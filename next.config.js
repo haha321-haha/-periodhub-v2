@@ -80,6 +80,17 @@ const nextConfig = {
         destination: '/pdf-files/:path*'
       }
     ];
+  },
+
+  // 重定向规则 - 修复格式错误的URL
+  async redirects() {
+    return [
+      {
+        source: '/&',
+        destination: '/',
+        permanent: true
+      }
+    ];
   }
 };
 

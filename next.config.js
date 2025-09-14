@@ -73,6 +73,11 @@ const nextConfig = {
       {
         source: '/en/images/:path*',
         destination: '/images/:path*'
+      },
+      // PDF文件路径重写规则 - 修复404问题
+      {
+        source: '/downloads/:path*',
+        destination: '/pdf-files/:path*'
       }
     ];
   }

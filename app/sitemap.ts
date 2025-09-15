@@ -129,6 +129,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'global-traditional-menstrual-pain-relief',
     'heat-therapy-complete-guide',
     'herbal-tea-menstrual-pain-relief',
+    'effective-herbal-tea-menstrual-pain',
+    'long-term-healthy-lifestyle-guide',
     'hidden-culprits-of-menstrual-pain',
     'home-natural-menstrual-pain-relief',
     'magnesium-gut-health-comprehensive-guide',

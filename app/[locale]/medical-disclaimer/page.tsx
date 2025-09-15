@@ -38,6 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: {
         'zh-CN': 'https://www.periodhub.health/zh/medical-disclaimer',
         'en-US': 'https://www.periodhub.health/en/medical-disclaimer',
+        'x-default': 'https://www.periodhub.health/en/medical-disclaimer',
       },
     },
   };

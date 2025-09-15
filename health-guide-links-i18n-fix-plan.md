@@ -305,3 +305,6 @@ console.log(`CTA text: ${guide.cta}`);
 - [ ] 确保无硬编码文字
 
 
+
+
+

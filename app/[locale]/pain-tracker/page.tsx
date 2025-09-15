@@ -54,6 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: {
         'zh-CN': 'https://www.periodhub.health/zh/pain-tracker',
         'en-US': 'https://www.periodhub.health/en/pain-tracker',
+        'x-default': 'https://www.periodhub.health/en/pain-tracker',
       },
     },
 

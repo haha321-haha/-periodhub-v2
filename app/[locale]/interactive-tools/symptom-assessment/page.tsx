@@ -54,6 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: {
         'zh-CN': 'https://www.periodhub.health/zh/interactive-tools/symptom-assessment',
         'en-US': 'https://www.periodhub.health/en/interactive-tools/symptom-assessment',
+        'x-default': 'https://www.periodhub.health/en/interactive-tools/symptom-assessment',
       },
     },
 

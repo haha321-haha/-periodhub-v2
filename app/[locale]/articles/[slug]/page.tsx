@@ -172,6 +172,7 @@ export async function generateMetadata({
       languages: {
         'en-US': `${baseUrl}/en/articles/${slug}`,
         'zh-CN': `${baseUrl}/zh/articles/${slug}`,
+        'x-default': `${baseUrl}/en/articles/${slug}`,
       },
     },
     other: {

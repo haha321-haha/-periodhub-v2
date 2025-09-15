@@ -19,6 +19,14 @@ export async function generateMetadata({
   return {
     title: `${title} | periodhub.health`,
     description,
+    alternates: {
+      canonical: `https://www.periodhub.health/${locale}/terms-of-service`,
+      languages: {
+        'zh-CN': 'https://www.periodhub.health/zh/terms-of-service',
+        'en-US': 'https://www.periodhub.health/en/terms-of-service',
+        'x-default': 'https://www.periodhub.health/en/terms-of-service',
+      },
+    },
     openGraph: {
       title: `${title} | periodhub.health`,
       description,

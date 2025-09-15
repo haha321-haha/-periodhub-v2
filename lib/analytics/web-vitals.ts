@@ -2,7 +2,7 @@
 export interface WebVitalsReport {
   FCP: number;
   LCP: number;
-  FID: number;
+  INP: number; // 更新：FID → INP (2024年3月更新)
   CLS: number;
   TTFB: number;
   score: number;
@@ -35,7 +35,7 @@ export class WebVitalsAnalyzer {
       return {
         FCP: 0,
         LCP: 0,
-        FID: 0,
+        INP: 0, // 更新：FID → INP
         CLS: 0,
         TTFB: 0,
         score: 85
@@ -45,7 +45,7 @@ export class WebVitalsAnalyzer {
     const sum = this.vitals.reduce((acc, curr) => ({
       FCP: acc.FCP + curr.FCP,
       LCP: acc.LCP + curr.LCP,
-      FID: acc.FID + curr.FID,
+      INP: acc.INP + curr.INP, // 更新：FID → INP
       CLS: acc.CLS + curr.CLS,
       TTFB: acc.TTFB + curr.TTFB,
       score: acc.score + curr.score
@@ -55,7 +55,7 @@ export class WebVitalsAnalyzer {
     return {
       FCP: sum.FCP / count,
       LCP: sum.LCP / count,
-      FID: sum.FID / count,
+      INP: sum.INP / count, // 更新：FID → INP
       CLS: sum.CLS / count,
       TTFB: sum.TTFB / count,
       score: sum.score / count

@@ -21,8 +21,8 @@ export class PerformanceMonitor {
       // LCP (Largest Contentful Paint)
       this.observeLCP();
       
-      // FID (First Input Delay)
-      this.observeFID();
+      // INP (Interaction to Next Paint) - 2024年3月更新
+      this.observeINP();
       
       // CLS (Cumulative Layout Shift)
       this.observeCLS();
@@ -50,21 +50,21 @@ export class PerformanceMonitor {
     }
   }
 
-  private observeFID() {
+  private observeINP() {
     try {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         entries.forEach((entry) => {
-          const fidEntry = entry as PerformanceEventTiming;
-          const fid = fidEntry.processingStart - fidEntry.startTime;
-          this.metrics.set('FID', fid);
-          this.logMetric('FID', fid);
+          const inpEntry = entry as PerformanceEventTiming;
+          const inp = inpEntry.processingEnd - inpEntry.startTime;
+          this.metrics.set('INP', inp);
+          this.logMetric('INP', inp);
         });
       });
-      observer.observe({ entryTypes: ['first-input'] });
+      observer.observe({ entryTypes: ['event'] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn('FID observer not supported:', error);
+      console.warn('INP observer not supported:', error);
     }
   }
 
@@ -158,7 +158,7 @@ export class PerformanceMonitor {
   getPerformanceGrade(metric: string, value: number): 'good' | 'needs-improvement' | 'poor' {
     const thresholds = {
       LCP: { good: 2500, poor: 4000 },
-      FID: { good: 100, poor: 300 },
+      INP: { good: 200, poor: 500 }, // 更新：FID → INP，目标值200ms
       CLS: { good: 0.1, poor: 0.25 },
       FCP: { good: 1800, poor: 3000 },
       TTFB: { good: 800, poor: 1800 },
@@ -200,7 +200,7 @@ export class PerformanceMonitor {
   private getRecommendation(metric: string, value: number, grade: string): string {
     const recommendations = {
       LCP: '优化最大内容绘制时间：压缩图片、使用CDN、优化关键渲染路径',
-      FID: '优化首次输入延迟：减少JavaScript执行时间、使用代码分割',
+      INP: '优化交互到下次绘制时间：减少JavaScript执行时间、使用代码分割、优化事件处理',
       CLS: '减少累积布局偏移：为图片和广告设置尺寸、避免动态插入内容',
       FCP: '优化首次内容绘制：减少阻塞资源、优化CSS和JavaScript',
       TTFB: '优化服务器响应时间：使用CDN、优化数据库查询、启用缓存'

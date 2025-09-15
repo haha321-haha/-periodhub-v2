@@ -13,6 +13,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isZh
       ? 'PeriodHub框架演示：展示网站的技术功能、性能优化和用户体验特性。为开发者和技术团队提供功能演示。'
       : 'PeriodHub Framework Demo: Showcase technical features, performance optimizations and user experience features of the website. Provides feature demonstrations for developers and technical teams.',
+    alternates: {
+      canonical: `https://www.periodhub.health/${locale}/framework-demo`,
+      languages: {
+        'zh-CN': 'https://www.periodhub.health/zh/framework-demo',
+        'en-US': 'https://www.periodhub.health/en/framework-demo',
+        'x-default': 'https://www.periodhub.health/zh/framework-demo',
+      },
+    },
     robots: {
       index: false,
       follow: false,

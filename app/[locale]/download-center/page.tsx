@@ -19,6 +19,14 @@ export async function generateMetadata({
     title: t('seo.title'),
     description: t('seo.description'),
     keywords: t('seo.keywords'),
+    alternates: {
+      canonical: `https://www.periodhub.health/${locale}/download-center`,
+      languages: {
+        'zh-CN': 'https://www.periodhub.health/zh/download-center',
+        'en-US': 'https://www.periodhub.health/en/download-center',
+        'x-default': 'https://www.periodhub.health/zh/download-center',
+      },
+    },
   };
 }
 

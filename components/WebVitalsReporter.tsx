@@ -2,8 +2,6 @@
 'use client';
 
 import { useEffect } from 'react';
-// web-vitals依赖暂时移除以解决构建问题
-// import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
 
 interface Metric {
   name: string;
@@ -15,19 +13,25 @@ interface Metric {
 
 export function WebVitalsReporter() {
   useEffect(() => {
-    // web-vitals依赖暂时移除以解决构建问题
-    console.log('Web Vitals监控已暂时禁用');
-    // 未来需要时可以重新启用：
-    // import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-    //   getCLS(sendToAnalytics);
-    //   getFID(sendToAnalytics);
-    //   getFCP(sendToAnalytics);
-    //   getLCP(sendToAnalytics);
-    //   getTTFB(sendToAnalytics);
-    // });
+    // 使用web-vitals库进行Core Web Vitals监控
+    import('web-vitals').then((webVitals) => {
+      // 注意：跳过已废弃的FID，使用新的API
+      webVitals.onCLS(sendToAnalytics);
+      webVitals.onFCP(sendToAnalytics);
+      webVitals.onLCP(sendToAnalytics);
+      webVitals.onTTFB(sendToAnalytics);
+      
+      // INP现在有官方支持
+      webVitals.onINP(sendToAnalytics);
+    }).catch(error => {
+      console.warn('Failed to load web-vitals:', error);
+    });
   }, []);
 
   function sendToAnalytics(metric: Metric) {
+    // 跳过已废弃的FID指标
+    if (metric.name === 'FID') return;
+    
     // 发送到分析服务
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', metric.name, {
@@ -50,6 +54,7 @@ export function WebVitalsReporter() {
       body: JSON.stringify(metric),
     }).catch(console.error);
   }
+
 
   return null;
 }

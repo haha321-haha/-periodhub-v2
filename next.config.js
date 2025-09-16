@@ -21,6 +21,8 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // 配置图片质量选项 - 解决Next.js 16兼容性警告
+    qualities: [75, 85, 95, 100],
   },
   
   // 实验性功能

@@ -196,3 +196,8 @@ export type EventHandler<T = Event> = (event: T) => void;
 export type AsyncEventHandler<T = Event> = (event: T) => Promise<void>;
 export type Validator<T = unknown> = (value: T) => boolean | string;
 export type Transformer<T = unknown, R = unknown> = (value: T) => R;
+
+
+
+
+

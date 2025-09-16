@@ -106,7 +106,18 @@
     "project:health": "npm run hardcode:all && npm run seo:impact && npm run perf:audit",
     "precommit:check": "node scripts/comprehensive-pre-commit.js",
     "github:validate": "node scripts/github-upload-validator.js",
-    "upload:safe": "npm run github:validate && git add . && git commit -m 'feat: 优化硬编码和SEO配置' && git push origin main"
+    "upload:safe": "npm run github:validate && git add . && git commit -m 'feat: 优化硬编码和SEO配置' && git push origin main",
+    "test:automated": "node scripts/automated-test-suite.js",
+    "test:comprehensive": "node scripts/comprehensive-test-suite.js",
+    "test:enhanced": "node scripts/enhanced-test-suite.js",
+    "test:quick": "node scripts/quick-test-suite.js",
+    "test:simple": "node scripts/simple-test-suite.js",
+    "test:full": "npm run test:enhanced",
+    "test:pre-upload": "node scripts/pre-upload-validator.js",
+    "test:validate": "npm run test:simple && npm run test:pre-upload",
+    "test:all": "npm run test:enhanced && npm run test:pre-upload",
+    "eslint:simple-fix": "node scripts/simple-eslint-fix.js",
+    "eslint:check-clean": "npx eslint . --ext .ts,.tsx --ignore-pattern 'recovery-workspace/**' --ignore-pattern 'backup/**' --ignore-pattern 'recovered/**'"
   },
   "dependencies": {
     "chart.js": "^4.5.0",

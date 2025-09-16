@@ -405,3 +405,8 @@ if (require.main === module) {
 }
 
 module.exports = { intelligentTypeFix, typeStrategies, typePatterns };
+
+
+
+
+

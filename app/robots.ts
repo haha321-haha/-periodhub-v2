@@ -13,9 +13,6 @@ export default function robots(): MetadataRoute.Robots {
           '/private/',
           '*.json',
           '/search?*',
-          // 禁止索引 PDF 文件，解决重复页面问题
-          '/pdf-files/',
-          '*.pdf$',
           // 禁止索引图标文件
           '/icon*',
           // 禁止索引测试和开发页面
@@ -34,8 +31,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/', 
           '/admin/',
-          '/pdf-files/',
-          '*.pdf$',
           '/icon*',
           '/test*',
           '/dev*',
@@ -51,8 +46,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/', 
           '/admin/',
-          '/pdf-files/',
-          '*.pdf$',
           '/icon*',
           '/test*',
           '/dev*',

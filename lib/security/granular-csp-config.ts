@@ -307,7 +307,7 @@ export class GranularCSPManager {
     Object.entries(directives).forEach(([directive, sources]) => {
       if (sources && sources.length > 0) {
         // 处理特殊指令
-        let processedSources = sources.map((source: string) => {
+        const processedSources = sources.map((source: string) => {
           if (source === '{NONCE}') {
             return `'nonce-${this.nonce}'`;
           }

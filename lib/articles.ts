@@ -103,7 +103,7 @@ export function getArticleBySlug(slug: string, locale: string = 'en'): Article |
       : path.join(articlesDirectory, 'en');
 
     // 首先尝试直接映射的slug
-    let actualSlug = slugMapping[slug] || slug;
+    const actualSlug = slugMapping[slug] || slug;
     let fullPath = path.join(articlesPath, `${actualSlug}.md`);
 
     // 如果映射的文件不存在，尝试原始slug

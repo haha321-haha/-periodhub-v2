@@ -47,7 +47,7 @@
     "performance:full": "npm run optimize:core-web-vitals && npm run optimize:images && npm run check:mobile && npm run test:performance",
     "performance:quick": "npm run optimize:core-web-vitals && npm run test:performance",
     "seo:optimize": "node scripts/seo-optimizer.js",
-    "seo:check": "node scripts/seo-check.js",
+    "seo:check": "node scripts/seo-final-check.js",
     "seo:analyze": "npm run seo:check && npm run seo:optimize && echo '📊 SEO分析完成，请查看生成的报告文件'",
     "seo:full": "npm run seo:analyze && npm run build && echo '🚀 SEO优化和构建完成'",
     "lighthouse": "npm run build && npm run start & sleep 5 && npx lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html && pkill -f 'next start'"

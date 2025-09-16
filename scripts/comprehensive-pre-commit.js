@@ -20,7 +20,7 @@ class ComprehensivePreCommit {
       },
       {
         name: 'SEO配置检查',
-        command: 'npm run seo:verify',
+        command: 'npm run seo:impact',
         critical: true,
         timeout: 15000
       },

@@ -20,7 +20,7 @@ class GitHubUploadValidator {
       },
       {
         name: 'SEO配置验证',
-        command: 'npm run seo:verify',
+        command: 'npm run seo:impact',
         critical: true,
         description: '验证SEO配置完整性'
       },

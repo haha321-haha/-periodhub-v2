@@ -6,7 +6,6 @@ tags: ["menstrual cycle", "hormones", "women's health", "health education", "rep
 category: "health-education"
 seo_title: "Understanding Your Menstrual Cycle: Complete Guide to Phases and Hormones"
 seo_description: "Comprehensive guide to understanding your menstrual cycle phases, hormonal changes, and how to use this knowledge for better health management and pain relief."
-featured_image: "/images/articles/understanding-cycle-feature.jpg"
 author: "periodhub.health Expert Team"
 canonical_url: "/articles/understanding-your-cycle"
 schema_type: "Article"

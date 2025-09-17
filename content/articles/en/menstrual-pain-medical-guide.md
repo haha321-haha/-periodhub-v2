@@ -12,7 +12,6 @@ seo_title: "Medical Guide to Menstrual Pain: Professional Diagnosis & Treatment 
 seo_title_zh: "痛经医学指南：专业诊断与治疗分析"
 seo_description: "Medical guide to menstrual pain: 10 major causes from prostaglandin mechanisms to endometriosis. Professional pain assessment, treatment protocols, consultation guidelines."
 seo_description_zh: "权威医学指南深度解析痛经10大病因，从前列腺素机制到子宫内膜异位症，详细阐述原发性与继发性痛经的鉴别诊断。提供专业疼痛评估方法、标准化治疗流程和就医指征，帮助女性科学认知痛经，实现精准健康管理。包含疼痛量表、诊断流程图、治疗决策树等实用医学工具，权威专业的医学参考指南，临床验证的诊疗标准规范方案指导。"
-featured_image: "/images/articles/menstrual-pain-medical-guide-featured.jpg"
 author: "Period Hub Medical Team"
 canonical_url: "/en/articles/menstrual-pain-medical-guide"
 schema_type: "Article"

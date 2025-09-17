@@ -13,7 +13,6 @@ seo_title: "痛经自然缓解与就医指南：掌控经期健康的完整攻�
 seo_title_en: "Natural Period Pain Relief & Medical Care Guide: Complete Strategy for Menstrual Health"
 seo_description: "学习科学验证的痛经自然缓解方法，包括抗炎饮食、热敷疗法和快速技巧。了解何时需要就医的重要警示信号，掌控您的经期健康。"
 seo_description_en: "Learn scientifically-validated natural period pain relief methods including anti-inflammatory diet, heat therapy, and quick techniques. Understand important warning signs for when to seek medical care and take control of your menstrual health."
-featured_image: "/images/articles/natural-pain-relief-feature.jpg"
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/when-to-seek-medical-care-comprehensive-guide"
 schema_type: "Article"

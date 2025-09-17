@@ -13,7 +13,6 @@ seo_title: "Magnesium Balance Gut Health Menstrual Pain Relief: Evidence-Based C
 seo_title_en: "Magnesium Balance Gut Health Menstrual Pain Relief: Evidence-Based Complete Guide to Period Care"
 seo_description: "Scientific analysis of magnesium supplementation mechanisms for menstrual pain relief, exploring gut health and menstrual cycle connections, providing dietary therapy plans and medical guidance. Evidence-based women's menstrual health management guide."
 seo_description_en: "Scientific analysis of magnesium supplementation mechanisms for menstrual pain relief, exploring gut health and menstrual cycle connections, providing dietary therapy plans and medical guidance. Evidence-based women's menstrual health management guide."
-featured_image: "/images/articles/magnesium-gut-health-feature.jpg"
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/magnesium-gut-health-comprehensive-guide"
 schema_type: "Article"

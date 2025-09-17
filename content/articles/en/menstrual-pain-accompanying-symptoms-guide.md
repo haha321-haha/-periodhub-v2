@@ -13,7 +13,6 @@ seo_title: "Complete Guide to Menstrual Pain Symptoms: Scientific Solutions for 
 seo_title_en: "Complete Guide to Menstrual Pain Symptoms: Scientific Solutions for Bloating, Vomiting & Fever"
 seo_description: "Menstrual pain with bloating, vomiting, fever? Learn symptom causes, master graded response plans, identify warning signs, and scientifically manage complex menstrual symptoms."
 seo_description_en: "Menstrual pain with bloating, vomiting, fever? Learn symptom causes, master graded response plans, identify warning signs, and scientifically manage complex menstrual symptoms."
-featured_image: "/images/articles/menstrual-symptoms-guide-featured.jpg"
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/menstrual-pain-accompanying-symptoms-guide"
 schema_type: "Article"

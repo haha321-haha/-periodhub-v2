@@ -13,7 +13,6 @@ seo_title: "Menstrual Nausea Relief Guide: Scientific Solutions for Pain and Vom
 seo_title_en: "Menstrual Nausea Relief Guide: Scientific Solutions for Pain and Vomiting"
 seo_description: "Period pain causing nausea and vomiting? Learn the medical mechanisms and master graded response strategies, from dietary adjustments to medication interventions for complete relief."
 seo_description_en: "Period pain causing nausea and vomiting? Learn the medical mechanisms and master graded response strategies, from dietary adjustments to medication interventions for complete relief."
-featured_image: "/images/articles/menstrual-nausea-relief-featured.jpg"
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/menstrual-nausea-relief-guide"
 schema_type: "Article"

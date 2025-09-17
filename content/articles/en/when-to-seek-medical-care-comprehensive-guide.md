@@ -6,7 +6,6 @@ tags: ["period pain relief", "natural remedies", "when to see doctor", "anti-inf
 category: "health-management"
 seo_title: "Natural Period Pain Relief & Medical Care Guide: Complete Strategy for Menstrual Health"
 seo_description: "Learn scientifically-validated natural period pain relief methods including anti-inflammatory diet, heat therapy, and quick techniques. Understand important warning signs for when to seek medical care and take control of your menstrual health."
-featured_image: "/images/articles/natural-pain-relief-feature.jpg"
 author: "periodhub.health Expert Team"
 canonical_url: "/articles/when-to-seek-medical-care-comprehensive-guide"
 schema_type: "Article"

@@ -13,7 +13,6 @@ seo_title: "站桩八段锦太极拳缓解痛经：科学实证的传统功法�
 seo_title_en: "Standing Meditation, Baduanjin and Tai Chi for Menstrual Pain: Evidence-Based Traditional Practice Guide"
 seo_description: "基于科学研究的站桩、八段锦与太极拳缓解痛经指南。详细的练习方法、现代医学机理解释和个体化方案，帮助女性安全有效地管理经期疼痛。"
 seo_description_en: "Evidence-based guide to using standing meditation, Baduanjin, and Tai Chi for menstrual pain relief. Detailed practice methods, modern medical mechanisms, and personalized plans to help women safely and effectively manage period pain."
-featured_image: "/images/articles/zhan-zhuang-baduanjin-feature.jpg"
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/zhan-zhuang-baduanjin-for-menstrual-pain-relief"
 schema_type: "Article"

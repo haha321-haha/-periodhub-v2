@@ -13,7 +13,6 @@ seo_title: "镁平衡肠道健康痛经缓解：科学实证的经期调理完�
 seo_title_en: "Magnesium Balance Gut Health Menstrual Pain Relief: Evidence-Based Complete Guide to Period Care"
 seo_description: "科学解析镁补充剂缓解痛经机制，探索肠道健康与月经周期关联，提供饮食调理方案和就医指导。基于权威研究的女性经期健康管理指南。"
 seo_description_en: "Scientific analysis of magnesium supplementation mechanisms for menstrual pain relief, exploring gut health and menstrual cycle connections, providing dietary therapy plans and medical guidance. Evidence-based women's menstrual health management guide."
-featured_image: "/images/articles/magnesium-gut-health-feature.jpg"
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/magnesium-gut-health-comprehensive-guide"
 schema_type: "Article"

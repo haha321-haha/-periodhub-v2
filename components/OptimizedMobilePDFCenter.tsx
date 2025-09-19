@@ -318,7 +318,13 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({ loc
       additionalResources.push(...sorted.slice(0, needed));
     }
     
-    return [...resources, ...additionalResources].slice(0, targetCount);
+    // 合并资源并去重（基于id）
+    const allCombinedResources = [...resources, ...additionalResources];
+    const uniqueResources = allCombinedResources.filter((resource, index, array) => 
+      array.findIndex(r => r.id === resource.id) === index
+    );
+    
+    return uniqueResources.slice(0, targetCount);
   };
 
   // 优化后的内容分类 - 使用动态生成的资源，使用useMemo缓存避免水合错误
@@ -654,15 +660,15 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({ loc
 
   // 处理HTML格式PDF下载
   const handlePDFDownload = (resourceId: string) => {
-    // 下载HTML格式的PDF内容，提供更好的屏幕阅读体验
-    const htmlFilename = `${resourceId}.html`;
-    const url = `/pdf-files/${htmlFilename}`;
+    // 生成HTML文件路径
+    const htmlFilename = `${resourceId}${locale === 'en' ? '-en' : ''}.html`;
+    const downloadUrl = `/downloads/${htmlFilename}`;
 
-    console.log(`下载HTML格式PDF: ${resourceId} -> ${htmlFilename}`);
+    console.log(`下载HTML文档: ${resourceId} -> ${downloadUrl}`);
 
     // 创建临时链接进行下载
     const link = document.createElement('a');
-    link.href = url;
+    link.href = downloadUrl;
     link.download = htmlFilename;
     link.target = '_blank';
     document.body.appendChild(link);
@@ -702,11 +708,14 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({ loc
     }
   };
 
-  // 处理预览功能
-  const handlePreview = (resourceId: string) => {
-    // 确保使用正确的资源ID（不需要映射，因为PDF资源已经使用了正确的ID）
-    console.log(`预览PDF: ${resourceId}`);
-    window.location.href = `/${locale}/downloads/preview/${resourceId}`;
+  // 处理文档查看功能 - 直接链接到HTML文件
+  const handleViewDocument = (resourceId: string) => {
+    // 生成HTML文件路径
+    const htmlFilename = `${resourceId}${locale === 'en' ? '-en' : ''}.html`;
+    const directUrl = `/downloads/${htmlFilename}`;
+    
+    console.log(`查看文档: ${resourceId} -> ${directUrl}`);
+    window.open(directUrl, '_blank');
   };
 
   // 资源卡片组件
@@ -753,11 +762,11 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({ loc
           ) : (
             <>
               <button
-                onClick={() => handlePreview(resource.id!)}
+                onClick={() => handleViewDocument(resource.id!)}
                 className="flex-1 bg-blue-600 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors flex items-center justify-center"
               >
                 <Eye className="w-3 h-3 mr-1" />
-                {t('actions.preview')}
+                {locale === 'zh' ? '查看文档' : 'View Document'}
               </button>
               <button
                 onClick={() => handlePDFDownload(resource.id!)}

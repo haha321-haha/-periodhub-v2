@@ -1,0 +1,264 @@
+{
+  "timestamp": "2025-09-19T08:04:07.791Z",
+  "summary": {
+    "total": 9,
+    "passed": 2,
+    "failed": 7,
+    "warnings": 0
+  },
+  "tests": [
+    {
+      "type": "file_exists",
+      "path": "/Users/duting/Downloads/money💰/--main/public/downloads/parent-communication-guide-en.pdf",
+      "exists": true,
+      "size": 269570
+    },
+    {
+      "type": "file_exists",
+      "path": "/Users/duting/Downloads/money💰/--main/public/downloads/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf",
+      "exists": false,
+      "error": "ENOENT: no such file or directory, stat '/Users/duting/Downloads/money💰/--main/public/downloads/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf'"
+    },
+    {
+      "type": "file_exists",
+      "path": "/Users/duting/Downloads/money💰/--main/public/downloads/teacher-collaboration-handbook-en.pdf",
+      "exists": true,
+      "size": 253097
+    },
+    {
+      "type": "url_test",
+      "url": "/downloads/parent-communication-guide-en.pdf",
+      "fullUrl": "http://localhost:3002/downloads/parent-communication-guide-en.pdf",
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "public, max-age=0",
+        "last-modified": "Sat, 30 Aug 2025 03:47:32 GMT",
+        "etag": "W/\"41d02-198f9166a49\"",
+        "content-type": "application/pdf",
+        "content-length": "269570",
+        "date": "Fri, 19 Sep 2025 08:04:07 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5"
+      },
+      "expected": 200,
+      "passed": true,
+      "contentType": "application/pdf",
+      "redirectLocation": null
+    },
+    {
+      "type": "url_test",
+      "url": "/downloads/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf",
+      "fullUrl": "http://localhost:3002/downloads/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf",
+      "status": 500,
+      "headers": {
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Fri, 19 Sep 2025 08:04:07 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "expected": 200,
+      "passed": false,
+      "contentType": "unknown",
+      "redirectLocation": null
+    },
+    {
+      "type": "url_test",
+      "url": "/downloads/teacher-collaboration-handbook-en.pdf",
+      "fullUrl": "http://localhost:3002/downloads/teacher-collaboration-handbook-en.pdf",
+      "status": 200,
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "public, max-age=0",
+        "last-modified": "Sat, 30 Aug 2025 03:47:32 GMT",
+        "etag": "W/\"3dca9-198f9166a54\"",
+        "content-type": "application/pdf",
+        "content-length": "253097",
+        "date": "Fri, 19 Sep 2025 08:04:07 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5"
+      },
+      "expected": 200,
+      "passed": true,
+      "contentType": "application/pdf",
+      "redirectLocation": null
+    },
+    {
+      "type": "url_test",
+      "url": "/en/downloads",
+      "fullUrl": "http://localhost:3002/en/downloads",
+      "status": 500,
+      "headers": {
+        "link": "<http://localhost:3002/en/downloads>; rel=\"alternate\"; hreflang=\"en\", <http://localhost:3002/downloads>; rel=\"alternate\"; hreflang=\"zh\", <http://localhost:3002/downloads>; rel=\"alternate\"; hreflang=\"x-default\"",
+        "set-cookie": [
+          "NEXT_LOCALE=en; Path=/; Expires=Sat, 19 Sep 2026 08:04:08 GMT; Max-Age=31536000; SameSite=lax"
+        ],
+        "x-middleware-rewrite": "/en/downloads",
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Fri, 19 Sep 2025 08:04:10 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "expected": 200,
+      "passed": false,
+      "contentType": "unknown",
+      "redirectLocation": null
+    },
+    {
+      "type": "url_test",
+      "url": "/zh/downloads",
+      "fullUrl": "http://localhost:3002/zh/downloads",
+      "status": 307,
+      "headers": {
+        "link": "<http://localhost:3002/en/downloads>; rel=\"alternate\"; hreflang=\"en\", <http://localhost:3002/downloads>; rel=\"alternate\"; hreflang=\"zh\", <http://localhost:3002/downloads>; rel=\"alternate\"; hreflang=\"x-default\"",
+        "location": "/downloads",
+        "set-cookie": [
+          "NEXT_LOCALE=zh; Path=/; Expires=Sat, 19 Sep 2026 08:04:10 GMT; Max-Age=31536000; SameSite=lax"
+        ],
+        "date": "Fri, 19 Sep 2025 08:04:10 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "expected": 200,
+      "passed": false,
+      "contentType": "unknown",
+      "redirectLocation": "/downloads"
+    },
+    {
+      "type": "url_test",
+      "url": "/en",
+      "fullUrl": "http://localhost:3002/en",
+      "status": 500,
+      "headers": {
+        "link": "<http://localhost:3002/en>; rel=\"alternate\"; hreflang=\"en\", <http://localhost:3002/>; rel=\"alternate\"; hreflang=\"zh\", <http://localhost:3002/>; rel=\"alternate\"; hreflang=\"x-default\"",
+        "set-cookie": [
+          "NEXT_LOCALE=en; Path=/; Expires=Sat, 19 Sep 2026 08:04:10 GMT; Max-Age=31536000; SameSite=lax"
+        ],
+        "x-middleware-rewrite": "/en",
+        "vary": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Fri, 19 Sep 2025 08:04:11 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "expected": 200,
+      "passed": false,
+      "contentType": "unknown",
+      "redirectLocation": null
+    },
+    {
+      "type": "url_test",
+      "url": "/zh",
+      "fullUrl": "http://localhost:3002/zh",
+      "status": 307,
+      "headers": {
+        "link": "<http://localhost:3002/en>; rel=\"alternate\"; hreflang=\"en\", <http://localhost:3002/>; rel=\"alternate\"; hreflang=\"zh\", <http://localhost:3002/>; rel=\"alternate\"; hreflang=\"x-default\"",
+        "location": "/",
+        "set-cookie": [
+          "NEXT_LOCALE=zh; Path=/; Expires=Sat, 19 Sep 2026 08:04:11 GMT; Max-Age=31536000; SameSite=lax"
+        ],
+        "date": "Fri, 19 Sep 2025 08:04:11 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "expected": 200,
+      "passed": false,
+      "contentType": "unknown",
+      "redirectLocation": "/"
+    },
+    {
+      "type": "redirect_test",
+      "url": "/pdf-files/parent-communication-guide-en.pdf",
+      "fullUrl": "http://localhost:3002/pdf-files/parent-communication-guide-en.pdf",
+      "status": 500,
+      "headers": {
+        "link": "<http://localhost:3002/en/pdf-files/parent-communication-guide-en.pdf>; rel=\"alternate\"; hreflang=\"en\", <http://localhost:3002/pdf-files/parent-communication-guide-en.pdf>; rel=\"alternate\"; hreflang=\"zh\", <http://localhost:3002/pdf-files/parent-communication-guide-en.pdf>; rel=\"alternate\"; hreflang=\"x-default\"",
+        "set-cookie": [
+          "NEXT_LOCALE=zh; Path=/; Expires=Sat, 19 Sep 2026 08:04:11 GMT; Max-Age=31536000; SameSite=lax"
+        ],
+        "x-middleware-rewrite": "/zh/pdf-files/parent-communication-guide-en.pdf",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Fri, 19 Sep 2025 08:04:11 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "expected": 301,
+      "passed": false,
+      "contentType": "unknown",
+      "redirectLocation": null
+    },
+    {
+      "type": "redirect_test",
+      "url": "/pdf-files/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf",
+      "fullUrl": "http://localhost:3002/pdf-files/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf",
+      "status": 500,
+      "headers": {
+        "link": "<http://localhost:3002/en/pdf-files/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf>; rel=\"alternate\"; hreflang=\"en\", <http://localhost:3002/pdf-files/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf>; rel=\"alternate\"; hreflang=\"zh\", <http://localhost:3002/pdf-files/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf>; rel=\"alternate\"; hreflang=\"x-default\"",
+        "set-cookie": [
+          "NEXT_LOCALE=zh; Path=/; Expires=Sat, 19 Sep 2026 08:04:11 GMT; Max-Age=31536000; SameSite=lax"
+        ],
+        "x-middleware-rewrite": "/zh/pdf-files/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "date": "Fri, 19 Sep 2025 08:04:11 GMT",
+        "connection": "keep-alive",
+        "keep-alive": "timeout=5",
+        "transfer-encoding": "chunked"
+      },
+      "expected": 301,
+      "passed": false,
+      "contentType": "unknown",
+      "redirectLocation": null
+    },
+    {
+      "type": "config_check",
+      "file": "app/sitemap.ts",
+      "passed": true,
+      "message": "PDF路径配置正确",
+      "details": {
+        "hasDownloadsPath": true,
+        "hasPdfFilesPath": false
+      }
+    },
+    {
+      "type": "config_check",
+      "file": "app/robots.ts",
+      "passed": true,
+      "message": "Icon规则配置正确",
+      "details": {
+        "hasIconRule": true,
+        "hasSpecificIconRule": true
+      }
+    },
+    {
+      "type": "config_check",
+      "file": "next.config.js",
+      "passed": true,
+      "message": "重写规则配置正确",
+      "details": {
+        "hasCorrectRewrite": true,
+        "hasWrongRewrite": false
+      }
+    },
+    {
+      "type": "config_check",
+      "file": "middleware.ts",
+      "passed": true,
+      "message": "中间件配置正确",
+      "details": {
+        "excludesDownloads": true,
+        "excludesPdfFiles": false
+      }
+    }
+  ],
+  "recommendations": [
+    "检查public/downloads目录下的PDF文件是否完整",
+    "检查next.config.js中的重写规则配置"
+  ]
+}

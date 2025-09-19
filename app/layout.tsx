@@ -1,12 +1,44 @@
 import './globals.css';
 import { Metadata, Viewport } from 'next';
-import { Noto_Sans_SC } from 'next/font/google';
+import localFont from 'next/font/local';
 // import ClientSafe from '@/components/ClientSafe';
 
-const notoSansSC = Noto_Sans_SC({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700', '900'],
+// 使用本地Noto Sans SC字体
+const notoSansSC = localFont({
+  src: [
+    {
+      path: './fonts/Noto_Sans_SC/static/NotoSansSC-Light.ttf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Noto_Sans_SC/static/NotoSansSC-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Noto_Sans_SC/static/NotoSansSC-Medium.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Noto_Sans_SC/static/NotoSansSC-SemiBold.ttf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Noto_Sans_SC/static/NotoSansSC-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Noto_Sans_SC/static/NotoSansSC-Black.ttf',
+      weight: '900',
+      style: 'normal',
+    },
+  ],
   display: 'swap',
+  variable: '--font-noto-sans-sc',
 });
 import { WebVitalsReporter } from '@/components/WebVitalsReporter';
 import PerformanceMonitor from '@/components/PerformanceMonitor';

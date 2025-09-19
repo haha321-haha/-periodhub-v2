@@ -37,8 +37,13 @@ export default async function LocaleLayout({
   // 确保在服务端设置当前请求的语言环境
   unstable_setRequestLocale(locale);
 
-  // 直接导入消息文件，避免getMessages()函数问题
-  const messages = (await import(`../../messages/${locale}.json`)).default;
+  // 使用静态导入避免动态路径解析问题
+  let messages;
+  if (locale === 'zh') {
+    messages = (await import('../../messages/zh.json')).default;
+  } else {
+    messages = (await import('../../messages/en.json')).default;
+  }
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>

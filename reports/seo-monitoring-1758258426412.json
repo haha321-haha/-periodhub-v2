@@ -1,0 +1,65 @@
+{
+  "timestamp": "2025-09-19T05:07:05.879Z",
+  "pages": {
+    "total": 9,
+    "accessible": 0,
+    "notIndexed": 0,
+    "errors": 9
+  },
+  "pdfs": {
+    "total": 5,
+    "accessible": 0,
+    "errors": 5
+  },
+  "sitemap": {
+    "status": "accessible",
+    "lastModified": null,
+    "urlCount": 174
+  },
+  "robots": {
+    "status": "accessible",
+    "iconRules": 3,
+    "pdfRules": 0
+  },
+  "performance": {
+    "averageResponseTime": 0,
+    "slowPages": [
+      "/en/articles/effective-herbal-tea-menstrual-pain",
+      "/en/scenario-solutions/office",
+      "/en/teen-health/development-pain",
+      "/en/scenario-solutions/social",
+      "/en/articles/when-to-seek-medical-care-comprehensive-guide",
+      "/en/articles/period-friendly-recipes",
+      "/en/articles/comprehensive-iud-guide",
+      "/en/articles/comprehensive-medical-guide-to-dysmenorrhea",
+      "/en/articles/anti-inflammatory-diet-period-pain"
+    ]
+  },
+  "healthScore": {
+    "score": 40,
+    "maxScore": 100,
+    "percentage": 40,
+    "grade": "F"
+  },
+  "recommendations": [
+    {
+      "priority": "HIGH",
+      "category": "页面可访问性",
+      "issue": "9 个页面无法访问",
+      "action": "检查页面配置和服务器状态"
+    },
+    {
+      "priority": "MEDIUM",
+      "category": "PDF文件",
+      "issue": "5 个PDF文件无法访问",
+      "action": "检查PDF文件路径和权限设置"
+    },
+    {
+      "priority": "LOW",
+      "category": "Robots.txt",
+      "issue": "发现Icon相关规则",
+      "action": "检查Icon规则是否过于宽泛"
+    }
+  ],
+  "nextCheck": "2025-09-20T05:07:06.412Z"
+}

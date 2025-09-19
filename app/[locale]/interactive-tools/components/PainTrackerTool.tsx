@@ -141,6 +141,19 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
 
   return (
     <div className="bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 rounded-xl p-8">
+      {/* 页面标题优化 */}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold text-gray-800 mb-2">
+          {locale === 'zh' ? '💊 痛经智能分析器 | 疼痛追踪计算器' : '💊 Period Pain Calculator & Intelligent Tracker'}
+        </h1>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          {locale === 'zh' 
+            ? 'AI驱动的经期疼痛计算器，分析您的周期模式，预测疼痛强度，提供个性化镁剂和自然缓解建议'
+            : 'AI-powered period pain calculator that analyzes your cycle patterns, predicts pain intensity, and provides personalized magnesium and natural relief recommendations'
+          }
+        </p>
+      </div>
+
       <LoadingOverlay isLoading={isLoading} message="Loading...">
         {/* Navigation Tabs */}
         <div className="mb-8">

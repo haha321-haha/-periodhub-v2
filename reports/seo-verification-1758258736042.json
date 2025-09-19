@@ -1,0 +1,113 @@
+{
+  "timestamp": "2025-09-19T05:12:16.037Z",
+  "baseUrl": "https://www.periodhub.health",
+  "summary": {
+    "sitemap": "PASS",
+    "robots": "PASS",
+    "pages": "PASS",
+    "pdfs": "PASS",
+    "icons": "PASS"
+  },
+  "details": {
+    "sitemap": {
+      "success": true,
+      "pdfPaths": [],
+      "oldPdfPaths": [
+        "/pdf-files/parent-communication-guide-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/teacher-collaboration-handbook-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/healthy-habits-checklist-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/specific-menstrual-pain-management-guide-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/natural-therapy-assessment-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/menstrual-cycle-nutrition-plan-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/campus-emergency-checklist-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/menstrual-pain-complications-management-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/magnesium-gut-health-menstrual-pain-guide-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/pain-tracking-form-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/teacher-health-manual-zh.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/parent-communication-guide-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/zhan-zhuang-baduanjin-illustrated-guide-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/teacher-collaboration-handbook-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/healthy-habits-checklist-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/specific-menstrual-pain-management-guide-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/natural-therapy-assessment-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/menstrual-cycle-nutrition-plan-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/campus-emergency-checklist-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/menstrual-pain-complications-management-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/magnesium-gut-health-menstrual-pain-guide-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/pain-tracking-form-en.pdf</loc>\n<lastmod>2025-09-19T04:18:42.888Z</lastmod>\n<changefreq>monthly</changefreq>\n<priority>0.6</priority>\n</url>\n<url>\n<loc>https://www.periodhub.health/pdf-files/teacher-health-manual-en.pdf"
+      ]
+    },
+    "robots": {
+      "success": true,
+      "iconRules": [
+        "Disallow: /icon",
+        "Disallow: /icon",
+        "Disallow: /icon"
+      ],
+      "iconStarRules": [
+        "Disallow: /icon*",
+        "Disallow: /icon*",
+        "Disallow: /icon*"
+      ]
+    },
+    "pages": {
+      "success": true,
+      "results": [
+        {
+          "page": "/en/articles/effective-herbal-tea-menstrual-pain",
+          "status": 200,
+          "success": true
+        },
+        {
+          "page": "/en/scenario-solutions/office",
+          "status": 200,
+          "success": true
+        },
+        {
+          "page": "/en/teen-health/development-pain",
+          "status": 200,
+          "success": true
+        },
+        {
+          "page": "/en/scenario-solutions/social",
+          "status": 200,
+          "success": true
+        },
+        {
+          "page": "/en/articles/when-to-seek-medical-care-comprehensive-guide",
+          "status": 200,
+          "success": true
+        },
+        {
+          "page": "/en/articles/period-friendly-recipes",
+          "status": 200,
+          "success": true
+        },
+        {
+          "page": "/en/articles/comprehensive-iud-guide",
+          "status": 200,
+          "success": true
+        },
+        {
+          "page": "/en/articles/comprehensive-medical-guide-to-dysmenorrhea",
+          "status": 200,
+          "success": true
+        },
+        {
+          "page": "/en/articles/anti-inflammatory-diet-period-pain",
+          "status": 200,
+          "success": true
+        }
+      ]
+    },
+    "pdfs": {
+      "success": true,
+      "results": [
+        {
+          "pdf": "/downloads/menstrual-cycle-nutrition-plan.pdf",
+          "status": 200,
+          "success": true
+        },
+        {
+          "pdf": "/downloads/parent-communication-guide.pdf",
+          "status": 200,
+          "success": true
+        },
+        {
+          "pdf": "/downloads/healthy-habits-checklist.pdf",
+          "status": 200,
+          "success": true
+        }
+      ]
+    },
+    "icons": {
+      "success": true,
+      "results": [
+        {
+          "iconPage": "/en/icon?9c1a5eaddb17b0ab",
+          "status": 200,
+          "success": true
+        }
+      ]
+    }
+  }
+}

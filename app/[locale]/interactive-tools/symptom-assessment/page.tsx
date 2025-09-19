@@ -8,18 +8,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: t('meta.title', { 
       default: locale === 'zh' 
-        ? '症状评估工具 - PeriodHub | 智能经期症状分析'
-        : 'Symptom Assessment Tool - PeriodHub | Smart Menstrual Symptom Analysis'
+        ? '痛经严重度计算器 - PeriodHub | 经期疼痛智能评估工具'
+        : 'Period Pain Calculator - PeriodHub | Menstrual Pain Assessment Tool'
     }),
     description: t('meta.description', { 
       default: locale === 'zh'
-        ? 'PeriodHub症状评估工具：科学分析经期症状，提供个性化健康建议。专业的症状评估系统，帮助您更好地了解和管理经期健康。'
-        : 'PeriodHub Symptom Assessment Tool: Scientifically analyze menstrual symptoms and provide personalized health recommendations. Professional symptom assessment system to help you better understand and manage menstrual health.'
+        ? '免费痛经严重度计算器：3分钟科学评估经期疼痛程度，获得个性化缓解建议。包含疼痛机制解析、补镁指导、热敷方案等专业医疗建议。'
+        : 'Free Period Pain Calculator: 3-minute scientific assessment of menstrual pain severity with personalized relief recommendations. Includes pain mechanism analysis, magnesium guidance, and heat therapy protocols.'
     }),
     keywords: locale === 'zh' ? [
-      '症状评估工具', '经期症状分析', '痛经评估', '健康检查工具', '智能评估', '经期健康'
+      '痛经计算器', '痛经严重度评估', '经期疼痛测试', '痛经疼痛原理', '痛经补镁', '经期疼痛缓解', '月经疼痛评估工具'
     ] : [
-      'symptom assessment tool', 'menstrual symptom analysis', 'period pain assessment', 'health check tool', 'smart assessment', 'menstrual health'
+      'period pain calculator', 'menstrual pain assessment', 'dysmenorrhea severity test', 'period pain mechanisms', 'magnesium for cramps', 'menstrual pain relief', 'period pain evaluation tool'
     ],
     
     openGraph: {

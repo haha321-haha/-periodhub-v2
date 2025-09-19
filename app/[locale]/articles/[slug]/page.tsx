@@ -190,10 +190,28 @@ export default async function ArticlePage({
   const { locale, slug } = await params;
   unstable_setRequestLocale(locale);
 
+  // 🔍 生产性能监控开始
+  const requestStart = Date.now();
+  
   try {
+    console.log(`[PROD-MONITOR] Request start: ${locale}/${slug} at ${new Date().toISOString()}`);
+    
+    // 检测冷启动
+    const coldStartCheck = Date.now();
+    if (!(global as any).isWarm) {
+      (global as any).isWarm = true;
+      console.log(`[PROD-MONITOR] Cold start detected - initialization: ${Date.now() - coldStartCheck}ms`);
+    } else {
+      console.log(`[PROD-MONITOR] Warm start - check: ${Date.now() - coldStartCheck}ms`);
+    }
+    
+    // 文章获取计时
+    const articleFetchStart = Date.now();
     console.log('ArticlePage - Processing:', { locale, slug });
     
     const article = await getArticleBySlug(slug, locale);
+    const articleFetchTime = Date.now() - articleFetchStart;
+    console.log(`[PROD-MONITOR] Article fetch: ${articleFetchTime}ms`);
     console.log('ArticlePage - Article found:', !!article, article?.title);
     
     if (!article) {
@@ -201,7 +219,11 @@ export default async function ArticlePage({
       notFound();
     }
 
+    // 相关文章计算计时
+    const relatedArticlesStart = Date.now();
     const relatedArticles = await getRelatedArticles(slug, locale, 3);
+    const relatedArticlesTime = Date.now() - relatedArticlesStart;
+    console.log(`[PROD-MONITOR] Related articles calculation: ${relatedArticlesTime}ms`);
     console.log('ArticlePage - Related articles found:', relatedArticles.length);
 
     const title = locale === 'zh' ? article.title_zh || article.title : article.title;
@@ -217,6 +239,11 @@ export default async function ArticlePage({
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'
   const articleUrl = `${baseUrl}/${locale}/articles/${slug}`
+
+  // 🔍 渲染准备完成计时
+  const renderPrepTime = Date.now() - requestStart;
+  console.log(`[PROD-MONITOR] Render preparation completed: ${renderPrepTime}ms`);
+  console.log(`[PROD-MONITOR] Component breakdown - Article: ${articleFetchTime}ms, Related: ${relatedArticlesTime}ms, Other: ${renderPrepTime - articleFetchTime - relatedArticlesTime}ms`);
 
   return (
     <div className="min-h-screen bg-neutral-50">
@@ -527,6 +554,9 @@ export default async function ArticlePage({
     </div>
   );
   } catch (error) {
+    const errorTime = Date.now() - requestStart;
+    console.error(`[PROD-MONITOR] Error in ArticlePage after ${errorTime}ms:`, error);
+    console.error(`[PROD-MONITOR] Error context: ${locale}/${slug}`);
     console.error('Error in ArticlePage:', error);
     notFound();
   }

@@ -1571,9 +1571,9 @@
       }
     },
     "painTracker": {
-      "title": "Pain Tracking System",
-      "description": "Record and monitor your menstrual pain patterns over time to identify triggers and effective relief methods. Professional pain tracking tool for better health management.",
-      "startButton": "Start Tracking",
+      "title": "Period Pain Calculator | Smart Analysis System",
+      "description": "Period pain severity calculator: automatically calculate pain levels, intelligently analyze pain patterns and cycle trends, identify triggers and effective relief methods. AI-driven pain calculation tool providing scientific personalized health guidance and treatment recommendations.",
+      "startButton": "Start Calculating",
       "addEntry": "Add New Entry",
       "viewHistory": "View History",
       "entryForm": {
@@ -2445,8 +2445,8 @@
         "description": "Assess pain severity"
       },
       "painTracker": {
-        "title": "Pain Tracker",
-        "description": "Smart menstrual pain tracking system: detailed recording of pain levels, locations, duration and other key data, analyzing pain patterns and triggers to provide personalized relief recommendations. Professional tracking tool to help you scientifically manage menstrual health."
+        "title": "Period Pain Calculator | Smart Analysis",
+        "description": "Period pain severity calculator: intelligently analyze pain levels, calculate pain patterns and cycle trends, automatically assess pain intensity, providing scientific personalized relief solutions. AI-driven pain calculation system to help you precisely manage menstrual health."
       },
       "symptomAssessment": {
         "title": "Symptom Assessment",

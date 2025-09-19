@@ -12,6 +12,10 @@ import PeriodPainAssessmentTool from '../components/PeriodPainAssessmentTool';
 import CycleTrackerTool from '../components/CycleTrackerTool';
 import SymptomTrackerTool from '../components/SymptomTrackerTool';
 
+// Import emergency relief and medical disclaimer components
+import EmergencyReliefGuide from '../shared/components/EmergencyReliefGuide';
+import MedicalDisclaimer from '../shared/components/MedicalDisclaimer';
+
 // Types
 type Locale = 'en' | 'zh';
 
@@ -34,10 +38,10 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
     {
       slug: 'symptom-assessment',
       frontmatter: {
-        title: locale === 'zh' ? '症状评估工具' : 'Symptom Assessment Tool',
+        title: locale === 'zh' ? '痛经症状评估工具 | 疼痛类型智能识别' : 'Period Pain Symptom Assessment | Smart Pain Type Identification',
         description: locale === 'zh'
-          ? '通过专业问卷快速识别疼痛类型，为您提供精准的个性化建议。'
-          : 'Quickly identify pain types through professional questionnaires and receive precise personalized recommendations.',
+          ? '痛经症状评估工具：通过专业医学问卷快速识别痛经类型和疼痛程度，智能分析症状模式，为您提供科学的个性化缓解建议和治疗方案。'
+          : 'Period pain symptom assessment tool: Quickly identify menstrual pain types and severity through professional medical questionnaires, intelligently analyze symptom patterns, and provide scientific personalized relief recommendations.',
         category: locale === 'zh' ? '评估工具' : 'Assessment',
         difficulty: locale === 'zh' ? '简单' : 'Easy',
         estimatedTime: locale === 'zh' ? '5-10分钟' : '5-10 minutes',
@@ -208,17 +212,17 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
     {
       slug: 'pain-tracker',
       frontmatter: {
-        title: locale === 'zh' ? '疼痛追踪器' : 'Pain Tracker',
+        title: locale === 'zh' ? '痛经计算器 | 智能疼痛追踪分析' : 'Period Pain Calculator | Smart Pain Tracking & Analysis',
         description: locale === 'zh' 
-          ? '记录疼痛模式，分析趋势变化，优化治疗效果。'
-          : 'Track pain patterns, analyze trends, and optimize treatment effectiveness.',
-        category: locale === 'zh' ? '追踪工具' : 'Tracking',
+          ? '痛经严重度计算器：智能分析疼痛模式，计算疼痛等级，预测周期趋势，为您提供个性化缓解建议和治疗优化方案。'
+          : 'Period pain severity calculator: Intelligently analyze pain patterns, calculate pain levels, predict cycle trends, and provide personalized relief recommendations.',
+        category: locale === 'zh' ? '计算器工具' : 'Calculator Tool',
         difficulty: locale === 'zh' ? '简单' : 'Easy',
         estimatedTime: locale === 'zh' ? '每日2-3分钟' : '2-3 minutes daily',
       },
       content: locale === 'zh' ? `
-        <h2>疼痛追踪工具</h2>
-        <p>通过每日记录，帮助您识别疼痛模式，为医生提供准确的症状信息。</p>
+        <h2>痛经计算器 | 智能疼痛分析系统</h2>
+        <p>通过每日记录自动计算疼痛等级，智能分析疼痛模式和周期趋势，为您提供科学的疼痛评估和个性化缓解建议。</p>
         
         <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-8">
           <h3 class="text-lg font-semibold text-green-800 mb-2">使用建议</h3>
@@ -302,8 +306,8 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
           <button class="btn-outline">导出PDF报告</button>
         </div>
       ` : `
-        <h2>Pain Tracking Tool</h2>
-        <p>Track your daily pain to identify patterns and provide accurate symptom information to your healthcare provider.</p>
+        <h2>Period Pain Calculator | Smart Pain Analysis System</h2>
+        <p>Automatically calculate pain levels through daily records, intelligently analyze pain patterns and cycle trends, providing scientific pain assessment and personalized relief recommendations.</p>
         
         <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-8">
           <h3 class="text-lg font-semibold text-green-800 mb-2">Usage Tips</h3>
@@ -376,7 +380,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
     {
       slug: 'period-pain-assessment',
       frontmatter: {
-        title: locale === 'zh' ? '痛经速测小工具' : 'Period Pain Assessment Tool',
+        title: locale === 'zh' ? '痛经严重度评估计算器 | 快速疼痛分析' : 'Period Pain Severity Calculator | Quick Pain Analysis',
         description: locale === 'zh'
           ? '回答几个简单问题，初步了解你的痛经类型和严重程度，获得个性化的健康建议。'
           : 'Answer a few simple questions to understand your period pain type and severity, and get personalized health recommendations.',
@@ -522,6 +526,15 @@ export default async function ToolPage({
         </div>
       </header>
 
+      {/* Emergency Relief Guide for symptom assessment and pain-related tools */}
+      {(tool === 'symptom-assessment' || tool === 'period-pain-assessment' || tool === 'pain-tracker') && (
+        <section className="container-custom">
+          <div className="max-w-4xl mx-auto">
+            <EmergencyReliefGuide locale={locale} />
+          </div>
+        </section>
+      )}
+
       {/* Tool Content */}
       <main className="container-custom">
         <div className="max-w-6xl mx-auto">
@@ -556,14 +569,7 @@ export default async function ToolPage({
       {/* Medical Disclaimer */}
       <section className="container-custom">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-6 rounded-r-lg">
-            <p className="font-bold mb-2">
-              {tTool('medicalDisclaimer')}
-            </p>
-            <p className="text-sm">
-              {tTool('medicalDisclaimerText')}
-            </p>
-          </div>
+          <MedicalDisclaimer locale={locale} />
         </div>
       </section>
     </div>

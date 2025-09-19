@@ -14,10 +14,7 @@ export default function robots(): MetadataRoute.Robots {
           '*.json',
           '/search?*',
           // 禁止索引图标文件
-          '/icon/',
-          '/icon?*',
-          '/favicon*',
-          '/apple-touch-icon*',
+          '/icon*',
           // 禁止索引测试和开发页面
           '/test*',
           '/dev*',
@@ -34,10 +31,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/', 
           '/admin/',
-          '/icon/',
-          '/icon?*',
-          '/favicon*',
-          '/apple-touch-icon*',
+          '/icon*',
           '/test*',
           '/dev*',
           '/staging*',
@@ -52,10 +46,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/', 
           '/admin/',
-          '/icon/',
-          '/icon?*',
-          '/favicon*',
-          '/apple-touch-icon*',
+          '/icon*',
           '/test*',
           '/dev*',
           '/staging*',

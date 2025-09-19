@@ -179,10 +179,7 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin'
           },
-          {
-            key: 'Link',
-            value: '</fonts/inter.woff2>; rel=preload; as=font; type=font/woff2; crossorigin'
-          }
+          // 字体预加载已移除 - 使用系统字体或CDN字体
         ]
       }
     ];

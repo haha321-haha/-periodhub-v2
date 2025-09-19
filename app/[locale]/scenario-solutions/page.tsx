@@ -244,20 +244,22 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
       {/* Scenarios Grid */}
       <section className="py-8 sm:py-10 md:py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-          {scenarios.map((scenario) => (
+          {scenarios.map((scenario, index) => (
             <div
-              key={scenario.id}
+              key={`${scenario.id}-${index}`}
               className="bg-white rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary-200 group cursor-pointer"
             >
               {/* Scenario Image */}
               <div className="mb-4 sm:mb-6 relative overflow-hidden rounded-lg">
                 <Image
+                  key={`scenario-image-${scenario.id}`}
                   src={`/images/scenarios/${scenarioImages[scenario.id].filename}`}
                   alt={scenarioImages[scenario.id].alt}
                   width={600}
                   height={400}
                   className="w-full h-40 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  priority={false}
                 />
               </div>
 

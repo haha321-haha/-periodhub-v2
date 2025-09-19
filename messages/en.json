@@ -1647,11 +1647,11 @@
         "title": "Usage Tips:",
         "bestTiming": {
           "title": "Best Timing:",
-          "items": "When pain just starts|When feeling anxious|Before sleep for relaxation"
+          "items": ["When pain just starts", "When feeling anxious", "Before sleep for relaxation"]
         },
         "precautions": {
           "title": "Precautions:",
-          "items": "Find comfortable sitting or lying position|Beginners: 3-4 cycles are enough|Stop if feeling dizzy"
+          "items": ["Find comfortable sitting or lying position", "Beginners: 3-4 cycles are enough", "Stop if feeling dizzy"]
         }
       }
     },
@@ -1696,6 +1696,40 @@
     },
     "toolsIntroduction": "Our interactive tools are designed to empower you with knowledge and personalized strategies for managing your menstrual health. By understanding your unique symptoms and patterns, you can make informed decisions and find more effective relief.",
     "developmentNote": "We are continuously developing new tools and resources. Check back often for updates!"
+  },
+  "periodPainAssessmentPage": {
+    "tool": {
+      "title": "Period Pain Assessment Tool",
+      "subtitle": "Understand your menstrual pain patterns and get personalized recommendations",
+      "intensityTitle": "How intense is your menstrual pain?",
+      "intensityOptions": {
+        "mild": "Mild - Tolerable, doesn't affect daily activities",
+        "moderate": "Moderate - Affects some activities but manageable",
+        "severe": "Severe - Completely affects daily activities, need rest"
+      },
+      "onsetTitle": "When does your menstrual pain typically start?",
+      "onsetOptions": {
+        "before": "1-2 days before menstruation starts",
+        "first_day": "On the first day of menstruation",
+        "second_day": "On the second day of menstruation",
+        "throughout": "Throughout the entire menstrual period"
+      },
+      "symptomsTitle": "Do you experience any of these severe symptoms?",
+      "symptomsOptions": {
+        "nausea": "Nausea or vomiting",
+        "diarrhea": "Diarrhea or digestive issues",
+        "headache": "Severe headaches or migraines",
+        "fainting": "Fainting or dizziness",
+        "heavy_bleeding": "Extremely heavy bleeding",
+        "irregular_cycles": "Very irregular menstrual cycles"
+      },
+      "assessButton": "Get Assessment Results",
+      "resultTitle": "Assessment Results",
+      "consultAdvice": "⚠️ Based on your symptoms, we recommend consulting a healthcare professional for proper evaluation and treatment.",
+      "resetButton": "Take Assessment Again",
+      "moreInfoButton": "Learn More About Period Health",
+      "disclaimer": "This assessment is for informational purposes only and should not replace professional medical advice."
+    }
   },
   "interactiveTools": {
     "meta": {
@@ -1912,11 +1946,11 @@
         "title": "Usage Tips:",
         "bestTiming": {
           "title": "Best Timing:",
-          "items": "When pain just starts|When feeling anxious|Before sleep for relaxation"
+          "items": ["When pain just starts", "When feeling anxious", "Before sleep for relaxation"]
         },
         "precautions": {
           "title": "Precautions:",
-          "items": "Find comfortable sitting or lying position|Beginners: 3-4 cycles are enough|Stop if feeling dizzy"
+          "items": ["Find comfortable sitting or lying position", "Beginners: 3-4 cycles are enough", "Stop if feeling dizzy"]
         }
       }
     },
@@ -1946,32 +1980,32 @@
       "office": {
         "title": "Office/Workplace Scenarios",
         "description": "Professional workplace period pain management solutions: discreet office relief techniques, meeting emergency kit preparation, workplace nutrition strategies. Get effective period pain relief methods suitable for office environments while maintaining your professional image.",
-        "features": "Meeting Emergency Kit|Office Chair Stretches|Workplace Nutrition"
+        "features": ["Meeting Emergency Kit", "Office Chair Stretches", "Workplace Nutrition"]
       },
       "commute": {
         "title": "Commuting Scenarios",
         "description": "Commuting period pain emergency management guide: public transport comfort techniques, driving adjustments, sudden pain relief methods. Get period management strategies suitable for various commuting methods to effectively handle menstrual discomfort while traveling.",
-        "features": "Public Transport Solutions|Driving Adjustments|Emergency Response Plans"
+        "features": ["Public Transport Solutions", "Driving Adjustments", "Emergency Response Plans"]
       },
       "exercise": {
         "title": "Exercise/Outdoor Scenarios",
         "description": "Professional period exercise safety guidelines: suitable exercise types during menstruation, outdoor activity precautions, exercise intensity adjustment techniques. Get scientific period exercise recommendations to maintain your fitness routine while safely managing your menstrual cycle.",
-        "features": "Period Hiking Guide|Pool Hygiene Management|Yoga Pose Library"
+        "features": ["Period Hiking Guide", "Pool Hygiene Management", "Yoga Pose Library"]
       },
       "sleep": {
         "title": "Sleep Scenarios",
         "description": "Period nighttime pain relief sleep solutions: scientific sleep position adjustments, sleep audio recommendations, bedtime nutrition advice. Get professional period sleep management techniques to improve your nighttime rest and minimize menstrual discomfort's impact on sleep quality.",
-        "features": "Sleep Audio|Scientific Sleep Positions|Bedtime Nutrition"
+        "features": ["Sleep Audio", "Scientific Sleep Positions", "Bedtime Nutrition"]
       },
       "social": {
         "title": "Social Scenarios",
         "description": "Elegant period pain management strategies for social situations: date emergency handling, party food choices, pain concealment techniques. Get period management solutions suitable for various social activities to maintain your elegant appearance while effectively managing menstrual discomfort.",
-        "features": "Date Emergency Strategies|Party Food Choices|Pain Concealment Techniques"
+        "features": ["Date Emergency Strategies", "Party Food Choices", "Pain Concealment Techniques"]
       },
       "lifeStages": {
         "title": "Special Life Stages",
         "description": "Professional menstrual health management guidance for different life stages: adolescent period education, reproductive age health management, perimenopause care solutions. Get personalized period health management strategies tailored to each age group's characteristics.",
-        "features": "Adolescence Programs|Pre-pregnancy Programs|Perimenopause Programs"
+        "features": ["Adolescence Programs", "Pre-pregnancy Programs", "Perimenopause Programs"]
       }
     }
   },
@@ -2096,11 +2130,11 @@
       "title": "Usage Tips:",
       "bestTiming": {
         "title": "Best Timing:",
-        "items": "When pain just starts|When feeling anxious|Before sleep for relaxation"
+        "items": ["When pain just starts", "When feeling anxious", "Before sleep for relaxation"]
       },
       "precautions": {
         "title": "Precautions:",
-        "items": "Find comfortable sitting or lying position|Beginners: 3-4 cycles are enough|Stop if feeling dizzy"
+        "items": ["Find comfortable sitting or lying position", "Beginners: 3-4 cycles are enough", "Stop if feeling dizzy"]
       }
     },
     "subtitle": "Natural pain relief through nervous system regulation",

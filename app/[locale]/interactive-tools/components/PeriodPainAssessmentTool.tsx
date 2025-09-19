@@ -76,7 +76,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
           <div>
             <h3 className="text-xl font-semibold mb-4 text-gray-800">{t('intensityTitle')}</h3>
             <div className="space-y-3">
-              {Object.entries(t('intensityOptions')).map(([value, label]) => (
+              {Object.entries(t.raw('intensityOptions')).map(([value, label]) => (
                 <label key={value} className="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
                   <input
                     type="radio"
@@ -96,7 +96,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
           <div>
             <h3 className="text-xl font-semibold mb-4 text-gray-800">{t('onsetTitle')}</h3>
             <div className="space-y-3">
-              {Object.entries(t('onsetOptions')).map(([value, label]) => (
+              {Object.entries(t.raw('onsetOptions')).map(([value, label]) => (
                 <label key={value} className="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
                   <input
                     type="radio"
@@ -116,7 +116,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
           <div>
             <h3 className="text-xl font-semibold mb-4 text-gray-800">{t('symptomsTitle')}</h3>
             <div className="space-y-3">
-              {Object.entries(t('symptomsOptions')).map(([value, label]) => (
+              {Object.entries(t.raw('symptomsOptions')).map(([value, label]) => (
                 <label key={value} className="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
                   <input
                     type="checkbox"

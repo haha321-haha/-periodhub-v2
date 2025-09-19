@@ -249,6 +249,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/downloads/magnesium-gut-health-menstrual-pain-guide.html',
     '/downloads/pain-tracking-form.html',
     '/downloads/teacher-health-manual.html',
+    '/downloads/constitution-guide.html',
     // 英文HTML文件
     '/downloads/parent-communication-guide-en.html',
     '/downloads/zhan-zhuang-baduanjin-illustrated-guide-en.html',
@@ -262,6 +263,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/downloads/magnesium-gut-health-menstrual-pain-guide-en.html',
     '/downloads/pain-tracking-form-en.html',
     '/downloads/teacher-health-manual-en.html',
+    '/downloads/constitution-guide-en.html',
   ];
 
   // 生成HTML文件的sitemap条目 - 高优先级

@@ -497,28 +497,28 @@
     },
     "searchKeywords": {
       "urgent": {
-        "core": ["Heat Therapy", "Warm Water Bottle", "Warm Patch", "Massage", "Belly Rub", "Painkiller"],
-        "professional": ["Heat Treatment", "Thermal Therapy", "Warm Therapy", "Heat Therapy Treatment", "Heat Treatment"],
-        "massage": ["Acupressure", "Muscle Relaxation", "Abdominal Massage", "Menstrual Massage", "Pain Massage"],
-        "medication": ["NSAID", "Anti-inflammatory Drug", "Ibuprofen", "Acetaminophen", "Pain Medication"],
-        "emergency": ["Hurt", "Ache", "Now", "Immediately", "Relief", "Quick", "Immediate", "Emergency", "Urgent", "Severe"]
+        "core": "Heat Therapy|Warm Water Bottle|Warm Patch|Massage|Belly Rub|Painkiller",
+        "professional": "Heat Treatment|Thermal Therapy|Warm Therapy|Heat Therapy Treatment|Heat Treatment",
+        "massage": "Acupressure|Muscle Relaxation|Abdominal Massage|Menstrual Massage|Pain Massage",
+        "medication": "NSAID|Anti-inflammatory Drug|Ibuprofen|Acetaminophen|Pain Medication",
+        "emergency": "Hurt|Ache|Now|Immediately|Relief|Quick|Immediate|Emergency|Urgent|Severe"
       },
       "preparation": {
-        "core": ["Nutrition", "Diet", "Exercise", "Habit", "Preparation", "Prevention", "Plan", "Advance", "Wellness", "Health", "Exercise", "Yoga", "Baduanjin"],
-        "heatTherapy": ["Heat Therapy Preparation", "Heat Therapy Tools", "Heat Therapy Supplies", "Warm Patch Preparation"],
-        "massage": ["Massage Preparation", "Massage Tools", "Massage Techniques", "Massage Learning"]
+        "core": "Nutrition|Diet|Exercise|Habit|Preparation|Prevention|Plan|Advance|Wellness|Health|Exercise|Yoga|Baduanjin",
+        "heatTherapy": "Heat Therapy Preparation|Heat Therapy Tools|Heat Therapy Supplies|Warm Patch Preparation",
+        "massage": "Massage Preparation|Massage Tools|Massage Techniques|Massage Learning"
       },
       "learning": {
-        "core": ["Doctor", "Medical", "See Doctor", "Cycle", "Understand", "Guide", "Education", "Knowledge", "Learning", "Research", "Science", "Evidence-based", "Diagnosis", "Examination"],
-        "heatTherapy": ["Heat Therapy Methods", "Heat Therapy Techniques", "Heat Therapy Principles", "Heat Therapy Learning"],
-        "massage": ["Massage Methods", "Massage Techniques", "Massage Principles", "Massage Learning"],
-        "medication": ["Medication Knowledge", "Medication Guide", "Medication Comparison", "Medication Learning"]
+        "core": "Doctor|Medical|See Doctor|Cycle|Understand|Guide|Education|Knowledge|Learning|Research|Science|Evidence-based|Diagnosis|Examination",
+        "heatTherapy": "Heat Therapy Methods|Heat Therapy Techniques|Heat Therapy Principles|Heat Therapy Learning",
+        "massage": "Massage Methods|Massage Techniques|Massage Principles|Massage Learning",
+        "medication": "Medication Knowledge|Medication Guide|Medication Comparison|Medication Learning"
       },
       "management": {
-        "core": ["Long-term", "Management", "Life", "Archive", "Record", "Continuous", "Tracking", "Monitoring", "Analysis", "Report", "Template"],
-        "heatTherapy": ["Heat Therapy Management", "Heat Therapy Record", "Heat Therapy Plan", "Heat Therapy Tracking"],
-        "massage": ["Massage Management", "Massage Record", "Massage Plan", "Massage Tracking"],
-        "medication": ["Medication Management", "Medication Record", "Medication Plan", "Medication Tracking"]
+        "core": "Long-term|Management|Life|Archive|Record|Continuous|Tracking|Monitoring|Analysis|Report|Template",
+        "heatTherapy": "Heat Therapy Management|Heat Therapy Record|Heat Therapy Plan|Heat Therapy Tracking",
+        "massage": "Massage Management|Massage Record|Massage Plan|Massage Tracking",
+        "medication": "Medication Management|Medication Record|Medication Plan|Medication Tracking"
       }
     },
     "breathingExercise": {
@@ -551,7 +551,7 @@
       "tip": "💡 Tip: Find a comfortable sitting or lying position, relax all muscles. Beginners should do 3-4 cycles."
     },
     "simplePdfCenter": {
-      "urgentKeywords": ["hurt", "ache", "now", "immediately", "relief"],
+      "urgentKeywords": "hurt|ache|now|immediately|relief",
       "userSearchKeywords": {
         "heatTherapy": {
           "keyword": "Heat Therapy",
@@ -1049,33 +1049,21 @@
           "name": "Heat + Breathing",
           "description": "Apply heat while practicing deep breathing",
           "benefits": "Enhanced relaxation and pain reduction",
-          "methods": [
-            "Apply heat pack to lower abdomen",
-            "Practice 4-7-8 breathing technique",
-            "Maintain for 15-20 minutes"
-          ]
+          "methods": "Apply heat pack to lower abdomen|Practice 4-7-8 breathing technique|Maintain for 15-20 minutes"
         },
         {
           "level": "Acupressure + Movement",
           "name": "Acupressure + Movement",
           "description": "Gentle massage followed by light stretching",
           "benefits": "Improved circulation and muscle relaxation",
-          "methods": [
-            "Massage SP6 acupoint for 2-3 minutes",
-            "Perform gentle pelvic tilts",
-            "Follow with light stretching"
-          ]
+          "methods": "Massage SP6 acupoint for 2-3 minutes|Perform gentle pelvic tilts|Follow with light stretching"
         },
         {
           "level": "Heat + Acupressure",
           "name": "Heat + Acupressure",
           "description": "Warm compress on acupressure points",
           "benefits": "Increased effectiveness of pressure point therapy",
-          "methods": [
-            "Apply warm compress to acupoints",
-            "Massage while heat is applied",
-            "Continue for 10-15 minutes"
-          ]
+          "methods": "Apply warm compress to acupoints|Massage while heat is applied|Continue for 10-15 minutes"
         }
       ]
     },
@@ -1083,33 +1071,15 @@
       "title": "Emergency Response Protocol",
       "subtitle": "When pain reaches severe levels (7+ on pain scale), follow these immediate steps:",
       "description": "When pain reaches severe levels (7+ on pain scale), follow these immediate steps:",
-      "immediateActions": [
-        "Apply heat immediately (40-45°C)",
-        "Take prescribed pain medication if available",
-        "Practice 4-7-8 breathing technique",
-        "Find comfortable position (fetal position recommended)",
-        "Contact healthcare provider if pain persists"
-      ],
+      "immediateActions": "Apply heat immediately (40-45°C)|Take prescribed pain medication if available|Practice 4-7-8 breathing technique|Find comfortable position (fetal position recommended)|Contact healthcare provider if pain persists",
       "medicalIndicators": {
         "title": "Seek Medical Attention If:",
-        "indicators": [
-          "Pain level 8+ that doesn't respond to treatment",
-          "Severe nausea or vomiting",
-          "Fever above 100.4°F (38°C)",
-          "Unusual bleeding patterns",
-          "Pain that worsens over time"
-        ]
+        "indicators": "Pain level 8+ that doesn't respond to treatment|Severe nausea or vomiting|Fever above 100.4°F (38°C)|Unusual bleeding patterns|Pain that worsens over time"
       },
       "emergencyKit": {
         "title": "Emergency Relief Kit",
         "description": "Keep these items readily available:",
-        "items": [
-          "Heat pack or hot water bottle",
-          "Pain medication (as prescribed)",
-          "Comfortable clothing",
-          "Water bottle",
-          "Emergency contact numbers"
-        ]
+        "items": "Heat pack or hot water bottle|Pain medication (as prescribed)|Comfortable clothing|Water bottle|Emergency contact numbers"
       }
     }
   },
@@ -1186,11 +1156,7 @@
         },
         "safety": {
           "title": "Safety Guidelines",
-          "guidelines": [
-            "Avoid temperatures above 48°C to prevent burns",
-            "Use with caution in diabetic patients",
-            "Avoid on broken or infected skin"
-          ]
+          "guidelines": "Avoid temperatures above 48°C to prevent burns|Use with caution in diabetic patients|Avoid on broken or infected skin"
         }
       },
       "herbalTherapy": {
@@ -1230,11 +1196,7 @@
         },
         "safety": {
           "title": "Safety Reminder",
-          "guidelines": [
-            "Consult TCM practitioner or pharmacist before first use",
-            "Avoid blood-activating herbs during pregnancy or when trying to conceive",
-            "Watch for allergic reactions, discontinue if discomfort occurs"
-          ]
+          "guidelines": "Consult TCM practitioner or pharmacist before first use|Avoid blood-activating herbs during pregnancy or when trying to conceive|Watch for allergic reactions, discontinue if discomfort occurs"
         }
       },
       "dietaryAdjustment": {
@@ -1268,21 +1230,11 @@
           "title": "Anti-inflammatory Foods",
           "recommended": {
             "title": "Recommended Foods",
-            "list": [
-              "Salmon, sardines (rich in Omega-3)",
-              "Spinach, kale (rich in magnesium)",
-              "Turmeric, ginger (natural anti-inflammatory)",
-              "Berries (antioxidant-rich)"
-            ]
+            "list": "Salmon, sardines (rich in Omega-3)|Spinach, kale (rich in magnesium)|Turmeric, ginger (natural anti-inflammatory)|Berries (antioxidant-rich)"
           },
           "avoid": {
             "title": "Foods to Avoid",
-            "list": [
-              "High-sugar foods (increase inflammation)",
-              "Refined carbohydrates",
-              "Excessive caffeine",
-              "Processed meats"
-            ]
+            "list": "High-sugar foods (increase inflammation)|Refined carbohydrates|Excessive caffeine|Processed meats"
           }
         }
       },
@@ -1317,16 +1269,16 @@
         "practice": {
           "title": "Practice Guidelines",
           "timing": {
-            "title": "Best Timing",
             "1": "During menstruation: 10-15 minutes daily",
             "2": "Pre-menstrual: 20-30 minutes every other day",
-            "3": "Post-menstrual: 15-20 minutes for recovery"
+            "3": "Post-menstrual: 15-20 minutes for recovery",
+            "title": "Best Timing"
           },
           "precautions": {
-            "title": "Important Precautions",
             "1": "Stop if pain increases during exercise",
             "2": "Avoid intense poses during heavy flow",
-            "3": "Consult doctor if you have chronic conditions"
+            "3": "Consult doctor if you have chronic conditions",
+            "title": "Important Precautions"
           }
         }
       },
@@ -1366,11 +1318,7 @@
         },
         "safety": {
           "title": "Safety Guidelines",
-          "guidelines": [
-            "Use with caution during pregnancy and breastfeeding",
-            "Always dilute before skin application",
-            "Perform patch test before first use"
-          ]
+          "guidelines": "Use with caution during pregnancy and breastfeeding|Always dilute before skin application|Perform patch test before first use"
         }
       },
       "acupuncture": {
@@ -1699,19 +1647,11 @@
         "title": "Usage Tips:",
         "bestTiming": {
           "title": "Best Timing:",
-          "items": [
-            "When pain just starts",
-            "When feeling anxious",
-            "Before sleep for relaxation"
-          ]
+          "items": "When pain just starts|When feeling anxious|Before sleep for relaxation"
         },
         "precautions": {
           "title": "Precautions:",
-          "items": [
-            "Find comfortable sitting or lying position",
-            "Beginners: 3-4 cycles are enough",
-            "Stop if feeling dizzy"
-          ]
+          "items": "Find comfortable sitting or lying position|Beginners: 3-4 cycles are enough|Stop if feeling dizzy"
         }
       }
     },
@@ -1972,19 +1912,11 @@
         "title": "Usage Tips:",
         "bestTiming": {
           "title": "Best Timing:",
-          "items": [
-            "When pain just starts",
-            "When feeling anxious",
-            "Before sleep for relaxation"
-          ]
+          "items": "When pain just starts|When feeling anxious|Before sleep for relaxation"
         },
         "precautions": {
           "title": "Precautions:",
-          "items": [
-            "Find comfortable sitting or lying position",
-            "Beginners: 3-4 cycles are enough",
-            "Stop if feeling dizzy"
-          ]
+          "items": "Find comfortable sitting or lying position|Beginners: 3-4 cycles are enough|Stop if feeling dizzy"
         }
       }
     },
@@ -2014,56 +1946,32 @@
       "office": {
         "title": "Office/Workplace Scenarios",
         "description": "Professional workplace period pain management solutions: discreet office relief techniques, meeting emergency kit preparation, workplace nutrition strategies. Get effective period pain relief methods suitable for office environments while maintaining your professional image.",
-        "features": [
-          "Meeting Emergency Kit",
-          "Office Chair Stretches",
-          "Workplace Nutrition"
-        ]
+        "features": "Meeting Emergency Kit|Office Chair Stretches|Workplace Nutrition"
       },
       "commute": {
         "title": "Commuting Scenarios",
         "description": "Commuting period pain emergency management guide: public transport comfort techniques, driving adjustments, sudden pain relief methods. Get period management strategies suitable for various commuting methods to effectively handle menstrual discomfort while traveling.",
-        "features": [
-          "Public Transport Solutions",
-          "Driving Adjustments",
-          "Emergency Response Plans"
-        ]
+        "features": "Public Transport Solutions|Driving Adjustments|Emergency Response Plans"
       },
       "exercise": {
         "title": "Exercise/Outdoor Scenarios",
         "description": "Professional period exercise safety guidelines: suitable exercise types during menstruation, outdoor activity precautions, exercise intensity adjustment techniques. Get scientific period exercise recommendations to maintain your fitness routine while safely managing your menstrual cycle.",
-        "features": [
-          "Period Hiking Guide",
-          "Pool Hygiene Management",
-          "Yoga Pose Library"
-        ]
+        "features": "Period Hiking Guide|Pool Hygiene Management|Yoga Pose Library"
       },
       "sleep": {
         "title": "Sleep Scenarios",
         "description": "Period nighttime pain relief sleep solutions: scientific sleep position adjustments, sleep audio recommendations, bedtime nutrition advice. Get professional period sleep management techniques to improve your nighttime rest and minimize menstrual discomfort's impact on sleep quality.",
-        "features": [
-          "Sleep Audio",
-          "Scientific Sleep Positions",
-          "Bedtime Nutrition"
-        ]
+        "features": "Sleep Audio|Scientific Sleep Positions|Bedtime Nutrition"
       },
       "social": {
         "title": "Social Scenarios",
         "description": "Elegant period pain management strategies for social situations: date emergency handling, party food choices, pain concealment techniques. Get period management solutions suitable for various social activities to maintain your elegant appearance while effectively managing menstrual discomfort.",
-        "features": [
-          "Date Emergency Strategies",
-          "Party Food Choices",
-          "Pain Concealment Techniques"
-        ]
+        "features": "Date Emergency Strategies|Party Food Choices|Pain Concealment Techniques"
       },
       "lifeStages": {
         "title": "Special Life Stages",
         "description": "Professional menstrual health management guidance for different life stages: adolescent period education, reproductive age health management, perimenopause care solutions. Get personalized period health management strategies tailored to each age group's characteristics.",
-        "features": [
-          "Adolescence Programs",
-          "Pre-pregnancy Programs",
-          "Perimenopause Programs"
-        ]
+        "features": "Adolescence Programs|Pre-pregnancy Programs|Perimenopause Programs"
       }
     }
   },
@@ -2188,19 +2096,11 @@
       "title": "Usage Tips:",
       "bestTiming": {
         "title": "Best Timing:",
-        "items": [
-          "When pain just starts",
-          "When feeling anxious",
-          "Before sleep for relaxation"
-        ]
+        "items": "When pain just starts|When feeling anxious|Before sleep for relaxation"
       },
       "precautions": {
         "title": "Precautions:",
-        "items": [
-          "Find comfortable sitting or lying position",
-          "Beginners: 3-4 cycles are enough",
-          "Stop if feeling dizzy"
-        ]
+        "items": "Find comfortable sitting or lying position|Beginners: 3-4 cycles are enough|Stop if feeling dizzy"
       }
     },
     "subtitle": "Natural pain relief through nervous system regulation",
@@ -2729,12 +2629,7 @@
       "campusGuide": "Campus Emergency Guide",
       "emergencyKit": "Emergency Kit List",
       "immediateMethods": "Immediate Methods",
-      "methods": [
-        "Apply heat to abdomen or lower back",
-        "Deep breathing relaxation",
-        "Gentle abdominal massage",
-        "Seek help from teachers or friends"
-      ]
+      "methods": "Apply heat to abdomen or lower back|Deep breathing relaxation|Gentle abdominal massage|Seek help from teachers or friends"
     },
     "painAssessment": {
       "title": "🎯 Quick Pain Assessment",
@@ -2748,38 +2643,22 @@
       "campusGuide": {
         "title": "Campus Emergency Guide",
         "description": "What to do when pain strikes at school? Classroom emergencies, dorm management, PE class strategies - comprehensive campus survival guide.",
-        "highlights": [
-          "Classroom self-help techniques",
-          "Dorm pain management",
-          "PE class strategies"
-        ]
+        "highlights": "Classroom self-help techniques|Dorm pain management|PE class strategies"
       },
       "developmentPain": {
         "title": "Developmental Pain Management",
         "description": "Specialized pain management advice for ages 12-16, understanding adolescent period pain characteristics and scientific relief methods.",
-        "highlights": [
-          "Adolescent period pain characteristics",
-          "Scientific relief methods",
-          "When to seek medical help"
-        ]
+        "highlights": "Adolescent period pain characteristics|Scientific relief methods|When to seek medical help"
       },
       "emotionalSupport": {
         "title": "Emotional Support & Mental Health",
         "description": "How to cope with period anxiety and mood swings? Relaxation techniques, peer experience sharing to help you through emotional \"roller coasters\".",
-        "highlights": [
-          "Emotional regulation techniques",
-          "Anxiety relief methods",
-          "Peer experience sharing"
-        ]
+        "highlights": "Emotional regulation techniques|Anxiety relief methods|Peer experience sharing"
       },
       "communicationGuide": {
         "title": "Communication Guide",
         "description": "How to effectively communicate with parents, teachers, and doctors? Conversation templates and communication skills to help you express your needs confidently.",
-        "highlights": [
-          "Parent communication templates",
-          "Teacher collaboration guide",
-          "Doctor communication skills"
-        ]
+        "highlights": "Parent communication templates|Teacher collaboration guide|Doctor communication skills"
       }
     },
     "resources": {
@@ -3056,43 +2935,25 @@
           "title": "Seek Immediate Medical Care",
           "description": "Your symptoms may require professional medical evaluation and treatment",
           "timeframe": "Immediately",
-          "actionSteps": [
-            "Contact your gynecologist",
-            "If pain is severe, consider emergency care",
-            "Keep a detailed symptom diary"
-          ]
+          "actionSteps": "Contact your gynecologist|If pain is severe, consider emergency care|Keep a detailed symptom diary"
         },
         "painManagement": {
           "title": "Pain Management Strategies",
           "description": "Multiple methods can help relieve menstrual pain",
           "timeframe": "Immediately available",
-          "actionSteps": [
-            "Use heating pads or hot water bottles",
-            "Try light exercise like walking",
-            "Consider over-the-counter pain relievers (follow instructions)"
-          ]
+          "actionSteps": "Use heating pads or hot water bottles|Try light exercise like walking|Consider over-the-counter pain relievers (follow instructions)"
         },
         "lifestyleChanges": {
           "title": "Lifestyle Adjustments",
           "description": "Long-term lifestyle changes can significantly improve symptoms",
           "timeframe": "2-3 months to see effects",
-          "actionSteps": [
-            "Maintain regular exercise habits",
-            "Ensure adequate sleep",
-            "Learn stress management techniques",
-            "Maintain a balanced diet"
-          ]
+          "actionSteps": "Maintain regular exercise habits|Ensure adequate sleep|Learn stress management techniques|Maintain a balanced diet"
         },
         "selfcarePractices": {
           "title": "Self-Care Practices",
           "description": "Daily self-care can help you better manage symptoms",
           "timeframe": "Ongoing",
-          "actionSteps": [
-            "Practice deep breathing and meditation",
-            "Use pain tracker to record symptoms",
-            "Build a support network",
-            "Learn relaxation techniques"
-          ]
+          "actionSteps": "Practice deep breathing and meditation|Use pain tracker to record symptoms|Build a support network|Learn relaxation techniques"
         }
       }
     }
@@ -3710,28 +3571,28 @@
     },
     "searchKeywords": {
       "urgent": {
-        "core": ["heat therapy", "warm water bottle", "warm patch", "massage", "belly rub", "painkiller"],
-        "professional": ["heat therapy method", "thermal therapy", "warm therapy", "heat therapy treatment", "heat therapy treatment 2"],
-        "massage": ["acupressure", "muscle relaxation", "abdominal massage", "menstrual massage", "pain massage"],
-        "medication": ["NSAID", "anti-inflammatory drug", "ibuprofen", "acetaminophen", "pain medication"],
-        "emergency": ["hurt", "ache", "now", "immediately", "relief", "quick", "immediate", "emergency", "urgent", "severe"]
+        "core": "heat therapy|warm water bottle|warm patch|massage|belly rub|painkiller",
+        "professional": "heat therapy method|thermal therapy|warm therapy|heat therapy treatment|heat therapy treatment 2",
+        "massage": "acupressure|muscle relaxation|abdominal massage|menstrual massage|pain massage",
+        "medication": "NSAID|anti-inflammatory drug|ibuprofen|acetaminophen|pain medication",
+        "emergency": "hurt|ache|now|immediately|relief|quick|immediate|emergency|urgent|severe"
       },
       "preparation": {
-        "core": ["nutrition", "diet", "exercise", "habit", "preparation", "prevention", "plan", "advance", "wellness", "health", "workout", "yoga", "baduanjin"],
-        "heatTherapy": ["heat therapy preparation", "heat therapy tools", "heat therapy supplies", "warm patch preparation"],
-        "massage": ["massage preparation", "massage tools", "massage techniques", "massage learning"]
+        "core": "nutrition|diet|exercise|habit|preparation|prevention|plan|advance|wellness|health|workout|yoga|baduanjin",
+        "heatTherapy": "heat therapy preparation|heat therapy tools|heat therapy supplies|warm patch preparation",
+        "massage": "massage preparation|massage tools|massage techniques|massage learning"
       },
       "learning": {
-        "core": ["doctor", "medical", "see doctor", "cycle", "understand", "guide", "education", "knowledge", "learning", "research", "science", "evidence-based", "diagnosis", "examination"],
-        "heatTherapy": ["heat therapy methods", "heat therapy techniques", "heat therapy principles", "heat therapy learning"],
-        "massage": ["massage methods", "massage techniques", "massage principles", "massage learning"],
-        "medication": ["medication knowledge", "medication guide", "medication comparison", "medication learning"]
+        "core": "doctor|medical|see doctor|cycle|understand|guide|education|knowledge|learning|research|science|evidence-based|diagnosis|examination",
+        "heatTherapy": "heat therapy methods|heat therapy techniques|heat therapy principles|heat therapy learning",
+        "massage": "massage methods|massage techniques|massage principles|massage learning",
+        "medication": "medication knowledge|medication guide|medication comparison|medication learning"
       },
       "management": {
-        "core": ["long-term", "management", "life", "archive", "record", "continuous", "tracking", "monitoring", "analysis", "report", "template"],
-        "heatTherapy": ["heat therapy management", "heat therapy record", "heat therapy plan", "heat therapy tracking"],
-        "massage": ["massage management", "massage record", "massage plan", "massage tracking"],
-        "medication": ["medication management", "medication record", "medication plan", "medication tracking"]
+        "core": "long-term|management|life|archive|record|continuous|tracking|monitoring|analysis|report|template",
+        "heatTherapy": "heat therapy management|heat therapy record|heat therapy plan|heat therapy tracking",
+        "massage": "massage management|massage record|massage plan|massage tracking",
+        "medication": "medication management|medication record|medication plan|medication tracking"
       }
     },
     "keywords": {

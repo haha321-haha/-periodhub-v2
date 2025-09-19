@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface PeriodPainAssessmentToolProps {
   locale: string;
@@ -12,69 +13,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [result, setResult] = useState<any>(null);
 
-  // 翻译文本
-  const texts = {
-    zh: {
-      title: '痛经速测小工具',
-      subtitle: '回答几个简单问题，初步了解你的痛经类型和严重程度。',
-      intensityTitle: '你的痛经强度如何？',
-      intensityOptions: {
-        mild: '轻微疼痛（可以正常活动）',
-        moderate: '中等疼痛（影响日常活动）',
-        severe: '严重疼痛（无法正常活动）'
-      },
-      onsetTitle: '痛经通常什么时候开始？',
-      onsetOptions: {
-        recent: '月经前1-2天开始',
-        later: '月经开始后才疼痛'
-      },
-      symptomsTitle: '是否伴有以下严重症状？（可多选）',
-      symptomsOptions: {
-        fever: '发热',
-        vomiting: '严重呕吐',
-        dizziness: '头晕或昏厥',
-        bleeding: '异常出血',
-        nonMenstrual: '非月经期也疼痛'
-      },
-      assessButton: '开始评估',
-      resetButton: '重新测试',
-      moreInfoButton: '了解更多',
-      resultTitle: '评估结果',
-      consultAdvice: '建议咨询医生获得专业建议',
-      disclaimer: '此工具仅供参考，不能替代专业医疗建议。如有疑虑请咨询医生。'
-    },
-    en: {
-      title: 'Period Pain Assessment Tool',
-      subtitle: 'Answer a few simple questions to understand your menstrual pain type and severity.',
-      intensityTitle: 'How intense is your menstrual pain?',
-      intensityOptions: {
-        mild: 'Mild pain (can continue normal activities)',
-        moderate: 'Moderate pain (affects daily activities)',
-        severe: 'Severe pain (unable to perform normal activities)'
-      },
-      onsetTitle: 'When does your menstrual pain usually start?',
-      onsetOptions: {
-        recent: 'Starts 1-2 days before menstruation',
-        later: 'Starts after menstruation begins'
-      },
-      symptomsTitle: 'Do you experience any of these severe symptoms? (Multiple choice)',
-      symptomsOptions: {
-        fever: 'Fever',
-        vomiting: 'Severe vomiting',
-        dizziness: 'Dizziness or fainting',
-        bleeding: 'Abnormal bleeding',
-        nonMenstrual: 'Pain outside menstrual period'
-      },
-      assessButton: 'Start Assessment',
-      resetButton: 'Reset Test',
-      moreInfoButton: 'Learn More',
-      resultTitle: 'Assessment Result',
-      consultAdvice: 'We recommend consulting a doctor for professional advice',
-      disclaimer: 'This tool is for reference only and cannot replace professional medical advice. Please consult a doctor if you have concerns.'
-    }
-  };
-
-  const t = texts[locale as keyof typeof texts] || texts.zh;
+  const t = useTranslations('periodPainAssessmentPage.tool');
 
   const handleSymptomChange = (symptom: string, checked: boolean) => {
     if (checked) {

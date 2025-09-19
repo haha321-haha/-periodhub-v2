@@ -234,7 +234,45 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/downloads/teacher-health-manual-en.pdf',
   ];
 
-  // 生成PDF文件的sitemap条目
+  // HTML资源文件 - 优先级高于PDF，更好的SEO和用户体验
+  const htmlFiles = [
+    // 中文HTML文件
+    '/downloads/parent-communication-guide.html',
+    '/downloads/zhan-zhuang-baduanjin-illustrated-guide.html',
+    '/downloads/teacher-collaboration-handbook.html',
+    '/downloads/healthy-habits-checklist.html',
+    '/downloads/specific-menstrual-pain-management-guide.html',
+    '/downloads/natural-therapy-assessment.html',
+    '/downloads/menstrual-cycle-nutrition-plan.html',
+    '/downloads/campus-emergency-checklist.html',
+    '/downloads/menstrual-pain-complications-management.html',
+    '/downloads/magnesium-gut-health-menstrual-pain-guide.html',
+    '/downloads/pain-tracking-form.html',
+    '/downloads/teacher-health-manual.html',
+    // 英文HTML文件
+    '/downloads/parent-communication-guide-en.html',
+    '/downloads/zhan-zhuang-baduanjin-illustrated-guide-en.html',
+    '/downloads/teacher-collaboration-handbook-en.html',
+    '/downloads/healthy-habits-checklist-en.html',
+    '/downloads/specific-menstrual-pain-management-guide-en.html',
+    '/downloads/natural-therapy-assessment-en.html',
+    '/downloads/menstrual-cycle-nutrition-plan-en.html',
+    '/downloads/campus-emergency-checklist-en.html',
+    '/downloads/menstrual-pain-complications-management-en.html',
+    '/downloads/magnesium-gut-health-menstrual-pain-guide-en.html',
+    '/downloads/pain-tracking-form-en.html',
+    '/downloads/teacher-health-manual-en.html',
+  ];
+
+  // 生成HTML文件的sitemap条目 - 高优先级
+  const htmlEntries: MetadataRoute.Sitemap = htmlFiles.map((html) => ({
+    url: `${baseUrl}${html}`,
+    lastModified: currentDate,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8, // HTML版本高优先级 - 更好的SEO和用户体验
+  }));
+
+  // 生成PDF文件的sitemap条目 - 保持现有PDF条目
   const pdfEntries: MetadataRoute.Sitemap = pdfFiles.map((pdf) => ({
     url: `${baseUrl}${pdf}`,
     lastModified: currentDate,
@@ -242,8 +280,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6, // PDF文件优先级较低
   }));
 
-  // 合并所有条目
-  const allEntries = [...staticEntries, ...pdfEntries];
+  // 合并所有条目 - HTML优先
+  const allEntries = [...staticEntries, ...htmlEntries, ...pdfEntries];
 
   return allEntries;
 }

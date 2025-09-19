@@ -91,7 +91,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
       title: t('scenarios.office.title'),
       description: t('scenarios.office.description'),
       features: t.raw('scenarios.office.features') as string[],
-      icon: <Briefcase className="w-8 h-8" />,
+      iconName: 'Briefcase',
       color: 'bg-blue-50 text-blue-600',
       hoverColor: 'hover:bg-blue-100'
     },
@@ -100,7 +100,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
       title: t('scenarios.commute.title'),
       description: t('scenarios.commute.description'),
       features: t.raw('scenarios.commute.features') as string[],
-      icon: <Car className="w-8 h-8" />,
+      iconName: 'Car',
       color: 'bg-green-50 text-green-600',
       hoverColor: 'hover:bg-green-100'
     },
@@ -109,7 +109,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
       title: t('scenarios.exercise.title'),
       description: t('scenarios.exercise.description'),
       features: t.raw('scenarios.exercise.features') as string[],
-      icon: <Dumbbell className="w-8 h-8" />,
+      iconName: 'Dumbbell',
       color: 'bg-orange-50 text-orange-600',
       hoverColor: 'hover:bg-orange-100'
     },
@@ -118,7 +118,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
       title: t('scenarios.sleep.title'),
       description: t('scenarios.sleep.description'),
       features: t.raw('scenarios.sleep.features') as string[],
-      icon: <Moon className="w-8 h-8" />,
+      iconName: 'Moon',
       color: 'bg-purple-50 text-purple-600',
       hoverColor: 'hover:bg-purple-100'
     },
@@ -127,7 +127,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
       title: t('scenarios.social.title'),
       description: t('scenarios.social.description'),
       features: t.raw('scenarios.social.features') as string[],
-      icon: <Users className="w-8 h-8" />,
+      iconName: 'Users',
       color: 'bg-pink-50 text-pink-600',
       hoverColor: 'hover:bg-pink-100'
     },
@@ -136,11 +136,24 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
       title: t('scenarios.lifeStages.title'),
       description: t('scenarios.lifeStages.description'),
       features: t.raw('scenarios.lifeStages.features') as string[],
-      icon: <Heart className="w-8 h-8" />,
+      iconName: 'Heart',
       color: 'bg-red-50 text-red-600',
       hoverColor: 'hover:bg-red-100'
     }
   ];
+
+  const getIcon = (iconName: string) => {
+    const iconProps = { className: "w-8 h-8" };
+    switch (iconName) {
+      case 'Briefcase': return <Briefcase {...iconProps} />;
+      case 'Car': return <Car {...iconProps} />;
+      case 'Dumbbell': return <Dumbbell {...iconProps} />;
+      case 'Moon': return <Moon {...iconProps} />;
+      case 'Users': return <Users {...iconProps} />;
+      case 'Heart': return <Heart {...iconProps} />;
+      default: return <Briefcase {...iconProps} />;
+    }
+  };
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-12" data-page="scenario-solutions">
@@ -264,7 +277,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
               </div>
 
               <div className={`w-12 sm:w-16 h-12 sm:h-16 flex items-center justify-center rounded-full ${scenario.color} mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                {scenario.icon}
+                {getIcon(scenario.iconName)}
               </div>
 
               <h3 className="text-lg sm:text-xl font-semibold text-neutral-800 mb-2 sm:mb-3 group-hover:text-primary-700 transition-colors">

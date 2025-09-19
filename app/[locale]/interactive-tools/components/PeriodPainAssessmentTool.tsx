@@ -86,7 +86,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
                     onChange={(e) => setIntensity(e.target.value)}
                     className="w-4 h-4 text-purple-600"
                   />
-                  <span className="text-gray-700 text-left">{label}</span>
+                  <span className="text-gray-700 text-left">{label as string}</span>
                 </label>
               ))}
             </div>
@@ -106,7 +106,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
                     onChange={(e) => setOnset(e.target.value)}
                     className="w-4 h-4 text-purple-600"
                   />
-                  <span className="text-gray-700 text-left">{label}</span>
+                  <span className="text-gray-700 text-left">{label as string}</span>
                 </label>
               ))}
             </div>
@@ -125,7 +125,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
                     onChange={(e) => handleSymptomChange(value, e.target.checked)}
                     className="w-4 h-4 text-purple-600"
                   />
-                  <span className="text-gray-700 text-left">{label}</span>
+                  <span className="text-gray-700 text-left">{label as string}</span>
                 </label>
               ))}
             </div>

@@ -74,9 +74,9 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
         <div className="space-y-8">
           {/* 痛经强度 */}
           <div>
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">{t.intensityTitle}</h3>
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">{t('intensityTitle')}</h3>
             <div className="space-y-3">
-              {Object.entries(t.intensityOptions).map(([value, label]) => (
+              {Object.entries(t('intensityOptions')).map(([value, label]) => (
                 <label key={value} className="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
                   <input
                     type="radio"
@@ -94,9 +94,9 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
 
           {/* 痛经开始时间 */}
           <div>
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">{t.onsetTitle}</h3>
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">{t('onsetTitle')}</h3>
             <div className="space-y-3">
-              {Object.entries(t.onsetOptions).map(([value, label]) => (
+              {Object.entries(t('onsetOptions')).map(([value, label]) => (
                 <label key={value} className="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
                   <input
                     type="radio"
@@ -114,9 +114,9 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
 
           {/* 严重症状 */}
           <div>
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">{t.symptomsTitle}</h3>
+            <h3 className="text-xl font-semibold mb-4 text-gray-800">{t('symptomsTitle')}</h3>
             <div className="space-y-3">
-              {Object.entries(t.symptomsOptions).map(([value, label]) => (
+              {Object.entries(t('symptomsOptions')).map(([value, label]) => (
                 <label key={value} className="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-gray-50 transition-colors">
                   <input
                     type="checkbox"
@@ -137,7 +137,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
               disabled={!intensity || !onset}
               className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
-              {t.assessButton}
+              {t('assessButton')}
             </button>
           </div>
         </div>
@@ -153,7 +153,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
               result.severity === 'medium' ? 'text-yellow-700' :
               'text-green-700'
             }`}>
-              {t.resultTitle}
+              {t('resultTitle')}
             </h3>
             <p className="text-gray-700 leading-relaxed">
               {result.advice}
@@ -163,7 +163,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
           {result.needConsult && (
             <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
               <p className="text-blue-700 font-medium">
-                {t.consultAdvice}
+                {t('consultAdvice')}
               </p>
             </div>
           )}
@@ -173,20 +173,20 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
               onClick={resetAssessment}
               className="border border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors"
             >
-              {t.resetButton}
+              {t('resetButton')}
             </button>
             <a
               href={`/${locale}/teen-health`}
               className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold text-center hover:from-pink-600 hover:to-pink-700 transition-all"
             >
-              {t.moreInfoButton}
+              {t('moreInfoButton')}
             </a>
           </div>
         </div>
       )}
 
       <div className="mt-8 text-sm text-gray-500 text-center">
-        <p>{t.disclaimer}</p>
+        <p>{t('disclaimer')}</p>
       </div>
     </div>
   );

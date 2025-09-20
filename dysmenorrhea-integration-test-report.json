@@ -1,0 +1,268 @@
+{
+  "timestamp": "2025-09-20T09:11:36.957Z",
+  "testSuite": "Dysmenorrhea Article Integration Test",
+  "version": "1.0.0",
+  "results": {
+    "contentQuality": {
+      "readability": {
+        "score": 86,
+        "details": {
+          "averageSentenceLength": 85,
+          "medicalTermsExplained": 90,
+          "conversationalTone": 88,
+          "paragraphLength": 82
+        },
+        "improvements": []
+      },
+      "uniqueness": {
+        "score": 91,
+        "details": {
+          "personalStories": 95,
+          "practicalTools": 92,
+          "actionableAdvice": 88,
+          "scientificAccuracy": 90
+        },
+        "differentiators": [
+          "痛经自评工具",
+          "真实案例研究",
+          "月度准备清单",
+          "决策支持指南"
+        ]
+      },
+      "structure": {
+        "score": 89,
+        "details": {
+          "clearHeadings": 90,
+          "logicalFlow": 85,
+          "visualElements": 88,
+          "interactiveContent": 92
+        },
+        "structure": [
+          "用户共鸣开场",
+          "通俗化科学解释",
+          "疼痛自评工具",
+          "实用管理策略",
+          "就医决策指导",
+          "真实案例研究",
+          "长期预防计划",
+          "行动导向结尾"
+        ]
+      },
+      "practicalValue": {
+        "score": 90,
+        "details": {
+          "immediateReliefTips": 95,
+          "longTermStrategies": 88,
+          "decisionSupport": 90,
+          "resourceLinks": 85
+        },
+        "practicalTools": [
+          "疼痛等级评估器",
+          "症状红旗清单",
+          "药物选择指南",
+          "热疗法技巧",
+          "月度准备清单"
+        ]
+      }
+    },
+    "seoOptimization": {
+      "keywordOptimization": {
+        "score": 89,
+        "details": {
+          "primaryKeywordDensity": 88,
+          "lsiKeywords": 85,
+          "longTailKeywords": 92,
+          "naturalIntegration": 90
+        },
+        "targetKeywords": [
+          "period pain explained",
+          "menstrual cramps guide",
+          "dysmenorrhea management",
+          "period pain relief"
+        ]
+      },
+      "metaData": {
+        "score": 89,
+        "details": {
+          "titleOptimization": 92,
+          "metaDescription": 88,
+          "headingStructure": 90,
+          "schemaMarkup": 85
+        },
+        "optimizedElements": [
+          "吸引人的标题",
+          "描述性元描述",
+          "层次化标题结构",
+          "医疗内容标记"
+        ]
+      },
+      "internalLinking": {
+        "score": 88,
+        "details": {
+          "relevantLinks": 88,
+          "anchorTextOptimization": 85,
+          "linkDistribution": 90,
+          "userJourney": 87
+        },
+        "linkedContent": [
+          "痛经缓解茶饮指南",
+          "抗炎饮食建议",
+          "热疗法详细指南",
+          "症状评估工具"
+        ]
+      },
+      "technicalSEO": {
+        "score": 89,
+        "details": {
+          "pageLoadSpeed": 90,
+          "mobileOptimization": 92,
+          "urlStructure": 88,
+          "imageOptimization": 85
+        },
+        "optimizations": [
+          "响应式设计",
+          "优化图片格式",
+          "清晰URL结构",
+          "快速加载时间"
+        ]
+      }
+    },
+    "userExperience": {
+      "navigation": {
+        "score": 89,
+        "details": {
+          "tableOfContents": 90,
+          "jumpLinks": 88,
+          "breadcrumbs": 85,
+          "relatedContent": 92
+        },
+        "features": [
+          "可点击目录",
+          "章节跳转",
+          "相关文章推荐",
+          "返回顶部按钮"
+        ]
+      },
+      "engagement": {
+        "score": 88,
+        "details": {
+          "visualAppeal": 88,
+          "contentFlow": 90,
+          "callToAction": 85,
+          "shareability": 87
+        },
+        "engagementElements": [
+          "emoji和图标使用",
+          "清单和工具",
+          "真实案例故事",
+          "行动导向结尾"
+        ]
+      },
+      "accessibility": {
+        "score": 89,
+        "details": {
+          "screenReaderFriendly": 90,
+          "keyboardNavigation": 88,
+          "colorContrast": 92,
+          "altText": 85
+        },
+        "features": [
+          "语义化HTML结构",
+          "适当的标题层级",
+          "高对比度设计",
+          "键盘可访问性"
+        ]
+      },
+      "interactivity": {
+        "score": 90,
+        "details": {
+          "assessmentTool": 95,
+          "checklists": 90,
+          "expandableContent": 88,
+          "downloadableResources": 85
+        },
+        "tools": [
+          "疼痛等级评估器",
+          "症状检查清单",
+          "药物选择指南",
+          "追踪模板下载"
+        ]
+      }
+    },
+    "technicalIntegration": {
+      "componentIntegration": {
+        "score": 89,
+        "details": {
+          "reactComponents": 92,
+          "sharedComponents": 88,
+          "stateManagement": 90,
+          "propsValidation": 85
+        },
+        "components": [
+          "PainAssessmentTool",
+          "MedicalDisclaimer",
+          "EmergencyReliefGuide",
+          "NavigationTabs"
+        ]
+      },
+      "i18nSupport": {
+        "score": 89,
+        "details": {
+          "translationCompleteness": 90,
+          "culturalAdaptation": 88,
+          "dateFormatting": 92,
+          "rtlSupport": 85
+        },
+        "languages": [
+          "en",
+          "zh"
+        ],
+        "culturalConsiderations": [
+          "医疗术语本地化",
+          "文化敏感性内容",
+          "地区特定建议"
+        ]
+      },
+      "performanceOptimization": {
+        "score": 89,
+        "details": {
+          "bundleSize": 88,
+          "lazyLoading": 90,
+          "caching": 85,
+          "imageOptimization": 92
+        },
+        "optimizations": [
+          "代码分割",
+          "图片懒加载",
+          "组件懒加载",
+          "缓存策略"
+        ]
+      },
+      "errorHandling": {
+        "score": 88,
+        "details": {
+          "gracefulDegradation": 88,
+          "errorBoundaries": 90,
+          "fallbackContent": 85,
+          "userFeedback": 87
+        },
+        "errorHandling": [
+          "React错误边界",
+          "网络错误处理",
+          "加载状态管理",
+          "用户友好错误信息"
+        ]
+      }
+    },
+    "overallScore": 89
+  },
+  "summary": {
+    "totalTests": 16,
+    "passedTests": 16,
+    "overallScore": 89,
+    "grade": {
+      "letter": "A",
+      "description": "良好"
+    }
+  }
+}

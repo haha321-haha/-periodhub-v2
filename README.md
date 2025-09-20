@@ -65,6 +65,44 @@
 - **🎨 设计系统** - 统一的紫粉渐变主题，Tailwind CSS 组件库
 - **🔒 安全性** - CSP 安全策略，XSS 防护，数据加密存储
 
+## Installation
+
+### Prerequisites
+- Node.js >= 18.0.0 (recommended 20.15.0+)
+- npm >= 8.0.0 or yarn >= 1.22.0
+- Git >= 2.0.0
+
+### Quick Setup
+```bash
+# Clone the repository
+git clone https://github.com/haha321-haha/v2-clean-fixed.git
+cd v2-clean-fixed
+
+# Install dependencies
+npm install
+
+# Create environment file
+cp .env.example .env.local
+
+# Start development server
+npm run dev
+```
+
+## Usage
+
+### Development Commands
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run type-check   # TypeScript type checking
+```
+
+### Accessing the Application
+- Development: http://localhost:3000
+- Production: https://periodhub.health
+
 ## 🚀 快速开始 | Quick Start
 
 ### 📋 环境要求 | Prerequisites

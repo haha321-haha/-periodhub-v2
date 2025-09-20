@@ -40,6 +40,140 @@
       "description": "Professional menstrual health consultation team, 24-hour response for period pain relief, health management, and technical support questions"
     }
   },
+  "dysmenorrheaGuide": {
+    "seo": {
+      "title": "Period Pain Explained: Your Complete Guide to Understanding and Managing Menstrual Cramps",
+      "description": "Comprehensive guide to understanding period pain causes, assessment tools, management strategies, and when to seek medical care. Includes interactive pain tracker and personalized recommendations."
+    },
+    "navigation": {
+      "backToArticles": "Back to Articles"
+    },
+    "hero": {
+      "title": "\"Why Does This Hurt So Much?\" - You're Not Alone",
+      "subtitle": "If you've ever curled up in bed, wondering why your period feels like your body is rebelling, you're definitely not alone. About 80% of women experience period pain at some point.",
+      "story": "Sarah's Story: \"I used to think severe period pain was just something I had to endure. It wasn't until I understood what was actually happening in my body that I felt empowered to manage it.\""
+    },
+    "explanation": {
+      "title": "What's Actually Happening During Period Pain?",
+      "step1": {
+        "title": "Trigger",
+        "description": "Your body releases natural chemicals called prostaglandins (think of them as 'contraction messengers')."
+      },
+      "step2": {
+        "title": "Squeeze", 
+        "description": "These chemicals tell your uterine muscles to contract."
+      },
+      "step3": {
+        "title": "Pain",
+        "description": "Strong contractions can temporarily cut off the muscle's oxygen supply, causing cramp-like pain."
+      },
+      "analogy": {
+        "title": "Simple Analogy:",
+        "description": "This is similar to the feeling of a leg muscle cramping during exercise."
+      }
+    },
+    "assessment": {
+      "title": "Is Your Period Pain Normal?",
+      "subtitle": "Use our interactive assessment to understand your pain level and get personalized recommendations."
+    },
+    "tracker": {
+      "title": "Pain & Symptom Tracker",
+      "subtitle": "Track your symptoms over time to identify patterns and find what works best for you."
+    },
+    "toolkit": {
+      "title": "Your Period Pain Management Toolkit",
+      "immediate": {
+        "title": "Immediate Relief Strategies (0-30 mins)",
+        "heat": {
+          "title": "Heat Therapy - Your Best Friend",
+          "description": "Heat relaxes the uterine muscles and increases blood flow. Apply heat to your lower abdomen or back.",
+          "items": [
+            "Heating pad (15-20 minutes at a time)",
+            "Hot water bottle", 
+            "Warm bath or shower",
+            "Adhesive heat patches (for work/school)"
+          ]
+        }
+      },
+      "medication": {
+        "title": "Complete Medication Guide",
+        "options": [
+          {
+            "name": "Ibuprofen (Advil, Motrin)",
+            "dosage": "Dose: 400-600mg, every 6-8 hours.",
+            "bestFor": "Best Use: Take 1-2 days before your period starts or at the first sign of pain to prevent prostaglandins from forming."
+          },
+          {
+            "name": "Naproxen (Aleve)",
+            "dosage": "Dose: 220mg, every 8-12 hours.",
+            "bestFor": "Best Use: Its longer-lasting effect is great for all-day or overnight relief."
+          },
+          {
+            "name": "Acetaminophen (Tylenol)",
+            "dosage": "Dose: 500-1000mg, every 6-8 hours.",
+            "bestFor": "Best Use: A good alternative if you have a sensitive stomach or cannot take NSAIDs like Ibuprofen."
+          }
+        ]
+      }
+    },
+    "doctorGuide": {
+      "title": "When to See a Doctor: Your Decision Guide",
+      "immediate": {
+        "title": "Seek Immediate Medical Attention",
+        "points": [
+          "Pain so severe you can't stand or walk.",
+          "Fainting or dizziness with pain.",
+          "Fever over 101°F (38.3°C) with the pain."
+        ]
+      },
+      "appointment": {
+        "title": "Schedule an Appointment If:",
+        "points": [
+          "Your pain pattern changes significantly.",
+          "Over-the-counter medications stop working.",
+          "You regularly miss work/school due to pain."
+        ]
+      }
+    },
+    "stories": {
+      "title": "Real Stories: How Women Find Relief",
+      "cases": [
+        {
+          "name": "Emma, 24 (College Student)",
+          "problemTitle": "Problem:",
+          "problemDescription": "Severe cramps affecting studies and exams.",
+          "solutionTitle": "Solution:",
+          "solutionDescription": "A combination of pre-emptive Ibuprofen, a portable heating pad, and light yoga."
+        },
+        {
+          "name": "Maria, 32 (Working Mom)",
+          "problemTitle": "Problem:",
+          "problemDescription": "Pain worsening over time, impacting work.",
+          "solutionTitle": "Solution:",
+          "solutionDescription": "Was diagnosed with endometriosis. Hormone therapy and dietary changes helped manage the condition."
+        }
+      ]
+    },
+    "nextSteps": {
+      "title": "Your Next Steps: Taking Control",
+      "description": "Understanding your body is the first step to taking control. You deserve to feel comfortable and confident every day of the month. Use our tools to build your personal management plan.",
+      "trackPainButton": "Start Pain Tracking",
+      "exploreToolsButton": "Explore All Tools"
+    },
+    "disclaimer": {
+      "title": "⚠️ Medical Disclaimer",
+      "content": "This content is for educational and informational purposes only and should not replace professional medical advice, diagnosis, or treatment. Always consult a healthcare provider for medical concerns."
+    },
+    "footer": {
+      "reviewed": "Medically Reviewed by Dr. Emily Carter, OB/GYN on Dec 19, 2024.",
+      "sourcesTitle": "Reference Sources:",
+      "sources": [
+        { "name": "Mayo Clinic" },
+        { "name": "WHO" },
+        { "name": "ACOG" }
+      ]
+    }
+  },
   "assessment": {
     "meta": {
       "title": "Smart Symptom Assessment - PeriodHub | Professional Menstrual Health Assessment Tool",

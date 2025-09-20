@@ -1,6 +1,7 @@
 {
   "name": "periodhub-health",
   "version": "0.1.0",
+  "description": "A comprehensive women's health platform focusing on menstrual health, period pain management, and reproductive wellness. Features interactive tools, multilingual support, and evidence-based health guidance.",
   "private": true,
   "engines": {
     "node": ">=20.0.0"

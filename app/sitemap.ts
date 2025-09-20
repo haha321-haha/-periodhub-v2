@@ -2,9 +2,20 @@ import { MetadataRoute } from 'next';
 
 // Sitemap generator for periodhub.health - Environment variable with fallback
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Environment variable with production fallback
+  // Environment variable with production fallback - 更严格的错误处理
   const getBaseUrl = () => {
-    return process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health';
+    const envUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const fallbackUrl = 'https://www.periodhub.health';
+    
+    // 确保URL格式正确
+    try {
+      const url = envUrl || fallbackUrl;
+      new URL(url); // 验证URL格式
+      return url;
+    } catch (error) {
+      console.error('Invalid base URL, using fallback:', error);
+      return fallbackUrl;
+    }
   };
   
   const baseUrl = getBaseUrl();
@@ -30,8 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/en/natural-therapies',
     '/zh/downloads',
     '/en/downloads',
-    '/zh/articles',
-    '/en/articles',
     '/zh/health-guide',
     '/en/health-guide',
     '/zh/teen-health',
@@ -285,5 +294,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 合并所有条目 - HTML优先
   const allEntries = [...staticEntries, ...htmlEntries, ...pdfEntries];
 
+  // 添加错误处理和验证
+  if (allEntries.length === 0) {
+    console.error('Sitemap generation failed: No entries generated');
+    // 返回最基本的条目确保sitemap不为空
+    return [
+      {
+        url: `${baseUrl}/zh`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 0.9,
+      },
+      {
+        url: `${baseUrl}/en`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly' as const,
+        priority: 1.0,
+      }
+    ];
+  }
+
+  console.log(`Sitemap generated successfully with ${allEntries.length} entries`);
   return allEntries;
 }

@@ -91,6 +91,17 @@ const nextConfig = {
         source: '/&',
         destination: '/',
         permanent: true
+      },
+      // 🎯 修复重定向问题的URL
+      {
+        source: '/assessment',
+        destination: '/en/interactive-tools/symptom-assessment',
+        permanent: true
+      },
+      {
+        source: '/articles',
+        destination: '/en/downloads',
+        permanent: true
       }
     ];
   }

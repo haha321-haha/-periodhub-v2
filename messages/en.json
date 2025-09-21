@@ -1023,10 +1023,6 @@
     "title": "Relief Therapies",
     "description": "Discover various therapies and methods to manage and alleviate period pain."
   },
-  "SpecialTherapiesPage": {
-    "title": "Special Therapies",
-    "description": "Explore specialized therapies and treatment methods for comprehensive menstrual health management."
-  },
   "therapyList": {
     "lastUpdated": "Last updated on {date, date, long}",
     "learnMore": "Learn more",

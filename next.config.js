@@ -27,8 +27,15 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     // 修复特定图片的兼容性问题
-    domains: [],
-    remotePatterns: [],
+    domains: ['images.unsplash.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
     // 临时禁用有问题图片的优化
     loader: 'default',
   },
@@ -109,6 +116,22 @@ const nextConfig = {
       {
         source: '/articles',
         destination: '/en/downloads',
+        permanent: true
+      },
+      // 🎯 重定向旧的special-therapies页面到natural-therapies
+      {
+        source: '/zh/special-therapies',
+        destination: '/zh/natural-therapies',
+        permanent: true
+      },
+      {
+        source: '/en/special-therapies',
+        destination: '/en/natural-therapies',
+        permanent: true
+      },
+      {
+        source: '/special-therapies',
+        destination: '/en/natural-therapies',
         permanent: true
       }
     ];

@@ -2213,11 +2213,6 @@
     "title": "缓解疗法",
     "description": "探索各种疗法和方法，以管理和减轻经期疼痛。"
   },
-  "SpecialTherapiesPage": {
-    "title": "特色疗法",
-    "description": "探索专业的特色疗法和治疗方法，为您的经期健康管理提供更多选择。",
-    "disclaimer": "本页面提供的信息仅供教育目的，不旨在替代专业医疗建议、诊断或治疗。如有任何医疗问题，请务必咨询您的医生或其他合格的医疗保健提供者。"
-  },
   "therapyList": {
     "lastUpdated": "最后更新于 {date, date, long}",
     "learnMore": "了解更多",

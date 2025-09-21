@@ -49,8 +49,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/en/scenario-solutions',
     '/zh/cultural-charms',
     '/en/cultural-charms',
-    '/zh/special-therapies',
-    '/en/special-therapies',
     '/zh/privacy-policy',
     '/en/privacy-policy',
     '/zh/terms-of-service',

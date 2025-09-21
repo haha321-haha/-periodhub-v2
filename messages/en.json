@@ -759,7 +759,8 @@
       }
     },
     "breadcrumb": {
-      "home": "Home"
+      "home": "Home",
+      "immediateRelief": "Immediate Relief"
     },
     "constitutionTest": {
       "testResult": "Test Result",
@@ -1041,10 +1042,22 @@
     "introText": "When period pain strikes, you need fast, effective ways to find comfort. This section is dedicated to immediate relief solutions – methods you can turn to right now to help alleviate acute menstrual cramps and discomfort.",
     "introText2": "We understand that finding quick relief is essential for getting through your day. The approaches suggested here focus on readily available techniques and remedies that can provide temporary but much-needed comfort.",
     "typesTitle": "Types of Immediate Relief",
-    "heatTherapy": "Heat Therapy",
-    "gentleMovement": "Gentle Movement & Breathing",
-    "acupressure": "Acupressure",
-    "otcOptions": "Over-the-Counter Options",
+    "heatTherapy": {
+      "title": "Heat Therapy",
+      "subtitle": "Scientifically Proven Primary Relief Method"
+    },
+    "gentleMovement": {
+      "title": "Gentle Movement & Breathing",
+      "subtitle": "Gentle and Effective Natural Relief Methods"
+    },
+    "acupressure": {
+      "title": "Acupressure",
+      "subtitle": "Traditional Chinese Medicine and Modern Medical Recognition"
+    },
+    "otcOptions": {
+      "title": "Over-the-Counter Options",
+      "subtitle": "Safe and Effective Medication Relief Solutions"
+    },
     "findingWhatWorksTitle": "Finding What Works for You",
     "findingWhatWorksText": "Experimentation is key to discovering which immediate relief methods are most effective for your unique body and pain type. Consider combining different approaches for enhanced comfort.",
     "findingWhatWorksText2": "Remember, these methods are for managing symptoms in the moment. For persistent, severe, or unusual pain, always consult a healthcare professional.",
@@ -1052,6 +1065,9 @@
     "heatTherapyDescription": "Applying heat to the lower abdomen or back can help relax contracting uterine muscles and improve blood circulation, which may alleviate cramps.",
     "gentleMovementDescription": "Light stretching, walking, or specific yoga poses can sometimes ease cramps by improving circulation and muscle relaxation. Deep breathing techniques can also help manage pain.",
     "breathingExerciseTitle": "Deep Breathing Exercise",
+    "breathingExercise": {
+      "subtitle": "Scientifically Proven Nervous System Regulation Method"
+    },
     "breathingExerciseDescription": "Activate the parasympathetic nervous system through 4-7-8 breathing technique to naturally reduce pain sensitivity. Research shows it can reduce pain perception by 40%.",
     "acupressureDescription": "Applying pressure to specific points on the body may help reduce pain signals and provide relief from menstrual cramps.",
     "otcOptionsDescription": "Understanding common non-prescription options and their basic mechanisms can be helpful, although professional medical advice is crucial for safe and effective use.",
@@ -1100,6 +1116,34 @@
     "actions": {
       "startPractice": "Start Practice →",
       "learnMore": "Learn More →"
+    },
+    "structuredData": {
+      "howTo": {
+        "name": "5-Step Emergency Menstrual Pain Relief",
+        "description": "Doctor-certified emergency menstrual pain relief methods"
+      },
+      "steps": {
+        "heatTherapy": {
+          "name": "Heat Therapy",
+          "text": "Apply 40-45°C heat to lower abdomen for 15-20 minutes"
+        },
+        "breathing": {
+          "name": "Breathing Exercise",
+          "text": "4-7-8 breathing technique to activate parasympathetic nervous system"
+        },
+        "acupressure": {
+          "name": "Acupressure",
+          "text": "Massage acupoints like Guanyuan and Sanyinjiao"
+        },
+        "medication": {
+          "name": "Medication",
+          "text": "Use NSAID medications as prescribed by doctor"
+        },
+        "medicalCare": {
+          "name": "Medical Care",
+          "text": "Seek immediate medical care when pain ≥7 or unusual symptoms occur"
+        }
+      }
     },
     "gentleMovementDetails": {
       "yogaPoses": {
@@ -3205,25 +3249,43 @@
           "title": "Seek Immediate Medical Care",
           "description": "Your symptoms may require professional medical evaluation and treatment",
           "timeframe": "Immediately",
-          "actionSteps": "Contact your gynecologist|If pain is severe, consider emergency care|Keep a detailed symptom diary"
+          "actionSteps": {
+            "0": "Contact your gynecologist",
+            "1": "If pain is severe, consider emergency care",
+            "2": "Keep a detailed symptom diary"
+          }
         },
         "painManagement": {
           "title": "Pain Management Strategies",
           "description": "Multiple methods can help relieve menstrual pain",
           "timeframe": "Immediately available",
-          "actionSteps": "Use heating pads or hot water bottles|Try light exercise like walking|Consider over-the-counter pain relievers (follow instructions)"
+          "actionSteps": {
+            "0": "Use heating pads or hot water bottles",
+            "1": "Try light exercise like walking",
+            "2": "Consider over-the-counter pain relievers (follow instructions)"
+          }
         },
         "lifestyleChanges": {
           "title": "Lifestyle Adjustments",
           "description": "Long-term lifestyle changes can significantly improve symptoms",
           "timeframe": "2-3 months to see effects",
-          "actionSteps": "Maintain regular exercise habits|Ensure adequate sleep|Learn stress management techniques|Maintain a balanced diet"
+          "actionSteps": {
+            "0": "Maintain regular exercise habits",
+            "1": "Ensure adequate sleep",
+            "2": "Learn stress management techniques",
+            "3": "Maintain a balanced diet"
+          }
         },
         "selfcarePractices": {
           "title": "Self-Care Practices",
           "description": "Daily self-care can help you better manage symptoms",
           "timeframe": "Ongoing",
-          "actionSteps": "Practice deep breathing and meditation|Use pain tracker to record symptoms|Build a support network|Learn relaxation techniques"
+          "actionSteps": {
+            "0": "Practice deep breathing and meditation",
+            "1": "Use pain tracker to record symptoms",
+            "2": "Build a support network",
+            "3": "Learn relaxation techniques"
+          }
         }
       }
     }

@@ -62,33 +62,33 @@ export default async function ImmediateReliefPage({
     },
     "mainEntity": {
       "@type": "HowTo",
-      "name": "痛经紧急缓解5步法",
-      "description": "医生认证的痛经紧急缓解方法",
+      "name": t('structuredData.howTo.name'),
+      "description": t('structuredData.howTo.description'),
       "step": [
         {
           "@type": "HowToStep",
-          "name": "热敷疗法",
-          "text": "40-45°C热敷下腹部15-20分钟"
+          "name": t('structuredData.steps.heatTherapy.name'),
+          "text": t('structuredData.steps.heatTherapy.text')
         },
         {
           "@type": "HowToStep", 
-          "name": "呼吸练习",
-          "text": "4-7-8呼吸法，激活副交感神经系统"
+          "name": t('structuredData.steps.breathing.name'),
+          "text": t('structuredData.steps.breathing.text')
         },
         {
           "@type": "HowToStep",
-          "name": "穴位按摩",
-          "text": "按摩关元穴、三阴交等穴位"
+          "name": t('structuredData.steps.acupressure.name'),
+          "text": t('structuredData.steps.acupressure.text')
         },
         {
           "@type": "HowToStep",
-          "name": "药物使用",
-          "text": "按医嘱使用NSAID类药物"
+          "name": t('structuredData.steps.medication.name'),
+          "text": t('structuredData.steps.medication.text')
         },
         {
           "@type": "HowToStep",
-          "name": "就医指征",
-          "text": "疼痛≥7分或出现异常症状时立即就医"
+          "name": t('structuredData.steps.medicalCare.name'),
+          "text": t('structuredData.steps.medicalCare.text')
         }
       ]
     }
@@ -107,7 +107,7 @@ export default async function ImmediateReliefPage({
         {/* Breadcrumb */}
         <Breadcrumb 
           items={[
-            { label: '即时缓解', href: `/${locale}/immediate-relief` }
+            { label: t('breadcrumb.immediateRelief'), href: `/${locale}/immediate-relief` }
           ]}
         />
         
@@ -153,8 +153,8 @@ export default async function ImmediateReliefPage({
                 </svg>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-red-700">🔥 {t('heatTherapy')}</h3>
-                <p className="text-red-600 font-medium">科学验证的首选缓解方法</p>
+                <h3 className="text-2xl font-bold text-red-700">🔥 {t('heatTherapy.title')}</h3>
+                <p className="text-red-600 font-medium">{t('heatTherapy.subtitle')}</p>
               </div>
             </div>
             <p className="text-neutral-600 mb-4">
@@ -195,8 +195,8 @@ export default async function ImmediateReliefPage({
                 </svg>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-green-700">🧘‍♀️ {t('gentleMovement')}</h3>
-                <p className="text-green-600 font-medium">温和有效的自然缓解方法</p>
+                <h3 className="text-2xl font-bold text-green-700">🧘‍♀️ {t('gentleMovement.title')}</h3>
+                <p className="text-green-600 font-medium">{t('gentleMovement.subtitle')}</p>
               </div>
             </div>
             <p className="text-neutral-600 mb-4">
@@ -261,7 +261,7 @@ export default async function ImmediateReliefPage({
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-blue-700">🫁 {t('breathingExerciseTitle')}</h3>
-                <p className="text-blue-600 font-medium">科学验证的神经系统调节方法</p>
+                <p className="text-blue-600 font-medium">{t('breathingExercise.subtitle')}</p>
               </div>
             </div>
             <p className="text-neutral-600 mb-4">
@@ -302,8 +302,8 @@ export default async function ImmediateReliefPage({
                 </svg>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-purple-700">👐 {t('acupressure')}</h3>
-                <p className="text-purple-600 font-medium">中医传统与现代医学认可的方法</p>
+                <h3 className="text-2xl font-bold text-purple-700">👐 {t('acupressure.title')}</h3>
+                <p className="text-purple-600 font-medium">{t('acupressure.subtitle')}</p>
               </div>
             </div>
             <p className="text-neutral-600 mb-4">
@@ -355,8 +355,8 @@ export default async function ImmediateReliefPage({
                 </svg>
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-orange-700">💊 {t('otcOptions')}</h3>
-                <p className="text-orange-600 font-medium">安全有效的药物缓解方案</p>
+                <h3 className="text-2xl font-bold text-orange-700">💊 {t('otcOptions.title')}</h3>
+                <p className="text-orange-600 font-medium">{t('otcOptions.subtitle')}</p>
               </div>
             </div>
             <p className="text-neutral-600 mb-4">

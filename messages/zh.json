@@ -1319,7 +1319,8 @@
       }
     },
     "breadcrumb": {
-      "home": "首页"
+      "home": "首页",
+      "immediateRelief": "即时缓解"
     },
     "constitutionTest": {
       "testResult": "测试结果",
@@ -2231,10 +2232,22 @@
     "introText": "当经期疼痛来袭时，您需要快速有效的方法来获得舒适。本节致力于提供即时缓解方案——您可以立即采用的方法，以帮助缓解急性经期痉挛和不适。",
     "introText2": "我们理解快速缓解对于度过一天是至关重要的。这里建议的方法专注于容易获得的技巧和疗法，可以提供临时但急需的舒适感。",
     "typesTitle": "即时缓解类型",
-    "heatTherapy": "热疗",
-    "gentleMovement": "温和运动与呼吸",
-    "acupressure": "穴位按摩",
-    "otcOptions": "非处方药选项",
+    "heatTherapy": {
+      "title": "热疗",
+      "subtitle": "科学验证的首选缓解方法"
+    },
+    "gentleMovement": {
+      "title": "温和运动与呼吸",
+      "subtitle": "温和有效的自然缓解方法"
+    },
+    "acupressure": {
+      "title": "穴位按摩",
+      "subtitle": "中医传统与现代医学认可的方法"
+    },
+    "otcOptions": {
+      "title": "非处方药选项",
+      "subtitle": "安全有效的药物缓解方案"
+    },
     "findingWhatWorksTitle": "找到适合您的方法",
     "findingWhatWorksText": "找到最适合您身体和疼痛类型的即时缓解方法，关键在于尝试。考虑结合不同的方法以增强舒适度。",
     "findingWhatWorksText2": "请记住，这些方法是为了在当下管理症状。对于持续、严重或异常的疼痛，请务必咨询医疗专业人士。",
@@ -2349,6 +2362,9 @@
       }
     },
     "breathingExerciseTitle": "深呼吸练习",
+    "breathingExercise": {
+      "subtitle": "科学验证的神经系统调节方法"
+    },
     "breathingExerciseDescription": "通过4-7-8呼吸法激活副交感神经系统，自然降低疼痛敏感度。科学研究显示可减少40%的疼痛感知。",
     "acupressureDescription": "对身体特定穴位施压可能有助于减少疼痛信号并缓解经期痉挛。",
     "acupressureDetails": {
@@ -2433,6 +2449,34 @@
     "actions": {
       "startPractice": "开始练习 →",
       "learnMore": "了解详情 →"
+    },
+    "structuredData": {
+      "howTo": {
+        "name": "痛经紧急缓解5步法",
+        "description": "医生认证的痛经紧急缓解方法"
+      },
+      "steps": {
+        "heatTherapy": {
+          "name": "热敷疗法",
+          "text": "40-45°C热敷下腹部15-20分钟"
+        },
+        "breathing": {
+          "name": "呼吸练习",
+          "text": "4-7-8呼吸法，激活副交感神经系统"
+        },
+        "acupressure": {
+          "name": "穴位按摩",
+          "text": "按摩关元穴、三阴交等穴位"
+        },
+        "medication": {
+          "name": "药物使用",
+          "text": "按医嘱使用NSAID类药物"
+        },
+        "medicalCare": {
+          "name": "就医指征",
+          "text": "疼痛≥7分或出现异常症状时立即就医"
+        }
+      }
     }
   },
   "naturalTherapiesPage": {
@@ -2987,25 +3031,43 @@
             "title": "建议立即就医",
             "description": "您的症状可能需要专业医疗评估和治疗",
             "timeframe": "立即",
-            "actionSteps": "联系您的妇科医生|如果疼痛剧烈，考虑急诊就医|记录详细的症状日志"
+            "actionSteps": {
+              "0": "联系您的妇科医生",
+              "1": "如果疼痛剧烈，考虑急诊就医",
+              "2": "记录详细的症状日志"
+            }
           },
           "painManagement": {
             "title": "疼痛管理策略",
             "description": "多种方法可以帮助缓解经期疼痛",
             "timeframe": "立即可用",
-            "actionSteps": "使用热敷垫或热水袋|尝试轻度运动如散步|考虑非处方止痛药（按说明使用）"
+            "actionSteps": {
+              "0": "使用热敷垫或热水袋",
+              "1": "尝试轻度运动如散步",
+              "2": "考虑非处方止痛药（按说明使用）"
+            }
           },
           "lifestyleChanges": {
             "title": "生活方式调整",
             "description": "长期的生活方式改变可以显著改善症状",
             "timeframe": "2-3个月见效",
-            "actionSteps": "保持规律的运动习惯|确保充足的睡眠|学习压力管理技巧|保持均衡饮食"
+            "actionSteps": {
+              "0": "保持规律的运动习惯",
+              "1": "确保充足的睡眠",
+              "2": "学习压力管理技巧",
+              "3": "保持均衡饮食"
+            }
           },
           "selfcarePractices": {
             "title": "自我护理实践",
             "description": "日常的自我护理可以帮助您更好地管理症状",
             "timeframe": "持续进行",
-            "actionSteps": "练习深呼吸和冥想|使用疼痛追踪器记录症状|建立支持网络|学习放松技巧"
+            "actionSteps": {
+              "0": "练习深呼吸和冥想",
+              "1": "使用疼痛追踪器记录症状",
+              "2": "建立支持网络",
+              "3": "学习放松技巧"
+            }
           }
         }
       }
@@ -4394,25 +4456,43 @@
           "title": "建议立即就医",
           "description": "您的症状可能需要专业医疗评估和治疗",
           "timeframe": "立即",
-          "actionSteps": "联系您的妇科医生|如果疼痛剧烈，考虑急诊就医|记录详细的症状日志"
+          "actionSteps": {
+            "0": "联系您的妇科医生",
+            "1": "如果疼痛剧烈，考虑急诊就医",
+            "2": "记录详细的症状日志"
+          }
         },
         "painManagement": {
           "title": "疼痛管理策略",
           "description": "多种方法可以帮助缓解经期疼痛",
           "timeframe": "立即可用",
-          "actionSteps": "使用热敷垫或热水袋|尝试轻度运动如散步|考虑非处方止痛药（按说明使用）"
+          "actionSteps": {
+            "0": "使用热敷垫或热水袋",
+            "1": "尝试轻度运动如散步",
+            "2": "考虑非处方止痛药（按说明使用）"
+          }
         },
         "lifestyleChanges": {
           "title": "生活方式调整",
           "description": "长期的生活方式改变可以显著改善症状",
           "timeframe": "2-3个月见效",
-          "actionSteps": "保持规律的运动习惯|确保充足的睡眠|学习压力管理技巧|保持均衡饮食"
+          "actionSteps": {
+            "0": "保持规律的运动习惯",
+            "1": "确保充足的睡眠",
+            "2": "学习压力管理技巧",
+            "3": "保持均衡饮食"
+          }
         },
         "selfcarePractices": {
           "title": "自我护理实践",
           "description": "日常的自我护理可以帮助您更好地管理症状",
           "timeframe": "持续进行",
-          "actionSteps": "练习深呼吸和冥想|使用疼痛追踪器记录症状|建立支持网络|学习放松技巧"
+          "actionSteps": {
+            "0": "练习深呼吸和冥想",
+            "1": "使用疼痛追踪器记录症状",
+            "2": "建立支持网络",
+            "3": "学习放松技巧"
+          }
         }
       }
     }

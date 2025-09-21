@@ -102,9 +102,15 @@ const nextConfig = {
   // 重定向规则 - 修复格式错误的URL
   async redirects() {
     return [
+      // 🎯 根路径重定向到中文首页 - 避免循环重定向
+      {
+        source: '/',
+        destination: '/zh',
+        permanent: false
+      },
       {
         source: '/&',
-        destination: '/',
+        destination: '/zh',
         permanent: true
       },
       // 🎯 修复重定向问题的URL
@@ -118,7 +124,7 @@ const nextConfig = {
         destination: '/en/downloads',
         permanent: true
       },
-      // 🎯 修复teen-health重定向问题
+      // 🎯 修复teen-health重定向问题 - 避免循环重定向
       {
         source: '/teen-health',
         destination: '/zh/teen-health',

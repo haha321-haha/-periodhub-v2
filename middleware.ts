@@ -7,7 +7,7 @@ const intlMiddleware = createMiddleware({
   locales,
   defaultLocale,
   localeDetection: true,
-  localePrefix: 'as-needed', // 🎯 修复：默认语言不需要前缀，其他语言需要前缀
+  localePrefix: 'always', // 🎯 修复重定向循环：始终使用语言前缀
 });
 
 export function middleware(request: NextRequest) {

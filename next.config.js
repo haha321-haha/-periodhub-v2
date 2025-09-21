@@ -118,6 +118,12 @@ const nextConfig = {
         destination: '/en/downloads',
         permanent: true
       },
+      // 🎯 修复teen-health重定向问题
+      {
+        source: '/teen-health',
+        destination: '/zh/teen-health',
+        permanent: true
+      },
       // 🎯 重定向旧的special-therapies页面到natural-therapies
       {
         source: '/zh/special-therapies',

@@ -16,7 +16,7 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
   const locale = useLocale();
-  const t = useTranslations('pdfCenter.breadcrumb');
+  const t = useTranslations('common.breadcrumb');
 
   const breadcrumbData = {
     "@context": "https://schema.org",

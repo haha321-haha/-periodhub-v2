@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, unstable_setRequestLocale as setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Breadcrumb from '@/components/Breadcrumb';
 
@@ -43,6 +43,8 @@ export default async function ImmediateReliefPage({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
+  
   // Get translations for the immediate relief page
   const t = await getTranslations({ locale, namespace: 'immediateReliefPage' });
   const commonT = await getTranslations({ locale, namespace: 'common' });

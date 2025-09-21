@@ -1185,21 +1185,33 @@
           "name": "Heat + Breathing",
           "description": "Apply heat while practicing deep breathing",
           "benefits": "Enhanced relaxation and pain reduction",
-          "methods": "Apply heat pack to lower abdomen|Practice 4-7-8 breathing technique|Maintain for 15-20 minutes"
+          "methods": {
+            "0": "Apply heat pack to lower abdomen",
+            "1": "Practice 4-7-8 breathing technique",
+            "2": "Maintain for 15-20 minutes"
+          }
         },
         {
           "level": "Acupressure + Movement",
           "name": "Acupressure + Movement",
           "description": "Gentle massage followed by light stretching",
           "benefits": "Improved circulation and muscle relaxation",
-          "methods": "Massage SP6 acupoint for 2-3 minutes|Perform gentle pelvic tilts|Follow with light stretching"
+          "methods": {
+            "0": "Massage SP6 acupoint for 2-3 minutes",
+            "1": "Perform gentle pelvic tilts",
+            "2": "Follow with light stretching"
+          }
         },
         {
           "level": "Heat + Acupressure",
           "name": "Heat + Acupressure",
           "description": "Warm compress on acupressure points",
           "benefits": "Increased effectiveness of pressure point therapy",
-          "methods": "Apply warm compress to acupoints|Massage while heat is applied|Continue for 10-15 minutes"
+          "methods": {
+            "0": "Apply warm compress to acupoints",
+            "1": "Massage while heat is applied",
+            "2": "Continue for 10-15 minutes"
+          }
         }
       ]
     },
@@ -1207,15 +1219,33 @@
       "title": "Emergency Response Protocol",
       "subtitle": "When pain reaches severe levels (7+ on pain scale), follow these immediate steps:",
       "description": "When pain reaches severe levels (7+ on pain scale), follow these immediate steps:",
-      "immediateActions": "Apply heat immediately (40-45°C)|Take prescribed pain medication if available|Practice 4-7-8 breathing technique|Find comfortable position (fetal position recommended)|Contact healthcare provider if pain persists",
+      "immediateActions": {
+        "0": "Apply heat immediately (40-45°C)",
+        "1": "Take prescribed pain medication if available",
+        "2": "Practice 4-7-8 breathing technique",
+        "3": "Find comfortable position (fetal position recommended)",
+        "4": "Contact healthcare provider if pain persists"
+      },
       "medicalIndicators": {
         "title": "Seek Medical Attention If:",
-        "indicators": "Pain level 8+ that doesn't respond to treatment|Severe nausea or vomiting|Fever above 100.4°F (38°C)|Unusual bleeding patterns|Pain that worsens over time"
+        "indicators": {
+          "0": "Pain level 8+ that doesn't respond to treatment",
+          "1": "Severe nausea or vomiting",
+          "2": "Fever above 100.4°F (38°C)",
+          "3": "Unusual bleeding patterns",
+          "4": "Pain that worsens over time"
+        }
       },
       "emergencyKit": {
         "title": "Emergency Relief Kit",
         "description": "Keep these items readily available:",
-        "items": "Heat pack or hot water bottle|Pain medication (as prescribed)|Comfortable clothing|Water bottle|Emergency contact numbers"
+        "items": {
+          "0": "Heat pack or hot water bottle",
+          "1": "Pain medication (as prescribed)",
+          "2": "Comfortable clothing",
+          "3": "Water bottle",
+          "4": "Emergency contact numbers"
+        }
       }
     }
   },

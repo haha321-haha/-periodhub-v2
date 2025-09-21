@@ -3235,69 +3235,11 @@
       }
     },
     "symptomChecker": {
-      "title": "症状检查清单",
-      "description": "请仔细检查以下症状，选择所有符合您情况的选项。此工具基于国际妇科协会诊断标准。",
-      "instructions": "请诚实选择您在最近3个月经周期中经历的症状。选择完成后，点击\"分析症状\"获取个性化建议。",
-      "analyzeButton": "分析症状",
-      "analyzing": "分析中...",
-      "resetButton": "重置选择",
-      "summary": "已选择 {count} / {total} 个症状",
-      "riskLevels": {
-        "emergency": {
-          "title": "🚨 紧急信号",
-          "badge": "立即就医"
-        },
-        "high": {
-          "title": "⚠️ 高风险症状",
-          "badge": "尽快就医"
-        },
-        "medium": {
-          "title": "⚡ 需要关注",
-          "badge": "建议就医"
-        }
-      },
-      "symptoms": {
-        "s1": {
-          "text": "突然剧烈疼痛，疼痛等级从轻微突然变为无法忍受",
-          "description": "可能提示卵巢囊肿破裂、扭转或其他需要紧急医疗评估的急性妇科疾病"
-        },
-        "s2": {
-          "text": "月经量突然显著增加，血块直径大于2.5厘米",
-          "description": "可能提示子宫肌瘤、腺肌症或凝血功能障碍，需要紧急检查"
-        },
-        "s3": {
-          "text": "痛经持续时间超过7天，或非月经期也有盆腔疼痛",
-          "description": "可能提示子宫内膜异位症、盆腔炎或其他慢性妇科疾病"
-        },
-        "s4": {
-          "text": "痛经模式在最近几个月发生明显变化",
-          "description": "可能提示新发疾病或病情变化，需要专业评估"
-        },
-        "s5": {
-          "text": "伴有发热、寒战、恶心呕吐等全身症状",
-          "description": "可能提示感染或其他严重疾病，需要立即就医"
-        },
-        "s6": {
-          "text": "疼痛影响日常活动，需要请假或卧床休息",
-          "description": "提示疼痛程度严重，建议寻求医疗帮助"
-        },
-        "s7": {
-          "text": "服用止痛药后疼痛无明显缓解",
-          "description": "可能提示需要更强效的治疗或存在其他疾病"
-        },
-        "s8": {
-          "text": "疼痛伴有排尿困难或尿频尿急",
-          "description": "可能提示泌尿系统疾病或盆腔器官压迫"
-        },
-        "s9": {
-          "text": "疼痛伴有便秘或腹泻等消化道症状",
-          "description": "可能提示肠道疾病或盆腔器官粘连"
-        },
-        "s10": {
-          "text": "疼痛伴有头痛、头晕、乏力等全身症状",
-          "description": "可能提示贫血、感染或其他全身性疾病"
-        }
-      }
+      "title": "症状检查器",
+      "description": "快速识别经期相关症状并获得专业建议",
+      "feature1": "快速症状识别",
+      "feature2": "专业建议",
+      "feature3": "健康指导"
     },
     "wellnessPlan": {
       "title": "健康计划制定",
@@ -4648,143 +4590,144 @@
       "videoError": "视频加载错误",
       "videoErrorDescription": "抱歉，视频加载失败。请检查您的网络连接或稍后再试。"
     }
-  },
-  "decisionTree": {
-    "title": "智能就医决策树",
-    "description": "通过回答几个简单问题，获得个性化的就医建议。这个决策树基于临床诊疗指南设计。",
-    "questionTitle": "问题 {step}",
-    "pathTitle": "决策路径",
-    "startButton": "开始评估",
-    "yesButton": "是",
-    "noButton": "否",
-    "restartButton": "重新开始",
-    "resetButton": "重置",
-    "progress": "进度：{current} / {total}",
-    "completed": "评估完成",
-    "recommendedActions": "建议采取的行动",
-    "questions": {
-      "start": "你是否正在经历剧烈的痛经，疼痛等级在7分以上（满分10分）？",
-      "severePain": "这种剧烈疼痛是否突然出现，或者比以往任何时候都要严重？",
-      "duration": "你的痛经是否持续时间超过7天，或者在非月经期间也有盆腔疼痛？",
-      "pattern": "你的痛经模式是否在最近几个月发生了明显变化？"
-    },
-    "options": {
-      "yes": "是的",
-      "no": "不是"
-    },
-    "results": {
-      "emergency": {
-        "title": "紧急情况 - 立即就医",
-        "text": "根据你的症状，建议立即寻求医疗帮助。这可能是需要紧急处理的妇科疾病。",
-        "action1": "立即前往急诊科或联系妇科医生",
-        "action2": "准备详细描述症状的发生时间和严重程度",
-        "action3": "如果疼痛剧烈，不要独自前往医院"
-      },
-      "urgent": {
-        "title": "紧急情况 - 48小时内就医",
-        "text": "你的症状需要尽快得到专业医生的评估和治疗。",
-        "action1": "在48小时内预约妇科医生",
-        "action2": "记录症状的详细情况和变化",
-        "action3": "如果症状加重，立即就医"
-      },
-      "routine": {
-        "title": "建议就医 - 1-2周内",
-        "text": "你的症状需要专业评估，但不是紧急情况。建议安排常规妇科检查。",
-        "action1": "在1-2周内预约妇科医生",
-        "action2": "开始记录疼痛日记，包括疼痛程度和时间",
-        "action3": "准备好月经周期和症状的详细信息"
-      },
-      "observe": {
-        "title": "继续观察 - 必要时就医",
-        "text": "你的症状相对较轻，可以继续观察。但要注意症状变化。",
-        "action1": "继续监测症状，记录疼痛模式",
-        "action2": "尝试非药物缓解方法，如热敷、适量运动",
-        "action3": "如果症状加重或出现新症状，及时就医"
-      }
-    },
-    "urgencyLevels": {
-      "emergency": "紧急（立即）",
-      "urgent": "紧急（48小时内）",
-      "routine": "常规（1-2周内）",
-      "observe": "观察（必要时）"
-    },
-    "emergency": {
-      "title": "紧急提醒",
-      "text": "根据你的回答，建议立即寻求医疗帮助。请不要拖延，及时就医是保护健康的最佳选择。"
-    }
-  },
-  "comparisonTable": {
-    "title": "正常vs异常痛经对比表",
-    "description": "通过对比表格，帮助你更好地理解什么是正常的痛经，什么情况需要就医。",
-    "expand": "展开详情",
-    "collapse": "收起详情",
-    "normalTitle": "正常痛经",
-    "concerningTitle": "需要关注",
-    "normalNote": "正常痛经通常可以通过自我管理缓解",
-    "concerningNote": "这些情况建议寻求专业医疗帮助",
-    "mobileHint": "提示：点击表格行可以查看更多详细信息",
-    "headers": {
-      "condition": "评估项目",
-      "normal": "正常情况",
-      "concerning": "需要关注的情况",
-      "action": "建议行动"
-    },
-    "rows": {
-      "painIntensity": {
-        "condition": "疼痛强度",
-        "normal": "轻度到中度疼痛（1-6分），可以忍受，不严重影响日常活动",
-        "concerning": "重度疼痛（7-10分），无法忍受，严重影响工作和生活",
-        "action": "疼痛评分≥7分时建议就医评估"
-      },
-      "painDuration": {
-        "condition": "疼痛持续时间",
-        "normal": "疼痛持续1-3天，主要集中在月经前1-2天和月经第1天",
-        "concerning": "疼痛持续超过3天，或在整个月经期间都有剧烈疼痛",
-        "action": "疼痛持续>3天建议妇科检查"
-      },
-      "painLocation": {
-        "condition": "疼痛位置",
-        "normal": "下腹部中央疼痛，可能放射到腰部和大腿内侧",
-        "concerning": "疼痛位置不固定，或伴有一侧明显的尖锐疼痛",
-        "action": "不典型疼痛位置需要医生评估"
-      },
-      "associatedSymptoms": {
-        "condition": "伴随症状",
-        "normal": "轻微恶心、乏力、情绪波动，症状轻微且可以忍受",
-        "concerning": "严重恶心呕吐、发热、头晕昏厥、大量出血",
-        "action": "出现严重伴随症状立即就医"
-      },
-      "medicationResponse": {
-        "condition": "药物反应",
-        "normal": "非处方止痛药（如布洛芬）能有效缓解疼痛",
-        "concerning": "止痛药完全无效，或需要越来越大的剂量才能缓解",
-        "action": "药物无效时需要专业治疗方案"
-      },
-      "dailyImpact": {
-        "condition": "对日常生活的影响",
-        "normal": "轻微影响，可以正常工作学习，只需适当休息",
-        "concerning": "严重影响，无法正常工作学习，需要卧床休息",
-        "action": "严重影响生活质量时建议就医"
-      },
-      "cycleChanges": {
-        "condition": "周期变化",
-        "normal": "疼痛模式相对稳定，每次月经疼痛程度相似",
-        "concerning": "疼痛逐渐加重，或疼痛模式突然改变",
-        "action": "疼痛模式改变需要医生评估原因"
-      }
-    },
-    "reminder": {
-      "title": "重要提醒",
-      "text": "这个对比表仅供参考，不能替代专业医疗诊断。如果你对自己的症状有任何担忧，请咨询专业医生。"
-    }
-  },
-  "disclaimer": {
-    "title": "医疗免责声明",
-    "text": "本文内容仅供教育和信息目的，不能替代专业医疗建议、诊断或治疗。如有健康问题，请咨询合格的医疗专业人员。任何医疗决策都应该在咨询医生后做出。"
-  },
-  "errors": {
-    "title": "出现错误",
-    "description": "评估工具暂时无法使用，请稍后再试。",
-    "reload": "重新加载"
   }
+},
+"decisionTree": {
+  "title": "智能就医决策树",
+  "description": "通过回答几个简单问题，获得个性化的就医建议。这个决策树基于临床诊疗指南设计。",
+  "questionTitle": "问题 {step}",
+  "pathTitle": "决策路径",
+  "startButton": "开始评估",
+  "yesButton": "是",
+  "noButton": "否",
+  "restartButton": "重新开始",
+  "resetButton": "重置",
+  "progress": "进度：{current} / {total}",
+  "completed": "评估完成",
+  "recommendedActions": "建议采取的行动",
+  "questions": {
+    "start": "你是否正在经历剧烈的痛经，疼痛等级在7分以上（满分10分）？",
+    "severePain": "这种剧烈疼痛是否突然出现，或者比以往任何时候都要严重？",
+    "duration": "你的痛经是否持续时间超过7天，或者在非月经期间也有盆腔疼痛？",
+    "pattern": "你的痛经模式是否在最近几个月发生了明显变化？"
+  },
+  "options": {
+    "yes": "是的",
+    "no": "不是"
+  },
+  "results": {
+    "emergency": {
+      "title": "紧急情况 - 立即就医",
+      "text": "根据你的症状，建议立即寻求医疗帮助。这可能是需要紧急处理的妇科疾病。",
+      "action1": "立即前往急诊科或联系妇科医生",
+      "action2": "准备详细描述症状的发生时间和严重程度",
+      "action3": "如果疼痛剧烈，不要独自前往医院"
+    },
+    "urgent": {
+      "title": "紧急情况 - 48小时内就医",
+      "text": "你的症状需要尽快得到专业医生的评估和治疗。",
+      "action1": "在48小时内预约妇科医生",
+      "action2": "记录症状的详细情况和变化",
+      "action3": "如果症状加重，立即就医"
+    },
+    "routine": {
+      "title": "建议就医 - 1-2周内",
+      "text": "你的症状需要专业评估，但不是紧急情况。建议安排常规妇科检查。",
+      "action1": "在1-2周内预约妇科医生",
+      "action2": "开始记录疼痛日记，包括疼痛程度和时间",
+      "action3": "准备好月经周期和症状的详细信息"
+    },
+    "observe": {
+      "title": "继续观察 - 必要时就医",
+      "text": "你的症状相对较轻，可以继续观察。但要注意症状变化。",
+      "action1": "继续监测症状，记录疼痛模式",
+      "action2": "尝试非药物缓解方法，如热敷、适量运动",
+      "action3": "如果症状加重或出现新症状，及时就医"
+    }
+  },
+  "urgencyLevels": {
+    "emergency": "紧急（立即）",
+    "urgent": "紧急（48小时内）",
+    "routine": "常规（1-2周内）",
+    "observe": "观察（必要时）"
+  },
+  "emergency": {
+    "title": "紧急提醒",
+    "text": "根据你的回答，建议立即寻求医疗帮助。请不要拖延，及时就医是保护健康的最佳选择。"
+  }
+},
+"comparisonTable": {
+  "title": "正常vs异常痛经对比表",
+  "description": "通过对比表格，帮助你更好地理解什么是正常的痛经，什么情况需要就医。",
+  "expand": "展开详情",
+  "collapse": "收起详情",
+  "normalTitle": "正常痛经",
+  "concerningTitle": "需要关注",
+  "normalNote": "正常痛经通常可以通过自我管理缓解",
+  "concerningNote": "这些情况建议寻求专业医疗帮助",
+  "mobileHint": "提示：点击表格行可以查看更多详细信息",
+  "headers": {
+    "condition": "评估项目",
+    "normal": "正常情况",
+    "concerning": "需要关注的情况",
+    "action": "建议行动"
+  },
+  "rows": {
+    "painIntensity": {
+      "condition": "疼痛强度",
+      "normal": "轻度到中度疼痛（1-6分），可以忍受，不严重影响日常活动",
+      "concerning": "重度疼痛（7-10分），无法忍受，严重影响工作和生活",
+      "action": "疼痛评分≥7分时建议就医评估"
+    },
+    "painDuration": {
+      "condition": "疼痛持续时间",
+      "normal": "疼痛持续1-3天，主要集中在月经前1-2天和月经第1天",
+      "concerning": "疼痛持续超过3天，或在整个月经期间都有剧烈疼痛",
+      "action": "疼痛持续>3天建议妇科检查"
+    },
+    "painLocation": {
+      "condition": "疼痛位置",
+      "normal": "下腹部中央疼痛，可能放射到腰部和大腿内侧",
+      "concerning": "疼痛位置不固定，或伴有一侧明显的尖锐疼痛",
+      "action": "不典型疼痛位置需要医生评估"
+    },
+    "associatedSymptoms": {
+      "condition": "伴随症状",
+      "normal": "轻微恶心、乏力、情绪波动，症状轻微且可以忍受",
+      "concerning": "严重恶心呕吐、发热、头晕昏厥、大量出血",
+      "action": "出现严重伴随症状立即就医"
+    },
+    "medicationResponse": {
+      "condition": "药物反应",
+      "normal": "非处方止痛药（如布洛芬）能有效缓解疼痛",
+      "concerning": "止痛药完全无效，或需要越来越大的剂量才能缓解",
+      "action": "药物无效时需要专业治疗方案"
+    },
+    "dailyImpact": {
+      "condition": "对日常生活的影响",
+      "normal": "轻微影响，可以正常工作学习，只需适当休息",
+      "concerning": "严重影响，无法正常工作学习，需要卧床休息",
+      "action": "严重影响生活质量时建议就医"
+    },
+    "cycleChanges": {
+      "condition": "周期变化",
+      "normal": "疼痛模式相对稳定，每次月经疼痛程度相似",
+      "concerning": "疼痛逐渐加重，或疼痛模式突然改变",
+      "action": "疼痛模式改变需要医生评估原因"
+    }
+  },
+  "reminder": {
+    "title": "重要提醒",
+    "text": "这个对比表仅供参考，不能替代专业医疗诊断。如果你对自己的症状有任何担忧，请咨询专业医生。"
+  }
+},
+"disclaimer": {
+  "title": "医疗免责声明",
+  "text": "本文内容仅供教育和信息目的，不能替代专业医疗建议、诊断或治疗。如有健康问题，请咨询合格的医疗专业人员。任何医疗决策都应该在咨询医生后做出。"
+},
+"errors": {
+  "title": "出现错误",
+  "description": "评估工具暂时无法使用，请稍后再试。",
+  "reload": "重新加载"
+}
 }

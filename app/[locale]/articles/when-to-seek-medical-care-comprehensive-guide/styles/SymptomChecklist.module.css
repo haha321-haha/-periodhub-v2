@@ -1,0 +1,287 @@
+/* 症状检查清单样式 - 基于souW1e2设计 */
+
+.container {
+  @apply bg-white rounded-2xl shadow-lg p-6 md:p-8 my-10 border border-gray-100;
+  transition: all 0.3s ease;
+}
+
+.header {
+  @apply mb-6;
+}
+
+.title {
+  @apply text-2xl font-bold text-gray-800 mb-4 flex items-center;
+}
+
+.icon {
+  @apply mr-3 text-green-500;
+}
+
+.description {
+  @apply text-gray-600 text-base leading-relaxed mb-4;
+}
+
+.instructions {
+  @apply bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6;
+}
+
+.instructions p {
+  @apply text-blue-700 text-sm mb-0;
+}
+
+/* 症状分组 */
+.symptomGroups {
+  @apply space-y-6 mb-8;
+}
+
+.symptomGroup {
+  @apply border border-gray-200 rounded-xl overflow-hidden;
+}
+
+.groupHeader {
+  @apply flex items-center p-4 bg-gray-50 border-b border-gray-200;
+}
+
+.groupIcon {
+  @apply mr-3;
+}
+
+.groupTitle {
+  @apply text-lg font-semibold text-gray-800 flex-1;
+}
+
+.groupBadge {
+  @apply px-3 py-1 text-xs font-medium rounded-full;
+}
+
+/* 症状列表 */
+.symptomList {
+  @apply divide-y divide-gray-100;
+}
+
+.symptomItem {
+  @apply p-4 transition-all duration-200 cursor-pointer;
+}
+
+.symptomItem:hover {
+  @apply bg-gray-50;
+}
+
+.symptomItem.checked {
+  @apply bg-blue-50 border-l-4 border-blue-500;
+}
+
+.symptomLabel {
+  @apply flex items-start cursor-pointer w-full;
+}
+
+.checkbox {
+  @apply w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2 mr-4 mt-1 flex-shrink-0;
+}
+
+.symptomContent {
+  @apply flex-1;
+}
+
+.symptomHeader {
+  @apply flex items-start mb-2;
+}
+
+.symptomIcon {
+  @apply text-xl mr-3 flex-shrink-0;
+}
+
+.symptomText {
+  @apply text-gray-800 font-medium leading-relaxed;
+}
+
+.symptomDescription {
+  @apply text-gray-600 text-sm leading-relaxed ml-8;
+}
+
+/* 操作按钮 */
+.actions {
+  @apply flex flex-col sm:flex-row gap-4 mb-8;
+}
+
+.analyzeButton {
+  @apply bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center;
+}
+
+.analyzeButton.disabled {
+  @apply bg-gray-300 text-gray-500 cursor-not-allowed hover:bg-gray-300;
+}
+
+.resetButton {
+  @apply bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200;
+}
+
+.spinner {
+  @apply animate-spin -ml-1 mr-3 h-5 w-5 text-white;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+}
+
+/* 分析结果 */
+.results {
+  @apply mb-8;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.resultsHeader {
+  @apply mb-4;
+}
+
+.resultsTitle {
+  @apply text-xl font-bold text-gray-800;
+}
+
+.resultCard {
+  @apply rounded-xl p-6 border-2;
+}
+
+.resultHeader {
+  @apply flex items-start mb-4;
+}
+
+.resultIcon {
+  @apply text-3xl mr-4 flex-shrink-0;
+}
+
+.resultInfo {
+  @apply flex-1;
+}
+
+.resultRiskLevel {
+  @apply text-xl font-bold mb-1;
+}
+
+.resultUrgency {
+  @apply text-sm font-medium opacity-80;
+}
+
+.resultContent {
+  @apply space-y-4;
+}
+
+.resultDescription {
+  @apply leading-relaxed;
+}
+
+/* 推荐建议 */
+.recommendations {
+  @apply mt-4;
+}
+
+.recommendationsTitle {
+  @apply text-lg font-semibold mb-3;
+}
+
+.recommendationsList {
+  @apply space-y-2;
+}
+
+.recommendationItem {
+  @apply flex items-start;
+}
+
+.recommendationItem::before {
+  content: "•";
+  @apply font-bold mr-3 mt-1 flex-shrink-0;
+}
+
+/* 紧急情况警告 */
+.emergencyAlert {
+  @apply bg-red-100 border border-red-300 rounded-lg p-4 mt-4 flex items-start;
+}
+
+.emergencyIcon {
+  @apply text-2xl mr-3 flex-shrink-0;
+}
+
+.emergencyContent {
+  @apply flex-1;
+}
+
+.emergencyContent strong {
+  @apply text-red-800 font-semibold block mb-1;
+}
+
+.emergencyContent p {
+  @apply text-red-700 text-sm;
+}
+
+/* 症状统计 */
+.summary {
+  @apply bg-gray-50 border border-gray-200 rounded-lg p-4;
+}
+
+.summaryText {
+  @apply text-gray-700 text-sm;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    @apply p-4 mx-2;
+  }
+  
+  .title {
+    @apply text-xl;
+  }
+  
+  .symptomItem {
+    @apply p-3;
+  }
+  
+  .resultCard {
+    @apply p-4;
+  }
+  
+  .actions {
+    @apply flex-col;
+  }
+}
+
+/* 可访问性增强 */
+.checkbox:focus {
+  @apply ring-2 ring-blue-500 ring-offset-2;
+}
+
+.symptomItem:focus-within {
+  @apply bg-blue-50 outline-none ring-2 ring-blue-500 ring-offset-2;
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .container {
+    @apply border-2 border-gray-800;
+  }
+  
+  .symptomItem.checked {
+    @apply border-l-8;
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .results,
+  .symptomItem,
+  .analyzeButton,
+  .resetButton {
+    animation: none;
+    transition: none;
+  }
+}

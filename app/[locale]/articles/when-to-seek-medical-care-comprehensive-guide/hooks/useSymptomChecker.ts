@@ -92,37 +92,37 @@ export function useSymptomChecker(symptoms: SymptomItem[]) {
     switch (assessmentResult.riskLevel) {
       case 'emergency':
         recommendations.push(
-          'Seek immediate emergency medical care',
-          'Call emergency services if symptoms are severe',
-          'Do not delay - go to emergency room',
-          'Have someone accompany you'
+          'symptomChecker.results.actions.emergency.0',
+          'symptomChecker.results.actions.emergency.2',
+          'symptomChecker.results.actions.emergency.1',
+          'symptomChecker.results.actions.emergency.3'
         );
         break;
       
       case 'high':
         recommendations.push(
-          'Schedule urgent appointment with healthcare provider',
-          'Contact your doctor within 24-48 hours',
-          'Monitor symptoms closely',
-          'Prepare list of symptoms for doctor visit'
+          'symptomChecker.results.actions.high.0',
+          'symptomChecker.results.actions.high.1',
+          'symptomChecker.results.actions.high.2',
+          'symptomChecker.results.actions.high.3'
         );
         break;
       
       case 'medium':
         recommendations.push(
-          'Schedule routine appointment with healthcare provider',
-          'Continue monitoring symptoms',
-          'Keep symptom diary',
-          'Consider lifestyle modifications'
+          'symptomChecker.results.actions.medium.0',
+          'symptomChecker.results.actions.medium.1',
+          'symptomChecker.results.actions.medium.2',
+          'symptomChecker.results.actions.medium.3'
         );
         break;
       
       case 'low':
         recommendations.push(
-          'Continue self-monitoring',
-          'Maintain healthy lifestyle',
-          'Consider preventive measures',
-          'Schedule routine check-up if symptoms persist'
+          'symptomChecker.results.actions.low.0',
+          'symptomChecker.results.actions.low.1',
+          'symptomChecker.results.actions.low.2',
+          'symptomChecker.results.actions.low.3'
         );
         break;
     }
@@ -155,10 +155,10 @@ function analyzeRiskLevel(symptoms: SymptomItem[]) {
       shouldSeeDoctor: true,
       urgency: 'immediate' as const,
       recommendations: [
-        'Seek immediate emergency medical care',
-        'Do not delay medical attention',
-        'Call emergency services if needed',
-        'Have someone accompany you to medical care'
+        'symptomChecker.results.actions.emergency.0',
+        'symptomChecker.results.actions.emergency.1',
+        'symptomChecker.results.actions.emergency.2',
+        'symptomChecker.results.actions.emergency.3'
       ]
     };
   }
@@ -170,10 +170,10 @@ function analyzeRiskLevel(symptoms: SymptomItem[]) {
       shouldSeeDoctor: true,
       urgency: 'within_week' as const,
       recommendations: [
-        'Schedule urgent appointment with healthcare provider',
-        'Contact your doctor within 24-48 hours',
-        'Monitor symptoms closely for any worsening',
-        'Prepare detailed symptom list for doctor visit'
+        'symptomChecker.results.actions.high.0',
+        'symptomChecker.results.actions.high.1',
+        'symptomChecker.results.actions.high.2',
+        'symptomChecker.results.actions.high.3'
       ]
     };
   }
@@ -185,10 +185,10 @@ function analyzeRiskLevel(symptoms: SymptomItem[]) {
       shouldSeeDoctor: true,
       urgency: 'routine' as const,
       recommendations: [
-        'Schedule routine appointment with healthcare provider',
-        'Continue monitoring symptoms',
-        'Keep detailed symptom diary',
-        'Consider lifestyle modifications'
+        'symptomChecker.results.actions.medium.0',
+        'symptomChecker.results.actions.medium.1',
+        'symptomChecker.results.actions.medium.2',
+        'symptomChecker.results.actions.medium.3'
       ]
     };
   }
@@ -198,12 +198,12 @@ function analyzeRiskLevel(symptoms: SymptomItem[]) {
     riskLevel: 'low' as const,
     shouldSeeDoctor: false,
     urgency: 'monitor' as const,
-    recommendations: [
-      'Continue self-monitoring',
-      'Maintain healthy lifestyle habits',
-      'Consider preventive measures',
-      'Schedule routine check-up if symptoms persist or worsen'
-    ]
+      recommendations: [
+        'symptomChecker.results.actions.low.0',
+        'symptomChecker.results.actions.low.1',
+        'symptomChecker.results.actions.low.2',
+        'symptomChecker.results.actions.low.3'
+      ]
   };
 }
 
@@ -218,24 +218,24 @@ export function generatePersonalizedRecommendations(
   // 基于症状类别的建议
   const categoryRecommendations = {
     pain: [
-      'Track pain intensity and patterns',
-      'Try heat therapy for pain relief',
-      'Consider gentle exercise when possible'
+      'symptomChecker.personalizedRecommendations.pain.0',
+      'symptomChecker.personalizedRecommendations.pain.1',
+      'symptomChecker.personalizedRecommendations.pain.2'
     ],
     bleeding: [
-      'Monitor bleeding patterns and flow',
-      'Keep track of cycle changes',
-      'Maintain iron-rich diet'
+      'symptomChecker.personalizedRecommendations.bleeding.0',
+      'symptomChecker.personalizedRecommendations.bleeding.1',
+      'symptomChecker.personalizedRecommendations.bleeding.2'
     ],
     systemic: [
-      'Monitor overall health symptoms',
-      'Ensure adequate rest and hydration',
-      'Consider stress management techniques'
+      'symptomChecker.personalizedRecommendations.systemic.0',
+      'symptomChecker.personalizedRecommendations.systemic.1',
+      'symptomChecker.personalizedRecommendations.systemic.2'
     ],
     pattern: [
-      'Keep detailed menstrual cycle diary',
-      'Track symptom patterns over time',
-      'Note any triggers or patterns'
+      'symptomChecker.personalizedRecommendations.pattern.0',
+      'symptomChecker.personalizedRecommendations.pattern.1',
+      'symptomChecker.personalizedRecommendations.pattern.2'
     ]
   };
 
@@ -250,14 +250,14 @@ export function generatePersonalizedRecommendations(
   const hasHighRiskSymptoms = checkedSymptoms.some(s => s.risk === 'high');
 
   if (hasEmergencySymptoms) {
-    recommendations.add('Seek immediate medical attention');
-    recommendations.add('Do not delay emergency care');
+    recommendations.add('symptomChecker.results.actions.emergency.0');
+    recommendations.add('symptomChecker.results.actions.emergency.1');
   } else if (hasHighRiskSymptoms) {
-    recommendations.add('Schedule urgent medical consultation');
-    recommendations.add('Monitor symptoms closely');
+    recommendations.add('symptomChecker.results.actions.high.0');
+    recommendations.add('symptomChecker.results.actions.high.2');
   } else {
-    recommendations.add('Continue regular health monitoring');
-    recommendations.add('Maintain healthy lifestyle habits');
+    recommendations.add('symptomChecker.personalizedRecommendations.general.0');
+    recommendations.add('symptomChecker.personalizedRecommendations.general.1');
   }
 
   return Array.from(recommendations);

@@ -4522,7 +4522,59 @@
           "routine": "Routine medical care (within 1-2 weeks)",
           "monitor": "Continue monitoring, seek care if needed"
         },
-        "recommendations": "Personalized Recommendations"
+        "recommendations": "Personalized Recommendations",
+        "actions": {
+          "emergency": [
+            "Seek immediate emergency medical care",
+            "Do not delay medical attention",
+            "Call emergency services if needed",
+            "Have someone accompany you to medical care"
+          ],
+          "high": [
+            "Schedule urgent appointment with healthcare provider",
+            "Contact your doctor within 24-48 hours",
+            "Monitor symptoms closely for any worsening",
+            "Prepare detailed symptom list for doctor visit"
+          ],
+          "medium": [
+            "Schedule routine appointment with healthcare provider",
+            "Continue monitoring symptoms",
+            "Keep detailed symptom diary",
+            "Consider lifestyle modifications"
+          ],
+          "low": [
+            "Continue self-monitoring",
+            "Maintain healthy lifestyle habits",
+            "Consider preventive measures",
+            "Schedule routine check-up if symptoms persist or worsen"
+          ]
+        },
+        "personalizedRecommendations": {
+          "pain": [
+            "Track pain intensity and patterns",
+            "Try heat therapy for pain relief",
+            "Consider gentle exercise when possible"
+          ],
+          "bleeding": [
+            "Monitor bleeding patterns and flow",
+            "Keep track of cycle changes",
+            "Maintain iron-rich diet"
+          ],
+          "systemic": [
+            "Monitor overall health symptoms",
+            "Ensure adequate rest and hydration",
+            "Consider stress management techniques"
+          ],
+          "pattern": [
+            "Keep detailed menstrual cycle diary",
+            "Track symptom patterns over time",
+            "Note any triggers or patterns"
+          ],
+          "general": [
+            "Continue regular health monitoring",
+            "Maintain healthy lifestyle habits"
+          ]
+        }
       },
       "emergency": {
         "title": "Emergency Alert",

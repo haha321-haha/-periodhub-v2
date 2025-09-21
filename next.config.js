@@ -15,7 +15,7 @@ const nextConfig = {
   // 性能优化
   compress: true,
   
-  // 图片优化
+  // 图片优化 - 修复scenario图片加载问题
   images: {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60,
@@ -23,6 +23,14 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     // 配置图片质量选项 - 解决Next.js 16兼容性警告
     qualities: [75, 85, 95, 100],
+    // 添加更宽松的图片处理配置
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // 修复特定图片的兼容性问题
+    domains: [],
+    remotePatterns: [],
+    // 临时禁用有问题图片的优化
+    loader: 'default',
   },
   
   // 实验性功能

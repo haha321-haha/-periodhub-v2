@@ -237,7 +237,7 @@ export default async function DysmenorrheaGuidePage({
                 </h3>
                 
                 <div className="space-y-6">
-                  {(t.raw('toolkit.medication.options') || []).map((med: any, index: number) => (
+                  {t.raw('toolkit.medication.options').map((med: any, index: number) => (
                     <div key={index}>
                       <h4 className="font-bold text-lg flex items-center gap-2 mb-2">
                         <svg className="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -269,7 +269,7 @@ export default async function DysmenorrheaGuidePage({
                   <span>{t('doctorGuide.immediate.title')}</span>
                 </h3>
                 <ul className="list-disc list-inside space-y-2 text-rose-900">
-                  {(t.raw('doctorGuide.immediate.points') || []).map((point: string, index: number) => (
+                  {t.raw('doctorGuide.immediate.points').map((point: string, index: number) => (
                     <li key={index}>{point}</li>
                   ))}
                 </ul>
@@ -283,7 +283,7 @@ export default async function DysmenorrheaGuidePage({
                   <span>{t('doctorGuide.appointment.title')}</span>
                 </h3>
                 <ul className="list-disc list-inside space-y-2 text-orange-900">
-                  {(t.raw('doctorGuide.appointment.points') || []).map((point: string, index: number) => (
+                  {t.raw('doctorGuide.appointment.points').map((point: string, index: number) => (
                     <li key={index}>{point}</li>
                   ))}
                 </ul>
@@ -298,7 +298,7 @@ export default async function DysmenorrheaGuidePage({
             </h2>
             
             <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {(t.raw('stories.cases') || []).map((story: any, index: number) => (
+              {t.raw('stories.cases').map((story: any, index: number) => (
                 <div key={index} className="bg-white p-6 rounded-xl shadow-lg text-left">
                   <h3 className="font-bold text-lg text-primary-800 mb-2">{story.name}</h3>
                   <p className="text-neutral-600 mb-3">
@@ -351,7 +351,7 @@ export default async function DysmenorrheaGuidePage({
               <div>
                 <p className="font-semibold">{t('footer.sourcesTitle')}</p>
                 <div className="flex justify-center flex-wrap gap-x-4 gap-y-1 mt-2">
-                  {(t.raw('footer.sources') || []).map((source: any, index: number) => (
+                  {t.raw('footer.sources').map((source: any, index: number) => (
                     <span key={index}>{source.name}</span>
                   ))}
                 </div>

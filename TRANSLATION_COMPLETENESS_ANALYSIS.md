@@ -246,3 +246,8 @@ t('comparisonTable.abnormalTitle') // ✅ 存在
 **总结**: 主要问题是 SymptomChecklist 组件缺少中文翻译字段，其他两个组件的翻译实际上是完整的。建议优先修复 SymptomChecklist 的翻译缺失问题。
 
 
+
+
+
+
+

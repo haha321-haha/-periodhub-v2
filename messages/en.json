@@ -2851,7 +2851,7 @@
       "campusGuide": "Campus Emergency Guide",
       "emergencyKit": "Emergency Kit List",
       "immediateMethods": "Immediate Methods",
-      "methods": "Apply heat to abdomen or lower back|Deep breathing relaxation|Gentle abdominal massage|Seek help from teachers or friends"
+      "methods": ["Apply heat to abdomen or lower back", "Deep breathing relaxation", "Gentle abdominal massage", "Seek help from teachers or friends"]
     },
     "painAssessment": {
       "title": "🎯 Quick Pain Assessment",
@@ -2865,22 +2865,22 @@
       "campusGuide": {
         "title": "Campus Emergency Guide",
         "description": "What to do when pain strikes at school? Classroom emergencies, dorm management, PE class strategies - comprehensive campus survival guide.",
-        "highlights": "Classroom self-help techniques|Dorm pain management|PE class strategies"
+        "highlights": ["Classroom self-help techniques", "Dorm pain management", "PE class strategies"]
       },
       "developmentPain": {
         "title": "Developmental Pain Management",
         "description": "Specialized pain management advice for ages 12-16, understanding adolescent period pain characteristics and scientific relief methods.",
-        "highlights": "Adolescent period pain characteristics|Scientific relief methods|When to seek medical help"
+        "highlights": ["Adolescent period pain characteristics", "Scientific relief methods", "When to seek medical help"]
       },
       "emotionalSupport": {
         "title": "Emotional Support & Mental Health",
         "description": "How to cope with period anxiety and mood swings? Relaxation techniques, peer experience sharing to help you through emotional \"roller coasters\".",
-        "highlights": "Emotional regulation techniques|Anxiety relief methods|Peer experience sharing"
+        "highlights": ["Emotional regulation techniques", "Anxiety relief methods", "Peer experience sharing"]
       },
       "communicationGuide": {
         "title": "Communication Guide",
         "description": "How to effectively communicate with parents, teachers, and doctors? Conversation templates and communication skills to help you express your needs confidently.",
-        "highlights": "Parent communication templates|Teacher collaboration guide|Doctor communication skills"
+        "highlights": ["Parent communication templates", "Teacher collaboration guide", "Doctor communication skills"]
       }
     },
     "resources": {

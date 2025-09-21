@@ -273,6 +273,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
                   className="w-full h-40 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   priority={false}
+                  unoptimized={true}
                 />
               </div>
 

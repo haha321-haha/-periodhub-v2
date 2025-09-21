@@ -104,7 +104,7 @@ export default function PainAssessmentTool({
       
       {/* 当前疼痛等级显示 */}
       <div className={styles.currentLevel}>
-        <span className={`${styles.levelNumber} ${currentPainInfo.colorClass}`}>
+        <span className={`${styles.levelNumber} ${currentPainInfo?.colorClass || ''}`}>
           {painLevel}
         </span>
         <span className={styles.levelText}>

@@ -13,122 +13,122 @@ import type {
 export const PAIN_SCALE_DATA: PainScaleItem[] = [
   {
     level: 0,
-    title: 'medicalCareGuide.painTool.levels.0.title',
-    advice: 'medicalCareGuide.painTool.levels.0.advice',
+    title: 'painTool.levels.0.title',
+    advice: 'painTool.levels.0.advice',
     severity: 'none',
     recommendations: [
-      'medicalCareGuide.painTool.levels.0.rec1',
-      'medicalCareGuide.painTool.levels.0.rec2'
+      'painTool.levels.0.rec1',
+      'painTool.levels.0.rec2'
     ],
     colorClass: 'text-green-600'
   },
   {
     level: 1,
-    title: 'medicalCareGuide.painTool.levels.1.title',
-    advice: 'medicalCareGuide.painTool.levels.1.advice',
+    title: 'painTool.levels.1.title',
+    advice: 'painTool.levels.1.advice',
     severity: 'mild',
     recommendations: [
-      'medicalCareGuide.painTool.levels.1.rec1',
-      'medicalCareGuide.painTool.levels.1.rec2'
+      'painTool.levels.1.rec1',
+      'painTool.levels.1.rec2'
     ],
     colorClass: 'text-green-500'
   },
   {
     level: 2,
-    title: 'medicalCareGuide.painTool.levels.2.title',
-    advice: 'medicalCareGuide.painTool.levels.2.advice',
+    title: 'painTool.levels.2.title',
+    advice: 'painTool.levels.2.advice',
     severity: 'mild',
     recommendations: [
-      'medicalCareGuide.painTool.levels.2.rec1',
-      'medicalCareGuide.painTool.levels.2.rec2'
+      'painTool.levels.2.rec1',
+      'painTool.levels.2.rec2'
     ],
     colorClass: 'text-green-400'
   },
   {
     level: 3,
-    title: 'medicalCareGuide.painTool.levels.3.title',
-    advice: 'medicalCareGuide.painTool.levels.3.advice',
+    title: 'painTool.levels.3.title',
+    advice: 'painTool.levels.3.advice',
     severity: 'mild',
     recommendations: [
-      'medicalCareGuide.painTool.levels.3.rec1',
-      'medicalCareGuide.painTool.levels.3.rec2'
+      'painTool.levels.3.rec1',
+      'painTool.levels.3.rec2'
     ],
     colorClass: 'text-yellow-500'
   },
   {
     level: 4,
-    title: 'medicalCareGuide.painTool.levels.4.title',
-    advice: 'medicalCareGuide.painTool.levels.4.advice',
+    title: 'painTool.levels.4.title',
+    advice: 'painTool.levels.4.advice',
     severity: 'moderate',
     recommendations: [
-      'medicalCareGuide.painTool.levels.4.rec1',
-      'medicalCareGuide.painTool.levels.4.rec2'
+      'painTool.levels.4.rec1',
+      'painTool.levels.4.rec2'
     ],
     colorClass: 'text-yellow-600'
   },
   {
     level: 5,
-    title: 'medicalCareGuide.painTool.levels.5.title',
-    advice: 'medicalCareGuide.painTool.levels.5.advice',
+    title: 'painTool.levels.5.title',
+    advice: 'painTool.levels.5.advice',
     severity: 'moderate',
     recommendations: [
-      'medicalCareGuide.painTool.levels.5.rec1',
-      'medicalCareGuide.painTool.levels.5.rec2'
+      'painTool.levels.5.rec1',
+      'painTool.levels.5.rec2'
     ],
     colorClass: 'text-orange-500'
   },
   {
     level: 6,
-    title: 'medicalCareGuide.painTool.levels.6.title',
-    advice: 'medicalCareGuide.painTool.levels.6.advice',
+    title: 'painTool.levels.6.title',
+    advice: 'painTool.levels.6.advice',
     severity: 'moderate',
     recommendations: [
-      'medicalCareGuide.painTool.levels.6.rec1',
-      'medicalCareGuide.painTool.levels.6.rec2'
+      'painTool.levels.6.rec1',
+      'painTool.levels.6.rec2'
     ],
     colorClass: 'text-orange-600'
   },
   {
     level: 7,
-    title: 'medicalCareGuide.painTool.levels.7.title',
-    advice: 'medicalCareGuide.painTool.levels.7.advice',
+    title: 'painTool.levels.7.title',
+    advice: 'painTool.levels.7.advice',
     severity: 'severe',
     recommendations: [
-      'medicalCareGuide.painTool.levels.7.rec1',
-      'medicalCareGuide.painTool.levels.7.rec2'
+      'painTool.levels.7.rec1',
+      'painTool.levels.7.rec2'
     ],
     colorClass: 'text-red-500'
   },
   {
     level: 8,
-    title: 'medicalCareGuide.painTool.levels.8.title',
-    advice: 'medicalCareGuide.painTool.levels.8.advice',
+    title: 'painTool.levels.8.title',
+    advice: 'painTool.levels.8.advice',
     severity: 'severe',
     recommendations: [
-      'medicalCareGuide.painTool.levels.8.rec1',
-      'medicalCareGuide.painTool.levels.8.rec2'
+      'painTool.levels.8.rec1',
+      'painTool.levels.8.rec2'
     ],
     colorClass: 'text-red-600'
   },
   {
     level: 9,
-    title: 'medicalCareGuide.painTool.levels.9.title',
-    advice: 'medicalCareGuide.painTool.levels.9.advice',
+    title: 'painTool.levels.9.title',
+    advice: 'painTool.levels.9.advice',
     severity: 'extreme',
     recommendations: [
-      'medicalCareGuide.painTool.levels.9.rec1',
-      'medicalCareGuide.painTool.levels.9.rec2'
+      'painTool.levels.9.rec1',
+      'painTool.levels.9.rec2'
     ],
     colorClass: 'text-red-700'
   },
   {
     level: 10,
-    title: 'medicalCareGuide.painTool.levels.10.title',
-    advice: 'medicalCareGuide.painTool.levels.10.advice',
+    title: 'painTool.levels.10.title',
+    advice: 'painTool.levels.10.advice',
     severity: 'extreme',
     recommendations: [
-      'medicalCareGuide.painTool.levels.10.rec1',
-      'medicalCareGuide.painTool.levels.10.rec2'
+      'painTool.levels.10.rec1',
+      'painTool.levels.10.rec2'
     ],
     colorClass: 'text-red-800'
   }
@@ -138,58 +138,58 @@ export const PAIN_SCALE_DATA: PainScaleItem[] = [
 export const SYMPTOM_DATA: SymptomItem[] = [
   {
     id: 's1',
-    text: 'medicalCareGuide.symptomChecker.symptoms.s1.text',
+    text: 'symptomChecker.symptoms.s1.text',
     risk: 'emergency',
     category: 'pain',
-    description: 'medicalCareGuide.symptomChecker.symptoms.s1.description',
+    description: 'symptomChecker.symptoms.s1.description',
     icon: '🚨'
   },
   {
     id: 's2',
-    text: 'medicalCareGuide.symptomChecker.symptoms.s2.text',
+    text: 'symptomChecker.symptoms.s2.text',
     risk: 'emergency',
     category: 'bleeding',
-    description: 'medicalCareGuide.symptomChecker.symptoms.s2.description',
+    description: 'symptomChecker.symptoms.s2.description',
     icon: '🩸'
   },
   {
     id: 's3',
-    text: 'medicalCareGuide.symptomChecker.symptoms.s3.text',
+    text: 'symptomChecker.symptoms.s3.text',
     risk: 'emergency',
     category: 'systemic',
-    description: 'medicalCareGuide.symptomChecker.symptoms.s3.description',
+    description: 'symptomChecker.symptoms.s3.description',
     icon: '🤒'
   },
   {
     id: 's4',
-    text: 'medicalCareGuide.symptomChecker.symptoms.s4.text',
+    text: 'symptomChecker.symptoms.s4.text',
     risk: 'high',
     category: 'pain',
-    description: 'medicalCareGuide.symptomChecker.symptoms.s4.description',
+    description: 'symptomChecker.symptoms.s4.description',
     icon: '⚡'
   },
   {
     id: 's5',
-    text: 'medicalCareGuide.symptomChecker.symptoms.s5.text',
+    text: 'symptomChecker.symptoms.s5.text',
     risk: 'high',
     category: 'pattern',
-    description: 'medicalCareGuide.symptomChecker.symptoms.s5.description',
+    description: 'symptomChecker.symptoms.s5.description',
     icon: '🔴'
   },
   {
     id: 's6',
-    text: 'medicalCareGuide.symptomChecker.symptoms.s6.text',
+    text: 'symptomChecker.symptoms.s6.text',
     risk: 'high',
     category: 'pattern',
-    description: 'medicalCareGuide.symptomChecker.symptoms.s6.description',
+    description: 'symptomChecker.symptoms.s6.description',
     icon: '📈'
   },
   {
     id: 's7',
-    text: 'medicalCareGuide.symptomChecker.symptoms.s7.text',
+    text: 'symptomChecker.symptoms.s7.text',
     risk: 'medium',
     category: 'pain',
-    description: 'medicalCareGuide.symptomChecker.symptoms.s7.description',
+    description: 'symptomChecker.symptoms.s7.description',
     icon: '💊'
   }
 ];
@@ -197,70 +197,70 @@ export const SYMPTOM_DATA: SymptomItem[] = [
 // 决策树数据 - 基于souW1e2的智能决策逻辑
 export const DECISION_TREE_DATA: DecisionTreeNode = {
   id: 'start',
-  question: 'medicalCareGuide.decisionTree.questions.start',
+  question: 'decisionTree.questions.start',
   options: {
-    yes: 'medicalCareGuide.decisionTree.options.yes',
-    no: 'medicalCareGuide.decisionTree.options.no'
+    yes: 'decisionTree.options.yes',
+    no: 'decisionTree.options.no'
   },
   children: {
     yes: {
       id: 'severe_pain',
-      question: 'medicalCareGuide.decisionTree.questions.severePain',
+      question: 'decisionTree.questions.severePain',
       options: {
-        yes: 'medicalCareGuide.decisionTree.options.yes',
-        no: 'medicalCareGuide.decisionTree.options.no'
+        yes: 'decisionTree.options.yes',
+        no: 'decisionTree.options.no'
       },
       children: {
         yes: {
           id: 'emergency_result',
           result: {
-            title: 'medicalCareGuide.decisionTree.results.emergency.title',
+            title: 'decisionTree.results.emergency.title',
             icon: '🚨',
             colorClass: 'text-red-600 bg-red-50 border-red-200',
-            text: 'medicalCareGuide.decisionTree.results.emergency.text',
+            text: 'decisionTree.results.emergency.text',
             urgency: 'emergency',
             actions: [
-              'medicalCareGuide.decisionTree.results.emergency.action1',
-              'medicalCareGuide.decisionTree.results.emergency.action2',
-              'medicalCareGuide.decisionTree.results.emergency.action3'
+              'decisionTree.results.emergency.action1',
+              'decisionTree.results.emergency.action2',
+              'decisionTree.results.emergency.action3'
             ]
           }
         },
         no: {
           id: 'duration_check',
-          question: 'medicalCareGuide.decisionTree.questions.duration',
+          question: 'decisionTree.questions.duration',
           options: {
-            yes: 'medicalCareGuide.decisionTree.options.yes',
-            no: 'medicalCareGuide.decisionTree.options.no'
+            yes: 'decisionTree.options.yes',
+            no: 'decisionTree.options.no'
           },
           children: {
             yes: {
               id: 'urgent_result',
               result: {
-                title: 'medicalCareGuide.decisionTree.results.urgent.title',
+                title: 'decisionTree.results.urgent.title',
                 icon: '⚠️',
                 colorClass: 'text-orange-600 bg-orange-50 border-orange-200',
-                text: 'medicalCareGuide.decisionTree.results.urgent.text',
+                text: 'decisionTree.results.urgent.text',
                 urgency: 'urgent',
                 actions: [
-                  'medicalCareGuide.decisionTree.results.urgent.action1',
-                  'medicalCareGuide.decisionTree.results.urgent.action2',
-                  'medicalCareGuide.decisionTree.results.urgent.action3'
+                  'decisionTree.results.urgent.action1',
+                  'decisionTree.results.urgent.action2',
+                  'decisionTree.results.urgent.action3'
                 ]
               }
             },
             no: {
               id: 'routine_result',
               result: {
-                title: 'medicalCareGuide.decisionTree.results.routine.title',
+                title: 'decisionTree.results.routine.title',
                 icon: '📅',
                 colorClass: 'text-blue-600 bg-blue-50 border-blue-200',
-                text: 'medicalCareGuide.decisionTree.results.routine.text',
+                text: 'decisionTree.results.routine.text',
                 urgency: 'routine',
                 actions: [
-                  'medicalCareGuide.decisionTree.results.routine.action1',
-                  'medicalCareGuide.decisionTree.results.routine.action2',
-                  'medicalCareGuide.decisionTree.results.routine.action3'
+                  'decisionTree.results.routine.action1',
+                  'decisionTree.results.routine.action2',
+                  'decisionTree.results.routine.action3'
                 ]
               }
             }
@@ -270,39 +270,39 @@ export const DECISION_TREE_DATA: DecisionTreeNode = {
     },
     no: {
       id: 'pattern_check',
-      question: 'medicalCareGuide.decisionTree.questions.pattern',
+      question: 'decisionTree.questions.pattern',
       options: {
-        yes: 'medicalCareGuide.decisionTree.options.yes',
-        no: 'medicalCareGuide.decisionTree.options.no'
+        yes: 'decisionTree.options.yes',
+        no: 'decisionTree.options.no'
       },
       children: {
         yes: {
           id: 'routine_result',
           result: {
-            title: 'medicalCareGuide.decisionTree.results.routine.title',
+            title: 'decisionTree.results.routine.title',
             icon: '📅',
             colorClass: 'text-blue-600 bg-blue-50 border-blue-200',
-            text: 'medicalCareGuide.decisionTree.results.routine.text',
+            text: 'decisionTree.results.routine.text',
             urgency: 'routine',
             actions: [
-              'medicalCareGuide.decisionTree.results.routine.action1',
-              'medicalCareGuide.decisionTree.results.routine.action2',
-              'medicalCareGuide.decisionTree.results.routine.action3'
+              'decisionTree.results.routine.action1',
+              'decisionTree.results.routine.action2',
+              'decisionTree.results.routine.action3'
             ]
           }
         },
         no: {
           id: 'observe_result',
           result: {
-            title: 'medicalCareGuide.decisionTree.results.observe.title',
+            title: 'decisionTree.results.observe.title',
             icon: '👁️',
             colorClass: 'text-green-600 bg-green-50 border-green-200',
-            text: 'medicalCareGuide.decisionTree.results.observe.text',
+            text: 'decisionTree.results.observe.text',
             urgency: 'observe',
             actions: [
-              'medicalCareGuide.decisionTree.results.observe.action1',
-              'medicalCareGuide.decisionTree.results.observe.action2',
-              'medicalCareGuide.decisionTree.results.observe.action3'
+              'decisionTree.results.observe.action1',
+              'decisionTree.results.observe.action2',
+              'decisionTree.results.observe.action3'
             ]
           }
         }
@@ -314,53 +314,53 @@ export const DECISION_TREE_DATA: DecisionTreeNode = {
 // 对比表格数据 - 基于souW1e2的正常vs异常对比
 export const COMPARISON_TABLE_DATA: ComparisonTableData = {
   headers: [
-    'medicalCareGuide.comparisonTable.headers.condition',
-    'medicalCareGuide.comparisonTable.headers.normal',
-    'medicalCareGuide.comparisonTable.headers.concerning',
-    'medicalCareGuide.comparisonTable.headers.action'
+    'comparisonTable.headers.condition',
+    'comparisonTable.headers.normal',
+    'comparisonTable.headers.concerning',
+    'comparisonTable.headers.action'
   ],
   rows: [
     {
-      condition: 'medicalCareGuide.comparisonTable.rows.painIntensity.condition',
-      normalPain: 'medicalCareGuide.comparisonTable.rows.painIntensity.normal',
-      concerningPain: 'medicalCareGuide.comparisonTable.rows.painIntensity.concerning',
-      action: 'medicalCareGuide.comparisonTable.rows.painIntensity.action'
+      condition: 'comparisonTable.rows.painIntensity.condition',
+      normalPain: 'comparisonTable.rows.painIntensity.normal',
+      concerningPain: 'comparisonTable.rows.painIntensity.concerning',
+      action: 'comparisonTable.rows.painIntensity.action'
     },
     {
-      condition: 'medicalCareGuide.comparisonTable.rows.painDuration.condition',
-      normalPain: 'medicalCareGuide.comparisonTable.rows.painDuration.normal',
-      concerningPain: 'medicalCareGuide.comparisonTable.rows.painDuration.concerning',
-      action: 'medicalCareGuide.comparisonTable.rows.painDuration.action'
+      condition: 'comparisonTable.rows.painDuration.condition',
+      normalPain: 'comparisonTable.rows.painDuration.normal',
+      concerningPain: 'comparisonTable.rows.painDuration.concerning',
+      action: 'comparisonTable.rows.painDuration.action'
     },
     {
-      condition: 'medicalCareGuide.comparisonTable.rows.painLocation.condition',
-      normalPain: 'medicalCareGuide.comparisonTable.rows.painLocation.normal',
-      concerningPain: 'medicalCareGuide.comparisonTable.rows.painLocation.concerning',
-      action: 'medicalCareGuide.comparisonTable.rows.painLocation.action'
+      condition: 'comparisonTable.rows.painLocation.condition',
+      normalPain: 'comparisonTable.rows.painLocation.normal',
+      concerningPain: 'comparisonTable.rows.painLocation.concerning',
+      action: 'comparisonTable.rows.painLocation.action'
     },
     {
-      condition: 'medicalCareGuide.comparisonTable.rows.associatedSymptoms.condition',
-      normalPain: 'medicalCareGuide.comparisonTable.rows.associatedSymptoms.normal',
-      concerningPain: 'medicalCareGuide.comparisonTable.rows.associatedSymptoms.concerning',
-      action: 'medicalCareGuide.comparisonTable.rows.associatedSymptoms.action'
+      condition: 'comparisonTable.rows.associatedSymptoms.condition',
+      normalPain: 'comparisonTable.rows.associatedSymptoms.normal',
+      concerningPain: 'comparisonTable.rows.associatedSymptoms.concerning',
+      action: 'comparisonTable.rows.associatedSymptoms.action'
     },
     {
-      condition: 'medicalCareGuide.comparisonTable.rows.medicationResponse.condition',
-      normalPain: 'medicalCareGuide.comparisonTable.rows.medicationResponse.normal',
-      concerningPain: 'medicalCareGuide.comparisonTable.rows.medicationResponse.concerning',
-      action: 'medicalCareGuide.comparisonTable.rows.medicationResponse.action'
+      condition: 'comparisonTable.rows.medicationResponse.condition',
+      normalPain: 'comparisonTable.rows.medicationResponse.normal',
+      concerningPain: 'comparisonTable.rows.medicationResponse.concerning',
+      action: 'comparisonTable.rows.medicationResponse.action'
     },
     {
-      condition: 'medicalCareGuide.comparisonTable.rows.dailyImpact.condition',
-      normalPain: 'medicalCareGuide.comparisonTable.rows.dailyImpact.normal',
-      concerningPain: 'medicalCareGuide.comparisonTable.rows.dailyImpact.concerning',
-      action: 'medicalCareGuide.comparisonTable.rows.dailyImpact.action'
+      condition: 'comparisonTable.rows.dailyImpact.condition',
+      normalPain: 'comparisonTable.rows.dailyImpact.normal',
+      concerningPain: 'comparisonTable.rows.dailyImpact.concerning',
+      action: 'comparisonTable.rows.dailyImpact.action'
     },
     {
-      condition: 'medicalCareGuide.comparisonTable.rows.cycleChanges.condition',
-      normalPain: 'medicalCareGuide.comparisonTable.rows.cycleChanges.normal',
-      concerningPain: 'medicalCareGuide.comparisonTable.rows.cycleChanges.concerning',
-      action: 'medicalCareGuide.comparisonTable.rows.cycleChanges.action'
+      condition: 'comparisonTable.rows.cycleChanges.condition',
+      normalPain: 'comparisonTable.rows.cycleChanges.normal',
+      concerningPain: 'comparisonTable.rows.cycleChanges.concerning',
+      action: 'comparisonTable.rows.cycleChanges.action'
     }
   ]
 };
@@ -393,10 +393,10 @@ export function analyzeSymptomRisk(selectedSymptomIds: string[]): {
       shouldSeeDoctor: true,
       urgency: 'immediate',
       recommendations: [
-        'Seek immediate emergency medical care',
-        'Do not delay medical attention',
-        'Call emergency services if needed',
-        'Have someone accompany you to medical care'
+        'symptomChecker.results.actions.emergency.0',
+        'symptomChecker.results.actions.emergency.1',
+        'symptomChecker.results.actions.emergency.2',
+        'symptomChecker.results.actions.emergency.3'
       ]
     };
   }
@@ -408,10 +408,10 @@ export function analyzeSymptomRisk(selectedSymptomIds: string[]): {
       shouldSeeDoctor: true,
       urgency: 'within_week',
       recommendations: [
-        'Schedule urgent appointment with healthcare provider',
-        'Contact your doctor within 24-48 hours',
-        'Monitor symptoms closely for any worsening',
-        'Prepare detailed symptom list for doctor visit'
+        'symptomChecker.results.actions.high.0',
+        'symptomChecker.results.actions.high.1',
+        'symptomChecker.results.actions.high.2',
+        'symptomChecker.results.actions.high.3'
       ]
     };
   }
@@ -423,10 +423,10 @@ export function analyzeSymptomRisk(selectedSymptomIds: string[]): {
       shouldSeeDoctor: true,
       urgency: 'routine',
       recommendations: [
-        'Schedule routine appointment with healthcare provider',
-        'Continue monitoring symptoms',
-        'Keep detailed symptom diary',
-        'Consider lifestyle modifications'
+        'symptomChecker.results.actions.medium.0',
+        'symptomChecker.results.actions.medium.1',
+        'symptomChecker.results.actions.medium.2',
+        'symptomChecker.results.actions.medium.3'
       ]
     };
   }
@@ -437,10 +437,10 @@ export function analyzeSymptomRisk(selectedSymptomIds: string[]): {
     shouldSeeDoctor: false,
     urgency: 'monitor',
     recommendations: [
-      'Continue self-monitoring',
-      'Maintain healthy lifestyle habits',
-      'Consider preventive measures',
-      'Schedule routine check-up if symptoms persist or worsen'
+      'symptomChecker.results.actions.low.0',
+      'symptomChecker.results.actions.low.1',
+      'symptomChecker.results.actions.low.2',
+      'symptomChecker.results.actions.low.3'
     ]
   };
 }

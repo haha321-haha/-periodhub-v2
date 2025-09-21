@@ -159,7 +159,7 @@ class MedicalCareGuideStorageManager extends StorageManager {
 
   // 获取评估历史
   getAssessmentHistory(): AssessmentResult[] {
-    return this.getItem('assessmentHistory', []);
+    return this.getItem('assessmentHistory', []) || [];
   }
 
   // 获取最后一次评估
@@ -185,7 +185,11 @@ class MedicalCareGuideStorageManager extends StorageManager {
       language: 'zh',
       reminderEnabled: false,
       lastVisit: new Date().toISOString()
-    });
+    }) || {
+      language: 'zh',
+      reminderEnabled: false,
+      lastVisit: new Date().toISOString()
+    };
   }
 
   // 更新统计信息
@@ -201,19 +205,31 @@ class MedicalCareGuideStorageManager extends StorageManager {
           emergency: 0
         },
         lastUpdated: new Date().toISOString()
-      });
+      }) || {
+        totalAssessments: 0,
+        averagePainLevel: 0,
+        riskLevelCounts: {
+          low: 0,
+          medium: 0,
+          high: 0,
+          emergency: 0
+        },
+        lastUpdated: new Date().toISOString()
+      };
 
-      stats.totalAssessments += 1;
-      stats.riskLevelCounts[result.riskLevel] += 1;
+      if (stats) {
+        stats.totalAssessments += 1;
+        stats.riskLevelCounts[result.riskLevel] += 1;
       
-      // 计算平均疼痛等级
-      const history = this.getAssessmentHistory();
-      const totalPainLevel = history.reduce((sum, assessment) => sum + assessment.painLevel, 0);
-      stats.averagePainLevel = totalPainLevel / history.length;
+        // 计算平均疼痛等级
+        const history = this.getAssessmentHistory();
+        const totalPainLevel = history.reduce((sum, assessment) => sum + assessment.painLevel, 0);
+        stats.averagePainLevel = totalPainLevel / history.length;
+        
+        stats.lastUpdated = new Date().toISOString();
       
-      stats.lastUpdated = new Date().toISOString();
-      
-      this.setItem('statistics', stats);
+        this.setItem('statistics', stats);
+      }
     } catch (error) {
       console.error('Failed to update statistics:', error);
     }
@@ -229,7 +245,7 @@ class MedicalCareGuideStorageManager extends StorageManager {
     try {
       const data: MedicalCareGuideStorage = {
         assessmentHistory: this.getAssessmentHistory(),
-        lastAssessment: this.getLastAssessment(),
+        lastAssessment: this.getLastAssessment() || undefined,
         userPreferences: this.getUserPreferences(),
         version: 1
       };

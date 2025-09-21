@@ -20,7 +20,8 @@ const RISK_ICONS = {
 const RISK_COLORS = {
   emergency: 'text-red-600 bg-red-50 border-red-200',
   high: 'text-orange-600 bg-orange-50 border-orange-200',
-  medium: 'text-yellow-600 bg-yellow-50 border-yellow-200'
+  medium: 'text-yellow-600 bg-yellow-50 border-yellow-200',
+  low: 'text-green-600 bg-green-50 border-green-200'
 };
 
 export default function SymptomChecklist({ 
@@ -224,7 +225,7 @@ export default function SymptomChecklist({
                   <ul className={styles.recommendationsList}>
                     {assessmentResult.recommendations.map((rec, index) => (
                       <li key={index} className={styles.recommendationItem}>
-                        {rec}
+                        {t(rec)}
                       </li>
                     ))}
                   </ul>

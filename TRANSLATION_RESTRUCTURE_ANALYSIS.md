@@ -257,3 +257,4 @@ jq '.medicalCareGuide + {symptomChecker: .symptomChecker}' messages/zh.json
 
 **总结**: 重构是必要的，风险可控，建议在充分准备后执行。
 
+

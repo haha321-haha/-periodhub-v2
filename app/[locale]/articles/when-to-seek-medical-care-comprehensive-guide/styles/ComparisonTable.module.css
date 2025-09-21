@@ -263,6 +263,10 @@
   @apply outline-none ring-2 ring-blue-500 ring-offset-2;
 }
 
+.tableRow.focused {
+  @apply ring-2 ring-blue-500 ring-offset-2 bg-blue-50;
+}
+
 .expandButton:focus {
   @apply ring-2 ring-blue-500 ring-offset-2;
 }

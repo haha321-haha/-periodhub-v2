@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { Table, CheckCircle, AlertTriangle } from 'lucide-react';
 import { COMPARISON_TABLE_DATA } from '../utils/medicalCareData';
@@ -13,9 +13,10 @@ export default function ComparisonTable({
 }: ComparisonTableProps) {
   const t = useTranslations('medicalCareGuide');
   const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
+  const [focusedRowIndex, setFocusedRowIndex] = useState<number>(-1);
 
   // 切换行展开状态
-  const toggleRowExpansion = (rowIndex: number) => {
+  const toggleRowExpansion = useCallback((rowIndex: number) => {
     const newExpandedRows = new Set(expandedRows);
     if (newExpandedRows.has(rowIndex)) {
       newExpandedRows.delete(rowIndex);
@@ -23,7 +24,62 @@ export default function ComparisonTable({
       newExpandedRows.add(rowIndex);
     }
     setExpandedRows(newExpandedRows);
-  };
+  }, [expandedRows]);
+
+  // 键盘导航处理
+  const handleKeyDown = useCallback((e: React.KeyboardEvent, rowIndex: number) => {
+    const totalRows = COMPARISON_TABLE_DATA.rows.length;
+    
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        const nextRow = rowIndex < totalRows - 1 ? rowIndex + 1 : 0;
+        setFocusedRowIndex(nextRow);
+        // 聚焦到下一行
+        const nextRowElement = e.currentTarget.parentElement?.children[nextRow + 1] as HTMLElement;
+        nextRowElement?.focus();
+        break;
+        
+      case 'ArrowUp':
+        e.preventDefault();
+        const prevRow = rowIndex > 0 ? rowIndex - 1 : totalRows - 1;
+        setFocusedRowIndex(prevRow);
+        // 聚焦到上一行
+        const prevRowElement = e.currentTarget.parentElement?.children[prevRow + 1] as HTMLElement;
+        prevRowElement?.focus();
+        break;
+        
+      case 'Enter':
+      case ' ':
+        e.preventDefault();
+        toggleRowExpansion(rowIndex);
+        break;
+        
+      case 'Home':
+        e.preventDefault();
+        setFocusedRowIndex(0);
+        const firstRowElement = e.currentTarget.parentElement?.children[1] as HTMLElement;
+        firstRowElement?.focus();
+        break;
+        
+      case 'End':
+        e.preventDefault();
+        setFocusedRowIndex(totalRows - 1);
+        const lastRowElement = e.currentTarget.parentElement?.children[totalRows] as HTMLElement;
+        lastRowElement?.focus();
+        break;
+    }
+  }, [toggleRowExpansion]);
+
+  // 处理行焦点
+  const handleRowFocus = useCallback((rowIndex: number) => {
+    setFocusedRowIndex(rowIndex);
+  }, []);
+
+  // 处理行失焦
+  const handleRowBlur = useCallback(() => {
+    setFocusedRowIndex(-1);
+  }, []);
 
   return (
     <div className={`${styles.container} ${className}`}>
@@ -35,6 +91,11 @@ export default function ComparisonTable({
         <p className={styles.description}>
           {t('comparisonTable.description')}
         </p>
+        
+        {/* 键盘导航说明 */}
+        <div className="sr-only" role="region" aria-label="键盘导航说明">
+          <p>使用箭头键在行间导航，按回车键或空格键展开/收起行详情，Home键跳到第一行，End键跳到最后一行</p>
+        </div>
       </div>
 
       {/* 表格容器 */}
@@ -56,8 +117,17 @@ export default function ComparisonTable({
                   key={rowIndex} 
                   className={`${styles.tableRow} ${
                     highlightRow === rowIndex ? styles.highlighted : ''
-                  } ${expandedRows.has(rowIndex) ? styles.expanded : ''}`}
+                  } ${expandedRows.has(rowIndex) ? styles.expanded : ''} ${
+                    focusedRowIndex === rowIndex ? styles.focused : ''
+                  }`}
                   onClick={() => toggleRowExpansion(rowIndex)}
+                  onKeyDown={(e) => handleKeyDown(e, rowIndex)}
+                  onFocus={() => handleRowFocus(rowIndex)}
+                  onBlur={handleRowBlur}
+                  tabIndex={0}
+                  role="button"
+                  aria-expanded={expandedRows.has(rowIndex)}
+                  aria-label={`${t(row.condition)} - ${expandedRows.has(rowIndex) ? t('comparisonTable.collapse') : t('comparisonTable.expand')}`}
                 >
                   {/* 条件列 */}
                   <td className={`${styles.tableCell} ${styles.conditionCell}`}>

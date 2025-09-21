@@ -17,11 +17,11 @@ export function createLazyComponent(importFn: () => Promise<any>, fallback?: Rea
       console.error('Component lazy loading failed:', error);
       // 返回错误组件
       return {
-        default: fallback || (() => (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4 my-4">
-            <p className="text-red-700">组件加载失败，请刷新页面重试。</p>
-          </div>
-        ))
+        default: fallback || (() => React.createElement('div', {
+          className: "bg-red-50 border border-red-200 rounded-lg p-4 my-4"
+        }, React.createElement('p', {
+          className: "text-red-700"
+        }, "组件加载失败，请刷新页面重试。")))
       };
     }
   });

@@ -438,7 +438,7 @@ export default async function ImmediateReliefPage({
           <div className="bg-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-red-700 mb-4">立即行动清单</h3>
             <ul className="space-y-2">
-              {t.raw('emergencyResponse.immediateActions').map((action: string, index: number) => (
+              {Object.values(t.raw('emergencyResponse.immediateActions')).map((action: string, index: number) => (
                 <li key={index} className="flex items-start text-sm text-red-600">
                   <span className="w-2 h-2 bg-red-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
                   {action}
@@ -451,7 +451,7 @@ export default async function ImmediateReliefPage({
           <div className="bg-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-red-700 mb-4">{t('emergencyResponse.medicalIndicators.title')}</h3>
             <ul className="space-y-2">
-              {t.raw('emergencyResponse.medicalIndicators.indicators').map((indicator: string, index: number) => (
+              {Object.values(t.raw('emergencyResponse.medicalIndicators.indicators')).map((indicator: string, index: number) => (
                 <li key={index} className="flex items-start text-sm text-red-600">
                   <span className="w-2 h-2 bg-red-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
                   {indicator}
@@ -465,7 +465,7 @@ export default async function ImmediateReliefPage({
         <div className="mt-6 bg-white p-6 rounded-lg">
           <h3 className="text-lg font-semibold text-red-700 mb-4">{t('emergencyResponse.emergencyKit.title')}</h3>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {t.raw('emergencyResponse.emergencyKit.items').map((item: string, index: number) => (
+            {Object.values(t.raw('emergencyResponse.emergencyKit.items')).map((item: string, index: number) => (
               <div key={index} className="flex items-center text-sm text-red-600">
                 <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
                 {item}

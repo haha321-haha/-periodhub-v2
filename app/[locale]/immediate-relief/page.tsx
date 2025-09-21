@@ -15,10 +15,12 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('description'),
-    keywords: [
+    keywords: locale === 'zh' ? [
       '痛经怎么缓解', '痛经剧痛急救指南', '痛经紧急处理', '经期疼痛缓解', '热敷疗法', '穴位按摩',
-      '热敷', '敷热水袋', '暖宝宝', '按摩', '揉肚子', '止痛药',
-      'period pain emergency relief', 'immediate period pain relief', 'heat therapy for cramps'
+      '热敷', '敷热水袋', '暖宝宝', '按摩', '揉肚子', '止痛药'
+    ] : [
+      'period pain emergency relief', 'immediate period pain relief', 'heat therapy for cramps',
+      'menstrual pain management', 'dysmenorrhea treatment', 'cramp relief methods'
     ],
     alternates: {
       canonical: `https://www.periodhub.health/${locale}/immediate-relief`,
@@ -107,7 +109,7 @@ export default async function ImmediateReliefPage({
         {/* Breadcrumb */}
         <Breadcrumb 
           items={[
-            { label: t('breadcrumb.immediateRelief'), href: `/${locale}/immediate-relief` }
+            { label: commonT('breadcrumb.immediateRelief'), href: `/${locale}/immediate-relief` }
           ]}
         />
         

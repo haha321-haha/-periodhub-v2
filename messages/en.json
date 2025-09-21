@@ -1292,7 +1292,11 @@
         },
         "safety": {
           "title": "Safety Guidelines",
-          "guidelines": "Avoid temperatures above 48°C to prevent burns|Use with caution in diabetic patients|Avoid on broken or infected skin"
+          "guidelines": {
+            "0": "Avoid temperatures above 48°C to prevent burns",
+            "1": "Use with caution in diabetic patients",
+            "2": "Avoid on broken or infected skin"
+          }
         }
       },
       "herbalTherapy": {
@@ -1332,7 +1336,11 @@
         },
         "safety": {
           "title": "Safety Reminder",
-          "guidelines": "Consult TCM practitioner or pharmacist before first use|Avoid blood-activating herbs during pregnancy or when trying to conceive|Watch for allergic reactions, discontinue if discomfort occurs"
+          "guidelines": {
+            "0": "Consult TCM practitioner or pharmacist before first use",
+            "1": "Avoid blood-activating herbs during pregnancy or when trying to conceive",
+            "2": "Watch for allergic reactions, discontinue if discomfort occurs"
+          }
         }
       },
       "dietaryAdjustment": {
@@ -1366,11 +1374,21 @@
           "title": "Anti-inflammatory Foods",
           "recommended": {
             "title": "Recommended Foods",
-            "list": "Salmon, sardines (rich in Omega-3)|Spinach, kale (rich in magnesium)|Turmeric, ginger (natural anti-inflammatory)|Berries (antioxidant-rich)"
+            "list": {
+              "0": "Salmon, sardines (rich in Omega-3)",
+              "1": "Spinach, kale (rich in magnesium)",
+              "2": "Turmeric, ginger (natural anti-inflammatory)",
+              "3": "Berries (antioxidant-rich)"
+            }
           },
           "avoid": {
             "title": "Foods to Avoid",
-            "list": "High-sugar foods (increase inflammation)|Refined carbohydrates|Excessive caffeine|Processed meats"
+            "list": {
+              "0": "High-sugar foods (increase inflammation)",
+              "1": "Refined carbohydrates",
+              "2": "Excessive caffeine",
+              "3": "Processed meats"
+            }
           }
         }
       },
@@ -1454,7 +1472,11 @@
         },
         "safety": {
           "title": "Safety Guidelines",
-          "guidelines": "Use with caution during pregnancy and breastfeeding|Always dilute before skin application|Perform patch test before first use"
+          "guidelines": {
+            "0": "Use with caution during pregnancy and breastfeeding",
+            "1": "Always dilute before skin application",
+            "2": "Perform patch test before first use"
+          }
         }
       },
       "acupuncture": {

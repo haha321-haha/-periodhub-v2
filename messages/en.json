@@ -205,6 +205,10 @@
     "tryAgain": "Try Again",
     "healthGuide": "Health Guide",
     "naturalTherapies": "Natural Therapies",
+    "breadcrumb": {
+      "home": "Home",
+      "immediateRelief": "Immediate Relief"
+    },
     "submit": "Submit",
     "cancel": "Cancel",
     "save": "Save",

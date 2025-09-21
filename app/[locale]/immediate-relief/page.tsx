@@ -409,7 +409,7 @@ export default async function ImmediateReliefPage({
                 {combination.level}
               </h3>
               <div className="space-y-2 mb-4">
-                {combination.methods.map((method: string, methodIndex: number) => (
+                {Object.values(combination.methods).map((method: string, methodIndex: number) => (
                   <div key={methodIndex} className="flex items-center text-sm text-purple-600">
                     <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
                     {method}

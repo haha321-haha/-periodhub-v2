@@ -765,6 +765,10 @@
     "tryAgain": "重试",
     "healthGuide": "健康指南",
     "naturalTherapies": "自然疗法",
+    "breadcrumb": {
+      "home": "首页",
+      "immediateRelief": "即时缓解"
+    },
     "submit": "提交",
     "cancel": "取消",
     "save": "保存",

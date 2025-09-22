@@ -241,7 +241,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({ loc
         createArticleResource('nutritionHealth', 'stressManagement', 22, 'highest', [t('tags.management'), t('tags.health'), t('tags.management')], 'menstrual-stress-management-complete-guide'),
         createArticleResource('naturalTherapies', 'zhanZhuang', 18, 'high', [t('tags.exercise'), t('tags.baduanjin'), t('tags.relief')], 'zhan-zhuang-baduanjin-for-menstrual-pain-relief'),
         ...PDF_RESOURCES.filter(pdf =>
-          ['healthy-habits-checklist', 'menstrual-cycle-nutrition-plan', 'magnesium-gut-health-guide', 'zhan-zhuang-baduanjin-illustrated-guide'].includes(pdf.id)
+          ['healthy-habits-checklist', 'menstrual-cycle-nutrition-plan', 'magnesium-gut-health-guide', 'zhan-zhuang-baduanjin-illustrated-guide', 'parent-communication-guide'].includes(pdf.id)
         ).map(convertPDFToResource)
       ],
       learning: [
@@ -263,7 +263,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({ loc
         createArticleResource('medicalGuidance', 'whenToSeeDoctor', 10, 'highest', [t('tags.seeDoctor'), t('tags.emergency'), t('tags.health'), t('tags.communication')], 'when-to-see-doctor-period-pain'),
         createArticleResource('medicalGuidance', 'medicalCare', 15, 'high', [t('tags.medical'), t('tags.health'), t('tags.guide'), t('tags.communication')], 'when-to-seek-medical-care-comprehensive-guide'),
         ...PDF_RESOURCES.filter(pdf =>
-          ['natural-therapy-assessment', 'hormone-testing-guide', 'nutritional-analysis', 'exercise-program'].includes(pdf.id)
+          ['natural-therapy-assessment', 'hormone-testing-guide', 'nutritional-analysis', 'exercise-program', 'teacher-health-manual', 'teacher-collaboration-handbook'].includes(pdf.id)
         ).map(convertPDFToResource)
       ],
       management: [

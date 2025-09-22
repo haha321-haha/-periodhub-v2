@@ -3577,7 +3577,20 @@
       "medication": "Medication ineffective or serious side effects occur"
     },
     "disclaimerTitle": "Medical Disclaimer:",
-    "disclaimerText": "This guide is for reference only and does not replace professional medical advice. Consult your doctor if you have questions."
+    "disclaimerText": "This guide is for reference only and does not replace professional medical advice. Consult your doctor if you have questions.",
+    "relatedToolsTitle": "Related Tools",
+    "relatedTools": {
+      "nsaidGuide": {
+        "title": "NSAIDs Professional Menstrual Pain Treatment Guide",
+        "description": "Includes interactive medication calculator to help you accurately calculate safe dosages",
+        "feature": "Interactive medication calculator included"
+      },
+      "symptomAssessment": {
+        "title": "Symptom Assessment Tool",
+        "description": "Scientifically assess menstrual symptoms and get personalized recommendations",
+        "feature": "Personalized symptom analysis"
+      }
+    }
   },
   "home": {
     "trusted": {

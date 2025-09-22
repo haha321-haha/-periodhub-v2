@@ -2236,7 +2236,225 @@
           "Meeting Emergency Kit",
           "Office Chair Stretches",
           "Workplace Nutrition"
-        ]
+        ],
+        "emergencyKit": {
+          "title": "Meeting Emergency Kit",
+          "categories": {
+            "core": "Core Equipment",
+            "painRelief": "Pain Relief",
+            "imageManagement": "Image Management"
+          },
+          "coreItems": [
+            "Adhesive heat patches (ThermaCare invisible patches)",
+            "Mini electric heating pad (USB rechargeable)",
+            "Ginger tea sachets (sugar-free formula)",
+            "Emergency energy gel (with magnesium + vitamin B6)"
+          ],
+          "painReliefItems": [
+            "Ibuprofen/Acetaminophen",
+            "Peppermint balm (for temple massage)",
+            "Simple massage tools"
+          ],
+          "imageManagementItems": [
+            "Mirror, lipstick, oil blotting paper",
+            "Dry shampoo, deodorant",
+            "Emergency makeup"
+          ],
+          "discreteUsageGuide": "Discreet Usage Guide",
+          "usageTips": [
+            "Heat patch excuse: \"Using heat pad for neck and shoulder pain\"",
+            "Emergency exit phrase: \"Need to handle urgent client email\""
+          ]
+        },
+        "stretching": {
+          "title": "Office Chair Stretching System",
+          "exercises": [
+            {
+              "name": "Chair Pelvic Clock Movement",
+              "description": "Relieves sacroiliac joint pressure, improves lower back circulation",
+              "duration": "30 seconds each, repeat 3-5 times",
+              "steps": [
+                "Sit on edge of chair, feet flat on floor",
+                "Imagine pelvis as clock, slowly draw circles",
+                "Do one set clockwise and counterclockwise"
+              ]
+            },
+            {
+              "name": "Hidden Foot Massage",
+              "description": "Use under-desk fascia ball to promote lower limb blood return",
+              "duration": "Anytime, 2-3 minutes each",
+              "steps": [
+                "Place small massage ball under desk",
+                "Remove shoes, roll ball with sole of foot",
+                "Focus on arch and heel areas"
+              ]
+            },
+            {
+              "name": "Side Waist Stretch by Water Cooler",
+              "description": "Natural standing position, relieves waist tension",
+              "duration": "Hold 15-30 seconds each side",
+              "steps": [
+                "Stand by water cooler, feet shoulder-width apart",
+                "One hand on waist, other arm stretch up",
+                "Bend body to one side, feel side waist stretch"
+              ]
+            }
+          ]
+        },
+        "nutrition": {
+          "title": "Workplace Nutrition Management",
+          "plan": [
+            {
+              "time": "Breakfast (7:00-8:00)",
+              "foods": "Oatmeal + nuts + banana",
+              "benefits": "Provides sustained energy, stabilizes blood sugar"
+            },
+            {
+              "time": "Morning Tea (10:00)",
+              "foods": "Red date tea or rose tea",
+              "benefits": "Warms uterus, relieves cramps"
+            },
+            {
+              "time": "Lunch (12:00-13:00)",
+              "foods": "Lean meat + dark green vegetables + brown rice",
+              "benefits": "Iron and fiber supplement, prevents anemia"
+            },
+            {
+              "time": "Afternoon Tea (15:00)",
+              "foods": "Dark chocolate + warm milk",
+              "benefits": "Relieves mood swings, supplements magnesium"
+            }
+          ],
+          "avoidFoods": {
+            "title": "Foods to Avoid",
+            "coldDrinks": {
+              "category": "Cold drinks:",
+              "items": "Iced coffee, cold drinks, ice water"
+            },
+            "highSaltSnacks": {
+              "category": "High-salt snacks:",
+              "items": "Chips, pickled foods"
+            },
+            "excessiveCaffeine": {
+              "category": "Excessive caffeine:",
+              "items": "Strong coffee, energy drinks"
+            }
+          }
+        },
+        "communication": {
+          "title": "Communication Template Assistant",
+          "description": "Effective communication is key to getting support and resources. When pain severely affects work, a professional and concise sick leave email is crucial.",
+          "leaveRequest": {
+            "title": "Menstrual Pain Leave Email Template",
+            "subtitle": "Chinese & English",
+            "chinese": {
+              "subject": "请假申请 - [你的名字] - [日期]",
+              "greeting": "尊敬的[上级姓名]，",
+              "salutation": "您好。",
+              "body": "由于今晨出现严重的生理期不适（痛经），导致我难以集中精力高效完成工作，身体状况也不允许通勤。为确保工作质量并尽快恢复，我希望能申请今天在家休息/远程办公一天。\n\n我已经将今日的重点工作[简要说明，例如：整理完毕并通过邮件发送给XX] / [或：安排妥当]，并将随时通过电话和邮件保持联系，以应对任何紧急事宜。\n\n给您带来不便，深表歉意。感谢您的理解与支持。",
+              "closing": "祝好，",
+              "signature": "[你的名字]\n[你的职位]\n[日期]"
+            },
+            "english": {
+              "subject": "Sick Leave Request - [Your Name] - [Date]",
+              "greeting": "Dear [Manager's Name],",
+              "salutation": "Good morning.",
+              "body": "I am writing to request a sick leave for today, [Date], due to severe menstrual pain (dysmenorrhea) that began this morning. The discomfort is making it difficult for me to concentrate and perform my duties effectively, and I do not feel well enough to commute.\n\nTo ensure my work responsibilities are covered, I would like to request to rest at home / work remotely for the day. I have already [briefly explain arrangements, e.g., \"completed and sent the X report to [Colleague's Name]\"] and will remain available by phone and email for any urgent matters.\n\nI apologize for any inconvenience this may cause and appreciate your understanding and support.",
+              "closing": "Best regards,",
+              "signature": "[Your Name]\n[Your Title]\n[Date]"
+            }
+          },
+          "templates": [
+            {
+              "scenario": "Communicating with Partner",
+              "icon": "💕",
+              "templates": [
+                {
+                  "situation": "Notification",
+                  "tone": "Intimate",
+                  "template": "\"Honey, I'm not feeling well today and might need more rest. If I seem uncomfortable, please don't worry.\"",
+                  "copyText": "Copy Text"
+                },
+                {
+                  "situation": "Seeking Understanding",
+                  "tone": "Intimate",
+                  "template": "\"I'm experiencing some pain and my emotions might fluctuate. Can you understand and give me some time and space? I'll recover soon.\"",
+                  "copyText": "Copy Text"
+                }
+              ]
+            },
+            {
+              "scenario": "Communicating with Friends",
+              "icon": "👭",
+              "templates": [
+                {
+                  "situation": "Rescheduling Date",
+                  "tone": "Casual",
+                  "template": "\"Sorry, I'm not feeling well today and might not be at my best. Can we reschedule? I'll make it up to you!\"",
+                  "copyText": "Copy Text"
+                },
+                {
+                  "situation": "Party Participation",
+                  "tone": "Casual",
+                  "template": "\"I might come to the party but may need to leave early. If I look tired, please understand.\"",
+                  "copyText": "Copy Text"
+                }
+              ]
+            },
+            {
+              "scenario": "Communicating with Colleagues",
+              "icon": "👔",
+              "templates": [
+                {
+                  "situation": "Leave Request",
+                  "tone": "Formal",
+                  "template": "\"Hello, I'm not feeling well today and may need to take half a day off to address health issues. I'll handle other matters as soon as possible.\"",
+                  "copyText": "Copy Text"
+                },
+                {
+                  "situation": "Work Adjustment",
+                  "tone": "Formal",
+                  "template": "\"Sorry, I'm feeling unwell today and my work efficiency might be affected. Please prioritize urgent matters, and I'll complete other tasks as soon as possible.\"",
+                  "copyText": "Copy Text"
+                }
+              ]
+            }
+          ],
+          "copyToUse": "Copy to use"
+        },
+        "acupressure": {
+          "title": "Office Acupressure Points",
+          "description": "Simple acupressure techniques that can be done discreetly in the office to quickly relieve pain and discomfort.",
+          "points": [
+            {
+              "name": "Hegu Point",
+              "location": "Tiger mouth area, between thumb and index finger",
+              "benefits": "Soothes liver qi, promotes blood circulation, relieves general pain",
+              "technique": "Press with thumb pad, moderate pressure, 30 seconds each time",
+              "officeUse": "Can be done discreetly during meetings without drawing attention"
+            },
+            {
+              "name": "Sanyinjiao Point",
+              "location": "Inner side of lower leg, three fingers above ankle",
+              "benefits": "Regulates qi and blood, specifically relieves gynecological pain",
+              "technique": "Press with thumb, coordinate with deep breathing, 1-2 minutes each time",
+              "officeUse": "Can be done under desk, better effect when shoes are removed"
+            }
+          ],
+          "scientificBasis": {
+            "title": "Scientific Basis",
+            "description": "Acupressure works by stimulating specific nerve points, promoting endorphin release, which are the body's natural painkillers. Modern research shows that appropriate acupoint stimulation can regulate nerve conduction and relieve pain perception."
+          },
+          "locationLabel": "Location:",
+          "benefitsLabel": "Benefits:",
+          "techniqueLabel": "Technique:",
+          "officeApplicationLabel": "Office Application:"
+        },
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially when using medications or making judgments about severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       },
       "commute": {
         "title": "Commuting Scenarios",

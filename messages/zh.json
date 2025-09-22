@@ -3475,7 +3475,225 @@
           "会议应急包",
           "办公椅拉伸",
           "职场饮食管理"
-        ]
+        ],
+        "emergencyKit": {
+          "title": "会议应急包",
+          "categories": {
+            "core": "核心装备",
+            "painRelief": "疼痛缓解",
+            "imageManagement": "形象管理"
+          },
+          "coreItems": [
+            "可粘贴暖宝宝（ThermaCare隐形贴片）",
+            "迷你电热护腰（USB充电款）",
+            "姜茶冲剂条（无糖配方）",
+            "应急能量胶（含镁+维生素B6）"
+          ],
+          "painReliefItems": [
+            "布洛芬/对乙酰氨基酚",
+            "薄荷膏（太阳穴按摩用）",
+            "简易按摩工具"
+          ],
+          "imageManagementItems": [
+            "镜子、唇膏、吸油纸",
+            "干发喷雾、除臭剂",
+            "应急化妆品"
+          ],
+          "discreteUsageGuide": "隐蔽使用指南",
+          "usageTips": [
+            "热敷贴启动借口：\"正在用暖宝宝缓解肩颈酸痛\"",
+            "突发疼痛离场话术：\"需要紧急处理客户邮件\""
+          ]
+        },
+        "stretching": {
+          "title": "办公椅拉伸系统",
+          "exercises": [
+            {
+              "name": "座椅骨盆时钟运动",
+              "description": "缓解骶髂关节压力，改善下背部血液循环",
+              "duration": "每次30秒，重复3-5次",
+              "steps": [
+                "坐在椅子边缘，双脚平放地面",
+                "想象骨盆是时钟，缓慢画圆",
+                "顺时针和逆时针各做一组"
+              ]
+            },
+            {
+              "name": "隐藏式足底按摩",
+              "description": "利用桌下筋膜球，促进下肢血液回流",
+              "duration": "随时进行，每次2-3分钟",
+              "steps": [
+                "在桌下放置小型按摩球",
+                "脱掉鞋子，用脚底滚动按摩球",
+                "重点按压足弓和脚跟部位"
+              ]
+            },
+            {
+              "name": "饮水机旁侧腰拉伸",
+              "description": "自然站立姿势，缓解腰部紧张",
+              "duration": "每侧保持15-30秒",
+              "steps": [
+                "站在饮水机旁，双脚与肩同宽",
+                "一手扶腰，另一手向上伸展",
+                "身体向一侧弯曲，感受侧腰拉伸"
+              ]
+            }
+          ]
+        },
+        "nutrition": {
+          "title": "职场饮食管理",
+          "plan": [
+            {
+              "time": "早餐 (7:00-8:00)",
+              "foods": "燕麦粥+坚果+香蕉",
+              "benefits": "提供持续能量，稳定血糖"
+            },
+            {
+              "time": "上午茶 (10:00)",
+              "foods": "红枣茶或玫瑰花茶",
+              "benefits": "温暖子宫，缓解痉挛"
+            },
+            {
+              "time": "午餐 (12:00-13:00)",
+              "foods": "瘦肉+深绿色蔬菜+糙米",
+              "benefits": "补铁补纤维，预防贫血"
+            },
+            {
+              "time": "下午茶 (15:00)",
+              "foods": "黑巧克力+温牛奶",
+              "benefits": "缓解情绪波动，补充镁元素"
+            }
+          ],
+          "avoidFoods": {
+            "title": "避免食物清单",
+            "coldDrinks": {
+              "category": "冰饮类：",
+              "items": "冰咖啡、冷饮、冰水"
+            },
+            "highSaltSnacks": {
+              "category": "高盐零食：",
+              "items": "薯片、腌制食品"
+            },
+            "excessiveCaffeine": {
+              "category": "过量咖啡因：",
+              "items": "浓咖啡、能量饮料"
+            }
+          }
+        },
+        "communication": {
+          "title": "沟通模板助手",
+          "description": "有效的沟通是获取支持和资源的关键一步。当疼痛严重影响工作时，一封专业、简洁的请假邮件至关重要。",
+          "leaveRequest": {
+            "title": "痛经请假邮件模板",
+            "subtitle": "中英双语",
+            "chinese": {
+              "subject": "请假申请 - [你的名字] - [日期]",
+              "greeting": "尊敬的[上级姓名]，",
+              "salutation": "您好。",
+              "body": "由于今晨出现严重的生理期不适（痛经），导致我难以集中精力高效完成工作，身体状况也不允许通勤。为确保工作质量并尽快恢复，我希望能申请今天在家休息/远程办公一天。\n\n我已经将今日的重点工作[简要说明，例如：整理完毕并通过邮件发送给XX] / [或：安排妥当]，并将随时通过电话和邮件保持联系，以应对任何紧急事宜。\n\n给您带来不便，深表歉意。感谢您的理解与支持。",
+              "closing": "祝好，",
+              "signature": "[你的名字]\n[你的职位]\n[日期]"
+            },
+            "english": {
+              "subject": "Sick Leave Request - [Your Name] - [Date]",
+              "greeting": "Dear [Manager's Name],",
+              "salutation": "Good morning.",
+              "body": "I am writing to request a sick leave for today, [Date], due to severe menstrual pain (dysmenorrhea) that began this morning. The discomfort is making it difficult for me to concentrate and perform my duties effectively, and I do not feel well enough to commute.\n\nTo ensure my work responsibilities are covered, I would like to request to rest at home / work remotely for the day. I have already [briefly explain arrangements, e.g., \"completed and sent the X report to [Colleague's Name]\"] and will remain available by phone and email for any urgent matters.\n\nI apologize for any inconvenience this may cause and appreciate your understanding and support.",
+              "closing": "Best regards,",
+              "signature": "[Your Name]\n[Your Title]\n[Date]"
+            }
+          },
+          "templates": [
+            {
+              "scenario": "与伴侣沟通",
+              "icon": "💕",
+              "templates": [
+                {
+                  "situation": "通知告知",
+                  "tone": "亲密",
+                  "template": "\"亲爱的，我今天身体不太舒服，可能需要多休息一下。如果我看起来有点不舒服，请不要担心。\"",
+                  "copyText": "复制文本"
+                },
+                {
+                  "situation": "寻求理解",
+                  "tone": "亲密",
+                  "template": "\"我现在有些疼痛，可能情绪会有些波动。你能理解并给我一些时间和空间吗？我会尽快恢复的。\"",
+                  "copyText": "复制文本"
+                }
+              ]
+            },
+            {
+              "scenario": "与朋友沟通",
+              "icon": "👭",
+              "templates": [
+                {
+                  "situation": "约会改期",
+                  "tone": "随意",
+                  "template": "\"不好意思，我今天身体有点不太舒服，可能没法保持最佳状态。我们能改到下次吗？我会补偿你的！\"",
+                  "copyText": "复制文本"
+                },
+                {
+                  "situation": "聚会参与",
+                  "tone": "随意",
+                  "template": "\"我可能会来聚会，但可能需要早点离开。如果我看起来有点累，你们理解就好。\"",
+                  "copyText": "复制文本"
+                }
+              ]
+            },
+            {
+              "scenario": "与同事沟通",
+              "icon": "👔",
+              "templates": [
+                {
+                  "situation": "请假申请",
+                  "tone": "正式",
+                  "template": "\"您好，我今天身体不太舒服，可能需要请半天假去处理身体问题。我会尽快处理完其他事务的。\"",
+                  "copyText": "复制文本"
+                },
+                {
+                  "situation": "工作调整",
+                  "tone": "正式",
+                  "template": "\"不好意思，我今天身体有些不适，可能工作效率会有所影响。如果有急事请优先安排，其他事务我会尽快完成。\"",
+                  "copyText": "复制文本"
+                }
+              ]
+            }
+          ],
+          "copyToUse": "可复制使用"
+        },
+        "acupressure": {
+          "title": "办公室穴位按压",
+          "description": "简单易学的穴位按压技巧，可以在办公室隐蔽进行，快速缓解疼痛不适。",
+          "points": [
+            {
+              "name": "合谷穴",
+              "location": "虎口处，拇指和食指之间",
+              "benefits": "疏肝理气、活血化瘀，缓解全身疼痛",
+              "technique": "用拇指指腹按压，力度适中，每次30秒",
+              "officeUse": "可在开会时隐蔽进行，不引人注意"
+            },
+            {
+              "name": "三阴交穴",
+              "location": "小腿内侧，踝关节上三寸",
+              "benefits": "调理气血，专门缓解妇科疼痛",
+              "technique": "用拇指按压，配合深呼吸，每次1-2分钟",
+              "officeUse": "可在桌下进行，脱掉鞋子按压效果更好"
+            }
+          ],
+          "scientificBasis": {
+            "title": "科学依据",
+            "description": "穴位按压通过刺激特定神经点，促进内啡肽释放，这是人体天然的止痛物质。现代研究表明，适当的穴位刺激可以调节神经传导，缓解疼痛感知。"
+          },
+          "locationLabel": "位置：",
+          "benefitsLabel": "功效：",
+          "techniqueLabel": "按压方法：",
+          "officeApplicationLabel": "办公室应用："
+        },
+        "disclaimer": {
+          "title": "免责声明",
+          "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
+        },
+        "backToOverview": "返回场景解决方案总览"
       },
       "commute": {
         "title": "通勤场景",

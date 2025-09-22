@@ -42,6 +42,8 @@ const notoSansSC = localFont({
 });
 import { WebVitalsReporter } from '@/components/WebVitalsReporter';
 import PerformanceMonitor from '@/components/PerformanceMonitor';
+import HydrationFix from '@/components/HydrationFix';
+import HydrationErrorBoundary from '@/components/HydrationErrorBoundary';
 
 // 🚀 Core Web Vitals 优化的根布局
 export const metadata: Metadata = {
@@ -203,7 +205,12 @@ export default function RootLayout({
         }} />
       </head>
       <body className={notoSansSC.className}>
-        {children}
+        {/* 🔧 Hydration修复 - 解决浏览器扩展导致的hydration不匹配 */}
+        <HydrationFix />
+        
+        <HydrationErrorBoundary>
+          {children}
+        </HydrationErrorBoundary>
         
         {/* 🚀 SEO优化 - Core Web Vitals监控 */}
         <WebVitalsReporter />

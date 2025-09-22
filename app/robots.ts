@@ -65,7 +65,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
       }
     ],
-    sitemap: 'https://www.periodhub.health/sitemap.xml',
-    host: 'https://www.periodhub.health'
+    sitemap: '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/sitemap.xml',
+    host: '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}'
   };
 }

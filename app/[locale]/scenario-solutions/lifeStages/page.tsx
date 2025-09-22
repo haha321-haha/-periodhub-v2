@@ -406,6 +406,21 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Medical Disclaimer */}
+      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg">
+        <div className="flex items-start">
+          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
+          <div>
+            <h3 className="font-semibold text-orange-800 mb-2">
+              {t('scenarios.lifeStages.disclaimer.title')}
+            </h3>
+            <p className="text-orange-700 text-sm leading-relaxed">
+              {t('scenarios.lifeStages.disclaimer.content')}
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Back to Overview */}
       <div className="text-center">
         <Link 
@@ -413,7 +428,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
           className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          {locale === 'zh' ? '返回场景解决方案总览' : 'Back to Scenario Solutions Overview'}
+          {t('scenarios.lifeStages.backToOverview')}
         </Link>
       </div>
     </div>

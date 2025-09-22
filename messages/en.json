@@ -2463,7 +2463,12 @@
           "Public Transport Solutions",
           "Driving Adjustments",
           "Emergency Response Plans"
-        ]
+        ],
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially when using medications or making judgments about severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       },
       "exercise": {
         "title": "Exercise/Outdoor Scenarios",
@@ -2472,7 +2477,12 @@
           "Period Hiking Guide",
           "Pool Hygiene Management",
           "Yoga Pose Library"
-        ]
+        ],
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially when using medications or making judgments about severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       },
       "sleep": {
         "title": "Sleep Scenarios",
@@ -2481,7 +2491,12 @@
           "Sleep Audio",
           "Scientific Sleep Positions",
           "Bedtime Nutrition"
-        ]
+        ],
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially when using medications or making judgments about severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       },
       "social": {
         "title": "Social Scenarios",
@@ -2490,7 +2505,12 @@
           "Date Emergency Strategies",
           "Party Food Choices",
           "Pain Concealment Techniques"
-        ]
+        ],
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially when using medications or making judgments about severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       },
       "lifeStages": {
         "title": "Special Life Stages",
@@ -2499,7 +2519,12 @@
           "Adolescence Programs",
           "Pre-pregnancy Programs",
           "Perimenopause Programs"
-        ]
+        ],
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially when using medications or making judgments about severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       }
     }
   },

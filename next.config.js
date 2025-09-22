@@ -82,6 +82,54 @@ const nextConfig = {
         destination: '/apple-touch-icon.png'
       },
       {
+        source: '/zh/favicon-32x32.png',
+        destination: '/favicon-32x32.png'
+      },
+      {
+        source: '/zh/favicon-16x16.png',
+        destination: '/favicon-16x16.png'
+      },
+      {
+        source: '/zh/favicon.ico',
+        destination: '/favicon.ico'
+      },
+      {
+        source: '/en/favicon-32x32.png',
+        destination: '/favicon-32x32.png'
+      },
+      {
+        source: '/en/favicon-16x16.png',
+        destination: '/favicon-16x16.png'
+      },
+      {
+        source: '/en/favicon.ico',
+        destination: '/favicon.ico'
+      },
+      {
+        source: '/zh/favicon.ico',
+        destination: '/favicon.ico'
+      },
+      {
+        source: '/en/favicon.ico',
+        destination: '/favicon.ico'
+      },
+      {
+        source: '/zh/favicon-16x16.png',
+        destination: '/favicon-16x16.png'
+      },
+      {
+        source: '/en/favicon-16x16.png',
+        destination: '/favicon-16x16.png'
+      },
+      {
+        source: '/zh/favicon-32x32.png',
+        destination: '/favicon-32x32.png'
+      },
+      {
+        source: '/en/favicon-32x32.png',
+        destination: '/favicon-32x32.png'
+      },
+      {
         source: '/fonts/:path*',
         destination: '/:path*'
       },

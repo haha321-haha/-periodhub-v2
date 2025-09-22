@@ -18,6 +18,8 @@ reading_time_zh: "22分钟"
 
 Facing menstrual pain challenges, modern women have unprecedented treatment options: from traditional medication to increasingly popular natural remedies. But how do you find the most suitable solution among numerous choices? This article, based on the latest medical research and clinical evidence, provides comprehensive comparative analysis and personalized selection guidance.
 
+> 💡 **Basic Preparation**: Before choosing treatment options, we recommend first understanding the basic medication knowledge in our [Complete Safe Medication Guide for Dysmenorrhea](/en/downloads/medication-guide), as well as the practical carrying tips in our [Complete Guide to Emergency Menstrual Pain Medication](/en/articles/menstrual-pain-emergency-medication-guide).
+
 ## Part I: Complete Analysis of Medication Treatment
 
 ### 1.1 Nonsteroidal Anti-Inflammatory Drugs (NSAIDs)
@@ -29,6 +31,8 @@ Facing menstrual pain challenges, modern women have unprecedented treatment opti
 
 **Mechanism of Action**:
 NSAIDs work by inhibiting cyclooxygenase (COX) activity, reducing prostaglandin synthesis, thereby relieving pain caused by uterine contractions. According to Cochrane systematic reviews, NSAIDs have an 80-85% effectiveness rate for primary dysmenorrhea.
+
+> 📋 **Detailed Guidance**: For specific usage methods, dosage calculations, and safety precautions for ibuprofen, naproxen, and other NSAIDs, please refer to the professional comparison tables in our [Complete Safe Medication Guide for Dysmenorrhea](/en/downloads/medication-guide). For carrying and emergency use scenarios, see our [Complete Guide to Emergency Menstrual Pain Medication](/en/articles/menstrual-pain-emergency-medication-guide).
 
 **Advantages**:
 - ✅ Fast onset (within 30-60 minutes)
@@ -292,6 +296,23 @@ Pain Assessment → Health Status Assessment → Personal Preference Considerati
 - **Build support system**: Family understanding and medical team support
 
 **Final Recommendation**: Menstrual pain management is a personalized process requiring patience and professional guidance. Whether choosing medication or natural remedies, decisions should be based on scientific evidence, combined with personal circumstances, and developed under healthcare professional guidance for the most suitable treatment plan.
+
+## Extended Reading
+
+### 📚 In-Depth Learning Resources
+
+- **[Complete Safe Medication Guide for Dysmenorrhea](/en/downloads/medication-guide)**  
+  Professional NSAIDs usage guidance, dosage calculators, and safe medication precautions - essential reference for medication treatment
+
+- **[Complete Guide to Emergency Menstrual Pain Medication](/en/articles/menstrual-pain-emergency-medication-guide)**  
+  Practical emergency medication selection, carrying compliance requirements, and emergency medication decision processes to ensure timely menstrual pain relief in any situation
+
+### 🔄 Treatment Plan Optimization Recommendations
+
+We recommend combining this comparative analysis with the above two guides:
+1. **Step One**: Read the basic medication guide to understand fundamental medication treatment knowledge
+2. **Step Two**: Learn emergency carrying techniques for daily preparation
+3. **Step Three**: Based on this article's comparative analysis, develop a personalized treatment plan
 
 ## References
 

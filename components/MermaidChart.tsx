@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import mermaid from 'mermaid';
 
 interface MermaidChartProps {
@@ -19,9 +19,27 @@ export default function MermaidChart({
   id 
 }: MermaidChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
-  const chartId = id || `mermaid-${Math.random().toString(36).substr(2, 9)}`;
+  const [isClient, setIsClient] = useState(false);
+  
+  // 使用稳定的ID生成策略，避免水合错误
+  const chartId = useMemo(() => {
+    if (id) return id;
+    // 基于内容生成稳定的ID，而不是随机ID
+    const hash = chart.split('').reduce((a, b) => {
+      a = ((a << 5) - a) + b.charCodeAt(0);
+      return a & a;
+    }, 0);
+    return `mermaid-${Math.abs(hash).toString(36)}`;
+  }, [id, chart]);
 
   useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    // 只在客户端渲染图表
+    if (!isClient) return;
+
     // Initialize Mermaid with configuration
     mermaid.initialize({
       startOnLoad: false,
@@ -101,7 +119,49 @@ export default function MermaidChart({
     // 延迟渲染以确保DOM已准备好
     const timer = setTimeout(renderChart, 100);
     return () => clearTimeout(timer);
-  }, [chart, chartId, description]);
+  }, [isClient, chart, chartId, description]);
+
+  // 服务端渲染时显示占位符，客户端渲染时显示图表
+  if (!isClient) {
+    return (
+      <div className={`mermaid-container ${className}`} suppressHydrationWarning>
+        {title && (
+          <h3 
+            id={`${chartId}-title`}
+            className="text-lg font-semibold text-gray-800 mb-2 text-center"
+          >
+            {title}
+          </h3>
+        )}
+        
+        {description && (
+          <p 
+            id={`${chartId}-desc`}
+            className="text-sm text-gray-600 mb-4 text-center max-w-2xl mx-auto"
+          >
+            {description}
+          </p>
+        )}
+        
+        <div 
+          className="mermaid-chart overflow-x-auto"
+          style={{
+            minHeight: '200px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <div className="flex items-center justify-center p-8 bg-gray-50 rounded-lg">
+            <div className="text-center">
+              <div className="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+              <p className="text-gray-600 text-sm">正在加载图表...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={`mermaid-container ${className}`}>

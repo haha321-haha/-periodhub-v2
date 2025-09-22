@@ -18,12 +18,16 @@ reading_time_zh: "18分钟"
 
 Menstrual pain is a common issue many women face during their periods, sometimes severely affecting daily life and work. To help you quickly relieve pain at critical moments, this guide will detail over-the-counter medication options, carrying compliance guidelines, emergency medication decision processes, and safe usage precautions. Whether you're at school, workplace, or traveling, this guide will help you prepare adequately.
 
+> 💡 **Basic Preparation**: If you're new to menstrual pain medication, we recommend first reading our [Complete Safe Medication Guide for Dysmenorrhea](/en/downloads/medication-guide) to understand basic medication knowledge and safety precautions.
+
 ## 1. Over-the-Counter Medication Selection Guide
 
 ### 1.1 Ibuprofen-Based Medications
 
 **Mechanism of Action**:
 Ibuprofen is a nonsteroidal anti-inflammatory drug (NSAID) that reduces pain and inflammation by inhibiting prostaglandin synthesis. According to Mayo Clinic research, ibuprofen is effective for 92% of menstrual pain patients.
+
+> 📚 **Learn More**: For detailed usage methods, dosage comparisons, and safety guidelines for ibuprofen, please refer to the professional comparison tables in our [Complete Safe Medication Guide for Dysmenorrhea](/en/downloads/medication-guide).
 
 **Suitable Population**:
 - Moderate to severe menstrual pain
@@ -352,6 +356,18 @@ graph TD
 2. Record medication details
 3. Contact medical facility
 4. Preserve medication packaging
+
+## Related Reading Recommendations
+
+After mastering the basics of emergency medication carrying, you may also want to learn about:
+
+### 🔗 In-Depth Learning Resources
+
+- **[Complete Safe Medication Guide for Dysmenorrhea](/en/downloads/medication-guide)**  
+  Comprehensive understanding of NSAIDs mechanisms, detailed medication comparison tables, and professional medication safety guidance
+
+- **[Medication vs Natural Remedies: Which Menstrual Pain Relief Method is Right for You?](/en/articles/medication-vs-natural-remedies-menstrual-pain)**  
+  Complete comparison of advantages and disadvantages between medication treatment and natural therapies, helping you find the most suitable personalized treatment plan
 
 ## Conclusion
 

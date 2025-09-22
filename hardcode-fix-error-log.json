@@ -1,0 +1,45 @@
+{
+  "timestamp": "2025-09-22T12:26:49.176Z",
+  "summary": {
+    "totalErrors": 5,
+    "totalWarnings": 0
+  },
+  "errors": [
+    {
+      "timestamp": "2025-09-22T12:26:48.521Z",
+      "context": "文件修复失败",
+      "message": "语法检查失败: Command failed: npx tsc --noEmit --skipLibCheck 修复建议文档/IndexNow集成配置.js.js\n",
+      "filePath": "修复建议文档/IndexNow集成配置.js.js",
+      "stack": "Error: 语法检查失败: Command failed: npx tsc --noEmit --skipLibCheck 修复建议文档/IndexNow集成配置.js.js\n\n    at SmartBatchFixer.fixFile (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:473:23)\n    at async /Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:564:44\n    at async Promise.all (index 1)\n    at async SmartBatchFixer.batchFix (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:556:34)\n    at async OptimizedHardcodeFixer.runSmartFix (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:788:28)\n    at async main (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:926:35)"
+    },
+    {
+      "timestamp": "2025-09-22T12:26:48.653Z",
+      "context": "文件修复失败",
+      "message": "语法检查失败: Command failed: npx tsc --noEmit --skipLibCheck bing-url-submission.js\n",
+      "filePath": "bing-url-submission.js",
+      "stack": "Error: 语法检查失败: Command failed: npx tsc --noEmit --skipLibCheck bing-url-submission.js\n\n    at SmartBatchFixer.fixFile (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:473:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async /Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:564:44\n    at async Promise.all (index 4)\n    at async SmartBatchFixer.batchFix (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:556:34)\n    at async OptimizedHardcodeFixer.runSmartFix (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:788:28)\n    at async main (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:926:35)"
+    },
+    {
+      "timestamp": "2025-09-22T12:26:48.762Z",
+      "context": "文件修复失败",
+      "message": "语法检查失败: Command failed: npx tsc --noEmit --skipLibCheck fix-seo-issues.js\n",
+      "filePath": "fix-seo-issues.js",
+      "stack": "Error: 语法检查失败: Command failed: npx tsc --noEmit --skipLibCheck fix-seo-issues.js\n\n    at SmartBatchFixer.fixFile (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:473:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async /Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:564:44\n    at async Promise.all (index 2)\n    at async SmartBatchFixer.batchFix (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:556:34)\n    at async OptimizedHardcodeFixer.runSmartFix (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:788:28)\n    at async main (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:926:35)"
+    },
+    {
+      "timestamp": "2025-09-22T12:26:48.775Z",
+      "context": "文件修复失败",
+      "message": "语法检查失败: Command failed: npx tsc --noEmit --skipLibCheck meta-descriptions-search-console-submission.js\n",
+      "filePath": "meta-descriptions-search-console-submission.js",
+      "stack": "Error: 语法检查失败: Command failed: npx tsc --noEmit --skipLibCheck meta-descriptions-search-console-submission.js\n\n    at SmartBatchFixer.fixFile (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:473:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async /Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:564:44\n    at async Promise.all (index 0)\n    at async SmartBatchFixer.batchFix (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:556:34)\n    at async OptimizedHardcodeFixer.runSmartFix (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:788:28)\n    at async main (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:926:35)"
+    },
+    {
+      "timestamp": "2025-09-22T12:26:49.176Z",
+      "context": "文件修复失败",
+      "message": "语法检查失败: Command failed: npx tsc --noEmit --skipLibCheck app/[locale]/page.tsx\n",
+      "filePath": "app/[locale]/page.tsx",
+      "stack": "Error: 语法检查失败: Command failed: npx tsc --noEmit --skipLibCheck app/[locale]/page.tsx\n\n    at SmartBatchFixer.fixFile (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:473:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async /Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:564:44\n    at async Promise.all (index 3)\n    at async SmartBatchFixer.batchFix (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:556:34)\n    at async OptimizedHardcodeFixer.runSmartFix (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:788:28)\n    at async main (/Users/duting/Downloads/money💰/--main/scripts/optimized-quick-fix.js:926:35)"
+    }
+  ],
+  "warnings": []
+}

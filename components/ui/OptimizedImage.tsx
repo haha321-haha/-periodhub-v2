@@ -101,7 +101,7 @@ export default function OptimizedImage({
           height: 'auto',
           objectFit: 'cover',
         }}
-        unoptimized={false}
+        unoptimized={src.includes('/images/tools/')}
         onError={() => {
           console.error(`Failed to load image: ${src}`);
           setImageError(true);

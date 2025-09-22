@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       locale: locale === 'zh' ? 'zh_CN' : 'en_US',
       siteName: 'PeriodHub',
-      url: `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/pain-tracker`,
+      url: `https://www.periodhub.health/${locale}/pain-tracker`,
     },
     
     twitter: {
@@ -50,11 +50,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
 
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/pain-tracker`,
+      canonical: `https://www.periodhub.health/${locale}/pain-tracker`,
       languages: {
-        'zh-CN': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/zh/pain-tracker',
-        'en-US': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/en/pain-tracker',
-        'x-default': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/en/pain-tracker',
+        'zh-CN': 'https://www.periodhub.health/zh/pain-tracker',
+        'en-US': 'https://www.periodhub.health/en/pain-tracker',
+        'x-default': 'https://www.periodhub.health/en/pain-tracker',
       },
     },
 

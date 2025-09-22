@@ -36,6 +36,8 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    // 允许本地图片优化
+    unoptimized: false,
     // 临时禁用有问题图片的优化
     loader: 'default',
   },

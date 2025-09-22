@@ -20,11 +20,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
       'menstrual health articles', 'period pain knowledge', 'menstrual management', 'women health', 'medical guidelines', 'health knowledge base'
     ],
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/articles`,
+      canonical: `https://www.periodhub.health/${locale}/articles`,
       languages: {
-        'zh-CN': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/zh/articles',
-        'en-US': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/en/articles',
-        'x-default': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/zh/articles',
+        'zh-CN': 'https://www.periodhub.health/zh/articles',
+        'en-US': 'https://www.periodhub.health/en/articles',
+        'x-default': 'https://www.periodhub.health/zh/articles',
       },
     },
     robots: {
@@ -54,7 +54,7 @@ export default async function ArticlesPage({
     "description": locale === 'zh' 
       ? "PeriodHub专业文章：基于医学指南的经期健康知识库"
       : "PeriodHub Professional Articles: Medical guideline-based menstrual health knowledge base",
-    "url": `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/articles`,
+    "url": `https://www.periodhub.health/${locale}/articles`,
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
@@ -62,13 +62,13 @@ export default async function ArticlesPage({
           "@type": "ListItem",
           "position": 1,
           "name": locale === 'zh' ? "首页" : "Home",
-          "item": `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}`
+          "item": `https://www.periodhub.health/${locale}`
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": locale === 'zh' ? "专业文章" : "Professional Articles",
-          "item": `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/articles`
+          "item": `https://www.periodhub.health/${locale}/articles`
         }
       ]
     }

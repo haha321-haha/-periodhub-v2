@@ -410,3 +410,4 @@ export function getPreviewContentById(resourceId: string): PreviewContent | unde
 export function getAllPreviewableResourceIds(): string[] {
   return Object.keys(previewContentMap);
 }
+

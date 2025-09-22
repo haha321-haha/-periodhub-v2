@@ -119,10 +119,23 @@ const nextConfig = {
         destination: '/en/interactive-tools/symptom-assessment',
         permanent: true
       },
+      // 🎯 智能文章页面重定向 - 基于用户语言偏好
       {
         source: '/articles',
-        destination: '/en/downloads',
-        permanent: true
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: '.*zh.*',
+          },
+        ],
+        destination: '/zh/articles',
+        permanent: false
+      },
+      {
+        source: '/articles',
+        destination: '/en/articles', // 默认英文版本
+        permanent: false
       },
       // 🎯 修复teen-health重定向问题 - 避免循环重定向
       {

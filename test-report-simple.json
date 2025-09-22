@@ -1,44 +1,44 @@
 {
   "summary": {
     "total": 5,
-    "passed": 2,
-    "failed": 3,
-    "passRate": 40,
-    "duration": 32220
+    "passed": 3,
+    "failed": 2,
+    "passRate": 60,
+    "duration": 41667
   },
   "details": [
     {
       "name": "TypeScript检查",
       "status": "PASS",
       "details": "命令执行成功",
-      "timestamp": "2025-09-16T10:49:41.555Z"
+      "timestamp": "2025-09-22T09:51:28.136Z"
     },
     {
       "name": "Next.js构建",
       "status": "PASS",
       "details": "命令执行成功",
-      "timestamp": "2025-09-16T10:50:11.361Z"
+      "timestamp": "2025-09-22T09:52:01.209Z"
     },
     {
       "name": "主页",
       "status": "FAIL",
-      "details": "HTTP状态码: 502",
-      "timestamp": "2025-09-16T10:50:11.403Z"
+      "details": "HTTP状态码: 307",
+      "timestamp": "2025-09-22T09:52:01.259Z"
     },
     {
       "name": "英文版",
-      "status": "FAIL",
-      "details": "HTTP状态码: 502",
-      "timestamp": "2025-09-16T10:50:11.418Z"
+      "status": "PASS",
+      "details": "响应时间: 5102ms",
+      "timestamp": "2025-09-22T09:52:06.375Z"
     },
     {
       "name": "健康指南",
       "status": "FAIL",
-      "details": "HTTP状态码: 502",
-      "timestamp": "2025-09-16T10:50:11.432Z"
+      "details": "HTTP状态码: 307",
+      "timestamp": "2025-09-22T09:52:06.403Z"
     }
   ],
-  "timestamp": "2025-09-16T10:49:39.212Z",
+  "timestamp": "2025-09-22T09:51:24.730Z",
   "environment": {
     "nodeVersion": "v24.4.1",
     "platform": "darwin",

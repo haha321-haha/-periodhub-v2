@@ -276,10 +276,11 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                   {locale === 'zh' ? '相关PDF资源下载' : 'Related PDF Resources'}
                 </h4>
                 <div className="grid md:grid-cols-2 gap-4">
-                  <Link
+                  <a
                     href={`/downloads/campus-emergency-checklist${locale === 'en' ? '-en' : ''}.html`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
                     <div>
@@ -290,12 +291,13 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                         {locale === 'zh' ? '校园经期应急处理指南' : 'Campus menstrual emergency guide'}
                       </div>
                     </div>
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href={`/downloads/parent-communication-guide${locale === 'en' ? '-en' : ''}.html`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
                     <div>
@@ -306,12 +308,13 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                         {locale === 'zh' ? '帮助家长与青春期女儿沟通' : 'Help parents communicate with teenage daughters'}
                       </div>
                     </div>
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href={`/downloads/teacher-health-manual${locale === 'en' ? '-en' : ''}.html`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
                     <div>
@@ -322,12 +325,13 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                         {locale === 'zh' ? '教师和学校卫生人员指南' : 'Guide for teachers and school health personnel'}
                       </div>
                     </div>
-                  </Link>
+                  </a>
 
-                  <Link
+                  <a
                     href={`/downloads/teacher-collaboration-handbook${locale === 'en' ? '-en' : ''}.html`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
                     <div>
@@ -338,7 +342,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                         {locale === 'zh' ? '理解与支持经期不适的青少年学生' : 'Understanding and supporting adolescent students with menstrual discomfort'}
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 </div>
               </div>
             )}

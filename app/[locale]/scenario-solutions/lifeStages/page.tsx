@@ -277,8 +277,9 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                 </h4>
                 <div className="grid md:grid-cols-2 gap-4">
                   <Link
-                    href={`/${locale}/downloads/preview/campus-emergency-checklist`}
+                    href={`/downloads/campus-emergency-checklist${locale === 'en' ? '-en' : ''}.html`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
+                    target="_blank"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
                     <div>
@@ -292,8 +293,9 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                   </Link>
 
                   <Link
-                    href={`/${locale}/downloads/preview/parent-communication-guide`}
+                    href={`/downloads/parent-communication-guide${locale === 'en' ? '-en' : ''}.html`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
+                    target="_blank"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
                     <div>
@@ -307,8 +309,9 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                   </Link>
 
                   <Link
-                    href={`/${locale}/downloads/preview/teacher-health-manual`}
+                    href={`/downloads/teacher-health-manual${locale === 'en' ? '-en' : ''}.html`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
+                    target="_blank"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
                     <div>
@@ -322,8 +325,9 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                   </Link>
 
                   <Link
-                    href={`/${locale}/downloads/preview/teacher-collaboration-handbook`}
+                    href={`/downloads/teacher-collaboration-handbook${locale === 'en' ? '-en' : ''}.html`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
+                    target="_blank"
                   >
                     <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
                     <div>

@@ -1,50 +1,97 @@
-/* 疼痛评估工具样式 - 基于souW1e2设计，转换为CSS Modules */
+/* 疼痛评估工具样式 - 清理版本，统一使用原生CSS */
 
 .container {
-  @apply bg-white rounded-2xl shadow-lg p-6 md:p-8 my-10 border border-gray-100;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 80rem;
+  border: 1px solid #e5e7eb;
   transition: all 0.3s ease;
+  animation: slideUp 0.6s ease-out;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 2rem;
+  }
 }
 
 .container:hover {
-  @apply shadow-xl;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .header {
-  @apply mb-6;
+  margin-bottom: 0.75rem;
 }
 
 .title {
-  @apply text-2xl font-bold text-gray-800 mb-4 flex items-center;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .icon {
-  @apply mr-3 text-blue-500;
+  margin-right: 0.5rem;
+  color: #3b82f6;
+  width: 1rem;
+  height: 1rem;
 }
 
 .description {
-  @apply text-gray-600 text-base leading-relaxed;
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 /* 滑块容器 */
 .sliderContainer {
-  @apply mb-8;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sliderLabels {
-  @apply flex justify-between text-sm text-gray-500 mb-2;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .sliderLabelMin {
-  @apply font-medium text-green-600;
+  font-weight: 500;
+  color: #059669;
 }
 
 .sliderLabelMax {
-  @apply font-medium text-red-600;
+  font-weight: 500;
+  color: #dc2626;
 }
 
 /* 滑块样式 */
 .slider {
-  @apply w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer mb-4;
+  width: 50%;
+  height: 0.5rem;
+  background-color: #e5e7eb;
+  border-radius: 0.5rem;
+  appearance: none;
+  cursor: pointer;
+  margin: 0 auto 0.75rem auto;
   background: linear-gradient(to right, 
     #10B981 0%, 
     #34D399 20%, 
@@ -53,59 +100,137 @@
     #EF4444 80%, 
     #DC2626 100%
   );
+  /* 移动端触摸优化 */
+  min-height: 44px;
+  padding: 20px 0;
+}
+
+/* 移动端滑块高度调整 */
+@media (max-width: 768px) {
+  .slider {
+    height: 0.75rem;
+    min-height: 48px;
+    padding: 24px 0;
+    width: 60%;
+  }
+  
+  .sliderLabels {
+    width: 60%;
+  }
+  
+  .sliderTicks {
+    width: 60%;
+  }
 }
 
 .slider::-webkit-slider-thumb {
-  @apply appearance-none w-6 h-6 bg-white border-2 border-blue-500 rounded-full cursor-pointer shadow-lg;
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: white;
+  border: 2px solid #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: all 0.2s ease;
+  /* 移动端触摸优化 */
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* 移动端滑块手柄优化 */
+@media (max-width: 768px) {
+  .slider::-webkit-slider-thumb {
+    width: 2rem;
+    height: 2rem;
+    min-width: 48px;
+    min-height: 48px;
+  }
 }
 
 .slider::-webkit-slider-thumb:hover {
-  @apply border-blue-600 shadow-xl;
+  border-color: #2563eb;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   transform: scale(1.1);
 }
 
 .slider::-moz-range-thumb {
-  @apply w-6 h-6 bg-white border-2 border-blue-500 rounded-full cursor-pointer shadow-lg;
-  border: 2px solid #3B82F6;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: white;
+  border: 2px solid #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: all 0.2s ease;
+  /* 移动端触摸优化 */
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* 移动端Firefox滑块手柄优化 */
+@media (max-width: 768px) {
+  .slider::-moz-range-thumb {
+    width: 2rem;
+    height: 2rem;
+    min-width: 48px;
+    min-height: 48px;
+  }
 }
 
 .slider::-moz-range-thumb:hover {
-  border-color: #2563EB;
+  border-color: #2563eb;
   transform: scale(1.1);
 }
 
 /* 滑块刻度 */
 .sliderTicks {
-  @apply flex justify-between px-1;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.25rem;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .tick {
-  @apply flex flex-col items-center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tickLabel {
-  @apply text-xs text-gray-400 mt-1;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-top: 0.25rem;
 }
 
 /* 当前疼痛等级显示 */
 .currentLevel {
-  @apply flex items-center justify-center mb-6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
 }
 
 .levelNumber {
-  @apply text-4xl font-bold mr-2;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-right: 0.5rem;
   transition: color 0.3s ease;
 }
 
 .levelText {
-  @apply text-lg text-gray-600;
+  font-size: 0.875rem;
+  color: #6b7280;
 }
 
 /* 建议容器 */
 .adviceContainer {
-  @apply bg-gray-50 rounded-xl p-6 border border-gray-200;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
   animation: fadeIn 0.5s ease-in-out;
 }
 
@@ -121,119 +246,149 @@
 }
 
 .adviceHeader {
-  @apply mb-4;
+  margin-bottom: 0.5rem;
 }
 
 .adviceTitle {
-  @apply text-xl font-semibold mb-2;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
   transition: color 0.3s ease;
 }
 
 .adviceContent {
-  @apply space-y-4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .adviceText {
-  @apply text-gray-700 leading-relaxed;
+  color: #374151;
+  line-height: 1.5;
+  font-size: 0.875rem;
 }
 
 /* 推荐建议 */
 .recommendations {
-  @apply mt-4;
+  margin-top: 1rem;
 }
 
 .recommendationsTitle {
-  @apply text-lg font-semibold text-gray-800 mb-3;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
 }
 
 .recommendationsList {
-  @apply space-y-2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .recommendationItem {
-  @apply flex items-start text-gray-700;
+  display: flex;
+  align-items: flex-start;
+  color: #374151;
 }
 
-.recommendationItem::before {
-  content: "•";
-  @apply text-blue-500 font-bold mr-3 mt-1;
+.recommendationIcon {
+  color: #3b82f6;
+  font-weight: 700;
+  margin-right: 0.75rem;
+  margin-top: 0.25rem;
 }
 
-/* 紧急情况警告 */
+.recommendationText {
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+/* 紧急警告 */
 .emergencyWarning {
-  @apply bg-red-50 border border-red-200 rounded-lg p-4 mt-4 flex items-start;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: flex-start;
 }
 
 .emergencyIcon {
-  @apply text-2xl mr-3 flex-shrink-0;
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
 }
 
 .emergencyText {
-  @apply flex-1;
+  flex: 1;
 }
 
-.emergencyText strong {
-  @apply text-red-800 font-semibold block mb-1;
+.emergencyTitle {
+  color: #991b1b;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
 }
 
-.emergencyText p {
-  @apply text-red-700 text-sm;
+.emergencyDescription {
+  color: #b91c1c;
+  font-size: 0.875rem;
 }
 
 /* 历史记录提示 */
 .historyHint {
-  @apply mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 0.5rem;
 }
 
 .historyText {
-  @apply text-blue-700 text-sm;
+  color: #1e40af;
+  font-size: 0.875rem;
+  margin: 0;
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .container {
-    @apply p-4 mx-2;
-  }
-  
-  .title {
-    @apply text-xl;
-  }
-  
-  .levelNumber {
-    @apply text-3xl;
-  }
-  
-  .adviceContainer {
-    @apply p-4;
-  }
-  
-  .slider {
-    @apply h-4;
-  }
-  
-  .slider::-webkit-slider-thumb {
-    @apply w-5 h-5;
-  }
+/* 按钮 */
+.button {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* 移动端触摸优化 */
+  min-height: 44px;
+  min-width: 44px;
 }
 
-/* 可访问性增强 */
-.slider:focus {
-  @apply outline-none ring-2 ring-blue-500 ring-opacity-50;
+.button:hover {
+  background-color: #1d4ed8;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.slider:focus::-webkit-slider-thumb {
-  @apply ring-2 ring-blue-500 ring-opacity-50;
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  gap: 1rem;
 }
 
 /* 动画效果 */
-.container {
-  animation: slideUp 0.6s ease-out;
-}
-
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -241,27 +396,29 @@
   }
 }
 
-/* 加载状态 */
-.loading {
-  @apply opacity-50 pointer-events-none;
+/* 禁用状态 */
+.container.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-.loading .slider {
-  @apply cursor-not-allowed;
+.slider:disabled {
+  cursor: not-allowed;
 }
 
 /* 高对比度模式支持 */
 @media (prefers-contrast: high) {
   .container {
-    @apply border-2 border-gray-800;
+    border: 2px solid #1f2937;
   }
   
   .slider {
-    @apply border border-gray-800;
+    border: 1px solid #1f2937;
   }
   
-  .adviceContainer {
-    @apply border-2 border-gray-600;
+  .slider::-webkit-slider-thumb,
+  .slider::-moz-range-thumb {
+    border: 2px solid #1f2937;
   }
 }
 
@@ -273,5 +430,46 @@
   .slider::-moz-range-thumb {
     animation: none;
     transition: none;
+  }
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    margin: 0.5rem auto;
+  }
+  
+  .title {
+    font-size: 1.125rem;
+  }
+  
+  .levelNumber {
+    font-size: 2.5rem;
+  }
+  
+  .adviceContainer {
+    padding: 1rem;
+  }
+  
+  .slider {
+    height: 0.75rem;
+  }
+  
+  .slider::-webkit-slider-thumb,
+  .slider::-moz-range-thumb {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .buttonGroup {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 1rem;
   }
 }

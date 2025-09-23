@@ -1,3 +1,4 @@
+import { URL_CONFIG } from '@/lib/url-config';
 /**
  * 内容安全策略 (CSP) 配置
  * 提供严格的安全策略配置
@@ -39,7 +40,7 @@ export const productionCSP: CSPConfig = {
       'data:', // Base64图片
       'blob:', // Blob URL
       'https:', // HTTPS图片
-      'https://www.periodhub.health', // 自己的域名
+      process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`, // 自己的域名
     ],
     
     // 字体策略：允许同源字体和Google Fonts
@@ -191,7 +192,7 @@ export function generateCSPHeader(config: CSPConfig): string {
  * 生成报告URI（用于CSP违规报告）
  */
 export function generateReportURI(): string {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`;
   return `${baseUrl}/api/csp-report`;
 }
 

@@ -2,7 +2,7 @@
 export const seoConfig = {
   // 网站基本信息
   siteName: 'PeriodHub',
-  siteUrl: '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}',
+  siteUrl: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
   siteDescription: '专业的女性月经健康管理平台，提供基于循证医学的痛经解决方案',
   
   // 关键词配置
@@ -48,8 +48,8 @@ export const seoConfig = {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: 'PeriodHub',
-      url: '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}',
-      logo: '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/logo.png',
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
+      logo: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/logo.png`,
       description: '专业的女性月经健康管理平台',
       contactPoint: {
         '@type': 'ContactPoint',
@@ -85,11 +85,11 @@ export const seoConfig = {
   openGraph: {
     type: 'website',
     locale: 'zh_CN',
-    url: '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}',
+    url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
     siteName: 'PeriodHub',
     images: [
       {
-        url: '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/og-image.jpg',
+        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: 'PeriodHub - 专业女性健康管理平台'
@@ -102,7 +102,7 @@ export const seoConfig = {
     card: 'summary_large_image',
     site: '@periodhub',
     creator: '@periodhub',
-    images: ['${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/twitter-image.jpg']
+    images: [`${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/twitter-image.jpg`]
   },
 
   // 图片优化配置

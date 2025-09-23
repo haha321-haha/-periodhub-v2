@@ -1,10 +1,11 @@
+import { URL_CONFIG } from '@/lib/url-config';
 /**
  * 统一Canonical URL配置
  * 解决Google Search Console重复网页问题
  */
 
 // 统一的基础URL - 使用www版本
-export const CANONICAL_BASE_URL = 'https://www.periodhub.health';
+export const CANONICAL_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`;
 
 // 生成canonical URL的函数
 export function getCanonicalUrl(locale: string, path: string = ''): string {

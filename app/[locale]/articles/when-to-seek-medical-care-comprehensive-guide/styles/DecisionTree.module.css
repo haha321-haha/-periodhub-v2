@@ -251,6 +251,7 @@
   
   .optionButton {
     @apply text-base py-3;
+    min-height: 48px; /* 增加移动端触摸区域 */
   }
   
   .resultCard {

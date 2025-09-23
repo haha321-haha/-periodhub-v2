@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // IndexNow API endpoint for notifying search engines about URL updates
 export async function POST(request: NextRequest) {
@@ -16,7 +17,7 @@ export async function POST(request: NextRequest) {
     }
     
     // Validate that all URLs are from our domain
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
     const invalidUrls = urls.filter(url => !url.startsWith(baseUrl));
     
     if (invalidUrls.length > 0) {

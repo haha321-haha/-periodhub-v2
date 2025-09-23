@@ -1,3 +1,4 @@
+import { URL_CONFIG } from '@/lib/url-config';
 /**
  * 细粒度CSP配置
  * 提供更精确的安全策略控制
@@ -70,7 +71,7 @@ export const granularCSPConfig: GranularCSPConfig = {
         "'self'",
         'data:',
         'blob:',
-        'https://www.periodhub.health',
+        process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
         'https://images.unsplash.com',
       ],
       'font-src': [
@@ -106,7 +107,7 @@ export const granularCSPConfig: GranularCSPConfig = {
         "'self'",
         'data:',
         'blob:',
-        'https://www.periodhub.health',
+        process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
       ],
       'font-src': [
         "'self'",
@@ -209,7 +210,7 @@ export const granularCSPConfig: GranularCSPConfig = {
         "'self'",
         'data:',
         'blob:',
-        'https://www.periodhub.health',
+        process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
       ],
       'connect-src': [
         "'self'",

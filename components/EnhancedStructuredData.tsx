@@ -1,3 +1,4 @@
+import { URL_CONFIG } from '@/lib/url-config';
 interface EnhancedStructuredDataProps {
   type: 'website' | 'article' | 'faq' | 'howto' | 'medicalwebpage';
   title: string;
@@ -69,7 +70,7 @@ export default function EnhancedStructuredData({
           "name": "PeriodHub",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://periodhub.health/icon-512.png"
+            "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"}/icon-512.png`
           }
         },
         ...(datePublished && { "datePublished": datePublished }),

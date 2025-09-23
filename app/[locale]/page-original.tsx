@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import Hero from '@/components/layout/Hero';
 import UserSuccessStories from '@/components/UserSuccessStories';
 import NavigationTabs from '@/components/NavigationTabs';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // 页面级别的metadata
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('seo.ogTitle'),
       description: t('seo.ogDescription'),
-      url: `https://www.periodhub.health/${locale}`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}`,
       siteName: 'PeriodHub',
       locale: locale === 'zh' ? 'zh_CN' : 'en_US',
       type: 'website',
@@ -29,11 +30,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: t('seo.ogDescription'),
     },
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}`,
       languages: {
-        'zh-CN': 'https://www.periodhub.health/zh',
-        'en-US': 'https://www.periodhub.health/en',
-        'x-default': 'https://www.periodhub.health',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
       },
     },
     robots: {
@@ -59,13 +60,13 @@ const getStructuredData = async (locale: string) => {
   "@graph": [
     {
       "@type": "SoftwareApplication",
-      "@id": `https://www.periodhub.health/${locale}#application`,
+      "@id": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}#application`,
       "name": "PeriodHub",
       "applicationCategory": "HealthApplication",
       "operatingSystem": "Web",
       "inLanguage": locale === 'zh' ? "zh-CN" : "en-US",
       "description": t('metadata.home.structuredData.description'),
-      "url": `https://www.periodhub.health/${locale}`,
+      "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}`,
       "offers": {
         "@type": "Offer",
         "price": "0",
@@ -85,46 +86,46 @@ const getStructuredData = async (locale: string) => {
         "bestRating": "5"
       },
       "publisher": {
-        "@id": `https://www.periodhub.health/${locale}#organization`
+        "@id": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}#organization`
       }
     },
     {
       "@type": "Organization",
-      "@id": `https://www.periodhub.health/${locale}#organization`,
+      "@id": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}#organization`,
       "name": "PeriodHub",
-      "url": "https://www.periodhub.health",
+      "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.periodhub.health/icon-512.png",
+        "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/icon-512.png`,
         "width": 512,
         "height": 512
       },
       "sameAs": [
-        "https://www.periodhub.health/zh",
-        "https://www.periodhub.health/en"
+        `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh`,
+        `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en`
       ]
     },
     {
       "@type": "WebSite",
-      "@id": `https://www.periodhub.health/${locale}#website`,
-      "url": "https://www.periodhub.health",
+      "@id": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}#website`,
+      "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
       "name": "PeriodHub",
       "description": t('organization.description'),
       "publisher": {
-        "@id": `https://www.periodhub.health/${locale}#organization`
+        "@id": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}#organization`
       },
       "potentialAction": {
         "@type": "SearchAction",
         "target": {
           "@type": "EntryPoint",
-          "urlTemplate": `https://www.periodhub.health/${locale}/search?q={search_term_string}`
+          "urlTemplate": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/search?q={search_term_string}`
         },
         "query-input": "required name=search_term_string"
       }
     },
     {
       "@type": "FAQPage",
-      "@id": `https://www.periodhub.health/${locale}#faq`,
+      "@id": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}#faq`,
       "mainEntity": [
         {
           "@type": "Question",

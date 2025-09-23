@@ -1,6 +1,7 @@
 import './globals.css';
 import { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
+import { URL_CONFIG } from '@/lib/url-config';
 // import ClientSafe from '@/components/ClientSafe';
 
 // 使用本地Noto Sans SC字体
@@ -47,7 +48,7 @@ import HydrationErrorBoundary from '@/components/HydrationErrorBoundary';
 
 // 🚀 Core Web Vitals 优化的根布局
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.periodhub.health'),
+  metadataBase: new URL(`${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`),
   title: {
     default: 'PeriodHub - 专业痛经缓解方法和月经健康管理平台',
     template: '%s | PeriodHub'
@@ -73,7 +74,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'zh_CN',
-    url: 'https://www.periodhub.health',
+    url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
     siteName: 'PeriodHub',
     title: 'PeriodHub - 专业女性健康管理平台',
     description: '专业的女性月经健康管理平台，提供中西医结合的痛经解决方案。',

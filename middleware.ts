@@ -13,9 +13,16 @@ const intlMiddleware = createMiddleware({
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  // 排除静态文件，但允许页面路由
-  if (pathname.startsWith('/downloads/') && 
-      (pathname.endsWith('.html') || pathname.endsWith('.pdf'))) {
+  // 排除静态文件路径，避免国际化中间件干扰
+  if (
+    pathname.startsWith('/downloads/') && 
+    (pathname.endsWith('.html') || pathname.endsWith('.pdf')) ||
+    pathname.startsWith('/styles/') ||
+    pathname.startsWith('/scripts/') ||
+    pathname.startsWith('/images/') ||
+    pathname.startsWith('/icons/') ||
+    pathname.startsWith('/fonts/')
+  ) {
     return NextResponse.next();
   }
   
@@ -23,5 +30,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|downloads|images).*)']
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|downloads|images|styles|scripts|fonts|icons).*)']
 }

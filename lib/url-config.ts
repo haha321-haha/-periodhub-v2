@@ -4,7 +4,7 @@
  */
 
 // 环境变量配置
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`;
 
 // URL配置对象
 export const URL_CONFIG = {

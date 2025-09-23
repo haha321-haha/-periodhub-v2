@@ -5,6 +5,7 @@ import { Locale, locales } from '@/i18n';
 import OptimizedMobilePDFCenter from '@/components/OptimizedMobilePDFCenter';
 import { SITE_CONFIG } from '@/config/site.config';
 import { pdfResources } from '@/config/pdfResources';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -25,7 +26,7 @@ export async function generateMetadata({
       ? ['经期健康', 'PDF下载', '健康资源', '月经管理', '女性健康', '中英双语', '移动优化']
       : ['menstrual health', 'PDF download', 'health resources', 'period management', 'women health', 'bilingual', 'mobile optimized'],
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/downloads`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/downloads`,
     },
     openGraph: {
       title: locale === 'zh' 
@@ -65,7 +66,7 @@ export default async function DownloadsPage({
     "description": locale === 'zh' 
       ? `Period Hub文章PDF下载中心，${totalResources}个精选经期健康资源`
       : `Period Hub Articles PDF Download Center, ${totalResources} curated menstrual health resources`,
-    "url": `https://www.periodhub.health/${locale}/downloads`,
+    "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/downloads`,
     "mainEntity": {
       "@type": "ItemList",
       "numberOfItems": pdfResources.length,
@@ -77,7 +78,7 @@ export default async function DownloadsPage({
           "name": resource.title,
           "description": resource.description,
           "fileSize": `${resource.fileSize}KB`,
-          "url": `https://www.periodhub.health${resource.downloadUrl}`,
+          "url": `process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"${resource.downloadUrl}`,
           "encodingFormat": "application/pdf"
         }
       }))
@@ -89,13 +90,13 @@ export default async function DownloadsPage({
           "@type": "ListItem",
           "position": 1,
           "name": locale === 'zh' ? "首页" : "Home",
-          "item": `https://www.periodhub.health/${locale}`
+          "item": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}`
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": locale === 'zh' ? "PDF下载中心" : "PDF Download Center",
-          "item": `https://www.periodhub.health/${locale}/downloads`
+          "item": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/downloads`
         }
       ]
     }

@@ -7,6 +7,7 @@ import BreathingExercise from '@/components/BreathingExercise';
 import { BarChart3, Calendar, ClipboardCheck, Lightbulb, Search, User } from 'lucide-react'; // Icons for cards
 import { Locale, locales } from '@/i18n';
 import StructuredData from '@/components/StructuredData';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -24,11 +25,11 @@ export async function generateMetadata({
       ? '经期健康管理,症状评估,疼痛追踪,痛经管理,健康工具,个性化建议,数据分析'
       : 'menstrual health management,symptom assessment,pain tracking,period pain management,health tools,personalized recommendations,data analytics',
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/interactive-tools`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools`,
       languages: {
-        'zh-CN': 'https://www.periodhub.health/zh/interactive-tools',
-        'en-US': 'https://www.periodhub.health/en/interactive-tools',
-        'x-default': 'https://www.periodhub.health/zh/interactive-tools',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/interactive-tools`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/interactive-tools`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/interactive-tools`,
       },
     },
     openGraph: {
@@ -129,7 +130,7 @@ export default async function InteractiveToolsPage({
     }
   };
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
   const pageUrl = `${baseUrl}/${locale}/interactive-tools`;
 
   return (

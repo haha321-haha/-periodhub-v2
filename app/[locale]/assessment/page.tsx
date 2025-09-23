@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import AssessmentClient from './assessment-client';
+import { URL_CONFIG } from '@/lib/url-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       locale: locale === 'zh' ? 'zh_CN' : 'en_US',
       siteName: 'PeriodHub',
-      url: `https://www.periodhub.health/${locale}/assessment`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/assessment`,
     },
     
     twitter: {
@@ -52,11 +53,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
 
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/assessment`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/assessment`,
       languages: {
-        'zh-CN': 'https://www.periodhub.health/zh/assessment',
-        'en-US': 'https://www.periodhub.health/en/assessment',
-        'x-default': 'https://www.periodhub.health/en/assessment',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/assessment`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/assessment`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/assessment`,
       },
     },
 

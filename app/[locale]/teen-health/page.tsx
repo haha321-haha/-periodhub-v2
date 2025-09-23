@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import type { Metadata } from 'next';
 import EmbeddedPainAssessment from '@/components/EmbeddedPainAssessment';
+import { URL_CONFIG } from '@/lib/url-config';
 
 type Locale = 'en' | 'zh';
 
@@ -32,11 +33,11 @@ export async function generateMetadata({
       ? '青少年经期健康,青春期教育,经期管理,校园健康,心理健康,成长支持,科学教育'
       : 'teen menstrual health,puberty education,period management,school health,mental health,growth support,scientific education',
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/teen-health`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/teen-health`,
       languages: {
-        'zh-CN': 'https://www.periodhub.health/zh/teen-health',
-        'en-US': 'https://www.periodhub.health/en/teen-health',
-        'x-default': 'https://www.periodhub.health/zh/teen-health',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/teen-health`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/teen-health`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/teen-health`,
       },
     },
     openGraph: {

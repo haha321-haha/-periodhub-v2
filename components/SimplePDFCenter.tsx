@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { Locale } from '@/i18n';
 import { SITE_CONFIG } from '@/config/site.config';
 import { PDF_RESOURCES } from '@/config/pdfResources';
+import { URL_CONFIG } from '@/lib/url-config';
 
 interface SimplePDFCenterProps {
   locale: Locale;
@@ -365,7 +366,7 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
     </div>
     <div class="content">
         <p>${t('share.underDevelopment')}</p>
-        <p>${t('share.moreInfo')} <a href="https://periodhub.health">periodhub.health</a></p>
+        <p>${t('share.moreInfo')} <a href="process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"">periodhub.health</a></p>
     </div>
 </body>
 </html>`;

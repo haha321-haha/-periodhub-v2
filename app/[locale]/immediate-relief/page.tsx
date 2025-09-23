@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { getTranslations, unstable_setRequestLocale as setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Breadcrumb from '@/components/Breadcrumb';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -23,11 +24,11 @@ export async function generateMetadata({
       'menstrual pain management', 'dysmenorrhea treatment', 'cramp relief methods'
     ],
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/immediate-relief`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/immediate-relief`,
       languages: {
-        'zh-CN': 'https://www.periodhub.health/zh/immediate-relief',
-        'en-US': 'https://www.periodhub.health/en/immediate-relief',
-        'x-default': 'https://www.periodhub.health/zh/immediate-relief',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/immediate-relief`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/immediate-relief`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/immediate-relief`,
       },
     },
     openGraph: {

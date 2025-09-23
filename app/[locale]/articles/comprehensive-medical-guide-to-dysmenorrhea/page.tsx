@@ -88,7 +88,7 @@ export default async function DysmenorrheaGuidePage({
         {/* Back to Articles */}
         <div className="mb-8">
           <Link
-            href={`/${locale}/articles`}
+            href={`/${locale}/downloads`}
             className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium mobile-touch-target"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

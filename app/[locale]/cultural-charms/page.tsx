@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -15,11 +16,11 @@ export async function generateMetadata({
     title: t('title'),
     description: t('description'),
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/cultural-charms`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/cultural-charms`,
       languages: {
-        'zh-CN': 'https://www.periodhub.health/zh/cultural-charms',
-        'en-US': 'https://www.periodhub.health/en/cultural-charms',
-        'x-default': 'https://www.periodhub.health/zh/cultural-charms',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/cultural-charms`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/cultural-charms`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/cultural-charms`,
       },
     },
   };

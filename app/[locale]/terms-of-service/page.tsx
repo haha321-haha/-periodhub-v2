@@ -1,5 +1,6 @@
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // Types
 type Locale = 'en' | 'zh';
@@ -20,18 +21,18 @@ export async function generateMetadata({
     title: `${title} | periodhub.health`,
     description,
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/terms-of-service`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/terms-of-service`,
       languages: {
-        'zh-CN': 'https://www.periodhub.health/zh/terms-of-service',
-        'en-US': 'https://www.periodhub.health/en/terms-of-service',
-        'x-default': 'https://www.periodhub.health/en/terms-of-service',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/terms-of-service`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/terms-of-service`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/terms-of-service`,
       },
     },
     openGraph: {
       title: `${title} | periodhub.health`,
       description,
       type: 'website',
-      url: `https://www.periodhub.health/${locale}/terms-of-service`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/terms-of-service`,
     },
     robots: {
       index: true,

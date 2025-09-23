@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { URL_CONFIG } from '@/lib/url-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: isZh
         ? '专业经期健康PDF资源下载中心'
         : 'Professional menstrual health PDF resource download center',
-      url: `https://www.periodhub.health/${locale}/resources`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/resources`,
       siteName: 'PeriodHub',
       locale: isZh ? 'zh_CN' : 'en_US',
       type: 'website',
@@ -33,10 +34,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       follow: true,
     },
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/resources`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/resources`,
       languages: {
-        'zh-CN': 'https://www.periodhub.health/zh/resources',
-        'en-US': 'https://www.periodhub.health/en/resources',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/resources`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/resources`,
       },
     },
   };

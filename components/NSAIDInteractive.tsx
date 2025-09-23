@@ -14,10 +14,10 @@ export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
     console.log('🔧 NSAIDInteractive component mounted');
     setIsClient(true);
 
-    // Load the CSS file dynamically
+    // Load the CSS file dynamically with absolute URL to avoid i18n middleware interference
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '/styles/nsaid-interactive.css';
+    link.href = `${window.location.origin}/styles/nsaid-interactive.css`;
     document.head.appendChild(link);
 
     console.log('✅ CSS file loaded');
@@ -44,7 +44,7 @@ export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
         onError={(e) => console.error('❌ Lucide script failed:', e)}
       />
       <Script
-        src="/scripts/nsaid-interactive.js"
+        src={`${typeof window !== 'undefined' ? window.location.origin : ''}/scripts/nsaid-interactive.js`}
         strategy="lazyOnload"
         onLoad={() => console.log('✅ NSAID interactive script loaded')}
         onError={(e) => console.error('❌ NSAID interactive script failed:', e)}

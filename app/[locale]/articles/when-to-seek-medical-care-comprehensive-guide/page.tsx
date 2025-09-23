@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     'author': {
       '@type': 'Organization',
       'name': 'PeriodHub Health',
-      'url': 'https://www.periodhub.health'
+      'url': `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}`
     },
     'datePublished': '2025-09-20',
     'dateModified': '2025-09-20',
@@ -84,10 +84,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       ]
     },
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`,
       languages: {
-        'en': 'https://www.periodhub.health/en/articles/when-to-seek-medical-care-comprehensive-guide',
-        'zh': 'https://www.periodhub.health/zh/articles/when-to-seek-medical-care-comprehensive-guide'
+        'en': `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/en/articles/when-to-seek-medical-care-comprehensive-guide`,
+        'zh': `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/zh/articles/when-to-seek-medical-care-comprehensive-guide`
       }
     },
     other: {

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import StructuredData from '@/components/StructuredData';
 import { Locale, locales } from '@/i18n';
 import BottomRecommendations from '@/components/BottomRecommendations';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -19,11 +20,11 @@ export async function generateMetadata({
     description: t('description'),
         keywords: t('keywords'),
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/health-guide`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/health-guide`,
       languages: {
-        'zh-CN': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/zh/health-guide',
-        'en-US': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/en/health-guide',
-        'x-default': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/zh/health-guide',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/health-guide`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/health-guide`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/health-guide`,
       },
     },
     openGraph: {
@@ -110,7 +111,7 @@ export default async function HealthGuidePage({
         type="healthTopicPage"
         title={t('title')}
         description={t('description')}
-        url={`${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/health-guide`}
+        url={`${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/health-guide`}
       />
       
       <div className="container mx-auto px-4 py-8 max-w-7xl">

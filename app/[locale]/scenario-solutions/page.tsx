@@ -15,6 +15,7 @@ import {
   Package,
   Star
 } from 'lucide-react';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // Types
 type Locale = 'en' | 'zh';
@@ -34,11 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       ? '经期可以运动吗,场景化痛经解决方案,职场痛经管理,运动痛经应对,社交痛经礼仪,痛经应急包,痛经缓解技巧,热敷,敷热水袋,暖宝宝,按摩,揉肚子,止痛药'
       : 'scenario-based period pain solutions,workplace period management,exercise period pain relief,social period etiquette,period emergency kit,period pain relief tips',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/scenario-solutions`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/scenario-solutions`,
       languages: {
-        'zh-CN': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/zh/scenario-solutions',
-        'en-US': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/en/scenario-solutions',
-        'x-default': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/zh/scenario-solutions',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/scenario-solutions`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/scenario-solutions`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/scenario-solutions`,
       },
     },
     openGraph: {
@@ -162,7 +163,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
         type="healthTopicPage"
         title={t('title')}
         description={t('description')}
-        url={`${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/scenario-solutions`}
+        url={`${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/scenario-solutions`}
       />
       
       {/* Page Header */}

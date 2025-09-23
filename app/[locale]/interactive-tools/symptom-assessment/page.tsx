@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       locale: locale === 'zh' ? 'zh_CN' : 'en_US',
       siteName: 'PeriodHub',
-      url: `https://www.periodhub.health/${locale}/interactive-tools/symptom-assessment`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/symptom-assessment`,
     },
     
     twitter: {
@@ -50,11 +50,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
 
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/interactive-tools/symptom-assessment`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/symptom-assessment`,
       languages: {
-        'zh-CN': 'https://www.periodhub.health/zh/interactive-tools/symptom-assessment',
-        'en-US': 'https://www.periodhub.health/en/interactive-tools/symptom-assessment',
-        'x-default': 'https://www.periodhub.health/en/interactive-tools/symptom-assessment',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/zh/interactive-tools/symptom-assessment`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/en/interactive-tools/symptom-assessment`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/en/interactive-tools/symptom-assessment`,
       },
     },
 

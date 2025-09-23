@@ -1,5 +1,6 @@
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { Metadata } from 'next';
+import { URL_CONFIG } from '@/lib/url-config';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -36,9 +37,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/medical-disclaimer`,
       languages: {
-        'zh-CN': '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/medical-disclaimer',
-        'en-US': '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/medical-disclaimer',
-        'x-default': '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/medical-disclaimer',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/medical-disclaimer`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/medical-disclaimer`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/medical-disclaimer`,
       },
     },
   };

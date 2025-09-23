@@ -269,13 +269,13 @@ export default async function ArticlePage({
         {/* Back to Articles */}
         <div className="container-custom">
           <Link
-            href={`/${locale}/articles`}
+            href={`/${locale}/downloads`}
             className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium mobile-touch-target"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            {locale === 'zh' ? '返回文章列表' : 'Back to Articles'}
+            {locale === 'zh' ? '查看更多文章' : 'More Articles'}
           </Link>
         </div>
 
@@ -394,7 +394,7 @@ export default async function ArticlePage({
                         </td>
                       ),
                       tr: ({ children }) => (
-                        <tr className="even:bg-gray-50 hover:bg-primary-25">
+                        <tr className="even:bg-gray-50">
                           {children}
                         </tr>
                       ),
@@ -428,7 +428,7 @@ export default async function ArticlePage({
                   </h3>
                   <div className="space-y-2">
                     <Link
-                      href={`/${locale}/articles`}
+                      href={`/${locale}/downloads`}
                       className="w-full text-left px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 rounded flex items-center gap-2"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -537,7 +537,7 @@ export default async function ArticlePage({
                   }
                 </p>
                 <Link
-                  href={`/${locale}/articles`}
+                  href={`/${locale}/downloads`}
                   className="inline-flex items-center mt-4 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium"
                 >
                   {locale === 'zh' ? '浏览所有文章' : 'Browse All Articles'}

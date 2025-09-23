@@ -3,6 +3,7 @@ import { unstable_setRequestLocale as setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import BottomRecommendations from '@/components/BottomRecommendations';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // SEO Metadata - 实现你建议的长标题策略
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -16,17 +17,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: t('meta.title'),
       description: t('meta.description'),
-      url: `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/natural-therapies`,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/natural-therapies`,
       siteName: 'PeriodHub',
       locale: locale === 'zh' ? 'zh_CN' : 'en_US',
       type: 'article',
     },
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/natural-therapies`,
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/natural-therapies`,
       languages: {
-        'zh-CN': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/zh/natural-therapies',
-        'en-US': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/en/natural-therapies',
-        'x-default': '${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/en/natural-therapies',
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/natural-therapies`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/natural-therapies`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/natural-therapies`,
       },
     },
     robots: {
@@ -52,10 +53,10 @@ const getStructuredData = async (locale: string) => {
     "@graph": [
       {
         "@type": "MedicalWebPage",
-        "@id": `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/natural-therapies#webpage`,
+        "@id": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/natural-therapies#webpage`,
         "name": t('meta.title'),
         "description": t('meta.description'),
-        "url": `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/natural-therapies`,
+        "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/natural-therapies`,
         "medicalAudience": {
           "@type": "MedicalAudience",
           "audienceType": "Patient"
@@ -72,7 +73,7 @@ const getStructuredData = async (locale: string) => {
       },
       {
         "@type": "FAQPage",
-        "@id": `${process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`}/${locale}/natural-therapies#faq`,
+        "@id": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/natural-therapies#faq`,
         "mainEntity": [
           {
             "@type": "Question",

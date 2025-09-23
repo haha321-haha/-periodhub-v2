@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import Hero from '@/components/layout/Hero';
 import UserSuccessStories from '@/components/UserSuccessStories';
 import NavigationTabs from '@/components/NavigationTabs';
+import { URL_CONFIG } from '@/lib/url-config';
 
 // 页面级别的metadata
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {

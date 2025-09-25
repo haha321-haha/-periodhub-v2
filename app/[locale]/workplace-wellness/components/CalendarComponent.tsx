@@ -7,16 +7,15 @@
 
 import { useState } from 'react';
 import { Calendar, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useLocale } from 'next-intl';
-import { useCalendar, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
+import { useCalendar, useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction, getPeriodData } from '../data';
 import { PeriodRecord } from '../types';
 
 export default function CalendarComponent() {
   const calendar = useCalendar();
-  const locale = useLocale();
+  const lang = useLanguage();
   const { updateCalendar, setCurrentDate } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(locale as 'zh' | 'en');
+  const t = createTranslationFunction(lang);
   
   const periodData = getPeriodData();
   const [showAddForm, setShowAddForm] = useState(false);
@@ -25,7 +24,7 @@ export default function CalendarComponent() {
   const { currentDate } = calendar;
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
-  const monthName = currentDate.toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
+  const monthName = currentDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
     month: 'long',
     year: 'numeric'
   });
@@ -36,7 +35,7 @@ export default function CalendarComponent() {
   const startingDayOfWeek = firstDay.getDay();
 
   // 生成日历天数数组 - 基于HVsLYEp的days生成逻辑
-  let days = Array(startingDayOfWeek).fill(null);
+  const days = Array(startingDayOfWeek).fill(null);
   for (let day = 1; day <= daysInMonth; day++) {
     days.push(day);
   }
@@ -64,7 +63,7 @@ export default function CalendarComponent() {
   // 获取预测日期 - 基于HVsLYEp的逻辑
   const predictedDateEntry = periodData.find(d => d.type === 'predicted');
   const formattedPredictedDate = predictedDateEntry 
-    ? new Date(predictedDateEntry.date).toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
+    ? new Date(predictedDateEntry.date).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
         month: 'short',
         day: 'numeric'
       })

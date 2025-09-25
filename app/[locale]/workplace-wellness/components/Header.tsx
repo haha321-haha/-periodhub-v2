@@ -6,14 +6,13 @@
 'use client';
 
 import { Heart } from 'lucide-react';
-import { useLocale } from 'next-intl';
-import { useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
+import { useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction } from '../data';
 
 export default function Header() {
-  const locale = useLocale();
+  const lang = useLanguage();
   const { toggleLanguage } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(locale as 'zh' | 'en');
+  const t = createTranslationFunction(lang);
 
   return (
     <header className="bg-white shadow-sm border-b border-neutral-100">

@@ -7,18 +7,17 @@
 
 import { useState } from 'react';
 import { Activity, Copy, Mail, CheckCircle } from 'lucide-react';
-import { useLocale } from 'next-intl';
-import { useWorkImpact, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
+import { useWorkImpact, useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction, getLeaveTemplates } from '../data';
 import { LeaveTemplate } from '../types';
 
 export default function WorkImpactComponent() {
   const workImpact = useWorkImpact();
-  const locale = useLocale();
+  const lang = useLanguage();
   const { updateWorkImpact, selectTemplate } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(locale as 'zh' | 'en');
+  const t = createTranslationFunction(lang);
 
-  const templates = getLeaveTemplates(locale as 'zh' | 'en');
+  const templates = getLeaveTemplates(lang);
   const [selectedTemplate, setSelectedTemplate] = useState<LeaveTemplate | null>(null);
 
   // 基于HVsLYEp的getBadgeVariant函数

@@ -6,7 +6,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useLocale } from 'next-intl';
 import { useWorkplaceWellnessStore } from './hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction } from './data';
 import Header from './components/Header';
@@ -18,11 +17,8 @@ import DataExportComponent from './components/DataExportComponent';
 import Footer from './components/Footer';
 
 export default function WorkplaceWellnessPage() {
-  const locale = useLocale();
-  const { activeTab } = useWorkplaceWellnessStore();
-  
-  // 创建翻译函数
-  const t = createTranslationFunction(locale as 'zh' | 'en');
+  const { activeTab, lang } = useWorkplaceWellnessStore();
+  const t = createTranslationFunction(lang);
 
   // 渲染内容组件 - 基于HVsLYEp的Content函数
   const renderContent = () => {

@@ -6,15 +6,14 @@
 'use client';
 
 import { Calendar, Apple, Download } from 'lucide-react';
-import { useLocale } from 'next-intl';
-import { useActiveTab, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
+import { useActiveTab, useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction } from '../data';
 
 export default function Navigation() {
   const activeTab = useActiveTab();
-  const locale = useLocale();
+  const lang = useLanguage();
   const { setActiveTab } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(locale as 'zh' | 'en');
+  const t = createTranslationFunction(lang);
 
   // 导航标签配置 - 基于HVsLYEp的tabs结构
   const tabs = [

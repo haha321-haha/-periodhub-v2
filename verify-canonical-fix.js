@@ -42,7 +42,7 @@ function checkFile(filePath) {
     
     lines.forEach((line, index) => {
       // 检查是否包含不带www的URL
-      if (line.includes('https://periodhub.health') && !line.includes('//www.periodhub.health')) {
+      if (line.includes('https://periodhub.health') && !line.includes('https://www.periodhub.health')) {
         // 检查是否在应该使用www的上下文中
         const shouldFix = shouldUseWww.some(keyword => 
           line.toLowerCase().includes(keyword.toLowerCase())

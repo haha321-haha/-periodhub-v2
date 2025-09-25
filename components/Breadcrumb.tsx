@@ -27,13 +27,13 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
         "@type": "ListItem",
         "position": 1,
         "name": t('home'),
-        "item": `${process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"}/${locale}`
+        "item": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}`
       },
       ...items.map((item, index) => ({
         "@type": "ListItem",
         "position": index + 2,
         "name": item.label,
-        ...(item.href && { "item": `process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"${item.href}` })
+        ...(item.href && { "item": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}${item.href}` })
       }))
     ]
   };

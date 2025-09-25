@@ -70,7 +70,7 @@ export default function EnhancedStructuredData({
           "name": "PeriodHub",
           "logo": {
             "@type": "ImageObject",
-            "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"}/icon-512.png`
+            "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/icon-512.png`
           }
         },
         ...(datePublished && { "datePublished": datePublished }),

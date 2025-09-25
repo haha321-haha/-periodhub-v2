@@ -366,7 +366,7 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
     </div>
     <div class="content">
         <p>${t('share.underDevelopment')}</p>
-        <p>${t('share.moreInfo')} <a href="process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"">periodhub.health</a></p>
+        <p>${t('share.moreInfo')} <a href="${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}">periodhub.health</a></p>
     </div>
 </body>
 </html>`;

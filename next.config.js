@@ -8,9 +8,9 @@ const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 const nextConfig = {
   // 解决多lockfile警告
   outputFileTracingRoot: path.join(__dirname),
-  // 临时禁用ESLint检查以解决构建问题
+  // 启用ESLint检查以确保代码质量
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   // 性能优化
   compress: true,

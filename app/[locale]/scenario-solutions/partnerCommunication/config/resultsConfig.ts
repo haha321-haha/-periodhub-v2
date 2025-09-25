@@ -57,24 +57,6 @@ export const calculateLevel = (
   return 'advanced';                          // 8-10分 (80-100%)
 };
 
-// 生成个性化建议的工具函数
-export const generatePersonalizedRecommendations = (
-  stage1Level: ResultLevel,
-  stage2Level?: ResultLevel
-): string[] => {
-  const recommendations: string[] = [];
-  
-  // 基于第一阶段结果
-  const stage1Config = stage1ResultsConfig[stage1Level];
-  recommendations.push(...stage1Config.recommendations);
-  
-  // 基于第二阶段结果（如果有）
-  if (stage2Level) {
-    const stage2Config = stage2ResultsConfig[stage2Level];
-    recommendations.push(...stage2Config.recommendations);
-  }
-  
-  // 去重并返回
-  return [...new Set(recommendations)];
-};
+// 注意：generatePersonalizedRecommendations 函数已不再需要
+// 因为建议配置已移动到翻译文件中，组件可以直接通过翻译函数获取
 

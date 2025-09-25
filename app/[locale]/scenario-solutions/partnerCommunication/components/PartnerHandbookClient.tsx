@@ -67,6 +67,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
   const { 
     currentLanguage, 
     currentStage,
+    setCurrentStage,
     completeStage,
     resetAllStages,
     stageProgress,
@@ -424,7 +425,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                 </p>
               </div>
               
-              {!isStage1Completed ? (
+              {!isStage1Completed || !stageProgress.stage1?.result ? (
                 <PartnerUnderstandingQuiz
                   locale={locale}
                   stage="stage1"
@@ -432,7 +433,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                 />
               ) : (
                 <ResultsDisplay
-                  result={stageProgress.stage1?.result}
+                  result={stageProgress.stage1.result}
                   locale={locale}
                   stage="stage1"
                   onStartTraining={handleStartTraining}
@@ -444,7 +445,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
             {/* 专业深度测试 - 直接显示 */}
             <section id="stage2-section" className="mb-16">
               
-              {!isStage2Completed ? (
+              {!isStage2Completed || !stageProgress.stage2?.result ? (
                 <PartnerUnderstandingQuiz
                   locale={locale}
                   stage="stage2"
@@ -452,7 +453,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                 />
               ) : (
                 <ResultsDisplay
-                  result={stageProgress.stage2?.result}
+                  result={stageProgress.stage2.result}
                   locale={locale}
                   stage="stage2"
                   onStartTraining={handleStartTraining}

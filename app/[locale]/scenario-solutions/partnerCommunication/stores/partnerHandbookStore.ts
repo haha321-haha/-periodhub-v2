@@ -16,7 +16,7 @@ export type StageType = 'quiz' | 'training' | 'guidance';
 interface StageProgress {
   status: QuizStageStatus;
   currentQuestionIndex: number;
-  answers: QuizAnswer[];
+  answers: (QuizAnswer | null)[];
   result: QuizResult | null;
   completedAt: Date | null;
   timeSpent: number; // 毫秒
@@ -349,7 +349,9 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           set((state) => ({
             stageProgress: {
               stage1: createDefaultStageProgress(),
-              stage2: { ...createDefaultStageProgress(), status: 'locked' }
+              stage2: { ...createDefaultStageProgress(), status: 'locked' },
+              stage3: { ...createDefaultStageProgress(), status: 'locked' },
+              stage4: { ...createDefaultStageProgress(), status: 'locked' }
             },
             overallResult: null,
             currentStage: 'stage1'
@@ -372,24 +374,21 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             currentStage: 'stage1',
             stageProgress: {
               stage1: createDefaultStageProgress(),
-              stage2: { ...createDefaultStageProgress(), status: 'locked' }
+              stage2: { ...createDefaultStageProgress(), status: 'locked' },
+              stage3: { ...createDefaultStageProgress(), status: 'locked' },
+              stage4: { ...createDefaultStageProgress(), status: 'locked' }
             },
             overallResult: null,
-            combinedLevel: null,
-            trainingProgress: {
-              completedDays: 0,
-              totalDays: 30,
-              currentWeek: 1,
-              currentDay: 1
-            },
+            trainingProgress: {},
             completedDays: [],
             currentDay: 1,
             trainingSessions: [],
-            preferences: {
+            userPreferences: {
               notifications: true,
-              shareProgress: true,
+              reminderTime: '09:00',
               difficulty: 'medium',
-              category: 'beginner'
+              autoAdvance: true,
+              preferredStage: 'auto'
             }
           });
         },

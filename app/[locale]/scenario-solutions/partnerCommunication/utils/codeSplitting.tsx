@@ -120,10 +120,10 @@ export const useComponentPreloader = () => {
 };
 
 // 动态导入工具函数
-export const dynamicImport = async <T>(
+export const dynamicImport = async function<T>(
   importFn: () => Promise<{ default: ComponentType<T> }>,
   fallback?: ComponentType<T>
-): Promise<ComponentType<T>> => {
+): Promise<ComponentType<T>> {
   try {
     const module = await importFn();
     return module.default;

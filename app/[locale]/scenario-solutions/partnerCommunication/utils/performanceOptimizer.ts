@@ -33,9 +33,9 @@ export function throttle<T extends (...args: any[]) => any>(
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
   
-  return function executedFunction(...args: Parameters<T>) {
+  return (...args: Parameters<T>) => {
     if (!inThrottle) {
-      func.apply(this, args);
+      func(...args);
       inThrottle = true;
       setTimeout(() => inThrottle = false, limit);
     }
@@ -123,7 +123,9 @@ export class SelectorOptimizer {
       // 限制缓存大小
       if (this.selectorCache.size >= this.maxCacheSize) {
         const firstKey = this.selectorCache.keys().next().value;
-        this.selectorCache.delete(firstKey);
+        if (firstKey !== undefined) {
+          this.selectorCache.delete(firstKey);
+        }
       }
       
       this.selectorCache.set(cacheKey, result);

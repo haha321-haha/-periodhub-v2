@@ -228,7 +228,7 @@ export default function PartnerUnderstandingQuiz({
     }
   };
 
-  const calculateResultWithAnswers = (answersToUse: QuizAnswer[]): QuizResult => {
+  const calculateResultWithAnswers = (answersToUse: (QuizAnswer | null)[]): QuizResult => {
     // 安全检查：确保answers存在
     if (!answersToUse || !Array.isArray(answersToUse)) {
       console.error('🔍 Debug - answersToUse is not an array:', answersToUse);

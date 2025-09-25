@@ -181,6 +181,8 @@ interface DayTaskProps {
 }
 
 const DayTask: React.FC<DayTaskProps> = ({ day, isCompleted, onToggle, locale }) => {
+  const { t } = useSafeTranslations('partnerHandbook');
+  
   return (
     <div className={`border rounded-lg p-4 transition-all duration-200 ${
       isCompleted 

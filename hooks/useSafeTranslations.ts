@@ -45,7 +45,7 @@ export function useSafeTranslations(namespace?: string) {
     try {
       // 检查 t.raw 方法是否存在
       if (typeof t.raw === 'function') {
-        const result = t.raw(key, params);
+        const result = t.raw(key);
         return result;
       } else {
         // 如果 t.raw 不存在，尝试使用 t 方法

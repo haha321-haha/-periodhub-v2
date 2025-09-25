@@ -19,14 +19,15 @@ export const useProgressSave = () => {
     try {
       isSaving.current = true;
       
-      const currentState = store.getState();
-      const success = progressManager.saveProgress({
-        stageProgress: currentState.stageProgress,
-        currentStage: currentState.currentStage,
-        overallResult: currentState.overallResult,
-        userPreferences: currentState.userPreferences,
-        lastVisitDate: currentState.lastVisitDate
-      });
+      // 使用选择器获取当前状态
+      const currentState = {
+        stageProgress: store.stageProgress,
+        currentStage: store.currentStage,
+        overallResult: store.overallResult,
+        userPreferences: store.userPreferences,
+        lastVisitDate: store.lastVisitDate
+      };
+      const success = progressManager.saveProgress(currentState);
       
       if (success) {
         lastSaveTime.current = new Date();
@@ -59,7 +60,7 @@ export const useProgressSave = () => {
       const success = progressManager.clearProgress();
       if (success) {
         // 重置store状态
-        store.getState().resetAllStages();
+        store.resetAllStages();
         console.log('🗑️ 进度清除成功');
       }
       return success;
@@ -177,21 +178,22 @@ export const useProgressSave = () => {
 
   // 监听状态变化，自动保存
   useEffect(() => {
-    const unsubscribe = store.subscribe((state) => {
-      // 检查是否有重要变化
+    // 注意：Zustand store不支持直接的subscribe方法
+    // 这里使用定时器来定期检查状态变化
+    const interval = setInterval(() => {
       const now = new Date();
       const timeSinceLastSave = now.getTime() - lastSaveTime.current.getTime();
       
-      // 如果距离上次保存超过5秒，且状态有变化，则保存
-      if (timeSinceLastSave > 5000) {
+      // 如果距离上次保存超过30秒，则保存
+      if (timeSinceLastSave > 30000) {
         saveProgress();
       }
-    });
+    }, 10000); // 每10秒检查一次
 
     return () => {
-      unsubscribe();
+      clearInterval(interval);
     };
-  }, [store, saveProgress]);
+  }, [saveProgress]);
 
   // 页面卸载时保存进度
   useEffect(() => {

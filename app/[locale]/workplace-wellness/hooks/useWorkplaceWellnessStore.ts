@@ -86,137 +86,123 @@ const initialState: WorkplaceWellnessState = {
   }
 };
 
-// 创建Zustand Store
-export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
-  persist(
-    (set, get) => ({
-      // 初始状态
-      ...initialState,
+// 创建Zustand Store - 暂时禁用persist以避免SSR问题
+export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()((set, get) => ({
+  // 初始状态
+  ...initialState,
 
-      // 语言相关Actions
-      setLanguage: (lang: Language) => set({ lang }),
-      
-      toggleLanguage: () => set((state) => ({ 
-        lang: state.lang === 'zh' ? 'en' : 'zh' 
-      })),
+  // 语言相关Actions
+  setLanguage: (lang: Language) => set({ lang }),
+  
+  toggleLanguage: () => set((state) => ({ 
+    lang: state.lang === 'zh' ? 'en' : 'zh' 
+  })),
 
-      // 标签页相关Actions
-      setActiveTab: (tab) => set({ activeTab: tab }),
+  // 标签页相关Actions
+  setActiveTab: (tab) => set({ activeTab: tab }),
 
-      // 日历相关Actions
-      updateCalendar: (updates) => set((state) => ({
-        calendar: { ...state.calendar, ...updates }
-      })),
-      
-      setCurrentDate: (date) => set((state) => ({
-        calendar: { ...state.calendar, currentDate: date }
-      })),
-      
-      setSelectedDate: (date) => set((state) => ({
-        calendar: { ...state.calendar, selectedDate: date }
-      })),
-      
-      toggleAddForm: () => set((state) => ({
-        calendar: { 
-          ...state.calendar, 
-          showAddForm: !state.calendar.showAddForm 
-        }
-      })),
-
-      // 工作影响相关Actions
-      updateWorkImpact: (updates) => set((state) => ({
-        workImpact: { ...state.workImpact, ...updates }
-      })),
-      
-      setPainLevel: (level) => set((state) => ({
-        workImpact: { ...state.workImpact, painLevel: level as any }
-      })),
-      
-      setEfficiency: (efficiency) => set((state) => ({
-        workImpact: { ...state.workImpact, efficiency }
-      })),
-      
-      selectTemplate: (templateId) => set((state) => ({
-        workImpact: { ...state.workImpact, selectedTemplateId: templateId }
-      })),
-
-      // 营养相关Actions
-      updateNutrition: (updates) => set((state) => ({
-        nutrition: { ...state.nutrition, ...updates }
-      })),
-      
-      setSelectedPhase: (phase) => set((state) => ({
-        nutrition: { ...state.nutrition, selectedPhase: phase as any }
-      })),
-      
-      setConstitutionType: (type) => set((state) => ({
-        nutrition: { ...state.nutrition, constitutionType: type as any }
-      })),
-      
-      setSearchTerm: (term) => set((state) => ({
-        nutrition: { ...state.nutrition, searchTerm: term }
-      })),
-
-      // 导出相关Actions
-      updateExport: (updates) => set((state) => ({
-        export: { ...state.export, ...updates }
-      })),
-      
-      setExportType: (type) => set((state) => ({
-        export: { ...state.export, exportType: type as any }
-      })),
-      
-      setExportFormat: (format) => set((state) => ({
-        export: { ...state.export, format: format as any }
-      })),
-      
-      setExporting: (isExporting) => set((state) => ({
-        export: { ...state.export, isExporting }
-      })),
-
-      // 数据相关Actions
-      addPeriodRecord: (record) => {
-        // 这里可以添加数据持久化逻辑
-        console.log('Adding period record:', record);
-      },
-      
-      updatePeriodRecord: (date, updates) => {
-        // 这里可以添加数据更新逻辑
-        console.log('Updating period record:', date, updates);
-      },
-      
-      removePeriodRecord: (date) => {
-        // 这里可以添加数据删除逻辑
-        console.log('Removing period record:', date);
-      },
-
-      // 工具方法
-      resetState: () => set(initialState),
-      
-      getStateSnapshot: () => {
-        const state = get();
-        return {
-          lang: state.lang,
-          activeTab: state.activeTab,
-          calendar: state.calendar,
-          workImpact: state.workImpact,
-          nutrition: state.nutrition,
-          export: state.export
-        };
-      },
-    }),
-    {
-      name: 'workplace-wellness-storage',
-      partialize: (state) => ({
-        lang: state.lang,
-        calendar: state.calendar,
-        workImpact: state.workImpact,
-        nutrition: state.nutrition,
-        export: state.export,
-      }),
+  // 日历相关Actions
+  updateCalendar: (updates) => set((state) => ({
+    calendar: { ...state.calendar, ...updates }
+  })),
+  
+  setCurrentDate: (date) => set((state) => ({
+    calendar: { ...state.calendar, currentDate: date }
+  })),
+  
+  setSelectedDate: (date) => set((state) => ({
+    calendar: { ...state.calendar, selectedDate: date }
+  })),
+  
+  toggleAddForm: () => set((state) => ({
+    calendar: { 
+      ...state.calendar, 
+      showAddForm: !state.calendar.showAddForm 
     }
-  )
-);
+  })),
+
+  // 工作影响相关Actions
+  updateWorkImpact: (updates) => set((state) => ({
+    workImpact: { ...state.workImpact, ...updates }
+  })),
+  
+  setPainLevel: (level) => set((state) => ({
+    workImpact: { ...state.workImpact, painLevel: level as any }
+  })),
+  
+  setEfficiency: (efficiency) => set((state) => ({
+    workImpact: { ...state.workImpact, efficiency }
+  })),
+  
+  selectTemplate: (templateId) => set((state) => ({
+    workImpact: { ...state.workImpact, selectedTemplateId: templateId }
+  })),
+
+  // 营养相关Actions
+  updateNutrition: (updates) => set((state) => ({
+    nutrition: { ...state.nutrition, ...updates }
+  })),
+  
+  setSelectedPhase: (phase) => set((state) => ({
+    nutrition: { ...state.nutrition, selectedPhase: phase as any }
+  })),
+  
+  setConstitutionType: (type) => set((state) => ({
+    nutrition: { ...state.nutrition, constitutionType: type as any }
+  })),
+  
+  setSearchTerm: (term) => set((state) => ({
+    nutrition: { ...state.nutrition, searchTerm: term }
+  })),
+
+  // 导出相关Actions
+  updateExport: (updates) => set((state) => ({
+    export: { ...state.export, ...updates }
+  })),
+  
+  setExportType: (type) => set((state) => ({
+    export: { ...state.export, exportType: type as any }
+  })),
+  
+  setExportFormat: (format) => set((state) => ({
+    export: { ...state.export, format: format as any }
+  })),
+  
+  setExporting: (isExporting) => set((state) => ({
+    export: { ...state.export, isExporting }
+  })),
+
+  // 数据相关Actions
+  addPeriodRecord: (record) => {
+    // 这里可以添加数据持久化逻辑
+    console.log('Adding period record:', record);
+  },
+  
+  updatePeriodRecord: (date, updates) => {
+    // 这里可以添加数据更新逻辑
+    console.log('Updating period record:', date, updates);
+  },
+  
+  removePeriodRecord: (date) => {
+    // 这里可以添加数据删除逻辑
+    console.log('Removing period record:', date);
+  },
+
+  // 工具方法
+  resetState: () => set(initialState),
+  
+  getStateSnapshot: () => {
+    const state = get();
+    return {
+      lang: state.lang,
+      activeTab: state.activeTab,
+      calendar: state.calendar,
+      workImpact: state.workImpact,
+      nutrition: state.nutrition,
+      export: state.export
+    };
+  },
+}));
 
 // 选择器Hooks - 基于HVsLYEp的状态结构
 export const useLanguage = () => useWorkplaceWellnessStore((state) => state.lang);

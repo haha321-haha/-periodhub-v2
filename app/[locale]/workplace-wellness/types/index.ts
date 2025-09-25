@@ -48,6 +48,7 @@ export interface PeriodRecord {
   type: PeriodType;
   painLevel: PainLevel | null;
   flow: FlowType | null;
+  notes?: string;
 }
 
 // 工作影响数据接口

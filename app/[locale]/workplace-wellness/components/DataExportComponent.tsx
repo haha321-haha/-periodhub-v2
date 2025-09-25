@@ -10,6 +10,7 @@ import { Download, ShieldCheck, FileText, FileSpreadsheet, FileImage } from 'luc
 import { useExport, useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction, getPeriodData, getNutritionData } from '../data';
 import { ExportFormat, ExportType } from '../types';
+import { PDFGenerator, PDFReportData } from '../utils/pdfGenerator';
 
 export default function DataExportComponent() {
   const exportConfig = useExport();
@@ -109,20 +110,25 @@ export default function DataExportComponent() {
     URL.revokeObjectURL(url);
   };
 
-  // 导出为PDF（模拟）
-  const exportAsPDF = (data: any) => {
-    // 这里只是模拟PDF导出，实际项目中需要集成PDF生成库
-    const reportContent = `
-工作场所健康数据报告
-导出时间: ${new Date().toLocaleString()}
-导出类型: ${t(`export.types.${exportConfig.exportType}`)}
-导出格式: ${t(`export.formats.${exportConfig.format}`)}
-
-数据内容:
-${JSON.stringify(data, null, 2)}
-    `;
-    
-    alert(`PDF导出功能（模拟）:\n\n${reportContent}`);
+  // 导出为PDF（使用HTML格式）
+  const exportAsPDF = async (data: any) => {
+    try {
+      const pdfGenerator = new PDFGenerator(lang);
+      const pdfData: PDFReportData = {
+        exportDate: new Date().toISOString(),
+        language: lang,
+        exportType: exportConfig.exportType,
+        periodData: exportConfig.exportType === 'period' ? data.data : undefined,
+        nutritionData: exportConfig.exportType === 'nutrition' ? data.data : undefined,
+        allData: exportConfig.exportType === 'all' ? data.data : undefined
+      };
+      
+      // 使用新的PDF生成器
+      await pdfGenerator.generateAndDownloadPDF(pdfData);
+    } catch (error) {
+      console.error('PDF generation error:', error);
+      alert(t('export.errorMessage'));
+    }
   };
 
   // 执行导出

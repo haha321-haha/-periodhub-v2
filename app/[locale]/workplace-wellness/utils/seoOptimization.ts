@@ -318,3 +318,4 @@ export function generateSEOReport(locale: Locale, pageData: PageSEOData): string
   
   return JSON.stringify(report, null, 2);
 }
+

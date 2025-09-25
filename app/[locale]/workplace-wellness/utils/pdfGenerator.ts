@@ -510,3 +510,4 @@ export class PDFGenerator {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 }
+

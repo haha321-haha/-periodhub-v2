@@ -193,5 +193,17 @@ reports/
 # Test files and documentation
 test-*.js
 Day*-*.md
+day*-*.md
 *-report.md
+*-completion-report.md
+*-success-report.md
+*-final-report.md
+*-implementation-complete-report.md
+*-legacy-issues-resolution-report.md
+*-state-management-report.md
+*-type-definitions-report.md
 git-upload-success-report.md
+
+# Scripts and utilities
+scripts/deploy-*.js
+verify-url-consistency.js

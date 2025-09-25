@@ -337,3 +337,4 @@ export class PrivacyProtectionManager {
     return JSON.stringify(report, null, 2);
   }
 }
+

@@ -184,3 +184,4 @@ export function initializeLanguage(): Language {
   // 优先使用保存的偏好，否则使用浏览器语言
   return saved || browser;
 }
+

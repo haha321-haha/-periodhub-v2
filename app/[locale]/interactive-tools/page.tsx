@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import OptimizedImage from '@/components/ui/OptimizedImage';
 import BreathingExercise from '@/components/BreathingExercise';
 // import Breadcrumb from '@/components/Breadcrumb';
-import { BarChart3, Calendar, ClipboardCheck, Lightbulb, Search, User } from 'lucide-react'; // Icons for cards
+import { BarChart3, Calendar, ClipboardCheck, Lightbulb, Search, User, Apple } from 'lucide-react'; // Icons for cards
 import { Locale, locales } from '@/i18n';
 import StructuredData from '@/components/StructuredData';
 import { URL_CONFIG } from '@/lib/url-config';
@@ -60,14 +60,6 @@ export default async function InteractiveToolsPage({
 
   const tools = [
     {
-      title: t('symptomAssessment.title'),
-      description: t('symptomAssessment.description'),
-      href: `/${locale}/interactive-tools/symptom-assessment`,
-      iconType: 'ClipboardCheck',
-      iconColor: 'text-primary-600',
-      cta: t('symptomAssessment.startButton'),
-    },
-    {
       title: t('periodPainAssessment.title'),
       description: t('periodPainAssessment.description'),
       href: `/${locale}/interactive-tools/period-pain-assessment`,
@@ -76,12 +68,12 @@ export default async function InteractiveToolsPage({
       cta: t('periodPainAssessment.cta'),
     },
     {
-      title: t('cycleTracker.title'),
-      description: t('cycleTracker.description'),
-      href: `/${locale}/interactive-tools/cycle-tracker`,
-      iconType: 'Calendar',
-      iconColor: 'text-purple-600',
-      cta: t('cycleTracker.cta'),
+      title: t('symptomAssessment.title'),
+      description: t('symptomAssessment.description'),
+      href: `/${locale}/interactive-tools/symptom-assessment`,
+      iconType: 'ClipboardCheck',
+      iconColor: 'text-primary-600',
+      cta: t('symptomAssessment.startButton'),
     },
     {
       title: t('painTracker.title'),
@@ -92,6 +84,14 @@ export default async function InteractiveToolsPage({
       cta: t('painTracker.startButton'),
     },
     {
+      title: t('cycleTracker.title'),
+      description: t('cycleTracker.description'),
+      href: `/${locale}/interactive-tools/cycle-tracker`,
+      iconType: 'Calendar',
+      iconColor: 'text-purple-600',
+      cta: t('cycleTracker.cta'),
+    },
+    {
       title: t('constitutionTest.title'),
       description: t('constitutionTest.description'),
       href: `/${locale}/interactive-tools/constitution-test`,
@@ -100,12 +100,15 @@ export default async function InteractiveToolsPage({
       cta: t('constitutionTest.cta'),
     },
     {
-      title: t('personalizedInsights.title'),
-      description: t('personalizedInsights.description'),
-      href: "#", // No link yet
-      iconType: 'Lightbulb',
-      iconColor: 'text-accent-600',
-      cta: commonT('comingSoon'),
+      title: locale === 'zh' ? '营养推荐生成器' : 'Nutrition Recommendation Generator',
+      description: locale === 'zh' 
+        ? '基于您的月经周期、健康目标和中医体质，提供科学的个性化营养建议。使用前请先完成周期追踪和体质测试。'
+        : 'Get personalized nutrition recommendations based on your menstrual cycle, health goals, and TCM constitution. Complete cycle tracking and constitution test first.',
+      href: `/${locale}/nutrition-recommendation-generator`,
+      iconType: 'Apple',
+      iconColor: 'text-orange-600',
+      cta: locale === 'zh' ? '开始营养分析' : 'Start Nutrition Analysis',
+      requiresPrerequisites: true,
     }
   ];
 
@@ -125,6 +128,8 @@ export default async function InteractiveToolsPage({
         return <User {...iconProps} />;
       case 'Lightbulb':
         return <Lightbulb {...iconProps} />;
+      case 'Apple':
+        return <Apple {...iconProps} />;
       default:
         return <ClipboardCheck {...iconProps} />;
     }
@@ -194,20 +199,47 @@ export default async function InteractiveToolsPage({
           <section className="container-custom">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
               {tools.map((tool) => (
-                <div key={tool.title} className="card flex flex-col items-center text-center h-full p-4 sm:p-6">
-                  <div className="w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-full bg-neutral-100 mb-4 sm:mb-6">
+                <div key={tool.title} className={`card flex flex-col items-center text-center h-full p-4 sm:p-6 ${tool.requiresPrerequisites ? 'relative border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-yellow-50' : ''}`}>
+                  {/* 前置条件提示 */}
+                  {tool.requiresPrerequisites && (
+                    <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+                      {locale === 'zh' ? '需要前置条件' : 'Prerequisites'}
+                    </div>
+                  )}
+                  
+                  <div className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-full mb-4 sm:mb-6 ${tool.requiresPrerequisites ? 'bg-orange-100' : 'bg-neutral-100'}`}>
                     {renderIcon(tool.iconType, tool.iconColor)}
                   </div>
+                  
                   <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-neutral-800 mb-2 sm:mb-3 leading-tight">
                     {tool.title}
                   </h2>
+                  
                   <p className="text-sm sm:text-base text-neutral-600 mb-4 sm:mb-6 flex-grow leading-relaxed">
                     {tool.description}
                   </p>
+                  
+                  {/* 前置条件说明 */}
+                  {tool.requiresPrerequisites && (
+                    <div className="mb-4 p-3 bg-orange-100 rounded-lg border border-orange-200">
+                      <p className="text-xs text-orange-700 font-medium mb-1">
+                        {locale === 'zh' ? '使用前请先完成：' : 'Complete first:'}
+                      </p>
+                      <div className="flex flex-wrap gap-1">
+                        <span className="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded">
+                          {locale === 'zh' ? '周期追踪' : 'Cycle Tracker'}
+                        </span>
+                        <span className="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded">
+                          {locale === 'zh' ? '体质测试' : 'Constitution Test'}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                  
                   {tool.href === "#" ? (
                     <span className="btn-disabled w-full mobile-touch-target text-sm sm:text-base px-4 py-3">{tool.cta}</span>
                   ) : (
-                    <Link href={tool.href} className="w-full mobile-touch-target text-sm sm:text-base px-4 py-3 text-center btn-primary">
+                    <Link href={tool.href} className={`w-full mobile-touch-target text-sm sm:text-base px-4 py-3 text-center ${tool.requiresPrerequisites ? 'btn-secondary' : 'btn-primary'}`}>
                       {tool.cta}
                     </Link>
                   )}

@@ -140,7 +140,7 @@ export default function PartnerUnderstandingQuiz({
       percentage,
       level,
       feedback: t(`results.${level}.description`),
-      recommendations: t(`results.${level}.recommendations`) as string[]
+      recommendations: Object.values(t(`results.${level}.recommendations`)) as string[]
     };
   };
 

@@ -63,7 +63,7 @@ export default function PartnerUnderstandingQuiz({
       ...result,
       title: tResults(`${result.level}.title`),
       feedback: tResults(`${result.level}.description`),
-      recommendations: tResultsRaw(`${result.level}.recommendations`) as string[] || []
+      recommendations: Object.values(tResultsRaw(`${result.level}.recommendations`)) as string[] || []
     };
   };
   

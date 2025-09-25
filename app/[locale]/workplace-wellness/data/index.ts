@@ -388,3 +388,47 @@ export function getLeaveTemplates(lang: Language): LeaveTemplate[] {
 export function getTranslations(lang: Language) {
   return translations[lang] || translations.en;
 }
+
+// 数据验证函数 - 基于HVsLYEp的数据结构
+export function validateAllData() {
+  const { validatePeriodData, validateNutritionData, validateLeaveTemplates } = require('../utils/validation');
+  
+  const results = {
+    periodData: validatePeriodData(mockPeriodData),
+    nutritionData: validateNutritionData(mockNutritionData),
+    leaveTemplates: validateLeaveTemplates(leaveTemplates)
+  };
+  
+  return results;
+}
+
+// 数据完整性检查
+export function checkDataIntegrity() {
+  const issues: string[] = [];
+  
+  // 检查经期数据
+  if (mockPeriodData.length === 0) {
+    issues.push('No period data available');
+  }
+  
+  // 检查营养数据
+  if (!mockNutritionData.en || mockNutritionData.en.length === 0) {
+    issues.push('No English nutrition data available');
+  }
+  if (!mockNutritionData.zh || mockNutritionData.zh.length === 0) {
+    issues.push('No Chinese nutrition data available');
+  }
+  
+  // 检查请假模板
+  if (!leaveTemplates.en || leaveTemplates.en.length === 0) {
+    issues.push('No English leave templates available');
+  }
+  if (!leaveTemplates.zh || leaveTemplates.zh.length === 0) {
+    issues.push('No Chinese leave templates available');
+  }
+  
+  return {
+    isValid: issues.length === 0,
+    issues
+  };
+}

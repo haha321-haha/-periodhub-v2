@@ -86,8 +86,10 @@ const initialState: WorkplaceWellnessState = {
   }
 };
 
-// 创建Zustand Store - 暂时禁用persist以避免SSR问题
-export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()((set, get) => ({
+// 创建Zustand Store - 使用persist进行本地存储持久化
+export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
+  persist(
+    (set, get) => ({
   // 初始状态
   ...initialState,
 
@@ -191,18 +193,38 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()((set, 
   // 工具方法
   resetState: () => set(initialState),
   
-  getStateSnapshot: () => {
-    const state = get();
-    return {
-      lang: state.lang,
-      activeTab: state.activeTab,
-      calendar: state.calendar,
-      workImpact: state.workImpact,
-      nutrition: state.nutrition,
-      export: state.export
-    };
-  },
-}));
+      getStateSnapshot: () => {
+        const state = get();
+        return {
+          lang: state.lang,
+          activeTab: state.activeTab,
+          calendar: state.calendar,
+          workImpact: state.workImpact,
+          nutrition: state.nutrition,
+          export: state.export
+        };
+      },
+    }),
+    {
+      name: 'workplace-wellness-storage',
+      partialize: (state) => ({
+        lang: state.lang,
+        activeTab: state.activeTab,
+        calendar: state.calendar,
+        workImpact: state.workImpact,
+        nutrition: state.nutrition,
+        export: state.export,
+      }),
+      // 添加SSR安全配置
+      skipHydration: false,
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          console.log('Workplace Wellness Store rehydrated successfully');
+        }
+      },
+    }
+  )
+);
 
 // 选择器Hooks - 基于HVsLYEp的状态结构
 export const useLanguage = () => useWorkplaceWellnessStore((state) => state.lang);

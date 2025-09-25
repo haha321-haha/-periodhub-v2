@@ -7,16 +7,16 @@
 
 import { useState } from 'react';
 import { Calendar, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLocale } from 'next-intl';
 import { useCalendar, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
-import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction, getPeriodData } from '../data';
 import { PeriodRecord } from '../types';
 
 export default function CalendarComponent() {
   const calendar = useCalendar();
-  const language = useLanguage();
+  const locale = useLocale();
   const { updateCalendar, setCurrentDate } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(language);
+  const t = createTranslationFunction(locale as 'zh' | 'en');
   
   const periodData = getPeriodData();
   const [showAddForm, setShowAddForm] = useState(false);
@@ -96,7 +96,7 @@ export default function CalendarComponent() {
           </button>
           
           <h3 className="text-lg font-semibold text-neutral-900">
-            {calendar.currentDate.toLocaleDateString(language === 'zh' ? 'zh-CN' : 'en-US', { 
+            {calendar.currentDate.toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', { 
               month: 'long', 
               year: 'numeric' 
             })}

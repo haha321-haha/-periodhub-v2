@@ -7,21 +7,21 @@
 
 import { useState } from 'react';
 import { Download, FileText, FileSpreadsheet, FileImage } from 'lucide-react';
+import { useLocale } from 'next-intl';
 import { useExport, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
-import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction, getPeriodData, getNutritionData } from '../data';
 
 export default function DataExportComponent() {
   const exportConfig = useExport();
-  const language = useLanguage();
+  const locale = useLocale();
   const { updateExport, setExporting } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(language);
+  const t = createTranslationFunction(locale as 'zh' | 'en');
   
   const [isExporting, setIsExporting] = useState(false);
   const [exportStatus, setExportStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const periodData = getPeriodData();
-  const nutritionData = getNutritionData(language);
+  const nutritionData = getNutritionData(locale as 'zh' | 'en');
 
   const handleExportTypeChange = (type: string) => {
     updateExport({ exportType: type as any });

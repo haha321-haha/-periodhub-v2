@@ -7,18 +7,18 @@
 
 import { useState } from 'react';
 import { Activity, Copy, Mail } from 'lucide-react';
+import { useLocale } from 'next-intl';
 import { useWorkImpact, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
-import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction, getLeaveTemplates } from '../data';
 import { LeaveTemplate } from '../types';
 
 export default function WorkImpactComponent() {
   const workImpact = useWorkImpact();
-  const language = useLanguage();
+  const locale = useLocale();
   const { updateWorkImpact, selectTemplate } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(language);
+  const t = createTranslationFunction(locale as 'zh' | 'en');
   
-  const templates = getLeaveTemplates(language);
+  const templates = getLeaveTemplates(locale as 'zh' | 'en');
   const [selectedTemplate, setSelectedTemplate] = useState<LeaveTemplate | null>(null);
 
   const handlePainLevelChange = (level: number) => {

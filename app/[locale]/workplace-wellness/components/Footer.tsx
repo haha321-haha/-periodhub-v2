@@ -6,12 +6,12 @@
 'use client';
 
 import { Heart } from 'lucide-react';
-import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
+import { useLocale } from 'next-intl';
 import { createTranslationFunction } from '../data';
 
 export default function Footer() {
-  const language = useLanguage();
-  const t = createTranslationFunction(language);
+  const locale = useLocale();
+  const t = createTranslationFunction(locale as 'zh' | 'en');
 
   return (
     <footer className="bg-white border-t border-neutral-100 mt-12">

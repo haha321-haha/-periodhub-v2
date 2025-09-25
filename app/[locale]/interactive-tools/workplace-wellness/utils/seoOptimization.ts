@@ -224,11 +224,13 @@ export function generateBreadcrumbSchema(locale: Locale): any {
   const breadcrumbData = {
     zh: [
       { name: '首页', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/zh` },
-      { name: '职场健康助手', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/zh/workplace-wellness` }
+      { name: '互动工具', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/zh/interactive-tools` },
+      { name: '职场健康助手', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/zh/interactive-tools/workplace-wellness` }
     ],
     en: [
       { name: 'Home', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/en` },
-      { name: 'Workplace Wellness Assistant', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/en/workplace-wellness` }
+      { name: 'Interactive Tools', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/en/interactive-tools` },
+      { name: 'Workplace Wellness Assistant', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/en/interactive-tools/workplace-wellness` }
     ]
   };
 

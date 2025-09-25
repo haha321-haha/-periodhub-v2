@@ -47,6 +47,29 @@ export default function Header() {
             </div>
           </div>
         </div>
+        
+        {/* 面包屑导航 */}
+        <nav className="mt-4">
+          <div className="flex items-center space-x-2 text-sm text-gray-500">
+            <a 
+              href={`/${lang}`}
+              className="hover:text-pink-600"
+            >
+              {lang === 'zh' ? '首页' : 'Home'}
+            </a>
+            <span>/</span>
+            <a 
+              href={`/${lang}/interactive-tools`}
+              className="hover:text-pink-600"
+            >
+              {lang === 'zh' ? '互动工具' : 'Interactive Tools'}
+            </a>
+            <span>/</span>
+            <span className="text-gray-900">
+              {t('header.title')}
+            </span>
+          </div>
+        </nav>
       </div>
     </header>
   );

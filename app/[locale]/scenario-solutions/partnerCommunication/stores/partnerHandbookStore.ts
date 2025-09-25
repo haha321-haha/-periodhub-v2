@@ -108,6 +108,9 @@ interface PartnerHandbookActions {
   clearAllData: () => void;
   exportData: () => string;
   importData: (data: string) => void;
+  
+  // 阶段初始化
+  initializeMissingStages: () => void;
 }
 
 type PartnerHandbookStore = PartnerHandbookState & PartnerHandbookActions;

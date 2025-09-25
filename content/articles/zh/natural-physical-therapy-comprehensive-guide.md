@@ -407,8 +407,7 @@ pdf_download_url: "/downloads/natural-physical-therapy-comprehensive-guide.pdf"
   </p>
   <a href="/zh/interactive-tools#breathing-exercise"
      style="display: inline-block; background: rgba(255, 255, 255, 0.2); color: white; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; border: 2px solid rgba(255, 255, 255, 0.3); transition: all 0.3s ease;"
-     onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'"
-     onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'; this.style.transform='translateY(0)'">
+     class="hover:bg-white hover:bg-opacity-30 hover:-translate-y-0.5">
     🚀 开始引导练习
   </a>
 </div>

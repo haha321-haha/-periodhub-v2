@@ -12,8 +12,8 @@ const { performance } = require('perf_hooks');
 
 // 配置
 const CONFIG = {
-  baseUrl: 'https://www.periodhub.health',
-  sitemapUrl: 'https://www.periodhub.health/sitemap.xml',
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health',
+  sitemapUrl: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/sitemap.xml`,
   outputDir: './reports',
   timeout: 30000,
 };

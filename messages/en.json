@@ -2225,7 +2225,7 @@
   },
   "scenarioSolutionsPage": {
     "title": "Scenario-Based Period Pain Solutions - Workplace, Exercise & Social Life Management",
-    "description": "Professional scenario-based period pain management strategies covering workplace, exercise, social, and sleep situations. Get targeted relief strategies and practical tips to handle period pain confidently in any environment. Includes emergency kit lists, exercise guidance, and social etiquette tips. Evidence-based professional guidance suitable for women of all ages.",
+    "description": "Professional scenario-based period pain management strategies covering workplace, exercise, social situations. Get targeted relief strategies and practical tips.",
     "introTitle": "Complete Life Scenario Coverage",
     "introText": "Every woman's life is multifaceted, from workplace to home, from exercise to social activities. Different scenarios require different coping strategies. We've carefully prepared comprehensive scenario-based solutions to help you handle menstrual discomfort gracefully, wherever you are.",
     "scenarios": {
@@ -2455,6 +2455,15 @@
           "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially when using medications or making judgments about severe pain."
         },
         "backToOverview": "Back to Scenario Solutions Overview"
+      },
+      "partnerCommunication": {
+        "title": "Partner Communication Scenarios",
+        "description": "Professional partner communication scenario solutions to help partners better understand period pain with targeted communication strategies and emotional support techniques. Includes understanding tests, 30-day training camps, and personalized guidance to help you build better understanding and communication.",
+        "features": [
+          "Partner Understanding Test",
+          "30-Day Training Camp",
+          "Personalized Guidance"
+        ]
       },
       "commute": {
         "title": "Commuting Scenarios",
@@ -3190,7 +3199,12 @@
       "campusGuide": "Campus Emergency Guide",
       "emergencyKit": "Emergency Kit List",
       "immediateMethods": "Immediate Methods",
-      "methods": ["Apply heat to abdomen or lower back", "Deep breathing relaxation", "Gentle abdominal massage", "Seek help from teachers or friends"]
+      "methods": [
+        "Apply heat to abdomen or lower back",
+        "Deep breathing relaxation",
+        "Gentle abdominal massage",
+        "Seek help from teachers or friends"
+      ]
     },
     "painAssessment": {
       "title": "🎯 Quick Pain Assessment",
@@ -3204,22 +3218,38 @@
       "campusGuide": {
         "title": "Campus Emergency Guide",
         "description": "What to do when pain strikes at school? Classroom emergencies, dorm management, PE class strategies - comprehensive campus survival guide.",
-        "highlights": ["Classroom self-help techniques", "Dorm pain management", "PE class strategies"]
+        "highlights": [
+          "Classroom self-help techniques",
+          "Dorm pain management",
+          "PE class strategies"
+        ]
       },
       "developmentPain": {
         "title": "Developmental Pain Management",
         "description": "Specialized pain management advice for ages 12-16, understanding adolescent period pain characteristics and scientific relief methods.",
-        "highlights": ["Adolescent period pain characteristics", "Scientific relief methods", "When to seek medical help"]
+        "highlights": [
+          "Adolescent period pain characteristics",
+          "Scientific relief methods",
+          "When to seek medical help"
+        ]
       },
       "emotionalSupport": {
         "title": "Emotional Support & Mental Health",
         "description": "How to cope with period anxiety and mood swings? Relaxation techniques, peer experience sharing to help you through emotional \"roller coasters\".",
-        "highlights": ["Emotional regulation techniques", "Anxiety relief methods", "Peer experience sharing"]
+        "highlights": [
+          "Emotional regulation techniques",
+          "Anxiety relief methods",
+          "Peer experience sharing"
+        ]
       },
       "communicationGuide": {
         "title": "Communication Guide",
         "description": "How to effectively communicate with parents, teachers, and doctors? Conversation templates and communication skills to help you express your needs confidently.",
-        "highlights": ["Parent communication templates", "Teacher collaboration guide", "Doctor communication skills"]
+        "highlights": [
+          "Parent communication templates",
+          "Teacher collaboration guide",
+          "Doctor communication skills"
+        ]
       }
     },
     "resources": {
@@ -5091,6 +5121,263 @@
       "title": "Error Occurred",
       "description": "Assessment tool is temporarily unavailable, please try again later.",
       "reload": "Reload"
+    }
+  },
+  "partnerHandbook": {
+    "pageTitle": "Partner Communication Handbook",
+    "pageDescription": "Professional partner communication scenario solutions to help partners better understand period pain with targeted communication strategies and emotional support techniques.",
+    "introTitle": "Partner Communication Scenario Solutions",
+    "introDescription": "When partners don't understand period pain, we need professional communication strategies and emotional support techniques. This solution includes understanding tests, 30-day training camps, and personalized guidance to help you build better understanding and communication.",
+    "loading": "Loading...",
+    "backToHome": "Back to Home",
+    "exploreMore": "Explore More Scenario Solutions",
+    "exploreMoreDescription": "Discover more period pain solutions for life scenarios, including professional guidance for work, exercise, social situations, and more.",
+    "disclaimer": "Disclaimer",
+    "disclaimerContent": "This website content is for informational and educational purposes only and is not intended to replace professional medical advice, diagnosis or treatment. We are not medical professionals. If you have any medical questions, please consult your doctor or other qualified healthcare provider. In case of emergency, please seek medical assistance immediately. Use of this website does not constitute a doctor-patient relationship.",
+    "quizCompleted": "Quiz Completed!",
+    "testResults": "Test Results",
+    "correctAnswers": "Correct Answers",
+    "totalQuestions": "Total Questions",
+    "accuracy": "Accuracy",
+    "startProfessionalTest": "Start Professional In-depth Test",
+    "startTrainingCamp": "Start 30-Day Training Camp",
+    "startPersonalizedGuidance": "Start Personalized Guidance",
+    "viewCompleteReport": "View Complete Report",
+    "levelDescription": "Level Description",
+    "personalizedRecommendations": "Personalized Recommendations",
+    "nextSteps": "Next Steps",
+    "retakeQuiz": "Retake Quiz",
+    "shareAchievement": "Share Your Achievement",
+    "trainingProgress": "Training Progress",
+    "complete": "Complete",
+    "progress": "Progress",
+    "day": "Day",
+    "daySuffix": "",
+    "completed": "Completed",
+    "pending": "Pending",
+    "overallProgress": "Overall Progress",
+    "selectTrainingWeek": "Select Training Week",
+    "weeklyGoal": "Weekly Goal",
+    "minutes": "min",
+    "markAsComplete": "Mark as Complete",
+    "instructions": "Instructions",
+    "tips": "Tips",
+    "expectedOutcome": "Expected Outcome",
+    "highlyRelevant": "Highly Relevant",
+    "moderatelyRelevant": "Moderately Relevant",
+    "lowRelevance": "Low Relevance",
+    "required": "Required",
+    "relatedRecommendations": "Related Recommendations",
+    "exploreMoreContent": "Explore more professional health content",
+    "learnMore": "Learn More",
+    "stageTitles": {
+      "stage1": "Partner Understanding Test",
+      "stage2": "Professional Depth Test",
+      "stage3": "30-Day Training Camp"
+    },
+    "fourStagesTitle": "Four-Stage Progressive Learning System",
+    "fourStagesDescription": "From basic understanding to professional support, step by step to become the most caring partner",
+    "quiz": {
+      "title": "The Partner Understanding Test",
+      "description": "Understand your knowledge level through 5 basic questions and get personalized recommendations",
+      "instructions": "For the gentlemen, please complete the following 10 questions independently. Choose the answer you believe is most appropriate.",
+      "noQuestionsAvailable": "No Questions Available",
+      "noQuestionsDescription": "No test questions available for this stage",
+      "questionProgress": "Question {current}/{total}",
+      "nextQuestion": "Next Question",
+      "completeTest": "Complete Test",
+      "stages": {
+        "stage1": {
+          "title": "Quick Understanding Test",
+          "description": "Understand your basic knowledge level in 3 minutes",
+          "instructions": "Please gentlemen complete the following 5 questions independently, honestly choose the answer you think is most appropriate.",
+          "timeLimit": "3 minutes",
+          "difficulty": "Easy",
+          "buttonText": "Start Quick Test",
+          "unlockCondition": "Available immediately"
+        },
+        "stage2": {
+          "title": "Professional Depth Test",
+          "description": "Deepen your understanding through 10 professional questions and get expert advice",
+          "instructions": "Please gentlemen complete the following 10 questions independently, honestly choose the answer you think is most appropriate.",
+          "timeLimit": "10 minutes",
+          "difficulty": "Hard",
+          "buttonText": "Start Professional Test",
+          "unlockCondition": "Complete Stage 1 first"
+        },
+        "stage3": {
+          "title": "30-Day Training Camp",
+          "description": "5 minutes a day, progressively become a warm-hearted partner",
+          "instructions": "Based on test results, start 30 days of systematic training, 5 minutes a day, progressively improve understanding and support abilities.",
+          "timeLimit": "5 minutes daily",
+          "difficulty": "Medium",
+          "buttonText": "Start Training Camp",
+          "unlockCondition": "Complete Stage 2 first"
+        },
+        "stage4": {
+          "title": "Personalized Guidance",
+          "description": "Based on test results, provide exclusive improvement suggestions",
+          "instructions": "Based on your test results and training progress, get personalized continuous optimization suggestions.",
+          "timeLimit": "Ongoing",
+          "difficulty": "Easy",
+          "buttonText": "Start Personalized Guidance",
+          "unlockCondition": "Complete Stage 3 first"
+        }
+      }
+    },
+    "results": {
+      "beginner": {
+        "title": "Beginner",
+        "description": "You already have a good foundation, keep up the good work!"
+      },
+      "intermediate": {
+        "title": "Intermediate",
+        "description": "You have a good understanding of dysmenorrhea and can further improve your support skills."
+      },
+      "advanced": {
+        "title": "Advanced",
+        "description": "You have a deep understanding of dysmenorrhea and are your girlfriend's strong support."
+      },
+      "expert": {
+        "title": "Expert",
+        "description": "Excellent! You are already a master at understanding dysmenorrhea!"
+      }
+    },
+    "stage1Results": {
+      "beginner": {
+        "title": "Warm Heart Beginner",
+        "description": "You have a caring heart, which is more important than anything! Although your understanding of dysmenorrhea is still basic, your sincerity and participation are the best start. Every caring gesture will make her feel your love.",
+        "recommendations": {
+          "0": "Start with the basics. Spend 5 minutes daily learning basic knowledge about dysmenorrhea, such as \"why dysmenorrhea occurs\" and \"when to pay attention\".",
+          "1": "Learn to listen. When she says \"my stomach hurts\", don't rush to give advice. First ask \"What can I do for you?\" to let her feel your care."
+        },
+        "nextSteps": [
+          "Complete Professional Depth Test",
+          "Start 30-day Basic Training",
+          "Learn Basic Care Skills"
+        ]
+      },
+      "intermediate": {
+        "title": "Caring Guardian",
+        "description": "You have mastered the basic knowledge of dysmenorrhea and can provide warm emotional support. You know when to give a hot water bottle and when to quietly accompany. Your care makes her feel safe and understood.",
+        "recommendations": {
+          "0": "Learn basic massage techniques. Master simple abdominal massage methods to provide practical help when she says it hurts.",
+          "1": "Prepare caring items. Such as hot water bottles, heating pads, brown sugar water, etc., to let her feel your thoughtful preparation."
+        },
+        "nextSteps": [
+          "Complete Professional Depth Test",
+          "Start 30-day Advanced Training",
+          "Learn More Care Skills"
+        ]
+      },
+      "advanced": {
+        "title": "Understanding Expert",
+        "description": "Congratulations! You already have excellent dysmenorrhea understanding ability and can provide support from both emotional and physical levels. You know her emotional changes and understand how to provide the most appropriate help.",
+        "recommendations": {
+          "0": "Create a care plan. Discuss pre and post-menstrual precautions with her and create your own \"care checklist\".",
+          "1": "Become her support. Let her know that during her period, you are her most reliable support and she doesn't need to tough it out."
+        },
+        "nextSteps": [
+          "Complete Professional Depth Test",
+          "Start 30-day Expert Training",
+          "Share Experience to Help Others"
+        ]
+      },
+      "expert": {
+        "title": "Caring Expert",
+        "description": "You have reached the highest level of the basic test! Your understanding and caring ability for dysmenorrhea has surpassed most men. Your girlfriend is lucky to have such a caring partner.",
+        "recommendations": {
+          "0": "Share your experience. Help other male friends learn how to better understand and support their partners.",
+          "1": "Continue learning. Although you performed excellently in the basic test, the professional test will give you deeper medical knowledge."
+        },
+        "nextSteps": [
+          "Complete Professional Depth Test",
+          "Start 30-day Expert Training",
+          "Become Community Mentor"
+        ]
+      }
+    },
+    "stage2Results": {
+      "beginner": {
+        "title": "Professional Care Novice",
+        "description": "You have basic medical knowledge but need to learn professional dysmenorrhea management knowledge in depth. Through systematic learning, you will master scientific support methods and become her most reliable professional supporter.",
+        "recommendations": {
+          "0": "Learn medical basics. Understand professional terms like prostaglandins, endometrial shedding, and master the physiological mechanisms of dysmenorrhea.",
+          "1": "Build scientific cognitive framework. Distinguish between primary and secondary dysmenorrhea, learn to identify symptoms that require medical intervention."
+        },
+        "nextSteps": [
+          "Start 30-day Professional Training",
+          "Focus on Learning Medical Knowledge",
+          "Build Scientific Cognitive System"
+        ]
+      },
+      "intermediate": {
+        "title": "Professional Support Partner",
+        "description": "You have mastered considerable professional knowledge and can understand the complexity of dysmenorrhea from a medical perspective. You not only have empathy but also scientific support methods, able to provide precise professional guidance.",
+        "recommendations": {
+          "0": "Master professional nursing skills. Learn professional pain assessment methods, master scientific relief techniques and medication knowledge.",
+          "1": "Develop scientific support plans. Create personalized menstrual management plans based on her specific situation."
+        },
+        "nextSteps": [
+          "Start 30-day Professional Training",
+          "Focus on Improving Professional Skills",
+          "Learn Advanced Nursing Methods"
+        ]
+      },
+      "advanced": {
+        "title": "Professional Empathy Expert",
+        "description": "Congratulations! You not only have professional medical knowledge but also perfect empathy ability. You can provide support from both scientific and emotional dimensions, making you a professional \"super teammate\" that 90% of men cannot match.",
+        "recommendations": {
+          "0": "Create professional emergency plans. Based on medical knowledge, work with her to develop scientific \"menstrual emergency plans\" including symptom monitoring, medication preparation, medical contacts, etc.",
+          "1": "Become a professional mentor. Use your professional knowledge to help other couples establish scientific menstrual management methods."
+        },
+        "nextSteps": [
+          "Start 30-day Professional Training",
+          "Focus on Consolidating Professional Abilities",
+          "Become Professional Community Mentor"
+        ]
+      },
+      "expert": {
+        "title": "Professional Care Master",
+        "description": "You have reached the highest level of professional testing! You not only have deep medical knowledge but also perfect professional judgment and action ability. You are a medical-level partner support expert and a professional role model for all men to learn from.",
+        "recommendations": {
+          "0": "Share professional experience. Use your professional knowledge to help more male friends master scientific partner support methods.",
+          "1": "Become a professional mentor. Guide other couples to establish medical knowledge-based menstrual management systems and communication patterns.",
+          "2": "Continue professional learning. Stay updated with the latest medical research and continuously improve professional support abilities."
+        },
+        "nextSteps": [
+          "Start 30-day Professional Training",
+          "Become Professional Community Mentor",
+          "Share Professional Experience to Help Others"
+        ]
+      }
+    },
+    "relatedLinks": {
+      "title": "Related Recommendations",
+      "description": "Explore more professional health content",
+      "scenarioSolutions": {
+        "title": "Scenario Solutions",
+        "description": "Comprehensive solutions for different life scenarios"
+      },
+      "naturalTherapies": {
+        "title": "Natural Therapies",
+        "description": "Safe and effective natural relief methods"
+      },
+      "interactiveTools": {
+        "title": "Interactive Tools",
+        "description": "Professional assessment and tracking tools"
+      },
+      "healthGuide": {
+        "title": "Health Guide",
+        "description": "Comprehensive menstrual health management guide"
+      },
+      "downloads": {
+        "title": "Downloads",
+        "description": "Downloadable resources and guides"
+      }
+    },
+    "viewMoreArticles": {
+      "buttonText": "View More Articles"
     }
   }
 }

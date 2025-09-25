@@ -16,6 +16,7 @@ import {
   Star
 } from 'lucide-react';
 import { URL_CONFIG } from '@/lib/url-config';
+import PartnerCommunicationFeature from './components/PartnerCommunicationFeature';
 
 // Types
 type Locale = 'en' | 'zh';
@@ -83,6 +84,10 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
     lifeStages: {
       filename: 'scenario-family.jpg',
       alt: 'Women of different life stages sharing menstrual health experiences'
+    },
+    partnerCommunication: {
+      filename: 'scenario-partner-communication.jpg',
+      alt: 'Couple having supportive conversation about period pain and understanding'
     }
   };
 
@@ -310,6 +315,9 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
           ))}
         </div>
       </section>
+
+      {/* Partner Communication Feature */}
+      <PartnerCommunicationFeature locale={locale} />
 
       {/* Emergency Kit Section */}
       <section className="bg-gradient-to-br from-red-50 to-orange-50 p-4 sm:p-6 md:p-8 rounded-xl">

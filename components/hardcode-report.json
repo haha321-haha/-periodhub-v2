@@ -2632,7 +2632,7 @@
       "match": "locale === 'zh' ? '如需更多信息，请访问：' : 'For more information, visit:'",
       "chineseText": "如需更多信息，请访问：",
       "englishText": "For more information, visit:",
-      "lineContent": "<p>${locale === 'zh' ? '如需更多信息，请访问：' : 'For more information, visit:'} <a href=\"https://periodhub.health\">periodhub.health</a></p>",
+      "lineContent": "<p>${locale === 'zh' ? '如需更多信息，请访问：' : 'For more information, visit:'} <a href=\"process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"\">periodhub.health</a></p>",
       "suggestion": "建议替换为: t('for.more.information')",
       "severity": "high"
     },
@@ -5167,7 +5167,7 @@
       "match": "'如需更多信息，请访问：' : 'For more information, visit:'",
       "chineseText": "如需更多信息，请访问：",
       "englishText": "For more information, visit:",
-      "lineContent": "<p>${locale === 'zh' ? '如需更多信息，请访问：' : 'For more information, visit:'} <a href=\"https://periodhub.health\">periodhub.health</a></p>",
+      "lineContent": "<p>${locale === 'zh' ? '如需更多信息，请访问：' : 'For more information, visit:'} <a href=\"process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"\">periodhub.health</a></p>",
       "suggestion": "建议替换为: t('for.more.information')",
       "severity": "high"
     },
@@ -15169,10 +15169,10 @@
       "column": 33,
       "type": "chinese-string",
       "description": "可能的中文字符串硬编码",
-      "match": "\": `https://periodhub.health${item.href}` })\n      }))\n    ]\n  };\n\n  return (\n    <>\n      {/* 结构化数据 */}\n      <script\n        type=\"",
-      "chineseText": ": `https://periodhub.health${item.href}` })\n      }))\n    ]\n  };\n\n  return (\n    <>\n      {/* 结构化数据 */}\n      <script\n        type=",
+      "match": "\": `process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"${item.href}` })\n      }))\n    ]\n  };\n\n  return (\n    <>\n      {/* 结构化数据 */}\n      <script\n        type=\"",
+      "chineseText": ": `process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"${item.href}` })\n      }))\n    ]\n  };\n\n  return (\n    <>\n      {/* 结构化数据 */}\n      <script\n        type=",
       "englishText": "",
-      "lineContent": "...(item.href && { \"item\": `https://periodhub.health${item.href}` })",
+      "lineContent": "...(item.href && { \"item\": `process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"${item.href}` })",
       "suggestion": "请检查是否为硬编码，如果是请替换为: t('结构.构化')",
       "severity": "low"
     },
@@ -22747,7 +22747,7 @@
       "match": "'如需更多信息，请访问：'",
       "chineseText": "如需更多信息，请访问：",
       "englishText": "",
-      "lineContent": "<p>${locale === 'zh' ? '如需更多信息，请访问：' : 'For more information, visit:'} <a href=\"https://periodhub.health\">periodhub.health</a></p>",
+      "lineContent": "<p>${locale === 'zh' ? '如需更多信息，请访问：' : 'For more information, visit:'} <a href=\"process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"\">periodhub.health</a></p>",
       "suggestion": "请检查是否为硬编码，如果是请替换为: t('如需.需更')",
       "severity": "low"
     },
@@ -22760,7 +22760,7 @@
       "match": "\">periodhub.health</a></p>\n    </div>\n</body>\n</html>`;\n  };\n\n  // 🔥 应用类型安全的翻译核心 - 消除硬编码\n  const getCategoryTitle = (key: string) => {\n    const titles = {\n      immediate: locale === '",
       "chineseText": ">periodhub.health</a></p>\n    </div>\n</body>\n</html>`;\n  };\n\n  // 🔥 应用类型安全的翻译核心 - 消除硬编码\n  const getCategoryTitle = (key: string) => {\n    const titles = {\n      immediate: locale === ",
       "englishText": "",
-      "lineContent": "<p>${locale === 'zh' ? '如需更多信息，请访问：' : 'For more information, visit:'} <a href=\"https://periodhub.health\">periodhub.health</a></p>",
+      "lineContent": "<p>${locale === 'zh' ? '如需更多信息，请访问：' : 'For more information, visit:'} <a href=\"process.env.NEXT_PUBLIC_BASE_URL || "https://periodhub.health"\">periodhub.health</a></p>",
       "suggestion": "请检查是否为硬编码，如果是请替换为: t('应用.用类')",
       "severity": "low"
     },

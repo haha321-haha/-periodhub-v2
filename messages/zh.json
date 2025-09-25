@@ -3467,7 +3467,7 @@
   },
   "scenarioSolutionsPage": {
     "title": "场景化痛经解决方案 - 职场、运动、社交全方位应对指南",
-    "description": "专业的场景化痛经应对方案，涵盖职场、运动、社交、睡眠等生活场景。提供针对性的缓解策略和实用技巧，让您在任何环境下都能从容应对痛经困扰。包含应急包清单、运动指导、社交礼仪等实用内容。基于循证医学的专业指导，适合各年龄段女性使用，确保生活品质。",
+    "description": "专业的场景化痛经应对方案，涵盖职场、运动、社交等生活场景。提供针对性缓解策略和实用技巧，确保生活品质。",
     "introTitle": "生活场景全覆盖",
     "introText": "每个女性的生活都是多元化的，从职场到家庭，从运动到社交，不同的场景需要不同的应对策略。我们为您精心准备了全方位的场景化解决方案，让您无论身处何地，都能优雅从容地应对痛经困扰。",
     "scenarios": {
@@ -3697,6 +3697,15 @@
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
         },
         "backToOverview": "返回场景解决方案总览"
+      },
+      "partnerCommunication": {
+        "title": "伴侣沟通场景",
+        "description": "专业的伴侣沟通场景解决方案，帮助伴侣更好地理解痛经，提供针对性的沟通策略和情感支持技巧。包含理解测试、30天训练营和个性化指导，帮助您建立更好的理解和沟通。",
+        "features": [
+          "伴侣理解测试",
+          "30天训练营",
+          "个性化指导"
+        ]
       },
       "commute": {
         "title": "通勤场景",
@@ -4400,7 +4409,12 @@
       "campusGuide": "校园应急指南",
       "emergencyKit": "应急包清单",
       "immediateMethods": "立即可用的方法",
-      "methods": ["热敷小腹或腰部", "深呼吸放松练习", "轻柔按摩腹部", "寻求老师或朋友帮助"]
+      "methods": [
+        "热敷小腹或腰部",
+        "深呼吸放松练习",
+        "轻柔按摩腹部",
+        "寻求老师或朋友帮助"
+      ]
     },
     "painAssessment": {
       "title": "🎯 痛经快速自测",
@@ -4414,22 +4428,38 @@
       "campusGuide": {
         "title": "校园应急指南",
         "description": "在学校突然痛起来怎么办？课堂应急、宿舍管理、体育课应对，全方位校园生存指南。",
-        "highlights": ["课堂悄悄自救技巧", "宿舍疼痛管理", "体育课应对策略"]
+        "highlights": [
+          "课堂悄悄自救技巧",
+          "宿舍疼痛管理",
+          "体育课应对策略"
+        ]
       },
       "developmentPain": {
         "title": "发育期疼痛管理",
         "description": "12-16岁专属疼痛管理建议，了解青春期痛经特点，掌握科学缓解方法。",
-        "highlights": ["青春期痛经特点", "科学缓解方法", "何时需要就医"]
+        "highlights": [
+          "青春期痛经特点",
+          "科学缓解方法",
+          "何时需要就医"
+        ]
       },
       "emotionalSupport": {
         "title": "情绪支持与心理健康",
         "description": "经期焦虑、情绪低落如何应对？放松技巧、同龄人经验分享，陪你度过情绪\"过山车\"。",
-        "highlights": ["情绪调节技巧", "焦虑缓解方法", "同龄人经验分享"]
+        "highlights": [
+          "情绪调节技巧",
+          "焦虑缓解方法",
+          "同龄人经验分享"
+        ]
       },
       "communicationGuide": {
         "title": "沟通指导",
         "description": "如何与家长、老师、医生有效沟通？提供对话模板和沟通技巧，让你勇敢表达需求。",
-        "highlights": ["家长沟通模板", "老师协作指南", "医生沟通技巧"]
+        "highlights": [
+          "家长沟通模板",
+          "老师协作指南",
+          "医生沟通技巧"
+        ]
       }
     },
     "resources": {
@@ -5373,5 +5403,262 @@
     "title": "出现错误",
     "description": "评估工具暂时无法使用，请稍后再试。",
     "reload": "重新加载"
+  },
+  "partnerHandbook": {
+    "pageTitle": "伴侣沟通手册",
+    "pageDescription": "专业的伴侣沟通场景解决方案，帮助伴侣更好地理解痛经，提供针对性的沟通策略和情感支持技巧。",
+    "introTitle": "伴侣沟通场景解决方案",
+    "introDescription": "当伴侣不理解痛经时，我们需要专业的沟通策略和情感支持技巧。这个解决方案包含理解度测试、30天训练营和个性化指导，帮助你们建立更好的理解和沟通。",
+    "loading": "加载中...",
+    "backToHome": "返回首页",
+    "exploreMore": "探索更多场景解决方案",
+    "exploreMoreDescription": "发现更多生活场景的痛经应对方案，包括职场、运动、社交等专业指导。",
+    "disclaimer": "免责声明",
+    "disclaimerContent": "本网站内容仅供信息和教育目的，不能替代专业医疗建议、诊断或治疗。我们不是医疗专业人员。如有任何医疗问题，请咨询您的医生或其他合格的医疗服务提供者。紧急情况下，请立即寻求医疗救助。使用本网站不构成医患关系。",
+    "quizCompleted": "测试完成！",
+    "testResults": "测试结果",
+    "correctAnswers": "答对题数",
+    "totalQuestions": "总题数",
+    "accuracy": "正确率",
+    "startProfessionalTest": "开始专业深度测试",
+    "startTrainingCamp": "开始30天训练营",
+    "startPersonalizedGuidance": "开始个性化指导",
+    "viewCompleteReport": "查看完整报告",
+    "levelDescription": "等级说明",
+    "personalizedRecommendations": "个性化建议",
+    "nextSteps": "下一步行动",
+    "retakeQuiz": "重新测试",
+    "shareAchievement": "分享你的成果",
+    "trainingProgress": "训练营进度",
+    "complete": "完成",
+    "progress": "进度",
+    "day": "第",
+    "daySuffix": "天",
+    "completed": "已完成",
+    "pending": "待完成",
+    "overallProgress": "整体进度",
+    "selectTrainingWeek": "选择训练周",
+    "weeklyGoal": "本周目标",
+    "minutes": "分钟",
+    "markAsComplete": "标记为完成",
+    "instructions": "执行步骤",
+    "tips": "小贴士",
+    "expectedOutcome": "预期效果",
+    "highlyRelevant": "高度相关",
+    "moderatelyRelevant": "中等相关",
+    "lowRelevance": "低相关",
+    "required": "必需",
+    "relatedRecommendations": "相关推荐",
+    "exploreMoreContent": "探索更多专业健康内容",
+    "learnMore": "了解更多",
+    "stageTitles": {
+      "stage1": "伴侣理解度测试",
+      "stage2": "专业深度测试",
+      "stage3": "30天训练营"
+    },
+    "fourStagesTitle": "四阶段递进学习系统",
+    "fourStagesDescription": "从基础理解到专业支持，循序渐进成为最暖心的伴侣",
+    "quiz": {
+      "title": "伴侣理解度测试",
+      "description": "通过5道基础题目，了解你对痛经的认知水平，获得个性化建议",
+      "instructions": "请男士独立完成以下10道题，诚实选择你认为最合适的答案。",
+      "noQuestionsAvailable": "暂无题目",
+      "noQuestionsDescription": "此阶段暂无测试题目",
+      "questionProgress": "第{current}/{total}题",
+      "nextQuestion": "下一题",
+      "completeTest": "完成测试",
+      "stages": {
+        "stage1": {
+          "title": "快速了解测试",
+          "description": "3分钟了解你的基础理解水平",
+          "instructions": "请男士独立完成以下5道题，诚实选择你认为最合适的答案。",
+          "timeLimit": "3分钟",
+          "difficulty": "简单",
+          "buttonText": "开始快速测试",
+          "unlockCondition": "立即可用"
+        },
+        "stage2": {
+          "title": "专业深度测试",
+          "description": "通过10道专业题目，深入了解痛经知识，获得专业建议",
+          "instructions": "请男士独立完成以下10道题，诚实选择你认为最合适的答案。",
+          "timeLimit": "10分钟",
+          "difficulty": "困难",
+          "buttonText": "开始专业测试",
+          "unlockCondition": "需先完成阶段1"
+        },
+        "stage3": {
+          "title": "30天训练营",
+          "description": "每天5分钟，循序渐进成为暖心伴侣",
+          "instructions": "根据测试结果，开始30天的系统训练，每天5分钟，循序渐进提升理解和支持能力。",
+          "timeLimit": "每天5分钟",
+          "difficulty": "中等",
+          "buttonText": "开始训练营",
+          "unlockCondition": "需先完成阶段2"
+        },
+        "stage4": {
+          "title": "个性化指导",
+          "description": "根据测试结果，提供专属的改进建议",
+          "instructions": "根据你的测试结果和训练进度，获得个性化的持续优化建议。",
+          "timeLimit": "持续进行",
+          "difficulty": "简单",
+          "buttonText": "开始个性化指导",
+          "unlockCondition": "需先完成阶段3"
+        }
+      }
+    },
+    "results": {
+      "beginner": {
+        "title": "初学者",
+        "description": "你已经有了不错的基础，继续加油！"
+      },
+      "intermediate": {
+        "title": "进阶者",
+        "description": "你对痛经有了较好的理解，可以进一步提升支持技巧。"
+      },
+      "advanced": {
+        "title": "高级者",
+        "description": "你对痛经有深入的理解，是女朋友的坚强后盾。"
+      },
+      "expert": {
+        "title": "专家级",
+        "description": "太棒了！你已经是理解痛经的高手了！"
+      }
+    },
+    "stage1Results": {
+      "beginner": {
+        "title": "温暖初心",
+        "description": "你拥有一颗愿意关怀的心，这比什么都重要！虽然对痛经的了解还比较基础，但你的真诚和参与就是最好的开始。每一个暖心的举动都会让她感受到你的爱意。",
+        "recommendations": {
+          "0": "从基础开始学习。每天花5分钟了解痛经的基本知识，比如\"为什么会有痛经\"、\"什么情况下需要关注\"。",
+          "1": "学会倾听。当她说\"肚子疼\"时，不要急着给建议，先问\"需要我做什么吗？\"让她感受到你的关心。"
+        },
+        "nextSteps": [
+          "完成专业深度测试",
+          "开始30天基础训练",
+          "学习基本关怀技巧"
+        ]
+      },
+      "intermediate": {
+        "title": "贴心守护者",
+        "description": "你已经掌握了痛经的基础知识，能够提供温暖的情感支持。你知道什么时候该给热水袋，什么时候该安静陪伴。你的关怀让她感到安心和被理解。",
+        "recommendations": {
+          "0": "学习基础按摩技巧。掌握简单的腹部按摩方法，在她说疼的时候能够提供实际的帮助。",
+          "1": "准备暖心小物品。比如热水袋、暖宝宝、红糖水等，让她感受到你的贴心准备。"
+        },
+        "nextSteps": [
+          "完成专业深度测试",
+          "开始30天进阶训练",
+          "学习更多关怀技巧"
+        ]
+      },
+      "advanced": {
+        "title": "理解达人",
+        "description": "恭喜你！你已经具备了很好的痛经理解能力，能够从情感和身体两个层面给予支持。你知道她的情绪变化，也了解如何提供最合适的帮助。",
+        "recommendations": {
+          "0": "制定关怀计划。和她一起讨论经期前后的注意事项，制定属于你们的\"关怀清单\"。",
+          "1": "成为她的依靠。让她知道在经期时，你就是她最可靠的支撑，不需要强撑。"
+        },
+        "nextSteps": [
+          "完成专业深度测试",
+          "开始30天高级训练",
+          "分享经验帮助他人"
+        ]
+      },
+      "expert": {
+        "title": "暖心专家",
+        "description": "你已经达到了基础测试的最高水平！你对痛经的理解和关怀能力已经超越了大多数男性。你的女朋友很幸运，有你这样贴心的伴侣。",
+        "recommendations": {
+          "0": "分享你的经验。帮助其他男性朋友学会如何更好地理解和支持伴侣。",
+          "1": "持续学习。虽然基础测试表现优秀，但专业测试会带给你更深层的医学知识。"
+        },
+        "nextSteps": [
+          "完成专业深度测试",
+          "开始30天专家训练",
+          "成为社区导师"
+        ]
+      }
+    },
+    "stage2Results": {
+      "beginner": {
+        "title": "专业关怀新手",
+        "description": "你具备了基础的医学认知，但还需要深入学习专业的痛经管理知识。通过系统学习，你将掌握科学的支持方法，成为她最可靠的专业支持者。",
+        "recommendations": {
+          "0": "学习医学基础知识。了解前列腺素、子宫内膜脱落等专业术语，掌握痛经的生理机制。",
+          "1": "建立科学认知框架。区分原发性痛经和继发性痛经，学会识别需要医疗干预的症状。"
+        },
+        "nextSteps": [
+          "开始30天专业训练",
+          "重点学习医学知识",
+          "建立科学认知体系"
+        ]
+      },
+      "intermediate": {
+        "title": "专业支持伙伴",
+        "description": "你已经掌握了相当的专业知识，能够从医学角度理解痛经的复杂性。你不仅具备同理心，更拥有科学的支持方法，能够提供精准的专业指导。",
+        "recommendations": {
+          "0": "掌握专业护理技能。学习专业的疼痛评估方法，掌握科学的缓解技巧和药物知识。",
+          "1": "制定科学支持计划。根据她的具体情况，制定个性化的经期管理方案。"
+        },
+        "nextSteps": [
+          "开始30天专业训练",
+          "重点提升专业技能",
+          "学习高级护理方法"
+        ]
+      },
+      "advanced": {
+        "title": "专业共情专家",
+        "description": "恭喜你！你不仅拥有专业的医学知识，更具备了完美的共情能力。你能够从科学和情感两个维度提供支持，是90%男性都无法企及的专业\"神队友\"。",
+        "recommendations": {
+          "0": "制定专业应急预案。基于医学知识，和她一起制定科学的\"经期应急预案\"，包括症状监测、药物准备、医疗联系等。",
+          "1": "成为专业导师。运用你的专业知识，帮助其他情侣建立科学的经期管理方法。"
+        },
+        "nextSteps": [
+          "开始30天专业训练",
+          "重点巩固专业能力",
+          "成为专业社区导师"
+        ]
+      },
+      "expert": {
+        "title": "专业关怀大师",
+        "description": "你已经达到了专业测试的最高境界！你不仅拥有深厚的医学知识，更具备了完美的专业判断力和行动力。你是医学级别的伴侣支持专家，是所有男性学习的专业榜样。",
+        "recommendations": {
+          "0": "分享专业经验。运用你的专业知识，帮助更多男性朋友掌握科学的伴侣支持方法。",
+          "1": "成为专业导师。指导其他情侣建立基于医学知识的经期管理体系和沟通模式。",
+          "2": "持续专业学习。保持对最新医学研究的关注，不断提升专业支持能力。"
+        },
+        "nextSteps": [
+          "开始30天专业训练",
+          "成为专业社区导师",
+          "分享专业经验帮助他人"
+        ]
+      }
+    },
+    "relatedLinks": {
+      "title": "相关推荐",
+      "description": "探索更多专业健康内容",
+      "scenarioSolutions": {
+        "title": "场景解决方案",
+        "description": "不同生活场景的综合解决方案"
+      },
+      "naturalTherapies": {
+        "title": "自然疗法",
+        "description": "安全有效的自然缓解方法"
+      },
+      "interactiveTools": {
+        "title": "互动工具",
+        "description": "专业的评估和追踪工具"
+      },
+      "healthGuide": {
+        "title": "健康指南",
+        "description": "全面的经期健康管理指南"
+      },
+      "downloads": {
+        "title": "下载资源",
+        "description": "可下载的资源和建议"
+      }
+    },
+    "viewMoreArticles": {
+      "buttonText": "查看更多文章"
+    }
   }
 }

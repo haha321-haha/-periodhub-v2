@@ -116,6 +116,17 @@ export default async function HealthGuidePage({
       
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-12">
+          {/* Breadcrumb */}
+          <nav className="text-sm text-neutral-600">
+            <Link href={`/${locale}`} className="hover:text-primary-600">
+              {locale === 'zh' ? '首页' : 'Home'}
+            </Link>
+            <span className="mx-2">›</span>
+            <span className="text-neutral-800">
+              {locale === 'zh' ? '痛经健康指南' : 'Health Guide'}
+            </span>
+          </nav>
+
           {/* Page Header */}
           <header className="text-center">
             <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">

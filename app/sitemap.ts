@@ -113,6 +113,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/en/scenario-solutions/social',
     '/zh/scenario-solutions/lifeStages',
     '/en/scenario-solutions/lifeStages',
+    '/zh/scenario-solutions/partnerCommunication',
+    '/en/scenario-solutions/partnerCommunication',
     '/zh/scenario-solutions/emergency-kit',
     '/en/scenario-solutions/emergency-kit',
   ];
@@ -157,7 +159,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'menstrual-pain-research-progress-2024',
     'menstrual-preventive-care-complete-plan',
     'menstrual-stress-management-complete-guide',
-    'understanding-your-cycle',
     'us-menstrual-pain-insurance-coverage-guide',
     'when-to-see-doctor-period-pain',
     'when-to-seek-medical-care-comprehensive-guide',

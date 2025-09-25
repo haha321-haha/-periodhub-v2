@@ -41,8 +41,67 @@ export function useSafeTranslations(namespace?: string) {
     }
   };
 
+  const safeTRaw = (key: string, params?: Record<string, any>, fallback?: any): any => {
+    try {
+      // 检查 t.raw 方法是否存在
+      if (typeof t.raw === 'function') {
+        const result = t.raw(key, params);
+        return result;
+      } else {
+        // 如果 t.raw 不存在，尝试使用 t 方法
+        console.warn(`t.raw method not available, falling back to t method for key: ${key}`);
+        const result = t(key, params);
+        return result;
+      }
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error(`🌐 Translation error (raw): ${namespace ? `${namespace}.` : ''}${key}`, error);
+      }
+      
+      return fallback || null;
+    }
+  };
+
+  const hasTranslation = (key: string): boolean => {
+    // 基于已知的翻译键结构来判断是否存在
+    // 这是一个更安全的方法，避免调用next-intl的API
+    
+    // 检查是否是recommendations相关的键
+    if (key.includes('.recommendations.')) {
+      const parts = key.split('.');
+      const levelIndex = parts.findIndex(part => part === 'recommendations');
+      
+      if (levelIndex !== -1 && levelIndex < parts.length - 1) {
+        const recommendationIndex = parseInt(parts[levelIndex + 1]);
+        
+        // 基于已知的建议数量来判断
+        // stage1: beginner(2), intermediate(2), advanced(2), expert(2)
+        // stage2: beginner(2), intermediate(2), advanced(2), expert(3)
+        const stage = parts.includes('stage1Results') ? 'stage1' : 'stage2';
+        const level = parts[parts.indexOf('stage1Results') + 1] || parts[parts.indexOf('stage2Results') + 1];
+        
+        if (stage === 'stage1') {
+          // stage1所有等级都有2个建议
+          return recommendationIndex < 2;
+        } else if (stage === 'stage2') {
+          // stage2: beginner(2), intermediate(2), advanced(2), expert(3)
+          if (level === 'expert') {
+            return recommendationIndex < 3;
+          } else {
+            return recommendationIndex < 2;
+          }
+        }
+      }
+    }
+    
+    // 对于其他类型的键，假设存在
+    return true;
+  };
+
   return {
     t: safeT,
+    tRaw: safeTRaw,
+    hasTranslation,
     locale,
     isZh: locale === 'zh',
     isEn: locale === 'en'

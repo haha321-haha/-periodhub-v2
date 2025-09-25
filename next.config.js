@@ -208,6 +208,22 @@ const nextConfig = {
         source: '/special-therapies',
         destination: '/en/natural-therapies',
         permanent: true
+      },
+      // 🎯 重定向understanding-your-cycle到health-guide
+      {
+        source: '/zh/articles/understanding-your-cycle',
+        destination: '/zh/health-guide',
+        permanent: true
+      },
+      {
+        source: '/en/articles/understanding-your-cycle',
+        destination: '/en/health-guide',
+        permanent: true
+      },
+      {
+        source: '/articles/understanding-your-cycle',
+        destination: '/zh/health-guide',
+        permanent: true
       }
     ];
   }

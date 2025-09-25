@@ -203,9 +203,9 @@ export default function RootLayout({
             * { box-sizing: border-box; }
             img, video { max-width: 100%; height: auto; }
           `
-        }} />
+        }} suppressHydrationWarning />
       </head>
-      <body className={notoSansSC.className}>
+      <body className={notoSansSC.className} suppressHydrationWarning>
         {/* 🔧 Hydration修复 - 解决浏览器扩展导致的hydration不匹配 */}
         <HydrationFix />
         

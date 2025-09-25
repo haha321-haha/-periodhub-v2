@@ -11,7 +11,7 @@ const path = require('path');
 
 // 配置
 const CONFIG = {
-  baseUrl: 'https://www.periodhub.health',
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health',
   testUrls: [
     '/articles',
     '/zh/articles', 

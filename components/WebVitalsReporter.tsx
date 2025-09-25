@@ -47,12 +47,17 @@ export function WebVitalsReporter() {
       console.log(`📊 ${metric.name}: ${metric.value} (${metric.rating})`);
     }
     
-    // 发送到自定义分析端点
-    fetch('/api/analytics/web-vitals', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(metric),
-    }).catch(console.error);
+    // 发送到自定义分析端点（仅在开发环境且API可用时）
+    if (process.env.NODE_ENV === 'development') {
+      fetch('/api/analytics/web-vitals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(metric),
+      }).catch(error => {
+        // 静默处理fetch错误，避免影响页面功能
+        console.warn('Web Vitals API不可用:', error.message);
+      });
+    }
   }
 
 

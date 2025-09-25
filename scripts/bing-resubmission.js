@@ -12,11 +12,11 @@ const path = require('path');
 // 配置
 const CONFIG = {
   bingApiUrl: 'https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch',
-  siteUrl: 'https://www.periodhub.health',
+  siteUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health',
   urlsToResubmit: [
-    'https://www.periodhub.health/articles',
-    'https://www.periodhub.health/zh/articles',
-    'https://www.periodhub.health/en/articles'
+    `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/articles`,
+    `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/zh/articles`,
+    `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/en/articles`
   ],
   outputFile: 'reports/bing-resubmission-report.json'
 };

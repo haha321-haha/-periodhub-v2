@@ -291,3 +291,4 @@ app/[locale]/workplace-wellness/data/
 *报告生成时间：2025-09-25*  
 *类型定义完成度：100%*  
 *状态：✅ 准备就绪*
+

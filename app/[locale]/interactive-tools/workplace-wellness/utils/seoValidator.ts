@@ -272,3 +272,4 @@ export function generateSEOValidationReport(locale: Locale): string {
   return JSON.stringify(report, null, 2);
 }
 
+

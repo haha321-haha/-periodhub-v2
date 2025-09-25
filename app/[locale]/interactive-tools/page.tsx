@@ -109,6 +109,17 @@ export default async function InteractiveToolsPage({
       iconColor: 'text-orange-600',
       cta: locale === 'zh' ? '开始营养分析' : 'Start Nutrition Analysis',
       requiresPrerequisites: true,
+    },
+    {
+      title: locale === 'zh' ? '职场健康助手' : 'Workplace Wellness Assistant',
+      description: locale === 'zh' 
+        ? '专业的职场健康管理工具，帮助您追踪经期对工作的影响，提供个性化的工作调整建议和健康管理方案。'
+        : 'Professional workplace wellness management tool to track menstrual impact on work and provide personalized work adjustment recommendations.',
+      href: `/${locale}/interactive-tools/workplace-wellness`,
+      iconType: 'BarChart3',
+      iconColor: 'text-blue-600',
+      cta: locale === 'zh' ? '开始健康管理' : 'Start Wellness Management',
+      requiresPrerequisites: false,
     }
   ];
 

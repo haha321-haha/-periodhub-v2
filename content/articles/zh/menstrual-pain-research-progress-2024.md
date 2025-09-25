@@ -1,15 +1,26 @@
 ---
 title: "2024年痛经研究进展报告：循证医学与临床转化"
+title_en: "2024 Menstrual Pain Research Progress Report: Evidence-Based Medicine and Clinical Translation"
 description: "基于PubMed数据库、FDA批准信息及权威期刊已发表研究的2024年痛经研究进展报告，涵盖病理机制新发现、治疗方法创新突破、循证预防策略和数字健康技术应用，为美国女性提供最新循证医学指导。"
+description_en: "2024 menstrual pain research progress report based on PubMed database, FDA approval information, and published studies from authoritative journals, covering new pathological mechanism discoveries, innovative treatment breakthroughs, evidence-based prevention strategies, and digital health technology applications, providing the latest evidence-based medical guidance for American women."
 summary: "痛经影响45-95%的育龄女性，超过30%的青少年经历严重痛经。本报告整合2024年最新的同行评议研究和临床试验数据，包括HMI-115等新药进展、中枢敏化机制发现、个性化医疗方向和数字健康技术应用。"
+summary_en: "Menstrual pain affects 45-95% of reproductive-age women, with over 30% of adolescents experiencing severe dysmenorrhea. This report integrates the latest peer-reviewed research and clinical trial data from 2024, including new drug developments like HMI-115, central sensitization mechanism discoveries, personalized medicine directions, and digital health technology applications."
 category: "理解与教育"
+category_en: "Understanding & Education"
 tags: ["循证医学", "研究进展", "新药开发", "病理机制", "临床试验"]
+tags_en: ["evidence-based medicine", "research progress", "drug development", "pathological mechanisms", "clinical trials"]
 author: "Period Hub Health Team"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true
 reading_time: "18分钟"
-reading_time_zh: "18分钟"
+reading_time_en: "18 minutes"
+seo_title: "2024年痛经研究进展报告：循证医学与临床转化 | 专业女性健康"
+seo_title_en: "2024 Menstrual Pain Research Progress Report: Evidence-Based Medicine and Clinical Translation | Professional Women's Health"
+seo_description: "2024年痛经研究进展报告：基于PubMed数据库和FDA批准信息的最新循证医学研究，涵盖病理机制新发现、治疗方法创新突破、循证预防策略和数字健康技术应用。为美国女性提供最新循证医学指导，包括HMI-115等新药进展、中枢敏化机制发现、个性化医疗方向和数字健康技术应用。"
+seo_description_en: "2024 menstrual pain research progress report based on PubMed database and FDA approval information, covering new pathological mechanism discoveries, innovative treatment breakthroughs, evidence-based prevention strategies, and digital health technology applications. Providing the latest evidence-based medical guidance for American women."
+canonical_url: "/zh/articles/menstrual-pain-research-progress-2024"
+schema_type: "Article"
 ---
 
 # 2024年痛经研究进展报告：循证医学与临床转化

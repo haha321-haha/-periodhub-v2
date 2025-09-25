@@ -21,11 +21,11 @@ export async function generateMetadata({
     title: `${title} | periodhub.health`,
     description,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/privacy-policy`,
+      canonical: `https://www.periodhub.health/${locale}/privacy-policy`,
       languages: {
-        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/privacy-policy`,
-        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/privacy-policy`,
-        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/privacy-policy`,
+        'zh-CN': 'https://www.periodhub.health/zh/privacy-policy',
+        'en-US': 'https://www.periodhub.health/en/privacy-policy',
+        'x-default': 'https://www.periodhub.health/zh/privacy-policy',
       },
     },
     openGraph: {

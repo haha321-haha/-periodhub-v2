@@ -847,7 +847,7 @@
     "hero": {
       "headline": "告别经期不适，掌控生理周期。",
       "subheadline": "您的贴心伙伴，提供有效方案与支持资源，助您轻松应对痛经困扰。",
-      "bodyCopy": "欢迎来到 periodhub.health – 您值得信赖的经期健康伙伴。我们提供循证的见解、实用的工具和贴心的支持，帮助您理解、管理并缓解经期不适。无论您需要快速的缓解方法、长期的策略，还是对身体更深入的了解，我们都在这里为您服务。",
+      "bodyCopy": "欢迎来到 www.periodhub.health – 您值得信赖的经期健康伙伴。我们提供循证的见解、实用的工具和贴心的支持，帮助您理解、管理并缓解经期不适。无论您需要快速的缓解方法、长期的策略，还是对身体更深入的了解，我们都在这里为您服务。",
       "ctaExplore": "探索方案",
       "ctaCheckSymptoms": "开始症状检查",
       "imageAlt": "一位女性在温馨的环境中表达关怀和理解的形象",
@@ -3790,7 +3790,7 @@
   },
   "footer": {
     "description": "专业经期健康信息平台",
-    "copyright": "© {currentYear, number, integer} periodhub.health。保留所有权利。",
+    "copyright": "© {currentYear, number, integer} www.periodhub.health。保留所有权利。",
     "privacy": "隐私政策",
     "terms": "服务条款",
     "contact_email": "tiyibaofu@outlook.com",

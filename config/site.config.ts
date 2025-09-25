@@ -16,16 +16,16 @@ export const SITE_CONFIG = {
   },
   
   // 域名和URL配置
-  domain: 'periodhub.health',
+  domain: 'www.periodhub.health',
   baseUrl: process.env.NODE_ENV === 'production' 
     ? 'https://www.periodhub.health' 
     : 'http://localhost:3000',
   
   // 社交媒体和联系信息
   social: {
-    email: 'support@periodhub.health',
+    email: 'support@www.periodhub.health',
     twitter: '@periodhub',
-    facebook: 'periodhub.health'
+    facebook: 'www.periodhub.health'
   },
   
   // SEO配置

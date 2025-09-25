@@ -284,7 +284,7 @@
     "hero": {
       "headline": "Find Relief, Understand Your Cycle.",
       "subheadline": "Your compassionate guide to navigating menstrual pain with effective solutions and supportive resources.",
-      "bodyCopy": "Welcome to periodhub.health – your trusted partner for menstrual wellness. We offer evidence-based insights, practical tools, and compassionate support to help you understand, manage, and find relief from menstrual discomfort. Whether you need quick remedies, long-term strategies, or a deeper understanding of your body, we're here for you.",
+      "bodyCopy": "Welcome to www.periodhub.health – your trusted partner for menstrual wellness. We offer evidence-based insights, practical tools, and compassionate support to help you understand, manage, and find relief from menstrual discomfort. Whether you need quick remedies, long-term strategies, or a deeper understanding of your body, we're here for you.",
       "ctaExplore": "Explore Solutions",
       "ctaCheckSymptoms": "Start Your Symptom Check",
       "imageAlt": "A woman in a warm, caring environment expressing understanding and compassion",
@@ -2548,7 +2548,7 @@
   },
   "footer": {
     "description": "Professional menstrual health information platform",
-    "copyright": "© {currentYear, number, integer} periodhub.health. All rights reserved.",
+    "copyright": "© {currentYear, number, integer} www.periodhub.health. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "contact_email": "tiyibaofu@outlook.com",

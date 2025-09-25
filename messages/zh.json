@@ -23,10 +23,70 @@
       "title": "健康文章 - Period Hub",
       "description": "42篇基于循证医学的经期健康文章，涵盖痛经缓解、营养调理、生活方式改善等专业知识"
     },
-    "tools": {
-      "title": "互动工具 - Period Hub",
-      "description": "痛经症状评估、周期追踪、体质测试等6大专业工具，基于医学研究提供个性化经期健康管理方案"
+  "tools": {
+    "title": "互动工具 - Period Hub",
+    "description": "痛经症状评估、周期追踪、体质测试等6大专业工具，基于医学研究提供个性化经期健康管理方案"
+  },
+  "nutritionGenerator": {
+    "pageTitle": "营养推荐生成器",
+    "mainTitle": "个性化营养推荐生成器",
+    "subtitle": "基于月经周期、健康目标和中医体质的科学营养指导",
+    "generateBtn": "生成我的建议",
+    "generating": "正在生成...",
+    "noSelection": "请至少选择一个选项以生成建议",
+    "footerText": "个性化健康，触手可及。",
+    "categories": {
+      "menstrualPhase": "月经阶段",
+      "healthGoals": "健康目标",
+      "tcmConstitution": "中医体质"
     },
+    "results": {
+      "title": "您的个性化营养建议",
+      "subtitle": "基于您的选择，我们为您推荐以下营养指导",
+      "recommendedFoods": "推荐食物",
+      "foodsToAvoid": "慎食/忌食",
+      "lifestyleTips": "生活与饮食贴士"
+    },
+    "menstrualPhase": {
+      "title": "选择您的月经阶段",
+      "description": "不同月经阶段的营养需求有所不同",
+      "options": {
+        "menstrual": "月经期",
+        "follicular": "卵泡期",
+        "ovulation": "排卵期",
+        "luteal": "黄体期"
+      }
+    },
+    "healthGoals": {
+      "title": "选择您的健康目标",
+      "description": "可以多选，我们会综合考虑您的所有目标",
+      "options": {
+        "anemiaPrevention": "预防缺铁性贫血",
+        "pmsRelief": "缓解经前综合症"
+      }
+    },
+    "tcmConstitution": {
+      "title": "选择您的中医体质",
+      "description": "了解您的体质类型，获得更精准的营养建议",
+      "options": {
+        "qiDeficiency": "气虚",
+        "yangDeficiency": "阳虚",
+        "yinDeficiency": "阴虚",
+        "phlegmDampness": "痰湿",
+        "dampHeat": "湿热"
+      }
+    },
+    "meta": {
+      "title": "营养推荐生成器 | 基于月经周期和中医体质的个性化营养指导 | Period Hub",
+      "description": "专业的营养推荐生成器，基于您的月经周期、健康目标和中医体质，提供个性化的饮食指导。科学结合现代营养学与中医理论，为女性提供精准的营养管理方案，帮助改善经期健康和生活质量。",
+      "keywords": "营养推荐生成器,月经周期营养,中医体质饮食,个性化营养方案,女性健康饮食,经期营养管理,痛经营养调理,中医食疗,月经期饮食指导,营养计算器",
+      "ogTitle": "营养推荐生成器 | 个性化营养指导工具",
+      "ogDescription": "基于月经周期、健康目标和中医体质的专业营养推荐生成器，为女性提供科学的个性化饮食指导。",
+      "ogImageAlt": "营养推荐生成器界面截图",
+      "twitterTitle": "营养推荐生成器 | 个性化营养指导",
+      "twitterDescription": "基于月经周期和中医体质的专业营养推荐生成器，为女性提供科学的个性化饮食指导。"
+    }
+  },
     "teen": {
       "title": "青少年健康专区 - Period Hub",
       "description": "专为10-19岁青少年设计的经期健康教育，包含痛经初潮应对、校园应急处理、心理调适等实用指导"

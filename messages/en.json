@@ -23,10 +23,70 @@
       "title": "Health Articles - Period Hub",
       "description": "42 evidence-based articles covering period pain relief, nutrition therapy, lifestyle improvements and expert menstrual health knowledge"
     },
-    "tools": {
-      "title": "Interactive Tools - Period Hub",
-      "description": "6 professional tools including period pain assessment, cycle tracking, constitution testing - personalized menstrual health management based on medical research"
+  "tools": {
+    "title": "Interactive Tools - Period Hub",
+    "description": "6 professional tools including period pain assessment, cycle tracking, constitution testing - personalized menstrual health management based on medical research"
+  },
+  "nutritionGenerator": {
+    "pageTitle": "Nutrition Recommendation Generator",
+    "mainTitle": "Personalized Nutrition Recommendation Generator",
+    "subtitle": "Scientific nutrition guidance based on menstrual cycle, health goals, and TCM constitution",
+    "generateBtn": "Generate My Plan",
+    "generating": "Generating...",
+    "noSelection": "Please make at least one selection to generate recommendations",
+    "footerText": "Personalized wellness at your fingertips.",
+    "categories": {
+      "menstrualPhase": "Menstrual Phase",
+      "healthGoals": "Health Goals",
+      "tcmConstitution": "TCM Constitution"
     },
+    "results": {
+      "title": "Your Personalized Nutrition Recommendations",
+      "subtitle": "Based on your selections, we recommend the following nutrition guidance",
+      "recommendedFoods": "Recommended Foods",
+      "foodsToAvoid": "Foods to Avoid",
+      "lifestyleTips": "Lifestyle & Dietary Tips"
+    },
+    "menstrualPhase": {
+      "title": "Select Your Menstrual Phase",
+      "description": "Nutritional needs vary during different menstrual phases",
+      "options": {
+        "menstrual": "Menstrual Phase",
+        "follicular": "Follicular Phase",
+        "ovulation": "Ovulation Phase",
+        "luteal": "Luteal Phase"
+      }
+    },
+    "healthGoals": {
+      "title": "Select Your Health Goals",
+      "description": "You can select multiple goals, we'll consider all of them",
+      "options": {
+        "anemiaPrevention": "Prevent Iron-Deficiency Anemia",
+        "pmsRelief": "Alleviate PMS Symptoms"
+      }
+    },
+    "tcmConstitution": {
+      "title": "Select Your TCM Constitution",
+      "description": "Understand your constitution type for more precise nutrition advice",
+      "options": {
+        "qiDeficiency": "Qi Deficiency",
+        "yangDeficiency": "Yang Deficiency",
+        "yinDeficiency": "Yin Deficiency",
+        "phlegmDampness": "Phlegm-Dampness",
+        "dampHeat": "Damp-Heat"
+      }
+    },
+    "meta": {
+      "title": "Nutrition Recommendation Generator | Personalized Diet Based on Menstrual Cycle & TCM | Period Hub",
+      "description": "Professional nutrition suggestion generator based on your menstrual cycle, health goals, and TCM constitution. Combines modern nutrition science with traditional Chinese medicine to provide personalized dietary guidance for women's menstrual health and quality of life improvement.",
+      "keywords": "nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management,period pain nutrition therapy,TCM dietary therapy,menstrual diet guide,nutrition calculator",
+      "ogTitle": "Nutrition Recommendation Generator | Personalized Nutrition Guide Tool",
+      "ogDescription": "Professional nutrition suggestion generator based on menstrual cycle, health goals, and TCM constitution, providing scientific personalized dietary guidance for women.",
+      "ogImageAlt": "Nutrition recommendation generator interface screenshot",
+      "twitterTitle": "Nutrition Recommendation Generator | Personalized Nutrition Guide",
+      "twitterDescription": "Professional nutrition suggestion generator based on menstrual cycle and TCM constitution, providing scientific personalized dietary guidance for women."
+    }
+  },
     "teen": {
       "title": "Teen Health Zone - Period Hub",
       "description": "Specialized menstrual health education for ages 10-19, including first period guidance, school emergency handling, and psychological adjustment support"

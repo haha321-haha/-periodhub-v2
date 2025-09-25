@@ -212,17 +212,31 @@ export const useWorkImpact = () => useWorkplaceWellnessStore((state) => state.wo
 export const useNutrition = () => useWorkplaceWellnessStore((state) => state.nutrition);
 export const useExport = () => useWorkplaceWellnessStore((state) => state.export);
 
-// Actions Hooks
-export const useWorkplaceWellnessActions = () => useWorkplaceWellnessStore((state) => ({
-  setLanguage: state.setLanguage,
-  toggleLanguage: state.toggleLanguage,
-  setActiveTab: state.setActiveTab,
-  updateCalendar: state.updateCalendar,
-  setCurrentDate: state.setCurrentDate,
-  updateWorkImpact: state.updateWorkImpact,
-  selectTemplate: state.selectTemplate,
-  updateNutrition: state.updateNutrition,
-  updateExport: state.updateExport,
-  setExporting: state.setExporting,
-  resetState: state.resetState,
-}));
+// Actions Hooks - 使用useCallback避免无限循环
+export const useWorkplaceWellnessActions = () => {
+  const setLanguage = useWorkplaceWellnessStore((state) => state.setLanguage);
+  const toggleLanguage = useWorkplaceWellnessStore((state) => state.toggleLanguage);
+  const setActiveTab = useWorkplaceWellnessStore((state) => state.setActiveTab);
+  const updateCalendar = useWorkplaceWellnessStore((state) => state.updateCalendar);
+  const setCurrentDate = useWorkplaceWellnessStore((state) => state.setCurrentDate);
+  const updateWorkImpact = useWorkplaceWellnessStore((state) => state.updateWorkImpact);
+  const selectTemplate = useWorkplaceWellnessStore((state) => state.selectTemplate);
+  const updateNutrition = useWorkplaceWellnessStore((state) => state.updateNutrition);
+  const updateExport = useWorkplaceWellnessStore((state) => state.updateExport);
+  const setExporting = useWorkplaceWellnessStore((state) => state.setExporting);
+  const resetState = useWorkplaceWellnessStore((state) => state.resetState);
+
+  return {
+    setLanguage,
+    toggleLanguage,
+    setActiveTab,
+    updateCalendar,
+    setCurrentDate,
+    updateWorkImpact,
+    selectTemplate,
+    updateNutrition,
+    updateExport,
+    setExporting,
+    resetState,
+  };
+};

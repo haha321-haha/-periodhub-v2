@@ -47,12 +47,12 @@ export async function generateMetadata({
       images: ['/images/nutrition-generator-twitter.jpg'],
     },
     alternates: {
-      canonical: `https://www.periodhub.health/${locale}/nutrition-recommendation-generator`,
-      languages: {
-        'zh': 'https://www.periodhub.health/zh/nutrition-recommendation-generator',
-        'en': 'https://www.periodhub.health/en/nutrition-recommendation-generator',
-      },
-    },
+             canonical: `https://www.periodhub.health/${locale}/interactive-tools/nutrition-recommendation-generator`,
+             languages: {
+               'zh': 'https://www.periodhub.health/zh/interactive-tools/nutrition-recommendation-generator',
+               'en': 'https://www.periodhub.health/en/interactive-tools/nutrition-recommendation-generator',
+             },
+           },
   };
 }
 

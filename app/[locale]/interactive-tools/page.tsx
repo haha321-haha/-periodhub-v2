@@ -104,7 +104,7 @@ export default async function InteractiveToolsPage({
       description: locale === 'zh' 
         ? '基于您的月经周期、健康目标和中医体质，提供科学的个性化营养建议。使用前请先完成周期追踪和体质测试。'
         : 'Get personalized nutrition recommendations based on your menstrual cycle, health goals, and TCM constitution. Complete cycle tracking and constitution test first.',
-      href: `/${locale}/nutrition-recommendation-generator`,
+      href: `/${locale}/interactive-tools/nutrition-recommendation-generator`,
       iconType: 'Apple',
       iconColor: 'text-orange-600',
       cta: locale === 'zh' ? '开始营养分析' : 'Start Nutrition Analysis',

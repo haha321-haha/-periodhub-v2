@@ -66,13 +66,15 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
   const { t, tRaw } = useSafeTranslations('partnerHandbook');
   const { 
     currentLanguage, 
-    quizResult, 
     completeStage,
     resetAllStages,
     stageProgress,
     isStageUnlocked,
     initializeMissingStages
   } = usePartnerHandbookStore();
+  
+  // 从stageProgress中获取当前阶段的quizResult
+  const quizResult = stageProgress[currentStage]?.result;
   
   const stageActions = useStageActions();
   const { clearAllTestData } = stageActions;

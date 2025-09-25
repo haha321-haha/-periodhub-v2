@@ -17,8 +17,8 @@ interface LazyLoaderProps {
 
 // 默认加载状态
 const DefaultFallback = ({ height = "200px" }: { height?: string }) => (
-  <LoadingWrapper>
-    <SkeletonCard height={height} />
+  <LoadingWrapper isLoading={true} loadingComponent={<SkeletonCard className={`h-[${height}]`} />}>
+    <SkeletonCard className={`h-[${height}]`} />
   </LoadingWrapper>
 );
 
@@ -61,7 +61,7 @@ export function createLazyComponent<T extends ComponentType<any>>(
         fallback={fallback || <DefaultFallback height={props.height} />}
         delay={delay}
       >
-        <LazyComponent {...props} />
+        <LazyComponent {...(props as any)} />
       </DelayedSuspense>
     );
   };

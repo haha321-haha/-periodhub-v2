@@ -121,7 +121,7 @@ export interface CalendarState {
 // 应用状态接口 - 基于HVsLYEp的appState结构
 export interface WorkplaceWellnessState {
   lang: Language;
-  activeTab: 'calendar' | 'nutrition' | 'export' | 'settings';
+  activeTab: 'calendar' | 'nutrition' | 'export' | 'settings' | 'work-impact' | 'analysis';
   calendar: CalendarState;
   workImpact: WorkImpactData;
   nutrition: NutritionData;

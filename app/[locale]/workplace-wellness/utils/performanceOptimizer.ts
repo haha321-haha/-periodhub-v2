@@ -245,18 +245,13 @@ export function useRenderOptimization() {
 export function useOptimizedSelector<T, R>(
   selector: (state: T) => R,
   equalityFn?: (a: R, b: R) => boolean
-): R {
+): (state: T) => R {
   const memoizedSelector = useMemo(
     () => selector,
     [selector]
   );
   
-  const result = useMemo(
-    () => memoizedSelector,
-    [memoizedSelector]
-  );
-  
-  return result;
+  return memoizedSelector;
 }
 
 /**

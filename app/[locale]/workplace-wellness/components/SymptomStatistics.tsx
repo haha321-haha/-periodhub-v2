@@ -63,7 +63,7 @@ export default function SymptomStatistics() {
     
     commonSymptoms.forEach(symptom => {
       const occurrences = periodData.filter(record => 
-        record.symptoms && record.symptoms.includes(symptom)
+        (record as any).symptoms && (record as any).symptoms.includes(symptom)
       );
       
       if (occurrences.length > 0) {

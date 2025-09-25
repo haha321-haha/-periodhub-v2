@@ -122,11 +122,17 @@ export default function WorkplaceWellnessPage() {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <LoadingWrapper>
+        <LoadingWrapper isLoading={true} loadingComponent={
           <div className="space-y-6">
-            <SkeletonCard height="200px" />
-            <SkeletonCard height="150px" />
-            <SkeletonCard height="100px" />
+            <SkeletonCard className="h-[200px]" />
+            <SkeletonCard className="h-[150px]" />
+            <SkeletonCard className="h-[100px]" />
+          </div>
+        }>
+          <div className="space-y-6">
+            <SkeletonCard className="h-[200px]" />
+            <SkeletonCard className="h-[150px]" />
+            <SkeletonCard className="h-[100px]" />
           </div>
         </LoadingWrapper>
       );

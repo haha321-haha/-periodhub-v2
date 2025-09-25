@@ -33,6 +33,7 @@ export interface ProductionConfig {
     enableBundleAnalysis: boolean;
     enableSourceMap: boolean;
     enableSWC: boolean;
+    enableMinification: boolean;
   };
   deployment: {
     enableStaticGeneration: boolean;
@@ -72,6 +73,7 @@ export const defaultProductionConfig: ProductionConfig = {
     enableBundleAnalysis: true,
     enableSourceMap: false, // 生产环境关闭source map
     enableSWC: true,
+    enableMinification: true,
   },
   deployment: {
     enableStaticGeneration: true,

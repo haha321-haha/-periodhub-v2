@@ -390,7 +390,10 @@ export default function ExportTemplateManager({ lang = 'zh' }: ExportTemplateMan
                       value={newTemplate.dateRange?.start || ''}
                       onChange={(e) => setNewTemplate({
                         ...newTemplate,
-                        dateRange: { ...newTemplate.dateRange, start: e.target.value }
+                        dateRange: { 
+                          start: e.target.value,
+                          end: newTemplate.dateRange?.end || ''
+                        }
                       })}
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     />
@@ -405,7 +408,10 @@ export default function ExportTemplateManager({ lang = 'zh' }: ExportTemplateMan
                       value={newTemplate.dateRange?.end || ''}
                       onChange={(e) => setNewTemplate({
                         ...newTemplate,
-                        dateRange: { ...newTemplate.dateRange, end: e.target.value }
+                        dateRange: { 
+                          start: newTemplate.dateRange?.start || '',
+                          end: e.target.value
+                        }
                       })}
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     />

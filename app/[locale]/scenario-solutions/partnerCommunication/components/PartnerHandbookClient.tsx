@@ -66,6 +66,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
   const { t, tRaw } = useSafeTranslations('partnerHandbook');
   const { 
     currentLanguage, 
+    currentStage,
     completeStage,
     resetAllStages,
     stageProgress,

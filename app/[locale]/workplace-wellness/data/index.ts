@@ -260,8 +260,16 @@ export const translations: Record<Language, any> = {
       downloadButton: "Download File",
       successMessage: "Data exported successfully!",
       errorMessage: "Export failed. Please try again.",
+      permissionDenied: "Permission denied. Please check your password.",
       privacyTitle: "Privacy Protection",
-      privacyContent: "All data is stored locally on your device. Please keep exported files secure to avoid leaking personal health information."
+      privacyContent: "All data is stored locally on your device. Please keep exported files secure to avoid leaking personal health information.",
+      showSettings: "Show Settings",
+      hideSettings: "Hide Settings",
+      enablePassword: "Enable Password Protection",
+      passwordLabel: "Export Password",
+      passwordPlaceholder: "Enter password for export",
+      enableMasking: "Enable Data Masking",
+      securityWarnings: "Security Warnings"
     },
     common: {
       save: "Save",
@@ -372,8 +380,16 @@ export const translations: Record<Language, any> = {
       downloadButton: "下载文件",
       successMessage: "数据导出成功！",
       errorMessage: "导出失败，请重试。",
+      permissionDenied: "权限被拒绝，请检查您的密码。",
       privacyTitle: "隐私保护",
-      privacyContent: "所有数据均存储在您的本地设备中，导出的文件请妥善保管，避免泄露个人健康信息。"
+      privacyContent: "所有数据均存储在您的本地设备中，导出的文件请妥善保管，避免泄露个人健康信息。",
+      showSettings: "显示设置",
+      hideSettings: "隐藏设置",
+      enablePassword: "启用密码保护",
+      passwordLabel: "导出密码",
+      passwordPlaceholder: "请输入导出密码",
+      enableMasking: "启用数据脱敏",
+      securityWarnings: "安全警告"
     },
     common: {
       save: "保存",

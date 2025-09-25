@@ -6,11 +6,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Download, ShieldCheck, FileText, FileSpreadsheet, FileImage } from 'lucide-react';
+import { Download, ShieldCheck, FileText, FileSpreadsheet, FileImage, Lock, Eye, AlertTriangle } from 'lucide-react';
 import { useExport, useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction, getPeriodData, getNutritionData } from '../data';
 import { ExportFormat, ExportType } from '../types';
 import { PDFGenerator, PDFReportData } from '../utils/pdfGenerator';
+import { PrivacyProtectionManager, PrivacySettings } from '../utils/privacyProtection';
 
 export default function DataExportComponent() {
   const exportConfig = useExport();
@@ -20,6 +21,9 @@ export default function DataExportComponent() {
 
   const [isExporting, setIsExporting] = useState(false);
   const [exportStatus, setExportStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [showPrivacySettings, setShowPrivacySettings] = useState(false);
+  const [password, setPassword] = useState('');
+  const [privacyManager] = useState(() => new PrivacyProtectionManager(lang));
 
   const periodData = getPeriodData();
   const nutritionData = getNutritionData(lang);
@@ -131,27 +135,36 @@ export default function DataExportComponent() {
     }
   };
 
-  // 执行导出
+  // 执行导出（带隐私保护）
   const handleExport = async () => {
     setIsExporting(true);
     setExportStatus('idle');
     setExporting(true);
 
     try {
+      // 检查导出权限
+      const hasPermission = await privacyManager.checkExportPermission(exportConfig.exportType, password);
+      if (!hasPermission) {
+        throw new Error(t('export.permissionDenied'));
+      }
+
       const data = generateExportData();
+      
+      // 应用隐私保护
+      const protectedData = privacyManager.maskSensitiveData(data, exportConfig.exportType);
       
       // 模拟导出延迟
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       switch (exportConfig.format) {
         case 'json':
-          exportAsJSON(data);
+          exportAsJSON(protectedData);
           break;
         case 'csv':
-          exportAsCSV(data);
+          exportAsCSV(protectedData);
           break;
         case 'pdf':
-          exportAsPDF(data);
+          exportAsPDF(protectedData);
           break;
         default:
           throw new Error('Unsupported export format');
@@ -162,7 +175,7 @@ export default function DataExportComponent() {
     } catch (error) {
       console.error('Export error:', error);
       setExportStatus('error');
-      alert(t('export.errorMessage'));
+      alert(error instanceof Error ? error.message : t('export.errorMessage'));
     } finally {
       setIsExporting(false);
       setExporting(false);
@@ -265,13 +278,88 @@ export default function DataExportComponent() {
           )}
         </button>
 
-        {/* 隐私保护说明 */}
+        {/* 隐私保护设置 */}
         <div className="p-4 bg-blue-50 rounded-lg">
-          <div className="flex gap-3">
+          <div className="flex gap-3 mb-3">
             <ShieldCheck className="text-blue-500 mt-0.5 w-5 h-5 flex-shrink-0" />
-            <div className="text-sm">
+            <div className="text-sm flex-1">
               <div className="font-medium text-blue-900">{t('export.privacyTitle')}</div>
               <div className="text-blue-700 mt-1">{t('export.privacyContent')}</div>
+            </div>
+            <button
+              onClick={() => setShowPrivacySettings(!showPrivacySettings)}
+              className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+            >
+              {showPrivacySettings ? t('export.hideSettings') : t('export.showSettings')}
+            </button>
+          </div>
+
+          {/* 隐私设置面板 */}
+          {showPrivacySettings && (
+            <div className="mt-3 p-3 bg-white rounded-lg border border-blue-200">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                    <Lock className="w-4 h-4" />
+                    {t('export.enablePassword')}
+                  </label>
+                  <input
+                    type="checkbox"
+                    checked={privacyManager.getSettings().requirePassword}
+                    onChange={(e) => {
+                      const newSettings = { requirePassword: e.target.checked };
+                      privacyManager.updateSettings(newSettings);
+                    }}
+                    className="rounded"
+                  />
+                </div>
+
+                {privacyManager.getSettings().requirePassword && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {t('export.passwordLabel')}
+                    </label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder={t('export.passwordPlaceholder')}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                )}
+
+                <div className="flex items-center justify-between">
+                  <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                    <Eye className="w-4 h-4" />
+                    {t('export.enableMasking')}
+                  </label>
+                  <input
+                    type="checkbox"
+                    checked={privacyManager.getSettings().enableDataMasking}
+                    onChange={(e) => {
+                      const newSettings = { enableDataMasking: e.target.checked };
+                      privacyManager.updateSettings(newSettings);
+                    }}
+                    className="rounded"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 安全警告 */}
+          <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <div className="flex gap-2">
+              <AlertTriangle className="text-yellow-600 mt-0.5 w-4 h-4 flex-shrink-0" />
+              <div className="text-sm">
+                <div className="font-medium text-yellow-800 mb-1">{t('export.securityWarnings')}</div>
+                <ul className="text-yellow-700 space-y-1">
+                  {privacyManager.generateSecurityWarnings(exportConfig.exportType).map((warning, index) => (
+                    <li key={index} className="text-xs">• {warning}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>

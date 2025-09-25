@@ -3,6 +3,7 @@
  * 优化页面加载性能
  */
 
+import React from 'react';
 import dynamic from 'next/dynamic';
 import { ComponentType } from 'react';
 

@@ -328,9 +328,6 @@ export class FinalValidator {
   // 验证类型定义
   private async validateTypeDefinitions(): Promise<ValidationResult> {
     try {
-      // 检查类型定义是否存在
-      const types = await import('../types');
-      
       // 检查类型定义是否存在（类型在编译时存在，运行时不需要检查）
       const hasTypes = true;
       

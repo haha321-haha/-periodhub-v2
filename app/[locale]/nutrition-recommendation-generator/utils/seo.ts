@@ -99,7 +99,7 @@ export function generateSEOMetadata(locale: 'en' | 'zh'): Metadata {
     keywords: config.keywords,
     authors: [{ name: seoConfig.base.author }],
     openGraph: {
-      type: openGraphConfig.type,
+      type: openGraphConfig.type as 'website',
       locale: locale === 'zh' ? openGraphConfig.alternateLocale : openGraphConfig.locale,
       alternateLocale: locale === 'zh' ? openGraphConfig.locale : openGraphConfig.alternateLocale,
       siteName: openGraphConfig.siteName,
@@ -109,7 +109,7 @@ export function generateSEOMetadata(locale: 'en' | 'zh'): Metadata {
       images: openGraphConfig.images
     },
     twitter: {
-      card: twitterConfig.card,
+      card: twitterConfig.card as 'summary_large_image',
       site: twitterConfig.site,
       creator: twitterConfig.creator,
       title: config.title,

@@ -77,7 +77,7 @@ export class InputValidator {
     const dangerousTags = /<script[^>]*>.*?<\/script>/gi;
     const dangerousAttributes = /on\w+\s*=/gi;
     
-    let sanitized = input
+    const sanitized = input
       .replace(dangerousTags, '')
       .replace(dangerousAttributes, '')
       .replace(/javascript:/gi, '')
@@ -164,7 +164,8 @@ export class RateLimiter {
   // 清理过期数据
   static cleanup(): void {
     const now = Date.now();
-    for (const [ip, data] of this.requests.entries()) {
+    const entries = Array.from(this.requests.entries());
+    for (const [ip, data] of entries) {
       if (now > data.resetTime) {
         this.requests.delete(ip);
       }

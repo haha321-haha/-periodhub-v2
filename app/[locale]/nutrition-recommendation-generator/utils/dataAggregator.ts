@@ -22,7 +22,7 @@ export function aggregateRecommendations(
   data: ZIV1D3DData
 ): AggregatedRecommendations {
   // 构建所有选择项数组 - 完全基于ziV1d3d的逻辑
-  let allSelections: Array<{ category: string; key: string }> = [];
+  const allSelections: Array<{ category: string; key: string }> = [];
   
   if (selections.menstrualPhase) {
     allSelections.push({ category: 'menstrualPhase', key: selections.menstrualPhase });

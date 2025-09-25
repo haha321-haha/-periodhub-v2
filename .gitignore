@@ -182,3 +182,16 @@ node_modules/
 
 # Build info
 tsconfig.tsbuildinfo
+
+# Reports and temporary analysis files
+reports/
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+
+# Test files and documentation
+test-*.js
+Day*-*.md
+*-report.md
+git-upload-success-report.md

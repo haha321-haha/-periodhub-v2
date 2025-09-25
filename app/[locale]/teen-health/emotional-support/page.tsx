@@ -30,11 +30,34 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'teenHealth' });
   
+  const title = locale === 'zh' ? '情绪支持与心理健康 - 青少年经期健康专区' : 'Emotional Support & Mental Health - Teen Menstrual Health Zone';
+  const description = locale === 'zh' 
+    ? '经期焦虑、情绪低落如何应对？放松技巧、同龄人经验分享，陪你度过情绪"过山车"。'
+    : 'How to cope with period anxiety and mood swings? Relaxation techniques and peer experience sharing.';
+  
   return {
-    title: locale === 'zh' ? '情绪支持与心理健康 - 青少年经期健康专区' : 'Emotional Support & Mental Health - Teen Menstrual Health Zone',
-    description: locale === 'zh' 
-      ? '经期焦虑、情绪低落如何应对？放松技巧、同龄人经验分享，陪你度过情绪"过山车"。'
-      : 'How to cope with period anxiety and mood swings? Relaxation techniques and peer experience sharing.',
+    title: `${title} | periodhub.health`,
+    description,
+    alternates: {
+      canonical: `https://www.periodhub.health/${locale}/teen-health/emotional-support`,
+      languages: {
+        'zh-CN': 'https://www.periodhub.health/zh/teen-health/emotional-support',
+        'en-US': 'https://www.periodhub.health/en/teen-health/emotional-support',
+        'x-default': 'https://www.periodhub.health/zh/teen-health/emotional-support',
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://www.periodhub.health/${locale}/teen-health/emotional-support`,
+      locale: locale === 'zh' ? 'zh_CN' : 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
   };
 }
 

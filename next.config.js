@@ -169,7 +169,12 @@ const nextConfig = {
         destination: '/en/interactive-tools/symptom-assessment',
         permanent: true
       },
-      // 🎯 智能文章页面重定向 - 基于用户语言偏好
+      {
+        source: '/zh/assessment',
+        destination: '/zh/interactive-tools/symptom-assessment',
+        permanent: true
+      },
+      // 🎯 文章页面重定向到下载中心
       {
         source: '/articles',
         has: [
@@ -179,13 +184,13 @@ const nextConfig = {
             value: '.*zh.*',
           },
         ],
-        destination: '/zh/articles',
-        permanent: false
+        destination: '/zh/downloads',
+        permanent: true
       },
       {
         source: '/articles',
-        destination: '/en/articles', // 默认英文版本
-        permanent: false
+        destination: '/en/downloads', // 默认英文版本
+        permanent: true
       },
       // 🎯 修复teen-health重定向问题 - 避免循环重定向
       {

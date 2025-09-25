@@ -208,7 +208,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
         if (state) {
           console.log('Workplace Wellness Store rehydrated successfully');
         }
-      },
+      }
     }
   )
 );

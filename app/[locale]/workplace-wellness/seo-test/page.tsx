@@ -3,7 +3,6 @@
  * 用于验证Meta信息和结构化数据
  */
 
-import { unstable_setRequestLocale } from 'next-intl/server';
 import { Locale } from '@/i18n';
 import { 
   generateSEOValidationReport,
@@ -36,7 +35,6 @@ export default async function SEOTestPage({
   params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
-  unstable_setRequestLocale(locale);
   
   // 执行SEO验证
   const validation = performSEOValidation(locale);

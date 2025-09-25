@@ -14,23 +14,37 @@ import CalendarComponent from './components/CalendarComponent';
 import WorkImpactComponent from './components/WorkImpactComponent';
 import NutritionComponent from './components/NutritionComponent';
 import DataExportComponent from './components/DataExportComponent';
+import CycleStatisticsChart from './components/CycleStatisticsChart';
+import HistoryDataViewer from './components/HistoryDataViewer';
 import Footer from './components/Footer';
 
 export default function WorkplaceWellnessPage() {
   const { activeTab, lang } = useWorkplaceWellnessStore();
   const t = createTranslationFunction(lang);
 
-  // 渲染内容组件 - 基于HVsLYEp的Content函数
+  // 渲染内容组件 - 基于HVsLYEp的Content函数，增强Day 8功能
   const renderContent = () => {
     switch (activeTab) {
       case 'calendar':
-        return <CalendarComponent />;
+        return (
+          <div className="space-y-6">
+            <CalendarComponent />
+            <CycleStatisticsChart />
+            <HistoryDataViewer />
+          </div>
+        );
       case 'nutrition':
         return <NutritionComponent />;
       case 'export':
         return <DataExportComponent />;
       default:
-        return <CalendarComponent />;
+        return (
+          <div className="space-y-6">
+            <CalendarComponent />
+            <CycleStatisticsChart />
+            <HistoryDataViewer />
+          </div>
+        );
     }
   };
 

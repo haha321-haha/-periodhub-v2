@@ -4,7 +4,6 @@
  */
 
 import type { Metadata } from 'next';
-import { unstable_setRequestLocale } from 'next-intl/server';
 import { Locale } from '@/i18n';
 import { 
   generatePageMetadata, 
@@ -52,7 +51,6 @@ export default async function WorkplaceWellnessLayout({
   params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
-  unstable_setRequestLocale(locale);
   
   // 生成结构化数据
   const structuredData = generateAllStructuredData(locale);

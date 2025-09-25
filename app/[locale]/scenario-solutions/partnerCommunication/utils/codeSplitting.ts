@@ -7,14 +7,17 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { ComponentType } from 'react';
 
+// 加载组件
+const LoadingComponent = () => (
+  <div className="flex items-center justify-center p-8">
+    <div className="loading-spinner"></div>
+    <span className="ml-2 text-gray-600">Loading...</span>
+  </div>
+);
+
 // 懒加载配置选项
 const lazyOptions = {
-  loading: () => (
-    <div className="flex items-center justify-center p-8">
-      <div className="loading-spinner"></div>
-      <span className="ml-2 text-gray-600">Loading...</span>
-    </div>
-  ),
+  loading: LoadingComponent,
   ssr: false // 禁用服务端渲染以提高性能
 };
 

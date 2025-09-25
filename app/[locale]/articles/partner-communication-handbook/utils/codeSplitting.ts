@@ -7,14 +7,17 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { ComponentType } from 'react';
 
+// 加载组件
+const LoadingComponent = () => (
+  <div className="flex items-center justify-center p-8">
+    <div className="loading-spinner"></div>
+    <span className="ml-2 text-gray-600">Loading...</span>
+  </div>
+);
+
 // 懒加载配置选项
 const lazyOptions = {
-  loading: () => (
-    <div className="flex items-center justify-center p-8">
-      <div className="loading-spinner"></div>
-      <span className="ml-2 text-gray-600">Loading...</span>
-    </div>
-  ),
+  loading: LoadingComponent,
   ssr: false // 禁用服务端渲染以提高性能
 };
 
@@ -51,11 +54,16 @@ export const LazyViewMoreArticlesButton = dynamic(
   lazyOptions
 );
 
+// 医疗免责声明加载组件
+const MedicalDisclaimerLoading = () => (
+  <div className="loading-skeleton h-32 rounded-lg"></div>
+);
+
 // 医疗免责声明组件（轻量级，可以同步加载）
 export const LazyMedicalDisclaimer = dynamic(
   () => import('../components/MedicalDisclaimer'),
   {
-    loading: () => <div className="loading-skeleton h-32 rounded-lg"></div>,
+    loading: MedicalDisclaimerLoading,
     ssr: true // 医疗免责声明需要SEO，保持服务端渲染
   }
 );

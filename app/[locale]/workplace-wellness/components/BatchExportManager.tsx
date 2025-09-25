@@ -12,7 +12,8 @@ import {
   Clock,
   FileText,
   Users,
-  Calendar
+  Calendar,
+  Plus
 } from 'lucide-react';
 import { 
   useBatchExportQueue, 

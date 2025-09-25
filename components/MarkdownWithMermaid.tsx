@@ -106,11 +106,11 @@ export default function MarkdownWithMermaid({ content, className = '' }: Markdow
           </li>
         ),
         
-        // Enhanced heading styling
+        // Enhanced heading styling - Convert h1 to h2 to avoid multiple h1 tags
         h1: ({ children }) => (
-          <h1 className="text-3xl font-bold text-neutral-800 mb-6 mt-8 first:mt-0">
+          <h2 className="text-3xl font-bold text-neutral-800 mb-6 mt-8 first:mt-0">
             {children}
-          </h1>
+          </h2>
         ),
         h2: ({ children }) => (
           <h2 className="text-2xl font-semibold text-neutral-800 mb-4 mt-8 first:mt-0">

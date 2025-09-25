@@ -371,6 +371,12 @@ export default async function ArticlePage({
                       remarkPlugins={[remarkGfm]}
                       rehypePlugins={[rehypeRaw]}
                       components={{
+                      // Convert h1 to h2 to avoid multiple h1 tags on the page
+                      h1: ({ children }) => (
+                        <h2 className="text-3xl font-bold text-neutral-800 mb-6 mt-8 first:mt-0">
+                          {children}
+                        </h2>
+                      ),
                       table: ({ children }) => (
                         <div className="overflow-x-auto my-6">
                           <table className="min-w-full border-collapse border border-gray-300 bg-white rounded-lg shadow-sm">

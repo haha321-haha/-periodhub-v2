@@ -18,8 +18,8 @@ function processNSAIDContent(content: string): string {
 
   // Process Markdown syntax
   processedContent = processedContent
-    // Convert headers
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    // Convert headers - Convert h1 to h2 to avoid multiple h1 tags on the page
+    .replace(/^# (.*$)/gim, '<h2 class="text-3xl font-bold text-neutral-800 mb-6 mt-8 first:mt-0">$1</h2>')
     .replace(/^## (.*$)/gim, '<h2>$1</h2>')
     .replace(/^### (.*$)/gim, '<h3>$1</h3>')
     .replace(/^#### (.*$)/gim, '<h4>$1</h4>')

@@ -21,49 +21,58 @@ export default function CalendarComponent() {
   const periodData = getPeriodData();
   const [showAddForm, setShowAddForm] = useState(false);
 
-  // 获取当前月份的第一天
-  const firstDayOfMonth = new Date(calendar.currentDate.getFullYear(), calendar.currentDate.getMonth(), 1);
-  const lastDayOfMonth = new Date(calendar.currentDate.getFullYear(), calendar.currentDate.getMonth() + 1, 0);
-  const firstDayWeekday = firstDayOfMonth.getDay();
+  // 基于HVsLYEp的日历逻辑
+  const { currentDate } = calendar;
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const monthName = currentDate.toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
+    month: 'long',
+    year: 'numeric'
+  });
+  
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const daysInMonth = lastDay.getDate();
+  const startingDayOfWeek = firstDay.getDay();
 
-  // 生成日历天数
-  const daysInMonth = lastDayOfMonth.getDate();
-  const calendarDays = [];
-
-  // 添加上个月的空白天数
-  for (let i = 0; i < firstDayWeekday; i++) {
-    calendarDays.push(null);
-  }
-
-  // 添加当前月的天数
+  // 生成日历天数数组 - 基于HVsLYEp的days生成逻辑
+  let days = Array(startingDayOfWeek).fill(null);
   for (let day = 1; day <= daysInMonth; day++) {
-    calendarDays.push(day);
+    days.push(day);
   }
 
-  // 检查某天是否有经期记录
-  const getPeriodRecord = (day: number) => {
-    const dateStr = `${calendar.currentDate.getFullYear()}-${String(calendar.currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    return periodData.find(record => record.date === dateStr);
+  // 获取某天的经期状态 - 基于HVsLYEp的getDayStatus函数
+  const getDayStatus = (day: number): PeriodRecord | null => {
+    if (!day) return null;
+    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    return periodData.find(d => d.date === dateStr) || null;
   };
 
-  // 获取日期样式类
-  const getDateClasses = (day: number, record: PeriodRecord | undefined) => {
-    const baseClasses = "w-10 h-10 flex items-center justify-center text-sm rounded-lg transition-colors duration-200";
-    
-    if (record) {
-      if (record.type === 'period') {
-        return `${baseClasses} bg-secondary-100 text-secondary-800 hover:bg-secondary-200`;
-      } else if (record.type === 'predicted') {
-        return `${baseClasses} bg-primary-100 text-primary-800 hover:bg-primary-200`;
-      }
+  // 获取日期样式 - 基于HVsLYEp的getDayStyles函数
+  const getDayStyles = (day: number, status: PeriodRecord | null) => {
+    if (!day) return 'invisible';
+    let styles = 'w-10 h-10 rounded-lg flex items-center justify-center text-sm font-medium cursor-pointer transition-colors duration-200 ';
+    if (status) {
+      if (status.type === 'period') styles += 'bg-secondary-500 text-white hover:bg-secondary-600';
+      else if (status.type === 'predicted') styles += 'bg-secondary-500/10 text-secondary-700 border-2 border-dashed border-secondary-300 hover:bg-secondary-500/20';
+    } else {
+      styles += 'hover:bg-neutral-100 text-neutral-800';
     }
-    
-    return `${baseClasses} hover:bg-neutral-100`;
+    return styles;
   };
+  
+  // 获取预测日期 - 基于HVsLYEp的逻辑
+  const predictedDateEntry = periodData.find(d => d.type === 'predicted');
+  const formattedPredictedDate = predictedDateEntry 
+    ? new Date(predictedDateEntry.date).toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
+        month: 'short',
+        day: 'numeric'
+      })
+    : '';
 
-  // 月份导航
+  // 月份导航 - 基于HVsLYEp的导航逻辑
   const navigateMonth = (direction: 'prev' | 'next') => {
-    const newDate = new Date(calendar.currentDate);
+    const newDate = new Date(currentDate);
     if (direction === 'prev') {
       newDate.setMonth(newDate.getMonth() - 1);
     } else {
@@ -72,113 +81,154 @@ export default function CalendarComponent() {
     setCurrentDate(newDate);
   };
 
+  // 添加经期记录
+  const handleAddRecord = () => {
+    setShowAddForm(true);
+  };
+
   return (
-    <div className="space-y-6">
-      {/* 标题区域 */}
-      <div className="text-center">
-        <h2 className="text-2xl font-bold text-neutral-900 mb-2">
-          {t('calendar.title')}
-        </h2>
-        <p className="text-neutral-600">
-          {t('calendar.subtitle')}
-        </p>
-      </div>
-
-      {/* 日历主体 */}
-      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-        {/* 月份导航 */}
-        <div className="flex items-center justify-between mb-6">
-          <button
-            onClick={() => navigateMonth('prev')}
-            className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          
-          <h3 className="text-lg font-semibold text-neutral-900">
-            {calendar.currentDate.toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', { 
-              month: 'long', 
-              year: 'numeric' 
-            })}
+    <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+      {/* 头部 - 基于HVsLYEp的头部设计 */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h3 className="text-xl font-semibold text-neutral-900">
+            {t('calendar.title')}
           </h3>
-          
-          <button
-            onClick={() => navigateMonth('next')}
-            className="p-2 rounded-lg hover:bg-neutral-100 transition-colors duration-200"
+          <p className="text-sm text-neutral-600 mt-1">
+            {t('calendar.subtitle')}
+          </p>
+        </div>
+        <button 
+          onClick={handleAddRecord}
+          className="rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
+        >
+          <Plus className="w-4 h-4" />
+          {t('calendar.recordButton')}
+        </button>
+      </div>
+
+      {/* 月份导航 - 基于HVsLYEp的导航设计 */}
+      <div className="flex items-center justify-between mb-4">
+        <button 
+          onClick={() => navigateMonth('prev')}
+          className="hover:bg-neutral-100 text-neutral-800 rounded-lg p-2"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <h4 className="text-lg font-medium text-neutral-900">{monthName}</h4>
+        <button 
+          onClick={() => navigateMonth('next')}
+          className="hover:bg-neutral-100 text-neutral-800 rounded-lg p-2"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* 星期标题 - 基于HVsLYEp的星期显示 */}
+      <div className="grid grid-cols-7 gap-1 mb-2">
+        {(t('calendar.days') as unknown as string[]).map((day: string, index: number) => (
+          <div key={index} className="h-10 flex items-center justify-center text-sm font-medium text-neutral-600">
+            {day}
+          </div>
+        ))}
+      </div>
+
+      {/* 日历网格 - 基于HVsLYEp的日历网格 */}
+      <div className="grid grid-cols-7 gap-1 mb-6">
+        {days.map((day, index) => (
+          <div 
+            key={index} 
+            className={getDayStyles(day, getDayStatus(day))}
           >
-            <ChevronRight size={20} />
-          </button>
-        </div>
-
-        {/* 星期标题 */}
-        <div className="grid grid-cols-7 gap-1 mb-4">
-          {(t('calendar.days') as unknown as string[]).map((day: string, index: number) => (
-            <div key={index} className="text-center text-sm font-medium text-neutral-600 py-2">
-              {day}
-            </div>
-          ))}
-        </div>
-
-        {/* 日历网格 */}
-        <div className="grid grid-cols-7 gap-1">
-          {calendarDays.map((day, index) => {
-            if (day === null) {
-              return <div key={index} className="w-10 h-10" />;
-            }
-            
-            const record = getPeriodRecord(day);
-            
-            return (
-              <button
-                key={day}
-                className={getDateClasses(day, record)}
-                onClick={() => updateCalendar({ selectedDate: new Date(calendar.currentDate.getFullYear(), calendar.currentDate.getMonth(), day) })}
-              >
-                {day}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* 图例 */}
-        <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-neutral-200">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-secondary-100 rounded"></div>
-            <span className="text-sm text-neutral-600">{t('calendar.legendPeriod')}</span>
+            {day || ''}
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-primary-100 rounded"></div>
-            <span className="text-sm text-neutral-600">{t('calendar.legendPredicted')}</span>
-          </div>
+        ))}
+      </div>
+      
+      {/* 图例 - 基于HVsLYEp的图例设计 */}
+      <div className="flex items-center gap-4 text-sm">
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded bg-secondary-500"></div>
+          <span className="text-neutral-600">{t('calendar.legendPeriod')}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 rounded bg-secondary-500/10 border-2 border-dashed border-secondary-300"></div>
+          <span className="text-neutral-600">{t('calendar.legendPredicted')}</span>
         </div>
       </div>
 
-      {/* 统计信息 */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4 text-center">
-          <div className="text-2xl font-bold text-primary-600">28</div>
+      {/* 统计信息 - 基于HVsLYEp的统计显示 */}
+      <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-neutral-100">
+        <div className="text-center">
+          <div className="text-2xl font-semibold text-neutral-900">28</div>
           <div className="text-sm text-neutral-600">{t('calendar.statCycle')}</div>
         </div>
-        <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4 text-center">
-          <div className="text-2xl font-bold text-primary-600">5</div>
+        <div className="text-center">
+          <div className="text-2xl font-semibold text-neutral-900">5</div>
           <div className="text-sm text-neutral-600">{t('calendar.statLength')}</div>
         </div>
-        <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-4 text-center">
-          <div className="text-2xl font-bold text-primary-600">12</div>
+        <div className="text-center">
+          <div className="text-2xl font-semibold text-secondary-500">{formattedPredictedDate}</div>
           <div className="text-sm text-neutral-600">{t('calendar.statNext')}</div>
         </div>
       </div>
 
-      {/* 记录按钮 */}
-      <div className="text-center">
-        <button
-          onClick={() => setShowAddForm(!showAddForm)}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-600 transition-colors duration-200"
-        >
-          <Plus size={20} />
-          {t('calendar.recordButton')}
-        </button>
-      </div>
+      {/* 添加经期记录表单 */}
+      {showAddForm && (
+        <div className="mt-6 p-4 bg-neutral-50 rounded-lg border border-neutral-200">
+          <h4 className="text-lg font-medium text-neutral-900 mb-4">
+            {t('calendar.addRecord')}
+          </h4>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-neutral-800 mb-2">
+                {t('calendar.date')}
+              </label>
+              <input 
+                type="date" 
+                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                defaultValue={new Date().toISOString().split('T')[0]}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-neutral-800 mb-2">
+                {t('calendar.type')}
+              </label>
+              <select className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                <option value="period">{t('calendar.typePeriod')}</option>
+                <option value="predicted">{t('calendar.typePredicted')}</option>
+                <option value="ovulation">{t('calendar.typeOvulation')}</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-neutral-800 mb-2">
+                {t('calendar.painLevel')}
+              </label>
+              <input 
+                type="range" 
+                min="0" 
+                max="10" 
+                defaultValue="0"
+                className="w-full"
+              />
+            </div>
+            <div className="flex gap-3">
+              <button 
+                onClick={() => setShowAddForm(false)}
+                className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200"
+              >
+                {t('common.save')}
+              </button>
+              <button 
+                onClick={() => setShowAddForm(false)}
+                className="px-4 py-2 bg-neutral-200 text-neutral-800 rounded-lg hover:bg-neutral-300 transition-colors duration-200"
+              >
+                {t('common.cancel')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

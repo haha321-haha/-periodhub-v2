@@ -224,6 +224,22 @@ const nextConfig = {
         source: '/articles/understanding-your-cycle',
         destination: '/zh/health-guide',
         permanent: true
+      },
+      // 🎯 重定向旧的partner-communication-handbook到新的scenario-solutions
+      {
+        source: '/zh/articles/partner-communication-handbook',
+        destination: '/zh/scenario-solutions/partnerCommunication',
+        permanent: true
+      },
+      {
+        source: '/en/articles/partner-communication-handbook',
+        destination: '/en/scenario-solutions/partnerCommunication',
+        permanent: true
+      },
+      {
+        source: '/articles/partner-communication-handbook',
+        destination: '/zh/scenario-solutions/partnerCommunication',
+        permanent: true
       }
     ];
   }

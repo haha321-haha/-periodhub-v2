@@ -14,7 +14,12 @@ import {
   ExportConfig,
   PeriodRecord,
   LeaveTemplate,
-  NutritionRecommendation
+  NutritionRecommendation,
+  PainLevel,
+  MenstrualPhase,
+  TCMConstitution,
+  ExportType,
+  ExportFormat
 } from '../types';
 
 // 扩展状态接口，添加Actions
@@ -48,16 +53,11 @@ interface WorkplaceWellnessStore extends WorkplaceWellnessState {
   updateExport: (updates: Partial<ExportConfig>) => void;
   setExportType: (type: string) => void;
   setExportFormat: (format: string) => void;
-  setExporting: (isExporting: boolean) => void;
-  
-  // 数据相关Actions
-  addPeriodRecord: (record: PeriodRecord) => void;
-  updatePeriodRecord: (date: string, updates: Partial<PeriodRecord>) => void;
-  removePeriodRecord: (date: string) => void;
+  setExporting: (exporting: boolean) => void;
   
   // 工具方法
   resetState: () => void;
-  getStateSnapshot: () => WorkplaceWellnessState;
+  getStateSnapshot: () => Partial<WorkplaceWellnessState>;
 }
 
 // 初始状态 - 基于HVsLYEp的appState
@@ -67,22 +67,22 @@ const initialState: WorkplaceWellnessState = {
   calendar: {
     currentDate: new Date(),
     selectedDate: null,
-    showAddForm: false,
+    showAddForm: false
   },
   workImpact: {
-    painLevel: 5,
-    efficiency: 70,
-    selectedTemplateId: null,
+    painLevel: 0 as PainLevel,
+    efficiency: 100,
+    selectedTemplateId: null
   },
   nutrition: {
-    selectedPhase: 'menstrual',
-    constitutionType: 'qi_deficiency',
-    searchTerm: '',
+    selectedPhase: 'menstrual' as MenstrualPhase,
+    constitutionType: 'balanced' as TCMConstitution,
+    searchTerm: ''
   },
   export: {
-    exportType: 'period',
-    format: 'json',
-    isExporting: false,
+    exportType: 'period' as ExportType,
+    format: 'json' as ExportFormat,
+    isExporting: false
   }
 };
 
@@ -90,109 +90,96 @@ const initialState: WorkplaceWellnessState = {
 export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
   persist(
     (set, get) => ({
-  // 初始状态
-  ...initialState,
+      // 初始状态
+      ...initialState,
 
-  // 语言相关Actions
-  setLanguage: (lang: Language) => set({ lang }),
-  
-  toggleLanguage: () => set((state) => ({ 
-    lang: state.lang === 'zh' ? 'en' : 'zh' 
-  })),
+      // 语言相关Actions
+      setLanguage: (lang: Language) => set({ lang }),
+      
+      toggleLanguage: () => set((state) => ({ 
+        lang: state.lang === 'zh' ? 'en' : 'zh' 
+      })),
 
-  // 标签页相关Actions
-  setActiveTab: (tab) => set({ activeTab: tab }),
+      // 标签页相关Actions
+      setActiveTab: (tab) => set({ activeTab: tab }),
 
-  // 日历相关Actions
-  updateCalendar: (updates) => set((state) => ({
-    calendar: { ...state.calendar, ...updates }
-  })),
-  
-  setCurrentDate: (date) => set((state) => ({
-    calendar: { ...state.calendar, currentDate: date }
-  })),
-  
-  setSelectedDate: (date) => set((state) => ({
-    calendar: { ...state.calendar, selectedDate: date }
-  })),
-  
-  toggleAddForm: () => set((state) => ({
-    calendar: { 
-      ...state.calendar, 
-      showAddForm: !state.calendar.showAddForm 
-    }
-  })),
+      // 日历相关Actions
+      updateCalendar: (updates) => set((state) => ({
+        calendar: { ...state.calendar, ...updates }
+      })),
+      
+      setCurrentDate: (date) => set((state) => ({
+        calendar: { ...state.calendar, currentDate: date }
+      })),
+      
+      setSelectedDate: (date) => set((state) => ({
+        calendar: { ...state.calendar, selectedDate: date }
+      })),
+      
+      toggleAddForm: () => set((state) => ({
+        calendar: { 
+          ...state.calendar, 
+          showAddForm: !state.calendar.showAddForm 
+        }
+      })),
 
-  // 工作影响相关Actions
-  updateWorkImpact: (updates) => set((state) => ({
-    workImpact: { ...state.workImpact, ...updates }
-  })),
-  
-  setPainLevel: (level) => set((state) => ({
-    workImpact: { ...state.workImpact, painLevel: level as any }
-  })),
-  
-  setEfficiency: (efficiency) => set((state) => ({
-    workImpact: { ...state.workImpact, efficiency }
-  })),
-  
-  selectTemplate: (templateId) => set((state) => ({
-    workImpact: { ...state.workImpact, selectedTemplateId: templateId }
-  })),
+      // 工作影响相关Actions
+      updateWorkImpact: (updates) => set((state) => ({
+        workImpact: { ...state.workImpact, ...updates }
+      })),
+      
+      setPainLevel: (level) => set((state) => ({
+        workImpact: { 
+          ...state.workImpact, 
+          painLevel: level as any // 临时类型断言
+        }
+      })),
+      
+      setEfficiency: (efficiency) => set((state) => ({
+        workImpact: { ...state.workImpact, efficiency }
+      })),
+      
+      selectTemplate: (templateId) => set((state) => ({
+        workImpact: { ...state.workImpact, selectedTemplateId: templateId }
+      })),
 
-  // 营养相关Actions
-  updateNutrition: (updates) => set((state) => ({
-    nutrition: { ...state.nutrition, ...updates }
-  })),
-  
-  setSelectedPhase: (phase) => set((state) => ({
-    nutrition: { ...state.nutrition, selectedPhase: phase as any }
-  })),
-  
-  setConstitutionType: (type) => set((state) => ({
-    nutrition: { ...state.nutrition, constitutionType: type as any }
-  })),
-  
-  setSearchTerm: (term) => set((state) => ({
-    nutrition: { ...state.nutrition, searchTerm: term }
-  })),
+      // 营养相关Actions
+      updateNutrition: (updates) => set((state) => ({
+        nutrition: { ...state.nutrition, ...updates }
+      })),
+      
+      setSelectedPhase: (phase) => set((state) => ({
+        nutrition: { ...state.nutrition, selectedPhase: phase as MenstrualPhase }
+      })),
+      
+      setConstitutionType: (type) => set((state) => ({
+        nutrition: { ...state.nutrition, constitutionType: type as TCMConstitution }
+      })),
+      
+      setSearchTerm: (term) => set((state) => ({
+        nutrition: { ...state.nutrition, searchTerm: term }
+      })),
 
-  // 导出相关Actions
-  updateExport: (updates) => set((state) => ({
-    export: { ...state.export, ...updates }
-  })),
-  
-  setExportType: (type) => set((state) => ({
-    export: { ...state.export, exportType: type as any }
-  })),
-  
-  setExportFormat: (format) => set((state) => ({
-    export: { ...state.export, format: format as any }
-  })),
-  
-  setExporting: (isExporting) => set((state) => ({
-    export: { ...state.export, isExporting }
-  })),
+      // 导出相关Actions
+      updateExport: (updates) => set((state) => ({
+        export: { ...state.export, ...updates }
+      })),
+      
+      setExportType: (type) => set((state) => ({
+        export: { ...state.export, exportType: type as ExportType }
+      })),
+      
+      setExportFormat: (format) => set((state) => ({
+        export: { ...state.export, format: format as ExportFormat }
+      })),
+      
+      setExporting: (exporting) => set((state) => ({
+        export: { ...state.export, isExporting: exporting }
+      })),
 
-  // 数据相关Actions
-  addPeriodRecord: (record) => {
-    // 这里可以添加数据持久化逻辑
-    console.log('Adding period record:', record);
-  },
-  
-  updatePeriodRecord: (date, updates) => {
-    // 这里可以添加数据更新逻辑
-    console.log('Updating period record:', date, updates);
-  },
-  
-  removePeriodRecord: (date) => {
-    // 这里可以添加数据删除逻辑
-    console.log('Removing period record:', date);
-  },
-
-  // 工具方法
-  resetState: () => set(initialState),
-  
+      // 工具方法
+      resetState: () => set(initialState),
+      
       getStateSnapshot: () => {
         const state = get();
         return {
@@ -234,7 +221,7 @@ export const useWorkImpact = () => useWorkplaceWellnessStore((state) => state.wo
 export const useNutrition = () => useWorkplaceWellnessStore((state) => state.nutrition);
 export const useExport = () => useWorkplaceWellnessStore((state) => state.export);
 
-// Actions Hooks - 使用useCallback避免无限循环
+// Actions Hooks - 使用独立的store调用避免无限循环
 export const useWorkplaceWellnessActions = () => {
   const setLanguage = useWorkplaceWellnessStore((state) => state.setLanguage);
   const toggleLanguage = useWorkplaceWellnessStore((state) => state.toggleLanguage);

@@ -230,7 +230,9 @@ export const translations: Record<Language, any> = {
         dinner: "Suggestion: Longan and lotus seed soup + light congee to nourish blood and calm the mind.",
         snack: "Suggestion: Brown sugar ginger tea or nuts to relieve pain."
       },
-      generateButton: "Generate Shopping List"
+      generateButton: "Generate Shopping List",
+      selectedFoods: "Selected Foods",
+      planGenerated: "Meal plan generated successfully!"
     },
     export: {
       title: "Data Export & Management",
@@ -323,7 +325,9 @@ export const translations: Record<Language, any> = {
         dinner: "建议：桂圆莲子汤 + 清淡粥品，养血安神。",
         snack: "建议：红糖姜茶或坚果，缓解疼痛。"
       },
-      generateButton: "生成购物清单"
+      generateButton: "生成购物清单",
+      selectedFoods: "已选食物",
+      planGenerated: "膳食计划生成成功！"
     },
     export: {
       title: "数据导出与管理",

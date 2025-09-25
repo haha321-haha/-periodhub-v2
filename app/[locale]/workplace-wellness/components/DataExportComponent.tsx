@@ -6,9 +6,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Download, FileText, FileSpreadsheet, FileImage } from 'lucide-react';
+import { Download, ShieldCheck, FileText, FileSpreadsheet, FileImage } from 'lucide-react';
 import { useExport, useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction, getPeriodData, getNutritionData } from '../data';
+import { ExportFormat, ExportType } from '../types';
 
 export default function DataExportComponent() {
   const exportConfig = useExport();
@@ -22,238 +23,269 @@ export default function DataExportComponent() {
   const periodData = getPeriodData();
   const nutritionData = getNutritionData(lang);
 
-  const handleExportTypeChange = (type: string) => {
-    updateExport({ exportType: type as any });
+  // 导出类型选择
+  const handleExportTypeChange = (type: ExportType) => {
+    updateExport({ exportType: type });
   };
 
-  const handleFormatChange = (format: string) => {
-    updateExport({ format: format as any });
+  // 导出格式选择
+  const handleExportFormatChange = (format: ExportFormat) => {
+    updateExport({ format });
   };
 
+  // 生成导出数据
+  const generateExportData = () => {
+    const baseData = {
+      exportDate: new Date().toISOString(),
+      language: lang,
+      version: '1.0.0'
+    };
+
+    switch (exportConfig.exportType) {
+      case 'period':
+        return {
+          ...baseData,
+          type: 'period',
+          data: periodData
+        };
+      case 'nutrition':
+        return {
+          ...baseData,
+          type: 'nutrition',
+          data: nutritionData
+        };
+      case 'all':
+        return {
+          ...baseData,
+          type: 'all',
+          data: {
+            period: periodData,
+            nutrition: nutritionData
+          }
+        };
+      default:
+        return baseData;
+    }
+  };
+
+  // 导出为JSON
+  const exportAsJSON = (data: any) => {
+    const jsonString = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `workplace-wellness-${exportConfig.exportType}-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  // 导出为CSV
+  const exportAsCSV = (data: any) => {
+    let csvContent = '';
+    
+    if (exportConfig.exportType === 'period') {
+      csvContent = 'Date,Type,Pain Level,Flow\n';
+      data.data.forEach((record: any) => {
+        csvContent += `${record.date},${record.type},${record.painLevel || ''},${record.flow || ''}\n`;
+      });
+    } else if (exportConfig.exportType === 'nutrition') {
+      csvContent = 'Name,Phase,TCM Nature,Benefits,Nutrients\n';
+      data.data.forEach((item: any) => {
+        csvContent += `"${item.name}","${item.phase}","${item.tcmNature}","${item.benefits.join('; ')}","${item.nutrients.join('; ')}"\n`;
+      });
+    }
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `workplace-wellness-${exportConfig.exportType}-${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  // 导出为PDF（模拟）
+  const exportAsPDF = (data: any) => {
+    // 这里只是模拟PDF导出，实际项目中需要集成PDF生成库
+    const reportContent = `
+工作场所健康数据报告
+导出时间: ${new Date().toLocaleString()}
+导出类型: ${t(`export.types.${exportConfig.exportType}`)}
+导出格式: ${t(`export.formats.${exportConfig.format}`)}
+
+数据内容:
+${JSON.stringify(data, null, 2)}
+    `;
+    
+    alert(`PDF导出功能（模拟）:\n\n${reportContent}`);
+  };
+
+  // 执行导出
   const handleExport = async () => {
     setIsExporting(true);
     setExportStatus('idle');
-    
-    try {
-      // 模拟导出过程
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // 根据选择的类型和格式生成数据
-      let exportData;
-      
-      switch (exportConfig.exportType) {
-        case 'period':
-          exportData = periodData;
-          break;
-        case 'nutrition':
-          exportData = nutritionData;
-          break;
-        case 'all':
-          exportData = {
-            period: periodData,
-            nutrition: nutritionData,
-            exportDate: new Date().toISOString()
-          };
-          break;
-        default:
-          exportData = periodData;
-      }
+    setExporting(true);
 
-      // 根据格式处理数据
-      let blob: Blob;
-      let filename: string;
+    try {
+      const data = generateExportData();
+      
+      // 模拟导出延迟
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
       switch (exportConfig.format) {
         case 'json':
-          blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-          filename = `workplace-wellness-data-${Date.now()}.json`;
+          exportAsJSON(data);
           break;
         case 'csv':
-          const csvData = convertToCSV(exportData);
-          blob = new Blob([csvData], { type: 'text/csv' });
-          filename = `workplace-wellness-data-${Date.now()}.csv`;
+          exportAsCSV(data);
           break;
         case 'pdf':
-          // 这里可以实现PDF生成逻辑
-          blob = new Blob(['PDF content would be here'], { type: 'application/pdf' });
-          filename = `workplace-wellness-data-${Date.now()}.pdf`;
+          exportAsPDF(data);
           break;
         default:
-          blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-          filename = `workplace-wellness-data-${Date.now()}.json`;
+          throw new Error('Unsupported export format');
       }
-
-      // 下载文件
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
       
       setExportStatus('success');
+      alert(t('export.successMessage'));
     } catch (error) {
-      console.error('Export failed:', error);
+      console.error('Export error:', error);
       setExportStatus('error');
+      alert(t('export.errorMessage'));
     } finally {
       setIsExporting(false);
+      setExporting(false);
     }
   };
 
-  const convertToCSV = (data: any) => {
-    if (Array.isArray(data)) {
-      const headers = Object.keys(data[0] || {});
-      const csvRows = [
-        headers.join(','),
-        ...data.map(row => headers.map(header => JSON.stringify(row[header] || '')).join(','))
-      ];
-      return csvRows.join('\n');
-    }
-    return JSON.stringify(data);
-  };
-
-  const getFormatIcon = (format: string) => {
+  // 获取格式图标
+  const getFormatIcon = (format: ExportFormat) => {
     switch (format) {
       case 'json':
-        return <FileText size={20} />;
+        return <FileText className="w-4 h-4" />;
       case 'csv':
-        return <FileSpreadsheet size={20} />;
+        return <FileSpreadsheet className="w-4 h-4" />;
       case 'pdf':
-        return <FileImage size={20} />;
+        return <FileImage className="w-4 h-4" />;
       default:
-        return <FileText size={20} />;
+        return <Download className="w-4 h-4" />;
     }
   };
 
   return (
-    <div className="space-y-6">
-      {/* 标题区域 */}
-      <div className="text-center">
-        <h2 className="text-2xl font-bold text-neutral-900 mb-2">
-          {t('export.title')}
-        </h2>
-        <p className="text-neutral-600">
-          {t('export.subtitle')}
-        </p>
-      </div>
-
-      {/* 导出配置 */}
-      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-        <div className="space-y-6">
-          {/* 导出类型选择 */}
-          <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-3">
-              {t('export.typeLabel')}
-            </label>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              {Object.entries(t('export.types')).map(([key, value]) => (
-                <button
-                  key={key}
-                  onClick={() => handleExportTypeChange(key)}
-                  className={`p-4 text-left border rounded-lg transition-colors duration-200 ${
-                    exportConfig.exportType === key
-                      ? 'border-primary-500 bg-primary-50 text-primary-700'
-                      : 'border-neutral-300 hover:border-neutral-400'
-                  }`}
-                >
-                  <div className="font-medium">{value}</div>
-                  <div className="text-sm text-neutral-600 mt-1">
-                    {key === 'period' && `${periodData.length} 条经期记录`}
-                    {key === 'nutrition' && `${nutritionData.length} 条营养建议`}
-                    {key === 'all' && '包含所有数据'}
-                  </div>
-                </button>
-              ))}
-            </div>
+    <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+      <h4 className="text-lg font-semibold text-neutral-900 mb-4">{t('export.title')}</h4>
+      
+      <div className="space-y-4">
+        {/* 导出内容选择 */}
+        <div>
+          <label className="block text-sm font-medium text-neutral-800 mb-2">{t('export.contentLabel')}</label>
+          <div className="space-y-2">
+            {(['period', 'nutrition', 'all'] as ExportType[]).map(typeId => (
+              <label 
+                key={typeId}
+                className={`flex items-start gap-3 p-3 border rounded-lg cursor-pointer transition-colors duration-200 ${
+                  exportConfig.exportType === typeId 
+                    ? 'border-primary-500 bg-primary-500/10' 
+                    : 'border-neutral-200 hover:border-neutral-300'
+                }`}
+              >
+                <input 
+                  type="radio" 
+                  name="exportType" 
+                  value={typeId} 
+                  checked={exportConfig.exportType === typeId}
+                  onChange={() => handleExportTypeChange(typeId)}
+                  className="mt-1 text-primary-500 focus:ring-primary-500"
+                />
+                <div>
+                  <div className="font-medium text-neutral-900">{t(`export.types.${typeId}`)}</div>
+                  <div className="text-sm text-neutral-600">{t(`export.types.${typeId}_desc`)}</div>
+                </div>
+              </label>
+            ))}
           </div>
-
-          {/* 导出格式选择 */}
-          <div>
-            <label className="block text-sm font-medium text-neutral-700 mb-3">
-              {t('export.formatLabel')}
-            </label>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-              {Object.entries(t('export.formats')).map(([key, value]) => (
-                <button
-                  key={key}
-                  onClick={() => handleFormatChange(key)}
-                  className={`p-4 text-left border rounded-lg transition-colors duration-200 ${
-                    exportConfig.format === key
-                      ? 'border-primary-500 bg-primary-50 text-primary-700'
-                      : 'border-neutral-300 hover:border-neutral-400'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    {getFormatIcon(key)}
-                    <div>
-                      <div className="font-medium">{value}</div>
-                      <div className="text-sm text-neutral-600">
-                        {key === 'json' && '结构化数据格式'}
-                        {key === 'csv' && '表格数据格式'}
-                        {key === 'pdf' && '文档格式'}
-                      </div>
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* 导出按钮 */}
-          <div className="pt-4">
-            <button
-              onClick={handleExport}
-              disabled={isExporting}
-              className={`w-full px-6 py-3 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 ${
-                isExporting
-                  ? 'bg-neutral-400 text-white cursor-not-allowed'
-                  : 'bg-primary-500 text-white hover:bg-primary-600'
-              }`}
-            >
-              <Download size={20} />
-              {isExporting ? t('common.loading') : t('export.exportButton')}
-            </button>
-          </div>
-
-          {/* 状态提示 */}
-          {exportStatus === 'success' && (
-            <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-              <div className="flex items-center gap-2 text-green-800">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                {t('export.successMessage')}
-              </div>
-            </div>
-          )}
-
-          {exportStatus === 'error' && (
-            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-              <div className="flex items-center gap-2 text-red-800">
-                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                {t('export.errorMessage')}
-              </div>
-            </div>
-          )}
         </div>
-      </div>
 
-      {/* 数据预览 */}
-      <div className="bg-white rounded-lg shadow-sm border border-neutral-200 p-6">
-        <h3 className="text-lg font-semibold text-neutral-900 mb-4">
-          数据预览
-        </h3>
-        <div className="bg-neutral-50 rounded-lg p-4">
-          <pre className="text-sm text-neutral-600 overflow-x-auto">
-            {JSON.stringify(
-              exportConfig.exportType === 'period' ? periodData :
-              exportConfig.exportType === 'nutrition' ? nutritionData :
-              { period: periodData, nutrition: nutritionData },
-              null,
-              2
-            )}
-          </pre>
+        {/* 导出格式选择 */}
+        <div>
+          <label className="block text-sm font-medium text-neutral-800 mb-2">{t('export.formatLabel')}</label>
+          <div className="grid grid-cols-3 gap-2">
+            {(['json', 'csv', 'pdf'] as ExportFormat[]).map(formatId => (
+              <button
+                key={formatId}
+                onClick={() => handleExportFormatChange(formatId)}
+                className={`p-3 text-center rounded-lg border-2 transition-colors duration-200 ${
+                  exportConfig.format === formatId 
+                    ? 'border-primary-500 bg-primary-500/10' 
+                    : 'border-neutral-200 hover:border-neutral-300'
+                }`}
+              >
+                <div className="flex items-center justify-center mb-1">
+                  {getFormatIcon(formatId)}
+                </div>
+                <div className="font-medium text-neutral-900">{t(`export.formats.${formatId}`)}</div>
+                <div className="text-xs text-neutral-600">{t(`export.formats.${formatId}_desc`)}</div>
+              </button>
+            ))}
+          </div>
         </div>
+
+        {/* 导出按钮 */}
+        <button 
+          onClick={handleExport}
+          disabled={isExporting}
+          className={`w-full rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base ${
+            isExporting 
+              ? 'bg-primary-500/50 cursor-not-allowed' 
+              : 'bg-primary-500 hover:bg-primary-600'
+          } text-white`}
+        >
+          {isExporting ? (
+            <>
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+              {t('export.exportingButton')}
+            </>
+          ) : (
+            <>
+              <Download className="w-4 h-4" />
+              {t('export.exportButton')}
+            </>
+          )}
+        </button>
+
+        {/* 隐私保护说明 */}
+        <div className="p-4 bg-blue-50 rounded-lg">
+          <div className="flex gap-3">
+            <ShieldCheck className="text-blue-500 mt-0.5 w-5 h-5 flex-shrink-0" />
+            <div className="text-sm">
+              <div className="font-medium text-blue-900">{t('export.privacyTitle')}</div>
+              <div className="text-blue-700 mt-1">{t('export.privacyContent')}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* 导出状态 */}
+        {exportStatus === 'success' && (
+          <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
+            <div className="text-sm text-green-800">
+              ✅ {t('export.successMessage')}
+            </div>
+          </div>
+        )}
+        
+        {exportStatus === 'error' && (
+          <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+            <div className="text-sm text-red-800">
+              ❌ {t('export.errorMessage')}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

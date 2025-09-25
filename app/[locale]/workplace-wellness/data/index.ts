@@ -237,14 +237,31 @@ export const translations: Record<Language, any> = {
     export: {
       title: "Data Export & Management",
       subtitle: "Export your health data for medical reports",
-      typeLabel: "Export Type",
-      types: { period: "Period Data", nutrition: "Nutrition Data", all: "All Data" },
+      contentLabel: "Export Content",
+      types: { 
+        period: "Period Data", 
+        period_desc: "Includes period dates, symptoms, work impact, etc.",
+        nutrition: "Nutrition Data", 
+        nutrition_desc: "Includes meal plans, food logs, etc.",
+        all: "All Data", 
+        all_desc: "Includes all health records and settings."
+      },
       formatLabel: "Export Format",
-      formats: { json: "JSON", csv: "CSV", pdf: "PDF" },
+      formats: { 
+        json: "JSON", 
+        json_desc: "For data backup",
+        csv: "CSV", 
+        csv_desc: "For spreadsheet analysis",
+        pdf: "PDF", 
+        pdf_desc: "For medical reports"
+      },
       exportButton: "Export Data",
+      exportingButton: "Exporting...",
       downloadButton: "Download File",
       successMessage: "Data exported successfully!",
-      errorMessage: "Export failed. Please try again."
+      errorMessage: "Export failed. Please try again.",
+      privacyTitle: "Privacy Protection",
+      privacyContent: "All data is stored locally on your device. Please keep exported files secure to avoid leaking personal health information."
     },
     common: {
       save: "Save",
@@ -332,14 +349,31 @@ export const translations: Record<Language, any> = {
     export: {
       title: "数据导出与管理",
       subtitle: "导出健康数据用于医疗报告",
-      typeLabel: "导出类型",
-      types: { period: "经期数据", nutrition: "营养数据", all: "全部数据" },
+      contentLabel: "导出内容",
+      types: { 
+        period: "经期数据", 
+        period_desc: "包含经期日期、症状、工作影响等",
+        nutrition: "营养数据", 
+        nutrition_desc: "包含膳食计划、食物记录等",
+        all: "全部数据", 
+        all_desc: "包含所有健康记录和设置"
+      },
       formatLabel: "导出格式",
-      formats: { json: "JSON", csv: "CSV", pdf: "PDF" },
+      formats: { 
+        json: "JSON", 
+        json_desc: "数据备份",
+        csv: "CSV", 
+        csv_desc: "表格分析",
+        pdf: "PDF", 
+        pdf_desc: "医疗报告"
+      },
       exportButton: "导出数据",
+      exportingButton: "导出中...",
       downloadButton: "下载文件",
       successMessage: "数据导出成功！",
-      errorMessage: "导出失败，请重试。"
+      errorMessage: "导出失败，请重试。",
+      privacyTitle: "隐私保护",
+      privacyContent: "所有数据均存储在您的本地设备中，导出的文件请妥善保管，避免泄露个人健康信息。"
     },
     common: {
       save: "保存",

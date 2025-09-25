@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useSafeTranslations } from '@/hooks/useSafeTranslations';
 import { usePartnerHandbookStore, useStageActions } from '../stores/partnerHandbookStore';
 import { Locale } from '../types/common';
-import { QuizResult } from '../types/quiz';
+import { QuizResult, QuizStage } from '../types/quiz';
 
 // 懒加载组件
 import dynamic from 'next/dynamic';

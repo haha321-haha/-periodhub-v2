@@ -212,35 +212,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
-  // PDF 资源文件 - 包含在sitemap中供Bing发现
-  const pdfFiles = [
-    // 中文PDF文件
-    '/downloads/parent-communication-guide-zh.pdf',
-    '/downloads/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf',
-    '/downloads/teacher-collaboration-handbook-zh.pdf',
-    '/downloads/healthy-habits-checklist-zh.pdf',
-    '/downloads/specific-menstrual-pain-management-guide-zh.pdf',
-    '/downloads/natural-therapy-assessment-zh.pdf',
-    '/downloads/menstrual-cycle-nutrition-plan-zh.pdf',
-    '/downloads/campus-emergency-checklist-zh.pdf',
-    '/downloads/menstrual-pain-complications-management-zh.pdf',
-    '/downloads/magnesium-gut-health-menstrual-pain-guide-zh.pdf',
-    '/downloads/pain-tracking-form-zh.pdf',
-    '/downloads/teacher-health-manual-zh.pdf',
-    // 英文PDF文件
-    '/downloads/parent-communication-guide-en.pdf',
-    '/downloads/zhan-zhuang-baduanjin-illustrated-guide-en.pdf',
-    '/downloads/teacher-collaboration-handbook-en.pdf',
-    '/downloads/healthy-habits-checklist-en.pdf',
-    '/downloads/specific-menstrual-pain-management-guide-en.pdf',
-    '/downloads/natural-therapy-assessment-en.pdf',
-    '/downloads/menstrual-cycle-nutrition-plan-en.pdf',
-    '/downloads/campus-emergency-checklist-en.pdf',
-    '/downloads/menstrual-pain-complications-management-en.pdf',
-    '/downloads/magnesium-gut-health-menstrual-pain-guide-en.pdf',
-    '/downloads/pain-tracking-form-en.pdf',
-    '/downloads/teacher-health-manual-en.pdf',
-  ];
+  // 🎯 PDF 资源文件 - 已从sitemap中移除，避免重复内容问题
+  // PDF文件现在通过robots.txt禁止索引，不再包含在sitemap中
+  // HTML文件是主要内容，PDF文件是备用/打印版本
+  const pdfFiles: string[] = [];
 
   // HTML资源文件 - 优先级高于PDF，更好的SEO和用户体验
   const htmlFiles = [

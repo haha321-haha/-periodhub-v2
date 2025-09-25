@@ -25,7 +25,11 @@ export default function robots(): MetadataRoute.Robots {
           // 禁止索引备份文件
           '*.backup*',
           '*.tmp*',
-          '*.log*'
+          '*.log*',
+          // 🎯 禁止索引PDF文件
+          '/pdf-files/',
+          '/downloads/*.pdf',
+          '*.pdf'
         ],
       },
       {
@@ -43,7 +47,11 @@ export default function robots(): MetadataRoute.Robots {
           '/staging*',
           '*.backup*',
           '*.tmp*',
-          '*.log*'
+          '*.log*',
+          // 🎯 禁止索引PDF文件
+          '/pdf-files/',
+          '/downloads/*.pdf',
+          '*.pdf'
         ],
       },
       {
@@ -61,7 +69,11 @@ export default function robots(): MetadataRoute.Robots {
           '/staging*',
           '*.backup*',
           '*.tmp*',
-          '*.log*'
+          '*.log*',
+          // 🎯 禁止索引PDF文件
+          '/pdf-files/',
+          '/downloads/*.pdf',
+          '*.pdf'
         ],
       }
     ],

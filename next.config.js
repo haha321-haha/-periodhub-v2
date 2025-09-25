@@ -229,6 +229,17 @@ const nextConfig = {
         source: '/articles/understanding-your-cycle',
         destination: '/zh/health-guide',
         permanent: true
+      },
+      // 🎯 修复特定文章页面的重定向问题
+      {
+        source: '/articles/long-term-healthy-lifestyle-guide',
+        destination: '/zh/articles/long-term-healthy-lifestyle-guide',
+        permanent: true
+      },
+      {
+        source: '/articles/effective-herbal-tea-menstrual-pain',
+        destination: '/zh/articles/effective-herbal-tea-menstrual-pain',
+        permanent: true
       }
     ];
   }

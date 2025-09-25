@@ -177,7 +177,10 @@ export const translations: Record<Language, any> = {
     nav: {
       calendar: "Period Calendar",
       nutrition: "Nutrition Advice",
-      export: "Data Management"
+      workImpact: "Work Impact",
+      analysis: "Data Analysis",
+      export: "Data Management",
+      settings: "Settings"
     },
     calendar: {
       title: "Period Work Calendar",
@@ -189,6 +192,13 @@ export const translations: Record<Language, any> = {
       statCycle: "Avg. Cycle",
       statLength: "Avg. Length",
       statNext: "Next Prediction",
+      addRecord: "Add Record",
+      date: "Date",
+      type: "Type",
+      typePeriod: "Period",
+      typePredicted: "Predicted",
+      typeOvulation: "Ovulation",
+      painLevel: "Pain Level",
       dateFormats: {
         yearMonth: { month: 'long', year: 'numeric' },
         monthDay: { month: 'short', day: 'numeric' }
@@ -269,7 +279,17 @@ export const translations: Record<Language, any> = {
       passwordLabel: "Export Password",
       passwordPlaceholder: "Enter password for export",
       enableMasking: "Enable Data Masking",
-      securityWarnings: "Security Warnings"
+      securityWarnings: "Security Warnings",
+      periodTypes: {
+        period: "Period",
+        predicted: "Predicted",
+        ovulation: "Ovulation"
+      },
+      flowTypes: {
+        light: "Light",
+        medium: "Medium",
+        heavy: "Heavy"
+      }
     },
     charts: {
       title: "Cycle Statistics & Analysis",
@@ -350,6 +370,124 @@ export const translations: Record<Language, any> = {
       success: "Success",
       warning: "Warning",
       info: "Information"
+    },
+    // Day 9: 数据分析功能翻译
+    analysis: {
+      advancedTitle: "Advanced Cycle Analysis",
+      tabs: {
+        overview: "Overview",
+        trends: "Trends",
+        comparison: "Comparison",
+        insights: "Insights"
+      },
+      avgCycleLength: "Avg Cycle Length",
+      avgPeriodLength: "Avg Period Length",
+      avgPainLevel: "Avg Pain Level",
+      confidence: "Confidence",
+      cycleLength: "Cycle Length",
+      avgPain: "Avg Pain",
+      commonFlow: "Common Flow",
+      noTrendData: "No trend data available",
+      noComparisonData: "No comparison data available",
+      comparisonTitle: "Period Comparison",
+      currentPeriod: "Current Period",
+      previousPeriod: "Previous Period",
+      averageCycle: "Average Cycle",
+      trendUp: "Trending Up",
+      trendDown: "Trending Down",
+      trendStable: "Stable"
+    },
+    symptoms: {
+      title: "Symptom Statistics",
+      tabs: {
+        overview: "Overview",
+        patterns: "Patterns",
+        trends: "Trends",
+        recommendations: "Recommendations"
+      },
+      noData: "No symptom data available",
+      frequency: "Frequency",
+      lastOccurrence: "Last Occurrence",
+      severity: "Severity",
+      cramps: "Cramps",
+      bloating: "Bloating",
+      headache: "Headache",
+      fatigue: "Fatigue",
+      mood_swings: "Mood Swings",
+      breast_tenderness: "Breast Tenderness",
+      back_pain: "Back Pain",
+      nausea: "Nausea",
+      insomnia: "Insomnia",
+      anxiety: "Anxiety",
+      trendsComingSoon: "Trend analysis coming soon"
+    },
+    patterns: {
+      crampsBloating: "Cramps + Bloating Pattern",
+      headacheFatigue: "Headache + Fatigue Pattern",
+      moodAnxiety: "Mood Swings + Anxiety Pattern",
+      occurrences: "occurrences",
+      frequency: "Frequency",
+      severity: "Severity"
+    },
+    recommendations: {
+      warmCompress: "Apply warm compress to lower abdomen",
+      gentleExercise: "Engage in gentle exercise like walking",
+      hydration: "Stay well hydrated",
+      rest: "Get adequate rest and sleep",
+      caffeineReduction: "Reduce caffeine intake",
+      stressManagement: "Practice stress management techniques",
+      mindfulness: "Practice mindfulness and meditation",
+      socialSupport: "Seek social support from friends/family",
+      sleepHygiene: "Maintain good sleep hygiene",
+      generalCare: "Follow general self-care practices"
+    },
+    workAnalysis: {
+      title: "Work Impact Analysis",
+      tabs: {
+        overview: "Overview",
+        patterns: "Patterns",
+        productivity: "Productivity",
+        insights: "Insights"
+      },
+      noData: "No work impact data available",
+      avgEfficiency: "Avg Efficiency",
+      avgPain: "Avg Pain",
+      avgProductivity: "Avg Productivity",
+      adjustmentRate: "Adjustment Rate",
+      recentTrends: "Recent Trends",
+      efficiency: "Efficiency",
+      painLevel: "Pain Level",
+      commonAdjustments: "Common Adjustments",
+      productivityTitle: "Productivity Analysis",
+      efficiencyVsPain: "Efficiency vs Pain Level",
+      productivityTrend: "Productivity Trend",
+      recommendation: "Recommendation"
+    },
+    workInsights: {
+      highEfficiency: "High Work Efficiency",
+      highEfficiencyDesc: "Your work efficiency is consistently high",
+      maintainRoutine: "Maintain your current work routine",
+      lowEfficiency: "Low Work Efficiency",
+      lowEfficiencyDesc: "Work efficiency could be improved",
+      improveWorkflow: "Consider optimizing your workflow",
+      highPainImpact: "High Pain Impact on Work",
+      highPainImpactDesc: "Pain levels significantly affect work performance",
+      painManagement: "Focus on pain management strategies",
+      frequentAdjustments: "Frequent Work Adjustments",
+      frequentAdjustmentsDesc: "You frequently need to adjust work arrangements",
+      planAhead: "Plan ahead for challenging days"
+    },
+    insights: {
+      regularCycle: "Regular Cycle Pattern",
+      regularCycleDesc: "Your menstrual cycle shows good regularity",
+      irregularCycle: "Irregular Cycle Pattern",
+      irregularCycleDesc: "Your cycle shows some irregularity",
+      highPain: "High Pain Levels",
+      highPainDesc: "Pain levels are consistently high",
+      lowPain: "Low Pain Levels",
+      lowPainDesc: "Pain levels are well managed",
+      highAccuracy: "High Prediction Accuracy",
+      highAccuracyDesc: "Cycle predictions are highly accurate"
     }
   },
   zh: {
@@ -363,7 +501,10 @@ export const translations: Record<Language, any> = {
     nav: {
       calendar: "经期日历",
       nutrition: "营养建议",
-      export: "数据管理"
+      workImpact: "工作影响",
+      analysis: "数据分析",
+      export: "数据管理",
+      settings: "设置"
     },
     calendar: {
       title: "经期工作日历",
@@ -375,6 +516,13 @@ export const translations: Record<Language, any> = {
       statCycle: "平均周期",
       statLength: "平均长度",
       statNext: "下次预测",
+      addRecord: "添加记录",
+      date: "日期",
+      type: "类型",
+      typePeriod: "经期",
+      typePredicted: "预测",
+      typeOvulation: "排卵",
+      painLevel: "疼痛等级",
       dateFormats: {
         yearMonth: { month: 'long', year: 'numeric' },
         monthDay: { month: 'short', day: 'numeric' }
@@ -455,7 +603,17 @@ export const translations: Record<Language, any> = {
       passwordLabel: "导出密码",
       passwordPlaceholder: "请输入导出密码",
       enableMasking: "启用数据脱敏",
-      securityWarnings: "安全警告"
+      securityWarnings: "安全警告",
+      periodTypes: {
+        period: "经期",
+        predicted: "预测",
+        ovulation: "排卵"
+      },
+      flowTypes: {
+        light: "少量",
+        medium: "中等",
+        heavy: "大量"
+      }
     },
     charts: {
       title: "周期统计与分析",
@@ -536,6 +694,124 @@ export const translations: Record<Language, any> = {
       success: "成功",
       warning: "警告",
       info: "信息"
+    },
+    // Day 9: 数据分析功能翻译
+    analysis: {
+      advancedTitle: "高级周期分析",
+      tabs: {
+        overview: "概览",
+        trends: "趋势",
+        comparison: "对比",
+        insights: "洞察"
+      },
+      avgCycleLength: "平均周期长度",
+      avgPeriodLength: "平均经期长度",
+      avgPainLevel: "平均疼痛等级",
+      confidence: "置信度",
+      cycleLength: "周期长度",
+      avgPain: "平均疼痛",
+      commonFlow: "常见流量",
+      noTrendData: "暂无趋势数据",
+      noComparisonData: "暂无对比数据",
+      comparisonTitle: "经期对比",
+      currentPeriod: "当前周期",
+      previousPeriod: "上一周期",
+      averageCycle: "平均周期",
+      trendUp: "上升趋势",
+      trendDown: "下降趋势",
+      trendStable: "稳定"
+    },
+    symptoms: {
+      title: "症状统计",
+      tabs: {
+        overview: "概览",
+        patterns: "模式",
+        trends: "趋势",
+        recommendations: "建议"
+      },
+      noData: "暂无症状数据",
+      frequency: "频率",
+      lastOccurrence: "最后出现",
+      severity: "严重程度",
+      cramps: "痉挛",
+      bloating: "腹胀",
+      headache: "头痛",
+      fatigue: "疲劳",
+      mood_swings: "情绪波动",
+      breast_tenderness: "乳房胀痛",
+      back_pain: "背痛",
+      nausea: "恶心",
+      insomnia: "失眠",
+      anxiety: "焦虑",
+      trendsComingSoon: "趋势分析即将推出"
+    },
+    patterns: {
+      crampsBloating: "痉挛+腹胀模式",
+      headacheFatigue: "头痛+疲劳模式",
+      moodAnxiety: "情绪波动+焦虑模式",
+      occurrences: "次出现",
+      frequency: "频率",
+      severity: "严重程度"
+    },
+    recommendations: {
+      warmCompress: "在下腹部敷热敷",
+      gentleExercise: "进行温和运动如散步",
+      hydration: "保持充足水分",
+      rest: "获得充足的休息和睡眠",
+      caffeineReduction: "减少咖啡因摄入",
+      stressManagement: "练习压力管理技巧",
+      mindfulness: "练习正念和冥想",
+      socialSupport: "寻求朋友/家人的社会支持",
+      sleepHygiene: "保持良好的睡眠卫生",
+      generalCare: "遵循一般自我护理实践"
+    },
+    workAnalysis: {
+      title: "工作影响分析",
+      tabs: {
+        overview: "概览",
+        patterns: "模式",
+        productivity: "生产力",
+        insights: "洞察"
+      },
+      noData: "暂无工作影响数据",
+      avgEfficiency: "平均效率",
+      avgPain: "平均疼痛",
+      avgProductivity: "平均生产力",
+      adjustmentRate: "调整率",
+      recentTrends: "近期趋势",
+      efficiency: "效率",
+      painLevel: "疼痛等级",
+      commonAdjustments: "常见调整",
+      productivityTitle: "生产力分析",
+      efficiencyVsPain: "效率 vs 疼痛等级",
+      productivityTrend: "生产力趋势",
+      recommendation: "建议"
+    },
+    workInsights: {
+      highEfficiency: "高工作效率",
+      highEfficiencyDesc: "您的工作效率持续保持高水平",
+      maintainRoutine: "保持当前的工作常规",
+      lowEfficiency: "低工作效率",
+      lowEfficiencyDesc: "工作效率有待提高",
+      improveWorkflow: "考虑优化工作流程",
+      highPainImpact: "疼痛对工作影响大",
+      highPainImpactDesc: "疼痛水平显著影响工作表现",
+      painManagement: "专注于疼痛管理策略",
+      frequentAdjustments: "频繁的工作调整",
+      frequentAdjustmentsDesc: "您经常需要调整工作安排",
+      planAhead: "为挑战性日子提前规划"
+    },
+    insights: {
+      regularCycle: "规律周期模式",
+      regularCycleDesc: "您的月经周期显示出良好的规律性",
+      irregularCycle: "不规律周期模式",
+      irregularCycleDesc: "您的周期显示出一些不规律性",
+      highPain: "高疼痛水平",
+      highPainDesc: "疼痛水平持续较高",
+      lowPain: "低疼痛水平",
+      lowPainDesc: "疼痛水平得到良好控制",
+      highAccuracy: "高预测准确性",
+      highAccuracyDesc: "周期预测高度准确"
     }
   }
 };
@@ -618,3 +894,276 @@ export function checkDataIntegrity() {
     issues
   };
 }
+
+// ================================
+// Day 11: 高级功能翻译键
+// ================================
+
+// 导出翻译键扩展
+export const day11Translations = {
+  zh: {
+    // 高级导出功能
+    advancedExport: {
+      title: "高级导出功能",
+      customFormat: "自定义导出格式",
+      batchExport: "批量导出",
+      exportTemplates: "导出模板",
+      customFields: "自定义字段",
+      dateRange: "日期范围",
+      filters: "数据过滤",
+      includeCharts: "包含图表",
+      includeMetadata: "包含元数据",
+      compression: "压缩文件",
+      password: "密码保护",
+      templateName: "模板名称",
+      templateDescription: "模板描述",
+      saveTemplate: "保存模板",
+      loadTemplate: "加载模板",
+      deleteTemplate: "删除模板",
+      batchProgress: "批量导出进度",
+      totalItems: "总项目数",
+      completedItems: "已完成",
+      failedItems: "失败项目",
+      cancelBatch: "取消批量导出",
+      retryFailed: "重试失败项目"
+    },
+    
+    // 用户偏好设置
+    userPreferences: {
+      title: "用户偏好设置",
+      uiPreferences: "界面偏好",
+      notificationSettings: "通知设置",
+      privacySettings: "隐私设置",
+      accessibilitySettings: "无障碍设置",
+      exportPreferences: "导出偏好",
+      theme: "主题",
+      fontSize: "字体大小",
+      animations: "动画效果",
+      compactMode: "紧凑模式",
+      dateFormat: "日期格式",
+      timeFormat: "时间格式",
+      chartType: "图表类型",
+      showTooltips: "显示提示",
+      showProgressBars: "显示进度条",
+      notifications: "通知",
+      reminderTime: "提醒时间",
+      reminderDays: "提醒日期",
+      quietHours: "免打扰时间",
+      notificationChannels: "通知渠道",
+      browser: "浏览器",
+      email: "邮件",
+      sms: "短信",
+      push: "推送",
+      dataCollection: "数据收集",
+      analytics: "分析统计",
+      personalization: "个性化",
+      shareProgress: "分享进度",
+      anonymousMode: "匿名模式",
+      exportPassword: "导出密码",
+      dataRetention: "数据保留",
+      autoDelete: "自动删除",
+      highContrast: "高对比度",
+      reducedMotion: "减少动画",
+      screenReader: "屏幕阅读器",
+      keyboardNavigation: "键盘导航",
+      focusIndicators: "焦点指示器",
+      textScaling: "文本缩放",
+      defaultFormat: "默认格式",
+      autoSave: "自动保存",
+      includeCharts: "包含图表",
+      compression: "压缩"
+    },
+    
+    // 主题设置
+    themeSettings: {
+      title: "主题设置",
+      light: "浅色主题",
+      dark: "深色主题",
+      auto: "自动主题",
+      system: "系统主题",
+      lightDescription: "适合日间使用的明亮主题",
+      darkDescription: "适合夜间使用的深色主题",
+      autoDescription: "根据系统设置自动切换",
+      systemDescription: "跟随系统主题设置"
+    },
+    
+    // 通知类型
+    notificationTypes: {
+      reminder: "提醒通知",
+      insight: "洞察通知",
+      update: "更新通知",
+      alert: "警告通知",
+      reminderDescription: "经期提醒和健康建议",
+      insightDescription: "数据分析和健康洞察",
+      updateDescription: "应用更新和功能通知",
+      alertDescription: "重要警告和异常情况"
+    },
+    
+    // 设置验证
+    settingsValidation: {
+      invalidTimeFormat: "时间格式无效，请使用HH:MM格式",
+      invalidDays: "提醒天数无效，请选择0-6之间的数字",
+      invalidScaling: "文本缩放比例无效，请选择0.8-2.0之间的数值",
+      invalidRetention: "数据保留天数无效，请选择30-3650天",
+      invalidCacheSize: "缓存大小无效，请选择10-1000MB",
+      invalidStorageSize: "存储大小无效，请选择5-500MB",
+      templateNotFound: "导出模板不存在",
+      exportFailed: "导出失败，请重试",
+      invalidPreferences: "偏好设置无效"
+    },
+    
+    // 系统设置
+    systemSettings: {
+      title: "系统设置",
+      performance: "性能设置",
+      storage: "存储设置",
+      sync: "同步设置",
+      enableLazyLoading: "启用懒加载",
+      enableCodeSplitting: "启用代码分割",
+      enableCaching: "启用缓存",
+      maxCacheSize: "最大缓存大小",
+      enableLocalStorage: "启用本地存储",
+      enableSessionStorage: "启用会话存储",
+      maxStorageSize: "最大存储大小",
+      autoCleanup: "自动清理",
+      cleanupInterval: "清理间隔",
+      enableAutoSync: "启用自动同步",
+      syncInterval: "同步间隔",
+      enableOfflineMode: "启用离线模式",
+      conflictResolution: "冲突解决"
+    }
+  },
+  
+  en: {
+    // Advanced Export Features
+    advancedExport: {
+      title: "Advanced Export Features",
+      customFormat: "Custom Export Format",
+      batchExport: "Batch Export",
+      exportTemplates: "Export Templates",
+      customFields: "Custom Fields",
+      dateRange: "Date Range",
+      filters: "Data Filters",
+      includeCharts: "Include Charts",
+      includeMetadata: "Include Metadata",
+      compression: "File Compression",
+      password: "Password Protection",
+      templateName: "Template Name",
+      templateDescription: "Template Description",
+      saveTemplate: "Save Template",
+      loadTemplate: "Load Template",
+      deleteTemplate: "Delete Template",
+      batchProgress: "Batch Export Progress",
+      totalItems: "Total Items",
+      completedItems: "Completed",
+      failedItems: "Failed Items",
+      cancelBatch: "Cancel Batch Export",
+      retryFailed: "Retry Failed Items"
+    },
+    
+    // User Preferences
+    userPreferences: {
+      title: "User Preferences",
+      uiPreferences: "UI Preferences",
+      notificationSettings: "Notification Settings",
+      privacySettings: "Privacy Settings",
+      accessibilitySettings: "Accessibility Settings",
+      exportPreferences: "Export Preferences",
+      theme: "Theme",
+      fontSize: "Font Size",
+      animations: "Animations",
+      compactMode: "Compact Mode",
+      dateFormat: "Date Format",
+      timeFormat: "Time Format",
+      chartType: "Chart Type",
+      showTooltips: "Show Tooltips",
+      showProgressBars: "Show Progress Bars",
+      notifications: "Notifications",
+      reminderTime: "Reminder Time",
+      reminderDays: "Reminder Days",
+      quietHours: "Quiet Hours",
+      notificationChannels: "Notification Channels",
+      browser: "Browser",
+      email: "Email",
+      sms: "SMS",
+      push: "Push",
+      dataCollection: "Data Collection",
+      analytics: "Analytics",
+      personalization: "Personalization",
+      shareProgress: "Share Progress",
+      anonymousMode: "Anonymous Mode",
+      exportPassword: "Export Password",
+      dataRetention: "Data Retention",
+      autoDelete: "Auto Delete",
+      highContrast: "High Contrast",
+      reducedMotion: "Reduced Motion",
+      screenReader: "Screen Reader",
+      keyboardNavigation: "Keyboard Navigation",
+      focusIndicators: "Focus Indicators",
+      textScaling: "Text Scaling",
+      defaultFormat: "Default Format",
+      autoSave: "Auto Save",
+      includeCharts: "Include Charts",
+      compression: "Compression"
+    },
+    
+    // Theme Settings
+    themeSettings: {
+      title: "Theme Settings",
+      light: "Light Theme",
+      dark: "Dark Theme",
+      auto: "Auto Theme",
+      system: "System Theme",
+      lightDescription: "Bright theme suitable for daytime use",
+      darkDescription: "Dark theme suitable for nighttime use",
+      autoDescription: "Automatically switch based on system settings",
+      systemDescription: "Follow system theme settings"
+    },
+    
+    // Notification Types
+    notificationTypes: {
+      reminder: "Reminder Notifications",
+      insight: "Insight Notifications",
+      update: "Update Notifications",
+      alert: "Alert Notifications",
+      reminderDescription: "Period reminders and health advice",
+      insightDescription: "Data analysis and health insights",
+      updateDescription: "App updates and feature notifications",
+      alertDescription: "Important warnings and exceptions"
+    },
+    
+    // Settings Validation
+    settingsValidation: {
+      invalidTimeFormat: "Invalid time format, please use HH:MM format",
+      invalidDays: "Invalid reminder days, please select numbers between 0-6",
+      invalidScaling: "Invalid text scaling, please select values between 0.8-2.0",
+      invalidRetention: "Invalid data retention, please select 30-3650 days",
+      invalidCacheSize: "Invalid cache size, please select 10-1000MB",
+      invalidStorageSize: "Invalid storage size, please select 5-500MB",
+      templateNotFound: "Export template not found",
+      exportFailed: "Export failed, please try again",
+      invalidPreferences: "Invalid preferences"
+    },
+    
+    // System Settings
+    systemSettings: {
+      title: "System Settings",
+      performance: "Performance Settings",
+      storage: "Storage Settings",
+      sync: "Sync Settings",
+      enableLazyLoading: "Enable Lazy Loading",
+      enableCodeSplitting: "Enable Code Splitting",
+      enableCaching: "Enable Caching",
+      maxCacheSize: "Max Cache Size",
+      enableLocalStorage: "Enable Local Storage",
+      enableSessionStorage: "Enable Session Storage",
+      maxStorageSize: "Max Storage Size",
+      autoCleanup: "Auto Cleanup",
+      cleanupInterval: "Cleanup Interval",
+      enableAutoSync: "Enable Auto Sync",
+      syncInterval: "Sync Interval",
+      enableOfflineMode: "Enable Offline Mode",
+      conflictResolution: "Conflict Resolution"
+    }
+  }
+};

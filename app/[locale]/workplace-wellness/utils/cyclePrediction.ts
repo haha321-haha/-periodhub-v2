@@ -130,7 +130,7 @@ export class CyclePredictor {
     
     if (!analysis.nextPredictedPeriod) return predictions;
 
-    let currentDate = new Date(analysis.nextPredictedPeriod);
+    const currentDate = new Date(analysis.nextPredictedPeriod);
     
     for (let month = 0; month < months; month++) {
       // 预测经期
@@ -332,7 +332,7 @@ export class CyclePredictor {
     if (cycleLengths.length === 0) return 0;
     if (cycleLengths.length < 3) return 30;
     
-    let baseConfidence = Math.min(90, 50 + cycleLengths.length * 5);
+    const baseConfidence = Math.min(90, 50 + cycleLengths.length * 5);
     
     switch (regularity) {
       case 'regular':

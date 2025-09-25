@@ -33,6 +33,27 @@ export type ExportFormat = 'json' | 'csv' | 'pdf';
 // 导出类型
 export type ExportType = 'period' | 'nutrition' | 'all';
 
+// Day 11: 扩展导出格式类型
+export type ExtendedExportFormat = ExportFormat | 'xlsx' | 'docx' | 'xml';
+
+// 主题类型
+export type Theme = 'light' | 'dark' | 'auto' | 'system';
+
+// 字体大小类型
+export type FontSize = 'small' | 'medium' | 'large';
+
+// 日期格式类型
+export type DateFormat = 'YYYY-MM-DD' | 'DD/MM/YYYY' | 'MM/DD/YYYY';
+
+// 时间格式类型
+export type TimeFormat = '24h' | '12h';
+
+// 通知类型
+export type NotificationType = 'reminder' | 'insight' | 'update' | 'alert';
+
+// 通知渠道类型
+export type NotificationChannel = 'browser' | 'email' | 'sms' | 'push';
+
 // 中医性质类型
 export type TCMNature = 'warm' | 'cool' | 'neutral';
 
@@ -100,11 +121,19 @@ export interface CalendarState {
 // 应用状态接口 - 基于HVsLYEp的appState结构
 export interface WorkplaceWellnessState {
   lang: Language;
-  activeTab: 'calendar' | 'nutrition' | 'export';
+  activeTab: 'calendar' | 'nutrition' | 'export' | 'settings';
   calendar: CalendarState;
   workImpact: WorkImpactData;
   nutrition: NutritionData;
   export: ExportConfig;
+  
+  // Day 11: 扩展状态
+  userPreferences: UserPreferences;
+  exportTemplates: ExportTemplate[];
+  activeTemplate: ExportTemplate | null;
+  batchExportQueue: BatchExportQueue | null;
+  exportHistory: ExportHistory[];
+  systemSettings: SystemSettings;
 }
 
 // 翻译函数类型
@@ -188,6 +217,225 @@ export interface WorkplaceWellnessConfig {
   maxPainLevel: number;
   minEfficiency: number;
   maxEfficiency: number;
+}
+
+// ================================
+// Day 11: 高级功能类型定义
+// ================================
+
+// 导出模板接口
+export interface ExportTemplate {
+  id: string;
+  name: string;
+  description?: string;
+  exportType: ExportType;
+  format: ExtendedExportFormat;
+  fields: string[]; // 要导出的字段
+  dateRange?: {
+    start: string;
+    end: string;
+  };
+  filters?: Record<string, any>; // 自定义过滤条件
+  createdAt: string;
+  updatedAt: string;
+  isDefault?: boolean;
+}
+
+// 批量导出项接口
+export interface BatchExportItem {
+  id: string;
+  userId?: string;
+  userName?: string;
+  exportType: ExportType;
+  templateId?: string;
+  status: 'pending' | 'processing' | 'completed' | 'failed';
+  progress: number; // 0-100
+  error?: string;
+  createdAt: string;
+  completedAt?: string;
+}
+
+// 批量导出队列接口
+export interface BatchExportQueue {
+  id: string;
+  name: string;
+  items: BatchExportItem[];
+  status: 'idle' | 'running' | 'completed' | 'failed' | 'cancelled';
+  totalItems: number;
+  completedItems: number;
+  failedItems: number;
+  createdAt: string;
+  startedAt?: string;
+  completedAt?: string;
+}
+
+// 自定义导出配置接口
+export interface CustomExportConfig {
+  exportType: ExportType;
+  format: ExtendedExportFormat;
+  fields: string[];
+  dateRange?: {
+    start: string;
+    end: string;
+  };
+  filters?: Record<string, any>;
+  includeMetadata: boolean;
+  includeCharts: boolean;
+  password?: string;
+  compression?: boolean;
+}
+
+// 通知设置接口
+export interface NotificationSettings {
+  enabled: boolean;
+  types: {
+    [K in NotificationType]: boolean;
+  };
+  channels: {
+    [K in NotificationChannel]: boolean;
+  };
+  reminderTime: string; // HH:MM格式
+  reminderDays: number[]; // 0-6，0为周日
+  quietHours: {
+    enabled: boolean;
+    start: string; // HH:MM格式
+    end: string; // HH:MM格式
+  };
+  frequency: 'immediate' | 'daily' | 'weekly';
+}
+
+// 界面偏好设置接口
+export interface UIPreferences {
+  theme: Theme;
+  fontSize: FontSize;
+  animations: boolean;
+  compactMode: boolean;
+  dateFormat: DateFormat;
+  timeFormat: TimeFormat;
+  chartType: 'line' | 'bar' | 'area' | 'pie';
+  sidebarCollapsed: boolean;
+  showTooltips: boolean;
+  showProgressBars: boolean;
+}
+
+// 隐私设置接口
+export interface PrivacySettings {
+  dataCollection: boolean;
+  analytics: boolean;
+  personalization: boolean;
+  shareProgress: boolean;
+  anonymousMode: boolean;
+  exportPassword: boolean;
+  dataRetention: number; // 天数
+  autoDelete: boolean;
+}
+
+// 无障碍设置接口
+export interface AccessibilitySettings {
+  highContrast: boolean;
+  reducedMotion: boolean;
+  screenReader: boolean;
+  keyboardNavigation: boolean;
+  focusIndicators: boolean;
+  textScaling: number; // 1.0 - 2.0
+}
+
+// 统一用户偏好设置接口
+export interface UserPreferences {
+  // 界面偏好
+  ui: UIPreferences;
+  
+  // 通知设置
+  notifications: NotificationSettings;
+  
+  // 隐私设置
+  privacy: PrivacySettings;
+  
+  // 无障碍设置
+  accessibility: AccessibilitySettings;
+  
+  // 导出偏好
+  export: {
+    defaultFormat: ExtendedExportFormat;
+    defaultTemplate?: string;
+    autoSave: boolean;
+    includeCharts: boolean;
+    compression: boolean;
+  };
+  
+  // 语言偏好
+  language: Language;
+  
+  // 元数据
+  version: string;
+  lastUpdated: string;
+}
+
+// 偏好设置变更接口
+export interface PreferenceChange {
+  category: keyof UserPreferences;
+  key: string;
+  value: any;
+  timestamp: string;
+}
+
+// 设置验证结果接口
+export interface SettingsValidationResult {
+  isValid: boolean;
+  errors: {
+    category: keyof UserPreferences;
+    key: string;
+    message: string;
+  }[];
+  warnings: {
+    category: keyof UserPreferences;
+    key: string;
+    message: string;
+  }[];
+}
+
+// 导出历史记录接口
+export interface ExportHistory {
+  id: string;
+  exportType: ExportType;
+  format: ExtendedExportFormat;
+  templateId?: string;
+  fileName: string;
+  fileSize: number;
+  recordCount: number;
+  status: 'success' | 'failed' | 'cancelled';
+  error?: string;
+  createdAt: string;
+  downloadUrl?: string;
+  expiresAt?: string;
+}
+
+// 系统设置接口
+export interface SystemSettings {
+  // 性能设置
+  performance: {
+    enableLazyLoading: boolean;
+    enableCodeSplitting: boolean;
+    enableCaching: boolean;
+    maxCacheSize: number; // MB
+  };
+  
+  // 存储设置
+  storage: {
+    enableLocalStorage: boolean;
+    enableSessionStorage: boolean;
+    maxStorageSize: number; // MB
+    autoCleanup: boolean;
+    cleanupInterval: number; // 小时
+  };
+  
+  // 同步设置
+  sync: {
+    enableAutoSync: boolean;
+    syncInterval: number; // 分钟
+    enableOfflineMode: boolean;
+    conflictResolution: 'server' | 'client' | 'manual';
+  };
 }
 
 // 所有类型已通过export type声明导出，无需重复导出

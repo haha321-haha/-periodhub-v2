@@ -22,9 +22,13 @@ export default function CalendarComponent() {
 
   // 基于HVsLYEp的日历逻辑
   const { currentDate } = calendar;
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const monthName = currentDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+  
+  // 确保 currentDate 是有效的 Date 对象
+  const validCurrentDate = currentDate instanceof Date ? currentDate : new Date(currentDate);
+  
+  const year = validCurrentDate.getFullYear();
+  const month = validCurrentDate.getMonth();
+  const monthName = validCurrentDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
     month: 'long',
     year: 'numeric'
   });
@@ -71,7 +75,7 @@ export default function CalendarComponent() {
 
   // 月份导航 - 基于HVsLYEp的导航逻辑
   const navigateMonth = (direction: 'prev' | 'next') => {
-    const newDate = new Date(currentDate);
+    const newDate = new Date(validCurrentDate);
     if (direction === 'prev') {
       newDate.setMonth(newDate.getMonth() - 1);
     } else {

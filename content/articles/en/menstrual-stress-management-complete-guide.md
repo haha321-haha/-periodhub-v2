@@ -1,15 +1,26 @@
 ---
 title: "Complete Menstrual Stress Management Guide: Comprehensive Relief from Psychological to Physiological"
+title_en: "Complete Menstrual Stress Management Guide: Comprehensive Relief from Psychological to Physiological"
 description: "Evidence-based menstrual stress management guide based on the latest ACOG, APA, and NIH research, providing scientific stress relief strategies for North American working women, covering immediate stress reduction techniques, long-term management plans, and workplace coping solutions."
+description_en: "Evidence-based menstrual stress management guide based on the latest ACOG, APA, and NIH research, providing scientific stress relief strategies for North American working women, covering immediate stress reduction techniques, long-term management plans, and workplace coping solutions."
 summary: "Over 70% of women experience mood swings and increased pain during menstruation. This guide systematically analyzes the scientific connection between stress and menstrual pain, providing specialized stress management solutions for North American working women, including 5-minute quick stress relief methods, discreet office techniques, and workplace rights protection."
+summary_en: "Over 70% of women experience mood swings and increased pain during menstruation. This guide systematically analyzes the scientific connection between stress and menstrual pain, providing specialized stress management solutions for North American working women, including 5-minute quick stress relief methods, discreet office techniques, and workplace rights protection."
 category: "Nutrition & Health"
+category_en: "Nutrition & Health"
 tags: ["stress management", "workplace wellness", "psychological relief", "HPA axis", "cortisol management"]
+tags_en: ["stress management", "workplace wellness", "psychological relief", "HPA axis", "cortisol management"]
 author: "Period Hub Health Team"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true
 reading_time: "22 minutes"
 reading_time_en: "22 minutes"
+seo_title: "Complete Menstrual Stress Management Guide: Comprehensive Relief from Psychological to Physiological | Professional Women's Health"
+seo_title_en: "Complete Menstrual Stress Management Guide: Comprehensive Relief from Psychological to Physiological | Professional Women's Health"
+seo_description: "Evidence-based menstrual stress management guide based on ACOG, APA, and NIH research, providing scientific stress relief strategies for North American working women."
+seo_description_en: "Evidence-based menstrual stress management guide based on ACOG, APA, and NIH research, providing scientific stress relief strategies for North American working women."
+canonical_url: "/en/articles/menstrual-stress-management-complete-guide"
+schema_type: "Article"
 ---
 
 # Complete Menstrual Stress Management Guide: Comprehensive Relief from Psychological to Physiological

@@ -1,15 +1,26 @@
 ---
 title: "How to Use Ginger for Menstrual Pain Relief: 5 Scientifically Proven Methods"
+title_en: "How to Use Ginger for Menstrual Pain Relief: 5 Scientifically Proven Methods"
 description: "Comprehensive guide to using ginger for menstrual pain relief based on authoritative medical research, covering scientific principles, 5 effective methods, comparative studies, and safety guidelines for natural menstrual pain management."
+description_en: "Comprehensive guide to using ginger for menstrual pain relief based on authoritative medical research, covering scientific principles, 5 effective methods, comparative studies, and safety guidelines for natural menstrual pain management."
 summary: "Detailed explanation of ginger's scientific mechanisms for menstrual pain relief and practical methods, including golden ginger tea formula, ginger heat packs, essential oil massage, and other validated approaches based on clinical research data."
+summary_en: "Detailed explanation of ginger's scientific mechanisms for menstrual pain relief and practical methods, including golden ginger tea formula, ginger heat packs, essential oil massage, and other validated approaches based on clinical research data."
 category: "Immediate Relief"
+category_en: "Immediate Relief"
 tags: ["ginger therapy", "menstrual pain relief", "natural remedies", "herbal treatment", "scientific methods"]
+tags_en: ["ginger therapy", "menstrual pain relief", "natural remedies", "herbal treatment", "scientific methods"]
 author: "Period Hub Health Team"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true
 reading_time: "12 minutes"
-reading_time_zh: "12分钟"
+reading_time_en: "12 minutes"
+seo_title: "How to Use Ginger for Menstrual Pain Relief: 5 Scientifically Proven Methods | Professional Women's Health"
+seo_title_en: "How to Use Ginger for Menstrual Pain Relief: 5 Scientifically Proven Methods | Professional Women's Health"
+seo_description: "Comprehensive guide to using ginger for menstrual pain relief based on medical research, covering 5 effective methods and safety guidelines for natural pain management."
+seo_description_en: "Comprehensive guide to using ginger for menstrual pain relief based on medical research, covering 5 effective methods and safety guidelines for natural pain management."
+canonical_url: "/en/articles/ginger-menstrual-pain-relief-guide"
+schema_type: "Article"
 ---
 
 # How to Use Ginger for Menstrual Pain Relief: 5 Scientifically Proven Methods

@@ -341,7 +341,7 @@ export const constitutionQuestions: Record<string, ConstitutionQuestion[]> = {
     },
     {
       id: 'menstrual_symptoms',
-      type: 'multiple',
+      type: 'multi',
       category: 'menstrual',
       weight: 2,
       title: '您在经期还有哪些伴随症状？',
@@ -739,7 +739,7 @@ export const constitutionQuestions: Record<string, ConstitutionQuestion[]> = {
     },
     {
       id: 'menstrual_symptoms',
-      type: 'multiple',
+      type: 'multi',
       category: 'menstrual',
       weight: 2,
       title: 'What other symptoms do you experience during menstruation?',

@@ -245,7 +245,7 @@ class MedicalCareGuideStorageManager extends StorageManager {
     try {
       const data: MedicalCareGuideStorage = {
         assessmentHistory: this.getAssessmentHistory(),
-        lastAssessment: this.getLastAssessment() || undefined,
+        lastAssessment: this.getLastAssessment() || undefined as any,
         userPreferences: this.getUserPreferences(),
         version: 1
       };

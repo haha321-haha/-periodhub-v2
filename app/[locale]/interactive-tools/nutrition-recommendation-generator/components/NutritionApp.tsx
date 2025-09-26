@@ -61,8 +61,8 @@ export default function NutritionApp({ language, selections, onSelectionsChange 
   const renderSelectionOptions = () => {
     const categories = [
       { key: 'menstrualPhase', type: 'single', icon: 'droplets' },
-      { key: 'healthGoals', type: 'multiple', icon: 'heart-pulse' },
-      { key: 'tcmConstitution', type: 'multiple', icon: 'yin-yang' }
+      { key: 'healthGoals', type: 'multi', icon: 'heart-pulse' },
+      { key: 'tcmConstitution', type: 'multi', icon: 'yin-yang' }
     ];
 
     return categories.map(categoryInfo => {

@@ -23,70 +23,70 @@
       "title": "健康文章 - Period Hub",
       "description": "42篇基于循证医学的经期健康文章，涵盖痛经缓解、营养调理、生活方式改善等专业知识"
     },
-  "tools": {
-    "title": "互动工具 - Period Hub",
-    "description": "痛经症状评估、周期追踪、体质测试等6大专业工具，基于医学研究提供个性化经期健康管理方案"
-  },
-  "nutritionGenerator": {
-    "pageTitle": "营养推荐生成器",
-    "mainTitle": "个性化营养推荐生成器",
-    "subtitle": "基于月经周期、健康目标和中医体质的科学营养指导",
-    "generateBtn": "生成我的建议",
-    "generating": "正在生成...",
-    "noSelection": "请至少选择一个选项以生成建议",
-    "footerText": "个性化健康，触手可及。",
-    "categories": {
-      "menstrualPhase": "月经阶段",
-      "healthGoals": "健康目标",
-      "tcmConstitution": "中医体质"
+    "tools": {
+      "title": "互动工具 - Period Hub",
+      "description": "痛经症状评估、周期追踪、体质测试等6大专业工具，基于医学研究提供个性化经期健康管理方案"
     },
-    "results": {
-      "title": "您的个性化营养建议",
-      "subtitle": "基于您的选择，我们为您推荐以下营养指导",
-      "recommendedFoods": "推荐食物",
-      "foodsToAvoid": "慎食/忌食",
-      "lifestyleTips": "生活与饮食贴士"
-    },
-    "menstrualPhase": {
-      "title": "选择您的月经阶段",
-      "description": "不同月经阶段的营养需求有所不同",
-      "options": {
-        "menstrual": "月经期",
-        "follicular": "卵泡期",
-        "ovulation": "排卵期",
-        "luteal": "黄体期"
+    "nutritionGenerator": {
+      "pageTitle": "营养推荐生成器",
+      "mainTitle": "个性化营养推荐生成器",
+      "subtitle": "基于月经周期、健康目标和中医体质的科学营养指导",
+      "generateBtn": "生成我的建议",
+      "generating": "正在生成...",
+      "noSelection": "请至少选择一个选项以生成建议",
+      "footerText": "个性化健康，触手可及。",
+      "categories": {
+        "menstrualPhase": "月经阶段",
+        "healthGoals": "健康目标",
+        "tcmConstitution": "中医体质"
+      },
+      "results": {
+        "title": "您的个性化营养建议",
+        "subtitle": "基于您的选择，我们为您推荐以下营养指导",
+        "recommendedFoods": "推荐食物",
+        "foodsToAvoid": "慎食/忌食",
+        "lifestyleTips": "生活与饮食贴士"
+      },
+      "menstrualPhase": {
+        "title": "选择您的月经阶段",
+        "description": "不同月经阶段的营养需求有所不同",
+        "options": {
+          "menstrual": "月经期",
+          "follicular": "卵泡期",
+          "ovulation": "排卵期",
+          "luteal": "黄体期"
+        }
+      },
+      "healthGoals": {
+        "title": "选择您的健康目标",
+        "description": "可以多选，我们会综合考虑您的所有目标",
+        "options": {
+          "anemiaPrevention": "预防缺铁性贫血",
+          "pmsRelief": "缓解经前综合症"
+        }
+      },
+      "tcmConstitution": {
+        "title": "选择您的中医体质",
+        "description": "了解您的体质类型，获得更精准的营养建议",
+        "options": {
+          "qiDeficiency": "气虚",
+          "yangDeficiency": "阳虚",
+          "yinDeficiency": "阴虚",
+          "phlegmDampness": "痰湿",
+          "dampHeat": "湿热"
+        }
+      },
+      "meta": {
+        "title": "营养推荐生成器 | 基于月经周期和中医体质的个性化营养指导 | Period Hub",
+        "description": "专业的营养推荐生成器，基于您的月经周期、健康目标和中医体质，提供个性化的饮食指导。科学结合现代营养学与中医理论，为女性提供精准的营养管理方案，帮助改善经期健康和生活质量。",
+        "keywords": "营养推荐生成器,月经周期营养,中医体质饮食,个性化营养方案,女性健康饮食,经期营养管理,痛经营养调理,中医食疗,月经期饮食指导,营养计算器",
+        "ogTitle": "营养推荐生成器 | 个性化营养指导工具",
+        "ogDescription": "基于月经周期、健康目标和中医体质的专业营养推荐生成器，为女性提供科学的个性化饮食指导。",
+        "ogImageAlt": "营养推荐生成器界面截图",
+        "twitterTitle": "营养推荐生成器 | 个性化营养指导",
+        "twitterDescription": "基于月经周期和中医体质的专业营养推荐生成器，为女性提供科学的个性化饮食指导。"
       }
     },
-    "healthGoals": {
-      "title": "选择您的健康目标",
-      "description": "可以多选，我们会综合考虑您的所有目标",
-      "options": {
-        "anemiaPrevention": "预防缺铁性贫血",
-        "pmsRelief": "缓解经前综合症"
-      }
-    },
-    "tcmConstitution": {
-      "title": "选择您的中医体质",
-      "description": "了解您的体质类型，获得更精准的营养建议",
-      "options": {
-        "qiDeficiency": "气虚",
-        "yangDeficiency": "阳虚",
-        "yinDeficiency": "阴虚",
-        "phlegmDampness": "痰湿",
-        "dampHeat": "湿热"
-      }
-    },
-    "meta": {
-      "title": "营养推荐生成器 | 基于月经周期和中医体质的个性化营养指导 | Period Hub",
-      "description": "专业的营养推荐生成器，基于您的月经周期、健康目标和中医体质，提供个性化的饮食指导。科学结合现代营养学与中医理论，为女性提供精准的营养管理方案，帮助改善经期健康和生活质量。",
-      "keywords": "营养推荐生成器,月经周期营养,中医体质饮食,个性化营养方案,女性健康饮食,经期营养管理,痛经营养调理,中医食疗,月经期饮食指导,营养计算器",
-      "ogTitle": "营养推荐生成器 | 个性化营养指导工具",
-      "ogDescription": "基于月经周期、健康目标和中医体质的专业营养推荐生成器，为女性提供科学的个性化饮食指导。",
-      "ogImageAlt": "营养推荐生成器界面截图",
-      "twitterTitle": "营养推荐生成器 | 个性化营养指导",
-      "twitterDescription": "基于月经周期和中医体质的专业营养推荐生成器，为女性提供科学的个性化饮食指导。"
-    }
-  },
     "teen": {
       "title": "青少年健康专区 - Period Hub",
       "description": "专为10-19岁青少年设计的经期健康教育，包含痛经初潮应对、校园应急处理、心理调适等实用指导"
@@ -2987,6 +2987,7 @@
     "description": "专业的经期健康管理工具集合，包含症状评估、疼痛追踪、数据分析等功能。科学评估您的经期症状，获得个性化健康建议，有效管理痛经困扰。支持中英双语，移动端优化体验。",
     "symptomAssessment": {
       "title": "症状评估工具",
+      "subtitle": "通过专业问卷快速识别疼痛类型，获得精准个性化建议",
       "description": "回答几个关于您症状的问题，以获得管理经期疼痛的个性化建议。",
       "startButton": "开始评估",
       "questions": {
@@ -3510,19 +3511,348 @@
     },
     "title": "互动工具",
     "symptomAssessment": {
+      "messages": {
+        "assessmentComplete": "评估完成",
+        "assessmentCompleteDesc": "您的症状评估已完成。请查看结果和建议。",
+        "assessmentFailed": "评估失败",
+        "assessmentFailedDesc": "评估过程中发生错误。请重试。",
+        "loading": "正在加载...",
+        "calculating": "正在计算...",
+        "generatingRecommendations": "正在生成建议..."
+      },
+      "severity": {
+        "mild": "轻度",
+        "moderate": "中度",
+        "severe": "重度",
+        "workplace": "职场影响",
+        "verySevere": "极重度"
+      },
+      "priority": {
+        "high": "高优先级",
+        "medium": "中等优先级",
+        "low": "低优先级"
+      },
+      "questions": {
+        "painLevel": "疼痛程度",
+        "painDuration": "疼痛持续时间",
+        "painLocation": "疼痛位置",
+        "accompanyingSymptoms": "伴随症状",
+        "reliefPreference": "缓解偏好",
+        "cyclePattern": "周期模式",
+        "workplaceImpact": "职场影响",
+        "sleepQuality": "睡眠质量",
+        "moodChanges": "情绪变化",
+        "energyLevel": "精力水平"
+      },
+      "options": {
+        "mild": "轻度 (1-3/10)",
+        "moderate": "中度 (4-6/10)",
+        "severe": "重度 (7-8/10)",
+        "verySevere": "极重度 (9-10/10)",
+        "hours": "持续几个小时",
+        "days": "持续1-2天",
+        "long": "持续3天或更长时间",
+        "variable": "疼痛不可预测",
+        "regular": "规律",
+        "irregular": "不规律",
+        "yes": "是",
+        "no": "否",
+        "sometimes": "有时"
+      },
       "title": "症状评估工具",
-      "description": "回答几个关于症状的问题，获取个性化的缓解建议。",
-      "toolTitle": "症状评估工具",
-      "toolDescription": "该工具将帮助您评估经期症状的严重程度，并提供个性化建议。",
-      "selectSymptom": "您当前的主要症状是什么？",
-      "selectSymptomPlaceholder": "请选择症状",
-      "menstrualPain": "经期疼痛",
-      "irregularPeriods": "经期不规律",
-      "abnormalFlow": "经期量异常",
-      "otherSymptoms": "其他症状",
-      "severity": "症状严重程度（1-10）",
-      "assessing": "评估中...",
-      "startAssessment": "开始评估"
+      "description": "专业的痛经症状评估工具，帮助您了解疼痛程度和获得个性化建议",
+      "subtitle": "专业医疗评估",
+      "start": {
+        "title": "开始症状评估",
+        "description": "通过5个专业问题，全面评估您的痛经症状",
+        "feature1": "专业评估",
+        "feature2": "个性化建议",
+        "feature3": "即时缓解",
+        "feature4": "长期管理",
+        "startButton": "开始评估",
+        "disclaimer": "本评估仅供参考，不能替代专业医疗诊断"
+      },
+      "progress": {
+        "questionOf": "第 {current} 题，共 {total} 题",
+        "step": "步骤",
+        "completed": "已完成",
+        "remaining": "剩余"
+      },
+      "navigation": {
+        "previous": "上一步",
+        "next": "下一步",
+        "skip": "跳过",
+        "back": "返回",
+        "continue": "继续",
+        "finish": "完成"
+      },
+      "buttons": {
+        "next": "下一步",
+        "previous": "上一步",
+        "submit": "提交评估",
+        "restart": "重新开始",
+        "viewResults": "查看结果",
+        "downloadReport": "下载报告",
+        "shareResults": "分享结果"
+      },
+      "results": {
+        "title": "评估结果",
+        "score": "疼痛评分",
+        "severity": "严重程度",
+        "recommendations": "个性化建议",
+        "immediate": "即时缓解",
+        "longTerm": "长期管理",
+        "workplace": "职场支持",
+        "medical": "医疗建议"
+      },
+      "result": {
+        "title": "评估结果",
+        "yourScore": "您的评分",
+        "severity": "严重程度",
+        "riskLevel": "风险等级",
+        "summary": "总结",
+        "recommendations": "建议",
+        "timeframe": "时间框架",
+        "actionSteps": "行动步骤",
+        "retakeAssessment": "重新评估",
+        "saveResults": "保存结果",
+        "settings": "设置",
+        "workplaceSupport": "职场支持建议",
+        "mediumPriority": "中等优先级",
+        "highPriority": "高优先级",
+        "lowPriority": "低优先级",
+        "immediate": "即时",
+        "shortTerm": "短期",
+        "longTerm": "长期",
+        "workplaceImpact": "职场影响",
+        "personalCare": "个人护理",
+        "medicalAdvice": "医疗建议"
+      },
+      "recommendations": {
+        "workplaceSupport": {
+          "title": "职场支持建议",
+          "description": "您的症状严重影响了您的工作。寻求支持非常重要。",
+          "action1": "首先记录症状对工作的影响。将我们的完整报告作为个人工具。",
+          "action2": "研究您公司现有的病假和弹性工作政策。",
+          "action3": "与HR部门讨论合理的住宿安排。",
+          "timeframe": "建议实施"
+        },
+        "personalCare": {
+          "title": "个人护理建议",
+          "description": "关注您的个人健康和舒适度。",
+          "action1": "建立规律的作息时间。",
+          "action2": "练习放松技巧，如深呼吸或冥想。",
+          "action3": "保持健康的饮食习惯。",
+          "timeframe": "建议实施"
+        },
+        "medicalAdvice": {
+          "title": "医疗建议",
+          "description": "考虑寻求专业医疗建议。",
+          "action1": "预约妇科医生进行详细检查。",
+          "action2": "讨论疼痛管理方案。",
+          "action3": "了解可能的治疗方案。",
+          "timeframe": "建议实施"
+        }
+      },
+      "modes": {
+        "simplified": "简化版评估",
+        "detailed": "详细版评估",
+        "medical": "医疗专业版评估"
+      }
+    },
+    "workplaceAssessment": {
+      "title": "职场适应性评估",
+      "subtitle": "了解您的症状如何影响工作，有助于找到有效的支持措施。",
+      "questions": {
+        "concentration": {
+          "title": "您的痛经如何影响您在工作或学习时的注意力？",
+          "options": {
+            "none": "对我的注意力没有影响。",
+            "slight": "会稍微分散注意力，但我能应付。",
+            "difficult": "让我很难专注于任务。",
+            "impossible": "几乎无法集中注意力或保持工作效率。"
+          }
+        },
+        "absenteeism": {
+          "title": "您是否曾因经期症状而不得不缺勤、缺课或错过重要活动？",
+          "options": {
+            "never": "从未",
+            "rarely": "很少（例如，每年一次或更少）",
+            "sometimes": "有时（每年几次）",
+            "frequently": "经常（在大多数或所有周期中）"
+          }
+        },
+        "communication": {
+          "title": "如果因痛经需要向您的上司提出调整请求（例如，短暂休息、在家工作），您的自在程度如何？",
+          "options": {
+            "comfortable": "非常自在，我相信他们会支持。",
+            "hesitant": "有些犹豫，不确定他们会作何反应。",
+            "uncomfortable": "非常不自在，我会避免进行这种沟通。",
+            "na": "不适用 / 我没有上司"
+          }
+        },
+        "support": {
+          "title": "您认为哪些支持措施对您最有帮助？（可多选）",
+          "options": {
+            "flexHours": "弹性的上下班时间",
+            "remoteWork": "可选择在家工作",
+            "restArea": "有安静的休息区可供使用",
+            "understanding": "对月经健康有更开放和理解的文化氛围",
+            "leave": "有明确的经期休假政策",
+            "none": "不需要特殊支持"
+          }
+        }
+      }
+    },
+    "settings": {
+      "title": "设置",
+      "general": "常规设置",
+      "notifications": "通知设置",
+      "privacy": "隐私设置",
+      "dataManagement": "数据管理",
+      "preferences": {
+        "trackAssessmentHistory": "记录评估历史",
+        "personalizedRecommendations": "个性化建议",
+        "notifications": "通知提醒",
+        "dataSharing": "数据共享"
+      },
+      "actions": {
+        "resetSettings": "重置设置",
+        "exportData": "导出数据",
+        "clearHistory": "清除历史",
+        "save": "保存"
+      },
+      "confirmations": {
+        "resetSettings": "确定要重置所有设置吗？此操作不可撤销。",
+        "clearHistory": "确定要清除所有评估历史吗？此操作不可撤销。"
+      }
+    },
+    "i18n": {
+      "title": "国际化优化",
+      "description": "完善翻译质量，优化多语言支持",
+      "status": {
+        "totalKeys": "总翻译键",
+        "missingKeys": "缺失翻译",
+        "inconsistentKeys": "不一致翻译",
+        "qualityScore": "质量分数"
+      },
+      "optimization": {
+        "title": "优化建议",
+        "addMissing": "补充缺失翻译",
+        "unifyStyle": "统一翻译风格",
+        "optimizeLayout": "优化布局适配",
+        "culturalAdaptation": "文化适应性"
+      },
+      "actions": {
+        "startOptimization": "开始优化",
+        "exportReport": "导出报告"
+      }
+    },
+    "performance": {
+      "title": "性能优化",
+      "description": "提升应用性能，优化用户体验",
+      "metrics": {
+        "bundleSize": "包大小",
+        "loadTime": "加载时间",
+        "memoryUsage": "内存使用",
+        "renderTime": "渲染时间",
+        "cacheHitRate": "缓存命中率",
+        "networkRequests": "网络请求"
+      },
+      "optimization": {
+        "codeSplitting": "代码分割",
+        "lazyLoading": "懒加载",
+        "cacheStrategy": "缓存策略",
+        "memoryOptimization": "内存优化",
+        "networkOptimization": "网络优化"
+      },
+      "recommendations": {
+        "title": "性能优化建议",
+        "bundleSize": "包大小优化",
+        "loadTime": "加载时间优化",
+        "cacheHitRate": "缓存命中率",
+        "networkRequests": "网络请求优化"
+      },
+      "actions": {
+        "startOptimization": "开始优化",
+        "reset": "重置"
+      }
+    },
+    "testing": {
+      "title": "测试框架",
+      "description": "全面的测试覆盖，确保代码质量",
+      "suites": {
+        "unitTests": "单元测试",
+        "integrationTests": "集成测试",
+        "userExperienceTests": "用户体验测试",
+        "securityTests": "安全测试"
+      },
+      "status": {
+        "totalTests": "总测试数",
+        "passedTests": "通过测试",
+        "failedTests": "失败测试",
+        "averageCoverage": "平均覆盖率"
+      },
+      "recommendations": {
+        "title": "测试建议",
+        "unitTestCoverage": "单元测试覆盖",
+        "integrationTesting": "集成测试",
+        "userExperienceTesting": "用户体验测试",
+        "securityTesting": "安全测试"
+      },
+      "actions": {
+        "runTests": "运行测试",
+        "reset": "重置",
+        "exportReport": "导出报告"
+      }
+    },
+    "documentation": {
+      "title": "文档框架",
+      "description": "完善的文档体系，提升开发效率",
+      "types": {
+        "apiDocs": "API文档",
+        "userGuide": "用户指南",
+        "deploymentGuide": "部署指南",
+        "codeComments": "代码注释"
+      },
+      "status": {
+        "totalDocuments": "文档总数",
+        "completed": "已完成",
+        "incomplete": "未完成",
+        "totalWords": "总字数"
+      },
+      "recommendations": {
+        "title": "文档完善建议",
+        "apiDocumentation": "API文档完善",
+        "userGuide": "用户指南优化",
+        "deploymentGuide": "部署指南更新",
+        "codeCommentStandards": "代码注释规范"
+      },
+      "actions": {
+        "exportAllDocuments": "导出所有文档",
+        "generateReport": "生成报告"
+      }
+    },
+    "p3": {
+      "title": "P3阶段：系统优化和性能提升",
+      "description": "完善国际化、性能优化、测试和文档，确保系统质量和稳定性",
+      "modules": {
+        "i18n": "国际化完善",
+        "performance": "性能优化",
+        "testing": "测试完善",
+        "documentation": "文档完善"
+      },
+      "statistics": {
+        "optimizationModules": "优化模块",
+        "completedTasks": "已完成任务",
+        "activeTasks": "进行中任务",
+        "overallProgress": "总体进度"
+      },
+      "completion": {
+        "title": "P3阶段完成！",
+        "description": "所有系统优化和性能提升任务已完成，系统已达到生产就绪状态",
+        "deployToProduction": "进入生产环境"
+      }
     }
   },
   "scenarioSolutionsPage": {
@@ -5729,5 +6059,118 @@
     "startButton": "开始评估",
     "impactButton": "职场影响分析",
     "cta": "开始评估"
-  }
+  },
+  "0": "益处",
+  "0-2": "0-2",
+  "3-4": "3-4",
+  "4": "4",
+  "5-7": "5-7",
+  "8-10": "8-10",
+  "benefitsLabel": "益处标签",
+  "foods": "食物",
+  "actionSteps": "行动步骤",
+  "step": "步骤",
+  "steps": "步骤",
+  "assessmentTool": "评估工具",
+  "assessmentResult": "评估结果",
+  "assessmentHistory": "评估历史",
+  "recommendation": "建议",
+  "recommendations": "建议",
+  "personalizedRecommendations": "个性化建议",
+  "immediateRecommendations": "即时建议",
+  "longTermRecommendations": "长期建议",
+  "symptom": "症状",
+  "symptoms": "症状",
+  "symptomAssessment": "症状评估",
+  "symptomTracker": "症状追踪",
+  "symptomHistory": "症状历史",
+  "pain": "疼痛",
+  "painLevel": "疼痛等级",
+  "painDuration": "疼痛持续时间",
+  "painLocation": "疼痛位置",
+  "cycle": "周期",
+  "cycleLength": "周期长度",
+  "cycleHistory": "周期历史",
+  "constitution": "体质",
+  "constitutionTest": "体质测试",
+  "constitutionType": "体质类型",
+  "constitutionRecommendations": "体质建议",
+  "nutrition": "营养",
+  "nutritionGuide": "营养指南",
+  "nutritionRecommendations": "营养建议",
+  "diet": "饮食",
+  "dietGuide": "饮食指南",
+  "exercise": "运动",
+  "exercises": "运动",
+  "exerciseGuide": "运动指南",
+  "stretching": "拉伸",
+  "yoga": "瑜伽",
+  "lifestyle": "生活方式",
+  "lifestyleRecommendations": "生活方式建议",
+  "sleep": "睡眠",
+  "stress": "压力",
+  "stressManagement": "压力管理",
+  "medical": "医疗",
+  "medicalAdvice": "医疗建议",
+  "doctor": "医生",
+  "doctorVisit": "看医生",
+  "emergency": "紧急情况",
+  "tool": "工具",
+  "tracker": "追踪器",
+  "calculator": "计算器",
+  "guide": "指南",
+  "button": "按钮",
+  "buttons": "按钮",
+  "menu": "菜单",
+  "settings": "设置",
+  "preferences": "偏好设置",
+  "loading": "加载中",
+  "error": "错误",
+  "success": "成功",
+  "warning": "警告",
+  "info": "信息",
+  "message": "消息",
+  "notification": "通知",
+  "date": "日期",
+  "time": "时间",
+  "duration": "持续时间",
+  "frequency": "频率",
+  "schedule": "时间表",
+  "data": "数据",
+  "record": "记录",
+  "records": "记录",
+  "history": "历史",
+  "statistics": "统计",
+  "analytics": "分析",
+  "report": "报告",
+  "export": "导出",
+  "import": "导入",
+  "community": "社区",
+  "social": "社交",
+  "share": "分享",
+  "support": "支持",
+  "help": "帮助",
+  "feedback": "反馈",
+  "sync": "同步",
+  "backup": "备份",
+  "restore": "恢复",
+  "update": "更新",
+  "version": "版本",
+  "performance": "性能",
+  "optimization": "优化",
+  "accessibility": "无障碍",
+  "aria": "ARIA",
+  "screenReader": "屏幕阅读器",
+  "keyboard": "键盘",
+  "focus": "焦点",
+  "test": "测试",
+  "testing": "测试",
+  "validation": "验证",
+  "quality": "质量",
+  "coverage": "覆盖率",
+  "documentation": "文档",
+  "tutorial": "教程",
+  "manual": "手册",
+  "api": "API",
+  "reference": "参考"
 }

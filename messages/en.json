@@ -23,70 +23,70 @@
       "title": "Health Articles - Period Hub",
       "description": "42 evidence-based articles covering period pain relief, nutrition therapy, lifestyle improvements and expert menstrual health knowledge"
     },
-  "tools": {
-    "title": "Interactive Tools - Period Hub",
-    "description": "6 professional tools including period pain assessment, cycle tracking, constitution testing - personalized menstrual health management based on medical research"
-  },
-  "nutritionGenerator": {
-    "pageTitle": "Nutrition Recommendation Generator",
-    "mainTitle": "Personalized Nutrition Recommendation Generator",
-    "subtitle": "Scientific nutrition guidance based on menstrual cycle, health goals, and TCM constitution",
-    "generateBtn": "Generate My Plan",
-    "generating": "Generating...",
-    "noSelection": "Please make at least one selection to generate recommendations",
-    "footerText": "Personalized wellness at your fingertips.",
-    "categories": {
-      "menstrualPhase": "Menstrual Phase",
-      "healthGoals": "Health Goals",
-      "tcmConstitution": "TCM Constitution"
+    "tools": {
+      "title": "Interactive Tools - Period Hub",
+      "description": "6 professional tools including period pain assessment, cycle tracking, constitution testing - personalized menstrual health management based on medical research"
     },
-    "results": {
-      "title": "Your Personalized Nutrition Recommendations",
-      "subtitle": "Based on your selections, we recommend the following nutrition guidance",
-      "recommendedFoods": "Recommended Foods",
-      "foodsToAvoid": "Foods to Avoid",
-      "lifestyleTips": "Lifestyle & Dietary Tips"
-    },
-    "menstrualPhase": {
-      "title": "Select Your Menstrual Phase",
-      "description": "Nutritional needs vary during different menstrual phases",
-      "options": {
-        "menstrual": "Menstrual Phase",
-        "follicular": "Follicular Phase",
-        "ovulation": "Ovulation Phase",
-        "luteal": "Luteal Phase"
+    "nutritionGenerator": {
+      "pageTitle": "Nutrition Recommendation Generator",
+      "mainTitle": "Personalized Nutrition Recommendation Generator",
+      "subtitle": "Scientific nutrition guidance based on menstrual cycle, health goals, and TCM constitution",
+      "generateBtn": "Generate My Plan",
+      "generating": "Generating...",
+      "noSelection": "Please make at least one selection to generate recommendations",
+      "footerText": "Personalized wellness at your fingertips.",
+      "categories": {
+        "menstrualPhase": "Menstrual Phase",
+        "healthGoals": "Health Goals",
+        "tcmConstitution": "TCM Constitution"
+      },
+      "results": {
+        "title": "Your Personalized Nutrition Recommendations",
+        "subtitle": "Based on your selections, we recommend the following nutrition guidance",
+        "recommendedFoods": "Recommended Foods",
+        "foodsToAvoid": "Foods to Avoid",
+        "lifestyleTips": "Lifestyle & Dietary Tips"
+      },
+      "menstrualPhase": {
+        "title": "Select Your Menstrual Phase",
+        "description": "Nutritional needs vary during different menstrual phases",
+        "options": {
+          "menstrual": "Menstrual Phase",
+          "follicular": "Follicular Phase",
+          "ovulation": "Ovulation Phase",
+          "luteal": "Luteal Phase"
+        }
+      },
+      "healthGoals": {
+        "title": "Select Your Health Goals",
+        "description": "You can select multiple goals, we'll consider all of them",
+        "options": {
+          "anemiaPrevention": "Prevent Iron-Deficiency Anemia",
+          "pmsRelief": "Alleviate PMS Symptoms"
+        }
+      },
+      "tcmConstitution": {
+        "title": "Select Your TCM Constitution",
+        "description": "Understand your constitution type for more precise nutrition advice",
+        "options": {
+          "qiDeficiency": "Qi Deficiency",
+          "yangDeficiency": "Yang Deficiency",
+          "yinDeficiency": "Yin Deficiency",
+          "phlegmDampness": "Phlegm-Dampness",
+          "dampHeat": "Damp-Heat"
+        }
+      },
+      "meta": {
+        "title": "Nutrition Recommendation Generator | Personalized Diet Based on Menstrual Cycle & TCM | Period Hub",
+        "description": "Professional nutrition suggestion generator based on your menstrual cycle, health goals, and TCM constitution. Combines modern nutrition science with traditional Chinese medicine to provide personalized dietary guidance for women's menstrual health and quality of life improvement.",
+        "keywords": "nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management,period pain nutrition therapy,TCM dietary therapy,menstrual diet guide,nutrition calculator",
+        "ogTitle": "Nutrition Recommendation Generator | Personalized Nutrition Guide Tool",
+        "ogDescription": "Professional nutrition suggestion generator based on menstrual cycle, health goals, and TCM constitution, providing scientific personalized dietary guidance for women.",
+        "ogImageAlt": "Nutrition recommendation generator interface screenshot",
+        "twitterTitle": "Nutrition Recommendation Generator | Personalized Nutrition Guide",
+        "twitterDescription": "Professional nutrition suggestion generator based on menstrual cycle and TCM constitution, providing scientific personalized dietary guidance for women."
       }
     },
-    "healthGoals": {
-      "title": "Select Your Health Goals",
-      "description": "You can select multiple goals, we'll consider all of them",
-      "options": {
-        "anemiaPrevention": "Prevent Iron-Deficiency Anemia",
-        "pmsRelief": "Alleviate PMS Symptoms"
-      }
-    },
-    "tcmConstitution": {
-      "title": "Select Your TCM Constitution",
-      "description": "Understand your constitution type for more precise nutrition advice",
-      "options": {
-        "qiDeficiency": "Qi Deficiency",
-        "yangDeficiency": "Yang Deficiency",
-        "yinDeficiency": "Yin Deficiency",
-        "phlegmDampness": "Phlegm-Dampness",
-        "dampHeat": "Damp-Heat"
-      }
-    },
-    "meta": {
-      "title": "Nutrition Recommendation Generator | Personalized Diet Based on Menstrual Cycle & TCM | Period Hub",
-      "description": "Professional nutrition suggestion generator based on your menstrual cycle, health goals, and TCM constitution. Combines modern nutrition science with traditional Chinese medicine to provide personalized dietary guidance for women's menstrual health and quality of life improvement.",
-      "keywords": "nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management,period pain nutrition therapy,TCM dietary therapy,menstrual diet guide,nutrition calculator",
-      "ogTitle": "Nutrition Recommendation Generator | Personalized Nutrition Guide Tool",
-      "ogDescription": "Professional nutrition suggestion generator based on menstrual cycle, health goals, and TCM constitution, providing scientific personalized dietary guidance for women.",
-      "ogImageAlt": "Nutrition recommendation generator interface screenshot",
-      "twitterTitle": "Nutrition Recommendation Generator | Personalized Nutrition Guide",
-      "twitterDescription": "Professional nutrition suggestion generator based on menstrual cycle and TCM constitution, providing scientific personalized dietary guidance for women."
-    }
-  },
     "teen": {
       "title": "Teen Health Zone - Period Hub",
       "description": "Specialized menstrual health education for ages 10-19, including first period guidance, school emergency handling, and psychological adjustment support"
@@ -2340,18 +2340,256 @@
     "title": "Interactive Tools",
     "symptomAssessment": {
       "title": "Symptom Assessment Tool",
+      "subtitle": "Quickly identify pain types through professional questionnaires and get precise personalized recommendations",
       "description": "Answer a few questions about your symptoms to get personalized relief recommendations.",
       "toolTitle": "Symptom Assessment Tool",
       "toolDescription": "This tool will help you assess the severity of your menstrual symptoms and provide personalized recommendations.",
-      "selectSymptom": "What are your main symptoms?",
-      "selectSymptomPlaceholder": "Please select symptoms",
+      "selectSymptom": "What is your current main symptom?",
+      "selectSymptomPlaceholder": "Please select a symptom",
       "menstrualPain": "Menstrual Pain",
       "irregularPeriods": "Irregular Periods",
       "abnormalFlow": "Abnormal Flow",
       "otherSymptoms": "Other Symptoms",
-      "severity": "Symptom Severity (1-10)",
+      "severity": {
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe",
+        "verySevere": "Very Severe",
+        "workplace": "Workplace Impact"
+      },
       "assessing": "Assessing...",
-      "startAssessment": "Start Assessment"
+      "startAssessment": "Start Assessment",
+      "start": {
+        "title": "Before Starting",
+        "description": "Please ensure you are in a quiet, private environment where you can focus on answering questions. This assessment will help you better understand your symptom patterns.",
+        "feature1": "Professional Symptom Analysis",
+        "feature2": "Personalized Recommendations",
+        "feature3": "Scientific Assessment Methods",
+        "feature4": "Instant Results Feedback",
+        "startButton": "Start Assessment",
+        "disclaimer": "This assessment is for reference only and cannot replace professional medical diagnosis."
+      },
+      "progress": {
+        "questionOf": "Question {current} / {total}",
+        "step": "Step",
+        "completed": "Completed",
+        "remaining": "Remaining"
+      },
+      "navigation": {
+        "previous": "Previous",
+        "next": "Next",
+        "skip": "Skip",
+        "finish": "Complete Assessment",
+        "back": "Back",
+        "continue": "Continue"
+      },
+      "questions": {
+        "painLevel": {
+          "title": "On a typical painful period day, how would you rate your pain intensity?",
+          "options": {
+            "mild": "Mild (1-3/10): I can feel it, but it doesn't affect my daily activities.",
+            "moderate": "Moderate (4-6/10): Pain interferes with me, affecting my concentration and work efficiency. May need over-the-counter pain medication.",
+            "severe": "Severe (7-8/10): Pain is very intense, I need to lie down or stop what I'm doing, making normal activities difficult.",
+            "verySevere": "Very Severe (9-10/10): Pain is debilitating and unbearable. I often stay in bed and may have other symptoms like nausea or fainting."
+          }
+        },
+        "painDuration": {
+          "title": "How long does the most intense pain typically last?",
+          "options": {
+            "short": "Lasts for a few hours on the first day.",
+            "medium": "Pain is more severe in the first 1-2 days of the period.",
+            "long": "Lasts 3 days or longer.",
+            "variable": "Pain is unpredictable, varying greatly each cycle."
+          }
+        },
+        "painLocation": {
+          "title": "Where do you primarily feel pain? (Multiple selection allowed)",
+          "options": {
+            "lowerAbdomen": "Lower abdomen (below belly button)",
+            "lowerBack": "Lower back (waist area)",
+            "upperThighs": "Radiating to upper thighs",
+            "fullPelvis": "General dull pain in the entire pelvic area",
+            "sideFlank": "One side of the body (left or right)"
+          }
+        },
+        "accompanyingSymptoms": {
+          "title": "Besides pain, what other symptoms do you experience? (Multiple selection allowed)",
+          "options": {
+            "fatigue": "Fatigue or exhaustion",
+            "headache": "Headache or migraine",
+            "nausea": "Nausea or vomiting",
+            "digestive": "Diarrhea or constipation",
+            "mood": "Irritability or mood swings",
+            "bloating": "Abdominal bloating",
+            "breastTenderness": "Breast tenderness",
+            "dizziness": "Dizziness or vertigo"
+          }
+        },
+        "reliefPreference": {
+          "title": "What is your current main goal?",
+          "options": {
+            "instant": "I need quick relief methods for current pain.",
+            "natural": "I prefer natural or non-medication therapies.",
+            "longTerm": "I want to explore long-term management strategies to reduce future pain.",
+            "medical": "I'm willing to learn about related medical options and professional advice."
+          }
+        },
+        "cyclePattern": "Cycle Pattern",
+        "workplaceImpact": "Workplace Impact",
+        "sleepQuality": "Sleep Quality",
+        "moodChanges": "Mood Changes",
+        "energyLevel": "Energy Level"
+      },
+      "result": {
+        "title": "Assessment Results",
+        "yourScore": "Your Score",
+        "severity": "Severity",
+        "riskLevel": "Risk Level",
+        "summary": "Result Summary",
+        "recommendations": "Recommendations",
+        "timeframe": "Timeframe:",
+        "actionSteps": "Action Steps",
+        "retakeAssessment": "Retake Assessment",
+        "saveResults": "Save Results",
+        "consultDoctor": "If symptoms persist or worsen, please consult a doctor",
+        "settings": "Settings"
+      },
+      "messages": {
+        "assessmentComplete": "Assessment Complete",
+        "assessmentCompleteDesc": "Your symptom assessment has been completed. Please review the results and recommendations.",
+        "assessmentFailed": "Assessment Failed",
+        "assessmentFailedDesc": "An error occurred during the assessment. Please try again.",
+        "loading": "Loading...",
+        "calculating": "Calculating...",
+        "generatingRecommendations": "Generating recommendations..."
+      },
+      "buttons": {
+        "next": "Next",
+        "previous": "Previous",
+        "submit": "Submit Assessment",
+        "restart": "Restart",
+        "viewResults": "View Results",
+        "downloadReport": "Download Report",
+        "shareResults": "Share Results"
+      },
+      "options": {
+        "mild": "Mild (1-3/10)",
+        "moderate": "Moderate (4-6/10)",
+        "severe": "Severe (7-8/10)",
+        "verySevere": "Very Severe (9-10/10)",
+        "hours": "Lasts a few hours",
+        "days": "Lasts 1-2 days",
+        "long": "Lasts 3 days or more",
+        "variable": "Pain is unpredictable",
+        "regular": "Regular",
+        "irregular": "Irregular",
+        "yes": "Yes",
+        "no": "No",
+        "sometimes": "Sometimes"
+      },
+      "priority": {
+        "high": "High Priority",
+        "medium": "Medium Priority",
+        "low": "Low Priority"
+      },
+      "recommendations": {
+        "workplaceSupport": {
+          "title": "Workplace Support Recommendations",
+          "description": "Your symptoms severely affect your work. Seeking support is very important.",
+          "action1": "First, record the impact of symptoms on work. Use our full report as a personal tool.",
+          "action2": "Research your company's existing sick leave and flexible work policies.",
+          "action3": "Discuss reasonable accommodations with HR department.",
+          "timeframe": "Recommended Implementation"
+        },
+        "personalCare": {
+          "title": "Personal Care Recommendations",
+          "description": "Focus on your personal health and comfort.",
+          "action1": "Establish regular sleep patterns.",
+          "action2": "Practice relaxation techniques such as deep breathing or meditation.",
+          "action3": "Maintain a healthy diet.",
+          "timeframe": "Recommended Implementation"
+        },
+        "medicalAdvice": {
+          "title": "Medical Advice",
+          "description": "Consider seeking professional medical advice.",
+          "action1": "Schedule an appointment with a gynecologist for detailed examination.",
+          "action2": "Discuss pain management options.",
+          "action3": "Learn about possible treatment options.",
+          "timeframe": "Recommended Implementation"
+        }
+      },
+      "modes": {
+        "simplified": "Simplified Assessment",
+        "detailed": "Detailed Assessment",
+        "medical": "Medical Professional Assessment"
+      }
+    },
+    "workplaceAssessment": {
+      "title": "Workplace Adaptability Assessment",
+      "subtitle": "Understanding how your symptoms affect work helps find effective support measures.",
+      "questions": {
+        "concentration": {
+          "title": "How does your period pain affect your concentration at work or study?",
+          "options": {
+            "none": "No effect on my concentration.",
+            "slight": "Slightly distracting, but I can handle it.",
+            "difficult": "Makes it very difficult to focus on tasks.",
+            "impossible": "Almost impossible to concentrate or maintain work efficiency."
+          }
+        },
+        "absenteeism": {
+          "title": "Have you ever had to miss work, school, or important activities due to period symptoms?",
+          "options": {
+            "never": "Never",
+            "rarely": "Rarely (e.g., once a year or less)",
+            "sometimes": "Sometimes (a few times a year)",
+            "frequently": "Frequently (in most or all cycles)"
+          }
+        },
+        "communication": {
+          "title": "How comfortable would you be requesting adjustments from your supervisor due to period pain (e.g., brief breaks, working from home)?",
+          "options": {
+            "comfortable": "Very comfortable, I believe they would be supportive.",
+            "hesitant": "Somewhat hesitant, unsure how they would react.",
+            "uncomfortable": "Very uncomfortable, I would avoid this communication.",
+            "na": "Not applicable / I don't have a supervisor"
+          }
+        },
+        "support": {
+          "title": "Which support measures would be most helpful to you? (Multiple selection allowed)",
+          "options": {
+            "flexHours": "Flexible work hours",
+            "remoteWork": "Option to work from home",
+            "restArea": "Access to quiet rest areas",
+            "understanding": "More open and understanding culture about menstrual health",
+            "leave": "Clear period leave policies",
+            "none": "No special support needed"
+          }
+        }
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "general": "General Settings",
+      "notifications": "Notification Settings",
+      "privacy": "Privacy Settings",
+      "dataManagement": "Data Management",
+      "preferences": {
+        "trackAssessmentHistory": "Track Assessment History",
+        "personalizedRecommendations": "Personalized Recommendations",
+        "notifications": "Notification Reminders",
+        "dataSharing": "Data Sharing"
+      },
+      "actions": {
+        "resetSettings": "Reset Settings",
+        "exportData": "Export Data",
+        "clearHistory": "Clear History",
+        "save": "Save"
+      },
+      "confirmations": {
+        "resetSettings": "Are you sure you want to reset all settings? This action cannot be undone.",
+        "clearHistory": "Are you sure you want to clear all assessment history? This action cannot be undone."
+      }
     }
   },
   "scenarioSolutionsPage": {
@@ -3997,6 +4235,14 @@
     }
   },
   "home": {
+    "hero": {
+      "title": "Menstrual Health Management Expert",
+      "subtitle": "Scientific period tracking, health advice, and personalized care solutions",
+      "cta": {
+        "primary": "Get Started",
+        "secondary": "Learn More"
+      }
+    },
     "trusted": {
       "title": "Trusted Professional Platform",
       "subtitle": "Based on scientific research, trusted by users",
@@ -4831,6 +5077,133 @@
       "description": "Is your period pain normal? Learn to self-check symptoms, identify 7 critical red flags requiring medical attention. Interactive pain assessment, symptom checker, decision tree, and professional medical guidance.",
       "keywords": "period pain, when to see doctor, gynecological conditions, symptom checker, medical guide, menstrual pain, health assessment, pain scale, warning signs"
     },
+    "hero": {
+      "title": "\"Why Does It Hurt So Much?\" - You're Not Alone",
+      "subtitle": "If you've ever curled up in bed wondering why your period feels like your body is rebelling, you're definitely not alone. About 80% of women experience period pain at some point.",
+      "story": "Sarah's story: \"I used to think severe period pain was something I had to endure. It wasn't until I understood what was actually happening in my body that I felt empowered to manage it.\""
+    },
+    "explanation": {
+      "title": "What Actually Happens During Period Pain?",
+      "step1": {
+        "title": "Trigger",
+        "description": "Your body releases natural chemicals called prostaglandins (think of them as 'contraction messengers')."
+      },
+      "step2": {
+        "title": "Squeeze",
+        "description": "These chemicals tell your uterine muscles to contract."
+      },
+      "step3": {
+        "title": "Pain",
+        "description": "Strong contractions temporarily cut off oxygen supply to the muscles, causing cramp-like pain."
+      },
+      "analogy": {
+        "title": "Simple Analogy:",
+        "description": "It's similar to the feeling of a leg muscle cramp during exercise."
+      }
+    },
+    "assessment": {
+      "title": "Is Your Period Pain Normal?",
+      "subtitle": "Use our interactive assessment tool to understand your pain level and get personalized recommendations."
+    },
+    "tracker": {
+      "title": "Pain & Symptom Tracker",
+      "subtitle": "Track your symptoms long-term to identify patterns and find the relief methods that work best for you."
+    },
+    "toolkit": {
+      "title": "Your Period Pain Management Toolkit",
+      "immediate": {
+        "title": "Immediate Relief Strategies (0-30 minutes)",
+        "heat": {
+          "title": "Heat Therapy - Your Best Friend",
+          "description": "Heat relaxes uterine muscles and increases blood flow. Apply heat to your lower abdomen or back.",
+          "items": [
+            "Heating pad (15-20 minutes at a time)",
+            "Hot water bottle",
+            "Warm bath or shower",
+            "Heat patches (perfect for work/school)"
+          ]
+        }
+      },
+      "medication": {
+        "title": "Complete Medication Guide",
+        "options": [
+          {
+            "name": "Ibuprofen",
+            "dosage": "Dosage: 400-600mg every 6-8 hours.",
+            "bestFor": "Best used: Take 1-2 days before your period starts or when pain first appears to prevent prostaglandin formation."
+          },
+          {
+            "name": "Naproxen",
+            "dosage": "Dosage: 220mg every 8-12 hours.",
+            "bestFor": "Best used: Its longer-lasting effect is perfect for all-day or overnight relief."
+          },
+          {
+            "name": "Acetaminophen",
+            "dosage": "Dosage: 500-1000mg every 6-8 hours.",
+            "bestFor": "Best used: Great alternative if you have a sensitive stomach or can't take NSAIDs like ibuprofen."
+          }
+        ]
+      }
+    },
+    "doctorGuide": {
+      "title": "When to See a Doctor: Your Decision Guide",
+      "immediate": {
+        "title": "Seek Immediate Care",
+        "points": [
+          "Pain so severe you can't stand or walk.",
+          "Fainting or dizziness with pain.",
+          "Fever over 101°F (38.3°C) with period pain."
+        ]
+      },
+      "appointment": {
+        "title": "Schedule an Appointment If:",
+        "points": [
+          "Your pain pattern changes significantly.",
+          "Over-the-counter medications no longer work.",
+          "You frequently miss work due to period pain."
+        ]
+      }
+    },
+    "stories": {
+      "title": "Real Stories: How They Found Relief",
+      "cases": [
+        {
+          "name": "Emma, 24 (College Student)",
+          "problemTitle": "Problem:",
+          "problemDescription": "Severe period pain affecting studies and exams.",
+          "solutionTitle": "Solution:",
+          "solutionDescription": "Combination of preemptive ibuprofen, portable heating pad, and gentle yoga."
+        },
+        {
+          "name": "Maria, 32 (Working Mom)",
+          "problemTitle": "Problem:",
+          "problemDescription": "Pain worsening over time, affecting work.",
+          "solutionTitle": "Solution:",
+          "solutionDescription": "Diagnosed with endometriosis. Hormone therapy and dietary changes helped control the condition."
+        }
+      ]
+    },
+    "nextSteps": {
+      "title": "Your Next Steps: Take Control",
+      "description": "Understanding your body is the first step to taking control. You deserve to feel comfortable and confident every day of the month. Use our tools to build your personal management plan.",
+      "trackPainButton": "Start Pain Tracking",
+      "exploreToolsButton": "Explore All Tools"
+    },
+    "footer": {
+      "reviewed": "Medically reviewed by Dr. Emily Carter, OB-GYN on December 19, 2024.",
+      "sourcesTitle": "Sources:",
+      "sources": [
+        {
+          "name": "Mayo Clinic"
+        },
+        {
+          "name": "WHO"
+        },
+        {
+          "name": "ACOG"
+        }
+      ]
+    },
     "navigation": {
       "backToArticles": "Back to Articles"
     },
@@ -5483,6 +5856,133 @@
         ]
       }
     },
+    "i18n": {
+      "title": "Internationalization Optimization",
+      "description": "Improve translation quality and optimize multilingual support",
+      "status": {
+        "totalKeys": "Total Translation Keys",
+        "missingKeys": "Missing Translations",
+        "inconsistentKeys": "Inconsistent Translations",
+        "qualityScore": "Quality Score"
+      },
+      "optimization": {
+        "title": "Optimization Recommendations",
+        "addMissing": "Add Missing Translations",
+        "unifyStyle": "Unify Translation Style",
+        "optimizeLayout": "Optimize Layout Adaptation",
+        "culturalAdaptation": "Cultural Adaptation"
+      },
+      "actions": {
+        "startOptimization": "Start Optimization",
+        "exportReport": "Export Report"
+      }
+    },
+    "performance": {
+      "title": "Performance Optimization",
+      "description": "Improve application performance and optimize user experience",
+      "metrics": {
+        "bundleSize": "Bundle Size",
+        "loadTime": "Load Time",
+        "memoryUsage": "Memory Usage",
+        "renderTime": "Render Time",
+        "cacheHitRate": "Cache Hit Rate",
+        "networkRequests": "Network Requests"
+      },
+      "optimization": {
+        "codeSplitting": "Code Splitting",
+        "lazyLoading": "Lazy Loading",
+        "cacheStrategy": "Cache Strategy",
+        "memoryOptimization": "Memory Optimization",
+        "networkOptimization": "Network Optimization"
+      },
+      "recommendations": {
+        "title": "Performance Optimization Recommendations",
+        "bundleSize": "Bundle Size Optimization",
+        "loadTime": "Load Time Optimization",
+        "cacheHitRate": "Cache Hit Rate Optimization",
+        "networkRequests": "Network Requests Optimization"
+      },
+      "actions": {
+        "startOptimization": "Start Optimization",
+        "reset": "Reset"
+      }
+    },
+    "testing": {
+      "title": "Testing Framework",
+      "description": "Comprehensive test coverage to ensure code quality",
+      "suites": {
+        "unitTests": "Unit Tests",
+        "integrationTests": "Integration Tests",
+        "userExperienceTests": "User Experience Tests",
+        "securityTests": "Security Tests"
+      },
+      "status": {
+        "totalTests": "Total Tests",
+        "passedTests": "Passed Tests",
+        "failedTests": "Failed Tests",
+        "averageCoverage": "Average Coverage"
+      },
+      "recommendations": {
+        "title": "Testing Recommendations",
+        "unitTestCoverage": "Unit Test Coverage",
+        "integrationTesting": "Integration Testing",
+        "userExperienceTesting": "User Experience Testing",
+        "securityTesting": "Security Testing"
+      },
+      "actions": {
+        "runTests": "Run Tests",
+        "reset": "Reset",
+        "exportReport": "Export Report"
+      }
+    },
+    "documentation": {
+      "title": "Documentation Framework",
+      "description": "Comprehensive documentation system to improve development efficiency",
+      "types": {
+        "apiDocs": "API Documentation",
+        "userGuide": "User Guide",
+        "deploymentGuide": "Deployment Guide",
+        "codeComments": "Code Comments"
+      },
+      "status": {
+        "totalDocuments": "Total Documents",
+        "completed": "Completed",
+        "incomplete": "Incomplete",
+        "totalWords": "Total Words"
+      },
+      "recommendations": {
+        "title": "Documentation Improvement Recommendations",
+        "apiDocumentation": "API Documentation Enhancement",
+        "userGuide": "User Guide Optimization",
+        "deploymentGuide": "Deployment Guide Updates",
+        "codeCommentStandards": "Code Comment Standards"
+      },
+      "actions": {
+        "exportAllDocuments": "Export All Documents",
+        "generateReport": "Generate Report"
+      }
+    },
+    "p3": {
+      "title": "P3 Phase: System Optimization and Performance Enhancement",
+      "description": "Complete internationalization, performance optimization, testing, and documentation to ensure system quality and stability",
+      "modules": {
+        "i18n": "Internationalization Enhancement",
+        "performance": "Performance Optimization",
+        "testing": "Testing Enhancement",
+        "documentation": "Documentation Enhancement"
+      },
+      "statistics": {
+        "optimizationModules": "Optimization Modules",
+        "completedTasks": "Completed Tasks",
+        "activeTasks": "Active Tasks",
+        "overallProgress": "Overall Progress"
+      },
+      "completion": {
+        "title": "P3 Phase Complete!",
+        "description": "All system optimization and performance enhancement tasks have been completed. The system has reached production-ready status",
+        "deployToProduction": "Deploy to Production"
+      }
+    },
     "relatedLinks": {
       "title": "Related Recommendations",
       "description": "Explore more professional health content",
@@ -5507,8 +6007,311 @@
         "description": "Downloadable resources and guides"
       }
     },
+    "scenarioSolutionsPage": {
+      "title": "Scenario-Based Period Pain Solutions - Comprehensive Workplace, Exercise, and Social Coping Guide",
+      "description": "Professional scenario-based period pain management solutions covering workplace, exercise, social, and other life scenarios. Provides targeted relief strategies and practical tips to ensure quality of life.",
+      "introTitle": "Complete Life Scenario Coverage",
+      "introText": "Every woman's life is diverse, from workplace to family, from exercise to social activities. Different scenarios require different coping strategies. We have carefully prepared comprehensive scenario-based solutions so you can gracefully and calmly cope with period pain wherever you are.",
+      "scenarios": {
+        "office": {
+          "title": "Office/Workplace Scenario",
+          "description": "Professional workplace period pain management plan: discrete office environment relief techniques, meeting emergency kit preparation, workplace nutrition management strategies. Provides period pain relief methods suitable for office environments, allowing you to effectively relieve pain while maintaining a professional image at work. Based on evidence-based medicine professional guidance, suitable for women in all industries.",
+          "features": [
+            "Meeting Emergency Kit",
+            "Office Chair Stretching",
+            "Workplace Nutrition Management"
+          ],
+          "emergencyKit": {
+            "title": "Meeting Emergency Kit",
+            "categories": {
+              "core": "Core Equipment",
+              "painRelief": "Pain Relief",
+              "imageManagement": "Image Management"
+            },
+            "coreItems": [
+              "Adhesive Heat Patches (ThermaCare Invisible Patches)",
+              "Mini Electric Waist Warmer (USB Charging)",
+              "Ginger Tea Powder Sticks (Sugar-Free Formula)",
+              "Emergency Energy Gel (with Magnesium + Vitamin B6)"
+            ],
+            "painReliefItems": [
+              "Ibuprofen/Acetaminophen",
+              "Menthol Balm (for temple massage)",
+              "Simple Massage Tools"
+            ],
+            "imageManagementItems": [
+              "Mirror, lipstick, oil blotting paper",
+              "Dry shampoo, deodorant",
+              "Emergency cosmetics"
+            ],
+            "discreteUsageGuide": "Discrete Usage Guide",
+            "usageTips": [
+              "Heat patch excuse: \"Using heat patches to relieve shoulder and neck soreness\"",
+              "Sudden pain departure script: \"Need to urgently handle client emails\""
+            ]
+          },
+          "stretching": {
+            "title": "Office Chair Stretching System",
+            "exercises": [
+              {
+                "name": "Seated Pelvic Clock Movement",
+                "description": "Relieves sacroiliac joint pressure and improves lower back blood circulation",
+                "duration": "30 seconds each time, repeat 3-5 times",
+                "steps": [
+                  "Sit on the edge of the chair with feet flat on the ground",
+                  "Imagine the pelvis as a clock, slowly draw circles",
+                  "Do one set clockwise and one counterclockwise"
+                ]
+              },
+              {
+                "name": "Hidden Foot Massage",
+                "description": "Use fascia ball under desk to promote lower limb blood return",
+                "duration": "Anytime, 2-3 minutes each time",
+                "steps": [
+                  "Place a small massage ball under the desk",
+                  "Remove shoes and roll the ball with the sole of your foot",
+                  "Focus on pressing the arch and heel areas"
+                ]
+              },
+              {
+                "name": "Water Cooler Side Stretch",
+                "description": "Natural standing posture to relieve waist tension",
+                "duration": "Hold each side for 15-30 seconds",
+                "steps": [
+                  "Stand by the water cooler with feet shoulder-width apart",
+                  "One hand on waist, the other reaching up",
+                  "Bend body to one side, feel the side stretch"
+                ]
+              }
+            ]
+          },
+          "nutrition": {
+            "title": "Workplace Nutrition Management",
+            "plan": [
+              {
+                "time": "Breakfast (7:00-8:00)",
+                "foods": "Oatmeal + Nuts + Banana",
+                "benefits": "Provides sustained energy and stabilizes blood sugar"
+              },
+              {
+                "time": "Morning Tea (10:00)",
+                "foods": "Red Date Tea or Rose Tea",
+                "benefits": "Warms the uterus and relieves spasms"
+              },
+              {
+                "time": "Lunch (12:00-13:00)",
+                "foods": "Lean Meat + Dark Green Vegetables + Brown Rice",
+                "benefits": "Iron and fiber supplementation, prevents anemia"
+              },
+              {
+                "time": "Afternoon Tea (15:00)",
+                "foods": "Dark Chocolate + Warm Milk",
+                "benefits": "Relieves mood swings and supplements magnesium"
+              }
+            ],
+            "avoidFoods": {
+              "title": "Foods to Avoid List",
+              "coldDrinks": {
+                "category": "Cold Drinks:",
+                "items": "Iced coffee, cold drinks, ice water"
+              },
+              "highSaltSnacks": {
+                "category": "High-Salt Snacks:",
+                "items": "Chips, pickled foods"
+              },
+              "excessiveCaffeine": {
+                "category": "Excessive Caffeine:",
+                "items": "Strong coffee, energy drinks"
+              }
+            }
+          },
+          "communication": {
+            "title": "Communication Template Assistant",
+            "description": "Effective communication is a key step in obtaining support and resources. When pain seriously affects work, a professional and concise leave request email is crucial.",
+            "leaveRequest": {
+              "title": "Period Pain Leave Request Email Template",
+              "subtitle": "Bilingual Chinese-English",
+              "chinese": {
+                "subject": "Leave Request - [Your Name] - [Date]",
+                "greeting": "Dear [Manager's Name],",
+                "salutation": "Good morning.",
+                "body": "Due to severe menstrual discomfort (dysmenorrhea) this morning, I find it difficult to concentrate and work efficiently. My physical condition also prevents me from commuting. To ensure work quality and recover quickly, I would like to request to rest at home/work remotely for today.\n\nI have already [briefly explain arrangements, e.g., \"completed and sent the X report to [Colleague's Name]\"] and will remain available by phone and email for any urgent matters.\n\nI apologize for any inconvenience and thank you for your understanding and support.",
+                "closing": "Best regards,",
+                "signature": "[Your Name]\n[Your Position]\n[Date]"
+              },
+              "english": {
+                "subject": "Sick Leave Request - [Your Name] - [Date]",
+                "greeting": "Dear [Manager's Name],",
+                "salutation": "Good morning.",
+                "body": "I am writing to request a sick leave for today, [Date], due to severe menstrual pain (dysmenorrhea) that began this morning. The discomfort is making it difficult for me to concentrate and perform my duties effectively, and I do not feel well enough to commute.\n\nTo ensure my work responsibilities are covered, I would like to request to rest at home / work remotely for the day. I have already [briefly explain arrangements, e.g., \"completed and sent the X report to [Colleague's Name]\"] and will remain available by phone and email for any urgent matters.\n\nI apologize for any inconvenience this may cause and appreciate your understanding and support.",
+                "closing": "Best regards,",
+                "signature": "[Your Name]\n[Your Title]\n[Date]"
+              }
+            },
+            "templates": [
+              {
+                "scenario": "Partner Communication",
+                "icon": "💕",
+                "templates": [
+                  {
+                    "situation": "Notification",
+                    "tone": "Intimate",
+                    "template": "\"Dear, I'm not feeling well today and may need more rest. If I seem a bit uncomfortable, please don't worry.\"",
+                    "copyText": "Copy Text"
+                  },
+                  {
+                    "situation": "Seeking Understanding",
+                    "tone": "Intimate",
+                    "template": "\"I'm experiencing some pain now and may have mood swings. Can you understand and give me some time and space? I'll recover soon.\"",
+                    "copyText": "Copy Text"
+                  }
+                ]
+              },
+              {
+                "scenario": "Friend Communication",
+                "icon": "👭",
+                "templates": [
+                  {
+                    "situation": "Reschedule Date",
+                    "tone": "Casual",
+                    "template": "\"Sorry, I'm not feeling well today and may not be at my best. Can we reschedule for next time? I'll make it up to you!\"",
+                    "copyText": "Copy Text"
+                  },
+                  {
+                    "situation": "Party Participation",
+                    "tone": "Casual",
+                    "template": "\"I might come to the party but may need to leave early. If I seem a bit tired, you understand.\"",
+                    "copyText": "Copy Text"
+                  }
+                ]
+              },
+              {
+                "scenario": "Colleague Communication",
+                "icon": "👔",
+                "templates": [
+                  {
+                    "situation": "Leave Request",
+                    "tone": "Formal",
+                    "template": "\"Hello, I'm not feeling well today and may need to take half a day off to handle physical issues. I'll finish other tasks as soon as possible.\"",
+                    "copyText": "Copy Text"
+                  },
+                  {
+                    "situation": "Work Adjustment",
+                    "tone": "Formal",
+                    "template": "\"Sorry, I'm not feeling well today and my work efficiency may be affected. If there are urgent matters, please prioritize them, and I'll complete other tasks as soon as possible.\"",
+                    "copyText": "Copy Text"
+                  }
+                ]
+              }
+            ],
+            "copyToUse": "Copy to Use"
+          },
+          "acupressure": {
+            "title": "Office Acupressure Points",
+            "description": "Simple and easy-to-learn acupressure techniques that can be performed discretely in the office for quick pain relief.",
+            "points": [
+              {
+                "name": "Hegu Point (LI4)",
+                "location": "Between thumb and index finger, in the web",
+                "benefits": "Regulates liver qi, promotes blood circulation, relieves general pain",
+                "technique": "Press with thumb pad, moderate pressure, 30 seconds each time",
+                "officeUse": "Can be done discretely during meetings without attracting attention"
+              },
+              {
+                "name": "Sanyinjiao Point (SP6)",
+                "location": "Inner side of calf, three inches above ankle joint",
+                "benefits": "Regulates qi and blood, specifically relieves gynecological pain",
+                "technique": "Press with thumb, combine with deep breathing, 1-2 minutes each time",
+                "officeUse": "Can be done under desk, removing shoes for better effect"
+              }
+            ],
+            "scientificBasis": {
+              "title": "Scientific Basis",
+              "description": "Acupressure works by stimulating specific nerve points to promote endorphin release, which is the body's natural pain-relieving substance. Modern research shows that appropriate acupoint stimulation can regulate nerve conduction and relieve pain perception."
+            },
+            "locationLabel": "Location:",
+            "benefitsLabel": "Benefits:",
+            "techniqueLabel": "Pressure Method:",
+            "officeApplicationLabel": "Office Application:"
+          },
+          "disclaimer": {
+            "title": "Disclaimer",
+            "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially regarding medication use and judgment of severe pain."
+          },
+          "backToOverview": "Return to Scenario Solutions Overview"
+        },
+        "partnerCommunication": {
+          "title": "Partner Communication Scenario",
+          "description": "Professional partner communication scenario solutions to help partners better understand period pain, providing targeted communication strategies and emotional support techniques. Includes understanding tests, 30-day training camp, and personalized guidance to help you build better understanding and communication.",
+          "features": [
+            "Partner Understanding Test",
+            "30-Day Training Camp",
+            "Personalized Guidance"
+          ]
+        },
+        "commute": {
+          "title": "Commute Scenario",
+          "description": "Emergency period pain management guide for commuting: public transportation comfort techniques, driving adjustment plans, rapid relief methods for sudden pain. Provides period pain management strategies suitable for various commuting methods, allowing you to effectively cope with menstrual discomfort while traveling. Based on evidence-based medicine professional guidance, ensuring safe and comfortable commuting.",
+          "features": [
+            "Public Transportation Coping",
+            "Driving Adjustments",
+            "Emergency Response Plans"
+          ],
+          "disclaimer": {
+            "title": "Disclaimer",
+            "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially regarding medication use and judgment of severe pain."
+          }
+        }
+      }
+    },
     "viewMoreArticles": {
       "buttonText": "View More Articles"
     }
+  },
+  "disclaimer": {
+    "title": "⚠️ Medical Disclaimer",
+    "content": "This content is for educational and informational purposes only and should not replace professional medical advice, diagnosis, or treatment. If you have medical concerns, always consult a healthcare provider.",
+    "text": "This content is for educational and informational purposes only and should not replace professional medical advice, diagnosis, or treatment. If you have medical concerns, always consult a healthcare provider."
+  },
+  "embeddedPainAssessment": {
+    "title": "💡 Quick Period Pain Self-Assessment",
+    "subtitle": "Understand your period pain level in 1 minute and get initial recommendations",
+    "description": "Quickly assess your pain level",
+    "loading": "Loading...",
+    "error": "Loading failed, please refresh the page and try again",
+    "question": "How would you rate your period pain intensity?",
+    "selectIntensityFirst": "Please select pain intensity first",
+    "options": {
+      "mild": "Mild (tolerable, doesn't affect daily activities)",
+      "moderate": "Moderate (affects some activities but manageable)",
+      "severe": "Severe (completely affects daily activities, requires rest)"
+    },
+    "buttons": {
+      "getAdvice": "Get Advice",
+      "detailedAssessment": "Detailed Assessment",
+      "testAgain": "Test Again",
+      "fullAssessment": "Full Assessment"
+    },
+    "resultTitle": "Assessment Result",
+    "results": {
+      "mild": "Your period pain is mild. You can try natural relief methods like heat therapy and light exercise.",
+      "moderate": "Your period pain is moderate. We recommend combining multiple relief methods, and consider over-the-counter pain medication if needed.",
+      "severe": "Your period pain is severe. We recommend consulting a doctor for professional assessment and treatment advice."
+    },
+    "disclaimer": "⚠️ This tool is for reference only and cannot replace professional medical advice"
+  },
+  "errors": {
+    "title": "Error Occurred",
+    "description": "The assessment tool is temporarily unavailable. Please try again later.",
+    "reload": "Reload"
+  },
+  "periodPainImpactCalculator": {
+    "metaTitle": "Period Pain Impact Calculator - Symptom Assessment & Workplace Analysis | Period Hub",
+    "title": "Period Pain Impact Calculator",
+    "description": "Scientifically assess how menstrual pain affects your life and work",
+    "breadcrumbTitle": "Period Pain Impact Calculator",
+    "startButton": "Start Assessment",
+    "impactButton": "Workplace Impact Analysis",
+    "cta": "Start Assessment"
   }
 }

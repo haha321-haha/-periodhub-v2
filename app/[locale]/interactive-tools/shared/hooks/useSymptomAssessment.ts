@@ -8,7 +8,8 @@ import {
   AssessmentResult,
   Recommendation 
 } from '../types';
-import { assessmentQuestions, getQuestionsByMode } from '../data/assessmentQuestions';
+import { getQuestionsByMode } from '../data/assessmentQuestions';
+import { calculateSymptomImpact, calculateWorkplaceImpact } from '../data/calculationAlgorithms';
 import { saveToStorage, loadFromStorage, createStorageKey } from '../utils';
 
 interface UseSymptomAssessmentReturn {
@@ -139,7 +140,7 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
         if (option && option.weight !== undefined) {
           totalScore += option.weight * question.weight;
         }
-      } else if (question.type === 'multiple') {
+      } else if (question.type === 'multi') {
         const selectedValues = answer.value as string[];
         selectedValues.forEach(value => {
           const option = question.options?.find(opt => opt.value === value);
@@ -356,99 +357,97 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
     setIsLoading(true);
 
     try {
-      const score = calculateScore(currentSession.answers, questions);
-      const maxScore = questions.reduce((sum, q) => sum + (q.weight * 10), 0);
-      const percentage = maxScore > 0 ? (score / maxScore) * 100 : 0;
-      // Use the current locale parameter if provided, otherwise fall back to session locale
+      // 使用基于参考代码的计算算法
       const effectiveLocale = currentLocale || currentSession.locale;
-      const isEnglish = effectiveLocale === 'en';
-
-      console.log('Assessment calculation:', {
-        score,
-        maxScore,
-        percentage,
-        answersCount: currentSession.answers.length,
-        locale: currentSession.locale
+      
+      // 将答案转换为参考代码格式
+      const answersForCalculation: Record<string, any> = {};
+      currentSession.answers.forEach(answer => {
+        answersForCalculation[answer.questionId] = answer.value;
       });
 
-      let severity: 'mild' | 'moderate' | 'severe' | 'emergency';
-      let type: 'normal' | 'mild' | 'moderate' | 'severe' | 'emergency';
-      let message: string;
-      let summary: string;
+      console.log('Answers for calculation:', answersForCalculation);
 
-      if (percentage >= 80) {
-        severity = 'emergency';
-        type = 'emergency';
-        message = t ? t('resultMessages.emergency') : (isEnglish ? 'Your symptoms are quite severe. We recommend consulting a healthcare professional as soon as possible.' : '您的症状较为严重，建议尽快咨询医疗专业人士。');
-        summary = t ? t('resultMessages.emergencySummary') : (isEnglish ? 'Assessment indicates you may need professional medical attention.' : '评估显示您可能需要专业医疗关注。');
-      } else if (percentage >= 60) {
-        severity = 'severe';
-        type = 'severe';
-        message = t ? t('resultMessages.severe') : (isEnglish ? 'Your symptoms are quite serious. We recommend adopting comprehensive management strategies.' : '您的症状比较严重，建议采取综合管理策略。');
-        summary = t ? t('resultMessages.severeSummary') : (isEnglish ? 'Your symptoms require active management and possible medical intervention.' : '您的症状需要积极的管理和可能的医疗干预。');
-      } else if (percentage >= 40) {
-        severity = 'moderate';
-        type = 'moderate';
-        message = t ? t('resultMessages.moderate') : (isEnglish ? 'You have moderate symptoms that can be managed through various methods.' : '您有中等程度的症状，可以通过多种方法进行管理。');
-        summary = t ? t('resultMessages.moderateSummary') : (isEnglish ? 'Your symptoms are manageable with recommended relief strategies.' : '您的症状是可以管理的，建议采用多种缓解策略。');
+      // 根据评估模式选择计算函数
+      let calculationResult;
+      if (currentSession.mode === 'medical' && answersForCalculation.concentration) {
+        // 职场评估
+        calculationResult = calculateWorkplaceImpact(answersForCalculation, effectiveLocale);
       } else {
-        severity = 'mild';
-        type = 'mild';
-        message = t ? t('resultMessages.mild') : (isEnglish ? 'Your symptoms are relatively mild and can be well managed through simple self-care.' : '您的症状相对较轻，通过简单的自我护理就能很好地管理。');
-        summary = t ? t('resultMessages.mildSummary') : (isEnglish ? 'Your symptoms are mild and can be improved through lifestyle adjustments.' : '您的症状较轻，可以通过生活方式调整来改善。');
+        // 症状评估
+        calculationResult = calculateSymptomImpact(answersForCalculation, effectiveLocale);
       }
 
-      const recommendations = generateRecommendations(score, percentage, currentSession.answers, t, effectiveLocale);
+      console.log('Calculation result:', calculationResult);
 
+      // 构建结果对象
       const assessmentResult: AssessmentResult = {
         sessionId: currentSession.id,
-        type,
-        severity,
-        score,
-        maxScore,
-        percentage,
-        recommendations,
-        emergency: percentage >= 80,
-        message,
-        summary,
-        relatedArticles: [
-          '/articles/menstrual-pain-management',
-          '/articles/lifestyle-tips-for-period-health',
-          '/articles/when-to-see-a-doctor'
-        ],
-        nextSteps: t ? [
-          t('result.nextSteps.trackSymptoms') || (isEnglish ? 'Use pain tracker to record symptoms' : '使用疼痛追踪器记录症状'),
-          t('result.nextSteps.tryRecommendations') || (isEnglish ? 'Try recommended relief methods' : '尝试推荐的缓解方法'),
-          t('result.nextSteps.consultDoctor') || (isEnglish ? 'Consult a doctor if symptoms persist or worsen' : '如果症状持续或恶化，请咨询医生')
-        ] : (isEnglish ? [
-          'Use pain tracker to record symptoms',
-          'Try recommended relief methods',
-          'Consult a doctor if symptoms persist or worsen'
-        ] : [
-          '使用疼痛追踪器记录症状',
-          '尝试推荐的缓解方法',
-          '如果症状持续或恶化，请咨询医生'
-        ]),
-        createdAt: new Date().toISOString()
+        type: currentSession.mode === 'medical' && answersForCalculation.concentration ? 'workplace' : 'symptom',
+        severity: calculationResult.isSevere ? 'severe' : 'moderate',
+        score: calculationResult.score || 0,
+        maxScore: 100,
+        percentage: calculationResult.score || 0,
+        recommendations: [],
+        emergency: calculationResult.isSevere || false,
+        message: effectiveLocale === 'zh' ? '评估完成' : 'Assessment Complete',
+        summary: calculationResult.summary?.join('; ') || '',
+        completedAt: new Date().toISOString(),
+        locale: effectiveLocale,
+        mode: currentSession.mode || 'simplified',
+        // 添加参考代码的结果数据
+        referenceData: calculationResult
       };
 
-      // Update session with completion time and result
-      const completedSession = {
-        ...currentSession,
-        result: assessmentResult,
-        completedAt: new Date().toISOString()
-      };
+      // 将建议转换为Recommendation格式
+      if (calculationResult.recommendations) {
+        const { immediate = [], longTerm = [] } = calculationResult.recommendations;
+        
+        immediate.forEach((rec: string, index: number) => {
+          assessmentResult.recommendations.push({
+            id: `immediate_${index}`,
+            category: 'immediate',
+            title: effectiveLocale === 'zh' ? '即时缓解建议' : 'Immediate Relief',
+            description: rec,
+            priority: 'high',
+            timeframe: effectiveLocale === 'zh' ? '立即可用' : 'Immediately Available',
+            actionSteps: [rec]
+          });
+        });
 
-      console.log('Setting completed session and result:', {
-        completedSession,
-        assessmentResult
-      });
+        longTerm.forEach((rec: string, index: number) => {
+          assessmentResult.recommendations.push({
+            id: `longterm_${index}`,
+            category: 'longterm',
+            title: effectiveLocale === 'zh' ? '长期管理建议' : 'Long-term Management',
+            description: rec,
+            priority: 'medium',
+            timeframe: effectiveLocale === 'zh' ? '持续实施' : 'Ongoing',
+            actionSteps: [rec]
+          });
+        });
+      }
 
-      setCurrentSession(completedSession);
+      // 如果是职场评估，添加职场建议
+      if (calculationResult.suggestions) {
+        calculationResult.suggestions.forEach((suggestion: string, index: number) => {
+          assessmentResult.recommendations.push({
+            id: `workplace_${index}`,
+            category: 'workplace',
+            title: effectiveLocale === 'zh' ? '职场支持建议' : 'Workplace Support',
+            description: suggestion,
+            priority: 'medium',
+            timeframe: effectiveLocale === 'zh' ? '建议实施' : 'Recommended',
+            actionSteps: [suggestion]
+          });
+        });
+      }
+
+      console.log('Final assessment result:', assessmentResult);
+
       setResult(assessmentResult);
-
-      console.log('Result state should be updated');
-
+      setCurrentSession(prev => prev ? { ...prev, result: assessmentResult, completedAt: new Date().toISOString() } : null);
+      
       return assessmentResult;
     } catch (err) {
       console.error('Failed to complete assessment:', err);
@@ -459,7 +458,7 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
     } finally {
       setIsLoading(false);
     }
-  }, [currentSession, calculateScore, generateRecommendations, questions]);
+  }, [currentSession, questions]);
 
   const resetAssessment = useCallback(() => {
     setCurrentSession(null);

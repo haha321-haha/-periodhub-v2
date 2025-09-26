@@ -29,9 +29,9 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
             {/* 显示当前评估模式 */}
             <div className="mt-4">
               <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
-                {mode === 'simplified' && '简化版评估'}
-                {mode === 'detailed' && '详细版评估'}
-                {mode === 'medical' && '医疗专业版评估'}
+                {mode === 'simplified' && t('symptomAssessment.modes.simplified')}
+                {mode === 'detailed' && t('symptomAssessment.modes.detailed')}
+                {mode === 'medical' && t('symptomAssessment.modes.medical')}
               </span>
             </div>
           </div>

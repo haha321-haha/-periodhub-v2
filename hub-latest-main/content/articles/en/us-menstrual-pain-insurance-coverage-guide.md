@@ -12,7 +12,7 @@ reading_time: "25 minutes"
 reading_time_en: "25 minutes"
 ---
 
-# Complete Guide to US Medical Insurance Coverage for Menstrual Pain Treatment (2025 Revised Edition)
+## Complete Guide to US Medical Insurance Coverage for Menstrual Pain Treatment (2025 Revised Edition)
 
 *Based on the latest Affordable Care Act (ACA) policies and official guidance from the Centers for Medicare & Medicaid Services (CMS)*
 

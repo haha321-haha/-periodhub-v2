@@ -2,7 +2,7 @@
 
 export interface ConstitutionQuestion {
   id: string;
-  type: 'single' | 'multiple' | 'scale';
+  type: 'single' | 'multi' | 'scale';
   category: string;
   weight: number;
   title: string;

@@ -37,23 +37,24 @@ export interface Option {
 
 export interface Question {
   id: string;
-  type: 'single' | 'multiple' | 'scale' | 'text' | 'range' | 'boolean';
+  type: 'single' | 'multi' | 'scale' | 'text' | 'range' | 'boolean';
+  category: 'basic' | 'pain' | 'symptoms' | 'lifestyle' | 'medical' | 'workplace' | 'preference';
+  weight: number; // 问题权重
   title: string;
   description?: string;
-  options?: Option[];
   validation?: {
     required?: boolean;
     min?: number;
     max?: number;
     minLength?: number;
     maxLength?: number;
+    minSelections?: number; // 多选最少选择数量
   };
+  options?: Option[];
   conditional?: {
     dependsOn: string;
     values: (string | number)[];
   };
-  category: 'basic' | 'pain' | 'symptoms' | 'lifestyle' | 'medical';
-  weight: number; // 问题权重
 }
 
 export interface AssessmentAnswer {
@@ -74,7 +75,7 @@ export interface AssessmentSession {
 
 export interface AssessmentResult {
   sessionId: string;
-  type: 'normal' | 'mild' | 'moderate' | 'severe' | 'emergency';
+  type: 'symptom' | 'workplace' | 'normal' | 'mild' | 'moderate' | 'severe' | 'emergency';
   severity: 'mild' | 'moderate' | 'severe' | 'emergency';
   score: number;
   maxScore: number;
@@ -83,14 +84,30 @@ export interface AssessmentResult {
   emergency?: boolean;
   message: string;
   summary: string;
-  relatedArticles: string[];
-  nextSteps: string[];
-  createdAt: string;
+  completedAt: string;
+  locale: string;
+  mode?: string;
+  // 参考代码的结果数据
+  referenceData?: {
+    isSevere?: boolean;
+    summary?: string[];
+    recommendations?: {
+      immediate?: string[];
+      longTerm?: string[];
+    };
+    score?: number;
+    profile?: string;
+    suggestions?: string[];
+  };
+  // 保留原有字段以兼容性
+  relatedArticles?: string[];
+  nextSteps?: string[];
+  createdAt?: string;
 }
 
 export interface Recommendation {
   id: string;
-  category: 'immediate' | 'lifestyle' | 'medical' | 'dietary' | 'exercise' | 'selfcare';
+  category: 'immediate' | 'longterm' | 'workplace' | 'lifestyle' | 'medical' | 'dietary' | 'exercise' | 'selfcare';
   title: string;
   description: string;
   priority: 'high' | 'medium' | 'low';
@@ -176,6 +193,38 @@ export interface NotificationAction {
   label: string;
   action: () => void;
   style?: 'primary' | 'secondary';
+}
+
+// 参考代码相关的类型定义
+export interface SymptomAssessmentResult {
+  isSevere: boolean;
+  summary: string[];
+  recommendations: {
+    immediate: string[];
+    longTerm: string[];
+  };
+}
+
+export interface WorkplaceAssessmentResult {
+  score: number;
+  profile: string;
+  suggestions: string[];
+}
+
+export interface AssessmentMode {
+  id: 'simplified' | 'detailed' | 'medical';
+  name: string;
+  description: string;
+  questionCount: number;
+  estimatedTime: string;
+}
+
+// 评估配置
+export interface AssessmentConfig {
+  modes: AssessmentMode[];
+  defaultMode: 'simplified' | 'detailed' | 'medical';
+  maxQuestionsPerMode: number;
+  timeoutMinutes: number;
 }
 
 // 用户偏好设置

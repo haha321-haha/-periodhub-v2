@@ -180,7 +180,7 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
     const answer = getCurrentAnswer();
 
     // 对于多选题，检查是否有选择（可以为空数组，因为有些多选题不是必填的）
-    if (currentQuestion.type === 'multiple') {
+    if (currentQuestion.type === 'multi') {
       return true; // 多选题允许不选择任何选项
     }
 
@@ -863,7 +863,7 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
                   </div>
                 </div>
               </div>
-            ) : currentQuestion.type === 'multiple' ? (
+            ) : currentQuestion.type === 'multi' ? (
               // 多选问题 - 紫色主题
               <div className="space-y-4">
                 {currentQuestion.options.map((option) => {

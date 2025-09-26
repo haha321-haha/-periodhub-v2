@@ -36,12 +36,12 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
   const [formData, setFormData] = useState<PainEntryFormData>({
     date: initialData?.date || formatDateShort(new Date()),
     painLevel: initialData?.painLevel || 1,
-    duration: initialData?.duration || undefined,
+    duration: initialData?.duration || undefined as any,
     location: initialData?.location || [],
     menstrualStatus: initialData?.menstrualStatus || 'other',
     symptoms: initialData?.symptoms || [],
     remedies: initialData?.remedies || [],
-    effectiveness: initialData?.effectiveness || undefined,
+    effectiveness: initialData?.effectiveness || undefined as any,
     notes: initialData?.notes || ''
   });
 

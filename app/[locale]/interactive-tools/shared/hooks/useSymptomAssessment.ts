@@ -8,7 +8,7 @@ import {
   AssessmentResult,
   Recommendation 
 } from '../types';
-import { assessmentQuestions } from '../data/assessmentQuestions';
+import { assessmentQuestions, getQuestionsByMode } from '../data/assessmentQuestions';
 import { saveToStorage, loadFromStorage, createStorageKey } from '../utils';
 
 interface UseSymptomAssessmentReturn {
@@ -23,7 +23,7 @@ interface UseSymptomAssessmentReturn {
   totalQuestions: number;
 
   // Actions
-  startAssessment: (locale: string) => void;
+  startAssessment: (locale: string, mode?: string) => void;
   answerQuestion: (answer: AssessmentAnswer) => void;
   goToQuestion: (index: number) => void;
   goToPreviousQuestion: () => void;
@@ -64,18 +64,19 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
     }
   }, [currentSession, storageKey]);
 
-  const questions = currentSession ? assessmentQuestions[currentSession.locale] || assessmentQuestions.en : [];
+  const questions = currentSession ? getQuestionsByMode(currentSession.locale, currentSession.mode || 'simplified') : [];
   const currentQuestion = questions[currentQuestionIndex] || null;
   const isComplete = currentQuestionIndex >= questions.length;
   const progress = questions.length > 0 ? Math.min((currentQuestionIndex / questions.length) * 100, 100) : 0;
 
-  const startAssessment = useCallback((locale: string) => {
+  const startAssessment = useCallback((locale: string, mode: string = 'simplified') => {
     const sessionId = `assessment_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     const newSession: AssessmentSession = {
       id: sessionId,
       answers: [],
       startedAt: new Date().toISOString(),
-      locale
+      locale,
+      mode
     };
     
     setCurrentSession(newSession);

@@ -5720,5 +5720,14 @@
     "viewMoreArticles": {
       "buttonText": "查看更多文章"
     }
+  },
+  "periodPainImpactCalculator": {
+    "metaTitle": "痛经影响算法 - 症状评估与职场分析 | Period Hub",
+    "title": "痛经影响算法",
+    "description": "科学评估月经疼痛对您生活和工作的影响程度",
+    "breadcrumbTitle": "痛经影响算法",
+    "startButton": "开始评估",
+    "impactButton": "职场影响分析",
+    "cta": "开始评估"
   }
 }

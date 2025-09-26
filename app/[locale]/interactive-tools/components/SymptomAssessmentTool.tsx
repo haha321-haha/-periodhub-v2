@@ -22,10 +22,11 @@ import { useSafeTranslations } from '@/hooks/useSafeTranslations';
 
 interface SymptomAssessmentToolProps {
   locale: string;
+  mode?: string;
 }
 
-export default function SymptomAssessmentTool({ locale }: SymptomAssessmentToolProps) {
-  const { t } = useSafeTranslations('painTracker.assessment');
+export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: SymptomAssessmentToolProps) {
+  const { t } = useSafeTranslations('interactiveTools.symptomAssessment');
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, any>>({});
 
   const {
@@ -89,10 +90,10 @@ export default function SymptomAssessmentTool({ locale }: SymptomAssessmentToolP
   } = useNotifications();
 
   const handleStartAssessment = () => {
-    console.log('Starting assessment with locale:', locale);
+    console.log('Starting assessment with locale:', locale, 'mode:', mode);
     // Clear any existing session first to ensure fresh start with correct locale
     resetAssessment();
-    startAssessment(locale);
+    startAssessment(locale, mode);
   };
 
   const handleAnswerChange = (value: any) => {

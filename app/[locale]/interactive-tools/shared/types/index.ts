@@ -69,6 +69,7 @@ export interface AssessmentSession {
   startedAt: string;
   completedAt?: string;
   locale: string;
+  mode?: string;
 }
 
 export interface AssessmentResult {

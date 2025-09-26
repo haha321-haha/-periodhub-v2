@@ -48,6 +48,7 @@ export function getPageCanonicalUrl(locale: string, path: string): string {
     '/interactive-tools/constitution-test': '/interactive-tools/constitution-test',
     '/interactive-tools/cycle-tracker': '/interactive-tools/cycle-tracker',
     '/interactive-tools/period-pain-assessment': '/interactive-tools/period-pain-assessment',
+    '/interactive-tools/period-pain-impact-calculator': '/interactive-tools/period-pain-impact-calculator',
     
     // 青少年健康页面
     '/teen-health': '/teen-health',

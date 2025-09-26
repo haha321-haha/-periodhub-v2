@@ -129,7 +129,7 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
               {translations.buttons.getAdvice}
             </button>
             <Link
-              href={`/${locale}/interactive-tools/period-pain-assessment`}
+              href={`/${locale}/interactive-tools/period-pain-impact-calculator`}
               className="flex-1 btn-outline text-sm py-2 px-4 font-semibold text-center"
             >
               {translations.buttons.detailedAssessment}
@@ -158,7 +158,7 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
               {translations.buttons.testAgain}
             </button>
             <Link
-              href={`/${locale}/interactive-tools/period-pain-assessment`}
+              href={`/${locale}/interactive-tools/period-pain-impact-calculator`}
               className="flex-1 btn-primary text-sm py-2 px-4 font-semibold text-center"
             >
               {translations.buttons.fullAssessment}

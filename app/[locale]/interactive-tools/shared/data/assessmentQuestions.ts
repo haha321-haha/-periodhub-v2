@@ -1,5 +1,39 @@
 import { Question } from '../types';
 
+// 根据评估模式筛选题目
+export const getQuestionsByMode = (locale: string, mode: string): Question[] => {
+  const allQuestions = assessmentQuestions[locale] || [];
+  
+  switch (mode) {
+    case 'simplified':
+      // 简化版：只包含基础题目
+      return allQuestions.filter(q => 
+        q.category === 'basic' || 
+        q.category === 'pain' ||
+        (q.category === 'symptoms' && ['accompanying_symptoms'].includes(q.id))
+      );
+    
+    case 'detailed':
+      // 详细版：包含基础和症状题目
+      return allQuestions.filter(q => 
+        q.category === 'basic' || 
+        q.category === 'pain' ||
+        q.category === 'symptoms' ||
+        q.category === 'lifestyle'
+      );
+    
+    case 'medical':
+      // 医疗专业版：包含所有题目
+      return allQuestions;
+    
+    default:
+      return allQuestions.filter(q => 
+        q.category === 'basic' || 
+        q.category === 'pain'
+      );
+  }
+};
+
 export const assessmentQuestions: Record<string, Question[]> = {
   zh: [
     // 基础信息

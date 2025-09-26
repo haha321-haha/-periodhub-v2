@@ -16,7 +16,7 @@ interface HydrationErrorBoundaryProps {
  * Hydration错误边界组件
  * 专门处理hydration不匹配错误
  */
-export default class HydrationErrorBoundary extends React.Component<
+class InternalHydrationErrorBoundary extends React.Component<
   HydrationErrorBoundaryProps,
   HydrationErrorBoundaryState
 > {
@@ -96,6 +96,11 @@ export default class HydrationErrorBoundary extends React.Component<
 
     return this.props.children;
   }
+}
+
+// 导出的函数组件包装器
+export default function HydrationErrorBoundary(props: HydrationErrorBoundaryProps) {
+  return <InternalHydrationErrorBoundary {...props} />;
 }
 
 

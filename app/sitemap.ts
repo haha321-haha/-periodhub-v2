@@ -69,6 +69,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/en/interactive-tools/symptom-tracker',
     '/zh/interactive-tools/period-pain-assessment',
     '/en/interactive-tools/period-pain-assessment',
+    '/zh/interactive-tools/period-pain-impact-calculator',
+    '/en/interactive-tools/period-pain-impact-calculator',
     '/zh/interactive-tools/nutrition-recommendation-generator',
     '/en/interactive-tools/nutrition-recommendation-generator',
     '/zh/interactive-tools/workplace-wellness',

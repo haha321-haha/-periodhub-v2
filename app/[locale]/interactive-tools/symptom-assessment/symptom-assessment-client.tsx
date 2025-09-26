@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import SymptomAssessmentTool from '../components/SymptomAssessmentTool';
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
 
 export default function SymptomAssessmentClient({ params: { locale } }: Props) {
   const t = useTranslations('interactiveTools');
+  const searchParams = useSearchParams();
+  const mode = searchParams.get('mode') || 'simplified';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
@@ -23,6 +26,14 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               {t('symptomAssessment.description')}
             </p>
+            {/* 显示当前评估模式 */}
+            <div className="mt-4">
+              <span className="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">
+                {mode === 'simplified' && '简化版评估'}
+                {mode === 'detailed' && '详细版评估'}
+                {mode === 'medical' && '医疗专业版评估'}
+              </span>
+            </div>
           </div>
 
           {/* 面包屑导航 */}
@@ -41,7 +52,7 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
           </nav>
 
           {/* 症状评估工具 */}
-          <SymptomAssessmentTool locale={locale} />
+          <SymptomAssessmentTool locale={locale} mode={mode} />
         </div>
       </div>
     </div>

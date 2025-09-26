@@ -22,7 +22,8 @@ interface ErrorBoundaryProps {
   onError?: (error: Error, errorInfo: ErrorInfo) => void;
 }
 
-export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+// 内部类组件（不导出）
+class InternalErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
@@ -246,6 +247,11 @@ export function WarningMessage({
       <p className="text-yellow-700 text-sm">{message}</p>
     </div>
   );
+}
+
+// 导出的函数组件包装器
+export function ErrorBoundary(props: ErrorBoundaryProps) {
+  return <InternalErrorBoundary {...props} />;
 }
 
 // 信息消息组件

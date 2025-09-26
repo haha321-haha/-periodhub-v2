@@ -1798,14 +1798,76 @@
     "description": "Professional menstrual health management tools including symptom assessment, pain tracking, and data analytics. Scientifically evaluate your menstrual symptoms, get personalized health recommendations, and effectively manage period pain. Bilingual support with mobile-optimized experience.",
     "symptomAssessment": {
       "title": "Symptom Assessment Tool",
+      "subtitle": "Quickly identify pain types through professional questionnaires and receive precise personalized recommendations.",
       "description": "Answer a few questions about your symptoms to receive personalized recommendations for managing your menstrual pain.",
       "startButton": "Start Assessment",
+      "start": {
+        "title": "Before Starting",
+        "description": "Please ensure you're in a quiet, private environment where you can focus on answering the questions. This assessment will help you better understand your symptom patterns.",
+        "feature1": "Professional symptom analysis",
+        "feature2": "Personalized recommendations",
+        "feature3": "Scientific assessment methods",
+        "feature4": "Instant result feedback",
+        "startButton": "Start Assessment",
+        "disclaimer": "This assessment is for reference only and cannot replace professional medical diagnosis."
+      },
+      "progress": {
+        "questionOf": "Question {current} of {total}"
+      },
+      "navigation": {
+        "previous": "Previous",
+        "next": "Next",
+        "skip": "Skip",
+        "finish": "Finish Assessment"
+      },
       "questions": {
         "painLocation": "Where do you feel pain during your period?",
         "painIntensity": "How would you rate your pain intensity?",
         "painDuration": "How long does your pain typically last?",
         "accompaniedSymptoms": "Which symptoms accompany your menstrual pain?",
         "reliefMethods": "Which methods have you tried for relief?"
+      },
+      "result": {
+        "title": "Assessment Results",
+        "yourScore": "Your Score",
+        "severity": "Severity Level",
+        "riskLevel": "Risk Level",
+        "summary": "Result Summary",
+        "recommendations": "Recommendations",
+        "timeframe": "Timeframe:",
+        "actionSteps": "Action Steps",
+        "retakeAssessment": "Retake Assessment",
+        "saveResults": "Save Results",
+        "nextSteps": {
+          "trackSymptoms": "Use pain tracker to record symptoms",
+          "tryRecommendations": "Try recommended relief methods",
+          "consultDoctor": "Consult a doctor if symptoms persist or worsen"
+        }
+      },
+      "severity": {
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe",
+        "emergency": "Emergency"
+      },
+      "priority": {
+        "high": "High Priority",
+        "medium": "Medium Priority",
+        "low": "Low Priority"
+      },
+      "messages": {
+        "assessmentComplete": "Assessment Complete",
+        "assessmentCompleteDesc": "Your symptom assessment is complete. Please review the results and recommendations.",
+        "assessmentFailed": "Assessment Failed",
+        "assessmentFailedDesc": "An error occurred during the assessment. Please try again.",
+        "resultsSaved": "Results Saved",
+        "resultsSavedDesc": "Your assessment results have been saved to local storage."
+      },
+      "resultMessages": {
+        "emergency": "Your symptoms are quite severe. We recommend consulting a medical professional as soon as possible.",
+        "severe": "Your symptoms indicate a high level of discomfort. Consider consulting a healthcare provider for proper evaluation.",
+        "moderate": "Your symptoms are moderate. Try the recommended relief methods and monitor your condition.",
+        "mild": "Your symptoms are mild. The recommended self-care methods should help manage your discomfort."
       },
       "results": {
         "title": "Your Personalized Recommendations",
@@ -1910,6 +1972,15 @@
       "title": "Period Pain Assessment Tool",
       "description": "Answer a few simple questions to understand your period pain type and severity.",
       "cta": "Quick Assessment"
+    },
+    "periodPainImpactCalculator": {
+      "metaTitle": "Period Pain Impact Calculator - Symptom Assessment & Workplace Analysis | Period Hub",
+      "title": "Period Pain Impact Calculator",
+      "description": "Scientifically assess how menstrual pain affects your life and work",
+      "breadcrumbTitle": "Period Pain Impact Calculator",
+      "startButton": "Start Assessment",
+      "impactButton": "Workplace Impact Analysis",
+      "cta": "Start Assessment"
     },
     "cycleTracker": {
       "title": "Menstrual Cycle Tracker",

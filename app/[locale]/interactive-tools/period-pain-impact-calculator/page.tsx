@@ -103,8 +103,8 @@ export default function PeriodPainImpactCalculatorPage({
   const handleImpactAnalysis = () => {
     console.log('开始职场影响分析');
     
-    // 跳转到职场健康页面
-    router.push(`/${currentLocale}/interactive-tools/workplace-wellness`);
+    // 跳转到职场影响评估页面
+    router.push(`/${currentLocale}/interactive-tools/workplace-impact-assessment`);
   };
 
   const handleBack = () => {

@@ -116,14 +116,19 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
 
   // 确保locale变化时重置assessment，避免使用错误locale的旧session
   useEffect(() => {
-    if (currentSession && currentSession.locale !== locale) {
-      console.log('Locale mismatch detected, resetting assessment:', {
-        sessionLocale: currentSession.locale,
-        currentLocale: locale
-      });
-      resetAssessment();
+    if (currentSession) {
+      const sessionMode = currentSession.mode || 'simplified';
+      if (currentSession.locale !== locale || sessionMode !== mode) {
+        console.log('Locale or mode mismatch detected, resetting assessment:', {
+          sessionLocale: currentSession.locale,
+          currentLocale: locale,
+          sessionMode: sessionMode,
+          currentMode: mode
+        });
+        resetAssessment();
+      }
     }
-  }, [locale, currentSession, resetAssessment]);
+  }, [locale, mode, currentSession, resetAssessment]);
 
   const {
     notifications,
@@ -231,7 +236,10 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
               {t('start.title')}
             </h3>
             <p className="text-blue-800 mb-4 leading-relaxed">
-              {t('start.description')}
+              {mode === 'simplified' && t('start.descriptionSimplified')}
+              {mode === 'detailed' && t('start.descriptionDetailed')}
+              {mode === 'medical' && t('start.descriptionMedical')}
+              {!['simplified', 'detailed', 'medical'].includes(mode) && t('start.description')}
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">

@@ -1804,6 +1804,9 @@
       "start": {
         "title": "Before Starting",
         "description": "Please ensure you're in a quiet, private environment where you can focus on answering the questions. This assessment will help you better understand your symptom patterns.",
+        "descriptionSimplified": "Quickly assess your menstrual pain symptoms through 3 core questions.",
+        "descriptionDetailed": "Comprehensively assess your menstrual pain symptoms through 13 professional questions.",
+        "descriptionMedical": "In-depth analysis of your menstrual pain symptoms through 21 medical-grade questions.",
         "feature1": "Professional symptom analysis",
         "feature2": "Personalized recommendations",
         "feature3": "Scientific assessment methods",
@@ -2525,8 +2528,22 @@
       }
     },
     "workplaceAssessment": {
-      "title": "Workplace Adaptability Assessment",
+      "metaTitle": "Workplace Impact Assessment - Professional Period Pain Work Impact Analysis Tool | Period Hub",
+      "title": "Workplace Impact Assessment",
       "subtitle": "Understanding how your symptoms affect work helps find effective support measures.",
+      "startButton": "Start Assessment",
+      "features": {
+        "assessment": "Professional Assessment",
+        "assessmentDesc": "4 professional questions for comprehensive work impact evaluation",
+        "quick": "Quick & Easy",
+        "quickDesc": "Only 3-5 minutes to get professional analysis",
+        "personalized": "Personalized Recommendations",
+        "personalizedDesc": "Targeted suggestions based on assessment results"
+      },
+      "resultsTitle": "Assessment Results",
+      "resultsSubtitle": "Based on your answers, we have generated the following analysis",
+      "recommendationsTitle": "Personalized Recommendations",
+      "restartButton": "Restart Assessment",
       "questions": {
         "concentration": {
           "title": "How does your period pain affect your concentration at work or study?",

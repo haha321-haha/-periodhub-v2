@@ -815,7 +815,7 @@ export const getQuestionsByMode = (locale: string, mode: string): Question[] => 
       return extendedSymptomQuestions;
     
     case 'medical':
-      // 医疗专业版：包含扩展的症状和职场问题（17个问题）
+      // 医疗专业版：包含扩展的症状和职场问题（21个问题）
       return [...extendedSymptomQuestions, ...extendedWorkplaceQuestions];
     
     default:

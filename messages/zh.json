@@ -3564,7 +3564,10 @@
       "subtitle": "专业医疗评估",
       "start": {
         "title": "开始症状评估",
-        "description": "通过5个专业问题，全面评估您的痛经症状",
+        "description": "通过3个核心问题，快速评估您的痛经症状",
+        "descriptionSimplified": "通过3个核心问题，快速评估您的痛经症状",
+        "descriptionDetailed": "通过13个专业问题，全面评估您的痛经症状",
+        "descriptionMedical": "通过21个医疗级问题，深度分析您的痛经症状",
         "feature1": "专业评估",
         "feature2": "个性化建议",
         "feature3": "即时缓解",
@@ -3661,8 +3664,22 @@
       }
     },
     "workplaceAssessment": {
-      "title": "职场适应性评估",
+      "metaTitle": "职场影响评估 - 专业痛经对工作影响分析工具 | Period Hub",
+      "title": "职场影响评估",
       "subtitle": "了解您的症状如何影响工作，有助于找到有效的支持措施。",
+      "startButton": "开始评估",
+      "features": {
+        "assessment": "专业评估",
+        "assessmentDesc": "4个专业问题，全面评估工作影响",
+        "quick": "快速便捷",
+        "quickDesc": "仅需3-5分钟，获得专业分析",
+        "personalized": "个性化建议",
+        "personalizedDesc": "基于评估结果提供针对性建议"
+      },
+      "resultsTitle": "评估结果",
+      "resultsSubtitle": "基于您的回答，我们为您生成了以下分析结果",
+      "recommendationsTitle": "个性化建议",
+      "restartButton": "重新评估",
       "questions": {
         "concentration": {
           "title": "您的痛经如何影响您在工作或学习时的注意力？",

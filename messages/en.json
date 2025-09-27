@@ -6687,7 +6687,28 @@
       "animations": "Animations",
       "compactMode": "Compact Mode",
       "dateFormat": "Date Format",
-      "timeFormat": "Time Format"
+      "timeFormat": "Time Format",
+      "notifications": {
+        "title": "Notifications",
+        "browser": "Browser Notifications",
+        "email": "Email Notifications",
+        "sms": "SMS Notifications",
+        "push": "Push Notifications"
+      },
+      "dataCollection": "Data Collection",
+      "analytics": "Analytics",
+      "personalization": "Personalization",
+      "shareProgress": "Share Progress",
+      "anonymousMode": "Anonymous Mode",
+      "exportPassword": "Export Password",
+      "dataRetention": "Data Retention",
+      "autoDelete": "Auto Delete"
+    },
+    "notificationTypes": {
+      "reminder": "Reminder",
+      "insight": "Insight",
+      "update": "Update",
+      "alert": "Alert"
     },
     "common": {
       "save": "Save",

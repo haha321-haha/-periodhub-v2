@@ -6546,7 +6546,28 @@
       "animations": "动画效果",
       "compactMode": "紧凑模式",
       "dateFormat": "日期格式",
-      "timeFormat": "时间格式"
+      "timeFormat": "时间格式",
+      "notifications": {
+        "title": "通知设置",
+        "browser": "浏览器通知",
+        "email": "邮件通知",
+        "sms": "短信通知",
+        "push": "推送通知"
+      },
+      "dataCollection": "数据收集",
+      "analytics": "分析统计",
+      "personalization": "个性化",
+      "shareProgress": "分享进度",
+      "anonymousMode": "匿名模式",
+      "exportPassword": "导出密码",
+      "dataRetention": "数据保留",
+      "autoDelete": "自动删除"
+    },
+    "notificationTypes": {
+      "reminder": "提醒",
+      "insight": "洞察",
+      "update": "更新",
+      "alert": "警告"
     },
     "common": {
       "save": "保存",

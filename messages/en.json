@@ -6673,6 +6673,22 @@
       "highAccuracy": "High Prediction Accuracy",
       "highAccuracyDesc": "Cycle predictions are highly accurate"
     },
+    "userPreferences": {
+      "title": "User Preferences",
+      "reset": "Reset",
+      "save": "Save",
+      "uiPreferences": "UI Preferences",
+      "notificationSettings": "Notification Settings",
+      "privacySettings": "Privacy Settings",
+      "accessibilitySettings": "Accessibility Settings",
+      "exportPreferences": "Export Preferences",
+      "theme": "Theme",
+      "fontSize": "Font Size",
+      "animations": "Animations",
+      "compactMode": "Compact Mode",
+      "dateFormat": "Date Format",
+      "timeFormat": "Time Format"
+    },
     "common": {
       "save": "Save",
       "cancel": "Cancel",

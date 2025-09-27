@@ -6532,6 +6532,22 @@
       "highAccuracy": "高预测准确性",
       "highAccuracyDesc": "周期预测高度准确"
     },
+    "userPreferences": {
+      "title": "用户偏好设置",
+      "reset": "重置",
+      "save": "保存",
+      "uiPreferences": "界面偏好",
+      "notificationSettings": "通知设置",
+      "privacySettings": "隐私设置",
+      "accessibilitySettings": "无障碍设置",
+      "exportPreferences": "导出偏好",
+      "theme": "主题",
+      "fontSize": "字体大小",
+      "animations": "动画效果",
+      "compactMode": "紧凑模式",
+      "dateFormat": "日期格式",
+      "timeFormat": "时间格式"
+    },
     "common": {
       "save": "保存",
       "cancel": "取消",

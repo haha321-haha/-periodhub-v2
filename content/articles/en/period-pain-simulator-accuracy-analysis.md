@@ -23,7 +23,7 @@ canonical_url: "/en/articles/period-pain-simulator-accuracy-analysis"
 schema_type: "Article"
 ---
 
-# Are Period Pain Simulators Accurate? Scientific Analysis and Expert Opinions
+## Are Period Pain Simulators Accurate? Scientific Analysis and Expert Opinions
 
 ## Introduction
 

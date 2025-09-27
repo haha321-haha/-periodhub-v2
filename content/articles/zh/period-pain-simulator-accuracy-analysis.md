@@ -23,7 +23,7 @@ canonical_url: "/zh/articles/period-pain-simulator-accuracy-analysis"
 schema_type: "Article"
 ---
 
-# 经痛模拟器准确吗？科学解析与权威观点
+## 经痛模拟器准确吗？科学解析与权威观点
 
 ## 引言
 

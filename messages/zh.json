@@ -6549,10 +6549,25 @@
       "timeFormat": "时间格式",
       "notifications": {
         "title": "通知设置",
+        "enableAll": "启用所有通知功能",
         "browser": "浏览器通知",
         "email": "邮件通知",
         "sms": "短信通知",
-        "push": "推送通知"
+        "push": "推送通知",
+        "reminderTime": "提醒频率"
+      },
+      "accessibility": {
+        "highContrast": "高对比度模式",
+        "reducedMotion": "减少动画效果",
+        "screenReader": "屏幕阅读器支持",
+        "keyboardNavigation": "键盘导航",
+        "focusIndicators": "焦点指示器",
+        "textScaling": "文字缩放"
+      },
+      "export": {
+        "defaultFormat": "默认导出格式",
+        "autoSave": "自动保存导出设置",
+        "includeCharts": "导出时包含图表"
       },
       "dataCollection": "数据收集",
       "analytics": "分析统计",

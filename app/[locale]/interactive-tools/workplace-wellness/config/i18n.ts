@@ -1,23 +1,23 @@
 /**
  * HVsLYEp职场健康助手 - 国际化配置
  * 基于HVsLYEp的翻译结构设计
+ * 已迁移到 next-intl 系统
  */
 
-import { Language } from '../types';
-
 // 支持的语言配置
-export const supportedLanguages: Language[] = ['zh', 'en'];
+export const supportedLanguages = ['zh', 'en'] as const;
+export type SupportedLanguage = typeof supportedLanguages[number];
 
 // 语言显示名称
-export const languageNames: Record<Language, string> = {
+export const languageNames: Record<SupportedLanguage, string> = {
   zh: '中文',
   en: 'English'
 };
 
 // 语言切换配置
 export const languageConfig = {
-  defaultLanguage: 'zh' as Language,
-  fallbackLanguage: 'en' as Language,
+  defaultLanguage: 'zh' as SupportedLanguage,
+  fallbackLanguage: 'en' as SupportedLanguage,
   storageKey: 'workplace-wellness-language'
 };
 
@@ -133,24 +133,24 @@ export function createTranslationFunction(translations: any) {
 }
 
 // 语言切换工具函数
-export function getLanguageFromLocale(locale: string): Language {
-  return supportedLanguages.includes(locale as Language) 
-    ? (locale as Language) 
+export function getLanguageFromLocale(locale: string): SupportedLanguage {
+  return supportedLanguages.includes(locale as SupportedLanguage) 
+    ? (locale as SupportedLanguage) 
     : languageConfig.defaultLanguage;
 }
 
 // 获取语言显示名称
-export function getLanguageDisplayName(lang: Language): string {
+export function getLanguageDisplayName(lang: SupportedLanguage): string {
   return languageNames[lang] || lang;
 }
 
 // 检查语言是否支持
-export function isLanguageSupported(lang: string): lang is Language {
-  return supportedLanguages.includes(lang as Language);
+export function isLanguageSupported(lang: string): lang is SupportedLanguage {
+  return supportedLanguages.includes(lang as SupportedLanguage);
 }
 
 // 获取浏览器语言偏好
-export function getBrowserLanguage(): Language {
+export function getBrowserLanguage(): SupportedLanguage {
   if (typeof window === 'undefined') {
     return languageConfig.defaultLanguage;
   }
@@ -160,24 +160,24 @@ export function getBrowserLanguage(): Language {
 }
 
 // 保存语言偏好到本地存储
-export function saveLanguagePreference(lang: Language): void {
+export function saveLanguagePreference(lang: SupportedLanguage): void {
   if (typeof window !== 'undefined') {
     localStorage.setItem(languageConfig.storageKey, lang);
   }
 }
 
 // 从本地存储获取语言偏好
-export function getLanguagePreference(): Language {
+export function getLanguagePreference(): SupportedLanguage {
   if (typeof window === 'undefined') {
     return languageConfig.defaultLanguage;
   }
   
   const saved = localStorage.getItem(languageConfig.storageKey);
-  return isLanguageSupported(saved || '') ? (saved as Language) : languageConfig.defaultLanguage;
+  return isLanguageSupported(saved || '') ? (saved as SupportedLanguage) : languageConfig.defaultLanguage;
 }
 
 // 初始化语言设置
-export function initializeLanguage(): Language {
+export function initializeLanguage(): SupportedLanguage {
   const saved = getLanguagePreference();
   const browser = getBrowserLanguage();
   

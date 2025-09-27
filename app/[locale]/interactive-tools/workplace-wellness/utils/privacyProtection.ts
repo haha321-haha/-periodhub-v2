@@ -187,7 +187,7 @@ export class PrivacyProtectionManager {
       }
       // 这里可以实现密码验证逻辑
       // 为了演示，使用简单的密码验证
-      const validPassword = this.language === 'zh' ? 'health2024' : 'wellness2024';
+      const validPassword = this.locale === 'zh' ? 'health2024' : 'wellness2024';
       return password === validPassword;
     }
 
@@ -199,7 +199,7 @@ export class PrivacyProtectionManager {
    */
   generateSecurityWarnings(dataType: ExportType): string[] {
     const warnings: string[] = [];
-    const isZh = this.language === 'zh';
+    const isZh = this.locale === 'zh';
 
     // 基础安全提示
     warnings.push(
@@ -326,7 +326,7 @@ export class PrivacyProtectionManager {
    * 生成隐私保护报告
    */
   generatePrivacyReport(): string {
-    const isZh = this.language === 'zh';
+    const isZh = this.locale === 'zh';
     const report = {
       title: isZh ? '隐私保护报告' : 'Privacy Protection Report',
       settings: this.settings,

@@ -7,7 +7,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { 
   WorkplaceWellnessState, 
-  Language, 
   CalendarState, 
   WorkImpactData, 
   NutritionData, 
@@ -47,9 +46,6 @@ import {
 
 // 扩展状态接口，添加Actions
 interface WorkplaceWellnessStore extends WorkplaceWellnessState {
-  // 语言相关Actions
-  setLanguage: (lang: Language) => void;
-  toggleLanguage: () => void;
   
   // 标签页相关Actions
   setActiveTab: (tab: 'calendar' | 'nutrition' | 'export' | 'settings') => void;
@@ -126,7 +122,6 @@ interface WorkplaceWellnessStore extends WorkplaceWellnessState {
 
 // 初始状态 - 基于HVsLYEp的appState
 const initialState: WorkplaceWellnessState = {
-  lang: 'zh',
   activeTab: 'calendar',
   calendar: {
     currentDate: new Date(),
@@ -166,11 +161,6 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       ...initialState,
 
       // 语言相关Actions
-      setLanguage: (lang: Language) => set({ lang }),
-      
-      toggleLanguage: () => set((state) => ({ 
-        lang: state.lang === 'zh' ? 'en' : 'zh' 
-      })),
 
       // 标签页相关Actions
       setActiveTab: (tab) => set({ activeTab: tab }),
@@ -525,7 +515,6 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       getStateSnapshot: () => {
         const state = get();
         return {
-          lang: state.lang,
           activeTab: state.activeTab,
           calendar: state.calendar,
           workImpact: state.workImpact,
@@ -544,7 +533,6 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
     {
       name: 'workplace-wellness-storage',
       partialize: (state) => ({
-        lang: state.lang,
         activeTab: state.activeTab,
         calendar: {
           ...state.calendar,
@@ -580,7 +568,6 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
 );
 
 // 选择器Hooks - 基于HVsLYEp的状态结构
-export const useLanguage = () => useWorkplaceWellnessStore((state) => state.lang);
 export const useActiveTab = () => useWorkplaceWellnessStore((state) => state.activeTab);
 export const useCalendar = () => useWorkplaceWellnessStore((state) => state.calendar);
 export const useWorkImpact = () => useWorkplaceWellnessStore((state) => state.workImpact);
@@ -597,8 +584,6 @@ export const useSystemSettings = () => useWorkplaceWellnessStore((state) => stat
 
 // Actions Hooks - 使用独立的store调用避免无限循环
 export const useWorkplaceWellnessActions = () => {
-  const setLanguage = useWorkplaceWellnessStore((state) => state.setLanguage);
-  const toggleLanguage = useWorkplaceWellnessStore((state) => state.toggleLanguage);
   const setActiveTab = useWorkplaceWellnessStore((state) => state.setActiveTab);
   const updateCalendar = useWorkplaceWellnessStore((state) => state.updateCalendar);
   const setCurrentDate = useWorkplaceWellnessStore((state) => state.setCurrentDate);
@@ -610,8 +595,6 @@ export const useWorkplaceWellnessActions = () => {
   const resetState = useWorkplaceWellnessStore((state) => state.resetState);
 
   return {
-    setLanguage,
-    toggleLanguage,
     setActiveTab,
     updateCalendar,
     setCurrentDate,

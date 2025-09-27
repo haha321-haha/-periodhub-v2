@@ -20,8 +20,9 @@ import {
   Users,
   Activity
 } from 'lucide-react';
-import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction, getPeriodData } from '../data';
+import { useLocale } from 'next-intl';
+import { getPeriodData } from '../data';
+import { useTranslations } from 'next-intl';
 import { PeriodRecord, WorkAdjustment } from '../types';
 
 interface WorkImpactData {
@@ -51,8 +52,8 @@ interface ProductivityInsight {
 }
 
 export default function WorkImpactAnalysis() {
-  const lang = useLanguage();
-  const t = createTranslationFunction(lang);
+  const locale = useLocale();
+  const t = useTranslations('workplaceWellness');
   const [activeTab, setActiveTab] = useState<'overview' | 'patterns' | 'productivity' | 'insights'>('overview');
   const [workData, setWorkData] = useState<WorkImpactData[]>([]);
   const [patterns, setPatterns] = useState<WorkPattern[]>([]);
@@ -64,7 +65,7 @@ export default function WorkImpactAnalysis() {
     analyzeWorkImpact();
     generateWorkPatterns();
     generateInsights();
-  }, [periodData, lang]);
+  }, [periodData, locale]);
 
   // 分析工作影响数据
   const analyzeWorkImpact = () => {

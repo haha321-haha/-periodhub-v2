@@ -1815,6 +1815,7 @@ export type TCMConstitution = 'qi_deficiency' | 'yang_deficiency' | 'yin_deficie
 - [ ] 数据存储和读取正常
 - [ ] 响应式设计适配良好
 
+
 #### **性能指标**
 - [ ] 页面加载时间 < 3秒
 - [ ] 组件渲染性能良好

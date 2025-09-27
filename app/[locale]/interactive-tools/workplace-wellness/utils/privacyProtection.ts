@@ -3,7 +3,7 @@
  * 实现数据脱敏、权限控制和安全提示
  */
 
-import { PeriodRecord, NutritionRecommendation, ExportType, Language } from '../types';
+import { PeriodRecord, NutritionRecommendation, ExportType } from '../types';
 
 export interface PrivacySettings {
   enableDataMasking: boolean;
@@ -23,12 +23,12 @@ export interface AuditLogEntry {
 }
 
 export class PrivacyProtectionManager {
-  private language: Language;
+  private locale: string;
   private settings: PrivacySettings;
   private auditLog: AuditLogEntry[] = [];
 
-  constructor(language: Language, settings?: Partial<PrivacySettings>) {
-    this.language = language;
+  constructor(locale: string, settings?: Partial<PrivacySettings>) {
+    this.locale = locale;
     this.settings = {
       enableDataMasking: true,
       requirePassword: false,

@@ -7,8 +7,9 @@
 
 import { useState, useMemo } from 'react';
 import { Calendar, Filter, Search, Download, Eye, Edit, Trash2, Plus } from 'lucide-react';
-import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction, getPeriodData } from '../data';
+import { useLocale } from 'next-intl';
+import { getPeriodData } from '../data';
+import { useTranslations } from 'next-intl';
 import { PeriodRecord, FlowType, PainLevel } from '../types';
 
 interface FilterOptions {
@@ -22,8 +23,8 @@ interface FilterOptions {
 }
 
 export default function HistoryDataViewer() {
-  const lang = useLanguage();
-  const t = createTranslationFunction(lang);
+  const locale = useLocale();
+  const t = useTranslations('workplaceWellness');
   const [searchTerm, setSearchTerm] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<PeriodRecord | null>(null);
@@ -347,7 +348,7 @@ export default function HistoryDataViewer() {
                 <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
                   <td className="py-3 px-4">
                     {new Date(record.date).toLocaleDateString(
-                      lang === 'zh' ? 'zh-CN' : 'en-US'
+                      locale === 'zh' ? 'zh-CN' : 'en-US'
                     )}
                   </td>
                   <td className="py-3 px-4">
@@ -411,7 +412,7 @@ export default function HistoryDataViewer() {
                 <label className="text-sm font-medium text-gray-700">{t('history.date')}</label>
                 <p className="text-gray-900">
                   {new Date(selectedRecord.date).toLocaleDateString(
-                    lang === 'zh' ? 'zh-CN' : 'en-US'
+                    locale === 'zh' ? 'zh-CN' : 'en-US'
                   )}
                 </p>
               </div>

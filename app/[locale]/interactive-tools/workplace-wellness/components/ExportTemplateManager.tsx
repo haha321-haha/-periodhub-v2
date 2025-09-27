@@ -14,20 +14,18 @@ import {
   X
 } from 'lucide-react';
 import { useExportTemplates, useActiveTemplate, useExportTemplateActions } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction } from '../data';
+import { useTranslations } from 'next-intl';
 import { 
   ExportTemplate, 
   ExportType, 
   ExtendedExportFormat,
-  Language
 } from '../types';
 import { EXPORT_FORMAT_CONFIG } from '../types/defaults';
 
 interface ExportTemplateManagerProps {
-  lang?: Language;
 }
 
-export default function ExportTemplateManager({ lang = 'zh' }: ExportTemplateManagerProps) {
+export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
   const templates = useExportTemplates();
   const activeTemplate = useActiveTemplate();
   const {
@@ -39,7 +37,7 @@ export default function ExportTemplateManager({ lang = 'zh' }: ExportTemplateMan
     duplicateTemplate
   } = useExportTemplateActions();
   
-  const t = createTranslationFunction(lang);
+  const t = useTranslations('workplaceWellness');
   const [isCreating, setIsCreating] = useState(false);
   const [editingTemplate, setEditingTemplate] = useState<ExportTemplate | null>(null);
   const [newTemplate, setNewTemplate] = useState<Partial<ExportTemplate>>({

@@ -7,7 +7,6 @@ import {
   PeriodRecord, 
   NutritionRecommendation, 
   LeaveTemplate, 
-  Language,
   MenstrualPhase,
   TCMConstitution,
   SeverityLevel,
@@ -164,31 +163,22 @@ export function validatePeriodData(data: any[]): ValidationResult {
 }
 
 // 批量验证营养数据
-export function validateNutritionData(data: Record<Language, any[]>): ValidationResult {
+export function validateNutritionData(data: any[]): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
 
-  if (!data.en || !data.zh) {
-    errors.push('Nutrition data must have both en and zh versions');
+  if (!data || data.length === 0) {
+    errors.push('Nutrition data is empty');
     return { isValid: false, errors, warnings };
   }
 
-  // 验证英文数据
-  data.en.forEach((nutrition, index) => {
+  // 验证营养数据
+  data.forEach((nutrition, index) => {
     const result = validateNutritionRecommendation(nutrition);
     if (!result.isValid) {
-      errors.push(`EN Nutrition ${index}: ${result.errors.join(', ')}`);
+      errors.push(`Nutrition ${index}: ${result.errors.join(', ')}`);
     }
-    warnings.push(...result.warnings.map(w => `EN Nutrition ${index}: ${w}`));
-  });
-
-  // 验证中文数据
-  data.zh.forEach((nutrition, index) => {
-    const result = validateNutritionRecommendation(nutrition);
-    if (!result.isValid) {
-      errors.push(`ZH Nutrition ${index}: ${result.errors.join(', ')}`);
-    }
-    warnings.push(...result.warnings.map(w => `ZH Nutrition ${index}: ${w}`));
+    warnings.push(...result.warnings.map(w => `Nutrition ${index}: ${w}`));
   });
 
   return {
@@ -199,31 +189,22 @@ export function validateNutritionData(data: Record<Language, any[]>): Validation
 }
 
 // 批量验证请假模板
-export function validateLeaveTemplates(data: Record<Language, any[]>): ValidationResult {
+export function validateLeaveTemplates(data: any[]): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
 
-  if (!data.en || !data.zh) {
-    errors.push('Leave templates must have both en and zh versions');
+  if (!data || data.length === 0) {
+    errors.push('Leave templates are empty');
     return { isValid: false, errors, warnings };
   }
 
-  // 验证英文模板
-  data.en.forEach((template, index) => {
+  // 验证请假模板
+  data.forEach((template, index) => {
     const result = validateLeaveTemplate(template);
     if (!result.isValid) {
-      errors.push(`EN Template ${index}: ${result.errors.join(', ')}`);
+      errors.push(`Template ${index}: ${result.errors.join(', ')}`);
     }
-    warnings.push(...result.warnings.map(w => `EN Template ${index}: ${w}`));
-  });
-
-  // 验证中文模板
-  data.zh.forEach((template, index) => {
-    const result = validateLeaveTemplate(template);
-    if (!result.isValid) {
-      errors.push(`ZH Template ${index}: ${result.errors.join(', ')}`);
-    }
-    warnings.push(...result.warnings.map(w => `ZH Template ${index}: ${w}`));
+    warnings.push(...result.warnings.map(w => `Template ${index}: ${w}`));
   });
 
   return {

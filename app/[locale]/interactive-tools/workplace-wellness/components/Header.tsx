@@ -1,17 +1,16 @@
 /**
- * HVsLYEp职场健康助手 - 头部组件
- * 基于HVsLYEp的Header函数设计
+ * Workplace Wellness Assistant - Header Component
+ * Based on HVsLYEp Header function design
  */
 
 'use client';
 
 import { Heart } from 'lucide-react';
-import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction } from '../data';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function Header() {
-  const lang = useLanguage();
-  const t = createTranslationFunction(lang);
+  const t = useTranslations('workplaceWellness');
+  const locale = useLocale();
 
   return (
     <header className="bg-white shadow-sm border-b border-neutral-100">
@@ -43,17 +42,17 @@ export default function Header() {
         <nav className="mt-4">
           <div className="flex items-center space-x-2 text-sm text-gray-500">
             <a 
-              href={`/${lang}`}
+              href={`/${locale}`}
               className="hover:text-pink-600"
             >
-              {lang === 'zh' ? '首页' : 'Home'}
+              {locale === 'zh' ? '首页' : 'Home'}
             </a>
             <span>/</span>
             <a 
-              href={`/${lang}/interactive-tools`}
+              href={`/${locale}/interactive-tools`}
               className="hover:text-pink-600"
             >
-              {lang === 'zh' ? '互动工具' : 'Interactive Tools'}
+              {locale === 'zh' ? '互动工具' : 'Interactive Tools'}
             </a>
             <span>/</span>
             <span className="text-gray-900">

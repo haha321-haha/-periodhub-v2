@@ -18,8 +18,9 @@ import {
   CheckCircle,
   Info
 } from 'lucide-react';
-import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction, getPeriodData } from '../data';
+import { useLocale } from 'next-intl';
+import { getPeriodData } from '../data';
+import { useTranslations } from 'next-intl';
 import { CyclePredictor, CycleAnalysis, CycleStatistics } from '../utils/cyclePrediction';
 import { PeriodRecord, MenstrualPhase } from '../types';
 
@@ -38,8 +39,8 @@ interface ComparisonData {
 }
 
 export default function AdvancedCycleAnalysis() {
-  const lang = useLanguage();
-  const t = createTranslationFunction(lang);
+  const locale = useLocale();
+  const t = useTranslations('workplaceWellness');
   const [activeTab, setActiveTab] = useState<'overview' | 'trends' | 'comparison' | 'insights'>('overview');
   const [analysis, setAnalysis] = useState<CycleAnalysis | null>(null);
   const [statistics, setStatistics] = useState<CycleStatistics | null>(null);
@@ -49,7 +50,7 @@ export default function AdvancedCycleAnalysis() {
   const periodData = getPeriodData();
 
   useEffect(() => {
-    const predictor = new CyclePredictor(lang);
+    const predictor = new CyclePredictor(locale);
     const cycleAnalysis = predictor.analyzeCycle(periodData);
     const cycleStats = predictor.generateStatistics(periodData);
     
@@ -61,7 +62,7 @@ export default function AdvancedCycleAnalysis() {
     
     // 生成对比数据
     generateComparisonData(periodData, cycleAnalysis);
-  }, [periodData, lang]);
+  }, [periodData, locale]);
 
   // 生成趋势数据
   const generateTrendData = (data: PeriodRecord[]) => {
@@ -152,7 +153,7 @@ export default function AdvancedCycleAnalysis() {
             <div className="flex justify-between items-center mb-2">
               <h4 className="font-medium text-gray-800">
                 {new Date(trend.month + '-01').toLocaleDateString(
-                  lang === 'zh' ? 'zh-CN' : 'en-US',
+                  locale === 'zh' ? 'zh-CN' : 'en-US',
                   { year: 'numeric', month: 'long' }
                 )}
               </h4>

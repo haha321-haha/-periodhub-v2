@@ -1,23 +1,22 @@
 /**
- * HVsLYEp职场健康助手 - 导航组件
- * Day 10: 用户体验优化 - 响应式设计优化
- * 基于HVsLYEp的Navigation函数设计
+ * Workplace Wellness Assistant - Navigation Component
+ * Day 10: User Experience Optimization - Responsive Design Optimization
+ * Based on HVsLYEp Navigation function design
  */
 
 'use client';
 
 import { Calendar, Apple, Download, Briefcase, BarChart3, Settings, Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import { useActiveTab, useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction } from '../data';
+import { useTranslations } from 'next-intl';
+import { useActiveTab, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
 import ResponsiveContainer, { TouchFriendlyButton } from './ResponsiveContainer';
 import { TouchFeedback } from './TouchGestures';
 
 export default function Navigation() {
   const activeTab = useActiveTab();
-  const lang = useLanguage();
   const { setActiveTab } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(lang);
+  const t = useTranslations('workplaceWellness');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // 导航标签配置 - 基于HVsLYEp的tabs结构，增强Day 11功能
@@ -27,7 +26,7 @@ export default function Navigation() {
     { id: 'work-impact', name: t('nav.workImpact'), icon: Briefcase },
     { id: 'analysis', name: t('nav.analysis'), icon: BarChart3 },
     { id: 'export', name: t('nav.export'), icon: Download },
-    { id: 'settings', name: t('nav.settings') || '设置', icon: Settings }
+    { id: 'settings', name: t('nav.settings'), icon: Settings }
   ];
 
   const handleTabClick = (tabId: string) => {

@@ -7,26 +7,28 @@
 
 import { useState } from 'react';
 import { Download, ShieldCheck, FileText, FileSpreadsheet, FileImage, Lock, Eye, AlertTriangle } from 'lucide-react';
-import { useExport, useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction, getPeriodData, getNutritionData } from '../data';
+import { useExport, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
+import { useLocale } from 'next-intl';
+import { getPeriodData, getNutritionData } from '../data';
+import { useTranslations } from 'next-intl';
 import { ExportFormat, ExportType } from '../types';
 import { PDFGenerator, PDFReportData } from '../utils/pdfGenerator';
 import { PrivacyProtectionManager, PrivacySettings } from '../utils/privacyProtection';
 
 export default function DataExportComponent() {
   const exportConfig = useExport();
-  const lang = useLanguage();
+  const locale = useLocale();
   const { updateExport, setExporting } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(lang);
+  const t = useTranslations('workplaceWellness');
 
   const [isExporting, setIsExporting] = useState(false);
   const [exportStatus, setExportStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [showPrivacySettings, setShowPrivacySettings] = useState(false);
   const [password, setPassword] = useState('');
-  const [privacyManager] = useState(() => new PrivacyProtectionManager(lang));
+  const [privacyManager] = useState(() => new PrivacyProtectionManager(locale));
 
   const periodData = getPeriodData();
-  const nutritionData = getNutritionData(lang);
+  const nutritionData = getNutritionData();
 
   // 导出类型选择
   const handleExportTypeChange = (type: ExportType) => {
@@ -42,7 +44,7 @@ export default function DataExportComponent() {
   const generateExportData = () => {
     const baseData = {
       exportDate: new Date().toISOString(),
-      language: lang,
+      locale: locale,
       version: '1.0.0'
     };
 
@@ -117,10 +119,10 @@ export default function DataExportComponent() {
   // 导出为PDF（使用HTML格式）
   const exportAsPDF = async (data: any) => {
     try {
-      const pdfGenerator = new PDFGenerator(lang);
+      const pdfGenerator = new PDFGenerator(locale);
       const pdfData: PDFReportData = {
         exportDate: new Date().toISOString(),
-        language: lang,
+        locale: locale,
         exportType: exportConfig.exportType,
         periodData: exportConfig.exportType === 'period' ? data.data : undefined,
         nutritionData: exportConfig.exportType === 'nutrition' ? data.data : undefined,

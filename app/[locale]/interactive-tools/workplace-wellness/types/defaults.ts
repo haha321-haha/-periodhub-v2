@@ -11,7 +11,6 @@ import {
   AccessibilitySettings,
   SystemSettings,
   ExportTemplate,
-  Language,
   Theme,
   FontSize,
   DateFormat,
@@ -95,7 +94,6 @@ export const DEFAULT_USER_PREFERENCES: UserPreferences = {
     includeCharts: true,
     compression: false,
   },
-  language: 'zh' as Language,
   version: '1.0.0',
   lastUpdated: new Date().toISOString(),
 };

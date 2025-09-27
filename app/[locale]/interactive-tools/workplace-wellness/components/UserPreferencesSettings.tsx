@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Settings, Palette, Bell, Shield, Eye, Download, Save, RotateCcw } from 'lucide-react';
 import { useUserPreferences, useUserPreferencesActions } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction } from '../data';
+import { useTranslations } from 'next-intl';
 import { 
   UserPreferences, 
   Theme, 
@@ -31,7 +31,7 @@ export default function UserPreferencesSettings() {
     resetPreferences
   } = useUserPreferencesActions();
   
-  const t = createTranslationFunction(preferences.language);
+  const t = useTranslations('workplaceWellness');
   const [activeTab, setActiveTab] = useState<'ui' | 'notifications' | 'privacy' | 'accessibility' | 'export'>('ui');
   const [validationResult, setValidationResult] = useState<SettingsValidationResult | null>(null);
   const [isSaving, setIsSaving] = useState(false);

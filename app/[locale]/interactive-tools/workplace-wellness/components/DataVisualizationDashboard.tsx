@@ -20,8 +20,9 @@ import {
   CheckCircle,
   Info
 } from 'lucide-react';
-import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction, getPeriodData } from '../data';
+import { useLocale } from 'next-intl';
+import { getPeriodData } from '../data';
+import { useTranslations } from 'next-intl';
 import { CyclePredictor, CycleAnalysis, CycleStatistics } from '../utils/cyclePrediction';
 import { PeriodRecord } from '../types';
 
@@ -43,8 +44,8 @@ interface DashboardData {
 }
 
 export default function DataVisualizationDashboard() {
-  const lang = useLanguage();
-  const t = createTranslationFunction(lang);
+  const locale = useLocale();
+  const t = useTranslations('workplaceWellness');
   const [activeView, setActiveView] = useState<'overview' | 'detailed' | 'comparison'>('overview');
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -53,13 +54,13 @@ export default function DataVisualizationDashboard() {
 
   useEffect(() => {
     generateDashboardData();
-  }, [periodData, lang]);
+  }, [periodData, locale]);
 
   const generateDashboardData = async () => {
     setLoading(true);
     
     try {
-      const predictor = new CyclePredictor(lang);
+      const predictor = new CyclePredictor(locale);
       const cycleAnalysis = predictor.analyzeCycle(periodData);
       const statistics = predictor.generateStatistics(periodData);
       
@@ -292,7 +293,7 @@ export default function DataVisualizationDashboard() {
                 <div className="flex justify-between items-center mb-3">
                   <h4 className="font-medium text-gray-800">
                     {new Date(trend.month + '-01').toLocaleDateString(
-                      lang === 'zh' ? 'zh-CN' : 'en-US',
+                      locale === 'zh' ? 'zh-CN' : 'en-US',
                       { year: 'numeric', month: 'long' }
                     )}
                   </h4>

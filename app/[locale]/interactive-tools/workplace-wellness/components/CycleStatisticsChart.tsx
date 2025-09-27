@@ -7,8 +7,9 @@
 
 import { useState, useEffect } from 'react';
 import { BarChart3, TrendingUp, Calendar, Activity, PieChart } from 'lucide-react';
-import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction, getPeriodData } from '../data';
+import { useLocale } from 'next-intl';
+import { getPeriodData } from '../data';
+import { useTranslations } from 'next-intl';
 import { CyclePredictor, CycleAnalysis, CycleStatistics } from '../utils/cyclePrediction';
 import { PeriodRecord } from '../types';
 
@@ -24,8 +25,8 @@ interface ChartData {
 }
 
 export default function CycleStatisticsChart() {
-  const lang = useLanguage();
-  const t = createTranslationFunction(lang);
+  const locale = useLocale();
+  const t = useTranslations('workplaceWellness');
   const [activeTab, setActiveTab] = useState<'overview' | 'cycle-length' | 'pain-level' | 'flow-type'>('overview');
   const [analysis, setAnalysis] = useState<CycleAnalysis | null>(null);
   const [statistics, setStatistics] = useState<CycleStatistics | null>(null);
@@ -33,13 +34,13 @@ export default function CycleStatisticsChart() {
   const periodData = getPeriodData();
 
   useEffect(() => {
-    const predictor = new CyclePredictor(lang);
+    const predictor = new CyclePredictor(locale);
     const cycleAnalysis = predictor.analyzeCycle(periodData);
     const cycleStats = predictor.generateStatistics(periodData);
     
     setAnalysis(cycleAnalysis);
     setStatistics(cycleStats);
-  }, [periodData, lang]);
+  }, [periodData, locale]);
 
   // 生成周期长度图表数据
   const generateCycleLengthChart = (): ChartData => {
@@ -259,7 +260,7 @@ export default function CycleStatisticsChart() {
               <p className="text-sm text-gray-600 mb-1">{t('charts.nextPeriod')}</p>
               <p className="font-semibold text-red-600">
                 {new Date(analysis.nextPredictedPeriod).toLocaleDateString(
-                  lang === 'zh' ? 'zh-CN' : 'en-US'
+                  locale === 'zh' ? 'zh-CN' : 'en-US'
                 )}
               </p>
             </div>
@@ -270,7 +271,7 @@ export default function CycleStatisticsChart() {
               <p className="text-sm text-gray-600 mb-1">{t('charts.nextOvulation')}</p>
               <p className="font-semibold text-green-600">
                 {new Date(analysis.nextPredictedOvulation).toLocaleDateString(
-                  lang === 'zh' ? 'zh-CN' : 'en-US'
+                  locale === 'zh' ? 'zh-CN' : 'en-US'
                 )}
               </p>
             </div>

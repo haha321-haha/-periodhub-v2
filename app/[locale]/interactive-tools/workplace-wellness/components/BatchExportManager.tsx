@@ -21,20 +21,18 @@ import {
   useBatchExportActions,
   useExportHistoryActions
 } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction } from '../data';
+import { useTranslations } from 'next-intl';
 import { 
   BatchExportItem, 
   ExportTemplate, 
   ExportType, 
   ExtendedExportFormat,
-  Language
 } from '../types';
 
 interface BatchExportManagerProps {
-  lang?: Language;
 }
 
-export default function BatchExportManager({ lang = 'zh' }: BatchExportManagerProps) {
+export default function BatchExportManager({}: BatchExportManagerProps) {
   const batchQueue = useBatchExportQueue();
   const templates = useExportTemplates();
   const {
@@ -46,7 +44,7 @@ export default function BatchExportManager({ lang = 'zh' }: BatchExportManagerPr
   } = useBatchExportActions();
   const { addExportHistory } = useExportHistoryActions();
   
-  const t = createTranslationFunction(lang);
+  const t = useTranslations('workplaceWellness');
   const [isCreating, setIsCreating] = useState(false);
   const [selectedItems, setSelectedItems] = useState<BatchExportItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);

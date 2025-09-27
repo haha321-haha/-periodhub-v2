@@ -3,11 +3,11 @@
  * 基于HTML格式生成PDF报告
  */
 
-import { PeriodRecord, NutritionRecommendation, ExportType, Language } from '../types';
+import { PeriodRecord, NutritionRecommendation, ExportType } from '../types';
 
 export interface PDFReportData {
   exportDate: string;
-  language: Language;
+  locale: string;
   exportType: ExportType;
   periodData?: PeriodRecord[];
   nutritionData?: NutritionRecommendation[];
@@ -18,21 +18,21 @@ export interface PDFReportData {
 }
 
 export class PDFGenerator {
-  private language: Language;
-  
-  constructor(language: Language) {
-    this.language = language;
+  private locale: string;
+
+  constructor(locale: string) {
+    this.locale = locale;
   }
 
   /**
    * 生成HTML格式的PDF报告
    */
   generateHTMLReport(data: PDFReportData): string {
-    const isZh = this.language === 'zh';
+    const isZh = this.locale === 'zh';
     
     return `
 <!DOCTYPE html>
-<html lang="${this.language}">
+<html lang="${this.locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -234,7 +234,7 @@ export class PDFGenerator {
         <div class="info-grid">
             <div class="info-item">
                 <div class="info-label">${isZh ? '导出时间' : 'Export Time'}</div>
-                <div class="info-value">${new Date(data.exportDate).toLocaleString(this.language === 'zh' ? 'zh-CN' : 'en-US')}</div>
+                <div class="info-value">${new Date(data.exportDate).toLocaleString(this.locale === 'zh' ? 'zh-CN' : 'en-US')}</div>
             </div>
             <div class="info-item">
                 <div class="info-label">${isZh ? '导出类型' : 'Export Type'}</div>
@@ -289,14 +289,14 @@ export class PDFGenerator {
       }
     };
     
-    return labels[this.language][type];
+    return labels[this.locale][type];
   }
 
   /**
    * 获取数据条数
    */
   private getDataCount(data: PDFReportData): string {
-    const isZh = this.language === 'zh';
+    const isZh = this.locale === 'zh';
     
     switch (data.exportType) {
       case 'period':
@@ -316,7 +316,7 @@ export class PDFGenerator {
    * 生成数据部分
    */
   private generateDataSections(data: PDFReportData): string {
-    const isZh = this.language === 'zh';
+    const isZh = this.locale === 'zh';
     let sections = '';
 
     if (data.exportType === 'period' || data.exportType === 'all') {
@@ -334,7 +334,7 @@ export class PDFGenerator {
    * 生成经期数据部分
    */
   private generatePeriodSection(periodData: PeriodRecord[]): string {
-    const isZh = this.language === 'zh';
+    const isZh = this.locale === 'zh';
     
     if (periodData.length === 0) {
       return `
@@ -361,7 +361,7 @@ export class PDFGenerator {
           <tbody>
             ${periodData.map(record => `
               <tr>
-                <td>${new Date(record.date).toLocaleDateString(this.language === 'zh' ? 'zh-CN' : 'en-US')}</td>
+                <td>${new Date(record.date).toLocaleDateString(this.locale === 'zh' ? 'zh-CN' : 'en-US')}</td>
                 <td>
                   <span class="badge ${record.type === 'period' ? 'badge-period' : 'badge-predicted'}">
                     ${isZh 
@@ -385,7 +385,7 @@ export class PDFGenerator {
    * 生成营养数据部分
    */
   private generateNutritionSection(nutritionData: NutritionRecommendation[]): string {
-    const isZh = this.language === 'zh';
+    const isZh = this.locale === 'zh';
     
     if (nutritionData.length === 0) {
       return `
@@ -448,7 +448,7 @@ export class PDFGenerator {
       }
     };
     
-    return labels[this.language][phase as keyof typeof labels.zh] || phase;
+    return labels[this.locale][phase as keyof typeof labels.zh] || phase;
   }
 
   /**
@@ -468,7 +468,7 @@ export class PDFGenerator {
       }
     };
     
-    return labels[this.language][nature as keyof typeof labels.zh] || nature;
+    return labels[this.locale][nature as keyof typeof labels.zh] || nature;
   }
 
   /**
@@ -503,7 +503,7 @@ export class PDFGenerator {
     const url = URL.createObjectURL(blob);
     
     // 跳转到下载中心并传递PDF数据
-    const downloadUrl = `/${this.language}/downloads?pdfData=${encodeURIComponent(JSON.stringify(data))}`;
+    const downloadUrl = `/${this.locale}/downloads?pdfData=${encodeURIComponent(JSON.stringify(data))}`;
     window.open(downloadUrl, '_blank');
     
     // 清理blob URL

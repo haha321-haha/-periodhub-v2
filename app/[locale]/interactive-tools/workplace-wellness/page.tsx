@@ -1,14 +1,14 @@
 /**
- * HVsLYEp职场健康助手 - 主页面
- * Day 10: 用户体验优化 - 响应式设计优化
- * 基于HVsLYEp的renderer.js结构设计
+ * Workplace Wellness Assistant - Main Page
+ * Day 10: User Experience Optimization - Responsive Design Optimization
+ * Based on HVsLYEp renderer.js structure design
  */
 
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { useWorkplaceWellnessStore } from './hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction } from './data';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import CalendarComponent from './components/CalendarComponent';
@@ -72,8 +72,8 @@ const HistoryDataViewer = createLazyModule(
 );
 
 export default function WorkplaceWellnessPage() {
-  const { activeTab, lang } = useWorkplaceWellnessStore();
-  const t = createTranslationFunction(lang);
+  const { activeTab } = useWorkplaceWellnessStore();
+  const t = useTranslations('workplaceWellness');
   const [isLoading, setIsLoading] = useState(true);
   const [previousTab, setPreviousTab] = useState(activeTab);
 

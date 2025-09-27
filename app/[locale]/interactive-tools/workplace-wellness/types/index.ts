@@ -4,7 +4,6 @@
  */
 
 // 基础类型定义
-export type Language = 'zh' | 'en';
 
 // 月经阶段类型
 export type MenstrualPhase = 'menstrual' | 'follicular' | 'ovulation' | 'luteal';
@@ -120,7 +119,6 @@ export interface CalendarState {
 
 // 应用状态接口 - 基于HVsLYEp的appState结构
 export interface WorkplaceWellnessState {
-  lang: Language;
   activeTab: 'calendar' | 'nutrition' | 'export' | 'settings' | 'work-impact' | 'analysis';
   calendar: CalendarState;
   workImpact: WorkImpactData;
@@ -144,7 +142,6 @@ export type UpdateStateFunction = (updates: Partial<WorkplaceWellnessState>) => 
 
 // 组件Props接口
 export interface WorkplaceWellnessProps {
-  initialLanguage?: Language;
   onStateChange?: (state: WorkplaceWellnessState) => void;
 }
 
@@ -167,7 +164,7 @@ export interface WorkImpactProps {
 // 营养建议组件Props
 export interface NutritionProps {
   state: NutritionData;
-  nutritionData: Record<Language, NutritionRecommendation[]>;
+  nutritionData: NutritionRecommendation[];
   t: TranslationFunction;
   updateState: UpdateStateFunction;
 }
@@ -176,7 +173,7 @@ export interface NutritionProps {
 export interface DataExportProps {
   state: ExportConfig;
   periodData: PeriodRecord[];
-  nutritionData: Record<Language, NutritionRecommendation[]>;
+  nutritionData: NutritionRecommendation[];
   t: TranslationFunction;
   updateState: UpdateStateFunction;
 }
@@ -191,8 +188,6 @@ export interface NavigationProps {
 // 头部组件Props
 export interface HeaderProps {
   t: TranslationFunction;
-  currentLanguage: Language;
-  onLanguageToggle: () => void;
 }
 
 // 错误类型
@@ -211,7 +206,6 @@ export interface ErrorInfo {
 
 // 配置接口
 export interface WorkplaceWellnessConfig {
-  defaultLanguage: Language;
   enableLocalStorage: boolean;
   enableAnalytics: boolean;
   maxPainLevel: number;
@@ -364,7 +358,6 @@ export interface UserPreferences {
   };
   
   // 语言偏好
-  language: Language;
   
   // 元数据
   version: string;

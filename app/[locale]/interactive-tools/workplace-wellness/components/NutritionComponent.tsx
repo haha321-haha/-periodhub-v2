@@ -7,17 +7,19 @@
 
 import { useState, useMemo } from 'react';
 import { Search, Plus, ListChecks } from 'lucide-react';
-import { useNutrition, useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction, getNutritionData } from '../data';
+import { useNutrition, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
+import { useLocale } from 'next-intl';
+import { getNutritionData } from '../data';
+import { useTranslations } from 'next-intl';
 import { NutritionRecommendation } from '../types';
 
 export default function NutritionComponent() {
   const nutrition = useNutrition();
-  const lang = useLanguage();
+  const locale = useLocale();
   const { updateNutrition } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(lang);
+  const t = useTranslations('workplaceWellness');
 
-  const nutritionData = getNutritionData(lang);
+  const nutritionData = getNutritionData();
   const [searchTerm, setSearchTerm] = useState('');
   const [mealPlan, setMealPlan] = useState<NutritionRecommendation[]>([]);
 

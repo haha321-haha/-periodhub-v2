@@ -7,15 +7,17 @@
 
 import { useState } from 'react';
 import { Calendar, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useCalendar, useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
-import { createTranslationFunction, getPeriodData } from '../data';
+import { useCalendar, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
+import { useLocale } from 'next-intl';
+import { getPeriodData } from '../data';
+import { useTranslations } from 'next-intl';
 import { PeriodRecord } from '../types';
 
 export default function CalendarComponent() {
   const calendar = useCalendar();
-  const lang = useLanguage();
+  const locale = useLocale();
   const { updateCalendar, setCurrentDate } = useWorkplaceWellnessActions();
-  const t = createTranslationFunction(lang);
+  const t = useTranslations('workplaceWellness');
   
   const periodData = getPeriodData();
   const [showAddForm, setShowAddForm] = useState(false);
@@ -28,7 +30,7 @@ export default function CalendarComponent() {
   
   const year = validCurrentDate.getFullYear();
   const month = validCurrentDate.getMonth();
-  const monthName = validCurrentDate.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+  const monthName = validCurrentDate.toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
     month: 'long',
     year: 'numeric'
   });
@@ -67,7 +69,7 @@ export default function CalendarComponent() {
   // 获取预测日期 - 基于HVsLYEp的逻辑
   const predictedDateEntry = periodData.find(d => d.type === 'predicted');
   const formattedPredictedDate = predictedDateEntry 
-    ? new Date(predictedDateEntry.date).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
+    ? new Date(predictedDateEntry.date).toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
         month: 'short',
         day: 'numeric'
       })
@@ -129,9 +131,9 @@ export default function CalendarComponent() {
 
       {/* 星期标题 - 基于HVsLYEp的星期显示 */}
       <div className="grid grid-cols-7 gap-1 mb-2">
-        {(t('calendar.days') as unknown as string[]).map((day: string, index: number) => (
+        {['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'].map((dayKey: string, index: number) => (
           <div key={index} className="h-10 flex items-center justify-center text-sm font-medium text-neutral-600">
-            {day}
+            {t(`calendar.days.${dayKey}`)}
           </div>
         ))}
       </div>

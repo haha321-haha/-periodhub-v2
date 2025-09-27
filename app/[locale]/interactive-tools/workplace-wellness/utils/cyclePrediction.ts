@@ -3,8 +3,7 @@
  * 基于HVsLYEp的周期计算逻辑进行增强
  */
 
-import { PeriodRecord, MenstrualPhase, Language } from '../types';
-import { createTranslationFunction } from '../data';
+import { PeriodRecord, MenstrualPhase } from '../types';
 
 export interface CycleAnalysis {
   averageCycleLength: number;
@@ -28,12 +27,10 @@ export interface CycleStatistics {
 }
 
 export class CyclePredictor {
-  private t: (key: string) => string;
-  private lang: Language;
+  private locale: string;
 
-  constructor(lang: Language) {
-    this.lang = lang;
-    this.t = createTranslationFunction(lang);
+  constructor(locale: string) {
+    this.locale = locale;
   }
 
   /**

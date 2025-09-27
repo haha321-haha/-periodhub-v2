@@ -27,36 +27,36 @@ export const mockNutritionData = {
     { 
       name: '红枣', 
       benefits: ['补气养血', '缓解疼痛', '改善贫血'], 
-      phase: 'menstrual', 
-      tcmNature: 'warm', 
+      phase: 'menstrual' as MenstrualPhase, 
+      tcmNature: 'warm' as TCMNature, 
       nutrients: ['铁', '维生素C', '叶酸'] 
     },
     { 
       name: '桂圆', 
       benefits: ['补血安神', '缓解疲劳', '镇静神经'], 
-      phase: 'menstrual', 
-      tcmNature: 'warm', 
+      phase: 'menstrual' as MenstrualPhase, 
+      tcmNature: 'warm' as TCMNature, 
       nutrients: ['铁', '蛋白质', '葡萄糖'] 
     },
     { 
       name: '黑豆', 
       benefits: ['补肾益精', '调节激素', '抗氧化'], 
-      phase: 'follicular', 
-      tcmNature: 'neutral', 
+      phase: 'follicular' as MenstrualPhase, 
+      tcmNature: 'neutral' as TCMNature, 
       nutrients: ['蛋白质', '异黄酮', '维生素E'] 
     },
     { 
       name: '红枣', 
       benefits: ['补中益气', '改善循环', '增强免疫力'], 
-      phase: 'luteal', 
-      tcmNature: 'warm', 
+      phase: 'luteal' as MenstrualPhase, 
+      tcmNature: 'warm' as TCMNature, 
       nutrients: ['铁', '维生素C', '钾'] 
     },
     { 
       name: '枸杞', 
       benefits: ['滋补肝肾', '明目护眼', '抗衰老'], 
-      phase: 'ovulation', 
-      tcmNature: 'neutral', 
+      phase: 'ovulation' as MenstrualPhase, 
+      tcmNature: 'neutral' as TCMNature, 
       nutrients: ['β-胡萝卜素', '玉米黄质', '多糖'] 
     }
   ],
@@ -64,36 +64,36 @@ export const mockNutritionData = {
     { 
       name: 'Jujube', 
       benefits: ['Replenish Qi & Blood', 'Relieve Pain', 'Improve Anemia'], 
-      phase: 'menstrual', 
-      tcmNature: 'warm', 
+      phase: 'menstrual' as MenstrualPhase, 
+      tcmNature: 'warm' as TCMNature, 
       nutrients: ['Iron', 'Vitamin C', 'Folic Acid'] 
     },
     { 
       name: 'Longan', 
       benefits: ['Nourish Blood', 'Calm Nerves', 'Relieve Fatigue'], 
-      phase: 'menstrual', 
-      tcmNature: 'warm', 
+      phase: 'menstrual' as MenstrualPhase, 
+      tcmNature: 'warm' as TCMNature, 
       nutrients: ['Iron', 'Protein', 'Glucose'] 
     },
     { 
       name: 'Black Beans', 
       benefits: ['Tonify Kidneys', 'Regulate Hormones', 'Antioxidant'], 
-      phase: 'follicular', 
-      tcmNature: 'neutral', 
+      phase: 'follicular' as MenstrualPhase, 
+      tcmNature: 'neutral' as TCMNature, 
       nutrients: ['Protein', 'Isoflavones', 'Vitamin E'] 
     },
     { 
       name: 'Red Dates', 
       benefits: ['Boost Energy', 'Improve Circulation', 'Support Immunity'], 
-      phase: 'luteal', 
-      tcmNature: 'warm', 
+      phase: 'luteal' as MenstrualPhase, 
+      tcmNature: 'warm' as TCMNature, 
       nutrients: ['Iron', 'Vitamin C', 'Potassium'] 
     },
     { 
       name: 'Goji Berries', 
       benefits: ['Nourish Liver', 'Improve Vision', 'Anti-aging'], 
-      phase: 'ovulation', 
-      tcmNature: 'neutral', 
+      phase: 'ovulation' as MenstrualPhase, 
+      tcmNature: 'neutral' as TCMNature, 
       nutrients: ['Beta-carotene', 'Zeaxanthin', 'Polysaccharides'] 
     }
   ]
@@ -105,28 +105,28 @@ export const leaveTemplates = {
     { 
       id: 1, 
       title: '轻度不适请假模板', 
-      severity: 'mild', 
+      severity: 'mild' as SeverityLevel, 
       subject: '因身体不适申请请假', 
       content: '您好，由于身体不适，我需要请半天假。我会确保工作得到妥善处理。如有紧急事务请与我联系。谢谢您的理解。' 
     },
     { 
       id: 2, 
       title: '中度疼痛请假模板', 
-      severity: 'moderate', 
+      severity: 'moderate' as SeverityLevel, 
       subject: '因健康原因申请请假', 
       content: '您好，由于健康原因，我需要请1天假休息恢复。我已经安排了工作交接。紧急事务可以通过邮件处理。谢谢您的理解和支持。' 
     },
     { 
       id: 3, 
       title: '居家办公申请模板', 
-      severity: 'moderate', 
+      severity: 'moderate' as SeverityLevel, 
       subject: '申请居家办公', 
       content: '您好，由于健康原因，我希望今天能够居家办公。我会保持正常的工作时间和沟通，确保工作不受影响。谢谢您的考虑。' 
     },
     { 
       id: 4, 
       title: '严重疼痛紧急请假', 
-      severity: 'severe', 
+      severity: 'severe' as SeverityLevel, 
       subject: '紧急请假申请', 
       content: '您好，由于严重的健康问题，我需要紧急请假。我会立即安排工作交接，重要事务可以通过电话联系我。感谢您在这个困难时期的理解。' 
     }
@@ -135,28 +135,28 @@ export const leaveTemplates = {
     { 
       id: 1, 
       title: 'Template for Mild Discomfort', 
-      severity: 'mild', 
+      severity: 'mild' as SeverityLevel, 
       subject: 'Leave Request for Physical Discomfort', 
       content: 'Hello, I need to take a half-day leave due to physical discomfort. I will ensure my work is handled properly. Please contact me for urgent matters. Thank you for your understanding.' 
     },
     { 
       id: 2, 
       title: 'Template for Moderate Pain', 
-      severity: 'moderate', 
+      severity: 'moderate' as SeverityLevel, 
       subject: 'Leave Request for Health Reasons', 
       content: 'Hello, I need to take a 1-day leave for rest and recovery due to health reasons. I have arranged for the handover of my work. Urgent matters can be addressed via email. Thank you for your understanding and support.' 
     },
     { 
       id: 3, 
       title: 'Work From Home Request Template', 
-      severity: 'moderate', 
+      severity: 'moderate' as SeverityLevel, 
       subject: 'Request to Work From Home', 
       content: 'Hello, due to health reasons, I would like to request to work from home today. I will maintain my normal working hours and communication to ensure my work is not affected. Thank you for your consideration.' 
     },
     { 
       id: 4, 
       title: 'Severe Pain Emergency Leave', 
-      severity: 'severe', 
+      severity: 'severe' as SeverityLevel, 
       subject: 'Emergency Leave Request', 
       content: 'Hello, I need to take an emergency leave due to severe health issues. I will arrange for immediate work handover and will be available for critical matters via phone. Thank you for your understanding during this difficult time.' 
     }
@@ -200,12 +200,12 @@ export function checkDataIntegrity() {
   }
   
   // 检查营养数据
-  if (!mockNutritionData || mockNutritionData.length === 0) {
+  if (!mockNutritionData || (!mockNutritionData.zh || mockNutritionData.zh.length === 0)) {
     issues.push('No nutrition data available');
   }
   
   // 检查请假模板
-  if (!leaveTemplates || leaveTemplates.length === 0) {
+  if (!leaveTemplates || (!leaveTemplates.zh || leaveTemplates.zh.length === 0)) {
     issues.push('No leave templates available');
   }
   

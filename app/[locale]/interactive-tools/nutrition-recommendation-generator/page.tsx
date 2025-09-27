@@ -72,8 +72,85 @@ export default async function NutritionRecommendationGeneratorPage({
         <NutritionGenerator />
       </div>
 
-      {/* 页面底部 */}
+      {/* 相关工具推荐 */}
       <div className="bg-white border-t mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center border-b-2 border-red-500 pb-2">
+            {isZh ? '相关工具' : 'Related Tools'}
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* 智能周期追踪器 */}
+            <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {isZh ? '智能周期追踪器' : 'Smart Cycle Tracker'}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-3">
+                    {isZh 
+                      ? '智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律'
+                      : 'Intelligently track your menstrual cycle, predict next period, record symptom changes, helping you better understand your body patterns'
+                    }
+                  </p>
+                  <a 
+                    href={`/${locale}/interactive-tools/cycle-tracker`}
+                    className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
+                  >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                    </svg>
+                    {isZh ? '开始周期追踪 >' : 'Start Cycle Tracking >'}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* 中医体质测试 */}
+            <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+              <div className="flex items-start space-x-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    {isZh ? '中医体质测试' : 'TCM Constitution Test'}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-3">
+                    {isZh 
+                      ? '通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议'
+                      : 'Understand your TCM constitution type through 8 questions and get personalized acupuncture points, diet and lifestyle recommendations'
+                    }
+                  </p>
+                  <a 
+                    href={`/${locale}/interactive-tools/constitution-test`}
+                    className="inline-flex items-center text-green-600 hover:text-green-800 font-medium text-sm"
+                  >
+                    <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {isZh ? '开始体质测试 >' : 'Start Constitution Test >'}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 页面底部 */}
+      <div className="bg-gray-50 border-t">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-500">
             <p className="text-sm">

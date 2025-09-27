@@ -6441,7 +6441,13 @@
       },
       "generateButton": "Generate Shopping List",
       "selectedFoods": "Selected Foods",
-      "planGenerated": "Meal plan generated successfully!"
+      "planGenerated": "Meal plan generated successfully!",
+      "mealSuggestions": {
+        "breakfast": "Add some nutritious breakfast items to start your day",
+        "lunch": "Include balanced lunch options for sustained energy",
+        "dinner": "Choose light dinner options for better digestion",
+        "snack": "Select healthy snacks for between meals"
+      }
     },
     "export": {
       "title": "Data Export & Management",
@@ -6480,7 +6486,9 @@
         "light": "Light",
         "medium": "Medium",
         "heavy": "Heavy"
-      }
+      },
+      "showSettings": "Show Settings",
+      "securityWarnings": "Security Warnings"
     },
     "charts": {
       "title": "Cycle Statistics & Analysis",

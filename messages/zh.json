@@ -6300,7 +6300,13 @@
       },
       "generateButton": "生成购物清单",
       "selectedFoods": "已选食物",
-      "planGenerated": "膳食计划生成成功！"
+      "planGenerated": "膳食计划生成成功！",
+      "mealSuggestions": {
+        "breakfast": "添加一些营养早餐来开启新的一天",
+        "lunch": "包含均衡的午餐选项以保持持续能量",
+        "dinner": "选择清淡的晚餐选项以促进消化",
+        "snack": "选择健康的餐间零食"
+      }
     },
     "export": {
       "title": "数据导出与管理",
@@ -6339,7 +6345,9 @@
         "light": "少量",
         "medium": "中等",
         "heavy": "大量"
-      }
+      },
+      "showSettings": "显示设置",
+      "securityWarnings": "安全警告"
     },
     "charts": {
       "title": "周期统计与分析",

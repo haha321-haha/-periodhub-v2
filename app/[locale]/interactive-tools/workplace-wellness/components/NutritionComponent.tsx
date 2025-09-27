@@ -19,7 +19,7 @@ export default function NutritionComponent() {
   const { updateNutrition } = useWorkplaceWellnessActions();
   const t = useTranslations('workplaceWellness');
 
-  const nutritionData = getNutritionData();
+  const nutritionData = getNutritionData(locale);
   const [searchTerm, setSearchTerm] = useState('');
   const [mealPlan, setMealPlan] = useState<NutritionRecommendation[]>([]);
 

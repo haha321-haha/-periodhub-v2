@@ -19,7 +19,7 @@ export default function WorkImpactComponent() {
   const { updateWorkImpact, selectTemplate } = useWorkplaceWellnessActions();
   const t = useTranslations('workplaceWellness');
 
-  const templates = getLeaveTemplates();
+  const templates = getLeaveTemplates(locale);
   const [selectedTemplate, setSelectedTemplate] = useState<LeaveTemplate | null>(null);
 
   // 基于HVsLYEp的getBadgeVariant函数

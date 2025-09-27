@@ -21,8 +21,46 @@ export const mockPeriodData: PeriodRecord[] = [
   { date: '2025-10-12', type: 'predicted', painLevel: null, flow: null },
 ];
 
-// 营养数据 - 基于HVsLYEp的mockNutritionData结构
-export const mockNutritionData: NutritionRecommendation[] = [
+// 营养数据 - 基于HVsLYEp的mockNutritionData结构，支持多语言
+export const mockNutritionData = {
+  zh: [
+    { 
+      name: '红枣', 
+      benefits: ['补气养血', '缓解疼痛', '改善贫血'], 
+      phase: 'menstrual', 
+      tcmNature: 'warm', 
+      nutrients: ['铁', '维生素C', '叶酸'] 
+    },
+    { 
+      name: '桂圆', 
+      benefits: ['补血安神', '缓解疲劳', '镇静神经'], 
+      phase: 'menstrual', 
+      tcmNature: 'warm', 
+      nutrients: ['铁', '蛋白质', '葡萄糖'] 
+    },
+    { 
+      name: '黑豆', 
+      benefits: ['补肾益精', '调节激素', '抗氧化'], 
+      phase: 'follicular', 
+      tcmNature: 'neutral', 
+      nutrients: ['蛋白质', '异黄酮', '维生素E'] 
+    },
+    { 
+      name: '红枣', 
+      benefits: ['补中益气', '改善循环', '增强免疫力'], 
+      phase: 'luteal', 
+      tcmNature: 'warm', 
+      nutrients: ['铁', '维生素C', '钾'] 
+    },
+    { 
+      name: '枸杞', 
+      benefits: ['滋补肝肾', '明目护眼', '抗衰老'], 
+      phase: 'ovulation', 
+      tcmNature: 'neutral', 
+      nutrients: ['β-胡萝卜素', '玉米黄质', '多糖'] 
+    }
+  ],
+  en: [
     { 
       name: 'Jujube', 
       benefits: ['Replenish Qi & Blood', 'Relieve Pain', 'Improve Anemia'], 
@@ -58,10 +96,42 @@ export const mockNutritionData: NutritionRecommendation[] = [
       tcmNature: 'neutral', 
       nutrients: ['Beta-carotene', 'Zeaxanthin', 'Polysaccharides'] 
     }
-];
+  ]
+};
 
-// 请假模板 - 基于HVsLYEp的leaveTemplates结构
-export const leaveTemplates: LeaveTemplate[] = [
+// 请假模板 - 基于HVsLYEp的leaveTemplates结构，支持多语言
+export const leaveTemplates = {
+  zh: [
+    { 
+      id: 1, 
+      title: '轻度不适请假模板', 
+      severity: 'mild', 
+      subject: '因身体不适申请请假', 
+      content: '您好，由于身体不适，我需要请半天假。我会确保工作得到妥善处理。如有紧急事务请与我联系。谢谢您的理解。' 
+    },
+    { 
+      id: 2, 
+      title: '中度疼痛请假模板', 
+      severity: 'moderate', 
+      subject: '因健康原因申请请假', 
+      content: '您好，由于健康原因，我需要请1天假休息恢复。我已经安排了工作交接。紧急事务可以通过邮件处理。谢谢您的理解和支持。' 
+    },
+    { 
+      id: 3, 
+      title: '居家办公申请模板', 
+      severity: 'moderate', 
+      subject: '申请居家办公', 
+      content: '您好，由于健康原因，我希望今天能够居家办公。我会保持正常的工作时间和沟通，确保工作不受影响。谢谢您的考虑。' 
+    },
+    { 
+      id: 4, 
+      title: '严重疼痛紧急请假', 
+      severity: 'severe', 
+      subject: '紧急请假申请', 
+      content: '您好，由于严重的健康问题，我需要紧急请假。我会立即安排工作交接，重要事务可以通过电话联系我。感谢您在这个困难时期的理解。' 
+    }
+  ],
+  en: [
     { 
       id: 1, 
       title: 'Template for Mild Discomfort', 
@@ -90,7 +160,8 @@ export const leaveTemplates: LeaveTemplate[] = [
       subject: 'Emergency Leave Request', 
       content: 'Hello, I need to take an emergency leave due to severe health issues. I will arrange for immediate work handover and will be available for critical matters via phone. Thank you for your understanding during this difficult time.' 
     }
-];
+  ]
+};
 
 
 // 数据获取函数
@@ -98,12 +169,12 @@ export function getPeriodData(): PeriodRecord[] {
   return mockPeriodData;
 }
 
-export function getNutritionData(): NutritionRecommendation[] {
-  return mockNutritionData;
+export function getNutritionData(locale: string = 'en'): NutritionRecommendation[] {
+  return mockNutritionData[locale as keyof typeof mockNutritionData] || mockNutritionData.en;
 }
 
-export function getLeaveTemplates(): LeaveTemplate[] {
-  return leaveTemplates;
+export function getLeaveTemplates(locale: string = 'en'): LeaveTemplate[] {
+  return leaveTemplates[locale as keyof typeof leaveTemplates] || leaveTemplates.en;
 }
 
 // 数据验证函数 - 基于HVsLYEp的数据结构

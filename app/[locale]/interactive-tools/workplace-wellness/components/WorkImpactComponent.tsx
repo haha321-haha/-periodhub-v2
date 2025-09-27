@@ -137,12 +137,12 @@ export default function WorkImpactComponent() {
               {t('workImpact.adjustment')}
             </label>
             <div className="grid grid-cols-2 gap-2">
-              {(t('workImpact.adjustOptions') as unknown as string[]).map((option: string, index: number) => (
+              {['takeLeave', 'workFromHome', 'postponeMeeting', 'reduceTasks'].map((optionKey: string, index: number) => (
                 <button 
                   key={index}
                   className="rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-3 py-1.5 text-sm border border-neutral-300 hover:bg-neutral-50 text-neutral-800"
                 >
-                  {option}
+                  {t(`workImpact.adjustOptions.${optionKey}`)}
                 </button>
               ))}
             </div>

@@ -6239,7 +6239,12 @@
       "painLevel": "疼痛程度 (1-10)",
       "efficiency": "工作效率 (%)",
       "adjustment": "今日工作调整",
-      "adjustOptions": ["请假", "居家办公", "推迟会议", "减少任务"],
+      "adjustOptions": {
+        "takeLeave": "请假",
+        "workFromHome": "居家办公",
+        "postponeMeeting": "推迟会议",
+        "reduceTasks": "减少任务"
+      },
       "saveButton": "保存记录",
       "templatesTitle": "请假申请模板",
       "severity": {

@@ -6380,7 +6380,12 @@
       "painLevel": "Pain Level (1-10)",
       "efficiency": "Work Efficiency (%)",
       "adjustment": "Today's Work Adjustment",
-      "adjustOptions": ["Take Leave", "Work From Home", "Postpone Meeting", "Reduce Tasks"],
+      "adjustOptions": {
+        "takeLeave": "Take Leave",
+        "workFromHome": "Work From Home",
+        "postponeMeeting": "Postpone Meeting",
+        "reduceTasks": "Reduce Tasks"
+      },
       "saveButton": "Save Record",
       "templatesTitle": "Leave Request Templates",
       "severity": {

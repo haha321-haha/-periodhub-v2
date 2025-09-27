@@ -10,12 +10,12 @@ import { titleManager } from '@/utils/unifiedTitleManager';
 // 完全硬编码的文本内容
 const TEXTS = {
   zh: {
-    metaTitle: '痛经影响算法 - 症状评估与职场分析完整解决方案 | 专业经期疼痛测试工具与个性化建议系统，科学评估痛经严重程度及工作影响，提供精准医疗建议和生活方式指导 | PeriodHub',
-    pageTitle: '痛经影响算法 - 症状评估与职场分析完整解决方案',
+    metaTitle: '工作影响计算器 - 症状评估与职场分析完整解决方案 | 专业经期疼痛测试工具与个性化建议系统，科学评估痛经严重程度及工作影响，提供精准医疗建议和生活方式指导 | PeriodHub',
+    pageTitle: '工作影响计算器 - 症状评估与职场分析完整解决方案',
     subtitle: '专业经期疼痛测试工具与个性化建议系统，科学评估痛经严重程度及工作影响，提供精准医疗建议和生活方式指导',
     breadcrumbHome: '首页',
     breadcrumbTools: '互动工具',
-    breadcrumbCurrent: '痛经影响算法',
+    breadcrumbCurrent: '工作影响计算器',
     modeTitle: '选择评估模式',
     simplifiedMode: '简化版',
     simplifiedDesc: '快速评估，适合一般用户',
@@ -29,13 +29,13 @@ const TEXTS = {
     disclaimer: '此工具不是医疗诊断。如有健康问题，请咨询医生。'
   },
   en: {
-    metaTitle: 'Period Pain Impact Calculator - Comprehensive Symptom Assessment & Workplace Analysis Solution | Professional Dysmenorrhea Evaluation Tool with Personalized Medical Recommendations, Scientific Severity Analysis and Lifestyle Guidance | PeriodHub',
-    pageTitle: 'Period Pain Impact Calculator - Comprehensive Symptom Assessment & Workplace Analysis Solution',
+    metaTitle: 'Work Impact Calculator - Comprehensive Symptom Assessment & Workplace Analysis Solution | Professional Dysmenorrhea Evaluation Tool with Personalized Medical Recommendations, Scientific Severity Analysis and Lifestyle Guidance | PeriodHub',
+    pageTitle: 'Work Impact Calculator - Comprehensive Symptom Assessment & Workplace Analysis Solution',
     subtitle: 'Professional Dysmenorrhea Evaluation Tool with Personalized Medical Recommendations, Scientific Severity Analysis and Lifestyle Guidance',
     description: 'Scientifically assess how menstrual pain affects your life and work',
     breadcrumbHome: 'Home',
     breadcrumbTools: 'Interactive Tools', 
-    breadcrumbCurrent: 'Period Pain Impact Calculator',
+    breadcrumbCurrent: 'Work Impact Calculator',
     modeTitle: 'Choose Assessment Mode',
     simplifiedMode: 'Simplified Version',
     simplifiedDesc: 'Quick assessment, suitable for general users',

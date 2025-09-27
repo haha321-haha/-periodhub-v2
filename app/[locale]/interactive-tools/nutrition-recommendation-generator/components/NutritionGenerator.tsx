@@ -186,10 +186,6 @@ export default function NutritionGenerator() {
         </section>
       </main>
 
-      {/* 底部 - 基于ziV1d3d的footer */}
-                 <footer className="text-center mt-16 text-neutral-600 text-sm">
-                   <p id="footer-text">{getUIContent('footerText', locale)}</p>
-                 </footer>
 
       {/* 错误提示 */}
       {error && (

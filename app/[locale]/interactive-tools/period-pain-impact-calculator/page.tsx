@@ -10,7 +10,7 @@ import { titleManager } from '@/utils/unifiedTitleManager';
 // 完全硬编码的文本内容
 const TEXTS = {
   zh: {
-    metaTitle: '工作影响计算器 - 症状评估与职场分析完整解决方案 | 专业经期疼痛测试工具与个性化建议系统，科学评估痛经严重程度及工作影响，提供精准医疗建议和生活方式指导 | PeriodHub',
+    metaTitle: '工作影响计算器 - 痛经症状评估与职场影响分析工具 | PeriodHub',
     pageTitle: '工作影响计算器 - 症状评估与职场分析完整解决方案',
     subtitle: '专业经期疼痛测试工具与个性化建议系统，科学评估痛经严重程度及工作影响，提供精准医疗建议和生活方式指导',
     breadcrumbHome: '首页',
@@ -29,7 +29,7 @@ const TEXTS = {
     disclaimer: '此工具不是医疗诊断。如有健康问题，请咨询医生。'
   },
   en: {
-    metaTitle: 'Work Impact Calculator - Comprehensive Symptom Assessment & Workplace Analysis Solution | Professional Dysmenorrhea Evaluation Tool with Personalized Medical Recommendations, Scientific Severity Analysis and Lifestyle Guidance | PeriodHub',
+    metaTitle: 'Work Impact Calculator - Menstrual Pain Assessment & Workplace Analysis | PeriodHub',
     pageTitle: 'Work Impact Calculator - Comprehensive Symptom Assessment & Workplace Analysis Solution',
     subtitle: 'Professional Dysmenorrhea Evaluation Tool with Personalized Medical Recommendations, Scientific Severity Analysis and Lifestyle Guidance',
     description: 'Scientifically assess how menstrual pain affects your life and work',

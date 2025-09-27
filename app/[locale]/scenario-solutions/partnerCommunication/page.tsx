@@ -29,11 +29,15 @@ export async function generateMetadata({ params }: PartnerHandbookPageProps): Pr
     title: currentMetadata.title,
     description: currentMetadata.description,
     keywords: currentMetadata.keywords,
+    other: {
+      'http-equiv': 'content-language',
+      content: locale === 'zh' ? 'zh-CN' : 'en-US',
+    },
     openGraph: {
       title: currentMetadata.title,
       description: currentMetadata.description,
       type: 'website',
-      locale: locale,
+      locale: locale === 'zh' ? 'zh_CN' : 'en_US',
       siteName: 'Period Hub',
     },
     twitter: {

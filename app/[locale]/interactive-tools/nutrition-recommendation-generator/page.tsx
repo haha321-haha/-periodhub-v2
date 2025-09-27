@@ -25,6 +25,10 @@ export async function generateMetadata({
     title,
     description,
     keywords: 'nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women\'s health nutrition,period nutrition management',
+    other: {
+      'http-equiv': 'content-language',
+      content: isZh ? 'zh-CN' : 'en-US',
+    },
     openGraph: {
       title,
       description,

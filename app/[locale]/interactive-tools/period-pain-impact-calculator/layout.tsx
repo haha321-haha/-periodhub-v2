@@ -10,12 +10,12 @@ export async function generateMetadata({
   const isZh = locale === 'zh';
 
   const title = isZh 
-    ? '工作影响计算器 - 症状评估与职场分析完整解决方案 | 专业经期疼痛测试工具与个性化建议系统，科学评估痛经严重程度及工作影响，提供精准医疗建议和生活方式指导'
-    : 'Work Impact Calculator - Comprehensive Symptom Assessment & Workplace Analysis Solution | Professional Dysmenorrhea Evaluation Tool with Personalized Medical Recommendations, Scientific Severity Analysis and Lifestyle Guidance';
+    ? '工作影响计算器 - 痛经症状评估与职场影响分析工具 | PeriodHub'
+    : 'Work Impact Calculator - Menstrual Pain Assessment & Workplace Analysis | PeriodHub';
 
   const description = isZh
-    ? '科学评估月经疼痛对您生活和工作的影响程度'
-    : 'Scientifically assess how menstrual pain affects your life and work';
+    ? '专业痛经评估工具，科学分析经期疼痛严重程度及对工作生活的影响，提供个性化医疗建议和生活方式指导。'
+    : 'Professional menstrual pain assessment tool that scientifically evaluates pain severity and its impact on work and daily life, providing personalized medical recommendations and lifestyle guidance.';
 
   return {
     title,

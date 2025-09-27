@@ -53,6 +53,16 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
 
           {/* 症状评估工具 */}
           <SymptomAssessmentTool locale={locale} mode={mode} />
+
+          {/* 返回按钮 - 页面底部 */}
+          <div className="mt-8 flex justify-center">
+            <Link 
+              href={`/${locale}/interactive-tools/period-pain-impact-calculator`}
+              className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium rounded-lg border border-gray-300 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300"
+            >
+              ← {locale === 'zh' ? '返回' : 'Back'}
+            </Link>
+          </div>
         </div>
       </div>
     </div>

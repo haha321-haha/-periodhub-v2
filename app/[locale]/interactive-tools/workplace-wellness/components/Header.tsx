@@ -6,12 +6,11 @@
 'use client';
 
 import { Heart } from 'lucide-react';
-import { useWorkplaceWellnessActions, useLanguage } from '../hooks/useWorkplaceWellnessStore';
+import { useLanguage } from '../hooks/useWorkplaceWellnessStore';
 import { createTranslationFunction } from '../data';
 
 export default function Header() {
   const lang = useLanguage();
-  const { toggleLanguage } = useWorkplaceWellnessActions();
   const t = createTranslationFunction(lang);
 
   return (
@@ -33,14 +32,6 @@ export default function Header() {
           
           {/* 右侧操作区域 */}
           <div className="flex items-center gap-3">
-            {/* 语言切换按钮 */}
-            <button 
-              onClick={toggleLanguage}
-              className="px-3 py-1.5 text-sm rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 hover:bg-neutral-100 text-neutral-800"
-            >
-              {t('lang_name')}
-            </button>
-            
             {/* 用户头像 */}
             <div className="w-8 h-8 bg-secondary-500/20 rounded-full flex items-center justify-center">
               <span className="text-sm font-medium text-secondary-700">L</span>

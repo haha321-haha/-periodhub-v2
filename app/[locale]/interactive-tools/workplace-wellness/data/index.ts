@@ -170,7 +170,7 @@ export const translations: Record<Language, any> = {
     lang_name: "中文",
     lang_id: "zh",
     header: {
-      title: "Period Hub",
+      title: "职场健康日历",
       subtitle: "Workplace Wellness Tool",
       settings: "Settings"
     },
@@ -494,7 +494,7 @@ export const translations: Record<Language, any> = {
     lang_name: "English",
     lang_id: "en",
     header: {
-      title: "Period Hub",
+      title: "职场健康日历",
       subtitle: "职场健康助手",
       settings: "设置"
     },

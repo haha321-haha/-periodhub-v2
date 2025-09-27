@@ -128,17 +128,67 @@ export const useAssessmentHistory = () => {
       })),
     };
 
-    const newHistory = [...history, historyEntry];
-    setHistory(newHistory);
-    calculateTrends(newHistory);
+    setHistory(prevHistory => {
+      const newHistory = [...prevHistory, historyEntry];
+      
+      // Calculate trends with new history
+      if (newHistory.length === 0) {
+        setTrends(null);
+      } else {
+        const totalAssessments = newHistory.length;
+        const averageScore = newHistory.reduce((sum, entry) => sum + entry.percentage, 0) / totalAssessments;
+        
+        // Calculate score trend (comparing last 3 vs previous 3)
+        let scoreTrend: 'improving' | 'stable' | 'declining' = 'stable';
+        if (totalAssessments >= 6) {
+          const recent = newHistory.slice(-3).reduce((sum, entry) => sum + entry.percentage, 0) / 3;
+          const previous = newHistory.slice(-6, -3).reduce((sum, entry) => sum + entry.percentage, 0) / 3;
+          const difference = recent - previous;
+          
+          if (difference > 5) scoreTrend = 'improving';
+          else if (difference < -5) scoreTrend = 'declining';
+        }
 
-    // Save to localStorage
-    try {
-      localStorage.setItem('assessmentHistory', JSON.stringify(newHistory));
-    } catch (error) {
-      console.error('Error saving assessment history:', error);
-    }
-  }, [history, calculateTrends]);
+        // Find most common severity
+        const severityCounts = newHistory.reduce((counts, entry) => {
+          counts[entry.severity] = (counts[entry.severity] || 0) + 1;
+          return counts;
+        }, {} as Record<string, number>);
+        
+        const mostCommonSeverity = Object.entries(severityCounts)
+          .sort(([,a], [,b]) => b - a)[0]?.[0] as 'mild' | 'moderate' | 'severe' | 'emergency' || 'mild';
+
+        // Calculate assessment frequency
+        const lastAssessmentDate = newHistory[newHistory.length - 1]?.completedAt || '';
+        const now = new Date();
+        const lastDate = new Date(lastAssessmentDate);
+        const daysSinceLast = Math.floor((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+        
+        let assessmentFrequency: 'daily' | 'weekly' | 'monthly' | 'irregular' = 'irregular';
+        if (daysSinceLast <= 1) assessmentFrequency = 'daily';
+        else if (daysSinceLast <= 7) assessmentFrequency = 'weekly';
+        else if (daysSinceLast <= 30) assessmentFrequency = 'monthly';
+
+        setTrends({
+          totalAssessments,
+          averageScore: Math.round(averageScore),
+          scoreTrend,
+          mostCommonSeverity,
+          lastAssessmentDate,
+          assessmentFrequency,
+        });
+      }
+
+      // Save to localStorage
+      try {
+        localStorage.setItem('assessmentHistory', JSON.stringify(newHistory));
+      } catch (error) {
+        console.error('Error saving assessment history:', error);
+      }
+
+      return newHistory;
+    });
+  }, []);
 
   // Get recent assessments
   const getRecentAssessments = useCallback((limit: number = 5) => {

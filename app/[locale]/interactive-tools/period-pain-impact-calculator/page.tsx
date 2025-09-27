@@ -25,6 +25,7 @@ const TEXTS = {
     medicalDesc: '专业评估，包含临床指导',
     startButton: '开始评估',
     impactButton: '职场影响分析',
+    backButton: '返回',
     disclaimer: '此工具不是医疗诊断。如有健康问题，请咨询医生。'
   },
   en: {
@@ -44,6 +45,7 @@ const TEXTS = {
     medicalDesc: 'Professional assessment, includes clinical guidance',
     startButton: 'Start Assessment',
     impactButton: 'Workplace Impact Analysis',
+    backButton: 'Back',
     disclaimer: 'This tool is not a medical diagnosis. Consult a doctor for any health concerns.'
   }
 };
@@ -103,6 +105,13 @@ export default function PeriodPainImpactCalculatorPage({
     
     // 跳转到职场健康页面
     router.push(`/${currentLocale}/interactive-tools/workplace-wellness`);
+  };
+
+  const handleBack = () => {
+    console.log('返回互动工具页面');
+    
+    // 返回到互动工具页面
+    router.push(`/${currentLocale}/interactive-tools`);
   };
 
   return (
@@ -218,6 +227,16 @@ export default function PeriodPainImpactCalculatorPage({
               {t.impactButton}
                   </button>
                 </div>
+
+          {/* 返回按钮 */}
+          <div className="mt-8 flex justify-center">
+            <button 
+              onClick={handleBack}
+              className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium rounded-lg border border-gray-300 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300"
+            >
+              ← {t.backButton}
+            </button>
+          </div>
               </div>
 
         {/* 免责声明 - 正确的语言版本 */}

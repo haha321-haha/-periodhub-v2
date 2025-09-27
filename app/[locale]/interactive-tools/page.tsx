@@ -58,7 +58,34 @@ export default async function InteractiveToolsPage({
   const t = await getTranslations({ locale, namespace: 'interactiveToolsPage' });
   const commonT = await getTranslations({ locale, namespace: 'common' });
 
-  const tools = [
+  // 职场健康专栏工具
+  const workplaceTools = [
+    {
+      title: locale === 'zh' ? '职场健康日历' : 'Workplace Wellness Calendar',
+      description: locale === 'zh' 
+        ? '专业的职场健康管理工具，帮助您追踪经期对工作的影响，提供个性化的工作调整建议和健康管理方案。'
+        : 'Professional workplace wellness management tool to track menstrual impact on work and provide personalized work adjustment recommendations.',
+      href: `/${locale}/interactive-tools/workplace-wellness`,
+      iconType: 'BarChart3',
+      iconColor: 'text-blue-600',
+      cta: locale === 'zh' ? '开始健康管理' : 'Start Wellness Management',
+      isPrimary: true,
+    },
+    {
+      title: locale === 'zh' ? '工作影响计算器' : 'Work Impact Calculator',
+      description: locale === 'zh' 
+        ? '专业的痛经影响评估工具，分析症状对工作和生活的影响程度，提供个性化的管理建议和职场适应策略。'
+        : 'Professional period pain impact assessment tool that analyzes how symptoms affect work and daily life, providing personalized management recommendations and workplace adaptation strategies.',
+      href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
+      iconType: 'Search',
+      iconColor: 'text-purple-600',
+      cta: locale === 'zh' ? '开始评估' : 'Start Assessment',
+      isPrimary: false,
+    }
+  ];
+
+  // 常规工具
+  const regularTools = [
     {
       title: t('periodPainAssessment.title'),
       description: t('periodPainAssessment.description'),
@@ -109,17 +136,6 @@ export default async function InteractiveToolsPage({
       iconColor: 'text-orange-600',
       cta: locale === 'zh' ? '开始营养分析' : 'Start Nutrition Analysis',
       requiresPrerequisites: true,
-    },
-    {
-      title: locale === 'zh' ? '职场健康助手' : 'Workplace Wellness Assistant',
-      description: locale === 'zh' 
-        ? '专业的职场健康管理工具，帮助您追踪经期对工作的影响，提供个性化的工作调整建议和健康管理方案。'
-        : 'Professional workplace wellness management tool to track menstrual impact on work and provide personalized work adjustment recommendations.',
-      href: `/${locale}/interactive-tools/workplace-wellness`,
-      iconType: 'BarChart3',
-      iconColor: 'text-blue-600',
-      cta: locale === 'zh' ? '开始健康管理' : 'Start Wellness Management',
-      requiresPrerequisites: false,
     }
   ];
 
@@ -206,10 +222,66 @@ export default async function InteractiveToolsPage({
             </div>
           </section>
 
-          {/* Tools Grid - 移动端优化 */}
+          {/* 职场健康专栏 - 显眼位置 */}
+          <section className="container-custom mb-8">
+            <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-2xl p-6 sm:p-8 border-2 border-blue-200 shadow-lg">
+              {/* 专栏标题 */}
+              <div className="text-center mb-6 sm:mb-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-4">
+                  <span className="text-2xl sm:text-3xl text-white">💼</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-blue-800 mb-3">
+                  {locale === 'zh' ? '职场健康管理专栏' : 'Workplace Wellness Column'}
+                </h2>
+                <p className="text-base sm:text-lg text-blue-700 max-w-3xl mx-auto leading-relaxed">
+                  {locale === 'zh' 
+                    ? '为职场女性量身定制的经期健康管理解决方案，帮助您在工作环境中更好地管理经期健康'
+                    : 'Tailored menstrual health management solutions for working women to better manage period health in the workplace'
+                  }
+                </p>
+              </div>
+
+              {/* 职场工具网格 */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
+                {workplaceTools.map((tool) => (
+                  <div key={tool.title} className={`card flex flex-col items-center text-center h-full p-6 sm:p-8 ${tool.isPrimary ? 'bg-gradient-to-br from-blue-100 to-indigo-100 border-2 border-blue-300 shadow-lg' : 'bg-white border-2 border-purple-200 shadow-md'}`}>
+                    <div className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-full mb-6 ${tool.isPrimary ? 'bg-blue-200' : 'bg-purple-100'}`}>
+                      {renderIcon(tool.iconType, tool.iconColor)}
+                    </div>
+                    
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 leading-tight">
+                      {tool.title}
+                    </h3>
+                    
+                    <p className="text-sm sm:text-base text-gray-600 mb-6 flex-grow leading-relaxed">
+                      {tool.description}
+                    </p>
+                    
+                    <Link href={tool.href} className={`w-full mobile-touch-target text-sm sm:text-base px-6 py-4 text-center font-semibold rounded-lg transition-all duration-300 ${tool.isPrimary ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg' : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 hover:shadow-lg'}`}>
+                      {tool.cta}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* 常规工具区域 */}
           <section className="container-custom">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3">
+                {locale === 'zh' ? '其他健康工具' : 'Other Health Tools'}
+              </h2>
+              <p className="text-base text-gray-600 max-w-2xl mx-auto">
+                {locale === 'zh' 
+                  ? '更多专业的经期健康管理工具，帮助您全面了解和管理经期健康'
+                  : 'More professional menstrual health management tools to help you comprehensively understand and manage period health'
+                }
+              </p>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
-              {tools.map((tool) => (
+              {regularTools.map((tool) => (
                 <div key={tool.title} className={`card flex flex-col items-center text-center h-full p-4 sm:p-6 ${tool.requiresPrerequisites ? 'relative border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-yellow-50' : ''}`}>
                   {/* 前置条件提示 */}
                   {tool.requiresPrerequisites && (

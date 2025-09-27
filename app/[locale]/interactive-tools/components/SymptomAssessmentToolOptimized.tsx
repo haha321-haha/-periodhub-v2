@@ -598,7 +598,7 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
                     {t('result.riskLevel')}
                   </h3>
                   <p className="text-xl font-bold text-green-600">
-                    {t(`severity.${result.type}`)}
+                    {result.type === 'symptom' ? t('severity.moderate') : t(`severity.${result.type}`)}
                   </p>
                 </div>
               </div>

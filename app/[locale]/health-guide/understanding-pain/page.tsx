@@ -2,6 +2,7 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Locale, locales } from '@/i18n';
+import Breadcrumb from '@/components/Breadcrumb';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -42,19 +43,12 @@ export default async function UnderstandingPainPage({
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-12">
           {/* Breadcrumb */}
-          <nav className="text-sm text-neutral-600">
-            <Link href={`/${locale}`} className="hover:text-primary-600">
-              {locale === 'zh' ? '首页' : 'Home'}
-            </Link>
-            <span className="mx-2">›</span>
-            <Link href={`/${locale}/health-guide`} className="hover:text-primary-600">
-              {locale === 'zh' ? '痛经健康指南' : 'Health Guide'}
-            </Link>
-            <span className="mx-2">›</span>
-            <span className="text-neutral-800">
-              {locale === 'zh' ? '理解痛经' : 'Understanding Pain'}
-            </span>
-          </nav>
+          <Breadcrumb 
+            items={[
+              { label: locale === 'zh' ? '痛经健康指南' : 'Health Guide', href: `/${locale}/health-guide` },
+              { label: locale === 'zh' ? '理解痛经' : 'Understanding Pain' }
+            ]}
+          />
 
       {/* Page Header */}
       <header className="text-center">

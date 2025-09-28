@@ -1,8 +1,10 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { Suspense } from 'react';
+import { Home } from 'lucide-react';
 import LoadingSystem from '../../../interactive-tools/shared/components/LoadingSystem';
 import { ErrorBoundary } from '../../../interactive-tools/shared/components/ErrorBoundary';
 import { 
@@ -12,23 +14,55 @@ import {
   ComparisonTableClient 
 } from './MedicalCareGuideClient';
 
+// Client Component面包屑组件
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+function ClientBreadcrumb({ items }: { items: BreadcrumbItem[] }) {
+  return (
+    <nav aria-label="Breadcrumb" className="mb-6">
+      <ol className="flex items-center space-x-2 text-sm text-gray-600">
+        {items.map((item, index) => (
+          <React.Fragment key={index}>
+            {index > 0 && (
+              <li className="flex items-center">
+                <span className="text-gray-400 mx-2">/</span>
+              </li>
+            )}
+            <li>
+              {item.href ? (
+                <Link href={item.href} className="hover:text-primary-600 transition-colors flex items-center">
+                  {index === 0 && <Home className="w-4 h-4 mr-1" />}
+                  {item.label}
+                </Link>
+              ) : (
+                <span className="text-gray-900 font-medium">{item.label}</span>
+              )}
+            </li>
+          </React.Fragment>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
 export default function MedicalCareGuideContent() {
   const t = useTranslations('medicalCareGuide');
   const locale = useLocale();
 
   return (
     <div className="container-custom py-8 md:py-12">
-      {/* Back to Articles - 参考 comprehensive-medical-guide-to-dysmenorrhea */}
+      {/* Breadcrumb */}
       <div className="mb-8">
-        <Link
-          href={`/${locale}/downloads`}
-          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium mobile-touch-target"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          {t('navigation.backToArticles')}
-        </Link>
+        <ClientBreadcrumb 
+          items={[
+            { label: locale === 'zh' ? '首页' : 'Home', href: `/${locale}` },
+            { label: locale === 'zh' ? '文章中心' : 'Articles', href: `/${locale}/downloads` },
+            { label: locale === 'zh' ? '就医指南' : 'Medical Care Guide' }
+          ]}
+        />
       </div>
 
       <main className="max-w-4xl mx-auto space-y-8 md:space-y-12" role="main" aria-label="医疗护理指南主要内容">

@@ -1,14 +1,50 @@
+import React from 'react';
 import { notFound } from 'next/navigation';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { Home } from 'lucide-react';
 import { Locale, locales } from '@/i18n';
 import StructuredData from '@/components/StructuredData';
 import ClientOnly from '@/components/ClientOnly';
 import PeriodPainAssessmentTool from '@/app/[locale]/interactive-tools/components/PeriodPainAssessmentTool';
 import PainTrackerTool from '@/app/[locale]/interactive-tools/components/PainTrackerTool';
+
+// Server Component面包屑组件
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+function ServerBreadcrumb({ items, locale }: { items: BreadcrumbItem[], locale: string }) {
+  return (
+    <nav aria-label="Breadcrumb" className="mb-6">
+      <ol className="flex items-center space-x-2 text-sm text-gray-600">
+        {items.map((item, index) => (
+          <React.Fragment key={index}>
+            {index > 0 && (
+              <li className="flex items-center">
+                <span className="text-gray-400 mx-2">/</span>
+              </li>
+            )}
+            <li>
+              {item.href ? (
+                <Link href={item.href} className="hover:text-primary-600 transition-colors flex items-center">
+                  {index === 0 && <Home className="w-4 h-4 mr-1" />}
+                  {item.label}
+                </Link>
+              ) : (
+                <span className="text-gray-900 font-medium">{item.label}</span>
+              )}
+            </li>
+          </React.Fragment>
+        ))}
+      </ol>
+    </nav>
+  );
+}
 
 // Generate static params for all supported locales
 export async function generateStaticParams() {
@@ -85,17 +121,16 @@ export default async function DysmenorrheaGuidePage({
       />
 
       <div className="container-custom py-8 md:py-12">
-        {/* Back to Articles */}
+        {/* Breadcrumb */}
         <div className="mb-8">
-          <Link
-            href={`/${locale}/downloads`}
-            className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium mobile-touch-target"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            {t('navigation.backToArticles')}
-          </Link>
+          <ServerBreadcrumb 
+            locale={locale}
+            items={[
+              { label: locale === 'zh' ? '首页' : 'Home', href: `/${locale}` },
+              { label: locale === 'zh' ? '文章中心' : 'Articles', href: `/${locale}/downloads` },
+              { label: locale === 'zh' ? '痛经医学指南' : 'Dysmenorrhea Medical Guide' }
+            ]}
+          />
         </div>
 
         <main className="max-w-4xl mx-auto space-y-16 md:space-y-24">

@@ -37,6 +37,10 @@ export default async function GlobalPerspectivesPage({
   // Enable static rendering
   unstable_setRequestLocale(locale);
 
+  // 预加载面包屑所需的翻译
+  const breadcrumbHealthGuideTitle = locale === 'zh' ? '痛经健康指南' : 'Health Guide';
+  const breadcrumbGlobalPerspectivesTitle = locale === 'zh' ? '全球视角' : 'Global Perspectives';
+
   const globalPractices = [
     {
       region: locale === 'zh' ? '中国传统医学' : 'Traditional Chinese Medicine',
@@ -119,8 +123,8 @@ export default async function GlobalPerspectivesPage({
           {/* Breadcrumb */}
           <Breadcrumb 
             items={[
-              { label: locale === 'zh' ? '痛经健康指南' : 'Health Guide', href: `/${locale}/health-guide` },
-              { label: locale === 'zh' ? '全球视角' : 'Global Perspectives' }
+              { label: breadcrumbHealthGuideTitle, href: `/${locale}/health-guide` },
+              { label: breadcrumbGlobalPerspectivesTitle }
             ]}
           />
 

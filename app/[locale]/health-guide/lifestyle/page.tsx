@@ -37,6 +37,10 @@ export default async function LifestylePage({
   // Enable static rendering
   unstable_setRequestLocale(locale);
 
+  // 预加载面包屑所需的翻译
+  const breadcrumbHealthGuideTitle = locale === 'zh' ? '痛经健康指南' : 'Health Guide';
+  const breadcrumbLifestyleTitle = locale === 'zh' ? '生活方式管理' : 'Lifestyle Management';
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
       <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -44,8 +48,8 @@ export default async function LifestylePage({
           {/* Breadcrumb */}
           <Breadcrumb 
             items={[
-              { label: locale === 'zh' ? '痛经健康指南' : 'Health Guide', href: `/${locale}/health-guide` },
-              { label: locale === 'zh' ? '生活方式管理' : 'Lifestyle Management' }
+              { label: breadcrumbHealthGuideTitle, href: `/${locale}/health-guide` },
+              { label: breadcrumbLifestyleTitle }
             ]}
           />
 

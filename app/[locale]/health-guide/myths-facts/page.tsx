@@ -37,6 +37,10 @@ export default async function MythsFactsPage({
   // Enable static rendering
   unstable_setRequestLocale(locale);
 
+  // 预加载面包屑所需的翻译
+  const breadcrumbHealthGuideTitle = locale === 'zh' ? '痛经健康指南' : 'Health Guide';
+  const breadcrumbMythsFactsTitle = locale === 'zh' ? '误区与事实' : 'Myths vs Facts';
+
   const mythsFacts = [
     {
       myth: locale === 'zh' 
@@ -101,8 +105,8 @@ export default async function MythsFactsPage({
           {/* Breadcrumb */}
           <Breadcrumb 
             items={[
-              { label: locale === 'zh' ? '痛经健康指南' : 'Health Guide', href: `/${locale}/health-guide` },
-              { label: locale === 'zh' ? '误区与事实' : 'Myths vs Facts' }
+              { label: breadcrumbHealthGuideTitle, href: `/${locale}/health-guide` },
+              { label: breadcrumbMythsFactsTitle }
             ]}
           />
 

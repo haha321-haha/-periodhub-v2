@@ -1,6 +1,7 @@
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 import { 
   Moon, 
   Volume2, 
@@ -37,6 +38,10 @@ export default async function SleepScenarioPage({ params }: Props) {
   
   const t = await getTranslations('scenarioSolutionsPage');
   const commonT = await getTranslations('common');
+  
+  // 预加载面包屑所需的翻译
+  const breadcrumbTitle = t('title');
+  const breadcrumbSleepTitle = t('scenarios.sleep.title');
 
   const audioSystems = [
     {
@@ -179,13 +184,12 @@ export default async function SleepScenarioPage({ params }: Props) {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12" data-page="scenario-sleep">
       {/* Breadcrumb */}
-      <nav className="flex items-center space-x-2 text-sm text-neutral-600">
-        <Link href={`/${locale}/scenario-solutions`} className="hover:text-primary-600 transition-colors">
-          {t('title')}
-        </Link>
-        <span>/</span>
-        <span className="text-neutral-800">{t('scenarios.sleep.title')}</span>
-      </nav>
+      <Breadcrumb 
+        items={[
+          { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
+          { label: breadcrumbSleepTitle }
+        ]}
+      />
 
       {/* Page Header */}
       <header className="text-center">

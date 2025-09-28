@@ -1,5 +1,6 @@
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 import {
   Heart,
   Clock,
@@ -44,6 +45,13 @@ export default async function DevelopmentPainPage({
 }) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
+  
+  const t = await getTranslations('scenarioSolutionsPage');
+  
+  // 预加载面包屑所需的翻译
+  const breadcrumbScenarioSolutionsTitle = t('title');
+  const breadcrumbTeenHealthTitle = locale === 'zh' ? '青少年专区' : 'Teen Zone';
+  const breadcrumbDevelopmentPainTitle = locale === 'zh' ? '发育期疼痛管理' : 'Developmental Pain Management';
 
   const painCharacteristics = [
     {
@@ -120,13 +128,13 @@ export default async function DevelopmentPainPage({
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
       {/* Breadcrumb */}
-      <nav className="flex items-center text-sm text-gray-600">
-        <Link href={`/${locale}/teen-health`} className="hover:text-primary-600 transition-colors">
-          {locale === 'zh' ? '青少年专区' : 'Teen Zone'}
-        </Link>
-        <span className="mx-2">/</span>
-        <span className="text-gray-900">{locale === 'zh' ? '发育期疼痛管理' : 'Developmental Pain Management'}</span>
-      </nav>
+      <Breadcrumb 
+        items={[
+          { label: breadcrumbScenarioSolutionsTitle, href: `/${locale}/scenario-solutions` },
+          { label: breadcrumbTeenHealthTitle, href: `/${locale}/teen-health` },
+          { label: breadcrumbDevelopmentPainTitle }
+        ]}
+      />
 
       {/* Header */}
       <header className="text-center">

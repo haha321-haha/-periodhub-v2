@@ -1,5 +1,6 @@
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 import {
   Heart,
   School,
@@ -57,6 +58,10 @@ export default async function TeenHealthPage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
   const t = await getTranslations('teenHealth');
+  
+  // 预加载面包屑所需的翻译
+  const breadcrumbScenarioSolutionsTitle = locale === 'zh' ? '场景解决方案' : 'Scenario Solutions';
+  const breadcrumbTeenHealthTitle = locale === 'zh' ? '青少年专区' : 'Teen Zone';
 
   const features = [
     {
@@ -99,6 +104,14 @@ export default async function TeenHealthPage({
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
+      {/* Breadcrumb */}
+      <Breadcrumb 
+        items={[
+          { label: breadcrumbScenarioSolutionsTitle, href: `/${locale}/scenario-solutions` },
+          { label: breadcrumbTeenHealthTitle }
+        ]}
+      />
+      
       {/* Hero Section */}
       <section className="text-center relative">
         <div className="absolute inset-0 bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 rounded-3xl opacity-50"></div>
@@ -142,12 +155,6 @@ export default async function TeenHealthPage({
               >
                 {t('quickHelp.campusGuide')}
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-              <Link 
-                href={`/${locale}/scenario-solutions/emergency-kit`}
-                className="inline-flex items-center bg-white text-red-600 px-6 py-3 rounded-full font-medium border-2 border-red-200 hover:bg-red-50 transition-colors"
-              >
-                {t('quickHelp.emergencyKit')}
               </Link>
             </div>
           </div>

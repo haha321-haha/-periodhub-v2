@@ -1,5 +1,6 @@
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 import { 
   Brain, 
   Heart, 
@@ -68,6 +69,13 @@ export default async function EmotionalSupportPage({
 }) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
+  
+  const t = await getTranslations('scenarioSolutionsPage');
+  
+  // 预加载面包屑所需的翻译
+  const breadcrumbScenarioSolutionsTitle = t('title');
+  const breadcrumbTeenHealthTitle = locale === 'zh' ? '青少年专区' : 'Teen Zone';
+  const breadcrumbEmotionalSupportTitle = locale === 'zh' ? '情绪支持与心理健康' : 'Emotional Support & Mental Health';
 
   const emotionalSymptoms = [
     {
@@ -163,13 +171,13 @@ export default async function EmotionalSupportPage({
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
       {/* Breadcrumb */}
-      <nav className="flex items-center text-sm text-gray-600">
-        <Link href={`/${locale}/teen-health`} className="hover:text-primary-600 transition-colors">
-          {locale === 'zh' ? '青少年专区' : 'Teen Zone'}
-        </Link>
-        <span className="mx-2">/</span>
-        <span className="text-gray-900">{locale === 'zh' ? '情绪支持与心理健康' : 'Emotional Support & Mental Health'}</span>
-      </nav>
+      <Breadcrumb 
+        items={[
+          { label: breadcrumbScenarioSolutionsTitle, href: `/${locale}/scenario-solutions` },
+          { label: breadcrumbTeenHealthTitle, href: `/${locale}/teen-health` },
+          { label: breadcrumbEmotionalSupportTitle }
+        ]}
+      />
 
       {/* Header */}
       <header className="text-center">

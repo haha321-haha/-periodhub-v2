@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import SymptomAssessmentTool from '../components/SymptomAssessmentTool';
+import Breadcrumb from '@/components/Breadcrumb';
 
 interface Props {
   params: { locale: string };
@@ -37,19 +38,12 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
           </div>
 
           {/* 面包屑导航 */}
-          <nav className="mb-8">
-            <div className="flex items-center space-x-2 text-sm text-gray-500">
-              <Link href={`/${locale}`} className="hover:text-pink-600">
-                {t('breadcrumb.home')}
-              </Link>
-              <span>/</span>
-              <Link href={`/${locale}/interactive-tools`} className="hover:text-pink-600">
-                {t('breadcrumb.interactiveTools')}
-              </Link>
-              <span>/</span>
-              <span className="text-gray-900">{t('symptomAssessment.title')}</span>
-            </div>
-          </nav>
+          <Breadcrumb 
+            items={[
+              { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
+              { label: locale === 'zh' ? '症状评估工具' : 'Symptom Assessment Tool' }
+            ]}
+          />
 
           {/* 症状评估工具 */}
           <SymptomAssessmentTool locale={locale} mode={mode} />

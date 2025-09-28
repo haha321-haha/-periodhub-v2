@@ -6,6 +6,7 @@ import { useSafeTranslations } from '@/hooks/useSafeTranslations';
 import { usePartnerHandbookStore, useStageActions } from '../stores/partnerHandbookStore';
 import { Locale } from '../types/common';
 import { QuizResult, QuizStage } from '../types/quiz';
+import Breadcrumb from '@/components/Breadcrumb';
 
 // 懒加载组件
 import dynamic from 'next/dynamic';
@@ -199,19 +200,12 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-12" data-page="partner-communication-scenario">
       {/* Breadcrumb */}
-      <nav className="text-sm text-neutral-600">
-        <Link href={`/${locale}`} className="hover:text-primary-600">
-          {locale === 'zh' ? '首页' : 'Home'}
-        </Link>
-        <span className="mx-2">›</span>
-        <Link href={`/${locale}/scenario-solutions`} className="hover:text-primary-600">
-          {locale === 'zh' ? '场景解决方案' : 'Scenario Solutions'}
-        </Link>
-        <span className="mx-2">›</span>
-        <span className="text-neutral-800">
-          {locale === 'zh' ? '伴侣沟通' : 'Partner Communication'}
-        </span>
-      </nav>
+      <Breadcrumb 
+        items={[
+          { label: locale === 'zh' ? '场景解决方案' : 'Scenario Solutions', href: `/${locale}/scenario-solutions` },
+          { label: locale === 'zh' ? '伴侣沟通' : 'Partner Communication' }
+        ]}
+      />
 
       {/* 页面头部 */}
       <header className="text-center py-8 md:py-12">

@@ -1,5 +1,6 @@
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 import {
   School,
   Clock,
@@ -45,6 +46,11 @@ export default async function CampusGuidePage({
 }) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
+  
+  // 预加载面包屑所需的翻译
+  const breadcrumbScenarioSolutionsTitle = locale === 'zh' ? '场景解决方案' : 'Scenario Solutions';
+  const breadcrumbTeenHealthTitle = locale === 'zh' ? '青少年专区' : 'Teen Zone';
+  const breadcrumbCampusGuideTitle = locale === 'zh' ? '校园应急指南' : 'Campus Emergency Guide';
 
   const emergencySteps = [
     {
@@ -90,13 +96,13 @@ export default async function CampusGuidePage({
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
       {/* Breadcrumb */}
-      <nav className="flex items-center text-sm text-gray-600">
-        <Link href={`/${locale}/teen-health`} className="hover:text-primary-600 transition-colors">
-          {locale === 'zh' ? '青少年专区' : 'Teen Zone'}
-        </Link>
-        <span className="mx-2">/</span>
-        <span className="text-gray-900">{locale === 'zh' ? '校园应急指南' : 'Campus Emergency Guide'}</span>
-      </nav>
+      <Breadcrumb 
+        items={[
+          { label: breadcrumbScenarioSolutionsTitle, href: `/${locale}/scenario-solutions` },
+          { label: breadcrumbTeenHealthTitle, href: `/${locale}/teen-health` },
+          { label: breadcrumbCampusGuideTitle }
+        ]}
+      />
 
       {/* Header */}
       <header className="text-center">

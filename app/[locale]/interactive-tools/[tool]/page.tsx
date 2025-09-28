@@ -3,6 +3,7 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
+import Breadcrumb from '@/components/Breadcrumb';
 
 // Static imports for interactive tools (temporary fix)
 import PainTrackerTool from '../components/PainTrackerTool';
@@ -492,17 +493,14 @@ export default async function ToolPage({
 
   return (
     <div className="space-y-8">
-      {/* Back to Tools */}
+      {/* 面包屑导航 */}
       <div className="container-custom">
-        <Link 
-          href={`/${locale}/interactive-tools`} 
-          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          {tTool('backToTools')}
-        </Link>
+        <Breadcrumb 
+          items={[
+            { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
+            { label: toolData.frontmatter.title }
+          ]}
+        />
       </div>
 
       {/* Tool Header */}

@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import PainTrackerTool from '../components/PainTrackerTool';
+import Breadcrumb from '@/components/Breadcrumb';
 
 interface Props {
   params: { locale: string };
@@ -26,19 +27,12 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
           </div>
 
           {/* 面包屑导航 */}
-          <nav className="mb-8">
-            <div className="flex items-center space-x-2 text-sm text-gray-500">
-              <Link href={`/${locale}`} className="hover:text-blue-600">
-                {t('breadcrumb.home')}
-              </Link>
-              <span>/</span>
-              <Link href={`/${locale}/interactive-tools`} className="hover:text-blue-600">
-                {t('breadcrumb.interactiveTools')}
-              </Link>
-              <span>/</span>
-              <span className="text-gray-900">{t('painTracker.title')}</span>
-            </div>
-          </nav>
+          <Breadcrumb 
+            items={[
+              { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
+              { label: locale === 'zh' ? '疼痛追踪工具' : 'Pain Tracking Tool' }
+            ]}
+          />
 
           {/* 疼痛追踪工具 */}
           <PainTrackerTool locale={locale} />

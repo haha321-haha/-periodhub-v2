@@ -6,6 +6,7 @@
 import React, { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { titleManager } from '@/utils/unifiedTitleManager';
+import Breadcrumb from '@/components/Breadcrumb';
 
 // 完全硬编码的文本内容
 const TEXTS = {
@@ -117,27 +118,12 @@ export default function PeriodPainImpactCalculatorPage({
   return (
         <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       {/* 面包屑导航 */}
-      <nav className="mb-8" aria-label="breadcrumb">
-        <div className="flex items-center space-x-2 text-sm text-gray-500">
-          <a 
-            href={`/${currentLocale}`} 
-            className="hover:text-purple-600 transition-colors"
-          >
-            {t.breadcrumbHome}
-          </a>
-          <span>/</span>
-          <a 
-            href={`/${currentLocale}/interactive-tools`} 
-            className="hover:text-purple-600 transition-colors"
-          >
-            {t.breadcrumbTools}
-          </a>
-          <span>/</span>
-          <span className="text-gray-900 font-medium">
-            {t.breadcrumbCurrent}
-          </span>
-        </div>
-      </nav>
+      <Breadcrumb 
+        items={[
+          { label: currentLocale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${currentLocale}/interactive-tools` },
+          { label: currentLocale === 'zh' ? '工作影响计算器' : 'Work Impact Calculator' }
+        ]}
+      />
 
       <div className="bg-white rounded-lg shadow-xl p-8 md:p-12 lg:p-16 max-w-5xl mx-auto">
         <div className="text-center">

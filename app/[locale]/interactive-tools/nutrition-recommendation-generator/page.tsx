@@ -5,6 +5,7 @@
 
 import { Metadata } from 'next';
 import NutritionGenerator from './components/NutritionGenerator';
+import Breadcrumb from '@/components/Breadcrumb';
 
 // 生成页面元数据
 export async function generateMetadata({
@@ -71,6 +72,16 @@ export default async function NutritionRecommendationGeneratorPage({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
+      {/* 面包屑导航 */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <Breadcrumb 
+          items={[
+            { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
+            { label: locale === 'zh' ? '营养推荐生成器' : 'Nutrition Recommendation Generator' }
+          ]}
+        />
+      </div>
+      
       {/* 主要内容区域 */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <NutritionGenerator />

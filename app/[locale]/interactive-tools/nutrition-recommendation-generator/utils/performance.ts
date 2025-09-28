@@ -19,7 +19,9 @@ export class PerformanceMonitor {
 
   // 开始性能测量 - 基于ziV1d3d的测量逻辑
   startMeasure(name: string): void {
-    this.metrics.set(`${name}_start`, performance.now());
+    if (typeof window !== 'undefined' && 'performance' in window) {
+      this.metrics.set(`${name}_start`, performance.now());
+    }
   }
 
   // 结束性能测量 - 基于ziV1d3d的测量逻辑
@@ -30,13 +32,18 @@ export class PerformanceMonitor {
       return 0;
     }
 
-    const endTime = performance.now();
-    const duration = endTime - startTime;
+    if (typeof window !== 'undefined' && 'performance' in window) {
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      
+      this.metrics.set(name, duration);
+      this.metrics.delete(`${name}_start`);
+      
+      return duration;
+    }
     
-    this.metrics.set(name, duration);
     this.metrics.delete(`${name}_start`);
-    
-    return duration;
+    return 0;
   }
 
   // 获取性能指标 - 基于ziV1d3d的指标获取

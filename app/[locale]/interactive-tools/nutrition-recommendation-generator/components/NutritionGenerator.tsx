@@ -30,9 +30,11 @@ export default function NutritionGenerator() {
   const [results, setResults] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
-  // 基于ziV1d3d的性能监控
+  // 客户端渲染检查
   useEffect(() => {
+    setIsClient(true);
     performanceMonitor.startMeasure('nutrition-generator-init');
     return () => {
       performanceMonitor.endMeasure('nutrition-generator-init');
@@ -97,6 +99,18 @@ export default function NutritionGenerator() {
     }
   };
 
+  // 防止hydration错误，只在客户端渲染
+  if (!isClient) {
+    return (
+      <div className="container mx-auto p-4 md:p-8 max-w-4xl">
+        <div className="text-center p-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500 mx-auto mb-4"></div>
+          <p className="text-neutral-600">加载中...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <ErrorBoundary>
       <AccessibilityWrapper
@@ -105,28 +119,6 @@ export default function NutritionGenerator() {
         ariaDescribedBy="nutrition-generator-description"
       >
         <div className="container mx-auto p-4 md:p-8 max-w-4xl">
-                 {/* 面包屑导航 */}
-                 <nav className="mb-8">
-                   <div className="flex items-center space-x-2 text-sm text-gray-500">
-                     <a 
-                       href={`/${locale}`}
-                       className="hover:text-pink-600"
-                     >
-                       {locale === 'zh' ? '首页' : 'Home'}
-                     </a>
-                     <span>/</span>
-                     <a 
-                       href={`/${locale}/interactive-tools`}
-                       className="hover:text-pink-600"
-                     >
-                       {locale === 'zh' ? '互动工具' : 'Interactive Tools'}
-                     </a>
-                     <span>/</span>
-                     <span className="text-gray-900">
-                       {locale === 'zh' ? '营养推荐生成器' : 'Nutrition Recommendation Generator'}
-                     </span>
-                   </div>
-                 </nav>
 
                  {/* 头部 - 基于ziV1d3d的header结构 */}
                  <header className="mb-8 md:mb-12">

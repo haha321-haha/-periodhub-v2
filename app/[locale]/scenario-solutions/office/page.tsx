@@ -1,6 +1,7 @@
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 import {
   Briefcase,
   Clock,
@@ -339,13 +340,12 @@ export default async function OfficeScenarioPage({ params }: Props) {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12" data-page="scenario-office">
       {/* Breadcrumb */}
-      <nav className="flex items-center space-x-2 text-sm text-neutral-600">
-        <Link href={`/${locale}/scenario-solutions`} className="hover:text-primary-600 transition-colors">
-          {t('title')}
-        </Link>
-        <span>/</span>
-        <span className="text-neutral-800">{t('scenarios.office.title')}</span>
-      </nav>
+      <Breadcrumb 
+        items={[
+          { label: t('title'), href: `/${locale}/scenario-solutions` },
+          { label: t('scenarios.office.title') }
+        ]}
+      />
 
       {/* Page Header */}
       <header className="text-center">

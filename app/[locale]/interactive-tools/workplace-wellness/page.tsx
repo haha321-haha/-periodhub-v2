@@ -7,10 +7,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useWorkplaceWellnessStore } from './hooks/useWorkplaceWellnessStore';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
+import Breadcrumb from '@/components/Breadcrumb';
 import CalendarComponent from './components/CalendarComponent';
 import WorkImpactComponent from './components/WorkImpactComponent';
 import NutritionComponent from './components/NutritionComponent';
@@ -76,6 +77,7 @@ export default function WorkplaceWellnessPage() {
   const t = useTranslations('workplaceWellness');
   const [isLoading, setIsLoading] = useState(true);
   const [previousTab, setPreviousTab] = useState(activeTab);
+  const locale = useLocale();
 
   // Day 12: 性能监控和优化
   useEffect(() => {
@@ -191,6 +193,16 @@ export default function WorkplaceWellnessPage() {
         
         {/* 导航组件 */}
         <Navigation />
+        
+        {/* 面包屑导航 */}
+        <div className="max-w-6xl mx-auto px-4">
+          <Breadcrumb 
+            items={[
+              { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
+              { label: locale === 'zh' ? '职场健康助手' : 'Workplace Wellness Assistant' }
+            ]}
+          />
+        </div>
         
         {/* 主要内容区域 */}
         <ResponsiveContainer>

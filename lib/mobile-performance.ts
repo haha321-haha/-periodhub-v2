@@ -49,7 +49,7 @@ export class TouchOptimizer {
     
     // 优化移动端滚动性能
     if (this.isMobile()) {
-      document.body.style.webkitOverflowScrolling = 'touch';
+      (document.body.style as any).webkitOverflowScrolling = 'touch';
     }
   }
   

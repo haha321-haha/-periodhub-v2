@@ -15,18 +15,22 @@ const nextConfig = {
   // 性能优化
   compress: true,
   
-  // 图片优化 - 修复scenario图片加载问题
+  // 🖼️ 智能图片优化配置 - 保留响应式设计
   images: {
-    formats: ['image/webp', 'image/avif'],
-    minimumCacheTTL: 60,
+    // 现代格式支持 - 浏览器自动选择最佳格式
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000, // 1年缓存
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // 配置图片质量选项 - 解决Next.js 16兼容性警告
-    qualities: [75, 85, 95, 100],
-    // 添加更宽松的图片处理配置
+    
+    // 图片质量配置 - 根据用途自动选择
+    qualities: [70, 75, 80, 85, 90, 95, 100],
+    
+    // 响应式设备尺寸 - 匹配现有图片尺寸策略
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // 修复特定图片的兼容性问题
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 400, 800],
+    
+    // 外部图片源
     domains: ['images.unsplash.com'],
     remotePatterns: [
       {
@@ -36,10 +40,13 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-    // 允许本地图片优化
+    
+    // 优化配置
     unoptimized: false,
-    // 临时禁用有问题图片的优化
     loader: 'default',
+    
+    // 保持现有图片结构 - 不强制转换
+    path: '/_next/image',
   },
   
   // 实验性功能

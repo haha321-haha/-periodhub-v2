@@ -2,59 +2,45 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { imageOptimization } from '@/lib/image-optimization';
 
-interface OptimizedImageProps {
+interface SmartImageProps {
   src: string;
   alt: string;
   width: number;
   height: number;
   className?: string;
+  type?: 'hero' | 'content' | 'thumbnail' | 'decorative';
   sizes?: string;
   priority?: boolean;
-  placeholder?: 'blur' | 'empty';
-  blurDataURL?: string;
-  quality?: number;
-  // SEO和可访问性增强
-  title?: string;
-  caption?: string;
-  isDecorative?: boolean; // 是否为装饰性图片
 }
 
-export default function OptimizedImage({
+/**
+ * 智能图片组件
+ * 自动选择最佳图片格式和尺寸
+ */
+export default function SmartImage({
   src,
   alt,
   width,
   height,
   className = '',
+  type = 'content',
   sizes,
-  priority = false,
-  placeholder = 'empty',
-  blurDataURL,
-  quality = 95,
-  title,
-  caption,
-  isDecorative = false
-}: OptimizedImageProps) {
+  priority = false
+}: SmartImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
 
-  // 智能alt文本处理
-  const getOptimizedAlt = () => {
-    // 如果是装饰性图片，使用空alt
-    if (isDecorative) {
-      return '';
-    }
-    
-    // 如果alt为空或太短，生成基于文件名的alt
-    if (!alt || alt.trim().length < 3) {
-      const fileName = src.split('/').pop()?.split('.')[0] || 'image';
-      return `Image: ${fileName.replace(/[-_]/g, ' ')}`;
-    }
-    
-    return alt;
-  };
-
-  const optimizedAlt = getOptimizedAlt();
+  // 获取优化配置
+  const config = imageOptimization.configs[type];
+  
+  // 生成响应式sizes
+  const responsiveSizes = sizes || imageOptimization.utilities.generateSizesString({
+    mobile: Math.min(width, 400),
+    tablet: Math.min(width, 800),
+    desktop: width
+  });
 
   if (imageError) {
     return (
@@ -64,8 +50,7 @@ export default function OptimizedImage({
       >
         <div className="text-center p-4">
           <div className="text-4xl mb-2">🖼️</div>
-          <p className="text-sm text-neutral-600">图片加载中...</p>
-          <p className="text-xs text-neutral-500 mt-1">Image loading...</p>
+          <p className="text-sm text-neutral-600">图片加载失败</p>
         </div>
       </div>
     );
@@ -84,37 +69,32 @@ export default function OptimizedImage({
           </div>
         </div>
       )}
+      
       <Image
         src={src}
-        alt={optimizedAlt}
-        title={title || optimizedAlt}
+        alt={alt}
         width={width}
         height={height}
         className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-        sizes={sizes}
-        priority={priority}
-        placeholder={placeholder}
-        blurDataURL={blurDataURL}
-        quality={quality}
+        sizes={responsiveSizes}
+        priority={priority || config.priority}
+        placeholder={config.placeholder}
+        quality={config.quality}
         style={{
           maxWidth: '100%',
           height: 'auto',
           objectFit: 'cover',
         }}
-        unoptimized={src.includes('/images/tools/')}
-        onError={() => {
-          console.error(`Failed to load image: ${src}`);
+        onError={(e) => {
+          console.error(`图片加载失败: ${src}`);
           setImageError(true);
+          const error = new Error(`图片加载失败: ${src}`);
+          imageOptimization.utilities.handleImageError(error, src);
         }}
         onLoad={() => {
           setIsLoading(false);
         }}
       />
-      {caption && (
-        <figcaption className="text-sm text-gray-600 mt-2 text-center italic">
-          {caption}
-        </figcaption>
-      )}
     </div>
   );
 }

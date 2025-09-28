@@ -10,6 +10,8 @@ lastModified: "2024-12-19"
 featured: true
 reading_time: "8分钟"
 reading_time_zh: "8分钟"
+canonical_url: "/zh/articles/heat-therapy-complete-guide"
+schema_type: "Article"
 ---
 
 ### 经期热敷的正确方法：科学验证的5步高效指南

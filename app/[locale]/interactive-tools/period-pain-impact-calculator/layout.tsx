@@ -14,8 +14,8 @@ export async function generateMetadata({
     : 'Work Impact Calculator - Menstrual Pain Assessment & Workplace Analysis | PeriodHub';
 
   const description = isZh
-    ? '专业痛经评估工具，科学分析经期疼痛严重程度及对工作生活的影响，提供个性化医疗建议和生活方式指导。'
-    : 'Professional menstrual pain assessment tool that scientifically evaluates pain severity and its impact on work and daily life, providing personalized medical recommendations and lifestyle guidance.';
+    ? '专业痛经评估工具，科学分析经期疼痛严重程度及对工作生活的影响，提供个性化医疗建议。'
+    : 'Professional menstrual pain assessment tool that scientifically evaluates pain severity and its impact on work and daily life.';
 
   return {
     title,

@@ -2,6 +2,7 @@ import './globals.css';
 import { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { URL_CONFIG } from '@/lib/url-config';
+import MobileOptimization from '@/components/MobileOptimization';
 // import ClientSafe from '@/components/ClientSafe';
 
 // 使用本地Noto Sans SC字体

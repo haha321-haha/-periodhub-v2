@@ -48,11 +48,11 @@ export async function generateMetadata({ params: { locale } }: { params: { local
         : 'Professional menstrual health management platform.',
     },
     alternates: {
-      canonical: `https://periodhub.health/${locale}`,
+      canonical: `https://www.periodhub.health/${locale}`,
       languages: {
-        'zh-CN': 'https://periodhub.health/zh',
-        'en-US': 'https://periodhub.health/en',
-        'x-default': 'https://periodhub.health',
+        'zh-CN': 'https://www.periodhub.health/zh',
+        'en-US': 'https://www.periodhub.health/en',
+        'x-default': 'https://www.periodhub.health',
       },
     },
     robots: {

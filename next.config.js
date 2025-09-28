@@ -46,11 +46,61 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['@/components', '@/lib'],
+    // 移动端性能优化
+    optimizeServerReact: true,
+    webVitalsAttribution: ['CLS', 'LCP'],
   },
   
   // 编译器优化
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
+  },
+  
+  // 移动端性能优化头部配置
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          // 预连接到关键域名
+          {
+            key: 'Link',
+            value: '<https://fonts.googleapis.com>; rel=preconnect; crossorigin'
+          },
+          {
+            key: 'Link', 
+            value: '<https://fonts.gstatic.com>; rel=preconnect; crossorigin'
+          },
+          // 缓存控制
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable'
+          }
+        ]
+      },
+      {
+        source: '/sw.js',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate'
+          },
+          {
+            key: 'Service-Worker-Allowed',
+            value: '/'
+          }
+        ]
+      },
+      {
+        source: '/offline.html',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=86400'
+          }
+        ]
+      }
+    ];
   },
   
   
@@ -239,6 +289,27 @@ const nextConfig = {
       {
         source: '/articles/effective-herbal-tea-menstrual-pain',
         destination: '/zh/articles/effective-herbal-tea-menstrual-pain',
+        permanent: true
+      },
+      // 🎯 修复Canonical标签错误的URL重定向
+      {
+        source: '/zh/articles/symptom-guide',
+        destination: '/zh/health-guide/myths-facts',
+        permanent: true
+      },
+      {
+        source: '/zh/articles/myths-facts',
+        destination: '/zh/health-guide/myths-facts',
+        permanent: true
+      },
+      {
+        source: '/en/articles/symptom-guide',
+        destination: '/en/health-guide/myths-facts',
+        permanent: true
+      },
+      {
+        source: '/en/articles/myths-facts',
+        destination: '/en/health-guide/myths-facts',
         permanent: true
       }
     ];

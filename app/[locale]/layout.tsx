@@ -47,7 +47,6 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages as any}>
-      <LanguageSetter />
       <Suspense fallback={<LoadingState />}>
         <Header />
         <main className="flex-1">

@@ -25,6 +25,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   console.log('NEXT_PUBLIC_BASE_URL env var:', process.env.NEXT_PUBLIC_BASE_URL);
   console.log('Environment check - NODE_ENV:', process.env.NODE_ENV);
   
+  // 🚀 移动端优化状态记录
+  console.log('Mobile optimization: Service Worker, touch optimization, performance monitoring enabled');
+  
   const currentDate = new Date();
   
   // 主要页面

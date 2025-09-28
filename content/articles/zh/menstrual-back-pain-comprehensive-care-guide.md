@@ -10,6 +10,8 @@ lastModified: "2024-12-19"
 featured: true
 reading_time: "12分钟"
 reading_time_zh: "12分钟"
+canonical_url: "/zh/articles/menstrual-back-pain-comprehensive-care-guide"
+schema_type: "Article"
 ---
 
 # 经期腰部深度护理指南：科学缓解与权威建议

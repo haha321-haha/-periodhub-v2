@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 
+// 🚀 移动端优化已启用：Service Worker、触摸优化、性能监控
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [

@@ -45,6 +45,8 @@ interface ConstitutionTestToolProps {
 
 export default function ConstitutionTestTool({ locale }: ConstitutionTestToolProps) {
   const { t } = useInteractiveToolTranslations('constitutionTest');
+  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string | string[]>>({});
+  
   // 生成安全的时间戳，避免水合错误
   const generateSafeTimestamp = () => {
     if (typeof window === 'undefined') {

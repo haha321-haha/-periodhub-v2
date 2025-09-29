@@ -29,6 +29,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${t('scenarios.sleep.title')} - ${t('title')}`,
     description: t('scenarios.sleep.description'),
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/scenario-solutions/sleep`,
+      languages: {
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/scenario-solutions/sleep`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/scenario-solutions/sleep`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/scenario-solutions/sleep`,
+      },
+    },
   };
 }
 

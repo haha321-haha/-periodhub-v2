@@ -32,6 +32,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${t('scenarios.office.title')} - ${t('title')}`,
     description: t('scenarios.office.description'),
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/scenario-solutions/office`,
+      languages: {
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/scenario-solutions/office`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/scenario-solutions/office`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/scenario-solutions/office`,
+      },
+    },
   };
 }
 

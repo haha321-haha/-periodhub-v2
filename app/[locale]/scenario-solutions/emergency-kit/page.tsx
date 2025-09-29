@@ -31,6 +31,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${locale === 'zh' ? '多场景应急包清单' : 'Multi-Scenario Emergency Kit List'} - ${t('title')}`,
     description: locale === 'zh' ? '详细的经期应急包准备清单，涵盖办公、通勤、运动、睡眠、社交等各种场景' : 'Detailed period emergency kit preparation list covering office, commute, exercise, sleep, social and other scenarios',
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/scenario-solutions/emergency-kit`,
+      languages: {
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/scenario-solutions/emergency-kit`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/scenario-solutions/emergency-kit`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/scenario-solutions/emergency-kit`,
+      },
+    },
   };
 }
 

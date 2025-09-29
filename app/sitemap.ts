@@ -56,6 +56,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/en/privacy-policy',
     '/zh/terms-of-service',
     '/en/terms-of-service',
+    '/zh/medical-disclaimer',
+    '/en/medical-disclaimer',
   ];
 
   // 互动工具子页面

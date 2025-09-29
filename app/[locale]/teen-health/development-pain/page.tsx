@@ -35,6 +35,14 @@ export async function generateMetadata({
     description: locale === 'zh' 
       ? '12-16岁专属疼痛管理建议，了解青春期痛经特点，掌握科学缓解方法。'
       : 'Specialized pain management advice for ages 12-16, understanding adolescent period pain characteristics.',
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/teen-health/development-pain`,
+      languages: {
+        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/teen-health/development-pain`,
+        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/teen-health/development-pain`,
+        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/teen-health/development-pain`,
+      },
+    },
   };
 }
 

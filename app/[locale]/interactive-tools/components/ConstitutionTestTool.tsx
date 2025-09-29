@@ -45,7 +45,13 @@ interface ConstitutionTestToolProps {
 
 export default function ConstitutionTestTool({ locale }: ConstitutionTestToolProps) {
   const { t } = useInteractiveToolTranslations('constitutionTest');
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string | string[]>>({});
+  // 生成安全的时间戳，避免水合错误
+  const generateSafeTimestamp = () => {
+    if (typeof window === 'undefined') {
+      return '0'; // 服务器端返回固定值
+    }
+    return Date.now().toString(); // 客户端返回实际时间戳
+  };
 
   const {
     currentSession,
@@ -88,7 +94,7 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
     const answer: ConstitutionAnswer = {
       questionId,
       selectedValues: [stringValue],
-      timestamp: new Date().toISOString()
+      timestamp: generateSafeTimestamp()
     };
 
     answerQuestion(answer);
@@ -127,7 +133,7 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
     const answer: ConstitutionAnswer = {
       questionId,
       selectedValues: newValues,
-      timestamp: new Date().toISOString()
+      timestamp: generateSafeTimestamp()
     };
 
     answerQuestion(answer);

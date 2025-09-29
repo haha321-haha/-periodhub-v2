@@ -82,7 +82,7 @@ export default function SmartImage({
         className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
         sizes={responsiveSizes}
         priority={priority || config.priority}
-        placeholder={config.placeholder}
+        placeholder="empty"
         quality={config.quality}
         style={{
           maxWidth: '100%',

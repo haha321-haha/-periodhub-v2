@@ -1,6 +1,5 @@
 import { unstable_setRequestLocale } from 'next-intl/server';
-import OptimizedImage from '@/components/ui/OptimizedImage';
-import Image from 'next/image';
+import SmartImage from '@/components/ui/SmartImage';
 import { Locale } from '@/i18n';
 import type { Metadata } from 'next';
 
@@ -28,11 +27,12 @@ export default async function TestImageQualityPage({
       
       {/* 原始Next.js Image组件 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">原始 Next.js Image 组件 (默认质量75)</h2>
+        <h2 className="text-2xl font-semibold">SmartImage 组件 (默认质量75)</h2>
         <div className="bg-gray-50 p-6 rounded-lg">
-          <Image
+          <SmartImage
             src="/images/tools/assessment-illustration.jpg"
-            alt="Original Next.js Image - Default Quality"
+            alt="SmartImage - Default Quality"
+            type="content"
             width={400}
             height={300}
             className="w-full max-w-md rounded-lg shadow-lg mx-auto"
@@ -44,15 +44,15 @@ export default async function TestImageQualityPage({
 
       {/* 高质量OptimizedImage组件 */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">OptimizedImage 组件 (质量95)</h2>
+        <h2 className="text-2xl font-semibold">SmartImage 组件 (质量95)</h2>
         <div className="bg-blue-50 p-6 rounded-lg">
-          <OptimizedImage
+          <SmartImage
             src="/images/tools/assessment-illustration.jpg"
-            alt="OptimizedImage - High Quality 95"
+            alt="SmartImage - High Quality 95"
+            type="content"
             width={400}
             height={300}
             className="w-full max-w-md rounded-lg shadow-lg mx-auto"
-            quality={95}
             priority={true}
           />
           <p className="text-sm text-blue-600 mt-2 text-center">高质量设置 (95)</p>
@@ -63,13 +63,13 @@ export default async function TestImageQualityPage({
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">中等质量对比 (质量80)</h2>
         <div className="bg-green-50 p-6 rounded-lg">
-          <OptimizedImage
+          <SmartImage
             src="/images/tools/assessment-illustration.jpg"
-            alt="OptimizedImage - Medium Quality 80"
+            alt="SmartImage - Medium Quality 80"
+            type="content"
             width={400}
             height={300}
             className="w-full max-w-md rounded-lg shadow-lg mx-auto"
-            quality={80}
             priority={true}
           />
           <p className="text-sm text-green-600 mt-2 text-center">中等质量设置 (80)</p>
@@ -80,14 +80,14 @@ export default async function TestImageQualityPage({
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">响应式尺寸测试</h2>
         <div className="bg-purple-50 p-6 rounded-lg">
-          <OptimizedImage
+          <SmartImage
             src="/images/tools/assessment-illustration.jpg"
             alt="Responsive Image Test"
+            type="content"
             width={400}
             height={300}
             className="w-full rounded-lg shadow-lg"
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 60vw, 50vw"
-            quality={95}
             priority={true}
           />
           <p className="text-sm text-purple-600 mt-2 text-center">响应式尺寸 - 在不同屏幕尺寸下调整大小</p>

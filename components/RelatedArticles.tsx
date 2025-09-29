@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import SmartImage from '@/components/ui/SmartImage';
 import { useTranslations } from 'next-intl';
 
 interface Article {
@@ -81,9 +81,10 @@ export default function RelatedArticles({
           >
             {article.coverImage && (
               <div className="mb-3 overflow-hidden rounded-lg">
-                <Image
+                <SmartImage
                   src={article.coverImage}
                   alt={article.title}
+                  type="thumbnail"
                   width={300}
                   height={200}
                   className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"

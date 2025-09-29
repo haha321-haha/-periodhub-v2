@@ -9,9 +9,9 @@ tags: ["痛经", "医学诊断", "药物治疗", "妇科疾病", "前列腺素",
 tags_en: ["dysmenorrhea", "medical diagnosis", "pharmacological treatment", "gynecological diseases", "prostaglandins", "secondary dysmenorrhea", "NSAIDs", "hormone therapy"]
 category: "医学知识与教育"
 category_en: "medical-knowledge"
-seo_title: "痛经医学指南：专业诊断与治疗的权威解析"
+seo_title: "痛经全解析：理解和管理月经疼痛的完整指南"
 seo_title_en: "Medical Guide to Dysmenorrhea: Authoritative Analysis of Professional Diagnosis and Treatment"
-seo_description: "权威痛经医学指南：详细解释痛经病理生理学、诊断标准和治疗方案。包括原发性和继发性痛经的鉴别、药物选择和综合管理策略。基于最新医学研究，提供专业诊断流程、个性化治疗建议和长期健康管理方案，涵盖疼痛评估、治疗监测、预防保健等全方位医学指导内容，权威医学专家编写，临床验证有效，科学严谨的医学参考资料指南。"
+seo_description: "全面解析痛经原因、评估工具、管理策略和就医指导。包含交互式疼痛追踪器和个性化建议，帮助女性科学管理经期疼痛。"
 seo_description_en: "Authoritative medical guide: detailed explanation of dysmenorrhea pathophysiology, diagnostic criteria, and treatment protocols. Including differentiation between primary and secondary dysmenorrhea, medication selection, and comprehensive management strategies."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/comprehensive-medical-guide-to-dysmenorrhea"

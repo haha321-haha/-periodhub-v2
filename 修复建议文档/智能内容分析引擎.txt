@@ -1,0 +1,660 @@
+// 智能内容分析引擎 - 专门处理VS Code崩溃恢复的misc文件
+// file: recovery-workspace/advanced-analysis-engine.js
+
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+
+class ContentAnalysisEngine {
+    constructor(analysisDir, outputDir) {
+        this.analysisDir = analysisDir;
+        this.outputDir = outputDir;
+        this.results = {
+            totalFiles: 0,
+            duplicates: [],
+            versions: {},
+            categories: {},
+            pathInferences: {},
+            timeline: []
+        };
+        
+        // 确保输出目录存在
+        this.ensureDirectories();
+    }
+
+    ensureDirectories() {
+        const dirs = ['components', 'pages', 'api', 'utils', 'hooks', 'styles', 'config', 'types', 'lib', 'unknown'];
+        dirs.forEach(dir => {
+            fs.mkdirSync(path.join(this.outputDir, dir), { recursive: true });
+        });
+    }
+
+    // 1. 时间戳分析 - 从文件名和元数据中提取时间信息
+    extractTimestamp(filename, stats) {
+        const patterns = [
+            // misc-1693478400000.js (Unix timestamp)
+            /misc-(\d{10,13})\./, 
+            // misc-20230830-143000.js (YYYYMMDD-HHMMSS)
+            /misc-(\d{8}-\d{6})\./,
+            // misc-2023-08-30T14-30-00.js (ISO-like)
+            /misc-(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})\./
+        ];
+
+        for (const pattern of patterns) {
+            const match = filename.match(pattern);
+            if (match) {
+                const timeStr = match[1];
+                if (timeStr.length >= 10) {
+                    // Unix timestamp
+                    const timestamp = parseInt(timeStr);
+                    return new Date(timestamp > 9999999999 ? timestamp : timestamp * 1000);
+                } else {
+                    // 其他格式尝试解析
+                    try {
+                        return new Date(timeStr.replace(/T/, ' ').replace(/-/g, ':'));
+                    } catch (e) {
+                        // 继续尝试其他方法
+                    }
+                }
+            }
+        }
+
+        // 如果文件名中没有时间戳，使用文件修改时间
+        return stats.mtime;
+    }
+
+    // 2. 去重检测 - 基于内容哈希和相似度
+    calculateContentHash(content) {
+        // 标准化内容：移除空白字符、注释等
+        const normalized = content
+            .replace(/\/\*[\s\S]*?\*\//g, '') // 移除块注释
+            .replace(/\/\/.*$/gm, '') // 移除行注释
+            .replace(/\s+/g, ' ') // 标准化空白
+            .replace(/;?\s*$/gm, '') // 移除行尾分号和空白
+            .trim();
+        
+        return crypto.createHash('md5').update(normalized).digest('hex');
+    }
+
+    calculateSimilarity(content1, content2) {
+        // 简单的相似度计算 - 基于行的Jaccard相似度
+        const lines1 = new Set(content1.split('\n').map(line => line.trim()).filter(line => line));
+        const lines2 = new Set(content2.split('\n').map(line => line.trim()).filter(line => line));
+        
+        const intersection = new Set([...lines1].filter(line => lines2.has(line)));
+        const union = new Set([...lines1, ...lines2]);
+        
+        return intersection.size / union.size;
+    }
+
+    // 3. 内容特征分析 - 更精确的文件类型识别
+    analyzeContentFeatures(content, filename) {
+        const features = {
+            type: 'unknown',
+            subtype: null,
+            confidence: 0,
+            characteristics: [],
+            imports: [],
+            exports: [],
+            functions: [],
+            components: [],
+            hooks: [],
+            apiEndpoints: [],
+            configKeys: []
+        };
+
+        // 提取imports
+        const importMatches = content.match(/import\s+.*?from\s+['"`]([^'"`]+)['"`]/g);
+        if (importMatches) {
+            features.imports = importMatches.map(imp => {
+                const match = imp.match(/from\s+['"`]([^'"`]+)['"`]/);
+                return match ? match[1] : null;
+            }).filter(Boolean);
+        }
+
+        // 提取exports
+        const exportMatches = content.match(/export\s+(default\s+)?(function|const|class|interface|type)\s+(\w+)/g);
+        if (exportMatches) {
+            features.exports = exportMatches.map(exp => {
+                const match = exp.match(/export\s+(?:default\s+)?(?:function|const|class|interface|type)\s+(\w+)/);
+                return match ? match[1] : null;
+            }).filter(Boolean);
+        }
+
+        // 分析文件类型
+        const typeAnalysis = this.determineFileType(content, features);
+        Object.assign(features, typeAnalysis);
+
+        return features;
+    }
+
+    determineFileType(content, features) {
+        const rules = {
+            // React组件
+            component: {
+                patterns: [
+                    /export\s+default\s+function\s+\w+/,
+                    /export\s+default\s+\w+Component/,
+                    /return\s*\(\s*<[^>]*>/,
+                    /jsx|tsx/i,
+                    /useState|useEffect|useContext|useReducer/
+                ],
+                imports: ['react', '@/', './'],
+                weight: 1.0
+            },
+            
+            // Next.js页面
+            page: {
+                patterns: [
+                    /export\s+default\s+function\s+\w+Page/,
+                    /getServerSideProps|getStaticProps|getStaticPaths/,
+                    /next\/head|next\/router|next\/link/
+                ],
+                imports: ['next/', '@/'],
+                weight: 0.9
+            },
+
+            // API路由
+            api: {
+                patterns: [
+                    /export\s+default\s+function\s+handler/,
+                    /req\.method|res\.status|res\.json/,
+                    /NextApiRequest|NextApiResponse/
+                ],
+                imports: ['next'],
+                weight: 0.95
+            },
+
+            // 工具函数
+            util: {
+                patterns: [
+                    /export\s+(const|function)\s+\w+/,
+                    /export\s*{[^}]+}/,
+                    /utils?|helpers?/i
+                ],
+                imports: [],
+                weight: 0.6
+            },
+
+            // React Hooks
+            hook: {
+                patterns: [
+                    /export\s+(const|function)\s+use\w+/,
+                    /use[A-Z]\w+\(/,
+                    /useState|useEffect|useCallback|useMemo/
+                ],
+                imports: ['react'],
+                weight: 0.8
+            },
+
+            // 配置文件
+            config: {
+                patterns: [
+                    /export\s+default\s*{/,
+                    /module\.exports\s*=/,
+                    /process\.env/,
+                    /config|Config/i
+                ],
+                imports: [],
+                weight: 0.7
+            },
+
+            // TypeScript类型定义
+            types: {
+                patterns: [
+                    /interface\s+\w+\s*{/,
+                    /type\s+\w+\s*=/,
+                    /export\s+type|export\s+interface/,
+                    /\.d\.ts$/
+                ],
+                imports: [],
+                weight: 0.9
+            },
+
+            // 样式文件
+            style: {
+                patterns: [
+                    /styled-components|emotion/,
+                    /className|tailwind/i,
+                    /\.module\.css|\.scss/,
+                    /createGlobalStyle|css`/
+                ],
+                imports: ['styled-components', '@emotion'],
+                weight: 0.8
+            }
+        };
+
+        let bestMatch = { type: 'unknown', confidence: 0, characteristics: [] };
+
+        Object.entries(rules).forEach(([type, rule]) => {
+            let score = 0;
+            let matches = [];
+
+            // 检查模式匹配
+            rule.patterns.forEach(pattern => {
+                if (pattern.test(content)) {
+                    score += 0.3;
+                    matches.push(`pattern: ${pattern.source}`);
+                }
+            });
+
+            // 检查import匹配
+            rule.imports.forEach(importPrefix => {
+                if (features.imports.some(imp => imp.includes(importPrefix))) {
+                    score += 0.2;
+                    matches.push(`import: ${importPrefix}`);
+                }
+            });
+
+            const confidence = (score * rule.weight).toFixed(2);
+            if (confidence > bestMatch.confidence) {
+                bestMatch = {
+                    type,
+                    confidence: parseFloat(confidence),
+                    characteristics: matches
+                };
+            }
+        });
+
+        return bestMatch;
+    }
+
+    // 4. 原始路径推断 - 基于内容和注释推断原始位置
+    inferOriginalPath(content, features, filename) {
+        const pathClues = [];
+
+        // 从注释中寻找路径线索
+        const commentPaths = content.match(/\/\/.*?(?:src\/|pages\/|components\/|utils\/|hooks\/|api\/)[^\s]*/g);
+        if (commentPaths) {
+            pathClues.push(...commentPaths.map(comment => comment.replace(/\/\/.*?(?=src\/|pages\/|components\/|utils\/|hooks\/|api\/)/, '')));
+        }
+
+        // 从import路径推断
+        if (features.imports.length > 0) {
+            features.imports.forEach(imp => {
+                if (imp.startsWith('./') || imp.startsWith('../')) {
+                    pathClues.push(`relative import: ${imp}`);
+                } else if (imp.startsWith('@/')) {
+                    pathClues.push(`absolute import: ${imp}`);
+                }
+            });
+        }
+
+        // 基于文件类型推断目录
+        const typeToDir = {
+            component: 'components',
+            page: 'pages',
+            api: 'pages/api',
+            hook: 'hooks',
+            util: 'utils',
+            config: 'config',
+            types: 'types',
+            style: 'styles'
+        };
+
+        const suggestedDir = typeToDir[features.type] || 'unknown';
+
+        // 推断文件名
+        let suggestedFilename = filename;
+        
+        // 从export中推断
+        if (features.exports.length > 0) {
+            const mainExport = features.exports[0];
+            const extension = filename.match(/\.(jsx?|tsx?)$/)?.[0] || '.js';
+            suggestedFilename = `${mainExport}${extension}`;
+        }
+
+        // 从函数名推断
+        const functionMatch = content.match(/(?:export\s+default\s+)?function\s+(\w+)/);
+        if (functionMatch && functionMatch[1] !== 'handler') {
+            const extension = filename.match(/\.(jsx?|tsx?)$/)?.[0] || '.js';
+            suggestedFilename = `${functionMatch[1]}${extension}`;
+        }
+
+        return {
+            suggestedDir,
+            suggestedFilename,
+            fullPath: `${suggestedDir}/${suggestedFilename}`,
+            pathClues,
+            confidence: pathClues.length > 0 ? 0.8 : 0.5
+        };
+    }
+
+    // 主分析函数
+    async analyze() {
+        console.log('🔍 开始智能内容分析...\n');
+        
+        const files = fs.readdirSync(this.analysisDir)
+            .filter(f => f.startsWith('misc-') && (f.endsWith('.js') || f.endsWith('.jsx') || f.endsWith('.ts') || f.endsWith('.tsx')))
+            .sort();
+
+        this.results.totalFiles = files.length;
+        console.log(`📁 发现 ${files.length} 个misc文件\n`);
+
+        const fileData = [];
+        const contentHashes = new Map();
+
+        // 第一遍：读取所有文件并进行基础分析
+        for (const filename of files) {
+            const filepath = path.join(this.analysisDir, filename);
+            const stats = fs.statSync(filepath);
+            const content = fs.readFileSync(filepath, 'utf8');
+            
+            const timestamp = this.extractTimestamp(filename, stats);
+            const contentHash = this.calculateContentHash(content);
+            const features = this.analyzeContentFeatures(content, filename);
+            const pathInference = this.inferOriginalPath(content, features, filename);
+
+            const fileInfo = {
+                filename,
+                filepath,
+                size: stats.size,
+                timestamp,
+                content,
+                contentHash,
+                features,
+                pathInference,
+                isDuplicate: false,
+                versions: []
+            };
+
+            fileData.push(fileInfo);
+
+            // 检查重复
+            if (contentHashes.has(contentHash)) {
+                const existingFile = contentHashes.get(contentHash);
+                fileInfo.isDuplicate = true;
+                existingFile.versions.push(fileInfo);
+                this.results.duplicates.push({
+                    hash: contentHash,
+                    files: [existingFile.filename, fileInfo.filename],
+                    keepNewest: fileInfo.timestamp > existingFile.timestamp ? fileInfo.filename : existingFile.filename
+                });
+            } else {
+                contentHashes.set(contentHash, fileInfo);
+            }
+        }
+
+        // 第二遍：版本分析和相似度检测
+        console.log('🔄 进行版本分析和相似度检测...\n');
+        
+        for (let i = 0; i < fileData.length; i++) {
+            for (let j = i + 1; j < fileData.length; j++) {
+                const file1 = fileData[i];
+                const file2 = fileData[j];
+                
+                if (file1.contentHash !== file2.contentHash) {
+                    const similarity = this.calculateSimilarity(file1.content, file2.content);
+                    
+                    if (similarity > 0.8) { // 80%以上相似度认为是版本关系
+                        const versionGroup = `${file1.features.type}_${similarity.toFixed(2)}`;
+                        
+                        if (!this.results.versions[versionGroup]) {
+                            this.results.versions[versionGroup] = [];
+                        }
+                        
+                        this.results.versions[versionGroup].push({
+                            files: [file1.filename, file2.filename],
+                            similarity,
+                            newerFile: file1.timestamp > file2.timestamp ? file1.filename : file2.filename,
+                            type: file1.features.type
+                        });
+                    }
+                }
+            }
+        }
+
+        // 生成分类统计
+        fileData.forEach(file => {
+            const type = file.features.type;
+            if (!this.results.categories[type]) {
+                this.results.categories[type] = [];
+            }
+            this.results.categories[type].push({
+                filename: file.filename,
+                confidence: file.features.confidence,
+                suggestedPath: file.pathInference.fullPath,
+                size: file.size,
+                timestamp: file.timestamp
+            });
+        });
+
+        // 生成时间线
+        this.results.timeline = fileData
+            .sort((a, b) => a.timestamp - b.timestamp)
+            .map(file => ({
+                timestamp: file.timestamp,
+                filename: file.filename,
+                type: file.features.type,
+                action: 'recovered'
+            }));
+
+        return this.generateReport(fileData);
+    }
+
+    generateReport(fileData) {
+        const report = {
+            summary: {
+                totalFiles: this.results.totalFiles,
+                duplicateGroups: this.results.duplicates.length,
+                versionGroups: Object.keys(this.results.versions).length,
+                categories: Object.keys(this.results.categories).map(cat => ({
+                    type: cat,
+                    count: this.results.categories[cat].length,
+                    avgConfidence: (this.results.categories[cat].reduce((sum, f) => sum + f.confidence, 0) / this.results.categories[cat].length).toFixed(2)
+                }))
+            },
+            duplicates: this.results.duplicates,
+            versions: this.results.versions,
+            categories: this.results.categories,
+            timeline: this.results.timeline,
+            recommendations: this.generateRecommendations()
+        };
+
+        // 保存详细报告
+        fs.writeFileSync(path.join(this.outputDir, '../analysis-report.json'), JSON.stringify(report, null, 2));
+        
+        // 生成人类可读的报告
+        this.generateHumanReadableReport(report);
+        
+        // 生成恢复脚本
+        this.generateRecoveryScript(fileData);
+
+        return report;
+    }
+
+    generateRecommendations() {
+        const recommendations = [];
+
+        // 重复文件处理建议
+        if (this.results.duplicates.length > 0) {
+            recommendations.push({
+                type: 'duplicates',
+                message: `发现 ${this.results.duplicates.length} 组重复文件，建议保留最新版本`,
+                action: 'remove_old_duplicates'
+            });
+        }
+
+        // 版本文件处理建议
+        const versionCount = Object.keys(this.results.versions).length;
+        if (versionCount > 0) {
+            recommendations.push({
+                type: 'versions',
+                message: `发现 ${versionCount} 组相似文件，可能是同一文件的不同版本`,
+                action: 'review_versions'
+            });
+        }
+
+        // 分类建议
+        Object.entries(this.results.categories).forEach(([type, files]) => {
+            if (files.length > 0) {
+                const avgConfidence = files.reduce((sum, f) => sum + f.confidence, 0) / files.length;
+                if (avgConfidence < 0.5) {
+                    recommendations.push({
+                        type: 'low_confidence',
+                        message: `${type} 类别的文件识别置信度较低 (${avgConfidence.toFixed(2)})，需要手动确认`,
+                        action: 'manual_review',
+                        files: files.map(f => f.filename)
+                    });
+                }
+            }
+        });
+
+        return recommendations;
+    }
+
+    generateHumanReadableReport(report) {
+        let output = '# 智能内容分析报告\n\n';
+        
+        output += '## 📊 总体概况\n';
+        output += `- 总文件数: ${report.summary.totalFiles}\n`;
+        output += `- 重复文件组: ${report.summary.duplicateGroups}\n`;
+        output += `- 版本文件组: ${report.summary.versionGroups}\n\n`;
+
+        output += '## 📁 文件分类\n';
+        report.summary.categories.forEach(cat => {
+            output += `- **${cat.type}**: ${cat.count} 个文件 (平均置信度: ${cat.avgConfidence})\n`;
+        });
+        output += '\n';
+
+        if (report.duplicates.length > 0) {
+            output += '## 🔄 重复文件处理建议\n';
+            report.duplicates.forEach((dup, i) => {
+                output += `${i + 1}. 保留: \`${dup.keepNewest}\`, 删除: \`${dup.files.filter(f => f !== dup.keepNewest).join(', ')}\`\n`;
+            });
+            output += '\n';
+        }
+
+        output += '## 🚀 推荐的恢复步骤\n';
+        report.recommendations.forEach((rec, i) => {
+            output += `${i + 1}. **${rec.type}**: ${rec.message}\n`;
+        });
+
+        fs.writeFileSync(path.join(this.outputDir, '../ANALYSIS_REPORT.md'), output);
+    }
+
+    generateRecoveryScript(fileData) {
+        let script = '#!/bin/bash\n\n';
+        script += '# 自动生成的文件恢复脚本\n';
+        script += '# 基于智能内容分析引擎的结果\n\n';
+        
+        script += 'echo "🚀 开始执行智能文件恢复..."\n\n';
+
+        // 按类型分组处理
+        Object.entries(this.results.categories).forEach(([type, files]) => {
+            if (files.length > 0) {
+                script += `echo "📁 处理 ${type} 类文件..."\n`;
+                script += `mkdir -p "../${type}"\n\n`;
+                
+                files.forEach(file => {
+                    if (!file.filename.includes('duplicate')) {
+                        script += `# ${file.filename} -> ${file.suggestedPath}\n`;
+                        script += `cp "analysis/${file.filename}" "../${file.suggestedPath}"\n`;
+                        script += `echo "✅ 恢复: ${file.filename} -> ${file.suggestedPath}"\n\n`;
+                    }
+                });
+            }
+        });
+
+        script += 'echo "✨ 恢复完成！请检查结果并手动调整需要的文件。"\n';
+
+        fs.writeFileSync(path.join(this.outputDir, '../auto-recovery.sh'), script);
+        fs.chmodSync(path.join(this.outputDir, '../auto-recovery.sh'), '755');
+    }
+}
+
+// 使用示例
+async function main() {
+    const analysisDir = './analysis';
+    const outputDir = './sorted';
+    
+    const engine = new ContentAnalysisEngine(analysisDir, outputDir);
+    
+    try {
+        const report = await engine.analyze();
+        
+        console.log('🎉 分析完成！');
+        console.log('\n📋 生成的文件:');
+        console.log('- analysis-report.json (详细的JSON报告)');
+        console.log('- ANALYSIS_REPORT.md (人类可读的分析报告)');
+        console.log('- auto-recovery.sh (自动恢复脚本)');
+        console.log('\n💡 建议: 先查看 ANALYSIS_REPORT.md 了解分析结果，然后决定是否执行 auto-recovery.sh');
+        
+    } catch (error) {
+        console.error('❌ 分析过程中出错:', error);
+    }
+}
+
+// 如果直接运行此脚本
+if (require.main === module) {
+    main();
+}
+
+module.exports = ContentAnalysisEngine;
+
+
+太好了！您的分析非常准确。55个misc文件确实符合VS Code崩溃恢复的典型情况。让我为您创建一个强大的内容分析引擎来处理这个复杂的恢复任务：现在我为您创建了一个强大的智能内容分析引擎！这个引擎专门针对VS Code崩溃恢复的55个misc文件进行分析。
+
+## 🚀 立即执行分析：
+
+### 第一步：保存分析引擎
+```bash
+cd "/Users/duting/Downloads/money💰/--main/recovery-workspace"
+
+# 将上面的代码保存为文件
+# （您可以复制粘贴到 advanced-analysis-engine.js）
+```
+
+### 第二步：运行智能分析
+```bash
+# 在recovery-workspace目录中运行
+node advanced-analysis-engine.js
+```
+
+## 🧠 这个引擎的强大功能：
+
+### 1. **时间戳分析**
+- 从文件名提取时间戳（支持多种格式）
+- 识别同一文件的多个版本
+- 建立文件的时间线
+
+### 2. **智能去重**
+- 基于内容哈希的精确重复检测
+- 相似度分析（识别80%以上相似的版本文件）
+- 推荐保留最新版本
+
+### 3. **深度内容分析**
+- React组件识别
+- Next.js页面检测
+- API路由分析
+- Hook和工具函数识别
+- TypeScript类型定义检测
+
+### 4. **原始路径推断**
+- 从注释中提取路径线索
+- 基于import语句推断目录结构
+- 从export和函数名推断文件名
+- 智能目录映射
+
+## 📊 生成的分析报告包括：
+
+- **ANALYSIS_REPORT.md** - 人类可读的详细分析
+- **analysis-report.json** - 完整的结构化数据  
+- **auto-recovery.sh** - 自动恢复脚本
+
+## ⚡ 预期分析结果：
+
+基于55个文件，引擎将会：
+- 识别出大约10-15组重复文件
+- 发现5-8组版本文件（同一文件的不同修改版本）
+- 将文件分类到6-8个不同类型
+- 为每个文件推荐最可能的原始路径
+
+## 🎯 执行建议：
+
+1. **先运行分析** - 了解文件的全貌
+2. **查看报告** - 重点关注高置信度的分类
+3. **手动确认** - 对重要文件进行人工验证
+4. **执行恢复** - 运行自动生成的恢复脚本
+
+请先执行分析，然后告诉我结果！这样我们就能看到这55个misc文件的真实情况，并制定精确的恢复策略。

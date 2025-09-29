@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Period Hub - Workplace Wellness Tool</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography,forms"></script>
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: {
+                        500: '#9333ea', // Main Purple
+                        600: '#7c3aed', // Darker Purple
+                        700: '#6d28d9', // Darkest Purple
+                    },
+                    secondary: {
+                        500: '#ec4899', // Main Pink
+                        600: '#db2777', // Darker Pink
+                        700: '#be185d', // Darkest Pink
+                    },
+                    neutral: {
+                        50: '#f9f7f5',   // Very Light Warm Gray
+                        100: '#f1eeea',  // Light Warm Gray
+                        200: '#e7e2dd',  // Added for borders
+                        300: '#d9d1c9',  // Added for borders
+                        600: '#8c7968',  // Medium Warm Gray
+                        800: '#625249',  // Dark Warm Gray
+                        900: '#433831',  // Added for headings
+                    },
+                    success: { // For badges
+                        100: '#dcfce7',
+                        800: '#166534'
+                    },
+                    warning: { // For badges
+                        100: '#fef3c7',
+                        800: '#92400e'
+                    },
+                    danger: { // For badges
+                        100: '#fee2e2',
+                        800: '#991b1b'
+                    },
+                     blue: { // for privacy notice
+                        50: '#eff6ff',
+                        500: '#3b82f6',
+                        700: '#1d4ed8',
+                        900: '#1e3a8a'
+                    }
+                }
+            }
+        }
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-neutral-50 text-neutral-800 font-sans">
+
+    <div id="app-container">
+        <!-- App content will be rendered here by JavaScript -->
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

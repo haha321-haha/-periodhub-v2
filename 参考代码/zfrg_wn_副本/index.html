@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>period.health - 专业经期疼痛管理平台 | 科学缓解痛经</title>
+    <meta name="description" content="专业的经期疼痛管理平台，提供科学的痛经缓解方法、个性化症状评估、即时解决方案和长期调理指导。帮助女性科学管理经期健康。">
+    <meta name="keywords" content="痛经缓解, 经期疼痛, 月经疼痛管理, 痛经治疗, 女性健康, period pain relief">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Schema.org Organization Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "period.health",
+      "url": "https://period.health",
+      "logo": "https://period.health/images/logo.png",
+      "description": "专业的经期疼痛管理平台，为女性健康保驾护航",
+      "sameAs": [
+        "https://facebook.com/periodhealth",
+        "https://twitter.com/periodhealth"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": "Chinese"
+      }
+    }
+    </script>
+
+    <!-- Schema.org WebSite Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "period.health",
+      "url": "https://period.health",
+      "description": "专业的经期疼痛管理平台",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://period.health/search?q={search_term_string}",
+        "@id": "https://period.health/search",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm border-b sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-purple-600">period.health</div>
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="index.html" class="text-purple-600 font-semibold border-b-2 border-purple-600 pb-1" aria-current="page">首页</a></li>
+                    <li><a href="interactive-solutions.html" class="text-gray-600 hover:text-purple-600 transition-colors">互动解决方案</a></li>
+                    <li><a href="instant-solutions.html" class="text-gray-600 hover:text-purple-600 transition-colors">即时解决方案</a></li>
+                    <li><a href="regular-conditioning.html" class="text-gray-600 hover:text-purple-600 transition-colors">平时调理</a></li>
+                    <li><a href="medical-research.html" class="text-gray-600 hover:text-purple-600 transition-colors">医学原理</a></li>
+                    <li><a href="blog-center.html" class="text-gray-600 hover:text-purple-600 transition-colors">文章中心</a></li>
+                </ul>
+                <button class="md:hidden p-2" id="mobile-menu-btn" aria-label="打开移动菜单">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="md:hidden hidden mt-4 pb-4" id="mobile-menu">
+                <a href="index.html" class="block py-2 text-purple-600 font-semibold" aria-current="page">首页</a>
+                <a href="interactive-solutions.html" class="block py-2 text-gray-600">互动解决方案</a>
+                <a href="instant-solutions.html" class="block py-2 text-gray-600">即时解决方案</a>
+                <a href="regular-conditioning.html" class="block py-2 text-gray-600">平时调理</a>
+                <a href="medical-research.html" class="block py-2 text-gray-600">医学原理</a>
+                <a href="blog-center.html" class="block py-2 text-gray-600">文章中心</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-purple-600 via-pink-500 to-rose-400 text-white py-16 lg:py-24">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-8">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                            科学管理<span class="text-yellow-300">经期疼痛</span>
+                        </h1>
+                        <p class="text-xl md:text-2xl opacity-90 leading-relaxed">
+                            专业的痛经缓解指导，个性化的健康管理方案，让每个月都不再是痛苦的等待
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="interactive-solutions.html" 
+                               class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-center">
+                                立即评估症状 →
+                            </a>
+                            <a href="instant-solutions.html" 
+                               class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-purple-600 transition-colors text-center">
+                                急救缓解方法
+                            </a>
+                        </div>
+                    </div>
+                    <div class="relative flex items-center justify-center">
+                        <div class="w-80 h-80 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                            <div class="w-64 h-64 bg-white/30 rounded-full flex items-center justify-center">
+                                <svg class="w-32 h-32 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Features Section -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">全方位痛经管理解决方案</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        基于医学循证理论，结合中西医智慧，为您提供个性化的经期疼痛管理方案
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl border border-purple-100 hover:shadow-lg transition-shadow text-center">
+                        <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">智能症状评估</h3>
+                        <p class="text-gray-600 mb-6">
+                            基于专业医学量表，全面评估您的痛经症状，识别疼痛类型和严重程度
+                        </p>
+                        <a href="interactive-solutions.html" class="text-purple-600 font-semibold hover:underline">
+                            开始评估 →
+                        </a>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-2xl border border-blue-100 hover:shadow-lg transition-shadow text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">即时缓解方法</h3>
+                        <p class="text-gray-600 mb-6">
+                            经过验证的快速缓解技巧，包括热敷、按摩、呼吸法等立即可用的方法
+                        </p>
+                        <a href="instant-solutions.html" class="text-blue-600 font-semibold hover:underline">
+                            立即缓解 →
+                        </a>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-gradient-to-br from-green-50 to-teal-50 p-8 rounded-2xl border border-green-100 hover:shadow-lg transition-shadow text-center">
+                        <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">长期调理方案</h3>
+                        <p class="text-gray-600 mb-6">
+                            从饮食、运动、中医调理等多方面，制定个性化的长期健康管理计划
+                        </p>
+                        <a href="regular-conditioning.html" class="text-green-600 font-semibold hover:underline">
+                            了解调理 →
+                        </a>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="bg-gradient-to-br from-orange-50 to-red-50 p-8 rounded-2xl border border-orange-100 hover:shadow-lg transition-shadow text-center">
+                        <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4">科学知识普及</h3>
+                        <p class="text-gray-600 mb-6">
+                            了解痛经的医学原理，掌握科学的健康知识，做出明智的治疗选择
+                        </p>
+                        <a href="medical-research.html" class="text-orange-600 font-semibold hover:underline">
+                            学习知识 →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Assessment CTA -->
+        <section class="py-16 lg:py-20 bg-gradient-to-r from-teal-600 to-cyan-600 text-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                        2分钟了解您的痛经状况
+                    </h2>
+                    <p class="text-xl mb-8 opacity-90">
+                        通过专业的症状评估，获得个性化的缓解建议和治疗方案推荐
+                    </p>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8">
+                        <div class="grid md:grid-cols-3 gap-6 text-center">
+                            <div class="space-y-2">
+                                <div class="text-3xl font-bold">2-5</div>
+                                <div class="text-sm opacity-90">分钟完成评估</div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="text-3xl font-bold">15+</div>
+                                <div class="text-sm opacity-90">专业评估维度</div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="text-3xl font-bold">100%</div>
+                                <div class="text-sm opacity-90">个性化建议</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="interactive-solutions.html" 
+                       class="inline-block bg-white text-teal-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        开始免费评估 →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Success Stories -->
+        <section class="py-16 lg:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">真实用户康复故事</h2>
+                    <p class="text-lg text-gray-600">
+                        数千名用户通过科学管理，重获健康自信的生活
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Story 1 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-purple-600 font-semibold">小</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold">小雅</div>
+                                <div class="text-sm text-gray-600">22岁 大学生</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 italic">
+                            "从高中开始就有严重痛经，每个月都要请假。通过这个平台的系统调理方案，
+                            现在疼痛减轻了80%，再也不用担心影响学习和工作了。"
+                        </p>
+                        <div class="text-sm text-purple-600 font-semibold">
+                            康复时间：6个月
+                        </div>
+                    </div>
+
+                    <!-- Story 2 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-blue-600 font-semibold">李</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold">李女士</div>
+                                <div class="text-sm text-gray-600">28岁 设计师</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 italic">
+                            "工作压力大的时候痛经就会加重。学会了压力管理和运动调理后，
+                            不仅痛经缓解了，整个人的状态都更好了。"
+                        </p>
+                        <div class="text-sm text-blue-600 font-semibold">
+                            康复时间：4个月
+                        </div>
+                    </div>
+
+                    <!-- Story 3 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-green-600 font-semibold">王</span>
+                            </div>
+                            <div>
+                                <div class="font-semibold">王女士</div>
+                                <div class="text-sm text-gray-600">35岁 教师</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4 italic">
+                            "生完孩子后痛经变严重了，通过饮食调理和中医方法，
+                            现在已经恢复到生育前的状态，还学会了很多健康知识。"
+                        </p>
+                        <div class="text-sm text-green-600 font-semibold">
+                            康复时间：8个月
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-12">
+                    <a href="blog-center.html" 
+                       class="inline-block bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors">
+                        查看更多康复故事 →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resource Center -->
+        <section class="py-16 lg:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">丰富的健康资源</h2>
+                    <p class="text-lg text-gray-600">
+                        提供全面的经期健康知识和实用工具
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Resource 1 -->
+                    <div class="border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">专业文章库</h3>
+                        <p class="text-gray-600 mb-4">
+                            医学专家撰写的科普文章、最新研究进展和治疗指南
+                        </p>
+                        <a href="blog-center.html" class="text-purple-600 font-semibold hover:underline">
+                            浏览文章 →
+                        </a>
+                    </div>
+
+                    <!-- Resource 2 -->
+                    <div class="border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">疼痛日志</h3>
+                        <p class="text-gray-600 mb-4">
+                            记录和追踪疼痛模式，为自己和医生提供有价值的诊疗信息
+                        </p>
+                        <a href="resources/pain-tracker.html" class="text-blue-600 font-semibold hover:underline">
+                            开始记录 →
+                        </a>
+                    </div>
+
+                    <!-- Resource 3 -->
+                    <div class="border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">常见问题</h3>
+                        <p class="text-gray-600 mb-4">
+                            专业医师回答用户最关心的痛经问题，快速获得可靠信息
+                        </p>
+                        <a href="faq.html" class="text-green-600 font-semibold hover:underline">
+                            查看问答 →
+                        </a>
+                    </div>
+
+                    <!-- Resource 4 -->
+                    <div class="border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">下载资源</h3>
+                        <p class="text-gray-600 mb-4">
+                            实用的PDF指南、食谱、运动计划等可下载资源
+                        </p>
+                        <a href="resources/index.html" class="text-orange-600 font-semibold hover:underline">
+                            获取资源 →
+                        </a>
+                    </div>
+
+                    <!-- Resource 5 -->
+                    <div class="border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">青少年专区</h3>
+                        <p class="text-gray-600 mb-4">
+                            专为青少年设计的经期教育内容和校园应对指南
+                        </p>
+                        <a href="scenes/teen-campus-pain-guide.html" class="text-pink-600 font-semibold hover:underline">
+                            查看指南 →
+                        </a>
+                    </div>
+
+                    <!-- Resource 6 -->
+                    <div class="border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">自然疗法</h3>
+                        <p class="text-gray-600 mb-4">
+                            中医调理、草本疗法、芳香疗法等天然缓解方法
+                        </p>
+                        <a href="therapies/natural-therapy-principles.html" class="text-indigo-600 font-semibold hover:underline">
+                            了解疗法 →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Subscribe -->
+        <section class="py-16 lg:py-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">订阅健康周刊</h2>
+                    <p class="text-xl mb-8 opacity-90">
+                        每周获取最新的经期健康资讯、专家建议和康复故事
+                    </p>
+                    <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" id="newsletter-form">
+                        <input 
+                            type="email" 
+                            placeholder="输入您的邮箱地址"
+                            class="flex-1 px-4 py-3 rounded-lg text-gray-800 focus:ring-2 focus:ring-purple-300 focus:outline-none"
+                            required
+                            aria-label="邮箱地址">
+                        <button 
+                            type="submit"
+                            class="bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            订阅
+                        </button>
+                    </form>
+                    <p class="text-purple-200 text-sm mt-4">
+                        我们承诺保护您的隐私，绝不分享您的邮箱地址。
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">period.health</h3>
+                    <p class="text-gray-400 mb-4">专业的经期疼痛管理平台，为女性健康保驾护航。</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">核心功能</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="interactive-solutions.html" class="hover:text-white">症状评估器</a></li>
+                        <li><a href="interactive-solutions.html" class="hover:text-white">个性化方案</a></li>
+                        <li><a href="instant-solutions.html" class="hover:text-white">即时缓解</a></li>
+                        <li><a href="regular-conditioning.html" class="hover:text-white">平时调理</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">专业内容</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="medical-research.html" class="hover:text-white">医学研究</a></li>
+                        <li><a href="blog-center.html" class="hover:text-white">健康资讯</a></li>
+                        <li><a href="blog-center.html" class="hover:text-white">用户故事</a></li>
+                        <li><a href="blog-center.html" class="hover:text-white">专家观点</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">法律信息</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="privacy-policy.html" class="hover:text-white">隐私政策</a></li>
+                        <li><a href="terms-of-service.html" class="hover:text-white">服务条款</a></li>
+                        <li><a href="faq.html" class="hover:text-white">常见问题</a></li>
+                        <li><a href="#" class="hover:text-white">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 period.health. 本网站内容仅供参考，不能替代专业医疗建议。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

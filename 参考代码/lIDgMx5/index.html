@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Delivery: Dysmenorrhea Impact Calculator</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="app/style.css">
+</head>
+<body class="bg-neutral-50 text-neutral-800 font-sans antialiased">
+
+    <div id="page-container" class="min-h-screen flex flex-col">
+
+        <header class="sticky top-0 z-50 bg-neutral-50/80 backdrop-blur-lg border-b border-neutral-100">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0">
+                            <i data-lucide="check-circle-2" class="w-8 h-8 text-purple-600"></i>
+                        </div>
+                        <div>
+                             <h1 class="text-lg font-bold text-neutral-800" data-lang-key="pageTitle">Project Delivery: Dysmenorrhea Impact Calculator</h1>
+                             <p class="text-sm text-neutral-600" data-lang-key="pageSubtitle">Final Build & Verification Report</p>
+                        </div>
+                    </div>
+                    <div id="page-lang-switcher" class="flex items-center gap-2 text-sm font-medium">
+                        <button data-lang="en" class="px-3 py-1 rounded-md transition-colors">EN</button>
+                        <div class="w-px h-4 bg-neutral-600/20"></div>
+                        <button data-lang="zh" class="px-3 py-1 rounded-md transition-colors">ZH</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+            <div class="space-y-16 md:space-y-24">
+
+                <section id="live-app-section">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl" data-lang-key="appTitle">Live MVP Application</h2>
+                        <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-600" data-lang-key="appSubtitle">The fully functional and repaired calculator is embedded below. All features, including the bilingual interface and assessment logic, are active.</p>
+                    </div>
+                    <div class="max-w-4xl mx-auto rounded-2xl shadow-2xl shadow-purple-500/10 bg-white p-2 border border-neutral-100">
+                         <!-- The application's DOM structure is placed here -->
+                        <div id="app-root" class="min-h-[600px] flex flex-col relative overflow-hidden rounded-xl">
+                            <header class="w-full p-4 sm:p-6" style="display: none;">
+                                <div class="container mx-auto flex justify-between items-center">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="heart-pulse" class="text-purple-500"></i>
+                                        <span class="font-bold text-lg text-neutral-800">PeriodWise</span>
+                                    </div>
+                                    <div id="lang-switcher" class="flex items-center gap-2 text-sm font-medium">
+                                        <button data-lang="en" class="px-3 py-1 rounded-md transition-colors">EN</button>
+                                        <div class="w-px h-4 bg-neutral-600/20"></div>
+                                        <button data-lang="zh" class="px-3 py-1 rounded-md transition-colors">ZH</button>
+                                    </div>
+                                </div>
+                            </header>
+
+                            <main id="app-container" class="flex-grow flex flex-col items-center justify-center p-4">
+                                <!-- App content will be rendered here by JavaScript -->
+                                <div class="text-center">
+                                    <p class="text-neutral-500">Loading Application...</p>
+                                </div>
+                            </main>
+
+                            <footer class="w-full py-6" style="display: none;">
+                                <div class="container mx-auto text-center text-neutral-600 text-xs">
+                                    <p id="footer-disclaimer">This tool is not a medical diagnosis. Consult a doctor for any health concerns.</p>
+                                    <p class="mt-1 opacity-70">&copy; 2025 PeriodWise. All Rights Reserved.</p>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="border-t border-neutral-200"></div>
+
+                <section id="report-section">
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl" data-lang-key="reportTitle">Final Verification Report</h2>
+                        <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-600" data-lang-key="reportSubtitle">This report details the root cause analysis, the implemented fix, and verification tests confirming the resolution of the text rendering issue.</p>
+                    </div>
+                    <div id="report-container" class="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-xl shadow-purple-500/10 border border-neutral-100 prose lg:prose-lg max-w-none">
+                        <p class="text-neutral-500">Loading Report...</p>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <footer class="w-full py-8 mt-16 border-t border-neutral-200">
+            <div class="container mx-auto text-center text-neutral-600 text-sm">
+                <p>Project Delivery Page &copy; 2025 Neo. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <script type="module" src="app/app.js"></script>
+</body>
+</html>

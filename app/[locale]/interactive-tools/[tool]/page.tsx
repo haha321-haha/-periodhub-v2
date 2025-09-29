@@ -4,18 +4,41 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import Breadcrumb from '@/components/Breadcrumb';
+import dynamic from 'next/dynamic';
 
-// Static imports for interactive tools (temporary fix)
-import PainTrackerTool from '../components/PainTrackerTool';
-import SymptomAssessmentTool from '../components/SymptomAssessmentTool';
-import ConstitutionTestTool from '../components/ConstitutionTestTool';
-import PeriodPainAssessmentTool from '../components/PeriodPainAssessmentTool';
-import CycleTrackerTool from '../components/CycleTrackerTool';
-import SymptomTrackerTool from '../components/SymptomTrackerTool';
+// 动态导入互动工具组件 - 代码分割优化
+const PainTrackerTool = dynamic(() => import('../components/PainTrackerTool'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
 
-// Import emergency relief and medical disclaimer components
-import EmergencyReliefGuide from '../shared/components/EmergencyReliefGuide';
-import MedicalDisclaimer from '../shared/components/MedicalDisclaimer';
+const SymptomAssessmentTool = dynamic(() => import('../components/SymptomAssessmentTool'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const ConstitutionTestTool = dynamic(() => import('../components/ConstitutionTestTool'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const PeriodPainAssessmentTool = dynamic(() => import('../components/PeriodPainAssessmentTool'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const CycleTrackerTool = dynamic(() => import('../components/CycleTrackerTool'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const SymptomTrackerTool = dynamic(() => import('../components/SymptomTrackerTool'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+// 动态导入共享组件
+const EmergencyReliefGuide = dynamic(() => import('../shared/components/EmergencyReliefGuide'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const MedicalDisclaimer = dynamic(() => import('../shared/components/MedicalDisclaimer'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-24 rounded-lg" />
+});
 
 // Types
 type Locale = 'en' | 'zh';

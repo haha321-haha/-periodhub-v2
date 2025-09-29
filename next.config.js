@@ -69,7 +69,7 @@ const nextConfig = {
       {
         source: '/(.*)',
         headers: [
-          // 预连接到关键域名
+          // 预连接到关键域名 - 预加载策略优化
           {
             key: 'Link',
             value: '<https://fonts.googleapis.com>; rel=preconnect; crossorigin'
@@ -77,6 +77,15 @@ const nextConfig = {
           {
             key: 'Link', 
             value: '<https://fonts.gstatic.com>; rel=preconnect; crossorigin'
+          },
+          // 预加载关键资源
+          {
+            key: 'Link',
+            value: '</_next/static/css/app/layout.css>; rel=preload; as=style'
+          },
+          {
+            key: 'Link',
+            value: '</_next/static/chunks/webpack.js>; rel=preload; as=script'
           },
           // 缓存控制
           {

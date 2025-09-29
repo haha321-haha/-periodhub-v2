@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互动解决方案 - 智能症状评估与个性化建议 | period.health</title>
+    <meta name="description" content="通过专业的症状评估器，获得个性化的痛经管理方案。AI驱动的分析为您提供科学、有效的治疗建议。">
+    <meta name="keywords" content="智能症状评估, 个性化痛经治疗, AI症状分析, 互动健康工具, 个性化医疗建议">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm border-b">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-purple-600">period.health</div>
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="index.html" class="text-gray-600 hover:text-purple-600 transition-colors">首页</a></li>
+                    <li><a href="interactive-solutions.html" class="text-purple-600 font-semibold border-b-2 border-purple-600 pb-1" aria-current="page">互动解决方案</a></li>
+                    <li><a href="instant-solutions.html" class="text-gray-600 hover:text-purple-600 transition-colors">即时解决方案</a></li>
+                    <li><a href="regular-conditioning.html" class="text-gray-600 hover:text-purple-600 transition-colors">平时调理</a></li>
+                    <li><a href="medical-research.html" class="text-gray-600 hover:text-purple-600 transition-colors">医学原理</a></li>
+                    <li><a href="blog-center.html" class="text-gray-600 hover:text-purple-600 transition-colors">文章中心</a></li>
+                </ul>
+                <button class="md:hidden p-2" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="md:hidden hidden mt-4 pb-4" id="mobile-menu">
+                <a href="index.html" class="block py-2 text-gray-600">首页</a>
+                <a href="interactive-solutions.html" class="block py-2 text-purple-600 font-semibold" aria-current="page">互动解决方案</a>
+                <a href="instant-solutions.html" class="block py-2 text-gray-600">即时解决方案</a>
+                <a href="regular-conditioning.html" class="block py-2 text-gray-600">平时调理</a>
+                <a href="medical-research.html" class="block py-2 text-gray-600">医学原理</a>
+                <a href="blog-center.html" class="block py-2 text-gray-600">文章中心</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">智能症状评估器</h1>
+                    <p class="text-xl md:text-2xl opacity-90 mb-8">专业医学知识与AI技术结合，为您提供个性化的痛经管理方案</p>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+                        <h2 class="text-lg font-semibold mb-3">🎯 评估优势</h2>
+                        <p class="text-sm opacity-90">基于科学医学标准，分析您的症状模式，识别痛经类型，提供个性化建议</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Form Section -->
+        <section class="py-16 bg-white" id="assessment-section">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="text-center mb-8">
+                            <h2 class="text-3xl font-bold mb-4">症状详情评估</h2>
+                            <p class="text-gray-600">请诚实详细地回答以下问题，这将帮助我们为您提供最准确的建议</p>
+                        </div>
+
+                        <form id="symptom-assessment-form" class="space-y-6">
+                            <!-- Pain Intensity -->
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                                <label class="block text-lg font-semibold text-red-700 mb-4">疼痛强度评估</label>
+                                <p class="text-sm text-red-600 mb-4">请选择您通常经历的最高疼痛强度（0=无痛，10=难以忍受的剧痛）</p>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm text-gray-600">0</span>
+                                    <input type="range" id="pain-intensity" name="pain_intensity" min="0" max="10" step="1" value="5" 
+                                           class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-red">
+                                    <span class="text-sm text-gray-600">10</span>
+                                </div>
+                                <div class="mt-2 text-center">
+                                    <span class="text-lg font-bold text-red-600" id="pain-intensity-display">5</span>
+                                    <span class="text-sm text-gray-600 ml-2" id="pain-intensity-label">中等疼痛</span>
+                                </div>
+                            </div>
+
+                            <!-- Daily Impact -->
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                                <label class="block text-lg font-semibold text-blue-700 mb-4">对日常生活的影响</label>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <input type="radio" id="impact-none" name="daily_impact" value="no_impact" 
+                                               class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                                        <label for="impact-none" class="ml-2 text-gray-700">几乎无影响，可以正常进行所有活动</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="impact-mild" name="daily_impact" value="mild_impact" 
+                                               class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                                        <label for="impact-mild" class="ml-2 text-gray-700">轻微影响，可能需要放慢节奏</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="impact-moderate" name="daily_impact" value="moderate_impact" 
+                                               class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                                        <label for="impact-moderate" class="ml-2 text-gray-700">中度影响，难以专注工作或学习</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="impact-severe" name="daily_impact" value="severe_impact" 
+                                               class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                                        <label for="impact-severe" class="ml-2 text-gray-700">严重影响，无法正常工作或学习</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="impact-bedridden" name="daily_impact" value="bedridden" 
+                                               class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                                        <label for="impact-bedridden" class="ml-2 text-gray-700">需要卧床休息，无法进行基本活动</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pain Timing -->
+                            <div class="bg-purple-50 border border-purple-200 rounded-lg p-6">
+                                <label class="block text-lg font-semibold text-purple-700 mb-4">疼痛通常什么时候开始？</label>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <input type="radio" id="timing-before" name="pain_timing" value="before_menstruation" 
+                                               class="w-4 h-4 text-purple-600 focus:ring-purple-500">
+                                        <label for="timing-before" class="ml-2 text-gray-700">月经来潮前1-3天</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="timing-with" name="pain_timing" value="with_menstruation" 
+                                               class="w-4 h-4 text-purple-600 focus:ring-purple-500">
+                                        <label for="timing-with" class="ml-2 text-gray-700">月经开始时</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="timing-after" name="pain_timing" value="after_start" 
+                                               class="w-4 h-4 text-purple-600 focus:ring-purple-500">
+                                        <label for="timing-after" class="ml-2 text-gray-700">月经开始后1-2天</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="timing-throughout" name="pain_timing" value="throughout" 
+                                               class="w-4 h-4 text-purple-600 focus:ring-purple-500">
+                                        <label for="timing-throughout" class="ml-2 text-gray-700">整个月经期</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="timing-unpredictable" name="pain_timing" value="unpredictable" 
+                                               class="w-4 h-4 text-purple-600 focus:ring-purple-500">
+                                        <label for="timing-unpredictable" class="ml-2 text-gray-700">时间不固定</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pain Duration -->
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                                <label class="block text-lg font-semibold text-green-700 mb-4">疼痛通常持续多长时间？</label>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <input type="radio" id="duration-hours" name="pain_duration" value="few_hours" 
+                                               class="w-4 h-4 text-green-600 focus:ring-green-500">
+                                        <label for="duration-hours" class="ml-2 text-gray-700">几个小时</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="duration-half-day" name="pain_duration" value="half_day" 
+                                               class="w-4 h-4 text-green-600 focus:ring-green-500">
+                                        <label for="duration-half-day" class="ml-2 text-gray-700">半天左右</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="duration-full-day" name="pain_duration" value="full_day" 
+                                               class="w-4 h-4 text-green-600 focus:ring-green-500">
+                                        <label for="duration-full-day" class="ml-2 text-gray-700">1天</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="duration-multiple" name="pain_duration" value="multiple_days" 
+                                               class="w-4 h-4 text-green-600 focus:ring-green-500">
+                                        <label for="duration-multiple" class="ml-2 text-gray-700">2-3天</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="radio" id="duration-entire" name="pain_duration" value="entire_period" 
+                                               class="w-4 h-4 text-green-600 focus:ring-green-500">
+                                        <label for="duration-entire" class="ml-2 text-gray-700">整个月经期</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pain Characteristics -->
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                                <label class="block text-lg font-semibold text-yellow-700 mb-4">疼痛的性质特点（可多选）</label>
+                                <div class="grid md:grid-cols-2 gap-3">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="char-cramping" name="pain_characteristics" value="spasmodic" 
+                                               class="w-4 h-4 text-yellow-600 focus:ring-yellow-500">
+                                        <label for="char-cramping" class="ml-2 text-gray-700">痉挛性疼痛（绞痛）</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="char-dull" name="pain_characteristics" value="dull_ache" 
+                                               class="w-4 h-4 text-yellow-600 focus:ring-yellow-500">
+                                        <label for="char-dull" class="ml-2 text-gray-700">钝痛（持续性疼痛）</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="char-sharp" name="pain_characteristics" value="sharp" 
+                                               class="w-4 h-4 text-yellow-600 focus:ring-yellow-500">
+                                        <label for="char-sharp" class="ml-2 text-gray-700">尖锐刺痛</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="char-throbbing" name="pain_characteristics" value="throbbing" 
+                                               class="w-4 h-4 text-yellow-600 focus:ring-yellow-500">
+                                        <label for="char-throbbing" class="ml-2 text-gray-700">搏动性疼痛</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="char-radiating" name="pain_characteristics" value="radiating" 
+                                               class="w-4 h-4 text-yellow-600 focus:ring-yellow-500">
+                                        <label for="char-radiating" class="ml-2 text-gray-700">放射性疼痛</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="char-pressure" name="pain_characteristics" value="pressure" 
+                                               class="w-4 h-4 text-yellow-600 focus:ring-yellow-500">
+                                        <label for="char-pressure" class="ml-2 text-gray-700">压迫感</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pain Location -->
+                            <div class="bg-orange-50 border border-orange-200 rounded-lg p-6">
+                                <label class="block text-lg font-semibold text-orange-700 mb-4">疼痛主要位置（可多选）</label>
+                                <div class="grid md:grid-cols-2 gap-3">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="loc-lower-abdomen" name="pain_location" value="lower_abdomen" 
+                                               class="w-4 h-4 text-orange-600 focus:ring-orange-500">
+                                        <label for="loc-lower-abdomen" class="ml-2 text-gray-700">下腹部</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="loc-lower-back" name="pain_location" value="lower_back" 
+                                               class="w-4 h-4 text-orange-600 focus:ring-orange-500">
+                                        <label for="loc-lower-back" class="ml-2 text-gray-700">腰部</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="loc-pelvis" name="pain_location" value="pelvis" 
+                                               class="w-4 h-4 text-orange-600 focus:ring-orange-500">
+                                        <label for="loc-pelvis" class="ml-2 text-gray-700">骨盆区域</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="loc-thighs" name="pain_location" value="thighs" 
+                                               class="w-4 h-4 text-orange-600 focus:ring-orange-500">
+                                        <label for="loc-thighs" class="ml-2 text-gray-700">大腿内侧</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="loc-sides" name="pain_location" value="sides" 
+                                               class="w-4 h-4 text-orange-600 focus:ring-orange-500">
+                                        <label for="loc-sides" class="ml-2 text-gray-700">两侧腰际</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="loc-whole-abdomen" name="pain_location" value="whole_abdomen" 
+                                               class="w-4 h-4 text-orange-600 focus:ring-orange-500">
+                                        <label for="loc-whole-abdomen" class="ml-2 text-gray-700">整个腹部</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Additional Questions -->
+                            <div class="space-y-6">
+                                <!-- Age Group -->
+                                <div class="bg-indigo-50 border border-indigo-200 rounded-lg p-6">
+                                    <label class="block text-lg font-semibold text-indigo-700 mb-4">年龄段</label>
+                                    <select name="age_group" class="w-full p-3 border border-indigo-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                        <option value="">请选择年龄段</option>
+                                        <option value="under_18">18岁以下</option>
+                                        <option value="18_25">18-25岁</option>
+                                        <option value="26_35">26-35岁</option>
+                                        <option value="36_45">36-45岁</option>
+                                        <option value="over_45">45岁以上</option>
+                                    </select>
+                                </div>
+
+                                <!-- Cycle Regularity -->
+                                <div class="bg-pink-50 border border-pink-200 rounded-lg p-6">
+                                    <label class="block text-lg font-semibold text-pink-700 mb-4">月经周期规律性</label>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center">
+                                            <input type="radio" id="cycle-regular" name="cycle_regularity" value="regular" 
+                                                   class="w-4 h-4 text-pink-600 focus:ring-pink-500">
+                                            <label for="cycle-regular" class="ml-2 text-gray-700">非常规律（相差不超过3天）</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="radio" id="cycle-somewhat" name="cycle_regularity" value="somewhat_irregular" 
+                                                   class="w-4 h-4 text-pink-600 focus:ring-pink-500">
+                                            <label for="cycle-somewhat" class="ml-2 text-gray-700">基本规律（相差3-7天）</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="radio" id="cycle-irregular" name="cycle_regularity" value="very_irregular" 
+                                                   class="w-4 h-4 text-pink-600 focus:ring-pink-500">
+                                            <label for="cycle-irregular" class="ml-2 text-gray-700">不太规律（相差1-2周）</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input type="radio" id="cycle-unpredictable" name="cycle_regularity" value="unpredictable" 
+                                                   class="w-4 h-4 text-pink-600 focus:ring-pink-500">
+                                            <label for="cycle-unpredictable" class="ml-2 text-gray-700">完全不可预测</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="text-center">
+                                <button type="submit" 
+                                        class="bg-purple-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-purple-700 transition-colors">
+                                    开始智能分析
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analysis Results Section (Initially Hidden) -->
+        <section class="py-16 bg-gray-50 hidden" id="analysis-results-section">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4">您的症状分析结果</h2>
+                        <p class="text-gray-600">基于您提供的信息，我们为您生成了以下分析和建议</p>
+                    </div>
+
+                    <!-- Analysis Summary -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h3 class="text-2xl font-bold mb-6 text-center">症状概况</h3>
+                        <div id="analysis-summary" class="text-gray-700">
+                            <!-- Analysis summary will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Severity Assessment -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h3 class="text-2xl font-bold mb-6 text-center">严重程度评估</h3>
+                        <div id="severity-assessment">
+                            <!-- Severity assessment will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Risk Factors -->
+                    <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                        <h3 class="text-2xl font-bold mb-6 text-center">风险因素评估</h3>
+                        <div id="risk-factors">
+                            <!-- Risk factors will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations Section (Initially Hidden) -->
+        <section class="py-16 bg-white hidden" id="recommendations-section">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-12">个性化建议方案</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Immediate Recommendations -->
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-8">
+                            <h3 class="text-xl font-bold text-red-700 mb-6">🚨 即时缓解建议</h3>
+                            <div id="immediate-recommendations" class="space-y-4">
+                                <!-- Immediate recommendations will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Medical Recommendations -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-8">
+                            <h3 class="text-xl font-bold text-blue-700 mb-6">🏥 医疗建议</h3>
+                            <div id="medical-recommendations" class="space-y-4">
+                                <!-- Medical recommendations will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Long-term Recommendations -->
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-8">
+                            <h3 class="text-xl font-bold text-green-700 mb-6">📅 长期调理建议</h3>
+                            <div id="longterm-recommendations" class="space-y-4">
+                                <!-- Long-term recommendations will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Educational Resources -->
+                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-8">
+                            <h3 class="text-xl font-bold text-purple-700 mb-6">📚 教育资源</h3>
+                            <div id="educational-recommendations" class="space-y-4">
+                                <!-- Educational recommendations will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="text-center mt-12">
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button id="restart-assessment" 
+                                    class="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition-colors">
+                                重新评估
+                            </button>
+                            <a href="instant-solutions.html" 
+                               class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                                查看即时缓解方法
+                            </a>
+                            <a href="regular-conditioning.html" 
+                               class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                                了解长期调理
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">period.health</h3>
+                    <p class="text-gray-400 mb-4">专业的经期疼痛管理平台，为女性健康保驾护航。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">核心功能</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="interactive-solutions.html" class="hover:text-white">症状评估器</a></li>
+                        <li><a href="interactive-solutions.html" class="hover:text-white">个性化方案</a></li>
+                        <li><a href="instant-solutions.html" class="hover:text-white">即时缓解</a></li>
+                        <li><a href="regular-conditioning.html" class="hover:text-white">平时调理</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">专业内容</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="medical-research.html" class="hover:text-white">医学研究</a></li>
+                        <li><a href="blog-center.html" class="hover:text-white">健康资讯</a></li>
+                        <li><a href="blog-center.html" class="hover:text-white">用户故事</a></li>
+                        <li><a href="blog-center.html" class="hover:text-white">专家观点</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">法律信息</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="privacy-policy.html" class="hover:text-white">隐私政策</a></li>
+                        <li><a href="terms-of-service.html" class="hover:text-white">服务条款</a></li>
+                        <li><a href="faq.html" class="hover:text-white">常见问题</a></li>
+                        <li><a href="#" class="hover:text-white">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 period.health. 本网站内容仅供参考，不能替代专业医疗建议。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="assessment-logic.js"></script>
+    <script>
+        // Initialize assessment form functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const painIntensitySlider = document.getElementById('pain-intensity');
+            const painIntensityDisplay = document.getElementById('pain-intensity-display');
+            const painIntensityLabel = document.getElementById('pain-intensity-label');
+            const form = document.getElementById('symptom-assessment-form');
+            const restartButton = document.getElementById('restart-assessment');
+
+            // Pain intensity slider functionality
+            const painLabels = [
+                '无痛', '非常轻微', '轻微', '轻度', '轻中度', 
+                '中等', '中度', '重度', '严重', '非常严重', '极度疼痛'
+            ];
+
+            function updatePainDisplay() {
+                const value = parseInt(painIntensitySlider.value);
+                painIntensityDisplay.textContent = value;
+                painIntensityLabel.textContent = painLabels[value];
+            }
+
+            painIntensitySlider.addEventListener('input', updatePainDisplay);
+            updatePainDisplay(); // Initialize display
+
+            // Form submission handler
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Collect form data
+                const formData = new FormData(form);
+                const data = {};
+                
+                // Convert FormData to object
+                for (let [key, value] of formData.entries()) {
+                    if (data[key]) {
+                        // Handle multiple values (checkboxes)
+                        if (Array.isArray(data[key])) {
+                            data[key].push(value);
+                        } else {
+                            data[key] = [data[key], value];
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                }
+
+                // Analyze symptoms using assessment logic
+                const analysis = analyzeSymptoms(data);
+                
+                // Store analysis data for recommendations
+                analysis.data = data;
+                
+                // Generate recommendations
+                const recommendations = generateRecommendations(analysis);
+                
+                // Display results
+                displayAnalysisResults(analysis);
+                displayRecommendations(recommendations);
+            });
+
+            // Restart assessment functionality
+            if (restartButton) {
+                restartButton.addEventListener('click', function() {
+                    // Reset form
+                    form.reset();
+                    updatePainDisplay();
+                    
+                    // Show assessment section, hide results
+                    document.getElementById('assessment-section').classList.remove('hidden');
+                    document.getElementById('analysis-results-section').classList.add('hidden');
+                    document.getElementById('recommendations-section').classList.add('hidden');
+                    
+                    // Scroll back to top of assessment
+                    document.getElementById('assessment-section').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

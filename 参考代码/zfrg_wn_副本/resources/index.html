@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源中心 - 痛经管理工具与实用指南 | period.health</title>
+    <meta name="description" content="期实用的痛经管理工具，包括疼痛追踪器、症状记录表、教育资源和下载指南，助力有效管理经期健康。">
+    <meta name="keywords" content="痛经管理工具, 疼痛追踪器, 症状记录, 健康工具, 下载资源">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation Header -->
+    <header class="bg-white shadow-sm border-b">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-purple-600">period.health</div>
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="../index.html" class="text-gray-600 hover:text-purple-600 transition-colors">首页</a></li>
+                    <li><a href="../interactive-solutions.html" class="text-gray-600 hover:text-purple-600 transition-colors">互动解决方案</a></li>
+                    <li><a href="../instant-solutions.html" class="text-gray-600 hover:text-purple-600 transition-colors">即时解决方案</a></li>
+                    <li><a href="../regular-conditioning.html" class="text-gray-600 hover:text-purple-600 transition-colors">平时调理</a></li>
+                    <li><a href="../medical-research.html" class="text-gray-600 hover:text-purple-600 transition-colors">医学原理</a></li>
+                    <li><a href="../blog-center.html" class="text-gray-600 hover:text-purple-600 transition-colors">文章中心</a></li>
+                </ul>
+                <button class="md:hidden p-2" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="md:hidden hidden mt-4 pb-4" id="mobile-menu">
+                <a href="../index.html" class="block py-2 text-gray-600">首页</a>
+                <a href="../interactive-solutions.html" class="block py-2 text-gray-600">互动解决方案</a>
+                <a href="../instant-solutions.html" class="block py-2 text-gray-600">即时解决方案</a>
+                <a href="../regular-conditioning.html" class="block py-2 text-gray-600">平时调理</a>
+                <a href="../medical-research.html" class="block py-2 text-gray-600">医学原理</a>
+                <a href="../blog-center.html" class="block py-2 text-gray-600">文章中心</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-teal-500 to-cyan-600 text-white py-16">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">资源中心</h1>
+                    <p class="text-xl md:text-2xl opacity-90 mb-8">实用工具和资源，助您有效管理经期健康</p>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+                        <h2 class="text-lg font-semibold mb-3">🛠️ 全面工具库</h2>
+                        <p class="text-sm opacity-90">从疼痛追踪到教育资源，一站式痛经管理解决方案</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Access Tools -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-12">快速访问工具</h2>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Pain Tracker -->
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-red-700 mb-3">疼痛追踪器</h3>
+                            <p class="text-sm text-red-600 mb-4">记录每日疼痛情况，生成个人健康报告</p>
+                            <a href="pain-tracker.html" class="bg-red-600 text-white px-4 py-2 rounded font-semibold hover:bg-red-700 transition-colors">
+                                开始使用
+                            </a>
+                        </div>
+
+                        <!-- Symptom Assessment -->
+                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-purple-700 mb-3">症状评估器</h3>
+                            <p class="text-sm text-purple-600 mb-4">智能分析症状，获得个性化建议</p>
+                            <a href="../interactive-solutions.html" class="bg-purple-600 text-white px-4 py-2 rounded font-semibold hover:bg-purple-700 transition-colors">
+                                立即评估
+                            </a>
+                        </div>
+
+                        <!-- Educational Resources -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-blue-700 mb-3">教育资源</h3>
+                            <p class="text-sm text-blue-600 mb-4">专业医学知识和健康指导文章</p>
+                            <a href="../blog-center.html" class="bg-blue-600 text-white px-4 py-2 rounded font-semibold hover:bg-blue-700 transition-colors">
+                                浏览文章
+                            </a>
+                        </div>
+
+                        <!-- Treatment Guide -->
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-6 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-green-700 mb-3">治疗指南</h3>
+                            <p class="text-sm text-green-600 mb-4">即时缓解和长期调理方法</p>
+                            <a href="../instant-solutions.html" class="bg-green-600 text-white px-4 py-2 rounded font-semibold hover:bg-green-700 transition-colors">
+                                查看方法
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pain Tracker Feature Highlight -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-12">疼痛追踪器详细功能</h2>
+                    
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-6 text-red-700">为什么需要追踪疼痛？</h3>
+                            <div class="space-y-4">
+                                <div class="bg-white rounded-lg p-4 border-l-4 border-red-500">
+                                    <h4 class="font-semibold text-red-600 mb-2">识别模式</h4>
+                                    <p class="text-sm text-gray-700">发现疼痛的触发因素、时间规律和影响因素</p>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4 border-l-4 border-orange-500">
+                                    <h4 class="font-semibold text-orange-600 mb-2">评估治疗效果</h4>
+                                    <p class="text-sm text-gray-700">客观评价正在使用的治疗方法是否有效</p>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4 border-l-4 border-yellow-500">
+                                    <h4 class="font-semibold text-yellow-600 mb-2">医生沟通</h4>
+                                    <p class="text-sm text-gray-700">为就医提供准确详细的症状记录</p>
+                                </div>
+                                
+                                <div class="bg-white rounded-lg p-4 border-l-4 border-green-500">
+                                    <h4 class="font-semibold text-green-600 mb-2">预防性干预</h4>
+                                    <p class="text-sm text-gray-700">提前预测疼痛发作时间，及时采取预防措施</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-lg p-6">
+                            <h4 class="text-xl font-bold mb-4 text-center text-gray-700">追踪器功能预览</h4>
+                            
+                            <!-- Mock Interface -->
+                            <div class="space-y-4">
+                                <div class="bg-gray-50 rounded p-4">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <span class="text-sm font-semibold">今日疼痛强度</span>
+                                        <span class="text-red-600 font-bold">6/10</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-red-500 h-2 rounded-full" style="width: 60%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded p-4">
+                                    <span class="text-sm font-semibold block mb-2">症状记录</span>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs">下腹痛</span>
+                                        <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs">腰痛</span>
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs">疲劳</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded p-4">
+                                    <span class="text-sm font-semibold block mb-2">使用的缓解方法</span>
+                                    <div class="text-xs text-gray-600">
+                                        ✓ 热敷 20分钟<br>
+                                        ✓ 布洛芬 400mg<br>
+                                        ✓ 深呼吸练习
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mt-6">
+                                <a href="pain-tracker.html" class="bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                                    开始使用追踪器
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Downloadable Resources -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-12">下载资源</h2>
+                    
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Monthly Tracker PDF -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                            <div class="text-center mb-4">
+                                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-blue-700">月度疼痛日记</h3>
+                            </div>
+                            <p class="text-sm text-blue-600 mb-4 text-center">可打印的月度症状记录表，便于纸质记录</p>
+                            <div class="text-center">
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50" disabled>
+                                    下载 PDF (即将推出)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Emergency Kit Guide -->
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+                            <div class="text-center mb-4">
+                                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-red-700">应急包清单</h3>
+                            </div>
+                            <p class="text-sm text-red-600 mb-4 text-center">家庭、办公室、外出应急用品准备指南</p>
+                            <div class="text-center">
+                                <button class="bg-red-600 text-white px-4 py-2 rounded font-semibold hover:bg-red-700 transition-colors disabled:opacity-50" disabled>
+                                    下载清单 (即将推出)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Exercise Program -->
+                        <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+                            <div class="text-center mb-4">
+                                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-5 8l-3 3m3-3l3 3m-3-3V8"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-green-700">运动计划表</h3>
+                            </div>
+                            <p class="text-sm text-green-600 mb-4 text-center">4周渐进式运动计划，适合痛经缓解</p>
+                            <div class="text-center">
+                                <button class="bg-green-600 text-white px-4 py-2 rounded font-semibold hover:bg-green-700 transition-colors disabled:opacity-50" disabled>
+                                    下载计划 (即将推出)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-8">
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 inline-block">
+                            <p class="text-yellow-700 text-sm">
+                                💡 更多下载资源正在开发中，请关注我们的更新
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Links -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-12">快速链接</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-white rounded-lg shadow-sm p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-700">专业指导</h3>
+                            <ul class="space-y-3">
+                                <li>
+                                    <a href="../medical-research.html" class="flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                                        <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        痛经医学原理解析
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../articles/period-pain-myths.html" class="flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                                        <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        常见痛经误区解答
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../faq.html" class="flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                                        <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        常见问题解答
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg shadow-sm p-6">
+                            <h3 class="text-xl font-bold mb-4 text-gray-700">特殊群体指导</h3>
+                            
+<ul class="space-y-3">
+                                <li>
+                                    <a href="../scenes/teen-campus-pain-guide.html" class="flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                                        <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                        青少年校园痛经指南
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../therapies/natural-therapy-principles.html" class="flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                                        <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                        </svg>
+                                        自然疗法基本原则
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../articles/stress-menstrual-health.html" class="flex items-center text-gray-600 hover:text-purple-600 transition-colors">
+                                        <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                        </svg>
+                                        压力与月经健康关系
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-16 bg-teal-600 text-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-6">开始使用我们的工具</h2>
+                    <p class="text-xl opacity-90 mb-8">选择最适合您需求的管理工具，开启健康管理之旅</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="pain-tracker.html" class="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            使用疼痛追踪器
+                        </a>
+                        <a href="../interactive-solutions.html" class="border border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-teal-600 transition-colors">
+                            进行症状评估
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">period.health</h3>
+                    <p class="text-gray-400 mb-4">专业的经期疼痛管理平台，为女性健康保驾护航。</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">核心功能</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../interactive-solutions.html" class="hover:text-white">症状评估器</a></li>
+                        <li><a href="../interactive-solutions.html" class="hover:text-white">个性化方案</a></li>
+                        <li><a href="../instant-solutions.html" class="hover:text-white">即时缓解</a></li>
+                        <li><a href="../regular-conditioning.html" class="hover:text-white">平时调理</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">专业内容</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../medical-research.html" class="hover:text-white">医学研究</a></li>
+                        <li><a href="../blog-center.html" class="hover:text-white">健康资讯</a></li>
+                        <li><a href="../blog-center.html" class="hover:text-white">用户故事</a></li>
+                        <li><a href="../blog-center.html" class="hover:text-white">专家观点</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">法律信息</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="../privacy-policy.html" class="hover:text-white">隐私政策</a></li>
+                        <li><a href="../terms-of-service.html" class="hover:text-white">服务条款</a></li>
+                        <li><a href="../faq.html" class="hover:text-white">常见问题</a></li>
+                        <li><a href="#" class="hover:text-white">联系我们</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 period.health. 本网站内容仅供参考，不能替代专业医疗建议。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+</html>
+
+

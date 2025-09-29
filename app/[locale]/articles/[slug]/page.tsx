@@ -3,21 +3,42 @@ import { notFound } from 'next/navigation';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Home } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import NSAIDInteractive from '@/components/NSAIDInteractive';
-import NSAIDContentSimple from '@/components/NSAIDContentSimple';
-import StructuredData from '@/components/StructuredData';
-import ArticleInteractions from '@/components/ArticleInteractions';
-import ReadingProgress from '@/components/ReadingProgress';
 import { getArticleBySlug, getRelatedArticles } from '@/lib/articles';
-import TableOfContents from '@/components/TableOfContents';
-import MarkdownWithMermaid from '@/components/MarkdownWithMermaid';
+
+// 按需导入Lucide React图标 - 第三方脚本优化（移除ssr: false）
+const Home = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Home })));
+
+// 动态导入大型组件 - 代码分割优化（移除ssr: false，在Server Component中不支持）
+const NSAIDInteractive = dynamic(() => import('@/components/NSAIDInteractive'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const NSAIDContentSimple = dynamic(() => import('@/components/NSAIDContentSimple'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-24 rounded-lg" />
+});
+
+const StructuredData = dynamic(() => import('@/components/StructuredData'));
+
+const ArticleInteractions = dynamic(() => import('@/components/ArticleInteractions'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-16 rounded-lg" />
+});
+
+const ReadingProgress = dynamic(() => import('@/components/ReadingProgress'));
+
+const TableOfContents = dynamic(() => import('@/components/TableOfContents'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-48 rounded-lg" />
+});
+
+const MarkdownWithMermaid = dynamic(() => import('@/components/MarkdownWithMermaid'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
 // Server Component面包屑组件
 interface BreadcrumbItem {

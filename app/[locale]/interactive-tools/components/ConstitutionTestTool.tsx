@@ -27,6 +27,7 @@ import { useConstitutionTest } from '../shared/hooks/useConstitutionTest';
 import { useNotifications } from '../shared/hooks/useNotifications';
 import NotificationContainer from '../shared/components/NotificationContainer';
 import LoadingSpinner from '../shared/components/LoadingSpinner';
+import HydrationBoundary from '@/components/HydrationBoundary';
 import { ConstitutionAnswer, ConstitutionType } from '../shared/types/constitution';
 import { constitutionTypeInfo } from '../shared/data/constitutionTypes';
 import {
@@ -211,7 +212,8 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
   // 如果没有开始测试，显示介绍页面
   if (!currentSession) {
     return (
-      <div className="max-w-4xl mx-auto">
+      <HydrationBoundary>
+        <div className="max-w-4xl mx-auto">
         <NotificationContainer 
           notifications={notifications}
           onRemove={removeNotification}
@@ -315,6 +317,7 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
           </button>
         </div>
       </div>
+      </HydrationBoundary>
     );
   }
 
@@ -323,7 +326,8 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
     const typeInfo = constitutionTypeInfo[locale]?.[result.primaryType] || constitutionTypeInfo.zh[result.primaryType];
     
     return (
-      <div className="max-w-6xl mx-auto">
+      <HydrationBoundary>
+        <div className="max-w-6xl mx-auto">
         <NotificationContainer 
           notifications={notifications}
           onRemove={removeNotification}
@@ -747,12 +751,14 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
           </button>
         </div>
       </div>
+      </HydrationBoundary>
     );
   }
 
   // 显示问题
   return (
-    <div className="max-w-4xl mx-auto">
+    <HydrationBoundary>
+      <div className="max-w-4xl mx-auto">
       <NotificationContainer 
         notifications={notifications}
         onRemove={removeNotification}
@@ -975,5 +981,6 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
         </div>
       )}
     </div>
+    </HydrationBoundary>
   );
 }

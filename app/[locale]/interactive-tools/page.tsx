@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
-import OptimizedImage from '@/components/ui/OptimizedImage';
+// import OptimizedImage from '@/components/ui/OptimizedImage';
 import BreathingExercise from '@/components/BreathingExercise';
 // import Breadcrumb from '@/components/Breadcrumb';
 import { BarChart3, Calendar, ClipboardCheck, Lightbulb, Search, User, Apple } from 'lucide-react'; // Icons for cards
@@ -205,17 +205,12 @@ export default async function InteractiveToolsPage({
                   </p>
                 </div>
                 <div className="flex justify-center order-first md:order-last">
-                  <OptimizedImage
+                  <img
                     src="/images/tools/assessment-illustration.jpg"
                     alt="Woman using digital health assessment tool on tablet in comfortable home setting"
                     width={400}
                     height={300}
                     className="w-full max-w-sm sm:max-w-md rounded-lg shadow-lg"
-                    sizes="(max-width: 640px) 320px, (max-width: 768px) 400px, (max-width: 1024px) 480px, 600px"
-                    priority={true}
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                    quality={95}
                   />
                 </div>
               </div>

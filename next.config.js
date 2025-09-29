@@ -231,7 +231,7 @@ const nextConfig = {
         destination: '/zh/interactive-tools/symptom-assessment',
         permanent: true
       },
-      // 🎯 文章页面重定向到下载中心
+      // 🎯 修复articles页面重定向问题 - 重定向到下载中心（用户实际使用的页面）
       {
         source: '/articles',
         has: [
@@ -287,15 +287,39 @@ const nextConfig = {
         destination: '/zh/health-guide',
         permanent: true
       },
-      // 🎯 修复特定文章页面的重定向问题
+      // 🎯 修复特定文章页面的重定向问题 - 支持多语言检测
       {
         source: '/articles/long-term-healthy-lifestyle-guide',
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: '.*zh.*',
+          },
+        ],
         destination: '/zh/articles/long-term-healthy-lifestyle-guide',
         permanent: true
       },
       {
+        source: '/articles/long-term-healthy-lifestyle-guide',
+        destination: '/en/articles/long-term-healthy-lifestyle-guide',
+        permanent: true
+      },
+      {
         source: '/articles/effective-herbal-tea-menstrual-pain',
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: '.*zh.*',
+          },
+        ],
         destination: '/zh/articles/effective-herbal-tea-menstrual-pain',
+        permanent: true
+      },
+      {
+        source: '/articles/effective-herbal-tea-menstrual-pain',
+        destination: '/en/articles/effective-herbal-tea-menstrual-pain',
         permanent: true
       },
       // 🎯 修复Canonical标签错误的URL重定向

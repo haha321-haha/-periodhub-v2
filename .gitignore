@@ -55,3 +55,111 @@ coverage/
 # 排除其他不需要的文件
 *.orig
 *.rej
+
+# 排除特定的大型文件
+*.csv
+*.xlsx
+*.pdf
+*.zip
+*.tar.gz
+
+# 排除IDE配置文件
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.idea/
+
+# 排除操作系统生成的文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 排除日志文件
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# 排除运行时数据
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# 排除覆盖率目录
+lib-cov/
+coverage/
+.nyc_output/
+.coverage/
+
+# 排除依赖目录
+node_modules/
+jspm_packages/
+
+# 排除TypeScript缓存
+*.tsbuildinfo
+
+# 排除可选的npm缓存目录
+.npm
+
+# 排除可选的eslint缓存
+.eslintcache
+
+# 排除Microbundle缓存
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# 排除可选的REPL历史
+.node_repl_history
+
+# 排除输出的npm包
+*.tgz
+
+# 排除Yarn完整性文件
+.yarn-integrity
+
+# 排除dotenv环境变量文件
+.env
+.env.test
+.env.production
+
+# 排除parcel-bundler缓存
+.cache
+.parcel-cache
+
+# 排除Next.js构建输出
+.next/
+
+# 排除Nuxt.js构建/生成输出
+.nuxt
+dist
+
+# 排除Gatsby文件
+.cache/
+public
+
+# 排除Storybook构建输出
+.out
+.storybook-out
+
+# 排除Temporary folders
+tmp/
+temp/
+
+# 排除编辑器目录和文件
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

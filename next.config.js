@@ -79,10 +79,11 @@ const nextConfig = {
             value: '<https://fonts.gstatic.com>; rel=preconnect; crossorigin'
           },
           // 预加载关键资源
-          {
-            key: 'Link',
-            value: '</_next/static/css/app/layout.css>; rel=preload; as=style'
-          },
+          // 注意：Next.js会自动处理CSS预加载，不需要手动配置
+          // {
+          //   key: 'Link',
+          //   value: '</_next/static/css/app/layout.css>; rel=preload; as=style'
+          // },
           // webpack.js预加载优化 - 只在开发环境或需要时预加载
           ...(process.env.NODE_ENV === 'development' ? [{
             key: 'Link',
@@ -386,4 +387,5 @@ const nextConfig = {
 };
 
 module.exports = withNextIntl(nextConfig);
+  
   

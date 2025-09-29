@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-09-29T09:15:17.865Z",
+  "summary": {
+    "totalTests": 4,
+    "passedTests": 4,
+    "failedTests": 0
+  },
+  "results": {
+    "componentImports": {
+      "SmartImage": true,
+      "OptimizedImage": true,
+      "SafeSmartImage": true
+    },
+    "environmentVariables": {
+      "useSmartImage": true,
+      "debugMode": false,
+      "fallbackComponent": "OptimizedImage"
+    },
+    "fileReplacement": {
+      "app/[locale]/interactive-tools/page.tsx": {
+        "exists": true,
+        "hasSmartImage": true,
+        "hasOptimizedImage": true,
+        "hasNextImage": false,
+        "hasImgTag": false,
+        "canReplace": true
+      },
+      "app/[locale]/scenario-solutions/page.tsx": {
+        "exists": true,
+        "hasSmartImage": true,
+        "hasOptimizedImage": true,
+        "hasNextImage": false,
+        "hasImgTag": false,
+        "canReplace": true
+      },
+      "components/RelatedArticles.tsx": {
+        "exists": true,
+        "hasSmartImage": true,
+        "hasOptimizedImage": false,
+        "hasNextImage": false,
+        "hasImgTag": false,
+        "canReplace": false
+      }
+    },
+    "rollbackMechanism": {
+      "rollbackScript": true,
+      "logFile": true,
+      "stateFile": false
+    }
+  }
+}

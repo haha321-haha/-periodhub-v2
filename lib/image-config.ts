@@ -182,3 +182,6 @@ export class ImageComponentState {
     return false;
   }
 }
+
+
+

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
-// import OptimizedImage from '@/components/ui/OptimizedImage';
+import SafeSmartImage from '@/components/ui/SafeSmartImage';
 import BreathingExercise from '@/components/BreathingExercise';
 // import Breadcrumb from '@/components/Breadcrumb';
 import { BarChart3, Calendar, ClipboardCheck, Lightbulb, Search, User, Apple } from 'lucide-react'; // Icons for cards
@@ -205,12 +205,15 @@ export default async function InteractiveToolsPage({
                   </p>
                 </div>
                 <div className="flex justify-center order-first md:order-last">
-                  <img
+                  <SafeSmartImage
                     src="/images/tools/assessment-illustration.jpg"
                     alt="Woman using digital health assessment tool on tablet in comfortable home setting"
                     width={400}
                     height={300}
+                    type="content"
                     className="w-full max-w-sm sm:max-w-md rounded-lg shadow-lg"
+                    enableFallback={true}
+                    fallbackComponent="OptimizedImage"
                   />
                 </div>
               </div>

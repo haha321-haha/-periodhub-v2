@@ -32,7 +32,7 @@ export default function NutritionGenerator() {
   const [error, setError] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
 
-  // 客户端渲染检查
+  // 客户端渲染检查 - 修复hydration错误
   useEffect(() => {
     setIsClient(true);
     performanceMonitor.startMeasure('nutrition-generator-init');

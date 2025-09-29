@@ -17,7 +17,7 @@ export default function NoSelectionState({ language }: NoSelectionStateProps) {
   const [animationClass, setAnimationClass] = useState('');
 
   useEffect(() => {
-    // 添加进入动画
+    // 添加进入动画 - 修复hydration错误
     setAnimationClass('animate-fade-in');
   }, []);
 

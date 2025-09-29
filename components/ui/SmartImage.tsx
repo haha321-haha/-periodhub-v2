@@ -13,6 +13,8 @@ interface SmartImageProps {
   type?: 'hero' | 'content' | 'thumbnail' | 'decorative';
   sizes?: string;
   priority?: boolean;
+  onError?: (e: any) => void;
+  onLoad?: () => void;
 }
 
 /**
@@ -27,7 +29,9 @@ export default function SmartImage({
   className = '',
   type = 'content',
   sizes,
-  priority = false
+  priority = false,
+  onError,
+  onLoad
 }: SmartImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
@@ -90,9 +94,11 @@ export default function SmartImage({
           setImageError(true);
           const error = new Error(`图片加载失败: ${src}`);
           imageOptimization.utilities.handleImageError(error, src);
+          onError?.(e);
         }}
         onLoad={() => {
           setIsLoading(false);
+          onLoad?.();
         }}
       />
     </div>

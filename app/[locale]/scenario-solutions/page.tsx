@@ -2,7 +2,7 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import StructuredData from '@/components/StructuredData';
-import Image from 'next/image';
+import SafeSmartImage from '@/components/ui/SafeSmartImage';
 import {
   Briefcase,
   Car,
@@ -270,16 +270,18 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
             >
               {/* Scenario Image */}
               <div className="mb-4 sm:mb-6 relative overflow-hidden rounded-lg">
-                <Image
+                <SafeSmartImage
                   key={`scenario-image-${scenario.id}`}
                   src={`/images/scenarios/${scenarioImages[scenario.id].filename}`}
                   alt={scenarioImages[scenario.id].alt}
                   width={600}
                   height={400}
+                  type="content"
                   className="w-full h-40 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   priority={false}
-                  unoptimized={true}
+                  enableFallback={true}
+                  fallbackComponent="OptimizedImage"
                 />
               </div>
 

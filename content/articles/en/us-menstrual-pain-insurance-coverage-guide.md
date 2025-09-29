@@ -1,7 +1,7 @@
 ---
-title: "Complete Guide to US Medical Insurance Coverage for Menstrual Pain Treatment (2025 Revised Edition)"
-description: "Comprehensive guide to US medical insurance coverage for menstrual pain treatment based on the latest ACA policies, covering insurance selection strategies, claims tips, cost optimization, and rights protection for American women."
-summary: "Detailed analysis of 2025 US health insurance policy changes, providing insurance coverage strategies for menstrual pain treatment, metal plan comparisons, medication cost references, and successful appeal techniques to help American women maximize their medical insurance benefits."
+title: "US Medical Insurance Guide for Menstrual Pain Treatment (2025)"
+description: "Complete guide to US medical insurance coverage for menstrual pain treatment. Learn ACA policies, insurance selection strategies, claims tips, and cost optimization for American women."
+summary: "2025 US health insurance guide for menstrual pain treatment. Covers ACA policies, insurance strategies, medication costs, and appeal techniques to maximize benefits."
 category: "Understanding & Education"
 tags: ["medical insurance", "ACA policy", "Medicare reform", "insurance claims", "healthcare costs"]
 author: "Period Hub Health Team"

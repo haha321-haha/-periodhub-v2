@@ -214,9 +214,9 @@ export async function generateMetadata({
     other: {
       'article:published_time': article.date,
       'article:author': article.author,
+      'Content-Language': locale === 'zh' ? 'zh-CN' : 'en-US',
     },
   };
-}
 
 export default async function ArticlePage({
   params

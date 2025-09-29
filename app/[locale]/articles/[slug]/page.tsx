@@ -217,6 +217,7 @@ export async function generateMetadata({
       'Content-Language': locale === 'zh' ? 'zh-CN' : 'en-US',
     },
   };
+}
 
 export default async function ArticlePage({
   params

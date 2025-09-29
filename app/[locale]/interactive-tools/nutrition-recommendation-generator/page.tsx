@@ -144,8 +144,8 @@ export default async function NutritionRecommendationGeneratorPage({
                   </h3>
                   <p className="text-gray-600 text-sm mb-3">
                     {isZh 
-                      ? '通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议'
-                      : 'Understand your TCM constitution type through 8 questions and get personalized acupuncture points, diet and lifestyle recommendations'
+                      ? '通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议'
+                      : 'Understand your TCM constitution type through 11 questions and get personalized acupuncture points, diet and lifestyle recommendations'
                     }
                   </p>
                   <a 

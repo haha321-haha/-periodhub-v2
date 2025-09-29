@@ -369,8 +369,8 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
       frontmatter: {
         title: locale === 'zh' ? '中医体质测试' : 'TCM Constitution Test',
         description: locale === 'zh'
-          ? '通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议。'
-          : 'Discover your TCM constitution type through 8 questions and get personalized acupoint, diet, and lifestyle recommendations.',
+          ? '通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议。'
+          : 'Discover your TCM constitution type through 11 questions and get personalized acupoint, diet, and lifestyle recommendations.',
         category: locale === 'zh' ? '体质评估' : 'Constitution Assessment',
         difficulty: locale === 'zh' ? '简单' : 'Easy',
         estimatedTime: locale === 'zh' ? '5-8分钟' : '5-8 minutes',

@@ -6,6 +6,7 @@ import OptimizedMobilePDFCenter from '@/components/OptimizedMobilePDFCenter';
 import { SITE_CONFIG } from '@/config/site.config';
 import { pdfResources } from '@/config/pdfResources';
 import { URL_CONFIG } from '@/lib/url-config';
+import { SmartPreloadProvider } from '@/components/SmartPreloadProvider';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -103,7 +104,7 @@ export default async function DownloadsPage({
   };
 
   return (
-    <>
+    <SmartPreloadProvider>
       {/* 结构化数据 */}
       <script
         type="application/ld+json"
@@ -183,6 +184,6 @@ export default async function DownloadsPage({
         </div>
       </div>
     </div>
-    </>
+    </SmartPreloadProvider>
   );
 }

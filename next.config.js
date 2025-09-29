@@ -83,10 +83,11 @@ const nextConfig = {
             key: 'Link',
             value: '</_next/static/css/app/layout.css>; rel=preload; as=style'
           },
-          {
+          // webpack.js预加载优化 - 只在开发环境或需要时预加载
+          ...(process.env.NODE_ENV === 'development' ? [{
             key: 'Link',
             value: '</_next/static/chunks/webpack.js>; rel=preload; as=script'
-          },
+          }] : []),
           // 缓存控制
           {
             key: 'Cache-Control',

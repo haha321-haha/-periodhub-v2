@@ -4,6 +4,7 @@ import {unstable_setRequestLocale} from 'next-intl/server';
 import {Suspense} from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { getValidLocale } from '@/lib/locale-utils';
 import LanguageSetter from '@/components/LanguageSetter';
 
 export const dynamic = 'force-dynamic';
@@ -34,19 +35,27 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  // 确保在服务端设置当前请求的语言环境
-  unstable_setRequestLocale(locale);
+  
+  // 使用安全的 locale 验证和处理
+  const validLocale = getValidLocale(locale);
+  unstable_setRequestLocale(validLocale);
 
-  // 使用静态导入避免动态路径解析问题
+  // 使用静态导入避免动态路径解析问题，添加错误处理
   let messages;
-  if (locale === 'zh') {
+  try {
+    if (validLocale === 'zh') {
+      messages = (await import('../../messages/zh.json')).default;
+    } else {
+      messages = (await import('../../messages/en.json')).default;
+    }
+  } catch (error) {
+    console.error('[Layout] Failed to import messages:', error);
+    // 回退到默认语言
     messages = (await import('../../messages/zh.json')).default;
-  } else {
-    messages = (await import('../../messages/en.json')).default;
   }
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages as any}>
+    <NextIntlClientProvider locale={validLocale} messages={messages as any}>
       <Suspense fallback={<LoadingState />}>
         <Header />
         <main className="flex-1">

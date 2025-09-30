@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 
 interface ReadingProgressProps {
-  locale: 'zh' | 'en';
+  locale: 'zh' | 'en' | string; // 允许更宽泛的字符串类型，但在运行时验证
 }
 
 export default function ReadingProgress({ locale }: ReadingProgressProps) {
@@ -45,7 +45,15 @@ export default function ReadingProgress({ locale }: ReadingProgressProps) {
     }
   };
 
-  const text = t[locale];
+  // 添加 locale 验证和默认值处理，防止 undefined 访问错误
+  const validLocale = (locale === 'zh' || locale === 'en') ? locale : 'en';
+  
+  // 如果 locale 无效，记录警告（仅在客户端）
+  if (typeof window !== 'undefined' && locale !== validLocale) {
+    console.warn(`[ReadingProgress] Invalid locale '${locale}', falling back to '${validLocale}'`);
+  }
+  
+  const text = t[validLocale];
 
   return (
     <>

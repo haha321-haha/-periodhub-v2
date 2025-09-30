@@ -6,7 +6,7 @@ import { Heart, Bookmark, Share2, Copy, Check, Eye } from 'lucide-react';
 interface ArticleInteractionsProps {
   articleId: string;
   articleTitle: string;
-  locale: 'zh' | 'en';
+  locale: 'zh' | 'en' | string; // 允许更宽泛的字符串类型，但在运行时验证
   className?: string;
 }
 
@@ -149,7 +149,15 @@ export default function ArticleInteractions({
     }
   };
 
-  const text = t[locale];
+  // 添加 locale 验证和默认值处理，防止 undefined 访问错误
+  const validLocale = (locale === 'zh' || locale === 'en') ? locale : 'en';
+  
+  // 如果 locale 无效，记录警告（仅在客户端）
+  if (typeof window !== 'undefined' && locale !== validLocale) {
+    console.warn(`[ArticleInteractions] Invalid locale '${locale}', falling back to '${validLocale}'`);
+  }
+  
+  const text = t[validLocale];
 
   return (
     <div className={`bg-white/80 backdrop-blur-sm border border-purple-200 rounded-lg p-4 sm:p-6 shadow-lg ${className}`}>

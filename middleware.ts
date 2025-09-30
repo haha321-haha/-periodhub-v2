@@ -13,20 +13,34 @@ const intlMiddleware = createMiddleware({
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  // 排除静态文件路径，避免国际化中间件干扰
-  if (
-    pathname.startsWith('/downloads/') && 
-    (pathname.endsWith('.html') || pathname.endsWith('.pdf')) ||
-    pathname.startsWith('/styles/') ||
-    pathname.startsWith('/scripts/') ||
-    pathname.startsWith('/images/') ||
-    pathname.startsWith('/icons/') ||
-    pathname.startsWith('/fonts/')
-  ) {
+  try {
+    // 排除静态文件路径，避免国际化中间件干扰
+    if (
+      pathname.startsWith('/downloads/') && 
+      (pathname.endsWith('.html') || pathname.endsWith('.pdf')) ||
+      pathname.startsWith('/styles/') ||
+      pathname.startsWith('/scripts/') ||
+      pathname.startsWith('/images/') ||
+      pathname.startsWith('/icons/') ||
+      pathname.startsWith('/fonts/')
+    ) {
+      return NextResponse.next();
+    }
+    
+    // 记录请求信息用于调试
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[Middleware] Processing: ${pathname}`);
+    }
+    
+    return intlMiddleware(request);
+  } catch (error) {
+    console.error('[Middleware] Error processing request:', error);
+    console.error('[Middleware] Request pathname:', pathname);
+    console.error('[Middleware] Request URL:', request.url);
+    
+    // 返回默认响应而不是崩溃
     return NextResponse.next();
   }
-  
-  return intlMiddleware(request);
 }
 
 export const config = {

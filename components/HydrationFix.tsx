@@ -37,10 +37,67 @@ export default function HydrationFix() {
       console.log('[HydrationFix] 移除了翻译扩展添加的属性');
     });
     
+    // 移除其他可能的翻译扩展属性
+    const allElements = document.querySelectorAll('*');
+    allElements.forEach(element => {
+      // 移除豆包翻译扩展的属性
+      if (element.hasAttribute('data-doubao-translate-traverse-mark')) {
+        element.removeAttribute('data-doubao-translate-traverse-mark');
+      }
+      // 移除其他可能的翻译扩展属性
+      const attributesToRemove = [
+        'data-google-translate',
+        'data-translate',
+        'data-microsoft-translate',
+        'data-baidu-translate'
+      ];
+      attributesToRemove.forEach(attr => {
+        if (element.hasAttribute(attr)) {
+          element.removeAttribute(attr);
+        }
+      });
+    });
+    
     // 确保html元素有正确的类名
     if (!htmlElement.classList.contains('hydrated')) {
       htmlElement.classList.add('hydrated');
     }
+    
+    // 监听DOM变化，持续清理扩展添加的属性
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes') {
+          const target = mutation.target as Element;
+          if (target.hasAttribute('data-doubao-translate-traverse-mark')) {
+            target.removeAttribute('data-doubao-translate-traverse-mark');
+            console.log('[HydrationFix] 动态移除了翻译扩展添加的属性');
+          }
+        }
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              const element = node as Element;
+              if (element.hasAttribute('data-doubao-translate-traverse-mark')) {
+                element.removeAttribute('data-doubao-translate-traverse-mark');
+                console.log('[HydrationFix] 移除了新添加元素的翻译扩展属性');
+              }
+            }
+          });
+        }
+      });
+    });
+    
+    observer.observe(document.body, {
+      attributes: true,
+      childList: true,
+      subtree: true,
+      attributeFilter: ['data-doubao-translate-traverse-mark']
+    });
+    
+    // 清理函数
+    return () => {
+      observer.disconnect();
+    };
     
   }, []);
 

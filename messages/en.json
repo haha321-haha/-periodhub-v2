@@ -12,7 +12,10 @@
       "medical": "Medical Guide",
       "knowledge": "Health Knowledge",
       "comprehensive": "Complete Guide",
-      "related": "Related Articles"
+      "related": "Related Articles",
+      "tcm_guide": "Learn TCM Conditioning",
+      "acupoint_massage": "Master Massage",
+      "tcm_nutrition": "Learn Nutrition"
     },
     "tools": {
       "main": "Health Tools",
@@ -29,7 +32,10 @@
       "sleep": "Sleep Tips",
       "diet": "Diet Solutions",
       "emergency": "Emergency Care",
-      "medication": "Medication Guide"
+      "medication": "Medication Guide",
+      "tcm_lifestyle": "TCM Lifestyle",
+      "workplace_wellness": "Workplace Wellness",
+      "exercise_balance": "Exercise Balance"
     },
     "navigation": {
       "main": "Pain Management",
@@ -6928,7 +6934,11 @@
     "tools": {
       "tracker": "Start Tracking",
       "assessment": "Start Assessment",
-      "constitution": "Start Test"
+      "constitution": "Start Test",
+      "pain_tracker": "Start Pain Tracking",
+      "symptom_assessment": "Start Symptom Assessment",
+      "nutrition_generator": "Start Nutrition Guide",
+      "nutrition": "Get Recommendations"
     },
     "articles": {
       "related": "Read Article",
@@ -6941,12 +6951,30 @@
       "relief": "Pain Relief Methods",
       "anti_inflammatory": "Learn Anti-Inflammatory Diet",
       "ginger_tea": "Master Ginger Tea",
-      "herbal_tea": "Explore Herbal Recipes"
+      "herbal_tea": "Explore Herbal Recipes",
+      "workplace_health": "Learn Workplace Health",
+      "pain_management": "Master Pain Management",
+      "nutrition_guide": "Learn Nutrition",
+      "quick_relief": "Learn Quick Relief",
+      "heat_therapy": "Master Heat Therapy",
+      "medical_guide": "View Medical Guide",
+      "cycle_knowledge": "Learn Cycle Knowledge",
+      "cycle_nutrition": "Master Cycle Nutrition",
+      "cycle_management": "Understand Cycle Management"
     },
     "solutions": {
       "workplace": "Workplace Guide",
       "student": "Student Life",
-      "social": "Social Events"
+      "social": "Social Events",
+      "workplace_cycle": "Workplace Cycle Management",
+      "student_cycle": "Student Cycle Wellness",
+      "fitness_cycle": "Fitness Cycle Balance",
+      "exercise": "Exercise Care",
+      "sleep": "Sleep Tips",
+      "office": "Workplace Solutions",
+      "workplace_wellness": "Workplace Wellness",
+      "exercise_balance_new": "Exercise Balance",
+      "exercise_balance": "Exercise Balance"
     }
   }
 }

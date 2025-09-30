@@ -44,6 +44,12 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
   // 页面加载时恢复数据
   useEffect(() => {
     const loadSavedData = () => {
+      // 确保在客户端环境中运行
+      if (typeof window === 'undefined') {
+        setIsLoading(false);
+        return;
+      }
+      
       try {
         // 加载当前数据
         const savedCurrentData = localStorage.getItem(STORAGE_KEYS.CURRENT_DATA);
@@ -71,8 +77,10 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
       } catch (error) {
         console.error('Error loading saved data:', error);
         // 数据损坏时清除
-        localStorage.removeItem(STORAGE_KEYS.CURRENT_DATA);
-        localStorage.removeItem(STORAGE_KEYS.HISTORY);
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem(STORAGE_KEYS.CURRENT_DATA);
+          localStorage.removeItem(STORAGE_KEYS.HISTORY);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -83,6 +91,8 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
 
   // 保存当前数据到本地存储
   const saveCurrentData = (data: { lastPeriodDate: string; cycleLength: number; prediction?: any }) => {
+    if (typeof window === 'undefined') return;
+    
     try {
       setSaveStatus('saving');
       localStorage.setItem(STORAGE_KEYS.CURRENT_DATA, JSON.stringify(data));
@@ -96,6 +106,8 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
 
   // 保存历史记录
   const saveToHistory = (record: HistoryRecord) => {
+    if (typeof window === 'undefined') return;
+    
     try {
       const updatedHistory = [record, ...historyRecords.slice(0, 9)]; // 保留最新10条
       setHistoryRecords(updatedHistory);
@@ -107,6 +119,8 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
 
   // 删除历史记录
   const deleteHistoryRecord = (id: string) => {
+    if (typeof window === 'undefined') return;
+    
     const updatedHistory = historyRecords.filter(record => record.id !== id);
     setHistoryRecords(updatedHistory);
     localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(updatedHistory));
@@ -114,6 +128,8 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
 
   // 清空所有历史记录
   const clearAllHistory = () => {
+    if (typeof window === 'undefined') return;
+    
     if (confirm(t('cycleTracker.confirmClearAll'))) {
       setHistoryRecords([]);
       localStorage.removeItem(STORAGE_KEYS.HISTORY);
@@ -197,7 +213,7 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
 
     // 保存到历史记录
     const historyRecord: HistoryRecord = {
-      id: Date.now().toString(),
+      id: typeof window !== 'undefined' ? Date.now().toString() : Math.random().toString(),
       date: new Date().toISOString(),
       lastPeriodDate,
       cycleLength,
@@ -213,7 +229,9 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
     setPrediction(null);
 
     // 清除保存的当前数据
-    localStorage.removeItem(STORAGE_KEYS.CURRENT_DATA);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(STORAGE_KEYS.CURRENT_DATA);
+    }
   };
 
   // 处理日期输入

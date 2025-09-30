@@ -62,8 +62,15 @@ export default function ScenarioSolutionCard({ solution, locale }: ScenarioSolut
             className={`inline-flex items-center ${iconColors.text} hover:${iconColors.text.replace('600', '800')} font-medium text-sm transition-colors`}
             suppressHydrationWarning={true}
           >
-            {solution.id === 'office' ? anchorT('solutions.workplace') :
+            {solution.id === 'office' ? anchorT('solutions.office') :
              solution.id === 'social' ? anchorT('solutions.social') :
+             solution.id === 'workplace-cycle-management' ? anchorT('solutions.workplace_cycle') :
+             solution.id === 'student-cycle-wellness' ? anchorT('solutions.student_cycle') :
+             solution.id === 'fitness-cycle-balance' ? anchorT('solutions.fitness_cycle') :
+             solution.id === 'exercise' ? anchorT('solutions.exercise') :
+             solution.id === 'sleep' ? anchorT('solutions.sleep') :
+             solution.id === 'workplace-wellness' ? anchorT('solutions.workplace_wellness') :
+             solution.id === 'exercise-balance' ? anchorT('solutions.exercise_balance') :
              anchorT('solutions.workplace')} &gt;
           </Link>
         </div>

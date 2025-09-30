@@ -13,6 +13,7 @@ interface RelatedToolCardProps {
     icon: string;
     priority: string;
     iconColor?: string;
+    anchorTextType?: string;
   };
   locale: string;
 }
@@ -62,9 +63,12 @@ export default function RelatedToolCard({ tool, locale }: RelatedToolCardProps) 
             className={`inline-flex items-center ${iconColors.text} hover:${iconColors.text.replace('600', '800')} font-medium text-sm transition-colors`}
             suppressHydrationWarning={true}
           >
-            {tool.id === 'pain-tracker' ? anchorT('tools.tracker') : 
-             tool.id === 'symptom-assessment' ? anchorT('tools.assessment') :
+            {tool.anchorTextType ? anchorT(`tools.${tool.anchorTextType}`) : 
+             tool.id === 'pain-tracker' ? anchorT('tools.pain_tracker') : 
+             tool.id === 'symptom-assessment' ? anchorT('tools.symptom_assessment') :
              tool.id === 'constitution-test' ? anchorT('tools.constitution') :
+             tool.id === 'nutrition-recommendation-generator' ? anchorT('tools.nutrition_generator') :
+             tool.id === 'cycle-tracker' ? anchorT('tools.tracker') :
              anchorT('tools.assessment')} &gt;
           </Link>
         </div>

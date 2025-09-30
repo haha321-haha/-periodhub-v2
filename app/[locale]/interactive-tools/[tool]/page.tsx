@@ -46,10 +46,283 @@ const MedicalDisclaimer = dynamic(() => import('../shared/components/MedicalDisc
 // Types
 type Locale = 'en' | 'zh';
 
-// 推荐数据配置 - 精简版，只推荐最相关的内容
-const getRecommendationData = (locale: Locale) => {
+// Cycle Tracker 专用推荐数据配置
+const getCycleTrackerRecommendations = (locale: Locale) => {
   const isZh = locale === 'zh';
   
+  // 相关工具推荐
+  const relatedTools = [
+    {
+      id: 'pain-tracker',
+      title: isZh ? '痛经追踪器' : 'Pain Tracker',
+      description: isZh 
+        ? '记录疼痛模式，分析趋势变化' 
+        : 'Track pain patterns and analyze trends',
+      href: `/${locale}/interactive-tools/pain-tracker`,
+      icon: '📊',
+      priority: 'high',
+      iconColor: 'blue'
+    },
+    {
+      id: 'symptom-assessment',
+      title: isZh ? '症状评估工具' : 'Symptom Assessment',
+      description: isZh
+        ? '专业症状分析，获得精准建议'
+        : 'Professional symptom analysis for precise recommendations',
+      href: `/${locale}/interactive-tools/symptom-assessment`,
+      icon: '🔍',
+      priority: 'high',
+      iconColor: 'green'
+    },
+    {
+      id: 'nutrition-recommendation-generator',
+      title: isZh ? '营养推荐生成器' : 'Nutrition Recommendation Generator',
+      description: isZh
+        ? '根据周期阶段推荐个性化营养方案'
+        : 'Personalized nutrition recommendations based on cycle phases',
+      href: `/${locale}/interactive-tools/nutrition-recommendation-generator`,
+      icon: '🥗',
+      priority: 'high',
+      iconColor: 'green'
+    }
+  ];
+
+  // 相关文章推荐
+  const relatedArticles = [
+    {
+      id: 'understanding-your-cycle',
+      title: isZh ? '了解你的月经周期' : 'Understanding Your Menstrual Cycle',
+      description: isZh 
+        ? '深入了解月经周期的各个阶段和生理变化'
+        : 'Deep understanding of menstrual cycle phases and physiological changes',
+      href: `/${locale}/health-guide`,
+      category: isZh ? '周期知识' : 'cycle-knowledge',
+      readTime: isZh ? '6分钟阅读' : '6 min read',
+      priority: 'high',
+      icon: '📅',
+      iconColor: 'blue',
+      anchorTextType: 'cycle_knowledge'
+    },
+    {
+      id: 'period-friendly-recipes',
+      title: isZh ? '经期友好食谱' : 'Period-Friendly Recipes',
+      description: isZh
+        ? '营养丰富的经期食谱，缓解症状'
+        : 'Nutritious period-friendly recipes to alleviate symptoms',
+      href: `/${locale}/articles/period-friendly-recipes`,
+      category: isZh ? '营养健康' : 'nutrition-health',
+      readTime: isZh ? '8分钟阅读' : '8 min read',
+      priority: 'high',
+      icon: '🥗',
+      iconColor: 'green',
+      anchorTextType: 'cycle_nutrition'
+    },
+    {
+      id: 'when-to-seek-medical-care-comprehensive-guide',
+      title: isZh ? '何时需要医疗护理' : 'When to Seek Medical Care',
+      description: isZh
+        ? '识别需要医疗干预的周期问题'
+        : 'Recognize cycle issues that require medical intervention',
+      href: `/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`,
+      category: isZh ? '健康管理' : 'health-management',
+      readTime: isZh ? '7分钟阅读' : '7 min read',
+      priority: 'medium',
+      icon: '⚖️',
+      iconColor: 'purple',
+      anchorTextType: 'cycle_management'
+    }
+  ];
+
+  // 场景解决方案推荐
+  const scenarioSolutions = [
+    {
+      id: 'office',
+      title: isZh ? '职场周期管理方案' : 'Workplace Cycle Management',
+      description: isZh
+        ? '职场女性的周期健康管理策略'
+        : 'Cycle health management strategies for working women',
+      href: `/${locale}/scenario-solutions/office`,
+      icon: '💼',
+      priority: 'high',
+      iconColor: 'blue'
+    },
+    {
+      id: 'exercise',
+      title: isZh ? '运动与周期平衡' : 'Exercise & Cycle Balance',
+      description: isZh
+        ? '运动爱好者的周期同步训练'
+        : 'Cycle-synced training for fitness enthusiasts',
+      href: `/${locale}/scenario-solutions/exercise`,
+      icon: '🏃‍♀️',
+      priority: 'medium',
+      iconColor: 'orange'
+    },
+    {
+      id: 'sleep',
+      title: isZh ? '睡眠与周期调节' : 'Sleep & Cycle Regulation',
+      description: isZh
+        ? '优化睡眠质量，改善周期健康'
+        : 'Optimize sleep quality to improve cycle health',
+      href: `/${locale}/scenario-solutions/sleep`,
+      icon: '😴',
+      priority: 'medium',
+      iconColor: 'purple'
+    }
+  ];
+
+  return { relatedTools, relatedArticles, scenarioSolutions };
+};
+
+// 中医体质测试专用推荐数据配置
+const getConstitutionTestRecommendations = (locale: Locale) => {
+  const isZh = locale === 'zh';
+  
+  // 相关工具推荐
+  const relatedTools = [
+    {
+      id: 'pain-tracker',
+      title: isZh ? '痛经追踪器' : 'Pain Tracker',
+      description: isZh
+        ? '记录疼痛模式，分析体质调理效果'
+        : 'Track pain patterns and analyze constitution conditioning effects',
+      href: `/${locale}/interactive-tools/pain-tracker`,
+      category: isZh ? '疼痛管理' : 'pain-management',
+      difficulty: isZh ? '简单' : 'Easy',
+      estimatedTime: isZh ? '每日2-3分钟' : '2-3 min daily',
+      priority: 'high',
+      icon: '📊',
+      iconColor: 'red'
+    },
+    {
+      id: 'nutrition-recommendation-generator',
+      title: isZh ? '营养推荐生成器' : 'Nutrition Generator',
+      description: isZh
+        ? '根据体质生成个性化营养建议'
+        : 'Generate personalized nutrition recommendations based on constitution',
+      href: `/${locale}/interactive-tools/nutrition-recommendation-generator`,
+      category: isZh ? '营养管理' : 'nutrition-management',
+      difficulty: isZh ? '简单' : 'Easy',
+      estimatedTime: isZh ? '3-5分钟' : '3-5 min',
+      priority: 'high',
+      icon: '🥗',
+      iconColor: 'green'
+    },
+    {
+      id: 'cycle-tracker',
+      title: isZh ? '智能周期追踪器' : 'Smart Cycle Tracker',
+      description: isZh
+        ? '追踪月经周期，了解体质变化规律'
+        : 'Track menstrual cycles and understand constitution patterns',
+      href: `/${locale}/interactive-tools/cycle-tracker`,
+      category: isZh ? '周期管理' : 'cycle-management',
+      difficulty: isZh ? '简单' : 'Easy',
+      estimatedTime: isZh ? '每日1分钟' : '1 min daily',
+      priority: 'medium',
+      icon: '📅',
+      iconColor: 'blue'
+    }
+  ];
+
+  // 相关文章推荐
+  const relatedArticles = [
+    {
+      id: 'tcm-constitution-guide',
+      title: isZh ? '中医体质调理完全指南' : 'Complete TCM Constitution Guide',
+      description: isZh 
+        ? '深入了解中医体质理论，掌握体质调理的科学方法'
+        : 'Deep understanding of TCM constitution theory and scientific conditioning methods',
+      href: `/${locale}/articles/tcm-constitution-complete-guide`,
+      category: isZh ? '中医调理' : 'tcm-conditioning',
+      readTime: isZh ? '12分钟阅读' : '12 min read',
+      priority: 'high',
+      icon: '🌿',
+      iconColor: 'green',
+      anchorTextType: 'tcm_guide'
+    },
+    {
+      id: 'acupoint-massage-techniques',
+      title: isZh ? '穴位按摩技巧大全' : 'Complete Acupoint Massage Guide',
+      description: isZh
+        ? '掌握专业穴位按摩手法，缓解经期不适'
+        : 'Master professional acupoint massage techniques for menstrual relief',
+      href: `/${locale}/articles/acupoint-massage-complete-guide`,
+      category: isZh ? '穴位疗法' : 'acupoint-therapy',
+      readTime: isZh ? '10分钟阅读' : '10 min read',
+      priority: 'high',
+      icon: '👐',
+      iconColor: 'purple',
+      anchorTextType: 'acupoint_massage'
+    },
+    {
+      id: 'menstrual-nutrition-tcm',
+      title: isZh ? '经期营养中医调理' : 'Menstrual Nutrition TCM Guide',
+      description: isZh
+        ? '根据体质类型制定个性化营养方案'
+        : 'Personalized nutrition plans based on constitution types',
+      href: `/${locale}/articles/menstrual-nutrition-tcm-guide`,
+      category: isZh ? '营养调理' : 'nutrition-conditioning',
+      readTime: isZh ? '8分钟阅读' : '8 min read',
+      priority: 'medium',
+      icon: '🥗',
+      iconColor: 'orange',
+      anchorTextType: 'tcm_nutrition'
+    }
+  ];
+
+  // 场景解决方案推荐
+  const scenarioSolutions = [
+    {
+      id: 'office',
+      title: isZh ? '职场健康管理' : 'Workplace Wellness',
+      description: isZh
+        ? '职场环境下的体质调理策略'
+        : 'Constitution conditioning strategies in workplace',
+      href: `/${locale}/scenario-solutions/office`,
+      icon: '💼',
+      priority: 'high',
+      iconColor: 'blue'
+    },
+    {
+      id: 'exercise',
+      title: isZh ? '运动与体质平衡' : 'Exercise & Constitution Balance',
+      description: isZh
+        ? '适合不同体质的运动方案'
+        : 'Exercise plans suitable for different constitutions',
+      href: `/${locale}/scenario-solutions/exercise`,
+      icon: '🏃‍♀️',
+      priority: 'high',
+      iconColor: 'orange'
+    },
+    {
+      id: 'sleep',
+      title: isZh ? '睡眠与体质调节' : 'Sleep & Constitution Regulation',
+      description: isZh
+        ? '优化睡眠质量，改善体质健康'
+        : 'Optimize sleep quality to improve constitution health',
+      href: `/${locale}/scenario-solutions/sleep`,
+      icon: '😴',
+      priority: 'medium',
+      iconColor: 'purple'
+    }
+  ];
+
+  return { relatedTools, relatedArticles, scenarioSolutions };
+};
+
+// 推荐数据配置 - 精简版，只推荐最相关的内容
+const getRecommendationData = (locale: Locale, toolType?: string) => {
+  const isZh = locale === 'zh';
+  
+  // 根据工具类型返回不同的推荐数据
+  if (toolType === 'cycle-tracker') {
+    return getCycleTrackerRecommendations(locale);
+  }
+  
+  if (toolType === 'constitution-test') {
+    return getConstitutionTestRecommendations(locale);
+  }
+  
+  // 默认推荐数据（用于period-pain-assessment）
   // 精简相关工具推荐 - 只推荐2个最相关的
   const relatedTools = [
     {
@@ -623,7 +896,7 @@ export default async function ToolPage({
   }
 
   // 获取推荐数据
-  const { relatedTools, relatedArticles, scenarioSolutions } = getRecommendationData(locale);
+  const { relatedTools, relatedArticles, scenarioSolutions } = getRecommendationData(locale, tool);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
@@ -705,9 +978,9 @@ export default async function ToolPage({
         </div>
       </section>
 
-      {/* 相关推荐区域 - 仅限痛经评估页面 */}
-      {tool === 'period-pain-assessment' && (
-        <div className="mt-16">
+      {/* 相关推荐区域 - 仅限痛经评估、周期追踪和中医体质测试页面 */}
+      {(tool === 'period-pain-assessment' || tool === 'cycle-tracker' || tool === 'constitution-test') && (
+        <div className="bg-white mt-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="space-y-12">
               
@@ -726,7 +999,12 @@ export default async function ToolPage({
               {/* 相关文章区域 */}
               <section>
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                  {locale === 'zh' ? '相关健康文章' : 'Related Health Articles'}
+                  {tool === 'cycle-tracker' 
+                    ? (locale === 'zh' ? '周期健康文章' : 'Cycle Health Articles')
+                    : tool === 'constitution-test'
+                    ? (locale === 'zh' ? '中医体质调理文章' : 'TCM Constitution Articles')
+                    : (locale === 'zh' ? '相关健康文章' : 'Related Health Articles')
+                  }
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {relatedArticles.map((article) => (
@@ -738,7 +1016,12 @@ export default async function ToolPage({
               {/* 场景解决方案区域 */}
               <section>
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                  {locale === 'zh' ? '场景解决方案' : 'Scenario Solutions'}
+                  {tool === 'cycle-tracker' 
+                    ? (locale === 'zh' ? '生活场景指导' : 'Life Scenario Guidance')
+                    : tool === 'constitution-test'
+                    ? (locale === 'zh' ? '体质调理方案' : 'Constitution Solutions')
+                    : (locale === 'zh' ? '场景解决方案' : 'Scenario Solutions')
+                  }
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {scenarioSolutions.map((solution) => (

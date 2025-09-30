@@ -1,4 +1,31 @@
-# Review short meta descriptions for SEO
+MISSING_MESSAGE: Could not resolve `workplaceWellness.export.periodTypes.predicted` in messages for locale `en`.
+
+app/[locale]/interactive-tools/workplace-wellness/components/HistoryDataViewer.tsx (356:24) @ eval
+
+
+  354 |                   <td className="py-3 px-4">
+  355 |                     <span className={getRecordStatusStyle(record)}>
+> 356 |                       {t(`export.periodTypes.${record.type}`)}
+      |                        ^
+  357 |                     </span>
+  358 |                   </td>
+  359 |                   <td className="py-3 px-4">
+Call Stack
+21
+
+Show 15 ignore-listed frame(s)
+eval
+app/[locale]/interactive-tools/workplace-wellness/components/HistoryDataViewer.tsx (356:24)
+Array.map
+<anonymous>
+HistoryDataViewer
+app/[locale]/interactive-tools/workplace-wellness/components/HistoryDataViewer.tsx (347:28)
+LazyWrapper
+app/[locale]/interactive-tools/workplace-wellness/components/LazyLoader.tsx (64:9)
+renderContent
+app/[locale]/interactive-tools/workplace-wellness/page.tsx (147:13)
+WorkplaceWellnessPage
+app/[locale]/interactive-tools/workplace-wellness/page.tsx (198:14)# Review short meta descriptions for SEO
 _Exported on 2025/9/27 at GMT+8 19:56:41 from Cursor (1.6.45)_
 
 ---

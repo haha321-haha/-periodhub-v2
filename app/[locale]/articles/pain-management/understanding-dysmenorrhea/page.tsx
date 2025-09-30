@@ -1,4 +1,4 @@
-import { setRequestLocale  } from 'next-intl/server';
+import { unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft, Clock, User, BookOpen, AlertCircle, CheckCircle, Info } from 'lucide-react';
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
   const { locale } = await params;
-  setRequestLocale(locale);
+  unstable_setRequestLocale(locale);
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8" data-page="understanding-dysmenorrhea">

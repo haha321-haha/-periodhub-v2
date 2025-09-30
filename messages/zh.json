@@ -3336,7 +3336,13 @@
       "consultAdvice": "⚠️ 根据您的症状，我们建议您咨询医疗专业人士进行适当的评估和治疗。",
       "resetButton": "重新评估",
       "moreInfoButton": "了解更多经期健康知识",
-      "disclaimer": "此评估仅供参考，不能替代专业医疗建议。"
+      "disclaimer": "此评估仅供参考，不能替代专业医疗建议。",
+      "advice": {
+        "severeSymptoms": "您的症状较为严重，建议尽快咨询妇科医生进行详细检查。",
+        "severeIntensity": "严重痛经可能影响生活质量，建议咨询医生了解治疗方案。",
+        "moderateIntensity": "中等程度痛经较为常见，可以尝试热敷、适量运动等缓解方法。如持续困扰建议就医。",
+        "mildIntensity": "您的痛经程度较轻，属于正常范围。保持良好的生活习惯即可。"
+      }
     }
   },
   "interactiveTools": {
@@ -6774,6 +6780,31 @@
       "success": "成功",
       "warning": "警告",
       "info": "信息"
+    }
+  },
+  "anchorTexts": {
+    "tools": {
+      "tracker": "开始周期追踪",
+      "assessment": "开始症状评估",
+      "constitution": "开始体质测试"
+    },
+    "articles": {
+      "related": "阅读文章",
+      "more": "更多知识",
+      "ginger": "了解生姜疗法",
+      "heat": "学习热敷技巧", 
+      "medical": "查看医疗指导",
+      "natural": "探索自然疗法",
+      "comprehensive": "完整指南",
+      "relief": "缓解方法",
+      "anti_inflammatory": "了解抗炎饮食",
+      "ginger_tea": "学习姜茶制作",
+      "herbal_tea": "掌握草药配方"
+    },
+    "solutions": {
+      "workplace": "职场管理方案",
+      "student": "学生生活指南",
+      "social": "社交场合应对"
     }
   }
 }

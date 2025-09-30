@@ -1,0 +1,52 @@
+{
+  "timestamp": "2025-09-29T12:12:27.423Z",
+  "issues": [
+    {
+      "type": "error",
+      "message": "配置中仍存在layout.css预加载",
+      "status": "needs_fix"
+    }
+  ],
+  "fixes": [
+    {
+      "type": "info",
+      "message": "发现可能的layout CSS文件",
+      "file": "18b13dbb475de698.css",
+      "size": 142240
+    },
+    {
+      "type": "info",
+      "message": "发现可能的layout CSS文件",
+      "file": "5372a2e5ea7b7688.css",
+      "size": 7708
+    },
+    {
+      "type": "info",
+      "message": "发现可能的layout CSS文件",
+      "file": "9aa75a53c3b999a8.css",
+      "size": 12342
+    }
+  ],
+  "recommendations": [
+    "✅ 移除错误的预加载配置",
+    "✅ Next.js会自动处理CSS预加载",
+    "✅ 使用动态CSS预加载（如果需要）",
+    "",
+    "🔧 修复步骤:",
+    "   1. 移除next.config.js中的layout.css预加载配置",
+    "   2. 重新构建项目",
+    "   3. 测试页面加载",
+    "   4. 验证控制台警告消失",
+    "",
+    "🛡️ 预防措施:",
+    "   1. 不要手动预加载Next.js生成的CSS文件",
+    "   2. 使用Next.js内置的CSS优化功能",
+    "   3. 定期检查构建产物"
+  ],
+  "summary": {
+    "totalCSSFiles": 8,
+    "totalIssues": 1,
+    "totalFixes": 3,
+    "status": "needs_attention"
+  }
+}

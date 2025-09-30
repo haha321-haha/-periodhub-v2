@@ -1,0 +1,116 @@
+{
+  "timestamp": "2025-09-29T13:03:29.323Z",
+  "totalPages": 15,
+  "status": {
+    "medical-disclaimer": {
+      "category": "A类-技术基础设施",
+      "path": "app/[locale]/medical-disclaimer/page.tsx",
+      "status": "completed",
+      "reason": "已包含canonical标签",
+      "index": 1
+    },
+    "health-guide": {
+      "category": "A类-技术基础设施",
+      "path": "app/[locale]/health-guide/page.tsx",
+      "status": "completed",
+      "reason": "已包含canonical标签",
+      "index": 2
+    },
+    "scenario-solutions/office": {
+      "category": "A类-技术基础设施",
+      "path": "app/[locale]/scenario-solutions/office/page.tsx",
+      "status": "completed",
+      "reason": "已包含canonical标签",
+      "index": 3
+    },
+    "scenario-solutions/social": {
+      "category": "A类-技术基础设施",
+      "path": "app/[locale]/scenario-solutions/social/page.tsx",
+      "status": "completed",
+      "reason": "已包含canonical标签",
+      "index": 4
+    },
+    "icon?9c1a5eaddb17b0ab": {
+      "category": "A类-技术基础设施",
+      "path": "N/A",
+      "status": "not_applicable",
+      "reason": "应被robots.txt屏蔽",
+      "index": 5
+    },
+    "period-pain-simulator-accuracy-analysis": {
+      "category": "B类-内容页面",
+      "path": "app/[locale]/articles/period-pain-simulator-accuracy-analysis/page.tsx",
+      "status": "missing",
+      "reason": "文件不存在",
+      "index": 6
+    },
+    "when-to-seek-medical-care-comprehensive-guide": {
+      "category": "B类-内容页面",
+      "path": "app/[locale]/articles/when-to-seek-medical-care-comprehensive-guide/page.tsx",
+      "status": "completed",
+      "reason": "已包含canonical标签",
+      "index": 7
+    },
+    "understanding-your-cycle": {
+      "category": "B类-内容页面",
+      "path": "app/[locale]/articles/understanding-your-cycle/page.tsx",
+      "status": "missing",
+      "reason": "文件不存在",
+      "index": 8
+    },
+    "menstrual-pain-complications-management": {
+      "category": "B类-内容页面",
+      "path": "app/[locale]/articles/menstrual-pain-complications-management/page.tsx",
+      "status": "missing",
+      "reason": "文件不存在",
+      "index": 9
+    },
+    "period-friendly-recipes": {
+      "category": "B类-内容页面",
+      "path": "app/[locale]/articles/period-friendly-recipes/page.tsx",
+      "status": "missing",
+      "reason": "文件不存在",
+      "index": 10
+    },
+    "comprehensive-medical-guide-to-dysmenorrhea": {
+      "category": "B类-内容页面",
+      "path": "app/[locale]/articles/comprehensive-medical-guide-to-dysmenorrhea/page.tsx",
+      "status": "completed",
+      "reason": "已包含canonical标签",
+      "index": 11
+    },
+    "anti-inflammatory-diet-period-pain": {
+      "category": "B类-内容页面",
+      "path": "app/[locale]/articles/anti-inflammatory-diet-period-pain/page.tsx",
+      "status": "missing",
+      "reason": "文件不存在",
+      "index": 12
+    },
+    "teen-health/development-pain": {
+      "category": "B类-内容页面",
+      "path": "app/[locale]/teen-health/development-pain/page.tsx",
+      "status": "missing",
+      "reason": "缺少canonical标签",
+      "index": 13
+    },
+    "menstrual-cycle-nutrition-plan.pdf": {
+      "category": "C类-资源文件",
+      "path": "N/A",
+      "status": "not_applicable",
+      "reason": "PDF文件，应被robots.txt屏蔽",
+      "index": 14
+    },
+    "其他PDF文件": {
+      "category": "C类-资源文件",
+      "path": "N/A",
+      "status": "not_applicable",
+      "reason": "PDF文件，应被robots.txt屏蔽",
+      "index": 15
+    }
+  },
+  "summary": {
+    "completed": 6,
+    "missing": 6,
+    "notApplicable": 3
+  }
+}

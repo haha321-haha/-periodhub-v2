@@ -55,6 +55,7 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
             <Link 
               href={`/${locale}`} 
               className="flex items-center hover:text-primary-600 transition-colors"
+              suppressHydrationWarning={true}
             >
               <Home className="w-4 h-4 mr-1" />
               {t('home')}
@@ -68,6 +69,7 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
                 <Link 
                   href={item.href}
                   className="hover:text-primary-600 transition-colors"
+                  suppressHydrationWarning={true}
                 >
                   {item.label}
                 </Link>

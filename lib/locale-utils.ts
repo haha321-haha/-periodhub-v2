@@ -94,3 +94,6 @@ export function getHTMLLang(locale: Locale): string {
   
   return htmlLangs[locale] || locale;
 }
+
+
+

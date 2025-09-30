@@ -75,7 +75,10 @@ export default function Header() {
           <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
             <div className="flex-shrink-0">
               <div className="flex items-center space-x-2">
-                <span className="font-bold text-lg sm:text-xl text-primary-600">
+                <span 
+                  className="font-bold text-lg sm:text-xl text-primary-600"
+                  suppressHydrationWarning={true}
+                >
                   periodhub.health
                 </span>
               </div>
@@ -106,7 +109,10 @@ export default function Header() {
           {/* 📱 移动端优化Logo */}
           <div className="flex-shrink-0">
             <Link href={`/${locale}`} className="flex items-center space-x-2">
-              <span className="font-bold text-lg sm:text-xl text-primary-600 hover:text-primary-700 transition-colors">
+              <span 
+                className="font-bold text-lg sm:text-xl text-primary-600 hover:text-primary-700 transition-colors"
+                suppressHydrationWarning={true}
+              >
                 periodhub.health
               </span>
             </Link>
@@ -123,6 +129,7 @@ export default function Header() {
                     ? 'bg-primary-50 text-primary-600'
                     : 'text-neutral-600 hover:text-primary-600 hover:bg-primary-50'
                 }`}
+                suppressHydrationWarning={true}
               >
                 {item.name}
               </Link>
@@ -225,8 +232,8 @@ function LanguageSwitcher() {
           aria-expanded={false}
           disabled
         >
-          <span className="text-base">{currentLanguage?.flag}</span>
-          <span className="hidden sm:inline text-xs lg:text-sm">{currentLanguage?.name}</span>
+          <span className="text-base" suppressHydrationWarning={true}>{currentLanguage?.flag}</span>
+          <span className="hidden sm:inline text-xs lg:text-sm" suppressHydrationWarning={true}>{currentLanguage?.name}</span>
           <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 hidden sm:block" />
         </button>
       </div>
@@ -241,8 +248,8 @@ function LanguageSwitcher() {
         className="flex items-center space-x-1 px-2 py-2 text-sm font-medium text-neutral-600 hover:text-primary-600 rounded hover:bg-neutral-100 transition-colors min-w-[44px] min-h-[44px] justify-center"
         aria-expanded={isOpen}
       >
-        <span className="text-base" suppressHydrationWarning>{currentLanguage?.flag}</span>
-        <span className="text-xs lg:text-sm" suppressHydrationWarning>{currentLanguage?.name}</span>
+        <span className="text-base" suppressHydrationWarning={true}>{currentLanguage?.flag}</span>
+        <span className="text-xs lg:text-sm" suppressHydrationWarning={true}>{currentLanguage?.name}</span>
         <ChevronDown className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
@@ -258,8 +265,8 @@ function LanguageSwitcher() {
                   locale === language.code ? 'bg-primary-50 text-primary-600' : 'text-neutral-700'
                 }`}
               >
-                <span className="text-base" suppressHydrationWarning>{language.flag}</span>
-                <span className="text-sm" suppressHydrationWarning>{language.name}</span>
+                <span className="text-base" suppressHydrationWarning={true}>{language.flag}</span>
+                <span className="text-sm" suppressHydrationWarning={true}>{language.name}</span>
               </button>
             ))}
           </div>

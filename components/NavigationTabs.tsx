@@ -16,12 +16,14 @@ export default function NavigationTabs({ locale }: NavigationTabsProps) {
         <Link
           href={`/${locale}/downloads`}
           className="px-6 py-2 rounded-md text-neutral-700 hover:bg-white hover:shadow-sm transition-all"
+          suppressHydrationWarning={true}
         >
           {locale === 'en' ? '📚 Articles' : '📚 专业文章'}
         </Link>
         <Link
           href={`/${locale}/downloads`}
           className="px-6 py-2 rounded-md text-neutral-700 hover:bg-white hover:shadow-sm transition-all"
+          suppressHydrationWarning={true}
         >
           {locale === 'en' ? '📥 PDF Downloads' : '📥 PDF下载'}
         </Link>

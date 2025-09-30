@@ -17,7 +17,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Logo and Tagline */}
           <div className="flex flex-col items-center md:items-start">
-            <Link href={`/${locale}/interactive-tools`} className="font-bold text-lg text-primary-600 hover:text-primary-700 transition-colors">
+            <Link 
+              href={`/${locale}/interactive-tools`} 
+              className="font-bold text-lg text-primary-600 hover:text-primary-700 transition-colors"
+              suppressHydrationWarning={true}
+            >
               periodhub.health
             </Link>
             <p className="mt-2 text-sm text-neutral-600 max-w-xs">

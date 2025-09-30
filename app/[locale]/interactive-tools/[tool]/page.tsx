@@ -5,6 +5,9 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import Breadcrumb from '@/components/Breadcrumb';
 import dynamic from 'next/dynamic';
+import RelatedToolCard from '../components/RelatedToolCard';
+import RelatedArticleCard from '../components/RelatedArticleCard';
+import ScenarioSolutionCard from '../components/ScenarioSolutionCard';
 
 // 动态导入互动工具组件 - 代码分割优化
 const PainTrackerTool = dynamic(() => import('../components/PainTrackerTool'), {
@@ -42,6 +45,111 @@ const MedicalDisclaimer = dynamic(() => import('../shared/components/MedicalDisc
 
 // Types
 type Locale = 'en' | 'zh';
+
+// 推荐数据配置 - 精简版，只推荐最相关的内容
+const getRecommendationData = (locale: Locale) => {
+  const isZh = locale === 'zh';
+  
+  // 精简相关工具推荐 - 只推荐2个最相关的
+  const relatedTools = [
+    {
+      id: 'pain-tracker',
+      title: isZh ? '痛经追踪器' : 'Pain Tracker',
+      description: isZh 
+        ? '记录疼痛模式，分析趋势变化' 
+        : 'Track pain patterns and analyze trends',
+      href: `/${locale}/interactive-tools/pain-tracker`,
+      icon: '📊',
+      priority: 'high',
+      iconColor: 'blue'
+    },
+    {
+      id: 'symptom-assessment',
+      title: isZh ? '症状评估工具' : 'Symptom Assessment',
+      description: isZh
+        ? '专业症状分析，获得精准建议'
+        : 'Professional symptom analysis for precise recommendations',
+      href: `/${locale}/interactive-tools/symptom-assessment`,
+      icon: '🔍',
+      priority: 'high',
+      iconColor: 'green'
+    }
+  ];
+
+  // 精简相关文章推荐 - 只推荐3个最相关的
+  const relatedArticles = [
+    {
+      id: 'ginger-menstrual-pain-relief-guide',
+      title: isZh ? '生姜缓解痛经完全指南' : 'Complete Ginger Menstrual Pain Relief Guide',
+      description: isZh
+        ? '科学验证的生姜疗法，天然无副作用缓解痛经'
+        : 'Scientifically proven ginger therapy for natural pain relief',
+      href: `/${locale}/articles/ginger-menstrual-pain-relief-guide`,
+      category: isZh ? '自然疗法' : 'natural-therapy',
+      readTime: isZh ? '8分钟阅读' : '8 min read',
+      priority: 'high',
+      icon: '🫚',
+      iconColor: 'orange',
+      anchorTextType: 'ginger'
+    },
+    {
+      id: 'heat-therapy-complete-guide',
+      title: isZh ? '热敷疗法完全指南' : 'Heat Therapy Complete Guide',
+      description: isZh
+        ? '热敷的科学原理和正确使用方法'
+        : 'Scientific principles and proper usage of heat therapy',
+      href: `/${locale}/articles/heat-therapy-complete-guide`,
+      category: isZh ? '自然疗法' : 'natural-therapy',
+      readTime: isZh ? '6分钟阅读' : '6 min read',
+      priority: 'high',
+      icon: '🔥',
+      iconColor: 'red',
+      anchorTextType: 'heat'
+    },
+    {
+      id: 'when-to-see-doctor-period-pain',
+      title: isZh ? '痛经何时需要看医生' : 'When to See Doctor for Period Pain',
+      description: isZh
+        ? '医生专业指导，识别需要医疗干预的症状'
+        : 'Professional guidance on recognizing symptoms that need medical attention',
+      href: `/${locale}/articles/when-to-see-doctor-period-pain`,
+      category: isZh ? '医疗指导' : 'medical-guidance',
+      readTime: isZh ? '5分钟阅读' : '5 min read',
+      priority: 'high',
+      icon: '👩‍⚕️',
+      iconColor: 'blue',
+      anchorTextType: 'medical'
+    }
+  ];
+
+  // 精简场景解决方案推荐 - 只推荐2个最相关的，使用正确的路径
+  const scenarioSolutions = [
+    {
+      id: 'office',
+      title: isZh ? '职场痛经管理方案' : 'Office Period Management',
+      description: isZh
+        ? '职场环境下的痛经应对策略'
+        : 'Period pain management strategies in office environment',
+      href: `/${locale}/scenario-solutions/office`,
+      icon: '💼',
+      priority: 'high',
+      iconColor: 'purple'
+    },
+    {
+      id: 'social',
+      title: isZh ? '社交场合痛经应对' : 'Social Occasions Management',
+      description: isZh
+        ? '聚会、约会等社交场合的痛经处理'
+        : 'Managing period pain during social events',
+      href: `/${locale}/scenario-solutions/social`,
+      icon: '🎉',
+      priority: 'medium',
+      iconColor: 'pink'
+    }
+  ];
+
+  return { relatedTools, relatedArticles, scenarioSolutions };
+};
 
 interface Tool {
   slug: string;
@@ -514,10 +622,13 @@ export default async function ToolPage({
     notFound();
   }
 
+  // 获取推荐数据
+  const { relatedTools, relatedArticles, scenarioSolutions } = getRecommendationData(locale);
+
   return (
-    <div className="space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
       {/* 面包屑导航 */}
-      <div className="container-custom">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <Breadcrumb 
           items={[
             { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
@@ -527,7 +638,7 @@ export default async function ToolPage({
       </div>
 
       {/* Tool Header */}
-      <header className="container-custom">
+      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-4 text-sm text-neutral-600 mb-4">
             <span className="bg-secondary-100 text-secondary-700 px-3 py-1 rounded-full">
@@ -549,7 +660,7 @@ export default async function ToolPage({
 
       {/* Emergency Relief Guide for symptom assessment and pain-related tools */}
       {(tool === 'symptom-assessment' || tool === 'period-pain-assessment' || tool === 'pain-tracker') && (
-        <section className="container-custom">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="max-w-4xl mx-auto">
             <EmergencyReliefGuide locale={locale} />
           </div>
@@ -557,7 +668,7 @@ export default async function ToolPage({
       )}
 
       {/* Tool Content */}
-      <main className="container-custom">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-6xl mx-auto">
           <Suspense fallback={
             <div className="flex items-center justify-center py-12">
@@ -588,11 +699,57 @@ export default async function ToolPage({
       </main>
 
       {/* Medical Disclaimer */}
-      <section className="container-custom">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-4xl mx-auto">
           <MedicalDisclaimer locale={locale} />
         </div>
       </section>
+
+      {/* 相关推荐区域 - 仅限痛经评估页面 */}
+      {tool === 'period-pain-assessment' && (
+        <div className="mt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="space-y-12">
+              
+              {/* 相关工具区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {locale === 'zh' ? '相关工具' : 'Related Tools'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {relatedTools.map((tool) => (
+                    <RelatedToolCard key={tool.id} tool={tool} locale={locale} />
+                  ))}
+                </div>
+              </section>
+
+              {/* 相关文章区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {locale === 'zh' ? '相关健康文章' : 'Related Health Articles'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {relatedArticles.map((article) => (
+                    <RelatedArticleCard key={article.id} article={article} locale={locale} />
+                  ))}
+                </div>
+              </section>
+
+              {/* 场景解决方案区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {locale === 'zh' ? '场景解决方案' : 'Scenario Solutions'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {scenarioSolutions.map((solution) => (
+                    <ScenarioSolutionCard key={solution.id} solution={solution} locale={locale} />
+                  ))}
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

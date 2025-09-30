@@ -2167,7 +2167,13 @@
       "consultAdvice": "⚠️ Based on your symptoms, we recommend consulting a healthcare professional for proper evaluation and treatment.",
       "resetButton": "Take Assessment Again",
       "moreInfoButton": "Learn More About Period Health",
-      "disclaimer": "This assessment is for informational purposes only and should not replace professional medical advice."
+      "disclaimer": "This assessment is for informational purposes only and should not replace professional medical advice.",
+      "advice": {
+        "severeSymptoms": "Your symptoms are quite severe. We recommend consulting a gynecologist for detailed examination as soon as possible.",
+        "severeIntensity": "Severe menstrual pain may affect quality of life. We recommend consulting a doctor to understand treatment options.",
+        "moderateIntensity": "Moderate menstrual pain is common. You can try heat therapy, moderate exercise, and other relief methods. If it continues to bother you, consider seeing a doctor.",
+        "mildIntensity": "Your menstrual pain is mild and within the normal range. Maintaining good lifestyle habits should be sufficient."
+      }
     }
   },
   "interactiveTools": {
@@ -6916,6 +6922,31 @@
       "testCompleteDesc": "Your constitution analysis is complete",
       "testFailed": "Test Failed",
       "testFailedDesc": "Please check your network connection and try again"
+    }
+  },
+  "anchorTexts": {
+    "tools": {
+      "tracker": "Start Tracking",
+      "assessment": "Start Assessment",
+      "constitution": "Start Test"
+    },
+    "articles": {
+      "related": "Read Article",
+      "more": "Learn More",
+      "ginger": "Learn Ginger Therapy",
+      "heat": "Master Heat Therapy",
+      "medical": "View Medical Guide",
+      "natural": "Explore Natural Remedies",
+      "comprehensive": "Complete Guide",
+      "relief": "Pain Relief Methods",
+      "anti_inflammatory": "Learn Anti-Inflammatory Diet",
+      "ginger_tea": "Master Ginger Tea",
+      "herbal_tea": "Explore Herbal Recipes"
+    },
+    "solutions": {
+      "workplace": "Workplace Guide",
+      "student": "Student Life",
+      "social": "Social Events"
     }
   }
 }

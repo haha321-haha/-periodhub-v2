@@ -32,25 +32,17 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
     if (symptoms.length > 0) {
       severity = 'high';
       needConsult = true;
-      advice = locale === 'zh' 
-        ? '您的症状较为严重，建议尽快咨询妇科医生进行详细检查。'
-        : 'Your symptoms are quite severe. We recommend consulting a gynecologist for detailed examination as soon as possible.';
+      advice = t('advice.severeSymptoms');
     } else if (intensity === 'severe') {
       severity = 'high';
       needConsult = true;
-      advice = locale === 'zh'
-        ? '严重痛经可能影响生活质量，建议咨询医生了解治疗方案。'
-        : 'Severe menstrual pain may affect quality of life. We recommend consulting a doctor to understand treatment options.';
+      advice = t('advice.severeIntensity');
     } else if (intensity === 'moderate') {
       severity = 'medium';
-      advice = locale === 'zh'
-        ? '中等程度痛经较为常见，可以尝试热敷、适量运动等缓解方法。如持续困扰建议就医。'
-        : 'Moderate menstrual pain is common. You can try heat therapy, moderate exercise, and other relief methods. If it continues to bother you, consider seeing a doctor.';
+      advice = t('advice.moderateIntensity');
     } else {
       severity = 'low';
-      advice = locale === 'zh'
-        ? '您的痛经程度较轻，属于正常范围。保持良好的生活习惯即可。'
-        : 'Your menstrual pain is mild and within the normal range. Maintaining good lifestyle habits should be sufficient.';
+      advice = t('advice.mildIntensity');
     }
 
     setResult({ severity, advice, needConsult });

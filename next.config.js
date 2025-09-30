@@ -288,6 +288,17 @@ const nextConfig = {
         destination: '/en/downloads', // 默认英文版本
         permanent: true
       },
+      // 🎯 修复不存在的文章重定向 - pain-relief-methods
+      {
+        source: '/zh/articles/pain-relief-methods',
+        destination: '/zh/articles/5-minute-period-pain-relief',
+        permanent: true
+      },
+      {
+        source: '/en/articles/pain-relief-methods',
+        destination: '/en/articles/5-minute-period-pain-relief',
+        permanent: true
+      },
       // 🎯 修复teen-health重定向问题 - 避免循环重定向
       {
         source: '/teen-health',
@@ -389,3 +400,4 @@ const nextConfig = {
 module.exports = withNextIntl(nextConfig);
   
   
+

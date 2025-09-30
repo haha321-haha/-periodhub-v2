@@ -268,7 +268,7 @@ export default async function InteractiveToolsPage({
           <section className="container-custom">
             <div className="text-center mb-6 sm:mb-8">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3">
-                {locale === 'zh' ? '其他健康工具' : 'Other Health Tools'}
+                {t('otherTools.title')}
               </h2>
               <p className="text-base text-gray-600 max-w-2xl mx-auto">
                 {locale === 'zh' 

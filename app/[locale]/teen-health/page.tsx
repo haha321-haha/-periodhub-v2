@@ -58,6 +58,8 @@ export default async function TeenHealthPage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
   const t = await getTranslations('teenHealth');
+  const commonT = await getTranslations('common');
+  const anchorT = await getTranslations('anchorTexts');
   
   // 预加载面包屑所需的翻译
   const breadcrumbScenarioSolutionsTitle = locale === 'zh' ? '场景解决方案' : 'Scenario Solutions';
@@ -245,7 +247,7 @@ export default async function TeenHealthPage({
                 href={`/${locale}${feature.href}`}
                 className="flex items-center text-primary-600 font-medium group-hover:text-primary-700 transition-colors"
               >
-                <span className="mr-2">{locale === 'zh' ? '了解更多' : 'Learn More'}</span>
+                <span className="mr-2">{anchorT('teen.main')}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>

@@ -14,6 +14,12 @@ export default function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // 确保客户端和服务端渲染一致
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Navigation items
   const navigation = [
@@ -60,6 +66,31 @@ export default function Header() {
     }
     return pathname?.startsWith(href) || false;
   };
+
+  // 服务端渲染时返回静态内容，避免hydration不匹配
+  if (!isMounted) {
+    return (
+      <header className="sticky top-0 z-40 w-full bg-white/85 backdrop-blur-sm">
+        <div className="container-custom">
+          <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
+            <div className="flex-shrink-0">
+              <div className="flex items-center space-x-2">
+                <span className="font-bold text-lg sm:text-xl text-primary-600">
+                  periodhub.health
+                </span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-4">
+              <div className="flex items-center space-x-1 px-2 py-2 text-sm font-medium text-neutral-600 rounded min-w-[44px] min-h-[44px] justify-center sm:justify-start">
+                <span className="text-base">🇨🇳</span>
+                <span className="hidden sm:inline text-xs lg:text-sm">中文</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header

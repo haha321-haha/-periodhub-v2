@@ -181,6 +181,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('');
+  const anchorT = await getTranslations('anchorTexts');
   const isZh = typeof locale === 'string' && (locale === 'zh' || locale.startsWith('zh'));
   const structuredData = await getStructuredData(locale);
 
@@ -222,7 +223,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors">{t('home.features.tracking.title')}</h3>
                     <p className="text-gray-600 leading-relaxed">{t('home.features.tracking.description')}</p>
                     <div className="mt-4 text-purple-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      {t('home.features.learnMore')}
+                      {anchorT('navigation.main')}
                     </div>
                   </article>
                 </Link>
@@ -237,7 +238,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">{t('home.features.assessment.title')}</h3>
                     <p className="text-gray-600 leading-relaxed">{t('home.features.assessment.description')}</p>
                     <div className="mt-4 text-blue-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      {t('home.features.learnMore')}
+                      {anchorT('navigation.main')}
                     </div>
                   </article>
                 </Link>
@@ -252,7 +253,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-green-600 transition-colors">{t('home.features.resources.title')}</h3>
                     <p className="text-gray-600 leading-relaxed">{t('home.features.resources.description')}</p>
                     <div className="mt-4 text-green-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      {t('home.features.learnMore')}
+                      {anchorT('navigation.main')}
                     </div>
                   </article>
                 </Link>
@@ -271,7 +272,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                       {t('home.features.immediateRelief.description')}
                     </p>
                     <div className="mt-4 text-red-600 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      {t('home.features.immediateRelief.cta')}
+                      {anchorT('cta.startNow')}
                     </div>
                   </article>
                 </Link>

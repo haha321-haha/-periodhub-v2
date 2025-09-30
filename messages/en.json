@@ -4,6 +4,64 @@
     "title": "Period Hub - Menstrual Health Management Platform",
     "description": "Period Hub - Professional menstrual health management platform offering scientific pain relief solutions, interactive tools, and personalized health guidance for comprehensive period care. From instant relief to long-term management, supporting women's menstrual health worldwide. Evidence-based content with 42 expert articles, 24 PDF resources, and 6 interactive tools."
   },
+  "anchorTexts": {
+    "articles": {
+      "relief": "Pain Relief",
+      "heat": "Heat Therapy",
+      "physical": "Physical Therapy",
+      "medical": "Medical Guide",
+      "knowledge": "Health Knowledge",
+      "comprehensive": "Complete Guide",
+      "related": "Related Articles"
+    },
+    "tools": {
+      "main": "Health Tools",
+      "tracker": "Track Symptoms",
+      "assessment": "Assess Symptoms",
+      "nutrition": "Nutrition Tips",
+      "calculator": "Impact Calculator",
+      "all": "All Tools"
+    },
+    "scenarios": {
+      "exercise": "Exercise Care",
+      "office": "Workplace Solutions",
+      "social": "Social Tips",
+      "sleep": "Sleep Tips",
+      "diet": "Diet Solutions",
+      "emergency": "Emergency Care",
+      "medication": "Medication Guide"
+    },
+    "navigation": {
+      "main": "Pain Management",
+      "health": "Health Center",
+      "guide": "Health Guide",
+      "teen": "Teen Health",
+      "therapy": "Natural Therapy"
+    },
+    "cta": {
+      "viewMore": "View More",
+      "startNow": "Start Now",
+      "learnMore": "Learn More",
+      "tryNow": "Try Now",
+      "download": "Download Resources"
+    },
+    "pdf": {
+      "guide": "Download Guide",
+      "checklist": "Download Checklist",
+      "resources": "Download Resources"
+    },
+    "teen": {
+      "main": "Teen Guide",
+      "development": "Development Health",
+      "education": "Health Education"
+    },
+    "therapy": {
+      "main": "Natural Relief",
+      "herbal": "Herbal Therapy",
+      "yoga": "Yoga Techniques",
+      "diet": "Diet Tips"
+    }
+  },
   "metadata": {
     "home": {
       "title": "2024 Complete Dysmenorrhea Treatment Guide: Symptom Relief + Medication Advice + Heat Therapy Methods",
@@ -1796,6 +1854,9 @@
   "interactiveToolsPage": {
     "title": "Interactive Menstrual Health Tools - Symptom Assessment & Pain Tracking",
     "description": "Professional menstrual health management tools including symptom assessment, pain tracking, and data analytics. Scientifically evaluate your menstrual symptoms, get personalized health recommendations, and effectively manage period pain. Bilingual support with mobile-optimized experience.",
+    "otherTools": {
+      "title": "All Tools"
+    },
     "symptomAssessment": {
       "title": "Symptom Assessment Tool",
       "subtitle": "Quickly identify pain types through professional questionnaires and receive precise personalized recommendations.",

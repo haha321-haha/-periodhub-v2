@@ -30,6 +30,13 @@ export default function HydrationFix() {
       }
     });
     
+    // 移除翻译扩展添加的属性
+    const elementsWithTranslationMarks = document.querySelectorAll('[data-doubao-translate-traverse-mark]');
+    elementsWithTranslationMarks.forEach(element => {
+      element.removeAttribute('data-doubao-translate-traverse-mark');
+      console.log('[HydrationFix] 移除了翻译扩展添加的属性');
+    });
+    
     // 确保html元素有正确的类名
     if (!htmlElement.classList.contains('hydrated')) {
       htmlElement.classList.add('hydrated');

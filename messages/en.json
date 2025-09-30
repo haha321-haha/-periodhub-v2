@@ -6974,7 +6974,11 @@
       "office": "Workplace Solutions",
       "workplace_wellness": "Workplace Wellness",
       "exercise_balance_new": "Exercise Balance",
-      "exercise_balance": "Exercise Balance"
+      "exercise_balance": "Exercise Balance",
+      "relief": "Relief Methods"
+    },
+    "teen": {
+      "main": "Teen Health Guide"
     }
   }
 }

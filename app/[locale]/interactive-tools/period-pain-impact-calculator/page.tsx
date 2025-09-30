@@ -7,23 +7,26 @@ import React, { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { titleManager } from '@/utils/unifiedTitleManager';
 import Breadcrumb from '@/components/Breadcrumb';
+import RelatedArticleCard from '../components/RelatedArticleCard';
+import RelatedToolCard from '../components/RelatedToolCard';
+import ScenarioSolutionCard from '../components/ScenarioSolutionCard';
 
 // 完全硬编码的文本内容
 const TEXTS = {
   zh: {
-    metaTitle: '工作影响计算器 - 痛经症状评估与职场影响分析工具 | PeriodHub',
-    pageTitle: '工作影响计算器 - 症状评估与职场分析完整解决方案',
-    subtitle: '专业经期疼痛测试工具与个性化建议系统，科学评估痛经严重程度及工作影响，提供精准医疗建议和生活方式指导',
+    metaTitle: '痛经影响计算器 - 职场影响专项分析与工作调整建议 | PeriodHub',
+    pageTitle: '痛经影响计算器 - 职场影响专项分析工具',
+    subtitle: '专业评估痛经对工作和生活的影响程度，提供个性化的工作调整建议和职场健康管理方案',
     breadcrumbHome: '首页',
     breadcrumbTools: '互动工具',
     breadcrumbCurrent: '工作影响计算器',
-    modeTitle: '选择评估模式',
-    simplifiedMode: '简化版',
-    simplifiedDesc: '快速评估，适合一般用户',
-    detailedMode: '详细版',
-    detailedDesc: '全面评估，提供详细建议',
-    medicalMode: '医疗专业版',
-    medicalDesc: '专业评估，包含临床指导',
+    modeTitle: '选择分析模式',
+    simplifiedMode: '快速影响评估',
+    simplifiedDesc: '快速评估痛经对工作的基础影响',
+    detailedMode: '全面影响分析',
+    detailedDesc: '深入分析工作、生活各方面的影响',
+    medicalMode: '专业职场指导',
+    medicalDesc: '专业职场健康管理和工作调整建议',
     startButton: '开始评估',
     impactButton: '职场影响分析',
     backButton: '返回',
@@ -51,6 +54,148 @@ const TEXTS = {
   }
 };
 
+// 痛经影响计算器专用推荐数据配置
+const getPainCalculatorRecommendations = (locale: string) => {
+  const isZh = locale === 'zh';
+  
+  // 推荐文章推荐
+  const relatedArticles = [
+    {
+      id: 'menstrual-stress-management',
+      title: isZh ? '经期压力管理完全指南' : 'Menstrual Stress Management Complete Guide',
+      description: isZh 
+        ? '职场环境下的压力管理策略和经期健康维护'
+        : 'Stress management strategies and menstrual health maintenance in workplace environment',
+      href: `/${locale}/articles/menstrual-stress-management-complete-guide`,
+      category: isZh ? '压力管理' : 'stress-management',
+      readTime: isZh ? '12分钟阅读' : '12 min read',
+      priority: 'high',
+      icon: '💼',
+      iconColor: 'blue',
+      anchorTextType: 'workplace_health'
+    },
+    {
+      id: 'menstrual-sleep-quality',
+      title: isZh ? '经期睡眠质量改善指南' : 'Menstrual Sleep Quality Improvement Guide',
+      description: isZh
+        ? '提升睡眠质量，改善经期不适和工作效率'
+        : 'Improve sleep quality to reduce menstrual discomfort and enhance work efficiency',
+      href: `/${locale}/articles/menstrual-sleep-quality-improvement-guide`,
+      category: isZh ? '睡眠管理' : 'sleep-management',
+      readTime: isZh ? '10分钟阅读' : '10 min read',
+      priority: 'high',
+      icon: '😴',
+      iconColor: 'purple',
+      anchorTextType: 'pain_management'
+    },
+    {
+      id: 'anti-inflammatory-diet',
+      title: isZh ? '抗炎饮食缓解痛经指南' : 'Anti-Inflammatory Diet for Period Pain Relief',
+      description: isZh
+        ? '适合职场女性的抗炎饮食方案和营养调理'
+        : 'Anti-inflammatory diet plan and nutrition conditioning for working women',
+      href: `/${locale}/articles/anti-inflammatory-diet-period-pain`,
+      category: isZh ? '营养调理' : 'nutrition-conditioning',
+      readTime: isZh ? '8分钟阅读' : '8 min read',
+      priority: 'medium',
+      icon: '🥗',
+      iconColor: 'green',
+      anchorTextType: 'quick_relief'
+    }
+  ];
+
+  // 相关工具推荐
+  const relatedTools = [
+    {
+      id: 'symptom-assessment',
+      title: isZh ? '症状评估工具' : 'Symptom Assessment Tool',
+      description: isZh
+        ? '专业评估痛经症状严重程度和类型'
+        : 'Professional assessment of menstrual pain symptom severity and types',
+      href: `/${locale}/interactive-tools/symptom-assessment`,
+      category: isZh ? '症状评估' : 'symptom-assessment',
+      difficulty: isZh ? '简单' : 'Easy',
+      estimatedTime: isZh ? '3-5分钟' : '3-5 min',
+      priority: 'high',
+      icon: '🔍',
+      iconColor: 'purple',
+      anchorTextType: 'assessment'
+    },
+    {
+      id: 'workplace-wellness',
+      title: isZh ? '职场健康管理' : 'Workplace Wellness',
+      description: isZh
+        ? '职场环境下的经期健康管理和工作调整'
+        : 'Menstrual health management and work adjustments in workplace environment',
+      href: `/${locale}/interactive-tools/workplace-wellness`,
+      category: isZh ? '职场管理' : 'workplace-management',
+      difficulty: isZh ? '中等' : 'Medium',
+      estimatedTime: isZh ? '5-8分钟' : '5-8 min',
+      priority: 'high',
+      icon: '💼',
+      iconColor: 'blue',
+      anchorTextType: 'tracker'
+    },
+    {
+      id: 'pain-tracker',
+      title: isZh ? '痛经追踪器' : 'Pain Tracker',
+      description: isZh
+        ? '记录疼痛模式，分析症状变化趋势'
+        : 'Track pain patterns and analyze symptom trends',
+      href: `/${locale}/interactive-tools/pain-tracker`,
+      category: isZh ? '疼痛追踪' : 'pain-tracking',
+      difficulty: isZh ? '简单' : 'Easy',
+      estimatedTime: isZh ? '每日2-3分钟' : '2-3 min daily',
+      priority: 'medium',
+      icon: '📊',
+      iconColor: 'red',
+      anchorTextType: 'pain_tracker'
+    }
+  ];
+
+  // 场景解决方案推荐
+  const scenarioSolutions = [
+    {
+      id: 'office',
+      title: isZh ? '办公环境健康管理' : 'Office Environment Health Management',
+      description: isZh
+        ? '办公环境下的经期健康管理策略'
+        : 'Menstrual health management strategies in office environment',
+      href: `/${locale}/scenario-solutions/office`,
+      icon: '💼',
+      priority: 'high',
+      iconColor: 'blue',
+      anchorTextType: 'office'
+    },
+    {
+      id: 'emergency-kit',
+      title: isZh ? '痛经应急包指南' : 'Emergency Kit Guide',
+      description: isZh
+        ? '疼痛发作时的快速缓解方法和应急处理'
+        : 'Quick relief methods and emergency treatment when pain occurs',
+      href: `/${locale}/scenario-solutions/emergency-kit`,
+      icon: '🚨',
+      priority: 'high',
+      iconColor: 'red',
+      anchorTextType: 'relief'
+    },
+    {
+      id: 'commute',
+      title: isZh ? '通勤场景' : 'Commute Scenario',
+      description: isZh
+        ? '通勤途中经期疼痛应急处理指南'
+        : 'Emergency menstrual pain management during commute',
+      href: `/${locale}/scenario-solutions/commute`,
+      icon: '🚗',
+      priority: 'medium',
+      iconColor: 'orange',
+      anchorTextType: 'exercise_balance_new'
+    }
+  ];
+
+  return { relatedArticles, relatedTools, scenarioSolutions };
+};
+
 export default function PeriodPainImpactCalculatorPage({ 
   params 
 }: { 
@@ -65,6 +210,11 @@ export default function PeriodPainImpactCalculatorPage({
 
   // 状态管理
   const [selectedMode, setSelectedMode] = useState<string>('');
+  const [showCalculator, setShowCalculator] = useState<boolean>(false);
+  const [workImpactScore, setWorkImpactScore] = useState<number>(0);
+  const [painLevel, setPainLevel] = useState<number>(0);
+  const [workDaysAffected, setWorkDaysAffected] = useState<number>(0);
+  const [productivityLoss, setProductivityLoss] = useState<number>(0);
   
   // 使用统一标题管理器设置页面标题
   useEffect(() => {
@@ -85,27 +235,38 @@ export default function PeriodPainImpactCalculatorPage({
     if (!selectedMode) {
       setSelectedMode('simplified');
     }
-    console.log('开始评估, 模式:', selectedMode || 'simplified');
+    console.log('开始职场影响分析, 模式:', selectedMode || 'simplified');
     
-    // 根据选择的模式跳转到不同的页面
-    const mode = selectedMode || 'simplified';
-    if (mode === 'simplified') {
-      router.push(`/${currentLocale}/interactive-tools/symptom-assessment?mode=simplified`);
-    } else if (mode === 'detailed') {
-      router.push(`/${currentLocale}/interactive-tools/symptom-assessment?mode=detailed`);
-    } else if (mode === 'medical') {
-      router.push(`/${currentLocale}/interactive-tools/symptom-assessment?mode=medical`);
-    } else {
-      // 默认跳转到简化版
-      router.push(`/${currentLocale}/interactive-tools/symptom-assessment?mode=simplified`);
-    }
+    // 设置计算器状态，不再跳转到其他页面
+    setShowCalculator(true);
   };
 
   const handleImpactAnalysis = () => {
     console.log('开始职场影响分析');
     
     // 跳转到职场影响评估页面
-    router.push(`/${currentLocale}/interactive-tools/workplace-impact-assessment`);
+    router.push(`/${currentLocale}/interactive-tools/workplace-wellness`);
+  };
+
+  // 计算职场影响评分
+  const calculateWorkImpact = () => {
+    const score = (painLevel * 0.4) + (workDaysAffected * 0.3) + (productivityLoss * 0.3);
+    setWorkImpactScore(Math.round(score));
+  };
+
+  // 当输入值改变时重新计算
+  useEffect(() => {
+    if (showCalculator) {
+      calculateWorkImpact();
+    }
+  }, [painLevel, workDaysAffected, productivityLoss, showCalculator]);
+
+  // 获取影响等级描述
+  const getImpactLevel = (score: number) => {
+    if (score <= 30) return { level: '轻度影响', color: 'text-green-600', bgColor: 'bg-green-50' };
+    if (score <= 60) return { level: '中度影响', color: 'text-yellow-600', bgColor: 'bg-yellow-50' };
+    if (score <= 80) return { level: '重度影响', color: 'text-orange-600', bgColor: 'bg-orange-50' };
+    return { level: '严重影响', color: 'text-red-600', bgColor: 'bg-red-50' };
   };
 
   const handleBack = () => {
@@ -214,6 +375,108 @@ export default function PeriodPainImpactCalculatorPage({
                   </button>
                 </div>
 
+          {/* 职场影响计算器 */}
+          {showCalculator && (
+            <div className="mt-12 p-8 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl border border-purple-200">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+                {currentLocale === 'zh' ? '职场影响评估' : 'Workplace Impact Assessment'}
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                {/* 疼痛程度 */}
+                <div className="bg-white p-6 rounded-lg shadow-sm">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    {currentLocale === 'zh' ? '疼痛程度 (1-10)' : 'Pain Level (1-10)'}
+                  </label>
+                  <input
+                    type="range"
+                    min="1"
+                    max="10"
+                    value={painLevel}
+                    onChange={(e) => setPainLevel(Number(e.target.value))}
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>1</span>
+                    <span className="font-semibold text-purple-600">{painLevel}</span>
+                    <span>10</span>
+                  </div>
+                </div>
+
+                {/* 受影响工作日 */}
+                <div className="bg-white p-6 rounded-lg shadow-sm">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    {currentLocale === 'zh' ? '每月受影响天数' : 'Affected Days per Month'}
+                  </label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="15"
+                    value={workDaysAffected}
+                    onChange={(e) => setWorkDaysAffected(Number(e.target.value))}
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0</span>
+                    <span className="font-semibold text-purple-600">{workDaysAffected}</span>
+                    <span>15</span>
+                  </div>
+                </div>
+
+                {/* 工作效率损失 */}
+                <div className="bg-white p-6 rounded-lg shadow-sm">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    {currentLocale === 'zh' ? '工作效率损失 (%)' : 'Productivity Loss (%)'}
+                  </label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={productivityLoss}
+                    onChange={(e) => setProductivityLoss(Number(e.target.value))}
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0%</span>
+                    <span className="font-semibold text-purple-600">{productivityLoss}%</span>
+                    <span>100%</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* 影响评分结果 */}
+              <div className="text-center">
+                <div className={`inline-block p-6 rounded-xl ${getImpactLevel(workImpactScore).bgColor}`}>
+                  <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                    {currentLocale === 'zh' ? '职场影响评分' : 'Workplace Impact Score'}
+                  </h4>
+                  <div className={`text-4xl font-bold ${getImpactLevel(workImpactScore).color} mb-2`}>
+                    {workImpactScore}/100
+                  </div>
+                  <p className={`text-lg font-medium ${getImpactLevel(workImpactScore).color}`}>
+                    {getImpactLevel(workImpactScore).level}
+                  </p>
+                </div>
+              </div>
+
+              {/* 建议按钮 */}
+              <div className="mt-8 text-center">
+                <button
+                  onClick={() => setShowCalculator(false)}
+                  className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium rounded-lg border border-gray-300 hover:border-gray-400 transition duration-300 mr-4"
+                >
+                  {currentLocale === 'zh' ? '重新评估' : 'Re-assess'}
+                </button>
+                <button
+                  onClick={handleImpactAnalysis}
+                  className="px-6 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition duration-300"
+                >
+                  {currentLocale === 'zh' ? '获取专业建议' : 'Get Professional Advice'}
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* 返回按钮 */}
           <div className="mt-8 flex justify-center">
             <button 
@@ -234,6 +497,63 @@ export default function PeriodPainImpactCalculatorPage({
             © 2024 PeriodWise. All Rights Reserved.
                         </p>
                       </div>
+          </div>
+
+          {/* 相关推荐区域 */}
+          <div className="bg-white mt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="space-y-12">
+
+              {/* 推荐文章区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {currentLocale === 'zh' ? '相关健康文章' : 'Related Health Articles'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {getPainCalculatorRecommendations(currentLocale).relatedArticles.map((article) => (
+                    <RelatedArticleCard
+                      key={article.id}
+                      article={article}
+                      locale={currentLocale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 相关工具区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {currentLocale === 'zh' ? '相关工具' : 'Related Tools'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {getPainCalculatorRecommendations(currentLocale).relatedTools.map((tool) => (
+                    <RelatedToolCard
+                      key={tool.id}
+                      tool={tool}
+                      locale={currentLocale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 场景解决方案区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {currentLocale === 'zh' ? '场景解决方案' : 'Scenario Solutions'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {getPainCalculatorRecommendations(currentLocale).scenarioSolutions.map((solution) => (
+                    <ScenarioSolutionCard
+                      key={solution.id}
+                      solution={solution}
+                      locale={currentLocale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+            </div>
+          </div>
           </div>
         </main>
   );

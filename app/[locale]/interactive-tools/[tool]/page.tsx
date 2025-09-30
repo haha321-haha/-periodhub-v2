@@ -147,15 +147,16 @@ const getCycleTrackerRecommendations = (locale: Locale) => {
       iconColor: 'blue'
     },
     {
-      id: 'exercise',
-      title: isZh ? '运动与周期平衡' : 'Exercise & Cycle Balance',
+      id: 'partnerCommunication',
+      title: isZh ? '伴侣沟通指南' : 'Partner Communication Guide',
       description: isZh
-        ? '运动爱好者的周期同步训练'
-        : 'Cycle-synced training for fitness enthusiasts',
-      href: `/${locale}/scenario-solutions/exercise`,
-      icon: '🏃‍♀️',
+        ? '与伴侣分享经期健康信息的专业指导'
+        : 'Professional guidance for sharing menstrual health information with partners',
+      href: `/${locale}/scenario-solutions/partnerCommunication`,
+      icon: '💕',
       priority: 'medium',
-      iconColor: 'orange'
+      iconColor: 'pink',
+      anchorTextType: 'social'
     },
     {
       id: 'sleep',

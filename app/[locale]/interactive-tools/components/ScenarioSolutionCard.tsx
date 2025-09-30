@@ -13,6 +13,7 @@ interface ScenarioSolutionCardProps {
     icon: string;
     priority: string;
     iconColor?: string;
+    anchorTextType?: string;
   };
   locale: string;
 }
@@ -62,7 +63,8 @@ export default function ScenarioSolutionCard({ solution, locale }: ScenarioSolut
             className={`inline-flex items-center ${iconColors.text} hover:${iconColors.text.replace('600', '800')} font-medium text-sm transition-colors`}
             suppressHydrationWarning={true}
           >
-            {solution.id === 'office' ? anchorT('solutions.office') :
+            {solution.anchorTextType ? anchorT(solution.anchorTextType) :
+             solution.id === 'office' ? anchorT('solutions.office') :
              solution.id === 'social' ? anchorT('solutions.social') :
              solution.id === 'workplace-cycle-management' ? anchorT('solutions.workplace_cycle') :
              solution.id === 'student-cycle-wellness' ? anchorT('solutions.student_cycle') :

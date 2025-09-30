@@ -1,65 +1,40 @@
 {
+  "0": "益处",
+  "4": "4",
   "site": {
     "name": "Period Hub",
     "title": "Period Hub - 经期健康管理平台",
     "description": "Period Hub - 专业经期健康管理平台，提供科学痛经缓解方案、互动工具和个性化健康指导。从即时缓解到长期管理，全方位支持女性经期健康，已帮助千万女性科学管理生理期。基于循证医学的专业内容，涵盖42篇专业文章、24个PDF资源、6大互动工具，为各年龄段女性提供科学指导。"
   },
   "anchorTexts": {
-    "articles": {
-      "relief": "痛经缓解方法",
-      "heat": "热疗止痛原理",
-      "physical": "物理疗法指南",
-      "medical": "就医诊断指南",
-      "knowledge": "更多健康知识",
-      "comprehensive": "完整医学指南",
-      "related": "相关健康文章"
-    },
     "tools": {
-      "main": "使用健康工具",
-      "tracker": "追踪痛经症状",
-      "assessment": "评估症状等级",
-      "nutrition": "获取营养建议",
-      "calculator": "计算影响程度",
-      "all": "浏览全部工具"
+      "tracker": "开始周期追踪",
+      "assessment": "开始症状评估",
+      "constitution": "开始体质测试"
     },
-    "scenarios": {
-      "exercise": "运动期间应对",
-      "office": "职场痛经管理",
-      "social": "社交场合应对",
-      "sleep": "改善睡眠质量",
-      "diet": "饮食调理方案",
-      "emergency": "紧急处理方法",
-      "medication": "药物使用建议"
+    "articles": {
+      "related": "阅读文章",
+      "more": "更多知识",
+      "ginger": "了解生姜疗法",
+      "heat": "学习热敷技巧",
+      "medical": "查看医疗指导",
+      "natural": "探索自然疗法",
+      "comprehensive": "完整指南",
+      "relief": "缓解方法",
+      "anti_inflammatory": "了解抗炎饮食",
+      "ginger_tea": "学习姜茶制作",
+      "herbal_tea": "掌握草药配方"
+    },
+    "solutions": {
+      "workplace": "职场管理方案",
+      "student": "学生生活指南",
+      "social": "社交场合应对"
     },
     "navigation": {
-      "main": "痛经管理指南",
-      "health": "经期健康中心",
-      "guide": "健康管理指南",
-      "teen": "青少年专区",
-      "therapy": "自然疗法中心"
+      "main": "痛经管理指南"
     },
     "cta": {
-      "viewMore": "查看完整内容",
-      "startNow": "立即开始使用",
-      "learnMore": "了解详细信息",
-      "tryNow": "立即体验工具",
-      "download": "下载健康资料"
-    },
-    "pdf": {
-      "guide": "下载完整指南",
-      "checklist": "下载应急清单",
-      "resources": "下载健康资料"
-    },
-    "teen": {
-      "main": "青少年痛经指南",
-      "development": "发育期健康",
-      "education": "经期健康教育"
-    },
-    "therapy": {
-      "main": "自然缓解方法",
-      "herbal": "中医调理方案",
-      "yoga": "瑜伽缓解技巧",
-      "diet": "饮食调理建议"
+      "startNow": "立即开始使用"
     }
   },
   "metadata": {
@@ -6144,10 +6119,8 @@
     "impactButton": "职场影响分析",
     "cta": "开始评估"
   },
-  "0": "益处",
   "0-2": "0-2",
   "3-4": "3-4",
-  "4": "4",
   "5-7": "5-7",
   "8-10": "8-10",
   "benefitsLabel": "益处标签",
@@ -6780,31 +6753,6 @@
       "success": "成功",
       "warning": "警告",
       "info": "信息"
-    }
-  },
-  "anchorTexts": {
-    "tools": {
-      "tracker": "开始周期追踪",
-      "assessment": "开始症状评估",
-      "constitution": "开始体质测试"
-    },
-    "articles": {
-      "related": "阅读文章",
-      "more": "更多知识",
-      "ginger": "了解生姜疗法",
-      "heat": "学习热敷技巧", 
-      "medical": "查看医疗指导",
-      "natural": "探索自然疗法",
-      "comprehensive": "完整指南",
-      "relief": "缓解方法",
-      "anti_inflammatory": "了解抗炎饮食",
-      "ginger_tea": "学习姜茶制作",
-      "herbal_tea": "掌握草药配方"
-    },
-    "solutions": {
-      "workplace": "职场管理方案",
-      "student": "学生生活指南",
-      "social": "社交场合应对"
     }
   }
 }

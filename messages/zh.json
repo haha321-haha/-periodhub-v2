@@ -1373,7 +1373,8 @@
       "phases": {
         "inhale": "吸气",
         "hold": "屏息",
-        "exhale": "呼气"
+        "exhale": "呼气",
+        "pause": "暂停"
       },
       "instructions": {
         "title": "练习方法：",

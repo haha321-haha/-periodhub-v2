@@ -795,7 +795,8 @@
       "phases": {
         "inhale": "Inhale",
         "hold": "Hold",
-        "exhale": "Exhale"
+        "exhale": "Exhale",
+        "pause": "Pause"
       },
       "instructions": {
         "title": "How to practice:",
@@ -2063,7 +2064,8 @@
       "phases": {
         "inhale": "Inhale",
         "hold": "Hold",
-        "exhale": "Exhale"
+        "exhale": "Exhale",
+        "pause": "Pause"
       },
       "instructions": "How to practice:",
       "startButton": "🫁 Start Guided Practice",

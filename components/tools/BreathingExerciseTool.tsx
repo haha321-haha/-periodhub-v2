@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface BreathingExerciseToolProps {
   locale?: string;
@@ -19,28 +20,8 @@ export default function BreathingExerciseTool({ locale = 'zh' }: BreathingExerci
     pause: { duration: 2, next: 'inhale' as const }
   };
 
-  const texts = {
-    zh: {
-      inhale: '吸气',
-      hold: '屏息',
-      exhale: '呼气',
-      pause: '暂停',
-      start: '开始练习',
-      stop: '停止练习',
-      cycles: '完成周期'
-    },
-    en: {
-      inhale: 'Inhale',
-      hold: 'Hold',
-      exhale: 'Exhale',
-      pause: 'Pause',
-      start: 'Start Practice',
-      stop: 'Stop Practice',
-      cycles: 'Cycles Completed'
-    }
-  };
-
-  const t = texts[locale as keyof typeof texts] || texts.zh;
+  // ✅ 使用翻译系统替代硬编码
+  const t = useTranslations('breathingExercise');
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -91,7 +72,7 @@ export default function BreathingExerciseTool({ locale = 'zh' }: BreathingExerci
               {timeLeft}
             </div>
             <div className="text-sm text-blue-600">
-              {t[phase]}
+              {t(`phases.${phase}`)}
             </div>
           </div>
         </div>
@@ -99,7 +80,7 @@ export default function BreathingExerciseTool({ locale = 'zh' }: BreathingExerci
 
       <div className="mb-4">
         <div className="text-lg font-semibold text-gray-700">
-          {t.cycles}: {cycle}
+          {t('buttons.oneCycleCompleted')}: {cycle}
         </div>
       </div>
 
@@ -111,7 +92,7 @@ export default function BreathingExerciseTool({ locale = 'zh' }: BreathingExerci
             : 'bg-blue-500 hover:bg-blue-600 text-white'
         }`}
       >
-        {isActive ? t.stop : t.start}
+        {isActive ? t('buttons.stopPractice') : t('buttons.startPractice')}
       </button>
     </div>
   );

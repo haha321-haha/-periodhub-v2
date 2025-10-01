@@ -133,8 +133,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'scenarioSolutionsPage' });
   
   return {
-    title: `${t('scenarios.lifeStages.title')} - ${t('title')}`,
-    description: t('scenarios.lifeStages.description'),
+    title: `${t('scenarios.life_stages.title')} - ${t('title')}`,
+    description: t('scenarios.life_stages.description'),
   };
 }
 
@@ -147,7 +147,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
   
   // 预加载面包屑所需的翻译
   const breadcrumbTitle = t('title');
-  const breadcrumbLifeStagesTitle = t('scenarios.lifeStages.title');
+  const breadcrumbLifeStagesTitle = t('scenarios.life_stages.title');
   
   // 获取推荐数据
   const recommendations = getLifeStagesRecommendations(locale);
@@ -319,10 +319,10 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
           <Heart className="w-8 h-8" />
         </div>
         <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
-          {t('scenarios.lifeStages.title')}
+          {t('scenarios.life_stages.title')}
         </h1>
         <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-          {t('scenarios.lifeStages.description')}
+          {t('scenarios.life_stages.description')}
         </p>
       </header>
 
@@ -581,7 +581,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
           className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          {t('scenarios.lifeStages.backToOverview')}
+          {t('scenarios.life_stages.backToOverview')}
         </Link>
       </div>
 
@@ -591,10 +591,10 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
           <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
           <div>
             <h3 className="font-semibold text-orange-800 mb-2">
-              {t('scenarios.lifeStages.disclaimer.title')}
+              {t('scenarios.life_stages.disclaimer.title')}
             </h3>
             <p className="text-orange-700 text-sm leading-relaxed">
-              {t('scenarios.lifeStages.disclaimer.content')}
+              {t('scenarios.life_stages.disclaimer.content')}
             </p>
           </div>
         </div>

@@ -170,13 +170,13 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
           anchorTextType: 'social'
         },
         {
-          id: 'lifeStages',
+          id: 'life_stages',
           title: isZh ? '人生阶段管理' : 'Life Stages Management',
           description: isZh ? '了解不同年龄段的经期需求和伴侣支持策略' : 'Understand period needs across ages and partner support strategies',
-          href: `/${locale}/scenario-solutions/lifeStages`,
+          href: `/${locale}/scenario-solutions/life_stages`,
           icon: '❤️',
           priority: 'high',
-          anchorTextType: 'lifeStages'
+          anchorTextType: 'life_stages'
         },
         {
           id: 'office',

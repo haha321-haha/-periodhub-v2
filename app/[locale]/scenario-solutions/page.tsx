@@ -81,7 +81,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
       filename: 'scenario-dating.jpg',
       alt: 'Woman confidently managing period during social gathering or date'
     },
-    lifeStages: {
+    life_stages: {
       filename: 'scenario-family.jpg',
       alt: 'Women of different life stages sharing menstrual health experiences'
     },
@@ -138,10 +138,10 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
       hoverColor: 'hover:bg-pink-100'
     },
     {
-      id: 'lifeStages',
-      title: t('scenarios.lifeStages.title'),
-      description: t('scenarios.lifeStages.description'),
-      features: t.raw('scenarios.lifeStages.features') as string[],
+      id: 'life_stages',
+      title: t('scenarios.life_stages.title'),
+      description: t('scenarios.life_stages.description'),
+      features: t.raw('scenarios.life_stages.features') as string[],
       iconName: 'Heart',
       color: 'bg-red-50 text-red-600',
       hoverColor: 'hover:bg-red-100'

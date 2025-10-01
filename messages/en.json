@@ -74,11 +74,13 @@
       "commute": "Commute Solutions",
       "partner_communication": "Partner Communication",
       "teen_health": "Teen Health",
-      "lifeStages": "Life Stages",
+      "life_stages": "Life Stages",
       "campus_emergency": "Campus Emergency",
       "workplace_cycle": "Workplace Cycle Management",
       "student_cycle": "Student Cycle Wellness",
-      "fitness_cycle": "Fitness Cycle Balance"
+      "fitness_cycle": "Fitness Cycle Balance",
+      "workplace_wellness": "Workplace Wellness",
+      "exercise_balance": "Exercise Balance"
     },
     "navigation": {
       "main": "Pain Management",
@@ -3008,7 +3010,7 @@
         },
         "backToOverview": "Back to Scenario Solutions Overview"
       },
-      "lifeStages": {
+      "life_stages": {
         "title": "Special Life Stages",
         "description": "Professional menstrual health management guidance for different life stages: adolescent period education, reproductive age health management, perimenopause care solutions. Get personalized period health management strategies tailored to each age group's characteristics.",
         "features": [

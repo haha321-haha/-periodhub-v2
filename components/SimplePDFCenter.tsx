@@ -315,7 +315,7 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
 
     const shareData = {
       title: title,
-      text: locale === 'zh' ? `来自 Period Hub 的资源：${title}` : `Resource from Period Hub: ${title}`,
+      text: t('simplePdfCenter.shareText', { title }),
       url: shareUrl
     };
 
@@ -1236,7 +1236,7 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
               aria-label={t('simplePdfCenter.ariaLabels.shareResource')}
             >
               <span className="hidden sm:inline">{t('ui.buttons.share')}</span>
-              <span className="sm:hidden">分享</span>
+              <span className="sm:hidden">{t('ui.buttons.share')}</span>
             </button>
             
             {resource.type === 'pdf' && (

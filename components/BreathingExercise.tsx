@@ -139,7 +139,7 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
               <div className="text-white text-center">
                 <div className="text-3xl font-bold">{timeLeft}</div>
                 <div className="text-sm">
-                  {locale === 'zh' ? getCurrentPhase().name : getCurrentPhase().nameEn}
+                  {getCurrentPhase().name}
                 </div>
               </div>
             </div>

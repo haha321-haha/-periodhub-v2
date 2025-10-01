@@ -880,6 +880,7 @@
         "fetchingContent": "Fetching PDF content: {url}",
         "downloadSuccess": "PDF download successful: {title}"
       },
+      "shareText": "Resource from Period Hub: {title}",
       "ariaLabels": {
         "readArticle": "Read article",
         "previewPdf": "Preview PDF",

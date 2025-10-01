@@ -1458,6 +1458,7 @@
         "fetchingContent": "正在获取PDF内容: {url}",
         "downloadSuccess": "PDF下载成功: {title}"
       },
+      "shareText": "来自 Period Hub 的资源：{title}",
       "ariaLabels": {
         "readArticle": "阅读文章",
         "previewPdf": "预览PDF",

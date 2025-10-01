@@ -66,6 +66,7 @@ function getLifeStagesRecommendations(locale: Locale) {
         href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
         readTime: isZh ? '18分钟阅读' : '18 min read',
         category: isZh ? '医疗指南' : 'Medical Guide',
+        priority: 'high',
         icon: '📋',
         anchorTextType: 'medical_guide'
       },
@@ -76,6 +77,7 @@ function getLifeStagesRecommendations(locale: Locale) {
         href: `/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`,
         readTime: isZh ? '15分钟阅读' : '15 min read',
         category: isZh ? '医疗指导' : 'Medical Care',
+        priority: 'high',
         icon: '🏥',
         anchorTextType: 'medical'
       },
@@ -86,6 +88,7 @@ function getLifeStagesRecommendations(locale: Locale) {
         href: `/${locale}/downloads/medication-guide`,
         readTime: isZh ? '12分钟阅读' : '12 min read',
         category: isZh ? '用药指导' : 'Medication',
+        priority: 'medium',
         icon: '💊',
         anchorTextType: 'medication'
       }

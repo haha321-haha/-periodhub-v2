@@ -60,6 +60,7 @@ function getNaturalTherapiesRecommendations(locale: string) {
         href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
         readTime: isZh ? '18分钟阅读' : '18 min read',
         category: isZh ? '医疗指南' : 'Medical Guide',
+        priority: 'high',
         icon: '📋',
         anchorTextType: 'medical_guide'
       },
@@ -72,6 +73,7 @@ function getNaturalTherapiesRecommendations(locale: string) {
         href: `/${locale}/articles/heat-therapy-complete-guide`,
         readTime: isZh ? '15分钟阅读' : '15 min read',
         category: isZh ? '自然疗法' : 'Natural Therapy',
+        priority: 'high',
         icon: '🔥',
         anchorTextType: 'heat_therapy'
       },
@@ -84,6 +86,7 @@ function getNaturalTherapiesRecommendations(locale: string) {
         href: `/${locale}/articles/herbal-tea-menstrual-pain-relief`,
         readTime: isZh ? '12分钟阅读' : '12 min read',
         category: isZh ? '草药疗法' : 'Herbal Therapy',
+        priority: 'medium',
         icon: '🌿',
         anchorTextType: 'herbal_tea'
       }

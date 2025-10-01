@@ -101,6 +101,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
           href: `/${locale}/articles/menstrual-stress-management-complete-guide`,
           readTime: isZh ? '15分钟阅读' : '15 min read',
           category: isZh ? '压力管理' : 'Stress Management',
+          priority: 'high',
           icon: '💼',
           anchorTextType: 'workplace'
         },
@@ -113,6 +114,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
           href: `/${locale}/articles/menstrual-sleep-quality-improvement-guide`,
           readTime: isZh ? '12分钟阅读' : '12 min read',
           category: isZh ? '睡眠管理' : 'Sleep Management',
+          priority: 'high',
           icon: '🏥',
           anchorTextType: 'pain_management'
         },
@@ -125,6 +127,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
           href: `/${locale}/articles/anti-inflammatory-diet-period-pain`,
           readTime: isZh ? '10分钟阅读' : '10 min read',
           category: isZh ? '营养调理' : 'Nutrition',
+          priority: 'medium',
           icon: '🥗',
           anchorTextType: 'nutrition'
         }

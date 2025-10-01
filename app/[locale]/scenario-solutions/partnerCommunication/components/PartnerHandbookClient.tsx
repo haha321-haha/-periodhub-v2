@@ -102,6 +102,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
           description: isZh ? '帮助伴侣了解痛经严重程度，提供针对性支持建议' : 'Help partners understand pain severity and provide targeted support advice',
           href: `/${locale}/interactive-tools/symptom-assessment`,
           icon: '🔍',
+          priority: 'high',
           anchorTextType: 'symptom_assessment'
         },
         {
@@ -110,6 +111,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
           description: isZh ? '记录痛经模式，帮助伴侣理解疼痛规律和触发因素' : 'Track pain patterns, help partners understand pain patterns and triggers',
           href: `/${locale}/interactive-tools/pain-tracker`,
           icon: '📊',
+          priority: 'high',
           anchorTextType: 'pain_tracker'
         },
         {
@@ -118,6 +120,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
           description: isZh ? '评估痛经对生活的影响，让伴侣了解实际困扰' : 'Assess period pain life impact, help partners understand real struggles',
           href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
           icon: '🧮',
+          priority: 'high',
           anchorTextType: 'calculator'
         }
       ],

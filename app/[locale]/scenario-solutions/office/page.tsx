@@ -68,6 +68,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
             : 'Record pain patterns and analyze symptom trends in workplace',
           href: `/${locale}/interactive-tools/pain-tracker`,
           icon: '📊',
+          priority: 'high',
           anchorTextType: 'tracker'
         },
         {
@@ -78,6 +79,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
             : 'Professional workplace health management strategies and stress relief solutions',
           href: `/${locale}/interactive-tools/workplace-wellness`,
           icon: '💼',
+          priority: 'high',
           anchorTextType: 'workplace'
         },
         {
@@ -88,6 +90,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
             : 'Assess period pain severity and get personalized workplace adaptation advice',
           href: `/${locale}/interactive-tools/symptom-assessment`,
           icon: '🔍',
+          priority: 'high',
           anchorTextType: 'assessment'
         }
       ],

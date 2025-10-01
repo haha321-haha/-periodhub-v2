@@ -38,6 +38,7 @@ function getSocialRecommendations(locale: Locale) {
         description: isZh ? '评估当前痛经状态，判断是否适合参加社交活动' : 'Assess current period pain status and determine if suitable for social activities',
         href: `/${locale}/interactive-tools/symptom-assessment`,
         icon: '🔍',
+        priority: 'high',
         anchorTextType: 'symptom_assessment'
       },
       {
@@ -46,6 +47,7 @@ function getSocialRecommendations(locale: Locale) {
         description: isZh ? '记录社交活动中的疼痛模式，优化未来社交安排' : 'Track pain patterns during social activities, optimize future social schedules',
         href: `/${locale}/interactive-tools/pain-tracker`,
         icon: '📊',
+        priority: 'high',
         anchorTextType: 'pain_tracker'
       },
       {
@@ -54,6 +56,7 @@ function getSocialRecommendations(locale: Locale) {
         description: isZh ? '评估痛经对社交能力的影响，制定社交应对计划' : 'Assess period pain impact on social capacity, create social response plans',
         href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
         icon: '🧮',
+        priority: 'high',
         anchorTextType: 'calculator'
       }
     ],

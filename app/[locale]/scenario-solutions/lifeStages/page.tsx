@@ -39,6 +39,7 @@ function getLifeStagesRecommendations(locale: Locale) {
         description: isZh ? '针对不同年龄段的痛经评估，获得个性化健康建议' : 'Age-specific period pain assessment, get personalized health advice',
         href: `/${locale}/interactive-tools/symptom-assessment`,
         icon: '🔍',
+        priority: 'high',
         anchorTextType: 'symptom_assessment'
       },
       {
@@ -47,6 +48,7 @@ function getLifeStagesRecommendations(locale: Locale) {
         description: isZh ? '长期追踪不同生命阶段的痛经变化，识别模式趋势' : 'Long-term tracking of period pain changes across life stages, identify pattern trends',
         href: `/${locale}/interactive-tools/pain-tracker`,
         icon: '📊',
+        priority: 'high',
         anchorTextType: 'pain_tracker'
       },
       {
@@ -55,6 +57,7 @@ function getLifeStagesRecommendations(locale: Locale) {
         description: isZh ? '评估痛经对不同年龄段生活质量的影响，制定管理计划' : 'Assess period pain impact on quality of life across different ages, create management plans',
         href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
         icon: '🧮',
+        priority: 'high',
         anchorTextType: 'calculator'
       }
     ],

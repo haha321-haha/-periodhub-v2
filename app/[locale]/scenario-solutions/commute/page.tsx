@@ -40,6 +40,7 @@ function getCommuteRecommendations(locale: Locale) {
         description: isZh ? '记录通勤疼痛模式，分析不同交通方式下的症状变化趋势' : 'Track commute pain patterns and analyze symptom changes across different transport modes',
         href: `/${locale}/interactive-tools/pain-tracker`,
         icon: '📊',
+        priority: 'high',
         anchorTextType: 'pain_tracker'
       },
       {
@@ -48,6 +49,7 @@ function getCommuteRecommendations(locale: Locale) {
         description: isZh ? '评估痛经严重程度，获得个性化通勤适应建议' : 'Assess pain severity and get personalized commute adaptation advice',
         href: `/${locale}/interactive-tools/symptom-assessment`,
         icon: '🔍',
+        priority: 'high',
         anchorTextType: 'symptom_assessment'
       },
       {
@@ -56,6 +58,7 @@ function getCommuteRecommendations(locale: Locale) {
         description: isZh ? '评估痛经对通勤和工作的影响程度，获得个性化改善方案' : 'Assess period pain impact on commuting and work, get personalized solutions',
         href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
         icon: '🧮',
+        priority: 'high',
         anchorTextType: 'calculator'
       }
     ],

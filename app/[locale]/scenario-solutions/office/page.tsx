@@ -871,7 +871,6 @@ export default async function OfficeScenarioPage({ params }: Props) {
                     key={solution.id}
                     solution={solution}
                     locale={locale}
-                    anchorTextType={solution.anchorTextType}
                   />
                 ))}
               </div>

@@ -839,7 +839,6 @@ export default async function OfficeScenarioPage({ params }: Props) {
                     key={tool.id}
                     tool={tool}
                     locale={locale}
-                    anchorTextType={tool.anchorTextType}
                   />
                 ))}
               </div>

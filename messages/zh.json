@@ -5805,12 +5805,6 @@
       }
     }
   },
-  "embeddedPainAssessment": {
-    "title": "疼痛评估工具",
-    "description": "快速评估您的疼痛程度",
-    "loading": "加载中...",
-    "error": "加载失败，请刷新页面重试"
-  },
   "cycleTracker": {
     "title": "月经周期追踪器",
     "subtitle": "记录您的月经周期，预测下次月经和排卵期。",

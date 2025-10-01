@@ -2106,30 +2106,6 @@
         }
       }
     },
-    "embeddedPainAssessment": {
-      "title": "💡 Quick Pain Assessment",
-      "subtitle": "Understand your pain level in 1 minute and get initial recommendations",
-      "question": "How intense is your menstrual pain?",
-      "selectIntensityFirst": "Please select pain intensity first",
-      "options": {
-        "mild": "Mild (tolerable, doesn't affect daily activities)",
-        "moderate": "Moderate (affects some activities, but manageable)",
-        "severe": "Severe (completely affects daily activities, need rest)"
-      },
-      "buttons": {
-        "getAdvice": "Get Advice",
-        "detailedAssessment": "Detailed Assessment",
-        "testAgain": "Test Again",
-        "fullAssessment": "Full Assessment"
-      },
-      "resultTitle": "Assessment Result",
-      "results": {
-        "mild": "Your menstrual pain is mild. You can try natural relief methods like heat therapy and light exercise.",
-        "moderate": "Your menstrual pain is moderate. Consider combining multiple relief methods, and over-the-counter pain medication if needed.",
-        "severe": "Your menstrual pain is severe. We recommend consulting a doctor for professional assessment and treatment advice."
-      },
-      "disclaimer": "⚠️ This tool is for reference only and cannot replace professional medical advice"
-    },
     "searchBox": {
       "placeholder": "Search articles...",
       "matchTypes": {

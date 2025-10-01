@@ -124,7 +124,7 @@ const getSymptomAssessmentRecommendations = (locale: string) => {
       icon: '🚨',
       priority: 'high',
       iconColor: 'red',
-      anchorTextType: 'solutions.relief'
+      anchorTextType: 'relief'
     },
     {
       id: 'office',
@@ -136,7 +136,7 @@ const getSymptomAssessmentRecommendations = (locale: string) => {
       icon: '💼',
       priority: 'medium',
       iconColor: 'blue',
-      anchorTextType: 'solutions.office'
+      anchorTextType: 'office'
     },
     {
       id: 'teen-health',

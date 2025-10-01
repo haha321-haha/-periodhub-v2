@@ -3,8 +3,129 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import StructuredData from '@/components/StructuredData';
 import { Locale, locales } from '@/i18n';
-import BottomRecommendations from '@/components/BottomRecommendations';
+import RelatedToolCard from '@/app/[locale]/interactive-tools/components/RelatedToolCard';
+import RelatedArticleCard from '@/app/[locale]/interactive-tools/components/RelatedArticleCard';
+import ScenarioSolutionCard from '@/app/[locale]/interactive-tools/components/ScenarioSolutionCard';
 import { URL_CONFIG } from '@/lib/url-config';
+
+// 推荐数据配置函数（健康指南主题）
+function getHealthGuideRecommendations(locale: string) {
+  const isZh = locale === 'zh';
+  
+  return {
+    relatedTools: [
+      {
+        id: 'symptom-assessment',
+        title: isZh ? '症状评估工具' : 'Symptom Assessment',
+        description: isZh 
+          ? '专业症状评估系统，科学分析痛经类型和严重程度，获得个性化健康建议' 
+          : 'Professional symptom assessment system, scientifically analyze pain type and severity, get personalized health advice',
+        href: `/${locale}/interactive-tools/symptom-assessment`,
+        icon: '🔍',
+        priority: 'high',
+        iconColor: 'red',
+        anchorTextType: 'symptom_assessment'
+      },
+      {
+        id: 'pain-tracker',
+        title: isZh ? '痛经追踪器' : 'Pain Tracker',
+        description: isZh 
+          ? '智能疼痛追踪系统，记录症状模式，生成健康报告，辅助医生诊断' 
+          : 'Smart pain tracking system, record symptom patterns, generate health reports, assist doctor diagnosis',
+        href: `/${locale}/interactive-tools/pain-tracker`,
+        icon: '📊',
+        priority: 'high',
+        iconColor: 'blue',
+        anchorTextType: 'pain_tracker'
+      },
+      {
+        id: 'period-pain-impact-calculator',
+        title: isZh ? '痛经影响计算器' : 'Pain Impact Calculator',
+        description: isZh 
+          ? '评估痛经对生活质量的影响，量化健康损失，制定科学管理方案' 
+          : 'Assess period pain impact on quality of life, quantify health loss, create scientific management plans',
+        href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
+        icon: '🧮',
+        priority: 'high',
+        iconColor: 'purple',
+        anchorTextType: 'calculator'
+      }
+    ],
+    relatedArticles: [
+      {
+        id: 'comprehensive-medical-guide-to-dysmenorrhea',
+        title: isZh ? '痛经医疗综合指南' : 'Medical Guide to Dysmenorrhea',
+        description: isZh 
+          ? '全面的痛经医疗知识，从病因到治疗的完整医学指南' 
+          : 'Comprehensive dysmenorrhea medical knowledge, complete medical guide from causes to treatment',
+        href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
+        readTime: isZh ? '18分钟阅读' : '18 min read',
+        category: isZh ? '医疗指南' : 'Medical Guide',
+        icon: '📋',
+        anchorTextType: 'medical_guide'
+      },
+      {
+        id: 'when-to-seek-medical-care-comprehensive-guide',
+        title: isZh ? '何时就医完整指南' : 'When to Seek Medical Care',
+        description: isZh 
+          ? '识别需要就医的警示信号，掌握就医时机和健康管理策略' 
+          : 'Identify warning signs requiring medical care, master medical timing and health management strategies',
+        href: `/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`,
+        readTime: isZh ? '15分钟阅读' : '15 min read',
+        category: isZh ? '医疗指导' : 'Medical Care',
+        icon: '🏥',
+        anchorTextType: 'medical'
+      },
+      {
+        id: 'menstrual-pain-faq-expert-answers',
+        title: isZh ? '痛经常见问题解答' : 'Period Pain FAQ',
+        description: isZh 
+          ? '专家解答痛经常见疑问，科学破解健康误区和疑虑' 
+          : 'Expert answers to common period pain questions, scientifically debunk health myths and concerns',
+        href: `/${locale}/articles/menstrual-pain-faq-expert-answers`,
+        readTime: isZh ? '12分钟阅读' : '12 min read',
+        category: isZh ? '专家问答' : 'FAQ',
+        icon: '❓',
+        anchorTextType: 'faq'
+      }
+    ],
+    healthTopics: [
+      {
+        id: 'natural-therapies',
+        title: isZh ? '自然疗法大全' : 'Natural Therapies Guide',
+        description: isZh 
+          ? '探索8种科学验证的自然疗法，无副作用的健康缓解方案' 
+          : 'Explore 8 scientifically validated natural therapies, side-effect-free health relief solutions',
+        href: `/${locale}/natural-therapies`,
+        icon: '🌿',
+        priority: 'high',
+        anchorTextType: 'natural_therapies'
+      },
+      {
+        id: 'scenario-solutions',
+        title: isZh ? '场景解决方案' : 'Scenario Solutions',
+        description: isZh 
+          ? '针对通勤、办公、运动等不同场景的个性化健康管理策略' 
+          : 'Personalized health management strategies for commute, office, exercise and other scenarios',
+        href: `/${locale}/scenario-solutions`,
+        icon: '🎯',
+        priority: 'high',
+        anchorTextType: 'scenarios'
+      },
+      {
+        id: 'teen-health',
+        title: isZh ? '青少年健康专区' : 'Teen Health Zone',
+        description: isZh 
+          ? '专为12-18岁青少年设计的经期健康教育和管理指南' 
+          : 'Period health education and management guide designed for teens aged 12-18',
+        href: `/${locale}/teen-health`,
+        icon: '🌸',
+        priority: 'medium',
+        anchorTextType: 'teen_main'
+      }
+    ]
+  };
+}
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -52,6 +173,10 @@ export default async function HealthGuidePage({
 
   const t = await getTranslations({ locale, namespace: 'healthGuidePage' });
   const commonT = await getTranslations({ locale, namespace: 'common' });
+  
+  // 获取推荐数据（健康指南主题）
+  const recommendations = getHealthGuideRecommendations(locale);
+  const isZh = locale === 'zh';
 
   const guideChapters = [
     {
@@ -775,11 +900,64 @@ export default async function HealthGuidePage({
               {t('quickAccess.medicalDisclaimerText')}
             </p>
           </section>
+
+          {/* Related Recommendations - 健康指南主题 */}
+          <section className="py-8 sm:py-12">
+            <div className="space-y-8 sm:space-y-12">
+              {/* 专业评估工具 */}
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
+                  <span className="mr-3">🔧</span>
+                  {isZh ? '专业评估工具' : 'Professional Assessment Tools'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {recommendations.relatedTools.map((tool) => (
+                    <RelatedToolCard
+                      key={tool.id}
+                      tool={tool}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* 深度健康文章 */}
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
+                  <span className="mr-3">📚</span>
+                  {isZh ? '深度健康文章' : 'In-Depth Health Articles'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {recommendations.relatedArticles.map((article) => (
+                    <RelatedArticleCard
+                      key={article.id}
+                      article={article}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* 健康管理专题 */}
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
+                  <span className="mr-3">🎯</span>
+                  {isZh ? '健康管理专题' : 'Health Management Topics'}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+                  {recommendations.healthTopics.map((topic) => (
+                    <ScenarioSolutionCard
+                      key={topic.id}
+                      solution={topic}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
-
-      {/* 底部推荐工具 */}
-      <BottomRecommendations currentPage="health-guide" />
     </div>
   );
 }

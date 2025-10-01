@@ -2,6 +2,9 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumb from '@/components/Breadcrumb';
+import RelatedToolCard from '@/app/[locale]/interactive-tools/components/RelatedToolCard';
+import RelatedArticleCard from '@/app/[locale]/interactive-tools/components/RelatedArticleCard';
+import ScenarioSolutionCard from '@/app/[locale]/interactive-tools/components/ScenarioSolutionCard';
 import {
   Users,
   Heart,
@@ -21,6 +24,101 @@ type Locale = 'en' | 'zh';
 
 interface Props {
   params: Promise<{ locale: Locale }>;
+}
+
+// 推荐数据配置函数
+function getSocialRecommendations(locale: Locale) {
+  const isZh = locale === 'zh';
+  
+  return {
+    relatedTools: [
+      {
+        id: 'symptom-assessment',
+        title: isZh ? '症状评估工具' : 'Symptom Assessment',
+        description: isZh ? '评估当前痛经状态，判断是否适合参加社交活动' : 'Assess current period pain status and determine if suitable for social activities',
+        href: `/${locale}/interactive-tools/symptom-assessment`,
+        icon: '🔍',
+        anchorTextType: 'symptom_assessment'
+      },
+      {
+        id: 'pain-tracker',
+        title: isZh ? '痛经追踪器' : 'Pain Tracker',
+        description: isZh ? '记录社交活动中的疼痛模式，优化未来社交安排' : 'Track pain patterns during social activities, optimize future social schedules',
+        href: `/${locale}/interactive-tools/pain-tracker`,
+        icon: '📊',
+        anchorTextType: 'pain_tracker'
+      },
+      {
+        id: 'period-pain-impact-calculator',
+        title: isZh ? '痛经影响计算器' : 'Pain Impact Calculator',
+        description: isZh ? '评估痛经对社交能力的影响，制定社交应对计划' : 'Assess period pain impact on social capacity, create social response plans',
+        href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
+        icon: '🧮',
+        anchorTextType: 'calculator'
+      }
+    ],
+    relatedArticles: [
+      {
+        id: 'comprehensive-medical-guide-to-dysmenorrhea',
+        title: isZh ? '痛经医疗综合指南' : 'Medical Guide to Dysmenorrhea',
+        description: isZh ? '深入了解痛经成因与社交场合的应对策略，科学管理' : 'Understand dysmenorrhea causes and social coping strategies, scientific management',
+        href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
+        readTime: isZh ? '18分钟阅读' : '18 min read',
+        category: isZh ? '医疗指南' : 'Medical Guide',
+        icon: '📋',
+        anchorTextType: 'medical_guide'
+      },
+      {
+        id: 'when-to-seek-medical-care-comprehensive-guide',
+        title: isZh ? '何时就医完整指南' : 'When to Seek Medical Care',
+        description: isZh ? '识别社交场合中需要就医的痛经警示信号，紧急应对' : 'Identify warning signs in social settings requiring medical care, emergency response',
+        href: `/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`,
+        readTime: isZh ? '15分钟阅读' : '15 min read',
+        category: isZh ? '医疗指导' : 'Medical Care',
+        icon: '🏥',
+        anchorTextType: 'medical'
+      },
+      {
+        id: 'medication-guide',
+        title: isZh ? '痛经用药指南' : 'Medication Guide for Period Pain',
+        description: isZh ? '社交场合的安全用药指南，快速缓解不适保持社交状态' : 'Safe medication guide in social settings, fast relief while maintaining social presence',
+        href: `/${locale}/downloads/medication-guide`,
+        readTime: isZh ? '12分钟阅读' : '12 min read',
+        category: isZh ? '用药指导' : 'Medication',
+        icon: '💊',
+        anchorTextType: 'medication'
+      }
+    ],
+    scenarioSolutions: [
+      {
+        id: 'partnerCommunication',
+        title: isZh ? '伴侣沟通指南' : 'Partner Communication Guide',
+        description: isZh ? '帮助伴侣理解经期不适，建立有效沟通和支持体系' : 'Help partners understand period discomfort, establish effective communication and support system',
+        href: `/${locale}/scenario-solutions/partnerCommunication`,
+        icon: '💕',
+        priority: 'high',
+        anchorTextType: 'partner_communication'
+      },
+      {
+        id: 'office',
+        title: isZh ? '办公环境健康管理' : 'Office Environment Health Management',
+        description: isZh ? '社交活动后返回办公环境的经期健康管理策略' : 'Menstrual health management strategies after social activities returning to office',
+        href: `/${locale}/scenario-solutions/office`,
+        icon: '💼',
+        priority: 'high',
+        anchorTextType: 'office'
+      },
+      {
+        id: 'emergency-kit',
+        title: isZh ? '痛经应急包指南' : 'Period Pain Emergency Kit Guide',
+        description: isZh ? '社交场合突发疼痛的应急处理和装备准备' : 'Emergency response and equipment preparation for sudden pain in social settings',
+        href: `/${locale}/scenario-solutions/emergency-kit`,
+        icon: '🚨',
+        priority: 'medium',
+        anchorTextType: 'emergency'
+      }
+    ]
+  };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -51,6 +149,10 @@ export default async function SocialScenarioPage({ params }: Props) {
   // 预加载面包屑所需的翻译
   const breadcrumbTitle = t('title');
   const breadcrumbSocialTitle = t('scenarios.social.title');
+  
+  // 获取推荐数据
+  const recommendations = getSocialRecommendations(locale);
+  const isZh = locale === 'zh';
 
   const dateStrategies = [
     {
@@ -427,17 +529,58 @@ export default async function SocialScenarioPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Medical Disclaimer */}
-      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg">
-        <div className="flex items-start">
-          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
-          <div>
-            <h3 className="font-semibold text-orange-800 mb-2">
-              {t('scenarios.social.disclaimer.title')}
-            </h3>
-            <p className="text-orange-700 text-sm leading-relaxed">
-              {t('scenarios.social.disclaimer.content')}
-            </p>
+      {/* 相关推荐区域 */}
+      <section className="bg-gradient-to-br from-pink-50 to-blue-50 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="space-y-12">
+            
+            {/* 相关工具区域 */}
+            <section>
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                {isZh ? '相关工具' : 'Related Tools'}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {recommendations.relatedTools.map((tool) => (
+                  <RelatedToolCard
+                    key={tool.id}
+                    tool={tool}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* 相关文章区域 */}
+            <section>
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                {isZh ? '相关文章' : 'Related Articles'}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {recommendations.relatedArticles.map((article) => (
+                  <RelatedArticleCard
+                    key={article.id}
+                    article={article}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* 场景解决方案区域 */}
+            <section>
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                {isZh ? '场景解决方案' : 'Scenario Solutions'}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {recommendations.scenarioSolutions.map((solution) => (
+                  <ScenarioSolutionCard
+                    key={solution.id}
+                    solution={solution}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+            </section>
           </div>
         </div>
       </section>
@@ -452,6 +595,21 @@ export default async function SocialScenarioPage({ params }: Props) {
           {t('scenarios.social.backToOverview')}
         </Link>
       </div>
+
+      {/* Medical Disclaimer */}
+      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
+        <div className="flex items-start">
+          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
+          <div>
+            <h3 className="font-semibold text-orange-800 mb-2">
+              {t('scenarios.social.disclaimer.title')}
+            </h3>
+            <p className="text-orange-700 text-sm leading-relaxed">
+              {t('scenarios.social.disclaimer.content')}
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -2,8 +2,129 @@ import Link from 'next/link';
 import { unstable_setRequestLocale as setRequestLocale } from 'next-intl/server';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
-import BottomRecommendations from '@/components/BottomRecommendations';
+import RelatedToolCard from '@/app/[locale]/interactive-tools/components/RelatedToolCard';
+import RelatedArticleCard from '@/app/[locale]/interactive-tools/components/RelatedArticleCard';
+import ScenarioSolutionCard from '@/app/[locale]/interactive-tools/components/ScenarioSolutionCard';
 import { URL_CONFIG } from '@/lib/url-config';
+
+// 推荐数据配置函数（自然疗法主题）
+function getNaturalTherapiesRecommendations(locale: string) {
+  const isZh = locale === 'zh';
+  
+  return {
+    relatedTools: [
+      {
+        id: 'nutrition-recommendation-generator',
+        title: isZh ? '营养建议生成器' : 'Nutrition Recommendation Generator',
+        description: isZh 
+          ? '基于体质生成个性化的自然饮食调理方案，通过营养改善痛经' 
+          : 'Generate personalized natural dietary plans based on constitution to improve period pain through nutrition',
+        href: `/${locale}/interactive-tools/nutrition-recommendation-generator`,
+        icon: '🥗',
+        priority: 'high',
+        iconColor: 'green',
+        anchorTextType: 'nutrition_generator'
+      },
+      {
+        id: 'constitution-test',
+        title: isZh ? '中医体质测试' : 'TCM Constitution Test',
+        description: isZh 
+          ? '了解自己的中医体质，选择最适合的自然疗法和草药调理' 
+          : 'Understand your TCM constitution, choose the most suitable natural therapies and herbal remedies',
+        href: `/${locale}/interactive-tools/constitution-test`,
+        icon: '🏮',
+        priority: 'high',
+        iconColor: 'orange',
+        anchorTextType: 'constitution'
+      },
+      {
+        id: 'pain-tracker',
+        title: isZh ? '痛经追踪器' : 'Pain Tracker',
+        description: isZh 
+          ? '记录自然疗法的效果，跟踪哪些方法最有效缓解你的痛经' 
+          : 'Track the effectiveness of natural therapies, monitor which methods work best for your pain',
+        href: `/${locale}/interactive-tools/pain-tracker`,
+        icon: '📊',
+        priority: 'high',
+        iconColor: 'blue',
+        anchorTextType: 'pain_tracker'
+      }
+    ],
+    relatedArticles: [
+      {
+        id: 'comprehensive-medical-guide-to-dysmenorrhea',
+        title: isZh ? '痛经医疗综合指南' : 'Medical Guide to Dysmenorrhea',
+        description: isZh 
+          ? '深入了解痛经成因，掌握自然疗法的科学原理和应用时机' 
+          : 'Understand dysmenorrhea causes, master the scientific principles and application timing of natural therapies',
+        href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
+        readTime: isZh ? '18分钟阅读' : '18 min read',
+        category: isZh ? '医疗指南' : 'Medical Guide',
+        icon: '📋',
+        anchorTextType: 'medical_guide'
+      },
+      {
+        id: 'heat-therapy-complete-guide',
+        title: isZh ? '热敷疗法完整指南' : 'Heat Therapy Complete Guide',
+        description: isZh 
+          ? '深度解析热敷缓解痛经的科学原理，温度控制和最佳实践方法' 
+          : 'In-depth analysis of heat therapy for pain relief, temperature control and best practices',
+        href: `/${locale}/articles/heat-therapy-complete-guide`,
+        readTime: isZh ? '15分钟阅读' : '15 min read',
+        category: isZh ? '自然疗法' : 'Natural Therapy',
+        icon: '🔥',
+        anchorTextType: 'heat_therapy'
+      },
+      {
+        id: 'herbal-tea-menstrual-pain-relief',
+        title: isZh ? '草药茶缓解痛经' : 'Herbal Tea Pain Relief',
+        description: isZh 
+          ? '草药茶配方和饮用指南，姜茶、当归茶等传统草药疗法' 
+          : 'Herbal tea recipes and drinking guide, traditional remedies like ginger tea and angelica tea',
+        href: `/${locale}/articles/herbal-tea-menstrual-pain-relief`,
+        readTime: isZh ? '12分钟阅读' : '12 min read',
+        category: isZh ? '草药疗法' : 'Herbal Therapy',
+        icon: '🌿',
+        anchorTextType: 'herbal_tea'
+      }
+    ],
+    scenarioSolutions: [
+      {
+        id: 'exercise',
+        title: isZh ? '运动场景管理' : 'Exercise Scenario Management',
+        description: isZh 
+          ? '在运动中应用自然疗法，通过瑜伽和拉伸缓解经期不适' 
+          : 'Apply natural therapies during exercise, relieve period discomfort through yoga and stretching',
+        href: `/${locale}/scenario-solutions/exercise`,
+        icon: '🏃‍♀️',
+        priority: 'high',
+        anchorTextType: 'exercise_balance_new'
+      },
+      {
+        id: 'office',
+        title: isZh ? '办公环境健康管理' : 'Office Environment Health Management',
+        description: isZh 
+          ? '职场中的自然缓解技巧，隐蔽式按摩穴位和热敷应用' 
+          : 'Natural relief techniques in workplace, discreet acupressure and heat therapy application',
+        href: `/${locale}/scenario-solutions/office`,
+        icon: '💼',
+        priority: 'high',
+        anchorTextType: 'office'
+      },
+      {
+        id: 'emergency-kit',
+        title: isZh ? '痛经应急包指南' : 'Period Pain Emergency Kit Guide',
+        description: isZh 
+          ? '准备便携式自然疗法应急包，随时随地缓解突发疼痛' 
+          : 'Prepare portable natural therapy emergency kit, relieve sudden pain anytime, anywhere',
+        href: `/${locale}/scenario-solutions/emergency-kit`,
+        icon: '🚨',
+        priority: 'medium',
+        anchorTextType: 'emergency'
+      }
+    ]
+  };
+}
 
 // SEO Metadata - 实现你建议的长标题策略
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -106,6 +227,10 @@ export default async function NaturalTherapiesPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'naturalTherapiesPage' });
   const structuredData = await getStructuredData(locale);
+  
+  // 获取推荐数据（自然疗法主题）
+  const recommendations = getNaturalTherapiesRecommendations(locale);
+  const isZh = locale === 'zh';
   
   return (
     <>
@@ -974,8 +1099,61 @@ export default async function NaturalTherapiesPage({
         </section>
       </div>
 
-      {/* 底部推荐工具 */}
-      <BottomRecommendations currentPage="natural-therapies" />
+      {/* Related Recommendations - 自然疗法主题 */}
+      <div className="container mx-auto px-4 py-8 sm:py-12">
+        <div className="space-y-8 sm:space-y-12">
+          {/* 相关工具 */}
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
+              <span className="mr-3">🔧</span>
+              {isZh ? '相关工具' : 'Related Tools'}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {recommendations.relatedTools.map((tool) => (
+                <RelatedToolCard
+                  key={tool.id}
+                  tool={tool}
+                  locale={locale}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* 相关文章 */}
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
+              <span className="mr-3">📚</span>
+              {isZh ? '相关文章' : 'Related Articles'}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {recommendations.relatedArticles.map((article) => (
+                <RelatedArticleCard
+                  key={article.id}
+                  article={article}
+                  locale={locale}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* 场景解决方案 */}
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
+              <span className="mr-3">🎯</span>
+              {isZh ? '场景解决方案' : 'Scenario Solutions'}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {recommendations.scenarioSolutions.map((solution) => (
+                <ScenarioSolutionCard
+                  key={solution.id}
+                  solution={solution}
+                  locale={locale}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

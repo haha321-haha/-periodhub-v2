@@ -269,7 +269,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
               className="bg-white rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary-200 group cursor-pointer"
             >
               {/* Scenario Image */}
-              <div className="mb-4 sm:mb-6 relative overflow-hidden rounded-lg">
+              <div className="mb-4 sm:mb-6 relative overflow-hidden rounded-lg h-40 sm:h-48">
                 <SafeSmartImage
                   key={`scenario-image-${scenario.id}`}
                   src={`/images/scenarios/${scenarioImages[scenario.id].filename}`}
@@ -277,7 +277,8 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
                   width={600}
                   height={400}
                   type="content"
-                  className="w-full h-40 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  style={{ width: '100%', height: '100%' }}
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   priority={false}
                   enableFallback={true}

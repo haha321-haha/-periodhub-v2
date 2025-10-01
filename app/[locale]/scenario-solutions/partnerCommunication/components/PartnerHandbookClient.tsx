@@ -7,6 +7,10 @@ import { usePartnerHandbookStore, useStageActions } from '../stores/partnerHandb
 import { Locale } from '../types/common';
 import { QuizResult, QuizStage } from '../types/quiz';
 import Breadcrumb from '@/components/Breadcrumb';
+import RelatedToolCard from '@/app/[locale]/interactive-tools/components/RelatedToolCard';
+import RelatedArticleCard from '@/app/[locale]/interactive-tools/components/RelatedArticleCard';
+import ScenarioSolutionCard from '@/app/[locale]/interactive-tools/components/ScenarioSolutionCard';
+import { ArrowLeft, AlertTriangle } from 'lucide-react';
 
 // 懒加载组件
 import dynamic from 'next/dynamic';
@@ -85,6 +89,103 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
   const [currentState, setCurrentState] = useState<AppState>('intro');
   const [isLoading, setIsLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
+
+  // 推荐数据配置
+  const recommendations = React.useMemo(() => {
+    const isZh = locale === 'zh';
+    
+    return {
+      relatedTools: [
+        {
+          id: 'symptom-assessment',
+          title: isZh ? '症状评估工具' : 'Symptom Assessment',
+          description: isZh ? '帮助伴侣了解痛经严重程度，提供针对性支持建议' : 'Help partners understand pain severity and provide targeted support advice',
+          href: `/${locale}/interactive-tools/symptom-assessment`,
+          icon: '🔍',
+          anchorTextType: 'symptom_assessment'
+        },
+        {
+          id: 'pain-tracker',
+          title: isZh ? '痛经追踪器' : 'Pain Tracker',
+          description: isZh ? '记录痛经模式，帮助伴侣理解疼痛规律和触发因素' : 'Track pain patterns, help partners understand pain patterns and triggers',
+          href: `/${locale}/interactive-tools/pain-tracker`,
+          icon: '📊',
+          anchorTextType: 'pain_tracker'
+        },
+        {
+          id: 'period-pain-impact-calculator',
+          title: isZh ? '痛经影响计算器' : 'Pain Impact Calculator',
+          description: isZh ? '评估痛经对生活的影响，让伴侣了解实际困扰' : 'Assess period pain life impact, help partners understand real struggles',
+          href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
+          icon: '🧮',
+          anchorTextType: 'calculator'
+        }
+      ],
+      relatedArticles: [
+        {
+          id: 'comprehensive-medical-guide-to-dysmenorrhea',
+          title: isZh ? '痛经医疗综合指南' : 'Medical Guide to Dysmenorrhea',
+          description: isZh ? '帮助伴侣从医学角度理解痛经，提供科学支持' : 'Help partners understand dysmenorrhea from medical perspective, provide scientific support',
+          href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
+          readTime: isZh ? '18分钟阅读' : '18 min read',
+          category: isZh ? '医疗指南' : 'Medical Guide',
+          icon: '📋',
+          anchorTextType: 'medical_guide'
+        },
+        {
+          id: 'when-to-seek-medical-care-comprehensive-guide',
+          title: isZh ? '何时就医完整指南' : 'When to Seek Medical Care',
+          description: isZh ? '识别需要就医的警示信号，伴侣可提供及时提醒' : 'Identify warning signs requiring medical care, partners can provide timely reminders',
+          href: `/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`,
+          readTime: isZh ? '15分钟阅读' : '15 min read',
+          category: isZh ? '医疗指导' : 'Medical Care',
+          icon: '🏥',
+          anchorTextType: 'medical'
+        },
+        {
+          id: 'medication-guide',
+          title: isZh ? '痛经用药指南' : 'Medication Guide for Period Pain',
+          description: isZh ? '了解安全用药知识，伴侣可协助用药管理' : 'Understand safe medication knowledge, partners can assist medication management',
+          href: `/${locale}/downloads/medication-guide`,
+          readTime: isZh ? '12分钟阅读' : '12 min read',
+          category: isZh ? '用药指导' : 'Medication',
+          icon: '💊',
+          anchorTextType: 'medication'
+        }
+      ],
+      scenarioSolutions: [
+        {
+          id: 'social',
+          title: isZh ? '社交场景管理' : 'Social Scenario Management',
+          description: isZh ? '学习在社交场合如何支持伴侣应对痛经不适' : 'Learn how to support partner dealing with period pain in social settings',
+          href: `/${locale}/scenario-solutions/social`,
+          icon: '💃',
+          priority: 'high',
+          anchorTextType: 'social'
+        },
+        {
+          id: 'lifeStages',
+          title: isZh ? '人生阶段管理' : 'Life Stages Management',
+          description: isZh ? '了解不同年龄段的经期需求和伴侣支持策略' : 'Understand period needs across ages and partner support strategies',
+          href: `/${locale}/scenario-solutions/lifeStages`,
+          icon: '❤️',
+          priority: 'high',
+          anchorTextType: 'lifeStages'
+        },
+        {
+          id: 'office',
+          title: isZh ? '办公环境健康管理' : 'Office Environment Health Management',
+          description: isZh ? '了解职场女性的经期挑战，提供工作日支持' : 'Understand workplace women\'s period challenges, provide weekday support',
+          href: `/${locale}/scenario-solutions/office`,
+          icon: '💼',
+          priority: 'medium',
+          anchorTextType: 'office'
+        }
+      ]
+    };
+  }, [locale]);
+
+  const isZh = locale === 'zh';
 
   // 使用useCallback稳定函数引用
   const stableInitializeMissingStages = useCallback(() => {
@@ -474,15 +575,86 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
               <TrainingCampDisplay locale={locale} />
             </section>
 
-            {/* 相关推荐区域 - 场景页面风格 */}
-            <section className="bg-neutral-100 p-4 sm:p-6 md:p-8 rounded-xl text-center">
-              <h2 className="text-xl sm:text-2xl font-semibold text-neutral-800 mb-4">
-                {t('exploreMore')}
-              </h2>
-              <p className="text-neutral-700 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
-                {t('exploreMoreDescription')}
-              </p>
-              <RelatedLinks locale={locale} showTitle={false} />
+            {/* 相关推荐区域 */}
+            <section className="bg-gradient-to-br from-pink-50 to-blue-50 mt-16">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div className="space-y-12">
+                  
+                  {/* 相关工具区域 */}
+                  <section>
+                    <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                      {isZh ? '相关工具' : 'Related Tools'}
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      {recommendations.relatedTools.map((tool) => (
+                        <RelatedToolCard
+                          key={tool.id}
+                          tool={tool}
+                          locale={locale}
+                        />
+                      ))}
+                    </div>
+                  </section>
+
+                  {/* 相关文章区域 */}
+                  <section>
+                    <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                      {isZh ? '相关文章' : 'Related Articles'}
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      {recommendations.relatedArticles.map((article) => (
+                        <RelatedArticleCard
+                          key={article.id}
+                          article={article}
+                          locale={locale}
+                        />
+                      ))}
+                    </div>
+                  </section>
+
+                  {/* 场景解决方案区域 */}
+                  <section>
+                    <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                      {isZh ? '场景解决方案' : 'Scenario Solutions'}
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      {recommendations.scenarioSolutions.map((solution) => (
+                        <ScenarioSolutionCard
+                          key={solution.id}
+                          solution={solution}
+                          locale={locale}
+                        />
+                      ))}
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </section>
+
+            {/* 返回场景解决方案总览 */}
+            <div className="text-center mt-12">
+              <Link 
+                href={`/${locale}/scenario-solutions`}
+                className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                {isZh ? '返回场景解决方案总览' : 'Back to Scenario Solutions'}
+              </Link>
+            </div>
+
+            {/* Medical Disclaimer - 移到返回按钮下方 */}
+            <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8 mb-8">
+              <div className="flex items-start">
+                <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold text-orange-800 mb-2">
+                    {t('disclaimer')}
+                  </h3>
+                  <p className="text-orange-700 text-sm leading-relaxed">
+                    {t('disclaimerContent')}
+                  </p>
+                </div>
+              </div>
             </section>
           </div>
         )}
@@ -575,15 +747,6 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
         </section>
       )}
 
-      {/* 医疗免责声明 - 参考emergency-kit页面样式 */}
-      <section className="bg-red-50 p-4 sm:p-6 md:p-8 rounded-xl border border-red-200 mt-8">
-        <h3 className="text-base sm:text-lg font-semibold text-red-800 mb-3 sm:mb-4">
-          {t('disclaimer')}
-        </h3>
-        <p className="text-red-700 text-xs sm:text-sm leading-relaxed">
-          {t('disclaimerContent')}
-        </p>
-      </section>
     </div>
   );
 }

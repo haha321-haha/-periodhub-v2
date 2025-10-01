@@ -2,6 +2,9 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumb from '@/components/Breadcrumb';
+import RelatedToolCard from '@/app/[locale]/interactive-tools/components/RelatedToolCard';
+import RelatedArticleCard from '@/app/[locale]/interactive-tools/components/RelatedArticleCard';
+import ScenarioSolutionCard from '@/app/[locale]/interactive-tools/components/ScenarioSolutionCard';
 import {
   Package,
   Briefcase,
@@ -22,6 +25,116 @@ type Locale = 'en' | 'zh';
 
 interface Props {
   params: Promise<{ locale: Locale }>;
+}
+
+// 推荐数据配置函数（侧重应急）
+function getEmergencyKitRecommendations(locale: Locale) {
+  const isZh = locale === 'zh';
+  
+  return {
+    relatedTools: [
+      {
+        id: 'symptom-assessment',
+        title: isZh ? '症状评估工具' : 'Symptom Assessment',
+        description: isZh ? '快速评估痛经严重程度，判断应急处理等级和就医必要性' : 'Quickly assess pain severity, determine emergency response level and medical necessity',
+        href: `/${locale}/interactive-tools/symptom-assessment`,
+        icon: '🔍',
+        priority: 'high',
+        iconColor: 'red',
+        anchorTextType: 'symptom_assessment'
+      },
+      {
+        id: 'pain-tracker',
+        title: isZh ? '痛经追踪器' : 'Pain Tracker',
+        description: isZh ? '记录应急处理效果，分析哪些应急方法最有效' : 'Track emergency treatment effectiveness, analyze which emergency methods work best',
+        href: `/${locale}/interactive-tools/pain-tracker`,
+        icon: '📊',
+        priority: 'high',
+        iconColor: 'blue',
+        anchorTextType: 'pain_tracker'
+      },
+      {
+        id: 'period-pain-impact-calculator',
+        title: isZh ? '痛经影响计算器' : 'Pain Impact Calculator',
+        description: isZh ? '评估应急包准备的完备性，制定个性化应急方案' : 'Assess emergency kit preparation completeness, create personalized emergency plans',
+        href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
+        icon: '🧮',
+        priority: 'high',
+        iconColor: 'purple',
+        anchorTextType: 'calculator'
+      }
+    ],
+    relatedArticles: [
+      {
+        id: 'when-to-seek-medical-care-comprehensive-guide',
+        title: isZh ? '何时就医完整指南' : 'When to Seek Medical Care',
+        description: isZh ? '识别紧急就医信号，了解应急处理时机和急诊指征' : 'Identify emergency medical signals, understand emergency timing and ER indicators',
+        href: `/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`,
+        readTime: isZh ? '15分钟阅读' : '15 min read',
+        category: isZh ? '医疗指导' : 'Medical Care',
+        icon: '🏥',
+        anchorTextType: 'medical'
+      },
+      {
+        id: 'medication-guide',
+        title: isZh ? '痛经用药指南' : 'Medication Guide for Period Pain',
+        description: isZh ? '应急用药安全指南，快速缓解痛经的药物选择和使用' : 'Emergency medication safety guide, fast pain relief drug selection and usage',
+        href: `/${locale}/downloads/medication-guide`,
+        readTime: isZh ? '12分钟阅读' : '12 min read',
+        category: isZh ? '用药指导' : 'Medication',
+        icon: '💊',
+        anchorTextType: 'medication'
+      },
+      {
+        id: 'comprehensive-medical-guide-to-dysmenorrhea',
+        title: isZh ? '痛经医疗综合指南' : 'Medical Guide to Dysmenorrhea',
+        description: isZh ? '了解痛经成因和应急处理原理，科学准备应急包' : 'Understand dysmenorrhea causes and emergency response principles, scientifically prepare emergency kit',
+        href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
+        readTime: isZh ? '18分钟阅读' : '18 min read',
+        category: isZh ? '医疗指南' : 'Medical Guide',
+        icon: '📋',
+        anchorTextType: 'medical_guide'
+      }
+    ],
+    scenarioSolutions: [
+      {
+        id: 'campus-guide',
+        title: isZh ? '校园应急指南' : 'Campus Emergency Guide',
+        description: isZh ? '青少年校园应急包使用技巧，课堂和宿舍应急处理方法' : 'Teen campus emergency kit usage tips, classroom and dorm emergency response methods',
+        href: `/${locale}/teen-health/campus-guide`,
+        icon: '🏫',
+        priority: 'high',
+        anchorTextType: 'campus_emergency'
+      },
+      {
+        id: 'commute',
+        title: isZh ? '通勤场景管理' : 'Commute Scenario Management',
+        description: isZh ? '通勤途中突发疼痛的应急处理和应急包应用技巧' : 'Emergency response for sudden pain during commute and emergency kit application tips',
+        href: `/${locale}/scenario-solutions/commute`,
+        icon: '🚗',
+        priority: 'high',
+        anchorTextType: 'commute'
+      },
+      {
+        id: 'office',
+        title: isZh ? '办公环境健康管理' : 'Office Environment Health Management',
+        description: isZh ? '职场应急包使用策略，隐蔽快速缓解疼痛技巧' : 'Workplace emergency kit usage strategies, discreet fast pain relief techniques',
+        href: `/${locale}/scenario-solutions/office`,
+        icon: '💼',
+        priority: 'high',
+        anchorTextType: 'office'
+      },
+      {
+        id: 'social',
+        title: isZh ? '社交场景管理' : 'Social Scenario Management',
+        description: isZh ? '社交场合的应急应对和便携应急包准备' : 'Emergency response in social settings and portable emergency kit preparation',
+        href: `/${locale}/scenario-solutions/social`,
+        icon: '💃',
+        priority: 'medium',
+        anchorTextType: 'social'
+      }
+    ]
+  };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -52,6 +165,10 @@ export default async function EmergencyKitPage({ params }: Props) {
   // 预加载面包屑所需的翻译
   const breadcrumbTitle = t('title');
   const breadcrumbEmergencyKitTitle = locale === 'zh' ? '应急包清单' : 'Emergency Kit List';
+  
+  // 获取推荐数据（侧重应急）
+  const recommendations = getEmergencyKitRecommendations(locale);
+  const isZh = locale === 'zh';
 
   const emergencyKitScenarios = [
     {
@@ -406,14 +523,60 @@ export default async function EmergencyKitPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Disclaimer */}
-      <section className="bg-red-50 p-4 sm:p-6 md:p-8 rounded-xl border border-red-200">
-        <h3 className="text-base sm:text-lg font-semibold text-red-800 mb-3 sm:mb-4">
-          {locale === 'zh' ? '免责声明' : 'Disclaimer'}
-        </h3>
-        <p className="text-red-700 text-xs sm:text-sm leading-relaxed">
-          {locale === 'zh' ? '本清单提供的建议仅供信息参考，不能替代专业的医疗诊断、治疗或建议。药物使用请务必遵循医生或药师的指导。个体情况差异，请根据自身感受进行调整。如果你的经期疼痛剧烈难忍，或伴随其他异常症状（如发烧、剧烈呕吐、异常出血等），请立即就医。' : 'The suggestions in this list are for informational reference only and cannot replace professional medical diagnosis, treatment, or advice. Please follow doctor or pharmacist guidance for medication use. Individual situations vary, please adjust according to your own feelings. If your menstrual pain is severe and unbearable, or accompanied by other abnormal symptoms (such as fever, severe vomiting, abnormal bleeding, etc.), please seek medical attention immediately.'}
-        </p>
+      {/* Related Recommendations - 应急主题 */}
+      <section className="py-8 sm:py-12">
+        <div className="space-y-8 sm:space-y-12">
+          {/* 应急评估工具 */}
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
+              <span className="mr-3">🔧</span>
+              {isZh ? '应急评估工具' : 'Emergency Assessment Tools'}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {recommendations.relatedTools.map((tool) => (
+                <RelatedToolCard
+                  key={tool.id}
+                  tool={tool}
+                  locale={locale}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* 应急知识指南 */}
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
+              <span className="mr-3">📚</span>
+              {isZh ? '应急知识指南' : 'Emergency Knowledge Guides'}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              {recommendations.relatedArticles.map((article) => (
+                <RelatedArticleCard
+                  key={article.id}
+                  article={article}
+                  locale={locale}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* 应急场景应用 */}
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
+              <span className="mr-3">🎯</span>
+              {isZh ? '应急场景应用' : 'Emergency Scenario Applications'}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {recommendations.scenarioSolutions.map((solution) => (
+                <ScenarioSolutionCard
+                  key={solution.id}
+                  solution={solution}
+                  locale={locale}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Back to Overview */}
@@ -426,6 +589,18 @@ export default async function EmergencyKitPage({ params }: Props) {
           {locale === 'zh' ? '返回场景解决方案总览' : 'Back to Scenario Solutions Overview'}
         </Link>
       </div>
+
+      {/* Medical Disclaimer */}
+      <section className="bg-red-50 p-4 sm:p-6 md:p-8 rounded-xl border border-red-200">
+        <h3 className="text-base sm:text-lg font-semibold text-red-800 mb-3 sm:mb-4">
+          {locale === 'zh' ? '医疗免责声明' : 'Medical Disclaimer'}
+        </h3>
+        <p className="text-red-700 text-xs sm:text-sm leading-relaxed">
+          {locale === 'zh' 
+            ? '本清单提供的建议仅供信息参考，不能替代专业的医疗诊断、治疗或建议。药物使用请务必遵循医生或药师的指导。个体情况差异，请根据自身感受进行调整。如果你的经期疼痛剧烈难忍，或伴随其他异常症状（如发烧、剧烈呕吐、异常出血等），请立即就医。' 
+            : 'The suggestions in this list are for informational reference only and cannot replace professional medical diagnosis, treatment, or advice. Please follow doctor or pharmacist guidance for medication use. Individual situations vary, please adjust according to your own feelings. If your menstrual pain is severe and unbearable, or accompanied by other abnormal symptoms (such as fever, severe vomiting, abnormal bleeding, etc.), please seek medical attention immediately.'}
+        </p>
+      </section>
     </div>
   );
 }

@@ -2,6 +2,9 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Breadcrumb from '@/components/Breadcrumb';
+import RelatedToolCard from '@/app/[locale]/interactive-tools/components/RelatedToolCard';
+import RelatedArticleCard from '@/app/[locale]/interactive-tools/components/RelatedArticleCard';
+import ScenarioSolutionCard from '@/app/[locale]/interactive-tools/components/ScenarioSolutionCard';
 import {
   Car,
   Train,
@@ -25,6 +28,92 @@ interface Props {
   params: Promise<{ locale: Locale }>;
 }
 
+// 推荐数据配置函数
+function getCommuteRecommendations(locale: Locale) {
+  const isZh = locale === 'zh';
+  
+  return {
+    relatedTools: [
+      {
+        id: 'pain-tracker',
+        title: isZh ? '痛经追踪器' : 'Pain Tracker',
+        description: isZh ? '记录通勤疼痛模式，分析不同交通方式下的症状变化趋势' : 'Track commute pain patterns and analyze symptom changes across different transport modes',
+        href: `/${locale}/interactive-tools/pain-tracker`,
+        icon: '📊',
+        anchorTextType: 'pain_tracker'
+      },
+      {
+        id: 'symptom-assessment',
+        title: isZh ? '症状评估工具' : 'Symptom Assessment',
+        description: isZh ? '评估痛经严重程度，获得个性化通勤适应建议' : 'Assess pain severity and get personalized commute adaptation advice',
+        href: `/${locale}/interactive-tools/symptom-assessment`,
+        icon: '🔍',
+        anchorTextType: 'symptom_assessment'
+      },
+      {
+        id: 'period-pain-impact-calculator',
+        title: isZh ? '痛经影响计算器' : 'Pain Impact Calculator',
+        description: isZh ? '评估痛经对通勤和工作的影响程度，获得个性化改善方案' : 'Assess period pain impact on commuting and work, get personalized solutions',
+        href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
+        icon: '🧮',
+        anchorTextType: 'calculator'
+      }
+    ],
+    relatedArticles: [
+      {
+        id: 'comprehensive-medical-guide-to-dysmenorrhea',
+        title: isZh ? '痛经医疗综合指南' : 'Medical Guide to Dysmenorrhea',
+        description: isZh ? '深入了解痛经成因、诊断和治疗方法，帮助通勤女性科学应对' : 'Understand causes, diagnosis and treatment of dysmenorrhea for commuting women',
+        href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
+        readTime: isZh ? '18分钟阅读' : '18 min read',
+        category: isZh ? '医疗指南' : 'Medical Guide',
+        icon: '📋',
+        anchorTextType: 'medical_guide'
+      },
+      {
+        id: 'when-to-seek-medical-care-comprehensive-guide',
+        title: isZh ? '何时就医完整指南' : 'When to Seek Medical Care',
+        description: isZh ? '识别需要就医的痛经警示信号，通勤途中的紧急应对策略' : 'Identify warning signs requiring medical care and emergency strategies during commute',
+        href: `/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`,
+        readTime: isZh ? '15分钟阅读' : '15 min read',
+        category: isZh ? '医疗指导' : 'Medical Care',
+        icon: '🏥',
+        anchorTextType: 'medical'
+      },
+      {
+        id: 'medication-guide',
+        title: isZh ? '痛经用药指南' : 'Medication Guide for Period Pain',
+        description: isZh ? '通勤途中安全用药指南，快速缓解痛经的药物选择' : 'Safe medication guide during commute, fast pain relief options',
+        href: `/${locale}/downloads/medication-guide`,
+        readTime: isZh ? '12分钟阅读' : '12 min read',
+        category: isZh ? '用药指导' : 'Medication',
+        icon: '💊',
+        anchorTextType: 'medication'
+      }
+    ],
+    scenarioSolutions: [
+      {
+        id: 'office',
+        title: isZh ? '办公环境健康管理' : 'Office Environment Health Management',
+        description: isZh ? '到达办公地点后的经期健康管理策略' : 'Menstrual health management strategies after arriving at the office',
+        href: `/${locale}/scenario-solutions/office`,
+        icon: '💼',
+        priority: 'high',
+        anchorTextType: 'office'
+      },
+      {
+        id: 'emergency-kit',
+        title: isZh ? '痛经应急包指南' : 'Period Pain Emergency Kit Guide',
+        description: isZh ? '通勤途中突发疼痛的应急处理方案' : 'Emergency response plan for sudden pain during commuting',
+        href: `/${locale}/scenario-solutions/emergency-kit`,
+        icon: '🚨',
+        priority: 'high',
+        anchorTextType: 'emergency'
+      }
+    ]
+  };
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'scenarioSolutionsPage' });
@@ -45,6 +134,10 @@ export default async function CommuteScenarioPage({ params }: Props) {
   // 预加载面包屑所需的翻译
   const breadcrumbTitle = t('title');
   const breadcrumbCommuteTitle = t('scenarios.commute.title');
+  
+  // 获取推荐数据
+  const recommendations = getCommuteRecommendations(locale);
+  const isZh = locale === 'zh';
 
   const emergencyKit = [
     {
@@ -517,17 +610,58 @@ export default async function CommuteScenarioPage({ params }: Props) {
         </ul>
       </section>
 
-      {/* Medical Disclaimer */}
-      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg">
-        <div className="flex items-start">
-          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
-          <div>
-            <h3 className="font-semibold text-orange-800 mb-2">
-              {t('scenarios.commute.disclaimer.title')}
-            </h3>
-            <p className="text-orange-700 text-sm leading-relaxed">
-              {t('scenarios.commute.disclaimer.content')}
-            </p>
+      {/* 相关推荐区域 */}
+      <section className="bg-gradient-to-br from-green-50 to-blue-50 mt-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="space-y-12">
+            
+            {/* 相关工具区域 */}
+            <section>
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                {isZh ? '相关工具' : 'Related Tools'}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {recommendations.relatedTools.map((tool) => (
+                  <RelatedToolCard
+                    key={tool.id}
+                    tool={tool}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* 相关文章区域 */}
+            <section>
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                {isZh ? '相关文章' : 'Related Articles'}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {recommendations.relatedArticles.map((article) => (
+                  <RelatedArticleCard
+                    key={article.id}
+                    article={article}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+            </section>
+
+            {/* 场景解决方案区域 */}
+            <section>
+              <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                {isZh ? '场景解决方案' : 'Scenario Solutions'}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {recommendations.scenarioSolutions.map((solution) => (
+                  <ScenarioSolutionCard
+                    key={solution.id}
+                    solution={solution}
+                    locale={locale}
+                  />
+                ))}
+              </div>
+            </section>
           </div>
         </div>
       </section>
@@ -542,6 +676,21 @@ export default async function CommuteScenarioPage({ params }: Props) {
           {t('scenarios.commute.backToOverview')}
         </Link>
       </div>
+
+      {/* Medical Disclaimer */}
+      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
+        <div className="flex items-start">
+          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
+          <div>
+            <h3 className="font-semibold text-orange-800 mb-2">
+              {t('scenarios.commute.disclaimer.title')}
+            </h3>
+            <p className="text-orange-700 text-sm leading-relaxed">
+              {t('scenarios.commute.disclaimer.content')}
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

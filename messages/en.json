@@ -15,7 +15,15 @@
       "related": "Related Articles",
       "tcm_guide": "Learn TCM Conditioning",
       "acupoint_massage": "Master Massage",
-      "tcm_nutrition": "Learn Nutrition"
+      "tcm_nutrition": "Learn Nutrition",
+      "workplace_health": "Workplace Health",
+      "pain_management": "Pain Management",
+      "quick_relief": "Quick Relief",
+      "medical_guide": "Medical Guide",
+      "heat_therapy": "Heat Therapy",
+      "herbal_tea": "Herbal Tea",
+      "natural": "Natural Therapies",
+      "faq": "FAQ"
     },
     "tools": {
       "main": "Health Tools",
@@ -23,7 +31,11 @@
       "assessment": "Assess Symptoms",
       "nutrition": "Nutrition Tips",
       "calculator": "Impact Calculator",
-      "all": "All Tools"
+      "all": "All Tools",
+      "pain_tracker": "Pain Tracker",
+      "nutrition_generator": "Nutrition Generator",
+      "constitution": "Constitution Test",
+      "symptom_assessment": "Symptom Assessment"
     },
     "scenarios": {
       "exercise": "Exercise Care",
@@ -36,6 +48,17 @@
       "tcm_lifestyle": "TCM Lifestyle",
       "workplace_wellness": "Workplace Wellness",
       "exercise_balance": "Exercise Balance"
+    },
+    "solutions": {
+      "office": "Office Solutions",
+      "relief": "Relief Solutions",
+      "exercise_balance_new": "Exercise Balance",
+      "emergency": "Emergency Solutions",
+      "exercise": "Exercise Solutions",
+      "sleep": "Sleep Solutions",
+      "natural_therapies": "Natural Therapies",
+      "scenarios": "Scenario Solutions",
+      "teen_main": "Teen Health"
     },
     "navigation": {
       "main": "Pain Management",

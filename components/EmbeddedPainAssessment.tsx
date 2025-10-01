@@ -45,7 +45,7 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
 
   const getQuickAssessment = () => {
     if (!intensity) {
-      alert(t('selectIntensityFirst'));
+      alert(t.selectIntensityFirst);
       return;
     }
 
@@ -54,11 +54,11 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
 
   const getResultMessage = () => {
     if (intensity === 'mild') {
-      return t('results.mild');
+      return t.results.mild;
     } else if (intensity === 'moderate') {
-      return t('results.moderate');
+      return t.results.moderate;
     } else {
-      return t('results.severe');
+      return t.results.severe;
     }
   };
 
@@ -72,10 +72,10 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
     <div className={`bg-gradient-to-br from-secondary-50 to-primary-50 rounded-xl p-6 ${className}`}>
       <div className="text-center mb-6">
         <h3 className="text-xl font-bold text-primary-700 mb-2">
-          {t('title')}
+          {t.title}
         </h3>
         <p className="text-gray-600 text-sm">
-          {t('subtitle')}
+          {t.subtitle}
         </p>
       </div>
 
@@ -83,23 +83,23 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
         <div className="space-y-4">
           <div>
             <h4 className="font-medium mb-3 text-gray-800">
-              {t('question')}
+              {t.question}
             </h4>
             <div className="space-y-2">
               {[
                 {
                   value: 'mild',
-                  label: t('options.mild'),
+                  label: t.options.mild,
                   emoji: '😊'
                 },
                 {
                   value: 'moderate',
-                  label: t('options.moderate'),
+                  label: t.options.moderate,
                   emoji: '😐'
                 },
                 {
                   value: 'severe',
-                  label: t('options.severe'),
+                  label: t.options.severe,
                   emoji: '😰'
                 }
               ].map((option) => (
@@ -127,13 +127,13 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
               onClick={getQuickAssessment}
               className="flex-1 btn-primary text-sm py-2 px-4 font-semibold"
             >
-              {t('buttons.getAdvice')}
+              {t.buttons.getAdvice}
             </button>
             <Link
               href={`/${locale}/interactive-tools/period-pain-impact-calculator`}
               className="flex-1 btn-outline text-sm py-2 px-4 font-semibold text-center"
             >
-              {t('buttons.detailedAssessment')}
+              {t.buttons.detailedAssessment}
             </Link>
           </div>
         </div>
@@ -141,7 +141,7 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
         <div className="space-y-4">
           <div className={`p-4 rounded-lg border-l-4 ${getResultColor()}`}>
             <h4 className="font-medium mb-2">
-              {t('resultTitle')}
+              {t.resultTitle}
             </h4>
             <p className="text-sm leading-relaxed">
               {getResultMessage()}
@@ -156,13 +156,13 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
               }}
               className="flex-1 btn-outline text-sm py-2 px-4 font-semibold"
             >
-              {t('buttons.testAgain')}
+              {t.buttons.testAgain}
             </button>
             <Link
               href={`/${locale}/interactive-tools/period-pain-impact-calculator`}
               className="flex-1 btn-primary text-sm py-2 px-4 font-semibold text-center"
             >
-              {t('buttons.fullAssessment')}
+              {t.buttons.fullAssessment}
             </Link>
           </div>
         </div>
@@ -170,7 +170,7 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
 
       <div className="mt-4 text-center">
         <p className="text-xs text-gray-500">
-          {t('disclaimer')}
+          {t.disclaimer}
         </p>
       </div>
     </div>

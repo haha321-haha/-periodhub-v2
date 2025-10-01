@@ -25,7 +25,10 @@
       "natural": "Natural Therapies",
       "faq": "FAQ",
       "nutrition_guide": "Nutrition Guide",
-      "ginger": "Ginger Therapy"
+      "ginger": "Ginger Therapy",
+      "cycle_knowledge": "Cycle Knowledge",
+      "cycle_nutrition": "Cycle Nutrition",
+      "cycle_management": "Cycle Management"
     },
     "tools": {
       "main": "Health Tools",

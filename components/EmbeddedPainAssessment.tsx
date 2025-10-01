@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 
 interface EmbeddedPainAssessmentProps {
   locale?: string;
@@ -16,8 +15,33 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
   const [intensity, setIntensity] = useState<string>('');
   const [showQuickResult, setShowQuickResult] = useState(false);
   
-  // ✅ 使用翻译系统替代硬编码
-  const t = useTranslations('embeddedPainAssessment');
+  // 临时使用硬编码文本，避免翻译系统问题
+  const isZh = locale === 'zh';
+  
+  const t = {
+    title: isZh ? '快速疼痛评估' : 'Quick Pain Assessment',
+    subtitle: isZh ? '选择疼痛程度，获得即时建议' : 'Select pain level for instant advice',
+    question: isZh ? '请选择您当前的疼痛程度：' : 'Please select your current pain level:',
+    options: {
+      mild: isZh ? '轻微疼痛' : 'Mild Pain',
+      moderate: isZh ? '中度疼痛' : 'Moderate Pain',
+      severe: isZh ? '严重疼痛' : 'Severe Pain'
+    },
+    buttons: {
+      getAdvice: isZh ? '获取建议' : 'Get Advice',
+      detailedAssessment: isZh ? '详细评估' : 'Detailed Assessment',
+      testAgain: isZh ? '重新测试' : 'Test Again',
+      fullAssessment: isZh ? '完整评估' : 'Full Assessment'
+    },
+    resultTitle: isZh ? '评估结果' : 'Assessment Result',
+    results: {
+      mild: isZh ? '您的疼痛程度较轻，建议使用热敷、轻度运动等自然疗法缓解。如疼痛持续或加重，请及时就医。' : 'Your pain level is mild. We recommend using heat therapy, light exercise and other natural remedies. If pain persists or worsens, please seek medical attention.',
+      moderate: isZh ? '您的疼痛程度中等，建议使用热敷、适当休息，必要时可考虑服用止痛药。如症状持续，建议咨询医生。' : 'Your pain level is moderate. We recommend heat therapy, adequate rest, and pain medication if necessary. If symptoms persist, please consult a doctor.',
+      severe: isZh ? '您的疼痛程度较重，建议立即就医检查。在等待就医期间，可使用热敷缓解症状，避免剧烈运动。' : 'Your pain level is severe. We recommend immediate medical attention. While waiting, use heat therapy to relieve symptoms and avoid strenuous exercise.'
+    },
+    disclaimer: isZh ? '此评估仅供参考，不能替代专业医疗建议。如有严重症状，请及时就医。' : 'This assessment is for reference only and cannot replace professional medical advice. Please seek medical attention for severe symptoms.',
+    selectIntensityFirst: isZh ? '请先选择疼痛程度' : 'Please select pain intensity first'
+  };
 
   const getQuickAssessment = () => {
     if (!intensity) {

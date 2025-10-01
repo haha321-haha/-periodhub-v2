@@ -30,7 +30,9 @@
       "cycle_nutrition": "Cycle Nutrition",
       "cycle_management": "Cycle Management",
       "anti_inflammatory": "Anti-Inflammatory",
-      "ginger_tea": "Ginger Tea"
+      "ginger_tea": "Ginger Tea",
+      "workplace": "Workplace Health",
+      "nutrition": "Nutrition Guide"
     },
     "tools": {
       "main": "Health Tools",
@@ -42,7 +44,8 @@
       "pain_tracker": "Pain Tracker",
       "nutrition_generator": "Nutrition Generator",
       "constitution": "Constitution Test",
-      "symptom_assessment": "Symptom Assessment"
+      "symptom_assessment": "Symptom Assessment",
+      "workplace": "Workplace Wellness"
     },
     "scenarios": {
       "exercise": "Exercise Care",
@@ -66,7 +69,8 @@
       "natural_therapies": "Natural Therapies",
       "scenarios": "Scenario Solutions",
       "teen_main": "Teen Health",
-      "social": "Social Solutions"
+      "social": "Social Solutions",
+      "commute": "Commute Solutions"
     },
     "navigation": {
       "main": "Pain Management",

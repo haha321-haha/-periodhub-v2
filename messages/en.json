@@ -820,7 +820,7 @@
       "tip": "💡 Tip: Find a comfortable sitting or lying position, relax all muscles. Beginners should do 3-4 cycles."
     },
     "simplePdfCenter": {
-      "urgentKeywords": "hurt|ache|now|immediately|relief",
+      "urgentKeywords": "hurt|ache|now|immediately|relief|urgent|quick|fast|instant|right away|heat therapy|warm water bottle|warm patch|massage|belly massage|painkiller|heat treatment|thermal therapy|warm therapy|heat therapy treatment|pain|menstrual pain|period pain|dysmenorrhea|menstrual cramps",
       "userSearchKeywords": {
         "heatTherapy": {
           "keyword": "Heat Therapy",
@@ -875,7 +875,10 @@
       },
       "consoleMessages": {
         "emergencyModeActivated": "🚨 Emergency mode activated!",
-        "pdfDownloadError": "PDF download error:"
+        "pdfDownloadError": "PDF download error:",
+        "autoRedirect": "🎯 Auto redirect to category: {category} - {content}",
+        "fetchingContent": "Fetching PDF content: {url}",
+        "downloadSuccess": "PDF download successful: {title}"
       },
       "ariaLabels": {
         "readArticle": "Read article",

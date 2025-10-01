@@ -33,13 +33,8 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
   // 🌐 翻译系统
   const t = useTranslations('simplePdfCenter');
   
-  // 🚨 紧急关键词检测系统
-  const urgentKeywords = [
-    "疼", "痛", "现在", "马上", "缓解", "紧急", "急", "快", "立即", "立刻",
-    "热敷", "敷热水袋", "暖宝宝", "按摩", "揉肚子", "止痛药",
-    "热疗法", "热疗", "温热疗法", "热敷疗法", "热敷治疗",
-    "疼痛", "痛经", "经期疼痛", "月经痛", "生理痛"
-  ];
+  // 🚨 紧急关键词检测系统 - 使用翻译系统
+  const urgentKeywords = t('simplePdfCenter.urgentKeywords').split('|');
   
   // 🔍 6个用户搜索关键词映射系统
   const userSearchKeywords = {
@@ -114,7 +109,10 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
         const mapping = userSearchKeywords[matchedKeyword as keyof typeof userSearchKeywords];
         if (mapping.autoRedirect) {
           setActiveCategory(mapping.category);
-          console.log(`🎯 自动跳转到分类: ${mapping.category} - ${mapping.targetContent}`);
+          console.log(t('simplePdfCenter.consoleMessages.autoRedirect', { 
+            category: mapping.category, 
+            content: mapping.targetContent 
+          }));
         }
       }
     }
@@ -271,7 +269,7 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
       }
       
       const fetchUrl = `/pdf-files/${htmlFilename}`;
-      console.log(`正在获取PDF内容: ${fetchUrl}`);
+      console.log(t('simplePdfCenter.consoleMessages.fetchingContent', { url: fetchUrl }));
 
       // 从服务器获取实际HTML内容
       const response = await fetch(fetchUrl);
@@ -299,7 +297,7 @@ const SimplePDFCenter: React.FC<SimplePDFCenterProps> = ({ locale }) => {
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
 
-      console.log(`PDF下载成功: ${title}`);
+      console.log(t('simplePdfCenter.consoleMessages.downloadSuccess', { title }));
 
     } catch (error) {
       console.error(t('simplePdfCenter.consoleMessages.pdfDownloadError'), error);

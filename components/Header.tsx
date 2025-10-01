@@ -85,7 +85,7 @@ export default function Header() {
             </div>
             <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-4">
               <div className="flex items-center space-x-1 px-2 py-2 text-sm font-medium text-neutral-600 rounded min-w-[44px] min-h-[44px] justify-center sm:justify-start">
-                <span className="text-base">🇨🇳</span>
+                <span className="text-base" suppressHydrationWarning={true}>🇨🇳</span>
                 <span className="hidden sm:inline text-xs lg:text-sm">中文</span>
               </div>
             </div>

@@ -152,7 +152,7 @@ export function SimpleLanguageSwitcher({ className = '' }: { className?: string 
       onClick={toggleLanguage}
       className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors ${className}`}
     >
-      <span className="text-lg">
+      <span className="text-lg" suppressHydrationWarning={true}>
         {currentLanguage === 'zh' ? '🇺🇸' : '🇨🇳'}
       </span>
       <span>{currentLanguage === 'zh' ? 'EN' : '中文'}</span>

@@ -199,7 +199,7 @@ function LanguageSwitcher() {
 
   const languages = [
     { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'zh', name: '中文', flag: '🇨🇳' },
+    { code: 'zh', name: 'Chinese', flag: '🇨🇳' },
   ];
 
   const currentLanguage = languages.find(lang => lang.code === locale) || languages[0];

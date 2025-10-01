@@ -31,6 +31,7 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
   const [showHistory, setShowHistory] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   // 使用翻译键
   const t = useTranslations();
@@ -41,14 +42,16 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
     HISTORY: 'cycle-tracker-history'
   };
 
+  // 确保客户端和服务端渲染一致
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   // 页面加载时恢复数据
   useEffect(() => {
+    if (!isMounted) return;
+    
     const loadSavedData = () => {
-      // 确保在客户端环境中运行
-      if (typeof window === 'undefined') {
-        setIsLoading(false);
-        return;
-      }
       
       try {
         // 加载当前数据
@@ -87,7 +90,7 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
     };
 
     loadSavedData();
-  }, []);
+  }, [isMounted]);
 
   // 保存当前数据到本地存储
   const saveCurrentData = (data: { lastPeriodDate: string; cycleLength: number; prediction?: any }) => {

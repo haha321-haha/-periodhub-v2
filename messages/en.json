@@ -75,7 +75,10 @@
       "partner_communication": "Partner Communication",
       "teen_health": "Teen Health",
       "lifeStages": "Life Stages",
-      "campus_emergency": "Campus Emergency"
+      "campus_emergency": "Campus Emergency",
+      "workplace_cycle": "Workplace Cycle Management",
+      "student_cycle": "Student Cycle Wellness",
+      "fitness_cycle": "Fitness Cycle Balance"
     },
     "navigation": {
       "main": "Pain Management",

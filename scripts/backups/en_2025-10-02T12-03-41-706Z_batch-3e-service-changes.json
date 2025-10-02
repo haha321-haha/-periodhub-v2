@@ -3096,7 +3096,6 @@
       "serviceContent": {
         "title": "3. Service Content and Usage Guidelines",
         "availabilityTitle": "3.1 Service Availability",
-        "availability": "Our website provides health information, assessment tools, and educational content related to menstrual health. All services are provided on an 'as is' basis and may be subject to availability, maintenance, or updates. We strive to maintain high service quality but cannot guarantee uninterrupted access.",
         "contentLicenseTitle": "3.2 Content Usage License",
         "contentLicense": "Subject to compliance with these terms, we grant you a limited, non-exclusive, non-transferable license to access and use website content for personal, non-commercial purposes only. You may not copy, modify, distribute, sell or reverse engineer any part of this website.",
         "assessmentToolsTitle": "3.3 Assessment Tool Usage",
@@ -3148,16 +3147,6 @@
         "privacyPolicyRefTitle": "5.1 Privacy Policy Reference",
         "privacyPolicyRef": "Your privacy is very important to us. The way we collect, use, store and protect your personal information is detailed in our Privacy Policy. The Privacy Policy is an important part of these terms of service and has the same legal effect as these terms.",
         "dataCollectionTitle": "5.2 Data Collection Overview",
-        "dataCollection": "The types of information we may collect include but are not limited to:",
-        "dataUsageTitle": "5.3 Data Usage Purposes",
-        "dataUsage": "We use your information for the following purposes:",
-        "usagePurposes": [
-          "Providing personalized health advice and services",
-          "Improving and optimizing website functionality and user experience",
-          "Conducting anonymous statistical analysis and research",
-          "Maintaining website security and preventing abuse",
-          "Sending you relevant health information and updates (if you choose to receive them)"
-        ],
         "dataTypes": {
           "basicInfo": "Basic Information: Age, geographical location (if you choose to provide)",
           "healthInfo": "Health-related Information: Symptom descriptions, pain scores, menstrual cycle information",
@@ -3203,11 +3192,8 @@
       },
       "medicalDisclaimer": {
         "title": "6. Health Information Disclaimer",
-        "importantMedicalDisclaimer": "Important Medical Disclaimer",
         "disclaimerText": "All health information, advice, assessment results and content provided on this website are for educational and informational purposes only, and cannot replace, nor should be considered as professional medical advice, diagnosis or treatment.",
-        "disclaimerTitle": "6.1 Non-Medical Service Statement",
         "nonMedicalService": "periodhub.health is not a medical service provider. We do not provide medical diagnosis, treatment plans or prescription drugs. All content on this website, including articles, assessment tools, advice and other information, is educational content compiled based on general medical knowledge and publicly available research materials.",
-        "personalResponsibilityTitle": "6.2 Personal Medical Decision Responsibility",
         "personalResponsibility": "You are fully responsible for your own health decisions. Before making any health-related decisions, changing lifestyle, starting new treatment methods or stopping existing treatments, you must consult qualified medical professionals, including but not limited to:",
         "medicalProfessionals": [
           "Your primary doctor or family doctor",
@@ -3215,28 +3201,22 @@
           "Pain management specialist",
           "Other relevant medical professionals"
         ],
-        "emergencyHandlingTitle": "6.3 Emergency Handling",
-        "emergencyHandling": "This website cannot replace emergency medical services. If you experience a medical emergency or severe symptoms, please immediately contact local emergency services or go to the nearest emergency department. Severe symptoms may include but are not limited to:",
+        "emergencyHandling": "This website cannot replace emergency medical services. If you encounter a medical emergency or serious symptoms, please immediately contact local emergency services or go to the nearest emergency room. Serious symptoms may include but are not limited to:",
         "emergencySymptoms": [
           "Severe and sudden abdominal pain",
           "Severe pain accompanied by high fever",
-          "Heavy abnormal bleeding",
-          "Fainting or loss of consciousness",
+          "Massive abnormal bleeding",
+          "Fainting or unconsciousness",
           "Difficulty breathing or chest pain",
-          "Any symptoms you believe require immediate medical attention"
+          "Any symptoms you think need immediate medical attention"
         ],
-        "informationAccuracyTitle": "6.4 Information Accuracy Statement",
-        "informationAccuracy": "While we strive to ensure the accuracy and timeliness of website content, medical knowledge continues to evolve and change, and we cannot guarantee that all information is completely accurate, complete, or up-to-date at all times. We recommend that you verify information and consult medical professionals for advice most suitable to your situation.",
-        "resultVariabilityTitle": "6.5 Result Variability Statement",
-        "resultVariability": "Each person's physical condition, symptoms, and response to treatment are unique. Any treatment methods, relief techniques, or management strategies mentioned on this website may affect you differently than others. Individual results may vary significantly, and we cannot guarantee any specific results or effects.",
-        "medicationWarningTitle": "6.6 Medication and Treatment Warning",
-        "medicationWarning": "If website content mentions any medications, supplements, or treatment methods, this information is for educational purposes only and does not constitute prescriptions or medical advice. Before using any medication or starting any new treatment method, please be sure to consult medical professionals. Medications may have side effects, contraindications, or interactions with other medications."
+        "informationAccuracy": "Although we strive to ensure the accuracy and timeliness of website content, medical knowledge continues to develop and change, and we cannot guarantee that all information is completely accurate, complete or up-to-date at all times. We recommend that you verify information and consult medical professionals to get advice most suitable for your situation.",
+        "resultVariability": "Everyone's physical condition, symptoms and response to treatment are unique. Any treatment methods, relief techniques or management strategies mentioned on this website may have different effects on you than others. Individual results may vary significantly, and we cannot guarantee any specific results or effects.",
+        "medicationWarning": "If website content mentions any medications, supplements or treatment methods, this information is for educational purposes only and does not constitute prescriptions or medical advice. Before using any medication or starting any new treatment method, please be sure to consult medical professionals. Medications may have side effects, contraindications or interactions with other medications."
       },
       "intellectualProperty": {
         "title": "4. Intellectual Property Rights",
-        "ownershipTitle": "7.1 Website Content Ownership",
         "contentOwnership": "All content on this website, including but not limited to text, images, graphics, videos, audio, software, code, design, layout, trademarks, logos and other materials (collectively referred to as 'content'), is protected by copyright, trademark and other intellectual property laws. Unless otherwise clearly stated, all content is owned by periodhub.health or its licensors.",
-        "usageRestrictionsTitle": "7.2 Usage Restrictions",
         "usageRestrictions": "Without our explicit written permission, you may not:",
         "restrictionsList": [
           "Copy, modify, distribute, disseminate or publicly display website content",
@@ -3246,7 +3226,6 @@
           "Use any automated tools to extract or 'scrape' website content",
           "Integrate our content into other websites or applications"
         ],
-        "fairUseTitle": "7.3 Fair Use",
         "fairUse": "You may:",
         "fairUseList": [
           "Browse and use website content for personal, non-commercial purposes",
@@ -3254,9 +3233,7 @@
           "Share links to our website on social media",
           "Quote short excerpts for comments or reviews, but must indicate the source"
         ],
-        "thirdPartyContentTitle": "7.4 Third-Party Content",
         "thirdPartyContent": "The website may contain or reference third-party content, links or resources. The intellectual property rights of these third-party contents belong to their respective owners. We do not claim rights to third-party content and are not responsible for its accuracy, completeness or applicability.",
-        "infringementNoticeTitle": "7.5 Infringement Notice",
         "infringementNotice": "If you believe that our website content infringes your intellectual property rights, please provide us with a detailed infringement notice by email, including: description of allegedly infringing content, proof of your rights, contact information and your statement confirming the authenticity of the information.",
         "ownership": {
           "title": "Content Ownership",
@@ -3286,8 +3263,7 @@
         }
       },
       "serviceChanges": {
-        "title": "5. Service Changes and Termination",
-        "modificationRightsTitle": "8.1 Service Modification Rights",
+        "title": "8. Service Changes and Termination",
         "modificationRights": "We reserve the right to modify, suspend or terminate part or all of this website's services at any time without prior notice. These changes may include but are not limited to:",
         "changesList": [
           "Adding, modifying or deleting website functions",
@@ -3296,30 +3272,8 @@
           "Updating or deleting content",
           "Implementing new security measures or usage restrictions"
         ],
-        "termsChangesTitle": "8.2 Terms Changes",
-        "termsChanges": "We may update these terms of service from time to time to reflect service changes, legal requirements or business needs. Major changes will be notified to users through website announcements or other appropriate means. Continued use of the service indicates your acceptance of the updated terms. We recommend that you regularly review the latest version of the terms of service.",
-        "accountTerminationTitle": "8.3 Account Termination",
-        "userRightsTitle": "8.4 User Termination Rights",
-        "consequencesTitle": "8.5 Termination Consequences",
-        "accountTermination": {
-          "title": "Account Termination",
-          "ourRights": "We reserve the right to suspend or terminate your account under the following circumstances:",
-          "terminationReasons": [
-            "You violate these terms of service or related policies",
-            "Your behavior may harm other users or website security",
-            "Your account has been inactive for an extended period or abandoned",
-            "Legal requirements or court orders",
-            "Other circumstances we deem necessary"
-          ],
-          "userRights": "You may stop using our services at any time. If you have created an account, you may request account deletion by contacting us. After account deletion, your personal information will be handled according to our Privacy Policy.",
-          "consequences": "When your account is terminated or you stop using the services:",
-          "consequencesList": [
-            "Your access to the services will be immediately suspended",
-            "Your account data may be deleted (subject to legal retention requirements)",
-            "You remain responsible for any activities that occurred before termination",
-            "Certain provisions of these terms will survive termination"
-          ]
-        },
+        "termsChanges": "We may update these terms of service from time to time to reflect service changes, legal requirements or business needs. Major changes will be notified to users by posting notices on the website or other appropriate means. Continued use of services indicates your acceptance of updated terms. We recommend that you regularly check the latest version of terms of service.",
+        "accountTermination": "We reserve the right to suspend or terminate your account in the following circumstances:",
         "terminationReasons": [
           "You violate these terms of service or related policies",
           "Your behavior may harm other users or website security",
@@ -3334,26 +3288,11 @@
           "Data saved in the account may be deleted",
           "Terms regarding liability limitations, disclaimers and dispute resolution continue to be effective",
           "We have no obligation to retain or forward any account information or content"
-        ],
-        "serviceModification": {
-          "title": "Service Modifications",
-          "description": "We reserve the right to modify, suspend, or discontinue any part of our services at any time without prior notice. We may also impose limits on certain features or restrict access to parts or all of the services.",
-          "reasons": "Reasons for service changes may include:",
-          "reasonsList": [
-            "Technical improvements and updates",
-            "Legal or regulatory requirements",
-            "Security enhancements",
-            "Business operational needs",
-            "Implementation of new security measures or usage restrictions"
-          ],
-          "termsChanges": "We may update these terms of service from time to time to reflect service changes, legal requirements, or business needs. Significant changes will be communicated to users through website notices or other appropriate means. Continued use of the services indicates your acceptance of the updated terms. We recommend that you regularly review the latest version of the terms of service."
-        }
+        ]
       },
       "liabilityLimitation": {
-        "title": "6. Liability Limitation and Disclaimers",
-        "serviceProvisionTitle": "9.1 Service Provision Method",
+        "title": "9. Liability Limitation and Disclaimer",
         "serviceProvision": "This website service is provided on an 'as is' and 'as available' basis. We do not provide any express or implied warranties, including but not limited to warranties of merchantability, fitness for a particular purpose, non-infringement, accuracy, reliability or uninterruptedness.",
-        "disclaimerScopeTitle": "9.2 Disclaimer Scope",
         "disclaimerScope": "To the maximum extent permitted by law, periodhub.health and its affiliates, employees, directors, agents and contractors are not liable for the following situations:",
         "disclaimerList": [
           "Health-related Damages: Any health problems, misdiagnosis, treatment delays or health deterioration caused by using or misusing website information",
@@ -3363,68 +3302,41 @@
           "Technical Issues: Website errors, interruptions, viruses or other technical problems",
           "Information Errors: Errors, omissions or outdated information in website content"
         ],
-        "liabilityLimitTitle": "9.3 Liability Limitation",
         "liabilityLimit": "Even in cases where we are found liable, our total liability does not exceed the fees you paid to us in the 12 months before the incident. Since this website currently provides services free of charge, our liability limitation is zero to the extent permitted by applicable law.",
-        "forceMajeureTitle": "9.4 Force Majeure",
         "forceMajeure": "We are not responsible for service interruptions or delays caused by force majeure events, including but not limited to: natural disasters, government actions, war, terrorism, epidemics, cyber attacks, power outages, telecommunications failures or other events beyond our reasonable control.",
-        "userLiabilityTitle": "9.5 User Liability",
-        "userLiability": "You agree to indemnify periodhub.health, its affiliates or third parties for any losses, damages, costs or liabilities (including reasonable attorney fees) caused by your violation of these terms or improper use of services.",
-        "medicalDisclaimer": {
-          "title": "Medical Disclaimer",
-          "content": "The information provided on this website is for educational and informational purposes only and should not be considered as medical advice, diagnosis, or treatment. We are not healthcare professionals, and the content should not replace consultation with qualified healthcare providers.",
-          "emergencyWarning": "In case of medical emergencies, seek immediate professional medical attention. Do not rely on website information for emergency medical decisions.",
-          "individualVariation": "Health information and recommendations may not be suitable for everyone. Individual responses to treatments and interventions may vary significantly.",
-          "professionalConsultation": "Always consult with healthcare professionals before making any medical decisions, starting new treatments, or changing existing medical regimens."
-        },
-        "serviceLimitations": {
-          "title": "Service Limitations",
-          "availabilityDisclaimer": "We provide our services on an 'as is' and 'as available' basis. We do not guarantee that our services will be uninterrupted, error-free, or completely secure.",
-          "accuracyDisclaimer": "While we strive to provide accurate and up-to-date information, we cannot guarantee the completeness, accuracy, or reliability of all content on our website.",
-          "thirdPartyContent": "Our website may contain links to third-party websites or content. We are not responsible for the accuracy, legality, or content of external sites."
-        },
-        "liabilityLimits": {
-          "title": "Limitation of Liability",
-          "generalLimitation": "To the maximum extent permitted by law, periodhub.health and its affiliates, directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of our services.",
-          "maxLiability": "Our total liability to you for any claims arising from your use of our services shall not exceed the amount you paid to us (if any) for accessing our services in the 12 months preceding the claim.",
-          "exclusions": "Some jurisdictions do not allow the exclusion or limitation of certain damages, so some of the above limitations may not apply to you."
-        }
+        "userLiability": "You agree to indemnify periodhub.health, its affiliates or third parties for any losses, damages, costs or liabilities (including reasonable attorney fees) caused by your violation of these terms or improper use of services."
       },
       "disputeResolution": {
         "title": "10. Dispute Resolution and Applicable Law",
-        "applicableLawTitle": "10.1 Applicable Law",
         "applicableLaw": "These terms of service are governed by and interpreted in accordance with the laws of the People's Republic of China, without regard to conflict of law principles. If you access services from outside the People's Republic of China, you are responsible for complying with local laws.",
-        "disputeResolutionProcessTitle": "10.2 Dispute Resolution Process",
         "disputeResolutionProcess": "If disputes arise between you and periodhub.health, we encourage resolution through friendly consultation first. If consultation fails, the dispute resolution process is as follows:",
         "resolutionSteps": [
           "Informal Resolution: You should first contact us by email, describe the dispute in detail and propose resolution suggestions. We will respond within 30 days after receiving the notice.",
           "Mediation: If informal consultation fails to resolve the dispute, both parties may choose to mediate through a neutral third-party mediation institution.",
           "Arbitration or Litigation: If mediation also fails to resolve the dispute, the dispute should be submitted to a people's court with jurisdiction for resolution."
         ],
-        "jurisdictionTitle": "10.3 Jurisdiction",
         "jurisdiction": "Any disputes arising from or related to these terms of service shall be submitted to the people's court with jurisdiction in the place where periodhub.health's main business place is located for exclusive jurisdiction.",
-        "severabilityTitle": "10.4 Severability",
         "severability": "If any provision of these terms of service is determined by a court of competent jurisdiction to be invalid, illegal or unenforceable, that provision shall be modified to the closest enforceable provision to the original intent, and the remaining provisions shall continue to be fully effective.",
-        "entireAgreementTitle": "10.5 Entire Agreement",
         "entireAgreement": "These terms of service together with our privacy policy constitute the entire agreement between you and periodhub.health regarding the use of website services, superseding all previous agreements, understandings or communications."
       }
     },
     "contact": {
       "title": "Contact Us",
-      "description": "If you have any questions, comments, or need clarification about these terms of service, please contact us through the following methods:",
+      "description": "If you have any questions, comments or need clarification about these terms of service, please contact us through the following methods:",
       "email": "Email: tiyibaofu@outlook.com",
       "mailingAddress": "Mailing Address: [Specific address will be provided during actual deployment]",
       "onlineFeedback": "Online Feedback: Submit your questions through the website contact form",
-      "responseTime": "Response time: Confirmation within 72 hours, processing completed within 30 days"
+      "responseTime": "We will reply within 5 working days after receiving your inquiry. For legal-related questions, we may need more time for detailed processing."
     },
     "finalNotice": {
       "title": "Final Reminder",
-      "content": "These terms of service were last updated on April 1, 2024. We recommend that you regularly review this page for any updates. Continued use of our services indicates your acceptance of any revisions to the terms. Thank you for choosing periodhub.health, and we are committed to providing you with valuable health education resources."
+      "content": "These terms of service were last updated on April 1, 2024. We recommend that you regularly check this page to learn about any updates. Continued use of our services indicates your acceptance of any revisions to the terms. Thank you for choosing periodhub.health, we are committed to providing you with valuable health education resources."
     },
-    "questionsTerms": "Have Questions?",
-    "questionsDescriptionTerms": "If you have any questions about our terms of service, please feel free to contact us.",
+    "questionsTerms": "Questions?",
+    "questionsDescriptionTerms": "If you have any questions about our Terms of Service, please feel free to contact us.",
     "contactUsTerms": "Contact Us",
     "importantReminder": "Important Reminder",
-    "importantReminderText": "These terms of service may be updated from time to time. Continued use of our services indicates your acceptance of any modifications."
+    "importantReminderText": "These Terms of Service may be updated from time to time. Continued use of our services indicates your acceptance of any modifications."
   },
   "navigationTabs": {
     "articles": "📚 Articles",
@@ -7532,13 +7444,5 @@
     "questions": "Questions?",
     "questionsDescription": "If you have any questions about our Privacy Policy, please feel free to contact us.",
     "contactUs": "Contact Us"
-  },
-  "languageSwitcher": {
-    "languages": {
-      "en": "English",
-      "zh": "Chinese"
-    },
-    "switchTo": "Switch to",
-    "currentLanguage": "Current Language"
   }
 }

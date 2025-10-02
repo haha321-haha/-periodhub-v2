@@ -191,6 +191,7 @@ function LanguageSwitcher() {
   const rawLocale = useLocale();
   const locale = rawLocale?.startsWith('zh') ? 'zh' : rawLocale?.startsWith('en') ? 'en' : 'zh';
   const pathname = usePathname();
+  const t = useTranslations('languageSwitcher');
 
   // 确保客户端和服务端渲染一致
   useEffect(() => {
@@ -198,8 +199,8 @@ function LanguageSwitcher() {
   }, []);
 
   const languages = [
-    { code: 'en', name: 'English', flag: '🇺🇸' },
-    { code: 'zh', name: 'Chinese', flag: '🇨🇳' },
+    { code: 'en', name: t('languages.en'), flag: '🇺🇸' },
+    { code: 'zh', name: t('languages.zh'), flag: '🇨🇳' },
   ];
 
   const currentLanguage = languages.find(lang => lang.code === locale) || languages[0];

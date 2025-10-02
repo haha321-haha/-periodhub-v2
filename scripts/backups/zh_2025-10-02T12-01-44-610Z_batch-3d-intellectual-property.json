@@ -1296,8 +1296,7 @@
       "phases": {
         "inhale": "吸气",
         "hold": "屏息",
-        "exhale": "呼气",
-        "pause": "暂停"
+        "exhale": "呼气"
       },
       "instructions": {
         "title": "练习方法：",
@@ -1376,10 +1375,7 @@
       },
       "consoleMessages": {
         "emergencyModeActivated": "🚨 紧急模式激活！",
-        "pdfDownloadError": "PDF下载错误:",
-        "autoRedirect": "🎯 自动跳转到分类: {category} - {content}",
-        "fetchingContent": "正在获取PDF内容: {url}",
-        "downloadSuccess": "PDF下载成功: {title}"
+        "pdfDownloadError": "PDF下载错误:"
       },
       "ariaLabels": {
         "readArticle": "阅读文章",
@@ -1389,8 +1385,7 @@
       },
       "emergencyMode": {
         "message": "紧急模式已激活 - 优先显示立即缓解资源"
-      },
-      "shareText": "来自 Period Hub 的资源：{title}"
+      }
     },
     "breadcrumb": {
       "home": "首页",
@@ -3249,9 +3244,6 @@
       "title": "智能周期追踪器",
       "description": "智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律。",
       "cta": "开始追踪"
-    },
-    "otherTools": {
-      "title": "全部工具"
     }
   },
   "periodPainAssessmentPage": {
@@ -3285,13 +3277,7 @@
       "consultAdvice": "⚠️ 根据您的症状，我们建议您咨询医疗专业人士进行适当的评估和治疗。",
       "resetButton": "重新评估",
       "moreInfoButton": "了解更多经期健康知识",
-      "disclaimer": "此评估仅供参考，不能替代专业医疗建议。",
-      "advice": {
-        "severeSymptoms": "您的症状较为严重，建议尽快咨询妇科医生进行详细检查。",
-        "severeIntensity": "严重痛经可能影响生活质量，建议咨询医生了解治疗方案。",
-        "moderateIntensity": "中等程度痛经较为常见，可以尝试热敷、适量运动等缓解方法。如持续困扰建议就医。",
-        "mildIntensity": "您的痛经程度较轻，属于正常范围。保持良好的生活习惯即可。"
-      }
+      "disclaimer": "此评估仅供参考，不能替代专业医疗建议。"
     }
   },
   "interactiveTools": {
@@ -4187,20 +4173,6 @@
         "backToOverview": "返回场景解决方案总览"
       },
       "lifeStages": {
-        "title": "特殊生理阶段",
-        "description": "女性不同生理阶段经期管理专业指导：青春期经期教育、育龄期健康管理、围绝经期调理方案。提供针对各年龄段特点的个性化经期健康管理策略，帮助女性科学应对不同生命阶段的生理变化。基于循证医学的专业指导，确保各阶段健康。",
-        "features": [
-          "青春期专项",
-          "备孕期专项",
-          "围绝经期专项"
-        ],
-        "disclaimer": {
-          "title": "免责声明",
-          "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
-        },
-        "backToOverview": "返回场景解决方案总览"
-      },
-      "life_stages": {
         "title": "特殊生理阶段",
         "description": "女性不同生理阶段经期管理专业指导：青春期经期教育、育龄期健康管理、围绝经期调理方案。提供针对各年龄段特点的个性化经期健康管理策略，帮助女性科学应对不同生命阶段的生理变化。基于循证医学的专业指导，确保各阶段健康。",
         "features": [
@@ -5746,28 +5718,7 @@
     "title": "疼痛评估工具",
     "description": "快速评估您的疼痛程度",
     "loading": "加载中...",
-    "error": "加载失败，请刷新页面重试",
-    "subtitle": "1分钟了解您的痛经程度，获得初步建议",
-    "question": "您的痛经强度如何？",
-    "selectIntensityFirst": "请先选择痛经强度",
-    "options": {
-      "mild": "轻微（可以忍受，不影响日常活动）",
-      "moderate": "中度（影响部分活动，但能坚持）",
-      "severe": "重度（完全影响日常活动，需要休息）"
-    },
-    "buttons": {
-      "getAdvice": "获取建议",
-      "detailedAssessment": "详细评估",
-      "testAgain": "重新测试",
-      "fullAssessment": "完整评估"
-    },
-    "resultTitle": "评估结果",
-    "results": {
-      "mild": "您的痛经程度较轻，可以尝试热敷、轻度运动等自然缓解方法。",
-      "moderate": "您的痛经程度中等，建议结合多种缓解方法，如有需要可考虑非处方止痛药。",
-      "severe": "您的痛经程度较重，建议咨询医生获得专业评估和治疗建议。"
-    },
-    "disclaimer": "⚠️ 此工具仅供参考，不能替代专业医疗建议"
+    "error": "加载失败，请刷新页面重试"
   },
   "cycleTracker": {
     "title": "月经周期追踪器",
@@ -6158,130 +6109,7 @@
   "cycleLength": "周期长度",
   "cycleHistory": "周期历史",
   "constitution": "体质",
-  "constitutionTest": {
-    "title": "中医体质测试",
-    "subtitle": "科学评估您的体质类型，获得个性化健康建议",
-    "features": {
-      "quick": {
-        "title": "快速测试",
-        "description": "5-10分钟完成专业体质评估"
-      },
-      "professional": {
-        "title": "专业权威",
-        "description": "基于中医理论的科学评估体系"
-      },
-      "personalized": {
-        "title": "个性化建议",
-        "description": "针对性的健康调理方案"
-      },
-      "practical": {
-        "title": "实用指导",
-        "description": "穴位按摩、饮食调理、生活方式建议"
-      }
-    },
-    "instructions": {
-      "title": "测试说明",
-      "item1": "请根据您的真实感受选择最符合的答案",
-      "item2": "每个问题只能选择一个答案",
-      "item3": "测试大约需要5-10分钟完成",
-      "item4": "结果仅供参考，不替代专业医疗建议"
-    },
-    "navigation": {
-      "startTest": "开始测试",
-      "previous": "上一题",
-      "next": "下一题",
-      "completeTest": "完成测试",
-      "retakeTest": "重新测试"
-    },
-    "painScale": {
-      "title": "疼痛程度",
-      "reference": "疼痛程度参考",
-      "levels": {
-        "none": "无痛",
-        "mild": "轻微",
-        "moderate": "中等",
-        "severe": "严重",
-        "extreme": "剧烈"
-      },
-      "descriptions": {
-        "0-2": "轻微不适，不影响日常生活",
-        "3-4": "轻度疼痛，可以忍受",
-        "5-7": "中度疼痛，影响工作学习",
-        "8-10": "重度疼痛，需要休息或药物缓解"
-      }
-    },
-    "result": {
-      "title": "测试完成",
-      "subtitle": "您的体质类型分析结果",
-      "match": "匹配度",
-      "constitutionFeatures": "体质特征",
-      "commonSymptoms": "常见症状",
-      "menstrualFeatures": "经期特点"
-    },
-    "recommendations": {
-      "acupoints": {
-        "title": "穴位按摩建议",
-        "primaryAcupoints": "主要穴位",
-        "location": "位置：",
-        "function": "功效：",
-        "method": "方法：",
-        "guidelines": "按摩指导",
-        "technique": "手法：",
-        "frequency": "频率：",
-        "duration": "时长："
-      },
-      "dietary": {
-        "title": "饮食调理建议",
-        "beneficialFoods": "推荐食物",
-        "foodsToAvoid": "避免食物",
-        "dietaryPrinciples": "饮食原则"
-      },
-      "lifestyle": {
-        "title": "生活方式建议",
-        "description": "基于您的体质类型，以下生活方式调整有助于改善健康状况",
-        "reminder": "温馨提示：",
-        "reminderText": "以上建议仅供参考，如有严重症状请及时就医"
-      },
-      "menstrualPain": {
-        "title": "痛经调理建议",
-        "acupointTherapy": "穴位疗法",
-        "lifestyleAdjustments": "生活方式调整"
-      }
-    },
-    "emergencyKit": {
-      "title": "个性化应急包推荐",
-      "description": "基于您的体质和痛经情况，推荐以下应急用品",
-      "priority": {
-        "high": "高优先级",
-        "medium": "中优先级",
-        "low": "低优先级"
-      },
-      "packingTips": "打包建议：",
-      "packingAdvice": "建议选择便携式包装，便于随身携带"
-    },
-    "articles": {
-      "title": "相关文章推荐",
-      "readMore": "阅读更多"
-    },
-    "communication": {
-      "title": "沟通表达模板",
-      "description": "帮助您更好地与家人、朋友或同事沟通经期不适情况",
-      "styles": {
-        "intimate": "亲密关系",
-        "casual": "普通朋友",
-        "formal": "职场同事"
-      },
-      "copyText": "复制文本",
-      "usageTips": "使用提示：",
-      "usageAdvice": "根据实际情况调整内容，选择合适的语气和表达方式"
-    },
-    "messages": {
-      "testComplete": "测试完成",
-      "testCompleteDesc": "您的体质分析已完成",
-      "testFailed": "测试失败",
-      "testFailedDesc": "请检查网络连接后重试"
-    }
-  },
+  "constitutionTest": "体质测试",
   "constitutionType": "体质类型",
   "constitutionRecommendations": "体质建议",
   "nutrition": "营养",
@@ -6788,16 +6616,7 @@
           "ageRequirement": "您必须年满13岁才能使用我们的服务。18岁以下用户应在家长指导下使用我们的服务。",
           "capacity": "您必须具有签订具有约束力协议的法律行为能力。",
           "accuracy": "您同意在使用我们的服务时提供准确和完整的信息。"
-        },
-        "content": "periodhub.health是一个提供经期健康信息和教育资源的平台。我们的服务包括：",
-        "items": {
-          "educationalContent": "教育内容：关于经期健康、疼痛管理和女性健康的文章和指南",
-          "interactiveTools": "互动工具：症状评估工具、疼痛追踪器和个性化推荐系统",
-          "resourceLibrary": "资源库：传统疗法、自然缓解方法和生活方式建议",
-          "communitySupport": "社区支持：安全的信息分享和支持环境"
-        },
-        "medicalNotice": "重要医疗声明：我们的服务仅供教育和信息目的，不构成医疗建议、诊断或治疗。我们不是医疗保健专业人员，本网站上的信息不能替代专业医疗建议。使用本网站不建立医患关系。如遇紧急情况，请立即寻求医疗救助。",
-        "mvpNotice": "MVP阶段说明：periodhub.health目前处于最小可行产品(MVP)阶段，以有限的资源运营。内容可能不如大型医疗机构那样全面或频繁更新。"
+        }
       },
       "userConduct": {
         "title": "2. 用户行为与责任",
@@ -6819,52 +6638,18 @@
             "骚扰、辱骂或伤害其他用户",
             "收集或获取其他用户的个人信息"
           ]
-        },
-        "prohibitedBehaviorsTitle": "4.1 禁止行为",
-        "prohibitedBehaviors": "在使用本网站时，您同意不从事以下行为：",
-        "prohibitedList": [
-          "违反任何适用的法律法规或本服务条款",
-          "传播虚假、误导性或有害的健康信息",
-          "冒充他人或虚假陈述您的身份或关联",
-          "骚扰、恐吓、威胁或伤害其他用户",
-          "发布、传输或分享不当、冒犯性或非法内容",
-          "试图破坏网站安全或干扰网站正常运行",
-          "使用自动化工具（如机器人、爬虫）访问网站",
-          "出于商业目的收集其他用户的信息",
-          "传播病毒、恶意软件或其他有害代码"
-        ],
-        "contentAccuracyTitle": "4.2 内容准确性责任",
-        "contentAccuracy": "您承诺在使用我们的评估工具和其他互动功能时提供准确和完整的信息。虚假或误导性信息不仅可能影响您收到的建议质量，还可能对您的健康决策产生负面影响。",
-        "respectOthersTitle": "4.3 尊重他人权利",
-        "respectOthers": "在使用任何社区功能或与其他用户互动时，您应尊重他人的隐私、尊严和权利。不要发布可能对他人造成伤害、歧视或偏见的内容。我们倡导建设性和支持性的社区环境。"
+        }
       },
       "privacyProtection": {
-        "title": "5. 数据使用与隐私保护",
-        "privacyPolicyRefTitle": "5.1 隐私政策参考",
+        "title": "3. 数据使用与隐私保护",
         "privacyPolicyRef": "您的隐私对我们至关重要。我们收集、使用、存储和保护您个人信息的方式详细规定在我们的隐私政策中。隐私政策是本服务条款的重要组成部分，与本条款具有同等法律效力。",
-        "dataCollectionTitle": "5.2 数据收集概述",
         "dataCollection": "我们可能收集的信息类型包括但不限于：",
         "dataTypes": {
-          "basicInfo": "基本信息：年龄、地理位置（如果您选择提供）",
-          "healthInfo": "健康相关信息：症状描述、疼痛评分、月经周期信息",
-          "deviceInfo": "设备信息：IP地址、浏览器类型、操作系统和其他技术信息",
           "personalInfo": "个人身份信息（如姓名、电子邮件地址）",
           "healthData": "您自愿提供的健康相关信息",
           "usageData": "网站使用数据和交互模式",
           "technicalData": "技术信息，如IP地址、浏览器类型、设备信息"
         },
-        "dataUsageTitle": "5.3 数据使用目的",
-        "dataUsage": "我们将您的信息用于以下目的：",
-        "usagePurposes": [
-          "提供个性化健康建议和服务",
-          "改进和优化网站功能和用户体验",
-          "进行匿名统计分析和研究",
-          "维护网站安全并防止滥用",
-          "向您发送相关健康信息和更新（如果您选择接收）"
-        ],
-        "dataSecurityTitle": "5.4 数据安全保护",
-        "thirdPartySharingTitle": "5.5 第三方数据共享",
-        "thirdPartySharing": "未经您的同意，我们不会向第三方出售、交易或转让您的个人信息，除非法律要求或为保护我们的权利和利益。在与可信的第三方服务提供商合作时，我们确保他们遵守严格的保密要求。",
         "dataUse": {
           "title": "数据使用",
           "purposes": "我们将您的信息用于以下目的：",
@@ -6886,558 +6671,7 @@
             "员工数据保护培训"
           ]
         }
-      },
-      "intellectualProperty": {
-        "title": "5. 知识产权",
-        "ownership": "本网站及其所有内容，包括但不限于文本、图形、图像、音频、视频、软件、代码和设计，均受版权、商标和其他知识产权法保护。除非另有明确说明，所有内容均为periodhub.health或其许可方所有。",
-        "userRights": {
-          "title": "您使用我们内容的权利",
-          "permittedUse": "您可以：",
-          "permittedList": [
-            "为个人、非商业用途查看和访问内容",
-            "打印或下载内容供个人参考",
-            "在社交媒体上分享我们内容的链接",
-            "在适当署名的情况下引用简短摘录"
-          ],
-          "restrictions": "您不得：",
-          "restrictionsList": [
-            "未经许可复制、分发或重新发布我们的内容",
-            "未经授权将我们的内容用于商业目的",
-            "修改、改编或从我们的内容创建衍生作品",
-            "删除或更改版权声明或署名",
-            "未经许可使用我们的商标或标志"
-          ]
-        },
-        "userContent": "如果您向我们提交任何内容（如反馈、建议或评论），您授予我们永久、免版税、非独占的许可，以使用、修改、复制和分发该内容用于改善我们的服务。",
-        "ownershipTitle": "5.1 内容所有权",
-        "userContentTitle": "5.2 用户生成内容",
-        "trademarkTitle": "5.3 商标使用",
-        "trademark": "periodhub.health及相关标志是我们的商标。未经我们事先书面同意，您不得使用我们的商标或任何可能引起混淆的相似标记。",
-        "contentOwnership": "本网站的所有内容，包括但不限于文本、图像、图形、视频、音频、软件、代码、设计、布局、商标、标志和其他材料（统称为\"内容\"），均受版权、商标和其他知识产权法保护。除非另有明确说明，所有内容均为periodhub.health或其许可方所有。",
-        "usageRestrictionsTitle": "7.2 使用限制",
-        "usageRestrictions": "未经我们明确书面许可，您不得：",
-        "restrictionsList": [
-          "复制、修改、分发、传播或公开展示网站内容",
-          "将网站内容用于商业目的",
-          "基于我们的内容创建衍生作品",
-          "删除或修改任何版权标记或其他权利声明",
-          "使用任何自动化工具提取或\"抓取\"网站内容",
-          "将我们的内容集成到其他网站或应用程序中"
-        ],
-        "fairUseTitle": "7.3 合理使用",
-        "fairUse": "您可以：",
-        "fairUseList": [
-          "为个人、非商业目的浏览和使用网站内容",
-          "打印单份内容供个人参考",
-          "在社交媒体上分享我们网站的链接",
-          "在评论或评价中引用简短摘录，但必须注明来源"
-        ],
-        "thirdPartyContentTitle": "7.4 第三方内容",
-        "thirdPartyContent": "本网站可能包含或引用第三方内容、链接或资源。这些第三方内容的知识产权归其各自所有者所有。我们不声称对第三方内容拥有权利，也不对其准确性、完整性或适用性负责。",
-        "infringementNoticeTitle": "7.5 侵权通知",
-        "infringementNotice": "如果您认为我们的网站内容侵犯了您的知识产权，请通过电子邮件向我们提供详细的侵权通知，包括：涉嫌侵权内容的描述、您的权利证明、联系信息以及您确认信息真实性的声明。"
-      },
-      "serviceChanges": {
-        "title": "6. 服务变更与终止",
-        "modificationRightsTitle": "8.1 服务修改权利",
-        "modificationRights": "我们保留随时修改、暂停或终止本网站部分或全部服务的权利，无需事先通知。这些变更可能包括但不限于：",
-        "changesList": [
-          "添加、修改或删除网站功能",
-          "更改用户界面或网站设计",
-          "调整服务可用性或访问条件",
-          "更新或删除内容",
-          "实施新的安全措施或使用限制"
-        ],
-        "termsChangesTitle": "8.2 条款变更",
-        "termsChanges": "我们可能会不时更新本服务条款以反映服务变化、法律要求或业务需求。重大变更将通过在网站上发布通知或其他适当方式告知用户。继续使用服务即表示您接受更新后的条款。建议您定期查看最新版本的服务条款。",
-        "accountTerminationTitle": "8.3 账户终止",
-        "accountTermination": {
-          "title": "账户终止",
-          "ourRights": "我们保留在以下情况下暂停或终止您账户的权利：",
-          "terminationReasons": [
-            "您违反本服务条款或相关政策",
-            "您的行为可能损害其他用户或网站安全",
-            "您长期不活跃或账户被废弃",
-            "法律要求或法院命令",
-            "其他我们认为有必要的情况"
-          ],
-          "userRights": "您可以随时停止使用我们的服务。如果您创建了账户，您可以通过联系我们要求删除账户。账户删除后，您的个人信息将按照我们的隐私政策进行处理。",
-          "consequences": "当您的账户被终止或您停止使用服务时：",
-          "consequencesList": [
-            "您对服务的访问将立即暂停",
-            "您的账户数据可能被删除（受法律保留要求约束）",
-            "您仍需对终止前发生的任何活动负责",
-            "本条款的某些条款在终止后仍然有效"
-          ]
-        },
-        "userRightsTitle": "8.4 用户终止权利",
-        "consequencesTitle": "8.5 终止后果",
-        "modificationsTitle": "6.1 服务修改",
-        "modifications": "我们保留随时修改、暂停或终止全部或部分服务的权利，恕不另行通知。我们将努力提前通知重大变更，但不保证在所有情况下都能做到。",
-        "terminationTitle": "6.2 服务终止",
-        "termination": "我们可能因任何原因终止或暂停您对服务的访问，包括但不限于违反本条款。终止后，您使用服务的权利将立即停止。",
-        "dataRetentionTitle": "6.3 数据保留",
-        "dataRetention": "服务终止后，我们可能会根据适用法律和我们的隐私政策保留某些信息。我们没有义务维护或向您提供任何用户内容的副本。"
-      },
-      "liabilityLimitation": {
-        "title": "7. 责任限制",
-        "serviceProvisionTitle": "7.1 服务提供方式",
-        "serviceProvision": "本网站服务按\"现状\"和\"按可用性\"提供。我们不提供任何明示或暗示的保证，包括但不限于适销性、特定用途适用性、非侵权、准确性、可靠性或无中断性的保证。",
-        "disclaimerScopeTitle": "7.2 免责范围",
-        "disclaimerScope": "在法律允许的最大范围内，periodhub.health及其关联公司、员工、董事、代理人和承包商不对以下情况承担责任：",
-        "disclaimerList": [
-          "健康相关损害：因使用或误用网站信息导致的任何健康问题、误诊、治疗延误或健康恶化",
-          "间接损失：任何间接、偶然、特殊、后果性或惩罚性损害",
-          "经济损失：利润损失、业务中断、数据丢失或其他经济损失",
-          "第三方行为：第三方网站、服务或内容造成的任何损害",
-          "技术问题：网站错误、中断、病毒或其他技术问题",
-          "信息错误：网站内容中的错误、遗漏或过时信息"
-        ],
-        "liabilityLimitTitle": "7.3 责任限制",
-        "liabilityLimit": "即使在我们被认定承担责任的情况下，我们的总责任也不超过您在事件发生前12个月内向我们支付的费用。由于本网站目前免费提供服务，在法律允许的范围内，我们的责任限制为零。",
-        "forceMajeureTitle": "7.4 不可抗力",
-        "forceMajeure": "我们不对不可抗力事件导致的服务中断或延误负责，包括但不限于：自然灾害、政府行为、战争、恐怖主义、流行病、网络攻击、停电、电信故障或我们合理控制范围之外的其他事件。",
-        "userLiabilityTitle": "7.5 用户责任",
-        "userLiability": "您同意就因您违反本条款或不当使用服务而给periodhub.health、其关联公司或第三方造成的任何损失、损害、费用或责任（包括合理的律师费）进行赔偿。",
-        "medicalDisclaimer": {
-          "title": "医疗免责声明",
-          "content": "本网站提供的信息仅用于教育和信息目的，不应被视为医疗建议、诊断或治疗。我们不是医疗保健专业人员，内容不应替代与合格医疗保健提供者的咨询。",
-          "emergencyWarning": "在医疗紧急情况下，请立即寻求专业医疗救助。不要依赖网站信息做出紧急医疗决定。",
-          "individualVariation": "健康信息和建议可能不适合每个人。个人对治疗和干预的反应可能存在显著差异。",
-          "professionalConsultation": "在做出任何医疗决定、开始新治疗或改变现有医疗方案之前，请务必咨询医疗保健专业人员。"
-        },
-        "serviceLimitations": {
-          "title": "服务限制",
-          "availabilityDisclaimer": "我们在\"按现状\"和\"按可用性\"的基础上提供服务。我们不保证我们的服务将不间断、无错误或完全安全。",
-          "accuracyDisclaimer": "虽然我们努力提供准确和最新的信息，但我们不能保证网站上所有内容的完整性、准确性或可靠性。",
-          "thirdPartyContent": "我们的网站可能包含第三方网站或内容的链接。我们不对外部网站的准确性、合法性或内容负责。"
-        },
-        "liabilityLimits": {
-          "title": "责任限制",
-          "generalLimitation": "在法律允许的最大范围内，periodhub.health及其关联公司、董事、员工和代理人不对因您使用我们服务而产生的任何间接、偶然、特殊、后果性或惩罚性损害承担责任。",
-          "maxLiability": "对于因您使用我们服务而产生的任何索赔，我们对您的总责任不应超过您在索赔前12个月内为访问我们服务而支付给我们的金额（如有）。",
-          "exclusions": "某些司法管辖区不允许排除或限制某些损害，因此上述某些限制可能不适用于您。"
-        },
-        "disclaimerTitle": "7.1 服务免责声明",
-        "disclaimer": "我们的服务按\"现状\"提供，不提供任何明示或暗示的保证。我们不保证服务将不间断、无错误或完全安全。",
-        "limitationTitle": "7.2 损害赔偿限制",
-        "limitation": "在适用法律允许的最大范围内，我们不对任何间接、偶然、特殊、后果性或惩罚性损害承担责任，包括但不限于利润损失、数据丢失或业务中断。",
-        "maximumLiabilityTitle": "7.3 最大责任限制",
-        "maximumLiability": "我们对您的总责任不得超过您在过去12个月内为使用我们服务支付的金额，如果您未支付任何费用，则我们的责任限制为100美元。"
-      },
-      "userEligibility": {
-        "title": "2. 用户资格与账户责任",
-        "ageRequirementTitle": "2.1 使用资格",
-        "ageRequirement": "年满13岁的任何个人均可使用我们的网站服务。13岁以下用户必须在父母或法定监护人的监督和同意下使用本网站。使用本网站即表示您声明并保证您符合上述年龄要求。",
-        "accountAccuracyTitle": "2.2 账户信息准确性",
-        "accountAccuracy": "如果您选择创建账户或提供个人信息，您承诺提供真实、准确、完整和最新的信息。您有责任及时更新您的信息以保持其准确性。虚假或误导性信息可能影响我们为您提供的服务质量。",
-        "accountSecurityTitle": "2.3 账户安全责任",
-        "accountSecurity": "您有责任维护账户信息的机密性和安全性。您应妥善保管登录凭据，不得与他人共享账户信息。您对账户下的所有活动负责。如果您发现账户被盗用或存在安全风险，请立即通知我们。"
-      },
-      "serviceContent": {
-        "title": "3. 服务内容与使用指南",
-        "availabilityTitle": "3.1 服务可用性",
-        "contentLicenseTitle": "3.2 内容使用许可",
-        "contentLicense": "在遵守本条款的前提下，我们授予您有限的、非独占的、不可转让的许可，仅供个人、非商业目的访问和使用网站内容。您不得复制、修改、分发、销售或逆向工程本网站的任何部分。",
-        "assessmentToolsTitle": "3.3 评估工具使用",
-        "assessmentTools": "我们的症状评估工具旨在提供教育和信息支持，不应被视为医疗诊断或治疗建议。评估结果基于您提供的信息，其准确性取决于信息的完整性和真实性。您应诚实、完整地填写评估问卷，以获得最准确的建议。",
-        "personalizedAdviceTitle": "3.4 个性化建议的性质",
-        "personalizedAdvice": "基于您的评估结果提供的个性化建议仅供参考，不能替代专业医疗建议。这些建议基于一般医学知识和最佳实践，但每个人的情况都是独特的。在实施任何建议之前，特别是涉及药物或重大生活方式改变的建议，请咨询医疗专业人士。",
-        "availability": "我们努力确保服务的持续可用性，但不保证服务不会中断。我们可能因维护、更新或其他技术原因暂时中断服务。我们将尽力提前通知计划内的服务中断，但紧急维护可能无法提前通知。"
-      },
-      "medicalDisclaimer": {
-        "title": "4. 医疗免责声明",
-        "disclaimerTitle": "4.1 信息性质",
-        "disclaimer": "本网站提供的所有信息仅供教育和信息目的，不构成医疗建议、诊断或治疗。我们不是医疗保健专业人员，本网站上的信息不能替代专业医疗建议。使用本网站不建立医患关系。",
-        "emergencyTitle": "4.2 紧急情况处理",
-        "emergency": "如遇紧急情况，请立即寻求医疗救助。本网站不提供紧急医疗服务。如果您遇到医疗紧急情况，请拨打当地紧急服务电话或前往最近的急诊科。",
-        "professionalAdviceTitle": "4.3 专业医疗建议",
-        "professionalAdvice": "始终就任何医疗状况咨询您的医生或其他合格的医疗保健提供者。不要因为您在本网站上阅读的内容而忽视专业医疗建议或延迟寻求医疗建议。",
-        "importantMedicalDisclaimer": "重要医疗免责声明",
-        "disclaimerText": "本网站提供的所有健康信息、建议、评估结果和内容仅供教育和信息目的，不能替代，也不应被视为专业医疗建议、诊断或治疗。",
-        "nonMedicalService": "periodhub.health不是医疗服务提供者。我们不提供医疗诊断、治疗计划或处方药物。本网站上的所有内容，包括文章、评估工具、建议和其他信息，都是基于一般医学知识和公开研究材料编制的教育内容。",
-        "personalResponsibilityTitle": "6.2 个人医疗决策责任",
-        "personalResponsibility": "您对自己的健康决策负完全责任。在做出任何健康相关决策、改变生活方式、开始新的治疗方法或停止现有治疗之前，您必须咨询合格的医疗专业人士，包括但不限于：",
-        "medicalProfessionals": [
-          "您的主治医生或家庭医生",
-          "妇科医生或妇科专科医生",
-          "疼痛管理专家",
-          "其他相关医疗专业人士"
-        ],
-        "emergencyHandlingTitle": "6.3 紧急情况处理",
-        "emergencyHandling": "本网站无法替代紧急医疗服务。如果您遇到医疗紧急情况或严重症状，请立即联系当地紧急服务或前往最近的急诊科。严重症状可能包括但不限于：",
-        "emergencySymptoms": [
-          "严重且突然的腹痛",
-          "伴有高热的严重疼痛",
-          "大量异常出血",
-          "昏厥或失去意识",
-          "呼吸困难或胸痛",
-          "任何您认为需要立即医疗关注的症状"
-        ],
-        "informationAccuracyTitle": "6.4 信息准确性声明",
-        "informationAccuracy": "虽然我们努力确保网站内容的准确性和及时性，但医学知识不断发展变化，我们无法保证所有信息在所有时候都完全准确、完整或最新。我们建议您验证信息并咨询医疗专业人士，以获得最适合您情况的建议。",
-        "resultVariabilityTitle": "6.5 结果变异性声明",
-        "resultVariability": "每个人的身体状况、症状和对治疗的反应都是独特的。本网站提及的任何治疗方法、缓解技巧或管理策略对您的影响可能与他人不同。个体结果可能存在显著差异，我们无法保证任何特定结果或效果。",
-        "medicationWarningTitle": "6.6 药物和治疗警告",
-        "medicationWarning": "如果网站内容提及任何药物、补充剂或治疗方法，此信息仅供教育目的，不构成处方或医疗建议。在使用任何药物或开始任何新的治疗方法之前，请务必咨询医疗专业人士。药物可能有副作用、禁忌症或与其他药物的相互作用。"
-      },
-      "disputeResolution": {
-        "title": "8. 争议解决",
-        "applicableLawTitle": "8.1 适用法律",
-        "applicableLaw": "本条款受中华人民共和国法律管辖并按其解释，不考虑法律冲突原则。如果您从中华人民共和国境外访问服务，您有责任遵守当地法律。",
-        "disputeResolutionProcessTitle": "8.2 争议解决程序",
-        "disputeResolutionProcess": "如果您与periodhub.health之间发生争议，我们鼓励首先通过友好协商解决。如果协商失败，争议解决程序如下：",
-        "resolutionSteps": [
-          "非正式解决：您应首先通过电子邮件联系我们，详细描述争议并提出解决建议。我们将在收到通知后30天内回复。",
-          "调解：如果非正式协商无法解决争议，双方可以选择通过中立的第三方调解机构进行调解。",
-          "仲裁或诉讼：如果调解也无法解决争议，争议应提交有管辖权的人民法院解决。"
-        ],
-        "governingLawTitle": "8.1 适用法律",
-        "governingLaw": "本条款受中华人民共和国法律管辖并按其解释，不考虑法律冲突原则。",
-        "jurisdictionTitle": "8.2 管辖权",
-        "jurisdiction": "因本条款或使用我们服务而产生的任何争议应提交至有管辖权的人民法院解决。",
-        "alternativeResolutionTitle": "8.3 替代争议解决",
-        "alternativeResolution": "在提起诉讼之前，我们鼓励通过友好协商解决争议。如果协商失败，可以考虑调解或仲裁等替代争议解决方式。",
-        "severabilityTitle": "8.3 条款可分割性",
-        "severability": "如果本服务条款的任何条款被有管辖权的法院认定为无效、非法或不可执行，该条款应修改为最接近原意的可执行条款，其余条款应继续完全有效。",
-        "entireAgreementTitle": "8.4 完整协议",
-        "entireAgreement": "本服务条款与我们的隐私政策一起构成您与periodhub.health之间关于使用网站服务的完整协议，取代所有先前的协议、理解或沟通。"
       }
-    },
-    "contact": {
-      "title": "联系我们",
-      "description": "如果您对本服务条款有任何疑问、意见或需要澄清，请通过以下方式联系我们：",
-      "email": "邮箱：tiyibaofu@outlook.com",
-      "mailingAddress": "邮寄地址：[实际部署时将提供具体地址]",
-      "onlineFeedback": "在线反馈：通过网站联系表单提交您的问题",
-      "responseTime": "响应时间：72小时内确认，30天内处理完成"
-    },
-    "finalNotice": {
-      "title": "最终提醒",
-      "content": "本服务条款最后更新于2024年4月1日。我们建议您定期查看本页面以了解任何更新。继续使用我们的服务即表示您接受条款的任何修订。感谢您选择periodhub.health，我们致力于为您提供有价值的健康教育资源。"
-    },
-    "questionsTerms": "有疑问？",
-    "questionsDescriptionTerms": "如果您对我们的服务条款有任何疑问，请随时联系我们。",
-    "contactUsTerms": "联系我们",
-    "importantReminder": "重要提醒",
-    "importantReminderText": "这些服务条款可能会不时更新。继续使用我们的服务即表示您接受任何修改。"
-  },
-  "anchorTexts": {
-    "articles": {
-      "relief": "疼痛缓解",
-      "heat": "热疗法",
-      "physical": "物理疗法",
-      "medical": "医疗指南",
-      "knowledge": "健康知识",
-      "comprehensive": "完整指南",
-      "related": "相关文章",
-      "tcm_guide": "学习中医调理",
-      "acupoint_massage": "掌握按摩",
-      "tcm_nutrition": "学习营养",
-      "workplace_health": "职场健康",
-      "pain_management": "疼痛管理",
-      "quick_relief": "快速缓解",
-      "medical_guide": "医疗指南",
-      "heat_therapy": "热疗法",
-      "herbal_tea": "草药茶",
-      "natural": "自然疗法",
-      "faq": "常见问题",
-      "nutrition_guide": "营养指南",
-      "ginger": "生姜疗法",
-      "cycle_knowledge": "周期知识",
-      "cycle_nutrition": "周期营养",
-      "cycle_management": "周期管理",
-      "anti_inflammatory": "抗炎",
-      "ginger_tea": "生姜茶",
-      "workplace": "职场健康",
-      "nutrition": "营养指南",
-      "medication": "药物指南",
-      "more": "更多知识",
-      "stress_management": "学习压力管理",
-      "sleep_quality": "改善睡眠质量"
-    },
-    "tools": {
-      "main": "健康工具",
-      "tracker": "症状追踪",
-      "assessment": "症状评估",
-      "nutrition": "营养建议",
-      "calculator": "影响计算器",
-      "all": "所有工具",
-      "pain_tracker": "疼痛追踪器",
-      "nutrition_generator": "营养生成器",
-      "constitution": "体质测试",
-      "symptom_assessment": "症状评估",
-      "workplace": "职场健康"
-    },
-    "scenarios": {
-      "exercise": "运动护理",
-      "office": "职场解决方案",
-      "social": "社交建议",
-      "sleep": "睡眠建议",
-      "diet": "饮食解决方案",
-      "emergency": "紧急护理",
-      "medication": "药物指南",
-      "tcm_lifestyle": "中医生活方式",
-      "workplace_wellness": "职场健康",
-      "exercise_balance": "运动平衡"
-    },
-    "solutions": {
-      "office": "办公室解决方案",
-      "relief": "缓解解决方案",
-      "exercise_balance_new": "运动平衡",
-      "emergency": "紧急解决方案",
-      "exercise": "运动解决方案",
-      "sleep": "睡眠解决方案",
-      "natural_therapies": "自然疗法",
-      "scenarios": "场景解决方案",
-      "teen_main": "青少年健康",
-      "social": "社交解决方案",
-      "commute": "通勤解决方案",
-      "partner_communication": "伴侣沟通",
-      "teen_health": "青少年健康",
-      "life_stages": "人生阶段",
-      "campus_emergency": "校园急救",
-      "workplace_cycle": "职场周期管理",
-      "student_cycle": "学生周期健康",
-      "fitness_cycle": "健身周期平衡",
-      "workplace_wellness": "职场健康",
-      "exercise_balance": "运动平衡",
-      "workplace": "职场管理方案",
-      "student": "学生生活指南"
-    },
-    "navigation": {
-      "main": "疼痛管理",
-      "health": "健康中心",
-      "guide": "健康指南",
-      "teen": "青少年健康",
-      "therapy": "自然疗法"
-    },
-    "cta": {
-      "viewMore": "查看更多",
-      "startNow": "立即开始",
-      "learnMore": "了解更多",
-      "tryNow": "立即尝试",
-      "download": "下载资源"
-    },
-    "pdf": {
-      "guide": "下载指南",
-      "checklist": "下载清单",
-      "resources": "下载资源"
-    },
-    "teen": {
-      "main": "青少年指南",
-      "development": "发育健康",
-      "education": "健康教育"
-    },
-    "therapy": {
-      "main": "自然缓解",
-      "herbal": "草药疗法",
-      "yoga": "瑜伽技巧",
-      "diet": "饮食建议"
     }
-  },
-  "privacyPolicy": {
-    "title": "隐私政策",
-    "lastUpdated": "最后更新：2024年4月1日",
-    "intro": "periodhub.health（以下简称\"我们\"）深知个人信息保护的重要性，特别是女性健康隐私数据的敏感性。本隐私政策详细说明了我们如何收集、使用、存储和保护您的个人信息，以及您对数据处理的权利。我们严格遵守《通用数据保护条例》(GDPR)和《中华人民共和国个人信息保护法》等相关法律法规。",
-    "importantNotice": "重要提示",
-    "importantNoticeText": "在使用periodhub.health网站服务前，请仔细阅读并充分理解本隐私政策的全部内容。一旦您使用本网站的任何服务，即表示您已阅读、理解并同意接受本政策的全部约束。如果您不同意本政策的任何内容，请立即停止使用本网站。",
-    "tableOfContents": "目录",
-    "sections": {
-      "informationCollection": {
-        "title": "1. 信息收集",
-        "subtitle": "我们收集的信息类型",
-        "symptomData": {
-          "title": "症状评估数据",
-          "items": [
-            "疼痛强度、特征和持续时间",
-            "月经周期相关信息",
-            "伴随症状描述",
-            "既往治疗经历",
-            "生活影响程度评估"
-          ]
-        },
-        "technicalInfo": {
-          "title": "技术信息",
-          "items": [
-            "IP地址（匿名化处理）",
-            "浏览器类型和版本",
-            "设备信息（操作系统、屏幕分辨率）",
-            "访问时间和页面浏览记录",
-            "来源网站信息"
-          ]
-        },
-        "userProvided": {
-          "title": "用户主动提供的信息",
-          "items": [
-            "电子邮箱地址（用于沟通）",
-            "年龄范围（不收集具体出生日期）",
-            "地理位置信息（仅国家/地区）",
-            "反馈和建议内容"
-          ]
-        },
-        "importantNote": {
-          "title": "重要说明",
-          "text": "我们绝不收集您的真实姓名、身份证号、具体地址、电话号码等直接身份识别信息。所有健康数据均经过匿名化处理，无法追溯到具体个人。"
-        }
-      },
-      "informationUse": {
-        "title": "2. 信息使用",
-        "mainPurposes": {
-          "title": "主要用途",
-          "items": [
-            "提供个性化症状评估和建议",
-            "生成定制化疼痛管理方案",
-            "改善网站功能和用户体验",
-            "统计分析以优化服务质量",
-            "发送您订阅的健康信息"
-          ]
-        },
-        "neverUsedFor": {
-          "title": "绝不用于",
-          "items": [
-            "出售给第三方商业机构",
-            "与健康无关的营销推广",
-            "个人身份识别或追踪",
-            "歧视性分析或评估",
-            "任何形式的数据挖掘"
-          ]
-        }
-      },
-      "informationSharing": {
-        "title": "3. 信息共享",
-        "content": "我们不会向第三方出售、交易或转让您的个人信息，除非：",
-        "exceptions": [
-          "获得您的明确同意",
-          "法律要求或法院命令",
-          "为保护我们的权利、财产或安全",
-          "与受信任的第三方服务提供商合作（他们同意保密）"
-        ]
-      },
-      "dataSecurity": {
-        "title": "4. 数据安全措施",
-        "encryption": {
-          "title": "数据加密",
-          "description": "TLS 1.3加密传输，AES-256数据存储加密"
-        },
-        "accessControl": {
-          "title": "访问控制",
-          "description": "严格权限管理，仅授权人员可访问数据"
-        },
-        "regularAudit": {
-          "title": "定期审计",
-          "description": "季度安全审计，第三方渗透测试"
-        },
-        "disclaimer": "但是，请注意，没有任何通过互联网传输的数据或存储系统能够保证100%安全。"
-      },
-      "cookieUsage": {
-        "title": "5. Cookie和跟踪技术",
-        "cookieTypes": {
-          "title": "我们使用的Cookie类型",
-          "necessary": {
-            "type": "必要Cookie",
-            "purpose": "网站基本功能",
-            "duration": "会话期间",
-            "required": "必需"
-          },
-          "functional": {
-            "type": "功能Cookie",
-            "purpose": "记住用户偏好",
-            "duration": "30天",
-            "required": "可选"
-          },
-          "analytical": {
-            "type": "分析Cookie",
-            "purpose": "网站使用统计",
-            "duration": "2年",
-            "required": "可选"
-          }
-        },
-        "management": {
-          "title": "Cookie管理",
-          "text": "您可以通过浏览器设置控制Cookie的使用。请注意，禁用某些Cookie可能会影响网站功能的正常使用。我们提供Cookie偏好中心，您可以随时调整设置。"
-        }
-      },
-      "userRights": {
-        "title": "6. 您的权利",
-        "subtitle": "根据GDPR，您享有以下权利：",
-        "rights": [
-          {
-            "name": "访问权",
-            "description": "查看我们持有的关于您的个人数据"
-          },
-          {
-            "name": "更正权",
-            "description": "要求更正不准确的个人数据"
-          },
-          {
-            "name": "删除权",
-            "description": "要求删除您的个人数据"
-          },
-          {
-            "name": "限制处理权",
-            "description": "限制数据处理活动"
-          },
-          {
-            "name": "数据可携权",
-            "description": "以结构化格式获取数据"
-          },
-          {
-            "name": "反对权",
-            "description": "反对特定的数据处理"
-          },
-          {
-            "name": "撤回同意权",
-            "description": "随时撤回已给予的同意"
-          },
-          {
-            "name": "投诉权",
-            "description": "向监管机构举报违规行为"
-          }
-        ]
-      },
-      "contactUs": {
-        "title": "7. 联系我们",
-        "description": "如果您对本隐私政策有任何疑问，或需要行使您的数据权利，请通过以下方式联系我们：",
-        "dataProtection": {
-          "title": "数据保护联系方式",
-          "email": "邮箱：tiyibaofu@outlook.com",
-          "subject": "请在邮件主题中注明\"数据保护请求\"",
-          "responseTime": "响应时间：72小时内确认，30天内完成处理"
-        },
-        "dpo": {
-          "title": "数据保护官(DPO)",
-          "email": "邮箱：tiyibaofu@outlook.com",
-          "responsibility": "职责：监督数据保护合规性",
-          "languages": "联系语言：中文、英文"
-        }
-      }
-    },
-    "policyUpdates": {
-      "title": "政策更新",
-      "content": "我们可能会根据法律要求、业务需要或技术发展更新本隐私政策。任何重大变更将：",
-      "procedures": [
-        "提前30天通过网站公告或邮件通知用户",
-        "在网站首页显著提醒",
-        "对于增加数据收集或使用的变更，重新获得用户同意",
-        "保留政策历史版本供查阅"
-      ],
-      "recommendation": "我们建议您定期查看本政策，以了解最新信息。继续使用我们的服务表示您接受更新后的政策。"
-    },
-    "mvpNotice": {
-      "title": "MVP阶段说明",
-      "text": "请注意，periodhub.health目前处于最小可行产品(MVP)阶段，以有限的资源运营。我们专注于最小化基础设施和成本，致力于近零个人信息收集。"
-    },
-    "questions": "有疑问？",
-    "questionsDescription": "如果您对我们的隐私政策有任何疑问，请随时联系我们。",
-    "contactUs": "联系我们"
-  },
-  "languageSwitcher": {
-    "languages": {
-      "en": "English",
-      "zh": "中文"
-    },
-    "switchTo": "切换到",
-    "currentLanguage": "当前语言"
   }
 }

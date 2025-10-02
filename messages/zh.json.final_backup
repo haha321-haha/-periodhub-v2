@@ -6,6 +6,83 @@
     "title": "Period Hub - 经期健康管理平台",
     "description": "Period Hub - 专业经期健康管理平台，提供科学痛经缓解方案、互动工具和个性化健康指导。从即时缓解到长期管理，全方位支持女性经期健康，已帮助千万女性科学管理生理期。基于循证医学的专业内容，涵盖42篇专业文章、24个PDF资源、6大互动工具，为各年龄段女性提供科学指导。"
   },
+  "anchorTexts": {
+    "tools": {
+      "tracker": "开始周期追踪",
+      "assessment": "开始症状评估",
+      "constitution": "开始体质测试",
+      "pain_tracker": "痛经追踪器",
+      "symptom_assessment": "痛经症状评估",
+      "nutrition_generator": "开始营养推荐",
+      "nutrition": "获取建议",
+      "workplace": "职场健康管理",
+      "calculator": "痛经影响计算"
+    },
+    "articles": {
+      "related": "阅读文章",
+      "more": "更多知识",
+      "ginger": "了解生姜疗法",
+      "heat": "学习热敷技巧",
+      "medical": "查看医疗指导",
+      "natural": "探索自然疗法",
+      "comprehensive": "完整指南",
+      "relief": "缓解方法",
+      "anti_inflammatory": "了解抗炎饮食",
+      "ginger_tea": "学习姜茶制作",
+      "herbal_tea": "草药茶缓解法",
+      "workplace_health": "了解职场健康",
+      "pain_management": "掌握疼痛管理",
+      "nutrition_guide": "学习营养调理",
+      "workplace": "了解职场健康",
+      "nutrition": "学习营养调理",
+      "quick_relief": "学习快速缓解",
+      "heat_therapy": "热敷疗法指南",
+      "medical_guide": "痛经医疗指南",
+      "cycle_knowledge": "了解周期知识",
+      "cycle_nutrition": "学习周期营养",
+      "cycle_management": "掌握周期管理",
+      "tcm_guide": "了解体质调理",
+      "acupoint_massage": "掌握按摩技巧",
+      "tcm_nutrition": "学习营养调理",
+      "stress_management": "学习压力管理",
+      "sleep_quality": "改善睡眠质量",
+      "medication": "痛经用药指南",
+      "faq": "痛经常见问答"
+    },
+    "solutions": {
+      "workplace": "职场管理方案",
+      "student": "学生生活指南",
+      "social": "社交场景应对",
+      "workplace_cycle": "职场周期管理",
+      "student_cycle": "学生周期健康",
+      "fitness_cycle": "运动周期平衡",
+      "exercise": "运动健康方案",
+      "sleep": "睡眠调理方案",
+      "office": "职场痛经管理",
+      "workplace_wellness": "职场健康管理",
+      "exercise_balance": "运动平衡方案",
+      "exercise_balance_new": "运动平衡方案",
+      "relief": "缓解方法",
+      "emergency": "痛经应急方案",
+      "commute": "通勤场景应对",
+      "partner_communication": "伴侣沟通指南",
+      "teen_health": "青少年健康指南",
+      "life_stages": "人生阶段管理",
+      "campus_emergency": "校园应急指南",
+      "natural_therapies": "自然疗法指南",
+      "scenarios": "场景解决方案",
+      "teen_main": "青少年健康区"
+    },
+    "teen": {
+      "main": "青少年健康指导"
+    },
+    "navigation": {
+      "main": "痛经管理指南"
+    },
+    "cta": {
+      "startNow": "立即开始使用"
+    }
+  },
   "metadata": {
     "home": {
       "title": "2024痛经治疗完整指南：症状缓解+用药建议+热敷方法",
@@ -206,7 +283,7 @@
           "problemDescription": "严重的痛经影响学习和考试。",
           "solutionTitle": "解决方案：",
           "solutionDescription": "提前服用布洛芬、使用便携式加热垫和进行轻度瑜伽的组合。"
-        },
+        }
         {
           "name": "Maria，32岁（职场妈妈）",
           "problemTitle": "问题：",
@@ -232,7 +309,7 @@
       "sources": [
         {
           "name": "Mayo Clinic"
-        },
+        }
         {
           "name": "WHO"
         },
@@ -267,7 +344,7 @@
         "li3": "实用的疼痛评估和症状自查工具",
         "li4": "科学的就医决策指导",
         "p4": "记住：你的健康，你有权利了解和保护。"
-      },
+      }
       "section2": {
         "title": "第一步：量化你的疼痛等级",
         "p1": "疼痛是主观感受，但我们可以通过标准化的评估方法来量化它。医学上常用的疼痛评分标准（0-10分）可以帮助你更准确地描述自己的症状。",
@@ -275,7 +352,7 @@
         "li1": "<strong>0-3分</strong>：轻微不适，不影响日常活动",
         "li2": "<strong>4-6分</strong>：中度疼痛，影响部分日常活动",
         "p3": "请移动滑块，选择最符合你疼痛程度的数值："
-      },
+      }
       "section3": {
         "title": "识别7个必须就医的危险信号",
         "p1": "以下症状检查清单基于国际妇科协会的诊断标准，请仔细检查你是否有以下任何症状：",
@@ -294,11 +371,11 @@
         "h3_7": "💊 药物无效",
         "p8": "规范使用非甾体抗炎药（如布洛芬）3个月经周期后，疼痛仍无明显改善，需要进一步检查。",
         "quote": "<strong>重要提醒</strong>：如果你有任何一个紧急信号，请立即就医。如果有2个或以上高风险症状，建议在48小时内就诊。"
-      },
+      }
       "section4": {
         "title": "智能就医决策树：3步判断是否需要就医",
         "p1": "基于你的症状评估结果，使用下面的决策树来判断是否需要就医以及就医的紧急程度："
-      },
+      }
       "section5": {
         "title": "总结：科学管理痛经，保护女性健康",
         "p1": "痛经不是女性必须承受的\"宿命\"，正确的评估和及时的医疗干预可以显著改善生活质量。",
@@ -325,68 +402,68 @@
       "emergency": {
         "title": "紧急提醒",
         "text": "你的疼痛等级较高，建议立即寻求医疗帮助。如果疼痛突然加剧，请考虑急诊就医。"
-      },
+      }
       "levels": {
         "0": {
           "title": "无疼痛",
           "advice": "很好！没有疼痛是最理想的状态。继续保持健康的生活方式。",
           "rec1": "继续监测症状变化",
           "rec2": "保持规律的生活作息"
-        },
+        }
         "1": {
           "title": "轻微不适",
           "advice": "轻微的不适感是正常的，不会影响日常活动。",
           "rec1": "可以尝试温热敷缓解",
           "rec2": "保持适量运动"
-        },
+        }
         "2": {
           "title": "轻度疼痛",
           "advice": "轻度疼痛，可能会注意到但不影响正常活动。",
           "rec1": "尝试放松技巧和深呼吸",
           "rec2": "考虑温水浴缓解"
-        },
+        }
         "3": {
           "title": "轻中度疼痛",
           "advice": "疼痛开始影响注意力，但仍能进行大部分日常活动。",
           "rec1": "可以考虑非处方止痛药",
           "rec2": "注意休息和保暖"
-        },
+        }
         "4": {
           "title": "中度疼痛",
           "advice": "疼痛明显，开始影响日常活动和工作效率。",
           "rec1": "建议使用布洛芬等NSAIDs",
           "rec2": "避免剧烈运动，适当休息"
-        },
+        }
         "5": {
           "title": "中度偏重疼痛",
           "advice": "疼痛较重，明显影响日常活动，需要采取措施缓解。",
           "rec1": "按医嘱使用止痛药物",
           "rec2": "考虑热敷和按摩"
-        },
+        }
         "6": {
           "title": "重度疼痛",
           "advice": "疼痛严重，难以集中注意力，影响正常生活。",
           "rec1": "建议咨询医生调整治疗方案",
           "rec2": "记录疼痛模式和诱发因素"
-        },
+        }
         "7": {
           "title": "严重疼痛",
           "advice": "疼痛严重，影响睡眠和基本活动，建议就医评估。",
           "rec1": "建议在本周期内就医咨询",
           "rec2": "准备详细的症状记录"
-        },
+        }
         "8": {
           "title": "极重疼痛",
           "advice": "疼痛极其严重，无法进行正常活动，强烈建议就医。",
           "rec1": "建议尽快就医，不要拖延",
           "rec2": "如疼痛突然加剧，考虑急诊"
-        },
+        }
         "9": {
           "title": "难以忍受",
           "advice": "疼痛几乎无法忍受，严重影响生活质量，需要紧急医疗评估。",
           "rec1": "立即寻求医疗帮助",
           "rec2": "准备好就医，可能需要急诊处理"
-        },
+        }
         "10": {
           "title": "无法忍受",
           "advice": "疼痛完全无法忍受，这是医疗紧急情况，需要立即就医。",
@@ -405,15 +482,15 @@
       "step1": {
         "title": "触发器",
         "description": "你的身体会释放一种叫做前列腺素的天然化学物质（把它们想象成\"收缩信使\"）。"
-      },
+      }
       "step2": {
         "title": "挤压",
         "description": "这些化学物质告诉你的子宫肌肉收缩。"
-      },
+      }
       "step3": {
         "title": "疼痛",
         "description": "强烈的收缩会暂时切断肌肉的氧气供应，导致痉挛样疼痛。"
-      },
+      }
       "analogy": {
         "title": "简单类比：",
         "description": "这类似于运动时腿部肌肉抽筋的感觉。"
@@ -441,7 +518,7 @@
             "暖宝宝贴（适合工作/上学）"
           ]
         }
-      },
+      }
       "medication": {
         "title": "完整药物指南",
         "options": [
@@ -449,12 +526,12 @@
             "name": "布洛芬 (Ibuprofen)",
             "dosage": "剂量：400-600mg，每6-8小时一次。",
             "bestFor": "最佳用法：在经期开始前1-2天或疼痛初现时服用，以阻止前列腺素的形成。"
-          },
+          }
           {
             "name": "萘普生 (Naproxen)",
             "dosage": "剂量：220mg，每8-12小时一次。",
             "bestFor": "最佳用法：其更长的药效非常适合全天或夜间的持续缓解。"
-          },
+          }
           {
             "name": "对乙酰氨基酚 (Acetaminophen)",
             "dosage": "剂量：500-1000mg，每6-8小时一次。",
@@ -472,7 +549,7 @@
           "疼痛时出现昏厥或头晕。",
           "发烧超过38.3°C并伴有经期疼痛。"
         ]
-      },
+      }
       "appointment": {
         "title": "预约医生如果：",
         "points": [
@@ -491,7 +568,7 @@
           "problemDescription": "严重的痛经影响学习和考试。",
           "solutionTitle": "解决方案：",
           "solutionDescription": "提前服用布洛芬、使用便携式加热垫和进行轻度瑜伽的组合。"
-        },
+        }
         {
           "name": "Maria，32岁（职场妈妈）",
           "problemTitle": "问题：",
@@ -517,10 +594,10 @@
       "sources": [
         {
           "name": "梅奥诊所"
-        },
+        }
         {
           "name": "世界卫生组织"
-        },
+        }
         {
           "name": "ACOG"
         }
@@ -544,11 +621,11 @@
         "severePain": "这种剧烈疼痛是否突然出现，或者比以往任何时候都要严重？",
         "duration": "你的痛经是否持续时间超过7天，或者在非月经期间也有盆腔疼痛？",
         "pattern": "你的痛经模式是否在最近几个月发生了明显变化？"
-      },
+      }
       "options": {
         "yes": "是的",
         "no": "不是"
-      },
+      }
       "results": {
         "emergency": {
           "title": "紧急情况 - 立即就医",
@@ -556,21 +633,21 @@
           "action1": "立即前往急诊科或联系妇科医生",
           "action2": "准备详细描述症状的发生时间和严重程度",
           "action3": "如果疼痛剧烈，不要独自前往医院"
-        },
+        }
         "urgent": {
           "title": "紧急情况 - 48小时内就医",
           "text": "你的症状需要尽快得到专业医生的评估和治疗。",
           "action1": "在48小时内预约妇科医生",
           "action2": "记录症状的详细情况和变化",
           "action3": "如果症状加重，立即就医"
-        },
+        }
         "routine": {
           "title": "建议就医 - 1-2周内",
           "text": "你的症状需要专业评估，但不是紧急情况。建议安排常规妇科检查。",
           "action1": "在1-2周内预约妇科医生",
           "action2": "开始记录疼痛日记，包括疼痛程度和时间",
           "action3": "准备好月经周期和症状的详细信息"
-        },
+        }
         "observe": {
           "title": "继续观察 - 必要时就医",
           "text": "你的症状相对较轻，可以继续观察。但要注意症状变化。",
@@ -578,13 +655,13 @@
           "action2": "尝试非药物缓解方法，如热敷、适量运动",
           "action3": "如果症状加重或出现新症状，及时就医"
         }
-      },
+      }
       "urgencyLevels": {
         "emergency": "紧急（立即）",
         "urgent": "紧急（48小时内）",
         "routine": "常规（1-2周内）",
         "observe": "观察（必要时）"
-      },
+      }
       "emergency": {
         "title": "紧急提醒",
         "text": "根据你的回答，建议立即寻求医疗帮助。请不要拖延，及时就医是保护健康的最佳选择。"
@@ -605,51 +682,51 @@
         "normal": "正常情况",
         "concerning": "需要关注的情况",
         "action": "建议行动"
-      },
+      }
       "rows": {
         "painIntensity": {
           "condition": "疼痛强度",
           "normal": "轻度到中度疼痛（1-6分），可以忍受，不严重影响日常活动",
           "concerning": "重度疼痛（7-10分），无法忍受，严重影响工作和生活",
           "action": "疼痛评分≥7分时建议就医评估"
-        },
+        }
         "painDuration": {
           "condition": "疼痛持续时间",
           "normal": "疼痛持续1-3天，主要集中在月经前1-2天和月经第1天",
           "concerning": "疼痛持续超过3天，或在整个月经期间都有剧烈疼痛",
           "action": "疼痛持续>3天建议妇科检查"
-        },
+        }
         "painLocation": {
           "condition": "疼痛位置",
           "normal": "下腹部中央疼痛，可能放射到腰部和大腿内侧",
           "concerning": "疼痛位置不固定，或伴有一侧明显的尖锐疼痛",
           "action": "不典型疼痛位置需要医生评估"
-        },
+        }
         "associatedSymptoms": {
           "condition": "伴随症状",
           "normal": "轻微恶心、乏力、情绪波动，症状轻微且可以忍受",
           "concerning": "严重恶心呕吐、发热、头晕昏厥、大量出血",
           "action": "出现严重伴随症状立即就医"
-        },
+        }
         "medicationResponse": {
           "condition": "药物反应",
           "normal": "非处方止痛药（如布洛芬）能有效缓解疼痛",
           "concerning": "止痛药完全无效，或需要越来越大的剂量才能缓解",
           "action": "药物无效时需要专业治疗方案"
-        },
+        }
         "dailyImpact": {
           "condition": "对日常生活的影响",
           "normal": "轻微影响，可以正常工作学习，只需适当休息",
           "concerning": "严重影响，无法正常工作学习，需要卧床休息",
           "action": "严重影响生活质量时建议就医"
-        },
+        }
         "cycleChanges": {
           "condition": "周期变化",
           "normal": "疼痛模式相对稳定，每次月经疼痛程度相似",
           "concerning": "疼痛逐渐加重，或疼痛模式突然改变",
           "action": "疼痛模式改变需要医生评估原因"
         }
-      },
+      }
       "reminder": {
         "title": "重要提醒",
         "text": "这个对比表仅供参考，不能替代专业医疗诊断。如果你对自己的症状有任何担忧，请咨询专业医生。"
@@ -667,42 +744,42 @@
         "emergency": {
           "title": "🚨 紧急信号",
           "badge": "立即就医"
-        },
+        }
         "high": {
           "title": "⚠️ 高风险症状",
           "badge": "尽快就医"
-        },
+        }
         "medium": {
           "title": "⚡ 需要关注",
           "badge": "建议就医"
         }
-      },
+      }
       "results": {
         "title": "症状分析结果",
         "riskLevels": {
           "emergency": {
             "title": "🚨 紧急信号：立即就医",
             "description": "您的症状提示可能存在需要紧急处理的妇科疾病，建议立即寻求医疗帮助。"
-          },
+          }
           "high": {
             "title": "⚠️ 高风险症状：尽快就医",
             "description": "您的症状需要专业医生的评估和治疗，建议在48小时内就医。"
-          },
+          }
           "medium": {
             "title": "⚡ 需要关注：建议就医",
             "description": "您的症状需要关注，建议在1-2周内安排妇科检查。"
-          },
+          }
           "low": {
             "title": "✅ 症状较轻：继续观察",
             "description": "您的症状相对较轻，可以继续观察并采取自我护理措施。"
           }
-        },
+        }
         "urgency": {
           "immediate": "立即就医",
           "within_week": "一周内就医",
           "routine": "常规就医",
           "monitor": "继续观察"
-        },
+        }
         "recommendations": "建议采取的行动",
         "actions": {
           "emergency": [
@@ -729,7 +806,7 @@
             "考虑预防措施",
             "如症状持续或恶化，安排常规检查"
           ]
-        },
+        }
         "personalizedRecommendations": {
           "pain": [
             "追踪疼痛强度和模式",
@@ -756,48 +833,48 @@
             "保持健康的生活习惯"
           ]
         }
-      },
+      }
       "emergency": {
         "title": "紧急提醒",
         "text": "如果您有任何紧急症状，请立即寻求医疗帮助，不要延误治疗。"
-      },
+      }
       "symptoms": {
         "s1": {
           "text": "突然剧烈疼痛，疼痛等级从轻微突然变为无法忍受",
           "description": "可能提示卵巢囊肿破裂、扭转或其他需要紧急医疗评估的急性妇科疾病"
-        },
+        }
         "s2": {
           "text": "月经量突然显著增加，血块直径大于2.5厘米",
           "description": "可能提示子宫肌瘤、腺肌症或凝血功能障碍，需要紧急检查"
-        },
+        }
         "s3": {
           "text": "痛经持续时间超过7天，或非月经期也有盆腔疼痛",
           "description": "可能提示子宫内膜异位症、盆腔炎或其他慢性妇科疾病"
-        },
+        }
         "s4": {
           "text": "痛经模式在最近几个月发生明显变化",
           "description": "可能提示新发疾病或病情变化，需要专业评估"
-        },
+        }
         "s5": {
           "text": "伴有发热、寒战、恶心呕吐等全身症状",
           "description": "可能提示感染或其他严重疾病，需要立即就医"
-        },
+        }
         "s6": {
           "text": "疼痛影响日常活动，需要请假或卧床休息",
           "description": "提示疼痛程度严重，建议寻求医疗帮助"
-        },
+        }
         "s7": {
           "text": "服用止痛药后疼痛无明显缓解",
           "description": "可能提示需要更强效的治疗或存在其他疾病"
-        },
+        }
         "s8": {
           "text": "疼痛伴有排尿困难或尿频尿急",
           "description": "可能提示泌尿系统疾病或盆腔器官压迫"
-        },
+        }
         "s9": {
           "text": "疼痛伴有便秘或腹泻等消化道症状",
           "description": "可能提示肠道疾病或盆腔器官粘连"
-        },
+        }
         "s10": {
           "text": "疼痛伴有头痛、头晕、乏力等全身症状",
           "description": "可能提示贫血、感染或其他全身性疾病"
@@ -813,7 +890,7 @@
       "ogDescription": "专业经期健康评估工具，科学分析症状，提供个性化建议",
       "twitterTitle": "智能症状评估 - PeriodHub",
       "twitterDescription": "专业的经期健康评估工具"
-    }
+    },
   },
   "common": {
     "PeriodHub": "经期健康中心",
@@ -852,7 +929,7 @@
     "medicalDisclaimer": "本信息仅供教育目的，不旨在替代专业医疗建议。如有医疗问题，请咨询医疗专业人士。",
     "navigation": {
       "backToArticles": "返回文章页面"
-    }
+    },
   },
   "hero": {
     "title": "专业的经期健康",
@@ -889,7 +966,7 @@
       "cycleTrackerDesc": "基于历史数据的智能预测，提前做好准备",
       "constitutionTest": "体质评估",
       "constitutionTestDesc": "中医体质辨识与调理建议，个性化健康方案"
-    }
+    },
   },
   "navigation": {
     "home": "首页",
@@ -920,11 +997,11 @@
       "instantRelief": {
         "title": "即时缓解",
         "description": "在您最需要的时候，快速缓解痛经的技巧和方法。找到现在就可以使用的即时舒适方法。"
-      },
+      }
       "interactiveSolutions": {
         "title": "互动解决方案",
         "description": "引人入胜的工具和个性化见解，助您主动管理月经健康。使用我们的症状检查器和资源获取针对性指导。"
-      },
+      }
       "dailyConditioning": {
         "title": "平时调理",
         "description": "通过调整生活方式和日常习惯，侧重自然方法，建立对月经不适的长期抵抗力，并支持整体健康。"
@@ -955,7 +1032,7 @@
       "naturalTherapiesDesc": "天然安全的调理方法",
       "painTracker": "疼痛追踪",
       "painTrackerDesc": "记录和分析您的疼痛模式"
-    }
+    },
   },
   "articlesPage": {
     "title": "文章与指南",
@@ -975,7 +1052,7 @@
           "specificManagement": "特定痛经管理指南",
           "specificManagementDesc": "针对不同类型痛经的个性化管理策略和治疗方案"
         }
-      },
+      }
       "nutritionHealth": {
         "title": "营养与健康",
         "description": "科学营养指导和健康生活方式建议",
@@ -993,7 +1070,7 @@
           "preventiveCare": "经期预防性护理完全方案：循证医学指导",
           "preventiveCareDesc": "基于ACOG、NIH及FDA最新循证医学研究，为北美女性提供科学的预防性护理策略，涵盖经前准备、经期管理、经后恢复的全周期护理方案"
         }
-      },
+      }
       "naturalTherapies": {
         "title": "自然疗法",
         "description": "科学验证的经期疼痛自然疗法大全：涵盖热敷、瑜伽、按摩、草药茶、精油芳疗、针灸等8种安全有效的自然缓解方法。基于循证医学的专业指导，无副作用，适合青少年到职场女性的全年龄段使用。提供详细的使用方法和注意事项，帮助您安全有效地缓解经期疼痛，改善生活质量。",
@@ -1009,7 +1086,7 @@
           "zhanZhuang": "站桩八段锦经期疼痛缓解",
           "zhanZhuangDesc": "学习传统中医养生功法在经期健康管理中的应用"
         }
-      },
+      }
       "medicalGuidance": {
         "title": "医学指导",
         "description": "专业医学知识和科学治疗指导",
@@ -1025,7 +1102,7 @@
           "nsaidProfessionalGuide": "NSAIDs痛经治疗专业指南",
           "nsaidProfessionalGuideDesc": "专业NSAIDs痛经治疗指南：详解药理机制、安全用药、剂量计算与效果优化"
         }
-      },
+      }
       "understandingEducation": {
         "title": "理解与教育",
         "description": "深入了解经期生理和健康教育知识",
@@ -1045,7 +1122,7 @@
           "lifecycleAnalysis": "女性生命周期痛经特点全解析：北美科学管理指南",
           "lifecycleAnalysisDesc": "基于ACOG、The Menopause Society及NIH最新临床指南，为北美女性提供全生命周期的痛经科学管理方案，涵盖各年龄段特点分析与管理策略"
         }
-      },
+      }
       "specializedGuides": {
         "title": "专业指南",
         "description": "针对特定情况的专业指导和深度解析",
@@ -1057,7 +1134,7 @@
           "readingList": "推荐阅读清单",
           "readingListDesc": "精选的经期健康相关书籍、研究和资源推荐"
         }
-      },
+      }
       "longTermManagement": {
         "title": "长期管理",
         "description": "建立可持续的健康生活方式和长期管理策略"
@@ -1072,7 +1149,7 @@
       "articles": "专业文章",
       "categories": "主题分类",
       "evidenceBased": "循证内容"
-    }
+    },
   },
   "pdfCenter": {
     "meta": {
@@ -1090,7 +1167,7 @@
         "exercise": "运动",
         "medical": "医学",
         "communication": "沟通"
-      },
+      }
       "suggestions": "试试关键词：疼痛、缓解、营养、运动、医学、沟通",
       "helpText": "在{totalResources}个专业资源中搜索",
       "ariaLabel": "搜索健康资源"
@@ -1114,15 +1191,15 @@
       "managementTools": {
         "title": "管理工具",
         "description": "实用的经期管理和追踪工具"
-      },
+      }
       "healthManagement": {
         "title": "健康管理",
         "description": "科学的健康管理指导方案"
-      },
+      }
       "communicationGuidance": {
         "title": "沟通指导",
         "description": "有效的沟通技巧和建议"
-      },
+      }
       "educationalResources": {
         "title": "教育资源",
         "description": "全面的经期健康教育材料"
@@ -1271,18 +1348,18 @@
         "massage": "穴位按压|肌肉放松|腹部按摩|经期按摩|疼痛按摩",
         "medication": "NSAID|非甾体抗炎药|布洛芬|对乙酰氨基酚|止痛药物",
         "emergency": "疼|痛|现在|马上|缓解|快速|立即|紧急|急|疼得厉害"
-      },
+      }
       "preparation": {
         "core": "营养|饮食|运动|习惯|准备|预防|计划|提前|养生|健康|锻炼|瑜伽|八段锦",
         "heatTherapy": "热敷准备|热敷工具|热敷用品|暖宝宝准备",
         "massage": "按摩准备|按摩工具|按摩技巧|按摩学习"
-      },
+      }
       "learning": {
         "core": "医生|医学|就医|周期|了解|指南|教育|知识|学习|研究|科学|循证|诊断|检查",
         "heatTherapy": "热敷方法|热敷技巧|热敷原理|热敷学习",
         "massage": "按摩方法|按摩技巧|按摩原理|按摩学习",
         "medication": "药物知识|用药指南|药物对比|用药学习"
-      },
+      }
       "management": {
         "core": "长期|管理|生活|档案|记录|持续|跟踪|监测|分析|报告|模板",
         "heatTherapy": "热敷管理|热敷记录|热敷计划|热敷跟踪",
@@ -1298,30 +1375,30 @@
         "hold": "屏息",
         "exhale": "呼气",
         "pause": "暂停"
-      },
+      }
       "instructions": {
         "title": "练习方法：",
         "inhale": "吸气 4秒",
         "hold": "屏息 7秒",
         "exhale": "呼气 8秒"
-      },
+      }
       "currentPhase": "正在进行：",
       "buttons": {
         "startPractice": "🫁 开始引导练习",
         "stopPractice": "停止练习",
         "practiceAgain": "再次练习",
         "oneCycleCompleted": "✅ 一轮练习完成！"
-      },
+      }
       "benefits": {
         "title": "科学效果：",
         "painPerception": "疼痛感知",
         "muscleTension": "肌肉紧张",
         "relaxation": "放松感受"
-      },
+      }
       "tip": "💡 建议：找一个舒适的坐位或躺位，放松全身肌肉。初学者建议进行3-4个循环。"
     },
     "simplePdfCenter": {
-      "urgentKeywords": "疼|痛|现在|马上|缓解",
+      "urgentKeywords": "疼|痛|现在|马上|缓解|紧急|急|快|立即|立刻|热敷|敷热水袋|暖宝宝|按摩|揉肚子|止痛药|热疗法|热疗|温热疗法|热敷疗法|热敷治疗|疼痛|痛经|经期疼痛|月经痛|生理痛",
       "userSearchKeywords": {
         "heatTherapy": {
           "keyword": "热敷",
@@ -1329,35 +1406,35 @@
           "category": "immediate",
           "priority": "high",
           "autoRedirect": true
-        },
+        }
         "warmWaterBottle": {
           "keyword": "敷热水袋",
           "targetContent": "热疗法操作指南",
           "category": "immediate",
           "priority": "high",
           "autoRedirect": true
-        },
+        }
         "warmPatch": {
           "keyword": "暖宝宝",
           "targetContent": "便携式热疗工具",
           "category": "immediate",
           "priority": "high",
           "autoRedirect": true
-        },
+        }
         "massage": {
           "keyword": "按摩",
           "targetContent": "穴位按压/肌肉放松",
           "category": "immediate",
           "priority": "high",
           "autoRedirect": true
-        },
+        }
         "bellyMassage": {
           "keyword": "揉肚子",
           "targetContent": "经期腹部按摩指南",
           "category": "immediate",
           "priority": "high",
           "autoRedirect": true
-        },
+        }
         "painkiller": {
           "keyword": "止痛药",
           "targetContent": "NSAID用药指南",
@@ -1365,7 +1442,7 @@
           "priority": "high",
           "autoRedirect": true
         }
-      },
+      }
       "englishToChineseKeywords": {
         "hotCompress": "热敷",
         "warmBag": "敷热水袋",
@@ -1373,24 +1450,24 @@
         "massage": "按摩",
         "bellyMassage": "揉肚子",
         "painkillers": "止痛药"
-      },
+      }
       "consoleMessages": {
         "emergencyModeActivated": "🚨 紧急模式激活！",
         "pdfDownloadError": "PDF下载错误:",
         "autoRedirect": "🎯 自动跳转到分类: {category} - {content}",
         "fetchingContent": "正在获取PDF内容: {url}",
         "downloadSuccess": "PDF下载成功: {title}"
-      },
+      }
+      "shareText": "来自 Period Hub 的资源：{title}",
       "ariaLabels": {
         "readArticle": "阅读文章",
         "previewPdf": "预览PDF",
         "shareResource": "分享资源",
         "downloadPdf": "下载PDF文件"
-      },
+      }
       "emergencyMode": {
         "message": "紧急模式已激活 - 优先显示立即缓解资源"
-      },
-      "shareText": "来自 Period Hub 的资源：{title}"
+      }
     },
     "breadcrumb": {
       "home": "首页",
@@ -1407,7 +1484,7 @@
             "medium": "精力一般，偶尔感到疲劳",
             "low": "经常感到疲劳，精力不足"
           }
-        },
+        }
         "coldTolerance": {
           "question": "您对寒冷的耐受性如何？",
           "options": {
@@ -1415,7 +1492,7 @@
             "normal": "一般，季节变化时会感到冷",
             "poor": "很怕冷，手脚经常冰凉"
           }
-        },
+        }
         "digestion": {
           "question": "您的消化功能如何？",
           "options": {
@@ -1424,21 +1501,21 @@
             "poor": "消化不良，经常胃肠不适"
           }
         }
-      },
+      }
       "results": {
         "yang": {
           "type": "阳性体质",
           "description": "体质较好，精力充沛，抗寒能力强"
-        },
+        }
         "balanced": {
           "type": "平和体质",
           "description": "体质平衡，需要适当调理"
-        },
+        }
         "yin": {
           "type": "阴性体质",
           "description": "体质偏弱，需要温补调理"
         }
-      },
+      }
       "progress": "问题 {current} / {total}"
     },
     "pdfCard": {
@@ -1468,7 +1545,7 @@
       "featuredResources": "特色资源",
       "allResources": "全部资源",
       "viewAllResources": "查看全部资源"
-    }
+    },
   },
   "simplePdfCenter": {
     "title": "文章PDF下载中心",
@@ -1585,18 +1662,18 @@
         "massage": "穴位按压|肌肉放松|腹部按摩|经期按摩|疼痛按摩",
         "medication": "NSAID|非甾体抗炎药|布洛芬|对乙酰氨基酚|止痛药物",
         "emergency": "疼|痛|现在|马上|缓解|快速|立即|紧急|急|疼得厉害"
-      },
+      }
       "preparation": {
         "core": "营养|饮食|运动|习惯|准备|预防|计划|提前|养生|健康|锻炼|瑜伽|八段锦",
         "heatTherapy": "热敷准备|热敷工具|热敷用品|暖宝宝准备",
         "massage": "按摩准备|按摩工具|按摩技巧|按摩学习"
-      },
+      }
       "learning": {
         "core": "医生|医学|就医|周期|了解|指南|教育|知识|学习|研究|科学|循证|诊断|检查",
         "heatTherapy": "热敷方法|热敷技巧|热敷原理|热敷学习",
         "massage": "按摩方法|按摩技巧|按摩原理|按摩学习",
         "medication": "药物知识|用药指南|药物对比|用药学习"
-      },
+      }
       "management": {
         "core": "长期|管理|生活|档案|记录|持续|跟踪|监测|分析|报告|模板",
         "heatTherapy": "热敷管理|热敷记录|热敷计划|热敷跟踪",
@@ -1611,81 +1688,81 @@
           "readTime": "5分钟",
           "keywords": "痛经快速缓解, 5分钟见效, 经期疼痛治疗, 即时缓解方法, 紧急止痛技巧",
           "description": "专业医生指导：痛经原因分析+NSAIDs用药剂量+热敷正确方法。5分钟了解科学缓解痛经的所有方法，已帮助千万女性减轻痛苦。"
-        },
+        }
         "heatTherapy": {
           "title": "经期热敷完整指南：温度控制安全注意事项科学原理",
           "readTime": "8分钟",
           "keywords": "经期热敷指南, 热敷缓解痛经, 温度控制方法, 热敷安全注意事项, 科学热疗原理",
           "description": "基于ACOG医学指南：经期热敷温度控制+安全操作步骤+科学原理解析。21天系统性改善计划，已帮助500万+女性科学缓解痛经。"
-        },
+        }
         "painVsOther": {
           "title": "经期疼痛与其他腹痛鉴别指南：症状识别诊断要点",
           "readTime": "25分钟",
           "keywords": "经期疼痛诊断, 腹痛鉴别指南, 症状识别方法, 医学诊断标准, 痛经vs其他腹痛",
           "description": "专业医学诊断指南：经期疼痛vs其他腹痛症状对比+鉴别诊断要点+医学检查标准。避免误诊，确保及时正确治疗，基于ACOG临床指南。"
-        },
+        }
         "naturalTherapy": {
           "title": "自然物理疗法综合指南：按摩穴位按压运动缓解痛经",
           "readTime": "12分钟",
           "keywords": "自然物理疗法, 按摩缓解痛经, 穴位按压方法, 物理治疗技巧, 非药物缓解",
           "description": "循证医学支持：自然物理疗法科学原理+按摩穴位图解+运动缓解方法。安全有效，无副作用，已帮助300万+女性自然缓解痛经。"
-        },
+        }
         "gingerRelief": {
           "title": "生姜经期疼痛缓解指南：天然草药科学使用方法",
           "readTime": "12分钟",
           "keywords": "生姜缓解痛经, 天然草药治疗, 经期疼痛自然疗法, 生姜使用方法, 草药止痛",
           "description": "科学验证：生姜缓解痛经的医学原理+正确使用方法+剂量控制指南。天然安全，无副作用，基于PubMed医学研究，已帮助200万+女性。"
-        },
+        }
         "nsaidGuide": {
           "title": "非甾体抗炎药专业指南：NSAIDs安全用药剂量指导",
           "readTime": "15分钟",
           "keywords": "NSAIDs止痛药, 抗炎药使用指南, 痛经药物治疗, 布洛芬萘普生, 药物安全使用",
           "description": "FDA批准药物指南：布洛芬vs萘普生效果对比+安全用药剂量+副作用预防。专业医学指导，确保安全有效缓解痛经，基于ACOG临床指南。"
-        },
+        }
         "specificManagement": {
           "title": "特定痛经管理指南：个性化治疗方案科学实施",
           "readTime": "20分钟",
           "keywords": "特定痛经管理, 个性化治疗方案, 痛经管理策略, 定制化治疗, 专业管理指南",
           "description": "个性化医疗方案：原发性vs继发性痛经管理+定制化治疗策略+专业监测评估。基于个人体质和症状特点，提供精准有效的管理方案。"
         }
-      },
+      }
       "pdfs": {
         "painTrackingForm": {
           "title": "经期疼痛追踪专业表格：科学记录监测管理",
           "readTime": "PDF",
           "keywords": "经期疼痛追踪, 疼痛记录表格, 疼痛监测管理, 专业追踪工具, 疼痛数据分析",
           "description": "基于疼痛医学：经期疼痛科学记录+专业追踪表格+数据分析管理。专业追踪工具，已帮助200万+女性科学记录疼痛数据。"
-        },
+        }
         "campusChecklist": {
           "title": "校园经期紧急应对清单：学生危机管理指南",
           "readTime": "PDF",
           "keywords": "校园经期紧急, 学生危机管理, 经期紧急清单, 校园应对指南, 学生健康管理",
           "description": "基于校园健康管理：经期紧急情况应对+学生危机管理+校园健康指南。专业校园指导，已帮助50万+学生科学应对经期紧急情况。"
-        },
+        }
         "specificPainManagementPdf": {
           "title": "特定痛经管理专业指南PDF：个性化治疗方案",
           "readTime": "PDF",
           "keywords": "特定痛经管理, 个性化治疗方案, 痛经管理指南, 专业管理PDF, 定制化治疗",
           "description": "基于个性化医疗：特定痛经类型管理+专业治疗方案+定制化管理策略。专业管理指南，已帮助300万+女性科学管理特定痛经。"
-        },
+        }
         "emergencyPainReliefCard": {
           "title": "经期疼痛急救缓解卡片：紧急情况快速指南",
           "readTime": "PDF",
           "keywords": "经期疼痛急救, 紧急缓解卡片, 疼痛快速指南, 急救缓解方法, 紧急情况应对",
           "description": "基于急救医学：经期疼痛紧急缓解+快速应对指南+急救缓解方法。专业急救工具，已帮助100万+女性紧急缓解经期疼痛。"
-        },
+        }
         "fiveMinuteReliefChecklist": {
           "title": "5分钟痛经快速缓解清单：即时见效步骤指南",
           "readTime": "PDF",
           "keywords": "5分钟痛经缓解, 快速缓解清单, 即时缓解步骤, 痛经快速指南, 紧急缓解方法",
           "description": "基于快速缓解医学：5分钟痛经缓解+即时见效步骤+快速缓解清单。专业快速指导，已帮助500万+女性5分钟内快速缓解痛经。"
-        },
+        }
         "heatTherapyGuidePdf": {
           "title": "经期热疗完整指南PDF：科学温度控制使用方法",
           "readTime": "PDF",
           "keywords": "经期热疗指南, 热敷使用方法, 温度控制指南, 热疗缓解痛经, 科学热疗PDF",
           "description": "基于热疗医学：经期热敷科学方法+温度控制指南+安全使用说明。专业热疗指导，已帮助400万+女性科学使用热疗缓解痛经。"
-        },
+        }
         "workplaceReliefToolkit": {
           "title": "职场经期疼痛缓解工具包：办公环境应急指南",
           "readTime": "PDF",
@@ -1701,111 +1778,111 @@
           "readTime": "22分钟",
           "keywords": "痛经预防护理, 经期预防计划, 提前准备策略, 预防性护理, 健康管理规划",
           "description": "基于ACOG循证医学：经期预防护理科学策略+提前准备方案+全周期管理计划。21天系统性预防计划，已帮助800万+女性科学预防痛经。"
-        },
+        }
         "sleepQuality": {
           "title": "经期睡眠质量改善指南：21天系统性提升计划",
           "readTime": "20分钟",
           "keywords": "经期睡眠改善, 睡眠质量指南, 经期休息方法, 睡眠优化技巧, 21天睡眠计划",
           "description": "基于AASM睡眠医学：经期睡眠科学改善+21天系统性计划+睡眠环境优化。专业睡眠指导，已帮助600万+女性改善经期睡眠质量。"
-        },
+        }
         "stressManagement": {
           "title": "经期压力管理完全指南：职场女性科学减压方法",
           "readTime": "22分钟",
           "keywords": "经期压力管理, 职场女性减压, 压力缓解方法, 心理健康管理, 压力应对策略",
           "description": "基于APA心理学研究：经期压力科学管理+职场减压技巧+心理健康维护。专业心理指导，已帮助500万+职场女性科学管理经期压力。"
-        },
+        }
         "baduanjinExercise": {
           "title": "站桩八段锦经期疼痛缓解：传统气功现代应用",
           "readTime": "18分钟",
           "keywords": "站桩八段锦, 气功缓解痛经, 传统运动疗法, 八段锦练习方法, 气功养生",
           "description": "传统中医气功：站桩八段锦科学原理+经期疼痛缓解+现代应用指导。千年传承，科学验证，已帮助400万+女性通过气功缓解痛经。"
-        },
+        }
         "antiInflammatoryDiet": {
           "title": "经期疼痛抗炎饮食指南：营养科学缓解痛经方法",
           "readTime": "18分钟",
           "keywords": "抗炎饮食指南, 经期营养调理, 痛经饮食疗法, 抗炎食物推荐, 营养科学管理",
           "description": "基于营养科学研究：抗炎饮食科学原理+经期营养调理+痛经饮食疗法。科学营养指导，已帮助700万+女性通过饮食科学缓解痛经。"
-        },
+        }
         "magnesiumGutHealth": {
           "title": "镁与肠道健康综合指南：矿物质补充科学管理",
           "readTime": "16分钟",
           "keywords": "镁补充指南, 肠道健康管理, 矿物质补充, 镁与痛经关系, 营养元素补充",
           "description": "基于营养医学研究：镁元素科学原理+肠道健康管理+矿物质补充指导。专业营养指导，已帮助300万+女性通过镁补充改善经期健康。"
-        },
+        }
         "periodFriendlyRecipes": {
           "title": "经期友好营养食谱：缓解痛经科学饮食方案",
           "readTime": "12分钟",
           "keywords": "经期友好食谱, 痛经营养食谱, 经期饮食指南, 健康食谱推荐, 营养美味搭配",
           "description": "专业营养师设计：经期友好食谱+痛经营养搭配+科学饮食方案。营养美味，科学搭配，已帮助500万+女性通过饮食改善经期健康。"
         }
-      },
+      }
       "pdfs": {
         "healthyHabitsChecklist": {
           "title": "经期健康习惯检查清单：科学生活方式建立指南",
           "readTime": "PDF",
           "keywords": "经期健康习惯, 健康习惯清单, 生活方式建立, 健康习惯检查, 科学习惯养成",
           "description": "基于健康行为学：经期健康习惯建立+科学生活方式+习惯检查清单。专业习惯指导，已帮助400万+女性建立健康生活方式。"
-        },
+        }
         "nutritionPlan": {
           "title": "月经周期营养科学计划：个性化饮食调理方案",
           "readTime": "PDF",
           "keywords": "月经周期营养, 个性化营养计划, 经期饮食调理, 营养科学方案, 周期营养管理",
           "description": "基于营养周期学：月经周期营养科学+个性化饮食计划+营养调理方案。专业营养指导，已帮助350万+女性科学管理经期营养。"
-        },
+        }
         "exerciseRoutine": {
           "title": "经期友好运动科学计划：温和锻炼健康管理",
           "readTime": "PDF",
           "keywords": "经期友好运动, 温和运动计划, 经期锻炼指南, 运动健康管理, 经期运动科学",
           "description": "基于运动医学：经期友好运动科学+温和锻炼计划+运动健康管理。专业运动指导，已帮助250万+女性科学进行经期运动。"
-        },
+        }
         "stressReliefTechniques": {
           "title": "经期压力缓解技巧指南：心理健康管理方法",
           "readTime": "PDF",
           "keywords": "经期压力缓解, 压力管理技巧, 心理健康指南, 压力缓解方法, 经期心理管理",
           "description": "基于心理学研究：经期压力科学管理+心理健康技巧+压力缓解方法。专业心理指导，已帮助200万+女性科学管理经期压力。"
-        },
+        }
         "sleepOptimization": {
           "title": "经期睡眠质量优化指南：科学改善休息方法",
           "readTime": "PDF",
           "keywords": "经期睡眠优化, 睡眠质量改善, 经期休息指南, 睡眠科学方法, 经期睡眠管理",
           "description": "基于睡眠医学：经期睡眠科学优化+睡眠质量改善+科学休息方法。专业睡眠指导，已帮助300万+女性改善经期睡眠质量。"
-        },
+        }
         "preventiveCarePlan": {
           "title": "经期健康预防护理计划：全面预防性管理方案",
           "readTime": "PDF",
           "keywords": "经期健康预防, 预防护理计划, 健康管理方案, 预防性护理, 经期健康管理",
           "description": "基于预防医学：经期健康预防护理+全面管理计划+预防性健康策略。专业预防指导，已帮助400万+女性科学预防经期健康问题。"
-        },
+        }
         "lifestyleAssessment": {
           "title": "经期健康生活方式评估工具：科学分析改善方法",
           "readTime": "PDF",
           "keywords": "经期生活方式评估, 健康生活方式工具, 生活方式分析, 经期健康评估, 生活方式改善",
           "description": "基于生活方式医学：经期生活方式科学评估+健康分析工具+生活方式改善方法。专业评估指导，已帮助250万+女性科学评估改善生活方式。"
-        },
+        }
         "magnesiumGuide": {
           "title": "镁与肠道健康综合指南：矿物质补充科学管理",
           "readTime": "PDF",
           "keywords": "镁补充指南, 肠道健康管理, 矿物质补充, 镁与痛经关系, 营养元素补充",
           "description": "基于营养医学：镁元素科学原理+肠道健康管理+矿物质补充指导。专业营养指导，已帮助200万+女性通过镁补充改善经期健康。"
-        },
+        }
         "baduanjinGuide": {
           "title": "站桩八段锦图解指南：传统气功现代应用",
           "readTime": "PDF",
           "keywords": "站桩八段锦, 气功缓解痛经, 传统运动疗法, 八段锦练习方法, 气功养生",
           "description": "传统中医气功：站桩八段锦科学原理+经期疼痛缓解+现代应用指导。千年传承，科学验证，已帮助150万+女性通过气功缓解痛经。"
-        },
+        }
         "monthlyPlanner": {
           "title": "经期健康月度准备计划表：科学管理安排工具",
           "readTime": "PDF",
           "keywords": "经期月度计划, 健康管理计划表, 经期准备工具, 月度健康安排, 经期管理计划",
           "description": "基于健康管理：经期健康月度计划+科学管理安排+健康管理工具。专业计划指导，已帮助300万+女性科学规划经期健康管理。"
-        },
+        }
         "stressWorkbook": {
           "title": "经期压力管理工作手册：心理健康管理指南",
           "readTime": "PDF",
           "keywords": "经期压力管理, 压力管理工作手册, 心理健康指南, 压力管理工具, 经期心理管理",
           "description": "基于心理学研究：经期压力科学管理+心理健康工作手册+压力管理工具。专业心理指导，已帮助200万+女性科学管理经期压力。"
-        },
+        }
         "sleepGuide": {
           "title": "经期睡眠质量改善指南：科学优化休息方法",
           "readTime": "PDF",
@@ -1821,141 +1898,141 @@
           "readTime": "32分钟",
           "keywords": "女性生命周期, 痛经特点分析, 各年龄段痛经, 生命周期管理, 女性健康周期",
           "description": "基于ACOG临床指南：女性全生命周期痛经特点+各年龄段管理策略+科学健康规划。专业医学指导，已帮助1000万+女性科学管理不同阶段痛经。"
-        },
+        }
         "painMechanism": {
           "title": "经期疼痛机制深度解析：生理病理科学原理解析",
           "readTime": "25分钟",
           "keywords": "痛经机制解析, 经期疼痛原理, 生理机制分析, 医学原理解析, 科学机制研究",
           "description": "基于循证医学研究：经期疼痛生理机制+病理过程分析+医学原理解析。专业医学解析，已帮助800万+女性深入理解痛经科学原理。"
-        },
+        }
         "hormoneBalance": {
           "title": "荷尔蒙平衡与经期健康：内分泌调节科学管理",
           "readTime": "28分钟",
           "keywords": "荷尔蒙平衡, 内分泌调节, 经期荷尔蒙, 激素平衡管理, 内分泌健康",
           "description": "基于内分泌医学：荷尔蒙平衡科学原理+经期内分泌调节+激素管理策略。专业内分泌指导，已帮助600万+女性科学管理荷尔蒙平衡。"
-        },
+        }
         "nutritionScience": {
           "title": "营养科学与经期健康：饮食调理科学研究应用",
           "readTime": "24分钟",
           "keywords": "营养科学研究, 经期营养学, 营养与痛经, 科学营养管理, 营养健康研究",
           "description": "基于营养科学研究：经期营养科学原理+饮食调理应用+营养健康管理。专业营养指导，已帮助700万+女性通过科学营养改善经期健康。"
-        },
+        }
         "exerciseTherapy": {
           "title": "运动疗法缓解经期疼痛科学原理：循证医学研究",
           "readTime": "22分钟",
           "keywords": "运动疗法原理, 科学运动方法, 运动缓解痛经, 运动科学研究, 运动治疗原理",
           "description": "基于运动医学研究：运动疗法科学原理+经期疼痛缓解+循证医学验证。专业运动指导，已帮助500万+女性通过科学运动缓解痛经。"
-        },
+        }
         "psychologicalFactors": {
           "title": "心理因素与经期疼痛感知：情绪管理科学方法",
           "readTime": "26分钟",
           "keywords": "心理因素影响, 疼痛感知调节, 情绪与痛经, 心理疼痛管理, 情绪调节方法",
           "description": "基于心理学研究：心理因素科学分析+疼痛感知调节+情绪管理策略。专业心理指导，已帮助400万+女性通过心理调节改善痛经感知。"
-        },
+        }
         "medicalResearch": {
           "title": "经期疼痛医学研究最新进展：2024年临床发现",
           "readTime": "26分钟",
           "keywords": "医学研究进展, 临床研究结果, 最新医学发现, 科学研究进展, 医学前沿研究",
           "description": "基于PubMed医学数据库：2024年最新研究进展+临床发现+医学前沿突破。专业医学研究，已帮助900万+女性了解最新痛经医学进展。"
-        },
+        }
         "traditionalMedicine": {
           "title": "传统医学与现代医学结合：经期健康管理创新",
           "readTime": "28分钟",
           "keywords": "传统医学结合, 中西医结合, 现代医学融合, 传统疗法应用, 医学结合治疗",
           "description": "基于中西医结合：传统医学智慧+现代医学技术+经期健康管理创新。专业医学结合，已帮助600万+女性通过中西医结合改善经期健康。"
-        },
+        }
         "globalPerspectives": {
           "title": "全球经期健康管理视角：文化差异科学比较",
           "readTime": "28分钟",
           "keywords": "全球文化差异, 国际视角比较, 文化差异分析, 全球健康管理, 跨文化研究",
           "description": "基于全球健康研究：不同文化背景+经期健康管理差异+国际比较分析。专业跨文化研究，已帮助500万+女性了解全球经期健康管理差异。"
-        },
+        }
         "technologyInnovation": {
           "title": "痛经并发症与伴随症状管理：腹胀恶心腰痛科学应对",
           "readTime": "24分钟",
           "keywords": "痛经并发症, 伴随症状管理, 腹胀恶心腰痛, 症状综合管理, 并发症处理",
           "description": "基于临床医学研究：痛经并发症科学分析+伴随症状管理+专业缓解策略。专业医学指导，已帮助800万+女性科学管理痛经并发症。"
-        },
+        }
         "communicationSkills": {
           "title": "经期疼痛医患沟通技巧：有效交流获得专业支持",
           "readTime": "18分钟",
           "keywords": "医患沟通技巧, 医生交流方法, 医疗沟通策略, 医患关系管理, 有效沟通技巧",
           "description": "基于医患沟通研究：有效沟通技巧+专业医疗支持+医患关系管理。专业沟通指导，已帮助300万+女性通过有效沟通获得更好的医疗支持。"
-        },
+        }
         "selfCareStrategies": {
           "title": "经期疼痛自我护理策略：科学方法有效管理",
           "readTime": "20分钟",
           "keywords": "自我护理方法, 个人健康管理, 自我护理策略, 个人护理技巧, 自主健康管理",
           "description": "基于自我护理研究：科学护理方法+个人健康管理+自主护理策略。专业护理指导，已帮助400万+女性通过自我护理改善经期健康。"
-        },
+        }
         "longTermManagement": {
           "title": "经期健康长期管理策略：持续改善科学方法",
           "readTime": "30分钟",
           "keywords": "经期健康长期管理, 持续健康改善, 长期管理策略, 健康持续发展, 长期健康规划",
           "description": "基于长期健康研究：经期健康长期管理+持续改善策略+科学健康规划。专业长期指导，已帮助600万+女性建立长期健康管理习惯。"
         }
-      },
+      }
       "pdfs": {
         "naturalTherapyAssessment": {
           "title": "自然疗法适用性评估工具：科学评估专业指南",
           "readTime": "PDF",
           "keywords": "自然疗法评估, 疗法适用性工具, 自然疗法评估, 疗法选择指南, 自然疗法测试",
           "description": "基于自然疗法医学：自然疗法适用性科学评估+专业评估工具+疗法选择指导。专业评估工具，已帮助150万+女性科学评估自然疗法适用性。"
-        },
+        }
         "hormoneTestingGuide": {
           "title": "经期荷尔蒙检测完整指南：内分泌水平科学评估",
           "readTime": "PDF",
           "keywords": "荷尔蒙检测指南, 内分泌水平检测, 经期荷尔蒙评估, 荷尔蒙检测方法, 内分泌诊断",
           "description": "基于内分泌医学：经期荷尔蒙检测科学方法+内分泌水平评估+专业诊断指导。专业检测指南，已帮助300万+女性科学检测荷尔蒙水平。"
-        },
+        }
         "nutritionalAnalysis": {
           "title": "经期营养分析报告模板：个人营养评估工具",
           "readTime": "PDF",
           "keywords": "经期营养分析, 营养分析模板, 个人营养评估, 营养报告工具, 经期营养评估",
           "description": "基于营养科学：经期营养分析科学方法+个人营养评估+专业分析模板。专业营养工具，已帮助200万+女性科学分析经期营养状况。"
-        },
+        }
         "exerciseProgram": {
           "title": "经期疼痛个性化运动计划：科学训练管理方案",
           "readTime": "PDF",
           "keywords": "经期个性化运动, 痛经运动计划, 个性化训练方案, 经期运动管理, 科学运动计划",
           "description": "基于运动医学：经期疼痛个性化运动+科学训练计划+运动管理方案。专业运动指导，已帮助180万+女性科学进行个性化运动训练。"
-        },
+        }
         "psychologicalAssessment": {
           "title": "经期心理健康评估工具包：专业心理测试集合",
           "readTime": "PDF",
           "keywords": "经期心理评估, 心理健康工具包, 心理测试集合, 经期心理测试, 心理健康评估",
           "description": "基于心理学研究：经期心理健康评估+专业心理测试+心理健康工具包。专业心理工具，已帮助120万+女性科学评估经期心理健康。"
-        },
+        }
         "researchSummary": {
           "title": "2024年痛经研究最新总结：科学进展临床发现",
           "readTime": "PDF",
           "keywords": "2024痛经研究, 痛经研究总结, 科学进展总结, 临床研究发现, 痛经研究进展",
           "description": "基于PubMed医学数据库：2024年最新痛经研究+科学进展总结+临床研究发现。专业研究总结，已帮助100万+女性了解最新痛经研究进展。"
-        },
+        }
         "cycleEducationGuide": {
           "title": "月经周期科学教育指南：全面知识学习手册",
           "readTime": "PDF",
           "keywords": "月经周期教育, 周期知识指南, 月经教育手册, 周期科学学习, 月经知识教育",
           "description": "基于生殖医学：月经周期科学教育+全面知识学习+周期管理指导。专业教育指南，已帮助80万+女性科学学习月经周期知识。"
-        },
+        }
         "consultationPreparation": {
           "title": "经期健康医疗咨询准备指南：专业咨询准备工具",
           "readTime": "PDF",
           "keywords": "经期医疗咨询, 医疗咨询准备, 医生咨询指南, 医疗预约准备, 经期健康咨询",
           "description": "基于医患沟通：经期健康医疗咨询+专业准备指南+咨询问题清单。专业咨询指导，已帮助60万+女性科学准备医疗咨询。"
-        },
+        }
         "innovationReport": {
           "title": "经期健康创新研究报告：技术发展科学突破",
           "readTime": "PDF",
           "keywords": "经期健康创新, 健康技术创新, 创新研究报告, 技术发展报告, 健康科技突破",
           "description": "基于健康科技创新：经期健康领域创新+技术发展报告+科学突破研究。专业创新报告，已帮助50万+女性了解经期健康科技创新。"
-        },
+        }
         "globalHealthReport": {
           "title": "全球经期健康视角报告：国际管理现状趋势分析",
           "readTime": "PDF",
           "keywords": "全球经期健康, 国际健康视角, 全球健康报告, 经期管理趋势, 国际健康分析",
           "description": "基于全球健康研究：全球经期健康现状+国际管理趋势+健康发展分析。专业国际报告，已帮助40万+女性了解全球经期健康趋势。"
-        },
+        }
         "technologyGuide": {
           "title": "经期健康数字工具指南：科技管理使用方法",
           "readTime": "PDF",
@@ -1971,87 +2048,87 @@
           "readTime": "35分钟",
           "keywords": "经期健康长期管理, 可持续管理策略, 长期健康规划, 持续改善方法, 专业管理指导",
           "description": "基于长期健康研究：经期健康长期管理+可持续管理策略+科学健康规划。专业长期指导，已帮助1000万+女性建立长期健康管理习惯。"
-        },
+        }
         "lifestyleOptimization": {
           "title": "经期健康生活方式优化：建立科学日常管理习惯",
           "readTime": "30分钟",
           "keywords": "生活方式优化, 健康习惯建立, 生活改善方法, 健康生活方式, 生活优化策略",
           "description": "基于生活方式医学：经期健康生活方式+科学习惯建立+日常管理优化。专业生活指导，已帮助800万+女性建立健康生活方式。"
-        },
+        }
         "healthMonitoring": {
           "title": "经期健康监测系统：个人健康数据追踪管理",
           "readTime": "25分钟",
           "keywords": "健康监测系统, 个人健康追踪, 健康数据管理, 监测系统建立, 健康追踪方法",
           "description": "基于数字健康技术：个人健康监测+数据追踪管理+健康趋势分析。专业监测指导，已帮助600万+女性建立个人健康监测系统。"
-        },
+        }
         "preventiveMeasures": {
           "title": "经期健康预防措施实施：科学保护长期健康",
           "readTime": "28分钟",
           "keywords": "预防措施实施, 健康保护方法, 预防性措施, 健康保护策略, 预防实施指南",
           "description": "基于预防医学：经期健康预防措施+科学保护策略+长期健康维护。专业预防指导，已帮助700万+女性科学实施预防措施。"
-        },
+        }
         "sustainablePractices": {
           "title": "经期健康可持续实践方法：长期发展科学策略",
           "readTime": "32分钟",
           "keywords": "可持续实践方法, 长期发展策略, 可持续健康实践, 实践方法指导, 可持续发展",
           "description": "基于可持续发展理论：经期健康可持续实践+长期发展策略+科学实践方法。专业实践指导，已帮助500万+女性建立可持续健康实践。"
-        },
+        }
         "communitySupport": {
           "title": "经期健康社区支持网络：互助分享经验交流",
           "readTime": "20分钟",
           "keywords": "社区支持网络, 互助分享平台, 社区健康支持, 网络支持系统, 互助交流网络",
           "description": "基于社区健康理论：社区支持网络+互助分享平台+经验交流系统。专业社区指导，已帮助400万+女性建立社区支持网络。"
-        },
+        }
         "professionalGuidance": {
           "title": "经期健康专业指导服务：专家咨询科学支持",
           "readTime": "24分钟",
           "keywords": "专业指导服务, 专业咨询服务, 专家指导支持, 专业健康服务, 专业咨询指导",
           "description": "基于专业医学服务：专家指导服务+专业咨询支持+科学健康管理。专业服务指导，已帮助300万+女性获得专业健康指导。"
-        },
+        }
         "technologyIntegration": {
           "title": "经痛模拟器科学解析：疼痛教育医学设备分析",
           "readTime": "26分钟",
           "keywords": "经痛模拟器, 疼痛教育工具, 医学设备分析, 疼痛科学教育, 模拟器科学原理",
           "description": "基于医学设备研究：经痛模拟器科学原理+疼痛教育应用+医学设备分析。专业设备指导，已帮助200万+女性了解经痛模拟器科学原理。"
-        },
+        }
         "qualityImprovement": {
           "title": "药物vs自然疗法选择指南：个性化治疗方案对比",
           "readTime": "22分钟",
           "keywords": "药物vs自然疗法, 治疗选择指南, 个性化治疗方案, 治疗方法对比, 治疗选择策略",
           "description": "基于循证医学对比：药物治疗vs自然疗法效果对比+安全性分析+个性化选择策略。专业治疗指导，已帮助500万+女性选择最适合的治疗方案。"
         }
-      },
+      }
       "pdfs": {
         "managementPlan": {
           "title": "经期健康长期管理计划：个性化科学管理方案",
           "readTime": "PDF",
           "keywords": "经期长期管理, 健康管理计划, 长期管理策略, 个性化管理, 经期健康规划",
           "description": "基于长期健康管理：经期健康长期计划+个性化管理策略+科学健康规划。专业管理指导，已帮助300万+女性建立长期健康管理计划。"
-        },
+        }
         "lifestyleGuide": {
           "title": "经期健康生活方式指南：全面优化改善方法",
           "readTime": "PDF",
           "keywords": "经期生活方式, 健康生活方式指南, 生活方式优化, 经期习惯改善, 健康生活方式",
           "description": "基于生活方式医学：经期健康生活方式+全面优化指南+科学习惯改善。专业生活指导，已帮助250万+女性建立健康生活方式。"
-        },
+        }
         "monitoringTools": {
           "title": "经期健康监测工具包：专业追踪分析系统",
           "readTime": "PDF",
           "keywords": "经期健康监测, 健康监测工具包, 健康追踪系统, 监测分析工具, 经期健康追踪",
           "description": "基于健康监测技术：经期健康监测工具+专业追踪系统+健康数据分析。专业监测工具，已帮助200万+女性科学监测经期健康。"
-        },
+        }
         "preventionChecklist": {
           "title": "经期健康预防措施清单：全面保护实施指南",
           "readTime": "PDF",
           "keywords": "经期健康预防, 预防措施清单, 健康保护指南, 预防实施清单, 经期健康保护",
           "description": "基于预防医学：经期健康预防措施+全面保护清单+预防实施指南。专业预防工具，已帮助180万+女性科学实施预防措施。"
-        },
+        }
         "sustainabilityGuide": {
           "title": "经期健康可持续实践指南：长期发展科学方法",
           "readTime": "PDF",
           "keywords": "经期健康可持续, 可持续实践指南, 长期发展方法, 可持续健康实践, 经期健康发展",
           "description": "基于可持续发展理论：经期健康可持续实践+长期发展策略+科学实践方法。专业实践指导，已帮助150万+女性建立可持续健康实践。"
-        },
+        }
         "communityResources": {
           "title": "经期健康社区资源手册：支持网络互助指南",
           "readTime": "PDF",
@@ -2072,23 +2149,23 @@
       "searchHints": {
         "desktop": "试试关键词：热敷、按摩、疼痛缓解、药物、敷热水袋、暖宝宝、揉肚子、止痛药",
         "mobile": "试试：热敷、按摩、疼痛、敷热水袋"
-      },
+      }
       "stats": {
         "totalResources": "总资源数",
         "categories": "分类数",
         "evidenceBased": "循证医学"
-      },
+      }
       "buttons": {
         "read": "阅读",
         "share": "分享",
         "download": "下载",
         "preview": "预览"
-      },
+      }
       "searchResults": {
         "title": "搜索结果",
         "noResults": "未找到相关资源",
         "suggestions": "请尝试其他关键词"
-      },
+      }
       "alerts": {
         "noResults": "未找到相关资源",
         "searchError": "搜索出错，请重试"
@@ -2103,47 +2180,47 @@
       "painTrackingForm": {
         "title": "疼痛追踪表",
         "description": "专业的疼痛记录和分析工具，帮助您更好地了解疼痛模式"
-      },
+      }
       "cycleCalendar": {
         "title": "经期日历",
         "description": "个性化的经期追踪日历，预测和管理您的生理周期"
-      },
+      }
       "symptomDiary": {
         "title": "症状日记",
         "description": "详细的症状记录模板，为医生诊断提供重要参考"
-      },
+      }
       "naturalTherapyAssessment": {
         "title": "自然疗法评估",
         "description": "个性化的自然疗法选择指南，找到最适合您的调理方案"
-      },
+      }
       "nutritionGuide": {
         "title": "营养指南",
         "description": "经期营养补充完整指南，科学饮食改善经期不适"
-      },
+      }
       "exerciseRoutine": {
         "title": "运动方案",
         "description": "专为经期设计的运动计划，缓解疼痛提升健康"
-      },
+      }
       "doctorConsultationGuide": {
         "title": "就医指导",
         "description": "与医生有效沟通的完整指南，获得更好的医疗服务"
-      },
+      }
       "familyCommunicationTips": {
         "title": "家庭沟通技巧",
         "description": "与家人朋友沟通经期话题的实用建议和技巧"
-      },
+      }
       "workplaceSupportGuide": {
         "title": "职场支持指南",
         "description": "在工作场所获得理解和支持的策略和方法"
-      },
+      }
       "menstrualHealthBasics": {
         "title": "经期健康基础",
         "description": "全面的经期健康知识手册，从基础到进阶的完整指南"
-      },
+      }
       "teenGuide": {
         "title": "青少年指南",
         "description": "专为青少年女性设计的经期健康教育资源"
-      },
+      }
       "mythsFactsGuide": {
         "title": "误区与事实",
         "description": "破除经期常见误区，了解科学的经期健康知识"
@@ -2173,7 +2250,7 @@
       "totalDownloads": "总下载量",
       "lastUpdated": "最后更新",
       "rating": "用户评分"
-    }
+    },
   },
   "downloadsPage": {
     "title": "PDF资源下载中心",
@@ -2199,15 +2276,15 @@
       "managementTools": {
         "title": "管理工具",
         "description": "实用的追踪表格、评估工具和管理指南"
-      },
+      }
       "healthManagement": {
         "title": "健康管理",
         "description": "营养指导、健康习惯和专业医学指南"
-      },
+      }
       "communicationGuidance": {
         "title": "沟通指导",
         "description": "家长、教师和学校的沟通协作指南"
-      },
+      }
       "educationalResources": {
         "title": "教育资源",
         "description": "为教育工作者提供的专业健康教育资源"
@@ -2217,55 +2294,55 @@
       "painTrackingForm": {
         "title": "疼痛追踪表",
         "description": "记录和分析您的疼痛模式，为医生诊断提供重要参考"
-      },
+      }
       "menstrualCycleNutritionPlan": {
         "title": "经期营养计划",
         "description": "科学的经期营养指导，帮助缓解症状并促进整体健康"
-      },
+      }
       "campusEmergencyChecklist": {
         "title": "校园应急清单",
         "description": "学生专用的经期应急处理指南和必备物品清单"
-      },
+      }
       "magnesiumGutHealthGuide": {
         "title": "镁与肠道健康指南",
         "description": "深入了解镁元素对经期健康的重要作用及补充方法"
-      },
+      }
       "naturalTherapyAssessment": {
         "title": "自然疗法评估",
         "description": "评估和选择适合您的自然疗法和调理方案"
-      },
+      }
       "healthyHabitsChecklist": {
         "title": "健康习惯清单",
         "description": "建立有益于经期健康的日常生活习惯和例行程序"
-      },
+      }
       "menstrualPainComplicationsManagement": {
         "title": "并发症管理指南",
         "description": "识别和管理经期疼痛相关并发症的专业指导"
-      },
+      }
       "parentCommunicationGuide": {
         "title": "家长沟通指南",
         "description": "帮助家长与青少年就经期健康进行有效沟通的指导"
-      },
+      }
       "teacherCollaborationHandbook": {
         "title": "教师合作手册",
         "description": "教师如何支持学生经期健康管理的实用手册"
-      },
+      }
       "teacherHealthManual": {
         "title": "教师健康手册",
         "description": "为教育工作者提供的经期健康教育资源和指导"
-      },
+      }
       "usInsuranceQuickReference": {
         "title": "美国医疗保险快速参考卡",
         "description": "美国痛经治疗医疗保险关键信息速查表，包含费用对比、申诉流程和紧急联系方式"
-      },
+      }
       "recommendedReadingList": {
         "title": "推荐阅读清单",
         "description": "精选的经期健康相关书籍、文章和研究资料推荐"
-      },
+      }
       "specificMenstrualPainManagementGuide": {
         "title": "特定痛经管理指南",
         "description": "针对不同类型痛经的个性化管理策略和治疗方案"
-      },
+      }
       "zhanZhuangBaduanjinIllustratedGuide": {
         "title": "站桩八段锦图解指南",
         "description": "传统中医养生功法在经期健康管理中的应用指导"
@@ -2334,23 +2411,23 @@
           "methods": {
             "0": "热敷 + 深呼吸",
             "1": "轻度拉伸 + 穴位按摩"
-          },
+          }
           "description": "适合日常轻微不适，以自然方法为主"
-        },
+        }
         {
           "level": "中度疼痛（4-6分）",
           "methods": {
             "0": "热敷 + 穴位按摩 + 温和运动",
             "1": "NSAID + 热敷 + 深呼吸"
-          },
+          }
           "description": "需要多种方法结合，可考虑药物辅助"
-        },
+        }
         {
           "level": "重度疼痛（7-10分）",
           "methods": {
             "0": "NSAID + 热敷 + 穴位按摩 + 深呼吸",
             "1": "立即就医 + 应急处理"
-          },
+          }
           "description": "建议立即就医，同时进行应急处理"
         }
       ]
@@ -2363,7 +2440,7 @@
         "1": "使用热敷垫或热水袋敷下腹部",
         "2": "进行4-7-8呼吸法缓解紧张",
         "3": "按摩三阴交、合谷穴等关键穴位"
-      },
+      }
       "medicalIndicators": {
         "title": "就医指征提醒",
         "indicators": {
@@ -2372,7 +2449,7 @@
           "2": "疼痛突然加重或性质改变",
           "3": "非经期时也有严重盆腔疼痛"
         }
-      },
+      }
       "emergencyKit": {
         "title": "急诊准备清单",
         "items": {
@@ -2395,24 +2472,24 @@
             "name": "婴儿式",
             "description": "跪坐，身体前倾，额头贴地，手臂向前伸展，保持5-10分钟",
             "benefits": "放松下背部和骨盆区域，缓解子宫收缩"
-          },
+          }
           {
             "name": "猫牛式",
             "description": "四肢着地，交替做拱背和塌腰动作，重复10-15次",
             "benefits": "改善脊柱灵活性，缓解腰部紧张"
-          },
+          }
           {
             "name": "仰卧束角式",
             "description": "仰卧，脚掌相对，膝盖向两侧打开，保持10-15分钟",
             "benefits": "打开骨盆，促进血液循环"
-          },
+          }
           {
             "name": "快乐婴儿式",
             "description": "仰卧，双手抓住脚掌，轻轻左右摇摆，保持5-10分钟",
             "benefits": "放松髋关节，缓解下腹部紧张"
           }
         ]
-      },
+      }
       "breathingExercises": {
         "title": "呼吸练习技巧",
         "exercises": [
@@ -2420,14 +2497,14 @@
             "name": "4-7-8呼吸法",
             "steps": "吸气4秒，屏气7秒，呼气8秒，重复3-8个循环",
             "benefits": "激活副交感神经系统，降低疼痛敏感度"
-          },
+          }
           {
             "name": "腹式呼吸",
             "steps": "将手放在腹部，深吸气时腹部鼓起，呼气时腹部收缩",
             "benefits": "促进深度放松，缓解肌肉紧张"
           }
         ]
-      },
+      }
       "timing": {
         "title": "使用时机建议",
         "preventive": "预防性使用：经期前3-5天开始练习",
@@ -2449,19 +2526,19 @@
           "location": "小腿内侧，踝关节上3寸（约4指宽）",
           "method": "用拇指按压，力度适中，每次3-5分钟",
           "benefits": "调理肝脾肾三经，缓解经期疼痛"
-        },
+        }
         {
           "name": "血海穴",
           "location": "大腿内侧，膝盖骨内侧端上2寸",
           "method": "用拇指或食指按压，有酸胀感为宜",
           "benefits": "活血化瘀，缓解经期血瘀疼痛"
-        },
+        }
         {
           "name": "合谷穴",
           "location": "手背，拇指和食指之间的虎口处",
           "method": "用另一手拇指按压，力度稍重",
           "benefits": "通经活络，缓解全身疼痛"
-        },
+        }
         {
           "name": "关元穴",
           "location": "下腹部，肚脐下3寸（约4指宽）",
@@ -2492,7 +2569,7 @@
         "frequency": "根据需要使用，最多3-4次/天",
         "timing": "疼痛开始时，持续2-3天",
         "mechanism": "增加血流，放松子宫肌肉"
-      },
+      }
       "breathing": {
         "title": "4-7-8呼吸法参数",
         "technique": "4-7-8呼吸法",
@@ -2500,7 +2577,7 @@
         "frequency": "急性疼痛期间每2-3小时",
         "timing": "疼痛强度达到5+时",
         "mechanism": "激活副交感神经系统，降低前列腺素敏感性"
-      },
+      }
       "nsaid": {
         "title": "NSAID使用参数",
         "dosage": "200-400mg布洛芬每6-8小时（最大1200mg/天）",
@@ -2528,30 +2605,30 @@
       "howTo": {
         "name": "痛经紧急缓解5步法",
         "description": "医生认证的痛经紧急缓解方法"
-      },
+      }
       "steps": {
         "heatTherapy": {
           "name": "热敷疗法",
           "text": "40-45°C热敷下腹部15-20分钟"
-        },
+        }
         "breathing": {
           "name": "呼吸练习",
           "text": "4-7-8呼吸法，激活副交感神经系统"
-        },
+        }
         "acupressure": {
           "name": "穴位按摩",
           "text": "按摩关元穴、三阴交等穴位"
-        },
+        }
         "medication": {
           "name": "药物使用",
           "text": "按医嘱使用NSAID类药物"
-        },
+        }
         "medicalCare": {
           "name": "就医指征",
           "text": "疼痛≥7分或出现异常症状时立即就医"
         }
       }
-    }
+    },
   },
   "naturalTherapiesPage": {
     "title": "经期健康自然疗法与平时调理",
@@ -2583,11 +2660,11 @@
         "noSideEffects": {
           "title": "无副作用",
           "description": "避免药物依赖和不良反应"
-        },
+        }
         "holisticApproach": {
           "title": "整体调理",
           "description": "改善整体健康状态"
-        },
+        }
         "costEffective": {
           "title": "经济实用",
           "description": "成本低廉，易于实施"
@@ -2612,18 +2689,18 @@
           "frequencyValue": "根据需要使用，最多3-4次/天",
           "timingValue": "疼痛开始时，持续2-3天",
           "mechanismValue": "增加血流，放松子宫肌肉"
-        },
+        }
         "mechanism": {
           "title": "科学机制深度解析",
           "gateControl": {
             "title": "闸门控制理论",
             "description": "热敷激活大直径神经纤维，通过脊髓的闸门控制机制抑制疼痛信号传导。"
-          },
+          }
           "vasodilation": {
             "title": "血管扩张与循环改善",
             "description": "热量使局部血管扩张，改善血流，减少肌肉紧张。"
           }
-        },
+        }
         "safety": {
           "title": "安全注意事项",
           "guidelines": {
@@ -2632,7 +2709,7 @@
             "2": "皮肤破损或感染时禁用"
           }
         }
-      },
+      }
       "herbalTherapy": {
         "title": "草本疗法",
         "subtitle": "植物药学的科学应用",
@@ -2646,7 +2723,7 @@
             "activeCompoundsValue": "6-姜酚、8-姜酚",
             "mechanismValue": "抑制环氧化酶-2，减少前列腺素合成",
             "clinicalEvidenceValue": "每日1-1.5g生姜粉，减轻痛经强度达62%"
-          },
+          }
           "angelica": {
             "title": "当归 - 妇科圣药",
             "activeCompounds": "活性成分：",
@@ -2656,18 +2733,18 @@
             "mechanismValue": "双向调节子宫平滑肌，改善微循环",
             "classicFormulaValue": "四物汤、当归补血汤"
           }
-        },
+        }
         "usage": {
           "title": "使用指导",
           "gingerTea": {
             "title": "生姜茶制作",
             "description": "鲜姜15g + 红糖30g，煮水15分钟，适于寒性痛经"
-          },
+          }
           "angelicaDecoction": {
             "title": "当归煎剂",
             "description": "15-30g水煎，经前一周开始服用，连续3-5天"
           }
-        },
+        }
         "safety": {
           "title": "安全提醒",
           "guidelines": {
@@ -2676,7 +2753,7 @@
             "2": "注意观察过敏反应，如有不适立即停用"
           }
         }
-      },
+      }
       "dietaryAdjustment": {
         "title": "饮食调整",
         "subtitle": "抗炎饮食的科学应用",
@@ -2688,14 +2765,14 @@
             "mechanism": "作用机制：",
             "sourcesValue": "深海鱼、亚麻籽、核桃",
             "mechanismValue": "抑制前列腺素合成，减少炎症"
-          },
+          }
           "magnesium": {
             "title": "镁元素",
             "sources": "来源：",
             "mechanism": "作用机制：",
             "sourcesValue": "坚果、绿叶蔬菜、全谷物",
             "mechanismValue": "放松肌肉，缓解痉挛"
-          },
+          }
           "vitaminB6": {
             "title": "维生素B6",
             "sources": "来源：",
@@ -2703,7 +2780,7 @@
             "sourcesValue": "香蕉、土豆、鸡肉",
             "mechanismValue": "调节激素平衡"
           }
-        },
+        }
         "foods": {
           "title": "抗炎食物推荐",
           "recommended": {
@@ -2714,7 +2791,7 @@
               "2": "姜黄、生姜（天然抗炎）",
               "3": "浆果类（抗氧化）"
             }
-          },
+          }
           "avoid": {
             "title": "避免食物",
             "list": {
@@ -2725,7 +2802,7 @@
             }
           }
         }
-      },
+      }
       "yogaExercise": {
         "title": "瑜伽运动",
         "subtitle": "身心合一的自然疗法",
@@ -2735,16 +2812,16 @@
           "catCow": {
             "title": "猫牛式",
             "description": "缓解下背部紧张，改善脊柱灵活性"
-          },
+          }
           "childPose": {
             "title": "婴儿式",
             "description": "放松盆腔，拉伸下背部"
-          },
+          }
           "supineTwist": {
             "title": "仰卧扭转",
             "description": "释放下背部和髋部紧张"
           }
-        },
+        }
         "science": {
           "title": "运动科学原理",
           "endorphinRelease": "内啡肽释放：",
@@ -2753,7 +2830,7 @@
           "endorphinReleaseValue": "运动促进天然止痛物质分泌",
           "bloodCirculationValue": "改善盆腔和子宫血流",
           "muscleRelaxationValue": "缓解肌肉紧张，促进血液循环"
-        },
+        }
         "practice": {
           "title": "练习指导",
           "timing": {
@@ -2761,7 +2838,7 @@
             "2": "疼痛期间每2-3小时进行一次",
             "3": "建立日常练习习惯",
             "title": "练习时机"
-          },
+          }
           "precautions": {
             "1": "避免过度拉伸，以舒适为宜",
             "2": "如有严重疼痛，请咨询医生",
@@ -2769,7 +2846,7 @@
             "title": "注意事项"
           }
         }
-      },
+      }
       "aromatherapy": {
         "title": "芳香疗法",
         "subtitle": "植物精油的科学应用",
@@ -2779,31 +2856,31 @@
             "title": "薰衣草精油",
             "effects": "镇静、抗炎、缓解痉挛",
             "mechanism": "通过激活GABA受体，减少神经兴奋性"
-          },
+          }
           "clarySage": {
             "title": "快乐鼠尾草精油",
             "effects": "调节激素、缓解疼痛、改善情绪",
             "mechanism": "模拟雌激素作用，平衡内分泌"
-          },
+          }
           "romanChamomile": {
             "title": "罗马洋甘菊精油",
             "effects": "抗炎、镇静、缓解肌肉紧张",
             "mechanism": "抑制前列腺素合成，减少炎症反应"
           }
-        },
+        }
         "usage": {
           "title": "使用方法",
           "massageOil": {
             "title": "按摩油配方",
             "recipe": "基础油10ml + 精油2-3滴",
             "instructions": "轻柔按摩下腹部，顺时针方向"
-          },
+          }
           "diffusion": {
             "title": "香薰扩散",
             "recipe": "精油3-5滴 + 水100ml",
             "instructions": "使用香薰机，每次15-20分钟"
           }
-        },
+        }
         "safety": {
           "title": "安全注意事项",
           "guidelines": {
@@ -2812,7 +2889,7 @@
             "2": "使用前进行皮肤过敏测试"
           }
         }
-      },
+      }
       "acupuncture": {
         "title": "针灸疗法",
         "subtitle": "传统中医的现代应用",
@@ -2822,16 +2899,16 @@
           "sanyinjiao": {
             "title": "三阴交",
             "description": "小腿内侧，踝关节上3寸，调理肝脾肾三经"
-          },
+          }
           "guanyuan": {
             "title": "关元穴",
             "description": "下腹部，肚脐下3寸，温肾固本"
-          },
+          }
           "shenque": {
             "title": "神阙穴",
             "description": "肚脐中央，调节脏腑功能"
           }
-        },
+        }
         "mechanisms": {
           "title": "作用机制",
           "neuralRegulation": "神经调节：",
@@ -2840,20 +2917,20 @@
           "endocrineRegulationValue": "调节下丘脑-垂体-卵巢轴，平衡激素水平",
           "evidenceBased": "循证依据：",
           "evidenceBasedValue": "WHO认可，多项RCT研究证实有效性"
-        },
+        }
         "selfMassage": {
           "title": "自我按摩",
           "sanyinjiao": {
             "title": "三阴交按摩",
             "instructions": "用拇指按压，力度适中，每次3-5分钟"
-          },
+          }
           "guanyuan": {
             "title": "关元穴按摩",
             "instructions": "用手掌轻柔按摩，顺时针方向"
-          },
+          }
           "note": "注意：自我按摩效果有限，严重疼痛建议专业针灸治疗"
         }
-      },
+      }
       "psychological": {
         "title": "心理疗法",
         "subtitle": "心理调节的科学方法",
@@ -2866,7 +2943,7 @@
           "frequencyValue": "疼痛期间每2-3小时一次",
           "effect": "作用效果：",
           "effectValue": "激活副交感神经系统，降低疼痛敏感度"
-        },
+        }
         "mindfulness": {
           "title": "正念冥想",
           "method": "练习方法：",
@@ -2875,14 +2952,14 @@
           "durationValue": "每次10-15分钟",
           "effect": "作用效果：",
           "effectValue": "提高疼痛耐受性，改善情绪状态"
-        },
+        }
         "muscleRelaxation": {
           "title": "肌肉放松",
           "step1": "从头部开始，逐步放松每个肌肉群",
           "step2": "配合深呼吸，感受紧张感的释放",
           "step3": "保持放松状态5-10分钟"
         }
-      },
+      }
       "comprehensive": {
         "title": "综合疗法",
         "subtitle": "多方法协同增效",
@@ -2893,20 +2970,20 @@
             "plan1": "热敷 + 轻度运动",
             "plan2": "芳香疗法 + 呼吸调节",
             "plan3": "穴位按摩 + 正念冥想"
-          },
+          }
           "moderate": {
             "title": "中度疼痛（4-6分）",
             "plan1": "热敷 + 瑜伽 + 芳香疗法",
             "plan2": "穴位按摩 + 呼吸调节 + 肌肉放松",
             "plan3": "综合疗法 + 情绪调节"
-          },
+          }
           "severe": {
             "title": "重度疼痛（7-10分）",
             "plan1": "专业针灸 + 综合自然疗法",
             "plan2": "多方法协同 + 心理支持",
             "plan3": "长期调理 + 生活方式改变"
           }
-        },
+        }
         "synergistic": {
           "title": "协同增效",
           "enhancing": {
@@ -2914,7 +2991,7 @@
             "combination1": "热敷 + 芳香疗法：温度促进精油吸收",
             "combination2": "瑜伽 + 呼吸调节：运动配合心理调节",
             "combination3": "穴位按摩 + 正念冥想：身体与心理结合"
-          },
+          }
           "personalized": {
             "title": "个性化方案",
             "coldConstitution": "寒性体质：热敷 + 温性精油 + 温补穴位",
@@ -2930,27 +3007,27 @@
         "heatTherapy": {
           "title": "热敷疗法",
           "source": "Cochrane系统综述，92%有效率"
-        },
+        }
         "tens": {
           "title": "经皮电神经刺激",
           "source": "RCT研究，76%有效率"
-        },
+        }
         "acupuncture": {
           "title": "针灸疗法",
           "source": "WHO认可，85%有效率"
-        },
+        }
         "aromatherapy": {
           "title": "芳香疗法",
           "source": "临床研究，68%有效率"
         }
-      },
+      }
       "highLevelEvidence": {
         "title": "高级别证据",
         "cochrane": "Cochrane系统综述",
         "rct": "随机对照试验",
         "who": "WHO指南推荐",
         "nih": "NIH研究支持"
-      },
+      }
       "longTermStudies": {
         "title": "长期研究",
         "study1": "12个月随访，症状改善持续",
@@ -2969,7 +3046,7 @@
       "effectiveTherapiesAnswer": "根据循证医学研究，最有效的自然疗法包括：热敷疗法（92%有效率）、针灸疗法（85%有效率）、经皮电神经刺激（76%有效率）和芳香疗法（68%有效率）。这些方法通过不同的生理机制缓解疼痛，建议根据个人体质和疼痛程度选择合适的方法。",
       "timeToEffect": "自然疗法需要多长时间才能见效？",
       "timeToEffectAnswer": "不同疗法的见效时间不同：热敷疗法通常在15-20分钟内见效；针灸疗法需要3-5次治疗才能看到明显效果；芳香疗法在30分钟内开始发挥作用；瑜伽和运动需要坚持2-4周才能看到长期改善。建议结合多种方法，并保持耐心和坚持。"
-    }
+    },
   },
   "culturalCharmsPage": {
     "title": "探索文化中的慰藉：符咒与传统疗愈符号",
@@ -2992,6 +3069,9 @@
   "interactiveToolsPage": {
     "title": "经期健康管理互动工具 - 症状评估与疼痛追踪",
     "description": "专业的经期健康管理工具集合，包含症状评估、疼痛追踪、数据分析等功能。科学评估您的经期症状，获得个性化健康建议，有效管理痛经困扰。支持中英双语，移动端优化体验。",
+    "otherTools": {
+      "title": "全部工具"
+    },
     "symptomAssessment": {
       "title": "症状评估工具",
       "subtitle": "通过专业问卷快速识别疼痛类型，获得精准个性化建议",
@@ -3003,7 +3083,7 @@
         "painDuration": "您的疼痛通常持续多久？",
         "accompaniedSymptoms": "您的经期疼痛伴随哪些症状？",
         "reliefMethods": "您尝试过哪些缓解方法？"
-      },
+      }
       "results": {
         "title": "您的个性化建议",
         "disclaimer": "这些建议基于您的回答，仅供参考。它们不能替代专业医疗建议。",
@@ -3027,12 +3107,12 @@
         "notes": "备注",
         "save": "保存记录",
         "cancel": "取消"
-      },
+      }
       "insights": {
         "title": "您的疼痛洞察",
         "description": "根据您的追踪历史，以下是我们注意到的一些模式：",
         "noData": "数据还不够。继续追踪以查看洞察。"
-      },
+      }
       "assessment": {
         "title": "症状评估工具",
         "subtitle": "通过专业问卷快速识别疼痛类型，为您提供精准的个性化建议。",
@@ -3045,16 +3125,16 @@
           "feature4": "即时结果反馈",
           "startButton": "开始评估",
           "disclaimer": "此评估仅供参考，不能替代专业医疗诊断。"
-        },
+        }
         "progress": {
           "questionOf": "第 {current} 题，共 {total} 题"
-        },
+        }
         "navigation": {
           "previous": "上一题",
           "next": "下一题",
           "skip": "跳过",
           "finish": "完成评估"
-        },
+        }
         "result": {
           "title": "评估结果",
           "yourScore": "您的得分",
@@ -3071,18 +3151,18 @@
             "tryRecommendations": "尝试推荐的缓解方法",
             "consultDoctor": "如果症状持续或恶化，请咨询医生"
           }
-        },
+        }
         "severity": {
           "mild": "轻度",
           "moderate": "中度",
           "severe": "重度",
           "emergency": "紧急"
-        },
+        }
         "priority": {
           "high": "高优先级",
           "medium": "中优先级",
           "low": "低优先级"
-        },
+        }
         "messages": {
           "assessmentComplete": "评估完成",
           "assessmentCompleteDesc": "您的症状评估已完成，请查看结果和建议。",
@@ -3090,7 +3170,7 @@
           "assessmentFailedDesc": "评估过程中出现错误，请重试。",
           "resultsSaved": "结果已保存",
           "resultsSavedDesc": "您的评估结果已保存到本地存储。"
-        },
+        }
         "resultMessages": {
           "emergency": "您的症状较为严重，建议尽快咨询医疗专业人士。",
           "emergencySummary": "评估显示您可能需要专业医疗关注。",
@@ -3100,7 +3180,7 @@
           "moderateSummary": "您的症状是可以管理的，建议采用多种缓解策略。",
           "mild": "您的症状相对较轻，通过简单的自我护理就能很好地管理。",
           "mildSummary": "您的症状较轻，可以通过生活方式调整来改善。"
-        },
+        }
         "recommendations": {
           "emergencyMedical": {
             "title": "建议立即就医",
@@ -3111,7 +3191,7 @@
               "1": "如果疼痛剧烈，考虑急诊就医",
               "2": "记录详细的症状日志"
             }
-          },
+          }
           "painManagement": {
             "title": "疼痛管理策略",
             "description": "多种方法可以帮助缓解经期疼痛",
@@ -3121,7 +3201,7 @@
               "1": "尝试轻度运动如散步",
               "2": "考虑非处方止痛药（按说明使用）"
             }
-          },
+          }
           "lifestyleChanges": {
             "title": "生活方式调整",
             "description": "长期的生活方式改变可以显著改善症状",
@@ -3132,7 +3212,7 @@
               "2": "学习压力管理技巧",
               "3": "保持均衡饮食"
             }
-          },
+          }
           "selfcarePractices": {
             "title": "自我护理实践",
             "description": "日常的自我护理可以帮助您更好地管理症状",
@@ -3147,30 +3227,6 @@
         }
       }
     },
-    "embeddedPainAssessment": {
-      "title": "💡 痛经快速自测",
-      "subtitle": "1分钟了解您的痛经程度，获得初步建议",
-      "question": "您的痛经强度如何？",
-      "selectIntensityFirst": "请先选择痛经强度",
-      "options": {
-        "mild": "轻微（可以忍受，不影响日常活动）",
-        "moderate": "中度（影响部分活动，但能坚持）",
-        "severe": "重度（完全影响日常活动，需要休息）"
-      },
-      "buttons": {
-        "getAdvice": "获取建议",
-        "detailedAssessment": "详细评估",
-        "testAgain": "重新测试",
-        "fullAssessment": "完整评估"
-      },
-      "resultTitle": "评估结果",
-      "results": {
-        "mild": "您的痛经程度较轻，可以尝试热敷、轻度运动等自然缓解方法。",
-        "moderate": "您的痛经程度中等，建议结合多种缓解方法，如有需要可考虑非处方止痛药。",
-        "severe": "您的痛经程度较重，建议咨询医生获得专业评估和治疗建议。"
-      },
-      "disclaimer": "⚠️ 此工具仅供参考，不能替代专业医疗建议"
-    },
     "searchBox": {
       "placeholder": "搜索文章...",
       "matchTypes": {
@@ -3178,7 +3234,7 @@
         "summary": "摘要",
         "tag": "标签",
         "content": "内容"
-      },
+      }
       "noResults": "未找到相关文章"
     },
     "breathingExercise": {
@@ -3193,7 +3249,7 @@
             "感到焦虑紧张时",
             "睡前放松时"
           ]
-        },
+        }
         "precautions": {
           "title": "注意事项：",
           "items": [
@@ -3202,13 +3258,13 @@
             "如感到头晕请停止练习"
           ]
         }
-      },
+      }
       "subtitle": "[ZH] Natural pain relief through nervous system regulation",
       "phases": {
         "inhale": "[ZH] Inhale",
         "hold": "[ZH] Hold",
         "exhale": "[ZH] Exhale"
-      },
+      }
       "instructions": "[ZH] How to practice:",
       "startButton": "[ZH] 🫁 Start Guided Practice",
       "stopButton": "[ZH] Stop Practice",
@@ -3220,7 +3276,7 @@
         "painPerception": "[ZH] Pain Perception",
         "muscleTension": "[ZH] Muscle Tension",
         "relaxation": "[ZH] Relaxation"
-      },
+      }
       "tip": "[ZH] 💡 Tip: Find a comfortable sitting or lying position, relax all muscles. Beginners should do 3-4 cycles.",
       "timeUnit": "[ZH] s"
     },
@@ -3235,7 +3291,7 @@
     },
     "constitutionTest": {
       "title": "中医体质测试",
-      "description": "通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议",
+      "description": "通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议",
       "cta": "开始测试"
     },
     "periodPainAssessment": {
@@ -3250,9 +3306,6 @@
       "description": "智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律。",
       "cta": "开始追踪"
     },
-    "otherTools": {
-      "title": "全部工具"
-    }
   },
   "periodPainAssessmentPage": {
     "tool": {
@@ -3263,14 +3316,14 @@
         "mild": "轻度 - 可以忍受，不影响日常活动",
         "moderate": "中度 - 影响部分活动但可以忍受",
         "severe": "重度 - 完全影响日常活动，需要休息"
-      },
+      }
       "onsetTitle": "您的痛经通常什么时候开始？",
       "onsetOptions": {
         "before": "月经来潮前1-2天",
         "first_day": "月经第一天",
         "second_day": "月经第二天",
         "throughout": "整个月经期间"
-      },
+      }
       "symptomsTitle": "您是否有以下严重症状？",
       "symptomsOptions": {
         "nausea": "恶心或呕吐",
@@ -3279,7 +3332,7 @@
         "fainting": "晕厥或头晕",
         "heavy_bleeding": "月经量极大",
         "irregular_cycles": "月经周期极不规律"
-      },
+      }
       "assessButton": "获取评估结果",
       "resultTitle": "评估结果",
       "consultAdvice": "⚠️ 根据您的症状，我们建议您咨询医疗专业人士进行适当的评估和治疗。",
@@ -3292,7 +3345,7 @@
         "moderateIntensity": "中等程度痛经较为常见，可以尝试热敷、适量运动等缓解方法。如持续困扰建议就医。",
         "mildIntensity": "您的痛经程度较轻，属于正常范围。保持良好的生活习惯即可。"
       }
-    }
+    },
   },
   "interactiveTools": {
     "meta": {
@@ -3351,34 +3404,34 @@
     },
     "constitutionTest": {
       "title": "中医体质测试",
-      "description": "通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议",
+      "description": "通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议",
       "cta": "开始测试",
       "subtitle": "通过专业的中医体质问卷，了解您的体质类型，获得个性化的健康建议",
       "features": {
         "quick": {
           "title": "快速便捷",
           "description": "仅需5-8分钟完成"
-        },
+        }
         "professional": {
           "title": "专业可靠",
           "description": "基于中医理论设计"
-        },
+        }
         "personalized": {
           "title": "个性化建议",
           "description": "针对您的体质特点"
-        },
+        }
         "practical": {
           "title": "实用指导",
           "description": "穴位、饮食、生活建议"
         }
-      },
+      }
       "instructions": {
         "title": "测试说明",
         "item1": "请根据您最近3个月的身体状况回答",
         "item2": "选择最符合您情况的选项",
         "item3": "如有疑问，选择相对更符合的选项",
         "item4": "测试结果仅供参考，不替代医疗诊断"
-      },
+      }
       "navigation": {
         "startTest": "开始测试",
         "nextQuestion": "下一题",
@@ -3387,7 +3440,7 @@
         "retakeTest": "重新测试",
         "previous": "上一题",
         "next": "下一题"
-      },
+      }
       "painScale": {
         "title": "疼痛程度：",
         "reference": "疼痛程度参考",
@@ -3397,18 +3450,18 @@
           "moderate": "中度",
           "severe": "严重",
           "extreme": "极重"
-        },
+        }
         "descriptions": {
           "0-2": "无痛或轻微不适",
           "3-4": "轻度疼痛，可忍受",
           "5-7": "中度疼痛，影响活动",
           "8-10": "重度疼痛，难以忍受"
         }
-      },
+      }
       "progress": {
         "questionOf": "第 {current} 题，共 {total} 题",
         "complete": "完成"
-      },
+      }
       "result": {
         "title": "测试结果",
         "subtitle": "您的中医体质类型分析",
@@ -3416,7 +3469,7 @@
         "constitutionFeatures": "体质特征",
         "commonSymptoms": "常见症状",
         "menstrualFeatures": "月经特点"
-      },
+      }
       "recommendations": {
         "acupoints": {
           "title": "穴位调理建议",
@@ -3428,31 +3481,31 @@
           "technique": "手法：",
           "frequency": "频率：",
           "duration": "时长："
-        },
+        }
         "dietary": {
           "title": "饮食调理建议",
           "beneficialFoods": "适宜食物",
           "foodsToAvoid": "避免食物",
           "dietaryPrinciples": "饮食原则"
-        },
+        }
         "lifestyle": {
           "title": "场景化生活建议",
           "description": "根据您的体质特点，为不同生活场景提供个性化建议",
           "reminder": "温馨提醒：",
           "reminderText": "以上建议需要持续实践才能看到效果，建议结合专业医师指导。"
-        },
+        }
         "menstrualPain": {
           "title": "痛经专项建议",
           "acupointTherapy": "穴位疗法",
           "lifestyleAdjustments": "生活调理"
         }
-      },
+      }
       "messages": {
         "testComplete": "测试完成",
         "testCompleteDesc": "您的个性化体质分析已生成",
         "testFailed": "测试失败",
         "testFailedDesc": "无法生成测试结果，请重试"
-      },
+      }
       "emergencyKit": {
         "title": "个性化应急包推荐",
         "description": "根据您的体质特点，为您推荐专属的应急包物品清单。提前准备，让经期更从容。",
@@ -3460,14 +3513,14 @@
           "high": "必需",
           "medium": "推荐",
           "low": "可选"
-        },
+        }
         "packingTips": "📦 打包建议：",
         "packingAdvice": "优先携带\"必需\"物品，根据外出时间和场景选择\"推荐\"和\"可选\"物品。建议准备一个专用的小包，方便随时取用。"
-      },
+      }
       "articles": {
         "title": "为您推荐的健康文章",
         "readMore": "阅读全文"
-      },
+      }
       "communication": {
         "title": "沟通模板助手",
         "description": "经期不适时，与身边的人沟通很重要。这些模板可以帮助你更好地表达需求和寻求理解。",
@@ -3475,7 +3528,7 @@
           "intimate": "亲密",
           "casual": "随意",
           "formal": "正式"
-        },
+        }
         "copyText": "复制文本",
         "usageTips": "💡 使用提示：",
         "usageAdvice": "这些模板仅供参考，请根据你的实际情况和关系亲密度进行调整。真诚的沟通是建立理解的关键。"
@@ -3514,7 +3567,7 @@
             "感到焦虑紧张时",
             "睡前放松时"
           ]
-        },
+        }
         "precautions": {
           "title": "注意事项：",
           "items": [
@@ -3535,19 +3588,19 @@
         "loading": "正在加载...",
         "calculating": "正在计算...",
         "generatingRecommendations": "正在生成建议..."
-      },
+      }
       "severity": {
         "mild": "轻度",
         "moderate": "中度",
         "severe": "重度",
         "workplace": "职场影响",
         "verySevere": "极重度"
-      },
+      }
       "priority": {
         "high": "高优先级",
         "medium": "中等优先级",
         "low": "低优先级"
-      },
+      }
       "questions": {
         "painLevel": "疼痛程度",
         "painDuration": "疼痛持续时间",
@@ -3559,7 +3612,7 @@
         "sleepQuality": "睡眠质量",
         "moodChanges": "情绪变化",
         "energyLevel": "精力水平"
-      },
+      }
       "options": {
         "mild": "轻度 (1-3/10)",
         "moderate": "中度 (4-6/10)",
@@ -3574,7 +3627,7 @@
         "yes": "是",
         "no": "否",
         "sometimes": "有时"
-      },
+      }
       "title": "症状评估工具",
       "description": "专业的痛经症状评估工具，帮助您了解疼痛程度和获得个性化建议",
       "subtitle": "专业医疗评估",
@@ -3590,13 +3643,13 @@
         "feature4": "长期管理",
         "startButton": "开始评估",
         "disclaimer": "本评估仅供参考，不能替代专业医疗诊断"
-      },
+      }
       "progress": {
         "questionOf": "第 {current} 题，共 {total} 题",
         "step": "步骤",
         "completed": "已完成",
         "remaining": "剩余"
-      },
+      }
       "navigation": {
         "previous": "上一步",
         "next": "下一步",
@@ -3604,7 +3657,7 @@
         "back": "返回",
         "continue": "继续",
         "finish": "完成"
-      },
+      }
       "buttons": {
         "next": "下一步",
         "previous": "上一步",
@@ -3613,7 +3666,7 @@
         "viewResults": "查看结果",
         "downloadReport": "下载报告",
         "shareResults": "分享结果"
-      },
+      }
       "results": {
         "title": "评估结果",
         "score": "疼痛评分",
@@ -3623,7 +3676,7 @@
         "longTerm": "长期管理",
         "workplace": "职场支持",
         "medical": "医疗建议"
-      },
+      }
       "result": {
         "title": "评估结果",
         "yourScore": "您的评分",
@@ -3646,7 +3699,7 @@
         "workplaceImpact": "职场影响",
         "personalCare": "个人护理",
         "medicalAdvice": "医疗建议"
-      },
+      }
       "recommendations": {
         "workplaceSupport": {
           "title": "职场支持建议",
@@ -3655,7 +3708,7 @@
           "action2": "研究您公司现有的病假和弹性工作政策。",
           "action3": "与HR部门讨论合理的住宿安排。",
           "timeframe": "建议实施"
-        },
+        }
         "personalCare": {
           "title": "个人护理建议",
           "description": "关注您的个人健康和舒适度。",
@@ -3663,7 +3716,7 @@
           "action2": "练习放松技巧，如深呼吸或冥想。",
           "action3": "保持健康的饮食习惯。",
           "timeframe": "建议实施"
-        },
+        }
         "medicalAdvice": {
           "title": "医疗建议",
           "description": "考虑寻求专业医疗建议。",
@@ -3672,7 +3725,7 @@
           "action3": "了解可能的治疗方案。",
           "timeframe": "建议实施"
         }
-      },
+      }
       "modes": {
         "simplified": "简化版评估",
         "detailed": "详细版评估",
@@ -3691,7 +3744,7 @@
         "quickDesc": "仅需3-5分钟，获得专业分析",
         "personalized": "个性化建议",
         "personalizedDesc": "基于评估结果提供针对性建议"
-      },
+      }
       "resultsTitle": "评估结果",
       "resultsSubtitle": "基于您的回答，我们为您生成了以下分析结果",
       "recommendationsTitle": "个性化建议",
@@ -3705,7 +3758,7 @@
             "difficult": "让我很难专注于任务。",
             "impossible": "几乎无法集中注意力或保持工作效率。"
           }
-        },
+        }
         "absenteeism": {
           "title": "您是否曾因经期症状而不得不缺勤、缺课或错过重要活动？",
           "options": {
@@ -3714,7 +3767,7 @@
             "sometimes": "有时（每年几次）",
             "frequently": "经常（在大多数或所有周期中）"
           }
-        },
+        }
         "communication": {
           "title": "如果因痛经需要向您的上司提出调整请求（例如，短暂休息、在家工作），您的自在程度如何？",
           "options": {
@@ -3723,7 +3776,7 @@
             "uncomfortable": "非常不自在，我会避免进行这种沟通。",
             "na": "不适用 / 我没有上司"
           }
-        },
+        }
         "support": {
           "title": "您认为哪些支持措施对您最有帮助？（可多选）",
           "options": {
@@ -3748,13 +3801,13 @@
         "personalizedRecommendations": "个性化建议",
         "notifications": "通知提醒",
         "dataSharing": "数据共享"
-      },
+      }
       "actions": {
         "resetSettings": "重置设置",
         "exportData": "导出数据",
         "clearHistory": "清除历史",
         "save": "保存"
-      },
+      }
       "confirmations": {
         "resetSettings": "确定要重置所有设置吗？此操作不可撤销。",
         "clearHistory": "确定要清除所有评估历史吗？此操作不可撤销。"
@@ -3768,14 +3821,14 @@
         "missingKeys": "缺失翻译",
         "inconsistentKeys": "不一致翻译",
         "qualityScore": "质量分数"
-      },
+      }
       "optimization": {
         "title": "优化建议",
         "addMissing": "补充缺失翻译",
         "unifyStyle": "统一翻译风格",
         "optimizeLayout": "优化布局适配",
         "culturalAdaptation": "文化适应性"
-      },
+      }
       "actions": {
         "startOptimization": "开始优化",
         "exportReport": "导出报告"
@@ -3791,21 +3844,21 @@
         "renderTime": "渲染时间",
         "cacheHitRate": "缓存命中率",
         "networkRequests": "网络请求"
-      },
+      }
       "optimization": {
         "codeSplitting": "代码分割",
         "lazyLoading": "懒加载",
         "cacheStrategy": "缓存策略",
         "memoryOptimization": "内存优化",
         "networkOptimization": "网络优化"
-      },
+      }
       "recommendations": {
         "title": "性能优化建议",
         "bundleSize": "包大小优化",
         "loadTime": "加载时间优化",
         "cacheHitRate": "缓存命中率",
         "networkRequests": "网络请求优化"
-      },
+      }
       "actions": {
         "startOptimization": "开始优化",
         "reset": "重置"
@@ -3819,20 +3872,20 @@
         "integrationTests": "集成测试",
         "userExperienceTests": "用户体验测试",
         "securityTests": "安全测试"
-      },
+      }
       "status": {
         "totalTests": "总测试数",
         "passedTests": "通过测试",
         "failedTests": "失败测试",
         "averageCoverage": "平均覆盖率"
-      },
+      }
       "recommendations": {
         "title": "测试建议",
         "unitTestCoverage": "单元测试覆盖",
         "integrationTesting": "集成测试",
         "userExperienceTesting": "用户体验测试",
         "securityTesting": "安全测试"
-      },
+      }
       "actions": {
         "runTests": "运行测试",
         "reset": "重置",
@@ -3847,20 +3900,20 @@
         "userGuide": "用户指南",
         "deploymentGuide": "部署指南",
         "codeComments": "代码注释"
-      },
+      }
       "status": {
         "totalDocuments": "文档总数",
         "completed": "已完成",
         "incomplete": "未完成",
         "totalWords": "总字数"
-      },
+      }
       "recommendations": {
         "title": "文档完善建议",
         "apiDocumentation": "API文档完善",
         "userGuide": "用户指南优化",
         "deploymentGuide": "部署指南更新",
         "codeCommentStandards": "代码注释规范"
-      },
+      }
       "actions": {
         "exportAllDocuments": "导出所有文档",
         "generateReport": "生成报告"
@@ -3874,19 +3927,19 @@
         "performance": "性能优化",
         "testing": "测试完善",
         "documentation": "文档完善"
-      },
+      }
       "statistics": {
         "optimizationModules": "优化模块",
         "completedTasks": "已完成任务",
         "activeTasks": "进行中任务",
         "overallProgress": "总体进度"
-      },
+      }
       "completion": {
         "title": "P3阶段完成！",
         "description": "所有系统优化和性能提升任务已完成，系统已达到生产就绪状态",
         "deployToProduction": "进入生产环境"
       }
-    }
+    },
   },
   "scenarioSolutionsPage": {
     "title": "场景化痛经解决方案 - 职场、运动、社交全方位应对指南",
@@ -3908,7 +3961,7 @@
             "core": "核心装备",
             "painRelief": "疼痛缓解",
             "imageManagement": "形象管理"
-          },
+          }
           "coreItems": [
             "可粘贴暖宝宝（ThermaCare隐形贴片）",
             "迷你电热护腰（USB充电款）",
@@ -3930,7 +3983,7 @@
             "热敷贴启动借口：\"正在用暖宝宝缓解肩颈酸痛\"",
             "突发疼痛离场话术：\"需要紧急处理客户邮件\""
           ]
-        },
+        }
         "stretching": {
           "title": "办公椅拉伸系统",
           "exercises": [
@@ -3943,7 +3996,7 @@
                 "想象骨盆是时钟，缓慢画圆",
                 "顺时针和逆时针各做一组"
               ]
-            },
+            }
             {
               "name": "隐藏式足底按摩",
               "description": "利用桌下筋膜球，促进下肢血液回流",
@@ -3953,7 +4006,7 @@
                 "脱掉鞋子，用脚底滚动按摩球",
                 "重点按压足弓和脚跟部位"
               ]
-            },
+            }
             {
               "name": "饮水机旁侧腰拉伸",
               "description": "自然站立姿势，缓解腰部紧张",
@@ -3965,7 +4018,7 @@
               ]
             }
           ]
-        },
+        }
         "nutrition": {
           "title": "职场饮食管理",
           "plan": [
@@ -3973,17 +4026,17 @@
               "time": "早餐 (7:00-8:00)",
               "foods": "燕麦粥+坚果+香蕉",
               "benefits": "提供持续能量，稳定血糖"
-            },
+            }
             {
               "time": "上午茶 (10:00)",
               "foods": "红枣茶或玫瑰花茶",
               "benefits": "温暖子宫，缓解痉挛"
-            },
+            }
             {
               "time": "午餐 (12:00-13:00)",
               "foods": "瘦肉+深绿色蔬菜+糙米",
               "benefits": "补铁补纤维，预防贫血"
-            },
+            }
             {
               "time": "下午茶 (15:00)",
               "foods": "黑巧克力+温牛奶",
@@ -3995,17 +4048,17 @@
             "coldDrinks": {
               "category": "冰饮类：",
               "items": "冰咖啡、冷饮、冰水"
-            },
+            }
             "highSaltSnacks": {
               "category": "高盐零食：",
               "items": "薯片、腌制食品"
-            },
+            }
             "excessiveCaffeine": {
               "category": "过量咖啡因：",
               "items": "浓咖啡、能量饮料"
             }
           }
-        },
+        }
         "communication": {
           "title": "沟通模板助手",
           "description": "有效的沟通是获取支持和资源的关键一步。当疼痛严重影响工作时，一封专业、简洁的请假邮件至关重要。",
@@ -4019,7 +4072,7 @@
               "body": "由于今晨出现严重的生理期不适（痛经），导致我难以集中精力高效完成工作，身体状况也不允许通勤。为确保工作质量并尽快恢复，我希望能申请今天在家休息/远程办公一天。\n\n我已经将今日的重点工作[简要说明，例如：整理完毕并通过邮件发送给XX] / [或：安排妥当]，并将随时通过电话和邮件保持联系，以应对任何紧急事宜。\n\n给您带来不便，深表歉意。感谢您的理解与支持。",
               "closing": "祝好，",
               "signature": "[你的名字]\n[你的职位]\n[日期]"
-            },
+            }
             "english": {
               "subject": "Sick Leave Request - [Your Name] - [Date]",
               "greeting": "Dear [Manager's Name],",
@@ -4028,7 +4081,7 @@
               "closing": "Best regards,",
               "signature": "[Your Name]\n[Your Title]\n[Date]"
             }
-          },
+          }
           "templates": [
             {
               "scenario": "与伴侣沟通",
@@ -4039,7 +4092,7 @@
                   "tone": "亲密",
                   "template": "\"亲爱的，我今天身体不太舒服，可能需要多休息一下。如果我看起来有点不舒服，请不要担心。\"",
                   "copyText": "复制文本"
-                },
+                }
                 {
                   "situation": "寻求理解",
                   "tone": "亲密",
@@ -4047,7 +4100,7 @@
                   "copyText": "复制文本"
                 }
               ]
-            },
+            }
             {
               "scenario": "与朋友沟通",
               "icon": "👭",
@@ -4057,7 +4110,7 @@
                   "tone": "随意",
                   "template": "\"不好意思，我今天身体有点不太舒服，可能没法保持最佳状态。我们能改到下次吗？我会补偿你的！\"",
                   "copyText": "复制文本"
-                },
+                }
                 {
                   "situation": "聚会参与",
                   "tone": "随意",
@@ -4065,7 +4118,7 @@
                   "copyText": "复制文本"
                 }
               ]
-            },
+            }
             {
               "scenario": "与同事沟通",
               "icon": "👔",
@@ -4075,7 +4128,7 @@
                   "tone": "正式",
                   "template": "\"您好，我今天身体不太舒服，可能需要请半天假去处理身体问题。我会尽快处理完其他事务的。\"",
                   "copyText": "复制文本"
-                },
+                }
                 {
                   "situation": "工作调整",
                   "tone": "正式",
@@ -4086,7 +4139,7 @@
             }
           ],
           "copyToUse": "可复制使用"
-        },
+        }
         "acupressure": {
           "title": "办公室穴位按压",
           "description": "简单易学的穴位按压技巧，可以在办公室隐蔽进行，快速缓解疼痛不适。",
@@ -4097,7 +4150,7 @@
               "benefits": "疏肝理气、活血化瘀，缓解全身疼痛",
               "technique": "用拇指指腹按压，力度适中，每次30秒",
               "officeUse": "可在开会时隐蔽进行，不引人注意"
-            },
+            }
             {
               "name": "三阴交穴",
               "location": "小腿内侧，踝关节上三寸",
@@ -4109,18 +4162,18 @@
           "scientificBasis": {
             "title": "科学依据",
             "description": "穴位按压通过刺激特定神经点，促进内啡肽释放，这是人体天然的止痛物质。现代研究表明，适当的穴位刺激可以调节神经传导，缓解疼痛感知。"
-          },
+          }
           "locationLabel": "位置：",
           "benefitsLabel": "功效：",
           "techniqueLabel": "按压方法：",
           "officeApplicationLabel": "办公室应用："
-        },
+        }
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
-        },
+        }
         "backToOverview": "返回场景解决方案总览"
-      },
+      }
       "partnerCommunication": {
         "title": "伴侣沟通场景",
         "description": "专业的伴侣沟通场景解决方案，帮助伴侣更好地理解痛经，提供针对性的沟通策略和情感支持技巧。包含理解测试、30天训练营和个性化指导，帮助您建立更好的理解和沟通。",
@@ -4129,7 +4182,7 @@
           "30天训练营",
           "个性化指导"
         ]
-      },
+      }
       "commute": {
         "title": "通勤场景",
         "description": "通勤途中经期疼痛应急处理指南：公共交通舒适技巧、自驾调整方案、突发疼痛快速缓解方法。提供适合各种通勤方式的痛经管理策略，让您在出行路上也能有效应对经期不适。基于循证医学的专业指导，确保通勤安全舒适。",
@@ -4141,9 +4194,9 @@
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
-        },
+        }
         "backToOverview": "返回场景解决方案总览"
-      },
+      }
       "exercise": {
         "title": "运动/户外场景",
         "description": "经期运动安全防护专业指南：适合经期的运动类型、户外活动注意事项、运动强度调节技巧。提供科学的经期运动建议，让您在保持运动习惯的同时安全度过生理期，避免运动伤害。基于循证医学的专业指导，确保运动安全有效。",
@@ -4155,9 +4208,9 @@
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
-        },
+        }
         "backToOverview": "返回场景解决方案总览"
-      },
+      }
       "sleep": {
         "title": "睡眠场景",
         "description": "经期夜间疼痛舒缓睡眠方案：科学睡姿调整、助眠音频推荐、睡前饮食建议。提供专业的经期睡眠管理技巧，帮助您获得更好的夜间休息，缓解经期不适对睡眠质量的影响。基于循证医学的专业指导，确保睡眠质量。",
@@ -4169,9 +4222,9 @@
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
-        },
+        }
         "backToOverview": "返回场景解决方案总览"
-      },
+      }
       "social": {
         "title": "社交场景",
         "description": "社交场合经期疼痛优雅应对策略：约会应急处理、聚会饮食选择、疼痛伪装技巧。提供适合各种社交活动的经期管理方案，让您在社交场合保持优雅形象的同时有效缓解经期不适。基于循证医学的专业指导，确保社交自信。",
@@ -4183,23 +4236,9 @@
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
-        },
+        }
         "backToOverview": "返回场景解决方案总览"
-      },
-      "lifeStages": {
-        "title": "特殊生理阶段",
-        "description": "女性不同生理阶段经期管理专业指导：青春期经期教育、育龄期健康管理、围绝经期调理方案。提供针对各年龄段特点的个性化经期健康管理策略，帮助女性科学应对不同生命阶段的生理变化。基于循证医学的专业指导，确保各阶段健康。",
-        "features": [
-          "青春期专项",
-          "备孕期专项",
-          "围绝经期专项"
-        ],
-        "disclaimer": {
-          "title": "免责声明",
-          "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
-        },
-        "backToOverview": "返回场景解决方案总览"
-      },
+      }
       "life_stages": {
         "title": "特殊生理阶段",
         "description": "女性不同生理阶段经期管理专业指导：青春期经期教育、育龄期健康管理、围绝经期调理方案。提供针对各年龄段特点的个性化经期健康管理策略，帮助女性科学应对不同生命阶段的生理变化。基于循证医学的专业指导，确保各阶段健康。",
@@ -4211,10 +4250,10 @@
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
-        },
+        }
         "backToOverview": "返回场景解决方案总览"
       }
-    }
+    },
   },
   "header": {
     "home": "首页",
@@ -4239,6 +4278,198 @@
     "naturalTherapies": "平时调理",
     "medicalDisclaimerFull": "医疗免责声明：本网站内容仅供信息和教育目的，不能替代专业医疗建议、诊断或治疗。我们不是医疗专业人员。如有任何医疗问题，请咨询您的医生或其他合格的医疗服务提供者。紧急情况下，请立即寻求医疗救助。使用本网站不构成医患关系。"
   },
+  "termsOfService": {
+    "title": "服务条款",
+    "lastUpdated": "最后更新：2024年4月1日",
+    "intro": "欢迎使用periodhub.health。通过访问和使用我们的网站，您同意遵守以下服务条款。请仔细阅读这些条款，如果您不同意任何条款，请不要使用我们的服务。",
+    "importantNotice": "重要提示",
+    "importantNoticeText": "在使用periodhub.health网站服务之前，请您仔细阅读并充分理解本服务条款的所有内容。一旦您使用本网站任何服务，即表示您已阅读、理解并同意接受本条款的所有约束。如果您不同意本条款的任何内容，请立即停止使用本网站。",
+    "tableOfContents": "条款目录",
+    "sections": {
+      "serviceDescription": {
+        "title": "1. 服务描述",
+        "content": "periodhub.health是一个提供月经健康信息和教育资源的平台。我们的服务包括：",
+        "items": {
+          "educationalContent": "教育内容：关于月经健康、疼痛管理和女性健康的文章和指南",
+          "interactiveTools": "交互工具：症状评估工具、疼痛追踪器和个性化建议系统",
+          "resourceLibrary": "资源库：传统疗法、自然缓解方法和生活方式建议",
+          "communitySupport": "社区支持：安全的信息分享和支持环境"
+        }
+        "medicalNotice": "重要医疗声明：我们的服务仅供教育和信息目的，不构成医疗建议、诊断或治疗。我们不是医疗保健专业人员，本网站信息不能替代专业医疗建议。使用本网站不会在您与periodhub.health之间建立医患关系。如遇紧急情况，请立即寻求医疗救助。",
+        "mvpNotice": "MVP阶段说明：periodhub.health目前处于最小可行产品(MVP)阶段，以有限资源运营。内容可能不如大型医疗机构那样全面或频繁更新。"
+      }
+      "userEligibility": {
+        "title": "2. 用户资格与账户责任",
+        "ageRequirementTitle": "2.1 使用资格",
+        "accountAccuracyTitle": "2.2 账户信息准确性",
+        "accountSecurityTitle": "2.3 账户安全责任",
+      "serviceContent": {
+        "title": "3. 服务内容与使用规范",
+        "availabilityTitle": "3.1 服务可获得性",
+        "contentLicenseTitle": "3.2 内容使用许可",
+        "assessmentToolsTitle": "3.3 评估工具使用",
+        "personalizedAdviceTitle": "3.4 个性化建议的性质",
+      "userConduct": {
+        "title": "4. 用户行为准则",
+        "prohibitedBehaviorsTitle": "4.1 禁止行为",
+        "prohibitedList": [
+          "违反任何适用的法律法规或本服务条款",
+          "传播虚假、误导性或有害的健康信息",
+          "冒充他人或虚假陈述您的身份或关联",
+          "骚扰、恐吓、威胁或伤害其他用户",
+          "发布、传输或分享不当、冒犯性或非法内容",
+          "尝试破坏网站安全或干扰网站正常运行",
+          "使用自动化工具（如机器人、蜘蛛）访问网站",
+          "为商业目的收集其他用户的信息",
+          "传播病毒、恶意软件或其他有害代码"
+        ],
+        "contentAccuracyTitle": "4.2 内容准确性责任",
+        "respectOthersTitle": "4.3 尊重他人权益",
+      "privacyProtection": {
+        "title": "5. 数据使用与隐私保护",
+        "privacyPolicyRefTitle": "5.1 隐私政策引用",
+        "dataCollectionTitle": "5.2 数据收集概述",
+        "dataTypes": {
+          "basicInfo": "基本信息：年龄、地理位置（如果您选择提供）",
+          "healthInfo": "健康相关信息：症状描述、疼痛评分、月经周期信息",
+          "usageData": "使用数据：网站访问记录、功能使用情况、偏好设置",
+          "deviceInfo": "设备信息：IP地址、浏览器类型、操作系统等技术信息"
+        }
+        "dataUsageTitle": "5.3 数据使用目的",
+        "usagePurposes": [
+          "提供个性化的健康建议和服务",
+          "改善和优化网站功能和用户体验",
+          "进行匿名化的统计分析和研究",
+          "维护网站安全和防止滥用",
+          "向您发送相关的健康信息和更新（如果您选择接收）"
+        ],
+        "dataSecurityTitle": "5.4 数据安全保护",
+        "thirdPartySharingTitle": "5.5 第三方数据共享",
+        "thirdPartySharing": "我们不会向第三方出售、交易或转让您的个人信息。我们可能与可信的第三方服务提供商共享信息，但仅限于为您提供服务所必需的范围，且这些第三方也必须遵守严格的隐私保护要求。"
+      }
+      "medicalDisclaimer": {
+        "title": "6. 健康信息免责声明",
+        "importantMedicalDisclaimer": "重要医学免责声明",
+        "disclaimerText": "本网站提供的所有健康信息、建议、评估结果和内容仅供教育和信息目的，不能替代、也不应被视为专业的医疗建议、诊断或治疗。",
+        "nonMedicalService": "periodhub.health不是医疗服务提供者，我们不提供医疗诊断、治疗方案或处方药物。本网站的所有内容，包括文章、评估工具、建议和其他信息，都是基于一般医学知识和公开可用的研究资料编制的教育性内容。",
+        "personalResponsibility": "您对自己的健康决策承担完全责任。在做出任何健康相关决策、改变生活方式、开始新的治疗方法或停止现有治疗之前，您必须咨询合格的医疗专业人员，包括但不限于：",
+        "medicalProfessionals": [
+          "您的主治医生或家庭医生",
+          "妇产科医生或妇科专家",
+          "疼痛管理专家",
+          "其他相关的医疗专业人员"
+        ],
+        "emergencyHandling": "本网站不能替代紧急医疗服务。如果您遇到医疗紧急情况或严重症状，请立即联系当地急救服务或前往最近的急诊室。严重症状可能包括但不限于：",
+        "emergencySymptoms": [
+          "剧烈而突然的腹痛",
+          "伴有高热的严重疼痛",
+          "大量异常出血",
+          "晕厥或意识不清",
+          "呼吸困难或胸痛",
+          "任何您认为需要立即医疗关注的症状"
+        ],
+        "informationAccuracy": "虽然我们努力确保网站内容的准确性和时效性，但医学知识不断发展变化，我们不能保证所有信息在任何时候都是完全准确、完整或最新的。我们建议您验证信息并咨询医疗专业人员以获得最适合您情况的建议。",
+        "resultVariability": "每个人的身体状况、症状和对治疗的反应都是独特的。本网站提到的任何治疗方法、缓解技巧或管理策略对您的效果可能与他人不同。个人结果可能存在显著差异，我们不能保证任何特定的结果或效果。",
+        "medicationWarning": "如果网站内容提及任何药物、补充剂或治疗方法，这些信息仅供教育目的，不构成处方或医疗建议。在使用任何药物或开始任何新的治疗方法之前，请务必咨询医疗专业人员。药物可能有副作用、禁忌症或与其他药物发生相互作用。"
+      }
+      "intellectualProperty": {
+        "title": "7. 知识产权声明",
+        "contentOwnership": "本网站的所有内容，包括但不限于文本、图像、图形、视频、音频、软件、代码、设计、布局、商标、标识和其他材料（统称为\"内容\"），均受版权、商标和其他知识产权法律保护。除非另有明确说明，所有内容均为periodhub.health或其许可方所有。",
+        "usageRestrictions": "未经我们明确书面许可，您不得：",
+        "restrictionsList": [
+          "复制、修改、分发、传播或公开展示网站内容",
+          "将网站内容用于商业目的",
+          "创建基于我们内容的衍生作品",
+          "移除或修改任何版权标记或其他权利声明",
+          "使用任何自动化工具提取或\"抓取\"网站内容",
+          "将我们的内容整合到其他网站或应用中"
+        ],
+        "fairUse": "您可以：",
+        "fairUseList": [
+          "为个人、非商业目的浏览和使用网站内容",
+          "打印单份内容副本供个人参考",
+          "在社交媒体上分享指向我们网站的链接",
+          "引用简短摘录用于评论或评价，但必须注明出处"
+        ],
+        "thirdPartyContent": "网站可能包含或引用第三方的内容、链接或资源。这些第三方内容的知识产权属于其各自所有者。我们不声明对第三方内容拥有权利，也不对其准确性、完整性或适用性承担责任。",
+        "infringementNotice": "如果您认为我们的网站内容侵犯了您的知识产权，请通过邮件向我们提供详细的侵权通知，包括：涉嫌侵权的内容描述、您的权利证明、联系信息以及您确认信息真实性的声明。"
+      }
+      "serviceChanges": {
+        "title": "8. 服务变更与终止",
+        "modificationRights": "我们保留随时修改、暂停或终止本网站部分或全部服务的权利，无需事先通知。这些变更可能包括但不限于：",
+        "changesList": [
+          "添加、修改或删除网站功能",
+          "更改用户界面或网站设计",
+          "调整服务的可用性或访问条件",
+          "更新或删除内容",
+          "实施新的安全措施或使用限制"
+        ],
+        "termsChanges": "我们可能会不时更新本服务条款以反映服务变化、法律要求或业务需求。重大变更将通过在网站上发布通知或其他适当方式告知用户。继续使用服务即表示您接受更新后的条款。建议您定期查看最新版本的服务条款。",
+        "accountTermination": "我们保留在以下情况下暂停或终止您账户的权利：",
+        "terminationReasons": [
+          "您违反本服务条款或相关政策",
+          "您的行为可能损害其他用户或网站安全",
+          "您长期不活跃或账户被废弃",
+          "应法律要求或政府监管部门要求",
+          "其他我们认为有必要的情况"
+        ],
+        "userTerminationRights": "您可以随时停止使用我们的服务。如果您创建了账户，您可以通过联系我们要求删除账户。账户删除后，您的个人信息将按照我们的隐私政策进行处理。",
+        "terminationConsequences": "当您的账户被终止或您停止使用服务时：",
+        "consequencesList": [
+          "您访问和使用服务的权利立即终止",
+          "保存在账户中的数据可能被删除",
+          "本条款中关于责任限制、免责声明和争议解决的条款继续有效",
+          "我们没有义务保留或转发任何账户信息或内容"
+        ]
+      }
+      "liabilityLimitation": {
+        "title": "9. 责任限制与免责",
+        "serviceProvision": "本网站服务按\"现状\"和\"现有\"基础提供。我们不提供任何明示或暗示的保证，包括但不限于：适销性、特定用途适用性、非侵权性、准确性、可靠性或不间断性的保证。",
+        "disclaimerScope": "在法律允许的最大范围内，periodhub.health及其关联方、员工、董事、代理人和承包商不对以下情况承担责任：",
+        "disclaimerList": [
+          "健康相关损害：因使用或不当使用网站信息而导致的任何健康问题、误诊、治疗延误或健康状况恶化",
+          "间接损失：任何间接、附带、特殊、后果性或惩罚性损害",
+          "经济损失：利润损失、业务中断、数据丢失或其他经济损害",
+          "第三方行为：第三方网站、服务或内容造成的任何损害",
+          "技术问题：网站错误、中断、病毒或其他技术问题",
+          "信息错误：网站内容中的错误、遗漏或过时信息"
+        ],
+        "liabilityLimit": "即使在我们被认定承担责任的情况下，我们的总责任不超过您在事件发生前12个月内支付给我们的费用。由于本网站目前免费提供服务，我们的责任限制在适用法律允许的范围内为零。",
+        "forceMajeure": "我们不对因不可抗力事件导致的服务中断或延误承担责任，包括但不限于：自然灾害、政府行为、战争、恐怖主义、流行病、网络攻击、电力中断、电信故障或其他超出我们合理控制范围的事件。",
+        "userLiability": "您同意为因您违反本条款或不当使用服务而给periodhub.health、其关联方或第三方造成的任何损失、损害、费用或责任（包括合理的律师费）承担赔偿责任。"
+      }
+      "disputeResolution": {
+        "title": "10. 争议解决与适用法律",
+        "applicableLaw": "本服务条款受中华人民共和国法律管辖并按其解释，不考虑冲突法原则。如果您从中华人民共和国境外访问服务，您有责任遵守当地法律。",
+        "disputeResolutionProcess": "如果您与periodhub.health之间出现争议，我们鼓励首先通过友好协商解决。协商不成的情况下，争议解决程序如下：",
+        "resolutionSteps": [
+          "非正式解决：您应首先通过邮件联系我们，详细描述争议并提出解决建议。我们将在收到通知后30天内回应。",
+          "调解：如果非正式协商未能解决争议，双方可以选择通过中立的第三方调解机构进行调解。",
+          "仲裁或诉讼：如果调解也未能解决争议，争议应提交有管辖权的人民法院解决。"
+        ],
+        "jurisdiction": "因本服务条款产生的或与之相关的任何争议，双方同意提交periodhub.health主要营业地所在地有管辖权的人民法院专属管辖。",
+        "severability": "如果本服务条款的任何条款被有管辖权的法院认定为无效、非法或不可执行，该条款应被修改为最接近原意图的可执行条款，其余条款继续保持完全效力。",
+        "entireAgreement": "本服务条款连同我们的隐私政策构成您与periodhub.health之间关于使用网站服务的完整协议，取代此前的所有协议、理解或沟通。"
+      }
+    },
+    "contact": {
+      "title": "联系我们",
+      "description": "如果您对本服务条款有任何疑问、意见或需要澄清，请通过以下方式联系我们：",
+      "email": "邮箱：tiyibaofu@outlook.com",
+      "mailingAddress": "邮寄地址：[具体地址将在实际部署时提供]",
+      "onlineFeedback": "在线反馈：通过网站联系表单提交您的问题",
+      "responseTime": "我们将在收到您的咨询后5个工作日内回复。对于法律相关问题，我们可能需要更多时间进行详细处理。"
+    },
+    "finalNotice": {
+      "title": "最后提醒",
+      "content": "本服务条款最后更新于2024年4月1日。我们建议您定期查看本页面以了解任何更新。继续使用我们的服务即表示您接受条款的任何修订。感谢您选择periodhub.health，我们致力于为您提供有价值的健康教育资源。"
+    },
+    "questionsTerms": "有疑问？",
+    "questionsDescriptionTerms": "如果您对我们的服务条款有任何疑问，请随时联系我们。",
+    "contactUsTerms": "联系我们",
+    "importantReminder": "重要提醒",
+    "importantReminderText": "这些服务条款可能会不时更新。继续使用我们的服务即表示您接受任何修改。"
+  },
   "navigationTabs": {
     "articles": "📚 专业文章",
     "pdfDownloads": "📥 PDF下载"
@@ -4253,20 +4484,20 @@
         "role": "IT从业者，25岁",
         "initial": "李",
         "testimonial": "\"通过个性化评估发现我属于前列腺素过度分泌型痛经，按照平台建议调整饮食和运动，3个月后疼痛强度从8分降到3分，工作效率大幅提升！\""
-      },
+      }
       "story2": {
         "name": "张婷婷",
         "role": "大学生，20岁",
         "initial": "张",
         "testimonial": "\"青少年专区的内容太有用了！学会了热敷、瑜伽和呼吸法，现在考试期间来大姨妈也不怕了。还帮助室友一起改善，大家感情更好了。\""
-      },
+      }
       "story3": {
         "name": "王芳",
         "role": "职场妈妈，32岁",
         "initial": "王",
         "testimonial": "\"疼痛日志功能帮我发现了痛经与压力的关联性。配合医生治疗使用平台建议，现在基本告别了每月的痛苦，生活质量改善明显。\""
       }
-    }
+    },
   },
   "toolsCollectionButton": {
     "buttonText": "访问完整工具集页面"
@@ -4281,33 +4512,33 @@
         "label": "女性经历痛经",
         "sublabel": "Experience Period Pain",
         "source": "全球统计数据"
-      },
+      }
       "affectsWork": {
         "label": "影响工作学习",
         "sublabel": "Affects Work/Study",
         "source": "生产力影响"
-      },
+      }
       "seekHelp": {
         "label": "寻求医疗帮助",
         "sublabel": "Seek Medical Help",
         "source": "就医统计"
-      },
+      }
       "usePainkillers": {
         "label": "使用止痛药",
         "sublabel": "Use Painkillers",
         "source": "缓解方式"
-      },
+      }
       "avgDuration": {
         "label": "平均疼痛持续时间",
         "sublabel": "Average Pain Duration",
         "unit": "天 Days",
         "source": "全球统计数据"
-      },
+      }
       "avgPainLevel": {
         "label": "平均疼痛程度",
         "sublabel": "Average Pain Level",
         "source": "全球统计数据"
-      },
+      }
       "primaryAge": {
         "label": "主要影响年龄段",
         "sublabel": "Primary Age Range",
@@ -4340,7 +4571,7 @@
       "timing": "痉挛首次出现时开始使用，持续1-2天",
       "mechanism": "阻断前列腺素合成（COX-1/COX-2抑制）",
       "contraindications": "哮喘、胃溃疡、肾病患者避免使用"
-    }
+    },
   },
   "searchBox": {
     "placeholder": "搜索文章...",
@@ -4350,7 +4581,7 @@
       "summary": "摘要",
       "tag": "标签",
       "content": "内容"
-    }
+    },
   },
   "downloadButton": {
     "viewDocument": "查看文档"
@@ -4378,7 +4609,7 @@
         "record": "记录",
         "history": "历史",
         "prediction": "预测"
-      },
+      }
       "record": {
         "startTitle": "开始记录新周期",
         "startDescription": "记录您的月经周期，获得智能预测和健康建议",
@@ -4391,7 +4622,7 @@
           "light": "少量",
           "medium": "中等",
           "heavy": "大量"
-        },
+        }
         "symptomsTitle": "症状记录",
         "symptoms": {
           "abdominalPain": "腹痛",
@@ -4406,14 +4637,14 @@
           "appetiteChanges": "食欲变化",
           "skinChanges": "皮肤变化",
           "other": "其他"
-        },
+        }
         "endDate": "结束日期",
         "endDateHint": "选择月经结束的日期（可选）",
         "notesTitle": "备注",
         "notesPlaceholder": "记录任何额外信息...",
         "endCycleButton": "结束当前周期",
         "cancelButton": "取消"
-      },
+      }
       "history": {
         "title": "历史记录",
         "noRecords": "暂无记录，开始记录您的第一个周期吧！",
@@ -4422,7 +4653,7 @@
         "symptoms": "症状",
         "notes": "备注",
         "days": "天"
-      },
+      }
       "prediction": {
         "title": "智能预测",
         "noData": "需要至少2个完整周期才能进行预测",
@@ -4473,14 +4704,14 @@
             "moderate": "中度（影响部分活动，但能坚持）",
             "severe": "重度（完全影响日常活动，需要休息）"
           }
-        },
+        }
         "onset": {
           "title": "你的痛经何时开始?",
           "options": {
             "recent": "初潮后不久（1-2年内）",
             "later": "较晚开始（初潮多年后）"
           }
-        },
+        }
         "symptoms": {
           "title": "你有以下任何症状吗？（可多选）",
           "options": {
@@ -4491,12 +4722,12 @@
             "nonMenstrual": "非经期时也有盆腔痛"
           }
         }
-      },
+      }
       "actions": {
         "assess": "评估是否需要就医",
         "reset": "重新评估",
         "moreInfo": "查看更多青少年健康指南"
-      },
+      }
       "results": {
         "title": "评估结果",
         "consultAdvice": "建议您尽快咨询医生或妇科专家，以获得专业的医疗建议和治疗方案。",
@@ -4506,7 +4737,7 @@
         "moderate_late": "中度痛经在初潮较晚后开始，建议咨询医生排除继发性痛经的可能性。",
         "normal": "基于您提供的信息，您的痛经情况属于常见范围，可能是原发性痛经。建议尝试自然缓解方法，如热敷、轻度运动和健康饮食习惯等。如症状加重或出现异常，请及时咨询医生。"
       }
-    }
+    },
   },
   "healthGuidePage": {
     "title": "痛经健康指南 - 专业医学知识与科学管理策略",
@@ -4519,27 +4750,27 @@
         "title": "理解痛经",
         "description": "深入了解痛经的原因、类型和生理机制",
         "cta": "了解疼痛原因"
-      },
+      }
       "reliefMethods": {
         "title": "A-Z缓解方法",
         "description": "从A到Z的全面缓解方法，包括即时和长期策略",
         "cta": "探索缓解方法"
-      },
+      }
       "lifestyleManagement": {
         "title": "生活方式管理",
         "description": "通过饮食、运动和日常习惯改善经期健康",
         "cta": "发现生活方式建议"
-      },
+      }
       "whenSeekHelp": {
         "title": "何时寻求帮助",
         "description": "识别需要医疗关注的症状和情况",
         "cta": "了解何时就医"
-      },
+      }
       "mythsFacts": {
         "title": "误区与事实",
         "description": "澄清关于经期健康的常见误解",
         "cta": "破除常见误解"
-      },
+      }
       "globalPerspective": {
         "title": "全球视角",
         "description": "探索世界各地的传统疗法和文化观点",
@@ -4560,15 +4791,15 @@
       "painAssessment": {
         "title": "痛经症状评估",
         "description": "评估痛经严重程度"
-      },
+      }
       "painTracker": {
         "title": "痛经计算器 | 智能疼痛分析",
         "description": "痛经严重度计算器：智能分析疼痛等级，计算疼痛模式和周期趋势，自动评估疼痛强度，提供科学的个性化缓解方案。AI驱动的疼痛计算系统，帮助您精准管理经期健康。"
-      },
+      }
       "symptomAssessment": {
         "title": "症状评估",
         "description": "专业经期症状全面评估工具：科学分析疼痛程度、症状类型、持续时间等关键指标，提供个性化健康建议和治疗方案。基于循证医学的评估体系，帮助您准确了解经期健康状况。"
-      },
+      }
       "lifestyleGuide": {
         "title": "生活方式指南",
         "description": "个性化健康建议"
@@ -4583,16 +4814,16 @@
         "uterus": {
           "title": "子宫 (Uterus)",
           "description": "痛经的主要发生部位，由肌层和内膜层组成。肌层收缩是疼痛的直接原因。"
-        },
+        }
         "endometrium": {
           "title": "子宫内膜 (Endometrium)",
           "description": "月经周期中脱落的组织，是前列腺素的主要产生部位。"
-        },
+        }
         "ovaries": {
           "title": "卵巢 (Ovaries)",
           "description": "激素分泌的控制中心，调节整个月经周期和疼痛的发生。"
         }
-      },
+      }
       "prostaglandinMechanism": {
         "title": "🧬 前列腺素机制",
         "molecularEffects": {
@@ -4600,36 +4831,36 @@
           "enzymeActivation": {
             "title": "酶活化：",
             "description": "子宫内膜细胞中的磷脂酶A2被激活，释放花生四烯酸"
-          },
+          }
           "synthesisPathway": {
             "title": "合成路径：",
             "description": "环氧合酶(COX-1/COX-2)催化花生四烯酸合成前列腺素"
-          },
+          }
           "mainProducts": {
             "title": "主要产物：",
             "description": "PGF2α和PGE2是导致子宫收缩和疼痛的关键分子"
           }
-        },
+        }
         "physiologicalEffects": {
           "title": "⚡ 生理效应：",
           "uterineContraction": {
             "title": "子宫肌收缩：",
             "description": "PGF2α刺激子宫平滑肌强烈收缩，收缩强度可超过分娩时的收缩"
-          },
+          }
           "vasoconstriction": {
             "title": "血管收缩：",
             "description": "导致子宫血流减少，造成局部缺血和代谢产物堆积"
-          },
+          }
           "neuralSensitization": {
             "title": "神经敏化：",
             "description": "激活疼痛神经纤维，降低疼痛阈值"
-          },
+          }
           "inflammatoryResponse": {
             "title": "炎症反应：",
             "description": "促进炎症介质释放，加重疼痛和不适"
           }
         }
-      },
+      }
       "hormonalControl": {
         "title": "⚖️ 激素调节机制",
         "estrogen": {
@@ -4637,13 +4868,13 @@
           "promotesThickening": "促进子宫内膜增厚",
           "increasesSensitivity": "增加子宫肌对前列腺素的敏感性",
           "peaksBeforeOvulation": "排卵前达到峰值"
-        },
+        }
         "progesterone": {
           "title": "孕激素 (Progesterone)",
           "inhibitsContraction": "抑制子宫肌收缩",
           "stabilizesEndometrium": "稳定子宫内膜",
           "declinesBeforeMenstruation": "月经前急剧下降"
-        },
+        }
         "feedbackRegulation": {
           "title": "反馈调节",
           "hypothalamicPituitaryOvarian": "下丘脑-垂体-卵巢轴",
@@ -4652,7 +4883,7 @@
           "negativeFeedbackMechanism": "负反馈调节机制",
           "balancePoint": "平衡点：激素平衡失调是痛经的根本原因"
         }
-      },
+      }
       "neuralConduction": {
         "title": "🧠 神经传导机制",
         "painPathway": {
@@ -4660,36 +4891,36 @@
           "receptors": {
             "title": "感受器：",
             "description": "子宫和盆腔的痛觉感受器"
-          },
+          }
           "afferentNerves": {
             "title": "传入神经：",
             "description": "经骶神经和腰交感神经传导"
-          },
+          }
           "spinalProcessing": {
             "title": "脊髓处理：",
             "description": "在脊髓后角进行初步整合"
-          },
+          }
           "centralPerception": {
             "title": "中枢感知：",
             "description": "上传至大脑皮层产生疼痛感觉"
           }
-        },
+        }
         "painControl": {
           "title": "疼痛调控机制",
           "gateControlTheory": {
             "title": "闸门控制理论",
             "description": "大纤维激活可以抑制疼痛信号，这是按摩和热敷有效的生理基础"
-          },
+          }
           "endogenousAnalgesia": {
             "title": "内源性镇痛",
             "description": "内啡肽、脑啡肽等内源性阿片肽的释放提供自然镇痛"
-          },
+          }
           "descendingControl": {
             "title": "下行调控",
             "description": "脑干核团对脊髓疼痛传导的调控作用"
           }
         }
-      },
+      }
       "treatmentMechanisms": {
         "title": "💊 治疗方法的科学机制",
         "nsaids": {
@@ -4704,7 +4935,7 @@
           "bestTimingDescription": "疼痛开始前使用",
           "efficacy": "疗效：",
           "efficacyDescription": "可减少疼痛70-80%"
-        },
+        }
         "heatTherapy": {
           "title": "热疗",
           "mechanism": "机制：",
@@ -4717,7 +4948,7 @@
           "durationDescription": "15-20分钟/次",
           "synergy": "增效：",
           "synergyDescription": "与NSAIDs协同作用"
-        },
+        }
         "hormonalTherapy": {
           "title": "激素疗法",
           "mechanism": "机制：",
@@ -4730,7 +4961,7 @@
           "applicableDescription": "重度原发性痛经",
           "efficacy": "疗效：",
           "efficacyDescription": "90%患者症状改善"
-        },
+        }
         "exerciseTherapy": {
           "title": "运动疗法",
           "mechanism": "机制：",
@@ -4744,29 +4975,29 @@
           "longTerm": "长效：",
           "longTermDescription": "需要持续6-8周见效"
         }
-      },
+      }
       "researchProgress": {
         "title": "🔬 最新研究进展",
         "molecularTargets": {
           "title": "🧬 分子靶点研究",
           "description": "针对COX-2、前列腺素受体等关键分子的新型药物研发，提高治疗效果，减少副作用"
-        },
+        }
         "aiApplications": {
           "title": "🤖 人工智能应用",
           "description": "利用机器学习算法分析痛经模式，提供个性化治疗方案和预测模型"
         }
-      },
+      }
       "geneTherapy": {
         "title": "🧬 基因治疗前景",
         "genePolymorphism": {
           "title": "基因多态性研究",
           "description": "研究发现COX-2基因的多态性与痛经严重程度相关，未来可能实现基于基因型的个性化治疗"
-        },
+        }
         "epigeneticMechanisms": {
           "title": "表观遗传学机制",
           "description": "DNA甲基化和组蛋白修饰在痛经发生中的作用正在被深入研究，为新的治疗靶点提供线索"
         }
-      },
+      }
       "clinicalEvidence": {
         "title": "📊 临床循证依据",
         "importantStudies": {
@@ -4779,7 +5010,7 @@
             "sampleSizeDescription": "涵盖73项随机对照试验，总计5,762名参与者",
             "conclusion": "结论：",
             "conclusionDescription": "NSAIDs比安慰剂更有效缓解痛经，布洛芬600-1200mg/日效果最佳"
-          },
+          }
           "bmj2019": {
             "title": "BMJ发表研究 (2019)",
             "studyContent": "研究内容：",
@@ -4788,7 +5019,7 @@
             "methodDescription": "多中心随机对照试验，比较热疗与布洛芬的效果",
             "conclusion": "结论：",
             "conclusionDescription": "连续低温热疗(39°C, 12小时)与布洛芬400mg效果相当"
-          },
+          }
           "jcm2021": {
             "title": "Journal of Clinical Medicine (2021)",
             "studyContent": "研究内容：",
@@ -4798,7 +5029,7 @@
             "conclusion": "结论：",
             "conclusionDescription": "规律中等强度运动显著减少痛经发作频率和严重程度"
           }
-        },
+        }
         "evidenceLevel": {
           "title": "循证医学等级",
           "description": "以上研究均达到Ia级证据水平（系统综述和荟萃分析），为临床实践提供了强有力的科学依据"
@@ -4815,7 +5046,7 @@
       "startAssessment": "开始评估",
       "medicalDisclaimer": "医疗免责声明：",
       "medicalDisclaimerText": "本指南仅供参考，不能替代专业医疗建议。如有严重症状，请及时就医。"
-    }
+    },
   },
   "bottomRecommendations": {
     "title": "相关工具",
@@ -4828,7 +5059,7 @@
       "title": "症状评估工具",
       "description": "科学评估经期症状，获取个性化建议",
       "actionText": "个性化症状分析"
-    }
+    },
   },
   "teenHealth": {
     "meta": {
@@ -4870,7 +5101,7 @@
           "宿舍疼痛管理",
           "体育课应对策略"
         ]
-      },
+      }
       "developmentPain": {
         "title": "发育期疼痛管理",
         "description": "12-16岁专属疼痛管理建议，了解青春期痛经特点，掌握科学缓解方法。",
@@ -4879,7 +5110,7 @@
           "科学缓解方法",
           "何时需要就医"
         ]
-      },
+      }
       "emotionalSupport": {
         "title": "情绪支持与心理健康",
         "description": "经期焦虑、情绪低落如何应对？放松技巧、同龄人经验分享，陪你度过情绪\"过山车\"。",
@@ -4888,7 +5119,7 @@
           "焦虑缓解方法",
           "同龄人经验分享"
         ]
-      },
+      }
       "communicationGuide": {
         "title": "沟通指导",
         "description": "如何与家长、老师、医生有效沟通？提供对话模板和沟通技巧，让你勇敢表达需求。",
@@ -4906,12 +5137,12 @@
         "title": "推荐书单",
         "description": "精选适合青少年的经期健康书籍",
         "action": "查看书单"
-      },
+      }
       "nutritionRecipes": {
         "title": "营养食谱",
         "description": "经期友好的营养搭配和食谱",
         "action": "查看食谱"
-      },
+      }
       "communicationTemplates": {
         "title": "沟通模板",
         "description": "与家长、老师沟通的实用模板",
@@ -4922,7 +5153,7 @@
       "title": "开始你的健康之旅",
       "description": "让我们一起学习，自信地面对经期，不再让疼痛和烦恼影响你的生活！",
       "button": "开始探索"
-    }
+    },
   },
   "toolPage": {
     "backToTools": "返回工具列表",
@@ -4944,14 +5175,14 @@
       "2to3minDaily": "每日2-3分钟",
       "5to8min": "5-8分钟",
       "3to5min": "3-5分钟"
-    }
+    },
   },
   "downloads": {
     "common": {
       "download": "查看文档",
       "document": "文档",
       "pages": "页"
-    }
+    },
   },
   "painTracker": {
     "title": "疼痛追踪器",
@@ -5112,16 +5343,16 @@
         "feature4": "即时结果反馈",
         "startButton": "开始评估",
         "disclaimer": "此评估仅供参考，不能替代专业医疗诊断。"
-      },
+      }
       "progress": {
         "questionOf": "第 {current} 题，共 {total} 题"
-      },
+      }
       "navigation": {
         "previous": "上一题",
         "next": "下一题",
         "skip": "跳过",
         "finish": "完成评估"
-      },
+      }
       "result": {
         "title": "评估结果",
         "yourScore": "您的得分",
@@ -5138,18 +5369,18 @@
           "tryRecommendations": "尝试推荐的缓解方法",
           "consultDoctor": "如果症状持续或恶化，请咨询医生"
         }
-      },
+      }
       "severity": {
         "mild": "轻度",
         "moderate": "中度",
         "severe": "重度",
         "emergency": "紧急"
-      },
+      }
       "priority": {
         "high": "高优先级",
         "medium": "中优先级",
         "low": "低优先级"
-      },
+      }
       "messages": {
         "assessmentComplete": "评估完成",
         "assessmentCompleteDesc": "您的症状评估已完成，请查看结果和建议。",
@@ -5157,7 +5388,7 @@
         "assessmentFailedDesc": "评估过程中出现错误，请重试。",
         "resultsSaved": "结果已保存",
         "resultsSavedDesc": "您的评估结果已保存到本地存储。"
-      },
+      }
       "resultMessages": {
         "emergency": "您的症状较为严重，建议尽快咨询医疗专业人士。",
         "emergencySummary": "评估显示您可能需要专业医疗关注。",
@@ -5167,7 +5398,7 @@
         "moderateSummary": "您的症状是可以管理的，建议采用多种缓解策略。",
         "mild": "您的症状相对较轻，通过简单的自我护理就能很好地管理。",
         "mildSummary": "您的症状较轻，可以通过生活方式调整来改善。"
-      },
+      }
       "recommendations": {
         "emergencyMedical": {
           "title": "建议立即就医",
@@ -5178,7 +5409,7 @@
             "1": "如果疼痛剧烈，考虑急诊就医",
             "2": "记录详细的症状日志"
           }
-        },
+        }
         "painManagement": {
           "title": "疼痛管理策略",
           "description": "多种方法可以帮助缓解经期疼痛",
@@ -5188,7 +5419,7 @@
             "1": "尝试轻度运动如散步",
             "2": "考虑非处方止痛药（按说明使用）"
           }
-        },
+        }
         "lifestyleChanges": {
           "title": "生活方式调整",
           "description": "长期的生活方式改变可以显著改善症状",
@@ -5199,7 +5430,7 @@
             "2": "学习压力管理技巧",
             "3": "保持均衡饮食"
           }
-        },
+        }
         "selfcarePractices": {
           "title": "自我护理实践",
           "description": "日常的自我护理可以帮助您更好地管理症状",
@@ -5212,7 +5443,7 @@
           }
         }
       }
-    }
+    },
   },
   "medicationGuide": {
     "title": "痛经安全用药全指南：布洛芬/萘普生等NSAIDs使用规范",
@@ -5241,33 +5472,33 @@
         "feature": "特性",
         "ibuprofen": "布洛芬",
         "naproxen": "萘普生"
-      },
+      }
       "rows": {
         "onset": {
           "feature": "起效时间",
           "ibuprofen": "30-60分钟",
           "naproxen": "1-2小时"
-        },
+        }
         "duration": {
           "feature": "持续时间",
           "ibuprofen": "4-6小时",
           "naproxen": "8-12小时"
-        },
+        }
         "dosage": {
           "feature": "常用剂量",
           "ibuprofen": "200-400mg",
           "naproxen": "220mg"
-        },
+        }
         "frequency": {
           "feature": "服用频率",
           "ibuprofen": "每6-8小时",
           "naproxen": "每8-12小时"
-        },
+        }
         "bestFor": {
           "feature": "最适合",
           "ibuprofen": "快速缓解急性疼痛",
           "naproxen": "持续缓解长期疼痛"
-        },
+        }
         "sideEffects": {
           "feature": "副作用风险",
           "ibuprofen": "中等",
@@ -5284,7 +5515,7 @@
           "1": "疼痛程度较轻到中等",
           "2": "希望更灵活的服药时间"
         }
-      },
+      }
       "naproxen": {
         "title": "选择萘普生，如果您：",
         "points": {
@@ -5313,15 +5544,15 @@
       "timing": {
         "title": "最佳服用时机",
         "description": "在疼痛刚开始时服用效果最佳，不要等到疼痛加剧"
-      },
+      }
       "food": {
         "title": "与食物同服",
         "description": "建议与食物同服以减少胃部刺激"
-      },
+      }
       "duration": {
         "title": "使用期限",
         "description": "连续使用不超过3-5天，如症状持续请咨询医生"
-      },
+      }
       "alternatives": {
         "title": "替代方案",
         "description": "可结合热敷、按摩等非药物方法"
@@ -5342,13 +5573,13 @@
         "title": "NSAIDs痛经治疗专业指南",
         "description": "包含互动式用药计算器，帮您精准计算安全剂量",
         "feature": "包含互动式用药计算器"
-      },
+      }
       "symptomAssessment": {
         "title": "症状评估工具",
         "description": "科学评估经期症状，获取个性化建议",
         "feature": "个性化症状分析"
       }
-    }
+    },
   },
   "home": {
     "hero": {
@@ -5365,20 +5596,20 @@
       "tracking": {
         "title": "智能追踪系统",
         "description": "精准预测经期周期，科学记录症状变化，提供个性化健康洞察"
-      },
+      }
       "assessment": {
         "title": "专业健康评估",
         "description": "基于医学研究的症状评估工具，为您量身定制健康管理方案"
-      },
+      }
       "resources": {
         "title": "丰富专业资源",
         "description": "42篇专业文章、24个PDF资源、PDF指南，全面支持您的健康需求"
-      },
+      }
       "immediateRelief": {
         "title": "即时缓解方案",
         "description": "快速有效的疼痛缓解方法和紧急技巧",
         "cta": "立即缓解 →"
-      },
+      }
       "learnMore": "了解更多"
     },
     "treatmentGuide": {
@@ -5388,12 +5619,12 @@
         "title": "用药指南",
         "description": "安全有效的药物使用建议",
         "cta": "查看指南 →"
-      },
+      }
       "heatTherapy": {
         "title": "热疗方法",
         "description": "温热疗法的科学应用",
         "cta": "学习热疗 →"
-      },
+      }
       "diagnosis": {
         "title": "症状诊断",
         "description": "专业的症状识别指导",
@@ -5422,7 +5653,7 @@
         "title": "痛经症状评估",
         "description": "科学评估痛经程度，获得个性化治疗建议和用药指导",
         "cta": "开始评估 →"
-      },
+      }
       "assessmentDesc": "专业工具帮助了解您的痛经类型",
       "resources": "PDF资源",
       "resourcesDesc": "可下载的专业健康指导和工具",
@@ -5430,11 +5661,11 @@
       "solutionsDesc": "针对不同生活环境的应对方案",
       "downloads": {
         "cta": "下载资源 →"
-      },
+      }
       "scenarios": {
         "cta": "查看方案 →"
       }
-    }
+    },
   },
   "organization": {
     "description": "专业的女性月经健康管理平台"
@@ -5469,7 +5700,7 @@
     "q7": {
       "question": "痛经时可以同时服用布洛芬和萘普生吗？",
       "answer": "不建议同时服用布洛芬和萘普生，因为它们都是NSAIDs类药物，同时服用会增加副作用风险。建议选择其中一种，如果效果不佳可咨询医生调整用药方案。"
-    }
+    },
   },
   "homeClean": {
     "meta": {
@@ -5488,17 +5719,17 @@
         "title": "症状评估工具",
         "description": "回答几个问题，获得个性化的缓解建议",
         "cta": "开始评估"
-      },
+      }
       "tracking": {
         "icon": "📈",
         "title": "疼痛追踪",
         "description": "记录疼痛模式并获取趋势洞察",
         "cta": "开始追踪"
-      },
+      }
       "constitution": {
         "icon": "🧩",
         "title": "中医体质测试",
-        "description": "8个问题了解体质类型并获得调理建议",
+        "description": "11个问题了解体质类型并获得调理建议",
         "cta": "开始测试"
       }
     },
@@ -5508,15 +5739,15 @@
         "activeUsers": {
           "number": "50K+",
           "label": "活跃用户"
-        },
+        }
         "articles": {
           "number": "42",
           "label": "专业文章"
-        },
+        }
         "resources": {
           "number": "24",
           "label": "PDF资源"
-        },
+        }
         "satisfaction": {
           "number": "98%",
           "label": "用户满意度"
@@ -5528,7 +5759,7 @@
       "constitutionTest": "体质评估",
       "symptomAssessment": "症状评估",
       "painTracker": "疼痛追踪"
-    }
+    },
   },
   "homePageContent": {
     "searchPlaceholder": "🔍 快速搜索痛经解决方案...",
@@ -5575,7 +5806,7 @@
         "medical": "医疗问题",
         "technical": "技术支持",
         "feedback": "意见反馈"
-      },
+      }
       "message": "消息内容",
       "messagePlaceholder": "告诉我们如何为您提供帮助...",
       "submit": "发送消息",
@@ -5587,13 +5818,13 @@
         "title": "邮件支持",
         "description": "获得详细的问题解答",
         "action": "发送邮件"
-      },
+      }
       "support": {
         "title": "24/7支持",
         "description": "需要时立即获得帮助",
         "value": "随时可用",
         "action": "获取帮助"
-      },
+      }
       "social": {
         "title": "社交媒体",
         "description": "关注我们获取健康贴士和更新",
@@ -5609,7 +5840,7 @@
       "generalTime": "24小时内",
       "support": "支持请求",
       "supportTime": "12小时内"
-    }
+    },
   },
   "breathingExercise": {
     "title": "4-7-8呼吸练习",
@@ -5623,7 +5854,7 @@
           "感到焦虑紧张时",
           "睡前放松时"
         ]
-      },
+      }
       "precautions": {
         "title": "注意事项：",
         "items": [
@@ -5673,14 +5904,14 @@
             "deductible": "自付额",
             "totalCost": "总费用",
             "coinsuranceRate": "共保比例"
-          },
+          }
           "descriptions": {
             "outOfPocket": "您最终需要支付的总金额",
             "deductible": "保险开始承担费用前您需要支付的固定金额",
             "totalCost": "医疗服务的总费用",
             "coinsuranceRate": "超过自付额后您需要承担的费用比例"
           }
-        },
+        }
         "calculator": {
           "title": "自付费用计算器",
           "subtitle": "输入您的保险信息，计算预期的自付费用",
@@ -5691,7 +5922,7 @@
             "totalCostPlaceholder": "输入医疗服务总费用",
             "coinsuranceLabel": "共同保险比例 (%)",
             "coinsurancePlaceholder": "输入共同保险比例"
-          },
+          }
           "result": {
             "title": "您的预期自付费用",
             "amount": "${amount}",
@@ -5699,7 +5930,7 @@
             "deductiblePortion": "自付额部分：${amount}",
             "coinsurancePortion": "共同保险部分：${amount}",
             "totalAmount": "总自付费用：${amount}"
-          },
+          }
           "validation": {
             "deductibleRequired": "请输入自付额",
             "totalCostRequired": "请输入总费用",
@@ -5707,7 +5938,7 @@
             "positiveNumberRequired": "请输入正数",
             "validPercentageRequired": "请输入0-100之间的百分比"
           }
-        },
+        }
         "steps": {
           "title": "费用计算步骤",
           "subtitle": "了解您的自付费用是如何计算的",
@@ -5716,21 +5947,21 @@
             "title": "确定自付额",
             "description": "您需要先支付的固定金额",
             "example": "例如：$1,000"
-          },
+          }
           "step2": {
             "number": "2",
             "title": "计算超出部分",
             "description": "总费用减去自付额",
             "formula": "超出部分 = 总费用 - 自付额",
             "example": "$5,000 - $1,000 = $4,000"
-          },
+          }
           "step3": {
             "number": "3",
             "title": "应用共同保险比例",
             "description": "超出部分乘以您的承担比例",
             "formula": "共同保险费用 = 超出部分 × 共保比例",
             "example": "$4,000 × 20% = $800"
-          },
+          }
           "finalResult": {
             "title": "计算最终结果",
             "description": "自付额 + 共同保险部分",
@@ -5740,34 +5971,7 @@
           }
         }
       }
-    }
-  },
-  "embeddedPainAssessment": {
-    "title": "疼痛评估工具",
-    "description": "快速评估您的疼痛程度",
-    "loading": "加载中...",
-    "error": "加载失败，请刷新页面重试",
-    "subtitle": "1分钟了解您的痛经程度，获得初步建议",
-    "question": "您的痛经强度如何？",
-    "selectIntensityFirst": "请先选择痛经强度",
-    "options": {
-      "mild": "轻微（可以忍受，不影响日常活动）",
-      "moderate": "中度（影响部分活动，但能坚持）",
-      "severe": "重度（完全影响日常活动，需要休息）"
     },
-    "buttons": {
-      "getAdvice": "获取建议",
-      "detailedAssessment": "详细评估",
-      "testAgain": "重新测试",
-      "fullAssessment": "完整评估"
-    },
-    "resultTitle": "评估结果",
-    "results": {
-      "mild": "您的痛经程度较轻，可以尝试热敷、轻度运动等自然缓解方法。",
-      "moderate": "您的痛经程度中等，建议结合多种缓解方法，如有需要可考虑非处方止痛药。",
-      "severe": "您的痛经程度较重，建议咨询医生获得专业评估和治疗建议。"
-    },
-    "disclaimer": "⚠️ 此工具仅供参考，不能替代专业医疗建议"
   },
   "cycleTracker": {
     "title": "月经周期追踪器",
@@ -5803,43 +6007,43 @@
       "scene1": {
         "title": "场景1：开场 - 表现痛经的不适感",
         "narration": "很多女性每个月都会经历痛经，那种痉挛、疼痛的感觉让人非常不适。"
-      },
+      }
       "scene2": {
         "title": "场景2：解释痛经原因 - 前列腺素",
         "text": "月经期间，子宫内膜会释放一种叫做\"前列腺素\"的物质。前列腺素会引起子宫肌肉剧烈收缩，导致疼痛。"
-      },
+      }
       "scene3": {
         "title": "场景3：引出NSAIDs",
         "text": "而非甾体抗炎药，简称NSAID，是缓解痛经的常用药物。它们能从源头减少前列腺素的产生。"
-      },
+      }
       "scene4": {
         "title": "场景4：药物服用",
         "text": "当您服下NSAID药片后，它会进入消化系统。"
-      },
+      }
       "scene5": {
         "title": "场景5：吸收进入血液",
         "text": "然后通过消化道被吸收到血液里，随着血液流向全身。"
-      },
+      }
       "scene6": {
         "title": "场景6：分布到作用部位",
         "text": "药物分子随着血液循环，最终抵达引起疼痛的部位——比如您的子宫周围。"
-      },
+      }
       "scene7": {
         "title": "场景7：作用机制 - 抑制COX酶",
         "text": "在这里，NSAID药物找到了产生前列腺素的关键\"工厂\"——环氧合酶，并抑制了它的活性。"
-      },
+      }
       "scene8": {
         "title": "场景8：减少前列腺素",
         "text": "环氧合酶的工作被打断，前列腺素的合成量就大大降低了。"
-      },
+      }
       "scene9": {
         "title": "场景9：疼痛缓解",
         "text": "随着前列腺素减少，子宫收缩变得温和，疼痛感明显减轻。"
-      },
+      }
       "scene10": {
         "title": "场景10：药物代谢",
         "text": "完成任务后，NSAID药物会被肝脏代谢，最终通过肾脏排出体外。"
-      },
+      }
       "scene11": {
         "title": "场景11：总结",
         "text": "这就是NSAID缓解痛经的完整过程：从服用到吸收，从作用到代谢，科学而有效。"
@@ -5851,7 +6055,7 @@
       "noScenesDescription": "请检查数据配置。",
       "videoError": "视频加载错误",
       "videoErrorDescription": "抱歉，视频加载失败。请检查您的网络连接或稍后再试。"
-    }
+    },
   },
   "disclaimer": {
     "title": "医疗免责声明",
@@ -5934,7 +6138,7 @@
           "difficulty": "简单",
           "buttonText": "开始快速测试",
           "unlockCondition": "立即可用"
-        },
+        }
         "stage2": {
           "title": "专业深度测试",
           "description": "通过10道专业题目，深入了解痛经知识，获得专业建议",
@@ -5943,7 +6147,7 @@
           "difficulty": "困难",
           "buttonText": "开始专业测试",
           "unlockCondition": "需先完成阶段1"
-        },
+        }
         "stage3": {
           "title": "30天训练营",
           "description": "每天5分钟，循序渐进成为暖心伴侣",
@@ -5952,7 +6156,7 @@
           "difficulty": "中等",
           "buttonText": "开始训练营",
           "unlockCondition": "需先完成阶段2"
-        },
+        }
         "stage4": {
           "title": "个性化指导",
           "description": "根据测试结果，提供专属的改进建议",
@@ -5968,15 +6172,15 @@
       "beginner": {
         "title": "初学者",
         "description": "你已经有了不错的基础，继续加油！"
-      },
+      }
       "intermediate": {
         "title": "进阶者",
         "description": "你对痛经有了较好的理解，可以进一步提升支持技巧。"
-      },
+      }
       "advanced": {
         "title": "高级者",
         "description": "你对痛经有深入的理解，是女朋友的坚强后盾。"
-      },
+      }
       "expert": {
         "title": "专家级",
         "description": "太棒了！你已经是理解痛经的高手了！"
@@ -5989,46 +6193,46 @@
         "recommendations": {
           "0": "从基础开始学习。每天花5分钟了解痛经的基本知识，比如\"为什么会有痛经\"、\"什么情况下需要关注\"。",
           "1": "学会倾听。当她说\"肚子疼\"时，不要急着给建议，先问\"需要我做什么吗？\"让她感受到你的关心。"
-        },
+        }
         "nextSteps": [
           "完成专业深度测试",
           "开始30天基础训练",
           "学习基本关怀技巧"
         ]
-      },
+      }
       "intermediate": {
         "title": "贴心守护者",
         "description": "你已经掌握了痛经的基础知识，能够提供温暖的情感支持。你知道什么时候该给热水袋，什么时候该安静陪伴。你的关怀让她感到安心和被理解。",
         "recommendations": {
           "0": "学习基础按摩技巧。掌握简单的腹部按摩方法，在她说疼的时候能够提供实际的帮助。",
           "1": "准备暖心小物品。比如热水袋、暖宝宝、红糖水等，让她感受到你的贴心准备。"
-        },
+        }
         "nextSteps": [
           "完成专业深度测试",
           "开始30天进阶训练",
           "学习更多关怀技巧"
         ]
-      },
+      }
       "advanced": {
         "title": "理解达人",
         "description": "恭喜你！你已经具备了很好的痛经理解能力，能够从情感和身体两个层面给予支持。你知道她的情绪变化，也了解如何提供最合适的帮助。",
         "recommendations": {
           "0": "制定关怀计划。和她一起讨论经期前后的注意事项，制定属于你们的\"关怀清单\"。",
           "1": "成为她的依靠。让她知道在经期时，你就是她最可靠的支撑，不需要强撑。"
-        },
+        }
         "nextSteps": [
           "完成专业深度测试",
           "开始30天高级训练",
           "分享经验帮助他人"
         ]
-      },
+      }
       "expert": {
         "title": "暖心专家",
         "description": "你已经达到了基础测试的最高水平！你对痛经的理解和关怀能力已经超越了大多数男性。你的女朋友很幸运，有你这样贴心的伴侣。",
         "recommendations": {
           "0": "分享你的经验。帮助其他男性朋友学会如何更好地理解和支持伴侣。",
           "1": "持续学习。虽然基础测试表现优秀，但专业测试会带给你更深层的医学知识。"
-        },
+        }
         "nextSteps": [
           "完成专业深度测试",
           "开始30天专家训练",
@@ -6043,39 +6247,39 @@
         "recommendations": {
           "0": "学习医学基础知识。了解前列腺素、子宫内膜脱落等专业术语，掌握痛经的生理机制。",
           "1": "建立科学认知框架。区分原发性痛经和继发性痛经，学会识别需要医疗干预的症状。"
-        },
+        }
         "nextSteps": [
           "开始30天专业训练",
           "重点学习医学知识",
           "建立科学认知体系"
         ]
-      },
+      }
       "intermediate": {
         "title": "专业支持伙伴",
         "description": "你已经掌握了相当的专业知识，能够从医学角度理解痛经的复杂性。你不仅具备同理心，更拥有科学的支持方法，能够提供精准的专业指导。",
         "recommendations": {
           "0": "掌握专业护理技能。学习专业的疼痛评估方法，掌握科学的缓解技巧和药物知识。",
           "1": "制定科学支持计划。根据她的具体情况，制定个性化的经期管理方案。"
-        },
+        }
         "nextSteps": [
           "开始30天专业训练",
           "重点提升专业技能",
           "学习高级护理方法"
         ]
-      },
+      }
       "advanced": {
         "title": "专业共情专家",
         "description": "恭喜你！你不仅拥有专业的医学知识，更具备了完美的共情能力。你能够从科学和情感两个维度提供支持，是90%男性都无法企及的专业\"神队友\"。",
         "recommendations": {
           "0": "制定专业应急预案。基于医学知识，和她一起制定科学的\"经期应急预案\"，包括症状监测、药物准备、医疗联系等。",
           "1": "成为专业导师。运用你的专业知识，帮助其他情侣建立科学的经期管理方法。"
-        },
+        }
         "nextSteps": [
           "开始30天专业训练",
           "重点巩固专业能力",
           "成为专业社区导师"
         ]
-      },
+      }
       "expert": {
         "title": "专业关怀大师",
         "description": "你已经达到了专业测试的最高境界！你不仅拥有深厚的医学知识，更具备了完美的专业判断力和行动力。你是医学级别的伴侣支持专家，是所有男性学习的专业榜样。",
@@ -6083,7 +6287,7 @@
           "0": "分享专业经验。运用你的专业知识，帮助更多男性朋友掌握科学的伴侣支持方法。",
           "1": "成为专业导师。指导其他情侣建立基于医学知识的经期管理体系和沟通模式。",
           "2": "持续专业学习。保持对最新医学研究的关注，不断提升专业支持能力。"
-        },
+        }
         "nextSteps": [
           "开始30天专业训练",
           "成为专业社区导师",
@@ -6097,19 +6301,19 @@
       "scenarioSolutions": {
         "title": "场景解决方案",
         "description": "不同生活场景的综合解决方案"
-      },
+      }
       "naturalTherapies": {
         "title": "自然疗法",
         "description": "安全有效的自然缓解方法"
-      },
+      }
       "interactiveTools": {
         "title": "互动工具",
         "description": "专业的评估和追踪工具"
-      },
+      }
       "healthGuide": {
         "title": "健康指南",
         "description": "全面的经期健康管理指南"
-      },
+      }
       "downloads": {
         "title": "下载资源",
         "description": "可下载的资源和建议"
@@ -6117,7 +6321,7 @@
     },
     "viewMoreArticles": {
       "buttonText": "查看更多文章"
-    }
+    },
   },
   "periodPainImpactCalculator": {
     "metaTitle": "痛经影响算法 - 症状评估与职场分析 | Period Hub",
@@ -6165,15 +6369,15 @@
       "quick": {
         "title": "快速测试",
         "description": "5-10分钟完成专业体质评估"
-      },
+      }
       "professional": {
         "title": "专业权威",
         "description": "基于中医理论的科学评估体系"
-      },
+      }
       "personalized": {
         "title": "个性化建议",
         "description": "针对性的健康调理方案"
-      },
+      }
       "practical": {
         "title": "实用指导",
         "description": "穴位按摩、饮食调理、生活方式建议"
@@ -6202,7 +6406,7 @@
         "moderate": "中等",
         "severe": "严重",
         "extreme": "剧烈"
-      },
+      }
       "descriptions": {
         "0-2": "轻微不适，不影响日常生活",
         "3-4": "轻度疼痛，可以忍受",
@@ -6229,19 +6433,19 @@
         "technique": "手法：",
         "frequency": "频率：",
         "duration": "时长："
-      },
+      }
       "dietary": {
         "title": "饮食调理建议",
         "beneficialFoods": "推荐食物",
         "foodsToAvoid": "避免食物",
         "dietaryPrinciples": "饮食原则"
-      },
+      }
       "lifestyle": {
         "title": "生活方式建议",
         "description": "基于您的体质类型，以下生活方式调整有助于改善健康状况",
         "reminder": "温馨提示：",
         "reminderText": "以上建议仅供参考，如有严重症状请及时就医"
-      },
+      }
       "menstrualPain": {
         "title": "痛经调理建议",
         "acupointTherapy": "穴位疗法",
@@ -6255,7 +6459,7 @@
         "high": "高优先级",
         "medium": "中优先级",
         "low": "低优先级"
-      },
+      }
       "packingTips": "打包建议：",
       "packingAdvice": "建议选择便携式包装，便于随身携带"
     },
@@ -6270,7 +6474,7 @@
         "intimate": "亲密关系",
         "casual": "普通朋友",
         "formal": "职场同事"
-      },
+      }
       "copyText": "复制文本",
       "usageTips": "使用提示：",
       "usageAdvice": "根据实际情况调整内容，选择合适的语气和表达方式"
@@ -6280,7 +6484,7 @@
       "testCompleteDesc": "您的体质分析已完成",
       "testFailed": "测试失败",
       "testFailedDesc": "请检查网络连接后重试"
-    }
+    },
   },
   "constitutionType": "体质类型",
   "constitutionRecommendations": "体质建议",
@@ -6392,7 +6596,7 @@
         "thu": "四",
         "fri": "五",
         "sat": "六"
-      },
+      }
       "legendPeriod": "经期",
       "legendPredicted": "预测",
       "statCycle": "平均周期",
@@ -6416,14 +6620,14 @@
         "workFromHome": "居家办公",
         "postponeMeeting": "推迟会议",
         "reduceTasks": "减少任务"
-      },
+      }
       "saveButton": "保存记录",
       "templatesTitle": "请假申请模板",
       "severity": {
         "mild": "轻度",
         "moderate": "中度",
         "severe": "重度"
-      },
+      }
       "preview": "邮件预览",
       "subject": "主题：",
       "content": "内容：",
@@ -6437,13 +6641,13 @@
         "follicular": "卵泡期",
         "ovulation": "排卵期",
         "luteal": "黄体期"
-      },
+      }
       "phaseIcons": {
         "menstrual": "🩸",
         "follicular": "🌱",
         "ovulation": "⭐",
         "luteal": "🌙"
-      },
+      }
       "constitutionLabel": "中医体质类型",
       "constitutions": {
         "qi_deficiency": "气虚",
@@ -6451,14 +6655,14 @@
         "yin_deficiency": "阴虚",
         "blood_deficiency": "血虚",
         "balanced": "平和"
-      },
+      }
       "foodTitle": "推荐食物",
       "searchPlaceholder": "搜索食物...",
       "tcmNature": {
         "warm": "温性",
         "cool": "凉性",
         "neutral": "平性"
-      },
+      }
       "benefitsLabel": "主要功效",
       "nutrientsLabel": "关键营养素",
       "addButton": "添加到餐单",
@@ -6469,7 +6673,7 @@
         "lunch": "午餐",
         "dinner": "晚餐",
         "snack": "加餐"
-      },
+      }
       "generateButton": "生成购物清单",
       "selectedFoods": "已选食物",
       "planGenerated": "膳食计划生成成功！",
@@ -6491,7 +6695,7 @@
         "nutrition_desc": "包含膳食计划、食物记录等",
         "all": "全部数据",
         "all_desc": "包含所有健康记录和设置"
-      },
+      }
       "formatLabel": "导出格式",
       "formats": {
         "json": "JSON",
@@ -6500,7 +6704,7 @@
         "csv_desc": "表格分析",
         "pdf": "PDF",
         "pdf_desc": "医疗报告"
-      },
+      }
       "exportButton": "导出数据",
       "exportingButton": "导出中...",
       "downloadButton": "下载文件",
@@ -6512,12 +6716,12 @@
         "period": "经期",
         "predicted": "预测",
         "ovulation": "排卵"
-      },
+      }
       "flowTypes": {
         "light": "少量",
         "medium": "中等",
         "heavy": "大量"
-      },
+      }
       "showSettings": "显示设置",
       "securityWarnings": "安全警告"
     },
@@ -6532,7 +6736,7 @@
         "regular": "规律",
         "irregular": "不规律",
         "very-irregular": "非常不规律"
-      },
+      }
       "predictions": "预测信息",
       "nextPeriod": "下次经期",
       "nextOvulation": "下次排卵",
@@ -6543,7 +6747,7 @@
         "cycleLength": "周期长度",
         "painLevel": "疼痛等级",
         "flowType": "流量类型"
-      },
+      }
       "cycleLength": "周期长度",
       "painLevel": "疼痛等级",
       "flowType": "流量类型",
@@ -6551,7 +6755,7 @@
         "light": "少量",
         "medium": "中等",
         "heavy": "大量"
-      },
+      }
       "cycleLengthDistribution": "周期长度分布",
       "painLevelDistribution": "疼痛等级分布",
       "flowTypeDistribution": "流量类型分布",
@@ -6594,7 +6798,7 @@
         "trends": "趋势",
         "comparison": "对比",
         "insights": "洞察"
-      },
+      }
       "avgCycleLength": "平均周期长度",
       "avgPeriodLength": "平均经期长度",
       "avgPainLevel": "平均疼痛等级",
@@ -6619,7 +6823,7 @@
         "patterns": "模式",
         "trends": "趋势",
         "recommendations": "建议"
-      },
+      }
       "noData": "暂无症状数据",
       "frequency": "频率",
       "lastOccurrence": "最后出现",
@@ -6663,7 +6867,7 @@
         "patterns": "模式",
         "productivity": "生产力",
         "insights": "洞察"
-      },
+      }
       "noData": "暂无工作影响数据",
       "avgEfficiency": "平均效率",
       "avgPain": "平均疼痛",
@@ -6762,486 +6966,38 @@
       "success": "成功",
       "warning": "警告",
       "info": "信息"
-    }
+    },
   },
-  "termsOfService": {
-    "title": "服务条款",
-    "lastUpdated": "最后更新：2024年4月1日",
-    "intro": "欢迎使用periodhub.health。通过访问和使用我们的网站，您同意遵守以下服务条款。请仔细阅读这些条款，如果您不同意任何条款，请不要使用我们的服务。",
-    "importantNotice": "重要提示",
-    "importantNoticeText": "在使用periodhub.health网站服务之前，请您仔细阅读并充分理解本服务条款的所有内容。一旦您使用本网站任何服务，即表示您已阅读、理解并同意接受本条款的所有约束。如果您不同意本条款的任何内容，请立即停止使用本网站。",
-    "tableOfContents": "条款目录",
-    "sections": {
-      "serviceDescription": {
-        "title": "1. 服务描述与用户资格",
-        "description": "periodhub.health是一个健康教育平台，提供经期健康信息、教育资源和互动工具。我们的服务旨在帮助用户更好地了解和管理经期健康。",
-        "serviceScope": "我们的服务包括但不限于：",
-        "serviceList": [
-          "经期健康教育文章和指南",
-          "互动健康评估工具",
-          "个性化健康建议",
-          "教育资源和可下载材料",
-          "社区支持和信息分享"
-        ],
-        "userEligibility": {
-          "title": "用户资格",
-          "ageRequirement": "您必须年满13岁才能使用我们的服务。18岁以下用户应在家长指导下使用我们的服务。",
-          "capacity": "您必须具有签订具有约束力协议的法律行为能力。",
-          "accuracy": "您同意在使用我们的服务时提供准确和完整的信息。"
-        },
-        "content": "periodhub.health是一个提供经期健康信息和教育资源的平台。我们的服务包括：",
-        "items": {
-          "educationalContent": "教育内容：关于经期健康、疼痛管理和女性健康的文章和指南",
-          "interactiveTools": "互动工具：症状评估工具、疼痛追踪器和个性化推荐系统",
-          "resourceLibrary": "资源库：传统疗法、自然缓解方法和生活方式建议",
-          "communitySupport": "社区支持：安全的信息分享和支持环境"
-        },
-        "medicalNotice": "重要医疗声明：我们的服务仅供教育和信息目的，不构成医疗建议、诊断或治疗。我们不是医疗保健专业人员，本网站上的信息不能替代专业医疗建议。使用本网站不建立医患关系。如遇紧急情况，请立即寻求医疗救助。",
-        "mvpNotice": "MVP阶段说明：periodhub.health目前处于最小可行产品(MVP)阶段，以有限的资源运营。内容可能不如大型医疗机构那样全面或频繁更新。"
-      },
-      "userConduct": {
-        "title": "2. 用户行为与责任",
-        "accountSecurity": {
-          "title": "账户安全",
-          "description": "如果您创建账户，您有责任维护账户信息和密码的机密性。您同意在发现账户被未经授权使用时立即通知我们。"
-        },
-        "acceptableUse": {
-          "title": "可接受的使用",
-          "description": "您同意仅将我们的服务用于合法目的，并遵守这些条款。",
-          "prohibitedBehaviors": "在使用本网站时，您同意不从事以下行为：",
-          "prohibitedList": [
-            "违反任何适用的法律法规或本服务条款",
-            "传播虚假、误导性或有害的健康信息",
-            "冒充他人或虚假陈述您的身份或关联",
-            "上传或传输病毒、恶意软件或其他有害代码",
-            "试图未经授权访问我们的系统或其他用户的账户",
-            "未经授权将我们的服务用于商业目的",
-            "骚扰、辱骂或伤害其他用户",
-            "收集或获取其他用户的个人信息"
-          ]
-        },
-        "prohibitedBehaviorsTitle": "4.1 禁止行为",
-        "prohibitedBehaviors": "在使用本网站时，您同意不从事以下行为：",
-        "prohibitedList": [
-          "违反任何适用的法律法规或本服务条款",
-          "传播虚假、误导性或有害的健康信息",
-          "冒充他人或虚假陈述您的身份或关联",
-          "骚扰、恐吓、威胁或伤害其他用户",
-          "发布、传输或分享不当、冒犯性或非法内容",
-          "试图破坏网站安全或干扰网站正常运行",
-          "使用自动化工具（如机器人、爬虫）访问网站",
-          "出于商业目的收集其他用户的信息",
-          "传播病毒、恶意软件或其他有害代码"
-        ],
-        "contentAccuracyTitle": "4.2 内容准确性责任",
-        "contentAccuracy": "您承诺在使用我们的评估工具和其他互动功能时提供准确和完整的信息。虚假或误导性信息不仅可能影响您收到的建议质量，还可能对您的健康决策产生负面影响。",
-        "respectOthersTitle": "4.3 尊重他人权利",
-        "respectOthers": "在使用任何社区功能或与其他用户互动时，您应尊重他人的隐私、尊严和权利。不要发布可能对他人造成伤害、歧视或偏见的内容。我们倡导建设性和支持性的社区环境。"
-      },
-      "privacyProtection": {
-        "title": "5. 数据使用与隐私保护",
-        "privacyPolicyRefTitle": "5.1 隐私政策参考",
-        "privacyPolicyRef": "您的隐私对我们至关重要。我们收集、使用、存储和保护您个人信息的方式详细规定在我们的隐私政策中。隐私政策是本服务条款的重要组成部分，与本条款具有同等法律效力。",
-        "dataCollectionTitle": "5.2 数据收集概述",
-        "dataCollection": "我们可能收集的信息类型包括但不限于：",
-        "dataTypes": {
-          "basicInfo": "基本信息：年龄、地理位置（如果您选择提供）",
-          "healthInfo": "健康相关信息：症状描述、疼痛评分、月经周期信息",
-          "deviceInfo": "设备信息：IP地址、浏览器类型、操作系统和其他技术信息",
-          "personalInfo": "个人身份信息（如姓名、电子邮件地址）",
-          "healthData": "您自愿提供的健康相关信息",
-          "usageData": "网站使用数据和交互模式",
-          "technicalData": "技术信息，如IP地址、浏览器类型、设备信息"
-        },
-        "dataUsageTitle": "5.3 数据使用目的",
-        "dataUsage": "我们将您的信息用于以下目的：",
-        "usagePurposes": [
-          "提供个性化健康建议和服务",
-          "改进和优化网站功能和用户体验",
-          "进行匿名统计分析和研究",
-          "维护网站安全并防止滥用",
-          "向您发送相关健康信息和更新（如果您选择接收）"
-        ],
-        "dataSecurityTitle": "5.4 数据安全保护",
-        "thirdPartySharingTitle": "5.5 第三方数据共享",
-        "thirdPartySharing": "未经您的同意，我们不会向第三方出售、交易或转让您的个人信息，除非法律要求或为保护我们的权利和利益。在与可信的第三方服务提供商合作时，我们确保他们遵守严格的保密要求。",
-        "dataUse": {
-          "title": "数据使用",
-          "purposes": "我们将您的信息用于以下目的：",
-          "purposeList": [
-            "提供和改进我们的服务",
-            "个性化您的用户体验",
-            "就我们的服务与您沟通",
-            "确保网站安全并防止欺诈",
-            "遵守法律义务"
-          ]
-        },
-        "dataSecurity": {
-          "title": "数据安全",
-          "measures": "我们实施适当的技术和组织措施来保护您的个人信息，包括：",
-          "securityList": [
-            "传输和存储过程中的数据加密",
-            "访问控制和身份验证系统",
-            "定期安全审计和更新",
-            "员工数据保护培训"
-          ]
-        }
-      },
-      "intellectualProperty": {
-        "title": "5. 知识产权",
-        "ownership": "本网站及其所有内容，包括但不限于文本、图形、图像、音频、视频、软件、代码和设计，均受版权、商标和其他知识产权法保护。除非另有明确说明，所有内容均为periodhub.health或其许可方所有。",
-        "userRights": {
-          "title": "您使用我们内容的权利",
-          "permittedUse": "您可以：",
-          "permittedList": [
-            "为个人、非商业用途查看和访问内容",
-            "打印或下载内容供个人参考",
-            "在社交媒体上分享我们内容的链接",
-            "在适当署名的情况下引用简短摘录"
-          ],
-          "restrictions": "您不得：",
-          "restrictionsList": [
-            "未经许可复制、分发或重新发布我们的内容",
-            "未经授权将我们的内容用于商业目的",
-            "修改、改编或从我们的内容创建衍生作品",
-            "删除或更改版权声明或署名",
-            "未经许可使用我们的商标或标志"
-          ]
-        },
-        "userContent": "如果您向我们提交任何内容（如反馈、建议或评论），您授予我们永久、免版税、非独占的许可，以使用、修改、复制和分发该内容用于改善我们的服务。",
-        "ownershipTitle": "5.1 内容所有权",
-        "userContentTitle": "5.2 用户生成内容",
-        "trademarkTitle": "5.3 商标使用",
-        "trademark": "periodhub.health及相关标志是我们的商标。未经我们事先书面同意，您不得使用我们的商标或任何可能引起混淆的相似标记。",
-        "contentOwnership": "本网站的所有内容，包括但不限于文本、图像、图形、视频、音频、软件、代码、设计、布局、商标、标志和其他材料（统称为\"内容\"），均受版权、商标和其他知识产权法保护。除非另有明确说明，所有内容均为periodhub.health或其许可方所有。",
-        "usageRestrictionsTitle": "7.2 使用限制",
-        "usageRestrictions": "未经我们明确书面许可，您不得：",
-        "restrictionsList": [
-          "复制、修改、分发、传播或公开展示网站内容",
-          "将网站内容用于商业目的",
-          "基于我们的内容创建衍生作品",
-          "删除或修改任何版权标记或其他权利声明",
-          "使用任何自动化工具提取或\"抓取\"网站内容",
-          "将我们的内容集成到其他网站或应用程序中"
-        ],
-        "fairUseTitle": "7.3 合理使用",
-        "fairUse": "您可以：",
-        "fairUseList": [
-          "为个人、非商业目的浏览和使用网站内容",
-          "打印单份内容供个人参考",
-          "在社交媒体上分享我们网站的链接",
-          "在评论或评价中引用简短摘录，但必须注明来源"
-        ],
-        "thirdPartyContentTitle": "7.4 第三方内容",
-        "thirdPartyContent": "本网站可能包含或引用第三方内容、链接或资源。这些第三方内容的知识产权归其各自所有者所有。我们不声称对第三方内容拥有权利，也不对其准确性、完整性或适用性负责。",
-        "infringementNoticeTitle": "7.5 侵权通知",
-        "infringementNotice": "如果您认为我们的网站内容侵犯了您的知识产权，请通过电子邮件向我们提供详细的侵权通知，包括：涉嫌侵权内容的描述、您的权利证明、联系信息以及您确认信息真实性的声明。"
-      },
-      "serviceChanges": {
-        "title": "6. 服务变更与终止",
-        "modificationRightsTitle": "8.1 服务修改权利",
-        "modificationRights": "我们保留随时修改、暂停或终止本网站部分或全部服务的权利，无需事先通知。这些变更可能包括但不限于：",
-        "changesList": [
-          "添加、修改或删除网站功能",
-          "更改用户界面或网站设计",
-          "调整服务可用性或访问条件",
-          "更新或删除内容",
-          "实施新的安全措施或使用限制"
-        ],
-        "termsChangesTitle": "8.2 条款变更",
-        "termsChanges": "我们可能会不时更新本服务条款以反映服务变化、法律要求或业务需求。重大变更将通过在网站上发布通知或其他适当方式告知用户。继续使用服务即表示您接受更新后的条款。建议您定期查看最新版本的服务条款。",
-        "accountTerminationTitle": "8.3 账户终止",
-        "accountTermination": {
-          "title": "账户终止",
-          "ourRights": "我们保留在以下情况下暂停或终止您账户的权利：",
-          "terminationReasons": [
-            "您违反本服务条款或相关政策",
-            "您的行为可能损害其他用户或网站安全",
-            "您长期不活跃或账户被废弃",
-            "法律要求或法院命令",
-            "其他我们认为有必要的情况"
-          ],
-          "userRights": "您可以随时停止使用我们的服务。如果您创建了账户，您可以通过联系我们要求删除账户。账户删除后，您的个人信息将按照我们的隐私政策进行处理。",
-          "consequences": "当您的账户被终止或您停止使用服务时：",
-          "consequencesList": [
-            "您对服务的访问将立即暂停",
-            "您的账户数据可能被删除（受法律保留要求约束）",
-            "您仍需对终止前发生的任何活动负责",
-            "本条款的某些条款在终止后仍然有效"
-          ]
-        },
-        "userRightsTitle": "8.4 用户终止权利",
-        "consequencesTitle": "8.5 终止后果",
-        "modificationsTitle": "6.1 服务修改",
-        "modifications": "我们保留随时修改、暂停或终止全部或部分服务的权利，恕不另行通知。我们将努力提前通知重大变更，但不保证在所有情况下都能做到。",
-        "terminationTitle": "6.2 服务终止",
-        "termination": "我们可能因任何原因终止或暂停您对服务的访问，包括但不限于违反本条款。终止后，您使用服务的权利将立即停止。",
-        "dataRetentionTitle": "6.3 数据保留",
-        "dataRetention": "服务终止后，我们可能会根据适用法律和我们的隐私政策保留某些信息。我们没有义务维护或向您提供任何用户内容的副本。"
-      },
-      "liabilityLimitation": {
-        "title": "7. 责任限制",
-        "serviceProvisionTitle": "7.1 服务提供方式",
-        "serviceProvision": "本网站服务按\"现状\"和\"按可用性\"提供。我们不提供任何明示或暗示的保证，包括但不限于适销性、特定用途适用性、非侵权、准确性、可靠性或无中断性的保证。",
-        "disclaimerScopeTitle": "7.2 免责范围",
-        "disclaimerScope": "在法律允许的最大范围内，periodhub.health及其关联公司、员工、董事、代理人和承包商不对以下情况承担责任：",
-        "disclaimerList": [
-          "健康相关损害：因使用或误用网站信息导致的任何健康问题、误诊、治疗延误或健康恶化",
-          "间接损失：任何间接、偶然、特殊、后果性或惩罚性损害",
-          "经济损失：利润损失、业务中断、数据丢失或其他经济损失",
-          "第三方行为：第三方网站、服务或内容造成的任何损害",
-          "技术问题：网站错误、中断、病毒或其他技术问题",
-          "信息错误：网站内容中的错误、遗漏或过时信息"
-        ],
-        "liabilityLimitTitle": "7.3 责任限制",
-        "liabilityLimit": "即使在我们被认定承担责任的情况下，我们的总责任也不超过您在事件发生前12个月内向我们支付的费用。由于本网站目前免费提供服务，在法律允许的范围内，我们的责任限制为零。",
-        "forceMajeureTitle": "7.4 不可抗力",
-        "forceMajeure": "我们不对不可抗力事件导致的服务中断或延误负责，包括但不限于：自然灾害、政府行为、战争、恐怖主义、流行病、网络攻击、停电、电信故障或我们合理控制范围之外的其他事件。",
-        "userLiabilityTitle": "7.5 用户责任",
-        "userLiability": "您同意就因您违反本条款或不当使用服务而给periodhub.health、其关联公司或第三方造成的任何损失、损害、费用或责任（包括合理的律师费）进行赔偿。",
-        "medicalDisclaimer": {
-          "title": "医疗免责声明",
-          "content": "本网站提供的信息仅用于教育和信息目的，不应被视为医疗建议、诊断或治疗。我们不是医疗保健专业人员，内容不应替代与合格医疗保健提供者的咨询。",
-          "emergencyWarning": "在医疗紧急情况下，请立即寻求专业医疗救助。不要依赖网站信息做出紧急医疗决定。",
-          "individualVariation": "健康信息和建议可能不适合每个人。个人对治疗和干预的反应可能存在显著差异。",
-          "professionalConsultation": "在做出任何医疗决定、开始新治疗或改变现有医疗方案之前，请务必咨询医疗保健专业人员。"
-        },
-        "serviceLimitations": {
-          "title": "服务限制",
-          "availabilityDisclaimer": "我们在\"按现状\"和\"按可用性\"的基础上提供服务。我们不保证我们的服务将不间断、无错误或完全安全。",
-          "accuracyDisclaimer": "虽然我们努力提供准确和最新的信息，但我们不能保证网站上所有内容的完整性、准确性或可靠性。",
-          "thirdPartyContent": "我们的网站可能包含第三方网站或内容的链接。我们不对外部网站的准确性、合法性或内容负责。"
-        },
-        "liabilityLimits": {
-          "title": "责任限制",
-          "generalLimitation": "在法律允许的最大范围内，periodhub.health及其关联公司、董事、员工和代理人不对因您使用我们服务而产生的任何间接、偶然、特殊、后果性或惩罚性损害承担责任。",
-          "maxLiability": "对于因您使用我们服务而产生的任何索赔，我们对您的总责任不应超过您在索赔前12个月内为访问我们服务而支付给我们的金额（如有）。",
-          "exclusions": "某些司法管辖区不允许排除或限制某些损害，因此上述某些限制可能不适用于您。"
-        },
-        "disclaimerTitle": "7.1 服务免责声明",
-        "disclaimer": "我们的服务按\"现状\"提供，不提供任何明示或暗示的保证。我们不保证服务将不间断、无错误或完全安全。",
-        "limitationTitle": "7.2 损害赔偿限制",
-        "limitation": "在适用法律允许的最大范围内，我们不对任何间接、偶然、特殊、后果性或惩罚性损害承担责任，包括但不限于利润损失、数据丢失或业务中断。",
-        "maximumLiabilityTitle": "7.3 最大责任限制",
-        "maximumLiability": "我们对您的总责任不得超过您在过去12个月内为使用我们服务支付的金额，如果您未支付任何费用，则我们的责任限制为100美元。"
-      },
-      "userEligibility": {
-        "title": "2. 用户资格与账户责任",
-        "ageRequirementTitle": "2.1 使用资格",
-        "ageRequirement": "年满13岁的任何个人均可使用我们的网站服务。13岁以下用户必须在父母或法定监护人的监督和同意下使用本网站。使用本网站即表示您声明并保证您符合上述年龄要求。",
-        "accountAccuracyTitle": "2.2 账户信息准确性",
-        "accountAccuracy": "如果您选择创建账户或提供个人信息，您承诺提供真实、准确、完整和最新的信息。您有责任及时更新您的信息以保持其准确性。虚假或误导性信息可能影响我们为您提供的服务质量。",
-        "accountSecurityTitle": "2.3 账户安全责任",
-        "accountSecurity": "您有责任维护账户信息的机密性和安全性。您应妥善保管登录凭据，不得与他人共享账户信息。您对账户下的所有活动负责。如果您发现账户被盗用或存在安全风险，请立即通知我们。"
-      },
-      "serviceContent": {
-        "title": "3. 服务内容与使用指南",
-        "availabilityTitle": "3.1 服务可用性",
-        "contentLicenseTitle": "3.2 内容使用许可",
-        "contentLicense": "在遵守本条款的前提下，我们授予您有限的、非独占的、不可转让的许可，仅供个人、非商业目的访问和使用网站内容。您不得复制、修改、分发、销售或逆向工程本网站的任何部分。",
-        "assessmentToolsTitle": "3.3 评估工具使用",
-        "assessmentTools": "我们的症状评估工具旨在提供教育和信息支持，不应被视为医疗诊断或治疗建议。评估结果基于您提供的信息，其准确性取决于信息的完整性和真实性。您应诚实、完整地填写评估问卷，以获得最准确的建议。",
-        "personalizedAdviceTitle": "3.4 个性化建议的性质",
-        "personalizedAdvice": "基于您的评估结果提供的个性化建议仅供参考，不能替代专业医疗建议。这些建议基于一般医学知识和最佳实践，但每个人的情况都是独特的。在实施任何建议之前，特别是涉及药物或重大生活方式改变的建议，请咨询医疗专业人士。",
-        "availability": "我们努力确保服务的持续可用性，但不保证服务不会中断。我们可能因维护、更新或其他技术原因暂时中断服务。我们将尽力提前通知计划内的服务中断，但紧急维护可能无法提前通知。"
-      },
-      "medicalDisclaimer": {
-        "title": "4. 医疗免责声明",
-        "disclaimerTitle": "4.1 信息性质",
-        "disclaimer": "本网站提供的所有信息仅供教育和信息目的，不构成医疗建议、诊断或治疗。我们不是医疗保健专业人员，本网站上的信息不能替代专业医疗建议。使用本网站不建立医患关系。",
-        "emergencyTitle": "4.2 紧急情况处理",
-        "emergency": "如遇紧急情况，请立即寻求医疗救助。本网站不提供紧急医疗服务。如果您遇到医疗紧急情况，请拨打当地紧急服务电话或前往最近的急诊科。",
-        "professionalAdviceTitle": "4.3 专业医疗建议",
-        "professionalAdvice": "始终就任何医疗状况咨询您的医生或其他合格的医疗保健提供者。不要因为您在本网站上阅读的内容而忽视专业医疗建议或延迟寻求医疗建议。",
-        "importantMedicalDisclaimer": "重要医疗免责声明",
-        "disclaimerText": "本网站提供的所有健康信息、建议、评估结果和内容仅供教育和信息目的，不能替代，也不应被视为专业医疗建议、诊断或治疗。",
-        "nonMedicalService": "periodhub.health不是医疗服务提供者。我们不提供医疗诊断、治疗计划或处方药物。本网站上的所有内容，包括文章、评估工具、建议和其他信息，都是基于一般医学知识和公开研究材料编制的教育内容。",
-        "personalResponsibilityTitle": "6.2 个人医疗决策责任",
-        "personalResponsibility": "您对自己的健康决策负完全责任。在做出任何健康相关决策、改变生活方式、开始新的治疗方法或停止现有治疗之前，您必须咨询合格的医疗专业人士，包括但不限于：",
-        "medicalProfessionals": [
-          "您的主治医生或家庭医生",
-          "妇科医生或妇科专科医生",
-          "疼痛管理专家",
-          "其他相关医疗专业人士"
-        ],
-        "emergencyHandlingTitle": "6.3 紧急情况处理",
-        "emergencyHandling": "本网站无法替代紧急医疗服务。如果您遇到医疗紧急情况或严重症状，请立即联系当地紧急服务或前往最近的急诊科。严重症状可能包括但不限于：",
-        "emergencySymptoms": [
-          "严重且突然的腹痛",
-          "伴有高热的严重疼痛",
-          "大量异常出血",
-          "昏厥或失去意识",
-          "呼吸困难或胸痛",
-          "任何您认为需要立即医疗关注的症状"
-        ],
-        "informationAccuracyTitle": "6.4 信息准确性声明",
-        "informationAccuracy": "虽然我们努力确保网站内容的准确性和及时性，但医学知识不断发展变化，我们无法保证所有信息在所有时候都完全准确、完整或最新。我们建议您验证信息并咨询医疗专业人士，以获得最适合您情况的建议。",
-        "resultVariabilityTitle": "6.5 结果变异性声明",
-        "resultVariability": "每个人的身体状况、症状和对治疗的反应都是独特的。本网站提及的任何治疗方法、缓解技巧或管理策略对您的影响可能与他人不同。个体结果可能存在显著差异，我们无法保证任何特定结果或效果。",
-        "medicationWarningTitle": "6.6 药物和治疗警告",
-        "medicationWarning": "如果网站内容提及任何药物、补充剂或治疗方法，此信息仅供教育目的，不构成处方或医疗建议。在使用任何药物或开始任何新的治疗方法之前，请务必咨询医疗专业人士。药物可能有副作用、禁忌症或与其他药物的相互作用。"
-      },
-      "disputeResolution": {
-        "title": "8. 争议解决",
-        "applicableLawTitle": "8.1 适用法律",
-        "applicableLaw": "本条款受中华人民共和国法律管辖并按其解释，不考虑法律冲突原则。如果您从中华人民共和国境外访问服务，您有责任遵守当地法律。",
-        "disputeResolutionProcessTitle": "8.2 争议解决程序",
-        "disputeResolutionProcess": "如果您与periodhub.health之间发生争议，我们鼓励首先通过友好协商解决。如果协商失败，争议解决程序如下：",
-        "resolutionSteps": [
-          "非正式解决：您应首先通过电子邮件联系我们，详细描述争议并提出解决建议。我们将在收到通知后30天内回复。",
-          "调解：如果非正式协商无法解决争议，双方可以选择通过中立的第三方调解机构进行调解。",
-          "仲裁或诉讼：如果调解也无法解决争议，争议应提交有管辖权的人民法院解决。"
-        ],
-        "governingLawTitle": "8.1 适用法律",
-        "governingLaw": "本条款受中华人民共和国法律管辖并按其解释，不考虑法律冲突原则。",
-        "jurisdictionTitle": "8.2 管辖权",
-        "jurisdiction": "因本条款或使用我们服务而产生的任何争议应提交至有管辖权的人民法院解决。",
-        "alternativeResolutionTitle": "8.3 替代争议解决",
-        "alternativeResolution": "在提起诉讼之前，我们鼓励通过友好协商解决争议。如果协商失败，可以考虑调解或仲裁等替代争议解决方式。",
-        "severabilityTitle": "8.3 条款可分割性",
-        "severability": "如果本服务条款的任何条款被有管辖权的法院认定为无效、非法或不可执行，该条款应修改为最接近原意的可执行条款，其余条款应继续完全有效。",
-        "entireAgreementTitle": "8.4 完整协议",
-        "entireAgreement": "本服务条款与我们的隐私政策一起构成您与periodhub.health之间关于使用网站服务的完整协议，取代所有先前的协议、理解或沟通。"
-      }
+  "embeddedPainAssessment": {
+    "title": "💡 痛经快速自测",
+    "subtitle": "1分钟了解您的痛经程度，获得初步建议",
+    "question": "您的痛经强度如何？",
+    "selectIntensityFirst": "请先选择痛经强度",
+    "options": {
+      "mild": "轻微（可以忍受，不影响日常活动）",
+      "moderate": "中度（影响部分活动，但能坚持）",
+      "severe": "重度（完全影响日常活动，需要休息）"
     },
-    "contact": {
-      "title": "联系我们",
-      "description": "如果您对本服务条款有任何疑问、意见或需要澄清，请通过以下方式联系我们：",
-      "email": "邮箱：tiyibaofu@outlook.com",
-      "mailingAddress": "邮寄地址：[实际部署时将提供具体地址]",
-      "onlineFeedback": "在线反馈：通过网站联系表单提交您的问题",
-      "responseTime": "响应时间：72小时内确认，30天内处理完成"
+    "buttons": {
+      "getAdvice": "获取建议",
+      "detailedAssessment": "详细评估",
+      "testAgain": "重新测试",
+      "fullAssessment": "完整评估"
     },
-    "finalNotice": {
-      "title": "最终提醒",
-      "content": "本服务条款最后更新于2024年4月1日。我们建议您定期查看本页面以了解任何更新。继续使用我们的服务即表示您接受条款的任何修订。感谢您选择periodhub.health，我们致力于为您提供有价值的健康教育资源。"
+    "resultTitle": "评估结果",
+    "results": {
+      "mild": "您的痛经程度较轻，可以尝试热敷、轻度运动等自然缓解方法。",
+      "moderate": "您的痛经程度中等，建议结合多种缓解方法，如有需要可考虑非处方止痛药。",
+      "severe": "您的痛经程度较重，建议咨询医生获得专业评估和治疗建议。"
     },
-    "questionsTerms": "有疑问？",
-    "questionsDescriptionTerms": "如果您对我们的服务条款有任何疑问，请随时联系我们。",
-    "contactUsTerms": "联系我们",
-    "importantReminder": "重要提醒",
-    "importantReminderText": "这些服务条款可能会不时更新。继续使用我们的服务即表示您接受任何修改。"
-  },
-  "anchorTexts": {
-    "articles": {
-      "relief": "疼痛缓解",
-      "heat": "热疗法",
-      "physical": "物理疗法",
-      "medical": "医疗指南",
-      "knowledge": "健康知识",
-      "comprehensive": "完整指南",
-      "related": "相关文章",
-      "tcm_guide": "学习中医调理",
-      "acupoint_massage": "掌握按摩",
-      "tcm_nutrition": "学习营养",
-      "workplace_health": "职场健康",
-      "pain_management": "疼痛管理",
-      "quick_relief": "快速缓解",
-      "medical_guide": "医疗指南",
-      "heat_therapy": "热疗法",
-      "herbal_tea": "草药茶",
-      "natural": "自然疗法",
-      "faq": "常见问题",
-      "nutrition_guide": "营养指南",
-      "ginger": "生姜疗法",
-      "cycle_knowledge": "周期知识",
-      "cycle_nutrition": "周期营养",
-      "cycle_management": "周期管理",
-      "anti_inflammatory": "抗炎",
-      "ginger_tea": "生姜茶",
-      "workplace": "职场健康",
-      "nutrition": "营养指南",
-      "medication": "药物指南",
-      "more": "更多知识",
-      "stress_management": "学习压力管理",
-      "sleep_quality": "改善睡眠质量"
-    },
-    "tools": {
-      "main": "健康工具",
-      "tracker": "症状追踪",
-      "assessment": "症状评估",
-      "nutrition": "营养建议",
-      "calculator": "影响计算器",
-      "all": "所有工具",
-      "pain_tracker": "疼痛追踪器",
-      "nutrition_generator": "营养生成器",
-      "constitution": "体质测试",
-      "symptom_assessment": "症状评估",
-      "workplace": "职场健康"
-    },
-    "scenarios": {
-      "exercise": "运动护理",
-      "office": "职场解决方案",
-      "social": "社交建议",
-      "sleep": "睡眠建议",
-      "diet": "饮食解决方案",
-      "emergency": "紧急护理",
-      "medication": "药物指南",
-      "tcm_lifestyle": "中医生活方式",
-      "workplace_wellness": "职场健康",
-      "exercise_balance": "运动平衡"
-    },
-    "solutions": {
-      "office": "办公室解决方案",
-      "relief": "缓解解决方案",
-      "exercise_balance_new": "运动平衡",
-      "emergency": "紧急解决方案",
-      "exercise": "运动解决方案",
-      "sleep": "睡眠解决方案",
-      "natural_therapies": "自然疗法",
-      "scenarios": "场景解决方案",
-      "teen_main": "青少年健康",
-      "social": "社交解决方案",
-      "commute": "通勤解决方案",
-      "partner_communication": "伴侣沟通",
-      "teen_health": "青少年健康",
-      "life_stages": "人生阶段",
-      "campus_emergency": "校园急救",
-      "workplace_cycle": "职场周期管理",
-      "student_cycle": "学生周期健康",
-      "fitness_cycle": "健身周期平衡",
-      "workplace_wellness": "职场健康",
-      "exercise_balance": "运动平衡",
-      "workplace": "职场管理方案",
-      "student": "学生生活指南"
-    },
-    "navigation": {
-      "main": "疼痛管理",
-      "health": "健康中心",
-      "guide": "健康指南",
-      "teen": "青少年健康",
-      "therapy": "自然疗法"
-    },
-    "cta": {
-      "viewMore": "查看更多",
-      "startNow": "立即开始",
-      "learnMore": "了解更多",
-      "tryNow": "立即尝试",
-      "download": "下载资源"
-    },
-    "pdf": {
-      "guide": "下载指南",
-      "checklist": "下载清单",
-      "resources": "下载资源"
-    },
-    "teen": {
-      "main": "青少年指南",
-      "development": "发育健康",
-      "education": "健康教育"
-    },
-    "therapy": {
-      "main": "自然缓解",
-      "herbal": "草药疗法",
-      "yoga": "瑜伽技巧",
-      "diet": "饮食建议"
-    }
+    "disclaimer": "⚠️ 此工具仅供参考，不能替代专业医疗建议"
   },
   "privacyPolicy": {
     "title": "隐私政策",
     "lastUpdated": "最后更新：2024年4月1日",
-    "intro": "periodhub.health（以下简称\"我们\"）深知个人信息保护的重要性，特别是女性健康隐私数据的敏感性。本隐私政策详细说明了我们如何收集、使用、存储和保护您的个人信息，以及您对数据处理的权利。我们严格遵守《通用数据保护条例》(GDPR)和《中华人民共和国个人信息保护法》等相关法律法规。",
+    "intro": "periodhub.health（以下简称\"我们\"）深知个人信息保护的重要性，特别是涉及女性健康隐私数据的敏感性。本隐私政策详细说明我们如何收集、使用、存储和保护您的个人信息，以及您在数据处理方面享有的权利。我们严格遵守《欧盟通用数据保护条例》(GDPR)、《中华人民共和国个人信息保护法》等相关法律法规。",
     "importantNotice": "重要提示",
-    "importantNoticeText": "在使用periodhub.health网站服务前，请仔细阅读并充分理解本隐私政策的全部内容。一旦您使用本网站的任何服务，即表示您已阅读、理解并同意接受本政策的全部约束。如果您不同意本政策的任何内容，请立即停止使用本网站。",
+    "importantNoticeText": "在使用periodhub.health网站服务之前，请仔细阅读并充分理解本隐私政策的所有内容。一旦您使用本网站的任何服务，即表示您已阅读、理解并同意接受本政策的所有约束。如果您不同意本政策的任何内容，请立即停止使用本网站。",
     "tableOfContents": "目录",
     "sections": {
       "informationCollection": {
@@ -7256,7 +7012,7 @@
             "既往治疗经历",
             "生活影响程度评估"
           ]
-        },
+        }
         "technicalInfo": {
           "title": "技术信息",
           "items": [
@@ -7264,23 +7020,23 @@
             "浏览器类型和版本",
             "设备信息（操作系统、屏幕分辨率）",
             "访问时间和页面浏览记录",
-            "来源网站信息"
+            "推荐来源网站"
           ]
-        },
+        }
         "userProvided": {
-          "title": "用户主动提供的信息",
+          "title": "用户提供的信息",
           "items": [
-            "电子邮箱地址（用于沟通）",
+            "邮箱地址（用于通讯）",
             "年龄范围（不收集具体出生日期）",
-            "地理位置信息（仅国家/地区）",
+            "地理位置信息（仅限国家/地区）",
             "反馈和建议内容"
           ]
-        },
+        }
         "importantNote": {
           "title": "重要说明",
-          "text": "我们绝不收集您的真实姓名、身份证号、具体地址、电话号码等直接身份识别信息。所有健康数据均经过匿名化处理，无法追溯到具体个人。"
+          "text": "我们绝不收集您的真实姓名、身份证号、具体地址、电话号码等直接身份标识信息。所有健康数据均匿名化处理，无法追溯到具体个人。"
         }
-      },
+      }
       "informationUse": {
         "title": "2. 信息使用",
         "mainPurposes": {
@@ -7290,154 +7046,271 @@
             "生成定制化疼痛管理方案",
             "改善网站功能和用户体验",
             "统计分析以优化服务质量",
-            "发送您订阅的健康信息"
+            "发送您订阅的健康资讯"
           ]
-        },
+        }
         "neverUsedFor": {
           "title": "绝不用于",
           "items": [
             "出售给第三方商业机构",
-            "与健康无关的营销推广",
+            "用于与健康无关的营销",
             "个人身份识别或追踪",
             "歧视性分析或评估",
             "任何形式的数据挖掘"
           ]
         }
-      },
+      }
       "informationSharing": {
         "title": "3. 信息共享",
-        "content": "我们不会向第三方出售、交易或转让您的个人信息，除非：",
+        "content": "我们不会出售、交易或转让您的个人信息给第三方，除非：",
         "exceptions": [
           "获得您的明确同意",
           "法律要求或法院命令",
-          "为保护我们的权利、财产或安全",
-          "与受信任的第三方服务提供商合作（他们同意保密）"
+          "保护我们的权利、财产或安全",
+          "与可信的第三方服务提供商合作（他们同意保密）"
         ]
-      },
+      }
       "dataSecurity": {
-        "title": "4. 数据安全措施",
+        "title": "4. 数据保护措施",
         "encryption": {
           "title": "数据加密",
-          "description": "TLS 1.3加密传输，AES-256数据存储加密"
-        },
+          "description": "采用TLS 1.3加密传输，AES-256数据存储加密"
+        }
         "accessControl": {
           "title": "访问控制",
-          "description": "严格权限管理，仅授权人员可访问数据"
-        },
+          "description": "严格的权限管理，仅授权人员可访问数据"
+        }
         "regularAudit": {
           "title": "定期审计",
-          "description": "季度安全审计，第三方渗透测试"
-        },
-        "disclaimer": "但是，请注意，没有任何通过互联网传输的数据或存储系统能够保证100%安全。"
-      },
+          "description": "每季度安全审计，第三方渗透测试"
+        }
+        "disclaimer": "但请注意，没有任何互联网传输或存储方法是100%安全的。"
+      }
       "cookieUsage": {
-        "title": "5. Cookie和跟踪技术",
+        "title": "5. Cookie 和跟踪技术",
         "cookieTypes": {
-          "title": "我们使用的Cookie类型",
+          "title": "我们使用的 Cookie 类型",
           "necessary": {
-            "type": "必要Cookie",
+            "type": "必要 Cookie",
             "purpose": "网站基本功能",
             "duration": "会话期间",
             "required": "必需"
-          },
+          }
           "functional": {
-            "type": "功能Cookie",
+            "type": "功能 Cookie",
             "purpose": "记住用户偏好",
             "duration": "30天",
             "required": "可选"
-          },
+          }
           "analytical": {
-            "type": "分析Cookie",
+            "type": "分析 Cookie",
             "purpose": "网站使用统计",
             "duration": "2年",
             "required": "可选"
           }
-        },
-        "management": {
-          "title": "Cookie管理",
-          "text": "您可以通过浏览器设置控制Cookie的使用。请注意，禁用某些Cookie可能会影响网站功能的正常使用。我们提供Cookie偏好中心，您可以随时调整设置。"
         }
-      },
+        "management": {
+          "title": "Cookie 管理",
+          "text": "您可以通过浏览器设置控制 Cookie 的使用。请注意，禁用某些 Cookie 可能影响网站功能的正常使用。我们提供Cookie偏好中心，您可以随时调整设置。"
+        }
+      }
       "userRights": {
         "title": "6. 您的权利",
         "subtitle": "根据GDPR，您享有以下权利：",
         "rights": [
           {
             "name": "访问权",
-            "description": "查看我们持有的关于您的个人数据"
-          },
+            "description": "查看我们持有的您的个人数据"
+          }
           {
             "name": "更正权",
             "description": "要求更正不准确的个人数据"
-          },
+          }
           {
             "name": "删除权",
             "description": "要求删除您的个人数据"
-          },
+          }
           {
             "name": "限制处理权",
             "description": "限制数据处理活动"
-          },
+          }
           {
-            "name": "数据可携权",
+            "name": "数据可携带权",
             "description": "以结构化格式获取数据"
-          },
+          }
           {
             "name": "反对权",
             "description": "反对特定的数据处理"
-          },
+          }
           {
-            "name": "撤回同意权",
-            "description": "随时撤回已给予的同意"
-          },
+            "name": "撤销同意权",
+            "description": "随时撤销已给予的同意"
+          }
           {
             "name": "投诉权",
             "description": "向监管机构举报违规行为"
           }
         ]
-      },
+      }
       "contactUs": {
         "title": "7. 联系我们",
         "description": "如果您对本隐私政策有任何疑问，或需要行使您的数据权利，请通过以下方式联系我们：",
         "dataProtection": {
           "title": "数据保护联系方式",
           "email": "邮箱：tiyibaofu@outlook.com",
-          "subject": "请在邮件主题中注明\"数据保护请求\"",
-          "responseTime": "响应时间：72小时内确认，30天内完成处理"
-        },
+          "subject": "邮件主题请包含：\"数据保护请求\"",
+          "responseTime": "回复时间：72小时内确认，30天内处理完成"
+        }
         "dpo": {
           "title": "数据保护官(DPO)",
           "email": "邮箱：tiyibaofu@outlook.com",
-          "responsibility": "职责：监督数据保护合规性",
+          "responsibility": "职责：监督数据保护合规",
           "languages": "联系语言：中文、英文"
         }
       }
     },
     "policyUpdates": {
       "title": "政策更新",
-      "content": "我们可能会根据法律要求、业务需要或技术发展更新本隐私政策。任何重大变更将：",
+      "content": "我们可能会根据法律要求、业务需要或技术发展更新本隐私政策。任何重大变更都将：",
       "procedures": [
         "提前30天通过网站公告或邮件通知用户",
-        "在网站首页显著提醒",
-        "对于增加数据收集或使用的变更，重新获得用户同意",
+        "在网站首页显著位置提醒",
+        "对于增加数据收集或用途的变更，重新获取用户同意",
         "保留政策历史版本供查阅"
       ],
-      "recommendation": "我们建议您定期查看本政策，以了解最新信息。继续使用我们的服务表示您接受更新后的政策。"
+      "recommendation": "建议您定期查看本政策以了解最新信息。继续使用我们的服务即表示您接受更新后的政策。"
     },
     "mvpNotice": {
       "title": "MVP阶段说明",
-      "text": "请注意，periodhub.health目前处于最小可行产品(MVP)阶段，以有限的资源运营。我们专注于最小化基础设施和成本，致力于近零个人信息收集。"
+      "text": "请注意，periodhub.health目前处于最小可行产品(MVP)阶段，以有限的资源运营，专注于最小化基础设施和成本，旨在实现接近零的个人信息收集。"
     },
     "questions": "有疑问？",
     "questionsDescription": "如果您对我们的隐私政策有任何疑问，请随时联系我们。",
     "contactUs": "联系我们"
   },
-  "languageSwitcher": {
-    "languages": {
-      "en": "English",
-      "zh": "中文"
+  "termsOfService": {
+    "title": "服务条款",
+    "lastUpdated": "最后更新：2024年4月1日",
+    "intro": "欢迎使用periodhub.health！在使用我们的服务之前，请仔细阅读并理解这些服务条款。通过访问或使用本网站的任何部分，您同意受这些条款的约束。如果您不同意本协议的所有条款和条件，则您可能无法访问网站或使用任何服务。",
+    "sections": {
+      "userEligibility": {
+        "title": "2. 用户资格和账户责任",
+        "ageRequirementTitle": "2.1 使用资格",
+        "ageRequirement": "任何13岁或以上的个人都可以使用我们的网站服务。13岁以下的用户必须在父母或法定监护人的监督和同意下使用本网站。通过使用本网站，您声明并保证您符合上述年龄要求。",
+        "accountAccuracyTitle": "2.2 账户信息准确性",
+        "accountAccuracy": "如果您选择创建账户或提供个人信息，您承诺提供真实、准确、完整和最新的信息。您有责任及时更新您的信息以保持其准确性。虚假或误导性信息可能会影响我们为您提供的服务质量。",
+        "accountSecurityTitle": "2.3 账户安全责任",
+        "accountSecurity": "您有责任维护账户信息的机密性和安全性。您应该妥善保管您的登录凭据，不要与他人分享账户信息。您对账户下的所有活动负责。如果您发现账户被盗用或存在安全风险，请立即通知我们。"
+      }
+      "serviceContent": {
+        "title": "3. 服务内容和使用指南",
+        "availabilityTitle": "3.1 服务可获得性",
+        "availability": "我们努力确保网站服务的持续可用性，但不保证服务不会中断。由于维护、技术故障、网络问题或其他不可预见的情况，服务可能会暂时中断。我们将尽力减少服务中断的影响。",
+        "contentLicenseTitle": "3.2 内容使用许可",
+        "contentLicense": "在遵守这些条款的前提下，我们授予您有限的、非独占的、不可转让的许可，仅用于个人、非商业目的访问和使用网站内容。您不得复制、修改、分发、出售或反向工程本网站的任何部分。",
+        "assessmentToolsTitle": "3.3 评估工具使用",
+        "assessmentTools": "我们的症状评估工具旨在提供教育和信息支持，不应被视为医疗诊断或治疗建议。评估结果基于您提供的信息，其准确性取决于信息的完整性和真实性。您应该诚实、完整地填写评估问卷以获得最准确的建议。",
+        "personalizedAdviceTitle": "3.4 个性化建议的性质",
+        "personalizedAdvice": "基于您的评估结果提供的个性化建议仅供参考，不能替代专业医疗建议。这些建议基于一般医学知识和最佳实践，但每个人的情况都是独特的。在实施任何建议之前，特别是涉及药物或重大生活方式改变的建议，请咨询医疗专业人士。"
+      }
+      "userConduct": {
+        "title": "4. 用户行为准则",
+        "prohibitedBehaviorsTitle": "4.1 禁止行为",
+        "prohibitedBehaviors": "在使用本网站时，您同意不从事以下行为：",
+        "prohibitedList": [
+          "违反任何适用的法律法规或这些服务条款",
+          "传播虚假、误导性或有害的健康信息",
+          "冒充他人或虚假陈述您的身份或隶属关系",
+          "骚扰、恐吓、威胁或伤害其他用户",
+          "发布、传输或分享不当、冒犯性或非法内容",
+          "试图破坏网站安全或干扰网站正常运行",
+          "使用自动化工具（如机器人、爬虫）访问网站",
+          "为商业目的收集其他用户的信息",
+          "传播病毒、恶意软件或其他有害代码"
+        ],
+        "contentAccuracyTitle": "4.2 内容准确性责任",
+        "contentAccuracy": "您承诺在使用我们的评估工具和其他交互功能时提供准确和完整的信息。虚假或误导性信息不仅可能影响您收到的建议质量，还可能对您的健康决策产生负面影响。",
+        "respectOthersTitle": "4.3 尊重他人权益",
+        "respectOthers": "在使用任何社区功能或与其他用户互动时，您应该尊重他人的隐私、尊严和权利。不要发布可能对他人造成伤害、歧视或偏见的内容。我们倡导建设性和支持性的社区环境。"
+      }
+      "privacyProtection": {
+        "title": "5. 数据使用和隐私保护",
+        "privacyPolicyRefTitle": "5.1 隐私政策引用",
+        "privacyPolicyRef": "您的隐私对我们非常重要。我们收集、使用、存储和保护您个人信息的方式在我们的隐私政策中有详细说明。隐私政策是这些服务条款的重要组成部分，与这些条款具有相同的法律效力。",
+        "dataCollectionTitle": "5.2 数据收集概述",
+        "dataCollection": "我们可能收集的信息类型包括但不限于：",
+        "dataTypes": {
+          "basicInfo": "基本信息：年龄、地理位置（如果您选择提供）",
+          "healthInfo": "健康相关信息：症状描述、疼痛评分、月经周期信息",
+          "usageData": "使用数据：网站访问记录、功能使用、偏好设置",
+          "deviceInfo": "设备信息：IP地址、浏览器类型、操作系统和其他技术信息"
+        }
+        "dataUsageTitle": "5.3 数据使用目的",
+        "usagePurposes": [
+          "提供个性化健康建议和服务",
+          "改进和优化网站功能和用户体验",
+          "进行匿名统计分析和研究",
+          "维护网站安全并防止滥用",
+          "向您发送相关健康信息和更新（如果您选择接收）"
+        ],
+        "dataSecurityTitle": "5.4 数据安全保护",
+        "dataSecurity": "我们实施适当的技术和组织措施来保护您个人信息的安全，包括加密传输、访问控制、定期安全审计等。但是，请注意互联网传输不能100%安全，我们无法保证绝对的数据安全。",
+        "thirdPartySharingTitle": "5.5 第三方数据共享",
+        "thirdPartySharing": "未经您同意，我们不会向第三方出售、交易或转让您的个人信息，除非法律要求或为保护我们的权利和利益。在与可信的第三方服务提供商合作时，我们确保他们遵守严格的保密要求。"
+      }
+      "medicalDisclaimer": {
+        "title": "6. 健康信息免责声明",
+        "importantMedicalDisclaimer": "重要医疗免责声明",
+        "disclaimerText": "本网站提供的所有健康信息、建议、评估结果和内容仅用于教育和信息目的，不能替代，也不应被视为专业医疗建议、诊断或治疗。",
+        "nonMedicalService": "periodhub.health不是医疗服务提供商。我们不提供医疗诊断、治疗计划或处方药物。本网站上的所有内容，包括文章、评估工具、建议和其他信息，都是基于一般医学知识和公开研究材料编制的教育内容。",
+        "personalResponsibility": "您对自己的健康决策承担全部责任。在做出任何健康相关决策、改变生活方式、开始新的治疗方法或停止现有治疗之前，您必须咨询合格的医疗专业人士，包括但不限于：",
+        "medicalProfessionals": [
+          "您的主治医生或家庭医生",
+          "妇产科医生",
+          "疼痛管理专家",
+          "其他相关医疗专业人士"
+        ],
+        "emergencyHandling": "本网站不能替代紧急医疗服务。如果您遇到医疗紧急情况或严重症状，请立即联系当地紧急服务或前往最近的急诊室。严重症状可能包括但不限于：",
+        "emergencySymptoms": [
+          "突然、严重的腹痛",
+          "大量出血（连续几小时每小时浸透超过一个卫生巾）",
+          "38°C（100.4°F）以上的发烧",
+          "头晕、昏厥或极度虚弱",
+          "呼吸困难或胸痛"
+        ]
+      }
+      "limitationOfLiability": {
+        "title": "7. 责任限制",
+        "generalDisclaimer": "在法律允许的最大范围内，periodhub.health及其关联公司、董事、员工、代理人、供应商或许可方不对任何直接、间接、偶然、特殊、后果性或惩罚性损害承担责任，包括但不限于利润、数据、使用、商誉或其他无形损失的损失，这些损失是由于（i）您访问或使用或无法访问或使用服务；（ii）服务上任何第三方的任何行为或内容；（iii）从服务获得的任何内容；以及（iv）未经授权访问、使用或更改您的传输或内容，无论基于保证、合同、侵权（包括疏忽）或任何其他法律理论，无论我们是否已被告知此类损害的可能性，即使此处规定的补救措施被发现未能达到其基本目的。",
+        "noMedicalAdvice": "您承认本网站提供的信息仅用于信息目的，不构成医疗建议。我们不对您基于本网站提供的信息做出的任何健康决策负责。"
+      }
+      "indemnification": {
+        "title": "8. 赔偿",
+        "content": "您同意赔偿并使periodhub.health、其关联公司、高级职员、董事、员工和代理人免受因您访问或使用网站或您违反这些服务条款而产生的任何和所有索赔、责任、损害、损失和费用，包括合理的律师费和费用。"
+      }
+      "governingLaw": {
+        "title": "9. 适用法律和争议解决",
+        "content": "这些条款应受中华人民共和国法律管辖并根据其解释，不考虑其法律冲突条款。因这些条款产生或与之相关的任何争议应提交periodhub.health所在地有管辖权的法院解决。"
+      }
+      "changesToTerms": {
+        "title": "10. 条款变更",
+        "content": "我们保留随时修改或替换这些条款的权利。如果修订是重大的，我们将在任何新条款生效前至少提前30天通知。什么构成重大变更将由我们自行决定。在那些修订生效后继续访问或使用我们的服务，您同意受修订条款的约束。如果您不同意新条款，请停止使用服务。"
+      }
+      "contactUsInfo": {
+        "title": "11. 联系我们",
+        "description": "如果您对这些服务条款有任何疑问，请联系我们：",
+        "email": "邮箱：tiyibaofu@outlook.com",
+        "responseTime": "响应时间：72小时内确认，30天内处理完成"
+      }
     },
-    "switchTo": "切换到",
-    "currentLanguage": "当前语言"
-  }
+    "finalNotice": {
+      "title": "最终提醒",
+      "content": "这些服务条款最后更新于2024年4月1日。我们建议您定期查看此页面以了解任何更新。继续使用我们的服务表示您接受条款的任何修订。感谢您选择periodhub.health，我们致力于为您提供有价值的健康教育资源。"
+    },
+    "questionsTerms": "有疑问？",
+    "questionsDescriptionTerms": "如果您对我们的服务条款有任何疑问，请随时联系我们。",
+    "contactUsTerms": "联系我们",
+    "importantReminder": "重要提醒",
+    "importantReminderText": "这些服务条款可能会不时更新。继续使用我们的服务表示您接受任何修改。"
+  },
 }

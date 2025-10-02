@@ -1,0 +1,266 @@
+[
+  {
+    "timestamp": "2025-10-02T11:39:58.750Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T11-39-58-744Z_batch-1-basic-structure.json",
+    "batchInfo": "batch-1-basic-structure",
+    "fileSize": 293829,
+    "checksum": "7e995d1b70b2ec2f2c38477b3530d01d"
+  },
+  {
+    "timestamp": "2025-10-02T11:40:09.405Z",
+    "originalPath": "messages/en.json",
+    "backupPath": "scripts/backups/en_2025-10-02T11-40-09-400Z_batch-1-basic-structure.json",
+    "batchInfo": "batch-1-basic-structure",
+    "fileSize": 366454,
+    "checksum": "908306fa5313fc28fd6c7cae55aaeee0"
+  },
+  {
+    "timestamp": "2025-10-02T11:42:26.526Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T11-42-26-494Z_batch-2-important-notice.json",
+    "batchInfo": "batch-2-important-notice",
+    "fileSize": 293866,
+    "checksum": "4aeefbfdcdf2028e12c9c8eab6625f04"
+  },
+  {
+    "timestamp": "2025-10-02T11:42:48.884Z",
+    "originalPath": "messages/en.json",
+    "backupPath": "scripts/backups/en_2025-10-02T11-42-48-871Z_batch-2-important-notice.json",
+    "batchInfo": "batch-2-important-notice",
+    "fileSize": 366464,
+    "checksum": "3151feabcbed041ca6e8e98576dc9c2c"
+  },
+  {
+    "timestamp": "2025-10-02T11:47:37.414Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T11-47-37-403Z_batch-3a-service-description.json",
+    "batchInfo": "batch-3a-service-description",
+    "fileSize": 294276,
+    "checksum": "53c9fda2d01dabaf647b5c4b4c574ca4"
+  },
+  {
+    "timestamp": "2025-10-02T11:48:12.135Z",
+    "originalPath": "messages/en.json",
+    "backupPath": "scripts/backups/en_2025-10-02T11-48-12-128Z_batch-3a-service-description.json",
+    "batchInfo": "batch-3a-service-description",
+    "fileSize": 366468,
+    "checksum": "389b3196471cfcdfe86b8a835b35e8b2"
+  },
+  {
+    "timestamp": "2025-10-02T11:50:29.352Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T11-50-29-344Z_batch-3b-user-conduct.json",
+    "batchInfo": "batch-3b-user-conduct",
+    "fileSize": 295300,
+    "checksum": "8852a33b42c5f838451acf0c943c898f"
+  },
+  {
+    "timestamp": "2025-10-02T11:50:48.967Z",
+    "originalPath": "messages/en.json",
+    "backupPath": "scripts/backups/en_2025-10-02T11-50-48-960Z_batch-3b-user-conduct.json",
+    "batchInfo": "batch-3b-user-conduct",
+    "fileSize": 367547,
+    "checksum": "7fa3e1ad81e4a619bbae448cd478fca8"
+  },
+  {
+    "timestamp": "2025-10-02T11:53:38.536Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T11-53-38-522Z_batch-3c-privacy-protection.json",
+    "batchInfo": "batch-3c-privacy-protection",
+    "fileSize": 296465,
+    "checksum": "5580069470188e2ea783204df68848d8"
+  },
+  {
+    "timestamp": "2025-10-02T11:54:21.252Z",
+    "originalPath": "messages/en.json",
+    "backupPath": "scripts/backups/en_2025-10-02T11-54-21-222Z_batch-3c-privacy-protection.json",
+    "batchInfo": "batch-3c-privacy-protection",
+    "fileSize": 368809,
+    "checksum": "a701974f3602528245023c29276ee210"
+  },
+  {
+    "timestamp": "2025-10-02T12:01:44.620Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-01-44-610Z_batch-3d-intellectual-property.json",
+    "batchInfo": "batch-3d-intellectual-property",
+    "fileSize": 298030,
+    "checksum": "088a7fd888ef232aa849fc2a57a1146e"
+  },
+  {
+    "timestamp": "2025-10-02T12:01:54.142Z",
+    "originalPath": "messages/en.json",
+    "backupPath": "scripts/backups/en_2025-10-02T12-01-54-140Z_batch-3d-intellectual-property.json",
+    "batchInfo": "batch-3d-intellectual-property",
+    "fileSize": 370061,
+    "checksum": "a97335faffc7d54a13e54750daab2c1d"
+  },
+  {
+    "timestamp": "2025-10-02T12:02:32.144Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-02-32-136Z_batch-3e-service-changes.json",
+    "batchInfo": "batch-3e-service-changes",
+    "fileSize": 299570,
+    "checksum": "ea6f067b7134b2729fbc4480a6197835"
+  },
+  {
+    "timestamp": "2025-10-02T12:03:41.719Z",
+    "originalPath": "messages/en.json",
+    "backupPath": "scripts/backups/en_2025-10-02T12-03-41-706Z_batch-3e-service-changes.json",
+    "batchInfo": "batch-3e-service-changes",
+    "fileSize": 371640,
+    "checksum": "4032f62892165e522dff951001eb9d35"
+  },
+  {
+    "timestamp": "2025-10-02T12:07:58.663Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-07-58-653Z_batch-4a-liability-limitation.json",
+    "batchInfo": "batch-4a-liability-limitation",
+    "fileSize": 301655,
+    "checksum": "30e43b6db2384165d74eb26dd244128f"
+  },
+  {
+    "timestamp": "2025-10-02T12:09:54.232Z",
+    "originalPath": "messages/en.json",
+    "backupPath": "scripts/backups/en_2025-10-02T12-09-54-223Z_batch-4a-liability-limitation.json",
+    "batchInfo": "batch-4a-liability-limitation",
+    "fileSize": 373909,
+    "checksum": "b01afb60da7f1179bcb4d4957aded635"
+  },
+  {
+    "timestamp": "2025-10-02T12:10:37.228Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-10-37-222Z_batch-5-contact-final.json",
+    "batchInfo": "batch-5-contact-final",
+    "fileSize": 303777,
+    "checksum": "473e37653073887fc35b9fc80ccfd8b8"
+  },
+  {
+    "timestamp": "2025-10-02T12:10:46.615Z",
+    "originalPath": "messages/en.json",
+    "backupPath": "scripts/backups/en_2025-10-02T12-10-46-608Z_batch-5-contact-final.json",
+    "batchInfo": "batch-5-contact-final",
+    "fileSize": 376262,
+    "checksum": "6e729a01638912909963054039909bff"
+  },
+  {
+    "timestamp": "2025-10-02T12:19:46.932Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-19-46-927Z_fix-missing-anchorTexts.json",
+    "batchInfo": "fix-missing-anchorTexts",
+    "fileSize": 304805,
+    "checksum": "0e5ca5616c167630b023772cba3b204b"
+  },
+  {
+    "timestamp": "2025-10-02T12:31:44.575Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-31-44-566Z_高优先级-anchorTexts.json",
+    "batchInfo": "高优先级-anchorTexts",
+    "fileSize": 308316,
+    "checksum": "d0baf0968806e02c62a2c077d1a0be3a"
+  },
+  {
+    "timestamp": "2025-10-02T12:31:53.879Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-31-53-876Z_高优先级-interactiveToolsPage.json",
+    "batchInfo": "高优先级-interactiveToolsPage",
+    "fileSize": 308520,
+    "checksum": "acf2ead3f5173705ed2c84b025a69e49"
+  },
+  {
+    "timestamp": "2025-10-02T12:32:01.960Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-32-01-954Z_中优先级-periodPainAssessmentPage.json",
+    "batchInfo": "中优先级-periodPainAssessmentPage",
+    "fileSize": 308577,
+    "checksum": "50a60129ccfe1885d1ae71556190e58c"
+  },
+  {
+    "timestamp": "2025-10-02T12:32:10.352Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-32-10-350Z_中优先级-scenarioSolutionsPage.json",
+    "batchInfo": "中优先级-scenarioSolutionsPage",
+    "fileSize": 309080,
+    "checksum": "dd02b6f0c9ef99508ccc2829117d5600"
+  },
+  {
+    "timestamp": "2025-10-02T12:32:19.983Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-32-19-977Z_中优先级-embeddedPainAssessment.json",
+    "batchInfo": "中优先级-embeddedPainAssessment",
+    "fileSize": 309990,
+    "checksum": "aca02cd0628375a1ad5699cd5852a3fe"
+  },
+  {
+    "timestamp": "2025-10-02T12:32:28.431Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-32-28-428Z_低优先级-pdfCenter.json",
+    "batchInfo": "低优先级-pdfCenter",
+    "fileSize": 311037,
+    "checksum": "e9507e8cd564eff95419ddc46739a84c"
+  },
+  {
+    "timestamp": "2025-10-02T12:32:47.685Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-32-47-675Z_低优先级-constitutionTest.json",
+    "batchInfo": "低优先级-constitutionTest",
+    "fileSize": 311316,
+    "checksum": "23aeed0b6638e9b5f50fbbe499c9c611"
+  },
+  {
+    "timestamp": "2025-10-02T12:42:54.526Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-42-54-513Z_隐私政策翻译.json",
+    "batchInfo": "隐私政策翻译",
+    "fileSize": 315427,
+    "checksum": "fdc5d43ec41ff11dde29e372697189b1"
+  },
+  {
+    "timestamp": "2025-10-02T12:52:58.647Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T12-52-58-640Z_语言切换翻译-中文.json",
+    "batchInfo": "语言切换翻译-中文",
+    "fileSize": 323488,
+    "checksum": "e57e7b904e08c8c1f0c50ea16d98b7bb"
+  },
+  {
+    "timestamp": "2025-10-02T12:53:08.444Z",
+    "originalPath": "messages/en.json",
+    "backupPath": "scripts/backups/en_2025-10-02T12-53-08-438Z_语言切换翻译-英文.json",
+    "batchInfo": "语言切换翻译-英文",
+    "fileSize": 376201,
+    "checksum": "464b5ffca944384c5b51075625ae20ae"
+  },
+  {
+    "timestamp": "2025-10-02T13:24:48.045Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T13-24-48-035Z_服务条款缺失章节翻译.json",
+    "batchInfo": "服务条款缺失章节翻译",
+    "fileSize": 323654,
+    "checksum": "62ce6b152ba09f36fd28c14acd4ab4f5"
+  },
+  {
+    "timestamp": "2025-10-02T13:28:37.917Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T13-28-37-914Z_服务描述缺失翻译键.json",
+    "batchInfo": "服务描述缺失翻译键",
+    "fileSize": 329230,
+    "checksum": "91a9abffb13604ee57021745b9436301"
+  },
+  {
+    "timestamp": "2025-10-02T13:36:56.962Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T13-36-56-954Z_服务可用性翻译键.json",
+    "batchInfo": "服务可用性翻译键",
+    "fileSize": 330308,
+    "checksum": "2c36e6468cc72ba8732825d8a564ae3d"
+  },
+  {
+    "timestamp": "2025-10-02T13:39:42.036Z",
+    "originalPath": "messages/zh.json",
+    "backupPath": "scripts/backups/zh_2025-10-02T13-39-42-028Z_用户行为规范翻译键.json",
+    "batchInfo": "用户行为规范翻译键",
+    "fileSize": 330582,
+    "checksum": "752b3d54c4191976de44cfa784eb843a"
+  }
+]

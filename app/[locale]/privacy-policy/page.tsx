@@ -12,26 +12,32 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>
 }): Promise<Metadata> {
   const { locale } = await params;
-  const title = locale === 'zh' ? '隐私政策' : 'Privacy Policy';
-  const description = locale === 'zh' 
-    ? '了解我们如何收集、使用和保护您的个人信息。'
-    : 'Learn how we collect, use, and protect your personal information.';
-
+  const t = await getTranslations({ locale, namespace: 'privacyPolicy' });
+  
   return {
-    title: `${title} | periodhub.health`,
-    description,
+    title: `${t('title')} | periodhub.health`,
+    description: locale === 'zh' 
+      ? '了解periodhub.health如何保护您的隐私信息。我们严格遵守GDPR等数据保护法规，承诺保护用户的经期健康数据隐私安全。'
+      : 'Learn how periodhub.health protects your privacy information. We strictly comply with GDPR and other data protection regulations, committed to protecting users\' menstrual health data privacy.',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/privacy-policy`,
+      canonical: `${URL_CONFIG.baseUrl}/${locale}/privacy-policy`,
       languages: {
-        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/privacy-policy`,
-        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/privacy-policy`,
-        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/privacy-policy`,
+        'zh-CN': `${URL_CONFIG.baseUrl}/zh/privacy-policy`,
+        'en-US': `${URL_CONFIG.baseUrl}/en/privacy-policy`,
+        'x-default': `${URL_CONFIG.baseUrl}/en/privacy-policy`,
       },
     },
     openGraph: {
-      title,
-      description,
+      title: `${t('title')} | periodhub.health`,
+      description: locale === 'zh' 
+        ? '了解periodhub.health如何保护您的隐私信息。我们严格遵守GDPR等数据保护法规，承诺保护用户的经期健康数据隐私安全。'
+        : 'Learn how periodhub.health protects your privacy information. We strictly comply with GDPR and other data protection regulations, committed to protecting users\' menstrual health data privacy.',
       type: 'website',
+      url: `${URL_CONFIG.baseUrl}/${locale}/privacy-policy`,
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
@@ -43,250 +49,341 @@ export default async function PrivacyPolicyPage({
 }) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'privacyPolicy' });
 
-  const content = locale === 'zh' ? {
-    title: '隐私政策',
-    lastUpdated: '最后更新：2024年4月1日',
-    sections: [
-      {
-        title: '1. 信息收集',
-        content: `
-          <p>我们可能收集以下类型的信息：</p>
-          <ul>
-            <li><strong>个人信息：</strong>当您注册账户或使用我们的服务时，我们可能收集您的姓名、电子邮件地址等信息。</li>
-            <li><strong>健康信息：</strong>您在使用我们的症状追踪工具时提供的健康相关信息。</li>
-            <li><strong>使用数据：</strong>关于您如何使用我们网站的信息，包括访问时间、页面浏览等。</li>
-            <li><strong>技术信息：</strong>您的IP地址、浏览器类型、设备信息等。</li>
-          </ul>
-        `
-      },
-      {
-        title: '2. 信息使用',
-        content: `
-          <p>我们使用收集的信息用于：</p>
-          <ul>
-            <li>提供和改进我们的服务</li>
-            <li>个性化您的用户体验</li>
-            <li>发送重要通知和更新</li>
-            <li>进行数据分析以改善网站功能</li>
-            <li>确保网站安全和防止欺诈</li>
-          </ul>
-        `
-      },
-      {
-        title: '3. 信息共享',
-        content: `
-          <p>我们不会出售、交易或转让您的个人信息给第三方，除非：</p>
-          <ul>
-            <li>获得您的明确同意</li>
-            <li>法律要求或法院命令</li>
-            <li>保护我们的权利、财产或安全</li>
-            <li>与可信的第三方服务提供商合作（他们同意保密）</li>
-          </ul>
-        `
-      },
-      {
-        title: '4. 数据安全',
-        content: `
-          <p>我们采取适当的安全措施来保护您的个人信息：</p>
-          <ul>
-            <li>使用SSL加密技术保护数据传输</li>
-            <li>定期更新安全协议</li>
-            <li>限制员工访问个人信息</li>
-            <li>定期备份和安全存储数据</li>
-          </ul>
-          <p>但请注意，没有任何互联网传输或存储方法是100%安全的。</p>
-
-          <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
-            <p class="text-blue-800"><strong>MVP阶段说明：</strong>请注意，periodhub.health目前处于最小可行产品(MVP)阶段。我们以有限的资源运营，专注于最小化基础设施和成本，旨在实现接近零的个人信息收集。</p>
-          </div>
-        `
-      },
-      {
-        title: '5. Cookie使用',
-        content: `
-          <p>我们使用Cookie来：</p>
-          <ul>
-            <li>记住您的偏好设置</li>
-            <li>分析网站流量</li>
-            <li>改善用户体验</li>
-            <li>提供个性化内容</li>
-          </ul>
-          <p>您可以通过浏览器设置控制Cookie的使用。</p>
-        `
-      },
-      {
-        title: '6. 您的权利',
-        content: `
-          <p>您有权：</p>
-          <ul>
-            <li>访问我们持有的关于您的信息</li>
-            <li>要求更正不准确的信息</li>
-            <li>要求删除您的个人信息</li>
-            <li>反对处理您的个人信息</li>
-            <li>数据可携带权</li>
-          </ul>
-        `
-      },
-      {
-        title: '7. 联系我们',
-        content: `
-          <p>如果您对本隐私政策有任何疑问，请通过以下方式联系我们：</p>
-          <ul>
-            <li>电子邮件：tiyibaofu@outlook.com</li>
-            <li>邮寄地址：[公司地址]</li>
-          </ul>
-        `
-      }
-    ]
-  } : {
-    title: 'Privacy Policy',
-    lastUpdated: 'Last updated: April 1, 2024',
-    sections: [
-      {
-        title: '1. Information Collection',
-        content: `
-          <p>We may collect the following types of information:</p>
-          <ul>
-            <li><strong>Personal Information:</strong> When you register an account or use our services, we may collect your name, email address, and other information.</li>
-            <li><strong>Health Information:</strong> Health-related information you provide when using our symptom tracking tools.</li>
-            <li><strong>Usage Data:</strong> Information about how you use our website, including access times, page views, etc.</li>
-            <li><strong>Technical Information:</strong> Your IP address, browser type, device information, etc.</li>
-          </ul>
-        `
-      },
-      {
-        title: '2. Information Use',
-        content: `
-          <p>We use the collected information to:</p>
-          <ul>
-            <li>Provide and improve our services</li>
-            <li>Personalize your user experience</li>
-            <li>Send important notices and updates</li>
-            <li>Conduct data analysis to improve website functionality</li>
-            <li>Ensure website security and prevent fraud</li>
-          </ul>
-        `
-      },
-      {
-        title: '3. Information Sharing',
-        content: `
-          <p>We do not sell, trade, or transfer your personal information to third parties, except when:</p>
-          <ul>
-            <li>We have your explicit consent</li>
-            <li>Required by law or court order</li>
-            <li>To protect our rights, property, or safety</li>
-            <li>Working with trusted third-party service providers (who agree to confidentiality)</li>
-          </ul>
-        `
-      },
-      {
-        title: '4. Data Security',
-        content: `
-          <p>We take appropriate security measures to protect your personal information:</p>
-          <ul>
-            <li>Use SSL encryption technology to protect data transmission</li>
-            <li>Regularly update security protocols</li>
-            <li>Limit employee access to personal information</li>
-            <li>Regular backup and secure data storage</li>
-          </ul>
-          <p>However, please be aware that no data transmission over the internet or storage system can be guaranteed to be 100% secure.</p>
-
-          <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
-            <p class="text-blue-800"><strong>MVP Phase Notice:</strong> Please be aware that periodhub.health is currently in its Minimum Viable Product (MVP) phase, focused on minimal infrastructure and cost, aiming for near-zero data collection of personal information.</p>
-          </div>
-        `
-      },
-      {
-        title: '5. Cookie Usage',
-        content: `
-          <p>We use cookies to:</p>
-          <ul>
-            <li>Remember your preference settings</li>
-            <li>Analyze website traffic</li>
-            <li>Improve user experience</li>
-            <li>Provide personalized content</li>
-          </ul>
-          <p>You can control cookie usage through your browser settings.</p>
-        `
-      },
-      {
-        title: '6. Your Rights',
-        content: `
-          <p>You have the right to:</p>
-          <ul>
-            <li>Access information we hold about you</li>
-            <li>Request correction of inaccurate information</li>
-            <li>Request deletion of your personal information</li>
-            <li>Object to processing of your personal information</li>
-            <li>Data portability</li>
-          </ul>
-        `
-      },
-      {
-        title: '7. Contact Us',
-        content: `
-          <p>If you have any questions about this Privacy Policy, please contact us:</p>
-          <ul>
-            <li>Email: tiyibaofu@outlook.com</li>
-            <li>Mailing Address: [Company Address]</li>
-          </ul>
-        `
-      }
-    ]
-  };
+  const tableOfContents = [
+    { id: 'information-collection', title: t('sections.informationCollection.title') },
+    { id: 'information-use', title: t('sections.informationUse.title') },
+    { id: 'information-sharing', title: t('sections.informationSharing.title') },
+    { id: 'data-security', title: t('sections.dataSecurity.title') },
+    { id: 'cookie-usage', title: t('sections.cookieUsage.title') },
+    { id: 'user-rights', title: t('sections.userRights.title') },
+    { id: 'contact-us', title: t('sections.contactUs.title') },
+  ];
 
   return (
     <div className="space-y-8">
       {/* Page Header */}
       <header className="container-custom">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-800 mb-6">
-            {content.title}
+            {t('title')}
           </h1>
-          <p className="text-neutral-600 mb-8">
-            {content.lastUpdated}
+          <p className="text-neutral-600 mb-6">
+            {t('lastUpdated')}
           </p>
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+            <p className="text-blue-800">
+              {t('intro')}
+            </p>
+          </div>
         </div>
       </header>
 
-      {/* Content */}
+      {/* Important Notice */}
+      <section className="py-8 bg-red-50">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto bg-red-100 border-l-4 border-red-500 p-6 rounded-r-lg">
+            <h3 className="text-lg font-semibold text-red-800 mb-2">{t('importantNotice')}</h3>
+            <p className="text-red-700">{t('importantNoticeText')}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Table of Contents */}
+      <section className="py-8 bg-gray-50">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto bg-gray-100 rounded-lg p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-neutral-800 mb-4">{t('tableOfContents')}</h2>
+            <div className="grid md:grid-cols-2 gap-2 text-sm">
+              {tableOfContents.map((item) => (
+                <a key={item.id} href={`#${item.id}`} className="text-blue-600 hover:underline">
+                  {item.title}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Content Sections */}
       <main className="container-custom">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-lg shadow-sm p-8 space-y-8">
-            {content.sections.map((section, index) => (
-              <section key={index} className="border-b border-neutral-200 pb-6 last:border-b-0">
-                <h2 className="text-xl font-semibold text-neutral-800 mb-4">
-                  {section.title}
-                </h2>
-                <div 
-                  className="prose prose-neutral max-w-none"
-                  dangerouslySetInnerHTML={{ __html: section.content }}
-                />
-              </section>
-            ))}
+          <div className="bg-white rounded-lg shadow-sm p-8 space-y-12">
+            
+            {/* Section 1: Information Collection */}
+            <section id="information-collection" className="border-b-2 border-blue-600 pb-8 last:border-b-0">
+              <h2 className="text-2xl font-bold text-neutral-800 mb-6">{t('sections.informationCollection.title')}</h2>
+              <div className="prose prose-lg prose-neutral max-w-none prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700">
+                <h3>{t('sections.informationCollection.subtitle')}</h3>
+                
+                <div className="space-y-6">
+                  <div className="border-l-4 border-purple-400 pl-6">
+                    <h4 className="text-lg font-semibold">{t('sections.informationCollection.symptomData.title')}</h4>
+                    <ul className="mt-2 space-y-1">
+                      {t.raw('sections.informationCollection.symptomData.items').map((item: string, i: number) => (
+                        <li key={i}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="border-l-4 border-green-400 pl-6">
+                    <h4 className="text-lg font-semibold">{t('sections.informationCollection.technicalInfo.title')}</h4>
+                    <ul className="mt-2 space-y-1">
+                      {t.raw('sections.informationCollection.technicalInfo.items').map((item: string, i: number) => (
+                        <li key={i}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="border-l-4 border-blue-400 pl-6">
+                    <h4 className="text-lg font-semibold">{t('sections.informationCollection.userProvided.title')}</h4>
+                    <ul className="mt-2 space-y-1">
+                      {t.raw('sections.informationCollection.userProvided.items').map((item: string, i: number) => (
+                        <li key={i}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <h4 className="font-semibold text-yellow-800 mb-2">{t('sections.informationCollection.importantNote.title')}</h4>
+                  <p className="text-yellow-700 text-sm">
+                    {t('sections.informationCollection.importantNote.text')}
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 2: Information Use */}
+            <section id="information-use" className="border-b-2 border-blue-600 pb-8 last:border-b-0">
+              <h2 className="text-2xl font-bold text-neutral-800 mb-6">{t('sections.informationUse.title')}</h2>
+              <div className="prose prose-lg prose-neutral max-w-none prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h4 className="text-lg font-semibold text-green-700 mb-3">{t('sections.informationUse.mainPurposes.title')}</h4>
+                    <ul className="space-y-2 text-sm">
+                      {t.raw('sections.informationUse.mainPurposes.items').map((item: string, i: number) => (
+                        <li key={i}>✓ {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+                    <h4 className="text-lg font-semibold text-red-700 mb-3">{t('sections.informationUse.neverUsedFor.title')}</h4>
+                    <ul className="space-y-2 text-sm">
+                      {t.raw('sections.informationUse.neverUsedFor.items').map((item: string, i: number) => (
+                        <li key={i}>✗ {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 3: Information Sharing */}
+            <section id="information-sharing" className="border-b-2 border-blue-600 pb-8 last:border-b-0">
+              <h2 className="text-2xl font-bold text-neutral-800 mb-6">{t('sections.informationSharing.title')}</h2>
+              <div className="prose prose-lg prose-neutral max-w-none prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700">
+                <p>{t('sections.informationSharing.content')}</p>
+                <ul>
+                  {t.raw('sections.informationSharing.exceptions').map((item: string, i: number) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+
+            {/* Section 4: Data Security */}
+            <section id="data-security" className="border-b-2 border-blue-600 pb-8 last:border-b-0">
+              <h2 className="text-2xl font-bold text-neutral-800 mb-6">{t('sections.dataSecurity.title')}</h2>
+              <div className="prose prose-lg prose-neutral max-w-none prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700">
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="text-center p-6 bg-blue-50 rounded-lg">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-semibold mb-2">{t('sections.dataSecurity.encryption.title')}</h4>
+                    <p className="text-sm text-gray-600">{t('sections.dataSecurity.encryption.description')}</p>
+                  </div>
+
+                  <div className="text-center p-6 bg-green-50 rounded-lg">
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-semibold mb-2">{t('sections.dataSecurity.accessControl.title')}</h4>
+                    <p className="text-sm text-gray-600">{t('sections.dataSecurity.accessControl.description')}</p>
+                  </div>
+
+                  <div className="text-center p-6 bg-purple-50 rounded-lg">
+                    <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                      </svg>
+                    </div>
+                    <h4 className="text-lg font-semibold mb-2">{t('sections.dataSecurity.regularAudit.title')}</h4>
+                    <p className="text-sm text-gray-600">{t('sections.dataSecurity.regularAudit.description')}</p>
+                  </div>
+                </div>
+                
+                <div className="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4">
+                  <p className="text-blue-800"><strong>{t('sections.dataSecurity.disclaimer')}</strong></p>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 5: Cookie Usage */}
+            <section id="cookie-usage" className="border-b-2 border-blue-600 pb-8 last:border-b-0">
+              <h2 className="text-2xl font-bold text-neutral-800 mb-6">{t('sections.cookieUsage.title')}</h2>
+              <div className="prose prose-lg prose-neutral max-w-none prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700">
+                <h3>{t('sections.cookieUsage.cookieTypes.title')}</h3>
+                <div className="overflow-x-auto">
+                  <table className="min-w-full bg-white border border-gray-200">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">{locale === 'zh' ? '类型' : 'Type'}</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">{locale === 'zh' ? '用途' : 'Purpose'}</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">{locale === 'zh' ? '保存时间' : 'Duration'}</th>
+                        <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">{locale === 'zh' ? '必要性' : 'Required'}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="px-4 py-3 text-sm border-b">{t('sections.cookieUsage.cookieTypes.necessary.type')}</td>
+                        <td className="px-4 py-3 text-sm border-b">{t('sections.cookieUsage.cookieTypes.necessary.purpose')}</td>
+                        <td className="px-4 py-3 text-sm border-b">{t('sections.cookieUsage.cookieTypes.necessary.duration')}</td>
+                        <td className="px-4 py-3 text-sm border-b text-green-600">{t('sections.cookieUsage.cookieTypes.necessary.required')}</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 text-sm border-b">{t('sections.cookieUsage.cookieTypes.functional.type')}</td>
+                        <td className="px-4 py-3 text-sm border-b">{t('sections.cookieUsage.cookieTypes.functional.purpose')}</td>
+                        <td className="px-4 py-3 text-sm border-b">{t('sections.cookieUsage.cookieTypes.functional.duration')}</td>
+                        <td className="px-4 py-3 text-sm border-b text-blue-600">{t('sections.cookieUsage.cookieTypes.functional.required')}</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-3 text-sm border-b">{t('sections.cookieUsage.cookieTypes.analytical.type')}</td>
+                        <td className="px-4 py-3 text-sm border-b">{t('sections.cookieUsage.cookieTypes.analytical.purpose')}</td>
+                        <td className="px-4 py-3 text-sm border-b">{t('sections.cookieUsage.cookieTypes.analytical.duration')}</td>
+                        <td className="px-4 py-3 text-sm border-b text-blue-600">{t('sections.cookieUsage.cookieTypes.analytical.required')}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className="mt-6 bg-orange-50 border border-orange-200 rounded-lg p-4">
+                  <h4 className="font-semibold text-orange-800 mb-2">{t('sections.cookieUsage.management.title')}</h4>
+                  <p className="text-orange-700 text-sm">
+                    {t('sections.cookieUsage.management.text')}
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 6: User Rights */}
+            <section id="user-rights" className="border-b-2 border-blue-600 pb-8 last:border-b-0">
+              <h2 className="text-2xl font-bold text-neutral-800 mb-6">{t('sections.userRights.title')}</h2>
+              <div className="prose prose-lg prose-neutral max-w-none prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700">
+                <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-8">
+                  <h4 className="text-lg font-semibold mb-4">{t('sections.userRights.subtitle')}</h4>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <ul className="space-y-3">
+                      {t.raw('sections.userRights.rights').slice(0, 4).map((right: any, i: number) => (
+                        <li key={i} className="flex items-center">
+                          <span className="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                          <span><strong>{right.name}：</strong>{right.description}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <ul className="space-y-3">
+                      {t.raw('sections.userRights.rights').slice(4).map((right: any, i: number) => (
+                        <li key={i} className="flex items-center">
+                          <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                          <span><strong>{right.name}：</strong>{right.description}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 7: Contact Us */}
+            <section id="contact-us" className="border-b-2 border-blue-600 pb-8 last:border-b-0">
+              <h2 className="text-2xl font-bold text-neutral-800 mb-6">{t('sections.contactUs.title')}</h2>
+              <div className="prose prose-lg prose-neutral max-w-none prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700">
+                <p>{t('sections.contactUs.description')}</p>
+                
+                <div className="grid md:grid-cols-2 gap-6 mt-6">
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                    <h4 className="font-semibold mb-3">{t('sections.contactUs.dataProtection.title')}</h4>
+                    <ul className="space-y-2 text-sm">
+                      <li><strong>{t('sections.contactUs.dataProtection.email')}</strong></li>
+                      <li><strong>{t('sections.contactUs.dataProtection.subject')}</strong></li>
+                      <li><strong>{t('sections.contactUs.dataProtection.responseTime')}</strong></li>
+                    </ul>
+                  </div>
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                    <h4 className="font-semibold mb-3">{t('sections.contactUs.dpo.title')}</h4>
+                    <ul className="space-y-2 text-sm">
+                      <li><strong>{t('sections.contactUs.dpo.email')}</strong></li>
+                      <li><strong>{t('sections.contactUs.dpo.responsibility')}</strong></li>
+                      <li><strong>{t('sections.contactUs.dpo.languages')}</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
       </main>
 
+      {/* Policy Updates */}
+      <section className="py-12 bg-blue-50">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto bg-blue-100 border border-blue-200 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-blue-800 mb-6">{t('policyUpdates.title')}</h2>
+            <p className="mb-4">{t('policyUpdates.content')}</p>
+            <ul className="space-y-2 mb-4">
+              {t.raw('policyUpdates.procedures').map((item: string, i: number) => (
+                <li key={i}>• {item}</li>
+              ))}
+            </ul>
+            <p className="text-sm text-blue-700">
+              <strong>{t('policyUpdates.recommendation')}</strong>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* MVP Notice */}
+      <section className="py-12 bg-yellow-50">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto bg-yellow-100 border border-yellow-200 rounded-lg p-6">
+            <h3 className="text-lg font-semibold mb-2 text-yellow-800">{t('mvpNotice.title')}</h3>
+            <p className="text-yellow-700 text-sm">{t('mvpNotice.text')}</p>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
-      <section className="bg-neutral-50 py-12">
+      <section className="py-12 bg-purple-50">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl font-bold text-neutral-800 mb-4">
-              {locale === 'zh' ? '有疑问？' : 'Questions?'}
+            <h2 className="text-2xl font-bold text-purple-800 mb-4">
+              {t('questions')}
             </h2>
-            <p className="text-neutral-600 mb-6">
-              {locale === 'zh' 
-                ? '如果您对我们的隐私政策有任何疑问，请随时联系我们。'
-                : 'If you have any questions about our Privacy Policy, please feel free to contact us.'
-              }
+            <p className="text-purple-700 mb-6">
+              {t('questionsDescription')}
             </p>
             <a
               href="mailto:tiyibaofu@outlook.com"
               className="btn-primary"
             >
-              {locale === 'zh' ? '联系我们' : 'Contact Us'}
+              {t('contactUs')}
             </a>
           </div>
         </div>
@@ -294,3 +391,17 @@ export default async function PrivacyPolicyPage({
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

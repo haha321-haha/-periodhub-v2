@@ -12,27 +12,28 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>
 }): Promise<Metadata> {
   const { locale } = await params;
-  const title = locale === 'zh' ? '服务条款' : 'Terms of Service';
-  const description = locale === 'zh' 
-    ? '了解使用periodhub.health的条款和条件，包括用户责任和服务限制。'
-    : 'Learn about the terms and conditions for using periodhub.health, including user responsibilities and service limitations.';
-
+  const t = await getTranslations({ locale, namespace: 'termsOfService' });
+  
   return {
-    title: `${title} | periodhub.health`,
-    description,
+    title: `${t('title')} | periodhub.health`,
+    description: locale === 'zh' 
+      ? '了解使用periodhub.health的条款和条件，包括用户责任和服务限制。'
+      : 'Learn about the terms and conditions for using periodhub.health, including user responsibilities and service limitations.',
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/terms-of-service`,
+      canonical: `${URL_CONFIG.baseUrl}/${locale}/terms-of-service`,
       languages: {
-        'zh-CN': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/terms-of-service`,
-        'en-US': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/terms-of-service`,
-        'x-default': `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/terms-of-service`,
+        'zh-CN': `${URL_CONFIG.baseUrl}/zh/terms-of-service`,
+        'en-US': `${URL_CONFIG.baseUrl}/en/terms-of-service`,
+        'x-default': `${URL_CONFIG.baseUrl}/en/terms-of-service`,
       },
     },
     openGraph: {
-      title: `${title} | periodhub.health`,
-      description,
+      title: `${t('title')} | periodhub.health`,
+      description: locale === 'zh' 
+        ? '了解使用periodhub.health的条款和条件，包括用户责任和服务限制。'
+        : 'Learn about the terms and conditions for using periodhub.health, including user responsibilities and service limitations.',
       type: 'website',
-      url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/terms-of-service`,
+      url: `${URL_CONFIG.baseUrl}/${locale}/terms-of-service`,
     },
     robots: {
       index: true,
@@ -48,182 +49,21 @@ export default async function TermsOfServicePage({
 }) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'termsOfService' });
 
-  const content = locale === 'zh' ? {
-    title: '服务条款',
-    lastUpdated: '最后更新：2024年4月1日',
-    intro: '欢迎使用periodhub.health。通过访问和使用我们的网站，您同意遵守以下服务条款。请仔细阅读这些条款，如果您不同意任何条款，请不要使用我们的服务。',
-    sections: [
-      {
-        title: '1. 服务描述',
-        content: `
-          <p>periodhub.health是一个提供月经健康信息和教育资源的平台。我们的服务包括：</p>
-          <ul>
-            <li><strong>教育内容：</strong>关于月经健康、疼痛管理和女性健康的文章和指南</li>
-            <li><strong>交互工具：</strong>症状评估工具、疼痛追踪器和个性化建议系统</li>
-            <li><strong>资源库：</strong>传统疗法、自然缓解方法和生活方式建议</li>
-            <li><strong>社区支持：</strong>安全的信息分享和支持环境</li>
-          </ul>
-          
-          <div class="bg-red-50 border-l-4 border-red-500 p-4 my-4">
-            <p class="text-red-800"><strong>重要医疗声明：</strong>我们的服务仅供教育和信息目的，不构成医疗建议、诊断或治疗。我们不是医疗保健专业人员，本网站信息不能替代专业医疗建议。使用本网站不会在您与periodhub.health之间建立医患关系。如遇紧急情况，请立即寻求医疗救助。</p>
-          </div>
-
-          <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
-            <p class="text-blue-800"><strong>MVP阶段说明：</strong>periodhub.health目前处于最小可行产品(MVP)阶段，以有限资源运营。内容可能不如大型医疗机构那样全面或频繁更新。</p>
-          </div>
-        `
-      },
-      {
-        title: '2. 医疗免责声明',
-        content: `
-          <h3>2.1 非医疗服务</h3>
-          <p>periodhub.health不是医疗服务提供者。我们提供的所有信息：</p>
-          <ul>
-            <li>仅供一般教育和信息目的</li>
-            <li>不能替代专业医疗建议、诊断或治疗</li>
-            <li>不应用于医疗紧急情况</li>
-            <li>可能不适用于您的具体情况</li>
-          </ul>
-          
-          <h3>2.2 寻求专业医疗建议</h3>
-          <p>您应该：</p>
-          <ul>
-            <li>在开始任何治疗前咨询合格的医疗专业人士</li>
-            <li>对于严重或持续的症状立即寻求医疗帮助</li>
-            <li>不要因为我们网站上的信息而忽视或延迟寻求医疗建议</li>
-            <li>在停止或改变现有治疗前咨询您的医生</li>
-          </ul>
-          
-          <h3>2.3 紧急情况</h3>
-          <p>如果您遇到医疗紧急情况，请立即拨打当地紧急服务电话或前往最近的急诊科。</p>
-        `
-      },
-      {
-        title: '3. 用户责任',
-        content: `
-          <h3>3.1 适当使用</h3>
-          <p>您同意：</p>
-          <ul>
-            <li>仅将我们的服务用于合法目的</li>
-            <li>提供准确、完整的信息</li>
-            <li>保护您的账户安全</li>
-            <li>尊重其他用户的隐私和权利</li>
-          </ul>
-          
-          <h3>3.2 禁止行为</h3>
-          <p>您不得：</p>
-          <ul>
-            <li>发布虚假、误导或有害信息</li>
-            <li>侵犯他人的知识产权</li>
-            <li>传播恶意软件或进行网络攻击</li>
-            <li>骚扰、威胁或伤害其他用户</li>
-            <li>将我们的服务用于商业目的（未经授权）</li>
-          </ul>
-        `
-      },
-      {
-        title: '4. 知识产权',
-        content: `
-          <p>periodhub.health的所有内容，包括但不限于：</p>
-          <ul>
-            <li>文本、图像、视频和音频内容</li>
-            <li>网站设计和布局</li>
-            <li>软件和代码</li>
-            <li>商标和标识</li>
-          </ul>
-          <p>均受版权法和其他知识产权法保护。未经明确书面许可，您不得复制、分发、修改或创建衍生作品。</p>
-        `
-      }
-    ]
-  } : {
-    title: 'Terms of Service',
-    lastUpdated: 'Last updated: April 1, 2024',
-    intro: 'Welcome to periodhub.health. By accessing and using our website, you agree to comply with the following terms of service. Please read these terms carefully. If you do not agree to any terms, please do not use our services.',
-    sections: [
-      {
-        title: '1. Service Description',
-        content: `
-          <p>periodhub.health is a platform providing menstrual health information and educational resources. Our services include:</p>
-          <ul>
-            <li><strong>Educational Content:</strong> Articles and guides about menstrual health, pain management, and women's health</li>
-            <li><strong>Interactive Tools:</strong> Symptom assessment tools, pain trackers, and personalized recommendation systems</li>
-            <li><strong>Resource Library:</strong> Traditional therapies, natural relief methods, and lifestyle recommendations</li>
-            <li><strong>Community Support:</strong> Safe environment for information sharing and support</li>
-          </ul>
-          
-          <div class="bg-red-50 border-l-4 border-red-500 p-4 my-4">
-            <p class="text-red-800"><strong>Important Medical Notice:</strong> Our services are for educational and informational purposes only and do not constitute medical advice, diagnosis, or treatment. We are not healthcare professionals, and the information on this website cannot replace professional medical advice. Use of this website does not establish a doctor-patient relationship. In case of emergency, seek immediate medical attention.</p>
-          </div>
-
-          <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
-            <p class="text-blue-800"><strong>MVP Phase Notice:</strong> periodhub.health is currently in its Minimum Viable Product (MVP) phase, operating with limited resources. Content may not be as comprehensive or frequently updated as larger medical institutions.</p>
-          </div>
-        `
-      },
-      {
-        title: '2. Medical Disclaimer',
-        content: `
-          <h3>2.1 Non-Medical Service</h3>
-          <p>periodhub.health is not a medical service provider. All information we provide:</p>
-          <ul>
-            <li>Is for general educational and informational purposes only</li>
-            <li>Cannot replace professional medical advice, diagnosis, or treatment</li>
-            <li>Should not be used for medical emergencies</li>
-            <li>May not be applicable to your specific situation</li>
-          </ul>
-          
-          <h3>2.2 Seek Professional Medical Advice</h3>
-          <p>You should:</p>
-          <ul>
-            <li>Consult qualified medical professionals before starting any treatment</li>
-            <li>Seek immediate medical help for serious or persistent symptoms</li>
-            <li>Not ignore or delay seeking medical advice because of information on our website</li>
-            <li>Consult your doctor before stopping or changing existing treatments</li>
-          </ul>
-          
-          <h3>2.3 Emergency Situations</h3>
-          <p>If you experience a medical emergency, immediately call your local emergency services or go to the nearest emergency room.</p>
-        `
-      },
-      {
-        title: '3. User Responsibilities',
-        content: `
-          <h3>3.1 Appropriate Use</h3>
-          <p>You agree to:</p>
-          <ul>
-            <li>Use our services only for lawful purposes</li>
-            <li>Provide accurate and complete information</li>
-            <li>Protect your account security</li>
-            <li>Respect other users' privacy and rights</li>
-          </ul>
-          
-          <h3>3.2 Prohibited Conduct</h3>
-          <p>You may not:</p>
-          <ul>
-            <li>Post false, misleading, or harmful information</li>
-            <li>Infringe on others' intellectual property rights</li>
-            <li>Distribute malware or conduct cyber attacks</li>
-            <li>Harass, threaten, or harm other users</li>
-            <li>Use our services for commercial purposes (without authorization)</li>
-          </ul>
-        `
-      },
-      {
-        title: '4. Intellectual Property',
-        content: `
-          <p>All content on periodhub.health, including but not limited to:</p>
-          <ul>
-            <li>Text, images, videos, and audio content</li>
-            <li>Website design and layout</li>
-            <li>Software and code</li>
-            <li>Trademarks and logos</li>
-          </ul>
-          <p>Is protected by copyright and other intellectual property laws. You may not copy, distribute, modify, or create derivative works without explicit written permission.</p>
-        `
-      }
-    ]
-  };
+  // Table of contents data
+  const tableOfContents = [
+    { id: 'service-description', title: t('sections.serviceDescription.title') },
+    { id: 'user-eligibility', title: t('sections.userEligibility.title') },
+    { id: 'service-content', title: t('sections.serviceContent.title') },
+    { id: 'user-conduct', title: t('sections.userConduct.title') },
+    { id: 'privacy-protection', title: t('sections.privacyProtection.title') },
+    { id: 'medical-disclaimer', title: t('sections.medicalDisclaimer.title') },
+    { id: 'intellectual-property', title: t('sections.intellectualProperty.title') },
+    { id: 'service-changes', title: t('sections.serviceChanges.title') },
+    { id: 'liability-limitation', title: t('sections.liabilityLimitation.title') },
+    { id: 'dispute-resolution', title: t('sections.disputeResolution.title') },
+  ];
 
   return (
     <div className="space-y-8">
@@ -231,37 +71,398 @@ export default async function TermsOfServicePage({
       <header className="container-custom">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-800 mb-6">
-            {content.title}
+            {t('title')}
           </h1>
           <p className="text-neutral-600 mb-6">
-            {content.lastUpdated}
+            {t('lastUpdated')}
           </p>
           <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
             <p className="text-blue-800">
-              {content.intro}
+              {t('intro')}
             </p>
           </div>
         </div>
       </header>
 
+      {/* Important Notice */}
+      <section className="bg-red-50 py-8">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-red-100 border-l-4 border-red-500 p-6 rounded-r-lg">
+              <div className="flex items-start">
+                <svg className="w-6 h-6 text-red-500 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                </svg>
+                <div>
+                  <h3 className="text-lg font-semibold text-red-800 mb-2">
+                    {t('importantNotice')}
+                  </h3>
+                  <p className="text-red-700">
+                    {t('importantNoticeText')}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Table of Contents */}
+      <section className="bg-gray-50 py-8">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h2 className="text-xl font-semibold mb-4">{t('tableOfContents')}</h2>
+              <div className="grid md:grid-cols-2 gap-2 text-sm">
+                {tableOfContents.map((item, index) => (
+                  <a 
+                    key={index}
+                    href={`#${item.id}`} 
+                    className="text-blue-600 hover:underline hover:text-blue-800 transition-colors"
+                  >
+                    {item.title}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Content */}
       <main className="container-custom">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-sm p-8 space-y-12">
-            {content.sections.map((section, index) => (
-              <section key={index} className="border-b border-neutral-200 pb-8 last:border-b-0">
-                <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
-                  {section.title}
-                </h2>
-                <div 
-                  className="prose prose-lg prose-neutral max-w-none prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700"
-                  dangerouslySetInnerHTML={{ __html: section.content }}
-                />
-              </section>
-            ))}
+            
+            {/* Section 1: Service Description */}
+            <section id="service-description" className="border-b border-neutral-200 pb-8">
+              <h2 className="text-2xl font-semibold text-neutral-800 mb-6 border-b-2 border-blue-600 pb-2">
+                {t('sections.serviceDescription.title')}
+              </h2>
+              <div className="prose prose-lg prose-neutral max-w-none">
+                <p className="mb-4">{t('sections.serviceDescription.content')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-2">
+                  <li><strong>{t('sections.serviceDescription.items.educationalContent')}</strong></li>
+                  <li><strong>{t('sections.serviceDescription.items.interactiveTools')}</strong></li>
+                  <li><strong>{t('sections.serviceDescription.items.resourceLibrary')}</strong></li>
+                  <li><strong>{t('sections.serviceDescription.items.communitySupport')}</strong></li>
+                </ul>
+                
+                <div className="bg-red-50 border-l-4 border-red-500 p-4 my-6 rounded-r-lg">
+                  <p className="text-red-800 font-semibold">
+                    {t('sections.serviceDescription.medicalNotice')}
+                  </p>
+                </div>
+
+                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 my-6 rounded-r-lg">
+                  <p className="text-blue-800">
+                    {t('sections.serviceDescription.mvpNotice')}
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* Section 2: User Eligibility */}
+            <section id="user-eligibility" className="border-b border-neutral-200 pb-8">
+              <h2 className="text-2xl font-semibold text-neutral-800 mb-6 border-b-2 border-blue-600 pb-2">
+                {t('sections.userEligibility.title')}
+              </h2>
+              <div className="prose prose-lg prose-neutral max-w-none">
+                <h3 className="text-lg font-semibold mb-3">{t('sections.userEligibility.ageRequirementTitle')}</h3>
+                <p className="mb-4">{t('sections.userEligibility.ageRequirement')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.userEligibility.accountAccuracyTitle')}</h3>
+                <p className="mb-4">{t('sections.userEligibility.accountAccuracy')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.userEligibility.accountSecurityTitle')}</h3>
+                <p className="mb-4">{t('sections.userEligibility.accountSecurity')}</p>
+              </div>
+            </section>
+
+            {/* Section 3: Service Content */}
+            <section id="service-content" className="border-b border-neutral-200 pb-8">
+              <h2 className="text-2xl font-semibold text-neutral-800 mb-6 border-b-2 border-blue-600 pb-2">
+                {t('sections.serviceContent.title')}
+              </h2>
+              <div className="prose prose-lg prose-neutral max-w-none">
+                <h3 className="text-lg font-semibold mb-3">{t('sections.serviceContent.availabilityTitle')}</h3>
+                <p className="mb-4">{t('sections.serviceContent.availability')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.serviceContent.contentLicenseTitle')}</h3>
+                <p className="mb-4">{t('sections.serviceContent.contentLicense')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.serviceContent.assessmentToolsTitle')}</h3>
+                <p className="mb-4">{t('sections.serviceContent.assessmentTools')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.serviceContent.personalizedAdviceTitle')}</h3>
+                <p className="mb-4">{t('sections.serviceContent.personalizedAdvice')}</p>
+              </div>
+            </section>
+
+            {/* Section 4: User Conduct */}
+            <section id="user-conduct" className="border-b border-neutral-200 pb-8">
+              <h2 className="text-2xl font-semibold text-neutral-800 mb-6 border-b-2 border-blue-600 pb-2">
+                {t('sections.userConduct.title')}
+              </h2>
+              <div className="prose prose-lg prose-neutral max-w-none">
+                <h3 className="text-lg font-semibold mb-3">{t('sections.userConduct.prohibitedBehaviorsTitle')}</h3>
+                <p className="mb-4">{t('sections.userConduct.prohibitedBehaviors')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.userConduct.prohibitedList').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.userConduct.contentAccuracyTitle')}</h3>
+                <p className="mb-4">{t('sections.userConduct.contentAccuracy')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.userConduct.respectOthersTitle')}</h3>
+                <p className="mb-4">{t('sections.userConduct.respectOthers')}</p>
+              </div>
+            </section>
+
+            {/* Section 5: Privacy Protection */}
+            <section id="privacy-protection" className="border-b border-neutral-200 pb-8">
+              <h2 className="text-2xl font-semibold text-neutral-800 mb-6 border-b-2 border-blue-600 pb-2">
+                {t('sections.privacyProtection.title')}
+              </h2>
+              <div className="prose prose-lg prose-neutral max-w-none">
+                <h3 className="text-lg font-semibold mb-3">{t('sections.privacyProtection.privacyPolicyRefTitle')}</h3>
+                <p className="mb-4">{t('sections.privacyProtection.privacyPolicyRef')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.privacyProtection.dataCollectionTitle')}</h3>
+                <p className="mb-4">{t('sections.privacyProtection.dataCollection')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  <li><strong>{t('sections.privacyProtection.dataTypes.basicInfo')}</strong></li>
+                  <li><strong>{t('sections.privacyProtection.dataTypes.healthInfo')}</strong></li>
+                  <li><strong>{t('sections.privacyProtection.dataTypes.usageData')}</strong></li>
+                  <li><strong>{t('sections.privacyProtection.dataTypes.deviceInfo')}</strong></li>
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.privacyProtection.dataUsageTitle')}</h3>
+                <p className="mb-4">{t('sections.privacyProtection.dataUsage')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.privacyProtection.usagePurposes').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.privacyProtection.dataSecurityTitle')}</h3>
+                <p className="mb-4">{t('sections.privacyProtection.dataSecurity.measures')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.privacyProtection.dataSecurity.securityList').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.privacyProtection.thirdPartySharingTitle')}</h3>
+                <p className="mb-4">{t('sections.privacyProtection.thirdPartySharing')}</p>
+              </div>
+            </section>
+
+            {/* Section 6: Medical Disclaimer */}
+            <section id="medical-disclaimer" className="border-b border-neutral-200 pb-8">
+              <h2 className="text-2xl font-semibold text-neutral-800 mb-6 border-b-2 border-red-600 pb-2">
+                {t('sections.medicalDisclaimer.title')}
+              </h2>
+              <div className="prose prose-lg prose-neutral max-w-none">
+                <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
+                  <div className="flex items-start">
+                    <svg className="w-8 h-8 text-red-600 mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                    </svg>
+                    <div>
+                      <h3 className="text-lg font-bold text-red-800 mb-2">
+                        {t('sections.medicalDisclaimer.importantMedicalDisclaimer')}
+                      </h3>
+                      <p className="text-red-700 font-semibold">
+                        {t('sections.medicalDisclaimer.disclaimerText')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <h3 className="text-lg font-semibold mb-3">{t('sections.medicalDisclaimer.disclaimerTitle')}</h3>
+                <p className="mb-4">{t('sections.medicalDisclaimer.nonMedicalService')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.medicalDisclaimer.personalResponsibilityTitle')}</h3>
+                <p className="mb-4">{t('sections.medicalDisclaimer.personalResponsibility')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.medicalDisclaimer.medicalProfessionals').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.medicalDisclaimer.emergencyHandlingTitle')}</h3>
+                <p className="mb-4">{t('sections.medicalDisclaimer.emergencyHandling')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.medicalDisclaimer.emergencySymptoms').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.medicalDisclaimer.informationAccuracyTitle')}</h3>
+                <p className="mb-4">{t('sections.medicalDisclaimer.informationAccuracy')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.medicalDisclaimer.resultVariabilityTitle')}</h3>
+                <p className="mb-4">{t('sections.medicalDisclaimer.resultVariability')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.medicalDisclaimer.medicationWarningTitle')}</h3>
+                <p className="mb-4">{t('sections.medicalDisclaimer.medicationWarning')}</p>
+              </div>
+            </section>
+
+            {/* Section 7: Intellectual Property */}
+            <section id="intellectual-property" className="border-b border-neutral-200 pb-8">
+              <h2 className="text-2xl font-semibold text-neutral-800 mb-6 border-b-2 border-blue-600 pb-2">
+                {t('sections.intellectualProperty.title')}
+              </h2>
+              <div className="prose prose-lg prose-neutral max-w-none">
+                <h3 className="text-lg font-semibold mb-3">{t('sections.intellectualProperty.ownershipTitle')}</h3>
+                <p className="mb-4">{t('sections.intellectualProperty.contentOwnership')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.intellectualProperty.usageRestrictionsTitle')}</h3>
+                <p className="mb-4">{t('sections.intellectualProperty.usageRestrictions')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.intellectualProperty.restrictionsList').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.intellectualProperty.fairUseTitle')}</h3>
+                <p className="mb-4">{t('sections.intellectualProperty.fairUse')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.intellectualProperty.fairUseList').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.intellectualProperty.thirdPartyContentTitle')}</h3>
+                <p className="mb-4">{t('sections.intellectualProperty.thirdPartyContent')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.intellectualProperty.infringementNoticeTitle')}</h3>
+                <p className="mb-4">{t('sections.intellectualProperty.infringementNotice')}</p>
+              </div>
+            </section>
+
+            {/* Section 8: Service Changes */}
+            <section id="service-changes" className="border-b border-neutral-200 pb-8">
+              <h2 className="text-2xl font-semibold text-neutral-800 mb-6 border-b-2 border-blue-600 pb-2">
+                {t('sections.serviceChanges.title')}
+              </h2>
+              <div className="prose prose-lg prose-neutral max-w-none">
+                <h3 className="text-lg font-semibold mb-3">{t('sections.serviceChanges.modificationRightsTitle')}</h3>
+                <p className="mb-4">{t('sections.serviceChanges.modificationRights')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.serviceChanges.changesList').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.serviceChanges.termsChangesTitle')}</h3>
+                <p className="mb-4">{t('sections.serviceChanges.termsChanges')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.serviceChanges.accountTerminationTitle')}</h3>
+                <p className="mb-4">{t('sections.serviceChanges.accountTermination.ourRights')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.serviceChanges.accountTermination.terminationReasons').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.serviceChanges.userRightsTitle')}</h3>
+                <p className="mb-4">{t('sections.serviceChanges.accountTermination.userRights')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.serviceChanges.consequencesTitle')}</h3>
+                <p className="mb-4">{t('sections.serviceChanges.accountTermination.consequences')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.serviceChanges.accountTermination.consequencesList').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+
+            {/* Section 9: Liability Limitation */}
+            <section id="liability-limitation" className="border-b border-neutral-200 pb-8">
+              <h2 className="text-2xl font-semibold text-neutral-800 mb-6 border-b-2 border-blue-600 pb-2">
+                {t('sections.liabilityLimitation.title')}
+              </h2>
+              <div className="prose prose-lg prose-neutral max-w-none">
+                <h3 className="text-lg font-semibold mb-3">{t('sections.liabilityLimitation.serviceProvisionTitle')}</h3>
+                <p className="mb-4">{t('sections.liabilityLimitation.serviceProvision')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.liabilityLimitation.disclaimerScopeTitle')}</h3>
+                <p className="mb-4">{t('sections.liabilityLimitation.disclaimerScope')}</p>
+                <ul className="list-disc list-inside mb-6 space-y-1">
+                  {t.raw('sections.liabilityLimitation.disclaimerList').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.liabilityLimitation.liabilityLimitTitle')}</h3>
+                <p className="mb-4">{t('sections.liabilityLimitation.liabilityLimit')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.liabilityLimitation.forceMajeureTitle')}</h3>
+                <p className="mb-4">{t('sections.liabilityLimitation.forceMajeure')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.liabilityLimitation.userLiabilityTitle')}</h3>
+                <p className="mb-4">{t('sections.liabilityLimitation.userLiability')}</p>
+              </div>
+            </section>
+
+            {/* Section 10: Dispute Resolution */}
+            <section id="dispute-resolution" className="pb-8">
+              <h2 className="text-2xl font-semibold text-neutral-800 mb-6 border-b-2 border-blue-600 pb-2">
+                {t('sections.disputeResolution.title')}
+              </h2>
+              <div className="prose prose-lg prose-neutral max-w-none">
+                <h3 className="text-lg font-semibold mb-3">{t('sections.disputeResolution.applicableLawTitle')}</h3>
+                <p className="mb-4">{t('sections.disputeResolution.applicableLaw')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.disputeResolution.disputeResolutionProcessTitle')}</h3>
+                <p className="mb-4">{t('sections.disputeResolution.disputeResolutionProcess')}</p>
+                <ol className="list-decimal list-inside mb-6 space-y-2">
+                  {t.raw('sections.disputeResolution.resolutionSteps').map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ol>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.disputeResolution.jurisdictionTitle')}</h3>
+                <p className="mb-4">{t('sections.disputeResolution.jurisdiction')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.disputeResolution.severabilityTitle')}</h3>
+                <p className="mb-4">{t('sections.disputeResolution.severability')}</p>
+                
+                <h3 className="text-lg font-semibold mb-3">{t('sections.disputeResolution.entireAgreementTitle')}</h3>
+                <p className="mb-4">{t('sections.disputeResolution.entireAgreement')}</p>
+              </div>
+            </section>
           </div>
         </div>
       </main>
+
+      {/* Contact Information */}
+      <section className="bg-purple-50 py-12">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold mb-6 border-b-2 border-purple-600 pb-2">
+              {t('contact.title')}
+            </h2>
+            <div className="bg-purple-100 border border-purple-200 rounded-lg p-6">
+              <p className="mb-4">{t('contact.description')}</p>
+              <ul className="space-y-2">
+                <li><strong>{t('contact.email')}</strong></li>
+                <li><strong>{t('contact.mailingAddress')}</strong></li>
+                <li><strong>{t('contact.onlineFeedback')}</strong></li>
+              </ul>
+              <p className="mt-4 text-sm text-purple-700">
+                {t('contact.responseTime')}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Important Notice */}
       <section className="bg-yellow-50 py-12">
@@ -269,13 +470,10 @@ export default async function TermsOfServicePage({
           <div className="max-w-4xl mx-auto">
             <div className="bg-yellow-100 border-l-4 border-yellow-500 p-6 rounded-r-lg">
               <h3 className="text-lg font-semibold text-yellow-800 mb-2">
-                {locale === 'zh' ? '重要提醒' : 'Important Reminder'}
+                {t('importantReminder')}
               </h3>
               <p className="text-yellow-700">
-                {locale === 'zh' 
-                  ? '这些服务条款可能会不时更新。继续使用我们的服务即表示您接受任何修改。'
-                  : 'These Terms of Service may be updated from time to time. Continued use of our services indicates your acceptance of any modifications.'
-                }
+                {t('importantReminderText')}
               </p>
             </div>
           </div>
@@ -287,20 +485,33 @@ export default async function TermsOfServicePage({
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-neutral-800 mb-4">
-              {locale === 'zh' ? '有疑问？' : 'Questions?'}
+              {t('questionsTerms')}
             </h2>
             <p className="text-neutral-600 mb-6">
-              {locale === 'zh' 
-                ? '如果您对我们的服务条款有任何疑问，请随时联系我们。'
-                : 'If you have any questions about our Terms of Service, please feel free to contact us.'
-              }
+              {t('questionsDescriptionTerms')}
             </p>
             <a
               href="mailto:tiyibaofu@outlook.com"
               className="btn-primary"
             >
-              {locale === 'zh' ? '联系我们' : 'Contact Us'}
+              {t('contactUsTerms')}
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Final Notice */}
+      <section className="bg-blue-50 py-12">
+        <div className="container-custom">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-blue-100 border border-blue-200 rounded-lg p-6">
+              <h3 className="text-lg font-semibold mb-2 text-blue-800">
+                {t('finalNotice.title')}
+              </h3>
+              <p className="text-blue-700 text-sm">
+                {t('finalNotice.content')}
+              </p>
+            </div>
           </div>
         </div>
       </section>

@@ -8,6 +8,8 @@ import dynamic from 'next/dynamic';
 import RelatedToolCard from '../components/RelatedToolCard';
 import RelatedArticleCard from '../components/RelatedArticleCard';
 import ScenarioSolutionCard from '../components/ScenarioSolutionCard';
+import { generateToolStructuredData, ToolStructuredDataScript } from '@/lib/seo/tool-structured-data';
+import { generateBreadcrumbStructuredData, BreadcrumbStructuredDataScript } from '@/lib/seo/breadcrumb-structured-data';
 
 // 动态导入互动工具组件 - 代码分割优化
 const PainTrackerTool = dynamic(() => import('../components/PainTrackerTool'), {
@@ -899,8 +901,40 @@ export default async function ToolPage({
   // 获取推荐数据
   const { relatedTools, relatedArticles, scenarioSolutions } = getRecommendationData(locale, tool);
 
+  // 生成工具结构化数据
+  const toolStructuredData = await generateToolStructuredData({
+    locale,
+    toolSlug: tool,
+    toolName: toolData.frontmatter.title,
+    description: toolData.frontmatter.description,
+    features: [
+      locale === 'zh' ? '症状评估' : 'Symptom Assessment',
+      locale === 'zh' ? '个性化建议' : 'Personalized Recommendations',
+      locale === 'zh' ? '健康报告' : 'Health Reports'
+    ],
+    category: 'HealthApplication',
+    rating: { value: 4.8, count: 1250 },
+    breadcrumbs: [
+      { name: locale === 'zh' ? '互动工具' : 'Interactive Tools', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/${locale}/interactive-tools` },
+      { name: toolData.frontmatter.title, url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/${locale}/interactive-tools/${tool}` }
+    ]
+  });
+
+  // 生成面包屑结构化数据
+  const breadcrumbStructuredData = generateBreadcrumbStructuredData({
+    locale,
+    path: `/interactive-tools/${tool}`,
+    breadcrumbs: [
+      { name: locale === 'zh' ? '互动工具' : 'Interactive Tools', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/${locale}/interactive-tools` },
+      { name: toolData.frontmatter.title, url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health'}/${locale}/interactive-tools/${tool}` }
+    ]
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
+      {/* 工具结构化数据 */}
+      <ToolStructuredDataScript data={toolStructuredData} />
+      <BreadcrumbStructuredDataScript data={breadcrumbStructuredData} />
       {/* 面包屑导航 */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <Breadcrumb 

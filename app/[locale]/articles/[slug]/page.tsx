@@ -11,6 +11,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import { getArticleBySlug, getRelatedArticles } from '@/lib/articles';
+import { generateArticleStructuredData, ArticleStructuredDataScript } from '@/lib/seo/article-structured-data';
+import { generateBreadcrumbStructuredData, BreadcrumbStructuredDataScript } from '@/lib/seo/breadcrumb-structured-data';
 
 // 按需导入Lucide React图标 - 第三方脚本优化（移除ssr: false）
 const Home = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Home })));
@@ -303,19 +305,37 @@ export default async function ArticlePage({
   console.log(`[PROD-MONITOR] Render preparation completed: ${renderPrepTime}ms`);
   console.log(`[PROD-MONITOR] Component breakdown - Article: ${articleFetchTime}ms, Related: ${relatedArticlesTime}ms, Other: ${renderPrepTime - articleFetchTime - relatedArticlesTime}ms`);
 
+  // 生成增强的结构化数据
+  const articleStructuredData = await generateArticleStructuredData({
+    locale,
+    slug,
+    title,
+    description: summary || '',
+    author: article.author,
+    datePublished: article.date,
+    dateModified: article.date,
+    image: article.featured_image,
+    breadcrumbs: [
+      { name: locale === 'zh' ? '文章中心' : 'Articles', url: `${baseUrl}/${locale}/downloads` },
+      { name: title, url: articleUrl }
+    ]
+  });
+
+  // 生成面包屑结构化数据
+  const breadcrumbStructuredData = generateBreadcrumbStructuredData({
+    locale,
+    path: `/articles/${slug}`,
+    breadcrumbs: [
+      { name: locale === 'zh' ? '文章中心' : 'Articles', url: `${baseUrl}/${locale}/downloads` },
+      { name: title, url: articleUrl }
+    ]
+  });
+
   return (
     <div className="min-h-screen bg-neutral-50">
-      {/* SEO结构化数据 */}
-      <StructuredData
-        type="medicalWebPage"
-        title={title}
-        description={summary || ''}
-        url={articleUrl}
-        image={article.featured_image}
-        author={article.author}
-        datePublished={article.date}
-        dateModified={article.date}
-      />
+      {/* 增强的SEO结构化数据 */}
+      <ArticleStructuredDataScript data={articleStructuredData} />
+      <BreadcrumbStructuredDataScript data={breadcrumbStructuredData} />
 
       {/* 阅读进度条和返回顶部 */}
       <ReadingProgress locale={locale} />

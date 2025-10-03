@@ -8,6 +8,7 @@ import { BarChart3, Calendar, ClipboardCheck, Lightbulb, Search, User, Apple } f
 import { Locale, locales } from '@/i18n';
 import StructuredData from '@/components/StructuredData';
 import { URL_CONFIG } from '@/lib/url-config';
+import { generateHreflangConfig, HreflangScript } from '@/lib/seo/multilingual-seo';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -165,8 +166,17 @@ export default async function InteractiveToolsPage({
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
   const pageUrl = `${baseUrl}/${locale}/interactive-tools`;
 
+  // 生成hreflang配置
+  const hreflangUrls = await generateHreflangConfig({
+    locale,
+    path: '/interactive-tools'
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      {/* hreflang标签 */}
+      <HreflangScript hreflangUrls={hreflangUrls} />
+      
       {/* SEO结构化数据 */}
       <StructuredData
         type="healthTopicPage"

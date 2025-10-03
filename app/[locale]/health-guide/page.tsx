@@ -7,6 +7,7 @@ import RelatedToolCard from '@/app/[locale]/interactive-tools/components/Related
 import RelatedArticleCard from '@/app/[locale]/interactive-tools/components/RelatedArticleCard';
 import ScenarioSolutionCard from '@/app/[locale]/interactive-tools/components/ScenarioSolutionCard';
 import { URL_CONFIG } from '@/lib/url-config';
+import { generateHreflangConfig, HreflangScript } from '@/lib/seo/multilingual-seo';
 
 // 推荐数据配置函数（健康指南主题）
 function getHealthGuideRecommendations(locale: string) {
@@ -232,8 +233,17 @@ export default async function HealthGuidePage({
     }
   ];
 
+  // 生成hreflang配置
+  const hreflangUrls = await generateHreflangConfig({
+    locale,
+    path: '/health-guide'
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      {/* hreflang标签 */}
+      <HreflangScript hreflangUrls={hreflangUrls} />
+      
       {/* SEO结构化数据 */}
       <StructuredData
         type="healthTopicPage"

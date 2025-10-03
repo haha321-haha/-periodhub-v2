@@ -7,6 +7,7 @@ import { SITE_CONFIG } from '@/config/site.config';
 import { pdfResources } from '@/config/pdfResources';
 import { URL_CONFIG } from '@/lib/url-config';
 import { SmartPreloadProvider } from '@/components/SmartPreloadProvider';
+import { generateHreflangConfig, HreflangScript } from '@/lib/seo/multilingual-seo';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -103,8 +104,17 @@ export default async function DownloadsPage({
     }
   };
 
+  // 生成hreflang配置
+  const hreflangUrls = await generateHreflangConfig({
+    locale,
+    path: '/downloads'
+  });
+
   return (
     <SmartPreloadProvider>
+      {/* hreflang标签 */}
+      <HreflangScript hreflangUrls={hreflangUrls} />
+      
       {/* 结构化数据 */}
       <script
         type="application/ld+json"

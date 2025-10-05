@@ -241,6 +241,65 @@
     "downloads": "资源下载",
     "guide": "健康指南"
   },
+  "interactiveToolsPage": {
+    "title": "互动健康工具 - PeriodHub",
+    "description": "专业的经期健康管理工具，提供症状评估、疼痛追踪、周期管理等个性化健康解决方案",
+    "toolsIntroduction": "我们的互动工具基于循证医学，帮助您更好地了解和管理经期健康。",
+    "otherTools": {
+      "title": "其他实用工具"
+    },
+    "periodPainAssessment": {
+      "title": "痛经评估工具",
+      "description": "专业的痛经症状评估，帮助您了解疼痛类型和严重程度",
+      "cta": "开始评估"
+    },
+    "symptomAssessment": {
+      "title": "症状自测工具",
+      "description": "全面的经期症状评估，提供个性化健康建议",
+      "startButton": "开始自测"
+    },
+    "painTracker": {
+      "title": "疼痛追踪器",
+      "description": "智能记录疼痛模式，分析症状规律",
+      "startButton": "开始追踪"
+    },
+    "cycleTracker": {
+      "title": "周期追踪器",
+      "description": "全面的月经周期管理，预测和记录",
+      "cta": "开始追踪"
+    },
+    "constitutionTest": {
+      "title": "体质测试",
+      "description": "中医体质辨识，个性化调理建议",
+      "cta": "开始测试"
+    },
+    "breathingExercise": {
+      "title": "呼吸放松练习",
+      "description": "专业的呼吸训练，帮助缓解经期疼痛和压力",
+      "usageTips": {
+        "title": "使用建议",
+        "bestTiming": {
+          "title": "最佳使用时机",
+          "items": [
+            "经期疼痛时立即使用",
+            "工作压力大时放松",
+            "睡前进行深度放松",
+            "日常压力管理练习"
+          ]
+        },
+        "precautions": {
+          "title": "注意事项",
+          "items": [
+            "保持自然呼吸节奏",
+            "避免过度用力呼吸",
+            "如有不适请停止练习",
+            "建议在安静环境中进行"
+          ]
+        }
+      }
+    },
+    "developmentNote": "更多工具正在开发中，敬请期待！"
+  },
   "understandingPain": {
     "painPatterns": {
       "title": "识别你的疼痛模式",

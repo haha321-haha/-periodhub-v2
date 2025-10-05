@@ -241,6 +241,65 @@
     "downloads": "Resource Downloads",
     "guide": "Health Guide"
   },
+  "interactiveToolsPage": {
+    "title": "Interactive Health Tools - PeriodHub",
+    "description": "Professional menstrual health management tools providing symptom assessment, pain tracking, cycle management and personalized health solutions",
+    "toolsIntroduction": "Our interactive tools are based on evidence-based medicine to help you better understand and manage menstrual health.",
+    "otherTools": {
+      "title": "Other Practical Tools"
+    },
+    "periodPainAssessment": {
+      "title": "Period Pain Assessment Tool",
+      "description": "Professional period pain symptom assessment to help you understand pain types and severity",
+      "cta": "Start Assessment"
+    },
+    "symptomAssessment": {
+      "title": "Symptom Self-Assessment Tool",
+      "description": "Comprehensive menstrual symptom assessment with personalized health recommendations",
+      "startButton": "Start Assessment"
+    },
+    "painTracker": {
+      "title": "Pain Tracker",
+      "description": "Smart pain pattern recording and symptom analysis",
+      "startButton": "Start Tracking"
+    },
+    "cycleTracker": {
+      "title": "Cycle Tracker",
+      "description": "Comprehensive menstrual cycle management with prediction and recording",
+      "cta": "Start Tracking"
+    },
+    "constitutionTest": {
+      "title": "Constitution Test",
+      "description": "Traditional Chinese Medicine constitution identification with personalized care recommendations",
+      "cta": "Start Test"
+    },
+    "breathingExercise": {
+      "title": "Breathing Relaxation Exercise",
+      "description": "Professional breathing training to help relieve period pain and stress",
+      "usageTips": {
+        "title": "Usage Tips",
+        "bestTiming": {
+          "title": "Best Usage Timing",
+          "items": [
+            "Use immediately when experiencing period pain",
+            "Relax during high work stress",
+            "Deep relaxation before bedtime",
+            "Daily stress management practice"
+          ]
+        },
+        "precautions": {
+          "title": "Precautions",
+          "items": [
+            "Maintain natural breathing rhythm",
+            "Avoid overexertion in breathing",
+            "Stop if experiencing discomfort",
+            "Practice in a quiet environment"
+          ]
+        }
+      }
+    },
+    "developmentNote": "More tools are under development, stay tuned!"
+  },
   "understandingPain": {
     "painPatterns": {
       "title": "Identify Your Pain Patterns",

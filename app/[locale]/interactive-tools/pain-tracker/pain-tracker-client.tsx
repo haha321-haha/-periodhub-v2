@@ -2,8 +2,13 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import PainTrackerTool from '../components/PainTrackerTool';
+import dynamic from 'next/dynamic';
 import Breadcrumb from '@/components/Breadcrumb';
+
+// 动态导入组件 - 代码分割优化
+const PainTrackerTool = dynamic(() => import('../components/PainTrackerTool'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
 
 interface Props {
   params: { locale: string };

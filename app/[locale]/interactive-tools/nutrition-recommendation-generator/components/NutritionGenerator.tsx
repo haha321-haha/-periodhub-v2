@@ -7,16 +7,37 @@
 
 import { useState, useEffect } from 'react';
 import { useLocale } from 'next-intl';
+import dynamic from 'next/dynamic';
 import type { Language } from '../types';
 import { generateRecommendations } from '../utils/recommendationEngine';
 import { getUIContent, getUIContentObject } from '../utils/uiContent';
 import { PerformanceMonitor, debounce } from '../utils/performance';
-import NutritionApp from './NutritionApp';
-import ResultsDisplay from './ResultsDisplay';
-import LoadingState from './LoadingState';
-import NoSelectionState from './NoSelectionState';
-import ErrorBoundary from './ErrorBoundary';
-import AccessibilityWrapper from './AccessibilityWrapper';
+
+// 动态导入组件 - 代码分割优化
+const NutritionApp = dynamic(() => import('./NutritionApp'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const ResultsDisplay = dynamic(() => import('./ResultsDisplay'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const LoadingState = dynamic(() => import('./LoadingState'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const NoSelectionState = dynamic(() => import('./NoSelectionState'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const ErrorBoundary = dynamic(() => import('./ErrorBoundary'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const AccessibilityWrapper = dynamic(() => import('./AccessibilityWrapper'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
 import '../styles/nutrition-generator.css';
 
 export default function NutritionGenerator() {

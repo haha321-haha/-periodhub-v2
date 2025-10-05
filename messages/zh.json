@@ -134,6 +134,11 @@
             "assessment": "症状评估",
             "assessmentDesc": "专业健康评估工具",
             "assessmentCta": "开始评估",
+            "assessment": {
+              "title": "症状评估",
+              "description": "专业健康评估工具",
+              "cta": "开始评估"
+            },
             "resources": "医学资源",
             "resourcesDesc": "专业医学指南下载",
             "downloads": {

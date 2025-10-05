@@ -134,6 +134,11 @@
             "assessment": "Symptom Assessment",
             "assessmentDesc": "Professional health assessment tools",
             "assessmentCta": "Start Assessment",
+            "assessment": {
+              "title": "Symptom Assessment",
+              "description": "Professional health assessment tools",
+              "cta": "Start Assessment"
+            },
             "resources": "Medical Resources",
             "resourcesDesc": "Professional medical guide downloads",
             "downloads": {

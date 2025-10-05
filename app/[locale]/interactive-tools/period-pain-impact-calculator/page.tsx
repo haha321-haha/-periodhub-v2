@@ -5,11 +5,22 @@
 
 import React, { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import { titleManager } from '@/utils/unifiedTitleManager';
 import Breadcrumb from '@/components/Breadcrumb';
-import RelatedArticleCard from '../components/RelatedArticleCard';
-import RelatedToolCard from '../components/RelatedToolCard';
-import ScenarioSolutionCard from '../components/ScenarioSolutionCard';
+
+// 动态导入相关组件 - 代码分割优化
+const RelatedArticleCard = dynamic(() => import('../components/RelatedArticleCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const RelatedToolCard = dynamic(() => import('../components/RelatedToolCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const ScenarioSolutionCard = dynamic(() => import('../components/ScenarioSolutionCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
 // 完全硬编码的文本内容
 const TEXTS = {

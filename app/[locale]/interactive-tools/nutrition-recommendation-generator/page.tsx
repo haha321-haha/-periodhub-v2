@@ -5,8 +5,13 @@
 
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import NutritionGenerator from './components/NutritionGenerator';
+import dynamic from 'next/dynamic';
 import Breadcrumb from '@/components/Breadcrumb';
+
+// 动态导入营养推荐生成器 - 代码分割优化
+const NutritionGenerator = dynamic(() => import('./components/NutritionGenerator'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
 
 // 生成页面元数据
 export async function generateMetadata({

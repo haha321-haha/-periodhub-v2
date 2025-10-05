@@ -3,13 +3,27 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 import { titleManager } from '@/utils/unifiedTitleManager';
 import { getWorkplaceQuestions } from '../shared/data/assessmentQuestions';
 import { calculateWorkplaceImpact } from '../shared/data/calculationAlgorithms';
-import WelcomeScreen from './components/WelcomeScreen';
-import QuestionScreen from './components/QuestionScreen';
-import ResultsScreen from './components/ResultsScreen';
-import ProgressBar from './components/ProgressBar';
+
+// 动态导入组件 - 代码分割优化
+const WelcomeScreen = dynamic(() => import('./components/WelcomeScreen'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const QuestionScreen = dynamic(() => import('./components/QuestionScreen'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const ResultsScreen = dynamic(() => import('./components/ResultsScreen'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const ProgressBar = dynamic(() => import('./components/ProgressBar'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-8 rounded-lg" />
+});
 
 // 页面状态类型
 type PageState = 'welcome' | 'questions' | 'results';

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Locale, locales } from '@/i18n';
 import Breadcrumb from '@/components/Breadcrumb';
+import PainPatternEducationContent from '@/components/PainPatternEducationContent';
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -380,6 +381,9 @@ export default async function UnderstandingPainPage({
           </div>
         </div>
       </section>
+
+      {/* Pain Pattern Education Content */}
+      <PainPatternEducationContent />
 
       {/* Comparison and Analysis */}
       <section className="bg-gradient-to-br from-purple-50 to-pink-50 p-6 md:p-8 rounded-xl">

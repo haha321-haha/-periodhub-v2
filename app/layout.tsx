@@ -114,7 +114,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh" data-scroll-behavior="smooth">
+    <html lang="zh" suppressHydrationWarning>
       <head>
         {/* 🚀 性能优化 - DNS 预解析 */}
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />

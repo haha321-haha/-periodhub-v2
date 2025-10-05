@@ -88,8 +88,8 @@ export function isRTL(locale: Locale): boolean {
  */
 export function getHTMLLang(locale: Locale): string {
   const htmlLangs = {
-    zh: 'zh-CN',
-    en: 'en-US'
+    zh: 'zh',
+    en: 'en'
   };
   
   return htmlLangs[locale] || locale;

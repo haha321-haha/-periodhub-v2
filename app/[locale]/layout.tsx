@@ -55,8 +55,8 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={getHTMLLang(validLocale)}>
-      <body>
+    <html lang={getHTMLLang(validLocale)} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <NextIntlClientProvider locale={validLocale} messages={messages as any}>
           <Suspense fallback={<LoadingState />}>
             <Header />

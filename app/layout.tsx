@@ -3,6 +3,8 @@ import { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { URL_CONFIG } from '@/lib/url-config';
 import MobileOptimization from '@/components/MobileOptimization';
+import OptimizedScripts, { OptimizedChartJS, OptimizedLucide } from '@/components/optimized/OptimizedScripts';
+import PerformanceTracker from '@/components/performance/PerformanceTracker';
 // import ClientSafe from '@/components/ClientSafe';
 
 // 使用本地Noto Sans SC字体
@@ -54,14 +56,17 @@ export const metadata: Metadata = {
     default: 'PeriodHub - 专业痛经缓解方法和月经健康管理平台',
     template: '%s | PeriodHub'
   },
-  description: '提供42篇专业文章、24个实用工具，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。',
+  description: '提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。',
   keywords: [
     // 高搜索量核心词
     '痛经怎么缓解最快方法', '痛经吃什么药最有效', '月经推迟几天算正常', '月经量少是什么原因',
     // 品牌核心词
     '痛经缓解', '月经疼痛', '经期健康', '女性健康', '月经健康管理', '经期疼痛怎么办', '中医调理',
+    // 新增关键词
+    '疼痛管理', 'PDF下载', '医学指南下载', '专业文章下载', '痛经管理',
     // 英文关键词
-    'menstrual cramps relief', 'period pain remedies', 'how to stop period pain', 'natural period pain relief'
+    'menstrual cramps relief', 'period pain remedies', 'how to stop period pain', 'natural period pain relief',
+    'pain management', 'PDF downloads', 'medical guides download', 'period pain management'
   ],
   authors: [{ name: 'PeriodHub Team' }],
   creator: 'PeriodHub',
@@ -77,14 +82,14 @@ export const metadata: Metadata = {
     locale: 'zh_CN',
     url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
     siteName: 'PeriodHub',
-    title: 'PeriodHub - 专业女性健康管理平台',
-    description: '专业的女性月经健康管理平台，提供中西医结合的痛经解决方案。',
+    title: 'PeriodHub - 专业痛经缓解和疼痛管理平台 | 42篇医学指南+PDF下载',
+    description: '专业的痛经缓解和疼痛管理平台，提供科学的缓解方法和个性化健康建议，42篇医学指南、8个实用工具和PDF下载。',
   },
   // Twitter
   twitter: {
     card: 'summary_large_image',
-    title: 'PeriodHub - 专业女性健康管理平台',
-    description: '专业的女性月经健康管理平台，提供中西医结合的痛经解决方案。',
+    title: 'PeriodHub - 专业痛经缓解和疼痛管理平台 | 42篇医学指南+PDF下载',
+    description: '专业的痛经缓解和疼痛管理平台，提供科学的缓解方法，42篇医学指南、8个实用工具和PDF下载。',
   },
   // 移动端优化 - 已移至单独的 viewport 导出
   // 性能优化
@@ -109,7 +114,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html data-scroll-behavior="smooth">
+    <html lang="zh" data-scroll-behavior="smooth">
       <head>
         {/* 🚀 性能优化 - DNS 预解析 */}
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
@@ -138,55 +143,15 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         
-        {/* 📊 Google Analytics 4 - 异步加载优化 */}
-        {process.env.NODE_ENV === 'production' && (
-          <>
-            <script
-              async
-              src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_GA_ID"
-            />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', 'G-YOUR_GA_ID', {
-                    page_title: document.title,
-                    page_location: window.location.href,
-                    anonymize_ip: true,
-                    allow_google_signals: false,
-                    allow_ad_personalization_signals: false
-                  });
-                `,
-              }}
-            />
-          </>
-        )}
+        {/* 🚀 优化的第三方脚本 - 智能延迟加载 */}
+        <OptimizedScripts />
         
-        {/* 📊 Microsoft Clarity - 延迟加载 */}
-        {process.env.NODE_ENV === 'production' && (
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", "ssdsoc827u");
-              `,
-            }}
-          />
-        )}
+        {/* 📊 按需脚本优化 */}
+        <OptimizedChartJS />
+        <OptimizedLucide />
         
-        {/* 💰 Google AdSense - 延迟加载 */}
-        {process.env.NODE_ENV === 'production' && (
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5773162579508714"
-            crossOrigin="anonymous"
-          />
-        )}
+        {/* 📊 性能监控 */}
+        <PerformanceTracker />
         
         {/* 🚀 性能优化 - 关键CSS内联 */}
         <style dangerouslySetInnerHTML={{

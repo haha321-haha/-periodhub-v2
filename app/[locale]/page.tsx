@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import Hero from '@/components/layout/Hero';
 import UserSuccessStories from '@/components/UserSuccessStories';
 import NavigationTabs from '@/components/NavigationTabs';
+import OptimizedSVG from '@/components/ui/OptimizedSVG';
 import { URL_CONFIG } from '@/lib/url-config';
 
 // 页面级别的metadata
@@ -14,27 +15,38 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   return {
     title: isZh
-      ? 'PeriodHub - 专业痛经缓解方法和月经健康管理平台 | 科学指导，贴心陪伴'
-      : 'PeriodHub - Professional Menstrual Health Management Platform | Scientific Guidance',
+      ? 'PeriodHub - 专业痛经缓解和疼痛管理平台 | 42篇医学指南+PDF下载'
+      : 'PeriodHub - Period Pain Relief & Pain Management | 42 Medical Guides + 8 Assessment Tools',
     description: isZh
-      ? 'PeriodHub专业痛经缓解方案与经期健康管理平台。基于42篇医学指南和24个自测工具，已帮助60万+女性科学应对痛经困扰，获取个性化解决方案，改善生活质量。'
-      : 'PeriodHub - Professional menstrual health platform with 42 medical guidelines and 24 assessment tools. Board-certified OB/GYN reviewed content helping 600K+ women.',
+      ? 'PeriodHub专业痛经缓解和疼痛管理平台：提供痛经怎么缓解最快方法、用药指导等42篇医学指南，8个症状自测工具，专业文章PDF下载。已帮助60万+女性科学应对月经疼痛，获取个性化解决方案。立即开始！'
+      : 'PeriodHub - Professional period pain relief and pain management platform. 42 medical guides on fastest relief methods and effective medications, 8 symptom assessment tools, PDF downloads. Helped 600,000+ women manage menstrual pain with personalized solutions. Start now!',
     keywords: isZh ? [
       '痛经怎么缓解最快方法', '痛经吃什么药最有效', '月经推迟几天算正常', '月经量少是什么原因',
       '痛经缓解', '月经疼痛', '经期健康', '女性健康', '月经健康管理', '经期疼痛怎么办', '中医调理',
+      '疼痛管理', 'PDF下载', '医学指南下载', '专业文章下载', '痛经管理',
       '热敷', '敷热水袋', '暖宝宝', '按摩', '揉肚子', '止痛药',
       '月经周期', '经期护理', '生理期', '大姨妈', '例假', '月经不调', '经期症状'
     ] : [
-      'menstrual cramps relief', 'period pain remedies', 'how to stop period pain', 'natural period pain relief',
-      'menstrual health', 'period tracking', 'women health', 'dysmenorrhea treatment'
+      // 核心关键词
+      'period pain relief', 'menstrual cramps relief', 
+      'how to stop period pain', 'period pain remedies',
+      'dysmenorrhea treatment', 'menstrual pain management',
+      
+      // 新增关键词
+      'pain management', 'PDF downloads', 'medical guides download',
+      'period pain management', 'menstrual health management',
+      
+      // 保留原有
+      'natural period pain relief', 'menstrual health', 
+      'period tracking', 'women health'
     ],
     openGraph: {
       title: isZh
-        ? 'PeriodHub - 专业痛经缓解方法和月经健康管理平台'
-        : 'PeriodHub - Professional Menstrual Health Management Platform',
+        ? 'PeriodHub - 专业痛经缓解和疼痛管理平台 | 42篇医学指南+PDF下载'
+        : 'PeriodHub - Period Pain Relief & Pain Management | 42 Medical Guides + 8 Assessment Tools',
       description: isZh
-        ? '专业的女性月经健康管理平台，提供科学的痛经缓解方法和个性化健康建议。'
-        : 'Professional menstrual health management platform providing scientific period pain relief methods.',
+        ? '专业的痛经缓解和疼痛管理平台，提供科学的缓解方法和个性化健康建议，42篇医学指南和PDF下载。'
+        : 'Professional period pain relief and pain management platform with scientific methods and personalized solutions, 42 medical guides and PDF downloads.',
       url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}`,
       siteName: 'PeriodHub',
       locale: isZh ? 'zh_CN' : 'en_US',
@@ -43,11 +55,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     twitter: {
       card: 'summary_large_image',
       title: isZh
-        ? 'PeriodHub - 专业痛经缓解方法和月经健康管理平台'
-        : 'PeriodHub - Professional Menstrual Health Management Platform',
+        ? 'PeriodHub - 专业痛经缓解和疼痛管理平台 | 42篇医学指南+PDF下载'
+        : 'PeriodHub - Period Pain Relief & Pain Management | 42 Medical Guides + 8 Assessment Tools',
       description: isZh
-        ? '专业的女性月经健康管理平台，提供科学的痛经缓解方法。'
-        : 'Professional menstrual health management platform.',
+        ? '专业的痛经缓解和疼痛管理平台，提供科学的缓解方法，42篇医学指南和PDF下载。'
+        : 'Professional period pain relief and pain management platform with scientific methods, 42 medical guides and PDF downloads.',
     },
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}`,
@@ -289,11 +301,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <section id="articles-section" className="py-16">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="bg-white/70 backdrop-blur rounded-2xl shadow-sm p-4 sm:p-6">
-                <img
+                <OptimizedSVG
                   src="/images/infographics/stats-infographic.svg"
                   alt={isZh ? '月经健康统计数据信息图' : 'Period Health Statistics Infographic'}
                   className="w-full h-auto"
-                  loading="lazy"
+                  priority={false}
                 />
                 <p className="mt-2 text-center text-sm text-neutral-500">
                   {t('healthStatistics.dataSource')}

@@ -2,7 +2,7 @@
   "site": {
     "name": "Period Hub",
     "title": "Period Hub - Menstrual Health Management Platform",
-    "description": "Period Hub - Professional menstrual health management platform offering scientific pain relief solutions, interactive tools, and personalized health guidance for comprehensive period care. From instant relief to long-term management, supporting women's menstrual health worldwide. Evidence-based content with 42 expert articles, 24 PDF resources, and 6 interactive tools."
+    "description": "PeriodHub - Professional period pain relief and pain management platform. 42 medical guides on fastest relief methods and effective medications, 8 symptom assessment tools, PDF downloads. Helped 600,000+ women manage menstrual pain with personalized solutions. Start now!"
   },
   "anchorTexts": {
     "articles": {
@@ -3148,15 +3148,15 @@
         "privacyPolicyRefTitle": "5.1 Privacy Policy Reference",
         "privacyPolicyRef": "Your privacy is very important to us. The way we collect, use, store and protect your personal information is detailed in our Privacy Policy. The Privacy Policy is an important part of these terms of service and has the same legal effect as these terms.",
         "dataCollectionTitle": "5.2 Data Collection Overview",
-        "dataCollection": "The types of information we may collect include but are not limited to:",
+        "dataCollection": "Types of information we may collect include but are not limited to:",
         "dataUsageTitle": "5.3 Data Usage Purposes",
         "dataUsage": "We use your information for the following purposes:",
         "usagePurposes": [
           "Providing personalized health advice and services",
-          "Improving and optimizing website functionality and user experience",
+          "Improving and optimizing website functions and user experience",
           "Conducting anonymous statistical analysis and research",
           "Maintaining website security and preventing abuse",
-          "Sending you relevant health information and updates (if you choose to receive them)"
+          "Sending you relevant health information and updates (if you choose to receive)"
         ],
         "dataTypes": {
           "basicInfo": "Basic Information: Age, geographical location (if you choose to provide)",
@@ -3167,18 +3167,9 @@
           "healthData": "Health-related information you voluntarily provide",
           "technicalData": "Technical information such as IP address, browser type, device information"
         },
-        "dataUsageTitle": "5.3 Data Usage Purposes",
-        "usagePurposes": [
-          "Providing personalized health advice and services",
-          "Improving and optimizing website functions and user experience",
-          "Conducting anonymous statistical analysis and research",
-          "Maintaining website security and preventing abuse",
-          "Sending you relevant health information and updates (if you choose to receive)"
-        ],
         "dataSecurityTitle": "5.4 Data Security Protection",
         "thirdPartySharingTitle": "5.5 Third-Party Data Sharing",
         "thirdPartySharing": "We do not sell, trade or transfer your personal information to third parties without your consent, except as required by law or to protect our rights and interests. When working with trusted third-party service providers, we ensure they comply with strict confidentiality requirements.",
-        "dataCollection": "Types of information we may collect include but are not limited to:",
         "dataUse": {
           "title": "Data Use",
           "purposes": "We use your information for the following purposes:",

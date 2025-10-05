@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 /**
  * P3阶段：技术文档框架
@@ -11,13 +11,13 @@ import React, { useState, useEffect } from 'react';
 interface DocumentationItem {
   id: string;
   title: string;
-  type: 'api' | 'guide' | 'deployment' | 'code' | 'architecture';
+  type: "api" | "guide" | "deployment" | "code" | "architecture";
   category: string;
   content: string;
   lastUpdated: string;
   author: string;
   tags: string[];
-  status: 'draft' | 'review' | 'published';
+  status: "draft" | "review" | "published";
 }
 
 // 文档分类接口
@@ -32,24 +32,26 @@ interface DocumentationCategory {
 // 文档框架钩子
 export function useDocumentationFramework() {
   const [categories, setCategories] = useState<DocumentationCategory[]>([]);
-  const [selectedItem, setSelectedItem] = useState<DocumentationItem | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedItem, setSelectedItem] = useState<DocumentationItem | null>(
+    null,
+  );
+  const [searchQuery, setSearchQuery] = useState("");
   const [isEditing, setIsEditing] = useState(false);
 
   // 初始化文档分类
   useEffect(() => {
     const initialCategories: DocumentationCategory[] = [
-        {
-          id: 'api-docs',
-        name: 'API文档',
-        description: '应用程序接口文档',
-        icon: '🔌',
+      {
+        id: "api-docs",
+        name: "API文档",
+        description: "应用程序接口文档",
+        icon: "🔌",
         items: [
           {
-            id: 'symptom-assessment-api',
-            title: '症状评估API',
-            type: 'api',
-            category: 'api-docs',
+            id: "symptom-assessment-api",
+            title: "症状评估API",
+            type: "api",
+            category: "api-docs",
             content: `# 症状评估API
 
 ## 概述
@@ -86,16 +88,16 @@ Content-Type: application/json
   }
 }
 \`\`\``,
-            lastUpdated: '2024-01-15',
-            author: '开发团队',
-            tags: ['API', '症状评估', '痛经'],
-            status: 'published'
+            lastUpdated: "2024-01-15",
+            author: "开发团队",
+            tags: ["API", "症状评估", "痛经"],
+            status: "published",
           },
           {
-            id: 'pain-tracker-api',
-            title: '疼痛追踪API',
-          type: 'api',
-            category: 'api-docs',
+            id: "pain-tracker-api",
+            title: "疼痛追踪API",
+            type: "api",
+            category: "api-docs",
             content: `# 疼痛追踪API
 
 ## 概述
@@ -108,24 +110,24 @@ GET /api/pain-tracker/history
 PUT /api/pain-tracker/record/:id
 DELETE /api/pain-tracker/record/:id
 \`\`\``,
-          lastUpdated: '2024-01-15',
-            author: '开发团队',
-            tags: ['API', '疼痛追踪', '数据记录'],
-            status: 'published'
-          }
-        ]
+            lastUpdated: "2024-01-15",
+            author: "开发团队",
+            tags: ["API", "疼痛追踪", "数据记录"],
+            status: "published",
+          },
+        ],
       },
       {
-        id: 'user-guides',
-        name: '用户指南',
-        description: '用户使用指南和教程',
-        icon: '📖',
+        id: "user-guides",
+        name: "用户指南",
+        description: "用户使用指南和教程",
+        icon: "📖",
         items: [
           {
-            id: 'getting-started',
-            title: '快速开始指南',
-            type: 'guide',
-            category: 'user-guides',
+            id: "getting-started",
+            title: "快速开始指南",
+            type: "guide",
+            category: "user-guides",
             content: `# 快速开始指南
 
 ## 欢迎使用痛经影响评估工具
@@ -151,16 +153,16 @@ DELETE /api/pain-tracker/record/:id
 - 即时缓解方法
 - 长期管理策略
 - 生活方式建议`,
-            lastUpdated: '2024-01-15',
-            author: '产品团队',
-            tags: ['指南', '快速开始', '用户'],
-            status: 'published'
+            lastUpdated: "2024-01-15",
+            author: "产品团队",
+            tags: ["指南", "快速开始", "用户"],
+            status: "published",
           },
           {
-            id: 'symptom-assessment-guide',
-            title: '症状评估使用指南',
-            type: 'guide',
-            category: 'user-guides',
+            id: "symptom-assessment-guide",
+            title: "症状评估使用指南",
+            type: "guide",
+            category: "user-guides",
             content: `# 症状评估使用指南
 
 ## 如何准确评估症状
@@ -187,24 +189,24 @@ DELETE /api/pain-tracker/record/:id
 - 腹胀
 - 乳房胀痛
 - 头晕或眩晕`,
-            lastUpdated: '2024-01-15',
-            author: '产品团队',
-            tags: ['指南', '症状评估', '疼痛'],
-            status: 'published'
-          }
-        ]
+            lastUpdated: "2024-01-15",
+            author: "产品团队",
+            tags: ["指南", "症状评估", "疼痛"],
+            status: "published",
+          },
+        ],
       },
       {
-        id: 'deployment',
-        name: '部署文档',
-        description: '部署和运维相关文档',
-        icon: '🚀',
+        id: "deployment",
+        name: "部署文档",
+        description: "部署和运维相关文档",
+        icon: "🚀",
         items: [
-        {
-          id: 'deployment-guide',
-            title: '部署指南',
-          type: 'deployment',
-            category: 'deployment',
+          {
+            id: "deployment-guide",
+            title: "部署指南",
+            type: "deployment",
+            category: "deployment",
             content: `# 部署指南
 
 ## 环境要求
@@ -247,24 +249,24 @@ npm run start
 - 配置CDN
 - 设置监控
 - 备份策略`,
-            lastUpdated: '2024-01-15',
-            author: '运维团队',
-            tags: ['部署', '运维', '生产环境'],
-            status: 'published'
-          }
-        ]
+            lastUpdated: "2024-01-15",
+            author: "运维团队",
+            tags: ["部署", "运维", "生产环境"],
+            status: "published",
+          },
+        ],
       },
       {
-        id: 'code-docs',
-        name: '代码文档',
-        description: '代码注释和架构文档',
-        icon: '💻',
+        id: "code-docs",
+        name: "代码文档",
+        description: "代码注释和架构文档",
+        icon: "💻",
         items: [
           {
-            id: 'architecture-overview',
-            title: '架构概览',
-            type: 'architecture',
-            category: 'code-docs',
+            id: "architecture-overview",
+            title: "架构概览",
+            type: "architecture",
+            category: "code-docs",
             content: `# 架构概览
 
 ## 技术栈
@@ -301,13 +303,13 @@ lib/                        # 工具库
 2. **疼痛追踪模块**: 记录和分析疼痛数据
 3. **建议生成模块**: 提供个性化建议
 4. **数据同步模块**: 处理数据同步和备份`,
-            lastUpdated: '2024-01-15',
-            author: '开发团队',
-            tags: ['架构', '技术栈', '项目结构'],
-            status: 'published'
-          }
-        ]
-      }
+            lastUpdated: "2024-01-15",
+            author: "开发团队",
+            tags: ["架构", "技术栈", "项目结构"],
+            status: "published",
+          },
+        ],
+      },
     ];
 
     setCategories(initialCategories);
@@ -320,46 +322,62 @@ lib/                        # 工具库
   };
 
   // 过滤文档
-  const filteredCategories = categories.map(category => ({
-    ...category,
-    items: category.items.filter(item =>
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-    )
-  })).filter(category => category.items.length > 0);
+  const filteredCategories = categories
+    .map((category) => ({
+      ...category,
+      items: category.items.filter(
+        (item) =>
+          item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.tags.some((tag) =>
+            tag.toLowerCase().includes(searchQuery.toLowerCase()),
+          ),
+      ),
+    }))
+    .filter((category) => category.items.length > 0);
 
   // 创建新文档
-  const createDocumentation = (item: Omit<DocumentationItem, 'id' | 'lastUpdated'>) => {
+  const createDocumentation = (
+    item: Omit<DocumentationItem, "id" | "lastUpdated">,
+  ) => {
     const newItem: DocumentationItem = {
       ...item,
       id: `doc-${Date.now()}`,
-      lastUpdated: new Date().toISOString().split('T')[0]
+      lastUpdated: new Date().toISOString().split("T")[0],
     };
 
-    setCategories(prev => prev.map(category =>
-      category.id === item.category
-        ? { ...category, items: [...category.items, newItem] }
-        : category
-    ));
+    setCategories((prev) =>
+      prev.map((category) =>
+        category.id === item.category
+          ? { ...category, items: [...category.items, newItem] }
+          : category,
+      ),
+    );
   };
 
   // 更新文档
-  const updateDocumentation = (id: string, updates: Partial<DocumentationItem>) => {
-    setCategories(prev => prev.map(category => ({
-      ...category,
-      items: category.items.map(item =>
-        item.id === id ? { ...item, ...updates } : item
-      )
-    })));
+  const updateDocumentation = (
+    id: string,
+    updates: Partial<DocumentationItem>,
+  ) => {
+    setCategories((prev) =>
+      prev.map((category) => ({
+        ...category,
+        items: category.items.map((item) =>
+          item.id === id ? { ...item, ...updates } : item,
+        ),
+      })),
+    );
   };
 
   // 删除文档
   const deleteDocumentation = (id: string) => {
-    setCategories(prev => prev.map(category => ({
-      ...category,
-      items: category.items.filter(item => item.id !== id)
-    })));
+    setCategories((prev) =>
+      prev.map((category) => ({
+        ...category,
+        items: category.items.filter((item) => item.id !== id),
+      })),
+    );
   };
 
   return {
@@ -373,7 +391,7 @@ lib/                        # 工具库
     searchDocumentation,
     createDocumentation,
     updateDocumentation,
-    deleteDocumentation
+    deleteDocumentation,
   };
 }
 
@@ -386,7 +404,7 @@ export function DocumentationFramework() {
     searchQuery,
     setSearchQuery,
     isEditing,
-    setIsEditing
+    setIsEditing,
   } = useDocumentationFramework();
 
   return (
@@ -404,11 +422,9 @@ export function DocumentationFramework() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               />
-              <div className="absolute right-3 top-2.5 text-gray-400">
-                🔍
+              <div className="absolute right-3 top-2.5 text-gray-400">🔍</div>
+            </div>
           </div>
-        </div>
-      </div>
 
           {/* 文档分类 */}
           <div className="flex-1 overflow-y-auto p-4">
@@ -416,9 +432,13 @@ export function DocumentationFramework() {
               <div key={category.id} className="mb-6">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-lg">{category.icon}</span>
-                  <h3 className="font-semibold text-gray-800">{category.name}</h3>
+                  <h3 className="font-semibold text-gray-800">
+                    {category.name}
+                  </h3>
                 </div>
-                <p className="text-sm text-gray-600 mb-3">{category.description}</p>
+                <p className="text-sm text-gray-600 mb-3">
+                  {category.description}
+                </p>
 
                 <div className="space-y-2">
                   {category.items.map((item) => (
@@ -427,29 +447,45 @@ export function DocumentationFramework() {
                       onClick={() => setSelectedItem(item)}
                       className={`p-3 rounded-lg cursor-pointer transition-colors ${
                         selectedItem?.id === item.id
-                          ? 'bg-blue-100 border border-blue-300'
-                          : 'bg-gray-50 hover:bg-gray-100'
+                          ? "bg-blue-100 border border-blue-300"
+                          : "bg-gray-50 hover:bg-gray-100"
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <h4 className="font-medium text-gray-800">{item.title}</h4>
-                        <span className={`px-2 py-1 rounded text-xs ${
-                          item.status === 'published' ? 'bg-green-100 text-green-800' :
-                          item.status === 'review' ? 'bg-yellow-100 text-yellow-800' :
-                          'bg-gray-100 text-gray-800'
-                        }`}>
-                          {item.status === 'published' ? '已发布' :
-                           item.status === 'review' ? '审核中' : '草稿'}
+                        <h4 className="font-medium text-gray-800">
+                          {item.title}
+                        </h4>
+                        <span
+                          className={`px-2 py-1 rounded text-xs ${
+                            item.status === "published"
+                              ? "bg-green-100 text-green-800"
+                              : item.status === "review"
+                                ? "bg-yellow-100 text-yellow-800"
+                                : "bg-gray-100 text-gray-800"
+                          }`}
+                        >
+                          {item.status === "published"
+                            ? "已发布"
+                            : item.status === "review"
+                              ? "审核中"
+                              : "草稿"}
                         </span>
-                </div>
+                      </div>
                       <div className="flex items-center gap-2 mt-1">
-                        <span className="text-xs text-gray-500">{item.lastUpdated}</span>
+                        <span className="text-xs text-gray-500">
+                          {item.lastUpdated}
+                        </span>
                         <span className="text-xs text-gray-500">•</span>
-                        <span className="text-xs text-gray-500">{item.author}</span>
-              </div>
+                        <span className="text-xs text-gray-500">
+                          {item.author}
+                        </span>
+                      </div>
                       <div className="flex flex-wrap gap-1 mt-2">
                         {item.tags.slice(0, 3).map((tag) => (
-                          <span key={tag} className="px-2 py-1 bg-gray-200 text-gray-600 text-xs rounded">
+                          <span
+                            key={tag}
+                            className="px-2 py-1 bg-gray-200 text-gray-600 text-xs rounded"
+                          >
                             {tag}
                           </span>
                         ))}
@@ -458,13 +494,13 @@ export function DocumentationFramework() {
                             +{item.tags.length - 3}
                           </span>
                         )}
-                  </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
         </div>
 
         {/* 主内容区 */}
@@ -474,31 +510,40 @@ export function DocumentationFramework() {
               {/* 文档头部 */}
               <div className="p-6 border-b border-gray-200">
                 <div className="flex items-center justify-between">
-              <div>
-                    <h1 className="text-2xl font-bold text-gray-800">{selectedItem.title}</h1>
+                  <div>
+                    <h1 className="text-2xl font-bold text-gray-800">
+                      {selectedItem.title}
+                    </h1>
                     <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
                       <span>最后更新: {selectedItem.lastUpdated}</span>
                       <span>作者: {selectedItem.author}</span>
-                      <span className={`px-2 py-1 rounded text-xs ${
-                        selectedItem.status === 'published' ? 'bg-green-100 text-green-800' :
-                        selectedItem.status === 'review' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {selectedItem.status === 'published' ? '已发布' :
-                         selectedItem.status === 'review' ? '审核中' : '草稿'}
+                      <span
+                        className={`px-2 py-1 rounded text-xs ${
+                          selectedItem.status === "published"
+                            ? "bg-green-100 text-green-800"
+                            : selectedItem.status === "review"
+                              ? "bg-yellow-100 text-yellow-800"
+                              : "bg-gray-100 text-gray-800"
+                        }`}
+                      >
+                        {selectedItem.status === "published"
+                          ? "已发布"
+                          : selectedItem.status === "review"
+                            ? "审核中"
+                            : "草稿"}
                       </span>
-              </div>
-            </div>
+                    </div>
+                  </div>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setIsEditing(!isEditing)}
                       className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                     >
-                      {isEditing ? '查看' : '编辑'}
+                      {isEditing ? "查看" : "编辑"}
                     </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
               {/* 文档内容 */}
               <div className="flex-1 p-6 overflow-y-auto">
@@ -507,7 +552,7 @@ export function DocumentationFramework() {
                     value={selectedItem.content}
                     onChange={(e) => {
                       // 这里应该调用updateDocumentation
-                      console.log('更新文档内容');
+                      console.log("更新文档内容");
                     }}
                     className="w-full h-full p-4 border border-gray-300 rounded-lg font-mono text-sm"
                     placeholder="输入文档内容..."
@@ -538,5 +583,5 @@ export function DocumentationFramework() {
 
 export default {
   useDocumentationFramework,
-  DocumentationFramework
+  DocumentationFramework,
 };

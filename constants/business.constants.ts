@@ -18,18 +18,18 @@ export const BUSINESS_CONSTANTS = {
 
     // 内容分析阈值
     minWordCount: 100,
-    maxTextLength: 10000
+    maxTextLength: 10000,
   },
 
   // 文件处理限制
   files: {
     maxFileSize: 10 * 1024 * 1024, // 10MB
     minFileSize: 1024, // 1KB
-    allowedTypes: ['application/pdf'],
+    allowedTypes: ["application/pdf"],
     maxBatchSize: 10,
 
     // 页数估算
-    estimatedBytesPerPage: 100000 // 100KB per page
+    estimatedBytesPerPage: 100000, // 100KB per page
   },
 
   // 内容分析参数
@@ -37,13 +37,13 @@ export const BUSINESS_CONSTANTS = {
     readingSpeed: 200, // words per minute
     complexityThresholds: {
       beginner: 15, // avg words per sentence
-      intermediate: 25
+      intermediate: 25,
     },
 
     // 关键词提取
     maxKeywords: 20,
     minKeywordLength: 2,
-    maxKeywordLength: 50
+    maxKeywordLength: 50,
   },
 
   // 搜索配置
@@ -57,23 +57,23 @@ export const BUSINESS_CONSTANTS = {
       title: 3.0,
       description: 2.0,
       content: 1.0,
-      keywords: 2.5
-    }
+      keywords: 2.5,
+    },
   },
 
   // 缓存配置
   cache: {
     defaultTtl: 3600, // 1 hour in seconds
-    searchTtl: 1800,  // 30 minutes
+    searchTtl: 1800, // 30 minutes
     metadataTtl: 7200, // 2 hours
-    maxCacheSize: 1000
+    maxCacheSize: 1000,
   },
 
   // 分页配置
   pagination: {
     defaultPageSize: 12,
     maxPageSize: 50,
-    minPageSize: 6
+    minPageSize: 6,
   },
 
   // 评分系统
@@ -87,9 +87,9 @@ export const BUSINESS_CONSTANTS = {
       content: 0.4,
       design: 0.2,
       file: 0.2,
-      usefulness: 0.2
-    }
-  }
+      usefulness: 0.2,
+    },
+  },
 } as const;
 
 export type BusinessConstants = typeof BUSINESS_CONSTANTS;

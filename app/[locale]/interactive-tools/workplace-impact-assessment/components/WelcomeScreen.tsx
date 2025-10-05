@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useTranslations } from 'next-intl';
-import { ArrowLeft, BarChart3, Users, Clock, CheckCircle } from 'lucide-react';
+import React from "react";
+import { useTranslations } from "next-intl";
+import { ArrowLeft, BarChart3, Users, Clock, CheckCircle } from "lucide-react";
 
 interface WelcomeScreenProps {
   onStart: () => void;
@@ -10,8 +10,8 @@ interface WelcomeScreenProps {
 }
 
 export default function WelcomeScreen({ onStart, onBack }: WelcomeScreenProps) {
-  const t = useTranslations('interactiveTools.workplaceAssessment');
-  const commonT = useTranslations('common');
+  const t = useTranslations("interactiveTools.workplaceAssessment");
+  const commonT = useTranslations("common");
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -22,7 +22,7 @@ export default function WelcomeScreen({ onStart, onBack }: WelcomeScreenProps) {
           className="flex items-center text-gray-600 hover:text-gray-800 transition-colors"
         >
           <ArrowLeft className="w-5 h-5 mr-2" />
-          {commonT('back') || '返回'}
+          {commonT("back") || "返回"}
         </button>
       </div>
 
@@ -35,11 +35,12 @@ export default function WelcomeScreen({ onStart, onBack }: WelcomeScreenProps) {
           </div>
 
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {t('title') || '职场影响评估'}
+            {t("title") || "职场影响评估"}
           </h1>
 
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            {t('subtitle') || '了解您的症状如何影响工作，有助于找到有效的支持措施。'}
+            {t("subtitle") ||
+              "了解您的症状如何影响工作，有助于找到有效的支持措施。"}
           </p>
         </div>
 
@@ -50,10 +51,10 @@ export default function WelcomeScreen({ onStart, onBack }: WelcomeScreenProps) {
               <Users className="w-6 h-6 text-blue-600" />
             </div>
             <h3 className="font-semibold text-gray-900 mb-2">
-              {t('features.assessment') || '专业评估'}
+              {t("features.assessment") || "专业评估"}
             </h3>
             <p className="text-sm text-gray-600">
-              {t('features.assessmentDesc') || '4个专业问题，全面评估工作影响'}
+              {t("features.assessmentDesc") || "4个专业问题，全面评估工作影响"}
             </p>
           </div>
 
@@ -62,10 +63,10 @@ export default function WelcomeScreen({ onStart, onBack }: WelcomeScreenProps) {
               <Clock className="w-6 h-6 text-purple-600" />
             </div>
             <h3 className="font-semibold text-gray-900 mb-2">
-              {t('features.quick') || '快速便捷'}
+              {t("features.quick") || "快速便捷"}
             </h3>
             <p className="text-sm text-gray-600">
-              {t('features.quickDesc') || '仅需3-5分钟，获得专业分析'}
+              {t("features.quickDesc") || "仅需3-5分钟，获得专业分析"}
             </p>
           </div>
 
@@ -74,10 +75,10 @@ export default function WelcomeScreen({ onStart, onBack }: WelcomeScreenProps) {
               <CheckCircle className="w-6 h-6 text-green-600" />
             </div>
             <h3 className="font-semibold text-gray-900 mb-2">
-              {t('features.personalized') || '个性化建议'}
+              {t("features.personalized") || "个性化建议"}
             </h3>
             <p className="text-sm text-gray-600">
-              {t('features.personalizedDesc') || '基于评估结果提供针对性建议'}
+              {t("features.personalizedDesc") || "基于评估结果提供针对性建议"}
             </p>
           </div>
         </div>
@@ -88,14 +89,15 @@ export default function WelcomeScreen({ onStart, onBack }: WelcomeScreenProps) {
             onClick={onStart}
             className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
           >
-            {t('startButton') || '开始评估'}
+            {t("startButton") || "开始评估"}
           </button>
         </div>
 
         {/* 免责声明 */}
         <div className="mt-8 pt-6 border-t border-gray-200">
           <p className="text-center text-sm text-gray-500">
-            {commonT('medicalDisclaimer') || '此评估仅供参考，不能替代专业医疗诊断。如有健康问题，请咨询医生。'}
+            {commonT("medicalDisclaimer") ||
+              "此评估仅供参考，不能替代专业医疗诊断。如有健康问题，请咨询医生。"}
           </p>
         </div>
       </div>

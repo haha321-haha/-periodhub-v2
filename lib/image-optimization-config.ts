@@ -6,13 +6,13 @@
 export const ImageOptimizationConfig = {
   // 基础配置
   defaultQuality: 85,
-  defaultPlaceholder: 'empty' as const,
+  defaultPlaceholder: "empty" as const,
 
   // 懒加载配置
   lazyLoading: {
     threshold: 100, // 提前100px开始加载
-    rootMargin: '50px',
-    thresholdValue: 0.1
+    rootMargin: "50px",
+    thresholdValue: 0.1,
   },
 
   // 响应式图片配置
@@ -20,9 +20,9 @@ export const ImageOptimizationConfig = {
     breakpoints: {
       mobile: 640,
       tablet: 1024,
-      desktop: 1280
+      desktop: 1280,
     },
-    defaultSizes: '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
+    defaultSizes: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
   },
 
   // 预设配置
@@ -31,41 +31,41 @@ export const ImageOptimizationConfig = {
       priority: true,
       quality: 90,
       preload: true,
-      lazyThreshold: 0
+      lazyThreshold: 0,
     },
     content: {
       priority: false,
       quality: 85,
       preload: false,
-      lazyThreshold: 100
+      lazyThreshold: 100,
     },
     thumbnail: {
       priority: false,
       quality: 75,
       preload: false,
-      lazyThreshold: 50
+      lazyThreshold: 50,
     },
     decorative: {
       priority: false,
       quality: 70,
       preload: false,
-      lazyThreshold: 200
-    }
+      lazyThreshold: 200,
+    },
   },
 
   // 性能监控
   performance: {
     enableMetrics: true,
     reportErrors: true,
-    logLoadTimes: false // 生产环境关闭
+    logLoadTimes: false, // 生产环境关闭
   },
 
   // 错误处理
   errorHandling: {
     maxRetries: 2,
-    fallbackImage: '/images/placeholder-error.webp',
-    showErrorState: true
-  }
+    fallbackImage: "/images/placeholder-error.webp",
+    showErrorState: true,
+  },
 };
 
 /**
@@ -89,7 +89,9 @@ export function generateResponsiveSizes(config: {
 /**
  * 获取图片优化预设
  */
-export function getImagePreset(type: keyof typeof ImageOptimizationConfig.presets) {
+export function getImagePreset(
+  type: keyof typeof ImageOptimizationConfig.presets,
+) {
   return ImageOptimizationConfig.presets[type];
 }
 
@@ -99,7 +101,7 @@ export function getImagePreset(type: keyof typeof ImageOptimizationConfig.preset
 export function shouldPrioritizeImage(
   isAboveFold: boolean,
   isHero: boolean,
-  isCritical: boolean = false
+  isCritical: boolean = false,
 ): boolean {
   return isAboveFold || isHero || isCritical;
 }
@@ -109,10 +111,10 @@ export function shouldPrioritizeImage(
  */
 export function generatePreloadConfig(src: string, sizes?: string) {
   return {
-    rel: 'preload',
-    as: 'image',
+    rel: "preload",
+    as: "image",
     href: src,
-    ...(sizes && { imageSizes: sizes })
+    ...(sizes && { imageSizes: sizes }),
   };
 }
 

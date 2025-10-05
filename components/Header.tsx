@@ -1,16 +1,20 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useTranslations, useLocale } from 'next-intl';
-import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
+import { useState, useEffect } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
 
 export default function Header() {
-  const t = useTranslations('header');
+  const t = useTranslations("header");
   const rawLocale = useLocale();
   // 兼容 zh/zh-CN/en/en-US 等格式，标准化为 zh/en
-  const locale = rawLocale?.startsWith('zh') ? 'zh' : rawLocale?.startsWith('en') ? 'en' : 'zh';
+  const locale = rawLocale?.startsWith("zh")
+    ? "zh"
+    : rawLocale?.startsWith("en")
+      ? "en"
+      : "zh";
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -23,13 +27,13 @@ export default function Header() {
 
   // Navigation items
   const navigation = [
-    { name: t('home'), href: `/${locale}` },
-    { name: t('interactiveSolutions'), href: `/${locale}/interactive-tools` },
-    { name: t('articlesDownloads'), href: `/${locale}/downloads` },
-    { name: t('scenarioSolutions'), href: `/${locale}/scenario-solutions` },
+    { name: t("home"), href: `/${locale}` },
+    { name: t("interactiveSolutions"), href: `/${locale}/interactive-tools` },
+    { name: t("articlesDownloads"), href: `/${locale}/downloads` },
+    { name: t("scenarioSolutions"), href: `/${locale}/scenario-solutions` },
     // { name: t('frameworkDemo'), href: `/${locale}/framework-demo` }, // 暂时隐藏 - 可快速恢复
-    { name: t('naturalCare'), href: `/${locale}/natural-therapies` },
-    { name: t('healthGuide'), href: `/${locale}/health-guide` },
+    { name: t("naturalCare"), href: `/${locale}/natural-therapies` },
+    { name: t("healthGuide"), href: `/${locale}/health-guide` },
   ];
 
   // Handle scroll effect for header
@@ -42,8 +46,8 @@ export default function Header() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Close mobile menu on route change
@@ -61,8 +65,10 @@ export default function Header() {
       return pathname === href;
     }
     // 简化：downloads页面匹配articles或downloads路径
-    if (href.includes('/downloads')) {
-      return pathname?.includes('/articles') || pathname?.includes('/downloads');
+    if (href.includes("/downloads")) {
+      return (
+        pathname?.includes("/articles") || pathname?.includes("/downloads")
+      );
     }
     return pathname?.startsWith(href) || false;
   };
@@ -85,8 +91,12 @@ export default function Header() {
             </div>
             <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-4">
               <div className="flex items-center space-x-1 px-2 py-2 text-sm font-medium text-neutral-600 rounded min-w-[44px] min-h-[44px] justify-center sm:justify-start">
-                <span className="text-base" suppressHydrationWarning={true}>🇨🇳</span>
-                <span className="hidden sm:inline text-xs lg:text-sm">中文</span>
+                <span className="text-base" suppressHydrationWarning={true}>
+                  🇨🇳
+                </span>
+                <span className="hidden sm:inline text-xs lg:text-sm">
+                  中文
+                </span>
               </div>
             </div>
           </div>
@@ -99,8 +109,8 @@ export default function Header() {
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-200/80'
-          : 'bg-white/85 backdrop-blur-sm'
+          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-neutral-200/80"
+          : "bg-white/85 backdrop-blur-sm"
       }`}
     >
       <div className="container-custom">
@@ -126,8 +136,8 @@ export default function Header() {
                 href={item.href}
                 className={`px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium rounded-md transition-colors ${
                   isActive(item.href)
-                    ? 'bg-primary-50 text-primary-600'
-                    : 'text-neutral-600 hover:text-primary-600 hover:bg-primary-50'
+                    ? "bg-primary-50 text-primary-600"
+                    : "text-neutral-600 hover:text-primary-600 hover:bg-primary-50"
                 }`}
                 suppressHydrationWarning={true}
               >
@@ -150,7 +160,10 @@ export default function Header() {
               <span className="sr-only">Open main menu</span>
               {/* 修复SVG hydration问题 - 使用条件渲染而不是CSS隐藏 */}
               {!isMenuOpen && (
-                <Menu className="block h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
+                <Menu
+                  className="block h-5 w-5 sm:h-6 sm:w-6"
+                  aria-hidden="true"
+                />
               )}
               {isMenuOpen && (
                 <X className="block h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
@@ -161,7 +174,10 @@ export default function Header() {
 
         {/* 📱 移动端优化导航菜单 */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-neutral-200 bg-white/95 backdrop-blur-md" id="mobile-menu">
+          <div
+            className="md:hidden border-t border-neutral-200 bg-white/95 backdrop-blur-md"
+            id="mobile-menu"
+          >
             <div className="px-2 pt-3 pb-4 space-y-2 sm:px-3">
               {navigation.map((item) => (
                 <Link
@@ -169,8 +185,8 @@ export default function Header() {
                   href={item.href}
                   className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors min-h-[44px] flex items-center ${
                     isActive(item.href)
-                      ? 'bg-primary-50 text-primary-600 border border-primary-200'
-                      : 'text-neutral-700 hover:bg-primary-50 hover:text-primary-600 border border-transparent'
+                      ? "bg-primary-50 text-primary-600 border border-primary-200"
+                      : "text-neutral-700 hover:bg-primary-50 hover:text-primary-600 border border-transparent"
                   }`}
                 >
                   {item.name}
@@ -189,9 +205,13 @@ function LanguageSwitcher() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const rawLocale = useLocale();
-  const locale = rawLocale?.startsWith('zh') ? 'zh' : rawLocale?.startsWith('en') ? 'en' : 'zh';
+  const locale = rawLocale?.startsWith("zh")
+    ? "zh"
+    : rawLocale?.startsWith("en")
+      ? "en"
+      : "zh";
   const pathname = usePathname();
-  const t = useTranslations('languageSwitcher');
+  const t = useTranslations("languageSwitcher");
 
   // 确保客户端和服务端渲染一致
   useEffect(() => {
@@ -199,26 +219,27 @@ function LanguageSwitcher() {
   }, []);
 
   const languages = [
-    { code: 'en', name: t('languages.en'), flag: '🇺🇸' },
-    { code: 'zh', name: t('languages.zh'), flag: '🇨🇳' },
+    { code: "en", name: t("languages.en"), flag: "🇺🇸" },
+    { code: "zh", name: t("languages.zh"), flag: "🇨🇳" },
   ];
 
-  const currentLanguage = languages.find(lang => lang.code === locale) || languages[0];
+  const currentLanguage =
+    languages.find((lang) => lang.code === locale) || languages[0];
 
   const switchLocale = (newLocale: string) => {
     // 规范化路径的第一个段为语言段；若没有语言段则插入
     let newPath = `/${newLocale}`;
     if (pathname) {
-      const segments = pathname.split('/');
+      const segments = pathname.split("/");
       // segments[0] === '' 永远成立
-      if (segments[1] === 'zh' || segments[1] === 'en') {
+      if (segments[1] === "zh" || segments[1] === "en") {
         segments[1] = newLocale;
       } else {
         segments.splice(1, 0, newLocale);
       }
-      newPath = segments.join('/') || `/${newLocale}`;
+      newPath = segments.join("/") || `/${newLocale}`;
     }
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       window.location.href = newPath;
     }
     setIsOpen(false);
@@ -233,8 +254,15 @@ function LanguageSwitcher() {
           aria-expanded={false}
           disabled
         >
-          <span className="text-base" suppressHydrationWarning={true}>{currentLanguage?.flag}</span>
-          <span className="hidden sm:inline text-xs lg:text-sm" suppressHydrationWarning={true}>{currentLanguage?.name}</span>
+          <span className="text-base" suppressHydrationWarning={true}>
+            {currentLanguage?.flag}
+          </span>
+          <span
+            className="hidden sm:inline text-xs lg:text-sm"
+            suppressHydrationWarning={true}
+          >
+            {currentLanguage?.name}
+          </span>
           <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 hidden sm:block" />
         </button>
       </div>
@@ -249,9 +277,17 @@ function LanguageSwitcher() {
         className="flex items-center space-x-1 px-2 py-2 text-sm font-medium text-neutral-600 hover:text-primary-600 rounded hover:bg-neutral-100 transition-colors min-w-[44px] min-h-[44px] justify-center"
         aria-expanded={isOpen}
       >
-        <span className="text-base" suppressHydrationWarning={true}>{currentLanguage?.flag}</span>
-        <span className="text-xs lg:text-sm" suppressHydrationWarning={true}>{currentLanguage?.name}</span>
-        <ChevronDown className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="text-base" suppressHydrationWarning={true}>
+          {currentLanguage?.flag}
+        </span>
+        <span className="text-xs lg:text-sm" suppressHydrationWarning={true}>
+          {currentLanguage?.name}
+        </span>
+        <ChevronDown
+          className={`w-3 h-3 sm:w-4 sm:h-4 transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
       </button>
 
       {/* 📱 移动端优化下拉菜单 */}
@@ -263,11 +299,17 @@ function LanguageSwitcher() {
                 key={language.code}
                 onClick={() => switchLocale(language.code)}
                 className={`flex items-center space-x-2 w-full px-3 sm:px-4 py-3 text-sm text-left hover:bg-neutral-50 transition-colors min-h-[44px] ${
-                  locale === language.code ? 'bg-primary-50 text-primary-600' : 'text-neutral-700'
+                  locale === language.code
+                    ? "bg-primary-50 text-primary-600"
+                    : "text-neutral-700"
                 }`}
               >
-                <span className="text-base" suppressHydrationWarning={true}>{language.flag}</span>
-                <span className="text-sm" suppressHydrationWarning={true}>{language.name}</span>
+                <span className="text-base" suppressHydrationWarning={true}>
+                  {language.flag}
+                </span>
+                <span className="text-sm" suppressHydrationWarning={true}>
+                  {language.name}
+                </span>
               </button>
             ))}
           </div>

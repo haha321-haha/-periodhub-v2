@@ -3,10 +3,14 @@
  */
 
 // 测试阶段类型
-export type QuizStage = 'stage1' | 'stage2' | 'stage3' | 'stage4';
-export type QuizStageStatus = 'not_started' | 'in_progress' | 'completed' | 'locked';
-export type ResultLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert';
-export type StageType = 'quiz' | 'training' | 'guidance';
+export type QuizStage = "stage1" | "stage2" | "stage3" | "stage4";
+export type QuizStageStatus =
+  | "not_started"
+  | "in_progress"
+  | "completed"
+  | "locked";
+export type ResultLevel = "beginner" | "intermediate" | "advanced" | "expert";
+export type StageType = "quiz" | "training" | "guidance";
 
 // 基础题目类型
 export interface QuizQuestion {
@@ -90,7 +94,7 @@ export interface QuizStageConfig {
   instructions: string;
   totalQuestions: number;
   timeLimit?: number; // 可选的时间限制（分钟）
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: "easy" | "medium" | "hard";
   unlockCondition?: {
     requiresPreviousStage: boolean;
     minScore?: number;

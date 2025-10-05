@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Globe,
   CheckCircle,
@@ -12,8 +12,8 @@ import {
   Settings,
   Languages,
   FileText,
-  BarChart3
-} from 'lucide-react';
+  BarChart3,
+} from "lucide-react";
 
 interface TranslationStatus {
   totalKeys: number;
@@ -29,10 +29,11 @@ interface I18nOptimizerProps {
 
 export default function I18nOptimizer({
   locale,
-  onTranslationUpdate
+  onTranslationUpdate,
 }: I18nOptimizerProps) {
-  const t = useTranslations('interactiveTools.i18n');
-  const [translationStatus, setTranslationStatus] = useState<TranslationStatus | null>(null);
+  const t = useTranslations("interactiveTools.i18n");
+  const [translationStatus, setTranslationStatus] =
+    useState<TranslationStatus | null>(null);
   const [loading, setLoading] = useState(true);
   const [optimizationProgress, setOptimizationProgress] = useState(0);
   const [isOptimizing, setIsOptimizing] = useState(false);
@@ -42,34 +43,34 @@ export default function I18nOptimizer({
     const checkTranslations = async () => {
       try {
         // 模拟翻译检查
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const mockStatus: TranslationStatus = {
           totalKeys: 3710,
           missingKeys: [
-            'interactiveTools.analytics.charts.pieChart',
-            'interactiveTools.analytics.charts.lineChart',
-            'interactiveTools.ai.recommendations.priority.high',
-            'interactiveTools.social.community.posts.create',
-            'interactiveTools.sync.devices.mobile',
-            'interactiveTools.reports.export.pdf',
-            'interactiveTools.reports.export.html',
-            'interactiveTools.reports.templates.medical',
-            'interactiveTools.reports.templates.summary',
-            'interactiveTools.reports.templates.detailed'
+            "interactiveTools.analytics.charts.pieChart",
+            "interactiveTools.analytics.charts.lineChart",
+            "interactiveTools.ai.recommendations.priority.high",
+            "interactiveTools.social.community.posts.create",
+            "interactiveTools.sync.devices.mobile",
+            "interactiveTools.reports.export.pdf",
+            "interactiveTools.reports.export.html",
+            "interactiveTools.reports.templates.medical",
+            "interactiveTools.reports.templates.summary",
+            "interactiveTools.reports.templates.detailed",
           ],
           inconsistentKeys: [
-            'interactiveTools.symptomAssessment.subtitle',
-            'interactiveTools.workplaceAssessment.subtitle',
-            'interactiveTools.settings.privacy.dataSharing'
+            "interactiveTools.symptomAssessment.subtitle",
+            "interactiveTools.workplaceAssessment.subtitle",
+            "interactiveTools.settings.privacy.dataSharing",
           ],
-          qualityScore: 85
+          qualityScore: 85,
         };
 
         setTranslationStatus(mockStatus);
         setLoading(false);
       } catch (error) {
-        console.error('Translation check failed:', error);
+        console.error("Translation check failed:", error);
         setLoading(false);
       }
     };
@@ -85,16 +86,16 @@ export default function I18nOptimizer({
     try {
       // 模拟优化过程
       const steps = [
-        '检查缺失翻译键...',
-        '补充缺失翻译...',
-        '修复不一致翻译...',
-        '验证翻译质量...',
-        '更新翻译缓存...',
-        '完成优化'
+        "检查缺失翻译键...",
+        "补充缺失翻译...",
+        "修复不一致翻译...",
+        "验证翻译质量...",
+        "更新翻译缓存...",
+        "完成优化",
       ];
 
       for (let i = 0; i < steps.length; i++) {
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
         setOptimizationProgress(Math.round(((i + 1) / steps.length) * 100));
       }
 
@@ -104,7 +105,7 @@ export default function I18nOptimizer({
           ...translationStatus,
           missingKeys: [],
           inconsistentKeys: [],
-          qualityScore: 98
+          qualityScore: 98,
         };
         setTranslationStatus(updatedStatus);
 
@@ -115,7 +116,7 @@ export default function I18nOptimizer({
 
       setIsOptimizing(false);
     } catch (error) {
-      console.error('Translation optimization failed:', error);
+      console.error("Translation optimization failed:", error);
       setIsOptimizing(false);
     }
   };
@@ -129,18 +130,22 @@ export default function I18nOptimizer({
       locale,
       status: translationStatus,
       recommendations: [
-        '补充缺失的210个英文翻译键',
-        '统一翻译术语和风格',
-        '优化长文本的布局适配',
-        '添加文化适应性调整'
-      ]
+        "补充缺失的210个英文翻译键",
+        "统一翻译术语和风格",
+        "优化长文本的布局适配",
+        "添加文化适应性调整",
+      ],
     };
 
-    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(report, null, 2)], {
+      type: "application/json",
+    });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `translation-report-${locale}-${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `translation-report-${locale}-${
+      new Date().toISOString().split("T")[0]
+    }.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -165,22 +170,31 @@ export default function I18nOptimizer({
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
             <Globe className="w-6 h-6 mr-2 text-blue-600" />
-            {locale === 'zh' ? '国际化优化' : 'Internationalization Optimization'}
+            {locale === "zh"
+              ? "国际化优化"
+              : "Internationalization Optimization"}
           </h2>
           <p className="text-gray-600">
-            {locale === 'zh' ? '完善翻译质量，优化多语言支持' : 'Improve translation quality and optimize multilingual support'}
+            {locale === "zh"
+              ? "完善翻译质量，优化多语言支持"
+              : "Improve translation quality and optimize multilingual support"}
           </p>
         </div>
 
         <div className="flex items-center space-x-2 mt-4 sm:mt-0">
-          <div className={`px-3 py-1 rounded-full text-sm font-medium ${
-            translationStatus?.qualityScore && translationStatus.qualityScore >= 90
-              ? 'bg-green-100 text-green-700'
-              : translationStatus?.qualityScore && translationStatus.qualityScore >= 70
-              ? 'bg-yellow-100 text-yellow-700'
-              : 'bg-red-100 text-red-700'
-          }`}>
-            {translationStatus?.qualityScore}% {locale === 'zh' ? '质量分数' : 'Quality Score'}
+          <div
+            className={`px-3 py-1 rounded-full text-sm font-medium ${
+              translationStatus?.qualityScore &&
+              translationStatus.qualityScore >= 90
+                ? "bg-green-100 text-green-700"
+                : translationStatus?.qualityScore &&
+                    translationStatus.qualityScore >= 70
+                  ? "bg-yellow-100 text-yellow-700"
+                  : "bg-red-100 text-red-700"
+            }`}
+          >
+            {translationStatus?.qualityScore}%{" "}
+            {locale === "zh" ? "质量分数" : "Quality Score"}
           </div>
         </div>
       </div>
@@ -191,52 +205,68 @@ export default function I18nOptimizer({
           <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
             <div className="flex items-center justify-between mb-4">
               <FileText className="w-8 h-8 text-blue-600" />
-              <span className="text-2xl font-bold text-blue-600">{translationStatus.totalKeys}</span>
+              <span className="text-2xl font-bold text-blue-600">
+                {translationStatus.totalKeys}
+              </span>
             </div>
             <h3 className="text-lg font-semibold text-blue-900 mb-2">
-              {locale === 'zh' ? '总翻译键' : 'Total Keys'}
+              {locale === "zh" ? "总翻译键" : "Total Keys"}
             </h3>
             <p className="text-sm text-blue-700">
-              {locale === 'zh' ? '中英文翻译键总数' : 'Total translation keys in both languages'}
+              {locale === "zh"
+                ? "中英文翻译键总数"
+                : "Total translation keys in both languages"}
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-lg p-6 border border-red-200">
             <div className="flex items-center justify-between mb-4">
               <AlertTriangle className="w-8 h-8 text-red-600" />
-              <span className="text-2xl font-bold text-red-600">{translationStatus.missingKeys.length}</span>
+              <span className="text-2xl font-bold text-red-600">
+                {translationStatus.missingKeys.length}
+              </span>
             </div>
             <h3 className="text-lg font-semibold text-red-900 mb-2">
-              {locale === 'zh' ? '缺失翻译' : 'Missing Keys'}
+              {locale === "zh" ? "缺失翻译" : "Missing Keys"}
             </h3>
             <p className="text-sm text-red-700">
-              {locale === 'zh' ? '需要补充的翻译键' : 'Translation keys that need to be added'}
+              {locale === "zh"
+                ? "需要补充的翻译键"
+                : "Translation keys that need to be added"}
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg p-6 border border-yellow-200">
             <div className="flex items-center justify-between mb-4">
               <RefreshCw className="w-8 h-8 text-yellow-600" />
-              <span className="text-2xl font-bold text-yellow-600">{translationStatus.inconsistentKeys.length}</span>
+              <span className="text-2xl font-bold text-yellow-600">
+                {translationStatus.inconsistentKeys.length}
+              </span>
             </div>
             <h3 className="text-lg font-semibold text-yellow-900 mb-2">
-              {locale === 'zh' ? '不一致翻译' : 'Inconsistent Keys'}
+              {locale === "zh" ? "不一致翻译" : "Inconsistent Keys"}
             </h3>
             <p className="text-sm text-yellow-700">
-              {locale === 'zh' ? '需要修复的翻译键' : 'Translation keys that need to be fixed'}
+              {locale === "zh"
+                ? "需要修复的翻译键"
+                : "Translation keys that need to be fixed"}
             </p>
           </div>
 
           <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-6 border border-green-200">
             <div className="flex items-center justify-between mb-4">
               <CheckCircle className="w-8 h-8 text-green-600" />
-              <span className="text-2xl font-bold text-green-600">{translationStatus.qualityScore}%</span>
+              <span className="text-2xl font-bold text-green-600">
+                {translationStatus.qualityScore}%
+              </span>
             </div>
             <h3 className="text-lg font-semibold text-green-900 mb-2">
-              {locale === 'zh' ? '质量分数' : 'Quality Score'}
+              {locale === "zh" ? "质量分数" : "Quality Score"}
             </h3>
             <p className="text-sm text-green-700">
-              {locale === 'zh' ? '整体翻译质量评分' : 'Overall translation quality score'}
+              {locale === "zh"
+                ? "整体翻译质量评分"
+                : "Overall translation quality score"}
             </p>
           </div>
         </div>
@@ -247,7 +277,7 @@ export default function I18nOptimizer({
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200 mb-8">
           <h3 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
             <RefreshCw className="w-5 h-5 mr-2 animate-spin" />
-            {locale === 'zh' ? '正在优化翻译...' : 'Optimizing translations...'}
+            {locale === "zh" ? "正在优化翻译..." : "Optimizing translations..."}
           </h3>
 
           <div className="w-full bg-blue-200 rounded-full h-3 mb-4">
@@ -258,7 +288,7 @@ export default function I18nOptimizer({
           </div>
 
           <p className="text-sm text-blue-700">
-            {optimizationProgress}% {locale === 'zh' ? '完成' : 'Complete'}
+            {optimizationProgress}% {locale === "zh" ? "完成" : "Complete"}
           </p>
         </div>
       )}
@@ -268,12 +298,15 @@ export default function I18nOptimizer({
         <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-6 border border-red-200 mb-8">
           <h3 className="text-lg font-semibold text-red-900 mb-4 flex items-center">
             <AlertTriangle className="w-5 h-5 mr-2" />
-            {locale === 'zh' ? '缺失翻译键' : 'Missing Translation Keys'}
+            {locale === "zh" ? "缺失翻译键" : "Missing Translation Keys"}
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             {translationStatus.missingKeys.slice(0, 10).map((key, index) => (
-              <div key={index} className="bg-white rounded-lg p-3 border border-red-100">
+              <div
+                key={index}
+                className="bg-white rounded-lg p-3 border border-red-100"
+              >
                 <code className="text-sm text-red-700 font-mono">{key}</code>
               </div>
             ))}
@@ -281,10 +314,13 @@ export default function I18nOptimizer({
 
           {translationStatus.missingKeys.length > 10 && (
             <p className="text-sm text-red-600">
-              {locale === 'zh'
-                ? `还有 ${translationStatus.missingKeys.length - 10} 个缺失的翻译键...`
-                : `And ${translationStatus.missingKeys.length - 10} more missing keys...`
-              }
+              {locale === "zh"
+                ? `还有 ${
+                    translationStatus.missingKeys.length - 10
+                  } 个缺失的翻译键...`
+                : `And ${
+                    translationStatus.missingKeys.length - 10
+                  } more missing keys...`}
             </p>
           )}
         </div>
@@ -295,15 +331,20 @@ export default function I18nOptimizer({
         <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-6 border border-yellow-200 mb-8">
           <h3 className="text-lg font-semibold text-yellow-900 mb-4 flex items-center">
             <RefreshCw className="w-5 h-5 mr-2" />
-            {locale === 'zh' ? '不一致翻译键' : 'Inconsistent Translation Keys'}
+            {locale === "zh" ? "不一致翻译键" : "Inconsistent Translation Keys"}
           </h3>
 
           <div className="space-y-3">
             {translationStatus.inconsistentKeys.map((key, index) => (
-              <div key={index} className="bg-white rounded-lg p-3 border border-yellow-100">
+              <div
+                key={index}
+                className="bg-white rounded-lg p-3 border border-yellow-100"
+              >
                 <code className="text-sm text-yellow-700 font-mono">{key}</code>
                 <p className="text-xs text-yellow-600 mt-1">
-                  {locale === 'zh' ? '需要统一翻译风格' : 'Needs consistent translation style'}
+                  {locale === "zh"
+                    ? "需要统一翻译风格"
+                    : "Needs consistent translation style"}
                 </p>
               </div>
             ))}
@@ -315,7 +356,7 @@ export default function I18nOptimizer({
       <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200 mb-8">
         <h3 className="text-lg font-semibold text-green-900 mb-4 flex items-center">
           <BarChart3 className="w-5 h-5 mr-2" />
-          {locale === 'zh' ? '优化建议' : 'Optimization Recommendations'}
+          {locale === "zh" ? "优化建议" : "Optimization Recommendations"}
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -324,10 +365,14 @@ export default function I18nOptimizer({
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-gray-900">
-                  {locale === 'zh' ? '补充缺失翻译' : 'Add Missing Translations'}
+                  {locale === "zh"
+                    ? "补充缺失翻译"
+                    : "Add Missing Translations"}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === 'zh' ? '补充210个缺失的英文翻译键' : 'Add 210 missing English translation keys'}
+                  {locale === "zh"
+                    ? "补充210个缺失的英文翻译键"
+                    : "Add 210 missing English translation keys"}
                 </p>
               </div>
             </div>
@@ -336,10 +381,12 @@ export default function I18nOptimizer({
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-gray-900">
-                  {locale === 'zh' ? '统一翻译风格' : 'Unify Translation Style'}
+                  {locale === "zh" ? "统一翻译风格" : "Unify Translation Style"}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === 'zh' ? '确保医学术语翻译的一致性' : 'Ensure consistency in medical terminology'}
+                  {locale === "zh"
+                    ? "确保医学术语翻译的一致性"
+                    : "Ensure consistency in medical terminology"}
                 </p>
               </div>
             </div>
@@ -350,10 +397,14 @@ export default function I18nOptimizer({
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-gray-900">
-                  {locale === 'zh' ? '优化布局适配' : 'Optimize Layout Adaptation'}
+                  {locale === "zh"
+                    ? "优化布局适配"
+                    : "Optimize Layout Adaptation"}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === 'zh' ? '调整长文本的显示布局' : 'Adjust layout for long text content'}
+                  {locale === "zh"
+                    ? "调整长文本的显示布局"
+                    : "Adjust layout for long text content"}
                 </p>
               </div>
             </div>
@@ -362,10 +413,12 @@ export default function I18nOptimizer({
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-gray-900">
-                  {locale === 'zh' ? '文化适应性' : 'Cultural Adaptation'}
+                  {locale === "zh" ? "文化适应性" : "Cultural Adaptation"}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === 'zh' ? '根据文化背景调整表达方式' : 'Adjust expressions based on cultural context'}
+                  {locale === "zh"
+                    ? "根据文化背景调整表达方式"
+                    : "Adjust expressions based on cultural context"}
                 </p>
               </div>
             </div>
@@ -383,12 +436,12 @@ export default function I18nOptimizer({
           {isOptimizing ? (
             <>
               <RefreshCw className="w-5 h-5 mr-2 animate-spin" />
-              {locale === 'zh' ? '优化中...' : 'Optimizing...'}
+              {locale === "zh" ? "优化中..." : "Optimizing..."}
             </>
           ) : (
             <>
               <Settings className="w-5 h-5 mr-2" />
-              {locale === 'zh' ? '开始优化' : 'Start Optimization'}
+              {locale === "zh" ? "开始优化" : "Start Optimization"}
             </>
           )}
         </button>
@@ -398,7 +451,7 @@ export default function I18nOptimizer({
           className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center"
         >
           <Download className="w-5 h-5 mr-2" />
-          {locale === 'zh' ? '导出报告' : 'Export Report'}
+          {locale === "zh" ? "导出报告" : "Export Report"}
         </button>
       </div>
     </div>

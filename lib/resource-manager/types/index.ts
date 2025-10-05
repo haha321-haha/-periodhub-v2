@@ -3,43 +3,43 @@
  * 企业级资源管理系统核心类型定义
  */
 
-import { Locale } from '@/types/pdf';
+import { Locale } from "@/types/pdf";
 
 // 资源状态枚举
 export enum ResourceStatus {
-  ACTIVE = 'active',
-  DRAFT = 'draft',
-  ARCHIVED = 'archived',
-  PENDING = 'pending',
-  DEPRECATED = 'deprecated'
+  ACTIVE = "active",
+  DRAFT = "draft",
+  ARCHIVED = "archived",
+  PENDING = "pending",
+  DEPRECATED = "deprecated",
 }
 
 // 资源类型枚举
 export enum ResourceType {
-  ARTICLE = 'article',
-  PDF = 'pdf',
-  INTERACTIVE_TOOL = 'interactive_tool',
-  VIDEO = 'video',
-  AUDIO = 'audio',
-  INFOGRAPHIC = 'infographic'
+  ARTICLE = "article",
+  PDF = "pdf",
+  INTERACTIVE_TOOL = "interactive_tool",
+  VIDEO = "video",
+  AUDIO = "audio",
+  INFOGRAPHIC = "infographic",
 }
 
 // 资源难度级别
 export enum DifficultyLevel {
-  BEGINNER = 'beginner',
-  INTERMEDIATE = 'intermediate',
-  ADVANCED = 'advanced',
-  EXPERT = 'expert'
+  BEGINNER = "beginner",
+  INTERMEDIATE = "intermediate",
+  ADVANCED = "advanced",
+  EXPERT = "expert",
 }
 
 // 目标用户群体
 export enum TargetAudience {
-  TEENS = 'teens',
-  ADULTS = 'adults',
-  PARENTS = 'parents',
-  HEALTHCARE_PROVIDERS = 'healthcare_providers',
-  EDUCATORS = 'educators',
-  GENERAL = 'general'
+  TEENS = "teens",
+  ADULTS = "adults",
+  PARENTS = "parents",
+  HEALTHCARE_PROVIDERS = "healthcare_providers",
+  EDUCATORS = "educators",
+  GENERAL = "general",
 }
 
 // 扩展的资源分类
@@ -182,8 +182,8 @@ export interface ResourceSearchFilters {
   language?: Locale[];
   hasFiles?: boolean;
   minimumRating?: number;
-  sortBy?: 'relevance' | 'popularity' | 'date' | 'rating' | 'downloads';
-  sortOrder?: 'asc' | 'desc';
+  sortBy?: "relevance" | "popularity" | "date" | "rating" | "downloads";
+  sortOrder?: "asc" | "desc";
 }
 
 // 资源搜索结果
@@ -237,7 +237,11 @@ export interface ResourceAnalyticsReport {
   resourcesByStatus: Record<ResourceStatus, number>;
   resourcesByCategory: Record<string, number>;
   topTags: Array<{ tag: string; count: number }>;
-  popularResources: Array<{ id: string; title: string; stats: ResourceUsageStats }>;
+  popularResources: Array<{
+    id: string;
+    title: string;
+    stats: ResourceUsageStats;
+  }>;
   recentActivity: Array<{ date: Date; action: string; resourceId: string }>;
   performanceMetrics: {
     averageSearchTime: number;
@@ -252,7 +256,7 @@ export interface ResourceValidationError {
   field: string;
   message: string;
   code: string;
-  severity: 'error' | 'warning' | 'info';
+  severity: "error" | "warning" | "info";
 }
 
 // 资源导入/导出
@@ -264,7 +268,7 @@ export interface ResourceImportResult {
 }
 
 export interface ResourceExportOptions {
-  format: 'json' | 'csv' | 'xlsx' | 'xml';
+  format: "json" | "csv" | "xlsx" | "xml";
   includeStats: boolean;
   includeContent: boolean;
   filters?: ResourceSearchFilters;

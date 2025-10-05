@@ -3,7 +3,7 @@
  * 管理搜索数据的索引构建和维护
  */
 
-import { UnifiedSearchConfig } from '../types';
+import { UnifiedSearchConfig } from "../types";
 
 export class SearchIndexManager {
   private config: UnifiedSearchConfig;
@@ -17,7 +17,7 @@ export class SearchIndexManager {
    */
   async buildIndex(): Promise<void> {
     // TODO: 实现索引构建逻辑
-    console.log('Building search index...');
+    console.log("Building search index...");
   }
 
   /**
@@ -25,7 +25,7 @@ export class SearchIndexManager {
    */
   async clearIndex(): Promise<void> {
     // TODO: 实现索引清除逻辑
-    console.log('Clearing search index...');
+    console.log("Clearing search index...");
   }
 
   /**

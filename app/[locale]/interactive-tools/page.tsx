@@ -36,7 +36,7 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("description"),
-    keywords: t('keywords').split(','),
+    keywords: t("keywords").split(","),
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
@@ -85,21 +85,21 @@ export default async function InteractiveToolsPage({
   // 职场健康专栏工具
   const workplaceTools = [
     {
-      title: t('workplaceWellness.tools.calendar.title'),
-      description: t('workplaceWellness.tools.calendar.description'),
+      title: t("workplaceWellness.tools.calendar.title"),
+      description: t("workplaceWellness.tools.calendar.description"),
       href: `/${locale}/interactive-tools/workplace-wellness`,
       iconType: "BarChart3",
       iconColor: "text-blue-600",
-      cta: t('workplaceWellness.tools.calendar.cta'),
+      cta: t("workplaceWellness.tools.calendar.cta"),
       isPrimary: true,
     },
     {
-      title: t('workplaceWellness.tools.calculator.title'),
-      description: t('workplaceWellness.tools.calculator.description'),
+      title: t("workplaceWellness.tools.calculator.title"),
+      description: t("workplaceWellness.tools.calculator.description"),
       href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
       iconType: "Search",
       iconColor: "text-purple-600",
-      cta: t('workplaceWellness.tools.calculator.cta'),
+      cta: t("workplaceWellness.tools.calculator.cta"),
       isPrimary: false,
     },
   ];
@@ -147,12 +147,12 @@ export default async function InteractiveToolsPage({
       cta: t("constitutionTest.cta"),
     },
     {
-      title: t('nutritionGenerator.title'),
-      description: t('nutritionGenerator.description'),
+      title: t("nutritionGenerator.title"),
+      description: t("nutritionGenerator.description"),
       href: `/${locale}/interactive-tools/nutrition-recommendation-generator`,
       iconType: "Apple",
       iconColor: "text-orange-600",
-      cta: t('nutritionGenerator.cta'),
+      cta: t("nutritionGenerator.cta"),
       requiresPrerequisites: true,
     },
   ];
@@ -257,10 +257,10 @@ export default async function InteractiveToolsPage({
                   <span className="text-2xl sm:text-3xl text-white">💼</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-blue-800 mb-3">
-                  {t('workplaceWellness.title')}
+                  {t("workplaceWellness.title")}
                 </h2>
                 <p className="text-base sm:text-lg text-blue-700 max-w-3xl mx-auto leading-relaxed">
-                  {t('workplaceWellness.description')}
+                  {t("workplaceWellness.description")}
                 </p>
               </div>
 
@@ -314,7 +314,7 @@ export default async function InteractiveToolsPage({
                 {t("otherTools.title")}
               </h2>
               <p className="text-base text-gray-600 max-w-2xl mx-auto">
-                {t('otherTools.description')}
+                {t("otherTools.description")}
               </p>
             </div>
 
@@ -331,7 +331,7 @@ export default async function InteractiveToolsPage({
                   {/* 前置条件提示 */}
                   {tool.requiresPrerequisites && (
                     <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full font-medium">
-                      {t('prerequisites.label')}
+                      {t("prerequisites.label")}
                     </div>
                   )}
 
@@ -357,14 +357,14 @@ export default async function InteractiveToolsPage({
                   {tool.requiresPrerequisites && (
                     <div className="mb-4 p-3 bg-orange-100 rounded-lg border border-orange-200">
                       <p className="text-xs text-orange-700 font-medium mb-1">
-                        {t('prerequisites.completeFirst')}
+                        {t("prerequisites.completeFirst")}
                       </p>
                       <div className="flex flex-wrap gap-1">
                         <span className="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded">
-                          {t('prerequisites.cycleTracker')}
+                          {t("prerequisites.cycleTracker")}
                         </span>
                         <span className="text-xs bg-orange-200 text-orange-800 px-2 py-1 rounded">
-                          {t('prerequisites.constitutionTest')}
+                          {t("prerequisites.constitutionTest")}
                         </span>
                       </div>
                     </div>

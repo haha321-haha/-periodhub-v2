@@ -9,11 +9,11 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'frameworkDemo' });
+  const t = await getTranslations({ locale, namespace: "frameworkDemo" });
 
   return {
-    title: t('title'),
-    description: t('description'),
+    title: t("title"),
+    description: t("description"),
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"

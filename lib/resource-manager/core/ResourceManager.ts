@@ -17,12 +17,12 @@ import {
   ResourceType,
   ResourceStatus,
   DifficultyLevel,
-  TargetAudience
-} from '../types';
-import { Locale } from '@/types/pdf';
-import { CacheManager } from '../cache/CacheManager';
-import { ResourceValidator } from '../validation/ResourceValidator';
-import { AnalyticsEngine } from '../analytics/AnalyticsEngine';
+  TargetAudience,
+} from "../types";
+import { Locale } from "@/types/pdf";
+import { CacheManager } from "../cache/CacheManager";
+import { ResourceValidator } from "../validation/ResourceValidator";
+import { AnalyticsEngine } from "../analytics/AnalyticsEngine";
 
 export class ResourceManager {
   private config: ResourceManagerConfig;
@@ -56,13 +56,13 @@ export class ResourceManager {
 
       return {
         success: true,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Initialization failed',
-        timestamp: new Date()
+        error: error instanceof Error ? error.message : "Initialization failed",
+        timestamp: new Date(),
       };
     }
   }
@@ -70,28 +70,32 @@ export class ResourceManager {
   /**
    * 获取资源
    */
-  async getResource(id: string, locale?: Locale): Promise<ResourceOperationResult<EnterpriseResource>> {
+  async getResource(
+    id: string,
+    locale?: Locale,
+  ): Promise<ResourceOperationResult<EnterpriseResource>> {
     if (!this.isInitialized) {
       return {
         success: false,
-        error: 'ResourceManager not initialized',
-        timestamp: new Date()
+        error: "ResourceManager not initialized",
+        timestamp: new Date(),
       };
     }
 
     try {
-      const cacheKey = `resource:${id}:${locale || 'default'}`;
+      const cacheKey = `resource:${id}:${locale || "default"}`;
 
       // 尝试从缓存获取
       if (this.config.cacheEnabled) {
-        const cached = await this.cacheManager.get<EnterpriseResource>(cacheKey);
+        const cached =
+          await this.cacheManager.get<EnterpriseResource>(cacheKey);
         if (cached) {
           // 更新访问统计
           await this.updateAccessStats(id);
           return {
             success: true,
             data: cached,
-            timestamp: new Date()
+            timestamp: new Date(),
           };
         }
       }
@@ -102,16 +106,22 @@ export class ResourceManager {
         return {
           success: false,
           error: `Resource not found: ${id}`,
-          timestamp: new Date()
+          timestamp: new Date(),
         };
       }
 
       // 应用本地化
-      const localizedResource = locale ? this.localizeResource(resource, locale) : resource;
+      const localizedResource = locale
+        ? this.localizeResource(resource, locale)
+        : resource;
 
       // 缓存结果
       if (this.config.cacheEnabled) {
-        await this.cacheManager.set(cacheKey, localizedResource, this.config.cacheTimeout);
+        await this.cacheManager.set(
+          cacheKey,
+          localizedResource,
+          this.config.cacheTimeout,
+        );
       }
 
       // 更新访问统计
@@ -120,13 +130,14 @@ export class ResourceManager {
       return {
         success: true,
         data: localizedResource,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to get resource',
-        timestamp: new Date()
+        error:
+          error instanceof Error ? error.message : "Failed to get resource",
+        timestamp: new Date(),
       };
     }
   }
@@ -137,13 +148,13 @@ export class ResourceManager {
   async searchResources(
     searchTerm: string,
     filters: ResourceSearchFilters = {},
-    locale?: Locale
+    locale?: Locale,
   ): Promise<ResourceOperationResult<ResourceSearchResult>> {
     if (!this.isInitialized) {
       return {
         success: false,
-        error: 'ResourceManager not initialized',
-        timestamp: new Date()
+        error: "ResourceManager not initialized",
+        timestamp: new Date(),
       };
     }
 
@@ -151,16 +162,19 @@ export class ResourceManager {
       const startTime = Date.now();
 
       // 构建缓存键
-      const cacheKey = `search:${searchTerm}:${JSON.stringify(filters)}:${locale || 'default'}`;
+      const cacheKey = `search:${searchTerm}:${JSON.stringify(filters)}:${
+        locale || "default"
+      }`;
 
       // 尝试从缓存获取
       if (this.config.cacheEnabled) {
-        const cached = await this.cacheManager.get<ResourceSearchResult>(cacheKey);
+        const cached =
+          await this.cacheManager.get<ResourceSearchResult>(cacheKey);
         if (cached) {
           return {
             success: true,
             data: cached,
-            timestamp: new Date()
+            timestamp: new Date(),
           };
         }
       }
@@ -170,83 +184,94 @@ export class ResourceManager {
 
       // 应用状态过滤
       if (filters.status && filters.status.length > 0) {
-        filteredResources = filteredResources.filter(r =>
-          filters.status!.includes(r.status)
+        filteredResources = filteredResources.filter((r) =>
+          filters.status!.includes(r.status),
         );
       }
 
       // 应用类型过滤
       if (filters.type && filters.type.length > 0) {
-        filteredResources = filteredResources.filter(r =>
-          filters.type!.includes(r.type)
+        filteredResources = filteredResources.filter((r) =>
+          filters.type!.includes(r.type),
         );
       }
 
       // 应用分类过滤
       if (filters.categories && filters.categories.length > 0) {
-        filteredResources = filteredResources.filter(r =>
-          filters.categories!.includes(r.categoryId)
+        filteredResources = filteredResources.filter((r) =>
+          filters.categories!.includes(r.categoryId),
         );
       }
 
       // 应用标签过滤
       if (filters.tags && filters.tags.length > 0) {
-        filteredResources = filteredResources.filter(r =>
-          filters.tags!.some(tag => r.tags.includes(tag))
+        filteredResources = filteredResources.filter((r) =>
+          filters.tags!.some((tag) => r.tags.includes(tag)),
         );
       }
 
       // 应用难度过滤
       if (filters.difficulty && filters.difficulty.length > 0) {
-        filteredResources = filteredResources.filter(r =>
-          filters.difficulty!.includes(r.difficulty)
+        filteredResources = filteredResources.filter((r) =>
+          filters.difficulty!.includes(r.difficulty),
         );
       }
 
       // 应用目标用户过滤
       if (filters.targetAudience && filters.targetAudience.length > 0) {
-        filteredResources = filteredResources.filter(r =>
-          filters.targetAudience!.some(audience => r.targetAudience.includes(audience))
+        filteredResources = filteredResources.filter((r) =>
+          filters.targetAudience!.some((audience) =>
+            r.targetAudience.includes(audience),
+          ),
         );
       }
 
       // 应用评分过滤
       if (filters.minimumRating) {
-        filteredResources = filteredResources.filter(r =>
-          r.stats.userRating >= filters.minimumRating!
+        filteredResources = filteredResources.filter(
+          (r) => r.stats.userRating >= filters.minimumRating!,
         );
       }
 
       // 应用搜索词过滤
       if (searchTerm) {
         const normalizedSearchTerm = searchTerm.toLowerCase();
-        filteredResources = filteredResources.filter(r => {
+        filteredResources = filteredResources.filter((r) => {
           const lang = locale || this.config.defaultLanguage;
-          const title = r.title[lang]?.toLowerCase() || '';
-          const description = r.description[lang]?.toLowerCase() || '';
-          const keywords = r.keywords[lang]?.join(' ').toLowerCase() || '';
-          const tags = r.tags.join(' ').toLowerCase();
+          const title = r.title[lang]?.toLowerCase() || "";
+          const description = r.description[lang]?.toLowerCase() || "";
+          const keywords = r.keywords[lang]?.join(" ").toLowerCase() || "";
+          const tags = r.tags.join(" ").toLowerCase();
 
-          return title.includes(normalizedSearchTerm) ||
-                 description.includes(normalizedSearchTerm) ||
-                 keywords.includes(normalizedSearchTerm) ||
-                 tags.includes(normalizedSearchTerm);
+          return (
+            title.includes(normalizedSearchTerm) ||
+            description.includes(normalizedSearchTerm) ||
+            keywords.includes(normalizedSearchTerm) ||
+            tags.includes(normalizedSearchTerm)
+          );
         });
       }
 
       // 应用排序
-      this.sortResources(filteredResources, filters.sortBy || 'relevance', filters.sortOrder || 'desc');
+      this.sortResources(
+        filteredResources,
+        filters.sortBy || "relevance",
+        filters.sortOrder || "desc",
+      );
 
       // 应用分页
       const page = 1; // 默认第一页
       const pageSize = 20; // 默认每页20条
       const startIndex = (page - 1) * pageSize;
-      const paginatedResources = filteredResources.slice(startIndex, startIndex + pageSize);
+      const paginatedResources = filteredResources.slice(
+        startIndex,
+        startIndex + pageSize,
+      );
 
       // 应用本地化
-      const localizedResources = locale ?
-        paginatedResources.map(r => this.localizeResource(r, locale)) :
-        paginatedResources;
+      const localizedResources = locale
+        ? paginatedResources.map((r) => this.localizeResource(r, locale))
+        : paginatedResources;
 
       const searchTime = Date.now() - startTime;
 
@@ -258,7 +283,7 @@ export class ResourceManager {
         filters,
         searchTerm,
         searchTime,
-        suggestions: await this.generateSearchSuggestions(searchTerm, locale)
+        suggestions: await this.generateSearchSuggestions(searchTerm, locale),
       };
 
       // 缓存结果
@@ -267,18 +292,23 @@ export class ResourceManager {
       }
 
       // 记录搜索统计
-      await this.analyticsEngine.recordSearch(searchTerm, filters, result.total, searchTime);
+      await this.analyticsEngine.recordSearch(
+        searchTerm,
+        filters,
+        result.total,
+        searchTime,
+      );
 
       return {
         success: true,
         data: result,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Search failed',
-        timestamp: new Date()
+        error: error instanceof Error ? error.message : "Search failed",
+        timestamp: new Date(),
       };
     }
   }
@@ -286,25 +316,28 @@ export class ResourceManager {
   /**
    * 创建或更新资源
    */
-  async saveResource(resource: EnterpriseResource): Promise<ResourceOperationResult<EnterpriseResource>> {
+  async saveResource(
+    resource: EnterpriseResource,
+  ): Promise<ResourceOperationResult<EnterpriseResource>> {
     if (!this.isInitialized) {
       return {
         success: false,
-        error: 'ResourceManager not initialized',
-        timestamp: new Date()
+        error: "ResourceManager not initialized",
+        timestamp: new Date(),
       };
     }
 
     try {
       // 验证资源
       if (this.config.validationEnabled) {
-        const validationResult = await this.validator.validateResource(resource);
+        const validationResult =
+          await this.validator.validateResource(resource);
         if (!validationResult.isValid) {
           return {
             success: false,
-            error: 'Resource validation failed',
+            error: "Resource validation failed",
             warnings: validationResult.errors.map((e: any) => e.message),
-            timestamp: new Date()
+            timestamp: new Date(),
           };
         }
       }
@@ -321,21 +354,26 @@ export class ResourceManager {
 
       // 清除相关缓存
       await this.cacheManager.clearPattern(`resource:${resource.id}:*`);
-      await this.cacheManager.clearPattern('search:*');
+      await this.cacheManager.clearPattern("search:*");
 
       // 记录操作
-      await this.analyticsEngine.recordOperation('save', resource.id, resource.type);
+      await this.analyticsEngine.recordOperation(
+        "save",
+        resource.id,
+        resource.type,
+      );
 
       return {
         success: true,
         data: resource,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to save resource',
-        timestamp: new Date()
+        error:
+          error instanceof Error ? error.message : "Failed to save resource",
+        timestamp: new Date(),
       };
     }
   }
@@ -347,8 +385,8 @@ export class ResourceManager {
     if (!this.isInitialized) {
       return {
         success: false,
-        error: 'ResourceManager not initialized',
-        timestamp: new Date()
+        error: "ResourceManager not initialized",
+        timestamp: new Date(),
       };
     }
 
@@ -357,7 +395,7 @@ export class ResourceManager {
         return {
           success: false,
           error: `Resource not found: ${id}`,
-          timestamp: new Date()
+          timestamp: new Date(),
         };
       }
 
@@ -366,21 +404,26 @@ export class ResourceManager {
 
       // 清除相关缓存
       await this.cacheManager.clearPattern(`resource:${id}:*`);
-      await this.cacheManager.clearPattern('search:*');
+      await this.cacheManager.clearPattern("search:*");
 
       // 记录操作
-      await this.analyticsEngine.recordOperation('delete', id, ResourceType.PDF);
+      await this.analyticsEngine.recordOperation(
+        "delete",
+        id,
+        ResourceType.PDF,
+      );
 
       return {
         success: true,
         data: true,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to delete resource',
-        timestamp: new Date()
+        error:
+          error instanceof Error ? error.message : "Failed to delete resource",
+        timestamp: new Date(),
       };
     }
   }
@@ -388,12 +431,14 @@ export class ResourceManager {
   /**
    * 获取分析报告
    */
-  async getAnalyticsReport(): Promise<ResourceOperationResult<ResourceAnalyticsReport>> {
+  async getAnalyticsReport(): Promise<
+    ResourceOperationResult<ResourceAnalyticsReport>
+  > {
     if (!this.isInitialized) {
       return {
         success: false,
-        error: 'ResourceManager not initialized',
-        timestamp: new Date()
+        error: "ResourceManager not initialized",
+        timestamp: new Date(),
       };
     }
 
@@ -402,13 +447,16 @@ export class ResourceManager {
       return {
         success: true,
         data: report,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
     } catch (error) {
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to generate analytics report',
-        timestamp: new Date()
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to generate analytics report",
+        timestamp: new Date(),
       };
     }
   }
@@ -424,7 +472,10 @@ export class ResourceManager {
   /**
    * 私有方法：本地化资源
    */
-  private localizeResource(resource: EnterpriseResource, locale: Locale): EnterpriseResource {
+  private localizeResource(
+    resource: EnterpriseResource,
+    locale: Locale,
+  ): EnterpriseResource {
     // 创建本地化副本
     const localized = { ...resource };
 
@@ -440,25 +491,25 @@ export class ResourceManager {
   private sortResources(
     resources: EnterpriseResource[],
     sortBy: string,
-    sortOrder: 'asc' | 'desc'
+    sortOrder: "asc" | "desc",
   ): void {
     resources.sort((a, b) => {
       let comparison = 0;
 
       switch (sortBy) {
-        case 'popularity':
+        case "popularity":
           comparison = a.stats.popularityScore - b.stats.popularityScore;
           break;
-        case 'date':
+        case "date":
           comparison = a.publishDate.getTime() - b.publishDate.getTime();
           break;
-        case 'rating':
+        case "rating":
           comparison = a.stats.userRating - b.stats.userRating;
           break;
-        case 'downloads':
+        case "downloads":
           comparison = a.stats.downloads - b.stats.downloads;
           break;
-        case 'relevance':
+        case "relevance":
         default:
           // 综合评分：下载量 + 评分 + 点击量
           const scoreA = a.stats.downloads + a.stats.userRating + a.stats.views;
@@ -467,7 +518,7 @@ export class ResourceManager {
           break;
       }
 
-      return sortOrder === 'desc' ? -comparison : comparison;
+      return sortOrder === "desc" ? -comparison : comparison;
     });
   }
 
@@ -476,14 +527,14 @@ export class ResourceManager {
    */
   private async generateSearchSuggestions(
     searchTerm: string,
-    locale?: Locale
+    locale?: Locale,
   ): Promise<string[]> {
     // 基于搜索词生成建议
-    const suggestions = ['疼痛', '缓解', '营养', '运动', '医学', '沟通'];
+    const suggestions = ["疼痛", "缓解", "营养", "运动", "医学", "沟通"];
 
-    return suggestions.filter(s =>
-      s.toLowerCase().includes(searchTerm.toLowerCase())
-    ).slice(0, 5);
+    return suggestions
+      .filter((s) => s.toLowerCase().includes(searchTerm.toLowerCase()))
+      .slice(0, 5);
   }
 
   /**
@@ -495,7 +546,9 @@ export class ResourceManager {
       resource.stats.views++;
       resource.stats.lastAccessed = new Date();
       // 更新流行度分数
-      resource.stats.popularityScore = this.calculatePopularityScore(resource.stats);
+      resource.stats.popularityScore = this.calculatePopularityScore(
+        resource.stats,
+      );
     }
   }
 
@@ -512,7 +565,13 @@ export class ResourceManager {
     const viewsScore = Math.min(stats.views / 1000, 1) * viewsWeight;
     const downloadsScore = Math.min(stats.downloads / 500, 1) * downloadsWeight;
     const ratingScore = (stats.userRating / 5) * ratingWeight;
-    const recencyScore = Math.max(0, 1 - (Date.now() - stats.lastAccessed.getTime()) / (1000 * 60 * 60 * 24 * 30)) * recencyWeight;
+    const recencyScore =
+      Math.max(
+        0,
+        1 -
+          (Date.now() - stats.lastAccessed.getTime()) /
+            (1000 * 60 * 60 * 24 * 30),
+      ) * recencyWeight;
 
     return (viewsScore + downloadsScore + ratingScore + recencyScore) * 100;
   }

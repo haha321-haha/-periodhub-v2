@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from "react";
 
 /**
  * 同构布局效果钩子
@@ -6,4 +6,4 @@ import { useEffect, useLayoutEffect } from 'react';
  * 避免SSR警告
  */
 export const useIsomorphicLayoutEffect =
-  typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;

@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   return {
     title: `${t("title")} | periodhub.health`,
-    description: t('description'),
+    description: t("description"),
     alternates: {
       canonical: `${URL_CONFIG.baseUrl}/${locale}/terms-of-service`,
       languages: {
@@ -27,7 +27,7 @@ export async function generateMetadata({
     },
     openGraph: {
       title: `${t("title")} | periodhub.health`,
-      description: t('openGraph.description'),
+      description: t("openGraph.description"),
       type: "website",
       url: `${URL_CONFIG.baseUrl}/${locale}/terms-of-service`,
     },

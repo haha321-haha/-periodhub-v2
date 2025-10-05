@@ -5,12 +5,17 @@ import {
   PainRecord,
   PaginationOptions,
   LazyLoadResult,
-  PainTrackerError
-} from '../../../types/pain-tracker';
+  PainTrackerError,
+} from "../../../types/pain-tracker";
 
 export interface LazyLoadingServiceInterface {
-  loadRecordsPaginated(options: PaginationOptions): Promise<LazyLoadResult<PainRecord>>;
-  loadRecordsVirtual(startIndex: number, endIndex: number): Promise<PainRecord[]>;
+  loadRecordsPaginated(
+    options: PaginationOptions,
+  ): Promise<LazyLoadResult<PainRecord>>;
+  loadRecordsVirtual(
+    startIndex: number,
+    endIndex: number,
+  ): Promise<PainRecord[]>;
   preloadNextBatch(currentPage: number, pageSize: number): Promise<void>;
   clearCache(): void;
   getCacheStats(): { size: number; hitRate: number };
@@ -26,14 +31,16 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
   /**
    * Load records with pagination support
    */
-  async loadRecordsPaginated(options: PaginationOptions): Promise<LazyLoadResult<PainRecord>> {
+  async loadRecordsPaginated(
+    options: PaginationOptions,
+  ): Promise<LazyLoadResult<PainRecord>> {
     try {
       const {
         page = 1,
         pageSize = 20,
-        sortBy = 'date',
-        sortOrder = 'desc',
-        filters = {}
+        sortBy = "date",
+        sortOrder = "desc",
+        filters = {},
       } = options;
 
       const cacheKey = this.generateCacheKey(options);
@@ -49,11 +56,14 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
             currentPage: page,
             pageSize,
             totalItems: await this.getTotalRecordCount(filters),
-            totalPages: Math.ceil(await this.getTotalRecordCount(filters) / pageSize),
-            hasNextPage: page * pageSize < await this.getTotalRecordCount(filters),
-            hasPreviousPage: page > 1
+            totalPages: Math.ceil(
+              (await this.getTotalRecordCount(filters)) / pageSize,
+            ),
+            hasNextPage:
+              page * pageSize < (await this.getTotalRecordCount(filters)),
+            hasPreviousPage: page > 1,
           },
-          fromCache: true
+          fromCache: true,
         };
       }
 
@@ -66,7 +76,11 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
       const filteredRecords = this.applyFilters(allRecords, filters);
 
       // Apply sorting
-      const sortedRecords = this.applySorting(filteredRecords, sortBy, sortOrder);
+      const sortedRecords = this.applySorting(
+        filteredRecords,
+        sortBy,
+        sortOrder,
+      );
 
       // Apply pagination
       const startIndex = (page - 1) * pageSize;
@@ -89,15 +103,15 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
           totalItems: filteredRecords.length,
           totalPages: Math.ceil(filteredRecords.length / pageSize),
           hasNextPage: endIndex < filteredRecords.length,
-          hasPreviousPage: page > 1
+          hasPreviousPage: page > 1,
         },
-        fromCache: false
+        fromCache: false,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to load paginated records',
-        'STORAGE_ERROR',
-        error
+        "Failed to load paginated records",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -105,7 +119,10 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
   /**
    * Load records for virtual scrolling
    */
-  async loadRecordsVirtual(startIndex: number, endIndex: number): Promise<PainRecord[]> {
+  async loadRecordsVirtual(
+    startIndex: number,
+    endIndex: number,
+  ): Promise<PainRecord[]> {
     try {
       const cacheKey = `virtual_${startIndex}_${endIndex}`;
 
@@ -127,9 +144,9 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
       return virtualRecords;
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to load virtual records',
-        'STORAGE_ERROR',
-        error
+        "Failed to load virtual records",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -143,7 +160,7 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
       const preloadOptions: PaginationOptions = {
         page: nextPage,
         pageSize,
-        preload: false // Prevent recursive preloading
+        preload: false, // Prevent recursive preloading
       };
 
       // Only preload if not already cached
@@ -153,7 +170,7 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
       }
     } catch (error) {
       // Preloading failures should not affect main functionality
-      console.warn('Failed to preload next batch:', error);
+      console.warn("Failed to preload next batch:", error);
     }
   }
 
@@ -175,7 +192,7 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
 
     return {
       size: this.cache.size,
-      hitRate: Math.round(hitRate * 100) / 100
+      hitRate: Math.round(hitRate * 100) / 100,
     };
   }
 
@@ -197,16 +214,16 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
 
         // Yield control to prevent blocking the UI
         if (hasMore) {
-          await new Promise(resolve => setTimeout(resolve, 0));
+          await new Promise((resolve) => setTimeout(resolve, 0));
         }
       }
 
       return allRecords;
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to load records in batches',
-        'STORAGE_ERROR',
-        error
+        "Failed to load records in batches",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -236,7 +253,7 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
 
     // Date range filter
     if (filters.startDate || filters.endDate) {
-      filteredRecords = filteredRecords.filter(record => {
+      filteredRecords = filteredRecords.filter((record) => {
         const recordDate = new Date(record.date);
         if (filters.startDate && recordDate < new Date(filters.startDate)) {
           return false;
@@ -249,12 +266,21 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
     }
 
     // Pain level filter
-    if (filters.minPainLevel !== undefined || filters.maxPainLevel !== undefined) {
-      filteredRecords = filteredRecords.filter(record => {
-        if (filters.minPainLevel !== undefined && record.painLevel < filters.minPainLevel) {
+    if (
+      filters.minPainLevel !== undefined ||
+      filters.maxPainLevel !== undefined
+    ) {
+      filteredRecords = filteredRecords.filter((record) => {
+        if (
+          filters.minPainLevel !== undefined &&
+          record.painLevel < filters.minPainLevel
+        ) {
           return false;
         }
-        if (filters.maxPainLevel !== undefined && record.painLevel > filters.maxPainLevel) {
+        if (
+          filters.maxPainLevel !== undefined &&
+          record.painLevel > filters.maxPainLevel
+        ) {
           return false;
         }
         return true;
@@ -263,20 +289,26 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
 
     // Menstrual status filter
     if (filters.menstrualStatus) {
-      filteredRecords = filteredRecords.filter(record =>
-        record.menstrualStatus === filters.menstrualStatus
+      filteredRecords = filteredRecords.filter(
+        (record) => record.menstrualStatus === filters.menstrualStatus,
       );
     }
 
     // Text search filter
     if (filters.searchText) {
       const searchTerm = filters.searchText.toLowerCase();
-      filteredRecords = filteredRecords.filter(record => {
+      filteredRecords = filteredRecords.filter((record) => {
         return (
           record.notes?.toLowerCase().includes(searchTerm) ||
-          record.painTypes.some(type => type.toLowerCase().includes(searchTerm)) ||
-          record.locations.some(location => location.toLowerCase().includes(searchTerm)) ||
-          record.symptoms.some(symptom => symptom.toLowerCase().includes(searchTerm))
+          record.painTypes.some((type) =>
+            type.toLowerCase().includes(searchTerm),
+          ) ||
+          record.locations.some((location) =>
+            location.toLowerCase().includes(searchTerm),
+          ) ||
+          record.symptoms.some((symptom) =>
+            symptom.toLowerCase().includes(searchTerm),
+          )
         );
       });
     }
@@ -284,28 +316,32 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
     return filteredRecords;
   }
 
-  private applySorting(records: PainRecord[], sortBy: string, sortOrder: 'asc' | 'desc'): PainRecord[] {
+  private applySorting(
+    records: PainRecord[],
+    sortBy: string,
+    sortOrder: "asc" | "desc",
+  ): PainRecord[] {
     return [...records].sort((a, b) => {
       let comparison = 0;
 
       switch (sortBy) {
-        case 'date':
+        case "date":
           comparison = new Date(a.date).getTime() - new Date(b.date).getTime();
           break;
-        case 'painLevel':
+        case "painLevel":
           comparison = a.painLevel - b.painLevel;
           break;
-        case 'createdAt':
+        case "createdAt":
           comparison = a.createdAt.getTime() - b.createdAt.getTime();
           break;
-        case 'updatedAt':
+        case "updatedAt":
           comparison = a.updatedAt.getTime() - b.updatedAt.getTime();
           break;
         default:
           comparison = 0;
       }
 
-      return sortOrder === 'desc' ? -comparison : comparison;
+      return sortOrder === "desc" ? -comparison : comparison;
     });
   }
 
@@ -319,7 +355,10 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
     this.cache.set(key, records);
   }
 
-  private async loadRecordsBatchFromStorage(offset: number, batchSize: number): Promise<PainRecord[]> {
+  private async loadRecordsBatchFromStorage(
+    offset: number,
+    batchSize: number,
+  ): Promise<PainRecord[]> {
     // This would load a specific batch from storage
     // Implementation depends on the storage adapter
     return Promise.resolve([]);

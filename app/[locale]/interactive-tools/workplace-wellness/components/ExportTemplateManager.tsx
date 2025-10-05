@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 import {
   FileText,
   Plus,
@@ -11,19 +11,18 @@ import {
   Calendar,
   Filter,
   Save,
-  X
-} from 'lucide-react';
-import { useExportTemplates, useActiveTemplate, useExportTemplateActions } from '../hooks/useWorkplaceWellnessStore';
-import { useTranslations } from 'next-intl';
+  X,
+} from "lucide-react";
 import {
-  ExportTemplate,
-  ExportType,
-  ExtendedExportFormat,
-} from '../types';
-import { EXPORT_FORMAT_CONFIG } from '../types/defaults';
+  useExportTemplates,
+  useActiveTemplate,
+  useExportTemplateActions,
+} from "../hooks/useWorkplaceWellnessStore";
+import { useTranslations } from "next-intl";
+import { ExportTemplate, ExportType, ExtendedExportFormat } from "../types";
+import { EXPORT_FORMAT_CONFIG } from "../types/defaults";
 
-interface ExportTemplateManagerProps {
-}
+interface ExportTemplateManagerProps {}
 
 export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
   const templates = useExportTemplates();
@@ -34,19 +33,21 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
     deleteExportTemplate,
     setActiveTemplate,
     loadTemplate,
-    duplicateTemplate
+    duplicateTemplate,
   } = useExportTemplateActions();
 
-  const t = useTranslations('workplaceWellness');
+  const t = useTranslations("workplaceWellness");
   const [isCreating, setIsCreating] = useState(false);
-  const [editingTemplate, setEditingTemplate] = useState<ExportTemplate | null>(null);
+  const [editingTemplate, setEditingTemplate] = useState<ExportTemplate | null>(
+    null,
+  );
   const [newTemplate, setNewTemplate] = useState<Partial<ExportTemplate>>({
-    name: '',
-    description: '',
-    exportType: 'period',
-    format: 'pdf',
-    fields: ['date', 'type', 'painLevel'],
-    isDefault: false
+    name: "",
+    description: "",
+    exportType: "period",
+    format: "pdf",
+    fields: ["date", "type", "painLevel"],
+    isDefault: false,
   });
 
   // 创建新模板
@@ -54,23 +55,23 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
     if (newTemplate.name && newTemplate.exportType && newTemplate.format) {
       addExportTemplate({
         name: newTemplate.name,
-        description: newTemplate.description || '',
+        description: newTemplate.description || "",
         exportType: newTemplate.exportType as ExportType,
         format: newTemplate.format as ExtendedExportFormat,
         fields: newTemplate.fields || [],
         dateRange: newTemplate.dateRange,
         filters: newTemplate.filters,
-        isDefault: newTemplate.isDefault || false
+        isDefault: newTemplate.isDefault || false,
       });
 
       // 重置表单
       setNewTemplate({
-        name: '',
-        description: '',
-        exportType: 'period',
-        format: 'pdf',
-        fields: ['date', 'type', 'painLevel'],
-        isDefault: false
+        name: "",
+        description: "",
+        exportType: "period",
+        format: "pdf",
+        fields: ["date", "type", "painLevel"],
+        isDefault: false,
       });
       setIsCreating(false);
     }
@@ -87,13 +88,18 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
       fields: template.fields,
       dateRange: template.dateRange,
       filters: template.filters,
-      isDefault: template.isDefault
+      isDefault: template.isDefault,
     });
   };
 
   // 更新模板
   const handleUpdateTemplate = () => {
-    if (editingTemplate && newTemplate.name && newTemplate.exportType && newTemplate.format) {
+    if (
+      editingTemplate &&
+      newTemplate.name &&
+      newTemplate.exportType &&
+      newTemplate.format
+    ) {
       updateExportTemplate(editingTemplate.id, {
         name: newTemplate.name,
         description: newTemplate.description,
@@ -102,17 +108,17 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
         fields: newTemplate.fields || [],
         dateRange: newTemplate.dateRange,
         filters: newTemplate.filters,
-        isDefault: newTemplate.isDefault || false
+        isDefault: newTemplate.isDefault || false,
       });
 
       setEditingTemplate(null);
       setNewTemplate({
-        name: '',
-        description: '',
-        exportType: 'period',
-        format: 'pdf',
-        fields: ['date', 'type', 'painLevel'],
-        isDefault: false
+        name: "",
+        description: "",
+        exportType: "period",
+        format: "pdf",
+        fields: ["date", "type", "painLevel"],
+        isDefault: false,
       });
     }
   };
@@ -139,21 +145,32 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
   const handleCancelEdit = () => {
     setEditingTemplate(null);
     setNewTemplate({
-      name: '',
-      description: '',
-      exportType: 'period',
-      format: 'pdf',
-      fields: ['date', 'type', 'painLevel'],
-      isDefault: false
+      name: "",
+      description: "",
+      exportType: "period",
+      format: "pdf",
+      fields: ["date", "type", "painLevel"],
+      isDefault: false,
     });
     setIsCreating(false);
   };
 
   // 可用字段选项
   const availableFields = {
-    period: ['date', 'type', 'painLevel', 'flow', 'notes'],
-    nutrition: ['name', 'benefits', 'phase', 'tcmNature', 'nutrients'],
-    all: ['date', 'type', 'painLevel', 'flow', 'notes', 'name', 'benefits', 'phase', 'tcmNature', 'nutrients']
+    period: ["date", "type", "painLevel", "flow", "notes"],
+    nutrition: ["name", "benefits", "phase", "tcmNature", "nutrients"],
+    all: [
+      "date",
+      "type",
+      "painLevel",
+      "flow",
+      "notes",
+      "name",
+      "benefits",
+      "phase",
+      "tcmNature",
+      "nutrients",
+    ],
   };
 
   return (
@@ -163,7 +180,7 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
         <div className="flex items-center gap-3">
           <FileText className="w-6 h-6 text-primary-600" />
           <h2 className="text-2xl font-bold text-neutral-800">
-            {t('advancedExport.exportTemplates')}
+            {t("advancedExport.exportTemplates")}
           </h2>
         </div>
         <button
@@ -182,8 +199,8 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
             key={template.id}
             className={`p-4 border rounded-lg transition-all cursor-pointer ${
               activeTemplate?.id === template.id
-                ? 'border-primary-500 bg-primary-50'
-                : 'border-neutral-200 hover:border-neutral-300 hover:shadow-sm'
+                ? "border-primary-500 bg-primary-50"
+                : "border-neutral-200 hover:border-neutral-300 hover:shadow-sm"
             }`}
             onClick={() => handleUseTemplate(template)}
           >
@@ -263,7 +280,7 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-semibold text-neutral-800">
-                  {editingTemplate ? '编辑模板' : '创建新模板'}
+                  {editingTemplate ? "编辑模板" : "创建新模板"}
                 </h3>
                 <button
                   onClick={handleCancelEdit}
@@ -282,8 +299,10 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                     </label>
                     <input
                       type="text"
-                      value={newTemplate.name || ''}
-                      onChange={(e) => setNewTemplate({ ...newTemplate, name: e.target.value })}
+                      value={newTemplate.name || ""}
+                      onChange={(e) =>
+                        setNewTemplate({ ...newTemplate, name: e.target.value })
+                      }
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                       placeholder="输入模板名称"
                     />
@@ -294,8 +313,13 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                       导出类型 *
                     </label>
                     <select
-                      value={newTemplate.exportType || 'period'}
-                      onChange={(e) => setNewTemplate({ ...newTemplate, exportType: e.target.value as ExportType })}
+                      value={newTemplate.exportType || "period"}
+                      onChange={(e) =>
+                        setNewTemplate({
+                          ...newTemplate,
+                          exportType: e.target.value as ExportType,
+                        })
+                      }
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     >
                       <option value="period">经期数据</option>
@@ -310,8 +334,13 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                     模板描述
                   </label>
                   <textarea
-                    value={newTemplate.description || ''}
-                    onChange={(e) => setNewTemplate({ ...newTemplate, description: e.target.value })}
+                    value={newTemplate.description || ""}
+                    onChange={(e) =>
+                      setNewTemplate({
+                        ...newTemplate,
+                        description: e.target.value,
+                      })
+                    }
                     className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     rows={3}
                     placeholder="输入模板描述"
@@ -324,15 +353,22 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                       导出格式 *
                     </label>
                     <select
-                      value={newTemplate.format || 'pdf'}
-                      onChange={(e) => setNewTemplate({ ...newTemplate, format: e.target.value as ExtendedExportFormat })}
+                      value={newTemplate.format || "pdf"}
+                      onChange={(e) =>
+                        setNewTemplate({
+                          ...newTemplate,
+                          format: e.target.value as ExtendedExportFormat,
+                        })
+                      }
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     >
-                      {Object.entries(EXPORT_FORMAT_CONFIG).map(([key, config]) => (
-                        <option key={key} value={key}>
-                          {config.name}
-                        </option>
-                      ))}
+                      {Object.entries(EXPORT_FORMAT_CONFIG).map(
+                        ([key, config]) => (
+                          <option key={key} value={key}>
+                            {config.name}
+                          </option>
+                        ),
+                      )}
                     </select>
                   </div>
 
@@ -341,10 +377,18 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                       type="checkbox"
                       id="isDefault"
                       checked={newTemplate.isDefault || false}
-                      onChange={(e) => setNewTemplate({ ...newTemplate, isDefault: e.target.checked })}
+                      onChange={(e) =>
+                        setNewTemplate({
+                          ...newTemplate,
+                          isDefault: e.target.checked,
+                        })
+                      }
                       className="w-4 h-4 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
                     />
-                    <label htmlFor="isDefault" className="text-sm font-medium text-neutral-700">
+                    <label
+                      htmlFor="isDefault"
+                      className="text-sm font-medium text-neutral-700"
+                    >
                       设为默认模板
                     </label>
                   </div>
@@ -356,24 +400,36 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                     包含字段
                   </label>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    {availableFields[newTemplate.exportType as ExportType]?.map((field) => (
-                      <label key={field} className="flex items-center gap-2">
-                        <input
-                          type="checkbox"
-                          checked={newTemplate.fields?.includes(field) || false}
-                          onChange={(e) => {
-                            const fields = newTemplate.fields || [];
-                            if (e.target.checked) {
-                              setNewTemplate({ ...newTemplate, fields: [...fields, field] });
-                            } else {
-                              setNewTemplate({ ...newTemplate, fields: fields.filter(f => f !== field) });
+                    {availableFields[newTemplate.exportType as ExportType]?.map(
+                      (field) => (
+                        <label key={field} className="flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={
+                              newTemplate.fields?.includes(field) || false
                             }
-                          }}
-                          className="w-4 h-4 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
-                        />
-                        <span className="text-sm text-neutral-700">{field}</span>
-                      </label>
-                    ))}
+                            onChange={(e) => {
+                              const fields = newTemplate.fields || [];
+                              if (e.target.checked) {
+                                setNewTemplate({
+                                  ...newTemplate,
+                                  fields: [...fields, field],
+                                });
+                              } else {
+                                setNewTemplate({
+                                  ...newTemplate,
+                                  fields: fields.filter((f) => f !== field),
+                                });
+                              }
+                            }}
+                            className="w-4 h-4 text-primary-600 border-neutral-300 rounded focus:ring-primary-500"
+                          />
+                          <span className="text-sm text-neutral-700">
+                            {field}
+                          </span>
+                        </label>
+                      ),
+                    )}
                   </div>
                 </div>
 
@@ -385,14 +441,16 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                     </label>
                     <input
                       type="date"
-                      value={newTemplate.dateRange?.start || ''}
-                      onChange={(e) => setNewTemplate({
-                        ...newTemplate,
-                        dateRange: {
-                          start: e.target.value,
-                          end: newTemplate.dateRange?.end || ''
-                        }
-                      })}
+                      value={newTemplate.dateRange?.start || ""}
+                      onChange={(e) =>
+                        setNewTemplate({
+                          ...newTemplate,
+                          dateRange: {
+                            start: e.target.value,
+                            end: newTemplate.dateRange?.end || "",
+                          },
+                        })
+                      }
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     />
                   </div>
@@ -403,14 +461,16 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                     </label>
                     <input
                       type="date"
-                      value={newTemplate.dateRange?.end || ''}
-                      onChange={(e) => setNewTemplate({
-                        ...newTemplate,
-                        dateRange: {
-                          start: newTemplate.dateRange?.start || '',
-                          end: e.target.value
-                        }
-                      })}
+                      value={newTemplate.dateRange?.end || ""}
+                      onChange={(e) =>
+                        setNewTemplate({
+                          ...newTemplate,
+                          dateRange: {
+                            start: newTemplate.dateRange?.start || "",
+                            end: e.target.value,
+                          },
+                        })
+                      }
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     />
                   </div>
@@ -426,12 +486,20 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                   取消
                 </button>
                 <button
-                  onClick={editingTemplate ? handleUpdateTemplate : handleCreateTemplate}
-                  disabled={!newTemplate.name || !newTemplate.exportType || !newTemplate.format}
+                  onClick={
+                    editingTemplate
+                      ? handleUpdateTemplate
+                      : handleCreateTemplate
+                  }
+                  disabled={
+                    !newTemplate.name ||
+                    !newTemplate.exportType ||
+                    !newTemplate.format
+                  }
                   className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   <Save size={16} />
-                  {editingTemplate ? '更新模板' : '创建模板'}
+                  {editingTemplate ? "更新模板" : "创建模板"}
                 </button>
               </div>
             </div>

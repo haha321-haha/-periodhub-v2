@@ -1,8 +1,18 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { WifiOff, Wifi, AlertTriangle, CheckCircle, Clock, RefreshCw } from 'lucide-react';
-import { useOfflineDetection, useOfflineStorage } from '../hooks/useOfflineDetection';
+import React, { useState, useEffect } from "react";
+import {
+  WifiOff,
+  Wifi,
+  AlertTriangle,
+  CheckCircle,
+  Clock,
+  RefreshCw,
+} from "lucide-react";
+import {
+  useOfflineDetection,
+  useOfflineStorage,
+} from "../hooks/useOfflineDetection";
 
 interface OfflineNotificationProps {
   storageKey?: string;
@@ -13,11 +23,11 @@ interface OfflineNotificationProps {
 }
 
 export function OfflineNotification({
-  storageKey = 'pain_tracker',
+  storageKey = "pain_tracker",
   showConnectionQuality = true,
   autoHide = true,
   autoHideDelay = 5000,
-  className = ''
+  className = "",
 }: OfflineNotificationProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [showReconnected, setShowReconnected] = useState(false);
@@ -29,7 +39,7 @@ export function OfflineNotification({
     wasOffline,
     checkConnectivity,
     getConnectionQuality,
-    connectionInfo
+    connectionInfo,
   } = useOfflineDetection({
     onOffline: () => {
       setIsVisible(true);
@@ -46,7 +56,7 @@ export function OfflineNotification({
           setShowReconnected(false);
         }, autoHideDelay);
       }
-    }
+    },
   });
 
   const { offlineData, getOfflineDataCount } = useOfflineStorage(storageKey);
@@ -78,21 +88,31 @@ export function OfflineNotification({
 
   const getConnectionQualityColor = (quality: string): string => {
     switch (quality) {
-      case 'excellent': return 'text-green-600';
-      case 'good': return 'text-blue-600';
-      case 'fair': return 'text-yellow-600';
-      case 'poor': return 'text-red-600';
-      default: return 'text-gray-600';
+      case "excellent":
+        return "text-green-600";
+      case "good":
+        return "text-blue-600";
+      case "fair":
+        return "text-yellow-600";
+      case "poor":
+        return "text-red-600";
+      default:
+        return "text-gray-600";
     }
   };
 
   const getConnectionQualityIcon = (quality: string) => {
     switch (quality) {
-      case 'excellent': return <CheckCircle className="h-4 w-4" />;
-      case 'good': return <Wifi className="h-4 w-4" />;
-      case 'fair': return <AlertTriangle className="h-4 w-4" />;
-      case 'poor': return <WifiOff className="h-4 w-4" />;
-      default: return <Clock className="h-4 w-4" />;
+      case "excellent":
+        return <CheckCircle className="h-4 w-4" />;
+      case "good":
+        return <Wifi className="h-4 w-4" />;
+      case "fair":
+        return <AlertTriangle className="h-4 w-4" />;
+      case "poor":
+        return <WifiOff className="h-4 w-4" />;
+      default:
+        return <Clock className="h-4 w-4" />;
     }
   };
 
@@ -160,11 +180,19 @@ export function OfflineNotification({
               {showConnectionQuality && connectionInfo && (
                 <div className="mt-2 flex items-center text-xs">
                   <span className="text-green-700 mr-2">Connection:</span>
-                  <div className={`flex items-center ${getConnectionQualityColor(getConnectionQuality())}`}>
+                  <div
+                    className={`flex items-center ${getConnectionQualityColor(
+                      getConnectionQuality(),
+                    )}`}
+                  >
                     {getConnectionQualityIcon(getConnectionQuality())}
-                    <span className="ml-1 capitalize">{getConnectionQuality()}</span>
+                    <span className="ml-1 capitalize">
+                      {getConnectionQuality()}
+                    </span>
                     {connectionInfo.effectiveType && (
-                      <span className="ml-1">({connectionInfo.effectiveType})</span>
+                      <span className="ml-1">
+                        ({connectionInfo.effectiveType})
+                      </span>
                     )}
                   </div>
                 </div>
@@ -193,31 +221,42 @@ interface ConnectionStatusProps {
   className?: string;
 }
 
-export function ConnectionStatus({ showDetails = false, className = '' }: ConnectionStatusProps) {
-  const { isOnline, getConnectionQuality, connectionInfo } = useOfflineDetection();
+export function ConnectionStatus({
+  showDetails = false,
+  className = "",
+}: ConnectionStatusProps) {
+  const { isOnline, getConnectionQuality, connectionInfo } =
+    useOfflineDetection();
   const quality = getConnectionQuality();
 
   const getConnectionQualityColor = (quality: string): string => {
     switch (quality) {
-      case 'excellent': return 'text-green-600';
-      case 'good': return 'text-blue-600';
-      case 'fair': return 'text-yellow-600';
-      case 'poor': return 'text-red-600';
-      default: return 'text-gray-600';
+      case "excellent":
+        return "text-green-600";
+      case "good":
+        return "text-blue-600";
+      case "fair":
+        return "text-yellow-600";
+      case "poor":
+        return "text-red-600";
+      default:
+        return "text-gray-600";
     }
   };
 
   return (
     <div className={`flex items-center ${className}`}>
-      <div className={`flex items-center ${isOnline ? 'text-green-600' : 'text-red-600'}`}>
+      <div
+        className={`flex items-center ${
+          isOnline ? "text-green-600" : "text-red-600"
+        }`}
+      >
         {isOnline ? (
           <Wifi className="h-4 w-4" />
         ) : (
           <WifiOff className="h-4 w-4" />
         )}
-        <span className="ml-1 text-sm">
-          {isOnline ? 'Online' : 'Offline'}
-        </span>
+        <span className="ml-1 text-sm">{isOnline ? "Online" : "Offline"}</span>
       </div>
 
       {showDetails && isOnline && connectionInfo && (
@@ -239,13 +278,18 @@ interface OfflineDataSyncProps {
   className?: string;
 }
 
-export function OfflineDataSync({ storageKey, onSync, className = '' }: OfflineDataSyncProps) {
+export function OfflineDataSync({
+  storageKey,
+  onSync,
+  className = "",
+}: OfflineDataSyncProps) {
   const [isSyncing, setIsSyncing] = useState(false);
   const [syncError, setSyncError] = useState<string | null>(null);
   const [lastSyncTime, setLastSyncTime] = useState<Date | null>(null);
 
   const { isOnline } = useOfflineDetection();
-  const { offlineData, clearOfflineData, getOfflineDataCount } = useOfflineStorage(storageKey);
+  const { offlineData, clearOfflineData, getOfflineDataCount } =
+    useOfflineStorage(storageKey);
 
   const handleSync = async () => {
     if (!onSync || !isOnline || getOfflineDataCount() === 0) return;
@@ -259,10 +303,10 @@ export function OfflineDataSync({ storageKey, onSync, className = '' }: OfflineD
         clearOfflineData();
         setLastSyncTime(new Date());
       } else {
-        setSyncError('Sync failed. Please try again.');
+        setSyncError("Sync failed. Please try again.");
       }
     } catch (error) {
-      setSyncError(error instanceof Error ? error.message : 'Sync failed');
+      setSyncError(error instanceof Error ? error.message : "Sync failed");
     } finally {
       setIsSyncing(false);
     }
@@ -271,7 +315,9 @@ export function OfflineDataSync({ storageKey, onSync, className = '' }: OfflineD
   if (getOfflineDataCount() === 0) return null;
 
   return (
-    <div className={`bg-blue-50 border border-blue-200 rounded-lg p-3 ${className}`}>
+    <div
+      className={`bg-blue-50 border border-blue-200 rounded-lg p-3 ${className}`}
+    >
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <Clock className="h-4 w-4 text-blue-500 mr-2" />
@@ -286,15 +332,15 @@ export function OfflineDataSync({ storageKey, onSync, className = '' }: OfflineD
             disabled={isSyncing}
             className="flex items-center text-sm text-blue-600 hover:text-blue-800 disabled:opacity-50 transition-colors"
           >
-            <RefreshCw className={`h-3 w-3 mr-1 ${isSyncing ? 'animate-spin' : ''}`} />
-            {isSyncing ? 'Syncing...' : 'Sync now'}
+            <RefreshCw
+              className={`h-3 w-3 mr-1 ${isSyncing ? "animate-spin" : ""}`}
+            />
+            {isSyncing ? "Syncing..." : "Sync now"}
           </button>
         )}
       </div>
 
-      {syncError && (
-        <p className="text-xs text-red-600 mt-2">{syncError}</p>
-      )}
+      {syncError && <p className="text-xs text-red-600 mt-2">{syncError}</p>}
 
       {lastSyncTime && (
         <p className="text-xs text-blue-600 mt-1">

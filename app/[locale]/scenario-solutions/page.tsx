@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     description: t("description"),
-    keywords: t('keywords').split(','),
+    keywords: t("keywords").split(","),
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
@@ -215,29 +215,29 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
               </div>
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
-                  {t('teenHealth.title')}
+                  {t("teenHealth.title")}
                 </h2>
                 <p className="text-sm text-pink-600 font-medium">
-                  {t('teenHealth.subtitle')}
+                  {t("teenHealth.subtitle")}
                 </p>
               </div>
             </div>
             <p className="text-gray-700 mb-4 md:mb-6 text-base sm:text-lg leading-relaxed">
-              {t('teenHealth.description')}
+              {t("teenHealth.description")}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Link
                 href={`/${locale}/teen-health`}
                 className="inline-flex items-center justify-center bg-gradient-to-r from-pink-600 to-purple-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium hover:from-pink-700 hover:to-purple-700 transition-all transform hover:scale-105 text-sm sm:text-base"
               >
-                {t('teenHealth.enterZone')}
+                {t("teenHealth.enterZone")}
                 <ArrowRight className="w-4 sm:w-5 h-4 sm:h-5 ml-2" />
               </Link>
               <Link
                 href={`/${locale}/teen-health/campus-guide`}
                 className="inline-flex items-center justify-center bg-white text-pink-600 px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium border-2 border-pink-200 hover:bg-pink-50 transition-colors text-sm sm:text-base"
               >
-                {t('teenHealth.campusGuide')}
+                {t("teenHealth.campusGuide")}
               </Link>
             </div>
           </div>
@@ -245,29 +245,29 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
             <div className="bg-white rounded-xl p-4 sm:p-6 shadow-lg border border-pink-100">
               <h3 className="font-semibold text-gray-900 mb-4 flex items-center text-sm sm:text-base">
                 <span className="text-pink-500 mr-2">💝</span>
-                {t('teenHealth.helpTitle')}
+                {t("teenHealth.helpTitle")}
               </h3>
               <div className="space-y-2 sm:space-y-3">
                 {[
                   {
                     icon: "🏫",
-                    text: t('teenHealth.services.campusGuide'),
+                    text: t("teenHealth.services.campusGuide"),
                   },
                   {
                     icon: "🌱",
-                    text: t('teenHealth.services.painManagement'),
+                    text: t("teenHealth.services.painManagement"),
                   },
                   {
                     icon: "💭",
-                    text: t('teenHealth.services.emotionalSupport'),
+                    text: t("teenHealth.services.emotionalSupport"),
                   },
                   {
                     icon: "💬",
-                    text: t('teenHealth.services.communication'),
+                    text: t("teenHealth.services.communication"),
                   },
                   {
                     icon: "👭",
-                    text: t('teenHealth.services.peerSharing'),
+                    text: t("teenHealth.services.peerSharing"),
                   },
                 ].map((item, index) => (
                   <div
@@ -378,17 +378,17 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
               <div className="flex items-center justify-center mb-2">
                 <Star className="w-4 sm:w-5 h-4 sm:h-5 text-yellow-500 mr-1" />
                 <span className="text-xs sm:text-sm font-medium text-red-700">
-                  {t('emergencyKit.specialRecommendation')}
+                  {t("emergencyKit.specialRecommendation")}
                 </span>
               </div>
               <h2 className="text-xl sm:text-2xl font-semibold text-neutral-800">
-                {t('emergencyKit.title')}
+                {t("emergencyKit.title")}
               </h2>
             </div>
           </div>
 
           <p className="text-neutral-700 text-center mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-            {t('emergencyKit.description')}
+            {t("emergencyKit.description")}
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
@@ -396,11 +396,11 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
               <div className="flex items-center mb-2">
                 <Briefcase className="w-4 sm:w-5 h-4 sm:h-5 text-blue-600 mr-2" />
                 <span className="font-medium text-neutral-800 text-sm sm:text-base">
-                  {t('emergencyKit.scenarios.office.title')}
+                  {t("emergencyKit.scenarios.office.title")}
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-neutral-600">
-                {t('emergencyKit.scenarios.office.description')}
+                {t("emergencyKit.scenarios.office.description")}
               </p>
             </div>
 
@@ -408,11 +408,11 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
               <div className="flex items-center mb-2">
                 <Car className="w-4 sm:w-5 h-4 sm:h-5 text-green-600 mr-2" />
                 <span className="font-medium text-neutral-800 text-sm sm:text-base">
-                  {t('emergencyKit.scenarios.commute.title')}
+                  {t("emergencyKit.scenarios.commute.title")}
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-neutral-600">
-                {t('emergencyKit.scenarios.commute.description')}
+                {t("emergencyKit.scenarios.commute.description")}
               </p>
             </div>
 
@@ -420,11 +420,11 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
               <div className="flex items-center mb-2">
                 <Users className="w-4 sm:w-5 h-4 sm:h-5 text-pink-600 mr-2" />
                 <span className="font-medium text-neutral-800 text-sm sm:text-base">
-                  {t('emergencyKit.scenarios.social.title')}
+                  {t("emergencyKit.scenarios.social.title")}
                 </span>
               </div>
               <p className="text-xs sm:text-sm text-neutral-600">
-                {t('emergencyKit.scenarios.social.description')}
+                {t("emergencyKit.scenarios.social.description")}
               </p>
             </div>
           </div>
@@ -435,7 +435,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
               className="inline-flex items-center justify-center bg-red-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium hover:bg-red-700 transition-colors text-sm sm:text-base"
             >
               <Package className="w-4 sm:w-5 h-4 sm:h-5 mr-2" />
-              {t('emergencyKit.viewCompleteList')}
+              {t("emergencyKit.viewCompleteList")}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </div>
@@ -445,23 +445,23 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
       {/* Call to Action Section */}
       <section className="bg-neutral-100 p-4 sm:p-6 md:p-8 rounded-xl text-center">
         <h2 className="text-xl sm:text-2xl font-semibold text-neutral-800 mb-4">
-          {t('cta.title')}
+          {t("cta.title")}
         </h2>
         <p className="text-neutral-700 mb-4 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base">
-          {t('cta.description')}
+          {t("cta.description")}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <Link
             href={`/${locale}/interactive-tools/symptom-assessment`}
             className="inline-flex items-center justify-center bg-primary-600 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg font-medium hover:bg-primary-700 transition-colors text-sm sm:text-base"
           >
-            {t('cta.startAssessment')}
+            {t("cta.startAssessment")}
           </Link>
           <Link
             href={`/${locale}/interactive-tools/pain-tracker`}
             className="inline-flex items-center justify-center border-2 border-primary-600 text-primary-600 px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg font-medium hover:bg-primary-50 transition-colors text-sm sm:text-base"
           >
-            {t('cta.startTracking')}
+            {t("cta.startTracking")}
           </Link>
         </div>
       </section>

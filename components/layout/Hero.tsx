@@ -1,17 +1,21 @@
-import React from 'react';
-import { useTranslations, useLocale } from 'next-intl';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { ArrowRight, Sparkles, Heart, Users, BookOpen } from 'lucide-react';
+import React from "react";
+import { useTranslations, useLocale } from "next-intl";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowRight, Sparkles, Heart, Users, BookOpen } from "lucide-react";
 
 export default function Hero() {
-  const t = useTranslations('hero');
+  const t = useTranslations("hero");
   const locale = useLocale();
 
   return (
-    <section className="relative text-white min-h-screen flex items-center overflow-hidden" style={{
-      background: 'linear-gradient(135deg, #db2777 0%, #7e22ce 50%, #9333ea 100%)'
-    }}>
+    <section
+      className="relative text-white min-h-screen flex items-center overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(135deg, #db2777 0%, #7e22ce 50%, #9333ea 100%)",
+      }}
+    >
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-white/5 opacity-20"></div>
@@ -29,29 +33,28 @@ export default function Hero() {
       {/* Main content */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-
           {/* Left content */}
           <div className="text-center lg:text-left">
             {/* Welcome badge */}
             <div className="inline-flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
               <Sparkles className="w-4 h-4 mr-2" />
-              <span className="text-sm font-medium">{t('welcomeBadge')}</span>
+              <span className="text-sm font-medium">{t("welcomeBadge")}</span>
             </div>
 
             {/* Main title */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
               <span className="bg-gradient-to-r from-white via-pink-100 to-purple-100 bg-clip-text text-transparent">
-                {t('title')}
+                {t("title")}
               </span>
               <br />
               <span className="text-4xl md:text-5xl lg:text-6xl font-medium">
-                {t('titleHighlight')}
+                {t("titleHighlight")}
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed font-normal">
-              {t('subtitle')}
+              {t("subtitle")}
             </p>
 
             {/* Features */}
@@ -61,8 +64,12 @@ export default function Hero() {
                   <Heart className="w-4 h-4" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium">{t('features.personalizedRecord')}</span>
-                  <span className="text-xs opacity-80">{t('features.personalizedRecordDesc')}</span>
+                  <span className="text-sm font-medium">
+                    {t("features.personalizedRecord")}
+                  </span>
+                  <span className="text-xs opacity-80">
+                    {t("features.personalizedRecordDesc")}
+                  </span>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -70,8 +77,12 @@ export default function Hero() {
                   <BookOpen className="w-4 h-4" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium">{t('features.evidenceBasedGuide')}</span>
-                  <span className="text-xs opacity-80">{t('features.evidenceBasedGuideDesc')}</span>
+                  <span className="text-sm font-medium">
+                    {t("features.evidenceBasedGuide")}
+                  </span>
+                  <span className="text-xs opacity-80">
+                    {t("features.evidenceBasedGuideDesc")}
+                  </span>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -79,8 +90,12 @@ export default function Hero() {
                   <Users className="w-4 h-4" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium">{t('features.privacyFirst')}</span>
-                  <span className="text-xs opacity-80">{t('features.privacyFirstDesc')}</span>
+                  <span className="text-sm font-medium">
+                    {t("features.privacyFirst")}
+                  </span>
+                  <span className="text-xs opacity-80">
+                    {t("features.privacyFirstDesc")}
+                  </span>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -88,8 +103,12 @@ export default function Hero() {
                   <Sparkles className="w-4 h-4" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm font-medium">{t('features.precisionPrediction')}</span>
-                  <span className="text-xs opacity-80">{t('features.precisionPredictionDesc')}</span>
+                  <span className="text-sm font-medium">
+                    {t("features.precisionPrediction")}
+                  </span>
+                  <span className="text-xs opacity-80">
+                    {t("features.precisionPredictionDesc")}
+                  </span>
                 </div>
               </div>
             </div>
@@ -101,7 +120,7 @@ export default function Hero() {
                   size="lg"
                   className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 min-w-[200px] group"
                 >
-                  {t('immediateRelief')}
+                  {t("immediateRelief")}
                   <ArrowRight className="w-5 h-5 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
@@ -111,7 +130,7 @@ export default function Hero() {
                   variant="outline"
                   className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-all duration-300 min-w-[200px]"
                 >
-                  {t('cta.primary')}
+                  {t("cta.primary")}
                 </Button>
               </Link>
               <Link href={`/${locale}/health-guide`}>
@@ -120,7 +139,7 @@ export default function Hero() {
                   variant="outline"
                   className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-all duration-300 min-w-[200px]"
                 >
-                  {t('cta.secondary')}
+                  {t("cta.secondary")}
                 </Button>
               </Link>
             </div>
@@ -128,20 +147,16 @@ export default function Hero() {
             {/* Statistics */}
             <div className="flex items-center justify-center lg:justify-start space-x-8 mt-8">
               <div className="text-center">
-                <div className="text-2xl font-bold">
-                  {t('toolsCount')}
-                </div>
-                <div className="text-sm opacity-80">{t('stats.tools')}</div>
+                <div className="text-2xl font-bold">{t("toolsCount")}</div>
+                <div className="text-sm opacity-80">{t("stats.tools")}</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold">
-                  {t('articlesCount')}
-                </div>
-                <div className="text-sm opacity-80">{t('stats.content')}</div>
+                <div className="text-2xl font-bold">{t("articlesCount")}</div>
+                <div className="text-sm opacity-80">{t("stats.content")}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold">24/7</div>
-                <div className="text-sm opacity-80">{t('stats.support')}</div>
+                <div className="text-sm opacity-80">{t("stats.support")}</div>
               </div>
             </div>
           </div>
@@ -159,8 +174,12 @@ export default function Hero() {
                         <Heart className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <div className="font-semibold">{t('toolCards.painTracker')}</div>
-                        <div className="text-sm opacity-80">{t('toolCards.painTrackerDesc')}</div>
+                        <div className="font-semibold">
+                          {t("toolCards.painTracker")}
+                        </div>
+                        <div className="text-sm opacity-80">
+                          {t("toolCards.painTrackerDesc")}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -172,8 +191,12 @@ export default function Hero() {
                         <Sparkles className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <div className="font-semibold">{t('toolCards.cycleTracker')}</div>
-                        <div className="text-sm opacity-80">{t('toolCards.cycleTrackerDesc')}</div>
+                        <div className="font-semibold">
+                          {t("toolCards.cycleTracker")}
+                        </div>
+                        <div className="text-sm opacity-80">
+                          {t("toolCards.cycleTrackerDesc")}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -185,8 +208,12 @@ export default function Hero() {
                         <Users className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <div className="font-semibold">{t('toolCards.constitutionTest')}</div>
-                        <div className="text-sm opacity-80">{t('toolCards.constitutionTestDesc')}</div>
+                        <div className="font-semibold">
+                          {t("toolCards.constitutionTest")}
+                        </div>
+                        <div className="text-sm opacity-80">
+                          {t("toolCards.constitutionTestDesc")}
+                        </div>
                       </div>
                     </div>
                   </div>

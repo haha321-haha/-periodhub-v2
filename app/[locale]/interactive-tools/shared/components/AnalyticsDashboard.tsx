@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { useTranslations } from 'next-intl';
+import React, { useState, useEffect, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import {
   BarChart,
   Bar,
@@ -16,8 +16,8 @@ import {
   Pie,
   Cell,
   Area,
-  AreaChart
-} from 'recharts';
+  AreaChart,
+} from "recharts";
 import {
   TrendingUp,
   TrendingDown,
@@ -26,8 +26,8 @@ import {
   Target,
   Award,
   Clock,
-  Heart
-} from 'lucide-react';
+  Heart,
+} from "lucide-react";
 
 interface AnalyticsData {
   painLevels: Array<{
@@ -49,12 +49,12 @@ interface AnalyticsData {
     satisfaction: number;
   }>;
   trends: {
-    painTrend: 'improving' | 'stable' | 'worsening';
-    moodTrend: 'improving' | 'stable' | 'worsening';
-    activityTrend: 'improving' | 'stable' | 'worsening';
+    painTrend: "improving" | "stable" | "worsening";
+    moodTrend: "improving" | "stable" | "worsening";
+    activityTrend: "improving" | "stable" | "worsening";
   };
   insights: Array<{
-    type: 'pattern' | 'correlation' | 'recommendation';
+    type: "pattern" | "correlation" | "recommendation";
     title: string;
     description: string;
     confidence: number;
@@ -65,43 +65,70 @@ interface AnalyticsData {
 interface AnalyticsDashboardProps {
   locale: string;
   userId?: string;
-  timeRange?: 'week' | 'month' | 'quarter' | 'year';
+  timeRange?: "week" | "month" | "quarter" | "year";
 }
 
-const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#00ff00'];
+const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#00ff00"];
 
 export default function AnalyticsDashboard({
   locale,
   userId,
-  timeRange = 'month'
+  timeRange = "month",
 }: AnalyticsDashboardProps) {
-  const t = useTranslations('interactiveTools.analytics');
+  const t = useTranslations("interactiveTools.analytics");
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [selectedMetric, setSelectedMetric] = useState<'pain' | 'mood' | 'activity'>('pain');
+  const [selectedMetric, setSelectedMetric] = useState<
+    "pain" | "mood" | "activity"
+  >("pain");
 
   // 模拟数据生成（实际应用中会从API获取）
   useEffect(() => {
     const generateMockData = (): AnalyticsData => {
       const painLevels = Array.from({ length: 30 }, (_, i) => ({
-        date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000)
+          .toISOString()
+          .split("T")[0],
         pain: Math.random() * 10,
         mood: Math.random() * 10,
-        activity: Math.random() * 10
+        activity: Math.random() * 10,
       }));
 
       const cyclePatterns = Array.from({ length: 6 }, (_, i) => ({
         cycle: i + 1,
         duration: 28 + Math.random() * 7 - 3.5,
         intensity: Math.random() * 10,
-        symptoms: ['cramps', 'bloating', 'fatigue'].slice(0, Math.floor(Math.random() * 3) + 1)
+        symptoms: ["cramps", "bloating", "fatigue"].slice(
+          0,
+          Math.floor(Math.random() * 3) + 1,
+        ),
       }));
 
       const treatmentEffectiveness = [
-        { treatment: '热敷', effectiveness: 8.5, frequency: 15, satisfaction: 8.2 },
-        { treatment: '布洛芬', effectiveness: 7.8, frequency: 8, satisfaction: 7.5 },
-        { treatment: '瑜伽', effectiveness: 6.2, frequency: 12, satisfaction: 7.8 },
-        { treatment: '按摩', effectiveness: 7.1, frequency: 6, satisfaction: 8.0 }
+        {
+          treatment: "热敷",
+          effectiveness: 8.5,
+          frequency: 15,
+          satisfaction: 8.2,
+        },
+        {
+          treatment: "布洛芬",
+          effectiveness: 7.8,
+          frequency: 8,
+          satisfaction: 7.5,
+        },
+        {
+          treatment: "瑜伽",
+          effectiveness: 6.2,
+          frequency: 12,
+          satisfaction: 7.8,
+        },
+        {
+          treatment: "按摩",
+          effectiveness: 7.1,
+          frequency: 6,
+          satisfaction: 8.0,
+        },
       ];
 
       return {
@@ -109,33 +136,33 @@ export default function AnalyticsDashboard({
         cyclePatterns,
         treatmentEffectiveness,
         trends: {
-          painTrend: 'improving',
-          moodTrend: 'stable',
-          activityTrend: 'improving'
+          painTrend: "improving",
+          moodTrend: "stable",
+          activityTrend: "improving",
         },
         insights: [
           {
-            type: 'pattern',
-            title: '疼痛模式识别',
-            description: '您的疼痛通常在月经开始前2天达到峰值',
+            type: "pattern",
+            title: "疼痛模式识别",
+            description: "您的疼痛通常在月经开始前2天达到峰值",
             confidence: 0.85,
-            actionable: true
+            actionable: true,
           },
           {
-            type: 'correlation',
-            title: '活动与疼痛关联',
-            description: '轻度运动与疼痛缓解呈正相关',
+            type: "correlation",
+            title: "活动与疼痛关联",
+            description: "轻度运动与疼痛缓解呈正相关",
             confidence: 0.72,
-            actionable: true
+            actionable: true,
           },
           {
-            type: 'recommendation',
-            title: '个性化建议',
-            description: '建议在疼痛高峰期前1天开始热敷治疗',
+            type: "recommendation",
+            title: "个性化建议",
+            description: "建议在疼痛高峰期前1天开始热敷治疗",
             confidence: 0.91,
-            actionable: true
-          }
-        ]
+            actionable: true,
+          },
+        ],
       };
     };
 
@@ -147,14 +174,17 @@ export default function AnalyticsDashboard({
 
   const chartData = useMemo(() => {
     if (!data) return [];
-    return data.painLevels.map(item => ({
-      date: new Date(item.date).toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
-        month: 'short',
-        day: 'numeric'
-      }),
+    return data.painLevels.map((item) => ({
+      date: new Date(item.date).toLocaleDateString(
+        locale === "zh" ? "zh-CN" : "en-US",
+        {
+          month: "short",
+          day: "numeric",
+        },
+      ),
       pain: item.pain,
       mood: item.mood,
-      activity: item.activity
+      activity: item.activity,
     }));
   }, [data, locale]);
 
@@ -163,7 +193,7 @@ export default function AnalyticsDashboard({
     return data.treatmentEffectiveness.map((treatment, index) => ({
       name: treatment.treatment,
       value: treatment.effectiveness,
-      color: COLORS[index % COLORS.length]
+      color: COLORS[index % COLORS.length],
     }));
   }, [data]);
 
@@ -174,7 +204,7 @@ export default function AnalyticsDashboard({
           <div className="h-8 bg-gray-200 rounded w-1/3"></div>
           <div className="h-64 bg-gray-200 rounded"></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map(i => (
+            {[1, 2, 3].map((i) => (
               <div key={i} className="h-32 bg-gray-200 rounded"></div>
             ))}
           </div>
@@ -188,10 +218,12 @@ export default function AnalyticsDashboard({
       <div className="bg-white rounded-xl shadow-lg p-8 text-center">
         <Activity className="w-16 h-16 text-gray-400 mx-auto mb-4" />
         <h3 className="text-lg font-semibold text-gray-900 mb-2">
-          {locale === 'zh' ? '暂无数据' : 'No Data Available'}
+          {locale === "zh" ? "暂无数据" : "No Data Available"}
         </h3>
         <p className="text-gray-600">
-          {locale === 'zh' ? '开始记录您的症状数据以查看分析结果' : 'Start recording your symptom data to see analytics'}
+          {locale === "zh"
+            ? "开始记录您的症状数据以查看分析结果"
+            : "Start recording your symptom data to see analytics"}
         </p>
       </div>
     );
@@ -203,27 +235,29 @@ export default function AnalyticsDashboard({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            {locale === 'zh' ? '数据分析仪表板' : 'Analytics Dashboard'}
+            {locale === "zh" ? "数据分析仪表板" : "Analytics Dashboard"}
           </h2>
           <p className="text-gray-600">
-            {locale === 'zh' ? '深入了解您的经期健康模式和趋势' : 'Deep insights into your menstrual health patterns and trends'}
+            {locale === "zh"
+              ? "深入了解您的经期健康模式和趋势"
+              : "Deep insights into your menstrual health patterns and trends"}
           </p>
         </div>
 
         <div className="flex space-x-2 mt-4 sm:mt-0">
-          {(['pain', 'mood', 'activity'] as const).map(metric => (
+          {(["pain", "mood", "activity"] as const).map((metric) => (
             <button
               key={metric}
               onClick={() => setSelectedMetric(metric)}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 selectedMetric === metric
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              {metric === 'pain' && (locale === 'zh' ? '疼痛' : 'Pain')}
-              {metric === 'mood' && (locale === 'zh' ? '情绪' : 'Mood')}
-              {metric === 'activity' && (locale === 'zh' ? '活动' : 'Activity')}
+              {metric === "pain" && (locale === "zh" ? "疼痛" : "Pain")}
+              {metric === "mood" && (locale === "zh" ? "情绪" : "Mood")}
+              {metric === "activity" && (locale === "zh" ? "活动" : "Activity")}
             </button>
           ))}
         </div>
@@ -235,37 +269,52 @@ export default function AnalyticsDashboard({
           const icons = {
             painTrend: Heart,
             moodTrend: Activity,
-            activityTrend: Target
+            activityTrend: Target,
           };
           const Icon = icons[key as keyof typeof icons];
           const colors = {
-            improving: 'text-green-600',
-            stable: 'text-blue-600',
-            worsening: 'text-red-600'
+            improving: "text-green-600",
+            stable: "text-blue-600",
+            worsening: "text-red-600",
           };
 
           return (
-            <div key={key} className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-6 border border-gray-200">
+            <div
+              key={key}
+              className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-6 border border-gray-200"
+            >
               <div className="flex items-center justify-between mb-4">
                 <Icon className="w-8 h-8 text-blue-600" />
                 <div className={`flex items-center ${colors[trend]}`}>
-                  {trend === 'improving' && <TrendingUp className="w-5 h-5 mr-1" />}
-                  {trend === 'stable' && <Clock className="w-5 h-5 mr-1" />}
-                  {trend === 'worsening' && <TrendingDown className="w-5 h-5 mr-1" />}
+                  {trend === "improving" && (
+                    <TrendingUp className="w-5 h-5 mr-1" />
+                  )}
+                  {trend === "stable" && <Clock className="w-5 h-5 mr-1" />}
+                  {trend === "worsening" && (
+                    <TrendingDown className="w-5 h-5 mr-1" />
+                  )}
                   <span className="text-sm font-medium">
-                    {trend === 'improving' && (locale === 'zh' ? '改善中' : 'Improving')}
-                    {trend === 'stable' && (locale === 'zh' ? '稳定' : 'Stable')}
-                    {trend === 'worsening' && (locale === 'zh' ? '下降中' : 'Worsening')}
+                    {trend === "improving" &&
+                      (locale === "zh" ? "改善中" : "Improving")}
+                    {trend === "stable" &&
+                      (locale === "zh" ? "稳定" : "Stable")}
+                    {trend === "worsening" &&
+                      (locale === "zh" ? "下降中" : "Worsening")}
                   </span>
                 </div>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {key === 'painTrend' && (locale === 'zh' ? '疼痛趋势' : 'Pain Trend')}
-                {key === 'moodTrend' && (locale === 'zh' ? '情绪趋势' : 'Mood Trend')}
-                {key === 'activityTrend' && (locale === 'zh' ? '活动趋势' : 'Activity Trend')}
+                {key === "painTrend" &&
+                  (locale === "zh" ? "疼痛趋势" : "Pain Trend")}
+                {key === "moodTrend" &&
+                  (locale === "zh" ? "情绪趋势" : "Mood Trend")}
+                {key === "activityTrend" &&
+                  (locale === "zh" ? "活动趋势" : "Activity Trend")}
               </h3>
               <p className="text-sm text-gray-600">
-                {locale === 'zh' ? '基于最近30天的数据分析' : 'Based on last 30 days of data'}
+                {locale === "zh"
+                  ? "基于最近30天的数据分析"
+                  : "Based on last 30 days of data"}
               </p>
             </div>
           );
@@ -277,7 +326,7 @@ export default function AnalyticsDashboard({
         {/* 时间序列图表 */}
         <div className="bg-gray-50 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            {locale === 'zh' ? '症状趋势图' : 'Symptom Trends'}
+            {locale === "zh" ? "症状趋势图" : "Symptom Trends"}
           </h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={chartData}>
@@ -299,7 +348,7 @@ export default function AnalyticsDashboard({
         {/* 治疗方法效果 */}
         <div className="bg-gray-50 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            {locale === 'zh' ? '治疗方法效果' : 'Treatment Effectiveness'}
+            {locale === "zh" ? "治疗方法效果" : "Treatment Effectiveness"}
           </h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -308,7 +357,9 @@ export default function AnalyticsDashboard({
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={(props: any) => `${props.name} ${(props.percent * 100).toFixed(0)}%`}
+                label={(props: any) =>
+                  `${props.name} ${(props.percent * 100).toFixed(0)}%`
+                }
                 outerRadius={80}
                 fill="#8884d8"
                 dataKey="value"
@@ -327,21 +378,27 @@ export default function AnalyticsDashboard({
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
         <h3 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
           <Award className="w-5 h-5 mr-2" />
-          {locale === 'zh' ? '智能洞察' : 'Smart Insights'}
+          {locale === "zh" ? "智能洞察" : "Smart Insights"}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {data.insights.map((insight, index) => (
-            <div key={index} className="bg-white rounded-lg p-4 border border-blue-100">
+            <div
+              key={index}
+              className="bg-white rounded-lg p-4 border border-blue-100"
+            >
               <div className="flex items-start justify-between mb-3">
                 <h4 className="font-semibold text-gray-900">{insight.title}</h4>
                 <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                  {Math.round(insight.confidence * 100)}% {locale === 'zh' ? '置信度' : 'Confidence'}
+                  {Math.round(insight.confidence * 100)}%{" "}
+                  {locale === "zh" ? "置信度" : "Confidence"}
                 </span>
               </div>
-              <p className="text-sm text-gray-700 mb-3">{insight.description}</p>
+              <p className="text-sm text-gray-700 mb-3">
+                {insight.description}
+              </p>
               {insight.actionable && (
                 <button className="text-xs bg-blue-600 text-white px-3 py-1 rounded-full hover:bg-blue-700 transition-colors">
-                  {locale === 'zh' ? '查看建议' : 'View Recommendation'}
+                  {locale === "zh" ? "查看建议" : "View Recommendation"}
                 </button>
               )}
             </div>

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState, useMemo } from 'react';
-import dynamic from 'next/dynamic';
+import { useEffect, useRef, useState, useMemo } from "react";
+import dynamic from "next/dynamic";
 
 interface MermaidChartProps {
   chart: string;
@@ -13,7 +13,7 @@ interface MermaidChartProps {
 
 // 动态导入Mermaid库 - 只在需要时加载
 const loadMermaid = async () => {
-  const mermaid = await import('mermaid');
+  const mermaid = await import("mermaid");
   return mermaid.default;
 };
 
@@ -21,8 +21,8 @@ export default function MermaidChart({
   chart,
   title,
   description,
-  className = '',
-  id
+  className = "",
+  id,
 }: MermaidChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const [isClient, setIsClient] = useState(false);
@@ -34,8 +34,8 @@ export default function MermaidChart({
   const chartId = useMemo(() => {
     if (id) return id;
     // 基于内容生成稳定的ID，而不是随机ID
-    const hash = chart.split('').reduce((a, b) => {
-      a = ((a << 5) - a) + b.charCodeAt(0);
+    const hash = chart.split("").reduce((a, b) => {
+      a = (a << 5) - a + b.charCodeAt(0);
       return a & a;
     }, 0);
     return `mermaid-${Math.abs(hash).toString(36)}`;
@@ -57,7 +57,7 @@ export default function MermaidChart({
 
           // 验证图表内容
           if (!chart.trim()) {
-            throw new Error('Empty chart definition');
+            throw new Error("Empty chart definition");
           }
 
           // 动态加载Mermaid库
@@ -67,31 +67,32 @@ export default function MermaidChart({
           if (!mermaidLoaded) {
             mermaid.initialize({
               startOnLoad: false,
-              theme: 'default',
+              theme: "default",
               themeVariables: {
-                primaryColor: '#9333ea',
-                primaryTextColor: '#ffffff',
-                primaryBorderColor: '#7c3aed',
-                lineColor: '#6b7280',
-                sectionBkgColor: '#f3f4f6',
-                altSectionBkgColor: '#e5e7eb',
-                gridColor: '#d1d5db',
-                secondaryColor: '#ec4899',
-                tertiaryColor: '#f59e0b'
+                primaryColor: "#9333ea",
+                primaryTextColor: "#ffffff",
+                primaryBorderColor: "#7c3aed",
+                lineColor: "#6b7280",
+                sectionBkgColor: "#f3f4f6",
+                altSectionBkgColor: "#e5e7eb",
+                gridColor: "#d1d5db",
+                secondaryColor: "#ec4899",
+                tertiaryColor: "#f59e0b",
               },
               flowchart: {
                 useMaxWidth: true,
                 htmlLabels: true,
-                curve: 'basis'
+                curve: "basis",
               },
-              fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
-              securityLevel: 'loose'
+              fontFamily:
+                'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
+              securityLevel: "loose",
             });
             setMermaidLoaded(true);
           }
 
           // Clear previous content
-          chartRef.current.innerHTML = '';
+          chartRef.current.innerHTML = "";
 
           // Render the chart
           const { svg } = await mermaid.render(chartId, chart);
@@ -100,25 +101,26 @@ export default function MermaidChart({
             chartRef.current.innerHTML = svg;
 
             // Add accessibility attributes
-            const svgElement = chartRef.current.querySelector('svg');
+            const svgElement = chartRef.current.querySelector("svg");
             if (svgElement) {
-              svgElement.setAttribute('role', 'img');
-              svgElement.setAttribute('aria-labelledby', `${chartId}-title`);
+              svgElement.setAttribute("role", "img");
+              svgElement.setAttribute("aria-labelledby", `${chartId}-title`);
               if (description) {
-                svgElement.setAttribute('aria-describedby', `${chartId}-desc`);
+                svgElement.setAttribute("aria-describedby", `${chartId}-desc`);
               }
 
               // 确保SVG可见
-              svgElement.style.maxWidth = '100%';
-              svgElement.style.height = 'auto';
+              svgElement.style.maxWidth = "100%";
+              svgElement.style.height = "auto";
             }
           } else {
-            throw new Error('No SVG generated');
+            throw new Error("No SVG generated");
           }
         } catch (error) {
-          console.error('Mermaid rendering error:', error);
-          console.error('Chart content:', chart);
-          const errorMessage = error instanceof Error ? error.message : String(error);
+          console.error("Mermaid rendering error:", error);
+          console.error("Chart content:", chart);
+          const errorMessage =
+            error instanceof Error ? error.message : String(error);
           setError(errorMessage);
           chartRef.current.innerHTML = `
             <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -144,7 +146,10 @@ export default function MermaidChart({
   // 服务端渲染时显示占位符，客户端渲染时显示图表
   if (!isClient) {
     return (
-      <div className={`mermaid-container ${className}`} suppressHydrationWarning>
+      <div
+        className={`mermaid-container ${className}`}
+        suppressHydrationWarning
+      >
         {title && (
           <h3
             id={`${chartId}-title`}
@@ -166,10 +171,10 @@ export default function MermaidChart({
         <div
           className="mermaid-chart overflow-x-auto"
           style={{
-            minHeight: '200px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
+            minHeight: "200px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <div className="flex items-center justify-center p-8 bg-gray-50 rounded-lg">
@@ -207,10 +212,10 @@ export default function MermaidChart({
         ref={chartRef}
         className="mermaid-chart overflow-x-auto"
         style={{
-          minHeight: '200px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center'
+          minHeight: "200px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       />
 
@@ -253,7 +258,7 @@ export default function MermaidChart({
           .mermaid-chart svg text {
             font-size: 12pt !important;
             fill: #000 !important;
-            font-family: 'Times New Roman', serif !important;
+            font-family: "Times New Roman", serif !important;
           }
 
           .mermaid-chart svg rect,
@@ -300,7 +305,8 @@ export default function MermaidChart({
           }
 
           /* Ensure title and description are print-friendly */
-          h3, p {
+          h3,
+          p {
             color: #000 !important;
             font-size: 14pt !important;
             margin: 10pt 0 !important;

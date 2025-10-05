@@ -3,28 +3,30 @@
  * 显示用户未选择任何选项时的友好提示
  */
 
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import type { Language } from '../types';
-import { getUIContent } from '../utils/uiContent';
+import { useState, useEffect } from "react";
+import type { Language } from "../types";
+import { getUIContent } from "../utils/uiContent";
 
 interface NoSelectionStateProps {
   language: Language;
 }
 
 export default function NoSelectionState({ language }: NoSelectionStateProps) {
-  const [animationClass, setAnimationClass] = useState('');
+  const [animationClass, setAnimationClass] = useState("");
 
   useEffect(() => {
     // 添加进入动画 - 修复hydration错误
-    setAnimationClass('animate-fade-in');
+    setAnimationClass("animate-fade-in");
   }, []);
 
-  const isZh = language === 'zh';
+  const isZh = language === "zh";
 
   return (
-    <div className={`text-center p-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 shadow-sm ${animationClass}`}>
+    <div
+      className={`text-center p-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100 shadow-sm ${animationClass}`}
+    >
       {/* 图标 */}
       <div className="mb-4">
         <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center shadow-inner">
@@ -46,21 +48,24 @@ export default function NoSelectionState({ language }: NoSelectionStateProps) {
 
       {/* 主标题 */}
       <h3 className="text-lg font-semibold text-gray-800 mb-2">
-        {isZh ? '准备生成您的专属建议' : 'Ready to Generate Your Recommendations'}
+        {isZh
+          ? "准备生成您的专属建议"
+          : "Ready to Generate Your Recommendations"}
       </h3>
 
       {/* 描述文字 */}
       <p className="text-gray-600 text-sm leading-relaxed">
         {isZh
           ? '请先选择您的月经阶段、健康目标和中医体质，然后点击"生成我的建议"按钮'
-          : 'Please select your menstrual phase, health goals, and TCM constitution, then click "Generate My Recommendations"'
-        }
+          : 'Please select your menstrual phase, health goals, and TCM constitution, then click "Generate My Recommendations"'}
       </p>
 
       {/* 底部装饰 */}
       <div className="mt-4 pt-3 border-t border-blue-100">
         <p className="text-xs text-gray-400">
-          {isZh ? '✨ 基于科学研究和中医理论的个性化建议' : '✨ Personalized recommendations based on scientific research and TCM theory'}
+          {isZh
+            ? "✨ 基于科学研究和中医理论的个性化建议"
+            : "✨ Personalized recommendations based on scientific research and TCM theory"}
         </p>
       </div>
     </div>

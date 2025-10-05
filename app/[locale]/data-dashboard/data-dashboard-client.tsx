@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import React from 'react';
+import { useState } from "react";
+import React from "react";
 
 const DataDashboardClient = () => {
   const [metrics] = useState({
@@ -9,14 +9,14 @@ const DataDashboardClient = () => {
     userRetentionRate: 76.3,
     platformEngagement: 8.7,
     newUserAcquisition: 89,
-    userLifetimeValue: 234.50
+    userLifetimeValue: 234.5,
   });
 
   const [trends] = useState([
-    { month: '1月', users: 820, engagement: 7.2 },
-    { month: '2月', users: 950, engagement: 7.8 },
-    { month: '3月', users: 1120, engagement: 8.1 },
-    { month: '4月', users: 1248, engagement: 8.7 },
+    { month: "1月", users: 820, engagement: 7.2 },
+    { month: "2月", users: 950, engagement: 7.8 },
+    { month: "3月", users: 1120, engagement: 8.1 },
+    { month: "4月", users: 1248, engagement: 8.7 },
   ]);
 
   return (
@@ -38,7 +38,9 @@ const DataDashboardClient = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500">日活跃用户</p>
-                <p className="text-2xl font-semibold text-gray-900">{metrics.dailyActiveUsers.toLocaleString()}</p>
+                <p className="text-2xl font-semibold text-gray-900">
+                  {metrics.dailyActiveUsers.toLocaleString()}
+                </p>
               </div>
             </div>
           </div>
@@ -52,7 +54,9 @@ const DataDashboardClient = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500">用户留存率</p>
-                <p className="text-2xl font-semibold text-gray-900">{metrics.userRetentionRate}%</p>
+                <p className="text-2xl font-semibold text-gray-900">
+                  {metrics.userRetentionRate}%
+                </p>
               </div>
             </div>
           </div>
@@ -66,7 +70,9 @@ const DataDashboardClient = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500">平台参与度</p>
-                <p className="text-2xl font-semibold text-gray-900">{metrics.platformEngagement}</p>
+                <p className="text-2xl font-semibold text-gray-900">
+                  {metrics.platformEngagement}
+                </p>
               </div>
             </div>
           </div>
@@ -80,7 +86,9 @@ const DataDashboardClient = () => {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500">新用户获取</p>
-                <p className="text-2xl font-semibold text-gray-900">{metrics.newUserAcquisition}</p>
+                <p className="text-2xl font-semibold text-gray-900">
+                  {metrics.newUserAcquisition}
+                </p>
               </div>
             </div>
           </div>
@@ -88,7 +96,9 @@ const DataDashboardClient = () => {
 
         {/* 趋势图表区域 */}
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">用户增长趋势</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-6">
+            用户增长趋势
+          </h2>
           <div className="h-64 flex items-end space-x-4">
             {trends.map((trend, index) => (
               <div key={index} className="flex-1 flex flex-col items-center">

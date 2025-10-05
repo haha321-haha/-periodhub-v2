@@ -3,8 +3,8 @@
  * 优化文章页面的代码分割和加载性能
  */
 
-import dynamic from 'next/dynamic';
-import { ComponentType, useState } from 'react';
+import dynamic from "next/dynamic";
+import { ComponentType, useState } from "react";
 
 // 加载组件
 const LoadingSpinner = () => (
@@ -21,81 +21,83 @@ const SkeletonLoader = ({ height = "h-32" }: { height?: string }) => (
 // 懒加载配置
 const lazyOptions = {
   loading: () => <LoadingSpinner />,
-  ssr: false // 禁用服务端渲染以提高性能
+  ssr: false, // 禁用服务端渲染以提高性能
 };
 
 // 文章相关组件懒加载
 export const LazyArticleInteractions = dynamic(
-  () => import('@/components/ArticleInteractions'),
+  () => import("@/components/ArticleInteractions"),
   {
     ...lazyOptions,
-    loading: () => <SkeletonLoader height="h-16" />
-  }
+    loading: () => <SkeletonLoader height="h-16" />,
+  },
 );
 
 export const LazyReadingProgress = dynamic(
-  () => import('@/components/ReadingProgress'),
+  () => import("@/components/ReadingProgress"),
   {
     ...lazyOptions,
-    loading: () => null // 静默加载
-  }
+    loading: () => null, // 静默加载
+  },
 );
 
 export const LazyTableOfContents = dynamic(
-  () => import('@/components/TableOfContents'),
+  () => import("@/components/TableOfContents"),
   {
     ...lazyOptions,
-    loading: () => <SkeletonLoader height="h-48" />
-  }
+    loading: () => <SkeletonLoader height="h-48" />,
+  },
 );
 
 export const LazyMarkdownWithMermaid = dynamic(
-  () => import('@/components/MarkdownWithMermaid'),
+  () => import("@/components/MarkdownWithMermaid"),
   {
     ...lazyOptions,
-    loading: () => <SkeletonLoader height="h-32" />
-  }
+    loading: () => <SkeletonLoader height="h-32" />,
+  },
 );
 
 export const LazyStructuredData = dynamic(
-  () => import('@/components/StructuredData'),
+  () => import("@/components/StructuredData"),
   {
     ...lazyOptions,
-    loading: () => null // 静默加载
-  }
+    loading: () => null, // 静默加载
+  },
 );
 
 // NSAID相关组件懒加载
 export const LazyNSAIDInteractive = dynamic(
-  () => import('@/components/NSAIDInteractive'),
+  () => import("@/components/NSAIDInteractive"),
   {
     ...lazyOptions,
-    loading: () => <SkeletonLoader height="h-32" />
-  }
+    loading: () => <SkeletonLoader height="h-32" />,
+  },
 );
 
 export const LazyNSAIDContentSimple = dynamic(
-  () => import('@/components/NSAIDContentSimple'),
+  () => import("@/components/NSAIDContentSimple"),
   {
     ...lazyOptions,
-    loading: () => <SkeletonLoader height="h-24" />
-  }
+    loading: () => <SkeletonLoader height="h-24" />,
+  },
 );
 
 // 图标组件懒加载
 export const LazyHomeIcon = dynamic(
-  () => import('lucide-react').then(mod => ({ default: mod.Home })),
+  () => import("lucide-react").then((mod) => ({ default: mod.Home })),
   {
     ...lazyOptions,
-    loading: () => <div className="w-5 h-5 bg-gray-200 rounded animate-pulse" />
-  }
+    loading: () => (
+      <div className="w-5 h-5 bg-gray-200 rounded animate-pulse" />
+    ),
+  },
 );
 
 // 工具函数：预加载组件
 export const preloadArticleComponents = () => {
   // 预加载关键组件
-  import('@/components/ReadingProgress');
-  import('@/components/ArticleInteractions');
+  import("@/components/ReadingProgress");
+  import("@/components/ArticleInteractions");
 };
 
 // 工具函数：条件加载组件
@@ -104,23 +106,25 @@ export const useConditionalArticleLoading = (showComponents: boolean) => {
     return {
       ArticleInteractions: null,
       TableOfContents: null,
-      MarkdownWithMermaid: null
+      MarkdownWithMermaid: null,
     };
   }
 
   return {
     ArticleInteractions: LazyArticleInteractions,
     TableOfContents: LazyTableOfContents,
-    MarkdownWithMermaid: LazyMarkdownWithMermaid
+    MarkdownWithMermaid: LazyMarkdownWithMermaid,
   };
 };
 
 // 组件加载状态管理
 export const useArticleComponentLoadingState = () => {
-  const [loadedComponents, setLoadedComponents] = useState<Set<string>>(new Set());
+  const [loadedComponents, setLoadedComponents] = useState<Set<string>>(
+    new Set(),
+  );
 
   const markComponentLoaded = (componentName: string) => {
-    setLoadedComponents(prev => new Set([...prev, componentName]));
+    setLoadedComponents((prev) => new Set([...prev, componentName]));
   };
 
   const isComponentLoaded = (componentName: string) => {

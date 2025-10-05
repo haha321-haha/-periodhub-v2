@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useEffect, ReactNode } from 'react';
-import { ErrorBoundary } from './ErrorBoundary';
-import { ToastContainer } from './ToastSystem';
-import { ModalManager } from './ModalSystem';
-import { useAppStore } from '@/lib/stores/appStore';
-import { performanceMonitor } from '@/lib/performance/monitor';
+import React, { useEffect, ReactNode } from "react";
+import { ErrorBoundary } from "./ErrorBoundary";
+import { ToastContainer } from "./ToastSystem";
+import { ModalManager } from "./ModalSystem";
+import { useAppStore } from "@/lib/stores/appStore";
+import { performanceMonitor } from "@/lib/performance/monitor";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -13,8 +13,8 @@ interface AppProviderProps {
 
 // 应用级别的Provider组件
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
-  const preferences = useAppStore(state => state.preferences);
-  const recordPageLoadTime = useAppStore(state => state.recordPageLoadTime);
+  const preferences = useAppStore((state) => state.preferences);
+  const recordPageLoadTime = useAppStore((state) => state.recordPageLoadTime);
 
   // 初始化应用
   useEffect(() => {
@@ -71,39 +71,41 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 };
 
 // 应用主题
-function applyTheme(theme: 'light' | 'dark' | 'system') {
+function applyTheme(theme: "light" | "dark" | "system") {
   const root = document.documentElement;
 
-  if (theme === 'system') {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    theme = prefersDark ? 'dark' : 'light';
+  if (theme === "system") {
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+    theme = prefersDark ? "dark" : "light";
   }
 
-  root.classList.remove('light', 'dark');
+  root.classList.remove("light", "dark");
   root.classList.add(theme);
 
   // 更新meta标签
   const metaTheme = document.querySelector('meta[name="theme-color"]');
   if (metaTheme) {
-    metaTheme.setAttribute('content', theme === 'dark' ? '#1f2937' : '#ffffff');
+    metaTheme.setAttribute("content", theme === "dark" ? "#1f2937" : "#ffffff");
   }
 }
 
 // 应用字体大小
-function applyFontSize(fontSize: 'small' | 'medium' | 'large') {
+function applyFontSize(fontSize: "small" | "medium" | "large") {
   const root = document.documentElement;
 
-  root.classList.remove('text-sm', 'text-base', 'text-lg');
+  root.classList.remove("text-sm", "text-base", "text-lg");
 
   switch (fontSize) {
-    case 'small':
-      root.classList.add('text-sm');
+    case "small":
+      root.classList.add("text-sm");
       break;
-    case 'large':
-      root.classList.add('text-lg');
+    case "large":
+      root.classList.add("text-lg");
       break;
     default:
-      root.classList.add('text-base');
+      root.classList.add("text-base");
   }
 }
 
@@ -113,22 +115,22 @@ function applyAccessibilitySettings(settings: any) {
 
   // 高对比度
   if (settings.highContrast) {
-    root.classList.add('high-contrast');
+    root.classList.add("high-contrast");
   } else {
-    root.classList.remove('high-contrast');
+    root.classList.remove("high-contrast");
   }
 
   // 减少动画
   if (settings.reduceMotion) {
-    root.classList.add('reduce-motion');
+    root.classList.add("reduce-motion");
   } else {
-    root.classList.remove('reduce-motion');
+    root.classList.remove("reduce-motion");
   }
 
   // 大字体
   if (settings.largeText) {
-    root.classList.add('large-text');
+    root.classList.add("large-text");
   } else {
-    root.classList.remove('large-text');
+    root.classList.remove("large-text");
   }
 }

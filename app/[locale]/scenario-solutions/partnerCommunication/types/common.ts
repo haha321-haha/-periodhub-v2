@@ -2,7 +2,7 @@
  * 通用类型定义
  */
 
-export type Locale = 'zh' | 'en';
+export type Locale = "zh" | "en";
 
 export interface LanguageSwitcherProps {
   currentLocale: Locale;
@@ -14,7 +14,7 @@ export interface RelatedLink {
   title: string;
   description: string;
   url: string;
-  relevance: 'high' | 'medium' | 'low' | 'required';
+  relevance: "high" | "medium" | "low" | "required";
   icon?: string;
 }
 
@@ -38,7 +38,7 @@ export interface PartnerHandbookState {
   userPreferences: {
     notifications: boolean;
     reminderTime: string;
-    difficulty: 'easy' | 'medium' | 'hard';
+    difficulty: "easy" | "medium" | "hard";
   };
 }
 
@@ -50,7 +50,9 @@ export interface PartnerHandbookActions {
   completeTraining: (day: string) => void;
   getQuizScore: () => number;
   getTrainingProgress: () => number;
-  updatePreferences: (preferences: Partial<PartnerHandbookState['userPreferences']>) => void;
+  updatePreferences: (
+    preferences: Partial<PartnerHandbookState["userPreferences"]>,
+  ) => void;
 }
 
 export interface ComponentProps {

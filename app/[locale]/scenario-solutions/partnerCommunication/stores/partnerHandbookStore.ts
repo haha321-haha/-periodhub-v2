@@ -1,17 +1,21 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import { devtools } from 'zustand/middleware';
-import { Locale } from '../types/common';
-import { QuizAnswer, QuizResult } from '../types/quiz';
-import { TrainingProgress, TrainingSession } from '../types/training';
+import React from "react";
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
+import { Locale } from "../types/common";
+import { QuizAnswer, QuizResult } from "../types/quiz";
+import { TrainingProgress, TrainingSession } from "../types/training";
 
 // 测试阶段类型定义
-export type QuizStage = 'stage1' | 'stage2' | 'stage3' | 'stage4';
-export type QuizStageStatus = 'not_started' | 'in_progress' | 'completed' | 'locked';
-export type StageType = 'quiz' | 'training' | 'guidance';
+export type QuizStage = "stage1" | "stage2" | "stage3" | "stage4";
+export type QuizStageStatus =
+  | "not_started"
+  | "in_progress"
+  | "completed"
+  | "locked";
+export type StageType = "quiz" | "training" | "guidance";
 
 interface StageProgress {
   status: QuizStageStatus;
@@ -37,7 +41,7 @@ interface PartnerHandbookState {
   overallResult: {
     stage1Score: number;
     stage2Score: number | null;
-    combinedLevel: 'beginner' | 'intermediate' | 'advanced' | 'expert' | null;
+    combinedLevel: "beginner" | "intermediate" | "advanced" | "expert" | null;
     recommendations: string[];
     completedAt: Date | null;
   } | null;
@@ -52,9 +56,9 @@ interface PartnerHandbookState {
   userPreferences: {
     notifications: boolean;
     reminderTime: string;
-    difficulty: 'easy' | 'medium' | 'hard';
+    difficulty: "easy" | "medium" | "hard";
     autoAdvance: boolean;
-    preferredStage: QuizStage | 'auto';
+    preferredStage: QuizStage | "auto";
   };
 
   // 时间戳
@@ -94,7 +98,9 @@ interface PartnerHandbookActions {
   resetTraining: () => void;
 
   // 用户偏好管理
-  updatePreferences: (preferences: Partial<PartnerHandbookState['userPreferences']>) => void;
+  updatePreferences: (
+    preferences: Partial<PartnerHandbookState["userPreferences"]>,
+  ) => void;
 
   // 工具方法
   getStageScore: (stage: QuizStage) => number;
@@ -116,45 +122,50 @@ interface PartnerHandbookActions {
 type PartnerHandbookStore = PartnerHandbookState & PartnerHandbookActions;
 
 const createDefaultStageProgress = (): StageProgress => ({
-  status: 'not_started',
+  status: "not_started",
   currentQuestionIndex: 0,
   answers: [],
   result: null,
   completedAt: null,
-  timeSpent: 0
+  timeSpent: 0,
 });
 
 // 数据迁移函数
 const migrateData = (state: any): PartnerHandbookState => {
-  const currentVersion = '2.0.1'; // 当前数据版本
+  const currentVersion = "2.0.1"; // 当前数据版本
 
   // 如果没有版本信息，说明是旧数据，需要重置
   if (!state.dataVersion) {
-    console.log('🔄 Migrating old data to new version...');
+    console.log("🔄 Migrating old data to new version...");
     return {
       ...defaultState,
       dataVersion: currentVersion,
-      currentLanguage: state.currentLanguage || 'zh'
+      currentLanguage: state.currentLanguage || "zh",
     };
   }
 
   // 如果版本不匹配，也需要重置
   if (state.dataVersion !== currentVersion) {
-    console.log('🔄 Migrating data from version', state.dataVersion, 'to', currentVersion);
+    console.log(
+      "🔄 Migrating data from version",
+      state.dataVersion,
+      "to",
+      currentVersion,
+    );
     return {
       ...defaultState,
       dataVersion: currentVersion,
-      currentLanguage: state.currentLanguage || 'zh'
+      currentLanguage: state.currentLanguage || "zh",
     };
   }
 
   // 额外检查：如果stage1的测试结果数据异常，强制重置
   if (state.stageProgress?.stage1?.result?.totalScore > 5) {
-    console.log('🔄 Detected invalid stage1 result data, resetting...');
+    console.log("🔄 Detected invalid stage1 result data, resetting...");
     return {
       ...defaultState,
       dataVersion: currentVersion,
-      currentLanguage: state.currentLanguage || 'zh'
+      currentLanguage: state.currentLanguage || "zh",
     };
   }
 
@@ -162,14 +173,14 @@ const migrateData = (state: any): PartnerHandbookState => {
 };
 
 const defaultState: PartnerHandbookState = {
-  dataVersion: '2.0.1',
-  currentLanguage: 'zh',
-  currentStage: 'stage1',
+  dataVersion: "2.0.1",
+  currentLanguage: "zh",
+  currentStage: "stage1",
   stageProgress: {
     stage1: createDefaultStageProgress(),
-    stage2: { ...createDefaultStageProgress(), status: 'locked' },
-    stage3: { ...createDefaultStageProgress(), status: 'locked' },
-    stage4: { ...createDefaultStageProgress(), status: 'locked' }
+    stage2: { ...createDefaultStageProgress(), status: "locked" },
+    stage3: { ...createDefaultStageProgress(), status: "locked" },
+    stage4: { ...createDefaultStageProgress(), status: "locked" },
   },
   overallResult: null,
   trainingProgress: {},
@@ -178,13 +189,13 @@ const defaultState: PartnerHandbookState = {
   trainingSessions: [],
   userPreferences: {
     notifications: true,
-    reminderTime: '09:00',
-    difficulty: 'medium',
+    reminderTime: "09:00",
+    difficulty: "medium",
     autoAdvance: true,
-    preferredStage: 'auto'
+    preferredStage: "auto",
   },
   lastVisitDate: null,
-  createdAt: new Date()
+  createdAt: new Date(),
 };
 
 export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
@@ -209,14 +220,19 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             const newStageProgress = { ...state.stageProgress };
             let hasChanges = false;
 
-            const stages: QuizStage[] = ['stage1', 'stage2', 'stage3', 'stage4'];
-            stages.forEach(stage => {
+            const stages: QuizStage[] = [
+              "stage1",
+              "stage2",
+              "stage3",
+              "stage4",
+            ];
+            stages.forEach((stage) => {
               if (!newStageProgress[stage]) {
                 const defaultProgress = createDefaultStageProgress();
-                if (stage === 'stage1') {
-                  defaultProgress.status = 'not_started';
+                if (stage === "stage1") {
+                  defaultProgress.status = "not_started";
                 } else {
-                  defaultProgress.status = 'locked';
+                  defaultProgress.status = "locked";
                 }
                 newStageProgress[stage] = defaultProgress;
                 hasChanges = true;
@@ -234,13 +250,13 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
               ...state.stageProgress,
               [stage]: {
                 ...state.stageProgress[stage],
-                status: 'in_progress',
+                status: "in_progress",
                 currentQuestionIndex: 0,
                 answers: [],
-                timeSpent: 0
-              }
+                timeSpent: 0,
+              },
             },
-            currentStage: stage
+            currentStage: stage,
           }));
         },
 
@@ -250,16 +266,16 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             const newAnswers = [...currentAnswers];
 
             // 调试信息：打印保存过程
-            console.log('🔍 Debug - setStageAnswer:', {
+            console.log("🔍 Debug - setStageAnswer:", {
               stage,
               index,
               answerId: answer.questionId,
               currentAnswersLength: currentAnswers.length,
-              newAnswersLength: newAnswers.length
+              newAnswersLength: newAnswers.length,
             });
 
             // 根据阶段确定题目数量，确保数组有正确的长度
-            const questionCount = stage === 'stage1' ? 5 : 10;
+            const questionCount = stage === "stage1" ? 5 : 10;
             while (newAnswers.length < questionCount) {
               newAnswers.push(null);
             }
@@ -268,9 +284,13 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             newAnswers[index] = answer;
 
             // 调试信息：打印保存后的数组
-            console.log('🔍 Debug - After saving:', {
+            console.log("🔍 Debug - After saving:", {
               newAnswersLength: newAnswers.length,
-              savedAnswers: newAnswers.map((ans, idx) => ans ? { index: idx, questionId: ans.questionId, score: ans.score } : { index: idx, questionId: null })
+              savedAnswers: newAnswers.map((ans, idx) =>
+                ans
+                  ? { index: idx, questionId: ans.questionId, score: ans.score }
+                  : { index: idx, questionId: null },
+              ),
             });
 
             return {
@@ -278,9 +298,9 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
                 ...state.stageProgress,
                 [stage]: {
                   ...state.stageProgress[stage],
-                  answers: newAnswers
-                }
-              }
+                  answers: newAnswers,
+                },
+              },
             };
           });
         },
@@ -289,7 +309,9 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           set((state) => {
             const currentStageProgress = state.stageProgress[stage];
             if (!currentStageProgress) {
-              console.warn(`Cannot move to next question: stage ${stage} not found`);
+              console.warn(
+                `Cannot move to next question: stage ${stage} not found`,
+              );
               return state;
             }
 
@@ -298,9 +320,10 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
                 ...state.stageProgress,
                 [stage]: {
                   ...currentStageProgress,
-                  currentQuestionIndex: currentStageProgress.currentQuestionIndex + 1
-                }
-              }
+                  currentQuestionIndex:
+                    currentStageProgress.currentQuestionIndex + 1,
+                },
+              },
             };
           });
         },
@@ -318,18 +341,18 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
                 ...state.stageProgress,
                 [stage]: {
                   ...currentStageProgress,
-                  status: 'completed',
+                  status: "completed",
                   result,
-                  completedAt: new Date()
-                }
+                  completedAt: new Date(),
+                },
               },
-              lastVisitDate: new Date()
+              lastVisitDate: new Date(),
             };
           });
 
           // 自动解锁下一阶段
-          if (stage === 'stage1') {
-            get().unlockStage('stage2');
+          if (stage === "stage1") {
+            get().unlockStage("stage2");
           }
 
           // 重新计算综合结果
@@ -340,8 +363,8 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           set((state) => ({
             stageProgress: {
               ...state.stageProgress,
-              [stage]: createDefaultStageProgress()
-            }
+              [stage]: createDefaultStageProgress(),
+            },
           }));
         },
 
@@ -349,34 +372,34 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           set((state) => ({
             stageProgress: {
               stage1: createDefaultStageProgress(),
-              stage2: { ...createDefaultStageProgress(), status: 'locked' },
-              stage3: { ...createDefaultStageProgress(), status: 'locked' },
-              stage4: { ...createDefaultStageProgress(), status: 'locked' }
+              stage2: { ...createDefaultStageProgress(), status: "locked" },
+              stage3: { ...createDefaultStageProgress(), status: "locked" },
+              stage4: { ...createDefaultStageProgress(), status: "locked" },
             },
             overallResult: null,
-            currentStage: 'stage1'
+            currentStage: "stage1",
           }));
         },
 
         clearAllTestData: () => {
           // 清除localStorage中的测试数据
           try {
-            localStorage.removeItem('partner-handbook-storage');
-            console.log('🧹 已清除所有测试数据');
+            localStorage.removeItem("partner-handbook-storage");
+            console.log("🧹 已清除所有测试数据");
           } catch (error) {
-            console.error('清除测试数据失败:', error);
+            console.error("清除测试数据失败:", error);
           }
 
           // 重置状态到初始值
           set({
-            dataVersion: '1.0.0',
-            currentLanguage: 'zh',
-            currentStage: 'stage1',
+            dataVersion: "1.0.0",
+            currentLanguage: "zh",
+            currentStage: "stage1",
             stageProgress: {
               stage1: createDefaultStageProgress(),
-              stage2: { ...createDefaultStageProgress(), status: 'locked' },
-              stage3: { ...createDefaultStageProgress(), status: 'locked' },
-              stage4: { ...createDefaultStageProgress(), status: 'locked' }
+              stage2: { ...createDefaultStageProgress(), status: "locked" },
+              stage3: { ...createDefaultStageProgress(), status: "locked" },
+              stage4: { ...createDefaultStageProgress(), status: "locked" },
             },
             overallResult: null,
             trainingProgress: {},
@@ -385,11 +408,11 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             trainingSessions: [],
             userPreferences: {
               notifications: true,
-              reminderTime: '09:00',
-              difficulty: 'medium',
+              reminderTime: "09:00",
+              difficulty: "medium",
               autoAdvance: true,
-              preferredStage: 'auto'
-            }
+              preferredStage: "auto",
+            },
           });
         },
 
@@ -407,9 +430,12 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
                 ...state.stageProgress,
                 [stage]: {
                   ...currentStageProgress,
-                  status: currentStageProgress.status === 'locked' ? 'not_started' : currentStageProgress.status
-                }
-              }
+                  status:
+                    currentStageProgress.status === "locked"
+                      ? "not_started"
+                      : currentStageProgress.status,
+                },
+              },
             };
           });
         },
@@ -424,16 +450,20 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             return false;
           }
 
-          return stageProgress.status !== 'locked';
+          return stageProgress.status !== "locked";
         },
 
         getNextAvailableStage: () => {
           const state = get();
-          const stages: QuizStage[] = ['stage1', 'stage2', 'stage3', 'stage4'];
+          const stages: QuizStage[] = ["stage1", "stage2", "stage3", "stage4"];
 
           for (const stage of stages) {
             const stageProgress = state.stageProgress[stage];
-            if (stageProgress && (stageProgress.status === 'not_started' || stageProgress.status === 'in_progress')) {
+            if (
+              stageProgress &&
+              (stageProgress.status === "not_started" ||
+                stageProgress.status === "in_progress")
+            ) {
               return stage;
             }
           }
@@ -452,20 +482,24 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           const stage2Score = stage2Result?.percentage || null;
 
           // 计算综合等级
-          let combinedLevel: 'beginner' | 'intermediate' | 'advanced' | 'expert';
+          let combinedLevel:
+            | "beginner"
+            | "intermediate"
+            | "advanced"
+            | "expert";
           if (stage2Score !== null) {
             // 如果有第二阶段结果，使用加权平均
-            const combinedScore = (stage1Score * 0.3 + stage2Score * 0.7);
-            if (combinedScore < 40) combinedLevel = 'beginner';
-            else if (combinedScore < 60) combinedLevel = 'intermediate';
-            else if (combinedScore < 80) combinedLevel = 'advanced';
-            else combinedLevel = 'expert';
+            const combinedScore = stage1Score * 0.3 + stage2Score * 0.7;
+            if (combinedScore < 40) combinedLevel = "beginner";
+            else if (combinedScore < 60) combinedLevel = "intermediate";
+            else if (combinedScore < 80) combinedLevel = "advanced";
+            else combinedLevel = "expert";
           } else {
             // 只有第一阶段结果
-            if (stage1Score < 40) combinedLevel = 'beginner';
-            else if (stage1Score < 60) combinedLevel = 'intermediate';
-            else if (stage1Score < 80) combinedLevel = 'advanced';
-            else combinedLevel = 'expert';
+            if (stage1Score < 40) combinedLevel = "beginner";
+            else if (stage1Score < 60) combinedLevel = "intermediate";
+            else if (stage1Score < 80) combinedLevel = "advanced";
+            else combinedLevel = "expert";
           }
 
           // 生成综合建议
@@ -477,8 +511,8 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
               stage2Score,
               combinedLevel,
               recommendations,
-              completedAt: new Date()
-            }
+              completedAt: new Date(),
+            },
           });
         },
 
@@ -512,11 +546,14 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             return {
               trainingProgress: {
                 ...state.trainingProgress,
-                [day]: true
+                [day]: true,
               },
               completedDays: newCompletedDays,
-              currentDay: Math.max(state.currentDay, parseInt(day.replace('day', '')) + 1),
-              lastVisitDate: new Date()
+              currentDay: Math.max(
+                state.currentDay,
+                parseInt(day.replace("day", "")) + 1,
+              ),
+              lastVisitDate: new Date(),
             };
           });
         },
@@ -525,26 +562,26 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           const session: TrainingSession = {
             dayId,
             startTime: new Date(),
-            completedTasks: []
+            completedTasks: [],
           };
 
           set((state) => ({
-            trainingSessions: [...state.trainingSessions, session]
+            trainingSessions: [...state.trainingSessions, session],
           }));
         },
 
         endTrainingSession: (dayId, notes, rating) => {
           set((state) => ({
-            trainingSessions: state.trainingSessions.map(session =>
+            trainingSessions: state.trainingSessions.map((session) =>
               session.dayId === dayId
                 ? {
                     ...session,
                     endTime: new Date(),
                     notes,
-                    rating
+                    rating,
                   }
-                : session
-            )
+                : session,
+            ),
           }));
         },
 
@@ -553,7 +590,7 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             trainingProgress: {},
             completedDays: [],
             currentDay: 1,
-            trainingSessions: []
+            trainingSessions: [],
           });
         },
 
@@ -562,8 +599,8 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           set((state) => ({
             userPreferences: {
               ...state.userPreferences,
-              ...preferences
-            }
+              ...preferences,
+            },
           }));
         },
 
@@ -576,12 +613,14 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
         getStageProgress: (stage) => {
           const state = get();
           const stageData = state.stageProgress[stage];
-          if (stageData.status === 'completed') return 100;
-          if (stageData.status === 'not_started') return 0;
+          if (stageData.status === "completed") return 100;
+          if (stageData.status === "not_started") return 0;
 
           // 假设每个阶段有固定数量的题目
-          const totalQuestions = stage === 'stage1' ? 5 : 10;
-          return Math.round((stageData.currentQuestionIndex / totalQuestions) * 100);
+          const totalQuestions = stage === "stage1" ? 5 : 10;
+          return Math.round(
+            (stageData.currentQuestionIndex / totalQuestions) * 100,
+          );
         },
 
         getTrainingProgress: () => {
@@ -593,7 +632,7 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
         getCurrentStreak: () => {
           const state = get();
           const sortedDays = state.completedDays
-            .map(day => parseInt(day.replace('day', '')))
+            .map((day) => parseInt(day.replace("day", "")))
             .sort((a, b) => a - b);
 
           if (sortedDays.length === 0) return 0;
@@ -613,7 +652,7 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
         getLongestStreak: () => {
           const state = get();
           const sortedDays = state.completedDays
-            .map(day => parseInt(day.replace('day', '')))
+            .map((day) => parseInt(day.replace("day", "")))
             .sort((a, b) => a - b);
 
           if (sortedDays.length === 0) return 0;
@@ -637,17 +676,19 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           const state = get();
           const totalSessions = state.trainingSessions.length;
           const completedSessions = state.trainingSessions.filter(
-            session => session.endTime !== undefined
+            (session) => session.endTime !== undefined,
           ).length;
 
-          return totalSessions > 0 ? Math.round((completedSessions / totalSessions) * 100) : 0;
+          return totalSessions > 0
+            ? Math.round((completedSessions / totalSessions) * 100)
+            : 0;
         },
 
         // 数据管理
         clearAllData: () => {
           set({
             ...defaultState,
-            createdAt: new Date()
+            createdAt: new Date(),
           });
         },
 
@@ -660,7 +701,7 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             completedDays: state.completedDays,
             trainingSessions: state.trainingSessions,
             userPreferences: state.userPreferences,
-            exportDate: new Date().toISOString()
+            exportDate: new Date().toISOString(),
           };
 
           return JSON.stringify(exportData, null, 2);
@@ -679,16 +720,16 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
               trainingSessions: importedData.trainingSessions || [],
               userPreferences: {
                 ...state.userPreferences,
-                ...importedData.userPreferences
-              }
+                ...importedData.userPreferences,
+              },
             }));
           } catch (error) {
-            console.error('Failed to import data:', error);
+            console.error("Failed to import data:", error);
           }
-        }
+        },
       }),
       {
-        name: 'partner-handbook-storage',
+        name: "partner-handbook-storage",
         storage: createJSONStorage(() => localStorage),
         partialize: (state) => ({
           dataVersion: state.dataVersion,
@@ -702,28 +743,34 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           trainingSessions: state.trainingSessions,
           userPreferences: state.userPreferences,
           lastVisitDate: state.lastVisitDate,
-          createdAt: state.createdAt
-        })
-      }
+          createdAt: state.createdAt,
+        }),
+      },
     ),
     {
-      name: 'partner-handbook-store',
+      name: "partner-handbook-store",
       migrate: migrateData,
-      version: 0
-    }
-  )
+      version: 0,
+    },
+  ),
 );
 
 // 选择器hooks，用于优化性能
 export const useStageState = (stage: QuizStage) => {
-  const stageProgress = usePartnerHandbookStore(state => state.stageProgress[stage]);
-  const currentStage = usePartnerHandbookStore(state => state.currentStage);
-  const initializeMissingStages = usePartnerHandbookStore(state => state.initializeMissingStages);
+  const stageProgress = usePartnerHandbookStore(
+    (state) => state.stageProgress[stage],
+  );
+  const currentStage = usePartnerHandbookStore((state) => state.currentStage);
+  const initializeMissingStages = usePartnerHandbookStore(
+    (state) => state.initializeMissingStages,
+  );
 
   // 使用useEffect来处理初始化，避免在渲染期间调用setState
   React.useEffect(() => {
     if (!stageProgress) {
-      console.warn(`Stage ${stage} not found in stageProgress, initializing...`);
+      console.warn(
+        `Stage ${stage} not found in stageProgress, initializing...`,
+      );
       initializeMissingStages();
     }
   }, [stageProgress, stage, initializeMissingStages]);
@@ -732,41 +779,57 @@ export const useStageState = (stage: QuizStage) => {
   if (!stageProgress) {
     return {
       ...createDefaultStageProgress(),
-      isCurrentStage: currentStage === stage
+      isCurrentStage: currentStage === stage,
     };
   }
 
   return {
     ...stageProgress,
-    isCurrentStage: currentStage === stage
+    isCurrentStage: currentStage === stage,
   };
 };
 
 export const useAllStagesState = () => {
-  const stageProgress = usePartnerHandbookStore(state => state.stageProgress);
-  const currentStage = usePartnerHandbookStore(state => state.currentStage);
-  const overallResult = usePartnerHandbookStore(state => state.overallResult);
+  const stageProgress = usePartnerHandbookStore((state) => state.stageProgress);
+  const currentStage = usePartnerHandbookStore((state) => state.currentStage);
+  const overallResult = usePartnerHandbookStore((state) => state.overallResult);
 
   return {
     stageProgress,
     currentStage,
-    overallResult
+    overallResult,
   };
 };
 
 export const useStageActions = () => {
-  const setCurrentStage = usePartnerHandbookStore(state => state.setCurrentStage);
-  const startStage = usePartnerHandbookStore(state => state.startStage);
-  const setStageAnswer = usePartnerHandbookStore(state => state.setStageAnswer);
-  const nextStageQuestion = usePartnerHandbookStore(state => state.nextStageQuestion);
-  const completeStage = usePartnerHandbookStore(state => state.completeStage);
-  const resetStage = usePartnerHandbookStore(state => state.resetStage);
-  const resetAllStages = usePartnerHandbookStore(state => state.resetAllStages);
-  const clearAllTestData = usePartnerHandbookStore(state => state.clearAllTestData);
-  const unlockStage = usePartnerHandbookStore(state => state.unlockStage);
-  const isStageUnlocked = usePartnerHandbookStore(state => state.isStageUnlocked);
-  const getNextAvailableStage = usePartnerHandbookStore(state => state.getNextAvailableStage);
-  const initializeMissingStages = usePartnerHandbookStore(state => state.initializeMissingStages);
+  const setCurrentStage = usePartnerHandbookStore(
+    (state) => state.setCurrentStage,
+  );
+  const startStage = usePartnerHandbookStore((state) => state.startStage);
+  const setStageAnswer = usePartnerHandbookStore(
+    (state) => state.setStageAnswer,
+  );
+  const nextStageQuestion = usePartnerHandbookStore(
+    (state) => state.nextStageQuestion,
+  );
+  const completeStage = usePartnerHandbookStore((state) => state.completeStage);
+  const resetStage = usePartnerHandbookStore((state) => state.resetStage);
+  const resetAllStages = usePartnerHandbookStore(
+    (state) => state.resetAllStages,
+  );
+  const clearAllTestData = usePartnerHandbookStore(
+    (state) => state.clearAllTestData,
+  );
+  const unlockStage = usePartnerHandbookStore((state) => state.unlockStage);
+  const isStageUnlocked = usePartnerHandbookStore(
+    (state) => state.isStageUnlocked,
+  );
+  const getNextAvailableStage = usePartnerHandbookStore(
+    (state) => state.getNextAvailableStage,
+  );
+  const initializeMissingStages = usePartnerHandbookStore(
+    (state) => state.initializeMissingStages,
+  );
 
   return {
     setCurrentStage,
@@ -780,30 +843,32 @@ export const useStageActions = () => {
     unlockStage,
     isStageUnlocked,
     getNextAvailableStage,
-    initializeMissingStages
+    initializeMissingStages,
   };
 };
 
 export const useTrainingState = () => {
-  const progress = usePartnerHandbookStore(state => state.trainingProgress);
-  const completedDays = usePartnerHandbookStore(state => state.completedDays);
-  const currentDay = usePartnerHandbookStore(state => state.currentDay);
-  const sessions = usePartnerHandbookStore(state => state.trainingSessions);
+  const progress = usePartnerHandbookStore((state) => state.trainingProgress);
+  const completedDays = usePartnerHandbookStore((state) => state.completedDays);
+  const currentDay = usePartnerHandbookStore((state) => state.currentDay);
+  const sessions = usePartnerHandbookStore((state) => state.trainingSessions);
 
   return {
     progress,
     completedDays,
     currentDay,
-    sessions
+    sessions,
   };
 };
 
 export const useUserPreferences = () => {
-  const preferences = usePartnerHandbookStore(state => state.userPreferences);
-  const updatePreferences = usePartnerHandbookStore(state => state.updatePreferences);
+  const preferences = usePartnerHandbookStore((state) => state.userPreferences);
+  const updatePreferences = usePartnerHandbookStore(
+    (state) => state.updatePreferences,
+  );
 
   return {
     preferences,
-    updatePreferences
+    updatePreferences,
   };
 };

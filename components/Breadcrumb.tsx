@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { ChevronRight, Home } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
-import { URL_CONFIG } from '@/lib/url-config';
+import Link from "next/link";
+import { ChevronRight, Home } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { URL_CONFIG } from "@/lib/url-config";
 
 interface BreadcrumbItem {
   label: string;
@@ -15,27 +15,33 @@ interface BreadcrumbProps {
   className?: string;
 }
 
-export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
+export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   const locale = useLocale();
-  const t = useTranslations('common.breadcrumb');
+  const t = useTranslations("common.breadcrumb");
 
   const breadcrumbData = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": t('home'),
-        "item": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}`
+        position: 1,
+        name: t("home"),
+        item: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/${locale}`,
       },
       ...items.map((item, index) => ({
         "@type": "ListItem",
-        "position": index + 2,
-        "name": item.label,
-        ...(item.href && { "item": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}${item.href}` })
-      }))
-    ]
+        position: index + 2,
+        name: item.label,
+        ...(item.href && {
+          item: `${
+            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+          }${item.href}`,
+        }),
+      })),
+    ],
   };
 
   return (
@@ -44,7 +50,7 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbData)
+          __html: JSON.stringify(breadcrumbData),
         }}
       />
 
@@ -58,7 +64,7 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
               suppressHydrationWarning={true}
             >
               <Home className="w-4 h-4 mr-1" />
-              {t('home')}
+              {t("home")}
             </Link>
           </li>
 

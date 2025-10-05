@@ -1,84 +1,88 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from "next";
 
 // 🚀 移动端优化已启用：Service Worker、触摸优化、性能监控
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: '*',
-        allow: '/',
+        userAgent: "*",
+        allow: "/",
         disallow: [
-          '/api/',
-          '/admin/',
-          '/_next/',
-          '/private/',
-          '*.json',
-          '/search?*',
+          "/api/",
+          "/admin/",
+          "/_next/",
+          "/private/",
+          "*.json",
+          "/search?*",
           // 禁止索引图标文件
-          '/icon/',
-          '/icon?*',
-          '/favicon*',
-          '/apple-touch-icon*',
+          "/icon/",
+          "/icon?*",
+          "/favicon*",
+          "/apple-touch-icon*",
           // 禁止索引测试和开发页面
-          '/test*',
-          '/dev*',
-          '/staging*',
+          "/test*",
+          "/dev*",
+          "/staging*",
           // 禁止索引备份文件
-          '*.backup*',
-          '*.tmp*',
-          '*.log*',
+          "*.backup*",
+          "*.tmp*",
+          "*.log*",
           // 🎯 禁止索引PDF文件
-          '/pdf-files/',
-          '/downloads/*.pdf',
-          '*.pdf'
+          "/pdf-files/",
+          "/downloads/*.pdf",
+          "*.pdf",
         ],
       },
       {
-        userAgent: 'Googlebot',
-        allow: '/',
+        userAgent: "Googlebot",
+        allow: "/",
         disallow: [
-          '/api/',
-          '/admin/',
-          '/icon/',
-          '/icon?*',
-          '/favicon*',
-          '/apple-touch-icon*',
-          '/test*',
-          '/dev*',
-          '/staging*',
-          '*.backup*',
-          '*.tmp*',
-          '*.log*',
+          "/api/",
+          "/admin/",
+          "/icon/",
+          "/icon?*",
+          "/favicon*",
+          "/apple-touch-icon*",
+          "/test*",
+          "/dev*",
+          "/staging*",
+          "*.backup*",
+          "*.tmp*",
+          "*.log*",
           // 🎯 禁止索引PDF文件
-          '/pdf-files/',
-          '/downloads/*.pdf',
-          '*.pdf'
+          "/pdf-files/",
+          "/downloads/*.pdf",
+          "*.pdf",
         ],
       },
       {
-        userAgent: 'Bingbot',
-        allow: '/',
+        userAgent: "Bingbot",
+        allow: "/",
         disallow: [
-          '/api/',
-          '/admin/',
-          '/icon/',
-          '/icon?*',
-          '/favicon*',
-          '/apple-touch-icon*',
-          '/test*',
-          '/dev*',
-          '/staging*',
-          '*.backup*',
-          '*.tmp*',
-          '*.log*',
+          "/api/",
+          "/admin/",
+          "/icon/",
+          "/icon?*",
+          "/favicon*",
+          "/apple-touch-icon*",
+          "/test*",
+          "/dev*",
+          "/staging*",
+          "*.backup*",
+          "*.tmp*",
+          "*.log*",
           // 🎯 禁止索引PDF文件
-          '/pdf-files/',
-          '/downloads/*.pdf',
-          '*.pdf'
+          "/pdf-files/",
+          "/downloads/*.pdf",
+          "*.pdf",
         ],
-      }
+      },
     ],
-    sitemap: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/sitemap.xml`,
-    host: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`
+    sitemap: `${
+      process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+    }/sitemap.xml`,
+    host: `${
+      process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+    }`,
   };
 }

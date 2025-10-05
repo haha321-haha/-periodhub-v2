@@ -1,12 +1,12 @@
 // PerformanceManager - Main performance optimization service
 // Integrates all performance optimization services and provides unified interface
 
-import LazyLoadingService from './LazyLoadingService';
-import DataCompressionService from './DataCompressionService';
-import DataCleanupService from './DataCleanupService';
-import ChartPerformanceOptimizer from './ChartPerformanceOptimizer';
-import MemoryManager from './MemoryManager';
-import StorageQuotaManager from './StorageQuotaManager';
+import LazyLoadingService from "./LazyLoadingService";
+import DataCompressionService from "./DataCompressionService";
+import DataCleanupService from "./DataCleanupService";
+import ChartPerformanceOptimizer from "./ChartPerformanceOptimizer";
+import MemoryManager from "./MemoryManager";
+import StorageQuotaManager from "./StorageQuotaManager";
 
 import {
   PainRecord,
@@ -17,13 +17,18 @@ import {
   ChartOptimizationOptions,
   MemoryUsageInfo,
   StorageQuotaInfo,
-  PainTrackerError
-} from '../../../types/pain-tracker';
+  PainTrackerError,
+} from "../../../types/pain-tracker";
 
 export interface PerformanceManagerInterface {
   // Lazy Loading
-  loadRecordsPaginated(options: PaginationOptions): Promise<LazyLoadResult<PainRecord>>;
-  loadRecordsVirtual(startIndex: number, endIndex: number): Promise<PainRecord[]>;
+  loadRecordsPaginated(
+    options: PaginationOptions,
+  ): Promise<LazyLoadResult<PainRecord>>;
+  loadRecordsVirtual(
+    startIndex: number,
+    endIndex: number,
+  ): Promise<PainRecord[]>;
 
   // Data Compression
   compressData(data: any): Promise<string>;
@@ -34,7 +39,11 @@ export interface PerformanceManagerInterface {
   scheduleAutomaticCleanup(intervalMs: number): void;
 
   // Chart Performance
-  optimizeChartData(data: any[], chartType: string, options?: ChartOptimizationOptions): Promise<any[]>;
+  optimizeChartData(
+    data: any[],
+    chartType: string,
+    options?: ChartOptimizationOptions,
+  ): Promise<any[]>;
   optimizeChartOptions(baseOptions: any, dataSize: number): any;
 
   // Memory Management
@@ -89,9 +98,9 @@ export class PerformanceManager implements PerformanceManagerInterface {
     this.quotaManager = new StorageQuotaManager();
 
     // Start automatic monitoring only if enabled (default true, but can be disabled for tests)
-    const enableMonitoring = options.enableMonitoring !== false &&
-                            typeof process === 'undefined' ||
-                            process.env.NODE_ENV !== 'test';
+    const enableMonitoring =
+      (options.enableMonitoring !== false && typeof process === "undefined") ||
+      process.env.NODE_ENV !== "test";
 
     if (enableMonitoring) {
       this.initializePerformanceMonitoring();
@@ -99,11 +108,16 @@ export class PerformanceManager implements PerformanceManagerInterface {
   }
 
   // Lazy Loading Methods
-  async loadRecordsPaginated(options: PaginationOptions): Promise<LazyLoadResult<PainRecord>> {
+  async loadRecordsPaginated(
+    options: PaginationOptions,
+  ): Promise<LazyLoadResult<PainRecord>> {
     return this.lazyLoadingService.loadRecordsPaginated(options);
   }
 
-  async loadRecordsVirtual(startIndex: number, endIndex: number): Promise<PainRecord[]> {
+  async loadRecordsVirtual(
+    startIndex: number,
+    endIndex: number,
+  ): Promise<PainRecord[]> {
     return this.lazyLoadingService.loadRecordsVirtual(startIndex, endIndex);
   }
 
@@ -127,7 +141,11 @@ export class PerformanceManager implements PerformanceManagerInterface {
   }
 
   // Chart Performance Methods
-  async optimizeChartData(data: any[], chartType: string, options?: ChartOptimizationOptions): Promise<any[]> {
+  async optimizeChartData(
+    data: any[],
+    chartType: string,
+    options?: ChartOptimizationOptions,
+  ): Promise<any[]> {
     return this.chartOptimizer.optimizeDataForChart(data, chartType, options);
   }
 
@@ -166,10 +184,18 @@ export class PerformanceManager implements PerformanceManagerInterface {
       const cacheStats = this.lazyLoadingService.getCacheStats();
 
       // Generate recommendations
-      const recommendations = await this.generatePerformanceRecommendations(memory, storage, cacheStats);
+      const recommendations = await this.generatePerformanceRecommendations(
+        memory,
+        storage,
+        cacheStats,
+      );
 
       // Calculate performance score
-      const performanceScore = this.calculatePerformanceScore(memory, storage, cacheStats);
+      const performanceScore = this.calculatePerformanceScore(
+        memory,
+        storage,
+        cacheStats,
+      );
 
       const report: PerformanceReport = {
         memory,
@@ -177,7 +203,7 @@ export class PerformanceManager implements PerformanceManagerInterface {
         cacheStats,
         recommendations,
         performanceScore,
-        lastOptimization: this.getLastOptimizationDate()
+        lastOptimization: this.getLastOptimizationDate(),
       };
 
       // Add to history
@@ -189,9 +215,9 @@ export class PerformanceManager implements PerformanceManagerInterface {
       return report;
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to generate performance report',
-        'STORAGE_ERROR',
-        error
+        "Failed to generate performance report",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -204,8 +230,10 @@ export class PerformanceManager implements PerformanceManagerInterface {
       const initialReport = await this.getPerformanceReport();
 
       // Perform optimizations in order of impact
-      const memoryOptimization = await this.memoryManager.cleanupChartInstances();
-      const storageOptimization = await this.quotaManager.optimizeStorageUsage();
+      const memoryOptimization =
+        await this.memoryManager.cleanupChartInstances();
+      const storageOptimization =
+        await this.quotaManager.optimizeStorageUsage();
       const dataCleanup = await this.cleanupService.performCleanup();
 
       // Clear caches to free up memory
@@ -215,13 +243,15 @@ export class PerformanceManager implements PerformanceManagerInterface {
       const finalReport = await this.getPerformanceReport();
 
       const totalTimeSaved = performance.now() - startTime;
-      const performanceImprovement = finalReport.performanceScore - initialReport.performanceScore;
+      const performanceImprovement =
+        finalReport.performanceScore - initialReport.performanceScore;
 
       // Generate post-optimization recommendations
-      const recommendations = await this.generatePostOptimizationRecommendations(
-        initialReport,
-        finalReport
-      );
+      const recommendations =
+        await this.generatePostOptimizationRecommendations(
+          initialReport,
+          finalReport,
+        );
 
       return {
         memoryOptimization,
@@ -229,13 +259,13 @@ export class PerformanceManager implements PerformanceManagerInterface {
         dataCleanup,
         totalTimeSaved,
         performanceImprovement,
-        recommendations
+        recommendations,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to optimize overall performance',
-        'STORAGE_ERROR',
-        error
+        "Failed to optimize overall performance",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -243,25 +273,35 @@ export class PerformanceManager implements PerformanceManagerInterface {
   /**
    * Get performance optimization recommendations for large datasets
    */
-  async getDatasetOptimizationRecommendations(recordCount: number): Promise<string[]> {
+  async getDatasetOptimizationRecommendations(
+    recordCount: number,
+  ): Promise<string[]> {
     const recommendations: string[] = [];
 
     if (recordCount > 1000) {
-      recommendations.push('Enable lazy loading for historical records to improve initial load time');
-      recommendations.push('Use data sampling for charts to improve rendering performance');
-      recommendations.push('Consider archiving records older than 12 months');
+      recommendations.push(
+        "Enable lazy loading for historical records to improve initial load time",
+      );
+      recommendations.push(
+        "Use data sampling for charts to improve rendering performance",
+      );
+      recommendations.push("Consider archiving records older than 12 months");
     }
 
     if (recordCount > 5000) {
-      recommendations.push('Enable aggressive data compression to reduce storage usage');
-      recommendations.push('Implement virtual scrolling for record lists');
-      recommendations.push('Use chart data buckets for trend visualization');
+      recommendations.push(
+        "Enable aggressive data compression to reduce storage usage",
+      );
+      recommendations.push("Implement virtual scrolling for record lists");
+      recommendations.push("Use chart data buckets for trend visualization");
     }
 
     if (recordCount > 10000) {
-      recommendations.push('Consider implementing data export and local cleanup');
-      recommendations.push('Enable automatic cleanup of old records');
-      recommendations.push('Use progressive loading for analytics');
+      recommendations.push(
+        "Consider implementing data export and local cleanup",
+      );
+      recommendations.push("Enable automatic cleanup of old records");
+      recommendations.push("Use progressive loading for analytics");
     }
 
     return recommendations;
@@ -277,14 +317,14 @@ export class PerformanceManager implements PerformanceManagerInterface {
     if (isLowMemoryDevice) {
       // Configure for low-memory devices
       this.chartOptimizer = new ChartPerformanceOptimizer();
-      this.compressionService = new DataCompressionService('advanced');
+      this.compressionService = new DataCompressionService("advanced");
 
       // Enable aggressive cleanup
       this.scheduleAutomaticCleanup(5 * 60 * 1000); // Every 5 minutes
       this.memoryManager.scheduleMemoryCleanup(2 * 60 * 1000); // Every 2 minutes
     } else {
       // Configure for high-performance devices
-      this.compressionService = new DataCompressionService('basic');
+      this.compressionService = new DataCompressionService("basic");
 
       // Less frequent cleanup
       this.scheduleAutomaticCleanup(30 * 60 * 1000); // Every 30 minutes
@@ -297,7 +337,7 @@ export class PerformanceManager implements PerformanceManagerInterface {
    */
   async emergencyOptimization(): Promise<void> {
     try {
-      console.warn('Performing emergency performance optimization');
+      console.warn("Performing emergency performance optimization");
 
       // Immediate memory cleanup
       await this.memoryManager.cleanupChartInstances();
@@ -316,14 +356,14 @@ export class PerformanceManager implements PerformanceManagerInterface {
         removeDuplicates: true,
         removeIncompleteRecords: true,
         archiveOldRecords: true,
-        compactStorage: true
+        compactStorage: true,
       };
 
       await this.cleanupService.performCleanup(emergencyCleanupOptions);
 
-      console.log('Emergency optimization completed');
+      console.log("Emergency optimization completed");
     } catch (error) {
-      console.error('Emergency optimization failed:', error);
+      console.error("Emergency optimization failed:", error);
     }
   }
 
@@ -334,19 +374,22 @@ export class PerformanceManager implements PerformanceManagerInterface {
 
   private initializePerformanceMonitoring(): void {
     // Monitor performance every 5 minutes
-    this.performanceMonitoringTimer = setInterval(async () => {
-      try {
-        const report = await this.getPerformanceReport();
+    this.performanceMonitoringTimer = setInterval(
+      async () => {
+        try {
+          const report = await this.getPerformanceReport();
 
-        // Trigger optimizations if performance is poor
-        if (report.performanceScore < 50) {
-          console.warn('Poor performance detected, triggering optimization');
-          await this.optimizeOverallPerformance();
+          // Trigger optimizations if performance is poor
+          if (report.performanceScore < 50) {
+            console.warn("Poor performance detected, triggering optimization");
+            await this.optimizeOverallPerformance();
+          }
+        } catch (error) {
+          console.error("Performance monitoring failed:", error);
         }
-      } catch (error) {
-        console.error('Performance monitoring failed:', error);
-      }
-    }, 5 * 60 * 1000);
+      },
+      5 * 60 * 1000,
+    );
 
     // Emergency monitoring every 30 seconds
     this.emergencyMonitoringTimer = setInterval(() => {
@@ -360,25 +403,31 @@ export class PerformanceManager implements PerformanceManagerInterface {
   private async generatePerformanceRecommendations(
     memory: MemoryUsageInfo,
     storage: StorageQuotaInfo,
-    cacheStats: { size: number; hitRate: number }
+    cacheStats: { size: number; hitRate: number },
   ): Promise<string[]> {
     const recommendations: string[] = [];
 
     // Memory recommendations
-    const memoryRecommendations = await this.memoryManager.getMemoryRecommendations();
+    const memoryRecommendations =
+      await this.memoryManager.getMemoryRecommendations();
     recommendations.push(...memoryRecommendations);
 
     // Storage recommendations
-    const storageRecommendations = await this.quotaManager.getStorageRecommendations();
+    const storageRecommendations =
+      await this.quotaManager.getStorageRecommendations();
     recommendations.push(...storageRecommendations);
 
     // Cache recommendations
     if (cacheStats.hitRate < 0.5) {
-      recommendations.push('Cache hit rate is low. Consider adjusting cache settings.');
+      recommendations.push(
+        "Cache hit rate is low. Consider adjusting cache settings.",
+      );
     }
 
     if (cacheStats.size > 20) {
-      recommendations.push('Cache size is large. Consider clearing old cache entries.');
+      recommendations.push(
+        "Cache size is large. Consider clearing old cache entries.",
+      );
     }
 
     return recommendations;
@@ -387,7 +436,7 @@ export class PerformanceManager implements PerformanceManagerInterface {
   private calculatePerformanceScore(
     memory: MemoryUsageInfo,
     storage: StorageQuotaInfo,
-    cacheStats: { size: number; hitRate: number }
+    cacheStats: { size: number; hitRate: number },
   ): number {
     let score = 100;
 
@@ -410,7 +459,8 @@ export class PerformanceManager implements PerformanceManagerInterface {
     // Performance trend score (0-10 points)
     if (this.performanceHistory.length >= 3) {
       const recent = this.performanceHistory.slice(-3);
-      const isImproving = recent[2].performanceScore > recent[0].performanceScore;
+      const isImproving =
+        recent[2].performanceScore > recent[0].performanceScore;
       if (!isImproving) score -= 10;
     }
 
@@ -425,24 +475,31 @@ export class PerformanceManager implements PerformanceManagerInterface {
 
   private async generatePostOptimizationRecommendations(
     initialReport: PerformanceReport,
-    finalReport: PerformanceReport
+    finalReport: PerformanceReport,
   ): Promise<string[]> {
     const recommendations: string[] = [];
 
-    const improvement = finalReport.performanceScore - initialReport.performanceScore;
+    const improvement =
+      finalReport.performanceScore - initialReport.performanceScore;
 
     if (improvement > 20) {
-      recommendations.push('Significant performance improvement achieved!');
-      recommendations.push('Consider scheduling regular optimizations to maintain performance.');
+      recommendations.push("Significant performance improvement achieved!");
+      recommendations.push(
+        "Consider scheduling regular optimizations to maintain performance.",
+      );
     } else if (improvement > 10) {
-      recommendations.push('Good performance improvement achieved.');
-      recommendations.push('Monitor performance trends and optimize as needed.');
+      recommendations.push("Good performance improvement achieved.");
+      recommendations.push(
+        "Monitor performance trends and optimize as needed.",
+      );
     } else if (improvement > 0) {
-      recommendations.push('Minor performance improvement achieved.');
-      recommendations.push('Consider more aggressive optimization settings.');
+      recommendations.push("Minor performance improvement achieved.");
+      recommendations.push("Consider more aggressive optimization settings.");
     } else {
-      recommendations.push('No significant performance improvement detected.');
-      recommendations.push('Review data usage patterns and consider manual cleanup.');
+      recommendations.push("No significant performance improvement detected.");
+      recommendations.push(
+        "Review data usage patterns and consider manual cleanup.",
+      );
     }
 
     return recommendations;

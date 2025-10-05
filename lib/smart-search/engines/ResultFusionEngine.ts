@@ -7,8 +7,8 @@ import {
   SearchResult,
   SearchOptions,
   UnifiedSearchConfig,
-  SearchWeights
-} from '../types';
+  SearchWeights,
+} from "../types";
 
 export class ResultFusionEngine {
   private config: UnifiedSearchConfig;
@@ -27,7 +27,7 @@ export class ResultFusionEngine {
       semantic: SearchResult[];
     },
     options: SearchOptions,
-    weights: SearchWeights
+    weights: SearchWeights,
   ): Promise<SearchResult[]> {
     const { keyword, fuzzy, semantic } = searchResults;
 
@@ -35,13 +35,13 @@ export class ResultFusionEngine {
     const resultMap = new Map<string, SearchResult>();
 
     // 处理关键词搜索结果
-    this.mergeResults(resultMap, keyword, weights.exact, 'keyword');
+    this.mergeResults(resultMap, keyword, weights.exact, "keyword");
 
     // 处理模糊搜索结果
-    this.mergeResults(resultMap, fuzzy, weights.fuzzy, 'fuzzy');
+    this.mergeResults(resultMap, fuzzy, weights.fuzzy, "fuzzy");
 
     // 处理语义搜索结果
-    this.mergeResults(resultMap, semantic, weights.semantic, 'semantic');
+    this.mergeResults(resultMap, semantic, weights.semantic, "semantic");
 
     // 转换为数组并按分数排序
     const fusedResults = Array.from(resultMap.values());
@@ -56,7 +56,7 @@ export class ResultFusionEngine {
     resultMap: Map<string, SearchResult>,
     results: SearchResult[],
     weight: number,
-    source: string
+    source: string,
   ): void {
     for (const result of results) {
       const existing = resultMap.get(result.id);
@@ -64,13 +64,15 @@ export class ResultFusionEngine {
       if (existing) {
         // 如果结果已存在，合并分数
         existing.score = Math.max(existing.score, result.score * weight);
-        existing.matchedFields = Array.from(new Set([...existing.matchedFields, ...result.matchedFields]));
+        existing.matchedFields = Array.from(
+          new Set([...existing.matchedFields, ...result.matchedFields]),
+        );
         existing.highlights = [...existing.highlights, ...result.highlights];
       } else {
         // 新结果，添加到映射中
         resultMap.set(result.id, {
           ...result,
-          score: result.score * weight
+          score: result.score * weight,
         });
       }
     }

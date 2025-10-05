@@ -6,7 +6,7 @@
 export interface ImageConfig {
   useSmartImage: boolean;
   debugMode: boolean;
-  fallbackComponent: 'OptimizedImage' | 'img';
+  fallbackComponent: "OptimizedImage" | "img";
   retryCount: number;
   timeout: number;
   enableErrorBoundary: boolean;
@@ -18,13 +18,15 @@ export interface ImageConfig {
  */
 export function getImageConfig(): ImageConfig {
   return {
-    useSmartImage: process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== 'false',
-    debugMode: process.env.NEXT_PUBLIC_DEBUG_IMAGES === 'true',
-    fallbackComponent: (process.env.NEXT_PUBLIC_IMAGE_FALLBACK as 'OptimizedImage' | 'img') || 'OptimizedImage',
-    retryCount: parseInt(process.env.NEXT_PUBLIC_IMAGE_RETRY_COUNT || '1'),
-    timeout: parseInt(process.env.NEXT_PUBLIC_IMAGE_TIMEOUT || '10000'),
+    useSmartImage: process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== "false",
+    debugMode: process.env.NEXT_PUBLIC_DEBUG_IMAGES === "true",
+    fallbackComponent:
+      (process.env.NEXT_PUBLIC_IMAGE_FALLBACK as "OptimizedImage" | "img") ||
+      "OptimizedImage",
+    retryCount: parseInt(process.env.NEXT_PUBLIC_IMAGE_RETRY_COUNT || "1"),
+    timeout: parseInt(process.env.NEXT_PUBLIC_IMAGE_TIMEOUT || "10000"),
     enableErrorBoundary: true,
-    enableFallback: true
+    enableFallback: true,
   };
 }
 
@@ -36,11 +38,11 @@ export function getImageComponent() {
   const config = getImageConfig();
 
   if (config.useSmartImage) {
-    return 'SmartImage';
-  } else if (config.fallbackComponent === 'OptimizedImage') {
-    return 'OptimizedImage';
+    return "SmartImage";
+  } else if (config.fallbackComponent === "OptimizedImage") {
+    return "OptimizedImage";
   } else {
-    return 'img';
+    return "img";
   }
 }
 
@@ -53,13 +55,17 @@ export function createImageComponent(config?: Partial<ImageConfig>) {
 
   if (finalConfig.useSmartImage) {
     // 动态导入SmartImage
-    return import('@/components/ui/SmartImage').then(module => module.default);
-  } else if (finalConfig.fallbackComponent === 'OptimizedImage') {
+    return import("@/components/ui/SmartImage").then(
+      (module) => module.default,
+    );
+  } else if (finalConfig.fallbackComponent === "OptimizedImage") {
     // 动态导入OptimizedImage
-    return import('@/components/ui/OptimizedImage').then(module => module.default);
+    return import("@/components/ui/OptimizedImage").then(
+      (module) => module.default,
+    );
   } else {
     // 返回原生img标签的React组件
-    return Promise.resolve('img');
+    return Promise.resolve("img");
   }
 }
 
@@ -77,12 +83,14 @@ export class ImageErrorHandler {
       src,
       error: error.message,
       count: this.errorCount,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     // 如果错误过多，建议切换到备用组件
     if (this.errorCount >= this.maxErrors) {
-      console.warn(`图片错误过多 (${this.errorCount})，建议检查图片配置或切换到备用组件`);
+      console.warn(
+        `图片错误过多 (${this.errorCount})，建议检查图片配置或切换到备用组件`,
+      );
     }
   }
 
@@ -118,11 +126,14 @@ export class ImagePerformanceMonitor {
 
   static getAverageLoadTime(): number {
     if (this.loadTimes.length === 0) return 0;
-    return this.loadTimes.reduce((sum, time) => sum + time, 0) / this.loadTimes.length;
+    return (
+      this.loadTimes.reduce((sum, time) => sum + time, 0) /
+      this.loadTimes.length
+    );
   }
 
   static getSlowLoadCount(): number {
-    return this.loadTimes.filter(time => time > 3000).length;
+    return this.loadTimes.filter((time) => time > 3000).length;
   }
 
   static reset() {
@@ -139,11 +150,11 @@ export class ImageComponentState {
     optimizedImageErrors: 0,
     totalLoads: 0,
     lastError: null as Error | null,
-    lastErrorTime: null as Date | null
+    lastErrorTime: null as Date | null,
   };
 
-  static recordError(component: 'SmartImage' | 'OptimizedImage', error: Error) {
-    if (component === 'SmartImage') {
+  static recordError(component: "SmartImage" | "OptimizedImage", error: Error) {
+    if (component === "SmartImage") {
       this.state.smartImageErrors++;
     } else {
       this.state.optimizedImageErrors++;
@@ -167,7 +178,7 @@ export class ImageComponentState {
       optimizedImageErrors: 0,
       totalLoads: 0,
       lastError: null,
-      lastErrorTime: null
+      lastErrorTime: null,
     };
   }
 
@@ -175,7 +186,7 @@ export class ImageComponentState {
     const { smartImageErrors, totalLoads } = this.state;
 
     // 如果SmartImage错误率超过10%，建议使用备用组件
-    if (totalLoads > 0 && (smartImageErrors / totalLoads) > 0.1) {
+    if (totalLoads > 0 && smartImageErrors / totalLoads > 0.1) {
       return true;
     }
 

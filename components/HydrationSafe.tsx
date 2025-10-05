@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface HydrationSafeProps {
   children: React.ReactNode;
@@ -11,7 +11,10 @@ interface HydrationSafeProps {
  * Hydration安全组件
  * 防止客户端和服务端渲染差异导致的hydration错误
  */
-export default function HydrationSafe({ children, fallback }: HydrationSafeProps) {
+export default function HydrationSafe({
+  children,
+  fallback,
+}: HydrationSafeProps) {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {

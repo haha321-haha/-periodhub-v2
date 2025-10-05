@@ -4,16 +4,16 @@
  */
 
 export enum EventType {
-  SEARCH = 'search',
-  CLICK = 'click',
-  DOWNLOAD = 'download',
-  VIEW = 'view',
-  SHARE = 'share',
-  BOOKMARK = 'bookmark',
-  RATING = 'rating',
-  TIME_SPENT = 'time_spent',
-  SCROLL_DEPTH = 'scroll_depth',
-  QUERY_REFINEMENT = 'query_refinement'
+  SEARCH = "search",
+  CLICK = "click",
+  DOWNLOAD = "download",
+  VIEW = "view",
+  SHARE = "share",
+  BOOKMARK = "bookmark",
+  RATING = "rating",
+  TIME_SPENT = "time_spent",
+  SCROLL_DEPTH = "scroll_depth",
+  QUERY_REFINEMENT = "query_refinement",
 }
 
 export interface UserEvent {
@@ -30,7 +30,7 @@ export interface EventContext {
   page: string;
   userAgent: string;
   referrer?: string;
-  deviceType: 'mobile' | 'tablet' | 'desktop';
+  deviceType: "mobile" | "tablet" | "desktop";
   language: string;
   searchQuery?: string;
   searchResults?: string[];
@@ -52,7 +52,7 @@ export interface SearchEvent extends UserEvent {
 export interface ClickEvent extends UserEvent {
   type: EventType.CLICK;
   data: {
-    elementType: 'article' | 'pdf' | 'tool' | 'link';
+    elementType: "article" | "pdf" | "tool" | "link";
     elementId: string;
     position: number; // 在搜索结果中的位置
     query?: string;
@@ -64,7 +64,7 @@ export interface ViewEvent extends UserEvent {
   type: EventType.VIEW;
   data: {
     contentId: string;
-    contentType: 'article' | 'pdf' | 'tool';
+    contentType: "article" | "pdf" | "tool";
     duration: number; // 浏览时长（秒）
     scrollDepth: number; // 滚动深度百分比
     interactions: number; // 交互次数
@@ -87,7 +87,7 @@ export class BehaviorTracker {
       maxEventsPerUser: 1000,
       sessionTimeout: 30 * 60 * 1000, // 30分钟
       enableLocalStorage: true,
-      ...config
+      ...config,
     };
 
     this.loadFromStorage();
@@ -96,19 +96,19 @@ export class BehaviorTracker {
   /**
    * 记录事件 (别名方法)
    */
-  recordEvent(event: Omit<UserEvent, 'id' | 'timestamp'>): string {
+  recordEvent(event: Omit<UserEvent, "id" | "timestamp">): string {
     return this.trackEvent(event);
   }
 
   /**
    * 记录事件
    */
-  trackEvent(event: Omit<UserEvent, 'id' | 'timestamp'>): string {
+  trackEvent(event: Omit<UserEvent, "id" | "timestamp">): string {
     const eventId = this.generateEventId();
     const fullEvent: UserEvent = {
       ...event,
       id: eventId,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     // 存储事件
@@ -143,7 +143,7 @@ export class BehaviorTracker {
     resultsCount: number,
     responseTime: number,
     context: EventContext,
-    additionalData: Partial<SearchEvent['data']> = {}
+    additionalData: Partial<SearchEvent["data"]> = {},
   ): string {
     return this.trackEvent({
       userId,
@@ -153,12 +153,12 @@ export class BehaviorTracker {
         query,
         resultsCount,
         responseTime,
-        ...additionalData
+        ...additionalData,
       },
       context: {
         ...context,
-        searchQuery: query
-      }
+        searchQuery: query,
+      },
     });
   }
 
@@ -168,11 +168,11 @@ export class BehaviorTracker {
   trackClick(
     userId: string,
     sessionId: string,
-    elementType: ClickEvent['data']['elementType'],
+    elementType: ClickEvent["data"]["elementType"],
     elementId: string,
     position: number,
     context: EventContext,
-    additionalData: Partial<ClickEvent['data']> = {}
+    additionalData: Partial<ClickEvent["data"]> = {},
   ): string {
     return this.trackEvent({
       userId,
@@ -182,9 +182,9 @@ export class BehaviorTracker {
         elementType,
         elementId,
         position,
-        ...additionalData
+        ...additionalData,
       },
-      context
+      context,
     });
   }
 
@@ -195,11 +195,11 @@ export class BehaviorTracker {
     userId: string,
     sessionId: string,
     contentId: string,
-    contentType: ViewEvent['data']['contentType'],
+    contentType: ViewEvent["data"]["contentType"],
     duration: number,
     scrollDepth: number,
     context: EventContext,
-    additionalData: Partial<ViewEvent['data']> = {}
+    additionalData: Partial<ViewEvent["data"]> = {},
   ): string {
     return this.trackEvent({
       userId,
@@ -211,21 +211,25 @@ export class BehaviorTracker {
         duration,
         scrollDepth,
         interactions: 0,
-        ...additionalData
+        ...additionalData,
       },
-      context
+      context,
     });
   }
 
   /**
    * 获取用户事件
    */
-  getUserEvents(userId: string, eventType?: string, limit?: number): UserEvent[] {
+  getUserEvents(
+    userId: string,
+    eventType?: string,
+    limit?: number,
+  ): UserEvent[] {
     const events = this.events.get(userId) || [];
     let filteredEvents = events;
 
     if (eventType) {
-      filteredEvents = events.filter(event => event.type === eventType);
+      filteredEvents = events.filter((event) => event.type === eventType);
     }
 
     return limit ? filteredEvents.slice(-limit) : filteredEvents;
@@ -239,7 +243,9 @@ export class BehaviorTracker {
 
     for (const userEvents of this.events.values()) {
       if (eventType) {
-        totalCount += userEvents.filter(event => event.type === eventType).length;
+        totalCount += userEvents.filter(
+          (event) => event.type === eventType,
+        ).length;
       } else {
         totalCount += userEvents.length;
       }
@@ -272,10 +278,10 @@ export class BehaviorTracker {
   getRecentSearches(userId: string, limit: number = 10): string[] {
     const events = this.getUserEvents(userId);
     const searchEvents = events
-      .filter(event => event.type === EventType.SEARCH)
+      .filter((event) => event.type === EventType.SEARCH)
       .slice(-limit) as SearchEvent[];
 
-    return searchEvents.map(event => event.data.query);
+    return searchEvents.map((event) => event.data.query);
   }
 
   /**
@@ -289,7 +295,8 @@ export class BehaviorTracker {
       if (event.type === EventType.CLICK) {
         const clickEvent = event as ClickEvent;
         const contentType = clickEvent.data.elementType;
-        contentTypeStats[contentType] = (contentTypeStats[contentType] || 0) + 1;
+        contentTypeStats[contentType] =
+          (contentTypeStats[contentType] || 0) + 1;
       }
     }
 
@@ -306,14 +313,16 @@ export class BehaviorTracker {
     searchTimes: Array<{ hour: number; count: number }>;
   } {
     const events = this.getUserEvents(userId);
-    const searchEvents = events.filter(event => event.type === EventType.SEARCH) as SearchEvent[];
+    const searchEvents = events.filter(
+      (event) => event.type === EventType.SEARCH,
+    ) as SearchEvent[];
 
     if (searchEvents.length === 0) {
       return {
         avgQueriesPerSession: 0,
         avgQueryLength: 0,
         commonTerms: [],
-        searchTimes: []
+        searchTimes: [],
       };
     }
 
@@ -323,10 +332,15 @@ export class BehaviorTracker {
       const count = sessionsMap.get(event.sessionId) || 0;
       sessionsMap.set(event.sessionId, count + 1);
     }
-    const avgQueriesPerSession = Array.from(sessionsMap.values()).reduce((a, b) => a + b, 0) / sessionsMap.size;
+    const avgQueriesPerSession =
+      Array.from(sessionsMap.values()).reduce((a, b) => a + b, 0) /
+      sessionsMap.size;
 
     // 计算平均查询长度
-    const totalQueryLength = searchEvents.reduce((sum, event) => sum + event.data.query.length, 0);
+    const totalQueryLength = searchEvents.reduce(
+      (sum, event) => sum + event.data.query.length,
+      0,
+    );
     const avgQueryLength = totalQueryLength / searchEvents.length;
 
     // 分析常用词汇
@@ -358,7 +372,7 @@ export class BehaviorTracker {
       avgQueriesPerSession,
       avgQueryLength,
       commonTerms,
-      searchTimes
+      searchTimes,
     };
   }
 
@@ -374,7 +388,10 @@ export class BehaviorTracker {
       let latestTimestamp = 0;
       for (const userEvents of this.events.values()) {
         for (const event of userEvents) {
-          if (eventIds.includes(event.id) && event.timestamp > latestTimestamp) {
+          if (
+            eventIds.includes(event.id) &&
+            event.timestamp > latestTimestamp
+          ) {
             latestTimestamp = event.timestamp;
           }
         }
@@ -417,7 +434,8 @@ export class BehaviorTracker {
       totalEvents,
       activeSessions: this.sessions.size,
       eventsByType,
-      averageEventsPerUser: this.events.size > 0 ? totalEvents / this.events.size : 0
+      averageEventsPerUser:
+        this.events.size > 0 ? totalEvents / this.events.size : 0,
     };
   }
 
@@ -434,13 +452,16 @@ export class BehaviorTracker {
    * 从本地存储加载数据
    */
   private loadFromStorage(): void {
-    if (!this.config.enableLocalStorage || typeof localStorage === 'undefined') {
+    if (
+      !this.config.enableLocalStorage ||
+      typeof localStorage === "undefined"
+    ) {
       return;
     }
 
     try {
-      const eventsData = localStorage.getItem('behaviorTracker_events');
-      const sessionsData = localStorage.getItem('behaviorTracker_sessions');
+      const eventsData = localStorage.getItem("behaviorTracker_events");
+      const sessionsData = localStorage.getItem("behaviorTracker_sessions");
 
       if (eventsData) {
         const parsed = JSON.parse(eventsData);
@@ -452,7 +473,10 @@ export class BehaviorTracker {
         this.sessions = new Map(parsed);
       }
     } catch (error) {
-      console.warn('Failed to load behavior tracking data from storage:', error);
+      console.warn(
+        "Failed to load behavior tracking data from storage:",
+        error,
+      );
     }
   }
 
@@ -460,15 +484,24 @@ export class BehaviorTracker {
    * 保存到本地存储
    */
   private saveToStorage(): void {
-    if (!this.config.enableLocalStorage || typeof localStorage === 'undefined') {
+    if (
+      !this.config.enableLocalStorage ||
+      typeof localStorage === "undefined"
+    ) {
       return;
     }
 
     try {
-      localStorage.setItem('behaviorTracker_events', JSON.stringify(Array.from(this.events.entries())));
-      localStorage.setItem('behaviorTracker_sessions', JSON.stringify(Array.from(this.sessions.entries())));
+      localStorage.setItem(
+        "behaviorTracker_events",
+        JSON.stringify(Array.from(this.events.entries())),
+      );
+      localStorage.setItem(
+        "behaviorTracker_sessions",
+        JSON.stringify(Array.from(this.sessions.entries())),
+      );
     } catch (error) {
-      console.warn('Failed to save behavior tracking data to storage:', error);
+      console.warn("Failed to save behavior tracking data to storage:", error);
     }
   }
 }

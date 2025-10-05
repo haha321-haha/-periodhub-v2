@@ -1,14 +1,22 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { Search, X, Filter, SortAsc, SortDesc, Clock, Bookmark } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import {
+  Search,
+  X,
+  Filter,
+  SortAsc,
+  SortDesc,
+  Clock,
+  Bookmark,
+} from "lucide-react";
 
 // 搜索结果类型
 export interface SearchResult {
   id: string;
   title: string;
   content: string;
-  type: 'article' | 'tool' | 'therapy' | 'guide';
+  type: "article" | "tool" | "therapy" | "guide";
   category?: string;
   tags?: string[];
   url: string;
@@ -28,8 +36,8 @@ export interface SearchFilters {
 }
 
 // 排序选项
-export type SortOption = 'relevance' | 'date' | 'title' | 'type';
-export type SortDirection = 'asc' | 'desc';
+export type SortOption = "relevance" | "date" | "title" | "type";
+export type SortDirection = "asc" | "desc";
 
 // 搜索配置
 export interface SearchConfig {
@@ -43,14 +51,17 @@ export interface SearchConfig {
 
 // 搜索Hook
 export const useSearch = (
-  searchFunction: (query: string, filters: SearchFilters) => Promise<SearchResult[]>,
-  config: SearchConfig = {}
+  searchFunction: (
+    query: string,
+    filters: SearchFilters,
+  ) => Promise<SearchResult[]>,
+  config: SearchConfig = {},
 ) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [filters, setFilters] = useState<SearchFilters>({});
-  const [sortBy, setSortBy] = useState<SortOption>('relevance');
-  const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
+  const [sortBy, setSortBy] = useState<SortOption>("relevance");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchHistory, setSearchHistory] = useState<string[]>([]);
@@ -74,16 +85,16 @@ export const useSearch = (
 
         // 添加到搜索历史
         if (searchQuery.trim() && !searchHistory.includes(searchQuery)) {
-          setSearchHistory(prev => [searchQuery, ...prev.slice(0, 9)]); // 保留最近10条
+          setSearchHistory((prev) => [searchQuery, ...prev.slice(0, 9)]); // 保留最近10条
         }
       } catch (err) {
-        setError('搜索失败，请重试');
-        console.error('Search error:', err);
+        setError("搜索失败，请重试");
+        console.error("Search error:", err);
       } finally {
         setIsLoading(false);
       }
     }, debounceMs),
-    [searchFunction, debounceMs, searchHistory]
+    [searchFunction, debounceMs, searchHistory],
   );
 
   // 执行搜索
@@ -97,28 +108,30 @@ export const useSearch = (
       let comparison = 0;
 
       switch (sortBy) {
-        case 'relevance':
+        case "relevance":
           comparison = (b.score || 0) - (a.score || 0);
           break;
-        case 'date':
-          comparison = new Date(b.lastModified || 0).getTime() - new Date(a.lastModified || 0).getTime();
+        case "date":
+          comparison =
+            new Date(b.lastModified || 0).getTime() -
+            new Date(a.lastModified || 0).getTime();
           break;
-        case 'title':
+        case "title":
           comparison = a.title.localeCompare(b.title);
           break;
-        case 'type':
+        case "type":
           comparison = a.type.localeCompare(b.type);
           break;
       }
 
-      return sortDirection === 'asc' ? comparison : -comparison;
+      return sortDirection === "asc" ? comparison : -comparison;
     });
 
     return config.maxResults ? sorted.slice(0, config.maxResults) : sorted;
   }, [results, sortBy, sortDirection, config.maxResults]);
 
   const clearSearch = useCallback(() => {
-    setQuery('');
+    setQuery("");
     setResults([]);
     setError(null);
   }, []);
@@ -148,7 +161,7 @@ export const useSearch = (
 // 防抖函数
 function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
   return (...args: Parameters<T>) => {
@@ -171,9 +184,9 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
   value,
   onChange,
   onClear,
-  placeholder = '搜索...',
+  placeholder = "搜索...",
   isLoading = false,
-  className = '',
+  className = "",
 }) => {
   return (
     <div className={`relative ${className}`}>
@@ -219,35 +232,35 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
   isLoading,
   error,
   onResultClick,
-  className = '',
+  className = "",
 }) => {
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'article':
-        return '📄';
-      case 'tool':
-        return '🔧';
-      case 'therapy':
-        return '🌿';
-      case 'guide':
-        return '📖';
+      case "article":
+        return "📄";
+      case "tool":
+        return "🔧";
+      case "therapy":
+        return "🌿";
+      case "guide":
+        return "📖";
       default:
-        return '📝';
+        return "📝";
     }
   };
 
   const getTypeLabel = (type: string) => {
     switch (type) {
-      case 'article':
-        return '文章';
-      case 'tool':
-        return '工具';
-      case 'therapy':
-        return '疗法';
-      case 'guide':
-        return '指南';
+      case "article":
+        return "文章";
+      case "tool":
+        return "工具";
+      case "therapy":
+        return "疗法";
+      case "guide":
+        return "指南";
       default:
-        return '内容';
+        return "内容";
     }
   };
 
@@ -308,13 +321,13 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
               </p>
 
               <div className="flex items-center space-x-4 text-xs text-gray-500">
-                {result.category && (
-                  <span>分类: {result.category}</span>
-                )}
+                {result.category && <span>分类: {result.category}</span>}
                 {result.lastModified && (
                   <span className="flex items-center space-x-1">
                     <Clock className="w-3 h-3" />
-                    <span>{new Date(result.lastModified).toLocaleDateString()}</span>
+                    <span>
+                      {new Date(result.lastModified).toLocaleDateString()}
+                    </span>
                   </span>
                 )}
                 {result.score && (
@@ -359,14 +372,16 @@ export const SearchHistory: React.FC<SearchHistoryProps> = ({
   history,
   onSelect,
   onClear,
-  className = '',
+  className = "",
 }) => {
   if (history.length === 0) {
     return null;
   }
 
   return (
-    <div className={`bg-white border border-gray-200 rounded-lg p-4 ${className}`}>
+    <div
+      className={`bg-white border border-gray-200 rounded-lg p-4 ${className}`}
+    >
       <div className="flex items-center justify-between mb-3">
         <h4 className="text-sm font-medium text-gray-700 flex items-center space-x-1">
           <Clock className="w-4 h-4" />

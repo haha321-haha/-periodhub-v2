@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useSymptomAssessment } from '../[locale]/interactive-tools/shared/hooks/useSymptomAssessment';
-import { AssessmentAnswer } from '../[locale]/interactive-tools/shared/types';
+import React, { useState } from "react";
+import { useSymptomAssessment } from "../[locale]/interactive-tools/shared/hooks/useSymptomAssessment";
+import { AssessmentAnswer } from "../[locale]/interactive-tools/shared/types";
 
 export default function TestSymptomAssessmentClient() {
   const {
@@ -17,7 +17,7 @@ export default function TestSymptomAssessmentClient() {
     goToPreviousQuestion,
     goToNextQuestion,
     resetAssessment,
-    completeAssessment
+    completeAssessment,
   } = useSymptomAssessment();
 
   const [showResults, setShowResults] = useState(false);
@@ -27,7 +27,7 @@ export default function TestSymptomAssessmentClient() {
       const answer: AssessmentAnswer = {
         questionId: currentQuestion.id,
         value: value,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
       answerQuestion(answer);
     }
@@ -47,10 +47,14 @@ export default function TestSymptomAssessmentClient() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Test Symptom Assessment</h1>
-          <p className="text-gray-600 mb-6">This is a test page for the symptom assessment functionality.</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            Test Symptom Assessment
+          </h1>
+          <p className="text-gray-600 mb-6">
+            This is a test page for the symptom assessment functionality.
+          </p>
           <button
-            onClick={() => startAssessment('en')}
+            onClick={() => startAssessment("en")}
             className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             Start Test Assessment
@@ -66,29 +70,44 @@ export default function TestSymptomAssessmentClient() {
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-4xl mx-auto px-4">
           <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Assessment Results</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              Assessment Results
+            </h2>
 
             <div className="space-y-6">
               <div className="bg-blue-50 rounded-lg p-6">
-                <h2 className="text-xl font-semibold text-blue-900 mb-4">Summary</h2>
+                <h2 className="text-xl font-semibold text-blue-900 mb-4">
+                  Summary
+                </h2>
                 <p className="text-blue-800">
                   Assessment completed successfully. This is a test environment.
                 </p>
                 {results && (
                   <div className="mt-4">
-                    <p className="text-blue-800">Severity: {results.severity}</p>
+                    <p className="text-blue-800">
+                      Severity: {results.severity}
+                    </p>
                     <p className="text-blue-800">Type: {results.type}</p>
-                    <p className="text-blue-800">Score: {results.score}/{results.maxScore}</p>
-                    <p className="text-blue-800">Percentage: {results.percentage}%</p>
+                    <p className="text-blue-800">
+                      Score: {results.score}/{results.maxScore}
+                    </p>
+                    <p className="text-blue-800">
+                      Percentage: {results.percentage}%
+                    </p>
                   </div>
                 )}
               </div>
 
               <div className="bg-gray-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Assessment Details</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  Assessment Details
+                </h3>
                 <div className="space-y-2">
                   <p className="text-gray-700">Progress: {progress}%</p>
-                  <p className="text-gray-700">Questions Completed: {currentQuestionIndex} / {totalQuestions}</p>
+                  <p className="text-gray-700">
+                    Questions Completed: {currentQuestionIndex} /{" "}
+                    {totalQuestions}
+                  </p>
                 </div>
               </div>
 
@@ -117,7 +136,9 @@ export default function TestSymptomAssessmentClient() {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4">
         <div className="bg-white rounded-lg shadow-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Test Symptom Assessment</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">
+            Test Symptom Assessment
+          </h2>
 
           {currentQuestion && (
             <div className="space-y-6">
@@ -125,9 +146,7 @@ export default function TestSymptomAssessmentClient() {
                 <h2 className="text-xl font-semibold text-blue-900 mb-4">
                   Question {currentQuestionIndex + 1}
                 </h2>
-                <p className="text-blue-800 text-lg">
-                  {currentQuestion.title}
-                </p>
+                <p className="text-blue-800 text-lg">{currentQuestion.title}</p>
               </div>
 
               <div className="space-y-3">
@@ -137,14 +156,17 @@ export default function TestSymptomAssessmentClient() {
                     onClick={() => handleAnswer(option.value)}
                     className="w-full p-4 text-left border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                   >
-                    <span className="font-medium text-gray-900">{option.label}</span>
+                    <span className="font-medium text-gray-900">
+                      {option.label}
+                    </span>
                   </button>
                 ))}
               </div>
 
               <div className="flex justify-between items-center">
                 <div className="text-sm text-gray-500">
-                  Progress: {progress}% ({currentQuestionIndex + 1} / {totalQuestions})
+                  Progress: {progress}% ({currentQuestionIndex + 1} /{" "}
+                  {totalQuestions})
                 </div>
                 <div className="flex space-x-2">
                   {currentQuestionIndex > 0 && (

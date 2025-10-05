@@ -3,7 +3,7 @@
  * 基于HTML格式生成PDF报告
  */
 
-import { PeriodRecord, NutritionRecommendation, ExportType } from '../types';
+import { PeriodRecord, NutritionRecommendation, ExportType } from "../types";
 
 export interface PDFReportData {
   exportDate: string;
@@ -28,7 +28,7 @@ export class PDFGenerator {
    * 生成HTML格式的PDF报告
    */
   generateHTMLReport(data: PDFReportData): string {
-    const isZh = this.locale === 'zh';
+    const isZh = this.locale === "zh";
 
     return `
 <!DOCTYPE html>
@@ -36,7 +36,9 @@ export class PDFGenerator {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${isZh ? '工作场所健康数据报告' : 'Workplace Health Data Report'}</title>
+    <title>${
+      isZh ? "工作场所健康数据报告" : "Workplace Health Data Report"
+    }</title>
     <style>
         * {
             margin: 0;
@@ -225,27 +227,45 @@ export class PDFGenerator {
 </head>
 <body>
     <div class="header">
-        <h1>${isZh ? '工作场所健康数据报告' : 'Workplace Health Data Report'}</h1>
-        <div class="subtitle">${isZh ? 'Period Hub 职场健康助手' : 'Period Hub Workplace Wellness Assistant'}</div>
+        <h1>${
+          isZh ? "工作场所健康数据报告" : "Workplace Health Data Report"
+        }</h1>
+        <div class="subtitle">${
+          isZh
+            ? "Period Hub 职场健康助手"
+            : "Period Hub Workplace Wellness Assistant"
+        }</div>
     </div>
 
     <div class="report-info">
-        <h2>${isZh ? '报告信息' : 'Report Information'}</h2>
+        <h2>${isZh ? "报告信息" : "Report Information"}</h2>
         <div class="info-grid">
             <div class="info-item">
-                <div class="info-label">${isZh ? '导出时间' : 'Export Time'}</div>
-                <div class="info-value">${new Date(data.exportDate).toLocaleString(this.locale === 'zh' ? 'zh-CN' : 'en-US')}</div>
+                <div class="info-label">${
+                  isZh ? "导出时间" : "Export Time"
+                }</div>
+                <div class="info-value">${new Date(
+                  data.exportDate,
+                ).toLocaleString(
+                  this.locale === "zh" ? "zh-CN" : "en-US",
+                )}</div>
             </div>
             <div class="info-item">
-                <div class="info-label">${isZh ? '导出类型' : 'Export Type'}</div>
-                <div class="info-value">${this.getExportTypeLabel(data.exportType)}</div>
+                <div class="info-label">${
+                  isZh ? "导出类型" : "Export Type"
+                }</div>
+                <div class="info-value">${this.getExportTypeLabel(
+                  data.exportType,
+                )}</div>
             </div>
             <div class="info-item">
-                <div class="info-label">${isZh ? '语言版本' : 'Language'}</div>
-                <div class="info-value">${isZh ? '中文' : 'English'}</div>
+                <div class="info-label">${isZh ? "语言版本" : "Language"}</div>
+                <div class="info-value">${isZh ? "中文" : "English"}</div>
             </div>
             <div class="info-item">
-                <div class="info-label">${isZh ? '数据条数' : 'Data Records'}</div>
+                <div class="info-label">${
+                  isZh ? "数据条数" : "Data Records"
+                }</div>
                 <div class="info-value">${this.getDataCount(data)}</div>
             </div>
         </div>
@@ -255,16 +275,18 @@ export class PDFGenerator {
 
     <div class="footer">
         <div class="privacy-notice">
-            <h4>${isZh ? '隐私保护声明' : 'Privacy Protection Notice'}</h4>
-            <p>${isZh
-                ? '本报告包含个人健康数据，请妥善保管，避免泄露。所有数据均存储在您的本地设备中，我们不会收集或存储您的个人信息。'
-                : 'This report contains personal health data. Please keep it secure and avoid disclosure. All data is stored locally on your device. We do not collect or store your personal information.'
+            <h4>${isZh ? "隐私保护声明" : "Privacy Protection Notice"}</h4>
+            <p>${
+              isZh
+                ? "本报告包含个人健康数据，请妥善保管，避免泄露。所有数据均存储在您的本地设备中，我们不会收集或存储您的个人信息。"
+                : "This report contains personal health data. Please keep it secure and avoid disclosure. All data is stored locally on your device. We do not collect or store your personal information."
             }</p>
         </div>
         <p style="margin-top: 15px;">
-            ${isZh
-                ? '报告生成时间: ' + new Date().toLocaleString('zh-CN')
-                : 'Report generated at: ' + new Date().toLocaleString('en-US')
+            ${
+              isZh
+                ? "报告生成时间: " + new Date().toLocaleString("zh-CN")
+                : "Report generated at: " + new Date().toLocaleString("en-US")
             }
         </p>
     </div>
@@ -278,15 +300,15 @@ export class PDFGenerator {
   private getExportTypeLabel(type: ExportType): string {
     const labels = {
       zh: {
-        period: '经期数据',
-        nutrition: '营养数据',
-        all: '全部数据'
+        period: "经期数据",
+        nutrition: "营养数据",
+        all: "全部数据",
       },
       en: {
-        period: 'Period Data',
-        nutrition: 'Nutrition Data',
-        all: 'All Data'
-      }
+        period: "Period Data",
+        nutrition: "Nutrition Data",
+        all: "All Data",
+      },
     };
 
     return labels[this.locale][type];
@@ -296,19 +318,21 @@ export class PDFGenerator {
    * 获取数据条数
    */
   private getDataCount(data: PDFReportData): string {
-    const isZh = this.locale === 'zh';
+    const isZh = this.locale === "zh";
 
     switch (data.exportType) {
-      case 'period':
-        return `${data.periodData?.length || 0} ${isZh ? '条记录' : 'records'}`;
-      case 'nutrition':
-        return `${data.nutritionData?.length || 0} ${isZh ? '条记录' : 'records'}`;
-      case 'all':
+      case "period":
+        return `${data.periodData?.length || 0} ${isZh ? "条记录" : "records"}`;
+      case "nutrition":
+        return `${data.nutritionData?.length || 0} ${
+          isZh ? "条记录" : "records"
+        }`;
+      case "all":
         const periodCount = data.allData?.period.length || 0;
         const nutritionCount = data.allData?.nutrition.length || 0;
-        return `${periodCount + nutritionCount} ${isZh ? '条记录' : 'records'}`;
+        return `${periodCount + nutritionCount} ${isZh ? "条记录" : "records"}`;
       default:
-        return '0';
+        return "0";
     }
   }
 
@@ -316,15 +340,19 @@ export class PDFGenerator {
    * 生成数据部分
    */
   private generateDataSections(data: PDFReportData): string {
-    const isZh = this.locale === 'zh';
-    let sections = '';
+    const isZh = this.locale === "zh";
+    let sections = "";
 
-    if (data.exportType === 'period' || data.exportType === 'all') {
-      sections += this.generatePeriodSection(data.periodData || data.allData?.period || []);
+    if (data.exportType === "period" || data.exportType === "all") {
+      sections += this.generatePeriodSection(
+        data.periodData || data.allData?.period || [],
+      );
     }
 
-    if (data.exportType === 'nutrition' || data.exportType === 'all') {
-      sections += this.generateNutritionSection(data.nutritionData || data.allData?.nutrition || []);
+    if (data.exportType === "nutrition" || data.exportType === "all") {
+      sections += this.generateNutritionSection(
+        data.nutritionData || data.allData?.nutrition || [],
+      );
     }
 
     return sections;
@@ -334,47 +362,64 @@ export class PDFGenerator {
    * 生成经期数据部分
    */
   private generatePeriodSection(periodData: PeriodRecord[]): string {
-    const isZh = this.locale === 'zh';
+    const isZh = this.locale === "zh";
 
     if (periodData.length === 0) {
       return `
         <div class="data-section">
-          <h3>${isZh ? '经期数据' : 'Period Data'}</h3>
-          <p style="color: #666; font-style: italic;">${isZh ? '暂无经期数据记录' : 'No period data records'}</p>
+          <h3>${isZh ? "经期数据" : "Period Data"}</h3>
+          <p style="color: #666; font-style: italic;">${
+            isZh ? "暂无经期数据记录" : "No period data records"
+          }</p>
         </div>
       `;
     }
 
     return `
       <div class="data-section">
-        <h3>${isZh ? '经期数据' : 'Period Data'}</h3>
+        <h3>${isZh ? "经期数据" : "Period Data"}</h3>
         <table class="data-table">
           <thead>
             <tr>
-              <th>${isZh ? '日期' : 'Date'}</th>
-              <th>${isZh ? '类型' : 'Type'}</th>
-              <th>${isZh ? '疼痛等级' : 'Pain Level'}</th>
-              <th>${isZh ? '流量' : 'Flow'}</th>
-              <th>${isZh ? '备注' : 'Notes'}</th>
+              <th>${isZh ? "日期" : "Date"}</th>
+              <th>${isZh ? "类型" : "Type"}</th>
+              <th>${isZh ? "疼痛等级" : "Pain Level"}</th>
+              <th>${isZh ? "流量" : "Flow"}</th>
+              <th>${isZh ? "备注" : "Notes"}</th>
             </tr>
           </thead>
           <tbody>
-            ${periodData.map(record => `
+            ${periodData
+              .map(
+                (record) => `
               <tr>
-                <td>${new Date(record.date).toLocaleDateString(this.locale === 'zh' ? 'zh-CN' : 'en-US')}</td>
+                <td>${new Date(record.date).toLocaleDateString(
+                  this.locale === "zh" ? "zh-CN" : "en-US",
+                )}</td>
                 <td>
-                  <span class="badge ${record.type === 'period' ? 'badge-period' : 'badge-predicted'}">
-                    ${isZh
-                      ? (record.type === 'period' ? '经期' : '预测')
-                      : (record.type === 'period' ? 'Period' : 'Predicted')
+                  <span class="badge ${
+                    record.type === "period"
+                      ? "badge-period"
+                      : "badge-predicted"
+                  }">
+                    ${
+                      isZh
+                        ? record.type === "period"
+                          ? "经期"
+                          : "预测"
+                        : record.type === "period"
+                          ? "Period"
+                          : "Predicted"
                     }
                   </span>
                 </td>
-                <td>${record.painLevel || '-'}</td>
-                <td>${record.flow || '-'}</td>
-                <td>${record.notes || '-'}</td>
+                <td>${record.painLevel || "-"}</td>
+                <td>${record.flow || "-"}</td>
+                <td>${record.notes || "-"}</td>
               </tr>
-            `).join('')}
+            `,
+              )
+              .join("")}
           </tbody>
         </table>
       </div>
@@ -384,33 +429,39 @@ export class PDFGenerator {
   /**
    * 生成营养数据部分
    */
-  private generateNutritionSection(nutritionData: NutritionRecommendation[]): string {
-    const isZh = this.locale === 'zh';
+  private generateNutritionSection(
+    nutritionData: NutritionRecommendation[],
+  ): string {
+    const isZh = this.locale === "zh";
 
     if (nutritionData.length === 0) {
       return `
         <div class="data-section">
-          <h3>${isZh ? '营养数据' : 'Nutrition Data'}</h3>
-          <p style="color: #666; font-style: italic;">${isZh ? '暂无营养数据记录' : 'No nutrition data records'}</p>
+          <h3>${isZh ? "营养数据" : "Nutrition Data"}</h3>
+          <p style="color: #666; font-style: italic;">${
+            isZh ? "暂无营养数据记录" : "No nutrition data records"
+          }</p>
         </div>
       `;
     }
 
     return `
       <div class="data-section">
-        <h3>${isZh ? '营养数据' : 'Nutrition Data'}</h3>
+        <h3>${isZh ? "营养数据" : "Nutrition Data"}</h3>
         <table class="data-table">
           <thead>
             <tr>
-              <th>${isZh ? '食物名称' : 'Food Name'}</th>
-              <th>${isZh ? '经期阶段' : 'Menstrual Phase'}</th>
-              <th>${isZh ? '中医性质' : 'TCM Nature'}</th>
-              <th>${isZh ? '主要功效' : 'Main Benefits'}</th>
-              <th>${isZh ? '关键营养素' : 'Key Nutrients'}</th>
+              <th>${isZh ? "食物名称" : "Food Name"}</th>
+              <th>${isZh ? "经期阶段" : "Menstrual Phase"}</th>
+              <th>${isZh ? "中医性质" : "TCM Nature"}</th>
+              <th>${isZh ? "主要功效" : "Main Benefits"}</th>
+              <th>${isZh ? "关键营养素" : "Key Nutrients"}</th>
             </tr>
           </thead>
           <tbody>
-            ${nutritionData.map(item => `
+            ${nutritionData
+              .map(
+                (item) => `
               <tr>
                 <td><strong>${item.name}</strong></td>
                 <td>${this.getPhaseLabel(item.phase)}</td>
@@ -419,10 +470,12 @@ export class PDFGenerator {
                     ${this.getTCMNatureLabel(item.tcmNature)}
                   </span>
                 </td>
-                <td>${item.benefits.join(', ')}</td>
-                <td>${item.nutrients.join(', ')}</td>
+                <td>${item.benefits.join(", ")}</td>
+                <td>${item.nutrients.join(", ")}</td>
               </tr>
-            `).join('')}
+            `,
+              )
+              .join("")}
           </tbody>
         </table>
       </div>
@@ -435,17 +488,17 @@ export class PDFGenerator {
   private getPhaseLabel(phase: string): string {
     const labels = {
       zh: {
-        menstrual: '经期',
-        follicular: '卵泡期',
-        ovulation: '排卵期',
-        luteal: '黄体期'
+        menstrual: "经期",
+        follicular: "卵泡期",
+        ovulation: "排卵期",
+        luteal: "黄体期",
       },
       en: {
-        menstrual: 'Menstrual',
-        follicular: 'Follicular',
-        ovulation: 'Ovulation',
-        luteal: 'Luteal'
-      }
+        menstrual: "Menstrual",
+        follicular: "Follicular",
+        ovulation: "Ovulation",
+        luteal: "Luteal",
+      },
     };
 
     return labels[this.locale][phase as keyof typeof labels.zh] || phase;
@@ -457,15 +510,15 @@ export class PDFGenerator {
   private getTCMNatureLabel(nature: string): string {
     const labels = {
       zh: {
-        warm: '温性',
-        cool: '凉性',
-        neutral: '平性'
+        warm: "温性",
+        cool: "凉性",
+        neutral: "平性",
       },
       en: {
-        warm: 'Warm',
-        cool: 'Cool',
-        neutral: 'Neutral'
-      }
+        warm: "Warm",
+        cool: "Cool",
+        neutral: "Neutral",
+      },
     };
 
     return labels[this.locale][nature as keyof typeof labels.zh] || nature;
@@ -478,7 +531,7 @@ export class PDFGenerator {
     const htmlContent = this.generateHTMLReport(data);
 
     // 创建新窗口显示HTML内容
-    const newWindow = window.open('', '_blank');
+    const newWindow = window.open("", "_blank");
     if (newWindow) {
       newWindow.document.write(htmlContent);
       newWindow.document.close();
@@ -499,12 +552,14 @@ export class PDFGenerator {
     const htmlContent = this.generateHTMLReport(data);
 
     // 创建blob URL
-    const blob = new Blob([htmlContent], { type: 'text/html' });
+    const blob = new Blob([htmlContent], { type: "text/html" });
     const url = URL.createObjectURL(blob);
 
     // 跳转到下载中心并传递PDF数据
-    const downloadUrl = `/${this.locale}/downloads?pdfData=${encodeURIComponent(JSON.stringify(data))}`;
-    window.open(downloadUrl, '_blank');
+    const downloadUrl = `/${this.locale}/downloads?pdfData=${encodeURIComponent(
+      JSON.stringify(data),
+    )}`;
+    window.open(downloadUrl, "_blank");
 
     // 清理blob URL
     setTimeout(() => URL.revokeObjectURL(url), 1000);

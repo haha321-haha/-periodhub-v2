@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { ArrowUp } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { ArrowUp } from "lucide-react";
 
 interface ReadingProgressProps {
-  locale: 'zh' | 'en' | string; // 允许更宽泛的字符串类型，但在运行时验证
+  locale: "zh" | "en" | string; // 允许更宽泛的字符串类型，但在运行时验证
 }
 
 export default function ReadingProgress({ locale }: ReadingProgressProps) {
@@ -14,43 +14,46 @@ export default function ReadingProgress({ locale }: ReadingProgressProps) {
   useEffect(() => {
     const updateProgress = () => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
 
       setProgress(Math.min(100, Math.max(0, scrollPercent)));
       setShowBackToTop(scrollTop > 300);
     };
 
-    window.addEventListener('scroll', updateProgress);
+    window.addEventListener("scroll", updateProgress);
     updateProgress(); // 初始化
 
-    return () => window.removeEventListener('scroll', updateProgress);
+    return () => window.removeEventListener("scroll", updateProgress);
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
   const t = {
     zh: {
-      backToTop: '返回顶部',
-      readingProgress: '阅读进度'
+      backToTop: "返回顶部",
+      readingProgress: "阅读进度",
     },
     en: {
-      backToTop: 'Back to Top',
-      readingProgress: 'Reading Progress'
-    }
+      backToTop: "Back to Top",
+      readingProgress: "Reading Progress",
+    },
   };
 
   // 添加 locale 验证和默认值处理，防止 undefined 访问错误
-  const validLocale = (locale === 'zh' || locale === 'en') ? locale : 'en';
+  const validLocale = locale === "zh" || locale === "en" ? locale : "en";
 
   // 如果 locale 无效，记录警告（仅在客户端）
-  if (typeof window !== 'undefined' && locale !== validLocale) {
-    console.warn(`[ReadingProgress] Invalid locale '${locale}', falling back to '${validLocale}'`);
+  if (typeof window !== "undefined" && locale !== validLocale) {
+    console.warn(
+      `[ReadingProgress] Invalid locale '${locale}', falling back to '${validLocale}'`,
+    );
   }
 
   const text = t[validLocale];

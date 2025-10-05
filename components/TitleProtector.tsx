@@ -1,12 +1,15 @@
-'use client';
-import { useEffect } from 'react';
+"use client";
+import { useEffect } from "react";
 
 interface TitleProtectorProps {
   title: string;
   locale: string;
 }
 
-export const TitleProtector: React.FC<TitleProtectorProps> = ({ title, locale }) => {
+export const TitleProtector: React.FC<TitleProtectorProps> = ({
+  title,
+  locale,
+}) => {
   useEffect(() => {
     let isProtecting = true;
     let protectionCount = 0;
@@ -25,20 +28,24 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({ title, locale })
 
       if (currentTitle !== title && !isTemplateModified) {
         protectionCount++;
-        console.warn(`🛡️ Title changed from "${title}" to "${currentTitle}", restoring... (Protection #${protectionCount})`);
+        console.warn(
+          `🛡️ Title changed from "${title}" to "${currentTitle}", restoring... (Protection #${protectionCount})`,
+        );
 
         // 强制设置标题
         document.title = title;
 
         // 更新页面中的title元素
-        const titleElement = document.querySelector('head > title');
+        const titleElement = document.querySelector("head > title");
         if (titleElement && titleElement.textContent !== title) {
           titleElement.textContent = title;
         }
 
         // 如果检测到数字前缀，特别处理
         if (hasLeadingNumbers) {
-          console.warn(`🚨 Detected leading numbers in title: "${currentTitle}", forcing correction`);
+          console.warn(
+            `🚨 Detected leading numbers in title: "${currentTitle}", forcing correction`,
+          );
           // 多次强制设置，确保生效
           setTimeout(() => {
             document.title = title;
@@ -56,10 +63,12 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({ title, locale })
         }
       } else if (isTemplateModified) {
         // 如果标题被Next.js模板修改了，我们需要保持原始标题
-        console.log(`📝 Title was modified by Next.js template, keeping original: "${title}"`);
+        console.log(
+          `📝 Title was modified by Next.js template, keeping original: "${title}"`,
+        );
         document.title = title;
 
-        const titleElement = document.querySelector('head > title');
+        const titleElement = document.querySelector("head > title");
         if (titleElement) {
           titleElement.textContent = title;
         }
@@ -74,17 +83,21 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({ title, locale })
 
     // 特别针对中文版本的额外保护
     let chineseProtectionInterval: NodeJS.Timeout | undefined;
-    if (locale === 'zh') {
-      console.log('🛡️ TitleProtector: Applying extra protection for Chinese version');
+    if (locale === "zh") {
+      console.log(
+        "🛡️ TitleProtector: Applying extra protection for Chinese version",
+      );
       chineseProtectionInterval = setInterval(() => {
         const currentTitle = document.title;
         const hasLeadingNumbers = /^\d+/.test(currentTitle);
 
         if (currentTitle !== title && !currentTitle.includes(title)) {
-          console.warn(`🛡️ TitleProtector Chinese protection: "${currentTitle}" -> "${title}"`);
+          console.warn(
+            `🛡️ TitleProtector Chinese protection: "${currentTitle}" -> "${title}"`,
+          );
           document.title = title;
 
-          const titleElement = document.querySelector('head > title');
+          const titleElement = document.querySelector("head > title");
           if (titleElement && titleElement.textContent !== title) {
             titleElement.textContent = title;
           }
@@ -92,9 +105,11 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({ title, locale })
 
         // 特别处理数字前缀
         if (hasLeadingNumbers) {
-          console.warn(`🚨 TitleProtector: Detected leading numbers in Chinese title: "${currentTitle}"`);
+          console.warn(
+            `🚨 TitleProtector: Detected leading numbers in Chinese title: "${currentTitle}"`,
+          );
           document.title = title;
-          const titleElement = document.querySelector('head > title');
+          const titleElement = document.querySelector("head > title");
           if (titleElement) {
             titleElement.textContent = title;
           }
@@ -110,17 +125,17 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({ title, locale })
     observer.observe(document.head, {
       childList: true,
       subtree: true,
-      characterData: true
+      characterData: true,
     });
 
     // 监听页面可见性变化
     const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') {
+      if (document.visibilityState === "visible") {
         protectTitle();
       }
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       isProtecting = false;
@@ -129,7 +144,7 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({ title, locale })
         clearInterval(chineseProtectionInterval);
       }
       observer.disconnect();
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [title, locale]);
 

@@ -347,7 +347,7 @@ export default async function ArticlePage({
       relatedArticles.length,
     );
 
-    const t = await getTranslations({ locale, namespace: 'articlePage' });
+    const t = await getTranslations({ locale, namespace: "articlePage" });
 
     const title =
       locale === "zh" ? article.title_zh || article.title : article.title;
@@ -395,7 +395,7 @@ export default async function ArticlePage({
       image: article.featured_image,
       breadcrumbs: [
         {
-          name: t('breadcrumb.articles'),
+          name: t("breadcrumb.articles"),
           url: `${baseUrl}/${locale}/downloads`,
         },
         { name: title, url: articleUrl },
@@ -408,7 +408,7 @@ export default async function ArticlePage({
       path: `/articles/${slug}`,
       breadcrumbs: [
         {
-          name: t('breadcrumb.articles'),
+          name: t("breadcrumb.articles"),
           url: `${baseUrl}/${locale}/downloads`,
         },
         { name: title, url: articleUrl },
@@ -434,11 +434,11 @@ export default async function ArticlePage({
               locale={locale}
               items={[
                 {
-                  label: t('breadcrumb.home'),
+                  label: t("breadcrumb.home"),
                   href: `/${locale}`,
                 },
                 {
-                  label: t('breadcrumb.articles'),
+                  label: t("breadcrumb.articles"),
                   href: `/${locale}/downloads`,
                 },
                 { label: title },
@@ -505,7 +505,7 @@ export default async function ArticlePage({
                 {summary && (
                   <div className="bg-blue-50 border-l-4 border-blue-400 p-4 sm:p-6 mb-6 rounded-r-lg">
                     <h2 className="text-sm sm:text-base font-semibold text-blue-800 mb-2">
-                      {t('content.articleSummary')}
+                      {t("content.articleSummary")}
                     </h2>
                     <p className="text-sm sm:text-base text-blue-700 leading-relaxed">
                       {summary}
@@ -526,7 +526,7 @@ export default async function ArticlePage({
                         {article.author || "Period Health Team"}
                       </p>
                       <p className="text-xs sm:text-sm text-neutral-600">
-                        {t('content.healthExpert')}
+                        {t("content.healthExpert")}
                       </p>
                     </div>
                   </div>
@@ -620,7 +620,7 @@ export default async function ArticlePage({
                     {/* Quick Actions */}
                     <div className="bg-white border border-gray-200 rounded-lg p-4">
                       <h3 className="font-semibold text-gray-800 mb-3 text-sm">
-                        {t('content.quickActions')}
+                        {t("content.quickActions")}
                       </h3>
                       <div className="space-y-2">
                         <Link
@@ -640,7 +640,7 @@ export default async function ArticlePage({
                               d="M9 5l7 7-7 7"
                             />
                           </svg>
-                          {t('content.moreArticles')}
+                          {t("content.moreArticles")}
                         </Link>
                       </div>
                     </div>
@@ -672,10 +672,10 @@ export default async function ArticlePage({
                   </div>
                   <div>
                     <h4 className="font-bold text-red-800 mb-2 text-sm sm:text-base">
-                      {t('content.medicalDisclaimer.title')}
+                      {t("content.medicalDisclaimer.title")}
                     </h4>
                     <p className="text-xs sm:text-sm text-red-700 leading-relaxed">
-                      {t('content.medicalDisclaimer.content')}
+                      {t("content.medicalDisclaimer.content")}
                     </p>
                   </div>
                 </div>
@@ -689,10 +689,10 @@ export default async function ArticlePage({
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-6 sm:mb-8">
                   <h2 className="text-xl sm:text-2xl font-bold text-neutral-800 mb-2">
-                    {t('content.relatedArticles.title')}
+                    {t("content.relatedArticles.title")}
                   </h2>
                   <p className="text-sm sm:text-base text-neutral-600">
-                    {t('content.relatedArticles.subtitle')}
+                    {t("content.relatedArticles.subtitle")}
                   </p>
                 </div>
 
@@ -731,9 +731,7 @@ export default async function ArticlePage({
                             {relatedSummary}
                           </p>
                           <div className="flex items-center text-primary-600 text-sm font-medium">
-                            <span>
-                              {t('content.relatedArticles.readMore')}
-                            </span>
+                            <span>{t("content.relatedArticles.readMore")}</span>
                             <svg
                               className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
                               fill="none"
@@ -770,16 +768,16 @@ export default async function ArticlePage({
                       </svg>
                     </div>
                     <h3 className="text-lg font-semibold text-primary-600 mb-2">
-                      {t('content.relatedArticles.moreComing')}
+                      {t("content.relatedArticles.moreComing")}
                     </h3>
                     <p className="text-neutral-600 text-sm sm:text-base">
-                      {t('content.relatedArticles.description')}
+                      {t("content.relatedArticles.description")}
                     </p>
                     <Link
                       href={`/${locale}/downloads`}
                       className="inline-flex items-center mt-4 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm font-medium"
                     >
-                      {t('content.relatedArticles.browseAll')}
+                      {t("content.relatedArticles.browseAll")}
                       <svg
                         className="w-4 h-4 ml-2"
                         fill="none"

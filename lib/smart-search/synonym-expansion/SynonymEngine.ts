@@ -3,8 +3,8 @@
  * 实现查询的同义词扩展和语义扩展
  */
 
-import { MedicalSynonyms } from './MedicalSynonyms';
-import { QueryExpander } from './QueryExpander';
+import { MedicalSynonyms } from "./MedicalSynonyms";
+import { QueryExpander } from "./QueryExpander";
 
 export interface SynonymExpansionResult {
   originalQuery: string;
@@ -23,7 +23,7 @@ export interface SynonymExpansionOptions {
   maxSynonymsPerTerm: number;
   includeRelatedTerms: boolean;
   contextualExpansion: boolean;
-  languageMode: 'zh' | 'en' | 'mixed';
+  languageMode: "zh" | "en" | "mixed";
   medicalTermsOnly: boolean;
   confidenceThreshold: number;
 }
@@ -42,16 +42,16 @@ export class SynonymEngine {
    */
   async expandQuery(
     query: string,
-    options: Partial<SynonymExpansionOptions> = {}
+    options: Partial<SynonymExpansionOptions> = {},
   ): Promise<SynonymExpansionResult> {
     const opts: SynonymExpansionOptions = {
       maxSynonymsPerTerm: 3,
       includeRelatedTerms: true,
       contextualExpansion: true,
-      languageMode: 'mixed',
+      languageMode: "mixed",
       medicalTermsOnly: false,
       confidenceThreshold: 0.6,
-      ...options
+      ...options,
     };
 
     // 分词
@@ -77,7 +77,11 @@ export class SynonymEngine {
     }
 
     // 生成扩展查询
-    const expandedQuery = this.generateExpandedQuery(query, expandedTerms, opts);
+    const expandedQuery = this.generateExpandedQuery(
+      query,
+      expandedTerms,
+      opts,
+    );
 
     // 收集所有同义词用于兼容性
     const allSynonyms: string[] = [];
@@ -90,7 +94,7 @@ export class SynonymEngine {
       expandedQuery,
       synonyms: allSynonyms, // 添加synonyms属性
       expandedTerms,
-      expansionScore: expansionScore / Math.max(tokens.length, 1)
+      expansionScore: expansionScore / Math.max(tokens.length, 1),
     };
   }
 
@@ -99,16 +103,16 @@ export class SynonymEngine {
    */
   async getSynonyms(
     term: string,
-    options: Partial<SynonymExpansionOptions> = {}
+    options: Partial<SynonymExpansionOptions> = {},
   ): Promise<string[]> {
     const opts: SynonymExpansionOptions = {
       maxSynonymsPerTerm: 5,
       includeRelatedTerms: false,
       contextualExpansion: false,
-      languageMode: 'mixed',
+      languageMode: "mixed",
       medicalTermsOnly: false,
       confidenceThreshold: 0.5,
-      ...options
+      ...options,
     };
 
     return this.medicalSynonyms.getSynonyms(term, opts.maxSynonymsPerTerm);
@@ -120,12 +124,14 @@ export class SynonymEngine {
   async getRelatedTerms(
     term: string,
     context: string[] = [],
-    limit: number = 5
-  ): Promise<Array<{
-    term: string;
-    relation: string;
-    confidence: number;
-  }>> {
+    limit: number = 5,
+  ): Promise<
+    Array<{
+      term: string;
+      relation: string;
+      confidence: number;
+    }>
+  > {
     return this.medicalSynonyms.getRelatedTerms(term, context, limit);
   }
 
@@ -134,18 +140,18 @@ export class SynonymEngine {
    */
   async buildQueryVariants(
     query: string,
-    maxVariants: number = 5
+    maxVariants: number = 5,
   ): Promise<string[]> {
     const expansionResult = await this.expandQuery(query, {
       maxSynonymsPerTerm: 2,
       includeRelatedTerms: false,
-      contextualExpansion: true
+      contextualExpansion: true,
     });
 
     return this.queryExpander.generateQueryVariants(
       query,
       expansionResult.expandedTerms,
-      maxVariants
+      maxVariants,
     );
   }
 
@@ -156,7 +162,7 @@ export class SynonymEngine {
    */
   private async expandTerm(
     term: string,
-    options: SynonymExpansionOptions
+    options: SynonymExpansionOptions,
   ): Promise<{
     original: string;
     synonyms: string[];
@@ -168,7 +174,7 @@ export class SynonymEngine {
     // 获取基础同义词
     const basicSynonyms = this.medicalSynonyms.getSynonyms(
       cleanTerm,
-      options.maxSynonymsPerTerm
+      options.maxSynonymsPerTerm,
     );
 
     // 获取相关词条
@@ -176,25 +182,28 @@ export class SynonymEngine {
     if (options.includeRelatedTerms) {
       const related = await this.getRelatedTerms(cleanTerm, [], 2);
       relatedTerms = related
-        .filter(r => r.confidence >= options.confidenceThreshold)
-        .map(r => r.term);
+        .filter((r) => r.confidence >= options.confidenceThreshold)
+        .map((r) => r.term);
     }
 
     // 合并同义词和相关词
-    const allSynonyms = [...basicSynonyms, ...relatedTerms]
-      .slice(0, options.maxSynonymsPerTerm);
+    const allSynonyms = [...basicSynonyms, ...relatedTerms].slice(
+      0,
+      options.maxSynonymsPerTerm,
+    );
 
     // 计算置信度
     const confidence = this.calculateTermConfidence(cleanTerm, allSynonyms);
 
     // 获取词条分类
-    const category = this.medicalSynonyms.getTermCategory(cleanTerm) || 'general';
+    const category =
+      this.medicalSynonyms.getTermCategory(cleanTerm) || "general";
 
     return {
       original: cleanTerm,
       synonyms: allSynonyms,
       category,
-      confidence
+      confidence,
     };
   }
 
@@ -209,7 +218,7 @@ export class SynonymEngine {
       category: string;
       confidence: number;
     }>,
-    options: SynonymExpansionOptions
+    options: SynonymExpansionOptions,
   ): string {
     if (expandedTerms.length === 0) {
       return originalQuery;
@@ -220,7 +229,7 @@ export class SynonymEngine {
 
     // 添加高置信度的同义词
     const highConfidenceTerms = expandedTerms.filter(
-      term => term.confidence >= options.confidenceThreshold
+      (term) => term.confidence >= options.confidenceThreshold,
     );
 
     for (const termData of highConfidenceTerms) {
@@ -241,7 +250,7 @@ export class SynonymEngine {
    */
   private calculateTermConfidence(
     originalTerm: string,
-    synonyms: string[]
+    synonyms: string[],
   ): number {
     if (synonyms.length === 0) return 0;
 
@@ -266,8 +275,15 @@ export class SynonymEngine {
    */
   private isCommonTerm(term: string): boolean {
     const commonTerms = new Set([
-      '痛经', '疼痛', '缓解', '治疗', '药物',
-      'pain', 'relief', 'treatment', 'medicine'
+      "痛经",
+      "疼痛",
+      "缓解",
+      "治疗",
+      "药物",
+      "pain",
+      "relief",
+      "treatment",
+      "medicine",
     ]);
     return commonTerms.has(term.toLowerCase());
   }
@@ -278,7 +294,7 @@ export class SynonymEngine {
   private cleanTerm(term: string): string {
     return term
       .toLowerCase()
-      .replace(/[^\w\u4e00-\u9fff]/g, '')
+      .replace(/[^\w\u4e00-\u9fff]/g, "")
       .trim();
   }
 
@@ -289,8 +305,8 @@ export class SynonymEngine {
     // 简单的分词实现
     return query
       .toLowerCase()
-      .replace(/[^\w\s\u4e00-\u9fff]/g, ' ')
+      .replace(/[^\w\s\u4e00-\u9fff]/g, " ")
       .split(/\s+/)
-      .filter(token => token.length > 0);
+      .filter((token) => token.length > 0);
   }
 }

@@ -7,7 +7,7 @@ export interface ShareData {
 
 // 检查是否支持原生分享API
 export const isNativeShareSupported = (): boolean => {
-  return typeof navigator !== 'undefined' && 'share' in navigator;
+  return typeof navigator !== "undefined" && "share" in navigator;
 };
 
 // 原生分享功能
@@ -21,12 +21,12 @@ export const nativeShare = async (data: ShareData): Promise<boolean> => {
     return true;
   } catch (error) {
     // 用户取消分享是正常行为，不应该记录为错误
-    if (error instanceof Error && error.name === 'AbortError') {
+    if (error instanceof Error && error.name === "AbortError") {
       // 用户取消了分享，这是正常行为
       return false;
     }
     // 其他错误才记录
-    console.error('Native share failed:', error);
+    console.error("Native share failed:", error);
     return false;
   }
 };
@@ -39,20 +39,20 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
       return true;
     } else {
       // 降级方案
-      const textArea = document.createElement('textarea');
+      const textArea = document.createElement("textarea");
       textArea.value = text;
-      textArea.style.position = 'fixed';
-      textArea.style.left = '-999999px';
-      textArea.style.top = '-999999px';
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
       document.body.appendChild(textArea);
       textArea.focus();
       textArea.select();
-      const result = document.execCommand('copy');
+      const result = document.execCommand("copy");
       document.body.removeChild(textArea);
       return result;
     }
   } catch (error) {
-    console.error('Copy to clipboard failed:', error);
+    console.error("Copy to clipboard failed:", error);
     return false;
   }
 };
@@ -62,11 +62,11 @@ export const generateShareText = (
   score: number,
   totalQuestions: number,
   level: string,
-  locale: 'zh' | 'en'
+  locale: "zh" | "en",
 ): string => {
   const percentage = Math.round((score / totalQuestions) * 100);
 
-  if (locale === 'zh') {
+  if (locale === "zh") {
     return `我在Period Hub完成了伴侣理解度测试！得分：${score}/${totalQuestions} (${percentage}%)，等级：${level}。快来测试你对痛经的理解程度吧！`;
   } else {
     return `I completed the Partner Understanding Test on Period Hub! Score: ${score}/${totalQuestions} (${percentage}%), Level: ${level}. Test your understanding of period pain now!`;
@@ -74,87 +74,109 @@ export const generateShareText = (
 };
 
 // 生成分享URL
-export const generateShareUrl = (locale: 'zh' | 'en'): string => {
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.periodhub.health';
+export const generateShareUrl = (locale: "zh" | "en"): string => {
+  const baseUrl =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : "https://www.periodhub.health";
   return `${baseUrl}/${locale}/scenario-solutions/partnerCommunication`;
 };
 
 // Twitter分享
 export const shareToTwitter = (text: string, url: string): void => {
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-  window.open(twitterUrl, '_blank', 'width=600,height=400');
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    text,
+  )}&url=${encodeURIComponent(url)}`;
+  window.open(twitterUrl, "_blank", "width=600,height=400");
 };
 
 // WhatsApp分享
 export const shareToWhatsApp = (text: string, url: string): void => {
-  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`;
-  window.open(whatsappUrl, '_blank', 'width=600,height=400');
+  const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(
+    `${text} ${url}`,
+  )}`;
+  window.open(whatsappUrl, "_blank", "width=600,height=400");
 };
 
 // Facebook分享
 export const shareToFacebook = (url: string): void => {
-  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-  window.open(facebookUrl, '_blank', 'width=600,height=400');
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+    url,
+  )}`;
+  window.open(facebookUrl, "_blank", "width=600,height=400");
 };
 
 // 通用分享处理函数
 export const handleShare = async (
-  platform: 'native' | 'twitter' | 'whatsapp' | 'facebook' | 'copy',
+  platform: "native" | "twitter" | "whatsapp" | "facebook" | "copy",
   shareData: ShareData,
-  locale: 'zh' | 'en'
+  locale: "zh" | "en",
 ): Promise<{ success: boolean; message: string }> => {
   try {
     switch (platform) {
-      case 'native':
+      case "native":
         const nativeSuccess = await nativeShare(shareData);
         return {
           success: nativeSuccess,
           message: nativeSuccess
-            ? (locale === 'zh' ? '分享成功！' : 'Shared successfully!')
-            : '' // 用户取消分享时不显示消息
+            ? locale === "zh"
+              ? "分享成功！"
+              : "Shared successfully!"
+            : "", // 用户取消分享时不显示消息
         };
 
-      case 'twitter':
+      case "twitter":
         shareToTwitter(shareData.text, shareData.url);
         return {
           success: true,
-          message: locale === 'zh' ? '正在打开Twitter...' : 'Opening Twitter...'
+          message:
+            locale === "zh" ? "正在打开Twitter..." : "Opening Twitter...",
         };
 
-      case 'whatsapp':
+      case "whatsapp":
         shareToWhatsApp(shareData.text, shareData.url);
         return {
           success: true,
-          message: locale === 'zh' ? '正在打开WhatsApp...' : 'Opening WhatsApp...'
+          message:
+            locale === "zh" ? "正在打开WhatsApp..." : "Opening WhatsApp...",
         };
 
-      case 'facebook':
+      case "facebook":
         shareToFacebook(shareData.url);
         return {
           success: true,
-          message: locale === 'zh' ? '正在打开Facebook...' : 'Opening Facebook...'
+          message:
+            locale === "zh" ? "正在打开Facebook..." : "Opening Facebook...",
         };
 
-      case 'copy':
-        const copySuccess = await copyToClipboard(`${shareData.text} ${shareData.url}`);
+      case "copy":
+        const copySuccess = await copyToClipboard(
+          `${shareData.text} ${shareData.url}`,
+        );
         return {
           success: copySuccess,
           message: copySuccess
-            ? (locale === 'zh' ? '已复制到剪贴板！' : 'Copied to clipboard!')
-            : (locale === 'zh' ? '复制失败' : 'Copy failed')
+            ? locale === "zh"
+              ? "已复制到剪贴板！"
+              : "Copied to clipboard!"
+            : locale === "zh"
+              ? "复制失败"
+              : "Copy failed",
         };
 
       default:
         return {
           success: false,
-          message: locale === 'zh' ? '不支持的分享方式' : 'Unsupported share method'
+          message:
+            locale === "zh" ? "不支持的分享方式" : "Unsupported share method",
         };
     }
   } catch (error) {
-    console.error('Share error:', error);
+    console.error("Share error:", error);
     return {
       success: false,
-      message: locale === 'zh' ? '分享出错，请重试' : 'Share error, please try again'
+      message:
+        locale === "zh" ? "分享出错，请重试" : "Share error, please try again",
     };
   }
 };

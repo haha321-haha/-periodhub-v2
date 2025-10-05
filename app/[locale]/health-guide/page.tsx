@@ -19,8 +19,10 @@ function getHealthGuideRecommendations(locale: string, t: any) {
     relatedTools: [
       {
         id: "symptom-assessment",
-        title: t('recommendations.relatedTools.symptomAssessment.title'),
-        description: t('recommendations.relatedTools.symptomAssessment.description'),
+        title: t("recommendations.relatedTools.symptomAssessment.title"),
+        description: t(
+          "recommendations.relatedTools.symptomAssessment.description",
+        ),
         href: `/${locale}/interactive-tools/symptom-assessment`,
         icon: "🔍",
         priority: "high",
@@ -29,8 +31,8 @@ function getHealthGuideRecommendations(locale: string, t: any) {
       },
       {
         id: "pain-tracker",
-        title: t('recommendations.relatedTools.painTracker.title'),
-        description: t('recommendations.relatedTools.painTracker.description'),
+        title: t("recommendations.relatedTools.painTracker.title"),
+        description: t("recommendations.relatedTools.painTracker.description"),
         href: `/${locale}/interactive-tools/pain-tracker`,
         icon: "📊",
         priority: "high",
@@ -39,8 +41,10 @@ function getHealthGuideRecommendations(locale: string, t: any) {
       },
       {
         id: "period-pain-impact-calculator",
-        title: t('recommendations.relatedTools.painImpactCalculator.title'),
-        description: t('recommendations.relatedTools.painImpactCalculator.description'),
+        title: t("recommendations.relatedTools.painImpactCalculator.title"),
+        description: t(
+          "recommendations.relatedTools.painImpactCalculator.description",
+        ),
         href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
         icon: "🧮",
         priority: "high",
@@ -51,33 +55,37 @@ function getHealthGuideRecommendations(locale: string, t: any) {
     relatedArticles: [
       {
         id: "comprehensive-medical-guide-to-dysmenorrhea",
-        title: t('recommendations.relatedArticles.medicalGuide.title'),
-        description: t('recommendations.relatedArticles.medicalGuide.description'),
+        title: t("recommendations.relatedArticles.medicalGuide.title"),
+        description: t(
+          "recommendations.relatedArticles.medicalGuide.description",
+        ),
         href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
-        readTime: t('recommendations.relatedArticles.medicalGuide.readTime'),
-        category: t('recommendations.relatedArticles.medicalGuide.category'),
+        readTime: t("recommendations.relatedArticles.medicalGuide.readTime"),
+        category: t("recommendations.relatedArticles.medicalGuide.category"),
         priority: "high",
         icon: "📋",
         anchorTextType: "medical_guide",
       },
       {
         id: "when-to-seek-medical-care-comprehensive-guide",
-        title: t('recommendations.relatedArticles.medicalCare.title'),
-        description: t('recommendations.relatedArticles.medicalCare.description'),
+        title: t("recommendations.relatedArticles.medicalCare.title"),
+        description: t(
+          "recommendations.relatedArticles.medicalCare.description",
+        ),
         href: `/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`,
-        readTime: t('recommendations.relatedArticles.medicalCare.readTime'),
-        category: t('recommendations.relatedArticles.medicalCare.category'),
+        readTime: t("recommendations.relatedArticles.medicalCare.readTime"),
+        category: t("recommendations.relatedArticles.medicalCare.category"),
         priority: "high",
         icon: "🏥",
         anchorTextType: "medical",
       },
       {
         id: "menstrual-pain-faq-expert-answers",
-        title: t('recommendations.relatedArticles.faq.title'),
-        description: t('recommendations.relatedArticles.faq.description'),
+        title: t("recommendations.relatedArticles.faq.title"),
+        description: t("recommendations.relatedArticles.faq.description"),
         href: `/${locale}/articles/menstrual-pain-faq-expert-answers`,
-        readTime: t('recommendations.relatedArticles.faq.readTime'),
-        category: t('recommendations.relatedArticles.faq.category'),
+        readTime: t("recommendations.relatedArticles.faq.readTime"),
+        category: t("recommendations.relatedArticles.faq.category"),
         priority: "medium",
         icon: "❓",
         anchorTextType: "faq",
@@ -86,8 +94,10 @@ function getHealthGuideRecommendations(locale: string, t: any) {
     healthTopics: [
       {
         id: "natural-therapies",
-        title: t('recommendations.healthTopics.naturalTherapies.title'),
-        description: t('recommendations.healthTopics.naturalTherapies.description'),
+        title: t("recommendations.healthTopics.naturalTherapies.title"),
+        description: t(
+          "recommendations.healthTopics.naturalTherapies.description",
+        ),
         href: `/${locale}/natural-therapies`,
         icon: "🌿",
         priority: "high",
@@ -95,8 +105,10 @@ function getHealthGuideRecommendations(locale: string, t: any) {
       },
       {
         id: "scenario-solutions",
-        title: t('recommendations.healthTopics.scenarioSolutions.title'),
-        description: t('recommendations.healthTopics.scenarioSolutions.description'),
+        title: t("recommendations.healthTopics.scenarioSolutions.title"),
+        description: t(
+          "recommendations.healthTopics.scenarioSolutions.description",
+        ),
         href: `/${locale}/scenario-solutions`,
         icon: "🎯",
         priority: "high",
@@ -104,8 +116,8 @@ function getHealthGuideRecommendations(locale: string, t: any) {
       },
       {
         id: "teen-health",
-        title: t('recommendations.healthTopics.teenHealth.title'),
-        description: t('recommendations.healthTopics.teenHealth.description'),
+        title: t("recommendations.healthTopics.teenHealth.title"),
+        description: t("recommendations.healthTopics.teenHealth.description"),
         href: `/${locale}/teen-health`,
         icon: "🌸",
         priority: "medium",
@@ -250,12 +262,10 @@ export default async function HealthGuidePage({
           {/* Breadcrumb */}
           <nav className="text-sm text-neutral-600">
             <Link href={`/${locale}`} className="hover:text-primary-600">
-              {t('breadcrumb.home')}
+              {t("breadcrumb.home")}
             </Link>
             <span className="mx-2">›</span>
-            <span className="text-neutral-800">
-              {t('breadcrumb.current')}
-            </span>
+            <span className="text-neutral-800">{t("breadcrumb.current")}</span>
           </nav>
 
           {/* Page Header */}

@@ -3,7 +3,7 @@
  * 计算两个向量之间的余弦相似度
  */
 
-import { TFIDFVector } from './TFIDFVectorizer';
+import { TFIDFVector } from "./TFIDFVectorizer";
 
 export interface SimilarityResult {
   documentId: string;
@@ -33,7 +33,7 @@ export class CosineSimilarity {
    */
   static calculateBatch(
     queryVector: TFIDFVector,
-    documentVectors: TFIDFVector[]
+    documentVectors: TFIDFVector[],
   ): SimilarityResult[] {
     const results: SimilarityResult[] = [];
 
@@ -46,7 +46,7 @@ export class CosineSimilarity {
         documentId: docVector.documentId,
         similarity,
         matchedTerms,
-        explanation
+        explanation,
       });
     }
 
@@ -59,7 +59,7 @@ export class CosineSimilarity {
   static getTopSimilar(
     queryVector: TFIDFVector,
     documentVectors: TFIDFVector[],
-    topN: number = 10
+    topN: number = 10,
   ): SimilarityResult[] {
     const results = this.calculateBatch(queryVector, documentVectors);
     return results.slice(0, topN);
@@ -91,7 +91,7 @@ export class CosineSimilarity {
   static findMostSimilar(
     targetVector: TFIDFVector,
     candidateVectors: TFIDFVector[],
-    excludeIds: string[] = []
+    excludeIds: string[] = [],
   ): SimilarityResult | null {
     let maxSimilarity = -1;
     let mostSimilar: SimilarityResult | null = null;
@@ -110,7 +110,7 @@ export class CosineSimilarity {
           documentId: candidate.documentId,
           similarity,
           matchedTerms,
-          explanation: this.generateExplanation(similarity, matchedTerms)
+          explanation: this.generateExplanation(similarity, matchedTerms),
         };
       }
     }
@@ -124,10 +124,10 @@ export class CosineSimilarity {
   static filterBySimilarity(
     queryVector: TFIDFVector,
     documentVectors: TFIDFVector[],
-    threshold: number = 0.1
+    threshold: number = 0.1,
   ): SimilarityResult[] {
     const results = this.calculateBatch(queryVector, documentVectors);
-    return results.filter(result => result.similarity >= threshold);
+    return results.filter((result) => result.similarity >= threshold);
   }
 
   // ========== 私有方法 ==========
@@ -135,7 +135,10 @@ export class CosineSimilarity {
   /**
    * 计算两个向量的点积
    */
-  private static dotProduct(vector1: TFIDFVector, vector2: TFIDFVector): number {
+  private static dotProduct(
+    vector1: TFIDFVector,
+    vector2: TFIDFVector,
+  ): number {
     let product = 0;
 
     // 创建词条到值的映射
@@ -158,7 +161,10 @@ export class CosineSimilarity {
   /**
    * 获取匹配的词条
    */
-  private static getMatchedTerms(vector1: TFIDFVector, vector2: TFIDFVector): string[] {
+  private static getMatchedTerms(
+    vector1: TFIDFVector,
+    vector2: TFIDFVector,
+  ): string[] {
     const vector1Terms = new Set(vector1.terms);
     const matchedTerms: string[] = [];
 
@@ -174,23 +180,34 @@ export class CosineSimilarity {
   /**
    * 生成相似度解释
    */
-  private static generateExplanation(similarity: number, matchedTerms: string[]): string {
+  private static generateExplanation(
+    similarity: number,
+    matchedTerms: string[],
+  ): string {
     if (similarity === 0) {
-      return '没有找到相关词汇匹配';
+      return "没有找到相关词汇匹配";
     }
 
     if (similarity < 0.1) {
-      return `相似度较低 (${(similarity * 100).toFixed(1)}%)，匹配词汇: ${matchedTerms.slice(0, 3).join(', ')}`;
+      return `相似度较低 (${(similarity * 100).toFixed(
+        1,
+      )}%)，匹配词汇: ${matchedTerms.slice(0, 3).join(", ")}`;
     }
 
     if (similarity < 0.3) {
-      return `相似度一般 (${(similarity * 100).toFixed(1)}%)，主要匹配: ${matchedTerms.slice(0, 5).join(', ')}`;
+      return `相似度一般 (${(similarity * 100).toFixed(
+        1,
+      )}%)，主要匹配: ${matchedTerms.slice(0, 5).join(", ")}`;
     }
 
     if (similarity < 0.6) {
-      return `相似度较高 (${(similarity * 100).toFixed(1)}%)，强匹配词汇: ${matchedTerms.slice(0, 7).join(', ')}`;
+      return `相似度较高 (${(similarity * 100).toFixed(
+        1,
+      )}%)，强匹配词汇: ${matchedTerms.slice(0, 7).join(", ")}`;
     }
 
-    return `相似度很高 (${(similarity * 100).toFixed(1)}%)，高度匹配: ${matchedTerms.join(', ')}`;
+    return `相似度很高 (${(similarity * 100).toFixed(
+      1,
+    )}%)，高度匹配: ${matchedTerms.join(", ")}`;
   }
 }

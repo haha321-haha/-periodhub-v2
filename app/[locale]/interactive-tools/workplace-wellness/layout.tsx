@@ -3,24 +3,24 @@
  * 处理Meta信息和结构化数据
  */
 
-import type { Metadata } from 'next';
-import { Locale } from '@/i18n';
+import type { Metadata } from "next";
+import { Locale } from "@/i18n";
 import {
   generatePageMetadata,
   getWorkplaceWellnessSEOData,
-  generateAllStructuredData
-} from './utils/seoOptimization';
+  generateAllStructuredData,
+} from "./utils/seoOptimization";
 
 // 生成静态参数
 export async function generateStaticParams() {
-  return [{ locale: 'zh' }, { locale: 'en' }];
+  return [{ locale: "zh" }, { locale: "en" }];
 }
 
 // 生成Meta信息
 export async function generateMetadata({
-  params
+  params,
 }: {
-  params: Promise<{ locale: Locale }>
+  params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
   const seoData = getWorkplaceWellnessSEOData();
@@ -32,9 +32,9 @@ export async function generateMetadata({
       googleBot: {
         index: true,
         follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
       },
     },
     verification: {
@@ -45,7 +45,7 @@ export async function generateMetadata({
 
 export default async function WorkplaceWellnessLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: Locale }>;

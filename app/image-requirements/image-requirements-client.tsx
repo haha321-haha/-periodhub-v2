@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React from 'react';
-import ImagePlaceholder from '@/components/ImagePlaceholder';
+import React from "react";
+import ImagePlaceholder from "@/components/ImagePlaceholder";
 
 export default function ImageRequirementsClient() {
   const imageRequirements = [
@@ -15,10 +15,11 @@ export default function ImageRequirementsClient() {
           width: 800,
           height: 450,
           path: "/public/images/hero/",
-          description: "Warm and professional healthcare illustration, young diverse women in comfortable poses, soft pink and blue gradient background, modern minimalist style, conveying comfort and medical trust"
-        }
-      ]
-    }
+          description:
+            "Warm and professional healthcare illustration, young diverse women in comfortable poses, soft pink and blue gradient background, modern minimalist style, conveying comfort and medical trust",
+        },
+      ],
+    },
   ];
 
   return (
@@ -31,14 +32,20 @@ export default function ImageRequirementsClient() {
 
           <div className="space-y-8">
             {imageRequirements.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="border border-gray-200 rounded-lg p-6">
+              <div
+                key={categoryIndex}
+                className="border border-gray-200 rounded-lg p-6"
+              >
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
                   {category.category}
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {category.images.map((image, imageIndex) => (
-                    <div key={imageIndex} className="border border-gray-200 rounded-lg p-4">
+                    <div
+                      key={imageIndex}
+                      className="border border-gray-200 rounded-lg p-4"
+                    >
                       <div className="aspect-video bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
                         <ImagePlaceholder
                           filename={image.filename}

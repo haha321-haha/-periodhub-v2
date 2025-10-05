@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 export interface PerformanceMetrics {
   loadTime: number;
@@ -51,9 +51,9 @@ export const usePerformanceOptimization = () => {
 
     // Monitor memory usage
     const updateMemoryUsage = () => {
-      if ('memory' in performance) {
+      if ("memory" in performance) {
         const memory = (performance as any).memory;
-        setMetrics(prev => ({
+        setMetrics((prev) => ({
           ...prev,
           memoryUsage: Math.round(memory.usedJSHeapSize / 1024 / 1024), // MB
         }));
@@ -66,7 +66,7 @@ export const usePerformanceOptimization = () => {
 
     window.fetch = (...args) => {
       requestCount++;
-      setMetrics(prev => ({
+      setMetrics((prev) => ({
         ...prev,
         networkRequests: requestCount,
       }));
@@ -78,7 +78,7 @@ export const usePerformanceOptimization = () => {
       updateMemoryUsage();
 
       const loadTime = performance.now() - loadStart;
-      setMetrics(prev => ({
+      setMetrics((prev) => ({
         ...prev,
         loadTime: Math.round(loadTime),
       }));
@@ -92,33 +92,39 @@ export const usePerformanceOptimization = () => {
   }, []);
 
   // Debounced function wrapper
-  const debounce = useCallback(<T extends (...args: any[]) => any>(
-    func: T,
-    delay: number = config.debounceDelay
-  ): T => {
-    let timeoutId: NodeJS.Timeout;
+  const debounce = useCallback(
+    <T extends (...args: any[]) => any>(
+      func: T,
+      delay: number = config.debounceDelay,
+    ): T => {
+      let timeoutId: NodeJS.Timeout;
 
-    return ((...args: Parameters<T>) => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => func(...args), delay);
-    }) as T;
-  }, [config.debounceDelay]);
+      return ((...args: Parameters<T>) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func(...args), delay);
+      }) as T;
+    },
+    [config.debounceDelay],
+  );
 
   // Throttled function wrapper
-  const throttle = useCallback(<T extends (...args: any[]) => any>(
-    func: T,
-    delay: number = config.debounceDelay
-  ): T => {
-    let lastCall = 0;
+  const throttle = useCallback(
+    <T extends (...args: any[]) => any>(
+      func: T,
+      delay: number = config.debounceDelay,
+    ): T => {
+      let lastCall = 0;
 
-    return ((...args: Parameters<T>) => {
-      const now = Date.now();
-      if (now - lastCall >= delay) {
-        lastCall = now;
-        func(...args);
-      }
-    }) as T;
-  }, [config.debounceDelay]);
+      return ((...args: Parameters<T>) => {
+        const now = Date.now();
+        if (now - lastCall >= delay) {
+          lastCall = now;
+          func(...args);
+        }
+      }) as T;
+    },
+    [config.debounceDelay],
+  );
 
   // Memoized value wrapper
   const memoize = useCallback(<T>(value: T, deps: React.DependencyList): T => {
@@ -126,78 +132,96 @@ export const usePerformanceOptimization = () => {
   }, []);
 
   // Lazy loading helper
-  const lazyLoad = useCallback((importFn: () => Promise<any>) => {
-    if (!config.enableLazyLoading) {
-      return importFn();
-    }
+  const lazyLoad = useCallback(
+    (importFn: () => Promise<any>) => {
+      if (!config.enableLazyLoading) {
+        return importFn();
+      }
 
-    return new Promise((resolve, reject) => {
-      const timeout = setTimeout(() => {
-        reject(new Error('Lazy loading timeout'));
-      }, 10000); // 10 second timeout
+      return new Promise((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(new Error("Lazy loading timeout"));
+        }, 10000); // 10 second timeout
 
-      importFn()
-        .then((module) => {
-          clearTimeout(timeout);
-          resolve(module);
-        })
-        .catch((error) => {
-          clearTimeout(timeout);
-          reject(error);
-        });
-    });
-  }, [config.enableLazyLoading]);
+        importFn()
+          .then((module) => {
+            clearTimeout(timeout);
+            resolve(module);
+          })
+          .catch((error) => {
+            clearTimeout(timeout);
+            reject(error);
+          });
+      });
+    },
+    [config.enableLazyLoading],
+  );
 
   // Cache management
   const cache = useMemo(() => new Map<string, any>(), []);
 
-  const getCachedValue = useCallback((key: string) => {
-    return cache.get(key);
-  }, [cache]);
+  const getCachedValue = useCallback(
+    (key: string) => {
+      return cache.get(key);
+    },
+    [cache],
+  );
 
-  const setCachedValue = useCallback((key: string, value: any) => {
-    // Check cache size limit
-    if (cache.size >= config.maxCacheSize) {
-      const firstKey = cache.keys().next().value;
-      cache.delete(firstKey);
-    }
-    cache.set(key, value);
-  }, [cache, config.maxCacheSize]);
+  const setCachedValue = useCallback(
+    (key: string, value: any) => {
+      // Check cache size limit
+      if (cache.size >= config.maxCacheSize) {
+        const firstKey = cache.keys().next().value;
+        cache.delete(firstKey);
+      }
+      cache.set(key, value);
+    },
+    [cache, config.maxCacheSize],
+  );
 
   const clearCache = useCallback(() => {
     cache.clear();
   }, [cache]);
 
   // Image optimization
-  const optimizeImage = useCallback((src: string, options: {
-    width?: number;
-    height?: number;
-    quality?: number;
-    format?: 'webp' | 'jpeg' | 'png';
-  } = {}) => {
-    if (!config.enableImageOptimization) {
-      return src;
-    }
+  const optimizeImage = useCallback(
+    (
+      src: string,
+      options: {
+        width?: number;
+        height?: number;
+        quality?: number;
+        format?: "webp" | "jpeg" | "png";
+      } = {},
+    ) => {
+      if (!config.enableImageOptimization) {
+        return src;
+      }
 
-    const { width, height, quality = 80, format = 'webp' } = options;
-    const params = new URLSearchParams();
+      const { width, height, quality = 80, format = "webp" } = options;
+      const params = new URLSearchParams();
 
-    if (width) params.set('w', width.toString());
-    if (height) params.set('h', height.toString());
-    params.set('q', quality.toString());
-    params.set('f', format);
+      if (width) params.set("w", width.toString());
+      if (height) params.set("h", height.toString());
+      params.set("q", quality.toString());
+      params.set("f", format);
 
-    return `${src}?${params.toString()}`;
-  }, [config.enableImageOptimization]);
+      return `${src}?${params.toString()}`;
+    },
+    [config.enableImageOptimization],
+  );
 
   // Bundle analysis (development only)
   const analyzeBundle = useCallback(() => {
-    if (!config.enableBundleAnalysis || process.env.NODE_ENV !== 'development') {
+    if (
+      !config.enableBundleAnalysis ||
+      process.env.NODE_ENV !== "development"
+    ) {
       return null;
     }
 
     // This would integrate with webpack-bundle-analyzer or similar tools
-    console.log('Bundle analysis would be performed here');
+    console.log("Bundle analysis would be performed here");
     return {
       totalSize: 0,
       chunkSizes: {},
@@ -210,19 +234,27 @@ export const usePerformanceOptimization = () => {
     const recommendations: string[] = [];
 
     if (metrics.loadTime > 3000) {
-      recommendations.push('Consider implementing code splitting to reduce initial bundle size');
+      recommendations.push(
+        "Consider implementing code splitting to reduce initial bundle size",
+      );
     }
 
     if (metrics.memoryUsage > 100) {
-      recommendations.push('High memory usage detected. Consider optimizing component rendering');
+      recommendations.push(
+        "High memory usage detected. Consider optimizing component rendering",
+      );
     }
 
     if (metrics.networkRequests > 20) {
-      recommendations.push('High number of network requests. Consider implementing request batching');
+      recommendations.push(
+        "High number of network requests. Consider implementing request batching",
+      );
     }
 
     if (metrics.cacheHitRate < 0.5) {
-      recommendations.push('Low cache hit rate. Consider improving caching strategy');
+      recommendations.push(
+        "Low cache hit rate. Consider improving caching strategy",
+      );
     }
 
     return recommendations;
@@ -230,7 +262,7 @@ export const usePerformanceOptimization = () => {
 
   // Update configuration
   const updateConfig = useCallback((newConfig: Partial<PerformanceConfig>) => {
-    setConfig(prev => ({ ...prev, ...newConfig }));
+    setConfig((prev) => ({ ...prev, ...newConfig }));
   }, []);
 
   // Reset metrics

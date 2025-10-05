@@ -3,13 +3,13 @@
  * 提供统一的 locale 验证和处理逻辑
  */
 
-import { locales, defaultLocale, type Locale } from '@/i18n/request';
+import { locales, defaultLocale, type Locale } from "@/i18n/request";
 
 /**
  * 验证 locale 是否有效
  */
 export function isValidLocale(locale: unknown): locale is Locale {
-  return typeof locale === 'string' && locales.includes(locale as Locale);
+  return typeof locale === "string" && locales.includes(locale as Locale);
 }
 
 /**
@@ -21,8 +21,10 @@ export function getValidLocale(locale: unknown): Locale {
   }
 
   // 记录警告（仅在客户端）
-  if (typeof window !== 'undefined') {
-    console.warn(`[LocaleUtils] Invalid locale '${locale}', falling back to '${defaultLocale}'`);
+  if (typeof window !== "undefined") {
+    console.warn(
+      `[LocaleUtils] Invalid locale '${locale}', falling back to '${defaultLocale}'`,
+    );
   }
 
   return defaultLocale;
@@ -31,18 +33,24 @@ export function getValidLocale(locale: unknown): Locale {
 /**
  * 安全地设置请求 locale
  */
-export function safeSetRequestLocale(locale: unknown, setRequestLocale: (locale: string) => void): Locale {
+export function safeSetRequestLocale(
+  locale: unknown,
+  setRequestLocale: (locale: string) => void,
+): Locale {
   const validLocale = getValidLocale(locale);
 
   try {
     setRequestLocale(validLocale);
   } catch (error) {
-    console.error('[LocaleUtils] Failed to set request locale:', error);
+    console.error("[LocaleUtils] Failed to set request locale:", error);
     // 尝试设置默认 locale
     try {
       setRequestLocale(defaultLocale);
     } catch (fallbackError) {
-      console.error('[LocaleUtils] Failed to set default locale:', fallbackError);
+      console.error(
+        "[LocaleUtils] Failed to set default locale:",
+        fallbackError,
+      );
     }
   }
 
@@ -53,7 +61,7 @@ export function safeSetRequestLocale(locale: unknown, setRequestLocale: (locale:
  * 从 URL 路径中提取 locale
  */
 export function extractLocaleFromPath(pathname: string): string | null {
-  const segments = pathname.split('/').filter(Boolean);
+  const segments = pathname.split("/").filter(Boolean);
   const firstSegment = segments[0];
 
   if (isValidLocale(firstSegment)) {
@@ -68,8 +76,8 @@ export function extractLocaleFromPath(pathname: string): string | null {
  */
 export function getLocaleDisplayName(locale: Locale): string {
   const displayNames = {
-    zh: '中文',
-    en: 'English'
+    zh: "中文",
+    en: "English",
   };
 
   return displayNames[locale] || locale;
@@ -88,8 +96,8 @@ export function isRTL(locale: Locale): boolean {
  */
 export function getHTMLLang(locale: Locale): string {
   const htmlLangs = {
-    zh: 'zh',
-    en: 'en'
+    zh: "zh",
+    en: "en",
   };
 
   return htmlLangs[locale] || locale;

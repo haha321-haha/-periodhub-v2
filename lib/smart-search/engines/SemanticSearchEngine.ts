@@ -9,8 +9,8 @@ import {
   SearchResponse,
   SearchResult,
   UnifiedSearchConfig,
-  SemanticSearchOptions
-} from '../types';
+  SemanticSearchOptions,
+} from "../types";
 
 export class SemanticSearchEngine implements ISemanticSearchEngine {
   private config: UnifiedSearchConfig;
@@ -31,11 +31,14 @@ export class SemanticSearchEngine implements ISemanticSearchEngine {
       hasMore: false,
       suggestions: [],
       relatedQueries: [],
-      recommendations: []
+      recommendations: [],
     };
   }
 
-  async semanticSearch(query: string, options: SemanticSearchOptions): Promise<SearchResult[]> {
+  async semanticSearch(
+    query: string,
+    options: SemanticSearchOptions,
+  ): Promise<SearchResult[]> {
     // TODO: 实现语义搜索逻辑
     return [];
   }
@@ -44,7 +47,10 @@ export class SemanticSearchEngine implements ISemanticSearchEngine {
     return [];
   }
 
-  async getRecommendations(userId: string, limit: number = 10): Promise<SearchResult[]> {
+  async getRecommendations(
+    userId: string,
+    limit: number = 10,
+  ): Promise<SearchResult[]> {
     return [];
   }
 

@@ -30,7 +30,7 @@ export async function generateMetadata({
   return {
     title: t("meta.title"),
     description: t("meta.description"),
-    keywords: t('keywords').split(','),
+    keywords: t("keywords").split(","),
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"

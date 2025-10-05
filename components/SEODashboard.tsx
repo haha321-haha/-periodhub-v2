@@ -1,7 +1,6 @@
+"use client";
 
-'use client';
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface SEOMetrics {
   score: number;
@@ -24,11 +23,11 @@ export function SEODashboard() {
 
   const fetchSEOMetrics = async () => {
     try {
-      const response = await fetch('/api/seo/metrics');
+      const response = await fetch("/api/seo/metrics");
       const data = await response.json();
       setMetrics(data);
     } catch (error) {
-      console.error('获取SEO指标失败:', error);
+      console.error("获取SEO指标失败:", error);
     } finally {
       setLoading(false);
     }

@@ -6,24 +6,34 @@ import {
   TrendPoint,
   ChartOptimizationOptions,
   ChartPerformanceMetrics,
-  PainTrackerError
-} from '../../../types/pain-tracker';
+  PainTrackerError,
+} from "../../../types/pain-tracker";
 
 export interface ChartPerformanceOptimizerInterface {
-  optimizeDataForChart(data: any[], chartType: string, options?: ChartOptimizationOptions): Promise<any[]>;
-  sampleLargeDataset(data: any[], maxPoints: number, method?: 'uniform' | 'adaptive' | 'importance'): any[];
+  optimizeDataForChart(
+    data: any[],
+    chartType: string,
+    options?: ChartOptimizationOptions,
+  ): Promise<any[]>;
+  sampleLargeDataset(
+    data: any[],
+    maxPoints: number,
+    method?: "uniform" | "adaptive" | "importance",
+  ): any[];
   createDataBuckets(data: TrendPoint[], bucketSize: number): TrendPoint[];
   optimizeChartOptions(baseOptions: any, dataSize: number): any;
   measureChartPerformance(renderFunction: () => void): ChartPerformanceMetrics;
   shouldUseVirtualization(dataSize: number, chartType: string): boolean;
 }
 
-export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInterface {
+export class ChartPerformanceOptimizer
+  implements ChartPerformanceOptimizerInterface
+{
   private performanceThresholds = {
     small: 50,
     medium: 200,
     large: 1000,
-    xlarge: 5000
+    xlarge: 5000,
   };
 
   private optimizationSettings = {
@@ -32,7 +42,7 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
     maxPointsForStatic: 1000,
     bucketSizeThreshold: 100,
     animationDisableThreshold: 500,
-    tooltipOptimizeThreshold: 1000
+    tooltipOptimizeThreshold: 1000,
   };
 
   /**
@@ -41,15 +51,15 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
   async optimizeDataForChart(
     data: any[],
     chartType: string,
-    options?: ChartOptimizationOptions
+    options?: ChartOptimizationOptions,
   ): Promise<any[]> {
     try {
       const dataSize = data.length;
       const opts = {
         maxPoints: this.getMaxPointsForChartType(chartType),
-        samplingMethod: 'adaptive' as const,
+        samplingMethod: "adaptive" as const,
         preserveImportantPoints: true,
-        ...options
+        ...options,
       };
 
       // No optimization needed for small datasets
@@ -67,9 +77,9 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
       }
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to optimize chart data',
-        'CHART_ERROR',
-        error
+        "Failed to optimize chart data",
+        "CHART_ERROR",
+        error,
       );
     }
   }
@@ -80,18 +90,18 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
   sampleLargeDataset(
     data: any[],
     maxPoints: number,
-    method: 'uniform' | 'adaptive' | 'importance' = 'adaptive'
+    method: "uniform" | "adaptive" | "importance" = "adaptive",
   ): any[] {
     if (data.length <= maxPoints) {
       return data;
     }
 
     switch (method) {
-      case 'uniform':
+      case "uniform":
         return this.uniformSampling(data, maxPoints);
-      case 'adaptive':
+      case "adaptive":
         return this.adaptiveSampling(data, maxPoints);
-      case 'importance':
+      case "importance":
         return this.importanceSampling(data, maxPoints);
       default:
         return this.uniformSampling(data, maxPoints);
@@ -107,8 +117,8 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
     }
 
     const buckets: TrendPoint[] = [];
-    const sortedData = [...data].sort((a, b) =>
-      new Date(a.date).getTime() - new Date(b.date).getTime()
+    const sortedData = [...data].sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
     );
 
     for (let i = 0; i < sortedData.length; i += bucketSize) {
@@ -131,7 +141,7 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
       optimizedOptions.animation = false;
       optimizedOptions.transitions = {
         active: { animation: { duration: 0 } },
-        resize: { animation: { duration: 0 } }
+        resize: { animation: { duration: 0 } },
       };
     }
 
@@ -142,8 +152,8 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
         tooltip: {
           ...optimizedOptions.plugins?.tooltip,
           enabled: false, // Disable tooltips for performance
-          external: this.createOptimizedTooltip // Use custom lightweight tooltip
-        }
+          external: this.createOptimizedTooltip, // Use custom lightweight tooltip
+        },
       };
     }
 
@@ -157,16 +167,16 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
             ...optimizedOptions.scales?.x?.ticks,
             maxTicksLimit: 10, // Limit number of x-axis ticks
             autoSkip: true,
-            autoSkipPadding: 10
-          }
+            autoSkipPadding: 10,
+          },
         },
         y: {
           ...optimizedOptions.scales?.y,
           ticks: {
             ...optimizedOptions.scales?.y?.ticks,
-            maxTicksLimit: 8 // Limit number of y-axis ticks
-          }
-        }
+            maxTicksLimit: 8, // Limit number of y-axis ticks
+          },
+        },
       };
     }
 
@@ -175,19 +185,21 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
       optimizedOptions.interaction = {
         ...optimizedOptions.interaction,
         intersect: false,
-        mode: 'nearest'
+        mode: "nearest",
       };
     }
 
     // Disable point rendering for very large line charts
     if (dataSize > this.performanceThresholds.large) {
       if (optimizedOptions.datasets) {
-        optimizedOptions.datasets = optimizedOptions.datasets.map((dataset: any) => ({
-          ...dataset,
-          pointRadius: 0,
-          pointHoverRadius: 3,
-          pointHitRadius: 5
-        }));
+        optimizedOptions.datasets = optimizedOptions.datasets.map(
+          (dataset: any) => ({
+            ...dataset,
+            pointRadius: 0,
+            pointHoverRadius: 3,
+            pointHitRadius: 5,
+          }),
+        );
       }
     }
 
@@ -209,7 +221,7 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
     return {
       renderTime: endTime - startTime,
       memoryUsed: endMemory - startMemory,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
   }
 
@@ -222,10 +234,12 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
       bar: this.performanceThresholds.medium,
       scatter: this.performanceThresholds.medium,
       pie: this.performanceThresholds.small,
-      doughnut: this.performanceThresholds.small
+      doughnut: this.performanceThresholds.small,
     };
 
-    const threshold = thresholds[chartType as keyof typeof thresholds] || this.performanceThresholds.medium;
+    const threshold =
+      thresholds[chartType as keyof typeof thresholds] ||
+      this.performanceThresholds.medium;
     return dataSize > threshold;
   }
 
@@ -257,43 +271,67 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
       scatter: this.optimizationSettings.maxPointsForInteractive,
       pie: 20,
       doughnut: 20,
-      radar: 10
+      radar: 10,
     };
 
-    return limits[chartType as keyof typeof limits] || this.optimizationSettings.maxPointsForStatic;
+    return (
+      limits[chartType as keyof typeof limits] ||
+      this.optimizationSettings.maxPointsForStatic
+    );
   }
 
   private lightOptimization(data: any[], chartType: string): any[] {
     // For medium datasets, just remove unnecessary properties
-    return data.map(point => this.cleanDataPoint(point));
+    return data.map((point) => this.cleanDataPoint(point));
   }
 
-  private mediumOptimization(data: any[], chartType: string, options: ChartOptimizationOptions): any[] {
+  private mediumOptimization(
+    data: any[],
+    chartType: string,
+    options: ChartOptimizationOptions,
+  ): any[] {
     // Apply sampling if needed
-    const maxPoints = options.maxPoints || this.getMaxPointsForChartType(chartType);
+    const maxPoints =
+      options.maxPoints || this.getMaxPointsForChartType(chartType);
     let optimizedData = data;
 
     if (data.length > maxPoints) {
-      optimizedData = this.sampleLargeDataset(data, maxPoints, options.samplingMethod);
+      optimizedData = this.sampleLargeDataset(
+        data,
+        maxPoints,
+        options.samplingMethod,
+      );
     }
 
-    return optimizedData.map(point => this.cleanDataPoint(point));
+    return optimizedData.map((point) => this.cleanDataPoint(point));
   }
 
-  private heavyOptimization(data: any[], chartType: string, options: ChartOptimizationOptions): any[] {
-    const maxPoints = options.maxPoints || this.getMaxPointsForChartType(chartType);
+  private heavyOptimization(
+    data: any[],
+    chartType: string,
+    options: ChartOptimizationOptions,
+  ): any[] {
+    const maxPoints =
+      options.maxPoints || this.getMaxPointsForChartType(chartType);
 
     // First, create buckets for aggregation
-    if (chartType === 'line' && data.length > this.performanceThresholds.xlarge) {
+    if (
+      chartType === "line" &&
+      data.length > this.performanceThresholds.xlarge
+    ) {
       const bucketSize = Math.ceil(data.length / maxPoints);
       data = this.createDataBuckets(data as TrendPoint[], bucketSize);
     }
 
     // Then apply sampling
-    let optimizedData = this.sampleLargeDataset(data, maxPoints, options.samplingMethod);
+    let optimizedData = this.sampleLargeDataset(
+      data,
+      maxPoints,
+      options.samplingMethod,
+    );
 
     // Clean and optimize data points
-    optimizedData = optimizedData.map(point => this.cleanDataPoint(point));
+    optimizedData = optimizedData.map((point) => this.cleanDataPoint(point));
 
     return optimizedData;
   }
@@ -350,7 +388,7 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
     const scoredData = data.map((point, index) => ({
       point,
       index,
-      importance: this.calculateImportanceScore(data, index)
+      importance: this.calculateImportanceScore(data, index),
     }));
 
     // Sort by importance and take top points
@@ -360,7 +398,7 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
     // Sort back by original index to maintain order
     importantPoints.sort((a, b) => a.index - b.index);
 
-    return importantPoints.map(item => item.point);
+    return importantPoints.map((item) => item.point);
   }
 
   private shouldIncludePoint(data: any[], index: number): boolean {
@@ -400,8 +438,9 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
       const next = data[index + 1];
 
       if (point.painLevel && prev.painLevel && next.painLevel) {
-        const change = Math.abs(point.painLevel - prev.painLevel) +
-                      Math.abs(next.painLevel - point.painLevel);
+        const change =
+          Math.abs(point.painLevel - prev.painLevel) +
+          Math.abs(next.painLevel - point.painLevel);
         score += change;
       }
     }
@@ -417,7 +456,8 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
   private aggregateBucket(bucket: TrendPoint[]): TrendPoint {
     if (bucket.length === 1) return bucket[0];
 
-    const avgPainLevel = bucket.reduce((sum, point) => sum + point.painLevel, 0) / bucket.length;
+    const avgPainLevel =
+      bucket.reduce((sum, point) => sum + point.painLevel, 0) / bucket.length;
     const middleIndex = Math.floor(bucket.length / 2);
     const representativePoint = bucket[middleIndex];
 
@@ -426,7 +466,7 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
       painLevel: Math.round(avgPainLevel * 10) / 10,
       // Add metadata about aggregation
       _aggregated: true,
-      _originalCount: bucket.length
+      _originalCount: bucket.length,
     } as TrendPoint & { _aggregated: boolean; _originalCount: number };
   }
 
@@ -449,12 +489,12 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
 
   private createOptimizedTooltip(context: any): void {
     // Lightweight tooltip implementation for large datasets
-    const tooltipEl = document.getElementById('chartjs-tooltip');
+    const tooltipEl = document.getElementById("chartjs-tooltip");
     if (!tooltipEl) return;
 
     const tooltip = context.tooltip;
     if (tooltip.opacity === 0) {
-      tooltipEl.style.opacity = '0';
+      tooltipEl.style.opacity = "0";
       return;
     }
 
@@ -466,11 +506,13 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
       </div>
     `;
 
-    tooltipEl.style.opacity = '1';
-    tooltipEl.style.position = 'absolute';
-    tooltipEl.style.left = context.chart.canvas.offsetLeft + tooltip.caretX + 'px';
-    tooltipEl.style.top = context.chart.canvas.offsetTop + tooltip.caretY + 'px';
-    tooltipEl.style.pointerEvents = 'none';
+    tooltipEl.style.opacity = "1";
+    tooltipEl.style.position = "absolute";
+    tooltipEl.style.left =
+      context.chart.canvas.offsetLeft + tooltip.caretX + "px";
+    tooltipEl.style.top =
+      context.chart.canvas.offsetTop + tooltip.caretY + "px";
+    tooltipEl.style.pointerEvents = "none";
   }
 }
 

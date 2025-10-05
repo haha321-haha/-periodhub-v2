@@ -1,7 +1,6 @@
+"use client";
 
-'use client';
-
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export function PageRefreshTool() {
   useEffect(() => {
@@ -10,17 +9,18 @@ export function PageRefreshTool() {
 
     const checkActivity = () => {
       const now = Date.now();
-      if (now - lastActivity > 30000) { // 30秒无活动
-        console.warn('页面可能卡死，尝试恢复...');
+      if (now - lastActivity > 30000) {
+        // 30秒无活动
+        console.warn("页面可能卡死，尝试恢复...");
         // 清理状态
-        if (typeof window !== 'undefined') {
+        if (typeof window !== "undefined") {
           // 清理可能导致问题的状态
-          const keysToRemove = ['partner-handbook-store'];
-          keysToRemove.forEach(key => {
+          const keysToRemove = ["partner-handbook-store"];
+          keysToRemove.forEach((key) => {
             try {
               localStorage.removeItem(key);
             } catch (e) {
-              console.warn('清理状态失败:', e);
+              console.warn("清理状态失败:", e);
             }
           });
         }
@@ -29,8 +29,14 @@ export function PageRefreshTool() {
     };
 
     // 监听用户活动
-    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
-    events.forEach(event => {
+    const events = [
+      "mousedown",
+      "mousemove",
+      "keypress",
+      "scroll",
+      "touchstart",
+    ];
+    events.forEach((event) => {
       document.addEventListener(event, () => {
         lastActivity = Date.now();
       });
@@ -41,7 +47,7 @@ export function PageRefreshTool() {
 
     return () => {
       clearInterval(interval);
-      events.forEach(event => {
+      events.forEach((event) => {
         document.removeEventListener(event, () => {});
       });
     };

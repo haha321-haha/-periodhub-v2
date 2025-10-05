@@ -8,8 +8,8 @@ import {
   CleanupResult,
   ArchiveOptions,
   PainTrackerError,
-  STORAGE_KEYS
-} from '../../../types/pain-tracker';
+  STORAGE_KEYS,
+} from "../../../types/pain-tracker";
 
 export interface DataCleanupServiceInterface {
   performCleanup(options?: CleanupOptions): Promise<CleanupResult>;
@@ -29,7 +29,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
     removeDuplicates: true,
     removeIncompleteRecords: false,
     archiveOldRecords: true,
-    compactStorage: true
+    compactStorage: true,
   };
 
   /**
@@ -79,24 +79,33 @@ export class DataCleanupService implements DataCleanupServiceInterface {
       if (cleanupOptions.archiveOldRecords && cleanupOptions.maxAgeMonths) {
         const archiveResult = await this.archiveRecordsByAge(
           cleanedRecords,
-          cleanupOptions.maxAgeMonths
+          cleanupOptions.maxAgeMonths,
         );
         cleanedRecords = archiveResult.remainingRecords;
         if (archiveResult.archivedCount > 0) {
-          operations.push(`Archived ${archiveResult.archivedCount} old records`);
+          operations.push(
+            `Archived ${archiveResult.archivedCount} old records`,
+          );
         }
       }
 
       // Limit total number of records
-      if (cleanupOptions.maxRecords && cleanedRecords.length > cleanupOptions.maxRecords) {
+      if (
+        cleanupOptions.maxRecords &&
+        cleanedRecords.length > cleanupOptions.maxRecords
+      ) {
         const excessRecords = cleanedRecords.length - cleanupOptions.maxRecords;
         // Keep the most recent records
         cleanedRecords = cleanedRecords
-          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+          )
           .slice(0, cleanupOptions.maxRecords);
 
         totalRecordsRemoved += excessRecords;
-        operations.push(`Removed ${excessRecords} excess records (keeping ${cleanupOptions.maxRecords} most recent)`);
+        operations.push(
+          `Removed ${excessRecords} excess records (keeping ${cleanupOptions.maxRecords} most recent)`,
+        );
       }
 
       // Save cleaned records
@@ -127,13 +136,13 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         initialRecordCount,
         finalRecordCount: cleanedRecords.length,
         initialStorageSize: initialSize,
-        finalStorageSize: finalSize
+        finalStorageSize: finalSize,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to perform data cleanup',
-        'STORAGE_ERROR',
-        error
+        "Failed to perform data cleanup",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -144,26 +153,33 @@ export class DataCleanupService implements DataCleanupServiceInterface {
   async archiveOldRecords(options: ArchiveOptions): Promise<CleanupResult> {
     try {
       const allRecords = await this.loadAllRecords();
-      const archiveResult = await this.archiveRecordsByAge(allRecords, options.maxAgeMonths);
+      const archiveResult = await this.archiveRecordsByAge(
+        allRecords,
+        options.maxAgeMonths,
+      );
 
       // Save remaining records
       await this.saveCleanedRecords(archiveResult.remainingRecords);
 
       return {
         recordsRemoved: archiveResult.archivedCount,
-        spaceSaved: await this.calculateSpaceSaved(archiveResult.archivedRecords),
-        operations: [`Archived ${archiveResult.archivedCount} records older than ${options.maxAgeMonths} months`],
+        spaceSaved: await this.calculateSpaceSaved(
+          archiveResult.archivedRecords,
+        ),
+        operations: [
+          `Archived ${archiveResult.archivedCount} records older than ${options.maxAgeMonths} months`,
+        ],
         cleanupTime: 0,
         initialRecordCount: allRecords.length,
         finalRecordCount: archiveResult.remainingRecords.length,
         initialStorageSize: 0,
-        finalStorageSize: 0
+        finalStorageSize: 0,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to archive old records',
-        'STORAGE_ERROR',
-        error
+        "Failed to archive old records",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -199,13 +215,13 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         initialRecordCount: 0,
         finalRecordCount: 0,
         initialStorageSize: 0,
-        finalStorageSize: 0
+        finalStorageSize: 0,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to remove orphaned data',
-        'STORAGE_ERROR',
-        error
+        "Failed to remove orphaned data",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -222,15 +238,15 @@ export class DataCleanupService implements DataCleanupServiceInterface {
       const records = await this.loadAllRecords();
       const optimizedRecords = this.optimizeRecordsStructure(records);
       await this.saveCleanedRecords(optimizedRecords);
-      operations.push('Optimized records structure');
+      operations.push("Optimized records structure");
 
       // Optimize preferences
       await this.optimizePreferences();
-      operations.push('Optimized user preferences');
+      operations.push("Optimized user preferences");
 
       // Optimize metadata
       await this.optimizeMetadata();
-      operations.push('Optimized metadata');
+      operations.push("Optimized metadata");
 
       const finalSize = await this.getStorageSize();
       const spaceSaved = initialSize - finalSize;
@@ -243,13 +259,13 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         initialRecordCount: records.length,
         finalRecordCount: optimizedRecords.length,
         initialStorageSize: initialSize,
-        finalStorageSize: finalSize
+        finalStorageSize: finalSize,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to optimize storage',
-        'STORAGE_ERROR',
-        error
+        "Failed to optimize storage",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -261,7 +277,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
     this.cancelAutomaticCleanup();
 
     // Don't start timers in test environment
-    if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
+    if (typeof process !== "undefined" && process.env.NODE_ENV === "test") {
       return;
     }
 
@@ -269,9 +285,9 @@ export class DataCleanupService implements DataCleanupServiceInterface {
       try {
         const recommendations = await this.getCleanupRecommendations();
         await this.performCleanup(recommendations);
-        console.log('Automatic cleanup completed successfully');
+        console.log("Automatic cleanup completed successfully");
       } catch (error) {
-        console.error('Automatic cleanup failed:', error);
+        console.error("Automatic cleanup failed:", error);
       }
     }, intervalMs);
   }
@@ -303,12 +319,15 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         removeIncompleteRecords: incompleteCount > 5, // Only if significant number
         archiveOldRecords: oldRecordCount > 10,
         compactStorage: storageSize > 1024 * 1024, // 1MB threshold
-        maxRecords: Math.max(500, records.length * 0.8) // Keep 80% of records or minimum 500
+        maxRecords: Math.max(500, records.length * 0.8), // Keep 80% of records or minimum 500
       };
 
       return recommendations;
     } catch (error) {
-      console.warn('Failed to get cleanup recommendations, using defaults:', error);
+      console.warn(
+        "Failed to get cleanup recommendations, using defaults:",
+        error,
+      );
       return this.defaultCleanupOptions;
     }
   }
@@ -328,7 +347,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
 
   private async getStorageSize(): Promise<number> {
     let totalSize = 0;
-    Object.values(STORAGE_KEYS).forEach(key => {
+    Object.values(STORAGE_KEYS).forEach((key) => {
       const data = localStorage.getItem(key);
       if (data) {
         totalSize += new Blob([data]).size;
@@ -339,7 +358,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
 
   private removeDuplicateRecords(records: PainRecord[]): PainRecord[] {
     const seen = new Set<string>();
-    return records.filter(record => {
+    return records.filter((record) => {
       // Create a unique key based on date, time, and pain level
       const key = `${record.date}_${record.time}_${record.painLevel}`;
       if (seen.has(key)) {
@@ -351,7 +370,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
   }
 
   private removeIncompleteRecords(records: PainRecord[]): PainRecord[] {
-    return records.filter(record => {
+    return records.filter((record) => {
       // Define what constitutes a complete record
       return (
         record.date &&
@@ -367,7 +386,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
 
   private async archiveRecordsByAge(
     records: PainRecord[],
-    maxAgeMonths: number
+    maxAgeMonths: number,
   ): Promise<{
     remainingRecords: PainRecord[];
     archivedRecords: PainRecord[];
@@ -379,7 +398,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
     const remainingRecords: PainRecord[] = [];
     const archivedRecords: PainRecord[] = [];
 
-    records.forEach(record => {
+    records.forEach((record) => {
       const recordDate = new Date(record.date);
       if (recordDate < cutoffDate) {
         archivedRecords.push(record);
@@ -396,7 +415,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
     return {
       remainingRecords,
       archivedRecords,
-      archivedCount: archivedRecords.length
+      archivedCount: archivedRecords.length,
     };
   }
 
@@ -406,15 +425,18 @@ export class DataCleanupService implements DataCleanupServiceInterface {
       const archiveData = {
         records,
         archivedAt: new Date(),
-        version: '1.0.0'
+        version: "1.0.0",
       };
       localStorage.setItem(archiveKey, JSON.stringify(archiveData));
     } catch (error) {
-      console.warn('Failed to save archived records:', error);
+      console.warn("Failed to save archived records:", error);
     }
   }
 
-  private async compactStorage(): Promise<{ spaceSaved: number; operations: string[] }> {
+  private async compactStorage(): Promise<{
+    spaceSaved: number;
+    operations: string[];
+  }> {
     const operations: string[] = [];
     let spaceSaved = 0;
 
@@ -438,13 +460,16 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         }
       }
     } catch (error) {
-      console.warn('Failed to compact storage:', error);
+      console.warn("Failed to compact storage:", error);
     }
 
     return { spaceSaved, operations };
   }
 
-  private async cleanupOldBackups(): Promise<{ spaceSaved: number; operations: string[] }> {
+  private async cleanupOldBackups(): Promise<{
+    spaceSaved: number;
+    operations: string[];
+  }> {
     const operations: string[] = [];
     let spaceSaved = 0;
 
@@ -454,7 +479,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
       // Find all backup keys
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && key.includes('_backup') || key?.includes('_archive')) {
+        if ((key && key.includes("_backup")) || key?.includes("_archive")) {
           backupKeys.push(key);
         }
       }
@@ -463,7 +488,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
       const sortedBackups = backupKeys.sort().reverse();
       const backupsToRemove = sortedBackups.slice(3);
 
-      backupsToRemove.forEach(key => {
+      backupsToRemove.forEach((key) => {
         const data = localStorage.getItem(key);
         if (data) {
           spaceSaved += new Blob([data]).size;
@@ -475,13 +500,16 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         operations.push(`Removed ${backupsToRemove.length} old backup files`);
       }
     } catch (error) {
-      console.warn('Failed to cleanup old backups:', error);
+      console.warn("Failed to cleanup old backups:", error);
     }
 
     return { spaceSaved, operations };
   }
 
-  private async cleanupTemporaryData(): Promise<{ spaceSaved: number; operations: string[] }> {
+  private async cleanupTemporaryData(): Promise<{
+    spaceSaved: number;
+    operations: string[];
+  }> {
     const operations: string[] = [];
     let spaceSaved = 0;
 
@@ -491,12 +519,12 @@ export class DataCleanupService implements DataCleanupServiceInterface {
       // Find temporary keys
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && (key.includes('_temp') || key.includes('_cache'))) {
+        if (key && (key.includes("_temp") || key.includes("_cache"))) {
           tempKeys.push(key);
         }
       }
 
-      tempKeys.forEach(key => {
+      tempKeys.forEach((key) => {
         const data = localStorage.getItem(key);
         if (data) {
           spaceSaved += new Blob([data]).size;
@@ -508,13 +536,16 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         operations.push(`Removed ${tempKeys.length} temporary data files`);
       }
     } catch (error) {
-      console.warn('Failed to cleanup temporary data:', error);
+      console.warn("Failed to cleanup temporary data:", error);
     }
 
     return { spaceSaved, operations };
   }
 
-  private async cleanupInvalidKeys(): Promise<{ spaceSaved: number; operations: string[] }> {
+  private async cleanupInvalidKeys(): Promise<{
+    spaceSaved: number;
+    operations: string[];
+  }> {
     const operations: string[] = [];
     let spaceSaved = 0;
 
@@ -525,15 +556,21 @@ export class DataCleanupService implements DataCleanupServiceInterface {
       // Find invalid keys
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && key.startsWith('pain_tracker_')) {
-          const isValid = validKeyPrefixes.some(prefix => key.startsWith(prefix));
-          if (!isValid && !key.includes('_backup') && !key.includes('_archive')) {
+        if (key && key.startsWith("pain_tracker_")) {
+          const isValid = validKeyPrefixes.some((prefix) =>
+            key.startsWith(prefix),
+          );
+          if (
+            !isValid &&
+            !key.includes("_backup") &&
+            !key.includes("_archive")
+          ) {
             invalidKeys.push(key);
           }
         }
       }
 
-      invalidKeys.forEach(key => {
+      invalidKeys.forEach((key) => {
         const data = localStorage.getItem(key);
         if (data) {
           spaceSaved += new Blob([data]).size;
@@ -545,57 +582,68 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         operations.push(`Removed ${invalidKeys.length} invalid storage keys`);
       }
     } catch (error) {
-      console.warn('Failed to cleanup invalid keys:', error);
+      console.warn("Failed to cleanup invalid keys:", error);
     }
 
     return { spaceSaved, operations };
   }
 
   private optimizeRecordsStructure(records: PainRecord[]): PainRecord[] {
-    return records.map(record => ({
+    return records.map((record) => ({
       ...record,
       // Remove empty arrays
       painTypes: record.painTypes.filter(Boolean),
       locations: record.locations.filter(Boolean),
       symptoms: record.symptoms.filter(Boolean),
-      medications: record.medications.filter(med => med.name?.trim()),
+      medications: record.medications.filter((med) => med.name?.trim()),
       lifestyleFactors: record.lifestyleFactors?.filter(Boolean) || [],
       // Trim and clean notes
-      notes: record.notes?.trim() || undefined
+      notes: record.notes?.trim() || undefined,
     }));
   }
 
   private async optimizePreferences(): Promise<void> {
     try {
-      const preferences = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER_PREFERENCES) || '{}');
+      const preferences = JSON.parse(
+        localStorage.getItem(STORAGE_KEYS.USER_PREFERENCES) || "{}",
+      );
 
       // Remove empty or default values
       const optimizedPreferences = {
         ...preferences,
-        defaultMedications: preferences.defaultMedications?.filter(Boolean) || []
+        defaultMedications:
+          preferences.defaultMedications?.filter(Boolean) || [],
       };
 
-      localStorage.setItem(STORAGE_KEYS.USER_PREFERENCES, JSON.stringify(optimizedPreferences));
+      localStorage.setItem(
+        STORAGE_KEYS.USER_PREFERENCES,
+        JSON.stringify(optimizedPreferences),
+      );
     } catch (error) {
-      console.warn('Failed to optimize preferences:', error);
+      console.warn("Failed to optimize preferences:", error);
     }
   }
 
   private async optimizeMetadata(): Promise<void> {
     try {
-      const metadata = JSON.parse(localStorage.getItem(STORAGE_KEYS.METADATA) || '{}');
+      const metadata = JSON.parse(
+        localStorage.getItem(STORAGE_KEYS.METADATA) || "{}",
+      );
 
       // Keep only essential metadata
       const optimizedMetadata = {
         lastModified: metadata.lastModified,
         recordCount: metadata.recordCount,
         dataSize: metadata.dataSize,
-        version: metadata.version
+        version: metadata.version,
       };
 
-      localStorage.setItem(STORAGE_KEYS.METADATA, JSON.stringify(optimizedMetadata));
+      localStorage.setItem(
+        STORAGE_KEYS.METADATA,
+        JSON.stringify(optimizedMetadata),
+      );
     } catch (error) {
-      console.warn('Failed to optimize metadata:', error);
+      console.warn("Failed to optimize metadata:", error);
     }
   }
 
@@ -603,7 +651,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
     const seen = new Set<string>();
     let duplicates = 0;
 
-    records.forEach(record => {
+    records.forEach((record) => {
       const key = `${record.date}_${record.time}_${record.painLevel}`;
       if (seen.has(key)) {
         duplicates++;
@@ -616,14 +664,15 @@ export class DataCleanupService implements DataCleanupServiceInterface {
   }
 
   private countIncompleteRecords(records: PainRecord[]): number {
-    return records.filter(record =>
-      !record.date ||
-      !record.time ||
-      record.painLevel === undefined ||
-      record.painLevel < 0 ||
-      record.painLevel > 10 ||
-      record.painTypes.length === 0 ||
-      record.locations.length === 0
+    return records.filter(
+      (record) =>
+        !record.date ||
+        !record.time ||
+        record.painLevel === undefined ||
+        record.painLevel < 0 ||
+        record.painLevel > 10 ||
+        record.painTypes.length === 0 ||
+        record.locations.length === 0,
     ).length;
   }
 
@@ -631,7 +680,8 @@ export class DataCleanupService implements DataCleanupServiceInterface {
     const cutoffDate = new Date();
     cutoffDate.setMonth(cutoffDate.getMonth() - maxAgeMonths);
 
-    return records.filter(record => new Date(record.date) < cutoffDate).length;
+    return records.filter((record) => new Date(record.date) < cutoffDate)
+      .length;
   }
 
   private async calculateSpaceSaved(records: PainRecord[]): Promise<number> {

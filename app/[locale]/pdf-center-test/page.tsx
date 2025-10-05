@@ -1,9 +1,9 @@
-import React from 'react';
-import { getTranslations, setRequestLocale } from 'next-intl/server';
-import type { Metadata } from 'next';
-import PDFCenterOptimized from '../../../components/PDFCenterOptimized';
+import React from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import PDFCenterOptimized from "../../../components/PDFCenterOptimized";
 
-type Locale = 'en' | 'zh';
+type Locale = "en" | "zh";
 
 interface Props {
   params: Promise<{ locale: Locale }>;
@@ -11,11 +11,11 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'common' });
+  const t = await getTranslations({ locale, namespace: "common" });
 
   return {
-    title: `PDF资源中心测试 - ${locale === 'zh' ? 'Period Hub' : 'Period Hub'}`,
-    description: '测试新的PDF资源分类和优化系统',
+    title: `PDF资源中心测试 - ${locale === "zh" ? "Period Hub" : "Period Hub"}`,
+    description: "测试新的PDF资源分类和优化系统",
     robots: {
       index: false,
       follow: false,
@@ -27,7 +27,7 @@ export default async function PDFCenterTestPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations('common');
+  const t = await getTranslations("common");
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -92,10 +92,18 @@ export default async function PDFCenterTestPage({ params }: Props) {
             <div className="space-y-2">
               <h3 className="font-medium text-gray-900">优先级标签</h3>
               <ul className="text-sm text-gray-600 space-y-1">
-                <li>• <span className="text-red-600">HIGHEST</span> - 最紧急</li>
-                <li>• <span className="text-orange-600">HIGH</span> - 高优先级</li>
-                <li>• <span className="text-yellow-600">MEDIUM</span> - 中等</li>
-                <li>• <span className="text-gray-600">LOW</span> - 低优先级</li>
+                <li>
+                  • <span className="text-red-600">HIGHEST</span> - 最紧急
+                </li>
+                <li>
+                  • <span className="text-orange-600">HIGH</span> - 高优先级
+                </li>
+                <li>
+                  • <span className="text-yellow-600">MEDIUM</span> - 中等
+                </li>
+                <li>
+                  • <span className="text-gray-600">LOW</span> - 低优先级
+                </li>
               </ul>
             </div>
 
@@ -121,7 +129,9 @@ export default async function PDFCenterTestPage({ params }: Props) {
           </div>
 
           <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <h4 className="font-medium text-yellow-800 mb-2">⚠️ 测试注意事项</h4>
+            <h4 className="font-medium text-yellow-800 mb-2">
+              ⚠️ 测试注意事项
+            </h4>
             <p className="text-sm text-yellow-700">
               这是技术架构测试页面。当前显示的是前10个紧急缓解类资源的示例数据。
               完整的38个资源数据将在内容制作完成后逐步添加。

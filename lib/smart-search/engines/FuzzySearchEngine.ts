@@ -9,8 +9,8 @@ import {
   SearchResponse,
   SearchResult,
   UnifiedSearchConfig,
-  FuzzySearchOptions
-} from '../types';
+  FuzzySearchOptions,
+} from "../types";
 
 export class FuzzySearchEngine implements IFuzzySearchEngine {
   private config: UnifiedSearchConfig;
@@ -31,11 +31,14 @@ export class FuzzySearchEngine implements IFuzzySearchEngine {
       hasMore: false,
       suggestions: [],
       relatedQueries: [],
-      recommendations: []
+      recommendations: [],
     };
   }
 
-  async fuzzySearch(query: string, options: FuzzySearchOptions): Promise<SearchResult[]> {
+  async fuzzySearch(
+    query: string,
+    options: FuzzySearchOptions,
+  ): Promise<SearchResult[]> {
     // TODO: 实现模糊搜索逻辑
     return [];
   }
@@ -44,7 +47,10 @@ export class FuzzySearchEngine implements IFuzzySearchEngine {
     return [];
   }
 
-  async getRecommendations(userId: string, limit: number = 10): Promise<SearchResult[]> {
+  async getRecommendations(
+    userId: string,
+    limit: number = 10,
+  ): Promise<SearchResult[]> {
     return [];
   }
 

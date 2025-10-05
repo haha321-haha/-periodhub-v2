@@ -7,7 +7,7 @@
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
   wait: number,
-  immediate = false
+  immediate = false,
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null;
 
@@ -29,7 +29,7 @@ export function debounce<T extends (...args: any[]) => any>(
 // 节流函数
 export function throttle<T extends (...args: any[]) => any>(
   func: T,
-  limit: number
+  limit: number,
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
 
@@ -37,7 +37,7 @@ export function throttle<T extends (...args: any[]) => any>(
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
+      setTimeout(() => (inThrottle = false), limit);
     }
   };
 }
@@ -59,7 +59,11 @@ export class StateUpdateOptimizer {
   }
 
   // 批量更新状态
-  public batchUpdate(key: string, value: any, updateFn: (updates: Record<string, any>) => void): void {
+  public batchUpdate(
+    key: string,
+    value: any,
+    updateFn: (updates: Record<string, any>) => void,
+  ): void {
     this.updateQueue.set(key, value);
 
     if (this.batchUpdateTimer) {
@@ -77,7 +81,7 @@ export class StateUpdateOptimizer {
   // 防抖更新
   public debouncedUpdate<T extends (...args: any[]) => any>(
     func: T,
-    wait: number = 300
+    wait: number = 300,
   ): (...args: Parameters<T>) => void {
     return debounce(func, wait);
   }
@@ -85,7 +89,7 @@ export class StateUpdateOptimizer {
   // 节流更新
   public throttledUpdate<T extends (...args: any[]) => any>(
     func: T,
-    limit: number = 100
+    limit: number = 100,
   ): (...args: Parameters<T>) => void {
     return throttle(func, limit);
   }
@@ -109,7 +113,7 @@ export class SelectorOptimizer {
   // 创建优化的选择器
   public createOptimizedSelector<T>(
     selector: (state: any) => T,
-    key: string
+    key: string,
   ): (state: any) => T {
     return (state: any) => {
       const cacheKey = `${key}_${JSON.stringify(state)}`;
@@ -182,13 +186,21 @@ export class RenderOptimizer {
   }
 
   // 防抖渲染
-  public debouncedRender(componentId: string, renderFn: () => void, wait: number = 100): void {
+  public debouncedRender(
+    componentId: string,
+    renderFn: () => void,
+    wait: number = 100,
+  ): void {
     const debouncedFn = debounce(renderFn, wait);
     debouncedFn();
   }
 
   // 节流渲染
-  public throttledRender(componentId: string, renderFn: () => void, limit: number = 100): void {
+  public throttledRender(
+    componentId: string,
+    renderFn: () => void,
+    limit: number = 100,
+  ): void {
     const throttledFn = throttle(renderFn, limit);
     throttledFn();
   }
@@ -213,7 +225,10 @@ export class MemoryOptimizer {
   public monitorMemoryUsage(key: string, size: number): void {
     this.memoryUsage.set(key, size);
 
-    const totalUsage = Array.from(this.memoryUsage.values()).reduce((sum, size) => sum + size, 0);
+    const totalUsage = Array.from(this.memoryUsage.values()).reduce(
+      (sum, size) => sum + size,
+      0,
+    );
 
     if (totalUsage > this.maxMemoryUsage) {
       this.cleanupMemory();
@@ -223,8 +238,9 @@ export class MemoryOptimizer {
   // 清理内存
   public cleanupMemory(): void {
     // 清理最旧的内存使用记录
-    const sortedEntries = Array.from(this.memoryUsage.entries())
-      .sort(([, a], [, b]) => a - b);
+    const sortedEntries = Array.from(this.memoryUsage.entries()).sort(
+      ([, a], [, b]) => a - b,
+    );
 
     const toRemove = Math.floor(sortedEntries.length * 0.3); // 清理30%
 
@@ -232,12 +248,15 @@ export class MemoryOptimizer {
       this.memoryUsage.delete(sortedEntries[i][0]);
     }
 
-    console.log('🧹 内存清理完成');
+    console.log("🧹 内存清理完成");
   }
 
   // 获取内存使用统计
   public getMemoryStats(): { total: number; entries: number; average: number } {
-    const total = Array.from(this.memoryUsage.values()).reduce((sum, size) => sum + size, 0);
+    const total = Array.from(this.memoryUsage.values()).reduce(
+      (sum, size) => sum + size,
+      0,
+    );
     const entries = this.memoryUsage.size;
     const average = entries > 0 ? total / entries : 0;
 
@@ -276,7 +295,9 @@ export class PerformanceMonitor {
   }
 
   // 获取性能统计
-  public getStats(name: string): { min: number; max: number; avg: number; count: number } | null {
+  public getStats(
+    name: string,
+  ): { min: number; max: number; avg: number; count: number } | null {
     const values = this.metrics.get(name);
     if (!values || values.length === 0) return null;
 

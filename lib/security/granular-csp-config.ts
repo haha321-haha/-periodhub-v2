@@ -1,4 +1,4 @@
-import { URL_CONFIG } from '@/lib/url-config';
+import { URL_CONFIG } from "@/lib/url-config";
 /**
  * 细粒度CSP配置
  * 提供更精确的安全策略控制
@@ -30,21 +30,21 @@ export interface GranularCSPConfig {
 }
 
 export interface CSPDirectives {
-  'default-src'?: string[];
-  'script-src'?: string[];
-  'style-src'?: string[];
-  'img-src'?: string[];
-  'font-src'?: string[];
-  'connect-src'?: string[];
-  'media-src'?: string[];
-  'object-src'?: string[];
-  'base-uri'?: string[];
-  'form-action'?: string[];
-  'frame-ancestors'?: string[];
-  'frame-src'?: string[];
-  'worker-src'?: string[];
-  'manifest-src'?: string[];
-  'require-sri-for'?: string[];
+  "default-src"?: string[];
+  "script-src"?: string[];
+  "style-src"?: string[];
+  "img-src"?: string[];
+  "font-src"?: string[];
+  "connect-src"?: string[];
+  "media-src"?: string[];
+  "object-src"?: string[];
+  "base-uri"?: string[];
+  "form-action"?: string[];
+  "frame-ancestors"?: string[];
+  "frame-src"?: string[];
+  "worker-src"?: string[];
+  "manifest-src"?: string[];
+  "require-sri-for"?: string[];
 }
 
 /**
@@ -55,118 +55,100 @@ export const granularCSPConfig: GranularCSPConfig = {
   pageSpecific: {
     // 公开页面 - 相对宽松
     public: {
-      'default-src': ["'self'"],
-      'script-src': [
+      "default-src": ["'self'"],
+      "script-src": [
         "'self'",
         "'strict-dynamic'",
-        'https://www.googletagmanager.com',
-        'https://www.google-analytics.com',
+        "https://www.googletagmanager.com",
+        "https://www.google-analytics.com",
       ],
-      'style-src': [
+      "style-src": [
         "'self'",
         "'unsafe-inline'", // Tailwind CSS
-        'https://fonts.googleapis.com',
+        "https://fonts.googleapis.com",
       ],
-      'img-src': [
+      "img-src": [
         "'self'",
-        'data:',
-        'blob:',
-        process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
-        'https://images.unsplash.com',
+        "data:",
+        "blob:",
+        process.env.NEXT_PUBLIC_BASE_URL ||
+          `${
+            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+          }`,
+        "https://images.unsplash.com",
       ],
-      'font-src': [
+      "font-src": ["'self'", "data:", "https://fonts.gstatic.com"],
+      "connect-src": [
         "'self'",
-        'data:',
-        'https://fonts.gstatic.com',
+        "https://www.google-analytics.com",
+        "https://analytics.google.com",
       ],
-      'connect-src': [
-        "'self'",
-        'https://www.google-analytics.com',
-        'https://analytics.google.com',
-      ],
-      'object-src': ["'none'"],
-      'base-uri': ["'self'"],
-      'form-action': ["'self'"],
-      'frame-ancestors': ["'none'"],
+      "object-src": ["'none'"],
+      "base-uri": ["'self'"],
+      "form-action": ["'self'"],
+      "frame-ancestors": ["'none'"],
     },
 
     // 认证页面 - 更严格
     authenticated: {
-      'default-src': ["'self'"],
-      'script-src': [
+      "default-src": ["'self'"],
+      "script-src": [
         "'self'",
         "'strict-dynamic'",
-        'https://www.googletagmanager.com',
+        "https://www.googletagmanager.com",
       ],
-      'style-src': [
+      "style-src": [
         "'self'",
         "'unsafe-inline'",
-        'https://fonts.googleapis.com',
+        "https://fonts.googleapis.com",
       ],
-      'img-src': [
+      "img-src": [
         "'self'",
-        'data:',
-        'blob:',
-        process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
+        "data:",
+        "blob:",
+        process.env.NEXT_PUBLIC_BASE_URL ||
+          `${
+            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+          }`,
       ],
-      'font-src': [
+      "font-src": ["'self'", "data:", "https://fonts.gstatic.com"],
+      "connect-src": [
         "'self'",
-        'data:',
-        'https://fonts.gstatic.com',
+        "https://api.periodhub.health",
+        "https://www.google-analytics.com",
       ],
-      'connect-src': [
-        "'self'",
-        'https://api.periodhub.health',
-        'https://www.google-analytics.com',
-      ],
-      'object-src': ["'none'"],
-      'base-uri': ["'self'"],
-      'form-action': ["'self'"],
-      'frame-ancestors': ["'none'"],
+      "object-src": ["'none'"],
+      "base-uri": ["'self'"],
+      "form-action": ["'self'"],
+      "frame-ancestors": ["'none'"],
     },
 
     // 管理页面 - 最严格
     admin: {
-      'default-src': ["'self'"],
-      'script-src': [
-        "'self'",
-        "'strict-dynamic'",
-      ],
-      'style-src': [
-        "'self'",
-        "'unsafe-inline'",
-      ],
-      'img-src': [
-        "'self'",
-        'data:',
-        'blob:',
-      ],
-      'font-src': [
-        "'self'",
-        'data:',
-      ],
-      'connect-src': [
-        "'self'",
-        'https://api.periodhub.health',
-      ],
-      'object-src': ["'none'"],
-      'base-uri': ["'self'"],
-      'form-action': ["'self'"],
-      'frame-ancestors': ["'none'"],
+      "default-src": ["'self'"],
+      "script-src": ["'self'", "'strict-dynamic'"],
+      "style-src": ["'self'", "'unsafe-inline'"],
+      "img-src": ["'self'", "data:", "blob:"],
+      "font-src": ["'self'", "data:"],
+      "connect-src": ["'self'", "https://api.periodhub.health"],
+      "object-src": ["'none'"],
+      "base-uri": ["'self'"],
+      "form-action": ["'self'"],
+      "frame-ancestors": ["'none'"],
     },
 
     // API页面 - 最小权限
     api: {
-      'default-src': ["'none'"],
-      'script-src': ["'none'"],
-      'style-src': ["'none'"],
-      'img-src': ["'none'"],
-      'font-src': ["'none'"],
-      'connect-src': ["'self'"],
-      'object-src': ["'none'"],
-      'base-uri': ["'none'"],
-      'form-action': ["'none'"],
-      'frame-ancestors': ["'none'"],
+      "default-src": ["'none'"],
+      "script-src": ["'none'"],
+      "style-src": ["'none'"],
+      "img-src": ["'none'"],
+      "font-src": ["'none'"],
+      "connect-src": ["'self'"],
+      "object-src": ["'none'"],
+      "base-uri": ["'none'"],
+      "form-action": ["'none'"],
+      "frame-ancestors": ["'none'"],
     },
   },
 
@@ -174,61 +156,54 @@ export const granularCSPConfig: GranularCSPConfig = {
   featureSpecific: {
     // 分析功能
     analytics: {
-      'script-src': [
+      "script-src": [
         "'self'",
-        'https://www.googletagmanager.com',
-        'https://www.google-analytics.com',
+        "https://www.googletagmanager.com",
+        "https://www.google-analytics.com",
       ],
-      'connect-src': [
+      "connect-src": [
         "'self'",
-        'https://www.google-analytics.com',
-        'https://analytics.google.com',
+        "https://www.google-analytics.com",
+        "https://analytics.google.com",
       ],
     },
 
     // 支付功能
     payments: {
-      'script-src': [
+      "script-src": [
         "'self'",
-        'https://js.stripe.com',
-        'https://checkout.stripe.com',
+        "https://js.stripe.com",
+        "https://checkout.stripe.com",
       ],
-      'connect-src': [
+      "connect-src": [
         "'self'",
-        'https://api.stripe.com',
-        'https://checkout.stripe.com',
+        "https://api.stripe.com",
+        "https://checkout.stripe.com",
       ],
-      'frame-src': [
-        'https://checkout.stripe.com',
-        'https://js.stripe.com',
-      ],
+      "frame-src": ["https://checkout.stripe.com", "https://js.stripe.com"],
     },
 
     // 文件上传功能
     uploads: {
-      'img-src': [
+      "img-src": [
         "'self'",
-        'data:',
-        'blob:',
-        process.env.NEXT_PUBLIC_BASE_URL || `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}`,
+        "data:",
+        "blob:",
+        process.env.NEXT_PUBLIC_BASE_URL ||
+          `${
+            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+          }`,
       ],
-      'connect-src': [
-        "'self'",
-        'https://api.periodhub.health',
-      ],
+      "connect-src": ["'self'", "https://api.periodhub.health"],
     },
 
     // 图表功能
     charts: {
-      'script-src': [
+      "script-src": [
         "'self'",
-        'https://cdn.jsdelivr.net', // Chart.js
+        "https://cdn.jsdelivr.net", // Chart.js
       ],
-      'img-src': [
-        "'self'",
-        'data:',
-        'blob:',
-      ],
+      "img-src": ["'self'", "data:", "blob:"],
     },
   },
 
@@ -258,13 +233,15 @@ export class GranularCSPManager {
   private generateNonce(): string {
     const array = new Uint8Array(16);
     crypto.getRandomValues(array);
-    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+    return Array.from(array, (byte) => byte.toString(16).padStart(2, "0")).join(
+      "",
+    );
   }
 
   /**
    * 根据页面类型获取CSP策略
    */
-  getCSPForPageType(pageType: keyof GranularCSPConfig['pageSpecific']): string {
+  getCSPForPageType(pageType: keyof GranularCSPConfig["pageSpecific"]): string {
     const directives = this.config.pageSpecific[pageType];
     return this.generateCSPHeader(directives);
   }
@@ -272,7 +249,9 @@ export class GranularCSPManager {
   /**
    * 根据功能模块获取CSP策略
    */
-  getCSPForFeature(feature: keyof GranularCSPConfig['featureSpecific']): string {
+  getCSPForFeature(
+    feature: keyof GranularCSPConfig["featureSpecific"],
+  ): string {
     const directives = this.config.featureSpecific[feature];
     return this.generateCSPHeader(directives);
   }
@@ -283,7 +262,7 @@ export class GranularCSPManager {
   mergeCSPDirectives(...directives: CSPDirectives[]): CSPDirectives {
     const merged: CSPDirectives = {};
 
-    directives.forEach(directive => {
+    directives.forEach((directive) => {
       Object.entries(directive).forEach(([key, values]) => {
         if (merged[key as keyof CSPDirectives]) {
           // 合并数组，去重
@@ -309,26 +288,26 @@ export class GranularCSPManager {
       if (sources && sources.length > 0) {
         // 处理特殊指令
         const processedSources = sources.map((source: string) => {
-          if (source === '{NONCE}') {
+          if (source === "{NONCE}") {
             return `'nonce-${this.nonce}'`;
           }
           return source;
         });
 
-        processedDirectives.push(`${directive} ${processedSources.join(' ')}`);
+        processedDirectives.push(`${directive} ${processedSources.join(" ")}`);
       }
     });
 
-    return processedDirectives.join('; ');
+    return processedDirectives.join("; ");
   }
 
   /**
    * 验证资源是否被允许
    */
   validateResource(
-    pageType: keyof GranularCSPConfig['pageSpecific'],
+    pageType: keyof GranularCSPConfig["pageSpecific"],
     resourceType: keyof CSPDirectives,
-    url: string
+    url: string,
   ): { allowed: boolean; reason?: string } {
     const directives = this.config.pageSpecific[pageType];
     const allowedSources = directives[resourceType];
@@ -341,20 +320,22 @@ export class GranularCSPManager {
       const urlObj = new URL(url);
 
       // 检查是否匹配允许的源
-      const isAllowed = allowedSources.some(source => {
+      const isAllowed = allowedSources.some((source) => {
         if (source === "'self'") {
           return urlObj.origin === window.location.origin;
         }
-        if (source === 'data:') {
-          return urlObj.protocol === 'data:';
+        if (source === "data:") {
+          return urlObj.protocol === "data:";
         }
-        if (source === 'blob:') {
-          return urlObj.protocol === 'blob:';
+        if (source === "blob:") {
+          return urlObj.protocol === "blob:";
         }
-        if (source.startsWith('https://')) {
-          return urlObj.protocol === 'https:' &&
-                 (urlObj.hostname === source.replace('https://', '') ||
-                  urlObj.hostname.endsWith('.' + source.replace('https://', '')));
+        if (source.startsWith("https://")) {
+          return (
+            urlObj.protocol === "https:" &&
+            (urlObj.hostname === source.replace("https://", "") ||
+              urlObj.hostname.endsWith("." + source.replace("https://", "")))
+          );
         }
         return false;
       });
@@ -362,13 +343,13 @@ export class GranularCSPManager {
       if (!isAllowed) {
         return {
           allowed: false,
-          reason: `URL ${url} is not allowed by ${resourceType} directive`
+          reason: `URL ${url} is not allowed by ${resourceType} directive`,
         };
       }
 
       return { allowed: true };
     } catch (error) {
-      return { allowed: false, reason: 'Invalid URL format' };
+      return { allowed: false, reason: "Invalid URL format" };
     }
   }
 
@@ -385,9 +366,11 @@ export class GranularCSPManager {
   async generateResourceHash(content: string): Promise<string> {
     const encoder = new TextEncoder();
     const data = encoder.encode(content);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    const hashHex = hashArray
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
     return `sha256-${btoa(hashHex)}`;
   }
 }
@@ -405,36 +388,40 @@ export class CSPPolicyTester {
   /**
    * 测试CSP策略
    */
-  async testCSPPolicy(pageType: keyof GranularCSPConfig['pageSpecific']) {
+  async testCSPPolicy(pageType: keyof GranularCSPConfig["pageSpecific"]) {
     const tests = [
       {
-        name: 'Self-origin script',
-        type: 'script-src' as keyof CSPDirectives,
+        name: "Self-origin script",
+        type: "script-src" as keyof CSPDirectives,
         url: `${window.location.origin}/script.js`,
         expected: true,
       },
       {
-        name: 'External script',
-        type: 'script-src' as keyof CSPDirectives,
-        url: 'https://malicious-site.com/script.js',
+        name: "External script",
+        type: "script-src" as keyof CSPDirectives,
+        url: "https://malicious-site.com/script.js",
         expected: false,
       },
       {
-        name: 'Data URI image',
-        type: 'img-src' as keyof CSPDirectives,
-        url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+        name: "Data URI image",
+        type: "img-src" as keyof CSPDirectives,
+        url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==",
         expected: true,
       },
       {
-        name: 'External image',
-        type: 'img-src' as keyof CSPDirectives,
-        url: 'https://malicious-site.com/image.jpg',
+        name: "External image",
+        type: "img-src" as keyof CSPDirectives,
+        url: "https://malicious-site.com/image.jpg",
         expected: false,
       },
     ];
 
-    const results = tests.map(test => {
-      const result = this.manager.validateResource(pageType, test.type, test.url);
+    const results = tests.map((test) => {
+      const result = this.manager.validateResource(
+        pageType,
+        test.type,
+        test.url,
+      );
       return {
         ...test,
         actual: result.allowed,
@@ -450,7 +437,7 @@ export class CSPPolicyTester {
    * 生成测试报告
    */
   generateTestReport(results: any[]) {
-    const passed = results.filter(r => r.passed).length;
+    const passed = results.filter((r) => r.passed).length;
     const total = results.length;
 
     return {
@@ -470,13 +457,13 @@ export class CSPPolicyTester {
   private generateRecommendations(results: any[]) {
     const recommendations = [];
 
-    const failedTests = results.filter(r => !r.passed);
+    const failedTests = results.filter((r) => !r.passed);
 
     if (failedTests.length > 0) {
       recommendations.push({
-        type: 'security',
+        type: "security",
         message: `${failedTests.length} 个CSP测试失败`,
-        action: '检查CSP策略配置，确保所有必要的资源都被允许',
+        action: "检查CSP策略配置，确保所有必要的资源都被允许",
       });
     }
 

@@ -3,7 +3,12 @@
  * 收集和分析搜索行为数据
  */
 
-import { SearchOptions, SearchResponse, SearchError, UnifiedSearchConfig } from '../types';
+import {
+  SearchOptions,
+  SearchResponse,
+  SearchError,
+  UnifiedSearchConfig,
+} from "../types";
 
 export class SearchAnalytics {
   private config: UnifiedSearchConfig;
@@ -19,7 +24,7 @@ export class SearchAnalytics {
   async recordSearch(
     options: SearchOptions,
     response: SearchResponse,
-    fromCache: boolean = false
+    fromCache: boolean = false,
   ): Promise<void> {
     const searchEvent = {
       timestamp: Date.now(),
@@ -29,7 +34,7 @@ export class SearchAnalytics {
       resultsCount: response.totalResults,
       searchTime: response.searchTime,
       fromCache,
-      userId: options.userId
+      userId: options.userId,
     };
 
     this.searchLog.push(searchEvent);
@@ -49,10 +54,10 @@ export class SearchAnalytics {
       error: error.code,
       message: error.message,
       query: options.query,
-      userId: options.userId
+      userId: options.userId,
     };
 
-    console.error('Search error recorded:', errorEvent);
+    console.error("Search error recorded:", errorEvent);
   }
 
   /**
@@ -62,19 +67,25 @@ export class SearchAnalytics {
     const startTime = dateRange ? new Date(dateRange.start).getTime() : 0;
     const endTime = dateRange ? new Date(dateRange.end).getTime() : Date.now();
 
-    const filteredLogs = this.searchLog.filter(log =>
-      log.timestamp >= startTime && log.timestamp <= endTime
+    const filteredLogs = this.searchLog.filter(
+      (log) => log.timestamp >= startTime && log.timestamp <= endTime,
     );
 
     return {
       totalSearches: filteredLogs.length,
-      uniqueQueries: new Set(filteredLogs.map(log => log.query)).size,
-      averageResultsPerQuery: filteredLogs.reduce((sum, log) => sum + log.resultsCount, 0) / filteredLogs.length || 0,
-      averageResponseTime: filteredLogs.reduce((sum, log) => sum + log.searchTime, 0) / filteredLogs.length || 0,
-      cacheHitRate: filteredLogs.filter(log => log.fromCache).length / filteredLogs.length || 0,
+      uniqueQueries: new Set(filteredLogs.map((log) => log.query)).size,
+      averageResultsPerQuery:
+        filteredLogs.reduce((sum, log) => sum + log.resultsCount, 0) /
+          filteredLogs.length || 0,
+      averageResponseTime:
+        filteredLogs.reduce((sum, log) => sum + log.searchTime, 0) /
+          filteredLogs.length || 0,
+      cacheHitRate:
+        filteredLogs.filter((log) => log.fromCache).length /
+          filteredLogs.length || 0,
       topQueries: this.getTopQueries(filteredLogs),
       startDate: dateRange?.start || new Date(0).toISOString(),
-      endDate: dateRange?.end || new Date().toISOString()
+      endDate: dateRange?.end || new Date().toISOString(),
     };
   }
 
@@ -84,7 +95,7 @@ export class SearchAnalytics {
   private getTopQueries(logs: any[]): any[] {
     const queryCount = new Map<string, number>();
 
-    logs.forEach(log => {
+    logs.forEach((log) => {
       const count = queryCount.get(log.query) || 0;
       queryCount.set(log.query, count + 1);
     });

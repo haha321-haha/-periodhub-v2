@@ -49,7 +49,9 @@
     "breadcrumb": {
       "home": "Home",
       "separator": "/"
-    }
+    },
+    "importantNote": "Important Note",
+    "medicalDisclaimer": "This website content is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional if you have any health concerns."
   },
   "hero": {
     "welcomeBadge": "Welcome to Professional Period Pain Management",
@@ -477,6 +479,40 @@
     "title": "Scenario-Based Period Pain Solutions - PeriodHub",
     "description": "Period pain management solutions for different life scenarios, including professional workplace, exercise, social situations with expert coping strategies and emergency kit preparation guides.",
     "keywords": "scenario-based period pain solutions,workplace period management,exercise period pain relief,social period etiquette,period emergency kit,period pain relief tips",
+    "scenarios": {
+      "office": {
+        "title": "Office Work",
+        "description": "Professional workplace period pain management strategies",
+        "features": ["Desk ergonomics", "Stress management", "Discrete pain relief"]
+      },
+      "commute": {
+        "title": "Commute & Travel",
+        "description": "Managing period pain during daily commute and travel",
+        "features": ["Portable relief items", "Comfort positioning", "Emergency planning"]
+      },
+      "exercise": {
+        "title": "Exercise & Sports",
+        "description": "Safe exercise modifications during menstruation",
+        "features": ["Low-impact alternatives", "Pain-relieving stretches", "Hydration strategies"]
+      },
+      "sleep": {
+        "title": "Sleep & Rest",
+        "description": "Optimizing sleep quality during period pain",
+        "features": ["Sleep positioning", "Bedroom environment", "Relaxation techniques"]
+      },
+      "social": {
+        "title": "Social Situations",
+        "description": "Managing period pain in social and public settings",
+        "features": ["Discrete management", "Communication strategies", "Backup plans"]
+      },
+      "life_stages": {
+        "title": "Life Stages",
+        "description": "Period pain management across different life stages",
+        "features": ["Adolescent care", "Adult management", "Menopause transition"]
+      }
+    },
+    "introTitle": "Comprehensive Scenario-Based Solutions",
+    "introText": "Every woman's lifestyle is unique, and so are her period pain management needs. Our scenario-based approach provides targeted solutions for different life situations.",
     "teenHealth": {
       "title": "🌸 Teen Menstrual Health Zone 🌸",
       "subtitle": "A caring space designed for girls aged 12-18",

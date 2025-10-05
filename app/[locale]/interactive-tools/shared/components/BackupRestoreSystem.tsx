@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 import {
   Download,
   Upload,
@@ -10,12 +10,17 @@ import {
   Clock,
   FileText,
   Database,
-  RefreshCw
-} from 'lucide-react';
-import { LoadingSpinner, ProgressBar } from './LoadingSystem';
-import { useLoadingState } from './LoadingSystem';
-import DataIntegrityService, { DataIntegrityReport } from '../../../../../lib/pain-tracker/storage/DataIntegrityService';
-import { PainTrackerError, StoredData } from '../../../../../types/pain-tracker';
+  RefreshCw,
+} from "lucide-react";
+import { LoadingSpinner, ProgressBar } from "./LoadingSystem";
+import { useLoadingState } from "./LoadingSystem";
+import DataIntegrityService, {
+  DataIntegrityReport,
+} from "../../../../../lib/pain-tracker/storage/DataIntegrityService";
+import {
+  PainTrackerError,
+  StoredData,
+} from "../../../../../types/pain-tracker";
 
 interface BackupRestoreSystemProps {
   onBackupComplete?: (success: boolean) => void;
@@ -28,12 +33,15 @@ export function BackupRestoreSystem({
   onBackupComplete,
   onRestoreComplete,
   onIntegrityCheck,
-  className = ''
+  className = "",
 }: BackupRestoreSystemProps) {
-  const [activeTab, setActiveTab] = useState<'backup' | 'restore' | 'integrity'>('backup');
+  const [activeTab, setActiveTab] = useState<
+    "backup" | "restore" | "integrity"
+  >("backup");
   const [backupData, setBackupData] = useState<string | null>(null);
   const [restoreFile, setRestoreFile] = useState<File | null>(null);
-  const [integrityReport, setIntegrityReport] = useState<DataIntegrityReport | null>(null);
+  const [integrityReport, setIntegrityReport] =
+    useState<DataIntegrityReport | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
@@ -47,7 +55,7 @@ export function BackupRestoreSystem({
     startLoading: startBackupLoading,
     updateProgress: updateBackupProgress,
     finishLoading: finishBackupLoading,
-    setLoadingError: setBackupError
+    setLoadingError: setBackupError,
   } = useLoadingState();
 
   const {
@@ -57,31 +65,37 @@ export function BackupRestoreSystem({
     startLoading: startRestoreLoading,
     updateProgress: updateRestoreProgress,
     finishLoading: finishRestoreLoading,
-    setLoadingError: setRestoreError
+    setLoadingError: setRestoreError,
   } = useLoadingState();
 
   const {
     isLoading: integrityLoading,
     startLoading: startIntegrityLoading,
     finishLoading: finishIntegrityLoading,
-    setLoadingError: setIntegrityError
+    setLoadingError: setIntegrityError,
   } = useLoadingState();
 
   // Create backup
   const handleCreateBackup = async () => {
     setError(null);
     setSuccess(null);
-    startBackupLoading('Creating backup...');
+    startBackupLoading("Creating backup...");
 
     try {
-      updateBackupProgress(20, 'Reading pain tracker data...');
+      updateBackupProgress(20, "Reading pain tracker data...");
 
       // Get all pain tracker data
-      const records = JSON.parse(localStorage.getItem('enhanced_pain_tracker_records') || '[]');
-      const preferences = JSON.parse(localStorage.getItem('enhanced_pain_tracker_preferences') || '{}');
-      const metadata = JSON.parse(localStorage.getItem('enhanced_pain_tracker_metadata') || '{}');
+      const records = JSON.parse(
+        localStorage.getItem("enhanced_pain_tracker_records") || "[]",
+      );
+      const preferences = JSON.parse(
+        localStorage.getItem("enhanced_pain_tracker_preferences") || "{}",
+      );
+      const metadata = JSON.parse(
+        localStorage.getItem("enhanced_pain_tracker_metadata") || "{}",
+      );
 
-      updateBackupProgress(50, 'Preparing backup data...');
+      updateBackupProgress(50, "Preparing backup data...");
 
       const backupData: StoredData = {
         records,
@@ -92,23 +106,23 @@ export function BackupRestoreSystem({
           ...metadata,
           backupCreated: new Date(),
           recordCount: records.length,
-          version: '1.0.0'
-        }
+          version: "1.0.0",
+        },
       };
 
-      updateBackupProgress(80, 'Generating backup file...');
+      updateBackupProgress(80, "Generating backup file...");
 
       const backupJson = JSON.stringify(backupData, null, 2);
       setBackupData(backupJson);
 
-      updateBackupProgress(100, 'Backup created successfully!');
+      updateBackupProgress(100, "Backup created successfully!");
       finishBackupLoading();
 
-      setSuccess('Backup created successfully! You can now download it.');
+      setSuccess("Backup created successfully! You can now download it.");
       onBackupComplete?.(true);
-
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to create backup';
+      const errorMessage =
+        error instanceof Error ? error.message : "Failed to create backup";
       setBackupError(errorMessage);
       setError(errorMessage);
       onBackupComplete?.(false);
@@ -120,19 +134,21 @@ export function BackupRestoreSystem({
     if (!backupData) return;
 
     try {
-      const blob = new Blob([backupData], { type: 'application/json' });
+      const blob = new Blob([backupData], { type: "application/json" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `pain-tracker-backup-${new Date().toISOString().split('T')[0]}.json`;
+      a.download = `pain-tracker-backup-${
+        new Date().toISOString().split("T")[0]
+      }.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      setSuccess('Backup file downloaded successfully!');
+      setSuccess("Backup file downloaded successfully!");
     } catch (error) {
-      setError('Failed to download backup file');
+      setError("Failed to download backup file");
     }
   };
 
@@ -140,11 +156,11 @@ export function BackupRestoreSystem({
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      if (file.type === 'application/json' || file.name.endsWith('.json')) {
+      if (file.type === "application/json" || file.name.endsWith(".json")) {
         setRestoreFile(file);
         setError(null);
       } else {
-        setError('Please select a valid JSON backup file');
+        setError("Please select a valid JSON backup file");
         setRestoreFile(null);
       }
     }
@@ -156,59 +172,77 @@ export function BackupRestoreSystem({
 
     setError(null);
     setSuccess(null);
-    startRestoreLoading('Restoring from backup...');
+    startRestoreLoading("Restoring from backup...");
 
     try {
-      updateRestoreProgress(20, 'Reading backup file...');
+      updateRestoreProgress(20, "Reading backup file...");
 
       const fileContent = await restoreFile.text();
       const backupData: StoredData = JSON.parse(fileContent);
 
-      updateRestoreProgress(40, 'Validating backup data...');
+      updateRestoreProgress(40, "Validating backup data...");
 
       // Validate backup structure
       if (!backupData.records || !Array.isArray(backupData.records)) {
-        throw new Error('Invalid backup file: missing or invalid records');
+        throw new Error("Invalid backup file: missing or invalid records");
       }
 
-      updateRestoreProgress(60, 'Creating safety backup...');
+      updateRestoreProgress(60, "Creating safety backup...");
 
       // Create safety backup of current data
-      const currentRecords = localStorage.getItem('enhanced_pain_tracker_records');
+      const currentRecords = localStorage.getItem(
+        "enhanced_pain_tracker_records",
+      );
       if (currentRecords) {
-        localStorage.setItem('enhanced_pain_tracker_records_safety', currentRecords);
+        localStorage.setItem(
+          "enhanced_pain_tracker_records_safety",
+          currentRecords,
+        );
       }
 
-      updateRestoreProgress(80, 'Restoring data...');
+      updateRestoreProgress(80, "Restoring data...");
 
       // Restore data
-      localStorage.setItem('enhanced_pain_tracker_records', JSON.stringify(backupData.records));
+      localStorage.setItem(
+        "enhanced_pain_tracker_records",
+        JSON.stringify(backupData.records),
+      );
 
       if (backupData.preferences) {
-        localStorage.setItem('enhanced_pain_tracker_preferences', JSON.stringify(backupData.preferences));
+        localStorage.setItem(
+          "enhanced_pain_tracker_preferences",
+          JSON.stringify(backupData.preferences),
+        );
       }
 
       if (backupData.metadata) {
-        localStorage.setItem('enhanced_pain_tracker_metadata', JSON.stringify({
-          ...backupData.metadata,
-          restoredAt: new Date(),
-          restoredFrom: restoreFile.name
-        }));
+        localStorage.setItem(
+          "enhanced_pain_tracker_metadata",
+          JSON.stringify({
+            ...backupData.metadata,
+            restoredAt: new Date(),
+            restoredFrom: restoreFile.name,
+          }),
+        );
       }
 
-      updateRestoreProgress(100, 'Restore completed successfully!');
+      updateRestoreProgress(100, "Restore completed successfully!");
       finishRestoreLoading();
 
-      setSuccess(`Successfully restored ${backupData.records.length} records from backup!`);
+      setSuccess(
+        `Successfully restored ${backupData.records.length} records from backup!`,
+      );
       setRestoreFile(null);
       if (fileInputRef.current) {
-        fileInputRef.current.value = '';
+        fileInputRef.current.value = "";
       }
 
       onRestoreComplete?.(true);
-
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to restore from backup';
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to restore from backup";
       setRestoreError(errorMessage);
       setError(errorMessage);
       onRestoreComplete?.(false);
@@ -219,7 +253,7 @@ export function BackupRestoreSystem({
   const handleIntegrityCheck = async () => {
     setError(null);
     setSuccess(null);
-    startIntegrityLoading('Checking data integrity...');
+    startIntegrityLoading("Checking data integrity...");
 
     try {
       const report = await dataIntegrityService.checkDataIntegrity();
@@ -227,22 +261,29 @@ export function BackupRestoreSystem({
       finishIntegrityLoading();
 
       if (report.isValid) {
-        setSuccess('Data integrity check passed! Your data is healthy.');
+        setSuccess("Data integrity check passed! Your data is healthy.");
       } else {
-        setError(`Data integrity issues detected: ${report.corruptionLevel} corruption level`);
+        setError(
+          `Data integrity issues detected: ${report.corruptionLevel} corruption level`,
+        );
       }
 
       onIntegrityCheck?.(report);
-
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to check data integrity';
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to check data integrity";
       setIntegrityError(errorMessage);
       setError(errorMessage);
     }
   };
 
   // Execute recovery option
-  const handleRecoveryAction = async (action: () => Promise<boolean>, description: string) => {
+  const handleRecoveryAction = async (
+    action: () => Promise<boolean>,
+    description: string,
+  ) => {
     setError(null);
     setSuccess(null);
     startIntegrityLoading(`Executing: ${description}...`);
@@ -259,7 +300,8 @@ export function BackupRestoreSystem({
         setError(`Recovery action failed: ${description}`);
       }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Recovery action failed';
+      const errorMessage =
+        error instanceof Error ? error.message : "Recovery action failed";
       setIntegrityError(errorMessage);
       setError(errorMessage);
     }
@@ -267,21 +309,31 @@ export function BackupRestoreSystem({
 
   const getCorruptionLevelColor = (level: string) => {
     switch (level) {
-      case 'none': return 'text-green-600';
-      case 'minor': return 'text-yellow-600';
-      case 'moderate': return 'text-orange-600';
-      case 'severe': return 'text-red-600';
-      default: return 'text-gray-600';
+      case "none":
+        return "text-green-600";
+      case "minor":
+        return "text-yellow-600";
+      case "moderate":
+        return "text-orange-600";
+      case "severe":
+        return "text-red-600";
+      default:
+        return "text-gray-600";
     }
   };
 
   const getCorruptionLevelIcon = (level: string) => {
     switch (level) {
-      case 'none': return <CheckCircle className="h-5 w-5" />;
-      case 'minor': return <Clock className="h-5 w-5" />;
-      case 'moderate': return <AlertTriangle className="h-5 w-5" />;
-      case 'severe': return <AlertTriangle className="h-5 w-5" />;
-      default: return <Database className="h-5 w-5" />;
+      case "none":
+        return <CheckCircle className="h-5 w-5" />;
+      case "minor":
+        return <Clock className="h-5 w-5" />;
+      case "moderate":
+        return <AlertTriangle className="h-5 w-5" />;
+      case "severe":
+        return <AlertTriangle className="h-5 w-5" />;
+      default:
+        return <Database className="h-5 w-5" />;
     }
   };
 
@@ -291,17 +343,17 @@ export function BackupRestoreSystem({
       <div className="border-b border-gray-200">
         <nav className="flex space-x-8 px-6">
           {[
-            { id: 'backup', label: 'Backup', icon: Download },
-            { id: 'restore', label: 'Restore', icon: Upload },
-            { id: 'integrity', label: 'Data Health', icon: Shield }
+            { id: "backup", label: "Backup", icon: Download },
+            { id: "restore", label: "Restore", icon: Upload },
+            { id: "integrity", label: "Data Health", icon: Shield },
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setActiveTab(id as any)}
               className={`flex items-center py-4 px-1 border-b-2 font-medium text-sm ${
                 activeTab === id
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? "border-blue-500 text-blue-600"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
               }`}
             >
               <Icon className="h-4 w-4 mr-2" />
@@ -332,12 +384,15 @@ export function BackupRestoreSystem({
         )}
 
         {/* Backup Tab */}
-        {activeTab === 'backup' && (
+        {activeTab === "backup" && (
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Create Data Backup</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                Create Data Backup
+              </h3>
               <p className="text-sm text-gray-600 mb-4">
-                Create a backup of all your pain tracking data, including records, preferences, and settings.
+                Create a backup of all your pain tracking data, including
+                records, preferences, and settings.
               </p>
             </div>
 
@@ -375,8 +430,9 @@ export function BackupRestoreSystem({
             {backupData && (
               <div className="mt-4 p-3 bg-gray-50 rounded-md">
                 <p className="text-sm text-gray-600">
-                  Backup created successfully! The backup contains {JSON.parse(backupData).records?.length || 0} records.
-                  Click "Download Backup" to save the file to your device.
+                  Backup created successfully! The backup contains{" "}
+                  {JSON.parse(backupData).records?.length || 0} records. Click
+                  "Download Backup" to save the file to your device.
                 </p>
               </div>
             )}
@@ -384,12 +440,15 @@ export function BackupRestoreSystem({
         )}
 
         {/* Restore Tab */}
-        {activeTab === 'restore' && (
+        {activeTab === "restore" && (
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Restore from Backup</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                Restore from Backup
+              </h3>
               <p className="text-sm text-gray-600 mb-4">
-                Restore your pain tracking data from a previously created backup file.
+                Restore your pain tracking data from a previously created backup
+                file.
               </p>
             </div>
 
@@ -420,14 +479,18 @@ export function BackupRestoreSystem({
             {restoreFile && (
               <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
                 <p className="text-sm text-blue-800">
-                  Selected file: {restoreFile.name} ({(restoreFile.size / 1024).toFixed(1)} KB)
+                  Selected file: {restoreFile.name} (
+                  {(restoreFile.size / 1024).toFixed(1)} KB)
                 </p>
               </div>
             )}
 
             {restoreLoading && (
               <div className="space-y-2">
-                <ProgressBar progress={restoreProgress} label={restoreMessage} />
+                <ProgressBar
+                  progress={restoreProgress}
+                  label={restoreMessage}
+                />
               </div>
             )}
 
@@ -450,8 +513,9 @@ export function BackupRestoreSystem({
               <div className="flex items-start">
                 <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 mr-2 flex-shrink-0" />
                 <div className="text-sm text-yellow-800">
-                  <strong>Warning:</strong> Restoring from backup will replace all current data.
-                  A safety backup of your current data will be created automatically.
+                  <strong>Warning:</strong> Restoring from backup will replace
+                  all current data. A safety backup of your current data will be
+                  created automatically.
                 </div>
               </div>
             </div>
@@ -459,12 +523,15 @@ export function BackupRestoreSystem({
         )}
 
         {/* Data Integrity Tab */}
-        {activeTab === 'integrity' && (
+        {activeTab === "integrity" && (
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Data Health Check</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                Data Health Check
+              </h3>
               <p className="text-sm text-gray-600 mb-4">
-                Check your pain tracking data for corruption, missing fields, or other integrity issues.
+                Check your pain tracking data for corruption, missing fields, or
+                other integrity issues.
               </p>
             </div>
 
@@ -484,46 +551,70 @@ export function BackupRestoreSystem({
             {integrityReport && (
               <div className="space-y-4">
                 <div className="bg-gray-50 rounded-lg p-4">
-                  <h4 className="font-medium text-gray-900 mb-3">Integrity Report</h4>
+                  <h4 className="font-medium text-gray-900 mb-3">
+                    Integrity Report
+                  </h4>
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-gray-900">{integrityReport.totalRecords}</div>
+                      <div className="text-2xl font-bold text-gray-900">
+                        {integrityReport.totalRecords}
+                      </div>
                       <div className="text-sm text-gray-600">Total Records</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-2xl font-bold text-green-600">{integrityReport.validRecords}</div>
+                      <div className="text-2xl font-bold text-green-600">
+                        {integrityReport.validRecords}
+                      </div>
                       <div className="text-sm text-gray-600">Valid Records</div>
                     </div>
                   </div>
 
-                  <div className={`flex items-center justify-center p-3 rounded-md ${
-                    integrityReport.corruptionLevel === 'none' ? 'bg-green-50' :
-                    integrityReport.corruptionLevel === 'minor' ? 'bg-yellow-50' :
-                    integrityReport.corruptionLevel === 'moderate' ? 'bg-orange-50' :
-                    'bg-red-50'
-                  }`}>
-                    <div className={getCorruptionLevelColor(integrityReport.corruptionLevel)}>
+                  <div
+                    className={`flex items-center justify-center p-3 rounded-md ${
+                      integrityReport.corruptionLevel === "none"
+                        ? "bg-green-50"
+                        : integrityReport.corruptionLevel === "minor"
+                          ? "bg-yellow-50"
+                          : integrityReport.corruptionLevel === "moderate"
+                            ? "bg-orange-50"
+                            : "bg-red-50"
+                    }`}
+                  >
+                    <div
+                      className={getCorruptionLevelColor(
+                        integrityReport.corruptionLevel,
+                      )}
+                    >
                       {getCorruptionLevelIcon(integrityReport.corruptionLevel)}
                     </div>
-                    <span className={`ml-2 font-medium capitalize ${getCorruptionLevelColor(integrityReport.corruptionLevel)}`}>
+                    <span
+                      className={`ml-2 font-medium capitalize ${getCorruptionLevelColor(
+                        integrityReport.corruptionLevel,
+                      )}`}
+                    >
                       {integrityReport.corruptionLevel} Corruption Level
                     </span>
                   </div>
 
                   {integrityReport.corruptedRecords.length > 0 && (
                     <div className="mt-4">
-                      <h5 className="font-medium text-red-800 mb-2">Issues Found:</h5>
+                      <h5 className="font-medium text-red-800 mb-2">
+                        Issues Found:
+                      </h5>
                       <ul className="text-sm text-red-700 space-y-1">
-                        {integrityReport.invalidData.slice(0, 5).map((issue, index) => (
-                          <li key={index} className="flex items-start">
-                            <span className="inline-block w-2 h-2 bg-red-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
-                            {issue}
-                          </li>
-                        ))}
+                        {integrityReport.invalidData
+                          .slice(0, 5)
+                          .map((issue, index) => (
+                            <li key={index} className="flex items-start">
+                              <span className="inline-block w-2 h-2 bg-red-400 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                              {issue}
+                            </li>
+                          ))}
                         {integrityReport.invalidData.length > 5 && (
                           <li className="text-red-600">
-                            ... and {integrityReport.invalidData.length - 5} more issues
+                            ... and {integrityReport.invalidData.length - 5}{" "}
+                            more issues
                           </li>
                         )}
                       </ul>
@@ -533,36 +624,57 @@ export function BackupRestoreSystem({
 
                 {integrityReport.recoveryOptions.length > 0 && (
                   <div className="bg-blue-50 rounded-lg p-4">
-                    <h4 className="font-medium text-blue-900 mb-3">Recovery Options</h4>
+                    <h4 className="font-medium text-blue-900 mb-3">
+                      Recovery Options
+                    </h4>
                     <div className="space-y-3">
                       {integrityReport.recoveryOptions.map((option, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 bg-white rounded border">
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-3 bg-white rounded border"
+                        >
                           <div className="flex-1">
-                            <div className="font-medium text-gray-900">{option.description}</div>
+                            <div className="font-medium text-gray-900">
+                              {option.description}
+                            </div>
                             <div className="text-sm text-gray-600 mt-1">
-                              Risk: <span className={`font-medium ${
-                                option.riskLevel === 'low' ? 'text-green-600' :
-                                option.riskLevel === 'medium' ? 'text-yellow-600' :
-                                'text-red-600'
-                              }`}>{option.riskLevel}</span>
-                              {' • '}
+                              Risk:{" "}
+                              <span
+                                className={`font-medium ${
+                                  option.riskLevel === "low"
+                                    ? "text-green-600"
+                                    : option.riskLevel === "medium"
+                                      ? "text-yellow-600"
+                                      : "text-red-600"
+                                }`}
+                              >
+                                {option.riskLevel}
+                              </span>
+                              {" • "}
                               Recovery: {option.estimatedRecovery}%
-                              {option.dataLoss && ' • Data loss possible'}
+                              {option.dataLoss && " • Data loss possible"}
                             </div>
                           </div>
                           <button
-                            onClick={() => handleRecoveryAction(option.action, option.description)}
+                            onClick={() =>
+                              handleRecoveryAction(
+                                option.action,
+                                option.description,
+                              )
+                            }
                             disabled={integrityLoading}
                             className={`ml-4 px-3 py-1 text-sm rounded transition-colors ${
-                              option.riskLevel === 'low' ? 'bg-green-600 hover:bg-green-700 text-white' :
-                              option.riskLevel === 'medium' ? 'bg-yellow-600 hover:bg-yellow-700 text-white' :
-                              'bg-red-600 hover:bg-red-700 text-white'
+                              option.riskLevel === "low"
+                                ? "bg-green-600 hover:bg-green-700 text-white"
+                                : option.riskLevel === "medium"
+                                  ? "bg-yellow-600 hover:bg-yellow-700 text-white"
+                                  : "bg-red-600 hover:bg-red-700 text-white"
                             } disabled:opacity-50 disabled:cursor-not-allowed`}
                           >
                             {integrityLoading ? (
                               <LoadingSpinner size="sm" color="white" />
                             ) : (
-                              'Execute'
+                              "Execute"
                             )}
                           </button>
                         </div>

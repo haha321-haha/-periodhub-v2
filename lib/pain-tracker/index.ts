@@ -2,10 +2,10 @@
 // Provides centralized access to all pain tracker services and types
 
 // Core Services
-export { default as LocalStorageAdapter } from './storage/LocalStorageAdapter';
-export { default as ValidationService } from './validation/ValidationService';
-export { default as MigrationService } from './migration/MigrationService';
-export { default as PainDataManager } from './data/PainDataManager';
+export { default as LocalStorageAdapter } from "./storage/LocalStorageAdapter";
+export { default as ValidationService } from "./validation/ValidationService";
+export { default as MigrationService } from "./migration/MigrationService";
+export { default as PainDataManager } from "./data/PainDataManager";
 
 // Analytics Services
 export {
@@ -15,8 +15,8 @@ export {
   PainDistributionChart,
   PainTypeChart,
   CyclePatternChart,
-  AnalyticsDemo
-} from './analytics';
+  AnalyticsDemo,
+} from "./analytics";
 
 // Performance Optimization Services
 export {
@@ -26,19 +26,19 @@ export {
   DataCleanupService,
   ChartPerformanceOptimizer,
   MemoryManager,
-  StorageQuotaManager
-} from './performance';
+  StorageQuotaManager,
+} from "./performance";
 
 // Types and Interfaces
-export * from '../../types/pain-tracker';
+export * from "../../types/pain-tracker";
 
 // Service Factory Functions
-import LocalStorageAdapter from './storage/LocalStorageAdapter';
-import ValidationService from './validation/ValidationService';
-import MigrationService from './migration/MigrationService';
-import PainDataManager from './data/PainDataManager';
-import { AnalyticsEngine } from './analytics';
-import { PerformanceManager } from './performance';
+import LocalStorageAdapter from "./storage/LocalStorageAdapter";
+import ValidationService from "./validation/ValidationService";
+import MigrationService from "./migration/MigrationService";
+import PainDataManager from "./data/PainDataManager";
+import { AnalyticsEngine } from "./analytics";
+import { PerformanceManager } from "./performance";
 
 /**
  * Create a new LocalStorageAdapter instance
@@ -92,12 +92,12 @@ export function createPainTrackerServices() {
     migration: createMigrationService(),
     dataManager: createPainDataManager(),
     analytics: createAnalyticsEngine(),
-    performance: createPerformanceManager()
+    performance: createPerformanceManager(),
   };
 }
 
 // Version information
-export const PAIN_TRACKER_VERSION = '1.0.0';
+export const PAIN_TRACKER_VERSION = "1.0.0";
 export const SUPPORTED_SCHEMA_VERSIONS = [1];
 
 // Utility functions

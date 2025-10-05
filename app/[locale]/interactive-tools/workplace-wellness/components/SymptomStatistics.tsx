@@ -3,9 +3,9 @@
  * Day 9: 症状统计功能
  */
 
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   Activity,
   TrendingUp,
@@ -14,18 +14,18 @@ import {
   BarChart3,
   PieChart,
   Calendar,
-  Heart
-} from 'lucide-react';
-import { useLocale } from 'next-intl';
-import { getPeriodData } from '../data';
-import { useTranslations } from 'next-intl';
-import { PeriodRecord } from '../types';
+  Heart,
+} from "lucide-react";
+import { useLocale } from "next-intl";
+import { getPeriodData } from "../data";
+import { useTranslations } from "next-intl";
+import { PeriodRecord } from "../types";
 
 interface SymptomData {
   name: string;
   frequency: number;
   severity: number;
-  trend: 'up' | 'down' | 'stable';
+  trend: "up" | "down" | "stable";
   lastOccurrence: string;
   relatedPhases: string[];
 }
@@ -40,8 +40,10 @@ interface SymptomPattern {
 
 export default function SymptomStatistics() {
   const locale = useLocale();
-  const t = useTranslations('workplaceWellness');
-  const [activeTab, setActiveTab] = useState<'overview' | 'patterns' | 'trends' | 'recommendations'>('overview');
+  const t = useTranslations("workplaceWellness");
+  const [activeTab, setActiveTab] = useState<
+    "overview" | "patterns" | "trends" | "recommendations"
+  >("overview");
   const [symptomData, setSymptomData] = useState<SymptomData[]>([]);
   const [patterns, setPatterns] = useState<SymptomPattern[]>([]);
 
@@ -58,31 +60,46 @@ export default function SymptomStatistics() {
 
     // 模拟症状数据（实际应用中应该从用户输入中获取）
     const commonSymptoms = [
-      'cramps', 'bloating', 'headache', 'fatigue', 'mood_swings',
-      'breast_tenderness', 'back_pain', 'nausea', 'insomnia', 'anxiety'
+      "cramps",
+      "bloating",
+      "headache",
+      "fatigue",
+      "mood_swings",
+      "breast_tenderness",
+      "back_pain",
+      "nausea",
+      "insomnia",
+      "anxiety",
     ];
 
-    commonSymptoms.forEach(symptom => {
-      const occurrences = periodData.filter(record =>
-        (record as any).symptoms && (record as any).symptoms.includes(symptom)
+    commonSymptoms.forEach((symptom) => {
+      const occurrences = periodData.filter(
+        (record) =>
+          (record as any).symptoms &&
+          (record as any).symptoms.includes(symptom),
       );
 
       if (occurrences.length > 0) {
-        const severity = occurrences.reduce((sum, record) =>
-          sum + (record.painLevel || 0), 0) / occurrences.length;
+        const severity =
+          occurrences.reduce(
+            (sum, record) => sum + (record.painLevel || 0),
+            0,
+          ) / occurrences.length;
 
         symptoms[symptom] = {
           name: symptom,
           frequency: occurrences.length,
           severity: severity,
           trend: calculateTrend(occurrences),
-          lastOccurrence: occurrences[occurrences.length - 1]?.date || '',
-          relatedPhases: getRelatedPhases(occurrences)
+          lastOccurrence: occurrences[occurrences.length - 1]?.date || "",
+          relatedPhases: getRelatedPhases(occurrences),
         };
       }
     });
 
-    setSymptomData(Object.values(symptoms).sort((a, b) => b.frequency - a.frequency));
+    setSymptomData(
+      Object.values(symptoms).sort((a, b) => b.frequency - a.frequency),
+    );
   };
 
   // 生成症状模式
@@ -92,13 +109,13 @@ export default function SymptomStatistics() {
     // 分析症状组合模式
     const symptomCombinations = analyzeSymptomCombinations();
 
-    symptomCombinations.forEach(combination => {
+    symptomCombinations.forEach((combination) => {
       patterns.push({
         symptom: combination.name,
         pattern: combination.pattern,
         frequency: combination.frequency,
         severity: combination.severity,
-        recommendations: generateRecommendations(combination.name)
+        recommendations: generateRecommendations(combination.name),
       });
     });
 
@@ -110,73 +127,78 @@ export default function SymptomStatistics() {
     // 模拟症状组合分析
     return [
       {
-        name: 'cramps_bloating',
-        pattern: t('patterns.crampsBloating'),
+        name: "cramps_bloating",
+        pattern: t("patterns.crampsBloating"),
         frequency: 8,
-        severity: 6.5
+        severity: 6.5,
       },
       {
-        name: 'headache_fatigue',
-        pattern: t('patterns.headacheFatigue'),
+        name: "headache_fatigue",
+        pattern: t("patterns.headacheFatigue"),
         frequency: 6,
-        severity: 5.2
+        severity: 5.2,
       },
       {
-        name: 'mood_swings_anxiety',
-        pattern: t('patterns.moodAnxiety'),
+        name: "mood_swings_anxiety",
+        pattern: t("patterns.moodAnxiety"),
         frequency: 5,
-        severity: 4.8
-      }
+        severity: 4.8,
+      },
     ];
   };
 
   // 生成建议
   const generateRecommendations = (symptom: string): string[] => {
     const recommendations: { [key: string]: string[] } = {
-      'cramps_bloating': [
-        t('recommendations.warmCompress'),
-        t('recommendations.gentleExercise'),
-        t('recommendations.hydration')
+      cramps_bloating: [
+        t("recommendations.warmCompress"),
+        t("recommendations.gentleExercise"),
+        t("recommendations.hydration"),
       ],
-      'headache_fatigue': [
-        t('recommendations.rest'),
-        t('recommendations.caffeineReduction'),
-        t('recommendations.stressManagement')
+      headache_fatigue: [
+        t("recommendations.rest"),
+        t("recommendations.caffeineReduction"),
+        t("recommendations.stressManagement"),
       ],
-      'mood_swings_anxiety': [
-        t('recommendations.mindfulness'),
-        t('recommendations.socialSupport'),
-        t('recommendations.sleepHygiene')
-      ]
+      mood_swings_anxiety: [
+        t("recommendations.mindfulness"),
+        t("recommendations.socialSupport"),
+        t("recommendations.sleepHygiene"),
+      ],
     };
 
-    return recommendations[symptom] || [t('recommendations.generalCare')];
+    return recommendations[symptom] || [t("recommendations.generalCare")];
   };
 
   // 计算趋势
-  const calculateTrend = (occurrences: PeriodRecord[]): 'up' | 'down' | 'stable' => {
-    if (occurrences.length < 3) return 'stable';
+  const calculateTrend = (
+    occurrences: PeriodRecord[],
+  ): "up" | "down" | "stable" => {
+    if (occurrences.length < 3) return "stable";
 
     const recent = occurrences.slice(-3);
     const previous = occurrences.slice(-6, -3);
 
-    if (recent.length < 3 || previous.length < 3) return 'stable';
+    if (recent.length < 3 || previous.length < 3) return "stable";
 
-    const recentAvg = recent.reduce((sum, r) => sum + (r.painLevel || 0), 0) / recent.length;
-    const previousAvg = previous.reduce((sum, r) => sum + (r.painLevel || 0), 0) / previous.length;
+    const recentAvg =
+      recent.reduce((sum, r) => sum + (r.painLevel || 0), 0) / recent.length;
+    const previousAvg =
+      previous.reduce((sum, r) => sum + (r.painLevel || 0), 0) /
+      previous.length;
 
-    if (recentAvg > previousAvg + 0.5) return 'up';
-    if (recentAvg < previousAvg - 0.5) return 'down';
-    return 'stable';
+    if (recentAvg > previousAvg + 0.5) return "up";
+    if (recentAvg < previousAvg - 0.5) return "down";
+    return "stable";
   };
 
   // 获取相关阶段
   const getRelatedPhases = (occurrences: PeriodRecord[]): string[] => {
     const phases = new Set<string>();
-    occurrences.forEach(record => {
-      if (record.type === 'period') phases.add('menstrual');
-      else if (record.type === 'ovulation') phases.add('ovulation');
-      else phases.add('luteal');
+    occurrences.forEach((record) => {
+      if (record.type === "period") phases.add("menstrual");
+      else if (record.type === "ovulation") phases.add("ovulation");
+      else phases.add("luteal");
     });
     return Array.from(phases);
   };
@@ -187,7 +209,7 @@ export default function SymptomStatistics() {
       return (
         <div className="text-center py-8">
           <Activity className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-600">{t('symptoms.noData')}</p>
+          <p className="text-gray-600">{t("symptoms.noData")}</p>
         </div>
       );
     }
@@ -202,19 +224,34 @@ export default function SymptomStatistics() {
                   <Activity className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-800">{t(`symptoms.${symptom.name}`)}</h4>
-                  <p className="text-sm text-gray-600">{t('symptoms.frequency')}: {symptom.frequency}</p>
+                  <h4 className="font-medium text-gray-800">
+                    {t(`symptoms.${symptom.name}`)}
+                  </h4>
+                  <p className="text-sm text-gray-600">
+                    {t("symptoms.frequency")}: {symptom.frequency}
+                  </p>
                 </div>
               </div>
 
               <div className="text-right">
                 <div className="flex items-center space-x-2">
-                  {symptom.trend === 'up' && <TrendingUp className="w-4 h-4 text-red-500" />}
-                  {symptom.trend === 'down' && <TrendingUp className="w-4 h-4 text-green-500 rotate-180" />}
-                  {symptom.trend === 'stable' && <Activity className="w-4 h-4 text-blue-500" />}
-                  <span className="text-sm font-medium text-gray-700">{symptom.severity.toFixed(1)}</span>
+                  {symptom.trend === "up" && (
+                    <TrendingUp className="w-4 h-4 text-red-500" />
+                  )}
+                  {symptom.trend === "down" && (
+                    <TrendingUp className="w-4 h-4 text-green-500 rotate-180" />
+                  )}
+                  {symptom.trend === "stable" && (
+                    <Activity className="w-4 h-4 text-blue-500" />
+                  )}
+                  <span className="text-sm font-medium text-gray-700">
+                    {symptom.severity.toFixed(1)}
+                  </span>
                 </div>
-                <p className="text-xs text-gray-500">{t('symptoms.lastOccurrence')}: {new Date(symptom.lastOccurrence).toLocaleDateString()}</p>
+                <p className="text-xs text-gray-500">
+                  {t("symptoms.lastOccurrence")}:{" "}
+                  {new Date(symptom.lastOccurrence).toLocaleDateString()}
+                </p>
               </div>
             </div>
 
@@ -225,7 +262,9 @@ export default function SymptomStatistics() {
                   style={{ width: `${(symptom.severity / 10) * 100}%` }}
                 />
               </div>
-              <span className="text-sm text-gray-600">{t('symptoms.severity')}</span>
+              <span className="text-sm text-gray-600">
+                {t("symptoms.severity")}
+              </span>
             </div>
           </div>
         ))}
@@ -238,18 +277,27 @@ export default function SymptomStatistics() {
     return (
       <div className="space-y-4">
         {patterns.map((pattern, index) => (
-          <div key={index} className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4">
+          <div
+            key={index}
+            className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-4"
+          >
             <div className="flex items-center justify-between mb-3">
               <h4 className="font-semibold text-gray-800">{pattern.pattern}</h4>
               <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600">{pattern.frequency} {t('patterns.occurrences')}</span>
-                <span className="text-sm font-medium text-purple-600">{pattern.severity.toFixed(1)}</span>
+                <span className="text-sm text-gray-600">
+                  {pattern.frequency} {t("patterns.occurrences")}
+                </span>
+                <span className="text-sm font-medium text-purple-600">
+                  {pattern.severity.toFixed(1)}
+                </span>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <h5 className="text-sm font-medium text-gray-700 mb-2">{t('patterns.frequency')}</h5>
+                <h5 className="text-sm font-medium text-gray-700 mb-2">
+                  {t("patterns.frequency")}
+                </h5>
                 <div className="flex items-center space-x-2">
                   <div className="flex-1 bg-gray-200 rounded-full h-2">
                     <div
@@ -257,12 +305,16 @@ export default function SymptomStatistics() {
                       style={{ width: `${(pattern.frequency / 10) * 100}%` }}
                     />
                   </div>
-                  <span className="text-sm text-gray-600">{pattern.frequency}</span>
+                  <span className="text-sm text-gray-600">
+                    {pattern.frequency}
+                  </span>
                 </div>
               </div>
 
               <div>
-                <h5 className="text-sm font-medium text-gray-700 mb-2">{t('patterns.severity')}</h5>
+                <h5 className="text-sm font-medium text-gray-700 mb-2">
+                  {t("patterns.severity")}
+                </h5>
                 <div className="flex items-center space-x-2">
                   <div className="flex-1 bg-gray-200 rounded-full h-2">
                     <div
@@ -270,7 +322,9 @@ export default function SymptomStatistics() {
                       style={{ width: `${(pattern.severity / 10) * 100}%` }}
                     />
                   </div>
-                  <span className="text-sm text-gray-600">{pattern.severity.toFixed(1)}</span>
+                  <span className="text-sm text-gray-600">
+                    {pattern.severity.toFixed(1)}
+                  </span>
                 </div>
               </div>
             </div>
@@ -285,8 +339,13 @@ export default function SymptomStatistics() {
     return (
       <div className="space-y-4">
         {patterns.map((pattern, index) => (
-          <div key={index} className="bg-white border border-gray-200 rounded-lg p-4">
-            <h4 className="font-semibold text-gray-800 mb-3">{pattern.pattern}</h4>
+          <div
+            key={index}
+            className="bg-white border border-gray-200 rounded-lg p-4"
+          >
+            <h4 className="font-semibold text-gray-800 mb-3">
+              {pattern.pattern}
+            </h4>
             <div className="space-y-2">
               {pattern.recommendations.map((recommendation, recIndex) => (
                 <div key={recIndex} className="flex items-start space-x-3">
@@ -305,25 +364,41 @@ export default function SymptomStatistics() {
     <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
       <h4 className="text-lg font-semibold text-neutral-900 mb-4 flex items-center">
         <Activity className="w-5 h-5 mr-2 text-primary-500" />
-        {t('symptoms.title')}
+        {t("symptoms.title")}
       </h4>
 
       {/* 标签页导航 */}
       <div className="mb-6">
         <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
           {[
-            { id: 'overview', label: t('symptoms.tabs.overview'), icon: BarChart3 },
-            { id: 'patterns', label: t('symptoms.tabs.patterns'), icon: PieChart },
-            { id: 'trends', label: t('symptoms.tabs.trends'), icon: TrendingUp },
-            { id: 'recommendations', label: t('symptoms.tabs.recommendations'), icon: Heart }
+            {
+              id: "overview",
+              label: t("symptoms.tabs.overview"),
+              icon: BarChart3,
+            },
+            {
+              id: "patterns",
+              label: t("symptoms.tabs.patterns"),
+              icon: PieChart,
+            },
+            {
+              id: "trends",
+              label: t("symptoms.tabs.trends"),
+              icon: TrendingUp,
+            },
+            {
+              id: "recommendations",
+              label: t("symptoms.tabs.recommendations"),
+              icon: Heart,
+            },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex-1 flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === tab.id
-                  ? 'bg-white text-primary-600 shadow-sm'
-                  : 'text-gray-600 hover:text-gray-800'
+                  ? "bg-white text-primary-600 shadow-sm"
+                  : "text-gray-600 hover:text-gray-800"
               }`}
             >
               <tab.icon className="w-4 h-4 mr-1" />
@@ -335,15 +410,15 @@ export default function SymptomStatistics() {
 
       {/* 内容区域 */}
       <div className="min-h-[400px]">
-        {activeTab === 'overview' && renderSymptomOverview()}
-        {activeTab === 'patterns' && renderSymptomPatterns()}
-        {activeTab === 'trends' && (
+        {activeTab === "overview" && renderSymptomOverview()}
+        {activeTab === "patterns" && renderSymptomPatterns()}
+        {activeTab === "trends" && (
           <div className="text-center py-8">
             <TrendingUp className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <p className="text-gray-600">{t('symptoms.trendsComingSoon')}</p>
+            <p className="text-gray-600">{t("symptoms.trendsComingSoon")}</p>
           </div>
         )}
-        {activeTab === 'recommendations' && renderRecommendations()}
+        {activeTab === "recommendations" && renderRecommendations()}
       </div>
     </div>
   );

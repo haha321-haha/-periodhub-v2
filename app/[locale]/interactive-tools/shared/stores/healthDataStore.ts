@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 // 数据类型定义
 export interface PainEntry {
@@ -30,8 +30,8 @@ export interface ConstitutionResult {
 }
 
 export interface UserPreferences {
-  language: 'zh' | 'en';
-  theme: 'light' | 'dark';
+  language: "zh" | "en";
+  theme: "light" | "dark";
   notifications: {
     painReminders: boolean;
     assessmentReminders: boolean;
@@ -58,11 +58,13 @@ export interface HealthDataState {
   lastSyncTime: string | null;
 
   // Actions
-  addPainEntry: (entry: Omit<PainEntry, 'id' | 'timestamp'>) => void;
+  addPainEntry: (entry: Omit<PainEntry, "id" | "timestamp">) => void;
   updatePainEntry: (id: string, updates: Partial<PainEntry>) => void;
   deletePainEntry: (id: string) => void;
 
-  addConstitutionResult: (result: Omit<ConstitutionResult, 'id' | 'timestamp'>) => void;
+  addConstitutionResult: (
+    result: Omit<ConstitutionResult, "id" | "timestamp">,
+  ) => void;
 
   updatePreferences: (preferences: Partial<UserPreferences>) => void;
 
@@ -79,8 +81,8 @@ export interface HealthDataState {
 
 // 默认用户偏好
 const defaultPreferences: UserPreferences = {
-  language: 'zh',
-  theme: 'light',
+  language: "zh",
+  theme: "light",
   notifications: {
     painReminders: true,
     assessmentReminders: true,
@@ -93,7 +95,8 @@ const defaultPreferences: UserPreferences = {
 };
 
 // 生成唯一ID
-const generateId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+const generateId = () =>
+  `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
 // 创建Zustand Store
 export const useHealthDataStore = create<HealthDataState>()(
@@ -123,7 +126,7 @@ export const useHealthDataStore = create<HealthDataState>()(
       updatePainEntry: (id, updates) => {
         set((state) => ({
           painEntries: state.painEntries.map((entry) =>
-            entry.id === id ? { ...entry, ...updates } : entry
+            entry.id === id ? { ...entry, ...updates } : entry,
           ),
           lastSyncTime: new Date().toISOString(),
         }));
@@ -162,21 +165,27 @@ export const useHealthDataStore = create<HealthDataState>()(
       getPainTrends: () => {
         const { painEntries } = get();
         // 实现疼痛趋势分析逻辑
-        return painEntries.reduce((trends, entry) => {
-          const date = entry.date;
-          if (!trends[date]) {
-            trends[date] = [];
-          }
-          trends[date].push(entry.painLevel);
-          return trends;
-        }, {} as Record<string, number[]>);
+        return painEntries.reduce(
+          (trends, entry) => {
+            const date = entry.date;
+            if (!trends[date]) {
+              trends[date] = [];
+            }
+            trends[date].push(entry.painLevel);
+            return trends;
+          },
+          {} as Record<string, number[]>,
+        );
       },
 
       getAveragePainLevel: () => {
         const { painEntries } = get();
         if (painEntries.length === 0) return 0;
 
-        const total = painEntries.reduce((sum, entry) => sum + entry.painLevel, 0);
+        const total = painEntries.reduce(
+          (sum, entry) => sum + entry.painLevel,
+          0,
+        );
         return Math.round((total / painEntries.length) * 10) / 10;
       },
 
@@ -218,7 +227,7 @@ export const useHealthDataStore = create<HealthDataState>()(
           });
           return true;
         } catch (error) {
-          console.error('Failed to import data:', error);
+          console.error("Failed to import data:", error);
           return false;
         }
       },
@@ -233,7 +242,7 @@ export const useHealthDataStore = create<HealthDataState>()(
       },
     }),
     {
-      name: 'periodhub-health-data',
+      name: "periodhub-health-data",
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({
         painEntries: state.painEntries,
@@ -241,6 +250,6 @@ export const useHealthDataStore = create<HealthDataState>()(
         preferences: state.preferences,
         lastSyncTime: state.lastSyncTime,
       }),
-    }
-  )
+    },
+  ),
 );

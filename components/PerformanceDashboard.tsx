@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface PerformanceData {
   data: any[];
@@ -26,7 +26,7 @@ export default function PerformanceDashboard() {
   const [data, setData] = useState<PerformanceData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedUrl, setSelectedUrl] = useState('');
+  const [selectedUrl, setSelectedUrl] = useState("");
 
   useEffect(() => {
     fetchPerformanceData();
@@ -35,17 +35,19 @@ export default function PerformanceDashboard() {
   const fetchPerformanceData = async () => {
     try {
       setLoading(true);
-      const url = selectedUrl ? `/api/performance?url=${encodeURIComponent(selectedUrl)}` : '/api/performance';
+      const url = selectedUrl
+        ? `/api/performance?url=${encodeURIComponent(selectedUrl)}`
+        : "/api/performance";
       const response = await fetch(url);
 
       if (!response.ok) {
-        throw new Error('Failed to fetch performance data');
+        throw new Error("Failed to fetch performance data");
       }
 
       const result = await response.json();
       setData(result);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
       setLoading(false);
     }
@@ -61,11 +63,11 @@ export default function PerformanceDashboard() {
     };
 
     const threshold = thresholds[metric as keyof typeof thresholds];
-    if (!threshold) return 'text-gray-600';
+    if (!threshold) return "text-gray-600";
 
-    if (value <= threshold.good) return 'text-green-600';
-    if (value <= threshold.poor) return 'text-yellow-600';
-    return 'text-red-600';
+    if (value <= threshold.good) return "text-green-600";
+    if (value <= threshold.poor) return "text-yellow-600";
+    return "text-red-600";
   };
 
   const getGrade = (metric: string, value: number) => {
@@ -78,11 +80,11 @@ export default function PerformanceDashboard() {
     };
 
     const threshold = thresholds[metric as keyof typeof thresholds];
-    if (!threshold) return 'unknown';
+    if (!threshold) return "unknown";
 
-    if (value <= threshold.good) return 'Good';
-    if (value <= threshold.poor) return 'Needs Improvement';
-    return 'Poor';
+    if (value <= threshold.good) return "Good";
+    if (value <= threshold.poor) return "Needs Improvement";
+    return "Poor";
   };
 
   if (loading) {
@@ -132,7 +134,7 @@ export default function PerformanceDashboard() {
             className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm"
           />
           <button
-            onClick={() => setSelectedUrl('')}
+            onClick={() => setSelectedUrl("")}
             className="bg-gray-200 text-gray-700 px-3 py-2 rounded-md text-sm hover:bg-gray-300"
           >
             Clear
@@ -144,23 +146,32 @@ export default function PerformanceDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg shadow p-4">
           <h3 className="text-sm font-medium text-gray-500">Total Records</h3>
-          <p className="text-2xl font-bold text-gray-900">{data.summary.totalRecords}</p>
+          <p className="text-2xl font-bold text-gray-900">
+            {data.summary.totalRecords}
+          </p>
         </div>
         <div className="bg-white rounded-lg shadow p-4">
-          <h3 className="text-sm font-medium text-gray-500">Filtered Records</h3>
-          <p className="text-2xl font-bold text-gray-900">{data.summary.filteredRecords}</p>
+          <h3 className="text-sm font-medium text-gray-500">
+            Filtered Records
+          </h3>
+          <p className="text-2xl font-bold text-gray-900">
+            {data.summary.filteredRecords}
+          </p>
         </div>
         <div className="bg-white rounded-lg shadow p-4">
-          <h3 className="text-sm font-medium text-gray-500">Returned Records</h3>
-          <p className="text-2xl font-bold text-gray-900">{data.summary.returnedRecords}</p>
+          <h3 className="text-sm font-medium text-gray-500">
+            Returned Records
+          </h3>
+          <p className="text-2xl font-bold text-gray-900">
+            {data.summary.returnedRecords}
+          </p>
         </div>
         <div className="bg-white rounded-lg shadow p-4">
           <h3 className="text-sm font-medium text-gray-500">Last Updated</h3>
           <p className="text-sm text-gray-900">
             {data.data.length > 0
               ? new Date(data.data[0].timestamp).toLocaleString()
-              : 'N/A'
-            }
+              : "N/A"}
           </p>
         </div>
       </div>
@@ -168,40 +179,53 @@ export default function PerformanceDashboard() {
       {/* 平均性能指标 */}
       {data.averages && Object.keys(data.averages).length > 0 && (
         <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Average Performance Metrics</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            Average Performance Metrics
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Object.entries(data.averages).map(([metric, stats]) => {
               const typedStats = stats as MetricAverages[string];
               return (
-              <div key={metric} className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-medium text-gray-900 mb-2">{metric}</h3>
-                <div className="space-y-1 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Average:</span>
-                    <span className={getGradeColor(metric, typedStats.average)}>
-                      {typedStats.average.toFixed(0)}ms
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Min:</span>
-                    <span className="text-gray-900">{typedStats.min.toFixed(0)}ms</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Max:</span>
-                    <span className="text-gray-900">{typedStats.max.toFixed(0)}ms</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Count:</span>
-                    <span className="text-gray-900">{typedStats.count}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Grade:</span>
-                    <span className={getGradeColor(metric, typedStats.average)}>
-                      {getGrade(metric, typedStats.average)}
-                    </span>
+                <div
+                  key={metric}
+                  className="border border-gray-200 rounded-lg p-4"
+                >
+                  <h3 className="font-medium text-gray-900 mb-2">{metric}</h3>
+                  <div className="space-y-1 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Average:</span>
+                      <span
+                        className={getGradeColor(metric, typedStats.average)}
+                      >
+                        {typedStats.average.toFixed(0)}ms
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Min:</span>
+                      <span className="text-gray-900">
+                        {typedStats.min.toFixed(0)}ms
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Max:</span>
+                      <span className="text-gray-900">
+                        {typedStats.max.toFixed(0)}ms
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Count:</span>
+                      <span className="text-gray-900">{typedStats.count}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Grade:</span>
+                      <span
+                        className={getGradeColor(metric, typedStats.average)}
+                      >
+                        {getGrade(metric, typedStats.average)}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
               );
             })}
           </div>
@@ -211,7 +235,9 @@ export default function PerformanceDashboard() {
       {/* 最近记录 */}
       <div className="bg-white rounded-lg shadow">
         <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Recent Performance Records</h2>
+          <h2 className="text-lg font-semibold text-gray-900">
+            Recent Performance Records
+          </h2>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -249,10 +275,18 @@ export default function PerformanceDashboard() {
                   <td className="px-6 py-4 text-sm text-gray-900 max-w-xs truncate">
                     {record.url}
                   </td>
-                  {['LCP', 'FID', 'CLS', 'FCP', 'TTFB'].map(metric => (
-                    <td key={metric} className="px-6 py-4 whitespace-nowrap text-sm">
+                  {["LCP", "FID", "CLS", "FCP", "TTFB"].map((metric) => (
+                    <td
+                      key={metric}
+                      className="px-6 py-4 whitespace-nowrap text-sm"
+                    >
                       {record.metrics[metric] ? (
-                        <span className={getGradeColor(metric, record.metrics[metric])}>
+                        <span
+                          className={getGradeColor(
+                            metric,
+                            record.metrics[metric],
+                          )}
+                        >
                           {record.metrics[metric].toFixed(0)}ms
                         </span>
                       ) : (

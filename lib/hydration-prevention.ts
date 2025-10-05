@@ -3,20 +3,20 @@
  * 防止React hydration错误的工具库
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 /**
  * 检查当前环境是否为客户端
  */
 export function isClient() {
-  return typeof window !== 'undefined';
+  return typeof window !== "undefined";
 }
 
 /**
  * 检查当前环境是否为服务端
  */
 export function isServer() {
-  return typeof window === 'undefined';
+  return typeof window === "undefined";
 }
 
 /**
@@ -57,7 +57,7 @@ export function useDelayedRender(delay = 0) {
  */
 export function ClientOnly({
   children,
-  fallback = null
+  fallback = null,
 }: {
   children: React.ReactNode;
   fallback?: React.ReactNode;

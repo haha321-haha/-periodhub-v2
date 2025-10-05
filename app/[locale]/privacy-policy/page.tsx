@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   return {
     title: `${t("title")} | periodhub.health`,
-    description: t('description'),
+    description: t("description"),
     alternates: {
       canonical: `${URL_CONFIG.baseUrl}/${locale}/privacy-policy`,
       languages: {
@@ -27,7 +27,7 @@ export async function generateMetadata({
     },
     openGraph: {
       title: `${t("title")} | periodhub.health`,
-      description: t('openGraph.description'),
+      description: t("openGraph.description"),
       type: "website",
       url: `${URL_CONFIG.baseUrl}/${locale}/privacy-policy`,
     },
@@ -348,16 +348,16 @@ export default async function PrivacyPolicyPage({
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
-                          {t('dataTable.type')}
+                          {t("dataTable.type")}
                         </th>
                         <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
-                          {t('dataTable.purpose')}
+                          {t("dataTable.purpose")}
                         </th>
                         <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
-                          {t('dataTable.duration')}
+                          {t("dataTable.duration")}
                         </th>
                         <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b">
-                          {t('dataTable.required')}
+                          {t("dataTable.required")}
                         </th>
                       </tr>
                     </thead>

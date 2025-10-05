@@ -3,11 +3,12 @@
  * 管理搜索结果的缓存存储
  */
 
-import { SearchOptions, SearchResponse, UnifiedSearchConfig } from '../types';
+import { SearchOptions, SearchResponse, UnifiedSearchConfig } from "../types";
 
 export class SearchCache {
   private config: UnifiedSearchConfig;
-  private cache: Map<string, { response: SearchResponse; timestamp: number }> = new Map();
+  private cache: Map<string, { response: SearchResponse; timestamp: number }> =
+    new Map();
 
   constructor(config: UnifiedSearchConfig) {
     this.config = config;
@@ -43,7 +44,7 @@ export class SearchCache {
     const key = this.generateCacheKey(options);
     this.cache.set(key, {
       response,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
 
     // 清理过期缓存
@@ -67,7 +68,7 @@ export class SearchCache {
       mode: options.mode,
       filters: options.filters,
       page: options.page,
-      pageSize: options.pageSize
+      pageSize: options.pageSize,
     });
   }
 

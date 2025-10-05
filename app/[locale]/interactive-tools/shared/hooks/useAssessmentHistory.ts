@@ -1,25 +1,32 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { AssessmentResult } from '../types';
+import { useState, useEffect, useCallback } from "react";
+import { AssessmentResult } from "../types";
 
 export interface AssessmentHistoryEntry {
   id: string;
   sessionId: string;
-  type: 'symptom' | 'workplace' | 'normal' | 'mild' | 'moderate' | 'severe' | 'emergency';
-  mode: 'simplified' | 'detailed' | 'medical';
+  type:
+    | "symptom"
+    | "workplace"
+    | "normal"
+    | "mild"
+    | "moderate"
+    | "severe"
+    | "emergency";
+  mode: "simplified" | "detailed" | "medical";
   locale: string;
   score: number;
   maxScore: number;
   percentage: number;
-  severity: 'mild' | 'moderate' | 'severe' | 'emergency';
+  severity: "mild" | "moderate" | "severe" | "emergency";
   completedAt: string;
   summary: string;
   recommendations: Array<{
     id: string;
     title: string;
     description: string;
-    priority: 'high' | 'medium' | 'low';
+    priority: "high" | "medium" | "low";
     category: string;
   }>;
 }
@@ -27,10 +34,10 @@ export interface AssessmentHistoryEntry {
 export interface AssessmentTrends {
   totalAssessments: number;
   averageScore: number;
-  scoreTrend: 'improving' | 'stable' | 'declining';
-  mostCommonSeverity: 'mild' | 'moderate' | 'severe' | 'emergency';
+  scoreTrend: "improving" | "stable" | "declining";
+  mostCommonSeverity: "mild" | "moderate" | "severe" | "emergency";
   lastAssessmentDate: string;
-  assessmentFrequency: 'daily' | 'weekly' | 'monthly' | 'irregular';
+  assessmentFrequency: "daily" | "weekly" | "monthly" | "irregular";
 }
 
 export const useAssessmentHistory = () => {
@@ -41,69 +48,89 @@ export const useAssessmentHistory = () => {
   // Load history from localStorage on mount
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('assessmentHistory');
+      const saved = localStorage.getItem("assessmentHistory");
       if (saved) {
         const parsedHistory = JSON.parse(saved);
         setHistory(parsedHistory);
         calculateTrends(parsedHistory);
       }
     } catch (error) {
-      console.error('Error loading assessment history:', error);
+      console.error("Error loading assessment history:", error);
     } finally {
       setIsLoading(false);
     }
   }, []);
 
   // Calculate trends from history
-  const calculateTrends = useCallback((historyData: AssessmentHistoryEntry[]) => {
-    if (historyData.length === 0) {
-      setTrends(null);
-      return;
-    }
+  const calculateTrends = useCallback(
+    (historyData: AssessmentHistoryEntry[]) => {
+      if (historyData.length === 0) {
+        setTrends(null);
+        return;
+      }
 
-    const totalAssessments = historyData.length;
-    const averageScore = historyData.reduce((sum, entry) => sum + entry.percentage, 0) / totalAssessments;
+      const totalAssessments = historyData.length;
+      const averageScore =
+        historyData.reduce((sum, entry) => sum + entry.percentage, 0) /
+        totalAssessments;
 
-    // Calculate score trend (comparing last 3 vs previous 3)
-    let scoreTrend: 'improving' | 'stable' | 'declining' = 'stable';
-    if (totalAssessments >= 6) {
-      const recent = historyData.slice(-3).reduce((sum, entry) => sum + entry.percentage, 0) / 3;
-      const previous = historyData.slice(-6, -3).reduce((sum, entry) => sum + entry.percentage, 0) / 3;
-      const difference = recent - previous;
+      // Calculate score trend (comparing last 3 vs previous 3)
+      let scoreTrend: "improving" | "stable" | "declining" = "stable";
+      if (totalAssessments >= 6) {
+        const recent =
+          historyData
+            .slice(-3)
+            .reduce((sum, entry) => sum + entry.percentage, 0) / 3;
+        const previous =
+          historyData
+            .slice(-6, -3)
+            .reduce((sum, entry) => sum + entry.percentage, 0) / 3;
+        const difference = recent - previous;
 
-      if (difference > 5) scoreTrend = 'improving';
-      else if (difference < -5) scoreTrend = 'declining';
-    }
+        if (difference > 5) scoreTrend = "improving";
+        else if (difference < -5) scoreTrend = "declining";
+      }
 
-    // Find most common severity
-    const severityCounts = historyData.reduce((counts, entry) => {
-      counts[entry.severity] = (counts[entry.severity] || 0) + 1;
-      return counts;
-    }, {} as Record<string, number>);
+      // Find most common severity
+      const severityCounts = historyData.reduce(
+        (counts, entry) => {
+          counts[entry.severity] = (counts[entry.severity] || 0) + 1;
+          return counts;
+        },
+        {} as Record<string, number>,
+      );
 
-    const mostCommonSeverity = Object.entries(severityCounts)
-      .sort(([,a], [,b]) => b - a)[0]?.[0] as 'mild' | 'moderate' | 'severe' | 'emergency' || 'mild';
+      const mostCommonSeverity =
+        (Object.entries(severityCounts).sort(
+          ([, a], [, b]) => b - a,
+        )[0]?.[0] as "mild" | "moderate" | "severe" | "emergency") || "mild";
 
-    // Calculate assessment frequency
-    const lastAssessmentDate = historyData[historyData.length - 1]?.completedAt || '';
-    const now = new Date();
-    const lastDate = new Date(lastAssessmentDate);
-    const daysSinceLast = Math.floor((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+      // Calculate assessment frequency
+      const lastAssessmentDate =
+        historyData[historyData.length - 1]?.completedAt || "";
+      const now = new Date();
+      const lastDate = new Date(lastAssessmentDate);
+      const daysSinceLast = Math.floor(
+        (now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24),
+      );
 
-    let assessmentFrequency: 'daily' | 'weekly' | 'monthly' | 'irregular' = 'irregular';
-    if (daysSinceLast <= 1) assessmentFrequency = 'daily';
-    else if (daysSinceLast <= 7) assessmentFrequency = 'weekly';
-    else if (daysSinceLast <= 30) assessmentFrequency = 'monthly';
+      let assessmentFrequency: "daily" | "weekly" | "monthly" | "irregular" =
+        "irregular";
+      if (daysSinceLast <= 1) assessmentFrequency = "daily";
+      else if (daysSinceLast <= 7) assessmentFrequency = "weekly";
+      else if (daysSinceLast <= 30) assessmentFrequency = "monthly";
 
-    setTrends({
-      totalAssessments,
-      averageScore: Math.round(averageScore),
-      scoreTrend,
-      mostCommonSeverity,
-      lastAssessmentDate,
-      assessmentFrequency,
-    });
-  }, []);
+      setTrends({
+        totalAssessments,
+        averageScore: Math.round(averageScore),
+        scoreTrend,
+        mostCommonSeverity,
+        lastAssessmentDate,
+        assessmentFrequency,
+      });
+    },
+    [],
+  );
 
   // Save assessment result to history
   const saveAssessmentResult = useCallback((result: AssessmentResult) => {
@@ -111,7 +138,10 @@ export const useAssessmentHistory = () => {
       id: `assessment_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       sessionId: result.sessionId,
       type: result.type,
-      mode: (result.mode || 'simplified') as 'simplified' | 'detailed' | 'medical',
+      mode: (result.mode || "simplified") as
+        | "simplified"
+        | "detailed"
+        | "medical",
       locale: result.locale,
       score: result.score,
       maxScore: result.maxScore,
@@ -119,7 +149,7 @@ export const useAssessmentHistory = () => {
       severity: result.severity,
       completedAt: result.completedAt,
       summary: result.summary,
-      recommendations: result.recommendations.map(rec => ({
+      recommendations: result.recommendations.map((rec) => ({
         id: rec.id,
         title: rec.title,
         description: rec.description,
@@ -128,7 +158,7 @@ export const useAssessmentHistory = () => {
       })),
     };
 
-    setHistory(prevHistory => {
+    setHistory((prevHistory) => {
       const newHistory = [...prevHistory, historyEntry];
 
       // Calculate trends with new history
@@ -136,38 +166,55 @@ export const useAssessmentHistory = () => {
         setTrends(null);
       } else {
         const totalAssessments = newHistory.length;
-        const averageScore = newHistory.reduce((sum, entry) => sum + entry.percentage, 0) / totalAssessments;
+        const averageScore =
+          newHistory.reduce((sum, entry) => sum + entry.percentage, 0) /
+          totalAssessments;
 
         // Calculate score trend (comparing last 3 vs previous 3)
-        let scoreTrend: 'improving' | 'stable' | 'declining' = 'stable';
+        let scoreTrend: "improving" | "stable" | "declining" = "stable";
         if (totalAssessments >= 6) {
-          const recent = newHistory.slice(-3).reduce((sum, entry) => sum + entry.percentage, 0) / 3;
-          const previous = newHistory.slice(-6, -3).reduce((sum, entry) => sum + entry.percentage, 0) / 3;
+          const recent =
+            newHistory
+              .slice(-3)
+              .reduce((sum, entry) => sum + entry.percentage, 0) / 3;
+          const previous =
+            newHistory
+              .slice(-6, -3)
+              .reduce((sum, entry) => sum + entry.percentage, 0) / 3;
           const difference = recent - previous;
 
-          if (difference > 5) scoreTrend = 'improving';
-          else if (difference < -5) scoreTrend = 'declining';
+          if (difference > 5) scoreTrend = "improving";
+          else if (difference < -5) scoreTrend = "declining";
         }
 
         // Find most common severity
-        const severityCounts = newHistory.reduce((counts, entry) => {
-          counts[entry.severity] = (counts[entry.severity] || 0) + 1;
-          return counts;
-        }, {} as Record<string, number>);
+        const severityCounts = newHistory.reduce(
+          (counts, entry) => {
+            counts[entry.severity] = (counts[entry.severity] || 0) + 1;
+            return counts;
+          },
+          {} as Record<string, number>,
+        );
 
-        const mostCommonSeverity = Object.entries(severityCounts)
-          .sort(([,a], [,b]) => b - a)[0]?.[0] as 'mild' | 'moderate' | 'severe' | 'emergency' || 'mild';
+        const mostCommonSeverity =
+          (Object.entries(severityCounts).sort(
+            ([, a], [, b]) => b - a,
+          )[0]?.[0] as "mild" | "moderate" | "severe" | "emergency") || "mild";
 
         // Calculate assessment frequency
-        const lastAssessmentDate = newHistory[newHistory.length - 1]?.completedAt || '';
+        const lastAssessmentDate =
+          newHistory[newHistory.length - 1]?.completedAt || "";
         const now = new Date();
         const lastDate = new Date(lastAssessmentDate);
-        const daysSinceLast = Math.floor((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+        const daysSinceLast = Math.floor(
+          (now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24),
+        );
 
-        let assessmentFrequency: 'daily' | 'weekly' | 'monthly' | 'irregular' = 'irregular';
-        if (daysSinceLast <= 1) assessmentFrequency = 'daily';
-        else if (daysSinceLast <= 7) assessmentFrequency = 'weekly';
-        else if (daysSinceLast <= 30) assessmentFrequency = 'monthly';
+        let assessmentFrequency: "daily" | "weekly" | "monthly" | "irregular" =
+          "irregular";
+        if (daysSinceLast <= 1) assessmentFrequency = "daily";
+        else if (daysSinceLast <= 7) assessmentFrequency = "weekly";
+        else if (daysSinceLast <= 30) assessmentFrequency = "monthly";
 
         setTrends({
           totalAssessments,
@@ -181,9 +228,9 @@ export const useAssessmentHistory = () => {
 
       // Save to localStorage
       try {
-        localStorage.setItem('assessmentHistory', JSON.stringify(newHistory));
+        localStorage.setItem("assessmentHistory", JSON.stringify(newHistory));
       } catch (error) {
-        console.error('Error saving assessment history:', error);
+        console.error("Error saving assessment history:", error);
       }
 
       return newHistory;
@@ -191,39 +238,50 @@ export const useAssessmentHistory = () => {
   }, []);
 
   // Get recent assessments
-  const getRecentAssessments = useCallback((limit: number = 5) => {
-    return history.slice(-limit).reverse();
-  }, [history]);
+  const getRecentAssessments = useCallback(
+    (limit: number = 5) => {
+      return history.slice(-limit).reverse();
+    },
+    [history],
+  );
 
   // Get assessments by mode
-  const getAssessmentsByMode = useCallback((mode: 'simplified' | 'detailed' | 'medical') => {
-    return history.filter(entry => entry.mode === mode);
-  }, [history]);
+  const getAssessmentsByMode = useCallback(
+    (mode: "simplified" | "detailed" | "medical") => {
+      return history.filter((entry) => entry.mode === mode);
+    },
+    [history],
+  );
 
   // Get assessments by severity
-  const getAssessmentsBySeverity = useCallback((severity: 'mild' | 'moderate' | 'severe' | 'emergency') => {
-    return history.filter(entry => entry.severity === severity);
-  }, [history]);
+  const getAssessmentsBySeverity = useCallback(
+    (severity: "mild" | "moderate" | "severe" | "emergency") => {
+      return history.filter((entry) => entry.severity === severity);
+    },
+    [history],
+  );
 
   // Clear history
   const clearHistory = useCallback(() => {
     setHistory([]);
     setTrends(null);
     try {
-      localStorage.removeItem('assessmentHistory');
+      localStorage.removeItem("assessmentHistory");
     } catch (error) {
-      console.error('Error clearing assessment history:', error);
+      console.error("Error clearing assessment history:", error);
     }
   }, []);
 
   // Export history
   const exportHistory = useCallback(() => {
     const dataStr = JSON.stringify(history, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const dataBlob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = `assessment-history-${new Date().toISOString().split('T')[0]}.json`;
+    link.download = `assessment-history-${
+      new Date().toISOString().split("T")[0]
+    }.json`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

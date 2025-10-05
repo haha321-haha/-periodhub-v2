@@ -1,8 +1,13 @@
 // ChartRenderer - Service for rendering charts as images for export
 // Converts Chart.js charts to base64 images for inclusion in medical reports
 
-import { PainAnalytics, TrendPoint, PainTypeFrequency, CyclePattern } from '../../../types/pain-tracker';
-import ChartUtils from '../analytics/ChartUtils';
+import {
+  PainAnalytics,
+  TrendPoint,
+  PainTypeFrequency,
+  CyclePattern,
+} from "../../../types/pain-tracker";
+import ChartUtils from "../analytics/ChartUtils";
 
 export interface ChartImageData {
   trendChart?: string;
@@ -14,38 +19,47 @@ export interface ChartImageData {
 export class ChartRenderer {
   private static readonly CHART_WIDTH = 800;
   private static readonly CHART_HEIGHT = 400;
-  private static readonly CHART_BACKGROUND = '#ffffff';
+  private static readonly CHART_BACKGROUND = "#ffffff";
 
   /**
    * Render all charts as base64 images for export
    */
-  static async renderChartsForExport(analytics: PainAnalytics): Promise<ChartImageData> {
+  static async renderChartsForExport(
+    analytics: PainAnalytics,
+  ): Promise<ChartImageData> {
     try {
       const chartImages: ChartImageData = {};
 
       // Render pain trend chart
       if (analytics.trendData && analytics.trendData.length > 0) {
-        chartImages.trendChart = await this.renderTrendChart(analytics.trendData);
+        chartImages.trendChart = await this.renderTrendChart(
+          analytics.trendData,
+        );
       }
 
       // Render pain distribution chart
       if (analytics.totalRecords > 0) {
-        chartImages.distributionChart = await this.renderDistributionChart(analytics);
+        chartImages.distributionChart =
+          await this.renderDistributionChart(analytics);
       }
 
       // Render pain type chart
       if (analytics.commonPainTypes && analytics.commonPainTypes.length > 0) {
-        chartImages.painTypeChart = await this.renderPainTypeChart(analytics.commonPainTypes);
+        chartImages.painTypeChart = await this.renderPainTypeChart(
+          analytics.commonPainTypes,
+        );
       }
 
       // Render cycle pattern chart
       if (analytics.cyclePatterns && analytics.cyclePatterns.length > 0) {
-        chartImages.cyclePatternChart = await this.renderCyclePatternChart(analytics.cyclePatterns);
+        chartImages.cyclePatternChart = await this.renderCyclePatternChart(
+          analytics.cyclePatterns,
+        );
       }
 
       return chartImages;
     } catch (error) {
-      console.error('Error rendering charts for export:', error);
+      console.error("Error rendering charts for export:", error);
       return {};
     }
   }
@@ -53,17 +67,19 @@ export class ChartRenderer {
   /**
    * Render pain trend chart as base64 image
    */
-  private static async renderTrendChart(trendData: TrendPoint[]): Promise<string> {
+  private static async renderTrendChart(
+    trendData: TrendPoint[],
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       try {
         // Create canvas element
-        const canvas = document.createElement('canvas');
+        const canvas = document.createElement("canvas");
         canvas.width = this.CHART_WIDTH;
         canvas.height = this.CHART_HEIGHT;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
 
         if (!ctx) {
-          reject(new Error('Failed to get canvas context'));
+          reject(new Error("Failed to get canvas context"));
           return;
         }
 
@@ -72,35 +88,37 @@ export class ChartRenderer {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Import Chart.js dynamically
-        import('chart.js').then(({ Chart }) => {
-          const chartData = ChartUtils.formatPainTrendData(trendData, false);
-          const chartOptions = {
-            ...ChartUtils.getPainTrendOptions(false),
-            responsive: false,
-            maintainAspectRatio: false,
-            animation: false,
-            plugins: {
-              ...ChartUtils.getPainTrendOptions(false).plugins,
-              legend: {
-                ...ChartUtils.getPainTrendOptions(false).plugins?.legend,
-                display: true
-              }
-            }
-          };
+        import("chart.js")
+          .then(({ Chart }) => {
+            const chartData = ChartUtils.formatPainTrendData(trendData, false);
+            const chartOptions = {
+              ...ChartUtils.getPainTrendOptions(false),
+              responsive: false,
+              maintainAspectRatio: false,
+              animation: false,
+              plugins: {
+                ...ChartUtils.getPainTrendOptions(false).plugins,
+                legend: {
+                  ...ChartUtils.getPainTrendOptions(false).plugins?.legend,
+                  display: true,
+                },
+              },
+            };
 
-          const chart = new Chart(ctx, {
-            type: 'line',
-            data: chartData,
-            options: chartOptions as any
-          });
+            const chart = new Chart(ctx, {
+              type: "line",
+              data: chartData,
+              options: chartOptions as any,
+            });
 
-          // Wait for chart to render, then convert to base64
-          setTimeout(() => {
-            const base64Image = canvas.toDataURL('image/png');
-            chart.destroy();
-            resolve(base64Image);
-          }, 500);
-        }).catch(reject);
+            // Wait for chart to render, then convert to base64
+            setTimeout(() => {
+              const base64Image = canvas.toDataURL("image/png");
+              chart.destroy();
+              resolve(base64Image);
+            }, 500);
+          })
+          .catch(reject);
       } catch (error) {
         reject(error);
       }
@@ -110,46 +128,51 @@ export class ChartRenderer {
   /**
    * Render pain distribution chart as base64 image
    */
-  private static async renderDistributionChart(analytics: PainAnalytics): Promise<string> {
+  private static async renderDistributionChart(
+    analytics: PainAnalytics,
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       try {
         // Create mock records for distribution calculation
         const mockRecords = this.createMockRecordsFromAnalytics(analytics);
 
-        const canvas = document.createElement('canvas');
+        const canvas = document.createElement("canvas");
         canvas.width = this.CHART_WIDTH;
         canvas.height = this.CHART_HEIGHT;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
 
         if (!ctx) {
-          reject(new Error('Failed to get canvas context'));
+          reject(new Error("Failed to get canvas context"));
           return;
         }
 
         ctx.fillStyle = this.CHART_BACKGROUND;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        import('chart.js').then(({ Chart }) => {
-          const chartData = ChartUtils.formatPainDistributionData(mockRecords);
-          const chartOptions = {
-            ...ChartUtils.getPainDistributionOptions(false),
-            responsive: false,
-            maintainAspectRatio: false,
-            animation: false
-          };
+        import("chart.js")
+          .then(({ Chart }) => {
+            const chartData =
+              ChartUtils.formatPainDistributionData(mockRecords);
+            const chartOptions = {
+              ...ChartUtils.getPainDistributionOptions(false),
+              responsive: false,
+              maintainAspectRatio: false,
+              animation: false,
+            };
 
-          const chart = new Chart(ctx, {
-            type: 'bar',
-            data: chartData,
-            options: chartOptions as any
-          });
+            const chart = new Chart(ctx, {
+              type: "bar",
+              data: chartData,
+              options: chartOptions as any,
+            });
 
-          setTimeout(() => {
-            const base64Image = canvas.toDataURL('image/png');
-            chart.destroy();
-            resolve(base64Image);
-          }, 500);
-        }).catch(reject);
+            setTimeout(() => {
+              const base64Image = canvas.toDataURL("image/png");
+              chart.destroy();
+              resolve(base64Image);
+            }, 500);
+          })
+          .catch(reject);
       } catch (error) {
         reject(error);
       }
@@ -159,43 +182,47 @@ export class ChartRenderer {
   /**
    * Render pain type chart as base64 image
    */
-  private static async renderPainTypeChart(painTypes: PainTypeFrequency[]): Promise<string> {
+  private static async renderPainTypeChart(
+    painTypes: PainTypeFrequency[],
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       try {
-        const canvas = document.createElement('canvas');
+        const canvas = document.createElement("canvas");
         canvas.width = this.CHART_WIDTH;
         canvas.height = this.CHART_HEIGHT;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
 
         if (!ctx) {
-          reject(new Error('Failed to get canvas context'));
+          reject(new Error("Failed to get canvas context"));
           return;
         }
 
         ctx.fillStyle = this.CHART_BACKGROUND;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        import('chart.js').then(({ Chart }) => {
-          const chartData = ChartUtils.formatPainTypeData(painTypes);
-          const chartOptions = {
-            ...ChartUtils.getPainTypeOptions(false),
-            responsive: false,
-            maintainAspectRatio: false,
-            animation: false
-          };
+        import("chart.js")
+          .then(({ Chart }) => {
+            const chartData = ChartUtils.formatPainTypeData(painTypes);
+            const chartOptions = {
+              ...ChartUtils.getPainTypeOptions(false),
+              responsive: false,
+              maintainAspectRatio: false,
+              animation: false,
+            };
 
-          const chart = new Chart(ctx, {
-            type: 'doughnut',
-            data: chartData,
-            options: chartOptions as any
-          });
+            const chart = new Chart(ctx, {
+              type: "doughnut",
+              data: chartData,
+              options: chartOptions as any,
+            });
 
-          setTimeout(() => {
-            const base64Image = canvas.toDataURL('image/png');
-            chart.destroy();
-            resolve(base64Image);
-          }, 500);
-        }).catch(reject);
+            setTimeout(() => {
+              const base64Image = canvas.toDataURL("image/png");
+              chart.destroy();
+              resolve(base64Image);
+            }, 500);
+          })
+          .catch(reject);
       } catch (error) {
         reject(error);
       }
@@ -205,43 +232,47 @@ export class ChartRenderer {
   /**
    * Render cycle pattern chart as base64 image
    */
-  private static async renderCyclePatternChart(cyclePatterns: CyclePattern[]): Promise<string> {
+  private static async renderCyclePatternChart(
+    cyclePatterns: CyclePattern[],
+  ): Promise<string> {
     return new Promise((resolve, reject) => {
       try {
-        const canvas = document.createElement('canvas');
+        const canvas = document.createElement("canvas");
         canvas.width = this.CHART_WIDTH;
         canvas.height = this.CHART_HEIGHT;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext("2d");
 
         if (!ctx) {
-          reject(new Error('Failed to get canvas context'));
+          reject(new Error("Failed to get canvas context"));
           return;
         }
 
         ctx.fillStyle = this.CHART_BACKGROUND;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        import('chart.js').then(({ Chart }) => {
-          const chartData = ChartUtils.formatCyclePatternData(cyclePatterns);
-          const chartOptions = {
-            ...ChartUtils.getCyclePatternOptions(false),
-            responsive: false,
-            maintainAspectRatio: false,
-            animation: false
-          };
+        import("chart.js")
+          .then(({ Chart }) => {
+            const chartData = ChartUtils.formatCyclePatternData(cyclePatterns);
+            const chartOptions = {
+              ...ChartUtils.getCyclePatternOptions(false),
+              responsive: false,
+              maintainAspectRatio: false,
+              animation: false,
+            };
 
-          const chart = new Chart(ctx, {
-            type: 'bar',
-            data: chartData,
-            options: chartOptions as any
-          });
+            const chart = new Chart(ctx, {
+              type: "bar",
+              data: chartData,
+              options: chartOptions as any,
+            });
 
-          setTimeout(() => {
-            const base64Image = canvas.toDataURL('image/png');
-            chart.destroy();
-            resolve(base64Image);
-          }, 500);
-        }).catch(reject);
+            setTimeout(() => {
+              const base64Image = canvas.toDataURL("image/png");
+              chart.destroy();
+              resolve(base64Image);
+            }, 500);
+          })
+          .catch(reject);
       } catch (error) {
         reject(error);
       }
@@ -305,7 +336,7 @@ export class ChartRenderer {
       <section class="section">
         <h2>Data Visualizations</h2>
         <div class="charts-grid">
-          ${charts.join('')}
+          ${charts.join("")}
         </div>
       </section>
     `;
@@ -382,14 +413,16 @@ export class ChartRenderer {
    * Create mock records from analytics data for chart rendering
    * This is a helper method to generate sample data when actual records aren't available
    */
-  private static createMockRecordsFromAnalytics(analytics: PainAnalytics): any[] {
+  private static createMockRecordsFromAnalytics(
+    analytics: PainAnalytics,
+  ): any[] {
     const mockRecords = [];
 
     // Generate distribution based on trend data
     if (analytics.trendData && analytics.trendData.length > 0) {
-      return analytics.trendData.map(point => ({
+      return analytics.trendData.map((point) => ({
         painLevel: point.painLevel,
-        date: point.date
+        date: point.date,
       }));
     }
 
@@ -400,11 +433,16 @@ export class ChartRenderer {
     for (let i = 0; i < Math.min(totalRecords, 100); i++) {
       // Generate pain levels around the average with some variation
       const variation = (Math.random() - 0.5) * 4; // ±2 variation
-      const painLevel = Math.max(0, Math.min(10, Math.round(avgPain + variation)));
+      const painLevel = Math.max(
+        0,
+        Math.min(10, Math.round(avgPain + variation)),
+      );
 
       mockRecords.push({
         painLevel,
-        date: new Date(Date.now() - (i * 24 * 60 * 60 * 1000)).toISOString().split('T')[0]
+        date: new Date(Date.now() - i * 24 * 60 * 60 * 1000)
+          .toISOString()
+          .split("T")[0],
       });
     }
 
@@ -416,8 +454,8 @@ export class ChartRenderer {
    */
   static isCanvasSupported(): boolean {
     try {
-      const canvas = document.createElement('canvas');
-      return !!(canvas.getContext && canvas.getContext('2d'));
+      const canvas = document.createElement("canvas");
+      return !!(canvas.getContext && canvas.getContext("2d"));
     } catch {
       return false;
     }

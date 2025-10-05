@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 export interface UserPreferences {
   // Assessment preferences
-  preferredAssessmentMode: 'simplified' | 'detailed' | 'medical';
-  preferredLanguage: 'zh' | 'en';
+  preferredAssessmentMode: "simplified" | "detailed" | "medical";
+  preferredLanguage: "zh" | "en";
 
   // UI preferences
-  theme: 'light' | 'dark' | 'auto';
-  fontSize: 'small' | 'medium' | 'large';
+  theme: "light" | "dark" | "auto";
+  fontSize: "small" | "medium" | "large";
   animationsEnabled: boolean;
 
   // Notification preferences
   emailNotifications: boolean;
   pushNotifications: boolean;
-  reminderFrequency: 'daily' | 'weekly' | 'monthly' | 'never';
+  reminderFrequency: "daily" | "weekly" | "monthly" | "never";
 
   // Privacy preferences
   dataSharing: boolean;
@@ -28,14 +28,14 @@ export interface UserPreferences {
 }
 
 const DEFAULT_PREFERENCES: UserPreferences = {
-  preferredAssessmentMode: 'simplified',
-  preferredLanguage: 'zh',
-  theme: 'light',
-  fontSize: 'medium',
+  preferredAssessmentMode: "simplified",
+  preferredLanguage: "zh",
+  theme: "light",
+  fontSize: "medium",
   animationsEnabled: true,
   emailNotifications: false,
   pushNotifications: true,
-  reminderFrequency: 'weekly',
+  reminderFrequency: "weekly",
   dataSharing: false,
   analyticsEnabled: true,
   personalizedRecommendations: true,
@@ -44,19 +44,20 @@ const DEFAULT_PREFERENCES: UserPreferences = {
 };
 
 export const useUserPreferences = () => {
-  const [preferences, setPreferences] = useState<UserPreferences>(DEFAULT_PREFERENCES);
+  const [preferences, setPreferences] =
+    useState<UserPreferences>(DEFAULT_PREFERENCES);
   const [isLoading, setIsLoading] = useState(true);
 
   // Load preferences from localStorage on mount
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('userPreferences');
+      const saved = localStorage.getItem("userPreferences");
       if (saved) {
         const parsedPreferences = JSON.parse(saved);
         setPreferences({ ...DEFAULT_PREFERENCES, ...parsedPreferences });
       }
     } catch (error) {
-      console.error('Error loading user preferences:', error);
+      console.error("Error loading user preferences:", error);
     } finally {
       setIsLoading(false);
     }
@@ -66,27 +67,27 @@ export const useUserPreferences = () => {
   useEffect(() => {
     if (!isLoading) {
       try {
-        localStorage.setItem('userPreferences', JSON.stringify(preferences));
+        localStorage.setItem("userPreferences", JSON.stringify(preferences));
       } catch (error) {
-        console.error('Error saving user preferences:', error);
+        console.error("Error saving user preferences:", error);
       }
     }
   }, [preferences, isLoading]);
 
-  const updatePreference = useCallback(<K extends keyof UserPreferences>(
-    key: K,
-    value: UserPreferences[K]
-  ) => {
-    setPreferences(prev => ({
-      ...prev,
-      [key]: value
-    }));
-  }, []);
+  const updatePreference = useCallback(
+    <K extends keyof UserPreferences>(key: K, value: UserPreferences[K]) => {
+      setPreferences((prev) => ({
+        ...prev,
+        [key]: value,
+      }));
+    },
+    [],
+  );
 
   const updatePreferences = useCallback((updates: Partial<UserPreferences>) => {
-    setPreferences(prev => ({
+    setPreferences((prev) => ({
       ...prev,
-      ...updates
+      ...updates,
     }));
   }, []);
 
@@ -94,11 +95,12 @@ export const useUserPreferences = () => {
     setPreferences(DEFAULT_PREFERENCES);
   }, []);
 
-  const getPreference = useCallback(<K extends keyof UserPreferences>(
-    key: K
-  ): UserPreferences[K] => {
-    return preferences[key];
-  }, [preferences]);
+  const getPreference = useCallback(
+    <K extends keyof UserPreferences>(key: K): UserPreferences[K] => {
+      return preferences[key];
+    },
+    [preferences],
+  );
 
   return {
     preferences,

@@ -9,14 +9,19 @@ import { URL_CONFIG } from "@/lib/url-config";
 
 // 推荐数据配置函数（自然疗法主题）
 async function getNaturalTherapiesRecommendations(locale: string) {
-  const t = await getTranslations({ locale, namespace: 'naturalTherapiesPage' });
+  const t = await getTranslations({
+    locale,
+    namespace: "naturalTherapiesPage",
+  });
 
   return {
     relatedTools: [
       {
         id: "nutrition-recommendation-generator",
-        title: t('recommendations.relatedTools.nutritionGenerator.title'),
-        description: t('recommendations.relatedTools.nutritionGenerator.description'),
+        title: t("recommendations.relatedTools.nutritionGenerator.title"),
+        description: t(
+          "recommendations.relatedTools.nutritionGenerator.description",
+        ),
         href: `/${locale}/interactive-tools/nutrition-recommendation-generator`,
         icon: "🥗",
         priority: "high",
@@ -25,8 +30,10 @@ async function getNaturalTherapiesRecommendations(locale: string) {
       },
       {
         id: "constitution-test",
-        title: t('recommendations.relatedTools.constitutionTest.title'),
-        description: t('recommendations.relatedTools.constitutionTest.description'),
+        title: t("recommendations.relatedTools.constitutionTest.title"),
+        description: t(
+          "recommendations.relatedTools.constitutionTest.description",
+        ),
         href: `/${locale}/interactive-tools/constitution-test`,
         icon: "🏮",
         priority: "high",
@@ -35,8 +42,8 @@ async function getNaturalTherapiesRecommendations(locale: string) {
       },
       {
         id: "pain-tracker",
-        title: t('recommendations.relatedTools.painTracker.title'),
-        description: t('recommendations.relatedTools.painTracker.description'),
+        title: t("recommendations.relatedTools.painTracker.title"),
+        description: t("recommendations.relatedTools.painTracker.description"),
         href: `/${locale}/interactive-tools/pain-tracker`,
         icon: "📊",
         priority: "high",
@@ -47,33 +54,37 @@ async function getNaturalTherapiesRecommendations(locale: string) {
     relatedArticles: [
       {
         id: "comprehensive-medical-guide-to-dysmenorrhea",
-        title: t('recommendations.relatedArticles.medicalGuide.title'),
-        description: t('recommendations.relatedArticles.medicalGuide.description'),
+        title: t("recommendations.relatedArticles.medicalGuide.title"),
+        description: t(
+          "recommendations.relatedArticles.medicalGuide.description",
+        ),
         href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
-        readTime: t('recommendations.relatedArticles.medicalGuide.readTime'),
-        category: t('recommendations.relatedArticles.medicalGuide.category'),
+        readTime: t("recommendations.relatedArticles.medicalGuide.readTime"),
+        category: t("recommendations.relatedArticles.medicalGuide.category"),
         priority: "high",
         icon: "📋",
         anchorTextType: "medical_guide",
       },
       {
         id: "heat-therapy-complete-guide",
-        title: t('recommendations.relatedArticles.heatTherapy.title'),
-        description: t('recommendations.relatedArticles.heatTherapy.description'),
+        title: t("recommendations.relatedArticles.heatTherapy.title"),
+        description: t(
+          "recommendations.relatedArticles.heatTherapy.description",
+        ),
         href: `/${locale}/articles/heat-therapy-complete-guide`,
-        readTime: t('recommendations.relatedArticles.heatTherapy.readTime'),
-        category: t('recommendations.relatedArticles.heatTherapy.category'),
+        readTime: t("recommendations.relatedArticles.heatTherapy.readTime"),
+        category: t("recommendations.relatedArticles.heatTherapy.category"),
         priority: "high",
         icon: "🔥",
         anchorTextType: "heat_therapy",
       },
       {
         id: "herbal-tea-menstrual-pain-relief",
-        title: t('recommendations.relatedArticles.herbalTea.title'),
-        description: t('recommendations.relatedArticles.herbalTea.description'),
+        title: t("recommendations.relatedArticles.herbalTea.title"),
+        description: t("recommendations.relatedArticles.herbalTea.description"),
         href: `/${locale}/articles/herbal-tea-menstrual-pain-relief`,
-        readTime: t('recommendations.relatedArticles.herbalTea.readTime'),
-        category: t('recommendations.relatedArticles.herbalTea.category'),
+        readTime: t("recommendations.relatedArticles.herbalTea.readTime"),
+        category: t("recommendations.relatedArticles.herbalTea.category"),
         priority: "medium",
         icon: "🌿",
         anchorTextType: "herbal_tea",
@@ -82,8 +93,10 @@ async function getNaturalTherapiesRecommendations(locale: string) {
     scenarioSolutions: [
       {
         id: "exercise",
-        title: t('recommendations.scenarioSolutions.exercise.title'),
-        description: t('recommendations.scenarioSolutions.exercise.description'),
+        title: t("recommendations.scenarioSolutions.exercise.title"),
+        description: t(
+          "recommendations.scenarioSolutions.exercise.description",
+        ),
         href: `/${locale}/scenario-solutions/exercise`,
         icon: "🏃‍♀️",
         priority: "high",
@@ -91,8 +104,8 @@ async function getNaturalTherapiesRecommendations(locale: string) {
       },
       {
         id: "office",
-        title: t('recommendations.scenarioSolutions.office.title'),
-        description: t('recommendations.scenarioSolutions.office.description'),
+        title: t("recommendations.scenarioSolutions.office.title"),
+        description: t("recommendations.scenarioSolutions.office.description"),
         href: `/${locale}/scenario-solutions/office`,
         icon: "💼",
         priority: "high",
@@ -100,8 +113,10 @@ async function getNaturalTherapiesRecommendations(locale: string) {
       },
       {
         id: "emergency-kit",
-        title: t('recommendations.scenarioSolutions.emergencyKit.title'),
-        description: t('recommendations.scenarioSolutions.emergencyKit.description'),
+        title: t("recommendations.scenarioSolutions.emergencyKit.title"),
+        description: t(
+          "recommendations.scenarioSolutions.emergencyKit.description",
+        ),
         href: `/${locale}/scenario-solutions/emergency-kit`,
         icon: "🚨",
         priority: "medium",
@@ -1617,7 +1632,7 @@ export default async function NaturalTherapiesPage({
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
               <span className="mr-3">🔧</span>
-              {t('sections.relatedTools')}
+              {t("sections.relatedTools")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {recommendations.relatedTools.map((tool) => (
@@ -1630,7 +1645,7 @@ export default async function NaturalTherapiesPage({
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
               <span className="mr-3">📚</span>
-              {t('sections.relatedArticles')}
+              {t("sections.relatedArticles")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {recommendations.relatedArticles.map((article) => (
@@ -1647,7 +1662,7 @@ export default async function NaturalTherapiesPage({
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
               <span className="mr-3">🎯</span>
-              {t('sections.scenarioSolutions')}
+              {t("sections.scenarioSolutions")}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {recommendations.scenarioSolutions.map((solution) => (

@@ -1,15 +1,18 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { ErrorBoundary } from './ErrorBoundary';
-import { NotificationProvider, NotificationContainer } from './NotificationSystem';
-import { OfflineNotification, ConnectionStatus } from './OfflineNotification';
-import { BackupRestoreSystem } from './BackupRestoreSystem';
-import { LoadingOverlay } from './LoadingSystem';
-import { useErrorHandling } from '../hooks/useErrorHandling';
-import { useOfflineDetection } from '../hooks/useOfflineDetection';
-import DataIntegrityService from '../../../../../lib/pain-tracker/storage/DataIntegrityService';
-import { Shield, AlertTriangle, CheckCircle, Settings } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { ErrorBoundary } from "./ErrorBoundary";
+import {
+  NotificationProvider,
+  NotificationContainer,
+} from "./NotificationSystem";
+import { OfflineNotification, ConnectionStatus } from "./OfflineNotification";
+import { BackupRestoreSystem } from "./BackupRestoreSystem";
+import { LoadingOverlay } from "./LoadingSystem";
+import { useErrorHandling } from "../hooks/useErrorHandling";
+import { useOfflineDetection } from "../hooks/useOfflineDetection";
+import DataIntegrityService from "../../../../../lib/pain-tracker/storage/DataIntegrityService";
+import { Shield, AlertTriangle, CheckCircle, Settings } from "lucide-react";
 
 interface ErrorHandlingWrapperProps {
   children: React.ReactNode;
@@ -26,23 +29,25 @@ export function ErrorHandlingWrapper({
   showOfflineNotifications = true,
   enableAutoBackup = true,
   enableHealthChecks = true,
-  className = ''
+  className = "",
 }: ErrorHandlingWrapperProps) {
   const [showBackupSystem, setShowBackupSystem] = useState(false);
-  const [healthStatus, setHealthStatus] = useState<'healthy' | 'warning' | 'error' | 'checking'>('healthy');
+  const [healthStatus, setHealthStatus] = useState<
+    "healthy" | "warning" | "error" | "checking"
+  >("healthy");
   const [lastHealthCheck, setLastHealthCheck] = useState<Date | null>(null);
 
   const { errorState, handleError, clearError } = useErrorHandling({
     enableAutoRecovery: true,
     enableOfflineMode: true,
     onError: (error) => {
-      console.error('Error handled by wrapper:', error);
+      console.error("Error handled by wrapper:", error);
     },
     onRecovery: (success) => {
       if (success) {
-        setHealthStatus('healthy');
+        setHealthStatus("healthy");
       }
-    }
+    },
   });
 
   const { isOnline, isOffline } = useOfflineDetection({
@@ -56,7 +61,7 @@ export function ErrorHandlingWrapper({
       if (enableHealthChecks) {
         performHealthCheck();
       }
-    }
+    },
   });
 
   const dataIntegrityService = new DataIntegrityService();
@@ -65,23 +70,23 @@ export function ErrorHandlingWrapper({
   const performHealthCheck = async () => {
     if (!enableHealthChecks) return;
 
-    setHealthStatus('checking');
+    setHealthStatus("checking");
     try {
       const report = await dataIntegrityService.checkDataIntegrity();
 
       if (report.isValid) {
-        setHealthStatus('healthy');
-      } else if (report.corruptionLevel === 'minor') {
-        setHealthStatus('warning');
+        setHealthStatus("healthy");
+      } else if (report.corruptionLevel === "minor") {
+        setHealthStatus("warning");
       } else {
-        setHealthStatus('error');
+        setHealthStatus("error");
       }
 
       setLastHealthCheck(new Date());
     } catch (error) {
-      console.error('Health check failed:', error);
-      setHealthStatus('error');
-      handleError(error as Error, 'health check');
+      console.error("Health check failed:", error);
+      setHealthStatus("error");
+      handleError(error as Error, "health check");
     }
   };
 
@@ -90,28 +95,45 @@ export function ErrorHandlingWrapper({
     if (!enableAutoBackup) return;
 
     try {
-      const records = JSON.parse(localStorage.getItem('enhanced_pain_tracker_records') || '[]');
+      const records = JSON.parse(
+        localStorage.getItem("enhanced_pain_tracker_records") || "[]",
+      );
       if (records.length === 0) return;
 
-      const lastBackup = localStorage.getItem('enhanced_pain_tracker_last_backup');
+      const lastBackup = localStorage.getItem(
+        "enhanced_pain_tracker_last_backup",
+      );
       const lastBackupDate = lastBackup ? new Date(lastBackup) : null;
       const now = new Date();
 
       // Auto backup every 7 days
-      if (!lastBackupDate || (now.getTime() - lastBackupDate.getTime()) > 7 * 24 * 60 * 60 * 1000) {
+      if (
+        !lastBackupDate ||
+        now.getTime() - lastBackupDate.getTime() > 7 * 24 * 60 * 60 * 1000
+      ) {
         const backupData = {
           records,
-          preferences: JSON.parse(localStorage.getItem('enhanced_pain_tracker_preferences') || '{}'),
-          metadata: JSON.parse(localStorage.getItem('enhanced_pain_tracker_metadata') || '{}'),
+          preferences: JSON.parse(
+            localStorage.getItem("enhanced_pain_tracker_preferences") || "{}",
+          ),
+          metadata: JSON.parse(
+            localStorage.getItem("enhanced_pain_tracker_metadata") || "{}",
+          ),
           schemaVersion: 1,
-          lastBackup: now
+          lastBackup: now,
         };
 
-        localStorage.setItem('enhanced_pain_tracker_records_backup', JSON.stringify(backupData));
-        localStorage.setItem('enhanced_pain_tracker_last_backup', now.toISOString());
+        localStorage.setItem(
+          "enhanced_pain_tracker_records_backup",
+          JSON.stringify(backupData),
+        );
+        localStorage.setItem(
+          "enhanced_pain_tracker_last_backup",
+          now.toISOString(),
+        );
       }
     } catch (error) {
-      console.error('Auto backup failed:', error);
+      console.error("Auto backup failed:", error);
     }
   };
 
@@ -141,38 +163,55 @@ export function ErrorHandlingWrapper({
     const handleBackupRequest = () => setShowBackupSystem(true);
     const handleCleanupRequest = () => {
       // Implement cleanup logic
-      const records = JSON.parse(localStorage.getItem('enhanced_pain_tracker_records') || '[]');
+      const records = JSON.parse(
+        localStorage.getItem("enhanced_pain_tracker_records") || "[]",
+      );
       const cutoffDate = new Date();
       cutoffDate.setFullYear(cutoffDate.getFullYear() - 1); // Keep only last year
 
-      const filteredRecords = records.filter((record: any) =>
-        new Date(record.date) > cutoffDate
+      const filteredRecords = records.filter(
+        (record: any) => new Date(record.date) > cutoffDate,
       );
 
-      localStorage.setItem('enhanced_pain_tracker_records', JSON.stringify(filteredRecords));
+      localStorage.setItem(
+        "enhanced_pain_tracker_records",
+        JSON.stringify(filteredRecords),
+      );
       performHealthCheck();
     };
 
-    window.addEventListener('pain-tracker-export-request', handleExportRequest);
-    window.addEventListener('pain-tracker-backup-request', handleBackupRequest);
-    window.addEventListener('pain-tracker-cleanup-request', handleCleanupRequest);
+    window.addEventListener("pain-tracker-export-request", handleExportRequest);
+    window.addEventListener("pain-tracker-backup-request", handleBackupRequest);
+    window.addEventListener(
+      "pain-tracker-cleanup-request",
+      handleCleanupRequest,
+    );
 
     return () => {
-      window.removeEventListener('pain-tracker-export-request', handleExportRequest);
-      window.removeEventListener('pain-tracker-backup-request', handleBackupRequest);
-      window.removeEventListener('pain-tracker-cleanup-request', handleCleanupRequest);
+      window.removeEventListener(
+        "pain-tracker-export-request",
+        handleExportRequest,
+      );
+      window.removeEventListener(
+        "pain-tracker-backup-request",
+        handleBackupRequest,
+      );
+      window.removeEventListener(
+        "pain-tracker-cleanup-request",
+        handleCleanupRequest,
+      );
     };
   }, []);
 
   const getHealthStatusIcon = () => {
     switch (healthStatus) {
-      case 'healthy':
+      case "healthy":
         return <CheckCircle className="h-4 w-4 text-green-500" />;
-      case 'warning':
+      case "warning":
         return <AlertTriangle className="h-4 w-4 text-yellow-500" />;
-      case 'error':
+      case "error":
         return <AlertTriangle className="h-4 w-4 text-red-500" />;
-      case 'checking':
+      case "checking":
         return <Shield className="h-4 w-4 text-blue-500 animate-pulse" />;
       default:
         return <Shield className="h-4 w-4 text-gray-500" />;
@@ -181,16 +220,16 @@ export function ErrorHandlingWrapper({
 
   const getHealthStatusText = () => {
     switch (healthStatus) {
-      case 'healthy':
-        return 'Data Healthy';
-      case 'warning':
-        return 'Minor Issues';
-      case 'error':
-        return 'Data Issues';
-      case 'checking':
-        return 'Checking...';
+      case "healthy":
+        return "Data Healthy";
+      case "warning":
+        return "Minor Issues";
+      case "error":
+        return "Data Issues";
+      case "checking":
+        return "Checking...";
       default:
-        return 'Unknown';
+        return "Unknown";
     }
   };
 
@@ -198,9 +237,9 @@ export function ErrorHandlingWrapper({
     <NotificationProvider>
       <ErrorBoundary
         onError={(error, errorInfo) => {
-          handleError(error, 'component error');
+          handleError(error, "component error");
         }}
-        showDetails={process.env.NODE_ENV === 'development'}
+        showDetails={process.env.NODE_ENV === "development"}
       >
         <div className={`relative ${className}`}>
           {/* Status Bar */}
@@ -227,7 +266,7 @@ export function ErrorHandlingWrapper({
               <div className="flex items-center space-x-2">
                 <button
                   onClick={performHealthCheck}
-                  disabled={healthStatus === 'checking'}
+                  disabled={healthStatus === "checking"}
                   className="text-xs text-blue-600 hover:text-blue-800 disabled:opacity-50 transition-colors"
                 >
                   Check Health
@@ -274,8 +313,18 @@ export function ErrorHandlingWrapper({
                     onClick={() => setShowBackupSystem(false)}
                     className="text-gray-400 hover:text-gray-600 transition-colors"
                   >
-                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    <svg
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -295,11 +344,11 @@ export function ErrorHandlingWrapper({
                   }}
                   onIntegrityCheck={(report) => {
                     if (report.isValid) {
-                      setHealthStatus('healthy');
-                    } else if (report.corruptionLevel === 'minor') {
-                      setHealthStatus('warning');
+                      setHealthStatus("healthy");
+                    } else if (report.corruptionLevel === "minor") {
+                      setHealthStatus("warning");
                     } else {
-                      setHealthStatus('error');
+                      setHealthStatus("error");
                     }
                   }}
                 />

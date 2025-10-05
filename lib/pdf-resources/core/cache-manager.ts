@@ -1,7 +1,7 @@
 // lib/pdf-resources/core/cache-manager.ts
 
-import { CacheEntry, CacheStats } from '../types/resource-types';
-import { CacheConfig, CacheStrategy } from '../types/config-types';
+import { CacheEntry, CacheStats } from "../types/resource-types";
+import { CacheConfig, CacheStrategy } from "../types/config-types";
 
 /**
  * 缓存策略接口
@@ -25,7 +25,10 @@ class LRUCacheStrategy<T = any> implements ICacheStrategy<T> {
   private accessOrder = new Map<string, number>();
   private accessCounter = 0;
 
-  constructor(private maxSize: number, private defaultTtl: number) {}
+  constructor(
+    private maxSize: number,
+    private defaultTtl: number,
+  ) {}
 
   get(key: string): CacheEntry<T> | null {
     const entry = this.cache.get(key);
@@ -62,7 +65,7 @@ class LRUCacheStrategy<T = any> implements ICacheStrategy<T> {
       expiresAt,
       accessCount: 1,
       lastAccessedAt: now,
-      size: this.calculateSize(value)
+      size: this.calculateSize(value),
     };
 
     this.cache.set(key, entry);
@@ -128,7 +131,10 @@ class LFUCacheStrategy<T = any> implements ICacheStrategy<T> {
   private cache = new Map<string, CacheEntry<T>>();
   private frequencies = new Map<string, number>();
 
-  constructor(private maxSize: number, private defaultTtl: number) {}
+  constructor(
+    private maxSize: number,
+    private defaultTtl: number,
+  ) {}
 
   get(key: string): CacheEntry<T> | null {
     const entry = this.cache.get(key);
@@ -164,7 +170,7 @@ class LFUCacheStrategy<T = any> implements ICacheStrategy<T> {
       expiresAt,
       accessCount: 1,
       lastAccessedAt: now,
-      size: this.calculateSize(value)
+      size: this.calculateSize(value),
     };
 
     this.cache.set(key, entry);
@@ -229,7 +235,10 @@ class TTLCacheStrategy<T = any> implements ICacheStrategy<T> {
   private cache = new Map<string, CacheEntry<T>>();
   private timers = new Map<string, NodeJS.Timeout>();
 
-  constructor(private maxSize: number, private defaultTtl: number) {}
+  constructor(
+    private maxSize: number,
+    private defaultTtl: number,
+  ) {}
 
   get(key: string): CacheEntry<T> | null {
     const entry = this.cache.get(key);
@@ -264,7 +273,7 @@ class TTLCacheStrategy<T = any> implements ICacheStrategy<T> {
       expiresAt,
       accessCount: 1,
       lastAccessedAt: now,
-      size: this.calculateSize(value)
+      size: this.calculateSize(value),
     };
 
     this.cache.set(key, entry);
@@ -345,7 +354,7 @@ class AdaptiveCacheStrategy<T = any> implements ICacheStrategy<T> {
   private currentStrategy: ICacheStrategy<T>;
   private performanceMetrics = {
     lru: { hits: 0, misses: 0 },
-    lfu: { hits: 0, misses: 0 }
+    lfu: { hits: 0, misses: 0 },
   };
   private lastEvaluation = Date.now();
   private evaluationInterval = 60000; // 1分钟
@@ -361,9 +370,13 @@ class AdaptiveCacheStrategy<T = any> implements ICacheStrategy<T> {
 
     // 记录性能指标
     if (this.currentStrategy === this.lruStrategy) {
-      result ? this.performanceMetrics.lru.hits++ : this.performanceMetrics.lru.misses++;
+      result
+        ? this.performanceMetrics.lru.hits++
+        : this.performanceMetrics.lru.misses++;
     } else {
-      result ? this.performanceMetrics.lfu.hits++ : this.performanceMetrics.lfu.misses++;
+      result
+        ? this.performanceMetrics.lfu.hits++
+        : this.performanceMetrics.lfu.misses++;
     }
 
     // 定期评估策略性能
@@ -385,7 +398,7 @@ class AdaptiveCacheStrategy<T = any> implements ICacheStrategy<T> {
     this.lfuStrategy.clear();
     this.performanceMetrics = {
       lru: { hits: 0, misses: 0 },
-      lfu: { hits: 0, misses: 0 }
+      lfu: { hits: 0, misses: 0 },
     };
   }
 
@@ -415,7 +428,8 @@ class AdaptiveCacheStrategy<T = any> implements ICacheStrategy<T> {
     const lfuHitRate = this.calculateHitRate(this.performanceMetrics.lfu);
 
     // 切换到性能更好的策略
-    const newStrategy = lruHitRate > lfuHitRate ? this.lruStrategy : this.lfuStrategy;
+    const newStrategy =
+      lruHitRate > lfuHitRate ? this.lruStrategy : this.lfuStrategy;
 
     if (newStrategy !== this.currentStrategy) {
       this.migrateData(this.currentStrategy, newStrategy);
@@ -435,8 +449,9 @@ class AdaptiveCacheStrategy<T = any> implements ICacheStrategy<T> {
     for (const key of from.keys()) {
       const entry = from.get(key);
       if (entry) {
-        const remainingTtl = entry.expiresAt ?
-          Math.max(0, entry.expiresAt.getTime() - Date.now()) / 1000 : undefined;
+        const remainingTtl = entry.expiresAt
+          ? Math.max(0, entry.expiresAt.getTime() - Date.now()) / 1000
+          : undefined;
         to.set(key, entry.value, remainingTtl);
       }
     }
@@ -459,7 +474,7 @@ export class CacheManager {
       totalEntries: 0,
       totalSize: 0,
       hitRate: 0,
-      evictionCount: 0
+      evictionCount: 0,
     };
 
     if (config.enabled) {
@@ -557,7 +572,9 @@ export class CacheManager {
   /**
    * 预热缓存
    */
-  async warmup(entries: Array<{ key: string; value: any; ttl?: number }>): Promise<void> {
+  async warmup(
+    entries: Array<{ key: string; value: any; ttl?: number }>,
+  ): Promise<void> {
     if (!this.config.enabled || !this.config.warmup?.enabled) return;
 
     for (const entry of entries) {
@@ -591,8 +608,8 @@ export class CacheManager {
    * 按模式删除
    */
   deletePattern(pattern: string): number {
-    const regex = new RegExp(pattern.replace(/\*/g, '.*'));
-    const keysToDelete = this.keys().filter(key => regex.test(key));
+    const regex = new RegExp(pattern.replace(/\*/g, ".*"));
+    const keysToDelete = this.keys().filter((key) => regex.test(key));
 
     let deletedCount = 0;
     for (const key of keysToDelete) {
@@ -637,13 +654,13 @@ export class CacheManager {
 
   private createStrategy(strategyType: CacheStrategy): ICacheStrategy {
     switch (strategyType) {
-      case 'lru':
+      case "lru":
         return new LRUCacheStrategy(this.config.maxSize, this.config.ttl);
-      case 'lfu':
+      case "lfu":
         return new LFUCacheStrategy(this.config.maxSize, this.config.ttl);
-      case 'ttl':
+      case "ttl":
         return new TTLCacheStrategy(this.config.maxSize, this.config.ttl);
-      case 'adaptive':
+      case "adaptive":
         return new AdaptiveCacheStrategy(this.config.maxSize, this.config.ttl);
       default:
         return new LRUCacheStrategy(this.config.maxSize, this.config.ttl);
@@ -705,7 +722,7 @@ export class CacheManager {
       totalEntries: 0,
       totalSize: 0,
       hitRate: 0,
-      evictionCount: 0
+      evictionCount: 0,
     };
   }
 }

@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useLocale } from 'next-intl';
+import { useEffect } from "react";
+import { useLocale } from "next-intl";
 
 export default function LanguageSetter() {
   const locale = useLocale();
 
   useEffect(() => {
     // 动态设置HTML的lang属性
-    if (typeof document !== 'undefined') {
+    if (typeof document !== "undefined") {
       const htmlElement = document.documentElement;
-      const newLang = locale === 'zh' ? 'zh-CN' : 'en-US';
+      const newLang = locale === "zh" ? "zh-CN" : "en-US";
 
-      if (htmlElement.getAttribute('lang') !== newLang) {
-        htmlElement.setAttribute('lang', newLang);
+      if (htmlElement.getAttribute("lang") !== newLang) {
+        htmlElement.setAttribute("lang", newLang);
       }
     }
   }, [locale]);

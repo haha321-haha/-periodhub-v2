@@ -5,8 +5,8 @@ import {
   MemoryUsageInfo,
   MemoryThresholds,
   MemoryOptimizationResult,
-  PainTrackerError
-} from '../../../types/pain-tracker';
+  PainTrackerError,
+} from "../../../types/pain-tracker";
 
 export interface MemoryManagerInterface {
   monitorMemoryUsage(): MemoryUsageInfo;
@@ -26,7 +26,7 @@ export class MemoryManager implements MemoryManagerInterface {
     warning: 50 * 1024 * 1024, // 50MB
     critical: 100 * 1024 * 1024, // 100MB
     maxCacheSize: 20 * 1024 * 1024, // 20MB
-    maxChartInstances: 10
+    maxChartInstances: 10,
   };
 
   private memoryHistory: MemoryUsageInfo[] = [];
@@ -46,10 +46,10 @@ export class MemoryManager implements MemoryManagerInterface {
 
     // Check for memory pressure
     if (memoryInfo.usedJSHeapSize > this.memoryThresholds.critical) {
-      console.warn('Critical memory usage detected:', memoryInfo);
+      console.warn("Critical memory usage detected:", memoryInfo);
       this.performEmergencyCleanup().catch(console.error);
     } else if (memoryInfo.usedJSHeapSize > this.memoryThresholds.warning) {
-      console.warn('High memory usage detected:', memoryInfo);
+      console.warn("High memory usage detected:", memoryInfo);
     }
 
     return memoryInfo;
@@ -76,7 +76,7 @@ export class MemoryManager implements MemoryManagerInterface {
       // Destroy identified instances
       for (const id of instancesToDestroy) {
         const instance = this.chartInstances.get(id);
-        if (instance && typeof instance.destroy === 'function') {
+        if (instance && typeof instance.destroy === "function") {
           instance.destroy();
           this.chartInstances.delete(id);
           instancesDestroyed++;
@@ -104,13 +104,13 @@ export class MemoryManager implements MemoryManagerInterface {
         operations,
         startMemory: startMemory.usedJSHeapSize,
         endMemory: endMemory.usedJSHeapSize,
-        optimizationTime: 0
+        optimizationTime: 0,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to cleanup chart instances',
-        'CHART_ERROR',
-        error
+        "Failed to cleanup chart instances",
+        "CHART_ERROR",
+        error,
       );
     }
   }
@@ -146,13 +146,13 @@ export class MemoryManager implements MemoryManagerInterface {
         operations,
         startMemory: startMemory.usedJSHeapSize,
         endMemory: endMemory.usedJSHeapSize,
-        optimizationTime: 0
+        optimizationTime: 0,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to optimize data structures',
-        'STORAGE_ERROR',
-        error
+        "Failed to optimize data structures",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -164,7 +164,7 @@ export class MemoryManager implements MemoryManagerInterface {
     this.cancelMemoryCleanup();
 
     // Don't start timers in test environment
-    if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
+    if (typeof process !== "undefined" && process.env.NODE_ENV === "test") {
       return;
     }
 
@@ -178,7 +178,7 @@ export class MemoryManager implements MemoryManagerInterface {
           await this.optimizeDataStructures();
         }
       } catch (error) {
-        console.error('Automatic memory cleanup failed:', error);
+        console.error("Automatic memory cleanup failed:", error);
       }
     }, intervalMs);
   }
@@ -202,23 +202,35 @@ export class MemoryManager implements MemoryManagerInterface {
 
     // Check current memory usage
     if (memoryInfo.usedJSHeapSize > this.memoryThresholds.critical) {
-      recommendations.push('Critical: Memory usage is very high. Consider reducing data visualization complexity.');
-      recommendations.push('Reduce the number of data points displayed in charts.');
-      recommendations.push('Close unused chart tabs or components.');
+      recommendations.push(
+        "Critical: Memory usage is very high. Consider reducing data visualization complexity.",
+      );
+      recommendations.push(
+        "Reduce the number of data points displayed in charts.",
+      );
+      recommendations.push("Close unused chart tabs or components.");
     } else if (memoryInfo.usedJSHeapSize > this.memoryThresholds.warning) {
-      recommendations.push('Warning: Memory usage is elevated. Monitor performance.');
-      recommendations.push('Consider enabling data sampling for large datasets.');
+      recommendations.push(
+        "Warning: Memory usage is elevated. Monitor performance.",
+      );
+      recommendations.push(
+        "Consider enabling data sampling for large datasets.",
+      );
     }
 
     // Check chart instances
     if (this.chartInstances.size > this.memoryThresholds.maxChartInstances) {
-      recommendations.push(`Too many chart instances (${this.chartInstances.size}). Consider destroying unused charts.`);
+      recommendations.push(
+        `Too many chart instances (${this.chartInstances.size}). Consider destroying unused charts.`,
+      );
     }
 
     // Check cache size
     const cacheSize = this.calculateCacheSize();
     if (cacheSize > this.memoryThresholds.maxCacheSize) {
-      recommendations.push('Data cache is large. Consider clearing cached data.');
+      recommendations.push(
+        "Data cache is large. Consider clearing cached data.",
+      );
     }
 
     // Check memory trend
@@ -227,13 +239,17 @@ export class MemoryManager implements MemoryManagerInterface {
       const isIncreasing = this.isMemoryTrendIncreasing(recentMemory);
 
       if (isIncreasing) {
-        recommendations.push('Memory usage is trending upward. Monitor for memory leaks.');
+        recommendations.push(
+          "Memory usage is trending upward. Monitor for memory leaks.",
+        );
       }
     }
 
     // Browser-specific recommendations
     if (!this.isMemoryAPIAvailable()) {
-      recommendations.push('Memory monitoring is limited in this browser. Consider using Chrome for better memory insights.');
+      recommendations.push(
+        "Memory monitoring is limited in this browser. Consider using Chrome for better memory insights.",
+      );
     }
 
     return recommendations;
@@ -245,7 +261,7 @@ export class MemoryManager implements MemoryManagerInterface {
   async forceGarbageCollection(): Promise<void> {
     try {
       // Force garbage collection in development/testing environments
-      if (typeof window !== 'undefined' && (window as any).gc) {
+      if (typeof window !== "undefined" && (window as any).gc) {
         (window as any).gc();
       }
 
@@ -257,7 +273,7 @@ export class MemoryManager implements MemoryManagerInterface {
       }
     } catch (error) {
       // Garbage collection is not available or failed
-      console.warn('Could not force garbage collection:', error);
+      console.warn("Could not force garbage collection:", error);
     }
   }
 
@@ -268,7 +284,7 @@ export class MemoryManager implements MemoryManagerInterface {
     // Destroy existing instance if it exists
     if (this.chartInstances.has(id)) {
       const existingInstance = this.chartInstances.get(id);
-      if (existingInstance && typeof existingInstance.destroy === 'function') {
+      if (existingInstance && typeof existingInstance.destroy === "function") {
         existingInstance.destroy();
       }
     }
@@ -276,7 +292,7 @@ export class MemoryManager implements MemoryManagerInterface {
     this.chartInstances.set(id, {
       instance,
       createdAt: Date.now(),
-      lastAccessed: Date.now()
+      lastAccessed: Date.now(),
     });
 
     // Enforce maximum number of instances
@@ -290,7 +306,11 @@ export class MemoryManager implements MemoryManagerInterface {
    */
   unregisterChartInstance(id: string): void {
     const instanceData = this.chartInstances.get(id);
-    if (instanceData && instanceData.instance && typeof instanceData.instance.destroy === 'function') {
+    if (
+      instanceData &&
+      instanceData.instance &&
+      typeof instanceData.instance.destroy === "function"
+    ) {
       instanceData.instance.destroy();
     }
     this.chartInstances.delete(id);
@@ -314,7 +334,7 @@ export class MemoryManager implements MemoryManagerInterface {
       totalJSHeapSize: 0,
       jsHeapSizeLimit: 0,
       timestamp: new Date(),
-      isEstimated: true
+      isEstimated: true,
     };
 
     if (!this.isMemoryAPIAvailable()) {
@@ -327,13 +347,15 @@ export class MemoryManager implements MemoryManagerInterface {
       totalJSHeapSize: memory.totalJSHeapSize || 0,
       jsHeapSizeLimit: memory.jsHeapSizeLimit || 0,
       timestamp: new Date(),
-      isEstimated: false
+      isEstimated: false,
     };
   }
 
   private isMemoryAPIAvailable(): boolean {
-    return typeof performance !== 'undefined' &&
-           (performance as any).memory !== undefined;
+    return (
+      typeof performance !== "undefined" &&
+      (performance as any).memory !== undefined
+    );
   }
 
   private shouldDestroyChartInstance(instanceData: any, id: string): boolean {
@@ -352,7 +374,10 @@ export class MemoryManager implements MemoryManagerInterface {
     }
 
     // Destroy if instance is invalid
-    if (!instanceData.instance || typeof instanceData.instance.destroy !== 'function') {
+    if (
+      !instanceData.instance ||
+      typeof instanceData.instance.destroy !== "function"
+    ) {
       return true;
     }
 
@@ -382,7 +407,7 @@ export class MemoryManager implements MemoryManagerInterface {
       // Find canvas elements that might be orphaned chart instances
       const canvasElements = document.querySelectorAll('canvas[id^="chart-"]');
 
-      canvasElements.forEach(canvas => {
+      canvasElements.forEach((canvas) => {
         const id = canvas.id;
         if (!this.chartInstances.has(id)) {
           // This canvas doesn't have a registered instance
@@ -395,15 +420,17 @@ export class MemoryManager implements MemoryManagerInterface {
       });
 
       // Clean up chart.js specific elements
-      const chartjsElements = document.querySelectorAll('.chartjs-render-monitor, .chartjs-size-monitor');
-      chartjsElements.forEach(element => {
-        if (!element.parentElement?.querySelector('canvas')) {
+      const chartjsElements = document.querySelectorAll(
+        ".chartjs-render-monitor, .chartjs-size-monitor",
+      );
+      chartjsElements.forEach((element) => {
+        if (!element.parentElement?.querySelector("canvas")) {
           element.remove();
           removedCount++;
         }
       });
     } catch (error) {
-      console.warn('Failed to cleanup orphaned chart elements:', error);
+      console.warn("Failed to cleanup orphaned chart elements:", error);
     }
 
     return removedCount;
@@ -452,8 +479,8 @@ export class MemoryManager implements MemoryManagerInterface {
       const storageKeys = Object.keys(localStorage);
       let optimizedKeys = 0;
 
-      storageKeys.forEach(key => {
-        if (key.startsWith('pain_tracker_')) {
+      storageKeys.forEach((key) => {
+        if (key.startsWith("pain_tracker_")) {
           try {
             const data = localStorage.getItem(key);
             if (data) {
@@ -476,7 +503,7 @@ export class MemoryManager implements MemoryManagerInterface {
         operations.push(`Optimized ${optimizedKeys} storage keys`);
       }
     } catch (error) {
-      console.warn('Failed to optimize stored data:', error);
+      console.warn("Failed to optimize stored data:", error);
     }
 
     return { operations };
@@ -488,9 +515,9 @@ export class MemoryManager implements MemoryManagerInterface {
     try {
       // Clean up chart-related event listeners
       // This is a placeholder - actual implementation would depend on how events are managed
-      operations.push('Cleaned up event listeners');
+      operations.push("Cleaned up event listeners");
     } catch (error) {
-      console.warn('Failed to cleanup event listeners:', error);
+      console.warn("Failed to cleanup event listeners:", error);
     }
 
     return { operations };
@@ -499,7 +526,7 @@ export class MemoryManager implements MemoryManagerInterface {
   private calculateCacheSize(): number {
     let totalSize = 0;
 
-    this.dataCache.forEach(value => {
+    this.dataCache.forEach((value) => {
       try {
         const serialized = JSON.stringify(value);
         totalSize += new Blob([serialized]).size;
@@ -534,9 +561,9 @@ export class MemoryManager implements MemoryManagerInterface {
       // Force garbage collection
       await this.forceGarbageCollection();
 
-      console.log('Emergency memory cleanup completed');
+      console.log("Emergency memory cleanup completed");
     } catch (error) {
-      console.error('Emergency cleanup failed:', error);
+      console.error("Emergency cleanup failed:", error);
     }
   }
 }

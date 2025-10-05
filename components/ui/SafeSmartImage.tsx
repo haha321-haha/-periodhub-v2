@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import SmartImage from './SmartImage';
-import OptimizedImage from './OptimizedImage';
-import EnhancedImage from './EnhancedImage';
+import { useState, useEffect } from "react";
+import SmartImage from "./SmartImage";
+import OptimizedImage from "./OptimizedImage";
+import EnhancedImage from "./EnhancedImage";
 
 interface SafeSmartImageProps {
   src: string;
@@ -11,18 +11,18 @@ interface SafeSmartImageProps {
   width: number;
   height: number;
   className?: string;
-  type?: 'hero' | 'content' | 'thumbnail' | 'decorative';
+  type?: "hero" | "content" | "thumbnail" | "decorative";
   priority?: boolean;
   sizes?: string;
   quality?: number;
-  placeholder?: 'blur' | 'empty';
+  placeholder?: "blur" | "empty";
   style?: React.CSSProperties;
   onError?: (e: any) => void;
   onLoad?: () => void;
   // 安全机制配置
   enableFallback?: boolean;
   enableErrorBoundary?: boolean;
-  fallbackComponent?: 'EnhancedImage' | 'OptimizedImage' | 'img';
+  fallbackComponent?: "EnhancedImage" | "OptimizedImage" | "img";
   debugMode?: boolean;
 }
 
@@ -35,8 +35,8 @@ export default function SafeSmartImage({
   alt,
   width,
   height,
-  className = '',
-  type = 'content',
+  className = "",
+  type = "content",
   priority = false,
   sizes,
   quality,
@@ -46,8 +46,8 @@ export default function SafeSmartImage({
   onLoad,
   enableFallback = true,
   enableErrorBoundary = true,
-  fallbackComponent = 'EnhancedImage',
-  debugMode = false
+  fallbackComponent = "EnhancedImage",
+  debugMode = false,
 }: SafeSmartImageProps) {
   const [hasError, setHasError] = useState(false);
   const [errorCount, setErrorCount] = useState(0);
@@ -59,9 +59,9 @@ export default function SafeSmartImage({
   }, []);
 
   // 环境变量控制
-  const useSmartImage = process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== 'false';
-  const isProduction = process.env.NODE_ENV === 'production';
-  const isDevelopment = process.env.NODE_ENV === 'development';
+  const useSmartImage = process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== "false";
+  const isProduction = process.env.NODE_ENV === "production";
+  const isDevelopment = process.env.NODE_ENV === "development";
 
   // 错误处理
   const handleError = (e: any) => {
@@ -69,7 +69,7 @@ export default function SafeSmartImage({
       console.warn(`SafeSmartImage错误 (尝试 ${errorCount + 1}):`, e);
     }
 
-    setErrorCount(prev => prev + 1);
+    setErrorCount((prev) => prev + 1);
 
     if (enableErrorBoundary && errorCount >= 1) {
       setHasError(true);
@@ -81,7 +81,7 @@ export default function SafeSmartImage({
   // 加载成功处理
   const handleLoad = () => {
     if (debugMode) {
-      console.log('SafeSmartImage加载成功:', src);
+      console.log("SafeSmartImage加载成功:", src);
     }
     onLoad?.();
   };
@@ -94,21 +94,22 @@ export default function SafeSmartImage({
 
   // 决定使用哪个组件
   const shouldUseSmartImage = useSmartImage && !hasError && isClient;
-  const shouldUseFallback = !shouldUseSmartImage || (enableFallback && hasError);
+  const shouldUseFallback =
+    !shouldUseSmartImage || (enableFallback && hasError);
 
   if (debugMode) {
-    console.log('SafeSmartImage决策:', {
+    console.log("SafeSmartImage决策:", {
       useSmartImage,
       hasError,
       isClient,
       shouldUseSmartImage,
       shouldUseFallback,
-      errorCount
+      errorCount,
     });
   }
 
   // 回退到原生img标签
-  if (shouldUseFallback && fallbackComponent === 'img') {
+  if (shouldUseFallback && fallbackComponent === "img") {
     return (
       <img
         src={src}
@@ -119,13 +120,13 @@ export default function SafeSmartImage({
         style={style}
         onError={handleError}
         onLoad={handleLoad}
-        loading={priority ? 'eager' : 'lazy'}
+        loading={priority ? "eager" : "lazy"}
       />
     );
   }
 
   // 回退到EnhancedImage
-  if (shouldUseFallback && fallbackComponent === 'EnhancedImage') {
+  if (shouldUseFallback && fallbackComponent === "EnhancedImage") {
     return (
       <EnhancedImage
         src={src}
@@ -145,7 +146,7 @@ export default function SafeSmartImage({
   }
 
   // 回退到OptimizedImage
-  if (shouldUseFallback && fallbackComponent === 'OptimizedImage') {
+  if (shouldUseFallback && fallbackComponent === "OptimizedImage") {
     return (
       <OptimizedImage
         src={src}
@@ -182,7 +183,7 @@ export default function SafeSmartImage({
     );
   } catch (error) {
     if (debugMode) {
-      console.error('SmartImage渲染错误:', error);
+      console.error("SmartImage渲染错误:", error);
     }
 
     // 捕获渲染错误，回退到EnhancedImage
@@ -213,20 +214,20 @@ export default function SafeSmartImage({
 // 导出配置工具
 export const SafeSmartImageConfig = {
   // 环境变量检查
-  isEnabled: () => process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== 'false',
-  isDebugMode: () => process.env.NEXT_PUBLIC_DEBUG_IMAGES === 'true',
+  isEnabled: () => process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== "false",
+  isDebugMode: () => process.env.NEXT_PUBLIC_DEBUG_IMAGES === "true",
 
   // 重置全局错误状态
   resetGlobalError: () => {
     // 这里可以实现全局错误状态重置
-    console.log('重置全局SmartImage错误状态');
+    console.log("重置全局SmartImage错误状态");
   },
 
   // 获取当前配置
   getConfig: () => ({
-    useSmartImage: process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== 'false',
-    debugMode: process.env.NEXT_PUBLIC_DEBUG_IMAGES === 'true',
+    useSmartImage: process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== "false",
+    debugMode: process.env.NEXT_PUBLIC_DEBUG_IMAGES === "true",
     environment: process.env.NODE_ENV,
-    isProduction: process.env.NODE_ENV === 'production'
-  })
+    isProduction: process.env.NODE_ENV === "production",
+  }),
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 interface HydrationBoundaryProps {
   children: React.ReactNode;
@@ -15,7 +15,9 @@ interface HydrationBoundaryProps {
  */
 const HydrationBoundary: React.FC<HydrationBoundaryProps> = ({
   children,
-  fallback = <div className="animate-pulse bg-gray-200 rounded h-8 w-full"></div>
+  fallback = (
+    <div className="animate-pulse bg-gray-200 rounded h-8 w-full"></div>
+  ),
 }) => {
   const [hasMounted, setHasMounted] = useState(false);
 

@@ -1,6 +1,6 @@
 // lib/pdf-resources/utils/id-mapper.ts
 
-import { ResourceCategory, SupportedLanguage } from '../types/resource-types';
+import { ResourceCategory, SupportedLanguage } from "../types/resource-types";
 // import { LEGACY_ID_MAPPING } from '../../../config/resources/pdf-resources.config';
 
 // 临时定义，直到配置文件创建
@@ -89,7 +89,8 @@ export class IDMapper {
     }
 
     // 2. 检查直接映射
-    const directMapping = LEGACY_ID_MAPPING[legacyId as keyof typeof LEGACY_ID_MAPPING];
+    const directMapping =
+      LEGACY_ID_MAPPING[legacyId as keyof typeof LEGACY_ID_MAPPING];
     if (directMapping) {
       this.cache.set(legacyId, directMapping);
       return directMapping;
@@ -138,10 +139,7 @@ export class IDMapper {
   /**
    * 生成新的现代ID
    */
-  generateId(
-    baseName: string,
-    options: IDGenerationOptions = {}
-  ): string {
+  generateId(baseName: string, options: IDGenerationOptions = {}): string {
     // 1. 标准化基础名称
     let normalizedBase = this.normalizeBaseName(baseName);
 
@@ -157,20 +155,21 @@ export class IDMapper {
     }
 
     // 4. 添加语言后缀
-    if (options.language && options.language !== 'zh') {
+    if (options.language && options.language !== "zh") {
       normalizedBase = `${normalizedBase}-${options.language}`;
     }
 
     // 5. 添加版本号
     if (options.version) {
-      normalizedBase = `${normalizedBase}-v${options.version.replace(/\./g, '-')}`;
+      normalizedBase = `${normalizedBase}-v${options.version.replace(
+        /\./g,
+        "-",
+      )}`;
     }
 
     // 6. 添加时间戳
     if (options.includeTimestamp) {
-      const timestamp = new Date().toISOString()
-        .slice(0, 10)
-        .replace(/-/g, '');
+      const timestamp = new Date().toISOString().slice(0, 10).replace(/-/g, "");
       normalizedBase = `${normalizedBase}-${timestamp}`;
     }
 
@@ -216,49 +215,49 @@ export class IDMapper {
       isValid: true,
       errors: [],
       warnings: [],
-      suggestions: []
+      suggestions: [],
     };
 
     // 1. 基础格式检查
     if (!id || id.trim().length === 0) {
       result.isValid = false;
-      result.errors.push('ID不能为空');
+      result.errors.push("ID不能为空");
       return result;
     }
 
     // 2. 长度检查
     if (id.length < 3) {
       result.isValid = false;
-      result.errors.push('ID长度不能少于3个字符');
+      result.errors.push("ID长度不能少于3个字符");
     }
 
     if (id.length > 100) {
       result.isValid = false;
-      result.errors.push('ID长度不能超过100个字符');
+      result.errors.push("ID长度不能超过100个字符");
     }
 
     // 3. 字符检查
     if (!/^[a-z0-9\-]+$/.test(id)) {
       result.isValid = false;
-      result.errors.push('ID只能包含小写字母、数字和连字符');
-      result.suggestions.push('使用normalizeId()方法标准化ID');
+      result.errors.push("ID只能包含小写字母、数字和连字符");
+      result.suggestions.push("使用normalizeId()方法标准化ID");
     }
 
     // 4. 格式规范检查
-    if (id.startsWith('-') || id.endsWith('-')) {
+    if (id.startsWith("-") || id.endsWith("-")) {
       result.isValid = false;
-      result.errors.push('ID不能以连字符开头或结尾');
+      result.errors.push("ID不能以连字符开头或结尾");
     }
 
-    if (id.includes('--')) {
-      result.warnings.push('ID包含连续连字符，建议避免');
-      result.suggestions.push('移除多余的连字符');
+    if (id.includes("--")) {
+      result.warnings.push("ID包含连续连字符，建议避免");
+      result.suggestions.push("移除多余的连字符");
     }
 
     // 5. 语义检查
-    if (id.split('-').length > 8) {
-      result.warnings.push('ID分段过多，建议简化');
-      result.suggestions.push('减少连字符分段，保持简洁');
+    if (id.split("-").length > 8) {
+      result.warnings.push("ID分段过多，建议简化");
+      result.suggestions.push("减少连字符分段，保持简洁");
     }
 
     // 6. 生成规范化建议
@@ -276,27 +275,34 @@ export class IDMapper {
     return id
       .toLowerCase()
       .trim()
-      .replace(/[^a-z0-9\-\s]/g, '') // 移除特殊字符
-      .replace(/\s+/g, '-') // 空格转连字符
-      .replace(/-+/g, '-') // 多个连字符合并
-      .replace(/^-+|-+$/g, ''); // 移除首尾连字符
+      .replace(/[^a-z0-9\-\s]/g, "") // 移除特殊字符
+      .replace(/\s+/g, "-") // 空格转连字符
+      .replace(/-+/g, "-") // 多个连字符合并
+      .replace(/^-+|-+$/g, ""); // 移除首尾连字符
   }
 
   /**
    * 查找相似ID
    */
-  findSimilarIds(targetId: string, threshold: number = 0.7): Array<{
+  findSimilarIds(
+    targetId: string,
+    threshold: number = 0.7,
+  ): Array<{
     id: string;
     similarity: number;
-    type: 'legacy' | 'modern';
+    type: "legacy" | "modern";
   }> {
-    const similar: Array<{ id: string; similarity: number; type: 'legacy' | 'modern' }> = [];
+    const similar: Array<{
+      id: string;
+      similarity: number;
+      type: "legacy" | "modern";
+    }> = [];
 
     // 搜索Legacy映射
     for (const legacyId of Object.keys(LEGACY_ID_MAPPING)) {
       const similarity = this.calculateSimilarity(targetId, legacyId);
       if (similarity >= threshold) {
-        similar.push({ id: legacyId, similarity, type: 'legacy' });
+        similar.push({ id: legacyId, similarity, type: "legacy" });
       }
     }
 
@@ -304,7 +310,7 @@ export class IDMapper {
     for (const modernId of Object.values(LEGACY_ID_MAPPING)) {
       const similarity = this.calculateSimilarity(targetId, modernId);
       if (similarity >= threshold) {
-        similar.push({ id: modernId, similarity, type: 'modern' });
+        similar.push({ id: modernId, similarity, type: "modern" });
       }
     }
 
@@ -322,7 +328,7 @@ export class IDMapper {
       brokenMappings: 0,
       duplicateMappings: 0,
       unusedMappings: 0,
-      mappingsByType: {}
+      mappingsByType: {},
     };
 
     // 统计Legacy映射
@@ -389,71 +395,71 @@ export class IDMapper {
       metadata: {
         exportDate: new Date().toISOString(),
         totalMappings: Object.keys(LEGACY_ID_MAPPING).length,
-        version: '1.0.0'
-      }
+        version: "1.0.0",
+      },
     };
   }
 
   private initializeDefaultRules(): void {
     // PDF编号格式映射规则
     this.addMappingRule({
-      id: 'pdf_numbered_pattern',
-      name: 'PDF编号格式映射',
+      id: "pdf_numbered_pattern",
+      name: "PDF编号格式映射",
       pattern: /^(immediate|preparation|learning|management)-pdf-(\d+)$/,
       transform: (match) => {
         const [, category, number] = match;
         const categoryMap: Record<string, string> = {
-          'immediate': 'immediate-relief',
-          'preparation': 'preparation',
-          'learning': 'learning',
-          'management': 'management'
+          immediate: "immediate-relief",
+          preparation: "preparation",
+          learning: "learning",
+          management: "management",
         };
         return `${categoryMap[category]}-guide-${number}`;
       },
-      description: '将旧的PDF编号格式转换为新的命名格式',
+      description: "将旧的PDF编号格式转换为新的命名格式",
       examples: [
-        { input: 'immediate-pdf-1', output: 'immediate-relief-guide-1' },
-        { input: 'learning-pdf-3', output: 'learning-guide-3' }
-      ]
+        { input: "immediate-pdf-1", output: "immediate-relief-guide-1" },
+        { input: "learning-pdf-3", output: "learning-guide-3" },
+      ],
     });
 
     // 类别缩写映射规则
     this.addMappingRule({
-      id: 'category_abbreviation',
-      name: '类别缩写映射',
+      id: "category_abbreviation",
+      name: "类别缩写映射",
       pattern: /^(imm|prep|learn|mgmt)-(.+)$/,
       transform: (match) => {
         const [, abbrev, rest] = match;
         const abbreviationMap: Record<string, string> = {
-          'imm': 'immediate-relief',
-          'prep': 'preparation',
-          'learn': 'learning',
-          'mgmt': 'management'
+          imm: "immediate-relief",
+          prep: "preparation",
+          learn: "learning",
+          mgmt: "management",
         };
         return `${abbreviationMap[abbrev]}-${rest}`;
       },
-      description: '将类别缩写扩展为完整名称',
+      description: "将类别缩写扩展为完整名称",
       examples: [
-        { input: 'imm-pain-relief', output: 'immediate-relief-pain-relief' },
-        { input: 'prep-nutrition', output: 'preparation-nutrition' }
-      ]
+        { input: "imm-pain-relief", output: "immediate-relief-pain-relief" },
+        { input: "prep-nutrition", output: "preparation-nutrition" },
+      ],
     });
 
     // 版本号标准化规则
     this.addMappingRule({
-      id: 'version_normalization',
-      name: '版本号标准化',
+      id: "version_normalization",
+      name: "版本号标准化",
       pattern: /^(.+)[-_]v?(\d+)\.?(\d*)\.?(\d*)$/,
       transform: (match) => {
-        const [, base, major, minor = '0', patch = '0'] = match;
+        const [, base, major, minor = "0", patch = "0"] = match;
         const normalizedBase = this.normalizeBaseName(base);
         return `${normalizedBase}-v${major}-${minor}-${patch}`;
       },
-      description: '标准化版本号格式',
+      description: "标准化版本号格式",
       examples: [
-        { input: 'guide_v2.1', output: 'guide-v2-1-0' },
-        { input: 'manual-v1', output: 'manual-v1-0-0' }
-      ]
+        { input: "guide_v2.1", output: "guide-v2-1-0" },
+        { input: "manual-v1", output: "manual-v1-0-0" },
+      ],
     });
   }
 
@@ -469,29 +475,29 @@ export class IDMapper {
   }
 
   private isValidModernId(id: string): boolean {
-    return /^[a-z0-9]+(-[a-z0-9]+)*$/.test(id) &&
-           id.length >= 3 &&
-           id.length <= 100;
+    return (
+      /^[a-z0-9]+(-[a-z0-9]+)*$/.test(id) && id.length >= 3 && id.length <= 100
+    );
   }
 
   private normalizeBaseName(name: string): string {
     return name
       .toLowerCase()
       .trim()
-      .replace(/[^a-z0-9\s\-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-+|-+$/g, '');
+      .replace(/[^a-z0-9\s\-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-+|-+$/g, "");
   }
 
   private getCategoryPrefix(category: ResourceCategory): string {
     const prefixMap: Record<ResourceCategory, string> = {
-      'immediate-relief': 'immediate',
-      'preparation': 'prep',
-      'learning': 'learn',
-      'management': 'mgmt',
-      'assessment': 'assess',
-      'template': 'template'
+      "immediate-relief": "immediate",
+      preparation: "prep",
+      learning: "learn",
+      management: "mgmt",
+      assessment: "assess",
+      template: "template",
     };
     return prefixMap[category] || category;
   }
@@ -500,7 +506,7 @@ export class IDMapper {
     let hash = 0;
     for (let i = 0; i < input.length; i++) {
       const char = input.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash = hash & hash; // 转换为32位整数
     }
     return Math.abs(hash).toString(36).substring(0, 6);
@@ -510,11 +516,11 @@ export class IDMapper {
     if (id.length <= maxLength) return id;
 
     // 尝试在连字符处截断
-    const parts = id.split('-');
-    let truncated = '';
+    const parts = id.split("-");
+    let truncated = "";
 
     for (const part of parts) {
-      if ((truncated + '-' + part).length <= maxLength) {
+      if ((truncated + "-" + part).length <= maxLength) {
         truncated = truncated ? `${truncated}-${part}` : part;
       } else {
         break;
@@ -523,7 +529,7 @@ export class IDMapper {
 
     // 如果截断后太短，直接截取
     if (truncated.length < maxLength * 0.7) {
-      truncated = id.substring(0, maxLength - 3) + '...';
+      truncated = id.substring(0, maxLength - 3) + "...";
     }
 
     return truncated;
@@ -557,7 +563,7 @@ export class IDMapper {
           matrix[i][j] = Math.min(
             matrix[i - 1][j - 1] + 1,
             matrix[i][j - 1] + 1,
-            matrix[i - 1][j] + 1
+            matrix[i - 1][j] + 1,
           );
         }
       }
@@ -568,10 +574,11 @@ export class IDMapper {
   }
 
   private inferMappingType(legacyId: string, modernId: string): string {
-    if (legacyId.includes('pdf')) return 'pdf-mapping';
-    if (legacyId.includes('-1') || legacyId.includes('-2')) return 'numbered-mapping';
-    if (legacyId.length < modernId.length) return 'expansion-mapping';
-    return 'standard-mapping';
+    if (legacyId.includes("pdf")) return "pdf-mapping";
+    if (legacyId.includes("-1") || legacyId.includes("-2"))
+      return "numbered-mapping";
+    if (legacyId.length < modernId.length) return "expansion-mapping";
+    return "standard-mapping";
   }
 }
 
@@ -593,7 +600,7 @@ export function mapLegacyId(legacyId: string): string | null {
 export function generateResourceId(
   baseName: string,
   category?: ResourceCategory,
-  options?: Omit<IDGenerationOptions, 'category'>
+  options?: Omit<IDGenerationOptions, "category">,
 ): string {
   return idMapper.generateId(baseName, { ...options, category });
 }

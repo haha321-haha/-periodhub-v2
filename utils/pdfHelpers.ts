@@ -3,7 +3,13 @@
  * Period Hub PDF Download Center Utility Functions
  */
 
-import { PDFResource, LocalizedPDFResource, Locale, PDFCategory, PDFStats } from '@/types/pdf';
+import {
+  PDFResource,
+  LocalizedPDFResource,
+  Locale,
+  PDFCategory,
+  PDFStats,
+} from "@/types/pdf";
 
 /**
  * 获取本地化的PDF文件名
@@ -12,8 +18,8 @@ import { PDFResource, LocalizedPDFResource, Locale, PDFCategory, PDFStats } from
  * @returns 本地化文件名
  */
 export function getLocalizedFilename(filename: string, locale: Locale): string {
-  const baseName = filename.replace('.pdf', '');
-  return locale === 'zh' ? `${baseName}.pdf` : `${baseName}-en.pdf`;
+  const baseName = filename.replace(".pdf", "");
+  return locale === "zh" ? `${baseName}.pdf` : `${baseName}-en.pdf`;
 }
 
 /**
@@ -23,8 +29,8 @@ export function getLocalizedFilename(filename: string, locale: Locale): string {
  * @returns 替代语言文件名
  */
 export function getAlternateFilename(filename: string, locale: Locale): string {
-  const baseName = filename.replace('.pdf', '');
-  return locale === 'zh' ? `${baseName}-en.pdf` : `${baseName}.pdf`;
+  const baseName = filename.replace(".pdf", "");
+  return locale === "zh" ? `${baseName}-en.pdf` : `${baseName}.pdf`;
 }
 
 /**
@@ -42,7 +48,7 @@ export function getPDFDownloadUrl(filename: string): string {
  * @returns 替代语言标签
  */
 export function getAlternateLanguageLabel(locale: Locale): string {
-  return locale === 'zh' ? 'English' : '中文版';
+  return locale === "zh" ? "English" : "中文版";
 }
 
 /**
@@ -55,7 +61,7 @@ export function getAlternateLanguageLabel(locale: Locale): string {
 export function localizeResource(
   resource: PDFResource,
   locale: Locale,
-  t: (key: string) => string
+  t: (key: string) => string,
 ): LocalizedPDFResource {
   const localizedFilename = getLocalizedFilename(resource.filename, locale);
   const alternateFilename = getAlternateFilename(resource.filename, locale);
@@ -66,7 +72,7 @@ export function localizeResource(
     description: t(resource.descriptionKey),
     localizedFilename,
     alternateFilename,
-    downloadUrl: getPDFDownloadUrl(localizedFilename)
+    downloadUrl: getPDFDownloadUrl(localizedFilename),
   };
 }
 
@@ -76,16 +82,19 @@ export function localizeResource(
  * @returns 按分类分组的资源
  */
 export function groupResourcesByCategory(
-  resources: LocalizedPDFResource[]
+  resources: LocalizedPDFResource[],
 ): Record<PDFCategory, LocalizedPDFResource[]> {
-  return resources.reduce((groups, resource) => {
-    const category = resource.category;
-    if (!groups[category]) {
-      groups[category] = [];
-    }
-    groups[category].push(resource);
-    return groups;
-  }, {} as Record<PDFCategory, LocalizedPDFResource[]>);
+  return resources.reduce(
+    (groups, resource) => {
+      const category = resource.category;
+      if (!groups[category]) {
+        groups[category] = [];
+      }
+      groups[category].push(resource);
+      return groups;
+    },
+    {} as Record<PDFCategory, LocalizedPDFResource[]>,
+  );
 }
 
 /**
@@ -95,15 +104,15 @@ export function groupResourcesByCategory(
  */
 export function calculatePDFStats(resources: PDFResource[]): PDFStats {
   const categoryStats: Record<PDFCategory, number> = {
-    'management-tools': 0,
-    'health-management': 0,
-    'communication-guidance': 0,
-    'educational-resources': 0
+    "management-tools": 0,
+    "health-management": 0,
+    "communication-guidance": 0,
+    "educational-resources": 0,
   };
 
   let featuredCount = 0;
 
-  resources.forEach(resource => {
+  resources.forEach((resource) => {
     categoryStats[resource.category]++;
     if (resource.featured) {
       featuredCount++;
@@ -114,7 +123,7 @@ export function calculatePDFStats(resources: PDFResource[]): PDFStats {
     totalPDFs: resources.length,
     totalCategories: Object.keys(categoryStats).length,
     categoryStats,
-    featuredCount
+    featuredCount,
   };
 }
 
@@ -130,34 +139,34 @@ export function validatePDFResource(resource: PDFResource): {
   const errors: string[] = [];
 
   if (!resource.id) {
-    errors.push('Resource ID is required');
+    errors.push("Resource ID is required");
   }
 
   if (!resource.filename) {
-    errors.push('Filename is required');
-  } else if (!resource.filename.endsWith('.pdf')) {
-    errors.push('Filename must end with .pdf');
+    errors.push("Filename is required");
+  } else if (!resource.filename.endsWith(".pdf")) {
+    errors.push("Filename must end with .pdf");
   }
 
   if (!resource.titleKey) {
-    errors.push('Title key is required');
+    errors.push("Title key is required");
   }
 
   if (!resource.descriptionKey) {
-    errors.push('Description key is required');
+    errors.push("Description key is required");
   }
 
   if (!resource.category) {
-    errors.push('Category is required');
+    errors.push("Category is required");
   }
 
   if (!resource.icon) {
-    errors.push('Icon is required');
+    errors.push("Icon is required");
   }
 
   return {
     isValid: errors.length === 0,
-    errors
+    errors,
   };
 }
 
@@ -168,11 +177,11 @@ export function validatePDFResource(resource: PDFResource): {
  */
 export function trackPDFDownload(resourceId: string, locale: Locale): void {
   // 这里可以集成分析工具，如Google Analytics
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', 'pdf_download', {
+  if (typeof window !== "undefined" && (window as any).gtag) {
+    (window as any).gtag("event", "pdf_download", {
       resource_id: resourceId,
       locale: locale,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   }
 
@@ -201,7 +210,9 @@ export function formatFileSize(sizeInKB: number): string {
  */
 export async function checkPDFExists(filename: string): Promise<boolean> {
   try {
-    const response = await fetch(getPDFDownloadUrl(filename), { method: 'HEAD' });
+    const response = await fetch(getPDFDownloadUrl(filename), {
+      method: "HEAD",
+    });
     return response.ok;
   } catch {
     return false;

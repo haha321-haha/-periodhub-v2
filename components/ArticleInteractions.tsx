@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Heart, Bookmark, Share2, Copy, Check, Eye } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { Heart, Bookmark, Share2, Copy, Check, Eye } from "lucide-react";
 
 interface ArticleInteractionsProps {
   articleId: string;
   articleTitle: string;
-  locale: 'zh' | 'en' | string; // 允许更宽泛的字符串类型，但在运行时验证
+  locale: "zh" | "en" | string; // 允许更宽泛的字符串类型，但在运行时验证
   className?: string;
 }
 
@@ -14,7 +14,7 @@ export default function ArticleInteractions({
   articleId,
   articleTitle,
   locale,
-  className = ''
+  className = "",
 }: ArticleInteractionsProps) {
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -32,8 +32,8 @@ export default function ArticleInteractions({
     const storedViews = localStorage.getItem(`views_${articleId}`);
 
     if (storedLikes) setLikes(parseInt(storedLikes));
-    if (storedIsLiked) setIsLiked(storedIsLiked === 'true');
-    if (storedIsBookmarked) setIsBookmarked(storedIsBookmarked === 'true');
+    if (storedIsLiked) setIsLiked(storedIsLiked === "true");
+    if (storedIsBookmarked) setIsBookmarked(storedIsBookmarked === "true");
     if (storedViews) {
       setViews(parseInt(storedViews));
     } else {
@@ -44,7 +44,9 @@ export default function ArticleInteractions({
     }
 
     // 记录本次访问
-    const currentViews = parseInt(localStorage.getItem(`views_${articleId}`) || '0');
+    const currentViews = parseInt(
+      localStorage.getItem(`views_${articleId}`) || "0",
+    );
     const newViews = currentViews + 1;
     setViews(newViews);
     localStorage.setItem(`views_${articleId}`, newViews.toString());
@@ -67,10 +69,13 @@ export default function ArticleInteractions({
     const newBookmarkedState = !isBookmarked;
     setIsBookmarked(newBookmarkedState);
 
-    localStorage.setItem(`bookmarked_${articleId}`, newBookmarkedState.toString());
+    localStorage.setItem(
+      `bookmarked_${articleId}`,
+      newBookmarkedState.toString(),
+    );
 
     // 管理收藏列表
-    const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+    const bookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
     if (newBookmarkedState) {
       if (!bookmarks.includes(articleId)) {
         bookmarks.push(articleId);
@@ -81,7 +86,7 @@ export default function ArticleInteractions({
         bookmarks.splice(index, 1);
       }
     }
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   };
 
   // 复制链接
@@ -91,7 +96,7 @@ export default function ArticleInteractions({
       setCopySuccess(true);
       setTimeout(() => setCopySuccess(false), 2000);
     } catch (err) {
-      console.error('Failed to copy link:', err);
+      console.error("Failed to copy link:", err);
     }
   };
 
@@ -105,62 +110,70 @@ export default function ArticleInteractions({
       twitter: `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
       linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
       whatsapp: `https://wa.me/?text=${title} ${url}`,
-      telegram: `https://t.me/share/url?url=${url}&text=${title}`
+      telegram: `https://t.me/share/url?url=${url}&text=${title}`,
     };
 
     if (shareUrls[platform as keyof typeof shareUrls]) {
-      window.open(shareUrls[platform as keyof typeof shareUrls], '_blank', 'width=600,height=400');
+      window.open(
+        shareUrls[platform as keyof typeof shareUrls],
+        "_blank",
+        "width=600,height=400",
+      );
     }
     setShowShareMenu(false);
   };
 
   const t = {
     zh: {
-      like: '点赞文章',
-      liked: '已点赞',
-      bookmark: '收藏',
-      bookmarked: '已收藏',
-      share: '分享',
-      views: '阅读量',
-      likes: '点赞',
-      copyLink: '复制链接',
-      copied: '已复制',
-      shareToFacebook: '分享到 Facebook',
-      shareToTwitter: '分享到 Twitter',
-      shareToLinkedIn: '分享到 LinkedIn',
-      shareToWhatsApp: '分享到 WhatsApp',
-      shareToTelegram: '分享到 Telegram'
+      like: "点赞文章",
+      liked: "已点赞",
+      bookmark: "收藏",
+      bookmarked: "已收藏",
+      share: "分享",
+      views: "阅读量",
+      likes: "点赞",
+      copyLink: "复制链接",
+      copied: "已复制",
+      shareToFacebook: "分享到 Facebook",
+      shareToTwitter: "分享到 Twitter",
+      shareToLinkedIn: "分享到 LinkedIn",
+      shareToWhatsApp: "分享到 WhatsApp",
+      shareToTelegram: "分享到 Telegram",
     },
     en: {
-      like: 'Like Article',
-      liked: 'Liked',
-      bookmark: 'Bookmark',
-      bookmarked: 'Bookmarked',
-      share: 'Share',
-      views: 'Views',
-      likes: 'Likes',
-      copyLink: 'Copy Link',
-      copied: 'Copied',
-      shareToFacebook: 'Share to Facebook',
-      shareToTwitter: 'Share to Twitter',
-      shareToLinkedIn: 'Share to LinkedIn',
-      shareToWhatsApp: 'Share to WhatsApp',
-      shareToTelegram: 'Share to Telegram'
-    }
+      like: "Like Article",
+      liked: "Liked",
+      bookmark: "Bookmark",
+      bookmarked: "Bookmarked",
+      share: "Share",
+      views: "Views",
+      likes: "Likes",
+      copyLink: "Copy Link",
+      copied: "Copied",
+      shareToFacebook: "Share to Facebook",
+      shareToTwitter: "Share to Twitter",
+      shareToLinkedIn: "Share to LinkedIn",
+      shareToWhatsApp: "Share to WhatsApp",
+      shareToTelegram: "Share to Telegram",
+    },
   };
 
   // 添加 locale 验证和默认值处理，防止 undefined 访问错误
-  const validLocale = (locale === 'zh' || locale === 'en') ? locale : 'en';
+  const validLocale = locale === "zh" || locale === "en" ? locale : "en";
 
   // 如果 locale 无效，记录警告（仅在客户端）
-  if (typeof window !== 'undefined' && locale !== validLocale) {
-    console.warn(`[ArticleInteractions] Invalid locale '${locale}', falling back to '${validLocale}'`);
+  if (typeof window !== "undefined" && locale !== validLocale) {
+    console.warn(
+      `[ArticleInteractions] Invalid locale '${locale}', falling back to '${validLocale}'`,
+    );
   }
 
   const text = t[validLocale];
 
   return (
-    <div className={`bg-white/80 backdrop-blur-sm border border-purple-200 rounded-lg p-4 sm:p-6 shadow-lg ${className}`}>
+    <div
+      className={`bg-white/80 backdrop-blur-sm border border-purple-200 rounded-lg p-4 sm:p-6 shadow-lg ${className}`}
+    >
       {/* 统计信息 */}
       <div className="flex items-center justify-start mb-4 text-sm text-gray-600">
         <div className="flex items-center gap-4">
@@ -182,11 +195,11 @@ export default function ArticleInteractions({
           onClick={handleLike}
           className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-md ${
             isLiked
-              ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600'
-              : 'bg-gray-100 text-gray-700 hover:bg-purple-50 hover:text-purple-600 border border-purple-200'
+              ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600"
+              : "bg-gray-100 text-gray-700 hover:bg-purple-50 hover:text-purple-600 border border-purple-200"
           }`}
         >
-          <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
+          <Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
           <span className="text-sm font-medium hidden sm:inline">
             {isLiked ? text.liked : text.like}
           </span>
@@ -197,11 +210,13 @@ export default function ArticleInteractions({
           onClick={handleBookmark}
           className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-md ${
             isBookmarked
-              ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600'
-              : 'bg-gray-100 text-gray-700 hover:bg-purple-50 hover:text-purple-600 border border-purple-200'
+              ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600"
+              : "bg-gray-100 text-gray-700 hover:bg-purple-50 hover:text-purple-600 border border-purple-200"
           }`}
         >
-          <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
+          <Bookmark
+            className={`w-4 h-4 ${isBookmarked ? "fill-current" : ""}`}
+          />
           <span className="text-sm font-medium hidden sm:inline">
             {isBookmarked ? text.bookmarked : text.bookmark}
           </span>
@@ -214,7 +229,9 @@ export default function ArticleInteractions({
             className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-purple-50 hover:text-purple-600 border border-purple-200 transition-all duration-200 transform hover:scale-105 hover:shadow-md"
           >
             <Share2 className="w-4 h-4" />
-            <span className="text-sm font-medium hidden sm:inline">{text.share}</span>
+            <span className="text-sm font-medium hidden sm:inline">
+              {text.share}
+            </span>
           </button>
 
           {/* 分享菜单 */}
@@ -224,36 +241,40 @@ export default function ArticleInteractions({
                 onClick={handleCopyLink}
                 className="w-full px-4 py-2 text-left text-sm hover:bg-purple-50 hover:text-purple-700 flex items-center gap-2 transition-colors duration-200"
               >
-                {copySuccess ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-purple-500" />}
+                {copySuccess ? (
+                  <Check className="w-4 h-4 text-green-500" />
+                ) : (
+                  <Copy className="w-4 h-4 text-purple-500" />
+                )}
                 {copySuccess ? text.copied : text.copyLink}
               </button>
               <div className="border-t border-purple-100 my-1"></div>
               <button
-                onClick={() => handleShare('facebook')}
+                onClick={() => handleShare("facebook")}
                 className="w-full px-4 py-2 text-left text-sm hover:bg-purple-50 hover:text-purple-700 transition-colors duration-200"
               >
                 📘 {text.shareToFacebook}
               </button>
               <button
-                onClick={() => handleShare('twitter')}
+                onClick={() => handleShare("twitter")}
                 className="w-full px-4 py-2 text-left text-sm hover:bg-purple-50 hover:text-purple-700 transition-colors duration-200"
               >
                 🐦 {text.shareToTwitter}
               </button>
               <button
-                onClick={() => handleShare('linkedin')}
+                onClick={() => handleShare("linkedin")}
                 className="w-full px-4 py-2 text-left text-sm hover:bg-purple-50 hover:text-purple-700 transition-colors duration-200"
               >
                 💼 {text.shareToLinkedIn}
               </button>
               <button
-                onClick={() => handleShare('whatsapp')}
+                onClick={() => handleShare("whatsapp")}
                 className="w-full px-4 py-2 text-left text-sm hover:bg-purple-50 hover:text-purple-700 transition-colors duration-200"
               >
                 💬 {text.shareToWhatsApp}
               </button>
               <button
-                onClick={() => handleShare('telegram')}
+                onClick={() => handleShare("telegram")}
                 className="w-full px-4 py-2 text-left text-sm hover:bg-purple-50 hover:text-purple-700 transition-colors duration-200"
               >
                 ✈️ {text.shareToTelegram}

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Download, ExternalLink, Copy, Check, Eye } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { LocalizedPDFResource, Locale } from '@/types/pdf';
+import { useState } from "react";
+import { Download, ExternalLink, Copy, Check, Eye } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { LocalizedPDFResource, Locale } from "@/types/pdf";
 import {
   formatFileSize,
   formatDate,
@@ -11,8 +11,8 @@ import {
   getCategoryBgColor,
   downloadPDF,
   copyToClipboard,
-  createDownloadEvent
-} from '@/utils/helpers';
+  createDownloadEvent,
+} from "@/utils/helpers";
 
 interface PDFCardProps {
   resource: LocalizedPDFResource;
@@ -25,11 +25,11 @@ export default function PDFCard({
   resource,
   locale,
   showDetails = true,
-  onDownload
+  onDownload,
 }: PDFCardProps) {
   const [isDownloading, setIsDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const t = useTranslations('pdfCard');
+  const t = useTranslations("pdfCard");
 
   const handleDownload = async () => {
     if (isDownloading) return;
@@ -39,16 +39,15 @@ export default function PDFCard({
     try {
       // 记录下载事件
       const downloadEvent = createDownloadEvent(resource.id, locale);
-      console.log('Download event:', downloadEvent);
+      console.log("Download event:", downloadEvent);
 
       // 触发下载
       downloadPDF(resource.downloadUrl, resource.localizedFilename);
 
       // 调用回调
       onDownload?.(resource);
-
     } catch (error) {
-      console.error('Download failed:', error);
+      console.error("Download failed:", error);
     } finally {
       setTimeout(() => setIsDownloading(false), 1000);
     }
@@ -68,35 +67,39 @@ export default function PDFCard({
   const categoryBgClass = getCategoryBgColor(resource.category);
 
   return (
-    <div className={`
+    <div
+      className={`
       group relative bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20
       hover:shadow-xl hover:scale-[1.02] transition-all duration-300 overflow-hidden
-      ${resource.featured ? 'ring-2 ring-purple-200' : ''}
-    `}>
+      ${resource.featured ? "ring-2 ring-purple-200" : ""}
+    `}
+    >
       {/* 特色标签 */}
       {resource.featured && (
         <div className="absolute top-3 right-3 z-10">
           <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-2 py-1 rounded-full font-medium">
-            {t('featured')}
+            {t("featured")}
           </div>
         </div>
       )}
 
       {/* 分类标签 */}
-      <div className={`absolute top-3 left-3 z-10 ${categoryBgClass} px-2 py-1 rounded-lg text-xs font-medium`}>
+      <div
+        className={`absolute top-3 left-3 z-10 ${categoryBgClass} px-2 py-1 rounded-lg text-xs font-medium`}
+      >
         <span className="mr-1">{resource.icon}</span>
-        <span className="text-gray-700">
-          {t('category')}
-        </span>
+        <span className="text-gray-700">{t("category")}</span>
       </div>
 
       <div className="p-6 pt-12">
         {/* 图标和标题 */}
         <div className="flex items-start gap-4 mb-4">
-          <div className={`
+          <div
+            className={`
             w-12 h-12 rounded-xl bg-gradient-to-r ${categoryColorClass}
             flex items-center justify-center text-white text-xl font-bold shadow-lg
-          `}>
+          `}
+          >
             {resource.icon}
           </div>
 
@@ -146,21 +149,23 @@ export default function PDFCard({
             {isDownloading ? (
               <>
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                <span>{t('downloadPdf')}</span>
+                <span>{t("downloadPdf")}</span>
               </>
             ) : (
               <>
                 <Download className="w-4 h-4" />
-                <span>{t('downloadPdf')}</span>
+                <span>{t("downloadPdf")}</span>
               </>
             )}
           </button>
 
           {/* HTML预览按钮 */}
           <button
-            onClick={() => window.open(`/${locale}/resources/${resource.id}`, '_blank')}
+            onClick={() =>
+              window.open(`/${locale}/resources/${resource.id}`, "_blank")
+            }
             className="p-2.5 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors group/preview"
-            title={t('htmlPreview')}
+            title={t("htmlPreview")}
           >
             <Eye className="w-4 h-4 text-blue-600 group-hover/preview:text-blue-800" />
           </button>
@@ -169,7 +174,7 @@ export default function PDFCard({
           <button
             onClick={handleCopyLink}
             className="p-2.5 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors group/copy"
-            title={t('copyLink')}
+            title={t("copyLink")}
           >
             {copied ? (
               <Check className="w-4 h-4 text-green-600" />
@@ -180,9 +185,9 @@ export default function PDFCard({
 
           {/* 新窗口打开按钮 */}
           <button
-            onClick={() => window.open(resource.downloadUrl, '_blank')}
+            onClick={() => window.open(resource.downloadUrl, "_blank")}
             className="p-2.5 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors group/external"
-            title={t('openInNewTab')}
+            title={t("openInNewTab")}
           >
             <ExternalLink className="w-4 h-4 text-gray-600 group-hover/external:text-gray-800" />
           </button>

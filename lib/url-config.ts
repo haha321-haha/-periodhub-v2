@@ -4,7 +4,8 @@
  */
 
 // 环境变量配置
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
 // URL配置对象
 export const URL_CONFIG = {
@@ -48,9 +49,12 @@ export const URL_CONFIG = {
   },
 
   // 工具函数
-  getUrl: (path: string) => `${BASE_URL}${path.startsWith('/') ? path : `/${path}`}`,
-  getCanonicalUrl: (path: string) => `${BASE_URL}${path.startsWith('/') ? path : `/${path}`}`,
-  getPageUrl: (locale: string, path: string) => `${BASE_URL}/${locale}${path.startsWith('/') ? path : `/${path}`}`,
+  getUrl: (path: string) =>
+    `${BASE_URL}${path.startsWith("/") ? path : `/${path}`}`,
+  getCanonicalUrl: (path: string) =>
+    `${BASE_URL}${path.startsWith("/") ? path : `/${path}`}`,
+  getPageUrl: (locale: string, path: string) =>
+    `${BASE_URL}/${locale}${path.startsWith("/") ? path : `/${path}`}`,
 };
 
 // 验证URL格式的函数
@@ -66,7 +70,7 @@ export const checkHardcodedUrl = (content: string): string[] => {
   ];
 
   const matches: string[] = [];
-  hardcodedPatterns.forEach(pattern => {
+  hardcodedPatterns.forEach((pattern) => {
     const found = content.match(pattern);
     if (found) {
       matches.push(...found);

@@ -1,38 +1,38 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 type ClientErrorBoundaryProps = {
-	fallback: React.ReactNode;
-	children: React.ReactNode;
+  fallback: React.ReactNode;
+  children: React.ReactNode;
 };
 
 type ClientErrorBoundaryState = {
-	hasError: boolean;
+  hasError: boolean;
 };
 
 export default class ClientErrorBoundary extends React.Component<
-	ClientErrorBoundaryProps,
-	ClientErrorBoundaryState
+  ClientErrorBoundaryProps,
+  ClientErrorBoundaryState
 > {
-	constructor(props: ClientErrorBoundaryProps) {
-		super(props);
-		this.state = { hasError: false };
-	}
+  constructor(props: ClientErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-	static getDerivedStateFromError(): ClientErrorBoundaryState {
-		return { hasError: true };
-	}
+  static getDerivedStateFromError(): ClientErrorBoundaryState {
+    return { hasError: true };
+  }
 
-	componentDidCatch(error: unknown) {
-		// eslint-disable-next-line no-console
-		console.error('ClientErrorBoundary caught error:', error);
-	}
+  componentDidCatch(error: unknown) {
+    // eslint-disable-next-line no-console
+    console.error("ClientErrorBoundary caught error:", error);
+  }
 
-	render() {
-		if (this.state.hasError) {
-			return this.props.fallback;
-		}
-		return this.props.children;
-	}
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
 }

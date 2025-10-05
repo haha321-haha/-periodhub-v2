@@ -1,26 +1,30 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Loader2, CheckCircle, AlertCircle, Clock } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Loader2, CheckCircle, AlertCircle, Clock } from "lucide-react";
 
 // Loading Spinner Component
 interface LoadingSpinnerProps {
-  size?: 'sm' | 'md' | 'lg';
-  color?: 'primary' | 'secondary' | 'white';
+  size?: "sm" | "md" | "lg";
+  color?: "primary" | "secondary" | "white";
   className?: string;
 }
 
-export function LoadingSpinner({ size = 'md', color = 'primary', className = '' }: LoadingSpinnerProps) {
+export function LoadingSpinner({
+  size = "md",
+  color = "primary",
+  className = "",
+}: LoadingSpinnerProps) {
   const sizeClasses = {
-    sm: 'h-4 w-4',
-    md: 'h-6 w-6',
-    lg: 'h-8 w-8'
+    sm: "h-4 w-4",
+    md: "h-6 w-6",
+    lg: "h-8 w-8",
   };
 
   const colorClasses = {
-    primary: 'text-blue-600',
-    secondary: 'text-gray-600',
-    white: 'text-white'
+    primary: "text-blue-600",
+    secondary: "text-gray-600",
+    white: "text-white",
   };
 
   return (
@@ -42,15 +46,17 @@ interface LoadingOverlayProps {
 
 export function LoadingOverlay({
   isVisible,
-  message = 'Loading...',
+  message = "Loading...",
   progress,
   onCancel,
-  className = ''
+  className = "",
 }: LoadingOverlayProps) {
   if (!isVisible) return null;
 
   return (
-    <div className={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ${className}`}>
+    <div
+      className={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ${className}`}
+    >
       <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4 shadow-xl">
         <div className="flex flex-col items-center">
           <LoadingSpinner size="lg" />
@@ -96,8 +102,8 @@ interface InlineLoadingProps {
 export function InlineLoading({
   isLoading,
   children,
-  loadingText = 'Loading...',
-  className = ''
+  loadingText = "Loading...",
+  className = "",
 }: InlineLoadingProps) {
   if (isLoading) {
     return (
@@ -116,8 +122,8 @@ interface ProgressBarProps {
   progress: number;
   label?: string;
   showPercentage?: boolean;
-  color?: 'blue' | 'green' | 'red' | 'yellow';
-  size?: 'sm' | 'md' | 'lg';
+  color?: "blue" | "green" | "red" | "yellow";
+  size?: "sm" | "md" | "lg";
   className?: string;
 }
 
@@ -125,21 +131,21 @@ export function ProgressBar({
   progress,
   label,
   showPercentage = true,
-  color = 'blue',
-  size = 'md',
-  className = ''
+  color = "blue",
+  size = "md",
+  className = "",
 }: ProgressBarProps) {
   const colorClasses = {
-    blue: 'bg-blue-600',
-    green: 'bg-green-600',
-    red: 'bg-red-600',
-    yellow: 'bg-yellow-600'
+    blue: "bg-blue-600",
+    green: "bg-green-600",
+    red: "bg-red-600",
+    yellow: "bg-yellow-600",
   };
 
   const sizeClasses = {
-    sm: 'h-1',
-    md: 'h-2',
-    lg: 'h-3'
+    sm: "h-1",
+    md: "h-2",
+    lg: "h-3",
   };
 
   const clampedProgress = Math.max(0, Math.min(100, progress));
@@ -166,7 +172,7 @@ export function ProgressBar({
 interface Step {
   id: string;
   label: string;
-  status: 'pending' | 'active' | 'completed' | 'error';
+  status: "pending" | "active" | "completed" | "error";
 }
 
 interface StepProgressProps {
@@ -174,31 +180,34 @@ interface StepProgressProps {
   className?: string;
 }
 
-export function StepProgress({ steps, className = '' }: StepProgressProps) {
+export function StepProgress({ steps, className = "" }: StepProgressProps) {
   return (
     <div className={`space-y-2 ${className}`}>
       {steps.map((step, index) => (
         <div key={step.id} className="flex items-center">
           <div className="flex items-center justify-center w-6 h-6 rounded-full mr-3 flex-shrink-0">
-            {step.status === 'completed' && (
+            {step.status === "completed" && (
               <CheckCircle className="w-5 h-5 text-green-600" />
             )}
-            {step.status === 'error' && (
+            {step.status === "error" && (
               <AlertCircle className="w-5 h-5 text-red-600" />
             )}
-            {step.status === 'active' && (
-              <LoadingSpinner size="sm" />
-            )}
-            {step.status === 'pending' && (
+            {step.status === "active" && <LoadingSpinner size="sm" />}
+            {step.status === "pending" && (
               <Clock className="w-5 h-5 text-gray-400" />
             )}
           </div>
-          <span className={`text-sm ${
-            step.status === 'completed' ? 'text-green-700' :
-            step.status === 'error' ? 'text-red-700' :
-            step.status === 'active' ? 'text-blue-700' :
-            'text-gray-500'
-          }`}>
+          <span
+            className={`text-sm ${
+              step.status === "completed"
+                ? "text-green-700"
+                : step.status === "error"
+                  ? "text-red-700"
+                  : step.status === "active"
+                    ? "text-blue-700"
+                    : "text-gray-500"
+            }`}
+          >
             {step.label}
           </span>
         </div>
@@ -212,26 +221,26 @@ interface SkeletonProps {
   width?: string | number;
   height?: string | number;
   className?: string;
-  variant?: 'text' | 'rectangular' | 'circular';
+  variant?: "text" | "rectangular" | "circular";
 }
 
 export function Skeleton({
-  width = '100%',
-  height = '1rem',
-  className = '',
-  variant = 'rectangular'
+  width = "100%",
+  height = "1rem",
+  className = "",
+  variant = "rectangular",
 }: SkeletonProps) {
-  const baseClasses = 'animate-pulse bg-gray-200';
+  const baseClasses = "animate-pulse bg-gray-200";
 
   const variantClasses = {
-    text: 'rounded',
-    rectangular: 'rounded',
-    circular: 'rounded-full'
+    text: "rounded",
+    rectangular: "rounded",
+    circular: "rounded-full",
   };
 
   const style = {
-    width: typeof width === 'number' ? `${width}px` : width,
-    height: typeof height === 'number' ? `${height}px` : height
+    width: typeof width === "number" ? `${width}px` : width,
+    height: typeof height === "number" ? `${height}px` : height,
   };
 
   return (
@@ -246,10 +255,10 @@ export function Skeleton({
 export function useLoadingState(initialState = false) {
   const [isLoading, setIsLoading] = useState(initialState);
   const [progress, setProgress] = useState(0);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const startLoading = (loadingMessage = 'Loading...') => {
+  const startLoading = (loadingMessage = "Loading...") => {
     setIsLoading(true);
     setProgress(0);
     setMessage(loadingMessage);
@@ -268,7 +277,7 @@ export function useLoadingState(initialState = false) {
     setTimeout(() => {
       setIsLoading(false);
       setProgress(0);
-      setMessage('');
+      setMessage("");
     }, 500);
   };
 
@@ -280,7 +289,7 @@ export function useLoadingState(initialState = false) {
   const reset = () => {
     setIsLoading(false);
     setProgress(0);
-    setMessage('');
+    setMessage("");
     setError(null);
   };
 
@@ -293,7 +302,7 @@ export function useLoadingState(initialState = false) {
     updateProgress,
     finishLoading,
     setLoadingError,
-    reset
+    reset,
   };
 }
 
@@ -315,8 +324,8 @@ export function AsyncOperation({
   operation,
   onSuccess,
   onError,
-  loadingMessage = 'Processing...',
-  children
+  loadingMessage = "Processing...",
+  children,
 }: AsyncOperationProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -334,7 +343,8 @@ export function AsyncOperation({
         onSuccess(operationResult);
       }
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An error occurred';
+      const errorMessage =
+        err instanceof Error ? err.message : "An error occurred";
       setError(errorMessage);
       if (onError) {
         onError(err instanceof Error ? err : new Error(errorMessage));
@@ -347,10 +357,7 @@ export function AsyncOperation({
   return (
     <>
       {children({ execute, isLoading, error, result })}
-      <LoadingOverlay
-        isVisible={isLoading}
-        message={loadingMessage}
-      />
+      <LoadingOverlay isVisible={isLoading} message={loadingMessage} />
     </>
   );
 }
@@ -363,5 +370,5 @@ export default {
   StepProgress,
   Skeleton,
   useLoadingState,
-  AsyncOperation
+  AsyncOperation,
 };

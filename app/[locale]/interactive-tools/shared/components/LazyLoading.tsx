@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { Suspense, lazy, ComponentType } from 'react';
-import LoadingSpinner from './LoadingSpinner';
+import React, { Suspense, lazy, ComponentType } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface LazyComponentProps {
   fallback?: React.ReactNode;
@@ -11,7 +11,7 @@ interface LazyComponentProps {
 // Lazy loading wrapper with error boundary
 export function withLazyLoading<P extends object>(
   importFn: () => Promise<{ default: ComponentType<P> }>,
-  fallback?: React.ReactNode
+  fallback?: React.ReactNode,
 ) {
   const LazyComponent = lazy(importFn);
 
@@ -44,7 +44,7 @@ export function preloadComponent(importFn: () => Promise<any>) {
 // Lazy loading hook for dynamic imports
 export function useLazyComponent<T = any>(
   importFn: () => Promise<T>,
-  deps: React.DependencyList = []
+  deps: React.DependencyList = [],
 ) {
   const [Component, setComponent] = React.useState<T | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -87,7 +87,7 @@ export function useLazyComponent<T = any>(
 // Intersection Observer hook for lazy loading
 export function useIntersectionObserver(
   elementRef: React.RefObject<Element>,
-  options: IntersectionObserverInit = {}
+  options: IntersectionObserverInit = {},
 ) {
   const [isIntersecting, setIsIntersecting] = React.useState(false);
   const [hasIntersected, setHasIntersected] = React.useState(false);
@@ -105,9 +105,9 @@ export function useIntersectionObserver(
       },
       {
         threshold: 0.1,
-        rootMargin: '50px',
+        rootMargin: "50px",
         ...options,
-      }
+      },
     );
 
     observer.observe(element);
@@ -125,23 +125,26 @@ export function useVirtualScrolling<T>(
   items: T[],
   itemHeight: number,
   containerHeight: number,
-  overscan: number = 5
+  overscan: number = 5,
 ) {
   const [scrollTop, setScrollTop] = React.useState(0);
 
   const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - overscan);
   const endIndex = Math.min(
     items.length - 1,
-    Math.ceil((scrollTop + containerHeight) / itemHeight) + overscan
+    Math.ceil((scrollTop + containerHeight) / itemHeight) + overscan,
   );
 
   const visibleItems = items.slice(startIndex, endIndex + 1);
   const totalHeight = items.length * itemHeight;
   const offsetY = startIndex * itemHeight;
 
-  const handleScroll = React.useCallback((event: React.UIEvent<HTMLDivElement>) => {
-    setScrollTop(event.currentTarget.scrollTop);
-  }, []);
+  const handleScroll = React.useCallback(
+    (event: React.UIEvent<HTMLDivElement>) => {
+      setScrollTop(event.currentTarget.scrollTop);
+    },
+    [],
+  );
 
   return {
     visibleItems,
@@ -156,13 +159,17 @@ export function useVirtualScrolling<T>(
 // Memoized component wrapper
 export function withMemoization<P extends object>(
   Component: ComponentType<P>,
-  areEqual?: (prevProps: P, nextProps: P) => boolean
+  areEqual?: (prevProps: P, nextProps: P) => boolean,
 ) {
   return React.memo(Component, areEqual);
 }
 
 // Performance monitoring component
-export function PerformanceMonitor({ children }: { children: React.ReactNode }) {
+export function PerformanceMonitor({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [renderTime, setRenderTime] = React.useState(0);
 
   React.useEffect(() => {
@@ -174,7 +181,7 @@ export function PerformanceMonitor({ children }: { children: React.ReactNode }) 
     };
   });
 
-  if (process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     return (
       <div>
         {children}

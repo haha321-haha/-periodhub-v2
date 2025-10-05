@@ -8,73 +8,93 @@
 
 import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import { useWorkplaceWellnessStore } from './hooks/useWorkplaceWellnessStore';
-import Header from './components/Header';
-import Navigation from './components/Navigation';
+import dynamic from 'next/dynamic';
+
+// 动态导入大型组件 - 代码分割优化
+const Header = dynamic(() => import('./components/Header'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-16 rounded-lg" />
+});
+
+const Navigation = dynamic(() => import('./components/Navigation'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-12 rounded-lg" />
+});
+
+const CalendarComponent = dynamic(() => import('./components/CalendarComponent'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const WorkImpactComponent = dynamic(() => import('./components/WorkImpactComponent'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const NutritionComponent = dynamic(() => import('./components/NutritionComponent'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const DataExportComponent = dynamic(() => import('./components/DataExportComponent'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const Footer = dynamic(() => import('./components/Footer'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-16 rounded-lg" />
+});
+
+const ResponsiveContainer = dynamic(() => import('./components/ResponsiveContainer'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const RelatedToolCard = dynamic(() => import('../components/RelatedToolCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const RelatedArticleCard = dynamic(() => import('../components/RelatedArticleCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const ScenarioSolutionCard = dynamic(() => import('../components/ScenarioSolutionCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+// 保留必要的直接导入
 import Breadcrumb from '@/components/Breadcrumb';
-import CalendarComponent from './components/CalendarComponent';
-import WorkImpactComponent from './components/WorkImpactComponent';
-import NutritionComponent from './components/NutritionComponent';
-import DataExportComponent from './components/DataExportComponent';
-import Footer from './components/Footer';
-import { ErrorBoundary } from './components/ErrorHandling';
-import ResponsiveContainer from './components/ResponsiveContainer';
-import { LoadingWrapper, SkeletonCard } from './components/LoadingAnimations';
-// Day 12: 懒加载优化导入
-import { createLazyPage, createLazyModule, preloadCriticalComponents } from './components/LazyLoader';
-import { PerformanceMonitor, MemoryMonitor } from './utils/performanceOptimizer';
-// 内链推荐系统导入
-import RelatedToolCard from '../components/RelatedToolCard';
-import RelatedArticleCard from '../components/RelatedArticleCard';
-import ScenarioSolutionCard from '../components/ScenarioSolutionCard';
+import { useWorkplaceWellnessStore } from './hooks/useWorkplaceWellnessStore';
 
-// Day 11: 懒加载组件导入
-const UserPreferencesSettings = createLazyModule(
-  () => import('./components/UserPreferencesSettings'),
-  'UserPreferencesSettings'
-);
+// 动态导入其他组件 - 代码分割优化
+const UserPreferencesSettings = dynamic(() => import('./components/UserPreferencesSettings'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
-const ExportTemplateManager = createLazyModule(
-  () => import('./components/ExportTemplateManager'),
-  'ExportTemplateManager'
-);
+const ExportTemplateManager = dynamic(() => import('./components/ExportTemplateManager'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
-const BatchExportManager = createLazyModule(
-  () => import('./components/BatchExportManager'),
-  'BatchExportManager'
-);
+const BatchExportManager = dynamic(() => import('./components/BatchExportManager'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
-// Day 12: 懒加载Day 9组件
-const AdvancedCycleAnalysis = createLazyModule(
-  () => import('./components/AdvancedCycleAnalysis'),
-  'AdvancedCycleAnalysis'
-);
+const AdvancedCycleAnalysis = dynamic(() => import('./components/AdvancedCycleAnalysis'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
-const SymptomStatistics = createLazyModule(
-  () => import('./components/SymptomStatistics'),
-  'SymptomStatistics'
-);
+const SymptomStatistics = dynamic(() => import('./components/SymptomStatistics'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
-const WorkImpactAnalysis = createLazyModule(
-  () => import('./components/WorkImpactAnalysis'),
-  'WorkImpactAnalysis'
-);
+const WorkImpactAnalysis = dynamic(() => import('./components/WorkImpactAnalysis'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
-const DataVisualizationDashboard = createLazyModule(
-  () => import('./components/DataVisualizationDashboard'),
-  'DataVisualizationDashboard'
-);
+const DataVisualizationDashboard = dynamic(() => import('./components/DataVisualizationDashboard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
-// Day 12: 懒加载Day 8组件
-const CycleStatisticsChart = createLazyModule(
-  () => import('./components/CycleStatisticsChart'),
-  'CycleStatisticsChart'
-);
+const CycleStatisticsChart = dynamic(() => import('./components/CycleStatisticsChart'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
-const HistoryDataViewer = createLazyModule(
-  () => import('./components/HistoryDataViewer'),
-  'HistoryDataViewer'
-);
+const HistoryDataViewer = dynamic(() => import('./components/HistoryDataViewer'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
 // 职场健康管理专用推荐数据配置
 const getWorkplaceWellnessRecommendations = (locale: string) => {
@@ -225,35 +245,11 @@ export default function WorkplaceWellnessPage() {
 
   // Day 12: 性能监控和优化
   useEffect(() => {
-    // 启动性能监控
-    PerformanceMonitor.observeWebVitals();
-    
-    // 预加载关键组件
-    preloadCriticalComponents();
-    
-    // 监控内存使用
-    const memoryCheckInterval = setInterval(() => {
-      if (MemoryMonitor.checkMemoryLeak()) {
-        console.warn('检测到潜在内存泄漏，建议进行垃圾回收');
-        MemoryMonitor.forceGC();
-      }
-    }, 30000); // 每30秒检查一次
-
-    return () => {
-      PerformanceMonitor.stopAllObservers();
-      clearInterval(memoryCheckInterval);
-    };
-  }, []);
-
-  // 模拟加载状态
-  useEffect(() => {
-    PerformanceMonitor.startMeasure('page-load');
-    
+    // 模拟加载状态
     const timer = setTimeout(() => {
       setIsLoading(false);
-      PerformanceMonitor.endMeasure('page-load');
     }, 1000);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -268,19 +264,9 @@ export default function WorkplaceWellnessPage() {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <LoadingWrapper isLoading={true} loadingComponent={
-          <div className="space-y-6">
-            <SkeletonCard className="h-[200px]" />
-            <SkeletonCard className="h-[150px]" />
-            <SkeletonCard className="h-[100px]" />
-          </div>
-        }>
-          <div className="space-y-6">
-            <SkeletonCard className="h-[200px]" />
-            <SkeletonCard className="h-[150px]" />
-            <SkeletonCard className="h-[100px]" />
-          </div>
-        </LoadingWrapper>
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+        </div>
       );
     }
 
@@ -330,10 +316,9 @@ export default function WorkplaceWellnessPage() {
   };
 
   return (
-    <ErrorBoundary>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 text-neutral-800 font-sans">
-        {/* 头部组件 */}
-        <Header />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 text-neutral-800 font-sans">
+      {/* 头部组件 */}
+      <Header />
         
         {/* 导航组件 */}
         <Navigation />
@@ -415,6 +400,5 @@ export default function WorkplaceWellnessPage() {
           </div>
         </div>
       </div>
-    </ErrorBoundary>
   );
 }

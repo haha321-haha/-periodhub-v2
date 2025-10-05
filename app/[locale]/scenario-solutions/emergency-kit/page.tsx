@@ -146,7 +146,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   return {
     title: `${locale === 'zh' ? '多场景应急包清单' : 'Multi-Scenario Emergency Kit List'} - ${t('title')}`,
-    description: locale === 'zh' ? '详细的经期应急包准备清单，涵盖办公、通勤、运动、睡眠、社交等各种场景' : 'Detailed period emergency kit preparation list covering office, commute, exercise, sleep, social and other scenarios',
+    description: locale === 'zh' ? '痛经应急包完整指南：办公、通勤、运动、睡眠、社交多场景应急物品清单。包含热敷贴、止痛药、暖宝宝等必备物品，快速缓解经期疼痛的专业应急方案' : 'Period Pain Emergency Kit Guide: Complete checklist for office, commute, exercise, sleep, social scenarios. Essential items including heat patches, pain relief, hand warmers for quick menstrual pain relief',
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/scenario-solutions/emergency-kit`,
       languages: {

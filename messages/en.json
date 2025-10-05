@@ -1249,10 +1249,18 @@
     "breathingExerciseDescription": "Activate the parasympathetic nervous system through 4-7-8 breathing technique to naturally reduce pain sensitivity. Research shows it can reduce pain perception by 40%.",
     "acupressureDescription": "Applying pressure to specific points on the body may help reduce pain signals and provide relief from menstrual cramps.",
     "otcOptionsDescription": "Understanding common non-prescription options and their basic mechanisms can be helpful, although professional medical advice is crucial for safe and effective use.",
-    "workTipsTitle": "Quick Tips for Managing Cramps at Work",
-    "workTipsDescription": "Practical strategies for finding relief during your workday when period pain strikes.",
+    "workTipsTitle": "Workplace Period Pain Relief",
+    "workTipsDescription": "Professional strategies for managing menstrual cramps during work hours, including emergency kit preparation and discreet relief techniques",
     "meditationTitle": "5-Minute Meditation for Pain Relief",
-    "meditationDescription": "A quick guided meditation practice designed specifically to help manage menstrual pain.",
+    "meditationDescription": "Quick guided breathing exercises for immediate menstrual pain relief. Based on 4-7-8 breathing technique, activates parasympathetic nervous system",
+    "nsaidGuideTitle": "NSAIDs Professional Guide for Menstrual Pain Treatment",
+    "nsaidGuideDescription": "Interactive dosage calculator for safe pain medication management, helps you accurately calculate safe doses",
+    "scenarioSolutionsTitle": "Complete Lifestyle Solutions",
+    "scenarioSolutionsDescription": "Comprehensive relief strategies for home, work, and travel. Professional scenario-based management",
+    "heatTherapyGuideTitle": "Heat Therapy Guide",
+    "heatTherapyGuideDescription": "Scientific temperature control (40-45°C) and timing methods for effective period pain relief",
+    "dietaryPlanTitle": "Anti-Inflammatory Diet Plan",
+    "dietaryPlanDescription": "Nutritional strategies with Omega-3, magnesium, and vitamin B6 to reduce menstrual cramps naturally",
     "disclaimerTitle": "Disclaimer:",
     "disclaimerText": "The information provided on this page is for educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.",
     "parameters": {
@@ -1289,7 +1297,9 @@
       "technique": "Technique: ",
       "cycles": "Cycles: ",
       "dosage": "Dosage: ",
-      "contraindications": "Contraindications: "
+      "contraindications": "Contraindications: ",
+      "location": "Location: ",
+      "method": "Method: "
     },
     "actions": {
       "startPractice": "Start Practice →",
@@ -1441,6 +1451,7 @@
       "title": "Emergency Response Protocol",
       "subtitle": "When pain reaches severe levels (7+ on pain scale), follow these immediate steps:",
       "description": "When pain reaches severe levels (7+ on pain scale), follow these immediate steps:",
+      "immediateActionsTitle": "Immediate Action Checklist",
       "immediateActions": {
         "0": "Apply heat immediately (40-45°C)",
         "1": "Take prescribed pain medication if available",
@@ -2714,7 +2725,7 @@
   },
   "scenarioSolutionsPage": {
     "title": "Scenario-Based Period Pain Solutions - Workplace, Exercise & Social Life Management",
-    "description": "Professional scenario-based period pain management strategies covering workplace, exercise, social situations. Get targeted relief strategies and practical tips.",
+    "description": "Complete Lifestyle Solutions for Period Pain: Comprehensive relief strategies for home, work, and travel. Professional scenario-based management covering office, exercise, social situations",
     "introTitle": "Complete Life Scenario Coverage",
     "introText": "Every woman's life is multifaceted, from workplace to home, from exercise to social activities. Different scenarios require different coping strategies. We've carefully prepared comprehensive scenario-based solutions to help you handle menstrual discomfort gracefully, wherever you are.",
     "scenarios": {
@@ -4588,7 +4599,7 @@
   },
   "medicationGuide": {
     "title": "Complete Safe Medication Guide for Dysmenorrhea: Ibuprofen/Naproxen and Other NSAIDs Usage Guidelines",
-    "description": "Complete safe medication guide for dysmenorrhea: Ibuprofen/Naproxen and other NSAIDs usage guidelines, dosage calculation, contraindication reminders, and drug interaction details. Includes medication timing reminder tool to calculate your safe dosage and avoid medication risks",
+    "description": "NSAID guide for menstrual pain: Pharmacological mechanisms, safe usage protocols, dosage calculation. Professional guidance for scientific and safe pain relief methods",
     "introTitle": "Understanding Period Pain Medication",
     "introText": "Proper medication use can safely and effectively relieve period pain. This guide will help you understand the usage, precautions, and safety recommendations for common medications.",
     "nsaidTitle": "Non-Steroidal Anti-Inflammatory Drugs (NSAIDs)",
@@ -4708,6 +4719,9 @@
     },
     "disclaimerTitle": "Medical Disclaimer:",
     "disclaimerText": "This guide is for reference only and does not replace professional medical advice. Consult your doctor if you have questions.",
+    "medicalReview": "Medical Review:",
+    "medicalReviewText": "This guide has been reviewed by North American certified OB/GYN physicians to ensure accuracy and safety.",
+    "breadcrumbTitle": "Medication Guide",
     "relatedToolsTitle": "Related Tools",
     "relatedTools": {
       "nsaidGuide": {
@@ -4719,6 +4733,16 @@
         "title": "Symptom Assessment Tool",
         "description": "Scientifically assess menstrual symptoms and get personalized recommendations",
         "feature": "Personalized symptom analysis"
+      },
+      "emergencyMedication": {
+        "title": "Emergency Period Pain Medication Guide",
+        "description": "Complete guide to emergency medication selection, carrying methods, and emergency medication decision-making processes",
+        "feature": "Emergency medication decision process"
+      },
+      "medicationVsNatural": {
+        "title": "Medication vs Natural Therapies: Which Period Pain Relief Method is Best for You?",
+        "description": "Comprehensive comparison of medication treatment and natural therapies effectiveness and safety, providing personalized selection guidance based on scientific evidence",
+        "feature": "Personalized treatment plan comparison"
       }
     }
   },

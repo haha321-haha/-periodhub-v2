@@ -1,7 +1,7 @@
 ---
 title: "Period-Friendly Recipes: Nourish Your Body and Soul During 'Those Days'"
 title_zh: "经期友好食谱：滋养身心，舒适度过\"那几天\""
-summary: "Carefully selected 8-10 simple, delicious, and nutritious recipes covering breakfast, lunch, dinner, and snacks/drinks to help you naturally nourish your body and comfortably navigate your period."
+description: "Anti-Inflammatory Diet Recipes: Omega-3 and magnesium-rich meals for menstrual pain relief. 8-10 simple, delicious, nutritious recipes covering breakfast, lunch, dinner, and snacks"
 summary_zh: "精选8-10款简单易学、美味又营养的食谱，涵盖早餐、午餐、晚餐及零食饮品，帮助你通过天然食物调理身体，舒适度过经期。"
 date: "2024-12-19"
 reading_time: "12 min read"

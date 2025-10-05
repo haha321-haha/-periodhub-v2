@@ -37,6 +37,7 @@ export default async function MedicationGuidePage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'medicationGuide' });
   const commonT = await getTranslations({ locale, namespace: 'common' });
+  const navT = await getTranslations({ locale, namespace: 'navigation' });
   
   // 结构化数据
   const structuredData = {
@@ -76,8 +77,8 @@ export default async function MedicationGuidePage({
         {/* Breadcrumb */}
         <Breadcrumb 
           items={[
-            { label: '下载中心', href: `/${locale}/downloads` },
-            { label: '用药指南' }
+            { label: navT('downloads'), href: `/${locale}/downloads` },
+            { label: t('breadcrumbTitle') }
           ]}
         />
         
@@ -113,7 +114,7 @@ export default async function MedicationGuidePage({
               </div>
               <div>
                 <p className="text-sm text-neutral-600">
-                  <strong>医学审核：</strong>本指南内容已通过北美认证妇产科医生审核，确保信息准确性和安全性。
+                  <strong>{t('medicalReview')}</strong>{t('medicalReviewText')}
                 </p>
               </div>
             </div>
@@ -477,14 +478,14 @@ export default async function MedicationGuidePage({
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-orange-600 group-hover:text-orange-700 mb-2">
-                    痛经应急药物携带完全指南
+                    {t('relatedTools.emergencyMedication.title')}
                   </h3>
                   <p className="text-neutral-600 mb-3">
-                    详细介绍应急药物选择、携带方法和紧急用药决策流程，确保您在任何场合都能及时缓解痛经
+                    {t('relatedTools.emergencyMedication.description')}
                   </p>
                   <div className="flex items-center text-sm text-orange-500 group-hover:text-orange-600">
                     <span className="mr-2">🚨</span>
-                    <span>应急用药决策流程</span>
+                    <span>{t('relatedTools.emergencyMedication.feature')}</span>
                     <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
@@ -506,14 +507,14 @@ export default async function MedicationGuidePage({
                 </div>
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-purple-600 group-hover:text-purple-700 mb-2">
-                    药物vs自然疗法：哪种痛经缓解方法最适合你？
+                    {t('relatedTools.medicationVsNatural.title')}
                   </h3>
                   <p className="text-neutral-600 mb-3">
-                    全面对比药物治疗与自然疗法的效果和安全性，基于科学证据为您提供个性化选择指南
+                    {t('relatedTools.medicationVsNatural.description')}
                   </p>
                   <div className="flex items-center text-sm text-purple-500 group-hover:text-purple-600">
                     <span className="mr-2">⚖️</span>
-                    <span>个性化治疗方案对比</span>
+                    <span>{t('relatedTools.medicationVsNatural.feature')}</span>
                     <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

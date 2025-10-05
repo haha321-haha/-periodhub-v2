@@ -320,8 +320,8 @@ export default async function ImmediateReliefPage({
                 {t.raw('acupressureDetails.acupoints').map((point: any, index: number) => (
                   <div key={index} className="border-l-2 border-accent-300 pl-3">
                     <h5 className="font-medium text-accent-700">{point.name}</h5>
-                    <p className="text-sm text-accent-600 mb-1"><strong>位置：</strong>{point.location}</p>
-                    <p className="text-sm text-accent-600 mb-1"><strong>方法：</strong>{point.method}</p>
+                    <p className="text-sm text-accent-600 mb-1"><strong>{t('labels.location')}</strong>{point.location}</p>
+                    <p className="text-sm text-accent-600 mb-1"><strong>{t('labels.method')}</strong>{point.method}</p>
                     <p className="text-xs text-accent-500">{point.benefits}</p>
                   </div>
                 ))}
@@ -437,7 +437,7 @@ export default async function ImmediateReliefPage({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Immediate Actions */}
           <div className="bg-white p-6 rounded-lg">
-            <h3 className="text-lg font-semibold text-red-700 mb-4">立即行动清单</h3>
+            <h3 className="text-lg font-semibold text-red-700 mb-4">{t('emergencyResponse.immediateActionsTitle')}</h3>
             <ul className="space-y-2">
               {Object.values(t.raw('emergencyResponse.immediateActions')).map((action: any, index: number) => (
                 <li key={index} className="flex items-start text-sm text-red-600">
@@ -514,7 +514,7 @@ export default async function ImmediateReliefPage({
           </div>
 
           <div className="card group block">
-            <Link href={`/${locale}/interactive-tools/symptom-assessment`}>
+            <Link href={`/${locale}/articles/5-minute-period-pain-relief`}>
               <div className="flex items-center mb-3">
                 <span className="text-2xl mr-2">📊</span>
                 <h3 className="text-xl font-semibold text-primary-600 group-hover:text-primary-700">
@@ -536,11 +536,11 @@ export default async function ImmediateReliefPage({
               <div className="flex items-center mb-3">
                 <span className="text-2xl mr-2">🧮</span>
                 <h3 className="text-xl font-semibold text-primary-600 group-hover:text-primary-700">
-                  NSAIDs痛经治疗专业指南
+                  {t('nsaidGuideTitle')}
                 </h3>
               </div>
               <p className="text-neutral-600 mb-4">
-                包含互动式用药计算器，帮您精准计算安全剂量
+                {t('nsaidGuideDescription')}
               </p>
               <span className="font-medium text-primary-500 group-hover:text-primary-600 transition-colors">
                 {commonT('readMore')} →
@@ -554,11 +554,11 @@ export default async function ImmediateReliefPage({
               <div className="flex items-center mb-3">
                 <span className="text-2xl mr-2">🏠</span>
                 <h3 className="text-xl font-semibold text-primary-600 group-hover:text-primary-700">
-                  生活场景全覆盖
+                  {t('scenarioSolutionsTitle')}
                 </h3>
               </div>
               <p className="text-neutral-600 mb-4">
-                从居家到外出，全方位经期不适解决方案
+                {t('scenarioSolutionsDescription')}
               </p>
               <span className="font-medium text-primary-500 group-hover:text-primary-600 transition-colors">
                 {commonT('readMore')} →
@@ -572,11 +572,11 @@ export default async function ImmediateReliefPage({
               <div className="flex items-center mb-3">
                 <span className="text-2xl mr-2">🔥</span>
                 <h3 className="text-xl font-semibold text-primary-600 group-hover:text-primary-700">
-                  热敷疗法指南
+                  {t('heatTherapyGuideTitle')}
                 </h3>
               </div>
               <p className="text-neutral-600 mb-4">
-                科学热敷方法，快速缓解经期疼痛
+                {t('heatTherapyGuideDescription')}
               </p>
               <span className="font-medium text-primary-500 group-hover:text-primary-600 transition-colors">
                 {commonT('readMore')} →
@@ -590,11 +590,11 @@ export default async function ImmediateReliefPage({
               <div className="flex items-center mb-3">
                 <span className="text-2xl mr-2">🥗</span>
                 <h3 className="text-xl font-semibold text-primary-600 group-hover:text-primary-700">
-                  饮食调理方案
+                  {t('dietaryPlanTitle')}
                 </h3>
               </div>
               <p className="text-neutral-600 mb-4">
-                经期营养搭配，从内而外缓解不适
+                {t('dietaryPlanDescription')}
               </p>
               <span className="font-medium text-primary-500 group-hover:text-primary-600 transition-colors">
                 {commonT('readMore')} →

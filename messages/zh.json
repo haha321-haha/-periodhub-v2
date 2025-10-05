@@ -2478,10 +2478,18 @@
       }
     },
     "otcOptionsDescription": "了解常见的非处方药选项及其基本机制可能会有所帮助，尽管专业医疗建议对于安全有效使用至关重要。",
-    "workTipsTitle": "多场景经期应急包清单",
-    "workTipsDescription": "在办公环境中管理经期疼痛的实用策略。",
-    "meditationTitle": "症状评估工具",
-    "meditationDescription": "科学评估经期症状，获取个性化建议。",
+    "workTipsTitle": "职场痛经缓解技巧",
+    "workTipsDescription": "工作期间科学应对经期疼痛的专业策略，包含应急包准备和隐蔽缓解技巧",
+    "meditationTitle": "5分钟冥想缓解痛经",
+    "meditationDescription": "快速引导式呼吸练习，立即缓解经期疼痛。基于4-7-8呼吸法，激活副交感神经系统",
+    "nsaidGuideTitle": "NSAIDs痛经治疗专业指南",
+    "nsaidGuideDescription": "包含互动式用药计算器，帮您精准计算安全剂量，避免用药风险",
+    "scenarioSolutionsTitle": "生活场景全覆盖",
+    "scenarioSolutionsDescription": "居家、职场、出行全方位经期不适解决方案，专业场景化应对策略",
+    "heatTherapyGuideTitle": "热敷疗法指南",
+    "heatTherapyGuideDescription": "科学热敷方法，快速缓解经期疼痛。温度控制40-45°C，15-20分钟最佳",
+    "dietaryPlanTitle": "饮食调理方案",
+    "dietaryPlanDescription": "经期营养搭配，从内而外缓解不适。Omega-3、镁元素、维生素B6营养策略",
     "disclaimerTitle": "免责声明：",
     "disclaimerText": "本页面提供的信息仅供教育目的，不旨在替代专业医疗建议、诊断或治疗。如有任何医疗问题，请务必咨询您的医生或其他合格的医疗保健提供者。",
     "parameters": {
@@ -3890,7 +3898,7 @@
   },
   "scenarioSolutionsPage": {
     "title": "场景化痛经解决方案 - 职场、运动、社交全方位应对指南",
-    "description": "专业的场景化痛经应对方案，涵盖职场、运动、社交等生活场景。提供针对性缓解策略和实用技巧，确保生活品质。",
+    "description": "生活场景全覆盖：居家、职场、出行全方位经期不适解决方案。专业场景化痛经应对策略，涵盖办公、运动、社交等生活场景，提供针对性缓解技巧",
     "introTitle": "生活场景全覆盖",
     "introText": "每个女性的生活都是多元化的，从职场到家庭，从运动到社交，不同的场景需要不同的应对策略。我们为您精心准备了全方位的场景化解决方案，让您无论身处何地，都能优雅从容地应对痛经困扰。",
     "scenarios": {
@@ -5216,7 +5224,7 @@
   },
   "medicationGuide": {
     "title": "痛经安全用药全指南：布洛芬/萘普生等NSAIDs使用规范",
-    "description": "痛经安全用药全指南：布洛芬/萘普生等NSAIDs使用规范，剂量计算、禁忌提醒、配伍禁忌详解。附用药时间提醒工具，立即测算您的安全剂量，避免用药风险",
+    "description": "NSAIDs痛经治疗专业指南：布洛芬、萘普生等非甾体抗炎药的药理机制、安全用药、剂量计算和效果优化。包含互动式用药计算器和副作用管理，帮助您科学安全地缓解痛经",
     "introTitle": "了解经期疼痛用药",
     "introText": "正确的药物使用可以安全有效地缓解经期疼痛。本指南将帮助您了解常用药物的使用方法、注意事项和安全建议。",
     "nsaidTitle": "非甾体抗炎药 (NSAIDs)",
@@ -5336,6 +5344,9 @@
     },
     "disclaimerTitle": "医疗免责声明：",
     "disclaimerText": "本指南仅供参考，不能替代专业医疗建议。如有疑问请咨询医生。",
+    "medicalReview": "医学审核：",
+    "medicalReviewText": "本指南内容已通过北美认证妇产科医生审核，确保信息准确性和安全性。",
+    "breadcrumbTitle": "用药指南",
     "relatedToolsTitle": "相关工具",
     "relatedTools": {
       "nsaidGuide": {
@@ -5347,6 +5358,16 @@
         "title": "症状评估工具",
         "description": "科学评估经期症状，获取个性化建议",
         "feature": "个性化症状分析"
+      },
+      "emergencyMedication": {
+        "title": "痛经应急药物携带完全指南",
+        "description": "详细介绍应急药物选择、携带方法和紧急用药决策流程，确保您在任何场合都能及时缓解痛经",
+        "feature": "应急用药决策流程"
+      },
+      "medicationVsNatural": {
+        "title": "药物vs自然疗法：哪种痛经缓解方法最适合你？",
+        "description": "全面对比药物治疗与自然疗法的效果和安全性，基于科学证据为您提供个性化选择指南",
+        "feature": "个性化治疗方案对比"
       }
     }
   },

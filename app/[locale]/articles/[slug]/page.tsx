@@ -17,7 +17,7 @@ import { generateBreadcrumbStructuredData, BreadcrumbStructuredDataScript } from
 // 按需导入Lucide React图标 - 第三方脚本优化（移除ssr: false）
 const Home = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Home })));
 
-// 动态导入大型组件 - 代码分割优化（移除ssr: false，在Server Component中不支持）
+// 优化的懒加载组件 - 代码分割优化（Server Component兼容）
 const NSAIDInteractive = dynamic(() => import('@/components/NSAIDInteractive'), {
   loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
 });

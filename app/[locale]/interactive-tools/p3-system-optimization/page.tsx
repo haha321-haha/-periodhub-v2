@@ -3,28 +3,42 @@
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
-import {
-  Settings,
-  Zap,
-  TestTube,
-  BookOpen,
-  CheckCircle,
-  Clock,
-  Target,
-  BarChart3,
-  Globe,
-  Shield,
-  Code,
-  Users
-} from 'lucide-react';
+import dynamic from 'next/dynamic';
 
-// 导入P3组件
-import I18nOptimizer from '../shared/components/I18nOptimizer';
-import PerformanceOptimizer from '../shared/components/PerformanceOptimizer';
-import { TestingFramework } from '../shared/components/TestingFramework';
-import { DocumentationFramework } from '../shared/components/DocumentationFramework';
-import { PerformanceOptimizationPanel } from '../shared/components/PerformanceMonitor';
-import { preloadCriticalTools, preloadAdvancedFeatures, preloadSystemOptimization } from '../shared/components/LazyToolComponents';
+// 动态导入Lucide图标 - 按需加载
+const Settings = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Settings })), { ssr: false });
+const Zap = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Zap })), { ssr: false });
+const TestTube = dynamic(() => import('lucide-react').then(mod => ({ default: mod.TestTube })), { ssr: false });
+const BookOpen = dynamic(() => import('lucide-react').then(mod => ({ default: mod.BookOpen })), { ssr: false });
+const CheckCircle = dynamic(() => import('lucide-react').then(mod => ({ default: mod.CheckCircle })), { ssr: false });
+const Clock = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Clock })), { ssr: false });
+const Target = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Target })), { ssr: false });
+const BarChart3 = dynamic(() => import('lucide-react').then(mod => ({ default: mod.BarChart3 })), { ssr: false });
+const Globe = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Globe })), { ssr: false });
+const Shield = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Shield })), { ssr: false });
+const Code = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Code })), { ssr: false });
+const Users = dynamic(() => import('lucide-react').then(mod => ({ default: mod.Users })), { ssr: false });
+
+// 动态导入P3组件 - 代码分割优化
+const I18nOptimizer = dynamic(() => import('../shared/components/I18nOptimizer'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const PerformanceOptimizer = dynamic(() => import('../shared/components/PerformanceOptimizer'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const TestingFramework = dynamic(() => import('../shared/components/TestingFramework').then(mod => ({ default: mod.TestingFramework })), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const DocumentationFramework = dynamic(() => import('../shared/components/DocumentationFramework').then(mod => ({ default: mod.DocumentationFramework })), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const PerformanceOptimizationPanel = dynamic(() => import('../shared/components/PerformanceMonitor').then(mod => ({ default: mod.PerformanceOptimizationPanel })), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
 
 interface P3PhaseProps {
   locale: string;
@@ -35,11 +49,9 @@ export default function P3Phase({ locale }: P3PhaseProps) {
   const [activeTab, setActiveTab] = useState<string>('i18n');
   const [completedTasks, setCompletedTasks] = useState<Set<string>>(new Set(['i18n'])); // 国际化已完成
 
-  // 预加载关键组件
+  // 组件初始化
   React.useEffect(() => {
-    preloadCriticalTools();
-    preloadAdvancedFeatures();
-    preloadSystemOptimization();
+    // 预加载逻辑已移至动态导入中
   }, []);
 
   // P3阶段任务定义

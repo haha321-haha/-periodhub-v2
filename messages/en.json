@@ -126,33 +126,25 @@
         "cta": "View Guide"
       }
     },
-    "quickLinks": {
-      "title": "Quick Navigation",
-      "healthGuide": {
-        "title": "Health Guide",
-        "description": "Comprehensive health management guide",
-        "viewNow": "View Now"
-      },
-      "assessment": {
-        "title": "Symptom Assessment",
-        "description": "Professional health assessment tools",
-        "cta": "Start Assessment"
-      },
-      "resources": {
-        "title": "Medical Resources",
-        "description": "Professional medical guide downloads",
-        "downloads": {
-          "cta": "Download Resources"
-        }
-      },
-      "solutions": {
-        "title": "Scenario Solutions",
-        "description": "Solutions for different scenarios",
-        "scenarios": {
-          "cta": "View Solutions"
-        }
-      }
-    }
+          "quickLinks": {
+            "title": "Quick Navigation",
+            "healthGuide": "Health Guide",
+            "healthGuideDesc": "Comprehensive health management guide",
+            "viewNow": "View Now",
+            "assessment": "Symptom Assessment",
+            "assessmentDesc": "Professional health assessment tools",
+            "assessmentCta": "Start Assessment",
+            "resources": "Medical Resources",
+            "resourcesDesc": "Professional medical guide downloads",
+            "downloads": {
+              "cta": "Download Resources"
+            },
+            "solutions": "Scenario Solutions",
+            "solutionsDesc": "Solutions for different scenarios",
+            "scenarios": {
+              "cta": "View Solutions"
+            }
+          }
   },
   "userSuccessStories": {
     "title": "User Success Stories",
@@ -223,6 +215,29 @@
     "title": "Health Statistics",
     "subtitle": "Professional data based on global women's health surveys",
     "dataSource": "Data Source: Global Women's Health Survey"
+  },
+  "metadata": {
+    "home": {
+      "structuredData": {
+        "description": "Professional period pain relief and pain management platform providing scientific relief methods and personalized health recommendations",
+        "featureList": {
+          "painTracking": "Smart Pain Tracking",
+          "cyclePrediction": "Cycle Prediction Analysis",
+          "constitutionAssessment": "Constitution Assessment Test",
+          "healthGuides": "Health Guide Documents",
+          "scenarioSolutions": "Scenario Solutions"
+        }
+      }
+    }
+  },
+  "organization": {
+    "description": "Professional menstrual health information platform providing scientific period pain management and health guidance for women"
+  },
+  "navigationTabs": {
+    "articles": "Articles Center",
+    "tools": "Interactive Tools",
+    "downloads": "Resource Downloads",
+    "guide": "Health Guide"
   },
   "understandingPain": {
     "painPatterns": {

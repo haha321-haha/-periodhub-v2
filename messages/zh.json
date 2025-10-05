@@ -126,33 +126,25 @@
         "cta": "查看指南"
       }
     },
-    "quickLinks": {
-      "title": "快速导航",
-      "healthGuide": {
-        "title": "健康指南",
-        "description": "全面的健康管理指南",
-        "viewNow": "立即查看"
-      },
-      "assessment": {
-        "title": "症状评估",
-        "description": "专业健康评估工具",
-        "cta": "开始评估"
-      },
-      "resources": {
-        "title": "医学资源",
-        "description": "专业医学指南下载",
-        "downloads": {
-          "cta": "下载资源"
-        }
-      },
-      "solutions": {
-        "title": "场景解决方案",
-        "description": "针对不同场景的解决方案",
-        "scenarios": {
-          "cta": "查看方案"
-        }
-      }
-    }
+          "quickLinks": {
+            "title": "快速导航",
+            "healthGuide": "健康指南",
+            "healthGuideDesc": "全面的健康管理指南",
+            "viewNow": "立即查看",
+            "assessment": "症状评估",
+            "assessmentDesc": "专业健康评估工具",
+            "assessmentCta": "开始评估",
+            "resources": "医学资源",
+            "resourcesDesc": "专业医学指南下载",
+            "downloads": {
+              "cta": "下载资源"
+            },
+            "solutions": "场景解决方案",
+            "solutionsDesc": "针对不同场景的解决方案",
+            "scenarios": {
+              "cta": "查看方案"
+            }
+          }
   },
   "userSuccessStories": {
     "title": "用户成功故事",
@@ -223,6 +215,29 @@
     "title": "健康统计数据",
     "subtitle": "基于全球女性健康调查的专业数据",
     "dataSource": "数据来源：全球女性健康调查"
+  },
+  "metadata": {
+    "home": {
+      "structuredData": {
+        "description": "专业的痛经缓解和疼痛管理平台，提供科学的缓解方法和个性化健康建议",
+        "featureList": {
+          "painTracking": "智能疼痛追踪",
+          "cyclePrediction": "周期预测分析",
+          "constitutionAssessment": "体质评估测试",
+          "healthGuides": "健康指南文档",
+          "scenarioSolutions": "场景解决方案"
+        }
+      }
+    }
+  },
+  "organization": {
+    "description": "专业的经期健康信息平台，为女性提供科学的痛经管理和健康指导"
+  },
+  "navigationTabs": {
+    "articles": "文章中心",
+    "tools": "互动工具",
+    "downloads": "资源下载",
+    "guide": "健康指南"
   },
   "understandingPain": {
     "painPatterns": {

@@ -40,6 +40,190 @@
       "separator": "/"
     }
   },
+  "hero": {
+    "welcomeBadge": "欢迎使用专业痛经管理平台",
+    "title": "科学管理",
+    "titleHighlight": "痛经困扰",
+    "subtitle": "基于医学证据的专业平台，为60万+女性提供个性化痛经解决方案",
+    "features": {
+      "personalizedRecord": "个性化记录",
+      "personalizedRecordDesc": "智能追踪个人症状",
+      "evidenceBasedGuide": "循证指南",
+      "evidenceBasedGuideDesc": "42篇医学指南",
+      "privacyFirst": "隐私优先",
+      "privacyFirstDesc": "数据安全保护",
+      "precisionPrediction": "精准预测",
+      "precisionPredictionDesc": "AI智能分析"
+    },
+    "immediateRelief": "立即缓解",
+    "cta": {
+      "primary": "互动工具",
+      "secondary": "健康指南"
+    },
+    "toolsCount": "8+",
+    "articlesCount": "42",
+    "stats": {
+      "tools": "专业工具",
+      "content": "医学指南",
+      "support": "在线支持"
+    },
+    "toolCards": {
+      "painTracker": "疼痛追踪器",
+      "painTrackerDesc": "智能记录疼痛模式",
+      "cycleTracker": "周期追踪器", 
+      "cycleTrackerDesc": "全面管理月经周期",
+      "constitutionTest": "体质测试",
+      "constitutionTestDesc": "个性化健康评估"
+    }
+  },
+  "home": {
+    "features": {
+      "title": "专业功能",
+      "subtitle": "全面的痛经管理解决方案",
+      "tracking": {
+        "title": "智能追踪",
+        "description": "个性化症状记录与分析"
+      },
+      "assessment": {
+        "title": "专业评估",
+        "description": "多维度健康评估工具"
+      },
+      "resources": {
+        "title": "医学资源",
+        "description": "42篇专业医学指南"
+      },
+      "immediateRelief": {
+        "title": "即时缓解",
+        "description": "快速疼痛缓解方案"
+      }
+    },
+    "trusted": {
+      "title": "值得信赖",
+      "subtitle": "已帮助60万+女性科学管理痛经",
+      "metrics": {
+        "activeUsers": "活跃用户",
+        "articles": "医学指南",
+        "resources": "专业资源",
+        "satisfaction": "满意度"
+      }
+    },
+    "treatmentGuide": {
+      "title": "治疗方案指南",
+      "subtitle": "基于循证医学的专业建议",
+      "medicationGuide": {
+        "title": "用药指导",
+        "description": "安全有效的药物选择",
+        "cta": "查看指南"
+      },
+      "heatTherapy": {
+        "title": "热敷疗法",
+        "description": "自然缓解疼痛方法",
+        "cta": "了解详情"
+      },
+      "diagnosis": {
+        "title": "诊断指南",
+        "description": "何时需要就医",
+        "cta": "查看指南"
+      }
+    },
+    "quickLinks": {
+      "title": "快速导航",
+      "healthGuide": {
+        "title": "健康指南",
+        "description": "全面的健康管理指南",
+        "viewNow": "立即查看"
+      },
+      "assessment": {
+        "title": "症状评估",
+        "description": "专业健康评估工具",
+        "cta": "开始评估"
+      },
+      "resources": {
+        "title": "医学资源",
+        "description": "专业医学指南下载",
+        "downloads": {
+          "cta": "下载资源"
+        }
+      },
+      "solutions": {
+        "title": "场景解决方案",
+        "description": "针对不同场景的解决方案",
+        "scenarios": {
+          "cta": "查看方案"
+        }
+      }
+    }
+  },
+  "userSuccessStories": {
+    "title": "用户成功故事",
+    "stories": {
+      "story1": {
+        "initial": "小",
+        "name": "小张",
+        "role": "25岁，上班族",
+        "testimonial": "使用PeriodHub后，我学会了科学管理痛经，生活质量大大提升。"
+      },
+      "story2": {
+        "initial": "李",
+        "name": "李女士",
+        "role": "28岁，教师",
+        "testimonial": "专业的医学指南让我对痛经有了更科学的认识，不再盲目用药。"
+      },
+      "story3": {
+        "initial": "王",
+        "name": "王同学",
+        "role": "22岁，学生",
+        "testimonial": "疼痛追踪功能帮我找到了规律，现在能提前预防痛经发作。"
+      }
+    },
+    "statistic": "98%的用户表示症状得到明显改善",
+    "ctaButton": "开始你的健康之旅"
+  },
+  "faq": {
+    "title": "常见问题",
+    "subtitle": "解答您关于痛经管理的疑问",
+    "q1": {
+      "question": "PeriodHub如何帮助我管理痛经？",
+      "answer": "PeriodHub提供智能追踪、专业评估和循证医学指南，帮助您科学管理痛经症状。"
+    },
+    "q2": {
+      "question": "我的数据安全吗？",
+      "answer": "我们采用最高级别的数据加密和隐私保护措施，确保您的个人信息安全。"
+    },
+    "q3": {
+      "question": "平台上的医学指南是否可信？",
+      "answer": "所有医学指南都基于循证医学，由专业医疗团队审核，确保内容的科学性和准确性。"
+    },
+    "q4": {
+      "question": "如何获得个性化建议？",
+      "answer": "通过症状评估和疼痛追踪，我们的AI系统会为您提供个性化的健康建议。"
+    },
+    "q5": {
+      "question": "平台是否收费？",
+      "answer": "基础功能完全免费，高级功能提供付费选项，确保服务的可持续性。"
+    },
+    "q6": {
+      "question": "什么时候需要就医？",
+      "answer": "如果痛经严重影响生活或出现异常症状，建议及时咨询专业医生。"
+    },
+    "q7": {
+      "question": "如何开始使用平台？",
+      "answer": "注册账号后，完成基础评估即可开始使用各项功能。"
+    }
+  },
+  "anchorTexts": {
+    "navigation": {
+      "main": "主导航"
+    },
+    "cta": {
+      "startNow": "立即开始"
+    }
+  },
+  "healthStatistics": {
+    "title": "健康统计数据",
+    "subtitle": "基于全球女性健康调查的专业数据",
+    "dataSource": "数据来源：全球女性健康调查"
+  },
   "understandingPain": {
     "painPatterns": {
       "title": "识别你的疼痛模式",

@@ -40,6 +40,190 @@
       "separator": "/"
     }
   },
+  "hero": {
+    "welcomeBadge": "Welcome to Professional Period Pain Management",
+    "title": "Scientific Management",
+    "titleHighlight": "of Period Pain",
+    "subtitle": "Evidence-based professional platform providing personalized period pain solutions for 600,000+ women",
+    "features": {
+      "personalizedRecord": "Personalized Tracking",
+      "personalizedRecordDesc": "Smart symptom monitoring",
+      "evidenceBasedGuide": "Evidence-Based Guide",
+      "evidenceBasedGuideDesc": "42 medical guides",
+      "privacyFirst": "Privacy First",
+      "privacyFirstDesc": "Data security protection",
+      "precisionPrediction": "Precision Prediction",
+      "precisionPredictionDesc": "AI intelligent analysis"
+    },
+    "immediateRelief": "Immediate Relief",
+    "cta": {
+      "primary": "Interactive Tools",
+      "secondary": "Health Guide"
+    },
+    "toolsCount": "8+",
+    "articlesCount": "42",
+    "stats": {
+      "tools": "Professional Tools",
+      "content": "Medical Guides",
+      "support": "Online Support"
+    },
+    "toolCards": {
+      "painTracker": "Pain Tracker",
+      "painTrackerDesc": "Smart pain pattern recording",
+      "cycleTracker": "Cycle Tracker",
+      "cycleTrackerDesc": "Comprehensive menstrual cycle management",
+      "constitutionTest": "Constitution Test",
+      "constitutionTestDesc": "Personalized health assessment"
+    }
+  },
+  "home": {
+    "features": {
+      "title": "Professional Features",
+      "subtitle": "Comprehensive period pain management solutions",
+      "tracking": {
+        "title": "Smart Tracking",
+        "description": "Personalized symptom recording and analysis"
+      },
+      "assessment": {
+        "title": "Professional Assessment",
+        "description": "Multi-dimensional health assessment tools"
+      },
+      "resources": {
+        "title": "Medical Resources",
+        "description": "42 professional medical guides"
+      },
+      "immediateRelief": {
+        "title": "Immediate Relief",
+        "description": "Quick pain relief solutions"
+      }
+    },
+    "trusted": {
+      "title": "Trusted Platform",
+      "subtitle": "Helped 600,000+ women scientifically manage period pain",
+      "metrics": {
+        "activeUsers": "Active Users",
+        "articles": "Medical Guides",
+        "resources": "Professional Resources",
+        "satisfaction": "Satisfaction Rate"
+      }
+    },
+    "treatmentGuide": {
+      "title": "Treatment Guide",
+      "subtitle": "Evidence-based medical recommendations",
+      "medicationGuide": {
+        "title": "Medication Guide",
+        "description": "Safe and effective medication choices",
+        "cta": "View Guide"
+      },
+      "heatTherapy": {
+        "title": "Heat Therapy",
+        "description": "Natural pain relief methods",
+        "cta": "Learn More"
+      },
+      "diagnosis": {
+        "title": "Diagnosis Guide",
+        "description": "When to seek medical care",
+        "cta": "View Guide"
+      }
+    },
+    "quickLinks": {
+      "title": "Quick Navigation",
+      "healthGuide": {
+        "title": "Health Guide",
+        "description": "Comprehensive health management guide",
+        "viewNow": "View Now"
+      },
+      "assessment": {
+        "title": "Symptom Assessment",
+        "description": "Professional health assessment tools",
+        "cta": "Start Assessment"
+      },
+      "resources": {
+        "title": "Medical Resources",
+        "description": "Professional medical guide downloads",
+        "downloads": {
+          "cta": "Download Resources"
+        }
+      },
+      "solutions": {
+        "title": "Scenario Solutions",
+        "description": "Solutions for different scenarios",
+        "scenarios": {
+          "cta": "View Solutions"
+        }
+      }
+    }
+  },
+  "userSuccessStories": {
+    "title": "User Success Stories",
+    "stories": {
+      "story1": {
+        "initial": "S",
+        "name": "Sarah",
+        "role": "25, Office Worker",
+        "testimonial": "After using PeriodHub, I learned to scientifically manage period pain and my quality of life has greatly improved."
+      },
+      "story2": {
+        "initial": "E",
+        "name": "Emma",
+        "role": "28, Teacher",
+        "testimonial": "The professional medical guides gave me a more scientific understanding of period pain, and I no longer take medication blindly."
+      },
+      "story3": {
+        "initial": "M",
+        "name": "Maria",
+        "role": "22, Student",
+        "testimonial": "The pain tracking feature helped me find patterns, and now I can prevent period pain episodes in advance."
+      }
+    },
+    "statistic": "98% of users report significant symptom improvement",
+    "ctaButton": "Start Your Health Journey"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to your questions about period pain management",
+    "q1": {
+      "question": "How does PeriodHub help me manage period pain?",
+      "answer": "PeriodHub provides smart tracking, professional assessment, and evidence-based medical guides to help you scientifically manage period pain symptoms."
+    },
+    "q2": {
+      "question": "Is my data secure?",
+      "answer": "We use the highest level of data encryption and privacy protection measures to ensure your personal information is secure."
+    },
+    "q3": {
+      "question": "Are the medical guides on the platform reliable?",
+      "answer": "All medical guides are based on evidence-based medicine and reviewed by professional medical teams to ensure scientific accuracy."
+    },
+    "q4": {
+      "question": "How can I get personalized recommendations?",
+      "answer": "Through symptom assessment and pain tracking, our AI system will provide you with personalized health recommendations."
+    },
+    "q5": {
+      "question": "Is the platform free?",
+      "answer": "Basic features are completely free, with premium features available as paid options to ensure service sustainability."
+    },
+    "q6": {
+      "question": "When should I see a doctor?",
+      "answer": "If period pain seriously affects your life or you experience abnormal symptoms, we recommend consulting a professional doctor promptly."
+    },
+    "q7": {
+      "question": "How do I start using the platform?",
+      "answer": "After registering an account, complete the basic assessment to start using all features."
+    }
+  },
+  "anchorTexts": {
+    "navigation": {
+      "main": "Main Navigation"
+    },
+    "cta": {
+      "startNow": "Start Now"
+    }
+  },
+  "healthStatistics": {
+    "title": "Health Statistics",
+    "subtitle": "Professional data based on global women's health surveys",
+    "dataSource": "Data Source: Global Women's Health Survey"
+  },
   "understandingPain": {
     "painPatterns": {
       "title": "Identify Your Pain Patterns",

@@ -1,0 +1,221 @@
+{
+  "timestamp": "2025-10-05T07:48:30.420Z",
+  "totalUrls": 21,
+  "checks": [
+    {
+      "url": "https://www.periodhub.health/zh/articles/zhan-zhuang-baduanjin-for-menstrual-pain-relief",
+      "locale": "zh",
+      "path": "articles/zhan-zhuang-baduanjin-for-menstrual-pain-relief",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/zh/articles/heat-therapy-complete-guide",
+      "locale": "zh",
+      "path": "articles/heat-therapy-complete-guide",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/zh/articles/period-pain-simulator-accuracy-analysis",
+      "locale": "zh",
+      "path": "articles/period-pain-simulator-accuracy-analysis",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/zh/articles/womens-lifecycle-menstrual-pain-analysis",
+      "locale": "zh",
+      "path": "articles/womens-lifecycle-menstrual-pain-analysis",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/zh/articles/menstrual-pain-medical-guide",
+      "locale": "zh",
+      "path": "articles/menstrual-pain-medical-guide",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/zh/articles/menstrual-pain-research-progress-2024",
+      "locale": "zh",
+      "path": "articles/menstrual-pain-research-progress-2024",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/zh/articles/menstrual-pain-accompanying-symptoms-guide",
+      "locale": "zh",
+      "path": "articles/menstrual-pain-accompanying-symptoms-guide",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/zh/articles/herbal-tea-menstrual-pain-relief",
+      "locale": "zh",
+      "path": "articles/herbal-tea-menstrual-pain-relief",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/en/articles/menstrual-stress-management-complete-guide",
+      "locale": "en",
+      "path": "articles/menstrual-stress-management-complete-guide",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/en/articles/ginger-menstrual-pain-relief-guide",
+      "locale": "en",
+      "path": "articles/ginger-menstrual-pain-relief-guide",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/zh/teen-health",
+      "locale": "zh",
+      "path": "teen-health",
+      "pageExists": true,
+      "pagePath": "/app/[locale]/teen-health/page.tsx",
+      "canonicalFound": true,
+      "canonicalType": "generateMetadata with alternates.canonical",
+      "canonicalSnippet": "export async function generateMetadata({\n  params\n}: {\n  params: Promise<{ locale: Locale }>\n}): Promise<Metadata> {\n  const { locale } = await params;\n  const t = await getTranslations({ locale, name..."
+    },
+    {
+      "url": "https://www.periodhub.health/en/teen-health/development-pain",
+      "locale": "en",
+      "path": "teen-health/development-pain",
+      "pageExists": true,
+      "pagePath": "/app/[locale]/teen-health/development-pain/page.tsx",
+      "canonicalFound": true,
+      "canonicalType": "generateMetadata with alternates.canonical",
+      "canonicalSnippet": "export async function generateMetadata({\n  params\n}: {\n  params: Promise<{ locale: Locale }>\n}): Promise<Metadata> {\n  const { locale } = await params;\n  const t = await getTranslations({ locale, name..."
+    },
+    {
+      "url": "https://www.periodhub.health/en/teen-health/emotional-support",
+      "locale": "en",
+      "path": "teen-health/emotional-support",
+      "pageExists": true,
+      "pagePath": "/app/[locale]/teen-health/emotional-support/page.tsx",
+      "canonicalFound": true,
+      "canonicalType": "generateMetadata with alternates.canonical",
+      "canonicalSnippet": "export async function generateMetadata({\n  params\n}: {\n  params: Promise<{ locale: Locale }>\n}): Promise<Metadata> {\n  const { locale } = await params;\n  const t = await getTranslations({ locale, name..."
+    },
+    {
+      "url": "https://www.periodhub.health/zh/interactive-tools/symptom-tracker",
+      "locale": "zh",
+      "path": "interactive-tools/symptom-tracker",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/en/interactive-tools/symptom-tracker",
+      "locale": "en",
+      "path": "interactive-tools/symptom-tracker",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/en/interactive-tools",
+      "locale": "en",
+      "path": "interactive-tools",
+      "pageExists": true,
+      "pagePath": "/app/[locale]/interactive-tools/page.tsx",
+      "canonicalFound": true,
+      "canonicalType": "generateMetadata with alternates.canonical",
+      "canonicalSnippet": "export async function generateMetadata({\n  params\n}: {\n  params: Promise<{ locale: Locale }>\n}): Promise<Metadata> {\n  const { locale } = await params;\n  const t = await getTranslations({ locale, name..."
+    },
+    {
+      "url": "https://www.periodhub.health/zh",
+      "locale": "zh",
+      "path": "home",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/en",
+      "locale": "en",
+      "path": "home",
+      "pageExists": false,
+      "pagePath": null,
+      "canonicalFound": false,
+      "canonicalType": null
+    },
+    {
+      "url": "https://www.periodhub.health/zh/immediate-relief",
+      "locale": "zh",
+      "path": "immediate-relief",
+      "pageExists": true,
+      "pagePath": "/app/[locale]/immediate-relief/page.tsx",
+      "canonicalFound": true,
+      "canonicalType": "generateMetadata with alternates.canonical",
+      "canonicalSnippet": "export async function generateMetadata({\n  params\n}: {\n  params: Promise<{ locale: string }>\n}): Promise<Metadata> {\n  const { locale } = await params;\n  const t = await getTranslations({ locale, name..."
+    },
+    {
+      "url": "https://www.periodhub.health/zh/privacy-policy",
+      "locale": "zh",
+      "path": "privacy-policy",
+      "pageExists": true,
+      "pagePath": "/app/[locale]/privacy-policy/page.tsx",
+      "canonicalFound": true,
+      "canonicalType": "generateMetadata with alternates.canonical",
+      "canonicalSnippet": "export async function generateMetadata({\n  params\n}: {\n  params: Promise<{ locale: Locale }>\n}): Promise<Metadata> {\n  const { locale } = await params;\n  const t = await getTranslations({ locale, name..."
+    },
+    {
+      "url": "https://www.periodhub.health/en/privacy-policy",
+      "locale": "en",
+      "path": "privacy-policy",
+      "pageExists": true,
+      "pagePath": "/app/[locale]/privacy-policy/page.tsx",
+      "canonicalFound": true,
+      "canonicalType": "generateMetadata with alternates.canonical",
+      "canonicalSnippet": "export async function generateMetadata({\n  params\n}: {\n  params: Promise<{ locale: Locale }>\n}): Promise<Metadata> {\n  const { locale } = await params;\n  const t = await getTranslations({ locale, name..."
+    }
+  ],
+  "layoutFiles": [
+    {
+      "path": "/app/layout.tsx",
+      "exists": true,
+      "hasCanonical": false,
+      "snippet": null
+    },
+    {
+      "path": "/app/[locale]/layout.tsx",
+      "exists": true,
+      "hasCanonical": false,
+      "snippet": null
+    }
+  ],
+  "nextConfig": {
+    "exists": true,
+    "hasTrailingSlash": false,
+    "trailingSlashValue": null
+  }
+}

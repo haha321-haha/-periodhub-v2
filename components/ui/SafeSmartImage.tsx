@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import SmartImage from './SmartImage';
 import OptimizedImage from './OptimizedImage';
+import EnhancedImage from './EnhancedImage';
 
 interface SafeSmartImageProps {
   src: string;
@@ -21,7 +22,7 @@ interface SafeSmartImageProps {
   // 安全机制配置
   enableFallback?: boolean;
   enableErrorBoundary?: boolean;
-  fallbackComponent?: 'OptimizedImage' | 'img';
+  fallbackComponent?: 'EnhancedImage' | 'OptimizedImage' | 'img';
   debugMode?: boolean;
 }
 
@@ -45,7 +46,7 @@ export default function SafeSmartImage({
   onLoad,
   enableFallback = true,
   enableErrorBoundary = true,
-  fallbackComponent = 'OptimizedImage',
+  fallbackComponent = 'EnhancedImage',
   debugMode = false
 }: SafeSmartImageProps) {
   const [hasError, setHasError] = useState(false);
@@ -123,6 +124,26 @@ export default function SafeSmartImage({
     );
   }
 
+  // 回退到EnhancedImage
+  if (shouldUseFallback && fallbackComponent === 'EnhancedImage') {
+    return (
+      <EnhancedImage
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={className}
+        priority={priority}
+        sizes={sizes}
+        quality={quality}
+        placeholder={placeholder}
+        style={style}
+        onError={handleError}
+        onLoad={handleLoad}
+      />
+    );
+  }
+
   // 回退到OptimizedImage
   if (shouldUseFallback && fallbackComponent === 'OptimizedImage') {
     return (
@@ -164,10 +185,10 @@ export default function SafeSmartImage({
       console.error('SmartImage渲染错误:', error);
     }
     
-    // 捕获渲染错误，回退到OptimizedImage
+    // 捕获渲染错误，回退到EnhancedImage
     if (enableFallback) {
       return (
-        <OptimizedImage
+        <EnhancedImage
           src={src}
           alt={alt}
           width={width}

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { Suspense, lazy } from 'react';
+import SafeSmartImage from '@/components/ui/SafeSmartImage';
 
 // 加载骨架屏组件
 export const LoadingSkeleton = ({ 
@@ -135,13 +136,17 @@ export const LazyImage = ({
         <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg"></div>
       )}
       {isInView && (
-        <img
+        <SafeSmartImage
           src={src}
           alt={alt}
+          width={400}
+          height={300}
           onLoad={() => setIsLoaded(true)}
           className={`transition-opacity duration-300 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           }`}
+          priority={false}
+          type="content"
         />
       )}
     </div>

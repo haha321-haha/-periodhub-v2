@@ -4,7 +4,7 @@ import {unstable_setRequestLocale} from 'next-intl/server';
 import {Suspense} from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getValidLocale } from '@/lib/locale-utils';
+import { getValidLocale, getHTMLLang } from '@/lib/locale-utils';
 import LanguageSetter from '@/components/LanguageSetter';
 
 export const dynamic = 'force-dynamic';
@@ -55,14 +55,18 @@ export default async function LocaleLayout({
   }
 
   return (
-    <NextIntlClientProvider locale={validLocale} messages={messages as any}>
-      <Suspense fallback={<LoadingState />}>
-        <Header />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
-      </Suspense>
-    </NextIntlClientProvider>
+    <html lang={getHTMLLang(validLocale)}>
+      <body>
+        <NextIntlClientProvider locale={validLocale} messages={messages as any}>
+          <Suspense fallback={<LoadingState />}>
+            <Header />
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </Suspense>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }

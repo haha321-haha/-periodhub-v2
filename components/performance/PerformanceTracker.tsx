@@ -22,7 +22,7 @@ export default function PerformanceTracker() {
               entry.name.includes('chart')) {
             
             const loadTime = Math.round(entry.duration);
-            const transferSize = entry.transferSize || 0;
+            const transferSize = (entry as any).transferSize || 0;
             
             console.log(`📊 Script Performance: ${entry.name}`);
             console.log(`   Load Time: ${loadTime}ms`);
@@ -76,7 +76,7 @@ export default function PerformanceTracker() {
           if ((window as any).gtag) {
             (window as any).gtag('event', 'web_vitals', {
               metric_name: 'FID',
-              metric_value: Math.round(entry.processingStart - entry.startTime),
+               metric_value: Math.round((entry as any).processingStart - entry.startTime),
               event_category: 'performance'
             });
           }
@@ -122,8 +122,8 @@ export default function PerformanceTracker() {
             dom_content_loaded: Math.round(navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart),
             load_complete: Math.round(navigation.loadEventEnd - navigation.loadEventStart),
             first_byte: Math.round(navigation.responseStart - navigation.requestStart),
-            dom_processing: Math.round(navigation.domComplete - navigation.domLoading),
-            total_load_time: Math.round(navigation.loadEventEnd - navigation.navigationStart)
+             dom_processing: Math.round(navigation.domComplete - (navigation as any).domLoading),
+             total_load_time: Math.round(navigation.loadEventEnd - (navigation as any).navigationStart)
           };
           
           console.log('📊 Page Performance Metrics:', metrics);
@@ -170,7 +170,7 @@ export function ScriptOptimizationSuggestions() {
       );
       
       const slowScripts = scripts.filter(script => script.duration > 500);
-      const largeScripts = scripts.filter(script => (script.transferSize || 0) > 100000);
+      const largeScripts = scripts.filter(script => ((script as any).transferSize || 0) > 100000);
       
       if (slowScripts.length > 0) {
         console.log('🐌 Slow scripts detected:', slowScripts.map(s => ({
@@ -182,7 +182,7 @@ export function ScriptOptimizationSuggestions() {
       if (largeScripts.length > 0) {
         console.log('📦 Large scripts detected:', largeScripts.map(s => ({
           name: s.name,
-          size: Math.round((s.transferSize || 0) / 1024) + 'KB'
+          size: Math.round(((s as any).transferSize || 0) / 1024) + 'KB'
         })));
       }
       

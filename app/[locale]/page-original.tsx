@@ -5,6 +5,7 @@ import { Metadata } from 'next';
 import Hero from '@/components/layout/Hero';
 import UserSuccessStories from '@/components/UserSuccessStories';
 import NavigationTabs from '@/components/NavigationTabs';
+import OptimizedSVG from '@/components/ui/OptimizedSVG';
 import { URL_CONFIG } from '@/lib/url-config';
 
 // 页面级别的metadata
@@ -268,11 +269,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <section id="articles-section" className="py-16">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="bg-white/70 backdrop-blur rounded-2xl shadow-sm p-4 sm:p-6">
-                <img
+                <OptimizedSVG
                   src="/images/infographics/stats-infographic.svg"
                   alt={isZh ? '月经健康统计数据信息图' : 'Period Health Statistics Infographic'}
                   className="w-full h-auto"
-                  loading="lazy"
+                  priority={false}
                 />
                 <p className="mt-2 text-center text-sm text-neutral-500">
                   {t('healthStatistics.dataSource')}

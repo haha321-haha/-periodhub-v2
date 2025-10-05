@@ -38,12 +38,6 @@ export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
   return (
     <>
       <Script
-        src="https://unpkg.com/lucide@latest"
-        strategy="lazyOnload"
-        onLoad={() => console.log('✅ Lucide script loaded')}
-        onError={(e) => console.error('❌ Lucide script failed:', e)}
-      />
-      <Script
         src={`${typeof window !== 'undefined' ? window.location.origin : ''}/scripts/nsaid-interactive.js`}
         strategy="lazyOnload"
         onLoad={() => console.log('✅ NSAID interactive script loaded')}

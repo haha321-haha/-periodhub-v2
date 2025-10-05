@@ -2,6 +2,7 @@
 
 import { lazy } from 'react';
 import React from 'react';
+import SafeSmartImage from '@/components/ui/SafeSmartImage';
 
 // 懒加载组件工厂
 export function createLazyComponent(importFn: () => Promise<any>, fallback?: React.ComponentType) {
@@ -213,13 +214,15 @@ export function LazyImage({
   }, []);
 
   return (
-    <img
-      ref={imgRef}
+    <SafeSmartImage
       src={isInView ? src : placeholder}
       alt={alt}
+      width={400}
+      height={300}
       className={`transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-50'} ${className}`}
       onLoad={() => setIsLoaded(true)}
-      loading="lazy"
+      priority={false}
+      type="content"
     />
   );
 }

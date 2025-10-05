@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import SafeSmartImage from '@/components/ui/SafeSmartImage';
 
 // 设备断点配置
 export const breakpoints = {
@@ -184,12 +185,15 @@ export const ResponsiveImage = ({
   const { screenSize } = useResponsive();
 
   return (
-    <img
+    <SafeSmartImage
       src={src}
       alt={alt}
+      width={400}
+      height={300}
       className={`responsive-image ${className}`}
       sizes={sizes}
-      loading={priority ? 'eager' : 'lazy'}
+      priority={priority}
+      type="content"
       style={{
         maxWidth: '100%',
         height: 'auto'

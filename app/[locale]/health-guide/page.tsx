@@ -2,6 +2,7 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import StructuredData from '@/components/StructuredData';
+import SafeSmartImage from '@/components/ui/SafeSmartImage';
 import { Locale, locales } from '@/i18n';
 import RelatedToolCard from '@/app/[locale]/interactive-tools/components/RelatedToolCard';
 import RelatedArticleCard from '@/app/[locale]/interactive-tools/components/RelatedArticleCard';
@@ -344,18 +345,18 @@ export default async function HealthGuidePage({
           <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div>
-                <picture>
-                  <source media="(min-width: 768px)" srcSet="/images/medical/female_reproductive_system_anatomy_800x800.webp" type="image/webp" />
-                  <source media="(min-width: 768px)" srcSet="/images/medical/female_reproductive_system_anatomy_800x800.png" type="image/png" />
-                  <source media="(max-width: 767px)" srcSet="/images/medical/female_reproductive_system_anatomy_400x400.webp" type="image/webp" />
-                  <source media="(max-width: 767px)" srcSet="/images/medical/female_reproductive_system_anatomy_400x400.png" type="image/png" />
-                  <img 
-                    src="/images/medical/female_reproductive_system_anatomy_800x800.png" 
-                    alt={t('medicalPrinciples.anatomy.imageAlt')}
-                    className="w-full h-auto rounded-lg shadow-md"
-                    loading="lazy"
-                  />
-                </picture>
+                <SafeSmartImage
+                  src="/images/medical/female_reproductive_system_anatomy_800x800.webp"
+                  alt={t('medicalPrinciples.anatomy.imageAlt')}
+                  width={800}
+                  height={800}
+                  type="content"
+                  className="w-full h-auto rounded-lg shadow-md"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={false}
+                  enableFallback={true}
+                  fallbackComponent="OptimizedImage"
+                />
               </div>
               
               <div>

@@ -33,11 +33,11 @@ export default function BreathingExerciseTool({ locale = 'zh' }: BreathingExerci
             const currentPhase = phases[phase];
             const nextPhase = currentPhase.next;
             setPhase(nextPhase);
-            
+
             if (nextPhase === 'inhale') {
               setCycle(c => c + 1);
             }
-            
+
             return phases[nextPhase].duration;
           }
           return prev - 1;

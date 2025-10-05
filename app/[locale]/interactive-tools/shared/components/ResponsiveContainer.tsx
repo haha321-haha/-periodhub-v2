@@ -47,7 +47,7 @@ export function ResponsiveContainer({
     const updateBreakpoint = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
-      
+
       setBreakpoint({
         isMobile: width < 768,
         isTablet: width >= 768 && width < 1024,
@@ -60,7 +60,7 @@ export function ResponsiveContainer({
 
     updateBreakpoint();
     window.addEventListener('resize', updateBreakpoint);
-    
+
     return () => window.removeEventListener('resize', updateBreakpoint);
   }, []);
 
@@ -124,7 +124,7 @@ export function useResponsive() {
     const updateBreakpoint = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
-      
+
       setBreakpoint({
         isMobile: width < 768,
         isTablet: width >= 768 && width < 1024,
@@ -137,7 +137,7 @@ export function useResponsive() {
 
     updateBreakpoint();
     window.addEventListener('resize', updateBreakpoint);
-    
+
     return () => window.removeEventListener('resize', updateBreakpoint);
   }, []);
 
@@ -169,7 +169,7 @@ export function ResponsiveGrid({
 }: ResponsiveGridProps) {
   const getGridClasses = () => {
     const { mobile = 1, tablet = 2, desktop = 3, largeDesktop = 4 } = columns;
-    
+
     const gridCols = [
       `grid-cols-${mobile}`,
       `sm:grid-cols-${tablet}`,
@@ -228,7 +228,7 @@ export function ResponsiveText({
 }: ResponsiveTextProps) {
   const getSizeClasses = () => {
     const { mobile = 'base', tablet = 'base', desktop = 'base' } = size;
-    
+
     const sizeMap = {
       xs: 'text-xs',
       sm: 'text-sm',
@@ -321,7 +321,7 @@ export function ResponsiveButton({
 
   const getSizeClasses = () => {
     const { mobile = 'md', desktop = 'md' } = size;
-    
+
     const sizeMap = {
       sm: 'px-3 py-2 text-sm',
       md: 'px-4 py-3 text-base',

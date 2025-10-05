@@ -39,7 +39,7 @@ export interface CycleRecord {
   startDate: string;
   endDate?: string;
   symptoms: string[];
-  flow: 'light' | 'medium' | 'heavy';
+  flow: "light" | "medium" | "heavy";
   notes?: string;
 }
 
@@ -47,7 +47,7 @@ export interface CycleRecord {
 export interface AssessmentQuestion {
   id: ID;
   question: string;
-  type: 'single' | 'multiple' | 'scale' | 'text';
+  type: "single" | "multiple" | "scale" | "text";
   options?: string[];
   required: boolean;
 }
@@ -85,15 +85,15 @@ export interface ToolConfig {
   id: ID;
   name: string;
   description: string;
-  type: 'tracker' | 'assessment' | 'calculator';
+  type: "tracker" | "assessment" | "calculator";
   settings: Record<string, unknown>;
 }
 
 // 导出相关类型
 export interface ExportData {
-  type: 'pain' | 'cycle' | 'assessment';
+  type: "pain" | "cycle" | "assessment";
   data: PainRecord[] | CycleRecord[] | AssessmentResult[];
-  format: 'csv' | 'json' | 'pdf';
+  format: "csv" | "json" | "pdf";
   dateRange: {
     start: string;
     end: string;
@@ -107,7 +107,7 @@ export interface AnalyticsData {
   symptoms: Record<string, number>;
   trends: {
     average: number;
-    trend: 'increasing' | 'decreasing' | 'stable';
+    trend: "increasing" | "decreasing" | "stable";
   };
 }
 
@@ -122,7 +122,14 @@ export interface AppError {
 export interface FormField {
   name: string;
   label: string;
-  type: 'text' | 'email' | 'number' | 'select' | 'textarea' | 'checkbox' | 'radio';
+  type:
+    | "text"
+    | "email"
+    | "number"
+    | "select"
+    | "textarea"
+    | "checkbox"
+    | "radio";
   required: boolean;
   options?: string[];
   validation?: {
@@ -178,7 +185,7 @@ export interface PaginationParams {
   page: number;
   limit: number;
   sortBy?: string;
-  sortOrder?: 'asc' | 'desc';
+  sortOrder?: "asc" | "desc";
 }
 
 export interface PaginatedResponse<T> {
@@ -196,9 +203,3 @@ export type EventHandler<T = Event> = (event: T) => void;
 export type AsyncEventHandler<T = Event> = (event: T) => Promise<void>;
 export type Validator<T = unknown> = (value: T) => boolean | string;
 export type Transformer<T = unknown, R = unknown> = (value: T) => R;
-
-
-
-
-
-

@@ -13,13 +13,13 @@ function checkPageMetaDescriptions() {
     'app/[locale]/health-guide/understanding-pain/page.tsx',
     'app/[locale]/interactive-tools/symptom-assessment/page.tsx'
   ];
-  
+
   let shortDescriptions = [];
-  
+
   pages.forEach(pagePath => {
     if (fs.existsSync(pagePath)) {
       const content = fs.readFileSync(pagePath, 'utf8');
-      
+
       // 查找description字段
       const descMatches = content.match(/description:\s*['"`](.*?)['"`]/g);
       if (descMatches) {
@@ -36,7 +36,7 @@ function checkPageMetaDescriptions() {
       }
     }
   });
-  
+
   return shortDescriptions;
 }
 
@@ -45,7 +45,7 @@ function checkArticleMetaDescriptions() {
   const articlesDir = 'content/articles/en';
   const files = fs.readdirSync(articlesDir);
   let shortDescriptions = [];
-  
+
   files.forEach(file => {
     if (file.endsWith('.md')) {
       const content = fs.readFileSync(path.join(articlesDir, file), 'utf8');
@@ -53,7 +53,7 @@ function checkArticleMetaDescriptions() {
       if (frontmatter) {
         const seoDescMatch = frontmatter.match(/seo_description:\s*['"](.*?)['"]/);
         const seoDescZhMatch = frontmatter.match(/seo_description_zh:\s*['"](.*?)['"]/);
-        
+
         if (seoDescMatch) {
           const desc = seoDescMatch[1];
           if (desc.length < 150) {
@@ -65,7 +65,7 @@ function checkArticleMetaDescriptions() {
             });
           }
         }
-        
+
         if (seoDescZhMatch) {
           const desc = seoDescZhMatch[1];
           if (desc.length < 150) {
@@ -80,14 +80,14 @@ function checkArticleMetaDescriptions() {
       }
     }
   });
-  
+
   return shortDescriptions;
 }
 
 // 检查所有页面类型
 function checkAllMetaDescriptions() {
   console.log('=== Meta Descriptions 长度检查报告 ===\n');
-  
+
   // 检查文章页面
   const articleShortDescs = checkArticleMetaDescriptions();
   console.log('📚 文章页面meta descriptions长度问题:');
@@ -97,7 +97,7 @@ function checkAllMetaDescriptions() {
     console.log(`   内容: ${item.description}`);
     console.log('');
   });
-  
+
   // 检查页面组件
   const pageShortDescs = checkPageMetaDescriptions();
   console.log('📄 页面组件meta descriptions长度问题:');
@@ -107,13 +107,13 @@ function checkAllMetaDescriptions() {
     console.log(`   内容: ${item.description}`);
     console.log('');
   });
-  
+
   // 总计
   const totalShort = articleShortDescs.length + pageShortDescs.length;
   console.log('📊 总计问题页面数量:', totalShort);
   console.log('📊 文章页面问题:', articleShortDescs.length);
   console.log('📊 页面组件问题:', pageShortDescs.length);
-  
+
   return {
     total: totalShort,
     articles: articleShortDescs.length,
@@ -124,5 +124,3 @@ function checkAllMetaDescriptions() {
 }
 
 const result = checkAllMetaDescriptions();
-
-

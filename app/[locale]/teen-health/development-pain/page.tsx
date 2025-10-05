@@ -29,10 +29,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'teenHealth' });
-  
+
   return {
     title: locale === 'zh' ? '发育期疼痛管理 - 青少年经期健康专区' : 'Developmental Pain Management - Teen Menstrual Health Zone',
-    description: locale === 'zh' 
+    description: locale === 'zh'
       ? '12-16岁专属疼痛管理建议，了解青春期痛经特点，掌握科学缓解方法。'
       : 'Specialized pain management advice for ages 12-16, understanding adolescent period pain characteristics.',
     alternates: {
@@ -53,7 +53,7 @@ export default async function DevelopmentPainPage({
 }) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
-  
+
   const t = await getTranslations('scenarioSolutionsPage');
   const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
 
@@ -132,7 +132,7 @@ export default async function DevelopmentPainPage({
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
       {/* Breadcrumb */}
-      <Breadcrumb 
+      <Breadcrumb
         items={[
           { label: breadcrumbT('scenarioSolutions'), href: `/${locale}/scenario-solutions` },
           { label: breadcrumbT('teenHealth'), href: `/${locale}/teen-health` },
@@ -183,7 +183,7 @@ export default async function DevelopmentPainPage({
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
           {locale === 'zh' ? '青春期经期疼痛的"不太一样"' : 'What Makes Adolescent Period Pain "Different"'}
         </h2>
-        
+
         <div className="bg-blue-50 rounded-2xl p-8 mb-8">
           <h3 className="text-xl font-semibold text-gray-900 mb-4">
             {locale === 'zh' ? '为什么会痛？' : 'Why Does It Hurt?'}
@@ -195,7 +195,7 @@ export default async function DevelopmentPainPage({
             }
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-8">
           {painCharacteristics.map((characteristic, index) => (
             <div key={index} className="text-center">
@@ -242,7 +242,7 @@ export default async function DevelopmentPainPage({
         <p className="text-center text-gray-600 mb-12">
           {locale === 'zh' ? '在这个成长关键期，建立健康的经期管理习惯非常重要' : 'During this critical growth period, establishing healthy period management habits is very important'}
         </p>
-        
+
         <div className="space-y-8">
           {managementMethods.map((category, index) => (
             <div key={index} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
@@ -254,7 +254,7 @@ export default async function DevelopmentPainPage({
                   {category.category}
                 </h3>
               </div>
-              
+
               <div className="grid md:grid-cols-3 gap-6">
                 {category.methods.map((method, methodIndex) => (
                   <div key={methodIndex} className="bg-gray-50 rounded-lg p-6">
@@ -285,7 +285,7 @@ export default async function DevelopmentPainPage({
             {locale === 'zh' ? '药物使用需谨慎' : 'Careful Medication Use'}
           </h2>
         </div>
-        
+
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <h3 className="font-semibold text-gray-900 mb-4">
@@ -308,7 +308,7 @@ export default async function DevelopmentPainPage({
               </li>
             </ul>
           </div>
-          
+
           <div>
             <h3 className="font-semibold text-gray-900 mb-4">
               {locale === 'zh' ? '重要提醒：' : 'Important Reminders:'}
@@ -341,14 +341,14 @@ export default async function DevelopmentPainPage({
             {locale === 'zh' ? '关注身体的"报警信号"' : 'Watch for Body\'s "Warning Signals"'}
           </h2>
         </div>
-        
+
         <p className="text-gray-700 mb-6">
           {locale === 'zh'
             ? '如果出现以下任何一种情况，请务必及时告诉家长，并尽快去看医生！'
             : 'If any of the following situations occur, be sure to tell your parents immediately and see a doctor as soon as possible!'
           }
         </p>
-        
+
         <div className="grid md:grid-cols-2 gap-4">
           {warningSignals.map((signal, index) => (
             <div key={index} className="flex items-start bg-white rounded-lg p-4">
@@ -357,7 +357,7 @@ export default async function DevelopmentPainPage({
             </div>
           ))}
         </div>
-        
+
         <div className="mt-6 bg-white rounded-lg p-6">
           <div className="flex items-center mb-3">
             <Stethoscope className="w-6 h-6 text-red-600 mr-2" />
@@ -396,7 +396,7 @@ export default async function DevelopmentPainPage({
           <ArrowLeft className="w-5 h-5 mr-2" />
           {locale === 'zh' ? '上一篇：校园应急指南' : 'Previous: Campus Emergency Guide'}
         </Link>
-        
+
         <Link
           href={`/${locale}/teen-health/emotional-support`}
           className="flex items-center text-primary-600 hover:text-primary-700 transition-colors"

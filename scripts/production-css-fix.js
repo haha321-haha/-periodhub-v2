@@ -24,7 +24,7 @@ class ProductionCSSFixer {
   // 检查生产环境CSS文件
   async checkProductionCSS() {
     console.log('🔍 检查生产环境CSS文件...');
-    
+
     const cssFiles = [
       '/_next/static/css/app/layout.css',
       '/_next/static/css/026415d6fc36570a.css',
@@ -34,7 +34,7 @@ class ProductionCSSFixer {
     for (const cssFile of cssFiles) {
       const url = `${this.productionUrl}${cssFile}`;
       const status = await this.checkUrl(url);
-      
+
       this.report.issues.push({
         url: url,
         status: status.status,
@@ -81,7 +81,7 @@ class ProductionCSSFixer {
   // 检查本地构建产物
   checkLocalBuild() {
     console.log('🔍 检查本地构建产物...');
-    
+
     const localFiles = [
       '.next/static/css/app/layout.css',
       '.next/static/css/026415d6fc36570a.css',
@@ -91,7 +91,7 @@ class ProductionCSSFixer {
     for (const file of localFiles) {
       const exists = fs.existsSync(file);
       const size = exists ? fs.statSync(file).size : 0;
-      
+
       this.report.fixes.push({
         file: file,
         exists: exists,
@@ -106,7 +106,7 @@ class ProductionCSSFixer {
   // 检查Next.js配置
   checkNextConfig() {
     console.log('🔍 检查Next.js配置...');
-    
+
     const configPath = 'next.config.js';
     if (!fs.existsSync(configPath)) {
       this.report.issues.push({
@@ -117,11 +117,11 @@ class ProductionCSSFixer {
     }
 
     const configContent = fs.readFileSync(configPath, 'utf8');
-    
+
     // 检查是否有layout.css预加载配置
     const hasLayoutCSSPreload = configContent.includes('layout.css');
     const isCommented = configContent.includes('//   value: \'</_next/static/css/app/layout.css>');
-    
+
     this.report.fixes.push({
       type: 'config',
       hasLayoutCSSPreload: hasLayoutCSSPreload,
@@ -135,8 +135,8 @@ class ProductionCSSFixer {
   // 生成修复建议
   generateRecommendations() {
     console.log('💡 生成修复建议...');
-    
-    const layoutCSSIssue = this.report.issues.find(issue => 
+
+    const layoutCSSIssue = this.report.issues.find(issue =>
       issue.url && issue.url.includes('layout.css')
     );
 
@@ -147,7 +147,7 @@ class ProductionCSSFixer {
     }
 
     // 检查本地构建
-    const localLayoutCSS = this.report.fixes.find(fix => 
+    const localLayoutCSS = this.report.fixes.find(fix =>
       fix.file && fix.file.includes('layout.css')
     );
 
@@ -199,10 +199,10 @@ class ProductionCSSFixer {
 
     const filename = `production-css-fix-report-${Date.now()}.json`;
     const filepath = path.join(reportDir, filename);
-    
+
     fs.writeFileSync(filepath, JSON.stringify(report, null, 2));
     console.log(`📊 报告已保存: ${filepath}`);
-    
+
     return filepath;
   }
 }
@@ -228,7 +228,7 @@ async function runProductionCSSFix() {
   // 生成报告
   console.log('\n📊 生成修复报告...');
   const report = fixer.generateReport();
-  
+
   console.log('\n📈 修复结果摘要:');
   console.log(`   总问题数: ${report.summary.totalIssues}`);
   console.log(`   生产环境问题: ${report.summary.productionIssues}`);
@@ -240,9 +240,9 @@ async function runProductionCSSFix() {
 
   // 保存报告
   const reportPath = fixer.saveReport(report);
-  
+
   console.log(`\n✅ 生产环境CSS修复完成！报告已保存到: ${reportPath}`);
-  
+
   return report;
 }
 
@@ -252,9 +252,3 @@ if (require.main === module) {
 }
 
 module.exports = { runProductionCSSFix, ProductionCSSFixer };
-
-
-
-
-
-

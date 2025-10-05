@@ -67,7 +67,7 @@ describe('PainDataManager', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockLocalStorage.getItem.mockReturnValue(null);
-    
+
     mockStorage = new LocalStorageAdapter();
     mockValidation = new ValidationService();
     dataManager = new PainDataManager(mockStorage, mockValidation);
@@ -155,7 +155,7 @@ describe('PainDataManager', () => {
   describe('updateRecord', () => {
     it('should update an existing record successfully', async () => {
       const updates = { painLevel: 5, notes: 'Updated notes' };
-      
+
       jest.spyOn(mockStorage, 'createAutoBackup').mockResolvedValue();
       jest.spyOn(mockStorage, 'load').mockResolvedValue([samplePainRecord]);
       jest.spyOn(mockStorage, 'save').mockResolvedValue();
@@ -276,12 +276,12 @@ describe('PainDataManager', () => {
       const record1 = { ...samplePainRecord, id: '1', date: '2024-01-10' };
       const record2 = { ...samplePainRecord, id: '2', date: '2024-01-15' };
       const record3 = { ...samplePainRecord, id: '3', date: '2024-01-20' };
-      
+
       jest.spyOn(mockStorage, 'load').mockResolvedValue([record1, record2, record3]);
 
       const startDate = new Date('2024-01-12');
       const endDate = new Date('2024-01-18');
-      
+
       const result = await dataManager.getRecordsByDateRange(startDate, endDate);
 
       expect(result).toHaveLength(1);
@@ -291,12 +291,12 @@ describe('PainDataManager', () => {
     it('should return records sorted by date descending', async () => {
       const record1 = { ...samplePainRecord, id: '1', date: '2024-01-10' };
       const record2 = { ...samplePainRecord, id: '2', date: '2024-01-20' };
-      
+
       jest.spyOn(mockStorage, 'load').mockResolvedValue([record1, record2]);
 
       const startDate = new Date('2024-01-01');
       const endDate = new Date('2024-01-31');
-      
+
       const result = await dataManager.getRecordsByDateRange(startDate, endDate);
 
       expect(result[0].id).toBe('2'); // Most recent first
@@ -309,7 +309,7 @@ describe('PainDataManager', () => {
       const record1 = { ...samplePainRecord, id: '1', painLevel: 3 };
       const record2 = { ...samplePainRecord, id: '2', painLevel: 7 };
       const record3 = { ...samplePainRecord, id: '3', painLevel: 9 };
-      
+
       jest.spyOn(mockStorage, 'load').mockResolvedValue([record1, record2, record3]);
 
       const result = await dataManager.getRecordsByPainLevel(6);
@@ -322,7 +322,7 @@ describe('PainDataManager', () => {
       const record1 = { ...samplePainRecord, id: '1', painLevel: 3 };
       const record2 = { ...samplePainRecord, id: '2', painLevel: 7 };
       const record3 = { ...samplePainRecord, id: '3', painLevel: 9 };
-      
+
       jest.spyOn(mockStorage, 'load').mockResolvedValue([record1, record2, record3]);
 
       const result = await dataManager.getRecordsByPainLevel(5, 8);
@@ -337,7 +337,7 @@ describe('PainDataManager', () => {
       const record1 = { ...samplePainRecord, id: '1', menstrualStatus: 'day_1' as const };
       const record2 = { ...samplePainRecord, id: '2', menstrualStatus: 'day_2_3' as const };
       const record3 = { ...samplePainRecord, id: '3', menstrualStatus: 'day_2_3' as const };
-      
+
       jest.spyOn(mockStorage, 'load').mockResolvedValue([record1, record2, record3]);
 
       const result = await dataManager.getRecordsByMenstrualStatus('day_2_3');
@@ -351,7 +351,7 @@ describe('PainDataManager', () => {
     it('should search records by notes', async () => {
       const record1 = { ...samplePainRecord, id: '1', notes: 'Severe cramping' };
       const record2 = { ...samplePainRecord, id: '2', notes: 'Mild discomfort' };
-      
+
       jest.spyOn(mockStorage, 'load').mockResolvedValue([record1, record2]);
 
       const result = await dataManager.searchRecords('severe');
@@ -363,7 +363,7 @@ describe('PainDataManager', () => {
     it('should search records by pain types', async () => {
       const record1 = { ...samplePainRecord, id: '1', painTypes: ['cramping'] };
       const record2 = { ...samplePainRecord, id: '2', painTypes: ['sharp'] };
-      
+
       jest.spyOn(mockStorage, 'load').mockResolvedValue([record1, record2]);
 
       const result = await dataManager.searchRecords('sharp');
@@ -373,17 +373,17 @@ describe('PainDataManager', () => {
     });
 
     it('should search records by medications', async () => {
-      const record1 = { 
-        ...samplePainRecord, 
-        id: '1', 
-        medications: [{ name: 'Ibuprofen', dosage: '400mg', timing: 'during pain' }] 
+      const record1 = {
+        ...samplePainRecord,
+        id: '1',
+        medications: [{ name: 'Ibuprofen', dosage: '400mg', timing: 'during pain' }]
       };
-      const record2 = { 
-        ...samplePainRecord, 
-        id: '2', 
-        medications: [{ name: 'Acetaminophen', dosage: '500mg', timing: 'before pain' }] 
+      const record2 = {
+        ...samplePainRecord,
+        id: '2',
+        medications: [{ name: 'Acetaminophen', dosage: '500mg', timing: 'before pain' }]
       };
-      
+
       jest.spyOn(mockStorage, 'load').mockResolvedValue([record1, record2]);
 
       const result = await dataManager.searchRecords('ibuprofen');
@@ -534,26 +534,26 @@ describe('PainDataManager', () => {
 
   describe('performDataCleanup', () => {
     it('should remove duplicate records', async () => {
-      const duplicateRecord1 = { 
-        ...samplePainRecord, 
-        id: '1', 
-        date: '2024-01-15', 
-        time: '14:30', 
-        painLevel: 7 
+      const duplicateRecord1 = {
+        ...samplePainRecord,
+        id: '1',
+        date: '2024-01-15',
+        time: '14:30',
+        painLevel: 7
       };
-      const duplicateRecord2 = { 
-        ...samplePainRecord, 
-        id: '2', 
-        date: '2024-01-15', 
-        time: '14:30', 
-        painLevel: 7 
+      const duplicateRecord2 = {
+        ...samplePainRecord,
+        id: '2',
+        date: '2024-01-15',
+        time: '14:30',
+        painLevel: 7
       };
-      const uniqueRecord = { 
-        ...samplePainRecord, 
-        id: '3', 
-        date: '2024-01-16', 
-        time: '10:00', 
-        painLevel: 5 
+      const uniqueRecord = {
+        ...samplePainRecord,
+        id: '3',
+        date: '2024-01-16',
+        time: '10:00',
+        painLevel: 5
       };
 
       jest.spyOn(mockStorage, 'createAutoBackup').mockResolvedValue();

@@ -54,4 +54,4 @@ export function createCustomResourceManager(
   config: Partial<ResourceManagerConfig>
 ): ResourceManager {
   return createResourceManager('custom', config);
-} 
+}

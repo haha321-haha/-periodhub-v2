@@ -24,7 +24,7 @@ class TranslationKeyExtractor {
    */
   scanTranslationKeys() {
     console.log('🔍 扫描翻译键使用情况...');
-    
+
     const files = glob.sync('**/*.{ts,tsx,js,jsx}', {
       cwd: this.appDir,
       ignore: ['**/node_modules/**', '**/.next/**']
@@ -33,7 +33,7 @@ class TranslationKeyExtractor {
     files.forEach(file => {
       const filePath = path.join(this.appDir, file);
       const content = fs.readFileSync(filePath, 'utf8');
-      
+
       // 匹配 t('key') 或 t("key") 模式
       const tMatches = content.match(/t\(['"`]([^'"`]+)['"`]\)/g);
       if (tMatches) {
@@ -64,7 +64,7 @@ class TranslationKeyExtractor {
    */
   loadTranslationFiles() {
     console.log('📚 加载翻译文件...');
-    
+
     const locales = ['zh', 'en'];
     const translationData = {};
 
@@ -91,7 +91,7 @@ class TranslationKeyExtractor {
    */
   flattenKeys(obj, prefix = '') {
     const flattened = {};
-    
+
     for (const key in obj) {
       if (typeof obj[key] === 'object' && obj[key] !== null) {
         const nested = this.flattenKeys(obj[key], prefix ? `${prefix}.${key}` : key);
@@ -100,7 +100,7 @@ class TranslationKeyExtractor {
         flattened[prefix ? `${prefix}.${key}` : key] = obj[key];
       }
     }
-    
+
     return flattened;
   }
 
@@ -109,10 +109,10 @@ class TranslationKeyExtractor {
    */
   validateTranslationKeys() {
     console.log('🔍 验证翻译键完整性...');
-    
+
     const translationData = this.loadTranslationFiles();
     const locales = Object.keys(translationData);
-    
+
     if (locales.length === 0) {
       this.errors.push('没有找到有效的翻译文件');
       return;
@@ -159,7 +159,7 @@ class TranslationKeyExtractor {
   generateReport() {
     console.log('\n📊 翻译键分析报告');
     console.log('='.repeat(50));
-    
+
     console.log(`\n📈 统计信息:`);
     console.log(`  - 代码中使用的翻译键: ${this.foundKeys.size}`);
     console.log(`  - 缺失的翻译键: ${this.missingKeys.size}`);
@@ -216,12 +216,12 @@ class TranslationKeyExtractor {
    */
   run() {
     console.log('🚀 开始翻译键分析...\n');
-    
+
     try {
       this.scanTranslationKeys();
       this.validateTranslationKeys();
       const report = this.generateReport();
-      
+
       console.log('\n' + '='.repeat(50));
       if (report.hasIssues) {
         console.log('❌ 发现问题，需要修复');

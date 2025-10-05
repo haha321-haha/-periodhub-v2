@@ -73,29 +73,29 @@ const cycleTrackerKeys = {
 function loadTranslations() {
   const zhPath = path.join(__dirname, '..', 'messages', 'zh.json');
   const enPath = path.join(__dirname, '..', 'messages', 'en.json');
-  
+
   let zhTranslations = {};
   let enTranslations = {};
-  
+
   try {
     zhTranslations = JSON.parse(fs.readFileSync(zhPath, 'utf8'));
   } catch (error) {
     console.log('创建新的中文翻译文件');
   }
-  
+
   try {
     enTranslations = JSON.parse(fs.readFileSync(enPath, 'utf8'));
   } catch (error) {
     console.log('创建新的英文翻译文件');
   }
-  
+
   return { zhTranslations, enTranslations };
 }
 
 // 更新翻译文件
 function updateTranslations() {
   const { zhTranslations, enTranslations } = loadTranslations();
-  
+
   // 添加CycleTracker翻译键
   if (!zhTranslations.cycleTracker) {
     zhTranslations.cycleTracker = {};
@@ -103,17 +103,17 @@ function updateTranslations() {
   if (!enTranslations.cycleTracker) {
     enTranslations.cycleTracker = {};
   }
-  
+
   Object.assign(zhTranslations.cycleTracker, cycleTrackerKeys.zh);
   Object.assign(enTranslations.cycleTracker, cycleTrackerKeys.en);
-  
+
   // 保存翻译文件
   const zhPath = path.join(__dirname, '..', 'messages', 'zh.json');
   const enPath = path.join(__dirname, '..', 'messages', 'en.json');
-  
+
   fs.writeFileSync(zhPath, JSON.stringify(zhTranslations, null, 2), 'utf8');
   fs.writeFileSync(enPath, JSON.stringify(enTranslations, null, 2), 'utf8');
-  
+
   console.log('✅ CycleTracker翻译键创建成功！');
   console.log(`📁 中文翻译: ${zhPath}`);
   console.log(`📁 英文翻译: ${enPath}`);

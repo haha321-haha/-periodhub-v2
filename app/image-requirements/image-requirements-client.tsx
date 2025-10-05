@@ -28,14 +28,14 @@ export default function ImageRequirementsClient() {
           <h1 className="text-3xl font-bold text-gray-800 mb-8">
             Image Requirements
           </h1>
-          
+
           <div className="space-y-8">
             {imageRequirements.map((category, categoryIndex) => (
               <div key={categoryIndex} className="border border-gray-200 rounded-lg p-6">
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
                   {category.category}
                 </h2>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {category.images.map((image, imageIndex) => (
                     <div key={imageIndex} className="border border-gray-200 rounded-lg p-4">
@@ -47,7 +47,7 @@ export default function ImageRequirementsClient() {
                           alt={image.alt}
                         />
                       </div>
-                      
+
                       <div className="space-y-2">
                         <h3 className="font-medium text-gray-800">
                           {image.filename}

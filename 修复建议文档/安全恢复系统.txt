@@ -57,25 +57,25 @@ class SafeRecoverySystem {
         try {
             // 阶段1: 验证和准备
             await this.validateRecoveryPlan(recoveryPlan);
-            
+
             // 阶段2: 构建操作队列
             await this.buildOperationQueue(recoveryPlan);
-            
+
             // 阶段3: 执行预检查
             await this.performPreflightChecks();
-            
+
             // 阶段4: 执行恢复操作
             await this.executeOperations();
-            
+
             // 阶段5: 验证结果
             await this.verifyRecoveryResults();
-            
+
             // 阶段6: 生成报告
             await this.generateRecoveryReport();
 
             this.recoveryState.endTime = new Date();
             console.log('恢复操作完成');
-            
+
             return this.recoveryState;
 
         } catch (error) {
@@ -222,7 +222,7 @@ class SafeRecoverySystem {
 
         for (const operation of this.operationQueue) {
             const targetPath = path.resolve(this.config.targetDir, operation.targetFile);
-            
+
             if (fs.existsSync(targetPath)) {
                 conflicts.push({
                     operation,
@@ -246,7 +246,7 @@ class SafeRecoverySystem {
 
         for (const conflict of conflicts) {
             const resolution = await this.resolveConflict(conflict);
-            
+
             switch (resolution) {
                 case 'overwrite':
                     // 继续操作，将覆盖现有文件
@@ -293,22 +293,22 @@ class SafeRecoverySystem {
         const ext = path.extname(filename);
         const base = path.basename(filename, ext);
         const dir = path.dirname(filename);
-        
+
         let counter = 1;
         let versionedName;
-        
+
         do {
             versionedName = path.join(dir, `${base}_v${counter}${ext}`);
             counter++;
         } while (fs.existsSync(path.resolve(this.config.targetDir, versionedName)));
-        
+
         return versionedName;
     }
 
     async backupExistingFile(targetPath) {
         const backupName = `${path.basename(targetPath)}.backup.${Date.now()}`;
         const backupPath = path.join(this.config.backupDir, backupName);
-        
+
         fs.copyFileSync(targetPath, backupPath);
         this.recoveryState.backups.push({
             original: targetPath,
@@ -384,7 +384,7 @@ class SafeRecoverySystem {
         if (this.config.verifyChecksums) {
             const targetChecksum = await this.calculateChecksum(targetPath);
             const sourceChecksum = this.recoveryState.checksums.get(operation.sourceFile);
-            
+
             if (sourceChecksum !== targetChecksum) {
                 throw new Error(`校验和不匹配: ${operation.sourceFile}`);
             }
@@ -400,7 +400,7 @@ class SafeRecoverySystem {
         return new Promise((resolve, reject) => {
             const hash = crypto.createHash('sha256');
             const stream = fs.createReadStream(filePath);
-            
+
             stream.on('data', data => hash.update(data));
             stream.on('end', () => resolve(hash.digest('hex')));
             stream.on('error', reject);
@@ -418,16 +418,16 @@ class SafeRecoverySystem {
 
         for (const success of this.recoveryState.successful) {
             const targetPath = path.resolve(this.config.targetDir, success.operation.targetFile);
-            
+
             // 检查文件是否存在
             if (fs.existsSync(targetPath)) {
                 verificationResults.filesExist++;
-                
+
                 // 验证校验和
                 if (this.config.verifyChecksums) {
                     const targetChecksum = await this.calculateChecksum(targetPath);
                     const sourceChecksum = this.recoveryState.checksums.get(success.operation.sourceFile);
-                    
+
                     if (targetChecksum === sourceChecksum) {
                         verificationResults.checksumMatches++;
                     }
@@ -478,7 +478,7 @@ class SafeRecoverySystem {
 
     async generateHumanReadableReport(report) {
         let output = '# 🔄 安全恢复系统报告\n\n';
-        
+
         output += `**恢复时间**: ${report.summary.startTime.toLocaleString()} - ${report.summary.endTime.toLocaleString()}\n`;
         output += `**耗时**: ${Math.round(report.summary.duration / 1000)} 秒\n\n`;
 
@@ -557,7 +557,7 @@ class SafeRecoverySystem {
 
     async handleRecoveryFailure(error) {
         console.log('处理恢复失败...');
-        
+
         // 记录错误状态
         this.recoveryState.endTime = new Date();
         this.recoveryState.error = error.message;
@@ -605,7 +605,7 @@ class SafeRecoverySystem {
 
     static createFromPlans(highConfidencePlan, manualReviewResults, mediumConfidencePlan = []) {
         const recovery = new SafeRecoverySystem();
-        
+
         const plan = {
             highConfidence: highConfidencePlan || [],
             mediumConfidence: mediumConfidencePlan || [],
@@ -659,7 +659,7 @@ async function main() {
         };
 
         const results = await recovery.executeRecovery(plan);
-        
+
         console.log('恢复完成！');
         console.log(`成功: ${results.successful.length}, 失败: ${results.failed.length}`);
 

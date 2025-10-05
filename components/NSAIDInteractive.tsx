@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Script from 'next/script';
+import { useEffect, useState } from "react";
+import Script from "next/script";
 
 interface NSAIDInteractiveProps {
-  locale: 'en' | 'zh';
+  locale: "en" | "zh";
 }
 
 export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    console.log('🔧 NSAIDInteractive component mounted');
+    console.log("🔧 NSAIDInteractive component mounted");
     setIsClient(true);
 
     // Load the CSS file dynamically with absolute URL to avoid i18n middleware interference
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
     link.href = `${window.location.origin}/styles/nsaid-interactive.css`;
     document.head.appendChild(link);
 
-    console.log('✅ CSS file loaded');
+    console.log("✅ CSS file loaded");
 
     return () => {
       // Cleanup: remove the CSS link when component unmounts
@@ -38,10 +38,12 @@ export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
   return (
     <>
       <Script
-        src={`${typeof window !== 'undefined' ? window.location.origin : ''}/scripts/nsaid-interactive.js`}
+        src={`${
+          typeof window !== "undefined" ? window.location.origin : ""
+        }/scripts/nsaid-interactive.js`}
         strategy="lazyOnload"
-        onLoad={() => console.log('✅ NSAID interactive script loaded')}
-        onError={(e) => console.error('❌ NSAID interactive script failed:', e)}
+        onLoad={() => console.log("✅ NSAID interactive script loaded")}
+        onError={(e) => console.error("❌ NSAID interactive script failed:", e)}
       />
     </>
   );

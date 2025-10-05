@@ -38,38 +38,38 @@ error() {
 # 检查依赖
 check_dependencies() {
     log "检查依赖..."
-    
+
     # 检查Node.js
     if ! command -v node &> /dev/null; then
         error "Node.js未安装，请先安装Node.js"
         exit 1
     fi
-    
+
     # 检查npm
     if ! command -v npm &> /dev/null; then
         error "npm未安装，请先安装npm"
         exit 1
     fi
-    
+
     success "依赖检查通过"
 }
 
 # 创建必要目录
 setup_directories() {
     log "创建必要目录..."
-    
+
     mkdir -p "$REPORTS_DIR"
     mkdir -p "$PROJECT_ROOT/backups/seo-fix"
-    
+
     success "目录创建完成"
 }
 
 # 运行验证脚本
 run_verification() {
     log "运行SEO验证脚本..."
-    
+
     cd "$PROJECT_ROOT"
-    
+
     if [ -f "$SCRIPTS_DIR/seo-fix-verification.js" ]; then
         node "$SCRIPTS_DIR/seo-fix-verification.js"
         success "验证脚本执行完成"
@@ -82,9 +82,9 @@ run_verification() {
 # 运行修复脚本
 run_fix() {
     log "运行SEO修复脚本..."
-    
+
     cd "$PROJECT_ROOT"
-    
+
     if [ -f "$SCRIPTS_DIR/seo-fix-implementation.js" ]; then
         node "$SCRIPTS_DIR/seo-fix-implementation.js"
         success "修复脚本执行完成"
@@ -97,9 +97,9 @@ run_fix() {
 # 运行监控脚本
 run_monitoring() {
     log "运行SEO监控脚本..."
-    
+
     cd "$PROJECT_ROOT"
-    
+
     if [ -f "$SCRIPTS_DIR/seo-monitoring-dashboard.js" ]; then
         node "$SCRIPTS_DIR/seo-monitoring-dashboard.js"
         success "监控脚本执行完成"
@@ -131,16 +131,16 @@ show_help() {
 # 主函数
 main() {
     local action="${1:-full}"
-    
+
     echo "🚀 SEO修复执行脚本"
     echo "=================="
-    
+
     # 检查依赖
     check_dependencies
-    
+
     # 创建目录
     setup_directories
-    
+
     case "$action" in
         "verify")
             log "执行验证模式..."
@@ -172,7 +172,7 @@ main() {
             exit 1
             ;;
     esac
-    
+
     success "所有操作完成！"
     echo ""
     echo "📋 查看报告:"

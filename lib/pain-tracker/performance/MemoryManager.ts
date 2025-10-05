@@ -37,7 +37,7 @@ export class MemoryManager implements MemoryManagerInterface {
    */
   monitorMemoryUsage(): MemoryUsageInfo {
     const memoryInfo = this.getMemoryInfo();
-    
+
     // Add to history
     this.memoryHistory.push(memoryInfo);
     if (this.memoryHistory.length > this.maxHistoryLength) {
@@ -66,7 +66,7 @@ export class MemoryManager implements MemoryManagerInterface {
     try {
       // Destroy old or unused chart instances
       const instancesToDestroy: string[] = [];
-      
+
       this.chartInstances.forEach((instance, id) => {
         if (this.shouldDestroyChartInstance(instance, id)) {
           instancesToDestroy.push(id);
@@ -162,16 +162,16 @@ export class MemoryManager implements MemoryManagerInterface {
    */
   scheduleMemoryCleanup(intervalMs: number): void {
     this.cancelMemoryCleanup();
-    
+
     // Don't start timers in test environment
     if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
       return;
     }
-    
+
     this.cleanupTimer = setInterval(async () => {
       try {
         const memoryInfo = this.monitorMemoryUsage();
-        
+
         // Perform cleanup if memory usage is high
         if (memoryInfo.usedJSHeapSize > this.memoryThresholds.warning) {
           await this.cleanupChartInstances();
@@ -225,7 +225,7 @@ export class MemoryManager implements MemoryManagerInterface {
     if (this.memoryHistory.length >= 5) {
       const recentMemory = this.memoryHistory.slice(-5);
       const isIncreasing = this.isMemoryTrendIncreasing(recentMemory);
-      
+
       if (isIncreasing) {
         recommendations.push('Memory usage is trending upward. Monitor for memory leaks.');
       }
@@ -248,7 +248,7 @@ export class MemoryManager implements MemoryManagerInterface {
       if (typeof window !== 'undefined' && (window as any).gc) {
         (window as any).gc();
       }
-      
+
       // Alternative: trigger garbage collection through memory pressure
       if (this.isMemoryAPIAvailable()) {
         // Create temporary memory pressure to trigger GC
@@ -332,7 +332,7 @@ export class MemoryManager implements MemoryManagerInterface {
   }
 
   private isMemoryAPIAvailable(): boolean {
-    return typeof performance !== 'undefined' && 
+    return typeof performance !== 'undefined' &&
            (performance as any).memory !== undefined;
   }
 
@@ -381,7 +381,7 @@ export class MemoryManager implements MemoryManagerInterface {
     try {
       // Find canvas elements that might be orphaned chart instances
       const canvasElements = document.querySelectorAll('canvas[id^="chart-"]');
-      
+
       canvasElements.forEach(canvas => {
         const id = canvas.id;
         if (!this.chartInstances.has(id)) {
@@ -428,7 +428,7 @@ export class MemoryManager implements MemoryManagerInterface {
     if (this.dataCache.size > maxCacheEntries) {
       const entries = Array.from(this.dataCache.entries());
       entries.sort((a, b) => (b[1].timestamp || 0) - (a[1].timestamp || 0));
-      
+
       // Keep only the most recent entries
       this.dataCache.clear();
       entries.slice(0, maxCacheEntries).forEach(([key, value]) => {
@@ -460,7 +460,7 @@ export class MemoryManager implements MemoryManagerInterface {
               // Re-stringify to remove extra whitespace
               const parsed = JSON.parse(data);
               const optimized = JSON.stringify(parsed);
-              
+
               if (optimized.length < data.length) {
                 localStorage.setItem(key, optimized);
                 optimizedKeys++;
@@ -498,7 +498,7 @@ export class MemoryManager implements MemoryManagerInterface {
 
   private calculateCacheSize(): number {
     let totalSize = 0;
-    
+
     this.dataCache.forEach(value => {
       try {
         const serialized = JSON.stringify(value);
@@ -527,13 +527,13 @@ export class MemoryManager implements MemoryManagerInterface {
       // Aggressive cleanup for critical memory situations
       await this.cleanupChartInstances();
       await this.optimizeDataStructures();
-      
+
       // Clear all caches
       this.dataCache.clear();
-      
+
       // Force garbage collection
       await this.forceGarbageCollection();
-      
+
       console.log('Emergency memory cleanup completed');
     } catch (error) {
       console.error('Emergency cleanup failed:', error);

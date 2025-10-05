@@ -14,13 +14,13 @@ const pdfIdToPreviewIdMap = {
   'immediate-pdf-1': 'pain-tracking-form',
   'immediate-pdf-2': 'campus-emergency-checklist',
   'immediate-pdf-3': 'specific-menstrual-pain-management-guide',
-  
+
   // 计划准备PDF (4个)
   'preparation-pdf-1': 'healthy-habits-checklist',
   'preparation-pdf-2': 'menstrual-cycle-nutrition-plan',
   'preparation-pdf-3': 'magnesium-gut-health-menstrual-pain-guide',
   'preparation-pdf-4': 'zhan-zhuang-baduanjin-illustrated-guide',
-  
+
   // 学习理解PDF (6个)
   'learning-pdf-1': 'natural-therapy-assessment',
   'learning-pdf-2': 'menstrual-pain-complications-management',
@@ -58,21 +58,21 @@ let issues = [];
 // 验证每个PDF
 Object.entries(pdfIdToPreviewIdMap).forEach(([pdfId, previewId]) => {
   totalPdfs++;
-  
+
   console.log(`\n📄 ${pdfId} (${pdfTitles[pdfId]})`);
   console.log(`   映射到: ${previewId}`);
-  
+
   // 检查映射是否有效
   if (previewId && previewId.trim()) {
     validMappings++;
     console.log(`   ✅ 映射有效`);
-    
+
     // 检查HTML文件是否存在
     const htmlFilePath = path.join('public', 'pdf-files', `${previewId}.html`);
     if (fs.existsSync(htmlFilePath)) {
       existingFiles++;
       console.log(`   ✅ HTML文件存在: ${htmlFilePath}`);
-      
+
       // 检查文件大小
       const stats = fs.statSync(htmlFilePath);
       if (stats.size > 1000) {

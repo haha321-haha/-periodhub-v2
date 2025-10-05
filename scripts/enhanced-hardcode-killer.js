@@ -19,14 +19,14 @@ class EnhancedHardcodeKiller {
         '**/*.json', '**/*.md', '**/*.yml', '**/*.yaml',
         '**/*.jsx', '**/*.tsx', '**/*.js', '**/*.ts'
       ],
-      
+
       // 排除目录（更精确）
       excludeDirs: [
-        'node_modules', 'dist', 'build', '.git', 
+        'node_modules', 'dist', 'build', '.git',
         'coverage', '.next', '.nuxt', 'recovery-workspace',
         'hub-latest-main', 'backup', 'reports'
       ],
-      
+
       // 增强的检测模式
       patterns: {
         // URL检测（更精确）
@@ -36,26 +36,26 @@ class EnhancedHardcodeKiller {
           /https:\/\/periodhub\.health(?!\/)/g,  // 特定项目URL
           /https:\/\/www\.periodhub\.health/g
         ],
-        
+
         // IP地址检测
         ips: [
           /\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/g
         ],
-        
+
         // 硬编码文本检测（支持多语言）
         hardcodedText: [
           /['"`][^'"`]*[\u4e00-\u9fa5]+[^'"`]*['"`]/g, // 中文
           /['"`][A-Z][a-z\s]{10,}['"`]/g, // 英文长句
           /locale\s*===\s*['"]zh['"]\s*\?\s*['"][^'"]*['"]\s*:\s*['"][^'"]*['"]/g // 条件硬编码
         ],
-        
+
         // API密钥检测
         apiKeys: [
           /['"](sk|pk)_[a-zA-Z0-9]{20,}['"]/g,
           /['"]AKIA[A-Z0-9]{16}['"]/g,
           /['"]AIza[0-9A-Za-z\\-_]{35}['"]/g // Google API
         ],
-        
+
         // 科学参数硬编码
         scientificParams: [
           /temperature.*[0-9]+.*°[CF]/g,
@@ -64,7 +64,7 @@ class EnhancedHardcodeKiller {
         ]
       }
     };
-    
+
     this.results = {
       urls: [],
       ips: [],
@@ -79,21 +79,21 @@ class EnhancedHardcodeKiller {
   async detectAllHardcodes() {
     console.log('🔍 开始全面检测硬编码...');
     console.log('💡 基于"地鼠窝"方案优化，检测更全面！');
-    
+
     const files = await this.getAllFiles();
     console.log(`📁 扫描 ${files.length} 个文件...`);
-    
+
     for (const file of files) {
       try {
         const content = fs.readFileSync(file, 'utf8');
-        
+
         // 检测各种类型的硬编码
         this.detectInFile(file, content, this.config.patterns.urls, this.results.urls, 'URL');
         this.detectInFile(file, content, this.config.patterns.ips, this.results.ips, 'IP');
         this.detectInFile(file, content, this.config.patterns.hardcodedText, this.results.texts, '文本');
         this.detectInFile(file, content, this.config.patterns.apiKeys, this.results.apiKeys, 'API密钥');
         this.detectInFile(file, content, this.config.patterns.scientificParams, this.results.scientificParams, '科学参数');
-        
+
       } catch (error) {
         console.warn(`⚠️  无法读取文件: ${file} - ${error.message}`);
       }
@@ -105,28 +105,28 @@ class EnhancedHardcodeKiller {
 
     // 生成详细报告
     this.generateReport();
-    
+
     return this.results;
   }
 
   // 📁 获取所有需要检查的文件
   async getAllFiles() {
     const allFiles = [];
-    
+
     for (const pattern of this.config.fileExtensions) {
       const files = glob.sync(pattern, {
         ignore: this.config.excludeDirs.map(dir => `${dir}/**`)
       });
       allFiles.push(...files);
     }
-    
+
     return [...new Set(allFiles)]; // 去重
   }
 
   // 🎯 在单个文件中检测硬编码
   detectInFile(file, content, patterns, results, type) {
     const lines = content.split('\n');
-    
+
     patterns.forEach(pattern => {
       lines.forEach((line, lineNumber) => {
         const matches = line.match(pattern);
@@ -165,19 +165,19 @@ class EnhancedHardcodeKiller {
           return '建议使用 URL_CONFIG.getUrl() 或环境变量';
         }
         return '建议使用配置文件管理URL';
-        
+
       case '文本':
         if (match.includes('locale ===')) {
           return '建议使用 t() 翻译函数';
         }
         return '建议使用翻译键或常量';
-        
+
       case 'API密钥':
         return '建议使用环境变量存储API密钥';
-        
+
       case '科学参数':
         return '建议将科学参数移到翻译文件中';
-        
+
       default:
         return '建议使用配置文件管理';
     }
@@ -222,12 +222,12 @@ class EnhancedHardcodeKiller {
       fs.mkdirSync('reports', { recursive: true });
     }
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
-    
+
     // 生成Markdown报告
     const mdReport = this.generateMarkdownReport(report);
     const mdFile = reportFile.replace('.json', '.md');
     fs.writeFileSync(mdFile, mdReport);
-    
+
     this.printSummary(report);
     console.log(`\n📄 详细报告已保存:`);
     console.log(`   JSON: ${reportFile}`);
@@ -245,7 +245,7 @@ class EnhancedHardcodeKiller {
 
 ### 按类型分布
 - **URL硬编码**: ${report.summary.byType.urls} 个
-- **IP地址**: ${report.summary.byType.ips} 个  
+- **IP地址**: ${report.summary.byType.ips} 个
 - **硬编码文本**: ${report.summary.byType.texts} 个
 - **API密钥**: ${report.summary.byType.apiKeys} 个
 - **科学参数**: ${report.summary.byType.scientificParams} 个
@@ -334,23 +334,23 @@ fi`
   // 🎯 获取下一步行动
   getNextSteps() {
     const steps = [];
-    
+
     if (this.results.urls.length > 0) {
       steps.push('立即修复URL硬编码（影响SEO）');
     }
-    
+
     if (this.results.apiKeys.length > 0) {
       steps.push('紧急处理API密钥泄露风险');
     }
-    
+
     if (this.results.texts.length > 0) {
       steps.push('建立国际化文本管理系统');
     }
-    
+
     steps.push('建立团队硬编码零容忍协议');
     steps.push('设置自动化检测和预防机制');
     steps.push('定期进行硬编码健康检查');
-    
+
     return steps;
   }
 
@@ -362,7 +362,7 @@ fi`
     console.log(`⚠️  高: ${report.summary.bySeverity.high} 个`);
     console.log(`📝 中等: ${report.summary.bySeverity.medium} 个`);
     console.log(`ℹ️  轻微: ${report.summary.bySeverity.low} 个`);
-    
+
     console.log('\n📋 按类型分布:');
     Object.entries(report.summary.byType).forEach(([type, count]) => {
       if (count > 0) {
@@ -374,12 +374,12 @@ fi`
   // 🛠️ 智能修复（安全模式）
   async autoFix(options = {}) {
     console.log('🛠️ 开始智能修复...');
-    
+
     const { dryRun = true, batchSize = 10 } = options;
-    
+
     // 按严重程度和类型分组
     const fixPlan = this.createFixPlan();
-    
+
     console.log('📋 修复计划:');
     fixPlan.forEach((batch, index) => {
       console.log(`批次 ${index + 1}: ${batch.length} 个文件`);
@@ -394,16 +394,16 @@ fi`
     for (let i = 0; i < fixPlan.length; i++) {
       const batch = fixPlan[i];
       console.log(`\n🔄 执行批次 ${i + 1}/${fixPlan.length}...`);
-      
+
       await this.processBatch(batch);
-      
+
       // 验证修复效果
       const verification = await this.verifyBatch(batch);
       if (!verification.success) {
         console.log('❌ 批次修复验证失败，停止执行');
         break;
       }
-      
+
       console.log('✅ 批次修复成功');
     }
   }
@@ -467,10 +467,10 @@ fi`
       if (hasChanges) {
         // 创建备份
         fs.writeFileSync(`${file}.backup`, fs.readFileSync(file, 'utf8'));
-        
+
         // 写入修复后的内容
         fs.writeFileSync(file, content);
-        
+
         console.log(`✅ 修复文件: ${file}`);
       }
 
@@ -483,10 +483,10 @@ fi`
   applyFix(item, content) {
     const lines = content.split('\n');
     const lineIndex = item.line - 1;
-    
+
     if (lineIndex >= 0 && lineIndex < lines.length) {
       let line = lines[lineIndex];
-      
+
       // 根据类型应用不同的修复策略
       switch (item.type) {
         case 'URL':
@@ -494,20 +494,20 @@ fi`
             line = line.replace(item.match, 'URL_CONFIG.getUrl()');
           }
           break;
-          
+
         case '文本':
           if (item.match.includes('locale ===')) {
             line = line.replace(item.match, 't()');
           }
           break;
-          
+
         // 其他类型的修复逻辑...
       }
-      
+
       lines[lineIndex] = line;
       return lines.join('\n');
     }
-    
+
     return content;
   }
 
@@ -521,7 +521,7 @@ fi`
   async trackProgress() {
     const today = new Date().toISOString().split('T')[0];
     const results = await this.detectAllHardcodes();
-    
+
     const progress = {
       date: today,
       total: results.total,
@@ -553,7 +553,7 @@ fi`
 async function main() {
   const killer = new EnhancedHardcodeKiller();
   const args = process.argv.slice(2);
-  
+
   if (args.includes('--detect')) {
     await killer.detectAllHardcodes();
   } else if (args.includes('--fix')) {

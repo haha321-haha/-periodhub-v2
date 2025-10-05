@@ -21,10 +21,10 @@ class InteractiveComponentTester {
     try {
       const zhPath = path.join(process.cwd(), 'messages/zh.json');
       const enPath = path.join(process.cwd(), 'messages/en.json');
-      
+
       this.zhTranslations = JSON.parse(fs.readFileSync(zhPath, 'utf8'));
       this.enTranslations = JSON.parse(fs.readFileSync(enPath, 'utf8'));
-      
+
       return true;
     } catch (error) {
       console.error('Failed to load translations:', error.message);
@@ -197,14 +197,14 @@ class InteractiveComponentTester {
   // Test all components
   testAllComponents() {
     console.log('🧪 Testing interactive components...');
-    
+
     this.initializeComponents();
-    
+
     this.components.forEach(component => {
       console.log(`Testing: ${component.name}`);
       const result = this.testComponent(component);
       this.testResults.push(result);
-      
+
       // Add issues to global issues list
       if (result.criticalIssues.length > 0) {
         this.issues.push({
@@ -235,7 +235,7 @@ class InteractiveComponentTester {
         });
       }
     });
-    
+
     console.log(`✅ Completed testing ${this.components.length} interactive components`);
   }
 
@@ -269,7 +269,7 @@ class InteractiveComponentTester {
 
     const reportPath = path.join(process.cwd(), 'component-testing-report.json');
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    
+
     console.log(`📊 Component testing report saved to: ${reportPath}`);
     return report;
   }
@@ -277,22 +277,22 @@ class InteractiveComponentTester {
   // Main execution
   async run() {
     console.log('🚀 Starting interactive component testing...');
-    
+
     if (!this.loadTranslations()) {
       console.error('Cannot proceed without translation files');
       return null;
     }
-    
+
     this.testAllComponents();
     const report = this.generateComponentReport();
-    
+
     console.log('\n📊 COMPONENT TESTING SUMMARY:');
     console.log(`Components Tested: ${report.summary.totalComponents}`);
     console.log(`Translation Health: ${report.summary.overallHealth}%`);
     console.log(`Critical Issues: ${report.summary.criticalIssues}`);
     console.log(`Missing Translations: ${report.summary.missingTranslations}`);
     console.log(`Language Issues: ${report.summary.languageIssues}`);
-    
+
     return report;
   }
 }

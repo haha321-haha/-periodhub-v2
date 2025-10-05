@@ -34,7 +34,7 @@ export function getImageConfig(): ImageConfig {
  */
 export function getImageComponent() {
   const config = getImageConfig();
-  
+
   if (config.useSmartImage) {
     return 'SmartImage';
   } else if (config.fallbackComponent === 'OptimizedImage') {
@@ -50,7 +50,7 @@ export function getImageComponent() {
  */
 export function createImageComponent(config?: Partial<ImageConfig>) {
   const finalConfig = { ...getImageConfig(), ...config };
-  
+
   if (finalConfig.useSmartImage) {
     // 动态导入SmartImage
     return import('@/components/ui/SmartImage').then(module => module.default);
@@ -69,27 +69,27 @@ export function createImageComponent(config?: Partial<ImageConfig>) {
 export class ImageErrorHandler {
   private static errorCount = 0;
   private static maxErrors = 10;
-  
+
   static handleError(error: Error, src: string, component: string) {
     this.errorCount++;
-    
+
     console.error(`图片加载错误 [${component}]:`, {
       src,
       error: error.message,
       count: this.errorCount,
       timestamp: new Date().toISOString()
     });
-    
+
     // 如果错误过多，建议切换到备用组件
     if (this.errorCount >= this.maxErrors) {
       console.warn(`图片错误过多 (${this.errorCount})，建议检查图片配置或切换到备用组件`);
     }
   }
-  
+
   static resetErrorCount() {
     this.errorCount = 0;
   }
-  
+
   static getErrorCount() {
     return this.errorCount;
   }
@@ -101,30 +101,30 @@ export class ImageErrorHandler {
 export class ImagePerformanceMonitor {
   private static loadTimes: number[] = [];
   private static maxSamples = 100;
-  
+
   static recordLoadTime(loadTime: number, src: string) {
     this.loadTimes.push(loadTime);
-    
+
     // 保持样本数量在限制内
     if (this.loadTimes.length > this.maxSamples) {
       this.loadTimes.shift();
     }
-    
+
     // 记录慢加载
     if (loadTime > 3000) {
       console.warn(`图片加载缓慢: ${src} (${loadTime}ms)`);
     }
   }
-  
+
   static getAverageLoadTime(): number {
     if (this.loadTimes.length === 0) return 0;
     return this.loadTimes.reduce((sum, time) => sum + time, 0) / this.loadTimes.length;
   }
-  
+
   static getSlowLoadCount(): number {
     return this.loadTimes.filter(time => time > 3000).length;
   }
-  
+
   static reset() {
     this.loadTimes = [];
   }
@@ -141,26 +141,26 @@ export class ImageComponentState {
     lastError: null as Error | null,
     lastErrorTime: null as Date | null
   };
-  
+
   static recordError(component: 'SmartImage' | 'OptimizedImage', error: Error) {
     if (component === 'SmartImage') {
       this.state.smartImageErrors++;
     } else {
       this.state.optimizedImageErrors++;
     }
-    
+
     this.state.lastError = error;
     this.state.lastErrorTime = new Date();
   }
-  
+
   static recordLoad() {
     this.state.totalLoads++;
   }
-  
+
   static getState() {
     return { ...this.state };
   }
-  
+
   static reset() {
     this.state = {
       smartImageErrors: 0,
@@ -170,18 +170,15 @@ export class ImageComponentState {
       lastErrorTime: null
     };
   }
-  
+
   static shouldUseFallback(): boolean {
     const { smartImageErrors, totalLoads } = this.state;
-    
+
     // 如果SmartImage错误率超过10%，建议使用备用组件
     if (totalLoads > 0 && (smartImageErrors / totalLoads) > 0.1) {
       return true;
     }
-    
+
     return false;
   }
 }
-
-
-

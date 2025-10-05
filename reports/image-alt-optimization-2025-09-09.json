@@ -1849,9 +1849,7 @@
       "file": "scripts/performance-test.js",
       "line": 500,
       "currentLine": "src=\"/hero-image.jpg\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/hero-image.jpg\""
     },
     {
@@ -1859,9 +1857,7 @@
       "file": "scripts/performance-test.js",
       "line": 509,
       "currentLine": "<Image src=\"/image.jpg\" fill alt=\"Image\" />",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "<Image src=\"/image.jpg\" fill alt=\"Image\" />"
     },
     {
@@ -1869,9 +1865,7 @@
       "file": "scripts/optimize-images.js",
       "line": 237,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -1879,9 +1873,7 @@
       "file": "scripts/optimize-images.js",
       "line": 255,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -1889,9 +1881,7 @@
       "file": "scripts/optimize-images.js",
       "line": 273,
       "currentLine": "src=\"/images/optimized/content-image.webp\"",
-      "suggestions": [
-        "Content Image"
-      ],
+      "suggestions": ["Content Image"],
       "recommendedFix": "src=\"/images/optimized/content-image.webp\""
     },
     {
@@ -1899,9 +1889,7 @@
       "file": "scripts/optimize-images.js",
       "line": 291,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -1909,9 +1897,7 @@
       "file": "scripts/mobile-responsive-checker.js",
       "line": 547,
       "currentLine": "src=\"/image.jpg\"",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "src=\"/image.jpg\""
     },
     {
@@ -1919,9 +1905,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/scripts/performance-test.js",
       "line": 500,
       "currentLine": "src=\"/hero-image.jpg\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/hero-image.jpg\""
     },
     {
@@ -1929,9 +1913,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/scripts/performance-test.js",
       "line": 509,
       "currentLine": "<Image src=\"/image.jpg\" fill alt=\"Image\" />",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "<Image src=\"/image.jpg\" fill alt=\"Image\" />"
     },
     {
@@ -1939,9 +1921,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/scripts/optimize-images.js",
       "line": 237,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -1949,9 +1929,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/scripts/optimize-images.js",
       "line": 255,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -1959,9 +1937,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/scripts/optimize-images.js",
       "line": 273,
       "currentLine": "src=\"/images/optimized/content-image.webp\"",
-      "suggestions": [
-        "Content Image"
-      ],
+      "suggestions": ["Content Image"],
       "recommendedFix": "src=\"/images/optimized/content-image.webp\""
     },
     {
@@ -1969,9 +1945,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/scripts/optimize-images.js",
       "line": 291,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -1979,9 +1953,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/scripts/mobile-responsive-checker.js",
       "line": 547,
       "currentLine": "src=\"/image.jpg\"",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "src=\"/image.jpg\""
     },
     {
@@ -1989,9 +1961,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/scripts/performance-test.js",
       "line": 500,
       "currentLine": "src=\"/hero-image.jpg\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/hero-image.jpg\""
     },
     {
@@ -1999,9 +1969,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/scripts/performance-test.js",
       "line": 509,
       "currentLine": "<Image src=\"/image.jpg\" fill alt=\"Image\" />",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "<Image src=\"/image.jpg\" fill alt=\"Image\" />"
     },
     {
@@ -2009,9 +1977,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/scripts/optimize-images.js",
       "line": 237,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -2019,9 +1985,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/scripts/optimize-images.js",
       "line": 255,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -2029,9 +1993,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/scripts/optimize-images.js",
       "line": 273,
       "currentLine": "src=\"/images/optimized/content-image.webp\"",
-      "suggestions": [
-        "Content Image"
-      ],
+      "suggestions": ["Content Image"],
       "recommendedFix": "src=\"/images/optimized/content-image.webp\""
     },
     {
@@ -2039,9 +2001,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/scripts/optimize-images.js",
       "line": 291,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -2049,9 +2009,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/scripts/mobile-responsive-checker.js",
       "line": 547,
       "currentLine": "src=\"/image.jpg\"",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "src=\"/image.jpg\""
     },
     {
@@ -2059,9 +2017,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/node_modules/sharp/lib/resize.js",
       "line": 132,
       "currentLine": "* <img alt=\"Examples of various values for the fit property when resizing\" width=\"100%\" style=\"aspect-ratio: 998/243\" src=\"/api-resize-fit.svg\">",
-      "suggestions": [
-        "Api Resize Fit"
-      ],
+      "suggestions": ["Api Resize Fit"],
       "recommendedFix": "* <img alt=\"Examples of various values for the fit property when resizing\" width=\"100%\" style=\"aspect-ratio: 998/243\" src=\"/api-resize-fit.svg\">"
     },
     {
@@ -2261,9 +2217,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/no-redundant-roles-test.js",
       "line": 86,
       "currentLine": "{ code: '<img src=\"example.svg\" role=\"img\" />' },",
-      "suggestions": [
-        "Example"
-      ],
+      "suggestions": ["Example"],
       "recommendedFix": "{ code: '<img src=\"example.svg\" role=\"img\" />' },"
     },
     {
@@ -2271,9 +2225,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/no-redundant-roles-test.js",
       "line": 86,
       "currentLine": "{ code: '<img src=\"example.svg\" role=\"img\" />' },",
-      "suggestions": [
-        "Example"
-      ],
+      "suggestions": ["Example"],
       "recommendedFix": "{ code: '<img src=\"example.svg\" role=\"img\" />' },"
     },
     {
@@ -2281,9 +2233,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/alt-text-test.js",
       "line": 188,
       "currentLine": "{ code: '<img src=\"xyz\" />', errors: [missingPropError('img')] },",
-      "suggestions": [
-        "Xyz"
-      ],
+      "suggestions": ["Xyz"],
       "recommendedFix": "{ code: '<img src=\"xyz\" />', errors: [missingPropError('img')] },"
     },
     {
@@ -2291,9 +2241,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/alt-text-test.js",
       "line": 267,
       "currentLine": "code: '<Image src=\"xyz\" />',",
-      "suggestions": [
-        "Xyz"
-      ],
+      "suggestions": ["Xyz"],
       "recommendedFix": "code: '<Image src=\"xyz\" />',"
     },
     {
@@ -2301,11 +2249,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/app/[locale]/page.tsx",
       "line": 268,
       "currentLine": "src=\"/images/infographics/stats-infographic.svg\"",
-      "suggestions": [
-        "Stats Infographic",
-        "graph - stats",
-        "Graph - stats"
-      ],
+      "suggestions": ["Stats Infographic", "graph - stats", "Graph - stats"],
       "recommendedFix": "src=\"/images/infographics/stats-infographic.svg\""
     },
     {
@@ -2313,10 +2257,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/app/[locale]/test-image-quality/page.tsx",
       "line": 22,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -2324,10 +2265,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/app/[locale]/test-image-quality/page.tsx",
       "line": 38,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -2335,10 +2273,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/app/[locale]/test-image-quality/page.tsx",
       "line": 55,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -2346,10 +2281,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/app/[locale]/test-image-quality/page.tsx",
       "line": 72,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -2357,10 +2289,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/recovery-workspace/backups/current-20250830-222904/app/[locale]/interactive-tools/page.tsx",
       "line": 157,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -2368,9 +2297,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/node_modules/sharp/lib/resize.js",
       "line": 132,
       "currentLine": "* <img alt=\"Examples of various values for the fit property when resizing\" width=\"100%\" style=\"aspect-ratio: 998/243\" src=\"/api-resize-fit.svg\">",
-      "suggestions": [
-        "Api Resize Fit"
-      ],
+      "suggestions": ["Api Resize Fit"],
       "recommendedFix": "* <img alt=\"Examples of various values for the fit property when resizing\" width=\"100%\" style=\"aspect-ratio: 998/243\" src=\"/api-resize-fit.svg\">"
     },
     {
@@ -2570,9 +2497,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/no-redundant-roles-test.js",
       "line": 86,
       "currentLine": "{ code: '<img src=\"example.svg\" role=\"img\" />' },",
-      "suggestions": [
-        "Example"
-      ],
+      "suggestions": ["Example"],
       "recommendedFix": "{ code: '<img src=\"example.svg\" role=\"img\" />' },"
     },
     {
@@ -2580,9 +2505,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/no-redundant-roles-test.js",
       "line": 86,
       "currentLine": "{ code: '<img src=\"example.svg\" role=\"img\" />' },",
-      "suggestions": [
-        "Example"
-      ],
+      "suggestions": ["Example"],
       "recommendedFix": "{ code: '<img src=\"example.svg\" role=\"img\" />' },"
     },
     {
@@ -2590,9 +2513,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/alt-text-test.js",
       "line": 188,
       "currentLine": "{ code: '<img src=\"xyz\" />', errors: [missingPropError('img')] },",
-      "suggestions": [
-        "Xyz"
-      ],
+      "suggestions": ["Xyz"],
       "recommendedFix": "{ code: '<img src=\"xyz\" />', errors: [missingPropError('img')] },"
     },
     {
@@ -2600,9 +2521,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/alt-text-test.js",
       "line": 267,
       "currentLine": "code: '<Image src=\"xyz\" />',",
-      "suggestions": [
-        "Xyz"
-      ],
+      "suggestions": ["Xyz"],
       "recommendedFix": "code: '<Image src=\"xyz\" />',"
     },
     {
@@ -2610,11 +2529,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/app/[locale]/page.tsx",
       "line": 268,
       "currentLine": "src=\"/images/infographics/stats-infographic.svg\"",
-      "suggestions": [
-        "Stats Infographic",
-        "graph - stats",
-        "Graph - stats"
-      ],
+      "suggestions": ["Stats Infographic", "graph - stats", "Graph - stats"],
       "recommendedFix": "src=\"/images/infographics/stats-infographic.svg\""
     },
     {
@@ -2622,10 +2537,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/app/[locale]/test-image-quality/page.tsx",
       "line": 22,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -2633,10 +2545,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/app/[locale]/test-image-quality/page.tsx",
       "line": 38,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -2644,10 +2553,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/app/[locale]/test-image-quality/page.tsx",
       "line": 55,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -2655,10 +2561,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/app/[locale]/test-image-quality/page.tsx",
       "line": 72,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -2666,10 +2569,7 @@
       "file": "recovery-workspace/backups/current-state-20250830-225356/app/[locale]/interactive-tools/page.tsx",
       "line": 157,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -2677,9 +2577,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/scripts/performance-test.js",
       "line": 500,
       "currentLine": "src=\"/hero-image.jpg\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/hero-image.jpg\""
     },
     {
@@ -2687,9 +2585,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/scripts/performance-test.js",
       "line": 509,
       "currentLine": "<Image src=\"/image.jpg\" fill alt=\"Image\" />",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "<Image src=\"/image.jpg\" fill alt=\"Image\" />"
     },
     {
@@ -2697,9 +2593,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/scripts/optimize-images.js",
       "line": 237,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -2707,9 +2601,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/scripts/optimize-images.js",
       "line": 255,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -2717,9 +2609,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/scripts/optimize-images.js",
       "line": 273,
       "currentLine": "src=\"/images/optimized/content-image.webp\"",
-      "suggestions": [
-        "Content Image"
-      ],
+      "suggestions": ["Content Image"],
       "recommendedFix": "src=\"/images/optimized/content-image.webp\""
     },
     {
@@ -2727,9 +2617,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/scripts/optimize-images.js",
       "line": 291,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -2737,9 +2625,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/scripts/mobile-responsive-checker.js",
       "line": 547,
       "currentLine": "src=\"/image.jpg\"",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "src=\"/image.jpg\""
     },
     {
@@ -2747,9 +2633,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/node_modules/sharp/lib/resize.js",
       "line": 132,
       "currentLine": "* <img alt=\"Examples of various values for the fit property when resizing\" width=\"100%\" style=\"aspect-ratio: 998/243\" src=\"/api-resize-fit.svg\">",
-      "suggestions": [
-        "Api Resize Fit"
-      ],
+      "suggestions": ["Api Resize Fit"],
       "recommendedFix": "* <img alt=\"Examples of various values for the fit property when resizing\" width=\"100%\" style=\"aspect-ratio: 998/243\" src=\"/api-resize-fit.svg\">"
     },
     {
@@ -2949,9 +2833,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/no-redundant-roles-test.js",
       "line": 86,
       "currentLine": "{ code: '<img src=\"example.svg\" role=\"img\" />' },",
-      "suggestions": [
-        "Example"
-      ],
+      "suggestions": ["Example"],
       "recommendedFix": "{ code: '<img src=\"example.svg\" role=\"img\" />' },"
     },
     {
@@ -2959,9 +2841,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/no-redundant-roles-test.js",
       "line": 86,
       "currentLine": "{ code: '<img src=\"example.svg\" role=\"img\" />' },",
-      "suggestions": [
-        "Example"
-      ],
+      "suggestions": ["Example"],
       "recommendedFix": "{ code: '<img src=\"example.svg\" role=\"img\" />' },"
     },
     {
@@ -2969,9 +2849,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/alt-text-test.js",
       "line": 188,
       "currentLine": "{ code: '<img src=\"xyz\" />', errors: [missingPropError('img')] },",
-      "suggestions": [
-        "Xyz"
-      ],
+      "suggestions": ["Xyz"],
       "recommendedFix": "{ code: '<img src=\"xyz\" />', errors: [missingPropError('img')] },"
     },
     {
@@ -2979,9 +2857,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/alt-text-test.js",
       "line": 267,
       "currentLine": "code: '<Image src=\"xyz\" />',",
-      "suggestions": [
-        "Xyz"
-      ],
+      "suggestions": ["Xyz"],
       "recommendedFix": "code: '<Image src=\"xyz\" />',"
     },
     {
@@ -2989,11 +2865,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/app/[locale]/page.tsx",
       "line": 268,
       "currentLine": "src=\"/images/infographics/stats-infographic.svg\"",
-      "suggestions": [
-        "Stats Infographic",
-        "graph - stats",
-        "Graph - stats"
-      ],
+      "suggestions": ["Stats Infographic", "graph - stats", "Graph - stats"],
       "recommendedFix": "src=\"/images/infographics/stats-infographic.svg\""
     },
     {
@@ -3001,10 +2873,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/app/[locale]/test-image-quality/page.tsx",
       "line": 22,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3012,10 +2881,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/app/[locale]/test-image-quality/page.tsx",
       "line": 38,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3023,10 +2889,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/app/[locale]/test-image-quality/page.tsx",
       "line": 55,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3034,10 +2897,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/app/[locale]/test-image-quality/page.tsx",
       "line": 72,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3045,10 +2905,7 @@
       "file": "recovery-workspace/backups/current-20250830-222904/app/[locale]/interactive-tools/page.tsx",
       "line": 157,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3056,9 +2913,7 @@
       "file": "recovered/node_modules/sharp/lib/resize.js",
       "line": 132,
       "currentLine": "* <img alt=\"Examples of various values for the fit property when resizing\" width=\"100%\" style=\"aspect-ratio: 998/243\" src=\"/api-resize-fit.svg\">",
-      "suggestions": [
-        "Api Resize Fit"
-      ],
+      "suggestions": ["Api Resize Fit"],
       "recommendedFix": "* <img alt=\"Examples of various values for the fit property when resizing\" width=\"100%\" style=\"aspect-ratio: 998/243\" src=\"/api-resize-fit.svg\">"
     },
     {
@@ -3258,9 +3113,7 @@
       "file": "recovered/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/no-redundant-roles-test.js",
       "line": 86,
       "currentLine": "{ code: '<img src=\"example.svg\" role=\"img\" />' },",
-      "suggestions": [
-        "Example"
-      ],
+      "suggestions": ["Example"],
       "recommendedFix": "{ code: '<img src=\"example.svg\" role=\"img\" />' },"
     },
     {
@@ -3268,9 +3121,7 @@
       "file": "recovered/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/no-redundant-roles-test.js",
       "line": 86,
       "currentLine": "{ code: '<img src=\"example.svg\" role=\"img\" />' },",
-      "suggestions": [
-        "Example"
-      ],
+      "suggestions": ["Example"],
       "recommendedFix": "{ code: '<img src=\"example.svg\" role=\"img\" />' },"
     },
     {
@@ -3278,9 +3129,7 @@
       "file": "recovered/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/alt-text-test.js",
       "line": 188,
       "currentLine": "{ code: '<img src=\"xyz\" />', errors: [missingPropError('img')] },",
-      "suggestions": [
-        "Xyz"
-      ],
+      "suggestions": ["Xyz"],
       "recommendedFix": "{ code: '<img src=\"xyz\" />', errors: [missingPropError('img')] },"
     },
     {
@@ -3288,9 +3137,7 @@
       "file": "recovered/node_modules/eslint-plugin-jsx-a11y/__tests__/src/rules/alt-text-test.js",
       "line": 267,
       "currentLine": "code: '<Image src=\"xyz\" />',",
-      "suggestions": [
-        "Xyz"
-      ],
+      "suggestions": ["Xyz"],
       "recommendedFix": "code: '<Image src=\"xyz\" />',"
     },
     {
@@ -3298,9 +3145,7 @@
       "file": "hub-latest-main/scripts/performance-test.js",
       "line": 500,
       "currentLine": "src=\"/hero-image.jpg\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/hero-image.jpg\""
     },
     {
@@ -3308,9 +3153,7 @@
       "file": "hub-latest-main/scripts/performance-test.js",
       "line": 509,
       "currentLine": "<Image src=\"/image.jpg\" fill alt=\"Image\" />",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "<Image src=\"/image.jpg\" fill alt=\"Image\" />"
     },
     {
@@ -3318,9 +3161,7 @@
       "file": "hub-latest-main/scripts/optimize-images.js",
       "line": 237,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -3328,9 +3169,7 @@
       "file": "hub-latest-main/scripts/optimize-images.js",
       "line": 255,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -3338,9 +3177,7 @@
       "file": "hub-latest-main/scripts/optimize-images.js",
       "line": 273,
       "currentLine": "src=\"/images/optimized/content-image.webp\"",
-      "suggestions": [
-        "Content Image"
-      ],
+      "suggestions": ["Content Image"],
       "recommendedFix": "src=\"/images/optimized/content-image.webp\""
     },
     {
@@ -3348,9 +3185,7 @@
       "file": "hub-latest-main/scripts/optimize-images.js",
       "line": 291,
       "currentLine": "src=\"/images/optimized/hero-image.webp\"",
-      "suggestions": [
-        "Hero Image"
-      ],
+      "suggestions": ["Hero Image"],
       "recommendedFix": "src=\"/images/optimized/hero-image.webp\""
     },
     {
@@ -3358,9 +3193,7 @@
       "file": "hub-latest-main/scripts/mobile-responsive-checker.js",
       "line": 547,
       "currentLine": "src=\"/image.jpg\"",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "src=\"/image.jpg\""
     },
     {
@@ -3368,11 +3201,7 @@
       "file": "hub-latest-main/app/[locale]/page.tsx",
       "line": 289,
       "currentLine": "src=\"/images/infographics/stats-infographic.svg\"",
-      "suggestions": [
-        "Stats Infographic",
-        "graph - stats",
-        "Graph - stats"
-      ],
+      "suggestions": ["Stats Infographic", "graph - stats", "Graph - stats"],
       "recommendedFix": "src=\"/images/infographics/stats-infographic.svg\""
     },
     {
@@ -3380,10 +3209,7 @@
       "file": "hub-latest-main/app/[locale]/test-image-quality/page.tsx",
       "line": 33,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3391,10 +3217,7 @@
       "file": "hub-latest-main/app/[locale]/test-image-quality/page.tsx",
       "line": 49,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3402,10 +3225,7 @@
       "file": "hub-latest-main/app/[locale]/test-image-quality/page.tsx",
       "line": 66,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3413,10 +3233,7 @@
       "file": "hub-latest-main/app/[locale]/test-image-quality/page.tsx",
       "line": 83,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3424,10 +3241,7 @@
       "file": "hub-latest-main/app/[locale]/interactive-tools/page.tsx",
       "line": 174,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3435,11 +3249,7 @@
       "file": "app/[locale]/page.tsx",
       "line": 269,
       "currentLine": "src=\"/images/infographics/stats-infographic.svg\"",
-      "suggestions": [
-        "Stats Infographic",
-        "graph - stats",
-        "Graph - stats"
-      ],
+      "suggestions": ["Stats Infographic", "graph - stats", "Graph - stats"],
       "recommendedFix": "src=\"/images/infographics/stats-infographic.svg\""
     },
     {
@@ -3447,10 +3257,7 @@
       "file": "app/[locale]/test-image-quality/page.tsx",
       "line": 33,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3458,10 +3265,7 @@
       "file": "app/[locale]/test-image-quality/page.tsx",
       "line": 49,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3469,10 +3273,7 @@
       "file": "app/[locale]/test-image-quality/page.tsx",
       "line": 66,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3480,10 +3281,7 @@
       "file": "app/[locale]/test-image-quality/page.tsx",
       "line": 83,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3491,10 +3289,7 @@
       "file": "app/[locale]/interactive-tools/page.tsx",
       "line": 174,
       "currentLine": "src=\"/images/tools/assessment-illustration.jpg\"",
-      "suggestions": [
-        "Assessment Illustration",
-        "Illustration - assessment"
-      ],
+      "suggestions": ["Assessment Illustration", "Illustration - assessment"],
       "recommendedFix": "src=\"/images/tools/assessment-illustration.jpg\""
     },
     {
@@ -3502,9 +3297,7 @@
       "file": "app/[locale]/health-guide/page.tsx",
       "line": 195,
       "currentLine": "src=\"/images/medical/_---female_reproductive_system_anatomy_800x800.png\"",
-      "suggestions": [
-        "Female Reproductive System Anatomy 800x800"
-      ],
+      "suggestions": ["Female Reproductive System Anatomy 800x800"],
       "recommendedFix": "src=\"/images/medical/_---female_reproductive_system_anatomy_800x800.png\""
     },
     {
@@ -3513,9 +3306,7 @@
       "line": 509,
       "currentLine": "<Image src=\"/image.jpg\" fill alt=\"Image\" />",
       "currentAlt": "Image",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "<Image src=\"/image.jpg\" fill alt=\"Image\" />"
     },
     {
@@ -3524,9 +3315,7 @@
       "line": 509,
       "currentLine": "<Image src=\"/image.jpg\" fill alt=\"Image\" />",
       "currentAlt": "Image",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "<Image src=\"/image.jpg\" fill alt=\"Image\" />"
     },
     {
@@ -3535,9 +3324,7 @@
       "line": 509,
       "currentLine": "<Image src=\"/image.jpg\" fill alt=\"Image\" />",
       "currentAlt": "Image",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "<Image src=\"/image.jpg\" fill alt=\"Image\" />"
     },
     {
@@ -3546,9 +3333,7 @@
       "line": 509,
       "currentLine": "<Image src=\"/image.jpg\" fill alt=\"Image\" />",
       "currentAlt": "Image",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "<Image src=\"/image.jpg\" fill alt=\"Image\" />"
     },
     {
@@ -3557,9 +3342,7 @@
       "line": 509,
       "currentLine": "<Image src=\"/image.jpg\" fill alt=\"Image\" />",
       "currentAlt": "Image",
-      "suggestions": [
-        "Image"
-      ],
+      "suggestions": ["Image"],
       "recommendedFix": "<Image src=\"/image.jpg\" fill alt=\"Image\" />"
     }
   ],

@@ -19,7 +19,7 @@ import {
 } from '../../../types/pain-tracker';
 
 export class ValidationService implements ValidationServiceInterface {
-  
+
   /**
    * Validate a complete pain record
    */
@@ -30,7 +30,7 @@ export class ValidationService implements ValidationServiceInterface {
     try {
       // Validate required fields
       this.validateRequiredFields(record, errors);
-      
+
       // Validate individual fields
       this.validatePainLevelField(record.painLevel, errors);
       this.validateDateField(record.date, errors);
@@ -169,7 +169,7 @@ export class ValidationService implements ValidationServiceInterface {
    * Check for duplicate records based on date and time
    */
   checkForDuplicates(record: PainRecord, existingRecords: PainRecord[]): boolean {
-    return existingRecords.some(existing => 
+    return existingRecords.some(existing =>
       existing.id !== record.id &&
       existing.date === record.date &&
       existing.time === record.time
@@ -246,8 +246,8 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate pain types field
    */
   private validatePainTypesField(
-    painTypes: any, 
-    errors: ValidationError[], 
+    painTypes: any,
+    errors: ValidationError[],
     warnings: ValidationWarning[]
   ): void {
     if (painTypes !== undefined && painTypes !== null) {
@@ -268,7 +268,7 @@ export class ValidationService implements ValidationServiceInterface {
         });
       }
 
-      const invalidTypes = painTypes.filter(type => 
+      const invalidTypes = painTypes.filter(type =>
         !VALIDATION_RULES.painTypes.validOptions.includes(type as PainType)
       );
 
@@ -294,8 +294,8 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate locations field
    */
   private validateLocationsField(
-    locations: any, 
-    errors: ValidationError[], 
+    locations: any,
+    errors: ValidationError[],
     warnings: ValidationWarning[]
   ): void {
     if (locations !== undefined && locations !== null) {
@@ -316,7 +316,7 @@ export class ValidationService implements ValidationServiceInterface {
         });
       }
 
-      const invalidLocations = locations.filter(location => 
+      const invalidLocations = locations.filter(location =>
         !VALIDATION_RULES.locations.validOptions.includes(location as PainLocation)
       );
 
@@ -342,8 +342,8 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate symptoms field
    */
   private validateSymptomsField(
-    symptoms: any, 
-    errors: ValidationError[], 
+    symptoms: any,
+    errors: ValidationError[],
     warnings: ValidationWarning[]
   ): void {
     if (symptoms !== undefined && symptoms !== null) {
@@ -364,7 +364,7 @@ export class ValidationService implements ValidationServiceInterface {
         });
       }
 
-      const invalidSymptoms = symptoms.filter(symptom => 
+      const invalidSymptoms = symptoms.filter(symptom =>
         !VALIDATION_RULES.symptoms.validOptions.includes(symptom as Symptom)
       );
 
@@ -384,7 +384,7 @@ export class ValidationService implements ValidationServiceInterface {
   private validateMenstrualStatusField(menstrualStatus: any, errors: ValidationError[]): void {
     if (menstrualStatus !== undefined && menstrualStatus !== null && menstrualStatus !== '') {
       const validStatuses: MenstrualStatus[] = [
-        'before_period', 'day_1', 'day_2_3', 'day_4_plus', 
+        'before_period', 'day_1', 'day_2_3', 'day_4_plus',
         'after_period', 'mid_cycle', 'irregular'
       ];
 
@@ -402,8 +402,8 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate medications field
    */
   private validateMedicationsField(
-    medications: any, 
-    errors: ValidationError[], 
+    medications: any,
+    errors: ValidationError[],
     warnings: ValidationWarning[]
   ): void {
     if (medications !== undefined && medications !== null) {
@@ -439,9 +439,9 @@ export class ValidationService implements ValidationServiceInterface {
    */
   private validateEffectivenessField(effectiveness: any, errors: ValidationError[]): void {
     if (effectiveness !== undefined && effectiveness !== null) {
-      if (typeof effectiveness !== 'number' || 
-          isNaN(effectiveness) || 
-          effectiveness < 0 || 
+      if (typeof effectiveness !== 'number' ||
+          isNaN(effectiveness) ||
+          effectiveness < 0 ||
           effectiveness > 10) {
         errors.push({
           field: 'effectiveness',
@@ -456,8 +456,8 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate lifestyle factors field
    */
   private validateLifestyleFactorsField(
-    lifestyleFactors: any, 
-    errors: ValidationError[], 
+    lifestyleFactors: any,
+    errors: ValidationError[],
     warnings: ValidationWarning[]
   ): void {
     if (lifestyleFactors !== undefined && lifestyleFactors !== null) {
@@ -480,12 +480,12 @@ export class ValidationService implements ValidationServiceInterface {
         }
 
         // Validate specific factor types
-        if (factor.factor === 'stress_level' || 
-            factor.factor === 'diet_quality' || 
+        if (factor.factor === 'stress_level' ||
+            factor.factor === 'diet_quality' ||
             factor.factor === 'activity_level' ||
             factor.factor === 'hydration') {
-          if (typeof factor.value !== 'number' || 
-              factor.value < 1 || 
+          if (typeof factor.value !== 'number' ||
+              factor.value < 1 ||
               factor.value > 10) {
             errors.push({
               field: `lifestyleFactors[${index}].value`,
@@ -496,8 +496,8 @@ export class ValidationService implements ValidationServiceInterface {
         }
 
         if (factor.factor === 'sleep_hours') {
-          if (typeof factor.value !== 'number' || 
-              factor.value < 0 || 
+          if (typeof factor.value !== 'number' ||
+              factor.value < 0 ||
               factor.value > 24) {
             errors.push({
               field: `lifestyleFactors[${index}].value`,
@@ -553,12 +553,12 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate cross-field logic and relationships
    */
   private validateCrossFieldLogic(
-    record: Partial<PainRecord>, 
-    errors: ValidationError[], 
+    record: Partial<PainRecord>,
+    errors: ValidationError[],
     warnings: ValidationWarning[]
   ): void {
     // Check if effectiveness is provided when medications are listed
-    if (record.medications && record.medications.length > 0 && 
+    if (record.medications && record.medications.length > 0 &&
         (record.effectiveness === undefined || record.effectiveness === null)) {
       warnings.push({
         field: 'effectiveness',
@@ -580,7 +580,7 @@ export class ValidationService implements ValidationServiceInterface {
     if (record.date && record.time) {
       const recordDateTime = new Date(`${record.date}T${record.time}`);
       const now = new Date();
-      
+
       if (recordDateTime > now) {
         errors.push({
           field: 'date',

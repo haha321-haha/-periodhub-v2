@@ -9,8 +9,8 @@ export interface TrainingDay {
   description: string;
   tasks: TrainingTask[];
   duration: number; // 分钟
-  difficulty: 'easy' | 'medium' | 'hard';
-  category: 'communication' | 'understanding' | 'support' | 'care';
+  difficulty: "easy" | "medium" | "hard";
+  category: "communication" | "understanding" | "support" | "care";
 }
 
 export interface TrainingTask {
@@ -58,5 +58,3 @@ export interface TrainingStats {
   favoriteCategory: string;
   improvementAreas: string[];
 }
-
-

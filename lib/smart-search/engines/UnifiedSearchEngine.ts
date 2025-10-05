@@ -3,27 +3,27 @@
  * 整合多种搜索算法，提供统一的搜索接口
  */
 
-import { 
-  ISearchEngine, 
-  SearchOptions, 
-  SearchResponse, 
-  SearchResult, 
+import {
+  ISearchEngine,
+  SearchOptions,
+  SearchResponse,
+  SearchResult,
   UnifiedSearchConfig,
   SearchWeights,
   SearchScope,
   SearchResultType,
   SearchError,
-  UserProfile
-} from '../types';
+  UserProfile,
+} from "../types";
 
-import { KeywordSearchEngine } from './KeywordSearchEngine';
-import { FuzzySearchEngine } from './FuzzySearchEngine';
-import { SemanticSearchEngine } from './SemanticSearchEngine';
-import { ResultFusionEngine } from './ResultFusionEngine';
-import { SearchIndexManager } from '../index/SearchIndexManager';
-import { PersonalizationEngine } from '../personalization/PersonalizationEngine';
-import { SearchCache } from '../cache/SearchCache';
-import { SearchAnalytics } from '../analytics/SearchAnalytics';
+import { KeywordSearchEngine } from "./KeywordSearchEngine";
+import { FuzzySearchEngine } from "./FuzzySearchEngine";
+import { SemanticSearchEngine } from "./SemanticSearchEngine";
+import { ResultFusionEngine } from "./ResultFusionEngine";
+import { SearchIndexManager } from "../index/SearchIndexManager";
+import { PersonalizationEngine } from "../personalization/PersonalizationEngine";
+import { SearchCache } from "../cache/SearchCache";
+import { SearchAnalytics } from "../analytics/SearchAnalytics";
 
 export class UnifiedSearchEngine implements ISearchEngine {
   private keywordEngine!: KeywordSearchEngine;
@@ -46,38 +46,46 @@ export class UnifiedSearchEngine implements ISearchEngine {
    */
   async search(options: SearchOptions): Promise<SearchResponse> {
     const startTime = Date.now();
-    
+
     try {
       // 1. 验证和预处理搜索查询
       const processedOptions = await this.preprocessSearch(options);
-      
+
       // 2. 检查缓存
       if (this.config.enableCache) {
         const cachedResult = await this.cache.get(processedOptions);
         if (cachedResult) {
-          await this.analytics.recordSearch(processedOptions, cachedResult, true);
+          await this.analytics.recordSearch(
+            processedOptions,
+            cachedResult,
+            true,
+          );
           return cachedResult;
         }
       }
 
       // 3. 执行多引擎搜索
-      const searchResults = await this.executeMultiEngineSearch(processedOptions);
-      
+      const searchResults =
+        await this.executeMultiEngineSearch(processedOptions);
+
       // 4. 融合和排序结果
       const fusedResults = await this.fusionEngine.fuseResults(
-        searchResults, 
-        processedOptions, 
-        this.config.weights
+        searchResults,
+        processedOptions,
+        this.config.weights,
       );
 
       // 5. 个性化处理
-      const personalizedResults = await this.personalizeResults(fusedResults, options.userId);
+      const personalizedResults = await this.personalizeResults(
+        fusedResults,
+        options.userId,
+      );
 
       // 6. 构建响应
       const response = await this.buildSearchResponse(
         personalizedResults,
         processedOptions,
-        startTime
+        startTime,
       );
 
       // 7. 缓存结果
@@ -89,15 +97,15 @@ export class UnifiedSearchEngine implements ISearchEngine {
       await this.analytics.recordSearch(processedOptions, response, false);
 
       return response;
-
     } catch (error) {
       const searchError: SearchError = {
-        name: 'SearchError',
-        message: error instanceof Error ? error.message : 'Unknown search error',
-        code: 'SEARCH_TIMEOUT',
-        details: { options, duration: Date.now() - startTime }
+        name: "SearchError",
+        message:
+          error instanceof Error ? error.message : "Unknown search error",
+        code: "SEARCH_TIMEOUT",
+        details: { options, duration: Date.now() - startTime },
       };
-      
+
       await this.analytics.recordError(searchError, options);
       throw searchError;
     }
@@ -114,17 +122,21 @@ export class UnifiedSearchEngine implements ISearchEngine {
       const [historyBased, contentBased, popularBased] = await Promise.all([
         this.getHistoryBasedSuggestions(query, limit),
         this.getContentBasedSuggestions(query, limit),
-        this.getPopularSuggestions(query, limit)
+        this.getPopularSuggestions(query, limit),
       ]);
 
       // 合并和去重建议
-      const allSuggestions = [...historyBased, ...contentBased, ...popularBased];
+      const allSuggestions = [
+        ...historyBased,
+        ...contentBased,
+        ...popularBased,
+      ];
       const uniqueSuggestions = Array.from(new Set(allSuggestions));
 
       // 按相关性排序并限制数量
       return this.rankSuggestions(uniqueSuggestions, query).slice(0, limit);
     } catch (error) {
-      console.error('Suggestion generation failed:', error);
+      console.error("Suggestion generation failed:", error);
       return [];
     }
   }
@@ -132,13 +144,19 @@ export class UnifiedSearchEngine implements ISearchEngine {
   /**
    * 获取个性化推荐
    */
-  async getRecommendations(userId: string, limit: number = 10): Promise<SearchResult[]> {
+  async getRecommendations(
+    userId: string,
+    limit: number = 10,
+  ): Promise<SearchResult[]> {
     if (!userId) return [];
 
     try {
-      return await this.personalizationEngine.generateRecommendations(userId, limit);
+      return await this.personalizationEngine.generateRecommendations(
+        userId,
+        limit,
+      );
     } catch (error) {
-      console.error('Recommendation generation failed:', error);
+      console.error("Recommendation generation failed:", error);
       return [];
     }
   }
@@ -149,9 +167,9 @@ export class UnifiedSearchEngine implements ISearchEngine {
   async buildIndex(): Promise<void> {
     try {
       await this.indexManager.buildIndex();
-      console.log('Search index built successfully');
+      console.log("Search index built successfully");
     } catch (error) {
-      console.error('Failed to build search index:', error);
+      console.error("Failed to build search index:", error);
       throw error;
     }
   }
@@ -163,9 +181,9 @@ export class UnifiedSearchEngine implements ISearchEngine {
     try {
       await this.indexManager.clearIndex();
       await this.cache.clear();
-      console.log('Search index cleared successfully');
+      console.log("Search index cleared successfully");
     } catch (error) {
-      console.error('Failed to clear search index:', error);
+      console.error("Failed to clear search index:", error);
       throw error;
     }
   }
@@ -211,17 +229,19 @@ export class UnifiedSearchEngine implements ISearchEngine {
   /**
    * 合并配置
    */
-  private mergeConfig(config: Partial<UnifiedSearchConfig>): UnifiedSearchConfig {
+  private mergeConfig(
+    config: Partial<UnifiedSearchConfig>,
+  ): UnifiedSearchConfig {
     const defaultConfig: UnifiedSearchConfig = {
-      scope: ['all'],
-      mode: 'instant',
+      scope: ["all"],
+      mode: "instant",
       personalization: true,
       maxResults: 20,
       groupByType: true,
       debounceMs: 300,
       enableCache: true,
       cacheTimeout: 300000, // 5分钟
-      weights: this.getDefaultWeights()
+      weights: this.getDefaultWeights(),
     };
 
     return { ...defaultConfig, ...config };
@@ -237,28 +257,30 @@ export class UnifiedSearchEngine implements ISearchEngine {
       partial: 0.8,
       fuzzy: 0.6,
       semantic: 0.7,
-      
+
       // 字段权重
       title: 1.0,
       description: 0.8,
       content: 0.6,
       keywords: 0.9,
       tags: 0.7,
-      
+
       // 其他因素权重
       freshness: 0.1,
       popularity: 0.2,
-      userPreference: 0.3
+      userPreference: 0.3,
     };
   }
 
   /**
    * 预处理搜索选项
    */
-  private async preprocessSearch(options: SearchOptions): Promise<SearchOptions> {
+  private async preprocessSearch(
+    options: SearchOptions,
+  ): Promise<SearchOptions> {
     // 清理和规范化查询
     const cleanedQuery = this.cleanQuery(options.query);
-    
+
     // 设置默认值
     const processedOptions: SearchOptions = {
       ...options,
@@ -268,7 +290,7 @@ export class UnifiedSearchEngine implements ISearchEngine {
       page: options.page || 1,
       pageSize: options.pageSize || this.config.maxResults,
       enableHighlight: options.enableHighlight ?? true,
-      enableRecommendations: options.enableRecommendations ?? true
+      enableRecommendations: options.enableRecommendations ?? true,
     };
 
     return processedOptions;
@@ -280,8 +302,8 @@ export class UnifiedSearchEngine implements ISearchEngine {
   private cleanQuery(query: string): string {
     return query
       .trim()
-      .replace(/\s+/g, ' ')  // 合并多个空格
-      .replace(/[^\w\s\u4e00-\u9fff]/g, '') // 保留字母、数字、空格和中文
+      .replace(/\s+/g, " ") // 合并多个空格
+      .replace(/[^\w\s\u4e00-\u9fff]/g, "") // 保留字母、数字、空格和中文
       .toLowerCase();
   }
 
@@ -297,48 +319,49 @@ export class UnifiedSearchEngine implements ISearchEngine {
 
     // 根据搜索模式选择引擎
     switch (options.mode) {
-      case 'instant':
+      case "instant":
         // 快速模式：只使用关键词搜索
         searchPromises.push(
           this.keywordEngine.search(options),
           Promise.resolve({ results: [] }), // 空的fuzzy结果
-          Promise.resolve({ results: [] })  // 空的semantic结果
+          Promise.resolve({ results: [] }), // 空的semantic结果
         );
         break;
-        
-      case 'detailed':
+
+      case "detailed":
         // 详细模式：使用关键词 + 模糊搜索
         searchPromises.push(
           this.keywordEngine.search(options),
           this.fuzzyEngine.search(options),
-          Promise.resolve({ results: [] })  // 空的semantic结果
+          Promise.resolve({ results: [] }), // 空的semantic结果
         );
         break;
-        
-      case 'semantic':
+
+      case "semantic":
         // 语义模式：使用所有引擎
         searchPromises.push(
           this.keywordEngine.search(options),
           this.fuzzyEngine.search(options),
-          this.semanticEngine.search(options)
+          this.semanticEngine.search(options),
         );
         break;
-        
+
       default:
         // 默认使用关键词搜索
         searchPromises.push(
           this.keywordEngine.search(options),
           Promise.resolve({ results: [] }),
-          Promise.resolve({ results: [] })
+          Promise.resolve({ results: [] }),
         );
     }
 
-    const [keywordResponse, fuzzyResponse, semanticResponse] = await Promise.all(searchPromises);
+    const [keywordResponse, fuzzyResponse, semanticResponse] =
+      await Promise.all(searchPromises);
 
     return {
       keyword: keywordResponse.results || [],
       fuzzy: fuzzyResponse.results || [],
-      semantic: semanticResponse.results || []
+      semantic: semanticResponse.results || [],
     };
   }
 
@@ -346,17 +369,23 @@ export class UnifiedSearchEngine implements ISearchEngine {
    * 个性化结果
    */
   private async personalizeResults(
-    results: SearchResult[], 
-    userId?: string
+    results: SearchResult[],
+    userId?: string,
   ): Promise<SearchResult[]> {
     if (!this.config.personalization || !userId) {
       return results;
     }
 
     try {
-      return await this.personalizationEngine.personalizeResults(results, userId);
+      return await this.personalizationEngine.personalizeResults(
+        results,
+        userId,
+      );
     } catch (error) {
-      console.error('Personalization failed, returning original results:', error);
+      console.error(
+        "Personalization failed, returning original results:",
+        error,
+      );
       return results;
     }
   }
@@ -367,28 +396,29 @@ export class UnifiedSearchEngine implements ISearchEngine {
   private async buildSearchResponse(
     results: SearchResult[],
     options: SearchOptions,
-    startTime: number
+    startTime: number,
   ): Promise<SearchResponse> {
     const searchTime = Date.now() - startTime;
     const totalResults = results.length;
     const page = options.page || 1;
     const pageSize = options.pageSize || this.config.maxResults;
-    
+
     // 分页处理
     const startIndex = (page - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedResults = results.slice(startIndex, endIndex);
 
     // 按类型分组（如果需要）
-    const groupedResults = this.config.groupByType 
+    const groupedResults = this.config.groupByType
       ? this.groupResultsByType(paginatedResults)
       : undefined;
 
     // 生成建议和推荐
     const suggestions = await this.suggest(options.query);
-    const recommendations = options.enableRecommendations && options.userId
-      ? await this.getRecommendations(options.userId, 5)
-      : [];
+    const recommendations =
+      options.enableRecommendations && options.userId
+        ? await this.getRecommendations(options.userId, 5)
+        : [];
 
     return {
       results: paginatedResults,
@@ -401,22 +431,24 @@ export class UnifiedSearchEngine implements ISearchEngine {
       hasMore: endIndex < totalResults,
       suggestions,
       relatedQueries: [], // TODO: 实现相关查询
-      recommendations
+      recommendations,
     };
   }
 
   /**
    * 按类型分组结果
    */
-  private groupResultsByType(results: SearchResult[]): Record<SearchResultType, SearchResult[]> {
+  private groupResultsByType(
+    results: SearchResult[],
+  ): Record<SearchResultType, SearchResult[]> {
     const groups: Record<SearchResultType, SearchResult[]> = {
       article: [],
       pdf: [],
       tool: [],
-      guide: []
+      guide: [],
     };
 
-    results.forEach(result => {
+    results.forEach((result) => {
       if (groups[result.type]) {
         groups[result.type].push(result);
       }
@@ -428,7 +460,10 @@ export class UnifiedSearchEngine implements ISearchEngine {
   /**
    * 获取基于历史的建议
    */
-  private async getHistoryBasedSuggestions(query: string, limit: number): Promise<string[]> {
+  private async getHistoryBasedSuggestions(
+    query: string,
+    limit: number,
+  ): Promise<string[]> {
     // TODO: 从搜索历史中获取建议
     return [];
   }
@@ -436,7 +471,10 @@ export class UnifiedSearchEngine implements ISearchEngine {
   /**
    * 获取基于内容的建议
    */
-  private async getContentBasedSuggestions(query: string, limit: number): Promise<string[]> {
+  private async getContentBasedSuggestions(
+    query: string,
+    limit: number,
+  ): Promise<string[]> {
     // TODO: 从内容索引中获取建议
     return [];
   }
@@ -444,7 +482,10 @@ export class UnifiedSearchEngine implements ISearchEngine {
   /**
    * 获取热门建议
    */
-  private async getPopularSuggestions(query: string, limit: number): Promise<string[]> {
+  private async getPopularSuggestions(
+    query: string,
+    limit: number,
+  ): Promise<string[]> {
     // TODO: 从热门搜索中获取建议
     return [];
   }
@@ -456,4 +497,4 @@ export class UnifiedSearchEngine implements ISearchEngine {
     // TODO: 实现建议排序逻辑
     return suggestions;
   }
-} 
+}

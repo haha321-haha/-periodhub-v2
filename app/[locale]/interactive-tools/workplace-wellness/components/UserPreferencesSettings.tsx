@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { Settings, Palette, Bell, Shield, Eye, Download, Save, RotateCcw } from 'lucide-react';
 import { useUserPreferences, useUserPreferencesActions } from '../hooks/useWorkplaceWellnessStore';
 import { useTranslations } from 'next-intl';
-import { 
-  UserPreferences, 
-  Theme, 
-  FontSize, 
-  DateFormat, 
+import {
+  UserPreferences,
+  Theme,
+  FontSize,
+  DateFormat,
   TimeFormat,
   NotificationType,
   NotificationChannel,
@@ -30,7 +30,7 @@ export default function UserPreferencesSettings() {
     validateSettings,
     resetPreferences
   } = useUserPreferencesActions();
-  
+
   const t = useTranslations('workplaceWellness');
   const [activeTab, setActiveTab] = useState<'ui' | 'notifications' | 'privacy' | 'accessibility' | 'export'>('ui');
   const [validationResult, setValidationResult] = useState<SettingsValidationResult | null>(null);
@@ -46,22 +46,22 @@ export default function UserPreferencesSettings() {
   // 保存设置
   const handleSaveSettings = async () => {
     setIsSaving(true);
-    
+
     // 验证设置
     if (!handleValidateSettings()) {
       setIsSaving(false);
       return;
     }
-    
+
     try {
       // 模拟保存延迟
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // 更新最后修改时间
       updateUserPreferences({
         lastUpdated: new Date().toISOString()
       });
-      
+
       console.log('Settings saved successfully');
     } catch (error) {
       console.error('Failed to save settings:', error);
@@ -144,7 +144,7 @@ export default function UserPreferencesSettings() {
         {activeTab === 'ui' && (
           <div className="space-y-6">
             <h3 className="text-lg font-semibold text-neutral-800">{t('userPreferences.uiPreferences')}</h3>
-            
+
             {/* 主题设置 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -284,7 +284,7 @@ export default function UserPreferencesSettings() {
         {activeTab === 'notifications' && (
           <div className="space-y-6">
             <h3 className="text-lg font-semibold text-neutral-800">{t('userPreferences.notificationSettings')}</h3>
-            
+
             {/* 通知开关 */}
             <div className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
               <div>
@@ -415,7 +415,7 @@ export default function UserPreferencesSettings() {
         {activeTab === 'privacy' && (
           <div className="space-y-6">
             <h3 className="text-lg font-semibold text-neutral-800">{t('userPreferences.privacySettings')}</h3>
-            
+
             <div className="space-y-4">
               {Object.entries(preferences.privacy).map(([key, value]) => (
                 <div key={key} className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
@@ -462,7 +462,7 @@ export default function UserPreferencesSettings() {
         {activeTab === 'accessibility' && (
           <div className="space-y-6">
             <h3 className="text-lg font-semibold text-neutral-800">{t('userPreferences.accessibilitySettings')}</h3>
-            
+
             <div className="space-y-4">
               {Object.entries(preferences.accessibility).map(([key, value]) => (
                 <div key={key} className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg">
@@ -510,7 +510,7 @@ export default function UserPreferencesSettings() {
         {activeTab === 'export' && (
           <div className="space-y-6">
             <h3 className="text-lg font-semibold text-neutral-800">{t('userPreferences.exportPreferences')}</h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-neutral-700 mb-2">
@@ -603,7 +603,7 @@ export default function UserPreferencesSettings() {
               {validationResult.isValid ? '设置验证通过' : '设置验证失败'}
             </span>
           </div>
-          
+
           {validationResult.errors.length > 0 && (
             <div className="mt-2">
               <p className="text-sm font-medium text-red-700 mb-1">错误：</p>
@@ -614,7 +614,7 @@ export default function UserPreferencesSettings() {
               </ul>
             </div>
           )}
-          
+
           {validationResult.warnings.length > 0 && (
             <div className="mt-2">
               <p className="text-sm font-medium text-yellow-700 mb-1">警告：</p>
@@ -630,4 +630,3 @@ export default function UserPreferencesSettings() {
     </div>
   );
 }
-

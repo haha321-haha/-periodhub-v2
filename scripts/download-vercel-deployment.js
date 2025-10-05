@@ -59,19 +59,19 @@ function getVercelProjectInfo() {
 function downloadDeployment(deploymentId) {
   try {
     log.info(`下载部署 ${deploymentId}...`);
-    
+
     // 创建下载目录
     const downloadDir = `vercel-backup-${new Date().toISOString().split('T')[0]}`;
     if (!fs.existsSync(downloadDir)) {
       fs.mkdirSync(downloadDir);
     }
-    
+
     // 下载部署文件
-    execSync(`vercel pull ${deploymentId} --yes`, { 
+    execSync(`vercel pull ${deploymentId} --yes`, {
       stdio: 'inherit',
-      cwd: downloadDir 
+      cwd: downloadDir
     });
-    
+
     log.success(`部署文件已下载到: ${downloadDir}`);
     return downloadDir;
   } catch (error) {
@@ -86,7 +86,7 @@ function getDeployments() {
     log.info('获取部署列表...');
     const output = execSync('vercel ls --json', { encoding: 'utf8' });
     const deployments = JSON.parse(output);
-    
+
     log.header('最近的部署');
     deployments.slice(0, 10).forEach((deployment, index) => {
       const date = new Date(deployment.created).toLocaleString();
@@ -96,7 +96,7 @@ function getDeployments() {
       console.log(`   状态: ${deployment.state}`);
       console.log('');
     });
-    
+
     return deployments;
   } catch (error) {
     log.error(`获取部署列表失败: ${error.message}`);
@@ -108,17 +108,17 @@ function getDeployments() {
 function exportDeployment(deploymentId) {
   try {
     log.info(`导出部署 ${deploymentId} 为静态文件...`);
-    
+
     const exportDir = `vercel-export-${new Date().toISOString().split('T')[0]}`;
     if (!fs.existsSync(exportDir)) {
       fs.mkdirSync(exportDir);
     }
-    
+
     // 使用vercel export命令
-    execSync(`vercel export --output=${exportDir}`, { 
-      stdio: 'inherit' 
+    execSync(`vercel export --output=${exportDir}`, {
+      stdio: 'inherit'
     });
-    
+
     log.success(`静态文件已导出到: ${exportDir}`);
     return exportDir;
   } catch (error) {
@@ -131,12 +131,12 @@ function exportDeployment(deploymentId) {
 function downloadFromSourceMaps() {
   try {
     log.info('尝试从source maps下载源代码...');
-    
+
     const sourceMapDir = `source-maps-${new Date().toISOString().split('T')[0]}`;
     if (!fs.existsSync(sourceMapDir)) {
       fs.mkdirSync(sourceMapDir);
     }
-    
+
     // 下载常见的source map文件
     const sourceMapUrls = [
       'https://periodhub.health/_next/static/chunks/pages/_app.js.map',
@@ -144,15 +144,15 @@ function downloadFromSourceMaps() {
       'https://periodhub.health/_next/static/chunks/pages/zh.js.map',
       'https://periodhub.health/_next/static/chunks/pages/en.js.map',
     ];
-    
+
     const https = require('https');
     const fs = require('fs');
-    
+
     sourceMapUrls.forEach((url, index) => {
       try {
         const fileName = `source-map-${index}.js.map`;
         const file = fs.createWriteStream(path.join(sourceMapDir, fileName));
-        
+
         https.get(url, (response) => {
           response.pipe(file);
           file.on('finish', () => {
@@ -166,7 +166,7 @@ function downloadFromSourceMaps() {
         log.warning(`处理 ${url} 时出错: ${error.message}`);
       }
     });
-    
+
     return sourceMapDir;
   } catch (error) {
     log.error(`从source maps下载失败: ${error.message}`);
@@ -177,25 +177,25 @@ function downloadFromSourceMaps() {
 // 主函数
 async function main() {
   log.header('Vercel部署代码下载工具');
-  
+
   // 检查Vercel CLI
   if (!checkVercelCLI()) {
     return;
   }
-  
+
   // 获取项目信息
   if (!getVercelProjectInfo()) {
     return;
   }
-  
+
   // 获取部署列表
   const deployments = getDeployments();
-  
+
   if (deployments.length === 0) {
     log.error('未找到任何部署');
     return;
   }
-  
+
   // 提供选项
   console.log('\n请选择操作:');
   console.log('1. 下载最新部署');
@@ -203,13 +203,13 @@ async function main() {
   console.log('3. 导出为静态文件');
   console.log('4. 从source maps下载');
   console.log('5. 查看所有部署详情');
-  
+
   // 这里可以添加交互式选择，但为了脚本化，我们默认下载最新部署
   const latestDeployment = deployments[0];
   if (latestDeployment) {
     log.info(`下载最新部署: ${latestDeployment.url}`);
     const downloadDir = downloadDeployment(latestDeployment.uid);
-    
+
     if (downloadDir) {
       log.success(`\n🎉 代码下载完成！`);
       log.info(`下载位置: ${path.resolve(downloadDir)}`);
@@ -234,16 +234,3 @@ module.exports = {
   exportDeployment,
   downloadFromSourceMaps
 };
-
-
-
-
-
-
-
-
-
-
-
-
-

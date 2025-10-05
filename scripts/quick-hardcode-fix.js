@@ -26,21 +26,21 @@ function fixHardcodedUrls(filePath) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
     let changes = 0;
-    
+
     // 替换硬编码的域名
     const originalContent = content;
     content = content.replace(/https:\/\/www\.periodhub\.health/g, '${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}');
-    
+
     // 计算变更数量
     changes = (originalContent.match(/https:\/\/www\.periodhub\.health/g) || []).length;
-    
+
     if (changes > 0) {
       fs.writeFileSync(filePath, content);
       console.log(`✅ 修复 ${filePath}: ${changes} 个硬编码URL`);
     } else {
       console.log(`ℹ️  ${filePath}: 无需修复`);
     }
-    
+
     return {
       file: filePath,
       changes,
@@ -64,7 +64,7 @@ function generateFixReport(results) {
   const totalChanges = results.reduce((sum, result) => sum + result.changes, 0);
   const successfulFixes = results.filter(r => r.success).length;
   const failedFixes = results.filter(r => !r.success).length;
-  
+
   return {
     summary: {
       totalFiles: results.length,
@@ -87,9 +87,9 @@ function generateFixReport(results) {
  */
 async function main() {
   console.log('🚀 开始快速硬编码修复...\n');
-  
+
   const results = [];
-  
+
   for (const filePath of CONFIG.filesToFix) {
     if (fs.existsSync(filePath)) {
       const result = fixHardcodedUrls(filePath);
@@ -104,19 +104,19 @@ async function main() {
       });
     }
   }
-  
+
   // 生成报告
   const report = generateFixReport(results);
-  
+
   // 确保输出目录存在
   const outputDir = path.dirname(CONFIG.outputFile);
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
-  
+
   // 保存报告
   fs.writeFileSync(CONFIG.outputFile, JSON.stringify(report, null, 2));
-  
+
   console.log('\n📊 快速修复完成！');
   console.log(`📄 报告已保存到: ${CONFIG.outputFile}`);
   console.log(`\n📈 统计信息:`);
@@ -124,14 +124,14 @@ async function main() {
   console.log(`   - 成功修复: ${report.summary.successfulFixes}`);
   console.log(`   - 失败修复: ${report.summary.failedFixes}`);
   console.log(`   - 总变更数: ${report.summary.totalChanges}`);
-  
+
   if (report.recommendations.length > 0) {
     console.log(`\n💡 建议:`);
     report.recommendations.forEach((rec, index) => {
       console.log(`   ${index + 1}. ${rec}`);
     });
   }
-  
+
   // 返回退出码
   process.exit(report.summary.failedFixes > 0 ? 1 : 0);
 }
@@ -142,4 +142,3 @@ if (require.main === module) {
 }
 
 module.exports = { fixHardcodedUrls, generateFixReport };
-

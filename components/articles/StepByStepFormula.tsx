@@ -6,7 +6,7 @@ interface StepByStepFormulaProps {
 
 export default function StepByStepFormula({ className = '' }: StepByStepFormulaProps) {
   const t = useTranslations('articles.insuranceGuide.formula.steps');
-  
+
   return (
     <div className={`my-6 ${className}`}>
       {/* 标题部分 */}
@@ -18,7 +18,7 @@ export default function StepByStepFormula({ className = '' }: StepByStepFormulaP
           {t('subtitle')}
         </p>
       </div>
-      
+
       <div className="space-y-4">
         {/* 步骤1：确定自付额 */}
         <div className="flex items-start space-x-4 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
@@ -39,7 +39,7 @@ export default function StepByStepFormula({ className = '' }: StepByStepFormulaP
             </div>
           </div>
         </div>
-        
+
         {/* 步骤2：计算超出部分 */}
         <div className="flex items-start space-x-4 p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
           <div className="bg-purple-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg flex-shrink-0">
@@ -62,7 +62,7 @@ export default function StepByStepFormula({ className = '' }: StepByStepFormulaP
             </div>
           </div>
         </div>
-        
+
         {/* 步骤3：应用共同保险比例 */}
         <div className="flex items-start space-x-4 p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
           <div className="bg-orange-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg flex-shrink-0">
@@ -85,7 +85,7 @@ export default function StepByStepFormula({ className = '' }: StepByStepFormulaP
             </div>
           </div>
         </div>
-        
+
         {/* 最终结果 */}
         <div className="flex items-start space-x-4 p-4 bg-green-50 rounded-lg border-l-4 border-green-500 border-2 border-green-300">
           <div className="bg-green-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg flex-shrink-0">
@@ -114,7 +114,7 @@ export default function StepByStepFormula({ className = '' }: StepByStepFormulaP
           </div>
         </div>
       </div>
-      
+
       {/* 移动端优化：简化视图提示 */}
       <div className="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg md:hidden">
         <p className="text-xs text-gray-600 text-center">

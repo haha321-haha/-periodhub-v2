@@ -40,7 +40,7 @@ class LoggingReportingSystem {
 
         // 初始化日志目录
         this.initializeLogging();
-        
+
         // 启动度量收集
         if (this.config.enableMetrics) {
             this.startMetricsCollection();
@@ -60,16 +60,16 @@ class LoggingReportingSystem {
             this.currentLogFile = path.join(this.config.logDir, `recovery_${this.formatTimestamp(new Date(), 'file')}.log`);
         }
 
-        this.log('INFO', 'system', 'Logging system initialized', { 
+        this.log('INFO', 'system', 'Logging system initialized', {
             sessionId: this.session.sessionId,
-            config: this.config 
+            config: this.config
         });
     }
 
     // 核心日志记录方法
     log(level, category, message, data = {}, error = null) {
         const logLevel = this.logLevels[level] || 1;
-        
+
         if (logLevel < this.currentLogLevel) {
             return; // 跳过低于当前日志级别的消息
         }
@@ -88,7 +88,7 @@ class LoggingReportingSystem {
 
         // 添加到内存日志
         this.session.logs.push(logEntry);
-        
+
         // 按类型分类存储
         switch (level) {
             case 'ERROR':
@@ -141,7 +141,7 @@ class LoggingReportingSystem {
 
         this.session.events.push(event);
         this.info('events', `Event: ${eventType}`, eventData);
-        
+
         return event.id;
     }
 
@@ -169,15 +169,15 @@ class LoggingReportingSystem {
     // 性能测量
     startTimer(timerName) {
         const startTime = process.hrtime.bigint();
-        
+
         return {
             end: () => {
                 const endTime = process.hrtime.bigint();
                 const duration = Number(endTime - startTime) / 1000000; // 转换为毫秒
-                
+
                 this.recordMetric(`timer_${timerName}`, duration, 'ms');
                 this.debug('performance', `Timer ${timerName} completed`, { duration });
-                
+
                 return duration;
             }
         };
@@ -215,7 +215,7 @@ class LoggingReportingSystem {
 
         this.info('recovery_stages', `Recovery stage: ${stageName}`, stageInfo);
         this.logEvent('recovery_stage', stageInfo);
-        
+
         return stageInfo;
     }
 
@@ -224,9 +224,9 @@ class LoggingReportingSystem {
         const timestamp = this.formatTimestamp(logEntry.timestamp);
         const level = logEntry.level.padEnd(5);
         const category = logEntry.category.padEnd(12);
-        
+
         let output = `[${timestamp}] ${level} [${category}] ${logEntry.message}`;
-        
+
         if (Object.keys(logEntry.data).length > 0) {
             output += ` | Data: ${JSON.stringify(logEntry.data)}`;
         }
@@ -279,12 +279,12 @@ class LoggingReportingSystem {
 
         const logDir = path.dirname(this.currentLogFile);
         const baseName = path.basename(this.currentLogFile, '.log');
-        
+
         // 轮换现有日志文件
         for (let i = this.config.maxLogFiles - 1; i >= 1; i--) {
             const oldFile = path.join(logDir, `${baseName}.${i}.log`);
             const newFile = path.join(logDir, `${baseName}.${i + 1}.log`);
-            
+
             if (fs.existsSync(oldFile)) {
                 if (i === this.config.maxLogFiles - 1) {
                     fs.unlinkSync(oldFile); // 删除最老的文件
@@ -298,9 +298,9 @@ class LoggingReportingSystem {
         const archivedFile = path.join(logDir, `${baseName}.1.log`);
         fs.renameSync(this.currentLogFile, archivedFile);
 
-        this.info('system', 'Log file rotated', { 
+        this.info('system', 'Log file rotated', {
             archived: archivedFile,
-            new: this.currentLogFile 
+            new: this.currentLogFile
         });
     }
 
@@ -312,7 +312,7 @@ class LoggingReportingSystem {
             this.recordMetric('memory_rss', memUsage.rss, 'bytes');
             this.recordMetric('memory_heap_used', memUsage.heapUsed, 'bytes');
             this.recordMetric('memory_heap_total', memUsage.heapTotal, 'bytes');
-            
+
             const cpuUsage = process.cpuUsage();
             this.recordMetric('cpu_user', cpuUsage.user, 'microseconds');
             this.recordMetric('cpu_system', cpuUsage.system, 'microseconds');
@@ -374,10 +374,10 @@ class LoggingReportingSystem {
 
     aggregateMetrics() {
         const aggregated = {};
-        
+
         for (const [metricName, values] of Object.entries(this.session.metrics)) {
             const numericValues = values.map(v => v.value).filter(v => typeof v === 'number');
-            
+
             if (numericValues.length > 0) {
                 aggregated[metricName] = {
                     count: values.length,
@@ -394,7 +394,7 @@ class LoggingReportingSystem {
                 };
             }
         }
-        
+
         return aggregated;
     }
 
@@ -420,7 +420,7 @@ class LoggingReportingSystem {
             const key = error.message;
             errorCounts[key] = (errorCounts[key] || 0) + 1;
         });
-        
+
         return Object.entries(errorCounts)
             .sort(([,a], [,b]) => b - a)
             .slice(0, 10)
@@ -429,12 +429,12 @@ class LoggingReportingSystem {
 
     getPerformanceMetrics() {
         const timerMetrics = {};
-        
+
         for (const [metricName, values] of Object.entries(this.session.metrics)) {
             if (metricName.startsWith('timer_')) {
                 const timerName = metricName.replace('timer_', '');
                 const durations = values.map(v => v.value);
-                
+
                 timerMetrics[timerName] = {
                     count: durations.length,
                     avgDuration: durations.reduce((a, b) => a + b, 0) / durations.length,
@@ -443,7 +443,7 @@ class LoggingReportingSystem {
                 };
             }
         }
-        
+
         return timerMetrics;
     }
 
@@ -457,7 +457,7 @@ class LoggingReportingSystem {
 
     async generateMarkdownReport(reportData) {
         let markdown = `# 文件恢复系统日志报告\n\n`;
-        
+
         markdown += `**会话ID**: ${reportData.session.sessionId}\n`;
         markdown += `**开始时间**: ${reportData.session.startTime.toLocaleString()}\n`;
         markdown += `**结束时间**: ${reportData.session.endTime.toLocaleString()}\n`;
@@ -575,7 +575,7 @@ class LoggingReportingSystem {
             ]);
         });
 
-        const csvContent = csvData.map(row => 
+        const csvContent = csvData.map(row =>
             row.map(field => `"${String(field).replace(/"/g, '""')}"`).join(',')
         ).join('\n');
 
@@ -606,7 +606,7 @@ class LoggingReportingSystem {
         }
 
         if (filters.message) {
-            results = results.filter(log => 
+            results = results.filter(log =>
                 log.message.toLowerCase().includes(filters.message.toLowerCase())
             );
         }
@@ -626,14 +626,14 @@ class LoggingReportingSystem {
         const originalLog = this.log.bind(this);
         this.log = (level, category, message, data, error) => {
             const logEntry = originalLog(level, category, message, data, error);
-            
+
             if (monitor.active) {
                 const matchesFilter = this.matchesFilters(logEntry, monitor.filters);
                 if (matchesFilter) {
                     monitor.callback(logEntry);
                 }
             }
-            
+
             return logEntry;
         };
 
@@ -657,7 +657,7 @@ class LoggingReportingSystem {
     // 辅助方法
     formatTimestamp(date, format = null) {
         const actualFormat = format || this.config.timestampFormat;
-        
+
         switch (actualFormat) {
             case 'ISO':
                 return date.toISOString();
@@ -690,14 +690,14 @@ class LoggingReportingSystem {
     // 清理和关闭
     async shutdown() {
         this.info('system', 'Logging system shutting down');
-        
+
         if (this.metricsInterval) {
             clearInterval(this.metricsInterval);
         }
 
         // 生成最终报告
         await this.generateReport('full');
-        
+
         this.info('system', 'Logging system shutdown complete');
     }
 
@@ -739,29 +739,29 @@ async function main() {
     // 基本日志记录
     logger.info('main', 'Application started');
     logger.debug('main', 'Debug information', { version: '1.0.0' });
-    
+
     // 事件记录
     logger.logEvent('user_action', { action: 'file_upload', fileCount: 5 });
-    
+
     // 度量记录
     logger.recordMetric('files_processed', 55, 'count');
-    
+
     // 性能测量
     const timer = logger.startTimer('file_processing');
     setTimeout(() => {
         timer.end();
     }, 1000);
-    
+
     // 文件操作记录
     logger.logFileOperation('copy', 'source.js', 'target.js', 'success');
-    
+
     // 错误记录
     try {
         throw new Error('Test error');
     } catch (error) {
         logger.error('main', 'Test error occurred', { context: 'testing' }, error);
     }
-    
+
     // 生成报告
     setTimeout(async () => {
         await logger.generateReport('full');

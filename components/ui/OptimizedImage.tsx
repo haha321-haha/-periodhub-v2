@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useState } from 'react';
+import Image from "next/image";
+import { useState } from "react";
 
 interface OptimizedImageProps {
   src: string;
@@ -12,7 +12,7 @@ interface OptimizedImageProps {
   priority?: boolean;
   sizes?: string;
   quality?: number;
-  placeholder?: 'blur' | 'empty';
+  placeholder?: "blur" | "empty";
   style?: React.CSSProperties;
   onError?: (e: any) => void;
   onLoad?: () => void;
@@ -27,14 +27,14 @@ export default function OptimizedImage({
   alt,
   width,
   height,
-  className = '',
+  className = "",
   priority = false,
   sizes,
   quality = 75,
-  placeholder = 'empty',
+  placeholder = "empty",
   style = {},
   onError,
-  onLoad
+  onLoad,
 }: OptimizedImageProps) {
   const [imageError, setImageError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,9 +54,9 @@ export default function OptimizedImage({
 
   if (imageError) {
     return (
-      <div 
+      <div
         className={`${className} bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center`}
-        style={{ width: '100%', aspectRatio: `${width}/${height}`, ...style }}
+        style={{ width: "100%", aspectRatio: `${width}/${height}`, ...style }}
       >
         <div className="text-center p-4">
           <div className="text-4xl mb-2">🖼️</div>
@@ -69,7 +69,7 @@ export default function OptimizedImage({
   return (
     <div className="relative">
       {isLoading && (
-        <div 
+        <div
           className={`absolute inset-0 ${className} bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center animate-pulse`}
           style={{ aspectRatio: `${width}/${height}` }}
         >
@@ -79,22 +79,24 @@ export default function OptimizedImage({
           </div>
         </div>
       )}
-      
+
       <Image
         src={src}
         alt={alt}
         width={width}
         height={height}
-        className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        className={`${className} ${
+          isLoading ? "opacity-0" : "opacity-100"
+        } transition-opacity duration-300`}
         sizes={sizes}
         priority={priority}
         placeholder={placeholder}
         quality={quality}
         style={{
-          maxWidth: '100%',
-          height: 'auto',
-          objectFit: 'cover',
-          ...style
+          maxWidth: "100%",
+          height: "auto",
+          objectFit: "cover",
+          ...style,
         }}
         onError={handleError}
         onLoad={handleLoad}
@@ -102,6 +104,3 @@ export default function OptimizedImage({
     </div>
   );
 }
-
-
-

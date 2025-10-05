@@ -28,7 +28,7 @@ let allPassed = true;
 for (const check of checks) {
   console.log(chalk.yellow(`📋 ${check.name}...`));
   console.log(chalk.gray(`   ${check.description}`));
-  
+
   try {
     execSync(check.command, { stdio: 'pipe' });
     console.log(chalk.green(`✅ ${check.name} 通过\n`));

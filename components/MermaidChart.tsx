@@ -17,19 +17,19 @@ const loadMermaid = async () => {
   return mermaid.default;
 };
 
-export default function MermaidChart({ 
-  chart, 
-  title, 
-  description, 
-  className = '', 
-  id 
+export default function MermaidChart({
+  chart,
+  title,
+  description,
+  className = '',
+  id
 }: MermaidChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [mermaidLoaded, setMermaidLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   // 使用稳定的ID生成策略，避免水合错误
   const chartId = useMemo(() => {
     if (id) return id;
@@ -62,7 +62,7 @@ export default function MermaidChart({
 
           // 动态加载Mermaid库
           const mermaid = await loadMermaid();
-          
+
           // 只在第一次加载时初始化
           if (!mermaidLoaded) {
             mermaid.initialize({
@@ -146,24 +146,24 @@ export default function MermaidChart({
     return (
       <div className={`mermaid-container ${className}`} suppressHydrationWarning>
         {title && (
-          <h3 
+          <h3
             id={`${chartId}-title`}
             className="text-lg font-semibold text-gray-800 mb-2 text-center"
           >
             {title}
           </h3>
         )}
-        
+
         {description && (
-          <p 
+          <p
             id={`${chartId}-desc`}
             className="text-sm text-gray-600 mb-4 text-center max-w-2xl mx-auto"
           >
             {description}
           </p>
         )}
-        
-        <div 
+
+        <div
           className="mermaid-chart overflow-x-auto"
           style={{
             minHeight: '200px',
@@ -186,24 +186,24 @@ export default function MermaidChart({
   return (
     <div className={`mermaid-container ${className}`}>
       {title && (
-        <h3 
+        <h3
           id={`${chartId}-title`}
           className="text-lg font-semibold text-gray-800 mb-2 text-center"
         >
           {title}
         </h3>
       )}
-      
+
       {description && (
-        <p 
+        <p
           id={`${chartId}-desc`}
           className="text-sm text-gray-600 mb-4 text-center max-w-2xl mx-auto"
         >
           {description}
         </p>
       )}
-      
-      <div 
+
+      <div
         ref={chartRef}
         className="mermaid-chart overflow-x-auto"
         style={{
@@ -213,7 +213,7 @@ export default function MermaidChart({
           alignItems: 'center'
         }}
       />
-      
+
       {/* 加载状态指示器 */}
       {isLoading && (
         <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
@@ -223,7 +223,7 @@ export default function MermaidChart({
           </div>
         </div>
       )}
-      
+
       {/* Print-specific styles */}
       <style jsx>{`
         @media print {
@@ -306,7 +306,7 @@ export default function MermaidChart({
             margin: 10pt 0 !important;
           }
         }
-        
+
         @media screen and (max-width: 768px) {
           .mermaid-container {
             margin: 16px 0;

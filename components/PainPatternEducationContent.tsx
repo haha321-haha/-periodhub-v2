@@ -1,7 +1,7 @@
-import React from 'react';
-import PainPatternRecognition from './PainPatternRecognition';
-import InfluencingFactors from './InfluencingFactors';
-import OptimizationStrategies from './OptimizationStrategies';
+import React from "react";
+import PainPatternRecognition from "./PainPatternRecognition";
+import InfluencingFactors from "./InfluencingFactors";
+import OptimizationStrategies from "./OptimizationStrategies";
 
 interface PainPatternEducationContentProps {
   className?: string;
@@ -10,18 +10,18 @@ interface PainPatternEducationContentProps {
 }
 
 export default function PainPatternEducationContent({
-  className = '',
+  className = "",
   showInfluencingFactors = true,
-  showOptimizationStrategies = true
+  showOptimizationStrategies = true,
 }: PainPatternEducationContentProps) {
   return (
     <div className={className}>
       {/* Main pain pattern recognition component */}
       <PainPatternRecognition />
-      
+
       {/* Influencing factors component */}
       {showInfluencingFactors && <InfluencingFactors />}
-      
+
       {/* Optimization strategies component */}
       {showOptimizationStrategies && <OptimizationStrategies />}
     </div>

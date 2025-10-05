@@ -25,7 +25,7 @@ const testResults = {
 function runTest(testName, testFunction) {
   console.log(`\n🧪 测试: ${testName}`);
   testResults.summary.total++;
-  
+
   try {
     const result = testFunction();
     if (result) {
@@ -172,7 +172,7 @@ const mockContentItems = [
 // 测试1：推荐引擎基本功能
 function testRecommendationEngine() {
   console.log('测试推荐引擎基本功能...');
-  
+
   // 模拟推荐结果
   const mockRecommendations = [
     {
@@ -200,13 +200,13 @@ function testRecommendationEngine() {
   ];
 
   // 验证推荐结果结构
-  const hasValidStructure = mockRecommendations.every(rec => 
-    rec.contentId && 
-    rec.contentType && 
-    rec.title && 
-    rec.score >= 0 && 
+  const hasValidStructure = mockRecommendations.every(rec =>
+    rec.contentId &&
+    rec.contentType &&
+    rec.title &&
+    rec.score >= 0 &&
     rec.score <= 1 &&
-    rec.confidence >= 0 && 
+    rec.confidence >= 0 &&
     rec.confidence <= 1 &&
     rec.reason &&
     rec.category
@@ -215,14 +215,14 @@ function testRecommendationEngine() {
   console.log('✓ 推荐结果结构验证通过');
   console.log(`✓ 生成了 ${mockRecommendations.length} 个推荐`);
   console.log(`✓ 平均推荐分数: ${mockRecommendations.reduce((sum, rec) => sum + rec.score, 0) / mockRecommendations.length}`);
-  
+
   return hasValidStructure;
 }
 
 // 测试2：用户行为跟踪
 function testBehaviorTracking() {
   console.log('测试用户行为跟踪...');
-  
+
   // 模拟行为事件
   const mockEvents = [
     {
@@ -243,7 +243,7 @@ function testBehaviorTracking() {
   ];
 
   // 验证事件结构
-  const hasValidEvents = mockEvents.every(event => 
+  const hasValidEvents = mockEvents.every(event =>
     event.userId &&
     event.type &&
     event.data &&
@@ -253,28 +253,28 @@ function testBehaviorTracking() {
   console.log('✓ 行为事件结构验证通过');
   console.log(`✓ 跟踪了 ${mockEvents.length} 个事件`);
   console.log(`✓ 事件类型: ${[...new Set(mockEvents.map(e => e.type))].join(', ')}`);
-  
+
   return hasValidEvents;
 }
 
 // 测试3：用户画像构建
 function testUserProfileBuilding() {
   console.log('测试用户画像构建...');
-  
+
   // 验证用户画像结构
   const requiredFields = [
-    'userId', 'demographics', 'healthProfile', 'behaviorProfile', 
+    'userId', 'demographics', 'healthProfile', 'behaviorProfile',
     'preferences', 'interestTopics', 'sessionContext'
   ];
-  
-  const hasRequiredFields = requiredFields.every(field => 
+
+  const hasRequiredFields = requiredFields.every(field =>
     mockUserProfile.hasOwnProperty(field) && mockUserProfile[field] !== null
   );
 
   // 验证兴趣主题
-  const hasValidInterests = mockUserProfile.interestTopics.every(topic => 
-    topic.topic && 
-    topic.relevance >= 0 && 
+  const hasValidInterests = mockUserProfile.interestTopics.every(topic =>
+    topic.topic &&
+    topic.relevance >= 0 &&
     topic.relevance <= 1 &&
     topic.lastUpdated
   );
@@ -283,14 +283,14 @@ function testUserProfileBuilding() {
   console.log(`✓ 识别了 ${mockUserProfile.interestTopics.length} 个兴趣主题`);
   console.log(`✓ 健康状况: ${mockUserProfile.healthProfile.severityLevel}`);
   console.log(`✓ 知识水平: ${mockUserProfile.healthProfile.knowledgeLevel}`);
-  
+
   return hasRequiredFields && hasValidInterests;
 }
 
 // 测试4：内容推荐算法
 function testRecommendationAlgorithm() {
   console.log('测试内容推荐算法...');
-  
+
   // 模拟不同推荐策略的结果
   const strategies = [
     {
@@ -318,8 +318,8 @@ function testRecommendationAlgorithm() {
 
   // 验证策略多样性
   const hasMultipleStrategies = strategies.length >= 3;
-  const hasValidScores = strategies.every(strategy => 
-    strategy.recommendations.every(rec => 
+  const hasValidScores = strategies.every(strategy =>
+    strategy.recommendations.every(rec =>
       rec.score >= 0 && rec.score <= 1 && rec.reason
     )
   );
@@ -327,14 +327,14 @@ function testRecommendationAlgorithm() {
   console.log('✓ 多策略推荐验证通过');
   console.log(`✓ 实现了 ${strategies.length} 种推荐策略`);
   console.log(`✓ 策略名称: ${strategies.map(s => s.name).join(', ')}`);
-  
+
   return hasMultipleStrategies && hasValidScores;
 }
 
 // 测试5：实时学习系统
 function testLearningSystem() {
   console.log('测试实时学习系统...');
-  
+
   // 模拟反馈数据
   const mockFeedback = [
     {
@@ -370,7 +370,7 @@ function testLearningSystem() {
   ];
 
   // 验证反馈结构
-  const hasValidFeedback = mockFeedback.every(f => 
+  const hasValidFeedback = mockFeedback.every(f =>
     f.userId &&
     f.contentId &&
     f.feedbackType &&
@@ -391,7 +391,7 @@ function testLearningSystem() {
     noveltyScore: 0.3
   };
 
-  const hasValidMetrics = Object.values(learningMetrics).every(value => 
+  const hasValidMetrics = Object.values(learningMetrics).every(value =>
     value >= 0 && value <= 1
   );
 
@@ -399,14 +399,14 @@ function testLearningSystem() {
   console.log(`✓ 处理了 ${mockFeedback.length} 个反馈事件`);
   console.log(`✓ 学习指标: 精确度=${learningMetrics.precision}, 召回率=${learningMetrics.recall}`);
   console.log(`✓ 用户满意度: ${learningMetrics.userSatisfaction}`);
-  
+
   return hasValidFeedback && hasValidMetrics;
 }
 
 // 测试6：个性化洞察生成
 function testPersonalizedInsights() {
   console.log('测试个性化洞察生成...');
-  
+
   // 模拟个性化洞察
   const mockInsights = {
     learningProgress: 0.6,
@@ -422,7 +422,7 @@ function testPersonalizedInsights() {
   };
 
   // 验证洞察结构
-  const hasValidInsights = 
+  const hasValidInsights =
     mockInsights.learningProgress >= 0 && mockInsights.learningProgress <= 1 &&
     mockInsights.preferenceStability >= 0 && mockInsights.preferenceStability <= 1 &&
     ['increasing', 'decreasing', 'stable'].includes(mockInsights.engagementTrend) &&
@@ -437,14 +437,14 @@ function testPersonalizedInsights() {
   console.log(`✓ 偏好稳定性: ${mockInsights.preferenceStability}`);
   console.log(`✓ 参与度趋势: ${mockInsights.engagementTrend}`);
   console.log(`✓ 推荐准确率: ${mockInsights.recommendationAccuracy}`);
-  
+
   return hasValidInsights;
 }
 
 // 测试7：A/B测试功能
 function testABTesting() {
   console.log('测试A/B测试功能...');
-  
+
   // 模拟A/B测试结果
   const mockABTest = {
     testId: 'ab-test-recommendation-v2',
@@ -478,7 +478,7 @@ function testABTesting() {
   };
 
   // 验证A/B测试结构
-  const hasValidABTest = 
+  const hasValidABTest =
     mockABTest.testId &&
     mockABTest.variantA.modelId &&
     mockABTest.variantB.modelId &&
@@ -493,14 +493,14 @@ function testABTesting() {
   console.log(`✓ 样本大小: A组=${mockABTest.variantA.sampleSize}, B组=${mockABTest.variantB.sampleSize}`);
   console.log(`✓ 获胜模型: ${mockABTest.winnerModel}`);
   console.log(`✓ 统计显著性: ${mockABTest.statisticalSignificance}`);
-  
+
   return hasValidABTest;
 }
 
 // 测试8：性能指标监控
 function testPerformanceMonitoring() {
   console.log('测试性能指标监控...');
-  
+
   // 模拟性能指标
   const mockPerformance = {
     responseTime: 150, // ms
@@ -513,7 +513,7 @@ function testPerformanceMonitoring() {
   };
 
   // 验证性能指标
-  const hasValidPerformance = 
+  const hasValidPerformance =
     mockPerformance.responseTime > 0 &&
     mockPerformance.throughput > 0 &&
     mockPerformance.memoryUsage >= 0 && mockPerformance.memoryUsage <= 1 &&
@@ -528,7 +528,7 @@ function testPerformanceMonitoring() {
   console.log(`✓ 内存使用: ${mockPerformance.memoryUsage * 100}%`);
   console.log(`✓ 缓存命中率: ${mockPerformance.cacheHitRate * 100}%`);
   console.log(`✓ 错误率: ${mockPerformance.errorRate * 100}%`);
-  
+
   return hasValidPerformance;
 }
 
@@ -653,4 +653,4 @@ fs.writeFileSync(verificationPath, JSON.stringify(verificationReport, null, 2));
 console.log(`📋 功能验证报告已保存到: ${verificationPath}`);
 
 console.log('\n🎉 阶段3.3测试完成！');
-console.log('�� 准备进行系统集成测试...'); 
+console.log('�� 准备进行系统集成测试...');

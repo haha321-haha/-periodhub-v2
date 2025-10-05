@@ -115,10 +115,10 @@ images: {
 ```javascript
 // Next.js 可能的内部逻辑
 // 1. 处理图片质量时需要配置文件 ✅ 已修复
-const qualities = config.images.qualities; 
+const qualities = config.images.qualities;
 
 // 2. 处理图片元数据时需要额外配置 ❌ 当前问题
-const imageMetadata = await import('./images.json'); 
+const imageMetadata = await import('./images.json');
 ```
 
 **可能的解释：**

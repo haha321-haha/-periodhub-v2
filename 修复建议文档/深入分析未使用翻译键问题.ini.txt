@@ -139,7 +139,7 @@ AST解析复杂性：
 
 ### 最严重的文件
 1. `natural-therapies/page-original.tsx` - 304处
-2. `health-guide/understanding-pain/page.tsx` - 154处  
+2. `health-guide/understanding-pain/page.tsx` - 154处
 3. `health-guide/relief-methods/page.tsx` - 143处
 4. `scenario-solutions/commute/page.tsx` - 114处
 
@@ -303,7 +303,7 @@ class TranslationKeyExtractor {
 
 ### 文档模板
 1. **翻译键命名规范文档**
-2. **国际化开发指南**  
+2. **国际化开发指南**
 3. **代码审查检查清单**
 4. **故障排除手册**
 
@@ -320,7 +320,7 @@ class TranslationKeyExtractor {
 - **性能影响**: 监控bundle大小和加载时间
 - **兼容性问题**: 保留回滚机制
 
-### 业务风险  
+### 业务风险
 - **翻译准确性**: 医疗内容需专业审核
 - **用户体验**: 渐进式发布，收集反馈
 - **SEO影响**: 监控搜索引擎索引情况
@@ -568,7 +568,7 @@ const t = useTranslations('painTracker');
 - 修复命名空间检测问题
 - 这应该能将误报从1100+减少到300-400个
 
-**阶段2（下周）**：  
+**阶段2（下周）**：
 - 实现动态键检测
 - 建立白名单机制
 
@@ -739,13 +739,13 @@ Phase 4: 质量保证（1天）
 interface TranslationKeyExtractor {
   // 命名空间检测
   detectNamespaces(code: string): NamespaceMapping[]
-  
+
   // 动态键检测
   detectDynamicKeys(code: string): DynamicKeyPattern[]
-  
+
   // AST解析
   parseWithAST(code: string): TranslationUsage[]
-  
+
   // 白名单验证
   validateWithWhitelist(keys: string[]): ValidationResult
 }
@@ -798,5 +798,3 @@ const hardcodingPatterns = [
 对风险评估有什么补充？
 是否需要额外的安全措施？
 您对这个完整方案有什么看法？需要调整哪些部分？
-
-

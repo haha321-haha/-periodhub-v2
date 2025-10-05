@@ -93,7 +93,7 @@ class SyntaxErrorAnalyzer {
         try {
             const content = fs.readFileSync(filePath, 'utf8');
             const relativePath = path.relative('.', filePath);
-            
+
             // 检查括号匹配
             const bracketError = this.checkBrackets(content);
             if (bracketError) {
@@ -139,10 +139,10 @@ class SyntaxErrorAnalyzer {
     checkBrackets(content) {
         const brackets = { '(': ')', '[': ']', '{': '}' };
         const stack = [];
-        
+
         for (let i = 0; i < content.length; i++) {
             const char = content[i];
-            
+
             if (brackets[char]) {
                 stack.push({ char, pos: i });
             } else if (Object.values(brackets).includes(char)) {
@@ -152,11 +152,11 @@ class SyntaxErrorAnalyzer {
                 }
             }
         }
-        
+
         if (stack.length > 0) {
             return `未闭合的括号: '${stack[stack.length - 1].char}' 在位置 ${stack[stack.length - 1].pos}`;
         }
-        
+
         return null;
     }
 
@@ -164,20 +164,20 @@ class SyntaxErrorAnalyzer {
         let inString = false;
         let stringChar = null;
         let escaped = false;
-        
+
         for (let i = 0; i < content.length; i++) {
             const char = content[i];
-            
+
             if (escaped) {
                 escaped = false;
                 continue;
             }
-            
+
             if (char === '\\') {
                 escaped = true;
                 continue;
             }
-            
+
             if (!inString && (char === '"' || char === "'" || char === '`')) {
                 inString = true;
                 stringChar = char;
@@ -186,11 +186,11 @@ class SyntaxErrorAnalyzer {
                 stringChar = null;
             }
         }
-        
+
         if (inString) {
             return `未闭合的字符串，起始字符: '${stringChar}'`;
         }
-        
+
         return null;
     }
 
@@ -203,22 +203,22 @@ class SyntaxErrorAnalyzer {
             { wrong: 'widht', correct: 'width' },
             { wrong: 'heigth', correct: 'height' }
         ];
-        
+
         for (const typo of typos) {
             if (content.includes(typo.wrong)) {
                 return `发现拼写错误: '${typo.wrong}' 应该是 '${typo.correct}'`;
             }
         }
-        
+
         return null;
     }
 
     generateReport() {
         console.log('📊 语法错误分析报告\n');
-        
+
         const total = Object.values(this.errors).reduce((sum, arr) => sum + arr.length, 0);
         console.log(`总错误数: ${total}\n`);
-        
+
         Object.entries(this.errors).forEach(([type, errors]) => {
             if (errors.length > 0) {
                 console.log(`📋 ${type.toUpperCase()} 错误 (${errors.length}个):`);
@@ -249,11 +249,11 @@ const targetDir = '../recovered';
 
 function scanDirectory(dir) {
     const items = fs.readdirSync(dir);
-    
+
     for (const item of items) {
         const itemPath = path.join(dir, item);
         const stats = fs.statSync(itemPath);
-        
+
         if (stats.isDirectory() && !['node_modules', '.git'].includes(item)) {
             scanDirectory(itemPath);
         } else if (stats.isFile() && /\.(js|jsx|ts|tsx)$/.test(item)) {
@@ -265,7 +265,7 @@ function scanDirectory(dir) {
 if (fs.existsSync(targetDir)) {
     scanDirectory(targetDir);
     const report = analyzer.generateReport();
-    
+
     console.log('🚀 建议的修复顺序:');
     console.log('1. 修复拼写错误 (最简单)');
     console.log('2. 修复未闭合的括号');
@@ -321,10 +321,10 @@ class AutoSyntaxFixer {
             if (modified) {
                 // 创建备份
                 fs.writeFileSync(filePath + '.backup', originalContent);
-                
+
                 // 写入修复后的内容
                 fs.writeFileSync(filePath, content);
-                
+
                 this.fixes.applied++;
                 console.log(`✅ 修复: ${path.relative('.', filePath)}`);
                 return true;
@@ -343,13 +343,13 @@ class AutoSyntaxFixer {
     fixSimpleBrackets(content) {
         // 这里只处理最简单的情况，复杂的需要手动处理
         // 例如：在文件末尾添加缺失的闭合括号（非常保守的修复）
-        
+
         const brackets = { '(': ')', '[': ']', '{': '}' };
         const stack = [];
-        
+
         for (let i = 0; i < content.length; i++) {
             const char = content[i];
-            
+
             if (brackets[char]) {
                 stack.push(char);
             } else if (Object.values(brackets).includes(char)) {
@@ -360,7 +360,7 @@ class AutoSyntaxFixer {
                 }
             }
         }
-        
+
         // 如果只是缺少结尾的括号，且数量合理（≤3个），尝试修复
         if (stack.length > 0 && stack.length <= 3) {
             let toAdd = '';
@@ -370,7 +370,7 @@ class AutoSyntaxFixer {
             }
             return content + toAdd;
         }
-        
+
         return content;
     }
 
@@ -379,7 +379,7 @@ class AutoSyntaxFixer {
         console.log(`✅ 成功修复: ${this.fixes.applied} 个文件`);
         console.log(`⏭️ 跳过: ${this.fixes.skipped} 个文件`);
         console.log(`❌ 修复失败: ${this.fixes.failed} 个文件`);
-        
+
         if (this.fixes.applied > 0) {
             console.log('\n💾 备份文件已创建 (.backup 扩展名)');
             console.log('如需回滚，请执行: find . -name "*.backup" -exec sh -c \'mv "$1" "${1%.backup}"\' _ {} \\;');
@@ -393,11 +393,11 @@ const targetDir = '../recovered';
 
 function fixDirectory(dir) {
     const items = fs.readdirSync(dir);
-    
+
     for (const item of items) {
         const itemPath = path.join(dir, item);
         const stats = fs.statSync(itemPath);
-        
+
         if (stats.isDirectory() && !['node_modules', '.git'].includes(item)) {
             fixDirectory(itemPath);
         } else if (stats.isFile() && /\.(js|jsx|ts|tsx)$/.test(item) && !item.includes('.backup')) {

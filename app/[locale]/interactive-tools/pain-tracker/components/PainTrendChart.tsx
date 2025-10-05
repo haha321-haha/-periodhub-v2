@@ -30,7 +30,7 @@ export default function PainTrendChart({
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [optimizedData, setOptimizedData] = useState<TrendPoint[]>([]);
-  
+
   // Performance optimization services
   const chartOptimizer = useMemo(() => new ChartPerformanceOptimizer(), []);
   const memoryManager = useMemo(() => new MemoryManager(), []);
@@ -56,7 +56,7 @@ export default function PainTrendChart({
             preserveImportantPoints: true
           }
         );
-        
+
         setOptimizedData(optimized);
       } catch (err) {
         console.warn('Failed to optimize chart data, using original:', err);
@@ -75,14 +75,14 @@ export default function PainTrendChart({
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     // Simulate loading delay for smooth rendering
     const timer = setTimeout(() => setIsLoading(false), 100);
 
     return () => {
       window.removeEventListener('resize', checkMobile);
       clearTimeout(timer);
-      
+
       // Cleanup chart instance for memory management
       if (chartInstanceRef.current) {
         memoryManager.unregisterChartInstance(chartId);
@@ -114,10 +114,10 @@ export default function PainTrendChart({
   const chartOptions = useMemo(() => {
     try {
       let options = ChartUtils.getPainTrendOptions(isMobile);
-      
+
       // Apply performance optimizations based on data size
       options = chartOptimizer.optimizeChartOptions(options, optimizedData.length);
-      
+
       // Override title display if showTitle is false
       if (!showTitle && options.plugins?.title) {
         options.plugins.title.display = false;
@@ -130,11 +130,11 @@ export default function PainTrendChart({
             const dataIndex = context[0].dataIndex;
             const dataPoint = optimizedData[dataIndex];
             if (!dataPoint) return '';
-            
+
             const date = new Date(dataPoint.date);
-            return date.toLocaleDateString('en-US', { 
+            return date.toLocaleDateString('en-US', {
               weekday: 'short',
-              month: 'short', 
+              month: 'short',
               day: 'numeric',
               year: 'numeric'
             });
@@ -142,9 +142,9 @@ export default function PainTrendChart({
           label: function(context: any) {
             const painLevel = context.parsed.y;
             const dataPoint = optimizedData[context.dataIndex];
-            
+
             let label = `Pain Level: ${painLevel}/10`;
-            
+
             if (showMenstrualPhases && dataPoint?.menstrualPhase) {
               const phaseMap: Record<string, string> = {
                 'before_period': 'Before Period',
@@ -157,7 +157,7 @@ export default function PainTrendChart({
               };
               label += `\nPhase: ${phaseMap[dataPoint.menstrualPhase] || dataPoint.menstrualPhase}`;
             }
-            
+
             return label;
           }
         };
@@ -208,18 +208,18 @@ export default function PainTrendChart({
     const average = painLevels.reduce((sum, level) => sum + level, 0) / painLevels.length;
     const highest = Math.max(...painLevels);
     const lowest = Math.min(...painLevels);
-    
+
     // Calculate trend direction
     const firstHalf = painLevels.slice(0, Math.floor(painLevels.length / 2));
     const secondHalf = painLevels.slice(Math.floor(painLevels.length / 2));
     const firstAvg = firstHalf.reduce((sum, level) => sum + level, 0) / firstHalf.length;
     const secondAvg = secondHalf.reduce((sum, level) => sum + level, 0) / secondHalf.length;
-    
+
     let trendDirection: 'improving' | 'worsening' | 'stable' = 'stable';
     const difference = secondAvg - firstAvg;
     if (difference < -0.5) trendDirection = 'improving';
     else if (difference > 0.5) trendDirection = 'worsening';
-    
+
     return {
       average: Math.round(average * 10) / 10,
       highest,
@@ -233,10 +233,10 @@ export default function PainTrendChart({
   // Calculate simple linear trend line
   function calculateTrendLine(data: TrendPoint[]): number[] {
     if (data.length < 2) return [];
-    
+
     const n = data.length;
     let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
-    
+
     data.forEach((point, index) => {
       const x = index;
       const y = point.painLevel;
@@ -245,17 +245,17 @@ export default function PainTrendChart({
       sumXY += x * y;
       sumXX += x * x;
     });
-    
+
     const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
     const intercept = (sumY - slope * sumX) / n;
-    
+
     return data.map((_, index) => slope * index + intercept);
   }
 
   // Loading state
   if (isLoading) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-gray-50 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
@@ -270,7 +270,7 @@ export default function PainTrendChart({
   // Error state
   if (error) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-red-50 border border-red-200 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
@@ -290,7 +290,7 @@ export default function PainTrendChart({
   // Empty data state
   if (!optimizedData || optimizedData.length === 0) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-gray-50 border border-gray-200 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
@@ -321,22 +321,22 @@ export default function PainTrendChart({
   return (
     <div className={`relative ${className}`}>
       <div style={{ height: containerHeight }}>
-        <Line 
+        <Line
           ref={handleChartRef}
-          data={chartData} 
+          data={chartData}
           options={chartOptions}
           aria-label="Pain level trend chart showing pain levels over time"
           role="img"
         />
       </div>
-      
+
       {/* Chart summary for screen readers */}
       <div className="sr-only">
         <p>
           Pain trend chart showing {trendStats?.dataPoints || 0} data points over time
-          {trendStats?.originalDataPoints && trendStats.originalDataPoints !== trendStats.dataPoints && 
+          {trendStats?.originalDataPoints && trendStats.originalDataPoints !== trendStats.dataPoints &&
             ` (optimized from ${trendStats.originalDataPoints} original points)`
-          }. 
+          }.
           {trendStats && (
             <>
               Average pain level: {trendStats.average}/10.
@@ -361,7 +361,7 @@ export default function PainTrendChart({
               <span className="font-medium">Lowest:</span> {trendStats.lowest}/10
             </div>
             <div>
-              <span className="font-medium">Trend:</span> 
+              <span className="font-medium">Trend:</span>
               <span className={`ml-1 ${
                 trendStats.trendDirection === 'improving' ? 'text-green-600' :
                 trendStats.trendDirection === 'worsening' ? 'text-red-600' :

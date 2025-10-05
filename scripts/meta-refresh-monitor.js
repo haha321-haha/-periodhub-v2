@@ -14,7 +14,7 @@ const CONFIG = {
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health',
   testUrls: [
     '/articles',
-    '/zh/articles', 
+    '/zh/articles',
     '/en/articles'
   ],
   outputFile: 'reports/meta-refresh-fix-report.json'
@@ -27,18 +27,18 @@ async function checkMetaRefresh(url) {
   return new Promise((resolve) => {
     const fullUrl = `${CONFIG.baseUrl}${url}`;
     console.log(`🔍 检查 URL: ${fullUrl}`);
-    
+
     https.get(fullUrl, (res) => {
       let data = '';
-      
+
       res.on('data', (chunk) => {
         data += chunk;
       });
-      
+
       res.on('end', () => {
         const hasMetaRefresh = /<meta[^>]*http-equiv\s*=\s*["']refresh["'][^>]*>/i.test(data);
         const hasRefreshRedirect = /<meta[^>]*content\s*=\s*["'][^"']*url\s*=/i.test(data);
-        
+
         resolve({
           url: fullUrl,
           statusCode: res.statusCode,
@@ -124,13 +124,13 @@ function generateSEOReport(results) {
  */
 async function main() {
   console.log('🚀 开始 Meta Refresh 修复验证...\n');
-  
+
   const results = [];
-  
+
   for (const url of CONFIG.testUrls) {
     const result = await checkMetaRefresh(url);
     results.push(result);
-    
+
     // 显示结果
     if (result.error) {
       console.log(`❌ ${url}: 错误 - ${result.error}`);
@@ -141,23 +141,23 @@ async function main() {
     } else {
       console.log(`✅ ${url}: 正常访问 (${result.statusCode})`);
     }
-    
+
     // 避免请求过于频繁
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
-  
+
   // 生成报告
   const report = generateSEOReport(results);
-  
+
   // 确保输出目录存在
   const outputDir = path.dirname(CONFIG.outputFile);
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
-  
+
   // 保存报告
   fs.writeFileSync(CONFIG.outputFile, JSON.stringify(report, null, 2));
-  
+
   console.log('\n📊 验证完成！');
   console.log(`📄 报告已保存到: ${CONFIG.outputFile}`);
   console.log(`\n📈 统计信息:`);
@@ -165,14 +165,14 @@ async function main() {
   console.log(`   - 发现 Meta Refresh: ${report.summary.urlsWithAnyRefresh}`);
   console.log(`   - 成功重定向: ${report.summary.successfulRedirects}`);
   console.log(`   - 访问错误: ${report.summary.errors}`);
-  
+
   if (report.recommendations.length > 0) {
     console.log(`\n💡 建议:`);
     report.recommendations.forEach((rec, index) => {
       console.log(`   ${index + 1}. ${rec.message}`);
     });
   }
-  
+
   // 返回退出码
   process.exit(report.summary.urlsWithAnyRefresh > 0 ? 1 : 0);
 }

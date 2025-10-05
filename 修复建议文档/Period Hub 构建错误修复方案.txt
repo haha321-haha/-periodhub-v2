@@ -152,10 +152,10 @@ export default function ClientComponent() { ... }
 
 基于您的项目配置，我已经创建了：
 
-✅ **标准化的服务器+客户端分离模板**  
-✅ **符合Period Hub女性健康应用的SEO配置**  
-✅ **完整的国际化元数据支持**  
-✅ **针对医疗健康网站的关键词策略**  
+✅ **标准化的服务器+客户端分离模板**
+✅ **符合Period Hub女性健康应用的SEO配置**
+✅ **完整的国际化元数据支持**
+✅ **针对医疗健康网站的关键词策略**
 
 ### **🔥 最高效的解决路径**
 
@@ -207,30 +207,30 @@ import AssessmentClient from './assessment-client';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'assessment' });
-  
+
   return {
     title: t('meta.title', { default: 'Health Assessment Tool | Period Hub' }),
-    description: t('meta.description', { 
-      default: 'Comprehensive women\'s health assessment tool to track symptoms, pain levels, and menstrual cycle patterns. Get personalized insights for better health management.' 
+    description: t('meta.description', {
+      default: 'Comprehensive women\'s health assessment tool to track symptoms, pain levels, and menstrual cycle patterns. Get personalized insights for better health management.'
     }),
     keywords: 'women health assessment, menstrual cycle tracking, symptom tracker, period pain assessment, reproductive health',
-    
+
     openGraph: {
       title: t('meta.ogTitle', { default: 'Health Assessment Tool' }),
-      description: t('meta.ogDescription', { 
-        default: 'Track your health symptoms and get personalized insights with Period Hub\'s comprehensive assessment tool.' 
+      description: t('meta.ogDescription', {
+        default: 'Track your health symptoms and get personalized insights with Period Hub\'s comprehensive assessment tool.'
       }),
       type: 'website',
       locale: locale,
       siteName: 'Period Hub',
       url: `https://periodhub.health/${locale}/assessment`,
     },
-    
+
     twitter: {
       card: 'summary_large_image',
       title: t('meta.twitterTitle', { default: 'Health Assessment - Period Hub' }),
-      description: t('meta.twitterDescription', { 
-        default: 'Professional women\'s health assessment and tracking tool.' 
+      description: t('meta.twitterDescription', {
+        default: 'Professional women\'s health assessment and tracking tool.'
       }),
     },
 
@@ -271,13 +271,13 @@ export default function AssessmentClient() {
   const [assessmentData, setAssessmentData] = useState({});
 
   // 您现有的所有客户端逻辑保持不变
-  
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-primary-700 mb-6">
         {t('title', { default: 'Health Assessment' })}
       </h1>
-      
+
       {/* 您现有的JSX内容保持不变 */}
     </div>
   );
@@ -293,18 +293,18 @@ import DashboardClient from './dashboard-client';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'dashboard' });
-  
+
   return {
     title: t('meta.title', { default: 'Health Data Dashboard | Period Hub' }),
-    description: t('meta.description', { 
-      default: 'Visualize your menstrual cycle patterns, symptom trends, and health insights with interactive charts and personalized analytics dashboard.' 
+    description: t('meta.description', {
+      default: 'Visualize your menstrual cycle patterns, symptom trends, and health insights with interactive charts and personalized analytics dashboard.'
     }),
     keywords: 'menstrual cycle dashboard, period tracking analytics, health data visualization, cycle patterns, symptom trends',
-    
+
     openGraph: {
       title: t('meta.ogTitle', { default: 'Health Data Dashboard' }),
-      description: t('meta.ogDescription', { 
-        default: 'Interactive health dashboard with personalized cycle analytics and insights.' 
+      description: t('meta.ogDescription', {
+        default: 'Interactive health dashboard with personalized cycle analytics and insights.'
       }),
       type: 'website',
       locale: locale,
@@ -341,18 +341,18 @@ import PainTrackerClient from './pain-tracker-client';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'pain-tracker' });
-  
+
   return {
     title: t('meta.title', { default: 'Pain Tracker | Period Hub' }),
-    description: t('meta.description', { 
-      default: 'Track and monitor menstrual pain levels, identify patterns, and manage symptoms effectively with our comprehensive pain tracking tool.' 
+    description: t('meta.description', {
+      default: 'Track and monitor menstrual pain levels, identify patterns, and manage symptoms effectively with our comprehensive pain tracking tool.'
     }),
     keywords: 'menstrual pain tracker, period pain management, pain level monitoring, symptom tracking, dysmenorrhea',
-    
+
     openGraph: {
       title: t('meta.ogTitle', { default: 'Pain Tracker Tool' }),
-      description: t('meta.ogDescription', { 
-        default: 'Monitor and manage menstrual pain with professional tracking tools.' 
+      description: t('meta.ogDescription', {
+        default: 'Monitor and manage menstrual pain with professional tracking tools.'
       }),
       type: 'website',
       locale: locale,
@@ -389,18 +389,18 @@ import InteractivePainTrackerClient from './interactive-pain-tracker-client';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'interactive-tools' });
-  
+
   return {
     title: t('painTracker.meta.title', { default: 'Interactive Pain Tracker | Period Hub' }),
-    description: t('painTracker.meta.description', { 
-      default: 'Advanced interactive pain tracking tool with real-time visualization, pattern analysis, and personalized recommendations for menstrual pain management.' 
+    description: t('painTracker.meta.description', {
+      default: 'Advanced interactive pain tracking tool with real-time visualization, pattern analysis, and personalized recommendations for menstrual pain management.'
     }),
     keywords: 'interactive pain tracker, real-time pain monitoring, pain visualization, menstrual pain analysis',
-    
+
     openGraph: {
       title: t('painTracker.meta.ogTitle', { default: 'Interactive Pain Tracker' }),
-      description: t('painTracker.meta.ogDescription', { 
-        default: 'Advanced interactive tool for comprehensive menstrual pain tracking and analysis.' 
+      description: t('painTracker.meta.ogDescription', {
+        default: 'Advanced interactive tool for comprehensive menstrual pain tracking and analysis.'
       }),
       type: 'website',
       locale: locale,
@@ -437,18 +437,18 @@ import SymptomAssessmentClient from './symptom-assessment-client';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'interactive-tools' });
-  
+
   return {
     title: t('symptomAssessment.meta.title', { default: 'Symptom Assessment Tool | Period Hub' }),
-    description: t('symptomAssessment.meta.description', { 
-      default: 'Comprehensive symptom assessment for menstrual health. Track PMS symptoms, mood changes, physical discomfort, and get personalized health insights.' 
+    description: t('symptomAssessment.meta.description', {
+      default: 'Comprehensive symptom assessment for menstrual health. Track PMS symptoms, mood changes, physical discomfort, and get personalized health insights.'
     }),
     keywords: 'symptom assessment, PMS symptoms, menstrual symptoms tracker, mood tracking, reproductive health assessment',
-    
+
     openGraph: {
       title: t('symptomAssessment.meta.ogTitle', { default: 'Symptom Assessment Tool' }),
-      description: t('symptomAssessment.meta.ogDescription', { 
-        default: 'Professional symptom assessment tool for comprehensive menstrual health tracking.' 
+      description: t('symptomAssessment.meta.ogDescription', {
+        default: 'Professional symptom assessment tool for comprehensive menstrual health tracking.'
       }),
       type: 'website',
       locale: locale,
@@ -487,12 +487,12 @@ import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'page-name' });
-  
+
   return {
     title: t('meta.title', { default: 'Page Title | Period Hub' }),
     description: t('meta.description', { default: 'Page description 120-150 characters' }),
     keywords: 'relevant, keywords, for, the, page',
-    
+
     openGraph: {
       title: t('meta.ogTitle', { default: 'Page Title' }),
       description: t('meta.ogDescription', { default: 'Page description for social media' }),
@@ -544,7 +544,7 @@ import { notFound } from 'next/navigation';
 
 export async function generateMetadata() {
   const isProduction = process.env.NODE_ENV === 'production';
-  
+
   return {
     title: isProduction ? 'Page Not Found | Period Hub' : 'Test Page | Development',
     description: isProduction ? 'This page does not exist.' : 'Development test page',
@@ -559,7 +559,7 @@ export default function TestPage() {
   if (process.env.NODE_ENV === 'production') {
     notFound();
   }
-  
+
   return <div>Test Content</div>;
 }
 ```
@@ -622,7 +622,7 @@ export default function Page() {
   useEffect(() => {
     document.title = 'Page Title | Period Hub';
   }, []);
-  
+
   // 原有逻辑
 }
 ```

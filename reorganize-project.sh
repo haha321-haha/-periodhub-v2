@@ -22,7 +22,7 @@ copy_and_rename() {
     local source_file="$1"
     local target_file="$2"
     local description="$3"
-    
+
     if [ -f "$source_file" ]; then
         cp "$source_file" "$target_file"
         echo "✅ $description: $(basename "$target_file")"
@@ -37,10 +37,10 @@ copy_and_rename() {
 analyze_and_copy() {
     local file="$1"
     local filename=$(basename "$file")
-    
+
     # 读取文件前几行来判断类型
     local content=$(head -10 "$file" 2>/dev/null)
-    
+
     # 根据内容特征分类
     if echo "$content" | grep -q "tailwind\|Config"; then
         copy_and_rename "$file" "$NEW_PROJECT_DIR/tailwind.config.js" "Tailwind配置"

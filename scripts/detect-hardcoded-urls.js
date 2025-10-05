@@ -33,16 +33,16 @@ const log = {
 const CONFIG = {
   // 要检查的文件类型
   filePatterns: ['*.tsx', '*.ts', '*.js', '*.json'],
-  
+
   // 排除的目录
   excludeDirs: ['node_modules', '.next', 'recovery-workspace', 'hub-latest-main', 'backup'],
-  
+
   // 硬编码URL模式
   hardcodedPatterns: [
     /https:\/\/periodhub\.health/g,
     /https:\/\/www\.periodhub\.health/g,
   ],
-  
+
   // 允许的硬编码模式（在特定上下文中）
   allowedPatterns: [
     // 在注释中的URL
@@ -58,16 +58,16 @@ function checkFile(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
     const issues = [];
-    
+
     CONFIG.hardcodedPatterns.forEach((pattern, index) => {
       const matches = content.match(pattern);
       if (matches) {
         matches.forEach(match => {
           // 检查是否在允许的上下文中
-          const isAllowed = CONFIG.allowedPatterns.some(allowedPattern => 
+          const isAllowed = CONFIG.allowedPatterns.some(allowedPattern =>
             allowedPattern.test(content)
           );
-          
+
           if (!isAllowed) {
             issues.push({
               type: 'hardcoded_url',
@@ -79,7 +79,7 @@ function checkFile(filePath) {
         });
       }
     });
-    
+
     return issues;
   } catch (error) {
     log.error(`读取文件失败: ${filePath} - ${error.message}`);
@@ -101,20 +101,20 @@ function getLineNumber(content, match) {
 // 扫描目录
 function scanDirectory(dirPath) {
   const results = [];
-  
+
   try {
     const items = fs.readdirSync(dirPath);
-    
+
     for (const item of items) {
       const fullPath = path.join(dirPath, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         // 跳过排除的目录
         if (CONFIG.excludeDirs.includes(item)) {
           continue;
         }
-        
+
         // 递归扫描子目录
         results.push(...scanDirectory(fullPath));
       } else if (stat.isFile()) {
@@ -134,28 +134,28 @@ function scanDirectory(dirPath) {
   } catch (error) {
     log.error(`扫描目录失败: ${dirPath} - ${error.message}`);
   }
-  
+
   return results;
 }
 
 // 生成报告
 function generateReport(results) {
   log.header('硬编码URL检测报告');
-  
+
   if (results.length === 0) {
     log.success('✅ 没有发现硬编码URL问题');
     return;
   }
-  
+
   log.warning(`⚠️ 发现 ${results.length} 个文件包含硬编码URL`);
-  
+
   results.forEach(({ file, issues }) => {
     log.error(`\n📁 文件: ${file}`);
     issues.forEach(issue => {
       log.error(`  第${issue.line}行: ${issue.match}`);
     });
   });
-  
+
   log.warning('\n🔧 建议修复方法:');
   log.info('1. 使用 lib/url-config.ts 中的配置');
   log.info('2. 使用环境变量 process.env.NEXT_PUBLIC_BASE_URL');
@@ -165,15 +165,15 @@ function generateReport(results) {
 // 主函数
 function main() {
   log.header('开始硬编码URL检测');
-  
+
   const startTime = Date.now();
   const results = scanDirectory('.');
   const endTime = Date.now();
-  
+
   generateReport(results);
-  
+
   log.info(`\n⏱️ 检测完成，耗时: ${endTime - startTime}ms`);
-  
+
   // 如果有问题，退出码为1
   if (results.length > 0) {
     process.exit(1);

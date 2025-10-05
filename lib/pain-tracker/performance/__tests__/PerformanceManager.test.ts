@@ -25,18 +25,18 @@ const createMockRecord = (id: string, date: string, painLevel: number): PainReco
 const createMockRecords = (count: number): PainRecord[] => {
   const records: PainRecord[] = [];
   const startDate = new Date('2024-01-01');
-  
+
   for (let i = 0; i < count; i++) {
     const date = new Date(startDate);
     date.setDate(startDate.getDate() + i);
-    
+
     records.push(createMockRecord(
       `record_${i}`,
       date.toISOString().split('T')[0],
       Math.floor(Math.random() * 10) + 1
     ));
   }
-  
+
   return records;
 };
 
@@ -79,17 +79,17 @@ describe('PerformanceManager', () => {
   describe('Data Compression', () => {
     test('should compress and decompress data', async () => {
       const testData = { test: 'data', numbers: [1, 2, 3] };
-      
+
       const compressed = await performanceManager.compressData(testData);
       expect(typeof compressed).toBe('string');
-      
+
       const decompressed = await performanceManager.decompressData(compressed);
       expect(decompressed).toEqual(testData);
     });
 
     test('should handle large data compression', async () => {
       const largeData = createMockRecords(1000);
-      
+
       const compressed = await performanceManager.compressData(largeData);
       expect(typeof compressed).toBe('string');
       expect(compressed.length).toBeGreaterThan(0);
@@ -99,13 +99,13 @@ describe('PerformanceManager', () => {
   describe('Chart Performance', () => {
     test('should optimize chart data for large datasets', async () => {
       const largeDataset = createMockRecords(5000);
-      
+
       const optimized = await performanceManager.optimizeChartData(
         largeDataset,
         'line',
         { maxPoints: 200 }
       );
-      
+
       expect(optimized.length).toBeLessThanOrEqual(200);
       expect(optimized.length).toBeGreaterThan(0);
     });
@@ -119,7 +119,7 @@ describe('PerformanceManager', () => {
       };
 
       const optimizedOptions = performanceManager.optimizeChartOptions(baseOptions, 10000);
-      
+
       // For large datasets, animations should be disabled
       expect(optimizedOptions.animation).toBe(false);
     });
@@ -128,7 +128,7 @@ describe('PerformanceManager', () => {
   describe('Memory Management', () => {
     test('should monitor memory usage', () => {
       const memoryInfo = performanceManager.monitorMemoryUsage();
-      
+
       expect(memoryInfo).toHaveProperty('usedJSHeapSize');
       expect(memoryInfo).toHaveProperty('totalJSHeapSize');
       expect(memoryInfo).toHaveProperty('jsHeapSizeLimit');
@@ -142,7 +142,7 @@ describe('PerformanceManager', () => {
       };
 
       performanceManager.registerChartInstance('test-chart', mockChartInstance);
-      
+
       // Should not throw error
       expect(() => {
         performanceManager.registerChartInstance('test-chart', mockChartInstance);
@@ -153,7 +153,7 @@ describe('PerformanceManager', () => {
   describe('Storage Quota', () => {
     test('should monitor storage quota', async () => {
       const quotaInfo = await performanceManager.monitorStorageQuota();
-      
+
       expect(quotaInfo).toHaveProperty('used');
       expect(quotaInfo).toHaveProperty('quota');
       expect(quotaInfo).toHaveProperty('available');
@@ -167,13 +167,13 @@ describe('PerformanceManager', () => {
   describe('Performance Report', () => {
     test('should generate performance report', async () => {
       const report = await performanceManager.getPerformanceReport();
-      
+
       expect(report).toHaveProperty('memory');
       expect(report).toHaveProperty('storage');
       expect(report).toHaveProperty('cacheStats');
       expect(report).toHaveProperty('recommendations');
       expect(report).toHaveProperty('performanceScore');
-      
+
       expect(typeof report.performanceScore).toBe('number');
       expect(report.performanceScore).toBeGreaterThanOrEqual(0);
       expect(report.performanceScore).toBeLessThanOrEqual(100);
@@ -181,7 +181,7 @@ describe('PerformanceManager', () => {
 
     test('should provide optimization recommendations', async () => {
       const recommendations = await performanceManager.getDatasetOptimizationRecommendations(5000);
-      
+
       expect(Array.isArray(recommendations)).toBe(true);
       expect(recommendations.length).toBeGreaterThan(0);
       expect(recommendations.every(rec => typeof rec === 'string')).toBe(true);
@@ -191,14 +191,14 @@ describe('PerformanceManager', () => {
   describe('Overall Optimization', () => {
     test('should perform overall optimization', async () => {
       const result = await performanceManager.optimizeOverallPerformance();
-      
+
       expect(result).toHaveProperty('memoryOptimization');
       expect(result).toHaveProperty('storageOptimization');
       expect(result).toHaveProperty('dataCleanup');
       expect(result).toHaveProperty('totalTimeSaved');
       expect(result).toHaveProperty('performanceImprovement');
       expect(result).toHaveProperty('recommendations');
-      
+
       expect(typeof result.totalTimeSaved).toBe('number');
       expect(Array.isArray(result.recommendations)).toBe(true);
     });
@@ -231,20 +231,20 @@ describe('PerformanceManager', () => {
 describe('PerformanceManager Integration', () => {
   test('should handle complete workflow', async () => {
     const performanceManager = new PerformanceManager({ enableMonitoring: false });
-    
+
     try {
       // Generate performance report
       const initialReport = await performanceManager.getPerformanceReport();
       expect(initialReport.performanceScore).toBeGreaterThanOrEqual(0);
-      
+
       // Perform optimization
       const optimizationResult = await performanceManager.optimizeOverallPerformance();
       expect(optimizationResult.totalTimeSaved).toBeGreaterThanOrEqual(0);
-      
+
       // Generate final report
       const finalReport = await performanceManager.getPerformanceReport();
       expect(finalReport.performanceScore).toBeGreaterThanOrEqual(0);
-      
+
     } finally {
       performanceManager.destroy();
       // Wait for cleanup to complete

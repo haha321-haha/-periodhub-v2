@@ -10,11 +10,11 @@ interface ArticleInteractionsProps {
   className?: string;
 }
 
-export default function ArticleInteractions({ 
-  articleId, 
-  articleTitle, 
+export default function ArticleInteractions({
+  articleId,
+  articleTitle,
   locale,
-  className = '' 
+  className = ''
 }: ArticleInteractionsProps) {
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -54,10 +54,10 @@ export default function ArticleInteractions({
   const handleLike = () => {
     const newLikedState = !isLiked;
     const newLikes = newLikedState ? likes + 1 : likes - 1;
-    
+
     setIsLiked(newLikedState);
     setLikes(newLikes);
-    
+
     localStorage.setItem(`liked_${articleId}`, newLikedState.toString());
     localStorage.setItem(`likes_${articleId}`, newLikes.toString());
   };
@@ -66,9 +66,9 @@ export default function ArticleInteractions({
   const handleBookmark = () => {
     const newBookmarkedState = !isBookmarked;
     setIsBookmarked(newBookmarkedState);
-    
+
     localStorage.setItem(`bookmarked_${articleId}`, newBookmarkedState.toString());
-    
+
     // 管理收藏列表
     const bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
     if (newBookmarkedState) {
@@ -99,7 +99,7 @@ export default function ArticleInteractions({
   const handleShare = (platform: string) => {
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent(articleTitle);
-    
+
     const shareUrls = {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
       twitter: `https://twitter.com/intent/tweet?url=${url}&text=${title}`,
@@ -107,7 +107,7 @@ export default function ArticleInteractions({
       whatsapp: `https://wa.me/?text=${title} ${url}`,
       telegram: `https://t.me/share/url?url=${url}&text=${title}`
     };
-    
+
     if (shareUrls[platform as keyof typeof shareUrls]) {
       window.open(shareUrls[platform as keyof typeof shareUrls], '_blank', 'width=600,height=400');
     }
@@ -151,12 +151,12 @@ export default function ArticleInteractions({
 
   // 添加 locale 验证和默认值处理，防止 undefined 访问错误
   const validLocale = (locale === 'zh' || locale === 'en') ? locale : 'en';
-  
+
   // 如果 locale 无效，记录警告（仅在客户端）
   if (typeof window !== 'undefined' && locale !== validLocale) {
     console.warn(`[ArticleInteractions] Invalid locale '${locale}', falling back to '${validLocale}'`);
   }
-  
+
   const text = t[validLocale];
 
   return (

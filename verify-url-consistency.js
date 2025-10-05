@@ -42,15 +42,15 @@ function checkFile(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
     const lines = content.split('\n');
-    
+
     lines.forEach((line, index) => {
       // 检查是否包含不带www的URL
       if (line.includes('https://periodhub.health') && !line.includes('https://www.periodhub.health')) {
         // 检查是否在应该使用www的上下文中
-        const shouldUseWww = wwwContexts.some(context => 
+        const shouldUseWww = wwwContexts.some(context =>
           line.toLowerCase().includes(context.toLowerCase())
         );
-        
+
         if (shouldUseWww) {
           issues.push({
             file: filePath,
@@ -61,7 +61,7 @@ function checkFile(filePath) {
         }
       }
     });
-    
+
     checkedFiles++;
   } catch (error) {
     console.error(`读取文件失败: ${filePath}`, error.message);
@@ -70,15 +70,15 @@ function checkFile(filePath) {
 
 function findFiles(dir, extensions = ['.tsx', '.ts']) {
   const files = [];
-  
+
   function traverse(currentDir) {
     try {
       const items = fs.readdirSync(currentDir);
-      
+
       for (const item of items) {
         const fullPath = path.join(currentDir, item);
         const stat = fs.statSync(fullPath);
-        
+
         if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
           traverse(fullPath);
         } else if (stat.isFile() && extensions.some(ext => item.endsWith(ext))) {
@@ -89,7 +89,7 @@ function findFiles(dir, extensions = ['.tsx', '.ts']) {
       // 忽略无法访问的目录
     }
   }
-  
+
   traverse(dir);
   return files;
 }
@@ -137,7 +137,7 @@ if (issues.length === 0) {
   console.log('✅ 所有页面都使用 https://www.periodhub.health 域名');
 } else {
   console.log(`❌ 发现 ${issues.length} 个问题:\n`);
-  
+
   issues.forEach((issue, index) => {
     console.log(`${index + 1}. 文件: ${issue.file}`);
     console.log(`   行号: ${issue.line}`);
@@ -154,10 +154,10 @@ if (fs.existsSync(sitemapPath)) {
   const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
   const wwwCount = (sitemapContent.match(/https:\/\/www\.periodhub\.health/g) || []).length;
   const nonWwwCount = (sitemapContent.match(/https:\/\/periodhub\.health/g) || []).length;
-  
+
   console.log(`   https://www.periodhub.health: ${wwwCount} 个`);
   console.log(`   https://periodhub.health: ${nonWwwCount} 个`);
-  
+
   if (nonWwwCount > 0) {
     console.log('   ⚠️ sitemap.xml中仍有不带www的URL');
   } else {
@@ -176,7 +176,7 @@ const report = {
   issues: issues,
   summary: {
     status: issues.length === 0 ? 'PASSED' : 'FAILED',
-    message: issues.length === 0 
+    message: issues.length === 0
       ? '所有URL格式配置正确，都使用https://www.periodhub.health'
       : `发现${issues.length}个URL格式问题需要修复`
   }
@@ -204,6 +204,3 @@ console.log('1. 如果发现问题，请修复后重新运行此脚本');
 console.log('2. 在搜索引擎控制台中重新提交sitemap.xml');
 console.log('3. 使用URL检查工具验证修复效果');
 console.log('4. 监控搜索引擎索引状态');
-
-
-

@@ -107,7 +107,7 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
     }
 
     const buckets: TrendPoint[] = [];
-    const sortedData = [...data].sort((a, b) => 
+    const sortedData = [...data].sort((a, b) =>
       new Date(a.date).getTime() - new Date(b.date).getTime()
     );
 
@@ -282,7 +282,7 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
 
   private heavyOptimization(data: any[], chartType: string, options: ChartOptimizationOptions): any[] {
     const maxPoints = options.maxPoints || this.getMaxPointsForChartType(chartType);
-    
+
     // First, create buckets for aggregation
     if (chartType === 'line' && data.length > this.performanceThresholds.xlarge) {
       const bucketSize = Math.ceil(data.length / maxPoints);
@@ -319,7 +319,7 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
 
     const sampled: any[] = [];
     const step = data.length / maxPoints;
-    
+
     // Always include first point
     sampled.push(data[0]);
 
@@ -327,7 +327,7 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
     for (let i = 1; i < maxPoints - 1; i++) {
       const index = Math.floor(i * step);
       const point = data[index];
-      
+
       // Include points with high variance from neighbors
       if (this.shouldIncludePoint(data, index)) {
         sampled.push(point);
@@ -398,9 +398,9 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
     if (index > 0 && index < data.length - 1) {
       const prev = data[index - 1];
       const next = data[index + 1];
-      
+
       if (point.painLevel && prev.painLevel && next.painLevel) {
-        const change = Math.abs(point.painLevel - prev.painLevel) + 
+        const change = Math.abs(point.painLevel - prev.painLevel) +
                       Math.abs(next.painLevel - point.painLevel);
         score += change;
       }
@@ -433,12 +433,12 @@ export class ChartPerformanceOptimizer implements ChartPerformanceOptimizerInter
   private cleanDataPoint(point: any): any {
     // Remove unnecessary properties to reduce memory usage
     const cleaned = { ...point };
-    
+
     // Remove internal properties
     delete cleaned._id;
     delete cleaned.__v;
     delete cleaned.metadata;
-    
+
     // Round numeric values to reduce precision
     if (cleaned.painLevel) {
       cleaned.painLevel = Math.round(cleaned.painLevel * 10) / 10;

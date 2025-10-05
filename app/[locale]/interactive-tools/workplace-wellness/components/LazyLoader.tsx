@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { Suspense, lazy, ComponentType } from 'react';
-import { LoadingWrapper, SkeletonCard } from './LoadingAnimations';
+import React, { Suspense, lazy, ComponentType } from "react";
+import { LoadingWrapper, SkeletonCard } from "./LoadingAnimations";
 
 /**
  * Day 12: 懒加载组件包装器
@@ -17,27 +17,26 @@ interface LazyLoaderProps {
 
 // 默认加载状态
 const DefaultFallback = ({ height = "200px" }: { height?: string }) => (
-  <LoadingWrapper isLoading={true} loadingComponent={<SkeletonCard className={`h-[${height}]`} />}>
+  <LoadingWrapper
+    isLoading={true}
+    loadingComponent={<SkeletonCard className={`h-[${height}]`} />}
+  >
     <SkeletonCard className={`h-[${height}]`} />
   </LoadingWrapper>
 );
 
 // 延迟加载包装器
-const DelayedSuspense = ({ 
-  children, 
-  fallback, 
-  delay = 0 
-}: { 
-  children: React.ReactNode; 
-  fallback?: React.ReactNode; 
+const DelayedSuspense = ({
+  children,
+  fallback,
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
   delay?: number;
 }) => {
   if (delay > 0) {
-    return (
-      <Suspense fallback={fallback}>
-        {children}
-      </Suspense>
-    );
+    return <Suspense fallback={fallback}>{children}</Suspense>;
   }
   return <Suspense fallback={fallback}>{children}</Suspense>;
 };
@@ -51,13 +50,15 @@ const DelayedSuspense = ({
 export function createLazyComponent<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
   fallback?: React.ReactNode,
-  delay: number = 0
+  delay: number = 0,
 ) {
   const LazyComponent = lazy(importFunc);
-  
-  return function LazyWrapper(props: React.ComponentProps<T> & LazyLoaderProps) {
+
+  return function LazyWrapper(
+    props: React.ComponentProps<T> & LazyLoaderProps,
+  ) {
     return (
-      <DelayedSuspense 
+      <DelayedSuspense
         fallback={fallback || <DefaultFallback height={props.height} />}
         delay={delay}
       >
@@ -73,12 +74,12 @@ export function createLazyComponent<T extends ComponentType<any>>(
  */
 export class ComponentPreloader {
   private static preloadedComponents = new Set<string>();
-  
+
   static async preload(importFunc: () => Promise<any>, componentName: string) {
     if (this.preloadedComponents.has(componentName)) {
       return;
     }
-    
+
     try {
       await importFunc();
       this.preloadedComponents.add(componentName);
@@ -87,11 +88,11 @@ export class ComponentPreloader {
       console.warn(`⚠️ 预加载组件失败: ${componentName}`, error);
     }
   }
-  
+
   static isPreloaded(componentName: string): boolean {
     return this.preloadedComponents.has(componentName);
   }
-  
+
   static clearCache() {
     this.preloadedComponents.clear();
   }
@@ -103,12 +104,12 @@ export class ComponentPreloader {
  */
 export function createLazyPage<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
-  pageName: string
+  pageName: string,
 ) {
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="400px" />,
-    100 // 页面级组件延迟100ms
+    100, // 页面级组件延迟100ms
   );
 }
 
@@ -118,12 +119,12 @@ export function createLazyPage<T extends ComponentType<any>>(
  */
 export function createLazyModule<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
-  moduleName: string
+  moduleName: string,
 ) {
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="300px" />,
-    50 // 模块级组件延迟50ms
+    50, // 模块级组件延迟50ms
   );
 }
 
@@ -133,12 +134,12 @@ export function createLazyModule<T extends ComponentType<any>>(
  */
 export function createLazyTool<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
-  toolName: string
+  toolName: string,
 ) {
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="150px" />,
-    0 // 工具组件立即加载
+    0, // 工具组件立即加载
   );
 }
 
@@ -149,38 +150,38 @@ export function createLazyTool<T extends ComponentType<any>>(
 export async function preloadCriticalComponents() {
   const criticalComponents = [
     {
-      name: 'CalendarComponent',
-      importFunc: () => import('./CalendarComponent'),
+      name: "CalendarComponent",
+      importFunc: () => import("./CalendarComponent"),
     },
     {
-      name: 'Navigation',
-      importFunc: () => import('./Navigation'),
+      name: "Navigation",
+      importFunc: () => import("./Navigation"),
     },
     {
-      name: 'Header',
-      importFunc: () => import('./Header'),
+      name: "Header",
+      importFunc: () => import("./Header"),
     },
     {
-      name: 'Footer',
-      importFunc: () => import('./Footer'),
+      name: "Footer",
+      importFunc: () => import("./Footer"),
     },
   ];
-  
+
   // 使用 requestIdleCallback 在浏览器空闲时预加载
-  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
     window.requestIdleCallback(async () => {
       await Promise.allSettled(
         criticalComponents.map(({ name, importFunc }) =>
-          ComponentPreloader.preload(importFunc, name)
-        )
+          ComponentPreloader.preload(importFunc, name),
+        ),
       );
     });
   } else {
     // 降级处理：直接预加载
     await Promise.allSettled(
       criticalComponents.map(({ name, importFunc }) =>
-        ComponentPreloader.preload(importFunc, name)
-      )
+        ComponentPreloader.preload(importFunc, name),
+      ),
     );
   }
 }
@@ -191,15 +192,15 @@ export async function preloadCriticalComponents() {
  */
 export function useLazyComponent<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
-  componentName: string
+  componentName: string,
 ) {
   const [Component, setComponent] = React.useState<T | null>(null);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<Error | null>(null);
-  
+
   React.useEffect(() => {
     if (Component || loading) return;
-    
+
     setLoading(true);
     importFunc()
       .then((module) => {
@@ -214,7 +215,7 @@ export function useLazyComponent<T extends ComponentType<any>>(
         setLoading(false);
       });
   }, [importFunc, componentName, Component, loading]);
-  
+
   return { Component, loading, error };
 }
 

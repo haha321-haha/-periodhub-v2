@@ -40,4 +40,4 @@ export const productionConfig: ResourceManagerConfig = {
   validationEnabled: true,
   statsEnabled: true,
   seoEnabled: true
-}; 
+};

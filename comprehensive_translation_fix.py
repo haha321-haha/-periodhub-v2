@@ -10,37 +10,37 @@ import sys
 
 def main():
     print("=== 全面补充症状评估工具翻译键 ===")
-    
+
     # 读取JSON文件
     with open('messages/zh.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
-    
+
     # 确保interactiveTools.symptomAssessment结构完整
     if 'interactiveTools' not in data:
         data['interactiveTools'] = {}
     if 'symptomAssessment' not in data['interactiveTools']:
         data['interactiveTools']['symptomAssessment'] = {}
-    
+
     # 添加所有必要的翻译键
     symptom_assessment = data['interactiveTools']['symptomAssessment']
-    
+
     # 基础信息
     symptom_assessment['title'] = '症状评估工具'
     symptom_assessment['description'] = '专业的痛经症状评估工具，帮助您了解疼痛程度和获得个性化建议'
     symptom_assessment['subtitle'] = '专业医疗评估'
-    
+
     # 开始页面
     symptom_assessment['start'] = {
         'title': '开始症状评估',
         'description': '通过5个专业问题，全面评估您的痛经症状',
         'feature1': '专业评估',
-        'feature2': '个性化建议', 
+        'feature2': '个性化建议',
         'feature3': '即时缓解',
         'feature4': '长期管理',
         'startButton': '开始评估',
         'disclaimer': '本评估仅供参考，不能替代专业医疗诊断'
     }
-    
+
     # 问题相关
     symptom_assessment['questions'] = {
         'painLevel': '疼痛程度',
@@ -49,7 +49,7 @@ def main():
         'accompanyingSymptoms': '伴随症状',
         'reliefPreference': '缓解偏好'
     }
-    
+
     # 选项
     symptom_assessment['options'] = {
         'mild': '轻度 (1-3/10)',
@@ -61,7 +61,7 @@ def main():
         'long': '持续3天或更长时间',
         'variable': '疼痛不可预测'
     }
-    
+
     # 严重程度
     symptom_assessment['severity'] = {
         'mild': '轻度',
@@ -70,14 +70,14 @@ def main():
         'verySevere': '极重度',
         'workplace': '职场影响'
     }
-    
+
     # 优先级
     symptom_assessment['priority'] = {
         'high': '高优先级',
         'medium': '中等优先级',
         'low': '低优先级'
     }
-    
+
     # 消息
     symptom_assessment['messages'] = {
         'assessmentComplete': '评估完成',
@@ -88,7 +88,7 @@ def main():
         'calculating': '正在计算分数...',
         'generatingRecommendations': '正在生成建议...'
     }
-    
+
     # 按钮和操作
     symptom_assessment['buttons'] = {
         'next': '下一步',
@@ -99,7 +99,7 @@ def main():
         'downloadReport': '下载报告',
         'shareResults': '分享结果'
     }
-    
+
     # 结果页面
     symptom_assessment['results'] = {
         'title': '评估结果',
@@ -111,13 +111,13 @@ def main():
         'workplace': '职场支持',
         'medical': '医疗建议'
     }
-    
+
     # 保存文件
     with open('messages/zh.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    
+
     print("✅ 所有症状评估工具翻译键已添加")
-    
+
     # 验证添加的键
     print("\n=== 验证关键翻译键 ===")
     key_checks = [
@@ -128,7 +128,7 @@ def main():
         'interactiveTools.symptomAssessment.severity.moderate',
         'interactiveTools.symptomAssessment.priority.medium'
     ]
-    
+
     for key_path in key_checks:
         keys = key_path.split('.')
         value = data

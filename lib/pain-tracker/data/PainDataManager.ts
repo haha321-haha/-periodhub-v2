@@ -8,20 +8,17 @@ import {
   MenstrualStatus,
   PainTrackerError,
   ValidationResult,
-  STORAGE_KEYS
-} from '../../../types/pain-tracker';
+  STORAGE_KEYS,
+} from "../../../types/pain-tracker";
 
-import LocalStorageAdapter from '../storage/LocalStorageAdapter';
-import ValidationService from '../validation/ValidationService';
+import LocalStorageAdapter from "../storage/LocalStorageAdapter";
+import ValidationService from "../validation/ValidationService";
 
 export class PainDataManager implements PainDataManagerInterface {
   private storage: LocalStorageAdapter;
   private validation: ValidationService;
 
-  constructor(
-    storage?: LocalStorageAdapter,
-    validation?: ValidationService
-  ) {
+  constructor(storage?: LocalStorageAdapter, validation?: ValidationService) {
     this.storage = storage || new LocalStorageAdapter();
     this.validation = validation || new ValidationService();
   }
@@ -29,15 +26,17 @@ export class PainDataManager implements PainDataManagerInterface {
   /**
    * Save a new pain record with validation and error handling
    */
-  async saveRecord(record: Omit<PainRecord, 'id' | 'createdAt' | 'updatedAt'>): Promise<PainRecord> {
+  async saveRecord(
+    record: Omit<PainRecord, "id" | "createdAt" | "updatedAt">,
+  ): Promise<PainRecord> {
     try {
       // Validate the record
       const validationResult = this.validation.validateRecord(record);
       if (!validationResult.isValid) {
         throw new PainTrackerError(
-          'Record validation failed',
-          'VALIDATION_ERROR',
-          validationResult.errors
+          "Record validation failed",
+          "VALIDATION_ERROR",
+          validationResult.errors,
         );
       }
 
@@ -52,15 +51,15 @@ export class PainDataManager implements PainDataManagerInterface {
         ...record,
         id: this.generateId(),
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       // Check for duplicates
       if (this.validation.checkForDuplicates(newRecord, existingRecords)) {
         throw new PainTrackerError(
-          'Duplicate record detected',
-          'VALIDATION_ERROR',
-          { message: 'A similar record already exists for this date and time' }
+          "Duplicate record detected",
+          "VALIDATION_ERROR",
+          { message: "A similar record already exists for this date and time" },
         );
       }
 
@@ -75,11 +74,11 @@ export class PainDataManager implements PainDataManagerInterface {
       if (error instanceof PainTrackerError) {
         throw error;
       }
-      
+
       throw new PainTrackerError(
-        'Failed to save pain record',
-        'STORAGE_ERROR',
-        error
+        "Failed to save pain record",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -87,22 +86,25 @@ export class PainDataManager implements PainDataManagerInterface {
   /**
    * Update an existing pain record
    */
-  async updateRecord(id: string, updates: Partial<PainRecord>): Promise<PainRecord> {
+  async updateRecord(
+    id: string,
+    updates: Partial<PainRecord>,
+  ): Promise<PainRecord> {
     try {
       // Create backup before modifying data
       await this.storage.createAutoBackup();
 
       // Load existing records
       const existingRecords = await this.getAllRecords();
-      
+
       // Find the record to update
-      const recordIndex = existingRecords.findIndex(record => record.id === id);
+      const recordIndex = existingRecords.findIndex(
+        (record) => record.id === id,
+      );
       if (recordIndex === -1) {
-        throw new PainTrackerError(
-          'Record not found',
-          'VALIDATION_ERROR',
-          { id }
-        );
+        throw new PainTrackerError("Record not found", "VALIDATION_ERROR", {
+          id,
+        });
       }
 
       // Create updated record
@@ -110,16 +112,16 @@ export class PainDataManager implements PainDataManagerInterface {
         ...existingRecords[recordIndex],
         ...updates,
         id, // Ensure ID cannot be changed
-        updatedAt: new Date()
+        updatedAt: new Date(),
       };
 
       // Validate the updated record
       const validationResult = this.validation.validateRecord(updatedRecord);
       if (!validationResult.isValid) {
         throw new PainTrackerError(
-          'Updated record validation failed',
-          'VALIDATION_ERROR',
-          validationResult.errors
+          "Updated record validation failed",
+          "VALIDATION_ERROR",
+          validationResult.errors,
         );
       }
 
@@ -135,11 +137,11 @@ export class PainDataManager implements PainDataManagerInterface {
       if (error instanceof PainTrackerError) {
         throw error;
       }
-      
+
       throw new PainTrackerError(
-        'Failed to update pain record',
-        'STORAGE_ERROR',
-        error
+        "Failed to update pain record",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -154,19 +156,21 @@ export class PainDataManager implements PainDataManagerInterface {
 
       // Load existing records
       const existingRecords = await this.getAllRecords();
-      
+
       // Find the record to delete
-      const recordIndex = existingRecords.findIndex(record => record.id === id);
+      const recordIndex = existingRecords.findIndex(
+        (record) => record.id === id,
+      );
       if (recordIndex === -1) {
-        throw new PainTrackerError(
-          'Record not found',
-          'VALIDATION_ERROR',
-          { id }
-        );
+        throw new PainTrackerError("Record not found", "VALIDATION_ERROR", {
+          id,
+        });
       }
 
       // Remove the record from the array
-      const updatedRecords = existingRecords.filter(record => record.id !== id);
+      const updatedRecords = existingRecords.filter(
+        (record) => record.id !== id,
+      );
 
       // Save to storage
       await this.storage.save(STORAGE_KEYS.PAIN_RECORDS, updatedRecords);
@@ -174,11 +178,11 @@ export class PainDataManager implements PainDataManagerInterface {
       if (error instanceof PainTrackerError) {
         throw error;
       }
-      
+
       throw new PainTrackerError(
-        'Failed to delete pain record',
-        'STORAGE_ERROR',
-        error
+        "Failed to delete pain record",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -189,12 +193,12 @@ export class PainDataManager implements PainDataManagerInterface {
   async getRecord(id: string): Promise<PainRecord | null> {
     try {
       const records = await this.getAllRecords();
-      return records.find(record => record.id === id) || null;
+      return records.find((record) => record.id === id) || null;
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to retrieve pain record',
-        'STORAGE_ERROR',
-        error
+        "Failed to retrieve pain record",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -205,7 +209,7 @@ export class PainDataManager implements PainDataManagerInterface {
   async getAllRecords(): Promise<PainRecord[]> {
     try {
       const records = await this.storage.load(STORAGE_KEYS.PAIN_RECORDS);
-      
+
       if (!records) {
         return [];
       }
@@ -214,9 +218,9 @@ export class PainDataManager implements PainDataManagerInterface {
       return records.map(this.deserializeRecord);
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to retrieve pain records',
-        'STORAGE_ERROR',
-        error
+        "Failed to retrieve pain records",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -227,16 +231,20 @@ export class PainDataManager implements PainDataManagerInterface {
   async getRecordsByDateRange(start: Date, end: Date): Promise<PainRecord[]> {
     try {
       const allRecords = await this.getAllRecords();
-      
-      return allRecords.filter(record => {
-        const recordDate = new Date(record.date);
-        return recordDate >= start && recordDate <= end;
-      }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+      return allRecords
+        .filter((record) => {
+          const recordDate = new Date(record.date);
+          return recordDate >= start && recordDate <= end;
+        })
+        .sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        );
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to retrieve records by date range',
-        'STORAGE_ERROR',
-        error
+        "Failed to retrieve records by date range",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -244,19 +252,24 @@ export class PainDataManager implements PainDataManagerInterface {
   /**
    * Get pain records by pain level range
    */
-  async getRecordsByPainLevel(minLevel: number, maxLevel?: number): Promise<PainRecord[]> {
+  async getRecordsByPainLevel(
+    minLevel: number,
+    maxLevel?: number,
+  ): Promise<PainRecord[]> {
     try {
       const allRecords = await this.getAllRecords();
       const max = maxLevel !== undefined ? maxLevel : 10;
-      
-      return allRecords.filter(record => 
-        record.painLevel >= minLevel && record.painLevel <= max
-      ).sort((a, b) => b.painLevel - a.painLevel);
+
+      return allRecords
+        .filter(
+          (record) => record.painLevel >= minLevel && record.painLevel <= max,
+        )
+        .sort((a, b) => b.painLevel - a.painLevel);
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to retrieve records by pain level',
-        'STORAGE_ERROR',
-        error
+        "Failed to retrieve records by pain level",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -264,18 +277,22 @@ export class PainDataManager implements PainDataManagerInterface {
   /**
    * Get pain records by menstrual status
    */
-  async getRecordsByMenstrualStatus(status: MenstrualStatus): Promise<PainRecord[]> {
+  async getRecordsByMenstrualStatus(
+    status: MenstrualStatus,
+  ): Promise<PainRecord[]> {
     try {
       const allRecords = await this.getAllRecords();
-      
-      return allRecords.filter(record => 
-        record.menstrualStatus === status
-      ).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+      return allRecords
+        .filter((record) => record.menstrualStatus === status)
+        .sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        );
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to retrieve records by menstrual status',
-        'STORAGE_ERROR',
-        error
+        "Failed to retrieve records by menstrual status",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -287,49 +304,69 @@ export class PainDataManager implements PainDataManagerInterface {
     try {
       const allRecords = await this.getAllRecords();
       const searchTerm = query.toLowerCase().trim();
-      
+
       if (!searchTerm) {
         return allRecords;
       }
 
-      return allRecords.filter(record => {
-        // Search in notes
-        if (record.notes && record.notes.toLowerCase().includes(searchTerm)) {
-          return true;
-        }
+      return allRecords
+        .filter((record) => {
+          // Search in notes
+          if (record.notes && record.notes.toLowerCase().includes(searchTerm)) {
+            return true;
+          }
 
-        // Search in pain types
-        if (record.painTypes.some(type => type.toLowerCase().includes(searchTerm))) {
-          return true;
-        }
+          // Search in pain types
+          if (
+            record.painTypes.some((type) =>
+              type.toLowerCase().includes(searchTerm),
+            )
+          ) {
+            return true;
+          }
 
-        // Search in locations
-        if (record.locations.some(location => location.toLowerCase().includes(searchTerm))) {
-          return true;
-        }
+          // Search in locations
+          if (
+            record.locations.some((location) =>
+              location.toLowerCase().includes(searchTerm),
+            )
+          ) {
+            return true;
+          }
 
-        // Search in symptoms
-        if (record.symptoms.some(symptom => symptom.toLowerCase().includes(searchTerm))) {
-          return true;
-        }
+          // Search in symptoms
+          if (
+            record.symptoms.some((symptom) =>
+              symptom.toLowerCase().includes(searchTerm),
+            )
+          ) {
+            return true;
+          }
 
-        // Search in medications
-        if (record.medications.some(med => med.name.toLowerCase().includes(searchTerm))) {
-          return true;
-        }
+          // Search in medications
+          if (
+            record.medications.some((med) =>
+              med.name.toLowerCase().includes(searchTerm),
+            )
+          ) {
+            return true;
+          }
 
-        // Search in menstrual status
-        if (record.menstrualStatus.toLowerCase().includes(searchTerm)) {
-          return true;
-        }
+          // Search in menstrual status
+          if (record.menstrualStatus.toLowerCase().includes(searchTerm)) {
+            return true;
+          }
 
-        return false;
-      }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+          return false;
+        })
+        .sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        );
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to search pain records',
-        'STORAGE_ERROR',
-        error
+        "Failed to search pain records",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -340,22 +377,26 @@ export class PainDataManager implements PainDataManagerInterface {
   async exportData(): Promise<StoredData> {
     try {
       const records = await this.getAllRecords();
-      const preferences = await this.storage.load(STORAGE_KEYS.USER_PREFERENCES);
+      const preferences = await this.storage.load(
+        STORAGE_KEYS.USER_PREFERENCES,
+      );
       const metadata = await this.storage.load(STORAGE_KEYS.METADATA);
-      const schemaVersion = await this.storage.load(STORAGE_KEYS.SCHEMA_VERSION);
+      const schemaVersion = await this.storage.load(
+        STORAGE_KEYS.SCHEMA_VERSION,
+      );
 
       return {
         records,
         preferences,
         schemaVersion,
         lastBackup: new Date(),
-        metadata
+        metadata,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to export data',
-        'EXPORT_ERROR',
-        error
+        "Failed to export data",
+        "EXPORT_ERROR",
+        error,
       );
     }
   }
@@ -368,8 +409,8 @@ export class PainDataManager implements PainDataManagerInterface {
       // Validate imported data
       if (!this.validateImportData(data)) {
         throw new PainTrackerError(
-          'Invalid import data format',
-          'VALIDATION_ERROR'
+          "Invalid import data format",
+          "VALIDATION_ERROR",
         );
       }
 
@@ -381,15 +422,19 @@ export class PainDataManager implements PainDataManagerInterface {
       data.records.forEach((record, index) => {
         const validationResult = this.validation.validateRecord(record);
         if (!validationResult.isValid) {
-          validationErrors.push(`Record ${index + 1}: ${validationResult.errors.map(e => e.message).join(', ')}`);
+          validationErrors.push(
+            `Record ${index + 1}: ${validationResult.errors
+              .map((e) => e.message)
+              .join(", ")}`,
+          );
         }
       });
 
       if (validationErrors.length > 0) {
         throw new PainTrackerError(
-          'Import data contains invalid records',
-          'VALIDATION_ERROR',
-          validationErrors
+          "Import data contains invalid records",
+          "VALIDATION_ERROR",
+          validationErrors,
         );
       }
 
@@ -399,11 +444,11 @@ export class PainDataManager implements PainDataManagerInterface {
       if (error instanceof PainTrackerError) {
         throw error;
       }
-      
+
       throw new PainTrackerError(
-        'Failed to import data',
-        'STORAGE_ERROR',
-        error
+        "Failed to import data",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -415,14 +460,14 @@ export class PainDataManager implements PainDataManagerInterface {
     try {
       // Create backup before clearing
       await this.storage.createAutoBackup();
-      
+
       // Clear all data
       await this.storage.clear();
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to clear all data',
-        'STORAGE_ERROR',
-        error
+        "Failed to clear all data",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -445,31 +490,34 @@ export class PainDataManager implements PainDataManagerInterface {
           totalRecords: 0,
           dateRange: { start: null, end: null },
           averagePainLevel: 0,
-          storageSize
+          storageSize,
         };
       }
 
-      const sortedRecords = records.sort((a, b) => 
-        new Date(a.date).getTime() - new Date(b.date).getTime()
+      const sortedRecords = records.sort(
+        (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
       );
 
-      const totalPainLevel = records.reduce((sum, record) => sum + record.painLevel, 0);
+      const totalPainLevel = records.reduce(
+        (sum, record) => sum + record.painLevel,
+        0,
+      );
       const averagePainLevel = totalPainLevel / records.length;
 
       return {
         totalRecords: records.length,
         dateRange: {
           start: new Date(sortedRecords[0].date),
-          end: new Date(sortedRecords[sortedRecords.length - 1].date)
+          end: new Date(sortedRecords[sortedRecords.length - 1].date),
         },
         averagePainLevel: Math.round(averagePainLevel * 10) / 10,
-        storageSize
+        storageSize,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to get data statistics',
-        'STORAGE_ERROR',
-        error
+        "Failed to get data statistics",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -490,11 +538,14 @@ export class PainDataManager implements PainDataManagerInterface {
 
       // Remove duplicate records (same date, time, and pain level)
       const uniqueRecords = records.filter((record, index, array) => {
-        return array.findIndex(r => 
-          r.date === record.date && 
-          r.time === record.time && 
-          r.painLevel === record.painLevel
-        ) === index;
+        return (
+          array.findIndex(
+            (r) =>
+              r.date === record.date &&
+              r.time === record.time &&
+              r.painLevel === record.painLevel,
+          ) === index
+        );
       });
 
       // Save cleaned records
@@ -507,13 +558,13 @@ export class PainDataManager implements PainDataManagerInterface {
 
       return {
         removedRecords: initialCount - uniqueRecords.length,
-        optimizedSize: finalSize
+        optimizedSize: finalSize,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to perform data cleanup',
-        'STORAGE_ERROR',
-        error
+        "Failed to perform data cleanup",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -522,7 +573,9 @@ export class PainDataManager implements PainDataManagerInterface {
    * Generate a unique ID for new records
    */
   private generateId(): string {
-    return `pain_record_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `pain_record_${Date.now()}_${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
   }
 
   /**
@@ -532,7 +585,7 @@ export class PainDataManager implements PainDataManagerInterface {
     return {
       ...record,
       createdAt: new Date(record.createdAt),
-      updatedAt: new Date(record.updatedAt)
+      updatedAt: new Date(record.updatedAt),
     };
   }
 
@@ -542,10 +595,10 @@ export class PainDataManager implements PainDataManagerInterface {
   private validateImportData(data: any): data is StoredData {
     return (
       data &&
-      typeof data === 'object' &&
+      typeof data === "object" &&
       Array.isArray(data.records) &&
-      typeof data.preferences === 'object' &&
-      typeof data.schemaVersion === 'number'
+      typeof data.preferences === "object" &&
+      typeof data.schemaVersion === "number"
     );
   }
 }

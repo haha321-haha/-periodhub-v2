@@ -181,7 +181,7 @@ class SafetyValidationSystem {
 
         const passedCount = this.validationResults.fileIntegrity.passed.length;
         const failedCount = this.validationResults.fileIntegrity.failed.length;
-        
+
         console.log(`✅ 文件完整性: ${passedCount} 通过, ${failedCount} 失败`);
 
         if (this.config.strictMode && failedCount > 0) {
@@ -191,7 +191,7 @@ class SafetyValidationSystem {
 
     async validateSingleFile(filePath) {
         const stats = fs.statSync(filePath);
-        
+
         // 检查文件大小
         if (stats.size === 0) {
             throw new Error('文件为空');
@@ -220,15 +220,15 @@ class SafetyValidationSystem {
 
     async validateJavaScriptSyntax(filePath) {
         const content = fs.readFileSync(filePath, 'utf8');
-        
+
         // 基本语法检查
         try {
             // 简单的语法检查 - 检查匹配的括号
             this.checkBracketMatching(content);
-            
+
             // 检查基本语法错误
             this.checkBasicSyntaxErrors(content);
-            
+
         } catch (error) {
             throw new Error(`语法错误: ${error.message}`);
         }
@@ -237,10 +237,10 @@ class SafetyValidationSystem {
     checkBracketMatching(content) {
         const brackets = { '(': ')', '[': ']', '{': '}' };
         const stack = [];
-        
+
         for (let i = 0; i < content.length; i++) {
             const char = content[i];
-            
+
             if (brackets[char]) {
                 stack.push(char);
             } else if (Object.values(brackets).includes(char)) {
@@ -250,7 +250,7 @@ class SafetyValidationSystem {
                 }
             }
         }
-        
+
         if (stack.length > 0) {
             throw new Error('未闭合的括号');
         }
@@ -259,18 +259,18 @@ class SafetyValidationSystem {
     checkBasicSyntaxErrors(content) {
         // 检查常见语法错误
         const errors = [];
-        
+
         // 检查未闭合的字符串
         const stringMatches = content.match(/(['"`])/g);
         if (stringMatches && stringMatches.length % 2 !== 0) {
             errors.push('可能存在未闭合的字符串');
         }
-        
+
         // 检查基本的关键词错误
         if (content.includes('functoin') || content.includes('consoel')) {
             errors.push('发现常见拼写错误');
         }
-        
+
         if (errors.length > 0) {
             throw new Error(errors.join(', '));
         }
@@ -292,7 +292,7 @@ class SafetyValidationSystem {
         for (const rule of this.structureRules) {
             try {
                 const result = await rule.check();
-                
+
                 if (result.valid) {
                     console.log(`✅ ${rule.name}: ${rule.description}`);
                 } else {
@@ -326,26 +326,26 @@ class SafetyValidationSystem {
 
     async validatePackageJson() {
         const packagePath = path.join(this.config.targetDir, 'package.json');
-        
+
         if (!fs.existsSync(packagePath)) {
             return { valid: false, message: 'package.json 不存在' };
         }
 
         try {
             const packageContent = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
-            
+
             const required = ['name', 'version', 'scripts'];
             const missing = required.filter(field => !packageContent[field]);
-            
+
             if (missing.length > 0) {
-                return { 
-                    valid: false, 
-                    message: `缺少必需字段: ${missing.join(', ')}` 
+                return {
+                    valid: false,
+                    message: `缺少必需字段: ${missing.join(', ')}`
                 };
             }
 
             return { valid: true, message: 'package.json 结构正确' };
-            
+
         } catch (error) {
             return { valid: false, message: `package.json 格式错误: ${error.message}` };
         }
@@ -353,10 +353,10 @@ class SafetyValidationSystem {
 
     async validateNextConfig() {
         const configPath = path.join(this.config.targetDir, 'next.config.js');
-        
+
         if (!fs.existsSync(configPath)) {
-            return { 
-                valid: true, 
+            return {
+                valid: true,
                 message: 'next.config.js 不存在（可选）',
                 suggestions: ['如果这是Next.js项目，建议添加next.config.js配置文件']
             };
@@ -364,14 +364,14 @@ class SafetyValidationSystem {
 
         try {
             const configContent = fs.readFileSync(configPath, 'utf8');
-            
+
             // 基本的Next.js配置验证
             if (!configContent.includes('module.exports')) {
                 return { valid: false, message: 'next.config.js 缺少 module.exports' };
             }
 
             return { valid: true, message: 'Next.js配置正确' };
-            
+
         } catch (error) {
             return { valid: false, message: `Next.js配置错误: ${error.message}` };
         }
@@ -379,10 +379,10 @@ class SafetyValidationSystem {
 
     async validateTypeScriptConfig() {
         const tsconfigPath = path.join(this.config.targetDir, 'tsconfig.json');
-        
+
         if (!fs.existsSync(tsconfigPath)) {
-            return { 
-                valid: true, 
+            return {
+                valid: true,
                 message: 'tsconfig.json 不存在（可选）',
                 suggestions: ['如果使用TypeScript，建议添加tsconfig.json配置文件']
             };
@@ -390,13 +390,13 @@ class SafetyValidationSystem {
 
         try {
             const tsconfigContent = JSON.parse(fs.readFileSync(tsconfigPath, 'utf8'));
-            
+
             if (!tsconfigContent.compilerOptions) {
                 return { valid: false, message: 'tsconfig.json 缺少 compilerOptions' };
             }
 
             return { valid: true, message: 'TypeScript配置正确' };
-            
+
         } catch (error) {
             return { valid: false, message: `TypeScript配置错误: ${error.message}` };
         }
@@ -435,7 +435,7 @@ class SafetyValidationSystem {
         for (const rule of this.securityRules) {
             try {
                 const result = await rule.check();
-                
+
                 if (result.passed) {
                     console.log(`✅ ${rule.name}: ${rule.description}`);
                     this.validationResults.securityChecks.passed.push({
@@ -446,7 +446,7 @@ class SafetyValidationSystem {
                 } else {
                     const level = rule.severity === 'high' ? '❌' : rule.severity === 'medium' ? '⚠️' : '💡';
                     console.log(`${level} ${rule.name}: ${result.message}`);
-                    
+
                     const issue = {
                         name: rule.name,
                         description: rule.description,
@@ -474,7 +474,7 @@ class SafetyValidationSystem {
 
         const failedCount = this.validationResults.securityChecks.failed.length;
         const warningCount = this.validationResults.securityChecks.warnings.length;
-        
+
         console.log(`安全检查: ${failedCount === 0 ? '✅ 通过' : `❌ ${failedCount} 个严重问题`}, ${warningCount} 个警告`);
     }
 
@@ -496,7 +496,7 @@ class SafetyValidationSystem {
         for (const filePath of allFiles) {
             const content = fs.readFileSync(filePath, 'utf8');
             const relativePath = path.relative(this.config.targetDir, filePath);
-            
+
             for (const pattern of suspiciousPatterns) {
                 const matches = content.match(pattern);
                 if (matches) {
@@ -511,8 +511,8 @@ class SafetyValidationSystem {
 
         return {
             passed: suspiciousFiles.length === 0,
-            message: suspiciousFiles.length > 0 ? 
-                `发现 ${suspiciousFiles.length} 个可疑代码模式` : 
+            message: suspiciousFiles.length > 0 ?
+                `发现 ${suspiciousFiles.length} 个可疑代码模式` :
                 '未发现可疑代码模式',
             details: suspiciousFiles
         };
@@ -520,7 +520,7 @@ class SafetyValidationSystem {
 
     async checkDependencySafety() {
         const packagePath = path.join(this.config.targetDir, 'package.json');
-        
+
         if (!fs.existsSync(packagePath)) {
             return { passed: true, message: '没有package.json，跳过依赖检查' };
         }
@@ -544,8 +544,8 @@ class SafetyValidationSystem {
 
             return {
                 passed: foundDangerous.length === 0,
-                message: foundDangerous.length > 0 ? 
-                    `发现潜在危险的依赖: ${foundDangerous.join(', ')}` : 
+                message: foundDangerous.length > 0 ?
+                    `发现潜在危险的依赖: ${foundDangerous.join(', ')}` :
                     '依赖安全检查通过',
                 details: foundDangerous
             };
@@ -570,7 +570,7 @@ class SafetyValidationSystem {
         for (const filePath of allFiles) {
             const content = fs.readFileSync(filePath, 'utf8');
             const relativePath = path.relative(this.config.targetDir, filePath);
-            
+
             for (const { name, pattern } of secretPatterns) {
                 const matches = content.match(pattern);
                 if (matches) {
@@ -585,8 +585,8 @@ class SafetyValidationSystem {
 
         return {
             passed: secretsFound.length === 0,
-            message: secretsFound.length > 0 ? 
-                `发现潜在的敏感信息: ${secretsFound.length} 处` : 
+            message: secretsFound.length > 0 ?
+                `发现潜在的敏感信息: ${secretsFound.length} 处` :
                 '未发现敏感信息泄露',
             details: secretsFound
         };
@@ -600,7 +600,7 @@ class SafetyValidationSystem {
             try {
                 const stats = fs.statSync(filePath);
                 const mode = stats.mode & parseInt('777', 8);
-                
+
                 // 检查是否有执行权限（对于非脚本文件）
                 const ext = path.extname(filePath);
                 if (!['.sh', '.py', '.pl'].includes(ext) && (mode & parseInt('111', 8))) {
@@ -616,8 +616,8 @@ class SafetyValidationSystem {
 
         return {
             passed: issues.length === 0,
-            message: issues.length > 0 ? 
-                `发现 ${issues.length} 个权限问题` : 
+            message: issues.length > 0 ?
+                `发现 ${issues.length} 个权限问题` :
                 '文件权限检查通过',
             details: issues
         };
@@ -638,7 +638,7 @@ class SafetyValidationSystem {
         for (const filePath of allFiles) {
             const content = fs.readFileSync(filePath, 'utf8');
             const relativePath = path.relative(this.config.targetDir, filePath);
-            
+
             for (const pattern of dangerousPatterns) {
                 const matches = content.match(pattern);
                 if (matches) {
@@ -653,8 +653,8 @@ class SafetyValidationSystem {
 
         return {
             passed: issues.length === 0,
-            message: issues.length > 0 ? 
-                `发现潜在的路径遍历风险: ${issues.length} 处` : 
+            message: issues.length > 0 ?
+                `发现潜在的路径遍历风险: ${issues.length} 处` :
                 '路径遍历检查通过',
             details: issues
         };
@@ -673,14 +673,14 @@ class SafetyValidationSystem {
 
         try {
             const startTime = new Date();
-            
+
             // 首先安装依赖
             console.log('📦 安装依赖...');
             await this.runCommand('npm', ['install'], { cwd: this.config.targetDir });
 
             // 尝试构建项目
             console.log('🔨 构建项目...');
-            const buildResult = await this.runCommand('npm', ['run', 'build'], { 
+            const buildResult = await this.runCommand('npm', ['run', 'build'], {
                 cwd: this.config.targetDir,
                 timeout: 120000 // 2分钟超时
             });
@@ -697,7 +697,7 @@ class SafetyValidationSystem {
             this.validationResults.buildTest.output = error.stdout || '';
 
             console.log(`❌ 项目构建失败: ${error.message}`);
-            
+
             if (this.config.strictMode) {
                 throw new Error(`构建测试失败: ${error.message}`);
             }
@@ -730,7 +730,7 @@ class SafetyValidationSystem {
 
             child.on('close', (code) => {
                 clearTimeout(timeout);
-                
+
                 if (code === 0) {
                     resolve({ stdout, stderr, code });
                 } else {
@@ -787,11 +787,11 @@ class SafetyValidationSystem {
     }
 
     calculateIntegrityScore() {
-        const total = this.validationResults.fileIntegrity.passed.length + 
+        const total = this.validationResults.fileIntegrity.passed.length +
                      this.validationResults.fileIntegrity.failed.length;
-        
+
         if (total === 0) return 0;
-        
+
         return (this.validationResults.fileIntegrity.passed.length / total) * 100;
     }
 
@@ -806,11 +806,11 @@ class SafetyValidationSystem {
     calculateSecurityScore() {
         const failedCount = this.validationResults.securityChecks.failed.length;
         const warningCount = this.validationResults.securityChecks.warnings.length;
-        
+
         if (failedCount > 0) {
             return Math.max(0, 50 - failedCount * 25); // 每个严重问题扣25分
         }
-        
+
         return Math.max(80, 100 - warningCount * 5); // 每个警告扣5分，最低80分
     }
 
@@ -818,7 +818,7 @@ class SafetyValidationSystem {
         if (!this.config.testProject) {
             return 85; // 如果没有测试构建，给默认分数
         }
-        
+
         return this.validationResults.buildTest.success ? 100 : 0;
     }
 
@@ -893,7 +893,7 @@ class SafetyValidationSystem {
                 overallStatus: this.validationResults.overallStatus,
                 overallScore: this.validationResults.overallScore,
                 scores: this.validationResults.scores,
-                totalFiles: this.validationResults.fileIntegrity.passed.length + 
+                totalFiles: this.validationResults.fileIntegrity.passed.length +
                            this.validationResults.fileIntegrity.failed.length,
                 passedFiles: this.validationResults.fileIntegrity.passed.length,
                 securityIssues: this.validationResults.securityChecks.failed.length,
@@ -923,7 +923,7 @@ class SafetyValidationSystem {
 
     async generateMarkdownReport(report) {
         let markdown = '# 🔒 安全验证和测试报告\n\n';
-        
+
         markdown += `**验证时间**: ${new Date(report.metadata.timestamp).toLocaleString()}\n`;
         markdown += `**目标目录**: ${report.metadata.targetDir}\n`;
         markdown += `**整体状态**: ${this.getStatusIcon(report.summary.overallStatus)} ${report.summary.overallStatus.toUpperCase()}\n`;
@@ -976,7 +976,7 @@ class SafetyValidationSystem {
             markdown += '\n';
         }
 
-        if (this.validationResults.securityChecks.failed.length === 0 && 
+        if (this.validationResults.securityChecks.failed.length === 0 &&
             this.validationResults.securityChecks.warnings.length === 0) {
             markdown += '✅ 所有安全检查通过\n\n';
         }
@@ -997,7 +997,7 @@ class SafetyValidationSystem {
         if (report.recommendations.length > 0) {
             markdown += '## 🚀 推荐操作\n';
             report.recommendations.forEach((rec, index) => {
-                const priority = rec.priority === 'high' ? '🔥' : 
+                const priority = rec.priority === 'high' ? '🔥' :
                                rec.priority === 'medium' ? '⚡' : '📝';
                 markdown += `${index + 1}. ${priority} **${rec.category}**: ${rec.message}\n`;
                 if (rec.details && rec.details.length > 0) {
@@ -1047,7 +1047,7 @@ class SafetyValidationSystem {
             <p><strong>验证时间:</strong> ${new Date(report.metadata.timestamp).toLocaleString()}</p>
             <p><strong>目标目录:</strong> ${report.metadata.targetDir}</p>
             <h2 class="status-${report.summary.overallStatus}">
-                状态: ${report.summary.overallStatus.toUpperCase()} 
+                状态: ${report.summary.overallStatus.toUpperCase()}
                 (${report.summary.overallScore.toFixed(1)}/100)
             </h2>
         </div>
@@ -1092,10 +1092,10 @@ class SafetyValidationSystem {
 
         <h2>📁 文件列表</h2>
         <div class="files-list">
-            ${this.validationResults.fileIntegrity.passed.map(file => 
+            ${this.validationResults.fileIntegrity.passed.map(file =>
                 `<div>✅ ${path.relative(this.config.targetDir, file)}</div>`
             ).join('')}
-            ${this.validationResults.fileIntegrity.failed.map(failure => 
+            ${this.validationResults.fileIntegrity.failed.map(failure =>
                 `<div>❌ ${failure.file} - ${failure.error}</div>`
             ).join('')}
         </div>
@@ -1120,14 +1120,14 @@ class SafetyValidationSystem {
     // 辅助方法
     async getAllFiles(dirPath, extensions = null) {
         const files = [];
-        
+
         const scanDirectory = (currentPath) => {
             const items = fs.readdirSync(currentPath);
-            
+
             for (const item of items) {
                 const itemPath = path.join(currentPath, item);
                 const stats = fs.statSync(itemPath);
-                
+
                 if (stats.isDirectory()) {
                     // 跳过node_modules等目录
                     if (!['node_modules', '.git', '.next', 'dist', 'build'].includes(item)) {
@@ -1149,7 +1149,7 @@ class SafetyValidationSystem {
         return new Promise((resolve, reject) => {
             const hash = crypto.createHash('sha256');
             const stream = fs.createReadStream(filePath);
-            
+
             stream.on('data', data => hash.update(data));
             stream.on('end', () => resolve(hash.digest('hex')));
             stream.on('error', reject);
@@ -1160,7 +1160,7 @@ class SafetyValidationSystem {
 // 使用示例和CLI接口
 async function main() {
     const args = process.argv.slice(2);
-    
+
     const config = {
         workspaceDir: './recovery-workspace',
         targetDir: '../recovered',
@@ -1172,25 +1172,25 @@ async function main() {
 
     try {
         console.log('🔒 启动安全验证和测试系统');
-        
+
         const validator = new SafetyValidationSystem(config);
         const results = await validator.validate();
-        
+
         console.log(`\n🎉 验证完成！整体状态: ${results.overallStatus.toUpperCase()}`);
         console.log(`📊 综合评分: ${results.overallScore.toFixed(1)}/100`);
-        
+
         if (results.recommendations.length > 0) {
             console.log(`\n📋 发现 ${results.recommendations.length} 条改进建议，详见验证报告`);
         }
-        
+
         // 根据结果设置退出代码
-        if (results.overallStatus === 'poor' || 
+        if (results.overallStatus === 'poor' ||
             (config.strictMode && results.overallScore < 80)) {
             process.exit(1);
         } else {
             process.exit(0);
         }
-        
+
     } catch (error) {
         console.error('\n❌ 验证系统执行失败:', error.message);
         process.exit(1);
@@ -1234,7 +1234,7 @@ module.exports = SafetyValidationSystem;
 
 ### 📊 完成的十大系统模块：
 1. ✅ **环境设置** - 工作环境验证和初始化
-2. ✅ **文件收集** - 自动发现和验证misc文件 
+2. ✅ **文件收集** - 自动发现和验证misc文件
 3. ✅ **内容分析** - AI驱动的深度内容分析
 4. ✅ **自动分类** - 智能文件分类和去重系统
 5. ✅ **文件名建议** - 基于内容的智能命名引擎

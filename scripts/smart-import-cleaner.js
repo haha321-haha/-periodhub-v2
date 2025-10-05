@@ -20,7 +20,7 @@ const cleanupStrategies = {
     preserveDynamic: true,
     preserveConditional: true
   },
-  
+
   // 平衡策略：使用多个工具交叉验证
   balanced: {
     tools: ['eslint', 'unimported', 'depcheck'],
@@ -28,7 +28,7 @@ const cleanupStrategies = {
     preserveDynamic: true,
     preserveConditional: false
   },
-  
+
   // 激进策略：尽可能清理所有未使用导入
   aggressive: {
     tools: ['eslint', 'unimported', 'depcheck', 'ts-unused-exports'],
@@ -57,32 +57,32 @@ const conditionalPatterns = [
 async function smartImportCleanup(strategy = 'balanced') {
   console.log(`🎯 使用策略: ${strategy}`);
   console.log('─'.repeat(50));
-  
+
   const config = cleanupStrategies[strategy];
   if (!config) {
     throw new Error(`未知策略: ${strategy}`);
   }
-  
+
   // 1. 多工具分析
   console.log('🔍 多工具分析未使用导入...');
   const analysisResults = await runMultiToolAnalysis(config.tools);
-  
+
   // 2. 交叉验证结果
   console.log('🔍 交叉验证分析结果...');
   const validatedResults = await crossValidateResults(analysisResults);
-  
+
   // 3. 安全清理
   console.log('🧹 安全清理未使用导入...');
   const cleanupResults = await safeCleanup(validatedResults, config);
-  
+
   // 4. 验证清理结果
   console.log('✅ 验证清理结果...');
   const validationResults = await validateCleanup();
-  
+
   // 5. 生成清理报告
   console.log('📊 生成清理报告...');
   await generateCleanupReport(cleanupResults, validationResults);
-  
+
   console.log('🎉 智能导入清理完成！');
 }
 
@@ -94,7 +94,7 @@ async function runMultiToolAnalysis(tools) {
     depcheck: null,
     tsUnusedExports: null
   };
-  
+
   // ESLint分析
   if (tools.includes('eslint')) {
     console.log('📝 运行ESLint分析...');
@@ -107,7 +107,7 @@ async function runMultiToolAnalysis(tools) {
       console.log('⚠️  ESLint分析失败');
     }
   }
-  
+
   // unimported分析
   if (tools.includes('unimported')) {
     console.log('📝 运行unimported分析...');
@@ -120,7 +120,7 @@ async function runMultiToolAnalysis(tools) {
       console.log('⚠️  unimported分析失败');
     }
   }
-  
+
   // depcheck分析
   if (tools.includes('depcheck')) {
     console.log('📝 运行depcheck分析...');
@@ -133,7 +133,7 @@ async function runMultiToolAnalysis(tools) {
       console.log('⚠️  depcheck分析失败');
     }
   }
-  
+
   // ts-unused-exports分析
   if (tools.includes('ts-unused-exports')) {
     console.log('📝 运行ts-unused-exports分析...');
@@ -146,18 +146,18 @@ async function runMultiToolAnalysis(tools) {
       console.log('⚠️  ts-unused-exports分析失败');
     }
   }
-  
+
   return results;
 }
 
 // 解析ESLint未使用导入
 function parseEslintUnusedImports(eslintReport) {
   const unusedImports = [];
-  
+
   for (const file of eslintReport) {
     if (file.messages) {
       for (const message of file.messages) {
-        if (message.ruleId === '@typescript-eslint/no-unused-vars' && 
+        if (message.ruleId === '@typescript-eslint/no-unused-vars' &&
             message.message.includes('is defined but never used')) {
           unusedImports.push({
             file: file.filePath,
@@ -170,14 +170,14 @@ function parseEslintUnusedImports(eslintReport) {
       }
     }
   }
-  
+
   return unusedImports;
 }
 
 // 解析unimported报告
 function parseUnimportedReport(unimportedReport) {
   const unusedImports = [];
-  
+
   if (unimportedReport.unused) {
     for (const [file, imports] of Object.entries(unimportedReport.unused)) {
       for (const importName of imports) {
@@ -189,14 +189,14 @@ function parseUnimportedReport(unimportedReport) {
       }
     }
   }
-  
+
   return unusedImports;
 }
 
 // 解析depcheck报告
 function parseDepcheckReport(depcheckReport) {
   const unusedDeps = [];
-  
+
   if (depcheckReport.dependencies) {
     for (const dep of depcheckReport.dependencies) {
       unusedDeps.push({
@@ -205,14 +205,14 @@ function parseDepcheckReport(depcheckReport) {
       });
     }
   }
-  
+
   return unusedDeps;
 }
 
 // 解析ts-unused-exports报告
 function parseTsUnusedExports(tsUnusedReport) {
   const unusedExports = [];
-  
+
   if (Array.isArray(tsUnusedReport)) {
     for (const item of tsUnusedReport) {
       unusedExports.push({
@@ -222,7 +222,7 @@ function parseTsUnusedExports(tsUnusedReport) {
       });
     }
   }
-  
+
   return unusedExports;
 }
 
@@ -233,7 +233,7 @@ async function crossValidateResults(analysisResults) {
     mediumConfidence: [],
     lowConfidence: []
   };
-  
+
   // 合并所有结果
   const allResults = [];
   Object.values(analysisResults).forEach(result => {
@@ -241,10 +241,10 @@ async function crossValidateResults(analysisResults) {
       allResults.push(...result);
     }
   });
-  
+
   // 按文件和导入分组
   const groupedResults = groupByFileAndImport(allResults);
-  
+
   // 计算置信度
   for (const [key, results] of Object.entries(groupedResults)) {
     const confidence = calculateConfidence(results);
@@ -253,7 +253,7 @@ async function crossValidateResults(analysisResults) {
       confidence,
       sources: results.map(r => r.source)
     };
-    
+
     if (confidence >= 0.8) {
       validatedResults.highConfidence.push(result);
     } else if (confidence >= 0.5) {
@@ -262,16 +262,16 @@ async function crossValidateResults(analysisResults) {
       validatedResults.lowConfidence.push(result);
     }
   }
-  
+
   console.log(`📊 验证结果: 高置信度 ${validatedResults.highConfidence.length}, 中置信度 ${validatedResults.mediumConfidence.length}, 低置信度 ${validatedResults.lowConfidence.length}`);
-  
+
   return validatedResults;
 }
 
 // 按文件和导入分组
 function groupByFileAndImport(results) {
   const grouped = {};
-  
+
   for (const result of results) {
     const key = `${result.file}:${result.import || result.export || 'unknown'}`;
     if (!grouped[key]) {
@@ -279,7 +279,7 @@ function groupByFileAndImport(results) {
     }
     grouped[key].push(result);
   }
-  
+
   return grouped;
 }
 
@@ -287,20 +287,20 @@ function groupByFileAndImport(results) {
 function calculateConfidence(results) {
   const sourceCount = new Set(results.map(r => r.source)).size;
   const totalCount = results.length;
-  
+
   // 基础置信度：工具数量
   let confidence = sourceCount / 4; // 假设最多4个工具
-  
+
   // 增加置信度：多个工具确认
   if (sourceCount > 1) {
     confidence += 0.2;
   }
-  
+
   // 增加置信度：结果数量
   if (totalCount > 1) {
     confidence += 0.1;
   }
-  
+
   return Math.min(confidence, 1.0);
 }
 
@@ -312,14 +312,14 @@ async function safeCleanup(validatedResults, config) {
     skipped: 0,
     failed: 0
   };
-  
+
   // 只清理高置信度的结果
-  const toClean = validatedResults.highConfidence.filter(result => 
+  const toClean = validatedResults.highConfidence.filter(result =>
     result.confidence >= config.confidence
   );
-  
+
   results.total = toClean.length;
-  
+
   for (const result of toClean) {
     try {
       // 检查是否为动态导入
@@ -328,26 +328,26 @@ async function safeCleanup(validatedResults, config) {
         results.skipped++;
         continue;
       }
-      
+
       // 检查是否为条件导入
       if (config.preserveConditional && isConditionalImport(result)) {
         console.log(`⏭️  跳过条件导入: ${result.file}`);
         results.skipped++;
         continue;
       }
-      
+
       // 执行清理
       await cleanSingleImport(result);
       results.cleaned++;
-      
+
       console.log(`✅ 清理成功: ${result.file}`);
-      
+
     } catch (error) {
       console.log(`❌ 清理失败: ${result.file} - ${error.message}`);
       results.failed++;
     }
   }
-  
+
   return results;
 }
 
@@ -356,15 +356,15 @@ function isDynamicImport(result) {
   if (!result.file || !fs.existsSync(result.file)) {
     return false;
   }
-  
+
   const content = fs.readFileSync(result.file, 'utf8');
-  
+
   for (const pattern of dynamicPatterns) {
     if (pattern.test(content)) {
       return true;
     }
   }
-  
+
   return false;
 }
 
@@ -373,15 +373,15 @@ function isConditionalImport(result) {
   if (!result.file || !fs.existsSync(result.file)) {
     return false;
   }
-  
+
   const content = fs.readFileSync(result.file, 'utf8');
-  
+
   for (const pattern of conditionalPatterns) {
     if (pattern.test(content)) {
       return true;
     }
   }
-  
+
   return false;
 }
 
@@ -389,17 +389,17 @@ function isConditionalImport(result) {
 async function cleanSingleImport(result) {
   const content = fs.readFileSync(result.file, 'utf8');
   let newContent = content;
-  
+
   // 简单的清理逻辑（实际实现会更复杂）
   if (result.import) {
     // 删除未使用的导入行
     const importRegex = new RegExp(`^import\\s+.*\\b${result.import}\\b.*;?$`, 'gm');
     newContent = newContent.replace(importRegex, '');
   }
-  
+
   // 清理空行
   newContent = newContent.replace(/\n\s*\n\s*\n/g, '\n\n');
-  
+
   fs.writeFileSync(result.file, newContent);
 }
 
@@ -408,13 +408,13 @@ async function validateCleanup() {
   try {
     // 检查构建
     execSync('npm run build', { stdio: 'pipe' });
-    
+
     // 检查类型
     execSync('npm run type-check', { stdio: 'pipe' });
-    
+
     // 检查ESLint
     execSync('npx eslint . --ext .ts,.tsx', { stdio: 'pipe' });
-    
+
     return { success: true, errors: [] };
   } catch (error) {
     return { success: false, errors: [error.message] };
@@ -436,7 +436,7 @@ async function generateCleanupReport(cleanupResults, validationResults) {
       successRate: Math.round((cleanupResults.cleaned / cleanupResults.total) * 100)
     }
   };
-  
+
   fs.writeFileSync('import-cleanup-report.json', JSON.stringify(report, null, 2));
   console.log('📄 导入清理报告已保存: import-cleanup-report.json');
 }
@@ -444,7 +444,7 @@ async function generateCleanupReport(cleanupResults, validationResults) {
 // 主执行函数
 async function main() {
   const strategy = process.argv[2] || 'balanced';
-  
+
   try {
     await smartImportCleanup(strategy);
   } catch (error) {
@@ -459,54 +459,3 @@ if (require.main === module) {
 }
 
 module.exports = { smartImportCleanup, cleanupStrategies };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

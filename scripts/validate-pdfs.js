@@ -64,7 +64,7 @@ class PDFValidator {
       items.forEach(item => {
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
-        
+
         if (stat.isDirectory()) {
           files = files.concat(this.scanDirectory(fullPath));
         } else if (item.toLowerCase().endsWith('.pdf')) {
@@ -98,7 +98,7 @@ class PDFValidator {
     for (const configPath of configPaths) {
       if (fs.existsSync(configPath)) {
         console.log(`📄 找到配置文件: ${configPath}`);
-        
+
         const content = fs.readFileSync(configPath, 'utf8');
         this.extractConfigFiles(content);
         break;
@@ -137,7 +137,7 @@ class PDFValidator {
       if (this.actualFiles.has(baseName)) {
         const actualVariants = this.actualFiles.get(baseName);
         const bestMatch = this.findBestMatch(configFileName, actualVariants);
-        
+
         if (bestMatch.filename !== configFileName) {
           this.issues.push({
             type: 'mismatch',
@@ -219,19 +219,19 @@ class PDFValidator {
   // 生成修复建议
   generateSuggestions() {
     console.log('💡 修复建议:');
-    
+
     if (this.stats.mismatched > 0) {
       console.log('   1. 修正文件名映射关系');
     }
-    
+
     if (this.stats.missing > 0) {
       console.log('   2. 创建缺失文件或从配置中移除');
     }
-    
+
     if (this.stats.unconfigured > 0) {
       console.log('   3. 添加未配置的资源到配置文件中');
     }
-    
+
     console.log('   4. 更新统计数据为实际核心资源数量');
     console.log('   5. 建立定期验证机制\n');
   }
@@ -239,14 +239,14 @@ class PDFValidator {
   // 主执行函数
   run() {
     console.log('🚀 启动PDF资源验证脚本\n');
-    
+
     this.scanActualFiles();
     this.parseConfigFile();
     this.validate();
     this.generateReport();
-    
+
     console.log('✅ 验证完成！');
-    
+
     // 返回验证结果
     return {
       success: this.issues.length === 0,
@@ -260,7 +260,7 @@ class PDFValidator {
 if (require.main === module) {
   const validator = new PDFValidator();
   const result = validator.run();
-  
+
   // 根据结果设置退出码
   process.exit(result.success ? 0 : 1);
 }

@@ -7,7 +7,7 @@ export function PageRefreshTool() {
   useEffect(() => {
     // 检查页面是否卡死
     let lastActivity = Date.now();
-    
+
     const checkActivity = () => {
       const now = Date.now();
       if (now - lastActivity > 30000) { // 30秒无活动
@@ -27,7 +27,7 @@ export function PageRefreshTool() {
       }
       lastActivity = now;
     };
-    
+
     // 监听用户活动
     const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
     events.forEach(event => {
@@ -35,10 +35,10 @@ export function PageRefreshTool() {
         lastActivity = Date.now();
       });
     });
-    
+
     // 定期检查
     const interval = setInterval(checkActivity, 10000);
-    
+
     return () => {
       clearInterval(interval);
       events.forEach(event => {
@@ -46,6 +46,6 @@ export function PageRefreshTool() {
       });
     };
   }, []);
-  
+
   return null;
 }

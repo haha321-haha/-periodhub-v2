@@ -194,10 +194,10 @@ export function useOfflineStorage(key: string) {
         timestamp: new Date().toISOString(),
         id: `offline_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
       }];
-      
+
       setOfflineData(newOfflineData);
       localStorage.setItem(`offline_${key}`, JSON.stringify(newOfflineData));
-      
+
       return true;
     } catch (error) {
       console.error('Failed to store offline data:', error);

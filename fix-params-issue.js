@@ -41,7 +41,7 @@ function fixParamsIssue(filePath) {
         /export async function generateMetadata\(\{\s*params:\s*\{\s*locale[^}]*\}\s*\}:\s*\{[^}]*\}\s*\):\s*Promise<Metadata>/g,
         'export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata>'
       );
-      
+
       // 添加 await params
       content = content.replace(
         /export async function generateMetadata\(\{\s*params\s*\}:\s*\{[^}]*\}\s*\):\s*Promise<Metadata>\s*\{/g,
@@ -59,7 +59,7 @@ function fixParamsIssue(filePath) {
         /export default async function (\w+)\(\{\s*params:\s*\{\s*locale[^}]*\}\s*\}:\s*\{[^}]*\}\s*\)/g,
         'export default async function $1({ params }: { params: Promise<{ locale: string }> })'
       );
-      
+
       // 添加 await params
       content = content.replace(
         /export default async function (\w+)\(\{\s*params\s*\}:\s*\{[^}]*\}\s*\)\s*\{/g,
@@ -97,15 +97,3 @@ filesToFix.forEach(filePath => {
 
 console.log(`\n📊 修复完成: ${fixedCount}/${totalCount} 个文件`);
 console.log('🎉 所有 params 问题已修复！');
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,4 +1,15 @@
 {
+  "homePage": {
+    "metadata": {
+      "title": "PeriodHub - Period Pain Relief & Pain Management | 42 Medical Guides + 8 Assessment Tools",
+      "description": "PeriodHub - Professional period pain relief and pain management platform. 42 medical guides on fastest relief methods and effective medications, 8 symptom assessment tools, PDF downloads. Helped 600,000+ women manage menstrual pain with personalized solutions. Start now!",
+      "keywords": "period pain relief,menstrual pain management,women health,period tracking,pain management,symptom assessment,health tools,medical guides,PDF downloads",
+      "ogTitle": "PeriodHub - Period Pain Relief & Pain Management | 42 Medical Guides + 8 Assessment Tools",
+      "ogDescription": "Professional period pain relief and pain management platform with scientific methods and personalized solutions, 42 medical guides and PDF downloads.",
+      "twitterTitle": "PeriodHub - Period Pain Relief & Pain Management | 42 Medical Guides + 8 Assessment Tools",
+      "twitterDescription": "Professional period pain relief and pain management platform with scientific methods, 42 medical guides and PDF downloads."
+    }
+  },
   "header": {
     "logo": "PeriodHub",
     "home": "Home",
@@ -126,27 +137,27 @@
         "cta": "View Guide"
       }
     },
-          "quickLinks": {
-            "title": "Quick Navigation",
-            "healthGuide": "Health Guide",
-            "healthGuideDesc": "Comprehensive health management guide",
-            "viewNow": "View Now",
-            "assessment": {
-              "title": "Symptom Assessment",
-              "description": "Professional health assessment tools",
-              "cta": "Start Assessment"
-            },
-            "resources": "Medical Resources",
-            "resourcesDesc": "Professional medical guide downloads",
-            "downloads": {
-              "cta": "Download Resources"
-            },
-            "solutions": "Scenario Solutions",
-            "solutionsDesc": "Solutions for different scenarios",
-            "scenarios": {
-              "cta": "View Solutions"
-            }
-          }
+    "quickLinks": {
+      "title": "Quick Navigation",
+      "healthGuide": "Health Guide",
+      "healthGuideDesc": "Comprehensive health management guide",
+      "viewNow": "View Now",
+      "assessment": {
+        "title": "Symptom Assessment",
+        "description": "Professional health assessment tools",
+        "cta": "Start Assessment"
+      },
+      "resources": "Medical Resources",
+      "resourcesDesc": "Professional medical guide downloads",
+      "downloads": {
+        "cta": "Download Resources"
+      },
+      "solutions": "Scenario Solutions",
+      "solutionsDesc": "Solutions for different scenarios",
+      "scenarios": {
+        "cta": "View Solutions"
+      }
+    }
   },
   "userSuccessStories": {
     "title": "User Success Stories",
@@ -211,6 +222,13 @@
     },
     "cta": {
       "startNow": "Start Now"
+    },
+    "tools": {
+      "nutrition_generator": "Nutrition Generator",
+      "pain_tracker": "Pain Tracker",
+      "symptom_assessment": "Symptom Assessment",
+      "constitution_test": "Constitution Test",
+      "cycle_tracker": "Cycle Tracker"
     }
   },
   "healthStatistics": {
@@ -241,13 +259,302 @@
     "downloads": "Resource Downloads",
     "guide": "Health Guide"
   },
+  "downloadsPage": {
+    "title": "PDF Resources Download Center - Period Hub",
+    "description": "Period Hub Articles PDF Download Center, 42 curated menstrual health resources including 42 expert articles and 0 PDF resources, bilingual support, mobile-optimized experience.",
+    "keywords": "menstrual health,PDF download,health resources,period management,women health,bilingual,mobile optimized",
+    "openGraph": {
+      "title": "PDF Resources Download Center - Period Hub",
+      "description": "Period Hub Articles PDF Download Center, 42 curated menstrual health resources including 42 expert articles and 0 PDF resources, bilingual support, mobile-optimized experience."
+    },
+    "banner": {
+      "text": "🎉 New PDF Download Center - 42 curated resources, mobile-optimized experience, smart categorized by urgency"
+    },
+    "structuredData": {
+      "name": "PDF Resources Download Center",
+      "description": "Period Hub Articles PDF Download Center, 42 curated menstrual health resources"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "downloadCenter": "PDF Download Center"
+    },
+    "content": {
+      "title": "📚 Articles PDF Download Center",
+      "description": "42 curated resources, smart categorized by urgency, helping you quickly find the right solutions when needed",
+      "statistics": {
+        "expertArticles": "Expert Articles",
+        "pdfResources": "PDF Resources",
+        "languages": "Languages"
+      },
+      "banner": {
+        "title": "💡 Try New Download Center",
+        "description": "Mobile optimized • Smart search • Emergency mode • 42 curated resources",
+        "feedbackButton": "Share Feedback"
+      }
+    }
+  },
+  "naturalTherapiesPage": {
+    "title": "Natural Therapies - PeriodHub",
+    "description": "Explore scientific natural therapies for period pain relief, including heat therapy, herbal teas, acupressure, exercise therapy, and traditional-modern integrated natural health solutions.",
+    "keywords": "natural therapies,period pain relief,heat therapy,herbal tea,acupressure,exercise therapy,TCM constitution,nutrition therapy",
+    "recommendations": {
+      "relatedTools": {
+        "nutritionGenerator": {
+          "title": "Nutrition Recommendation Generator",
+          "description": "Generate personalized natural dietary plans based on constitution to improve period pain through nutrition"
+        },
+        "constitutionTest": {
+          "title": "TCM Constitution Test",
+          "description": "Understand your TCM constitution to choose the most suitable natural therapies and herbal treatments"
+        },
+        "painTracker": {
+          "title": "Pain Tracker",
+          "description": "Record the effectiveness of natural therapies and track which methods best relieve your period pain"
+        }
+      },
+      "relatedArticles": {
+        "medicalGuide": {
+          "title": "Medical Guide to Dysmenorrhea",
+          "description": "Deep understanding of dysmenorrhea causes and scientific principles and application timing of natural therapies",
+          "readTime": "18 min read",
+          "category": "Medical Guide"
+        },
+        "heatTherapy": {
+          "title": "Heat Therapy Complete Guide",
+          "description": "In-depth analysis of heat therapy principles for period pain relief, temperature control and best practices",
+          "readTime": "15 min read",
+          "category": "Natural Therapy"
+        },
+        "herbalTea": {
+          "title": "Herbal Tea Pain Relief",
+          "description": "Herbal tea recipes and drinking guides, traditional herbal remedies like ginger tea and angelica tea",
+          "readTime": "12 min read",
+          "category": "Herbal Therapy"
+        }
+      },
+      "scenarioSolutions": {
+        "exercise": {
+          "title": "Exercise Scenario Management",
+          "description": "Apply natural therapies in exercise, relieve menstrual discomfort through yoga and stretching"
+        },
+        "office": {
+          "title": "Office Environment Health Management",
+          "description": "Natural relief techniques in workplace, discreet acupressure points and heat therapy applications"
+        },
+        "emergencyKit": {
+          "title": "Period Pain Emergency Kit Guide",
+          "description": "Prepare portable natural therapy emergency kit to relieve sudden pain anytime, anywhere"
+        }
+      }
+    },
+    "sections": {
+      "relatedTools": "Related Tools",
+      "relatedArticles": "Related Articles",
+      "scenarioSolutions": "Scenario Solutions"
+    }
+  },
+  "articlePage": {
+    "breadcrumb": {
+      "home": "Home",
+      "articles": "Articles"
+    },
+    "content": {
+      "articleSummary": "Article Summary",
+      "healthExpert": "Health Expert",
+      "quickActions": "Quick Actions",
+      "moreArticles": "More Articles",
+      "medicalDisclaimer": {
+        "title": "⚠️ Medical Disclaimer",
+        "content": "This content is for educational and informational purposes only and is not intended to replace professional medical advice, diagnosis, or treatment. If you have any health concerns or questions, please consult a qualified healthcare professional. Always seek the advice of your physician before making any health-related decisions."
+      },
+      "relatedArticles": {
+        "title": "📚 Related Articles",
+        "subtitle": "Continue exploring more professional health content",
+        "readMore": "Read More",
+        "moreComing": "More Articles Coming Soon",
+        "description": "We are preparing more high-quality health content, stay tuned.",
+        "browseAll": "Browse All Articles"
+      }
+    }
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "description": "Learn how periodhub.health protects your privacy information. We strictly comply with GDPR and other data protection regulations, committed to protecting users' menstrual health data privacy.",
+    "openGraph": {
+      "description": "Learn how periodhub.health protects your privacy information. We strictly comply with GDPR and other data protection regulations, committed to protecting users' menstrual health data privacy."
+    },
+    "dataTable": {
+      "type": "Type",
+      "purpose": "Purpose",
+      "duration": "Duration",
+      "required": "Required"
+    }
+  },
+  "termsOfService": {
+    "title": "Terms of Service",
+    "description": "Learn about the terms and conditions for using periodhub.health, including user responsibilities and service limitations.",
+    "openGraph": {
+      "description": "Learn about the terms and conditions for using periodhub.health, including user responsibilities and service limitations."
+    }
+  },
+  "frameworkDemo": {
+    "title": "Framework Demo - PeriodHub | Technical Feature Showcase",
+    "description": "PeriodHub Framework Demo: Showcase technical features, performance optimizations and user experience features of the website. Provides feature demonstrations for developers and technical teams."
+  },
+  "dataDashboard": {
+    "meta": {
+      "title": "Data Dashboard - PeriodHub | Platform Analytics Center",
+      "description": "PeriodHub Data Dashboard: View platform usage data, user activity, engagement metrics and other key indicators. Provides data insights and decision support for the development team."
+    },
+    "keywords": "data dashboard,platform analytics,user data,activity,engagement,data insights,decision support"
+  },
+  "teenHealth": {
+    "meta": {
+      "title": "Teen Menstrual Health Zone - PeriodHub",
+      "description": "Period health education and management guide designed for teens aged 12-18, providing campus emergency, developmental pain management, emotional support and other professional services."
+    },
+    "keywords": "teen menstrual health,puberty education,period management,school health,mental health,growth support,scientific education"
+  },
+  "healthGuidePage": {
+    "title": "Period Pain Health Guide - PeriodHub",
+    "description": "Professional period pain health management guide providing symptom assessment, pain tracking, natural therapies and other scientific solutions to help you effectively manage menstrual health.",
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Health Guide"
+    },
+    "recommendations": {
+      "relatedTools": {
+        "symptomAssessment": {
+          "title": "Symptom Assessment",
+          "description": "Professional symptom assessment system, scientifically analyze pain type and severity, get personalized health advice"
+        },
+        "painTracker": {
+          "title": "Pain Tracker",
+          "description": "Smart pain tracking system, record symptom patterns, generate health reports, assist doctor diagnosis"
+        },
+        "painImpactCalculator": {
+          "title": "Pain Impact Calculator",
+          "description": "Assess period pain impact on quality of life, quantify health loss, create scientific management plans"
+        }
+      },
+      "relatedArticles": {
+        "medicalGuide": {
+          "title": "Medical Guide to Dysmenorrhea",
+          "description": "Comprehensive dysmenorrhea medical knowledge, complete medical guide from causes to treatment",
+          "readTime": "18 min read",
+          "category": "Medical Guide"
+        },
+        "medicalCare": {
+          "title": "When to Seek Medical Care",
+          "description": "Identify warning signs requiring medical care, master medical timing and health management strategies",
+          "readTime": "15 min read",
+          "category": "Medical Care"
+        },
+        "faq": {
+          "title": "Period Pain FAQ",
+          "description": "Expert answers to common period pain questions, scientifically debunk health myths and concerns",
+          "readTime": "12 min read",
+          "category": "FAQ"
+        }
+      },
+      "healthTopics": {
+        "naturalTherapies": {
+          "title": "Natural Therapies Guide",
+          "description": "Explore 8 scientifically validated natural therapies, side-effect-free health relief solutions"
+        },
+        "scenarioSolutions": {
+          "title": "Scenario Solutions",
+          "description": "Personalized health management strategies for commute, office, exercise and other scenarios"
+        },
+        "teenHealth": {
+          "title": "Teen Health Zone",
+          "description": "Period health education and management guide designed for teens aged 12-18"
+        }
+      }
+    }
+  },
+  "scenarioSolutionsPage": {
+    "title": "Scenario-Based Period Pain Solutions - PeriodHub",
+    "description": "Period pain management solutions for different life scenarios, including professional workplace, exercise, social situations with expert coping strategies and emergency kit preparation guides.",
+    "keywords": "scenario-based period pain solutions,workplace period management,exercise period pain relief,social period etiquette,period emergency kit,period pain relief tips",
+    "teenHealth": {
+      "title": "🌸 Teen Menstrual Health Zone 🌸",
+      "subtitle": "A caring space designed for girls aged 12-18",
+      "description": "Adolescence brings many worries, and \"those days\" each month can be especially concerning. Pain, mood swings, body changes... Don't worry, you're not fighting alone. We've prepared campus emergency guides, developmental pain management, emotional support, and communication skills to help you confidently navigate every period.",
+      "enterZone": "Enter Zone",
+      "campusGuide": "Campus Emergency Guide",
+      "helpTitle": "How Can We Help?",
+      "services": {
+        "campusGuide": "Campus Emergency Guide",
+        "painManagement": "Developmental Pain Management",
+        "emotionalSupport": "Emotional & Mental Support",
+        "communication": "Communication with Parents & Teachers",
+        "peerSharing": "Peer Experience Sharing"
+      }
+    },
+    "emergencyKit": {
+      "specialRecommendation": "Special Recommendation",
+      "title": "Multi-Scenario Emergency Kit List",
+      "description": "From office to commute, from sports field to social gatherings, detailed emergency kit preparation lists help you handle period discomfort confidently in any scenario.",
+      "scenarios": {
+        "office": {
+          "title": "Office Scenario",
+          "description": "Discreet heat patches, pain meds, ginger tea..."
+        },
+        "commute": {
+          "title": "Commute Scenario",
+          "description": "Portable warmers, headphones, warm water..."
+        },
+        "social": {
+          "title": "Social Scenario",
+          "description": "Mini heat patches, comfortable clothes, scarf..."
+        }
+      },
+      "viewCompleteList": "View Complete Emergency Kit List"
+    },
+    "cta": {
+      "title": "Start Your Personalized Pain Management Journey",
+      "description": "Combine our symptom assessment tools and pain tracking system to create the most suitable scenario-based solutions for you.",
+      "startAssessment": "Start Symptom Assessment",
+      "startTracking": "Start Pain Tracking"
+    }
+  },
   "interactiveToolsPage": {
     "title": "Interactive Health Tools - PeriodHub",
     "description": "Professional menstrual health management tools providing symptom assessment, pain tracking, cycle management and personalized health solutions",
-    "toolsIntroduction": "Our interactive tools are based on evidence-based medicine to help you better understand and manage menstrual health.",
-    "otherTools": {
-      "title": "Other Practical Tools"
+    "keywords": "menstrual health management,symptom assessment,pain tracking,period pain management,health tools,personalized recommendations,data analytics",
+    "workplaceWellness": {
+      "title": "Workplace Wellness Column",
+      "description": "Tailored menstrual health management solutions for working women to better manage period health in the workplace",
+      "tools": {
+        "calendar": {
+          "title": "Workplace Wellness Calendar",
+          "description": "Professional workplace wellness management tool to track menstrual impact on work and provide personalized work adjustment recommendations.",
+          "cta": "Start Wellness Management"
+        },
+        "calculator": {
+          "title": "Work Impact Calculator",
+          "description": "Professional period pain impact assessment tool that analyzes how symptoms affect work and daily life, providing personalized management recommendations and workplace adaptation strategies.",
+          "cta": "Start Assessment"
+        }
+      }
     },
+    "prerequisites": {
+      "label": "Prerequisites",
+      "completeFirst": "Complete first:",
+      "cycleTracker": "Cycle Tracker",
+      "constitutionTest": "Constitution Test"
+    },
+    "nutritionGenerator": {
+      "title": "Nutrition Recommendation Generator",
+      "description": "Get personalized nutrition recommendations based on your menstrual cycle, health goals, and TCM constitution. Complete cycle tracking and constitution test first.",
+      "cta": "Start Nutrition Analysis"
+    },
+    "otherTools": {
+      "title": "Other Practical Tools",
+      "description": "More professional menstrual health management tools to help you comprehensively understand and manage period health"
+    },
+    "toolsIntroduction": "Our interactive tools are based on evidence-based medicine to help you better understand and manage menstrual health.",
     "periodPainAssessment": {
       "title": "Period Pain Assessment Tool",
       "description": "Professional period pain symptom assessment to help you understand pain types and severity",
@@ -274,31 +581,478 @@
       "cta": "Start Test"
     },
     "breathingExercise": {
-      "title": "Breathing Relaxation Exercise",
-      "description": "Professional breathing training to help relieve period pain and stress",
+      "title": "4-7-8 Breathing Exercise",
+      "description": "Based on scientifically validated 4-7-8 breathing method, quickly relieves pain by regulating the nervous system. No download required, start practicing immediately.",
+      "subtitle": "Achieve natural pain relief through nervous system regulation",
+      "phases": {
+        "inhale": "Inhale",
+        "hold": "Hold",
+        "exhale": "Exhale"
+      },
+      "instructions": {
+        "title": "Practice Guidance",
+        "inhale": "Inhale",
+        "hold": "Hold",
+        "exhale": "Exhale"
+      },
+      "buttons": {
+        "startPractice": "Start Practice",
+        "stopPractice": "Stop Practice",
+        "practiceAgain": "Practice Again",
+        "oneCycleCompleted": "✅ One cycle completed!"
+      },
+      "currentPhase": "Current phase:",
+      "benefits": {
+        "title": "Scientific benefits:",
+        "painPerception": "Pain perception",
+        "muscleTension": "Muscle tension",
+        "relaxation": "Relaxation level"
+      },
+      "tip": "💡 Tip: Find a comfortable sitting or lying position, relax all muscles. Beginners can do 3-4 cycles.",
+      "timeUnit": "seconds",
       "usageTips": {
-        "title": "Usage Tips",
+        "title": "Usage suggestions:",
         "bestTiming": {
-          "title": "Best Usage Timing",
+          "title": "Best timing:",
           "items": [
-            "Use immediately when experiencing period pain",
-            "Relax during high work stress",
-            "Deep relaxation before bedtime",
-            "Daily stress management practice"
+            "When pain first starts",
+            "When feeling anxious or tense",
+            "Before bedtime relaxation"
           ]
         },
         "precautions": {
-          "title": "Precautions",
+          "title": "Precautions:",
           "items": [
-            "Maintain natural breathing rhythm",
-            "Avoid overexertion in breathing",
-            "Stop if experiencing discomfort",
-            "Practice in a quiet environment"
+            "Find a comfortable sitting or lying position",
+            "Beginners can do 3-4 cycles",
+            "Stop if feeling dizzy"
           ]
         }
       }
     },
     "developmentNote": "More tools are under development, stay tuned!"
+  },
+  "stressManagement": {
+    "title": "Stress Management",
+    "description": "Scientific management of menstrual stress to improve quality of life",
+    "pageTitle": "Stress Management - PeriodHub",
+    "keywords": "stress management,period stress,menstrual health,stress relief,relaxation techniques,workplace stress,women health",
+    "subtitle": "Help you effectively manage period-related stress and anxiety",
+    "startAssessment": "Start Assessment",
+    "learnMore": "Learn More",
+    "backToTools": "Back to Tools",
+    "next": "Next",
+    "previous": "Previous",
+    "complete": "Complete",
+    "restart": "Restart",
+    "save": "Save",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "skip": "Skip",
+    "stressLevels": {
+      "low": "Low",
+      "moderate": "Moderate",
+      "high": "High",
+      "severe": "Severe",
+      "lowDesc": "Low stress level, maintaining good condition",
+      "moderateDesc": "Moderate stress, requires attention and regulation",
+      "highDesc": "High stress, recommend taking relief measures",
+      "severeDesc": "Severe stress, requires professional help"
+    },
+    "resources": {
+      "title": "Resource Recommendations",
+      "subtitle": "More resources to help you manage stress",
+      "articles": {
+        "title": "Related Articles",
+        "stressAndMenstruation": "Relationship between Stress and Menstruation",
+        "relaxationTechniques": "Detailed Relaxation Techniques",
+        "mindfulnessBenefits": "Benefits of Mindfulness Practice"
+      },
+      "tools": {
+        "title": "Related Tools",
+        "painTracker": "Pain Tracker",
+        "cycleTracker": "Cycle Tracker",
+        "breathingExercise": "Breathing Exercise"
+      },
+      "support": {
+        "title": "Support Resources",
+        "community": "Community Support",
+        "professionalHelp": "Professional Help",
+        "emergencyContacts": "Emergency Contacts"
+      }
+    },
+    "tips": {
+      "title": "Practical Tips",
+      "subtitle": "Daily life stress management techniques",
+      "daily": {
+        "title": "Daily Habits",
+        "regularSleep": "Maintain Regular Sleep Schedule",
+        "healthyDiet": "Balanced Diet",
+        "moderateExercise": "Moderate Exercise",
+        "socialConnection": "Maintain Social Connections"
+      },
+      "emergency": {
+        "title": "Emergency Relief",
+        "deepBreathing": "Deep Breathing",
+        "progressiveRelaxation": "Progressive Relaxation",
+        "positiveThinking": "Positive Thinking",
+        "seekHelp": "Seek Help"
+      },
+      "prevention": {
+        "title": "Prevention Measures",
+        "identifyTriggers": "Identify Stress Triggers",
+        "timeManagement": "Time Management",
+        "boundarySetting": "Set Boundaries",
+        "selfCare": "Self-Care"
+      }
+    },
+    "common": {
+      "loading": "Loading...",
+      "error": "An error occurred",
+      "retry": "Retry",
+      "success": "Success",
+      "failed": "Failed",
+      "saved": "Saved",
+      "deleted": "Deleted",
+      "updated": "Updated",
+      "created": "Created",
+      "noData": "No data available",
+      "tryAgain": "Please try again",
+      "contactSupport": "Contact Support",
+      "importantNote": "Important Note",
+      "medicalDisclaimer": "This website content is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional for any health concerns.",
+      "showDetails": "Show Details",
+      "hideDetails": "Hide Details",
+      "learnMore": "Learn More",
+      "breadcrumb": {
+        "home": "Home"
+      }
+    },
+    "neuroendocrine": {
+      "title": "Neuroendocrine Cascade",
+      "subtitle": "Understanding how stress affects menstruation through complex physiological mechanisms",
+      "detailedExplanation": "Detailed Explanation",
+      "acute": {
+        "title": "Acute Stress Response",
+        "description": "Short-term stress activates HPA axis, releases cortisol, usually recovers quickly"
+      },
+      "chronic": {
+        "title": "Chronic Stress Impact",
+        "description": "Long-term stress causes persistent cortisol elevation, may severely affect menstrual cycle"
+      },
+      "keyInsight": "Key Insight",
+      "keyInsightDescription": "Understanding these mechanisms helps better manage stress impact on menstruation"
+    },
+    "evolutionary": {
+      "title": "Evolutionary Biology Perspective",
+      "subtitle": "Why does stress affect menstruation? The ancient wisdom of the body",
+      "mainTitle": "Body's Survival Wisdom",
+      "mainDescription": "Stress effects on menstruation are actually protective mechanisms",
+      "storyTitle": "Ancient Protection Mechanism",
+      "storyContent": "When our ancestors faced life threats, the body would automatically judge that it's not a good time for reproduction and pause ovulation and menstruation.",
+      "modernTitle": "Modern Misinterpretation",
+      "modernContent": "Work stress, relationship issues and other psychological pressures are misinterpreted by the body as survival threats, continuously activating ancient systems.",
+      "realizationTitle": "Key Realizations",
+      "realization1": "Your body's response is not a malfunction",
+      "realization2": "It's executing an ancient protection program",
+      "realization3": "Understanding this can reduce self-blame and anxiety",
+      "practicalTitle": "Practical Advice",
+      "practicalDescription": "When you feel stress affecting your menstruation, try telling yourself:",
+      "selfTalk": "My body is protecting me, this is a normal physiological response. Now I need to tell it: the crisis is over, you can relax.",
+      "action1": {
+        "title": "Cognitive Reframing",
+        "description": "View stress response as protection rather than problem"
+      },
+      "action2": {
+        "title": "Relaxation Training",
+        "description": "Tell your body the crisis is over through relaxation techniques"
+      },
+      "detailsTitle": "Deeper Understanding",
+      "detail1": {
+        "title": "Survival Advantage",
+        "content": "This mechanism helped our ancestors survive in crises"
+      },
+      "detail2": {
+        "title": "Modern Adaptation",
+        "content": "Need to learn to distinguish real threats from psychological stress"
+      },
+      "detail3": {
+        "title": "Self-Compassion",
+        "content": "Maintain understanding and compassion for body's responses"
+      }
+    },
+    "stressTypes": {
+      "comparison": {
+        "title": "Acute vs Chronic Stress",
+        "subtitle": "Understanding characteristics and impacts of different stress types",
+        "keyTakeaway": "Key Takeaway",
+        "keyTakeawayContent": "Acute stress is usually manageable, chronic stress requires systematic intervention.",
+        "action1": {
+          "title": "Acute Stress Management",
+          "description": "Use immediate relief techniques like deep breathing and short breaks"
+        },
+        "action2": {
+          "title": "Chronic Stress Intervention",
+          "description": "Requires long-term strategies and possibly professional help"
+        }
+      }
+    },
+    "assessment": {
+      "title": "Stress Assessment",
+      "subtitle": "Understand your stress condition through scientific assessment",
+      "instructions": "Assessment Instructions",
+      "instructionsDetail": "Please answer the following questions honestly based on your actual situation. This will help us provide you with personalized stress management recommendations.",
+      "questionsPreview": {
+        "title": "Assessment Questions Preview"
+      },
+      "questions": {
+        "q1": {
+          "question": "Have you frequently felt anxious or tense recently?",
+          "options": ["Never", "Occasionally", "Often", "Always"]
+        },
+        "q2": {
+          "question": "How is your sleep quality?",
+          "options": ["Very Good", "Good", "Poor", "Very Poor"]
+        },
+        "q3": {
+          "question": "Do you often feel tired or lack energy?",
+          "options": ["Never", "Occasionally", "Often", "Always"]
+        },
+        "q4": {
+          "question": "Do you easily feel irritable or angry?",
+          "options": ["Never", "Occasionally", "Often", "Always"]
+        },
+        "q5": {
+          "question": "Do you often worry about period-related issues?",
+          "options": ["Never", "Occasionally", "Often", "Always"]
+        }
+      },
+      "benefits": {
+        "title": "Benefits of Assessment",
+        "personalized": {
+          "title": "Personalized Recommendations",
+          "description": "Provide customized stress management strategies based on your answers"
+        },
+        "tracking": {
+          "title": "Progress Tracking",
+          "description": "Record your stress management progress and improvements"
+        },
+        "insights": {
+          "title": "Deep Insights",
+          "description": "Understand how stress affects your menstruation and overall health"
+        }
+      }
+    },
+    "techniques": {
+      "title": "Relaxation Techniques",
+      "subtitle": "Scientific relaxation methods to help you relieve stress",
+      "benefits": {
+        "title": "Benefits"
+      },
+      "breathing": {
+        "title": "Breathing Exercise",
+        "description": "Relax body and mind through breathing regulation",
+        "start": "Start Exercise",
+        "instructions": "Exercise Instructions",
+        "instructionsDetail": "Follow audio guidance for deep breathing exercises, practice for 5-10 minutes each time.",
+        "benefits": {
+          "benefit1": "Immediate relief from tension",
+          "benefit2": "Lower heart rate and blood pressure",
+          "benefit3": "Improve sleep quality"
+        }
+      },
+      "meditation": {
+        "title": "Meditation Practice",
+        "description": "Achieve inner peace through meditation",
+        "start": "Start Meditation",
+        "instructions": "Meditation Instructions",
+        "instructionsDetail": "Follow guided audio for meditation practice, start with 5 minutes and gradually extend.",
+        "benefits": {
+          "benefit1": "Reduce anxiety and depression",
+          "benefit2": "Improve concentration",
+          "benefit3": "Enhance emotional regulation"
+        }
+      },
+      "exercise": {
+        "title": "Light Exercise",
+        "description": "Gentle exercises suitable for menstrual periods",
+        "start": "Start Exercise",
+        "instructions": "Exercise Instructions",
+        "instructionsDetail": "Choose gentle exercises suitable for menstrual periods, such as yoga, walking or stretching.",
+        "benefits": {
+          "benefit1": "Release endorphins",
+          "benefit2": "Improve blood circulation",
+          "benefit3": "Relieve muscle tension"
+        }
+      },
+      "music": {
+        "title": "Music Therapy",
+        "description": "Relax your mood through music",
+        "start": "Start Listening",
+        "instructions": "Music Instructions",
+        "instructionsDetail": "Choose soothing music, close your eyes and listen for 10-15 minutes.",
+        "benefits": {
+          "benefit1": "Activate parasympathetic nervous system",
+          "benefit2": "Reduce cortisol secretion",
+          "benefit3": "Enhance overall well-being"
+        }
+      },
+      "quickTips": {
+        "title": "Quick Tips",
+        "timing": {
+          "title": "Best Timing",
+          "tip1": "Practice after waking up or before bed",
+          "tip2": "Preventive practice before stress peaks",
+          "tip3": "Increase practice frequency one week before period",
+          "tip4": "Brief practice during work breaks"
+        },
+        "precautions": {
+          "title": "Precautions",
+          "tip1": "Choose a quiet and comfortable environment",
+          "tip2": "Wear loose and comfortable clothing",
+          "tip3": "Avoid practicing immediately after meals",
+          "tip4": "Stop immediately if you feel unwell"
+        }
+      }
+    },
+    "progress": {
+      "title": "Progress Tracking",
+      "subtitle": "Record your stress management progress",
+      "today": "Today",
+      "week": "This Week",
+      "month": "This Month",
+      "addEntry": {
+        "title": "Add Entry",
+        "subtitle": "Record your stress condition and techniques used today"
+      },
+      "features": {
+        "stressLevel": {
+          "title": "Stress Level",
+          "description": "1-10 scale assessment"
+        },
+        "techniquesUsed": {
+          "title": "Techniques Used",
+          "description": "Record practiced methods"
+        },
+        "moodRating": {
+          "title": "Mood Rating",
+          "description": "Overall emotional state"
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "Record special feelings"
+        }
+      },
+      "viewHistory": {
+        "title": "View History",
+        "today": {
+          "description": "View today's records"
+        },
+        "week": {
+          "description": "View this week's trends"
+        },
+        "month": {
+          "description": "View monthly statistics"
+        }
+      },
+      "sampleData": {
+        "title": "Data Preview",
+        "averageStress": "Average Stress Level",
+        "techniquesUsed": "Technique Usage Rate",
+        "averageMood": "Average Mood Rating"
+      },
+      "benefits": {
+        "title": "Benefits of Tracking",
+        "insights": {
+          "title": "Deep Insights",
+          "description": "Understand your stress patterns and triggers"
+        },
+        "trends": {
+          "title": "Trend Analysis",
+          "description": "Discover areas for improvement and attention"
+        },
+        "motivation": {
+          "title": "Continuous Motivation",
+          "description": "See progress to enhance persistence"
+        }
+      }
+    },
+    "quantifiedImpact": {
+      "title": "Quantified Impact Data",
+      "subtitle": "Stress impact data based on scientific research",
+      "metrics": {
+        "anxiety": {
+          "title": "Anxiety and Tension"
+        },
+        "depression": {
+          "title": "Depression"
+        },
+        "irritability": {
+          "title": "Irritability"
+        }
+      },
+      "emotionalImpact": {
+        "title": "Emotional Impact",
+        "subtitle": "Symptom severity under high stress",
+        "lowStress": "Low Stress State",
+        "highStress": "High Stress State",
+        "details": {
+          "title": "Detailed Description",
+          "anxiety": "Anxiety symptoms significantly worsen under high stress, affecting daily life and work performance.",
+          "depression": "Depression is more likely to occur in high-stress environments and needs timely attention.",
+          "irritability": "Irritability and mood swings are most obvious under high stress, affecting relationships."
+        }
+      },
+      "menstrualImpact": {
+        "title": "Menstrual Impact",
+        "cycleLength": {
+          "title": "Cycle Length Changes",
+          "lowStress": "Regular cycle (28±3 days)",
+          "highStress": "Irregular or prolonged cycle"
+        },
+        "painIntensity": {
+          "title": "Pain Intensity",
+          "lowStress": "Mild discomfort",
+          "highStress": "Increased pain"
+        },
+        "flowChanges": {
+          "title": "Flow Changes",
+          "lowStress": "Normal flow",
+          "highStress": "Abnormal flow"
+        },
+        "lowStress": "Low Stress",
+        "highStress": "High Stress"
+      },
+      "keyInsights": {
+        "title": "Key Insights",
+        "insight1": {
+          "title": "Stress Accumulation Effect",
+          "description": "Long-term stress has greater impact on menstruation than short-term stress"
+        },
+        "insight2": {
+          "title": "Individual Differences",
+          "description": "Everyone has different sensitivity to stress"
+        },
+        "insight3": {
+          "title": "Reversibility",
+          "description": "Most stress effects can recover after stress relief"
+        },
+        "insight4": {
+          "title": "Importance of Prevention",
+          "description": "Early stress management is more effective than later treatment"
+        }
+      },
+      "actionItems": {
+        "immediate": {
+          "title": "Immediate Action",
+          "description": "Identify stress sources and take relief measures"
+        },
+        "longterm": {
+          "title": "Long-term Strategy",
+          "description": "Establish a continuous stress management system"
+        }
+      }
+    }
   },
   "understandingPain": {
     "painPatterns": {
@@ -348,7 +1102,7 @@
         "description": "Keeping a detailed pain diary is the most effective way to understand personal patterns. By recording for 3-6 consecutive months, you will be able to clearly see your pain patterns.",
         "recordingElements": {
           "title": "Recording Elements",
-        "items": [
+          "items": [
             "Pain intensity (0-10 scale)",
             "Pain nature (cramping, dull pain, etc.)",
             "Duration",
@@ -359,7 +1113,7 @@
         },
         "analysisDimensions": {
           "title": "Analysis Dimensions",
-        "items": [
+          "items": [
             "Which day of the menstrual cycle is the pain most severe",
             "Trend of pain duration",
             "Comparison of treatment effects",
@@ -415,7 +1169,7 @@
           "title": "Lifestyle Factors",
           "dietaryHabits": {
             "title": "Dietary Habits",
-          "items": [
+            "items": [
               "Caffeine intake",
               "Sugar consumption",
               "Anti-inflammatory food ratio",
@@ -471,7 +1225,7 @@
           "title": "Preventive Intervention Timing",
           "earlyLutealPhase": {
             "title": "1-2 weeks before menstruation (early luteal phase)",
-          "items": [
+            "items": [
               "Start increasing anti-inflammatory food intake (omega-3, turmeric)",
               "Regular moderate exercise, avoid overtraining",
               "Optimize sleep quality, ensure 7-8 hours of rest",
@@ -480,7 +1234,7 @@
           },
           "premenstrualDays": {
             "title": "3-5 days before menstruation",
-          "items": [
+            "items": [
               "Start preventive NSAIDs (if doctor recommended)",
               "Increase magnesium supplements (300-400mg/day)",
               "Appropriately reduce caffeine and alcohol intake",
@@ -489,7 +1243,7 @@
           },
           "peakPainDays": {
             "title": "Days 1-2 of menstruation (peak pain period)",
-          "items": [
+            "items": [
               "Apply all available relief methods promptly",
               "Maintain hydration, but avoid excessive fluids",
               "Adopt optimal positioning for pain relief",
@@ -501,7 +1255,7 @@
           "title": "Treatment Effect Optimization",
           "medicationTiming": {
             "title": "Medication Timing",
-          "items": [
+            "items": [
               "NSAIDs: Take 1-2 hours before pain starts for best effect",
               "Hormone supplementation: Follow doctor's instructions for optimal absorption",
               "Traditional Chinese medicine: Start conditioning herbs 1-2 weeks in advance"
@@ -509,7 +1263,7 @@
           },
           "recoveryOptimization": {
             "title": "Recovery Optimization",
-          "items": [
+            "items": [
               "Progressive activity: Gradually increase activity level as pain subsides",
               "Nutrition recovery: Focus on nutrient replenishment after menstruation",
               "Reflection assessment: Evaluate the effectiveness of this treatment strategy"

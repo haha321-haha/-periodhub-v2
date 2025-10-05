@@ -19,7 +19,7 @@ const typeStrategies = {
     confidenceThreshold: 0.9,
     preserveAny: true
   },
-  
+
   // 渐进策略：逐步替换，验证后继续
   progressive: {
     maxReplacements: 10,
@@ -27,7 +27,7 @@ const typeStrategies = {
     preserveAny: false,
     batchSize: 3
   },
-  
+
   // 严格策略：尽可能替换所有any
   strict: {
     maxReplacements: 50,
@@ -45,35 +45,35 @@ const typePatterns = {
     type: 'ApiResponse<T>',
     confidence: 0.8
   },
-  
+
   // 事件处理模式
   eventHandler: {
     pattern: /(?:on|handle)\w+.*Event/g,
     type: 'EventHandler<T>',
     confidence: 0.9
   },
-  
+
   // 用户数据模式
   userData: {
     pattern: /(?:user|profile|account)\w*/gi,
     type: 'User',
     confidence: 0.8
   },
-  
+
   // 配置对象模式
   configObject: {
     pattern: /(?:config|options|settings)\w*/gi,
     type: 'Record<string, unknown>',
     confidence: 0.7
   },
-  
+
   // 数组模式
   arrayPattern: {
     pattern: /\[\]/g,
     type: 'unknown[]',
     confidence: 0.6
   },
-  
+
   // 函数模式
   functionPattern: {
     pattern: /\([^)]*\)\s*=>/g,
@@ -86,37 +86,37 @@ const typePatterns = {
 async function intelligentTypeFix(strategy = 'progressive') {
   console.log(`🎯 使用策略: ${strategy}`);
   console.log('─'.repeat(50));
-  
+
   const config = typeStrategies[strategy];
   if (!config) {
     throw new Error(`未知策略: ${strategy}`);
   }
-  
+
   // 1. 扫描包含any类型的文件
   console.log('🔍 扫描包含any类型的文件...');
   const filesWithAny = await findFilesWithAnyTypes();
   console.log(`📁 发现 ${filesWithAny.length} 个文件包含any类型`);
-  
+
   // 2. 分析每个文件的类型使用模式
   console.log('🧠 分析类型使用模式...');
   const analysisResults = await analyzeTypePatterns(filesWithAny);
-  
+
   // 3. 生成类型替换建议
   console.log('💡 生成类型替换建议...');
   const replacementSuggestions = await generateTypeSuggestions(analysisResults);
-  
+
   // 4. 应用类型替换
   console.log('🔧 应用类型替换...');
   const replacementResults = await applyTypeReplacements(replacementSuggestions, config);
-  
+
   // 5. 验证替换结果
   console.log('✅ 验证替换结果...');
   const validationResults = await validateTypeReplacements();
-  
+
   // 6. 生成报告
   console.log('📊 生成修复报告...');
   await generateTypeFixReport(replacementResults, validationResults);
-  
+
   console.log('🎉 智能类型修复完成！');
 }
 
@@ -125,7 +125,7 @@ async function findFilesWithAnyTypes() {
   try {
     const result = execSync('grep -r "any" --include="*.ts" --include="*.tsx" . | grep -v node_modules | grep -v ".next"', { encoding: 'utf8' });
     const lines = result.split('\n').filter(line => line.trim());
-    
+
     const files = new Set();
     lines.forEach(line => {
       const filePath = line.split(':')[0];
@@ -133,7 +133,7 @@ async function findFilesWithAnyTypes() {
         files.add(filePath);
       }
     });
-    
+
     return Array.from(files);
   } catch (error) {
     console.log('⚠️  扫描any类型失败，使用备用方法...');
@@ -145,14 +145,14 @@ async function findFilesWithAnyTypes() {
 async function findFilesWithAnyTypesFallback() {
   const files = [];
   const extensions = ['.ts', '.tsx'];
-  
+
   function scanDirectory(dir) {
     const items = fs.readdirSync(dir);
-    
+
     for (const item of items) {
       const fullPath = path.join(dir, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
         scanDirectory(fullPath);
       } else if (stat.isFile() && extensions.some(ext => item.endsWith(ext))) {
@@ -163,7 +163,7 @@ async function findFilesWithAnyTypesFallback() {
       }
     }
   }
-  
+
   scanDirectory('.');
   return files;
 }
@@ -171,7 +171,7 @@ async function findFilesWithAnyTypesFallback() {
 // 分析类型使用模式
 async function analyzeTypePatterns(files) {
   const results = [];
-  
+
   for (const filePath of files) {
     try {
       const content = fs.readFileSync(filePath, 'utf8');
@@ -180,7 +180,7 @@ async function analyzeTypePatterns(files) {
         anyUsages: [],
         suggestions: []
       };
-      
+
       // 查找any类型使用
       const anyMatches = content.matchAll(/: any/g);
       for (const match of anyMatches) {
@@ -191,7 +191,7 @@ async function analyzeTypePatterns(files) {
           confidence: 0
         });
       }
-      
+
       // 分析上下文，确定最佳类型
       for (const usage of analysis.anyUsages) {
         const suggestion = await analyzeContext(usage.context);
@@ -199,13 +199,13 @@ async function analyzeTypePatterns(files) {
           analysis.suggestions.push(suggestion);
         }
       }
-      
+
       results.push(analysis);
     } catch (error) {
       console.log(`❌ 分析文件失败: ${filePath} - ${error.message}`);
     }
   }
-  
+
   return results;
 }
 
@@ -220,7 +220,7 @@ function extractContext(content, position, length) {
 async function analyzeContext(context) {
   let bestSuggestion = null;
   let bestConfidence = 0;
-  
+
   for (const [patternName, pattern] of Object.entries(typePatterns)) {
     if (pattern.pattern.test(context)) {
       if (pattern.confidence > bestConfidence) {
@@ -234,14 +234,14 @@ async function analyzeContext(context) {
       }
     }
   }
-  
+
   return bestSuggestion;
 }
 
 // 生成类型替换建议
 async function generateTypeSuggestions(analysisResults) {
   const suggestions = [];
-  
+
   for (const analysis of analysisResults) {
     for (const suggestion of analysis.suggestions) {
       suggestions.push({
@@ -250,10 +250,10 @@ async function generateTypeSuggestions(analysisResults) {
       });
     }
   }
-  
+
   // 按置信度排序
   suggestions.sort((a, b) => b.confidence - a.confidence);
-  
+
   return suggestions;
 }
 
@@ -265,24 +265,24 @@ async function applyTypeReplacements(suggestions, config) {
     failed: 0,
     skipped: 0
   };
-  
+
   let processed = 0;
-  
+
   for (const suggestion of suggestions) {
     if (processed >= config.maxReplacements) {
       results.skipped = suggestions.length - processed;
       break;
     }
-    
+
     if (suggestion.confidence < config.confidenceThreshold) {
       results.skipped++;
       continue;
     }
-    
+
     try {
       await applySingleReplacement(suggestion);
       results.applied++;
-      
+
       // 批量验证
       if (config.batchSize && results.applied % config.batchSize === 0) {
         if (await validateTypeCheck()) {
@@ -296,34 +296,34 @@ async function applyTypeReplacements(suggestions, config) {
       console.log(`❌ 替换失败: ${suggestion.filePath} - ${error.message}`);
       results.failed++;
     }
-    
+
     processed++;
   }
-  
+
   return results;
 }
 
 // 应用单个类型替换
 async function applySingleReplacement(suggestion) {
   const content = fs.readFileSync(suggestion.filePath, 'utf8');
-  
+
   // 简单的替换逻辑（实际实现会更复杂）
   let newContent = content;
-  
+
   // 替换 : any 为具体类型
   if (suggestion.type) {
     newContent = newContent.replace(/: any/g, `: ${suggestion.type}`);
   }
-  
+
   // 添加必要的导入
   if (suggestion.type && suggestion.type.includes('ApiResponse')) {
     newContent = addImport(newContent, "import { ApiResponse } from '@/types/common';");
   }
-  
+
   if (suggestion.type && suggestion.type.includes('User')) {
     newContent = addImport(newContent, "import { User } from '@/types/common';");
   }
-  
+
   fs.writeFileSync(suggestion.filePath, newContent);
 }
 
@@ -332,17 +332,17 @@ function addImport(content, importStatement) {
   if (content.includes(importStatement)) {
     return content;
   }
-  
+
   const lines = content.split('\n');
   let insertIndex = 0;
-  
+
   // 找到最后一个import语句的位置
   for (let i = 0; i < lines.length; i++) {
     if (lines[i].startsWith('import ')) {
       insertIndex = i + 1;
     }
   }
-  
+
   lines.splice(insertIndex, 0, importStatement);
   return lines.join('\n');
 }
@@ -382,7 +382,7 @@ async function generateTypeFixReport(replacementResults, validationResults) {
       successRate: Math.round((replacementResults.applied / replacementResults.total) * 100)
     }
   };
-  
+
   fs.writeFileSync('type-fix-report.json', JSON.stringify(report, null, 2));
   console.log('📄 类型修复报告已保存: type-fix-report.json');
 }
@@ -390,7 +390,7 @@ async function generateTypeFixReport(replacementResults, validationResults) {
 // 主执行函数
 async function main() {
   const strategy = process.argv[2] || 'progressive';
-  
+
   try {
     await intelligentTypeFix(strategy);
   } catch (error) {
@@ -405,54 +405,3 @@ if (require.main === module) {
 }
 
 module.exports = { intelligentTypeFix, typeStrategies, typePatterns };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

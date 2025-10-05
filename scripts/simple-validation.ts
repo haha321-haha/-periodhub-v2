@@ -51,4 +51,4 @@ async function runValidation() {
 }
 
 // 运行验证
-runValidation().catch(console.error); 
+runValidation().catch(console.error);

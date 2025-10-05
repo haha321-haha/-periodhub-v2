@@ -39,7 +39,7 @@ const pdfFiles = [
 async function checkFile(filename) {
   return new Promise((resolve) => {
     const url = `${baseUrl}/pdf-files/${filename}`;
-    
+
     https.get(url, (res) => {
       resolve({
         filename,
@@ -58,25 +58,25 @@ async function checkFile(filename) {
 
 async function verifyAllFiles() {
   console.log('🔍 验证sitemap中的PDF文件是否存在...\n');
-  
+
   const results = [];
-  
+
   for (const filename of pdfFiles) {
     const result = await checkFile(filename);
     results.push(result);
-    
+
     const status = result.exists ? '✅' : '❌';
     console.log(`${status} ${filename} - ${result.status}`);
   }
-  
+
   const existingFiles = results.filter(r => r.exists);
   const missingFiles = results.filter(r => !r.exists);
-  
+
   console.log('\n📊 验证结果:');
   console.log(`总文件数: ${pdfFiles.length}`);
   console.log(`存在: ${existingFiles.length} ✅`);
   console.log(`缺失: ${missingFiles.length} ❌`);
-  
+
   if (missingFiles.length > 0) {
     console.log('\n❌ 缺失的文件:');
     missingFiles.forEach(file => {

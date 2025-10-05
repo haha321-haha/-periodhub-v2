@@ -18,11 +18,11 @@ const enPath = path.join(process.cwd(), 'messages/en.json');
 if (fs.existsSync(zhPath) && fs.existsSync(enPath)) {
   const zh = JSON.parse(fs.readFileSync(zhPath, 'utf8'));
   const en = JSON.parse(fs.readFileSync(enPath, 'utf8'));
-  
+
   // 检查painTracker.assessment.recommendations结构
   const zhRecommendations = zh.interactiveTools?.painTracker?.assessment?.recommendations;
   const enRecommendations = en.painTracker?.assessment?.recommendations;
-  
+
   console.log('  Chinese recommendations structure:');
   if (zhRecommendations) {
     Object.keys(zhRecommendations).forEach(key => {
@@ -36,7 +36,7 @@ if (fs.existsSync(zhPath) && fs.existsSync(enPath)) {
   } else {
     console.log('    ❌ Not found');
   }
-  
+
   console.log('  English recommendations structure:');
   if (enRecommendations) {
     Object.keys(enRecommendations).forEach(key => {
@@ -50,26 +50,26 @@ if (fs.existsSync(zhPath) && fs.existsSync(enPath)) {
   } else {
     console.log('    ❌ Not found');
   }
-  
+
   // 检查是否有重复的recommendations部分
   const zhContent = JSON.stringify(zh);
   const enContent = JSON.stringify(en);
-  
+
   const zhRecommendationsCount = (zhContent.match(/"recommendations":/g) || []).length;
   const enRecommendationsCount = (enContent.match(/"recommendations":/g) || []).length;
-  
+
   console.log(`\n  Recommendations sections count:`);
   console.log(`    Chinese: ${zhRecommendationsCount}`);
   console.log(`    English: ${enRecommendationsCount}`);
-  
+
   // 检查是否有错误的actionSteps格式
   const zhBadActionSteps = zhContent.includes('"actionSteps": "[ZH]');
   const enBadActionSteps = enContent.includes('"actionSteps": "[EN]');
-  
+
   console.log(`\n  Bad actionSteps format:`);
   console.log(`    Chinese: ${zhBadActionSteps ? '❌ Found' : '✅ Clean'}`);
   console.log(`    English: ${enBadActionSteps ? '❌ Found' : '✅ Clean'}`);
-  
+
 } else {
   console.log('  ❌ Translation files not found');
 }
@@ -81,7 +81,7 @@ const hookPath = path.join(process.cwd(), 'app/[locale]/interactive-tools/shared
 
 if (fs.existsSync(hookPath)) {
   const hookContent = fs.readFileSync(hookPath, 'utf8');
-  
+
   // 检查关键修复
   const checks = [
     {
@@ -105,11 +105,11 @@ if (fs.existsSync(hookPath)) {
       status: hookContent.includes('currentSession.locale') ? '✅' : '❌'
     }
   ];
-  
+
   checks.forEach(check => {
     console.log(`  ${check.name}: ${check.status}`);
   });
-  
+
 } else {
   console.log('  ❌ useSymptomAssessment hook not found');
 }
@@ -121,7 +121,7 @@ const componentPath = path.join(process.cwd(), 'app/[locale]/interactive-tools/c
 
 if (fs.existsSync(componentPath)) {
   const componentContent = fs.readFileSync(componentPath, 'utf8');
-  
+
   const checks = [
     {
       name: 'Uses useSafeTranslations',
@@ -136,11 +136,11 @@ if (fs.existsSync(componentPath)) {
       status: componentContent.includes('startAssessment(locale') ? '✅' : '❌'
     }
   ];
-  
+
   checks.forEach(check => {
     console.log(`  ${check.name}: ${check.status}`);
   });
-  
+
 } else {
   console.log('  ❌ SymptomAssessmentTool component not found');
 }

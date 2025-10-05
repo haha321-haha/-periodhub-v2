@@ -34,7 +34,7 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
           </div>
 
           {/* 面包屑导航 */}
-          <Breadcrumb 
+          <Breadcrumb
             items={[
               { label: breadcrumbT('interactiveTools'), href: `/${locale}/interactive-tools` },
               { label: breadcrumbT('painTracker') }
@@ -50,7 +50,7 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
       <div className="bg-white mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="space-y-12">
-            
+
             {/* 相关工具区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
@@ -72,12 +72,12 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
                         {locale === 'zh' ? '症状评估工具' : 'Symptom Assessment Tool'}
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">
-                        {locale === 'zh' 
+                        {locale === 'zh'
                           ? '快速评估症状严重程度，配合疼痛追踪制定管理计划，获得个性化建议'
                           : 'Quickly assess symptom severity, work with pain tracking to create management plans, get personalized recommendations'
                         }
                       </p>
-                      <a 
+                      <a
                         href={`/${locale}/interactive-tools/symptom-assessment`}
                         className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
                       >
@@ -105,12 +105,12 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
                         {locale === 'zh' ? '智能周期追踪器' : 'Smart Cycle Tracker'}
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">
-                        {locale === 'zh' 
+                        {locale === 'zh'
                           ? '追踪月经周期，分析疼痛与周期的关联性，预测疼痛发生时间'
                           : 'Track menstrual cycles, analyze pain-cycle correlations, predict pain occurrence times'
                         }
                       </p>
-                      <a 
+                      <a
                         href={`/${locale}/interactive-tools/cycle-tracker`}
                         className="inline-flex items-center text-green-600 hover:text-green-800 font-medium text-sm"
                       >
@@ -146,7 +146,7 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
                         {locale === 'zh' ? '5分钟快速缓解痛经方法' : '5-Minute Quick Period Pain Relief'}
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">
-                        {locale === 'zh' 
+                        {locale === 'zh'
                           ? '学习快速缓解痛经的实用技巧，配合疼痛追踪工具使用效果更佳'
                           : 'Learn practical techniques for quick period pain relief, works better with pain tracking tools'
                         }
@@ -158,7 +158,7 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
                           </svg>
                           {locale === 'zh' ? '6分钟阅读' : '6 min read'}
                         </span>
-                        <a 
+                        <a
                           href={`/${locale}/articles/5-minute-period-pain-relief`}
                           className="inline-flex items-center text-orange-600 hover:text-orange-800 font-medium text-sm"
                         >
@@ -187,7 +187,7 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
                         {locale === 'zh' ? '热疗完全指南' : 'Heat Therapy Complete Guide'}
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">
-                        {locale === 'zh' 
+                        {locale === 'zh'
                           ? '深入了解热疗原理和正确使用方法，提升疼痛管理效果'
                           : 'Deep understanding of heat therapy principles and correct usage methods to improve pain management'
                         }
@@ -199,7 +199,7 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
                           </svg>
                           {locale === 'zh' ? '8分钟阅读' : '8 min read'}
                         </span>
-                        <a 
+                        <a
                           href={`/${locale}/articles/heat-therapy-complete-guide`}
                           className="inline-flex items-center text-red-600 hover:text-red-800 font-medium text-sm"
                         >
@@ -228,7 +228,7 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
                         {locale === 'zh' ? '痛经医疗指南' : 'Medical Guide for Period Pain'}
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">
-                        {locale === 'zh' 
+                        {locale === 'zh'
                           ? '识别需要医疗干预的痛经症状，确保及时获得专业帮助'
                           : 'Identify period pain symptoms that require medical intervention, ensure timely professional help'
                         }
@@ -240,7 +240,7 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
                           </svg>
                           {locale === 'zh' ? '10分钟阅读' : '10 min read'}
                         </span>
-                        <a 
+                        <a
                           href={`/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`}
                           className="inline-flex items-center text-purple-600 hover:text-purple-800 font-medium text-sm"
                         >

@@ -120,7 +120,7 @@ Robots.txt优化：
 
 **HTML结构**
 ```html
-<a href="/zh/articles/痛经-饮食-调理" 
+<a href="/zh/articles/痛经-饮食-调理"
    title="痛经期间的饮食调理方法">
    饮食调理缓解痛经
 </a>

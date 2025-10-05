@@ -136,12 +136,7 @@
           "breadcrumbs": 85,
           "relatedContent": 92
         },
-        "features": [
-          "可点击目录",
-          "章节跳转",
-          "相关文章推荐",
-          "返回顶部按钮"
-        ]
+        "features": ["可点击目录", "章节跳转", "相关文章推荐", "返回顶部按钮"]
       },
       "engagement": {
         "score": 88,
@@ -213,10 +208,7 @@
           "dateFormatting": 92,
           "rtlSupport": 85
         },
-        "languages": [
-          "en",
-          "zh"
-        ],
+        "languages": ["en", "zh"],
         "culturalConsiderations": [
           "医疗术语本地化",
           "文化敏感性内容",
@@ -231,12 +223,7 @@
           "caching": 85,
           "imageOptimization": 92
         },
-        "optimizations": [
-          "代码分割",
-          "图片懒加载",
-          "组件懒加载",
-          "缓存策略"
-        ]
+        "optimizations": ["代码分割", "图片懒加载", "组件懒加载", "缓存策略"]
       },
       "errorHandling": {
         "score": 88,

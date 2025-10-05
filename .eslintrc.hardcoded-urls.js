@@ -11,17 +11,17 @@ module.exports = {
           Literal: function(node) {
             if (typeof node.value === 'string') {
               const value = node.value;
-              
+
               // 检查是否包含硬编码URL
               const hardcodedPatterns = [
                 /https:\/\/periodhub\.health/,
                 /https:\/\/www\.periodhub\.health/,
               ];
-              
-              const hasHardcoded = hardcodedPatterns.some(pattern => 
+
+              const hasHardcoded = hardcodedPatterns.some(pattern =>
                 pattern.test(value)
               );
-              
+
               if (hasHardcoded) {
                 context.report({
                   node: node,
@@ -41,21 +41,21 @@ module.exports = {
               }
             }
           },
-          
+
           TemplateLiteral: function(node) {
             const sourceCode = context.getSourceCode();
             const text = sourceCode.getText(node);
-            
+
             // 检查模板字符串中的硬编码URL
             const hardcodedPatterns = [
               /https:\/\/periodhub\.health/,
               /https:\/\/www\.periodhub\.health/,
             ];
-            
-            const hasHardcoded = hardcodedPatterns.some(pattern => 
+
+            const hasHardcoded = hardcodedPatterns.some(pattern =>
               pattern.test(text)
             );
-            
+
             if (hasHardcoded) {
               context.report({
                 node: node,

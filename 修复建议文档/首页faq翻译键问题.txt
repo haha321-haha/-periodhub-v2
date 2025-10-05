@@ -50,7 +50,7 @@ import { Metadata } from 'next';
 // 修复getStructuredData函数 - 使用根命名空间访问FAQ
 const getStructuredData = async (locale: string) => {
   const t = await getTranslations({ locale, namespace: '' }); // 使用根命名空间
-  
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -118,10 +118,10 @@ const getStructuredData = async (locale: string) => {
 export default async function HomePage({ params: { locale } }: { params: { locale: string } }) {
   // 获取home命名空间的翻译（用于其他部分）
   const t = await getTranslations({ locale, namespace: 'home' });
-  
+
   // 获取根命名空间的翻译（用于FAQ）
   const tRoot = await getTranslations({ locale, namespace: '' });
-  
+
   // 生成结构化数据
   const structuredData = await getStructuredData(locale);
 
@@ -168,7 +168,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
       />
 
       {/* Hero Section */}
-      <Hero 
+      <Hero
         title={t('hero.title')}
         subtitle={t('hero.subtitle')}
         ctaText={t('hero.cta')}
@@ -178,14 +178,14 @@ export default async function HomePage({ params: { locale } }: { params: { local
       <Features />
 
       {/* FAQ Section - 使用tRoot访问根级别FAQ */}
-      <FAQ 
+      <FAQ
         title={tRoot('faq.title')}
         subtitle={tRoot('faq.subtitle')}
         faqs={faqData}
       />
 
       {/* CTA Section */}
-      <CTA 
+      <CTA
         title={t('cta.title')}
         subtitle={t('cta.subtitle')}
         ctaText={t('cta.button')}
@@ -675,7 +675,7 @@ echo "3. 缓存是否已清除"
     "mission": "我们致力于为女性提供科学、便捷的经期健康管理工具",
     "values": {
       "privacy": "隐私保护",
-      "science": "科学专业", 
+      "science": "科学专业",
       "care": "贴心关怀"
     }
   }
@@ -705,7 +705,7 @@ cp messages/zh.json messages/zh.json.backup
 - 用artifact `restructured_zh_json` 中的内容完全替换 `messages/zh.json`
 - 这将把FAQ从根级别移动到 `home.faq` 下
 
-**步骤3：替换HomePage组件**  
+**步骤3：替换HomePage组件**
 - 用artifact `final_homepage_fix` 中的内容完全替换 `app/[locale]/page.tsx`
 - 这将使用统一的 `t('faq.xxx')` 访问方式
 
@@ -721,7 +721,7 @@ npm run dev
    ```json
    // ❌ 之前：FAQ在根级别（next-intl无法解析）
    { "faq": {...}, "home": {...} }
-   
+
    // ✅ 现在：FAQ在home命名空间下
    { "home": { "faq": {...}, "hero": {...} } }
    ```
@@ -731,7 +731,7 @@ npm run dev
    // ❌ 之前：需要两个翻译实例，容易出错
    const tRoot = await getTranslations('');
    const t = await getTranslations('home');
-   
+
    // ✅ 现在：只需一个翻译实例，简洁可靠
    const t = await getTranslations('home');
    ```
@@ -807,7 +807,7 @@ npm run dev
     "features": "功能特色",
     "about": "关于我们",
     "contact": "联系我们",
-   
+
   },
   "footer": {
     "description": "专业的经期健康管理平台，科学追踪，轻松管理",
@@ -873,7 +873,7 @@ import CTA from '@/components/CTA';
 // ✅ 修复后的getStructuredData函数 - 统一使用home命名空间
 const getStructuredData = async (locale: string) => {
   const t = await getTranslations({ locale, namespace: 'home' });
-  
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -882,7 +882,7 @@ const getStructuredData = async (locale: string) => {
         "@type": "Question",
         "name": t('faq.q1.question'),
         "acceptedAnswer": {
-          "@type": "Answer", 
+          "@type": "Answer",
           "text": t('faq.q1.answer')
         }
       },
@@ -941,7 +941,7 @@ const getStructuredData = async (locale: string) => {
 // 生成metadata
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'home' });
-  
+
   return {
     title: t('meta.title'),
     description: t('meta.description'),
@@ -963,7 +963,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function HomePage({ params: { locale } }: { params: { locale: string } }) {
   // 只需要一个翻译实例，因为FAQ已经在home命名空间下
   const t = await getTranslations({ locale, namespace: 'home' });
-  
+
   // 生成结构化数据
   const structuredData = await getStructuredData(locale);
 
@@ -1010,7 +1010,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
       />
 
       {/* Hero Section */}
-      <Hero 
+      <Hero
         title={t('hero.title')}
         subtitle={t('hero.subtitle')}
         ctaText={t('hero.cta')}
@@ -1020,14 +1020,14 @@ export default async function HomePage({ params: { locale } }: { params: { local
       <Features />
 
       {/* ✅ FAQ Section - 使用相同的t实例访问FAQ */}
-      <FAQ 
+      <FAQ
         title={t('faq.title')}
         subtitle={t('faq.subtitle')}
         faqs={faqData}
       />
 
       {/* CTA Section */}
-      <CTA 
+      <CTA
         title={t('cta.title')}
         subtitle={t('cta.subtitle')}
         ctaText={t('cta.button')}
@@ -1108,7 +1108,7 @@ import CTA from '@/components/CTA';
 // 修复后的getStructuredData函数 - 使用home命名空间
 const getStructuredData = async (locale: string) => {
   const t = await getTranslations({ locale, namespace: 'home' });
-  
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -1122,7 +1122,7 @@ const getStructuredData = async (locale: string) => {
         }
       },
       {
-        "@type": "Question", 
+        "@type": "Question",
         "name": t('faq.q2.question'),
         "acceptedAnswer": {
           "@type": "Answer",
@@ -1139,7 +1139,7 @@ const getStructuredData = async (locale: string) => {
       },
       {
         "@type": "Question",
-        "name": t('faq.q4.question'), 
+        "name": t('faq.q4.question'),
         "acceptedAnswer": {
           "@type": "Answer",
           "text": t('faq.q4.answer')
@@ -1149,7 +1149,7 @@ const getStructuredData = async (locale: string) => {
         "@type": "Question",
         "name": t('faq.q5.question'),
         "acceptedAnswer": {
-          "@type": "Answer", 
+          "@type": "Answer",
           "text": t('faq.q5.answer')
         }
       },
@@ -1162,7 +1162,7 @@ const getStructuredData = async (locale: string) => {
         }
       },
       {
-        "@type": "Question", 
+        "@type": "Question",
         "name": t('faq.q7.question'),
         "acceptedAnswer": {
           "@type": "Answer",
@@ -1176,7 +1176,7 @@ const getStructuredData = async (locale: string) => {
 // 生成metadata
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'home' });
-  
+
   return {
     title: t('meta.title'),
     description: t('meta.description'),
@@ -1198,7 +1198,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 export default async function HomePage({ params: { locale } }: { params: { locale: string } }) {
   // 只需要一个翻译实例，因为FAQ已经移到home命名空间
   const t = await getTranslations({ locale, namespace: 'home' });
-  
+
   // 生成结构化数据
   const structuredData = await getStructuredData(locale);
 
@@ -1245,7 +1245,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
       />
 
       {/* Hero Section */}
-      <Hero 
+      <Hero
         title={t('hero.title')}
         subtitle={t('hero.subtitle')}
         ctaText={t('hero.cta')}
@@ -1255,14 +1255,14 @@ export default async function HomePage({ params: { locale } }: { params: { local
       <Features />
 
       {/* FAQ Section - 现在使用相同的t实例 */}
-      <FAQ 
+      <FAQ
         title={t('faq.title')}
         subtitle={t('faq.subtitle')}
         faqs={faqData}
       />
 
       {/* CTA Section */}
-      <CTA 
+      <CTA
         title={t('cta.title')}
         subtitle={t('cta.subtitle')}
         ctaText={t('cta.button')}
@@ -1327,7 +1327,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
   },
   "navigation": {
     "home": "首页",
-    "features": "功能特色", 
+    "features": "功能特色",
     "about": "关于我们",
     "contact": "联系我们",
     "login": "登录",
@@ -1392,7 +1392,7 @@ npm run dev
      "faq": { "title": "...", "q1": {...} },
      "home": { "hero": {...} }
    }
-   
+
    // ✅ 现在（修复版本）
    {
      "home": {
@@ -1407,8 +1407,8 @@ npm run dev
    // ❌ 之前（问题版本）
    const tRoot = await getTranslations('');
    const title = tRoot('faq.title'); // 无法解析
-   
-   // ✅ 现在（修复版本）  
+
+   // ✅ 现在（修复版本）
    const t = await getTranslations('home');
    const title = t('faq.title'); // 正确解析
    ```
@@ -1429,7 +1429,7 @@ npm run dev
 
 
 FAQ翻译键问题最终修复方案
-Code 
+Code
 {
   "faq": {
     "title": "常见问题",
@@ -1522,7 +1522,7 @@ FAQ英文翻译键修复
 # 检查messages/zh.json中是否存在重复的faq命名空间
 grep -n "\"faq\"" messages/zh.json
 
-# 检查messages/en.json中是否存在重复的faq命名空间  
+# 检查messages/en.json中是否存在重复的faq命名空间
 grep -n "\"faq\"" messages/en.json
 ```
 
@@ -1630,7 +1630,7 @@ npm run dev
     "features": "功能特色",
     "about": "关于我们",
     "contact": "联系我们",
-    
+
   },
   "footer": {
     "description": "专业的经期健康管理平台，科学追踪，轻松管理",
@@ -1642,7 +1642,7 @@ npm run dev
     },
     "contact": {
       "email": "tiyibaofu@outlook.com",
-    
+
     },
     "copyright": "© 2025 经期健康管理平台. 保留所有权利."
   }
@@ -1663,7 +1663,7 @@ import CTA from '@/components/CTA';
 // 修复getStructuredData函数 - 使用根命名空间
 const getStructuredData = async (locale: string) => {
   const t = await getTranslations({ locale, namespace: '' }); // 使用根命名空间
-  
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -1677,7 +1677,7 @@ const getStructuredData = async (locale: string) => {
         }
       },
       {
-        "@type": "Question", 
+        "@type": "Question",
         "name": t('faq.q2.question'),
         "acceptedAnswer": {
           "@type": "Answer",
@@ -1694,7 +1694,7 @@ const getStructuredData = async (locale: string) => {
       },
       {
         "@type": "Question",
-        "name": t('faq.q4.question'), 
+        "name": t('faq.q4.question'),
         "acceptedAnswer": {
           "@type": "Answer",
           "text": t('faq.q4.answer')
@@ -1704,7 +1704,7 @@ const getStructuredData = async (locale: string) => {
         "@type": "Question",
         "name": t('faq.q5.question'),
         "acceptedAnswer": {
-          "@type": "Answer", 
+          "@type": "Answer",
           "text": t('faq.q5.answer')
         }
       },
@@ -1717,7 +1717,7 @@ const getStructuredData = async (locale: string) => {
         }
       },
       {
-        "@type": "Question", 
+        "@type": "Question",
         "name": t('faq.q7.question'),
         "acceptedAnswer": {
           "@type": "Answer",
@@ -1731,7 +1731,7 @@ const getStructuredData = async (locale: string) => {
 // 修复metadata生成函数
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'home' });
-  
+
   return {
     title: t('meta.title'),
     description: t('meta.description'),
@@ -1755,7 +1755,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
   const t = await getTranslations({ locale, namespace: 'home' });
   // 获取根命名空间的翻译，用于访问FAQ
   const tRoot = await getTranslations({ locale, namespace: '' });
-  
+
   // 生成结构化数据
   const structuredData = await getStructuredData(locale);
 
@@ -1802,7 +1802,7 @@ export default async function HomePage({ params: { locale } }: { params: { local
       />
 
       {/* Hero Section */}
-      <Hero 
+      <Hero
         title={t('hero.title')}
         subtitle={t('hero.subtitle')}
         ctaText={t('hero.cta')}
@@ -1812,14 +1812,14 @@ export default async function HomePage({ params: { locale } }: { params: { local
       <Features />
 
       {/* FAQ Section - 使用tRoot访问标题和副标题 */}
-      <FAQ 
+      <FAQ
         title={tRoot('faq.title')}
         subtitle={tRoot('faq.subtitle')}
         faqs={faqData}
       />
 
       {/* CTA Section */}
-      <CTA 
+      <CTA
         title={t('cta.title')}
         subtitle={t('cta.subtitle')}
         ctaText={t('cta.button')}
@@ -1914,7 +1914,7 @@ const faqQ1Question = tRoot('faq.q1.question');
 现在我明白了！问题是有**多个重复的FAQ命名空间**！我看到：
 
 1. **第2130行**：`"faq"` 命名空间 - 包含 q1-q7（完整版本）
-2. **第2240行**：`"faq"` 命名空间 - 只包含 q1-q3（不完整版本）  
+2. **第2240行**：`"faq"` 命名空间 - 只包含 q1-q3（不完整版本）
 3. **第2327行**：`"faq"` 命名空间 - 只有标题和描述
 
 这就是问题所在！JSON文件中有重复的键，后面的会覆盖前面的。让我检查哪个命名空间在最后：
@@ -2033,7 +2033,7 @@ const faqQ1Question = tRoot('faq.q1.question');
 
 #### **中文翻译文件 (messages/zh.json)**
 - ❌ **删除第2240行**：只包含q1-q3的不完整FAQ命名空间
-- ❌ **删除第2327行**：只有标题描述的FAQ命名空间  
+- ❌ **删除第2327行**：只有标题描述的FAQ命名空间
 - ✅ **保留第2130行**：包含q1-q7的完整FAQ命名空间
 
 #### **英文翻译文件 (messages/en.json)**

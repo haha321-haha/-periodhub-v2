@@ -50,17 +50,17 @@ async function validateFix() {
 function validateKeyFileLocation() {
   return new Promise((resolve) => {
     console.log(`检查新位置: ${FIXED_CONFIG.keyLocation}`);
-    
+
     https.get(FIXED_CONFIG.keyLocation, (res) => {
       console.log(`   状态码: ${res.statusCode}`);
       console.log(`   位置: 根目录 ${res.statusCode === 200 ? '✅' : '❌'}`);
-      
+
       if (res.statusCode === 200) {
         console.log('   ✅ 密钥文件已成功移至根目录');
       } else {
         console.log('   ❌ 密钥文件在根目录不可访问');
       }
-      
+
       resolve();
     }).on('error', (err) => {
       console.log(`   ❌ 访问失败: ${err.message}`);
@@ -79,13 +79,13 @@ function validateKeyFileContent() {
         console.log(`   内容长度: ${data.length} 字节`);
         console.log(`   去空白后: "${data.trim()}"`);
         console.log(`   去空白长度: ${data.trim().length} 字节`);
-        
+
         const isExactMatch = data === FIXED_CONFIG.key;
         const isTrimMatch = data.trim() === FIXED_CONFIG.key;
-        
+
         console.log(`   严格匹配: ${isExactMatch ? '✅' : '❌'} (无任何额外字符)`);
         console.log(`   修剪匹配: ${isTrimMatch ? '✅' : '❌'} (去除空白后匹配)`);
-        
+
         if (isExactMatch) {
           console.log('   ✅ 文件内容格式完美');
         } else if (isTrimMatch) {
@@ -93,7 +93,7 @@ function validateKeyFileContent() {
         } else {
           console.log('   ❌ 文件内容不匹配');
         }
-        
+
         resolve();
       });
     }).on('error', (err) => {
@@ -107,7 +107,7 @@ function validateUrlFormat() {
   console.log('检查URL格式标准化:');
   FIXED_CONFIG.urlList.forEach((url, index) => {
     console.log(`   URL ${index + 1}: ${url}`);
-    
+
     try {
       const urlObj = new URL(url);
       console.log(`     协议: ${urlObj.protocol} ${urlObj.protocol === 'https:' ? '✅' : '❌'}`);
@@ -123,11 +123,11 @@ function validateUrlFormat() {
 function testIndexNowAPI() {
   return new Promise((resolve) => {
     console.log('提交测试URL到IndexNow API:');
-    
+
     const postData = JSON.stringify(FIXED_CONFIG);
     console.log('请求数据:');
     console.log(postData);
-    
+
     const options = {
       hostname: 'api.indexnow.org',
       port: 443,
@@ -147,7 +147,7 @@ function testIndexNowAPI() {
         console.log(`\n📊 API测试结果:`);
         console.log(`状态码: ${res.statusCode}`);
         console.log(`响应: ${responseData}`);
-        
+
         switch (res.statusCode) {
           case 200:
           case 202:
@@ -171,7 +171,7 @@ function testIndexNowAPI() {
           default:
             console.log(`❓ 未知状态码: ${res.statusCode}`);
         }
-        
+
         resolve();
       });
     });

@@ -247,11 +247,11 @@
   .quiz-option:hover {
     animation: none; /* 移动端禁用悬停动画 */
   }
-  
+
   .animate-scale-in {
     animation-duration: 0.3s; /* 移动端缩短动画时间 */
   }
-  
+
   .animate-slide-up {
     animation-duration: 0.4s;
   }
@@ -265,5 +265,3 @@
     transition-duration: 0.01ms !important;
   }
 }
-
-

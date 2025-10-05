@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { PeriodHubSEOAnalyzer } from '@/lib/seo/keyword-analyzer';
-import type { KeywordAnalysis } from '@/lib/seo/keyword-analyzer';
+import { useState, useEffect } from "react";
+import { PeriodHubSEOAnalyzer } from "@/lib/seo/keyword-analyzer";
+import type { KeywordAnalysis } from "@/lib/seo/keyword-analyzer";
 
 interface SEOStats {
   totalKeywords: number;
@@ -13,7 +13,7 @@ interface SEOStats {
   recentChanges: Array<{
     keyword: string;
     change: number;
-    type: 'volume' | 'difficulty' | 'cpc';
+    type: "volume" | "difficulty" | "cpc";
   }>;
 }
 
@@ -26,25 +26,32 @@ export default function SEODashboardClient() {
     const loadSEOData = async () => {
       try {
         setLoading(true);
-        
+
         // 使用真实的SEO分析器
         const analysis = PeriodHubSEOAnalyzer.analyzePeriodHealthKeywords();
-        
+
         setSeoStats({
           totalKeywords: analysis.length,
-          avgSearchVolume: analysis.reduce((sum, kw) => sum + kw.searchVolume, 0) / analysis.length,
-          avgDifficulty: analysis.reduce((sum, kw) => sum + kw.difficulty, 0) / analysis.length,
-          avgCPC: analysis.reduce((sum, kw) => sum + kw.cpc, 0) / analysis.length,
+          avgSearchVolume:
+            analysis.reduce((sum, kw) => sum + kw.searchVolume, 0) /
+            analysis.length,
+          avgDifficulty:
+            analysis.reduce((sum, kw) => sum + kw.difficulty, 0) /
+            analysis.length,
+          avgCPC:
+            analysis.reduce((sum, kw) => sum + kw.cpc, 0) / analysis.length,
           topKeywords: analysis.slice(0, 10),
-          recentChanges: analysis.slice(0, 5).map(kw => ({
+          recentChanges: analysis.slice(0, 5).map((kw) => ({
             keyword: kw.keyword,
             change: Math.random() * 20 - 10, // Mock change data
-            type: ['volume', 'difficulty', 'cpc'][Math.floor(Math.random() * 3)] as 'volume' | 'difficulty' | 'cpc'
-          }))
+            type: ["volume", "difficulty", "cpc"][
+              Math.floor(Math.random() * 3)
+            ] as "volume" | "difficulty" | "cpc",
+          })),
         });
       } catch (err) {
-        setError('Failed to load SEO data');
-        console.error('SEO data loading error:', err);
+        setError("Failed to load SEO data");
+        console.error("SEO data loading error:", err);
       } finally {
         setLoading(false);
       }
@@ -88,7 +95,9 @@ export default function SEODashboardClient() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">SEO Dashboard</h1>
-          <p className="mt-2 text-gray-600">PeriodHub SEO Analytics and Keyword Management</p>
+          <p className="mt-2 text-gray-600">
+            PeriodHub SEO Analytics and Keyword Management
+          </p>
         </div>
 
         {/* Key Metrics */}
@@ -101,8 +110,12 @@ export default function SEODashboardClient() {
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Total Keywords</p>
-                <p className="text-2xl font-semibold text-gray-900">{seoStats.totalKeywords}</p>
+                <p className="text-sm font-medium text-gray-500">
+                  Total Keywords
+                </p>
+                <p className="text-2xl font-semibold text-gray-900">
+                  {seoStats.totalKeywords}
+                </p>
               </div>
             </div>
           </div>
@@ -115,7 +128,9 @@ export default function SEODashboardClient() {
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Avg Search Volume</p>
+                <p className="text-sm font-medium text-gray-500">
+                  Avg Search Volume
+                </p>
                 <p className="text-2xl font-semibold text-gray-900">
                   {Math.round(seoStats.avgSearchVolume).toLocaleString()}
                 </p>
@@ -131,7 +146,9 @@ export default function SEODashboardClient() {
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Avg Difficulty</p>
+                <p className="text-sm font-medium text-gray-500">
+                  Avg Difficulty
+                </p>
                 <p className="text-2xl font-semibold text-gray-900">
                   {seoStats.avgDifficulty.toFixed(1)}
                 </p>
@@ -159,7 +176,9 @@ export default function SEODashboardClient() {
         {/* Top Keywords Table */}
         <div className="bg-white rounded-lg shadow mb-8">
           <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Top Keywords</h2>
+            <h2 className="text-lg font-semibold text-gray-900">
+              Top Keywords
+            </h2>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
@@ -204,7 +223,9 @@ export default function SEODashboardClient() {
         {/* Recent Changes */}
         <div className="bg-white rounded-lg shadow">
           <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Recent Changes</h2>
+            <h2 className="text-lg font-semibold text-gray-900">
+              Recent Changes
+            </h2>
           </div>
           <div className="p-6">
             <div className="space-y-4">
@@ -218,10 +239,13 @@ export default function SEODashboardClient() {
                       ({change.type})
                     </span>
                   </div>
-                  <div className={`flex items-center text-sm ${
-                    change.change > 0 ? 'text-green-600' : 'text-red-600'
-                  }`}>
-                    {change.change > 0 ? '↗' : '↘'} {Math.abs(change.change).toFixed(1)}%
+                  <div
+                    className={`flex items-center text-sm ${
+                      change.change > 0 ? "text-green-600" : "text-red-600"
+                    }`}
+                  >
+                    {change.change > 0 ? "↗" : "↘"}{" "}
+                    {Math.abs(change.change).toFixed(1)}%
                   </div>
                 </div>
               ))}

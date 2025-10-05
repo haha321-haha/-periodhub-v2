@@ -107,7 +107,7 @@ export const useConditionalArticleLoading = (showComponents: boolean) => {
       MarkdownWithMermaid: null
     };
   }
-  
+
   return {
     ArticleInteractions: LazyArticleInteractions,
     TableOfContents: LazyTableOfContents,
@@ -118,14 +118,14 @@ export const useConditionalArticleLoading = (showComponents: boolean) => {
 // 组件加载状态管理
 export const useArticleComponentLoadingState = () => {
   const [loadedComponents, setLoadedComponents] = useState<Set<string>>(new Set());
-  
+
   const markComponentLoaded = (componentName: string) => {
     setLoadedComponents(prev => new Set([...prev, componentName]));
   };
-  
+
   const isComponentLoaded = (componentName: string) => {
     return loadedComponents.has(componentName);
   };
-  
+
   return { markComponentLoaded, isComponentLoaded, loadedComponents };
 };

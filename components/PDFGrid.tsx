@@ -14,12 +14,12 @@ interface PDFGridProps {
   onDownload?: (resource: LocalizedPDFResource) => void;
 }
 
-export default function PDFGrid({ 
-  resources, 
-  categories, 
-  locale, 
+export default function PDFGrid({
+  resources,
+  categories,
+  locale,
   t,
-  onDownload 
+  onDownload
 }: PDFGridProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -28,23 +28,23 @@ export default function PDFGrid({
   // 过滤和搜索资源
   const filteredResources = useMemo(() => {
     let filtered = resources;
-    
+
     // 按分类过滤
     filtered = filterPDFsByCategory(filtered, selectedCategory);
-    
+
     // 搜索过滤
     filtered = searchPDFs(filtered, searchQuery);
-    
+
     // 排序（特色优先）
     filtered = sortPDFs(filtered, 'featured');
-    
+
     return filtered;
   }, [resources, selectedCategory, searchQuery]);
 
   // 按分类分组资源
   const resourcesByCategory = useMemo(() => {
     const grouped: Record<string, LocalizedPDFResource[]> = {};
-    
+
     if (selectedCategory === 'all') {
       // 显示所有分类
       categories.forEach(category => {
@@ -59,7 +59,7 @@ export default function PDFGrid({
       // 只显示选中的分类
       grouped[selectedCategory] = filteredResources;
     }
-    
+
     return grouped;
   }, [filteredResources, selectedCategory, categories]);
 
@@ -84,7 +84,7 @@ export default function PDFGrid({
           totalResults={0}
           t={t}
         />
-        
+
         <div className="text-center py-16">
           <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full flex items-center justify-center">
             <span className="text-4xl">📄</span>
@@ -93,7 +93,7 @@ export default function PDFGrid({
             {t('pdfCenter.empty.title')}
           </h3>
           <p className="text-gray-600 mb-6 max-w-md mx-auto">
-            {searchQuery 
+            {searchQuery
               ? t('pdfCenter.empty.searchMessage')
               : t('pdfCenter.empty.filterMessage')
             }

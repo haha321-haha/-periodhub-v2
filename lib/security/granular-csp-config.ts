@@ -12,7 +12,7 @@ export interface GranularCSPConfig {
     admin: CSPDirectives;
     api: CSPDirectives;
   };
-  
+
   // 按功能模块配置
   featureSpecific: {
     analytics: CSPDirectives;
@@ -20,7 +20,7 @@ export interface GranularCSPConfig {
     uploads: CSPDirectives;
     charts: CSPDirectives;
   };
-  
+
   // 动态策略调整
   dynamic: {
     enableNonce: boolean;
@@ -89,7 +89,7 @@ export const granularCSPConfig: GranularCSPConfig = {
       'form-action': ["'self'"],
       'frame-ancestors': ["'none'"],
     },
-    
+
     // 认证页面 - 更严格
     authenticated: {
       'default-src': ["'self'"],
@@ -124,7 +124,7 @@ export const granularCSPConfig: GranularCSPConfig = {
       'form-action': ["'self'"],
       'frame-ancestors': ["'none'"],
     },
-    
+
     // 管理页面 - 最严格
     admin: {
       'default-src': ["'self'"],
@@ -154,7 +154,7 @@ export const granularCSPConfig: GranularCSPConfig = {
       'form-action': ["'self'"],
       'frame-ancestors': ["'none'"],
     },
-    
+
     // API页面 - 最小权限
     api: {
       'default-src': ["'none'"],
@@ -169,7 +169,7 @@ export const granularCSPConfig: GranularCSPConfig = {
       'frame-ancestors': ["'none'"],
     },
   },
-  
+
   // 按功能模块配置
   featureSpecific: {
     // 分析功能
@@ -185,7 +185,7 @@ export const granularCSPConfig: GranularCSPConfig = {
         'https://analytics.google.com',
       ],
     },
-    
+
     // 支付功能
     payments: {
       'script-src': [
@@ -203,7 +203,7 @@ export const granularCSPConfig: GranularCSPConfig = {
         'https://js.stripe.com',
       ],
     },
-    
+
     // 文件上传功能
     uploads: {
       'img-src': [
@@ -217,7 +217,7 @@ export const granularCSPConfig: GranularCSPConfig = {
         'https://api.periodhub.health',
       ],
     },
-    
+
     // 图表功能
     charts: {
       'script-src': [
@@ -231,7 +231,7 @@ export const granularCSPConfig: GranularCSPConfig = {
       ],
     },
   },
-  
+
   // 动态策略配置
   dynamic: {
     enableNonce: true,
@@ -246,12 +246,12 @@ export const granularCSPConfig: GranularCSPConfig = {
 export class GranularCSPManager {
   private config: GranularCSPConfig;
   private nonce: string;
-  
+
   constructor(config: GranularCSPConfig) {
     this.config = config;
     this.nonce = this.generateNonce();
   }
-  
+
   /**
    * 生成随机nonce
    */
@@ -260,7 +260,7 @@ export class GranularCSPManager {
     crypto.getRandomValues(array);
     return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
   }
-  
+
   /**
    * 根据页面类型获取CSP策略
    */
@@ -268,7 +268,7 @@ export class GranularCSPManager {
     const directives = this.config.pageSpecific[pageType];
     return this.generateCSPHeader(directives);
   }
-  
+
   /**
    * 根据功能模块获取CSP策略
    */
@@ -276,13 +276,13 @@ export class GranularCSPManager {
     const directives = this.config.featureSpecific[feature];
     return this.generateCSPHeader(directives);
   }
-  
+
   /**
    * 合并多个CSP策略
    */
   mergeCSPDirectives(...directives: CSPDirectives[]): CSPDirectives {
     const merged: CSPDirectives = {};
-    
+
     directives.forEach(directive => {
       Object.entries(directive).forEach(([key, values]) => {
         if (merged[key as keyof CSPDirectives]) {
@@ -295,16 +295,16 @@ export class GranularCSPManager {
         }
       });
     });
-    
+
     return merged;
   }
-  
+
   /**
    * 生成CSP头部字符串
    */
   private generateCSPHeader(directives: CSPDirectives): string {
     const processedDirectives: string[] = [];
-    
+
     Object.entries(directives).forEach(([directive, sources]) => {
       if (sources && sources.length > 0) {
         // 处理特殊指令
@@ -314,14 +314,14 @@ export class GranularCSPManager {
           }
           return source;
         });
-        
+
         processedDirectives.push(`${directive} ${processedSources.join(' ')}`);
       }
     });
-    
+
     return processedDirectives.join('; ');
   }
-  
+
   /**
    * 验证资源是否被允许
    */
@@ -332,14 +332,14 @@ export class GranularCSPManager {
   ): { allowed: boolean; reason?: string } {
     const directives = this.config.pageSpecific[pageType];
     const allowedSources = directives[resourceType];
-    
+
     if (!allowedSources) {
       return { allowed: false, reason: `No ${resourceType} directive found` };
     }
-    
+
     try {
       const urlObj = new URL(url);
-      
+
       // 检查是否匹配允许的源
       const isAllowed = allowedSources.some(source => {
         if (source === "'self'") {
@@ -352,33 +352,33 @@ export class GranularCSPManager {
           return urlObj.protocol === 'blob:';
         }
         if (source.startsWith('https://')) {
-          return urlObj.protocol === 'https:' && 
+          return urlObj.protocol === 'https:' &&
                  (urlObj.hostname === source.replace('https://', '') ||
                   urlObj.hostname.endsWith('.' + source.replace('https://', '')));
         }
         return false;
       });
-      
+
       if (!isAllowed) {
-        return { 
-          allowed: false, 
-          reason: `URL ${url} is not allowed by ${resourceType} directive` 
+        return {
+          allowed: false,
+          reason: `URL ${url} is not allowed by ${resourceType} directive`
         };
       }
-      
+
       return { allowed: true };
     } catch (error) {
       return { allowed: false, reason: 'Invalid URL format' };
     }
   }
-  
+
   /**
    * 获取当前nonce
    */
   getNonce(): string {
     return this.nonce;
   }
-  
+
   /**
    * 生成资源完整性哈希
    */
@@ -397,11 +397,11 @@ export class GranularCSPManager {
  */
 export class CSPPolicyTester {
   private manager: GranularCSPManager;
-  
+
   constructor(manager: GranularCSPManager) {
     this.manager = manager;
   }
-  
+
   /**
    * 测试CSP策略
    */
@@ -432,7 +432,7 @@ export class CSPPolicyTester {
         expected: false,
       },
     ];
-    
+
     const results = tests.map(test => {
       const result = this.manager.validateResource(pageType, test.type, test.url);
       return {
@@ -442,17 +442,17 @@ export class CSPPolicyTester {
         reason: result.reason,
       };
     });
-    
+
     return results;
   }
-  
+
   /**
    * 生成测试报告
    */
   generateTestReport(results: any[]) {
     const passed = results.filter(r => r.passed).length;
     const total = results.length;
-    
+
     return {
       summary: {
         passed,
@@ -463,15 +463,15 @@ export class CSPPolicyTester {
       recommendations: this.generateRecommendations(results),
     };
   }
-  
+
   /**
    * 生成优化建议
    */
   private generateRecommendations(results: any[]) {
     const recommendations = [];
-    
+
     const failedTests = results.filter(r => !r.passed);
-    
+
     if (failedTests.length > 0) {
       recommendations.push({
         type: 'security',
@@ -479,7 +479,7 @@ export class CSPPolicyTester {
         action: '检查CSP策略配置，确保所有必要的资源都被允许',
       });
     }
-    
+
     return recommendations;
   }
 }

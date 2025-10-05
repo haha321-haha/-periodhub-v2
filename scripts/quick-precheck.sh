@@ -23,9 +23,9 @@ check_item() {
     local description="$1"
     local command="$2"
     local error_msg="$3"
-    
+
     echo -n "🔍 $description... "
-    
+
     if eval "$command" >/dev/null 2>&1; then
         echo -e "${GREEN}✅ 通过${NC}"
         return 0
@@ -41,9 +41,9 @@ warn_item() {
     local description="$1"
     local command="$2"
     local warning_msg="$3"
-    
+
     echo -n "🔍 $description... "
-    
+
     if eval "$command" >/dev/null 2>&1; then
         echo -e "${GREEN}✅ 通过${NC}"
         return 0
@@ -106,7 +106,7 @@ echo "-------------"
 # 检查Git仓库
 if [ -d .git ]; then
     echo -e "🔍 Git仓库... ${GREEN}✅ 存在${NC}"
-    
+
     # 检查工作区状态
     UNCOMMITTED=$(git status --porcelain | wc -l)
     if [ "$UNCOMMITTED" -eq 0 ]; then
@@ -116,11 +116,11 @@ if [ -d .git ]; then
         echo "   建议先提交或暂存更改"
         ((WARNINGS++))
     fi
-    
+
     # 检查当前分支
     CURRENT_BRANCH=$(git branch --show-current)
     echo -e "🔍 当前分支... ${GREEN}✅ $CURRENT_BRANCH${NC}"
-    
+
 else
     echo -e "🔍 Git仓库... ${RED}❌ 不存在${NC}"
     ((ERRORS++))
@@ -202,19 +202,19 @@ echo "==============="
 if [ $ERRORS -eq 0 ]; then
     echo -e "${GREEN}✅ 所有关键检查通过！${NC}"
     echo -e "${GREEN}🚀 可以开始硬编码修复！${NC}"
-    
+
     if [ $WARNINGS -gt 0 ]; then
         echo -e "${YELLOW}⚠️  有 $WARNINGS 个警告，建议处理${NC}"
     fi
-    
+
     exit 0
 else
     echo -e "${RED}❌ 发现 $ERRORS 个关键问题${NC}"
     echo -e "${RED}🛑 请先解决这些问题再开始修复${NC}"
-    
+
     if [ $WARNINGS -gt 0 ]; then
         echo -e "${YELLOW}⚠️  还有 $WARNINGS 个警告${NC}"
     fi
-    
+
     exit 1
 fi

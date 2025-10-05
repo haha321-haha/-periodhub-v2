@@ -68,13 +68,13 @@ export default function SafeSmartImage({
     if (debugMode) {
       console.warn(`SafeSmartImage错误 (尝试 ${errorCount + 1}):`, e);
     }
-    
+
     setErrorCount(prev => prev + 1);
-    
+
     if (enableErrorBoundary && errorCount >= 1) {
       setHasError(true);
     }
-    
+
     onError?.(e);
   };
 
@@ -184,7 +184,7 @@ export default function SafeSmartImage({
     if (debugMode) {
       console.error('SmartImage渲染错误:', error);
     }
-    
+
     // 捕获渲染错误，回退到EnhancedImage
     if (enableFallback) {
       return (
@@ -204,7 +204,7 @@ export default function SafeSmartImage({
         />
       );
     }
-    
+
     // 如果禁用回退，抛出错误
     throw error;
   }
@@ -215,13 +215,13 @@ export const SafeSmartImageConfig = {
   // 环境变量检查
   isEnabled: () => process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== 'false',
   isDebugMode: () => process.env.NEXT_PUBLIC_DEBUG_IMAGES === 'true',
-  
+
   // 重置全局错误状态
   resetGlobalError: () => {
     // 这里可以实现全局错误状态重置
     console.log('重置全局SmartImage错误状态');
   },
-  
+
   // 获取当前配置
   getConfig: () => ({
     useSmartImage: process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== 'false',
@@ -230,6 +230,3 @@ export const SafeSmartImageConfig = {
     isProduction: process.env.NODE_ENV === 'production'
   })
 };
-
-
-

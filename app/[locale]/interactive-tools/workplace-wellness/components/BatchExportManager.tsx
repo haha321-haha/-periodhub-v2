@@ -1,31 +1,31 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  Download, 
-  Play, 
-  Pause, 
-  X, 
-  RotateCcw, 
-  CheckCircle, 
-  AlertCircle, 
+import {
+  Download,
+  Play,
+  Pause,
+  X,
+  RotateCcw,
+  CheckCircle,
+  AlertCircle,
   Clock,
   FileText,
   Users,
   Calendar,
   Plus
 } from 'lucide-react';
-import { 
-  useBatchExportQueue, 
+import {
+  useBatchExportQueue,
   useExportTemplates,
   useBatchExportActions,
   useExportHistoryActions
 } from '../hooks/useWorkplaceWellnessStore';
 import { useTranslations } from 'next-intl';
-import { 
-  BatchExportItem, 
-  ExportTemplate, 
-  ExportType, 
+import {
+  BatchExportItem,
+  ExportTemplate,
+  ExportType,
   ExtendedExportFormat,
 } from '../types';
 
@@ -43,7 +43,7 @@ export default function BatchExportManager({}: BatchExportManagerProps) {
     clearBatchExport
   } = useBatchExportActions();
   const { addExportHistory } = useExportHistoryActions();
-  
+
   const t = useTranslations('workplaceWellness');
   const [isCreating, setIsCreating] = useState(false);
   const [selectedItems, setSelectedItems] = useState<BatchExportItem[]>([]);
@@ -61,17 +61,17 @@ export default function BatchExportManager({}: BatchExportManagerProps) {
     if (!batchQueue) return;
 
     const pendingItems = batchQueue.items.filter(item => item.status === 'pending');
-    
+
     for (const item of pendingItems) {
       // 更新状态为处理中
       updateBatchItemStatus(item.id, 'processing', 0);
-      
+
       // 模拟处理时间
       for (let progress = 0; progress <= 100; progress += 20) {
         await new Promise(resolve => setTimeout(resolve, 200));
         updateBatchItemStatus(item.id, 'processing', progress);
       }
-      
+
       // 模拟成功/失败
       const success = Math.random() > 0.2; // 80% 成功率
       if (success) {
@@ -92,7 +92,7 @@ export default function BatchExportManager({}: BatchExportManagerProps) {
         updateBatchItemStatus(item.id, 'failed', 0, '处理失败，请重试');
       }
     }
-    
+
     setIsProcessing(false);
   };
 
@@ -153,7 +153,7 @@ export default function BatchExportManager({}: BatchExportManagerProps) {
       progress: 0,
       createdAt: new Date().toISOString()
     };
-    
+
     setSelectedItems([...selectedItems, newItem]);
   };
 

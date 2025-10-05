@@ -3,7 +3,11 @@
  * 基于HVsLYEp的性能需求，实现全面的性能测试和监控
  */
 
-import { PerformanceMonitor, MemoryMonitor, ComponentCache } from './performanceOptimizer';
+import {
+  PerformanceMonitor,
+  MemoryMonitor,
+  ComponentCache,
+} from "./performanceOptimizer";
 
 /**
  * 性能测试结果接口
@@ -35,7 +39,7 @@ export class PerformanceTestSuite {
   async runTest(
     testName: string,
     testFunction: () => Promise<void> | void,
-    metadata?: Record<string, any>
+    metadata?: Record<string, any>,
   ): Promise<PerformanceTestResult> {
     const startTime = Date.now();
     const memoryBefore = MemoryMonitor.getMemoryInfo();
@@ -44,13 +48,13 @@ export class PerformanceTestSuite {
 
     try {
       PerformanceMonitor.startMeasure(testName);
-      
+
       if (testFunction instanceof Promise) {
         await testFunction();
       } else {
         testFunction();
       }
-      
+
       PerformanceMonitor.endMeasure(testName);
     } catch (err) {
       success = false;
@@ -68,7 +72,9 @@ export class PerformanceTestSuite {
       memoryUsage: {
         before: memoryBefore?.usedJSHeapSize || 0,
         after: memoryAfter?.usedJSHeapSize || 0,
-        delta: (memoryAfter?.usedJSHeapSize || 0) - (memoryBefore?.usedJSHeapSize || 0),
+        delta:
+          (memoryAfter?.usedJSHeapSize || 0) -
+          (memoryBefore?.usedJSHeapSize || 0),
       },
       success,
       error,
@@ -83,15 +89,17 @@ export class PerformanceTestSuite {
   /**
    * 运行测试套件
    */
-  async runTestSuite(tests: Array<{
-    name: string;
-    test: () => Promise<void> | void;
-    metadata?: Record<string, any>;
-  }>): Promise<PerformanceTestResult[]> {
+  async runTestSuite(
+    tests: Array<{
+      name: string;
+      test: () => Promise<void> | void;
+      metadata?: Record<string, any>;
+    }>,
+  ): Promise<PerformanceTestResult[]> {
     this.isRunning = true;
     this.results = [];
 
-    console.log('🧪 开始运行性能测试套件...');
+    console.log("🧪 开始运行性能测试套件...");
 
     for (const test of tests) {
       console.log(`🔍 运行测试: ${test.name}`);
@@ -99,7 +107,7 @@ export class PerformanceTestSuite {
     }
 
     this.isRunning = false;
-    console.log('✅ 性能测试套件完成');
+    console.log("✅ 性能测试套件完成");
     return this.results;
   }
 
@@ -115,10 +123,14 @@ export class PerformanceTestSuite {
    */
   generateReport(): string {
     const totalTests = this.results.length;
-    const passedTests = this.results.filter(r => r.success).length;
+    const passedTests = this.results.filter((r) => r.success).length;
     const failedTests = totalTests - passedTests;
-    const averageDuration = this.results.reduce((sum, r) => sum + r.duration, 0) / totalTests;
-    const totalMemoryDelta = this.results.reduce((sum, r) => sum + r.memoryUsage.delta, 0);
+    const averageDuration =
+      this.results.reduce((sum, r) => sum + r.duration, 0) / totalTests;
+    const totalMemoryDelta = this.results.reduce(
+      (sum, r) => sum + r.memoryUsage.delta,
+      0,
+    );
 
     const report = `
 📊 性能测试报告
@@ -131,13 +143,17 @@ export class PerformanceTestSuite {
 总内存变化: ${totalMemoryDelta} bytes
 
 详细结果:
-${this.results.map(r => `
+${this.results
+  .map(
+    (r) => `
 ✅ ${r.testName}
    执行时间: ${r.duration}ms
    内存变化: ${r.memoryUsage.delta} bytes
-   状态: ${r.success ? '通过' : '失败'}
-   ${r.error ? `错误: ${r.error}` : ''}
-`).join('')}
+   状态: ${r.success ? "通过" : "失败"}
+   ${r.error ? `错误: ${r.error}` : ""}
+`,
+  )
+  .join("")}
 ====================================
     `;
 
@@ -164,7 +180,7 @@ export class ComponentRenderTest {
   static async testComponentRender(
     componentName: string,
     renderFunction: () => void,
-    iterations: number = 100
+    iterations: number = 100,
   ): Promise<PerformanceTestResult> {
     return this.testSuite.runTest(
       `${componentName}-render-${iterations}iterations`,
@@ -173,7 +189,7 @@ export class ComponentRenderTest {
           renderFunction();
         }
       },
-      { componentName, iterations }
+      { componentName, iterations },
     );
   }
 
@@ -184,7 +200,7 @@ export class ComponentRenderTest {
     componentName: string,
     setupFunction: () => void,
     rerenderFunction: () => void,
-    iterations: number = 50
+    iterations: number = 50,
   ): Promise<PerformanceTestResult> {
     return this.testSuite.runTest(
       `${componentName}-rerender-${iterations}iterations`,
@@ -194,7 +210,7 @@ export class ComponentRenderTest {
           rerenderFunction();
         }
       },
-      { componentName, iterations }
+      { componentName, iterations },
     );
   }
 
@@ -225,7 +241,7 @@ export class StateManagementTest {
   static async testStateUpdate(
     updateFunction: () => void,
     iterations: number = 1000,
-    testName: string = 'state-update'
+    testName: string = "state-update",
   ): Promise<PerformanceTestResult> {
     return this.testSuite.runTest(
       `${testName}-${iterations}iterations`,
@@ -234,7 +250,7 @@ export class StateManagementTest {
           updateFunction();
         }
       },
-      { iterations }
+      { iterations },
     );
   }
 
@@ -244,7 +260,7 @@ export class StateManagementTest {
   static async testStateSubscription(
     subscribeFunction: () => () => void,
     iterations: number = 100,
-    testName: string = 'state-subscription'
+    testName: string = "state-subscription",
   ): Promise<PerformanceTestResult> {
     return this.testSuite.runTest(
       `${testName}-${iterations}iterations`,
@@ -254,9 +270,9 @@ export class StateManagementTest {
           unsubscribeFunctions.push(subscribeFunction());
         }
         // 清理订阅
-        unsubscribeFunctions.forEach(unsubscribe => unsubscribe());
+        unsubscribeFunctions.forEach((unsubscribe) => unsubscribe());
       },
-      { iterations }
+      { iterations },
     );
   }
 
@@ -280,7 +296,7 @@ export class MemoryPerformanceTest {
   static async testMemoryLeak(
     setupFunction: () => void,
     cleanupFunction: () => void,
-    iterations: number = 10
+    iterations: number = 10,
   ): Promise<PerformanceTestResult> {
     return this.testSuite.runTest(
       `memory-leak-test-${iterations}iterations`,
@@ -290,7 +306,7 @@ export class MemoryPerformanceTest {
           cleanupFunction();
         }
       },
-      { iterations }
+      { iterations },
     );
   }
 
@@ -299,7 +315,7 @@ export class MemoryPerformanceTest {
    */
   static async testGarbageCollection(
     createObjectsFunction: () => void,
-    iterations: number = 100
+    iterations: number = 100,
   ): Promise<PerformanceTestResult> {
     return this.testSuite.runTest(
       `garbage-collection-test-${iterations}iterations`,
@@ -310,7 +326,7 @@ export class MemoryPerformanceTest {
           MemoryMonitor.forceGC();
         }
       },
-      { iterations }
+      { iterations },
     );
   }
 
@@ -333,14 +349,14 @@ export class NetworkPerformanceTest {
    */
   static async testApiResponseTime(
     apiCall: () => Promise<any>,
-    testName: string = 'api-response'
+    testName: string = "api-response",
   ): Promise<PerformanceTestResult> {
     return this.testSuite.runTest(
       testName,
       async () => {
         await apiCall();
       },
-      { type: 'api' }
+      { type: "api" },
     );
   }
 
@@ -349,14 +365,14 @@ export class NetworkPerformanceTest {
    */
   static async testConcurrentRequests(
     apiCalls: (() => Promise<any>)[],
-    testName: string = 'concurrent-requests'
+    testName: string = "concurrent-requests",
   ): Promise<PerformanceTestResult> {
     return this.testSuite.runTest(
       testName,
       async () => {
-        await Promise.all(apiCalls.map(call => call()));
+        await Promise.all(apiCalls.map((call) => call()));
       },
-      { type: 'concurrent', requestCount: apiCalls.length }
+      { type: "concurrent", requestCount: apiCalls.length },
     );
   }
 
@@ -386,7 +402,7 @@ export class PerformanceTestRunner {
    * 运行所有性能测试
    */
   async runAllTests(): Promise<PerformanceTestResult[]> {
-    console.log('🚀 开始运行综合性能测试...');
+    console.log("🚀 开始运行综合性能测试...");
 
     // 清理之前的结果
     this.allResults = [];
@@ -394,30 +410,29 @@ export class PerformanceTestRunner {
 
     try {
       // 运行组件渲染测试
-      console.log('📱 运行组件渲染测试...');
+      console.log("📱 运行组件渲染测试...");
       const renderResults = ComponentRenderTest.getResults();
       this.allResults.push(...renderResults);
 
       // 运行状态管理测试
-      console.log('🏪 运行状态管理测试...');
+      console.log("🏪 运行状态管理测试...");
       const stateResults = StateManagementTest.getResults();
       this.allResults.push(...stateResults);
 
       // 运行内存性能测试
-      console.log('💾 运行内存性能测试...');
+      console.log("💾 运行内存性能测试...");
       const memoryResults = MemoryPerformanceTest.getResults();
       this.allResults.push(...memoryResults);
 
       // 运行网络性能测试
-      console.log('🌐 运行网络性能测试...');
+      console.log("🌐 运行网络性能测试...");
       const networkResults = NetworkPerformanceTest.getResults();
       this.allResults.push(...networkResults);
 
-      console.log('✅ 所有性能测试完成');
+      console.log("✅ 所有性能测试完成");
       return this.allResults;
-
     } catch (error) {
-      console.error('❌ 性能测试执行失败:', error);
+      console.error("❌ 性能测试执行失败:", error);
       throw error;
     }
   }
@@ -427,7 +442,7 @@ export class PerformanceTestRunner {
    */
   generateComprehensiveReport(): string {
     const totalTests = this.allResults.length;
-    const passedTests = this.allResults.filter(r => r.success).length;
+    const passedTests = this.allResults.filter((r) => r.success).length;
     const failedTests = totalTests - passedTests;
 
     const report = `
@@ -440,18 +455,29 @@ export class PerformanceTestRunner {
 成功率: ${((passedTests / totalTests) * 100).toFixed(2)}%
 
 性能指标:
-- 平均执行时间: ${(this.allResults.reduce((sum, r) => sum + r.duration, 0) / totalTests).toFixed(2)}ms
-- 总内存变化: ${this.allResults.reduce((sum, r) => sum + r.memoryUsage.delta, 0)} bytes
-- 最大内存使用: ${Math.max(...this.allResults.map(r => r.memoryUsage.after))} bytes
+- 平均执行时间: ${(
+      this.allResults.reduce((sum, r) => sum + r.duration, 0) / totalTests
+    ).toFixed(2)}ms
+- 总内存变化: ${this.allResults.reduce(
+      (sum, r) => sum + r.memoryUsage.delta,
+      0,
+    )} bytes
+- 最大内存使用: ${Math.max(
+      ...this.allResults.map((r) => r.memoryUsage.after),
+    )} bytes
 
 详细结果:
-${this.allResults.map(r => `
-${r.success ? '✅' : '❌'} ${r.testName}
+${this.allResults
+  .map(
+    (r) => `
+${r.success ? "✅" : "❌"} ${r.testName}
    执行时间: ${r.duration}ms
    内存变化: ${r.memoryUsage.delta} bytes
    时间戳: ${new Date(r.timestamp).toLocaleTimeString()}
-   ${r.error ? `错误: ${r.error}` : ''}
-`).join('')}
+   ${r.error ? `错误: ${r.error}` : ""}
+`,
+  )
+  .join("")}
 ====================================
     `;
 
@@ -462,11 +488,15 @@ ${r.success ? '✅' : '❌'} ${r.testName}
    * 导出测试结果为JSON
    */
   exportResults(): string {
-    return JSON.stringify({
-      timestamp: new Date().toISOString(),
-      totalTests: this.allResults.length,
-      results: this.allResults,
-    }, null, 2);
+    return JSON.stringify(
+      {
+        timestamp: new Date().toISOString(),
+        totalTests: this.allResults.length,
+        results: this.allResults,
+      },
+      null,
+      2,
+    );
   }
 }
 
@@ -479,4 +509,3 @@ export default {
   NetworkPerformanceTest,
   PerformanceTestRunner,
 };
-

@@ -9,7 +9,7 @@ export interface Messages {
     title: string;
     description: string;
   };
-  
+
   navigation: {
     home: string;
     articles: string;
@@ -125,19 +125,22 @@ export interface Messages {
 }
 
 // 翻译键路径类型
-export type TranslationKey = 
-  | 'site.name'
-  | 'site.title'
-  | 'site.description'
-  | 'navigation.home'
-  | 'navigation.articles'
-  | 'painTracker.assessment.title'
-  | 'painTracker.assessment.result.title'
-  | 'painTracker.assessment.resultMessages.mild'
-  // ... 更多键路径
+export type TranslationKey =
+  | "site.name"
+  | "site.title"
+  | "site.description"
+  | "navigation.home"
+  | "navigation.articles"
+  | "painTracker.assessment.title"
+  | "painTracker.assessment.result.title"
+  | "painTracker.assessment.resultMessages.mild";
+// ... 更多键路径
 
 // 翻译函数类型
-export type TranslationFunction = (key: TranslationKey, params?: Record<string, any>) => string;
+export type TranslationFunction = (
+  key: TranslationKey,
+  params?: Record<string, any>,
+) => string;
 
 // 翻译Hook返回类型
 export interface UseTranslationsReturn {

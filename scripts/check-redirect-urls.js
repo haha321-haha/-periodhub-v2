@@ -48,14 +48,14 @@ function checkUrl(url) {
 
 async function checkAllUrls() {
   console.log('🔍 检查重定向问题的URL状态...\n');
-  
+
   for (const url of urlsToCheck) {
     try {
       const result = await checkUrl(url);
-      
+
       console.log(`📋 URL: ${url}`);
       console.log(`   状态码: ${result.statusCode}`);
-      
+
       if (result.hasRedirect) {
         console.log(`   ⚠️  重定向到: ${result.location}`);
         console.log(`   问题: 存在重定向`);
@@ -66,9 +66,9 @@ async function checkAllUrls() {
       } else {
         console.log(`   ⚠️  状态: ${result.statusCode}`);
       }
-      
+
       console.log('');
-      
+
     } catch (error) {
       console.log(`❌ ${url} 检查失败: ${error.message}\n`);
     }

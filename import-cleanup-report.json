@@ -9,9 +9,7 @@
   },
   "validation": {
     "success": false,
-    "errors": [
-      "Command failed: npx eslint . --ext .ts,.tsx"
-    ]
+    "errors": ["Command failed: npx eslint . --ext .ts,.tsx"]
   },
   "summary": {
     "total": 0,

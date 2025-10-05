@@ -29,41 +29,41 @@ const AlertTriangle = dynamic(() => import('lucide-react').then(mod => ({ defaul
 // 动态导入组件以优化性能
 const PartnerUnderstandingQuiz = dynamic(
   () => import('./PartnerUnderstandingQuiz'),
-  { 
+  {
     loading: () => <div className="quiz-container"><div className="loading-skeleton h-96 rounded-lg"></div></div>,
-    ssr: false 
+    ssr: false
   }
 );
 
 const TrainingCampDisplay = dynamic(
   () => import('./TrainingCampDisplay'),
-  { 
+  {
     loading: () => <div className="quiz-container"><div className="loading-skeleton h-96 rounded-lg"></div></div>,
-    ssr: false 
+    ssr: false
   }
 );
 
 const ResultsDisplay = dynamic(
   () => import('./ResultsDisplay'),
-  { 
+  {
     loading: () => <div className="results-container"><div className="loading-skeleton h-96 rounded-lg"></div></div>,
-    ssr: false 
+    ssr: false
   }
 );
 
 const TrainingCampSchedule = dynamic(
   () => import('./TrainingCampSchedule'),
-  { 
+  {
     loading: () => <div className="training-camp-container"><div className="loading-skeleton h-96 rounded-lg"></div></div>,
-    ssr: false 
+    ssr: false
   }
 );
 
 const RelatedLinks = dynamic(
   () => import('./RelatedLinks'),
-  { 
+  {
     loading: () => <div className="related-links-section"><div className="loading-skeleton h-64 rounded-lg"></div></div>,
-    ssr: false 
+    ssr: false
   }
 );
 
@@ -80,8 +80,8 @@ type AppState = 'intro' | 'quiz' | 'results' | 'training';
 
 export default function PartnerHandbookClient({ locale }: PartnerHandbookClientProps) {
   const { t, tRaw } = useSafeTranslations('partnerHandbook');
-  const { 
-    currentLanguage, 
+  const {
+    currentLanguage,
     currentStage,
     setCurrentStage,
     completeStage,
@@ -90,13 +90,13 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
     isStageUnlocked,
     initializeMissingStages
   } = usePartnerHandbookStore();
-  
+
   // 从stageProgress中获取当前阶段的quizResult
   const quizResult = stageProgress[currentStage]?.result;
-  
+
   const stageActions = useStageActions();
   const { clearAllTestData } = stageActions;
-  
+
   const [currentState, setCurrentState] = useState<AppState>('intro');
   const [isLoading, setIsLoading] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -104,7 +104,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
   // 推荐数据配置
   const recommendations = React.useMemo(() => {
     const isZh = locale === 'zh';
-    
+
     return {
       relatedTools: [
         {
@@ -242,19 +242,19 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
     const initializeStages = () => {
       const stages: QuizStage[] = ['stage1', 'stage2', 'stage3', 'stage4'];
       let needsInitialization = false;
-      
+
       stages.forEach(stage => {
         if (!stageProgress[stage]) {
           needsInitialization = true;
         }
       });
-      
+
       if (needsInitialization) {
         console.log('🔧 Initializing missing stages...');
         stageActions.initializeMissingStages();
       }
     };
-    
+
     initializeStages();
   }, [stageProgress, stageActions]);
 
@@ -318,7 +318,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-12" data-page="partner-communication-scenario">
       {/* Breadcrumb */}
-      <Breadcrumb 
+      <Breadcrumb
         items={[
           { label: locale === 'zh' ? '场景解决方案' : 'Scenario Solutions', href: `/${locale}/scenario-solutions` },
           { label: locale === 'zh' ? '伴侣沟通' : 'Partner Communication' }
@@ -361,10 +361,10 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                   {t('fourStagesDescription')}
                 </p>
               </div>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                 {/* 第一阶段：理解度测试 */}
-                <button 
+                <button
                   onClick={handleStartQuiz}
                   className="bg-white rounded-xl p-4 sm:p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-primary-200 group cursor-pointer hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500"
                 >
@@ -389,9 +389,9 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                     </svg>
                   </div>
                 </button>
-                
+
                 {/* 第二阶段：专业深度测试 */}
-                <button 
+                <button
                   onClick={() => {
                     if (isStageUnlockedSafe('stage2')) {
                       setCurrentStage('stage2');
@@ -399,8 +399,8 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                     }
                   }}
                   className={`rounded-xl p-4 sm:p-6 shadow-md transition-all duration-300 border group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-                    isStageUnlockedSafe('stage2') 
-                      ? 'bg-white hover:shadow-lg hover:border-primary-200 hover:scale-105' 
+                    isStageUnlockedSafe('stage2')
+                      ? 'bg-white hover:shadow-lg hover:border-primary-200 hover:scale-105'
                       : 'bg-gray-50 border-gray-200 opacity-60 cursor-not-allowed'
                   }`}
                   disabled={!isStageUnlockedSafe('stage2')}
@@ -433,17 +433,17 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                     {isStageUnlockedSafe('stage2') ? t('quiz.stages.stage2.buttonText') : t('quiz.stages.stage2.unlockCondition')}
                   </div>
                 </button>
-                
+
                 {/* 第三阶段：30天训练营 */}
-                <button 
+                <button
                   onClick={() => {
                     if (isStageUnlockedSafe('stage3')) {
                       setCurrentState('training');
                     }
                   }}
                   className={`rounded-xl p-4 sm:p-6 shadow-md transition-all duration-300 border group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-                    isStageUnlockedSafe('stage3') 
-                      ? 'bg-white hover:shadow-lg hover:border-primary-200 hover:scale-105' 
+                    isStageUnlockedSafe('stage3')
+                      ? 'bg-white hover:shadow-lg hover:border-primary-200 hover:scale-105'
                       : 'bg-gray-50 border-gray-200 opacity-60 cursor-not-allowed'
                   }`}
                   disabled={!isStageUnlockedSafe('stage3')}
@@ -476,9 +476,9 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                     {isStageUnlockedSafe('stage3') ? t('quiz.stages.stage3.buttonText') : t('quiz.stages.stage3.unlockCondition')}
                   </div>
                 </button>
-                
+
                 {/* 第四阶段：个性化指导 */}
-                <button 
+                <button
                   onClick={() => {
                     if (isStageUnlockedSafe('stage4')) {
                       // TODO: 实现个性化指导页面
@@ -486,8 +486,8 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                     }
                   }}
                   className={`rounded-xl p-4 sm:p-6 shadow-md transition-all duration-300 border group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-                    isStageUnlockedSafe('stage4') 
-                      ? 'bg-white hover:shadow-lg hover:border-primary-200 hover:scale-105' 
+                    isStageUnlockedSafe('stage4')
+                      ? 'bg-white hover:shadow-lg hover:border-primary-200 hover:scale-105'
                       : 'bg-gray-50 border-gray-200 opacity-60 cursor-not-allowed'
                   }`}
                   disabled={!isStageUnlockedSafe('stage4')}
@@ -530,13 +530,13 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                   {t('stageTitles.stage1')}
                 </h2>
                 <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  {locale === 'zh' 
-                    ? '通过5道基础题目，了解你对痛经的认知水平，获得个性化建议' 
+                  {locale === 'zh'
+                    ? '通过5道基础题目，了解你对痛经的认知水平，获得个性化建议'
                     : 'Understand your knowledge level through 5 basic questions and get personalized recommendations'
                   }
                 </p>
               </div>
-              
+
               {!isStage1Completed || !stageProgress.stage1?.result ? (
                 <PartnerUnderstandingQuiz
                   locale={locale}
@@ -556,7 +556,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
 
             {/* 专业深度测试 - 直接显示 */}
             <section id="stage2-section" className="mb-16">
-              
+
               {!isStage2Completed || !stageProgress.stage2?.result ? (
                 <PartnerUnderstandingQuiz
                   locale={locale}
@@ -581,13 +581,13 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
                   {t('stageTitles.stage3')}
                 </h2>
                 <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                  {locale === 'zh' 
-                    ? '每天5分钟，循序渐进成为暖心伴侣' 
+                  {locale === 'zh'
+                    ? '每天5分钟，循序渐进成为暖心伴侣'
                     : '5 minutes a day, progressively become a warm-hearted partner'
                   }
                 </p>
               </div>
-              
+
               {/* 直接显示训练营内容 */}
               <TrainingCampDisplay locale={locale} />
             </section>
@@ -596,7 +596,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
             <section className="bg-gradient-to-br from-pink-50 to-blue-50 mt-16">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="space-y-12">
-                  
+
                   {/* 相关工具区域 */}
                   <section>
                     <h2 className="text-xl font-semibold text-gray-900 mb-6">
@@ -650,7 +650,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
 
             {/* 返回场景解决方案总览 */}
             <div className="text-center mt-12">
-              <Link 
+              <Link
                 href={`/${locale}/scenario-solutions`}
                 className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
               >
@@ -749,7 +749,7 @@ export default function PartnerHandbookClient({ locale }: PartnerHandbookClientP
           </h3>
           <div className="space-y-3">
             <p className="text-yellow-700 text-xs sm:text-sm">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? '如果您发现测试结果没有变化，可能是因为浏览器缓存了之前的测试数据。点击下面的按钮可以清除所有测试数据并重新开始。'
                 : 'If you notice that test results are not changing, it might be because the browser cached previous test data. Click the button below to clear all test data and start fresh.'
               }

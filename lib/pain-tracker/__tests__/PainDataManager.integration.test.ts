@@ -137,21 +137,21 @@ describe('PainDataManager Integration Tests', () => {
     it('should handle record updates and maintain data integrity', async () => {
       // Save initial record
       const initialRecord = await dataManager.saveRecord(sampleRecords[0]);
-      
+
       // Update the record
       const updates = {
         painLevel: 8,
         notes: 'Updated: Pain increased',
         effectiveness: 9
       };
-      
+
       const updatedRecord = await dataManager.updateRecord(initialRecord.id, updates);
-      
+
       expect(updatedRecord.painLevel).toBe(8);
       expect(updatedRecord.notes).toBe('Updated: Pain increased');
       expect(updatedRecord.effectiveness).toBe(9);
       expect(updatedRecord.updatedAt.getTime()).toBeGreaterThanOrEqual(updatedRecord.createdAt.getTime());
-      
+
       // Verify the update persisted
       const retrievedRecord = await dataManager.getRecord(initialRecord.id);
       expect(retrievedRecord?.painLevel).toBe(8);
@@ -172,18 +172,18 @@ describe('PainDataManager Integration Tests', () => {
 
       // Clear all data
       await dataManager.clearAllData();
-      
+
       // Verify data is cleared
       const emptyRecords = await dataManager.getAllRecords();
       expect(emptyRecords).toHaveLength(0);
 
       // Import the data back
       await dataManager.importData(exportedData);
-      
+
       // Verify data is restored
       const restoredRecords = await dataManager.getAllRecords();
       expect(restoredRecords).toHaveLength(3);
-      
+
       // Verify record integrity
       const firstRecord = restoredRecords.find(r => r.painLevel === 7);
       expect(firstRecord).toBeDefined();
@@ -207,14 +207,14 @@ describe('PainDataManager Integration Tests', () => {
 
       // Perform cleanup
       const cleanupResult = await dataManager.performDataCleanup();
-      
+
       // Since we made the records different, no duplicates should be removed
       expect(cleanupResult.removedRecords).toBe(0);
-      
+
       // Verify cleanup worked
       allRecords = await dataManager.getAllRecords();
       expect(allRecords).toHaveLength(3);
-      
+
       // Verify all records remain
       const painLevels = allRecords.map(r => r.painLevel).sort();
       expect(painLevels).toEqual([5, 7, 7]);
@@ -268,7 +268,7 @@ describe('PainDataManager Integration Tests', () => {
       // Verify final state
       const finalRecords = await dataManager.getAllRecords();
       expect(finalRecords).toHaveLength(3);
-      
+
       const painLevels = finalRecords.map(r => r.painLevel).sort();
       expect(painLevels).toEqual([1, 2, 3]);
     });
@@ -304,7 +304,7 @@ describe('PainDataManager Integration Tests', () => {
       const filterTime = Date.now() - filterStartTime;
 
       expect(highPainRecords.length).toBeGreaterThan(0);
-      
+
       // Basic performance checks (should complete within reasonable time)
       expect(saveTime).toBeLessThan(5000); // 5 seconds
       expect(filterTime).toBeLessThan(100); // 100ms
@@ -324,11 +324,11 @@ describe('PainDataManager Integration Tests', () => {
       // Save data with first instance
       const firstManager = new PainDataManager();
       await firstManager.saveRecord(sampleRecords[0]);
-      
+
       // Create new instance and verify data persists
       const secondManager = new PainDataManager();
       const records = await secondManager.getAllRecords();
-      
+
       expect(records).toHaveLength(1);
       expect(records[0].painLevel).toBe(7);
       expect(records[0].notes).toBe('Morning pain, severe cramping');

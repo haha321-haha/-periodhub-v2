@@ -17,8 +17,8 @@ export class SearchAnalytics {
    * 记录搜索事件
    */
   async recordSearch(
-    options: SearchOptions, 
-    response: SearchResponse, 
+    options: SearchOptions,
+    response: SearchResponse,
     fromCache: boolean = false
   ): Promise<void> {
     const searchEvent = {
@@ -33,7 +33,7 @@ export class SearchAnalytics {
     };
 
     this.searchLog.push(searchEvent);
-    
+
     // 限制日志大小
     if (this.searchLog.length > 1000) {
       this.searchLog = this.searchLog.slice(-500);
@@ -61,8 +61,8 @@ export class SearchAnalytics {
   async getAnalytics(dateRange?: { start: string; end: string }): Promise<any> {
     const startTime = dateRange ? new Date(dateRange.start).getTime() : 0;
     const endTime = dateRange ? new Date(dateRange.end).getTime() : Date.now();
-    
-    const filteredLogs = this.searchLog.filter(log => 
+
+    const filteredLogs = this.searchLog.filter(log =>
       log.timestamp >= startTime && log.timestamp <= endTime
     );
 
@@ -83,7 +83,7 @@ export class SearchAnalytics {
    */
   private getTopQueries(logs: any[]): any[] {
     const queryCount = new Map<string, number>();
-    
+
     logs.forEach(log => {
       const count = queryCount.get(log.query) || 0;
       queryCount.set(log.query, count + 1);
@@ -94,4 +94,4 @@ export class SearchAnalytics {
       .slice(0, 10)
       .map(([query, count]) => ({ query, count }));
   }
-} 
+}

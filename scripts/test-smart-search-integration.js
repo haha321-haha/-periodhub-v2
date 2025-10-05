@@ -36,14 +36,14 @@ const integrationTestResults = {
 function runIntegrationTest(testName, testFunction) {
   console.log(`\n🔄 集成测试: ${testName}`);
   integrationTestResults.summary.total++;
-  
+
   const startTime = Date.now();
-  
+
   try {
     const result = testFunction();
     const endTime = Date.now();
     const duration = endTime - startTime;
-    
+
     if (result && result.success) {
       console.log(`✅ 通过: ${testName} (${duration}ms)`);
       integrationTestResults.summary.passed++;
@@ -66,7 +66,7 @@ function runIntegrationTest(testName, testFunction) {
   } catch (error) {
     const endTime = Date.now();
     const duration = endTime - startTime;
-    
+
     console.log(`💥 错误: ${testName} (${duration}ms) - ${error.message}`);
     integrationTestResults.summary.failed++;
     integrationTestResults.summary.errors.push({
@@ -97,7 +97,7 @@ class MockSmartSearchSystem {
 
   initializeSystem() {
     console.log('🔧 正在初始化智能搜索系统...');
-    
+
     // 模拟初始化各个组件
     this.components = {
       spellChecker: { status: 'ready', version: '1.0.0' },
@@ -117,7 +117,7 @@ class MockSmartSearchSystem {
   async search(options) {
     const startTime = Date.now();
     this.totalSearches++;
-    
+
     // 模拟搜索逻辑
     const mockResult = {
       results: [
@@ -253,14 +253,14 @@ class MockSmartSearchSystem {
 // 集成测试1：系统初始化
 function testSystemInitialization() {
   console.log('测试系统初始化...');
-  
+
   const system = new MockSmartSearchSystem();
-  
+
   const success = system.initialized &&
     system.components &&
     Object.keys(system.components).length === 8 &&
     Object.values(system.components).every(comp => comp.status === 'ready');
-  
+
   return {
     success,
     details: success ? '系统初始化成功，所有组件就绪' : '系统初始化失败'
@@ -270,9 +270,9 @@ function testSystemInitialization() {
 // 集成测试2：基本搜索功能
 function testBasicSearch() {
   console.log('测试基本搜索功能...');
-  
+
   const system = new MockSmartSearchSystem();
-  
+
   // 执行搜索
   const searchOptions = {
     query: '痛经缓解',
@@ -280,20 +280,20 @@ function testBasicSearch() {
     searchMode: 'detailed',
     maxResults: 10
   };
-  
+
   const result = system.search(searchOptions);
-  
+
   const success = result &&
     result.results &&
     result.results.length > 0 &&
     result.originalQuery === searchOptions.query &&
     result.intent &&
     result.systemInfo;
-  
+
   return {
     success,
-    details: success 
-      ? `搜索成功，返回 ${result.results.length} 个结果` 
+    details: success
+      ? `搜索成功，返回 ${result.results.length} 个结果`
       : '搜索失败'
   };
 }
@@ -301,34 +301,34 @@ function testBasicSearch() {
 // 集成测试3：多模式搜索
 function testMultiModeSearch() {
   console.log('测试多模式搜索...');
-  
+
   const system = new MockSmartSearchSystem();
   const testQueries = [
     { query: '快速缓解', mode: 'instant' },
     { query: '痛经治疗', mode: 'detailed' },
     { query: '自然疗法', mode: 'semantic' }
   ];
-  
+
   let successCount = 0;
-  
+
   for (const testQuery of testQueries) {
     const result = system.search({
       query: testQuery.query,
       searchMode: testQuery.mode,
       userId: 'test-user-002'
     });
-    
+
     if (result && result.results && result.searchMode === testQuery.mode) {
       successCount++;
     }
   }
-  
+
   const success = successCount === testQueries.length;
-  
+
   return {
     success,
-    details: success 
-      ? `所有搜索模式测试通过 (${successCount}/${testQueries.length})` 
+    details: success
+      ? `所有搜索模式测试通过 (${successCount}/${testQueries.length})`
       : `搜索模式测试失败 (${successCount}/${testQueries.length})`
   };
 }
@@ -336,25 +336,25 @@ function testMultiModeSearch() {
 // 集成测试4：个性化推荐
 function testPersonalizedRecommendations() {
   console.log('测试个性化推荐...');
-  
+
   const system = new MockSmartSearchSystem();
-  
+
   const result = system.search({
     query: '痛经管理',
     userId: 'test-user-003',
     includeRecommendations: true
   });
-  
+
   const success = result &&
     result.recommendations &&
     result.recommendations.length > 0 &&
     result.userInsights &&
     result.userInsights.profileCompleteness > 0;
-  
+
   return {
     success,
-    details: success 
-      ? `个性化推荐成功，生成 ${result.recommendations.length} 个推荐` 
+    details: success
+      ? `个性化推荐成功，生成 ${result.recommendations.length} 个推荐`
       : '个性化推荐失败'
   };
 }
@@ -362,20 +362,20 @@ function testPersonalizedRecommendations() {
 // 集成测试5：搜索建议
 function testSearchSuggestions() {
   console.log('测试搜索建议...');
-  
+
   const system = new MockSmartSearchSystem();
-  
+
   const suggestions = system.getSearchSuggestions('痛经', 5);
-  
+
   const success = suggestions &&
     Array.isArray(suggestions) &&
     suggestions.length > 0 &&
     suggestions.every(s => s.includes('痛经'));
-  
+
   return {
     success,
-    details: success 
-      ? `搜索建议成功，生成 ${suggestions.length} 个建议` 
+    details: success
+      ? `搜索建议成功，生成 ${suggestions.length} 个建议`
       : '搜索建议失败'
   };
 }
@@ -383,9 +383,9 @@ function testSearchSuggestions() {
 // 集成测试6：用户反馈系统
 function testUserFeedback() {
   console.log('测试用户反馈系统...');
-  
+
   const system = new MockSmartSearchSystem();
-  
+
   try {
     const feedbackResult = system.recordFeedback(
       'test-user-004',
@@ -394,9 +394,9 @@ function testUserFeedback() {
       'positive',
       0.8
     );
-    
+
     const success = feedbackResult === true;
-    
+
     return {
       success,
       details: success ? '用户反馈记录成功' : '用户反馈记录失败'
@@ -412,22 +412,22 @@ function testUserFeedback() {
 // 集成测试7：个性化洞察
 function testPersonalizedInsights() {
   console.log('测试个性化洞察...');
-  
+
   const system = new MockSmartSearchSystem();
-  
+
   const insights = system.getPersonalizedInsights('test-user-005');
-  
+
   const success = insights &&
     insights.learningProgress !== undefined &&
     insights.preferenceStability !== undefined &&
     insights.engagementTrend &&
     insights.recommendationAccuracy !== undefined &&
     insights.feedbackSummary;
-  
+
   return {
     success,
-    details: success 
-      ? `个性化洞察生成成功，学习进度: ${insights.learningProgress}` 
+    details: success
+      ? `个性化洞察生成成功，学习进度: ${insights.learningProgress}`
       : '个性化洞察生成失败'
   };
 }
@@ -435,9 +435,9 @@ function testPersonalizedInsights() {
 // 集成测试8：系统性能统计
 function testSystemPerformance() {
   console.log('测试系统性能统计...');
-  
+
   const system = new MockSmartSearchSystem();
-  
+
   // 执行一些搜索操作
   for (let i = 0; i < 10; i++) {
     system.search({
@@ -446,20 +446,20 @@ function testSystemPerformance() {
       searchMode: 'detailed'
     });
   }
-  
+
   const stats = system.getSystemStats();
-  
+
   const success = stats &&
     stats.totalSearches >= 10 &&
     stats.cacheHitRate >= 0 &&
     stats.averageResponseTime > 0 &&
     stats.userProfiles >= 0 &&
     stats.contentItems > 0;
-  
+
   return {
     success,
-    details: success 
-      ? `系统性能统计正常，总搜索次数: ${stats.totalSearches}` 
+    details: success
+      ? `系统性能统计正常，总搜索次数: ${stats.totalSearches}`
       : '系统性能统计异常'
   };
 }
@@ -467,9 +467,9 @@ function testSystemPerformance() {
 // 集成测试9：并发搜索处理
 function testConcurrentSearch() {
   console.log('测试并发搜索处理...');
-  
+
   const system = new MockSmartSearchSystem();
-  
+
   // 模拟并发搜索
   const concurrentSearches = [];
   for (let i = 0; i < 5; i++) {
@@ -481,7 +481,7 @@ function testConcurrentSearch() {
       })
     );
   }
-  
+
   // 等待所有搜索完成
   let successCount = 0;
   for (const result of concurrentSearches) {
@@ -489,13 +489,13 @@ function testConcurrentSearch() {
       successCount++;
     }
   }
-  
+
   const success = successCount === concurrentSearches.length;
-  
+
   return {
     success,
-    details: success 
-      ? `并发搜索测试通过 (${successCount}/${concurrentSearches.length})` 
+    details: success
+      ? `并发搜索测试通过 (${successCount}/${concurrentSearches.length})`
       : `并发搜索测试失败 (${successCount}/${concurrentSearches.length})`
   };
 }
@@ -503,10 +503,10 @@ function testConcurrentSearch() {
 // 集成测试10：端到端用户场景
 function testEndToEndUserScenario() {
   console.log('测试端到端用户场景...');
-  
+
   const system = new MockSmartSearchSystem();
   const userId = 'e2e-test-user';
-  
+
   try {
     // 1. 用户搜索
     const searchResult = system.search({
@@ -515,11 +515,11 @@ function testEndToEndUserScenario() {
       searchMode: 'detailed',
       includeRecommendations: true
     });
-    
+
     if (!searchResult || !searchResult.results || searchResult.results.length === 0) {
       return { success: false, details: '搜索结果为空' };
     }
-    
+
     // 2. 用户点击结果
     const clickedResult = searchResult.results[0];
     const feedbackResult = system.recordFeedback(
@@ -529,37 +529,37 @@ function testEndToEndUserScenario() {
       'positive',
       0.8
     );
-    
+
     if (!feedbackResult) {
       return { success: false, details: '反馈记录失败' };
     }
-    
+
     // 3. 获取搜索建议
     const suggestions = system.getSearchSuggestions('痛经', 3);
-    
+
     if (!suggestions || suggestions.length === 0) {
       return { success: false, details: '搜索建议为空' };
     }
-    
+
     // 4. 获取个性化洞察
     const insights = system.getPersonalizedInsights(userId);
-    
+
     if (!insights || !insights.learningProgress) {
       return { success: false, details: '个性化洞察获取失败' };
     }
-    
+
     // 5. 验证系统状态
     const stats = system.getSystemStats();
-    
+
     if (!stats || stats.totalSearches === 0) {
       return { success: false, details: '系统统计异常' };
     }
-    
+
     return {
       success: true,
       details: `端到端测试通过 - 搜索: ${searchResult.results.length}个结果, 建议: ${suggestions.length}个, 洞察: ${insights.learningProgress}`
     };
-    
+
   } catch (error) {
     return {
       success: false,
@@ -664,14 +664,14 @@ const deploymentAssessment = {
     }
   },
   recommendations: [
-    integrationTestResults.coverage.completeness >= 0.8 ? 
-      '✅ 系统已准备好部署' : 
+    integrationTestResults.coverage.completeness >= 0.8 ?
+      '✅ 系统已准备好部署' :
       '⚠️ 建议修复失败的测试后再部署',
-    integrationTestResults.performance.averageResponseTime < 200 ? 
-      '✅ 响应时间满足要求' : 
+    integrationTestResults.performance.averageResponseTime < 200 ?
+      '✅ 响应时间满足要求' :
       '⚠️ 建议优化响应时间',
-    integrationTestResults.summary.errors.length === 0 ? 
-      '✅ 没有发现错误' : 
+    integrationTestResults.summary.errors.length === 0 ?
+      '✅ 没有发现错误' :
       `⚠️ 发现 ${integrationTestResults.summary.errors.length} 个错误，建议修复`
   ],
   nextSteps: [
@@ -694,4 +694,4 @@ if (integrationTestResults.coverage.completeness >= 0.8) {
   console.log('✅ 系统已准备好进行下一阶段开发或部署！');
 } else {
   console.log('⚠️ 建议修复失败的测试后再进行部署。');
-} 
+}

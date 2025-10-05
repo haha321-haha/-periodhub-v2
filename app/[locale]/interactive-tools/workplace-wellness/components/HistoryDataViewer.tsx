@@ -29,7 +29,7 @@ export default function HistoryDataViewer() {
   const [showFilters, setShowFilters] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<PeriodRecord | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
-  
+
   const [filters, setFilters] = useState<FilterOptions>({
     dateRange: {
       start: '',
@@ -48,7 +48,7 @@ export default function HistoryDataViewer() {
 
     // 搜索过滤
     if (searchTerm) {
-      filtered = filtered.filter(record => 
+      filtered = filtered.filter(record =>
         record.date.includes(searchTerm) ||
         record.type.includes(searchTerm) ||
         (record.notes && record.notes.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -72,7 +72,7 @@ export default function HistoryDataViewer() {
     if (filters.painLevel !== 'all') {
       filtered = filtered.filter(record => {
         if (!record.painLevel) return false;
-        
+
         switch (filters.painLevel) {
           case 'low':
             return record.painLevel <= 3;
@@ -97,7 +97,7 @@ export default function HistoryDataViewer() {
   // 获取记录状态样式
   const getRecordStatusStyle = (record: PeriodRecord) => {
     const baseStyle = "px-3 py-2 rounded-lg text-sm font-medium";
-    
+
     switch (record.type) {
       case 'period':
         return `${baseStyle} bg-red-100 text-red-800 border border-red-200`;
@@ -113,7 +113,7 @@ export default function HistoryDataViewer() {
   // 获取疼痛等级样式
   const getPainLevelStyle = (painLevel: PainLevel | null) => {
     if (!painLevel) return "text-gray-400";
-    
+
     if (painLevel <= 3) return "text-green-600";
     if (painLevel <= 7) return "text-yellow-600";
     return "text-red-600";
@@ -122,7 +122,7 @@ export default function HistoryDataViewer() {
   // 获取流量样式
   const getFlowStyle = (flow: FlowType | null) => {
     if (!flow) return "text-gray-400";
-    
+
     switch (flow) {
       case 'light':
         return "text-blue-600";
@@ -179,7 +179,7 @@ export default function HistoryDataViewer() {
           <Calendar className="w-5 h-5 mr-2 text-primary-500" />
           {t('history.title')}
         </h4>
-        
+
         <div className="flex items-center space-x-2">
           <button
             onClick={() => setShowAddForm(true)}
@@ -188,7 +188,7 @@ export default function HistoryDataViewer() {
             <Plus className="w-4 h-4 mr-1" />
             {t('history.addRecord')}
           </button>
-          
+
           <button
             onClick={exportData}
             className="flex items-center px-3 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
@@ -212,12 +212,12 @@ export default function HistoryDataViewer() {
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
             />
           </div>
-          
+
           <button
             onClick={() => setShowFilters(!showFilters)}
             className={`flex items-center px-3 py-2 rounded-lg transition-colors ${
-              showFilters 
-                ? 'bg-primary-500 text-white' 
+              showFilters
+                ? 'bg-primary-500 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -314,7 +314,7 @@ export default function HistoryDataViewer() {
               >
                 {t('history.clearFilters')}
               </button>
-              
+
               <div className="text-sm text-gray-600">
                 {t('history.resultsCount').replace('{count}', filteredData.length.toString())}
               </div>
@@ -406,7 +406,7 @@ export default function HistoryDataViewer() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
             <h3 className="text-lg font-semibold mb-4">{t('history.recordDetails')}</h3>
-            
+
             <div className="space-y-3">
               <div>
                 <label className="text-sm font-medium text-gray-700">{t('history.date')}</label>
@@ -416,12 +416,12 @@ export default function HistoryDataViewer() {
                   )}
                 </p>
               </div>
-              
+
               <div>
                 <label className="text-sm font-medium text-gray-700">{t('history.type')}</label>
                 <p className="text-gray-900">{t(`export.periodTypes.${selectedRecord.type}`)}</p>
               </div>
-              
+
               {selectedRecord.painLevel && (
                 <div>
                   <label className="text-sm font-medium text-gray-700">{t('history.painLevel')}</label>
@@ -430,7 +430,7 @@ export default function HistoryDataViewer() {
                   </p>
                 </div>
               )}
-              
+
               {selectedRecord.flow && (
                 <div>
                   <label className="text-sm font-medium text-gray-700">{t('history.flow')}</label>
@@ -439,7 +439,7 @@ export default function HistoryDataViewer() {
                   </p>
                 </div>
               )}
-              
+
               {selectedRecord.notes && (
                 <div>
                   <label className="text-sm font-medium text-gray-700">{t('history.notes')}</label>
@@ -447,7 +447,7 @@ export default function HistoryDataViewer() {
                 </div>
               )}
             </div>
-            
+
             <div className="flex justify-end space-x-3 mt-6">
               <button
                 onClick={() => setSelectedRecord(null)}

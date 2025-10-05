@@ -114,14 +114,14 @@ class ActualImageChecker {
    */
   checkImageUsage() {
     const usage = [];
-    
+
     // 扫描项目文件
     const files = glob.sync('**/*.{tsx,jsx,ts,js}', {
       ignore: [
-        'node_modules/**', 
-        '.next/**', 
-        'out/**', 
-        'reports/**', 
+        'node_modules/**',
+        '.next/**',
+        'out/**',
+        'reports/**',
         'backups/**',
         'recovery-workspace/**',
         'recovered/**',
@@ -132,10 +132,10 @@ class ActualImageChecker {
 
     for (const file of files) {
       if (!fs.statSync(file).isFile()) continue;
-      
+
       const content = fs.readFileSync(file, 'utf8');
       const lines = content.split('\n');
-      
+
       lines.forEach((line, index) => {
         // 检查是否包含我们关心的图片路径
         const imagePatterns = [
@@ -150,11 +150,11 @@ class ActualImageChecker {
             const srcMatch = line.match(/src=["']([^"']+)["']/);
             if (srcMatch) {
               const imageSrc = srcMatch[1];
-              
+
               // 检查当前行和接下来几行是否有alt属性
               let hasAlt = false;
               let altText = null;
-              
+
               // 检查当前行
               const currentAltMatch = line.match(/alt=["']([^"']*)["']/);
               if (currentAltMatch) {
@@ -172,7 +172,7 @@ class ActualImageChecker {
                   }
                 }
               }
-              
+
               usage.push({
                 file: file,
                 line: index + 1,
@@ -248,7 +248,7 @@ class ActualImageChecker {
     }
 
     const timestamp = new Date().toISOString().split('T')[0];
-    
+
     // 保存JSON报告
     fs.writeFileSync(
       path.join(reportsDir, `actual-images-check-${timestamp}.json`),
@@ -284,7 +284,7 @@ class ActualImageChecker {
 
     // 文件检查详情
     markdown += `## 📁 文件检查详情\n\n`;
-    
+
     if (report.fileCheck.medical.length > 0) {
       markdown += `### 医学图片 (${report.fileCheck.medical.length}个)\n\n`;
       report.fileCheck.medical.forEach(img => {
@@ -320,7 +320,7 @@ class ActualImageChecker {
     // 使用情况详情
     if (report.usageCheck.length > 0) {
       markdown += `## 🔍 代码使用情况\n\n`;
-      
+
       const usageByFile = report.usageCheck.reduce((acc, usage) => {
         if (!acc[usage.file]) acc[usage.file] = [];
         acc[usage.file].push(usage);
@@ -364,14 +364,14 @@ class ActualImageChecker {
    */
   async run() {
     console.log('🔍 开始检查实际项目图片...');
-    
+
     try {
       const fileCheck = this.checkImageFiles();
       const usageCheck = this.checkImageUsage();
       const report = this.generateReport(fileCheck, usageCheck);
-      
+
       await this.saveReport(report);
-      
+
       // 控制台输出摘要
       console.log('\n📊 实际图片检查完成:');
       console.log(`预期图片总数: ${report.summary.totalExpectedImages}`);
@@ -380,14 +380,14 @@ class ActualImageChecker {
       console.log(`代码中使用数: ${report.summary.totalUsage}`);
       console.log(`有alt属性: ${report.summary.usageWithAlt}`);
       console.log(`缺少alt属性: ${report.summary.usageWithoutAlt}`);
-      
+
       if (report.recommendations.length > 0) {
         console.log('\n🎯 主要建议:');
         report.recommendations.forEach((rec, index) => {
           console.log(`${index + 1}. ${rec.message}`);
         });
       }
-      
+
     } catch (error) {
       console.error('❌ 图片检查失败:', error);
       process.exit(1);

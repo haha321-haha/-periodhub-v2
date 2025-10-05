@@ -106,19 +106,19 @@ export interface EnterpriseResource {
   type: ResourceType;
   status: ResourceStatus;
   version: string;
-  
+
   // 内容信息
   title: Record<Locale, string>;
   description: Record<Locale, string>;
   content?: Record<Locale, string>;
   summary: Record<Locale, string>;
-  
+
   // 分类和标签
   categoryId: string;
   subcategoryId?: string;
   tags: string[];
   keywords: Record<Locale, string[]>;
-  
+
   // 文件信息
   files: {
     [key: string]: {
@@ -129,35 +129,35 @@ export interface EnterpriseResource {
       lastModified: Date;
     };
   };
-  
+
   // 元数据
   author: string;
   publishDate: Date;
   lastModified: Date;
   expiryDate?: Date;
-  
+
   // 分级信息
   difficulty: DifficultyLevel;
   targetAudience: TargetAudience[];
   estimatedReadTime?: number;
-  
+
   // 关联资源
   relatedResources: string[];
   prerequisites: string[];
   followUpResources: string[];
-  
+
   // 统计信息
   stats: ResourceUsageStats;
-  
+
   // SEO信息
   seo: ResourceSEO;
-  
+
   // 访问控制
   access: ResourceAccess;
-  
+
   // 自定义字段
   customFields: Record<string, any>;
-  
+
   // 版本控制
   changeLog: {
     version: string;
@@ -269,4 +269,4 @@ export interface ResourceExportOptions {
   includeContent: boolean;
   filters?: ResourceSearchFilters;
   fields?: string[];
-} 
+}

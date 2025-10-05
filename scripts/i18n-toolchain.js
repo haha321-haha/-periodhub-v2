@@ -27,10 +27,10 @@ class I18nToolchain {
   runTool(toolName, args = []) {
     const toolPath = path.join(this.scriptsDir, this.tools[toolName]);
     const command = `node ${toolPath} ${args.join(' ')}`;
-    
+
     console.log(`🔧 运行工具: ${toolName}`);
     console.log(`📝 命令: ${command}\n`);
-    
+
     try {
       execSync(command, { stdio: 'inherit' });
       console.log(`✅ ${toolName} 执行成功\n`);
@@ -45,31 +45,31 @@ class I18nToolchain {
    */
   runFullWorkflow() {
     console.log('🚀 开始国际化工具链完整工作流...\n');
-    
+
     // 1. 提取翻译键
     console.log('📋 步骤 1: 提取翻译键');
     this.runTool('extract');
-    
+
     // 2. 验证翻译键
     console.log('📋 步骤 2: 验证翻译键');
     this.runTool('validate');
-    
+
     // 3. 验证翻译键结构
     console.log('📋 步骤 3: 验证翻译键结构');
     this.runTool('structure');
-    
+
     // 4. 同步翻译键
     console.log('📋 步骤 4: 同步翻译键');
     this.runTool('sync');
-    
+
     // 5. 审计硬编码
     console.log('📋 步骤 5: 审计硬编码');
     this.runTool('audit');
-    
+
     // 6. 清理未使用键
     console.log('📋 步骤 6: 清理未使用键');
     this.runTool('cleanup', ['--dry-run']);
-    
+
     console.log('✅ 完整工作流执行完成！');
   }
 
@@ -78,16 +78,16 @@ class I18nToolchain {
    */
   runQuickCheck() {
     console.log('⚡ 开始快速检查...\n');
-    
+
     // 验证翻译键
     this.runTool('validate');
-    
+
     // 验证翻译键结构
     this.runTool('structure');
-    
+
     // 审计硬编码
     this.runTool('audit');
-    
+
     console.log('✅ 快速检查完成！');
   }
 
@@ -96,16 +96,16 @@ class I18nToolchain {
    */
   runCleanupWorkflow() {
     console.log('🧹 开始清理工作流...\n');
-    
+
     // 同步翻译键
     this.runTool('sync');
-    
+
     // 清理未使用键
     this.runTool('cleanup', ['--clean']);
-    
+
     // 验证清理结果
     this.runTool('validate');
-    
+
     console.log('✅ 清理工作流完成！');
   }
 

@@ -6,10 +6,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  Activity, 
-  TrendingUp, 
-  AlertTriangle, 
+import {
+  Activity,
+  TrendingUp,
+  AlertTriangle,
   CheckCircle,
   BarChart3,
   PieChart,
@@ -44,7 +44,7 @@ export default function SymptomStatistics() {
   const [activeTab, setActiveTab] = useState<'overview' | 'patterns' | 'trends' | 'recommendations'>('overview');
   const [symptomData, setSymptomData] = useState<SymptomData[]>([]);
   const [patterns, setPatterns] = useState<SymptomPattern[]>([]);
-  
+
   const periodData = getPeriodData();
 
   useEffect(() => {
@@ -55,22 +55,22 @@ export default function SymptomStatistics() {
   // 分析症状数据
   const analyzeSymptoms = () => {
     const symptoms: { [key: string]: SymptomData } = {};
-    
+
     // 模拟症状数据（实际应用中应该从用户输入中获取）
     const commonSymptoms = [
       'cramps', 'bloating', 'headache', 'fatigue', 'mood_swings',
       'breast_tenderness', 'back_pain', 'nausea', 'insomnia', 'anxiety'
     ];
-    
+
     commonSymptoms.forEach(symptom => {
-      const occurrences = periodData.filter(record => 
+      const occurrences = periodData.filter(record =>
         (record as any).symptoms && (record as any).symptoms.includes(symptom)
       );
-      
+
       if (occurrences.length > 0) {
-        const severity = occurrences.reduce((sum, record) => 
+        const severity = occurrences.reduce((sum, record) =>
           sum + (record.painLevel || 0), 0) / occurrences.length;
-        
+
         symptoms[symptom] = {
           name: symptom,
           frequency: occurrences.length,
@@ -81,17 +81,17 @@ export default function SymptomStatistics() {
         };
       }
     });
-    
+
     setSymptomData(Object.values(symptoms).sort((a, b) => b.frequency - a.frequency));
   };
 
   // 生成症状模式
   const generatePatterns = () => {
     const patterns: SymptomPattern[] = [];
-    
+
     // 分析症状组合模式
     const symptomCombinations = analyzeSymptomCombinations();
-    
+
     symptomCombinations.forEach(combination => {
       patterns.push({
         symptom: combination.name,
@@ -101,7 +101,7 @@ export default function SymptomStatistics() {
         recommendations: generateRecommendations(combination.name)
       });
     });
-    
+
     setPatterns(patterns);
   };
 
@@ -149,22 +149,22 @@ export default function SymptomStatistics() {
         t('recommendations.sleepHygiene')
       ]
     };
-    
+
     return recommendations[symptom] || [t('recommendations.generalCare')];
   };
 
   // 计算趋势
   const calculateTrend = (occurrences: PeriodRecord[]): 'up' | 'down' | 'stable' => {
     if (occurrences.length < 3) return 'stable';
-    
+
     const recent = occurrences.slice(-3);
     const previous = occurrences.slice(-6, -3);
-    
+
     if (recent.length < 3 || previous.length < 3) return 'stable';
-    
+
     const recentAvg = recent.reduce((sum, r) => sum + (r.painLevel || 0), 0) / recent.length;
     const previousAvg = previous.reduce((sum, r) => sum + (r.painLevel || 0), 0) / previous.length;
-    
+
     if (recentAvg > previousAvg + 0.5) return 'up';
     if (recentAvg < previousAvg - 0.5) return 'down';
     return 'stable';
@@ -206,7 +206,7 @@ export default function SymptomStatistics() {
                   <p className="text-sm text-gray-600">{t('symptoms.frequency')}: {symptom.frequency}</p>
                 </div>
               </div>
-              
+
               <div className="text-right">
                 <div className="flex items-center space-x-2">
                   {symptom.trend === 'up' && <TrendingUp className="w-4 h-4 text-red-500" />}
@@ -217,7 +217,7 @@ export default function SymptomStatistics() {
                 <p className="text-xs text-gray-500">{t('symptoms.lastOccurrence')}: {new Date(symptom.lastOccurrence).toLocaleDateString()}</p>
               </div>
             </div>
-            
+
             <div className="flex items-center space-x-4">
               <div className="flex-1 bg-gray-200 rounded-full h-2">
                 <div
@@ -246,7 +246,7 @@ export default function SymptomStatistics() {
                 <span className="text-sm font-medium text-purple-600">{pattern.severity.toFixed(1)}</span>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <h5 className="text-sm font-medium text-gray-700 mb-2">{t('patterns.frequency')}</h5>
@@ -260,7 +260,7 @@ export default function SymptomStatistics() {
                   <span className="text-sm text-gray-600">{pattern.frequency}</span>
                 </div>
               </div>
-              
+
               <div>
                 <h5 className="text-sm font-medium text-gray-700 mb-2">{t('patterns.severity')}</h5>
                 <div className="flex items-center space-x-2">

@@ -273,7 +273,5 @@
       }
     }
   ],
-  "recommendations": [
-    "检查next.config.js中的重写规则配置"
-  ]
+  "recommendations": ["检查next.config.js中的重写规则配置"]
 }

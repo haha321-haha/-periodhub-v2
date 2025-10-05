@@ -3,37 +3,37 @@
 export const GA4_CONFIG = {
   // GA4 测量ID (需要替换为实际的ID)
   MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-XXXXXXXXXX',
-  
+
   // 是否启用GA4
   ENABLED: process.env.NODE_ENV === 'production',
-  
+
   // 自定义事件配置
   EVENTS: {
     // 页面浏览
     PAGE_VIEW: 'page_view',
-    
+
     // 用户交互
     CLICK: 'click',
     SCROLL: 'scroll',
     SEARCH: 'search',
-    
+
     // 内容交互
     PDF_DOWNLOAD: 'pdf_download',
     PDF_PREVIEW: 'pdf_preview',
     ARTICLE_READ: 'article_read',
     TOOL_USAGE: 'tool_usage',
-    
+
     // 转化事件
     SUBSCRIBE: 'subscribe',
     CONTACT: 'contact',
     SHARE: 'share',
-    
+
     // 用户行为
     SESSION_START: 'session_start',
     SESSION_END: 'session_end',
     USER_REGISTRATION: 'user_registration'
   },
-  
+
   // 自定义维度
   CUSTOM_DIMENSIONS: {
     USER_TYPE: 'user_type',
@@ -41,7 +41,7 @@ export const GA4_CONFIG = {
     LANGUAGE: 'language',
     DEVICE_TYPE: 'device_type'
   },
-  
+
   // 自定义指标
   CUSTOM_METRICS: {
     SESSION_DURATION: 'session_duration',
@@ -140,4 +140,4 @@ export class GA4Tracker {
   }
 }
 
-export default GA4Tracker; 
+export default GA4Tracker;

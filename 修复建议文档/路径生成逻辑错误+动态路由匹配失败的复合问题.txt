@@ -22,11 +22,11 @@ const nextConfig = {
         permanent: true, // 301 重定向
       },
       {
-        source: '/zh/5-minute-period-pain-relief', 
+        source: '/zh/5-minute-period-pain-relief',
         destination: '/zh/articles/5-minute-period-pain-relief',
         permanent: true,
       },
-      
+
       // 通用文章重定向规则（适用于所有文章）
       {
         source: '/en/:slug((?!articles|api|_next|favicon).*)',
@@ -42,7 +42,7 @@ const nextConfig = {
       },
       {
         source: '/zh/:slug((?!articles|api|_next|favicon).*)',
-        destination: '/zh/articles/:slug', 
+        destination: '/zh/articles/:slug',
         permanent: false,
       },
     ];
@@ -86,30 +86,30 @@ const intlMiddleware = createMiddleware({
 
 export default function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
-  
+
   console.log(`🔄 Middleware processing: ${pathname}${search}`);
-  
+
   // 1. 最高优先级：处理已知的错误文章URL
   const knownArticleRedirects = new Map([
     ['/en/5-minute-period-pain-relief', '/en/articles/5-minute-period-pain-relief'],
     ['/zh/5-minute-period-pain-relief', '/zh/articles/5-minute-period-pain-relief'],
     // 添加更多已知的文章重定向...
   ]);
-  
+
   if (knownArticleRedirects.has(pathname)) {
     const newPath = knownArticleRedirects.get(pathname)!;
     const redirectUrl = new URL(newPath + search, request.url);
     console.log(`✅ Redirecting ${pathname} -> ${newPath}`);
     return NextResponse.redirect(redirectUrl, 301);
   }
-  
+
   // 2. 动态检测可能的文章slug并重定向
   const potentialArticlePattern = /^\/(en|zh)\/([a-z0-9-]+)$/;
   const match = pathname.match(potentialArticlePattern);
-  
+
   if (match && !pathname.includes('/articles/')) {
     const [, locale, slug] = match;
-    
+
     // 验证是否为有效的文章slug（可选：查询数据库或文件系统）
     if (isValidArticleSlug(slug)) {
       const articlePath = `/${locale}/articles/${slug}`;
@@ -118,7 +118,7 @@ export default function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl, 301);
     }
   }
-  
+
   // 3. 让国际化中间件处理其他路由
   return intlMiddleware(request);
 }
@@ -131,9 +131,9 @@ function isValidArticleSlug(slug: string): boolean {
     'another-article-slug',
     // ... 添加更多
   ];
-  
+
   if (knownSlugs.includes(slug)) return true;
-  
+
   // 方法2：基于文件系统检查（仅开发模式）
   if (process.env.NODE_ENV === 'development') {
     try {
@@ -145,7 +145,7 @@ function isValidArticleSlug(slug: string): boolean {
       return false;
     }
   }
-  
+
   // 方法3：简单的slug格式验证
   return /^[a-z0-9-]+$/.test(slug) && slug.length > 3 && slug.length < 100;
 }
@@ -171,22 +171,22 @@ type Props = {
 export default async function FallbackSlugPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
-  
+
   console.log(`🔍 Fallback page accessed: /${locale}/${slug}`);
-  
+
   // 检查是否为已知的文章slug
   if (await isArticleSlug(slug)) {
     console.log(`📰 Redirecting to article: /${locale}/articles/${slug}`);
     redirect(`/${locale}/articles/${slug}`);
   }
-  
+
   // 检查是否为其他已知页面
   const knownPages = ['about', 'contact', 'privacy', 'terms'];
   if (knownPages.includes(slug)) {
     // 重定向到正确的页面路径
     redirect(`/${locale}/pages/${slug}`);
   }
-  
+
   // 如果都不匹配，显示404
   console.log(`❌ Unknown slug: ${slug}, showing 404`);
   notFound();
@@ -195,12 +195,12 @@ export default async function FallbackSlugPage({ params }: Props) {
 async function isArticleSlug(slug: string): Promise<boolean> {
   // 在这里实现你的文章检查逻辑
   // 可以查询数据库、检查文件系统等
-  
+
   const knownArticles = [
     '5-minute-period-pain-relief',
     // 添加其他已知文章...
   ];
-  
+
   return knownArticles.includes(slug);
 }
 
@@ -224,7 +224,7 @@ const testCases = [
     expected: 'Should redirect to /en/articles/5-minute-period-pain-relief'
   },
   {
-    url: 'http://localhost:3001/zh/5-minute-period-pain-relief', 
+    url: 'http://localhost:3001/zh/5-minute-period-pain-relief',
     expected: 'Should redirect to /zh/articles/5-minute-period-pain-relief'
   },
   {
@@ -237,27 +237,27 @@ console.log('🧪 Testing redirects...\n');
 
 testCases.forEach((testCase, index) => {
   const client = testCase.url.startsWith('https') ? https : http;
-  
-  const req = client.get(testCase.url, { 
+
+  const req = client.get(testCase.url, {
     // 不跟随重定向，以便检查重定向响应
-    // followRedirect: false 
+    // followRedirect: false
   });
-  
+
   req.on('response', (res) => {
     const status = res.statusCode;
     const location = res.headers.location;
-    
+
     console.log(`Test ${index + 1}: ${testCase.url}`);
     console.log(`Status: ${status}`);
     console.log(`Location: ${location || 'N/A'}`);
     console.log(`Expected: ${testCase.expected}`);
     console.log(`Result: ${
-      status === 301 || status === 302 ? 
-      `✅ REDIRECT to ${location}` : 
+      status === 301 || status === 302 ?
+      `✅ REDIRECT to ${location}` :
       status === 200 ? '✅ OK' : `❌ UNEXPECTED (${status})`
     }\n`);
   });
-  
+
   req.on('error', (err) => {
     console.log(`❌ Error testing ${testCase.url}: ${err.message}\n`);
   });
@@ -306,16 +306,16 @@ const intlMiddleware = createMiddleware({
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
   // 🔧 最优先处理：特定文章重定向
   if (pathname === '/en/5-minute-period-pain-relief') {
     console.log('🔀 Redirecting EN article...');
     return NextResponse.redirect(
-      new URL('/en/articles/5-minute-period-pain-relief', request.url), 
+      new URL('/en/articles/5-minute-period-pain-relief', request.url),
       301
     );
   }
-  
+
   if (pathname === '/zh/5-minute-period-pain-relief') {
     console.log('🔀 Redirecting ZH article...');
     return NextResponse.redirect(
@@ -323,7 +323,7 @@ export default function middleware(request: NextRequest) {
       301
     );
   }
-  
+
   // 处理其他路由
   return intlMiddleware(request);
 }
@@ -344,11 +344,11 @@ function testRedirect(url, expectedLocation) {
     const req = http.get(url, (res) => {
       const { statusCode, headers } = res;
       const location = headers.location;
-      
+
       console.log(`\n🧪 测试: ${url}`);
       console.log(`📊 状态码: ${statusCode}`);
       console.log(`📍 重定向到: ${location || '无'}`);
-      
+
       if (statusCode === 301 || statusCode === 302) {
         if (location === expectedLocation) {
           console.log(`✅ 成功！正确重定向到 ${location}`);
@@ -365,12 +365,12 @@ function testRedirect(url, expectedLocation) {
         resolve(false);
       }
     });
-    
+
     req.on('error', (err) => {
       console.log(`❌ 请求错误: ${err.message}`);
       resolve(false);
     });
-    
+
     req.setTimeout(5000, () => {
       console.log(`❌ 请求超时`);
       req.destroy();
@@ -383,31 +383,31 @@ async function runTests() {
   console.log('🚀 开始测试重定向功能...');
   console.log('确保开发服务器正在运行: npm run dev');
   console.log('=' * 50);
-  
+
   const tests = [
     {
       url: 'http://localhost:3001/en/5-minute-period-pain-relief',
       expected: '/en/articles/5-minute-period-pain-relief'
     },
     {
-      url: 'http://localhost:3001/zh/5-minute-period-pain-relief', 
+      url: 'http://localhost:3001/zh/5-minute-period-pain-relief',
       expected: '/zh/articles/5-minute-period-pain-relief'
     }
   ];
-  
+
   let passedTests = 0;
-  
+
   for (const test of tests) {
     const result = await testRedirect(test.url, test.expected);
     if (result) passedTests++;
-    
+
     // 等待一秒再测试下一个
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
-  
+
   console.log('\n' + '=' * 50);
   console.log(`📊 测试结果: ${passedTests}/${tests.length} 通过`);
-  
+
   if (passedTests === tests.length) {
     console.log('🎉 所有测试通过！重定向工作正常。');
   } else {
@@ -458,13 +458,13 @@ async redirects() {
   return [
     {
       source: '/en/5-minute-period-pain-relief',
-      destination: '/en/articles/5-minute-period-pain-relief', 
+      destination: '/en/articles/5-minute-period-pain-relief',
       permanent: true,
     },
     {
       source: '/zh/5-minute-period-pain-relief',
       destination: '/zh/articles/5-minute-period-pain-relief',
-      permanent: true, 
+      permanent: true,
     },
   ];
 }
@@ -485,7 +485,7 @@ async redirects() {
     },
     {
       source: '/zh/5-minute-period-pain-relief',
-      destination: '/zh/articles/5-minute-period-pain-relief', 
+      destination: '/zh/articles/5-minute-period-pain-relief',
       permanent: true,
     },
   ];
@@ -544,7 +544,7 @@ import { useLocale } from 'next-intl';
 
 export function ArticleCard({ article }) {
   const locale = useLocale();
-  
+
   return (
     <Link href={`/${locale}/articles/${article.slug}`}>
       {/* 确保路径包含 /articles/ */}
@@ -582,17 +582,17 @@ router.push(getArticlePath('5-minute-period-pain-relief', 'en'));
 
 // 5. 添加开发模式调试
 // app/[locale]/articles/[slug]/page.tsx
-export default async function ArticlePage({ params }: { 
-  params: Promise<{ locale: string; slug: string }> 
+export default async function ArticlePage({ params }: {
+  params: Promise<{ locale: string; slug: string }>
 }) {
   const { locale, slug } = await params;
-  
+
   // 开发模式下添加调试信息
   if (process.env.NODE_ENV === 'development') {
     console.log('🔍 Article page accessed:', { locale, slug });
     console.log('📍 Full path should be:', `/${locale}/articles/${slug}`);
   }
-  
+
   // 其他逻辑...
 }
 
@@ -612,16 +612,16 @@ const intlMiddleware = createMiddleware({
 
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
   // 开发模式调试
   if (process.env.NODE_ENV === 'development') {
     console.log('🔄 Middleware processing:', pathname);
   }
-  
+
   // 1. 处理缺失 /articles/ 的重定向（临时兼容）
   const articleSlugPattern = /^\/(en|zh)\/([^\/]+)$/;
   const match = pathname.match(articleSlugPattern);
-  
+
   if (match && !pathname.includes('/articles/')) {
     const [, locale, slug] = match;
     // 检查是否为已知文章 slug（可选：从数据库或文件系统验证）
@@ -630,19 +630,19 @@ export default function middleware(request: NextRequest) {
       'other-article-slug'
       // 添加其他已知文章 slug
     ];
-    
+
     if (knownArticleSlugs.includes(slug)) {
       const redirectUrl = new URL(`/${locale}/articles/${slug}`, request.url);
       console.log('🔀 Redirecting to correct path:', redirectUrl.pathname);
       return NextResponse.redirect(redirectUrl, 301); // 永久重定向
     }
   }
-  
+
   // 2. 确保文章路由直接传递给 Next.js
   if (pathname.match(/^\/(en|zh)\/articles\/[^\/]+$/)) {
     return intlMiddleware(request);
   }
-  
+
   // 3. 处理其他国际化路由
   return intlMiddleware(request);
 }
@@ -658,17 +658,17 @@ export const config = {
 /*
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
   // URL 重写而非重定向（用户不会看到 URL 变化）
   const articleSlugPattern = /^\/(en|zh)\/([^\/]+)$/;
   const match = pathname.match(articleSlugPattern);
-  
+
   if (match) {
     const [, locale, slug] = match;
     const rewriteUrl = new URL(`/${locale}/articles/${slug}`, request.url);
     return NextResponse.rewrite(rewriteUrl);
   }
-  
+
   return intlMiddleware(request);
 }
 */
@@ -690,10 +690,10 @@ const nextConfig = {
     // 对于 Next.js 15.5.2，确保服务器组件优化稳定
     serverComponentsExternalPackages: ['next-intl'],
   },
-  
+
   // 2. 增强构建配置
   outputFileTracingRoot: path.join(__dirname, '../../'),
-  
+
   // 3. 优化 webpack 配置以减少警告
   webpack: (config, { dev, isServer }) => {
     // 开发模式下的特殊处理
@@ -703,23 +703,23 @@ const nextConfig = {
         level: 'error',
       };
     }
-    
+
     return config;
   },
-  
+
   // 4. 确保静态生成配置正确
   trailingSlash: false,
-  
+
   // 5. 优化图片和资源处理
   images: {
     remotePatterns: [
       // 添加允许的图片域名
     ],
   },
-  
+
   // 6. 生产环境优化
   swcMinify: true,
-  
+
   // 7. 重定向配置（作为备用方案）
   async redirects() {
     return [
@@ -888,7 +888,7 @@ echo "🚀 诊断完成！请根据上述建议进行修复。"
 ## 🔍 问题诊断确认
 
 你的分析完全正确：
-- **实际访问路径**: `en/5-minute-period-pain-relief` 
+- **实际访问路径**: `en/5-minute-period-pain-relief`
 - **期望动态路由**: `app/[locale]/articles/[slug]/page.tsx`
 - **正确路径应为**: `en/articles/5-minute-period-pain-relief`
 
@@ -909,7 +909,7 @@ grep -r "href.*\/en\/[^\/]*\"" . --include="*.tsx" | grep -v articles
 
 ### 短期修复（15分钟）
 1. **统一路径生成**：使用 `getArticlePath` 工具函数
-2. **更新中间件**：添加自动重定向或重写逻辑  
+2. **更新中间件**：添加自动重定向或重写逻辑
 3. **清理配置**：移除 `esmExternals: 'loose'`
 
 ### 验证成功
@@ -928,7 +928,7 @@ open http://localhost:3001/en/articles/5-minute-period-pain-relief
 
 **完全正确** ✨ 你的分析抓住了问题的核心：
 - ✅ 路径缺少 `/articles/` 段的发现很精准
-- ✅ 控制台截图分析到位  
+- ✅ 控制台截图分析到位
 - ✅ 中间件干扰的推测合理
 - ✅ 修复优先级排序恰当
 
@@ -1000,15 +1000,15 @@ const nextConfig = {
 // middleware.ts 中改进路由处理
 export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
   // 添加调试日志
   console.log('Middleware processing:', pathname);
-  
+
   // 确保文章路由不被中间件干扰
   if (pathname.startsWith('/en/articles/') || pathname.startsWith('/zh/articles/')) {
     return intlMiddleware(request);
   }
-  
+
   // 其他中间件逻辑...
 }
 ```
@@ -1051,8 +1051,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ locale
 export async function generateStaticParams() {
   const locales = ['en', 'zh'];
   const articles = await getAllArticles(); // 动态获取所有文章
-  
-  return articles.flatMap(article => 
+
+  return articles.flatMap(article =>
     locales.map(locale => ({
       locale,
       slug: article.slug

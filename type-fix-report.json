@@ -9,9 +9,7 @@
   },
   "validation": {
     "success": false,
-    "errors": [
-      "Command failed: npm run type-check"
-    ]
+    "errors": ["Command failed: npm run type-check"]
   },
   "summary": {
     "totalSuggestions": 622,

@@ -3,11 +3,11 @@
  * 实现基于关键词的精确和部分匹配搜索
  */
 
-import { 
+import {
   IKeywordSearchEngine,
-  SearchOptions, 
-  SearchResponse, 
-  SearchResult, 
+  SearchOptions,
+  SearchResponse,
+  SearchResult,
   UnifiedSearchConfig,
   KeywordSearchOptions,
   SearchResultType,
@@ -186,16 +186,16 @@ export class KeywordSearchEngine implements IKeywordSearchEngine {
       const fieldValue = item[field];
       if (!fieldValue) continue;
 
-      const fieldText = Array.isArray(fieldValue) 
-        ? fieldValue.join(' ') 
+      const fieldText = Array.isArray(fieldValue)
+        ? fieldValue.join(' ')
         : String(fieldValue);
-      
+
       const fieldScore = this.scoreFieldMatch(fieldText, searchTerms, field);
-      
+
       if (fieldScore > 0) {
         totalScore += fieldScore * this.getFieldWeight(field);
         matchedFields.push(field);
-        
+
         // 添加高亮信息
         highlights.push(...this.generateHighlights(fieldText, searchTerms, field));
       }
@@ -301,4 +301,4 @@ export class KeywordSearchEngine implements IKeywordSearchEngine {
     if (score >= 0.8) return 'partial';
     return 'fuzzy';
   }
-} 
+}

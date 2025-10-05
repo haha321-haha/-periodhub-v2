@@ -39,27 +39,27 @@ const crawlDates = [
 async function analyzeUnindexedUrls() {
   console.log('🔍 分析Google Search Console中"已抓取-尚未编入索引"的URL\n');
   console.log(`📊 总计: 11个受影响的网页 (共112个未索引页面)\n`);
-  
+
   const results = [];
-  
+
   for (let i = 0; i < unindexedUrls.length; i++) {
     const url = unindexedUrls[i];
     const crawlDate = crawlDates[i];
-    
+
     console.log(`\n${i + 1}. 检查URL: ${url}`);
     console.log(`   上次抓取: ${crawlDate}`);
-    
+
     const analysis = await analyzeUrl(url);
     results.push({
       url,
       crawlDate,
       ...analysis
     });
-    
+
     // 添加延迟避免请求过快
     await new Promise(resolve => setTimeout(resolve, 500));
   }
-  
+
   // 生成分析报告
   generateAnalysisReport(results);
 }
@@ -70,12 +70,12 @@ async function analyzeUrl(url) {
       const status = response.statusCode;
       const contentType = response.headers['content-type'] || '';
       const contentLength = response.headers['content-length'] || 'unknown';
-      
+
       // 分析URL类型
       let urlType = 'unknown';
       let issue = 'none';
       let priority = 'medium';
-      
+
       if (url.includes('/icon?')) {
         urlType = 'icon';
         issue = 'dynamic-icon';
@@ -97,12 +97,12 @@ async function analyzeUrl(url) {
         issue = 'content-depth';
         priority = 'medium';
       }
-      
+
       console.log(`   状态: ${status} ${response.statusMessage}`);
       console.log(`   类型: ${contentType}`);
       console.log(`   大小: ${contentLength} bytes`);
       console.log(`   分类: ${urlType} | 问题: ${issue} | 优先级: ${priority}`);
-      
+
       resolve({
         status,
         contentType,
@@ -112,7 +112,7 @@ async function analyzeUrl(url) {
         priority
       });
     });
-    
+
     request.on('error', (error) => {
       console.log(`   ❌ 错误: ${error.message}`);
       resolve({
@@ -124,7 +124,7 @@ async function analyzeUrl(url) {
         priority: 'high'
       });
     });
-    
+
     request.end();
   });
 }
@@ -132,7 +132,7 @@ async function analyzeUrl(url) {
 function generateAnalysisReport(results) {
   console.log('\n\n📋 分析报告总结\n');
   console.log('=' .repeat(60));
-  
+
   // 按问题类型分组
   const issueGroups = {};
   results.forEach(result => {
@@ -141,16 +141,16 @@ function generateAnalysisReport(results) {
     }
     issueGroups[result.issue].push(result);
   });
-  
+
   console.log('\n🎯 问题分类统计:');
   Object.keys(issueGroups).forEach(issue => {
     const count = issueGroups[issue].length;
     const priority = issueGroups[issue][0].priority;
     console.log(`   ${issue}: ${count}个URL (优先级: ${priority})`);
   });
-  
+
   console.log('\n📊 详细建议:\n');
-  
+
   // 高优先级问题
   console.log('🔴 高优先级问题 (需要立即关注):');
   const highPriority = results.filter(r => r.priority === 'high');
@@ -163,7 +163,7 @@ function generateAnalysisReport(results) {
   } else {
     console.log('   ✅ 无高优先级问题');
   }
-  
+
   // 中优先级问题
   console.log('\n🟡 中优先级问题 (建议优化):');
   const mediumPriority = results.filter(r => r.priority === 'medium');
@@ -173,7 +173,7 @@ function generateAnalysisReport(results) {
     });
     console.log(`     建议: ${getRecommendation('content-depth')}`);
   }
-  
+
   // 低优先级问题
   console.log('\n🟢 低优先级问题 (可接受):');
   const lowPriority = results.filter(r => r.priority === 'low');
@@ -183,14 +183,14 @@ function generateAnalysisReport(results) {
     });
     console.log(`     说明: 这些问题是正常现象，无需修复`);
   }
-  
+
   console.log('\n🎯 总体建议:');
   console.log('   1. 重点关注文章内容质量和深度');
   console.log('   2. 确保每个页面有足够的独特内容');
   console.log('   3. 添加内部链接提升页面权重');
   console.log('   4. 监控索引状态变化');
   console.log('   5. 考虑提交重要页面到Google Search Console');
-  
+
   console.log('\n📈 预期结果:');
   console.log('   • 文章页面: 应该在1-2周内被索引');
   console.log('   • 场景页面: 需要增加内容深度');

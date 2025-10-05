@@ -48,10 +48,10 @@ console.log('\n🔍 检查PDF文件存在性...');
 for (const [simplePDFId, realId] of Object.entries(mappings)) {
   const zhFile = path.join(publicPath, `${realId}.html`);
   const enFile = path.join(publicPath, `${realId}-en.html`);
-  
+
   const zhExists = fs.existsSync(zhFile);
   const enExists = fs.existsSync(enFile);
-  
+
   if (zhExists && enExists) {
     existingFiles.push(realId);
     console.log(`✅ ${simplePDFId} -> ${realId} (双语完整)`);
@@ -114,4 +114,4 @@ if (missingFiles.length === 0) {
 } else {
   console.log(`⚠️  发现 ${missingFiles.length} 个映射问题`);
   process.exit(1);
-} 
+}

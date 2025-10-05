@@ -30,13 +30,13 @@ interface Props {
 // 症状评估工具专用推荐数据配置
 const getSymptomAssessmentRecommendations = (locale: string) => {
   const isZh = locale === 'zh';
-  
+
   // 推荐文章推荐
   const relatedArticles = [
     {
       id: 'comprehensive-medical-guide',
       title: isZh ? '痛经医学指南大全' : 'Comprehensive Medical Guide to Dysmenorrhea',
-      description: isZh 
+      description: isZh
         ? '专业医学角度的痛经诊断、治疗和预防指南'
         : 'Professional medical guide to dysmenorrhea diagnosis, treatment and prevention',
       href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
@@ -198,7 +198,7 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
           </div>
 
           {/* 面包屑导航 */}
-          <Breadcrumb 
+          <Breadcrumb
             items={[
               { label: breadcrumbT('interactiveTools'), href: `/${locale}/interactive-tools` },
               { label: breadcrumbT('symptomAssessment') }
@@ -210,7 +210,7 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
 
           {/* 返回按钮 - 页面底部 */}
           <div className="mt-8 flex justify-center">
-            <Link 
+            <Link
               href={`/${locale}/interactive-tools/period-pain-impact-calculator`}
               className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium rounded-lg border border-gray-300 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300"
             >

@@ -41,9 +41,9 @@ describe('LocalStorageAdapter', () => {
   describe('save', () => {
     it('should save data to localStorage', async () => {
       const testData = [{ id: '1', name: 'test' }];
-      
+
       await adapter.save(STORAGE_KEYS.PAIN_RECORDS, testData);
-      
+
       expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
         STORAGE_KEYS.PAIN_RECORDS,
         JSON.stringify(testData)
@@ -55,7 +55,7 @@ describe('LocalStorageAdapter', () => {
       mockLocalStorage.setItem.mockImplementation(() => {
         throw new Error('Storage quota exceeded');
       });
-      
+
       await expect(adapter.save(STORAGE_KEYS.PAIN_RECORDS, testData))
         .rejects.toThrow('Failed to save data to localStorage');
     });
@@ -63,7 +63,7 @@ describe('LocalStorageAdapter', () => {
     it('should handle circular references in data', async () => {
       const circularData: any = { id: '1' };
       circularData.self = circularData;
-      
+
       await expect(adapter.save(STORAGE_KEYS.PAIN_RECORDS, circularData))
         .rejects.toThrow('Failed to save data to localStorage');
     });
@@ -73,24 +73,24 @@ describe('LocalStorageAdapter', () => {
     it('should load data from localStorage', async () => {
       const testData = [{ id: '1', name: 'test' }];
       mockLocalStorage.getItem.mockReturnValue(JSON.stringify(testData));
-      
+
       const result = await adapter.load(STORAGE_KEYS.PAIN_RECORDS);
-      
+
       expect(mockLocalStorage.getItem).toHaveBeenCalledWith(STORAGE_KEYS.PAIN_RECORDS);
       expect(result).toEqual(testData);
     });
 
     it('should return null for non-existent data', async () => {
       mockLocalStorage.getItem.mockReturnValue(null);
-      
+
       const result = await adapter.load(STORAGE_KEYS.PAIN_RECORDS);
-      
+
       expect(result).toBeNull();
     });
 
     it('should handle corrupted JSON data', async () => {
       mockLocalStorage.getItem.mockReturnValue('invalid json');
-      
+
       await expect(adapter.load(STORAGE_KEYS.PAIN_RECORDS))
         .rejects.toThrow('Failed to load data from localStorage');
     });
@@ -99,7 +99,7 @@ describe('LocalStorageAdapter', () => {
       mockLocalStorage.getItem.mockImplementation(() => {
         throw new Error('localStorage not available');
       });
-      
+
       await expect(adapter.load(STORAGE_KEYS.PAIN_RECORDS))
         .rejects.toThrow('Failed to load data from localStorage');
     });
@@ -108,7 +108,7 @@ describe('LocalStorageAdapter', () => {
   describe('remove', () => {
     it('should remove data from localStorage', async () => {
       await adapter.remove(STORAGE_KEYS.PAIN_RECORDS);
-      
+
       expect(mockLocalStorage.removeItem).toHaveBeenCalledWith(STORAGE_KEYS.PAIN_RECORDS);
     });
 
@@ -116,7 +116,7 @@ describe('LocalStorageAdapter', () => {
       mockLocalStorage.removeItem.mockImplementation(() => {
         throw new Error('Remove failed');
       });
-      
+
       await expect(adapter.remove(STORAGE_KEYS.PAIN_RECORDS))
         .rejects.toThrow('Failed to remove data from localStorage');
     });
@@ -125,7 +125,7 @@ describe('LocalStorageAdapter', () => {
   describe('clear', () => {
     it('should clear all pain tracker data', async () => {
       await adapter.clear();
-      
+
       expect(mockLocalStorage.removeItem).toHaveBeenCalledWith(STORAGE_KEYS.PAIN_RECORDS);
       expect(mockLocalStorage.removeItem).toHaveBeenCalledWith(STORAGE_KEYS.USER_PREFERENCES);
       expect(mockLocalStorage.removeItem).toHaveBeenCalledWith(STORAGE_KEYS.SCHEMA_VERSION);
@@ -136,7 +136,7 @@ describe('LocalStorageAdapter', () => {
       mockLocalStorage.removeItem.mockImplementation(() => {
         throw new Error('Clear failed');
       });
-      
+
       await expect(adapter.clear())
         .rejects.toThrow('Failed to clear localStorage');
     });
@@ -150,17 +150,17 @@ describe('LocalStorageAdapter', () => {
         .mockReturnValueOnce('{}')
         .mockReturnValueOnce('1')
         .mockReturnValueOnce('{}');
-      
+
       const size = await adapter.getSize();
-      
+
       expect(size).toBe(testData.length + 2 + 1 + 2); // Sum of all data lengths
     });
 
     it('should handle missing data when calculating size', async () => {
       mockLocalStorage.getItem.mockReturnValue(null);
-      
+
       const size = await adapter.getSize();
-      
+
       expect(size).toBe(0);
     });
   });
@@ -173,10 +173,10 @@ describe('LocalStorageAdapter', () => {
     it('should return false when localStorage is not available', () => {
       const originalLocalStorage = global.localStorage;
       delete (global as any).localStorage;
-      
+
       const newAdapter = new LocalStorageAdapter();
       expect(newAdapter.isAvailable()).toBe(false);
-      
+
       global.localStorage = originalLocalStorage;
     });
 
@@ -185,10 +185,10 @@ describe('LocalStorageAdapter', () => {
       mockLocalStorage.setItem.mockImplementation(() => {
         throw new Error('localStorage disabled');
       });
-      
+
       const newAdapter = new LocalStorageAdapter();
       expect(newAdapter.isAvailable()).toBe(false);
-      
+
       mockLocalStorage.setItem = originalSetItem;
     });
   });
@@ -196,7 +196,7 @@ describe('LocalStorageAdapter', () => {
   describe('getQuotaInfo', () => {
     it('should return quota information', async () => {
       const quotaInfo = await adapter.getQuotaInfo();
-      
+
       expect(quotaInfo).toEqual({
         usage: 1024,
         quota: 5 * 1024 * 1024,
@@ -206,9 +206,9 @@ describe('LocalStorageAdapter', () => {
 
     it('should handle quota API not available', async () => {
       delete (global.navigator as any).storage;
-      
+
       const quotaInfo = await adapter.getQuotaInfo();
-      
+
       expect(quotaInfo).toEqual({
         usage: 0,
         quota: 0,
@@ -218,9 +218,9 @@ describe('LocalStorageAdapter', () => {
 
     it('should handle quota API errors', async () => {
       global.navigator.storage!.estimate = jest.fn().mockRejectedValue(new Error('Quota error'));
-      
+
       const quotaInfo = await adapter.getQuotaInfo();
-      
+
       expect(quotaInfo).toEqual({
         usage: 0,
         quota: 0,
@@ -233,9 +233,9 @@ describe('LocalStorageAdapter', () => {
     it('should create automatic backup', async () => {
       const testData = [{ id: '1', name: 'test' }];
       mockLocalStorage.getItem.mockReturnValue(JSON.stringify(testData));
-      
+
       await adapter.createAutoBackup();
-      
+
       expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
         expect.stringMatching(/^pain_tracker_backup_\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/),
         expect.any(String)
@@ -246,7 +246,7 @@ describe('LocalStorageAdapter', () => {
       mockLocalStorage.getItem.mockImplementation(() => {
         throw new Error('Backup failed');
       });
-      
+
       await expect(adapter.createAutoBackup())
         .rejects.toThrow('Failed to create automatic backup');
     });
@@ -260,12 +260,12 @@ describe('LocalStorageAdapter', () => {
         .mockReturnValueOnce('pain_tracker_backup_2024-01-04T10:00:00')
         .mockReturnValueOnce('pain_tracker_backup_2024-01-05T10:00:00')
         .mockReturnValueOnce(null);
-      
+
       mockLocalStorage.length = 5;
       mockLocalStorage.getItem.mockReturnValue('{}');
-      
+
       await adapter.createAutoBackup();
-      
+
       // Should remove oldest backup
       expect(mockLocalStorage.removeItem).toHaveBeenCalledWith('pain_tracker_backup_2024-01-01T10:00:00');
     });
@@ -278,11 +278,11 @@ describe('LocalStorageAdapter', () => {
         .mockReturnValueOnce('pain_tracker_backup_2024-01-02T10:00:00')
         .mockReturnValueOnce('other_key')
         .mockReturnValueOnce(null);
-      
+
       mockLocalStorage.length = 3;
-      
+
       const backups = await adapter.listBackups();
-      
+
       expect(backups).toEqual([
         'pain_tracker_backup_2024-01-02T10:00:00',
         'pain_tracker_backup_2024-01-01T10:00:00'
@@ -291,9 +291,9 @@ describe('LocalStorageAdapter', () => {
 
     it('should return empty array when no backups exist', async () => {
       mockLocalStorage.length = 0;
-      
+
       const backups = await adapter.listBackups();
-      
+
       expect(backups).toEqual([]);
     });
   });
@@ -306,11 +306,11 @@ describe('LocalStorageAdapter', () => {
         schemaVersion: 1,
         metadata: {}
       };
-      
+
       mockLocalStorage.getItem.mockReturnValue(JSON.stringify(backupData));
-      
+
       await adapter.restoreFromBackup('pain_tracker_backup_2024-01-01T10:00:00');
-      
+
       expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
         STORAGE_KEYS.PAIN_RECORDS,
         JSON.stringify(backupData.records)
@@ -323,14 +323,14 @@ describe('LocalStorageAdapter', () => {
 
     it('should handle non-existent backup', async () => {
       mockLocalStorage.getItem.mockReturnValue(null);
-      
+
       await expect(adapter.restoreFromBackup('non_existent_backup'))
         .rejects.toThrow('Backup not found');
     });
 
     it('should handle corrupted backup data', async () => {
       mockLocalStorage.getItem.mockReturnValue('invalid json');
-      
+
       await expect(adapter.restoreFromBackup('corrupted_backup'))
         .rejects.toThrow('Failed to restore from backup');
     });
@@ -340,19 +340,19 @@ describe('LocalStorageAdapter', () => {
     it('should remove backups older than retention period', async () => {
       const oldDate = new Date();
       oldDate.setDate(oldDate.getDate() - 31); // 31 days old
-      
+
       const recentDate = new Date();
       recentDate.setDate(recentDate.getDate() - 1); // 1 day old
-      
+
       mockLocalStorage.key
         .mockReturnValueOnce(`pain_tracker_backup_${oldDate.toISOString()}`)
         .mockReturnValueOnce(`pain_tracker_backup_${recentDate.toISOString()}`)
         .mockReturnValueOnce(null);
-      
+
       mockLocalStorage.length = 2;
-      
+
       await adapter.cleanupOldBackups();
-      
+
       expect(mockLocalStorage.removeItem).toHaveBeenCalledWith(
         `pain_tracker_backup_${oldDate.toISOString()}`
       );
@@ -367,15 +367,15 @@ describe('LocalStorageAdapter', () => {
       const records = [{ id: '1', name: 'test' }];
       const preferences = { theme: 'light' };
       const metadata = { version: '1.0' };
-      
+
       mockLocalStorage.getItem
         .mockReturnValueOnce(JSON.stringify(records))
         .mockReturnValueOnce(JSON.stringify(preferences))
         .mockReturnValueOnce('1')
         .mockReturnValueOnce(JSON.stringify(metadata));
-      
+
       const exportData = await adapter.export();
-      
+
       expect(exportData).toEqual({
         records,
         preferences,
@@ -387,9 +387,9 @@ describe('LocalStorageAdapter', () => {
 
     it('should handle missing data during export', async () => {
       mockLocalStorage.getItem.mockReturnValue(null);
-      
+
       const exportData = await adapter.export();
-      
+
       expect(exportData).toEqual({
         records: [],
         preferences: {},
@@ -408,9 +408,9 @@ describe('LocalStorageAdapter', () => {
         schemaVersion: 1,
         metadata: { version: '1.0' }
       };
-      
+
       await adapter.restore(JSON.stringify(importData));
-      
+
       expect(mockLocalStorage.setItem).toHaveBeenCalledWith(
         STORAGE_KEYS.PAIN_RECORDS,
         JSON.stringify(importData.records)
@@ -436,7 +436,7 @@ describe('LocalStorageAdapter', () => {
 
     it('should handle missing required fields in restore data', async () => {
       const invalidData = { invalid: 'data' };
-      
+
       await expect(adapter.restore(JSON.stringify(invalidData)))
         .rejects.toThrow('Invalid restore data format');
     });
@@ -445,10 +445,10 @@ describe('LocalStorageAdapter', () => {
   describe('migration support', () => {
     it('should handle schema version updates', async () => {
       mockLocalStorage.getItem.mockReturnValue('0'); // Old schema version
-      
+
       const currentVersion = await adapter.load(STORAGE_KEYS.SCHEMA_VERSION);
       expect(currentVersion).toBe('0');
-      
+
       await adapter.save(STORAGE_KEYS.SCHEMA_VERSION, 1);
       expect(mockLocalStorage.setItem).toHaveBeenCalledWith(STORAGE_KEYS.SCHEMA_VERSION, '1');
     });
@@ -464,7 +464,7 @@ describe('LocalStorageAdapter', () => {
         }
         return undefined;
       });
-      
+
       // Should retry and succeed on second attempt
       await adapter.save(STORAGE_KEYS.PAIN_RECORDS, []);
       expect(mockLocalStorage.setItem).toHaveBeenCalledTimes(2);
@@ -474,7 +474,7 @@ describe('LocalStorageAdapter', () => {
       mockLocalStorage.setItem.mockImplementation(() => {
         throw new Error('Persistent error');
       });
-      
+
       await expect(adapter.save(STORAGE_KEYS.PAIN_RECORDS, []))
         .rejects.toThrow('Failed to save data to localStorage');
     });

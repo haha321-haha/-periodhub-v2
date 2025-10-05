@@ -40,18 +40,18 @@ Object.keys(checks).forEach(key => {
 const nextConfigPath = path.join(process.cwd(), 'next.config.js');
 if (fs.existsSync(nextConfigPath)) {
   const configContent = fs.readFileSync(nextConfigPath, 'utf8');
-  
+
   // 检查是否包含优化配置
   const optimizations = [
     'optimizeCss: true',
     'scrollRestoration: true',
     'removeConsole:'
   ];
-  
-  const hasOptimizations = optimizations.every(opt => 
+
+  const hasOptimizations = optimizations.every(opt =>
     configContent.includes(opt)
   );
-  
+
   checks.nextConfigOptimization.status = hasOptimizations;
 }
 
@@ -79,11 +79,11 @@ const checkBreadcrumbUsage = (dir) => {
   const items = fs.readdirSync(dir);
   let pagesWithBreadcrumb = 0;
   let totalPages = 0;
-  
+
   items.forEach(item => {
     const itemPath = path.join(dir, item);
     const stat = fs.statSync(itemPath);
-    
+
     if (stat.isDirectory() && !item.startsWith('.')) {
       const pageFile = path.join(itemPath, 'page.tsx');
       if (fs.existsSync(pageFile)) {
@@ -98,7 +98,7 @@ const checkBreadcrumbUsage = (dir) => {
       }
     }
   });
-  
+
   return { pagesWithBreadcrumb, totalPages };
 };
 

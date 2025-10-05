@@ -54,7 +54,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
         // Fallback for browsers without Storage API
         const painTrackerUsage = await this.calculatePainTrackerUsage();
         const fallbackQuota = this.getFallbackQuota();
-        
+
         quotaInfo = {
           used: painTrackerUsage, // We can only estimate our own usage
           quota: fallbackQuota,
@@ -81,7 +81,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
    */
   async monitorQuotaUsage(): Promise<StorageQuotaInfo> {
     const quotaInfo = await this.getQuotaInfo();
-    
+
     // Add to history
     this.quotaHistory.push(quotaInfo);
     if (this.quotaHistory.length > this.maxHistoryLength) {
@@ -109,7 +109,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
   async optimizeStorageUsage(): Promise<StorageOptimizationResult> {
     const startQuota = await this.getQuotaInfo();
     const operations: string[] = [];
-    
+
     try {
       // 1. Clean up old backups
       const backupCleanup = await this.cleanupOldBackups();
@@ -181,7 +181,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
     if (this.quotaHistory.length >= 5) {
       const recentHistory = this.quotaHistory.slice(-5);
       const isGrowingFast = this.isStorageGrowingFast(recentHistory);
-      
+
       if (isGrowingFast) {
         recommendations.push('Storage usage is growing rapidly. Monitor data accumulation.');
       }
@@ -209,12 +209,12 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
    */
   scheduleQuotaMonitoring(intervalMs: number): void {
     this.cancelQuotaMonitoring();
-    
+
     // Don't start timers in test environment
     if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
       return;
     }
-    
+
     this.monitoringTimer = setInterval(async () => {
       try {
         await this.monitorQuotaUsage();
@@ -334,7 +334,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       // Calculate other pain tracker related data
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && key.startsWith('pain_tracker_') && 
+        if (key && key.startsWith('pain_tracker_') &&
             !Object.values(STORAGE_KEYS).includes(key as any) &&
             !key.includes('_backup') && !key.includes('_archive')) {
           const data = localStorage.getItem(key);
@@ -399,7 +399,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
     try {
       const backupKeys: string[] = [];
-      
+
       // Find all backup keys
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
@@ -433,19 +433,19 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
   private async compressStoredData(): Promise<{ operations: string[] }> {
     const operations: string[] = [];
-    
+
     try {
       // This would integrate with the DataCompressionService
       // For now, just optimize JSON formatting
       let totalSaved = 0;
-      
+
       Object.values(STORAGE_KEYS).forEach(key => {
         const data = localStorage.getItem(key);
         if (data) {
           try {
             const parsed = JSON.parse(data);
             const compressed = JSON.stringify(parsed); // Remove extra whitespace
-            
+
             if (compressed.length < data.length) {
               localStorage.setItem(key, compressed);
               totalSaved += data.length - compressed.length;
@@ -468,7 +468,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
   private async removeDuplicateData(): Promise<{ operations: string[] }> {
     const operations: string[] = [];
-    
+
     try {
       // This would integrate with the DataCleanupService
       // For now, just report that deduplication would be performed
@@ -482,7 +482,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
   private async archiveOldData(): Promise<{ operations: string[] }> {
     const operations: string[] = [];
-    
+
     try {
       // This would integrate with the DataCleanupService
       // For now, just report that archiving would be performed
@@ -501,7 +501,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
     try {
       const tempKeys: string[] = [];
-      
+
       // Find temporary keys
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
@@ -536,7 +536,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
     try {
       const backupKeys: string[] = [];
-      
+
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (key && (key.includes('_backup') || key.includes('_archive'))) {
@@ -569,7 +569,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
   private async emergencyArchive(maxAgeMonths: number): Promise<{ operations: string[] }> {
     const operations: string[] = [];
-    
+
     try {
       // This would integrate with DataCleanupService for emergency archiving
       operations.push(`Emergency: Archive records older than ${maxAgeMonths} months`);
@@ -587,7 +587,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
     try {
       const cacheKeys: string[] = [];
-      
+
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (key && key.includes('_cache')) {
@@ -616,7 +616,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
   private async aggressiveCompression(): Promise<{ operations: string[] }> {
     const operations: string[] = [];
-    
+
     try {
       // This would use advanced compression techniques
       operations.push('Aggressive compression would be applied here');
@@ -629,11 +629,11 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
   private formatBytes(bytes: number): string {
     if (bytes === 0) return '0 Bytes';
-    
+
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    
+
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   }
 }

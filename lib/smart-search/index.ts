@@ -74,4 +74,4 @@ export async function suggest(query: string, limit?: number) {
 export async function getRecommendations(userId: string, limit?: number) {
   const engine = getSearchEngine();
   return await engine.getRecommendations(userId, limit);
-} 
+}

@@ -64,10 +64,10 @@
 
 你的**渐进式整合方案A**建议非常正确：
 
-✅ **风险控制**：保持系统稳定性，零停机时间  
-✅ **快速见效**：核心搜索问题立即解决  
-✅ **可扩展性**：为后续优化奠定了良好基础  
-✅ **兼容性**：完美融合新功能与现有架构  
+✅ **风险控制**：保持系统稳定性，零停机时间
+✅ **快速见效**：核心搜索问题立即解决
+✅ **可扩展性**：为后续优化奠定了良好基础
+✅ **兼容性**：完美融合新功能与现有架构
 
 现在用户搜索"热敷"、"按摩"、"揉肚子"等关键词都能获得精准的智能匹配结果，搜索体验得到了质的提升！🎯
 
@@ -95,7 +95,7 @@ const PainManagementPDFCenter = () => {
       downloadPdf: '下载 PDF',
       categories: {
         immediate: '立即帮助',
-        planning: '计划准备', 
+        planning: '计划准备',
         understanding: '深入了解',
         longterm: '长期管理'
       },
@@ -110,8 +110,8 @@ const PainManagementPDFCenter = () => {
         immediate_comfort_measures: '即时舒缓措施',
         pain_assessment_scale: '疼痛评估量表',
         quick_relaxation: '快速放松技巧',
-        
-        // 计划准备 (8个) 
+
+        // 计划准备 (8个)
         pain_management_plan: '个人疼痛管理计划',
         exercise_schedule: '康复运动计划表',
         medication_tracker: '用药记录表',
@@ -120,7 +120,7 @@ const PainManagementPDFCenter = () => {
         goal_setting_worksheet: '康复目标设定',
         weekly_routine: '每周康复计划',
         progress_tracking: '康复进度追踪',
-        
+
         // 深入了解 (13个)
         chronic_pain_guide: '慢性疼痛完全指南',
         pain_science_basics: '疼痛科学基础知识',
@@ -135,7 +135,7 @@ const PainManagementPDFCenter = () => {
         alternative_therapies: '替代疗法介绍',
         pain_medication_guide: '疼痛用药指南',
         recovery_timeline: '康复时间线',
-        
+
         // 长期管理 (4个)
         lifestyle_modifications: '生活方式调整',
         maintenance_strategies: '长期维护策略',
@@ -152,7 +152,7 @@ const PainManagementPDFCenter = () => {
         immediate_comfort_measures: '简单易行的即时舒缓措施，无需特殊设备即可执行',
         pain_assessment_scale: '标准化疼痛评估工具，帮助准确描述和记录疼痛程度',
         quick_relaxation: '5-10分钟的快速放松技巧，适合在任何场所使用',
-        
+
         // 计划准备
         pain_management_plan: '制定个性化的疼痛管理策略，包括目标设定和行动步骤',
         exercise_schedule: '结构化的康复运动时间表，循序渐进地提高身体功能',
@@ -162,7 +162,7 @@ const PainManagementPDFCenter = () => {
         goal_setting_worksheet: '设定现实可行的康复目标，并制定达成计划',
         weekly_routine: '平衡活动与休息的每周例行安排',
         progress_tracking: '监测康复进展的指标和记录方法',
-        
+
         // 深入了解
         chronic_pain_guide: '全面了解慢性疼痛的成因、类型和综合管理方法',
         pain_science_basics: '疼痛信号传递机制和现代疼痛科学理论',
@@ -177,7 +177,7 @@ const PainManagementPDFCenter = () => {
         alternative_therapies: '针灸、按摩、瑜伽等替代疗法的介绍和评估',
         pain_medication_guide: '疼痛药物的分类、使用原则和副作用管理',
         recovery_timeline: '不同类型疼痛的典型康复过程和时间预期',
-        
+
         // 长期管理
         lifestyle_modifications: '持续的生活方式调整，维持疼痛管理效果',
         maintenance_strategies: '长期保持康复成果的策略和定期评估',
@@ -267,7 +267,7 @@ const PainManagementPDFCenter = () => {
 
   // 动态计算总资源数
   const totalResources = useMemo(() => {
-    return Object.values(optimizedCategories).reduce((total, category) => 
+    return Object.values(optimizedCategories).reduce((total, category) =>
       total + category.resources.length, 0
     );
   }, []);
@@ -275,18 +275,18 @@ const PainManagementPDFCenter = () => {
   // 语义搜索函数 - 优化版本，重点解决用户搜索词与专业内容不匹配问题
   const semanticSearch = (query, resources) => {
     if (!query.trim()) return resources;
-    
+
     const searchTerm = query.toLowerCase().trim();
-    
+
     return resources.filter(resource => {
       const title = t(resource.titleKey).toLowerCase();
       const description = t(resource.descriptionKey).toLowerCase();
-      
+
       // 直接匹配
       if (title.includes(searchTerm) || description.includes(searchTerm)) {
         return true;
       }
-      
+
       // 核心用户搜索词映射表 - 基于真实用户搜索行为优化
       const userSearchMapping = {
         // 1. 热敷 - 用户最常用的口语化表达 (83%搜索失败的核心词)
@@ -294,59 +294,59 @@ const PainManagementPDFCenter = () => {
           keywords: ['heat', 'hot', 'warm', 'thermal', '加热', '温热', '热疗', '热敷垫', '热疗法', '温敷'],
           targetResources: ['heat_cold_therapy', 'pain_relief_techniques', 'immediate_comfort_measures']
         },
-        
+
         // 2. 敷热水袋 - 具体使用场景描述
         '敷热水袋': {
           keywords: ['热水袋', '热敷袋', '加热垫', 'heating pad', '热疗工具'],
           targetResources: ['heat_cold_therapy', 'immediate_comfort_measures']
         },
-        
+
         // 3. 暖宝宝 - 年轻用户群体常用词汇
         '暖宝宝': {
           keywords: ['暖贴', '发热贴', '便携热源', '一次性暖包', '暖手宝'],
           targetResources: ['heat_cold_therapy', 'pain_relief_techniques']
         },
-        
+
         // 4. 按摩 - 物理缓解方法通用词
         '按摩': {
           keywords: ['massage', '推拿', '揉捏', '按压', '穴位按压', '肌肉放松', '手法治疗'],
           targetResources: ['pain_relief_techniques', 'immediate_comfort_measures', 'posture_correction']
         },
-        
+
         // 5. 揉肚子 - 腹部按摩的直观描述
         '揉肚子': {
           keywords: ['腹部按摩', '肚子疼', '腹痛缓解', '经期按摩', '肠胃按摩', '腹部舒缓', '肚子', '腹部'],
           targetResources: ['pain_relief_techniques', 'breathing_exercises', 'immediate_comfort_measures']
         },
-        
+
         // 6. 止痛药 - 药物需求的直接表达
         '止痛药': {
           keywords: ['止痛片', '镇痛药', '消炎药', 'nsaid', '布洛芬', '扑热息痛', '药物治疗', '用药指南'],
           targetResources: ['pain_medication_guide', 'medication_tracker', 'emergency_pain_management']
         },
-        
+
         // 扩展常用搜索词
         '冷敷': {
           keywords: ['cold', 'ice', 'cool', 'cooling', '冰敷', '冷疗', '冰袋', '降温'],
           targetResources: ['heat_cold_therapy', 'emergency_pain_management']
         },
-        
+
         '运动': {
           keywords: ['exercise', 'movement', '锻炼', '活动', '体操', '训练', '康复运动', '拉伸'],
           targetResources: ['exercise_schedule', 'pain_management_plan', 'lifestyle_modifications']
         },
-        
+
         '睡眠': {
           keywords: ['sleep', 'rest', '休息', '睡觉', '失眠', '睡眠质量', '睡姿'],
           targetResources: ['sleep_pain_relationship', 'posture_correction', 'pain_diary']
         },
-        
+
         '压力': {
           keywords: ['stress', 'anxiety', '焦虑', '紧张', '心理', '情绪', '放松'],
           targetResources: ['stress_pain_cycle', 'breathing_exercises', 'quick_relaxation']
         }
       };
-      
+
       // 检查用户搜索词映射
       for (const [userTerm, mapping] of Object.entries(userSearchMapping)) {
         // 直接匹配用户搜索词
@@ -355,20 +355,20 @@ const PainManagementPDFCenter = () => {
             return true;
           }
         }
-        
+
         // 匹配同义词和关键词
-        if (mapping.keywords.some(keyword => 
-          searchTerm.includes(keyword.toLowerCase()) || 
-          title.includes(keyword.toLowerCase()) || 
+        if (mapping.keywords.some(keyword =>
+          searchTerm.includes(keyword.toLowerCase()) ||
+          title.includes(keyword.toLowerCase()) ||
           description.includes(keyword.toLowerCase())
         )) {
           return true;
         }
       }
-      
+
       // 模糊匹配 - 部分关键词匹配
       const words = searchTerm.split(/\s+/);
-      return words.some(word => 
+      return words.some(word =>
         word.length > 1 && (title.includes(word) || description.includes(word))
       );
     });
@@ -377,11 +377,11 @@ const PainManagementPDFCenter = () => {
   // 计算搜索结果
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return [];
-    
-    const allResources = Object.values(optimizedCategories).flatMap(category => 
+
+    const allResources = Object.values(optimizedCategories).flatMap(category =>
       category.resources
     );
-    
+
     return semanticSearch(searchQuery, allResources);
   }, [searchQuery]);
 
@@ -394,7 +394,7 @@ const PainManagementPDFCenter = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
+
     // 显示下载提示
     alert(`正在下载：${t(resource.titleKey)}`);
   };
@@ -427,7 +427,7 @@ const PainManagementPDFCenter = () => {
           }
         })
       }} />
-      
+
       <div className="container mx-auto px-6 py-12 max-w-7xl">
         {/* 头部区域 */}
         <div className="text-center mb-12">
@@ -452,7 +452,7 @@ const PainManagementPDFCenter = () => {
               className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
             />
           </div>
-          
+
           {/* 推荐搜索关键词 - 基于用户行为数据优化 */}
           <div className="mb-8">
             <p className="text-sm text-gray-500 mb-3">{t('recommendedKeywords')}</p>
@@ -497,7 +497,7 @@ const PainManagementPDFCenter = () => {
                   <div className="text-gray-400 mb-4 text-4xl">🔍</div>
                   <p className="text-gray-600 mb-2 text-lg font-medium">{t('noResults')}</p>
                   <p className="text-sm text-gray-500 mb-6">{t('noResultsDesc')}</p>
-                  
+
                   {/* 智能推荐 - 基于搜索词提供相关建议 */}
                   <div className="bg-white rounded-lg p-4 border border-gray-200">
                     <p className="text-sm font-medium text-gray-700 mb-3">💡 您可能想找：</p>
@@ -505,7 +505,7 @@ const PainManagementPDFCenter = () => {
                       {(() => {
                         const suggestions = [];
                         const query = searchQuery.toLowerCase();
-                        
+
                         // 基于搜索词提供智能建议
                         if (query.includes('痛') || query.includes('疼')) {
                           suggestions.push('热敷', '按摩', '止痛药');
@@ -522,12 +522,12 @@ const PainManagementPDFCenter = () => {
                         if (query.includes('运动') || query.includes('锻炼')) {
                           suggestions.push('运动康复', '拉伸');
                         }
-                        
+
                         // 默认推荐
                         if (suggestions.length === 0) {
                           suggestions.push('热敷', '按摩', '运动康复');
                         }
-                        
+
                         return suggestions.slice(0, 4).map(suggestion => (
                           <button
                             key={suggestion}
@@ -554,7 +554,7 @@ const PainManagementPDFCenter = () => {
                       <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                         {t(resource.descriptionKey)}
                       </p>
-                      <button 
+                      <button
                         onClick={() => handleDownload(resource)}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
                       >
@@ -585,7 +585,7 @@ const PainManagementPDFCenter = () => {
                       </span>
                     </div>
                   </div>
-                  
+
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {category.resources.map((resource) => (
                       <div key={resource.id} className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
@@ -598,7 +598,7 @@ const PainManagementPDFCenter = () => {
                         <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                           {t(resource.descriptionKey)}
                         </p>
-                        <button 
+                        <button
                           onClick={() => handleDownload(resource)}
                           className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
                         >
@@ -653,7 +653,7 @@ const PainManagementPDFCenter = () => {
       downloadPdf: '下载 PDF',
       categories: {
         immediate: '立即帮助',
-        planning: '计划准备', 
+        planning: '计划准备',
         understanding: '深入了解',
         longterm: '长期管理'
       },
@@ -668,8 +668,8 @@ const PainManagementPDFCenter = () => {
         immediate_comfort_measures: '即时舒缓措施',
         pain_assessment_scale: '疼痛评估量表',
         quick_relaxation: '快速放松技巧',
-        
-        // 计划准备 (8个) 
+
+        // 计划准备 (8个)
         pain_management_plan: '个人疼痛管理计划',
         exercise_schedule: '康复运动计划表',
         medication_tracker: '用药记录表',
@@ -678,7 +678,7 @@ const PainManagementPDFCenter = () => {
         goal_setting_worksheet: '康复目标设定',
         weekly_routine: '每周康复计划',
         progress_tracking: '康复进度追踪',
-        
+
         // 深入了解 (13个)
         chronic_pain_guide: '慢性疼痛完全指南',
         pain_science_basics: '疼痛科学基础知识',
@@ -693,7 +693,7 @@ const PainManagementPDFCenter = () => {
         alternative_therapies: '替代疗法介绍',
         pain_medication_guide: '疼痛用药指南',
         recovery_timeline: '康复时间线',
-        
+
         // 长期管理 (4个)
         lifestyle_modifications: '生活方式调整',
         maintenance_strategies: '长期维护策略',
@@ -710,7 +710,7 @@ const PainManagementPDFCenter = () => {
         immediate_comfort_measures: '简单易行的即时舒缓措施，无需特殊设备即可执行',
         pain_assessment_scale: '标准化疼痛评估工具，帮助准确描述和记录疼痛程度',
         quick_relaxation: '5-10分钟的快速放松技巧，适合在任何场所使用',
-        
+
         // 计划准备
         pain_management_plan: '制定个性化的疼痛管理策略，包括目标设定和行动步骤',
         exercise_schedule: '结构化的康复运动时间表，循序渐进地提高身体功能',
@@ -720,7 +720,7 @@ const PainManagementPDFCenter = () => {
         goal_setting_worksheet: '设定现实可行的康复目标，并制定达成计划',
         weekly_routine: '平衡活动与休息的每周例行安排',
         progress_tracking: '监测康复进展的指标和记录方法',
-        
+
         // 深入了解
         chronic_pain_guide: '全面了解慢性疼痛的成因、类型和综合管理方法',
         pain_science_basics: '疼痛信号传递机制和现代疼痛科学理论',
@@ -735,7 +735,7 @@ const PainManagementPDFCenter = () => {
         alternative_therapies: '针灸、按摩、瑜伽等替代疗法的介绍和评估',
         pain_medication_guide: '疼痛药物的分类、使用原则和副作用管理',
         recovery_timeline: '不同类型疼痛的典型康复过程和时间预期',
-        
+
         // 长期管理
         lifestyle_modifications: '持续的生活方式调整，维持疼痛管理效果',
         maintenance_strategies: '长期保持康复成果的策略和定期评估',
@@ -825,7 +825,7 @@ const PainManagementPDFCenter = () => {
 
   // 动态计算总资源数
   const totalResources = useMemo(() => {
-    return Object.values(optimizedCategories).reduce((total, category) => 
+    return Object.values(optimizedCategories).reduce((total, category) =>
       total + category.resources.length, 0
     );
   }, []);
@@ -833,18 +833,18 @@ const PainManagementPDFCenter = () => {
   // 语义搜索函数 - 优化版本，重点解决用户搜索词与专业内容不匹配问题
   const semanticSearch = (query, resources) => {
     if (!query.trim()) return resources;
-    
+
     const searchTerm = query.toLowerCase().trim();
-    
+
     return resources.filter(resource => {
       const title = t(resource.titleKey).toLowerCase();
       const description = t(resource.descriptionKey).toLowerCase();
-      
+
       // 直接匹配
       if (title.includes(searchTerm) || description.includes(searchTerm)) {
         return true;
       }
-      
+
       // 核心用户搜索词映射表 - 基于真实用户搜索行为优化
       const userSearchMapping = {
         // 1. 热敷 - 用户最常用的口语化表达 (83%搜索失败的核心词)
@@ -852,59 +852,59 @@ const PainManagementPDFCenter = () => {
           keywords: ['heat', 'hot', 'warm', 'thermal', '加热', '温热', '热疗', '热敷垫', '热疗法', '温敷'],
           targetResources: ['heat_cold_therapy', 'pain_relief_techniques', 'immediate_comfort_measures']
         },
-        
+
         // 2. 敷热水袋 - 具体使用场景描述
         '敷热水袋': {
           keywords: ['热水袋', '热敷袋', '加热垫', 'heating pad', '热疗工具'],
           targetResources: ['heat_cold_therapy', 'immediate_comfort_measures']
         },
-        
+
         // 3. 暖宝宝 - 年轻用户群体常用词汇
         '暖宝宝': {
           keywords: ['暖贴', '发热贴', '便携热源', '一次性暖包', '暖手宝'],
           targetResources: ['heat_cold_therapy', 'pain_relief_techniques']
         },
-        
+
         // 4. 按摩 - 物理缓解方法通用词
         '按摩': {
           keywords: ['massage', '推拿', '揉捏', '按压', '穴位按压', '肌肉放松', '手法治疗'],
           targetResources: ['pain_relief_techniques', 'immediate_comfort_measures', 'posture_correction']
         },
-        
+
         // 5. 揉肚子 - 腹部按摩的直观描述
         '揉肚子': {
           keywords: ['腹部按摩', '肚子疼', '腹痛缓解', '经期按摩', '肠胃按摩', '腹部舒缓', '肚子', '腹部'],
           targetResources: ['pain_relief_techniques', 'breathing_exercises', 'immediate_comfort_measures']
         },
-        
+
         // 6. 止痛药 - 药物需求的直接表达
         '止痛药': {
           keywords: ['止痛片', '镇痛药', '消炎药', 'nsaid', '布洛芬', '扑热息痛', '药物治疗', '用药指南'],
           targetResources: ['pain_medication_guide', 'medication_tracker', 'emergency_pain_management']
         },
-        
+
         // 扩展常用搜索词
         '冷敷': {
           keywords: ['cold', 'ice', 'cool', 'cooling', '冰敷', '冷疗', '冰袋', '降温'],
           targetResources: ['heat_cold_therapy', 'emergency_pain_management']
         },
-        
+
         '运动': {
           keywords: ['exercise', 'movement', '锻炼', '活动', '体操', '训练', '康复运动', '拉伸'],
           targetResources: ['exercise_schedule', 'pain_management_plan', 'lifestyle_modifications']
         },
-        
+
         '睡眠': {
           keywords: ['sleep', 'rest', '休息', '睡觉', '失眠', '睡眠质量', '睡姿'],
           targetResources: ['sleep_pain_relationship', 'posture_correction', 'pain_diary']
         },
-        
+
         '压力': {
           keywords: ['stress', 'anxiety', '焦虑', '紧张', '心理', '情绪', '放松'],
           targetResources: ['stress_pain_cycle', 'breathing_exercises', 'quick_relaxation']
         }
       };
-      
+
       // 检查用户搜索词映射
       for (const [userTerm, mapping] of Object.entries(userSearchMapping)) {
         // 直接匹配用户搜索词
@@ -913,20 +913,20 @@ const PainManagementPDFCenter = () => {
             return true;
           }
         }
-        
+
         // 匹配同义词和关键词
-        if (mapping.keywords.some(keyword => 
-          searchTerm.includes(keyword.toLowerCase()) || 
-          title.includes(keyword.toLowerCase()) || 
+        if (mapping.keywords.some(keyword =>
+          searchTerm.includes(keyword.toLowerCase()) ||
+          title.includes(keyword.toLowerCase()) ||
           description.includes(keyword.toLowerCase())
         )) {
           return true;
         }
       }
-      
+
       // 模糊匹配 - 部分关键词匹配
       const words = searchTerm.split(/\s+/);
-      return words.some(word => 
+      return words.some(word =>
         word.length > 1 && (title.includes(word) || description.includes(word))
       );
     });
@@ -935,11 +935,11 @@ const PainManagementPDFCenter = () => {
   // 计算搜索结果
   const searchResults = useMemo(() => {
     if (!searchQuery.trim()) return [];
-    
-    const allResources = Object.values(optimizedCategories).flatMap(category => 
+
+    const allResources = Object.values(optimizedCategories).flatMap(category =>
       category.resources
     );
-    
+
     return semanticSearch(searchQuery, allResources);
   }, [searchQuery]);
 
@@ -952,7 +952,7 @@ const PainManagementPDFCenter = () => {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    
+
     // 显示下载提示
     alert(`正在下载：${t(resource.titleKey)}`);
   };
@@ -985,7 +985,7 @@ const PainManagementPDFCenter = () => {
           }
         })
       }} />
-      
+
       <div className="container mx-auto px-6 py-12 max-w-7xl">
         {/* 头部区域 */}
         <div className="text-center mb-12">
@@ -1010,7 +1010,7 @@ const PainManagementPDFCenter = () => {
               className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
             />
           </div>
-          
+
           {/* 推荐搜索关键词 - 基于用户行为数据优化 */}
           <div className="mb-8">
             <p className="text-sm text-gray-500 mb-3">{t('recommendedKeywords')}</p>
@@ -1055,7 +1055,7 @@ const PainManagementPDFCenter = () => {
                   <div className="text-gray-400 mb-4 text-4xl">🔍</div>
                   <p className="text-gray-600 mb-2 text-lg font-medium">{t('noResults')}</p>
                   <p className="text-sm text-gray-500 mb-6">{t('noResultsDesc')}</p>
-                  
+
                   {/* 智能推荐 - 基于搜索词提供相关建议 */}
                   <div className="bg-white rounded-lg p-4 border border-gray-200">
                     <p className="text-sm font-medium text-gray-700 mb-3">💡 您可能想找：</p>
@@ -1063,7 +1063,7 @@ const PainManagementPDFCenter = () => {
                       {(() => {
                         const suggestions = [];
                         const query = searchQuery.toLowerCase();
-                        
+
                         // 基于搜索词提供智能建议
                         if (query.includes('痛') || query.includes('疼')) {
                           suggestions.push('热敷', '按摩', '止痛药');
@@ -1080,12 +1080,12 @@ const PainManagementPDFCenter = () => {
                         if (query.includes('运动') || query.includes('锻炼')) {
                           suggestions.push('运动康复', '拉伸');
                         }
-                        
+
                         // 默认推荐
                         if (suggestions.length === 0) {
                           suggestions.push('热敷', '按摩', '运动康复');
                         }
-                        
+
                         return suggestions.slice(0, 4).map(suggestion => (
                           <button
                             key={suggestion}
@@ -1112,7 +1112,7 @@ const PainManagementPDFCenter = () => {
                       <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                         {t(resource.descriptionKey)}
                       </p>
-                      <button 
+                      <button
                         onClick={() => handleDownload(resource)}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
                       >
@@ -1143,7 +1143,7 @@ const PainManagementPDFCenter = () => {
                       </span>
                     </div>
                   </div>
-                  
+
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {category.resources.map((resource) => (
                       <div key={resource.id} className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
@@ -1156,7 +1156,7 @@ const PainManagementPDFCenter = () => {
                         <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                           {t(resource.descriptionKey)}
                         </p>
-                        <button 
+                        <button
                           onClick={() => handleDownload(resource)}
                           className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
                         >

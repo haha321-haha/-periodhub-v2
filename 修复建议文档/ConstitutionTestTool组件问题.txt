@@ -80,7 +80,7 @@ ConstitutionTestTool/
 
 **执行优先级**：
 1. 🔴 **用户功能** > 代码质量
-2. 🟡 **稳定性** > 完美架构  
+2. 🟡 **稳定性** > 完美架构
 3. 🟢 **长期维护** > 短期修复
 
 您觉得这个计划如何？需要我提供更具体的某个阶段的实施细节吗？
@@ -90,7 +90,7 @@ ConstitutionTestTool/
 
 /**
  * ConstitutionTestTool 紧急修复指南
- * 
+ *
  * 执行顺序：
  * 1. 语法检查和修复
  * 2. 基础功能验证
@@ -100,29 +100,29 @@ ConstitutionTestTool/
 // ====== 第一步：语法检查函数 ======
 export const checkSyntaxIssues = (componentCode: string) => {
   const issues: string[] = [];
-  
+
   // 1. 检查括号匹配
   const openBraces = (componentCode.match(/\{/g) || []).length;
   const closeBraces = (componentCode.match(/\}/g) || []).length;
-  
+
   if (openBraces !== closeBraces) {
     issues.push(`括号不匹配: ${openBraces} 个 '{' vs ${closeBraces} 个 '}'`);
   }
-  
+
   // 2. 检查JSX标签
   const jsxOpenTags = componentCode.match(/<[^/][^>]*>/g) || [];
   const jsxCloseTags = componentCode.match(/<\/[^>]*>/g) || [];
-  
+
   if (jsxOpenTags.length !== jsxCloseTags.length) {
     issues.push(`JSX标签不匹配: ${jsxOpenTags.length} 个开始标签 vs ${jsxCloseTags.length} 个结束标签`);
   }
-  
+
   // 3. 检查JSON.parse调用
   const jsonParseMatches = componentCode.match(/JSON\.parse\([^)]+\)/g) || [];
   jsonParseMatches.forEach((match, index) => {
     console.log(`JSON.parse 调用 ${index + 1}: ${match}`);
   });
-  
+
   return issues;
 };
 
@@ -194,7 +194,7 @@ const ConstitutionTestTool: React.FC = () => {
       <div className="max-w-4xl mx-auto p-6">
         <h2 className="text-2xl font-bold mb-4">测试完成</h2>
         <p>感谢您完成体质测试！</p>
-        <button 
+        <button
           onClick={() => {
             setCurrentQuestion(0);
             setAnswers({});
@@ -217,8 +217,8 @@ const ConstitutionTestTool: React.FC = () => {
     <div className="max-w-4xl mx-auto p-6">
       {/* 进度条 */}
       <div className="w-full bg-gray-200 rounded-full h-2 mb-6">
-        <div 
-          className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
+        <div
+          className="bg-blue-600 h-2 rounded-full transition-all duration-300"
           style={{ width: \`\${((currentQuestion + 1) / questions.length) * 100}%\` }}
         />
       </div>
@@ -229,11 +229,11 @@ const ConstitutionTestTool: React.FC = () => {
           问题 {currentQuestion + 1} / {questions.length}
         </h3>
         <p className="text-lg mb-6">{question.text}</p>
-        
+
         {/* 选项 */}
         <div className="space-y-3">
           {question.options.map((option, index) => (
-            <label 
+            <label
               key={index}
               className="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50"
             >
@@ -260,7 +260,7 @@ const ConstitutionTestTool: React.FC = () => {
         >
           上一题
         </button>
-        
+
         <button
           onClick={nextQuestion}
           disabled={answers[currentQuestion] === undefined}
@@ -373,7 +373,7 @@ ConstitutionTestTool 重构架构方案
 
 /**
  * 📁 项目结构重组
- * 
+ *
  * 从 979 行的单一组件，重构为模块化架构
  */
 
@@ -480,12 +480,12 @@ export const useTestLogic = (questions: Question[], answers: Record<number, numb
       const answer = answers[index];
       if (answer !== undefined) {
         const score = (answer + 1) * question.weight;
-        
+
         if (!categoryScores[question.category]) {
           categoryScores[question.category] = 0;
           categoryMaxScores[question.category] = 0;
         }
-        
+
         categoryScores[question.category] += score;
         categoryMaxScores[question.category] += 5 * question.weight;
       }
@@ -547,12 +547,12 @@ const getConstitutionSuggestions = (category: string, percentage: number): strin
   };
 
   const suggestions = baseSuggestions[category] || ['请咨询专业中医师'];
-  
+
   // 根据得分程度调整建议强度
   if (percentage > 70) {
     suggestions.unshift('建议咨询专业中医师进行个性化调理');
   }
-  
+
   return suggestions;
 };
 
@@ -584,15 +584,15 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
         </span>
         <h3 className="text-xl font-semibold mt-1">{question.text}</h3>
       </div>
-      
+
       <div className="space-y-3">
         {question.options.map((option, index) => (
-          <label 
+          <label
             key={index}
             className={`
               flex items-center p-3 border rounded-lg cursor-pointer transition-colors
-              ${selectedAnswer === index 
-                ? 'border-blue-500 bg-blue-50' 
+              ${selectedAnswer === index
+                ? 'border-blue-500 bg-blue-50'
                 : 'border-gray-200 hover:bg-gray-50'
               }
             `}
@@ -634,8 +634,8 @@ export const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
         <span className="text-sm text-gray-600">{current}/{total}</span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-2">
-        <div 
-          className="bg-blue-600 h-2 rounded-full transition-all duration-300 ease-out" 
+        <div
+          className="bg-blue-600 h-2 rounded-full transition-all duration-300 ease-out"
           style={{ width: `${percentage}%` }}
         />
       </div>
@@ -660,7 +660,7 @@ const ConstitutionTestTool: React.FC = () => {
 
   if (state.isCompleted) {
     return (
-      <TestResults 
+      <TestResults
         results={results}
         onRestart={resetTest}
         testDuration={state.endTime ? state.endTime.getTime() - state.startTime.getTime() : 0}
@@ -679,7 +679,7 @@ const ConstitutionTestTool: React.FC = () => {
         </p>
       </div>
 
-      <ProgressIndicator 
+      <ProgressIndicator
         current={state.currentQuestion + 1}
         total={questionsData.length}
         percentage={progress}
@@ -708,22 +708,22 @@ export default ConstitutionTestTool;
 
 /**
  * 🎯 重构收益分析：
- * 
+ *
  * 📊 代码质量提升：
  * - 单一组件 979 行 → 多个小组件 < 100 行
  * - 职责分离：UI、状态、业务逻辑分开
  * - 类型安全：完整的 TypeScript 类型定义
- * 
+ *
  * 🚀 开发效率提升：
  * - 组件复用：QuestionCard 可用于其他测试
  * - 易于测试：每个模块可单独测试
  * - 易于维护：问题定位更精准
- * 
+ *
  * 💯 用户体验提升：
  * - 更好的错误处理
  * - 更流畅的交互动画
  * - 更清晰的进度反馈
- * 
+ *
  * 📈 性能优化：
  * - 减少不必要的重渲染
  * - 更好的内存管理
@@ -894,13 +894,13 @@ echo "请根据检查结果选择下一步操作方案"
 
 **为什么现在就开始执行路径A？**
 1. **时间效益**：2-4小时 vs 可能数天的调试
-2. **用户价值**：立即恢复功能 vs 继续维护页面  
+2. **用户价值**：立即恢复功能 vs 继续维护页面
 3. **技术风险**：可控的模板替换 vs 复杂的语法修复
 4. **未来规划**：为后续重构奠定基础
 
 **您现在希望我：**
 - 🟢 **提供基础模板代码，立即开始执行路径A**
-- 🟡 **先分析现有代码，再决定执行方案**  
+- 🟡 **先分析现有代码，再决定执行方案**
 - 🔵 **其他具体需求**
 
 告诉我您的选择，我会立即为您提供对应的详细指导和代码！
@@ -938,13 +938,13 @@ echo "请根据检查结果选择下一步操作方案"
 
 **为什么现在就开始执行路径A？**
 1. **时间效益**：2-4小时 vs 可能数天的调试
-2. **用户价值**：立即恢复功能 vs 继续维护页面  
+2. **用户价值**：立即恢复功能 vs 继续维护页面
 3. **技术风险**：可控的模板替换 vs 复杂的语法修复
 4. **未来规划**：为后续重构奠定基础
 
 **您现在希望我：**
 - 🟢 **提供基础模板代码，立即开始执行路径A**
-- 🟡 **先分析现有代码，再决定执行方案**  
+- 🟡 **先分析现有代码，再决定执行方案**
 - 🔵 **其他具体需求**
 
 告诉我您的选择，我会立即为您提供对应的详细指导和代码！
@@ -1336,8 +1336,8 @@ const ConstitutionTestTool: React.FC = () => {
       .map(([category, score]) => ({
         category,
         score,
-        percentage: categoryMaxScores[category] > 0 
-          ? Math.round((score / categoryMaxScores[category]) * 100) 
+        percentage: categoryMaxScores[category] > 0
+          ? Math.round((score / categoryMaxScores[category]) * 100)
           : 0,
         description: CONSTITUTION_INFO[category]?.description || '',
         suggestions: CONSTITUTION_INFO[category]?.suggestions || []
@@ -1426,7 +1426,7 @@ const ConstitutionTestTool: React.FC = () => {
               <span className="text-2xl font-bold text-blue-600">{primaryResult.percentage}%</span>
             </div>
             <p className="text-gray-700 mb-4">{primaryResult.description}</p>
-            
+
             <h4 className="font-semibold text-gray-800 mb-2">调理建议：</h4>
             <ul className="space-y-2">
               {primaryResult.suggestions.map((suggestion, index) => (
@@ -1473,7 +1473,7 @@ const ConstitutionTestTool: React.FC = () => {
           <div className="flex justify-center">
             <button
               onClick={restartTest}
-              className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 
+              className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700
                        transition-colors duration-200 font-medium"
             >
               重新测试
@@ -1508,8 +1508,8 @@ const ConstitutionTestTool: React.FC = () => {
           </span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-3">
-          <div 
-            className="bg-blue-600 h-3 rounded-full transition-all duration-500 ease-out" 
+          <div
+            className="bg-blue-600 h-3 rounded-full transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -1526,15 +1526,15 @@ const ConstitutionTestTool: React.FC = () => {
           </div>
           <h3 className="text-2xl font-semibold text-gray-800">{question.text}</h3>
         </div>
-        
+
         <div className="space-y-4">
           {question.options.map((option, index) => (
-            <label 
+            <label
               key={index}
               className={`
                 flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-200
-                ${answers[currentQuestion] === index 
-                  ? 'border-blue-500 bg-blue-50 shadow-sm' 
+                ${answers[currentQuestion] === index
+                  ? 'border-blue-500 bg-blue-50 shadow-sm'
                   : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                 }
               `}
@@ -1560,28 +1560,28 @@ const ConstitutionTestTool: React.FC = () => {
           disabled={currentQuestion === 0}
           className={`
             px-6 py-3 rounded-lg font-medium transition-all duration-200
-            ${currentQuestion === 0 
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+            ${currentQuestion === 0
+              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
               : 'bg-gray-500 text-white hover:bg-gray-600 shadow-sm'
             }
           `}
         >
           上一题
         </button>
-        
+
         <div className="text-center">
           <div className="text-sm text-gray-500">
             {hasAnswer ? '已选择答案' : '请选择一个选项'}
           </div>
         </div>
-        
+
         <button
           onClick={nextQuestion}
           disabled={!hasAnswer}
           className={`
             px-6 py-3 rounded-lg font-medium transition-all duration-200
-            ${!hasAnswer 
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+            ${!hasAnswer
+              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
               : 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm'
             }
           `}
@@ -1833,7 +1833,7 @@ ConstitutionTestTool 路径A 执行步骤清单
 
 您的理解完全正确：
 - ✅ **1500+行完整基础模板** - 立即可用
-- ✅ **17步详细执行流程** - 2-4小时完成  
+- ✅ **17步详细执行流程** - 2-4小时完成
 - ✅ **完善的备份机制** - 零风险执行
 - ✅ **全面的验证测试** - 确保质量
 

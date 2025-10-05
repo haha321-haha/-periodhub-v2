@@ -93,7 +93,7 @@ class TestRunner {
     }
 
     this.log('Starting development server for E2E tests...', 'yellow');
-    
+
     return new Promise((resolve, reject) => {
       this.serverProcess = spawn('npm', ['run', 'dev'], {
         stdio: 'pipe',
@@ -193,7 +193,7 @@ class TestRunner {
     } catch (error) {
       this.log(`❌ ${suite.name} failed`, 'red');
       this.results.failed++;
-      
+
       if (options.failFast) {
         throw error;
       }
@@ -203,9 +203,9 @@ class TestRunner {
 
   async runAllTests(options = {}) {
     this.logHeader('Pain Tracker Test Suite');
-    
+
     const suitesToRun = options.suites || Object.keys(testConfig);
-    
+
     for (const suiteKey of suitesToRun) {
       try {
         await this.runTestSuite(suiteKey, options);
@@ -224,12 +224,12 @@ class TestRunner {
 
   async runCoverageReport() {
     this.logSection('Generating Coverage Report');
-    
+
     try {
       execSync('npx jest --coverage --coverageReporters=text --coverageReporters=html', {
         stdio: 'inherit'
       });
-      
+
       this.log('✅ Coverage report generated successfully', 'green');
       this.log('📊 View detailed report: open coverage/lcov-report/index.html', 'cyan');
     } catch (error) {
@@ -240,7 +240,7 @@ class TestRunner {
 
   validateCoverage() {
     const coveragePath = path.join(process.cwd(), 'coverage', 'coverage-summary.json');
-    
+
     if (!fs.existsSync(coveragePath)) {
       this.log('⚠️  Coverage summary not found', 'yellow');
       return false;
@@ -249,7 +249,7 @@ class TestRunner {
     try {
       const coverage = JSON.parse(fs.readFileSync(coveragePath, 'utf8'));
       const total = coverage.total;
-      
+
       this.log('\n📊 Coverage Summary:', 'cyan');
       this.log(`   Statements: ${total.statements.pct}%`, 'blue');
       this.log(`   Branches: ${total.branches.pct}%`, 'blue');
@@ -281,16 +281,16 @@ class TestRunner {
 
   generateReport() {
     this.logSection('Test Execution Summary');
-    
+
     const duration = this.results.endTime - this.results.startTime;
     const durationStr = `${(duration / 1000).toFixed(2)}s`;
-    
+
     this.log(`📊 Test Results:`, 'cyan');
     this.log(`   Total Suites: ${this.results.total}`, 'blue');
     this.log(`   Passed: ${this.results.passed}`, 'green');
     this.log(`   Failed: ${this.results.failed}`, this.results.failed > 0 ? 'red' : 'blue');
     this.log(`   Duration: ${durationStr}`, 'blue');
-    
+
     if (this.results.failed === 0) {
       this.log('\n🎉 All tests passed!', 'green');
     } else {

@@ -6,55 +6,68 @@
 // 基础类型定义
 
 // 月经阶段类型
-export type MenstrualPhase = 'menstrual' | 'follicular' | 'ovulation' | 'luteal';
+export type MenstrualPhase =
+  | "menstrual"
+  | "follicular"
+  | "ovulation"
+  | "luteal";
 
 // 中医体质类型
-export type TCMConstitution = 'qi_deficiency' | 'yang_deficiency' | 'yin_deficiency' | 'blood_deficiency' | 'balanced';
+export type TCMConstitution =
+  | "qi_deficiency"
+  | "yang_deficiency"
+  | "yin_deficiency"
+  | "blood_deficiency"
+  | "balanced";
 
 // 经期类型
-export type PeriodType = 'period' | 'predicted' | 'ovulation';
+export type PeriodType = "period" | "predicted" | "ovulation";
 
 // 流量类型
-export type FlowType = 'light' | 'medium' | 'heavy';
+export type FlowType = "light" | "medium" | "heavy";
 
 // 疼痛程度类型
 export type PainLevel = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 // 工作调整类型
-export type WorkAdjustment = 'leave' | 'workFromHome' | 'postponeMeeting' | 'reduceTasks';
+export type WorkAdjustment =
+  | "leave"
+  | "workFromHome"
+  | "postponeMeeting"
+  | "reduceTasks";
 
 // 请假模板严重程度
-export type SeverityLevel = 'mild' | 'moderate' | 'severe';
+export type SeverityLevel = "mild" | "moderate" | "severe";
 
 // 导出格式类型
-export type ExportFormat = 'json' | 'csv' | 'pdf';
+export type ExportFormat = "json" | "csv" | "pdf";
 
 // 导出类型
-export type ExportType = 'period' | 'nutrition' | 'all';
+export type ExportType = "period" | "nutrition" | "all";
 
 // Day 11: 扩展导出格式类型
-export type ExtendedExportFormat = ExportFormat | 'xlsx' | 'docx' | 'xml';
+export type ExtendedExportFormat = ExportFormat | "xlsx" | "docx" | "xml";
 
 // 主题类型
-export type Theme = 'light' | 'dark' | 'auto' | 'system';
+export type Theme = "light" | "dark" | "auto" | "system";
 
 // 字体大小类型
-export type FontSize = 'small' | 'medium' | 'large';
+export type FontSize = "small" | "medium" | "large";
 
 // 日期格式类型
-export type DateFormat = 'YYYY-MM-DD' | 'DD/MM/YYYY' | 'MM/DD/YYYY';
+export type DateFormat = "YYYY-MM-DD" | "DD/MM/YYYY" | "MM/DD/YYYY";
 
 // 时间格式类型
-export type TimeFormat = '24h' | '12h';
+export type TimeFormat = "24h" | "12h";
 
 // 通知类型
-export type NotificationType = 'reminder' | 'insight' | 'update' | 'alert';
+export type NotificationType = "reminder" | "insight" | "update" | "alert";
 
 // 通知渠道类型
-export type NotificationChannel = 'browser' | 'email' | 'sms' | 'push';
+export type NotificationChannel = "browser" | "email" | "sms" | "push";
 
 // 中医性质类型
-export type TCMNature = 'warm' | 'cool' | 'neutral';
+export type TCMNature = "warm" | "cool" | "neutral";
 
 // 多语言文本接口
 export interface LocalizedText {
@@ -119,12 +132,18 @@ export interface CalendarState {
 
 // 应用状态接口 - 基于HVsLYEp的appState结构
 export interface WorkplaceWellnessState {
-  activeTab: 'calendar' | 'nutrition' | 'export' | 'settings' | 'work-impact' | 'analysis';
+  activeTab:
+    | "calendar"
+    | "nutrition"
+    | "export"
+    | "settings"
+    | "work-impact"
+    | "analysis";
   calendar: CalendarState;
   workImpact: WorkImpactData;
   nutrition: NutritionData;
   export: ExportConfig;
-  
+
   // Day 11: 扩展状态
   userPreferences: UserPreferences;
   exportTemplates: ExportTemplate[];
@@ -138,7 +157,9 @@ export interface WorkplaceWellnessState {
 export type TranslationFunction = (key: string) => string;
 
 // 状态更新函数类型
-export type UpdateStateFunction = (updates: Partial<WorkplaceWellnessState>) => void;
+export type UpdateStateFunction = (
+  updates: Partial<WorkplaceWellnessState>,
+) => void;
 
 // 组件Props接口
 export interface WorkplaceWellnessProps {
@@ -191,11 +212,11 @@ export interface HeaderProps {
 }
 
 // 错误类型
-export type WorkplaceWellnessError = 
-  | 'DATA_LOAD_ERROR'
-  | 'EXPORT_ERROR'
-  | 'VALIDATION_ERROR'
-  | 'NETWORK_ERROR';
+export type WorkplaceWellnessError =
+  | "DATA_LOAD_ERROR"
+  | "EXPORT_ERROR"
+  | "VALIDATION_ERROR"
+  | "NETWORK_ERROR";
 
 // 错误信息接口
 export interface ErrorInfo {
@@ -242,7 +263,7 @@ export interface BatchExportItem {
   userName?: string;
   exportType: ExportType;
   templateId?: string;
-  status: 'pending' | 'processing' | 'completed' | 'failed';
+  status: "pending" | "processing" | "completed" | "failed";
   progress: number; // 0-100
   error?: string;
   createdAt: string;
@@ -254,7 +275,7 @@ export interface BatchExportQueue {
   id: string;
   name: string;
   items: BatchExportItem[];
-  status: 'idle' | 'running' | 'completed' | 'failed' | 'cancelled';
+  status: "idle" | "running" | "completed" | "failed" | "cancelled";
   totalItems: number;
   completedItems: number;
   failedItems: number;
@@ -295,7 +316,7 @@ export interface NotificationSettings {
     start: string; // HH:MM格式
     end: string; // HH:MM格式
   };
-  frequency: 'immediate' | 'daily' | 'weekly';
+  frequency: "immediate" | "daily" | "weekly";
 }
 
 // 界面偏好设置接口
@@ -306,7 +327,7 @@ export interface UIPreferences {
   compactMode: boolean;
   dateFormat: DateFormat;
   timeFormat: TimeFormat;
-  chartType: 'line' | 'bar' | 'area' | 'pie';
+  chartType: "line" | "bar" | "area" | "pie";
   sidebarCollapsed: boolean;
   showTooltips: boolean;
   showProgressBars: boolean;
@@ -338,16 +359,16 @@ export interface AccessibilitySettings {
 export interface UserPreferences {
   // 界面偏好
   ui: UIPreferences;
-  
+
   // 通知设置
   notifications: NotificationSettings;
-  
+
   // 隐私设置
   privacy: PrivacySettings;
-  
+
   // 无障碍设置
   accessibility: AccessibilitySettings;
-  
+
   // 导出偏好
   export: {
     defaultFormat: ExtendedExportFormat;
@@ -356,9 +377,9 @@ export interface UserPreferences {
     includeCharts: boolean;
     compression: boolean;
   };
-  
+
   // 语言偏好
-  
+
   // 元数据
   version: string;
   lastUpdated: string;
@@ -396,7 +417,7 @@ export interface ExportHistory {
   fileName: string;
   fileSize: number;
   recordCount: number;
-  status: 'success' | 'failed' | 'cancelled';
+  status: "success" | "failed" | "cancelled";
   error?: string;
   createdAt: string;
   downloadUrl?: string;
@@ -412,7 +433,7 @@ export interface SystemSettings {
     enableCaching: boolean;
     maxCacheSize: number; // MB
   };
-  
+
   // 存储设置
   storage: {
     enableLocalStorage: boolean;
@@ -421,13 +442,13 @@ export interface SystemSettings {
     autoCleanup: boolean;
     cleanupInterval: number; // 小时
   };
-  
+
   // 同步设置
   sync: {
     enableAutoSync: boolean;
     syncInterval: number; // 分钟
     enableOfflineMode: boolean;
-    conflictResolution: 'server' | 'client' | 'manual';
+    conflictResolution: "server" | "client" | "manual";
   };
 }
 

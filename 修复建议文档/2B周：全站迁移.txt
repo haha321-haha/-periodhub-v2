@@ -69,7 +69,7 @@ Start with the 5 A-class pages:
     "hasCredential": "Medical Content Certification"
   },
   "medicalAudience": {
-    "@type": "MedicalAudience", 
+    "@type": "MedicalAudience",
     "audienceType": "Patient"
   },
   "lastReviewed": "2025-01-15",

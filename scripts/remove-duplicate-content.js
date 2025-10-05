@@ -4,15 +4,15 @@ const fs = require('fs');
 
 function removeDuplicateContent(filePath) {
   console.log(`正在修复 ${filePath} 中的重复内容...`);
-  
+
   try {
     const content = fs.readFileSync(filePath, 'utf8');
     const lines = content.split('\n');
-    
+
     // 找到第二个 "symptomChecker" 的位置（第4595行）
     let duplicateStartLine = -1;
     let symptomCheckerCount = 0;
-    
+
     for (let i = 0; i < lines.length; i++) {
       if (lines[i].includes('"symptomChecker"')) {
         symptomCheckerCount++;
@@ -22,17 +22,17 @@ function removeDuplicateContent(filePath) {
         }
       }
     }
-    
+
     if (duplicateStartLine === -1) {
       console.log('未找到重复的 symptomChecker 块');
       return false;
     }
-    
+
     console.log(`找到重复内容开始于第 ${duplicateStartLine + 1} 行`);
-    
+
     // 保留从开始到重复内容之前的部分
     const validLines = lines.slice(0, duplicateStartLine);
-    
+
     // 添加正确的结尾结构
     const correctEnding = [
       '},',
@@ -47,15 +47,15 @@ function removeDuplicateContent(filePath) {
       '}',
       '}'
     ];
-    
+
     // 合并内容
     const fixedContent = validLines.concat(correctEnding).join('\n');
-    
+
     // 验证JSON格式
     try {
       JSON.parse(fixedContent);
       console.log('✅ JSON格式验证通过');
-      
+
       // 写入修复后的内容
       fs.writeFileSync(filePath, fixedContent);
       console.log(`✅ 成功修复 ${filePath}`);
@@ -76,7 +76,7 @@ const zhFixed = removeDuplicateContent('messages/zh.json');
 
 if (zhFixed) {
   console.log('\n🎉 中文翻译文件修复完成！');
-  
+
   // 验证英文翻译文件
   console.log('\n检查英文翻译文件...');
   try {

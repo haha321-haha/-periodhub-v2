@@ -21,15 +21,15 @@ if [ -z "$(git status --porcelain)" ]; then
     fi
 else
     echo "📝 检测到未提交的更改，准备提交..."
-    
+
     # 添加所有更改
     echo "📋 添加文件到暂存区..."
     git add .
-    
+
     # 显示将要提交的文件
     echo "📄 将要提交的文件:"
     git diff --cached --name-only
-    
+
     # 确认提交
     read -p "确认提交这些更改? (y/n): " -n 1 -r
     echo
@@ -37,7 +37,7 @@ else
         echo "❌ 取消提交"
         exit 1
     fi
-    
+
     # 执行提交
     echo "💾 执行提交..."
     git commit -m "🚀 Core Web Vitals优化 & 性能提升 - 修复Vercel 404错误
@@ -87,7 +87,7 @@ else
 - 显著提升Core Web Vitals指标
 - 改善移动端用户体验
 - 建立完整的性能监控体系"
-    
+
     if [ $? -eq 0 ]; then
         echo "✅ 提交成功!"
     else
@@ -157,10 +157,10 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "📤 推送代码..."
     git push origin main
-    
+
     echo "📤 推送标签..."
     git push origin --tags
-    
+
     if [ $? -eq 0 ]; then
         echo "✅ 推送成功!"
         echo ""

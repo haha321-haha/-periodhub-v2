@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { Plus, List, BarChart3, Download, Settings } from 'lucide-react';
-import { usePainTracker } from '../shared/hooks/usePainTracker';
-import { useNotifications } from '../shared/hooks/useNotifications';
-import PainEntryForm from '../pain-tracker/components/PainEntryForm';
-import NotificationContainer from '../shared/components/NotificationContainer';
-import { LoadingOverlay } from '../shared/components/LoadingSpinner';
+import React, { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Plus, List, BarChart3, Download, Settings } from "lucide-react";
+import { usePainTracker } from "../shared/hooks/usePainTracker";
+import { useNotifications } from "../shared/hooks/useNotifications";
+import PainEntryForm from "../pain-tracker/components/PainEntryForm";
+import NotificationContainer from "../shared/components/NotificationContainer";
+import { LoadingOverlay } from "../shared/components/LoadingSpinner";
 
 interface PainTrackerToolProps {
   locale: string;
 }
 
-type ActiveTab = 'overview' | 'add' | 'entries' | 'statistics' | 'export';
+type ActiveTab = "overview" | "add" | "entries" | "statistics" | "export";
 
 interface EditingEntry {
   id: string;
@@ -21,11 +21,11 @@ interface EditingEntry {
 }
 
 export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
-  const t = useTranslations('painTracker');
-  const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
+  const t = useTranslations("painTracker");
+  const [activeTab, setActiveTab] = useState<ActiveTab>("overview");
   const [isFormLoading, setIsFormLoading] = useState(false);
   const [editingEntry, setEditingEntry] = useState<EditingEntry | null>(null);
-  
+
   const {
     entries,
     statistics,
@@ -34,14 +34,14 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
     addEntry,
     updateEntry,
     deleteEntry,
-    setError
+    setError,
   } = usePainTracker();
 
   const {
     notifications,
     removeNotification,
     addSuccessNotification,
-    addErrorNotification
+    addErrorNotification,
   } = useNotifications();
 
   const handleAddEntry = async (data: any) => {
@@ -49,19 +49,16 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
     try {
       const result = await addEntry(data);
       if (result.success) {
-        addSuccessNotification(
-          t('messages.saveSuccess'),
-          t('form.save')
-        );
-        setActiveTab('entries');
+        addSuccessNotification(t("messages.saveSuccess"), t("form.save"));
+        setActiveTab("entries");
         return { success: true };
       } else {
         return result;
       }
     } catch (error) {
       addErrorNotification(
-        t('messages.saveError'),
-        t('messages.validationError')
+        t("messages.saveError"),
+        t("messages.validationError"),
       );
       return { success: false };
     } finally {
@@ -76,20 +73,17 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
     try {
       const result = await updateEntry(editingEntry.id, data);
       if (result.success) {
-        addSuccessNotification(
-          t('messages.updateSuccess'),
-          t('form.save')
-        );
+        addSuccessNotification(t("messages.updateSuccess"), t("form.save"));
         setEditingEntry(null);
-        setActiveTab('entries');
+        setActiveTab("entries");
         return { success: true };
       } else {
         return result;
       }
     } catch (error) {
       addErrorNotification(
-        t('messages.updateError'),
-        t('messages.validationError')
+        t("messages.updateError"),
+        t("messages.validationError"),
       );
       return { success: false };
     } finally {
@@ -98,24 +92,24 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
   };
 
   const handleDeleteEntry = async (id: string) => {
-    if (window.confirm(t('messages.confirmDelete'))) {
+    if (window.confirm(t("messages.confirmDelete"))) {
       try {
         const success = await deleteEntry(id);
         if (success) {
           addSuccessNotification(
-            t('messages.deleteSuccess'),
-            t('entries.delete')
+            t("messages.deleteSuccess"),
+            t("entries.delete"),
           );
         } else {
           addErrorNotification(
-            t('messages.deleteError'),
-            t('messages.validationError')
+            t("messages.deleteError"),
+            t("messages.validationError"),
           );
         }
       } catch (error) {
         addErrorNotification(
-          t('messages.deleteError'),
-          t('messages.validationError')
+          t("messages.deleteError"),
+          t("messages.validationError"),
         );
       }
     }
@@ -123,20 +117,36 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
 
   const startEditEntry = (entry: any) => {
     setEditingEntry({ id: entry.id, data: entry });
-    setActiveTab('add');
+    setActiveTab("add");
   };
 
   const cancelEdit = () => {
     setEditingEntry(null);
-    setActiveTab('entries');
+    setActiveTab("entries");
   };
 
   const tabs = [
-    { id: 'overview' as ActiveTab, label: t('navigation.overview'), icon: BarChart3 },
-    { id: 'add' as ActiveTab, label: t('navigation.addEntry'), icon: Plus },
-    { id: 'entries' as ActiveTab, label: t('navigation.viewEntries'), icon: List },
-    { id: 'statistics' as ActiveTab, label: t('navigation.statistics'), icon: BarChart3 },
-    { id: 'export' as ActiveTab, label: t('navigation.export'), icon: Download }
+    {
+      id: "overview" as ActiveTab,
+      label: t("navigation.overview"),
+      icon: BarChart3,
+    },
+    { id: "add" as ActiveTab, label: t("navigation.addEntry"), icon: Plus },
+    {
+      id: "entries" as ActiveTab,
+      label: t("navigation.viewEntries"),
+      icon: List,
+    },
+    {
+      id: "statistics" as ActiveTab,
+      label: t("navigation.statistics"),
+      icon: BarChart3,
+    },
+    {
+      id: "export" as ActiveTab,
+      label: t("navigation.export"),
+      icon: Download,
+    },
   ];
 
   return (
@@ -144,13 +154,14 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
       {/* 页面标题优化 */}
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
-          {locale === 'zh' ? '💊 痛经智能分析器 | 疼痛追踪计算器' : '💊 Period Pain Calculator & Intelligent Tracker'}
+          {locale === "zh"
+            ? "💊 痛经智能分析器 | 疼痛追踪计算器"
+            : "💊 Period Pain Calculator & Intelligent Tracker"}
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          {locale === 'zh' 
-            ? 'AI驱动的经期疼痛计算器，分析您的周期模式，预测疼痛强度，提供个性化镁剂和自然缓解建议'
-            : 'AI-powered period pain calculator that analyzes your cycle patterns, predicts pain intensity, and provides personalized magnesium and natural relief recommendations'
-          }
+          {locale === "zh"
+            ? "AI驱动的经期疼痛计算器，分析您的周期模式，预测疼痛强度，提供个性化镁剂和自然缓解建议"
+            : "AI-powered period pain calculator that analyzes your cycle patterns, predicts pain intensity, and provides personalized magnesium and natural relief recommendations"}
         </p>
       </div>
 
@@ -167,8 +178,8 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                       activeTab === tab.id
-                        ? 'bg-gradient-to-r from-pink-600 to-purple-600 text-white'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                        ? "bg-gradient-to-r from-pink-600 to-purple-600 text-white"
+                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                     }`}
                   >
                     <Icon className="w-4 h-4 mr-2" />
@@ -182,53 +193,53 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
 
         {/* Main Content */}
         <div>
-          {activeTab === 'overview' && (
+          {activeTab === "overview" && (
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                {t('statistics.overview')}
+                {t("statistics.overview")}
               </h2>
-              
+
               {entries.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="text-gray-400 mb-4">
                     <BarChart3 className="w-16 h-16 mx-auto" />
                   </div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">
-                    {t('entries.noEntries')}
+                    {t("entries.noEntries")}
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    {t('entries.noEntriesDescription')}
+                    {t("entries.noEntriesDescription")}
                   </p>
                   <button
-                    onClick={() => setActiveTab('add')}
+                    onClick={() => setActiveTab("add")}
                     className="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:from-pink-700 hover:to-purple-700 transition-colors"
                   >
-                    {t('entries.addFirst')}
+                    {t("entries.addFirst")}
                   </button>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="bg-gradient-to-r from-pink-100 to-purple-100 p-6 rounded-lg">
                     <h3 className="text-sm font-medium text-gray-600 mb-2">
-                      {t('statistics.totalEntries')}
+                      {t("statistics.totalEntries")}
                     </h3>
                     <p className="text-3xl font-bold text-gray-900">
                       {statistics.totalEntries}
                     </p>
                   </div>
-                  
+
                   <div className="bg-gradient-to-r from-blue-100 to-indigo-100 p-6 rounded-lg">
                     <h3 className="text-sm font-medium text-gray-600 mb-2">
-                      {t('statistics.averagePain')}
+                      {t("statistics.averagePain")}
                     </h3>
                     <p className="text-3xl font-bold text-gray-900">
                       {statistics.averagePain}/10
                     </p>
                   </div>
-                  
+
                   <div className="bg-gradient-to-r from-green-100 to-teal-100 p-6 rounded-lg">
                     <h3 className="text-sm font-medium text-gray-600 mb-2">
-                      {t('statistics.trendDirection')}
+                      {t("statistics.trendDirection")}
                     </h3>
                     <p className="text-lg font-semibold text-gray-900">
                       {t(`statistics.${statistics.trendDirection}`)}
@@ -239,14 +250,16 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
             </div>
           )}
 
-          {activeTab === 'add' && (
+          {activeTab === "add" && (
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                {editingEntry ? t('form.editTitle') : t('form.title')}
+                {editingEntry ? t("form.editTitle") : t("form.title")}
               </h2>
               <PainEntryForm
                 onSubmit={editingEntry ? handleEditEntry : handleAddEntry}
-                onCancel={editingEntry ? cancelEdit : () => setActiveTab('overview')}
+                onCancel={
+                  editingEntry ? cancelEdit : () => setActiveTab("overview")
+                }
                 isLoading={isFormLoading}
                 locale={locale}
                 initialData={editingEntry?.data}
@@ -254,45 +267,49 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
             </div>
           )}
 
-          {activeTab === 'entries' && (
+          {activeTab === "entries" && (
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                {t('entries.title')}
+                {t("entries.title")}
               </h2>
-              
+
               {entries.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="text-gray-400 mb-4">
                     <List className="w-16 h-16 mx-auto" />
                   </div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">
-                    {t('entries.noEntries')}
+                    {t("entries.noEntries")}
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    {t('entries.noEntriesDescription')}
+                    {t("entries.noEntriesDescription")}
                   </p>
                   <button
-                    onClick={() => setActiveTab('add')}
+                    onClick={() => setActiveTab("add")}
                     className="bg-gradient-to-r from-pink-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:from-pink-700 hover:to-purple-700 transition-colors"
                   >
-                    {t('entries.addFirst')}
+                    {t("entries.addFirst")}
                   </button>
                 </div>
               ) : (
                 <div className="space-y-4">
                   {entries.map((entry) => (
-                    <div key={entry.id} className="border border-gray-200 rounded-lg p-4">
+                    <div
+                      key={entry.id}
+                      className="border border-gray-200 rounded-lg p-4"
+                    >
                       <div className="flex justify-between items-start">
                         <div>
                           <h3 className="font-medium text-gray-900">
                             {new Date(entry.date).toLocaleDateString(locale)}
                           </h3>
                           <p className="text-sm text-gray-600">
-                            {t('entries.painIntensity')}: {entry.painLevel}/10
+                            {t("entries.painIntensity")}: {entry.painLevel}/10
                           </p>
                           {entry.duration && (
                             <p className="text-sm text-gray-600">
-                              {t('entries.duration')}: {entry.duration} {t('entries.minutes')}
+                              {t("entries.duration")}: {entry.duration}{" "}
+                              {t("entries.minutes")}
                             </p>
                           )}
                         </div>
@@ -301,13 +318,13 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
                             onClick={() => startEditEntry(entry)}
                             className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors"
                           >
-                            {t('entries.edit')}
+                            {t("entries.edit")}
                           </button>
                           <button
                             onClick={() => handleDeleteEntry(entry.id)}
                             className="text-red-600 hover:text-red-800 text-sm font-medium transition-colors"
                           >
-                            {t('entries.delete')}
+                            {t("entries.delete")}
                           </button>
                         </div>
                       </div>
@@ -318,25 +335,21 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
             </div>
           )}
 
-          {activeTab === 'statistics' && (
+          {activeTab === "statistics" && (
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                {t('statistics.title')}
+                {t("statistics.title")}
               </h2>
-              <p className="text-gray-600">
-                {t('statistics.inDevelopment')}
-              </p>
+              <p className="text-gray-600">{t("statistics.inDevelopment")}</p>
             </div>
           )}
 
-          {activeTab === 'export' && (
+          {activeTab === "export" && (
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-                {t('export.title')}
+                {t("export.title")}
               </h2>
-              <p className="text-gray-600">
-                {t('export.inDevelopment')}
-              </p>
+              <p className="text-gray-600">{t("export.inDevelopment")}</p>
             </div>
           )}
         </div>
@@ -350,7 +363,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
                 onClick={() => setError(null)}
                 className="mt-2 text-sm text-red-600 hover:text-red-800"
               >
-                {t('messages.close')}
+                {t("messages.close")}
               </button>
             </div>
           </div>

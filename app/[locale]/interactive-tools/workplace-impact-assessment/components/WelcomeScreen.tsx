@@ -33,11 +33,11 @@ export default function WelcomeScreen({ onStart, onBack }: WelcomeScreenProps) {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-6">
             <BarChart3 className="w-10 h-10 text-white" />
           </div>
-          
+
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             {t('title') || '职场影响评估'}
           </h1>
-          
+
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             {t('subtitle') || '了解您的症状如何影响工作，有助于找到有效的支持措施。'}
           </p>
@@ -56,7 +56,7 @@ export default function WelcomeScreen({ onStart, onBack }: WelcomeScreenProps) {
               {t('features.assessmentDesc') || '4个专业问题，全面评估工作影响'}
             </p>
           </div>
-          
+
           <div className="text-center p-6 bg-purple-50 rounded-lg">
             <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full mb-4">
               <Clock className="w-6 h-6 text-purple-600" />
@@ -68,7 +68,7 @@ export default function WelcomeScreen({ onStart, onBack }: WelcomeScreenProps) {
               {t('features.quickDesc') || '仅需3-5分钟，获得专业分析'}
             </p>
           </div>
-          
+
           <div className="text-center p-6 bg-green-50 rounded-lg">
             <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-4">
               <CheckCircle className="w-6 h-6 text-green-600" />

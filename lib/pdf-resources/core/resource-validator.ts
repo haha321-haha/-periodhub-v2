@@ -1,8 +1,8 @@
 // lib/pdf-resources/core/resource-validator.ts
 
-import { 
-  PDFResource, 
-  ValidationResult, 
+import {
+  PDFResource,
+  ValidationResult,
   ValidationError,
   QualityScore,
   AccessLevel,
@@ -247,7 +247,7 @@ class ContentValidationRule implements IValidationRule {
   private findDuplicates(array: string[]): string[] {
     const seen = new Set<string>();
     const duplicates = new Set<string>();
-    
+
     for (const item of array) {
       const lowerItem = item.toLowerCase();
       if (seen.has(lowerItem)) {
@@ -256,7 +256,7 @@ class ContentValidationRule implements IValidationRule {
         seen.add(lowerItem);
       }
     }
-    
+
     return Array.from(duplicates);
   }
 }
@@ -276,7 +276,7 @@ class QualityValidationRule implements IValidationRule {
     // 验证必需的评分
     if (qualityConfig.requireAllScores) {
       const requiredFields = ['content', 'design', 'accuracy', 'usefulness'] as const;
-      
+
       for (const field of requiredFields) {
         const score = quality[field];
         if (score === undefined || score === null) {
@@ -301,7 +301,7 @@ class QualityValidationRule implements IValidationRule {
     if (qualityConfig.autoCalculateOverall) {
       const calculatedOverall = this.calculateOverallScore(quality, qualityConfig.scoreWeights);
       const difference = Math.abs(calculatedOverall - quality.overall);
-      
+
       if (difference > 0.1) {
         errors.push({
           field: 'metadata.quality.overall',
@@ -328,7 +328,7 @@ class QualityValidationRule implements IValidationRule {
     const scores = [quality.content, quality.design, quality.accuracy, quality.usefulness];
     const maxScore = Math.max(...scores);
     const minScore = Math.min(...scores);
-    
+
     if (maxScore - minScore > 5) {
       errors.push({
         field: 'metadata.quality',
@@ -343,13 +343,13 @@ class QualityValidationRule implements IValidationRule {
   }
 
   private calculateOverallScore(
-    quality: QualityScore, 
+    quality: QualityScore,
     weights: { content: number; design: number; accuracy: number; usefulness: number }
   ): number {
     const totalWeight = weights.content + weights.design + weights.accuracy + weights.usefulness;
-    
+
     if (totalWeight === 0) return 0;
-    
+
     return (
       quality.content * weights.content +
       quality.design * weights.design +
@@ -606,21 +606,21 @@ class CustomValidationRule implements IValidationRule {
     switch (rule.type) {
       case 'required':
         return value !== undefined && value !== null && value !== '';
-      
+
       case 'format':
         if (typeof value !== 'string') return false;
         return rule.params?.pattern ? new RegExp(rule.params.pattern).test(value) : true;
-      
+
       case 'range':
         if (typeof value !== 'number') return false;
         const min = rule.params?.min ?? -Infinity;
         const max = rule.params?.max ?? Infinity;
         return value >= min && value <= max;
-      
+
       case 'custom':
         // 这里可以实现更复杂的自定义验证逻辑
         return true;
-      
+
       default:
         return true;
     }
@@ -793,7 +793,7 @@ export class ResourceValidator {
    */
   updateConfig(newConfig: Partial<ValidationConfig>): void {
     this.config = { ...this.config, ...newConfig };
-    
+
     // 重新初始化自定义规则
     if (newConfig.custom) {
       this.initializeCustomRules();
@@ -830,7 +830,7 @@ export class ResourceValidator {
     // 验证质量权重
     const weights = this.config.quality.scoreWeights;
     const totalWeight = weights.content + weights.design + weights.accuracy + weights.usefulness;
-    
+
     if (Math.abs(totalWeight - 1.0) > 0.01) {
       warnings.push({
         field: 'quality.scoreWeights',

@@ -21,12 +21,12 @@ const translations = {
         title: "经期疼痛影响评估",
         subtitle: "评估您的经期疼痛对日常生活的影响程度"
       },
-      
+
       // 工作场所评估
       workplaceAssessment: {
         title: "工作场所影响评估"
       },
-      
+
       // 通用按钮和界面元素
       common: {
         buttons: {
@@ -38,7 +38,7 @@ const translations = {
         },
         disclaimer: "免责声明：此工具仅供参考，不能替代专业医疗建议。如有健康问题，请咨询医疗专业人士。"
       },
-      
+
       // 疼痛位置相关
       questions: {
         painLocation: {
@@ -52,7 +52,7 @@ const translations = {
             variable: "位置变化"
           }
         },
-        
+
         painLevel: {
           title: "疼痛程度",
           options: {
@@ -62,7 +62,7 @@ const translations = {
             verySevere: "非常严重"
           }
         },
-        
+
         painDuration: {
           title: "疼痛持续时间",
           options: {
@@ -71,7 +71,7 @@ const translations = {
             long: "6天或更长"
           }
         },
-        
+
         accompanyingSymptoms: {
           title: "伴随症状",
           options: {
@@ -104,31 +104,31 @@ function initI18n() {
 
   try {
     i18nInstance = window.i18next.createInstance();
-    
+
     i18nInstance.init({
       lng: 'zh',
       fallbackLng: 'zh',
       debug: true,
-      
+
       // 重要：使用 'translation' 作为默认命名空间
       ns: ['translation'],
       defaultNS: 'translation',
-      
+
       // 直接内联资源，避免加载问题
       resources: translations,
-      
+
       // 插值配置
       interpolation: {
         escapeValue: false
       },
-      
+
       // 处理缺失键的回调
       saveMissing: true,
       missingKeyHandler: (lng, ns, key, fallbackValue) => {
         console.warn(`Missing translation key: ${key} for language: ${lng}, namespace: ${ns}`);
         return key; // 返回键名作为后备
       },
-      
+
       // React 特定配置
       react: {
         bindI18n: 'languageChanged loaded',
@@ -142,18 +142,18 @@ function initI18n() {
         console.error('i18n initialization failed:', err);
         return;
       }
-      
+
       console.log('i18n initialized successfully');
       isInitialized = true;
-      
+
       // 测试翻译是否工作
       console.log('Test translation:', t('symptomAssessor.title'));
-      
+
       if (window.i18nResolve) {
         window.i18nResolve(i18nInstance);
       }
     });
-    
+
     return initPromise;
   } catch (error) {
     console.error('Error initializing i18n:', error);
@@ -167,7 +167,7 @@ function t(key, options = {}) {
     console.warn(`Translation called before initialization: ${key}`);
     return key; // 返回键名作为后备
   }
-  
+
   try {
     const result = i18nInstance.t(key, options);
     if (result === key && key.includes('.')) {
@@ -217,7 +217,7 @@ window.i18nReady.then(() => {
   // 现在可以安全使用翻译
   const title = window.t('symptomAssessor.title');
   console.log('Translated title:', title);
-  
+
   // 更新DOM
   const titleElement = document.querySelector('.symptom-assessor-title');
   if (titleElement) {
@@ -232,7 +232,7 @@ function updateTranslations() {
     window.i18nReady.then(updateTranslations);
     return;
   }
-  
+
   // 更新所有翻译
   document.querySelector('.symptom-title').textContent = window.t('symptomAssessor.title');
   document.querySelector('.symptom-subtitle').textContent = window.t('symptomAssessor.subtitle');
@@ -340,7 +340,7 @@ window.addEventListener('DOMContentLoaded', function() {
             '.workplace-assessment-title': 'workplaceAssessment.title',
             '.disclaimer': 'common.disclaimer'
         };
-        
+
         Object.entries(elements).forEach(([selector, key]) => {
             const element = document.querySelector(selector);
             if (element) {
@@ -406,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'workplaceAssessment.title': '工作场所影响评估',
         'common.disclaimer': '免责声明：此工具仅供参考，不能替代专业医疗建议。如有健康问题，请咨询医疗专业人士。'
     };
-    
+
     // 查找并替换所有包含翻译键的文本节点
     function walkTextNodes(node) {
         if (node.nodeType === 3) { // 文本节点
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-    
+
     walkTextNodes(document.body);
 });
 ```

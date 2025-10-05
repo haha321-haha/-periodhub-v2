@@ -106,8 +106,8 @@
                                     1. 您的疼痛强度通常是多少？（10分为最痛）
                                 </label>
                                 <div class="grid grid-cols-5 md:grid-cols-10 gap-2">
-                                    <input type="range" id="pain-intensity-slider" class="col-span-5 md:col-span-8" 
-                                           min="0" max="10" value="5" step="1" 
+                                    <input type="range" id="pain-intensity-slider" class="col-span-5 md:col-span-8"
+                                           min="0" max="10" value="5" step="1"
                                            oninput="document.getElementById('pain-intensity-value').textContent = this.value">
                                     <div class="col-span-2 flex items-center">
                                         <span class="text-2xl font-bold text-purple-600" id="pain-intensity-value">5</span>
@@ -347,7 +347,7 @@
                                 <!-- Analysis summary will be populated by JavaScript -->
                             </div>
                         </div>
-                        
+
                         <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border border-blue-200">
                             <h3 class="text-lg font-semibold mb-4 text-blue-800">严重程度评估</h3>
                             <div id="severity-assessment">
@@ -371,7 +371,7 @@
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto">
                     <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">个性化管理建议</h2>
-                    
+
                     <div class="grid md:grid-cols-2 gap-8">
                         <!-- Immediate Recommendations -->
                         <div class="bg-red-50 rounded-lg p-6 border border-red-200">
@@ -439,7 +439,7 @@
                                 开始疼痛记录
                             </a>
                         </div>
-                        
+
                         <button onclick="location.reload()" class="mt-4 text-gray-600 hover:text-gray-800 font-medium">
                             重新评估 ↻
                         </button>
@@ -521,7 +521,7 @@
             // Update pain intensity input when slider changes
             const slider = document.getElementById('pain-intensity-slider');
             const input = document.getElementById('pain-intensity-input');
-            
+
             slider.addEventListener('input', function() {
                 input.value = this.value;
             });
@@ -530,7 +530,7 @@
             const form = document.getElementById('symptom-assessment-form');
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 // Show loading state
                 const submitBtn = form.querySelector('button[type="submit"]');
                 const originalText = submitBtn.textContent;
@@ -539,7 +539,7 @@
 
                 // Collect form data
                 const formData = new FormData(form);
-                
+
                 // Handle checkbox arrays
                 const checkboxData = {};
                 ['pain_characteristics', 'pain_location', 'associated_symptoms'].forEach(name => {
@@ -559,7 +559,7 @@
 
                         // Display results
                         displayAnalysisResults(analysis);
-                        
+
                         // Generate and display recommendations
                         const recommendations = generateRecommendations(analysis);
                         displayRecommendations(recommendations);
@@ -631,7 +631,7 @@
                             </li>
                         `).join('')}
                     </ul>
-                
+
 `;
             } else {
                  riskFactorsDiv.innerHTML = `
@@ -810,4 +810,3 @@
     </script>
 </body>
 </html>
-

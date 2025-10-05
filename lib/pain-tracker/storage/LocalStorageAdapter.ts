@@ -1,17 +1,17 @@
 // LocalStorageAdapter - Enhanced Pain Tracker Storage System
 // Provides robust local storage with data persistence, migration, and error handling
 
-import { 
-  StoredData, 
-  PainRecord, 
-  UserPreferences, 
+import {
+  StoredData,
+  PainRecord,
+  UserPreferences,
   StorageMetadata,
   LocalStorageAdapterInterface,
   PainTrackerError,
   STORAGE_KEYS,
   CURRENT_SCHEMA_VERSION,
-  DEFAULT_USER_PREFERENCES
-} from '../../../types/pain-tracker';
+  DEFAULT_USER_PREFERENCES,
+} from "../../../types/pain-tracker";
 
 export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   private compressionEnabled: boolean = true;
@@ -28,19 +28,22 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
     try {
       // Check if this is first time initialization
       const schemaVersion = await this.load(STORAGE_KEYS.SCHEMA_VERSION);
-      
+
       if (!schemaVersion) {
         // First time setup
         await this.save(STORAGE_KEYS.SCHEMA_VERSION, CURRENT_SCHEMA_VERSION);
-        await this.save(STORAGE_KEYS.USER_PREFERENCES, DEFAULT_USER_PREFERENCES);
+        await this.save(
+          STORAGE_KEYS.USER_PREFERENCES,
+          DEFAULT_USER_PREFERENCES,
+        );
         await this.save(STORAGE_KEYS.PAIN_RECORDS, []);
-        
+
         const metadata: StorageMetadata = {
           createdAt: new Date(),
           lastModified: new Date(),
-          version: '1.0.0',
+          version: "1.0.0",
           recordCount: 0,
-          dataSize: 0
+          dataSize: 0,
         };
         await this.save(STORAGE_KEYS.METADATA, metadata);
       } else if (schemaVersion < CURRENT_SCHEMA_VERSION) {
@@ -49,9 +52,9 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
       }
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to initialize storage',
-        'STORAGE_ERROR',
-        error
+        "Failed to initialize storage",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -62,24 +65,27 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   async save(key: string, data: any): Promise<void> {
     try {
       const serializedData = JSON.stringify(data);
-      const processedData = this.compressionEnabled 
+      const processedData = this.compressionEnabled
         ? this.compress(serializedData)
         : serializedData;
 
       // Check storage quota before saving
       const quotaInfo = await this.getQuotaUsage();
       const dataSize = new Blob([processedData]).size;
-      
+
       if (quotaInfo.used + dataSize > quotaInfo.available * 0.9) {
         throw new PainTrackerError(
-          'Storage quota nearly exceeded',
-          'QUOTA_EXCEEDED',
-          { required: dataSize, available: quotaInfo.available - quotaInfo.used }
+          "Storage quota nearly exceeded",
+          "QUOTA_EXCEEDED",
+          {
+            required: dataSize,
+            available: quotaInfo.available - quotaInfo.used,
+          },
         );
       }
 
       localStorage.setItem(key, processedData);
-      
+
       // Update metadata if saving records
       if (key === STORAGE_KEYS.PAIN_RECORDS) {
         await this.updateMetadata(data);
@@ -88,19 +94,19 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
       if (error instanceof PainTrackerError) {
         throw error;
       }
-      
+
       if (error instanceof DOMException && error.code === 22) {
         throw new PainTrackerError(
-          'Storage quota exceeded',
-          'QUOTA_EXCEEDED',
-          error
+          "Storage quota exceeded",
+          "QUOTA_EXCEEDED",
+          error,
         );
       }
-      
+
       throw new PainTrackerError(
         `Failed to save data for key: ${key}`,
-        'STORAGE_ERROR',
-        error
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -111,12 +117,12 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   async load(key: string): Promise<any> {
     try {
       const rawData = localStorage.getItem(key);
-      
+
       if (rawData === null) {
         return null;
       }
 
-      const processedData = this.compressionEnabled 
+      const processedData = this.compressionEnabled
         ? this.decompress(rawData)
         : rawData;
 
@@ -124,20 +130,20 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
     } catch (error) {
       // If data is corrupted, try to recover or return null
       console.warn(`Failed to load data for key: ${key}`, error);
-      
+
       if (key === STORAGE_KEYS.PAIN_RECORDS) {
         // Try to recover from backup
         const backupData = await this.loadBackup();
         if (backupData) {
-          console.log('Recovered data from backup');
+          console.log("Recovered data from backup");
           return backupData.records;
         }
       }
-      
+
       throw new PainTrackerError(
         `Failed to load data for key: ${key}`,
-        'DATA_CORRUPTION',
-        error
+        "DATA_CORRUPTION",
+        error,
       );
     }
   }
@@ -151,8 +157,8 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
     } catch (error) {
       throw new PainTrackerError(
         `Failed to remove data for key: ${key}`,
-        'STORAGE_ERROR',
-        error
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -162,14 +168,14 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
    */
   async clear(): Promise<void> {
     try {
-      Object.values(STORAGE_KEYS).forEach(key => {
+      Object.values(STORAGE_KEYS).forEach((key) => {
         localStorage.removeItem(key);
       });
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to clear storage',
-        'STORAGE_ERROR',
-        error
+        "Failed to clear storage",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -187,20 +193,20 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   async getSize(): Promise<number> {
     try {
       let totalSize = 0;
-      
-      Object.values(STORAGE_KEYS).forEach(key => {
+
+      Object.values(STORAGE_KEYS).forEach((key) => {
         const data = localStorage.getItem(key);
         if (data) {
           totalSize += new Blob([data]).size;
         }
       });
-      
+
       return totalSize;
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to calculate storage size',
-        'STORAGE_ERROR',
-        error
+        "Failed to calculate storage size",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -210,25 +216,25 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
    */
   async getQuotaUsage(): Promise<{ used: number; available: number }> {
     try {
-      if ('storage' in navigator && 'estimate' in navigator.storage) {
+      if ("storage" in navigator && "estimate" in navigator.storage) {
         const estimate = await navigator.storage.estimate();
         return {
           used: estimate.usage || 0,
-          available: estimate.quota || 5 * 1024 * 1024 // 5MB fallback
+          available: estimate.quota || 5 * 1024 * 1024, // 5MB fallback
         };
       }
-      
+
       // Fallback for browsers without storage API
       const used = await this.getSize();
       return {
         used,
-        available: 5 * 1024 * 1024 // 5MB fallback
+        available: 5 * 1024 * 1024, // 5MB fallback
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to get quota usage',
-        'STORAGE_ERROR',
-        error
+        "Failed to get quota usage",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -238,24 +244,26 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
    */
   async backup(): Promise<string> {
     try {
-      const records = await this.load(STORAGE_KEYS.PAIN_RECORDS) || [];
-      const preferences = await this.load(STORAGE_KEYS.USER_PREFERENCES) || DEFAULT_USER_PREFERENCES;
+      const records = (await this.load(STORAGE_KEYS.PAIN_RECORDS)) || [];
+      const preferences =
+        (await this.load(STORAGE_KEYS.USER_PREFERENCES)) ||
+        DEFAULT_USER_PREFERENCES;
       const metadata = await this.load(STORAGE_KEYS.METADATA);
-      
+
       const backupData: StoredData = {
         records,
         preferences,
         schemaVersion: CURRENT_SCHEMA_VERSION,
         lastBackup: new Date(),
-        metadata
+        metadata,
       };
-      
+
       return JSON.stringify(backupData, null, 2);
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to create backup',
-        'STORAGE_ERROR',
-        error
+        "Failed to create backup",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -266,38 +274,37 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   async restore(backupData: string): Promise<void> {
     try {
       const data: StoredData = JSON.parse(backupData);
-      
+
       // Validate backup data structure
       if (!this.validateBackupData(data)) {
         throw new PainTrackerError(
-          'Invalid backup data format',
-          'VALIDATION_ERROR'
+          "Invalid backup data format",
+          "VALIDATION_ERROR",
         );
       }
-      
+
       // Check if migration is needed
       if (data.schemaVersion < CURRENT_SCHEMA_VERSION) {
         await this.migrateBackupData(data);
       }
-      
+
       // Restore data
       await this.save(STORAGE_KEYS.PAIN_RECORDS, data.records);
       await this.save(STORAGE_KEYS.USER_PREFERENCES, data.preferences);
       await this.save(STORAGE_KEYS.SCHEMA_VERSION, data.schemaVersion);
-      
+
       if (data.metadata) {
         await this.save(STORAGE_KEYS.METADATA, data.metadata);
       }
-      
     } catch (error) {
       if (error instanceof PainTrackerError) {
         throw error;
       }
-      
+
       throw new PainTrackerError(
-        'Failed to restore from backup',
-        'STORAGE_ERROR',
-        error
+        "Failed to restore from backup",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -305,37 +312,42 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   /**
    * Migrate data from old schema version to new version
    */
-  private async migrateData(fromVersion: number, toVersion: number): Promise<void> {
+  private async migrateData(
+    fromVersion: number,
+    toVersion: number,
+  ): Promise<void> {
     try {
       console.log(`Migrating data from version ${fromVersion} to ${toVersion}`);
-      
+
       // Load existing data
-      const records = await this.load(STORAGE_KEYS.PAIN_RECORDS) || [];
-      const preferences = await this.load(STORAGE_KEYS.USER_PREFERENCES) || {};
-      
+      const records = (await this.load(STORAGE_KEYS.PAIN_RECORDS)) || [];
+      const preferences =
+        (await this.load(STORAGE_KEYS.USER_PREFERENCES)) || {};
+
       // Apply migrations sequentially
       let migratedRecords = records;
       let migratedPreferences = preferences;
-      
+
       for (let version = fromVersion; version < toVersion; version++) {
         const migration = this.getMigration(version, version + 1);
         if (migration) {
           migratedRecords = migration.migrateRecords(migratedRecords);
-          migratedPreferences = migration.migratePreferences(migratedPreferences);
+          migratedPreferences =
+            migration.migratePreferences(migratedPreferences);
         }
       }
-      
+
       // Save migrated data
       await this.save(STORAGE_KEYS.PAIN_RECORDS, migratedRecords);
       await this.save(STORAGE_KEYS.USER_PREFERENCES, migratedPreferences);
       await this.save(STORAGE_KEYS.SCHEMA_VERSION, toVersion);
-      
-      console.log('Data migration completed successfully');
+
+      console.log("Data migration completed successfully");
     } catch (error) {
       throw new PainTrackerError(
         `Failed to migrate data from version ${fromVersion} to ${toVersion}`,
-        'MIGRATION_ERROR',
-        error
+        "MIGRATION_ERROR",
+        error,
       );
     }
   }
@@ -364,10 +376,10 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   private validateBackupData(data: any): data is StoredData {
     return (
       data &&
-      typeof data === 'object' &&
+      typeof data === "object" &&
       Array.isArray(data.records) &&
-      typeof data.preferences === 'object' &&
-      typeof data.schemaVersion === 'number'
+      typeof data.preferences === "object" &&
+      typeof data.schemaVersion === "number"
     );
   }
 
@@ -379,14 +391,14 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
       // Try to load from a backup key if it exists
       const backupKey = `${STORAGE_KEYS.PAIN_RECORDS}_backup`;
       const backupData = localStorage.getItem(backupKey);
-      
+
       if (backupData) {
         return JSON.parse(backupData);
       }
-      
+
       return null;
     } catch (error) {
-      console.warn('Failed to load backup data', error);
+      console.warn("Failed to load backup data", error);
       return null;
     }
   }
@@ -396,19 +408,19 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
    */
   private async updateMetadata(records: PainRecord[]): Promise<void> {
     try {
-      const currentMetadata = await this.load(STORAGE_KEYS.METADATA) || {};
+      const currentMetadata = (await this.load(STORAGE_KEYS.METADATA)) || {};
       const dataSize = await this.getSize();
-      
+
       const updatedMetadata: StorageMetadata = {
         ...currentMetadata,
         lastModified: new Date(),
         recordCount: records.length,
-        dataSize
+        dataSize,
       };
-      
+
       await this.save(STORAGE_KEYS.METADATA, updatedMetadata);
     } catch (error) {
-      console.warn('Failed to update metadata', error);
+      console.warn("Failed to update metadata", error);
       // Don't throw error for metadata update failure
     }
   }
@@ -442,7 +454,7 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
       const backupKey = `${STORAGE_KEYS.PAIN_RECORDS}_backup`;
       localStorage.setItem(backupKey, backupData);
     } catch (error) {
-      console.warn('Failed to create automatic backup', error);
+      console.warn("Failed to create automatic backup", error);
       // Don't throw error for backup failure
     }
   }
@@ -454,18 +466,19 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
     try {
       const backupKey = `${STORAGE_KEYS.PAIN_RECORDS}_backup`;
       const backupData = localStorage.getItem(backupKey);
-      
+
       if (backupData) {
         const backup: StoredData = JSON.parse(backupData);
-        const backupAge = Date.now() - new Date(backup.lastBackup || 0).getTime();
+        const backupAge =
+          Date.now() - new Date(backup.lastBackup || 0).getTime();
         const maxAge = 7 * 24 * 60 * 60 * 1000; // 7 days
-        
+
         if (backupAge > maxAge) {
           localStorage.removeItem(backupKey);
         }
       }
     } catch (error) {
-      console.warn('Failed to cleanup old backups', error);
+      console.warn("Failed to cleanup old backups", error);
     }
   }
 }

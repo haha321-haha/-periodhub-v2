@@ -1,19 +1,23 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { PerformanceMonitor, trackPageLoad, trackRouteChange } from '@/lib/performance-monitor';
+import { useEffect, useState } from "react";
+import {
+  PerformanceMonitor,
+  trackPageLoad,
+  trackRouteChange,
+} from "@/lib/performance-monitor";
 
 interface PerformanceMonitorProps {
   enabled?: boolean;
   showConsole?: boolean;
 }
 
-export default function PerformanceMonitorComponent({ 
-  enabled = true, 
-  showConsole = false 
+export default function PerformanceMonitorComponent({
+  enabled = true,
+  showConsole = false,
 }: PerformanceMonitorProps) {
   useEffect(() => {
-    if (!enabled || typeof window === 'undefined') return;
+    if (!enabled || typeof window === "undefined") return;
 
     // 初始化性能监控
     trackPageLoad();
@@ -23,9 +27,9 @@ export default function PerformanceMonitorComponent({
     const interval = setInterval(() => {
       const monitor = PerformanceMonitor.getInstance();
       const metrics = monitor.getMetrics();
-      
+
       if (showConsole && Object.keys(metrics).length > 0) {
-        console.log('📊 Current Performance Metrics:', metrics);
+        console.log("📊 Current Performance Metrics:", metrics);
       }
     }, 5000);
 
@@ -45,10 +49,10 @@ export function PerformanceMetricsDisplay() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const monitor = PerformanceMonitor.getInstance();
-    
+
     const updateMetrics = () => {
       setMetrics(monitor.getMetrics());
     };
@@ -84,22 +88,24 @@ export function PerformanceMetricsDisplay() {
           ×
         </button>
       </div>
-      
+
       <div className="space-y-2 text-sm">
         {Object.entries(metrics).map(([name, value]) => {
           const monitor = PerformanceMonitor.getInstance();
           const grade = monitor.getPerformanceGrade(name, value as number);
           const gradeColor = {
-            good: 'text-green-600',
-            'needs-improvement': 'text-yellow-600',
-            poor: 'text-red-600'
+            good: "text-green-600",
+            "needs-improvement": "text-yellow-600",
+            poor: "text-red-600",
           }[grade];
 
           return (
             <div key={name} className="flex justify-between">
               <span className="font-medium">{name}:</span>
               <span className={`${gradeColor}`}>
-                {typeof value === 'number' ? `${value.toFixed(0)}ms` : String(value)}
+                {typeof value === "number"
+                  ? `${value.toFixed(0)}ms`
+                  : String(value)}
                 <span className="ml-1 text-xs">({grade})</span>
               </span>
             </div>

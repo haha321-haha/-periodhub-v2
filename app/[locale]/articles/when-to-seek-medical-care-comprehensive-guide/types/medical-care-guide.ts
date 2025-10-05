@@ -5,7 +5,7 @@ export interface PainScaleItem {
   level: number;
   title: string;
   advice: string;
-  severity: 'none' | 'mild' | 'moderate' | 'severe' | 'extreme';
+  severity: "none" | "mild" | "moderate" | "severe" | "extreme";
   recommendations: string[];
   colorClass: string;
 }
@@ -13,8 +13,8 @@ export interface PainScaleItem {
 export interface SymptomItem {
   id: string;
   text: string;
-  risk: 'emergency' | 'high' | 'medium';
-  category: 'pain' | 'bleeding' | 'systemic' | 'pattern';
+  risk: "emergency" | "high" | "medium";
+  category: "pain" | "bleeding" | "systemic" | "pattern";
   description?: string;
   icon?: string;
 }
@@ -31,7 +31,7 @@ export interface DecisionTreeNode {
     icon: string;
     colorClass: string;
     text: string;
-    urgency: 'emergency' | 'urgent' | 'routine' | 'observe';
+    urgency: "emergency" | "urgent" | "routine" | "observe";
     actions: string[];
   };
   children?: {
@@ -53,10 +53,10 @@ export interface ComparisonTableData {
 export interface AssessmentResult {
   painLevel: number;
   symptoms: string[];
-  riskLevel: 'low' | 'medium' | 'high' | 'emergency';
+  riskLevel: "low" | "medium" | "high" | "emergency";
   recommendations: string[];
   shouldSeeDoctor: boolean;
-  urgency: 'immediate' | 'within_week' | 'routine' | 'monitor';
+  urgency: "immediate" | "within_week" | "routine" | "monitor";
   timestamp: string;
 }
 

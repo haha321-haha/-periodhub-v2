@@ -19,7 +19,7 @@ const CONFIG = {
 function runCommand(command, description) {
   console.log(`\n🔧 ${description}...`);
   try {
-    const result = execSync(command, { 
+    const result = execSync(command, {
       encoding: 'utf8',
       stdio: 'pipe'
     });
@@ -34,7 +34,7 @@ function runCommand(command, description) {
 // 检查Git状态
 function checkGitStatus() {
   console.log('📋 检查Git状态...');
-  
+
   try {
     const status = execSync('git status --porcelain', { encoding: 'utf8' });
     if (status.trim()) {
@@ -54,72 +54,72 @@ function checkGitStatus() {
 // 添加和提交更改
 function commitChanges() {
   console.log('💾 提交性能优化更改...');
-  
+
   // 添加所有文件
   const addResult = runCommand('git add .', '添加所有文件到暂存区');
   if (!addResult) {
     console.error('❌ 添加文件失败');
     return false;
   }
-  
+
   // 提交更改
   const commitResult = runCommand(`git commit -m "${CONFIG.commitMessage}"`, '提交性能优化更改');
   if (!commitResult) {
     console.error('❌ 提交更改失败');
     return false;
   }
-  
+
   return true;
 }
 
 // 推送到远程仓库
 function pushToRemote() {
   console.log('📤 推送到远程仓库...');
-  
+
   // 推送当前分支
   const pushResult = runCommand(`git push origin ${CONFIG.branch}`, '推送性能优化分支');
   if (!pushResult) {
     console.error('❌ 推送分支失败');
     return false;
   }
-  
+
   // 合并到主分支
   console.log('🔄 合并到主分支...');
-  
+
   // 切换到主分支
   const checkoutMain = runCommand(`git checkout ${CONFIG.mainBranch}`, '切换到主分支');
   if (!checkoutMain) {
     console.error('❌ 切换到主分支失败');
     return false;
   }
-  
+
   // 拉取最新更改
   const pullResult = runCommand('git pull origin main', '拉取最新更改');
   if (!pullResult) {
     console.warn('⚠️ 拉取最新更改失败，继续执行');
   }
-  
+
   // 合并性能优化分支
   const mergeResult = runCommand(`git merge ${CONFIG.branch}`, '合并性能优化分支');
   if (!mergeResult) {
     console.error('❌ 合并分支失败');
     return false;
   }
-  
+
   // 推送到主分支
   const pushMain = runCommand(`git push origin ${CONFIG.mainBranch}`, '推送主分支');
   if (!pushMain) {
     console.error('❌ 推送主分支失败');
     return false;
   }
-  
+
   return true;
 }
 
 // 部署到Vercel
 function deployToVercel() {
   console.log('🚀 部署到Vercel...');
-  
+
   // 检查Vercel CLI是否安装
   try {
     execSync('vercel --version', { stdio: 'pipe' });
@@ -131,27 +131,27 @@ function deployToVercel() {
       return false;
     }
   }
-  
+
   // 部署到生产环境
   const deployResult = runCommand('vercel --prod --yes', '部署到Vercel生产环境');
   if (!deployResult) {
     console.error('❌ 部署到Vercel失败');
     return false;
   }
-  
+
   return true;
 }
 
 // 验证部署
 function verifyDeployment() {
   console.log('🔍 验证部署...');
-  
+
   console.log('📋 请手动验证以下内容:');
   console.log('1. 访问 https://www.periodhub.health');
   console.log('2. 使用Google PageSpeed Insights测试性能');
   console.log('3. 检查移动端和桌面端性能指标');
   console.log('4. 验证无效点击问题是否改善');
-  
+
   console.log('\n📊 预期改善:');
   console.log('- 移动端性能: 45分 → 85分+');
   console.log('- 桌面端性能: 94分 → 98分+');
@@ -187,25 +187,25 @@ function generateDeploymentReport() {
       '持续优化迭代'
     ]
   };
-  
+
   const reportFile = 'deployment-report.json';
   fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
   console.log(`✅ 部署报告已保存: ${reportFile}`);
-  
+
   return report;
 }
 
 // 主函数
 async function main() {
   console.log('🚀 开始部署性能优化到Vercel...\n');
-  
+
   try {
     // 1. 检查Git状态
     const hasChanges = checkGitStatus();
     if (!hasChanges) {
       console.log('✅ 没有需要提交的更改');
     }
-    
+
     // 2. 提交更改
     if (hasChanges) {
       const commitSuccess = commitChanges();
@@ -214,27 +214,27 @@ async function main() {
         return;
       }
     }
-    
+
     // 3. 推送到远程仓库
     const pushSuccess = pushToRemote();
     if (!pushSuccess) {
       console.error('❌ 推送到远程仓库失败，无法继续部署');
       return;
     }
-    
+
     // 4. 部署到Vercel
     const deploySuccess = deployToVercel();
     if (!deploySuccess) {
       console.error('❌ 部署到Vercel失败');
       return;
     }
-    
+
     // 5. 生成部署报告
     const report = generateDeploymentReport();
-    
+
     // 6. 验证部署
     verifyDeployment();
-    
+
     // 7. 输出总结
     console.log('\n🎉 性能优化部署完成！');
     console.log('=' .repeat(50));
@@ -244,17 +244,17 @@ async function main() {
     report.optimizations.forEach(opt => {
       console.log(`- ✅ ${opt}`);
     });
-    
+
     console.log('\n🔍 下一步操作:');
     report.nextSteps.forEach(step => {
       console.log(`  ${step}`);
     });
-    
+
     console.log('\n📊 验证链接:');
     console.log('- 网站: https://www.periodhub.health');
     console.log('- 性能测试: https://pagespeed.web.dev/');
     console.log('- Vercel仪表板: https://vercel.com/dashboard');
-    
+
   } catch (error) {
     console.error('❌ 部署失败:', error.message);
     process.exit(1);

@@ -33,9 +33,7 @@
   },
   "urlStructure": {
     "urlPatterns": {},
-    "issues": [
-      "PDF 文件路径模式 /pdf-files/* 有 8 个重复"
-    ],
+    "issues": ["PDF 文件路径模式 /pdf-files/* 有 8 个重复"],
     "recommendations": []
   },
   "solutions": {

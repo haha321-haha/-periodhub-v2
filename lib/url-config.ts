@@ -10,7 +10,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.heal
 export const URL_CONFIG = {
   // 基础URL
   baseUrl: BASE_URL,
-  
+
   // 主要页面URL
   pages: {
     home: BASE_URL,
@@ -30,7 +30,7 @@ export const URL_CONFIG = {
     termsOfService: `${BASE_URL}/terms-of-service`,
     medicalDisclaimer: `${BASE_URL}/medical-disclaimer`,
   },
-  
+
   // 资源URL
   assets: {
     logo: `${BASE_URL}/logo.png`,
@@ -39,14 +39,14 @@ export const URL_CONFIG = {
     favicon: `${BASE_URL}/favicon.ico`,
     icon512: `${BASE_URL}/icon-512.png`,
   },
-  
+
   // API端点
   api: {
     indexnow: `${BASE_URL}/api/indexnow`,
     sitemap: `${BASE_URL}/sitemap.xml`,
     robots: `${BASE_URL}/robots.txt`,
   },
-  
+
   // 工具函数
   getUrl: (path: string) => `${BASE_URL}${path.startsWith('/') ? path : `/${path}`}`,
   getCanonicalUrl: (path: string) => `${BASE_URL}${path.startsWith('/') ? path : `/${path}`}`,
@@ -64,7 +64,7 @@ export const checkHardcodedUrl = (content: string): string[] => {
     /https:\/\/periodhub\.health/g,
     /https:\/\/www\.periodhub\.health/g,
   ];
-  
+
   const matches: string[] = [];
   hardcodedPatterns.forEach(pattern => {
     const found = content.match(pattern);
@@ -72,7 +72,7 @@ export const checkHardcodedUrl = (content: string): string[] => {
       matches.push(...found);
     }
   });
-  
+
   return matches;
 };
 

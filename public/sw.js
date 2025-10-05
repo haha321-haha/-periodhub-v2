@@ -38,7 +38,7 @@ const MEDIA_CACHE_PATTERNS = [
 // 安装事件
 self.addEventListener('install', (event) => {
   console.log('Service Worker installing...');
-  
+
   event.waitUntil(
     caches.open(STATIC_CACHE)
       .then(cache => {
@@ -58,15 +58,15 @@ self.addEventListener('install', (event) => {
 // 激活事件
 self.addEventListener('activate', (event) => {
   console.log('Service Worker activating...');
-  
+
   event.waitUntil(
     caches.keys()
       .then(cacheNames => {
         return Promise.all(
           cacheNames.map(cacheName => {
             // 删除旧版本的缓存
-            if (cacheName !== STATIC_CACHE && 
-                cacheName !== DYNAMIC_CACHE && 
+            if (cacheName !== STATIC_CACHE &&
+                cacheName !== DYNAMIC_CACHE &&
                 cacheName.startsWith('periodhub-')) {
               console.log('Deleting old cache:', cacheName);
               return caches.delete(cacheName);
@@ -85,17 +85,17 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const request = event.request;
   const url = new URL(request.url);
-  
+
   // 只处理同源请求
   if (url.origin !== location.origin) {
     return;
   }
-  
+
   // 跳过非GET请求
   if (request.method !== 'GET') {
     return;
   }
-  
+
   // 处理不同类型的请求
   if (isStaticAsset(request.url)) {
     event.respondWith(cacheFirst(request));
@@ -117,15 +117,15 @@ async function cacheFirst(request) {
     if (cachedResponse) {
       return cachedResponse;
     }
-    
+
     const networkResponse = await fetch(request);
-    
+
     // 缓存成功的响应
     if (networkResponse.ok) {
       const cache = await caches.open(STATIC_CACHE);
       cache.put(request, networkResponse.clone());
     }
-    
+
     return networkResponse;
   } catch (error) {
     console.error('Cache first strategy failed:', error);
@@ -137,13 +137,13 @@ async function cacheFirst(request) {
 async function networkFirst(request) {
   try {
     const networkResponse = await fetch(request);
-    
+
     // 缓存成功的响应
     if (networkResponse.ok) {
       const cache = await caches.open(DYNAMIC_CACHE);
       cache.put(request, networkResponse.clone());
     }
-    
+
     return networkResponse;
   } catch (error) {
     // 网络失败，尝试从缓存获取
@@ -151,7 +151,7 @@ async function networkFirst(request) {
     if (cachedResponse) {
       return cachedResponse;
     }
-    
+
     console.error('Network first strategy failed:', error);
     return new Response('Network error', { status: 503 });
   }
@@ -161,13 +161,13 @@ async function networkFirst(request) {
 async function networkFirstWithOfflineFallback(request) {
   try {
     const networkResponse = await fetch(request);
-    
+
     // 缓存成功的响应
     if (networkResponse.ok) {
       const cache = await caches.open(DYNAMIC_CACHE);
       cache.put(request, networkResponse.clone());
     }
-    
+
     return networkResponse;
   } catch (error) {
     // 网络失败，尝试从缓存获取
@@ -175,13 +175,13 @@ async function networkFirstWithOfflineFallback(request) {
     if (cachedResponse) {
       return cachedResponse;
     }
-    
+
     // 如果都没有，返回离线页面
     const offlineResponse = await caches.match('/offline.html');
     if (offlineResponse) {
       return offlineResponse;
     }
-    
+
     console.error('Network first with offline fallback failed:', error);
     return new Response('Offline', { status: 503 });
   }
@@ -208,7 +208,7 @@ function isAPIRequest(url) {
 
 // 检查是否为页面请求
 function isPageRequest(url) {
-  return !url.includes('.') || 
+  return !url.includes('.') ||
          url.endsWith('.html') ||
          url.includes('/zh/') ||
          url.includes('/en/');
@@ -217,24 +217,24 @@ function isPageRequest(url) {
 // 消息处理
 self.addEventListener('message', (event) => {
   const { type, payload } = event.data;
-  
+
   switch (type) {
     case 'SKIP_WAITING':
       self.skipWaiting();
       break;
-      
+
     case 'GET_CACHE_STATUS':
       getCacheStatus().then(status => {
         event.ports[0].postMessage({ type: 'CACHE_STATUS', payload: status });
       });
       break;
-      
+
     case 'CLEAR_CACHE':
       clearAllCaches().then(() => {
         event.ports[0].postMessage({ type: 'CACHE_CLEARED' });
       });
       break;
-      
+
     default:
       console.log('Unknown message type:', type);
   }
@@ -244,20 +244,20 @@ self.addEventListener('message', (event) => {
 async function getCacheStatus() {
   const cacheNames = await caches.keys();
   const status = {};
-  
+
   for (const cacheName of cacheNames) {
     const cache = await caches.open(cacheName);
     const keys = await cache.keys();
     status[cacheName] = keys.length;
   }
-  
+
   return status;
 }
 
 // 清理所有缓存
 async function clearAllCaches() {
   const cacheNames = await caches.keys();
-  
+
   await Promise.all(
     cacheNames.map(cacheName => {
       if (cacheName.startsWith('periodhub-')) {
@@ -265,7 +265,7 @@ async function clearAllCaches() {
       }
     })
   );
-  
+
   console.log('All caches cleared');
 }
 
@@ -274,10 +274,10 @@ setInterval(async () => {
   try {
     const cache = await caches.open(DYNAMIC_CACHE);
     const keys = await cache.keys();
-    
+
     // 清理超过24小时的缓存
     const oneDayAgo = Date.now() - (24 * 60 * 60 * 1000);
-    
+
     for (const key of keys) {
       const response = await cache.match(key);
       if (response) {

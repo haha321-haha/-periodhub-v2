@@ -40,38 +40,38 @@ cat > public/force-title.js << 'EOF'
 // 强制标题设置脚本
 (function() {
   'use strict';
-  
+
   const CHINESE_TITLE = '痛经影响算法 - 症状评估与职场分析 | PeriodHub';
   const ENGLISH_TITLE = 'Period Pain Impact Calculator - Symptom Assessment & Workplace Analysis | PeriodHub';
-  
+
   function forceSetTitle() {
     const isChinesePage = window.location.pathname.includes('/zh/');
     const correctTitle = isChinesePage ? CHINESE_TITLE : ENGLISH_TITLE;
-    
+
     if (document.title !== correctTitle) {
       console.log('🛠️ 强制修复标题:', correctTitle);
       document.title = correctTitle;
-      
+
       const titleEl = document.querySelector('head > title');
       if (titleEl) {
         titleEl.textContent = correctTitle;
       }
     }
   }
-  
+
   // 立即执行
   forceSetTitle();
-  
+
   // 定期检查
   setInterval(forceSetTitle, 1000);
-  
+
   // 页面完全加载后执行
   if (document.readyState === 'complete') {
     forceSetTitle();
   } else {
     window.addEventListener('load', forceSetTitle);
   }
-  
+
   console.log('🛡️ 标题保护脚本已激活');
 })();
 EOF
@@ -84,18 +84,3 @@ echo "✅ 缓存清理完成！现在请执行以下步骤："
 echo "1. 运行: npm run dev"
 echo "2. 在浏览器中按 Ctrl+Shift+R 强制刷新"
 echo "3. 如果问题仍存在，请在无痕模式下测试"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

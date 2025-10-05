@@ -21,12 +21,12 @@ export class WebVitalsAnalyzer {
 
   getPerformanceRating(metrics: any): { score: number; grade: string } {
     const score = Math.round(metrics.score || 85);
-    let grade = '良好';
-    if (score >= 90) grade = '优秀';
-    else if (score >= 75) grade = '良好';
-    else if (score >= 60) grade = '一般';
-    else grade = '需改进';
-    
+    let grade = "良好";
+    if (score >= 90) grade = "优秀";
+    else if (score >= 75) grade = "良好";
+    else if (score >= 60) grade = "一般";
+    else grade = "需改进";
+
     return { score, grade };
   }
 
@@ -38,7 +38,7 @@ export class WebVitalsAnalyzer {
         INP: 0, // 更新：FID → INP
         CLS: 0,
         TTFB: 0,
-        score: 85
+        score: 85,
       };
     }
 
@@ -48,7 +48,7 @@ export class WebVitalsAnalyzer {
       INP: acc.INP + curr.INP, // 更新：FID → INP
       CLS: acc.CLS + curr.CLS,
       TTFB: acc.TTFB + curr.TTFB,
-      score: acc.score + curr.score
+      score: acc.score + curr.score,
     }));
 
     const count = this.vitals.length;
@@ -58,7 +58,7 @@ export class WebVitalsAnalyzer {
       INP: sum.INP / count, // 更新：FID → INP
       CLS: sum.CLS / count,
       TTFB: sum.TTFB / count,
-      score: sum.score / count
+      score: sum.score / count,
     };
   }
 

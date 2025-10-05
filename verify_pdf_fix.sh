@@ -30,13 +30,13 @@ for url in "${urls[@]}"; do
   response=$(curl -s -o /dev/null -w "%{http_code},%{time_total}" --max-time 10 "$url")
   status_code=$(echo $response | cut -d',' -f1)
   response_time=$(echo $response | cut -d',' -f2)
-  
+
   filename=$(basename "$url")
-  
+
   if [ "$status_code" -eq 200 ]; then
     echo "✅ $status_code - $filename (${response_time}s)"
     ((success_count++))
-    
+
     # 验证文件大小（确保不是空文件）
     file_size=$(curl -s -I "$url" | grep -i content-length | awk '{print $2}' | tr -d '\r')
     if [ -n "$file_size" ] && [ "$file_size" -gt 1000 ]; then
@@ -74,7 +74,7 @@ other_urls=(
 
 for url in "${other_urls[@]}"; do
   status_code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$url")
-  
+
   if [ "$status_code" -eq 200 ]; then
     echo "✅ $status_code - $url"
   else

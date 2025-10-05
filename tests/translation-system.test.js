@@ -14,7 +14,7 @@ describe('Translation System Tests', () => {
     // 加载翻译文件
     const zhPath = path.join(__dirname, '../messages/zh.json');
     const enPath = path.join(__dirname, '../messages/en.json');
-    
+
     zhTranslations = JSON.parse(fs.readFileSync(zhPath, 'utf8'));
     enTranslations = JSON.parse(fs.readFileSync(enPath, 'utf8'));
   });
@@ -29,7 +29,7 @@ describe('Translation System Tests', () => {
       // 检查核心结构
       expect(zhTranslations.painTracker).toBeDefined();
       expect(enTranslations.painTracker).toBeDefined();
-      
+
       expect(zhTranslations.painTracker.assessment).toBeDefined();
       expect(enTranslations.painTracker.assessment).toBeDefined();
     });
@@ -52,10 +52,10 @@ describe('Translation System Tests', () => {
     test('中英文翻译键应该一致', () => {
       const zhKeys = getAllKeys(zhTranslations);
       const enKeys = getAllKeys(enTranslations);
-      
+
       const missingInEn = zhKeys.filter(key => !enKeys.includes(key));
       const missingInZh = enKeys.filter(key => !zhKeys.includes(key));
-      
+
       expect(missingInEn).toEqual([]);
       expect(missingInZh).toEqual([]);
     });
@@ -63,7 +63,7 @@ describe('Translation System Tests', () => {
     test('翻译值不应该是空字符串', () => {
       const zhEmptyKeys = findEmptyValues(zhTranslations);
       const enEmptyKeys = findEmptyValues(enTranslations);
-      
+
       expect(zhEmptyKeys).toEqual([]);
       expect(enEmptyKeys).toEqual([]);
     });
@@ -91,14 +91,14 @@ describe('Translation System Tests', () => {
       componentFiles.forEach(file => {
         const content = fs.readFileSync(file, 'utf8');
         const chineseMatches = content.match(/['"`]([^'"`]*[\u4e00-\u9fff][^'"`]*)['"`]/g);
-        
+
         if (chineseMatches) {
           // 过滤掉注释和翻译文件
           const filteredMatches = chineseMatches.filter(match => {
             const line = content.split('\n').find(line => line.includes(match));
             return line && !line.trim().startsWith('//') && !line.trim().startsWith('*');
           });
-          
+
           if (filteredMatches.length > 0) {
             hardcodedTexts.push({
               file: file.replace(process.cwd(), ''),
@@ -111,7 +111,7 @@ describe('Translation System Tests', () => {
       if (hardcodedTexts.length > 0) {
         console.warn('发现硬编码中文文本:', hardcodedTexts);
       }
-      
+
       // 允许少量硬编码（如示例数据），但应该控制在合理范围内
       expect(hardcodedTexts.length).toBeLessThan(10);
     });
@@ -154,17 +154,17 @@ function findEmptyValues(obj, prefix = '') {
 function findFiles(dir, pattern) {
   const files = [];
   const items = fs.readdirSync(dir);
-  
+
   items.forEach(item => {
     const fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);
-    
+
     if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
       files.push(...findFiles(fullPath, pattern));
     } else if (stat.isFile() && pattern.test(item)) {
       files.push(fullPath);
     }
   });
-  
+
   return files;
 }

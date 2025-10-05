@@ -44,11 +44,11 @@ async function submitToBing(urls, apiKey) {
 
     const req = https.request(options, (res) => {
       let data = '';
-      
+
       res.on('data', (chunk) => {
         data += chunk;
       });
-      
+
       res.on('end', () => {
         try {
           const response = JSON.parse(data);
@@ -104,7 +104,7 @@ function generateResubmissionReport(results) {
  */
 async function main() {
   console.log('🚀 开始向 Bing Webmaster Tools 重新提交 URL...\n');
-  
+
   // 检查 API Key
   const apiKey = process.env.BING_API_KEY;
   if (!apiKey) {
@@ -115,7 +115,7 @@ async function main() {
     CONFIG.urlsToResubmit.forEach((url, index) => {
       console.log(`   ${index + 1}. ${url}`);
     });
-    
+
     // 生成手动提交指南
     const manualGuide = {
       message: 'Bing API Key 未设置，请手动重新提交',
@@ -129,25 +129,25 @@ async function main() {
       ],
       timestamp: new Date().toISOString()
     };
-    
+
     const outputDir = path.dirname(CONFIG.outputFile);
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
-    
+
     fs.writeFileSync(CONFIG.outputFile, JSON.stringify(manualGuide, null, 2));
     console.log(`\n📄 手动提交指南已保存到: ${CONFIG.outputFile}`);
     process.exit(0);
   }
-  
+
   const results = [];
-  
+
   try {
     console.log(`📤 提交 ${CONFIG.urlsToResubmit.length} 个 URL 到 Bing...`);
-    
+
     const result = await submitToBing(CONFIG.urlsToResubmit, apiKey);
     results.push(result);
-    
+
     if (result.success) {
       console.log('✅ 成功提交到 Bing Webmaster Tools');
       console.log(`📊 响应: ${JSON.stringify(result.response, null, 2)}`);
@@ -155,7 +155,7 @@ async function main() {
       console.log(`❌ 提交失败 (状态码: ${result.statusCode})`);
       console.log(`📊 响应: ${JSON.stringify(result.response, null, 2)}`);
     }
-    
+
   } catch (error) {
     console.error('❌ 提交过程中发生错误:', error.message);
     results.push({
@@ -164,31 +164,31 @@ async function main() {
       timestamp: new Date().toISOString()
     });
   }
-  
+
   // 生成报告
   const report = generateResubmissionReport(results);
-  
+
   // 确保输出目录存在
   const outputDir = path.dirname(CONFIG.outputFile);
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }
-  
+
   // 保存报告
   fs.writeFileSync(CONFIG.outputFile, JSON.stringify(report, null, 2));
-  
+
   console.log('\n📊 重新提交完成！');
   console.log(`📄 报告已保存到: ${CONFIG.outputFile}`);
   console.log(`\n📈 统计信息:`);
   console.log(`   - 总 URL 数: ${report.summary.totalUrls}`);
   console.log(`   - 成功提交: ${report.summary.successfulSubmissions}`);
   console.log(`   - 失败提交: ${report.summary.failedSubmissions}`);
-  
+
   console.log(`\n📋 后续步骤:`);
   report.nextSteps.forEach((step, index) => {
     console.log(`   ${index + 1}. ${step}`);
   });
-  
+
   console.log(`\n🔗 监控链接:`);
   console.log(`   - Bing Webmaster Tools: ${report.monitoring.bingWebmasterTools}`);
   console.log(`   - URL 检查: ${report.monitoring.urlInspection}`);

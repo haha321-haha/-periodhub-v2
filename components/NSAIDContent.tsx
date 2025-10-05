@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useAppTranslations } from '@/hooks/useAppTranslations';
+import { useEffect } from "react";
+import { useAppTranslations } from "@/hooks/useAppTranslations";
 
 interface NSAIDContentProps {
   content: string;
@@ -21,73 +21,106 @@ function processNSAIDContent(content: string): string {
   processedContent = processedContent
     // Convert headers
     // Convert h1 to h2 to avoid multiple h1 tags on the page
-    .replace(/^# (.*$)/gim, '<h2 class="text-3xl font-bold text-neutral-800 mb-6 mt-8 first:mt-0">$1</h2>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^#### (.*$)/gim, '<h4>$1</h4>')
-    
+    .replace(
+      /^# (.*$)/gim,
+      '<h2 class="text-3xl font-bold text-neutral-800 mb-6 mt-8 first:mt-0">$1</h2>',
+    )
+    .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+    .replace(/^### (.*$)/gim, "<h3>$1</h3>")
+    .replace(/^#### (.*$)/gim, "<h4>$1</h4>")
+
     // Convert bold and italic
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*(.*?)\*/g, "<em>$1</em>")
+
     // Convert blockquotes
-    .replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>')
-    
+    .replace(/^> (.*$)/gim, "<blockquote>$1</blockquote>")
+
     // Convert code blocks
-    .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-    .replace(/`(.*?)`/g, '<code>$1</code>')
-    
+    .replace(/```([\s\S]*?)```/g, "<pre><code>$1</code></pre>")
+    .replace(/`(.*?)`/g, "<code>$1</code>")
+
     // Convert links
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-    
+
     // Convert tables - improved table processing with center alignment for first column
-    .replace(/\|(.+)\|\n\|[-\s|]+\|\n((?:\|.+\|\n?)*)/g, (match, header, rows) => {
-      const headerCells = header.split('|').map((cell: string) => cell.trim()).filter(Boolean);
-      const headerRow = '<tr>' + headerCells.map((cell: string, index: number) => {
-        const alignment = index === 0 ? 'text-center' : 'text-left';
-        return `<th class="border border-gray-300 px-4 py-3 bg-primary-100 font-semibold ${alignment} text-primary-800">${cell}</th>`;
-      }).join('') + '</tr>';
+    .replace(
+      /\|(.+)\|\n\|[-\s|]+\|\n((?:\|.+\|\n?)*)/g,
+      (match, header, rows) => {
+        const headerCells = header
+          .split("|")
+          .map((cell: string) => cell.trim())
+          .filter(Boolean);
+        const headerRow =
+          "<tr>" +
+          headerCells
+            .map((cell: string, index: number) => {
+              const alignment = index === 0 ? "text-center" : "text-left";
+              return `<th class="border border-gray-300 px-4 py-3 bg-primary-100 font-semibold ${alignment} text-primary-800">${cell}</th>`;
+            })
+            .join("") +
+          "</tr>";
 
-      const bodyRows = rows.trim().split('\n').map((row: string) => {
-        const cells = row.replace(/^\||\|$/g, '').split('|').map((cell: string) => cell.trim());
-        return '<tr class="even:bg-gray-50 hover:bg-primary-25">' + cells.map((cell: string, index: number) => {
-          const alignment = index === 0 ? 'text-center' : 'text-left';
-          return `<td class="border border-gray-300 px-4 py-3 text-neutral-700 ${alignment}">${cell}</td>`;
-        }).join('') + '</tr>';
-      }).join('');
+        const bodyRows = rows
+          .trim()
+          .split("\n")
+          .map((row: string) => {
+            const cells = row
+              .replace(/^\||\|$/g, "")
+              .split("|")
+              .map((cell: string) => cell.trim());
+            return (
+              '<tr class="even:bg-gray-50 hover:bg-primary-25">' +
+              cells
+                .map((cell: string, index: number) => {
+                  const alignment = index === 0 ? "text-center" : "text-left";
+                  return `<td class="border border-gray-300 px-4 py-3 text-neutral-700 ${alignment}">${cell}</td>`;
+                })
+                .join("") +
+              "</tr>"
+            );
+          })
+          .join("");
 
-      return `<div class="overflow-x-auto my-6"><table class="min-w-full border-collapse border border-gray-300 bg-white rounded-lg shadow-sm"><thead class="bg-primary-50">${headerRow}</thead><tbody>${bodyRows}</tbody></table></div>`;
-    })
-    
+        return `<div class="overflow-x-auto my-6"><table class="min-w-full border-collapse border border-gray-300 bg-white rounded-lg shadow-sm"><thead class="bg-primary-50">${headerRow}</thead><tbody>${bodyRows}</tbody></table></div>`;
+      },
+    )
+
     // Convert line breaks and paragraphs
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/\n/g, '<br>')
-    
+    .replace(/\n\n/g, "</p><p>")
+    .replace(/\n/g, "<br>")
+
     // Wrap in paragraphs (but not HTML blocks)
-    .replace(/^(?!<[h1-6]|<div|<blockquote|<pre|<ul|<ol|<li|__HTML_BLOCK)(.+)/gim, '<p>$1</p>');
+    .replace(
+      /^(?!<[h1-6]|<div|<blockquote|<pre|<ul|<ol|<li|__HTML_BLOCK)(.+)/gim,
+      "<p>$1</p>",
+    );
 
   // Restore HTML blocks
   htmlBlocks.forEach((block, index) => {
-    processedContent = processedContent.replace(`__HTML_BLOCK_${index}__`, block);
+    processedContent = processedContent.replace(
+      `__HTML_BLOCK_${index}__`,
+      block,
+    );
   });
 
   // Ensure video element has proper attributes for visibility
   processedContent = processedContent.replace(
     /<video([^>]*id="nsaidAnimationPlayer"[^>]*)>/g,
-    '<video$1 style="display: block !important; width: 100% !important; height: auto !important; min-height: 250px !important; background: #000 !important; opacity: 1 !important; visibility: visible !important; position: relative !important; z-index: 100 !important;" controls playsinline>'
+    '<video$1 style="display: block !important; width: 100% !important; height: auto !important; min-height: 250px !important; background: #000 !important; opacity: 1 !important; visibility: visible !important; position: relative !important; z-index: 100 !important;" controls playsinline>',
   );
 
   // Debug: Log the processed content to see if video element is present
-  if (processedContent.includes('nsaidAnimationPlayer')) {
-    console.log('🎬 Video element found in processed content');
+  if (processedContent.includes("nsaidAnimationPlayer")) {
+    console.log("🎬 Video element found in processed content");
   } else {
-    console.warn('❌ Video element NOT found in processed content');
+    console.warn("❌ Video element NOT found in processed content");
   }
 
   // Remove test message and ensure clean video container
   processedContent = processedContent.replace(
     /<div class="nsaid-animation-player">/g,
-    '<div class="nsaid-animation-player">'
+    '<div class="nsaid-animation-player">',
   );
 
   return processedContent;
@@ -95,8 +128,8 @@ function processNSAIDContent(content: string): string {
 
 export default function NSAIDContent({ content }: NSAIDContentProps) {
   // 获取翻译函数
-  const { t } = useAppTranslations('nsaidContent');
-  
+  const { t } = useAppTranslations("nsaidContent");
+
   // Component rendering - reduced logging for production
 
   useEffect(() => {
@@ -106,32 +139,32 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
     const removeFilters = () => {
       // Target all possible video-related elements
       const selectors = [
-        'video',
+        "video",
         '[id*="nsaid"]',
         '[class*="animation"]',
         '[class*="video"]',
         '[class*="player"]',
-        '.nsaid-animation-player',
-        '#nsaidAnimationPlayer',
-        '.video-player-container'
+        ".nsaid-animation-player",
+        "#nsaidAnimationPlayer",
+        ".video-player-container",
       ];
 
-      selectors.forEach(selector => {
+      selectors.forEach((selector) => {
         const elements = document.querySelectorAll(selector);
-        elements.forEach(el => {
+        elements.forEach((el) => {
           const element = el as HTMLElement;
           // Remove all possible filter properties to eliminate gray overlay
-          element.style.setProperty('filter', 'none', 'important');
-          element.style.setProperty('-webkit-filter', 'none', 'important');
-          element.style.setProperty('-moz-filter', 'none', 'important');
-          element.style.setProperty('-ms-filter', 'none', 'important');
-          element.style.setProperty('-o-filter', 'none', 'important');
-          element.style.setProperty('opacity', '1', 'important');
+          element.style.setProperty("filter", "none", "important");
+          element.style.setProperty("-webkit-filter", "none", "important");
+          element.style.setProperty("-moz-filter", "none", "important");
+          element.style.setProperty("-ms-filter", "none", "important");
+          element.style.setProperty("-o-filter", "none", "important");
+          element.style.setProperty("opacity", "1", "important");
           // Keep video background black for better contrast
-          if (element.tagName.toLowerCase() === 'video') {
-            element.style.setProperty('background', '#000000', 'important');
+          if (element.tagName.toLowerCase() === "video") {
+            element.style.setProperty("background", "#000000", "important");
           } else {
-            element.style.setProperty('background', 'transparent', 'important');
+            element.style.setProperty("background", "transparent", "important");
           }
         });
       });
@@ -142,7 +175,7 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
     const filterInterval = setInterval(removeFilters, 500);
 
     // Add CSS styles to head
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.textContent = `
       .nsaid-animation-player {
         margin: 2rem 0;
@@ -601,49 +634,55 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
 
   useEffect(() => {
     // Add a small delay to ensure DOM elements are rendered
-    console.log('🔧 NSAIDContent component initialized, external script will handle events');
+    console.log(
+      "🔧 NSAIDContent component initialized, external script will handle events",
+    );
 
     const timer = setTimeout(() => {
       // NSAID Calculator functionality
-      const calculateButton = document.getElementById('calculate-dose-button');
+      const calculateButton = document.getElementById("calculate-dose-button");
 
       if (calculateButton) {
         // 强制设置按钮样式
         const btn = calculateButton as HTMLButtonElement;
-        btn.style.setProperty('background', '#1e40af', 'important');
-        btn.style.setProperty('background-color', '#1e40af', 'important');
-        btn.style.setProperty('background-image', 'none', 'important');
-        btn.style.setProperty('color', '#ffffff', 'important');
-        btn.style.setProperty('border', '2px solid #1d4ed8', 'important');
-        btn.style.setProperty('border-radius', '0.5rem', 'important');
-        btn.style.setProperty('padding', '0.5rem 1rem', 'important');
-        btn.style.setProperty('font-weight', '700', 'important');
-        btn.style.setProperty('cursor', 'pointer', 'important');
-        btn.style.setProperty('opacity', '1', 'important');
-        btn.style.setProperty('pointer-events', 'auto', 'important');
-        btn.style.setProperty('z-index', '100', 'important');
-        btn.style.setProperty('position', 'relative', 'important');
-        btn.style.setProperty('display', 'inline-block', 'important');
-        btn.style.setProperty('width', '100%', 'important');
+        btn.style.setProperty("background", "#1e40af", "important");
+        btn.style.setProperty("background-color", "#1e40af", "important");
+        btn.style.setProperty("background-image", "none", "important");
+        btn.style.setProperty("color", "#ffffff", "important");
+        btn.style.setProperty("border", "2px solid #1d4ed8", "important");
+        btn.style.setProperty("border-radius", "0.5rem", "important");
+        btn.style.setProperty("padding", "0.5rem 1rem", "important");
+        btn.style.setProperty("font-weight", "700", "important");
+        btn.style.setProperty("cursor", "pointer", "important");
+        btn.style.setProperty("opacity", "1", "important");
+        btn.style.setProperty("pointer-events", "auto", "important");
+        btn.style.setProperty("z-index", "100", "important");
+        btn.style.setProperty("position", "relative", "important");
+        btn.style.setProperty("display", "inline-block", "important");
+        btn.style.setProperty("width", "100%", "important");
 
-        console.log('✅ Calculate button found and styled, event handling delegated to external script');
+        console.log(
+          "✅ Calculate button found and styled, event handling delegated to external script",
+        );
       }
 
       // Simple video player initialization based on original code
-      const videoPlayer = document.getElementById('nsaidAnimationPlayer') as HTMLVideoElement;
-      const prevButton = document.getElementById('nsaidPrevButton');
-      const nextButton = document.getElementById('nsaidNextButton');
-      const sceneIndicator = document.getElementById('nsaidSceneIndicator');
-      const sceneTitle = document.getElementById('nsaidSceneTitle');
-      const narrationText = document.getElementById('nsaidNarrationText');
+      const videoPlayer = document.getElementById(
+        "nsaidAnimationPlayer",
+      ) as HTMLVideoElement;
+      const prevButton = document.getElementById("nsaidPrevButton");
+      const nextButton = document.getElementById("nsaidNextButton");
+      const sceneIndicator = document.getElementById("nsaidSceneIndicator");
+      const sceneTitle = document.getElementById("nsaidSceneTitle");
+      const narrationText = document.getElementById("nsaidNarrationText");
 
-      console.log('🎬 Animation controls found:', {
+      console.log("🎬 Animation controls found:", {
         videoPlayer: !!videoPlayer,
         prevButton: !!prevButton,
         nextButton: !!nextButton,
         sceneIndicator: !!sceneIndicator,
         sceneTitle: !!sceneTitle,
-        narrationText: !!narrationText
+        narrationText: !!narrationText,
       });
 
       let currentSceneIndex = 0;
@@ -652,76 +691,87 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
       const scenes = [
         {
           id: 1,
-          title: t('scenes.scene1.title'),
-          videoUrl: "https://v3.fal.media/files/monkey/OMrBMAEeA1my97zJzH64q_output.mp4",
-          narration: t('scenes.scene1.narration')
+          title: t("scenes.scene1.title"),
+          videoUrl:
+            "https://v3.fal.media/files/monkey/OMrBMAEeA1my97zJzH64q_output.mp4",
+          narration: t("scenes.scene1.narration"),
         },
         {
           id: 2,
-          title: t('scenes.scene2.title'),
-          text: t('scenes.scene2.text'),
-          videoUrl: 'https://v3.fal.media/files/panda/DJlINSBKErKOTTRW4scwG_output.mp4'
+          title: t("scenes.scene2.title"),
+          text: t("scenes.scene2.text"),
+          videoUrl:
+            "https://v3.fal.media/files/panda/DJlINSBKErKOTTRW4scwG_output.mp4",
         },
         {
           id: 3,
-          title: t('scenes.scene3.title'),
-          text: t('scenes.scene3.text'),
-          videoUrl: 'https://v3.fal.media/files/monkey/sRVoOWjzmaoyzF7cure1m_output.mp4'
+          title: t("scenes.scene3.title"),
+          text: t("scenes.scene3.text"),
+          videoUrl:
+            "https://v3.fal.media/files/monkey/sRVoOWjzmaoyzF7cure1m_output.mp4",
         },
         {
           id: 4,
-          title: t('scenes.scene4.title'),
-          text: t('scenes.scene4.text'),
-          videoUrl: 'https://v3.fal.media/files/lion/O4Ys7oYqfMg3M0jR80mhw_output.mp4'
+          title: t("scenes.scene4.title"),
+          text: t("scenes.scene4.text"),
+          videoUrl:
+            "https://v3.fal.media/files/lion/O4Ys7oYqfMg3M0jR80mhw_output.mp4",
         },
         {
           id: 5,
-          title: t('scenes.scene5.title'),
-          text: t('scenes.scene5.text'),
-          videoUrl: 'https://v3.fal.media/files/elephant/ejMBtuanCnJ9v_RH-3gXc_output.mp4'
+          title: t("scenes.scene5.title"),
+          text: t("scenes.scene5.text"),
+          videoUrl:
+            "https://v3.fal.media/files/elephant/ejMBtuanCnJ9v_RH-3gXc_output.mp4",
         },
         {
           id: 6,
-          title: t('scenes.scene6.title'),
-          text: t('scenes.scene6.text'),
-          videoUrl: 'https://v3.fal.media/files/lion/_wrFzYC89XCXhT08_ldCQ_output.mp4'
+          title: t("scenes.scene6.title"),
+          text: t("scenes.scene6.text"),
+          videoUrl:
+            "https://v3.fal.media/files/lion/_wrFzYC89XCXhT08_ldCQ_output.mp4",
         },
         {
           id: 7,
-          title: t('scenes.scene7.title'),
-          text: t('scenes.scene7.text'),
-          videoUrl: 'https://v3.fal.media/files/zebra/-3fM_hp6Ze7ceOdKospQ-_output.mp4'
+          title: t("scenes.scene7.title"),
+          text: t("scenes.scene7.text"),
+          videoUrl:
+            "https://v3.fal.media/files/zebra/-3fM_hp6Ze7ceOdKospQ-_output.mp4",
         },
         {
           id: 8,
-          title: t('scenes.scene8.title'),
-          text: t('scenes.scene8.text'),
-          videoUrl: 'https://v3.fal.media/files/koala/-0hQKGQ9lIMGoyG_jRw2H_output.mp4'
+          title: t("scenes.scene8.title"),
+          text: t("scenes.scene8.text"),
+          videoUrl:
+            "https://v3.fal.media/files/koala/-0hQKGQ9lIMGoyG_jRw2H_output.mp4",
         },
         {
           id: 9,
-          title: t('scenes.scene9.title'),
-          text: t('scenes.scene9.text'),
-          videoUrl: 'https://v3.fal.media/files/monkey/OMrBMAEeA1my97zJzH64q_output.mp4'
+          title: t("scenes.scene9.title"),
+          text: t("scenes.scene9.text"),
+          videoUrl:
+            "https://v3.fal.media/files/monkey/OMrBMAEeA1my97zJzH64q_output.mp4",
         },
         {
           id: 10,
-          title: t('scenes.scene10.title'),
-          text: t('scenes.scene10.text'),
-          videoUrl: 'https://v3.fal.media/files/panda/DJlINSBKErKOTTRW4scwG_output.mp4'
+          title: t("scenes.scene10.title"),
+          text: t("scenes.scene10.text"),
+          videoUrl:
+            "https://v3.fal.media/files/panda/DJlINSBKErKOTTRW4scwG_output.mp4",
         },
         {
           id: 11,
-          title: t('scenes.scene11.title'),
-          text: t('scenes.scene11.text'),
-          videoUrl: 'https://v3.fal.media/files/monkey/sRVoOWjzmaoyzF7cure1m_output.mp4'
-        }
+          title: t("scenes.scene11.title"),
+          text: t("scenes.scene11.text"),
+          videoUrl:
+            "https://v3.fal.media/files/monkey/sRVoOWjzmaoyzF7cure1m_output.mp4",
+        },
       ];
 
       // Simple scene loading function based on original working code
       function loadScene(index: number) {
         if (index < 0 || index >= scenes.length) {
-          console.error('Scene index out of bounds:', index);
+          console.error("Scene index out of bounds:", index);
           return;
         }
 
@@ -730,8 +780,13 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
 
         // Update UI elements
         if (sceneTitle) sceneTitle.textContent = scene.title;
-        if (narrationText) narrationText.textContent = scene.text || scene.narration || '';
-        if (sceneIndicator) sceneIndicator.textContent = t('ui.sceneIndicator', { current: scene.id, total: scenes.length });
+        if (narrationText)
+          narrationText.textContent = scene.text || scene.narration || "";
+        if (sceneIndicator)
+          sceneIndicator.textContent = t("ui.sceneIndicator", {
+            current: scene.id,
+            total: scenes.length,
+          });
 
         // Load video
         if (videoPlayer && scene.videoUrl) {
@@ -741,15 +796,18 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
           // 仅在用户交互后尝试播放，避免 AudioContext/Autoplay 警告
           const tryPlay = () => {
             videoPlayer.play().catch(() => {});
-            videoPlayer.removeEventListener('pointerdown', tryPlay);
-            document.removeEventListener('pointerdown', tryPlay);
+            videoPlayer.removeEventListener("pointerdown", tryPlay);
+            document.removeEventListener("pointerdown", tryPlay);
           };
-          document.addEventListener('pointerdown', tryPlay, { once: true });
+          document.addEventListener("pointerdown", tryPlay, { once: true });
         }
 
         // Update navigation buttons
-        if (prevButton) (prevButton as HTMLButtonElement).disabled = currentSceneIndex === 0;
-        if (nextButton) (nextButton as HTMLButtonElement).disabled = currentSceneIndex === scenes.length - 1;
+        if (prevButton)
+          (prevButton as HTMLButtonElement).disabled = currentSceneIndex === 0;
+        if (nextButton)
+          (nextButton as HTMLButtonElement).disabled =
+            currentSceneIndex === scenes.length - 1;
       }
 
       // Simple navigation functions
@@ -772,27 +830,28 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
       // Set up event listeners based on original working code
       if (videoPlayer) {
         // Video ended - auto advance to next scene
-        videoPlayer.addEventListener('ended', () => {
+        videoPlayer.addEventListener("ended", () => {
           playNextScene();
         });
 
         // Video error handling
-        videoPlayer.addEventListener('error', (e) => {
-          console.error('Video error:', e);
-          if (narrationText) narrationText.textContent = t('ui.videoErrorDescription');
-          if (sceneTitle) sceneTitle.textContent = t('ui.videoError');
+        videoPlayer.addEventListener("error", (e) => {
+          console.error("Video error:", e);
+          if (narrationText)
+            narrationText.textContent = t("ui.videoErrorDescription");
+          if (sceneTitle) sceneTitle.textContent = t("ui.videoError");
         });
       }
 
       // Button event listeners
       if (prevButton) {
-        prevButton.addEventListener('click', () => {
+        prevButton.addEventListener("click", () => {
           playPrevScene();
         });
       }
 
       if (nextButton) {
-        nextButton.addEventListener('click', () => {
+        nextButton.addEventListener("click", () => {
           playNextScene();
         });
       }
@@ -801,24 +860,29 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
       if (scenes.length > 0) {
         loadScene(0);
       } else {
-        if (sceneTitle) sceneTitle.textContent = t('ui.noScenes');
-        if (narrationText) narrationText.textContent = t('ui.noScenesDescription');
+        if (sceneTitle) sceneTitle.textContent = t("ui.noScenes");
+        if (narrationText)
+          narrationText.textContent = t("ui.noScenesDescription");
         if (prevButton) (prevButton as HTMLButtonElement).disabled = true;
         if (nextButton) (nextButton as HTMLButtonElement).disabled = true;
-        if (sceneIndicator) sceneIndicator.textContent = t('ui.sceneIndicator', { current: 0, total: 0 });
+        if (sceneIndicator)
+          sceneIndicator.textContent = t("ui.sceneIndicator", {
+            current: 0,
+            total: 0,
+          });
       }
 
       // Enhanced video player setup with debugging
       if (videoPlayer) {
         videoPlayer.controls = true;
-        videoPlayer.style.width = '100%';
-        videoPlayer.style.height = 'auto';
-        videoPlayer.style.minHeight = '250px';
-        videoPlayer.style.background = '#000';
-        videoPlayer.style.display = 'block';
+        videoPlayer.style.width = "100%";
+        videoPlayer.style.height = "auto";
+        videoPlayer.style.minHeight = "250px";
+        videoPlayer.style.background = "#000";
+        videoPlayer.style.display = "block";
 
-        console.log('✅ Video player initialized successfully');
-        console.log('🎬 Video player details:', {
+        console.log("✅ Video player initialized successfully");
+        console.log("🎬 Video player details:", {
           element: videoPlayer,
           src: videoPlayer.src,
           currentSrc: videoPlayer.currentSrc,
@@ -827,35 +891,31 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
             display: videoPlayer.style.display,
             width: videoPlayer.style.width,
             height: videoPlayer.style.height,
-            visibility: videoPlayer.style.visibility
+            visibility: videoPlayer.style.visibility,
           },
           parentElement: videoPlayer.parentElement,
           offsetWidth: videoPlayer.offsetWidth,
-          offsetHeight: videoPlayer.offsetHeight
+          offsetHeight: videoPlayer.offsetHeight,
         });
 
         // Force video to be visible
-        videoPlayer.style.setProperty('display', 'block', 'important');
-        videoPlayer.style.setProperty('visibility', 'visible', 'important');
-        videoPlayer.style.setProperty('opacity', '1', 'important');
-
+        videoPlayer.style.setProperty("display", "block", "important");
+        videoPlayer.style.setProperty("visibility", "visible", "important");
+        videoPlayer.style.setProperty("opacity", "1", "important");
       } else {
-        console.error('❌ Video player element not found!');
+        console.error("❌ Video player element not found!");
         // Try to find any video elements on the page
-        const allVideos = document.querySelectorAll('video');
-        console.log('🔍 All video elements found:', allVideos.length);
+        const allVideos = document.querySelectorAll("video");
+        console.log("🔍 All video elements found:", allVideos.length);
         allVideos.forEach((video, index) => {
           console.log(`Video ${index}:`, {
             id: video.id,
             className: video.className,
             src: video.src,
-            parentElement: video.parentElement
+            parentElement: video.parentElement,
           });
         });
       }
-
-
-
     }, 100); // Small delay to ensure DOM is ready
 
     return () => {
@@ -1055,7 +1115,7 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
       <div
         className="nsaid-article-content"
         dangerouslySetInnerHTML={{
-          __html: processNSAIDContent(content)
+          __html: processNSAIDContent(content),
         }}
       />
     </>

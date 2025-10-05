@@ -1,4 +1,4 @@
-import { PDFResource, LocalizedPDFResource, Locale } from '@/types/pdf';
+import { PDFResource, LocalizedPDFResource, Locale } from "@/types/pdf";
 
 /**
  * 格式化文件大小
@@ -22,8 +22,11 @@ export function generatePDFUrl(filename: string, locale: Locale): string {
 /**
  * 生成替代语言PDF URL
  */
-export function generateAlternatePDFUrl(filename: string, locale: Locale): string {
-  const alternateLocale = locale === 'zh' ? 'en' : 'zh';
+export function generateAlternatePDFUrl(
+  filename: string,
+  locale: Locale,
+): string {
+  const alternateLocale = locale === "zh" ? "en" : "zh";
   return generatePDFUrl(filename, alternateLocale);
 }
 
@@ -33,14 +36,16 @@ export function generateAlternatePDFUrl(filename: string, locale: Locale): strin
 export function localizePDFResource(
   resource: PDFResource,
   locale: Locale,
-  t: (key: string) => string
+  t: (key: string) => string,
 ): LocalizedPDFResource {
   return {
     ...resource,
     title: t(resource.titleKey),
     description: t(resource.descriptionKey),
     localizedFilename: `${resource.filename}-${locale}.pdf`,
-    alternateFilename: `${resource.filename}-${locale === 'zh' ? 'en' : 'zh'}.pdf`,
+    alternateFilename: `${resource.filename}-${
+      locale === "zh" ? "en" : "zh"
+    }.pdf`,
     downloadUrl: generatePDFUrl(resource.filename, locale),
   };
 }
@@ -50,18 +55,19 @@ export function localizePDFResource(
  */
 export function searchPDFs(
   resources: LocalizedPDFResource[],
-  query: string
+  query: string,
 ): LocalizedPDFResource[] {
   if (!query.trim()) {
     return resources;
   }
 
   const searchTerm = query.toLowerCase().trim();
-  
-  return resources.filter(resource => 
-    resource.title.toLowerCase().includes(searchTerm) ||
-    resource.description.toLowerCase().includes(searchTerm) ||
-    resource.id.toLowerCase().includes(searchTerm)
+
+  return resources.filter(
+    (resource) =>
+      resource.title.toLowerCase().includes(searchTerm) ||
+      resource.description.toLowerCase().includes(searchTerm) ||
+      resource.id.toLowerCase().includes(searchTerm),
   );
 }
 
@@ -70,13 +76,13 @@ export function searchPDFs(
  */
 export function filterPDFsByCategory(
   resources: LocalizedPDFResource[],
-  category: string
+  category: string,
 ): LocalizedPDFResource[] {
-  if (category === 'all') {
+  if (category === "all") {
     return resources;
   }
-  
-  return resources.filter(resource => resource.category === category);
+
+  return resources.filter((resource) => resource.category === category);
 }
 
 /**
@@ -84,30 +90,30 @@ export function filterPDFsByCategory(
  */
 export function sortPDFs(
   resources: LocalizedPDFResource[],
-  sortBy: 'title' | 'category' | 'featured' | 'updated' = 'featured'
+  sortBy: "title" | "category" | "featured" | "updated" = "featured",
 ): LocalizedPDFResource[] {
   return [...resources].sort((a, b) => {
     switch (sortBy) {
-      case 'title':
+      case "title":
         return a.title.localeCompare(b.title);
-      
-      case 'category':
+
+      case "category":
         if (a.category !== b.category) {
           return a.category.localeCompare(b.category);
         }
         return a.title.localeCompare(b.title);
-      
-      case 'featured':
+
+      case "featured":
         if (a.featured !== b.featured) {
           return a.featured ? -1 : 1;
         }
         return a.title.localeCompare(b.title);
-      
-      case 'updated':
-        const dateA = new Date(a.updatedAt || a.createdAt || '');
-        const dateB = new Date(b.updatedAt || b.createdAt || '');
+
+      case "updated":
+        const dateA = new Date(a.updatedAt || a.createdAt || "");
+        const dateB = new Date(b.updatedAt || b.createdAt || "");
         return dateB.getTime() - dateA.getTime();
-      
+
       default:
         return 0;
     }
@@ -119,13 +125,13 @@ export function sortPDFs(
  */
 export function getCategoryColor(category: string): string {
   const colors = {
-    'management-tools': 'from-blue-500 to-blue-600',
-    'health-management': 'from-green-500 to-green-600',
-    'communication-guidance': 'from-purple-500 to-purple-600',
-    'educational-resources': 'from-orange-500 to-orange-600',
+    "management-tools": "from-blue-500 to-blue-600",
+    "health-management": "from-green-500 to-green-600",
+    "communication-guidance": "from-purple-500 to-purple-600",
+    "educational-resources": "from-orange-500 to-orange-600",
   };
-  
-  return colors[category as keyof typeof colors] || 'from-gray-500 to-gray-600';
+
+  return colors[category as keyof typeof colors] || "from-gray-500 to-gray-600";
 }
 
 /**
@@ -133,13 +139,15 @@ export function getCategoryColor(category: string): string {
  */
 export function getCategoryBgColor(category: string): string {
   const colors = {
-    'management-tools': 'bg-blue-50 border-blue-200',
-    'health-management': 'bg-green-50 border-green-200',
-    'communication-guidance': 'bg-purple-50 border-purple-200',
-    'educational-resources': 'bg-orange-50 border-orange-200',
+    "management-tools": "bg-blue-50 border-blue-200",
+    "health-management": "bg-green-50 border-green-200",
+    "communication-guidance": "bg-purple-50 border-purple-200",
+    "educational-resources": "bg-orange-50 border-orange-200",
   };
-  
-  return colors[category as keyof typeof colors] || 'bg-gray-50 border-gray-200';
+
+  return (
+    colors[category as keyof typeof colors] || "bg-gray-50 border-gray-200"
+  );
 }
 
 /**
@@ -147,23 +155,43 @@ export function getCategoryBgColor(category: string): string {
  */
 export function formatDate(dateString: string, locale: Locale): string {
   const date = new Date(dateString);
-  
+
   // 使用UTC时间避免时区差异导致的hydration mismatch
   const year = date.getUTCFullYear();
   const month = date.getUTCMonth();
   const day = date.getUTCDate();
-  
-  if (locale === 'zh') {
+
+  if (locale === "zh") {
     const months = [
-      '1月', '2月', '3月', '4月', '5月', '6月',
-      '7月', '8月', '9月', '10月', '11月', '12月'
+      "1月",
+      "2月",
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月",
     ];
     return `${year}年${months[month]}${day}日`;
   }
-  
+
   const months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
   return `${months[month]} ${day}, ${year}`;
 }
@@ -176,7 +204,8 @@ export function createDownloadEvent(resourceId: string, locale: Locale) {
     resourceId,
     locale,
     timestamp: new Date().toISOString(), // 使用ISO格式保持一致
-    userAgent: typeof window !== 'undefined' ? window.navigator.userAgent : 'SSR',
+    userAgent:
+      typeof window !== "undefined" ? window.navigator.userAgent : "SSR",
   };
 }
 
@@ -185,7 +214,7 @@ export function createDownloadEvent(resourceId: string, locale: Locale) {
  */
 export async function checkPDFExists(url: string): Promise<boolean> {
   try {
-    const response = await fetch(url, { method: 'HEAD' });
+    const response = await fetch(url, { method: "HEAD" });
     return response.ok;
   } catch {
     return false;
@@ -196,12 +225,12 @@ export async function checkPDFExists(url: string): Promise<boolean> {
  * 下载PDF文件
  */
 export function downloadPDF(url: string, filename: string): void {
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
   link.download = filename;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+
   // 触发下载
   document.body.appendChild(link);
   link.click();
@@ -218,15 +247,15 @@ export async function copyToClipboard(text: string): Promise<boolean> {
       return true;
     } else {
       // 降级方案
-      const textArea = document.createElement('textarea');
+      const textArea = document.createElement("textarea");
       textArea.value = text;
-      textArea.style.position = 'fixed';
-      textArea.style.left = '-999999px';
-      textArea.style.top = '-999999px';
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
       document.body.appendChild(textArea);
       textArea.focus();
       textArea.select();
-      const result = document.execCommand('copy');
+      const result = document.execCommand("copy");
       document.body.removeChild(textArea);
       return result;
     }

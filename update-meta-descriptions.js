@@ -56,16 +56,16 @@ const updates = [
 // 更新单个文件
 function updateFile(fileName, newDescription) {
   const filePath = path.join('content/articles/en', fileName);
-  
+
   if (!fs.existsSync(filePath)) {
     console.log(`❌ 文件不存在: ${fileName}`);
     return false;
   }
-  
+
   try {
     const content = fs.readFileSync(filePath, 'utf8');
     const lines = content.split('\n');
-    
+
     // 查找并更新 seo_description_zh 字段
     let updated = false;
     for (let i = 0; i < lines.length; i++) {
@@ -80,16 +80,16 @@ function updateFile(fileName, newDescription) {
         break;
       }
     }
-    
+
     if (!updated) {
       console.log(`⚠️  未找到 seo_description_zh 字段: ${fileName}`);
       return false;
     }
-    
+
     // 写回文件
     fs.writeFileSync(filePath, lines.join('\n'), 'utf8');
     return true;
-    
+
   } catch (error) {
     console.log(`❌ 更新文件失败 ${fileName}:`, error.message);
     return false;
@@ -99,25 +99,25 @@ function updateFile(fileName, newDescription) {
 // 主函数
 function updateAllMetaDescriptions() {
   console.log('🚀 开始批量更新 Meta Descriptions...\n');
-  
+
   let successCount = 0;
   let failCount = 0;
-  
+
   updates.forEach((update, index) => {
     console.log(`\n--- 更新 ${index + 1}/${updates.length}: ${update.file} ---`);
-    
+
     if (updateFile(update.file, update.newDescription)) {
       successCount++;
     } else {
       failCount++;
     }
   });
-  
+
   console.log('\n📊 更新结果统计:');
   console.log(`✅ 成功: ${successCount} 个文件`);
   console.log(`❌ 失败: ${failCount} 个文件`);
   console.log(`📝 总计: ${updates.length} 个文件`);
-  
+
   if (successCount === updates.length) {
     console.log('\n🎉 所有文件更新成功！');
   } else {

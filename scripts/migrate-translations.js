@@ -19,7 +19,7 @@ class TranslationMigrator {
   loadTranslations() {
     const translations = {};
     const locales = ['zh', 'en'];
-    
+
     for (const locale of locales) {
       const filePath = path.join(this.messagesDir, `${locale}.json`);
       if (fs.existsSync(filePath)) {
@@ -30,7 +30,7 @@ class TranslationMigrator {
         }
       }
     }
-    
+
     return translations;
   }
 
@@ -115,7 +115,7 @@ class TranslationMigrator {
   // 修复常见的翻译问题
   fixCommonIssues(translations) {
     const { zh, en } = translations;
-    
+
     // 确保基本结构存在
     const ensureStructure = (obj, structure) => {
       for (const [key, value] of Object.entries(structure)) {
@@ -197,7 +197,7 @@ class TranslationMigrator {
     console.log('🔄 Starting translation migration...\n');
 
     const translations = this.loadTranslations();
-    
+
     if (Object.keys(translations).length === 0) {
       this.errors.push('No translation files found');
       return false;
@@ -205,7 +205,7 @@ class TranslationMigrator {
 
     // 修复常见问题
     this.fixCommonIssues(translations);
-    
+
     // 修复缺失的键
     this.fixMissingKeys(translations);
 

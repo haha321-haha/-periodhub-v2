@@ -68,31 +68,31 @@ if (hasIssues) {
 function checkHydrationPatterns() {
   const issues = [];
   const appDir = 'app';
-  
+
   if (fs.existsSync(appDir)) {
     const files = getAllTsxFiles(appDir);
     files.forEach(file => {
       const content = fs.readFileSync(file, 'utf8');
-      
+
       // 检查危险的hydration模式
       if (content.includes('typeof window') && !content.includes('use client')) {
         issues.push(`${file}: 使用window检查但未标记为客户端组件`);
       }
-      
+
       // 检查useEffect + useState的延迟渲染模式
-      if (content.includes('useState(false)') && 
-          content.includes('setIsClient(true)') && 
+      if (content.includes('useState(false)') &&
+          content.includes('setIsClient(true)') &&
           !content.includes('typeof window')) {
         issues.push(`${file}: 可能使用不安全的客户端检测模式`);
       }
-      
+
       // 检查SVG图标属性
       if (content.includes('aria-hidden') && content.includes('className={`')) {
         issues.push(`${file}: SVG图标可能因条件类名导致hydration不匹配`);
       }
     });
   }
-  
+
   return {
     issues,
     message: 'Hydration模式检查完成'
@@ -105,12 +105,12 @@ function checkHydrationPatterns() {
 function checkSvgAttributes() {
   const issues = [];
   const componentsDir = 'components';
-  
+
   if (fs.existsSync(componentsDir)) {
     const files = getAllTsxFiles(componentsDir);
     files.forEach(file => {
       const content = fs.readFileSync(file, 'utf8');
-      
+
       // 检查SVG属性可能导致的问题
       const svgIssues = [
         /aria-hidden="[^"]*".*className.*\$\{/,
@@ -118,7 +118,7 @@ function checkSvgAttributes() {
         /stroke-width="[^"]*".*className.*\$\{/,
         /fill="[^"]*".*className.*\$/
       ];
-      
+
       svgIssues.forEach(pattern => {
         if (pattern.test(content)) {
           issues.push(`${file}: SVG属性可能因动态类名导致hydration问题`);
@@ -126,7 +126,7 @@ function checkSvgAttributes() {
       });
     });
   }
-  
+
   return {
     issues,
     message: 'SVG属性检查完成'
@@ -138,26 +138,26 @@ function checkSvgAttributes() {
  */
 function checkClientServerConsistency() {
   const issues = [];
-  
+
   // 检查Header组件
   const headerPath = 'components/Header.tsx';
   if (fs.existsSync(headerPath)) {
     const content = fs.readFileSync(headerPath, 'utf8');
-    
+
     // 检查LanguageSwitcher的实现
-    if (content.includes('LanguageSwitcher') && 
-        !content.includes('isMounted') && 
+    if (content.includes('LanguageSwitcher') &&
+        !content.includes('isMounted') &&
         !content.includes('typeof window')) {
       issues.push(`${headerPath}: LanguageSwitcher可能缺少hydration保护`);
     }
-    
+
     // 检查SVG图标使用
-    if (content.includes('className={`') && 
+    if (content.includes('className={`') &&
         content.includes('aria-hidden="true"')) {
       issues.push(`${headerPath}: SVG图标可能因条件渲染导致hydration问题`);
     }
   }
-  
+
   return {
     issues,
     message: '客户端/服务端一致性检查完成'
@@ -170,10 +170,10 @@ function checkClientServerConsistency() {
 function checkUseStatePatterns() {
   const issues = [];
   const allFiles = [...getAllTsxFiles('app'), ...getAllTsxFiles('components')];
-  
+
   allFiles.forEach(file => {
     const content = fs.readFileSync(file, 'utf8');
-    
+
     // 检查不安全的useState初始值
     const useStateMatches = content.match(/useState\([^)]*\)/g) || [];
     useStateMatches.forEach(match => {
@@ -181,13 +181,13 @@ function checkUseStatePatterns() {
         issues.push(`${file}: useState初始值可能依赖浏览器API`);
       }
     });
-    
+
     // 检查日期/时间相关的不安全初始值
     if (content.includes('useState(new Date()') || content.includes('useState(Date.now()')) {
       issues.push(`${file}: useState使用了不安全的日期初始值`);
     }
   });
-  
+
   return {
     issues,
     message: 'useState模式检查完成'
@@ -200,14 +200,14 @@ function checkUseStatePatterns() {
 function checkBrowserApiUsage() {
   const issues = [];
   const allFiles = [...getAllTsxFiles('app'), ...getAllTsxFiles('components')];
-  
+
   allFiles.forEach(file => {
     const content = fs.readFileSync(file, 'utf8');
-    
+
     // 检查不安全的浏览器API使用
     const dangerousApis = [
       'window.localStorage',
-      'window.sessionStorage', 
+      'window.sessionStorage',
       'navigator.',
       'document.',
       'screen.',
@@ -215,17 +215,17 @@ function checkBrowserApiUsage() {
       'localStorage.',
       'sessionStorage.'
     ];
-    
+
     dangerousApis.forEach(api => {
-      if (content.includes(api) && 
-          !content.includes('typeof window') && 
+      if (content.includes(api) &&
+          !content.includes('typeof window') &&
           !content.includes('typeof window !== "undefined"') &&
           !content.includes('use client')) {
         issues.push(`${file}: 使用了${api}但未进行安全检查`);
       }
     });
   });
-  
+
   return {
     issues,
     message: '浏览器API使用检查完成'
@@ -238,10 +238,10 @@ function checkBrowserApiUsage() {
 function checkResponsiveDesign() {
   const issues = [];
   const allFiles = [...getAllTsxFiles('app'), ...getAllTsxFiles('components')];
-  
+
   allFiles.forEach(file => {
     const content = fs.readFileSync(file, 'utf8');
-    
+
     // 检查响应式类名可能导致的hydration问题
     const responsivePatterns = [
       /className.*sm:/,
@@ -249,16 +249,16 @@ function checkResponsiveDesign() {
       /className.*lg:/,
       /className.*xl:/
     ];
-    
+
     responsivePatterns.forEach(pattern => {
-      if (pattern.test(content) && 
-          content.includes('useState') && 
+      if (pattern.test(content) &&
+          content.includes('useState') &&
           !content.includes('isMounted')) {
         issues.push(`${file}: 响应式类名可能与状态变化冲突`);
       }
     });
   });
-  
+
   return {
     issues,
     message: '响应式设计检查完成'
@@ -270,10 +270,10 @@ function checkResponsiveDesign() {
  */
 function checkBuildIntegrity() {
   const issues = [];
-  
+
   try {
     console.log('   正在验证构建完整性...');
-    
+
     // 检查必要的构建文件
     const requiredFiles = [
       'package.json',
@@ -281,13 +281,13 @@ function checkBuildIntegrity() {
       'tsconfig.json',
       'tailwind.config.js'
     ];
-    
+
     requiredFiles.forEach(file => {
       if (!fs.existsSync(file)) {
         issues.push(`缺少必要文件: ${file}`);
       }
     });
-    
+
     // 检查关键目录
     const requiredDirs = ['app', 'components', 'lib'];
     requiredDirs.forEach(dir => {
@@ -295,7 +295,7 @@ function checkBuildIntegrity() {
         issues.push(`缺少必要目录: ${dir}`);
       }
     });
-    
+
     // 验证构建
     try {
       execSync('npm run build:unsafe', { stdio: 'pipe' });
@@ -308,11 +308,11 @@ function checkBuildIntegrity() {
         });
       }
     }
-    
+
   } catch (error) {
     issues.push(`构建完整性检查失败: ${error.message}`);
   }
-  
+
   return {
     issues,
     message: '构建完整性验证完成'
@@ -324,17 +324,17 @@ function checkBuildIntegrity() {
  */
 function getAllTsxFiles(dir) {
   const files = [];
-  
+
   function traverse(currentDir) {
     if (!fs.existsSync(currentDir)) return;
-    
+
     const items = fs.readdirSync(currentDir);
-    
+
     for (const item of items) {
       const fullPath = path.join(currentDir, item);
       try {
         const stat = fs.statSync(fullPath);
-        
+
         if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
           traverse(fullPath);
         } else if (item.endsWith('.tsx') || item.endsWith('.ts')) {
@@ -345,7 +345,7 @@ function getAllTsxFiles(dir) {
       }
     }
   }
-  
+
   traverse(dir);
   return files;
 }

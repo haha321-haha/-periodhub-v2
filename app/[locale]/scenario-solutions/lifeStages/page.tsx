@@ -30,7 +30,7 @@ interface Props {
 // 推荐数据配置函数
 function getLifeStagesRecommendations(locale: Locale) {
   const isZh = locale === 'zh';
-  
+
   return {
     relatedTools: [
       {
@@ -131,7 +131,7 @@ function getLifeStagesRecommendations(locale: Locale) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'scenarioSolutionsPage' });
-  
+
   return {
     title: `${t('scenarios.life_stages.title')} - ${t('title')}`,
     description: t('scenarios.life_stages.description'),
@@ -141,14 +141,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LifeStagesScenarioPage({ params }: Props) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
-  
+
   const t = await getTranslations('scenarioSolutionsPage');
   const commonT = await getTranslations('common');
-  
+
   // 预加载面包屑所需的翻译
   const breadcrumbTitle = t('title');
   const breadcrumbLifeStagesTitle = t('scenarios.life_stages.title');
-  
+
   // 获取推荐数据
   const recommendations = getLifeStagesRecommendations(locale);
   const isZh = locale === 'zh';
@@ -306,7 +306,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12" data-page="scenario-lifestages">
       {/* Breadcrumb */}
-      <Breadcrumb 
+      <Breadcrumb
         items={[
           { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
           { label: breadcrumbLifeStagesTitle }
@@ -522,7 +522,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
       <section className="bg-gradient-to-br from-red-50 to-blue-50 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="space-y-12">
-            
+
             {/* 相关工具区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
@@ -576,7 +576,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
 
       {/* Back to Overview */}
       <div className="text-center">
-        <Link 
+        <Link
           href={`/${locale}/scenario-solutions`}
           className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
         >

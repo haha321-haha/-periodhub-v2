@@ -36,7 +36,7 @@ class MedicalValidator {
           severity: ['mild', 'moderate', 'severe']
         }
       },
-      
+
       // 治疗方法
       treatments: {
         'heat therapy': {
@@ -61,7 +61,7 @@ class MedicalValidator {
           evidence: 'moderate'
         }
       },
-      
+
       // 药物信息
       medications: {
         'ibuprofen': {
@@ -84,7 +84,7 @@ class MedicalValidator {
         }
       }
     };
-    
+
     // FDA合规要求
     this.fdaRequirements = {
       // 必需的免责声明
@@ -93,7 +93,7 @@ class MedicalValidator {
         'Always consult with a qualified healthcare provider for any health concerns.',
         'Individual results may vary.'
       ],
-      
+
       // 禁止的声明
       prohibitedClaims: [
         'cure',
@@ -103,14 +103,14 @@ class MedicalValidator {
         'guarantee',
         'promise'
       ],
-      
+
       // 必需的警告
       requiredWarnings: [
         'Seek immediate medical attention if you experience severe symptoms',
         'Consult your healthcare provider before starting any new treatment',
         'Stop use and consult a doctor if symptoms worsen'
       ],
-      
+
       // 医疗建议语气检查
       medicalAdvicePatterns: [
         /you should/gi,
@@ -120,7 +120,7 @@ class MedicalValidator {
         /prescription/gi,
         /doctor.*prescribe/gi
       ],
-      
+
       // 免责声明放置位置
       disclaimerPlacement: [
         'footer',
@@ -128,7 +128,7 @@ class MedicalValidator {
         'modal',
         'sidebar'
       ],
-      
+
       // 权威来源验证
       authorizedSources: [
         'FDA',
@@ -148,35 +148,35 @@ class MedicalValidator {
   validateMedicalContent(content, locale = 'en') {
     const issues = [];
     const warnings = [];
-    
+
     // 1. 检查医学术语准确性
     const terminologyIssues = this.validateTerminology(content, locale);
     issues.push(...terminologyIssues);
-    
+
     // 2. 检查FDA合规性
     const complianceIssues = this.validateFDACompliance(content);
     issues.push(...complianceIssues);
-    
+
     // 3. 检查药物信息
     const medicationIssues = this.validateMedicationInfo(content);
     issues.push(...medicationIssues);
-    
+
     // 4. 检查安全警告
     const safetyIssues = this.validateSafetyWarnings(content);
     issues.push(...safetyIssues);
-    
+
     // 5. 检查医疗建议语气
     const adviceIssues = this.validateMedicalAdviceTone(content);
     warnings.push(...adviceIssues);
-    
+
     // 6. 检查免责声明放置
     const disclaimerIssues = this.validateDisclaimerPlacement(content);
     warnings.push(...disclaimerIssues);
-    
+
     // 7. 验证引用来源
     const sourceIssues = this.validateSourceAuthority(content);
     warnings.push(...sourceIssues);
-    
+
     return {
       isValid: issues.length === 0,
       issues,
@@ -191,7 +191,7 @@ class MedicalValidator {
   validateTerminology(content, locale) {
     const issues = [];
     const allTerms = this.getAllTerms();
-    
+
     // 检查术语准确性
     Object.entries(allTerms).forEach(([category, terms]) => {
       Object.entries(terms).forEach(([key, term]) => {
@@ -210,7 +210,7 @@ class MedicalValidator {
         }
       });
     });
-    
+
     return issues;
   }
 
@@ -219,7 +219,7 @@ class MedicalValidator {
    */
   validateFDACompliance(content) {
     const issues = [];
-    
+
     // 检查必需的免责声明
     this.fdaRequirements.requiredDisclaimers.forEach(disclaimer => {
       if (!content.includes(disclaimer)) {
@@ -231,7 +231,7 @@ class MedicalValidator {
         });
       }
     });
-    
+
     // 检查禁止的声明
     this.fdaRequirements.prohibitedClaims.forEach(claim => {
       if (content.toLowerCase().includes(claim)) {
@@ -243,7 +243,7 @@ class MedicalValidator {
         });
       }
     });
-    
+
     return issues;
   }
 
@@ -253,7 +253,7 @@ class MedicalValidator {
   validateMedicationInfo(content) {
     const issues = [];
     const medications = this.fdaApprovedTerms.medications;
-    
+
     Object.entries(medications).forEach(([key, medication]) => {
       if (content.includes(medication.en) || content.includes(medication.zh)) {
         // 检查剂量信息
@@ -266,7 +266,7 @@ class MedicalValidator {
             suggestion: 'Add dosage information'
           });
         }
-        
+
         // 检查安全警告
         if (!this.hasRequiredWarnings(content, medication.warnings)) {
           issues.push({
@@ -279,7 +279,7 @@ class MedicalValidator {
         }
       }
     });
-    
+
     return issues;
   }
 
@@ -288,7 +288,7 @@ class MedicalValidator {
    */
   validateSafetyWarnings(content) {
     const issues = [];
-    
+
     // 检查必需的安全警告
     this.fdaRequirements.requiredWarnings.forEach(warning => {
       if (!content.includes(warning)) {
@@ -300,7 +300,7 @@ class MedicalValidator {
         });
       }
     });
-    
+
     return issues;
   }
 
@@ -309,7 +309,7 @@ class MedicalValidator {
    */
   validateMedicalAdviceTone(content) {
     const warnings = [];
-    
+
     this.fdaRequirements.medicalAdvicePatterns.forEach(pattern => {
       const matches = content.match(pattern);
       if (matches) {
@@ -323,7 +323,7 @@ class MedicalValidator {
         });
       }
     });
-    
+
     return warnings;
   }
 
@@ -332,22 +332,22 @@ class MedicalValidator {
    */
   validateDisclaimerPlacement(content) {
     const warnings = [];
-    
+
     // 检查免责声明是否在合适的位置
-    const hasDisclaimer = this.fdaRequirements.requiredDisclaimers.some(disclaimer => 
+    const hasDisclaimer = this.fdaRequirements.requiredDisclaimers.some(disclaimer =>
       content.includes(disclaimer)
     );
-    
+
     if (hasDisclaimer) {
       // 检查是否在页面底部
       const contentLines = content.split('\n');
       const lastQuarter = contentLines.slice(-Math.floor(contentLines.length / 4));
-      const hasDisclaimerInFooter = lastQuarter.some(line => 
-        this.fdaRequirements.requiredDisclaimers.some(disclaimer => 
+      const hasDisclaimerInFooter = lastQuarter.some(line =>
+        this.fdaRequirements.requiredDisclaimers.some(disclaimer =>
           line.includes(disclaimer)
         )
       );
-      
+
       if (!hasDisclaimerInFooter) {
         warnings.push({
           type: 'disclaimer_placement',
@@ -356,7 +356,7 @@ class MedicalValidator {
         });
       }
     }
-    
+
     return warnings;
   }
 
@@ -365,12 +365,12 @@ class MedicalValidator {
    */
   validateSourceAuthority(content) {
     const warnings = [];
-    
+
     // 检查是否引用了权威来源
-    const hasAuthorizedSource = this.fdaRequirements.authorizedSources.some(source => 
+    const hasAuthorizedSource = this.fdaRequirements.authorizedSources.some(source =>
       content.includes(source)
     );
-    
+
     if (!hasAuthorizedSource) {
       warnings.push({
         type: 'source_authority',
@@ -378,7 +378,7 @@ class MedicalValidator {
         suggestion: 'Consider referencing FDA, CDC, NIH, or other authoritative medical sources'
       });
     }
-    
+
     return warnings;
   }
 
@@ -399,15 +399,15 @@ class MedicalValidator {
   isTermUsedCorrectly(content, term, termInfo) {
     // 简单的正确性检查
     // 在实际应用中，这里可以添加更复杂的逻辑
-    
+
     // 检查是否在正确的上下文中使用
     const context = this.getTermContext(content, term);
-    
+
     // 检查是否与FDA批准的信息一致
     if (termInfo.fdaApproved === false) {
       return false;
     }
-    
+
     return true;
   }
 
@@ -417,10 +417,10 @@ class MedicalValidator {
   getTermContext(content, term) {
     const index = content.indexOf(term);
     if (index === -1) return '';
-    
+
     const start = Math.max(0, index - 50);
     const end = Math.min(content.length, index + term.length + 50);
-    
+
     return content.substring(start, end);
   }
 
@@ -457,18 +457,18 @@ class MedicalValidator {
    */
   getTotalChecks(content) {
     let checks = 0;
-    
+
     // 术语检查
     const allTerms = this.getAllTerms();
     checks += Object.keys(allTerms).length;
-    
+
     // FDA合规检查
     checks += this.fdaRequirements.requiredDisclaimers.length;
     checks += this.fdaRequirements.prohibitedClaims.length;
-    
+
     // 安全警告检查
     checks += this.fdaRequirements.requiredWarnings.length;
-    
+
     return checks;
   }
 
@@ -505,19 +505,19 @@ class MedicalValidator {
    */
   generateRecommendations(issues) {
     const recommendations = [];
-    
+
     if (issues.some(issue => issue.type === 'fda_compliance')) {
       recommendations.push('Review FDA compliance requirements and add missing disclaimers');
     }
-    
+
     if (issues.some(issue => issue.type === 'medication')) {
       recommendations.push('Ensure all medication information includes dosage and safety warnings');
     }
-    
+
     if (issues.some(issue => issue.type === 'terminology')) {
       recommendations.push('Review medical terminology for accuracy and proper usage');
     }
-    
+
     return recommendations;
   }
 
@@ -529,7 +529,7 @@ class MedicalValidator {
       const content = fs.readFileSync(filePath, 'utf-8');
       const validation = this.validateMedicalContent(content);
       const report = this.generateReport(validation);
-      
+
       return {
         file: filePath,
         validation,
@@ -550,17 +550,17 @@ class MedicalValidator {
     const messagesDir = path.join(projectRoot, 'messages');
     const enFile = path.join(messagesDir, 'en.json');
     const zhFile = path.join(messagesDir, 'zh.json');
-    
+
     const results = [];
-    
+
     if (fs.existsSync(enFile)) {
       results.push(this.validateFile(enFile));
     }
-    
+
     if (fs.existsSync(zhFile)) {
       results.push(this.validateFile(zhFile));
     }
-    
+
     return results;
   }
 }
@@ -569,11 +569,11 @@ class MedicalValidator {
 if (require.main === module) {
   const validator = new MedicalValidator();
   const projectRoot = process.argv[2] || process.cwd();
-  
+
   console.log(`🏥 验证医学内容: ${projectRoot}`);
-  
+
   const results = validator.validateProject(projectRoot);
-  
+
   results.forEach(result => {
     if (result.error) {
       console.error(`❌ 错误: ${result.file} - ${result.error}`);
@@ -581,7 +581,7 @@ if (require.main === module) {
       console.log(`\n📄 文件: ${result.file}`);
       console.log(`分数: ${result.report.score.toFixed(1)}%`);
       console.log(`问题数: ${result.report.totalIssues}`);
-      
+
       if (result.report.totalIssues > 0) {
         console.log('\n🔍 问题详情:');
         Object.entries(result.report.issuesByType).forEach(([type, issues]) => {
@@ -593,7 +593,7 @@ if (require.main === module) {
             }
           });
         });
-        
+
         console.log('\n💡 建议:');
         result.report.recommendations.forEach((rec, index) => {
           console.log(`  ${index + 1}. ${rec}`);
@@ -603,7 +603,7 @@ if (require.main === module) {
       }
     }
   });
-  
+
   // 如果有问题，退出码为1
   const hasIssues = results.some(result => !result.error && result.report.totalIssues > 0);
   process.exit(hasIssues ? 1 : 0);

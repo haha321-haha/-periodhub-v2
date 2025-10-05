@@ -37,11 +37,11 @@ export default function PerformanceDashboard() {
       setLoading(true);
       const url = selectedUrl ? `/api/performance?url=${encodeURIComponent(selectedUrl)}` : '/api/performance';
       const response = await fetch(url);
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch performance data');
       }
-      
+
       const result = await response.json();
       setData(result);
     } catch (err) {
@@ -157,7 +157,7 @@ export default function PerformanceDashboard() {
         <div className="bg-white rounded-lg shadow p-4">
           <h3 className="text-sm font-medium text-gray-500">Last Updated</h3>
           <p className="text-sm text-gray-900">
-            {data.data.length > 0 
+            {data.data.length > 0
               ? new Date(data.data[0].timestamp).toLocaleString()
               : 'N/A'
             }

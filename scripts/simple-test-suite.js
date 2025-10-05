@@ -32,17 +32,17 @@ class SimpleTestSuite {
 
   async runSimpleTests() {
     console.log('🚀 简化测试套件启动...\n');
-    
+
     try {
       // 1. 基础构建测试
       await this.testBasicBuild();
-      
+
       // 2. 核心页面测试（增加超时时间）
       await this.testCorePages();
-      
+
       // 3. 生成报告
       this.generateReport();
-      
+
     } catch (error) {
       console.error('❌ 测试过程中发生错误:', error.message);
       this.results.summary.failed++;
@@ -58,7 +58,7 @@ class SimpleTestSuite {
   async testBasicBuild() {
     console.log('🔨 基础构建测试');
     console.log('-'.repeat(30));
-    
+
     const buildTests = [
       { name: 'TypeScript检查', command: 'npm run type-check' },
       { name: 'Next.js构建', command: 'npm run build' }
@@ -72,7 +72,7 @@ class SimpleTestSuite {
   async testCorePages() {
     console.log('\n📋 核心页面测试');
     console.log('-'.repeat(30));
-    
+
     const corePages = [
       { name: '主页', url: '/' },
       { name: '英文版', url: '/en' },
@@ -87,7 +87,7 @@ class SimpleTestSuite {
   async testCommand(name, command) {
     try {
       execSync(command, { stdio: 'pipe', timeout: 60000 });
-      
+
       this.results.summary.passed++;
       this.results.details.push({
         name,
@@ -96,7 +96,7 @@ class SimpleTestSuite {
         timestamp: new Date().toISOString()
       });
       console.log(`✅ ${name}: 通过`);
-      
+
     } catch (error) {
       this.results.summary.failed++;
       this.results.details.push({
@@ -107,7 +107,7 @@ class SimpleTestSuite {
       });
       console.log(`❌ ${name}: 失败 - ${error.message}`);
     }
-    
+
     this.results.summary.total++;
   }
 
@@ -115,14 +115,14 @@ class SimpleTestSuite {
     try {
       const startTime = Date.now();
       const fullUrl = `${this.results.environment.baseUrl}${url}`;
-      
+
       // 增加超时时间到15秒，添加重试机制
       const curlCommand = `curl -s -o /dev/null -w "%{http_code},%{time_total}" --max-time 15 "${fullUrl}"`;
       const result = execSync(curlCommand, { encoding: 'utf8', timeout: 20000 });
-      
+
       const [statusCode, responseTime] = result.trim().split(',');
       const responseTimeMs = Math.round(parseFloat(responseTime) * 1000);
-      
+
       if (statusCode === '200') {
         this.results.summary.passed++;
         this.results.details.push({
@@ -142,7 +142,7 @@ class SimpleTestSuite {
         });
         console.log(`❌ ${name}: 失败 (状态码: ${statusCode})`);
       }
-      
+
     } catch (error) {
       this.results.summary.failed++;
       this.results.details.push({
@@ -153,7 +153,7 @@ class SimpleTestSuite {
       });
       console.log(`❌ ${name}: 错误 - ${error.message}`);
     }
-    
+
     this.results.summary.total++;
   }
 
@@ -161,7 +161,7 @@ class SimpleTestSuite {
     const endTime = Date.now();
     this.results.summary.duration = endTime - this.startTime;
     this.results.summary.passRate = Math.round((this.results.summary.passed / this.results.summary.total) * 100);
-    
+
     console.log('\n' + '='.repeat(50));
     console.log('📊 简化测试结果');
     console.log('='.repeat(50));
@@ -170,12 +170,12 @@ class SimpleTestSuite {
     console.log(`失败数: ${this.results.summary.failed}`);
     console.log(`通过率: ${this.results.summary.passRate}%`);
     console.log(`总耗时: ${Math.round(this.results.summary.duration / 1000)}秒`);
-    
+
     // 保存测试报告
     const reportPath = path.join(__dirname, '..', 'test-report-simple.json');
     fs.writeFileSync(reportPath, JSON.stringify(this.results, null, 2));
     console.log(`\n📄 测试报告已保存到: ${reportPath}`);
-    
+
     // 根据通过率给出建议
     if (this.results.summary.passRate >= 90) {
       console.log('\n🎉 测试通过率优秀，可以安全上传GitHub！');
@@ -194,4 +194,3 @@ if (require.main === module) {
 }
 
 module.exports = SimpleTestSuite;
-

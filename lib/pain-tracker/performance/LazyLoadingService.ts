@@ -37,12 +37,12 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
       } = options;
 
       const cacheKey = this.generateCacheKey(options);
-      
+
       // Check cache first
       if (this.cache.has(cacheKey)) {
         this.cacheHits++;
         const cachedRecords = this.cache.get(cacheKey)!;
-        
+
         return {
           data: cachedRecords,
           pagination: {
@@ -61,21 +61,21 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
 
       // Load records from storage
       const allRecords = await this.loadAllRecords();
-      
+
       // Apply filters
       const filteredRecords = this.applyFilters(allRecords, filters);
-      
+
       // Apply sorting
       const sortedRecords = this.applySorting(filteredRecords, sortBy, sortOrder);
-      
+
       // Apply pagination
       const startIndex = (page - 1) * pageSize;
       const endIndex = startIndex + pageSize;
       const paginatedRecords = sortedRecords.slice(startIndex, endIndex);
-      
+
       // Cache the result
       this.cacheRecords(cacheKey, paginatedRecords);
-      
+
       // Preload next batch if needed
       if (options.preload !== false) {
         this.preloadNextBatch(page, pageSize).catch(console.warn);
@@ -108,7 +108,7 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
   async loadRecordsVirtual(startIndex: number, endIndex: number): Promise<PainRecord[]> {
     try {
       const cacheKey = `virtual_${startIndex}_${endIndex}`;
-      
+
       // Check cache first
       if (this.cache.has(cacheKey)) {
         this.cacheHits++;
@@ -120,10 +120,10 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
       // Load all records and slice the required range
       const allRecords = await this.loadAllRecords();
       const virtualRecords = allRecords.slice(startIndex, endIndex);
-      
+
       // Cache the result
       this.cacheRecords(cacheKey, virtualRecords);
-      
+
       return virtualRecords;
     } catch (error) {
       throw new PainTrackerError(
@@ -172,7 +172,7 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
   getCacheStats(): { size: number; hitRate: number } {
     const totalRequests = this.cacheHits + this.cacheMisses;
     const hitRate = totalRequests > 0 ? this.cacheHits / totalRequests : 0;
-    
+
     return {
       size: this.cache.size,
       hitRate: Math.round(hitRate * 100) / 100
@@ -191,7 +191,7 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
       while (hasMore) {
         const batch = await this.loadRecordsBatchFromStorage(offset, batchSize);
         allRecords.push(...batch);
-        
+
         hasMore = batch.length === batchSize;
         offset += batchSize;
 
@@ -263,7 +263,7 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
 
     // Menstrual status filter
     if (filters.menstrualStatus) {
-      filteredRecords = filteredRecords.filter(record => 
+      filteredRecords = filteredRecords.filter(record =>
         record.menstrualStatus === filters.menstrualStatus
       );
     }

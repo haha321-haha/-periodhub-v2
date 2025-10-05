@@ -43,11 +43,11 @@ export class SystemHealthChecker {
 
     // 生成修复建议
     report.recommendations = this.generateRecommendations(report.checks);
-    
+
     // 确定整体状态
     const hasFailures = Object.values(report.checks).some(check => check.status === 'fail');
     const hasWarnings = Object.values(report.checks).some(check => check.status === 'warning');
-    
+
     if (hasFailures) {
       report.status = 'critical';
     } else if (hasWarnings) {
@@ -64,8 +64,8 @@ export class SystemHealthChecker {
     const duplicates = await this.findDuplicatePDFs();
     return {
       status: duplicates.length === 0 ? 'pass' : 'fail',
-      message: duplicates.length === 0 
-        ? '✅ 未发现PDF重复问题' 
+      message: duplicates.length === 0
+        ? '✅ 未发现PDF重复问题'
         : `❌ 发现${duplicates.length}个重复PDF`,
       details: duplicates
     };
@@ -112,7 +112,7 @@ export class SystemHealthChecker {
 
     // 检查PDF资源是否有重复的标题
     const titles = pdfResources.map(r => r.title);
-    const duplicateTitles = titles.filter((title, index) => 
+    const duplicateTitles = titles.filter((title, index) =>
       titles.indexOf(title) !== index
     );
 
@@ -142,7 +142,7 @@ export class SystemHealthChecker {
     try {
       // 合并热点数据
       heatmapManager.consolidateHeatmapData();
-      
+
       const allData = heatmapManager.getAllHeatmapData();
       const totalClicks = Array.from(allData.values())
         .flat()
@@ -220,11 +220,11 @@ export class SystemHealthChecker {
    */
   public static generateReportSummary(report: HealthReport): string {
     const { checks, status, recommendations } = report;
-    
+
     let summary = `# 系统健康检查报告\n\n`;
     summary += `**检查时间**: ${report.timestamp}\n`;
     summary += `**整体状态**: ${status === 'healthy' ? '✅ 健康' : status === 'issues-found' ? '⚠️ 发现问题' : '❌ 严重问题'}\n\n`;
-    
+
     summary += `## 检查结果\n\n`;
     Object.entries(checks).forEach(([key, result]) => {
       const icon = result.status === 'pass' ? '✅' : result.status === 'warning' ? '⚠️' : '❌';

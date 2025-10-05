@@ -3,14 +3,14 @@
  * 基于Levenshtein距离算法和医疗词典的拼写检查和纠错
  */
 
-import { MedicalDictionary } from './MedicalDictionary';
+import { MedicalDictionary } from "./MedicalDictionary";
 
 export interface SpellCheckResult {
   isCorrect: boolean;
   originalWord: string;
   suggestions: string[];
   confidence: number;
-  correctionType: 'exact' | 'suggestion' | 'medical_term' | 'none';
+  correctionType: "exact" | "suggestion" | "medical_term" | "none";
 }
 
 export interface SpellCheckOptions {
@@ -18,7 +18,7 @@ export interface SpellCheckOptions {
   maxDistance: number;
   minWordLength: number;
   includeMedicalTerms: boolean;
-  languageMode: 'zh' | 'en' | 'mixed';
+  languageMode: "zh" | "en" | "mixed";
 }
 
 export class SpellChecker {
@@ -37,27 +37,27 @@ export class SpellChecker {
    * 检查单词拼写并提供纠错建议
    */
   async checkSpelling(
-    word: string, 
-    options: Partial<SpellCheckOptions> = {}
+    word: string,
+    options: Partial<SpellCheckOptions> = {},
   ): Promise<SpellCheckResult> {
     const opts: SpellCheckOptions = {
       maxSuggestions: 3,
       maxDistance: 2,
       minWordLength: 2,
       includeMedicalTerms: true,
-      languageMode: 'mixed',
-      ...options
+      languageMode: "mixed",
+      ...options,
     };
 
     const cleanWord = this.cleanWord(word);
-    
+
     if (cleanWord.length < opts.minWordLength) {
       return {
         isCorrect: true,
         originalWord: word,
         suggestions: [],
         confidence: 1.0,
-        correctionType: 'none'
+        correctionType: "none",
       };
     }
 
@@ -68,19 +68,19 @@ export class SpellChecker {
         originalWord: word,
         suggestions: [],
         confidence: 1.0,
-        correctionType: 'exact'
+        correctionType: "exact",
       };
     }
 
     // 生成纠错建议
     const suggestions = await this.generateSuggestions(cleanWord, opts);
-    
+
     return {
       isCorrect: false,
       originalWord: word,
       suggestions: suggestions.slice(0, opts.maxSuggestions),
       confidence: suggestions.length > 0 ? 0.8 : 0.0,
-      correctionType: suggestions.length > 0 ? 'suggestion' : 'none'
+      correctionType: suggestions.length > 0 ? "suggestion" : "none",
     };
   }
 
@@ -95,7 +95,10 @@ export class SpellChecker {
   /**
    * 检查并纠正整个查询字符串
    */
-  async checkQuery(query: string, options?: Partial<SpellCheckOptions>): Promise<{
+  async checkQuery(
+    query: string,
+    options?: Partial<SpellCheckOptions>,
+  ): Promise<{
     originalQuery: string;
     correctedQuery: string;
     corrections: Array<{
@@ -117,20 +120,20 @@ export class SpellChecker {
 
     for (const { word, start, end } of words) {
       const checkResult = await this.checkSpelling(word, options);
-      
+
       if (!checkResult.isCorrect && checkResult.suggestions.length > 0) {
         const bestSuggestion = checkResult.suggestions[0];
         corrections.push({
           word,
           suggestion: bestSuggestion,
-          position: start
+          position: start,
         });
 
         // 替换原查询中的单词
         const beforeCorrection = correctedQuery.substring(0, start + offset);
         const afterCorrection = correctedQuery.substring(end + offset);
         correctedQuery = beforeCorrection + bestSuggestion + afterCorrection;
-        
+
         // 更新偏移量
         offset += bestSuggestion.length - word.length;
       }
@@ -140,7 +143,7 @@ export class SpellChecker {
       originalQuery: query,
       correctedQuery,
       corrections,
-      hasCorrections: corrections.length > 0
+      hasCorrections: corrections.length > 0,
     };
   }
 
@@ -176,14 +179,50 @@ export class SpellChecker {
     // 加载常用词词典
     this.commonWords = new Set([
       // 中文常用词
-      '痛经', '疼痛', '缓解', '治疗', '药物', '症状', '月经', '生理',
-      '健康', '医生', '检查', '诊断', '护理', '预防', '调理', '改善',
-      '严重', '轻微', '急性', '慢性', '持续', '间歇', '周期', '规律',
-      
+      "痛经",
+      "疼痛",
+      "缓解",
+      "治疗",
+      "药物",
+      "症状",
+      "月经",
+      "生理",
+      "健康",
+      "医生",
+      "检查",
+      "诊断",
+      "护理",
+      "预防",
+      "调理",
+      "改善",
+      "严重",
+      "轻微",
+      "急性",
+      "慢性",
+      "持续",
+      "间歇",
+      "周期",
+      "规律",
+
       // 英文常用词
-      'pain', 'relief', 'treatment', 'medicine', 'health', 'doctor',
-      'symptom', 'period', 'menstrual', 'cramp', 'therapy', 'care',
-      'severe', 'mild', 'chronic', 'acute', 'cycle', 'regular'
+      "pain",
+      "relief",
+      "treatment",
+      "medicine",
+      "health",
+      "doctor",
+      "symptom",
+      "period",
+      "menstrual",
+      "cramp",
+      "therapy",
+      "care",
+      "severe",
+      "mild",
+      "chronic",
+      "acute",
+      "cycle",
+      "regular",
     ]);
 
     // 加载医疗术语
@@ -196,7 +235,7 @@ export class SpellChecker {
   private cleanWord(word: string): string {
     return word
       .toLowerCase()
-      .replace(/[^\w\u4e00-\u9fff]/g, '') // 保留字母、数字和中文
+      .replace(/[^\w\u4e00-\u9fff]/g, "") // 保留字母、数字和中文
       .trim();
   }
 
@@ -226,10 +265,14 @@ export class SpellChecker {
    * 生成纠错建议
    */
   private async generateSuggestions(
-    word: string, 
-    options: SpellCheckOptions
+    word: string,
+    options: SpellCheckOptions,
   ): Promise<string[]> {
-    const suggestions: Array<{ word: string; distance: number; score: number }> = [];
+    const suggestions: Array<{
+      word: string;
+      distance: number;
+      score: number;
+    }> = [];
 
     // 从常用词典生成建议
     for (const dictWord of this.commonWords) {
@@ -245,7 +288,11 @@ export class SpellChecker {
       for (const medicalTerm of this.medicalTerms) {
         const distance = this.levenshteinDistance(word, medicalTerm);
         if (distance <= options.maxDistance) {
-          const score = this.calculateSuggestionScore(word, medicalTerm, distance);
+          const score = this.calculateSuggestionScore(
+            word,
+            medicalTerm,
+            distance,
+          );
           suggestions.push({ word: medicalTerm, distance, score: score + 0.1 }); // 医疗术语加权
         }
       }
@@ -254,7 +301,7 @@ export class SpellChecker {
     // 按评分排序并返回
     return suggestions
       .sort((a, b) => b.score - a.score)
-      .map(s => s.word)
+      .map((s) => s.word)
       .slice(0, options.maxSuggestions);
   }
 
@@ -279,9 +326,9 @@ export class SpellChecker {
       for (let j = 1; j <= len2; j++) {
         const cost = str1[i - 1] === str2[j - 1] ? 0 : 1;
         matrix[i][j] = Math.min(
-          matrix[i - 1][j] + 1,     // 删除
-          matrix[i][j - 1] + 1,     // 插入
-          matrix[i - 1][j - 1] + cost // 替换
+          matrix[i - 1][j] + 1, // 删除
+          matrix[i][j - 1] + 1, // 插入
+          matrix[i - 1][j - 1] + cost, // 替换
         );
       }
     }
@@ -293,19 +340,20 @@ export class SpellChecker {
    * 计算建议评分
    */
   private calculateSuggestionScore(
-    original: string, 
-    suggestion: string, 
-    distance: number
+    original: string,
+    suggestion: string,
+    distance: number,
   ): number {
     const maxLength = Math.max(original.length, suggestion.length);
-    const similarity = 1 - (distance / maxLength);
-    
+    const similarity = 1 - distance / maxLength;
+
     // 考虑长度相似性
-    const lengthSimilarity = 1 - Math.abs(original.length - suggestion.length) / maxLength;
-    
+    const lengthSimilarity =
+      1 - Math.abs(original.length - suggestion.length) / maxLength;
+
     // 考虑首字母匹配
     const firstCharMatch = original[0] === suggestion[0] ? 0.1 : 0;
-    
+
     return similarity * 0.7 + lengthSimilarity * 0.2 + firstCharMatch;
   }
 
@@ -325,10 +373,10 @@ export class SpellChecker {
       tokens.push({
         word: match[0],
         start: match.index,
-        end: match.index + match[0].length
+        end: match.index + match[0].length,
       });
     }
 
     return tokens;
   }
-} 
+}

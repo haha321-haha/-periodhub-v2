@@ -11,7 +11,7 @@ export default function LanguageSetter() {
     if (typeof document !== 'undefined') {
       const htmlElement = document.documentElement;
       const newLang = locale === 'zh' ? 'zh-CN' : 'en-US';
-      
+
       if (htmlElement.getAttribute('lang') !== newLang) {
         htmlElement.setAttribute('lang', newLang);
       }

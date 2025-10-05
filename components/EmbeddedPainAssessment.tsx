@@ -14,10 +14,10 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
 }) => {
   const [intensity, setIntensity] = useState<string>('');
   const [showQuickResult, setShowQuickResult] = useState(false);
-  
+
   // 临时使用硬编码文本，避免翻译系统问题
   const isZh = locale === 'zh';
-  
+
   const t = {
     title: isZh ? '快速疼痛评估' : 'Quick Pain Assessment',
     subtitle: isZh ? '选择疼痛程度，获得即时建议' : 'Select pain level for instant advice',
@@ -103,8 +103,8 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
                   emoji: '😰'
                 }
               ].map((option) => (
-                <label 
-                  key={option.value} 
+                <label
+                  key={option.value}
                   className="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-white/50 transition-colors"
                 >
                   <input
@@ -178,5 +178,3 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
 };
 
 export default EmbeddedPainAssessment;
-
-

@@ -21,10 +21,10 @@ class RealTimeTranslationValidator {
     try {
       const zhPath = path.join(process.cwd(), 'messages/zh.json');
       const enPath = path.join(process.cwd(), 'messages/en.json');
-      
+
       this.zhTranslations = JSON.parse(fs.readFileSync(zhPath, 'utf8'));
       this.enTranslations = JSON.parse(fs.readFileSync(enPath, 'utf8'));
-      
+
       return true;
     } catch (error) {
       console.error('Failed to load translations:', error.message);
@@ -53,11 +53,11 @@ class RealTimeTranslationValidator {
 
   scanDirectory(dirPath) {
     const items = fs.readdirSync(dirPath);
-    
+
     items.forEach(item => {
       const fullPath = path.join(dirPath, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         this.scanDirectory(fullPath);
       } else if (item.endsWith('.tsx') || item.endsWith('.ts')) {
@@ -69,7 +69,7 @@ class RealTimeTranslationValidator {
   // Analyze translation usage in components
   analyzeTranslationUsage() {
     console.log('🔍 Analyzing translation usage in components...');
-    
+
     this.componentFiles.forEach(filePath => {
       try {
         const content = fs.readFileSync(filePath, 'utf8');
@@ -84,7 +84,7 @@ class RealTimeTranslationValidator {
 
   analyzeFileTranslations(filePath, content) {
     const relativePath = path.relative(process.cwd(), filePath);
-    
+
     // Find translation hook usage
     const translationHooks = [
       'useTranslations',
@@ -93,7 +93,7 @@ class RealTimeTranslationValidator {
     ];
 
     const hookUsage = translationHooks.filter(hook => content.includes(hook));
-    
+
     // Find translation key usage patterns
     const translationKeyPatterns = [
       /t\(['"`]([^'"`]+)['"`]\)/g,
@@ -102,7 +102,7 @@ class RealTimeTranslationValidator {
     ];
 
     const usedKeys = new Set();
-    
+
     translationKeyPatterns.forEach(pattern => {
       let match;
       while ((match = pattern.exec(content)) !== null) {
@@ -144,22 +144,22 @@ class RealTimeTranslationValidator {
 
   findHardcodedStrings(content) {
     const hardcodedStrings = [];
-    
+
     // Look for Chinese characters in strings
     const chineseStringPattern = /['"`]([^'"`]*[\u4e00-\u9fff][^'"`]*)['"`]/g;
     let match;
-    
+
     while ((match = chineseStringPattern.exec(content)) !== null) {
       // Skip if it's in a comment or import
       const beforeMatch = content.substring(0, match.index);
       const lastLineStart = beforeMatch.lastIndexOf('\n');
       const currentLine = content.substring(lastLineStart, match.index + match[0].length);
-      
+
       if (!currentLine.trim().startsWith('//') && !currentLine.includes('import')) {
         hardcodedStrings.push(match[1]);
       }
     }
-    
+
     return hardcodedStrings;
   }
 
@@ -201,13 +201,13 @@ class RealTimeTranslationValidator {
   // Check for translation system integration issues
   checkTranslationSystemIntegration() {
     console.log('🔧 Checking translation system integration...');
-    
+
     // Check if useSymptomAssessment hook properly handles locale
     const hookPath = path.join(process.cwd(), 'app/[locale]/interactive-tools/shared/hooks/useSymptomAssessment.ts');
-    
+
     if (fs.existsSync(hookPath)) {
       const hookContent = fs.readFileSync(hookPath, 'utf8');
-      
+
       const integrationChecks = [
         {
           name: 'Locale parameter in generateRecommendations',
@@ -278,7 +278,7 @@ class RealTimeTranslationValidator {
 
     const reportPath = path.join(process.cwd(), 'real-time-validation-report.json');
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    
+
     console.log(`📊 Real-time validation report saved to: ${reportPath}`);
     return report;
   }
@@ -286,25 +286,25 @@ class RealTimeTranslationValidator {
   // Main execution
   async run() {
     console.log('🚀 Starting real-time translation validation...');
-    
+
     if (!this.loadTranslations()) {
       console.error('Cannot proceed without translation files');
       return null;
     }
-    
+
     this.findComponentFiles();
     this.analyzeTranslationUsage();
     this.checkTranslationSystemIntegration();
-    
+
     const report = this.generateValidationReport();
-    
+
     console.log('\n📊 REAL-TIME VALIDATION SUMMARY:');
     console.log(`Files Analyzed: ${report.summary.totalFiles}`);
     console.log(`Translation Coverage: ${report.summary.translationCoverage}%`);
     console.log(`System Health: ${report.summary.systemHealth}`);
     console.log(`Critical Issues: ${report.summary.criticalIssues}`);
     console.log(`Hardcoded Strings: ${report.summary.totalHardcodedStrings}`);
-    
+
     return report;
   }
 }

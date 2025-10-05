@@ -50,7 +50,7 @@ const allPDFResources = {
 // 测试PDF文件存在性
 function testPDFFilesExist() {
   console.log('🔍 测试PDF文件存在性...\n');
-  
+
   const pdfDir = path.join(__dirname, '..', 'public', 'pdf-files');
   let totalFiles = 0;
   let existingFiles = 0;
@@ -61,7 +61,7 @@ function testPDFFilesExist() {
     const zhFile = `${previewId}.html`;
     const zhPath = path.join(pdfDir, zhFile);
     totalFiles++;
-    
+
     if (fs.existsSync(zhPath)) {
       console.log(`✅ 中文版存在: ${zhFile}`);
       existingFiles++;
@@ -74,7 +74,7 @@ function testPDFFilesExist() {
     const enFile = `${previewId}-en.html`;
     const enPath = path.join(pdfDir, enFile);
     totalFiles++;
-    
+
     if (fs.existsSync(enPath)) {
       console.log(`✅ 英文版存在: ${enFile}`);
       existingFiles++;
@@ -87,7 +87,7 @@ function testPDFFilesExist() {
   console.log('\n📊 文件存在性测试结果:');
   console.log(`✅ 存在文件: ${existingFiles}/${totalFiles}`);
   console.log(`❌ 缺失文件: ${missingFiles.length}`);
-  
+
   if (missingFiles.length > 0) {
     console.log(`⚠️ 缺失的文件: ${missingFiles.join(', ')}`);
   }
@@ -103,7 +103,7 @@ function testPDFFilesExist() {
 // 测试PDF内容质量
 function testPDFContentQuality() {
   console.log('\n🎯 测试PDF内容质量...\n');
-  
+
   const pdfDir = path.join(__dirname, '..', 'public', 'pdf-files');
   let qualityIssues = [];
   let validFiles = 0;
@@ -133,10 +133,10 @@ function testPDFContentQuality() {
     // 测试中文版
     const zhFile = `${resourceId}.html`;
     const zhPath = path.join(pdfDir, zhFile);
-    
+
     if (fs.existsSync(zhPath)) {
       const content = fs.readFileSync(zhPath, 'utf8');
-      
+
       if (content.length < 1000) {
         qualityIssues.push(`${zhFile}: 内容过短 (${content.length} 字符)`);
       } else if (!content.includes('Period Hub')) {
@@ -152,10 +152,10 @@ function testPDFContentQuality() {
     // 测试英文版
     const enFile = `${resourceId}-en.html`;
     const enPath = path.join(pdfDir, enFile);
-    
+
     if (fs.existsSync(enPath)) {
       const content = fs.readFileSync(enPath, 'utf8');
-      
+
       if (content.length < 1000) {
         qualityIssues.push(`${enFile}: 内容过短 (${content.length} 字符)`);
       } else if (!content.includes('Period Hub')) {
@@ -172,7 +172,7 @@ function testPDFContentQuality() {
   console.log('\n📊 内容质量测试结果:');
   console.log(`✅ 质量合格: ${validFiles} 个文件`);
   console.log(`⚠️ 质量问题: ${qualityIssues.length} 个问题`);
-  
+
   if (qualityIssues.length > 0) {
     console.log('质量问题详情:');
     qualityIssues.forEach(issue => console.log(`  - ${issue}`));
@@ -199,7 +199,7 @@ function generateTestReport(fileTest, qualityTest) {
   // 计算总体状态
   const fileSuccessRate = (fileTest.existing / fileTest.total) * 100;
   const qualitySuccessRate = qualityTest.validFiles / (17 * 2) * 100; // 17个新资源 * 2语言
-  
+
   if (fileSuccessRate >= 95 && qualitySuccessRate >= 90) {
     report.overallStatus = 'excellent';
   } else if (fileSuccessRate >= 90 && qualitySuccessRate >= 80) {
@@ -217,16 +217,16 @@ function generateTestReport(fileTest, qualityTest) {
 function runAllTests() {
   console.log('🚀 Period Hub PDF资源完整性测试');
   console.log('=======================================\n');
-  
+
   // 测试文件存在性
   const fileTest = testPDFFilesExist();
-  
+
   // 测试内容质量
   const qualityTest = testPDFContentQuality();
-  
+
   // 生成报告
   const report = generateTestReport(fileTest, qualityTest);
-  
+
   console.log('\n📋 测试总结报告');
   console.log('=======================================');
   console.log(`测试时间: ${new Date().toLocaleString()}`);
@@ -235,12 +235,12 @@ function runAllTests() {
   console.log(`文件存在率: ${((fileTest.existing / fileTest.total) * 100).toFixed(1)}%`);
   console.log(`内容质量率: ${((qualityTest.validFiles / (17 * 2)) * 100).toFixed(1)}%`);
   console.log(`总体状态: ${report.overallStatus.toUpperCase()}`);
-  
+
   // 保存详细报告
   const reportPath = path.join(__dirname, '..', 'pdf-test-report.json');
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
   console.log(`\n📄 详细报告已保存到: pdf-test-report.json`);
-  
+
   // 提供后续建议
   console.log('\n💡 后续建议:');
   if (report.overallStatus === 'excellent') {
@@ -256,7 +256,7 @@ function runAllTests() {
       console.log('  - 修复内容质量问题');
     }
   }
-  
+
   return report;
 }
 
@@ -271,4 +271,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { runAllTests, allPDFResources }; 
+module.exports = { runAllTests, allPDFResources };

@@ -37,7 +37,3 @@ echo "🚀 部署到Vercel..."
 npx vercel --prod
 
 echo "✅ 部署完成！"
-
-
-
-

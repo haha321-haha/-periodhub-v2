@@ -13,7 +13,7 @@
 
 1. **疼痛机制科学解释**：
    - Gate Control Theory（闸门控制理论）
-   - 血管扩张与循环改善机制  
+   - 血管扩张与循环改善机制
    - 前列腺素合成抑制原理
    - 神经传导机制
 
@@ -55,7 +55,7 @@
    - **工具功能**：Pain Tracking System、Cycle Tracker等工具确实存在
 
 2. **SEO问题确实严重**：
-   - 用户搜索"痛经疼痛原理" → 网站标题"Natural Therapies" ❌ **0%匹配**  
+   - 用户搜索"痛经疼痛原理" → 网站标题"Natural Therapies" ❌ **0%匹配**
    - 用户搜索"痛经计算器" → 网站提供"Pain Tracking System" ❌ **名称不匹配**
    - 用户搜索"痛经补镁" → 内容仅1句话提及 ❌ **深度不足**
 
@@ -72,7 +72,7 @@
 
 ### 1. **标题立即优化**（本周完成）
 ```
-❌ 当前：Natural Therapies  
+❌ 当前：Natural Therapies
 ✅ 改为：Period Pain Mechanisms: Scientific Explanation & Natural Relief
 
 ❌ 当前：Interactive Tools
@@ -94,7 +94,7 @@
 基于你的SEO数据分析，执行上述优化后：
 
 - **排名提升**：目标关键词从未收录提升至TOP 3-5
-- **CTR增长**：预计整体点击率提升25-40%  
+- **CTR增长**：预计整体点击率提升25-40%
 - **用户满意度**：解决"内容不匹配"的根本问题
 
 **总结**：这是一个典型的"好内容但SEO不佳"案例。通过精准的关键词匹配和内容重组，无需大量新增内容就能显著提升搜索表现。你的网站内容质量很高，只是需要让用户更容易找到它们！
@@ -112,7 +112,7 @@
 ❌ 当前: /en/natural-therapies → "Natural Therapies"
 ✅ 优化: /en/period-pain-mechanisms → "Period Pain Mechanisms: Scientific Explanation & Natural Relief"
 
-❌ 当前: /en/interactive-tools → "Interactive Tools" 
+❌ 当前: /en/interactive-tools → "Interactive Tools"
 ✅ 优化: /en/period-pain-calculator → "Period Pain Calculator & Menstrual Cycle Tracker"
 ```
 
@@ -168,7 +168,7 @@
 ### Food Sources & Meal Planning
 **High Magnesium Foods (per 100g):**
 - Dark chocolate: 228mg
-- Pumpkin seeds: 262mg  
+- Pumpkin seeds: 262mg
 - Spinach: 79mg
 - Avocado: 58mg
 
@@ -213,7 +213,7 @@
     "name": "Dysmenorrhea",
     "alternateName": ["Period Pain", "Menstrual Cramps", "痛经"],
     "associatedAnatomy": {
-      "@type": "AnatomicalStructure",  
+      "@type": "AnatomicalStructure",
       "name": "Uterus"
     }
   },
@@ -239,7 +239,7 @@
 #### Pain Tracking System → 痛经智能分析器
 ```
 功能描述优化：
-❌ 当前: "Track your symptoms"  
+❌ 当前: "Track your symptoms"
 ✅ 优化: "AI-powered period pain calculator that predicts your cycle, analyzes pain patterns, and provides personalized relief recommendations"
 
 CTA按钮优化：
@@ -249,7 +249,7 @@ CTA按钮优化：
 
 #### 新增工具功能：
 1. **疼痛强度预测器**：根据历史数据预测下次经期疼痛程度
-2. **镁需求量计算器**：基于体重、疼痛程度计算个性化镁补充建议  
+2. **镁需求量计算器**：基于体重、疼痛程度计算个性化镁补充建议
 3. **热敷时间优化器**：根据疼痛类型推荐最佳热敷温度和时长
 
 ### B. 工具页面SEO元素
@@ -272,7 +272,7 @@ CTA按钮优化：
 #### 高价值中文长尾词：
 ```
 - "痛经为什么会痛到无法忍受"
-- "经期疼痛的医学原理解释"  
+- "经期疼痛的医学原理解释"
 - "补镁对痛经真的有用吗"
 - "痛经疼痛等级测试"
 - "经期第一天疼痛最厉害的原因"
@@ -282,7 +282,7 @@ CTA按钮优化：
 ```
 /zh/痛经科学解析/
 ├── 痛经疼痛原理详解
-├── 前列腺素与炎症机制  
+├── 前列腺素与炎症机制
 ├── 神经传导路径分析
 └── 子宫收缩生理机制
 
@@ -297,7 +297,7 @@ CTA按钮优化：
 ```
 目标学术词汇：
 - prostaglandin-induced dysmenorrhea
-- primary dysmenorrhea pathophysiology  
+- primary dysmenorrhea pathophysiology
 - magnesium deficiency menstrual pain
 - gate control theory menstrual cramps
 - cyclooxygenase inhibition period pain
@@ -310,7 +310,7 @@ CTA按钮优化：
 | 关键词类型 | 当前排名 | 目标排名 | 预期CTR提升 |
 |------------|----------|----------|-------------|
 | 痛经疼痛原理 | 未收录 | TOP 3 | +25% |
-| period pain mechanisms | 未收录 | TOP 5 | +20% |  
+| period pain mechanisms | 未收录 | TOP 5 | +20% |
 | 痛经补镁 | 未收录 | TOP 3 | +30% |
 | magnesium menstrual cramps | 8-10 | TOP 5 | +40% |
 | 痛经计算器 | 未收录 | TOP 3 | +35% |
@@ -320,7 +320,7 @@ CTA按钮优化：
 ```
 月度有机流量增长预测：
 第1个月：+15% (quick wins)
-第2个月：+35% (内容优化生效)  
+第2个月：+35% (内容优化生效)
 第3个月：+60% (工具优化完成)
 第6个月：+120% (长尾关键词效应)
 ```
@@ -330,7 +330,7 @@ CTA按钮优化：
 ```
 用户行为改善：
 - 页面停留时间：+45%
-- 工具使用率：+80%  
+- 工具使用率：+80%
 - 内容分享率：+25%
 - 回访率：+50%
 ```
@@ -343,7 +343,7 @@ CTA按钮优化：
 - [ ] 扩展镁的内容至500字以上
 - [ ] 为工具页面添加"计算器"相关描述
 
-### 下周执行（优先级⭐⭐）  
+### 下周执行（优先级⭐⭐）
 - [ ] 创建中文版痛经机制专题页面
 - [ ] 优化工具页面URL和标题
 - [ ] 添加结构化数据标记
@@ -365,15 +365,15 @@ CTA按钮优化：
 
 ✅ 核心认同点
 
-1. 内容价值无需重构  
-   • 现有机制解释（闸门控制理论/前列腺素原理）专业度足够  
+1. 内容价值无需重构
+   • 现有机制解释（闸门控制理论/前列腺素原理）专业度足够
 
-   • 工具功能设计（疼痛追踪/周期预测）已满足核心需求  
+   • 工具功能设计（疼痛追踪/周期预测）已满足核心需求
 
    • 问题本质是内容与搜索意图的“连接失效”
 
-2. 关键词重组是最高效解法  
-   • 通过标题/URL/H标签优化可解决80%曝光问题  
+2. 关键词重组是最高效解法
+   • 通过标题/URL/H标签优化可解决80%曝光问题
 
    • 如 痛经疼痛原理 → 前列腺素机制 的搜索词匹配
 
@@ -431,21 +431,21 @@ graph TD
 
 💡 为什么这些补充至关重要？
 
-1. 医疗信任壁垒  
+1. 医疗信任壁垒
    普通用户对“痛经机制”内容可能存疑，权威背书能提升22%的内容采纳率（来源：JAMA研究）
 
-2. 疼痛场景特殊性  
+2. 疼痛场景特殊性
    月经疼痛常伴随行动能力下降，需优先提供“躺着也能获取”的解决方案
 
-3. 法律风险防控  
+3. 法律风险防控
    未声明镁补充上限可能导致用户过量服用（尤其肾功能障碍者）
 
 ✅ 最终结论
 
 完全同意只需通过SEO重组释放现有内容价值，但必须叠加医疗健康领域的专项优化：
-1. 关键词重组是“发动机” → 解决曝光问题  
-2. E-A-T建设是“安全带” → 建立医疗信任  
-3. 场景化设计是“方向盘” → 精准对接需求  
+1. 关键词重组是“发动机” → 解决曝光问题
+2. E-A-T建设是“安全带” → 建立医疗信任
+3. 场景化设计是“方向盘” → 精准对接需求
 
 这三者结合才能让优质内容真正服务目标用户。现有内容价值约80分，通过上述优化可提升至95分，而成本仅需新增20%工作量。
 
@@ -494,7 +494,7 @@ gantt
     <li>按压三阴交穴位（配简易手绘示意图）</li>
   </ol>
   <!-- 保留此区域为后续功能入口 -->
-  <div id="pain-tracker-placeholder">📆 疼痛追踪功能开发中(9月上线)</div>  
+  <div id="pain-tracker-placeholder">📆 疼痛追踪功能开发中(9月上线)</div>
 </div>
 
 
@@ -516,7 +516,7 @@ function quickPainAssessment() {
   const Q1 = "请选择当前疼痛程度：[滑块1-10级]";
   const Q2 = "疼痛是否伴随：[多选] 呕吐/头晕/腹泻";
   const Q3 = "上次月经日期：[日期选择器]";
-  
+
   // 输出简易建议（无需数据库）
   if(painLevel > 7) return "⚠️ 建议：立即热敷+服用镁剂400mg";
   else return "💡 建议：生姜茶+轻度骨盆运动";
@@ -526,8 +526,8 @@ function quickPainAssessment() {
 2. 动态页面元描述
 
 // 根据访问IP自动切换中英文描述（无需多语言路由）
-$meta_desc = ($region == 'CN') ? 
-  "痛经疼痛原理的医学解析｜涵盖前列腺素机制、神经传导路径与子宫收缩原理" : 
+$meta_desc = ($region == 'CN') ?
+  "痛经疼痛原理的医学解析｜涵盖前列腺素机制、神经传导路径与子宫收缩原理" :
   "Prostaglandins, Nerve Pathways & Uterine Contractions: Science of Period Pain";
 
 
@@ -571,20 +571,20 @@ trackEvent('SelfTest_Completed') // 自测工具提交
 
 💡 MVP阶段核心原则
 
-1. 不做完美主义重构  
-   ✅ 用<!-- 占位符 -->标注开发中功能  
+1. 不做完美主义重构
+   ✅ 用<!-- 占位符 -->标注开发中功能
    ❌ 不隐藏未完成内容
 
-2. 医疗合规优先  
+2. 医疗合规优先
    即使简单声明也需包含：
    <small>（专业医疗建议待功能完善后提供）</small>
-   
 
-3. 功能价值可视化  
-   在占位区域添加：  
-   + [开发进度条] 疼痛预测功能完成度75% 
+
+3. 功能价值可视化
+   在占位区域添加：
+   + [开发进度条] 疼痛预测功能完成度75%
    + 点击提前预约测试资格
-   
+
 
 最终效果：用10%的开发成本解决80%的SEO曝光问题，同时建立医疗信任基线。视频与高级功能可待资源到位后迭代补充。
 
@@ -646,7 +646,7 @@ ROI：约1:15（极高性价比）
 
 你的方案完美解决了：
 - **资源约束下的效果最大化**
-- **医疗合规与用户体验的平衡**  
+- **医疗合规与用户体验的平衡**
 - **MVP迭代与长期规划的衔接**
 - **数据驱动的可持续优化机制**
 
@@ -667,7 +667,7 @@ ROI：约1:15（极高性价比）
 ❌ 当前: <title>Natural Therapies | PeriodHub</title>
 ✅ 修改为: <title>Period Pain Science: Mechanisms & Relief (Clinically Reviewed)</title>
 
-❌ 当前: <h1>Natural Therapies</h1>  
+❌ 当前: <h1>Natural Therapies</h1>
 ✅ 修改为: <h1>痛经疼痛原理的科学解析 | Period Pain Mechanisms</h1>
 
 <!-- interactive-tools 页面 -->
@@ -688,13 +688,13 @@ location /en/natural-therapies {
 #### 在natural-therapies页面顶部插入：
 ```html
 <!-- 紧急缓解指南 - 置于现有内容最前面 -->
-<div class="emergency-relief-guide" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%); 
+<div class="emergency-relief-guide" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
      border-left: 4px solid #e91e63; padding: 20px; margin: 20px 0; border-radius: 8px;">
-  
+
   <h2 style="color: #c2185b; margin-bottom: 15px;">
     💢 经期剧痛紧急处理 | Emergency Period Pain Relief
   </h2>
-  
+
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
     <!-- 中文版 -->
     <div>
@@ -705,13 +705,13 @@ location /en/natural-therapies {
         <li><strong>穴位</strong>：按压三阴交穴（内踝上3寸）</li>
         <li><strong>姿势</strong>：膝胸位或侧卧位缓解</li>
       </ol>
-      
+
       <div style="background: #fff3e0; padding: 10px; border-radius: 4px; margin-top: 10px;">
         <strong>⚠️ 紧急就医信号：</strong><br>
         疼痛伴随呕吐、发烧(>38°C)、剧烈头痛时请立即就医
       </div>
     </div>
-    
+
     <!-- 英文版 -->
     <div>
       <h3>🚨 Quick Relief Steps:</h3>
@@ -721,16 +721,16 @@ location /en/natural-therapies {
         <li><strong>Acupressure</strong>: Press Sanyinjiao point</li>
         <li><strong>Position</strong>: Knee-chest or side lying</li>
       </ol>
-      
+
       <div style="background: #fff3e0; padding: 10px; border-radius: 4px; margin-top: 10px;">
         <strong>⚠️ Seek immediate care if:</strong><br>
         Pain with vomiting, fever >38°C, or severe headache
       </div>
     </div>
   </div>
-  
+
   <!-- 功能占位区 -->
-  <div style="text-align: center; margin-top: 15px; padding: 10px; 
+  <div style="text-align: center; margin-top: 15px; padding: 10px;
        background: rgba(255,255,255,0.7); border-radius: 4px; border: 2px dashed #e91e63;">
     <p style="margin: 0; color: #666;">
       📱 <strong>个性化疼痛追踪器开发中</strong> | Pain Tracker Coming Soon (September 2024)<br>
@@ -745,11 +745,11 @@ location /en/natural-therapies {
 #### 在页面底部添加：
 ```html
 <!-- 医疗免责声明 - 法律风险防控 -->
-<div class="medical-disclaimer" style="background: #f5f5f5; padding: 20px; border-radius: 8px; 
+<div class="medical-disclaimer" style="background: #f5f5f5; padding: 20px; border-radius: 8px;
      border: 1px solid #ddd; margin: 30px 0; font-size: 14px; line-height: 1.6;">
-  
+
   <h3 style="color: #d32f2f; margin-bottom: 15px;">⚕️ 医疗声明 | Medical Disclaimer</h3>
-  
+
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
     <div>
       <p><strong>重要提醒：</strong></p>
@@ -759,12 +759,12 @@ location /en/natural-therapies {
         <li>青少年(<18岁)请在医生指导下使用</li>
         <li>肾功能障碍者禁用高剂量镁剂</li>
       </ul>
-      
+
       <p><strong>医学审核：</strong><br>
       Dr. Sarah Chen, MD (妇产科主治医师)*<br>
       <small style="color: #666;">*审核员资质认证中，如有疑问请咨询你的医生</small></p>
     </div>
-    
+
     <div>
       <p><strong>Important Notice:</strong></p>
       <ul>
@@ -773,13 +773,13 @@ location /en/natural-therapies {
         <li>Teens (<18yr) require medical supervision</li>
         <li>Kidney disease patients avoid high-dose Mg</li>
       </ul>
-      
+
       <p><strong>Medical Review:</strong><br>
       Dr. Sarah Chen, MD (OB/GYN)*<br>
       <small style="color: #666;">*Credential verification pending</small></p>
     </div>
   </div>
-  
+
   <div style="border-top: 1px solid #ddd; padding-top: 15px; margin-top: 15px; text-align: center;">
     <small style="color: #666;">
       本内容仅供教育用途，不替代专业医疗建议。如有疑问请咨询医生。<br>
@@ -805,13 +805,13 @@ location /en/natural-therapies {
 <body>
 <div class="assessment-container" style="max-width: 600px; margin: 0 auto; padding: 20px;">
     <h1>💊 痛经严重度快速评估 | Quick Pain Assessment</h1>
-    
+
     <form id="painAssessment">
         <!-- 问题1：疼痛程度 -->
         <div class="question-block" style="margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
             <label><strong>1. 当前疼痛程度 | Current Pain Level (0-10):</strong></label>
-            <input type="range" id="painLevel" min="0" max="10" value="5" 
-                   oninput="document.getElementById('painValue').innerHTML = this.value" 
+            <input type="range" id="painLevel" min="0" max="10" value="5"
+                   oninput="document.getElementById('painValue').innerHTML = this.value"
                    style="width: 100%; margin: 10px 0;">
             <div style="display: flex; justify-content: space-between; font-size: 12px;">
                 <span>无痛 No Pain</span>
@@ -819,7 +819,7 @@ location /en/natural-therapies {
                 <span>剧痛 Severe</span>
             </div>
         </div>
-        
+
         <!-- 问题2：伴随症状 -->
         <div class="question-block" style="margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
             <label><strong>2. 伴随症状 | Associated Symptoms:</strong></label><br>
@@ -828,7 +828,7 @@ location /en/natural-therapies {
             <input type="checkbox" id="diarrhea" value="diarrhea"> <label for="diarrhea">腹泻 Diarrhea</label><br>
             <input type="checkbox" id="fatigue" value="fatigue"> <label for="fatigue">乏力 Fatigue</label>
         </div>
-        
+
         <!-- 问题3：影响程度 -->
         <div class="question-block" style="margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
             <label><strong>3. 对日常活动的影响 | Impact on Daily Activities:</strong></label><br>
@@ -836,16 +836,16 @@ location /en/natural-therapies {
             <input type="radio" id="moderate" name="impact" value="moderate"> <label for="moderate">中度影响 Moderate impact</label><br>
             <input type="radio" id="severe" name="impact" value="severe"> <label for="severe">无法正常活动 Cannot function</label>
         </div>
-        
-        <button type="button" onclick="calculateRecommendation()" 
-                style="background: #e91e63; color: white; padding: 15px 30px; border: none; border-radius: 8px; 
+
+        <button type="button" onclick="calculateRecommendation()"
+                style="background: #e91e63; color: white; padding: 15px 30px; border: none; border-radius: 8px;
                        font-size: 16px; cursor: pointer; width: 100%;">
             获取个性化建议 | Get Personalized Advice
         </button>
     </form>
-    
+
     <!-- 结果显示区域 -->
-    <div id="recommendation" style="display: none; margin-top: 30px; padding: 20px; 
+    <div id="recommendation" style="display: none; margin-top: 30px; padding: 20px;
          background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%); border-radius: 8px; border: 2px solid #4caf50;">
     </div>
 </div>
@@ -858,14 +858,14 @@ function calculateRecommendation() {
     checkboxes.forEach(id => {
         if (document.getElementById(id).checked) symptoms.push(id);
     });
-    
+
     const impact = document.querySelector('input[name="impact"]:checked')?.value || 'mild';
-    
+
     let recommendation = generateRecommendation(painLevel, symptoms, impact);
-    
+
     document.getElementById('recommendation').innerHTML = recommendation;
     document.getElementById('recommendation').style.display = 'block';
-    
+
     // 滚动到结果
     document.getElementById('recommendation').scrollIntoView({ behavior: 'smooth' });
 }
@@ -874,7 +874,7 @@ function generateRecommendation(painLevel, symptoms, impact) {
     let advice = '';
     let urgency = '';
     let methods = '';
-    
+
     // 根据疼痛程度生成建议
     if (painLevel <= 3) {
         urgency = '🟢 轻度疼痛 | Mild Pain';
@@ -904,7 +904,7 @@ function generateRecommendation(painLevel, symptoms, impact) {
             • 考虑就医咨询 | Consider medical consultation
         `;
     }
-    
+
     // 伴随症状警示
     if (symptoms.includes('nausea') && painLevel > 7) {
         advice += `<div style="background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 10px 0;">
@@ -912,7 +912,7 @@ function generateRecommendation(painLevel, symptoms, impact) {
             <strong>Warning:</strong> Pain with nausea may require medical evaluation
         </div>`;
     }
-    
+
     return `
         <h3>${urgency}</h3>
         <div style="line-height: 1.8;">
@@ -923,9 +923,9 @@ function generateRecommendation(painLevel, symptoms, impact) {
             <small><strong>声明：</strong>此建议仅供参考，不替代医生诊断。如症状持续或加重请就医。<br>
             <strong>Disclaimer:</strong> For guidance only, not medical diagnosis. Seek healthcare if symptoms persist.</small>
         </div>
-        
+
         <div style="text-align: center; margin-top: 15px;">
-            <button onclick="location.reload()" style="background: #666; color: white; padding: 8px 16px; 
+            <button onclick="location.reload()" style="background: #666; color: white; padding: 8px 16px;
                     border: none; border-radius: 4px; cursor: pointer;">
                 重新评估 | Reassess
             </button>
@@ -944,32 +944,32 @@ function generateRecommendation(painLevel, symptoms, impact) {
 <!-- 在"Scientific Foundation"章节前插入 -->
 <div class="seo-content-bridge" style="margin: 30px 0;">
     <h2>痛经疼痛的医学原理 | Medical Mechanisms of Period Pain</h2>
-    
+
     <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0;">
         <h3>🧠 为什么经期会疼痛？Why Do Periods Hurt?</h3>
         <p style="line-height: 1.8;">
             <strong>痛经的科学原理</strong>主要涉及三个生理过程：<br>
             <strong>Period pain mechanisms</strong> involve three key physiological processes:
         </p>
-        
+
         <ol style="line-height: 2;">
             <li><strong>前列腺素释放 | Prostaglandin Release</strong>：
                 子宫内膜脱落时释放PGF2α，引起子宫强烈收缩<br>
                 <small style="color: #666;">Endometrial shedding releases PGF2α, causing intense uterine contractions</small>
             </li>
-            
+
             <li><strong>疼痛信号传导 | Pain Signal Transmission</strong>：
                 通过脊髓传导至大脑痛觉中枢，闸门控制理论解释缓解机制<br>
                 <small style="color: #666;">Signals travel via spinal cord to brain pain centers; gate control theory explains relief</small>
             </li>
-            
+
             <li><strong>炎症反应 | Inflammatory Response</strong>：
                 局部炎症因子增加血管通透性，加重疼痛敏感性<br>
                 <small style="color: #666;">Local inflammatory factors increase vascular permeability, enhancing pain sensitivity</small>
             </li>
         </ol>
-        
-        <div style="background: linear-gradient(90deg, #e3f2fd 0%, #f3e5f5 100%); 
+
+        <div style="background: linear-gradient(90deg, #e3f2fd 0%, #f3e5f5 100%);
              padding: 15px; border-radius: 6px; margin: 15px 0; border-left: 4px solid #2196f3;">
             <h4 style="color: #1976d2; margin-bottom: 10px;">💡 补镁缓解痛经的科学机制</h4>
             <p style="margin: 0; line-height: 1.7;">
@@ -999,7 +999,7 @@ function generateRecommendation(painLevel, symptoms, impact) {
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'GA_MEASUREMENT_ID');
-  
+
   // 医疗内容专用事件追踪
   function trackMedicalEvent(eventName, contentType, painLevel = null) {
     gtag('event', eventName, {
@@ -1010,7 +1010,7 @@ function generateRecommendation(painLevel, symptoms, impact) {
       'language': document.documentElement.lang || 'en'
     });
   }
-  
+
   // 自动追踪关键交互
   document.addEventListener('DOMContentLoaded', function() {
     // 紧急指南展开
@@ -1018,13 +1018,13 @@ function generateRecommendation(painLevel, symptoms, impact) {
     if (emergencyBox) {
       emergencyBox.addEventListener('click', () => trackMedicalEvent('emergency_guide_used', 'pain_relief'));
     }
-    
+
     // 镁补充内容点击
     const magnesiumContent = document.querySelector('[data-content="magnesium"]');
     if (magnesiumContent) {
       magnesiumContent.addEventListener('click', () => trackMedicalEvent('magnesium_guide_viewed', 'supplement_info'));
     }
-    
+
     // 医疗声明查看
     const disclaimer = document.querySelector('.medical-disclaimer');
     if (disclaimer) {
@@ -1050,12 +1050,12 @@ const targetKeywords = [
   // 中文核心词
   '痛经疼痛原理', '痛经机制', '经期疼痛原因', '痛经为什么痛', '痛经补镁',
   '经期补充镁', '痛经科学解释', '月经疼痛机制', '痛经计算器', '经期疼痛评估',
-  
-  // 英文核心词  
+
+  // 英文核心词
   'period pain mechanisms', 'menstrual cramp causes', 'why periods hurt',
   'dysmenorrhea pathophysiology', 'magnesium period pain', 'menstrual pain science',
   'period pain calculator', 'menstrual pain assessment', 'prostaglandin period pain',
-  
+
   // 长尾词
   '痛经疼痛程度评估', '经期镁缺乏症状', '月经期间补镁剂量',
   'how does magnesium help period cramps', 'period pain relief mechanisms',
@@ -1065,7 +1065,7 @@ const targetKeywords = [
 // 监测指标目标值
 const performanceTargets = {
   'impressions_growth': 150,      // 曝光增长150%
-  'ctr_improvement': 40,          // CTR提升40%  
+  'ctr_improvement': 40,          // CTR提升40%
   'avg_position_target': 5,       // 平均排名进入TOP 5
   'chinese_traffic_ratio': 35     // 中文流量占比35%+
 };
@@ -1127,7 +1127,7 @@ addEventListener('fetch', event => {
 
 async function handleRequest(request) {
   const url = new URL(request.url)
-  
+
   // 标题重写规则
   if (url.pathname.includes('natural-therapies')) {
     const response = await fetch(request)
@@ -1136,12 +1136,12 @@ async function handleRequest(request) {
       .on('h1', { element: e => e.setInnerText('痛经疼痛原理的科学解析') })
     return rewriter.transform(response)
   }
-  
+
   // URL重定向规则
   if (url.pathname === '/en/natural-therapies') {
     return Response.redirect('https://www.periodhub.health/en/menstrual-pain-mechanisms', 301)
   }
-  
+
   return fetch(request)
 }
 
@@ -1240,7 +1240,7 @@ if (navigator.geolocation) {
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
     document.getElementById('emergency-care').innerHTML = `
-      <a href="https://maps.google.com/maps?q=emergency+hospital&location=${lat},${lng}" 
+      <a href="https://maps.google.com/maps?q=emergency+hospital&location=${lat},${lng}"
          target="_blank" style="color:#d32f2f;">
         🚑 最近急诊医院导航（距您${calcDistance(lat,lng)}公里）
       </a>
@@ -1250,7 +1250,7 @@ if (navigator.geolocation) {
 
 function calcDistance(userLat, userLng) {
   // 简版距离计算（实际需接入地图API）
-  return (Math.abs(userLat - 39.9) + Math.abs(userLng - 116.4)).toFixed(1); 
+  return (Math.abs(userLat - 39.9) + Math.abs(userLng - 116.4)).toFixed(1);
 }
 </script>
 
@@ -1267,7 +1267,7 @@ timeline
     疼痛自测MVP     ： 2024-08-07 ： 2d
     关键词埋点      ： 2024-08-09 ： 1d
     section 本月收尾
-    首轮效果评估     ： 2024-08-20 
+    首轮效果评估     ： 2024-08-20
     视频占位区      ： 2024-08-25
 
 
@@ -1283,7 +1283,7 @@ timeline
 2. 医疗合规三防线
    graph LR
       动态剂量校验 --> 药物交互警告 --> 急诊分流机制
-   
+
 
 3. 搜索意图精准对接
    • “痛经计算器” → 提供临时替代方案+开发倒计时
@@ -1296,7 +1296,7 @@ timeline
    journey
       title 医疗信任建设路径
       占位声明 --> 资质进度条 --> 完整认证
-   
+
 
 预期交付：通过此方案，3天内解决核心关键词曝光问题，2周内建立基础医疗信任，4周后自然流量可提升50%+，为后续视频和高级功能上线奠定坚实基础。
 
@@ -1479,7 +1479,7 @@ PeriodHub网站在痛经健康领域有良好的内容基础。通过系统性�
 #### 技术实施优先级重排：
 ```
 Phase 1 (本周): 标题/元描述优化 + 医疗声明
-Phase 2 (2周后): 内容重组 + 简化版自测工具  
+Phase 2 (2周后): 内容重组 + 简化版自测工具
 Phase 3 (1个月后): 基于实际效果数据决定高级功能
 ```
 
@@ -1526,9 +1526,9 @@ Phase 3 (1个月后): 基于实际效果数据决定高级功能
 <div class="magnesium-guide">
   <h3>镁补充方案</h3>
   <div style="position:relative">
-    <input type="number" id="mgDose" placeholder="输入剂量(mg)" 
+    <input type="number" id="mgDose" placeholder="输入剂量(mg)"
            oninput="checkDoseSafety(this.value)" style="padding:8px; width:200px">
-    
+
     <div id="doseAlert" style="display:none; background:#ffebee; padding:10px; margin-top:10px; border-radius:4px">
       ⚠️ <span id="alertText"></span>
     </div>
@@ -1539,11 +1539,11 @@ Phase 3 (1个月后): 基于实际效果数据决定高级功能
 function checkDoseSafety(dose) {
   const alertBox = document.getElementById('doseAlert')
   if (!dose) return alertBox.style.display = 'none'
-  
+
   let alertMsg = ''
   if (dose > 400) alertMsg = '超过安全上限！建议剂量≤400mg/日'
   else if (dose > 300) alertMsg = '接近上限剂量，建议分次服用'
-  
+
   if (alertMsg) {
     document.getElementById('alertText').innerText = alertMsg
     alertBox.style.display = 'block'
@@ -1611,7 +1611,7 @@ document.getElementById('citySelector').addEventListener('change', function() {
 
 - 预计CTR增长35-40%
 + 阶梯式增长模型：
-   • 第4周：+8-12% 
+   • 第4周：+8-12%
    • 第8周：+15-20%
    • 第12周：+25-30%
 
@@ -1648,47 +1648,47 @@ graph LR
    • 每篇专业文章需经：
      flowchart LR
         内容创作 --> 医学背景编辑初审 --> 法律合规复核 --> 发布
-     
+
 
 2. 动态效果监测体系
    // 核心指标异常报警
    function monitorSEOHealth() {
      const metrics = {
-       bounceRate: getBounceRate(), 
+       bounceRate: getBounceRate(),
        avgPosition: getAvgRank(),
        ctr: getCTR()
      }
-     
+
      if (metrics.ctr > 40) {
        console.warn("⚠️ 异常高CTR：可能存在点击欺诈")
        sendAlert('CTR异常升高需人工复核')
      }
    }
-   
+
 
 3. 应急预案
    • 内容下架标准：
      + 收到2次以上用户安全投诉
      + 专业机构发函质疑
      + 监管机构问询
-     
+
 
 💎 最终方案价值点
 
-1. 合规性  
-   ▸ 彻底规避虚假背书风险  
-   ▸ 药物安全实时校验系统  
-   ▸ 双人内容审核机制  
+1. 合规性
+   ▸ 彻底规避虚假背书风险
+   ▸ 药物安全实时校验系统
+   ▸ 双人内容审核机制
 
-2. 可行性  
-   ▸ 技术方案全兼容虚拟主机  
-   ▸ 无企业级工具依赖  
-   ▸ 前端主导轻量开发  
+2. 可行性
+   ▸ 技术方案全兼容虚拟主机
+   ▸ 无企业级工具依赖
+   ▸ 前端主导轻量开发
 
-3. 可持续性  
-   ▸ 符合医疗行业增长规律  
-   ▸ 建立内容质量护城河  
-   ▸ 风险防控机制完善  
+3. 可持续性
+   ▸ 符合医疗行业增长规律
+   ▸ 建立内容质量护城河
+   ▸ 风险防控机制完善
 
 执行建议：立即启动Phase 1的医疗合规改造，同步进行标题/URL基础优化。技术团队资源应优先保障安全校验功能，内容团队聚焦权威文献引用建设。首月核心目标不是流量增长，而是建立安全的运营基础。
 
@@ -1785,7 +1785,7 @@ alertMsg = '个体剂量差异较大，请咨询医生确定适合剂量'
 
 建议优先级重排：
 1. **内容权威性建设**（投入70%精力）
-2. **基础SEO优化**（投入25%精力）  
+2. **基础SEO优化**（投入25%精力）
 3. **技术功能开发**（投入5%精力）
 
 医疗网站的核心竞争力在于内容的专业性和可信度，而非功能的丰富性。你当前的修正方向是正确的，但执行细节仍需更加保守和务实。
@@ -1822,8 +1822,8 @@ alertMsg = '个体剂量差异较大，请咨询医生确定适合剂量'
 
 <!-- 官方查询入口 -->
 <div style="text-align: center; margin: 1.5rem 0;">
-  <a href="https://www.nhc.gov.cn/" target="_blank" 
-     style="display: inline-block; background: #2196f3; color: white; 
+  <a href="https://www.nhc.gov.cn/" target="_blank"
+     style="display: inline-block; background: #2196f3; color: white;
             padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px;">
     🔍 国家卫健委官方医院查询系统
   </a>
@@ -1868,19 +1868,19 @@ alertMsg = '个体剂量差异较大，请咨询医生确定适合剂量'
 <!-- 简化版评估 - 无数据存储，零风险 -->
 <div style="max-width: 600px; margin: 0 auto;">
   <h3>经期疼痛快速自评</h3>
-  
+
   <label>您的疼痛程度(0-10)：</label>
-  <input type="range" min="0" max="10" value="5" 
+  <input type="range" min="0" max="10" value="5"
          oninput="this.nextElementSibling.textContent = this.value">
   <output>5</output>
-  
+
   <div style="margin-top: 1rem;">
-    <button onclick="showGeneralAdvice()" 
+    <button onclick="showGeneralAdvice()"
             style="background: #e91e63; color: white; border: none; padding: 0.5rem 1rem;">
       获取一般性建议
     </button>
   </div>
-  
+
   <div id="advice" style="display: none; margin-top: 1rem; padding: 1rem; background: #f3f4f6;">
     <p>根据您的输入，一般性建议包括：</p>
     <ul>
@@ -1960,7 +1960,7 @@ Phase 3：持续优化（第5-12周）
 - ✅ 明确声明不替代医疗诊断
 - ✅ 提供官方查询入口而非特定医院推荐
 
-### 技术可行性  
+### 技术可行性
 - ✅ Vercel重定向配置正确
 - ✅ 纯前端实现，无服务器依赖
 - ✅ 简化的评估工具避免医疗建议
@@ -1991,7 +1991,7 @@ Phase 3：持续优化（第5-12周）
           "value": "nosniff"
         },
         {
-          "key": "X-Frame-Options", 
+          "key": "X-Frame-Options",
           "value": "DENY"
         }
       ]
@@ -2010,7 +2010,7 @@ Phase 3：持续优化（第5-12周）
 ### 3. 内容优先级排序
 基于你的CTR数据，建议内容开发顺序：
 1. **热疗指南扩展**（当前CTR 15.87%） - 最高优先级
-2. **中文痛经机制科普**（中文内容CTR 7.25%） - 高优先级  
+2. **中文痛经机制科普**（中文内容CTR 7.25%） - 高优先级
 3. **NSAID药物科普**（搜索量高） - 中等优先级
 
 ### 4. 关键词策略微调
@@ -2062,7 +2062,7 @@ gtag('event', 'medical_content_engagement', {
 ❌ 当前: <title>Natural Therapies | PeriodHub</title>
 ✅ 修改为: <title>Period Pain Science: Mechanisms & Relief (Clinically Reviewed)</title>
 
-❌ 当前: <h1>Natural Therapies</h1>  
+❌ 当前: <h1>Natural Therapies</h1>
 ✅ 修改为: <h1>痛经疼痛原理的科学解析 | Period Pain Mechanisms</h1>
 
 <!-- interactive-tools 页面 -->
@@ -2083,13 +2083,13 @@ location /en/natural-therapies {
 #### 在natural-therapies页面顶部插入：
 ```html
 <!-- 紧急缓解指南 - 置于现有内容最前面 -->
-<div class="emergency-relief-guide" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%); 
+<div class="emergency-relief-guide" style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
      border-left: 4px solid #e91e63; padding: 20px; margin: 20px 0; border-radius: 8px;">
-  
+
   <h2 style="color: #c2185b; margin-bottom: 15px;">
     💢 经期剧痛紧急处理 | Emergency Period Pain Relief
   </h2>
-  
+
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
     <!-- 中文版 -->
     <div>
@@ -2100,13 +2100,13 @@ location /en/natural-therapies {
         <li><strong>穴位</strong>：按压三阴交穴（内踝上3寸）</li>
         <li><strong>姿势</strong>：膝胸位或侧卧位缓解</li>
       </ol>
-      
+
       <div style="background: #fff3e0; padding: 10px; border-radius: 4px; margin-top: 10px;">
         <strong>⚠️ 紧急就医信号：</strong><br>
         疼痛伴随呕吐、发烧(>38°C)、剧烈头痛时请立即就医
       </div>
     </div>
-    
+
     <!-- 英文版 -->
     <div>
       <h3>🚨 Quick Relief Steps:</h3>
@@ -2116,16 +2116,16 @@ location /en/natural-therapies {
         <li><strong>Acupressure</strong>: Press Sanyinjiao point</li>
         <li><strong>Position</strong>: Knee-chest or side lying</li>
       </ol>
-      
+
       <div style="background: #fff3e0; padding: 10px; border-radius: 4px; margin-top: 10px;">
         <strong>⚠️ Seek immediate care if:</strong><br>
         Pain with vomiting, fever >38°C, or severe headache
       </div>
     </div>
   </div>
-  
+
   <!-- 功能占位区 -->
-  <div style="text-align: center; margin-top: 15px; padding: 10px; 
+  <div style="text-align: center; margin-top: 15px; padding: 10px;
        background: rgba(255,255,255,0.7); border-radius: 4px; border: 2px dashed #e91e63;">
     <p style="margin: 0; color: #666;">
       📱 <strong>个性化疼痛追踪器开发中</strong> | Pain Tracker Coming Soon (September 2024)<br>
@@ -2140,11 +2140,11 @@ location /en/natural-therapies {
 #### 在页面底部添加：
 ```html
 <!-- 医疗免责声明 - 法律风险防控 -->
-<div class="medical-disclaimer" style="background: #f5f5f5; padding: 20px; border-radius: 8px; 
+<div class="medical-disclaimer" style="background: #f5f5f5; padding: 20px; border-radius: 8px;
      border: 1px solid #ddd; margin: 30px 0; font-size: 14px; line-height: 1.6;">
-  
+
   <h3 style="color: #d32f2f; margin-bottom: 15px;">⚕️ 医疗声明 | Medical Disclaimer</h3>
-  
+
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
     <div>
       <p><strong>重要提醒：</strong></p>
@@ -2154,12 +2154,12 @@ location /en/natural-therapies {
         <li>青少年(<18岁)请在医生指导下使用</li>
         <li>肾功能障碍者禁用高剂量镁剂</li>
       </ul>
-      
+
       <p><strong>医学审核：</strong><br>
       Dr. Sarah Chen, MD (妇产科主治医师)*<br>
       <small style="color: #666;">*审核员资质认证中，如有疑问请咨询你的医生</small></p>
     </div>
-    
+
     <div>
       <p><strong>Important Notice:</strong></p>
       <ul>
@@ -2168,13 +2168,13 @@ location /en/natural-therapies {
         <li>Teens (<18yr) require medical supervision</li>
         <li>Kidney disease patients avoid high-dose Mg</li>
       </ul>
-      
+
       <p><strong>Medical Review:</strong><br>
       Dr. Sarah Chen, MD (OB/GYN)*<br>
       <small style="color: #666;">*Credential verification pending</small></p>
     </div>
   </div>
-  
+
   <div style="border-top: 1px solid #ddd; padding-top: 15px; margin-top: 15px; text-align: center;">
     <small style="color: #666;">
       本内容仅供教育用途，不替代专业医疗建议。如有疑问请咨询医生。<br>
@@ -2200,13 +2200,13 @@ location /en/natural-therapies {
 <body>
 <div class="assessment-container" style="max-width: 600px; margin: 0 auto; padding: 20px;">
     <h1>💊 痛经严重度快速评估 | Quick Pain Assessment</h1>
-    
+
     <form id="painAssessment">
         <!-- 问题1：疼痛程度 -->
         <div class="question-block" style="margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
             <label><strong>1. 当前疼痛程度 | Current Pain Level (0-10):</strong></label>
-            <input type="range" id="painLevel" min="0" max="10" value="5" 
-                   oninput="document.getElementById('painValue').innerHTML = this.value" 
+            <input type="range" id="painLevel" min="0" max="10" value="5"
+                   oninput="document.getElementById('painValue').innerHTML = this.value"
                    style="width: 100%; margin: 10px 0;">
             <div style="display: flex; justify-content: space-between; font-size: 12px;">
                 <span>无痛 No Pain</span>
@@ -2214,7 +2214,7 @@ location /en/natural-therapies {
                 <span>剧痛 Severe</span>
             </div>
         </div>
-        
+
         <!-- 问题2：伴随症状 -->
         <div class="question-block" style="margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
             <label><strong>2. 伴随症状 | Associated Symptoms:</strong></label><br>
@@ -2223,7 +2223,7 @@ location /en/natural-therapies {
             <input type="checkbox" id="diarrhea" value="diarrhea"> <label for="diarrhea">腹泻 Diarrhea</label><br>
             <input type="checkbox" id="fatigue" value="fatigue"> <label for="fatigue">乏力 Fatigue</label>
         </div>
-        
+
         <!-- 问题3：影响程度 -->
         <div class="question-block" style="margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 8px;">
             <label><strong>3. 对日常活动的影响 | Impact on Daily Activities:</strong></label><br>
@@ -2231,16 +2231,16 @@ location /en/natural-therapies {
             <input type="radio" id="moderate" name="impact" value="moderate"> <label for="moderate">中度影响 Moderate impact</label><br>
             <input type="radio" id="severe" name="impact" value="severe"> <label for="severe">无法正常活动 Cannot function</label>
         </div>
-        
-        <button type="button" onclick="calculateRecommendation()" 
-                style="background: #e91e63; color: white; padding: 15px 30px; border: none; border-radius: 8px; 
+
+        <button type="button" onclick="calculateRecommendation()"
+                style="background: #e91e63; color: white; padding: 15px 30px; border: none; border-radius: 8px;
                        font-size: 16px; cursor: pointer; width: 100%;">
             获取个性化建议 | Get Personalized Advice
         </button>
     </form>
-    
+
     <!-- 结果显示区域 -->
-    <div id="recommendation" style="display: none; margin-top: 30px; padding: 20px; 
+    <div id="recommendation" style="display: none; margin-top: 30px; padding: 20px;
          background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%); border-radius: 8px; border: 2px solid #4caf50;">
     </div>
 </div>
@@ -2253,14 +2253,14 @@ function calculateRecommendation() {
     checkboxes.forEach(id => {
         if (document.getElementById(id).checked) symptoms.push(id);
     });
-    
+
     const impact = document.querySelector('input[name="impact"]:checked')?.value || 'mild';
-    
+
     let recommendation = generateRecommendation(painLevel, symptoms, impact);
-    
+
     document.getElementById('recommendation').innerHTML = recommendation;
     document.getElementById('recommendation').style.display = 'block';
-    
+
     // 滚动到结果
     document.getElementById('recommendation').scrollIntoView({ behavior: 'smooth' });
 }
@@ -2269,7 +2269,7 @@ function generateRecommendation(painLevel, symptoms, impact) {
     let advice = '';
     let urgency = '';
     let methods = '';
-    
+
     // 根据疼痛程度生成建议
     if (painLevel <= 3) {
         urgency = '🟢 轻度疼痛 | Mild Pain';
@@ -2299,7 +2299,7 @@ function generateRecommendation(painLevel, symptoms, impact) {
             • 考虑就医咨询 | Consider medical consultation
         `;
     }
-    
+
     // 伴随症状警示
     if (symptoms.includes('nausea') && painLevel > 7) {
         advice += `<div style="background: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 10px 0;">
@@ -2307,7 +2307,7 @@ function generateRecommendation(painLevel, symptoms, impact) {
             <strong>Warning:</strong> Pain with nausea may require medical evaluation
         </div>`;
     }
-    
+
     return `
         <h3>${urgency}</h3>
         <div style="line-height: 1.8;">
@@ -2318,9 +2318,9 @@ function generateRecommendation(painLevel, symptoms, impact) {
             <small><strong>声明：</strong>此建议仅供参考，不替代医生诊断。如症状持续或加重请就医。<br>
             <strong>Disclaimer:</strong> For guidance only, not medical diagnosis. Seek healthcare if symptoms persist.</small>
         </div>
-        
+
         <div style="text-align: center; margin-top: 15px;">
-            <button onclick="location.reload()" style="background: #666; color: white; padding: 8px 16px; 
+            <button onclick="location.reload()" style="background: #666; color: white; padding: 8px 16px;
                     border: none; border-radius: 4px; cursor: pointer;">
                 重新评估 | Reassess
             </button>
@@ -2339,32 +2339,32 @@ function generateRecommendation(painLevel, symptoms, impact) {
 <!-- 在"Scientific Foundation"章节前插入 -->
 <div class="seo-content-bridge" style="margin: 30px 0;">
     <h2>痛经疼痛的医学原理 | Medical Mechanisms of Period Pain</h2>
-    
+
     <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 15px 0;">
         <h3>🧠 为什么经期会疼痛？Why Do Periods Hurt?</h3>
         <p style="line-height: 1.8;">
             <strong>痛经的科学原理</strong>主要涉及三个生理过程：<br>
             <strong>Period pain mechanisms</strong> involve three key physiological processes:
         </p>
-        
+
         <ol style="line-height: 2;">
             <li><strong>前列腺素释放 | Prostaglandin Release</strong>：
                 子宫内膜脱落时释放PGF2α，引起子宫强烈收缩<br>
                 <small style="color: #666;">Endometrial shedding releases PGF2α, causing intense uterine contractions</small>
             </li>
-            
+
             <li><strong>疼痛信号传导 | Pain Signal Transmission</strong>：
                 通过脊髓传导至大脑痛觉中枢，闸门控制理论解释缓解机制<br>
                 <small style="color: #666;">Signals travel via spinal cord to brain pain centers; gate control theory explains relief</small>
             </li>
-            
+
             <li><strong>炎症反应 | Inflammatory Response</strong>：
                 局部炎症因子增加血管通透性，加重疼痛敏感性<br>
                 <small style="color: #666;">Local inflammatory factors increase vascular permeability, enhancing pain sensitivity</small>
             </li>
         </ol>
-        
-        <div style="background: linear-gradient(90deg, #e3f2fd 0%, #f3e5f5 100%); 
+
+        <div style="background: linear-gradient(90deg, #e3f2fd 0%, #f3e5f5 100%);
              padding: 15px; border-radius: 6px; margin: 15px 0; border-left: 4px solid #2196f3;">
             <h4 style="color: #1976d2; margin-bottom: 10px;">💡 补镁缓解痛经的科学机制</h4>
             <p style="margin: 0; line-height: 1.7;">
@@ -2394,7 +2394,7 @@ function generateRecommendation(painLevel, symptoms, impact) {
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'GA_MEASUREMENT_ID');
-  
+
   // 医疗内容专用事件追踪
   function trackMedicalEvent(eventName, contentType, painLevel = null) {
     gtag('event', eventName, {
@@ -2405,7 +2405,7 @@ function generateRecommendation(painLevel, symptoms, impact) {
       'language': document.documentElement.lang || 'en'
     });
   }
-  
+
   // 自动追踪关键交互
   document.addEventListener('DOMContentLoaded', function() {
     // 紧急指南展开
@@ -2413,13 +2413,13 @@ function generateRecommendation(painLevel, symptoms, impact) {
     if (emergencyBox) {
       emergencyBox.addEventListener('click', () => trackMedicalEvent('emergency_guide_used', 'pain_relief'));
     }
-    
+
     // 镁补充内容点击
     const magnesiumContent = document.querySelector('[data-content="magnesium"]');
     if (magnesiumContent) {
       magnesiumContent.addEventListener('click', () => trackMedicalEvent('magnesium_guide_viewed', 'supplement_info'));
     }
-    
+
     // 医疗声明查看
     const disclaimer = document.querySelector('.medical-disclaimer');
     if (disclaimer) {
@@ -2445,12 +2445,12 @@ const targetKeywords = [
   // 中文核心词
   '痛经疼痛原理', '痛经机制', '经期疼痛原因', '痛经为什么痛', '痛经补镁',
   '经期补充镁', '痛经科学解释', '月经疼痛机制', '痛经计算器', '经期疼痛评估',
-  
-  // 英文核心词  
+
+  // 英文核心词
   'period pain mechanisms', 'menstrual cramp causes', 'why periods hurt',
   'dysmenorrhea pathophysiology', 'magnesium period pain', 'menstrual pain science',
   'period pain calculator', 'menstrual pain assessment', 'prostaglandin period pain',
-  
+
   // 长尾词
   '痛经疼痛程度评估', '经期镁缺乏症状', '月经期间补镁剂量',
   'how does magnesium help period cramps', 'period pain relief mechanisms',
@@ -2460,7 +2460,7 @@ const targetKeywords = [
 // 监测指标目标值
 const performanceTargets = {
   'impressions_growth': 150,      // 曝光增长150%
-  'ctr_improvement': 40,          // CTR提升40%  
+  'ctr_improvement': 40,          // CTR提升40%
   'avg_position_target': 5,       // 平均排名进入TOP 5
   'chinese_traffic_ratio': 35     // 中文流量占比35%+
 };
@@ -2715,7 +2715,7 @@ PeriodHub MVP阶段SEO优化方案（最终执行版）
         <p><small>使用专业热敷袋或热水瓶</small></p>
       </div>
     </div>
-    
+
     <div class="step">
       <div class="step-number">2</div>
       <div class="step-content">
@@ -2724,7 +2724,7 @@ PeriodHub MVP阶段SEO优化方案（最终执行版）
         <p><small>根据疼痛程度选择</small></p>
       </div>
     </div>
-    
+
     <div class="step">
       <div class="step-number">3</div>
       <div class="step-content">
@@ -2734,7 +2734,7 @@ PeriodHub MVP阶段SEO优化方案（最终执行版）
       </div>
     </div>
   </div>
-  
+
   <div class="warning-box">
     <p>⚠️ <strong>立即就医信号：</strong></p>
     <ul>
@@ -2782,11 +2782,11 @@ PeriodHub MVP阶段SEO优化方案（最终执行版）
     margin-top: 0;
     border-left-width: 3px;
   }
-  
+
   .relief-steps {
     flex-direction: column;
   }
-  
+
   .step {
     margin-bottom: 15px;
   }
@@ -2891,7 +2891,7 @@ if(startAssessment) {
 
 **高价值关键词表现**：
 - "原发性痛经指南" - 30% CTR（排名8.2）
-- "痛经指南共识" - 28.57% CTR（排名3.7） 
+- "痛经指南共识" - 28.57% CTR（排名3.7）
 - "热疗指南" - 15.87% CTR（排名3.9）
 
 **问题关键词**：
@@ -2938,7 +2938,7 @@ if(startAssessment) {
   "redirects": [
     {
       "source": "/interactive-tools/symptom-assessment",
-      "destination": "/interactive-tools/period-pain-assessment", 
+      "destination": "/interactive-tools/period-pain-assessment",
       "permanent": true
     }
   ]
@@ -2971,7 +2971,7 @@ if(startAssessment) {
       <li>激活闸门控制理论，抑制疼痛信号传导</li>
       <li>降低子宫平滑肌紧张度</li>
     </ul>
-    
+
     <h3>临床证据</h3>
     <p>基于Cochrane系统评价：76%使用者报告疼痛减轻(J Pain Res. 2024)</p>
   </div>
@@ -3074,7 +3074,7 @@ A. 页面基础优化（优先级⭐⭐⭐⭐⭐）
 
      ◦ 将/en/natural-therapies页面标题改为：
        <title>痛经疼痛原理的科学解析 | Period Pain Mechanisms & Relief - PeriodHub</title>
-       
+
      ◦ 在Vercel配置301重定向：
        // vercel.json
        {
@@ -3086,7 +3086,7 @@ A. 页面基础优化（优先级⭐⭐⭐⭐⭐）
            }
          ]
        }
-       
+
    • 负责人：技术团队
 
    • 完成时间：周一
@@ -3104,7 +3104,7 @@ A. 页面基础优化（优先级⭐⭐⭐⭐⭐）
          <p>• 具体用药请咨询执业医师</p>
          <a href="https://www.nhc.gov.cn/">国家卫健委医院查询</a>
        </div>
-       
+
    • 负责人：内容团队
 
    • 完成时间：周二
@@ -3125,7 +3125,7 @@ B. 高价值内容优化（优先级⭐⭐⭐⭐）
            <li>按压三阴交穴位</li>
          </ol>
        </div>
-       
+
    • 负责人：内容团队
 
    • 完成时间：周三
@@ -3139,7 +3139,7 @@ B. 高价值内容优化（优先级⭐⭐⭐⭐）
 
      ◦ 添加H2标题：
        <h2>🔥 热敷缓解痛经的科学原理 | Heat Therapy Mechanism</h2>
-       
+
    • 负责人：内容团队
 
    • 完成时间：周四
@@ -3160,7 +3160,7 @@ A. 内容深度优化（优先级⭐⭐⭐）
        ### 1. 前列腺素释放机制
        ### 2. 神经信号传导
        ### 3. 子宫收缩原理
-       
+
    • 负责人：内容团队
 
    • 完成时间：第2周
@@ -3175,7 +3175,7 @@ A. 内容深度优化（优先级⭐⭐⭐）
          <h3>💊 布洛芬vs萘普生对比</h3>
          <table>...</table>
        </div>
-       
+
    • 负责人：内容团队
 
    • 完成时间：第3周
@@ -3193,7 +3193,7 @@ B. 工具整合优化（优先级⭐⭐⭐）
 
      ◦ 修改标题：
        <title>痛经严重度评估工具 | Period Pain Calculator - PeriodHub</title>
-       
+
    • 负责人：技术团队
 
    • 完成时间：第2周
@@ -3215,7 +3215,7 @@ A. 信任度建设（优先级⭐⭐）
            <li>WHO Primary Dysmenorrhea Guidelines</li>
          </ul>
        </div>
-       
+
    • 负责人：内容团队
 
    • 完成时间：第6周
@@ -3230,7 +3230,7 @@ B. 效果监测体系（优先级⭐⭐）
      ◦ 配置GA4事件追踪：
        // 紧急指南使用追踪
        gtag('event', 'emergency_guide_used', {...})
-       
+
      ◦ 监测关键词：痛经疼痛原理、period pain mechanisms等
 
    • 负责人：技术团队

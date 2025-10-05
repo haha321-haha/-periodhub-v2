@@ -17,29 +17,29 @@ class TeamWorkflowSetup {
 
   async setup() {
     console.log('\n👥 设置团队协作工作流');
-    
+
     try {
       // 1. 创建工作流目录结构
       await this.createDirectoryStructure();
-      
+
       // 2. 生成角色分工文档
       await this.generateRoleDefinitions();
-      
+
       // 3. 创建沟通机制
       await this.setupCommunicationChannels();
-      
+
       // 4. 生成工作流模板
       await this.generateWorkflowTemplates();
-      
+
       // 5. 创建培训材料
       await this.createTrainingMaterials();
-      
+
       // 6. 设置代码审查流程
       await this.setupCodeReviewProcess();
-      
+
       console.log('✅ 团队协作工作流设置完成');
       this.printSetupSummary();
-      
+
     } catch (error) {
       console.error(`❌ 工作流设置失败: ${error.message}`);
       process.exit(1);
@@ -48,7 +48,7 @@ class TeamWorkflowSetup {
 
   async createDirectoryStructure() {
     console.log('📁 创建工作流目录结构...');
-    
+
     const dirs = [
       this.workflowDir,
       this.templatesDir,
@@ -60,7 +60,7 @@ class TeamWorkflowSetup {
       `${this.docsDir}/training`,
       `${this.docsDir}/adr` // Architecture Decision Records
     ];
-    
+
     for (const dir of dirs) {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
@@ -71,7 +71,7 @@ class TeamWorkflowSetup {
 
   async generateRoleDefinitions() {
     console.log('👤 生成角色分工文档...');
-    
+
     const roles = {
       "技术负责人": {
         "职责": [
@@ -154,7 +154,7 @@ class TeamWorkflowSetup {
         ]
       }
     };
-    
+
     const roleDoc = `# 团队角色分工定义
 
 ## 项目角色和职责
@@ -200,7 +200,7 @@ ${details.在项目中的具体任务.map(task => `- ${task}`).join('\n')}
 
   async setupCommunicationChannels() {
     console.log('💬 设置沟通机制...');
-    
+
     const communicationConfig = {
       "日常沟通": {
         "每日站会": {
@@ -250,7 +250,7 @@ ${details.在项目中的具体任务.map(task => `- ${task}`).join('\n')}
         "决策记录": "docs/adr/"
       }
     };
-    
+
     const commDoc = `# 团队沟通机制
 
 ## 沟通渠道配置
@@ -296,7 +296,7 @@ ${typeof details === 'object' ? Object.entries(details).map(([key, value]) => {
 
   async generateWorkflowTemplates() {
     console.log('📋 生成工作流模板...');
-    
+
     // 代码审查模板
     const codeReviewTemplate = `# 代码审查清单
 
@@ -391,9 +391,9 @@ _________________________________
     const issueTemplate = `# 问题报告模板
 
 ## 问题描述
-**问题标题**: 
-**发现时间**: 
-**发现人**: 
+**问题标题**:
+**发现时间**:
+**发现人**:
 **问题类型**: [ ] Bug [ ] 性能问题 [ ] SEO问题 [ ] 用户体验问题
 
 ## 问题详情
@@ -402,9 +402,9 @@ _________________________________
 _________________________________
 
 **重现步骤**:
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 **预期结果**:
 _________________________________
@@ -413,15 +413,15 @@ _________________________________
 _________________________________
 
 ## 环境信息
-**浏览器**: 
-**操作系统**: 
+**浏览器**:
+**操作系统**:
 **设备类型**: [ ] 桌面 [ ] 移动 [ ] 平板
-**网络环境**: 
+**网络环境**:
 
 ## 影响评估
 **严重程度**: [ ] 低 [ ] 中 [ ] 高 [ ] 严重
-**影响范围**: 
-**用户影响**: 
+**影响范围**:
+**用户影响**:
 
 ## 解决方案
 **建议解决方案**:
@@ -429,8 +429,8 @@ _________________________________
 _________________________________
 
 **优先级**: [ ] P0 [ ] P1 [ ] P2 [ ] P3
-**预计修复时间**: 
-**负责人**: 
+**预计修复时间**:
+**负责人**:
 `;
 
     fs.writeFileSync(`${this.templatesDir}/issue-report-template.md`, issueTemplate);
@@ -440,7 +440,7 @@ _________________________________
 
   async createTrainingMaterials() {
     console.log('📚 创建培训材料...');
-    
+
     // 新人入职培训
     const onboardingGuide = `# 新人入职培训指南
 
@@ -552,7 +552,7 @@ PeriodHub是一个专注于女性健康的国际化网站，提供多语言支�
 
   async setupCodeReviewProcess() {
     console.log('🔍 设置代码审查流程...');
-    
+
     // Git hooks配置
     const preCommitHook = `#!/bin/sh
 # Pre-commit hook for PeriodHub project
@@ -632,7 +632,7 @@ exit 0
 
   printSetupSummary() {
     console.log('\n👥 团队协作工作流设置摘要');
-    
+
     console.log('\n📁 目录结构:');
     console.log('   workflow/');
     console.log('   ├── checklists/      # 检查清单');
@@ -642,24 +642,24 @@ exit 0
     console.log('   ├── standards/       # 标准文档');
     console.log('   ├── training/        # 培训材料');
     console.log('   └── adr/            # 架构决策记录');
-    
+
     console.log('\n👤 角色分工:');
     console.log('   - 技术负责人: SEO技术实施、性能优化');
     console.log('   - 产品负责人: 业务影响评估、用户体验');
     console.log('   - 运维负责人: 监控部署、系统稳定性');
     console.log('   - 测试负责人: 功能测试、质量保证');
-    
+
     console.log('\n💬 沟通机制:');
     console.log('   - 每日站会: 15分钟同步');
     console.log('   - 每周回顾: 1小时总结');
     console.log('   - 重要通知: 48小时提前通知');
     console.log('   - 紧急问题: 15分钟响应');
-    
+
     console.log('\n📋 工作流模板:');
     console.log('   - 代码审查清单');
     console.log('   - 发布检查清单');
     console.log('   - 问题报告模板');
-    
+
     console.log('\n🔍 代码审查:');
     console.log('   - Pre-commit hooks');
     console.log('   - 自动化检查');

@@ -102,8 +102,8 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
                   emoji: '😰'
                 }
               ].map((option) => (
-                <label 
-                  key={option.value} 
+                <label
+                  key={option.value}
                   className="flex items-center space-x-3 cursor-pointer p-3 rounded-lg hover:bg-white/50 transition-colors"
                 >
                   <input

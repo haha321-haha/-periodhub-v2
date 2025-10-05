@@ -27,7 +27,7 @@ class AutoImageAltFixer {
     const fileName = path.basename(filePath);
     const backupPath = path.join(this.backupDir, `${fileName}.backup.${Date.now()}`);
     fs.copyFileSync(filePath, backupPath);
-    
+
     return backupPath;
   }
 
@@ -44,7 +44,7 @@ class AutoImageAltFixer {
 
     // 基于上下文关键词
     const contextKeywords = this.extractContextKeywords(context);
-    
+
     // 基于图片类型
     const imageType = this.detectImageType(src, context);
 
@@ -74,7 +74,7 @@ class AutoImageAltFixer {
     ];
 
     const lowerContext = context.toLowerCase();
-    return healthKeywords.filter(keyword => 
+    return healthKeywords.filter(keyword =>
       lowerContext.includes(keyword.toLowerCase())
     );
   }
@@ -96,7 +96,7 @@ class AutoImageAltFixer {
     if (srcLower.includes('illustration') || contextLower.includes('illustration')) return 'Illustration';
     if (srcLower.includes('avatar') || contextLower.includes('avatar')) return 'Avatar';
     if (srcLower.includes('profile') || contextLower.includes('profile')) return 'Profile picture';
-    
+
     return null;
   }
 
@@ -106,17 +106,17 @@ class AutoImageAltFixer {
   optimizeAltText(altText) {
     // 首字母大写
     altText = altText.charAt(0).toUpperCase() + altText.slice(1);
-    
+
     // 移除多余空格
     altText = altText.replace(/\s+/g, ' ').trim();
-    
+
     // 确保长度适中 (10-125字符)
     if (altText.length < 10) {
       altText = `Image: ${altText}`;
     } else if (altText.length > 125) {
       altText = altText.substring(0, 122) + '...';
     }
-    
+
     return altText;
   }
 
@@ -143,25 +143,25 @@ class AutoImageAltFixer {
           if (match) {
             const fullTag = match[0];
             const imageSrc = match[2];
-            
+
             // 检查是否已有alt属性
             if (!/alt\s*=/i.test(fullTag)) {
               // 生成智能alt文本
               const altText = this.generateSmartAlt(imageSrc, line, path.basename(filePath));
-              
+
               // 添加alt属性
               const newTag = fullTag.replace(
                 /(src=["'][^"']+["'])/i,
                 `$1 alt="${altText}"`
               );
-              
+
               fixes.push({
                 line: index + 1,
                 original: line.trim(),
                 fixed: line.replace(fullTag, newTag).trim(),
                 altText: altText
               });
-              
+
               modified = true;
               return line.replace(fullTag, newTag);
             }
@@ -174,16 +174,16 @@ class AutoImageAltFixer {
       if (modified) {
         // 创建备份
         const backupPath = this.createBackup(filePath);
-        
+
         // 写入修复后的内容
         fs.writeFileSync(filePath, newLines.join('\n'));
-        
+
         this.fixedFiles.push({
           file: filePath,
           backup: backupPath,
           fixes: fixes
         });
-        
+
         console.log(`✅ 修复文件: ${filePath} (${fixes.length} 个修复)`);
         return fixes;
       }
@@ -204,7 +204,7 @@ class AutoImageAltFixer {
    */
   async fixAllFiles() {
     console.log('🔧 开始自动修复图片Alt标签...');
-    
+
     // 获取所有需要修复的文件
     const componentFiles = glob.sync('**/*.{tsx,jsx,ts,js}', {
       ignore: ['node_modules/**', '.next/**', 'out/**', 'reports/**', 'backups/**']
@@ -215,7 +215,7 @@ class AutoImageAltFixer {
 
     for (const file of componentFiles) {
       if (!fs.statSync(file).isFile()) continue;
-      
+
       const fixes = this.fixFileImageAlt(file);
       totalFixes += fixes.length;
       allFixes.push(...fixes);
@@ -254,7 +254,7 @@ class AutoImageAltFixer {
     }
 
     const timestamp = new Date().toISOString().split('T')[0];
-    
+
     // 生成JSON报告
     const jsonReport = {
       timestamp: new Date().toISOString(),
@@ -300,7 +300,7 @@ class AutoImageAltFixer {
     // 修复详情
     if (report.fixes.length > 0) {
       markdown += `## 🔧 修复详情\n\n`;
-      
+
       const fixesByFile = report.fixes.reduce((acc, fix) => {
         if (!acc[fix.file]) acc[fix.file] = [];
         acc[fix.file].push(fix);
@@ -309,7 +309,7 @@ class AutoImageAltFixer {
 
       Object.entries(fixesByFile).forEach(([file, fixes]) => {
         markdown += `### ${file}\n\n`;
-        
+
         fixes.forEach((fix, index) => {
           markdown += `#### 修复 ${index + 1} (第${fix.line}行)\n\n`;
           markdown += `**原始代码**:\n\`\`\`\n${fix.original}\n\`\`\`\n\n`;

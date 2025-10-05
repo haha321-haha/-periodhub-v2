@@ -27,7 +27,7 @@ class PageRouteTester {
       { path: '/scenario-solutions', name: 'Scenario Solutions' },
       { path: '/health-guide', name: 'Health Guide' },
       { path: '/teen-health', name: 'Teen Health' },
-      
+
       // Interactive Tools
       { path: '/interactive-tools', name: 'Interactive Tools Hub' },
       { path: '/interactive-tools/symptom-assessment', name: 'Symptom Assessment' },
@@ -35,15 +35,15 @@ class PageRouteTester {
       { path: '/interactive-tools/pain-tracker', name: 'Pain Tracker' },
       { path: '/interactive-tools/breathing-exercise', name: 'Breathing Exercise' },
       { path: '/interactive-tools/period-pain-assessment', name: 'Period Pain Assessment' },
-      
+
       // Article examples
       { path: '/articles/menstrual-pain-management', name: 'Pain Management Article' },
       { path: '/articles/lifestyle-tips-for-period-health', name: 'Lifestyle Tips Article' },
-      
+
       // Therapy guides
       { path: '/natural-therapies/physical-therapy', name: 'Physical Therapy Guide' },
       { path: '/natural-therapies/herbal-remedies', name: 'Herbal Remedies Guide' },
-      
+
       // Downloads
       { path: '/downloads', name: 'Downloads Page' }
     ];
@@ -68,16 +68,16 @@ class PageRouteTester {
       // In a real implementation, you'd use a headless browser like Puppeteer
       testResult.accessible = true;
       testResult.hasContent = true;
-      
+
       // Check for common translation issues in route structure
       if (locale === 'en' && route.path.includes('chinese-specific-term')) {
         testResult.languageIssues.push('Route contains Chinese-specific terms in English version');
       }
-      
+
       if (locale === 'zh' && route.path.includes('english-specific-term')) {
         testResult.languageIssues.push('Route contains English-specific terms in Chinese version');
       }
-      
+
     } catch (error) {
       testResult.accessible = false;
       testResult.error = error.message;
@@ -89,24 +89,24 @@ class PageRouteTester {
   // Test all routes for both languages
   async testAllRoutes() {
     console.log('🧪 Testing all page routes...');
-    
+
     this.initializeRoutes();
-    
+
     for (const route of this.routes) {
       console.log(`Testing: ${route.name}`);
-      
+
       // Test Chinese version
       const zhResult = await this.testRoute('zh', route);
       this.testResults.push(zhResult);
-      
+
       // Test English version
       const enResult = await this.testRoute('en', route);
       this.testResults.push(enResult);
-      
+
       // Compare results
       this.compareRouteResults(zhResult, enResult);
     }
-    
+
     console.log(`✅ Completed testing ${this.routes.length} routes in both languages`);
   }
 
@@ -171,7 +171,7 @@ class PageRouteTester {
 
     const reportPath = path.join(process.cwd(), 'route-testing-report.json');
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    
+
     console.log(`📊 Route testing report saved to: ${reportPath}`);
     return report;
   }
@@ -179,15 +179,15 @@ class PageRouteTester {
   // Main execution
   async run() {
     console.log('🚀 Starting comprehensive route testing...');
-    
+
     await this.testAllRoutes();
     const report = this.generateRouteReport();
-    
+
     console.log('\n📊 ROUTE TESTING SUMMARY:');
     console.log(`Total Routes: ${report.summary.totalRoutes}`);
     console.log(`Successful Tests: ${report.summary.successfulTests}/${report.summary.totalTests}`);
     console.log(`Issues Found: ${report.summary.totalIssues}`);
-    
+
     return report;
   }
 }

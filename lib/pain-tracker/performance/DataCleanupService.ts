@@ -39,7 +39,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
     try {
       const cleanupOptions = { ...this.defaultCleanupOptions, ...options };
       const startTime = performance.now();
-      
+
       let totalRecordsRemoved = 0;
       let totalSpaceSaved = 0;
       const operations: string[] = [];
@@ -94,7 +94,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         cleanedRecords = cleanedRecords
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .slice(0, cleanupOptions.maxRecords);
-        
+
         totalRecordsRemoved += excessRecords;
         operations.push(`Removed ${excessRecords} excess records (keeping ${cleanupOptions.maxRecords} most recent)`);
       }
@@ -145,7 +145,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
     try {
       const allRecords = await this.loadAllRecords();
       const archiveResult = await this.archiveRecordsByAge(allRecords, options.maxAgeMonths);
-      
+
       // Save remaining records
       await this.saveCleanedRecords(archiveResult.remainingRecords);
 
@@ -259,12 +259,12 @@ export class DataCleanupService implements DataCleanupServiceInterface {
    */
   scheduleAutomaticCleanup(intervalMs: number): void {
     this.cancelAutomaticCleanup();
-    
+
     // Don't start timers in test environment
     if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
       return;
     }
-    
+
     this.cleanupTimer = setInterval(async () => {
       try {
         const recommendations = await this.getCleanupRecommendations();
@@ -424,11 +424,11 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         const data = localStorage.getItem(key);
         if (data) {
           const originalSize = new Blob([data]).size;
-          
+
           // Parse and re-stringify to remove extra whitespace
           const parsedData = JSON.parse(data);
           const compactedData = JSON.stringify(parsedData);
-          
+
           if (compactedData.length < data.length) {
             localStorage.setItem(key, compactedData);
             const newSize = new Blob([compactedData]).size;
@@ -450,7 +450,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
 
     try {
       const backupKeys: string[] = [];
-      
+
       // Find all backup keys
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
@@ -487,7 +487,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
 
     try {
       const tempKeys: string[] = [];
-      
+
       // Find temporary keys
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
@@ -568,7 +568,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
   private async optimizePreferences(): Promise<void> {
     try {
       const preferences = JSON.parse(localStorage.getItem(STORAGE_KEYS.USER_PREFERENCES) || '{}');
-      
+
       // Remove empty or default values
       const optimizedPreferences = {
         ...preferences,
@@ -584,7 +584,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
   private async optimizeMetadata(): Promise<void> {
     try {
       const metadata = JSON.parse(localStorage.getItem(STORAGE_KEYS.METADATA) || '{}');
-      
+
       // Keep only essential metadata
       const optimizedMetadata = {
         lastModified: metadata.lastModified,
@@ -616,7 +616,7 @@ export class DataCleanupService implements DataCleanupServiceInterface {
   }
 
   private countIncompleteRecords(records: PainRecord[]): number {
-    return records.filter(record => 
+    return records.filter(record =>
       !record.date ||
       !record.time ||
       record.painLevel === undefined ||

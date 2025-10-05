@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from "react";
 
 /**
  * P3阶段：性能监控和优化系统
@@ -15,16 +15,16 @@ interface PerformanceMetrics {
   largestContentfulPaint: number;
   firstInputDelay: number;
   cumulativeLayoutShift: number;
-  
+
   // 运行时性能
   memoryUsage: number;
   renderTime: number;
   componentCount: number;
-  
+
   // 网络性能
   networkRequests: number;
   totalTransferSize: number;
-  
+
   // 用户体验
   interactionTime: number;
   errorRate: number;
@@ -33,11 +33,11 @@ interface PerformanceMetrics {
 // 性能优化建议接口
 interface OptimizationSuggestion {
   id: string;
-  type: 'critical' | 'warning' | 'info';
+  type: "critical" | "warning" | "info";
   title: string;
   description: string;
-  impact: 'high' | 'medium' | 'low';
-  effort: 'low' | 'medium' | 'high';
+  impact: "high" | "medium" | "low";
+  effort: "low" | "medium" | "high";
   action: string;
 }
 
@@ -61,38 +61,44 @@ export function usePerformanceMonitoring() {
       networkRequests: 0,
       totalTransferSize: 0,
       interactionTime: 0,
-      errorRate: 0
+      errorRate: 0,
     };
 
     // 使用Performance API收集指标
-    if (typeof window !== 'undefined' && 'performance' in window) {
-      const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-      const paintEntries = performance.getEntriesByType('paint');
-      const measureEntries = performance.getEntriesByType('measure');
-      
+    if (typeof window !== "undefined" && "performance" in window) {
+      const navigation = performance.getEntriesByType(
+        "navigation",
+      )[0] as PerformanceNavigationTiming;
+      const paintEntries = performance.getEntriesByType("paint");
+      const measureEntries = performance.getEntriesByType("measure");
+
       // 页面加载时间
       metrics.loadTime = navigation.loadEventEnd - navigation.loadEventStart;
-      
+
       // 首次内容绘制
-      const fcpEntry = paintEntries.find(entry => entry.name === 'first-contentful-paint');
+      const fcpEntry = paintEntries.find(
+        (entry) => entry.name === "first-contentful-paint",
+      );
       if (fcpEntry) {
         metrics.firstContentfulPaint = fcpEntry.startTime;
       }
-      
+
       // 最大内容绘制
-      const lcpEntry = paintEntries.find(entry => entry.name === 'largest-contentful-paint');
+      const lcpEntry = paintEntries.find(
+        (entry) => entry.name === "largest-contentful-paint",
+      );
       if (lcpEntry) {
         metrics.largestContentfulPaint = lcpEntry.startTime;
       }
-      
+
       // 内存使用情况
-      if ('memory' in performance) {
+      if ("memory" in performance) {
         const memory = (performance as any).memory;
         metrics.memoryUsage = memory.usedJSHeapSize / memory.jsHeapSizeLimit;
       }
-      
+
       // 网络请求统计
-      const resourceEntries = performance.getEntriesByType('resource');
+      const resourceEntries = performance.getEntriesByType("resource");
       metrics.networkRequests = resourceEntries.length;
       metrics.totalTransferSize = resourceEntries.reduce((total, entry) => {
         return total + (entry.transferSize || 0);
@@ -100,21 +106,21 @@ export function usePerformanceMonitoring() {
     }
 
     // 使用Web Vitals API收集Core Web Vitals
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       try {
         // 这里可以集成web-vitals库来获取更准确的指标
         // 暂时使用简化的实现
         const observer = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
-            if (entry.entryType === 'largest-contentful-paint') {
+            if (entry.entryType === "largest-contentful-paint") {
               metrics.largestContentfulPaint = entry.startTime;
             }
           }
         });
-        
-        observer.observe({ entryTypes: ['largest-contentful-paint'] });
+
+        observer.observe({ entryTypes: ["largest-contentful-paint"] });
       } catch (error) {
-        console.warn('Web Vitals monitoring not available:', error);
+        console.warn("Web Vitals monitoring not available:", error);
       }
     }
 
@@ -122,92 +128,106 @@ export function usePerformanceMonitoring() {
   }, []);
 
   // 生成优化建议
-  const generateSuggestions = useCallback((metrics: PerformanceMetrics): OptimizationSuggestion[] => {
-    const suggestions: OptimizationSuggestion[] = [];
+  const generateSuggestions = useCallback(
+    (metrics: PerformanceMetrics): OptimizationSuggestion[] => {
+      const suggestions: OptimizationSuggestion[] = [];
 
-    // 加载时间优化建议
-    if (metrics.loadTime > 3000) {
-      suggestions.push({
-        id: 'slow-load-time',
-        type: 'critical',
-        title: '页面加载时间过长',
-        description: `当前加载时间为 ${metrics.loadTime.toFixed(0)}ms，建议优化到3秒以内`,
-        impact: 'high',
-        effort: 'medium',
-        action: '实施代码分割和懒加载'
-      });
-    }
+      // 加载时间优化建议
+      if (metrics.loadTime > 3000) {
+        suggestions.push({
+          id: "slow-load-time",
+          type: "critical",
+          title: "页面加载时间过长",
+          description: `当前加载时间为 ${metrics.loadTime.toFixed(
+            0,
+          )}ms，建议优化到3秒以内`,
+          impact: "high",
+          effort: "medium",
+          action: "实施代码分割和懒加载",
+        });
+      }
 
-    // 首次内容绘制优化建议
-    if (metrics.firstContentfulPaint > 1800) {
-      suggestions.push({
-        id: 'slow-fcp',
-        type: 'warning',
-        title: '首次内容绘制时间过长',
-        description: `当前FCP为 ${metrics.firstContentfulPaint.toFixed(0)}ms，建议优化到1.8秒以内`,
-        impact: 'high',
-        effort: 'medium',
-        action: '优化关键渲染路径，减少阻塞资源'
-      });
-    }
+      // 首次内容绘制优化建议
+      if (metrics.firstContentfulPaint > 1800) {
+        suggestions.push({
+          id: "slow-fcp",
+          type: "warning",
+          title: "首次内容绘制时间过长",
+          description: `当前FCP为 ${metrics.firstContentfulPaint.toFixed(
+            0,
+          )}ms，建议优化到1.8秒以内`,
+          impact: "high",
+          effort: "medium",
+          action: "优化关键渲染路径，减少阻塞资源",
+        });
+      }
 
-    // 内存使用优化建议
-    if (metrics.memoryUsage > 0.8) {
-      suggestions.push({
-        id: 'high-memory-usage',
-        type: 'warning',
-        title: '内存使用率过高',
-        description: `当前内存使用率为 ${(metrics.memoryUsage * 100).toFixed(1)}%，建议优化内存使用`,
-        impact: 'medium',
-        effort: 'high',
-        action: '检查内存泄漏，优化组件卸载'
-      });
-    }
+      // 内存使用优化建议
+      if (metrics.memoryUsage > 0.8) {
+        suggestions.push({
+          id: "high-memory-usage",
+          type: "warning",
+          title: "内存使用率过高",
+          description: `当前内存使用率为 ${(metrics.memoryUsage * 100).toFixed(
+            1,
+          )}%，建议优化内存使用`,
+          impact: "medium",
+          effort: "high",
+          action: "检查内存泄漏，优化组件卸载",
+        });
+      }
 
-    // 网络请求优化建议
-    if (metrics.networkRequests > 50) {
-      suggestions.push({
-        id: 'too-many-requests',
-        type: 'info',
-        title: '网络请求过多',
-        description: `当前有 ${metrics.networkRequests} 个网络请求，建议合并请求`,
-        impact: 'medium',
-        effort: 'medium',
-        action: '实施请求合并和缓存策略'
-      });
-    }
+      // 网络请求优化建议
+      if (metrics.networkRequests > 50) {
+        suggestions.push({
+          id: "too-many-requests",
+          type: "info",
+          title: "网络请求过多",
+          description: `当前有 ${metrics.networkRequests} 个网络请求，建议合并请求`,
+          impact: "medium",
+          effort: "medium",
+          action: "实施请求合并和缓存策略",
+        });
+      }
 
-    // 传输大小优化建议
-    if (metrics.totalTransferSize > 1024 * 1024) { // 1MB
-      suggestions.push({
-        id: 'large-transfer-size',
-        type: 'warning',
-        title: '传输数据量过大',
-        description: `当前传输大小为 ${(metrics.totalTransferSize / 1024 / 1024).toFixed(2)}MB，建议压缩资源`,
-        impact: 'medium',
-        effort: 'low',
-        action: '启用Gzip压缩，优化图片和资源'
-      });
-    }
+      // 传输大小优化建议
+      if (metrics.totalTransferSize > 1024 * 1024) {
+        // 1MB
+        suggestions.push({
+          id: "large-transfer-size",
+          type: "warning",
+          title: "传输数据量过大",
+          description: `当前传输大小为 ${(
+            metrics.totalTransferSize /
+            1024 /
+            1024
+          ).toFixed(2)}MB，建议压缩资源`,
+          impact: "medium",
+          effort: "low",
+          action: "启用Gzip压缩，优化图片和资源",
+        });
+      }
 
-    return suggestions;
-  }, []);
+      return suggestions;
+    },
+    [],
+  );
 
   // 开始监控
   const startMonitoring = useCallback(async () => {
     setIsMonitoring(true);
-    
+
     try {
       const collectedMetrics = await collectMetrics();
       const optimizationSuggestions = generateSuggestions(collectedMetrics);
-      
+
       setMetrics(collectedMetrics);
       setSuggestions(optimizationSuggestions);
-      
-      console.log('📊 性能指标收集完成:', collectedMetrics);
-      console.log('💡 优化建议:', optimizationSuggestions);
+
+      console.log("📊 性能指标收集完成:", collectedMetrics);
+      console.log("💡 优化建议:", optimizationSuggestions);
     } catch (error) {
-      console.error('性能监控失败:', error);
+      console.error("性能监控失败:", error);
     } finally {
       setIsMonitoring(false);
     }
@@ -231,13 +251,20 @@ export function usePerformanceMonitoring() {
     startMonitoring,
     stopMonitoring,
     resetMetrics,
-    collectMetrics
+    collectMetrics,
   };
 }
 
 // 性能优化建议组件
 export function PerformanceOptimizationPanel() {
-  const { metrics, suggestions, isMonitoring, startMonitoring, stopMonitoring, resetMetrics } = usePerformanceMonitoring();
+  const {
+    metrics,
+    suggestions,
+    isMonitoring,
+    startMonitoring,
+    stopMonitoring,
+    resetMetrics,
+  } = usePerformanceMonitoring();
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
@@ -249,7 +276,7 @@ export function PerformanceOptimizationPanel() {
             disabled={isMonitoring}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
           >
-            {isMonitoring ? '监控中...' : '开始监控'}
+            {isMonitoring ? "监控中..." : "开始监控"}
           </button>
           <button
             onClick={stopMonitoring}
@@ -307,38 +334,47 @@ export function PerformanceOptimizationPanel() {
               <div
                 key={suggestion.id}
                 className={`p-4 rounded-lg border-l-4 ${
-                  suggestion.type === 'critical'
-                    ? 'bg-red-50 border-red-500'
-                    : suggestion.type === 'warning'
-                    ? 'bg-yellow-50 border-yellow-500'
-                    : 'bg-blue-50 border-blue-500'
+                  suggestion.type === "critical"
+                    ? "bg-red-50 border-red-500"
+                    : suggestion.type === "warning"
+                      ? "bg-yellow-50 border-yellow-500"
+                      : "bg-blue-50 border-blue-500"
                 }`}
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h4 className="font-semibold text-gray-800">{suggestion.title}</h4>
-                    <p className="text-gray-600 mt-1">{suggestion.description}</p>
+                    <h4 className="font-semibold text-gray-800">
+                      {suggestion.title}
+                    </h4>
+                    <p className="text-gray-600 mt-1">
+                      {suggestion.description}
+                    </p>
                     <p className="text-sm text-gray-500 mt-2">
-                      <span className="font-medium">建议行动:</span> {suggestion.action}
+                      <span className="font-medium">建议行动:</span>{" "}
+                      {suggestion.action}
                     </p>
                   </div>
                   <div className="ml-4 text-right">
-                    <div className={`px-2 py-1 rounded text-xs font-medium ${
-                      suggestion.impact === 'high'
-                        ? 'bg-red-100 text-red-800'
-                        : suggestion.impact === 'medium'
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-green-100 text-green-800'
-                    }`}>
+                    <div
+                      className={`px-2 py-1 rounded text-xs font-medium ${
+                        suggestion.impact === "high"
+                          ? "bg-red-100 text-red-800"
+                          : suggestion.impact === "medium"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-green-100 text-green-800"
+                      }`}
+                    >
                       {suggestion.impact} impact
                     </div>
-                    <div className={`px-2 py-1 rounded text-xs font-medium mt-1 ${
-                      suggestion.effort === 'low'
-                        ? 'bg-green-100 text-green-800'
-                        : suggestion.effort === 'medium'
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-red-100 text-red-800'
-                    }`}>
+                    <div
+                      className={`px-2 py-1 rounded text-xs font-medium mt-1 ${
+                        suggestion.effort === "low"
+                          ? "bg-green-100 text-green-800"
+                          : suggestion.effort === "medium"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-red-100 text-red-800"
+                      }`}
+                    >
                       {suggestion.effort} effort
                     </div>
                   </div>
@@ -360,5 +396,5 @@ export function PerformanceOptimizationPanel() {
 
 export default {
   usePerformanceMonitoring,
-  PerformanceOptimizationPanel
+  PerformanceOptimizationPanel,
 };

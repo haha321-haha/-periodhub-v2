@@ -20,26 +20,26 @@ check_url() {
     local url=$1
     local description=$2
     local expected_status=$3
-    
+
     echo -e "\n${BLUE}🔗 检查: $description${NC}"
     echo "URL: $url"
-    
+
     # 使用curl检查，设置超时和重定向跟踪
     response=$(curl -s -o /dev/null -w "%{http_code}|%{redirect_url}" --max-time 10 --location "$url" 2>/dev/null || echo "ERROR|")
-    
+
     if [[ $response == "ERROR"* ]]; then
         echo -e "${RED}❌ 连接失败或超时${NC}"
         return 1
     fi
-    
+
     status_code=$(echo $response | cut -d'|' -f1)
     redirect_url=$(echo $response | cut -d'|' -f2)
-    
+
     echo "状态码: $status_code"
     if [[ -n "$redirect_url" ]]; then
         echo "重定向到: $redirect_url"
     fi
-    
+
     if [[ "$status_code" == "$expected_status" ]]; then
         echo -e "${GREEN}✅ 通过${NC}"
         return 0
@@ -53,15 +53,15 @@ check_url() {
 check_dns() {
     local domain=$1
     local record_type=$2
-    
+
     echo -e "\n${BLUE}🌐 DNS检查: $domain ($record_type)${NC}"
-    
+
     if [[ "$record_type" == "A" ]]; then
         result=$(dig +short "$domain" A 2>/dev/null | head -1)
     elif [[ "$record_type" == "CNAME" ]]; then
         result=$(dig +short "$domain" CNAME 2>/dev/null | head -1)
     fi
-    
+
     if [[ -n "$result" ]]; then
         echo -e "${GREEN}✅ $record_type记录: $result${NC}"
         return 0
@@ -75,18 +75,18 @@ check_dns() {
 check_metadata() {
     local url=$1
     local description=$2
-    
+
     echo -e "\n${BLUE}🏷️ 元数据检查: $description${NC}"
     echo "URL: $url"
-    
+
     # 获取页面内容并检查关键元数据
     content=$(curl -s --max-time 10 "$url" 2>/dev/null || echo "")
-    
+
     if [[ -z "$content" ]]; then
         echo -e "${RED}❌ 无法获取页面内容${NC}"
         return 1
     fi
-    
+
     # 检查title标签
     title=$(echo "$content" | grep -i '<title>' | head -1 | sed 's/<[^>]*>//g' | xargs)
     if [[ -n "$title" ]]; then
@@ -94,7 +94,7 @@ check_metadata() {
     else
         echo -e "${YELLOW}⚠️ 未找到title标签${NC}"
     fi
-    
+
     # 检查description
     description=$(echo "$content" | grep -i 'name="description"' | head -1 | sed 's/.*content="\([^"]*\)".*/\1/')
     if [[ -n "$description" ]]; then
@@ -102,7 +102,7 @@ check_metadata() {
     else
         echo -e "${YELLOW}⚠️ 未找到description标签${NC}"
     fi
-    
+
     # 检查canonical URL
     canonical=$(echo "$content" | grep -i 'rel="canonical"' | head -1 | sed 's/.*href="\([^"]*\)".*/\1/')
     if [[ -n "$canonical" ]]; then
@@ -115,7 +115,7 @@ check_metadata() {
     else
         echo -e "${YELLOW}⚠️ 未找到canonical标签${NC}"
     fi
-    
+
     return 0
 }
 

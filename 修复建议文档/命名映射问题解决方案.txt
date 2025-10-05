@@ -73,7 +73,7 @@ statistics: {
 // 在PDFResource接口中添加了多语言版本支持
 versions?: {
   zh: string;    // 中文版本
-  en: string;    // 英文版本  
+  en: string;    // 英文版本
   zhEn: string;  // 中英文版本
 }
 ```
@@ -191,7 +191,7 @@ node fix-pdf-mapping.js
 statistics: {
   articles: 42,        // ✅ 保持不变
   pdfResources: 13,    // ✅ 修正为实际核心资源数
-  interactiveTools: 5, // ✅ 保持不变  
+  interactiveTools: 5, // ✅ 保持不变
   supportHours: 24     // ✅ 保持不变
 }
 ```
@@ -212,7 +212,7 @@ echo ""
 echo "📄 检查SimplePDFCenter组件:"
 if [ -f "components/SimplePDFCenter.tsx" ]; then
     echo "✅ SimplePDFCenter.tsx 存在"
-    
+
     # 检查是否使用了硬编码数值
     if grep -q "9.*7.*10.*4\|30" components/SimplePDFCenter.tsx; then
         echo "❌ 发现硬编码数值，需要修复"
@@ -221,7 +221,7 @@ if [ -f "components/SimplePDFCenter.tsx" ]; then
     else
         echo "✅ 未发现明显的硬编码数值"
     fi
-    
+
     # 检查getCategoryResourceCount函数
     if grep -q "getCategoryResourceCount" components/SimplePDFCenter.tsx; then
         echo "✅ 找到getCategoryResourceCount函数"
@@ -315,12 +315,12 @@ const getCategoryResourceCount = (category: CategoryKey) => {
   const categoryMapping = {
     immediate: 'immediate-help',
     preparation: 'planning-preparation',
-    learning: 'in-depth-understanding', 
+    learning: 'in-depth-understanding',
     management: 'long-term-management'
   };
-  
+
   // 使用实际的资源数据进行计算，而不是硬编码
-  return allResources.filter(resource => 
+  return allResources.filter(resource =>
     resource.category === categoryMapping[category]
   ).length;
 };
@@ -384,7 +384,7 @@ setTimeout(() => {
     console.log('  分类数量显示:', numbers);
     const sum = numbers.reduce((a, b) => a + parseInt(b), 0);
     console.log('  分类数量总和:', sum);
-    
+
     if (sum === 30) {
       console.log('❌ 仍然显示硬编码的30个资源');
     } else {
@@ -559,7 +559,7 @@ actualFiles.forEach(file => console.log(`  ${file}`));
 console.log(`总计：${actualFiles.length}个文件`);
 
 // 生成去重后的核心资源列表
-const coreResources = [...new Set(actualFiles.map(f => 
+const coreResources = [...new Set(actualFiles.map(f =>
   f.replace(/-en\.pdf$|zh\.pdf$/, '.pdf')
 ))];
 
@@ -630,7 +630,7 @@ class PDFMappingFixer {
       if (fs.existsSync(dir)) {
         const files = fs.readdirSync(dir).filter(f => f.endsWith('.pdf'));
         console.log(`📁 ${dir}: ${files.length}个文件`);
-        
+
         files.forEach(file => {
           const baseName = this.getBaseName(file);
           if (!this.actualFiles.has(baseName)) {
@@ -648,7 +648,7 @@ class PDFMappingFixer {
 
     const totalFiles = Array.from(this.actualFiles.values()).reduce((sum, arr) => sum + arr.length, 0);
     const coreResources = this.actualFiles.size;
-    
+
     console.log(`\n📊 统计结果:`);
     console.log(`   总PDF文件: ${totalFiles}个`);
     console.log(`   核心资源: ${coreResources}个`);
@@ -677,7 +677,7 @@ class PDFMappingFixer {
     for (const configPath of configPaths) {
       if (fs.existsSync(configPath)) {
         console.log(`📄 找到配置文件: ${configPath}`);
-        
+
         const content = fs.readFileSync(configPath, 'utf8');
         this.extractConfigFiles(content);
         break;
@@ -716,7 +716,7 @@ class PDFMappingFixer {
       if (this.actualFiles.has(baseName)) {
         const actualVariants = this.actualFiles.get(baseName);
         const bestMatch = this.findBestMatch(configFileName, actualVariants);
-        
+
         if (bestMatch.filename !== configFileName) {
           this.fixedMappings.push({
             baseName,
@@ -772,9 +772,9 @@ class PDFMappingFixer {
   calculateSimilarity(str1, str2) {
     const longer = str1.length > str2.length ? str1 : str2;
     const shorter = str1.length > str2.length ? str2 : str1;
-    
+
     if (longer.length === 0) return 1.0;
-    
+
     const distance = this.levenshteinDistance(longer, shorter);
     return (longer.length - distance) / longer.length;
   }
@@ -782,15 +782,15 @@ class PDFMappingFixer {
   // 计算Levenshtein距离
   levenshteinDistance(str1, str2) {
     const matrix = [];
-    
+
     for (let i = 0; i <= str2.length; i++) {
       matrix[i] = [i];
     }
-    
+
     for (let j = 0; j <= str1.length; j++) {
       matrix[0][j] = j;
     }
-    
+
     for (let i = 1; i <= str2.length; i++) {
       for (let j = 1; j <= str1.length; j++) {
         if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
@@ -804,7 +804,7 @@ class PDFMappingFixer {
         }
       }
     }
-    
+
     return matrix[str2.length][str1.length];
   }
 
@@ -904,13 +904,13 @@ class PDFMappingFixer {
   // 主执行函数
   run() {
     console.log('🚀 启动PDF映射修复脚本\n');
-    
+
     this.scanActualFiles();
     this.parseConfigFile();
     this.analyzeMappings();
     this.generateReport();
     this.generateFixSuggestions();
-    
+
     console.log('✅ 分析完成！请根据建议修复配置文件。');
   }
 }
@@ -955,7 +955,7 @@ class PDFConsistencyChecker {
     ];
 
     this.actualPdfs = [];
-    
+
     pdfDirs.forEach(dir => {
       if (fs.existsSync(dir)) {
         const files = this.scanDirectory(dir);
@@ -982,7 +982,7 @@ class PDFConsistencyChecker {
       items.forEach(item => {
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
-        
+
         if (stat.isDirectory()) {
           files = files.concat(this.scanDirectory(fullPath));
         } else if (item.toLowerCase().endsWith('.pdf')) {
@@ -1023,7 +1023,7 @@ class PDFConsistencyChecker {
     ];
 
     this.configPdfs = [];
-    
+
     configPaths.forEach(configPath => {
       if (fs.existsSync(configPath)) {
         try {
@@ -1066,10 +1066,10 @@ class PDFConsistencyChecker {
   // 执行一致性检查
   checkConsistency() {
     console.log('\n🔍 开始PDF资源一致性检查...\n');
-    
+
     this.scanActualPDFs();
     this.loadConfigPDFs();
-    
+
     this.analyzeMatches();
     this.generateSuggestions();
     this.printReport();
@@ -1081,12 +1081,12 @@ class PDFConsistencyChecker {
     const configFilenames = this.configPdfs.map(pdf => pdf.filename);
 
     // 找出配置中存在但实际文件缺失的
-    const missingFiles = configFilenames.filter(filename => 
+    const missingFiles = configFilenames.filter(filename =>
       !actualFilenames.includes(filename)
     );
 
     // 找出实际存在但配置中未声明的
-    const unconfiguredFiles = actualFilenames.filter(filename => 
+    const unconfiguredFiles = actualFilenames.filter(filename =>
       !configFilenames.includes(filename)
     );
 
@@ -1097,7 +1097,7 @@ class PDFConsistencyChecker {
       missing: missingFiles,
       unconfigured: unconfiguredFiles,
       possibleMappings: possibleMappings,
-      exactMatches: configFilenames.filter(filename => 
+      exactMatches: configFilenames.filter(filename =>
         actualFilenames.includes(filename)
       )
     };
@@ -1106,7 +1106,7 @@ class PDFConsistencyChecker {
   // 寻找可能的文件映射关系
   findPossibleMappings(missingFiles, unconfiguredFiles) {
     const mappings = [];
-    
+
     missingFiles.forEach(missingFile => {
       unconfiguredFiles.forEach(unconfiguredFile => {
         const similarity = this.calculateSimilarity(missingFile, unconfiguredFile);
@@ -1128,9 +1128,9 @@ class PDFConsistencyChecker {
   calculateSimilarity(str1, str2) {
     const longer = str1.length > str2.length ? str1 : str2;
     const shorter = str1.length > str2.length ? str2 : str1;
-    
+
     if (longer.length === 0) return 1.0;
-    
+
     const distance = this.levenshteinDistance(longer, shorter);
     return (longer.length - distance) / longer.length;
   }
@@ -1138,15 +1138,15 @@ class PDFConsistencyChecker {
   // 计算编辑距离
   levenshteinDistance(str1, str2) {
     const matrix = [];
-    
+
     for (let i = 0; i <= str2.length; i++) {
       matrix[i] = [i];
     }
-    
+
     for (let j = 0; j <= str1.length; j++) {
       matrix[0][j] = j;
     }
-    
+
     for (let i = 1; i <= str2.length; i++) {
       for (let j = 1; j <= str1.length; j++) {
         if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
@@ -1160,7 +1160,7 @@ class PDFConsistencyChecker {
         }
       }
     }
-    
+
     return matrix[str2.length][str1.length];
   }
 
@@ -1183,10 +1183,10 @@ class PDFConsistencyChecker {
     }
 
     // 建议3：真正缺失的文件
-    const reallyMissing = this.mismatches.missing.filter(missing => 
+    const reallyMissing = this.mismatches.missing.filter(missing =>
       !this.mismatches.possibleMappings.some(mapping => mapping.configured === missing)
     );
-    
+
     if (reallyMissing.length > 0) {
       this.suggestions.push({
         type: 'missing',
@@ -1197,7 +1197,7 @@ class PDFConsistencyChecker {
     // 建议4：未配置的文件
     if (this.mismatches.unconfigured.length > 0) {
       this.suggestions.push({
-        type: 'unconfigured', 
+        type: 'unconfigured',
         message: `📝 未配置: ${this.mismatches.unconfigured.length}个PDF文件需要添加到配置`
       });
     }
@@ -1213,7 +1213,7 @@ class PDFConsistencyChecker {
   // 打印详细报告
   printReport() {
     console.log('📊 === PDF资源一致性检查报告 ===\n');
-    
+
     // 总体统计
     console.log('📈 总体统计:');
     console.log(`   配置声明: ${this.configPdfs.length}个`);
@@ -1244,10 +1244,10 @@ class PDFConsistencyChecker {
     }
 
     // 真正缺失的文件
-    const reallyMissing = this.mismatches.missing.filter(missing => 
+    const reallyMissing = this.mismatches.missing.filter(missing =>
       !this.mismatches.possibleMappings.some(mapping => mapping.configured === missing)
     );
-    
+
     if (reallyMissing.length > 0) {
       console.log('❌ 真正缺失的PDF文件:');
       reallyMissing.forEach(filename => {
@@ -1257,11 +1257,11 @@ class PDFConsistencyChecker {
     }
 
     // 未配置的文件
-    const unconfiguredFiles = this.actualPdfs.filter(pdf => 
+    const unconfiguredFiles = this.actualPdfs.filter(pdf =>
       !this.mismatches.possibleMappings.some(mapping => mapping.actual === pdf.filename) &&
       !this.mismatches.exactMatches.includes(pdf.filename)
     );
-    
+
     if (unconfiguredFiles.length > 0) {
       console.log('📝 未配置的PDF文件:');
       unconfiguredFiles.forEach(pdf => {
@@ -1286,7 +1286,7 @@ class PDFConsistencyChecker {
   generateFixScript() {
     console.log('🔧 建议的修复操作:');
     console.log('');
-    
+
     if (this.mismatches.possibleMappings.length > 0) {
       console.log('# 文件重命名建议:');
       this.mismatches.possibleMappings.forEach(mapping => {
@@ -1298,7 +1298,7 @@ class PDFConsistencyChecker {
     console.log('# 更新配置文件中的统计数据:');
     console.log(`# 将PDF资源数量更新为: ${this.actualPdfs.length}`);
     console.log('');
-    
+
     console.log('# 运行此脚本:');
     console.log('node pdf-consistency-check.js');
   }
@@ -1331,19 +1331,19 @@ class PDFConfigSync {
   // 自动发现并同步PDF配置
   async autoSync() {
     console.log('🔄 开始PDF配置自动同步...\n');
-    
+
     // 1. 扫描实际PDF文件
     this.scanPDFFiles();
-    
+
     // 2. 找到配置文件
     this.findConfigFiles();
-    
+
     // 3. 生成新的配置内容
     const newConfig = this.generateNewConfig();
-    
+
     // 4. 更新配置文件
     this.updateConfigFiles(newConfig);
-    
+
     // 5. 生成验证报告
     this.generateValidationReport();
   }
@@ -1352,20 +1352,20 @@ class PDFConfigSync {
   scanPDFFiles() {
     const searchDirs = [
       './public/pdfs',
-      './src/assets/pdfs', 
+      './src/assets/pdfs',
       './assets/pdfs',
       './public/assets/pdfs',
       './static/pdfs'
     ];
 
     this.actualPdfs = [];
-    
+
     searchDirs.forEach(dir => {
       if (fs.existsSync(dir)) {
         this.scanDirectory(dir).forEach(file => {
           const stats = fs.statSync(file);
           const filename = path.basename(file);
-          
+
           // 提取文件信息
           this.actualPdfs.push({
             filename: filename,
@@ -1392,7 +1392,7 @@ class PDFConfigSync {
       items.forEach(item => {
         const fullPath = path.join(dir, item);
         const stat = fs.statSync(fullPath);
-        
+
         if (stat.isDirectory()) {
           files = files.concat(this.scanDirectory(fullPath));
         } else if (item.toLowerCase().endsWith('.pdf')) {
@@ -1419,14 +1419,14 @@ class PDFConfigSync {
         return category;
       }
     }
-    
+
     return 'in-depth-understanding'; // 默认分类
   }
 
   // 生成标题
   generateTitle(filename) {
     const name = filename.replace('.pdf', '');
-    const words = name.split('-').map(word => 
+    const words = name.split('-').map(word =>
       word.charAt(0).toUpperCase() + word.slice(1)
     );
     return words.join(' ');
@@ -1453,7 +1453,7 @@ class PDFConfigSync {
         return description;
       }
     }
-    
+
     return '实用PDF资源';
   }
 
@@ -1473,13 +1473,13 @@ class PDFConfigSync {
     };
 
     let tags = ['PDF资源'];
-    
+
     for (const [keyword, keywordTags] of Object.entries(tagMap)) {
       if (filename.toLowerCase().includes(keyword)) {
         tags = tags.concat(keywordTags);
       }
     }
-    
+
     return [...new Set(tags)]; // 去重
   }
 
@@ -1552,7 +1552,7 @@ ${this.actualPdfs.map(pdf => {
 ];
 
 export const pdfResourcesByCategory = {
-${Object.entries(categories).map(([category, pdfs]) => 
+${Object.entries(categories).map(([category, pdfs]) =>
   `  '${category}': pdfResources.filter(pdf => pdf.category === '${category}')`
 ).join(',\n')}
 };
@@ -1560,7 +1560,7 @@ ${Object.entries(categories).map(([category, pdfs]) =>
 export const pdfStatistics = {
   total: ${this.actualPdfs.length},
   byCategory: {
-${Object.entries(categories).map(([category, pdfs]) => 
+${Object.entries(categories).map(([category, pdfs]) =>
   `    '${category}': ${pdfs.length}`
 ).join(',\n')}
   }
@@ -1577,7 +1577,7 @@ ${Object.entries(categories).map(([category, pdfs]) =>
       const backupPath = this.configPath + '.backup.' + Date.now();
       fs.copyFileSync(this.configPath, backupPath);
       console.log(`📄 已备份原配置: ${backupPath}`);
-      
+
       // 写入新配置
       fs.writeFileSync(this.configPath, newConfig, 'utf8');
       console.log(`✅ 已更新PDF配置: ${this.configPath}`);
@@ -1593,7 +1593,7 @@ ${Object.entries(categories).map(([category, pdfs]) =>
   updateSiteConfig() {
     try {
       const content = fs.readFileSync(this.siteConfigPath, 'utf8');
-      
+
       // 更新PDF资源数量
       const updatedContent = content.replace(
         /(pdfResources:\s*)(\d+)/g,
@@ -1604,7 +1604,7 @@ ${Object.entries(categories).map(([category, pdfs]) =>
         // 备份原文件
         const backupPath = this.siteConfigPath + '.backup.' + Date.now();
         fs.copyFileSync(this.siteConfigPath, backupPath);
-        
+
         // 写入更新后的内容
         fs.writeFileSync(this.siteConfigPath, updatedContent, 'utf8');
         console.log(`✅ 已更新站点配置: ${this.siteConfigPath}`);
@@ -1617,7 +1617,7 @@ ${Object.entries(categories).map(([category, pdfs]) =>
   // 生成验证报告
   generateValidationReport() {
     console.log('\n📊 === PDF配置同步完成 ===\n');
-    
+
     console.log('📈 同步结果:');
     console.log(`   实际PDF文件: ${this.actualPdfs.length}个`);
     console.log(`   配置文件: ${this.configPath ? '✅ 已更新' : '❌ 未找到'}`);
@@ -1687,7 +1687,7 @@ find . -path "*/assets/pdfs/*" -name "*.pdf" | sort
 
 ### **方案特点**
 - ✅ **智能诊断**：自动发现文件系统中的所有PDF
-- ✅ **相似度匹配**：识别可能的文件映射关系  
+- ✅ **相似度匹配**：识别可能的文件映射关系
 - ✅ **自动同步**：配置文件与实际文件自动对齐
 - ✅ **零损失**：保留所有现有文件，只修正配置
 
@@ -1706,7 +1706,7 @@ node pdf-consistency-check.js
 
 #### **步骤2：执行自动同步**
 ```bash
-# 将上面的脚本保存为 pdf-config-sync.js  
+# 将上面的脚本保存为 pdf-config-sync.js
 node pdf-config-sync.js
 ```
 

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from 'lucide-react';
-import { Notification } from '../types';
-import { ANIMATION_DURATION } from '../constants';
+import React from "react";
+import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from "lucide-react";
+import { Notification } from "../types";
+import { ANIMATION_DURATION } from "../constants";
 
 interface NotificationContainerProps {
   notifications: Notification[];
@@ -12,7 +12,7 @@ interface NotificationContainerProps {
 
 const NotificationContainer: React.FC<NotificationContainerProps> = ({
   notifications,
-  onRemove
+  onRemove,
 }) => {
   if (notifications.length === 0) return null;
 
@@ -36,17 +36,17 @@ interface NotificationItemProps {
 
 const NotificationItem: React.FC<NotificationItemProps> = ({
   notification,
-  onRemove
+  onRemove,
 }) => {
   const getIcon = () => {
     switch (notification.type) {
-      case 'success':
+      case "success":
         return <CheckCircle className="w-5 h-5 text-green-500" />;
-      case 'error':
+      case "error":
         return <AlertCircle className="w-5 h-5 text-red-500" />;
-      case 'warning':
+      case "warning":
         return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
-      case 'info':
+      case "info":
         return <Info className="w-5 h-5 text-blue-500" />;
       default:
         return <Info className="w-5 h-5 text-gray-500" />;
@@ -55,46 +55,46 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
 
   const getBackgroundColor = () => {
     switch (notification.type) {
-      case 'success':
-        return 'bg-green-50 border-green-200';
-      case 'error':
-        return 'bg-red-50 border-red-200';
-      case 'warning':
-        return 'bg-yellow-50 border-yellow-200';
-      case 'info':
-        return 'bg-blue-50 border-blue-200';
+      case "success":
+        return "bg-green-50 border-green-200";
+      case "error":
+        return "bg-red-50 border-red-200";
+      case "warning":
+        return "bg-yellow-50 border-yellow-200";
+      case "info":
+        return "bg-blue-50 border-blue-200";
       default:
-        return 'bg-gray-50 border-gray-200';
+        return "bg-gray-50 border-gray-200";
     }
   };
 
   const getTitleColor = () => {
     switch (notification.type) {
-      case 'success':
-        return 'text-green-800';
-      case 'error':
-        return 'text-red-800';
-      case 'warning':
-        return 'text-yellow-800';
-      case 'info':
-        return 'text-blue-800';
+      case "success":
+        return "text-green-800";
+      case "error":
+        return "text-red-800";
+      case "warning":
+        return "text-yellow-800";
+      case "info":
+        return "text-blue-800";
       default:
-        return 'text-gray-800';
+        return "text-gray-800";
     }
   };
 
   const getMessageColor = () => {
     switch (notification.type) {
-      case 'success':
-        return 'text-green-700';
-      case 'error':
-        return 'text-red-700';
-      case 'warning':
-        return 'text-yellow-700';
-      case 'info':
-        return 'text-blue-700';
+      case "success":
+        return "text-green-700";
+      case "error":
+        return "text-red-700";
+      case "warning":
+        return "text-yellow-700";
+      case "info":
+        return "text-blue-700";
       default:
-        return 'text-gray-700';
+        return "text-gray-700";
     }
   };
 
@@ -109,9 +109,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
       role="alert"
     >
       <div className="flex items-start">
-        <div className="flex-shrink-0">
-          {getIcon()}
-        </div>
+        <div className="flex-shrink-0">{getIcon()}</div>
         <div className="ml-3 flex-1">
           <h3 className={`text-sm font-medium ${getTitleColor()}`}>
             {notification.title}
@@ -127,9 +125,10 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
                   onClick={action.action}
                   className={`
                     text-xs font-medium px-3 py-1 rounded-md
-                    ${action.style === 'primary' 
-                      ? 'bg-pink-600 text-white hover:bg-pink-700' 
-                      : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+                    ${
+                      action.style === "primary"
+                        ? "bg-pink-600 text-white hover:bg-pink-700"
+                        : "bg-gray-200 text-gray-800 hover:bg-gray-300"
                     }
                     transition-colors duration-${ANIMATION_DURATION.fast}
                   `}

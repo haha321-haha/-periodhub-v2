@@ -23,7 +23,7 @@ const optimizedPages = [
   'https://www.periodhub.health/zh/articles/nsaid-menstrual-pain-professional-guide',
   'https://www.periodhub.health/zh/articles/personal-menstrual-health-profile',
   'https://www.periodhub.health/zh/articles/specific-menstrual-pain-management-guide',
-  
+
   // 英文页面
   'https://www.periodhub.health/en/articles/5-minute-period-pain-relief',
   'https://www.periodhub.health/en/articles/comprehensive-iud-guide',
@@ -107,4 +107,3 @@ console.log('1. Google Search Console: 使用网址检查工具逐个提交URL')
 console.log('2. Bing Webmaster Tools: 批量提交URL或重新提交sitemap');
 console.log('3. 监控索引状态和搜索表现变化');
 console.log('\n🌐 Sitemap URL: https://www.periodhub.health/sitemap.xml');
-

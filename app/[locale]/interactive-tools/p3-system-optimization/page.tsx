@@ -159,7 +159,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
             {locale === 'zh' ? 'P3阶段：系统优化和性能提升' : 'P3 Phase: System Optimization and Performance Enhancement'}
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {locale === 'zh' 
+            {locale === 'zh'
               ? '完善国际化、性能优化、测试和文档，确保系统质量和稳定性'
               : 'Complete internationalization, performance optimization, testing, and documentation to ensure system quality and stability'
             }
@@ -171,7 +171,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
           {p3Tasks.map((task) => {
             const status = getTaskStatus(task.id);
             const Icon = task.icon;
-            
+
             return (
               <div
                 key={task.id}
@@ -188,17 +188,17 @@ export default function P3Phase({ locale }: P3PhaseProps) {
                   }`} />
                   {getStatusIcon(status)}
                 </div>
-                
+
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {task.title}
                 </h3>
-                
+
                 <p className="text-sm text-gray-600 mb-4">
                   {task.description}
                 </p>
-                
+
                 <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
+                  <div
                     className={`h-2 rounded-full transition-all duration-500 ${
                       status === 'completed' ? 'bg-green-500' :
                       status === 'active' ? 'bg-blue-500' :
@@ -207,7 +207,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
                     style={{ width: `${task.progress}%` }}
                   />
                 </div>
-                
+
                 <p className="text-xs text-gray-500 mt-2">
                   {task.progress}% {locale === 'zh' ? '完成' : 'Complete'}
                 </p>
@@ -222,7 +222,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
             <BarChart3 className="w-6 h-6 mr-2 text-blue-600" />
             {locale === 'zh' ? 'P3阶段统计' : 'P3 Phase Statistics'}
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-600 mb-2">4</div>
@@ -230,7 +230,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
                 {locale === 'zh' ? '优化模块' : 'Optimization Modules'}
               </div>
             </div>
-            
+
             <div className="text-center">
               <div className="text-3xl font-bold text-green-600 mb-2">
                 {completedTasks.size}
@@ -239,7 +239,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
                 {locale === 'zh' ? '已完成任务' : 'Completed Tasks'}
               </div>
             </div>
-            
+
             <div className="text-center">
               <div className="text-3xl font-bold text-yellow-600 mb-2">
                 {p3Tasks.filter(task => getTaskStatus(task.id) === 'active').length}
@@ -248,7 +248,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
                 {locale === 'zh' ? '进行中任务' : 'Active Tasks'}
               </div>
             </div>
-            
+
             <div className="text-center">
               <div className="text-3xl font-bold text-purple-600 mb-2">
                 {Math.round((completedTasks.size / p3Tasks.length) * 100)}%
@@ -267,7 +267,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
               {p3Tasks.map((task) => {
                 const status = getTaskStatus(task.id);
                 const Icon = task.icon;
-                
+
                 return (
                   <button
                     key={task.id}
@@ -303,7 +303,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
               {locale === 'zh' ? 'P3阶段完成！' : 'P3 Phase Complete!'}
             </h3>
             <p className="text-green-700 mb-6">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? '所有系统优化和性能提升任务已完成，系统已达到生产就绪状态'
                 : 'All system optimization and performance enhancement tasks are complete, system is production-ready'
               }

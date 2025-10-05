@@ -1,10 +1,10 @@
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import Breadcrumb from '@/components/Breadcrumb';
-import { 
-  MessageCircle, 
-  Heart, 
-  Users, 
+import {
+  MessageCircle,
+  Heart,
+  Users,
   School,
   Stethoscope,
   CheckCircle,
@@ -28,10 +28,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'teenHealth' });
-  
+
   return {
     title: locale === 'zh' ? '沟通指导 - 青少年经期健康专区' : 'Communication Guide - Teen Menstrual Health Zone',
-    description: locale === 'zh' 
+    description: locale === 'zh'
       ? '如何与家长、老师、医生有效沟通？提供对话模板和沟通技巧，让你勇敢表达需求。'
       : 'How to effectively communicate with parents, teachers, and doctors? Conversation templates and communication skills.',
   };
@@ -44,7 +44,7 @@ export default async function CommunicationGuidePage({
 }) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
-  
+
   const t = await getTranslations('scenarioSolutionsPage');
   const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
 
@@ -58,7 +58,7 @@ export default async function CommunicationGuidePage({
       templates: [
         {
           situation: locale === 'zh' ? '第一次来月经' : 'First Period',
-          template: locale === 'zh' 
+          template: locale === 'zh'
             ? '"妈妈，我想我来月经了，我有点紧张，你能帮助我吗？我需要知道该怎么办。"'
             : '"Mom, I think I got my period. I\'m a bit nervous, can you help me? I need to know what to do."',
           tips: locale === 'zh' ? '选择一个安静、私密的时间和地点' : 'Choose a quiet, private time and place'
@@ -167,7 +167,7 @@ export default async function CommunicationGuidePage({
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
       {/* Breadcrumb */}
-      <Breadcrumb 
+      <Breadcrumb
         items={[
           { label: breadcrumbT('scenarioSolutions'), href: `/${locale}/scenario-solutions` },
           { label: breadcrumbT('teenHealth'), href: `/${locale}/teen-health` },
@@ -198,7 +198,7 @@ export default async function CommunicationGuidePage({
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
           {locale === 'zh' ? '为什么沟通很重要？' : 'Why Is Communication Important?'}
         </h2>
-        
+
         <div className="grid md:grid-cols-3 gap-8">
           <div className="text-center">
             <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
@@ -211,7 +211,7 @@ export default async function CommunicationGuidePage({
               {locale === 'zh' ? '让身边的人了解你的需求，给你更多支持' : 'Help people around you understand your needs and give you more support'}
             </p>
           </div>
-          
+
           <div className="text-center">
             <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
               <Stethoscope className="w-8 h-8 text-green-600" />
@@ -223,7 +223,7 @@ export default async function CommunicationGuidePage({
               {locale === 'zh' ? '及时获得医疗建议和专业治疗' : 'Get timely medical advice and professional treatment'}
             </p>
           </div>
-          
+
           <div className="text-center">
             <div className="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
               <Users className="w-8 h-8 text-purple-600" />
@@ -243,7 +243,7 @@ export default async function CommunicationGuidePage({
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
           {locale === 'zh' ? '沟通技巧' : 'Communication Tips'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-8">
           {communicationTips.map((tip, index) => (
             <div key={index} className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
@@ -273,7 +273,7 @@ export default async function CommunicationGuidePage({
         <p className="text-center text-gray-600 mb-12">
           {locale === 'zh' ? '根据不同情况，选择合适的表达方式' : 'Choose appropriate expressions based on different situations'}
         </p>
-        
+
         <div className="space-y-12">
           {communicationScenarios.map((scenario) => (
             <div key={scenario.id} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
@@ -290,7 +290,7 @@ export default async function CommunicationGuidePage({
                   </p>
                 </div>
               </div>
-              
+
               <div className="space-y-6">
                 {scenario.templates.map((template, index) => (
                   <div key={index} className="bg-gray-50 rounded-lg p-6">
@@ -303,13 +303,13 @@ export default async function CommunicationGuidePage({
                         <span>{locale === 'zh' ? '可复制使用' : 'Copy to use'}</span>
                       </div>
                     </div>
-                    
+
                     <div className="bg-white rounded-lg p-4 mb-3 border-l-4 border-blue-500">
                       <p className="text-gray-700 italic">
                         {template.template}
                       </p>
                     </div>
-                    
+
                     <div className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
                       <p className="text-sm text-gray-600">
@@ -333,14 +333,14 @@ export default async function CommunicationGuidePage({
             {locale === 'zh' ? '紧急情况下的沟通' : 'Emergency Communication'}
           </h2>
         </div>
-        
+
         <p className="text-gray-700 mb-6">
           {locale === 'zh'
             ? '如果你遇到以下情况，请立即寻求帮助，不要犹豫：'
             : 'If you encounter the following situations, seek help immediately without hesitation:'
           }
         </p>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white rounded-lg p-6">
             <h3 className="font-semibold text-gray-900 mb-3">
@@ -353,7 +353,7 @@ export default async function CommunicationGuidePage({
               <li>• {locale === 'zh' ? '晕倒或意识模糊' : 'Fainting or confusion'}</li>
             </ul>
           </div>
-          
+
           <div className="bg-white rounded-lg p-6">
             <h3 className="font-semibold text-gray-900 mb-3">
               {locale === 'zh' ? '紧急联系：' : 'Emergency Contacts:'}
@@ -404,7 +404,7 @@ export default async function CommunicationGuidePage({
           <ArrowLeft className="w-5 h-5 mr-2" />
           {locale === 'zh' ? '上一篇：情绪支持与心理健康' : 'Previous: Emotional Support & Mental Health'}
         </Link>
-        
+
         <Link
           href={`/${locale}/teen-health`}
           className="flex items-center text-primary-600 hover:text-primary-700 transition-colors"

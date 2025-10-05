@@ -27,7 +27,7 @@ export default function PainPatternRecognition({ className = '' }: PainPatternRe
             <h3 className="text-2xl font-semibold mb-6 text-gray-800">
               {t('types.title')}
             </h3>
-            
+
             <div className="grid md:grid-cols-2 gap-6">
               {/* Menstrual focused type */}
               <div className="bg-red-50 border border-red-200 rounded-lg p-6">
@@ -101,12 +101,12 @@ export default function PainPatternRecognition({ className = '' }: PainPatternRe
               <span className="text-2xl mr-2">📊</span>
               {t('recordingImportance.title')}
             </h3>
-            
+
             <div className="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg">
               <p className="text-gray-700 mb-6">
                 {t('recordingImportance.description')}
               </p>
-              
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-semibold mb-3 text-blue-700">
@@ -121,7 +121,7 @@ export default function PainPatternRecognition({ className = '' }: PainPatternRe
                     ))}
                   </ul>
                 </div>
-                
+
                 <div>
                   <h4 className="font-semibold mb-3 text-blue-700">
                     {t('recordingImportance.analysisDimensions.title')}

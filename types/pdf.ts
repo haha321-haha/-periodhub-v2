@@ -4,10 +4,10 @@
  */
 
 export type PDFCategory =
-  | 'management-tools'
-  | 'health-management'
-  | 'communication-guidance'
-  | 'educational-resources';
+  | "management-tools"
+  | "health-management"
+  | "communication-guidance"
+  | "educational-resources";
 
 export interface PDFResource {
   /** 唯一标识符 */
@@ -80,7 +80,7 @@ export interface PDFDownloadEvent {
   userAgent?: string;
 }
 
-export type Locale = 'zh' | 'en';
+export type Locale = "zh" | "en";
 
 export interface PDFComponentProps {
   /** 当前语言 */

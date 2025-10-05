@@ -143,5 +143,3 @@ export interface QuizAnalysis {
   personalizedTips: string[];
   nextRecommendations: string[];
 }
-
-

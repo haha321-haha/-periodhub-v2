@@ -3,11 +3,11 @@
  * 实现基于编辑距离的模糊匹配搜索
  */
 
-import { 
+import {
   IFuzzySearchEngine,
-  SearchOptions, 
-  SearchResponse, 
-  SearchResult, 
+  SearchOptions,
+  SearchResponse,
+  SearchResult,
   UnifiedSearchConfig,
   FuzzySearchOptions
 } from '../types';
@@ -55,4 +55,4 @@ export class FuzzySearchEngine implements IFuzzySearchEngine {
   async clearIndex(): Promise<void> {
     // TODO: 清除索引
   }
-} 
+}

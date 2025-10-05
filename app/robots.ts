@@ -37,7 +37,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'Googlebot',
         allow: '/',
         disallow: [
-          '/api/', 
+          '/api/',
           '/admin/',
           '/icon/',
           '/icon?*',
@@ -59,7 +59,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'Bingbot',
         allow: '/',
         disallow: [
-          '/api/', 
+          '/api/',
           '/admin/',
           '/icon/',
           '/icon?*',

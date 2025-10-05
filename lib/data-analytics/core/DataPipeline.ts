@@ -1,8 +1,8 @@
 import { EventCollector } from './EventCollector';
 import { MetricsEngine } from './MetricsEngine';
-import { 
-  EnhancedUserEvent, 
-  DataPipelineStatus, 
+import {
+  EnhancedUserEvent,
+  DataPipelineStatus,
   DashboardData,
   CoreMetrics,
   MetricsResult
@@ -22,7 +22,7 @@ export class DataPipeline {
   constructor() {
     this.eventCollector = new EventCollector();
     this.metricsEngine = new MetricsEngine();
-    
+
     this.pipelineStatus = {
       name: 'Period Hub Analytics Pipeline',
       status: 'idle',
@@ -44,10 +44,10 @@ export class DataPipeline {
     }
 
     console.log('🚀 启动 Period Hub 数据分析管道');
-    
+
     // 立即执行一次处理
     await this.processPipeline();
-    
+
     // 设置定时处理（每24小时一次）
     this.processingInterval = setInterval(async () => {
       await this.processPipeline();
@@ -88,7 +88,7 @@ export class DataPipeline {
 
     this.isProcessing = true;
     const startTime = Date.now();
-    
+
     try {
       console.log('📊 开始数据处理...');
       this.pipelineStatus.status = 'processing';
@@ -113,12 +113,12 @@ export class DataPipeline {
       this.pipelineStatus.error = undefined;
 
       console.log(`✅ 数据处理完成，耗时: ${this.pipelineStatus.processingDuration}ms`);
-      
+
     } catch (error) {
       this.pipelineStatus.status = 'failed';
       this.pipelineStatus.error = error instanceof Error ? error.message : '未知错误';
       this.pipelineStatus.processingDuration = Date.now() - startTime;
-      
+
       console.error('❌ 数据处理失败:', error);
       throw error;
     } finally {
@@ -132,17 +132,17 @@ export class DataPipeline {
   private async collectAndProcessEvents(): Promise<void> {
     try {
       console.log('📥 收集事件数据...');
-      
+
       // 获取待处理的事件
       const events = await this.eventCollector.getCollectedEvents();
-      
+
       if (events.length === 0) {
         console.log('ℹ️ 没有新的事件需要处理');
         return;
       }
 
       console.log(`📋 收集到 ${events.length} 个事件`);
-      
+
       // 处理每个事件
       const processedEvents: EnhancedUserEvent[] = [];
       const failedEvents: any[] = [];
@@ -151,10 +151,10 @@ export class DataPipeline {
         try {
           const enhancedEvent = await this.enhanceEvent(event);
           processedEvents.push(enhancedEvent);
-          
+
           // 添加到指标引擎
           this.metricsEngine.addEvent(enhancedEvent);
-          
+
         } catch (error) {
           console.error('处理事件失败:', (event as any).id || 'unknown_event', error);
           failedEvents.push({ event, error });
@@ -166,7 +166,7 @@ export class DataPipeline {
       this.pipelineStatus.failedRecords += failedEvents.length;
 
       console.log(`✅ 成功处理 ${processedEvents.length} 个事件，失败 ${failedEvents.length} 个`);
-      
+
     } catch (error) {
       console.error('❌ 事件收集失败:', error);
       throw error;
@@ -216,16 +216,16 @@ export class DataPipeline {
   private async calculateMetrics(): Promise<void> {
     try {
       console.log('📈 计算核心指标...');
-      
+
       const metrics = await this.metricsEngine.calculateAllMetrics();
-      
+
       console.log('📊 核心指标计算完成:');
       console.log(`  - 日活跃用户数: ${metrics.dailyActiveUsers}`);
       console.log(`  - 用户留存率: ${metrics.userRetentionRate.toFixed(2)}%`);
       console.log(`  - 平台使用深度: ${metrics.platformEngagementDepth.toFixed(2)} 分钟`);
       console.log(`  - 新用户获取成本: ¥${metrics.newUserAcquisitionCost.toFixed(2)}`);
       console.log(`  - 用户生命周期价值: ¥${metrics.userLifetimeValue.toFixed(2)}`);
-      
+
     } catch (error) {
       console.error('❌ 指标计算失败:', error);
       throw error;
@@ -238,16 +238,16 @@ export class DataPipeline {
   private async generateDashboardData(): Promise<void> {
     try {
       console.log('📊 生成仪表板数据...');
-      
+
       const dashboardData = await this.metricsEngine.getDashboardData();
-      
+
       // 在实际应用中，这里会将数据保存到数据库或缓存
       console.log('✅ 仪表板数据生成完成');
       console.log(`  - 总用户数: ${dashboardData.userActivity.totalUsers}`);
       console.log(`  - 活跃用户: ${dashboardData.userActivity.activeUsers}`);
       console.log(`  - 总下载量: ${dashboardData.resourceUsage.totalDownloads}`);
       console.log(`  - 总浏览量: ${dashboardData.resourceUsage.totalViews}`);
-      
+
     } catch (error) {
       console.error('❌ 仪表板数据生成失败:', error);
       throw error;
@@ -260,12 +260,12 @@ export class DataPipeline {
   private async performDataQualityChecks(): Promise<void> {
     try {
       console.log('🔍 执行数据质量检查...');
-      
+
       const eventHistory = this.metricsEngine.getEventHistory();
       const checks = [];
 
       // 检查1: 数据完整性
-      const incompleteEvents = eventHistory.filter(event => 
+      const incompleteEvents = eventHistory.filter(event =>
         !event.userId || !event.timestamp || !event.type
       );
       if (incompleteEvents.length > 0) {
@@ -286,13 +286,13 @@ export class DataPipeline {
       eventHistory.forEach(event => {
         userEventCounts.set(event.userId, (userEventCounts.get(event.userId) || 0) + 1);
       });
-      
+
       const avgEventsPerUser = Array.from(userEventCounts.values())
         .reduce((sum, count) => sum + count, 0) / userEventCounts.size;
-      
+
       const anomalousUsers = Array.from(userEventCounts.entries())
         .filter(([_, count]) => count > avgEventsPerUser * 10);
-      
+
       if (anomalousUsers.length > 0) {
         checks.push(`发现 ${anomalousUsers.length} 个异常活跃用户`);
       }
@@ -303,7 +303,7 @@ export class DataPipeline {
         console.log('⚠️ 数据质量检查发现问题:');
         checks.forEach(check => console.log(`  - ${check}`));
       }
-      
+
     } catch (error) {
       console.error('❌ 数据质量检查失败:', error);
       // 质量检查失败不应该阻止管道继续运行
@@ -375,7 +375,7 @@ export class DataPipeline {
     // 简化的设备信息解析
     const isMobile = /Mobile|Android|iPhone|iPad/i.test(userAgent);
     const isTablet = /iPad|Tablet/i.test(userAgent);
-    
+
     return {
       type: isTablet ? 'tablet' : isMobile ? 'mobile' : 'desktop',
       os: this.extractOS(userAgent),
@@ -409,4 +409,4 @@ export class DataPipeline {
 }
 
 // 导出单例实例
-export const dataPipeline = new DataPipeline(); 
+export const dataPipeline = new DataPipeline();

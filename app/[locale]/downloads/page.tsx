@@ -16,27 +16,18 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>
 }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'downloadsPage' });
 
   return {
-    title: locale === 'zh' 
-      ? 'PDF资源下载中心 - Period Hub' 
-      : 'PDF Resources Download Center - Period Hub',
-    description: locale === 'zh'
-      ? `Period Hub文章PDF下载中心，${SITE_CONFIG.statistics.articles + SITE_CONFIG.statistics.pdfResources}个精选经期健康资源，包括${SITE_CONFIG.statistics.articles}篇专业文章和${SITE_CONFIG.statistics.pdfResources}个PDF资源，支持中英双语，移动端优化体验。`
-      : `Period Hub Articles PDF Download Center, ${SITE_CONFIG.statistics.articles + SITE_CONFIG.statistics.pdfResources} curated menstrual health resources including ${SITE_CONFIG.statistics.articles} expert articles and ${SITE_CONFIG.statistics.pdfResources} PDF resources, bilingual support, mobile-optimized experience.`,
-    keywords: locale === 'zh'
-      ? ['经期健康', 'PDF下载', '健康资源', '月经管理', '女性健康', '中英双语', '移动优化']
-      : ['menstrual health', 'PDF download', 'health resources', 'period management', 'women health', 'bilingual', 'mobile optimized'],
+    title: t('title'),
+    description: t('description'),
+    keywords: t('keywords').split(','),
     alternates: {
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/downloads`,
     },
     openGraph: {
-      title: locale === 'zh' 
-        ? 'PDF资源下载中心 - Period Hub' 
-        : 'PDF Resources Download Center - Period Hub',
-      description: locale === 'zh'
-        ? `Period Hub文章PDF下载中心，${SITE_CONFIG.statistics.articles + SITE_CONFIG.statistics.pdfResources}个精选经期健康资源，包括${SITE_CONFIG.statistics.articles}篇专业文章和${SITE_CONFIG.statistics.pdfResources}个PDF资源，支持中英双语，移动端优化体验。`
-        : `Period Hub Articles PDF Download Center, ${SITE_CONFIG.statistics.articles + SITE_CONFIG.statistics.pdfResources} curated menstrual health resources including ${SITE_CONFIG.statistics.articles} expert articles and ${SITE_CONFIG.statistics.pdfResources} PDF resources, bilingual support, mobile-optimized experience.`,
+      title: t('openGraph.title'),
+      description: t('openGraph.description'),
       images: ['/images/downloads-og.jpg'],
     },
   };
@@ -56,18 +47,15 @@ export default async function DownloadsPage({
   unstable_setRequestLocale(locale);
 
   const totalResources = SITE_CONFIG.statistics.articles + SITE_CONFIG.statistics.pdfResources;
-  const bannerText = locale === 'zh'
-    ? `🎉 全新PDF下载中心 - ${totalResources}个精选资源，移动端优化体验，基于紧急程度智能分类`
-    : `🎉 New PDF Download Center - ${totalResources} curated resources, mobile-optimized experience, urgency-based smart categorization`;
+  const t = await getTranslations({ locale, namespace: 'downloadsPage' });
+  const bannerText = t('banner.text');
 
   // 生成结构化数据
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": locale === 'zh' ? "PDF资源下载中心" : "PDF Resources Download Center",
-    "description": locale === 'zh' 
-      ? `Period Hub文章PDF下载中心，${totalResources}个精选经期健康资源`
-      : `Period Hub Articles PDF Download Center, ${totalResources} curated menstrual health resources`,
+    "name": t('structuredData.name'),
+    "description": t('structuredData.description'),
     "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/downloads`,
     "mainEntity": {
       "@type": "ItemList",
@@ -91,13 +79,13 @@ export default async function DownloadsPage({
         {
           "@type": "ListItem",
           "position": 1,
-          "name": locale === 'zh' ? "首页" : "Home",
+          "name": t('breadcrumb.home'),
           "item": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}`
         },
         {
           "@type": "ListItem",
           "position": 2,
-          "name": locale === 'zh' ? "PDF下载中心" : "PDF Download Center",
+          "name": t('breadcrumb.downloadCenter'),
           "item": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/downloads`
         }
       ]
@@ -114,7 +102,7 @@ export default async function DownloadsPage({
     <SmartPreloadProvider>
       {/* hreflang标签 */}
       <HreflangScript hreflangUrls={hreflangUrls} />
-      
+
       {/* 结构化数据 */}
       <script
         type="application/ld+json"
@@ -143,31 +131,28 @@ export default async function DownloadsPage({
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl mb-6 shadow-lg">
             <Download className="w-8 h-8 text-white" />
           </div>
-          
+
           <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            {locale === 'zh' ? '📚 文章PDF下载中心' : '📚 Articles PDF Download Center'}
+            {t('content.title')}
           </h1>
 
           <p className="text-base md:text-lg text-gray-600 mb-6 leading-relaxed">
-            {locale === 'zh'
-              ? `${totalResources}个精选资源，基于紧急程度智能分类，让您在需要时快速找到合适的解决方案`
-              : `${totalResources} curated resources, intelligently categorized by urgency to help you find the right solution when you need it`
-            }
+            {t('content.description')}
           </p>
-          
+
           {/* 快速统计 */}
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
             <div className="text-center">
               <div className="text-2xl font-bold text-purple-600">{SITE_CONFIG.statistics.articles}</div>
-              <div className="text-sm text-gray-500">{locale === 'zh' ? '专业文章' : 'Expert Articles'}</div>
+              <div className="text-sm text-gray-500">{t('content.statistics.expertArticles')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-pink-600">{SITE_CONFIG.statistics.pdfResources}</div>
-              <div className="text-sm text-gray-500">{locale === 'zh' ? 'PDF资源' : 'PDF Resources'}</div>
+              <div className="text-sm text-gray-500">{t('content.statistics.pdfResources')}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-indigo-600">2</div>
-              <div className="text-sm text-gray-500">{locale === 'zh' ? '语言版本' : 'Languages'}</div>
+              <div className="text-sm text-gray-500">{t('content.statistics.languages')}</div>
             </div>
           </div>
         </header>
@@ -179,16 +164,13 @@ export default async function DownloadsPage({
         <div className="fixed bottom-4 right-4 z-50 max-w-xs">
           <div className="bg-blue-600 text-white p-4 rounded-xl shadow-lg border border-blue-500">
             <div className="text-sm font-bold mb-2">
-              {locale === 'zh' ? '💡 体验新版下载中心' : '💡 Try New Download Center'}
+              {t('content.banner.title')}
             </div>
             <div className="text-xs mb-3 opacity-90">
-              {locale === 'zh'
-                ? `移动端优化 • 智能搜索 • 紧急模式 • ${totalResources}个精选资源`
-                : `Mobile Optimized • Smart Search • Emergency Mode • ${totalResources} Curated Resources`
-              }
+              {t('content.banner.description')}
             </div>
             <button className="bg-white text-blue-600 px-3 py-2 rounded-lg text-xs w-full font-medium hover:bg-gray-50 transition-colors">
-              {locale === 'zh' ? '反馈体验效果' : 'Share Feedback'}
+              {t('content.banner.feedbackButton')}
             </button>
           </div>
         </div>

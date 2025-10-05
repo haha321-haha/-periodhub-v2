@@ -15,7 +15,7 @@ class SyntaxAwareHardcodeFixer {
             config: ['.json', '.md', '.txt'],
             ignore: ['node_modules', '.git', 'backups', '.next', 'dist']
         };
-        
+
         this.fixPatterns = [
             {
                 name: 'Basic HTTPS URL',
@@ -63,7 +63,7 @@ class SyntaxAwareHardcodeFixer {
             const { exec } = require('child_process');
             const { promisify } = require('util');
             const execAsync = promisify(exec);
-            
+
             await execAsync(`npx tsc --noEmit --skipLibCheck "${filePath}"`, { timeout: 10000 });
             return { valid: true, message: 'TypeScript validation passed' };
         } catch (error) {
@@ -82,7 +82,7 @@ class SyntaxAwareHardcodeFixer {
             for (const pattern of this.fixPatterns) {
                 const beforeContent = content;
                 content = content.replace(pattern.search, pattern.replace);
-                
+
                 if (beforeContent !== content) {
                     const matches = (beforeContent.match(pattern.search) || []).length;
                     totalChanges += matches;
@@ -117,7 +117,7 @@ class SyntaxAwareHardcodeFixer {
         // Focus on core TypeScript React files first
         const coreFiles = [
             'app/[locale]/page.tsx',
-            'app/[locale]/articles/page.tsx', 
+            'app/[locale]/articles/page.tsx',
             'app/[locale]/natural-therapies/page.tsx',
             'app/[locale]/health-guide/page.tsx',
             'app/[locale]/pain-tracker/page.tsx',
@@ -139,20 +139,20 @@ class SyntaxAwareHardcodeFixer {
 
     async processPhase1() {
         console.log('Phase 1: Core TypeScript React Files\n');
-        
+
         const coreFiles = await this.getCoreTsxFiles();
         console.log(`Found ${coreFiles.length} core TypeScript files to process\n`);
 
         const results = [];
         for (const file of coreFiles) {
             console.log(`Processing: ${file}`);
-            
+
             // Create backup
             const backupPath = `${file}.backup.${Date.now()}`;
             await fs.copyFile(file, backupPath);
-            
+
             const result = await this.fixFileWithoutSyntaxCheck(file);
-            
+
             if (result.success) {
                 console.log(`  ✅ Fixed ${result.changes} hardcoded URLs`);
                 if (result.appliedFixes.length > 0) {
@@ -165,7 +165,7 @@ class SyntaxAwareHardcodeFixer {
                 // Restore backup
                 await fs.copyFile(backupPath, file);
             }
-            
+
             results.push({ file, ...result, backupPath });
             console.log('');
         }
@@ -175,7 +175,7 @@ class SyntaxAwareHardcodeFixer {
 
     async processSpecificFiles(fileList) {
         console.log(`Processing ${fileList.length} specified files\n`);
-        
+
         const results = [];
         for (const file of fileList) {
             try {
@@ -186,13 +186,13 @@ class SyntaxAwareHardcodeFixer {
             }
 
             console.log(`Processing: ${file}`);
-            
+
             // Create backup
             const backupPath = `${file}.backup.${Date.now()}`;
             await fs.copyFile(file, backupPath);
-            
+
             const result = await this.fixFileWithoutSyntaxCheck(file);
-            
+
             if (result.success && result.changes > 0) {
                 console.log(`  ✅ Fixed ${result.changes} hardcoded URLs`);
             } else if (result.success && result.changes === 0) {
@@ -201,7 +201,7 @@ class SyntaxAwareHardcodeFixer {
                 console.log(`  ❌ Failed: ${result.error}`);
                 await fs.copyFile(backupPath, file);
             }
-            
+
             results.push({ file, ...result, backupPath });
         }
 
@@ -212,7 +212,7 @@ class SyntaxAwareHardcodeFixer {
         const totalFiles = results.length;
         const successfulFiles = results.filter(r => r.success).length;
         const totalChanges = results.reduce((sum, r) => sum + (r.changes || 0), 0);
-        
+
         console.log('\n📊 Processing Summary');
         console.log('='.repeat(50));
         console.log(`Total files processed: ${totalFiles}`);
@@ -220,7 +220,7 @@ class SyntaxAwareHardcodeFixer {
         console.log(`Failed: ${totalFiles - successfulFiles}`);
         console.log(`Total hardcoded URLs fixed: ${totalChanges}`);
         console.log(`Success rate: ${((successfulFiles / totalFiles) * 100).toFixed(1)}%`);
-        
+
         return {
             totalFiles,
             successfulFiles,
@@ -234,13 +234,13 @@ class SyntaxAwareHardcodeFixer {
 async function main() {
     const args = process.argv.slice(2);
     const fixer = new SyntaxAwareHardcodeFixer();
-    
+
     try {
         if (args.includes('--core-files')) {
             // Process core TypeScript files
             const results = await fixer.processPhase1();
             fixer.generateSummary(results);
-            
+
         } else if (args.includes('--files')) {
             // Process specific files
             const filesArg = args.find(arg => arg.startsWith('--files='));
@@ -248,11 +248,11 @@ async function main() {
                 console.log('Please specify files: --files="file1,file2,file3"');
                 return;
             }
-            
+
             const files = filesArg.split('=')[1].replace(/"/g, '').split(',');
             const results = await fixer.processSpecificFiles(files);
             fixer.generateSummary(results);
-            
+
         } else {
             console.log(`
 Syntax-Aware Hardcode Fixer
@@ -260,7 +260,7 @@ Syntax-Aware Hardcode Fixer
 Usage:
   node syntax-fix-strategy.js --core-files          # Fix core TypeScript files
   node syntax-fix-strategy.js --files="file1,file2" # Fix specific files
-  
+
 Examples:
   node syntax-fix-strategy.js --core-files
   node syntax-fix-strategy.js --files="app/[locale]/page.tsx,app/[locale]/articles/page.tsx"
@@ -277,4 +277,3 @@ if (require.main === module) {
 }
 
 module.exports = { SyntaxAwareHardcodeFixer };
-

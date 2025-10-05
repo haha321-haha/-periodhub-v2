@@ -2,7 +2,7 @@
 
 /**
  * 🚀 PeriodHub Core Web Vitals 优化器
- * 
+ *
  * 这个脚本会：
  * 1. 检查页面加载速度
  * 2. 优化图片压缩和懒加载
@@ -28,7 +28,7 @@ class CoreWebVitalsOptimizer {
 
   async run() {
     console.log('🚀 开始 Core Web Vitals 优化...\n');
-    
+
     try {
       await this.checkProjectStructure();
       await this.analyzeImages();
@@ -36,10 +36,10 @@ class CoreWebVitalsOptimizer {
       await this.analyzeCSS();
       await this.generateOptimizations();
       await this.generateReport();
-      
+
       console.log('\n✅ Core Web Vitals 优化完成！');
       console.log('📊 查看详细报告: ./core-web-vitals-report.json');
-      
+
     } catch (error) {
       console.error('❌ 优化过程中出现错误:', error.message);
       process.exit(1);
@@ -48,39 +48,39 @@ class CoreWebVitalsOptimizer {
 
   async checkProjectStructure() {
     console.log('📁 检查项目结构...');
-    
+
     const requiredDirs = ['public', 'app', 'components'];
     const missingDirs = [];
-    
+
     for (const dir of requiredDirs) {
       const dirPath = path.join(this.projectRoot, dir);
       if (!fs.existsSync(dirPath)) {
         missingDirs.push(dir);
       }
     }
-    
+
     if (missingDirs.length > 0) {
       throw new Error(`缺少必要目录: ${missingDirs.join(', ')}`);
     }
-    
+
     console.log('✅ 项目结构检查通过');
   }
 
   async analyzeImages() {
     console.log('🖼️  分析图片资源...');
-    
+
     if (!fs.existsSync(this.imagesDir)) {
       console.log('⚠️  images 目录不存在，跳过图片分析');
       return;
     }
-    
+
     const imageFiles = this.getImageFiles(this.imagesDir);
-    
+
     for (const imagePath of imageFiles) {
       const stats = fs.statSync(imagePath);
       const relativePath = path.relative(this.publicDir, imagePath);
       const ext = path.extname(imagePath).toLowerCase();
-      
+
       const imageInfo = {
         path: relativePath,
         size: stats.size,
@@ -89,35 +89,35 @@ class CoreWebVitalsOptimizer {
         needsOptimization: false,
         recommendations: []
       };
-      
+
       // 检查图片大小
       if (stats.size > 500 * 1024) { // 500KB
         imageInfo.needsOptimization = true;
         imageInfo.recommendations.push('图片过大，建议压缩到500KB以下');
       }
-      
+
       // 检查图片格式
       if (['.jpg', '.jpeg', '.png'].includes(ext)) {
         imageInfo.recommendations.push('建议转换为WebP格式以获得更好的压缩率');
       }
-      
+
       this.results.images.push(imageInfo);
     }
-    
+
     console.log(`✅ 分析了 ${imageFiles.length} 个图片文件`);
   }
 
   getImageFiles(dir) {
     const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
     const files = [];
-    
+
     function scanDirectory(currentDir) {
       const items = fs.readdirSync(currentDir);
-      
+
       for (const item of items) {
         const itemPath = path.join(currentDir, item);
         const stat = fs.statSync(itemPath);
-        
+
         if (stat.isDirectory()) {
           scanDirectory(itemPath);
         } else if (imageExtensions.includes(path.extname(item).toLowerCase())) {
@@ -125,16 +125,16 @@ class CoreWebVitalsOptimizer {
         }
       }
     }
-    
+
     scanDirectory(dir);
     return files;
   }
 
   async checkNextConfig() {
     console.log('⚙️  检查 Next.js 配置...');
-    
+
     const nextConfigPath = path.join(this.projectRoot, 'next.config.js');
-    
+
     if (!fs.existsSync(nextConfigPath)) {
       this.results.recommendations.push({
         type: 'config',
@@ -144,9 +144,9 @@ class CoreWebVitalsOptimizer {
       });
       return;
     }
-    
+
     const configContent = fs.readFileSync(nextConfigPath, 'utf8');
-    
+
     // 检查图片优化配置
     if (!configContent.includes('images:')) {
       this.results.recommendations.push({
@@ -156,7 +156,7 @@ class CoreWebVitalsOptimizer {
         solution: '在 next.config.js 中添加 images 配置'
       });
     }
-    
+
     // 检查现代图片格式支持
     if (!configContent.includes('webp') && !configContent.includes('avif')) {
       this.results.recommendations.push({
@@ -166,15 +166,15 @@ class CoreWebVitalsOptimizer {
         solution: '在 images 配置中添加 formats: ["image/webp", "image/avif"]'
       });
     }
-    
+
     console.log('✅ Next.js 配置检查完成');
   }
 
   async analyzeCSS() {
     console.log('🎨 分析 CSS 性能...');
-    
+
     const globalCSSPath = path.join(this.projectRoot, 'app', 'globals.css');
-    
+
     if (!fs.existsSync(globalCSSPath)) {
       this.results.recommendations.push({
         type: 'css',
@@ -184,13 +184,13 @@ class CoreWebVitalsOptimizer {
       });
       return;
     }
-    
+
     const cssContent = fs.readFileSync(globalCSSPath, 'utf8');
     const cssSize = Buffer.byteLength(cssContent, 'utf8');
-    
+
     this.results.performance.cssSize = cssSize;
     this.results.performance.cssSizeKB = Math.round(cssSize / 1024);
-    
+
     // 检查CSS大小
     if (cssSize > 100 * 1024) { // 100KB
       this.results.recommendations.push({
@@ -200,7 +200,7 @@ class CoreWebVitalsOptimizer {
         solution: '考虑拆分CSS或移除未使用的样式'
       });
     }
-    
+
     // 检查关键CSS优化
     if (!cssContent.includes('@media')) {
       this.results.recommendations.push({
@@ -210,13 +210,13 @@ class CoreWebVitalsOptimizer {
         solution: '添加移动端优化的媒体查询'
       });
     }
-    
+
     console.log(`✅ CSS 分析完成 (${Math.round(cssSize / 1024)}KB)`);
   }
 
   async generateOptimizations() {
     console.log('🔧 生成优化建议...');
-    
+
     // 图片优化建议
     const largeImages = this.results.images.filter(img => img.needsOptimization);
     if (largeImages.length > 0) {
@@ -228,7 +228,7 @@ class CoreWebVitalsOptimizer {
         details: largeImages.map(img => `${img.path} (${img.sizeKB}KB)`)
       });
     }
-    
+
     // 性能优化建议
     this.results.recommendations.push({
       type: 'performance',
@@ -236,7 +236,7 @@ class CoreWebVitalsOptimizer {
       message: '启用 Next.js 性能优化功能',
       solution: '确保使用 Image 组件、动态导入和代码分割'
     });
-    
+
     // 移动端优化建议
     this.results.recommendations.push({
       type: 'mobile',
@@ -244,13 +244,13 @@ class CoreWebVitalsOptimizer {
       message: '移动端性能优化',
       solution: '使用响应式图片、触摸优化和移动端友好的交互'
     });
-    
+
     console.log(`✅ 生成了 ${this.results.recommendations.length} 个优化建议`);
   }
 
   async generateReport() {
     console.log('📊 生成性能报告...');
-    
+
     const report = {
       timestamp: new Date().toISOString(),
       summary: {
@@ -269,19 +269,19 @@ class CoreWebVitalsOptimizer {
         '4. 定期监控 Core Web Vitals 指标'
       ]
     };
-    
+
     const reportPath = path.join(this.projectRoot, 'core-web-vitals-report.json');
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    
+
     // 生成人类可读的报告
     this.generateHumanReadableReport(report);
-    
+
     console.log('✅ 报告生成完成');
   }
 
   generateHumanReadableReport(report) {
     const readableReportPath = path.join(this.projectRoot, 'core-web-vitals-report.md');
-    
+
     let content = `# 🚀 PeriodHub Core Web Vitals 优化报告
 
 生成时间: ${new Date(report.timestamp).toLocaleString('zh-CN')}
@@ -338,7 +338,7 @@ ${report.nextSteps.map((step, index) => `${index + 1}. ${step}`).join('\n')}
     if (report.images.length > 0) {
       content += '| 文件路径 | 大小 | 格式 | 需要优化 | 建议 |\n';
       content += '|----------|------|------|----------|------|\n';
-      
+
       report.images.forEach(img => {
         const needsOpt = img.needsOptimization ? '是' : '否';
         const recommendations = img.recommendations.join('; ') || '无';

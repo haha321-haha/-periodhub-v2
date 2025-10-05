@@ -4,16 +4,16 @@
  * 基于HVsLYEp的过渡动画设计
  */
 
-'use client';
+"use client";
 
-import { ReactNode, useState, useEffect } from 'react';
+import { ReactNode, useState, useEffect } from "react";
 
 // 淡入淡出过渡
 export function FadeTransition({
   children,
   isVisible,
   duration = 300,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   isVisible: boolean;
@@ -38,7 +38,7 @@ export function FadeTransition({
       className={`transition-opacity duration-300 ${className}`}
       style={{
         opacity: isVisible ? 1 : 0,
-        transitionDuration: `${duration}ms`
+        transitionDuration: `${duration}ms`,
       }}
     >
       {children}
@@ -50,13 +50,13 @@ export function FadeTransition({
 export function SlideTransition({
   children,
   isVisible,
-  direction = 'up',
+  direction = "up",
   duration = 300,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   isVisible: boolean;
-  direction?: 'up' | 'down' | 'left' | 'right';
+  direction?: "up" | "down" | "left" | "right";
   duration?: number;
   className?: string;
 }) {
@@ -74,10 +74,10 @@ export function SlideTransition({
   if (!shouldRender) return null;
 
   const directionClasses = {
-    up: 'translate-y-4',
-    down: '-translate-y-4',
-    left: 'translate-x-4',
-    right: '-translate-x-4'
+    up: "translate-y-4",
+    down: "-translate-y-4",
+    left: "translate-x-4",
+    right: "-translate-x-4",
   };
 
   return (
@@ -85,8 +85,8 @@ export function SlideTransition({
       className={`transition-all duration-300 ${className}`}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translate(0, 0)' : directionClasses[direction],
-        transitionDuration: `${duration}ms`
+        transform: isVisible ? "translate(0, 0)" : directionClasses[direction],
+        transitionDuration: `${duration}ms`,
       }}
     >
       {children}
@@ -99,7 +99,7 @@ export function ScaleTransition({
   children,
   isVisible,
   duration = 300,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   isVisible: boolean;
@@ -124,8 +124,8 @@ export function ScaleTransition({
       className={`transition-all duration-300 ${className}`}
       style={{
         opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'scale(1)' : 'scale(0.95)',
-        transitionDuration: `${duration}ms`
+        transform: isVisible ? "scale(1)" : "scale(0.95)",
+        transitionDuration: `${duration}ms`,
       }}
     >
       {children}
@@ -137,16 +137,14 @@ export function ScaleTransition({
 export function PageTransition({
   children,
   isActive = true,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   isActive?: boolean;
   className?: string;
 }) {
   return (
-    <div className={`transition-all duration-300 ${className}`}>
-      {children}
-    </div>
+    <div className={`transition-all duration-300 ${className}`}>{children}</div>
   );
 }
 
@@ -154,23 +152,21 @@ export function PageTransition({
 export function TabTransition({
   children,
   isActive = true,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   isActive?: boolean;
   className?: string;
 }) {
   return (
-    <div className={`transition-all duration-300 ${className}`}>
-      {children}
-    </div>
+    <div className={`transition-all duration-300 ${className}`}>{children}</div>
   );
 }
 
 // 悬停效果
 export function HoverEffect({
   children,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   className?: string;
@@ -185,7 +181,7 @@ export function HoverEffect({
 // 点击效果
 export function ClickEffect({
   children,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   className?: string;
@@ -201,7 +197,7 @@ export function ClickEffect({
 export function AnimatedListItem({
   children,
   index = 0,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   index?: number;
@@ -212,7 +208,7 @@ export function AnimatedListItem({
       className={`transition-all duration-300 ${className}`}
       style={{
         animationDelay: `${index * 0.1}s`,
-        animation: 'fadeInUp 0.6s ease-out forwards'
+        animation: "fadeInUp 0.6s ease-out forwards",
       }}
     >
       {children}
@@ -224,7 +220,7 @@ export function AnimatedListItem({
 export function CountUpAnimation({
   value,
   duration = 1000,
-  className = ''
+  className = "",
 }: {
   value: number;
   duration?: number;

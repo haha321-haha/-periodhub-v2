@@ -37,7 +37,7 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     // Simulate loading delay for smooth rendering
     const timer = setTimeout(() => setIsLoading(false), 100);
 
@@ -71,7 +71,7 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
   const chartOptions = useMemo(() => {
     try {
       const options = ChartUtils.getPainTypeOptions(isMobile);
-      
+
       // Override title display if showTitle is false
       if (!showTitle && options.plugins?.title) {
         options.plugins.title.display = false;
@@ -119,7 +119,7 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
     const totalOccurrences = painTypes.reduce((sum, type) => sum + type.count, 0);
     const mostCommon = painTypes[0];
     const leastCommon = painTypes[painTypes.length - 1];
-    
+
     return {
       mostCommon,
       leastCommon,
@@ -131,7 +131,7 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
   // Loading state
   if (isLoading) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-gray-50 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
@@ -146,7 +146,7 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
   // Error state
   if (error) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-red-50 border border-red-200 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
@@ -166,7 +166,7 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
   // Empty data state
   if (!painTypes || painTypes.length === 0) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-gray-50 border border-gray-200 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
@@ -194,18 +194,18 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
   return (
     <div className={`relative ${className}`}>
       <div style={{ height: containerHeight }}>
-        <Doughnut 
-          data={chartData} 
+        <Doughnut
+          data={chartData}
           options={chartOptions}
           aria-label="Pain type distribution chart showing percentage breakdown of different pain types"
           role="img"
         />
       </div>
-      
+
       {/* Chart summary for screen readers */}
       <div className="sr-only">
         <p>
-          Pain type distribution chart showing {painTypes.length} different pain types. 
+          Pain type distribution chart showing {painTypes.length} different pain types.
           {painTypeStats && (
             <>
               Most common: {formatPainType(painTypeStats.mostCommon.type)} at {painTypeStats.mostCommon.percentage.toFixed(1)}%.
@@ -221,15 +221,15 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
         <div className="mt-4 text-xs text-gray-600 bg-gray-50 p-3 rounded-lg">
           <div className="grid grid-cols-1 gap-2">
             <div className="flex justify-between">
-              <span className="font-medium">Most Common:</span> 
+              <span className="font-medium">Most Common:</span>
               <span>{formatPainType(painTypeStats.mostCommon.type)} ({painTypeStats.mostCommon.percentage.toFixed(1)}%)</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-medium">Total Types:</span> 
+              <span className="font-medium">Total Types:</span>
               <span>{painTypeStats.uniqueTypes} different types</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-medium">Total Occurrences:</span> 
+              <span className="font-medium">Total Occurrences:</span>
               <span>{painTypeStats.totalOccurrences}</span>
             </div>
           </div>
@@ -242,7 +242,7 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
           {painTypes.slice(0, 5).map((painType, index) => (
             <div key={painType.type} className="flex items-center justify-between text-sm">
               <div className="flex items-center space-x-2">
-                <div 
+                <div
                   className="w-3 h-3 rounded-full"
                   style={{ backgroundColor: chartData.datasets[0].backgroundColor[index] }}
                 ></div>

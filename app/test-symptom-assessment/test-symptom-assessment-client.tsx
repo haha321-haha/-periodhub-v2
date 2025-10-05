@@ -67,7 +67,7 @@ export default function TestSymptomAssessmentClient() {
         <div className="max-w-4xl mx-auto px-4">
           <div className="bg-white rounded-lg shadow-lg p-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Assessment Results</h2>
-            
+
             <div className="space-y-6">
               <div className="bg-blue-50 rounded-lg p-6">
                 <h2 className="text-xl font-semibold text-blue-900 mb-4">Summary</h2>
@@ -118,7 +118,7 @@ export default function TestSymptomAssessmentClient() {
       <div className="max-w-4xl mx-auto px-4">
         <div className="bg-white rounded-lg shadow-lg p-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Test Symptom Assessment</h2>
-          
+
           {currentQuestion && (
             <div className="space-y-6">
               <div className="bg-blue-50 rounded-lg p-6">

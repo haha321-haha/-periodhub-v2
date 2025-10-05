@@ -18,23 +18,23 @@ class SEOFixer {
 
     async execute() {
         console.log('🚀 Starting Phase 1 SEO Fixes...\n');
-        
+
         try {
             // 1. 创建robots.txt文件
             await this.createRobotsTxt();
-            
+
             // 2. 更新next.config.js添加重定向
             await this.addRedirects();
-            
+
             // 3. 为测试页面添加meta标签
             await this.addMetaTags();
-            
+
             // 4. 生成修复报告
             await this.generateReport();
-            
+
             console.log('✅ Phase 1 SEO fixes completed successfully!');
             this.printSummary();
-            
+
         } catch (error) {
             console.error('❌ Error during SEO fixes:', error.message);
             process.exit(1);
@@ -43,7 +43,7 @@ class SEOFixer {
 
     async createRobotsTxt() {
         console.log('📄 Creating robots.txt...');
-        
+
         const robotsContent = `# SEO优化 - 阻止搜索引擎索引测试和开发页面
 User-agent: *
 Allow: /
@@ -95,7 +95,7 @@ Sitemap: https://periodhub.health/sitemap.xml
 
     async addRedirects() {
         console.log('🔄 Adding 301 redirects...');
-        
+
         // 定义重定向规则
         const redirects = [
             // 处理重复下载页面
@@ -150,7 +150,7 @@ Sitemap: https://periodhub.health/sitemap.xml
 
         // 读取现有的next.config.js
         let nextConfigContent = fs.readFileSync(this.nextConfigPath, 'utf8');
-        
+
         // 添加重定向配置
         const redirectsConfig = `
   // 🚀 SEO优化 - 301重定向配置
@@ -211,14 +211,14 @@ Sitemap: https://periodhub.health/sitemap.xml
         // 在nextConfig对象中添加重定向
         const insertAfter = 'trailingSlash: false,';
         const insertIndex = nextConfigContent.indexOf(insertAfter) + insertAfter.length;
-        
-        const newConfigContent = 
-            nextConfigContent.slice(0, insertIndex) + 
-            '\n' + redirectsConfig + 
+
+        const newConfigContent =
+            nextConfigContent.slice(0, insertIndex) +
+            '\n' + redirectsConfig +
             nextConfigContent.slice(insertIndex);
 
         fs.writeFileSync(this.nextConfigPath, newConfigContent);
-        
+
         this.changes.push({
             type: 'next.config.js',
             action: 'updated',
@@ -230,7 +230,7 @@ Sitemap: https://periodhub.health/sitemap.xml
 
     async addMetaTags() {
         console.log('🏷️ Adding meta tags for test pages...');
-        
+
         // 为测试页面添加noindex标签
         const testPages = [
             'app/test/page.tsx',
@@ -242,7 +242,7 @@ Sitemap: https://periodhub.health/sitemap.xml
             const fullPath = path.join(this.workspaceDir, pagePath);
             if (fs.existsSync(fullPath)) {
                 let content = fs.readFileSync(fullPath, 'utf8');
-                
+
                 // 添加noindex meta标签
                 if (!content.includes('noindex')) {
                     const metaTag = `
@@ -254,15 +254,15 @@ Sitemap: https://periodhub.health/sitemap.xml
     },
   };
 `;
-                    
+
                     // 在文件顶部添加
                     const newContent = content.replace(
                         /export default/,
                         metaTag + '\nexport default'
                     );
-                    
+
                     fs.writeFileSync(fullPath, newContent);
-                    
+
                     this.changes.push({
                         type: 'meta tags',
                         action: 'added',
@@ -272,7 +272,7 @@ Sitemap: https://periodhub.health/sitemap.xml
                 }
             }
         });
-        
+
         console.log('✅ Meta tags added to test pages');
     }
 
@@ -291,7 +291,7 @@ Sitemap: https://periodhub.health/sitemap.xml
 
         const reportPath = path.join(this.workspaceDir, 'seo-phase1-report.json');
         fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-        
+
         console.log(`📊 Report generated: ${reportPath}`);
     }
 

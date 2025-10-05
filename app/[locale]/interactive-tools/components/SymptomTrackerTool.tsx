@@ -133,7 +133,7 @@ export default function SymptomTrackerTool({ locale }: SymptomTrackerToolProps) 
     }
   };
 
-  const commonSymptoms = locale === 'zh' 
+  const commonSymptoms = locale === 'zh'
     ? ['腹痛', '头痛', '乳房胀痛', '情绪波动', '疲劳', '腰痛', '恶心', '失眠', '腹胀', '便秘', '腹泻', '食欲改变']
     : ['Abdominal pain', 'Headache', 'Breast tenderness', 'Mood swings', 'Fatigue', 'Back pain', 'Nausea', 'Insomnia', 'Bloating', 'Constipation', 'Diarrhea', 'Appetite changes'];
 
@@ -157,7 +157,7 @@ export default function SymptomTrackerTool({ locale }: SymptomTrackerToolProps) 
           {locale === 'zh' ? '症状记录器' : 'Symptom Tracker'}
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          {locale === 'zh' 
+          {locale === 'zh'
             ? '详细记录您的经期症状，帮助识别模式并为医疗咨询提供准确信息。'
             : 'Record your menstrual symptoms in detail to help identify patterns and provide accurate information for medical consultations.'
           }
@@ -169,8 +169,8 @@ export default function SymptomTrackerTool({ locale }: SymptomTrackerToolProps) 
         <button
           onClick={() => setShowHistory(false)}
           className={`px-6 py-2 rounded-lg font-semibold transition-colors ${
-            !showHistory 
-              ? 'bg-purple-600 text-white' 
+            !showHistory
+              ? 'bg-purple-600 text-white'
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }`}
         >
@@ -179,8 +179,8 @@ export default function SymptomTrackerTool({ locale }: SymptomTrackerToolProps) 
         <button
           onClick={() => setShowHistory(true)}
           className={`px-6 py-2 rounded-lg font-semibold transition-colors ${
-            showHistory 
-              ? 'bg-purple-600 text-white' 
+            showHistory
+              ? 'bg-purple-600 text-white'
               : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
           }`}
         >
@@ -196,7 +196,7 @@ export default function SymptomTrackerTool({ locale }: SymptomTrackerToolProps) 
             <h3 className="text-xl font-semibold mb-6 text-gray-800">
               {locale === 'zh' ? '基本信息' : 'Basic Information'}
             </h3>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -330,7 +330,7 @@ export default function SymptomTrackerTool({ locale }: SymptomTrackerToolProps) 
             <h3 className="text-xl font-semibold mb-6 text-gray-800">
               {locale === 'zh' ? '症状与用药' : 'Symptoms & Medications'}
             </h3>
-            
+
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -398,7 +398,7 @@ export default function SymptomTrackerTool({ locale }: SymptomTrackerToolProps) 
           <h3 className="text-xl font-semibold mb-6 text-gray-800">
             {locale === 'zh' ? '症状历史记录' : 'Symptom History'}
           </h3>
-          
+
           {entries.length === 0 ? (
             <div className="text-center py-8">
               <div className="text-gray-400 mb-4">
@@ -420,7 +420,7 @@ export default function SymptomTrackerTool({ locale }: SymptomTrackerToolProps) 
                       {locale === 'zh' ? '疼痛' : 'Pain'}: {entry.painLevel}/10
                     </span>
                   </div>
-                  
+
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div>
                       <p><strong>{locale === 'zh' ? '情绪' : 'Mood'}:</strong> {entry.mood || (locale === 'zh' ? '未记录' : 'Not recorded')}</p>
@@ -435,7 +435,7 @@ export default function SymptomTrackerTool({ locale }: SymptomTrackerToolProps) 
                       )}
                     </div>
                   </div>
-                  
+
                   {entry.notes && (
                     <p className="mt-2 text-sm text-gray-600">
                       <strong>{locale === 'zh' ? '备注' : 'Notes'}:</strong> {entry.notes}

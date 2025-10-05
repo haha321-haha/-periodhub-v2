@@ -2,7 +2,7 @@
 
 /**
  * 🖼️ PeriodHub 图片优化脚本
- * 
+ *
  * 功能：
  * 1. 自动压缩图片
  * 2. 转换为现代格式 (WebP)
@@ -20,13 +20,13 @@ class ImageOptimizer {
     this.publicDir = path.join(this.projectRoot, 'public');
     this.imagesDir = path.join(this.publicDir, 'images');
     this.optimizedDir = path.join(this.imagesDir, 'optimized');
-    
+
     // 响应式图片尺寸
     this.sizes = [320, 640, 768, 1024, 1280, 1920];
-    
+
     // 支持的图片格式
     this.supportedFormats = ['.jpg', '.jpeg', '.png', '.webp'];
-    
+
     this.stats = {
       processed: 0,
       originalSize: 0,
@@ -37,15 +37,15 @@ class ImageOptimizer {
 
   async run() {
     console.log('🖼️ 开始图片优化...\n');
-    
+
     try {
       await this.checkSharpInstallation();
       await this.createOptimizedDirectory();
       await this.processImages();
       await this.generateReport();
-      
+
       console.log('\n✅ 图片优化完成！');
-      
+
     } catch (error) {
       console.error('❌ 图片优化失败:', error.message);
       process.exit(1);
@@ -87,14 +87,14 @@ class ImageOptimizer {
 
   getImageFiles(dir) {
     const files = [];
-    
+
     function scanDirectory(currentDir) {
       const items = fs.readdirSync(currentDir);
-      
+
       for (const item of items) {
         const itemPath = path.join(currentDir, item);
         const stat = fs.statSync(itemPath);
-        
+
         if (stat.isDirectory() && !item.includes('optimized')) {
           scanDirectory(itemPath);
         } else if (optimizer.supportedFormats.includes(path.extname(item).toLowerCase())) {
@@ -102,7 +102,7 @@ class ImageOptimizer {
         }
       }
     }
-    
+
     const optimizer = this;
     scanDirectory(dir);
     return files;
@@ -168,7 +168,7 @@ class ImageOptimizer {
   }
 
   async generateReport() {
-    const compressionRatio = this.stats.originalSize > 0 
+    const compressionRatio = this.stats.originalSize > 0
       ? ((this.stats.originalSize - this.stats.optimizedSize) / this.stats.originalSize * 100).toFixed(1)
       : 0;
 
@@ -204,7 +204,7 @@ class ImageOptimizer {
     console.log(`   原始大小: ${report.summary.originalSizeKB} KB`);
     console.log(`   优化后大小: ${report.summary.optimizedSizeKB} KB`);
     console.log(`   节省空间: ${report.summary.savedKB} KB (${report.summary.compressionRatio})`);
-    
+
     if (report.summary.errors > 0) {
       console.log(`   错误数量: ${report.summary.errors}`);
     }
@@ -212,7 +212,7 @@ class ImageOptimizer {
 
   generateUsageGuide(report) {
     const guidePath = path.join(this.projectRoot, 'image-usage-guide.md');
-    
+
     const content = `# 🖼️ PeriodHub 图片使用指南
 
 生成时间: ${new Date(report.timestamp).toLocaleString('zh-CN')}
@@ -309,7 +309,7 @@ function LazyImage() {
 
 ### 2. 尺寸规划
 - 移动端: 320px, 640px
-- 平板: 768px, 1024px  
+- 平板: 768px, 1024px
 - 桌面: 1280px, 1920px
 
 ### 3. 格式选择

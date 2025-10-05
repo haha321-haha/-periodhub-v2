@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useSmartPreload } from '@/hooks/useSmartPreload';
-import { ReactNode } from 'react';
+import { useSmartPreload } from "@/hooks/useSmartPreload";
+import { ReactNode } from "react";
 
 interface SmartPreloadProviderProps {
   children: ReactNode;
@@ -16,8 +16,11 @@ export function SmartPreloadProvider({ children }: SmartPreloadProviderProps) {
   const { isWebpackPreloaded } = useSmartPreload();
 
   // 在开发环境显示预加载状态（可选）
-  if (process.env.NODE_ENV === 'development') {
-    console.log('🔍 SmartPreloadProvider: webpack preloaded =', isWebpackPreloaded);
+  if (process.env.NODE_ENV === "development") {
+    console.log(
+      "🔍 SmartPreloadProvider: webpack preloaded =",
+      isWebpackPreloaded,
+    );
   }
 
   return <>{children}</>;
@@ -31,9 +34,3 @@ export function PageSmartPreload({ children }: SmartPreloadProviderProps) {
   useSmartPreload();
   return <>{children}</>;
 }
-
-
-
-
-
-

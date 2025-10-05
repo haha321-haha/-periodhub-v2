@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { 
+import {
   getTrainingCampConfig,
   calculateTrainingProgress,
   TrainingWeek,
-  TrainingDay 
+  TrainingDay
 } from '../config/trainingCampConfigI18n';
 import { Locale } from '../types/common';
 import { useSafeTranslations } from '@/hooks/useSafeTranslations';
@@ -55,7 +55,7 @@ const TrainingCampDisplay: React.FC<TrainingCampDisplayProps> = ({ locale }) => 
       newCompletedDays.add(day);
     }
     setCompletedDays(newCompletedDays);
-    
+
     // 保存到localStorage
     localStorage.setItem('trainingCampProgress', JSON.stringify([...newCompletedDays]));
   };
@@ -72,14 +72,14 @@ const TrainingCampDisplay: React.FC<TrainingCampDisplayProps> = ({ locale }) => 
             {t('trainingProgress')}
           </h3>
           <span className="text-sm text-gray-600">
-            {locale === 'zh' 
-              ? `${overallProgress.completed}/${overallProgress.total} 天完成` 
+            {locale === 'zh'
+              ? `${overallProgress.completed}/${overallProgress.total} 天完成`
               : `${overallProgress.completed}/${overallProgress.total} days completed`
             }
           </span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-3">
-          <div 
+          <div
             className="bg-gradient-to-r from-pink-500 to-purple-500 h-3 rounded-full transition-all duration-300"
             style={{ width: `${overallProgress.percentage}%` }}
           />
@@ -99,11 +99,11 @@ const TrainingCampDisplay: React.FC<TrainingCampDisplayProps> = ({ locale }) => 
             total: week.days.length,
             percentage: week.days.length > 0 ? Math.round((weekCompletedDays / week.days.length) * 100) : 0
           };
-          
+
           return (
             <div key={week.week} className="bg-white rounded-xl shadow-md overflow-hidden">
               {/* 周标题栏 */}
-              <div 
+              <div
                 className="p-6 cursor-pointer hover:bg-gray-50 transition-colors"
                 onClick={() => toggleWeek(week.week)}
               >
@@ -123,7 +123,7 @@ const TrainingCampDisplay: React.FC<TrainingCampDisplayProps> = ({ locale }) => 
                         </span>
                       </div>
                       <div className="w-24 bg-gray-200 rounded-full h-2">
-                        <div 
+                        <div
                           className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300"
                           style={{ width: `${weekProgress.percentage}%` }}
                         />
@@ -134,12 +134,12 @@ const TrainingCampDisplay: React.FC<TrainingCampDisplayProps> = ({ locale }) => 
                     </div>
                   </div>
                   <div className="ml-4">
-                    <svg 
+                    <svg
                       className={`w-6 h-6 text-gray-400 transition-transform duration-200 ${
                         isExpanded ? 'rotate-180' : ''
                       }`}
-                      fill="none" 
-                      stroke="currentColor" 
+                      fill="none"
+                      stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -153,7 +153,7 @@ const TrainingCampDisplay: React.FC<TrainingCampDisplayProps> = ({ locale }) => 
                 <div className="border-t border-gray-100">
                   <div className="p-6 space-y-4">
                     {week.days.map((day) => (
-                      <DayTask 
+                      <DayTask
                         key={day.day}
                         day={day}
                         isCompleted={completedDays.has(day.day)}
@@ -182,11 +182,11 @@ interface DayTaskProps {
 
 const DayTask: React.FC<DayTaskProps> = ({ day, isCompleted, onToggle, locale }) => {
   const { t } = useSafeTranslations('partnerHandbook');
-  
+
   return (
     <div className={`border rounded-lg p-4 transition-all duration-200 ${
-      isCompleted 
-        ? 'bg-green-50 border-green-200' 
+      isCompleted
+        ? 'bg-green-50 border-green-200'
         : 'bg-gray-50 border-gray-200 hover:bg-gray-100'
     }`}>
       <div className="flex items-start space-x-3">
@@ -210,11 +210,11 @@ const DayTask: React.FC<DayTaskProps> = ({ day, isCompleted, onToggle, locale })
               {t('day')} {day.day} {t('daySuffix')}
             </span>
             <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-              isCompleted 
-                ? 'bg-green-100 text-green-800' 
+              isCompleted
+                ? 'bg-green-100 text-green-800'
                 : 'bg-gray-100 text-gray-600'
             }`}>
-              {isCompleted 
+              {isCompleted
                 ? t('completed')
                 : t('pending')
               }

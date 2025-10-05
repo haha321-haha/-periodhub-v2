@@ -3,7 +3,7 @@
  * 提供性能监控和优化功能
  */
 
-import React from 'react';
+import React from "react";
 
 // 基于ziV1d3d的性能监控
 export class PerformanceMonitor {
@@ -19,7 +19,7 @@ export class PerformanceMonitor {
 
   // 开始性能测量 - 基于ziV1d3d的测量逻辑
   startMeasure(name: string): void {
-    if (typeof window !== 'undefined' && 'performance' in window) {
+    if (typeof window !== "undefined" && "performance" in window) {
       this.metrics.set(`${name}_start`, performance.now());
     }
   }
@@ -32,16 +32,16 @@ export class PerformanceMonitor {
       return 0;
     }
 
-    if (typeof window !== 'undefined' && 'performance' in window) {
+    if (typeof window !== "undefined" && "performance" in window) {
       const endTime = performance.now();
       const duration = endTime - startTime;
-      
+
       this.metrics.set(name, duration);
       this.metrics.delete(`${name}_start`);
-      
+
       return duration;
     }
-    
+
     this.metrics.delete(`${name}_start`);
     return 0;
   }
@@ -50,7 +50,7 @@ export class PerformanceMonitor {
   getMetrics(): Record<string, number> {
     const result: Record<string, number> = {};
     this.metrics.forEach((value, key) => {
-      if (!key.includes('_start')) {
+      if (!key.includes("_start")) {
         result[key] = value;
       }
     });
@@ -66,10 +66,10 @@ export class PerformanceMonitor {
 // 基于ziV1d3d的防抖函数
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
-  
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
@@ -79,15 +79,15 @@ export function debounce<T extends (...args: any[]) => any>(
 // 基于ziV1d3d的节流函数
 export function throttle<T extends (...args: any[]) => any>(
   func: T,
-  limit: number
+  limit: number,
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
-  
+
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
+      setTimeout(() => (inThrottle = false), limit);
     }
   };
 }
@@ -95,13 +95,13 @@ export function throttle<T extends (...args: any[]) => any>(
 // 基于ziV1d3d的懒加载函数
 export function lazyLoad<T>(
   importFn: () => Promise<T>,
-  fallback?: T
+  fallback?: T,
 ): () => Promise<T> {
   let promise: Promise<T> | null = null;
-  
+
   return () => {
     if (!promise) {
-      promise = importFn().catch(error => {
+      promise = importFn().catch((error) => {
         promise = null;
         if (fallback) {
           return fallback;
@@ -147,7 +147,7 @@ export class MemoryOptimizer {
 
 // 基于ziV1d3d的渲染优化
 export function optimizeRender<T extends Record<string, any>>(
-  component: React.ComponentType<T>
+  component: React.ComponentType<T>,
 ): React.MemoExoticComponent<React.ComponentType<T>> {
   return React.memo(component, (prevProps, nextProps) => {
     // 基于ziV1d3d的浅比较逻辑
@@ -159,6 +159,6 @@ export function optimizeRender<T extends Record<string, any>>(
 export function batchUpdate(updates: (() => void)[]): void {
   // 基于ziV1d3d的批量更新逻辑
   requestAnimationFrame(() => {
-    updates.forEach(update => update());
+    updates.forEach((update) => update());
   });
 }

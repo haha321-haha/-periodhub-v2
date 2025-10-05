@@ -1,10 +1,10 @@
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import Breadcrumb from '@/components/Breadcrumb';
-import { 
-  Brain, 
-  Heart, 
-  Moon, 
+import {
+  Brain,
+  Heart,
+  Moon,
   Music,
   PenTool,
   Users,
@@ -30,12 +30,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'teenHealth' });
-  
+
   const title = locale === 'zh' ? '情绪支持与心理健康 - 青少年经期健康专区' : 'Emotional Support & Mental Health - Teen Menstrual Health Zone';
-  const description = locale === 'zh' 
+  const description = locale === 'zh'
     ? '经期焦虑、情绪低落如何应对？放松技巧、同龄人经验分享，陪你度过情绪"过山车"。'
     : 'How to cope with period anxiety and mood swings? Relaxation techniques and peer experience sharing.';
-  
+
   return {
     title: `${title} | periodhub.health`,
     description,
@@ -69,7 +69,7 @@ export default async function EmotionalSupportPage({
 }) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
-  
+
   const t = await getTranslations('scenarioSolutionsPage');
   const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
 
@@ -146,7 +146,7 @@ export default async function EmotionalSupportPage({
   const peerExperiences = [
     {
       question: locale === 'zh' ? '经期前情绪特别差，看什么都不顺眼，怎么控制自己的脾气不迁怒家人？' : 'My mood is particularly bad before my period, everything annoys me. How can I control my temper and not take it out on family?',
-      answer: locale === 'zh' 
+      answer: locale === 'zh'
         ? '我也是这样！我的方法是，感觉快要发脾气的时候，就深呼吸，然后找个没人的地方呆几分钟，或者出去散步。告诉家人我这几天情绪不太稳定，请他们多担待一下，得到理解会好很多。'
         : 'I\'m the same way! My method is to take deep breaths when I feel like I\'m about to lose my temper, then find a quiet place to stay for a few minutes or go for a walk. I tell my family that my emotions are unstable these days and ask for their understanding - it helps a lot.'
     },
@@ -167,7 +167,7 @@ export default async function EmotionalSupportPage({
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
       {/* Breadcrumb */}
-      <Breadcrumb 
+      <Breadcrumb
         items={[
           { label: breadcrumbT('scenarioSolutions'), href: `/${locale}/scenario-solutions` },
           { label: breadcrumbT('teenHealth'), href: `/${locale}/teen-health` },
@@ -239,7 +239,7 @@ export default async function EmotionalSupportPage({
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
           {locale === 'zh' ? '为什么经期情绪会受影响？' : 'Why Are Emotions Affected During Periods?'}
         </h2>
-        
+
         <div className="max-w-4xl mx-auto">
           <p className="text-lg text-gray-700 mb-6 leading-relaxed">
             {locale === 'zh'
@@ -247,7 +247,7 @@ export default async function EmotionalSupportPage({
               : 'This is mainly due to hormonal fluctuations during the menstrual cycle. Especially estrogen and progesterone - their changes affect mood-regulating chemicals in the brain, like serotonin. So feeling emotionally unstable is a very normal physiological response.'
             }
           </p>
-          
+
           <div className="grid md:grid-cols-4 gap-6">
             {emotionalSymptoms.map((symptom, index) => (
               <div key={index} className="text-center bg-white rounded-lg p-6 shadow-sm">
@@ -276,7 +276,7 @@ export default async function EmotionalSupportPage({
         <p className="text-center text-gray-600 mb-12">
           {locale === 'zh' ? '理解这些是身体的正常反应，是缓解焦虑的第一步' : 'Understanding these as normal bodily responses is the first step to relieving anxiety'}
         </p>
-        
+
         <div className="space-y-8">
           {copingStrategies.map((category, index) => (
             <div key={index} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
@@ -288,7 +288,7 @@ export default async function EmotionalSupportPage({
                   {category.category}
                 </h3>
               </div>
-              
+
               <div className="grid md:grid-cols-3 gap-6">
                 {category.strategies.map((strategy, strategyIndex) => (
                   <div key={strategyIndex} className="bg-gray-50 rounded-lg p-6">
@@ -319,7 +319,7 @@ export default async function EmotionalSupportPage({
             {locale === 'zh' ? '建立健康的情绪管理习惯' : 'Build Healthy Emotional Management Habits'}
           </h2>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-white rounded-lg p-6">
             <div className="flex items-center mb-3">
@@ -332,7 +332,7 @@ export default async function EmotionalSupportPage({
               {locale === 'zh' ? '保证高质量的睡眠对调节情绪非常重要。睡前可以听一些舒缓的音乐或冥想音频。' : 'Quality sleep is crucial for emotional regulation. Listen to soothing music or meditation audio before bed.'}
             </p>
           </div>
-          
+
           <div className="bg-white rounded-lg p-6">
             <div className="flex items-center mb-3">
               <Users className="w-6 h-6 text-green-600 mr-2" />
@@ -344,7 +344,7 @@ export default async function EmotionalSupportPage({
               {locale === 'zh' ? '知道自己不是一个人经历这些很重要。可以和同龄小伙伴交流，或者看看别人是如何应对的。' : 'Knowing you\'re not alone in experiencing this is important. Talk with peers or see how others cope.'}
             </p>
           </div>
-          
+
           <div className="bg-white rounded-lg p-6">
             <div className="flex items-center mb-3">
               <BookOpen className="w-6 h-6 text-green-600 mr-2" />
@@ -367,7 +367,7 @@ export default async function EmotionalSupportPage({
         <p className="text-center text-gray-600 mb-12">
           {locale === 'zh' ? '来自真实用户的匿名问答，你并不孤单' : 'Anonymous Q&A from real users - you\'re not alone'}
         </p>
-        
+
         <div className="space-y-8">
           {peerExperiences.map((experience, index) => (
             <div key={index} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
@@ -381,7 +381,7 @@ export default async function EmotionalSupportPage({
                     <p className="text-gray-700">{experience.question}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="bg-green-100 rounded-full p-2 mr-3 flex-shrink-0">
                     <Users className="w-5 h-5 text-green-600" />
@@ -405,14 +405,14 @@ export default async function EmotionalSupportPage({
             {locale === 'zh' ? '何时寻求专业帮助？' : 'When to Seek Professional Help?'}
           </h2>
         </div>
-        
+
         <p className="text-gray-700 mb-6">
           {locale === 'zh'
             ? '如果你的经期情绪问题（焦虑、抑郁、易怒）非常严重，持续时间长，影响到你的学习、社交和日常生活，或者有自我伤害的想法，请一定要告诉家长或老师，并寻求专业的心理咨询师或医生的帮助。'
             : 'If your period-related emotional issues (anxiety, depression, irritability) are very severe, last a long time, affect your studies, social life, and daily activities, or if you have thoughts of self-harm, please tell your parents or teachers and seek help from professional counselors or doctors.'
           }
         </p>
-        
+
         <div className="bg-white rounded-lg p-6">
           <h3 className="font-semibold text-gray-900 mb-3">
             {locale === 'zh' ? '记住：' : 'Remember:'}
@@ -435,7 +435,7 @@ export default async function EmotionalSupportPage({
           <ArrowLeft className="w-5 h-5 mr-2" />
           {locale === 'zh' ? '上一篇：发育期疼痛管理' : 'Previous: Developmental Pain Management'}
         </Link>
-        
+
         <Link
           href={`/${locale}/teen-health/communication-guide`}
           className="flex items-center text-primary-600 hover:text-primary-700 transition-colors"

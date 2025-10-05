@@ -1,11 +1,15 @@
 // ReportTemplate - Medical Report HTML Template Generator
 // Creates professional medical report templates consistent with existing PDF center styling
 
-import { PainRecord, PainAnalytics, MedicalSummary, ExportOptions } from '../../../types/pain-tracker';
-import { ChartRenderer, ChartImageData } from './ChartRenderer';
+import {
+  PainRecord,
+  PainAnalytics,
+  MedicalSummary,
+  ExportOptions,
+} from "../../../types/pain-tracker";
+import { ChartRenderer, ChartImageData } from "./ChartRenderer";
 
 export class ReportTemplate {
-  
   /**
    * Generate complete medical report HTML
    */
@@ -13,23 +17,24 @@ export class ReportTemplate {
     records: PainRecord[],
     analytics: PainAnalytics,
     medicalSummary: MedicalSummary,
-    options: ExportOptions
+    options: ExportOptions,
   ): Promise<string> {
-    const reportDate = new Date().toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    const reportDate = new Date().toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
 
     // Render charts if requested and supported
-    let chartsHTML = '';
+    let chartsHTML = "";
     if (options.includeCharts) {
       if (ChartRenderer.isCanvasSupported()) {
         try {
-          const chartImages = await ChartRenderer.renderChartsForExport(analytics);
+          const chartImages =
+            await ChartRenderer.renderChartsForExport(analytics);
           chartsHTML = ChartRenderer.generateChartsHTML(chartImages);
         } catch (error) {
-          console.error('Failed to render charts:', error);
+          console.error("Failed to render charts:", error);
           chartsHTML = ChartRenderer.getFallbackChartsHTML();
         }
       } else {
@@ -73,7 +78,11 @@ export class ReportTemplate {
   /**
    * Generate report header section
    */
-  private static generateReportHeader(reportDate: string, options: ExportOptions, recordCount: number): string {
+  private static generateReportHeader(
+    reportDate: string,
+    options: ExportOptions,
+    recordCount: number,
+  ): string {
     return `
     <header class="report-header">
         <div class="header-content">
@@ -95,7 +104,9 @@ export class ReportTemplate {
             </div>
             <div class="meta-item">
                 <span class="meta-label">Period:</span>
-                <span class="meta-value">${this.formatDateRange(options.dateRange)}</span>
+                <span class="meta-value">${this.formatDateRange(
+                  options.dateRange,
+                )}</span>
             </div>
             <div class="meta-item">
                 <span class="meta-label">Total Records:</span>
@@ -116,20 +127,32 @@ export class ReportTemplate {
             <div class="summary-card primary">
                 <div class="card-icon">📈</div>
                 <h3>Average Pain Level</h3>
-                <div class="metric">${analytics.averagePainLevel.toFixed(1)}/10</div>
-                <p class="metric-description">${this.getPainLevelDescription(analytics.averagePainLevel)}</p>
+                <div class="metric">${analytics.averagePainLevel.toFixed(
+                  1,
+                )}/10</div>
+                <p class="metric-description">${this.getPainLevelDescription(
+                  analytics.averagePainLevel,
+                )}</p>
             </div>
             <div class="summary-card secondary">
                 <div class="card-icon">🎯</div>
                 <h3>Most Common Pain Type</h3>
-                <div class="metric">${analytics.commonPainTypes[0]?.type.replace('_', ' ') || 'N/A'}</div>
-                <p class="metric-description">${analytics.commonPainTypes[0]?.percentage.toFixed(1) || 0}% of records</p>
+                <div class="metric">${
+                  analytics.commonPainTypes[0]?.type.replace("_", " ") || "N/A"
+                }</div>
+                <p class="metric-description">${
+                  analytics.commonPainTypes[0]?.percentage.toFixed(1) || 0
+                }% of records</p>
             </div>
             <div class="summary-card success">
                 <div class="card-icon">💊</div>
                 <h3>Most Effective Treatment</h3>
-                <div class="metric">${analytics.effectiveTreatments[0]?.treatment || 'N/A'}</div>
-                <p class="metric-description">${analytics.effectiveTreatments[0]?.successRate.toFixed(1) || 0}% success rate</p>
+                <div class="metric">${
+                  analytics.effectiveTreatments[0]?.treatment || "N/A"
+                }</div>
+                <p class="metric-description">${
+                  analytics.effectiveTreatments[0]?.successRate.toFixed(1) || 0
+                }% success rate</p>
             </div>
         </div>
     </section>`;
@@ -161,19 +184,33 @@ export class ReportTemplate {
             <div class="characteristic-card">
                 <h4>Pain Intensity</h4>
                 <div class="characteristic-value">
-                    <span class="value-number">${characteristics.averageLevel.toFixed(1)}/10</span>
-                    <span class="value-label">${characteristics.levelDescription}</span>
+                    <span class="value-number">${characteristics.averageLevel.toFixed(
+                      1,
+                    )}/10</span>
+                    <span class="value-label">${
+                      characteristics.levelDescription
+                    }</span>
                 </div>
             </div>
             <div class="characteristic-card">
                 <h4>Common Pain Types</h4>
                 <div class="pain-types-list">
-                    ${characteristics.commonTypes.slice(0, 3).map((type: any) => `
+                    ${characteristics.commonTypes
+                      .slice(0, 3)
+                      .map(
+                        (type: any) => `
                         <div class="pain-type-item">
-                            <span class="type-name">${type.type.replace('_', ' ')}</span>
-                            <span class="type-percentage">${type.percentage.toFixed(1)}%</span>
+                            <span class="type-name">${type.type.replace(
+                              "_",
+                              " ",
+                            )}</span>
+                            <span class="type-percentage">${type.percentage.toFixed(
+                              1,
+                            )}%</span>
                         </div>
-                    `).join('')}
+                    `,
+                      )
+                      .join("")}
                 </div>
             </div>
         </div>
@@ -190,32 +227,48 @@ export class ReportTemplate {
         <div class="treatment-overview">
             <div class="treatment-stats">
                 <div class="stat-item">
-                    <span class="stat-number">${treatmentHistory.totalTreatments}</span>
+                    <span class="stat-number">${
+                      treatmentHistory.totalTreatments
+                    }</span>
                     <span class="stat-label">Treatments Tracked</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">${treatmentHistory.averageEffectiveness.toFixed(1)}/10</span>
+                    <span class="stat-number">${treatmentHistory.averageEffectiveness.toFixed(
+                      1,
+                    )}/10</span>
                     <span class="stat-label">Average Effectiveness</span>
                 </div>
             </div>
         </div>
-        
+
         <h4>Most Effective Treatments</h4>
         <div class="treatment-effectiveness-list">
-            ${treatmentHistory.mostEffective.map((treatment: any) => `
+            ${treatmentHistory.mostEffective
+              .map(
+                (treatment: any) => `
                 <div class="treatment-item">
                     <div class="treatment-info">
-                        <span class="treatment-name">${treatment.treatment}</span>
-                        <span class="treatment-usage">${treatment.usageCount} uses</span>
+                        <span class="treatment-name">${
+                          treatment.treatment
+                        }</span>
+                        <span class="treatment-usage">${
+                          treatment.usageCount
+                        } uses</span>
                     </div>
                     <div class="treatment-metrics">
                         <div class="effectiveness-bar">
-                            <div class="effectiveness-fill" style="width: ${treatment.successRate}%"></div>
+                            <div class="effectiveness-fill" style="width: ${
+                              treatment.successRate
+                            }%"></div>
                         </div>
-                        <span class="effectiveness-rate">${treatment.successRate.toFixed(1)}%</span>
+                        <span class="effectiveness-rate">${treatment.successRate.toFixed(
+                          1,
+                        )}%</span>
                     </div>
                 </div>
-            `).join('')}
+            `,
+              )
+              .join("")}
         </div>
     </section>`;
   }
@@ -241,32 +294,58 @@ export class ReportTemplate {
             <div class="pattern-highlight">
                 <h4>Highest Pain Phase</h4>
                 <div class="phase-info">
-                    <span class="phase-name">${this.formatMenstrualStatus(patterns.highestPainPhase.phase)}</span>
-                    <span class="phase-pain">${patterns.highestPainPhase.averagePainLevel.toFixed(1)}/10 average</span>
+                    <span class="phase-name">${this.formatMenstrualStatus(
+                      patterns.highestPainPhase.phase,
+                    )}</span>
+                    <span class="phase-pain">${patterns.highestPainPhase.averagePainLevel.toFixed(
+                      1,
+                    )}/10 average</span>
                 </div>
             </div>
         </div>
-        
+
         <h4>Phase Analysis</h4>
         <div class="phase-analysis-grid">
-            ${patterns.phaseAnalysis.map((phase: any) => `
+            ${patterns.phaseAnalysis
+              .map(
+                (phase: any) => `
                 <div class="phase-card">
                     <div class="phase-header">
-                        <span class="phase-name">${this.formatMenstrualStatus(phase.phase)}</span>
-                        <span class="phase-pain-level pain-level-${Math.floor(phase.averagePain)}">${phase.averagePain.toFixed(1)}/10</span>
+                        <span class="phase-name">${this.formatMenstrualStatus(
+                          phase.phase,
+                        )}</span>
+                        <span class="phase-pain-level pain-level-${Math.floor(
+                          phase.averagePain,
+                        )}">${phase.averagePain.toFixed(1)}/10</span>
                     </div>
                     <div class="phase-details">
-                        <span class="phase-frequency">${phase.frequency} records</span>
-                        ${phase.commonSymptoms.length > 0 ? `
+                        <span class="phase-frequency">${
+                          phase.frequency
+                        } records</span>
+                        ${
+                          phase.commonSymptoms.length > 0
+                            ? `
                             <div class="phase-symptoms">
-                                ${phase.commonSymptoms.slice(0, 2).map((symptom: string) => `
-                                    <span class="symptom-tag">${symptom.replace('_', ' ')}</span>
-                                `).join('')}
+                                ${phase.commonSymptoms
+                                  .slice(0, 2)
+                                  .map(
+                                    (symptom: string) => `
+                                    <span class="symptom-tag">${symptom.replace(
+                                      "_",
+                                      " ",
+                                    )}</span>
+                                `,
+                                  )
+                                  .join("")}
                             </div>
-                        ` : ''}
+                        `
+                            : ""
+                        }
                     </div>
                 </div>
-            `).join('')}
+            `,
+              )
+              .join("")}
         </div>
     </section>`;
   }
@@ -279,14 +358,18 @@ export class ReportTemplate {
     <section class="section">
         <h2>Clinical Insights</h2>
         <div class="insights-container">
-            ${insights.map((insight, index) => `
+            ${insights
+              .map(
+                (insight, index) => `
                 <div class="insight-item">
                     <div class="insight-number">${index + 1}</div>
                     <div class="insight-content">
                         <p>${insight}</p>
                     </div>
                 </div>
-            `).join('')}
+            `,
+              )
+              .join("")}
         </div>
     </section>`;
   }
@@ -299,7 +382,9 @@ export class ReportTemplate {
     <section class="section">
         <h2>Clinical Recommendations</h2>
         <div class="recommendations-container">
-            ${recommendations.map(rec => `
+            ${recommendations
+              .map(
+                (rec) => `
                 <div class="recommendation-card priority-${rec.priority}">
                     <div class="recommendation-header">
                         <h4>${rec.category}</h4>
@@ -314,7 +399,9 @@ export class ReportTemplate {
                         </div>
                     </div>
                 </div>
-            `).join('')}
+            `,
+              )
+              .join("")}
         </div>
     </section>`;
   }
@@ -346,7 +433,7 @@ export class ReportTemplate {
    */
   private static generateDetailedRecords(records: PainRecord[]): string {
     const displayRecords = records.slice(0, 50); // Limit to first 50 records for readability
-    
+
     return `
     <section class="section">
         <h2>Detailed Pain Records</h2>
@@ -365,25 +452,47 @@ export class ReportTemplate {
                     </tr>
                 </thead>
                 <tbody>
-                    ${displayRecords.map(record => `
+                    ${displayRecords
+                      .map(
+                        (record) => `
                         <tr>
-                            <td>${new Date(record.date).toLocaleDateString()}</td>
+                            <td>${new Date(
+                              record.date,
+                            ).toLocaleDateString()}</td>
                             <td>${record.time}</td>
-                            <td class="pain-level pain-level-${Math.floor(record.painLevel)}">${record.painLevel}/10</td>
-                            <td>${record.painTypes.map(t => t.replace('_', ' ')).join(', ')}</td>
-                            <td>${record.locations.map(l => l.replace('_', ' ')).join(', ')}</td>
-                            <td>${this.formatMenstrualStatus(record.menstrualStatus)}</td>
-                            <td>${record.medications.map(m => m.name).join(', ')}</td>
-                            <td class="effectiveness-rating">${record.effectiveness}/10</td>
+                            <td class="pain-level pain-level-${Math.floor(
+                              record.painLevel,
+                            )}">${record.painLevel}/10</td>
+                            <td>${record.painTypes
+                              .map((t) => t.replace("_", " "))
+                              .join(", ")}</td>
+                            <td>${record.locations
+                              .map((l) => l.replace("_", " "))
+                              .join(", ")}</td>
+                            <td>${this.formatMenstrualStatus(
+                              record.menstrualStatus,
+                            )}</td>
+                            <td>${record.medications
+                              .map((m) => m.name)
+                              .join(", ")}</td>
+                            <td class="effectiveness-rating">${
+                              record.effectiveness
+                            }/10</td>
                         </tr>
-                    `).join('')}
+                    `,
+                      )
+                      .join("")}
                 </tbody>
             </table>
-            ${records.length > 50 ? `
+            ${
+              records.length > 50
+                ? `
                 <div class="table-note">
                     <p>Showing first 50 of ${records.length} records. Complete data available in source application.</p>
                 </div>
-            ` : ''}
+            `
+                : ""
+            }
         </div>
     </section>`;
   }
@@ -413,37 +522,40 @@ export class ReportTemplate {
 
   // Helper methods
 
-  private static formatDateRange(dateRange: { start: Date; end: Date }): string {
-    const startStr = dateRange.start.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
+  private static formatDateRange(dateRange: {
+    start: Date;
+    end: Date;
+  }): string {
+    const startStr = dateRange.start.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
-    const endStr = dateRange.end.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
+    const endStr = dateRange.end.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
     return `${startStr} - ${endStr}`;
   }
 
   private static getPainLevelDescription(level: number): string {
-    if (level >= 8) return 'Severe Pain';
-    if (level >= 6) return 'High Pain';
-    if (level >= 4) return 'Moderate Pain';
-    if (level >= 2) return 'Mild Pain';
-    return 'Minimal Pain';
+    if (level >= 8) return "Severe Pain";
+    if (level >= 6) return "High Pain";
+    if (level >= 4) return "Moderate Pain";
+    if (level >= 2) return "Mild Pain";
+    return "Minimal Pain";
   }
 
   private static formatMenstrualStatus(status: string): string {
     const statusMap: Record<string, string> = {
-      'before_period': 'Before Period',
-      'day_1': 'Day 1',
-      'day_2_3': 'Days 2-3',
-      'day_4_plus': 'Day 4+',
-      'after_period': 'After Period',
-      'mid_cycle': 'Mid-Cycle',
-      'irregular': 'Irregular'
+      before_period: "Before Period",
+      day_1: "Day 1",
+      day_2_3: "Days 2-3",
+      day_4_plus: "Day 4+",
+      after_period: "After Period",
+      mid_cycle: "Mid-Cycle",
+      irregular: "Irregular",
     };
     return statusMap[status] || status;
   }
@@ -892,17 +1004,17 @@ export class ReportTemplate {
         border-radius: 4px;
       }
 
-      .pain-level-0, .pain-level-1, .pain-level-2 { 
-        background: #dcfce7; color: #16a34a; 
+      .pain-level-0, .pain-level-1, .pain-level-2 {
+        background: #dcfce7; color: #16a34a;
       }
-      .pain-level-3, .pain-level-4, .pain-level-5 { 
-        background: #fef3c7; color: #d97706; 
+      .pain-level-3, .pain-level-4, .pain-level-5 {
+        background: #fef3c7; color: #d97706;
       }
-      .pain-level-6, .pain-level-7, .pain-level-8 { 
-        background: #fee2e2; color: #dc2626; 
+      .pain-level-6, .pain-level-7, .pain-level-8 {
+        background: #fee2e2; color: #dc2626;
       }
-      .pain-level-9, .pain-level-10 { 
-        background: #fecaca; color: #991b1b; 
+      .pain-level-9, .pain-level-10 {
+        background: #fecaca; color: #991b1b;
       }
 
       .phase-details {
@@ -1206,20 +1318,20 @@ export class ReportTemplate {
           padding: 15mm;
           box-shadow: none;
         }
-        
+
         .section {
           page-break-inside: avoid;
         }
-        
+
         .summary-grid {
           grid-template-columns: repeat(3, 1fr);
         }
-        
+
         .characteristics-grid,
         .phase-analysis-grid {
           grid-template-columns: repeat(2, 1fr);
         }
-        
+
         .footer-content {
           grid-template-columns: 1fr;
           gap: 15px;
@@ -1231,26 +1343,26 @@ export class ReportTemplate {
         .report-container {
           padding: 15px;
         }
-        
+
         .header-content {
           flex-direction: column;
           gap: 15px;
         }
-        
+
         .report-meta {
           flex-direction: column;
           gap: 10px;
         }
-        
+
         .summary-grid {
           grid-template-columns: 1fr;
         }
-        
+
         .characteristics-grid,
         .phase-analysis-grid {
           grid-template-columns: 1fr;
         }
-        
+
         .footer-content {
           grid-template-columns: 1fr;
         }

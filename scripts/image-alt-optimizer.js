@@ -22,7 +22,7 @@ class ImageAltOptimizer {
    */
   async scanImageUsage() {
     console.log('🔍 扫描图片使用情况...');
-    
+
     const componentFiles = glob.sync('**/*.{tsx,jsx,ts,js}', {
       ignore: ['node_modules/**', '.next/**', 'out/**', 'reports/**']
     });
@@ -34,10 +34,10 @@ class ImageAltOptimizer {
       if (!fs.statSync(file).isFile()) {
         continue;
       }
-      
+
       const content = fs.readFileSync(file, 'utf8');
       const lines = content.split('\n');
-      
+
       lines.forEach((line, index) => {
         // 检测各种图片使用模式
         const patterns = [
@@ -52,7 +52,7 @@ class ImageAltOptimizer {
           while ((match = pattern.exec(line)) !== null) {
             const imageSrc = match[1];
             const fullTag = match[0];
-            
+
             imageUsage.push({
               file: file,
               line: index + 1,
@@ -119,8 +119,8 @@ class ImageAltOptimizer {
       'image', 'img', 'picture', 'photo', '图片', '图像',
       'placeholder', 'banner', 'icon', 'logo', '图标'
     ];
-    
-    return genericAlts.some(generic => 
+
+    return genericAlts.some(generic =>
       altText.toLowerCase().includes(generic.toLowerCase())
     );
   }
@@ -134,7 +134,7 @@ class ImageAltOptimizer {
     // 2. 包含相关关键词
     // 3. 描述图片内容
     // 4. 不是纯装饰性图片
-    
+
     if (altText.length < 10 || altText.length > 125) {
       return false;
     }
@@ -145,7 +145,7 @@ class ImageAltOptimizer {
       '月经', '健康', '周期', '疼痛', '症状', '女性'
     ];
 
-    const hasKeywords = healthKeywords.some(keyword => 
+    const hasKeywords = healthKeywords.some(keyword =>
       altText.toLowerCase().includes(keyword.toLowerCase())
     );
 
@@ -159,13 +159,13 @@ class ImageAltOptimizer {
     const suggestions = [];
     const imageSrc = usage.imageSrc;
     const fileName = path.basename(imageSrc, path.extname(imageSrc));
-    
+
     // 基于文件名生成建议
     const fileNameWords = fileName.split(/[-_]/).filter(word => word.length > 2);
-    
+
     // 基于上下文生成建议
     const contextKeywords = this.extractContextKeywords(usage.lineContent);
-    
+
     // 生成多个建议选项
     if (fileNameWords.length > 0) {
       const descriptiveAlt = fileNameWords
@@ -185,7 +185,7 @@ class ImageAltOptimizer {
       suggestions.push(`${imageType} - ${fileNameWords[0] || 'image'}`);
     }
 
-    return suggestions.filter((suggestion, index, self) => 
+    return suggestions.filter((suggestion, index, self) =>
       suggestion && self.indexOf(suggestion) === index
     );
   }
@@ -200,7 +200,7 @@ class ImageAltOptimizer {
       '月经', '周期', '疼痛', '症状', '健康', '追踪', '日历'
     ];
 
-    return healthKeywords.filter(keyword => 
+    return healthKeywords.filter(keyword =>
       lineContent.toLowerCase().includes(keyword.toLowerCase())
     );
   }
@@ -219,7 +219,7 @@ class ImageAltOptimizer {
     if (src.includes('graph') || ctx.includes('graph')) return 'Graph';
     if (src.includes('diagram') || ctx.includes('diagram')) return 'Diagram';
     if (src.includes('illustration') || ctx.includes('illustration')) return 'Illustration';
-    
+
     return null;
   }
 
@@ -284,7 +284,7 @@ class ImageAltOptimizer {
    */
   generateRecommendedFix(usage, suggestedAlt) {
     const currentLine = usage.lineContent;
-    
+
     if (usage.type === 'missing_alt') {
       // 添加alt属性
       if (currentLine.includes('<img')) {
@@ -316,7 +316,7 @@ class ImageAltOptimizer {
     const report = {
       timestamp: new Date().toISOString(),
       summary: {
-        totalIssues: issues.missingAlt.length + issues.emptyAlt.length + 
+        totalIssues: issues.missingAlt.length + issues.emptyAlt.length +
                     issues.genericAlt.length + issues.seoUnfriendly.length,
         missingAlt: issues.missingAlt.length,
         emptyAlt: issues.emptyAlt.length,
@@ -378,7 +378,7 @@ class ImageAltOptimizer {
     }
 
     const timestamp = new Date().toISOString().split('T')[0];
-    
+
     // 保存JSON报告
     fs.writeFileSync(
       path.join(reportsDir, `image-alt-optimization-${timestamp}.json`),
@@ -424,7 +424,7 @@ class ImageAltOptimizer {
     // 修复建议
     if (report.fixes.length > 0) {
       markdown += `## 🔧 具体修复建议\n\n`;
-      
+
       const fixesByType = report.fixes.reduce((acc, fix) => {
         if (!acc[fix.type]) acc[fix.type] = [];
         acc[fix.type].push(fix);
@@ -433,7 +433,7 @@ class ImageAltOptimizer {
 
       Object.entries(fixesByType).forEach(([type, fixes]) => {
         markdown += `### ${this.getTypeTitle(type)} (${fixes.length}个)\n\n`;
-        
+
         fixes.slice(0, 5).forEach((fix, index) => {
           markdown += `#### ${index + 1}. ${path.basename(fix.file)}:${fix.line}\n\n`;
           markdown += `**当前代码**:\n\`\`\`\n${fix.currentLine}\n\`\`\`\n\n`;
@@ -473,17 +473,17 @@ class ImageAltOptimizer {
    */
   async run() {
     console.log('🔍 开始扫描图片Alt标签...');
-    
+
     try {
       const imageUsage = await this.scanImageUsage();
       console.log(`📊 发现 ${imageUsage.length} 个图片使用`);
-      
+
       const issues = this.analyzeImageIssues(imageUsage);
       const fixes = this.generateFixSuggestions(issues);
       const report = this.generateReport(issues, fixes);
-      
+
       await this.saveReport(report);
-      
+
       // 控制台输出摘要
       console.log('\n📊 图片Alt标签扫描完成:');
       console.log(`总问题数: ${report.summary.totalIssues}`);
@@ -491,14 +491,14 @@ class ImageAltOptimizer {
       console.log(`空alt属性: ${report.summary.emptyAlt} 个`);
       console.log(`通用alt文本: ${report.summary.genericAlt} 个`);
       console.log(`SEO不友好: ${report.summary.seoUnfriendly} 个`);
-      
+
       if (report.recommendations.length > 0) {
         console.log('\n🎯 主要建议:');
         report.recommendations.forEach((rec, index) => {
           console.log(`${index + 1}. ${rec.message}`);
         });
       }
-      
+
     } catch (error) {
       console.error('❌ 图片Alt扫描失败:', error);
       process.exit(1);

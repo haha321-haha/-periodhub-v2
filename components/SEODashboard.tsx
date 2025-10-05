@@ -41,7 +41,7 @@ export function SEODashboard() {
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-6">SEO监控仪表板</h2>
-      
+
       {/* SEO评分 */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
@@ -51,7 +51,7 @@ export function SEODashboard() {
           </span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-3">
-          <div 
+          <div
             className="bg-green-500 h-3 rounded-full transition-all duration-500"
             style={{ width: `${metrics?.score || 0}%` }}
           />

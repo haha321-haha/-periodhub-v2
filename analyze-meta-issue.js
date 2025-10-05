@@ -6,10 +6,10 @@ function analyzeBingUrls() {
   const csvPath = 'www.periodhub.health_FailingUrls_9_27_2025.csv';
   const content = fs.readFileSync(csvPath, 'utf8');
   const urls = content.split('\n').filter(line => line.trim() && line !== '"URL"').map(line => line.replace(/"/g, ''));
-  
+
   console.log('=== Bing报告URL分析 ===');
   console.log('总URL数量:', urls.length);
-  
+
   const urlTypes = {};
   urls.forEach(url => {
     if (url.includes('/articles/')) {
@@ -30,12 +30,12 @@ function analyzeBingUrls() {
       urlTypes.other = (urlTypes.other || 0) + 1;
     }
   });
-  
+
   console.log('URL类型分布:');
   Object.entries(urlTypes).forEach(([type, count]) => {
     console.log('  ' + type + ': ' + count + '个');
   });
-  
+
   return urls;
 }
 
@@ -45,21 +45,21 @@ function checkArticleMetaDescriptions() {
   const articlesDir = 'content/articles';
   const locales = ['en', 'zh'];
   let shortDescriptions = [];
-  
+
   locales.forEach(locale => {
     const localeDir = path.join(articlesDir, locale);
     if (!fs.existsSync(localeDir)) return;
-    
+
     const files = fs.readdirSync(localeDir);
     files.forEach(file => {
       if (file.endsWith('.md')) {
         const filePath = path.join(localeDir, file);
         const content = fs.readFileSync(filePath, 'utf8');
-        
+
         const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
         if (frontmatterMatch) {
           const frontmatter = frontmatterMatch[1];
-          
+
           // 检查seo_description字段
           const seoDescMatch = frontmatter.match(/seo_description:\s*['"](.*?)['"]/);
           if (seoDescMatch) {
@@ -77,12 +77,12 @@ function checkArticleMetaDescriptions() {
       }
     });
   });
-  
+
   console.log(`发现 ${shortDescriptions.length} 个Meta描述过短的文章:`);
   shortDescriptions.forEach(item => {
     console.log(`  ${item.locale}/${item.file}: ${item.length}字符 - ${item.description}`);
   });
-  
+
   return shortDescriptions;
 }
 
@@ -95,13 +95,13 @@ function checkPageMetaDescriptions() {
     'app/[locale]/pain-tracker/page.tsx',
     'app/[locale]/interactive-tools/page.tsx'
   ];
-  
+
   let pageIssues = [];
-  
+
   pages.forEach(pagePath => {
     if (fs.existsSync(pagePath)) {
       const content = fs.readFileSync(pagePath, 'utf8');
-      
+
       // 查找description字段
       const descMatches = content.match(/description:\s*['"`](.*?)['"`]/g);
       if (descMatches) {
@@ -118,12 +118,12 @@ function checkPageMetaDescriptions() {
       }
     }
   });
-  
+
   console.log(`发现 ${pageIssues.length} 个页面组件Meta描述过短:`);
   pageIssues.forEach(item => {
     console.log(`  ${item.file}: ${item.length}字符 - ${item.description}`);
   });
-  
+
   return pageIssues;
 }
 

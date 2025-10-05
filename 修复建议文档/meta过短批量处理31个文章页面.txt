@@ -37,7 +37,7 @@
 **影响范围**：一个修复可以影响多个页面
 **已验证的修复目标**：
 - `healthGuidePage.description`
-- `downloadsPage.description` 
+- `downloadsPage.description`
 - `interactiveToolsPage.description`
 - 其他页面组件的翻译键
 
@@ -420,7 +420,7 @@ This will validate your character length assumptions and metadata generation und
 // 第135行：description字段的生成
 const description = locale === 'zh' ? (article.summary_zh || article.summary) : article.summary;
 
-// 第137行：seoDescription字段的生成  
+// 第137行：seoDescription字段的生成
 const seoDescription = locale === 'zh' ? (article.seo_description_zh || description) : (article.seo_description || description);
 
 // 第144行：最终使用的meta描述

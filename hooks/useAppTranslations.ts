@@ -8,7 +8,7 @@ import { useTranslations, useLocale } from 'next-intl';
 export const useAppTranslations = (namespace?: string) => {
   const t = useTranslations(namespace);
   const locale = useLocale();
-  
+
   return {
     t,
     locale,
@@ -38,7 +38,7 @@ export const useInteractiveToolTranslations = (toolName?: string) => {
  */
 export const useTranslatedOptions = (namespace: string, optionsKey: string) => {
   const { t } = useAppTranslations(namespace);
-  
+
   return (options: string[]) => {
     return options.map(option => ({
       value: option,

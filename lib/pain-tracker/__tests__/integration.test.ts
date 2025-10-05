@@ -16,7 +16,7 @@ describe('Enhanced Pain Tracker Integration', () => {
     Object.values(STORAGE_KEYS).forEach(key => {
       localStorage.removeItem(key);
     });
-    
+
     services = createPainTrackerServices();
   });
 
@@ -55,7 +55,7 @@ describe('Enhanced Pain Tracker Integration', () => {
       };
 
       const result = services.validation.validateRecord(testRecord);
-      
+
       expect(result.isValid).toBe(true);
       expect(result.errors).toHaveLength(0);
     });
@@ -72,10 +72,10 @@ describe('Enhanced Pain Tracker Integration', () => {
       };
 
       const result = services.validation.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors.length).toBeGreaterThan(0);
-      
+
       // Check for specific error types
       const errorCodes = result.errors.map(e => e.code);
       expect(errorCodes).toContain('INVALID_DATE');
@@ -98,16 +98,16 @@ describe('Enhanced Pain Tracker Integration', () => {
 
     it('should save and load data correctly', async () => {
       const testData = { test: 'data', number: 42 };
-      
+
       await services.storage.save('test_key', testData);
       const loadedData = await services.storage.load('test_key');
-      
+
       expect(loadedData).toEqual(testData);
     });
 
     it('should handle storage quota checks', async () => {
       const quotaInfo = await services.storage.getQuotaUsage();
-      
+
       expect(quotaInfo).toHaveProperty('used');
       expect(quotaInfo).toHaveProperty('available');
       expect(typeof quotaInfo.used).toBe('number');
@@ -134,20 +134,20 @@ describe('Enhanced Pain Tracker Integration', () => {
           updatedAt: new Date()
         }
       ];
-      
+
       await services.storage.save(STORAGE_KEYS.PAIN_RECORDS, testRecords);
-      
+
       // Create backup
       const backupData = await services.storage.backup();
       expect(backupData).toBeDefined();
       expect(typeof backupData).toBe('string');
-      
+
       // Clear data
       await services.storage.clear();
-      
+
       // Restore from backup
       await services.storage.restore(backupData);
-      
+
       // Verify data was restored
       const restoredRecords = await services.storage.load(STORAGE_KEYS.PAIN_RECORDS);
       expect(restoredRecords).toHaveLength(1);
@@ -159,14 +159,14 @@ describe('Enhanced Pain Tracker Integration', () => {
     it('should detect when migration is needed', () => {
       const isNeeded = services.migration.isMigrationNeeded(0);
       expect(isNeeded).toBe(true);
-      
+
       const isNotNeeded = services.migration.isMigrationNeeded(CURRENT_SCHEMA_VERSION);
       expect(isNotNeeded).toBe(false);
     });
 
     it('should create migration plan', () => {
       const plan = services.migration.getMigrationPlan(0, 1);
-      
+
       expect(plan.fromVersion).toBe(0);
       expect(plan.toVersion).toBe(1);
       expect(plan.migrations).toHaveLength(1);
@@ -189,11 +189,11 @@ describe('Enhanced Pain Tracker Integration', () => {
 
       const plan = services.migration.getMigrationPlan(0, 1);
       const migratedData = await services.migration.executeMigrationPlan(legacyData, plan);
-      
+
       expect(migratedData).toBeDefined();
       expect(migratedData.schemaVersion).toBe(1);
       expect(migratedData.records).toHaveLength(1);
-      
+
       const migratedRecord = migratedData.records[0];
       expect(migratedRecord.id).toBe('legacy1');
       expect(migratedRecord.painLevel).toBe(7);
@@ -239,7 +239,7 @@ describe('Enhanced Pain Tracker Integration', () => {
         createdAt: new Date(),
         updatedAt: new Date()
       };
-      
+
       records.push(completeRecord);
       await services.storage.save(STORAGE_KEYS.PAIN_RECORDS, records);
 

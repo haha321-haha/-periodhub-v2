@@ -2,7 +2,7 @@
  * 多阶段测试相关类型定义
  */
 
-import { QuizStage, QuizStageStatus, ResultLevel } from './quiz';
+import { QuizStage, QuizStageStatus, ResultLevel } from "./quiz";
 
 // 阶段状态类型
 export interface StageState {
@@ -39,7 +39,7 @@ export interface StageConfig {
   description: string;
   icon: string;
   color: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: "easy" | "medium" | "hard";
   estimatedTime: number; // 分钟
   unlockCondition: UnlockCondition;
   prerequisites: QuizStage[];
@@ -114,7 +114,7 @@ export interface StageAnalysis {
 export interface StageUnlockEvent {
   stage: QuizStage;
   unlockedAt: Date;
-  reason: 'score_threshold' | 'completion' | 'time_based' | 'manual';
+  reason: "score_threshold" | "completion" | "time_based" | "manual";
   triggerData: any;
 }
 
@@ -161,4 +161,3 @@ export interface StageMetadata {
   difficulty: number; // 1-5
   popularity: number; // 1-5
 }
-

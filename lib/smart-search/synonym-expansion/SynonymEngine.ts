@@ -69,7 +69,7 @@ export class SynonymEngine {
     // 处理每个词条
     for (const token of tokens) {
       const synonymData = await this.expandTerm(token, opts);
-      
+
       if (synonymData.synonyms.length > 0) {
         expandedTerms.push(synonymData);
         expansionScore += synonymData.confidence;
@@ -78,7 +78,7 @@ export class SynonymEngine {
 
     // 生成扩展查询
     const expandedQuery = this.generateExpandedQuery(query, expandedTerms, opts);
-    
+
     // 收集所有同义词用于兼容性
     const allSynonyms: string[] = [];
     for (const termData of expandedTerms) {
@@ -143,8 +143,8 @@ export class SynonymEngine {
     });
 
     return this.queryExpander.generateQueryVariants(
-      query, 
-      expansionResult.expandedTerms, 
+      query,
+      expansionResult.expandedTerms,
       maxVariants
     );
   }
@@ -164,10 +164,10 @@ export class SynonymEngine {
     confidence: number;
   }> {
     const cleanTerm = this.cleanTerm(term);
-    
+
     // 获取基础同义词
     const basicSynonyms = this.medicalSynonyms.getSynonyms(
-      cleanTerm, 
+      cleanTerm,
       options.maxSynonymsPerTerm
     );
 
@@ -217,7 +217,7 @@ export class SynonymEngine {
 
     // 构建扩展查询字符串
     let expandedQuery = originalQuery;
-    
+
     // 添加高置信度的同义词
     const highConfidenceTerms = expandedTerms.filter(
       term => term.confidence >= options.confidenceThreshold
@@ -266,7 +266,7 @@ export class SynonymEngine {
    */
   private isCommonTerm(term: string): boolean {
     const commonTerms = new Set([
-      '痛经', '疼痛', '缓解', '治疗', '药物', 
+      '痛经', '疼痛', '缓解', '治疗', '药物',
       'pain', 'relief', 'treatment', 'medicine'
     ]);
     return commonTerms.has(term.toLowerCase());
@@ -293,4 +293,4 @@ export class SynonymEngine {
       .split(/\s+/)
       .filter(token => token.length > 0);
   }
-} 
+}

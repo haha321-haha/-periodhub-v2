@@ -71,7 +71,7 @@ export const useSearch = (
       try {
         const searchResults = await searchFunction(searchQuery, searchFilters);
         setResults(searchResults);
-        
+
         // 添加到搜索历史
         if (searchQuery.trim() && !searchHistory.includes(searchQuery)) {
           setSearchHistory(prev => [searchQuery, ...prev.slice(0, 9)]); // 保留最近10条
@@ -195,7 +195,7 @@ export const SearchBox: React.FC<SearchBoxProps> = ({
           </button>
         )}
       </div>
-      
+
       {isLoading && (
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
           <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
@@ -302,11 +302,11 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
                   {getTypeLabel(result.type)}
                 </span>
               </div>
-              
+
               <p className="text-gray-600 text-sm line-clamp-2 mb-2">
                 {result.content}
               </p>
-              
+
               <div className="flex items-center space-x-4 text-xs text-gray-500">
                 {result.category && (
                   <span>分类: {result.category}</span>
@@ -321,7 +321,7 @@ export const SearchResults: React.FC<SearchResultsProps> = ({
                   <span>相关度: {Math.round(result.score * 100)}%</span>
                 )}
               </div>
-              
+
               {result.tags && result.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1 mt-2">
                   {result.tags.slice(0, 3).map((tag) => (
@@ -379,7 +379,7 @@ export const SearchHistory: React.FC<SearchHistoryProps> = ({
           清除
         </button>
       </div>
-      
+
       <div className="space-y-1">
         {history.map((query, index) => (
           <button

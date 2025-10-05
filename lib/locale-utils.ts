@@ -19,12 +19,12 @@ export function getValidLocale(locale: unknown): Locale {
   if (isValidLocale(locale)) {
     return locale;
   }
-  
+
   // 记录警告（仅在客户端）
   if (typeof window !== 'undefined') {
     console.warn(`[LocaleUtils] Invalid locale '${locale}', falling back to '${defaultLocale}'`);
   }
-  
+
   return defaultLocale;
 }
 
@@ -33,7 +33,7 @@ export function getValidLocale(locale: unknown): Locale {
  */
 export function safeSetRequestLocale(locale: unknown, setRequestLocale: (locale: string) => void): Locale {
   const validLocale = getValidLocale(locale);
-  
+
   try {
     setRequestLocale(validLocale);
   } catch (error) {
@@ -45,7 +45,7 @@ export function safeSetRequestLocale(locale: unknown, setRequestLocale: (locale:
       console.error('[LocaleUtils] Failed to set default locale:', fallbackError);
     }
   }
-  
+
   return validLocale;
 }
 
@@ -55,11 +55,11 @@ export function safeSetRequestLocale(locale: unknown, setRequestLocale: (locale:
 export function extractLocaleFromPath(pathname: string): string | null {
   const segments = pathname.split('/').filter(Boolean);
   const firstSegment = segments[0];
-  
+
   if (isValidLocale(firstSegment)) {
     return firstSegment;
   }
-  
+
   return null;
 }
 
@@ -71,7 +71,7 @@ export function getLocaleDisplayName(locale: Locale): string {
     zh: '中文',
     en: 'English'
   };
-  
+
   return displayNames[locale] || locale;
 }
 
@@ -91,9 +91,6 @@ export function getHTMLLang(locale: Locale): string {
     zh: 'zh',
     en: 'en'
   };
-  
+
   return htmlLangs[locale] || locale;
 }
-
-
-

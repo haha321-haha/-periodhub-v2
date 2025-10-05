@@ -16,12 +16,12 @@ class TranslationKeyCleaner {
     this.zhPath = path.join(this.messagesDir, 'zh.json');
     this.enPath = path.join(this.messagesDir, 'en.json');
     this.backupDir = path.join(this.messagesDir, 'backups');
-    
+
     this.usedKeys = new Set();
     this.unusedKeys = new Set();
     this.whitelistKeys = new Set();
     this.dynamicKeys = new Set();
-    
+
     this.cleanupStats = {
       totalKeys: 0,
       unusedKeys: 0,
@@ -80,7 +80,7 @@ class TranslationKeyCleaner {
    */
   scanUsedKeys() {
     console.log('🔍 扫描代码中使用的翻译键...');
-    
+
     const files = glob.sync('**/*.{ts,tsx,js,jsx}', {
       cwd: this.appDir,
       ignore: ['**/node_modules/**', '**/.next/**', '**/test/**', '**/tests/**']
@@ -89,7 +89,7 @@ class TranslationKeyCleaner {
     files.forEach(file => {
       const filePath = path.join(this.appDir, file);
       const content = fs.readFileSync(filePath, 'utf8');
-      
+
       // 匹配 t('key') 或 t("key") 模式
       const tMatches = content.match(/t\(['"`]([^'"`]+)['"`]\)/g);
       if (tMatches) {
@@ -157,7 +157,7 @@ class TranslationKeyCleaner {
    */
   flattenKeys(obj, prefix = '') {
     const flattened = {};
-    
+
     for (const key in obj) {
       if (typeof obj[key] === 'object' && obj[key] !== null) {
         const nested = this.flattenKeys(obj[key], prefix ? `${prefix}.${key}` : key);
@@ -166,7 +166,7 @@ class TranslationKeyCleaner {
         flattened[prefix ? `${prefix}.${key}` : key] = obj[key];
       }
     }
-    
+
     return flattened;
   }
 
@@ -175,21 +175,21 @@ class TranslationKeyCleaner {
    */
   unflattenKeys(flattened) {
     const result = {};
-    
+
     for (const key in flattened) {
       const keys = key.split('.');
       let current = result;
-      
+
       for (let i = 0; i < keys.length - 1; i++) {
         if (!current[keys[i]]) {
           current[keys[i]] = {};
         }
         current = current[keys[i]];
       }
-      
+
       current[keys[keys.length - 1]] = flattened[key];
     }
-    
+
     return result;
   }
 
@@ -233,13 +233,13 @@ class TranslationKeyCleaner {
    */
   analyzeUnusedKeys() {
     console.log('🔍 分析未使用的翻译键...');
-    
+
     const { zhTranslations, enTranslations } = this.loadTranslationFiles();
-    
+
     // 扁平化所有翻译键
     const zhFlattened = this.flattenKeys(zhTranslations);
     const enFlattened = this.flattenKeys(enTranslations);
-    
+
     // 获取所有键
     const allKeys = new Set([
       ...Object.keys(zhFlattened),
@@ -273,26 +273,26 @@ class TranslationKeyCleaner {
    */
   cleanupUnusedKeys(dryRun = true) {
     console.log(`\n🧹 ${dryRun ? '模拟' : '执行'}清理未使用的翻译键...`);
-    
+
     const { zhTranslations, enTranslations } = this.loadTranslationFiles();
-    
+
     // 扁平化翻译键
     const zhFlattened = this.flattenKeys(zhTranslations);
     const enFlattened = this.flattenKeys(enTranslations);
-    
+
     // 创建清理后的版本
     const cleanedZh = { ...zhFlattened };
     const cleanedEn = { ...enFlattened };
-    
+
     let removedCount = 0;
-    
+
     this.unusedKeys.forEach(key => {
       if (cleanedZh[key]) {
         delete cleanedZh[key];
         removedCount++;
         console.log(`🗑️  ${dryRun ? '将删除' : '已删除'} 中文键: ${key}`);
       }
-      
+
       if (cleanedEn[key]) {
         delete cleanedEn[key];
         removedCount++;
@@ -341,7 +341,7 @@ class TranslationKeyCleaner {
   generateReport() {
     console.log('\n📊 翻译键清理报告');
     console.log('='.repeat(50));
-    
+
     console.log(`\n📈 统计信息:`);
     console.log(`  - 总键数: ${this.cleanupStats.totalKeys}`);
     console.log(`  - 未使用键: ${this.cleanupStats.unusedKeys}`);
@@ -381,15 +381,15 @@ class TranslationKeyCleaner {
     this.initializeWhitelist();
     this.scanUsedKeys();
     this.analyzeUnusedKeys();
-    
+
     if (clean) {
       this.cleanupUnusedKeys(false);
     } else {
       this.cleanupUnusedKeys(true);
     }
-    
+
     this.generateReport();
-    
+
     console.log('\n' + '='.repeat(50));
     if (this.cleanupStats.unusedKeys > 0) {
       if (clean) {

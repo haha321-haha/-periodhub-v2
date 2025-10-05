@@ -626,7 +626,7 @@ function generatePDFHTML(resource, locale) {
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.8;
@@ -636,14 +636,14 @@ function generatePDFHTML(resource, locale) {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         .header {
             border-bottom: 3px solid #9333ea;
             padding-bottom: 30px;
             margin-bottom: 40px;
             text-align: center;
         }
-        
+
         .title {
             color: #9333ea;
             font-size: 32px;
@@ -651,43 +651,43 @@ function generatePDFHTML(resource, locale) {
             margin-bottom: 16px;
             line-height: 1.2;
         }
-        
+
         .subtitle {
             color: #666;
             font-size: 18px;
             margin-bottom: 20px;
             font-weight: 400;
         }
-        
+
         .source {
             color: #888;
             font-size: 14px;
             margin-top: 10px;
         }
-        
+
         .content {
             max-width: 800px;
             margin: 0 auto;
         }
-        
+
         .content-section {
             margin-bottom: 30px;
         }
-        
+
         .content-item {
             margin-bottom: 16px;
             padding: 12px 0;
             font-size: 16px;
             line-height: 1.6;
         }
-        
+
         .content-item:first-child {
             font-size: 20px;
             font-weight: 600;
             color: #9333ea;
             margin-bottom: 24px;
         }
-        
+
         .footer {
             margin-top: 60px;
             padding-top: 30px;
@@ -696,54 +696,54 @@ function generatePDFHTML(resource, locale) {
             color: #666;
             font-size: 14px;
         }
-        
+
         .footer a {
             color: #9333ea;
             text-decoration: none;
         }
-        
+
         .footer a:hover {
             text-decoration: underline;
         }
-        
+
         /* 移动端响应式设计 */
         @media (max-width: 768px) {
             body {
                 padding: 20px;
                 font-size: 14px;
             }
-            
+
             .title {
                 font-size: 24px;
             }
-            
+
             .subtitle {
                 font-size: 16px;
             }
-            
+
             .content-item {
                 font-size: 14px;
             }
-            
+
             .content-item:first-child {
                 font-size: 18px;
             }
         }
-        
+
         @media (max-width: 480px) {
             body {
                 padding: 15px;
             }
-            
+
             .title {
                 font-size: 20px;
             }
-            
+
             .subtitle {
                 font-size: 14px;
             }
         }
-        
+
         /* 打印样式 */
         @media print {
             body {
@@ -751,11 +751,11 @@ function generatePDFHTML(resource, locale) {
                 padding: 0;
                 color: #000;
             }
-            
+
             .header {
                 border-bottom: 2px solid #000;
             }
-            
+
             .title {
                 color: #000;
             }
@@ -768,13 +768,13 @@ function generatePDFHTML(resource, locale) {
         <p class="subtitle">${description}</p>
         <p class="source">${locale === 'zh' ? '来源：Period Hub 健康资源中心' : 'Source: Period Hub Health Resource Center'}</p>
     </div>
-    
+
     <div class="content">
         <div class="content-section">
             ${content.map(item => `<div class="content-item">${item}</div>`).join('')}
         </div>
     </div>
-    
+
     <div class="footer">
         <p>${locale === 'zh' ? '如需更多信息，请访问：' : 'For more information, visit:'} <a href="https://periodhub.health" target="_blank">periodhub.health</a></p>
         <p>${locale === 'zh' ? '本资源仅供教育参考，不能替代专业医疗建议' : 'This resource is for educational purposes only and cannot replace professional medical advice'}</p>
@@ -786,7 +786,7 @@ function generatePDFHTML(resource, locale) {
 // 创建PDF文件
 function createPDFFiles() {
   const pdfDir = path.join(__dirname, '..', 'public', 'pdf-files');
-  
+
   // 确保目录存在
   if (!fs.existsSync(pdfDir)) {
     fs.mkdirSync(pdfDir, { recursive: true });
@@ -801,7 +801,7 @@ function createPDFFiles() {
     // 创建中文版本
     const zhFilename = `${resource.id}.html`;
     const zhFilepath = path.join(pdfDir, zhFilename);
-    
+
     if (!fs.existsSync(zhFilepath)) {
       const zhContent = generatePDFHTML(resource, 'zh');
       fs.writeFileSync(zhFilepath, zhContent, 'utf8');
@@ -815,7 +815,7 @@ function createPDFFiles() {
     // 创建英文版本
     const enFilename = `${resource.id}-en.html`;
     const enFilepath = path.join(pdfDir, enFilename);
-    
+
     if (!fs.existsSync(enFilepath)) {
       const enContent = generatePDFHTML(resource, 'en');
       fs.writeFileSync(enFilepath, enContent, 'utf8');
@@ -831,7 +831,7 @@ function createPDFFiles() {
   console.log(`✅ 成功创建: ${createdCount} 个文件`);
   console.log(`⏭️ 跳过已存在: ${skippedCount} 个文件`);
   console.log(`🎯 总计PDF资源: ${newPDFResources.length} 个新资源 (每个包含中英文版本)`);
-  
+
   return {
     created: createdCount,
     skipped: skippedCount,
@@ -844,7 +844,7 @@ if (require.main === module) {
   try {
     const result = createPDFFiles();
     console.log('\n🎉 PDF文件创建任务完成！');
-    
+
     if (result.created > 0) {
       console.log('💡 下一步：测试新PDF的预览和下载功能');
     }
@@ -854,4 +854,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { newPDFResources, generatePDFHTML, createPDFFiles }; 
+module.exports = { newPDFResources, generatePDFHTML, createPDFFiles };

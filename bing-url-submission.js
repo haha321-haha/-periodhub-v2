@@ -61,7 +61,7 @@ function generateBingSubmissionReport() {
 // 生成HTML格式的提交指南
 function generateHTMLGuide() {
   const report = generateBingSubmissionReport();
-  
+
   let html = `
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -118,7 +118,7 @@ function generateHTMLGuide() {
     const priorityClass = item.priority === 'high' ? 'high-priority' : 'normal-priority';
     html += `
             <div class="url-item ${priorityClass}">
-                <strong>${item.url}</strong> 
+                <strong>${item.url}</strong>
                 <span style="color: #666;">(${item.priority === 'high' ? '高优先级' : '普通优先级'})</span>
             </div>`;
   });
@@ -153,28 +153,28 @@ function generateHTMLGuide() {
 // 主执行函数
 function main() {
   console.log('🔧 生成Bing Webmaster Tools修复指南...\n');
-  
+
   // 生成JSON报告
   const report = generateBingSubmissionReport();
   fs.writeFileSync('bing-submission-report.json', JSON.stringify(report, null, 2));
   console.log('✅ 已生成 bing-submission-report.json');
-  
+
   // 生成HTML指南
   const htmlGuide = generateHTMLGuide();
   fs.writeFileSync('bing-submission-guide.html', htmlGuide);
   console.log('✅ 已生成 bing-submission-guide.html');
-  
+
   // 生成URL列表文件
   const urlList = problemUrls.join('\n');
   fs.writeFileSync('bing-urls-to-check.txt', urlList);
   console.log('✅ 已生成 bing-urls-to-check.txt');
-  
+
   console.log('\n📋 下一步操作:');
   console.log('1. 打开 bing-submission-guide.html 查看详细指南');
   console.log('2. 在Bing Webmaster Tools中提交sitemap.xml');
   console.log('3. 使用 bing-urls-to-check.txt 中的URL进行批量检查');
   console.log('4. 请求Bing重新抓取所有问题URL');
-  
+
   console.log(`\n📊 统计信息:`);
   console.log(`- 总URL数量: ${report.totalUrls}`);
   console.log(`- 高优先级URL: ${report.urls.filter(u => u.priority === 'high').length}`);
@@ -186,8 +186,3 @@ if (require.main === module) {
 }
 
 module.exports = { generateBingSubmissionReport, generateHTMLGuide };
-
-
-
-
-

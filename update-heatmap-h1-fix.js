@@ -19,18 +19,18 @@ const h1FixedPages = [
 // 更新热点地图数据
 function updateHeatmapData() {
   console.log('🔥 开始更新热点地图数据...');
-  
+
   // 读取现有热点地图数据
   const heatmapDir = path.join(__dirname, 'data', 'heatmap', 'csv');
   const files = fs.readdirSync(heatmapDir);
-  
+
   let updatedCount = 0;
-  
+
   files.forEach(file => {
     if (file.endsWith('.csv')) {
       const filePath = path.join(heatmapDir, file);
       let content = fs.readFileSync(filePath, 'utf8');
-      
+
       // 为H1修复的页面添加特殊标记
       h1FixedPages.forEach(pageUrl => {
         if (content.includes(pageUrl)) {
@@ -46,7 +46,7 @@ function updateHeatmapData() {
       });
     }
   });
-  
+
   return updatedCount;
 }
 
@@ -76,43 +76,43 @@ function generateHeatmapUpdateReport() {
       '4. 定期更新热点地图配置'
     ]
   };
-  
+
   const reportPath = path.join(__dirname, 'heatmap-h1-fix-update-report.json');
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-  
+
   return reportPath;
 }
 
 // 主执行函数
 function main() {
   console.log('🔥 热点地图H1修复更新开始...\n');
-  
+
   try {
     // 更新热点地图数据
     const updatedCount = updateHeatmapData();
-    
+
     // 生成更新报告
     const reportPath = generateHeatmapUpdateReport();
-    
+
     console.log(`\n📊 更新完成统计:`);
     console.log(`   - 处理的文件数量: ${updatedCount}`);
     console.log(`   - 修复的页面数量: ${h1FixedPages.length}`);
     console.log(`   - 更新报告: ${reportPath}`);
-    
+
     console.log('\n🎯 H1修复对热点地图的影响:');
     console.log('   ✅ 页面结构更清晰（1个H1 vs 2个H1）');
     console.log('   ✅ SEO表现改善');
     console.log('   ✅ 搜索引擎理解更准确');
     console.log('   ✅ 用户体验提升');
-    
+
     console.log('\n📋 后续监控建议:');
     console.log('   1. 观察用户点击行为变化');
     console.log('   2. 监控SEO指标改善');
     console.log('   3. 跟踪搜索引擎索引情况');
     console.log('   4. 定期更新热点地图配置');
-    
+
     console.log('\n✅ 热点地图H1修复更新完成！');
-    
+
   } catch (error) {
     console.error('❌ 热点地图更新失败:', error.message);
     process.exit(1);
@@ -121,8 +121,3 @@ function main() {
 
 // 执行主函数
 main();
-
-
-
-
-

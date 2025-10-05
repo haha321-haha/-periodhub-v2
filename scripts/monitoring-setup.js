@@ -11,23 +11,23 @@ const path = require('path');
 // 监控配置
 const MONITORING_CONFIG = {
   seo: {
-    indexRate: { 
-      baseline: 0.482, 
-      threshold: -0.05, 
+    indexRate: {
+      baseline: 0.482,
+      threshold: -0.05,
       action: 'alert',
       description: '索引率下降超过5%时告警',
       checkInterval: 'daily'
     },
-    organicTraffic: { 
-      baseline: 'current', 
-      threshold: -0.1, 
+    organicTraffic: {
+      baseline: 'current',
+      threshold: -0.1,
       action: 'rollback',
       description: '有机流量下降超过10%时回滚',
       checkInterval: 'daily'
     },
-    duplicatePages: { 
-      baseline: 11, 
-      threshold: 15, 
+    duplicatePages: {
+      baseline: 11,
+      threshold: 15,
       action: 'rollback',
       description: '重复页面超过15个时回滚',
       checkInterval: 'daily'
@@ -48,9 +48,9 @@ const MONITORING_CONFIG = {
     }
   },
   performance: {
-    lcp: { 
-      baseline: 5000, 
-      threshold: 6000, 
+    lcp: {
+      baseline: 5000,
+      threshold: 6000,
       action: 'rollback',
       description: 'LCP超过6秒时回滚',
       checkInterval: 'hourly'
@@ -62,9 +62,9 @@ const MONITORING_CONFIG = {
       description: 'FID超过300ms时告警',
       checkInterval: 'hourly'
     },
-    cls: { 
-      baseline: 0.15, 
-      threshold: 0.25, 
+    cls: {
+      baseline: 0.15,
+      threshold: 0.25,
       action: 'alert',
       description: 'CLS超过0.25时告警',
       checkInterval: 'hourly'
@@ -153,29 +153,29 @@ class MonitoringSetup {
 
   async setup() {
     log.section('设置监控系统');
-    
+
     try {
       // 1. 创建监控目录结构
       await this.createDirectoryStructure();
-      
+
       // 2. 生成监控配置文件
       await this.generateConfigFiles();
-      
+
       // 3. 创建监控脚本
       await this.createMonitoringScripts();
-      
+
       // 4. 设置告警系统
       await this.setupAlertSystem();
-      
+
       // 5. 创建Dashboard
       await this.createDashboard();
-      
+
       // 6. 设置自动化检查
       await this.setupAutomatedChecks();
-      
+
       log.success('监控系统设置完成');
       this.printSetupSummary();
-      
+
     } catch (error) {
       log.error(`监控设置失败: ${error.message}`);
       process.exit(1);
@@ -184,7 +184,7 @@ class MonitoringSetup {
 
   async createDirectoryStructure() {
     log.info('创建监控目录结构...');
-    
+
     const dirs = [
       'monitoring',
       'monitoring/config',
@@ -194,7 +194,7 @@ class MonitoringSetup {
       'monitoring/reports',
       'monitoring/logs'
     ];
-    
+
     for (const dir of dirs) {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
@@ -205,7 +205,7 @@ class MonitoringSetup {
 
   async generateConfigFiles() {
     log.info('生成监控配置文件...');
-    
+
     // 主配置文件
     const mainConfig = {
       version: '1.0.0',
@@ -215,12 +215,12 @@ class MonitoringSetup {
       alerts: this.alerts,
       createdAt: new Date().toISOString()
     };
-    
+
     fs.writeFileSync(
       'monitoring/config/monitoring.json',
       JSON.stringify(mainConfig, null, 2)
     );
-    
+
     // 环境变量配置
     const envConfig = `
 # 监控系统环境变量
@@ -243,15 +243,15 @@ SEO_BASELINE_INDEX_RATE=0.482
 SEO_BASELINE_DUPLICATE_PAGES=11
 SEO_BASELINE_CANONICAL_ERRORS=28
 `;
-    
+
     fs.writeFileSync('monitoring/config/.env', envConfig);
-    
+
     log.success('配置文件生成完成');
   }
 
   async createMonitoringScripts() {
     log.info('创建监控脚本...');
-    
+
     // SEO监控脚本
     const seoMonitoringScript = `#!/usr/bin/env node
 /**
@@ -273,7 +273,7 @@ class SEOMonitor {
     // 模拟检查索引率（实际应该调用Google Search Console API）
     const currentIndexRate = 0.482; // 当前基线
     const threshold = this.config.monitoring.seo.indexRate.threshold;
-    
+
     if (currentIndexRate < (this.config.monitoring.seo.indexRate.baseline + threshold)) {
       this.triggerAlert('seo', 'indexRate', {
         current: currentIndexRate,
@@ -281,7 +281,7 @@ class SEOMonitor {
         threshold: threshold
       });
     }
-    
+
     this.results.indexRate = currentIndexRate;
   }
 
@@ -289,14 +289,14 @@ class SEOMonitor {
     // 模拟检查重复页面
     const currentDuplicates = 11; // 当前基线
     const threshold = this.config.monitoring.seo.duplicatePages.threshold;
-    
+
     if (currentDuplicates > threshold) {
       this.triggerAlert('seo', 'duplicatePages', {
         current: currentDuplicates,
         threshold: threshold
       });
     }
-    
+
     this.results.duplicatePages = currentDuplicates;
   }
 
@@ -304,14 +304,14 @@ class SEOMonitor {
     // 模拟检查Canonical错误
     const currentErrors = 28; // 当前基线
     const threshold = this.config.monitoring.seo.canonicalErrors.threshold;
-    
+
     if (currentErrors > threshold) {
       this.triggerAlert('seo', 'canonicalErrors', {
         current: currentErrors,
         threshold: threshold
       });
     }
-    
+
     this.results.canonicalErrors = currentErrors;
   }
 
@@ -324,28 +324,28 @@ class SEOMonitor {
       data: data,
       message: this.config.monitoring[category][metric].description
     };
-    
+
     // 保存告警到文件
     const alertFile = \`monitoring/alerts/alert-\${Date.now()}.json\`;
     fs.writeFileSync(alertFile, JSON.stringify(alert, null, 2));
-    
+
     console.log(\`🚨 告警触发: \${metric} - \${alert.message}\`);
   }
 
   async run() {
     console.log('🔍 开始SEO监控检查...');
-    
+
     await this.checkIndexRate();
     await this.checkDuplicatePages();
     await this.checkCanonicalErrors();
-    
+
     // 保存结果
     const resultFile = \`monitoring/reports/seo-monitor-\${Date.now()}.json\`;
     fs.writeFileSync(resultFile, JSON.stringify({
       timestamp: new Date().toISOString(),
       results: this.results
     }, null, 2));
-    
+
     console.log('✅ SEO监控检查完成');
   }
 }
@@ -383,14 +383,14 @@ class PerformanceMonitor {
     // 模拟LCP检查（实际应该使用Lighthouse）
     const currentLCP = 5000; // 当前基线
     const threshold = this.config.monitoring.performance.lcp.threshold;
-    
+
     if (currentLCP > threshold) {
       this.triggerAlert('performance', 'lcp', {
         current: currentLCP,
         threshold: threshold
       });
     }
-    
+
     this.results.lcp = currentLCP;
   }
 
@@ -398,14 +398,14 @@ class PerformanceMonitor {
     // 模拟移动端性能分数检查
     const currentScore = 45; // 当前基线
     const threshold = this.config.monitoring.performance.mobileScore.threshold;
-    
+
     if (currentScore < threshold) {
       this.triggerAlert('performance', 'mobileScore', {
         current: currentScore,
         threshold: threshold
       });
     }
-    
+
     this.results.mobileScore = currentScore;
   }
 
@@ -418,27 +418,27 @@ class PerformanceMonitor {
       data: data,
       message: this.config.monitoring[category][metric].description
     };
-    
+
     // 保存告警到文件
     const alertFile = \`monitoring/alerts/alert-\${Date.now()}.json\`;
     fs.writeFileSync(alertFile, JSON.stringify(alert, null, 2));
-    
+
     console.log(\`🚨 告警触发: \${metric} - \${alert.message}\`);
   }
 
   async run() {
     console.log('🔍 开始性能监控检查...');
-    
+
     await this.checkLCP();
     await this.checkMobileScore();
-    
+
     // 保存结果
     const resultFile = \`monitoring/reports/performance-monitor-\${Date.now()}.json\`;
     fs.writeFileSync(resultFile, JSON.stringify({
       timestamp: new Date().toISOString(),
       results: this.results
     }, null, 2));
-    
+
     console.log('✅ 性能监控检查完成');
   }
 }
@@ -460,7 +460,7 @@ module.exports = PerformanceMonitor;
 
   async setupAlertSystem() {
     log.info('设置告警系统...');
-    
+
     // 告警处理脚本
     const alertHandlerScript = `#!/usr/bin/env node
 /**
@@ -492,7 +492,7 @@ class AlertHandler {
 
   async handleAlert(alert) {
     console.log(\`处理告警: \${alert.category}.\${alert.metric}\`);
-    
+
     // 根据告警级别处理
     switch (alert.level) {
       case 'critical':
@@ -534,7 +534,7 @@ module.exports = AlertHandler;
 
   async createDashboard() {
     log.info('创建监控Dashboard...');
-    
+
     const dashboardHTML = `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -562,7 +562,7 @@ module.exports = AlertHandler;
             <h1>PeriodHub 监控Dashboard</h1>
             <p>实时监控系统状态和关键指标</p>
         </div>
-        
+
         <div class="metrics">
             <div class="metric-card">
                 <div class="metric-title">SEO 索引率</div>
@@ -570,21 +570,21 @@ module.exports = AlertHandler;
                 <div class="metric-status status-warning">需要关注</div>
                 <div class="chart">图表区域</div>
             </div>
-            
+
             <div class="metric-card">
                 <div class="metric-title">重复页面</div>
                 <div class="metric-value" id="duplicatePages">11</div>
                 <div class="metric-status status-error">需要修复</div>
                 <div class="chart">图表区域</div>
             </div>
-            
+
             <div class="metric-card">
                 <div class="metric-title">移动端性能</div>
                 <div class="metric-value" id="mobileScore">45/100</div>
                 <div class="metric-status status-error">需要优化</div>
                 <div class="chart">图表区域</div>
             </div>
-            
+
             <div class="metric-card">
                 <div class="metric-title">LCP (毫秒)</div>
                 <div class="metric-value" id="lcp">5000</div>
@@ -593,14 +593,14 @@ module.exports = AlertHandler;
             </div>
         </div>
     </div>
-    
+
     <script>
         // 简单的数据更新逻辑
         function updateMetrics() {
             // 这里应该从API获取实时数据
             console.log('更新监控数据...');
         }
-        
+
         // 每30秒更新一次
         setInterval(updateMetrics, 30000);
     </script>
@@ -608,13 +608,13 @@ module.exports = AlertHandler;
 </html>`;
 
     fs.writeFileSync('monitoring/dashboards/index.html', dashboardHTML);
-    
+
     log.success('Dashboard创建完成');
   }
 
   async setupAutomatedChecks() {
     log.info('设置自动化检查...');
-    
+
     // Cron任务配置
     const cronConfig = `# PeriodHub 监控Cron任务
 # 每5分钟检查性能指标
@@ -631,7 +631,7 @@ module.exports = AlertHandler;
 `;
 
     fs.writeFileSync('monitoring/crontab.txt', cronConfig);
-    
+
     // Package.json脚本
     const packageScripts = {
       "monitoring:setup": "node scripts/monitoring-setup.js",
@@ -641,13 +641,13 @@ module.exports = AlertHandler;
       "monitoring:dashboard": "open monitoring/dashboards/index.html",
       "monitoring:status": "node scripts/monitoring-status.js"
     };
-    
+
     log.success('自动化检查设置完成');
   }
 
   printSetupSummary() {
     log.section('监控系统设置摘要');
-    
+
     console.log('\n📁 目录结构:');
     console.log('   monitoring/');
     console.log('   ├── config/          # 配置文件');
@@ -656,18 +656,18 @@ module.exports = AlertHandler;
     console.log('   ├── alerts/          # 告警文件');
     console.log('   ├── reports/         # 监控报告');
     console.log('   └── logs/           # 日志文件');
-    
+
     console.log('\n🔧 可用命令:');
     console.log('   npm run monitoring:seo          # SEO监控');
     console.log('   npm run monitoring:performance  # 性能监控');
     console.log('   npm run monitoring:alerts       # 告警处理');
     console.log('   npm run monitoring:dashboard    # 打开监控面板');
-    
+
     console.log('\n📊 监控指标:');
     console.log('   SEO: 索引率、重复页面、Canonical错误');
     console.log('   性能: LCP、FID、CLS、移动端分数');
     console.log('   系统: 错误率、响应时间、可用性');
-    
+
     console.log('\n🚨 告警配置:');
     console.log('   渠道: Slack、邮件、短信');
     console.log('   级别: 警告、严重、紧急');

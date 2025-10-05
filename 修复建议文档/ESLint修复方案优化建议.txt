@@ -22,7 +22,7 @@
 **建议采用"技术方案保留 + 执行策略优化"的混合方案：**
 
 1. **保留原方案的技术细节** - 修复方法、脚本、工具都很专业
-2. **采用分阶段渐进式执行** - 降低风险，提高成功率  
+2. **采用分阶段渐进式执行** - 降低风险，提高成功率
 3. **延长总体时间到3-4周** - 更现实的规划
 4. **强化质量控制** - 每个阶段都要充分验证
 
@@ -38,7 +38,7 @@
 阶段1: 构建问题修复 (3-4天)
   └── require导入转换 + 验证
 
-阶段2: 核心模块优化 (8-10天)  
+阶段2: 核心模块优化 (8-10天)
   └── 未使用变量 + 关键any类型替换
 
 阶段3: 边缘模块完善 (5-6天)
@@ -70,12 +70,12 @@ graph TD
     B --> C[阶段2: 核心模块]
     C --> D[阶段3: 边缘模块]
     D --> E[阶段4: 优化完善]
-    
+
     B1[构建问题修复<br/>672个require导入]
     C1[核心组件<br/>~800个警告]
     D1[辅助模块<br/>~1000个警告]
     E1[代码风格<br/>~500个警告]
-    
+
     B --> B1
     C --> C1
     D --> D1
@@ -114,12 +114,12 @@ graph LR
     C --> D[手动验证]
     D --> E[合并到main]
     E --> F[生产部署]
-    
+
     C1[单元测试]
     C2[集成测试]
     C3[E2E测试]
     C4[性能测试]
-    
+
     C --> C1
     C --> C2
     C --> C3
@@ -162,7 +162,7 @@ class SmartESLintFixer {
     this.eslint = new ESLint({ fix: true });
     this.riskLevels = {
       'no-require-imports': 'low',
-      'no-unused-vars': 'medium', 
+      'no-unused-vars': 'medium',
       'no-explicit-any': 'high',
       'exhaustive-deps': 'high'
     };
@@ -171,7 +171,7 @@ class SmartESLintFixer {
   async analyzeRisk(filePath) {
     const results = await this.eslint.lintFiles([filePath]);
     const issues = results[0]?.messages || [];
-    
+
     return issues.map(issue => ({
       rule: issue.ruleId,
       risk: this.riskLevels[issue.ruleId] || 'medium',
@@ -182,15 +182,15 @@ class SmartESLintFixer {
 
   async fixSafely(filePath, maxRisk = 'medium') {
     const risks = await this.analyzeRisk(filePath);
-    const safeFixes = risks.filter(r => 
+    const safeFixes = risks.filter(r =>
       r.risk !== 'high' && r.fixable === 'auto'
     );
-    
+
     if (safeFixes.length > 0) {
       await ESLint.outputFixes(await this.eslint.lintFiles([filePath]));
       console.log(`✅ Auto-fixed ${safeFixes.length} issues in ${filePath}`);
     }
-    
+
     return risks.filter(r => r.risk === 'high' || r.fixable === 'manual');
   }
 }
@@ -209,7 +209,7 @@ echo "📊 修复前后质量对比"
 echo "1. 代码复杂度分析..."
 npx complexity-report --format json src/ > before-complexity.json
 
-# 2. 包大小对比  
+# 2. 包大小对比
 echo "2. 包大小分析..."
 npm run build
 du -sh .next/ > before-bundle-size.txt
@@ -279,7 +279,7 @@ describe('ESLint修复回归测试', () => {
 - [ ] 没有引入any类型
 - [ ] Hooks依赖正确
 
-### 🧪 功能验证  
+### 🧪 功能验证
 - [ ] 关键功能正常工作
 - [ ] 单元测试通过
 - [ ] 集成测试通过
@@ -318,7 +318,7 @@ const debtTracker = {
     businessImpact: "类型安全性差，维护困难"
   },
   unused_vars: {
-    description: "未使用变量过多", 
+    description: "未使用变量过多",
     severity: 'medium',
     estimatedEffort: 16,
     businessImpact: "代码可读性差，包大小增加"
@@ -391,13 +391,13 @@ interface SuccessMetrics {
     critical: number;      // 0 (新增)
     trend: 'decreasing';   // 持续改善
   };
-  
+
   codeQuality: {
     typesCoverage: number;     // > 90%
     testCoverage: number;      // > 85%
     cyclomaticComplexity: number; // < 10
   };
-  
+
   teamEfficiency: {
     buildTime: number;         // < 3min
     developerExperience: number; // 主观评分 > 8/10
@@ -454,7 +454,7 @@ interface SuccessMetrics {
 **建议采用"技术方案保留 + 执行策略优化"的混合方案：**
 
 1. **保留原方案的技术细节** - 修复方法、脚本、工具都很专业
-2. **采用分阶段渐进式执行** - 降低风险，提高成功率  
+2. **采用分阶段渐进式执行** - 降低风险，提高成功率
 3. **延长总体时间到3-4周** - 更现实的规划
 4. **强化质量控制** - 每个阶段都要充分验证
 
@@ -470,7 +470,7 @@ interface SuccessMetrics {
 阶段1: 构建问题修复 (3-4天)
   └── require导入转换 + 验证
 
-阶段2: 核心模块优化 (8-10天)  
+阶段2: 核心模块优化 (8-10天)
   └── 未使用变量 + 关键any类型替换
 
 阶段3: 边缘模块完善 (5-6天)
@@ -502,12 +502,12 @@ graph TD
     B --> C[阶段2: 核心模块]
     C --> D[阶段3: 边缘模块]
     D --> E[阶段4: 优化完善]
-    
+
     B1[构建问题修复<br/>672个require导入]
     C1[核心组件<br/>~800个警告]
     D1[辅助模块<br/>~1000个警告]
     E1[代码风格<br/>~500个警告]
-    
+
     B --> B1
     C --> C1
     D --> D1
@@ -546,12 +546,12 @@ graph LR
     C --> D[手动验证]
     D --> E[合并到main]
     E --> F[生产部署]
-    
+
     C1[单元测试]
     C2[集成测试]
     C3[E2E测试]
     C4[性能测试]
-    
+
     C --> C1
     C --> C2
     C --> C3
@@ -594,7 +594,7 @@ class SmartESLintFixer {
     this.eslint = new ESLint({ fix: true });
     this.riskLevels = {
       'no-require-imports': 'low',
-      'no-unused-vars': 'medium', 
+      'no-unused-vars': 'medium',
       'no-explicit-any': 'high',
       'exhaustive-deps': 'high'
     };
@@ -603,7 +603,7 @@ class SmartESLintFixer {
   async analyzeRisk(filePath) {
     const results = await this.eslint.lintFiles([filePath]);
     const issues = results[0]?.messages || [];
-    
+
     return issues.map(issue => ({
       rule: issue.ruleId,
       risk: this.riskLevels[issue.ruleId] || 'medium',
@@ -614,15 +614,15 @@ class SmartESLintFixer {
 
   async fixSafely(filePath, maxRisk = 'medium') {
     const risks = await this.analyzeRisk(filePath);
-    const safeFixes = risks.filter(r => 
+    const safeFixes = risks.filter(r =>
       r.risk !== 'high' && r.fixable === 'auto'
     );
-    
+
     if (safeFixes.length > 0) {
       await ESLint.outputFixes(await this.eslint.lintFiles([filePath]));
       console.log(`✅ Auto-fixed ${safeFixes.length} issues in ${filePath}`);
     }
-    
+
     return risks.filter(r => r.risk === 'high' || r.fixable === 'manual');
   }
 }
@@ -641,7 +641,7 @@ echo "📊 修复前后质量对比"
 echo "1. 代码复杂度分析..."
 npx complexity-report --format json src/ > before-complexity.json
 
-# 2. 包大小对比  
+# 2. 包大小对比
 echo "2. 包大小分析..."
 npm run build
 du -sh .next/ > before-bundle-size.txt
@@ -711,7 +711,7 @@ describe('ESLint修复回归测试', () => {
 - [ ] 没有引入any类型
 - [ ] Hooks依赖正确
 
-### 🧪 功能验证  
+### 🧪 功能验证
 - [ ] 关键功能正常工作
 - [ ] 单元测试通过
 - [ ] 集成测试通过
@@ -750,7 +750,7 @@ const debtTracker = {
     businessImpact: "类型安全性差，维护困难"
   },
   unused_vars: {
-    description: "未使用变量过多", 
+    description: "未使用变量过多",
     severity: 'medium',
     estimatedEffort: 16,
     businessImpact: "代码可读性差，包大小增加"
@@ -823,13 +823,13 @@ interface SuccessMetrics {
     critical: number;      // 0 (新增)
     trend: 'decreasing';   // 持续改善
   };
-  
+
   codeQuality: {
     typesCoverage: number;     // > 90%
     testCoverage: number;      // > 85%
     cyclomaticComplexity: number; // < 10
   };
-  
+
   teamEfficiency: {
     buildTime: number;         // < 3min
     developerExperience: number; // 主观评分 > 8/10

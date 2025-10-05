@@ -3,11 +3,11 @@
  * 实现基于语义理解的搜索
  */
 
-import { 
+import {
   ISemanticSearchEngine,
-  SearchOptions, 
-  SearchResponse, 
-  SearchResult, 
+  SearchOptions,
+  SearchResponse,
+  SearchResult,
   UnifiedSearchConfig,
   SemanticSearchOptions
 } from '../types';
@@ -55,4 +55,4 @@ export class SemanticSearchEngine implements ISemanticSearchEngine {
   async clearIndex(): Promise<void> {
     // TODO: 清除索引
   }
-} 
+}

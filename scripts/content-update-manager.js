@@ -14,7 +14,7 @@ class ContentUpdateManager {
     this.articlesPath = path.join(process.cwd(), 'content/articles');
     this.updateThreshold = 90; // 90天未更新提醒
     this.criticalThreshold = 180; // 180天未更新警告
-    
+
     // 内容更新频率建议
     this.updateSchedule = {
       weekly: {
@@ -52,18 +52,18 @@ class ContentUpdateManager {
       if (!fs.existsSync(localePath)) continue;
 
       const files = fs.readdirSync(localePath).filter(f => f.endsWith('.md'));
-      
+
       for (const file of files) {
         const filePath = path.join(localePath, file);
         const content = fs.readFileSync(filePath, 'utf8');
         const { data } = matter(content);
-        
+
         const lastModified = fs.statSync(filePath).mtime;
         const publishDate = new Date(data.date || data.publishDate || lastModified);
         const daysSinceUpdate = Math.floor((Date.now() - publishDate.getTime()) / (1000 * 60 * 60 * 24));
-        
+
         results.total++;
-        
+
         const articleInfo = {
           file: file,
           locale: locale,
@@ -162,9 +162,9 @@ class ContentUpdateManager {
   generateUpdateScheduleAdvice(results) {
     const totalArticles = results.total;
     const needsUpdate = results.needsUpdate.length + results.critical.length;
-    
+
     const advice = [];
-    
+
     // 基于当前文章数量给出建议
     if (totalArticles < 50) {
       advice.push('📈 内容较少，建议每周发布2-3篇新文章');
@@ -176,7 +176,7 @@ class ContentUpdateManager {
       advice.push('📚 内容丰富，建议每周发布1篇高质量文章');
       advice.push('🎯 重点：专业深度内容、案例研究、趋势分析');
     }
-    
+
     // 基于需要更新的文章数量
     if (needsUpdate > 20) {
       advice.push('⚠️ 需要更新的文章较多，建议优先更新核心内容');
@@ -185,7 +185,7 @@ class ContentUpdateManager {
     } else {
       advice.push('🎉 内容新鲜度良好，继续保持');
     }
-    
+
     return advice.join('；');
   }
 
@@ -239,7 +239,7 @@ class ContentUpdateManager {
     }
 
     const timestamp = new Date().toISOString().split('T')[0];
-    
+
     // 保存JSON报告
     fs.writeFileSync(
       path.join(reportsDir, `content-freshness-${timestamp}.json`),
@@ -291,7 +291,7 @@ class ContentUpdateManager {
 
     // 更新计划
     markdown += `## 📅 更新计划\n\n`;
-    
+
     if (plan.weekly.length > 0) {
       markdown += `### 🚨 本周紧急更新\n\n`;
       plan.weekly.forEach(article => {
@@ -316,28 +316,28 @@ class ContentUpdateManager {
    */
   async run() {
     console.log('🔍 开始检查内容新鲜度...');
-    
+
     try {
       const results = await this.checkContentFreshness();
       const report = this.generateUpdateReport(results);
       const plan = this.createUpdatePlan(results);
-      
+
       await this.saveReport(report, plan);
-      
+
       // 控制台输出摘要
       console.log('\n📊 内容新鲜度检查完成:');
       console.log(`总文章数: ${report.summary.total}`);
       console.log(`需要更新: ${report.summary.needsUpdate} 篇`);
       console.log(`紧急更新: ${report.summary.critical} 篇`);
       console.log(`最近更新: ${report.summary.recentlyUpdated} 篇`);
-      
+
       if (report.recommendations.length > 0) {
         console.log('\n🎯 主要建议:');
         report.recommendations.forEach((rec, index) => {
           console.log(`${index + 1}. ${rec.message}`);
         });
       }
-      
+
     } catch (error) {
       console.error('❌ 内容检查失败:', error);
       process.exit(1);

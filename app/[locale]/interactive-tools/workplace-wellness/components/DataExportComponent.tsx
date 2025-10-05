@@ -3,28 +3,45 @@
  * 基于HVsLYEp的DataExportComponent函数设计
  */
 
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Download, ShieldCheck, FileText, FileSpreadsheet, FileImage, Lock, Eye, AlertTriangle } from 'lucide-react';
-import { useExport, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
-import { useLocale } from 'next-intl';
-import { getPeriodData, getNutritionData } from '../data';
-import { useTranslations } from 'next-intl';
-import { ExportFormat, ExportType } from '../types';
-import { PDFGenerator, PDFReportData } from '../utils/pdfGenerator';
-import { PrivacyProtectionManager, PrivacySettings } from '../utils/privacyProtection';
+import { useState } from "react";
+import {
+  Download,
+  ShieldCheck,
+  FileText,
+  FileSpreadsheet,
+  FileImage,
+  Lock,
+  Eye,
+  AlertTriangle,
+} from "lucide-react";
+import {
+  useExport,
+  useWorkplaceWellnessActions,
+} from "../hooks/useWorkplaceWellnessStore";
+import { useLocale } from "next-intl";
+import { getPeriodData, getNutritionData } from "../data";
+import { useTranslations } from "next-intl";
+import { ExportFormat, ExportType } from "../types";
+import { PDFGenerator, PDFReportData } from "../utils/pdfGenerator";
+import {
+  PrivacyProtectionManager,
+  PrivacySettings,
+} from "../utils/privacyProtection";
 
 export default function DataExportComponent() {
   const exportConfig = useExport();
   const locale = useLocale();
   const { updateExport, setExporting } = useWorkplaceWellnessActions();
-  const t = useTranslations('workplaceWellness');
+  const t = useTranslations("workplaceWellness");
 
   const [isExporting, setIsExporting] = useState(false);
-  const [exportStatus, setExportStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [exportStatus, setExportStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
   const [showPrivacySettings, setShowPrivacySettings] = useState(false);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [privacyManager] = useState(() => new PrivacyProtectionManager(locale));
 
   const periodData = getPeriodData();
@@ -45,30 +62,30 @@ export default function DataExportComponent() {
     const baseData = {
       exportDate: new Date().toISOString(),
       locale: locale,
-      version: '1.0.0'
+      version: "1.0.0",
     };
 
     switch (exportConfig.exportType) {
-      case 'period':
+      case "period":
         return {
           ...baseData,
-          type: 'period',
-          data: periodData
+          type: "period",
+          data: periodData,
         };
-      case 'nutrition':
+      case "nutrition":
         return {
           ...baseData,
-          type: 'nutrition',
-          data: nutritionData
+          type: "nutrition",
+          data: nutritionData,
         };
-      case 'all':
+      case "all":
         return {
           ...baseData,
-          type: 'all',
+          type: "all",
           data: {
             period: periodData,
-            nutrition: nutritionData
-          }
+            nutrition: nutritionData,
+          },
         };
       default:
         return baseData;
@@ -78,11 +95,13 @@ export default function DataExportComponent() {
   // 导出为JSON
   const exportAsJSON = (data: any) => {
     const jsonString = JSON.stringify(data, null, 2);
-    const blob = new Blob([jsonString], { type: 'application/json' });
+    const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = `workplace-wellness-${exportConfig.exportType}-${new Date().toISOString().split('T')[0]}.json`;
+    link.download = `workplace-wellness-${exportConfig.exportType}-${
+      new Date().toISOString().split("T")[0]
+    }.json`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -91,25 +110,31 @@ export default function DataExportComponent() {
 
   // 导出为CSV
   const exportAsCSV = (data: any) => {
-    let csvContent = '';
-    
-    if (exportConfig.exportType === 'period') {
-      csvContent = 'Date,Type,Pain Level,Flow\n';
+    let csvContent = "";
+
+    if (exportConfig.exportType === "period") {
+      csvContent = "Date,Type,Pain Level,Flow\n";
       data.data.forEach((record: any) => {
-        csvContent += `${record.date},${record.type},${record.painLevel || ''},${record.flow || ''}\n`;
+        csvContent += `${record.date},${record.type},${
+          record.painLevel || ""
+        },${record.flow || ""}\n`;
       });
-    } else if (exportConfig.exportType === 'nutrition') {
-      csvContent = 'Name,Phase,TCM Nature,Benefits,Nutrients\n';
+    } else if (exportConfig.exportType === "nutrition") {
+      csvContent = "Name,Phase,TCM Nature,Benefits,Nutrients\n";
       data.data.forEach((item: any) => {
-        csvContent += `"${item.name}","${item.phase}","${item.tcmNature}","${item.benefits.join('; ')}","${item.nutrients.join('; ')}"\n`;
+        csvContent += `"${item.name}","${item.phase}","${
+          item.tcmNature
+        }","${item.benefits.join("; ")}","${item.nutrients.join("; ")}"\n`;
       });
     }
 
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = `workplace-wellness-${exportConfig.exportType}-${new Date().toISOString().split('T')[0]}.csv`;
+    link.download = `workplace-wellness-${exportConfig.exportType}-${
+      new Date().toISOString().split("T")[0]
+    }.csv`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -124,60 +149,68 @@ export default function DataExportComponent() {
         exportDate: new Date().toISOString(),
         locale: locale,
         exportType: exportConfig.exportType,
-        periodData: exportConfig.exportType === 'period' ? data.data : undefined,
-        nutritionData: exportConfig.exportType === 'nutrition' ? data.data : undefined,
-        allData: exportConfig.exportType === 'all' ? data.data : undefined
+        periodData:
+          exportConfig.exportType === "period" ? data.data : undefined,
+        nutritionData:
+          exportConfig.exportType === "nutrition" ? data.data : undefined,
+        allData: exportConfig.exportType === "all" ? data.data : undefined,
       };
-      
+
       // 使用新的PDF生成器
       await pdfGenerator.generateAndDownloadPDF(pdfData);
     } catch (error) {
-      console.error('PDF generation error:', error);
-      alert(t('export.errorMessage'));
+      console.error("PDF generation error:", error);
+      alert(t("export.errorMessage"));
     }
   };
 
   // 执行导出（带隐私保护）
   const handleExport = async () => {
     setIsExporting(true);
-    setExportStatus('idle');
+    setExportStatus("idle");
     setExporting(true);
 
     try {
       // 检查导出权限
-      const hasPermission = await privacyManager.checkExportPermission(exportConfig.exportType, password);
+      const hasPermission = await privacyManager.checkExportPermission(
+        exportConfig.exportType,
+        password,
+      );
       if (!hasPermission) {
-        throw new Error(t('export.permissionDenied'));
+        throw new Error(t("export.permissionDenied"));
       }
 
       const data = generateExportData();
-      
+
       // 应用隐私保护
-      const protectedData = privacyManager.maskSensitiveData(data, exportConfig.exportType);
-      
+      const protectedData = privacyManager.maskSensitiveData(
+        data,
+        exportConfig.exportType,
+      );
+
       // 模拟导出延迟
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       switch (exportConfig.format) {
-        case 'json':
+        case "json":
           exportAsJSON(protectedData);
           break;
-        case 'csv':
+        case "csv":
           exportAsCSV(protectedData);
           break;
-        case 'pdf':
+        case "pdf":
           exportAsPDF(protectedData);
           break;
         default:
-          throw new Error('Unsupported export format');
+          throw new Error("Unsupported export format");
       }
-      
-      setExportStatus('success');
-      alert(t('export.successMessage'));
+
+      setExportStatus("success");
+      alert(t("export.successMessage"));
     } catch (error) {
-      console.error('Export error:', error);
-      setExportStatus('error');
-      alert(error instanceof Error ? error.message : t('export.errorMessage'));
+      console.error("Export error:", error);
+      setExportStatus("error");
+      alert(error instanceof Error ? error.message : t("export.errorMessage"));
     } finally {
       setIsExporting(false);
       setExporting(false);
@@ -187,11 +220,11 @@ export default function DataExportComponent() {
   // 获取格式图标
   const getFormatIcon = (format: ExportFormat) => {
     switch (format) {
-      case 'json':
+      case "json":
         return <FileText className="w-4 h-4" />;
-      case 'csv':
+      case "csv":
         return <FileSpreadsheet className="w-4 h-4" />;
-      case 'pdf':
+      case "pdf":
         return <FileImage className="w-4 h-4" />;
       default:
         return <Download className="w-4 h-4" />;
@@ -200,33 +233,41 @@ export default function DataExportComponent() {
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
-      <h4 className="text-lg font-semibold text-neutral-900 mb-4">{t('export.title')}</h4>
-      
+      <h4 className="text-lg font-semibold text-neutral-900 mb-4">
+        {t("export.title")}
+      </h4>
+
       <div className="space-y-4">
         {/* 导出内容选择 */}
         <div>
-          <label className="block text-sm font-medium text-neutral-800 mb-2">{t('export.contentLabel')}</label>
+          <label className="block text-sm font-medium text-neutral-800 mb-2">
+            {t("export.contentLabel")}
+          </label>
           <div className="space-y-2">
-            {(['period', 'nutrition', 'all'] as ExportType[]).map(typeId => (
-              <label 
+            {(["period", "nutrition", "all"] as ExportType[]).map((typeId) => (
+              <label
                 key={typeId}
                 className={`flex items-start gap-3 p-3 border rounded-lg cursor-pointer transition-colors duration-200 ${
-                  exportConfig.exportType === typeId 
-                    ? 'border-primary-500 bg-primary-500/10' 
-                    : 'border-neutral-200 hover:border-neutral-300'
+                  exportConfig.exportType === typeId
+                    ? "border-primary-500 bg-primary-500/10"
+                    : "border-neutral-200 hover:border-neutral-300"
                 }`}
               >
-                <input 
-                  type="radio" 
-                  name="exportType" 
-                  value={typeId} 
+                <input
+                  type="radio"
+                  name="exportType"
+                  value={typeId}
                   checked={exportConfig.exportType === typeId}
                   onChange={() => handleExportTypeChange(typeId)}
                   className="mt-1 text-primary-500 focus:ring-primary-500"
                 />
                 <div>
-                  <div className="font-medium text-neutral-900">{t(`export.types.${typeId}`)}</div>
-                  <div className="text-sm text-neutral-600">{t(`export.types.${typeId}_desc`)}</div>
+                  <div className="font-medium text-neutral-900">
+                    {t(`export.types.${typeId}`)}
+                  </div>
+                  <div className="text-sm text-neutral-600">
+                    {t(`export.types.${typeId}_desc`)}
+                  </div>
                 </div>
               </label>
             ))}
@@ -235,47 +276,53 @@ export default function DataExportComponent() {
 
         {/* 导出格式选择 */}
         <div>
-          <label className="block text-sm font-medium text-neutral-800 mb-2">{t('export.formatLabel')}</label>
+          <label className="block text-sm font-medium text-neutral-800 mb-2">
+            {t("export.formatLabel")}
+          </label>
           <div className="grid grid-cols-3 gap-2">
-            {(['json', 'csv', 'pdf'] as ExportFormat[]).map(formatId => (
+            {(["json", "csv", "pdf"] as ExportFormat[]).map((formatId) => (
               <button
                 key={formatId}
                 onClick={() => handleExportFormatChange(formatId)}
                 className={`p-3 text-center rounded-lg border-2 transition-colors duration-200 ${
-                  exportConfig.format === formatId 
-                    ? 'border-primary-500 bg-primary-500/10' 
-                    : 'border-neutral-200 hover:border-neutral-300'
+                  exportConfig.format === formatId
+                    ? "border-primary-500 bg-primary-500/10"
+                    : "border-neutral-200 hover:border-neutral-300"
                 }`}
               >
                 <div className="flex items-center justify-center mb-1">
                   {getFormatIcon(formatId)}
                 </div>
-                <div className="font-medium text-neutral-900">{t(`export.formats.${formatId}`)}</div>
-                <div className="text-xs text-neutral-600">{t(`export.formats.${formatId}_desc`)}</div>
+                <div className="font-medium text-neutral-900">
+                  {t(`export.formats.${formatId}`)}
+                </div>
+                <div className="text-xs text-neutral-600">
+                  {t(`export.formats.${formatId}_desc`)}
+                </div>
               </button>
             ))}
           </div>
         </div>
 
         {/* 导出按钮 */}
-        <button 
+        <button
           onClick={handleExport}
           disabled={isExporting}
           className={`w-full rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base ${
-            isExporting 
-              ? 'bg-primary-500/50 cursor-not-allowed' 
-              : 'bg-primary-500 hover:bg-primary-600'
+            isExporting
+              ? "bg-primary-500/50 cursor-not-allowed"
+              : "bg-primary-500 hover:bg-primary-600"
           } text-white`}
         >
           {isExporting ? (
             <>
               <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-              {t('export.exportingButton')}
+              {t("export.exportingButton")}
             </>
           ) : (
             <>
               <Download className="w-4 h-4" />
-              {t('export.exportButton')}
+              {t("export.exportButton")}
             </>
           )}
         </button>
@@ -285,14 +332,20 @@ export default function DataExportComponent() {
           <div className="flex gap-3 mb-3">
             <ShieldCheck className="text-blue-500 mt-0.5 w-5 h-5 flex-shrink-0" />
             <div className="text-sm flex-1">
-              <div className="font-medium text-blue-900">{t('export.privacyTitle')}</div>
-              <div className="text-blue-700 mt-1">{t('export.privacyContent')}</div>
+              <div className="font-medium text-blue-900">
+                {t("export.privacyTitle")}
+              </div>
+              <div className="text-blue-700 mt-1">
+                {t("export.privacyContent")}
+              </div>
             </div>
             <button
               onClick={() => setShowPrivacySettings(!showPrivacySettings)}
               className="text-blue-600 hover:text-blue-800 text-sm font-medium"
             >
-              {showPrivacySettings ? t('export.hideSettings') : t('export.showSettings')}
+              {showPrivacySettings
+                ? t("export.hideSettings")
+                : t("export.showSettings")}
             </button>
           </div>
 
@@ -303,7 +356,7 @@ export default function DataExportComponent() {
                 <div className="flex items-center justify-between">
                   <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                     <Lock className="w-4 h-4" />
-                    {t('export.enablePassword')}
+                    {t("export.enablePassword")}
                   </label>
                   <input
                     type="checkbox"
@@ -319,13 +372,13 @@ export default function DataExportComponent() {
                 {privacyManager.getSettings().requirePassword && (
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      {t('export.passwordLabel')}
+                      {t("export.passwordLabel")}
                     </label>
                     <input
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder={t('export.passwordPlaceholder')}
+                      placeholder={t("export.passwordPlaceholder")}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
@@ -334,13 +387,15 @@ export default function DataExportComponent() {
                 <div className="flex items-center justify-between">
                   <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
                     <Eye className="w-4 h-4" />
-                    {t('export.enableMasking')}
+                    {t("export.enableMasking")}
                   </label>
                   <input
                     type="checkbox"
                     checked={privacyManager.getSettings().enableDataMasking}
                     onChange={(e) => {
-                      const newSettings = { enableDataMasking: e.target.checked };
+                      const newSettings = {
+                        enableDataMasking: e.target.checked,
+                      };
                       privacyManager.updateSettings(newSettings);
                     }}
                     className="rounded"
@@ -355,11 +410,17 @@ export default function DataExportComponent() {
             <div className="flex gap-2">
               <AlertTriangle className="text-yellow-600 mt-0.5 w-4 h-4 flex-shrink-0" />
               <div className="text-sm">
-                <div className="font-medium text-yellow-800 mb-1">{t('export.securityWarnings')}</div>
+                <div className="font-medium text-yellow-800 mb-1">
+                  {t("export.securityWarnings")}
+                </div>
                 <ul className="text-yellow-700 space-y-1">
-                  {privacyManager.generateSecurityWarnings(exportConfig.exportType).map((warning, index) => (
-                    <li key={index} className="text-xs">• {warning}</li>
-                  ))}
+                  {privacyManager
+                    .generateSecurityWarnings(exportConfig.exportType)
+                    .map((warning, index) => (
+                      <li key={index} className="text-xs">
+                        • {warning}
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>
@@ -367,18 +428,18 @@ export default function DataExportComponent() {
         </div>
 
         {/* 导出状态 */}
-        {exportStatus === 'success' && (
+        {exportStatus === "success" && (
           <div className="p-3 bg-green-50 border border-green-200 rounded-lg">
             <div className="text-sm text-green-800">
-              ✅ {t('export.successMessage')}
+              ✅ {t("export.successMessage")}
             </div>
           </div>
         )}
-        
-        {exportStatus === 'error' && (
+
+        {exportStatus === "error" && (
           <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
             <div className="text-sm text-red-800">
-              ❌ {t('export.errorMessage')}
+              ❌ {t("export.errorMessage")}
             </div>
           </div>
         )}

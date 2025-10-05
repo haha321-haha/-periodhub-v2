@@ -1,0 +1,44 @@
+{
+  "timestamp": "2025-10-05T20:48:37.027Z",
+  "summary": {
+    "totalFiles": 4,
+    "existingFiles": 4,
+    "filesWithIssues": 0,
+    "totalIssues": 0,
+    "totalHighSeverity": 0
+  },
+  "results": [
+    {
+      "file": "app/[locale]/natural-therapies/page.tsx",
+      "exists": true,
+      "totalIssues": 0,
+      "highSeverity": 0,
+      "mediumSeverity": 0,
+      "issues": []
+    },
+    {
+      "file": "app/[locale]/articles/[slug]/page.tsx",
+      "exists": true,
+      "totalIssues": 0,
+      "highSeverity": 0,
+      "mediumSeverity": 0,
+      "issues": []
+    },
+    {
+      "file": "app/[locale]/privacy-policy/page.tsx",
+      "exists": true,
+      "totalIssues": 0,
+      "highSeverity": 0,
+      "mediumSeverity": 0,
+      "issues": []
+    },
+    {
+      "file": "app/[locale]/terms-of-service/page.tsx",
+      "exists": true,
+      "totalIssues": 0,
+      "highSeverity": 0,
+      "mediumSeverity": 0,
+      "issues": []
+    }
+  ]
+}

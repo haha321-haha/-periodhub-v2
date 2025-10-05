@@ -37,7 +37,7 @@ function createAndAppend(parent, tag, options = {}) {
 export function renderWelcomeScreen(container, onStartSymptom, onStartWorkplace) {
     // 获取当前语言
     const currentLang = getLang();
-    
+
     // 直接使用翻译对象，避免翻译函数调用问题
     const translations = {
         zh: {
@@ -53,9 +53,9 @@ export function renderWelcomeScreen(container, onStartSymptom, onStartWorkplace)
             'workplaceAssessment.title': 'Workplace Adaptability Assessment'
         }
     };
-    
+
     const langTranslations = translations[currentLang] || translations.zh;
-    
+
     container.innerHTML = `
         <div class="text-center max-w-2xl mx-auto question-card">
             <h1 class="text-3xl sm:text-4xl font-bold text-neutral-800">${langTranslations['symptomAssessor.title']}</h1>
@@ -147,7 +147,7 @@ function renderSymptomResults(container, results, onRedo, onConsultHR) {
     const resultsContainer = createAndAppend(container, 'div', { class: 'w-full max-w-3xl mx-auto space-y-8 question-card' });
     createAndAppend(resultsContainer, 'h2', { text: t('results.title'), class: 'text-3xl font-bold text-center text-neutral-800' });
     if (emergencyHtml) resultsContainer.insertAdjacentHTML('beforeend', emergencyHtml);
-    
+
     const summaryCard = createAndAppend(resultsContainer, 'div', { class: 'p-6 bg-white rounded-xl shadow-sm border border-neutral-100' });
     createAndAppend(summaryCard, 'h3', { text: t('results.summaryTitle'), class: 'text-xl font-semibold mb-4 text-purple-700' });
     const summaryList = createAndAppend(summaryCard, 'ul', { class: 'space-y-2' });
@@ -178,13 +178,13 @@ export function renderResultsScreen(container, results, onRedo, onConsultHR) {
 export function renderWorkplaceResultsScreen(container, results, onRedo, onConsultHR) {
     const resultsContainer = createAndAppend(container, 'div', { class: 'w-full max-w-3xl mx-auto space-y-8 question-card' });
     createAndAppend(resultsContainer, 'h2', { text: t('workplaceAssessment.title'), class: 'text-3xl font-bold text-center text-neutral-800' });
-    
+
     const summaryCard = createAndAppend(resultsContainer, 'div', { class: 'p-6 bg-white rounded-xl shadow-sm border border-neutral-100 text-center' });
     createAndAppend(summaryCard, 'h3', { text: t('results.workplaceTitle'), class: 'text-xl font-semibold mb-2 text-purple-700' });
     createAndAppend(summaryCard, 'p', { text: results.score, class: 'text-5xl font-bold text-purple-500'});
     createAndAppend(summaryCard, 'p', { text: `/ 100`, class: 'text-neutral-500'});
     createAndAppend(summaryCard, 'p', { text: results.profile, class: 'mt-3 font-semibold text-neutral-700 text-lg' });
-    
+
     const recsCard = createAndAppend(resultsContainer, 'div', { class: 'p-6 bg-white rounded-xl shadow-sm border border-neutral-100' });
     createAndAppend(recsCard, 'h3', { text: t('results.workplaceSuggestionsTitle'), class: 'text-xl font-semibold mb-4 text-purple-700' });
     const recsList = createAndAppend(recsCard, 'ul', { class: 'space-y-4' });
@@ -206,7 +206,7 @@ export function renderWorkplaceResultsScreen(container, results, onRedo, onConsu
 function renderConversionForms(container, onConsultHR) {
     const conversionCard = createAndAppend(container, 'div', { class: 'p-8 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-sm border border-purple-100 mt-4' });
     createAndAppend(conversionCard, 'h3', { text: t('conversion.title'), class: 'text-xl font-semibold mb-6 text-center text-purple-800' });
-    
+
     const grid = createAndAppend(conversionCard, 'div', { class: 'grid md:grid-cols-2 gap-8 items-start' });
 
     const emailFormContainer = createAndAppend(grid, 'div', { class: 'space-y-3' });
@@ -252,4 +252,3 @@ export function showModal(title, body) {
 
     // lucide.createIcons(); // Not needed in Next.js
 }
-

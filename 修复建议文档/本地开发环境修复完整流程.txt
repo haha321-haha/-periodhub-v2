@@ -167,7 +167,7 @@ vercel dev
    ```bash
    # 检查npm配置
    npm config list
-   
+
    # 重置npm配置
    npm config delete registry
    ```
@@ -182,7 +182,7 @@ vercel dev
    ```bash
    # 安装yarn
    npm install -g yarn
-   
+
    # 使用yarn安装依赖
    yarn install
    yarn dev

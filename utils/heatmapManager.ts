@@ -69,7 +69,7 @@ export class HeatmapDataManager {
 
     Object.entries(consolidationRules).forEach(([target, sources]) => {
       const consolidatedData: ClickData[] = [];
-      
+
       // 收集所有源页面的数据
       sources.forEach(source => {
         const sourceData = this.clickData.get(source) || [];
@@ -84,7 +84,7 @@ export class HeatmapDataManager {
       // 合并到目标页面
       const existingData = this.clickData.get(target) || [];
       this.clickData.set(target, [...existingData, ...consolidatedData]);
-      
+
       // 清理源页面数据
       sources.forEach(source => this.clickData.delete(source));
     });
@@ -112,7 +112,7 @@ export class HeatmapDataManager {
    */
   public cleanExpiredData(): void {
     const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
-    
+
     this.clickData.forEach((data, pageUrl) => {
       const filteredData = data.filter(click => click.timestamp > thirtyDaysAgo);
       this.clickData.set(pageUrl, filteredData);
@@ -133,7 +133,7 @@ export class HeatmapDataManager {
   } {
     const data = this.getConsolidatedHeatmapData(pageId);
     const uniqueUsers = new Set(data.map(d => d.userId).filter(Boolean)).size;
-    
+
     // 统计元素点击次数
     const elementCounts = new Map<string, number>();
     data.forEach(click => {

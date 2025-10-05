@@ -26,22 +26,22 @@ class TranslationQualityChecker {
 
     try {
       const translations = this.loadTranslations();
-      
+
       // 1. 覆盖率分析
       this.analyzeCoverage(translations);
-      
+
       // 2. 质量分析
       this.analyzeQuality(translations);
-      
+
       // 3. 性能分析
       this.analyzePerformance(translations);
-      
+
       // 4. 使用情况分析
       await this.analyzeUsage(translations);
-      
+
       // 5. 生成报告
       this.generateReport();
-      
+
       return this.results;
     } catch (error) {
       console.error('❌ Quality check failed:', error);
@@ -53,27 +53,27 @@ class TranslationQualityChecker {
   loadTranslations() {
     const translations = {};
     const locales = ['zh', 'en'];
-    
+
     for (const locale of locales) {
       const filePath = path.join(this.messagesDir, `${locale}.json`);
       if (fs.existsSync(filePath)) {
         translations[locale] = JSON.parse(fs.readFileSync(filePath, 'utf8'));
       }
     }
-    
+
     return translations;
   }
 
   // 分析翻译覆盖率
   analyzeCoverage(translations) {
     const { zh, en } = translations;
-    
+
     const zhKeys = this.getAllKeys(zh);
     const enKeys = this.getAllKeys(en);
-    
+
     const totalKeys = new Set([...zhKeys, ...enKeys]).size;
     const commonKeys = zhKeys.filter(key => enKeys.includes(key)).length;
-    
+
     this.results.coverage = {
       totalKeys,
       zhKeys: zhKeys.length,
@@ -88,7 +88,7 @@ class TranslationQualityChecker {
   // 分析翻译质量
   analyzeQuality(translations) {
     const { zh, en } = translations;
-    
+
     const qualityIssues = {
       emptyValues: [],
       suspiciousValues: [],
@@ -123,11 +123,11 @@ class TranslationQualityChecker {
   // 分析性能指标
   analyzePerformance(translations) {
     const { zh, en } = translations;
-    
+
     const zhSize = JSON.stringify(zh).length;
     const enSize = JSON.stringify(en).length;
     const totalSize = zhSize + enSize;
-    
+
     this.results.performance = {
       fileSize: {
         zh: `${(zhSize / 1024).toFixed(2)} KB`,
@@ -293,7 +293,7 @@ class TranslationQualityChecker {
       if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
         suspicious.push(...this.findSuspiciousValues(value, locale, fullKey));
       } else if (typeof value === 'string' && (
-        value.includes('painTracker.') || 
+        value.includes('painTracker.') ||
         value.includes('assessment.') ||
         value.includes('resultMessages.')
       )) {
@@ -310,7 +310,7 @@ class TranslationQualityChecker {
       if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
         placeholders.push(...this.findPlaceholderValues(value, locale, fullKey));
       } else if (typeof value === 'string' && (
-        value.startsWith('[EN]') || 
+        value.startsWith('[EN]') ||
         value.startsWith('[ZH]') ||
         value.includes('TODO') ||
         value.includes('PLACEHOLDER')

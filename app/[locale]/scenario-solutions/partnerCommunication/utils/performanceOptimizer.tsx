@@ -4,12 +4,12 @@ import React, { Suspense, lazy } from 'react';
 import SafeSmartImage from '@/components/ui/SafeSmartImage';
 
 // 加载骨架屏组件
-export const LoadingSkeleton = ({ 
-  className = '', 
-  height = 'h-64' 
-}: { 
-  className?: string; 
-  height?: string; 
+export const LoadingSkeleton = ({
+  className = '',
+  height = 'h-64'
+}: {
+  className?: string;
+  height?: string;
 }) => (
   <div className={`loading-skeleton ${height} rounded-lg ${className}`}>
     <div className="animate-pulse bg-gray-200 h-full rounded-lg"></div>
@@ -17,28 +17,28 @@ export const LoadingSkeleton = ({
 );
 
 // 测试组件懒加载包装器
-export const LazyQuizComponent = lazy(() => 
+export const LazyQuizComponent = lazy(() =>
   import('../components/PartnerUnderstandingQuiz').then(module => ({
     default: module.default
   }))
 );
 
 // 结果展示组件懒加载包装器
-export const LazyResultsComponent = lazy(() => 
+export const LazyResultsComponent = lazy(() =>
   import('../components/ResultsDisplay').then(module => ({
     default: module.default
   }))
 );
 
 // 训练计划组件懒加载包装器
-export const LazyTrainingComponent = lazy(() => 
+export const LazyTrainingComponent = lazy(() =>
   import('../components/TrainingCampSchedule').then(module => ({
     default: module.default
   }))
 );
 
 // 相关链接组件懒加载包装器
-export const LazyRelatedLinksComponent = lazy(() => 
+export const LazyRelatedLinksComponent = lazy(() =>
   import('../components/RelatedLinks').then(module => ({
     default: module.default
   }))
@@ -68,7 +68,7 @@ export const usePerformanceMonitor = () => {
 
   React.useEffect(() => {
     const startTime = performance.now();
-    
+
     // 监控内存使用
     const checkMemory = () => {
       if ('memory' in performance) {
@@ -81,7 +81,7 @@ export const usePerformanceMonitor = () => {
     };
 
     const timer = setInterval(checkMemory, 1000);
-    
+
     const endTime = performance.now();
     setMetrics(prev => ({
       ...prev,
@@ -97,9 +97,9 @@ export const usePerformanceMonitor = () => {
 };
 
 // 图片懒加载组件
-export const LazyImage = ({ 
-  src, 
-  alt, 
+export const LazyImage = ({
+  src,
+  alt,
   className = '',
   placeholder = '/images/placeholder.svg'
 }: {
@@ -160,13 +160,13 @@ export const useVirtualScroll = <T>(
   containerHeight: number
 ) => {
   const [scrollTop, setScrollTop] = React.useState(0);
-  
+
   const visibleStart = Math.floor(scrollTop / itemHeight);
   const visibleEnd = Math.min(
     visibleStart + Math.ceil(containerHeight / itemHeight) + 1,
     items.length
   );
-  
+
   const visibleItems = items.slice(visibleStart, visibleEnd);
   const totalHeight = items.length * itemHeight;
   const offsetY = visibleStart * itemHeight;
@@ -216,5 +216,3 @@ export const useThrottle = <T>(value: T, limit: number): T => {
 
   return throttledValue;
 };
-
-

@@ -61,7 +61,7 @@ export default function PDFCenterOptimized({
     // 搜索筛选
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      resources = resources.filter(r => 
+      resources = resources.filter(r =>
         r.title.toLowerCase().includes(query) ||
         r.description.toLowerCase().includes(query) ||
         r.tags.some(tag => tag.toLowerCase().includes(query))
@@ -116,7 +116,7 @@ export default function PDFCenterOptimized({
               className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
             />
           </div>
-          
+
           {showFilters && (
             <button
               onClick={() => setShowFilterPanel(!showFilterPanel)}
@@ -142,7 +142,7 @@ export default function PDFCenterOptimized({
           >
             {t('all')} ({PDF_RESOURCES.length})
           </button>
-          
+
           {PDF_CATEGORIES.map((category) => (
             <button
               key={category.id}
@@ -174,7 +174,7 @@ export default function PDFCenterOptimized({
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {filteredResources.map((resource) => {
               const categoryInfo = getCategoryInfo(resource.category);
-              
+
               return (
                 <div
                   key={resource.id}

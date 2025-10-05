@@ -17,19 +17,19 @@ export class PerformanceMonitor {
 
   private initializeObservers() {
     // 监控Core Web Vitals
-    if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
+    if (typeof window !== "undefined" && "PerformanceObserver" in window) {
       // LCP (Largest Contentful Paint)
       this.observeLCP();
-      
+
       // INP (Interaction to Next Paint) - 2024年3月更新
       this.observeINP();
-      
+
       // CLS (Cumulative Layout Shift)
       this.observeCLS();
-      
+
       // FCP (First Contentful Paint)
       this.observeFCP();
-      
+
       // TTFB (Time to First Byte)
       this.observeTTFB();
     }
@@ -40,13 +40,13 @@ export class PerformanceMonitor {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
-        this.metrics.set('LCP', lastEntry.startTime);
-        this.logMetric('LCP', lastEntry.startTime);
+        this.metrics.set("LCP", lastEntry.startTime);
+        this.logMetric("LCP", lastEntry.startTime);
       });
-      observer.observe({ entryTypes: ['largest-contentful-paint'] });
+      observer.observe({ entryTypes: ["largest-contentful-paint"] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn('LCP observer not supported:', error);
+      console.warn("LCP observer not supported:", error);
     }
   }
 
@@ -57,14 +57,14 @@ export class PerformanceMonitor {
         entries.forEach((entry) => {
           const inpEntry = entry as PerformanceEventTiming;
           const inp = inpEntry.processingEnd - inpEntry.startTime;
-          this.metrics.set('INP', inp);
-          this.logMetric('INP', inp);
+          this.metrics.set("INP", inp);
+          this.logMetric("INP", inp);
         });
       });
-      observer.observe({ entryTypes: ['event'] });
+      observer.observe({ entryTypes: ["event"] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn('INP observer not supported:', error);
+      console.warn("INP observer not supported:", error);
     }
   }
 
@@ -76,15 +76,15 @@ export class PerformanceMonitor {
         entries.forEach((entry: any) => {
           if (!entry.hadRecentInput) {
             clsValue += entry.value;
-            this.metrics.set('CLS', clsValue);
-            this.logMetric('CLS', clsValue);
+            this.metrics.set("CLS", clsValue);
+            this.logMetric("CLS", clsValue);
           }
         });
       });
-      observer.observe({ entryTypes: ['layout-shift'] });
+      observer.observe({ entryTypes: ["layout-shift"] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn('CLS observer not supported:', error);
+      console.warn("CLS observer not supported:", error);
     }
   }
 
@@ -93,14 +93,14 @@ export class PerformanceMonitor {
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         entries.forEach((entry) => {
-          this.metrics.set('FCP', entry.startTime);
-          this.logMetric('FCP', entry.startTime);
+          this.metrics.set("FCP", entry.startTime);
+          this.logMetric("FCP", entry.startTime);
         });
       });
-      observer.observe({ entryTypes: ['paint'] });
+      observer.observe({ entryTypes: ["paint"] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn('FCP observer not supported:', error);
+      console.warn("FCP observer not supported:", error);
     }
   }
 
@@ -112,32 +112,32 @@ export class PerformanceMonitor {
           const navEntry = entry as PerformanceNavigationTiming;
           if (navEntry.responseStart > 0) {
             const ttfb = navEntry.responseStart - navEntry.requestStart;
-            this.metrics.set('TTFB', ttfb);
-            this.logMetric('TTFB', ttfb);
+            this.metrics.set("TTFB", ttfb);
+            this.logMetric("TTFB", ttfb);
           }
         });
       });
-      observer.observe({ entryTypes: ['navigation'] });
+      observer.observe({ entryTypes: ["navigation"] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn('TTFB observer not supported:', error);
+      console.warn("TTFB observer not supported:", error);
     }
   }
 
   private logMetric(name: string, value: number) {
     console.log(`📊 Performance Metric - ${name}: ${value.toFixed(2)}ms`);
-    
+
     // 发送到分析服务（可选）
     this.sendToAnalytics(name, value);
   }
 
   private sendToAnalytics(metric: string, value: number) {
     // 这里可以集成Google Analytics、Mixpanel等分析服务
-    if (typeof window !== 'undefined' && 'gtag' in window) {
-      (window as any).gtag('event', 'web_vitals', {
+    if (typeof window !== "undefined" && "gtag" in window) {
+      (window as any).gtag("event", "web_vitals", {
         name: metric,
         value: Math.round(value),
-        event_category: 'Performance',
+        event_category: "Performance",
         event_label: window.location.pathname,
         non_interaction: true,
       });
@@ -155,7 +155,10 @@ export class PerformanceMonitor {
   }
 
   // 检查性能等级
-  getPerformanceGrade(metric: string, value: number): 'good' | 'needs-improvement' | 'poor' {
+  getPerformanceGrade(
+    metric: string,
+    value: number,
+  ): "good" | "needs-improvement" | "poor" {
     const thresholds = {
       LCP: { good: 2500, poor: 4000 },
       INP: { good: 200, poor: 500 }, // 更新：FID → INP，目标值200ms
@@ -165,11 +168,11 @@ export class PerformanceMonitor {
     };
 
     const threshold = thresholds[metric as keyof typeof thresholds];
-    if (!threshold) return 'good';
+    if (!threshold) return "good";
 
-    if (value <= threshold.good) return 'good';
-    if (value <= threshold.poor) return 'needs-improvement';
-    return 'poor';
+    if (value <= threshold.good) return "good";
+    if (value <= threshold.poor) return "needs-improvement";
+    return "poor";
   }
 
   // 生成性能报告
@@ -177,10 +180,10 @@ export class PerformanceMonitor {
     const metrics = this.getMetrics();
     const report = {
       timestamp: new Date().toISOString(),
-      url: typeof window !== 'undefined' ? window.location.href : '',
+      url: typeof window !== "undefined" ? window.location.href : "",
       metrics: {} as Record<string, number>,
       grades: {} as Record<string, string>,
-      recommendations: [] as string[]
+      recommendations: [] as string[],
     };
 
     Object.entries(metrics).forEach(([name, value]) => {
@@ -189,7 +192,7 @@ export class PerformanceMonitor {
       report.grades[name] = grade;
 
       // 生成建议
-      if (grade === 'poor' || grade === 'needs-improvement') {
+      if (grade === "poor" || grade === "needs-improvement") {
         report.recommendations.push(this.getRecommendation(name, value, grade));
       }
     });
@@ -197,37 +200,44 @@ export class PerformanceMonitor {
     return report;
   }
 
-  private getRecommendation(metric: string, value: number, grade: string): string {
+  private getRecommendation(
+    metric: string,
+    value: number,
+    grade: string,
+  ): string {
     const recommendations = {
-      LCP: '优化最大内容绘制时间：压缩图片、使用CDN、优化关键渲染路径',
-      INP: '优化交互到下次绘制时间：减少JavaScript执行时间、使用代码分割、优化事件处理',
-      CLS: '减少累积布局偏移：为图片和广告设置尺寸、避免动态插入内容',
-      FCP: '优化首次内容绘制：减少阻塞资源、优化CSS和JavaScript',
-      TTFB: '优化服务器响应时间：使用CDN、优化数据库查询、启用缓存'
+      LCP: "优化最大内容绘制时间：压缩图片、使用CDN、优化关键渲染路径",
+      INP: "优化交互到下次绘制时间：减少JavaScript执行时间、使用代码分割、优化事件处理",
+      CLS: "减少累积布局偏移：为图片和广告设置尺寸、避免动态插入内容",
+      FCP: "优化首次内容绘制：减少阻塞资源、优化CSS和JavaScript",
+      TTFB: "优化服务器响应时间：使用CDN、优化数据库查询、启用缓存",
     };
 
-    return recommendations[metric as keyof typeof recommendations] || '需要进一步优化';
+    return (
+      recommendations[metric as keyof typeof recommendations] ||
+      "需要进一步优化"
+    );
   }
 
   // 清理观察者
   disconnect() {
-    this.observers.forEach(observer => observer.disconnect());
+    this.observers.forEach((observer) => observer.disconnect());
     this.observers = [];
   }
 }
 
 // 页面加载性能监控
 export function trackPageLoad() {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   const monitor = PerformanceMonitor.getInstance();
-  
+
   // 页面加载完成后生成报告
-  window.addEventListener('load', () => {
+  window.addEventListener("load", () => {
     setTimeout(() => {
       const report = monitor.generateReport();
-      console.log('📈 Performance Report:', report);
-      
+      console.log("📈 Performance Report:", report);
+
       // 可以发送到服务器进行分析
       sendPerformanceReport(report);
     }, 1000);
@@ -237,31 +247,31 @@ export function trackPageLoad() {
 // 发送性能报告到服务器
 async function sendPerformanceReport(report: any) {
   try {
-    await fetch('/api/performance', {
-      method: 'POST',
+    await fetch("/api/performance", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(report),
     });
   } catch (error) {
-    console.warn('Failed to send performance report:', error);
+    console.warn("Failed to send performance report:", error);
   }
 }
 
 // 路由变化监控
 export function trackRouteChange() {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   let routeChangeStart = 0;
-  
+
   // 监听路由变化开始
-  window.addEventListener('beforeunload', () => {
+  window.addEventListener("beforeunload", () => {
     routeChangeStart = performance.now();
   });
 
   // 监听路由变化完成
-  window.addEventListener('load', () => {
+  window.addEventListener("load", () => {
     if (routeChangeStart > 0) {
       const routeChangeTime = performance.now() - routeChangeStart;
       console.log(`🔄 Route Change Time: ${routeChangeTime.toFixed(2)}ms`);

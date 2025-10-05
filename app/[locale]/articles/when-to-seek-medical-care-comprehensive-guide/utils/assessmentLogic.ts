@@ -1,69 +1,75 @@
 // 评估逻辑工具 - 基于souW1e2的医学算法
 // 提供疼痛评估、症状分析、决策支持的核心逻辑
 
-import type { 
-  AssessmentResult, 
-  PainScaleItem, 
+import type {
+  AssessmentResult,
+  PainScaleItem,
   SymptomItem,
-  DecisionTreeNode 
-} from '../types/medical-care-guide';
+  DecisionTreeNode,
+} from "../types/medical-care-guide";
 
 // 疼痛等级评估逻辑
 export class PainAssessmentLogic {
   // 根据疼痛等级获取严重程度
-  static getSeverityLevel(painLevel: number): PainScaleItem['severity'] {
-    if (painLevel === 0) return 'none';
-    if (painLevel <= 3) return 'mild';
-    if (painLevel <= 6) return 'moderate';
-    if (painLevel <= 8) return 'severe';
-    return 'extreme';
+  static getSeverityLevel(painLevel: number): PainScaleItem["severity"] {
+    if (painLevel === 0) return "none";
+    if (painLevel <= 3) return "mild";
+    if (painLevel <= 6) return "moderate";
+    if (painLevel <= 8) return "severe";
+    return "extreme";
   }
 
   // 根据疼痛等级获取颜色类
   static getColorClass(painLevel: number): string {
     const colorMap: Record<number, string> = {
-      0: 'text-green-600',
-      1: 'text-green-500', 2: 'text-green-400', 3: 'text-yellow-500',
-      4: 'text-yellow-600', 5: 'text-orange-500', 6: 'text-orange-600',
-      7: 'text-red-500', 8: 'text-red-600',
-      9: 'text-red-700', 10: 'text-red-800'
+      0: "text-green-600",
+      1: "text-green-500",
+      2: "text-green-400",
+      3: "text-yellow-500",
+      4: "text-yellow-600",
+      5: "text-orange-500",
+      6: "text-orange-600",
+      7: "text-red-500",
+      8: "text-red-600",
+      9: "text-red-700",
+      10: "text-red-800",
     };
-    return colorMap[painLevel] || 'text-gray-500';
+    return colorMap[painLevel] || "text-gray-500";
   }
 
   // 根据疼痛等级生成建议
   static generateRecommendations(painLevel: number): string[] {
     if (painLevel === 0) {
       return [
-        'Continue monitoring your symptoms',
-        'Maintain healthy lifestyle habits'
+        "Continue monitoring your symptoms",
+        "Maintain healthy lifestyle habits",
       ];
     } else if (painLevel <= 3) {
       return [
-        'Try gentle heat therapy or warm baths',
-        'Consider light exercise or stretching',
-        'Monitor if pain increases'
+        "Try gentle heat therapy or warm baths",
+        "Consider light exercise or stretching",
+        "Monitor if pain increases",
       ];
     } else if (painLevel <= 6) {
       return [
-        'Consider over-the-counter pain relief',
-        'Apply heat or cold therapy',
-        'Rest and avoid strenuous activities',
-        'Track your symptoms'
+        "Consider over-the-counter pain relief",
+        "Apply heat or cold therapy",
+        "Rest and avoid strenuous activities",
+        "Track your symptoms",
       ];
     } else if (painLevel <= 8) {
       return [
-        'Consider seeing a healthcare provider',
-        'Use prescribed or stronger pain medication',
-        'Apply heat therapy',
-        'Rest and limit activities'
+        "Consider seeing a healthcare provider",
+        "Use prescribed or stronger pain medication",
+        "Apply heat therapy",
+        "Rest and limit activities",
       ];
     } else {
       return [
-        'Seek immediate medical attention',
-        'Consider emergency care if pain is sudden',
-        'Do not delay medical consultation',
-        'Have someone accompany you to medical care'
+        "Seek immediate medical attention",
+        "Consider emergency care if pain is sudden",
+        "Do not delay medical consultation",
+        "Have someone accompany you to medical care",
       ];
     }
   }
@@ -74,110 +80,124 @@ export class PainAssessmentLogic {
   }
 
   // 获取就医紧急程度
-  static getUrgencyLevel(painLevel: number): AssessmentResult['urgency'] {
-    if (painLevel >= 9) return 'immediate';
-    if (painLevel >= 7) return 'within_week';
-    if (painLevel >= 4) return 'routine';
-    return 'monitor';
+  static getUrgencyLevel(painLevel: number): AssessmentResult["urgency"] {
+    if (painLevel >= 9) return "immediate";
+    if (painLevel >= 7) return "within_week";
+    if (painLevel >= 4) return "routine";
+    return "monitor";
   }
 }
 
 // 症状分析逻辑
 export class SymptomAnalysisLogic {
   // 按风险等级分组症状
-  static groupSymptomsByRisk(symptoms: SymptomItem[]): Record<string, SymptomItem[]> {
-    return symptoms.reduce((acc, symptom) => {
-      if (!acc[symptom.risk]) {
-        acc[symptom.risk] = [];
-      }
-      acc[symptom.risk].push(symptom);
-      return acc;
-    }, {} as Record<string, SymptomItem[]>);
+  static groupSymptomsByRisk(
+    symptoms: SymptomItem[],
+  ): Record<string, SymptomItem[]> {
+    return symptoms.reduce(
+      (acc, symptom) => {
+        if (!acc[symptom.risk]) {
+          acc[symptom.risk] = [];
+        }
+        acc[symptom.risk].push(symptom);
+        return acc;
+      },
+      {} as Record<string, SymptomItem[]>,
+    );
   }
 
   // 计算风险评分
-  static calculateRiskScore(selectedSymptomIds: string[], allSymptoms: SymptomItem[]): number {
-    const selectedSymptoms = allSymptoms.filter(s => selectedSymptomIds.includes(s.id));
-    
+  static calculateRiskScore(
+    selectedSymptomIds: string[],
+    allSymptoms: SymptomItem[],
+  ): number {
+    const selectedSymptoms = allSymptoms.filter((s) =>
+      selectedSymptomIds.includes(s.id),
+    );
+
     let score = 0;
-    selectedSymptoms.forEach(symptom => {
+    selectedSymptoms.forEach((symptom) => {
       switch (symptom.risk) {
-        case 'emergency':
+        case "emergency":
           score += 10;
           break;
-        case 'high':
+        case "high":
           score += 5;
           break;
-        case 'medium':
+        case "medium":
           score += 2;
           break;
         default:
           score += 1;
       }
     });
-    
+
     return score;
   }
 
   // 根据风险评分确定风险等级
-  static determineRiskLevel(riskScore: number): AssessmentResult['riskLevel'] {
-    if (riskScore >= 10) return 'emergency';
-    if (riskScore >= 8) return 'high';
-    if (riskScore >= 4) return 'medium';
-    return 'low';
+  static determineRiskLevel(riskScore: number): AssessmentResult["riskLevel"] {
+    if (riskScore >= 10) return "emergency";
+    if (riskScore >= 8) return "high";
+    if (riskScore >= 4) return "medium";
+    return "low";
   }
 
   // 生成个性化建议
   static generatePersonalizedRecommendations(
-    selectedSymptomIds: string[], 
-    allSymptoms: SymptomItem[]
+    selectedSymptomIds: string[],
+    allSymptoms: SymptomItem[],
   ): string[] {
-    const selectedSymptoms = allSymptoms.filter(s => selectedSymptomIds.includes(s.id));
+    const selectedSymptoms = allSymptoms.filter((s) =>
+      selectedSymptomIds.includes(s.id),
+    );
     const recommendations = new Set<string>();
 
     // 基于症状类别的建议
     const categoryRecommendations = {
       pain: [
-        'Track pain intensity and patterns',
-        'Try heat therapy for pain relief',
-        'Consider gentle exercise when possible'
+        "Track pain intensity and patterns",
+        "Try heat therapy for pain relief",
+        "Consider gentle exercise when possible",
       ],
       bleeding: [
-        'Monitor bleeding patterns and flow',
-        'Keep track of cycle changes',
-        'Maintain iron-rich diet'
+        "Monitor bleeding patterns and flow",
+        "Keep track of cycle changes",
+        "Maintain iron-rich diet",
       ],
       systemic: [
-        'Monitor overall health symptoms',
-        'Ensure adequate rest and hydration',
-        'Consider stress management techniques'
+        "Monitor overall health symptoms",
+        "Ensure adequate rest and hydration",
+        "Consider stress management techniques",
       ],
       pattern: [
-        'Keep detailed menstrual cycle diary',
-        'Track symptom patterns over time',
-        'Note any triggers or patterns'
-      ]
+        "Keep detailed menstrual cycle diary",
+        "Track symptom patterns over time",
+        "Note any triggers or patterns",
+      ],
     };
 
     // 添加基于症状类别的建议
-    selectedSymptoms.forEach(symptom => {
+    selectedSymptoms.forEach((symptom) => {
       const categoryRecs = categoryRecommendations[symptom.category] || [];
-      categoryRecs.forEach(rec => recommendations.add(rec));
+      categoryRecs.forEach((rec) => recommendations.add(rec));
     });
 
     // 基于风险等级的通用建议
-    const hasEmergencySymptoms = selectedSymptoms.some(s => s.risk === 'emergency');
-    const hasHighRiskSymptoms = selectedSymptoms.some(s => s.risk === 'high');
+    const hasEmergencySymptoms = selectedSymptoms.some(
+      (s) => s.risk === "emergency",
+    );
+    const hasHighRiskSymptoms = selectedSymptoms.some((s) => s.risk === "high");
 
     if (hasEmergencySymptoms) {
-      recommendations.add('Seek immediate medical attention');
-      recommendations.add('Do not delay emergency care');
+      recommendations.add("Seek immediate medical attention");
+      recommendations.add("Do not delay emergency care");
     } else if (hasHighRiskSymptoms) {
-      recommendations.add('Schedule urgent medical consultation');
-      recommendations.add('Monitor symptoms closely');
+      recommendations.add("Schedule urgent medical consultation");
+      recommendations.add("Monitor symptoms closely");
     } else {
-      recommendations.add('Continue regular health monitoring');
-      recommendations.add('Maintain healthy lifestyle habits');
+      recommendations.add("Continue regular health monitoring");
+      recommendations.add("Maintain healthy lifestyle habits");
     }
 
     return Array.from(recommendations);
@@ -193,7 +213,7 @@ export class DecisionTreeLogic {
   } {
     const errors: string[] = [];
 
-    function validate(node: DecisionTreeNode, path: string = '') {
+    function validate(node: DecisionTreeNode, path: string = "") {
       const currentPath = path ? `${path} -> ${node.id}` : node.id;
 
       // 检查节点ID
@@ -204,7 +224,9 @@ export class DecisionTreeLogic {
       // 检查结果节点
       if (node.result) {
         if (!node.result.title || !node.result.urgency) {
-          errors.push(`Result node at ${currentPath} is missing required fields`);
+          errors.push(
+            `Result node at ${currentPath} is missing required fields`,
+          );
         }
         return; // 结果节点不应该有子节点
       }
@@ -230,21 +252,28 @@ export class DecisionTreeLogic {
 
     return {
       isValid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
   // 根据ID查找节点
-  static findNodeById(tree: DecisionTreeNode, nodeId: string): DecisionTreeNode | null {
+  static findNodeById(
+    tree: DecisionTreeNode,
+    nodeId: string,
+  ): DecisionTreeNode | null {
     if (tree.id === nodeId) {
       return tree;
     }
 
     if (tree.children) {
-      const yesResult = tree.children.yes ? this.findNodeById(tree.children.yes, nodeId) : null;
+      const yesResult = tree.children.yes
+        ? this.findNodeById(tree.children.yes, nodeId)
+        : null;
       if (yesResult) return yesResult;
 
-      const noResult = tree.children.no ? this.findNodeById(tree.children.no, nodeId) : null;
+      const noResult = tree.children.no
+        ? this.findNodeById(tree.children.no, nodeId)
+        : null;
       if (noResult) return noResult;
     }
 
@@ -252,8 +281,10 @@ export class DecisionTreeLogic {
   }
 
   // 获取所有可能的结果
-  static getAllPossibleResults(tree: DecisionTreeNode): DecisionTreeNode['result'][] {
-    const results: DecisionTreeNode['result'][] = [];
+  static getAllPossibleResults(
+    tree: DecisionTreeNode,
+  ): DecisionTreeNode["result"][] {
+    const results: DecisionTreeNode["result"][] = [];
 
     function traverse(node: DecisionTreeNode) {
       if (node.result) {
@@ -276,8 +307,12 @@ export class DecisionTreeLogic {
       return 0;
     }
 
-    const yesDepth = tree.children.yes ? this.calculateTreeDepth(tree.children.yes) : 0;
-    const noDepth = tree.children.no ? this.calculateTreeDepth(tree.children.no) : 0;
+    const yesDepth = tree.children.yes
+      ? this.calculateTreeDepth(tree.children.yes)
+      : 0;
+    const noDepth = tree.children.no
+      ? this.calculateTreeDepth(tree.children.no)
+      : 0;
 
     return 1 + Math.max(yesDepth, noDepth);
   }
@@ -289,44 +324,50 @@ export class ComprehensiveAssessmentLogic {
   static generateComprehensiveAssessment(
     painLevel: number,
     selectedSymptomIds: string[],
-    allSymptoms: SymptomItem[]
+    allSymptoms: SymptomItem[],
   ): AssessmentResult {
     // 疼痛评估
     const painSeverity = PainAssessmentLogic.getSeverityLevel(painLevel);
-    const painRecommendations = PainAssessmentLogic.generateRecommendations(painLevel);
+    const painRecommendations =
+      PainAssessmentLogic.generateRecommendations(painLevel);
     const painShouldSeeDoctor = PainAssessmentLogic.shouldSeeDoctor(painLevel);
     const painUrgency = PainAssessmentLogic.getUrgencyLevel(painLevel);
 
     // 症状评估
-    const riskScore = SymptomAnalysisLogic.calculateRiskScore(selectedSymptomIds, allSymptoms);
-    const symptomRiskLevel = SymptomAnalysisLogic.determineRiskLevel(riskScore);
-    const symptomRecommendations = SymptomAnalysisLogic.generatePersonalizedRecommendations(
-      selectedSymptomIds, 
-      allSymptoms
+    const riskScore = SymptomAnalysisLogic.calculateRiskScore(
+      selectedSymptomIds,
+      allSymptoms,
     );
+    const symptomRiskLevel = SymptomAnalysisLogic.determineRiskLevel(riskScore);
+    const symptomRecommendations =
+      SymptomAnalysisLogic.generatePersonalizedRecommendations(
+        selectedSymptomIds,
+        allSymptoms,
+      );
 
     // 综合评估
-    let finalRiskLevel: AssessmentResult['riskLevel'] = 'low';
-    let finalUrgency: AssessmentResult['urgency'] = 'monitor';
+    let finalRiskLevel: AssessmentResult["riskLevel"] = "low";
+    let finalUrgency: AssessmentResult["urgency"] = "monitor";
     let finalShouldSeeDoctor = false;
 
     // 取最高风险等级
-    const riskLevels = ['low', 'medium', 'high', 'emergency'];
-    const painRiskIndex = painLevel >= 8 ? 3 : painLevel >= 6 ? 2 : painLevel >= 4 ? 1 : 0;
+    const riskLevels = ["low", "medium", "high", "emergency"];
+    const painRiskIndex =
+      painLevel >= 8 ? 3 : painLevel >= 6 ? 2 : painLevel >= 4 ? 1 : 0;
     const symptomRiskIndex = riskLevels.indexOf(symptomRiskLevel);
     const maxRiskIndex = Math.max(painRiskIndex, symptomRiskIndex);
-    
-    finalRiskLevel = riskLevels[maxRiskIndex] as AssessmentResult['riskLevel'];
+
+    finalRiskLevel = riskLevels[maxRiskIndex] as AssessmentResult["riskLevel"];
 
     // 确定紧急程度
-    if (finalRiskLevel === 'emergency') {
-      finalUrgency = 'immediate';
+    if (finalRiskLevel === "emergency") {
+      finalUrgency = "immediate";
       finalShouldSeeDoctor = true;
-    } else if (finalRiskLevel === 'high') {
-      finalUrgency = 'within_week';
+    } else if (finalRiskLevel === "high") {
+      finalUrgency = "within_week";
       finalShouldSeeDoctor = true;
-    } else if (finalRiskLevel === 'medium') {
-      finalUrgency = 'routine';
+    } else if (finalRiskLevel === "medium") {
+      finalUrgency = "routine";
       finalShouldSeeDoctor = true;
     } else {
       finalUrgency = painUrgency;
@@ -334,7 +375,9 @@ export class ComprehensiveAssessmentLogic {
     }
 
     // 合并建议
-    const allRecommendations = [...new Set([...painRecommendations, ...symptomRecommendations])];
+    const allRecommendations = [
+      ...new Set([...painRecommendations, ...symptomRecommendations]),
+    ];
 
     return {
       painLevel,
@@ -343,7 +386,7 @@ export class ComprehensiveAssessmentLogic {
       recommendations: allRecommendations,
       shouldSeeDoctor: finalShouldSeeDoctor,
       urgency: finalUrgency,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -352,49 +395,49 @@ export class ComprehensiveAssessmentLogic {
     title: string;
     description: string;
     actionRequired: boolean;
-    priority: 'low' | 'medium' | 'high' | 'critical';
+    priority: "low" | "medium" | "high" | "critical";
   } {
     const { riskLevel, painLevel, symptoms, urgency } = result;
 
-    let title = '';
-    let description = '';
+    let title = "";
+    let description = "";
     let actionRequired = false;
-    let priority: 'low' | 'medium' | 'high' | 'critical' = 'low';
+    let priority: "low" | "medium" | "high" | "critical" = "low";
 
     switch (riskLevel) {
-      case 'emergency':
-        title = 'Emergency Situation - Seek Immediate Care';
+      case "emergency":
+        title = "Emergency Situation - Seek Immediate Care";
         description = `High pain level (${painLevel}/10) with ${symptoms.length} concerning symptoms requires immediate medical attention.`;
         actionRequired = true;
-        priority = 'critical';
+        priority = "critical";
         break;
-      
-      case 'high':
-        title = 'High Risk - Schedule Urgent Appointment';
+
+      case "high":
+        title = "High Risk - Schedule Urgent Appointment";
         description = `Pain level ${painLevel}/10 with ${symptoms.length} symptoms suggests need for prompt medical evaluation.`;
         actionRequired = true;
-        priority = 'high';
+        priority = "high";
         break;
-      
-      case 'medium':
-        title = 'Moderate Concern - Consider Medical Consultation';
+
+      case "medium":
+        title = "Moderate Concern - Consider Medical Consultation";
         description = `Pain level ${painLevel}/10 with ${symptoms.length} symptoms may benefit from medical evaluation.`;
         actionRequired = true;
-        priority = 'medium';
+        priority = "medium";
         break;
-      
+
       default:
-        title = 'Low Risk - Continue Monitoring';
+        title = "Low Risk - Continue Monitoring";
         description = `Pain level ${painLevel}/10 with ${symptoms.length} symptoms can be managed with self-care.`;
         actionRequired = false;
-        priority = 'low';
+        priority = "low";
     }
 
     return {
       title,
       description,
       actionRequired,
-      priority
+      priority,
     };
   }
 }

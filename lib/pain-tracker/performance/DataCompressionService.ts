@@ -95,7 +95,7 @@ export class DataCompressionService implements DataCompressionServiceInterface {
     try {
       // Try to detect compression algorithm from data format
       const algorithm = this.detectCompressionAlgorithm(compressedData);
-      
+
       let decompressedString: string;
 
       switch (algorithm) {
@@ -210,10 +210,10 @@ export class DataCompressionService implements DataCompressionServiceInterface {
   private async basicCompress(data: string): Promise<string> {
     // Basic compression using JSON minification and simple string replacement
     let compressed = data;
-    
+
     // Remove unnecessary whitespace
     compressed = compressed.replace(/\s+/g, ' ').trim();
-    
+
     // Replace common repeated strings with shorter tokens
     const replacements = [
       { pattern: '"painLevel":', replacement: '"pl":' },
@@ -268,10 +268,10 @@ export class DataCompressionService implements DataCompressionServiceInterface {
   private async advancedCompress(data: string): Promise<string> {
     // Advanced compression using LZ-string algorithm
     // For now, implement a simple dictionary-based compression
-    
+
     const dictionary = this.buildCompressionDictionary(data);
     let compressed = data;
-    
+
     // Replace common patterns with dictionary references
     dictionary.forEach((replacement, pattern) => {
       compressed = compressed.replace(new RegExp(pattern, 'g'), replacement);
@@ -289,7 +289,7 @@ export class DataCompressionService implements DataCompressionServiceInterface {
 
     const content = compressedData.substring(9); // Remove 'ADVANCED:' prefix
     const separatorIndex = content.indexOf('|');
-    
+
     if (separatorIndex === -1) {
       throw new Error('Invalid advanced compression format');
     }
@@ -313,7 +313,7 @@ export class DataCompressionService implements DataCompressionServiceInterface {
   private detectCompressionAlgorithm(data: string): string {
     if (data.startsWith('BASIC:')) return 'basic';
     if (data.startsWith('ADVANCED:')) return 'lz-string';
-    
+
     // Try to parse as JSON to detect uncompressed data
     try {
       JSON.parse(data);

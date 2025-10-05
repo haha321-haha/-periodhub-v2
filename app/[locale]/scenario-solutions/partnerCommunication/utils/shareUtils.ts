@@ -65,7 +65,7 @@ export const generateShareText = (
   locale: 'zh' | 'en'
 ): string => {
   const percentage = Math.round((score / totalQuestions) * 100);
-  
+
   if (locale === 'zh') {
     return `我在Period Hub完成了伴侣理解度测试！得分：${score}/${totalQuestions} (${percentage}%)，等级：${level}。快来测试你对痛经的理解程度吧！`;
   } else {
@@ -109,7 +109,7 @@ export const handleShare = async (
         const nativeSuccess = await nativeShare(shareData);
         return {
           success: nativeSuccess,
-          message: nativeSuccess 
+          message: nativeSuccess
             ? (locale === 'zh' ? '分享成功！' : 'Shared successfully!')
             : '' // 用户取消分享时不显示消息
         };
@@ -139,7 +139,7 @@ export const handleShare = async (
         const copySuccess = await copyToClipboard(`${shareData.text} ${shareData.url}`);
         return {
           success: copySuccess,
-          message: copySuccess 
+          message: copySuccess
             ? (locale === 'zh' ? '已复制到剪贴板！' : 'Copied to clipboard!')
             : (locale === 'zh' ? '复制失败' : 'Copy failed')
         };

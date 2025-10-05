@@ -8,22 +8,22 @@
 // 只保留实际存在文件的映射
 export const PDF_ID_MAPPING: Record<string, string> = {
   // 即时缓解类PDF映射 - 只保留存在的文件
-  'immediate-pdf-1': 'pain-tracking-form',
-  'immediate-pdf-2': 'campus-emergency-checklist', 
-  'immediate-pdf-3': 'specific-menstrual-pain-management-guide',
-  
+  "immediate-pdf-1": "pain-tracking-form",
+  "immediate-pdf-2": "campus-emergency-checklist",
+  "immediate-pdf-3": "specific-menstrual-pain-management-guide",
+
   // 计划准备类PDF映射 - 只保留存在的文件
-  'preparation-pdf-1': 'healthy-habits-checklist',
-  'preparation-pdf-2': 'menstrual-cycle-nutrition-plan',
-  'preparation-pdf-3': 'magnesium-gut-health-menstrual-pain-guide',
-  'preparation-pdf-4': 'zhan-zhuang-baduanjin-illustrated-guide',
-  
+  "preparation-pdf-1": "healthy-habits-checklist",
+  "preparation-pdf-2": "menstrual-cycle-nutrition-plan",
+  "preparation-pdf-3": "magnesium-gut-health-menstrual-pain-guide",
+  "preparation-pdf-4": "zhan-zhuang-baduanjin-illustrated-guide",
+
   // 学习理解类PDF映射 - 只保留存在的文件
-  'learning-pdf-1': 'natural-therapy-assessment',
-  'learning-pdf-2': 'menstrual-pain-complications-management',
-  'learning-pdf-3': 'teacher-health-manual',
-  'learning-pdf-4': 'teacher-collaboration-handbook',
-  'learning-pdf-5': 'parent-communication-guide',
+  "learning-pdf-1": "natural-therapy-assessment",
+  "learning-pdf-2": "menstrual-pain-complications-management",
+  "learning-pdf-3": "teacher-health-manual",
+  "learning-pdf-4": "teacher-collaboration-handbook",
+  "learning-pdf-5": "parent-communication-guide",
 };
 
 /**
@@ -57,4 +57,4 @@ export function getSimplePDFId(realId: string): string | undefined {
     }
   }
   return undefined;
-} 
+}

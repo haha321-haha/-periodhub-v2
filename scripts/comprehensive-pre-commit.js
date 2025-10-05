@@ -37,7 +37,7 @@ class ComprehensivePreCommit {
         timeout: 15000
       }
     ];
-    
+
     this.results = {
       passed: 0,
       failed: 0,
@@ -48,29 +48,29 @@ class ComprehensivePreCommit {
 
   async runAllChecks() {
     console.log('🛡️ 开始全面预提交检查...\n');
-    
+
     for (const check of this.checks) {
       await this.runCheck(check);
     }
-    
+
     this.printSummary();
     return this.results.failed === 0;
   }
 
   async runCheck(check) {
     const startTime = Date.now();
-    
+
     try {
       console.log(`🔍 运行检查: ${check.name}...`);
-      
+
       // 设置超时
       const timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => reject(new Error('检查超时')), check.timeout);
       });
-      
+
       const checkPromise = new Promise((resolve, reject) => {
         try {
-          const result = execSync(check.command, { 
+          const result = execSync(check.command, {
             encoding: 'utf8',
             stdio: 'pipe'
           });
@@ -79,16 +79,16 @@ class ComprehensivePreCommit {
           reject(error);
         }
       });
-      
+
       await Promise.race([checkPromise, timeoutPromise]);
-      
+
       const duration = Date.now() - startTime;
       console.log(`✅ ${check.name} 通过 (${duration}ms)`);
       this.results.passed++;
-      
+
     } catch (error) {
       const duration = Date.now() - startTime;
-      
+
       if (check.critical) {
         console.log(`❌ ${check.name} 失败 (${duration}ms)`);
         console.log(`   错误: ${error.message}`);
@@ -107,7 +107,7 @@ class ComprehensivePreCommit {
     console.log(`❌ 失败: ${this.results.failed}`);
     console.log(`⚠️  警告: ${this.results.warnings}`);
     console.log(`📋 总计: ${this.results.total}`);
-    
+
     if (this.results.failed > 0) {
       console.log('\n🚨 提交被阻止！请修复关键问题后重试。');
       console.log('💡 建议运行: npm run project:health');
@@ -123,7 +123,7 @@ class ComprehensivePreCommit {
 async function main() {
   const checker = new ComprehensivePreCommit();
   const success = await checker.runAllChecks();
-  
+
   if (!success) {
     process.exit(1);
   }

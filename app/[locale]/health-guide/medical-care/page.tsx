@@ -13,10 +13,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const title = locale === 'zh' ? '何时寻求帮助 - 痛经健康指南' : 'When to Seek Help - Health Guide';
-  const description = locale === 'zh' 
+  const description = locale === 'zh'
     ? '识别需要医疗关注的症状和情况，了解何时应该寻求专业医疗帮助。'
     : 'Recognize symptoms and situations that require medical attention, understand when to seek professional medical help.';
-  
+
   return {
     title,
     description,
@@ -43,7 +43,7 @@ export default async function MedicalCarePage({
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-12">
           {/* Breadcrumb */}
-          <Breadcrumb 
+          <Breadcrumb
             items={[
               { label: breadcrumbT('healthGuide'), href: `/${locale}/health-guide` },
               { label: breadcrumbT('medicalCare') }
@@ -74,7 +74,7 @@ export default async function MedicalCarePage({
             : 'If you experience any of the following symptoms, seek emergency medical help immediately:'
           }
         </p>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white p-4 rounded-lg">
             <h3 className="font-semibold text-red-800 mb-3">
@@ -123,7 +123,7 @@ export default async function MedicalCarePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '何时预约医生' : 'When to Schedule a Doctor Visit'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="card">
             <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
@@ -183,7 +183,7 @@ export default async function MedicalCarePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '就诊准备' : 'Preparing for Your Visit'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-blue-600 mb-4">
@@ -248,7 +248,7 @@ export default async function MedicalCarePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '医疗专业人士类型' : 'Types of Healthcare Providers'}
         </h2>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
           <div className="card">
             <h3 className="text-lg font-semibold text-primary-600 mb-3">
@@ -302,7 +302,7 @@ export default async function MedicalCarePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '就诊时的期望' : 'What to Expect During Your Visit'}
         </h2>
-        
+
         <div className="space-y-6">
           <div className="flex items-start">
             <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center mr-4 mt-1">
@@ -384,7 +384,7 @@ export default async function MedicalCarePage({
 
       {/* Navigation */}
       <section className="flex justify-between items-center pt-8 border-t border-neutral-200">
-        <Link 
+        <Link
           href={`/${locale}/health-guide/lifestyle`}
           className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
         >
@@ -393,7 +393,7 @@ export default async function MedicalCarePage({
           </svg>
           {locale === 'zh' ? '上一章：生活方式管理' : 'Previous: Lifestyle Management'}
         </Link>
-        
+
           <Link
             href={`/${locale}/health-guide/myths-facts`}
             className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"

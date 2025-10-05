@@ -3,8 +3,8 @@
  * 整合TF-IDF和余弦相似度进行语义搜索
  */
 
-import { TFIDFVectorizer, TFIDFVector } from './TFIDFVectorizer';
-import { CosineSimilarity, SimilarityResult } from './CosineSimilarity';
+import { TFIDFVectorizer, TFIDFVector } from "./TFIDFVectorizer";
+import { CosineSimilarity, SimilarityResult } from "./CosineSimilarity";
 
 export interface SemanticSearchResult {
   documentId: string;
@@ -41,17 +41,19 @@ export class SemanticMatcher {
   /**
    * 训练语义匹配器
    */
-  train(documents: Array<{
-    id: string;
-    title?: string;
-    content: string;
-    keywords?: string[];
-    metadata?: Record<string, any>;
-  }>): void {
+  train(
+    documents: Array<{
+      id: string;
+      title?: string;
+      content: string;
+      keywords?: string[];
+      metadata?: Record<string, any>;
+    }>,
+  ): void {
     // 准备训练数据
-    const trainingDocs = documents.map(doc => ({
+    const trainingDocs = documents.map((doc) => ({
       id: doc.id,
-      content: this.combineTextFields(doc.title, doc.content, doc.keywords)
+      content: this.combineTextFields(doc.title, doc.content, doc.keywords),
     }));
 
     // 训练向量化器
@@ -62,9 +64,12 @@ export class SemanticMatcher {
     this.documentMetadata.clear();
 
     for (const doc of documents) {
-      const vector = this.vectorizer.transform(doc.id, trainingDocs.find(td => td.id === doc.id)?.content);
+      const vector = this.vectorizer.transform(
+        doc.id,
+        trainingDocs.find((td) => td.id === doc.id)?.content,
+      );
       this.documentVectors.set(doc.id, vector);
-      
+
       if (doc.metadata) {
         this.documentMetadata.set(doc.id, doc.metadata);
       }
@@ -76,7 +81,7 @@ export class SemanticMatcher {
    */
   search(
     query: string,
-    options: Partial<SemanticSearchOptions> = {}
+    options: Partial<SemanticSearchOptions> = {},
   ): SemanticSearchResult[] {
     const opts: SemanticSearchOptions = {
       similarityThreshold: 0.05,
@@ -84,33 +89,40 @@ export class SemanticMatcher {
       boostFactors: {
         titleBoost: 1.5,
         contentBoost: 1.0,
-        keywordBoost: 1.3
+        keywordBoost: 1.3,
       },
       includeExplanation: true,
-      ...options
+      ...options,
     };
 
     // 生成查询向量
     const queryVector = this.vectorizer.transformQuery(query);
-    
+
     if (queryVector.terms.length === 0) {
       return [];
     }
 
     // 计算相似度
     const documentVectors = Array.from(this.documentVectors.values());
-    const similarities = CosineSimilarity.calculateBatch(queryVector, documentVectors);
+    const similarities = CosineSimilarity.calculateBatch(
+      queryVector,
+      documentVectors,
+    );
 
     // 过滤和评分
     const results: SemanticSearchResult[] = [];
-    
+
     for (const simResult of similarities) {
       if (simResult.similarity < opts.similarityThreshold) {
         continue;
       }
 
       const metadata = this.documentMetadata.get(simResult.documentId) || {};
-      const relevance = this.calculateRelevance(simResult, metadata, opts.boostFactors);
+      const relevance = this.calculateRelevance(
+        simResult,
+        metadata,
+        opts.boostFactors,
+      );
       const score = this.calculateFinalScore(simResult.similarity, relevance);
 
       results.push({
@@ -119,15 +131,13 @@ export class SemanticMatcher {
         similarity: simResult.similarity,
         relevance,
         matchedTerms: simResult.matchedTerms,
-        explanation: opts.includeExplanation ? simResult.explanation : '',
-        metadata
+        explanation: opts.includeExplanation ? simResult.explanation : "",
+        metadata,
       });
     }
 
     // 排序并返回
-    return results
-      .sort((a, b) => b.score - a.score)
-      .slice(0, opts.maxResults);
+    return results.sort((a, b) => b.score - a.score).slice(0, opts.maxResults);
   }
 
   /**
@@ -136,7 +146,7 @@ export class SemanticMatcher {
   findSimilar(
     documentId: string,
     limit: number = 5,
-    excludeSelf: boolean = true
+    excludeSelf: boolean = true,
   ): SemanticSearchResult[] {
     const targetVector = this.documentVectors.get(documentId);
     if (!targetVector) {
@@ -144,17 +154,20 @@ export class SemanticMatcher {
     }
 
     const documentVectors = Array.from(this.documentVectors.values());
-    const similarities = CosineSimilarity.calculateBatch(targetVector, documentVectors);
+    const similarities = CosineSimilarity.calculateBatch(
+      targetVector,
+      documentVectors,
+    );
 
     const results: SemanticSearchResult[] = [];
-    
+
     for (const simResult of similarities) {
       if (excludeSelf && simResult.documentId === documentId) {
         continue;
       }
 
       const metadata = this.documentMetadata.get(simResult.documentId) || {};
-      
+
       results.push({
         documentId: simResult.documentId,
         score: simResult.similarity,
@@ -162,13 +175,11 @@ export class SemanticMatcher {
         relevance: 1.0,
         matchedTerms: simResult.matchedTerms,
         explanation: simResult.explanation,
-        metadata
+        metadata,
       });
     }
 
-    return results
-      .sort((a, b) => b.score - a.score)
-      .slice(0, limit);
+    return results.sort((a, b) => b.score - a.score).slice(0, limit);
   }
 
   /**
@@ -177,26 +188,26 @@ export class SemanticMatcher {
   getQuerySuggestions(partialQuery: string, limit: number = 5): string[] {
     const vocabulary = this.vectorizer.getVocabulary();
     const queryLower = partialQuery.toLowerCase();
-    
+
     const suggestions: Array<{ term: string; score: number }> = [];
 
     for (const term of vocabulary) {
       if (term.includes(queryLower)) {
         let score = 0;
-        
+
         // 前缀匹配得分更高
         if (term.startsWith(queryLower)) {
           score += 10;
         }
-        
+
         // 完整匹配得分最高
         if (term === queryLower) {
           score += 20;
         }
-        
+
         // 根据IDF值调整得分（更重要的词得分更高）
         score += this.vectorizer.getIDF(term);
-        
+
         suggestions.push({ term, score });
       }
     }
@@ -204,7 +215,7 @@ export class SemanticMatcher {
     return suggestions
       .sort((a, b) => b.score - a.score)
       .slice(0, limit)
-      .map(s => s.term);
+      .map((s) => s.term);
   }
 
   /**
@@ -225,27 +236,28 @@ export class SemanticMatcher {
   } {
     const vocabularySize = this.vectorizer.getVocabularySize();
     const documentsCount = this.documentVectors.size;
-    
+
     // 计算平均文档长度
     let totalTerms = 0;
     for (const vector of this.documentVectors.values()) {
       totalTerms += vector.terms.length;
     }
-    const averageDocumentLength = documentsCount > 0 ? totalTerms / documentsCount : 0;
+    const averageDocumentLength =
+      documentsCount > 0 ? totalTerms / documentsCount : 0;
 
     // 获取高频词
     const vocabulary = this.vectorizer.getVocabulary();
     const topTerms = vocabulary
-      .map(term => ({ term, idf: this.vectorizer.getIDF(term) }))
+      .map((term) => ({ term, idf: this.vectorizer.getIDF(term) }))
       .sort((a, b) => a.idf - b.idf) // IDF越小表示词频越高
       .slice(0, 10)
-      .map(t => t.term);
+      .map((t) => t.term);
 
     return {
       vocabularySize,
       documentsCount,
       averageDocumentLength,
-      topTerms
+      topTerms,
     };
   }
 
@@ -257,26 +269,26 @@ export class SemanticMatcher {
   private combineTextFields(
     title?: string,
     content?: string,
-    keywords?: string[]
+    keywords?: string[],
   ): string {
     const parts: string[] = [];
-    
+
     if (title) {
       // 标题重复3次以增加权重
       parts.push(title, title, title);
     }
-    
+
     if (content) {
       parts.push(content);
     }
-    
+
     if (keywords && keywords.length > 0) {
       // 关键词重复2次以增加权重
-      const keywordText = keywords.join(' ');
+      const keywordText = keywords.join(" ");
       parts.push(keywordText, keywordText);
     }
-    
-    return parts.join(' ');
+
+    return parts.join(" ");
   }
 
   /**
@@ -285,7 +297,11 @@ export class SemanticMatcher {
   private calculateRelevance(
     simResult: SimilarityResult,
     metadata: Record<string, any>,
-    boostFactors: { titleBoost: number; contentBoost: number; keywordBoost: number }
+    boostFactors: {
+      titleBoost: number;
+      contentBoost: number;
+      keywordBoost: number;
+    },
   ): number {
     let relevance = 1.0;
 
@@ -298,13 +314,13 @@ export class SemanticMatcher {
     // 根据文档类型调整
     if (metadata.type) {
       switch (metadata.type) {
-        case 'article':
+        case "article":
           relevance *= boostFactors.contentBoost;
           break;
-        case 'pdf':
+        case "pdf":
           relevance *= boostFactors.titleBoost;
           break;
-        case 'tool':
+        case "tool":
           relevance *= boostFactors.keywordBoost;
           break;
       }
@@ -325,4 +341,4 @@ export class SemanticMatcher {
     // 结合相似度和相关性
     return similarity * relevance;
   }
-} 
+}

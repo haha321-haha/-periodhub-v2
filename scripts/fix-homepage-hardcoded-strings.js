@@ -16,7 +16,7 @@ class HomepageStringFixer {
 
   fixHomepageStrings() {
     console.log('🔧 Fixing homepage hardcoded strings...');
-    
+
     try {
       let content = fs.readFileSync(this.homepageFile, 'utf8');
       let hasChanges = false;
@@ -137,7 +137,7 @@ class HomepageStringFixer {
 
   generateTranslationKeys() {
     console.log('📝 Generating translation keys for homepage...');
-    
+
     const zhKeys = {
       homePageContent: {
         searchPlaceholder: "🔍 快速搜索痛经解决方案...",
@@ -193,18 +193,18 @@ class HomepageStringFixer {
       // Read existing translation files
       const zhFile = 'messages/zh.json';
       const enFile = 'messages/en.json';
-      
+
       const zhContent = JSON.parse(fs.readFileSync(zhFile, 'utf8'));
       const enContent = JSON.parse(fs.readFileSync(enFile, 'utf8'));
-      
+
       // Merge new keys
       Object.assign(zhContent, zhKeys);
       Object.assign(enContent, enKeys);
-      
+
       // Write back to files
       fs.writeFileSync(zhFile, JSON.stringify(zhContent, null, 2));
       fs.writeFileSync(enFile, JSON.stringify(enContent, null, 2));
-      
+
       console.log('✅ Translation keys added successfully');
       return true;
     } catch (error) {
@@ -215,17 +215,17 @@ class HomepageStringFixer {
 
   run() {
     console.log('🚀 Starting homepage hardcoded string fixing...');
-    
+
     // First add translation keys
     const keysAdded = this.generateTranslationKeys();
     if (!keysAdded) {
       console.error('❌ Failed to add translation keys');
       return false;
     }
-    
+
     // Then fix the homepage
     const homepageFixed = this.fixHomepageStrings();
-    
+
     if (homepageFixed) {
       console.log('🎉 Homepage hardcoded string fixing completed successfully!');
       return true;

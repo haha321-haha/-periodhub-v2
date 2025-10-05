@@ -8,14 +8,14 @@ async function generatePDF(htmlFile, outputFile) {
     headless: 'new'
   });
   const page = await browser.newPage();
-  
+
   // Read HTML file
   const htmlPath = path.join(__dirname, '..', 'public', 'downloads', htmlFile);
   const htmlContent = fs.readFileSync(htmlPath, 'utf8');
-  
+
   // Set content
   await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-  
+
   // Generate PDF
   const outputPath = path.join(__dirname, '..', 'public', 'downloads', outputFile);
   await page.pdf({
@@ -29,7 +29,7 @@ async function generatePDF(htmlFile, outputFile) {
       left: '15mm'
     }
   });
-  
+
   await browser.close();
   console.log(`Generated: ${outputFile}`);
 }

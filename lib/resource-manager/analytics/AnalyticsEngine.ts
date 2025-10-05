@@ -3,15 +3,15 @@
  * 分析引擎
  */
 
-import { 
-  EnterpriseResource, 
+import {
+  EnterpriseResource,
   ResourceAnalyticsReport,
   ResourceManagerConfig,
   ResourceType,
   ResourceStatus,
   ResourceSearchFilters,
-  ResourceUsageStats
-} from '../types';
+  ResourceUsageStats,
+} from "../types";
 
 export class AnalyticsEngine {
   private config: ResourceManagerConfig;
@@ -45,15 +45,15 @@ export class AnalyticsEngine {
    * 记录操作
    */
   async recordOperation(
-    operation: string, 
-    resourceId: string, 
-    resourceType: ResourceType
+    operation: string,
+    resourceId: string,
+    resourceType: ResourceType,
   ): Promise<void> {
     this.operationHistory.push({
       timestamp: new Date(),
       operation,
       resourceId,
-      resourceType
+      resourceType,
     });
 
     // 保持历史记录在合理范围内
@@ -66,17 +66,17 @@ export class AnalyticsEngine {
    * 记录搜索
    */
   async recordSearch(
-    searchTerm: string, 
-    filters: ResourceSearchFilters, 
-    resultCount: number, 
-    searchTime: number
+    searchTerm: string,
+    filters: ResourceSearchFilters,
+    resultCount: number,
+    searchTime: number,
   ): Promise<void> {
     this.searchHistory.push({
       timestamp: new Date(),
       searchTerm,
       filters,
       resultCount,
-      searchTime
+      searchTime,
     });
 
     // 保持历史记录在合理范围内
@@ -89,10 +89,10 @@ export class AnalyticsEngine {
    * 生成分析报告
    */
   async generateReport(
-    resources: Map<string, EnterpriseResource>
+    resources: Map<string, EnterpriseResource>,
   ): Promise<ResourceAnalyticsReport> {
     const resourceArray = Array.from(resources.values());
-    
+
     const report: ResourceAnalyticsReport = {
       totalResources: resourceArray.length,
       resourcesByType: this.getResourcesByType(resourceArray),
@@ -101,7 +101,7 @@ export class AnalyticsEngine {
       topTags: this.getTopTags(resourceArray),
       popularResources: this.getPopularResources(resourceArray),
       recentActivity: this.getRecentActivity(),
-      performanceMetrics: this.getPerformanceMetrics()
+      performanceMetrics: this.getPerformanceMetrics(),
     };
 
     return report;
@@ -110,17 +110,19 @@ export class AnalyticsEngine {
   /**
    * 按类型统计资源
    */
-  private getResourcesByType(resources: EnterpriseResource[]): Record<ResourceType, number> {
+  private getResourcesByType(
+    resources: EnterpriseResource[],
+  ): Record<ResourceType, number> {
     const typeCount: Record<ResourceType, number> = {
       [ResourceType.ARTICLE]: 0,
       [ResourceType.PDF]: 0,
       [ResourceType.INTERACTIVE_TOOL]: 0,
       [ResourceType.VIDEO]: 0,
       [ResourceType.AUDIO]: 0,
-      [ResourceType.INFOGRAPHIC]: 0
+      [ResourceType.INFOGRAPHIC]: 0,
     };
 
-    resources.forEach(resource => {
+    resources.forEach((resource) => {
       typeCount[resource.type] = (typeCount[resource.type] || 0) + 1;
     });
 
@@ -130,16 +132,18 @@ export class AnalyticsEngine {
   /**
    * 按状态统计资源
    */
-  private getResourcesByStatus(resources: EnterpriseResource[]): Record<ResourceStatus, number> {
+  private getResourcesByStatus(
+    resources: EnterpriseResource[],
+  ): Record<ResourceStatus, number> {
     const statusCount: Record<ResourceStatus, number> = {
       [ResourceStatus.ACTIVE]: 0,
       [ResourceStatus.DRAFT]: 0,
       [ResourceStatus.ARCHIVED]: 0,
       [ResourceStatus.PENDING]: 0,
-      [ResourceStatus.DEPRECATED]: 0
+      [ResourceStatus.DEPRECATED]: 0,
     };
 
-    resources.forEach(resource => {
+    resources.forEach((resource) => {
       statusCount[resource.status] = (statusCount[resource.status] || 0) + 1;
     });
 
@@ -149,10 +153,12 @@ export class AnalyticsEngine {
   /**
    * 按分类统计资源
    */
-  private getResourcesByCategory(resources: EnterpriseResource[]): Record<string, number> {
+  private getResourcesByCategory(
+    resources: EnterpriseResource[],
+  ): Record<string, number> {
     const categoryCount: Record<string, number> = {};
 
-    resources.forEach(resource => {
+    resources.forEach((resource) => {
       const category = resource.categoryId;
       categoryCount[category] = (categoryCount[category] || 0) + 1;
     });
@@ -163,11 +169,13 @@ export class AnalyticsEngine {
   /**
    * 获取热门标签
    */
-  private getTopTags(resources: EnterpriseResource[]): Array<{ tag: string; count: number }> {
+  private getTopTags(
+    resources: EnterpriseResource[],
+  ): Array<{ tag: string; count: number }> {
     const tagCount: Record<string, number> = {};
 
-    resources.forEach(resource => {
-      resource.tags.forEach(tag => {
+    resources.forEach((resource) => {
+      resource.tags.forEach((tag) => {
         tagCount[tag] = (tagCount[tag] || 0) + 1;
       });
     });
@@ -181,37 +189,40 @@ export class AnalyticsEngine {
   /**
    * 获取热门资源
    */
-  private getPopularResources(resources: EnterpriseResource[]): Array<{ 
-    id: string; 
-    title: string; 
-    stats: ResourceUsageStats 
+  private getPopularResources(resources: EnterpriseResource[]): Array<{
+    id: string;
+    title: string;
+    stats: ResourceUsageStats;
   }> {
     return resources
-      .filter(resource => resource.stats)
+      .filter((resource) => resource.stats)
       .sort((a, b) => b.stats.popularityScore - a.stats.popularityScore)
       .slice(0, 10)
-      .map(resource => ({
+      .map((resource) => ({
         id: resource.id,
-        title: resource.title[this.config.defaultLanguage] || Object.values(resource.title)[0] || 'Untitled',
-        stats: resource.stats
+        title:
+          resource.title[this.config.defaultLanguage] ||
+          Object.values(resource.title)[0] ||
+          "Untitled",
+        stats: resource.stats,
       }));
   }
 
   /**
    * 获取最近活动
    */
-  private getRecentActivity(): Array<{ 
-    date: Date; 
-    action: string; 
-    resourceId: string 
+  private getRecentActivity(): Array<{
+    date: Date;
+    action: string;
+    resourceId: string;
   }> {
     return this.operationHistory
       .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
       .slice(0, 20)
-      .map(op => ({
+      .map((op) => ({
         date: op.timestamp,
         action: op.operation,
-        resourceId: op.resourceId
+        resourceId: op.resourceId,
       }));
   }
 
@@ -225,50 +236,58 @@ export class AnalyticsEngine {
     cacheHitRate: number;
   } {
     const recentSearches = this.searchHistory.slice(-100);
-    const averageSearchTime = recentSearches.length > 0 
-      ? recentSearches.reduce((sum, search) => sum + search.searchTime, 0) / recentSearches.length
-      : 0;
+    const averageSearchTime =
+      recentSearches.length > 0
+        ? recentSearches.reduce((sum, search) => sum + search.searchTime, 0) /
+          recentSearches.length
+        : 0;
 
     return {
       averageSearchTime,
       averageLoadTime: 0, // 需要从其他系统获取
       errorRate: 0, // 需要从错误日志计算
-      cacheHitRate: 0 // 需要从缓存系统获取
+      cacheHitRate: 0, // 需要从缓存系统获取
     };
   }
 
   /**
    * 获取搜索趋势
    */
-  async getSearchTrends(days: number = 30): Promise<Array<{
-    date: string;
-    searchCount: number;
-    topTerms: string[];
-  }>> {
+  async getSearchTrends(days: number = 30): Promise<
+    Array<{
+      date: string;
+      searchCount: number;
+      topTerms: string[];
+    }>
+  > {
     const now = new Date();
     const cutoffDate = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
-    
-    const recentSearches = this.searchHistory.filter(search => 
-      search.timestamp >= cutoffDate
+
+    const recentSearches = this.searchHistory.filter(
+      (search) => search.timestamp >= cutoffDate,
     );
 
-    const dailyStats: Record<string, { 
-      count: number; 
-      terms: Record<string, number> 
-    }> = {};
+    const dailyStats: Record<
+      string,
+      {
+        count: number;
+        terms: Record<string, number>;
+      }
+    > = {};
 
-    recentSearches.forEach(search => {
-      const dateKey = search.timestamp.toISOString().split('T')[0];
-      
+    recentSearches.forEach((search) => {
+      const dateKey = search.timestamp.toISOString().split("T")[0];
+
       if (!dailyStats[dateKey]) {
         dailyStats[dateKey] = { count: 0, terms: {} };
       }
-      
+
       dailyStats[dateKey].count++;
-      
+
       if (search.searchTerm) {
         const term = search.searchTerm.toLowerCase();
-        dailyStats[dateKey].terms[term] = (dailyStats[dateKey].terms[term] || 0) + 1;
+        dailyStats[dateKey].terms[term] =
+          (dailyStats[dateKey].terms[term] || 0) + 1;
       }
     });
 
@@ -278,7 +297,7 @@ export class AnalyticsEngine {
       topTerms: Object.entries(stats.terms)
         .sort(([, a], [, b]) => b - a)
         .slice(0, 5)
-        .map(([term]) => term)
+        .map(([term]) => term),
     }));
   }
 
@@ -292,9 +311,9 @@ export class AnalyticsEngine {
     conversionRate: number;
   }> {
     const recentSearches = this.searchHistory.slice(-1000);
-    
+
     const termCount: Record<string, number> = {};
-    recentSearches.forEach(search => {
+    recentSearches.forEach((search) => {
       if (search.searchTerm) {
         const term = search.searchTerm.toLowerCase();
         termCount[term] = (termCount[term] || 0) + 1;
@@ -310,7 +329,7 @@ export class AnalyticsEngine {
       mostSearchedTerms,
       averageSessionTime: 0, // 需要从用户会话数据获取
       bounceRate: 0, // 需要从用户行为数据获取
-      conversionRate: 0 // 需要从转化数据获取
+      conversionRate: 0, // 需要从转化数据获取
     };
   }
 
@@ -323,10 +342,12 @@ export class AnalyticsEngine {
     contentGaps: string[];
   }> {
     // 基于搜索历史和资源统计分析内容效果
-    const searchTerms = this.searchHistory.map(s => s.searchTerm).filter(Boolean);
+    const searchTerms = this.searchHistory
+      .map((s) => s.searchTerm)
+      .filter(Boolean);
     const termFrequency: Record<string, number> = {};
-    
-    searchTerms.forEach(term => {
+
+    searchTerms.forEach((term) => {
       termFrequency[term] = (termFrequency[term] || 0) + 1;
     });
 
@@ -338,7 +359,7 @@ export class AnalyticsEngine {
     return {
       topPerformingContent: [],
       underperformingContent: [],
-      contentGaps
+      contentGaps,
     };
   }
-} 
+}

@@ -2,19 +2,19 @@
  * 用户偏好设置相关类型定义
  */
 
-import { QuizStage } from './quiz';
+import { QuizStage } from "./quiz";
 
 // 用户偏好类型
 export interface UserPreferences {
   // 测试偏好
   testPreferences: {
-    preferredStage: QuizStage | 'auto';
+    preferredStage: QuizStage | "auto";
     autoAdvance: boolean;
     showExplanations: boolean;
     timeLimit: boolean;
     soundEffects: boolean;
   };
-  
+
   // 通知偏好
   notificationPreferences: {
     enabled: boolean;
@@ -23,25 +23,25 @@ export interface UserPreferences {
     pushNotifications: boolean;
     emailNotifications: boolean;
   };
-  
+
   // 界面偏好
   uiPreferences: {
-    theme: 'light' | 'dark' | 'auto';
-    language: 'zh' | 'en';
-    fontSize: 'small' | 'medium' | 'large';
+    theme: "light" | "dark" | "auto";
+    language: "zh" | "en";
+    fontSize: "small" | "medium" | "large";
     animations: boolean;
     compactMode: boolean;
   };
-  
+
   // 学习偏好
   learningPreferences: {
-    difficulty: 'easy' | 'medium' | 'hard';
-    learningStyle: 'visual' | 'auditory' | 'kinesthetic' | 'mixed';
+    difficulty: "easy" | "medium" | "hard";
+    learningStyle: "visual" | "auditory" | "kinesthetic" | "mixed";
     studyTime: number; // 分钟
     breakInterval: number; // 分钟
-    reviewFrequency: 'daily' | 'weekly' | 'monthly';
+    reviewFrequency: "daily" | "weekly" | "monthly";
   };
-  
+
   // 隐私偏好
   privacyPreferences: {
     dataCollection: boolean;
@@ -87,7 +87,7 @@ export interface PreferenceTemplate {
   name: string;
   description: string;
   preferences: Partial<UserPreferences>;
-  category: 'beginner' | 'intermediate' | 'advanced' | 'custom';
+  category: "beginner" | "intermediate" | "advanced" | "custom";
   isDefault: boolean;
 }
 
@@ -98,7 +98,7 @@ export interface PreferenceSuggestion {
   currentValue: any;
   suggestedValue: any;
   reason: string;
-  impact: 'low' | 'medium' | 'high';
+  impact: "low" | "medium" | "high";
   confidence: number; // 0-1
 }
 
@@ -110,9 +110,9 @@ export interface PreferenceAnalysis {
     averageSessionTime: number;
     preferredTimeOfDay: string;
   };
-  
+
   recommendations: PreferenceSuggestion[];
-  
+
   optimization: {
     performanceImprovements: string[];
     accessibilityImprovements: string[];
@@ -123,9 +123,9 @@ export interface PreferenceAnalysis {
 // 偏好设置同步类型
 export interface PreferenceSync {
   lastSync: Date;
-  syncStatus: 'success' | 'failed' | 'pending';
+  syncStatus: "success" | "failed" | "pending";
   conflicts: PreferenceConflict[];
-  resolution: 'manual' | 'automatic' | 'none';
+  resolution: "manual" | "automatic" | "none";
 }
 
 // 偏好设置冲突类型
@@ -133,8 +133,8 @@ export interface PreferenceConflict {
   key: string;
   localValue: any;
   remoteValue: any;
-  conflictType: 'value' | 'structure' | 'version';
-  resolution: 'local' | 'remote' | 'merge' | 'manual';
+  conflictType: "value" | "structure" | "version";
+  resolution: "local" | "remote" | "merge" | "manual";
 }
 
 // 偏好设置历史类型
@@ -143,7 +143,7 @@ export interface PreferenceHistory {
   totalChanges: number;
   lastChange: Date;
   mostChangedCategory: keyof UserPreferences;
-  changeFrequency: 'low' | 'medium' | 'high';
+  changeFrequency: "low" | "medium" | "high";
 }
 
 // 偏好设置统计类型
@@ -154,4 +154,3 @@ export interface PreferenceStats {
   averageCustomization: number; // 0-1
   satisfactionScore: number; // 1-5
 }
-

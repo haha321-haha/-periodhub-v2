@@ -51,21 +51,21 @@ const unindexedArticles = [
 async function analyzeContentUniqueness() {
   console.log('🔍 分析6篇未索引文章的内容独特性\n');
   console.log('=' .repeat(60));
-  
+
   const analysisResults = [];
-  
+
   for (const article of unindexedArticles) {
     console.log(`\n📄 分析文章: ${article.title}`);
     console.log(`   Slug: ${article.slug}`);
     console.log(`   抓取日期: ${article.crawlDate}`);
-    
+
     const analysis = analyzeArticleContent(article);
     analysisResults.push({
       ...article,
       ...analysis
     });
   }
-  
+
   // 生成综合分析报告
   generateUniquenessReport(analysisResults);
 }
@@ -79,7 +79,7 @@ function analyzeArticleContent(article) {
     recommendations: [],
     seoScore: 0
   };
-  
+
   // 基于文章主题分析内容独特性
   switch (article.slug) {
     case 'effective-herbal-tea-menstrual-pain':
@@ -98,7 +98,7 @@ function analyzeArticleContent(article) {
       ];
       analysis.seoScore = 75;
       break;
-      
+
     case 'when-to-seek-medical-care-comprehensive-guide':
       analysis.contentLength = 'very long';
       analysis.keywordDensity = 'moderate';
@@ -115,7 +115,7 @@ function analyzeArticleContent(article) {
       ];
       analysis.seoScore = 65;
       break;
-      
+
     case 'period-friendly-recipes':
       analysis.contentLength = 'medium';
       analysis.keywordDensity = 'moderate';
@@ -132,7 +132,7 @@ function analyzeArticleContent(article) {
       ];
       analysis.seoScore = 70;
       break;
-      
+
     case 'comprehensive-iud-guide':
       analysis.contentLength = 'very long';
       analysis.keywordDensity = 'high';
@@ -149,7 +149,7 @@ function analyzeArticleContent(article) {
       ];
       analysis.seoScore = 80;
       break;
-      
+
     case 'comprehensive-medical-guide-to-dysmenorrhea':
       analysis.contentLength = 'very long';
       analysis.keywordDensity = 'high';
@@ -166,7 +166,7 @@ function analyzeArticleContent(article) {
       ];
       analysis.seoScore = 60;
       break;
-      
+
     case 'anti-inflammatory-diet-period-pain':
       analysis.contentLength = 'long';
       analysis.keywordDensity = 'moderate';
@@ -184,68 +184,68 @@ function analyzeArticleContent(article) {
       analysis.seoScore = 68;
       break;
   }
-  
+
   // 生成改进建议
   analysis.recommendations = generateRecommendations(analysis, article);
-  
+
   console.log(`   内容长度: ${analysis.contentLength}`);
   console.log(`   SEO评分: ${analysis.seoScore}/100`);
   console.log(`   独特特征: ${analysis.uniqueFeatures.length}个`);
   console.log(`   潜在问题: ${analysis.potentialIssues.length}个`);
-  
+
   return analysis;
 }
 
 function generateRecommendations(analysis, article) {
   const recommendations = [];
-  
+
   // 基于SEO评分生成建议
   if (analysis.seoScore < 70) {
     recommendations.push('提升内容独特性和价值');
     recommendations.push('优化关键词策略');
     recommendations.push('增加原创研究或数据');
   }
-  
+
   // 基于潜在问题生成建议
   if (analysis.potentialIssues.some(issue => issue.includes('重复'))) {
     recommendations.push('重写重复部分，增加独特视角');
     recommendations.push('添加个人化案例或故事');
   }
-  
+
   if (analysis.potentialIssues.some(issue => issue.includes('专业'))) {
     recommendations.push('简化专业术语，提高可读性');
     recommendations.push('添加通俗易懂的解释');
   }
-  
+
   if (analysis.potentialIssues.some(issue => issue.includes('竞争'))) {
     recommendations.push('寻找长尾关键词机会');
     recommendations.push('创建更具体的子主题');
   }
-  
+
   // 通用建议
   recommendations.push('增加内部链接到相关文章');
   recommendations.push('优化标题和元描述');
   recommendations.push('添加结构化数据');
-  
+
   return recommendations;
 }
 
 function generateUniquenessReport(results) {
   console.log('\n\n📊 内容独特性分析报告\n');
   console.log('=' .repeat(60));
-  
+
   // 按SEO评分排序
   const sortedResults = results.sort((a, b) => b.seoScore - a.seoScore);
-  
+
   console.log('\n🎯 文章评分排名:');
   sortedResults.forEach((result, index) => {
     const status = result.seoScore >= 75 ? '✅' : result.seoScore >= 65 ? '⚠️' : '❌';
     console.log(`   ${index + 1}. ${status} ${result.title}`);
     console.log(`      评分: ${result.seoScore}/100 | 抓取: ${result.crawlDate}`);
   });
-  
+
   console.log('\n🔍 主要问题分析:');
-  
+
   // 统计常见问题
   const allIssues = results.flatMap(r => r.potentialIssues);
   const issueCount = {};
@@ -253,15 +253,15 @@ function generateUniquenessReport(results) {
     const key = issue.split('，')[0]; // 取问题的主要部分
     issueCount[key] = (issueCount[key] || 0) + 1;
   });
-  
+
   Object.entries(issueCount)
     .sort(([,a], [,b]) => b - a)
     .forEach(([issue, count]) => {
       console.log(`   • ${issue}: ${count}篇文章`);
     });
-  
+
   console.log('\n💡 优先改进建议:');
-  
+
   // 低分文章的改进建议
   const lowScoreArticles = results.filter(r => r.seoScore < 70);
   if (lowScoreArticles.length > 0) {
@@ -273,7 +273,7 @@ function generateUniquenessReport(results) {
       });
     });
   }
-  
+
   // 中等分数文章的建议
   const mediumScoreArticles = results.filter(r => r.seoScore >= 70 && r.seoScore < 80);
   if (mediumScoreArticles.length > 0) {
@@ -283,7 +283,7 @@ function generateUniquenessReport(results) {
       console.log(`     - ${article.recommendations[0]}`);
     });
   }
-  
+
   console.log('\n📈 整体改进策略:');
   console.log('   1. 重点关注评分<70的文章，进行内容重写');
   console.log('   2. 减少文章间的内容重复，增加独特视角');
@@ -291,13 +291,13 @@ function generateUniquenessReport(results) {
   console.log('   4. 增加原创研究、案例和数据支持');
   console.log('   5. 改善内部链接结构，提升页面权重');
   console.log('   6. 简化专业术语，提高内容可读性');
-  
+
   console.log('\n🎯 预期效果:');
   console.log('   • 内容独特性提升后，1-2周内开始被索引');
   console.log('   • 减少重复内容，提高整体网站权威性');
   console.log('   • 优化用户体验，提高页面停留时间');
   console.log('   • 建立更强的主题权威性和专业度');
-  
+
   console.log('\n📋 下一步行动:');
   console.log('   1. 立即重写评分最低的2-3篇文章');
   console.log('   2. 为每篇文章添加独特的案例或数据');

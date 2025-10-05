@@ -24,7 +24,7 @@ class HardcodeDetector {
         type: 'conditional-string-double',
         description: '条件字符串硬编码（双引号）'
       },
-      
+
       // 对象字面量模式
       {
         regex: /'([^']+)' : '([^']+)'/g,
@@ -36,14 +36,14 @@ class HardcodeDetector {
         type: 'object-literal-double',
         description: '对象字面量硬编码（双引号）'
       },
-      
+
       // 三元运算符模式
       {
         regex: /locale === 'zh' \? ([^:]+) : ([^,)]+)/g,
         type: 'ternary-operator',
         description: '三元运算符硬编码'
       },
-      
+
       // 直接字符串硬编码（需要人工判断）
       {
         regex: /['"]([^'"]*[\u4e00-\u9fff][^'"]*)['"]/g,
@@ -51,7 +51,7 @@ class HardcodeDetector {
         description: '可能的中文字符串硬编码'
       }
     ];
-    
+
     // 排除的文件和目录
     this.excludePatterns = [
       'node_modules/**',
@@ -62,10 +62,10 @@ class HardcodeDetector {
       '**/messages/**',
       '**/docs/**'
     ];
-    
+
     // 包含的文件类型
     this.includeExtensions = ['.tsx', '.ts', '.jsx', '.js'];
-    
+
     // 北美市场特殊检查模式
     this.northAmericaChecks = {
       // 医疗建议语气检测
@@ -107,7 +107,7 @@ class HardcodeDetector {
           severity: 'medium'
         }
       ],
-      
+
       // 医学术语检测
       medicalTermPatterns: [
         {
@@ -123,7 +123,7 @@ class HardcodeDetector {
           severity: 'low'
         }
       ],
-      
+
       // 必需的免责声明关键词
       requiredDisclaimerKeywords: [
         {
@@ -164,17 +164,17 @@ class HardcodeDetector {
       if (!stats.isFile()) {
         return [];
       }
-      
+
       const content = fs.readFileSync(filePath, 'utf-8');
       const reports = [];
-      
+
       // 检测传统硬编码模式
       this.patterns.forEach(pattern => {
         const matches = content.matchAll(pattern.regex);
         for (const match of matches) {
           const lineNumber = this.getLineNumber(content, match.index);
           const lineContent = this.getLineContent(content, match.index);
-          
+
           reports.push({
             file: filePath,
             line: lineNumber,
@@ -190,11 +190,11 @@ class HardcodeDetector {
           });
         }
       });
-      
+
       // 检测北美市场特殊问题
       const northAmericaReports = this.detectNorthAmericaIssues(content, filePath);
       reports.push(...northAmericaReports);
-      
+
       return reports;
     } catch (error) {
       // 静默处理错误，避免输出过多错误信息
@@ -207,14 +207,14 @@ class HardcodeDetector {
    */
   detectNorthAmericaIssues(content, filePath) {
     const reports = [];
-    
+
     // 检测医疗建议语气
     this.northAmericaChecks.medicalAdvicePatterns.forEach(pattern => {
       const matches = content.matchAll(pattern.regex);
       for (const match of matches) {
         const lineNumber = this.getLineNumber(content, match.index);
         const lineContent = this.getLineContent(content, match.index);
-        
+
         reports.push({
           file: filePath,
           line: lineNumber,
@@ -229,14 +229,14 @@ class HardcodeDetector {
         });
       }
     });
-    
+
     // 检测医学术语
     this.northAmericaChecks.medicalTermPatterns.forEach(pattern => {
       const matches = content.matchAll(pattern.regex);
       for (const match of matches) {
         const lineNumber = this.getLineNumber(content, match.index);
         const lineContent = this.getLineContent(content, match.index);
-        
+
         reports.push({
           file: filePath,
           line: lineNumber,
@@ -251,7 +251,7 @@ class HardcodeDetector {
         });
       }
     });
-    
+
     // 检查必需的免责声明
     this.northAmericaChecks.requiredDisclaimerKeywords.forEach(keyword => {
       if (!content.includes(keyword.keyword)) {
@@ -269,7 +269,7 @@ class HardcodeDetector {
         });
       }
     });
-    
+
     return reports;
   }
 
@@ -279,14 +279,14 @@ class HardcodeDetector {
   detectInProject(projectRoot = process.cwd()) {
     const files = this.getSourceFiles(projectRoot);
     const allReports = [];
-    
+
     console.log(`🔍 扫描 ${files.length} 个文件...`);
-    
+
     files.forEach(file => {
       const reports = this.detectInFile(file);
       allReports.push(...reports);
     });
-    
+
     return allReports;
   }
 
@@ -294,10 +294,10 @@ class HardcodeDetector {
    * 获取源文件列表
    */
   getSourceFiles(projectRoot) {
-    const patterns = this.includeExtensions.map(ext => 
+    const patterns = this.includeExtensions.map(ext =>
       path.join(projectRoot, '**', `*${ext}`)
     );
-    
+
     let files = [];
     patterns.forEach(pattern => {
       const matches = glob.sync(pattern, {
@@ -305,7 +305,7 @@ class HardcodeDetector {
       });
       files = files.concat(matches);
     });
-    
+
     return [...new Set(files)]; // 去重
   }
 
@@ -314,25 +314,25 @@ class HardcodeDetector {
    */
   generateSuggestion(match, type) {
     const [fullMatch, chineseText, englishText] = match;
-    
+
     // 生成翻译键建议
     const keySuggestion = this.generateKeySuggestion(chineseText, englishText);
-    
+
     switch (type) {
       case 'conditional-string':
       case 'conditional-string-double':
         return `建议替换为: t('${keySuggestion}')`;
-      
+
       case 'object-literal':
       case 'object-literal-double':
         return `建议替换为: t('${keySuggestion}')`;
-      
+
       case 'ternary-operator':
         return `建议替换为: t('${keySuggestion}')`;
-      
+
       case 'chinese-string':
         return `请检查是否为硬编码，如果是请替换为: t('${keySuggestion}')`;
-      
+
       default:
         return `建议替换为: t('${keySuggestion}')`;
     }
@@ -345,19 +345,19 @@ class HardcodeDetector {
     switch (type) {
       case 'medical_advice':
         return '建议改为教育性语言，避免构成医疗建议。例如："you should" → "you may consider"';
-      
+
       case 'dosage_advice':
         return '⚠️ 高优先级：避免提供具体剂量建议，建议改为"consult your healthcare provider"';
-      
+
       case 'medical_term':
         return '医学术语检测到，建议确保使用FDA认证的术语';
-      
+
       case 'authoritative_source':
         return '✅ 检测到权威来源引用，这有助于提高内容可信度';
-      
+
       case 'disclaimer_required':
         return '建议添加完整的医疗免责声明以确保合规性';
-      
+
       default:
         return '建议检查内容是否符合FDA合规要求';
     }
@@ -375,14 +375,14 @@ class HardcodeDetector {
         .slice(0, 3);
       return words.join('.');
     }
-    
+
     // 基于中文文本生成键名（备用方案）
     if (chineseText) {
       // 提取关键词
       const keywords = this.extractKeywords(chineseText);
       return keywords.join('.');
     }
-    
+
     return 'translation.key';
   }
 
@@ -393,7 +393,7 @@ class HardcodeDetector {
     // 简单的关键词提取逻辑
     const words = text.replace(/[^\u4e00-\u9fff]/g, '').split('');
     const keywords = [];
-    
+
     // 提取2-4个字符的关键词
     for (let i = 0; i < words.length - 1; i++) {
       const word = words.slice(i, i + 2).join('');
@@ -402,7 +402,7 @@ class HardcodeDetector {
         if (keywords.length >= 2) break;
       }
     }
-    
+
     return keywords.length > 0 ? keywords : ['content'];
   }
 
@@ -425,13 +425,13 @@ class HardcodeDetector {
       case 'object-literal':
       case 'object-literal-double':
         return 'high';
-      
+
       case 'ternary-operator':
         return 'medium';
-      
+
       case 'chinese-string':
         return 'low';
-      
+
       default:
         return 'medium';
     }
@@ -477,13 +477,13 @@ class HardcodeDetector {
     reports.forEach(report => {
       // 按类型统计
       summary.byType[report.type] = (summary.byType[report.type] || 0) + 1;
-      
+
       // 按严重程度统计
       summary.bySeverity[report.severity]++;
-      
+
       // 按文件统计
       summary.byFile[report.file] = (summary.byFile[report.file] || 0) + 1;
-      
+
       // 按类别统计
       if (report.category === 'north_america') {
         summary.byCategory.north_america++;
@@ -511,7 +511,7 @@ class HardcodeDetector {
   printReport(report) {
     console.log('\n📊 硬编码检测报告 - 北美市场优化版');
     console.log('='.repeat(60));
-    
+
     // 摘要
     console.log(`\n📈 摘要:`);
     console.log(`  总计: ${report.summary.total} 个问题`);
@@ -520,13 +520,13 @@ class HardcodeDetector {
     console.log(`  高优先级: ${report.summary.bySeverity.high} 个`);
     console.log(`  中优先级: ${report.summary.bySeverity.medium} 个`);
     console.log(`  低优先级: ${report.summary.bySeverity.low} 个`);
-    
+
     // 按类型统计
     console.log(`\n📋 按类型统计:`);
     Object.entries(report.summary.byType).forEach(([type, count]) => {
       console.log(`  ${type}: ${count} 个`);
     });
-    
+
     // 按文件统计
     console.log(`\n📁 按文件统计:`);
     Object.entries(report.summary.byFile)
@@ -535,7 +535,7 @@ class HardcodeDetector {
       .forEach(([file, count]) => {
         console.log(`  ${file}: ${count} 个`);
       });
-    
+
     // 北美市场特殊检查摘要
     if (report.summary.byCategory.north_america > 0) {
       console.log(`\n🇺🇸 北美市场合规性检查:`);
@@ -544,13 +544,13 @@ class HardcodeDetector {
       const dosageAdviceCount = northAmericaReports.filter(r => r.type === 'dosage_advice').length;
       const disclaimerCount = northAmericaReports.filter(r => r.type === 'disclaimer_required').length;
       const authoritativeSourceCount = northAmericaReports.filter(r => r.type === 'authoritative_source').length;
-      
+
       console.log(`  医疗建议语气: ${medicalAdviceCount} 个`);
       console.log(`  剂量建议: ${dosageAdviceCount} 个`);
       console.log(`  缺失免责声明: ${disclaimerCount} 个`);
       console.log(`  权威来源引用: ${authoritativeSourceCount} 个`);
     }
-    
+
     // 详细报告
     if (report.reports.length > 0) {
       console.log(`\n🔍 详细报告:`);
@@ -560,9 +560,9 @@ class HardcodeDetector {
           medium: '🟡',
           low: '🟢'
         }[item.severity];
-        
+
         const categoryIcon = item.category === 'north_america' ? '🇺🇸' : '🔧';
-        
+
         console.log(`\n${index + 1}. ${severityIcon} ${categoryIcon} ${item.file}:${item.line}`);
         console.log(`   类型: ${item.description}`);
         console.log(`   内容: ${item.match}`);
@@ -579,14 +579,14 @@ class HardcodeDetector {
 if (require.main === module) {
   const detector = new HardcodeDetector();
   const projectRoot = process.argv[2] || process.cwd();
-  
+
   console.log(`🚀 开始检测项目: ${projectRoot}`);
-  
+
   const reports = detector.detectInProject(projectRoot);
   const report = detector.generateReport(reports);
-  
+
   detector.printReport(report);
-  
+
   // 如果有硬编码，退出码为1
   if (reports.length > 0) {
     process.exit(1);

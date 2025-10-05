@@ -7,14 +7,14 @@
 #### **1. 英文药物指南页面**
 - **URL**: https://www.periodhub.health/zh/articles/pain-management/medication-guide
 - **内容**: 包含布洛芬、萘普生等NSAIDs的详细用药指南
-- **覆盖关键词**: 
+- **覆盖关键词**:
   - "naproxen period pain" ✅
   - "ibuprofen for period pain" ✅
   - "nsaids for period pain" ✅
 
 #### **2. 药物剂量计算器**
 - **功能**: 互动式NSAID用药计算器
-- **覆盖关键词**: 
+- **覆盖关键词**:
   - "ibuprofen dosage for period pain" ✅
   - "naproxen dose for period cramps" ✅
   - "how often can you have ibuprofen for period pain" ✅

@@ -75,7 +75,7 @@ export default function Header() {
           <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
             <div className="flex-shrink-0">
               <div className="flex items-center space-x-2">
-                <span 
+                <span
                   className="font-bold text-lg sm:text-xl text-primary-600"
                   suppressHydrationWarning={true}
                 >
@@ -109,7 +109,7 @@ export default function Header() {
           {/* 📱 移动端优化Logo */}
           <div className="flex-shrink-0">
             <Link href={`/${locale}`} className="flex items-center space-x-2">
-              <span 
+              <span
                 className="font-bold text-lg sm:text-xl text-primary-600 hover:text-primary-700 transition-colors"
                 suppressHydrationWarning={true}
               >

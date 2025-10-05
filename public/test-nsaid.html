@@ -11,7 +11,7 @@
 <body class="bg-gray-50 p-8">
     <div class="max-w-4xl mx-auto">
         <h1 class="text-3xl font-bold mb-8">NSAID 交互式组件测试</h1>
-        
+
         <!-- Animation Player -->
         <div class="nsaid-animation-player">
             <div class="animation-container">
@@ -20,12 +20,12 @@
                         您的浏览器不支持视频播放。
                     </video>
                 </div>
-                
+
                 <div class="narration-section">
                     <h4 id="nsaidSceneTitle" class="scene-title">NSAID药物代谢动画</h4>
                     <p id="nsaidNarrationText" class="narration-text">了解非甾体抗炎药如何在体内工作以缓解疼痛</p>
                 </div>
-                
+
                 <div class="navigation-controls">
                     <button id="nsaidPrevButton" class="nav-button prev-button">
                         <i data-lucide="chevron-left"></i> 上一幕
@@ -42,7 +42,7 @@
         <div class="nsaid-calculator mt-8">
             <div class="calculator-container">
                 <h3 class="calculator-title">💊 个性化用药剂量计算器（成人）</h3>
-                
+
                 <div class="calculator-form">
                     <div class="form-group">
                         <label for="nsaidDrugSelect" class="form-label">选择药物:</label>
@@ -51,16 +51,16 @@
                             <option value="naproxen">萘普生 (Naproxen)</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="nsaidWeightInput" class="form-label">输入体重 (kg):</label>
                         <input type="number" id="nsaidWeightInput" placeholder="例如: 55" class="form-input">
                     </div>
-                    
+
                     <button id="nsaidCalculateButton" class="calculate-button">
                         计算推荐剂量
                     </button>
-                    
+
                     <div id="nsaidDoseResult" class="dose-result hidden">
                         <h4 class="result-title">计算结果:</h4>
                         <div class="result-content">
@@ -70,7 +70,7 @@
                             <p id="nsaidResultNotes" class="result-notes"></p>
                         </div>
                     </div>
-                    
+
                     <div class="disclaimer">
                         <i data-lucide="alert-triangle"></i>
                         <strong>重要免责声明:</strong> 本计算器提供的剂量建议仅供参考，不能替代执业医师或药师的专业意见。个体情况差异较大，请务必在医生指导下用药。体重信息仅用于记录，成人常用剂量通常基于标准范围。

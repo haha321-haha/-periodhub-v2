@@ -11,12 +11,12 @@ class ManualReviewInterface {
         this.suggestionsReportPath = suggestionsReportPath;
         this.reviewResults = {
             approved: [],
-            modified: [], 
+            modified: [],
             rejected: [],
             deferred: [],
             stats: {}
         };
-        
+
         this.rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout
@@ -24,7 +24,7 @@ class ManualReviewInterface {
 
         // 加载建议数据
         this.loadSuggestionsData();
-        
+
         // 初始化审查会话
         this.initializeReviewSession();
     }
@@ -54,7 +54,7 @@ class ManualReviewInterface {
 
     buildReviewQueue() {
         const allSuggestions = this.suggestionsReport.suggestions;
-        
+
         // 按优先级排序：中置信度 -> 低置信度 -> 冲突文件
         const queue = [
             ...allSuggestions.mediumConfidence.map(s => ({...s, priority: 'medium', reason: 'Medium confidence'})),
@@ -73,7 +73,7 @@ class ManualReviewInterface {
     extractConflictFiles() {
         const conflicts = this.suggestionsReport.suggestions.conflicts || [];
         const conflictFiles = [];
-        
+
         conflicts.forEach(conflict => {
             conflict.conflictingFiles.forEach(filename => {
                 // 查找冲突文件的详细信息
@@ -105,22 +105,22 @@ class ManualReviewInterface {
     // 主要审查流程
     async startReview() {
         console.log('\n🚀 开始手动审查流程...\n');
-        
+
         await this.showWelcomeMessage();
-        
+
         for (let i = 0; i < this.reviewSession.reviewQueue.length; i++) {
             this.reviewSession.currentIndex = i;
             const file = this.reviewSession.reviewQueue[i];
-            
+
             console.log(`\n${'='.repeat(80)}`);
             console.log(`📄 审查进度: ${i + 1}/${this.reviewSession.totalFiles} - ${this.getProgressBar(i + 1, this.reviewSession.totalFiles)}`);
             console.log(`${'='.repeat(80)}\n`);
-            
+
             const result = await this.reviewFile(file);
-            
+
             // 处理审查结果
             this.processReviewResult(file, result);
-            
+
             // 检查是否需要暂停或退出
             if (result.action === 'quit') {
                 console.log('\n👋 审查会话已终止');
@@ -136,17 +136,17 @@ class ManualReviewInterface {
 
     async showWelcomeMessage() {
         const stats = this.suggestionsReport.summary;
-        
+
         console.log('🎯 ================================');
         console.log('   手动审查界面系统');
         console.log('🎯 ================================\n');
-        
+
         console.log('📊 审查统计:');
         console.log(`   • 待审查文件: ${this.reviewSession.totalFiles} 个`);
         console.log(`   • 中置信度: ${stats.mediumConfidence} 个`);
         console.log(`   • 低置信度: ${stats.lowConfidence} 个`);
         console.log(`   • 冲突文件: ${stats.conflicts} 个\n`);
-        
+
         console.log('📋 操作指南:');
         console.log('   • [A]pprove - 接受建议');
         console.log('   • [M]odify - 修改建议');
@@ -154,14 +154,14 @@ class ManualReviewInterface {
         console.log('   • [S]kip - 跳过此文件');
         console.log('   • [V]iew - 查看文件内容');
         console.log('   • [Q]uit - 退出审查\n');
-        
+
         await this.waitForEnter('按 Enter 开始审查...');
     }
 
     async reviewFile(file) {
         // 显示文件信息
         await this.displayFileInfo(file);
-        
+
         while (true) {
             const choice = await this.promptChoice(
                 `\n🤔 如何处理 ${file.originalName}?`,
@@ -193,7 +193,7 @@ class ManualReviewInterface {
     async displayFileInfo(file) {
         const priorityIcon = this.getPriorityIcon(file.priority);
         const confidenceBar = this.getConfidenceBar(file.confidence || 0);
-        
+
         console.log(`📁 文件信息:`);
         console.log(`   原始名称: ${file.originalName}`);
         console.log(`   建议名称: ${file.suggestedName || 'N/A'}`);
@@ -201,7 +201,7 @@ class ManualReviewInterface {
         console.log(`   文件类型: ${file.category || 'unknown'}`);
         console.log(`   优先级: ${priorityIcon} ${file.priority} - ${file.reason}`);
         console.log(`   置信度: ${confidenceBar} ${((file.confidence || 0) * 100).toFixed(0)}%`);
-        
+
         if (file.reasoning) {
             console.log(`   推理依据: ${file.reasoning.join(', ')}`);
         }
@@ -226,16 +226,16 @@ class ManualReviewInterface {
     async viewFileContent(file) {
         console.log(`\n📖 查看文件内容: ${file.originalName}`);
         console.log('─'.repeat(60));
-        
+
         try {
             const filePath = file.originalPath || path.join(this.classifiedDir, 'manual-review', file.originalName);
             const content = fs.readFileSync(filePath, 'utf8');
             const lines = content.split('\n');
-            
+
             // 显示前30行，突出显示关键信息
             const preview = lines.slice(0, 30).map((line, i) => {
                 const lineNum = (i + 1).toString().padStart(3, ' ');
-                
+
                 // 突出显示关键模式
                 let displayLine = line;
                 if (line.match(/export|import|function|const|class/)) {
@@ -243,27 +243,27 @@ class ManualReviewInterface {
                 } else if (line.match(/\/\*|\/\/|#/)) {
                     displayLine = `💬 ${line}`;
                 }
-                
+
                 return `${lineNum}: ${displayLine}`;
             }).join('\n');
-            
+
             console.log(preview);
-            
+
             if (lines.length > 30) {
                 console.log(`\n... (${lines.length - 30} 行更多内容)`);
             }
-            
+
         } catch (error) {
             console.log(`❌ 无法读取文件: ${error.message}`);
         }
-        
+
         console.log('─'.repeat(60));
         await this.waitForEnter('按 Enter 继续...');
     }
 
     async approveFile(file) {
         console.log(`✅ 接受建议: ${file.originalName} → ${file.suggestedPath}`);
-        
+
         return {
             action: 'approve',
             originalName: file.originalName,
@@ -276,18 +276,18 @@ class ManualReviewInterface {
 
     async modifyFile(file) {
         console.log(`✏️  修改建议: ${file.originalName}`);
-        
+
         // 获取新的文件名
         const newName = await this.promptInput(`请输入新的文件名 (当前: ${file.suggestedName}):`);
-        
+
         // 获取新的路径（可选）
         const newPath = await this.promptInput(`请输入新的路径 (当前: ${file.suggestedPath}, 留空使用默认):`);
-        
+
         const finalName = newName.trim() || file.suggestedName;
         const finalPath = newPath.trim() || `${file.category}/${finalName}`;
-        
+
         console.log(`✏️  修改完成: ${file.originalName} → ${finalPath}`);
-        
+
         return {
             action: 'modify',
             originalName: file.originalName,
@@ -300,9 +300,9 @@ class ManualReviewInterface {
 
     async rejectFile(file) {
         console.log(`❌ 拒绝建议: ${file.originalName}`);
-        
+
         const reason = await this.promptInput('请输入拒绝原因 (可选):');
-        
+
         return {
             action: 'reject',
             originalName: file.originalName,
@@ -332,11 +332,11 @@ class ManualReviewInterface {
 
     async completeReview() {
         console.log('\n🎉 审查会话完成！');
-        
+
         // 计算统计信息
         const stats = {
-            totalReviewed: this.reviewResults.approved.length + 
-                         this.reviewResults.modified.length + 
+            totalReviewed: this.reviewResults.approved.length +
+                         this.reviewResults.modified.length +
                          this.reviewResults.rejected.length,
             approved: this.reviewResults.approved.length,
             modified: this.reviewResults.modified.length,
@@ -357,7 +357,7 @@ class ManualReviewInterface {
 
         // 生成审查报告
         await this.generateReviewReport();
-        
+
         // 生成执行脚本
         await this.generateReviewExecutionScript();
 
@@ -391,7 +391,7 @@ class ManualReviewInterface {
 
     async generateHumanReadableReviewReport(report) {
         let output = '# 📋 手动审查结果报告\n\n';
-        
+
         output += `**审查时间**: ${report.sessionInfo.startTime.toLocaleString()} - ${report.sessionInfo.endTime.toLocaleString()}\n`;
         output += `**审查耗时**: ${Math.round(report.statistics.sessionDuration / 1000)} 秒\n\n`;
 
@@ -443,7 +443,7 @@ class ManualReviewInterface {
         let script = '#!/bin/bash\n\n';
         script += '# 应用手动审查结果的执行脚本\n';
         script += '# 基于用户审查决定执行文件重命名\n\n';
-        
+
         script += 'echo "🚀 应用手动审查结果..."\n\n';
 
         // 应用接受的建议
@@ -525,7 +525,7 @@ class ManualReviewInterface {
     async promptChoice(question, choices, defaultChoice = '') {
         const choiceList = choices.map(c => `[${c}]`).join('');
         const prompt = `${question} (${choiceList}${defaultChoice ? `, 默认: ${defaultChoice}` : ''}): `;
-        
+
         return new Promise((resolve) => {
             this.rl.question(prompt, (answer) => {
                 resolve(answer.trim() || defaultChoice);
@@ -553,7 +553,7 @@ class ManualReviewInterface {
         const percentage = (current / total);
         const filled = Math.round(width * percentage);
         const empty = width - filled;
-        
+
         return `[${'█'.repeat(filled)}${' '.repeat(empty)}] ${(percentage * 100).toFixed(1)}%`;
     }
 
@@ -589,9 +589,9 @@ async function main() {
 
         console.log('📋 初始化手动审查界面...');
         const reviewInterface = new ManualReviewInterface(classifiedDir, suggestionsReportPath);
-        
+
         await reviewInterface.startReview();
-        
+
     } catch (error) {
         console.error('❌ 手动审查过程失败:', error.message);
         process.exit(1);
@@ -643,7 +643,7 @@ module.exports = ManualReviewInterface;
 ```javascript
 // 将按以下优先级审查您的31个文件：
 1. 中置信度文件 (如果有)
-2. 低置信度但文件较大的 (可能包含重要业务逻辑)  
+2. 低置信度但文件较大的 (可能包含重要业务逻辑)
 3. 有备选建议的文件
 4. 冲突文件
 5. 完全未知的文件
@@ -657,7 +657,7 @@ module.exports = ManualReviewInterface;
 📁 文件信息:
    原始名称: misc-1qd4.js
    建议名称: sampleData.js
-   建议路径: unknown/sampleData.js  
+   建议路径: unknown/sampleData.js
    文件类型: unknown
    优先级: 📝 low - Low confidence
    置信度: [░░░░░░░░░░] 0%
@@ -679,7 +679,7 @@ node manual-review-interface.js
 ## 🎯 **预期审查体验**：
 
 1. **欢迎界面** - 显示31个待审查文件的统计
-2. **逐文件审查** - 每个文件显示详细信息和代码预览  
+2. **逐文件审查** - 每个文件显示详细信息和代码预览
 3. **智能建议** - 基于内容分析的文件名建议
 4. **灵活操作** - 可以接受、修改、拒绝或跳过任何文件
 5. **实时统计** - 显示审查进度和已处理文件数
@@ -688,7 +688,7 @@ node manual-review-interface.js
 ### 🏆 **这个界面的专业优势**：
 
 - **用户体验优化** - 清晰的界面，直观的操作
-- **效率最大化** - 智能排序，优先处理重要文件  
+- **效率最大化** - 智能排序，优先处理重要文件
 - **风险控制** - 可以预览内容，避免误判
 - **完整记录** - 所有决策都被记录和可追溯
 - **自动化执行** - 生成可执行脚本，一键应用审查结果
@@ -708,7 +708,7 @@ node manual-review-interface.js
 预估审查时间: 15-20分钟 (平均每个文件30-40秒)
 预期结果:
 - 📁 10-15个文件 将被正确重命名
-- 📝 8-12个文件 需要进一步处理  
+- 📝 8-12个文件 需要进一步处理
 - ❌ 3-5个文件 可能被标记为无用
 - ⏸️ 3-5个文件 延后到后续批次
 ```
@@ -737,7 +737,7 @@ node manual-review-interface.js
 - 可能是关键组件的文件
 - 有特殊依赖关系的文件
 
-**准备好开始审查那31个神秘的低置信度文件了吗？** 
+**准备好开始审查那31个神秘的低置信度文件了吗？**
 
 这个交互式界面将帮助您高效地处理它们，确保没有重要的业务逻辑被遗漏！运行后，您将在15-20分钟内完成所有文件的审查，并获得一个可执行的脚本来应用您的决策。
 

@@ -10,7 +10,7 @@ function optimizeClickEvents() {
       setTimeout(() => {
         target.style.transform = '';
       }, 150);
-      
+
       // 记录有效点击
       if (typeof gtag !== 'undefined') {
         gtag('event', 'click', {
@@ -20,18 +20,18 @@ function optimizeClickEvents() {
       }
     }
   });
-  
+
   // 防止重复点击
   const clickableElements = document.querySelectorAll('.clickable, .btn, a');
   clickableElements.forEach(element => {
     let isProcessing = false;
-    
+
     element.addEventListener('click', function(e) {
       if (isProcessing) {
         e.preventDefault();
         return;
       }
-      
+
       isProcessing = true;
       setTimeout(() => {
         isProcessing = false;
@@ -54,14 +54,14 @@ function hideLoadingState(element, originalText) {
 // 错误处理
 function handleClickError(element, error) {
   console.error('点击事件错误:', error);
-  
+
   // 显示错误提示
   const errorDiv = document.createElement('div');
   errorDiv.className = 'error-message';
   errorDiv.textContent = '操作失败，请重试';
-  
+
   element.parentNode.insertBefore(errorDiv, element.nextSibling);
-  
+
   setTimeout(() => {
     errorDiv.remove();
   }, 3000);
@@ -71,4 +71,3 @@ function handleClickError(element, error) {
 document.addEventListener('DOMContentLoaded', function() {
   optimizeClickEvents();
 });
-      

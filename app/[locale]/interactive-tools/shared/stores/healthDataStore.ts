@@ -46,31 +46,31 @@ export interface UserPreferences {
 export interface HealthDataState {
   // 疼痛追踪数据
   painEntries: PainEntry[];
-  
+
   // 体质测试结果
   constitutionResults: ConstitutionResult[];
-  
+
   // 用户偏好
   preferences: UserPreferences;
-  
+
   // 数据状态
   isLoading: boolean;
   lastSyncTime: string | null;
-  
+
   // Actions
   addPainEntry: (entry: Omit<PainEntry, 'id' | 'timestamp'>) => void;
   updatePainEntry: (id: string, updates: Partial<PainEntry>) => void;
   deletePainEntry: (id: string) => void;
-  
+
   addConstitutionResult: (result: Omit<ConstitutionResult, 'id' | 'timestamp'>) => void;
-  
+
   updatePreferences: (preferences: Partial<UserPreferences>) => void;
-  
+
   // 数据分析方法
   getPainTrends: () => any;
   getAveragePainLevel: () => number;
   getMostCommonSymptoms: () => string[];
-  
+
   // 数据管理
   exportData: () => string;
   importData: (data: string) => boolean;
@@ -113,7 +113,7 @@ export const useHealthDataStore = create<HealthDataState>()(
           id: generateId(),
           timestamp: new Date().toISOString(),
         };
-        
+
         set((state) => ({
           painEntries: [...state.painEntries, newEntry],
           lastSyncTime: new Date().toISOString(),
@@ -143,7 +143,7 @@ export const useHealthDataStore = create<HealthDataState>()(
           id: generateId(),
           timestamp: new Date().toISOString(),
         };
-        
+
         set((state) => ({
           constitutionResults: [...state.constitutionResults, newResult],
           lastSyncTime: new Date().toISOString(),
@@ -175,7 +175,7 @@ export const useHealthDataStore = create<HealthDataState>()(
       getAveragePainLevel: () => {
         const { painEntries } = get();
         if (painEntries.length === 0) return 0;
-        
+
         const total = painEntries.reduce((sum, entry) => sum + entry.painLevel, 0);
         return Math.round((total / painEntries.length) * 10) / 10;
       },
@@ -183,13 +183,13 @@ export const useHealthDataStore = create<HealthDataState>()(
       getMostCommonSymptoms: () => {
         const { painEntries } = get();
         const symptomCounts: Record<string, number> = {};
-        
+
         painEntries.forEach((entry) => {
           entry.symptoms.forEach((symptom) => {
             symptomCounts[symptom] = (symptomCounts[symptom] || 0) + 1;
           });
         });
-        
+
         return Object.entries(symptomCounts)
           .sort(([, a], [, b]) => b - a)
           .slice(0, 5)

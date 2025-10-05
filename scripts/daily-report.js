@@ -17,25 +17,25 @@ class DailyReportGenerator {
 
   async generate() {
     console.log(`\n📊 生成每日报告 - ${this.reportDate}`);
-    
+
     try {
       // 1. 收集监控数据
       const monitoringData = await this.collectMonitoringData();
-      
+
       // 2. 分析趋势
       const trends = this.analyzeTrends(monitoringData);
-      
+
       // 3. 生成报告
       const report = this.generateReport(monitoringData, trends);
-      
+
       // 4. 保存报告
       await this.saveReport(report);
-      
+
       // 5. 发送通知
       await this.sendNotifications(report);
-      
+
       console.log('✅ 每日报告生成完成');
-      
+
     } catch (error) {
       console.error(`❌ 报告生成失败: ${error.message}`);
       process.exit(1);
@@ -44,7 +44,7 @@ class DailyReportGenerator {
 
   async collectMonitoringData() {
     console.log('📈 收集监控数据...');
-    
+
     const data = {
       seo: {
         indexRate: 0.482,
@@ -71,37 +71,37 @@ class DailyReportGenerator {
         resolved: 0
       }
     };
-    
+
     // 尝试读取实际的监控数据文件
     try {
       const seoFiles = fs.readdirSync(this.monitoringDir)
         .filter(file => file.startsWith('seo-monitor-') && file.endsWith('.json'));
-      
+
       if (seoFiles.length > 0) {
         const latestSeoFile = seoFiles.sort().pop();
         const seoData = JSON.parse(fs.readFileSync(path.join(this.monitoringDir, latestSeoFile), 'utf8'));
         data.seo = { ...data.seo, ...seoData.results };
       }
-      
+
       const perfFiles = fs.readdirSync(this.monitoringDir)
         .filter(file => file.startsWith('performance-monitor-') && file.endsWith('.json'));
-      
+
       if (perfFiles.length > 0) {
         const latestPerfFile = perfFiles.sort().pop();
         const perfData = JSON.parse(fs.readFileSync(path.join(this.monitoringDir, latestPerfFile), 'utf8'));
         data.performance = { ...data.performance, ...perfData.results };
       }
-      
+
     } catch (error) {
       console.log('⚠️  使用模拟数据（监控文件未找到）');
     }
-    
+
     return data;
   }
 
   analyzeTrends(data) {
     console.log('📈 分析趋势...');
-    
+
     const trends = {
       seo: {
         indexRate: { direction: 'stable', change: 0 },
@@ -117,14 +117,14 @@ class DailyReportGenerator {
         responseTime: { direction: 'stable', change: 0 }
       }
     };
-    
+
     // 这里应该比较历史数据，目前使用模拟数据
     return trends;
   }
 
   generateReport(data, trends) {
     console.log('📝 生成报告...');
-    
+
     const report = {
       date: this.reportDate,
       timestamp: new Date().toISOString(),
@@ -138,14 +138,14 @@ class DailyReportGenerator {
       recommendations: this.generateRecommendations(data, trends),
       nextActions: this.generateNextActions(data, trends)
     };
-    
+
     return report;
   }
 
   generateSummary(data, trends) {
     const issues = [];
     const improvements = [];
-    
+
     // SEO问题
     if (data.seo.duplicatePages > 10) {
       issues.push(`发现 ${data.seo.duplicatePages} 个重复页面`);
@@ -156,7 +156,7 @@ class DailyReportGenerator {
     if (data.seo.indexRate < 0.5) {
       issues.push(`索引率偏低: ${(data.seo.indexRate * 100).toFixed(1)}%`);
     }
-    
+
     // 性能问题
     if (data.performance.lcp > 4000) {
       issues.push(`LCP性能差: ${data.performance.lcp}ms`);
@@ -164,12 +164,12 @@ class DailyReportGenerator {
     if (data.performance.mobileScore < 50) {
       issues.push(`移动端性能差: ${data.performance.mobileScore}/100`);
     }
-    
+
     // 系统问题
     if (data.system.errorRate > 0.05) {
       issues.push(`错误率偏高: ${(data.system.errorRate * 100).toFixed(2)}%`);
     }
-    
+
     return {
       status: issues.length > 0 ? 'needs_attention' : 'healthy',
       totalIssues: issues.length,
@@ -260,7 +260,7 @@ class DailyReportGenerator {
 
   generateRecommendations(data, trends) {
     const recommendations = [];
-    
+
     // SEO建议
     if (data.seo.duplicatePages > 10) {
       recommendations.push({
@@ -272,7 +272,7 @@ class DailyReportGenerator {
         effort: '2-3天'
       });
     }
-    
+
     if (data.seo.canonicalErrors > 20) {
       recommendations.push({
         priority: 'P0',
@@ -283,7 +283,7 @@ class DailyReportGenerator {
         effort: '1-2天'
       });
     }
-    
+
     // 性能建议
     if (data.performance.lcp > 4000) {
       recommendations.push({
@@ -295,7 +295,7 @@ class DailyReportGenerator {
         effort: '1-2周'
       });
     }
-    
+
     if (data.performance.mobileScore < 50) {
       recommendations.push({
         priority: 'P1',
@@ -306,50 +306,50 @@ class DailyReportGenerator {
         effort: '2-4周'
       });
     }
-    
+
     return recommendations;
   }
 
   generateNextActions(data, trends) {
     const actions = [];
-    
+
     // 基于当前问题生成下一步行动
     if (data.seo.duplicatePages > 10) {
       actions.push('立即开始修复重复页面问题');
     }
-    
+
     if (data.seo.canonicalErrors > 20) {
       actions.push('优先修复Canonical标签错误');
     }
-    
+
     if (data.performance.lcp > 4000) {
       actions.push('启动LCP性能优化项目');
     }
-    
+
     if (data.performance.mobileScore < 50) {
       actions.push('制定移动端性能优化计划');
     }
-    
+
     return actions;
   }
 
   async saveReport(report) {
     console.log('💾 保存报告...');
-    
+
     // 确保报告目录存在
     if (!fs.existsSync(this.reportDir)) {
       fs.mkdirSync(this.reportDir, { recursive: true });
     }
-    
+
     // 保存JSON格式
     const jsonFile = path.join(this.reportDir, `daily-report-${this.reportDate}.json`);
     fs.writeFileSync(jsonFile, JSON.stringify(report, null, 2));
-    
+
     // 保存Markdown格式
     const mdFile = path.join(this.reportDir, `daily-report-${this.reportDate}.md`);
     const markdown = this.generateMarkdownReport(report);
     fs.writeFileSync(mdFile, markdown);
-    
+
     console.log(`📄 报告已保存: ${jsonFile}`);
     console.log(`📄 报告已保存: ${mdFile}`);
   }
@@ -411,14 +411,14 @@ ${report.nextActions.map((action, index) => `${index + 1}. ${action}`).join('\n'
 
   async sendNotifications(report) {
     console.log('📧 发送通知...');
-    
+
     // 这里应该实现实际的通知发送逻辑
     // 例如：发送邮件、Slack消息等
-    
+
     if (report.summary.status === 'needs_attention') {
       console.log('🚨 发送告警通知');
     }
-    
+
     console.log('✅ 通知发送完成');
   }
 }

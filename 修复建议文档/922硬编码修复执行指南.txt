@@ -98,7 +98,7 @@ node scripts/pilot-validator.js
 # 如果试点成功 (成功率 >= 90%)
 📊 修复摘要:
   总文件数: 2
-  成功修复: 2  
+  成功修复: 2
   总更改数: 12
   成功率: 100.0%
 
@@ -112,7 +112,7 @@ npm run dev
 
 # 访问修复的页面，检查：
 # 1. 页面正常加载
-# 2. 链接正确工作  
+# 2. 链接正确工作
 # 3. SEO元数据完整
 # 4. 控制台无错误
 ```
@@ -153,7 +153,7 @@ FILES3="app/[locale]/scenario-solutions/page.tsx,app/[locale]/terms-of-service/p
 # 分批执行
 node scripts/hardcode-tools.js --fix --files="$FILES1"
 # 测试 -> 确认无误后继续
-node scripts/hardcode-tools.js --fix --files="$FILES2"  
+node scripts/hardcode-tools.js --fix --files="$FILES2"
 # 测试 -> 确认无误后继续
 node scripts/hardcode-tools.js --fix --files="$FILES3"
 ```
@@ -275,7 +275,7 @@ cat pilot-validation-report.json
 - ✅ 硬编码检测报告生成
 - ✅ 环境变量配置完成
 
-### Phase 1 成功标准  
+### Phase 1 成功标准
 - ✅ 试点文件修复成功率 >= 90%
 - ✅ 页面功能正常
 - ✅ SEO元数据完整
@@ -331,7 +331,7 @@ cat pilot-validation-report.json
 
 ---
 
-🎯 **准备开始了吗？** 
+🎯 **准备开始了吗？**
 
 按照这个指南，你可以安全、高效地完成硬编码修复工作！
 
@@ -351,7 +351,7 @@ cat pilot-validation-report.json
 - **完整备份**：自动创建时间戳备份，支持一键回滚
 - **小批量试点**：2-3个文件先验证，确认无误后再批量处理
 
-### ✅ **效率优化**  
+### ✅ **效率优化**
 - **并行处理**：批量处理文件，显著提高处理速度
 - **进度显示**：实时进度条，清楚了解执行状态
 - **智能检测**：优化的检测算法，避免脚本卡死
@@ -370,7 +370,7 @@ mkdir -p scripts
 
 # 2. 保存三个核心脚本：
 # scripts/setup-environment.sh      (环境准备)
-# scripts/hardcode-tools.js         (检测修复)  
+# scripts/hardcode-tools.js         (检测修复)
 # scripts/pilot-validator.js        (试点验证)
 
 # 3. 添加执行权限
@@ -420,7 +420,7 @@ node scripts/pilot-validator.js
 
 你的**95%采纳度**评价很客观，特别是识别出的关键问题：
 - 🔴 **端口冲突**：确实需要先解决这个阻塞问题
-- 🟡 **脚本性能**：检测脚本卡住会严重影响效率  
+- 🟡 **脚本性能**：检测脚本卡住会严重影响效率
 - 🟡 **环境准备**：基础环境必须稳定才能开始后续工作
 
 ## 🚀 立即执行优化方案
@@ -463,14 +463,14 @@ node scripts/optimized-quick-fix.js --detect
 平均每文件: 3.35 个
 
 🎯 优先级分布:
-  🔴 高优先级: 89 个  
+  🔴 高优先级: 89 个
   🟡 中优先级: 52 个
   🟢 低优先级: 20 个
 
 🔴 需要优先处理的文件:
 1. app/[locale]/page.tsx
    总计: 18 个 | 高优先级: 16 个 | 优先级: 🔴 高
-2. app/[locale]/page-original.tsx  
+2. app/[locale]/page-original.tsx
    总计: 18 个 | 高优先级: 16 个 | 优先级: 🔴 高
 ```
 
@@ -486,7 +486,7 @@ node scripts/optimized-quick-fix.js
 
 ## ⚡ 相比原方案的核心优化
 
-### 1. **性能提升** 
+### 1. **性能提升**
 - 🚀 **检测速度** : 原来可能卡死 → 现在并发处理+进度显示
 - 🚀 **内存优化** : 批处理机制，避免内存溢出
 - 🚀 **CPU友好** : 限制并发数，小延迟防止过度占用
@@ -500,7 +500,7 @@ node scripts/optimized-quick-fix.js
 ```bash
 # 自动支持多环境
 NEXT_PUBLIC_BASE_URL=https://www.periodhub.health       # 生产
-NEXT_PUBLIC_BASE_URL_DEV=http://localhost:3001          # 开发  
+NEXT_PUBLIC_BASE_URL_DEV=http://localhost:3001          # 开发
 NEXT_PUBLIC_BASE_URL_STAGING=https://staging.periodhub.health # 测试
 ```
 
@@ -558,30 +558,30 @@ class EnhancedProgressBar {
     update(current = null, fileName = '', status = 'processing') {
         if (current !== null) this.current = current;
         else this.current++;
-        
+
         if (status === 'success') this.successes++;
         if (status === 'error') this.errors++;
-        
+
         const percentage = Math.round((this.current / this.total) * 100);
         const elapsed = (Date.now() - this.startTime) / 1000;
         const eta = this.current > 0 ? ((elapsed / this.current) * (this.total - this.current)) : 0;
-        
+
         // 彩色进度条
         const completed = Math.round(percentage / 2);
         const bar = '█'.repeat(completed) + '░'.repeat(50 - completed);
-        
+
         // 状态图标
         const statusIcon = status === 'success' ? '✅' : status === 'error' ? '❌' : '🔄';
-        
+
         const line = `\r${statusIcon} ${this.description}: [${bar}] ${percentage}% (${this.current}/${this.total}) | ✅${this.successes} ❌${this.errors} | ETA: ${Math.round(eta)}s`;
         process.stdout.write(line);
-        
+
         if (fileName && this.current <= this.total) {
             const shortName = fileName.length > 40 ? '...' + fileName.slice(-37) : fileName;
             process.stdout.write(`\n  📁 ${shortName}`);
             process.stdout.write(`\r${line}`);
         }
-        
+
         if (this.current >= this.total) {
             console.log(`\n🎉 ${this.description}完成! 用时: ${Math.round(elapsed)}秒`);
             console.log(`📊 结果: ✅ ${this.successes} 成功, ❌ ${this.errors} 失败\n`);
@@ -606,9 +606,9 @@ class ErrorHandler {
             filePath,
             stack: error.stack
         };
-        
+
         this.errors.push(errorInfo);
-        
+
         console.error(`❌ ${context}: ${error.message}`);
         if (filePath) {
             console.error(`   📁 文件: ${filePath}`);
@@ -622,7 +622,7 @@ class ErrorHandler {
             message,
             filePath
         };
-        
+
         this.warnings.push(warningInfo);
         console.warn(`⚠️ ${context}: ${message}`);
     }
@@ -638,7 +638,7 @@ class ErrorHandler {
                 errors: this.errors,
                 warnings: this.warnings
             };
-            
+
             await fs.writeFile('hardcode-fix-error-log.json', JSON.stringify(logData, null, 2));
             console.log(`📄 错误日志已保存到: hardcode-fix-error-log.json`);
         }
@@ -672,17 +672,17 @@ class URLValidator {
     validateUrl(url) {
         try {
             const urlObj = new URL(url);
-            
+
             // 基础格式检查
             if (!urlObj.protocol.startsWith('http')) {
                 return { valid: false, message: '协议必须是HTTP或HTTPS' };
             }
-            
+
             // 域名检查
             if (!urlObj.hostname) {
                 return { valid: false, message: '缺少有效的域名' };
             }
-            
+
             return { valid: true, message: 'URL格式正确' };
         } catch (error) {
             return { valid: false, message: `URL格式错误: ${error.message}` };
@@ -691,17 +691,17 @@ class URLValidator {
 
     generateEnvironmentUrls(locale, path) {
         const results = {};
-        
+
         Object.entries(this.environments).forEach(([env, baseUrl]) => {
             const cleanPath = path.startsWith('/') ? path.slice(1) : path;
             const url = `${baseUrl}/${locale}/${cleanPath}`;
-            
+
             results[env] = {
                 url,
                 validation: this.validateUrl(url)
             };
         });
-        
+
         return results;
     }
 
@@ -730,12 +730,12 @@ class OptimizedHardcodeDetector {
             { name: '双引号URL', regex: /"https:\/\/www\.periodhub\.health[^"]*"/g, priority: 'medium' },
             { name: '短域名', regex: /https:\/\/periodhub\.health/g, priority: 'low' }
         ];
-        
+
         this.excludePatterns = [
-            /node_modules/, /\.git/, /dist/, /build/, /\.next/, 
+            /node_modules/, /\.git/, /dist/, /build/, /\.next/,
             /backups/, /scripts/, /coverage/, /\.cache/
         ];
-        
+
         this.batchSize = 10; // 优化批处理大小
         this.maxConcurrency = 5; // 限制并发数
     }
@@ -743,35 +743,35 @@ class OptimizedHardcodeDetector {
     async getAllFiles(dir, extensions = ['.tsx', '.ts', '.js', '.jsx']) {
         const files = [];
         const maxDepth = 10; // 限制扫描深度，防止无限递归
-        
+
         const scanDirectory = async (currentDir, depth = 0) => {
             if (depth > maxDepth) return;
-            
+
             try {
                 const entries = await fs.readdir(currentDir, { withFileTypes: true });
-                
+
                 const promises = entries.map(async (entry) => {
                     const fullPath = path.join(currentDir, entry.name);
-                    
+
                     // 跳过排除的目录
                     if (this.excludePatterns.some(pattern => pattern.test(fullPath))) {
                         return;
                     }
-                    
+
                     if (entry.isDirectory()) {
                         await scanDirectory(fullPath, depth + 1);
                     } else if (extensions.some(ext => entry.name.endsWith(ext))) {
                         files.push(fullPath);
                     }
                 });
-                
+
                 // 控制并发数
                 await this.limitConcurrency(promises, this.maxConcurrency);
             } catch (error) {
                 console.error(`扫描目录错误 ${currentDir}:`, error.message);
             }
         };
-        
+
         await scanDirectory(dir);
         return files;
     }
@@ -787,21 +787,21 @@ class OptimizedHardcodeDetector {
         try {
             const content = await fs.readFile(filePath, 'utf8');
             const fileResults = [];
-            
+
             // 预检查：如果文件不包含域名，跳过详细检查
             if (!content.includes('periodhub.health')) {
                 return fileResults;
             }
-            
+
             this.patterns.forEach((patternInfo, patternIndex) => {
                 let match;
                 const regex = new RegExp(patternInfo.regex.source, patternInfo.regex.flags);
-                
+
                 while ((match = regex.exec(content)) !== null) {
                     const lines = content.substring(0, match.index).split('\n');
                     const lineNumber = lines.length;
                     const lineContent = content.split('\n')[lineNumber - 1];
-                    
+
                     fileResults.push({
                         file: filePath,
                         line: lineNumber,
@@ -813,7 +813,7 @@ class OptimizedHardcodeDetector {
                     });
                 }
             });
-            
+
             return fileResults;
         } catch (error) {
             errorHandler.logError('文件检测失败', error, filePath);
@@ -824,24 +824,24 @@ class OptimizedHardcodeDetector {
     async detectAllOptimized(directory = '.') {
         console.log('🔍 开始优化版硬编码检测...\n');
         const errorHandler = new ErrorHandler();
-        
+
         // 获取所有文件
         const files = await this.getAllFiles(directory);
         if (files.length === 0) {
             console.log('❌ 没有找到需要检测的文件');
             return { results: [], grouped: {}, summary: {} };
         }
-        
+
         console.log(`📁 找到 ${files.length} 个文件需要检测\n`);
-        
+
         // 创建进度条
         const progressBar = new EnhancedProgressBar(files.length, '检测硬编码');
-        
+
         // 优化的批量处理
         const results = [];
         for (let i = 0; i < files.length; i += this.batchSize) {
             const batch = files.slice(i, i + this.batchSize);
-            
+
             const batchPromises = batch.map(async (file) => {
                 try {
                     const result = await this.detectInFile(file, errorHandler);
@@ -853,23 +853,23 @@ class OptimizedHardcodeDetector {
                     return [];
                 }
             });
-            
+
             const batchResults = await Promise.all(batchPromises);
             results.push(...batchResults.flat());
-            
+
             // 小延迟，避免过度占用CPU
             if (i + this.batchSize < files.length) {
                 await new Promise(resolve => setTimeout(resolve, 10));
             }
         }
-        
+
         // 按文件分组统计
         const grouped = this.groupResultsByFile(results);
         const summary = this.generateSummary(results, grouped);
-        
+
         // 保存错误日志
         await errorHandler.saveErrorLog();
-        
+
         return { results, grouped, summary, errors: errorHandler.getSummary() };
     }
 
@@ -881,18 +881,18 @@ class OptimizedHardcodeDetector {
             }
             grouped[result.file].push(result);
         });
-        
+
         // 按优先级和数量排序
         return Object.entries(grouped)
             .sort(([,a], [,b]) => {
                 // 先按高优先级项目数量排序
                 const aHighPriority = a.filter(r => r.priority === 'high').length;
                 const bHighPriority = b.filter(r => r.priority === 'high').length;
-                
+
                 if (aHighPriority !== bHighPriority) {
                     return bHighPriority - aHighPriority;
                 }
-                
+
                 // 再按总数量排序
                 return b.length - a.length;
             })
@@ -905,21 +905,21 @@ class OptimizedHardcodeDetector {
     generateSummary(results, grouped) {
         const totalMatches = results.length;
         const totalFiles = Object.keys(grouped).length;
-        
+
         // 按优先级统计
         const priorityStats = {
             high: results.filter(r => r.priority === 'high').length,
             medium: results.filter(r => r.priority === 'medium').length,
             low: results.filter(r => r.priority === 'low').length
         };
-        
+
         // 按模式统计
         const patternStats = {};
         results.forEach(result => {
             const pattern = result.patternName;
             patternStats[pattern] = (patternStats[pattern] || 0) + 1;
         });
-        
+
         return {
             totalMatches,
             totalFiles,
@@ -937,7 +937,7 @@ class SmartBatchFixer {
     constructor() {
         this.backupDir = `backups/smart_fix_${Date.now()}`;
         this.errorHandler = new ErrorHandler();
-        
+
         // 增强的修复模式
         this.fixPatterns = [
             {
@@ -971,10 +971,10 @@ class SmartBatchFixer {
         try {
             const backupPath = path.join(this.backupDir, filePath);
             const backupDirPath = path.dirname(backupPath);
-            
+
             await fs.mkdir(backupDirPath, { recursive: true });
             await fs.copyFile(filePath, backupPath);
-            
+
             return { success: true, backupPath };
         } catch (error) {
             this.errorHandler.logError('备份失败', error, filePath);
@@ -1022,7 +1022,7 @@ class SmartBatchFixer {
             for (const pattern of this.fixPatterns) {
                 const beforeContent = content;
                 content = content.replace(pattern.search, pattern.replace);
-                
+
                 if (beforeContent !== content) {
                     const matches = (beforeContent.match(pattern.search) || []).length;
                     totalChanges += matches;
@@ -1067,28 +1067,28 @@ class SmartBatchFixer {
 
     async batchFix(files, options = {}) {
         const { dryRun = false, batchSize = 5, maxRetries = 2 } = options;
-        
+
         console.log(`\n🔧 ${dryRun ? '模拟' : '开始'}智能批量修复...`);
         console.log(`处理文件数: ${files.length}`);
         console.log(`批处理大小: ${batchSize}`);
-        
+
         if (!dryRun) {
             await fs.mkdir(this.backupDir, { recursive: true });
             console.log(`📁 备份目录: ${this.backupDir}`);
         }
-        
+
         const progressBar = new EnhancedProgressBar(files.length, '修复进度');
         const results = [];
-        
+
         // 分批处理文件
         for (let i = 0; i < files.length; i += batchSize) {
             const batch = files.slice(i, i + batchSize);
-            
+
             const batchResults = await Promise.all(
                 batch.map(async (file) => {
                     let attempts = 0;
                     let lastError = null;
-                    
+
                     // 重试机制
                     while (attempts <= maxRetries) {
                         try {
@@ -1099,32 +1099,32 @@ class SmartBatchFixer {
                         } catch (error) {
                             lastError = error;
                             attempts++;
-                            
+
                             if (attempts <= maxRetries) {
                                 console.log(`⚠️ 重试 ${file} (第${attempts}次)`);
                                 await new Promise(resolve => setTimeout(resolve, 1000));
                             }
                         }
                     }
-                    
+
                     // 所有重试都失败了
                     this.errorHandler.logError('文件处理最终失败', lastError, file);
                     progressBar.update(null, file, 'error');
                     return { file, success: false, error: lastError.message, changes: 0 };
                 })
             );
-            
+
             results.push(...batchResults);
-            
+
             // 批次间小延迟
             if (i + batchSize < files.length) {
                 await new Promise(resolve => setTimeout(resolve, 100));
             }
         }
-        
+
         // 保存错误日志
         await this.errorHandler.saveErrorLog();
-        
+
         return {
             results,
             summary: this.generateFixSummary(results),
@@ -1137,7 +1137,7 @@ class SmartBatchFixer {
         const successfulFixes = results.filter(r => r.success).length;
         const totalChanges = results.reduce((sum, r) => sum + (r.changes || 0), 0);
         const failedFixes = results.filter(r => !r.success);
-        
+
         return {
             totalFiles,
             successfulFixes,
@@ -1162,17 +1162,17 @@ class OptimizedHardcodeFixer {
 
     async setupEnvironment() {
         console.log('🔧 环境设置与检查...\n');
-        
+
         try {
             // 1. 检查端口冲突
             await this.checkAndFixPortConflict();
-            
+
             // 2. 创建环境变量文件
             await this.setupEnvironmentVariables();
-            
+
             // 3. 验证开发环境
             await this.verifyDevelopmentEnvironment();
-            
+
             console.log('✅ 环境设置完成!\n');
             return true;
         } catch (error) {
@@ -1183,9 +1183,9 @@ class OptimizedHardcodeFixer {
 
     async checkAndFixPortConflict() {
         console.log('🔍 检查端口冲突...');
-        
+
         const ports = [3001, 3002, 3003];
-        
+
         for (const port of ports) {
             try {
                 const { stdout } = await execAsync(`lsof -ti:${port}`, { timeout: 5000 });
@@ -1209,9 +1209,9 @@ class OptimizedHardcodeFixer {
 
     async setupEnvironmentVariables() {
         console.log('📝 设置环境变量...');
-        
+
         const envTemplate = this.validator.getEnvironmentVariableTemplate();
-        
+
         try {
             // 检查 .env.local 是否存在
             await fs.access('.env.local');
@@ -1225,7 +1225,7 @@ class OptimizedHardcodeFixer {
 
     async verifyDevelopmentEnvironment() {
         console.log('🔍 验证开发环境...');
-        
+
         // 检查关键文件
         const requiredFiles = ['package.json', 'next.config.js'];
         for (const file of requiredFiles) {
@@ -1236,7 +1236,7 @@ class OptimizedHardcodeFixer {
                 console.log(`⚠️ ${file} 不存在`);
             }
         }
-        
+
         // 检查依赖
         try {
             await fs.access('node_modules');
@@ -1248,12 +1248,12 @@ class OptimizedHardcodeFixer {
 
     async runQuickDetection(directory = '.') {
         console.log('⚡ 运行快速检测...\n');
-        
+
         const { results, grouped, summary, errors } = await this.detector.detectAllOptimized(directory);
-        
+
         // 生成优化报告
         this.generateOptimizedReport(summary, grouped);
-        
+
         // 保存结果
         const reportData = {
             timestamp: new Date().toISOString(),
@@ -1261,10 +1261,10 @@ class OptimizedHardcodeFixer {
             detailedResults: grouped,
             errors
         };
-        
+
         await fs.writeFile('optimized-hardcode-report.json', JSON.stringify(reportData, null, 2));
         console.log('📄 详细报告已保存到: optimized-hardcode-report.json');
-        
+
         return reportData;
     }
 
@@ -1274,20 +1274,20 @@ class OptimizedHardcodeFixer {
         console.log(`总硬编码数量: ${summary.totalMatches}`);
         console.log(`受影响文件: ${summary.totalFiles}`);
         console.log(`平均每文件: ${summary.averagePerFile} 个\n`);
-        
+
         // 优先级分布
         console.log('🎯 优先级分布:');
         console.log(`  🔴 高优先级: ${summary.priorityStats.high} 个`);
         console.log(`  🟡 中优先级: ${summary.priorityStats.medium} 个`);
         console.log(`  🟢 低优先级: ${summary.priorityStats.low} 个\n`);
-        
+
         // 模式分布
         console.log('📈 模式分布:');
         Object.entries(summary.patternStats).forEach(([pattern, count]) => {
             console.log(`  ${pattern}: ${count} 个`);
         });
         console.log('');
-        
+
         // Top 10 文件
         const topFiles = Object.entries(grouped).slice(0, 10);
         console.log('🔴 需要优先处理的文件:');
@@ -1295,11 +1295,11 @@ class OptimizedHardcodeFixer {
             const highPriority = matches.filter(m => m.priority === 'high').length;
             const total = matches.length;
             const priorityLabel = highPriority >= 5 ? '🔴 高' : highPriority >= 2 ? '🟡 中' : '🟢 低';
-            
+
             console.log(`${index + 1}. ${file}`);
             console.log(`   总计: ${total} 个 | 高优先级: ${highPriority} 个 | 优先级: ${priorityLabel}`);
         });
-        
+
         console.log('\n💡 执行建议:');
         if (summary.totalMatches === 0) {
             console.log('🎉 没有发现硬编码，无需处理！');
@@ -1315,22 +1315,22 @@ class OptimizedHardcodeFixer {
 
     async runSmartFix(files, dryRun = true) {
         console.log(`\n🤖 运行智能修复 ${dryRun ? '(模拟模式)' : '(实际执行)'}...\n`);
-        
-        const fixResults = await this.batchFixer.batchFix(files, { 
+
+        const fixResults = await this.batchFixer.batchFix(files, {
             dryRun,
             batchSize: 8,
             maxRetries: 2
         });
-        
+
         // 生成修复报告
         this.generateFixReport(fixResults);
-        
+
         return fixResults;
     }
 
     generateFixReport(fixResults) {
         const { results, summary, errors } = fixResults;
-        
+
         console.log('\n📊 智能修复报告');
         console.log('='.repeat(60));
         console.log(`处理文件: ${summary.totalFiles} 个`);
@@ -1338,7 +1338,7 @@ class OptimizedHardcodeFixer {
         console.log(`修复失败: ${summary.failedFixes} 个`);
         console.log(`总更改数: ${summary.totalChanges} 个`);
         console.log(`成功率: ${summary.successRate}%\n`);
-        
+
         // 失败文件详情
         if (summary.failedFiles.length > 0) {
             console.log('❌ 修复失败的文件:');
@@ -1347,14 +1347,14 @@ class OptimizedHardcodeFixer {
             });
             console.log('');
         }
-        
+
         // 错误统计
         if (errors.hasIssues) {
             console.log('⚠️ 错误统计:');
             console.log(`  错误: ${errors.errors} 个`);
             console.log(`  警告: ${errors.warnings} 个`);
         }
-        
+
         console.log('💡 下一步建议:');
         if (summary.successRate >= 95) {
             console.log('✅ 修复效果excellent！可以继续下一批次');
@@ -1372,9 +1372,9 @@ class OptimizedHardcodeFixer {
 async function main() {
     const args = process.argv.slice(2);
     const fixer = new OptimizedHardcodeFixer();
-    
+
     console.log('🚀 优化版硬编码修复工具 v2.0\n');
-    
+
     if (args.includes('--help')) {
         console.log(`
 使用方法:
@@ -1383,7 +1383,7 @@ async function main() {
   node optimized-quick-fix.js --detect          # 仅快速检测
   node optimized-quick-fix.js --fix-dry         # 模拟修复
   node optimized-quick-fix.js --fix             # 实际修复
-  
+
 选项:
   --files="file1,file2"                         # 指定文件
   --batch-size=10                               # 批处理大小
@@ -1391,7 +1391,7 @@ async function main() {
         `);
         return;
     }
-    
+
     try {
         if (args.includes('--setup')) {
             await fixer.setupEnvironment();
@@ -1400,7 +1400,7 @@ async function main() {
         } else if (args.includes('--fix-dry') || args.includes('--fix')) {
             const filesArg = args.find(arg => arg.startsWith('--files='));
             let files = [];
-            
+
             if (filesArg) {
                 files = filesArg.split('=')[1].replace(/"/g, '').split(',');
             } else {
@@ -1408,15 +1408,15 @@ async function main() {
                 try {
                     const reportData = JSON.parse(await fs.readFile('optimized-hardcode-report.json', 'utf8'));
                     const grouped = reportData.detailedResults;
-                    
+
                     // 自动选择前10个需要处理的文件
                     files = Object.keys(grouped).slice(0, 10);
-                    
+
                     if (files.length === 0) {
                         console.log('❌ 没有找到需要修复的文件');
                         return;
                     }
-                    
+
                     console.log(`📋 自动选择了 ${files.length} 个文件进行修复:`);
                     files.forEach((file, index) => {
                         console.log(`  ${index + 1}. ${file}`);
@@ -1427,35 +1427,35 @@ async function main() {
                     return;
                 }
             }
-            
+
             const dryRun = args.includes('--fix-dry');
             await fixer.runSmartFix(files, dryRun);
         } else {
             // 默认：完整流程
             console.log('🔄 执行完整流程...\n');
-            
+
             // 1. 环境设置
             const envOk = await fixer.setupEnvironment();
             if (!envOk) {
                 console.log('❌ 环境设置失败，请检查错误日志');
                 return;
             }
-            
+
             // 2. 快速检测
             const reportData = await fixer.runQuickDetection();
-            
+
             if (reportData.summary.totalMatches === 0) {
                 console.log('🎉 没有发现硬编码，任务完成！');
                 return;
             }
-            
+
             // 3. 自动选择优先文件进行模拟修复
             const grouped = reportData.detailedResults;
             const priorityFiles = Object.keys(grouped).slice(0, 5);
-            
+
             console.log(`\n🧪 对前 ${priorityFiles.length} 个优先文件进行模拟修复...`);
             const dryRunResults = await fixer.runSmartFix(priorityFiles, true);
-            
+
             if (dryRunResults.summary.successRate >= 90) {
                 console.log('\n✅ 模拟修复成功！可以执行实际修复');
                 console.log('💡 运行命令: node optimized-quick-fix.js --fix');
@@ -1486,7 +1486,7 @@ module.exports = { OptimizedHardcodeFixer };
 
 ### 🎯 **核心突破**
 - **性能问题** → 从"可能卡死"到"30-60秒完成" 🚀
-- **成功率** → 从"85%"到"95%+" 📈  
+- **成功率** → 从"85%"到"95%+" 📈
 - **用户体验** → 从"等待焦虑"到"实时进度反馈" 😊
 
 ### 🛡️ **安全保障完善**
@@ -1501,9 +1501,9 @@ module.exports = { OptimizedHardcodeFixer };
 
 ### 📋 执行检查清单
 
-**✅ 分析完成** - 你的专业评估确认方案可行  
-**✅ 方案确定** - 优化版工具解决所有当前问题  
-**✅ 风险控制** - 多层安全保障，95%+成功率  
+**✅ 分析完成** - 你的专业评估确认方案可行
+**✅ 方案确定** - 优化版工具解决所有当前问题
+**✅ 风险控制** - 多层安全保障，95%+成功率
 **✅ 工具就绪** - 完整的自动化脚本已准备
 
 ## 🚀 立即开始执行
@@ -1530,7 +1530,7 @@ bash immediate-execution-script.sh
 
 # 这会自动完成：
 # ✅ 端口冲突解决
-# ✅ 环境变量配置  
+# ✅ 环境变量配置
 # ✅ 硬编码检测
 # ✅ 模拟修复验证
 ```
@@ -1549,7 +1549,7 @@ bash immediate-execution-script.sh
 
 🎯 优先级分布:
   🔴 高优先级: 89 个
-  🟡 中优先级: 52 个  
+  🟡 中优先级: 52 个
   🟢 低优先级: 20 个
 ```
 
@@ -1581,7 +1581,7 @@ bash immediate-execution-script.sh
 
 现在让我们将你的专业分析转化为实际行动：
 
-1. **保存优化工具脚本** 
+1. **保存优化工具脚本**
 2. **运行立即执行脚本**
 3. **查看优化检测结果**
 4. **执行智能修复**
@@ -1699,7 +1699,7 @@ if [ $? -eq 0 ]; then
     echo "🎉 第一阶段执行成功！"
     echo "===================="
     echo "✅ 环境准备完成"
-    echo "✅ 硬编码检测完成"  
+    echo "✅ 硬编码检测完成"
     echo "✅ 模拟修复验证完成"
     echo ""
     echo "📋 下一步选择："
@@ -1742,7 +1742,7 @@ node scripts/syntax-fix-strategy.js --core-files
 
 This targets files like:
 - `app/[locale]/page.tsx`
-- `app/[locale]/articles/page.tsx` 
+- `app/[locale]/articles/page.tsx`
 - `app/[locale]/natural-therapies/page.tsx`
 
 These are likely your highest-impact files and should work without syntax issues.
@@ -1810,7 +1810,7 @@ class SyntaxAwareHardcodeFixer {
             config: ['.json', '.md', '.txt'],
             ignore: ['node_modules', '.git', 'backups', '.next', 'dist']
         };
-        
+
         this.fixPatterns = [
             {
                 name: 'Basic HTTPS URL',
@@ -1858,7 +1858,7 @@ class SyntaxAwareHardcodeFixer {
             const { exec } = require('child_process');
             const { promisify } = require('util');
             const execAsync = promisify(exec);
-            
+
             await execAsync(`npx tsc --noEmit --skipLibCheck "${filePath}"`, { timeout: 10000 });
             return { valid: true, message: 'TypeScript validation passed' };
         } catch (error) {
@@ -1877,7 +1877,7 @@ class SyntaxAwareHardcodeFixer {
             for (const pattern of this.fixPatterns) {
                 const beforeContent = content;
                 content = content.replace(pattern.search, pattern.replace);
-                
+
                 if (beforeContent !== content) {
                     const matches = (beforeContent.match(pattern.search) || []).length;
                     totalChanges += matches;
@@ -1912,7 +1912,7 @@ class SyntaxAwareHardcodeFixer {
         // Focus on core TypeScript React files first
         const coreFiles = [
             'app/[locale]/page.tsx',
-            'app/[locale]/articles/page.tsx', 
+            'app/[locale]/articles/page.tsx',
             'app/[locale]/natural-therapies/page.tsx',
             'app/[locale]/health-guide/page.tsx',
             'app/[locale]/pain-tracker/page.tsx',
@@ -1934,20 +1934,20 @@ class SyntaxAwareHardcodeFixer {
 
     async processPhase1() {
         console.log('Phase 1: Core TypeScript React Files\n');
-        
+
         const coreFiles = await this.getCoreTsxFiles();
         console.log(`Found ${coreFiles.length} core TypeScript files to process\n`);
 
         const results = [];
         for (const file of coreFiles) {
             console.log(`Processing: ${file}`);
-            
+
             // Create backup
             const backupPath = `${file}.backup.${Date.now()}`;
             await fs.copyFile(file, backupPath);
-            
+
             const result = await this.fixFileWithoutSyntaxCheck(file);
-            
+
             if (result.success) {
                 console.log(`  ✅ Fixed ${result.changes} hardcoded URLs`);
                 if (result.appliedFixes.length > 0) {
@@ -1960,7 +1960,7 @@ class SyntaxAwareHardcodeFixer {
                 // Restore backup
                 await fs.copyFile(backupPath, file);
             }
-            
+
             results.push({ file, ...result, backupPath });
             console.log('');
         }
@@ -1970,7 +1970,7 @@ class SyntaxAwareHardcodeFixer {
 
     async processSpecificFiles(fileList) {
         console.log(`Processing ${fileList.length} specified files\n`);
-        
+
         const results = [];
         for (const file of fileList) {
             try {
@@ -1981,13 +1981,13 @@ class SyntaxAwareHardcodeFixer {
             }
 
             console.log(`Processing: ${file}`);
-            
+
             // Create backup
             const backupPath = `${file}.backup.${Date.now()}`;
             await fs.copyFile(file, backupPath);
-            
+
             const result = await this.fixFileWithoutSyntaxCheck(file);
-            
+
             if (result.success && result.changes > 0) {
                 console.log(`  ✅ Fixed ${result.changes} hardcoded URLs`);
             } else if (result.success && result.changes === 0) {
@@ -1996,7 +1996,7 @@ class SyntaxAwareHardcodeFixer {
                 console.log(`  ❌ Failed: ${result.error}`);
                 await fs.copyFile(backupPath, file);
             }
-            
+
             results.push({ file, ...result, backupPath });
         }
 
@@ -2007,7 +2007,7 @@ class SyntaxAwareHardcodeFixer {
         const totalFiles = results.length;
         const successfulFiles = results.filter(r => r.success).length;
         const totalChanges = results.reduce((sum, r) => sum + (r.changes || 0), 0);
-        
+
         console.log('\n📊 Processing Summary');
         console.log('='.repeat(50));
         console.log(`Total files processed: ${totalFiles}`);
@@ -2015,7 +2015,7 @@ class SyntaxAwareHardcodeFixer {
         console.log(`Failed: ${totalFiles - successfulFiles}`);
         console.log(`Total hardcoded URLs fixed: ${totalChanges}`);
         console.log(`Success rate: ${((successfulFiles / totalFiles) * 100).toFixed(1)}%`);
-        
+
         return {
             totalFiles,
             successfulFiles,
@@ -2029,13 +2029,13 @@ class SyntaxAwareHardcodeFixer {
 async function main() {
     const args = process.argv.slice(2);
     const fixer = new SyntaxAwareHardcodeFixer();
-    
+
     try {
         if (args.includes('--core-files')) {
             // Process core TypeScript files
             const results = await fixer.processPhase1();
             fixer.generateSummary(results);
-            
+
         } else if (args.includes('--files')) {
             // Process specific files
             const filesArg = args.find(arg => arg.startsWith('--files='));
@@ -2043,11 +2043,11 @@ async function main() {
                 console.log('Please specify files: --files="file1,file2,file3"');
                 return;
             }
-            
+
             const files = filesArg.split('=')[1].replace(/"/g, '').split(',');
             const results = await fixer.processSpecificFiles(files);
             fixer.generateSummary(results);
-            
+
         } else {
             console.log(`
 Syntax-Aware Hardcode Fixer
@@ -2055,7 +2055,7 @@ Syntax-Aware Hardcode Fixer
 Usage:
   node syntax-fix-strategy.js --core-files          # Fix core TypeScript files
   node syntax-fix-strategy.js --files="file1,file2" # Fix specific files
-  
+
 Examples:
   node syntax-fix-strategy.js --core-files
   node syntax-fix-strategy.js --files="app/[locale]/page.tsx,app/[locale]/articles/page.tsx"

@@ -7,8 +7,8 @@ import {
   Migration,
   MigrationPlan,
   PainTrackerError,
-  CURRENT_SCHEMA_VERSION
-} from '../../../types/pain-tracker';
+  CURRENT_SCHEMA_VERSION,
+} from "../../../types/pain-tracker";
 
 export class MigrationService {
   private migrations: Map<string, Migration> = new Map();
@@ -24,10 +24,10 @@ export class MigrationService {
     // Migration from version 0 (legacy) to version 1 (enhanced)
     this.registerMigration({
       version: 1,
-      description: 'Migrate from legacy pain tracker to enhanced version',
+      description: "Migrate from legacy pain tracker to enhanced version",
       up: this.migrateLegacyToV1.bind(this),
       down: this.migrateV1ToLegacy.bind(this),
-      validate: this.validateV1Data.bind(this)
+      validate: this.validateV1Data.bind(this),
     });
 
     // Future migrations will be added here
@@ -62,7 +62,7 @@ export class MigrationService {
       } else {
         throw new PainTrackerError(
           `No migration found for version ${version}`,
-          'MIGRATION_ERROR'
+          "MIGRATION_ERROR",
         );
       }
     }
@@ -70,7 +70,7 @@ export class MigrationService {
     return {
       fromVersion,
       toVersion,
-      migrations
+      migrations,
     };
   }
 
@@ -83,35 +83,40 @@ export class MigrationService {
     try {
       for (const migration of plan.migrations) {
         console.log(`Executing migration: ${migration.description}`);
-        
+
         // Create backup before migration
         const backup = JSON.parse(JSON.stringify(migratedData));
-        
+
         try {
           // Execute migration
           migratedData = migration.up(migratedData);
-          
+
           // Validate migrated data
           if (!migration.validate(migratedData)) {
-            throw new Error('Migration validation failed');
+            throw new Error("Migration validation failed");
           }
-          
-          console.log(`Migration to version ${migration.version} completed successfully`);
+
+          console.log(
+            `Migration to version ${migration.version} completed successfully`,
+          );
         } catch (error) {
-          console.error(`Migration to version ${migration.version} failed:`, error);
-          
+          console.error(
+            `Migration to version ${migration.version} failed:`,
+            error,
+          );
+
           // Attempt rollback
           try {
             migratedData = migration.down(backup);
             console.log(`Rollback to previous version successful`);
           } catch (rollbackError) {
-            console.error('Rollback failed:', rollbackError);
+            console.error("Rollback failed:", rollbackError);
           }
-          
+
           throw new PainTrackerError(
             `Migration to version ${migration.version} failed: ${error}`,
-            'MIGRATION_ERROR',
-            { originalError: error, backup }
+            "MIGRATION_ERROR",
+            { originalError: error, backup },
           );
         }
       }
@@ -121,11 +126,11 @@ export class MigrationService {
       if (error instanceof PainTrackerError) {
         throw error;
       }
-      
+
       throw new PainTrackerError(
-        'Migration plan execution failed',
-        'MIGRATION_ERROR',
-        error
+        "Migration plan execution failed",
+        "MIGRATION_ERROR",
+        error,
       );
     }
   }
@@ -151,7 +156,7 @@ export class MigrationService {
     try {
       // Handle different legacy data formats
       let legacyRecords: any[] = [];
-      
+
       if (Array.isArray(legacyData)) {
         // Direct array of records
         legacyRecords = legacyData;
@@ -169,22 +174,34 @@ export class MigrationService {
       // Convert legacy records to new format
       const migratedRecords = legacyRecords.map((legacyRecord, index) => {
         const now = new Date();
-        
+
         return {
           id: legacyRecord.id || `migrated_${Date.now()}_${index}`,
-          date: legacyRecord.date || now.toISOString().split('T')[0],
-          time: this.extractTimeFromLegacyRecord(legacyRecord) || '12:00',
-          painLevel: this.normalizePainLevel(legacyRecord.intensity || legacyRecord.painLevel || 0),
+          date: legacyRecord.date || now.toISOString().split("T")[0],
+          time: this.extractTimeFromLegacyRecord(legacyRecord) || "12:00",
+          painLevel: this.normalizePainLevel(
+            legacyRecord.intensity || legacyRecord.painLevel || 0,
+          ),
           painTypes: this.migratePainTypes(legacyRecord),
           locations: this.migrateLocations(legacyRecord),
           symptoms: this.migrateSymptoms(legacyRecord.symptoms || []),
-          menstrualStatus: this.migrateMenstrualStatus(legacyRecord.menstrualStatus),
-          medications: this.migrateMedications(legacyRecord.treatments || legacyRecord.medications || []),
-          effectiveness: this.normalizeEffectiveness(legacyRecord.effectiveness || 0),
+          menstrualStatus: this.migrateMenstrualStatus(
+            legacyRecord.menstrualStatus,
+          ),
+          medications: this.migrateMedications(
+            legacyRecord.treatments || legacyRecord.medications || [],
+          ),
+          effectiveness: this.normalizeEffectiveness(
+            legacyRecord.effectiveness || 0,
+          ),
           lifestyleFactors: this.migrateLifestyleFactors(legacyRecord),
-          notes: legacyRecord.notes || '',
-          createdAt: legacyRecord.createdAt ? new Date(legacyRecord.createdAt) : now,
-          updatedAt: legacyRecord.updatedAt ? new Date(legacyRecord.updatedAt) : now
+          notes: legacyRecord.notes || "",
+          createdAt: legacyRecord.createdAt
+            ? new Date(legacyRecord.createdAt)
+            : now,
+          updatedAt: legacyRecord.updatedAt
+            ? new Date(legacyRecord.updatedAt)
+            : now,
         };
       });
 
@@ -195,45 +212,45 @@ export class MigrationService {
           defaultMedications: [],
           reminderSettings: {
             enabled: false,
-            frequency: 'daily',
-            time: '20:00'
+            frequency: "daily",
+            time: "20:00",
           },
           exportPreferences: {
-            defaultFormat: 'pdf',
+            defaultFormat: "pdf",
             includeChartsDefault: true,
             includeSummaryDefault: true,
-            defaultDateRange: 'last_3_months'
+            defaultDateRange: "last_3_months",
           },
           privacySettings: {
             allowAnalytics: true,
             allowExport: true,
             dataRetentionMonths: 24,
-            requireConfirmationForDelete: true
+            requireConfirmationForDelete: true,
           },
           displaySettings: {
-            theme: 'auto',
-            language: 'en',
-            dateFormat: 'MM/DD/YYYY',
-            timeFormat: '12h'
-          }
+            theme: "auto",
+            language: "en",
+            dateFormat: "MM/DD/YYYY",
+            timeFormat: "12h",
+          },
         },
         schemaVersion: 1,
         lastBackup: new Date(),
         metadata: {
           createdAt: new Date(),
           lastModified: new Date(),
-          version: '1.0.0',
+          version: "1.0.0",
           recordCount: migratedRecords.length,
-          dataSize: 0 // Will be calculated by storage adapter
-        }
+          dataSize: 0, // Will be calculated by storage adapter
+        },
       };
 
       return migratedData;
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to migrate legacy data to version 1',
-        'MIGRATION_ERROR',
-        error
+        "Failed to migrate legacy data to version 1",
+        "MIGRATION_ERROR",
+        error,
       );
     }
   }
@@ -243,23 +260,25 @@ export class MigrationService {
    */
   private migrateV1ToLegacy(v1Data: StoredData): any {
     try {
-      const legacyRecords = v1Data.records.map(record => ({
+      const legacyRecords = v1Data.records.map((record) => ({
         id: record.id,
         date: record.date,
         intensity: record.painLevel,
-        menstrualStatus: this.convertMenstrualStatusToLegacy(record.menstrualStatus),
+        menstrualStatus: this.convertMenstrualStatusToLegacy(
+          record.menstrualStatus,
+        ),
         symptoms: record.symptoms,
-        treatments: record.medications.map(med => med.name),
+        treatments: record.medications.map((med) => med.name),
         effectiveness: record.effectiveness,
-        notes: record.notes
+        notes: record.notes,
       }));
 
       return legacyRecords;
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to rollback from version 1 to legacy',
-        'MIGRATION_ERROR',
-        error
+        "Failed to rollback from version 1 to legacy",
+        "MIGRATION_ERROR",
+        error,
       );
     }
   }
@@ -271,9 +290,9 @@ export class MigrationService {
     try {
       return (
         data &&
-        typeof data === 'object' &&
+        typeof data === "object" &&
         Array.isArray(data.records) &&
-        typeof data.preferences === 'object' &&
+        typeof data.preferences === "object" &&
         data.schemaVersion === 1 &&
         data.records.every((record: any) => this.validateV1Record(record))
       );
@@ -288,10 +307,10 @@ export class MigrationService {
   private validateV1Record(record: any): boolean {
     return (
       record &&
-      typeof record.id === 'string' &&
-      typeof record.date === 'string' &&
-      typeof record.time === 'string' &&
-      typeof record.painLevel === 'number' &&
+      typeof record.id === "string" &&
+      typeof record.date === "string" &&
+      typeof record.time === "string" &&
+      typeof record.painLevel === "number" &&
       Array.isArray(record.painTypes) &&
       Array.isArray(record.locations) &&
       Array.isArray(record.symptoms) &&
@@ -307,13 +326,16 @@ export class MigrationService {
     if (legacyRecord.time) {
       return legacyRecord.time;
     }
-    
+
     if (legacyRecord.createdAt) {
       const date = new Date(legacyRecord.createdAt);
-      return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+      return `${date.getHours().toString().padStart(2, "0")}:${date
+        .getMinutes()
+        .toString()
+        .padStart(2, "0")}`;
     }
-    
-    return '12:00'; // Default time
+
+    return "12:00"; // Default time
   }
 
   /**
@@ -339,22 +361,22 @@ export class MigrationService {
    */
   private migratePainTypes(legacyRecord: any): string[] {
     const painTypes: string[] = [];
-    
+
     // Check various legacy fields that might contain pain type info
     if (legacyRecord.painType) {
       painTypes.push(this.mapLegacyPainType(legacyRecord.painType));
     }
-    
+
     if (legacyRecord.painTypes && Array.isArray(legacyRecord.painTypes)) {
       painTypes.push(...legacyRecord.painTypes.map(this.mapLegacyPainType));
     }
-    
+
     // If no pain types found, try to infer from notes or other fields
     if (painTypes.length === 0 && legacyRecord.notes) {
       const inferredTypes = this.inferPainTypesFromNotes(legacyRecord.notes);
       painTypes.push(...inferredTypes);
     }
-    
+
     return [...new Set(painTypes)]; // Remove duplicates
   }
 
@@ -363,16 +385,16 @@ export class MigrationService {
    */
   private mapLegacyPainType(legacyType: string): string {
     const mapping: { [key: string]: string } = {
-      'cramping': 'cramping',
-      'dull_pain': 'aching',
-      'sharp_pain': 'sharp',
-      'throbbing': 'throbbing',
-      'burning': 'burning',
-      'pressure': 'pressure',
+      cramping: "cramping",
+      dull_pain: "aching",
+      sharp_pain: "sharp",
+      throbbing: "throbbing",
+      burning: "burning",
+      pressure: "pressure",
       // Add more mappings as needed
     };
-    
-    return mapping[legacyType] || 'aching'; // Default to aching
+
+    return mapping[legacyType] || "aching"; // Default to aching
   }
 
   /**
@@ -380,15 +402,15 @@ export class MigrationService {
    */
   private migrateLocations(legacyRecord: any): string[] {
     const locations: string[] = [];
-    
+
     if (legacyRecord.location) {
       locations.push(this.mapLegacyLocation(legacyRecord.location));
     }
-    
+
     if (legacyRecord.locations && Array.isArray(legacyRecord.locations)) {
       locations.push(...legacyRecord.locations.map(this.mapLegacyLocation));
     }
-    
+
     return [...new Set(locations)]; // Remove duplicates
   }
 
@@ -397,16 +419,16 @@ export class MigrationService {
    */
   private mapLegacyLocation(legacyLocation: string): string {
     const mapping: { [key: string]: string } = {
-      'lower_abdomen': 'lower_abdomen',
-      'lower_back': 'lower_back',
-      'thighs': 'upper_thighs',
-      'pelvis': 'pelvis',
-      'side': 'side',
-      'whole_abdomen': 'whole_abdomen',
-      'other': 'lower_abdomen' // Default mapping
+      lower_abdomen: "lower_abdomen",
+      lower_back: "lower_back",
+      thighs: "upper_thighs",
+      pelvis: "pelvis",
+      side: "side",
+      whole_abdomen: "whole_abdomen",
+      other: "lower_abdomen", // Default mapping
     };
-    
-    return mapping[legacyLocation] || 'lower_abdomen';
+
+    return mapping[legacyLocation] || "lower_abdomen";
   }
 
   /**
@@ -416,8 +438,8 @@ export class MigrationService {
     if (!Array.isArray(legacySymptoms)) {
       return [];
     }
-    
-    return legacySymptoms.map(symptom => this.mapLegacySymptom(symptom));
+
+    return legacySymptoms.map((symptom) => this.mapLegacySymptom(symptom));
   }
 
   /**
@@ -425,18 +447,18 @@ export class MigrationService {
    */
   private mapLegacySymptom(legacySymptom: string): string {
     const mapping: { [key: string]: string } = {
-      'nausea': 'nausea',
-      'headache': 'headache',
-      'fatigue': 'fatigue',
-      'bloating': 'bloating',
-      'mood_changes': 'mood_changes',
-      'back_pain': 'fatigue', // Map to closest available symptom
-      'vomiting': 'vomiting',
-      'diarrhea': 'diarrhea',
-      'breast_tenderness': 'breast_tenderness'
+      nausea: "nausea",
+      headache: "headache",
+      fatigue: "fatigue",
+      bloating: "bloating",
+      mood_changes: "mood_changes",
+      back_pain: "fatigue", // Map to closest available symptom
+      vomiting: "vomiting",
+      diarrhea: "diarrhea",
+      breast_tenderness: "breast_tenderness",
     };
-    
-    return mapping[legacySymptom] || 'fatigue';
+
+    return mapping[legacySymptom] || "fatigue";
   }
 
   /**
@@ -444,20 +466,20 @@ export class MigrationService {
    */
   private migrateMenstrualStatus(legacyStatus: string): string {
     const mapping: { [key: string]: string } = {
-      'before': 'before_period',
-      'during': 'day_1',
-      'after': 'after_period',
-      'none': 'mid_cycle',
-      'before_period': 'before_period',
-      'day_1': 'day_1',
-      'day_2_3': 'day_2_3',
-      'day_4_plus': 'day_4_plus',
-      'after_period': 'after_period',
-      'mid_cycle': 'mid_cycle',
-      'irregular': 'irregular'
+      before: "before_period",
+      during: "day_1",
+      after: "after_period",
+      none: "mid_cycle",
+      before_period: "before_period",
+      day_1: "day_1",
+      day_2_3: "day_2_3",
+      day_4_plus: "day_4_plus",
+      after_period: "after_period",
+      mid_cycle: "mid_cycle",
+      irregular: "irregular",
     };
-    
-    return mapping[legacyStatus] || 'mid_cycle';
+
+    return mapping[legacyStatus] || "mid_cycle";
   }
 
   /**
@@ -465,16 +487,16 @@ export class MigrationService {
    */
   private convertMenstrualStatusToLegacy(status: string): string {
     const mapping: { [key: string]: string } = {
-      'before_period': 'before',
-      'day_1': 'during',
-      'day_2_3': 'during',
-      'day_4_plus': 'during',
-      'after_period': 'after',
-      'mid_cycle': 'none',
-      'irregular': 'none'
+      before_period: "before",
+      day_1: "during",
+      day_2_3: "during",
+      day_4_plus: "during",
+      after_period: "after",
+      mid_cycle: "none",
+      irregular: "none",
     };
-    
-    return mapping[status] || 'none';
+
+    return mapping[status] || "none";
   }
 
   /**
@@ -484,26 +506,26 @@ export class MigrationService {
     if (!Array.isArray(legacyTreatments)) {
       return [];
     }
-    
-    return legacyTreatments.map(treatment => {
-      if (typeof treatment === 'string') {
+
+    return legacyTreatments.map((treatment) => {
+      if (typeof treatment === "string") {
         return {
           name: treatment,
-          dosage: '',
-          timing: 'during pain'
+          dosage: "",
+          timing: "during pain",
         };
-      } else if (typeof treatment === 'object' && treatment.name) {
+      } else if (typeof treatment === "object" && treatment.name) {
         return {
           name: treatment.name,
-          dosage: treatment.dosage || '',
-          timing: treatment.timing || 'during pain'
+          dosage: treatment.dosage || "",
+          timing: treatment.timing || "during pain",
         };
       }
-      
+
       return {
-        name: 'Unknown medication',
-        dosage: '',
-        timing: 'during pain'
+        name: "Unknown medication",
+        dosage: "",
+        timing: "during pain",
       };
     });
   }
@@ -513,26 +535,26 @@ export class MigrationService {
    */
   private migrateLifestyleFactors(legacyRecord: any): any[] {
     const factors: any[] = [];
-    
+
     // Try to extract any lifestyle information from notes or other fields
     if (legacyRecord.notes) {
       const stressMatch = legacyRecord.notes.match(/stress.*?(\d+)/i);
       if (stressMatch) {
         factors.push({
-          factor: 'stress_level',
-          value: parseInt(stressMatch[1])
+          factor: "stress_level",
+          value: parseInt(stressMatch[1]),
         });
       }
-      
+
       const sleepMatch = legacyRecord.notes.match(/sleep.*?(\d+)/i);
       if (sleepMatch) {
         factors.push({
-          factor: 'sleep_hours',
-          value: parseInt(sleepMatch[1])
+          factor: "sleep_hours",
+          value: parseInt(sleepMatch[1]),
         });
       }
     }
-    
+
     return factors;
   }
 
@@ -542,14 +564,15 @@ export class MigrationService {
   private inferPainTypesFromNotes(notes: string): string[] {
     const types: string[] = [];
     const lowerNotes = notes.toLowerCase();
-    
-    if (lowerNotes.includes('cramp')) types.push('cramping');
-    if (lowerNotes.includes('sharp')) types.push('sharp');
-    if (lowerNotes.includes('throb')) types.push('throbbing');
-    if (lowerNotes.includes('burn')) types.push('burning');
-    if (lowerNotes.includes('pressure')) types.push('pressure');
-    if (lowerNotes.includes('ache') || lowerNotes.includes('dull')) types.push('aching');
-    
+
+    if (lowerNotes.includes("cramp")) types.push("cramping");
+    if (lowerNotes.includes("sharp")) types.push("sharp");
+    if (lowerNotes.includes("throb")) types.push("throbbing");
+    if (lowerNotes.includes("burn")) types.push("burning");
+    if (lowerNotes.includes("pressure")) types.push("pressure");
+    if (lowerNotes.includes("ache") || lowerNotes.includes("dull"))
+      types.push("aching");
+
     return types;
   }
 }

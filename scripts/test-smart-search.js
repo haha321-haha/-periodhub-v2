@@ -23,7 +23,7 @@ async function testSmartSearch() {
 
     // 测试搜索功能
     console.log('\n📋 测试基础搜索功能...');
-    
+
     const searchResults = await searchEngine.search({
       query: '痛经缓解',
       scope: ['all'],
@@ -76,4 +76,4 @@ async function testSmartSearch() {
 }
 
 // 运行测试
-testSmartSearch().catch(console.error); 
+testSmartSearch().catch(console.error);

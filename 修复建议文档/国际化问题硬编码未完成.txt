@@ -223,7 +223,7 @@ build
         "cta": "学习方法"
       },
       "diagnosis": {
-        "title": "症状诊断", 
+        "title": "症状诊断",
         "description": "专业的症状识别指导",
         "cta": "开始评估"
       }
@@ -513,7 +513,7 @@ find content/articles -name "*medication*" -o -name "*guide*"
   修正3：自动化工具选择
 
   - 推荐工具: formatjs extract
-  - 命令: npx formatjs extract 'app//*.tsx' --out-file 
+  - 命令: npx formatjs extract 'app//*.tsx' --out-file
   lang/extracted.json
   - 集成**: 添加到pre-commit hooks
 
@@ -948,7 +948,7 @@ find content/articles -name "*medication*" -o -name "*guide*"
 {locale === 'zh' ? '中文硬编码' : 'English hardcoded'}
 ```
 
-**2. 科学参数架构缺陷**  
+**2. 科学参数架构缺陷**
 您指出的科学参数硬编码问题很关键。这些参数应该支持：
 - 不同地区的度量单位（摄氏度/华氏度）
 - 时间格式的本地化
@@ -1246,4 +1246,3 @@ immediateReliefPage: {
   3. 分阶段部署: 先部署安全修改，医疗内容单独审核
 
   当前状态: ✅ 分析完成，未做任何代码改动，等待用户确认执行方案。
-

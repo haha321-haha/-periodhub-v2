@@ -49,20 +49,20 @@ echo ""
 # 处理每个文件
 for file in $files_to_fix; do
     echo -e "${BLUE}🔧 修复文件: $file${NC}"
-    
+
     # 备份原文件
     cp "$file" "$file.backup"
-    
+
     # 执行替换
     sed -i.tmp 's|https://periodhub\.health|https://www.periodhub.health|g' "$file"
-    
+
     # 删除临时文件
     rm -f "$file.tmp"
-    
+
     # 统计替换次数
     replacements=$(grep -c "https://www.periodhub.health" "$file" || echo "0")
     total_replacements=$((total_replacements + replacements))
-    
+
     echo -e "${GREEN}✅ 完成 - 替换了 $replacements 个链接${NC}"
     fixed_files=$((fixed_files + 1))
     total_files=$((total_files + 1))

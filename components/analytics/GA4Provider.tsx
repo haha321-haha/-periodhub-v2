@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, Suspense } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
-import GA4Tracker, { GA4_CONFIG } from '@/lib/analytics/ga4-config';
+import { useEffect, Suspense } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import GA4Tracker, { GA4_CONFIG } from "@/lib/analytics/ga4-config";
 
 interface GA4ProviderProps {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ function GA4ProviderInner({ children }: GA4ProviderProps) {
 
   useEffect(() => {
     // 页面变化时追踪
-    if (GA4_CONFIG.ENABLED && typeof window !== 'undefined') {
+    if (GA4_CONFIG.ENABLED && typeof window !== "undefined") {
       const tracker = GA4Tracker.getInstance();
       tracker.trackPageView(document.title, window.location.href);
     }

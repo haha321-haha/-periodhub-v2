@@ -53,29 +53,29 @@ async function submitToIndexNow(urls) {
 async function main() {
   console.log('🔍 检查特定页面的IndexNow提交状态...');
   console.log(`📋 需要检查的页面数量: ${urlsToSubmit.length}`);
-  
+
   urlsToSubmit.forEach((url, index) => {
     console.log(`  ${index + 1}. ${url}`);
   });
-  
+
   console.log('\n📤 开始提交到IndexNow...');
   const result = await submitToIndexNow(urlsToSubmit);
-  
+
   if (result.success) {
     console.log('✅ 所有页面已成功提交到IndexNow！');
     console.log(`📊 状态码: ${result.status}`);
     console.log(`📄 提交页面数: ${urlsToSubmit.length}`);
-    
+
     console.log('\n🎯 提交的页面:');
     urlsToSubmit.forEach((url, index) => {
       console.log(`  ✅ ${index + 1}. ${url}`);
     });
-    
+
     console.log('\n💡 建议:');
     console.log('  - 等待24-48小时后检查Bing Webmaster Tools状态');
     console.log('  - 这些页面应该会从"未提交"列表中移除');
     console.log('  - 搜索引擎将更快发现和索引这些页面');
-    
+
   } else {
     console.log('❌ IndexNow提交失败');
     console.log(`错误: ${result.error || result.statusText}`);

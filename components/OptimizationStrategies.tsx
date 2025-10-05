@@ -29,7 +29,7 @@ export default function OptimizationStrategies({ className = '' }: OptimizationS
                 <span className="text-xl mr-2">🎯</span>
                 {t('preventiveIntervention.title')}
               </h3>
-              
+
               <div className="space-y-6">
                 {/* Early luteal phase */}
                 <div className="bg-white p-4 rounded border border-green-300">
@@ -45,7 +45,7 @@ export default function OptimizationStrategies({ className = '' }: OptimizationS
                     ))}
                   </ul>
                 </div>
-                
+
                 {/* Premenstrual days */}
                 <div className="bg-white p-4 rounded border border-blue-300">
                   <h4 className="font-semibold text-blue-600 mb-3">
@@ -60,7 +60,7 @@ export default function OptimizationStrategies({ className = '' }: OptimizationS
                     ))}
                   </ul>
                 </div>
-                
+
                 {/* Peak pain days */}
                 <div className="bg-white p-4 rounded border border-red-300">
                   <h4 className="font-semibold text-red-600 mb-3">
@@ -86,7 +86,7 @@ export default function OptimizationStrategies({ className = '' }: OptimizationS
                 <span className="text-xl mr-2">📈</span>
                 {t('treatmentOptimization.title')}
               </h3>
-              
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-semibold mb-3 text-blue-600">
@@ -101,7 +101,7 @@ export default function OptimizationStrategies({ className = '' }: OptimizationS
                     ))}
                   </ul>
                 </div>
-                
+
                 <div>
                   <h4 className="font-semibold mb-3 text-green-600">
                     {t('treatmentOptimization.recoveryOptimization.title')}

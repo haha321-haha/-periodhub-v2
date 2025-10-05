@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { useSafeTranslations } from '@/hooks/useSafeTranslations';
-import { useTrainingState } from '../stores/partnerHandbookStore';
-import { TrainingWeek, TrainingDay, TrainingTask } from '../types/training';
-import { Locale } from '../types/common';
+import React, { useState, useEffect } from "react";
+import { useSafeTranslations } from "@/hooks/useSafeTranslations";
+import { useTrainingState } from "../stores/partnerHandbookStore";
+import { TrainingWeek, TrainingDay, TrainingTask } from "../types/training";
+import { Locale } from "../types/common";
 
 interface TrainingCampScheduleProps {
   locale: Locale;
@@ -15,10 +15,10 @@ interface TrainingCampScheduleProps {
 export default function TrainingCampSchedule({
   locale,
   onDayComplete,
-  className = ''
+  className = "",
 }: TrainingCampScheduleProps) {
-  const { t } = useSafeTranslations('partnerHandbook.trainingCamp');
-  const { t: tCommon } = useSafeTranslations('partnerHandbook');
+  const { t } = useSafeTranslations("partnerHandbook.trainingCamp");
+  const { t: tCommon } = useSafeTranslations("partnerHandbook");
   const { progress, completedDays, currentDay } = useTrainingState();
   const [selectedWeek, setSelectedWeek] = useState(0);
   const [selectedDay, setSelectedDay] = useState<TrainingDay | null>(null);
@@ -27,73 +27,75 @@ export default function TrainingCampSchedule({
   // 从翻译中获取训练计划数据
   const trainingWeeks: TrainingWeek[] = [
     {
-      id: 'week1',
+      id: "week1",
       week: 1,
-      title: t('weeks.0.title'),
-      theme: t('weeks.0.theme'),
-      description: t('weeks.0.description'),
-      weeklyGoal: t('weeks.0.weeklyGoal'),
+      title: t("weeks.0.title"),
+      theme: t("weeks.0.theme"),
+      description: t("weeks.0.description"),
+      weeklyGoal: t("weeks.0.weeklyGoal"),
       days: [
         {
-          id: 'day1',
+          id: "day1",
           day: 1,
-          title: t('weeks.0.days.0.title'),
-          description: t('weeks.0.days.0.description'),
+          title: t("weeks.0.days.0.title"),
+          description: t("weeks.0.days.0.description"),
           duration: 5,
-          difficulty: 'easy',
-          category: 'understanding',
+          difficulty: "easy",
+          category: "understanding",
           tasks: [
             {
-              id: 'task1',
-              title: t('weeks.0.days.0.tasks.0.title'),
-              description: t('weeks.0.days.0.tasks.0.description'),
+              id: "task1",
+              title: t("weeks.0.days.0.tasks.0.title"),
+              description: t("weeks.0.days.0.tasks.0.description"),
               instructions: [
-                t('weeks.0.days.0.tasks.0.instructions.0'),
-                t('weeks.0.days.0.tasks.0.instructions.1'),
-                t('weeks.0.days.0.tasks.0.instructions.2')
+                t("weeks.0.days.0.tasks.0.instructions.0"),
+                t("weeks.0.days.0.tasks.0.instructions.1"),
+                t("weeks.0.days.0.tasks.0.instructions.2"),
               ],
               tips: [
-                t('weeks.0.days.0.tasks.0.tips.0'),
-                t('weeks.0.days.0.tasks.0.tips.1'),
-                t('weeks.0.days.0.tasks.0.tips.2')
+                t("weeks.0.days.0.tasks.0.tips.0"),
+                t("weeks.0.days.0.tasks.0.tips.1"),
+                t("weeks.0.days.0.tasks.0.tips.2"),
               ],
-              expectedOutcome: t('weeks.0.days.0.tasks.0.expectedOutcome')
-            }
-          ]
-        }
-      ]
-    }
+              expectedOutcome: t("weeks.0.days.0.tasks.0.expectedOutcome"),
+            },
+          ],
+        },
+      ],
+    },
   ];
 
   const currentWeek = trainingWeeks[selectedWeek];
   const totalDays = 30;
-  const completionPercentage = Math.round((completedDays.length / totalDays) * 100);
+  const completionPercentage = Math.round(
+    (completedDays.length / totalDays) * 100,
+  );
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'easy':
-        return 'bg-green-100 text-green-800';
-      case 'medium':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'hard':
-        return 'bg-red-100 text-red-800';
+      case "easy":
+        return "bg-green-100 text-green-800";
+      case "medium":
+        return "bg-yellow-100 text-yellow-800";
+      case "hard":
+        return "bg-red-100 text-red-800";
       default:
-        return 'bg-gray-100 text-gray-800';
+        return "bg-gray-100 text-gray-800";
     }
   };
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'communication':
-        return '💬';
-      case 'understanding':
-        return '🧠';
-      case 'support':
-        return '🤗';
-      case 'care':
-        return '❤️';
+      case "communication":
+        return "💬";
+      case "understanding":
+        return "🧠";
+      case "support":
+        return "🤗";
+      case "care":
+        return "❤️";
       default:
-        return '📝';
+        return "📝";
     }
   };
 
@@ -113,39 +115,45 @@ export default function TrainingCampSchedule({
       {/* 训练营标题和介绍 */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold text-primary-600 mb-4">
-          {t('title')}
+          {t("title")}
         </h2>
-        <p className="text-gray-600 mb-6 max-w-3xl mx-auto">
-          {t('intro')}
-        </p>
+        <p className="text-gray-600 mb-6 max-w-3xl mx-auto">{t("intro")}</p>
       </div>
 
       {/* 整体进度 */}
       <div className="bg-white rounded-xl p-6 shadow-md mb-8">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-xl font-semibold text-gray-800">
-            {tCommon('overallProgress')}
+            {tCommon("overallProgress")}
           </h3>
           <span className="text-lg font-bold text-primary-600">
             {completionPercentage}%
           </span>
         </div>
         <div className="quiz-progress mb-4">
-          <div 
+          <div
             className="quiz-progress-bar"
             style={{ width: `${completionPercentage}%` }}
           />
         </div>
         <div className="flex justify-between text-sm text-gray-600">
-          <span>{locale === 'zh' ? `已完成 ${completedDays.length} 天` : `${completedDays.length} days completed`}</span>
-          <span>{locale === 'zh' ? `剩余 ${totalDays - completedDays.length} 天` : `${totalDays - completedDays.length} days remaining`}</span>
+          <span>
+            {locale === "zh"
+              ? `已完成 ${completedDays.length} 天`
+              : `${completedDays.length} days completed`}
+          </span>
+          <span>
+            {locale === "zh"
+              ? `剩余 ${totalDays - completedDays.length} 天`
+              : `${totalDays - completedDays.length} days remaining`}
+          </span>
         </div>
       </div>
 
       {/* 周选择器 */}
       <div className="mb-8">
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
-          {tCommon('selectTrainingWeek')}
+          {tCommon("selectTrainingWeek")}
         </h3>
         <div className="flex flex-wrap gap-4">
           {trainingWeeks.map((week, index) => (
@@ -154,8 +162,8 @@ export default function TrainingCampSchedule({
               onClick={() => setSelectedWeek(index)}
               className={`px-6 py-3 rounded-lg font-medium transition-colors ${
                 selectedWeek === index
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:border-primary-300'
+                  ? "bg-primary-600 text-white"
+                  : "bg-white text-gray-700 border border-gray-300 hover:border-primary-300"
               }`}
             >
               {week.title}
@@ -172,10 +180,12 @@ export default function TrainingCampSchedule({
               {currentWeek.title}
             </h3>
             <span className="text-sm text-gray-600">
-              {locale === 'zh' ? `第 ${currentWeek.week} 周` : `Week ${currentWeek.week}`}
+              {locale === "zh"
+                ? `第 ${currentWeek.week} 周`
+                : `Week ${currentWeek.week}`}
             </span>
           </div>
-          
+
           <div className="mb-4">
             <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium mb-2">
               {currentWeek.theme}
@@ -183,7 +193,7 @@ export default function TrainingCampSchedule({
             <p className="text-gray-700 mb-4">{currentWeek.description}</p>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <h4 className="font-semibold text-blue-800 mb-2">
-                {tCommon('weeklyGoal')}
+                {tCommon("weeklyGoal")}
               </h4>
               <p className="text-blue-700">{currentWeek.weeklyGoal}</p>
             </div>
@@ -196,31 +206,35 @@ export default function TrainingCampSchedule({
                 key={day.id}
                 onClick={() => handleDayClick(day)}
                 className={`training-day-card cursor-pointer ${
-                  completedDays.includes(day.id) ? 'completed' : ''
+                  completedDays.includes(day.id) ? "completed" : ""
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-2xl">{getCategoryIcon(day.category)}</span>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(day.difficulty)}`}>
+                  <span className="text-2xl">
+                    {getCategoryIcon(day.category)}
+                  </span>
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(
+                      day.difficulty,
+                    )}`}
+                  >
                     {day.difficulty}
                   </span>
                 </div>
-                
+
                 <h4 className="font-semibold text-gray-800 mb-2">
-                  {locale === 'zh' ? `第 ${day.day} 天` : `Day ${day.day}`}
+                  {locale === "zh" ? `第 ${day.day} 天` : `Day ${day.day}`}
                 </h4>
-                <h5 className="font-medium text-gray-700 mb-2">
-                  {day.title}
-                </h5>
-                <p className="text-sm text-gray-600 mb-3">
-                  {day.description}
-                </p>
-                
+                <h5 className="font-medium text-gray-700 mb-2">{day.title}</h5>
+                <p className="text-sm text-gray-600 mb-3">{day.description}</p>
+
                 <div className="flex items-center justify-between text-sm text-gray-500">
-                  <span>{day.duration} {tCommon('minutes')}</span>
+                  <span>
+                    {day.duration} {tCommon("minutes")}
+                  </span>
                   {completedDays.includes(day.id) && (
                     <span className="text-green-600 font-medium">
-                      ✓ {tCommon('completed')}
+                      ✓ {tCommon("completed")}
                     </span>
                   )}
                 </div>
@@ -242,8 +256,18 @@ export default function TrainingCampSchedule({
                 onClick={() => setShowTaskDetail(false)}
                 className="text-gray-500 hover:text-gray-700"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
@@ -251,11 +275,19 @@ export default function TrainingCampSchedule({
             <div className="mb-4">
               <p className="text-gray-700 mb-4">{selectedDay.description}</p>
               <div className="flex items-center space-x-4 text-sm text-gray-600">
-                <span>{selectedDay.duration} {tCommon('minutes')}</span>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(selectedDay.difficulty)}`}>
+                <span>
+                  {selectedDay.duration} {tCommon("minutes")}
+                </span>
+                <span
+                  className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(
+                    selectedDay.difficulty,
+                  )}`}
+                >
                   {selectedDay.difficulty}
                 </span>
-                <span>{getCategoryIcon(selectedDay.category)} {selectedDay.category}</span>
+                <span>
+                  {getCategoryIcon(selectedDay.category)} {selectedDay.category}
+                </span>
               </div>
             </div>
 
@@ -267,10 +299,10 @@ export default function TrainingCampSchedule({
                     {index + 1}. {task.title}
                   </h4>
                   <p className="text-gray-700 mb-3">{task.description}</p>
-                  
+
                   <div className="mb-3">
                     <h5 className="font-medium text-gray-800 mb-2">
-                      {tCommon('instructions')}
+                      {tCommon("instructions")}
                     </h5>
                     <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
                       {task.instructions.map((instruction, idx) => (
@@ -281,7 +313,7 @@ export default function TrainingCampSchedule({
 
                   <div className="mb-3">
                     <h5 className="font-medium text-gray-800 mb-2">
-                      {tCommon('tips')}
+                      {tCommon("tips")}
                     </h5>
                     <ul className="list-disc list-inside space-y-1 text-sm text-gray-700">
                       {task.tips.map((tip, idx) => (
@@ -292,9 +324,11 @@ export default function TrainingCampSchedule({
 
                   <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                     <h5 className="font-medium text-green-800 mb-1">
-                      {tCommon('expectedOutcome')}
+                      {tCommon("expectedOutcome")}
                     </h5>
-                    <p className="text-green-700 text-sm">{task.expectedOutcome}</p>
+                    <p className="text-green-700 text-sm">
+                      {task.expectedOutcome}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -308,9 +342,8 @@ export default function TrainingCampSchedule({
                 className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {completedDays.includes(selectedDay.id)
-                  ? tCommon('completed')
-                  : tCommon('markAsComplete')
-                }
+                  ? tCommon("completed")
+                  : tCommon("markAsComplete")}
               </button>
             </div>
           </div>
@@ -319,5 +352,3 @@ export default function TrainingCampSchedule({
     </div>
   );
 }
-
-

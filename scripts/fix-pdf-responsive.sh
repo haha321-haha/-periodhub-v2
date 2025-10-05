@@ -52,7 +52,7 @@ MOBILE_CSS='
                 gap: 10px !important;
             }
         }
-        
+
         @media (max-width: 480px) {
             body {
                 padding: 4px !important;
@@ -77,16 +77,16 @@ echo ""
 # 处理每个HTML文件
 for file in public/pdf-files/*.html; do
     filename=$(basename "$file")
-    
+
     # 检查是否已经有移动端媒体查询
     if grep -q "@media.*max-width" "$file"; then
         echo "⏭️  跳过 $filename (已有响应式设计)"
         ((SKIP_COUNT++))
         continue
     fi
-    
+
     echo "🔧 修复 $filename..."
-    
+
     # 在 </style> 之前插入移动端CSS
     if sed -i.tmp "s|</style>|$MOBILE_CSS</style>|g" "$file"; then
         # 删除临时文件
@@ -123,4 +123,4 @@ else
 fi
 
 echo ""
-echo "🚀 准备测试响应式效果..." 
+echo "🚀 准备测试响应式效果..."

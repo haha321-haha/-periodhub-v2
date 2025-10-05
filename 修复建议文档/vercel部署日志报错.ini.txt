@@ -14,7 +14,7 @@ Vercel部署日志显示的都是 `MISSING_MESSAGE` 错误，这表明：
 3. **缺失的翻译键**：
    - `organization.description`
    - `faq.q1.question` / `faq.q1.answer`
-   - `faq.q2.question` / `faq.q2.answer`  
+   - `faq.q2.question` / `faq.q2.answer`
    - `faq.q3.question` / `faq.q3.answer`
    - `home.faq.q4.question` / `home.faq.q4.answer`
    - `home.faq.q5.question` / `home.faq.q5.answer`

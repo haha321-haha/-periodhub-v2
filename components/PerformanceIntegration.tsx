@@ -7,9 +7,9 @@ import PerformanceMonitorComponent from './PerformanceMonitor';
 export default function PerformanceIntegration() {
   useEffect(() => {
     // 只在生产环境或开发环境启用
-    const isEnabled = process.env.NODE_ENV === 'production' || 
+    const isEnabled = process.env.NODE_ENV === 'production' ||
                      process.env.NEXT_PUBLIC_PERFORMANCE_MONITORING === 'true';
-    
+
     if (!isEnabled) return;
 
     // 添加性能监控到页面
@@ -17,7 +17,7 @@ export default function PerformanceIntegration() {
   }, []);
 
   return (
-    <PerformanceMonitorComponent 
+    <PerformanceMonitorComponent
       enabled={process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_PERFORMANCE_MONITORING === 'true'}
       showConsole={process.env.NODE_ENV === 'development'}
     />
@@ -32,7 +32,7 @@ export function usePerformanceMonitoring() {
     // 页面加载性能
     const handleLoad = () => {
       const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-      
+
       if (navigation) {
         console.log('📊 Page Load Performance:', {
           domContentLoaded: navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart,
@@ -45,7 +45,7 @@ export function usePerformanceMonitoring() {
     // 资源加载性能
     const handleResourceTiming = () => {
       const resources = performance.getEntriesByType('resource');
-      const slowResources = resources.filter(resource => 
+      const slowResources = resources.filter(resource =>
         resource.duration > 1000 // 超过1秒的资源
       );
 

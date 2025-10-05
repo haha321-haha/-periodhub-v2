@@ -498,11 +498,11 @@ class EmergencyKitTranslationsCreator {
    */
   run() {
     console.log('🚀 开始创建应急包页面翻译键...\n');
-    
+
     try {
       const { zhTranslations, enTranslations } = this.createEmergencyKitTranslations();
       this.saveTranslations(zhTranslations, enTranslations);
-      
+
       console.log('\n📊 创建统计:');
       console.log(`  - 中文键数: ${Object.keys(zhTranslations.scenarios.emergencyKit).length}`);
       console.log(`  - 英文键数: ${Object.keys(enTranslations.scenarios.emergencyKit).length}`);

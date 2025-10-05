@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 interface ProgressBarProps {
   current: number;
@@ -17,11 +17,9 @@ export default function ProgressBar({ current, total }: ProgressBarProps) {
         <span className="text-sm font-medium text-gray-700">
           第 {current} 题，共 {total} 题
         </span>
-        <span className="text-sm text-gray-500">
-          {Math.round(percentage)}%
-        </span>
+        <span className="text-sm text-gray-500">{Math.round(percentage)}%</span>
       </div>
-      
+
       {/* 进度条 */}
       <div className="w-full bg-gray-200 rounded-full h-2">
         <div

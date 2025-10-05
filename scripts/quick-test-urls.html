@@ -361,7 +361,7 @@
             <li><strong>检查下载的文件</strong> - 确认文件扩展名为 <code>.html</code></li>
             <li><strong>验证文件内容</strong> - 确认HTML文件内容与预览页面一致</li>
         </ol>
-        
+
         <h3>✅ 预期结果</h3>
         <ul>
             <li>所有下载的文件都应该是HTML格式（.html扩展名）</li>
@@ -375,7 +375,7 @@
         function testDownload(url, expectedFilename) {
             // 在新标签页中打开预览页面
             window.open(url, '_blank');
-            
+
             // 显示预期的下载文件名
             alert(`请在新打开的页面中点击"下载PDF"按钮\n预期下载文件名: ${expectedFilename}`);
         }

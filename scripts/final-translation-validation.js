@@ -19,39 +19,39 @@ const enPath = path.join(process.cwd(), 'messages/en.json');
 if (fs.existsSync(zhPath) && fs.existsSync(enPath)) {
   const zh = JSON.parse(fs.readFileSync(zhPath, 'utf8'));
   const en = JSON.parse(fs.readFileSync(enPath, 'utf8'));
-  
+
   // Check critical translation paths
   const paths = [
     'painTracker.assessment.recommendations',
     'interactiveToolsPage.painTracker.assessment.recommendations'
   ];
-  
+
   paths.forEach(pathStr => {
     console.log(`\n  Checking path: ${pathStr}`);
-    
+
     const zhValue = pathStr.split('.').reduce((obj, key) => obj?.[key], zh);
     const enValue = pathStr.split('.').reduce((obj, key) => obj?.[key], en);
-    
+
     if (zhValue && enValue) {
       console.log(`    ✅ Both languages have this path`);
-      
+
       // Check painManagement actionSteps specifically
       if (zhValue.painManagement && enValue.painManagement) {
         const zhSteps = zhValue.painManagement.actionSteps;
         const enSteps = enValue.painManagement.actionSteps;
-        
+
         if (Array.isArray(zhSteps) && Array.isArray(enSteps)) {
           console.log(`    ✅ Both have actionSteps arrays (ZH: ${zhSteps.length}, EN: ${enSteps.length})`);
-          
+
           // Check language separation
           const zhHasChinese = zhSteps.some(step => /[\u4e00-\u9fff]/.test(step));
           const enHasChinese = enSteps.some(step => /[\u4e00-\u9fff]/.test(step));
           const enHasEnglish = enSteps.some(step => /[a-zA-Z]/.test(step));
-          
+
           console.log(`    Chinese steps contain Chinese: ${zhHasChinese ? '✅' : '❌'}`);
           console.log(`    English steps contain Chinese: ${enHasChinese ? '❌ PROBLEM' : '✅'}`);
           console.log(`    English steps contain English: ${enHasEnglish ? '✅' : '❌'}`);
-          
+
           if (zhSteps.length > 0 && enSteps.length > 0) {
             console.log(`    Sample ZH step: "${zhSteps[0]}"`);
             console.log(`    Sample EN step: "${enSteps[0]}"`);
@@ -64,7 +64,7 @@ if (fs.existsSync(zhPath) && fs.existsSync(enPath)) {
       console.log(`    ❌ Missing path (ZH: ${!!zhValue}, EN: ${!!enValue})`);
     }
   });
-  
+
 } else {
   console.log('  ❌ Translation files not found');
 }
@@ -76,7 +76,7 @@ const hookPath = path.join(process.cwd(), 'app/[locale]/interactive-tools/shared
 
 if (fs.existsSync(hookPath)) {
   const hookContent = fs.readFileSync(hookPath, 'utf8');
-  
+
   const validations = [
     {
       name: 'Locale parameter in generateRecommendations',
@@ -112,7 +112,7 @@ if (fs.existsSync(hookPath)) {
       critical: true
     }
   ];
-  
+
   let criticalIssues = 0;
   validations.forEach(validation => {
     const passed = validation.check();
@@ -122,9 +122,9 @@ if (fs.existsSync(hookPath)) {
       criticalIssues++;
     }
   });
-  
+
   console.log(`\n  Critical issues: ${criticalIssues}`);
-  
+
 } else {
   console.log('  ❌ useSymptomAssessment hook not found');
 }
@@ -136,7 +136,7 @@ const componentPath = path.join(process.cwd(), 'app/[locale]/interactive-tools/c
 
 if (fs.existsSync(componentPath)) {
   const componentContent = fs.readFileSync(componentPath, 'utf8');
-  
+
   const checks = [
     {
       name: 'Uses useSafeTranslations hook',
@@ -151,12 +151,12 @@ if (fs.existsSync(componentPath)) {
       test: () => componentContent.includes('locale') && componentContent.includes('startAssessment')
     }
   ];
-  
+
   checks.forEach(check => {
     const passed = check.test();
     console.log(`  ${passed ? '✅' : '❌'} ${check.name}`);
   });
-  
+
 } else {
   console.log('  ❌ SymptomAssessmentTool component not found');
 }
@@ -166,15 +166,15 @@ console.log('\n4. Translation Quality Check:');
 
 try {
   const { execSync } = require('child_process');
-  const output = execSync('npm run quality:translations 2>/dev/null || echo "Quality check not available"', { 
+  const output = execSync('npm run quality:translations 2>/dev/null || echo "Quality check not available"', {
     encoding: 'utf8',
     stdio: 'pipe'
   });
-  
+
   if (output.includes('Coverage Rate')) {
     const coverageMatch = output.match(/Coverage Rate: ([\d.]+)%/);
     const qualityMatch = output.match(/Quality Score: (\d+)\/100/);
-    
+
     if (coverageMatch) {
       const coverage = parseFloat(coverageMatch[1]);
       console.log(`  Coverage Rate: ${coverage}% ${coverage >= 100 ? '✅' : '⚠️'}`);

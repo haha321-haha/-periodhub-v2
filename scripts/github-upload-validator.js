@@ -55,7 +55,7 @@ class GitHubUploadValidator {
         description: '运行所有测试用例'
       }
     ];
-    
+
     this.results = {
       passed: 0,
       failed: 0,
@@ -77,30 +77,30 @@ class GitHubUploadValidator {
     for (const step of this.validationSteps) {
       await this.runValidationStep(step);
     }
-    
+
     this.printValidationSummary();
     return this.results.failed === 0;
   }
 
   async runValidationStep(step) {
     const startTime = Date.now();
-    
+
     try {
       console.log(`🔍 验证: ${step.name}...`);
-      
-      const result = execSync(step.command, { 
+
+      const result = execSync(step.command, {
         encoding: 'utf8',
         stdio: 'pipe',
         timeout: 60000 // 60秒超时
       });
-      
+
       const duration = Date.now() - startTime;
       console.log(`✅ ${step.name} 通过 (${duration}ms)`);
       this.results.passed++;
-      
+
     } catch (error) {
       const duration = Date.now() - startTime;
-      
+
       if (step.critical) {
         console.log(`❌ ${step.name} 失败 (${duration}ms)`);
         console.log(`   错误: ${error.message}`);
@@ -115,14 +115,14 @@ class GitHubUploadValidator {
 
   printValidationSummary() {
     const totalTime = Date.now() - this.results.startTime;
-    
+
     console.log('\n📊 验证结果摘要:');
     console.log(`✅ 通过: ${this.results.passed}`);
     console.log(`❌ 失败: ${this.results.failed}`);
     console.log(`⚠️  警告: ${this.results.warnings}`);
     console.log(`📋 总计: ${this.results.total}`);
     console.log(`⏱️  耗时: ${Math.round(totalTime / 1000)}秒`);
-    
+
     if (this.results.failed > 0) {
       console.log('\n🚨 上传被阻止！请修复关键问题后重试。');
       console.log('💡 建议运行以下命令修复问题:');
@@ -154,34 +154,34 @@ class GitHubUploadValidator {
     if (!fs.existsSync('reports')) {
       fs.mkdirSync('reports', { recursive: true });
     }
-    
+
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
     console.log(`\n📄 验证报告已保存: ${reportFile}`);
-    
+
     return report;
   }
 
   getRecommendations() {
     const recommendations = [];
-    
+
     if (this.results.failed > 0) {
       recommendations.push('立即修复所有关键问题');
       recommendations.push('运行 npm run project:health 进行全面检查');
     }
-    
+
     if (this.results.warnings > 0) {
       recommendations.push('考虑修复警告项以提高代码质量');
     }
-    
+
     recommendations.push('定期运行验证脚本确保代码质量');
     recommendations.push('建立团队代码审查流程');
-    
+
     return recommendations;
   }
 
   getNextSteps() {
     const steps = [];
-    
+
     if (this.results.failed === 0) {
       steps.push('可以安全上传到GitHub');
       steps.push('通知团队代码已更新');
@@ -191,7 +191,7 @@ class GitHubUploadValidator {
       steps.push('重新运行验证脚本');
       steps.push('确认修复效果后再上传');
     }
-    
+
     return steps;
   }
 }
@@ -200,11 +200,11 @@ class GitHubUploadValidator {
 async function main() {
   const validator = new GitHubUploadValidator();
   const success = await validator.validateBeforeUpload();
-  
+
   if (success) {
     validator.generateValidationReport();
   }
-  
+
   if (!success) {
     process.exit(1);
   }

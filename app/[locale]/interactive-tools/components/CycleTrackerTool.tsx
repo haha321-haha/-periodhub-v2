@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
+import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 interface CycleTrackerToolProps {
   locale: string;
@@ -20,7 +20,7 @@ interface HistoryRecord {
 }
 
 export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
-  const [lastPeriodDate, setLastPeriodDate] = useState('');
+  const [lastPeriodDate, setLastPeriodDate] = useState("");
   const [cycleLength, setCycleLength] = useState(28);
   const [prediction, setPrediction] = useState<{
     nextPeriod: string;
@@ -29,7 +29,9 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
   } | null>(null);
   const [historyRecords, setHistoryRecords] = useState<HistoryRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">(
+    "idle",
+  );
   const [showHistory, setShowHistory] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
@@ -38,8 +40,8 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
 
   // 本地存储键名
   const STORAGE_KEYS = {
-    CURRENT_DATA: 'cycle-tracker-current',
-    HISTORY: 'cycle-tracker-history'
+    CURRENT_DATA: "cycle-tracker-current",
+    HISTORY: "cycle-tracker-history",
   };
 
   // 确保客户端和服务端渲染一致
@@ -50,12 +52,13 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
   // 页面加载时恢复数据
   useEffect(() => {
     if (!isMounted) return;
-    
+
     const loadSavedData = () => {
-      
       try {
         // 加载当前数据
-        const savedCurrentData = localStorage.getItem(STORAGE_KEYS.CURRENT_DATA);
+        const savedCurrentData = localStorage.getItem(
+          STORAGE_KEYS.CURRENT_DATA,
+        );
         if (savedCurrentData) {
           const currentData = JSON.parse(savedCurrentData);
           if (currentData.lastPeriodDate) {
@@ -78,9 +81,9 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
           }
         }
       } catch (error) {
-        console.error('Error loading saved data:', error);
+        console.error("Error loading saved data:", error);
         // 数据损坏时清除
-        if (typeof window !== 'undefined') {
+        if (typeof window !== "undefined") {
           localStorage.removeItem(STORAGE_KEYS.CURRENT_DATA);
           localStorage.removeItem(STORAGE_KEYS.HISTORY);
         }
@@ -93,47 +96,54 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
   }, [isMounted]);
 
   // 保存当前数据到本地存储
-  const saveCurrentData = (data: { lastPeriodDate: string; cycleLength: number; prediction?: any }) => {
-    if (typeof window === 'undefined') return;
-    
+  const saveCurrentData = (data: {
+    lastPeriodDate: string;
+    cycleLength: number;
+    prediction?: any;
+  }) => {
+    if (typeof window === "undefined") return;
+
     try {
-      setSaveStatus('saving');
+      setSaveStatus("saving");
       localStorage.setItem(STORAGE_KEYS.CURRENT_DATA, JSON.stringify(data));
-      setSaveStatus('saved');
-      setTimeout(() => setSaveStatus('idle'), 2000);
+      setSaveStatus("saved");
+      setTimeout(() => setSaveStatus("idle"), 2000);
     } catch (error) {
-      console.error('Error saving data:', error);
-      setSaveStatus('idle');
+      console.error("Error saving data:", error);
+      setSaveStatus("idle");
     }
   };
 
   // 保存历史记录
   const saveToHistory = (record: HistoryRecord) => {
-    if (typeof window === 'undefined') return;
-    
+    if (typeof window === "undefined") return;
+
     try {
       const updatedHistory = [record, ...historyRecords.slice(0, 9)]; // 保留最新10条
       setHistoryRecords(updatedHistory);
-      localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(updatedHistory));
+      localStorage.setItem(
+        STORAGE_KEYS.HISTORY,
+        JSON.stringify(updatedHistory),
+      );
     } catch (error) {
-      console.error('Error saving history:', error);
+      console.error("Error saving history:", error);
     }
   };
 
   // 删除历史记录
   const deleteHistoryRecord = (id: string) => {
-    if (typeof window === 'undefined') return;
-    
-    const updatedHistory = historyRecords.filter(record => record.id !== id);
+    if (typeof window === "undefined") return;
+
+    const updatedHistory = historyRecords.filter((record) => record.id !== id);
     setHistoryRecords(updatedHistory);
     localStorage.setItem(STORAGE_KEYS.HISTORY, JSON.stringify(updatedHistory));
   };
 
   // 清空所有历史记录
   const clearAllHistory = () => {
-    if (typeof window === 'undefined') return;
-    
-    if (confirm(t('cycleTracker.confirmClearAll'))) {
+    if (typeof window === "undefined") return;
+
+    if (confirm(t("cycleTracker.confirmClearAll"))) {
       setHistoryRecords([]);
       localStorage.removeItem(STORAGE_KEYS.HISTORY);
     }
@@ -144,16 +154,18 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
     const exportData = {
       currentData: { lastPeriodDate, cycleLength, prediction },
       history: historyRecords,
-      exportDate: new Date().toISOString()
+      exportDate: new Date().toISOString(),
     };
 
     const dataStr = JSON.stringify(exportData, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const dataBlob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(dataBlob);
 
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = `cycle-tracker-data-${new Date().toISOString().split('T')[0]}.json`;
+    link.download = `cycle-tracker-data-${
+      new Date().toISOString().split("T")[0]
+    }.json`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -164,18 +176,18 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
   const getTodayDate = () => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
 
   // 格式化日期显示
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return date.toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
@@ -200,39 +212,46 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
     fertilityEnd.setUTCDate(fertilityEnd.getUTCDate() + 1);
 
     const newPrediction = {
-      nextPeriod: nextPeriod.toISOString().split('T')[0],
-      ovulation: ovulation.toISOString().split('T')[0],
+      nextPeriod: nextPeriod.toISOString().split("T")[0],
+      ovulation: ovulation.toISOString().split("T")[0],
       fertilityWindow: {
-        start: fertilityStart.toISOString().split('T')[0],
-        end: fertilityEnd.toISOString().split('T')[0]
-      }
+        start: fertilityStart.toISOString().split("T")[0],
+        end: fertilityEnd.toISOString().split("T")[0],
+      },
     };
 
     setPrediction(newPrediction);
 
     // 保存当前数据
-    const currentData = { lastPeriodDate, cycleLength, prediction: newPrediction };
+    const currentData = {
+      lastPeriodDate,
+      cycleLength,
+      prediction: newPrediction,
+    };
     saveCurrentData(currentData);
 
     // 保存到历史记录
     const historyRecord: HistoryRecord = {
-      id: typeof window !== 'undefined' ? Date.now().toString() : Math.random().toString(),
+      id:
+        typeof window !== "undefined"
+          ? Date.now().toString()
+          : Math.random().toString(),
       date: new Date().toISOString(),
       lastPeriodDate,
       cycleLength,
-      prediction: newPrediction
+      prediction: newPrediction,
     };
     saveToHistory(historyRecord);
   };
 
   // 重置
   const resetCalculation = () => {
-    setLastPeriodDate('');
+    setLastPeriodDate("");
     setCycleLength(28);
     setPrediction(null);
 
     // 清除保存的当前数据
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       localStorage.removeItem(STORAGE_KEYS.CURRENT_DATA);
     }
   };
@@ -243,14 +262,18 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
     const today = getTodayDate();
 
     if (new Date(selectedDate) > new Date(today)) {
-      alert(t('cycleTracker.dateValidation'));
+      alert(t("cycleTracker.dateValidation"));
       return;
     }
 
     setLastPeriodDate(selectedDate);
 
     // 自动保存当前数据
-    const currentData = { lastPeriodDate: selectedDate, cycleLength, prediction };
+    const currentData = {
+      lastPeriodDate: selectedDate,
+      cycleLength,
+      prediction,
+    };
     saveCurrentData(currentData);
   };
 
@@ -269,7 +292,7 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
       <div className="max-w-2xl mx-auto p-6">
         <div className="text-center py-12">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">{t('cycleTracker.loading')}</p>
+          <p className="text-gray-600">{t("cycleTracker.loading")}</p>
         </div>
       </div>
     );
@@ -278,16 +301,26 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
   return (
     <div className="max-w-2xl mx-auto p-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">{t('cycleTracker.title')}</h1>
-        <p className="text-lg text-gray-600">{t('cycleTracker.subtitle')}</p>
+        <h1 className="text-3xl font-bold text-gray-800 mb-4">
+          {t("cycleTracker.title")}
+        </h1>
+        <p className="text-lg text-gray-600">{t("cycleTracker.subtitle")}</p>
 
         {/* 保存状态提示 */}
-        {saveStatus === 'saved' && (
+        {saveStatus === "saved" && (
           <div className="mt-4 inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-lg">
-            <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+            <svg
+              className="w-4 h-4 mr-2"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clipRule="evenodd"
+              />
             </svg>
-            {t('cycleTracker.saveSuccess')}
+            {t("cycleTracker.saveSuccess")}
           </div>
         )}
       </div>
@@ -298,10 +331,22 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
           onClick={() => setShowHistory(!showHistory)}
           className="inline-flex items-center px-4 py-2 border border-purple-300 text-purple-700 rounded-lg hover:bg-purple-50 transition-colors"
         >
-          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <svg
+            className="w-4 h-4 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
           </svg>
-          {showHistory ? t('cycleTracker.hideHistory') : t('cycleTracker.showHistory')}
+          {showHistory
+            ? t("cycleTracker.hideHistory")
+            : t("cycleTracker.showHistory")}
           {historyRecords.length > 0 && (
             <span className="ml-2 bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">
               {historyRecords.length}
@@ -314,7 +359,9 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
       {showHistory && (
         <div className="mb-8 bg-purple-50 rounded-xl p-6">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-semibold text-gray-800">{t('cycleTracker.historyTitle')}</h3>
+            <h3 className="text-xl font-semibold text-gray-800">
+              {t("cycleTracker.historyTitle")}
+            </h3>
             <div className="flex space-x-2">
               {historyRecords.length > 0 && (
                 <>
@@ -322,13 +369,13 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
                     onClick={exportData}
                     className="px-3 py-1 text-sm bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors"
                   >
-                    {t('cycleTracker.exportData')}
+                    {t("cycleTracker.exportData")}
                   </button>
                   <button
                     onClick={clearAllHistory}
                     className="px-3 py-1 text-sm bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors"
                   >
-                    {t('cycleTracker.clearAllHistory')}
+                    {t("cycleTracker.clearAllHistory")}
                   </button>
                 </>
               )}
@@ -336,40 +383,55 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
           </div>
 
           {historyRecords.length === 0 ? (
-            <p className="text-gray-500 text-center py-4">{t('cycleTracker.noHistory')}</p>
+            <p className="text-gray-500 text-center py-4">
+              {t("cycleTracker.noHistory")}
+            </p>
           ) : (
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {historyRecords.map((record) => (
-                <div key={record.id} className="bg-white rounded-lg p-4 border border-purple-200">
+                <div
+                  key={record.id}
+                  className="bg-white rounded-lg p-4 border border-purple-200"
+                >
                   <div className="flex justify-between items-start mb-2">
                     <div>
                       <p className="text-sm text-gray-500">
-                        {t('cycleTracker.recordedOn')} {formatDate(record.date.split('T')[0])}
+                        {t("cycleTracker.recordedOn")}{" "}
+                        {formatDate(record.date.split("T")[0])}
                       </p>
                       <p className="font-medium text-gray-800">
-                        {t('cycleTracker.cycleLength')}: {record.cycleLength} {t('cycleTracker.days')}
+                        {t("cycleTracker.cycleLength")}: {record.cycleLength}{" "}
+                        {t("cycleTracker.days")}
                       </p>
                     </div>
                     <button
                       onClick={() => deleteHistoryRecord(record.id)}
                       className="text-red-500 hover:text-red-700 text-sm"
                     >
-                      {t('cycleTracker.deleteRecord')}
+                      {t("cycleTracker.deleteRecord")}
                     </button>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
                     <div className="bg-pink-100 text-pink-800 p-2 rounded">
-                      <div className="font-medium">{t('cycleTracker.nextPeriodLabel')}</div>
+                      <div className="font-medium">
+                        {t("cycleTracker.nextPeriodLabel")}
+                      </div>
                       <div>{formatDate(record.prediction.nextPeriod)}</div>
                     </div>
                     <div className="bg-purple-100 text-purple-800 p-2 rounded">
-                      <div className="font-medium">{t('cycleTracker.ovulationLabel')}</div>
+                      <div className="font-medium">
+                        {t("cycleTracker.ovulationLabel")}
+                      </div>
                       <div>{formatDate(record.prediction.ovulation)}</div>
                     </div>
                     <div className="bg-green-100 text-green-800 p-2 rounded">
-                      <div className="font-medium">{t('cycleTracker.fertilityWindowLabel')}</div>
+                      <div className="font-medium">
+                        {t("cycleTracker.fertilityWindowLabel")}
+                      </div>
                       <div>
-                        {formatDate(record.prediction.fertilityWindow.start)} {t('cycleTracker.to')} {formatDate(record.prediction.fertilityWindow.end)}
+                        {formatDate(record.prediction.fertilityWindow.start)}{" "}
+                        {t("cycleTracker.to")}{" "}
+                        {formatDate(record.prediction.fertilityWindow.end)}
                       </div>
                     </div>
                   </div>
@@ -384,7 +446,7 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
         <div className="space-y-6">
           <div>
             <label className="block text-lg font-semibold mb-3 text-gray-800">
-              {t('cycleTracker.lastPeriodLabel')}
+              {t("cycleTracker.lastPeriodLabel")}
             </label>
             <input
               type="date"
@@ -393,12 +455,14 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
               max={getTodayDate()}
               className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-base"
             />
-            <p className="mt-2 text-sm text-red-600">⚠️ {t('cycleTracker.dateValidation')}</p>
+            <p className="mt-2 text-sm text-red-600">
+              ⚠️ {t("cycleTracker.dateValidation")}
+            </p>
           </div>
 
           <div>
             <label className="block text-lg font-semibold mb-3 text-gray-800">
-              {t('cycleTracker.cycleLengthLabel')}
+              {t("cycleTracker.cycleLengthLabel")}
             </label>
             <div className="flex items-center space-x-4">
               <div className="flex-1 relative">
@@ -407,14 +471,16 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
                   min="21"
                   max="35"
                   value={cycleLength}
-                  onChange={(e) => handleCycleLengthChange(Number(e.target.value))}
+                  onChange={(e) =>
+                    handleCycleLengthChange(Number(e.target.value))
+                  }
                   className="w-full h-3 bg-gradient-to-r from-purple-200 via-purple-300 to-purple-400 rounded-lg appearance-none cursor-pointer slider"
                   style={{
                     background: `linear-gradient(to right,
                       #e9d5ff 0%,
                       #c4b5fd ${((cycleLength - 21) / 14) * 100}%,
                       #e5e7eb ${((cycleLength - 21) / 14) * 100}%,
-                      #e5e7eb 100%)`
+                      #e5e7eb 100%)`,
                   }}
                 />
                 {/* 滑块样式 */}
@@ -444,7 +510,9 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
                 {cycleLength}
               </span>
             </div>
-            <p className="mt-2 text-sm text-gray-500">{t('cycleTracker.cycleLengthRange')}</p>
+            <p className="mt-2 text-sm text-gray-500">
+              {t("cycleTracker.cycleLengthRange")}
+            </p>
           </div>
 
           <div className="flex justify-center pt-6">
@@ -453,40 +521,54 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
               disabled={!lastPeriodDate}
               className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-8 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
-              {t('cycleTracker.calculateButton')}
+              {t("cycleTracker.calculateButton")}
             </button>
           </div>
         </div>
       ) : (
         <div className="space-y-6">
           <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">{t('cycleTracker.predictionTitle')}</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+              {t("cycleTracker.predictionTitle")}
+            </h2>
           </div>
 
           <div className="grid gap-6">
             <div className="bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl p-6 text-white">
               <div className="flex items-center space-x-3 mb-4">
                 <span className="text-3xl">🩸</span>
-                <h3 className="text-xl font-semibold">{t('cycleTracker.nextPeriodLabel')}</h3>
+                <h3 className="text-xl font-semibold">
+                  {t("cycleTracker.nextPeriodLabel")}
+                </h3>
               </div>
-              <p className="text-2xl font-bold">{formatDate(prediction.nextPeriod)}</p>
+              <p className="text-2xl font-bold">
+                {formatDate(prediction.nextPeriod)}
+              </p>
             </div>
 
             <div className="bg-gradient-to-r from-purple-500 to-indigo-500 rounded-xl p-6 text-white">
               <div className="flex items-center space-x-3 mb-4">
                 <span className="text-3xl">🥚</span>
-                <h3 className="text-xl font-semibold">{t('cycleTracker.ovulationLabel')}</h3>
+                <h3 className="text-xl font-semibold">
+                  {t("cycleTracker.ovulationLabel")}
+                </h3>
               </div>
-              <p className="text-2xl font-bold">{formatDate(prediction.ovulation)}</p>
+              <p className="text-2xl font-bold">
+                {formatDate(prediction.ovulation)}
+              </p>
             </div>
 
             <div className="bg-gradient-to-r from-green-500 to-teal-500 rounded-xl p-6 text-white">
               <div className="flex items-center space-x-3 mb-4">
                 <span className="text-3xl">💚</span>
-                <h3 className="text-xl font-semibold">{t('cycleTracker.fertilityWindowLabel')}</h3>
+                <h3 className="text-xl font-semibold">
+                  {t("cycleTracker.fertilityWindowLabel")}
+                </h3>
               </div>
               <p className="text-xl font-bold">
-                {formatDate(prediction.fertilityWindow.start)} {t('cycleTracker.to')} {formatDate(prediction.fertilityWindow.end)}
+                {formatDate(prediction.fertilityWindow.start)}{" "}
+                {t("cycleTracker.to")}{" "}
+                {formatDate(prediction.fertilityWindow.end)}
               </p>
             </div>
           </div>
@@ -496,14 +578,14 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
               onClick={resetCalculation}
               className="border border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors"
             >
-              {t('cycleTracker.resetButton')}
+              {t("cycleTracker.resetButton")}
             </button>
           </div>
         </div>
       )}
 
       <div className="mt-8 text-sm text-gray-500 text-center">
-        <p>{t('cycleTracker.disclaimer')}</p>
+        <p>{t("cycleTracker.disclaimer")}</p>
       </div>
     </div>
   );

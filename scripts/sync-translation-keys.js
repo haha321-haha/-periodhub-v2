@@ -47,7 +47,7 @@ class TranslationKeySyncer {
    */
   flattenKeys(obj, prefix = '') {
     const flattened = {};
-    
+
     for (const key in obj) {
       if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
         const nested = this.flattenKeys(obj[key], prefix ? `${prefix}.${key}` : key);
@@ -56,7 +56,7 @@ class TranslationKeySyncer {
         flattened[prefix ? `${prefix}.${key}` : key] = obj[key];
       }
     }
-    
+
     return flattened;
   }
 
@@ -65,21 +65,21 @@ class TranslationKeySyncer {
    */
   unflattenKeys(flattened) {
     const result = {};
-    
+
     for (const key in flattened) {
       const keys = key.split('.');
       let current = result;
-      
+
       for (let i = 0; i < keys.length - 1; i++) {
         if (!current[keys[i]]) {
           current[keys[i]] = {};
         }
         current = current[keys[i]];
       }
-      
+
       current[keys[keys.length - 1]] = flattened[key];
     }
-    
+
     return result;
   }
 
@@ -88,11 +88,11 @@ class TranslationKeySyncer {
    */
   syncKeys() {
     console.log('🔄 开始同步翻译键...');
-    
+
     // 加载翻译文件
     const zhData = this.loadJsonFile(this.zhFile);
     const enData = this.loadJsonFile(this.enFile);
-    
+
     if (!zhData || !enData) {
       console.error('❌ 无法加载翻译文件');
       return false;
@@ -101,14 +101,14 @@ class TranslationKeySyncer {
     // 扁平化键
     const zhFlattened = this.flattenKeys(zhData);
     const enFlattened = this.flattenKeys(enData);
-    
+
     console.log(`📊 中文键数量: ${Object.keys(zhFlattened).length}`);
     console.log(`📊 英文键数量: ${Object.keys(enFlattened).length}`);
 
     // 找出差异
     const zhKeys = new Set(Object.keys(zhFlattened));
     const enKeys = new Set(Object.keys(enFlattened));
-    
+
     const missingInEn = [...zhKeys].filter(key => !enKeys.has(key));
     const missingInZh = [...enKeys].filter(key => !zhKeys.has(key));
     const commonKeys = [...zhKeys].filter(key => enKeys.has(key));
@@ -144,7 +144,7 @@ class TranslationKeySyncer {
       // 重建嵌套结构并保存
       const newZhData = this.unflattenKeys(zhFlattened);
       const newEnData = this.unflattenKeys(enFlattened);
-      
+
       if (this.saveJsonFile(this.zhFile, newZhData) && this.saveJsonFile(this.enFile, newEnData)) {
         console.log('\n✅ 翻译键同步完成！');
         return true;
@@ -163,20 +163,20 @@ class TranslationKeySyncer {
    */
   validateSync() {
     console.log('\n🔍 验证同步结果...');
-    
+
     const zhData = this.loadJsonFile(this.zhFile);
     const enData = this.loadJsonFile(this.enFile);
-    
+
     if (!zhData || !enData) {
       return false;
     }
 
     const zhFlattened = this.flattenKeys(zhData);
     const enFlattened = this.flattenKeys(enData);
-    
+
     const zhKeys = new Set(Object.keys(zhFlattened));
     const enKeys = new Set(Object.keys(enFlattened));
-    
+
     const missingInEn = [...zhKeys].filter(key => !enKeys.has(key));
     const missingInZh = [...enKeys].filter(key => !zhKeys.has(key));
 
@@ -194,7 +194,7 @@ class TranslationKeySyncer {
    */
   run() {
     console.log('🚀 开始翻译键同步...\n');
-    
+
     try {
       const success = this.syncKeys();
       if (success) {

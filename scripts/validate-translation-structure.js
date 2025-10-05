@@ -13,7 +13,7 @@ class TranslationStructureValidator {
     this.messagesDir = path.join(__dirname, '..', 'messages');
     this.zhPath = path.join(this.messagesDir, 'zh.json');
     this.enPath = path.join(this.messagesDir, 'en.json');
-    
+
     this.standards = {
       // 命名规范
       naming: {
@@ -35,7 +35,7 @@ class TranslationStructureValidator {
         ]
       }
     };
-    
+
     this.violations = {
       naming: [],
       structure: [],
@@ -77,7 +77,7 @@ class TranslationStructureValidator {
    */
   flattenKeys(obj, prefix = '') {
     const flattened = {};
-    
+
     for (const key in obj) {
       if (typeof obj[key] === 'object' && obj[key] !== null) {
         const nested = this.flattenKeys(obj[key], prefix ? `${prefix}.${key}` : key);
@@ -86,7 +86,7 @@ class TranslationStructureValidator {
         flattened[prefix ? `${prefix}.${key}` : key] = obj[key];
       }
     }
-    
+
     return flattened;
   }
 
@@ -95,13 +95,13 @@ class TranslationStructureValidator {
    */
   validateNaming(translations) {
     const locales = Object.keys(translations);
-    
+
     locales.forEach(locale => {
       const flattened = this.flattenKeys(translations[locale]);
-      
+
       Object.keys(flattened).forEach(key => {
         const parts = key.split('.');
-        
+
         parts.forEach(part => {
           // 检查驼峰命名法
           if (!this.standards.naming.camelCase.test(part)) {
@@ -113,7 +113,7 @@ class TranslationStructureValidator {
               suggestion: '使用 camelCase 格式'
             });
           }
-          
+
           // 检查长度
           if (part.length > this.standards.naming.maxLength) {
             this.violations.naming.push({
@@ -124,7 +124,7 @@ class TranslationStructureValidator {
               suggestion: `缩短到 ${this.standards.naming.maxLength} 字符以内`
             });
           }
-          
+
           if (part.length < this.standards.naming.minLength) {
             this.violations.naming.push({
               key,
@@ -134,7 +134,7 @@ class TranslationStructureValidator {
               suggestion: `至少 ${this.standards.naming.minLength} 字符`
             });
           }
-          
+
           // 检查特殊字符
           if (this.standards.naming.forbiddenChars.test(part)) {
             this.violations.naming.push({
@@ -145,7 +145,7 @@ class TranslationStructureValidator {
               suggestion: '只使用字母、数字和点号'
             });
           }
-          
+
           // 检查禁用词
           if (this.standards.naming.forbiddenWords.includes(part.toLowerCase())) {
             this.violations.naming.push({
@@ -166,10 +166,10 @@ class TranslationStructureValidator {
    */
   validateStructure(translations) {
     const locales = Object.keys(translations);
-    
+
     locales.forEach(locale => {
       const flattened = this.flattenKeys(translations[locale]);
-      
+
       // 检查层级深度
       Object.keys(flattened).forEach(key => {
         const depth = key.split('.').length;
@@ -182,7 +182,7 @@ class TranslationStructureValidator {
           });
         }
       });
-      
+
       // 检查必需命名空间
       this.standards.structure.requiredNamespaces.forEach(namespace => {
         if (!translations[locale][namespace]) {
@@ -194,7 +194,7 @@ class TranslationStructureValidator {
           });
         }
       });
-      
+
       // 检查命名空间是否在允许列表中
       Object.keys(translations[locale]).forEach(namespace => {
         if (!this.standards.structure.allowedNamespaces.includes(namespace)) {
@@ -214,10 +214,10 @@ class TranslationStructureValidator {
    */
   validateContent(translations) {
     const locales = Object.keys(translations);
-    
+
     locales.forEach(locale => {
       const flattened = this.flattenKeys(translations[locale]);
-      
+
       Object.entries(flattened).forEach(([key, value]) => {
         if (typeof value === 'string') {
           // 检查空值
@@ -229,7 +229,7 @@ class TranslationStructureValidator {
               suggestion: '添加翻译内容'
             });
           }
-          
+
           // 检查占位符
           if (value.includes('TODO') || value.includes('TBD') || value.includes('[ZH]') || value.includes('[EN]')) {
             this.violations.content.push({
@@ -239,7 +239,7 @@ class TranslationStructureValidator {
               suggestion: '完成翻译内容'
             });
           }
-          
+
           // 检查长度
           if (value.length > 500) {
             this.violations.content.push({
@@ -259,20 +259,20 @@ class TranslationStructureValidator {
    */
   validateConsistency(translations) {
     const locales = Object.keys(translations);
-    
+
     if (locales.length < 2) return;
-    
+
     const flattenedTranslations = {};
     locales.forEach(locale => {
       flattenedTranslations[locale] = this.flattenKeys(translations[locale]);
     });
-    
+
     // 检查键的一致性
     const allKeys = new Set();
     locales.forEach(locale => {
       Object.keys(flattenedTranslations[locale]).forEach(key => allKeys.add(key));
     });
-    
+
     allKeys.forEach(key => {
       const missingInLocales = locales.filter(locale => !flattenedTranslations[locale][key]);
       if (missingInLocales.length > 0) {
@@ -291,9 +291,9 @@ class TranslationStructureValidator {
   generateReport() {
     console.log('\n📊 翻译键结构验证报告');
     console.log('='.repeat(60));
-    
+
     const totalViolations = Object.values(this.violations).reduce((sum, violations) => sum + violations.length, 0);
-    
+
     console.log(`\n📈 总体统计:`);
     console.log(`  - 命名规范违规: ${this.violations.naming.length}`);
     console.log(`  - 结构规范违规: ${this.violations.structure.length}`);
@@ -379,10 +379,10 @@ class TranslationStructureValidator {
    */
   run() {
     console.log('🔍 开始翻译键结构验证...\n');
-    
+
     try {
       const translations = this.loadTranslations();
-      
+
       if (Object.keys(translations).length === 0) {
         console.error('❌ 没有找到有效的翻译文件');
         process.exit(1);
@@ -392,9 +392,9 @@ class TranslationStructureValidator {
       this.validateStructure(translations);
       this.validateContent(translations);
       this.validateConsistency(translations);
-      
+
       const report = this.generateReport();
-      
+
       console.log('\n' + '='.repeat(60));
       if (report.hasIssues) {
         console.log('❌ 发现结构问题，需要修复');

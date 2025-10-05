@@ -118,7 +118,7 @@ export class URLGenerator {
   ): string {
     const locale = options.locale || 'zh';
     const template = this.routeTemplates.get(URLType.RESOURCE_VIEW);
-    
+
     if (!template) {
       throw new Error('Resource view route template not found');
     }
@@ -144,7 +144,7 @@ export class URLGenerator {
 
     const locale = options.locale || 'zh';
     const template = this.routeTemplates.get(URLType.RESOURCE_DOWNLOAD);
-    
+
     if (!template) {
       throw new Error('Resource download route template not found');
     }
@@ -173,7 +173,7 @@ export class URLGenerator {
   ): string {
     const locale = options.locale || 'zh';
     const template = this.routeTemplates.get(URLType.RESOURCE_PREVIEW);
-    
+
     if (!template) {
       throw new Error('Resource preview route template not found');
     }
@@ -205,7 +205,7 @@ export class URLGenerator {
 
     // 动态生成缩略图URL
     const template = this.routeTemplates.get(URLType.RESOURCE_THUMBNAIL);
-    
+
     if (!template) {
       throw new Error('Resource thumbnail route template not found');
     }
@@ -226,7 +226,7 @@ export class URLGenerator {
   ): string {
     const locale = options.locale || 'zh';
     const template = this.routeTemplates.get(URLType.CATEGORY_LIST);
-    
+
     if (!template) {
       throw new Error('Category list route template not found');
     }
@@ -248,7 +248,7 @@ export class URLGenerator {
   ): string {
     const locale = options.locale || 'zh';
     const template = this.routeTemplates.get(URLType.SEARCH_RESULTS);
-    
+
     if (!template) {
       throw new Error('Search results route template not found');
     }
@@ -273,13 +273,13 @@ export class URLGenerator {
     options: URLGenerationOptions = {}
   ): string {
     const template = this.routeTemplates.get(URLType.API_ENDPOINT);
-    
+
     if (!template) {
       throw new Error('API endpoint route template not found');
     }
 
     let pathname = template.pattern.replace(':endpoint', endpoint);
-    
+
     if (resourceId) {
       pathname = pathname.replace(':resourceId', resourceId);
     } else {
@@ -305,12 +305,12 @@ export class URLGenerator {
 
     const cdnBaseUrl = this.config.cdn.baseUrl;
     const normalizedPath = assetPath.startsWith('/') ? assetPath.slice(1) : assetPath;
-    
+
     let url = `${cdnBaseUrl}/${normalizedPath}`;
 
     // 添加版本参数用于缓存控制
     const queryParams: Record<string, string> = {};
-    
+
     if (options.version) {
       queryParams.v = options.version;
     }
@@ -399,7 +399,7 @@ export class URLGenerator {
 
     try {
       const urlObj = new URL(url);
-      
+
       result.parsedComponents = {
         protocol: urlObj.protocol,
         hostname: urlObj.hostname,
@@ -475,18 +475,18 @@ export class URLGenerator {
       if (options.includeAlternateLanguages) {
         entry.alternateUrls = [
           {
-            url: this.generateResourceViewUrl(resource.id, { 
-              locale: 'zh', 
-              absolute: true, 
-              baseUrl 
+            url: this.generateResourceViewUrl(resource.id, {
+              locale: 'zh',
+              absolute: true,
+              baseUrl
             }),
             language: 'zh'
           },
           {
-            url: this.generateResourceViewUrl(resource.id, { 
-              locale: 'en', 
-              absolute: true, 
-              baseUrl 
+            url: this.generateResourceViewUrl(resource.id, {
+              locale: 'en',
+              absolute: true,
+              baseUrl
             }),
             language: 'en'
           }
@@ -612,7 +612,7 @@ export class URLGenerator {
 
   private initializeBaseUrls(): void {
     const baseUrl = this.config.publicPath || '';
-    
+
     this.baseUrls.set('zh', `${baseUrl}/zh`);
     this.baseUrls.set('en', `${baseUrl}/en`);
     this.baseUrls.set('es', `${baseUrl}/es`);
@@ -710,20 +710,20 @@ export class URLGenerator {
  */
 export const urlGenerator = {
   getInstance: URLGenerator.getInstance,
-  
+
   // 快捷方法
-  resourceView: (resourceId: string, locale?: SupportedLanguage) => 
+  resourceView: (resourceId: string, locale?: SupportedLanguage) =>
     URLGenerator.getInstance().generateResourceViewUrl(resourceId, { locale }),
-  
+
   resourceDownload: (resource: PDFResource, locale?: SupportedLanguage) =>
     URLGenerator.getInstance().generateResourceDownloadUrl(resource, { locale }),
-  
+
   resourcePreview: (resourceId: string, locale?: SupportedLanguage) =>
     URLGenerator.getInstance().generateResourcePreviewUrl(resourceId, undefined, { locale }),
-  
+
   category: (category: ResourceCategory, locale?: SupportedLanguage) =>
     URLGenerator.getInstance().generateCategoryUrl(category, { locale }),
-  
+
   search: (query: string, locale?: SupportedLanguage) =>
     URLGenerator.getInstance().generateSearchUrl(query, {}, { locale })
 };

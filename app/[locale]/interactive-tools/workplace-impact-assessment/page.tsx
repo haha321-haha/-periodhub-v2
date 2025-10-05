@@ -1,32 +1,32 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-import dynamic from 'next/dynamic';
-import { titleManager } from '@/utils/unifiedTitleManager';
-import { getWorkplaceQuestions } from '../shared/data/assessmentQuestions';
-import { calculateWorkplaceImpact } from '../shared/data/calculationAlgorithms';
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
+import { titleManager } from "@/utils/unifiedTitleManager";
+import { getWorkplaceQuestions } from "../shared/data/assessmentQuestions";
+import { calculateWorkplaceImpact } from "../shared/data/calculationAlgorithms";
 
 // 动态导入组件 - 代码分割优化
-const WelcomeScreen = dynamic(() => import('./components/WelcomeScreen'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+const WelcomeScreen = dynamic(() => import("./components/WelcomeScreen"), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />,
 });
 
-const QuestionScreen = dynamic(() => import('./components/QuestionScreen'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+const QuestionScreen = dynamic(() => import("./components/QuestionScreen"), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />,
 });
 
-const ResultsScreen = dynamic(() => import('./components/ResultsScreen'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+const ResultsScreen = dynamic(() => import("./components/ResultsScreen"), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />,
 });
 
-const ProgressBar = dynamic(() => import('./components/ProgressBar'), {
-  loading: () => <div className="animate-pulse bg-gray-200 h-8 rounded-lg" />
+const ProgressBar = dynamic(() => import("./components/ProgressBar"), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-8 rounded-lg" />,
 });
 
 // 页面状态类型
-type PageState = 'welcome' | 'questions' | 'results';
+type PageState = "welcome" | "questions" | "results";
 
 // 答案类型
 interface WorkplaceAnswers {
@@ -43,41 +43,43 @@ interface WorkplaceResults {
   suggestions: string[];
 }
 
-export default function WorkplaceImpactAssessmentPage({ 
-  params 
-}: { 
-  params: Promise<{ locale: string }> 
+export default function WorkplaceImpactAssessmentPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
 }) {
   const router = useRouter();
-  const t = useTranslations('interactiveTools.workplaceAssessment');
-  const commonT = useTranslations('common');
-  
+  const t = useTranslations("interactiveTools.workplaceAssessment");
+  const commonT = useTranslations("common");
+
   // 页面状态管理
-  const [currentState, setCurrentState] = useState<PageState>('welcome');
+  const [currentState, setCurrentState] = useState<PageState>("welcome");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<WorkplaceAnswers>({});
   const [results, setResults] = useState<WorkplaceResults | null>(null);
-  
+
   // 获取题库数据
-  const questions = getWorkplaceQuestions('zh'); // 使用固定语言，因为题库数据已经在组件中处理国际化
-  
+  const questions = getWorkplaceQuestions("zh"); // 使用固定语言，因为题库数据已经在组件中处理国际化
+
   // 设置页面标题
   useEffect(() => {
-    const metaTitle = t('metaTitle') || '职场影响评估 - 专业痛经对工作影响分析工具 | Period Hub';
-    titleManager.setTitle(metaTitle, 'zh');
+    const metaTitle =
+      t("metaTitle") ||
+      "职场影响评估 - 专业痛经对工作影响分析工具 | Period Hub";
+    titleManager.setTitle(metaTitle, "zh");
   }, [t]);
 
   // 开始评估
   const handleStartAssessment = () => {
-    setCurrentState('questions');
+    setCurrentState("questions");
     setCurrentQuestionIndex(0);
   };
 
   // 处理问题答案
   const handleAnswer = (questionId: string, answer: string | string[]) => {
-    setAnswers(prev => ({
+    setAnswers((prev) => ({
       ...prev,
-      [questionId]: answer
+      [questionId]: answer,
     }));
   };
 
@@ -87,9 +89,9 @@ export default function WorkplaceImpactAssessmentPage({
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       // 完成所有问题，计算结果
-      const workplaceResults = calculateWorkplaceImpact(answers, 'zh');
+      const workplaceResults = calculateWorkplaceImpact(answers, "zh");
       setResults(workplaceResults);
-      setCurrentState('results');
+      setCurrentState("results");
     }
   };
 
@@ -102,7 +104,7 @@ export default function WorkplaceImpactAssessmentPage({
 
   // 重新评估
   const handleRestart = () => {
-    setCurrentState('welcome');
+    setCurrentState("welcome");
     setCurrentQuestionIndex(0);
     setAnswers({});
     setResults(null);
@@ -110,20 +112,22 @@ export default function WorkplaceImpactAssessmentPage({
 
   // 返回主页
   const handleBack = () => {
-    router.push('/zh/interactive-tools');
+    router.push("/zh/interactive-tools");
   };
 
   // 渲染当前页面内容
   const renderCurrentContent = () => {
     switch (currentState) {
-      case 'welcome':
-        return <WelcomeScreen onStart={handleStartAssessment} onBack={handleBack} />;
-      
-      case 'questions':
+      case "welcome":
+        return (
+          <WelcomeScreen onStart={handleStartAssessment} onBack={handleBack} />
+        );
+
+      case "questions":
         return (
           <div className="space-y-6">
-            <ProgressBar 
-              current={currentQuestionIndex + 1} 
+            <ProgressBar
+              current={currentQuestionIndex + 1}
               total={questions.length}
             />
             <QuestionScreen
@@ -137,8 +141,8 @@ export default function WorkplaceImpactAssessmentPage({
             />
           </div>
         );
-      
-      case 'results':
+
+      case "results":
         return (
           <ResultsScreen
             results={results}
@@ -146,9 +150,11 @@ export default function WorkplaceImpactAssessmentPage({
             onBack={handleBack}
           />
         );
-      
+
       default:
-        return <WelcomeScreen onStart={handleStartAssessment} onBack={handleBack} />;
+        return (
+          <WelcomeScreen onStart={handleStartAssessment} onBack={handleBack} />
+        );
     }
   };
 

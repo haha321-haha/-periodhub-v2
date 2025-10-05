@@ -569,7 +569,7 @@
 
 1. **英文版本缺失 (en)**
    - `organization.description`
-   - `faq.title`, `faq.subtitle` 
+   - `faq.title`, `faq.subtitle`
    - `faq.q1-q7.question` 和 `faq.q1-q7.answer`
 
 2. **中文交互工具元数据缺失 (zh)**
@@ -730,7 +730,7 @@ export default getRequestConfig(async ({locale}) => ({
 ls -la messages/
 # 或
 ls -la locales/
-# 或  
+# 或
 ls -la src/messages/
 ```
 
@@ -753,7 +753,7 @@ t('organization.description') // 确保存在于 en.json
 // app/[locale]/interactive-tools/pain-tracker/page.js
 export async function generateMetadata({params: {locale}}) {
   const t = await getTranslations({locale, namespace: 'interactiveTools'});
-  
+
   return {
     title: t('meta.title'),
     description: t('meta.description'),
@@ -802,10 +802,10 @@ const path = require('path');
 function checkTranslationCompleteness() {
   const locales = ['en', 'zh'];
   const issues = [];
-  
+
   // 检查所有语言文件是否有相同的键
   // 实现翻译键的完整性检查逻辑
-  
+
   return issues;
 }
 ```

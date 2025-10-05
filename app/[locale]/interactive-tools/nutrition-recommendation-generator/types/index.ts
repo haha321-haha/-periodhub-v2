@@ -4,16 +4,25 @@
  */
 
 // 基础类型定义
-export type Language = 'zh' | 'en';
+export type Language = "zh" | "en";
 
 // 月经阶段类型
-export type MenstrualPhase = 'menstrual' | 'follicular' | 'ovulation' | 'luteal';
+export type MenstrualPhase =
+  | "menstrual"
+  | "follicular"
+  | "ovulation"
+  | "luteal";
 
 // 健康目标类型
-export type HealthGoal = 'anemiaPrevention' | 'pmsRelief';
+export type HealthGoal = "anemiaPrevention" | "pmsRelief";
 
 // 中医体质类型
-export type TCMConstitution = 'qiDeficiency' | 'yangDeficiency' | 'yinDeficiency' | 'phlegmDampness' | 'dampHeat';
+export type TCMConstitution =
+  | "qiDeficiency"
+  | "yangDeficiency"
+  | "yinDeficiency"
+  | "phlegmDampness"
+  | "dampHeat";
 
 // 多语言文本接口
 export interface LocalizedText {
@@ -34,7 +43,7 @@ export interface NutritionRecommendation {
 export interface LifestyleTip {
   title: LocalizedText;
   description: LocalizedText;
-  category: 'diet' | 'exercise' | 'lifestyle' | 'supplements';
+  category: "diet" | "exercise" | "lifestyle" | "supplements";
 }
 
 // 月经阶段数据接口
@@ -150,11 +159,11 @@ export interface UseLocalStorageReturn<T> {
 }
 
 // 错误类型
-export type NutritionError = 
-  | 'NO_SELECTION'
-  | 'DATA_LOAD_ERROR'
-  | 'GENERATION_ERROR'
-  | 'VALIDATION_ERROR';
+export type NutritionError =
+  | "NO_SELECTION"
+  | "DATA_LOAD_ERROR"
+  | "GENERATION_ERROR"
+  | "VALIDATION_ERROR";
 
 // 错误信息接口
 export interface ErrorInfo {

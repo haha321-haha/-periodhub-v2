@@ -34,11 +34,11 @@ function fetchSitemap(url) {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
       let data = '';
-      
+
       res.on('data', (chunk) => {
         data += chunk;
       });
-      
+
       res.on('end', () => {
         resolve(data);
       });
@@ -72,7 +72,7 @@ function buildSitemap(sitemapData) {
       xmldec: { version: '1.0', encoding: 'UTF-8' },
       renderOpts: { pretty: true, indent: '  ', newline: '\n' }
     });
-    
+
     try {
       const xml = builder.buildObject(sitemapData);
       resolve(xml);
@@ -89,16 +89,16 @@ function removeDuplicateUrls(sitemapData) {
   const duplicateUrls = new Set(CONFIG.duplicateUrls);
   const removedUrls = [];
   const keptUrls = [];
-  
+
   if (sitemapData.urlset && sitemapData.urlset.url) {
     const originalUrls = sitemapData.urlset.url;
     const uniqueUrls = [];
     const seenUrls = new Set();
-    
+
     for (const urlEntry of originalUrls) {
       if (urlEntry.loc && urlEntry.loc[0]) {
         const url = urlEntry.loc[0];
-        
+
         if (duplicateUrls.has(url)) {
           if (seenUrls.has(url)) {
             // 这是重复的 URL，需要移除
@@ -122,10 +122,10 @@ function removeDuplicateUrls(sitemapData) {
         uniqueUrls.push(urlEntry);
       }
     }
-    
+
     // 更新 sitemap 数据
     sitemapData.urlset.url = uniqueUrls;
-    
+
     return {
       removedUrls,
       keptUrls,
@@ -134,7 +134,7 @@ function removeDuplicateUrls(sitemapData) {
       removedCount: removedUrls.length
     };
   }
-  
+
   return {
     removedUrls: [],
     keptUrls: [],
@@ -155,10 +155,10 @@ function validateFixedSitemap(sitemapData) {
     duplicateUrls: [],
     isValid: true
   };
-  
+
   if (sitemapData.urlset && sitemapData.urlset.url) {
     validation.urlCount = sitemapData.urlset.url.length;
-    
+
     // 检查是否还有重复
     const seenUrls = new Set();
     for (const urlEntry of sitemapData.urlset.url) {
@@ -174,7 +174,7 @@ function validateFixedSitemap(sitemapData) {
       }
     }
   }
-  
+
   return validation;
 }
 
@@ -183,16 +183,16 @@ function validateFixedSitemap(sitemapData) {
  */
 function generateFixReport(results, validation) {
   const timestamp = new Date().toLocaleString('zh-CN');
-  
+
   let report = `# Sitemap 重复 URL 修复报告\n\n`;
   report += `**修复时间**: ${timestamp}\n\n`;
-  
+
   report += `## 📊 修复统计\n\n`;
   report += `- **原始 URL 数量**: ${results.originalCount}\n`;
   report += `- **修复后 URL 数量**: ${results.newCount}\n`;
   report += `- **移除的重复 URL**: ${results.removedCount}\n`;
   report += `- **保留的唯一 URL**: ${results.keptUrls.length}\n\n`;
-  
+
   if (results.removedUrls.length > 0) {
     report += `## 🗑️ 已移除的重复 URL\n\n`;
     results.removedUrls.forEach(url => {
@@ -200,13 +200,13 @@ function generateFixReport(results, validation) {
     });
     report += `\n`;
   }
-  
+
   report += `## ✅ 验证结果\n\n`;
   report += `- **包含 urlset**: ${validation.hasUrlset ? '是' : '否'}\n`;
   report += `- **URL 总数**: ${validation.urlCount}\n`;
   report += `- **剩余重复**: ${validation.duplicateCount}\n`;
   report += `- **验证状态**: ${validation.isValid ? '✅ 通过' : '❌ 失败'}\n\n`;
-  
+
   if (validation.duplicateUrls.length > 0) {
     report += `## ⚠️ 仍存在的重复 URL\n\n`;
     validation.duplicateUrls.forEach(url => {
@@ -214,7 +214,7 @@ function generateFixReport(results, validation) {
     });
     report += `\n`;
   }
-  
+
   if (validation.isValid) {
     report += `## 🎉 修复成功\n\n`;
     report += `sitemap 已成功修复，所有重复 URL 已被移除。\n\n`;
@@ -227,7 +227,7 @@ function generateFixReport(results, validation) {
     report += `## ❌ 修复失败\n\n`;
     report += `sitemap 修复过程中出现问题，请检查日志并重试。\n\n`;
   }
-  
+
   return report;
 }
 
@@ -236,53 +236,53 @@ function generateFixReport(results, validation) {
  */
 async function fixSitemapDuplicates() {
   console.log('🔧 开始修复 sitemap 重复 URL...\n');
-  
+
   try {
     // 获取原始 sitemap
     console.log('📥 获取原始 sitemap...');
     const originalSitemap = await fetchSitemap(CONFIG.sitemapUrl);
     console.log('✅ 原始 sitemap 获取成功');
-    
+
     // 备份原始 sitemap
     console.log('💾 备份原始 sitemap...');
     fs.writeFileSync(CONFIG.backupSitemap, originalSitemap);
     console.log(`✅ 备份已保存: ${CONFIG.backupSitemap}`);
-    
+
     // 解析 sitemap
     console.log('🔍 解析 sitemap...');
     const sitemapData = await parseSitemap(originalSitemap);
     console.log('✅ Sitemap 解析成功');
-    
+
     // 移除重复 URL
     console.log('🗑️  移除重复 URL...');
     const results = removeDuplicateUrls(sitemapData);
     console.log(`✅ 移除了 ${results.removedCount} 个重复 URL`);
-    
+
     // 验证修复结果
     console.log('✅ 验证修复结果...');
     const validation = validateFixedSitemap(sitemapData);
     console.log(`✅ 验证完成，剩余 ${validation.urlCount} 个唯一 URL`);
-    
+
     // 生成修复后的 sitemap
     console.log('📄 生成修复后的 sitemap...');
     const fixedSitemap = await buildSitemap(sitemapData);
     fs.writeFileSync(CONFIG.outputSitemap, fixedSitemap);
     console.log(`✅ 修复后的 sitemap 已保存: ${CONFIG.outputSitemap}`);
-    
+
     // 生成修复报告
     console.log('📊 生成修复报告...');
     const report = generateFixReport(results, validation);
     const reportFile = path.join(__dirname, 'sitemap-fix-report.md');
     fs.writeFileSync(reportFile, report);
     console.log(`✅ 修复报告已保存: ${reportFile}`);
-    
+
     // 输出摘要
     console.log('\n📊 修复结果摘要:');
     console.log(`原始 URL 数量: ${results.originalCount}`);
     console.log(`修复后 URL 数量: ${results.newCount}`);
     console.log(`移除的重复 URL: ${results.removedCount}`);
     console.log(`验证状态: ${validation.isValid ? '✅ 通过' : '❌ 失败'}`);
-    
+
     if (validation.isValid) {
       console.log('\n🎉 修复成功！');
       console.log(`修复后的 sitemap 文件: ${CONFIG.outputSitemap}`);
@@ -291,7 +291,7 @@ async function fixSitemapDuplicates() {
     } else {
       console.log('\n❌ 修复失败，请检查报告了解详情');
     }
-    
+
   } catch (error) {
     console.error('❌ 修复过程中出错:', error.message);
   }

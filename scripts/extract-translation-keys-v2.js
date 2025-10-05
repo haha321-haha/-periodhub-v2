@@ -26,7 +26,7 @@ class ImprovedTranslationKeyExtractor {
    */
   scanTranslationKeys() {
     console.log('🔍 扫描翻译键使用情况（改进版）...');
-    
+
     const files = glob.sync('**/*.{ts,tsx,js,jsx}', {
       cwd: this.appDir,
       ignore: ['**/node_modules/**', '**/.next/**']
@@ -35,13 +35,13 @@ class ImprovedTranslationKeyExtractor {
     files.forEach(file => {
       const filePath = path.join(this.appDir, file);
       const content = fs.readFileSync(filePath, 'utf8');
-      
+
       this.scanFileForTranslationKeys(content, file);
     });
 
     // 处理命名空间键
     this.processNamespaceKeys();
-    
+
     console.log(`✅ 发现 ${this.foundKeys.size} 个翻译键使用`);
     console.log(`✅ 发现 ${this.namespaceKeys.size} 个命名空间映射`);
     console.log(`✅ 发现 ${this.dynamicKeys.size} 个动态键模式`);
@@ -53,7 +53,7 @@ class ImprovedTranslationKeyExtractor {
    */
   scanFileForTranslationKeys(content, filePath) {
     const lines = content.split('\n');
-    
+
     lines.forEach((line, lineIndex) => {
       // 1. 检测 useTranslations 命名空间
       const useTranslationsMatch = line.match(/useTranslations\(['"`]([^'"`]+)['"`]\)/);
@@ -105,7 +105,7 @@ class ImprovedTranslationKeyExtractor {
     // 这里需要更复杂的逻辑来关联命名空间和键的使用
     // 简化版本：为每个命名空间添加常见的键
     const commonKeys = [
-      'title', 'description', 'subtitle', 'cta', 'button', 'label', 
+      'title', 'description', 'subtitle', 'cta', 'button', 'label',
       'placeholder', 'error', 'success', 'loading', 'empty', 'notFound'
     ];
 
@@ -121,7 +121,7 @@ class ImprovedTranslationKeyExtractor {
    */
   loadTranslationFiles() {
     console.log('📚 加载翻译文件...');
-    
+
     const locales = ['zh', 'en'];
     const translationData = {};
 
@@ -148,7 +148,7 @@ class ImprovedTranslationKeyExtractor {
    */
   flattenKeys(obj, prefix = '') {
     const flattened = {};
-    
+
     for (const key in obj) {
       if (typeof obj[key] === 'object' && obj[key] !== null) {
         const nested = this.flattenKeys(obj[key], prefix ? `${prefix}.${key}` : key);
@@ -157,7 +157,7 @@ class ImprovedTranslationKeyExtractor {
         flattened[prefix ? `${prefix}.${key}` : key] = obj[key];
       }
     }
-    
+
     return flattened;
   }
 
@@ -166,10 +166,10 @@ class ImprovedTranslationKeyExtractor {
    */
   validateTranslationKeys() {
     console.log('🔍 验证翻译键完整性...');
-    
+
     const translationData = this.loadTranslationFiles();
     const locales = Object.keys(translationData);
-    
+
     if (locales.length === 0) {
       this.errors.push('没有找到有效的翻译文件');
       return;
@@ -216,7 +216,7 @@ class ImprovedTranslationKeyExtractor {
   generateReport() {
     console.log('\n📊 改进版翻译键分析报告');
     console.log('='.repeat(50));
-    
+
     console.log(`\n📈 统计信息:`);
     console.log(`  - 代码中使用的翻译键: ${this.foundKeys.size}`);
     console.log(`  - 命名空间映射: ${this.namespaceKeys.size}`);
@@ -293,12 +293,12 @@ class ImprovedTranslationKeyExtractor {
    */
   run() {
     console.log('🚀 开始改进版翻译键分析...\n');
-    
+
     try {
       this.scanTranslationKeys();
       this.validateTranslationKeys();
       const report = this.generateReport();
-      
+
       console.log('\n' + '='.repeat(50));
       if (report.hasIssues) {
         console.log('❌ 发现问题，需要修复');

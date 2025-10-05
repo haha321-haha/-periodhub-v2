@@ -22,7 +22,7 @@ describe('ExportManager', () => {
 
   beforeEach(() => {
     exportManager = new ExportManager();
-    
+
     // Create mock pain records
     mockRecords = [
       {
@@ -194,7 +194,7 @@ describe('ExportManager', () => {
       };
 
       const htmlReport = await exportManager.exportToHTML(mockRecords, mockAnalytics, restrictedOptions);
-      
+
       // Should only include records from Jan 1st
       expect(htmlReport).toContain('2024-01-01');
       // Should not include records from Jan 2nd in the detailed table
@@ -206,7 +206,7 @@ describe('ExportManager', () => {
   describe('exportToPDF', () => {
     // Note: PDF export tests would require a more complex setup with jsdom or similar
     // For now, we'll test the basic functionality
-    
+
     it('should attempt to generate PDF', async () => {
       // Mock window.open for testing
       const mockWindow = {
@@ -269,14 +269,14 @@ describe('ExportManager', () => {
   describe('error handling', () => {
     it('should throw PainTrackerError for invalid data', async () => {
       const invalidRecords = null as any;
-      
+
       await expect(exportManager.exportToHTML(invalidRecords, mockAnalytics, mockExportOptions))
         .rejects.toThrow('No data available for export');
     });
 
     it('should handle analytics engine errors gracefully', () => {
       const invalidAnalytics = null as any;
-      
+
       expect(() => exportManager.generateMedicalSummary(mockRecords, invalidAnalytics))
         .toThrow();
     });
@@ -356,7 +356,7 @@ function validateHTMLStructure(html: string): boolean {
   const hasHtmlTag = html.includes('<html') && html.includes('</html>');
   const hasHead = html.includes('<head>') && html.includes('</head>');
   const hasBody = html.includes('<body>') && html.includes('</body>');
-  
+
   return hasDoctype && hasHtmlTag && hasHead && hasBody;
 }
 

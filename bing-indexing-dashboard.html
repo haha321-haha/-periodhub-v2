@@ -35,7 +35,7 @@
             <p><strong>交互工具:</strong> 3</p>
             <p><strong>其他页面:</strong> 2</p>
         </div>
-        
+
         <div class="status-card">
             <h3>⏰ 预期时间</h3>
             <p><strong>处理时间:</strong> 3-7天</p>
@@ -45,7 +45,7 @@
             </div>
             <p style="font-size: 0.9em; color: #666;">索引编制进度</p>
         </div>
-        
+
         <div class="status-card">
             <h3>🎯 优先级</h3>
             <p><strong>高优先级:</strong> 3 个</p>
@@ -148,10 +148,10 @@
             const expectedTime = 7 * 24 * 60 * 60 * 1000; // 7天
             const elapsed = now - startTime;
             const progress = Math.min((elapsed / expectedTime) * 100, 100);
-            
+
             document.querySelector('.progress-fill').style.width = progress + '%';
         }
-        
+
         updateProgress();
         setInterval(updateProgress, 60000); // 每分钟更新一次
     </script>

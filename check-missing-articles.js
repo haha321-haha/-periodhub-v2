@@ -23,14 +23,14 @@ function readFailingUrls() {
   try {
     const content = fs.readFileSync(CONFIG.failingUrlsFile, 'utf8');
     const lines = content.split('\n').filter(line => line.trim());
-    
+
     // 跳过标题行，提取URL
     const urls = lines.slice(1).map(line => {
       // 移除引号并提取URL
       const url = line.replace(/"/g, '').trim();
       return url;
     }).filter(url => url && url.startsWith('http'));
-    
+
     console.log(`📊 读取到 ${urls.length} 个失败URL`);
     return urls;
   } catch (error) {
@@ -44,15 +44,15 @@ function readFailingUrls() {
  */
 function scanDirectoryRecursively(dir, basePath = '') {
   const files = new Map();
-  
+
   try {
     const items = fs.readdirSync(dir);
-    
+
     for (const item of items) {
       const itemPath = path.join(dir, item);
       const relativePath = basePath ? `${basePath}/${item}` : item;
       const stat = fs.statSync(itemPath);
-      
+
       if (stat.isDirectory()) {
         // 递归扫描子目录
         const subFiles = scanDirectoryRecursively(itemPath, relativePath);
@@ -68,7 +68,7 @@ function scanDirectoryRecursively(dir, basePath = '') {
   } catch (error) {
     console.warn(`⚠️  扫描目录失败: ${dir}`, error.message);
   }
-  
+
   return files;
 }
 
@@ -77,7 +77,7 @@ function scanDirectoryRecursively(dir, basePath = '') {
  */
 function getAllArticleFiles() {
   const articleFiles = new Map();
-  
+
   try {
     // 检查英文文章
     const enDir = path.join(CONFIG.articlesDir, 'en');
@@ -87,7 +87,7 @@ function getAllArticleFiles() {
         articleFiles.set(key, value);
       }
     }
-    
+
     // 检查中文文章
     const zhDir = path.join(CONFIG.articlesDir, 'zh');
     if (fs.existsSync(zhDir)) {
@@ -96,7 +96,7 @@ function getAllArticleFiles() {
         articleFiles.set(key, value);
       }
     }
-    
+
     console.log(`📁 发现 ${articleFiles.size} 个文章文件`);
     return articleFiles;
   } catch (error) {
@@ -120,13 +120,13 @@ function extractArticleFromUrl(url) {
   try {
     const urlObj = new URL(url);
     const pathname = urlObj.pathname;
-    
+
     // 匹配文章URL模式: /{locale}/articles/{article-slug}
     const articleMatch = pathname.match(/\/([a-z]{2})\/articles\/(.+)$/);
     if (articleMatch) {
       const [, locale, articleSlug] = articleMatch;
       const key = `${locale}/${articleSlug}`;
-      
+
       // 检查是否是故意删除的URL
       if (intentionallyRemovedUrls.includes(key)) {
         return {
@@ -137,7 +137,7 @@ function extractArticleFromUrl(url) {
           intentionallyRemoved: true
         };
       }
-      
+
       return {
         locale,
         slug: articleSlug,
@@ -145,7 +145,7 @@ function extractArticleFromUrl(url) {
         url: url
       };
     }
-    
+
     return null;
   } catch (error) {
     console.warn(`⚠️  解析URL失败: ${url}`, error.message);
@@ -165,21 +165,21 @@ function checkArticleExists(articleKey, articleFiles) {
  */
 function checkMissingArticles() {
   console.log('🔍 开始检查缺失的文章文件...\n');
-  
+
   // 读取失败URL
   const failingUrls = readFailingUrls();
   if (failingUrls.length === 0) {
     console.log('❌ 没有找到失败URL，请检查CSV文件');
     return;
   }
-  
+
   // 获取所有文章文件
   const articleFiles = getAllArticleFiles();
   if (articleFiles.size === 0) {
     console.log('❌ 没有找到文章文件，请检查content/articles目录');
     return;
   }
-  
+
   // 分析结果
   const results = {
     totalUrls: failingUrls.length,
@@ -190,15 +190,15 @@ function checkMissingArticles() {
     nonArticleUrls: [],
     checkTime: new Date().toISOString()
   };
-  
+
   console.log('📋 分析URL...\n');
-  
+
   failingUrls.forEach(url => {
     const article = extractArticleFromUrl(url);
-    
+
     if (article) {
       results.articleUrls++;
-      
+
       // 检查是否是故意删除的URL
       if (article.intentionallyRemoved) {
         results.intentionallyRemoved.push({
@@ -211,9 +211,9 @@ function checkMissingArticles() {
         console.log(`🗑️  ${article.key} - 故意删除的页面`);
         return;
       }
-      
+
       const exists = checkArticleExists(article.key, articleFiles);
-      
+
       if (exists) {
         results.existingArticles.push({
           url: url,
@@ -242,10 +242,10 @@ function checkMissingArticles() {
       console.log(`ℹ️  ${url} - 非文章URL`);
     }
   });
-  
+
   // 生成报告
   generateReports(results);
-  
+
   // 输出摘要
   console.log('\n📊 检查结果摘要:');
   console.log(`总URL数量: ${results.totalUrls}`);
@@ -254,14 +254,14 @@ function checkMissingArticles() {
   console.log(`存在文章: ${results.existingArticles.length}`);
   console.log(`故意删除: ${results.intentionallyRemoved.length}`);
   console.log(`非文章URL: ${results.nonArticleUrls.length}`);
-  
+
   if (results.missingArticles.length > 0) {
     console.log('\n❌ 缺失的文章文件:');
     results.missingArticles.forEach(article => {
       console.log(`  - ${article.key} (${article.url})`);
     });
   }
-  
+
   if (results.intentionallyRemoved.length > 0) {
     console.log('\n🗑️  故意删除的页面:');
     results.intentionallyRemoved.forEach(article => {
@@ -278,12 +278,12 @@ function generateReports(results) {
     // JSON报告
     fs.writeFileSync(CONFIG.outputReport, JSON.stringify(results, null, 2));
     console.log(`\n📄 详细报告已保存: ${CONFIG.outputReport}`);
-    
+
     // Markdown摘要报告
     const markdownReport = generateMarkdownReport(results);
     fs.writeFileSync(CONFIG.outputSummary, markdownReport);
     console.log(`📄 摘要报告已保存: ${CONFIG.outputSummary}`);
-    
+
   } catch (error) {
     console.error('❌ 生成报告时出错:', error.message);
   }
@@ -294,21 +294,21 @@ function generateReports(results) {
  */
 function generateMarkdownReport(results) {
   const timestamp = new Date().toLocaleString('zh-CN');
-  
+
   let report = `# 缺失文章文件检查报告\n\n`;
   report += `**检查时间**: ${timestamp}\n\n`;
-  
+
   report += `## 📊 检查摘要\n\n`;
   report += `- **总URL数量**: ${results.totalUrls}\n`;
   report += `- **文章URL数量**: ${results.articleUrls}\n`;
   report += `- **缺失文章**: ${results.missingArticles.length}\n`;
   report += `- **存在文章**: ${results.existingArticles.length}\n`;
   report += `- **非文章URL**: ${results.nonArticleUrls.length}\n\n`;
-  
+
   if (results.missingArticles.length > 0) {
     report += `## ❌ 缺失的文章文件\n\n`;
     report += `以下文章URL对应的markdown文件不存在:\n\n`;
-    
+
     results.missingArticles.forEach(article => {
       report += `### ${article.key}\n`;
       report += `- **URL**: ${article.url}\n`;
@@ -316,7 +316,7 @@ function generateMarkdownReport(results) {
       report += `- **期望文件路径**: \`${article.expectedFile}\`\n`;
       report += `- **建议操作**: 创建对应的markdown文件\n\n`;
     });
-    
+
     report += `## 🔧 修复建议\n\n`;
     report += `1. **创建缺失文件**: 为每个缺失的文章创建对应的markdown文件\n`;
     report += `2. **检查文件命名**: 确保文件名与URL slug完全匹配\n`;
@@ -326,7 +326,7 @@ function generateMarkdownReport(results) {
     report += `## ✅ 检查结果\n\n`;
     report += `所有文章URL都有对应的文件存在，无需修复。\n\n`;
   }
-  
+
   if (results.nonArticleUrls.length > 0) {
     report += `## ℹ️ 非文章URL\n\n`;
     report += `以下URL不是文章URL，可能对应其他类型的页面:\n\n`;
@@ -335,7 +335,7 @@ function generateMarkdownReport(results) {
     });
     report += `\n`;
   }
-  
+
   return report;
 }
 

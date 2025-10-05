@@ -17,7 +17,7 @@ const CLARITY_CONFIG = {
       description: '所有会话都包含无效点击'
     }
   },
-  
+
   // 优化建议
   optimizations: [
     {
@@ -61,7 +61,7 @@ const CLARITY_CONFIG = {
       ]
     }
   ],
-  
+
   // 监控指标
   metrics: {
     invalidClicks: {
@@ -92,7 +92,7 @@ function generateClarityReport() {
       problemSessions: 7,
       problemRate: 100
     },
-    
+
     rootCauses: [
       {
         cause: '触摸目标过小',
@@ -115,9 +115,9 @@ function generateClarityReport() {
         solution: '使用清晰的视觉提示和交互设计'
       }
     ],
-    
+
     optimizations: CLARITY_CONFIG.optimizations,
-    
+
     implementation: {
       css: `
 /* 触摸目标优化 */
@@ -195,7 +195,7 @@ a:hover {
     min-width: 48px;
     padding: 16px 20px;
   }
-  
+
   .btn {
     min-height: 48px;
     padding: 16px 28px;
@@ -203,7 +203,7 @@ a:hover {
   }
 }
       `,
-      
+
       javascript: `
 // 点击事件优化
 function optimizeClickEvents() {
@@ -216,7 +216,7 @@ function optimizeClickEvents() {
       setTimeout(() => {
         target.style.transform = '';
       }, 150);
-      
+
       // 记录有效点击
       if (typeof gtag !== 'undefined') {
         gtag('event', 'click', {
@@ -226,18 +226,18 @@ function optimizeClickEvents() {
       }
     }
   });
-  
+
   // 防止重复点击
   const clickableElements = document.querySelectorAll('.clickable, .btn, a');
   clickableElements.forEach(element => {
     let isProcessing = false;
-    
+
     element.addEventListener('click', function(e) {
       if (isProcessing) {
         e.preventDefault();
         return;
       }
-      
+
       isProcessing = true;
       setTimeout(() => {
         isProcessing = false;
@@ -260,14 +260,14 @@ function hideLoadingState(element, originalText) {
 // 错误处理
 function handleClickError(element, error) {
   console.error('点击事件错误:', error);
-  
+
   // 显示错误提示
   const errorDiv = document.createElement('div');
   errorDiv.className = 'error-message';
   errorDiv.textContent = '操作失败，请重试';
-  
+
   element.parentNode.insertBefore(errorDiv, element.nextSibling);
-  
+
   setTimeout(() => {
     errorDiv.remove();
   }, 3000);
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
   optimizeClickEvents();
 });
       `,
-      
+
       html: `
 <!-- 优化后的HTML结构示例 -->
 <button class="btn btn-primary" onclick="handleClick(this)">
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
       `
     }
   };
-  
+
   return report;
 }
 
@@ -319,13 +319,13 @@ function generateMonitoringScript() {
   function trackInvalidClicks() {
     let clickCount = 0;
     let validClickCount = 0;
-    
+
     document.addEventListener('click', function(e) {
       clickCount++;
-      
+
       const target = e.target;
       const isClickable = target.closest('a, button, [role="button"], input[type="button"], input[type="submit"]');
-      
+
       if (isClickable) {
         validClickCount++;
       } else {
@@ -337,7 +337,7 @@ function generateMonitoringScript() {
           x: e.clientX,
           y: e.clientY
         });
-        
+
         // 发送到分析工具
         if (typeof gtag !== 'undefined') {
           gtag('event', 'invalid_click', {
@@ -347,7 +347,7 @@ function generateMonitoringScript() {
         }
       }
     });
-    
+
     // 定期报告点击统计
     setInterval(() => {
       const invalidClickRate = ((clickCount - validClickCount) / clickCount * 100).toFixed(2);
@@ -358,7 +358,7 @@ function generateMonitoringScript() {
       });
     }, 30000); // 每30秒报告一次
   }
-  
+
   // 监控页面性能
   function trackPerformance() {
     if ('performance' in window) {
@@ -366,7 +366,7 @@ function generateMonitoringScript() {
         setTimeout(() => {
           const perfData = performance.getEntriesByType('navigation')[0];
           const paintData = performance.getEntriesByType('paint');
-          
+
           console.log('页面性能:', {
             LCP: perfData.loadEventEnd - perfData.loadEventStart,
             FCP: paintData.find(p => p.name === 'first-contentful-paint')?.startTime,
@@ -376,7 +376,7 @@ function generateMonitoringScript() {
       });
     }
   }
-  
+
   // 初始化监控
   document.addEventListener('DOMContentLoaded', function() {
     trackInvalidClicks();
@@ -389,47 +389,47 @@ function generateMonitoringScript() {
 // 主函数
 async function main() {
   console.log('🔍 开始Bing Clarity无效点击分析...\n');
-  
+
   try {
     // 生成Clarity报告
     const report = generateClarityReport();
-    
+
     // 保存报告
     const reportDir = path.join(__dirname, '../reports/clarity');
     if (!fs.existsSync(reportDir)) {
       fs.mkdirSync(reportDir, { recursive: true });
     }
-    
+
     const reportFile = path.join(reportDir, 'clarity-optimization-report.json');
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
-    
+
     // 生成优化文件
     const cssFile = path.join(reportDir, 'clarity-optimization.css');
     fs.writeFileSync(cssFile, report.implementation.css);
-    
+
     const jsFile = path.join(reportDir, 'clarity-optimization.js');
     fs.writeFileSync(jsFile, report.implementation.javascript);
-    
+
     const htmlFile = path.join(reportDir, 'clarity-optimization.html');
     fs.writeFileSync(htmlFile, report.implementation.html);
-    
+
     const monitoringFile = path.join(reportDir, 'clarity-monitoring.js');
     fs.writeFileSync(monitoringFile, generateMonitoringScript());
-    
+
     // 输出摘要
     console.log('📊 Bing Clarity 分析报告');
     console.log('=' .repeat(50));
     console.log(`无效点击率: ${report.analysis.invalidClicks.percentage}%`);
     console.log(`问题会话数: ${report.analysis.problemSessions}/${report.analysis.totalSessions}`);
     console.log(`问题描述: ${report.analysis.invalidClicks.description}\n`);
-    
+
     console.log('🔍 根本原因分析:');
     report.rootCauses.forEach((cause, index) => {
       console.log(`${index + 1}. ${cause.cause}`);
       console.log(`   描述: ${cause.description}`);
       console.log(`   解决方案: ${cause.solution}\n`);
     });
-    
+
     console.log('💡 优化建议:');
     report.optimizations.forEach((opt, index) => {
       console.log(`${index + 1}. [${opt.priority}] ${opt.category}`);
@@ -438,16 +438,16 @@ async function main() {
       });
       console.log('');
     });
-    
+
     console.log('📁 生成的文件:');
     console.log(`- 分析报告: ${reportFile}`);
     console.log(`- CSS优化: ${cssFile}`);
     console.log(`- JS优化: ${jsFile}`);
     console.log(`- HTML示例: ${htmlFile}`);
     console.log(`- 监控脚本: ${monitoringFile}`);
-    
+
     console.log('\n✅ Bing Clarity 优化分析完成！');
-    
+
   } catch (error) {
     console.error('❌ Clarity优化分析失败:', error.message);
     process.exit(1);

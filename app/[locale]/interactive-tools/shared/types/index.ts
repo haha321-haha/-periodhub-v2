@@ -5,7 +5,7 @@ export interface PainEntry {
   painLevel: number; // 1-10
   duration?: number; // minutes
   location: string[];
-  menstrualStatus: 'period' | 'pre' | 'post' | 'ovulation' | 'other';
+  menstrualStatus: "period" | "pre" | "post" | "ovulation" | "other";
   symptoms: string[];
   remedies: string[];
   effectiveness?: number; // 1-5
@@ -19,7 +19,7 @@ export interface PainEntryFormData {
   painLevel: number;
   duration?: number;
   location: string[];
-  menstrualStatus: 'period' | 'pre' | 'post' | 'ovulation' | 'other';
+  menstrualStatus: "period" | "pre" | "post" | "ovulation" | "other";
   symptoms: string[];
   remedies: string[];
   effectiveness?: number;
@@ -37,8 +37,15 @@ export interface Option {
 
 export interface Question {
   id: string;
-  type: 'single' | 'multi' | 'scale' | 'text' | 'range' | 'boolean';
-  category: 'basic' | 'pain' | 'symptoms' | 'lifestyle' | 'medical' | 'workplace' | 'preference';
+  type: "single" | "multi" | "scale" | "text" | "range" | "boolean";
+  category:
+    | "basic"
+    | "pain"
+    | "symptoms"
+    | "lifestyle"
+    | "medical"
+    | "workplace"
+    | "preference";
   weight: number; // 问题权重
   title: string;
   description?: string;
@@ -75,8 +82,15 @@ export interface AssessmentSession {
 
 export interface AssessmentResult {
   sessionId: string;
-  type: 'symptom' | 'workplace' | 'normal' | 'mild' | 'moderate' | 'severe' | 'emergency';
-  severity: 'mild' | 'moderate' | 'severe' | 'emergency';
+  type:
+    | "symptom"
+    | "workplace"
+    | "normal"
+    | "mild"
+    | "moderate"
+    | "severe"
+    | "emergency";
+  severity: "mild" | "moderate" | "severe" | "emergency";
   score: number;
   maxScore: number;
   percentage: number;
@@ -107,17 +121,25 @@ export interface AssessmentResult {
 
 export interface Recommendation {
   id: string;
-  category: 'immediate' | 'longterm' | 'workplace' | 'lifestyle' | 'medical' | 'dietary' | 'exercise' | 'selfcare';
+  category:
+    | "immediate"
+    | "longterm"
+    | "workplace"
+    | "lifestyle"
+    | "medical"
+    | "dietary"
+    | "exercise"
+    | "selfcare";
   title: string;
   description: string;
-  priority: 'high' | 'medium' | 'low';
+  priority: "high" | "medium" | "low";
   timeframe: string;
   evidence?: string;
   actionSteps?: string[];
   resources?: {
     title: string;
     url: string;
-    type: 'article' | 'video' | 'tool' | 'external';
+    type: "article" | "video" | "tool" | "external";
   }[];
 }
 
@@ -144,7 +166,7 @@ export interface PainStatistics {
   mostCommonSymptoms: string[];
   mostEffectiveRemedies: string[];
   painFrequency: Record<string, number>;
-  trendDirection: 'improving' | 'worsening' | 'stable';
+  trendDirection: "improving" | "worsening" | "stable";
 }
 
 // 错误处理类型
@@ -170,7 +192,7 @@ export interface StorageData<T> {
 
 // 导出相关类型
 export interface ExportOptions {
-  format: 'json' | 'csv' | 'pdf';
+  format: "json" | "csv" | "pdf";
   dateRange?: {
     start: string;
     end: string;
@@ -182,7 +204,7 @@ export interface ExportOptions {
 // 通知类型
 export interface Notification {
   id: string;
-  type: 'success' | 'error' | 'warning' | 'info';
+  type: "success" | "error" | "warning" | "info";
   title: string;
   message: string;
   duration?: number;
@@ -192,7 +214,7 @@ export interface Notification {
 export interface NotificationAction {
   label: string;
   action: () => void;
-  style?: 'primary' | 'secondary';
+  style?: "primary" | "secondary";
 }
 
 // 参考代码相关的类型定义
@@ -212,7 +234,7 @@ export interface WorkplaceAssessmentResult {
 }
 
 export interface AssessmentMode {
-  id: 'simplified' | 'detailed' | 'medical';
+  id: "simplified" | "detailed" | "medical";
   name: string;
   description: string;
   questionCount: number;
@@ -222,15 +244,15 @@ export interface AssessmentMode {
 // 评估配置
 export interface AssessmentConfig {
   modes: AssessmentMode[];
-  defaultMode: 'simplified' | 'detailed' | 'medical';
+  defaultMode: "simplified" | "detailed" | "medical";
   maxQuestionsPerMode: number;
   timeoutMinutes: number;
 }
 
 // 用户偏好设置
 export interface UserPreferences {
-  language: 'en' | 'zh';
-  theme: 'light' | 'dark' | 'auto';
+  language: "en" | "zh";
+  theme: "light" | "dark" | "auto";
   notifications: {
     reminders: boolean;
     insights: boolean;
@@ -241,8 +263,8 @@ export interface UserPreferences {
     crashReports: boolean;
   };
   display: {
-    chartType: 'line' | 'bar' | 'area';
-    dateFormat: 'YYYY-MM-DD' | 'DD/MM/YYYY' | 'MM/DD/YYYY';
-    timeFormat: '24h' | '12h';
+    chartType: "line" | "bar" | "area";
+    dateFormat: "YYYY-MM-DD" | "DD/MM/YYYY" | "MM/DD/YYYY";
+    timeFormat: "24h" | "12h";
   };
 }

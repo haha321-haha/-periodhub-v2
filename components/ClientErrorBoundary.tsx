@@ -36,5 +36,3 @@ export default class ClientErrorBoundary extends React.Component<
 		return this.props.children;
 	}
 }
-
-

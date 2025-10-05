@@ -1,8 +1,14 @@
 // lib/data-analytics/types/analytics.types.ts
 
 // 基础类型定义
-type SupportedLanguage = 'zh' | 'en' | 'es' | 'fr';
-type ResourceCategory = 'immediate-relief' | 'preparation' | 'learning' | 'management' | 'assessment' | 'template';
+type SupportedLanguage = "zh" | "en" | "es" | "fr";
+type ResourceCategory =
+  | "immediate-relief"
+  | "preparation"
+  | "learning"
+  | "management"
+  | "assessment"
+  | "template";
 
 interface AnalyticsData {
   downloadCount: number;
@@ -16,12 +22,18 @@ interface AnalyticsData {
 
 interface SystemEvent {
   id: string;
-  type: 'resource_created' | 'resource_updated' | 'resource_deleted' | 
-        'resource_accessed' | 'search_performed' | 'error_occurred' |
-        'user_action' | 'system_maintenance';
+  type:
+    | "resource_created"
+    | "resource_updated"
+    | "resource_deleted"
+    | "resource_accessed"
+    | "search_performed"
+    | "error_occurred"
+    | "user_action"
+    | "system_maintenance";
   timestamp: Date;
   data: Record<string, any>;
-  severity: 'low' | 'medium' | 'high' | 'critical';
+  severity: "low" | "medium" | "high" | "critical";
   source: string;
   correlationId?: string;
 }
@@ -55,7 +67,7 @@ export interface MetricsResult {
   /** 变化率 */
   changeRate: number;
   /** 趋势 */
-  trend: 'increasing' | 'decreasing' | 'stable';
+  trend: "increasing" | "decreasing" | "stable";
   /** 计算时间 */
   calculatedAt: Date;
   /** 数据时间窗口 */
@@ -85,7 +97,7 @@ export interface EnhancedUserEvent extends SystemEvent {
   };
   /** 设备信息 */
   device?: {
-    type: 'desktop' | 'mobile' | 'tablet';
+    type: "desktop" | "mobile" | "tablet";
     os?: string;
     browser?: string;
   };
@@ -119,7 +131,7 @@ export interface DashboardData {
   };
   /** 系统健康状态 */
   systemHealth: {
-    status: 'healthy' | 'warning' | 'critical';
+    status: "healthy" | "warning" | "critical";
     uptime: number;
     responseTime: number;
     errorRate: number;
@@ -135,7 +147,7 @@ export interface DataPipelineStatus {
   /** 管道名称 */
   name: string;
   /** 当前状态 */
-  status: 'idle' | 'processing' | 'completed' | 'failed';
+  status: "idle" | "processing" | "completed" | "failed";
   /** 最后运行时间 */
   lastRun: Date;
   /** 下次运行时间 */
@@ -170,25 +182,25 @@ export interface MetricsEngineConfig {
 
 // 常量定义
 export const CORE_METRICS_LABELS: Record<keyof CoreMetrics, string> = {
-  dailyActiveUsers: '日活跃用户数',
-  userRetentionRate: '用户留存率',
-  platformEngagementDepth: '平台使用深度',
-  newUserAcquisitionCost: '新用户获取成本',
-  userLifetimeValue: '用户生命周期价值'
+  dailyActiveUsers: "日活跃用户数",
+  userRetentionRate: "用户留存率",
+  platformEngagementDepth: "平台使用深度",
+  newUserAcquisitionCost: "新用户获取成本",
+  userLifetimeValue: "用户生命周期价值",
 };
 
 export const METRICS_UNITS: Record<keyof CoreMetrics, string> = {
-  dailyActiveUsers: '人',
-  userRetentionRate: '%',
-  platformEngagementDepth: '分',
-  newUserAcquisitionCost: '元',
-  userLifetimeValue: '元'
+  dailyActiveUsers: "人",
+  userRetentionRate: "%",
+  platformEngagementDepth: "分",
+  newUserAcquisitionCost: "元",
+  userLifetimeValue: "元",
 };
 
-export const DEFAULT_METRICS_WEIGHTS: MetricsEngineConfig['metricsWeights'] = {
+export const DEFAULT_METRICS_WEIGHTS: MetricsEngineConfig["metricsWeights"] = {
   dailyActiveUsers: 0.25,
   userRetentionRate: 0.25,
-  platformEngagementDepth: 0.20,
+  platformEngagementDepth: 0.2,
   newUserAcquisitionCost: 0.15,
-  userLifetimeValue: 0.15
-}; 
+  userLifetimeValue: 0.15,
+};

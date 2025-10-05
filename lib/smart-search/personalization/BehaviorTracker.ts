@@ -89,7 +89,7 @@ export class BehaviorTracker {
       enableLocalStorage: true,
       ...config
     };
-    
+
     this.loadFromStorage();
   }
 
@@ -114,12 +114,12 @@ export class BehaviorTracker {
     // 存储事件
     const userEvents = this.events.get(event.userId) || [];
     userEvents.push(fullEvent);
-    
+
     // 限制事件数量
     if (userEvents.length > this.config.maxEventsPerUser) {
       userEvents.shift(); // 移除最旧的事件
     }
-    
+
     this.events.set(event.userId, userEvents);
 
     // 更新会话
@@ -223,11 +223,11 @@ export class BehaviorTracker {
   getUserEvents(userId: string, eventType?: string, limit?: number): UserEvent[] {
     const events = this.events.get(userId) || [];
     let filteredEvents = events;
-    
+
     if (eventType) {
       filteredEvents = events.filter(event => event.type === eventType);
     }
-    
+
     return limit ? filteredEvents.slice(-limit) : filteredEvents;
   }
 
@@ -236,7 +236,7 @@ export class BehaviorTracker {
    */
   getTotalEvents(eventType?: string): number {
     let totalCount = 0;
-    
+
     for (const userEvents of this.events.values()) {
       if (eventType) {
         totalCount += userEvents.filter(event => event.type === eventType).length;
@@ -244,7 +244,7 @@ export class BehaviorTracker {
         totalCount += userEvents.length;
       }
     }
-    
+
     return totalCount;
   }
 
@@ -254,7 +254,7 @@ export class BehaviorTracker {
   getSessionEvents(sessionId: string): UserEvent[] {
     const eventIds = this.sessions.get(sessionId) || [];
     const allEvents: UserEvent[] = [];
-    
+
     for (const userEvents of this.events.values()) {
       for (const event of userEvents) {
         if (eventIds.includes(event.id)) {
@@ -262,7 +262,7 @@ export class BehaviorTracker {
         }
       }
     }
-    
+
     return allEvents.sort((a, b) => a.timestamp - b.timestamp);
   }
 
@@ -274,7 +274,7 @@ export class BehaviorTracker {
     const searchEvents = events
       .filter(event => event.type === EventType.SEARCH)
       .slice(-limit) as SearchEvent[];
-    
+
     return searchEvents.map(event => event.data.query);
   }
 
@@ -284,7 +284,7 @@ export class BehaviorTracker {
   getPreferredContentTypes(userId: string): Record<string, number> {
     const events = this.getUserEvents(userId);
     const contentTypeStats: Record<string, number> = {};
-    
+
     for (const event of events) {
       if (event.type === EventType.CLICK) {
         const clickEvent = event as ClickEvent;
@@ -292,7 +292,7 @@ export class BehaviorTracker {
         contentTypeStats[contentType] = (contentTypeStats[contentType] || 0) + 1;
       }
     }
-    
+
     return contentTypeStats;
   }
 
@@ -307,7 +307,7 @@ export class BehaviorTracker {
   } {
     const events = this.getUserEvents(userId);
     const searchEvents = events.filter(event => event.type === EventType.SEARCH) as SearchEvent[];
-    
+
     if (searchEvents.length === 0) {
       return {
         avgQueriesPerSession: 0,
@@ -471,4 +471,4 @@ export class BehaviorTracker {
       console.warn('Failed to save behavior tracking data to storage:', error);
     }
   }
-} 
+}

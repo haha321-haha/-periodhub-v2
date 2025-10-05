@@ -126,22 +126,22 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
-    
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '20'
         cache: 'npm'
-    
+
     - name: Install dependencies
       run: npm ci
-    
+
     - name: Run ESLint
       run: npm run lint:check
-    
+
     - name: Run TypeScript check
       run: npm run type-check
 `;
@@ -173,9 +173,3 @@ console.log('1. 运行 npm run lint:fix 自动修复可修复的问题');
 console.log('2. 手动修复剩余的ESLint错误');
 console.log('3. 运行 npm run lint:check 验证修复效果');
 console.log('4. 提交代码并推送');
-
-
-
-
-
-

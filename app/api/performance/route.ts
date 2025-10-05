@@ -6,7 +6,7 @@ const performanceData: any[] = [];
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
-    
+
     // 验证数据格式
     if (!data.timestamp || !data.url || !data.metrics) {
       return NextResponse.json(
@@ -54,13 +54,13 @@ export async function GET(request: NextRequest) {
 
     // 按URL过滤
     if (url) {
-      filteredData = performanceData.filter(item => 
+      filteredData = performanceData.filter(item =>
         item.url.includes(url)
       );
     }
 
     // 按时间排序（最新的在前）
-    filteredData.sort((a, b) => 
+    filteredData.sort((a, b) =>
       new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
     );
 

@@ -95,11 +95,11 @@ export function useTestFramework() {
     if (!test) throw new Error('Test not found');
 
     const startTime = Date.now();
-    
+
     try {
       // 模拟测试执行
       await new Promise(resolve => setTimeout(resolve, Math.random() * 1000 + 500));
-      
+
       const duration = Date.now() - startTime;
       const success = Math.random() > 0.1; // 90% 成功率
 
@@ -128,7 +128,7 @@ export function useTestFramework() {
     const startTime = Date.now();
 
     // 更新套件状态
-    setTestSuites(prev => prev.map(s => 
+    setTestSuites(prev => prev.map(s =>
       s.id === suiteId ? { ...s, status: 'running' } : s
     ));
 
@@ -153,7 +153,7 @@ export function useTestFramework() {
       ];
 
       // 更新测试列表
-      setTestSuites(prev => prev.map(s => 
+      setTestSuites(prev => prev.map(s =>
         s.id === suiteId ? { ...s, tests: exampleTests } : s
       ));
 
@@ -166,9 +166,9 @@ export function useTestFramework() {
       const allPassed = results.every(r => r.status === 'pass');
 
       // 更新套件结果
-      setTestSuites(prev => prev.map(s => 
-        s.id === suiteId ? { 
-          ...s, 
+      setTestSuites(prev => prev.map(s =>
+        s.id === suiteId ? {
+          ...s,
           status: allPassed ? 'completed' : 'failed',
           tests: results,
           duration
@@ -176,9 +176,9 @@ export function useTestFramework() {
       ));
 
     } catch (error) {
-      setTestSuites(prev => prev.map(s => 
-        s.id === suiteId ? { 
-          ...s, 
+      setTestSuites(prev => prev.map(s =>
+        s.id === suiteId ? {
+          ...s,
           status: 'failed',
           duration: Date.now() - startTime
         } : s
@@ -191,11 +191,11 @@ export function useTestFramework() {
   // 运行所有测试
   const runAllTests = async () => {
     setIsRunning(true);
-    
+
     for (const suite of testSuites) {
       await runTestSuite(suite.id);
     }
-    
+
     setIsRunning(false);
   };
 
@@ -212,10 +212,10 @@ export function useTestFramework() {
   // 获取测试统计
   const getTestStats = () => {
     const totalTests = testSuites.reduce((sum, suite) => sum + suite.tests.length, 0);
-    const passedTests = testSuites.reduce((sum, suite) => 
+    const passedTests = testSuites.reduce((sum, suite) =>
       sum + suite.tests.filter(test => test.status === 'pass').length, 0
     );
-    const failedTests = testSuites.reduce((sum, suite) => 
+    const failedTests = testSuites.reduce((sum, suite) =>
       sum + suite.tests.filter(test => test.status === 'fail').length, 0
     );
     const completedSuites = testSuites.filter(suite => suite.status === 'completed').length;
@@ -244,15 +244,15 @@ export function useTestFramework() {
 
 // 测试框架组件
 export function TestingFramework() {
-  const { 
-    testSuites, 
-    isRunning, 
-    config, 
-    setConfig, 
-    runTestSuite, 
-    runAllTests, 
-    resetTests, 
-    getTestStats 
+  const {
+    testSuites,
+    isRunning,
+    config,
+    setConfig,
+    runTestSuite,
+    runAllTests,
+    resetTests,
+    getTestStats
   } = useTestFramework();
 
   const stats = getTestStats();

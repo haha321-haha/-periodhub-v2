@@ -5,13 +5,13 @@
   function trackInvalidClicks() {
     let clickCount = 0;
     let validClickCount = 0;
-    
+
     document.addEventListener('click', function(e) {
       clickCount++;
-      
+
       const target = e.target;
       const isClickable = target.closest('a, button, [role="button"], input[type="button"], input[type="submit"]');
-      
+
       if (isClickable) {
         validClickCount++;
       } else {
@@ -23,7 +23,7 @@
           x: e.clientX,
           y: e.clientY
         });
-        
+
         // 发送到分析工具
         if (typeof gtag !== 'undefined') {
           gtag('event', 'invalid_click', {
@@ -33,7 +33,7 @@
         }
       }
     });
-    
+
     // 定期报告点击统计
     setInterval(() => {
       const invalidClickRate = ((clickCount - validClickCount) / clickCount * 100).toFixed(2);
@@ -44,7 +44,7 @@
       });
     }, 30000); // 每30秒报告一次
   }
-  
+
   // 监控页面性能
   function trackPerformance() {
     if ('performance' in window) {
@@ -52,7 +52,7 @@
         setTimeout(() => {
           const perfData = performance.getEntriesByType('navigation')[0];
           const paintData = performance.getEntriesByType('paint');
-          
+
           console.log('页面性能:', {
             LCP: perfData.loadEventEnd - perfData.loadEventStart,
             FCP: paintData.find(p => p.name === 'first-contentful-paint')?.startTime,
@@ -62,11 +62,10 @@
       });
     }
   }
-  
+
   // 初始化监控
   document.addEventListener('DOMContentLoaded', function() {
     trackInvalidClicks();
     trackPerformance();
   });
 })();
-  

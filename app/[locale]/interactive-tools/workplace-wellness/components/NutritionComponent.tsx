@@ -25,8 +25,8 @@ export default function NutritionComponent() {
 
   // 过滤营养数据 - 基于HVsLYEp的过滤逻辑
   const filteredFoods = useMemo(() => {
-    return nutritionData.filter(food => 
-      food.phase === nutrition.selectedPhase && 
+    return nutritionData.filter(food =>
+      food.phase === nutrition.selectedPhase &&
       food.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [nutritionData, nutrition.selectedPhase, searchTerm]);
@@ -49,7 +49,7 @@ export default function NutritionComponent() {
       meal,
       suggestion: t(`nutrition.mealSuggestions.${meal}`)
     }));
-    
+
     console.log('Generated meal plan:', suggestions);
     alert(t('nutrition.planGenerated'));
   };
@@ -59,7 +59,7 @@ export default function NutritionComponent() {
       {/* 营养建议配置 - 基于HVsLYEp的NutritionAdvisorComponent */}
       <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
         <h3 className="text-xl font-semibold text-neutral-900 mb-4">{t('nutrition.title')}</h3>
-        
+
         {/* 经期阶段选择 */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-neutral-800 mb-3">{t('nutrition.phaseLabel')}</label>
@@ -69,8 +69,8 @@ export default function NutritionComponent() {
                 key={phase}
                 onClick={() => updateNutrition({ selectedPhase: phase })}
                 className={`p-3 rounded-lg border-2 transition-colors duration-200 text-center ${
-                  nutrition.selectedPhase === phase 
-                    ? 'border-primary-500 bg-primary-500/10' 
+                  nutrition.selectedPhase === phase
+                    ? 'border-primary-500 bg-primary-500/10'
                     : 'border-neutral-200 hover:border-neutral-300'
                 }`}
               >
@@ -84,7 +84,7 @@ export default function NutritionComponent() {
         {/* 体质类型选择 */}
         <div>
           <label className="block text-sm font-medium text-neutral-800 mb-2">{t('nutrition.constitutionLabel')}</label>
-          <select 
+          <select
             value={nutrition.constitutionType}
             onChange={(e) => updateNutrition({ constitutionType: e.target.value as any })}
             className="w-full px-3 py-2 border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
@@ -111,7 +111,7 @@ export default function NutritionComponent() {
             />
           </div>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredFoods.length > 0 ? filteredFoods.map((food, index) => (
             <div key={index} className="p-4 border border-neutral-200 rounded-lg hover:border-neutral-300 transition-colors duration-200">
@@ -123,7 +123,7 @@ export default function NutritionComponent() {
                   {t(`nutrition.tcmNature.${food.tcmNature}`)}
                 </span>
               </div>
-              
+
               <div className="space-y-3">
                 <div>
                   <h6 className="text-sm font-medium text-neutral-800 mb-2">{t('nutrition.benefitsLabel')}</h6>
@@ -135,7 +135,7 @@ export default function NutritionComponent() {
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
                   <h6 className="text-sm font-medium text-neutral-800 mb-2">{t('nutrition.nutrientsLabel')}</h6>
                   <div className="flex flex-wrap gap-1">
@@ -146,8 +146,8 @@ export default function NutritionComponent() {
                     ))}
                   </div>
                 </div>
-                
-                <button 
+
+                <button
                   onClick={() => addToMealPlan(food)}
                   className="w-full rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-3 py-1.5 text-sm border border-primary-500 text-primary-600 hover:bg-primary-500/10"
                 >
@@ -166,7 +166,7 @@ export default function NutritionComponent() {
       {/* 膳食计划 - 基于HVsLYEp的膳食计划展示 */}
       <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
         <h4 className="text-lg font-semibold text-neutral-900 mb-4">{t('nutrition.planTitle')}</h4>
-        
+
         {/* 膳食建议 */}
         <div className="space-y-4 mb-6">
           {(['breakfast', 'lunch', 'dinner', 'snack'] as const).map(mealId => (
@@ -196,8 +196,8 @@ export default function NutritionComponent() {
             </div>
           </div>
         )}
-        
-        <button 
+
+        <button
           onClick={generateMealPlan}
           className="w-full rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
         >

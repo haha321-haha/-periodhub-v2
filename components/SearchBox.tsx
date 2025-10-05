@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { Search, X } from 'lucide-react';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import React, { useState, useEffect, useRef } from "react";
+import { Search, X } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 // 定义 Article 接口，避免导入 lib/articles
 interface Article {
@@ -32,13 +32,18 @@ interface SearchBoxProps {
 }
 
 interface SearchResult extends Article {
-  matchType: 'title' | 'summary' | 'tag' | 'content';
+  matchType: "title" | "summary" | "tag" | "content";
   matchText: string;
 }
 
-export default function SearchBox({ articles, locale, placeholder, className = '' }: SearchBoxProps) {
-  const t = useTranslations('searchBox');
-  const [query, setQuery] = useState('');
+export default function SearchBox({
+  articles,
+  locale,
+  placeholder,
+  className = "",
+}: SearchBoxProps) {
+  const t = useTranslations("searchBox");
+  const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -52,18 +57,18 @@ export default function SearchBox({ articles, locale, placeholder, className = '
     const query = searchQuery.toLowerCase();
     const searchResults: SearchResult[] = [];
 
-    articles.forEach(article => {
+    articles.forEach((article) => {
       const title = article.title.toLowerCase();
       const summary = article.summary.toLowerCase();
-      const tags = article.tags.map(tag => tag.toLowerCase());
+      const tags = article.tags.map((tag) => tag.toLowerCase());
       const content = article.content.toLowerCase();
 
       // 标题匹配（最高优先级）
       if (title.includes(query)) {
         searchResults.push({
           ...article,
-          matchType: 'title',
-          matchText: article.title
+          matchType: "title",
+          matchText: article.title,
         });
         return;
       }
@@ -73,23 +78,24 @@ export default function SearchBox({ articles, locale, placeholder, className = '
         const matchIndex = summary.indexOf(query);
         const start = Math.max(0, matchIndex - 50);
         const end = Math.min(summary.length, matchIndex + query.length + 50);
-        const matchText = '...' + article.summary.substring(start, end) + '...';
-        
+        const matchText = "..." + article.summary.substring(start, end) + "...";
+
         searchResults.push({
           ...article,
-          matchType: 'summary',
-          matchText
+          matchType: "summary",
+          matchText,
         });
         return;
       }
 
       // 标签匹配
-      const matchingTag = tags.find(tag => tag.includes(query));
+      const matchingTag = tags.find((tag) => tag.includes(query));
       if (matchingTag) {
         searchResults.push({
           ...article,
-          matchType: 'tag',
-          matchText: article.tags.find(tag => tag.toLowerCase() === matchingTag) || ''
+          matchType: "tag",
+          matchText:
+            article.tags.find((tag) => tag.toLowerCase() === matchingTag) || "",
         });
         return;
       }
@@ -99,12 +105,15 @@ export default function SearchBox({ articles, locale, placeholder, className = '
         const matchIndex = content.indexOf(query);
         const start = Math.max(0, matchIndex - 100);
         const end = Math.min(content.length, matchIndex + query.length + 100);
-        const matchText = '...' + article.content.substring(start, end).replace(/[#*]/g, '') + '...';
-        
+        const matchText =
+          "..." +
+          article.content.substring(start, end).replace(/[#*]/g, "") +
+          "...";
+
         searchResults.push({
           ...article,
-          matchType: 'content',
-          matchText
+          matchType: "content",
+          matchText,
         });
       }
     });
@@ -134,21 +143,21 @@ export default function SearchBox({ articles, locale, placeholder, className = '
     if (!isOpen || results.length === 0) return;
 
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         e.preventDefault();
-        setSelectedIndex(prev => (prev < results.length - 1 ? prev + 1 : 0));
+        setSelectedIndex((prev) => (prev < results.length - 1 ? prev + 1 : 0));
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         e.preventDefault();
-        setSelectedIndex(prev => (prev > 0 ? prev - 1 : results.length - 1));
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : results.length - 1));
         break;
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         if (selectedIndex >= 0 && results[selectedIndex]) {
           window.location.href = `/${locale}/articles/${results[selectedIndex].slug}`;
         }
         break;
-      case 'Escape':
+      case "Escape":
         setIsOpen(false);
         setSelectedIndex(-1);
         inputRef.current?.blur();
@@ -159,19 +168,22 @@ export default function SearchBox({ articles, locale, placeholder, className = '
   // 点击外部关闭
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
         setSelectedIndex(-1);
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // 清除搜索
   const clearSearch = () => {
-    setQuery('');
+    setQuery("");
     setResults([]);
     setIsOpen(false);
     setSelectedIndex(-1);
@@ -181,12 +193,12 @@ export default function SearchBox({ articles, locale, placeholder, className = '
   // 获取匹配类型的显示文本
   const getMatchTypeLabel = (matchType: string) => {
     const labels = {
-      title: locale === 'en' ? 'Title' : '标题',
-      summary: locale === 'en' ? 'Summary' : '摘要',
-      tag: locale === 'en' ? 'Tag' : '标签',
-      content: locale === 'en' ? 'Content' : '内容'
+      title: locale === "en" ? "Title" : "标题",
+      summary: locale === "en" ? "Summary" : "摘要",
+      tag: locale === "en" ? "Tag" : "标签",
+      content: locale === "en" ? "Content" : "内容",
     };
-    return labels[matchType as keyof typeof labels] || '';
+    return labels[matchType as keyof typeof labels] || "";
   };
 
   return (
@@ -203,7 +215,10 @@ export default function SearchBox({ articles, locale, placeholder, className = '
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           onFocus={() => query && setIsOpen(true)}
-          placeholder={placeholder || (locale === 'en' ? 'Search articles...' : '搜索文章...')}
+          placeholder={
+            placeholder ||
+            (locale === "en" ? "Search articles..." : "搜索文章...")
+          }
           className="block w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white text-gray-900 placeholder-gray-500"
         />
         {query && (
@@ -224,11 +239,11 @@ export default function SearchBox({ articles, locale, placeholder, className = '
               key={`${result.slug}-${result.matchType}`}
               href={`/${locale}/articles/${result.slug}`}
               className={`block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 ${
-                index === selectedIndex ? 'bg-pink-50' : ''
+                index === selectedIndex ? "bg-pink-50" : ""
               }`}
               onClick={() => {
                 setIsOpen(false);
-                setQuery('');
+                setQuery("");
               }}
             >
               <div className="flex items-start justify-between">
@@ -240,12 +255,17 @@ export default function SearchBox({ articles, locale, placeholder, className = '
                     {result.matchText}
                   </p>
                   <div className="flex items-center mt-2 space-x-2">
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-                      result.matchType === 'title' ? 'bg-pink-100 text-pink-800' :
-                      result.matchType === 'summary' ? 'bg-blue-100 text-blue-800' :
-                      result.matchType === 'tag' ? 'bg-green-100 text-green-800' :
-                      'bg-gray-100 text-gray-800'
-                    }`}>
+                    <span
+                      className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+                        result.matchType === "title"
+                          ? "bg-pink-100 text-pink-800"
+                          : result.matchType === "summary"
+                            ? "bg-blue-100 text-blue-800"
+                            : result.matchType === "tag"
+                              ? "bg-green-100 text-green-800"
+                              : "bg-gray-100 text-gray-800"
+                      }`}
+                    >
                       {getMatchTypeLabel(result.matchType)}
                     </span>
                     <span className="text-xs text-gray-400">
@@ -263,7 +283,7 @@ export default function SearchBox({ articles, locale, placeholder, className = '
       {isOpen && query && results.length === 0 && (
         <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg p-4">
           <p className="text-sm text-gray-500 text-center">
-            {locale === 'en' ? 'No articles found' : '未找到相关文章'}
+            {locale === "en" ? "No articles found" : "未找到相关文章"}
           </p>
         </div>
       )}

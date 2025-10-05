@@ -3,19 +3,19 @@ import { t } from './i18n.js';
 // 延迟翻译加载的函数
 function getSymptomQuestionsData() {
     return [
-        { 
-            id: 'painLevel', 
-            labelKey: 'symptomAssessor.questions.painLevel.title', 
+        {
+            id: 'painLevel',
+            labelKey: 'symptomAssessor.questions.painLevel.title',
             options: [
                 { value: 'mild', labelKey: 'symptomAssessor.questions.painLevel.options.mild' },
                 { value: 'moderate', labelKey: 'symptomAssessor.questions.painLevel.options.moderate' },
                 { value: 'severe', labelKey: 'symptomAssessor.questions.painLevel.options.severe' },
                 { value: 'verySevere', labelKey: 'symptomAssessor.questions.painLevel.options.verySevere' }
-            ] 
+            ]
         },
-        { 
-            id: 'painDuration', 
-            labelKey: 'symptomAssessor.questions.painDuration.title', 
+        {
+            id: 'painDuration',
+            labelKey: 'symptomAssessor.questions.painDuration.title',
             options: [
                 { value: 'short', labelKey: 'symptomAssessor.questions.painDuration.options.short' },
                 { value: 'medium', labelKey: 'symptomAssessor.questions.painDuration.options.medium' },
@@ -23,21 +23,21 @@ function getSymptomQuestionsData() {
                 { value: 'variable', labelKey: 'symptomAssessor.questions.painDuration.options.variable' }
             ]
         },
-        { 
-            id: 'painLocation', 
-            labelKey: 'symptomAssessor.questions.painLocation.title', 
+        {
+            id: 'painLocation',
+            labelKey: 'symptomAssessor.questions.painLocation.title',
             options: [
                 { value: 'lowerAbdomen', labelKey: 'symptomAssessor.questions.painLocation.options.lowerAbdomen' },
                 { value: 'lowerBack', labelKey: 'symptomAssessor.questions.painLocation.options.lowerBack' },
                 { value: 'upperThighs', labelKey: 'symptomAssessor.questions.painLocation.options.upperThighs' },
                 { value: 'fullPelvis', labelKey: 'symptomAssessor.questions.painLocation.options.fullPelvis' },
                 { value: 'sideFlank', labelKey: 'symptomAssessor.questions.painLocation.options.sideFlank' }
-            ], 
-            type: 'multi-select' 
+            ],
+            type: 'multi-select'
         },
-        { 
-            id: 'accompanyingSymptoms', 
-            labelKey: 'symptomAssessor.questions.accompanyingSymptoms.title', 
+        {
+            id: 'accompanyingSymptoms',
+            labelKey: 'symptomAssessor.questions.accompanyingSymptoms.title',
             options: [
                  { value: 'fatigue', labelKey: 'symptomAssessor.questions.accompanyingSymptoms.options.fatigue' },
                  { value: 'headache', labelKey: 'symptomAssessor.questions.accompanyingSymptoms.options.headache' },
@@ -47,12 +47,12 @@ function getSymptomQuestionsData() {
                  { value: 'bloating', labelKey: 'symptomAssessor.questions.accompanyingSymptoms.options.bloating' },
                  { value: 'breastTenderness', labelKey: 'symptomAssessor.questions.accompanyingSymptoms.options.breastTenderness' },
                  { value: 'dizziness', labelKey: 'symptomAssessor.questions.accompanyingSymptoms.options.dizziness' }
-            ], 
-            type: 'multi-select' 
+            ],
+            type: 'multi-select'
         },
-        { 
-            id: 'reliefPreference', 
-            labelKey: 'impactAssessment.preference.title', 
+        {
+            id: 'reliefPreference',
+            labelKey: 'impactAssessment.preference.title',
             options: [
                 { value: 'instant', labelKey: 'impactAssessment.preference.options.instant' },
                 { value: 'natural', labelKey: 'impactAssessment.preference.options.natural' },
@@ -77,42 +77,42 @@ export function getSymptomQuestions() {
 
 function getWorkplaceQuestionsData() {
     return [
-        { 
-            id: 'concentration', 
-            labelKey: 'workplaceAssessment.questions.concentration.title', 
+        {
+            id: 'concentration',
+            labelKey: 'workplaceAssessment.questions.concentration.title',
             options: [
                 { value: 'none', labelKey: 'workplaceAssessment.questions.concentration.options.none' },
                 { value: 'slight', labelKey: 'workplaceAssessment.questions.concentration.options.slight' },
                 { value: 'difficult', labelKey: 'workplaceAssessment.questions.concentration.options.difficult' },
                 { value: 'impossible', labelKey: 'workplaceAssessment.questions.concentration.options.impossible' }
-            ], 
-            type: 'single-select' 
+            ],
+            type: 'single-select'
         },
-        { 
-            id: 'absenteeism', 
-            labelKey: 'workplaceAssessment.questions.absenteeism.title', 
+        {
+            id: 'absenteeism',
+            labelKey: 'workplaceAssessment.questions.absenteeism.title',
             options: [
                 { value: 'never', labelKey: 'workplaceAssessment.questions.absenteeism.options.never' },
                 { value: 'rarely', labelKey: 'workplaceAssessment.questions.absenteeism.options.rarely' },
                 { value: 'sometimes', labelKey: 'workplaceAssessment.questions.absenteeism.options.sometimes' },
                 { value: 'frequently', labelKey: 'workplaceAssessment.questions.absenteeism.options.frequently' }
-            ], 
-            type: 'single-select' 
+            ],
+            type: 'single-select'
         },
-        { 
-            id: 'communication', 
-            labelKey: 'workplaceAssessment.questions.communication.title', 
+        {
+            id: 'communication',
+            labelKey: 'workplaceAssessment.questions.communication.title',
             options: [
                 { value: 'comfortable', labelKey: 'workplaceAssessment.questions.communication.options.comfortable' },
                 { value: 'hesitant', labelKey: 'workplaceAssessment.questions.communication.options.hesitant' },
                 { value: 'uncomfortable', labelKey: 'workplaceAssessment.questions.communication.options.uncomfortable' },
                 { value: 'na', labelKey: 'workplaceAssessment.questions.communication.options.na' }
-            ], 
-            type: 'single-select' 
+            ],
+            type: 'single-select'
         },
-        { 
-            id: 'support', 
-            labelKey: 'workplaceAssessment.questions.support.title', 
+        {
+            id: 'support',
+            labelKey: 'workplaceAssessment.questions.support.title',
             options: [
                 { value: 'flexHours', labelKey: 'workplaceAssessment.questions.support.options.flexHours' },
                 { value: 'remoteWork', labelKey: 'workplaceAssessment.questions.support.options.remoteWork' },
@@ -120,8 +120,8 @@ function getWorkplaceQuestionsData() {
                 { value: 'understanding', labelKey: 'workplaceAssessment.questions.support.options.understanding' },
                 { value: 'leave', labelKey: 'workplaceAssessment.questions.support.options.leave' },
                 { value: 'none', labelKey: 'workplaceAssessment.questions.support.options.none' }
-            ], 
-            type: 'multi-select' 
+            ],
+            type: 'multi-select'
         }
     ];
 }
@@ -210,7 +210,7 @@ export function calculateWorkplaceImpact(answers) {
             case 'na': score += 15; break;
         }
     }
-    
+
     score = Math.round(score);
 
 
@@ -227,7 +227,7 @@ export function calculateWorkplaceImpact(answers) {
         suggestions.push(t('calculation.workplace.suggestions.challenging2'));
         suggestions.push(t('calculation.workplace.suggestions.challenging3'));
     }
-    
+
     if (answers.communication === 'uncomfortable' || answers.communication === 'hesitant') {
         suggestions.push(t('calculation.workplace.suggestions.communicationHelp'));
     }
@@ -240,7 +240,7 @@ export function calculateWorkplaceImpact(answers) {
         if (answers.support.includes('restArea')) supportItems.push(t('workplaceAssessment.questions.support.options.restArea'));
         if (answers.support.includes('understanding')) supportItems.push(t('workplaceAssessment.questions.support.options.understanding'));
         if (answers.support.includes('leave')) supportItems.push(t('workplaceAssessment.questions.support.options.leave'));
-        
+
         if(supportItems.length > 0) {
             suggestions.push(supportText + supportItems.join(', ') + '.');
         }
@@ -252,4 +252,3 @@ export function calculateWorkplaceImpact(answers) {
         suggestions
     };
 }
-

@@ -23,7 +23,7 @@ export class CosineSimilarity {
 
     // 计算点积
     const dotProduct = this.dotProduct(vector1, vector2);
-    
+
     // 余弦相似度 = 点积 / (||v1|| * ||v2||)
     return dotProduct / (vector1.norm * vector2.norm);
   }
@@ -32,7 +32,7 @@ export class CosineSimilarity {
    * 计算查询与文档集合的相似度
    */
   static calculateBatch(
-    queryVector: TFIDFVector, 
+    queryVector: TFIDFVector,
     documentVectors: TFIDFVector[]
   ): SimilarityResult[] {
     const results: SimilarityResult[] = [];
@@ -70,7 +70,7 @@ export class CosineSimilarity {
    */
   static calculateMatrix(vectors: TFIDFVector[]): number[][] {
     const matrix: number[][] = [];
-    
+
     for (let i = 0; i < vectors.length; i++) {
       matrix[i] = [];
       for (let j = 0; j < vectors.length; j++) {
@@ -81,7 +81,7 @@ export class CosineSimilarity {
         }
       }
     }
-    
+
     return matrix;
   }
 
@@ -102,7 +102,7 @@ export class CosineSimilarity {
       }
 
       const similarity = this.calculate(targetVector, candidate);
-      
+
       if (similarity > maxSimilarity) {
         maxSimilarity = similarity;
         const matchedTerms = this.getMatchedTerms(targetVector, candidate);
@@ -193,4 +193,4 @@ export class CosineSimilarity {
 
     return `相似度很高 (${(similarity * 100).toFixed(1)}%)，高度匹配: ${matchedTerms.join(', ')}`;
   }
-} 
+}

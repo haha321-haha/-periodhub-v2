@@ -2,7 +2,7 @@
 
 /**
  * 📱 PeriodHub 移动端响应式检查器
- * 
+ *
  * 功能：
  * 1. 检查移动端响应式设计
  * 2. 验证触摸目标大小
@@ -24,7 +24,7 @@ class MobileResponsiveChecker {
       accessibility: {},
       recommendations: []
     };
-    
+
     // 测试的视口尺寸
     this.viewports = [
       { name: 'iPhone SE', width: 375, height: 667, deviceScaleFactor: 2 },
@@ -34,7 +34,7 @@ class MobileResponsiveChecker {
       { name: 'Android Phone', width: 360, height: 640, deviceScaleFactor: 3 },
       { name: 'Android Tablet', width: 800, height: 1280, deviceScaleFactor: 1.5 }
     ];
-    
+
     // 需要检查的页面
     this.testPages = [
       '/',
@@ -47,16 +47,16 @@ class MobileResponsiveChecker {
 
   async run() {
     console.log('📱 开始移动端响应式检查...\n');
-    
+
     try {
       await this.checkPuppeteerInstallation();
       await this.startLocalServer();
       await this.runResponsiveTests();
       await this.generateReport();
-      
+
       console.log('\n✅ 移动端响应式检查完成！');
       console.log('📊 查看详细报告: ./mobile-responsive-report.json');
-      
+
     } catch (error) {
       console.error('❌ 检查过程中出现错误:', error.message);
       process.exit(1);
@@ -77,7 +77,7 @@ class MobileResponsiveChecker {
 
   async startLocalServer() {
     console.log('🚀 启动本地开发服务器...');
-    
+
     // 检查是否已有服务器运行
     try {
       const response = await fetch('http://localhost:3000');
@@ -88,7 +88,7 @@ class MobileResponsiveChecker {
     } catch (error) {
       // 服务器未运行，需要启动
     }
-    
+
     console.log('⚠️ 请确保开发服务器正在运行:');
     console.log('   npm run dev');
     console.log('   然后重新运行此脚本');
@@ -113,7 +113,7 @@ class MobileResponsiveChecker {
 
   async testViewport(browser, viewport) {
     const page = await browser.newPage();
-    
+
     try {
       // 设置视口
       await page.setViewport({
@@ -147,7 +147,7 @@ class MobileResponsiveChecker {
 
   async testPage(page, pagePath, viewport) {
     const url = `http://localhost:3000${pagePath}`;
-    
+
     try {
       // 导航到页面
       await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
@@ -186,13 +186,13 @@ class MobileResponsiveChecker {
           'screenshots',
           `${viewport.name.replace(/\s+/g, '-')}-${pagePath.replace(/\//g, '-') || 'home'}.png`
         );
-        
+
         // 确保截图目录存在
         const screenshotDir = path.dirname(screenshotPath);
         if (!fs.existsSync(screenshotDir)) {
           fs.mkdirSync(screenshotDir, { recursive: true });
         }
-        
+
         await page.screenshot({ path: screenshotPath, fullPage: true });
         pageResult.screenshots.push(screenshotPath);
       }
@@ -219,7 +219,7 @@ class MobileResponsiveChecker {
       interactiveElements.forEach((element, index) => {
         const rect = element.getBoundingClientRect();
         const computedStyle = window.getComputedStyle(element);
-        
+
         // 计算实际的触摸目标大小
         const width = rect.width;
         const height = rect.height;
@@ -250,7 +250,7 @@ class MobileResponsiveChecker {
     return await page.evaluate(() => {
       return new Promise((resolve) => {
         let cumulativeLayoutShift = 0;
-        
+
         const observer = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
             if (entry.entryType === 'layout-shift' && !entry.hadRecentInput) {
@@ -282,7 +282,7 @@ class MobileResponsiveChecker {
       // 检查字体大小
       const textElements = document.querySelectorAll('p, span, div, h1, h2, h3, h4, h5, h6');
       let smallTextCount = 0;
-      
+
       textElements.forEach(element => {
         const fontSize = parseFloat(window.getComputedStyle(element).fontSize);
         if (fontSize < 16 && element.textContent.trim().length > 0) {
@@ -297,17 +297,17 @@ class MobileResponsiveChecker {
       // 检查点击目标间距
       const buttons = document.querySelectorAll('button, a[href]');
       let tooCloseCount = 0;
-      
+
       for (let i = 0; i < buttons.length; i++) {
         for (let j = i + 1; j < buttons.length; j++) {
           const rect1 = buttons[i].getBoundingClientRect();
           const rect2 = buttons[j].getBoundingClientRect();
-          
+
           const distance = Math.sqrt(
-            Math.pow(rect1.left - rect2.left, 2) + 
+            Math.pow(rect1.left - rect2.left, 2) +
             Math.pow(rect1.top - rect2.top, 2)
           );
-          
+
           if (distance < 8 && distance > 0) { // 8px 最小间距
             tooCloseCount++;
             break;
@@ -339,10 +339,10 @@ class MobileResponsiveChecker {
 
     // 统计数据
     const totalPages = this.results.viewports.reduce((sum, vp) => sum + vp.pages.length, 0);
-    const totalIssues = this.results.viewports.reduce((sum, vp) => 
+    const totalIssues = this.results.viewports.reduce((sum, vp) =>
       sum + vp.pages.reduce((pageSum, page) => pageSum + (page.issues?.length || 0), 0), 0
     );
-    
+
     const inaccessibleTargets = this.results.viewports.reduce((sum, vp) =>
       sum + vp.pages.reduce((pageSum, page) =>
         pageSum + (page.touchTargets?.filter(target => !target.isAccessible).length || 0), 0
@@ -441,7 +441,7 @@ class MobileResponsiveChecker {
 
   generateHumanReadableReport(report) {
     const readableReportPath = path.join(this.projectRoot, 'mobile-responsive-report.md');
-    
+
     let content = `# 📱 PeriodHub 移动端响应式检查报告
 
 生成时间: ${new Date(report.timestamp).toLocaleString('zh-CN')}
@@ -485,23 +485,23 @@ class MobileResponsiveChecker {
 
     report.viewports.forEach(viewport => {
       content += `### ${viewport.name} (${viewport.width}x${viewport.height})\n\n`;
-      
+
       viewport.pages.forEach(page => {
         const issueCount = page.issues?.length || 0;
         const touchTargetIssues = page.touchTargets?.filter(t => !t.isAccessible).length || 0;
-        
+
         content += `#### ${page.path || '/'}\n`;
         content += `- 加载时间: ${page.loadTime || 'N/A'}ms\n`;
         content += `- 问题数量: ${issueCount}\n`;
         content += `- 不合格触摸目标: ${touchTargetIssues}\n`;
-        
+
         if (page.issues && page.issues.length > 0) {
           content += `- 具体问题:\n`;
           page.issues.forEach(issue => {
             content += `  - ${issue}\n`;
           });
         }
-        
+
         content += '\n';
       });
     });
@@ -532,7 +532,7 @@ class MobileResponsiveChecker {
   .container {
     padding: 16px;
   }
-  
+
   .text-lg {
     font-size: 16px; /* 确保可读性 */
   }

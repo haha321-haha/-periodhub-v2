@@ -32,16 +32,16 @@ const log = {
 const CONFIG = {
   // 要检查的文件类型
   fileExtensions: ['.tsx', '.ts', '.js', '.json'],
-  
+
   // 排除的目录
   excludeDirs: ['node_modules', '.next', 'recovery-workspace', 'hub-latest-main', 'backup', 'backups', 'recovered', 'recovery-backups'],
-  
+
   // 硬编码URL模式
   hardcodedPatterns: [
     /https:\/\/periodhub\.health/g,
     /https:\/\/www\.periodhub\.health/g,
   ],
-  
+
   // 允许的硬编码模式（在特定上下文中）
   allowedPatterns: [
     /\/\/.*https:\/\/periodhub\.health/g,
@@ -51,7 +51,7 @@ const CONFIG = {
     /process\.env\.NEXT_PUBLIC_BASE_URL\s*\|\|\s*["']https:\/\/periodhub\.health["']/g,
     /process\.env\.NEXT_PUBLIC_BASE_URL\s*\|\|\s*["']https:\/\/www\.periodhub\.health["']/g,
   ],
-  
+
   // 最大文件大小 (1MB)
   maxFileSize: 1024 * 1024,
 };
@@ -60,15 +60,15 @@ const CONFIG = {
 function checkFile(filePath) {
   try {
     const stats = fs.statSync(filePath);
-    
+
     // 跳过过大的文件
     if (stats.size > CONFIG.maxFileSize) {
       return [];
     }
-    
+
     const content = fs.readFileSync(filePath, 'utf8');
     const issues = [];
-    
+
     CONFIG.hardcodedPatterns.forEach((pattern) => {
       const matches = content.match(pattern);
       if (matches) {
@@ -78,7 +78,7 @@ function checkFile(filePath) {
             // 检查整个文件内容是否包含允许的模式
             return allowedPattern.test(content);
           });
-          
+
           if (!isAllowed) {
             issues.push({
               type: 'hardcoded_url',
@@ -90,7 +90,7 @@ function checkFile(filePath) {
         });
       }
     });
-    
+
     return issues;
   } catch (error) {
     // 静默处理错误，避免输出过多错误信息
@@ -113,32 +113,32 @@ function getLineNumber(content, match) {
 function quickScanDirectory(dirPath, depth = 0, maxDepth = 3) {
   const results = [];
   let fileCount = 0;
-  
+
   try {
     const items = fs.readdirSync(dirPath);
-    
+
     for (const item of items) {
       const fullPath = path.join(dirPath, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         // 跳过排除的目录
         if (CONFIG.excludeDirs.includes(item)) {
           continue;
         }
-        
+
         // 限制扫描深度
         if (depth < maxDepth) {
           results.push(...quickScanDirectory(fullPath, depth + 1, maxDepth));
         }
       } else if (stat.isFile()) {
         fileCount++;
-        
+
         // 显示进度
         if (fileCount % 50 === 0) {
           process.stdout.write(`\r扫描进度: ${fileCount} 个文件...`);
         }
-        
+
         // 检查文件类型
         const ext = path.extname(item);
         if (CONFIG.fileExtensions.includes(ext)) {
@@ -155,7 +155,7 @@ function quickScanDirectory(dirPath, depth = 0, maxDepth = 3) {
   } catch (error) {
     // 静默处理错误
   }
-  
+
   return results;
 }
 
@@ -163,21 +163,21 @@ function quickScanDirectory(dirPath, depth = 0, maxDepth = 3) {
 function generateReport(results) {
   console.log('\r'); // 清除进度显示
   log.header('硬编码URL检测报告');
-  
+
   if (results.length === 0) {
     log.success('✅ 没有发现硬编码URL问题');
     return;
   }
-  
+
   log.warning(`⚠️ 发现 ${results.length} 个文件包含硬编码URL`);
-  
+
   results.forEach(({ file, issues }) => {
     log.error(`\n📁 文件: ${file}`);
     issues.forEach(issue => {
       log.error(`  第${issue.line}行: ${issue.match}`);
     });
   });
-  
+
   log.warning('\n🔧 建议修复方法:');
   log.info('1. 使用 lib/url-config.ts 中的配置');
   log.info('2. 使用环境变量 process.env.NEXT_PUBLIC_BASE_URL');
@@ -187,32 +187,32 @@ function generateReport(results) {
 // 主函数
 function main() {
   log.header('开始快速硬编码URL检测');
-  
+
   const startTime = Date.now();
-  
+
   // 优先扫描主要目录
   const priorityDirs = ['app', 'components', 'lib', 'utils', 'scripts'];
   let results = [];
-  
+
   for (const dir of priorityDirs) {
     if (fs.existsSync(dir)) {
       log.info(`扫描目录: ${dir}`);
       results.push(...quickScanDirectory(dir, 0, 2));
     }
   }
-  
+
   // 如果主要目录没有发现问题，再扫描其他目录
   if (results.length === 0) {
     log.info('主要目录无问题，扫描其他目录...');
     results = quickScanDirectory('.', 0, 1);
   }
-  
+
   const endTime = Date.now();
-  
+
   generateReport(results);
-  
+
   log.info(`\n⏱️ 检测完成，耗时: ${endTime - startTime}ms`);
-  
+
   // 如果有问题，退出码为1
   if (results.length > 0) {
     process.exit(1);

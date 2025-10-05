@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import SmartImage from '@/components/ui/SmartImage';
-import { useTranslations } from 'next-intl';
+import Link from "next/link";
+import SmartImage from "@/components/ui/SmartImage";
+import { useTranslations } from "next-intl";
 
 interface Article {
   slug: string;
@@ -20,42 +20,42 @@ interface RelatedArticlesProps {
   maxResults?: number;
 }
 
-export default function RelatedArticles({ 
-  currentArticle, 
-  allArticles, 
-  locale, 
-  maxResults = 3 
+export default function RelatedArticles({
+  currentArticle,
+  allArticles,
+  locale,
+  maxResults = 3,
 }: RelatedArticlesProps) {
-  const t = useTranslations('article');
-  
+  const t = useTranslations("article");
+
   // 计算相关文章
   const getRelatedArticles = () => {
     const related = allArticles
-      .filter(article => article.slug !== currentArticle.slug)
-      .map(article => {
+      .filter((article) => article.slug !== currentArticle.slug)
+      .map((article) => {
         // 计算相关性分数
         let score = 0;
-        
+
         // 标签匹配
-        const commonTags = article.tags.filter(tag => 
-          currentArticle.tags.includes(tag)
+        const commonTags = article.tags.filter((tag) =>
+          currentArticle.tags.includes(tag),
         );
         score += commonTags.length * 3;
-        
+
         // 标题关键词匹配
-        const titleWords = currentArticle.title.toLowerCase().split(' ');
-        const articleTitleWords = article.title.toLowerCase().split(' ');
-        const commonWords = titleWords.filter(word => 
-          articleTitleWords.includes(word) && word.length > 3
+        const titleWords = currentArticle.title.toLowerCase().split(" ");
+        const articleTitleWords = article.title.toLowerCase().split(" ");
+        const commonWords = titleWords.filter(
+          (word) => articleTitleWords.includes(word) && word.length > 3,
         );
         score += commonWords.length * 2;
-        
+
         return { ...article, score };
       })
-      .filter(article => article.score > 0)
+      .filter((article) => article.score > 0)
       .sort((a, b) => b.score - a.score)
       .slice(0, maxResults);
-    
+
     return related;
   };
 
@@ -69,9 +69,9 @@ export default function RelatedArticles({
     <section className="mt-12 p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl">
       <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
         <span className="mr-2">🔗</span>
-        {t('relatedArticles')}
+        {t("relatedArticles")}
       </h3>
-      
+
       <div className="grid md:grid-cols-3 gap-6">
         {relatedArticles.map((article) => (
           <Link
@@ -91,19 +91,21 @@ export default function RelatedArticles({
                 />
               </div>
             )}
-            
+
             <h4 className="font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors line-clamp-2">
               {article.title}
             </h4>
-            
+
             <p className="text-gray-600 text-sm mb-3 line-clamp-2">
               {article.description}
             </p>
-            
+
             <div className="flex items-center justify-between text-xs text-gray-500">
-              <span>{article.readingTime} {t('minutesRead')}</span>
+              <span>
+                {article.readingTime} {t("minutesRead")}
+              </span>
               <span className="text-purple-600 group-hover:text-purple-700">
-                {t('readMore')} →
+                {t("readMore")} →
               </span>
             </div>
           </Link>

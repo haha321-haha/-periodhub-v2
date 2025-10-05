@@ -20,4 +20,3 @@ curl -s https://www.periodhub.health/sitemap.xml | grep -o "https://[^<]*" | hea
 
 echo ""
 echo "✅ DNS检查完成！"
-

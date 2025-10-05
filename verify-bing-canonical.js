@@ -26,12 +26,12 @@ function checkCanonicalTags(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
     const issues = [];
-    
+
     // 检查是否使用www.periodhub.health
     if (content.includes('https://periodhub.health') && !content.includes('https://www.periodhub.health')) {
       issues.push('发现不带www的URL，应该使用www.periodhub.health');
     }
-    
+
     // 检查canonical标签
     const canonicalMatch = content.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']*)["'][^>]*>/i);
     if (!canonicalMatch) {
@@ -39,7 +39,7 @@ function checkCanonicalTags(filePath) {
     } else if (!canonicalMatch[1].includes('www.periodhub.health')) {
       issues.push(`canonical标签URL不正确: ${canonicalMatch[1]}`);
     }
-    
+
     // 检查hreflang标签
     const hreflangMatches = content.match(/<link[^>]*rel=["']alternate["'][^>]*hreflang=["']([^"']*)["'][^>]*href=["']([^"']*)["'][^>]*>/gi);
     if (!hreflangMatches || hreflangMatches.length < 2) {
@@ -51,7 +51,7 @@ function checkCanonicalTags(filePath) {
         }
       });
     }
-    
+
     return issues;
   } catch (error) {
     return [`文件读取错误: ${error.message}`];
@@ -77,10 +77,10 @@ function generateBingVerificationReport() {
       '在Bing Webmaster Tools中提交更新的sitemap.xml'
     ]
   };
-  
+
   criticalPages.forEach(page => {
     const issues = checkCanonicalTags(page.file);
-    
+
     const pageReport = {
       page: page.path,
       filePath: page.file,
@@ -90,9 +90,9 @@ function generateBingVerificationReport() {
       hasHreflang: !issues.some(issue => issue.includes('hreflang标签')),
       usesCorrectDomain: !issues.some(issue => issue.includes('不带www的URL'))
     };
-    
+
     report.checkedPages.push(pageReport);
-    
+
     if (pageReport.status === 'passed') {
       report.summary.passed++;
     } else {
@@ -100,17 +100,17 @@ function generateBingVerificationReport() {
       report.summary.totalIssues += issues.length;
     }
   });
-  
+
   return report;
 }
 
 // 生成修复建议
 function generateFixSuggestions(report) {
   const suggestions = [];
-  
+
   if (report.summary.failed > 0) {
     suggestions.push('🔧 需要修复的问题:');
-    
+
     const failedPages = report.checkedPages.filter(p => p.status === 'failed');
     failedPages.forEach(page => {
       suggestions.push(`\n📄 ${page.page}:`);
@@ -119,33 +119,33 @@ function generateFixSuggestions(report) {
       });
     });
   }
-  
+
   suggestions.push('\n🚀 Bing Webmaster Tools操作步骤:');
   suggestions.push('1. 登录 https://www.bing.com/webmasters/');
   suggestions.push('2. 选择网站 https://www.periodhub.health');
   suggestions.push('3. 进入"站点地图"页面，提交 sitemap.xml');
   suggestions.push('4. 进入"URL检查"工具，检查问题页面');
   suggestions.push('5. 请求Bing重新抓取所有修复的页面');
-  
+
   return suggestions.join('\n');
 }
 
 // 主执行函数
 function main() {
   console.log('🔍 验证Bing所需的canonical标签配置...\n');
-  
+
   const report = generateBingVerificationReport();
-  
+
   // 生成JSON报告
   fs.writeFileSync('bing-canonical-verification.json', JSON.stringify(report, null, 2));
   console.log('✅ 已生成 bing-canonical-verification.json');
-  
+
   // 显示验证结果
   console.log('\n📊 验证结果:');
   console.log(`✅ 通过: ${report.summary.passed} 个页面`);
   console.log(`❌ 失败: ${report.summary.failed} 个页面`);
   console.log(`🔧 总问题数: ${report.summary.totalIssues}`);
-  
+
   if (report.summary.failed > 0) {
     console.log('\n❌ 失败的页面:');
     report.checkedPages
@@ -157,10 +157,10 @@ function main() {
         });
       });
   }
-  
+
   // 显示修复建议
   console.log('\n' + generateFixSuggestions(report));
-  
+
   console.log('\n📋 下一步操作:');
   console.log('1. 修复所有canonical标签问题');
   console.log('2. 在Bing Webmaster Tools中提交sitemap.xml');

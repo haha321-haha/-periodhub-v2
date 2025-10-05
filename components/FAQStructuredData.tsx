@@ -51,7 +51,7 @@ export const commonFAQs = {
       answer: '许多自然疗法如热敷、瑜伽、草药茶等都有科学研究支持其有效性。但效果因人而异，建议结合医学治疗使用。'
     }
   ],
-  
+
   menstrualHealth: [
     {
       question: '正常的月经周期是多长？',

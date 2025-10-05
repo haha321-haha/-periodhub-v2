@@ -21,7 +21,7 @@ class AdvancedTranslationKeyExtractor {
     this.unusedKeys = new Set();
     this.errors = [];
     this.fileAnalysis = new Map(); // 存储每个文件的分析结果
-    
+
     // 初始化白名单
     this.initializeWhitelist();
   }
@@ -68,7 +68,7 @@ class AdvancedTranslationKeyExtractor {
    */
   scanTranslationKeys() {
     console.log('🔍 扫描翻译键使用情况（v3 增强版）...');
-    
+
     const files = glob.sync('**/*.{ts,tsx,js,jsx}', {
       cwd: this.appDir,
       ignore: ['**/node_modules/**', '**/.next/**', '**/test/**', '**/tests/**']
@@ -79,21 +79,21 @@ class AdvancedTranslationKeyExtractor {
     files.forEach(file => {
       const filePath = path.join(this.appDir, file);
       const content = fs.readFileSync(filePath, 'utf8');
-      
+
       this.analyzeFile(content, file);
     });
 
     // 处理命名空间映射
     this.processNamespaceMappings();
-    
+
     // 处理动态键模式
     this.processDynamicKeyPatterns();
-    
+
     console.log(`✅ 发现 ${this.foundKeys.size} 个翻译键使用`);
     console.log(`✅ 发现 ${this.namespaceMappings.size} 个命名空间映射`);
     console.log(`✅ 发现 ${this.dynamicKeyPatterns.size} 个动态键模式`);
     console.log(`✅ 白名单包含 ${this.whitelistKeys.size} 个键`);
-    
+
     return this.foundKeys;
   }
 
@@ -195,10 +195,10 @@ class AdvancedTranslationKeyExtractor {
     this.fileAnalysis.forEach((analysis, filePath) => {
       analysis.namespaces.forEach((namespaceInfo, key) => {
         const { namespace, line, type } = namespaceInfo;
-        
+
         // 为每个命名空间添加常见的键
         const commonKeys = [
-          'title', 'description', 'subtitle', 'cta', 'button', 'label', 
+          'title', 'description', 'subtitle', 'cta', 'button', 'label',
           'placeholder', 'error', 'success', 'loading', 'empty', 'notFound',
           'meta', 'hero', 'sections', 'content', 'footer', 'header',
           'form', 'input', 'select', 'textarea', 'checkbox', 'radio',
@@ -270,7 +270,7 @@ class AdvancedTranslationKeyExtractor {
       if (parts.length >= 2) {
         const baseKey = parts[0];
         const subKey = parts[1];
-        
+
         // 添加一些常见的组合
         this.foundKeys.add(`${baseKey}.${subKey}`);
         this.foundKeys.add(`${baseKey}.title`);
@@ -284,7 +284,7 @@ class AdvancedTranslationKeyExtractor {
    */
   loadTranslationFiles() {
     console.log('📚 加载翻译文件...');
-    
+
     const locales = ['zh', 'en'];
     const translationData = {};
 
@@ -311,7 +311,7 @@ class AdvancedTranslationKeyExtractor {
    */
   flattenKeys(obj, prefix = '') {
     const flattened = {};
-    
+
     for (const key in obj) {
       if (typeof obj[key] === 'object' && obj[key] !== null) {
         const nested = this.flattenKeys(obj[key], prefix ? `${prefix}.${key}` : key);
@@ -320,7 +320,7 @@ class AdvancedTranslationKeyExtractor {
         flattened[prefix ? `${prefix}.${key}` : key] = obj[key];
       }
     }
-    
+
     return flattened;
   }
 
@@ -329,10 +329,10 @@ class AdvancedTranslationKeyExtractor {
    */
   validateTranslationKeys() {
     console.log('🔍 验证翻译键完整性...');
-    
+
     const translationData = this.loadTranslationFiles();
     const locales = Object.keys(translationData);
-    
+
     if (locales.length === 0) {
       this.errors.push('没有找到有效的翻译文件');
       return;
@@ -379,7 +379,7 @@ class AdvancedTranslationKeyExtractor {
   generateReport() {
     console.log('\n📊 翻译键分析报告 v3');
     console.log('='.repeat(60));
-    
+
     console.log(`\n📈 统计信息:`);
     console.log(`  - 代码中使用的翻译键: ${this.foundKeys.size}`);
     console.log(`  - 命名空间映射: ${this.namespaceMappings.size}`);
@@ -488,12 +488,12 @@ class AdvancedTranslationKeyExtractor {
    */
   run() {
     console.log('🚀 开始翻译键分析 v3...\n');
-    
+
     try {
       this.scanTranslationKeys();
       this.validateTranslationKeys();
       const report = this.generateReport();
-      
+
       console.log('\n' + '='.repeat(60));
       if (report.hasIssues) {
         console.log('❌ 发现问题，需要修复');

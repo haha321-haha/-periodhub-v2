@@ -63,5 +63,3 @@ export interface ResponsiveProps extends ComponentProps {
   tablet?: boolean;
   desktop?: boolean;
 }
-
-

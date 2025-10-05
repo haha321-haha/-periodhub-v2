@@ -67,7 +67,7 @@ function generateMonitoringReport() {
 // 生成HTML监控面板
 function generateMonitoringDashboard() {
   const report = generateMonitoringReport();
-  
+
   let html = `
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -105,7 +105,7 @@ function generateMonitoringDashboard() {
             <p><strong>交互工具:</strong> ${report.categories.interactiveTools}</p>
             <p><strong>其他页面:</strong> ${report.categories.otherPages}</p>
         </div>
-        
+
         <div class="status-card">
             <h3>⏰ 预期时间</h3>
             <p><strong>处理时间:</strong> 3-7天</p>
@@ -115,7 +115,7 @@ function generateMonitoringDashboard() {
             </div>
             <p style="font-size: 0.9em; color: #666;">索引编制进度</p>
         </div>
-        
+
         <div class="status-card">
             <h3>🎯 优先级</h3>
             <p><strong>高优先级:</strong> ${report.urls.filter(u => u.priority === 'high').length} 个</p>
@@ -132,7 +132,7 @@ function generateMonitoringDashboard() {
     if (item.url.includes('pdf-files/')) cssClass += ' pdf-url';
     else if (item.url.includes('interactive-tools')) cssClass += ' interactive-url';
     else cssClass += ' other-url';
-    
+
     html += `
         <div class="${cssClass}">
             <strong>${item.url}</strong>
@@ -171,10 +171,10 @@ function generateMonitoringDashboard() {
             const expectedTime = 7 * 24 * 60 * 60 * 1000; // 7天
             const elapsed = now - startTime;
             const progress = Math.min((elapsed / expectedTime) * 100, 100);
-            
+
             document.querySelector('.progress-fill').style.width = progress + '%';
         }
-        
+
         updateProgress();
         setInterval(updateProgress, 60000); // 每分钟更新一次
     </script>
@@ -229,38 +229,38 @@ function generateChecklist() {
 // 主执行函数
 function main() {
   console.log('🔍 生成Bing索引编制监控报告...\n');
-  
+
   // 生成监控报告
   const report = generateMonitoringReport();
   fs.writeFileSync('bing-indexing-monitor.json', JSON.stringify(report, null, 2));
   console.log('✅ 已生成 bing-indexing-monitor.json');
-  
+
   // 生成HTML监控面板
   const dashboard = generateMonitoringDashboard();
   fs.writeFileSync('bing-indexing-dashboard.html', dashboard);
   console.log('✅ 已生成 bing-indexing-dashboard.html');
-  
+
   // 生成检查清单
   const checklist = generateChecklist();
   fs.writeFileSync('bing-indexing-checklist.json', JSON.stringify(checklist, null, 2));
   console.log('✅ 已生成 bing-indexing-checklist.json');
-  
+
   console.log('\n📊 提交统计:');
   console.log(`- 总URL数量: ${report.totalSubmitted}`);
   console.log(`- PDF文件: ${report.categories.pdfFiles}`);
   console.log(`- 交互工具页面: ${report.categories.interactiveTools}`);
   console.log(`- 其他页面: ${report.categories.otherPages}`);
-  
+
   console.log('\n⏰ 预期时间:');
   console.log('- 处理时间: 3-7天');
   console.log('- 下次检查: ' + new Date(report.urls[0].nextCheckDate).toLocaleDateString());
-  
+
   console.log('\n📋 下一步操作:');
   console.log('1. 打开 bing-indexing-dashboard.html 查看监控面板');
   console.log('2. 每日在Bing Webmaster Tools中检查URL状态');
   console.log('3. 每周查看站点诊断和搜索性能报告');
   console.log('4. 7天后重新提交仍未索引的URL');
-  
+
   console.log('\n🎯 重要提醒:');
   console.log('- PDF文件已被robots.txt排除，可能不会被索引');
   console.log('- 交互工具页面是重点，需要优先处理');
@@ -272,8 +272,3 @@ if (require.main === module) {
 }
 
 module.exports = { generateMonitoringReport, generateMonitoringDashboard, generateChecklist };
-
-
-
-
-

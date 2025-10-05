@@ -50,12 +50,12 @@ function handleSitemapRename() {
       // 复制为最终的 sitemap.xml
       fs.copyFileSync(CONFIG.sitemapFixed, CONFIG.sitemapFinal);
       console.log('✅ Sitemap 已重命名为 sitemap.xml');
-      
+
       // 复制到输出目录
       const outputSitemap = path.join(CONFIG.outputDir, 'sitemap.xml');
       fs.copyFileSync(CONFIG.sitemapFixed, outputSitemap);
       console.log(`✅ Sitemap 已复制到: ${outputSitemap}`);
-      
+
       return true;
     } else {
       console.error('❌ 找不到修复后的 sitemap 文件');
@@ -94,7 +94,7 @@ Sitemap: https://www.periodhub.health/sitemap.xml
     const outputRobots = path.join(CONFIG.outputDir, 'robots.txt');
     fs.writeFileSync(outputRobots, robotsContent);
     console.log(`✅ Robots.txt 已生成: ${outputRobots}`);
-    
+
     return true;
   } catch (error) {
     console.error('❌ 生成 robots.txt 时出错:', error.message);
@@ -149,7 +149,7 @@ Disallow: /pdf-files/
     const outputCanonical = path.join(CONFIG.outputDir, 'canonical-config.md');
     fs.writeFileSync(outputCanonical, canonicalContent);
     console.log(`✅ Canonical 配置已生成: ${outputCanonical}`);
-    
+
     return true;
   } catch (error) {
     console.error('❌ 生成 canonical 配置时出错:', error.message);
@@ -239,7 +239,7 @@ function generateImplementationGuide() {
     const outputGuide = path.join(CONFIG.outputDir, 'implementation-guide.md');
     fs.writeFileSync(outputGuide, guideContent);
     console.log(`✅ 实施指南已生成: ${outputGuide}`);
-    
+
     return true;
   } catch (error) {
     console.error('❌ 生成实施指南时出错:', error.message);
@@ -284,7 +284,7 @@ function generateFixSummary() {
     const outputSummary = path.join(CONFIG.outputDir, 'fix-summary.md');
     fs.writeFileSync(outputSummary, summaryContent);
     console.log(`✅ 修复摘要已生成: ${outputSummary}`);
-    
+
     return true;
   } catch (error) {
     console.error('❌ 生成修复摘要时出错:', error.message);
@@ -297,13 +297,13 @@ function generateFixSummary() {
  */
 function fixSeoIssues() {
   console.log('🔧 开始修复 SEO 问题...\n');
-  
+
   // 创建输出目录
   createOutputDir();
-  
+
   let successCount = 0;
   const totalSteps = 5;
-  
+
   // 步骤 1: 处理 sitemap 重命名
   console.log('📄 处理 sitemap 重命名...');
   if (handleSitemapRename()) {
@@ -312,7 +312,7 @@ function fixSeoIssues() {
   } else {
     console.log('❌ Sitemap 重命名失败\n');
   }
-  
+
   // 步骤 2: 生成 robots.txt
   console.log('🤖 生成 robots.txt 更新...');
   if (generateRobotsTxt()) {
@@ -321,7 +321,7 @@ function fixSeoIssues() {
   } else {
     console.log('❌ Robots.txt 生成失败\n');
   }
-  
+
   // 步骤 3: 生成 canonical 配置
   console.log('🏷️  生成 canonical 配置...');
   if (generateCanonicalConfig()) {
@@ -330,7 +330,7 @@ function fixSeoIssues() {
   } else {
     console.log('❌ Canonical 配置生成失败\n');
   }
-  
+
   // 步骤 4: 生成实施指南
   console.log('📖 生成实施指南...');
   if (generateImplementationGuide()) {
@@ -339,7 +339,7 @@ function fixSeoIssues() {
   } else {
     console.log('❌ 实施指南生成失败\n');
   }
-  
+
   // 步骤 5: 生成修复摘要
   console.log('📊 生成修复摘要...');
   if (generateFixSummary()) {
@@ -348,12 +348,12 @@ function fixSeoIssues() {
   } else {
     console.log('❌ 修复摘要生成失败\n');
   }
-  
+
   // 输出最终结果
   console.log('🎉 SEO 问题修复完成！');
   console.log(`✅ 成功完成 ${successCount}/${totalSteps} 个步骤`);
   console.log(`📁 所有文件已保存到: ${CONFIG.outputDir}`);
-  
+
   if (successCount === totalSteps) {
     console.log('\n🚀 下一步操作:');
     console.log('1. 上传 sitemap.xml 到网站根目录');
@@ -375,19 +375,3 @@ module.exports = {
   generateRobotsTxt,
   generateCanonicalConfig
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

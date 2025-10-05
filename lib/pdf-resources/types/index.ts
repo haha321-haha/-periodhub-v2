@@ -1,39 +1,39 @@
 /**
  * PDF资源管理系统 - 类型定义索引
- * 
+ *
  * 统一导出所有类型定义，方便其他模块使用
  */
 
 // 重新导出现有的类型定义
-export * from './resource-types';
-export * from './config-types';
-export * from './api-types';
+export * from "./resource-types";
+export * from "./config-types";
+export * from "./api-types";
 
 // 补充基础枚举类型
 export enum ResourceCategory {
-  RELIEF = 'relief',
-  EDUCATION = 'education',
-  LIFESTYLE = 'lifestyle',
-  MEDICAL = 'medical',
-  EMERGENCY = 'emergency',
-  WELLNESS = 'wellness'
+  RELIEF = "relief",
+  EDUCATION = "education",
+  LIFESTYLE = "lifestyle",
+  MEDICAL = "medical",
+  EMERGENCY = "emergency",
+  WELLNESS = "wellness",
 }
 
 export enum ResourceType {
-  PDF = 'pdf',
-  CHECKLIST = 'checklist',
-  GUIDE = 'guide',
-  TEMPLATE = 'template',
-  WORKBOOK = 'workbook',
-  CARD = 'card'
+  PDF = "pdf",
+  CHECKLIST = "checklist",
+  GUIDE = "guide",
+  TEMPLATE = "template",
+  WORKBOOK = "workbook",
+  CARD = "card",
 }
 
 export enum ResourceStatus {
-  ACTIVE = 'active',
-  INACTIVE = 'inactive',
-  PENDING = 'pending',
-  DEPRECATED = 'deprecated',
-  MAINTENANCE = 'maintenance'
+  ACTIVE = "active",
+  INACTIVE = "inactive",
+  PENDING = "pending",
+  DEPRECATED = "deprecated",
+  MAINTENANCE = "maintenance",
 }
 
 // 补充基础接口类型
@@ -42,7 +42,7 @@ export interface EnvironmentConfig {
   apiUrl: string;
   cdnUrl: string;
   debugMode: boolean;
-  logLevel: 'error' | 'warn' | 'info' | 'debug';
+  logLevel: "error" | "warn" | "info" | "debug";
 }
 
 export interface SystemConfig {
@@ -68,7 +68,7 @@ export interface ValidationConfig {
 
 export interface ErrorHandlingConfig {
   enabled: boolean;
-  logLevel: 'error' | 'warn' | 'info' | 'debug';
+  logLevel: "error" | "warn" | "info" | "debug";
   retryAttempts: number;
   timeout: number;
 }
@@ -82,20 +82,24 @@ export interface ValidationResult {
 
 // 事件类型
 export interface ResourceEvent {
-  type: 'resource_created' | 'resource_updated' | 'resource_deleted' | 'resource_accessed';
+  type:
+    | "resource_created"
+    | "resource_updated"
+    | "resource_deleted"
+    | "resource_accessed";
   resourceId: string;
   timestamp: Date;
   metadata?: Record<string, any>;
 }
 
 export interface SystemEvent {
-  type: 'system_started' | 'system_stopped' | 'cache_cleared' | 'health_check';
+  type: "system_started" | "system_stopped" | "cache_cleared" | "health_check";
   timestamp: Date;
   data?: Record<string, any>;
 }
 
 export interface UserEvent {
-  type: 'user_download' | 'user_preview' | 'user_search' | 'user_view';
+  type: "user_download" | "user_preview" | "user_search" | "user_view";
   userId?: string;
   resourceId?: string;
   timestamp: Date;
@@ -123,7 +127,7 @@ export interface FilterOptions {
     min: number;
     max: number;
   };
-  quality?: 'high' | 'medium' | 'low';
+  quality?: "high" | "medium" | "low";
   language?: string;
 }
 
@@ -135,7 +139,7 @@ export interface PaginationOptions {
 
 export interface SortOptions {
   field: string;
-  order: 'asc' | 'desc';
+  order: "asc" | "desc";
 }
 
 // 资源操作结果类型
@@ -148,5 +152,5 @@ export interface OperationResult<T = any> {
 
 export interface ResourceOperationResult extends OperationResult {
   resourceId?: string;
-  operation: 'create' | 'read' | 'update' | 'delete';
-} 
+  operation: "create" | "read" | "update" | "delete";
+}

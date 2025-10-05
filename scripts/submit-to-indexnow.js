@@ -27,7 +27,7 @@ async function getUrlsFromSitemap() {
   try {
     const sitemapPath = path.join(__dirname, '../app/sitemap.ts');
     const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
-    
+
     // 提取所有页面路径
     const pageMatches = sitemapContent.match(/['"`]\/[^'"`]*['"`]/g) || [];
     const urls = pageMatches
@@ -35,7 +35,7 @@ async function getUrlsFromSitemap() {
       .filter(path => path.startsWith('/'))
       .map(path => `${CONFIG.baseUrl}${path}`)
       .filter((url, index, array) => array.indexOf(url) === index); // 去重
-    
+
     console.log(`📋 从sitemap.ts提取到 ${urls.length} 个URL`);
     return urls;
   } catch (error) {
@@ -50,7 +50,7 @@ function getImportantUrls() {
     // 首页
     `${CONFIG.baseUrl}/zh`,
     `${CONFIG.baseUrl}/en`,
-    
+
     // 主要功能页面
     `${CONFIG.baseUrl}/zh/interactive-tools`,
     `${CONFIG.baseUrl}/en/interactive-tools`,
@@ -64,7 +64,7 @@ function getImportantUrls() {
     `${CONFIG.baseUrl}/en/articles`,
     `${CONFIG.baseUrl}/zh/health-guide`,
     `${CONFIG.baseUrl}/en/health-guide`,
-    
+
     // 重要文章
     `${CONFIG.baseUrl}/zh/articles/menstrual-pain-medical-guide`,
     `${CONFIG.baseUrl}/en/articles/menstrual-pain-medical-guide`,
@@ -101,7 +101,7 @@ async function submitToSearchEngine(searchEngine, urls) {
       res.on('data', (chunk) => {
         data += chunk;
       });
-      
+
       res.on('end', () => {
         resolve({
           searchEngine,
@@ -128,37 +128,37 @@ async function submitToSearchEngine(searchEngine, urls) {
 // 主函数
 async function main() {
   console.log('🚀 开始IndexNow URL提交...\n');
-  
+
   // 获取URL列表
   const sitemapUrls = await getUrlsFromSitemap();
   const importantUrls = getImportantUrls();
   const allUrls = [...new Set([...sitemapUrls, ...importantUrls])]; // 合并并去重
-  
+
   console.log(`📊 总共需要提交 ${allUrls.length} 个URL`);
-  
+
   if (allUrls.length === 0) {
     console.log('❌ 没有找到需要提交的URL');
     return;
   }
-  
+
   // 分批提交
   const batches = [];
   for (let i = 0; i < allUrls.length; i += CONFIG.maxUrlsPerBatch) {
     batches.push(allUrls.slice(i, i + CONFIG.maxUrlsPerBatch));
   }
-  
+
   console.log(`📦 分为 ${batches.length} 个批次提交\n`);
-  
+
   // 提交到所有搜索引擎
   for (const searchEngine of CONFIG.searchEngines) {
     console.log(`🔍 提交到 ${searchEngine}...`);
-    
+
     for (let i = 0; i < batches.length; i++) {
       const batch = batches[i];
       console.log(`  批次 ${i + 1}/${batches.length}: ${batch.length} 个URL`);
-      
+
       const result = await submitToSearchEngine(searchEngine, batch);
-      
+
       if (result.success) {
         console.log(`  ✅ 成功 (状态码: ${result.status})`);
       } else {
@@ -167,16 +167,16 @@ async function main() {
           console.log(`     响应: ${result.response}`);
         }
       }
-      
+
       // 避免请求过于频繁
       if (i < batches.length - 1) {
         await new Promise(resolve => setTimeout(resolve, 1000));
       }
     }
-    
+
     console.log('');
   }
-  
+
   console.log('🎉 IndexNow提交完成！');
   console.log('\n📝 注意事项:');
   console.log('- 搜索引擎可能需要几分钟到几小时来处理这些URL');

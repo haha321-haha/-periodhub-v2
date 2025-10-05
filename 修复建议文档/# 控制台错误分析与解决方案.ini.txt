@@ -4,7 +4,7 @@
 
 ### 问题1：API版本过时警告
 ```
-[warning] The `locale` parameter in `getRequestConfig` is deprecated, 
+[warning] The `locale` parameter in `getRequestConfig` is deprecated,
 please switch to `await requestLocale`.
 ```
 

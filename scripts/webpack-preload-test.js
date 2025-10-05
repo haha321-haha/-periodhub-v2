@@ -35,10 +35,10 @@ class PerformanceMonitor {
   // 检查webpack预加载警告
   checkWebpackPreloadWarnings(pageUrl) {
     console.log(`🔍 检查页面: ${pageUrl}`);
-    
+
     // 模拟检查逻辑
     const hasWarning = this.simulateWarningCheck(pageUrl);
-    
+
     this.metrics.webpackPreloadWarnings.push({
       page: pageUrl,
       hasWarning,
@@ -64,7 +64,7 @@ class PerformanceMonitor {
         totalPages: this.metrics.webpackPreloadWarnings.length,
         pagesWithoutWarnings: this.metrics.webpackPreloadWarnings.filter(m => !m.hasWarning).length,
         pagesWithWarnings: this.metrics.webpackPreloadWarnings.filter(m => m.hasWarning).length,
-        successRate: (this.metrics.webpackPreloadWarnings.filter(m => !m.hasWarning).length / 
+        successRate: (this.metrics.webpackPreloadWarnings.filter(m => !m.hasWarning).length /
                     this.metrics.webpackPreloadWarnings.length * 100).toFixed(2) + '%'
       },
       details: this.metrics.webpackPreloadWarnings,
@@ -77,7 +77,7 @@ class PerformanceMonitor {
   // 生成建议
   generateRecommendations() {
     const warningsCount = this.metrics.webpackPreloadWarnings.filter(m => m.hasWarning).length;
-    
+
     if (warningsCount === 0) {
       return [
         '✅ 所有页面都没有webpack预加载警告',
@@ -108,10 +108,10 @@ class PerformanceMonitor {
 
     const filename = `webpack-preload-fix-report-${Date.now()}.json`;
     const filepath = path.join(reportDir, filename);
-    
+
     fs.writeFileSync(filepath, JSON.stringify(report, null, 2));
     console.log(`📊 报告已保存: ${filepath}`);
-    
+
     return filepath;
   }
 }
@@ -125,12 +125,12 @@ async function runPerformanceTest() {
   // 测试每个页面
   for (const pageUrl of TEST_CONFIG.testPages) {
     console.log(`📄 测试页面: ${pageUrl}`);
-    
+
     // 检查webpack预加载警告
     const isFixed = monitor.checkWebpackPreloadWarnings(pageUrl);
-    
+
     console.log(`   ${isFixed ? '✅' : '❌'} Webpack预加载警告: ${isFixed ? '已修复' : '仍存在'}`);
-    
+
     // 模拟等待
     await new Promise(resolve => setTimeout(resolve, 100));
   }
@@ -138,7 +138,7 @@ async function runPerformanceTest() {
   // 生成报告
   console.log('\n📊 生成测试报告...');
   const report = monitor.generateReport();
-  
+
   console.log('\n📈 测试结果摘要:');
   console.log(`   总页面数: ${report.summary.totalPages}`);
   console.log(`   无警告页面: ${report.summary.pagesWithoutWarnings}`);
@@ -150,9 +150,9 @@ async function runPerformanceTest() {
 
   // 保存报告
   const reportPath = monitor.saveReport(report);
-  
+
   console.log(`\n✅ 测试完成！报告已保存到: ${reportPath}`);
-  
+
   return report;
 }
 
@@ -162,9 +162,3 @@ if (require.main === module) {
 }
 
 module.exports = { runPerformanceTest, PerformanceMonitor };
-
-
-
-
-
-

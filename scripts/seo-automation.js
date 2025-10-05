@@ -25,7 +25,7 @@ const keywordDatabase = {
       { keyword: '经期可以运动吗', volume: 1900, difficulty: 'low' }
     ]
   },
-  
+
   // 英文高搜索量关键词
   en: {
     primary: [
@@ -60,14 +60,14 @@ function generateArticleTemplate(keyword, language = 'zh') {
         'Understanding Menstrual Pain: Medical Overview',
         'Root Causes of Period Pain',
         'Immediate Relief Methods',
-        'Long-term Management Strategies', 
+        'Long-term Management Strategies',
         'When to See a Doctor',
         'Common Myths and Facts',
         'Expert Recommendations'
       ]
     }
   };
-  
+
   return templates[language];
 }
 
@@ -95,7 +95,7 @@ function generateMetaTags(keyword, language = 'zh') {
       }
     }
   };
-  
+
   return metaTags[language];
 }
 
@@ -105,19 +105,19 @@ function generateStructuredData(keyword, language = 'zh') {
     '@context': 'https://schema.org',
     '@type': 'MedicalWebPage',
     name: language === 'zh' ? `${keyword} - 专业指南` : `${keyword} - Professional Guide`,
-    description: language === 'zh' ? 
+    description: language === 'zh' ?
       `专业的${keyword}指南，基于医学研究提供安全有效的解决方案` :
       `Professional guide for ${keyword} with evidence-based solutions`,
     url: `https://periodhub.health/${language}/articles/${keyword.replace(/\s+/g, '-').toLowerCase()}`,
     inLanguage: language === 'zh' ? 'zh-CN' : 'en-US',
-    
+
     mainEntity: {
       '@type': 'MedicalCondition',
       name: language === 'zh' ? '痛经' : 'Dysmenorrhea',
-      alternateName: language === 'zh' ? 
-        ['月经疼痛', '经期疼痛'] : 
+      alternateName: language === 'zh' ?
+        ['月经疼痛', '经期疼痛'] :
         ['Menstrual Pain', 'Period Pain'],
-      
+
       possibleTreatment: language === 'zh' ? [
         { '@type': 'MedicalTherapy', name: '热敷疗法' },
         { '@type': 'MedicalTherapy', name: '运动疗法' },
@@ -128,7 +128,7 @@ function generateStructuredData(keyword, language = 'zh') {
         { '@type': 'MedicalTherapy', name: 'Traditional Medicine' }
       ]
     },
-    
+
     // FAQ结构化数据 (针对语音搜索优化)
     mainEntity: {
       '@type': 'FAQPage',
@@ -143,7 +143,7 @@ function generateStructuredData(keyword, language = 'zh') {
         }
       ] : [
         {
-          '@type': 'Question', 
+          '@type': 'Question',
           name: keyword,
           acceptedAnswer: {
             '@type': 'Answer',
@@ -153,7 +153,7 @@ function generateStructuredData(keyword, language = 'zh') {
       ]
     }
   };
-  
+
   return structuredData;
 }
 
@@ -175,7 +175,7 @@ function generateInternalLinks(keyword, language = 'zh') {
       { url: '/en/interactive-tools/health-tracker', anchor: 'Health Tracker' }
     ]
   };
-  
+
   return internalLinks[language];
 }
 
@@ -183,7 +183,7 @@ function generateInternalLinks(keyword, language = 'zh') {
 function generateSitemapEntry(keyword, language = 'zh') {
   const url = `https://periodhub.health/${language}/articles/${keyword.replace(/\s+/g, '-').toLowerCase()}`;
   const lastmod = new Date().toISOString().split('T')[0];
-  
+
   return {
     url: url,
     lastmod: lastmod,
@@ -199,7 +199,7 @@ function generateSitemapEntry(keyword, language = 'zh') {
 // 主要功能：生成SEO优化报告
 function generateSEOReport() {
   console.log('🚀 生成SEO优化报告...\n');
-  
+
   const report = {
     timestamp: new Date().toISOString(),
     keywords: keywordDatabase,
@@ -207,14 +207,14 @@ function generateSEOReport() {
     contentPlan: [],
     technicalOptimizations: []
   };
-  
+
   // 分析中文关键词机会
   console.log('📊 分析中文关键词机会...');
   keywordDatabase.zh.primary.forEach(item => {
     const template = generateArticleTemplate(item.keyword, 'zh');
     const metaTags = generateMetaTags(item.keyword, 'zh');
     const structuredData = generateStructuredData(item.keyword, 'zh');
-    
+
     report.contentPlan.push({
       keyword: item.keyword,
       searchVolume: item.volume,
@@ -226,16 +226,16 @@ function generateSEOReport() {
       internalLinks: generateInternalLinks(item.keyword, 'zh'),
       sitemapEntry: generateSitemapEntry(item.keyword, 'zh')
     });
-    
+
     console.log(`  ✅ ${item.keyword} (${item.volume}/月) - ${item.difficulty}`);
   });
-  
+
   // 分析英文关键词机会
   console.log('\n📊 分析英文关键词机会...');
   keywordDatabase.en.primary.forEach(item => {
     const template = generateArticleTemplate(item.keyword, 'en');
     const metaTags = generateMetaTags(item.keyword, 'en');
-    
+
     report.contentPlan.push({
       keyword: item.keyword,
       searchVolume: item.volume,
@@ -246,10 +246,10 @@ function generateSEOReport() {
       internalLinks: generateInternalLinks(item.keyword, 'en'),
       sitemapEntry: generateSitemapEntry(item.keyword, 'en')
     });
-    
+
     console.log(`  ✅ ${item.keyword} (${item.volume}/月) - ${item.difficulty}`);
   });
-  
+
   // 生成技术优化建议
   report.technicalOptimizations = [
     {
@@ -261,7 +261,7 @@ function generateSEOReport() {
     {
       type: 'Mobile Optimization',
       action: '优化移动端触摸体验',
-      priority: 'high', 
+      priority: 'high',
       impact: '提升移动端用户体验'
     },
     {
@@ -277,7 +277,7 @@ function generateSEOReport() {
       impact: '提升搜索结果展示'
     }
   ];
-  
+
   // 生成内容建议
   report.recommendations = [
     '优先创建高搜索量关键词内容（8K+搜索量）',
@@ -287,40 +287,40 @@ function generateSEOReport() {
     '优化图片SEO（文件名+Alt标签）',
     '建立系统化的内链策略'
   ];
-  
+
   // 保存报告
   const reportPath = path.join(__dirname, '../seo-optimization-report.json');
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-  
+
   console.log('\n✅ SEO优化报告已生成！');
   console.log(`📁 报告位置: ${reportPath}`);
-  
+
   return report;
 }
 
 // 生成内容创作清单
 function generateContentChecklist() {
   console.log('\n📝 生成内容创作清单...');
-  
+
   const checklist = {
     immediate: [
       '痛经怎么缓解最快方法：5分钟见效的7种科学方法',
-      '痛经吃什么药最有效：医生推荐的安全用药指南', 
+      '痛经吃什么药最有效：医生推荐的安全用药指南',
       '月经推迟几天算正常：妇科医生详解月经周期'
     ],
-    
+
     thisWeek: [
       '月经量少是什么原因：6大原因及调理方法',
       '经期可以运动吗：适合月经期的5种运动',
       '痛经贴哪个牌子好：2024年痛经贴评测对比'
     ],
-    
+
     english: [
       'Menstrual Cramps Relief: 10 Science-Backed Methods',
       'How to Stop Period Pain: Complete Natural Guide',
       'Period Pain Remedies: TCM Meets Modern Medicine'
     ],
-    
+
     seoRequirements: [
       '文章长度: 2000-3000字',
       '关键词密度: 1-2%',
@@ -330,12 +330,12 @@ function generateContentChecklist() {
       '结构化数据: 医疗类Schema'
     ]
   };
-  
+
   fs.writeFileSync(
     path.join(__dirname, '../content-creation-checklist.json'),
     JSON.stringify(checklist, null, 2)
   );
-  
+
   console.log('✅ 内容创作清单已生成！');
   return checklist;
 }
@@ -343,24 +343,24 @@ function generateContentChecklist() {
 // 主函数
 function main() {
   console.log('🎯 PeriodHub SEO自动化优化启动...\n');
-  
+
   try {
     const report = generateSEOReport();
     const checklist = generateContentChecklist();
-    
+
     console.log('\n🎉 SEO自动化分析完成！');
     console.log('\n📊 关键发现:');
     console.log(`  • 高价值中文关键词: ${keywordDatabase.zh.primary.length}个`);
     console.log(`  • 高价值英文关键词: ${keywordDatabase.en.primary.length}个`);
     console.log(`  • 内容创作机会: ${report.contentPlan.length}篇文章`);
     console.log(`  • 技术优化项目: ${report.technicalOptimizations.length}个`);
-    
+
     console.log('\n🚀 立即行动建议:');
     console.log('  1. 创建前3篇高搜索量文章');
     console.log('  2. 优化现有文章的meta标签');
     console.log('  3. 添加结构化数据到主要页面');
     console.log('  4. 建立系统化内链结构');
-    
+
   } catch (error) {
     console.error('❌ SEO优化过程中出现错误:', error);
   }

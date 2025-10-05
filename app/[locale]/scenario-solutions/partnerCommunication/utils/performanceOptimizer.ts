@@ -10,18 +10,18 @@ export function debounce<T extends (...args: any[]) => any>(
   immediate = false
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null;
-  
+
   return function executedFunction(...args: Parameters<T>) {
     const later = () => {
       timeout = null;
       if (!immediate) func(...args);
     };
-    
+
     const callNow = immediate && !timeout;
-    
+
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(later, wait);
-    
+
     if (callNow) func(...args);
   };
 }
@@ -32,7 +32,7 @@ export function throttle<T extends (...args: any[]) => any>(
   limit: number
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
-  
+
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args);
@@ -61,11 +61,11 @@ export class StateUpdateOptimizer {
   // 批量更新状态
   public batchUpdate(key: string, value: any, updateFn: (updates: Record<string, any>) => void): void {
     this.updateQueue.set(key, value);
-    
+
     if (this.batchUpdateTimer) {
       clearTimeout(this.batchUpdateTimer);
     }
-    
+
     this.batchUpdateTimer = setTimeout(() => {
       const updates = Object.fromEntries(this.updateQueue);
       updateFn(updates);
@@ -113,13 +113,13 @@ export class SelectorOptimizer {
   ): (state: any) => T {
     return (state: any) => {
       const cacheKey = `${key}_${JSON.stringify(state)}`;
-      
+
       if (this.selectorCache.has(cacheKey)) {
         return this.selectorCache.get(cacheKey);
       }
-      
+
       const result = selector(state);
-      
+
       // 限制缓存大小
       if (this.selectorCache.size >= this.maxCacheSize) {
         const firstKey = this.selectorCache.keys().next().value;
@@ -127,7 +127,7 @@ export class SelectorOptimizer {
           this.selectorCache.delete(firstKey);
         }
       }
-      
+
       this.selectorCache.set(cacheKey, result);
       return result;
     };
@@ -167,11 +167,11 @@ export class RenderOptimizer {
   // 批量渲染
   public batchRender(componentId: string, renderFn: () => void): void {
     this.renderQueue.add(componentId);
-    
+
     if (this.renderTimer) {
       clearTimeout(this.renderTimer);
     }
-    
+
     this.renderTimer = setTimeout(() => {
       for (const id of this.renderQueue) {
         renderFn();
@@ -212,9 +212,9 @@ export class MemoryOptimizer {
   // 监控内存使用
   public monitorMemoryUsage(key: string, size: number): void {
     this.memoryUsage.set(key, size);
-    
+
     const totalUsage = Array.from(this.memoryUsage.values()).reduce((sum, size) => sum + size, 0);
-    
+
     if (totalUsage > this.maxMemoryUsage) {
       this.cleanupMemory();
     }
@@ -225,13 +225,13 @@ export class MemoryOptimizer {
     // 清理最旧的内存使用记录
     const sortedEntries = Array.from(this.memoryUsage.entries())
       .sort(([, a], [, b]) => a - b);
-    
+
     const toRemove = Math.floor(sortedEntries.length * 0.3); // 清理30%
-    
+
     for (let i = 0; i < toRemove; i++) {
       this.memoryUsage.delete(sortedEntries[i][0]);
     }
-    
+
     console.log('🧹 内存清理完成');
   }
 
@@ -240,7 +240,7 @@ export class MemoryOptimizer {
     const total = Array.from(this.memoryUsage.values()).reduce((sum, size) => sum + size, 0);
     const entries = this.memoryUsage.size;
     const average = entries > 0 ? total / entries : 0;
-    
+
     return { total, entries, average };
   }
 }
@@ -265,10 +265,10 @@ export class PerformanceMonitor {
     if (!this.metrics.has(name)) {
       this.metrics.set(name, []);
     }
-    
+
     const values = this.metrics.get(name)!;
     values.push(value);
-    
+
     // 限制指标数量
     if (values.length > this.maxMetrics) {
       values.shift();
@@ -279,12 +279,12 @@ export class PerformanceMonitor {
   public getStats(name: string): { min: number; max: number; avg: number; count: number } | null {
     const values = this.metrics.get(name);
     if (!values || values.length === 0) return null;
-    
+
     const min = Math.min(...values);
     const max = Math.max(...values);
     const avg = values.reduce((sum, val) => sum + val, 0) / values.length;
     const count = values.length;
-    
+
     return { min, max, avg, count };
   }
 
@@ -304,4 +304,3 @@ export const selectorOptimizer = SelectorOptimizer.getInstance();
 export const renderOptimizer = RenderOptimizer.getInstance();
 export const memoryOptimizer = MemoryOptimizer.getInstance();
 export const performanceMonitor = PerformanceMonitor.getInstance();
-

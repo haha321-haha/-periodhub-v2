@@ -1,0 +1,47 @@
+{
+  "timestamp": "2025-10-05T20:56:20.879Z",
+  "summary": {
+    "totalFiles": 13,
+    "totalIssues": 0,
+    "criticalIssues": 0,
+    "highPriorityIssues": 0,
+    "mediumPriorityIssues": 0
+  },
+  "results": {
+    "p0": {
+      "total": 0,
+      "files": [],
+      "issues": []
+    },
+    "p1": {
+      "total": 0,
+      "files": [],
+      "issues": []
+    },
+    "p2": {
+      "total": 0,
+      "files": [],
+      "issues": []
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "P0",
+      "action": "立即修复首页、Interactive Tools、Scenario Solutions硬编码",
+      "impact": "极高",
+      "effort": "1-2天"
+    },
+    {
+      "priority": "P1",
+      "action": "修复文章页面、Downloads等P1页面硬编码",
+      "impact": "高",
+      "effort": "2-3天"
+    },
+    {
+      "priority": "P2",
+      "action": "修复Stress Management等P2页面硬编码",
+      "impact": "中",
+      "effort": "1-2天"
+    }
+  ]
+}

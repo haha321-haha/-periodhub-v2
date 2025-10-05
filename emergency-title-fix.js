@@ -1,9 +1,9 @@
 // 紧急修复脚本 - 在浏览器控制台运行
 function emergencyTitleFix() {
   console.log('🚨 执行紧急标题修复...');
-  
+
   const chineseTitle = '痛经影响算法 - 症状评估与职场分析完整解决方案 | 专业经期疼痛测试工具与个性化建议系统，科学评估痛经严重程度及工作影响，提供精准医疗建议和生活方式指导 | PeriodHub';
-  
+
   // 1. 强制设置多次
   for (let i = 0; i < 5; i++) {
     setTimeout(() => {
@@ -16,7 +16,7 @@ function emergencyTitleFix() {
       console.log(`🔄 尝试 ${i + 1}: ${document.title}`);
     }, i * 200);
   }
-  
+
   // 2. 完全清理缓存
   if ('caches' in window) {
     caches.keys().then(names => {
@@ -24,14 +24,14 @@ function emergencyTitleFix() {
       console.log('🧹 已清理所有缓存');
     });
   }
-  
+
   // 3. 清理localStorage
   Object.keys(localStorage).forEach(key => {
     if (key.includes('title') || key.includes('meta') || key.includes('cache')) {
       localStorage.removeItem(key);
     }
   });
-  
+
   // 4. 强制页面重载
   setTimeout(() => {
     if (document.title !== chineseTitle) {

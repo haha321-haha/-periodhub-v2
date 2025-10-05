@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { Suspense, lazy, ComponentType } from 'react';
-import LoadingSpinner from './LoadingSpinner';
+import React, { Suspense, lazy, ComponentType } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 /**
  * P3阶段：懒加载实现
@@ -17,7 +17,7 @@ interface LazyComponentProps {
 
 // 默认加载状态组件
 const DefaultFallback = ({ height = "200px" }: { height?: string }) => (
-  <div 
+  <div
     className="flex items-center justify-center p-8 bg-gray-50 rounded-lg"
     style={{ height }}
   >
@@ -32,18 +32,18 @@ const DelayedSuspense: React.FC<{
   delay?: number;
 }> = ({ children, fallback, delay = 0 }) => {
   const [showContent, setShowContent] = React.useState(delay === 0);
-  
+
   React.useEffect(() => {
     if (delay > 0) {
       const timer = setTimeout(() => setShowContent(true), delay);
       return () => clearTimeout(timer);
     }
   }, [delay]);
-  
+
   if (!showContent) {
     return <>{fallback}</>;
   }
-  
+
   return <Suspense fallback={fallback}>{children}</Suspense>;
 };
 
@@ -56,13 +56,15 @@ const DelayedSuspense: React.FC<{
 export function createLazyComponent<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
   fallback?: React.ReactNode,
-  delay: number = 0
+  delay: number = 0,
 ) {
   const LazyComponent = lazy(importFunc);
-  
-  return function LazyWrapper(props: React.ComponentProps<T> & LazyComponentProps) {
+
+  return function LazyWrapper(
+    props: React.ComponentProps<T> & LazyComponentProps,
+  ) {
     return (
-      <DelayedSuspense 
+      <DelayedSuspense
         fallback={fallback || <DefaultFallback height={props.height} />}
         delay={delay}
       >
@@ -77,7 +79,7 @@ export function createLazyComponent<T extends ComponentType<any>>(
  * 在空闲时间预加载组件，提升用户体验
  */
 export function preloadComponent(importFunc: () => Promise<any>) {
-  if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
     requestIdleCallback(() => {
       importFunc().catch(console.error);
     });
@@ -95,12 +97,12 @@ export function preloadComponent(importFunc: () => Promise<any>) {
  */
 export function createLazyPage<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
-  pageName: string
+  pageName: string,
 ) {
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="400px" />,
-    100 // 页面级组件延迟100ms
+    100, // 页面级组件延迟100ms
   );
 }
 
@@ -110,12 +112,12 @@ export function createLazyPage<T extends ComponentType<any>>(
  */
 export function createLazyModule<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
-  moduleName: string
+  moduleName: string,
 ) {
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="300px" />,
-    50 // 模块级组件延迟50ms
+    50, // 模块级组件延迟50ms
   );
 }
 
@@ -125,12 +127,12 @@ export function createLazyModule<T extends ComponentType<any>>(
  */
 export function createLazyTool<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
-  toolName: string
+  toolName: string,
 ) {
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="150px" />,
-    0 // 工具组件立即加载
+    0, // 工具组件立即加载
   );
 }
 
@@ -141,21 +143,21 @@ export function createLazyTool<T extends ComponentType<any>>(
 export async function preloadCriticalComponents() {
   const criticalComponents = [
     {
-      name: 'SymptomAssessmentTool',
-      importFunc: () => import('../../components/SymptomAssessmentTool')
+      name: "SymptomAssessmentTool",
+      importFunc: () => import("../../components/SymptomAssessmentTool"),
     },
     {
-      name: 'PainTrackerTool',
-      importFunc: () => import('../../components/PainTrackerTool')
+      name: "PainTrackerTool",
+      importFunc: () => import("../../components/PainTrackerTool"),
     },
     {
-      name: 'ConstitutionTestTool',
-      importFunc: () => import('../../components/ConstitutionTestTool')
+      name: "ConstitutionTestTool",
+      importFunc: () => import("../../components/ConstitutionTestTool"),
     },
     {
-      name: 'CycleTrackerTool',
-      importFunc: () => import('../../components/CycleTrackerTool')
-    }
+      name: "CycleTrackerTool",
+      importFunc: () => import("../../components/CycleTrackerTool"),
+    },
   ];
 
   // 使用Promise.allSettled确保即使某个组件加载失败也不影响其他组件
@@ -167,11 +169,15 @@ export async function preloadCriticalComponents() {
       } catch (error) {
         console.warn(`⚠️ 预加载组件失败: ${name}`, error);
       }
-    })
+    }),
   );
 
-  const successCount = results.filter(result => result.status === 'fulfilled').length;
-  console.log(`📊 预加载完成: ${successCount}/${criticalComponents.length} 个组件`);
+  const successCount = results.filter(
+    (result) => result.status === "fulfilled",
+  ).length;
+  console.log(
+    `📊 预加载完成: ${successCount}/${criticalComponents.length} 个组件`,
+  );
 }
 
 /**
@@ -180,15 +186,15 @@ export async function preloadCriticalComponents() {
  */
 export function useLazyComponent<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
-  componentName: string
+  componentName: string,
 ) {
   const [Component, setComponent] = React.useState<T | null>(null);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<Error | null>(null);
-  
+
   React.useEffect(() => {
     if (Component || loading) return;
-    
+
     setLoading(true);
     importFunc()
       .then((module) => {
@@ -203,7 +209,7 @@ export function useLazyComponent<T extends ComponentType<any>>(
         setLoading(false);
       });
   }, [importFunc, componentName, Component, loading]);
-  
+
   return { Component, loading, error };
 }
 
@@ -214,13 +220,13 @@ export function useLazyComponent<T extends ComponentType<any>>(
 export function useConditionalLoading() {
   const [isVisible, setIsVisible] = React.useState(false);
   const [hasIntersected, setHasIntersected] = React.useState(false);
-  
+
   const observerRef = React.useRef<IntersectionObserver | null>(null);
   const elementRef = React.useRef<HTMLDivElement>(null);
-  
+
   React.useEffect(() => {
     if (!elementRef.current) return;
-    
+
     observerRef.current = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasIntersected) {
@@ -231,17 +237,17 @@ export function useConditionalLoading() {
       },
       {
         threshold: 0.1,
-        rootMargin: '50px'
-      }
+        rootMargin: "50px",
+      },
     );
-    
+
     observerRef.current.observe(elementRef.current);
-    
+
     return () => {
       observerRef.current?.disconnect();
     };
   }, [hasIntersected]);
-  
+
   return { isVisible, elementRef };
 }
 
@@ -254,5 +260,5 @@ export default {
   preloadComponent,
   preloadCriticalComponents,
   useLazyComponent,
-  useConditionalLoading
+  useConditionalLoading,
 };

@@ -14,12 +14,12 @@ export function withLazyLoading<P extends object>(
   fallback?: React.ReactNode
 ) {
   const LazyComponent = lazy(importFn);
-  
+
   return function LazyWrapper(props: P & LazyComponentProps) {
     const { fallback: customFallback, delay = 200, ...componentProps } = props;
-    
+
     return (
-      <Suspense 
+      <Suspense
         fallback={
           customFallback || (
             <div className="flex items-center justify-center p-8">
@@ -52,14 +52,14 @@ export function useLazyComponent<T = any>(
 
   React.useEffect(() => {
     let isMounted = true;
-    
+
     const loadComponent = async () => {
       try {
         setIsLoading(true);
         setError(null);
-        
+
         const component = await importFn();
-        
+
         if (isMounted) {
           setComponent(component);
         }
@@ -128,13 +128,13 @@ export function useVirtualScrolling<T>(
   overscan: number = 5
 ) {
   const [scrollTop, setScrollTop] = React.useState(0);
-  
+
   const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - overscan);
   const endIndex = Math.min(
     items.length - 1,
     Math.ceil((scrollTop + containerHeight) / itemHeight) + overscan
   );
-  
+
   const visibleItems = items.slice(startIndex, endIndex + 1);
   const totalHeight = items.length * itemHeight;
   const offsetY = startIndex * itemHeight;
@@ -164,10 +164,10 @@ export function withMemoization<P extends object>(
 // Performance monitoring component
 export function PerformanceMonitor({ children }: { children: React.ReactNode }) {
   const [renderTime, setRenderTime] = React.useState(0);
-  
+
   React.useEffect(() => {
     const start = performance.now();
-    
+
     return () => {
       const end = performance.now();
       setRenderTime(end - start);
@@ -187,4 +187,3 @@ export function PerformanceMonitor({ children }: { children: React.ReactNode }) 
 
   return <>{children}</>;
 }
-

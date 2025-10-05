@@ -1,6 +1,6 @@
-import { URL_CONFIG } from '@/lib/url-config';
+import { URL_CONFIG } from "@/lib/url-config";
 interface EnhancedStructuredDataProps {
-  type: 'website' | 'article' | 'faq' | 'howto' | 'medicalwebpage';
+  type: "website" | "article" | "faq" | "howto" | "medicalwebpage";
   title: string;
   description: string;
   url: string;
@@ -28,96 +28,98 @@ export default function EnhancedStructuredData({
   datePublished,
   dateModified,
   faqItems,
-  steps
+  steps,
 }: EnhancedStructuredDataProps) {
   const baseData = {
     "@context": "https://schema.org",
-    "name": title,
-    "description": description,
-    "url": url,
-    ...(image && { "image": image })
+    name: title,
+    description: description,
+    url: url,
+    ...(image && { image: image }),
   };
 
   let structuredData;
 
   switch (type) {
-    case 'website':
+    case "website":
       structuredData = {
         ...baseData,
         "@type": "WebSite",
-        "potentialAction": {
+        potentialAction: {
           "@type": "SearchAction",
-          "target": {
+          target: {
             "@type": "EntryPoint",
-            "urlTemplate": `${url}/search?q={search_term_string}`
+            urlTemplate: `${url}/search?q={search_term_string}`,
           },
-          "query-input": "required name=search_term_string"
-        }
+          "query-input": "required name=search_term_string",
+        },
       };
       break;
 
-    case 'article':
+    case "article":
       structuredData = {
         ...baseData,
         "@type": "Article",
-        "headline": title,
-        "author": {
+        headline: title,
+        author: {
           "@type": "Organization",
-          "name": author || "PeriodHub Health Team"
+          name: author || "PeriodHub Health Team",
         },
-        "publisher": {
+        publisher: {
           "@type": "Organization",
-          "name": "PeriodHub",
-          "logo": {
+          name: "PeriodHub",
+          logo: {
             "@type": "ImageObject",
-            "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/icon-512.png`
-          }
+            url: `${
+              process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+            }/icon-512.png`,
+          },
         },
-        ...(datePublished && { "datePublished": datePublished }),
-        ...(dateModified && { "dateModified": dateModified })
+        ...(datePublished && { datePublished: datePublished }),
+        ...(dateModified && { dateModified: dateModified }),
       };
       break;
 
-    case 'faq':
+    case "faq":
       structuredData = {
         ...baseData,
         "@type": "FAQPage",
-        "mainEntity": faqItems?.map(item => ({
+        mainEntity: faqItems?.map((item) => ({
           "@type": "Question",
-          "name": item.question,
-          "acceptedAnswer": {
+          name: item.question,
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": item.answer
-          }
-        }))
+            text: item.answer,
+          },
+        })),
       };
       break;
 
-    case 'howto':
+    case "howto":
       structuredData = {
         ...baseData,
         "@type": "HowTo",
-        "step": steps?.map((step, index) => ({
+        step: steps?.map((step, index) => ({
           "@type": "HowToStep",
-          "position": index + 1,
-          "name": step.name,
-          "text": step.text
-        }))
+          position: index + 1,
+          name: step.name,
+          text: step.text,
+        })),
       };
       break;
 
-    case 'medicalwebpage':
+    case "medicalwebpage":
       structuredData = {
         ...baseData,
         "@type": "MedicalWebPage",
-        "medicalAudience": {
+        medicalAudience: {
           "@type": "MedicalAudience",
-          "audienceType": "Patient"
+          audienceType: "Patient",
         },
-        "about": {
+        about: {
           "@type": "MedicalCondition",
-          "name": "Menstrual Health"
-        }
+          name: "Menstrual Health",
+        },
       };
       break;
 
@@ -129,7 +131,7 @@ export default function EnhancedStructuredData({
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData)
+        __html: JSON.stringify(structuredData),
       }}
     />
   );

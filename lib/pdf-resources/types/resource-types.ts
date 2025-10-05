@@ -3,28 +3,28 @@
 /**
  * 支持的语言类型
  */
-export type SupportedLanguage = 'zh' | 'en' | 'es' | 'fr';
+export type SupportedLanguage = "zh" | "en" | "es" | "fr";
 
 /**
  * 资源类别
  */
-export type ResourceCategory = 
-  | 'immediate-relief'  // 即时缓解
-  | 'preparation'       // 计划准备
-  | 'learning'         // 学习理解
-  | 'management'       // 长期管理
-  | 'assessment'       // 评估工具
-  | 'template';        // 模板表格
+export type ResourceCategory =
+  | "immediate-relief" // 即时缓解
+  | "preparation" // 计划准备
+  | "learning" // 学习理解
+  | "management" // 长期管理
+  | "assessment" // 评估工具
+  | "template"; // 模板表格
 
 /**
  * 访问权限类型
  */
-export type AccessLevel = 'public' | 'protected' | 'premium' | 'private';
+export type AccessLevel = "public" | "protected" | "premium" | "private";
 
 /**
  * 资源状态
  */
-export type ResourceStatus = 'active' | 'draft' | 'archived' | 'deprecated';
+export type ResourceStatus = "active" | "draft" | "archived" | "deprecated";
 
 /**
  * 多语言字符串
@@ -40,11 +40,11 @@ export interface LocalizedString {
  * 质量评分
  */
 export interface QualityScore {
-  content: number;     // 内容质量 (1-10)
-  design: number;      // 设计质量 (1-10)
-  accuracy: number;    // 准确性 (1-10)
-  usefulness: number;  // 实用性 (1-10)
-  overall: number;     // 综合评分 (自动计算)
+  content: number; // 内容质量 (1-10)
+  design: number; // 设计质量 (1-10)
+  accuracy: number; // 准确性 (1-10)
+  usefulness: number; // 实用性 (1-10)
+  overall: number; // 综合评分 (自动计算)
 }
 
 /**
@@ -53,10 +53,10 @@ export interface QualityScore {
 export interface AccessConfig {
   level: AccessLevel;
   public: boolean;
-  regions: string[];          // 支持的地区 ['all', 'cn', 'us', 'eu']
-  ageRestriction?: number;    // 年龄限制
-  requireAuth?: boolean;      // 是否需要认证
-  premiumOnly?: boolean;      // 是否仅限高级用户
+  regions: string[]; // 支持的地区 ['all', 'cn', 'us', 'eu']
+  ageRestriction?: number; // 年龄限制
+  requireAuth?: boolean; // 是否需要认证
+  premiumOnly?: boolean; // 是否仅限高级用户
 }
 
 /**
@@ -66,9 +66,9 @@ export interface AnalyticsData {
   downloadCount: number;
   viewCount: number;
   shareCount?: number;
-  rating: number;           // 平均评分 (0-5)
-  reviewCount?: number;     // 评论数量
-  lastAccessedAt?: Date;    // 最后访问时间
+  rating: number; // 平均评分 (0-5)
+  reviewCount?: number; // 评论数量
+  lastAccessedAt?: Date; // 最后访问时间
   popularityScore?: number; // 受欢迎程度 (自动计算)
 }
 
@@ -79,11 +79,11 @@ export interface UserReview {
   id: string;
   userId?: string;
   userName?: string;
-  rating: number;       // 1-5星评分
+  rating: number; // 1-5星评分
   comment: string;
   createdAt: Date;
-  helpful: number;      // 有用票数
-  reported?: boolean;   // 是否被举报
+  helpful: number; // 有用票数
+  reported?: boolean; // 是否被举报
 }
 
 /**
@@ -95,15 +95,15 @@ export interface ResourceMetadata {
   author?: string;
   coAuthors?: string[];
   keywords: string[];
-  thumbnail?: string;           // 缩略图URL
-  banner?: string;             // 横幅图URL
-  featured: boolean;           // 是否精选
-  trending?: boolean;          // 是否热门
+  thumbnail?: string; // 缩略图URL
+  banner?: string; // 横幅图URL
+  featured: boolean; // 是否精选
+  trending?: boolean; // 是否热门
   quality: QualityScore;
-  difficulty?: 'beginner' | 'intermediate' | 'advanced';  // 难度级别
-  estimatedReadTime?: number;  // 预计阅读时间（分钟）
-  lastReviewed?: Date;        // 最后审核时间
-  reviewedBy?: string;        // 审核人员
+  difficulty?: "beginner" | "intermediate" | "advanced"; // 难度级别
+  estimatedReadTime?: number; // 预计阅读时间（分钟）
+  lastReviewed?: Date; // 最后审核时间
+  reviewedBy?: string; // 审核人员
 }
 
 /**
@@ -112,22 +112,23 @@ export interface ResourceMetadata {
 export interface PDFContent {
   preview: {
     enabled: boolean;
-    pages: number[];          // 可预览的页面
-    watermark?: string;       // 水印文字
+    pages: number[]; // 可预览的页面
+    watermark?: string; // 水印文字
     maxPreviewPages?: number; // 最大预览页数
   };
   download: {
     enabled: boolean;
     requireAuth?: boolean;
     trackDownloads: boolean;
-    downloadLimit?: number;   // 每日下载限制
-    fileFormat?: 'pdf' | 'compressed'; // 文件格式
+    downloadLimit?: number; // 每日下载限制
+    fileFormat?: "pdf" | "compressed"; // 文件格式
   };
   search: {
     indexed: boolean;
-    extractedText?: string;   // 提取的文本内容
+    extractedText?: string; // 提取的文本内容
     searchKeywords: string[]; // 搜索关键词
-    searchableContent?: {     // 可搜索的结构化内容
+    searchableContent?: {
+      // 可搜索的结构化内容
       sections: {
         title: string;
         content: string;
@@ -136,10 +137,10 @@ export interface PDFContent {
     };
   };
   interactive?: {
-    hasForm: boolean;         // 是否包含表单
-    formFields?: string[];    // 表单字段
-    hasCalculator?: boolean;  // 是否包含计算器
-    hasLinks?: boolean;       // 是否包含外部链接
+    hasForm: boolean; // 是否包含表单
+    formFields?: string[]; // 表单字段
+    hasCalculator?: boolean; // 是否包含计算器
+    hasLinks?: boolean; // 是否包含外部链接
   };
 }
 
@@ -147,12 +148,12 @@ export interface PDFContent {
  * 版本信息
  */
 export interface VersionInfo {
-  version: string;          // 版本号 (e.g., "2.1.0")
-  releaseDate: Date;        // 发布日期
-  changelog?: string;       // 更新日志
-  isLatest: boolean;        // 是否最新版本
-  deprecated?: boolean;     // 是否已废弃
-  migrationPath?: string;   // 迁移路径说明
+  version: string; // 版本号 (e.g., "2.1.0")
+  releaseDate: Date; // 发布日期
+  changelog?: string; // 更新日志
+  isLatest: boolean; // 是否最新版本
+  deprecated?: boolean; // 是否已废弃
+  migrationPath?: string; // 迁移路径说明
 }
 
 /**
@@ -160,7 +161,7 @@ export interface VersionInfo {
  */
 export interface BaseResource {
   id: string;
-  type: 'pdf' | 'document' | 'template' | 'guide';
+  type: "pdf" | "document" | "template" | "guide";
   status: ResourceStatus;
   version: VersionInfo;
   createdAt: Date;
@@ -176,41 +177,42 @@ export interface BaseResource {
  * PDF资源接口
  */
 export interface PDFResource extends BaseResource {
-  type: 'pdf';
+  type: "pdf";
   filename: string;
-  fileSize: number;         // 文件大小（字节）
-  pageCount: number;        // 页数
+  fileSize: number; // 文件大小（字节）
+  pageCount: number; // 页数
   language: SupportedLanguage;
   category: ResourceCategory;
   tags: string[];
   content: PDFContent;
-  
+
   // PDF特有属性
   pdfMetadata?: {
-    producer?: string;      // PDF生成工具
-    creator?: string;       // 创建者应用
-    subject?: string;       // PDF主题
-    securityLevel?: 'none' | 'password' | 'certificate'; // 安全级别
-    permissions?: {         // 权限设置
+    producer?: string; // PDF生成工具
+    creator?: string; // 创建者应用
+    subject?: string; // PDF主题
+    securityLevel?: "none" | "password" | "certificate"; // 安全级别
+    permissions?: {
+      // 权限设置
       printing: boolean;
       copying: boolean;
       commenting: boolean;
       formFilling: boolean;
     };
   };
-  
+
   // 关联资源
   relatedResources?: {
-    type: 'prerequisite' | 'follow-up' | 'related' | 'alternative';
+    type: "prerequisite" | "follow-up" | "related" | "alternative";
     resourceId: string;
     description?: string;
   }[];
-  
+
   // 本地化变体
   localizedVersions?: {
     language: SupportedLanguage;
     resourceId: string;
-    completeness: number;   // 本地化完成度 (0-1)
+    completeness: number; // 本地化完成度 (0-1)
   }[];
 }
 
@@ -238,15 +240,15 @@ export interface SearchOptions {
   category?: ResourceCategory;
   tags?: string[];
   language?: SupportedLanguage;
-  difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  difficulty?: "beginner" | "intermediate" | "advanced";
   minQuality?: number;
   maxFileSize?: number;
   hasPreview?: boolean;
   featuredOnly?: boolean;
   limit?: number;
   offset?: number;
-  sortBy?: 'relevance' | 'quality' | 'date' | 'popularity' | 'downloads';
-  sortOrder?: 'asc' | 'desc';
+  sortBy?: "relevance" | "quality" | "date" | "popularity" | "downloads";
+  sortOrder?: "asc" | "desc";
 }
 
 /**
@@ -254,9 +256,10 @@ export interface SearchOptions {
  */
 export interface SearchResult {
   resource: PDFResource;
-  score: number;            // 相关性评分
-  matchedFields: string[];  // 匹配的字段
-  highlights?: {            // 高亮摘要
+  score: number; // 相关性评分
+  matchedFields: string[]; // 匹配的字段
+  highlights?: {
+    // 高亮摘要
     title?: string;
     description?: string;
     content?: string;
@@ -273,7 +276,8 @@ export interface PaginatedSearchResult {
   pageSize: number;
   hasNext: boolean;
   hasPrevious: boolean;
-  facets?: {               // 搜索分面
+  facets?: {
+    // 搜索分面
     categories: { category: ResourceCategory; count: number }[];
     languages: { language: SupportedLanguage; count: number }[];
     tags: { tag: string; count: number }[];
@@ -286,23 +290,23 @@ export interface PaginatedSearchResult {
  */
 export interface ResourceStats {
   totalCount: number;
-  totalSize: number;        // 总文件大小
+  totalSize: number; // 总文件大小
   averageQuality: number;
   totalDownloads: number;
   totalViews: number;
-  lastUpdated: number;      // 时间戳
-  
+  lastUpdated: number; // 时间戳
+
   byCategory: Record<ResourceCategory, number>;
   byLanguage: Record<SupportedLanguage, number>;
   byStatus: Record<ResourceStatus, number>;
-  
+
   topResources: {
     mostDownloaded: { resourceId: string; count: number }[];
     highestRated: { resourceId: string; rating: number }[];
     mostRecent: { resourceId: string; updatedAt: Date }[];
     trending: { resourceId: string; score: number }[];
   };
-  
+
   // 时间序列数据
   timeline?: {
     date: string;
@@ -318,7 +322,7 @@ export interface ResourceStats {
 export interface ValidationError {
   field: string;
   message: string;
-  severity: 'error' | 'warning' | 'info';
+  severity: "error" | "warning" | "info";
   code?: string;
   suggestion?: string;
 }
@@ -331,7 +335,7 @@ export interface ValidationResult {
   errors: ValidationError[];
   warnings: ValidationError[];
   suggestions?: ValidationError[];
-  
+
   summary: {
     totalChecks: number;
     passedChecks: number;
@@ -350,7 +354,7 @@ export interface CacheEntry<T = any> {
   expiresAt: Date;
   accessCount: number;
   lastAccessedAt: Date;
-  size?: number;           // 条目大小（字节）
+  size?: number; // 条目大小（字节）
 }
 
 /**
@@ -359,8 +363,8 @@ export interface CacheEntry<T = any> {
 export interface CacheStats {
   totalEntries: number;
   totalSize: number;
-  hitRate: number;         // 命中率
-  evictionCount: number;   // 驱逐次数
+  hitRate: number; // 命中率
+  evictionCount: number; // 驱逐次数
   oldestEntry?: Date;
   newestEntry?: Date;
   mostAccessedKey?: string;
@@ -385,21 +389,27 @@ export interface ErrorContext {
  */
 export interface SystemEvent {
   id: string;
-  type: 'resource_created' | 'resource_updated' | 'resource_deleted' | 
-        'resource_accessed' | 'search_performed' | 'error_occurred' |
-        'user_action' | 'system_maintenance';
+  type:
+    | "resource_created"
+    | "resource_updated"
+    | "resource_deleted"
+    | "resource_accessed"
+    | "search_performed"
+    | "error_occurred"
+    | "user_action"
+    | "system_maintenance";
   timestamp: Date;
   data: Record<string, any>;
-  severity: 'low' | 'medium' | 'high' | 'critical';
-  source: string;          // 事件来源
-  correlationId?: string;  // 关联ID
+  severity: "low" | "medium" | "high" | "critical";
+  source: string; // 事件来源
+  correlationId?: string; // 关联ID
 }
 
 /**
  * 导出/导入格式
  */
 export interface ExportFormat {
-  format: 'json' | 'csv' | 'xlsx' | 'xml';
+  format: "json" | "csv" | "xlsx" | "xml";
   options?: {
     includeMetadata?: boolean;
     includeAnalytics?: boolean;
@@ -423,66 +433,68 @@ export interface BatchOperationResult {
     resourceId: string;
     warning: string;
   }>;
-  duration: number;        // 操作耗时（毫秒）
+  duration: number; // 操作耗时（毫秒）
 }
 
 // 类型保护函数
 export function isPDFResource(resource: BaseResource): resource is PDFResource {
-  return resource.type === 'pdf';
+  return resource.type === "pdf";
 }
 
 export function isValidLanguage(lang: string): lang is SupportedLanguage {
-  return ['zh', 'en', 'es', 'fr'].includes(lang);
+  return ["zh", "en", "es", "fr"].includes(lang);
 }
 
-export function isValidCategory(category: string): category is ResourceCategory {
+export function isValidCategory(
+  category: string,
+): category is ResourceCategory {
   return [
-    'immediate-relief',
-    'preparation', 
-    'learning',
-    'management',
-    'assessment',
-    'template'
+    "immediate-relief",
+    "preparation",
+    "learning",
+    "management",
+    "assessment",
+    "template",
   ].includes(category);
 }
 
 export function isValidAccessLevel(level: string): level is AccessLevel {
-  return ['public', 'protected', 'premium', 'private'].includes(level);
+  return ["public", "protected", "premium", "private"].includes(level);
 }
 
 // 常量定义
 export const RESOURCE_CATEGORIES: Record<ResourceCategory, LocalizedString> = {
-  'immediate-relief': {
-    zh: '即时缓解',
-    en: 'Immediate Relief'
+  "immediate-relief": {
+    zh: "即时缓解",
+    en: "Immediate Relief",
   },
-  'preparation': {
-    zh: '计划准备',
-    en: 'Preparation'
+  preparation: {
+    zh: "计划准备",
+    en: "Preparation",
   },
-  'learning': {
-    zh: '学习理解',
-    en: 'Learning'
+  learning: {
+    zh: "学习理解",
+    en: "Learning",
   },
-  'management': {
-    zh: '长期管理',
-    en: 'Management'
+  management: {
+    zh: "长期管理",
+    en: "Management",
   },
-  'assessment': {
-    zh: '评估工具',
-    en: 'Assessment'
+  assessment: {
+    zh: "评估工具",
+    en: "Assessment",
   },
-  'template': {
-    zh: '模板表格',
-    en: 'Templates'
-  }
+  template: {
+    zh: "模板表格",
+    en: "Templates",
+  },
 };
 
 export const SUPPORTED_LANGUAGES: Record<SupportedLanguage, string> = {
-  zh: '中文',
-  en: 'English',
-  es: 'Español',
-  fr: 'Français'
+  zh: "中文",
+  en: "English",
+  es: "Español",
+  fr: "Français",
 };
 
 export const DEFAULT_QUALITY_SCORE: QualityScore = {
@@ -490,7 +502,7 @@ export const DEFAULT_QUALITY_SCORE: QualityScore = {
   design: 5,
   accuracy: 5,
   usefulness: 5,
-  overall: 5
+  overall: 5,
 };
 
 export const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB

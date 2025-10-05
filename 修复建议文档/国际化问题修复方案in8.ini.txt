@@ -9,7 +9,7 @@
 ## 🚨 问题确认
 
 ### 发现的关键冲突
-1. **next.config.js** 指向 `'./i18n.ts'` 
+1. **next.config.js** 指向 `'./i18n.ts'`
 2. **实际项目结构** 显示配置文件在 `i18n/` 文件夹内
 3. **messages文件夹** 在项目根目录
 
@@ -21,7 +21,7 @@ next.config.js -> './i18n.ts' (❌ 错误路径)
 实际文件位置：
 ├── i18n/
 │   ├── i18n.ts          # 旧版配置
-│   └── request.ts       # 新版配置  
+│   └── request.ts       # 新版配置
 └── messages/            # 翻译文件
     ├── zh.json
     └── en.json
@@ -130,7 +130,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       dateTime: {
         short: {
           day: 'numeric',
-          month: 'short', 
+          month: 'short',
           year: 'numeric'
         },
         full: {
@@ -218,7 +218,7 @@ grep -r "import.*i18n" src/
 
 ### P0 - 立即执行（今天内）
 - [x] 修改 next.config.js 第1行
-- [x] 修复 request.ts 中的路径问题  
+- [x] 修复 request.ts 中的路径问题
 - [x] 删除 i18n.ts
 - [x] 创建 config.ts 导出文件
 
@@ -731,15 +731,15 @@ src/
   // 页面级别
   "pages.assessment.title": "症状评估",
   "pages.assessment.description": "请填写您的症状信息",
-  
+
   // 组件级别
   "components.button.save": "保存",
   "components.form.validation.required": "此字段为必填项",
-  
+
   // 功能级别
   "features.export.html": "导出HTML报告",
   "features.export.txt": "导出文本文件",
-  
+
   // 医疗专业术语
   "medical.symptoms.fever": "发热",
   "medical.symptoms.cough": "咳嗽"
@@ -1031,7 +1031,7 @@ function TranslationErrorBoundary({ children, fallback }: Props) {
 
 **建议立即启动P0优先级文档的编写工作！**
 
-2025-09-03T10:25:40.804Z [警告]locale中的参数getRequestConfig已弃用，请切换到await requestLocale。参见https://next-intl.dev/blog/next-intl-3-22#await-request-locale 
+2025-09-03T10:25:40.804Z [警告]locale中的参数getRequestConfig已弃用，请切换到await requestLocale。参见https://next-intl.dev/blog/next-intl-3-22#await-request-locale
 2025-09-03T10:25:40.866Z [错误] l [错误]：MISSING_MESSAGE：home.healthStatistics.dataSource（zh）在 b（/var/task/.next/server/chunks/2.js:1:120409）在 v（/var/task/.next/server/chunks/2.js:1:120565）在 T（/var/task/.next/server/chunks/2.js:1:121898）在 eh（/var/task/.next/server/app/[locale]/page.js:1:43780）在 eh (/var/task/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134660) 在 e (/var/task/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137545) 在 ek (/var/task/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138019) 在 eP (/var/task/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:141998) 在 eE （/var/task/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142572）在Timeout._onTimeout（/var/task/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135349）{代码： 'MISSING_MESSAGE', originalMessage: 'home.healthStatistics.dataSource (zh)' }——制台错误信息-希望是跟翻译相关的。——🚨国际化问题根本原因分析问题1：配置冲突-两个i18n配置文件
 发现的问题： * ✅ i18n.ts - 使用过时的 {locale} 参数 * ✅ i18n/request.ts - 使用新的 {requestLocale}参数 * ❌冲突：middleware.ts 引用 i18n.ts，但应该使用 i18n/request.ts 问题2：翻译键路径错误
 发现的问题： * ✅ 翻译键存在：messages/zh.json 第1237行有 dataSource * ❌路径错误：代码使用 t('healthStatistics.dataSource') * ❌实际路径：应该是 t('home.healthStatistics.dataSource') 问题3：翻译键结构与当前结构不匹配
@@ -1126,6 +1126,3 @@ Next.js 开发服务器缓存了旧的翻译文件
 - �� **代码已保存** - 修复已提交并推送到GitHub
 
 感谢您的提醒！所有任务确实都已完成，现在TODO列表正确反映了完成状态。
-
-
-

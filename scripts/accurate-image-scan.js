@@ -19,7 +19,7 @@ class AccurateImageScanner {
       'pages/**/*.{tsx,jsx,ts,js}',
       'content/**/*.{tsx,jsx,ts,js}',
     ];
-    
+
     // 排除的文件和目录
     this.excludePatterns = [
       'node_modules/**',
@@ -44,20 +44,20 @@ class AccurateImageScanner {
    */
   async scanProjectImages() {
     console.log('🔍 扫描实际项目图片使用情况...');
-    
+
     const imageUsage = [];
-    
+
     for (const pattern of this.includePatterns) {
       const files = glob.sync(pattern, {
         ignore: this.excludePatterns
       });
-      
+
       for (const file of files) {
         if (!fs.statSync(file).isFile()) continue;
-        
+
         const content = fs.readFileSync(file, 'utf8');
         const lines = content.split('\n');
-        
+
         lines.forEach((line, index) => {
           // 检测图片使用模式
           const patterns = [
@@ -71,7 +71,7 @@ class AccurateImageScanner {
             while ((match = pattern.exec(line)) !== null) {
               const imageSrc = match[1];
               const fullTag = match[0];
-              
+
               // 只统计实际的图片文件
               if (this.isActualImage(imageSrc)) {
                 imageUsage.push({
@@ -109,7 +109,7 @@ class AccurateImageScanner {
       'image.jpg',
       'content-image.webp'
     ];
-    
+
     const srcLower = src.toLowerCase();
     return !testPatterns.some(pattern => srcLower.includes(pattern));
   }
@@ -163,8 +163,8 @@ class AccurateImageScanner {
       'image', 'img', 'picture', 'photo', '图片', '图像',
       'placeholder', 'banner', 'icon', 'logo', '图标'
     ];
-    
-    return genericAlts.some(generic => 
+
+    return genericAlts.some(generic =>
       altText.toLowerCase().includes(generic.toLowerCase())
     );
   }
@@ -182,7 +182,7 @@ class AccurateImageScanner {
       '月经', '健康', '周期', '疼痛', '症状', '女性'
     ];
 
-    const hasKeywords = healthKeywords.some(keyword => 
+    const hasKeywords = healthKeywords.some(keyword =>
       altText.toLowerCase().includes(keyword.toLowerCase())
     );
 
@@ -197,7 +197,7 @@ class AccurateImageScanner {
       timestamp: new Date().toISOString(),
       summary: {
         totalImages: imageUsage.length,
-        totalIssues: issues.missingAlt.length + issues.emptyAlt.length + 
+        totalIssues: issues.missingAlt.length + issues.emptyAlt.length +
                     issues.genericAlt.length + issues.seoUnfriendly.length,
         missingAlt: issues.missingAlt.length,
         emptyAlt: issues.emptyAlt.length,
@@ -251,7 +251,7 @@ class AccurateImageScanner {
     }
 
     const timestamp = new Date().toISOString().split('T')[0];
-    
+
     // 保存JSON报告
     fs.writeFileSync(
       path.join(reportsDir, `accurate-image-scan-${timestamp}.json`),
@@ -288,7 +288,7 @@ class AccurateImageScanner {
     // 图片使用详情
     if (report.imageUsage.length > 0) {
       markdown += `## 🖼️ 图片使用详情\n\n`;
-      
+
       const imagesByFile = report.imageUsage.reduce((acc, usage) => {
         if (!acc[usage.file]) acc[usage.file] = [];
         acc[usage.file].push(usage);
@@ -327,16 +327,16 @@ class AccurateImageScanner {
    */
   async run() {
     console.log('🔍 开始精确扫描项目图片...');
-    
+
     try {
       const imageUsage = await this.scanProjectImages();
       console.log(`📊 发现 ${imageUsage.length} 个实际图片使用`);
-      
+
       const issues = this.analyzeImageIssues(imageUsage);
       const report = this.generateReport(imageUsage, issues);
-      
+
       await this.saveReport(report);
-      
+
       // 控制台输出摘要
       console.log('\n📊 精确图片扫描完成:');
       console.log(`总图片数: ${report.summary.totalImages}`);
@@ -345,14 +345,14 @@ class AccurateImageScanner {
       console.log(`空alt属性: ${report.summary.emptyAlt} 个`);
       console.log(`通用alt文本: ${report.summary.genericAlt} 个`);
       console.log(`SEO不友好: ${report.summary.seoUnfriendly} 个`);
-      
+
       if (report.recommendations.length > 0) {
         console.log('\n🎯 主要建议:');
         report.recommendations.forEach((rec, index) => {
           console.log(`${index + 1}. ${rec.message}`);
         });
       }
-      
+
     } catch (error) {
       console.error('❌ 图片扫描失败:', error);
       process.exit(1);

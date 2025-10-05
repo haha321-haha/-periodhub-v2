@@ -54,14 +54,14 @@ if (hasIssues) {
  */
 function checkUnusedImports() {
   const issues = [];
-  
+
   try {
     const lintOutput = execSync('npm run lint 2>&1', { encoding: 'utf8' });
-    const unusedImportLines = lintOutput.split('\n').filter(line => 
-      line.includes('defined but never used') && 
+    const unusedImportLines = lintOutput.split('\n').filter(line =>
+      line.includes('defined but never used') &&
       (line.includes('useTranslations') || line.includes('getTranslations'))
     );
-    
+
     unusedImportLines.forEach(line => {
       issues.push(`未使用的next-intl导入: ${line.trim()}`);
     });
@@ -72,7 +72,7 @@ function checkUnusedImports() {
       issues.push('发现未使用的导入，请检查ESLint输出');
     }
   }
-  
+
   return {
     issues,
     message: '未发现有问题的未使用导入'
@@ -84,7 +84,7 @@ function checkUnusedImports() {
  */
 function checkClientSafeUsage() {
   const issues = [];
-  
+
   // 检查layout.tsx中是否使用了ClientSafe
   const layoutPath = 'app/layout.tsx';
   if (fs.existsSync(layoutPath)) {
@@ -93,7 +93,7 @@ function checkClientSafeUsage() {
       issues.push('根布局中使用了ClientSafe组件，这可能导致Hydration错误');
     }
   }
-  
+
   // 检查其他可能的问题使用
   const appDir = 'app';
   if (fs.existsSync(appDir)) {
@@ -105,7 +105,7 @@ function checkClientSafeUsage() {
       }
     });
   }
-  
+
   return {
     issues,
     message: 'ClientSafe组件使用正确'
@@ -117,22 +117,22 @@ function checkClientSafeUsage() {
  */
 function checkDynamicImports() {
   const issues = [];
-  
+
   const appDir = 'app';
   if (fs.existsSync(appDir)) {
     const files = getAllTsxFiles(appDir);
     files.forEach(file => {
       const content = fs.readFileSync(file, 'utf8');
-      
+
       // 检查是否有浏览器API但没有客户端标记
-      if ((content.includes('window.') || content.includes('document.')) && 
+      if ((content.includes('window.') || content.includes('document.')) &&
           !content.includes('dangerouslySetInnerHTML')) {
-        if (!content.includes("'use client'") && !content.includes('dynamic(') && 
+        if (!content.includes("'use client'") && !content.includes('dynamic(') &&
             !content.includes('typeof window')) {
           issues.push(`${file}: 使用了浏览器API但未标记为客户端组件`);
         }
       }
-      
+
       // 检查动态导入是否正确配置
       if (content.includes('dynamic(') && !content.includes('ssr: false')) {
         const dynamicLines = content.split('\n').filter(line => line.includes('dynamic('));
@@ -144,7 +144,7 @@ function checkDynamicImports() {
       }
     });
   }
-  
+
   return {
     issues,
     message: '动态导入配置正确'
@@ -156,28 +156,28 @@ function checkDynamicImports() {
  */
 function checkSSRComponents() {
   const issues = [];
-  
+
   const appDir = 'app';
   if (fs.existsSync(appDir)) {
     const files = getAllTsxFiles(appDir);
     files.forEach(file => {
       const content = fs.readFileSync(file, 'utf8');
-      
+
       // 检查useState + useEffect模式是否正确
       if (content.includes('useState(false)') && content.includes('setIsClient(true)')) {
         if (!content.includes('if (!isClient)')) {
           issues.push(`${file}: 客户端检查模式不完整`);
         }
       }
-      
+
       // 检查可能的hydration不匹配 - 但允许正确的window检查模式
-      if (content.includes('typeof window') && !content.includes("'use client'") && 
+      if (content.includes('typeof window') && !content.includes("'use client'") &&
           !content.includes('typeof window === \'undefined\'')) {
         issues.push(`${file}: 使用window检查但未标记为客户端组件`);
       }
     });
   }
-  
+
   return {
     issues,
     message: 'SSR组件配置正确'
@@ -189,7 +189,7 @@ function checkSSRComponents() {
  */
 function checkBuildSuccess() {
   const issues = [];
-  
+
   // 在Vercel环境中跳过构建检查，避免循环调用
   if (process.env.VERCEL === '1') {
     console.log('   在Vercel环境中跳过构建检查...');
@@ -198,7 +198,7 @@ function checkBuildSuccess() {
       message: '在Vercel环境中跳过构建检查'
     };
   }
-  
+
   try {
     console.log('   正在执行构建检查...');
     // 使用 build:unsafe 避免循环调用
@@ -212,7 +212,7 @@ function checkBuildSuccess() {
       }
     }
   }
-  
+
   return {
     issues,
     message: '构建成功'
@@ -224,14 +224,14 @@ function checkBuildSuccess() {
  */
 function getAllTsxFiles(dir) {
   const files = [];
-  
+
   function traverse(currentDir) {
     const items = fs.readdirSync(currentDir);
-    
+
     for (const item of items) {
       const fullPath = path.join(currentDir, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
         traverse(fullPath);
       } else if (item.endsWith('.tsx') || item.endsWith('.ts')) {
@@ -239,7 +239,7 @@ function getAllTsxFiles(dir) {
       }
     }
   }
-  
+
   traverse(dir);
   return files;
 }

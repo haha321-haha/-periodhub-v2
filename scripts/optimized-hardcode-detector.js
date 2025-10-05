@@ -17,15 +17,15 @@ class OptimizedHardcodeDetector {
         '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx',
         '**/*.vue', '**/*.html', '**/*.css', '**/*.scss'
       ],
-      
+
       // 更精确的排除目录
       excludeDirs: [
-        'node_modules', 'dist', 'build', '.git', 
+        'node_modules', 'dist', 'build', '.git',
         'coverage', '.next', '.nuxt', 'recovery-workspace',
         'hub-latest-main', 'backup', 'reports', 'recovered',
         '.vercel', 'logs', 'tests/__snapshots__'
       ],
-      
+
       // 简化的检测模式
       patterns: {
         urls: [
@@ -36,13 +36,13 @@ class OptimizedHardcodeDetector {
           /['"`][^'"`]*[\u4e00-\u9fa5]+[^'"`]*['"`]/g
         ]
       },
-      
+
       // 性能限制
       maxFiles: 1000,        // 最大文件数
       maxFileSize: 1024 * 1024, // 最大文件大小 1MB
       batchSize: 50          // 批处理大小
     };
-    
+
     this.results = {
       urls: [],
       texts: [],
@@ -56,33 +56,33 @@ class OptimizedHardcodeDetector {
   async detectHardcodes() {
     console.log('🔍 开始优化版硬编码检测...');
     console.log('⚡ 性能优化：限制文件数量，分批处理');
-    
+
     const files = await this.getFilesToScan();
     console.log(`📁 扫描 ${files.length} 个文件（已优化）...`);
-    
+
     // 分批处理文件
     for (let i = 0; i < files.length; i += this.config.batchSize) {
       const batch = files.slice(i, i + this.config.batchSize);
       await this.processBatch(batch);
-      
+
       // 显示进度
       const progress = Math.round((i + batch.length) / files.length * 100);
       process.stdout.write(`\r📊 进度: ${progress}% (${i + batch.length}/${files.length})`);
     }
-    
+
     console.log('\n');
     this.results.total = this.results.urls.length + this.results.texts.length;
-    
+
     // 生成简化报告
     this.generateSimpleReport();
-    
+
     return this.results;
   }
 
   // 📁 获取需要扫描的文件（优化版）
   async getFilesToScan() {
     const allFiles = [];
-    
+
     for (const pattern of this.config.fileExtensions) {
       const files = glob.sync(pattern, {
         ignore: this.config.excludeDirs.map(dir => `${dir}/**`),
@@ -90,10 +90,10 @@ class OptimizedHardcodeDetector {
       });
       allFiles.push(...files);
     }
-    
+
     // 去重并限制数量
     const uniqueFiles = [...new Set(allFiles)];
-    
+
     // 按文件大小和类型过滤
     const filteredFiles = uniqueFiles
       .filter(file => {
@@ -105,9 +105,9 @@ class OptimizedHardcodeDetector {
         }
       })
       .slice(0, this.config.maxFiles); // 限制最大文件数
-    
+
     this.results.skippedFiles = uniqueFiles.length - filteredFiles.length;
-    
+
     return filteredFiles;
   }
 
@@ -117,13 +117,13 @@ class OptimizedHardcodeDetector {
       try {
         const content = fs.readFileSync(file, 'utf8');
         this.results.scannedFiles++;
-        
+
         // 检测URL硬编码
         this.detectInFile(file, content, this.config.patterns.urls, this.results.urls, 'URL');
-        
+
         // 检测文本硬编码
         this.detectInFile(file, content, this.config.patterns.hardcodedText, this.results.texts, '文本');
-        
+
       } catch (error) {
         // 静默跳过无法读取的文件
         this.results.skippedFiles++;
@@ -134,7 +134,7 @@ class OptimizedHardcodeDetector {
   // 🎯 在单个文件中检测硬编码
   detectInFile(file, content, patterns, results, type) {
     const lines = content.split('\n');
-    
+
     patterns.forEach(pattern => {
       lines.forEach((line, lineNumber) => {
         const matches = line.match(pattern);
@@ -171,22 +171,22 @@ class OptimizedHardcodeDetector {
     console.log(`   📁 扫描文件: ${this.results.scannedFiles}`);
     console.log(`   ⏭️  跳过文件: ${this.results.skippedFiles}`);
     console.log(`   🔍 发现硬编码: ${this.results.total}`);
-    
+
     console.log(`\n📋 按类型分布:`);
     console.log(`   🔗 URL硬编码: ${this.results.urls.length} 个`);
     console.log(`   📝 文本硬编码: ${this.results.texts.length} 个`);
-    
+
     // 按严重程度统计
     const severityCount = { high: 0, medium: 0, low: 0 };
     [...this.results.urls, ...this.results.texts].forEach(item => {
       severityCount[item.severity]++;
     });
-    
+
     console.log(`\n🚨 按严重程度:`);
     console.log(`   🔴 高: ${severityCount.high} 个`);
     console.log(`   🟡 中: ${severityCount.medium} 个`);
     console.log(`   🟢 低: ${severityCount.low} 个`);
-    
+
     // 显示前10个问题
     if (this.results.total > 0) {
       console.log(`\n🔍 前10个问题示例:`);
@@ -196,18 +196,18 @@ class OptimizedHardcodeDetector {
           return severityOrder[b.severity] - severityOrder[a.severity];
         })
         .slice(0, 10);
-      
+
       allIssues.forEach((issue, index) => {
-        const severityIcon = issue.severity === 'high' ? '🔴' : 
+        const severityIcon = issue.severity === 'high' ? '🔴' :
                            issue.severity === 'medium' ? '🟡' : '🟢';
         console.log(`   ${index + 1}. ${severityIcon} ${issue.file}:${issue.line} - ${issue.match}`);
       });
-      
+
       if (this.results.total > 10) {
         console.log(`   ... 还有 ${this.results.total - 10} 个问题`);
       }
     }
-    
+
     // 生成修复建议
     this.printFixSuggestions();
   }
@@ -215,21 +215,21 @@ class OptimizedHardcodeDetector {
   // 💡 打印修复建议
   printFixSuggestions() {
     console.log(`\n💡 修复建议:`);
-    
+
     if (this.results.urls.length > 0) {
       console.log(`   🔗 URL硬编码修复:`);
       console.log(`     1. 使用: import { URL_CONFIG } from '@/lib/url-config'`);
       console.log(`     2. 替换: URL_CONFIG.getUrl('/path')`);
       console.log(`     3. 运行: npm run hardcode:fix`);
     }
-    
+
     if (this.results.texts.length > 0) {
       console.log(`   📝 文本硬编码修复:`);
       console.log(`     1. 使用: import { useTranslations } from 'next-intl'`);
       console.log(`     2. 替换: const t = useTranslations(); t('key')`);
       console.log(`     3. 运行: npm run hardcode:text:fix`);
     }
-    
+
     console.log(`\n🚀 快速修复命令:`);
     console.log(`   npm run hardcode:fix          # 修复URL硬编码`);
     console.log(`   npm run hardcode:text:fix     # 修复文本硬编码`);
@@ -262,10 +262,10 @@ class OptimizedHardcodeDetector {
     if (!fs.existsSync('reports')) {
       fs.mkdirSync('reports', { recursive: true });
     }
-    
+
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
     console.log(`\n📄 轻量级报告已保存: ${reportFile}`);
-    
+
     return report;
   }
 }
@@ -274,7 +274,7 @@ class OptimizedHardcodeDetector {
 async function main() {
   const detector = new OptimizedHardcodeDetector();
   const args = process.argv.slice(2);
-  
+
   if (args.includes('--detect')) {
     await detector.detectHardcodes();
     detector.generateLightweightReport();

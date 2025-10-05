@@ -13,7 +13,7 @@ const PERFORMANCE_CONFIG = {
   // 当前性能得分
   currentScore: 45,
   targetScore: 90,
-  
+
   // 关键指标目标
   targets: {
     LCP: 2.5, // 秒
@@ -22,7 +22,7 @@ const PERFORMANCE_CONFIG = {
     CLS: 0.1, // 分数
     SI: 3.0   // 秒
   },
-  
+
   // 当前指标
   current: {
     LCP: 5.0,
@@ -31,7 +31,7 @@ const PERFORMANCE_CONFIG = {
     CLS: 0.001,
     SI: 5.1
   },
-  
+
   // 优化建议
   optimizations: [
     {
@@ -88,7 +88,7 @@ function generatePerformanceReport() {
     currentScore: PERFORMANCE_CONFIG.currentScore,
     targetScore: PERFORMANCE_CONFIG.targetScore,
     improvement: PERFORMANCE_CONFIG.targetScore - PERFORMANCE_CONFIG.currentScore,
-    
+
     metrics: {
       LCP: {
         current: PERFORMANCE_CONFIG.current.LCP,
@@ -121,9 +121,9 @@ function generatePerformanceReport() {
         status: PERFORMANCE_CONFIG.current.SI > PERFORMANCE_CONFIG.targets.SI ? '需要改进' : '良好'
       }
     },
-    
+
     optimizations: PERFORMANCE_CONFIG.optimizations,
-    
+
     recommendations: [
       {
         priority: '紧急',
@@ -160,7 +160,7 @@ function generatePerformanceReport() {
       }
     ]
   };
-  
+
   return report;
 }
 
@@ -171,7 +171,7 @@ function generateNextJSConfig() {
 const nextConfig = {
   // 启用压缩
   compress: true,
-  
+
   // 图片优化
   images: {
     formats: ['image/webp', 'image/avif'],
@@ -179,18 +179,18 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  
+
   // 实验性功能
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['@/components', '@/lib'],
   },
-  
+
   // 编译器优化
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  
+
   // 头部优化
   async headers() {
     return [
@@ -266,13 +266,13 @@ const LazyComponent = dynamic(() => import('./HeavyComponent'), {
 // 2. 图片懒加载
 const LazyImage = ({ src, alt, ...props }) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   useEffect(() => {
     const img = new Image();
     img.onload = () => setIsLoaded(true);
     img.src = src;
   }, [src]);
-  
+
   return (
     <div className="lazy-image-container">
       {isLoaded ? (
@@ -287,35 +287,35 @@ const LazyImage = ({ src, alt, ...props }) => {
 // 3. 防抖和节流
 const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
-  
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
-    
+
     return () => clearTimeout(handler);
   }, [value, delay]);
-  
+
   return debouncedValue;
 };
 
 // 4. 虚拟滚动（用于长列表）
 const VirtualList = ({ items, itemHeight, containerHeight }) => {
   const [scrollTop, setScrollTop] = useState(0);
-  
+
   const visibleItems = useMemo(() => {
     const startIndex = Math.floor(scrollTop / itemHeight);
     const endIndex = Math.min(
       startIndex + Math.ceil(containerHeight / itemHeight) + 1,
       items.length
     );
-    
+
     return items.slice(startIndex, endIndex).map((item, index) => ({
       ...item,
       index: startIndex + index
     }));
   }, [items, itemHeight, containerHeight, scrollTop]);
-  
+
   return (
     <div
       style={{ height: containerHeight, overflow: 'auto' }}
@@ -345,56 +345,56 @@ const VirtualList = ({ items, itemHeight, containerHeight }) => {
 // 主函数
 async function main() {
   console.log('🚀 开始性能优化分析...\n');
-  
+
   try {
     // 生成性能报告
     const report = generatePerformanceReport();
-    
+
     // 保存报告
     const reportDir = path.join(__dirname, '../reports/performance');
     if (!fs.existsSync(reportDir)) {
       fs.mkdirSync(reportDir, { recursive: true });
     }
-    
+
     const reportFile = path.join(reportDir, 'performance-optimization-report.json');
     fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
-    
+
     // 生成配置文件
     const configFile = path.join(reportDir, 'next.config.optimized.js');
     fs.writeFileSync(configFile, generateNextJSConfig());
-    
+
     const cssFile = path.join(reportDir, 'critical-css.css');
     fs.writeFileSync(cssFile, generateCSSOptimization());
-    
+
     const jsFile = path.join(reportDir, 'performance-optimization.js');
     fs.writeFileSync(jsFile, generateJSOptimization());
-    
+
     // 输出摘要
     console.log('📊 性能分析报告');
     console.log('=' .repeat(50));
     console.log(`当前性能得分: ${report.currentScore}/100`);
     console.log(`目标性能得分: ${report.targetScore}/100`);
     console.log(`需要提升: ${report.improvement}分\n`);
-    
+
     console.log('🔍 关键指标分析:');
     Object.entries(report.metrics).forEach(([metric, data]) => {
       console.log(`${metric}: ${data.current} → ${data.target} (${data.status})`);
     });
-    
+
     console.log('\n💡 优化建议:');
     report.recommendations.forEach((rec, index) => {
       console.log(`${index + 1}. [${rec.priority}] ${rec.action}`);
       console.log(`   ${rec.description}`);
     });
-    
+
     console.log('\n📁 生成的文件:');
     console.log(`- 性能报告: ${reportFile}`);
     console.log(`- Next.js配置: ${configFile}`);
     console.log(`- CSS优化: ${cssFile}`);
     console.log(`- JS优化: ${jsFile}`);
-    
+
     console.log('\n✅ 性能优化分析完成！');
-    
+
   } catch (error) {
     console.error('❌ 性能优化分析失败:', error.message);
     process.exit(1);

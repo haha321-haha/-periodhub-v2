@@ -32,7 +32,7 @@ class HardcodingAuditor {
       /\/\*[^*]*[\u4e00-\u9fff][^*]*\*\//g,
       /\/\/[^\n]*[\u4e00-\u9fff][^\n]*/g
     ];
-    
+
     this.auditResults = {
       totalFiles: 0,
       filesWithHardcoding: 0,
@@ -66,7 +66,7 @@ class HardcodingAuditor {
           matches.forEach(match => {
             const severity = this.assessSeverity(match, index);
             const lineNumber = this.getLineNumber(content, match);
-            
+
             results.hardcoding.push({
               type: this.getPatternType(index),
               content: match,
@@ -74,7 +74,7 @@ class HardcodingAuditor {
               line: lineNumber,
               suggestion: this.getSuggestion(match, index)
             });
-            
+
             results.count++;
             this.auditResults.totalHardcoding++;
             this.auditResults.bySeverity[severity]++;
@@ -102,17 +102,17 @@ class HardcodingAuditor {
     if (patternIndex === 0 || patternIndex === 1 || patternIndex === 2) {
       return 'high';
     }
-    
+
     // 中文字符串 - 中等严重程度
     if (patternIndex === 3) {
       return 'medium';
     }
-    
+
     // 英文字符串 - 低严重程度（可能是变量名等）
     if (patternIndex === 4) {
       return 'low';
     }
-    
+
     // 其他 - 中等严重程度
     return 'medium';
   }
@@ -178,7 +178,7 @@ class HardcodingAuditor {
    */
   scanAllFiles() {
     console.log('🔍 开始硬编码审计...\n');
-    
+
     const files = glob.sync('**/*.{ts,tsx,js,jsx}', {
       cwd: this.appDir,
       ignore: ['**/node_modules/**', '**/.next/**', '**/test/**', '**/tests/**']
@@ -190,7 +190,7 @@ class HardcodingAuditor {
     files.forEach(file => {
       const filePath = path.join(this.appDir, file);
       const result = this.scanFile(filePath);
-      
+
       if (result && result.count > 0) {
         console.log(`⚠️  ${file}: ${result.count} 处硬编码`);
       }
@@ -203,7 +203,7 @@ class HardcodingAuditor {
   generateReport() {
     console.log('\n📊 硬编码审计报告');
     console.log('='.repeat(60));
-    
+
     console.log(`\n📈 总体统计:`);
     console.log(`  - 扫描文件数: ${this.auditResults.totalFiles}`);
     console.log(`  - 包含硬编码的文件: ${this.auditResults.filesWithHardcoding}`);
@@ -219,7 +219,7 @@ class HardcodingAuditor {
       result.hardcoding.forEach(item => {
         typeCount[item.type] = (typeCount[item.type] || 0) + 1;
       });
-      
+
       console.log(`\n  📄 ${file}:`);
       Object.entries(typeCount).forEach(([type, count]) => {
         console.log(`    - ${type}: ${count} 处`);
@@ -247,21 +247,21 @@ class HardcodingAuditor {
    */
   generateFixSuggestions() {
     console.log(`\n💡 修复建议:`);
-    
+
     if (this.auditResults.bySeverity.high > 0) {
       console.log(`  🔴 高优先级 (${this.auditResults.bySeverity.high} 处):`);
       console.log(`    - 立即修复条件硬编码 (locale === 'zh' ? ... : ...)`);
       console.log(`    - 将硬编码数组和对象移到翻译文件`);
       console.log(`    - 使用 useTranslations() 替换所有条件判断`);
     }
-    
+
     if (this.auditResults.bySeverity.medium > 0) {
       console.log(`  🟡 中优先级 (${this.auditResults.bySeverity.medium} 处):`);
       console.log(`    - 替换中文字符串为翻译键`);
       console.log(`    - 处理模板字符串中的硬编码`);
       console.log(`    - 清理JSX中的硬编码文本`);
     }
-    
+
     if (this.auditResults.bySeverity.low > 0) {
       console.log(`  🟢 低优先级 (${this.auditResults.bySeverity.low} 处):`);
       console.log(`    - 检查英文字符串是否需要翻译`);
@@ -307,7 +307,7 @@ function fixFile(filePath) {
   try {
     let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
-    
+
     fixRules.forEach(rule => {
       const matches = content.match(rule.pattern);
       if (matches) {
@@ -316,11 +316,11 @@ function fixFile(filePath) {
         console.log(\`✅ 修复 \${rule.description} 在 \${filePath}\`);
       }
     });
-    
+
     if (modified) {
       fs.writeFileSync(filePath, content, 'utf8');
     }
-    
+
     return modified;
   } catch (error) {
     console.error(\`❌ 修复文件失败 \${filePath}:\`, error.message);
@@ -346,7 +346,7 @@ console.log('✅ 修复完成！');
     this.scanAllFiles();
     this.generateReport();
     this.generateFixScript();
-    
+
     console.log('\n' + '='.repeat(60));
     if (this.auditResults.totalHardcoding > 0) {
       console.log('❌ 发现硬编码问题，需要修复');

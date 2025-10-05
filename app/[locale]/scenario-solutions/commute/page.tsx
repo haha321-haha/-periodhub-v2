@@ -31,7 +31,7 @@ interface Props {
 // 推荐数据配置函数
 function getCommuteRecommendations(locale: Locale) {
   const isZh = locale === 'zh';
-  
+
   return {
     relatedTools: [
       {
@@ -123,7 +123,7 @@ function getCommuteRecommendations(locale: Locale) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'scenarioSolutionsPage' });
-  
+
   return {
     title: `${t('scenarios.commute.title')} - ${t('title')}`,
     description: t('scenarios.commute.description'),
@@ -133,14 +133,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CommuteScenarioPage({ params }: Props) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
-  
+
   const t = await getTranslations('scenarioSolutionsPage');
   const commonT = await getTranslations('common');
-  
+
   // 预加载面包屑所需的翻译
   const breadcrumbTitle = t('title');
   const breadcrumbCommuteTitle = t('scenarios.commute.title');
-  
+
   // 获取推荐数据
   const recommendations = getCommuteRecommendations(locale);
   const isZh = locale === 'zh';
@@ -328,7 +328,7 @@ export default async function CommuteScenarioPage({ params }: Props) {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12" data-page="scenario-commute">
       {/* Breadcrumb */}
-      <Breadcrumb 
+      <Breadcrumb
         items={[
           { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
           { label: breadcrumbCommuteTitle }
@@ -356,7 +356,7 @@ export default async function CommuteScenarioPage({ params }: Props) {
             {locale === 'zh' ? '通勤应急工具包' : 'Commute Emergency Kit'}
           </h2>
         </div>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           {emergencyKit.map((kit, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
@@ -395,7 +395,7 @@ export default async function CommuteScenarioPage({ params }: Props) {
                   {transport.type}
                 </h3>
               </div>
-              
+
               <ul className="space-y-3">
                 {transport.strategies.map((strategy, strategyIndex) => (
                   <li key={strategyIndex} className="flex items-start">
@@ -620,7 +620,7 @@ export default async function CommuteScenarioPage({ params }: Props) {
       <section className="bg-gradient-to-br from-green-50 to-blue-50 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="space-y-12">
-            
+
             {/* 相关工具区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
@@ -674,7 +674,7 @@ export default async function CommuteScenarioPage({ params }: Props) {
 
       {/* Back to Overview */}
       <div className="text-center">
-        <Link 
+        <Link
           href={`/${locale}/scenario-solutions`}
           className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
         >

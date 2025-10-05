@@ -1,10 +1,15 @@
 // Period Hub PDF资源优化类型定义
 // 38个资源分类系统
 
-export type PDFCategory = 'emergency' | 'daily' | 'learning' | 'professional';
-export type PDFPriority = 'highest' | 'high' | 'medium' | 'low';
-export type PDFDifficulty = 'beginner' | 'intermediate' | 'advanced';
-export type PDFType = 'guide' | 'checklist' | 'worksheet' | 'reference' | 'template';
+export type PDFCategory = "emergency" | "daily" | "learning" | "professional";
+export type PDFPriority = "highest" | "high" | "medium" | "low";
+export type PDFDifficulty = "beginner" | "intermediate" | "advanced";
+export type PDFType =
+  | "guide"
+  | "checklist"
+  | "worksheet"
+  | "reference"
+  | "template";
 
 export interface PDFResource {
   id: string;
@@ -64,7 +69,7 @@ export interface PDFSearchResult {
 // 用户交互数据
 export interface PDFUserInteraction {
   resourceId: string;
-  action: 'view' | 'download' | 'preview' | 'share';
+  action: "view" | "download" | "preview" | "share";
   timestamp: Date;
   userAgent?: string;
   source?: string;

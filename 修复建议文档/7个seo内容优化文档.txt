@@ -385,7 +385,7 @@ https://www.periodhub.health/en/articles/anti-inflammatory-diet-period-pain
         }
       },
       {
-        "@type": "Question", 
+        "@type": "Question",
         "name": "痛经不能吃什么食物？",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -451,7 +451,7 @@ https://www.periodhub.health/en/articles/anti-inflammatory-diet-period-pain
 
 **蛋白质类**：
 □ 三文鱼 500g
-□ 鸡胸肉 1kg  
+□ 鸡胸肉 1kg
 □ 鸡蛋 1盒
 □ 豆腐 2块
 

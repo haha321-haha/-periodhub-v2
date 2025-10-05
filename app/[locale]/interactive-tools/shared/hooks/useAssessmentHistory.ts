@@ -63,14 +63,14 @@ export const useAssessmentHistory = () => {
 
     const totalAssessments = historyData.length;
     const averageScore = historyData.reduce((sum, entry) => sum + entry.percentage, 0) / totalAssessments;
-    
+
     // Calculate score trend (comparing last 3 vs previous 3)
     let scoreTrend: 'improving' | 'stable' | 'declining' = 'stable';
     if (totalAssessments >= 6) {
       const recent = historyData.slice(-3).reduce((sum, entry) => sum + entry.percentage, 0) / 3;
       const previous = historyData.slice(-6, -3).reduce((sum, entry) => sum + entry.percentage, 0) / 3;
       const difference = recent - previous;
-      
+
       if (difference > 5) scoreTrend = 'improving';
       else if (difference < -5) scoreTrend = 'declining';
     }
@@ -80,7 +80,7 @@ export const useAssessmentHistory = () => {
       counts[entry.severity] = (counts[entry.severity] || 0) + 1;
       return counts;
     }, {} as Record<string, number>);
-    
+
     const mostCommonSeverity = Object.entries(severityCounts)
       .sort(([,a], [,b]) => b - a)[0]?.[0] as 'mild' | 'moderate' | 'severe' | 'emergency' || 'mild';
 
@@ -89,7 +89,7 @@ export const useAssessmentHistory = () => {
     const now = new Date();
     const lastDate = new Date(lastAssessmentDate);
     const daysSinceLast = Math.floor((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
-    
+
     let assessmentFrequency: 'daily' | 'weekly' | 'monthly' | 'irregular' = 'irregular';
     if (daysSinceLast <= 1) assessmentFrequency = 'daily';
     else if (daysSinceLast <= 7) assessmentFrequency = 'weekly';
@@ -130,21 +130,21 @@ export const useAssessmentHistory = () => {
 
     setHistory(prevHistory => {
       const newHistory = [...prevHistory, historyEntry];
-      
+
       // Calculate trends with new history
       if (newHistory.length === 0) {
         setTrends(null);
       } else {
         const totalAssessments = newHistory.length;
         const averageScore = newHistory.reduce((sum, entry) => sum + entry.percentage, 0) / totalAssessments;
-        
+
         // Calculate score trend (comparing last 3 vs previous 3)
         let scoreTrend: 'improving' | 'stable' | 'declining' = 'stable';
         if (totalAssessments >= 6) {
           const recent = newHistory.slice(-3).reduce((sum, entry) => sum + entry.percentage, 0) / 3;
           const previous = newHistory.slice(-6, -3).reduce((sum, entry) => sum + entry.percentage, 0) / 3;
           const difference = recent - previous;
-          
+
           if (difference > 5) scoreTrend = 'improving';
           else if (difference < -5) scoreTrend = 'declining';
         }
@@ -154,7 +154,7 @@ export const useAssessmentHistory = () => {
           counts[entry.severity] = (counts[entry.severity] || 0) + 1;
           return counts;
         }, {} as Record<string, number>);
-        
+
         const mostCommonSeverity = Object.entries(severityCounts)
           .sort(([,a], [,b]) => b - a)[0]?.[0] as 'mild' | 'moderate' | 'severe' | 'emergency' || 'mild';
 
@@ -163,7 +163,7 @@ export const useAssessmentHistory = () => {
         const now = new Date();
         const lastDate = new Date(lastAssessmentDate);
         const daysSinceLast = Math.floor((now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
-        
+
         let assessmentFrequency: 'daily' | 'weekly' | 'monthly' | 'irregular' = 'irregular';
         if (daysSinceLast <= 1) assessmentFrequency = 'daily';
         else if (daysSinceLast <= 7) assessmentFrequency = 'weekly';
@@ -242,4 +242,3 @@ export const useAssessmentHistory = () => {
     exportHistory,
   };
 };
-

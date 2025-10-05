@@ -4,20 +4,24 @@
  */
 
 // 核心类型
-export * from './types';
+export * from "./types";
 
 // 核心类
-export { ResourceManager } from './core/ResourceManager';
-export { CacheManager } from './cache/CacheManager';
-export { ResourceValidator } from './validation/ResourceValidator';
-export { AnalyticsEngine } from './analytics/AnalyticsEngine';
+export { ResourceManager } from "./core/ResourceManager";
+export { CacheManager } from "./cache/CacheManager";
+export { ResourceValidator } from "./validation/ResourceValidator";
+export { AnalyticsEngine } from "./analytics/AnalyticsEngine";
 
 // 配置
-export { defaultConfig, developmentConfig, productionConfig } from './config/default';
+export {
+  defaultConfig,
+  developmentConfig,
+  productionConfig,
+} from "./config/default";
 
 // 实用工具
-export { createResourceManager } from './utils/factory';
+export { createResourceManager } from "./utils/factory";
 
 // 版本信息
-export const VERSION = '1.0.0';
-export const BUILD_DATE = new Date().toISOString(); 
+export const VERSION = "1.0.0";
+export const BUILD_DATE = new Date().toISOString();

@@ -37,7 +37,7 @@ describe('ValidationService', () => {
   describe('validateRecord', () => {
     it('should validate a correct record', () => {
       const result = validationService.validateRecord(validRecord);
-      
+
       expect(result.isValid).toBe(true);
       expect(result.errors).toHaveLength(0);
       expect(result.warnings).toHaveLength(0);
@@ -46,7 +46,7 @@ describe('ValidationService', () => {
     it('should reject record with invalid pain level', () => {
       const invalidRecord = { ...validRecord, painLevel: 15 };
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'painLevel',
@@ -58,7 +58,7 @@ describe('ValidationService', () => {
     it('should reject record with negative pain level', () => {
       const invalidRecord = { ...validRecord, painLevel: -1 };
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'painLevel',
@@ -72,9 +72,9 @@ describe('ValidationService', () => {
       delete (invalidRecord as any).date;
       delete (invalidRecord as any).time;
       delete (invalidRecord as any).painLevel;
-      
+
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'date',
@@ -96,7 +96,7 @@ describe('ValidationService', () => {
     it('should reject record with invalid date format', () => {
       const invalidRecord = { ...validRecord, date: 'invalid-date' };
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'date',
@@ -108,13 +108,13 @@ describe('ValidationService', () => {
     it('should reject record with future date', () => {
       const futureDate = new Date();
       futureDate.setDate(futureDate.getDate() + 1);
-      const invalidRecord = { 
-        ...validRecord, 
-        date: futureDate.toISOString().split('T')[0] 
+      const invalidRecord = {
+        ...validRecord,
+        date: futureDate.toISOString().split('T')[0]
       };
-      
+
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'date',
@@ -126,7 +126,7 @@ describe('ValidationService', () => {
     it('should reject record with invalid time format', () => {
       const invalidRecord = { ...validRecord, time: '25:70' };
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'time',
@@ -136,13 +136,13 @@ describe('ValidationService', () => {
     });
 
     it('should reject record with invalid pain types', () => {
-      const invalidRecord = { 
-        ...validRecord, 
-        painTypes: ['invalid_type'] as any 
+      const invalidRecord = {
+        ...validRecord,
+        painTypes: ['invalid_type'] as any
       };
-      
+
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'painTypes',
@@ -152,13 +152,13 @@ describe('ValidationService', () => {
     });
 
     it('should reject record with invalid locations', () => {
-      const invalidRecord = { 
-        ...validRecord, 
-        locations: ['invalid_location'] as any 
+      const invalidRecord = {
+        ...validRecord,
+        locations: ['invalid_location'] as any
       };
-      
+
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'locations',
@@ -168,13 +168,13 @@ describe('ValidationService', () => {
     });
 
     it('should reject record with invalid symptoms', () => {
-      const invalidRecord = { 
-        ...validRecord, 
-        symptoms: ['invalid_symptom'] as any 
+      const invalidRecord = {
+        ...validRecord,
+        symptoms: ['invalid_symptom'] as any
       };
-      
+
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'symptoms',
@@ -184,13 +184,13 @@ describe('ValidationService', () => {
     });
 
     it('should reject record with invalid menstrual status', () => {
-      const invalidRecord = { 
-        ...validRecord, 
-        menstrualStatus: 'invalid_status' as any 
+      const invalidRecord = {
+        ...validRecord,
+        menstrualStatus: 'invalid_status' as any
       };
-      
+
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'menstrualStatus',
@@ -202,7 +202,7 @@ describe('ValidationService', () => {
     it('should reject record with invalid effectiveness rating', () => {
       const invalidRecord = { ...validRecord, effectiveness: 15 };
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'effectiveness',
@@ -215,7 +215,7 @@ describe('ValidationService', () => {
       const longNotes = 'a'.repeat(1001);
       const invalidRecord = { ...validRecord, notes: longNotes };
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'notes',
@@ -225,14 +225,14 @@ describe('ValidationService', () => {
     });
 
     it('should generate warnings for potential issues', () => {
-      const recordWithWarnings = { 
-        ...validRecord, 
+      const recordWithWarnings = {
+        ...validRecord,
         painLevel: 9,
         medications: []
       };
-      
+
       const result = validationService.validateRecord(recordWithWarnings);
-      
+
       expect(result.isValid).toBe(true);
       expect(result.warnings).toContainEqual({
         field: 'painLevel',
@@ -247,13 +247,13 @@ describe('ValidationService', () => {
     });
 
     it('should validate medication structure', () => {
-      const invalidRecord = { 
-        ...validRecord, 
+      const invalidRecord = {
+        ...validRecord,
         medications: [{ name: '', dosage: '400mg', timing: 'during pain' }]
       };
-      
+
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'medications',
@@ -263,13 +263,13 @@ describe('ValidationService', () => {
     });
 
     it('should validate lifestyle factors structure', () => {
-      const invalidRecord = { 
-        ...validRecord, 
+      const invalidRecord = {
+        ...validRecord,
         lifestyleFactors: [{ factor: 'invalid_factor' as any, value: 5 }]
       };
-      
+
       const result = validationService.validateRecord(invalidRecord);
-      
+
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
         field: 'lifestyleFactors',
@@ -425,7 +425,7 @@ describe('ValidationService', () => {
     it('should validate correct date range', () => {
       const startDate = new Date('2024-01-01');
       const endDate = new Date('2024-01-31');
-      
+
       const result = validationService.validateDateRange(startDate, endDate);
       expect(result.isValid).toBe(true);
       expect(result.errors).toHaveLength(0);
@@ -434,7 +434,7 @@ describe('ValidationService', () => {
     it('should reject range where start date is after end date', () => {
       const startDate = new Date('2024-01-31');
       const endDate = new Date('2024-01-01');
-      
+
       const result = validationService.validateDateRange(startDate, endDate);
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
@@ -447,7 +447,7 @@ describe('ValidationService', () => {
     it('should reject range that is too large', () => {
       const startDate = new Date('2020-01-01');
       const endDate = new Date('2024-12-31');
-      
+
       const result = validationService.validateDateRange(startDate, endDate);
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({
@@ -460,7 +460,7 @@ describe('ValidationService', () => {
     it('should handle invalid date objects', () => {
       const invalidDate = new Date('invalid');
       const validDate = new Date('2024-01-01');
-      
+
       const result = validationService.validateDateRange(invalidDate, validDate);
       expect(result.isValid).toBe(false);
       expect(result.errors).toContainEqual({

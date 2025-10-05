@@ -17,7 +17,7 @@ const API_ENDPOINT = 'https://api.indexnow.org/indexnow';
 function getAllPdfFiles() {
   const downloadsDir = path.resolve(process.cwd(), 'public/downloads');
   const files = fs.readdirSync(downloadsDir);
-  
+
   return files
     .filter(file => file.endsWith('.pdf'))
     .map(file => `${BASE_URL}/downloads/${file}`);
@@ -54,49 +54,49 @@ async function submitToIndexNow(urls) {
 // 批量提交（每批10个URL）
 async function batchSubmit(urls, batchSize = 10) {
   const results = [];
-  
+
   for (let i = 0; i < urls.length; i += batchSize) {
     const batch = urls.slice(i, i + batchSize);
     console.log(`📤 提交批次 ${Math.floor(i/batchSize) + 1}: ${batch.length} 个URL`);
-    
+
     const result = await submitToIndexNow(batch);
     results.push({
       batch: Math.floor(i/batchSize) + 1,
       urls: batch,
       result
     });
-    
+
     // 避免请求过于频繁
     if (i + batchSize < urls.length) {
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
   }
-  
+
   return results;
 }
 
 // 主函数
 async function main() {
   console.log('🚀 开始批量提交PDF文件到IndexNow...');
-  
+
   const pdfUrls = getAllPdfFiles();
   console.log(`📋 发现 ${pdfUrls.length} 个PDF文件:`);
   pdfUrls.forEach((url, index) => {
     console.log(`  ${index + 1}. ${url}`);
   });
-  
+
   console.log('\n📤 开始提交到IndexNow...');
   const results = await batchSubmit(pdfUrls);
-  
+
   // 统计结果
   const successful = results.filter(r => r.result.success).length;
   const failed = results.filter(r => !r.result.success).length;
-  
+
   console.log('\n📊 提交结果统计:');
   console.log(`✅ 成功批次: ${successful}`);
   console.log(`❌ 失败批次: ${failed}`);
   console.log(`📄 总文件数: ${pdfUrls.length}`);
-  
+
   // 显示详细结果
   results.forEach(({ batch, urls, result }) => {
     if (result.success) {
@@ -105,7 +105,7 @@ async function main() {
       console.log(`❌ 批次 ${batch}: 提交失败 - ${result.error || result.statusText}`);
     }
   });
-  
+
   // 生成报告
   const report = {
     timestamp: new Date().toISOString(),
@@ -120,11 +120,11 @@ async function main() {
       error: result.error
     }))
   };
-  
+
   const reportPath = path.resolve(process.cwd(), 'reports/indexnow-submission-report.json');
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
   console.log(`\n📄 详细报告已保存: ${reportPath}`);
-  
+
   if (failed === 0) {
     console.log('\n🎉 所有PDF文件已成功提交到IndexNow！');
     console.log('💡 建议: 等待24-48小时后检查Bing Webmaster Tools中的IndexNow状态');

@@ -115,7 +115,7 @@ export class ChartRenderer {
       try {
         // Create mock records for distribution calculation
         const mockRecords = this.createMockRecordsFromAnalytics(analytics);
-        
+
         const canvas = document.createElement('canvas');
         canvas.width = this.CHART_WIDTH;
         canvas.height = this.CHART_HEIGHT;
@@ -364,7 +364,7 @@ export class ChartRenderer {
           grid-template-columns: 1fr;
           gap: 20px;
         }
-        
+
         .chart-image {
           max-height: 300px;
         }
@@ -384,7 +384,7 @@ export class ChartRenderer {
    */
   private static createMockRecordsFromAnalytics(analytics: PainAnalytics): any[] {
     const mockRecords = [];
-    
+
     // Generate distribution based on trend data
     if (analytics.trendData && analytics.trendData.length > 0) {
       return analytics.trendData.map(point => ({
@@ -396,12 +396,12 @@ export class ChartRenderer {
     // Generate mock data based on average pain level
     const avgPain = analytics.averagePainLevel;
     const totalRecords = analytics.totalRecords;
-    
+
     for (let i = 0; i < Math.min(totalRecords, 100); i++) {
       // Generate pain levels around the average with some variation
       const variation = (Math.random() - 0.5) * 4; // ±2 variation
       const painLevel = Math.max(0, Math.min(10, Math.round(avgPain + variation)));
-      
+
       mockRecords.push({
         painLevel,
         date: new Date(Date.now() - (i * 24 * 60 * 60 * 1000)).toISOString().split('T')[0]

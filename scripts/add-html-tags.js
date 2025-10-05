@@ -7,7 +7,7 @@ const path = require('path');
 const htmlFiles = [
   // 中文HTML文件
   'parent-communication-guide.html',
-  'zhan-zhuang-baduanjin-illustrated-guide.html', 
+  'zhan-zhuang-baduanjin-illustrated-guide.html',
   'teacher-collaboration-handbook.html',
   'healthy-habits-checklist.html',
   'specific-menstrual-pain-management-guide.html',
@@ -20,7 +20,7 @@ const htmlFiles = [
   // 英文HTML文件
   'parent-communication-guide-en.html',
   'zhan-zhuang-baduanjin-illustrated-guide-en.html',
-  'teacher-collaboration-handbook-en.html', 
+  'teacher-collaboration-handbook-en.html',
   'healthy-habits-checklist-en.html',
   'specific-menstrual-pain-management-guide-en.html',
   'natural-therapy-assessment-en.html',
@@ -33,14 +33,14 @@ const htmlFiles = [
 
 function addTagsToHtmlFile(fileName) {
   const filePath = path.join('public/downloads', fileName);
-  
+
   if (!fs.existsSync(filePath)) {
     console.log(`⚠️  文件不存在: ${fileName}`);
     return;
   }
 
   const content = fs.readFileSync(filePath, 'utf8');
-  
+
   // 检查是否已经有hreflang标签
   if (content.includes('rel="alternate" hreflang=')) {
     console.log(`✅ 已处理: ${fileName}`);
@@ -49,9 +49,9 @@ function addTagsToHtmlFile(fileName) {
 
   const isEnglish = fileName.includes('-en.html');
   const baseName = fileName.replace('-en.html', '').replace('.html', '');
-  
+
   // 构建标签
-  const hreflangTags = isEnglish ? 
+  const hreflangTags = isEnglish ?
     `    <!-- Hreflang标签 - 语言版本引用 -->
     <link rel="alternate" hreflang="en" href="https://www.periodhub.health/downloads/${fileName}">
     <link rel="alternate" hreflang="zh" href="https://www.periodhub.health/downloads/${baseName}.html">` :
@@ -60,11 +60,11 @@ function addTagsToHtmlFile(fileName) {
     <link rel="alternate" hreflang="en" href="https://www.periodhub.health/downloads/${baseName}-en.html">`;
 
   const pdfTags = isEnglish ?
-    `    
+    `
     <!-- PDF版本引用 - 不占用站点地图空间 -->
     <link rel="alternate" type="application/pdf" href="/downloads/${baseName}-en.pdf" title="PDF Version - Print-friendly">
     <link rel="alternate" type="application/pdf" href="/downloads/${baseName}.pdf" title="中文PDF版本">` :
-    `    
+    `
     <!-- PDF版本引用 - 不占用站点地图空间 -->
     <link rel="alternate" type="application/pdf" href="/downloads/${baseName}.pdf" title="PDF版本 - 适合打印和离线阅读">
     <link rel="alternate" type="application/pdf" href="/downloads/${baseName}-en.pdf" title="English PDF Version">`;

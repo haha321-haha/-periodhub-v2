@@ -34,7 +34,7 @@ class MimeTypeValidator {
   // 验证静态资源MIME类型
   validateStaticAssets() {
     console.log('🔍 验证静态资源MIME类型...');
-    
+
     const staticDir = path.join(__dirname, '../.next/static');
     if (!fs.existsSync(staticDir)) {
       console.log('⚠️ 静态资源目录不存在，请先运行构建');
@@ -42,7 +42,7 @@ class MimeTypeValidator {
     }
 
     this.scanDirectory(staticDir);
-    
+
     console.log(`📊 扫描完成: 发现 ${this.issues.length} 个问题`);
     return this.issues;
   }
@@ -50,11 +50,11 @@ class MimeTypeValidator {
   // 扫描目录
   scanDirectory(dir) {
     const items = fs.readdirSync(dir);
-    
+
     items.forEach(item => {
       const itemPath = path.join(dir, item);
       const stat = fs.statSync(itemPath);
-      
+
       if (stat.isDirectory()) {
         this.scanDirectory(itemPath);
       } else {
@@ -67,7 +67,7 @@ class MimeTypeValidator {
   validateFile(filePath) {
     const ext = path.extname(filePath);
     const expectedMimeType = MIME_TYPES[ext];
-    
+
     if (!expectedMimeType) {
       return; // 跳过未知文件类型
     }
@@ -75,7 +75,7 @@ class MimeTypeValidator {
     // 检查文件内容
     const content = fs.readFileSync(filePath, 'utf8');
     const isTextFile = this.isTextFile(content);
-    
+
     if (ext === '.css' && !isTextFile) {
       this.issues.push({
         file: filePath,
@@ -100,14 +100,14 @@ class MimeTypeValidator {
   // 生成修复建议
   generateFixSuggestions() {
     const suggestions = [];
-    
+
     if (this.issues.length === 0) {
       suggestions.push('✅ 所有静态资源MIME类型正确');
       return suggestions;
     }
 
     suggestions.push('🔧 MIME类型修复建议:');
-    
+
     this.issues.forEach(issue => {
       suggestions.push(`   - ${issue.file}: ${issue.issue}`);
       suggestions.push(`     期望: ${issue.expected}`);
@@ -127,7 +127,7 @@ class MimeTypeValidator {
   // 验证Next.js配置
   validateNextConfig() {
     console.log('🔍 验证Next.js配置...');
-    
+
     const configPath = path.join(__dirname, '../next.config.js');
     if (!fs.existsSync(configPath)) {
       console.log('❌ next.config.js 不存在');
@@ -135,14 +135,14 @@ class MimeTypeValidator {
     }
 
     const configContent = fs.readFileSync(configPath, 'utf8');
-    
+
     // 检查MIME类型配置
     const hasCssMimeType = configContent.includes('text/css');
     const hasJsMimeType = configContent.includes('application/javascript');
-    
+
     console.log(`   CSS MIME类型配置: ${hasCssMimeType ? '✅' : '❌'}`);
     console.log(`   JS MIME类型配置: ${hasJsMimeType ? '✅' : '❌'}`);
-    
+
     return hasCssMimeType && hasJsMimeType;
   }
 
@@ -173,10 +173,10 @@ class MimeTypeValidator {
 
     const filename = `mime-type-validation-report-${Date.now()}.json`;
     const filepath = path.join(reportDir, filename);
-    
+
     fs.writeFileSync(filepath, JSON.stringify(report, null, 2));
     console.log(`📊 报告已保存: ${filepath}`);
-    
+
     return filepath;
   }
 }
@@ -196,7 +196,7 @@ async function runMimeTypeValidation() {
   // 生成报告
   console.log('\n📊 生成验证报告...');
   const report = validator.generateReport();
-  
+
   console.log('\n📈 验证结果摘要:');
   console.log(`   总问题数: ${report.summary.totalIssues}`);
   console.log(`   关键问题: ${report.summary.criticalIssues}`);
@@ -207,9 +207,9 @@ async function runMimeTypeValidation() {
 
   // 保存报告
   const reportPath = validator.saveReport(report);
-  
+
   console.log(`\n✅ MIME类型验证完成！报告已保存到: ${reportPath}`);
-  
+
   return report;
 }
 
@@ -219,9 +219,3 @@ if (require.main === module) {
 }
 
 module.exports = { runMimeTypeValidation, MimeTypeValidator };
-
-
-
-
-
-

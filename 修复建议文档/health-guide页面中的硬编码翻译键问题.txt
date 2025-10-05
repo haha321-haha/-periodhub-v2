@@ -209,13 +209,13 @@ class ContentExtractor {
   extractFromHTML(htmlContent: string): TherapyContent {
     // 1. 解析HTML结构
     const sections = this.parseHTMLSections(htmlContent);
-    
+
     // 2. 识别内容类型和层级
     const structuredSections = this.identifyContentStructure(sections);
-    
+
     // 3. 提取中英文对照内容
     const bilingualContent = this.extractBilingualContent(structuredSections);
-    
+
     return {
       metadata: this.extractMetadata(htmlContent),
       sections: bilingualContent
@@ -230,7 +230,7 @@ class ContentExtractor {
       /<h[1-6][^>]*>(.*?)<\/h[1-6]>/g,
       /<div[^>]*class="[^"]*content[^"]*"[^>]*>(.*?)<\/div>/gs
     ];
-    
+
     // 提取逻辑...
     return [];
   }
@@ -392,7 +392,7 @@ export default function ${componentName}({ locale }: ${componentName}Props) {
     const zhTranslations: any = {
       metadata: content.metadata.zh
     };
-    
+
     const enTranslations: any = {
       metadata: content.metadata.en
     };
@@ -403,7 +403,7 @@ export default function ${componentName}({ locale }: ${componentName}Props) {
         zhTranslations[section.category] = {};
         enTranslations[section.category] = {};
       }
-      
+
       zhTranslations[section.category][section.id] = section.zh;
       enTranslations[section.category][section.id] = section.en;
     });
@@ -418,19 +418,19 @@ const extractor = new ContentExtractor();
 // 处理现有HTML文件
 async function processLegacyHTML() {
   const htmlContent = `<!-- 这里是您提供的HTML内容 -->`;
-  
+
   // 1. 提取结构化内容
   const extractedContent = extractor.extractFromHTML(htmlContent);
-  
+
   // 2. 生成翻译文件
   const translations = extractor.generateTranslationFiles(extractedContent);
-  
+
   // 3. 生成Next.js组件
   const component = extractor.generateNextJSComponent(
-    extractedContent, 
+    extractedContent,
     'NaturalTherapyPrinciples'
   );
-  
+
   console.log('翻译文件 (zh.json):', JSON.stringify(translations.zh, null, 2));
   console.log('翻译文件 (en.json):', JSON.stringify(translations.en, null, 2));
   console.log('组件代码:', component);
@@ -439,16 +439,16 @@ async function processLegacyHTML() {
 // 批量处理多个HTML文件
 async function batchProcessHTMLFiles(fileList: string[]) {
   const results = [];
-  
+
   for (const file of fileList) {
     try {
       // 读取文件内容
       const content = await fetch(file).then(res => res.text());
-      
+
       // 提取和转换
       const extracted = extractor.extractFromHTML(content);
       const translations = extractor.generateTranslationFiles(extracted);
-      
+
       results.push({
         filename: file,
         translations,
@@ -462,7 +462,7 @@ async function batchProcessHTMLFiles(fileList: string[]) {
       });
     }
   }
-  
+
   return results;
 }
 
@@ -547,14 +547,14 @@ src/
 interface ContentManagementSystem {
   // 统一内容源
   contentSource: 'database' | 'cms' | 'markdown';
-  
+
   // 自动翻译流程
   translationWorkflow: {
     source: string;
     target: string[];
     approval: boolean;
   };
-  
+
   // 版本控制
   versionControl: {
     trackChanges: boolean;
@@ -621,12 +621,12 @@ interface ContentManagementSystem {
 // 只修复这些低风险项目（约10个）
 // 1. 页面元数据
 title: t('meta.title')
-description: t('meta.description') 
+description: t('meta.description')
 keywords: t('meta.keywords')
 
 // 2. 导航菜单
 {t('nav.understanding')}
-{t('nav.methods')} 
+{t('nav.methods')}
 {t('nav.lifestyle')}
 ```
 
@@ -644,7 +644,7 @@ keywords: t('meta.keywords')
 
 #### **Phase 3: 专项修复（待专业审核）**
 - **范围**: 80+个医学术语硬编码
-- **前置条件**: 
+- **前置条件**:
   - 获得医学专业人士审核
   - 建立翻译质量保证流程
   - 设立专门的维护时间窗口
@@ -655,7 +655,7 @@ keywords: t('meta.keywords')
 ```bash
 # 建议的操作优先级
 1. 完成图片优化 ✅ 优先
-2. 确保sitemap正常 ✅ 优先  
+2. 确保sitemap正常 ✅ 优先
 3. 解决性能问题 ✅ 优先
 4. 硬编码修复 ⏸️ 暂缓
 ```
@@ -695,7 +695,7 @@ const seoImpact = {
 
 #### **成功指标**：
 - 图片优化完成 ✅
-- SEO性能稳定 ✅  
+- SEO性能稳定 ✅
 - 用户体验良好 ✅
 - 系统稳定运行 ✅
 
@@ -836,10 +836,10 @@ npm run build
    ```bash
    # 方案1：恢复Git Stash（推荐）
    git stash pop
-   
+
    # 方案2：恢复文件备份
    cp app/[locale]/health-guide/page.tsx.backup-20250906-160318 app/[locale]/health-guide/page.tsx
-   
+
    # 方案3：完全重置到上次提交
    git checkout HEAD -- app/[locale]/health-guide/page.tsx
    ```
@@ -898,7 +898,7 @@ npm run build
 ```
 ├── 页面元数据 (3个)
 │   ├── keywords
-│   ├── title  
+│   ├── title
 │   └── description
 ├── 导航菜单 (6个)
 │   ├── 理解痛经
@@ -967,7 +967,7 @@ npm run build
 // 修复前
 keywords: locale === 'zh' ? '痛经,健康,指南' : 'dysmenorrhea,health,guide'
 
-// 修复后  
+// 修复后
 keywords: t('meta.keywords')
 ```
 
@@ -1038,7 +1038,7 @@ keywords: t('meta.keywords')
 
 ### **图片优化完成后开始**
 - **第1周**: 低风险修复 (10个) + 测试
-- **第2周**: 中风险修复 (30个) + 测试  
+- **第2周**: 中风险修复 (30个) + 测试
 - **第3-4周**: 高风险修复 (80+个) + 专业审核
 - **第5周**: 全面测试 + 性能优化
 

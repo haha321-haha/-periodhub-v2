@@ -43,7 +43,7 @@ const CONFIG = {
       description: 'www.periodhub.health'
     }
   ],
-  
+
   // 需要特殊处理的文件
   specialFiles: {
     'app/seo-config.ts': {
@@ -62,10 +62,10 @@ const CONFIG = {
       reason: 'robots.txt需要静态URL'
     }
   },
-  
+
   // 需要添加导入的文件类型
   needsImport: ['.tsx', '.ts'],
-  
+
   // 导入语句
   importStatement: "import { URL_CONFIG } from '@/lib/url-config';"
 };
@@ -84,19 +84,19 @@ function hasImport(content, importPath) {
 // 添加导入语句
 function addImport(content, filePath) {
   const ext = path.extname(filePath);
-  
+
   if (!CONFIG.needsImport.includes(ext)) {
     return content;
   }
-  
+
   if (hasImport(content, 'URL_CONFIG')) {
     return content;
   }
-  
+
   // 在文件开头添加导入
   const lines = content.split('\n');
   let insertIndex = 0;
-  
+
   // 找到第一个import语句的位置
   for (let i = 0; i < lines.length; i++) {
     if (lines[i].trim().startsWith('import ')) {
@@ -105,7 +105,7 @@ function addImport(content, filePath) {
       break;
     }
   }
-  
+
   lines.splice(insertIndex, 0, CONFIG.importStatement);
   return lines.join('\n');
 }
@@ -116,7 +116,7 @@ function fixFile(filePath) {
     const content = fs.readFileSync(filePath, 'utf8');
     let newContent = content;
     let changes = 0;
-    
+
     // 检查是否需要跳过
     if (shouldSkipFile(filePath)) {
       const relativePath = path.relative('.', filePath);
@@ -124,7 +124,7 @@ function fixFile(filePath) {
       log.warning(`跳过文件 ${relativePath}: ${reason}`);
       return { success: true, changes: 0, skipped: true };
     }
-    
+
     // 应用所有替换模式
     CONFIG.hardcodedPatterns.forEach(({ pattern, replacement, description }) => {
       const matches = newContent.match(pattern);
@@ -134,16 +134,16 @@ function fixFile(filePath) {
         log.info(`替换 ${matches.length} 个 ${description} URL`);
       }
     });
-    
+
     // 如果有更改，添加导入语句
     if (changes > 0) {
       newContent = addImport(newContent, filePath);
-      
+
       // 写回文件
       fs.writeFileSync(filePath, newContent, 'utf8');
       log.success(`修复文件: ${filePath} (${changes} 处更改)`);
     }
-    
+
     return { success: true, changes, skipped: false };
   } catch (error) {
     log.error(`修复文件失败: ${filePath} - ${error.message}`);
@@ -160,20 +160,20 @@ function scanAndFixDirectory(dirPath, depth = 0, maxDepth = 3) {
     errors: 0,
     files: []
   };
-  
+
   try {
     const items = fs.readdirSync(dirPath);
-    
+
     for (const item of items) {
       const fullPath = path.join(dirPath, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         // 跳过排除的目录
         if (['node_modules', '.next', 'recovery-workspace', 'hub-latest-main', 'backup', 'backups', 'recovered', 'recovery-backups'].includes(item)) {
           continue;
         }
-        
+
         // 限制扫描深度
         if (depth < maxDepth) {
           const subResults = scanAndFixDirectory(fullPath, depth + 1, maxDepth);
@@ -188,13 +188,13 @@ function scanAndFixDirectory(dirPath, depth = 0, maxDepth = 3) {
         const ext = path.extname(item);
         if (['.tsx', '.ts', '.js', '.json'].includes(ext)) {
           results.total++;
-          
+
           const result = fixFile(fullPath);
           results.files.push({
             file: fullPath,
             ...result
           });
-          
+
           if (result.success) {
             if (result.skipped) {
               results.skipped++;
@@ -210,25 +210,25 @@ function scanAndFixDirectory(dirPath, depth = 0, maxDepth = 3) {
   } catch (error) {
     log.error(`扫描目录失败: ${dirPath} - ${error.message}`);
   }
-  
+
   return results;
 }
 
 // 生成修复报告
 function generateReport(results) {
   log.header('硬编码URL修复报告');
-  
+
   log.info(`总文件数: ${results.total}`);
   log.success(`成功修复: ${results.fixed}`);
   log.warning(`跳过文件: ${results.skipped}`);
   log.error(`错误文件: ${results.errors}`);
-  
+
   if (results.files.length > 0) {
     log.header('详细结果');
-    
+
     results.files.forEach(({ file, success, changes, skipped, error }) => {
       const relativePath = path.relative('.', file);
-      
+
       if (skipped) {
         log.warning(`⏭️  ${relativePath} (跳过)`);
       } else if (success && changes > 0) {
@@ -240,7 +240,7 @@ function generateReport(results) {
       }
     });
   }
-  
+
   log.warning('\n🔧 修复说明:');
   log.info('1. 硬编码URL已替换为环境变量');
   log.info('2. 已添加必要的导入语句');
@@ -251,9 +251,9 @@ function generateReport(results) {
 // 主函数
 function main() {
   log.header('开始自动修复硬编码URL');
-  
+
   const startTime = Date.now();
-  
+
   // 优先修复主要目录
   const priorityDirs = ['app', 'components', 'lib', 'utils'];
   let results = {
@@ -263,7 +263,7 @@ function main() {
     errors: 0,
     files: []
   };
-  
+
   for (const dir of priorityDirs) {
     if (fs.existsSync(dir)) {
       log.info(`修复目录: ${dir}`);
@@ -275,13 +275,13 @@ function main() {
       results.files.push(...dirResults.files);
     }
   }
-  
+
   const endTime = Date.now();
-  
+
   generateReport(results);
-  
+
   log.info(`\n⏱️ 修复完成，耗时: ${endTime - startTime}ms`);
-  
+
   // 如果有错误，退出码为1
   if (results.errors > 0) {
     process.exit(1);
@@ -294,11 +294,3 @@ if (require.main === module) {
 }
 
 module.exports = { fixFile, scanAndFixDirectory, generateReport };
-
-
-
-
-
-
-
-

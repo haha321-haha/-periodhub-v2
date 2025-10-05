@@ -7,7 +7,7 @@ export const setupErrorDebugging = () => {
     console.group('🚨 Unhandled Promise Rejection');
     console.error('Reason:', event.reason);
     console.error('Promise:', event.promise);
-    
+
     // 检查是否是403错误相关
     if (event.reason && typeof event.reason === 'object') {
       if (event.reason.code === 403 || event.reason.httpStatus === 200) {
@@ -15,9 +15,9 @@ export const setupErrorDebugging = () => {
         console.error('Full error object:', JSON.stringify(event.reason, null, 2));
       }
     }
-    
+
     console.groupEnd();
-    
+
     // 不阻止默认行为，但记录错误
     // event.preventDefault(); // 取消注释来阻止错误显示在控制台
   });
@@ -44,7 +44,7 @@ export const debugNetwork = () => {
   // 检查所有正在进行的网络请求
   if (window.performance && window.performance.getEntriesByType) {
     const resources = window.performance.getEntriesByType('resource');
-    
+
     resources.forEach((resource, index) => {
       if (resource.name.includes('403') || resource.responseStatus === 403) {
         console.error(`🚫 Found 403 resource [${index}]:`, resource);
@@ -77,43 +77,28 @@ export const useForceTitle = (title) => {
   const setTitle = () => {
     document.title = title;
   };
-  
+
   // 多种触发方式
   setTitle(); // 立即执行
   setTimeout(setTitle, 0); // 下一个事件循环
   setTimeout(setTitle, 100); // 100ms后
   setTimeout(setTitle, 500); // 500ms后
   setTimeout(setTitle, 1000); // 1秒后
-  
+
   // 页面完全加载后
   if (document.readyState !== 'complete') {
     window.addEventListener('load', setTitle);
   }
-  
+
   // 用户交互后
   const handleUserInteraction = () => {
     setTitle();
     document.removeEventListener('click', handleUserInteraction, { once: true });
   };
-  
+
   document.addEventListener('click', handleUserInteraction, { once: true });
-  
+
   return () => {
     window.removeEventListener('load', setTitle);
   };
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

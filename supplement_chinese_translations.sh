@@ -26,7 +26,7 @@ declare -A translations=(
 for key in "${!translations[@]}"; do
     value="${translations[$key]}"
     echo "添加键: $key = $value"
-    
+
     # 使用jq添加键值对
     jq --arg key "$key" --arg value "$value" '.[$key] = $value' messages/zh.json > temp.json && mv temp.json messages/zh.json
 done

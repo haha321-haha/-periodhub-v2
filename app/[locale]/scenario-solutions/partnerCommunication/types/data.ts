@@ -2,8 +2,8 @@
  * 数据管理和存储相关类型定义
  */
 
-import { QuizStage, QuizResult, StageProgress } from './quiz';
-import { UserPreferences } from './preferences';
+import { QuizStage, QuizResult, StageProgress } from "./quiz";
+import { UserPreferences } from "./preferences";
 
 // 数据存储类型
 export interface DataStorage {
@@ -15,7 +15,7 @@ export interface DataStorage {
     lastUpdated: Date;
     version: string;
   };
-  
+
   // 测试数据
   quizData: {
     stageProgress: Record<QuizStage, StageProgress>;
@@ -23,7 +23,7 @@ export interface DataStorage {
     history: QuizResult[];
     statistics: any;
   };
-  
+
   // 训练数据
   trainingData: {
     progress: Record<string, boolean>;
@@ -31,13 +31,13 @@ export interface DataStorage {
     currentDay: number;
     sessions: any[];
   };
-  
+
   // 元数据
   metadata: {
     appVersion: string;
     dataVersion: string;
     lastBackup: Date | null;
-    syncStatus: 'synced' | 'pending' | 'failed';
+    syncStatus: "synced" | "pending" | "failed";
     deviceId: string;
   };
 }
@@ -47,7 +47,7 @@ export interface DataExport {
   data: DataStorage;
   exportInfo: {
     exportedAt: Date;
-    format: 'json' | 'csv' | 'xml';
+    format: "json" | "csv" | "xml";
     version: string;
     size: number;
     checksum: string;
@@ -76,10 +76,10 @@ export interface DataValidation {
 
 // 数据同步类型
 export interface DataSync {
-  status: 'syncing' | 'success' | 'failed' | 'conflict';
+  status: "syncing" | "success" | "failed" | "conflict";
   lastSync: Date;
   conflicts: DataConflict[];
-  resolution: 'automatic' | 'manual' | 'none';
+  resolution: "automatic" | "manual" | "none";
 }
 
 // 数据冲突类型
@@ -87,8 +87,8 @@ export interface DataConflict {
   field: string;
   localValue: any;
   remoteValue: any;
-  conflictType: 'value' | 'structure' | 'version';
-  resolution: 'local' | 'remote' | 'merge' | 'manual';
+  conflictType: "value" | "structure" | "version";
+  resolution: "local" | "remote" | "merge" | "manual";
 }
 
 // 数据备份类型
@@ -97,16 +97,16 @@ export interface DataBackup {
   data: DataStorage;
   createdAt: Date;
   size: number;
-  type: 'manual' | 'automatic' | 'scheduled';
-  location: 'local' | 'cloud' | 'external';
-  status: 'success' | 'failed' | 'pending';
+  type: "manual" | "automatic" | "scheduled";
+  location: "local" | "cloud" | "external";
+  status: "success" | "failed" | "pending";
 }
 
 // 数据恢复类型
 export interface DataRestore {
   backupId: string;
   restoredAt: Date;
-  status: 'success' | 'failed' | 'partial';
+  status: "success" | "failed" | "partial";
   restoredFields: string[];
   failedFields: string[];
   warnings: string[];
@@ -122,7 +122,7 @@ export interface DataCleanup {
     duplicateEntries: number;
   };
   freedSpace: number; // bytes
-  status: 'success' | 'failed' | 'partial';
+  status: "success" | "failed" | "partial";
 }
 
 // 数据统计类型
@@ -140,7 +140,7 @@ export interface DataMigration {
   fromVersion: string;
   toVersion: string;
   migratedAt: Date;
-  status: 'success' | 'failed' | 'partial';
+  status: "success" | "failed" | "partial";
   migratedFields: string[];
   failedFields: string[];
   warnings: string[];
@@ -161,7 +161,7 @@ export interface DataEncryption {
   keySize: number;
   encryptedAt: Date;
   isEncrypted: boolean;
-  encryptionLevel: 'low' | 'medium' | 'high';
+  encryptionLevel: "low" | "medium" | "high";
 }
 
 // 数据完整性类型
@@ -197,7 +197,7 @@ export interface DataAccessControl {
 // 数据访问日志类型
 export interface DataAccessLog {
   timestamp: Date;
-  action: 'read' | 'write' | 'delete' | 'export' | 'import';
+  action: "read" | "write" | "delete" | "export" | "import";
   field: string;
   success: boolean;
   error?: string;
@@ -219,18 +219,17 @@ export interface DataError {
   message: string;
   field: string;
   timestamp: Date;
-  severity: 'low' | 'medium' | 'high' | 'critical';
+  severity: "low" | "medium" | "high" | "critical";
   context: any;
   stackTrace?: string;
 }
 
 // 数据恢复策略类型
 export interface DataRecoveryStrategy {
-  strategy: 'backup' | 'replication' | 'versioning' | 'manual';
-  frequency: 'real-time' | 'hourly' | 'daily' | 'weekly';
+  strategy: "backup" | "replication" | "versioning" | "manual";
+  frequency: "real-time" | "hourly" | "daily" | "weekly";
   retention: number; // days
-  location: 'local' | 'cloud' | 'external';
+  location: "local" | "cloud" | "external";
   encryption: boolean;
   compression: boolean;
 }
-

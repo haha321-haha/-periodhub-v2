@@ -12,13 +12,13 @@ function checkSpecificPages() {
     { path: 'app/[locale]/health-guide/understanding-pain/page.tsx', name: 'Understanding Pain页面' },
     { path: 'app/[locale]/interactive-tools/symptom-assessment/page.tsx', name: 'Symptom Assessment页面' }
   ];
-  
+
   let shortDescriptions = [];
-  
+
   pages.forEach(page => {
     if (fs.existsSync(page.path)) {
       const content = fs.readFileSync(page.path, 'utf8');
-      
+
       // 查找description字段
       const descMatches = content.match(/description:\s*['"`](.*?)['"`]/g);
       if (descMatches) {
@@ -36,7 +36,7 @@ function checkSpecificPages() {
       }
     }
   });
-  
+
   return shortDescriptions;
 }
 
@@ -44,16 +44,16 @@ function checkSpecificPages() {
 function checkHealthGuidePages() {
   const healthGuideDir = 'app/[locale]/health-guide';
   let shortDescriptions = [];
-  
+
   if (fs.existsSync(healthGuideDir)) {
     const files = fs.readdirSync(healthGuideDir, { withFileTypes: true });
-    
+
     files.forEach(file => {
       if (file.isDirectory()) {
         const pagePath = path.join(healthGuideDir, file.name, 'page.tsx');
         if (fs.existsSync(pagePath)) {
           const content = fs.readFileSync(pagePath, 'utf8');
-          
+
           // 查找description字段
           const descMatches = content.match(/description:\s*['"`](.*?)['"`]/g);
           if (descMatches) {
@@ -73,7 +73,7 @@ function checkHealthGuidePages() {
       }
     });
   }
-  
+
   return shortDescriptions;
 }
 
@@ -81,16 +81,16 @@ function checkHealthGuidePages() {
 function checkScenarioPages() {
   const scenarioDir = 'app/[locale]/scenario-solutions';
   let shortDescriptions = [];
-  
+
   if (fs.existsSync(scenarioDir)) {
     const files = fs.readdirSync(scenarioDir, { withFileTypes: true });
-    
+
     files.forEach(file => {
       if (file.isDirectory()) {
         const pagePath = path.join(scenarioDir, file.name, 'page.tsx');
         if (fs.existsSync(pagePath)) {
           const content = fs.readFileSync(pagePath, 'utf8');
-          
+
           // 查找description字段
           const descMatches = content.match(/description:\s*['"`](.*?)['"`]/g);
           if (descMatches) {
@@ -110,14 +110,14 @@ function checkScenarioPages() {
       }
     });
   }
-  
+
   return shortDescriptions;
 }
 
 // 主检查函数
 function comprehensiveMetaCheck() {
   console.log('=== 全面Meta Descriptions长度检查报告 ===\n');
-  
+
   // 检查文章页面（中文）
   const articleShortDescs = checkArticleMetaDescriptions();
   console.log('📚 中文文章页面meta descriptions长度问题:');
@@ -127,7 +127,7 @@ function comprehensiveMetaCheck() {
     console.log(`   内容: ${item.description}`);
     console.log('');
   });
-  
+
   // 检查其他页面
   const pageShortDescs = checkSpecificPages();
   console.log('📄 主要页面meta descriptions长度问题:');
@@ -138,7 +138,7 @@ function comprehensiveMetaCheck() {
     console.log(`   内容: ${item.description}`);
     console.log('');
   });
-  
+
   // 检查健康指南子页面
   const healthGuideShortDescs = checkHealthGuidePages();
   console.log('🏥 健康指南子页面meta descriptions长度问题:');
@@ -149,7 +149,7 @@ function comprehensiveMetaCheck() {
     console.log(`   内容: ${item.description}`);
     console.log('');
   });
-  
+
   // 检查场景解决方案页面
   const scenarioShortDescs = checkScenarioPages();
   console.log('🎯 场景解决方案页面meta descriptions长度问题:');
@@ -160,7 +160,7 @@ function comprehensiveMetaCheck() {
     console.log(`   内容: ${item.description}`);
     console.log('');
   });
-  
+
   // 总计
   const totalShort = articleShortDescs.length + pageShortDescs.length + healthGuideShortDescs.length + scenarioShortDescs.length;
   console.log('📊 总计问题页面数量:', totalShort);
@@ -168,7 +168,7 @@ function comprehensiveMetaCheck() {
   console.log('📊 主要页面问题:', pageShortDescs.length);
   console.log('📊 健康指南子页面问题:', healthGuideShortDescs.length);
   console.log('📊 场景解决方案页面问题:', scenarioShortDescs.length);
-  
+
   return {
     total: totalShort,
     articles: articleShortDescs.length,
@@ -187,14 +187,14 @@ function checkArticleMetaDescriptions() {
   const articlesDir = 'content/articles/en';
   const files = fs.readdirSync(articlesDir);
   let shortDescriptions = [];
-  
+
   files.forEach(file => {
     if (file.endsWith('.md')) {
       const content = fs.readFileSync(path.join(articlesDir, file), 'utf8');
       const frontmatter = content.split('---')[1];
       if (frontmatter) {
         const seoDescZhMatch = frontmatter.match(/seo_description_zh:\s*['"](.*?)['"]/);
-        
+
         if (seoDescZhMatch) {
           const desc = seoDescZhMatch[1];
           if (desc.length < 150) {
@@ -209,10 +209,8 @@ function checkArticleMetaDescriptions() {
       }
     }
   });
-  
+
   return shortDescriptions;
 }
 
 const result = comprehensiveMetaCheck();
-
-

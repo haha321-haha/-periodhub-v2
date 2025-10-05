@@ -13,7 +13,7 @@ const targetKeywords = {
   // 中文核心关键词
   zh: [
     '痛经疼痛原理',
-    '痛经机制', 
+    '痛经机制',
     '经期疼痛原因',
     '痛经为什么痛',
     '痛经补镁',
@@ -27,11 +27,11 @@ const targetKeywords = {
     '经期镁缺乏症状',
     '月经期间补镁剂量'
   ],
-  
+
   // 英文核心关键词
   en: [
     'period pain mechanisms',
-    'menstrual cramp causes', 
+    'menstrual cramp causes',
     'why periods hurt',
     'dysmenorrhea pathophysiology',
     'magnesium period pain',
@@ -56,7 +56,7 @@ const targetPages = [
     locale: 'zh'
   },
   {
-    url: 'https://www.periodhub.health/en/interactive-tools/symptom-assessment', 
+    url: 'https://www.periodhub.health/en/interactive-tools/symptom-assessment',
     title: 'Period Pain Calculator',
     primaryKeywords: ['period pain calculator', 'menstrual pain assessment', 'dysmenorrhea severity test'],
     locale: 'en'
@@ -84,14 +84,14 @@ const performanceTargets = {
     'magnesium menstrual cramps': { current: 10, target: 5, priority: 'medium' },
     '痛经计算器': { current: 'unranked', target: 3, priority: 'high' }
   },
-  
+
   trafficTargets: {
     month1: { increase: '15%', description: 'Quick wins from title optimization' },
     month2: { increase: '35%', description: 'Content optimization takes effect' },
     month3: { increase: '60%', description: 'Tool optimization completed' },
     month6: { increase: '120%', description: 'Long-tail keyword effects' }
   },
-  
+
   userBehaviorTargets: {
     pageStayTime: { current: '45s', target: '90s', increase: '+100%' },
     toolUsageRate: { current: '12%', target: '25%', increase: '+108%' },
@@ -110,14 +110,14 @@ const ga4EventConfig = {
       trigger: 'click on emergency relief guide'
     },
     {
-      eventName: 'magnesium_guide_viewed', 
+      eventName: 'magnesium_guide_viewed',
       category: 'Medical_Content',
       description: '镁补充指南查看',
       trigger: 'view magnesium supplementation guide'
     },
     {
       eventName: 'pain_mechanism_explored',
-      category: 'Medical_Content', 
+      category: 'Medical_Content',
       description: '疼痛机制内容探索',
       trigger: 'expand pain mechanism sections'
     },
@@ -145,14 +145,14 @@ function generateMonitoringConfig() {
     targetPages,
     performanceTargets,
     ga4EventConfig,
-    
+
     // 监测计划
     monitoringSchedule: {
       daily: ['keyword ranking checks', 'traffic analysis'],
       weekly: ['content performance review', 'user behavior analysis'],
       monthly: ['comprehensive SEO audit', 'target adjustment']
     },
-    
+
     // 报告模板
     reportTemplate: {
       keywordRankingReport: {
@@ -161,17 +161,17 @@ function generateMonitoringConfig() {
         format: 'json + csv export'
       },
       trafficAnalysisReport: {
-        frequency: 'monthly', 
+        frequency: 'monthly',
         metrics: ['organic traffic growth', 'page views', 'session duration', 'bounce rate'],
         format: 'dashboard + pdf summary'
       }
     }
   };
-  
+
   // 保存配置文件
   const configPath = path.join(__dirname, '../seo-monitoring-config.json');
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
-  
+
   console.log('✅ SEO监测配置已生成:', configPath);
   return config;
 }
@@ -186,7 +186,7 @@ function generateGA4TrackingCode() {
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'GA_MEASUREMENT_ID');
-  
+
   // 医疗内容专用事件追踪函数
   function trackMedicalEvent(eventName, contentType, additionalParams = {}) {
     gtag('event', eventName, {
@@ -197,10 +197,10 @@ function generateGA4TrackingCode() {
       'timestamp': new Date().toISOString(),
       ...additionalParams
     });
-    
+
     console.log('📊 Medical event tracked:', eventName, contentType);
   }
-  
+
   // 自动追踪关键交互
   document.addEventListener('DOMContentLoaded', function() {
     // 紧急指南使用追踪
@@ -212,7 +212,7 @@ function generateGA4TrackingCode() {
         });
       });
     }
-    
+
     // 疼痛机制内容展开追踪
     const mechanismSections = document.querySelectorAll('[data-mechanism-section]');
     mechanismSections.forEach(section => {
@@ -223,7 +223,7 @@ function generateGA4TrackingCode() {
         });
       });
     });
-    
+
     // 医疗声明查看追踪（使用Intersection Observer）
     const disclaimer = document.querySelector('[data-component="medical-disclaimer"]');
     if (disclaimer) {
@@ -236,17 +236,17 @@ function generateGA4TrackingCode() {
           }
         });
       }, { threshold: 0.5 });
-      
+
       observer.observe(disclaimer);
     }
-    
+
     // 疼痛计算器完成追踪
     const painCalculator = document.querySelector('[data-component="pain-calculator"]');
     if (painCalculator) {
       painCalculator.addEventListener('submit', (e) => {
         const formData = new FormData(e.target);
         const painLevel = formData.get('painLevel');
-        
+
         trackMedicalEvent('pain_calculator_completed', 'assessment_tool', {
           'pain_level': painLevel,
           'assessment_type': 'severity_calculator'
@@ -259,7 +259,7 @@ function generateGA4TrackingCode() {
 
   const trackingPath = path.join(__dirname, '../ga4-medical-tracking.html');
   fs.writeFileSync(trackingPath, trackingCode, 'utf8');
-  
+
   console.log('✅ GA4追踪代码已生成:', trackingPath);
   return trackingCode;
 }
@@ -267,29 +267,29 @@ function generateGA4TrackingCode() {
 // 主执行函数
 function main() {
   console.log('🚀 开始设置PeriodHub SEO监测系统...\n');
-  
+
   try {
     // 生成监测配置
     const config = generateMonitoringConfig();
-    console.log('📊 监测目标关键词数量:', 
+    console.log('📊 监测目标关键词数量:',
       config.targetKeywords.zh.length + config.targetKeywords.en.length);
-    
+
     // 生成GA4追踪代码
     generateGA4TrackingCode();
-    
+
     // 输出执行摘要
     console.log('\n📋 SEO监测设置完成摘要:');
     console.log('├── 目标关键词:', config.targetKeywords.zh.length + config.targetKeywords.en.length, '个');
     console.log('├── 监测页面:', config.targetPages.length, '个');
     console.log('├── GA4事件:', config.ga4EventConfig.medicalContentEvents.length, '个');
     console.log('└── 预期效果: 6个月内有机流量增长120%');
-    
+
     console.log('\n🎯 下一步行动:');
     console.log('1. 将GA4追踪代码添加到页面头部');
     console.log('2. 在Google Search Console中设置关键词监测');
     console.log('3. 配置每周自动化SEO报告');
     console.log('4. 开始执行内容优化计划');
-    
+
   } catch (error) {
     console.error('❌ 设置过程中出现错误:', error.message);
     process.exit(1);

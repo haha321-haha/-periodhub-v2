@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect } from 'react';
-import { 
-  initMobileOptimization, 
-  optimizeTouchEvents, 
-  isMobile 
+import {
+  initMobileOptimization,
+  optimizeTouchEvents,
+  isMobile
 } from '@/lib/mobile-performance';
 
 /**
@@ -15,24 +15,24 @@ export default function MobileOptimization() {
   useEffect(() => {
     // 初始化移动端优化
     initMobileOptimization();
-    
+
     // 优化触摸事件
     optimizeTouchEvents();
-    
+
     // 添加移动端特定的meta标签
     if (isMobile()) {
       addMobileMetaTags();
     }
-    
+
     // 设置viewport优化
     optimizeViewport();
-    
+
     // 预加载关键资源
     preloadCriticalResources();
-    
+
     // 性能监控
     setupPerformanceMonitoring();
-    
+
   }, []);
 
   return null; // 这是一个无UI的组件
@@ -47,21 +47,21 @@ function addMobileMetaTags() {
     meta1.content = 'yes';
     document.head.appendChild(meta1);
   }
-  
+
   if (!document.querySelector('meta[name="apple-mobile-web-app-capable"]')) {
     const meta2 = document.createElement('meta');
     meta2.name = 'apple-mobile-web-app-capable';
     meta2.content = 'yes';
     document.head.appendChild(meta2);
   }
-  
+
   if (!document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')) {
     const meta3 = document.createElement('meta');
     meta3.name = 'apple-mobile-web-app-status-bar-style';
     meta3.content = 'default';
     document.head.appendChild(meta3);
   }
-  
+
   if (!document.querySelector('meta[name="format-detection"]')) {
     const meta4 = document.createElement('meta');
     meta4.name = 'format-detection';
@@ -76,7 +76,7 @@ function optimizeViewport() {
   if (viewport) {
     // 移动端优化viewport
     if (isMobile()) {
-      viewport.setAttribute('content', 
+      viewport.setAttribute('content',
         'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'
       );
     }
@@ -91,7 +91,7 @@ function preloadCriticalResources() {
     { href: '/images/hero-bg.jpg', as: 'image' },
     { href: '/icon.svg', as: 'image' }
   ];
-  
+
   criticalResources.forEach(resource => {
     // 检查是否已经预加载
     const existing = document.querySelector(`link[href="${resource.href}"]`);
@@ -100,15 +100,15 @@ function preloadCriticalResources() {
       link.rel = 'preload';
       link.href = resource.href;
       link.as = resource.as;
-      
+
       if (resource.type) {
         link.type = resource.type;
       }
-      
+
       if (resource.crossorigin) {
         link.crossOrigin = resource.crossorigin;
       }
-      
+
       document.head.appendChild(link);
     }
   });
@@ -120,7 +120,7 @@ function setupPerformanceMonitoring() {
   window.addEventListener('load', () => {
     setTimeout(() => {
       const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-      
+
       if (navigation) {
         const metrics = {
           dns: navigation.domainLookupEnd - navigation.domainLookupStart,
@@ -131,16 +131,16 @@ function setupPerformanceMonitoring() {
           load: navigation.loadEventEnd - navigation.loadEventStart,
           total: navigation.loadEventEnd - navigation.fetchStart
         };
-        
+
         console.log('Page Load Metrics:', metrics);
-        
+
         // 发送性能数据到分析服务
         if (typeof window !== 'undefined' && (window as any).gtag) {
           (window as any).gtag('event', 'page_load_performance', {
             custom_map: metrics
           });
         }
-        
+
         // 如果性能较差，记录警告
         if (metrics.total > 3000) {
           console.warn('Slow page load detected:', metrics.total + 'ms');
@@ -148,23 +148,23 @@ function setupPerformanceMonitoring() {
       }
     }, 0);
   });
-  
+
   // 监控用户交互性能
   let interactionStart = 0;
-  
+
   ['click', 'touchstart', 'keydown'].forEach(eventType => {
     document.addEventListener(eventType, () => {
       interactionStart = performance.now();
     }, { passive: true });
   });
-  
+
   // 监控长任务
   if ('PerformanceObserver' in window) {
     const observer = new PerformanceObserver((list) => {
       list.getEntries().forEach(entry => {
         if (entry.duration > 50) {
           console.warn('Long task detected:', entry.duration + 'ms');
-          
+
           // 发送长任务数据
           if (typeof window !== 'undefined' && (window as any).gtag) {
             (window as any).gtag('event', 'long_task', {
@@ -175,7 +175,7 @@ function setupPerformanceMonitoring() {
         }
       });
     });
-    
+
     observer.observe({ entryTypes: ['longtask'] });
   }
 }

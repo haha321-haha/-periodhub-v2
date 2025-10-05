@@ -19,7 +19,7 @@ Command
 curl -s -I https://www.periodhub.health/.well-known/49c6581aaa713a83b14b2d47022e79b6.txt
 HTTP/1.1 200 Connection established
 
-HTTP/2 200 
+HTTP/2 200
 accept-ranges: bytes
 access-control-allow-origin: *
 age: 0
@@ -80,7 +80,7 @@ npm run indexnow:submit
 📊 提交URL数量: 31
 ❌ 提交失败! 状态码: 422
 ❌ 第 1 批提交失败: HTTP 422: {"code":"InvalidRequestParameters","message":"One or more URLs are not related to y
-our site verified through the keylocation parameter. Please verify URLs before submitting."}                     
+our site verified through the keylocation parameter. Please verify URLs before submitting."}
 🎉 IndexNow自动提交完成！
 📈 搜索引擎将加速索引这些页面
 ⏰ 预计1-3天内看到索引效果
@@ -231,8 +231,8 @@ curl -s -L https://periodhub.health/.well-known/a3f202e9872f45238294db525b233bf5
               </script><style>
             /* 关键CSS - 防止布局偏移 */
             html { scroll-behavior: smooth; }
-            body { 
-              margin: 0; 
+            body {
+              margin: 0;
               font-family: "Noto Sans SC", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang
  SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;                          line-height: 1.6;
               -webkit-font-smoothing: antialiased;
@@ -242,7 +242,7 @@ curl -s -L https://periodhub.health/.well-known/a3f202e9872f45238294db525b233bf5
             * { box-sizing: border-box; }
             img, video { max-width: 100%; height: auto; }
           </style><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><b
-ody class="__className_eb35fb"><div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50"><div class="text-center px-4"><h1 class="text-6xl font-bold text-gray-900 mb-4">404</h1><h2 class="text-2xl font-semibold text-gray-700 mb-6">页面未找到</h2><p class="text-gray-600 mb-8 max-w-md mx-auto">抱歉，您访问的页面不存在。可能是链接错误或页面已被移动。</p><div class="space-y-4"><a class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors" href="/zh">返回首页</a><div class="text-sm text-gray-500"><a class="text-primary-600 hover:underline mr-4" href="/zh/articles">文章中心</a><a class="text-primary-600 hover:underline mr-4" href="/zh/interactive-tools">互动工具</a><a class="text-primary-600 hover:underline" href="/zh/immediate-relief">即时缓解</a></div></div></div></div><script src="/_next/static/chunks/webpack-38c985cd9e7857c2.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,"1:HL[\"/_next/static/media/a7d1cce8496465df-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n2:HL[\"/_next/static/css/fe01b9ebb052c7f7.css\",\"style\"]\n3:HL[\"/_next/static/css/590d153117db31da.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"4:I[12846,[],\"\"]\n6:I[72972,[\"2972\",\"static/chunks/2972-20b5f44916cc5908.js\",\"9160\",\"static/chunks/app/not-found-58a209729f9e7abe.js\"],\"\"]\n7:I[4707,[],\"\"]\n8:I[36423,[],\"\"]\n9:I[13490,[\"7601\",\"static/chunks/app/error-7de3e35fefcf7cb2.js\"],\"default\"]\nb:I[61060,[],\"\"]\nc:[]\n"])</script><script>self.__next_f.push([1,"0:[\"$\",\"$L4\",null,{\"buildId\":\"7WPo7vT1iFRK-gwLM9NGR\",\"assetPrefix\":\"\",\"urlParts\":[\"\",\"_not-found\"],\"initialTree\":[\"\",{\"children\":[\"/_not-found\",{\"children\":[\"__PAGE__\",{}]}]},\"$undefined\",\"$undefined\",true],\"initialSeedData\":[\"\",{\"children\":[\"/_not-found\",{\"children\":[\"__PAGE__\",{},[[\"$L5\",[\"$\",\"div\",null,{\"className\":\"min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50\",\"children\":[\"$\",\"div\",null,{\"className\":\"text-center px-4\",\"children\":[[\"$\",\"h1\",null,{\"className\":\"text-6xl font-bold text-gray-900 mb-4\",\"children\":\"404\"}],[\"$\",\"h2\",null,{\"className\":\"text-2xl font-semibold text-gray-700 mb-6\",\"children\":\"页面未找到\"}],[\"$\",\"p\",null,{\"className\":\"text-gray-600 mb-8 max-w-md mx-auto\",\"children\":\"抱歉，您访问的页面不存在。可能是链接错误或页面已被移动。\"}],[\"$\",\"div\",null,{\"className\":\"space-y-4\",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/zh\",\"className\":\"inline-block bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors\",\"children\":\"返回首页\"}],[\"$\",\"div\",null,{\"className\":\"text-sm text-gray-500\",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/zh/articles\",\"className\":\"text-primary-600 hover:underline mr-4\",\"children\":\"文章中心\"}],[\"$\",\"$L6\",null,{\"href\":\"/zh/interactive-tools\",\"className\":\"text-primary-600 hover:underline mr-4\",\"children\":\"互动工具\"}],[\"$\",\"$L6\",null,{\"href\":\"/zh/immediate-relief\",\"className\":\"text-primary-600 hover:underline\",\"children\":\"即时缓解\"}]]}]]}]]}]}],null],null],null]},[null,[\"$\",\"$L7\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"/_not-found\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L8\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/fe01b9ebb052c7f7.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/590d153117db31da.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh-CN\",\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"link\",null,{\"rel\":\"dns-prefetch\",\"href\":\"//www.googletagmanager.com\"}],[\"$\",\"link\",null,{\"rel\":\"dns-prefetch\",\"href\":\"//pagead2.googlesyndication.com\"}],[\"$\",\"link\",null,{\"rel\":\"dns-prefetch\",\"href\":\"//www.clarity.ms\"}],[\"$\",\"link\",null,{\"rel\":\"preconnect\",\"href\":\"https://fonts.googleapis.com\"}],[\"$\",\"link\",null,{\"rel\":\"preconnect\",\"href\":\"https://fonts.gstatic.com\",\"crossOrigin\":\"anonymous\"}],[\"$\",\"meta\",null,{\"name\":\"format-detection\",\"content\":\"telephone=no\"}],[\"$\",\"meta\",null,{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",null,{\"name\":\"apple-mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",null,{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",null,{\"name\":\"google-site-verification\",\"content\":\"1cZ9WUBHeRB2lMoPes66cXWCTkycozosPw4_PnNMoGk\"}],[\"$\",\"meta\",null,{\"name\":\"msvalidate.01\",\"content\":\"12D5EA89A249696AACD3F155B64C5E56\"}],[\"$\",\"meta\",null,{\"name\":\"robots\",\"content\":\"index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1\"}],[\"$\",\"link\",null,{\"rel\":\"icon\",\"href\":\"/icon.svg\",\"type\":\"image/svg+xml\"}],[\"$\",\"link\",null,{\"rel\":\"icon\",\"href\":\"/favicon-32x32.png\",\"sizes\":\"32x32\",\"type\":\"image/png\"}],[\"$\",\"link\",null,{\"rel\":\"icon\",\"href\":\"/favicon-16x16.png\",\"sizes\":\"16x16\",\"type\":\"image/png\"}],[\"$\",\"link\",null,{\"rel\":\"apple-touch-icon\",\"href\":\"/apple-touch-icon.png\"}],[\"$\",\"link\",null,{\"rel\":\"manifest\",\"href\":\"/manifest.json\"}],[[\"$\",\"script\",null,{\"async\":true,\"src\":\"https://www.googletagmanager.com/gtag/js?id=G-YOUR_GA_ID\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\n                  window.dataLayer = window.dataLayer || [];\\n                  function gtag(){dataLayer.push(arguments);}\\n                  gtag('js', new Date());\\n                  gtag('config', 'G-YOUR_GA_ID', {\\n                    page_title: document.title,\\n                    page_location: window.location.href,\\n                    anonymize_ip: true,\\n                    allow_google_signals: false,\\n                    allow_ad_personalization_signals: false\\n                  });\\n                \"}}]],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\n                (function(c,l,a,r,i,t,y){\\n                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};\\n                  t=l.createElement(r);t.async=1;t.src=\\\"https://www.clarity.ms/tag/\\\"+i;\\n                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);\\n                })(window, document, \\\"clarity\\\", \\\"script\\\", \\\"ssdsoc827u\\\");\\n              \"}}],[\"$\",\"script\",null,{\"async\":true,\"src\":\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5773162579508714\",\"crossOrigin\":\"anonymous\"}],[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\n            /* 关键CSS - 防止布局偏移 */\\n            html { scroll-behavior: smooth; }\\n            body { \\n              margin: 0; \\n              font-family: \\\"Noto Sans SC\\\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \\\"PingFang SC\\\", \\\"Hiragino Sans GB\\\", \\\"Microsoft YaHei\\\", \\\"Segoe UI\\\", Roboto, \\\"Helvetica Neue\\\", Arial, sans-serif;\\n              line-height: 1.6;\\n              -webkit-font-smoothing: antialiased;\\n              -moz-osx-font-smoothing: grayscale;\\n              text-rendering: optimizeLegibility;\\n            }\\n            * { box-sizing: border-box; }\\n            img, video { max-width: 100%; height: auto; }\\n          \"}}]]}],[\"$\",\"body\",null,{\"className\":\"__className_eb35fb\",\"children\":[\"$\",\"$L7\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$9\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L8\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[\"$\",\"div\",null,{\"className\":\"min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50\",\"children\":[\"$\",\"div\",null,{\"className\":\"text-center px-4\",\"children\":[[\"$\",\"h1\",null,{\"className\":\"text-6xl font-bold text-gray-900 mb-4\",\"children\":\"404\"}],[\"$\",\"h2\",null,{\"className\":\"text-2xl font-semibold text-gray-700 mb-6\",\"children\":\"页面未找到\"}],[\"$\",\"p\",null,{\"className\":\"text-gray-600 mb-8 max-w-md mx-auto\",\"children\":\"抱歉，您访问的页面不存在。可能是链接错误或页面已被移动。\"}],[\"$\",\"div\",null,{\"className\":\"space-y-4\",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/zh\",\"className\":\"inline-block bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors\",\"children\":\"返回首页\"}],[\"$\",\"div\",null,{\"className\":\"text-sm text-gray-500\",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/zh/articles\",\"className\":\"text-primary-600 hover:underline mr-4\",\"children\":\"文章中心\"}],[\"$\",\"$L6\",null,{\"href\":\"/zh/interactive-tools\",\"className\":\"text-primary-600 hover:underline mr-4\",\"children\":\"互动工具\"}],[\"$\",\"$L6\",null,{\"href\":\"/zh/immediate-relief\",\"className\":\"text-primary-600 hover:underline\",\"children\":\"即时缓解\"}]]}]]}]]}]}],\"notFoundStyles\":[]}]}]]}]],null],null],\"couldBeIntercepted\":false,\"initialHead\":[[\"$\",\"meta\",null,{\"name\":\"robots\",\"content\":\"noindex\"}],\"$La\"],\"globalErrorComponent\":\"$b\",\"missingSlots\":\"$Wc\"}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes\"}],[\"$\",\"meta\",\"1\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"2\",{\"children\":\"PeriodHub - 专业痛经缓解方 法和月经健康管理平台\"}],[\"$\",\"meta\",\"3\",{\"name\":\"description\",\"content\":\"提供42篇专业文章、24个实用工具，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。\"}],[\"$\",\"meta\",\"4\",{\"name\":\"author\",\"content\":\"PeriodHub Team\"}],[\"$\",\"link\",\"5\",{\"rel\":\"manifest\",\"href\":\"/manifest.webmanifest\",\"crossOrigin\":\"use-credentials\"}],[\"$\",\"meta\",\"6\",{\"name\":\"keywords\",\"content\":\"痛经怎么缓解最快方法,痛经吃什么药最有效,月经推迟几天算正常,月经量少是什么原因,痛经缓解,月经疼痛,经期 健康,女性健康,月经健康管理,经期疼痛怎么办,中医调理,menstrual cramps relief,period pain remedies,how to stop period pain,natural period pain relief\"}],[\"$\",\"meta\",\"7\",{\"name\":\"creator\",\"content\":\"PeriodHub\"}],[\"$\",\"meta\",\"8\",{\"name\":\"publisher\",\"content\":\"PeriodHub\"}],[\"$\",\"meta\",\"9\",{\"name\":\"theme-color\",\"content\":\"#9333ea\"}],[\"$\",\"meta\",\"10\",{\"name\":\"color-scheme\",\"content\":\"light\"}],[\"$\",\"meta\",\"11\",{\"name\":\"format-detection\",\"content\":\"telephone=no, address=no, email=no\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:title\",\"content\":\"PeriodHub - 专业女性健康管理平台\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:description\",\"content\":\"专业的女性月经健康管理平台，提供中西医结合的痛经解决方案。\"}],[\"$\",\"meta\",\"14\",{\"property\":\"og:url\",\"content\":\"https://periodhub.health\"}],[\"$\",\"meta\",\"15\",{\"property\":\"og:site_name\",\"content\":\"PeriodHub\"}],[\"$\",\"meta\",\"16\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"17\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"18\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"19\",{\"name\":\"twitter:title\",\"content\":\"PeriodHub - 专业女性健康管理平台\"}],[\"$\",\"meta\",\"20\",{\"name\":\"twitter:description\",\"content\":\"专业的女性月经健康管理平台，提供中西医结合的痛经解决方案。\"}],[\"$\",\"link\",\"21\",{\"rel\":\"icon\",\"href\":\"/icon?040dbbaeb70c8654\",\"alt\":\"$undefined\",\"type\":\"image/png\",\"sizes\":\"32x32\"}],[\"$\",\"meta\",\"22\",{\"name\":\"next-size-adjust\"}]]\n"])</script><script>self.__next_f.push([1,"5:null\n"])</script></body></html>%                                                                                              
+ody class="__className_eb35fb"><div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50"><div class="text-center px-4"><h1 class="text-6xl font-bold text-gray-900 mb-4">404</h1><h2 class="text-2xl font-semibold text-gray-700 mb-6">页面未找到</h2><p class="text-gray-600 mb-8 max-w-md mx-auto">抱歉，您访问的页面不存在。可能是链接错误或页面已被移动。</p><div class="space-y-4"><a class="inline-block bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors" href="/zh">返回首页</a><div class="text-sm text-gray-500"><a class="text-primary-600 hover:underline mr-4" href="/zh/articles">文章中心</a><a class="text-primary-600 hover:underline mr-4" href="/zh/interactive-tools">互动工具</a><a class="text-primary-600 hover:underline" href="/zh/immediate-relief">即时缓解</a></div></div></div></div><script src="/_next/static/chunks/webpack-38c985cd9e7857c2.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,"1:HL[\"/_next/static/media/a7d1cce8496465df-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n2:HL[\"/_next/static/css/fe01b9ebb052c7f7.css\",\"style\"]\n3:HL[\"/_next/static/css/590d153117db31da.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"4:I[12846,[],\"\"]\n6:I[72972,[\"2972\",\"static/chunks/2972-20b5f44916cc5908.js\",\"9160\",\"static/chunks/app/not-found-58a209729f9e7abe.js\"],\"\"]\n7:I[4707,[],\"\"]\n8:I[36423,[],\"\"]\n9:I[13490,[\"7601\",\"static/chunks/app/error-7de3e35fefcf7cb2.js\"],\"default\"]\nb:I[61060,[],\"\"]\nc:[]\n"])</script><script>self.__next_f.push([1,"0:[\"$\",\"$L4\",null,{\"buildId\":\"7WPo7vT1iFRK-gwLM9NGR\",\"assetPrefix\":\"\",\"urlParts\":[\"\",\"_not-found\"],\"initialTree\":[\"\",{\"children\":[\"/_not-found\",{\"children\":[\"__PAGE__\",{}]}]},\"$undefined\",\"$undefined\",true],\"initialSeedData\":[\"\",{\"children\":[\"/_not-found\",{\"children\":[\"__PAGE__\",{},[[\"$L5\",[\"$\",\"div\",null,{\"className\":\"min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50\",\"children\":[\"$\",\"div\",null,{\"className\":\"text-center px-4\",\"children\":[[\"$\",\"h1\",null,{\"className\":\"text-6xl font-bold text-gray-900 mb-4\",\"children\":\"404\"}],[\"$\",\"h2\",null,{\"className\":\"text-2xl font-semibold text-gray-700 mb-6\",\"children\":\"页面未找到\"}],[\"$\",\"p\",null,{\"className\":\"text-gray-600 mb-8 max-w-md mx-auto\",\"children\":\"抱歉，您访问的页面不存在。可能是链接错误或页面已被移动。\"}],[\"$\",\"div\",null,{\"className\":\"space-y-4\",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/zh\",\"className\":\"inline-block bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors\",\"children\":\"返回首页\"}],[\"$\",\"div\",null,{\"className\":\"text-sm text-gray-500\",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/zh/articles\",\"className\":\"text-primary-600 hover:underline mr-4\",\"children\":\"文章中心\"}],[\"$\",\"$L6\",null,{\"href\":\"/zh/interactive-tools\",\"className\":\"text-primary-600 hover:underline mr-4\",\"children\":\"互动工具\"}],[\"$\",\"$L6\",null,{\"href\":\"/zh/immediate-relief\",\"className\":\"text-primary-600 hover:underline\",\"children\":\"即时缓解\"}]]}]]}]]}]}],null],null],null]},[null,[\"$\",\"$L7\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"/_not-found\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L8\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\"}]],null]},[[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/fe01b9ebb052c7f7.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/590d153117db31da.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"zh-CN\",\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"link\",null,{\"rel\":\"dns-prefetch\",\"href\":\"//www.googletagmanager.com\"}],[\"$\",\"link\",null,{\"rel\":\"dns-prefetch\",\"href\":\"//pagead2.googlesyndication.com\"}],[\"$\",\"link\",null,{\"rel\":\"dns-prefetch\",\"href\":\"//www.clarity.ms\"}],[\"$\",\"link\",null,{\"rel\":\"preconnect\",\"href\":\"https://fonts.googleapis.com\"}],[\"$\",\"link\",null,{\"rel\":\"preconnect\",\"href\":\"https://fonts.gstatic.com\",\"crossOrigin\":\"anonymous\"}],[\"$\",\"meta\",null,{\"name\":\"format-detection\",\"content\":\"telephone=no\"}],[\"$\",\"meta\",null,{\"name\":\"mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",null,{\"name\":\"apple-mobile-web-app-capable\",\"content\":\"yes\"}],[\"$\",\"meta\",null,{\"name\":\"apple-mobile-web-app-status-bar-style\",\"content\":\"default\"}],[\"$\",\"meta\",null,{\"name\":\"google-site-verification\",\"content\":\"1cZ9WUBHeRB2lMoPes66cXWCTkycozosPw4_PnNMoGk\"}],[\"$\",\"meta\",null,{\"name\":\"msvalidate.01\",\"content\":\"12D5EA89A249696AACD3F155B64C5E56\"}],[\"$\",\"meta\",null,{\"name\":\"robots\",\"content\":\"index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1\"}],[\"$\",\"link\",null,{\"rel\":\"icon\",\"href\":\"/icon.svg\",\"type\":\"image/svg+xml\"}],[\"$\",\"link\",null,{\"rel\":\"icon\",\"href\":\"/favicon-32x32.png\",\"sizes\":\"32x32\",\"type\":\"image/png\"}],[\"$\",\"link\",null,{\"rel\":\"icon\",\"href\":\"/favicon-16x16.png\",\"sizes\":\"16x16\",\"type\":\"image/png\"}],[\"$\",\"link\",null,{\"rel\":\"apple-touch-icon\",\"href\":\"/apple-touch-icon.png\"}],[\"$\",\"link\",null,{\"rel\":\"manifest\",\"href\":\"/manifest.json\"}],[[\"$\",\"script\",null,{\"async\":true,\"src\":\"https://www.googletagmanager.com/gtag/js?id=G-YOUR_GA_ID\"}],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\n                  window.dataLayer = window.dataLayer || [];\\n                  function gtag(){dataLayer.push(arguments);}\\n                  gtag('js', new Date());\\n                  gtag('config', 'G-YOUR_GA_ID', {\\n                    page_title: document.title,\\n                    page_location: window.location.href,\\n                    anonymize_ip: true,\\n                    allow_google_signals: false,\\n                    allow_ad_personalization_signals: false\\n                  });\\n                \"}}]],[\"$\",\"script\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\n                (function(c,l,a,r,i,t,y){\\n                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};\\n                  t=l.createElement(r);t.async=1;t.src=\\\"https://www.clarity.ms/tag/\\\"+i;\\n                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);\\n                })(window, document, \\\"clarity\\\", \\\"script\\\", \\\"ssdsoc827u\\\");\\n              \"}}],[\"$\",\"script\",null,{\"async\":true,\"src\":\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5773162579508714\",\"crossOrigin\":\"anonymous\"}],[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"\\n            /* 关键CSS - 防止布局偏移 */\\n            html { scroll-behavior: smooth; }\\n            body { \\n              margin: 0; \\n              font-family: \\\"Noto Sans SC\\\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \\\"PingFang SC\\\", \\\"Hiragino Sans GB\\\", \\\"Microsoft YaHei\\\", \\\"Segoe UI\\\", Roboto, \\\"Helvetica Neue\\\", Arial, sans-serif;\\n              line-height: 1.6;\\n              -webkit-font-smoothing: antialiased;\\n              -moz-osx-font-smoothing: grayscale;\\n              text-rendering: optimizeLegibility;\\n            }\\n            * { box-sizing: border-box; }\\n            img, video { max-width: 100%; height: auto; }\\n          \"}}]]}],[\"$\",\"body\",null,{\"className\":\"__className_eb35fb\",\"children\":[\"$\",\"$L7\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$9\",\"errorStyles\":[],\"errorScripts\":[],\"template\":[\"$\",\"$L8\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[\"$\",\"div\",null,{\"className\":\"min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50\",\"children\":[\"$\",\"div\",null,{\"className\":\"text-center px-4\",\"children\":[[\"$\",\"h1\",null,{\"className\":\"text-6xl font-bold text-gray-900 mb-4\",\"children\":\"404\"}],[\"$\",\"h2\",null,{\"className\":\"text-2xl font-semibold text-gray-700 mb-6\",\"children\":\"页面未找到\"}],[\"$\",\"p\",null,{\"className\":\"text-gray-600 mb-8 max-w-md mx-auto\",\"children\":\"抱歉，您访问的页面不存在。可能是链接错误或页面已被移动。\"}],[\"$\",\"div\",null,{\"className\":\"space-y-4\",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/zh\",\"className\":\"inline-block bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors\",\"children\":\"返回首页\"}],[\"$\",\"div\",null,{\"className\":\"text-sm text-gray-500\",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/zh/articles\",\"className\":\"text-primary-600 hover:underline mr-4\",\"children\":\"文章中心\"}],[\"$\",\"$L6\",null,{\"href\":\"/zh/interactive-tools\",\"className\":\"text-primary-600 hover:underline mr-4\",\"children\":\"互动工具\"}],[\"$\",\"$L6\",null,{\"href\":\"/zh/immediate-relief\",\"className\":\"text-primary-600 hover:underline\",\"children\":\"即时缓解\"}]]}]]}]]}]}],\"notFoundStyles\":[]}]}]]}]],null],null],\"couldBeIntercepted\":false,\"initialHead\":[[\"$\",\"meta\",null,{\"name\":\"robots\",\"content\":\"noindex\"}],\"$La\"],\"globalErrorComponent\":\"$b\",\"missingSlots\":\"$Wc\"}]\n"])</script><script>self.__next_f.push([1,"a:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes\"}],[\"$\",\"meta\",\"1\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"2\",{\"children\":\"PeriodHub - 专业痛经缓解方 法和月经健康管理平台\"}],[\"$\",\"meta\",\"3\",{\"name\":\"description\",\"content\":\"提供42篇专业文章、24个实用工具，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。\"}],[\"$\",\"meta\",\"4\",{\"name\":\"author\",\"content\":\"PeriodHub Team\"}],[\"$\",\"link\",\"5\",{\"rel\":\"manifest\",\"href\":\"/manifest.webmanifest\",\"crossOrigin\":\"use-credentials\"}],[\"$\",\"meta\",\"6\",{\"name\":\"keywords\",\"content\":\"痛经怎么缓解最快方法,痛经吃什么药最有效,月经推迟几天算正常,月经量少是什么原因,痛经缓解,月经疼痛,经期 健康,女性健康,月经健康管理,经期疼痛怎么办,中医调理,menstrual cramps relief,period pain remedies,how to stop period pain,natural period pain relief\"}],[\"$\",\"meta\",\"7\",{\"name\":\"creator\",\"content\":\"PeriodHub\"}],[\"$\",\"meta\",\"8\",{\"name\":\"publisher\",\"content\":\"PeriodHub\"}],[\"$\",\"meta\",\"9\",{\"name\":\"theme-color\",\"content\":\"#9333ea\"}],[\"$\",\"meta\",\"10\",{\"name\":\"color-scheme\",\"content\":\"light\"}],[\"$\",\"meta\",\"11\",{\"name\":\"format-detection\",\"content\":\"telephone=no, address=no, email=no\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:title\",\"content\":\"PeriodHub - 专业女性健康管理平台\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:description\",\"content\":\"专业的女性月经健康管理平台，提供中西医结合的痛经解决方案。\"}],[\"$\",\"meta\",\"14\",{\"property\":\"og:url\",\"content\":\"https://periodhub.health\"}],[\"$\",\"meta\",\"15\",{\"property\":\"og:site_name\",\"content\":\"PeriodHub\"}],[\"$\",\"meta\",\"16\",{\"property\":\"og:locale\",\"content\":\"zh_CN\"}],[\"$\",\"meta\",\"17\",{\"property\":\"og:type\",\"content\":\"website\"}],[\"$\",\"meta\",\"18\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"19\",{\"name\":\"twitter:title\",\"content\":\"PeriodHub - 专业女性健康管理平台\"}],[\"$\",\"meta\",\"20\",{\"name\":\"twitter:description\",\"content\":\"专业的女性月经健康管理平台，提供中西医结合的痛经解决方案。\"}],[\"$\",\"link\",\"21\",{\"rel\":\"icon\",\"href\":\"/icon?040dbbaeb70c8654\",\"alt\":\"$undefined\",\"type\":\"image/png\",\"sizes\":\"32x32\"}],[\"$\",\"meta\",\"22\",{\"name\":\"next-size-adjust\"}]]\n"])</script><script>self.__next_f.push([1,"5:null\n"])</script></body></html>%
 看到问题了！密钥文件返回的是404页面，说明文件路径有问题。让我检查当前的文件结构：
 
 Searched workspace
@@ -253,7 +253,7 @@ Command
 curl -s -I https://www.periodhub.health/.well-known/a3f202e9872f45238294db525b233bf5.txt
 HTTP/1.1 200 Connection established
 
-HTTP/2 404 
+HTTP/2 404
 accept-ranges: bytes
 access-control-allow-origin: *
 age: 40
@@ -316,8 +316,8 @@ npm run indexnow:verify
               </script><style>
             /* 关键CSS - 防止布局偏移 */
             html { scroll-behavior: smooth; }
-            body { 
-              margin: 0; 
+            body {
+              margin: 0;
               font-family: "Noto Sans SC", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang
  SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;                          line-height: 1.6;
               -webkit-font-smoothing: antialiased;
@@ -367,7 +367,7 @@ npm run indexnow:submit
 📊 提交URL数量: 31
 ❌ 提交失败! 状态码: 422
 ❌ 第 1 批提交失败: HTTP 422: {"code":"InvalidRequestParameters","message":"One or more URLs are not related to y
-our site verified through the keylocation parameter. Please verify URLs before submitting."}                     
+our site verified through the keylocation parameter. Please verify URLs before submitting."}
 🎉 IndexNow自动提交完成！
 📈 搜索引擎将加速索引这些页面
 ⏰ 预计1-3天内看到索引效果
@@ -417,8 +417,8 @@ h=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes"/><link rel=
               </script><style>
             /* 关键CSS - 防止布局偏移 */
             html { scroll-behavior: smooth; }
-            body { 
-              margin: 0; 
+            body {
+              margin: 0;
               font-family: "Noto Sans SC", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang
  SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;                          line-height: 1.6;
               -webkit-font-smoothing: antialiased;
@@ -759,7 +759,7 @@ npm run indexnow:submit
 📊 提交URL数量: 31
 ❌ 提交失败! 状态码: 422
 ❌ 第 1 批提交失败: HTTP 422: {"code":"InvalidRequestParameters","message":"One or more URLs are not related to y
-our site verified through the keylocation parameter. Please verify URLs before submitting."}                     
+our site verified through the keylocation parameter. Please verify URLs before submitting."}
 🎉 IndexNow自动提交完成！
 📈 搜索引擎将加速索引这些页面
 ⏰ 预计1-3天内看到索引效果
@@ -869,7 +869,7 @@ node scripts/deep-indexnow-diagnosis.js
 .                                                                                                                   测试URL: https://periodhub.health/zh
      ⚠️ 状态: 422
      响应: {"code":"InvalidRequestParameters","message":"One or more URLs are not related to your site verified..
-.                                                                                                                
+.
 3️⃣ 测试不同host配置...
    测试Host: www.periodhub.health
      ⚠️ 状态: 422
@@ -877,7 +877,7 @@ node scripts/deep-indexnow-diagnosis.js
 .                                                                                                                   测试Host: periodhub.health
      ⚠️ 状态: 422
      响应: {"code":"InvalidRequestParameters","message":"One or more URLs are not related to your site verified..
-.                                                                                                                
+.
 4️⃣ 测试其他IndexNow端点...
    测试Bing: https://www.bing.com/indexnow
      ⚠️ 状态: 422
@@ -913,9 +913,9 @@ curl -v https://www.periodhub.health/.well-known/a3f202e9872f45238294db525b233bf
 > Host: www.periodhub.health:443
 > User-Agent: curl/8.7.1
 > Proxy-Connection: Keep-Alive
-> 
+>
 < HTTP/1.1 200 Connection established
-< 
+<
 * CONNECT phase completed
 * CONNECT tunnel established, response 200
 * ALPN: curl offers h2,http/1.1
@@ -949,9 +949,9 @@ curl -v https://www.periodhub.health/.well-known/a3f202e9872f45238294db525b233bf
 > Host: www.periodhub.health
 > User-Agent: curl/8.7.1
 > Accept: */*
-> 
+>
 * Request completely sent off
-< HTTP/2 200 
+< HTTP/2 200
 < accept-ranges: bytes
 < access-control-allow-origin: *
 < age: 782
@@ -972,9 +972,9 @@ curl -v https://www.periodhub.health/.well-known/a3f202e9872f45238294db525b233bf
 < x-vercel-id: sfo1::zp7tc-1756338135116-1a135e1a27ed
 < x-xss-protection: 1; mode=block
 < content-length: 32
-< 
+<
 * Connection #0 to host 127.0.0.1 left intact
-a3f202e9872f45238294db525b233bf5%                                                                                
+a3f202e9872f45238294db525b233bf5%
 我发现了一个重要问题！注意最后一行的 % 符号，这表明密钥文件可能没有正确的换行符结尾。让我检查文件内容：
 
 Read file(s)
@@ -1046,7 +1046,7 @@ A3F202E98 72F45238</B116>
 
 请求
 
-POST /IndexNow HTTP/1.1 Content-Type: application/json; charset=utf-8 Host: api.indexnow.org {   "host": "www.example.org",   "key": "a3f202e9872f45238294db525b233bf5",   "keyLocation": "https://www.example.org/a3f202e9872f45238294db525b233bf5.txt",   "urlList": [       "https://www.example.org/url1",       "https://www.example.org/folder/url2",       "https://www.example.org/url3"       ] } 
+POST /IndexNow HTTP/1.1 Content-Type: application/json; charset=utf-8 Host: api.indexnow.org {   "host": "www.example.org",   "key": "a3f202e9872f45238294db525b233bf5",   "keyLocation": "https://www.example.org/a3f202e9872f45238294db525b233bf5.txt",   "urlList": [       "https://www.example.org/url1",       "https://www.example.org/folder/url2",       "https://www.example.org/url3"       ] }
 
 响应
 
@@ -1170,25 +1170,25 @@ Next.js静态文件配置
 
 在 public 目录下创建根级密钥文件
 
-public/a3f202e9872f45238294db525b233bf5.txt 
+public/a3f202e9872f45238294db525b233bf5.txt
 
 文件内容：a3f202e9872f45238294db525b233bf5（无换行符）
 
 更新IndexNow提交脚本 修改 keyLocation 参数：
 
-keyLocation: "https://www.periodhub.health/a3f202e9872f45238294db525b233bf5.txt" 
+keyLocation: "https://www.periodhub.health/a3f202e9872f45238294db525b233bf5.txt"
 
 步骤2：验证文件内容格式
 
 确保密钥文件没有隐藏字符：
 
-# 创建正确格式的文件 echo -n "a3f202e9872f45238294db525b233bf5" > public/a3f202e9872f45238294db525b233bf5.txt  # 验证文件内容（应该正好32字节） wc -c public/a3f202e9872f45238294db525b233bf5.txt 
+# 创建正确格式的文件 echo -n "a3f202e9872f45238294db525b233bf5" > public/a3f202e9872f45238294db525b233bf5.txt  # 验证文件内容（应该正好32字节） wc -c public/a3f202e9872f45238294db525b233bf5.txt
 
 步骤3：标准化URL格式
 
 更新提交的URL格式，确保一致性：
 
-{   "host": "www.periodhub.health",   "key": "a3f202e9872f45238294db525b233bf5",   "keyLocation": "https://www.periodhub.health/a3f202e9872f45238294db525b233bf5.txt",   "urlList": [     "https://www.periodhub.health/",     "https://www.periodhub.health/zh/"   ] } 
+{   "host": "www.periodhub.health",   "key": "a3f202e9872f45238294db525b233bf5",   "keyLocation": "https://www.periodhub.health/a3f202e9872f45238294db525b233bf5.txt",   "urlList": [     "https://www.periodhub.health/",     "https://www.periodhub.health/zh/"   ] }
 
 📋 需要提供的文档清单
 
@@ -1431,12 +1431,12 @@ b.health/a3f202e9872f45238294db525b233bf5.txt                      状态码: 20
 检查URL格式标准化:
    URL 1: https://www.periodhub.
 health/                              协议: https: ✅
-     主机: www.periodhub.health 
+     主机: www.periodhub.health
 ✅                                   路径: /
      尾部斜杠: ✅
    URL 2: https://www.periodhub.
 health/zh/                           协议: https: ✅
-     主机: www.periodhub.health 
+     主机: www.periodhub.health
 ✅                                   路径: /zh/
      尾部斜杠: ✅
 
@@ -1444,10 +1444,10 @@ health/zh/                           协议: https: ✅
 提交测试URL到IndexNow API:
 请求数据:
 {"host":"www.periodhub.health","
-key":"a3f202e9872f45238294db525b233bf5","keyLocation":"https://www.periodhub.health/a3f202e9872f45238294db525b233bf5.txt","urlList":["https://www.periodhub.health/","https://www.periodhub.health/zh/"]}                       
+key":"a3f202e9872f45238294db525b233bf5","keyLocation":"https://www.periodhub.health/a3f202e9872f45238294db525b233bf5.txt","urlList":["https://www.periodhub.health/","https://www.periodhub.health/zh/"]}
 📊 API测试结果:
 状态码: 200
-响应: 
+响应:
 🎉 成功！IndexNow接受了请求
 ✅ 修复生效，422错误已解决
 
@@ -1468,12 +1468,12 @@ b.health/a3f202e9872f45238294db525b233bf5.txt                     URL格式: 标
 1. 密钥文件移至根目录（符合Index
 Now官方建议）                   2. URL格式标准化（提高兼容性）
 3. 减少测试URL数量（避免批量提交
-问题）                          
+问题）
 🚀 下一步:
 1. 如果API测试成功，部署这些更改
 到生产环境                      2. 等待1-3天观察Bing Webmaster T
 ools状态变化                    3. 如果仍有问题，考虑联系IndexNo
-w技术支持                       
+w技术支持
 🎉 太棒了！修复成功！
 
 ✅ 验证结果总结
@@ -1595,12 +1595,12 @@ b.health/a3f202e9872f45238294db525b233bf5.txt                      状态码: 20
 检查URL格式标准化:
    URL 1: https://www.periodhub.
 health/                              协议: https: ✅
-     主机: www.periodhub.health 
+     主机: www.periodhub.health
 ✅                                   路径: /
      尾部斜杠: ✅
    URL 2: https://www.periodhub.
 health/zh/                           协议: https: ✅
-     主机: www.periodhub.health 
+     主机: www.periodhub.health
 ✅                                   路径: /zh/
      尾部斜杠: ✅
 
@@ -1608,10 +1608,10 @@ health/zh/                           协议: https: ✅
 提交测试URL到IndexNow API:
 请求数据:
 {"host":"www.periodhub.health","
-key":"a3f202e9872f45238294db525b233bf5","keyLocation":"https://www.periodhub.health/a3f202e9872f45238294db525b233bf5.txt","urlList":["https://www.periodhub.health/","https://www.periodhub.health/zh/"]}                       
+key":"a3f202e9872f45238294db525b233bf5","keyLocation":"https://www.periodhub.health/a3f202e9872f45238294db525b233bf5.txt","urlList":["https://www.periodhub.health/","https://www.periodhub.health/zh/"]}
 📊 API测试结果:
 状态码: 200
-响应: 
+响应:
 🎉 成功！IndexNow接受了请求
 ✅ 修复生效，422错误已解决
 
@@ -1632,12 +1632,12 @@ b.health/a3f202e9872f45238294db525b233bf5.txt                     URL格式: 标
 1. 密钥文件移至根目录（符合Index
 Now官方建议）                   2. URL格式标准化（提高兼容性）
 3. 减少测试URL数量（避免批量提交
-问题）                          
+问题）
 🚀 下一步:
 1. 如果API测试成功，部署这些更改
 到生产环境                      2. 等待1-3天观察Bing Webmaster T
 ools状态变化                    3. 如果仍有问题，考虑联系IndexNo
-w技术支持                       
+w技术支持
 🎉 完美！IndexNow重新配置成功！
 
 ✅ 验证结果总结

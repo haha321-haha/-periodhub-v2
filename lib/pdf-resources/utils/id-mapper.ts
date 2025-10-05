@@ -200,7 +200,7 @@ export class IDMapper {
    */
   batchMapIds(legacyIds: string[]): Record<string, string | null> {
     const results: Record<string, string | null> = {};
-    
+
     for (const legacyId of legacyIds) {
       results[legacyId] = this.mapId(legacyId);
     }
@@ -459,7 +459,7 @@ export class IDMapper {
 
   private buildReverseMappings(): void {
     this.reverseMappings.clear();
-    
+
     for (const [legacyId, modernId] of Object.entries(LEGACY_ID_MAPPING)) {
       if (!this.reverseMappings.has(modernId)) {
         this.reverseMappings.set(modernId, []);
@@ -469,8 +469,8 @@ export class IDMapper {
   }
 
   private isValidModernId(id: string): boolean {
-    return /^[a-z0-9]+(-[a-z0-9]+)*$/.test(id) && 
-           id.length >= 3 && 
+    return /^[a-z0-9]+(-[a-z0-9]+)*$/.test(id) &&
+           id.length >= 3 &&
            id.length <= 100;
   }
 
@@ -512,7 +512,7 @@ export class IDMapper {
     // 尝试在连字符处截断
     const parts = id.split('-');
     let truncated = '';
-    
+
     for (const part of parts) {
       if ((truncated + '-' + part).length <= maxLength) {
         truncated = truncated ? `${truncated}-${part}` : part;

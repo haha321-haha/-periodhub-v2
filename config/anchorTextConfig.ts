@@ -1,7 +1,7 @@
 // config/anchorTextConfig.ts
 /**
  * 锚文本优化配置 - 最终优化版
- * 
+ *
  * 核心原则：
  * 1. 严格长度控制：6个字符（不含标点）
  * 2. 分类使用动作词：
@@ -24,7 +24,7 @@ export const ANCHOR_TEXTS = {
     comprehensive: '完整医学指南', // 6字，专业化
     related: '相关健康文章'       // 6字，通用化
   },
-  
+
   // 交互工具（使用动作词，6字符）
   tools: {
     main: '使用健康工具',          // 6字，保留动作词
@@ -34,7 +34,7 @@ export const ANCHOR_TEXTS = {
     calculator: '计算影响程度',     // 6字，功能化
     all: '浏览全部工具'            // 6字，保留动作词
   },
-  
+
   // 场景解决方案（场景词优先，6字符）
   scenarios: {
     exercise: '运动期间应对',      // 6字，场景词
@@ -45,7 +45,7 @@ export const ANCHOR_TEXTS = {
     emergency: '紧急处理方法',      // 6字，场景词
     medication: '药物使用建议'     // 6字，场景词
   },
-  
+
   // 导航和主页（含核心词，6字符）
   navigation: {
     main: '痛经管理指南',          // 6字，含核心词
@@ -54,7 +54,7 @@ export const ANCHOR_TEXTS = {
     teen: '青少年专区',           // 5字，简洁化
     therapy: '自然疗法中心'        // 6字，场景词
   },
-  
+
   // CTA按钮（含动作词，6字符）
   cta: {
     viewMore: '查看完整内容',      // 6字，含动作词
@@ -63,21 +63,21 @@ export const ANCHOR_TEXTS = {
     tryNow: '立即体验工具',        // 6字，含动作词
     download: '下载健康资料'        // 6字，含动作词
   },
-  
+
   // PDF下载（含动作词，6字符）
   pdf: {
     guide: '下载完整指南',         // 6字，含动作词
     checklist: '下载应急清单',      // 6字，含动作词
     resources: '下载健康资料'       // 6字，含动作词
   },
-  
+
   // 青少年专区（6字符）
   teen: {
     main: '青少年痛经指南',        // 7字，含核心词（特殊处理）
     development: '发育期健康',      // 6字，场景词
     education: '经期健康教育'       // 6字，含核心词
   },
-  
+
   // 自然疗法（6字符）
   therapy: {
     main: '自然缓解方法',         // 6字，场景词
@@ -127,7 +127,7 @@ export function containsCoreKeyword(text: string): boolean {
  * @returns 核心关键词出现频率
  */
 export function calculateKeywordDensity(): number {
-  const allTexts = Object.values(ANCHOR_TEXTS).flat().map(category => 
+  const allTexts = Object.values(ANCHOR_TEXTS).flat().map(category =>
     Object.values(category).flat()
   ).flat();
   const coreKeywordCount = allTexts.filter(containsCoreKeyword).length;
@@ -140,7 +140,7 @@ export function calculateKeywordDensity(): number {
  */
 export const ANCHOR_TEXT_AB_TEST = {
   enabled: false, // 设置为true启用A/B测试
-  
+
   variants: {
     // 测试是否保留动作词
     withAction: {
@@ -151,7 +151,7 @@ export const ANCHOR_TEXT_AB_TEST = {
       main: '痛经管理指南',
       tools: '健康工具中心'
     },
-    
+
     // 测试关键词密度
     highKeyword: {
       main: '痛经缓解方法',
@@ -162,7 +162,7 @@ export const ANCHOR_TEXT_AB_TEST = {
       health: '健康管理中心'
     }
   },
-  
+
   /**
    * 获取A/B测试锚文本
    * @param section - 页面区域
@@ -172,13 +172,13 @@ export const ANCHOR_TEXT_AB_TEST = {
     if (!this.enabled) {
       return getAnchorText(section as AnchorTextSection, 'main' as AnchorTextKey<AnchorTextSection>);
     }
-    
+
     const variant = this.variants[userGroup];
     if (!variant) {
       return getAnchorText(section as AnchorTextSection, 'main' as AnchorTextKey<AnchorTextSection>);
     }
-    
-    return variant[section as keyof typeof variant] || 
+
+    return variant[section as keyof typeof variant] ||
            getAnchorText(section as AnchorTextSection, 'main' as AnchorTextKey<AnchorTextSection>);
   }
 };
@@ -206,18 +206,18 @@ export const BANNED_ANCHOR_TEXTS = [
  * 锚文本使用统计
  */
 export const ANCHOR_TEXT_STATS = {
-  totalCount: Object.values(ANCHOR_TEXTS).flat().map(category => 
+  totalCount: Object.values(ANCHOR_TEXTS).flat().map(category =>
     Object.values(category).flat()
   ).flat().length,
-  averageLength: Object.values(ANCHOR_TEXTS).flat().map(category => 
+  averageLength: Object.values(ANCHOR_TEXTS).flat().map(category =>
     Object.values(category).flat()
-  ).flat().reduce((sum, text) => sum + text.length, 0) / Object.values(ANCHOR_TEXTS).flat().map(category => 
+  ).flat().reduce((sum, text) => sum + text.length, 0) / Object.values(ANCHOR_TEXTS).flat().map(category =>
     Object.values(category).flat()
   ).flat().length,
   keywordDensity: calculateKeywordDensity(),
-  actionWordCount: Object.values(ANCHOR_TEXTS).flat().map(category => 
+  actionWordCount: Object.values(ANCHOR_TEXTS).flat().map(category =>
     Object.values(category).flat()
-  ).flat().filter(text => 
+  ).flat().filter(text =>
     text.includes('查看') || text.includes('下载') || text.includes('立即') || text.includes('使用')
   ).length
 };
@@ -230,4 +230,3 @@ export function getAnchorTextStats() {
     actionWordPercentage: Math.round((ANCHOR_TEXT_STATS.actionWordCount / ANCHOR_TEXT_STATS.totalCount) * 100)
   };
 }
-

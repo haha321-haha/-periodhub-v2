@@ -35,11 +35,11 @@ export default function RecordTab({ locale }: RecordTabProps) {
     }
 
     setIsRecording(true);
-    
+
     // 模拟记录过程
     setTimeout(() => {
       setIsRecording(false);
-      
+
       // 将存储值映射为已翻译的标签
       const locationLabel = locations.find(l => l.value === painLocation)?.label || painLocation;
       const typeLabel = painTypes.find(ti => ti.value === painType)?.label || painType;
@@ -123,7 +123,7 @@ export default function RecordTab({ locale }: RecordTabProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
           </div>
-          
+
           <div>
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">
               {t('painTracker.toolTitle')}
@@ -139,10 +139,10 @@ export default function RecordTab({ locale }: RecordTabProps) {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 {t('painTracker.painLevel')}
               </label>
-              <input 
-                type="range" 
-                min="1" 
-                max="10" 
+              <input
+                type="range"
+                min="1"
+                max="10"
                 value={painLevel}
                 onChange={(e) => setPainLevel(parseInt(e.target.value))}
                 className="w-full pain-scale cursor-pointer outline-none rounded-lg"
@@ -166,7 +166,7 @@ export default function RecordTab({ locale }: RecordTabProps) {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 {t('painTracker.painLocation')}
               </label>
-              <select 
+              <select
                 value={painLocation}
                 onChange={(e) => setPainLocation(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
@@ -184,7 +184,7 @@ export default function RecordTab({ locale }: RecordTabProps) {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 {t('painTracker.painType')}
               </label>
-              <select 
+              <select
                 value={painType}
                 onChange={(e) => setPainType(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
@@ -198,7 +198,7 @@ export default function RecordTab({ locale }: RecordTabProps) {
               </select>
             </div>
 
-            <button 
+            <button
               onClick={handleRecordPain}
               disabled={isRecording || !painLocation || !painType}
               className={`w-full py-2 px-4 rounded-md transition-colors ${
@@ -220,7 +220,7 @@ export default function RecordTab({ locale }: RecordTabProps) {
             {(painLocation || painType) && (
               <div className="mt-4 p-3 bg-blue-50 rounded-md">
                 <p className="text-sm text-blue-800">
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? `已选择：疼痛程度 ${painLevel}/10${painLocation ? `，位置：${locations.find(l => l.value === painLocation)?.label}` : ''}${painType ? `，类型：${painTypes.find(t => t.value === painType)?.label}` : ''}`
                     : `Selected: Pain level ${painLevel}/10${painLocation ? `, Location: ${locations.find(l => l.value === painLocation)?.label}` : ''}${painType ? `, Type: ${painTypes.find(t => t.value === painType)?.label}` : ''}`
                   }

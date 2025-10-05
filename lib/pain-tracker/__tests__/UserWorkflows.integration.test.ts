@@ -63,7 +63,7 @@ describe('Pain Tracker User Workflows', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockLocalStorage.getItem.mockReturnValue(null);
-    
+
     storage = new LocalStorageAdapter();
     validation = new ValidationService();
     dataManager = new PainDataManager(storage, validation);
@@ -97,7 +97,7 @@ describe('Pain Tracker User Workflows', () => {
       jest.spyOn(storage, 'save').mockResolvedValue();
 
       const savedRecord = await dataManager.saveRecord(firstRecord);
-      
+
       expect(savedRecord).toMatchObject({
         ...firstRecord,
         id: expect.any(String),
@@ -146,7 +146,7 @@ describe('Pain Tracker User Workflows', () => {
 
       // Step 3: User views their history with filtering
       jest.spyOn(storage, 'load').mockResolvedValue(allRecords);
-      
+
       const allUserRecords = await dataManager.getAllRecords();
       expect(allUserRecords).toHaveLength(3);
 
@@ -158,7 +158,7 @@ describe('Pain Tracker User Workflows', () => {
 
       // Step 4: User generates analytics
       const analytics = analyticsEngine.calculateAnalytics(allRecords);
-      
+
       expect(analytics.totalRecords).toBe(3);
       expect(analytics.averagePainLevel).toBeCloseTo(6.0, 1);
       expect(analytics.commonPainTypes.length).toBeGreaterThan(0);
@@ -179,7 +179,7 @@ describe('Pain Tracker User Workflows', () => {
       };
 
       const exportedHTML = await exportManager.exportToHTML(allRecords, analytics, exportOptions);
-      
+
       expect(exportedHTML).toContain('Pain Tracking Report');
       expect(exportedHTML).toContain('Total Records: 3');
       expect(exportedHTML).toContain('Average Pain Level');
@@ -240,7 +240,7 @@ describe('Pain Tracker User Workflows', () => {
 
       // Step 2: User exports data for backup
       const exportData = await dataManager.exportData();
-      
+
       expect(exportData.records).toHaveLength(2);
       expect(exportData.lastBackup).toBeInstanceOf(Date);
 
@@ -347,12 +347,12 @@ describe('Pain Tracker User Workflows', () => {
     it('should handle analytics and insights workflow', async () => {
       // Create records with patterns for analytics testing
       const patternRecords = [];
-      
+
       // Create a month of records with menstrual cycle pattern
       for (let day = 1; day <= 30; day++) {
         let menstrualStatus: MenstrualStatus;
         let painLevel: number;
-        
+
         if (day <= 3) {
           menstrualStatus = day === 1 ? 'day_1' : 'day_2_3';
           painLevel = 8 - day; // Decreasing pain
@@ -394,7 +394,7 @@ describe('Pain Tracker User Workflows', () => {
 
       // Generate analytics
       const analytics = analyticsEngine.calculateAnalytics(savedRecords);
-      
+
       expect(analytics.totalRecords).toBe(30);
       expect(analytics.averagePainLevel).toBeGreaterThan(0);
       expect(analytics.commonPainTypes.length).toBeGreaterThan(0);
@@ -466,7 +466,7 @@ describe('Pain Tracker User Workflows', () => {
       };
 
       const htmlExport = await exportManager.exportToHTML([savedRecord], analytics, htmlOptions);
-      
+
       expect(htmlExport).toContain('<!DOCTYPE html>');
       expect(htmlExport).toContain('Pain Tracking Report');
       expect(htmlExport).toContain('Severe cramping');
@@ -485,13 +485,13 @@ describe('Pain Tracker User Workflows', () => {
       };
 
       const pdfBlob = await exportManager.exportToPDF([savedRecord], analytics, pdfOptions);
-      
+
       expect(pdfBlob).toBeInstanceOf(Blob);
       expect(pdfBlob.type).toBe('application/pdf');
 
       // Test medical summary generation
       const medicalSummary = exportManager.generateMedicalSummary([savedRecord], analytics);
-      
+
       expect(medicalSummary.patientSummary).toContain('pain tracking');
       expect(medicalSummary.keyFindings.length).toBeGreaterThan(0);
       expect(medicalSummary.recommendations.length).toBeGreaterThan(0);
@@ -587,7 +587,7 @@ describe('Pain Tracker User Workflows', () => {
 
       // Test that operations complete within reasonable time
       const startTime = Date.now();
-      
+
       // Save first few records to test performance
       const savedRecords = [];
       for (let i = 0; i < 10; i++) {
@@ -603,7 +603,7 @@ describe('Pain Tracker User Workflows', () => {
       const analyticsStartTime = Date.now();
       const analytics = analyticsEngine.calculateAnalytics(savedRecords);
       const analyticsTime = Date.now() - analyticsStartTime;
-      
+
       expect(analyticsTime).toBeLessThan(1000); // Should complete within 1 second
       expect(analytics.totalRecords).toBe(10);
     });

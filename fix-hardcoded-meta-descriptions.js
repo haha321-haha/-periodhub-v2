@@ -31,11 +31,11 @@ function fixHardcodedMetaDescriptions(filePath) {
     const content = fs.readFileSync(filePath, 'utf8');
     let newContent = content;
     let modified = false;
-    
+
     // 备份原文件
     const backupPath = path.join(CONFIG.outputDir, `${path.basename(filePath)}.backup`);
     fs.writeFileSync(backupPath, content);
-    
+
     // 修复硬编码的 Meta descriptions
     const hardcodedPatterns = [
       // 英文硬编码模式
@@ -71,7 +71,7 @@ function fixHardcodedMetaDescriptions(filePath) {
         pattern: /seo_description:\s*"Professional analysis of how occupational stress, sleep quality, dietary habits, and exercise impact menstrual pain mechanisms\. ([^"]+)"/g,
         replacement: 'seo_description: "Professional analysis of how occupational stress, sleep quality, dietary habits, and exercise impact menstrual pain mechanisms. Based on latest scientific research, providing systematic menstrual pain management strategies to help women improve menstrual health from the root cause."'
       },
-      
+
       // 中文硬编码模式
       {
         pattern: /seo_description_zh:\s*"Professional NSAID Guide for Menstrual Pain - ([^"]+)"/g,
@@ -98,7 +98,7 @@ function fixHardcodedMetaDescriptions(filePath) {
         replacement: 'seo_description_zh: "经期疼痛并发症专业指南 - 深入分析腹胀、恶心、呕吐和背痛机制，提供科学缓解策略。包含症状关联矩阵、经期恶心缓解指南、背痛分析、穴位按摩技术和基于前列腺素理论的抗炎饮食建议。"'
       }
     ];
-    
+
     // 应用所有修复模式
     hardcodedPatterns.forEach(({ pattern, replacement }) => {
       if (pattern.test(newContent)) {
@@ -107,7 +107,7 @@ function fixHardcodedMetaDescriptions(filePath) {
         console.log(`  ✅ 修复硬编码: ${path.basename(filePath)}`);
       }
     });
-    
+
     if (modified) {
       fs.writeFileSync(filePath, newContent);
       return true;
@@ -115,7 +115,7 @@ function fixHardcodedMetaDescriptions(filePath) {
       console.log(`  ℹ️  无需修复: ${path.basename(filePath)}`);
       return false;
     }
-    
+
   } catch (error) {
     console.error(`  ❌ 修复失败: ${filePath}`, error.message);
     return false;
@@ -127,18 +127,18 @@ function fixHardcodedMetaDescriptions(filePath) {
  */
 function scanAndFixAllArticles() {
   console.log('🔍 扫描文章文件中的硬编码问题...\n');
-  
+
   const locales = ['en', 'zh'];
   let totalFixed = 0;
-  
+
   locales.forEach(locale => {
     const localeDir = path.join(CONFIG.articlesDir, locale);
-    
+
     if (fs.existsSync(localeDir)) {
       const files = fs.readdirSync(localeDir).filter(file => file.endsWith('.md'));
-      
+
       console.log(`📁 处理 ${locale} 语言文件 (${files.length} 个)...`);
-      
+
       files.forEach(file => {
         const filePath = path.join(localeDir, file);
         if (fixHardcodedMetaDescriptions(filePath)) {
@@ -147,7 +147,7 @@ function scanAndFixAllArticles() {
       });
     }
   });
-  
+
   return totalFixed;
 }
 
@@ -156,27 +156,27 @@ function scanAndFixAllArticles() {
  */
 function generateFixReport(totalFixed) {
   const timestamp = new Date().toLocaleString('zh-CN');
-  
+
   let report = `# Meta Descriptions 硬编码修复报告\n\n`;
   report += `**修复时间**: ${timestamp}\n\n`;
-  
+
   report += `## 📊 修复摘要\n\n`;
   report += `- **修复的文件数**: ${totalFixed}\n`;
   report += `- **修复类型**: 硬编码的 Meta descriptions\n\n`;
-  
+
   report += `## 🔧 修复内容\n\n`;
   report += `### 问题描述\n`;
   report += `发现以下文章中存在硬编码的 Meta descriptions：\n\n`;
   report += `1. **英文文章**: 包含 "Professional", "5-Minute", "Medical Guide" 等硬编码前缀\n`;
   report += `2. **中文文章**: 包含英文硬编码前缀，应该使用中文描述\n`;
   report += `3. **长度问题**: 部分描述过长或过短\n\n`;
-  
+
   report += `### 修复方法\n`;
   report += `1. **移除硬编码前缀**: 删除 "Professional", "5-Minute" 等固定前缀\n`;
   report += `2. **语言一致性**: 确保中文文章使用中文描述，英文文章使用英文描述\n`;
   report += `3. **长度优化**: 将描述长度控制在 150-160 字符\n`;
   report += `4. **内容优化**: 包含关键词和价值主张\n\n`;
-  
+
   report += `### 修复详情\n`;
   report += `- **NSAID 指南**: 移除 "Professional NSAID Guide for Menstrual Pain -" 前缀\n`;
   report += `- **5分钟缓解法**: 移除 "5-Minute Period Pain Relief -" 前缀\n`;
@@ -184,14 +184,14 @@ function generateFixReport(totalFixed) {
   report += `- **痛经管理指南**: 移除 "Professional dysmenorrhea management guide:" 前缀\n`;
   report += `- **自然疗法指南**: 移除 "Professional natural therapy guide for menstrual pain:" 前缀\n`;
   report += `- **并发症指南**: 移除 "Professional guide to menstrual pain complications:" 前缀\n\n`;
-  
+
   report += `## ✅ 修复完成\n\n`;
   report += `所有硬编码问题已成功修复，Meta descriptions 现在更加自然和优化。\n\n`;
   report += `### 下一步操作\n\n`;
   report += `1. 重新构建项目: \`npm run build\`\n`;
   report += `2. 部署到生产环境\n`;
   report += `3. 验证修复效果\n\n`;
-  
+
   return report;
 }
 
@@ -200,31 +200,31 @@ function generateFixReport(totalFixed) {
  */
 function fixHardcodedMetaDescriptions() {
   console.log('🔧 开始修复 Meta descriptions 硬编码问题...\n');
-  
+
   try {
     createOutputDir();
-    
+
     // 扫描并修复所有文章
     const totalFixed = scanAndFixAllArticles();
-    
+
     // 生成修复报告
     console.log('\n📊 生成修复报告...');
     const report = generateFixReport(totalFixed);
     const reportPath = path.join(CONFIG.outputDir, 'hardcoded-meta-fix-report.md');
     fs.writeFileSync(reportPath, report);
     console.log(`✅ 修复报告已保存: ${reportPath}`);
-    
+
     // 输出摘要
     console.log('\n📊 修复结果摘要:');
     console.log(`修复的文件数: ${totalFixed}`);
-    
+
     if (totalFixed > 0) {
       console.log('\n🎉 硬编码问题修复完成！');
       console.log('下一步: 重新构建并部署项目');
     } else {
       console.log('\n✅ 未发现硬编码问题');
     }
-    
+
   } catch (error) {
     console.error('❌ 修复过程中出错:', error.message);
   }
@@ -239,19 +239,3 @@ module.exports = {
   fixHardcodedMetaDescriptions,
   scanAndFixAllArticles
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

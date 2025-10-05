@@ -22,7 +22,7 @@ class CSSPreloadFixer {
   // 扫描CSS文件
   scanCSSFiles() {
     console.log('🔍 扫描CSS文件...');
-    
+
     const cssDir = path.join(__dirname, '../.next/static/css');
     if (!fs.existsSync(cssDir)) {
       this.report.issues.push({
@@ -35,7 +35,7 @@ class CSSPreloadFixer {
 
     const files = fs.readdirSync(cssDir);
     this.cssFiles = files.filter(file => file.endsWith('.css'));
-    
+
     console.log(`📊 发现 ${this.cssFiles.length} 个CSS文件`);
     this.cssFiles.forEach(file => {
       console.log(`   - ${file}`);
@@ -45,11 +45,11 @@ class CSSPreloadFixer {
   // 分析CSS文件
   analyzeCSSFiles() {
     console.log('📈 分析CSS文件...');
-    
+
     this.cssFiles.forEach(file => {
       const filePath = path.join(__dirname, '../.next/static/css', file);
       const stats = fs.statSync(filePath);
-      
+
       // 检查文件大小
       if (stats.size < 1000) {
         this.report.issues.push({
@@ -59,7 +59,7 @@ class CSSPreloadFixer {
           size: stats.size
         });
       }
-      
+
       // 检查文件内容
       const content = fs.readFileSync(filePath, 'utf8');
       if (content.includes('layout') || content.includes('app')) {
@@ -76,7 +76,7 @@ class CSSPreloadFixer {
   // 生成修复建议
   generateRecommendations() {
     console.log('💡 生成修复建议...');
-    
+
     if (this.cssFiles.length === 0) {
       this.report.recommendations.push('❌ 未找到CSS文件，需要重新构建项目');
       return;
@@ -106,13 +106,13 @@ class CSSPreloadFixer {
   // 验证修复效果
   validateFix() {
     console.log('✅ 验证修复效果...');
-    
+
     const configPath = path.join(__dirname, '../next.config.js');
     const configContent = fs.readFileSync(configPath, 'utf8');
-    
+
     // 检查是否还有错误的预加载配置
     const hasLayoutCSSPreload = configContent.includes('layout.css');
-    
+
     if (hasLayoutCSSPreload) {
       this.report.issues.push({
         type: 'error',
@@ -149,10 +149,10 @@ class CSSPreloadFixer {
 
     const filename = `css-preload-fix-report-${Date.now()}.json`;
     const filepath = path.join(reportDir, filename);
-    
+
     fs.writeFileSync(filepath, JSON.stringify(report, null, 2));
     console.log(`📊 报告已保存: ${filepath}`);
-    
+
     return filepath;
   }
 }
@@ -178,7 +178,7 @@ async function runCSSPreloadFix() {
   // 生成报告
   console.log('\n📊 生成修复报告...');
   const report = fixer.generateReport();
-  
+
   console.log('\n📈 修复结果摘要:');
   console.log(`   CSS文件数: ${report.summary.totalCSSFiles}`);
   console.log(`   问题数: ${report.summary.totalIssues}`);
@@ -190,9 +190,9 @@ async function runCSSPreloadFix() {
 
   // 保存报告
   const reportPath = fixer.saveReport(report);
-  
+
   console.log(`\n✅ CSS预加载修复完成！报告已保存到: ${reportPath}`);
-  
+
   return report;
 }
 
@@ -202,9 +202,3 @@ if (require.main === module) {
 }
 
 module.exports = { runCSSPreloadFix, CSSPreloadFixer };
-
-
-
-
-
-

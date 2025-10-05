@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
 // PainTrendChart - Line chart component for displaying pain level trends over time
 // Shows pain levels with color-coded points and responsive design for mobile devices
 
-import React, { useMemo, useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import { TrendPoint, PainTrackerError } from '../../../../types/pain-tracker';
-import ChartUtils from '../ChartUtils';
+import React, { useMemo, useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import { TrendPoint, PainTrackerError } from "../../../../types/pain-tracker";
+import ChartUtils from "../ChartUtils";
 
 interface PainTrendChartProps {
   trendData: TrendPoint[];
@@ -18,10 +18,10 @@ interface PainTrendChartProps {
 
 export const PainTrendChart: React.FC<PainTrendChartProps> = ({
   trendData,
-  className = '',
+  className = "",
   height,
   showTitle = true,
-  onError
+  onError,
 }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,13 +34,13 @@ export const PainTrendChart: React.FC<PainTrendChartProps> = ({
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
+    window.addEventListener("resize", checkMobile);
+
     // Simulate loading delay for smooth rendering
     const timer = setTimeout(() => setIsLoading(false), 100);
 
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener("resize", checkMobile);
       clearTimeout(timer);
     };
   }, []);
@@ -49,19 +49,19 @@ export const PainTrendChart: React.FC<PainTrendChartProps> = ({
   const chartData = useMemo(() => {
     try {
       if (!trendData || trendData.length === 0) {
-        return ChartUtils.getEmptyChartData('line');
+        return ChartUtils.getEmptyChartData("line");
       }
 
       return ChartUtils.formatPainTrendData(trendData, isMobile);
     } catch (err) {
       const error = new PainTrackerError(
-        'Failed to format trend chart data',
-        'CHART_ERROR',
-        err
+        "Failed to format trend chart data",
+        "CHART_ERROR",
+        err,
       );
       setError(error.message);
       onError?.(error);
-      return ChartUtils.getEmptyChartData('line');
+      return ChartUtils.getEmptyChartData("line");
     }
   }, [trendData, isMobile, onError]);
 
@@ -69,7 +69,7 @@ export const PainTrendChart: React.FC<PainTrendChartProps> = ({
   const chartOptions = useMemo(() => {
     try {
       const options = ChartUtils.getPainTrendOptions(isMobile);
-      
+
       // Override title display if showTitle is false
       if (!showTitle && options.plugins?.title) {
         options.plugins.title.display = false;
@@ -78,9 +78,9 @@ export const PainTrendChart: React.FC<PainTrendChartProps> = ({
       return options;
     } catch (err) {
       const error = new PainTrackerError(
-        'Failed to configure trend chart options',
-        'CHART_ERROR',
-        err
+        "Failed to configure trend chart options",
+        "CHART_ERROR",
+        err,
       );
       setError(error.message);
       onError?.(error);
@@ -97,7 +97,7 @@ export const PainTrendChart: React.FC<PainTrendChartProps> = ({
   // Loading state
   if (isLoading) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-gray-50 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
@@ -112,14 +112,24 @@ export const PainTrendChart: React.FC<PainTrendChartProps> = ({
   // Error state
   if (error) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-red-50 border border-red-200 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
         <div className="text-center p-4">
           <div className="text-red-600 mb-2">
-            <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              className="w-8 h-8 mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
           </div>
           <p className="text-sm text-red-700 font-medium">Chart Error</p>
@@ -132,17 +142,29 @@ export const PainTrendChart: React.FC<PainTrendChartProps> = ({
   // Empty data state
   if (!trendData || trendData.length === 0) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-gray-50 border border-gray-200 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
         <div className="text-center p-4">
           <div className="text-gray-400 mb-2">
-            <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            <svg
+              className="w-12 h-12 mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              />
             </svg>
           </div>
-          <p className="text-sm text-gray-600 font-medium">No Pain Trend Data</p>
+          <p className="text-sm text-gray-600 font-medium">
+            No Pain Trend Data
+          </p>
           <p className="text-xs text-gray-500 mt-1">
             Start tracking your pain to see trends over time
           </p>
@@ -153,20 +175,24 @@ export const PainTrendChart: React.FC<PainTrendChartProps> = ({
 
   // Render chart
   return (
-    <div className={`relative ${className}`} style={{ height: containerHeight }}>
-      <Line 
-        data={chartData} 
+    <div
+      className={`relative ${className}`}
+      style={{ height: containerHeight }}
+    >
+      <Line
+        data={chartData}
         options={chartOptions}
         aria-label="Pain level trend chart showing pain levels over time"
         role="img"
       />
-      
+
       {/* Chart summary for screen readers */}
       <div className="sr-only">
         <p>
-          Pain trend chart showing {trendData.length} data points. 
-          Pain levels range from {Math.min(...trendData.map(d => d.painLevel))} to {Math.max(...trendData.map(d => d.painLevel))}.
-          Latest pain level: {trendData[trendData.length - 1]?.painLevel || 'N/A'}.
+          Pain trend chart showing {trendData.length} data points. Pain levels
+          range from {Math.min(...trendData.map((d) => d.painLevel))} to{" "}
+          {Math.max(...trendData.map((d) => d.painLevel))}. Latest pain level:{" "}
+          {trendData[trendData.length - 1]?.painLevel || "N/A"}.
         </p>
       </div>
     </div>

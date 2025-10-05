@@ -232,7 +232,7 @@ const getSiteUrl = () => {
     // 客户端：使用当前访问的域名
     return window.location.origin
   }
-  
+
   // 服务端：使用已验证的域名
   return 'https://periodhub.health'  // 这个域名已确认工作
 }
@@ -356,11 +356,11 @@ module.exports = nextConfig
 // 3. lib/config.js - 环境变量管理
 export const siteConfig = {
   // 使用环境变量，生产环境回退到主域名
-  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 
-           (process.env.NODE_ENV === 'production' 
-             ? 'https://periodhub.health' 
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL ||
+           (process.env.NODE_ENV === 'production'
+             ? 'https://periodhub.health'
              : 'http://localhost:3001'),
-  
+
   // 确保始终使用一致的域名
   getCanonicalUrl: (path = '') => {
     const base = process.env.NEXT_PUBLIC_BASE_URL || 'https://periodhub.health'
@@ -373,7 +373,7 @@ import { siteConfig } from '@/lib/config'
 
 export default function Sitemap() {
   const baseUrl = siteConfig.baseUrl
-  
+
   // 确保URL格式正确
   const formatUrl = (path) => {
     return `${baseUrl}${path.startsWith('/') ? path : `/${path}`}`

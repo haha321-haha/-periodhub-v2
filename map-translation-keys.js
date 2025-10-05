@@ -4,17 +4,17 @@ const path = require('path');
 // 映射翻译键到实际meta描述
 function mapTranslationKeysToMetaDescriptions() {
   console.log('=== 翻译键到Meta描述的映射分析 ===\n');
-  
+
   const results = {
     hardcodedPages: [],
     translationPages: [],
     markdownPages: [],
     unknownPages: []
   };
-  
+
   // 1. 检查不同页面类型的元数据生成方式
   console.log('🔍 分析页面类型的元数据生成方式...');
-  
+
   const pageTypes = [
     'app/[locale]/page.tsx', // 主页
     'app/[locale]/articles/[slug]/page.tsx', // 文章页面
@@ -23,15 +23,15 @@ function mapTranslationKeysToMetaDescriptions() {
     'app/[locale]/downloads/page.tsx', // 下载页面
     'app/[locale]/interactive-tools/page.tsx' // 互动工具
   ];
-  
+
   pageTypes.forEach(pagePath => {
     if (fs.existsSync(pagePath)) {
       const content = fs.readFileSync(pagePath, 'utf8');
-      
+
       // 检查generateMetadata函数
       const metadataMatch = content.match(/generateMetadata[^}]*description:\s*['"`](.*?)['"`]/s);
       const translationMatch = content.match(/generateMetadata[^}]*description:\s*t\(['"`](.*?)['"`]/s);
-      
+
       if (metadataMatch) {
         const description = metadataMatch[1];
         results.hardcodedPages.push({
@@ -55,7 +55,7 @@ function mapTranslationKeysToMetaDescriptions() {
       }
     }
   });
-  
+
   console.log('📊 页面类型分析结果:');
   console.log(`硬编码页面: ${results.hardcodedPages.length}个`);
   results.hardcodedPages.forEach((item, index) => {
@@ -64,29 +64,29 @@ function mapTranslationKeysToMetaDescriptions() {
     console.log(`   内容: ${item.description}`);
     console.log('');
   });
-  
+
   console.log(`翻译页面: ${results.translationPages.length}个`);
   results.translationPages.forEach((item, index) => {
     console.log(`${index + 1}. ${item.page}`);
     console.log(`   翻译键: ${item.translationKey}`);
     console.log('');
   });
-  
+
   console.log(`未知页面: ${results.unknownPages.length}个`);
   results.unknownPages.forEach((item, index) => {
     console.log(`${index + 1}. ${item.page}`);
     console.log('');
   });
-  
+
   // 2. 检查翻译键的实际用途
   console.log('🌐 检查翻译键的实际用途...');
   const translationFiles = ['messages/zh.json', 'messages/en.json'];
-  
+
   translationFiles.forEach(filePath => {
     if (fs.existsSync(filePath)) {
       const content = fs.readFileSync(filePath, 'utf8');
       const data = JSON.parse(content);
-      
+
       // 检查关键翻译键
       const keyPaths = [
         'site.description',
@@ -95,7 +95,7 @@ function mapTranslationKeysToMetaDescriptions() {
         'metadata.articles.description',
         'metadata.tools.description'
       ];
-      
+
       keyPaths.forEach(keyPath => {
         const value = getNestedValue(data, keyPath);
         if (value && typeof value === 'string') {
@@ -107,7 +107,7 @@ function mapTranslationKeysToMetaDescriptions() {
       });
     }
   });
-  
+
   // 3. 分析Bing报告中的页面类型
   console.log('📋 分析Bing报告中的页面类型...');
   const csvPath = 'www.periodhub.health_FailingUrls_9_23_2025.csv';
@@ -115,7 +115,7 @@ function mapTranslationKeysToMetaDescriptions() {
     const content = fs.readFileSync(csvPath, 'utf8');
     const lines = content.split('\n').filter(line => line.trim() && line !== '"URL"');
     const urls = lines.map(line => line.replace(/"/g, ''));
-    
+
     const urlTypes = {
       articles: 0,
       healthGuide: 0,
@@ -124,7 +124,7 @@ function mapTranslationKeysToMetaDescriptions() {
       interactiveTools: 0,
       other: 0
     };
-    
+
     urls.forEach(url => {
       if (url.includes('/articles/')) urlTypes.articles++;
       else if (url.includes('/health-guide')) urlTypes.healthGuide++;
@@ -133,7 +133,7 @@ function mapTranslationKeysToMetaDescriptions() {
       else if (url.includes('/interactive-tools')) urlTypes.interactiveTools++;
       else urlTypes.other++;
     });
-    
+
     console.log('Bing报告中的页面类型分布:');
     Object.entries(urlTypes).forEach(([type, count]) => {
       if (count > 0) {
@@ -141,7 +141,7 @@ function mapTranslationKeysToMetaDescriptions() {
       }
     });
   }
-  
+
   return results;
 }
 
@@ -153,6 +153,3 @@ function getNestedValue(obj, path) {
 }
 
 const result = mapTranslationKeysToMetaDescriptions();
-
-
-

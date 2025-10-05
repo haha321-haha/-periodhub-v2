@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useState } from 'react';
-import { imageOptimization } from '@/lib/image-optimization';
+import Image from "next/image";
+import { useState } from "react";
+import { imageOptimization } from "@/lib/image-optimization";
 
 interface SmartImageProps {
   src: string;
@@ -10,7 +10,7 @@ interface SmartImageProps {
   width: number;
   height: number;
   className?: string;
-  type?: 'hero' | 'content' | 'thumbnail' | 'decorative';
+  type?: "hero" | "content" | "thumbnail" | "decorative";
   sizes?: string;
   priority?: boolean;
   onError?: (e: any) => void;
@@ -26,31 +26,33 @@ export default function SmartImage({
   alt,
   width,
   height,
-  className = '',
-  type = 'content',
+  className = "",
+  type = "content",
   sizes,
   priority = false,
   onError,
-  onLoad
+  onLoad,
 }: SmartImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
 
   // 获取优化配置
   const config = imageOptimization.configs[type];
-  
+
   // 生成响应式sizes
-  const responsiveSizes = sizes || imageOptimization.utilities.generateSizesString({
-    mobile: Math.min(width, 400),
-    tablet: Math.min(width, 800),
-    desktop: width
-  });
+  const responsiveSizes =
+    sizes ||
+    imageOptimization.utilities.generateSizesString({
+      mobile: Math.min(width, 400),
+      tablet: Math.min(width, 800),
+      desktop: width,
+    });
 
   if (imageError) {
     return (
-      <div 
+      <div
         className={`${className} bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center`}
-        style={{ width: '100%', aspectRatio: `${width}/${height}` }}
+        style={{ width: "100%", aspectRatio: `${width}/${height}` }}
       >
         <div className="text-center p-4">
           <div className="text-4xl mb-2">🖼️</div>
@@ -63,7 +65,7 @@ export default function SmartImage({
   return (
     <div className="relative">
       {isLoading && (
-        <div 
+        <div
           className={`absolute inset-0 ${className} bg-gradient-to-br from-purple-50 to-pink-50 flex items-center justify-center animate-pulse`}
           style={{ aspectRatio: `${width}/${height}` }}
         >
@@ -73,21 +75,23 @@ export default function SmartImage({
           </div>
         </div>
       )}
-      
+
       <Image
         src={src}
         alt={alt}
         width={width}
         height={height}
-        className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+        className={`${className} ${
+          isLoading ? "opacity-0" : "opacity-100"
+        } transition-opacity duration-300`}
         sizes={responsiveSizes}
         priority={priority || config.priority}
         placeholder="empty"
         quality={config.quality}
         style={{
-          maxWidth: '100%',
-          height: 'auto',
-          objectFit: 'cover',
+          maxWidth: "100%",
+          height: "auto",
+          objectFit: "cover",
         }}
         onError={(e) => {
           console.error(`图片加载失败: ${src}`);

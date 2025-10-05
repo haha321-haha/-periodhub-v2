@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   // ... rest of function
 }
 
-// 2. Fix HomePage component  
+// 2. Fix HomePage component
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -111,7 +111,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   try {
     const { locale } = await params;
     const isZh = locale === 'zh';
-    
+
     return {
       title: isZh ? 'PeriodHub - 专业女性健康管理平台' : 'PeriodHub - Professional Women\'s Health Platform',
       // ... rest of metadata
@@ -128,7 +128,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function HomePage({ params }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  
+
   // ... rest of component
 }
 修复 2：简单图像路径校正
@@ -163,7 +163,7 @@ npm run dev
 
 # Check these specific issues are resolved:
 # 1. No more "params should be awaited" errors
-# 2. Images load correctly 
+# 2. Images load correctly
 # 3. Page renders without hydration errors
 您的核心理解是正确的，但实施需要这些改进才能做好生产准备。
 
@@ -197,7 +197,7 @@ The backup file imports these components - check if they exist:
 ```bash
 # Check for required components
 ls -la components/Hero.tsx
-ls -la components/UserSuccessStories.tsx  
+ls -la components/UserSuccessStories.tsx
 ls -la components/NavigationTabs.tsx
 ls -la components/SearchBox.tsx
 ls -la components/StructuredData.tsx
@@ -249,7 +249,7 @@ git push origin main
 
 **Low Risk**: The backup file uses standard Next.js patterns and proper translation namespacing.
 
-**Potential Issues**: 
+**Potential Issues**:
 - Missing component files
 - Changed component APIs since backup was made
 
@@ -313,7 +313,7 @@ cat messages/zh.json | head -20
         "description": "记录和分析您的月经周期"
       },
       "assessment": {
-        "title": "健康评估", 
+        "title": "健康评估",
         "description": "获取个性化的健康建议"
       },
       "resources": {
@@ -328,7 +328,7 @@ cat messages/zh.json | head -20
         "description": "快速了解您的健康状况"
       },
       "resources": {
-        "title": "下载资源", 
+        "title": "下载资源",
         "description": "获取专业的健康指南"
       },
       "downloads": {

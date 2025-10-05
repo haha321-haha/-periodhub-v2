@@ -13,10 +13,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const title = locale === 'zh' ? '全球视角 - 痛经健康指南' : 'Global Perspectives - Health Guide';
-  const description = locale === 'zh' 
+  const description = locale === 'zh'
     ? '探索世界各地的传统疗法和文化观点，了解不同文化如何处理经期健康。'
     : 'Explore traditional therapies and cultural perspectives from around the world, understand how different cultures approach menstrual health.';
-  
+
   return {
     title,
     description,
@@ -118,7 +118,7 @@ export default async function GlobalPerspectivesPage({
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-12">
           {/* Breadcrumb */}
-          <Breadcrumb 
+          <Breadcrumb
             items={[
               { label: breadcrumbT('healthGuide'), href: `/${locale}/health-guide` },
               { label: breadcrumbT('globalPerspectives') }
@@ -179,7 +179,7 @@ export default async function GlobalPerspectivesPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-8 text-center">
           {locale === 'zh' ? '世界各地的传统做法' : 'Traditional Practices Around the World'}
         </h2>
-        
+
         <div className="space-y-8">
           {globalPractices.map((region, index) => (
             <div key={index} className="card">
@@ -189,7 +189,7 @@ export default async function GlobalPerspectivesPage({
                   {region.region}
                 </h3>
               </div>
-              
+
               <div className="grid md:grid-cols-3 gap-6">
                 {region.practices.map((practice, practiceIndex) => (
                   <div key={practiceIndex} className="bg-neutral-50 p-4 rounded-lg">
@@ -212,7 +212,7 @@ export default async function GlobalPerspectivesPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '科学验证的传统方法' : 'Scientifically Validated Traditional Methods'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-green-600 mb-4">
@@ -227,7 +227,7 @@ export default async function GlobalPerspectivesPage({
                   {locale === 'zh' ? '研究证实热敷可以有效缓解子宫痉挛' : 'Research confirms heat therapy effectively relieves uterine cramps'}
                 </p>
               </div>
-              
+
               <div className="border-l-4 border-green-400 pl-4">
                 <h4 className="font-medium text-neutral-800 mb-1">
                   {locale === 'zh' ? '瑜伽和冥想' : 'Yoga and Meditation'}
@@ -236,7 +236,7 @@ export default async function GlobalPerspectivesPage({
                   {locale === 'zh' ? '多项研究显示瑜伽可以减轻痛经症状' : 'Multiple studies show yoga can reduce dysmenorrhea symptoms'}
                 </p>
               </div>
-              
+
               <div className="border-l-4 border-green-400 pl-4">
                 <h4 className="font-medium text-neutral-800 mb-1">
                   {locale === 'zh' ? '草药疗法' : 'Herbal Medicine'}
@@ -261,7 +261,7 @@ export default async function GlobalPerspectivesPage({
                   {locale === 'zh' ? '某些传统草药可能与现代药物相互作用' : 'Some traditional herbs may interact with modern medications'}
                 </p>
               </div>
-              
+
               <div className="border-l-4 border-orange-400 pl-4">
                 <h4 className="font-medium text-neutral-800 mb-1">
                   {locale === 'zh' ? '极端饮食限制' : 'Extreme Dietary Restrictions'}
@@ -270,7 +270,7 @@ export default async function GlobalPerspectivesPage({
                   {locale === 'zh' ? '过度的饮食限制可能导致营养不良' : 'Excessive dietary restrictions may lead to malnutrition'}
                 </p>
               </div>
-              
+
               <div className="border-l-4 border-orange-400 pl-4">
                 <h4 className="font-medium text-neutral-800 mb-1">
                   {locale === 'zh' ? '迷信做法' : 'Superstitious Practices'}
@@ -289,7 +289,7 @@ export default async function GlobalPerspectivesPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '现代整合医学方法' : 'Modern Integrative Medicine Approach'}
         </h2>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
           <div className="card text-center">
             <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -349,7 +349,7 @@ export default async function GlobalPerspectivesPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '实际应用建议' : 'Practical Application Recommendations'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-accent-600 mb-4">
@@ -429,7 +429,7 @@ export default async function GlobalPerspectivesPage({
 
       {/* Navigation */}
       <section className="flex justify-between items-center pt-8 border-t border-neutral-200">
-        <Link 
+        <Link
           href={`/${locale}/health-guide/myths-facts`}
           className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
         >
@@ -438,7 +438,7 @@ export default async function GlobalPerspectivesPage({
           </svg>
           {locale === 'zh' ? '上一章：误区与事实' : 'Previous: Myths vs Facts'}
         </Link>
-        
+
           <Link
             href={`/${locale}/health-guide`}
             className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"

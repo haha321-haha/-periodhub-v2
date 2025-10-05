@@ -19,7 +19,7 @@ find "$HISTORY_DIR" -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.ts
         # 获取文件名和扩展名
         filename=$(basename "$file")
         extension="${filename##*.}"
-        
+
         # 根据内容判断文件类型并分类
         if grep -q "tailwind" "$file" 2>/dev/null; then
             cp "$file" "$RECOVERY_DIR/config/tailwind-$filename"
@@ -34,7 +34,7 @@ find "$HISTORY_DIR" -name "*.js" -o -name "*.jsx" -o -name "*.ts" -o -name "*.ts
         else
             cp "$file" "$RECOVERY_DIR/misc-$filename"
         fi
-        
+
         count=$((count + 1))
         echo "✅ 已恢复: $filename"
     fi

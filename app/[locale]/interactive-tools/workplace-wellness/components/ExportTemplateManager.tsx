@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  FileText, 
-  Plus, 
-  Edit, 
-  Trash2, 
-  Copy, 
-  Download, 
+import {
+  FileText,
+  Plus,
+  Edit,
+  Trash2,
+  Copy,
+  Download,
   Calendar,
   Filter,
   Save,
@@ -15,9 +15,9 @@ import {
 } from 'lucide-react';
 import { useExportTemplates, useActiveTemplate, useExportTemplateActions } from '../hooks/useWorkplaceWellnessStore';
 import { useTranslations } from 'next-intl';
-import { 
-  ExportTemplate, 
-  ExportType, 
+import {
+  ExportTemplate,
+  ExportType,
   ExtendedExportFormat,
 } from '../types';
 import { EXPORT_FORMAT_CONFIG } from '../types/defaults';
@@ -36,7 +36,7 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
     loadTemplate,
     duplicateTemplate
   } = useExportTemplateActions();
-  
+
   const t = useTranslations('workplaceWellness');
   const [isCreating, setIsCreating] = useState(false);
   const [editingTemplate, setEditingTemplate] = useState<ExportTemplate | null>(null);
@@ -62,7 +62,7 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
         filters: newTemplate.filters,
         isDefault: newTemplate.isDefault || false
       });
-      
+
       // 重置表单
       setNewTemplate({
         name: '',
@@ -104,7 +104,7 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
         filters: newTemplate.filters,
         isDefault: newTemplate.isDefault || false
       });
-      
+
       setEditingTemplate(null);
       setNewTemplate({
         name: '',
@@ -388,7 +388,7 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                       value={newTemplate.dateRange?.start || ''}
                       onChange={(e) => setNewTemplate({
                         ...newTemplate,
-                        dateRange: { 
+                        dateRange: {
                           start: e.target.value,
                           end: newTemplate.dateRange?.end || ''
                         }
@@ -406,7 +406,7 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
                       value={newTemplate.dateRange?.end || ''}
                       onChange={(e) => setNewTemplate({
                         ...newTemplate,
-                        dateRange: { 
+                        dateRange: {
                           start: newTemplate.dateRange?.start || '',
                           end: e.target.value
                         }

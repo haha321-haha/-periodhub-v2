@@ -1,7 +1,7 @@
-import { 
-  CoreMetrics, 
-  MetricsResult, 
-  EnhancedUserEvent, 
+import {
+  CoreMetrics,
+  MetricsResult,
+  EnhancedUserEvent,
   MetricsEngineConfig,
   DashboardData,
   DEFAULT_METRICS_WEIGHTS,
@@ -39,14 +39,14 @@ export class MetricsEngine {
     }
 
     this.isCalculating = true;
-    
+
     try {
       const now = new Date();
       const windowStart = new Date(now.getTime() - this.config.historyWindowDays * 24 * 60 * 60 * 1000);
-      
+
       // 获取时间窗口内的事件
       const events = this.getEventsInWindow(windowStart, now);
-      
+
       // 并行计算所有指标
       const [
         dailyActiveUsers,
@@ -72,7 +72,7 @@ export class MetricsEngine {
 
       // 缓存结果
       this.cacheMetrics(metrics);
-      
+
       return metrics;
     } finally {
       this.isCalculating = false;
@@ -90,7 +90,7 @@ export class MetricsEngine {
 
     // 统计今天的唯一用户
     const activeUsers = new Set<string>();
-    
+
     events.forEach(event => {
       if (event.timestamp >= todayStart && event.timestamp < todayEnd) {
         if (event.type === 'user_action' || event.type === 'resource_accessed') {
@@ -119,7 +119,7 @@ export class MetricsEngine {
         if (!userFirstVisit.has(userId) || timestamp < userFirstVisit.get(userId)!) {
           userFirstVisit.set(userId, timestamp);
         }
-        
+
         if (!userLastVisit.has(userId) || timestamp > userLastVisit.get(userId)!) {
           userLastVisit.set(userId, timestamp);
         }
@@ -179,7 +179,7 @@ export class MetricsEngine {
     // 计算平均使用深度（转换为分钟）
     const totalEngagement = Array.from(userEngagement.values()).reduce((sum, score) => sum + score, 0);
     const averageEngagement = userEngagement.size > 0 ? totalEngagement / userEngagement.size : 0;
-    
+
     // 假设每分等于1分钟的深度参与
     return Math.round(averageEngagement * 100) / 100;
   }
@@ -236,11 +236,11 @@ export class MetricsEngine {
     userActions.forEach((actionCount, userId) => {
       const firstVisit = userFirstVisit.get(userId);
       const lastVisit = userLastVisit.get(userId);
-      
+
       if (firstVisit && lastVisit) {
         const daysActive = Math.max(1, Math.ceil((lastVisit.getTime() - firstVisit.getTime()) / (24 * 60 * 60 * 1000)));
         const engagementScore = actionCount / daysActive; // 日均参与度
-        
+
         // 简化的价值计算：参与度 * 活跃天数 * 单位价值
         const userValue = engagementScore * Math.min(daysActive, 365) * 0.5; // 假设每个参与行为价值0.5元
         totalValue += userValue;
@@ -260,19 +260,19 @@ export class MetricsEngine {
     for (let i = days - 1; i >= 0; i--) {
       const date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
       const cacheKey = `${metricName}_${date.toISOString().split('T')[0]}`;
-      
+
       let result = this.getFromCache(cacheKey);
       if (!result) {
         // 这里应该从历史数据中计算，暂时使用模拟数据
         const currentValue = await this.calculateSingleMetric(metricName);
         const previousValue = currentValue * (0.9 + Math.random() * 0.2); // 模拟历史变化
-        
+
         result = {
           metricName,
           currentValue,
           previousValue,
           changeRate: ((currentValue - previousValue) / previousValue) * 100,
-          trend: currentValue > previousValue ? 'increasing' : 
+          trend: currentValue > previousValue ? 'increasing' :
                  currentValue < previousValue ? 'decreasing' : 'stable',
           calculatedAt: date,
           timeWindow: {
@@ -280,10 +280,10 @@ export class MetricsEngine {
             end: date
           }
         };
-        
+
         this.setCache(cacheKey, result);
       }
-      
+
       results.push(result);
     }
 
@@ -296,7 +296,7 @@ export class MetricsEngine {
   async getDashboardData(): Promise<DashboardData> {
     const coreMetrics = await this.calculateAllMetrics();
     const metricsHistory = await this.getMetricsTrend('dailyActiveUsers', 7);
-    
+
     return {
       coreMetrics,
       metricsHistory,
@@ -326,7 +326,7 @@ export class MetricsEngine {
    */
   addEvent(event: EnhancedUserEvent): void {
     this.eventHistory.push(event);
-    
+
     // 限制历史记录大小
     if (this.eventHistory.length > 10000) {
       this.eventHistory = this.eventHistory.slice(-5000);
@@ -347,7 +347,7 @@ export class MetricsEngine {
 
   // 私有辅助方法
   private getEventsInWindow(start: Date, end: Date): EnhancedUserEvent[] {
-    return this.eventHistory.filter(event => 
+    return this.eventHistory.filter(event =>
       event.timestamp >= start && event.timestamp <= end
     );
   }
@@ -422,42 +422,42 @@ export class MetricsEngine {
     const today = new Date();
     const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     const newUsers = new Set<string>();
-    
+
     this.eventHistory.forEach(event => {
       if (event.timestamp >= todayStart && event.type === 'user_action') {
         newUsers.add(event.userId);
       }
     });
-    
+
     return newUsers.size;
   }
 
   private getTotalDownloads(): number {
-    return this.eventHistory.filter(e => 
+    return this.eventHistory.filter(e =>
       e.type === 'user_action' && e.data.action === 'download'
     ).length;
   }
 
   private getTotalViews(): number {
-    return this.eventHistory.filter(e => 
+    return this.eventHistory.filter(e =>
       e.type === 'resource_accessed'
     ).length;
   }
 
   private getPopularResources(): any[] {
     const resourceStats = new Map<string, { downloads: number; views: number }>();
-    
+
     this.eventHistory.forEach(event => {
       if (event.data.resourceId) {
         const resourceId = event.data.resourceId;
         const stats = resourceStats.get(resourceId) || { downloads: 0, views: 0 };
-        
+
         if (event.type === 'user_action' && event.data.action === 'download') {
           stats.downloads++;
         } else if (event.type === 'resource_accessed') {
           stats.views++;
         }
-        
+
         resourceStats.set(resourceId, stats);
       }
     });
@@ -482,4 +482,4 @@ export class MetricsEngine {
     // 模拟错误率
     return Math.round(Math.random() * 5 * 100) / 100;
   }
-} 
+}

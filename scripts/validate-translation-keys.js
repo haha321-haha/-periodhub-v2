@@ -53,7 +53,7 @@ class TranslationKeyValidator {
    */
   flattenKeys(obj, prefix = '') {
     const flattened = {};
-    
+
     for (const key in obj) {
       if (typeof obj[key] === 'object' && obj[key] !== null) {
         const nested = this.flattenKeys(obj[key], prefix ? `${prefix}.${key}` : key);
@@ -62,7 +62,7 @@ class TranslationKeyValidator {
         flattened[prefix ? `${prefix}.${key}` : key] = obj[key];
       }
     }
-    
+
     return flattened;
   }
 
@@ -93,7 +93,7 @@ class TranslationKeyValidator {
     // 检查每个键在所有语言中是否存在
     allKeys.forEach(key => {
       const missingInLocales = locales.filter(locale => !flattenedKeys[locale][key]);
-      
+
       if (missingInLocales.length > 0) {
         this.stats.missingKeys++;
         this.errors.push(`键 "${key}" 在以下语言中缺失: ${missingInLocales.join(', ')}`);
@@ -104,7 +104,7 @@ class TranslationKeyValidator {
     locales.forEach(locale => {
       const localeKeys = Object.keys(flattenedKeys[locale]);
       const extraKeys = localeKeys.filter(key => {
-        return !locales.every(otherLocale => 
+        return !locales.every(otherLocale =>
           otherLocale === locale || flattenedKeys[otherLocale][key]
         );
       });
@@ -121,32 +121,32 @@ class TranslationKeyValidator {
    */
   validateConsistency(translations) {
     const locales = Object.keys(translations);
-    
+
     // 检查嵌套结构一致性
     const checkStructure = (obj1, obj2, path = '') => {
       const keys1 = Object.keys(obj1);
       const keys2 = Object.keys(obj2);
-      
+
       // 检查键的差异
       const onlyIn1 = keys1.filter(key => !keys2.includes(key));
       const onlyIn2 = keys2.filter(key => !keys1.includes(key));
-      
+
       if (onlyIn1.length > 0) {
         this.stats.inconsistentKeys += onlyIn1.length;
         this.warnings.push(`结构不一致: ${path} 中 ${onlyIn1[0]} 只在第一个语言中存在`);
       }
-      
+
       if (onlyIn2.length > 0) {
         this.stats.inconsistentKeys += onlyIn2.length;
         this.warnings.push(`结构不一致: ${path} 中 ${onlyIn2[0]} 只在第二个语言中存在`);
       }
-      
+
       // 递归检查嵌套对象
       keys1.forEach(key => {
         if (keys2.includes(key)) {
           const val1 = obj1[key];
           const val2 = obj2[key];
-          
+
           if (typeof val1 === 'object' && typeof val2 === 'object' && val1 !== null && val2 !== null) {
             checkStructure(val1, val2, path ? `${path}.${key}` : key);
           }
@@ -167,22 +167,22 @@ class TranslationKeyValidator {
    */
   validateQuality(translations) {
     const locales = Object.keys(translations);
-    
+
     locales.forEach(locale => {
       const flattened = this.flattenKeys(translations[locale]);
-      
+
       Object.entries(flattened).forEach(([key, value]) => {
         // 检查空值
         if (!value || value.trim() === '') {
           this.stats.emptyKeys++;
           this.warnings.push(`键 "${key}" 在 ${locale} 中为空`);
         }
-        
+
         // 检查是否包含未翻译的占位符
         if (typeof value === 'string' && value.includes('TODO') || value.includes('TBD')) {
           this.warnings.push(`键 "${key}" 在 ${locale} 中可能未完成翻译: ${value}`);
         }
-        
+
         // 检查是否包含硬编码的英文（针对中文翻译）
         if (locale === 'zh' && typeof value === 'string') {
           const englishPattern = /[A-Za-z]{3,}/;
@@ -199,21 +199,21 @@ class TranslationKeyValidator {
    */
   validateNamingConvention(translations) {
     const locales = Object.keys(translations);
-    
+
     locales.forEach(locale => {
       const flattened = this.flattenKeys(translations[locale]);
-      
+
       Object.keys(flattened).forEach(key => {
         // 检查键名格式
         if (!/^[a-zA-Z][a-zA-Z0-9]*(\.[a-zA-Z][a-zA-Z0-9]*)*$/.test(key)) {
           this.warnings.push(`键 "${key}" 不符合命名规范（应使用驼峰命名法）`);
         }
-        
+
         // 检查是否包含特殊字符
         if (/[^a-zA-Z0-9.]/.test(key)) {
           this.warnings.push(`键 "${key}" 包含特殊字符`);
         }
-        
+
         // 检查键名长度
         if (key.length > 100) {
           this.warnings.push(`键 "${key}" 名称过长（${key.length} 字符）`);
@@ -228,7 +228,7 @@ class TranslationKeyValidator {
   generateReport() {
     console.log('\n📊 翻译键验证报告');
     console.log('='.repeat(50));
-    
+
     console.log(`\n📈 统计信息:`);
     console.log(`  - 总键数: ${this.stats.totalKeys}`);
     console.log(`  - 缺失键: ${this.stats.missingKeys}`);
@@ -289,10 +289,10 @@ class TranslationKeyValidator {
    */
   run() {
     console.log('🔍 开始翻译键验证...\n');
-    
+
     try {
       const translations = this.loadTranslationFiles();
-      
+
       if (Object.keys(translations).length === 0) {
         console.error('❌ 没有找到有效的翻译文件');
         process.exit(1);
@@ -302,9 +302,9 @@ class TranslationKeyValidator {
       this.validateConsistency(translations);
       this.validateQuality(translations);
       this.validateNamingConvention(translations);
-      
+
       const report = this.generateReport();
-      
+
       console.log('\n' + '='.repeat(50));
       if (report.hasIssues) {
         console.log('❌ 验证发现问题，需要修复');

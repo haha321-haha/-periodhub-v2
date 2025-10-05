@@ -290,9 +290,5 @@
   ],
   "riskLevel": "critical",
   "riskScore": 75,
-  "riskFactors": [
-    "重复页面过多",
-    "LCP性能差",
-    "移动端性能差"
-  ]
+  "riskFactors": ["重复页面过多", "LCP性能差", "移动端性能差"]
 }

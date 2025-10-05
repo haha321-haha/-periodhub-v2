@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 // 缓存项接口
 interface CacheItem<T> {
@@ -61,14 +61,18 @@ export class AdvancedCacheManager {
     options: {
       ttl?: number;
       tags?: string[];
-      priority?: 'low' | 'normal' | 'high';
-    } = {}
+      priority?: "low" | "normal" | "high";
+    } = {},
   ): void {
-    const { ttl = this.config.defaultTTL, tags = [], priority = 'normal' } = options;
-    
+    const {
+      ttl = this.config.defaultTTL,
+      tags = [],
+      priority = "normal",
+    } = options;
+
     const now = Date.now();
     const item: CacheItem<T> = {
-      data: this.config.enableCompression ? this.compress(data) as T : data,
+      data: this.config.enableCompression ? (this.compress(data) as T) : data,
       timestamp: now,
       ttl,
       accessCount: 0,
@@ -88,14 +92,14 @@ export class AdvancedCacheManager {
   // 获取缓存项
   get<T>(key: string): T | null {
     const item = this.cache.get(key);
-    
+
     if (!item) {
       this.stats.misses++;
       return null;
     }
 
     const now = Date.now();
-    
+
     // 检查是否过期
     if (now - item.timestamp > item.ttl) {
       this.cache.delete(key);
@@ -108,7 +112,9 @@ export class AdvancedCacheManager {
     item.lastAccessed = now;
     this.stats.hits++;
 
-    const data = this.config.enableCompression ? this.decompress(item.data) : item.data;
+    const data = this.config.enableCompression
+      ? this.decompress(item.data)
+      : item.data;
     return data;
   }
 
@@ -136,7 +142,7 @@ export class AdvancedCacheManager {
   // 根据标签删除缓存项
   deleteByTag(tag: string): number {
     let deletedCount = 0;
-    
+
     for (const [key, item] of this.cache.entries()) {
       if (item.tags?.includes(tag)) {
         this.cache.delete(key);
@@ -170,7 +176,8 @@ export class AdvancedCacheManager {
     }
 
     const totalRequests = this.stats.hits + this.stats.misses;
-    const hitRate = totalRequests > 0 ? (this.stats.hits / totalRequests) * 100 : 0;
+    const hitRate =
+      totalRequests > 0 ? (this.stats.hits / totalRequests) * 100 : 0;
 
     return {
       size: this.cache.size,
@@ -202,7 +209,7 @@ export class AdvancedCacheManager {
       item.ttl = newTTL;
     }
     item.timestamp = Date.now();
-    
+
     this.saveToPersistence();
     return true;
   }
@@ -216,7 +223,10 @@ export class AdvancedCacheManager {
     return result;
   }
 
-  mset<T>(items: Record<string, T>, options?: { ttl?: number; tags?: string[] }): void {
+  mset<T>(
+    items: Record<string, T>,
+    options?: { ttl?: number; tags?: string[] },
+  ): void {
     for (const [key, data] of Object.entries(items)) {
       this.set(key, data, options);
     }
@@ -224,7 +234,7 @@ export class AdvancedCacheManager {
 
   // LRU淘汰策略
   private evictLRU(): void {
-    let lruKey = '';
+    let lruKey = "";
     let lruTime = Date.now();
 
     for (const [key, item] of this.cache.entries()) {
@@ -288,7 +298,7 @@ export class AdvancedCacheManager {
     try {
       return JSON.stringify(data);
     } catch {
-      return '';
+      return "";
     }
   }
 
@@ -303,7 +313,7 @@ export class AdvancedCacheManager {
 
   // 持久化到localStorage
   private saveToPersistence(): void {
-    if (!this.config.enablePersistence || typeof window === 'undefined') {
+    if (!this.config.enablePersistence || typeof window === "undefined") {
       return;
     }
 
@@ -313,20 +323,20 @@ export class AdvancedCacheManager {
         stats: this.stats,
         timestamp: Date.now(),
       });
-      localStorage.setItem('advanced-cache', serialized);
+      localStorage.setItem("advanced-cache", serialized);
     } catch (error) {
-      console.warn('Failed to save cache to localStorage:', error);
+      console.warn("Failed to save cache to localStorage:", error);
     }
   }
 
   // 从localStorage加载
   private loadFromPersistence(): void {
-    if (!this.config.enablePersistence || typeof window === 'undefined') {
+    if (!this.config.enablePersistence || typeof window === "undefined") {
       return;
     }
 
     try {
-      const serialized = localStorage.getItem('advanced-cache');
+      const serialized = localStorage.getItem("advanced-cache");
       if (!serialized) return;
 
       const data = JSON.parse(serialized);
@@ -334,7 +344,7 @@ export class AdvancedCacheManager {
 
       // 检查数据是否太旧（超过1天）
       if (now - data.timestamp > 24 * 60 * 60 * 1000) {
-        localStorage.removeItem('advanced-cache');
+        localStorage.removeItem("advanced-cache");
         return;
       }
 
@@ -348,8 +358,8 @@ export class AdvancedCacheManager {
       // 恢复统计
       this.stats = data.stats || { hits: 0, misses: 0 };
     } catch (error) {
-      console.warn('Failed to load cache from localStorage:', error);
-      localStorage.removeItem('advanced-cache');
+      console.warn("Failed to load cache from localStorage:", error);
+      localStorage.removeItem("advanced-cache");
     }
   }
 

@@ -20,7 +20,7 @@ const USER_AGENTS = {
 function makeRequest(userAgent, label) {
   return new Promise((resolve, reject) => {
     const url = new URL(SITEMAP_URL);
-    
+
     const options = {
       hostname: url.hostname,
       port: url.port || 443,
@@ -36,11 +36,11 @@ function makeRequest(userAgent, label) {
 
     const req = https.request(options, (res) => {
       let data = '';
-      
+
       res.on('data', (chunk) => {
         data += chunk;
       });
-      
+
       res.on('end', () => {
         resolve({
           label,
@@ -71,7 +71,7 @@ function makeRequest(userAgent, label) {
 
 async function diagnoseSitemap() {
   console.log('🔍 开始诊断Bing Sitemap问题...\n');
-  
+
   const tests = [
     { agent: USER_AGENTS.bing, label: 'Bing Bot' },
     { agent: USER_AGENTS.google, label: 'Google Bot' },
@@ -82,7 +82,7 @@ async function diagnoseSitemap() {
     try {
       console.log(`📡 测试 ${test.label}...`);
       const result = await makeRequest(test.agent, test.label);
-      
+
       console.log(`✅ ${result.label} 结果:`);
       console.log(`   状态码: ${result.statusCode}`);
       console.log(`   Content-Type: ${result.contentType}`);
@@ -90,14 +90,14 @@ async function diagnoseSitemap() {
       console.log(`   包含XML声明: ${result.hasXmlDeclaration}`);
       console.log(`   包含urlset标签: ${result.hasUrlsetTag}`);
       console.log(`   URL数量: ${result.urlCount}`);
-      
+
       if (result.contentLength < 100) {
         console.log(`⚠️  内容异常短，前几行:`);
         console.log(result.firstFewLines);
       }
-      
+
       console.log('');
-      
+
     } catch (error) {
       console.log(`❌ ${error.label} 失败: ${error.error}\n`);
     }

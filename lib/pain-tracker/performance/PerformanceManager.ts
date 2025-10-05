@@ -24,28 +24,28 @@ export interface PerformanceManagerInterface {
   // Lazy Loading
   loadRecordsPaginated(options: PaginationOptions): Promise<LazyLoadResult<PainRecord>>;
   loadRecordsVirtual(startIndex: number, endIndex: number): Promise<PainRecord[]>;
-  
+
   // Data Compression
   compressData(data: any): Promise<string>;
   decompressData(compressedData: string): Promise<any>;
-  
+
   // Data Cleanup
   performDataCleanup(options?: CleanupOptions): Promise<CleanupResult>;
   scheduleAutomaticCleanup(intervalMs: number): void;
-  
+
   // Chart Performance
   optimizeChartData(data: any[], chartType: string, options?: ChartOptimizationOptions): Promise<any[]>;
   optimizeChartOptions(baseOptions: any, dataSize: number): any;
-  
+
   // Memory Management
   monitorMemoryUsage(): MemoryUsageInfo;
   cleanupMemory(): Promise<void>;
   registerChartInstance(id: string, instance: any): void;
-  
+
   // Storage Quota
   monitorStorageQuota(): Promise<StorageQuotaInfo>;
   optimizeStorage(): Promise<void>;
-  
+
   // Overall Performance
   getPerformanceReport(): Promise<PerformanceReport>;
   optimizeOverallPerformance(): Promise<OverallOptimizationResult>;
@@ -89,10 +89,10 @@ export class PerformanceManager implements PerformanceManagerInterface {
     this.quotaManager = new StorageQuotaManager();
 
     // Start automatic monitoring only if enabled (default true, but can be disabled for tests)
-    const enableMonitoring = options.enableMonitoring !== false && 
-                            typeof process === 'undefined' || 
+    const enableMonitoring = options.enableMonitoring !== false &&
+                            typeof process === 'undefined' ||
                             process.env.NODE_ENV !== 'test';
-    
+
     if (enableMonitoring) {
       this.initializePerformanceMonitoring();
     }
@@ -164,13 +164,13 @@ export class PerformanceManager implements PerformanceManagerInterface {
       const memory = this.monitorMemoryUsage();
       const storage = await this.monitorStorageQuota();
       const cacheStats = this.lazyLoadingService.getCacheStats();
-      
+
       // Generate recommendations
       const recommendations = await this.generatePerformanceRecommendations(memory, storage, cacheStats);
-      
+
       // Calculate performance score
       const performanceScore = this.calculatePerformanceScore(memory, storage, cacheStats);
-      
+
       const report: PerformanceReport = {
         memory,
         storage,
@@ -198,25 +198,25 @@ export class PerformanceManager implements PerformanceManagerInterface {
 
   async optimizeOverallPerformance(): Promise<OverallOptimizationResult> {
     const startTime = performance.now();
-    
+
     try {
       // Get initial performance metrics
       const initialReport = await this.getPerformanceReport();
-      
+
       // Perform optimizations in order of impact
       const memoryOptimization = await this.memoryManager.cleanupChartInstances();
       const storageOptimization = await this.quotaManager.optimizeStorageUsage();
       const dataCleanup = await this.cleanupService.performCleanup();
-      
+
       // Clear caches to free up memory
       this.lazyLoadingService.clearCache();
-      
+
       // Get final performance metrics
       const finalReport = await this.getPerformanceReport();
-      
+
       const totalTimeSaved = performance.now() - startTime;
       const performanceImprovement = finalReport.performanceScore - initialReport.performanceScore;
-      
+
       // Generate post-optimization recommendations
       const recommendations = await this.generatePostOptimizationRecommendations(
         initialReport,
@@ -273,19 +273,19 @@ export class PerformanceManager implements PerformanceManagerInterface {
   configureForDevice(): void {
     const memory = this.monitorMemoryUsage();
     const isLowMemoryDevice = memory.jsHeapSizeLimit < 100 * 1024 * 1024; // Less than 100MB
-    
+
     if (isLowMemoryDevice) {
       // Configure for low-memory devices
       this.chartOptimizer = new ChartPerformanceOptimizer();
       this.compressionService = new DataCompressionService('advanced');
-      
+
       // Enable aggressive cleanup
       this.scheduleAutomaticCleanup(5 * 60 * 1000); // Every 5 minutes
       this.memoryManager.scheduleMemoryCleanup(2 * 60 * 1000); // Every 2 minutes
     } else {
       // Configure for high-performance devices
       this.compressionService = new DataCompressionService('basic');
-      
+
       // Less frequent cleanup
       this.scheduleAutomaticCleanup(30 * 60 * 1000); // Every 30 minutes
       this.memoryManager.scheduleMemoryCleanup(10 * 60 * 1000); // Every 10 minutes
@@ -298,17 +298,17 @@ export class PerformanceManager implements PerformanceManagerInterface {
   async emergencyOptimization(): Promise<void> {
     try {
       console.warn('Performing emergency performance optimization');
-      
+
       // Immediate memory cleanup
       await this.memoryManager.cleanupChartInstances();
       await this.memoryManager.forceGarbageCollection();
-      
+
       // Clear all caches
       this.lazyLoadingService.clearCache();
-      
+
       // Emergency storage cleanup
       await this.quotaManager.handleQuotaExceeded();
-      
+
       // Aggressive data cleanup
       const emergencyCleanupOptions: CleanupOptions = {
         maxRecords: 500,
@@ -318,9 +318,9 @@ export class PerformanceManager implements PerformanceManagerInterface {
         archiveOldRecords: true,
         compactStorage: true
       };
-      
+
       await this.cleanupService.performCleanup(emergencyCleanupOptions);
-      
+
       console.log('Emergency optimization completed');
     } catch (error) {
       console.error('Emergency optimization failed:', error);
@@ -337,7 +337,7 @@ export class PerformanceManager implements PerformanceManagerInterface {
     this.performanceMonitoringTimer = setInterval(async () => {
       try {
         const report = await this.getPerformanceReport();
-        
+
         // Trigger optimizations if performance is poor
         if (report.performanceScore < 50) {
           console.warn('Poor performance detected, triggering optimization');
@@ -457,7 +457,7 @@ export class PerformanceManager implements PerformanceManagerInterface {
       clearInterval(this.performanceMonitoringTimer);
       this.performanceMonitoringTimer = null;
     }
-    
+
     if (this.emergencyMonitoringTimer) {
       clearInterval(this.emergencyMonitoringTimer);
       this.emergencyMonitoringTimer = null;

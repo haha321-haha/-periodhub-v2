@@ -2,7 +2,7 @@
 
 /**
  * 🚀 PeriodHub 性能测试脚本
- * 
+ *
  * 功能：
  * 1. 测试页面加载速度
  * 2. 分析 Core Web Vitals 指标
@@ -22,7 +22,7 @@ class PerformanceTester {
       summary: {},
       recommendations: []
     };
-    
+
     // 测试页面列表
     this.testPages = [
       { path: '/zh', name: '首页' },
@@ -35,15 +35,15 @@ class PerformanceTester {
 
   async run() {
     console.log('🚀 开始性能测试...\n');
-    
+
     try {
       await this.checkServer();
       await this.runPerformanceTests();
       await this.generateReport();
-      
+
       console.log('\n✅ 性能测试完成！');
       console.log('📊 查看详细报告: ./performance-test-report.json');
-      
+
     } catch (error) {
       console.error('❌ 性能测试失败:', error.message);
       process.exit(1);
@@ -52,7 +52,7 @@ class PerformanceTester {
 
   async checkServer() {
     console.log('🔍 检查本地服务器...');
-    
+
     try {
       const response = await fetch('http://localhost:3000');
       if (response.ok) {
@@ -62,7 +62,7 @@ class PerformanceTester {
     } catch (error) {
       // 服务器未运行
     }
-    
+
     console.log('⚠️ 请确保开发服务器正在运行:');
     console.log('   npm run dev');
     console.log('   然后重新运行此脚本');
@@ -96,7 +96,7 @@ class PerformanceTester {
 
   async testPage(browser, testPage) {
     const page = await browser.newPage();
-    
+
     try {
       // 设置移动端视口
       await page.setViewport({
@@ -150,7 +150,7 @@ class PerformanceTester {
       // 获取代码覆盖率
       const jsCoverage = await page.coverage.stopJSCoverage();
       const cssCoverage = await page.coverage.stopCSSCoverage();
-      
+
       result.metrics.jsUsage = this.calculateUsage(jsCoverage);
       result.metrics.cssUsage = this.calculateUsage(cssCoverage);
 
@@ -172,7 +172,7 @@ class PerformanceTester {
     return await page.evaluate(() => {
       return new Promise((resolve) => {
         const vitals = {};
-        
+
         // 获取 FCP (First Contentful Paint)
         const observer = new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
@@ -211,7 +211,7 @@ class PerformanceTester {
           observer.disconnect();
           lcpObserver.disconnect();
           clsObserver.disconnect();
-          
+
           // 获取其他性能指标
           const navigation = performance.getEntriesByType('navigation')[0];
           if (navigation) {
@@ -219,7 +219,7 @@ class PerformanceTester {
             vitals.domContentLoaded = Math.round(navigation.domContentLoadedEventEnd - navigation.navigationStart);
             vitals.loadComplete = Math.round(navigation.loadEventEnd - navigation.navigationStart);
           }
-          
+
           resolve(vitals);
         }, 3000);
       });
@@ -230,7 +230,7 @@ class PerformanceTester {
     return await page.evaluate(() => {
       const resources = [];
       const entries = performance.getEntriesByType('resource');
-      
+
       entries.forEach(entry => {
         resources.push({
           name: entry.name.split('/').pop(),
@@ -240,58 +240,58 @@ class PerformanceTester {
           startTime: Math.round(entry.startTime)
         });
       });
-      
+
       return resources.sort((a, b) => b.size - a.size).slice(0, 10); // 前10个最大的资源
     });
   }
 
   async checkPerformanceIssues(page, metrics) {
     const issues = [];
-    
+
     // 检查 Core Web Vitals 阈值
     if (metrics.fcp > 1800) {
       issues.push(`FCP 过慢: ${metrics.fcp}ms (建议 < 1800ms)`);
     }
-    
+
     if (metrics.lcp > 2500) {
       issues.push(`LCP 过慢: ${metrics.lcp}ms (建议 < 2500ms)`);
     }
-    
+
     if (metrics.cls > 0.1) {
       issues.push(`CLS 过高: ${metrics.cls} (建议 < 0.1)`);
     }
-    
+
     if (metrics.ttfb > 800) {
       issues.push(`TTFB 过慢: ${metrics.ttfb}ms (建议 < 800ms)`);
     }
-    
+
     if (metrics.loadTime > 3000) {
       issues.push(`页面加载时间过长: ${metrics.loadTime}ms (建议 < 3000ms)`);
     }
-    
+
     // 检查代码使用率
     if (metrics.jsUsage < 50) {
       issues.push(`JavaScript 使用率过低: ${metrics.jsUsage}% (建议 > 50%)`);
     }
-    
+
     if (metrics.cssUsage < 60) {
       issues.push(`CSS 使用率过低: ${metrics.cssUsage}% (建议 > 60%)`);
     }
-    
+
     return issues;
   }
 
   calculateUsage(coverage) {
     let totalBytes = 0;
     let usedBytes = 0;
-    
+
     coverage.forEach(entry => {
       totalBytes += entry.text.length;
       entry.ranges.forEach(range => {
         usedBytes += range.end - range.start - 1;
       });
     });
-    
+
     return totalBytes > 0 ? Math.round((usedBytes / totalBytes) * 100) : 0;
   }
 
@@ -301,7 +301,7 @@ class PerformanceTester {
     // 计算总体统计
     const validPages = this.results.pages.filter(page => !page.error);
     const totalIssues = validPages.reduce((sum, page) => sum + (page.issues?.length || 0), 0);
-    
+
     const avgMetrics = this.calculateAverageMetrics(validPages);
 
     const report = {
@@ -341,32 +341,32 @@ class PerformanceTester {
 
   calculateAverageMetrics(pages) {
     if (pages.length === 0) return {};
-    
+
     const metrics = ['fcp', 'lcp', 'cls', 'ttfb', 'loadTime', 'jsUsage', 'cssUsage'];
     const averages = {};
-    
+
     metrics.forEach(metric => {
       const values = pages
         .map(page => page.metrics?.[metric])
         .filter(value => value !== undefined && value !== null);
-      
+
       if (values.length > 0) {
         averages[metric] = Math.round(values.reduce((sum, val) => sum + val, 0) / values.length);
       }
     });
-    
+
     return averages;
   }
 
   generateRecommendations(pages) {
     const recommendations = [];
-    
+
     // 基于测试结果生成建议
     const hasSlowFCP = pages.some(page => page.metrics?.fcp > 1800);
     const hasSlowLCP = pages.some(page => page.metrics?.lcp > 2500);
     const hasHighCLS = pages.some(page => page.metrics?.cls > 0.1);
     const hasLowJSUsage = pages.some(page => page.metrics?.jsUsage < 50);
-    
+
     if (hasSlowFCP) {
       recommendations.push({
         type: 'fcp',
@@ -375,7 +375,7 @@ class PerformanceTester {
         solution: '优化关键渲染路径，内联关键CSS，延迟非关键资源'
       });
     }
-    
+
     if (hasSlowLCP) {
       recommendations.push({
         type: 'lcp',
@@ -384,7 +384,7 @@ class PerformanceTester {
         solution: '优化最大内容元素，使用 priority 属性预加载重要图片'
       });
     }
-    
+
     if (hasHighCLS) {
       recommendations.push({
         type: 'cls',
@@ -393,7 +393,7 @@ class PerformanceTester {
         solution: '为图片和动态内容预留空间，避免布局跳动'
       });
     }
-    
+
     if (hasLowJSUsage) {
       recommendations.push({
         type: 'js-usage',
@@ -402,13 +402,13 @@ class PerformanceTester {
         solution: '实施代码分割，移除未使用的代码'
       });
     }
-    
+
     return recommendations;
   }
 
   generateHumanReadableReport(report) {
     const readableReportPath = path.join(this.projectRoot, 'performance-test-report.md');
-    
+
     let content = `# 🚀 PeriodHub 性能测试报告
 
 生成时间: ${new Date(report.timestamp).toLocaleString('zh-CN')}
@@ -458,12 +458,12 @@ class PerformanceTester {
 
     report.pages.forEach(page => {
       content += `### ${page.name} (${page.path})\n\n`;
-      
+
       if (page.error) {
         content += `❌ **错误**: ${page.error}\n\n`;
         return;
       }
-      
+
       content += `**性能指标**:\n`;
       content += `- FCP: ${page.metrics?.fcp || 'N/A'}ms\n`;
       content += `- LCP: ${page.metrics?.lcp || 'N/A'}ms\n`;
@@ -472,7 +472,7 @@ class PerformanceTester {
       content += `- 加载时间: ${page.metrics?.loadTime || 'N/A'}ms\n`;
       content += `- JS 使用率: ${page.metrics?.jsUsage || 'N/A'}%\n`;
       content += `- CSS 使用率: ${page.metrics?.cssUsage || 'N/A'}%\n\n`;
-      
+
       if (page.issues && page.issues.length > 0) {
         content += `**发现问题**:\n`;
         page.issues.forEach(issue => {
@@ -480,7 +480,7 @@ class PerformanceTester {
         });
         content += '\n';
       }
-      
+
       if (page.resources && page.resources.length > 0) {
         content += `**最大资源** (前5个):\n`;
         page.resources.slice(0, 5).forEach(resource => {

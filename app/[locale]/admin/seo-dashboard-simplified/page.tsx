@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import SEODashboardSimplifiedClient from './seo-dashboard-simplified-client';
+import type { Metadata } from "next";
+import SEODashboardSimplifiedClient from "./seo-dashboard-simplified-client";
 
 export const metadata: Metadata = {
-  title: 'SEO Dashboard Simplified - PeriodHub Admin',
-  description: 'Simplified SEO analytics dashboard',
+  title: "SEO Dashboard Simplified - PeriodHub Admin",
+  description: "Simplified SEO analytics dashboard",
   robots: {
     index: false,
     follow: false,

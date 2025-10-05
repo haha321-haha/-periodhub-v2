@@ -6,21 +6,21 @@ export interface UserPreferences {
   // Assessment preferences
   preferredAssessmentMode: 'simplified' | 'detailed' | 'medical';
   preferredLanguage: 'zh' | 'en';
-  
+
   // UI preferences
   theme: 'light' | 'dark' | 'auto';
   fontSize: 'small' | 'medium' | 'large';
   animationsEnabled: boolean;
-  
+
   // Notification preferences
   emailNotifications: boolean;
   pushNotifications: boolean;
   reminderFrequency: 'daily' | 'weekly' | 'monthly' | 'never';
-  
+
   // Privacy preferences
   dataSharing: boolean;
   analyticsEnabled: boolean;
-  
+
   // Personalization preferences
   personalizedRecommendations: boolean;
   trackAssessmentHistory: boolean;
@@ -109,4 +109,3 @@ export const useUserPreferences = () => {
     getPreference,
   };
 };
-

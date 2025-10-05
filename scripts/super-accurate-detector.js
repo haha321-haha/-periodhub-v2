@@ -17,10 +17,10 @@ class SuperAccurateDetector {
         '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx',
         '**/*.vue', '**/*.html', '**/*.css', '**/*.scss'
       ],
-      
+
       // 严格排除目录
       excludeDirs: [
-        'node_modules', 'dist', 'build', '.git', 
+        'node_modules', 'dist', 'build', '.git',
         'coverage', '.next', '.nuxt', 'recovery-workspace',
         'hub-latest-main', 'backup', 'reports', 'recovered',
         '.vercel', 'logs', 'tests/__snapshots__',
@@ -28,7 +28,7 @@ class SuperAccurateDetector {
         'h1-fixes', 'hardcoded-fixes', 'dead-links-fixes',
         'public/pdf-files' // 排除PDF文件
       ],
-      
+
       // 排除特定文件
       excludeFiles: [
         '**/*.json', '**/*.md', '**/*.txt', '**/*.csv',
@@ -38,7 +38,7 @@ class SuperAccurateDetector {
         '**/public/pdf-files/**' // 排除PDF文件
       ]
     };
-    
+
     this.results = {
       urls: [],
       texts: [],
@@ -52,25 +52,25 @@ class SuperAccurateDetector {
   async detectHardcodes() {
     console.log('🎯 开始超级精确硬编码检测...');
     console.log('🔍 只检测真正的硬编码，排除所有误报');
-    
+
     const files = await this.getFilesToScan();
     console.log(`📁 扫描 ${files.length} 个关键文件...`);
-    
+
     for (const file of files) {
       await this.processFile(file);
     }
-    
+
     this.results.total = this.results.urls.length + this.results.texts.length;
-    
+
     this.generateSuperAccurateReport();
-    
+
     return this.results;
   }
 
   // 📁 获取需要扫描的文件
   async getFilesToScan() {
     const allFiles = [];
-    
+
     for (const pattern of this.config.fileExtensions) {
       const files = glob.sync(pattern, {
         ignore: [
@@ -81,9 +81,9 @@ class SuperAccurateDetector {
       });
       allFiles.push(...files);
     }
-    
+
     const uniqueFiles = [...new Set(allFiles)];
-    
+
     // 按文件大小过滤
     const filteredFiles = uniqueFiles.filter(file => {
       try {
@@ -93,9 +93,9 @@ class SuperAccurateDetector {
         return false;
       }
     });
-    
+
     this.results.skippedFiles = uniqueFiles.length - filteredFiles.length;
-    
+
     return filteredFiles;
   }
 
@@ -104,10 +104,10 @@ class SuperAccurateDetector {
     try {
       const content = fs.readFileSync(file, 'utf8');
       this.results.scannedFiles++;
-      
+
       // 只检测URL硬编码，暂时跳过文本硬编码
       this.detectUrlsInFile(file, content);
-      
+
     } catch (error) {
       this.results.skippedFiles++;
     }
@@ -116,12 +116,12 @@ class SuperAccurateDetector {
   // 🔗 检测URL硬编码（超级严格）
   detectUrlsInFile(file, content) {
     const lines = content.split('\n');
-    
+
     lines.forEach((line, lineNumber) => {
       // 只检测非www版本的URL（这些是真正的问题）
       const nonWwwUrl = /https:\/\/periodhub\.health(?!\/)/g;
       const matches = line.match(nonWwwUrl);
-      
+
       if (matches) {
         matches.forEach(match => {
           // 超级严格的过滤条件
@@ -145,32 +145,32 @@ class SuperAccurateDetector {
     if (line.trim().startsWith('//') || line.trim().startsWith('*')) {
       return false;
     }
-    
+
     // 排除文档文件
     if (file.includes('README') || file.includes('CHANGELOG')) {
       return false;
     }
-    
+
     // 排除配置文件中的示例
     if (line.includes('example') || line.includes('Example')) {
       return false;
     }
-    
+
     // 排除测试文件
     if (file.includes('test') || file.includes('spec')) {
       return false;
     }
-    
+
     // 排除PDF文件
     if (file.includes('pdf-files')) {
       return false;
     }
-    
+
     // 排除报告文件
     if (file.includes('report') || file.includes('analysis')) {
       return false;
     }
-    
+
     return true;
   }
 
@@ -181,18 +181,18 @@ class SuperAccurateDetector {
     console.log(`   📁 扫描文件: ${this.results.scannedFiles}`);
     console.log(`   ⏭️  跳过文件: ${this.results.skippedFiles}`);
     console.log(`   🔍 发现硬编码: ${this.results.total}`);
-    
+
     console.log(`\n📋 按类型分布:`);
     console.log(`   🔗 URL硬编码: ${this.results.urls.length} 个`);
     console.log(`   📝 文本硬编码: ${this.results.texts.length} 个`);
-    
+
     if (this.results.urls.length > 0) {
       console.log(`\n🔍 URL硬编码详情:`);
       this.results.urls.forEach((issue, index) => {
         console.log(`   ${index + 1}. 🔴 ${issue.file}:${issue.line} - ${issue.match}`);
       });
     }
-    
+
     if (this.results.total === 0) {
       console.log(`\n🎉 太棒了！没有发现真正的硬编码问题！`);
       console.log(`💡 建议:`);
@@ -205,7 +205,7 @@ class SuperAccurateDetector {
       console.log(`     1. 使用: import { URL_CONFIG } from '@/lib/url-config'`);
       console.log(`     2. 替换: URL_CONFIG.getUrl('/path')`);
       console.log(`     3. 运行: npm run hardcode:fix`);
-      
+
       console.log(`\n🚀 快速修复命令:`);
       console.log(`   npm run hardcode:super-accurate  # 超级精确检测`);
       console.log(`   npm run hardcode:fix             # 修复URL硬编码`);
@@ -218,7 +218,7 @@ class SuperAccurateDetector {
 async function main() {
   const detector = new SuperAccurateDetector();
   const args = process.argv.slice(2);
-  
+
   if (args.includes('--detect')) {
     await detector.detectHardcodes();
   } else {

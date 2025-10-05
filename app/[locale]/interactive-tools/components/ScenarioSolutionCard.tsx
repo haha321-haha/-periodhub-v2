@@ -20,7 +20,7 @@ interface ScenarioSolutionCardProps {
 
 export default function ScenarioSolutionCard({ solution, locale }: ScenarioSolutionCardProps) {
   const anchorT = useTranslations('anchorTexts');
-  
+
   // 根据图标颜色确定背景色和文字色
   const getIconColors = (color?: string) => {
     switch (color) {
@@ -42,7 +42,7 @@ export default function ScenarioSolutionCard({ solution, locale }: ScenarioSolut
   };
 
   const iconColors = getIconColors(solution.iconColor);
-  
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
       <div className="flex items-start space-x-4">
@@ -58,14 +58,14 @@ export default function ScenarioSolutionCard({ solution, locale }: ScenarioSolut
           <p className="text-gray-600 text-sm mb-3">
             {solution.description}
           </p>
-          <Link 
+          <Link
             href={solution.href}
             className={`inline-flex items-center ${iconColors.text} hover:${iconColors.text.replace('600', '800')} font-medium text-sm transition-colors`}
             suppressHydrationWarning={true}
           >
-            {solution.anchorTextType ? 
-              (solution.anchorTextType.includes('teen.') ? 
-                anchorT(solution.anchorTextType) : 
+            {solution.anchorTextType ?
+              (solution.anchorTextType.includes('teen.') ?
+                anchorT(solution.anchorTextType) :
                 anchorT(`solutions.${solution.anchorTextType}`)) :
              solution.id === 'office' ? anchorT('solutions.office') :
              solution.id === 'social' ? anchorT('solutions.social') :

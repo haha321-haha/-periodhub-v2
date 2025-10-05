@@ -3,8 +3,12 @@
  * 提供完整的部署流程
  */
 
-import { productionConfig, environmentVariables, deploymentConfig } from '../config/production';
-import { FinalValidator } from '../utils/finalValidation';
+import {
+  productionConfig,
+  environmentVariables,
+  deploymentConfig,
+} from "../config/production";
+import { FinalValidator } from "../utils/finalValidation";
 
 // 基于ziV1d3d的部署步骤
 export class DeploymentManager {
@@ -16,90 +20,90 @@ export class DeploymentManager {
 
   // 预部署验证
   async preDeploymentValidation(): Promise<boolean> {
-    console.log('🔍 开始预部署验证...');
-    
+    console.log("🔍 开始预部署验证...");
+
     try {
       const report = await this.validator.runFullValidation();
-      
-      console.log('📊 验证报告:');
+
+      console.log("📊 验证报告:");
       console.log(`   总体状态: ${report.overall}`);
       console.log(`   总计: ${report.summary.total}`);
       console.log(`   通过: ${report.summary.passed}`);
       console.log(`   失败: ${report.summary.failed}`);
       console.log(`   警告: ${report.summary.warnings}`);
 
-      if (report.overall === 'fail') {
-        console.error('❌ 预部署验证失败，无法继续部署');
+      if (report.overall === "fail") {
+        console.error("❌ 预部署验证失败，无法继续部署");
         return false;
       }
 
-      if (report.overall === 'warning') {
-        console.warn('⚠️ 预部署验证有警告，建议检查后继续');
+      if (report.overall === "warning") {
+        console.warn("⚠️ 预部署验证有警告，建议检查后继续");
       }
 
-      console.log('✅ 预部署验证通过');
+      console.log("✅ 预部署验证通过");
       return true;
     } catch (error) {
-      console.error('❌ 预部署验证出错:', error);
+      console.error("❌ 预部署验证出错:", error);
       return false;
     }
   }
 
   // 构建项目
   async buildProject(): Promise<boolean> {
-    console.log('🔨 开始构建项目...');
-    
+    console.log("🔨 开始构建项目...");
+
     try {
       // 这里应该调用实际的构建命令
       // 例如: await exec('npm run build');
-      console.log('✅ 项目构建完成');
+      console.log("✅ 项目构建完成");
       return true;
     } catch (error) {
-      console.error('❌ 项目构建失败:', error);
+      console.error("❌ 项目构建失败:", error);
       return false;
     }
   }
 
   // 部署到Vercel
   async deployToVercel(): Promise<boolean> {
-    console.log('🚀 开始部署到Vercel...');
-    
+    console.log("🚀 开始部署到Vercel...");
+
     try {
       // 这里应该调用Vercel部署命令
       // 例如: await exec('vercel --prod');
-      console.log('✅ Vercel部署完成');
+      console.log("✅ Vercel部署完成");
       return true;
     } catch (error) {
-      console.error('❌ Vercel部署失败:', error);
+      console.error("❌ Vercel部署失败:", error);
       return false;
     }
   }
 
   // 部署后验证
   async postDeploymentValidation(): Promise<boolean> {
-    console.log('🔍 开始部署后验证...');
-    
+    console.log("🔍 开始部署后验证...");
+
     try {
       // 检查部署状态
       const isDeployed = await this.checkDeploymentStatus();
-      
+
       if (!isDeployed) {
-        console.error('❌ 部署状态检查失败');
+        console.error("❌ 部署状态检查失败");
         return false;
       }
 
       // 检查页面可访问性
       const isAccessible = await this.checkPageAccessibility();
-      
+
       if (!isAccessible) {
-        console.error('❌ 页面可访问性检查失败');
+        console.error("❌ 页面可访问性检查失败");
         return false;
       }
 
-      console.log('✅ 部署后验证通过');
+      console.log("✅ 部署后验证通过");
       return true;
     } catch (error) {
-      console.error('❌ 部署后验证出错:', error);
+      console.error("❌ 部署后验证出错:", error);
       return false;
     }
   }
@@ -109,10 +113,10 @@ export class DeploymentManager {
     try {
       // 这里应该检查实际的部署状态
       // 例如: 检查Vercel部署状态API
-      console.log('   检查部署状态...');
+      console.log("   检查部署状态...");
       return true;
     } catch (error) {
-      console.error('   部署状态检查失败:', error);
+      console.error("   部署状态检查失败:", error);
       return false;
     }
   }
@@ -122,18 +126,18 @@ export class DeploymentManager {
     try {
       // 这里应该检查页面是否可访问
       // 例如: 发送HTTP请求到部署的页面
-      console.log('   检查页面可访问性...');
+      console.log("   检查页面可访问性...");
       return true;
     } catch (error) {
-      console.error('   页面可访问性检查失败:', error);
+      console.error("   页面可访问性检查失败:", error);
       return false;
     }
   }
 
   // 完整部署流程
   async deploy(): Promise<boolean> {
-    console.log('🚀 开始完整部署流程...');
-    
+    console.log("🚀 开始完整部署流程...");
+
     try {
       // 1. 预部署验证
       const preValidation = await this.preDeploymentValidation();
@@ -159,10 +163,10 @@ export class DeploymentManager {
         return false;
       }
 
-      console.log('🎉 完整部署流程成功完成！');
+      console.log("🎉 完整部署流程成功完成！");
       return true;
     } catch (error) {
-      console.error('❌ 完整部署流程失败:', error);
+      console.error("❌ 完整部署流程失败:", error);
       return false;
     }
   }
@@ -170,14 +174,14 @@ export class DeploymentManager {
 
 // 基于ziV1d3d的部署配置检查
 export function checkDeploymentConfig(): boolean {
-  console.log('🔍 检查部署配置...');
-  
+  console.log("🔍 检查部署配置...");
+
   try {
     // 检查环境变量
     const requiredEnvVars = [
-      'NODE_ENV',
-      'NEXT_PUBLIC_APP_URL',
-      'NEXT_PUBLIC_API_URL'
+      "NODE_ENV",
+      "NEXT_PUBLIC_APP_URL",
+      "NEXT_PUBLIC_API_URL",
     ];
 
     for (const envVar of requiredEnvVars) {
@@ -189,21 +193,21 @@ export function checkDeploymentConfig(): boolean {
 
     // 检查生产配置
     if (!productionConfig.performance.enableMonitoring) {
-      console.warn('⚠️ 性能监控未启用');
+      console.warn("⚠️ 性能监控未启用");
     }
 
     if (!productionConfig.security.enableCSP) {
-      console.warn('⚠️ CSP未启用');
+      console.warn("⚠️ CSP未启用");
     }
 
     if (!productionConfig.seo.enableSitemap) {
-      console.warn('⚠️ Sitemap未启用');
+      console.warn("⚠️ Sitemap未启用");
     }
 
-    console.log('✅ 部署配置检查通过');
+    console.log("✅ 部署配置检查通过");
     return true;
   } catch (error) {
-    console.error('❌ 部署配置检查失败:', error);
+    console.error("❌ 部署配置检查失败:", error);
     return false;
   }
 }
@@ -211,7 +215,7 @@ export function checkDeploymentConfig(): boolean {
 // 基于ziV1d3d的部署状态监控
 export class DeploymentMonitor {
   private static instance: DeploymentMonitor;
-  private status: 'idle' | 'deploying' | 'deployed' | 'failed' = 'idle';
+  private status: "idle" | "deploying" | "deployed" | "failed" = "idle";
   private startTime: number = 0;
   private endTime: number = 0;
 
@@ -224,14 +228,14 @@ export class DeploymentMonitor {
 
   // 开始部署
   startDeployment(): void {
-    this.status = 'deploying';
+    this.status = "deploying";
     this.startTime = Date.now();
-    console.log('🚀 部署开始...');
+    console.log("🚀 部署开始...");
   }
 
   // 完成部署
   completeDeployment(): void {
-    this.status = 'deployed';
+    this.status = "deployed";
     this.endTime = Date.now();
     const duration = this.endTime - this.startTime;
     console.log(`✅ 部署完成，耗时: ${duration}ms`);
@@ -239,19 +243,24 @@ export class DeploymentMonitor {
 
   // 部署失败
   failDeployment(): void {
-    this.status = 'failed';
+    this.status = "failed";
     this.endTime = Date.now();
     const duration = this.endTime - this.startTime;
     console.log(`❌ 部署失败，耗时: ${duration}ms`);
   }
 
   // 获取部署状态
-  getStatus(): { status: string; duration: number; startTime: number; endTime: number } {
+  getStatus(): {
+    status: string;
+    duration: number;
+    startTime: number;
+    endTime: number;
+  } {
     return {
       status: this.status,
       duration: this.endTime - this.startTime,
       startTime: this.startTime,
-      endTime: this.endTime
+      endTime: this.endTime,
     };
   }
 }

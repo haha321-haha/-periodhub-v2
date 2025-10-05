@@ -1,24 +1,24 @@
 // lib/pdf-resources/core/resource-manager.ts
 
-import { 
-  PDFResource, 
-  ResourceCategory, 
+import {
+  PDFResource,
+  ResourceCategory,
   SupportedLanguage,
   SearchOptions,
   ResourceStats,
   ValidationResult,
   BatchOperationResult,
   SearchResult,
-  PaginatedSearchResult
-} from '../types/resource-types';
-import { PDFResourceConfig } from '../types/config-types';
-import { CacheManager } from './cache-manager';
-import { ResourceValidator } from './resource-validator';
-import { ErrorHandler, ErrorType, ErrorSeverity } from './error-handler';
-// import { 
-//   PDF_RESOURCES, 
-//   LEGACY_ID_MAPPING, 
-//   getPDFResourceById, 
+  PaginatedSearchResult,
+} from "../types/resource-types";
+import { PDFResourceConfig } from "../types/config-types";
+import { CacheManager } from "./cache-manager";
+import { ResourceValidator } from "./resource-validator";
+import { ErrorHandler, ErrorType, ErrorSeverity } from "./error-handler";
+// import {
+//   PDF_RESOURCES,
+//   LEGACY_ID_MAPPING,
+//   getPDFResourceById,
 //   getPDFResourcesByCategory,
 //   getFeaturedResources,
 //   getResourceStats
@@ -44,8 +44,8 @@ const getResourceStats = () => ({
     mostDownloaded: [],
     highestRated: [],
     mostRecent: [],
-    trending: []
-  }
+    trending: [],
+  },
 });
 
 /**
@@ -55,9 +55,15 @@ interface IResourceAdapter {
   getResource(id: string): Promise<PDFResource | null>;
   getResources(options?: ResourceQueryOptions): Promise<PDFResource[]>;
   createResource(resource: PDFResource): Promise<PDFResource>;
-  updateResource(id: string, updates: Partial<PDFResource>): Promise<PDFResource>;
+  updateResource(
+    id: string,
+    updates: Partial<PDFResource>,
+  ): Promise<PDFResource>;
   deleteResource(id: string): Promise<boolean>;
-  searchResources(query: string, options?: SearchOptions): Promise<SearchResult[]>;
+  searchResources(
+    query: string,
+    options?: SearchOptions,
+  ): Promise<SearchResult[]>;
 }
 
 /**
@@ -68,11 +74,11 @@ interface ResourceQueryOptions {
   language?: SupportedLanguage;
   tags?: string[];
   featured?: boolean;
-  status?: 'active' | 'draft' | 'archived';
+  status?: "active" | "draft" | "archived";
   limit?: number;
   offset?: number;
-  sortBy?: 'id' | 'title' | 'createdAt' | 'updatedAt' | 'quality' | 'downloads';
-  sortOrder?: 'asc' | 'desc';
+  sortBy?: "id" | "title" | "createdAt" | "updatedAt" | "quality" | "downloads";
+  sortOrder?: "asc" | "desc";
 }
 
 /**
@@ -80,46 +86,52 @@ interface ResourceQueryOptions {
  */
 class LocalResourceAdapter implements IResourceAdapter {
   private resources: PDFResource[] = [];
-  
+
   constructor() {
     this.resources = [...PDF_RESOURCES];
   }
 
   async getResource(id: string): Promise<PDFResource | null> {
     // 首先尝试直接查找
-    let resource = this.resources.find(r => r.id === id);
-    
+    let resource = this.resources.find((r) => r.id === id);
+
     // 如果没找到，尝试Legacy映射
     if (!resource) {
       const mappedId = LEGACY_ID_MAPPING[id as keyof typeof LEGACY_ID_MAPPING];
       if (mappedId) {
-        resource = this.resources.find(r => r.id === mappedId);
+        resource = this.resources.find((r) => r.id === mappedId);
       }
     }
-    
+
     return resource || null;
   }
 
-  async getResources(options: ResourceQueryOptions = {}): Promise<PDFResource[]> {
-    let filtered = this.resources.filter(r => r.status === (options.status || 'active'));
+  async getResources(
+    options: ResourceQueryOptions = {},
+  ): Promise<PDFResource[]> {
+    let filtered = this.resources.filter(
+      (r) => r.status === (options.status || "active"),
+    );
 
     // 应用过滤条件
     if (options.category) {
-      filtered = filtered.filter(r => r.category === options.category);
+      filtered = filtered.filter((r) => r.category === options.category);
     }
-    
+
     if (options.language) {
-      filtered = filtered.filter(r => r.language === options.language);
+      filtered = filtered.filter((r) => r.language === options.language);
     }
-    
+
     if (options.tags && options.tags.length > 0) {
-      filtered = filtered.filter(r => 
-        options.tags!.some(tag => r.tags.includes(tag))
+      filtered = filtered.filter((r) =>
+        options.tags!.some((tag) => r.tags.includes(tag)),
       );
     }
-    
+
     if (options.featured !== undefined) {
-      filtered = filtered.filter(r => r.metadata.featured === options.featured);
+      filtered = filtered.filter(
+        (r) => r.metadata.featured === options.featured,
+      );
     }
 
     // 排序
@@ -127,17 +139,17 @@ class LocalResourceAdapter implements IResourceAdapter {
       filtered.sort((a, b) => {
         const getValue = (resource: PDFResource) => {
           switch (options.sortBy) {
-            case 'id':
+            case "id":
               return resource.id;
-            case 'title':
+            case "title":
               return resource.metadata.title.zh || resource.metadata.title.en;
-            case 'createdAt':
+            case "createdAt":
               return resource.createdAt.getTime();
-            case 'updatedAt':
+            case "updatedAt":
               return resource.updatedAt.getTime();
-            case 'quality':
+            case "quality":
               return resource.metadata.quality.overall;
-            case 'downloads':
+            case "downloads":
               return resource.analytics.downloadCount;
             default:
               return resource.id;
@@ -146,19 +158,19 @@ class LocalResourceAdapter implements IResourceAdapter {
 
         const aValue = getValue(a);
         const bValue = getValue(b);
-        
-        if (typeof aValue === 'string' && typeof bValue === 'string') {
-          return options.sortOrder === 'desc' 
+
+        if (typeof aValue === "string" && typeof bValue === "string") {
+          return options.sortOrder === "desc"
             ? bValue.localeCompare(aValue)
             : aValue.localeCompare(bValue);
         }
-        
-        if (typeof aValue === 'number' && typeof bValue === 'number') {
-          return options.sortOrder === 'desc' 
+
+        if (typeof aValue === "number" && typeof bValue === "number") {
+          return options.sortOrder === "desc"
             ? bValue - aValue
             : aValue - bValue;
         }
-        
+
         return 0;
       });
     }
@@ -189,16 +201,19 @@ class LocalResourceAdapter implements IResourceAdapter {
         viewCount: 0,
         shareCount: 0,
         rating: 0,
-        reviewCount: 0
-      }
+        reviewCount: 0,
+      },
     };
 
     this.resources.push(newResource);
     return newResource;
   }
 
-  async updateResource(id: string, updates: Partial<PDFResource>): Promise<PDFResource> {
-    const index = this.resources.findIndex(r => r.id === id);
+  async updateResource(
+    id: string,
+    updates: Partial<PDFResource>,
+  ): Promise<PDFResource> {
+    const index = this.resources.findIndex((r) => r.id === id);
     if (index === -1) {
       throw new Error(`Resource with ID ${id} not found`);
     }
@@ -206,7 +221,7 @@ class LocalResourceAdapter implements IResourceAdapter {
     const updatedResource = {
       ...this.resources[index],
       ...updates,
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     this.resources[index] = updatedResource;
@@ -214,7 +229,7 @@ class LocalResourceAdapter implements IResourceAdapter {
   }
 
   async deleteResource(id: string): Promise<boolean> {
-    const index = this.resources.findIndex(r => r.id === id);
+    const index = this.resources.findIndex((r) => r.id === id);
     if (index === -1) {
       return false;
     }
@@ -223,44 +238,55 @@ class LocalResourceAdapter implements IResourceAdapter {
     return true;
   }
 
-  async searchResources(query: string, options: SearchOptions = {}): Promise<SearchResult[]> {
+  async searchResources(
+    query: string,
+    options: SearchOptions = {},
+  ): Promise<SearchResult[]> {
     const normalizedQuery = query.toLowerCase().trim();
     if (!normalizedQuery) return [];
 
     const results: SearchResult[] = [];
-    
+
     for (const resource of this.resources) {
-      if (resource.status !== 'active') continue;
-      
-      const score = this.calculateSearchScore(resource, normalizedQuery, options);
-      
+      if (resource.status !== "active") continue;
+
+      const score = this.calculateSearchScore(
+        resource,
+        normalizedQuery,
+        options,
+      );
+
       if (score > 0) {
         results.push({
           resource,
           score,
           matchedFields: this.getMatchedFields(resource, normalizedQuery),
-          highlights: this.generateHighlights(resource, normalizedQuery)
+          highlights: this.generateHighlights(resource, normalizedQuery),
         });
       }
     }
 
     // 按分数排序
     results.sort((a, b) => b.score - a.score);
-    
+
     // 应用限制
     return results.slice(0, options.limit || 50);
   }
 
   private calculateSearchScore(
-    resource: PDFResource, 
-    query: string, 
-    options: SearchOptions
+    resource: PDFResource,
+    query: string,
+    options: SearchOptions,
   ): number {
     let score = 0;
     const queryWords = query.split(/\s+/);
 
     // 标题匹配 (权重: 3.0)
-    const title = (resource.metadata.title.zh || resource.metadata.title.en || '').toLowerCase();
+    const title = (
+      resource.metadata.title.zh ||
+      resource.metadata.title.en ||
+      ""
+    ).toLowerCase();
     for (const word of queryWords) {
       if (title.includes(word)) {
         score += title === query ? 3.0 : title.startsWith(query) ? 2.5 : 2.0;
@@ -268,7 +294,11 @@ class LocalResourceAdapter implements IResourceAdapter {
     }
 
     // 描述匹配 (权重: 2.0)
-    const description = (resource.metadata.description.zh || resource.metadata.description.en || '').toLowerCase();
+    const description = (
+      resource.metadata.description.zh ||
+      resource.metadata.description.en ||
+      ""
+    ).toLowerCase();
     for (const word of queryWords) {
       if (description.includes(word)) {
         score += 2.0;
@@ -317,10 +347,10 @@ class LocalResourceAdapter implements IResourceAdapter {
     }
 
     if (options.tags && options.tags.length > 0) {
-      const hasMatchingTag = options.tags.some(tag => 
-        resource.tags.some(resourceTag => 
-          resourceTag.toLowerCase().includes(tag.toLowerCase())
-        )
+      const hasMatchingTag = options.tags.some((tag) =>
+        resource.tags.some((resourceTag) =>
+          resourceTag.toLowerCase().includes(tag.toLowerCase()),
+        ),
       );
       if (!hasMatchingTag) {
         score *= 0.3;
@@ -328,10 +358,13 @@ class LocalResourceAdapter implements IResourceAdapter {
     }
 
     // 质量加权
-    if (options.minQuality && resource.metadata.quality.overall < options.minQuality) {
+    if (
+      options.minQuality &&
+      resource.metadata.quality.overall < options.minQuality
+    ) {
       score *= 0.2;
     } else {
-      score *= (resource.metadata.quality.overall / 10); // 质量加权
+      score *= resource.metadata.quality.overall / 10; // 质量加权
     }
 
     // 精选资源加权
@@ -346,39 +379,58 @@ class LocalResourceAdapter implements IResourceAdapter {
     const matched: string[] = [];
     const queryLower = query.toLowerCase();
 
-    if ((resource.metadata.title.zh || '').toLowerCase().includes(queryLower) ||
-        (resource.metadata.title.en || '').toLowerCase().includes(queryLower)) {
-      matched.push('title');
+    if (
+      (resource.metadata.title.zh || "").toLowerCase().includes(queryLower) ||
+      (resource.metadata.title.en || "").toLowerCase().includes(queryLower)
+    ) {
+      matched.push("title");
     }
 
-    if ((resource.metadata.description.zh || '').toLowerCase().includes(queryLower) ||
-        (resource.metadata.description.en || '').toLowerCase().includes(queryLower)) {
-      matched.push('description');
+    if (
+      (resource.metadata.description.zh || "")
+        .toLowerCase()
+        .includes(queryLower) ||
+      (resource.metadata.description.en || "")
+        .toLowerCase()
+        .includes(queryLower)
+    ) {
+      matched.push("description");
     }
 
-    if (resource.metadata.keywords.some(k => k.toLowerCase().includes(queryLower))) {
-      matched.push('keywords');
+    if (
+      resource.metadata.keywords.some((k) =>
+        k.toLowerCase().includes(queryLower),
+      )
+    ) {
+      matched.push("keywords");
     }
 
-    if (resource.tags.some(t => t.toLowerCase().includes(queryLower))) {
-      matched.push('tags');
+    if (resource.tags.some((t) => t.toLowerCase().includes(queryLower))) {
+      matched.push("tags");
     }
 
     return matched;
   }
 
-  private generateHighlights(resource: PDFResource, query: string): SearchResult['highlights'] {
+  private generateHighlights(
+    resource: PDFResource,
+    query: string,
+  ): SearchResult["highlights"] {
     const queryLower = query.toLowerCase();
-    const highlights: SearchResult['highlights'] = {};
+    const highlights: SearchResult["highlights"] = {};
 
     // 生成标题高亮
-    const title = resource.metadata.title.zh || resource.metadata.title.en || '';
+    const title =
+      resource.metadata.title.zh || resource.metadata.title.en || "";
     if (title.toLowerCase().includes(queryLower)) {
       highlights.title = this.highlightText(title, query);
     }
 
     // 生成描述高亮
-    const description = resource.metadata.description.zh || resource.metadata.description.en || '';
+    const description =
+      resource.metadata.description.zh ||
+      resource.metadata.description.en ||
+      "";
     if (description.toLowerCase().includes(queryLower)) {
       highlights.description = this.highlightText(description, query, 150);
     }
@@ -386,28 +438,35 @@ class LocalResourceAdapter implements IResourceAdapter {
     return highlights;
   }
 
-  private highlightText(text: string, query: string, maxLength: number = 200): string {
+  private highlightText(
+    text: string,
+    query: string,
+    maxLength: number = 200,
+  ): string {
     const queryLower = query.toLowerCase();
     const textLower = text.toLowerCase();
     const index = textLower.indexOf(queryLower);
-    
+
     if (index === -1) return text;
 
     const start = Math.max(0, index - 50);
     let end = Math.min(text.length, index + query.length + 50);
-    
+
     if (end - start > maxLength) {
       end = start + maxLength;
     }
 
     let excerpt = text.substring(start, end);
-    
+
     // 添加省略号
-    if (start > 0) excerpt = '...' + excerpt;
-    if (end < text.length) excerpt = excerpt + '...';
+    if (start > 0) excerpt = "..." + excerpt;
+    if (end < text.length) excerpt = excerpt + "...";
 
     // 高亮匹配文本
-    const regex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    const regex = new RegExp(
+      query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+      "gi",
+    );
     return excerpt.replace(regex, `<mark>$&</mark>`);
   }
 }
@@ -417,13 +476,13 @@ class LocalResourceAdapter implements IResourceAdapter {
  */
 export class PDFResourceManager {
   private static instance: PDFResourceManager;
-  
+
   private config: PDFResourceConfig;
   private cache: CacheManager;
   private validator: ResourceValidator;
   private errorHandler: ErrorHandler;
   private adapter: IResourceAdapter;
-  
+
   private constructor(config: PDFResourceConfig) {
     this.config = config;
     this.cache = new CacheManager(config.cache);
@@ -438,7 +497,7 @@ export class PDFResourceManager {
   static getInstance(config?: PDFResourceConfig): PDFResourceManager {
     if (!PDFResourceManager.instance) {
       if (!config) {
-        throw new Error('Configuration required for first initialization');
+        throw new Error("Configuration required for first initialization");
       }
       PDFResourceManager.instance = new PDFResourceManager(config);
     }
@@ -454,7 +513,7 @@ export class PDFResourceManager {
       const cacheKey = `resource:${id}`;
       const cached = this.cache.get<PDFResource>(cacheKey);
       if (cached) {
-        await this.recordResourceAccess(id, 'view');
+        await this.recordResourceAccess(id, "view");
         return cached;
       }
 
@@ -464,9 +523,9 @@ export class PDFResourceManager {
         await this.errorHandler.handleError(
           this.errorHandler.createBusinessError(
             `Resource not found: ${id}`,
-            'RESOURCE_NOT_FOUND',
-            { operation: 'getResource', resourceId: id }
-          )
+            "RESOURCE_NOT_FOUND",
+            { operation: "getResource", resourceId: id },
+          ),
         );
         return null;
       }
@@ -476,21 +535,25 @@ export class PDFResourceManager {
       if (!validation.isValid) {
         await this.errorHandler.logWarning(
           `Resource ${id} has validation issues`,
-          { operation: 'getResource', resourceId: id }
+          { operation: "getResource", resourceId: id },
         );
       }
 
       // 4. 缓存结果
-      this.cache.set(cacheKey, resource, this.config.cache.resourceTtl.resource);
+      this.cache.set(
+        cacheKey,
+        resource,
+        this.config.cache.resourceTtl.resource,
+      );
 
       // 5. 记录访问
-      await this.recordResourceAccess(id, 'view');
+      await this.recordResourceAccess(id, "view");
 
       return resource;
     } catch (error) {
       await this.errorHandler.handleError(error as Error, {
-        operation: 'getResource',
-        resourceId: id
+        operation: "getResource",
+        resourceId: id,
       });
       return null;
     }
@@ -499,7 +562,9 @@ export class PDFResourceManager {
   /**
    * 获取资源列表
    */
-  async getResources(options: ResourceQueryOptions = {}): Promise<PDFResource[]> {
+  async getResources(
+    options: ResourceQueryOptions = {},
+  ): Promise<PDFResource[]> {
     try {
       // 生成缓存键
       const cacheKey = `resources:${JSON.stringify(options)}`;
@@ -512,12 +577,16 @@ export class PDFResourceManager {
       const resources = await this.adapter.getResources(options);
 
       // 缓存结果
-      this.cache.set(cacheKey, resources, this.config.cache.resourceTtl.resource);
+      this.cache.set(
+        cacheKey,
+        resources,
+        this.config.cache.resourceTtl.resource,
+      );
 
       return resources;
     } catch (error) {
       await this.errorHandler.handleError(error as Error, {
-        operation: 'getResources'
+        operation: "getResources",
       });
       return [];
     }
@@ -526,23 +595,25 @@ export class PDFResourceManager {
   /**
    * 按类别获取资源
    */
-  async getResourcesByCategory(category: ResourceCategory): Promise<PDFResource[]> {
-    return this.getResources({ category, status: 'active' });
+  async getResourcesByCategory(
+    category: ResourceCategory,
+  ): Promise<PDFResource[]> {
+    return this.getResources({ category, status: "active" });
   }
 
   /**
    * 获取精选资源
    */
   async getFeaturedResources(): Promise<PDFResource[]> {
-    return this.getResources({ featured: true, status: 'active' });
+    return this.getResources({ featured: true, status: "active" });
   }
 
   /**
    * 搜索资源
    */
   async searchResources(
-    query: string, 
-    options: SearchOptions = {}
+    query: string,
+    options: SearchOptions = {},
   ): Promise<PaginatedSearchResult> {
     try {
       // 生成缓存键
@@ -554,15 +625,16 @@ export class PDFResourceManager {
 
       // 执行搜索
       const results = await this.adapter.searchResources(query, options);
-      
+
       // 分页处理
-      const page = Math.floor((options.offset || 0) / (options.limit || 20)) + 1;
+      const page =
+        Math.floor((options.offset || 0) / (options.limit || 20)) + 1;
       const pageSize = options.limit || 20;
       const total = results.length;
-      
+
       const paginatedResults = results.slice(
-        options.offset || 0, 
-        (options.offset || 0) + pageSize
+        options.offset || 0,
+        (options.offset || 0) + pageSize,
       );
 
       const searchResult: PaginatedSearchResult = {
@@ -572,26 +644,30 @@ export class PDFResourceManager {
         pageSize,
         hasNext: (options.offset || 0) + pageSize < total,
         hasPrevious: (options.offset || 0) > 0,
-        facets: await this.generateSearchFacets(results)
+        facets: await this.generateSearchFacets(results),
       };
 
       // 缓存搜索结果
-      this.cache.set(cacheKey, searchResult, this.config.cache.resourceTtl.search);
+      this.cache.set(
+        cacheKey,
+        searchResult,
+        this.config.cache.resourceTtl.search,
+      );
 
       return searchResult;
     } catch (error) {
       await this.errorHandler.handleError(error as Error, {
-        operation: 'searchResources',
-        metadata: { query, options }
+        operation: "searchResources",
+        metadata: { query, options },
       });
-      
+
       return {
         results: [],
         total: 0,
         page: 1,
         pageSize: options.limit || 20,
         hasNext: false,
-        hasPrevious: false
+        hasPrevious: false,
       };
     }
   }
@@ -604,7 +680,11 @@ export class PDFResourceManager {
       // 验证资源
       const validation = await this.validator.validate(resource);
       if (!validation.isValid) {
-        throw new Error(`Validation failed: ${validation.errors.map((e: any) => e.message).join(', ')}`);
+        throw new Error(
+          `Validation failed: ${validation.errors
+            .map((e: any) => e.message)
+            .join(", ")}`,
+        );
       }
 
       // 创建资源
@@ -616,8 +696,8 @@ export class PDFResourceManager {
       return created;
     } catch (error) {
       await this.errorHandler.handleError(error as Error, {
-        operation: 'createResource',
-        resourceId: resource.id
+        operation: "createResource",
+        resourceId: resource.id,
       });
       throw error;
     }
@@ -626,7 +706,10 @@ export class PDFResourceManager {
   /**
    * 更新资源
    */
-  async updateResource(id: string, updates: Partial<PDFResource>): Promise<PDFResource> {
+  async updateResource(
+    id: string,
+    updates: Partial<PDFResource>,
+  ): Promise<PDFResource> {
     try {
       // 获取现有资源
       const existing = await this.adapter.getResource(id);
@@ -640,7 +723,11 @@ export class PDFResourceManager {
       // 验证更新后的资源
       const validation = await this.validator.validate(updated);
       if (!validation.isValid) {
-        throw new Error(`Validation failed: ${validation.errors.map((e: any) => e.message).join(', ')}`);
+        throw new Error(
+          `Validation failed: ${validation.errors
+            .map((e: any) => e.message)
+            .join(", ")}`,
+        );
       }
 
       // 执行更新
@@ -652,8 +739,8 @@ export class PDFResourceManager {
       return result;
     } catch (error) {
       await this.errorHandler.handleError(error as Error, {
-        operation: 'updateResource',
-        resourceId: id
+        operation: "updateResource",
+        resourceId: id,
       });
       throw error;
     }
@@ -665,7 +752,7 @@ export class PDFResourceManager {
   async deleteResource(id: string): Promise<boolean> {
     try {
       const result = await this.adapter.deleteResource(id);
-      
+
       if (result) {
         // 清除相关缓存
         await this.invalidateResourceCaches(id);
@@ -674,8 +761,8 @@ export class PDFResourceManager {
       return result;
     } catch (error) {
       await this.errorHandler.handleError(error as Error, {
-        operation: 'deleteResource',
-        resourceId: id
+        operation: "deleteResource",
+        resourceId: id,
       });
       return false;
     }
@@ -685,8 +772,8 @@ export class PDFResourceManager {
    * 批量操作
    */
   async batchOperation(
-    operation: 'create' | 'update' | 'delete',
-    resources: Array<{ id?: string; data?: any }>
+    operation: "create" | "update" | "delete",
+    resources: Array<{ id?: string; data?: any }>,
   ): Promise<BatchOperationResult> {
     const result: BatchOperationResult = {
       totalCount: resources.length,
@@ -694,7 +781,7 @@ export class PDFResourceManager {
       errorCount: 0,
       errors: [],
       warnings: [],
-      duration: 0
+      duration: 0,
     };
 
     const startTime = Date.now();
@@ -702,19 +789,19 @@ export class PDFResourceManager {
     for (const item of resources) {
       try {
         switch (operation) {
-          case 'create':
+          case "create":
             if (item.data) {
               await this.createResource(item.data);
               result.successCount++;
             }
             break;
-          case 'update':
+          case "update":
             if (item.id && item.data) {
               await this.updateResource(item.id, item.data);
               result.successCount++;
             }
             break;
-          case 'delete':
+          case "delete":
             if (item.id) {
               await this.deleteResource(item.id);
               result.successCount++;
@@ -724,8 +811,8 @@ export class PDFResourceManager {
       } catch (error) {
         result.errorCount++;
         result.errors.push({
-          resourceId: item.id || 'unknown',
-          error: (error as Error).message
+          resourceId: item.id || "unknown",
+          error: (error as Error).message,
         });
       }
     }
@@ -739,21 +826,21 @@ export class PDFResourceManager {
    */
   async getResourceStats(): Promise<ResourceStats> {
     try {
-      const cacheKey = 'stats:resources';
+      const cacheKey = "stats:resources";
       const cached = this.cache.get<ResourceStats>(cacheKey);
       if (cached) {
         return cached;
       }
 
       const stats = getResourceStats() as any;
-      
+
       // 缓存统计信息
       this.cache.set(cacheKey, stats, this.config.cache.resourceTtl.stats);
 
       return stats;
     } catch (error) {
       await this.errorHandler.handleError(error as Error, {
-        operation: 'getResourceStats'
+        operation: "getResourceStats",
       });
       throw error;
     }
@@ -772,10 +859,10 @@ export class PDFResourceManager {
         const resource = await this.adapter.getResource(modernId);
         if (!resource) {
           errors.push({
-            field: 'mapping',
+            field: "mapping",
             message: `Legacy mapping ${legacyId} -> ${modernId} points to non-existent resource`,
-            severity: 'error',
-            code: 'MISSING_MAPPED_RESOURCE'
+            severity: "error",
+            code: "MISSING_MAPPED_RESOURCE",
           });
         }
       }
@@ -794,15 +881,19 @@ export class PDFResourceManager {
         warnings,
         suggestions: [],
         summary: {
-          totalChecks: allResources.length + Object.keys(LEGACY_ID_MAPPING).length,
-          passedChecks: allResources.length + Object.keys(LEGACY_ID_MAPPING).length - errors.length,
+          totalChecks:
+            allResources.length + Object.keys(LEGACY_ID_MAPPING).length,
+          passedChecks:
+            allResources.length +
+            Object.keys(LEGACY_ID_MAPPING).length -
+            errors.length,
           errorCount: errors.length,
-          warningCount: warnings.length
-        }
+          warningCount: warnings.length,
+        },
       };
     } catch (error) {
       await this.errorHandler.handleError(error as Error, {
-        operation: 'validateAllMappings'
+        operation: "validateAllMappings",
       });
       throw error;
     }
@@ -812,8 +903,8 @@ export class PDFResourceManager {
    * 记录资源访问
    */
   private async recordResourceAccess(
-    resourceId: string, 
-    action: 'view' | 'download' | 'share'
+    resourceId: string,
+    action: "view" | "download" | "share",
   ): Promise<void> {
     try {
       // 更新分析数据
@@ -822,12 +913,20 @@ export class PDFResourceManager {
         const updates: Partial<PDFResource> = {
           analytics: {
             ...resource.analytics,
-            [action === 'view' ? 'viewCount' : 
-             action === 'download' ? 'downloadCount' : 'shareCount']: 
-             (resource.analytics[action === 'view' ? 'viewCount' : 
-                                 action === 'download' ? 'downloadCount' : 'shareCount'] || 0) + 1,
-            lastAccessedAt: new Date()
-          }
+            [action === "view"
+              ? "viewCount"
+              : action === "download"
+                ? "downloadCount"
+                : "shareCount"]:
+              (resource.analytics[
+                action === "view"
+                  ? "viewCount"
+                  : action === "download"
+                    ? "downloadCount"
+                    : "shareCount"
+              ] || 0) + 1,
+            lastAccessedAt: new Date(),
+          },
         };
 
         await this.adapter.updateResource(resourceId, updates);
@@ -836,7 +935,7 @@ export class PDFResourceManager {
       // 记录访问失败不应该阻止主要操作
       await this.errorHandler.logWarning(
         `Failed to record access for resource ${resourceId}`,
-        { operation: 'recordResourceAccess', resourceId }
+        { operation: "recordResourceAccess", resourceId },
       );
     }
   }
@@ -844,20 +943,22 @@ export class PDFResourceManager {
   /**
    * 生成搜索分面
    */
-  private async generateSearchFacets(results: SearchResult[]): Promise<PaginatedSearchResult['facets']> {
+  private async generateSearchFacets(
+    results: SearchResult[],
+  ): Promise<PaginatedSearchResult["facets"]> {
     const categories: Record<string, number> = {};
     const languages: Record<string, number> = {};
     const tags: Record<string, number> = {};
 
     for (const result of results) {
       const resource = result.resource;
-      
+
       // 统计类别
       categories[resource.category] = (categories[resource.category] || 0) + 1;
-      
+
       // 统计语言
       languages[resource.language] = (languages[resource.language] || 0) + 1;
-      
+
       // 统计标签
       for (const tag of resource.tags) {
         tags[tag] = (tags[tag] || 0) + 1;
@@ -867,20 +968,20 @@ export class PDFResourceManager {
     return {
       categories: Object.entries(categories).map(([category, count]) => ({
         category: category as any,
-        count
+        count,
       })),
       languages: Object.entries(languages).map(([language, count]) => ({
         language: language as any,
-        count
+        count,
       })),
       tags: Object.entries(tags)
-        .sort(([,a], [,b]) => b - a)
+        .sort(([, a], [, b]) => b - a)
         .slice(0, 20) // 限制标签数量
         .map(([tag, count]) => ({
           tag: tag,
-          count
+          count,
         })),
-      quality: []
+      quality: [],
     };
   }
 
@@ -891,11 +992,11 @@ export class PDFResourceManager {
     if (resourceId) {
       this.cache.delete(`resource:${resourceId}`);
     }
-    
+
     // 清除列表和搜索缓存
-    this.cache.deletePattern('resources:*');
-    this.cache.deletePattern('search:*');
-    this.cache.delete('stats:resources');
+    this.cache.deletePattern("resources:*");
+    this.cache.deletePattern("search:*");
+    this.cache.delete("stats:resources");
   }
 
   /**
@@ -903,15 +1004,15 @@ export class PDFResourceManager {
    */
   updateConfig(newConfig: Partial<PDFResourceConfig>): void {
     this.config = { ...this.config, ...newConfig };
-    
+
     if (newConfig.cache) {
       this.cache.updateConfig(newConfig.cache);
     }
-    
+
     if (newConfig.validation) {
       this.validator.updateConfig(newConfig.validation);
     }
-    
+
     if (newConfig.monitoring) {
       this.errorHandler.updateConfig(newConfig.monitoring);
     }
@@ -921,64 +1022,67 @@ export class PDFResourceManager {
    * 获取系统健康状态
    */
   async getHealthStatus(): Promise<{
-    status: 'healthy' | 'degraded' | 'unhealthy';
-    checks: Record<string, { status: 'up' | 'down'; latency?: number; error?: string }>;
+    status: "healthy" | "degraded" | "unhealthy";
+    checks: Record<
+      string,
+      { status: "up" | "down"; latency?: number; error?: string }
+    >;
   }> {
     const checks: Record<string, any> = {};
-    let overallStatus: 'healthy' | 'degraded' | 'unhealthy' = 'healthy';
+    let overallStatus: "healthy" | "degraded" | "unhealthy" = "healthy";
 
     try {
       // 检查缓存
       const cacheStart = Date.now();
-      this.cache.get('health-check');
-      this.cache.set('health-check', 'ok');
-      checks.cache = { 
-        status: 'up', 
-        latency: Date.now() - cacheStart 
+      this.cache.get("health-check");
+      this.cache.set("health-check", "ok");
+      checks.cache = {
+        status: "up",
+        latency: Date.now() - cacheStart,
       };
     } catch (error) {
-      checks.cache = { 
-        status: 'down', 
-        error: (error as Error).message 
+      checks.cache = {
+        status: "down",
+        error: (error as Error).message,
       };
-      overallStatus = 'degraded';
+      overallStatus = "degraded";
     }
 
     try {
       // 检查资源访问
       const resourceStart = Date.now();
       await this.adapter.getResources({ limit: 1 });
-      checks.resources = { 
-        status: 'up', 
-        latency: Date.now() - resourceStart 
+      checks.resources = {
+        status: "up",
+        latency: Date.now() - resourceStart,
       };
     } catch (error) {
-      checks.resources = { 
-        status: 'down', 
-        error: (error as Error).message 
+      checks.resources = {
+        status: "down",
+        error: (error as Error).message,
       };
-      overallStatus = 'unhealthy';
+      overallStatus = "unhealthy";
     }
 
     try {
       // 检查验证器
       const validationStart = Date.now();
       await this.validator.validateConfig();
-      checks.validation = { 
-        status: 'up', 
-        latency: Date.now() - validationStart 
+      checks.validation = {
+        status: "up",
+        latency: Date.now() - validationStart,
       };
     } catch (error) {
-      checks.validation = { 
-        status: 'down', 
-        error: (error as Error).message 
+      checks.validation = {
+        status: "down",
+        error: (error as Error).message,
       };
-      overallStatus = 'degraded';
+      overallStatus = "degraded";
     }
 
     return {
       status: overallStatus,
-      checks
+      checks,
     };
   }
 

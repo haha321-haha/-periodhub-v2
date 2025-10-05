@@ -9,13 +9,13 @@ interface HydrationBoundaryProps {
 
 /**
  * HydrationBoundary - 防止hydration不匹配错误的边界组件
- * 
+ *
  * 这个组件确保只在客户端渲染，避免服务器端和客户端渲染不一致的问题
  * 特别适用于包含动态内容、浏览器特定API或状态依赖的组件
  */
-const HydrationBoundary: React.FC<HydrationBoundaryProps> = ({ 
-  children, 
-  fallback = <div className="animate-pulse bg-gray-200 rounded h-8 w-full"></div> 
+const HydrationBoundary: React.FC<HydrationBoundaryProps> = ({
+  children,
+  fallback = <div className="animate-pulse bg-gray-200 rounded h-8 w-full"></div>
 }) => {
   const [hasMounted, setHasMounted] = useState(false);
 
@@ -34,10 +34,3 @@ const HydrationBoundary: React.FC<HydrationBoundaryProps> = ({
 };
 
 export default HydrationBoundary;
-
-
-
-
-
-
-

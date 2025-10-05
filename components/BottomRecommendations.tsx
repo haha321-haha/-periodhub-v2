@@ -16,7 +16,7 @@ interface BottomRecommendationsProps {
 
 const BottomRecommendations = ({ currentPage }: BottomRecommendationsProps) => {
   const t = useTranslations('bottomRecommendations');
-  
+
   const recommendations: Record<string, RecommendationItem[]> = {
     'natural-therapies': [
       {
@@ -78,7 +78,7 @@ const BottomRecommendations = ({ currentPage }: BottomRecommendationsProps) => {
 
 const RecommendationCard = ({ titleKey, descriptionKey, actionTextKey, icon, link, color }: RecommendationItem) => {
   const t = useTranslations('bottomRecommendations');
-  
+
   // 根据卡片类型设置不同的图标组合
   const getIcons = () => {
     if (titleKey === 'scenarioSolutions.title') {

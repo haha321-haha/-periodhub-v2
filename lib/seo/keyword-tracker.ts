@@ -30,7 +30,7 @@ export interface CompetitorKeyword {
 export class KeywordTracker {
   private config = getDataForSEOConfig();
   private readonly STORAGE_KEY = 'periodhub-seo-data';
-  
+
   /**
    * 追踪关键词排名变化
    */
@@ -56,16 +56,16 @@ export class KeywordTracker {
 
       const data = await response.json();
       const results = data.tasks?.[0]?.result || [];
-      
+
       for (const result of results) {
         const keyword = result.keyword;
         const items = result.items || [];
-        
+
         // 查找PeriodHub的排名
-        const periodhubResult = items.find((item: any) => 
+        const periodhubResult = items.find((item: any) =>
           item.domain?.includes('periodhub') || item.url?.includes('periodhub')
         );
-        
+
         if (periodhubResult) {
           rankings.push({
             keyword,
@@ -113,7 +113,7 @@ export class KeywordTracker {
 
         const data = await response.json();
         const result = data.tasks?.[0]?.result?.[0];
-        
+
         if (result) {
           const keywords: CompetitorKeyword[] = result.top_keywords?.map((kw: any) => ({
             keyword: kw.keyword,
@@ -181,7 +181,7 @@ export class KeywordTracker {
    */
   private getStoredData(): any {
     if (typeof window === 'undefined') return { rankings: [], lastUpdate: null };
-    
+
     try {
       const data = localStorage.getItem(this.STORAGE_KEY);
       return data ? JSON.parse(data) : { rankings: [], lastUpdate: null };
@@ -226,7 +226,7 @@ export class KeywordTracker {
     newRankings: KeywordRanking[];
   } {
     const rankings = this.getStoredRankings();
-    
+
     return {
       improving: rankings.filter(r => r.change > 0),
       declining: rankings.filter(r => r.change < 0),
@@ -245,17 +245,17 @@ export class KeywordTracker {
     averagePosition: number;
   } {
     const rankings = this.getStoredRankings();
-    
+
     const topRanked = rankings
       .filter(r => r.currentPosition <= 10)
       .sort((a, b) => a.currentPosition - b.currentPosition);
-    
+
     const opportunities = rankings
       .filter(r => r.currentPosition > 10 && r.currentPosition <= 30)
       .sort((a, b) => a.searchVolume - b.searchVolume);
-    
-    const averagePosition = rankings.length > 0 
-      ? rankings.reduce((sum, r) => sum + r.currentPosition, 0) / rankings.length 
+
+    const averagePosition = rankings.length > 0
+      ? rankings.reduce((sum, r) => sum + r.currentPosition, 0) / rankings.length
       : 0;
 
     return {
@@ -299,13 +299,13 @@ export class KeywordTracker {
    */
   cleanupOldData(daysToKeep: number = 30): void {
     if (typeof window === 'undefined') return;
-    
+
     const data = this.getStoredData();
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - daysToKeep);
-    
+
     if (data.rankings) {
-      data.rankings = data.rankings.filter((r: KeywordRanking) => 
+      data.rankings = data.rankings.filter((r: KeywordRanking) =>
         new Date(r.date) > cutoffDate
       );
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(data));

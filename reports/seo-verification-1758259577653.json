@@ -18,11 +18,7 @@
     },
     "robots": {
       "success": true,
-      "iconRules": [
-        "Disallow: /icon",
-        "Disallow: /icon",
-        "Disallow: /icon"
-      ],
+      "iconRules": ["Disallow: /icon", "Disallow: /icon", "Disallow: /icon"],
       "iconStarRules": [
         "Disallow: /icon*",
         "Disallow: /icon*",

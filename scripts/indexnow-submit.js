@@ -61,7 +61,7 @@ async function submitToIndexNow() {
   for (let i = 0; i < batches.length; i++) {
     const batch = batches[i];
     console.log(`📤 提交第 ${i + 1} 批 (${batch.length} 个URL)`);
-    
+
     try {
       const result = await submitBatch(batch);
       if (result.success) {
@@ -75,9 +75,9 @@ async function submitToIndexNow() {
       failCount += batch.length;
       console.log(`❌ 第 ${i + 1} 批提交失败: ${error.message}`);
     }
-    
+
     console.log('');
-    
+
     // 避免请求过于频繁
     if (i < batches.length - 1) {
       await new Promise(resolve => setTimeout(resolve, 2000));
@@ -109,7 +109,7 @@ function submitBatch(urlList) {
     };
 
     const postData = JSON.stringify(payload);
-    
+
     // 尝试多个端点
     submitToEndpoint(CONFIG.endpoints[0], postData)
       .then(result => {
@@ -149,7 +149,7 @@ function submitToEndpoint(endpoint, postData) {
       res.on('data', chunk => responseData += chunk);
       res.on('end', () => {
         const success = res.statusCode >= 200 && res.statusCode < 300;
-        
+
         if (success) {
           console.log(`✅ 提交成功! 状态码: ${res.statusCode}`);
           if (responseData) {

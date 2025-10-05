@@ -659,15 +659,15 @@ const getBaseUrl = () => {
 // app/sitemap.ts - 使用Vercel环境变量API
 const getBaseUrl = () => {
   // 尝试多种方式获取环境变量
-  const envUrl = process.env.NEXT_PUBLIC_BASE_URL || 
-                 process.env.VERCEL_URL || 
+  const envUrl = process.env.NEXT_PUBLIC_BASE_URL ||
+                 process.env.VERCEL_URL ||
                  'https://www.periodhub.health';
-  
+
   // 确保包含www前缀
   if (envUrl.includes('periodhub.health') && !envUrl.includes('www.')) {
     return envUrl.replace('periodhub.health', 'www.periodhub.health');
   }
-  
+
   return envUrl;
 };
 ```
@@ -1004,7 +1004,7 @@ curl -s https://www.periodhub.health/sitemap.xml | grep -o "https://www.periodhu
 
 **代码审查结果：**
 - ✅ `getBaseUrl()` 函数逻辑正确
-- ✅ 环境变量优先级设置合理  
+- ✅ 环境变量优先级设置合理
 - ✅ 生产环境后备方案安全
 - ✅ 开发环境日志有助调试
 - ✅ 代码简洁易维护
@@ -1167,7 +1167,7 @@ const getBaseUrl = () => {
 
 export default async function sitemap() {
   const baseUrl = getBaseUrl();
-  
+
   return [
     {
       url: `${baseUrl}/`,
@@ -1288,7 +1288,7 @@ const getBaseUrl = () => {
 
 export default async function sitemap() {
   const baseUrl = getBaseUrl();
-  
+
   return [
     {
       url: `${baseUrl}/`,
@@ -1386,7 +1386,7 @@ const getBaseUrl = () => {
 
 export default async function sitemap() {
   const baseUrl = getBaseUrl();
-  
+
   return [
     {
       url: `${baseUrl}/`,
@@ -1463,12 +1463,12 @@ const getSiteUrl = (): string => {
   if (process.env.NEXT_PUBLIC_BASE_URL) {
     return process.env.NEXT_PUBLIC_BASE_URL;
   }
-  
+
   // 2. 生产环境硬编码后备
   if (process.env.NODE_ENV === 'production') {
     return 'https://www.periodhub.health';
   }
-  
+
   // 3. 开发环境默认值
   return 'http://localhost:3001';
 };
@@ -1484,7 +1484,7 @@ const getSiteUrl = (): string => {
 export class SiteConfig {
   private static instance: SiteConfig;
   private baseUrl: string;
-  
+
   private validateAndSetBaseUrl(): void {
     // 严格的验证逻辑
   }
@@ -1517,7 +1517,7 @@ describe('SiteConfig', () => {
   it('should use environment variable when set', () => {
     // 测试环境变量优先级
   });
-  
+
   it('should throw error in production without env var', () => {
     // 测试生产环境严格性
   });
@@ -1531,14 +1531,14 @@ describe('SiteConfig', () => {
 const getSiteUrl = () => {
   const envUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const fallbackUrl = 'https://www.periodhub.health';
-  
+
   const baseUrl = envUrl || fallbackUrl;
-  
+
   // 开发环境日志
   if (process.env.NODE_ENV === 'development') {
     console.log('Sitemap baseUrl source:', envUrl ? 'environment' : 'fallback');
   }
-  
+
   return baseUrl;
 };
 ```
@@ -1642,13 +1642,13 @@ const getSiteUrl = (): string => {
     console.log('Using NEXT_PUBLIC_BASE_URL:', process.env.NEXT_PUBLIC_BASE_URL);
     return process.env.NEXT_PUBLIC_BASE_URL;
   }
-  
+
   // 2. 生产环境硬编码后备
   if (process.env.NODE_ENV === 'production') {
     console.log('Using production fallback URL');
     return 'https://www.periodhub.health';
   }
-  
+
   // 3. 开发环境默认值
   console.log('Using development default URL');
   return 'http://localhost:3001';
@@ -1676,7 +1676,7 @@ export class SiteConfig {
 
   private validateAndSetBaseUrl(): void {
     const envUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    
+
     if (!envUrl) {
       if (process.env.NODE_ENV === 'production') {
         throw new Error(
@@ -1714,7 +1714,7 @@ import { SiteConfig } from '@/lib/config';
 export default async function sitemap() {
   const config = SiteConfig.getInstance();
   const baseUrl = config.getBaseUrl();
-  
+
   return [
     {
       url: config.getCanonicalUrl('/'),
@@ -1755,7 +1755,7 @@ if (missing.length > 0) {
   missing.forEach(varName => {
     console.error(`  - ${varName}`);
   });
-  
+
   if (currentEnv === 'production') {
     console.error('\nPlease set these variables in Vercel dashboard:');
     console.error('1. Go to Vercel project settings');
@@ -1809,7 +1809,7 @@ describe('SiteConfig', () => {
   it('should throw error in production without env var', () => {
     process.env.NODE_ENV = 'production';
     delete process.env.NEXT_PUBLIC_BASE_URL;
-    
+
     expect(() => {
       SiteConfig.getInstance();
     }).toThrow('NEXT_PUBLIC_BASE_URL is required in production environment');
@@ -1818,7 +1818,7 @@ describe('SiteConfig', () => {
   it('should use localhost in development', () => {
     process.env.NODE_ENV = 'development';
     delete process.env.NEXT_PUBLIC_BASE_URL;
-    
+
     const config = SiteConfig.getInstance();
     expect(config.getBaseUrl()).toBe('http://localhost:3001');
   });
@@ -1851,21 +1851,21 @@ const getSiteUrl = () => {
   // 优先环境变量，硬编码作为安全后备
   const envUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const fallbackUrl = 'https://www.periodhub.health';
-  
+
   const baseUrl = envUrl || fallbackUrl;
-  
+
   // 开发环境日志，生产环境不输出
   if (process.env.NODE_ENV === 'development') {
     console.log('Sitemap baseUrl source:', envUrl ? 'environment' : 'fallback');
     console.log('Sitemap baseUrl value:', baseUrl);
   }
-  
+
   return baseUrl;
 };
 
 export default async function sitemap() {
   const baseUrl = getSiteUrl();
-  
+
   return [
     {
       url: `${baseUrl}/`,
@@ -1892,11 +1892,11 @@ const testSitemap = async () => {
   try {
     const response = await fetch('https://www.periodhub.health/sitemap.xml');
     const text = await response.text();
-    
+
     console.log('Sitemap status:', response.status);
     console.log('Contains www:', text.includes('www.periodhub.health'));
     console.log('URL count:', (text.match(/<url>/g) || []).length);
-    
+
     if (text.includes('www.periodhub.health')) {
       console.log('✅ Sitemap is working correctly');
     } else {

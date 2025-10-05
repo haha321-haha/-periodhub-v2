@@ -73,12 +73,12 @@ class PreExecutionChecklist {
 
   async checkEnvironment() {
     console.log('🔍 1. 环境检查...');
-    
+
     try {
       // Node.js版本检查
       const nodeVersion = execSync('node --version', { encoding: 'utf8' }).trim();
       const nodeMajor = parseInt(nodeVersion.slice(1).split('.')[0]);
-      
+
       if (nodeMajor >= 16) {
         console.log(`  ✅ Node.js版本: ${nodeVersion} (符合要求 >= 16.0.0)`);
         this.results.environment.node = true;
@@ -90,7 +90,7 @@ class PreExecutionChecklist {
       // npm版本检查
       const npmVersion = execSync('npm --version', { encoding: 'utf8' }).trim();
       const npmMajor = parseInt(npmVersion.split('.')[0]);
-      
+
       if (npmMajor >= 8) {
         console.log(`  ✅ npm版本: ${npmVersion} (符合要求 >= 8.0.0)`);
         this.results.environment.npm = true;
@@ -112,7 +112,7 @@ class PreExecutionChecklist {
 
   async checkProject() {
     console.log('🔍 2. 项目结构检查...');
-    
+
     try {
       // 检查关键文件
       const criticalFiles = [
@@ -135,7 +135,7 @@ class PreExecutionChecklist {
 
       // 检查package.json内容
       const packageJson = JSON.parse(await fs.readFile('package.json', 'utf8'));
-      
+
       if (packageJson.scripts && packageJson.scripts.dev) {
         console.log('  ✅ package.json 脚本配置正常');
         this.results.project.packageJson = true;
@@ -161,7 +161,7 @@ class PreExecutionChecklist {
 
   async checkGit() {
     console.log('🔍 3. Git状态检查...');
-    
+
     try {
       // 检查是否在Git仓库中
       execSync('git rev-parse --git-dir', { stdio: 'ignore' });
@@ -170,7 +170,7 @@ class PreExecutionChecklist {
       // 检查工作区状态
       const statusOutput = execSync('git status --porcelain', { encoding: 'utf8' });
       const modifiedFiles = statusOutput.trim().split('\n').filter(line => line.trim());
-      
+
       if (modifiedFiles.length === 0) {
         console.log('  ✅ 工作区干净，无未提交的更改');
         this.results.git.clean = true;
@@ -209,7 +209,7 @@ class PreExecutionChecklist {
 
   async checkTools() {
     console.log('🔍 4. 修复工具检查...');
-    
+
     try {
       // 检查关键脚本文件
       const toolFiles = [
@@ -247,7 +247,7 @@ class PreExecutionChecklist {
 
   async checkDependencies() {
     console.log('🔍 5. 依赖检查...');
-    
+
     try {
       // 检查node_modules
       try {
@@ -283,28 +283,28 @@ class PreExecutionChecklist {
 
   async checkTests() {
     console.log('🔍 6. 测试环境检查...');
-    
+
     try {
       // 检查开发服务器是否能启动
       console.log('  🔄 测试开发服务器启动...');
-      
+
       try {
         // 启动开发服务器（后台）
-        const devProcess = execSync('npm run dev &', { 
+        const devProcess = execSync('npm run dev &', {
           stdio: 'pipe',
-          timeout: 10000 
+          timeout: 10000
         });
-        
+
         // 等待服务器启动
         await new Promise(resolve => setTimeout(resolve, 5000));
-        
+
         // 测试页面访问
         try {
-          const response = execSync('curl -s -o /dev/null -w "%{http_code}" http://localhost:3001/zh', { 
+          const response = execSync('curl -s -o /dev/null -w "%{http_code}" http://localhost:3001/zh', {
             encoding: 'utf8',
-            timeout: 5000 
+            timeout: 5000
           });
-          
+
           if (response.trim() === '200') {
             console.log('  ✅ 开发服务器正常启动，页面可访问');
             this.results.tests.devServer = true;
@@ -316,12 +316,12 @@ class PreExecutionChecklist {
           this.warnings.push('无法访问开发服务器');
           this.results.tests.devServer = false;
         }
-        
+
         // 停止开发服务器
         try {
           execSync('pkill -f "next dev"', { stdio: 'ignore' });
         } catch {}
-        
+
       } catch (error) {
         this.warnings.push(`开发服务器测试失败: ${error.message}`);
         this.results.tests.devServer = false;
@@ -330,9 +330,9 @@ class PreExecutionChecklist {
       // 检查构建
       console.log('  🔄 测试生产构建...');
       try {
-        execSync('npm run build', { 
+        execSync('npm run build', {
           stdio: 'pipe',
-          timeout: 60000 
+          timeout: 60000
         });
         console.log('  ✅ 生产构建成功');
         this.results.tests.build = true;
@@ -349,15 +349,15 @@ class PreExecutionChecklist {
 
   async createBackup() {
     console.log('🔍 7. 创建修复前备份...');
-    
+
     try {
       // 创建Git标签备份
       const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
       const backupTag = `backup-before-hardcode-fix-${timestamp}`;
-      
+
       execSync(`git tag ${backupTag}`, { stdio: 'pipe' });
       console.log(`  ✅ 创建Git标签备份: ${backupTag}`);
-      
+
       // 创建修复前快照
       const snapshot = {
         timestamp: new Date().toISOString(),
@@ -370,12 +370,12 @@ class PreExecutionChecklist {
           arch: process.arch
         }
       };
-      
+
       await fs.writeFile(
         `backup-snapshot-${timestamp}.json`,
         JSON.stringify(snapshot, null, 2)
       );
-      
+
       console.log(`  ✅ 创建快照文件: backup-snapshot-${timestamp}.json`);
       this.results.backup = true;
 
@@ -387,7 +387,7 @@ class PreExecutionChecklist {
 
   async generateReport() {
     console.log('🔍 8. 生成检查报告...');
-    
+
     const report = {
       timestamp: new Date().toISOString(),
       results: this.results,
@@ -401,12 +401,12 @@ class PreExecutionChecklist {
         ready: this.errors.length === 0
       }
     };
-    
+
     await fs.writeFile(
       'pre-execution-checklist-report.json',
       JSON.stringify(report, null, 2)
     );
-    
+
     console.log('  ✅ 检查报告已保存: pre-execution-checklist-report.json');
   }
 }
@@ -418,12 +418,3 @@ if (require.main === module) {
 }
 
 module.exports = PreExecutionChecklist;
-
-
-
-
-
-
-
-
-

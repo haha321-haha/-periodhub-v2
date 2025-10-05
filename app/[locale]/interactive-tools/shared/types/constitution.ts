@@ -2,7 +2,7 @@
 
 export interface ConstitutionQuestion {
   id: string;
-  type: 'single' | 'multi' | 'scale';
+  type: "single" | "multi" | "scale";
   category: string;
   weight: number;
   title: string;
@@ -22,16 +22,16 @@ export interface ConstitutionOption {
   constitutionType: ConstitutionType;
 }
 
-export type ConstitutionType = 
-  | 'qi_deficiency'      // 气虚质
-  | 'yang_deficiency'    // 阳虚质
-  | 'yin_deficiency'     // 阴虚质
-  | 'phlegm_dampness'    // 痰湿质
-  | 'damp_heat'          // 湿热质
-  | 'blood_stasis'       // 血瘀质
-  | 'qi_stagnation'      // 气郁质
-  | 'special_diathesis'  // 特禀质
-  | 'balanced';          // 平和质
+export type ConstitutionType =
+  | "qi_deficiency" // 气虚质
+  | "yang_deficiency" // 阳虚质
+  | "yin_deficiency" // 阴虚质
+  | "phlegm_dampness" // 痰湿质
+  | "damp_heat" // 湿热质
+  | "blood_stasis" // 血瘀质
+  | "qi_stagnation" // 气郁质
+  | "special_diathesis" // 特禀质
+  | "balanced"; // 平和质
 
 export interface ConstitutionAnswer {
   questionId: string;

@@ -235,9 +235,9 @@ To meet the requirement for bilingual (Chinese/English) support with no hardcode
 
 ```javascript
 // Example of retrieving a translated string in ui.js
-createAndAppend(resultsContainer, 'h2', { 
+createAndAppend(resultsContainer, 'h2', {
     text: t('results.title'), // Dynamically gets "Your Personalized Impact Report" or "您的个性化影响报告"
-    class: 'text-3xl font-bold text-center text-neutral-800' 
+    class: 'text-3xl font-bold text-center text-neutral-800'
 });
 ```
 

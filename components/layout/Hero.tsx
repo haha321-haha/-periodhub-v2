@@ -15,12 +15,12 @@ export default function Hero() {
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-white/5 opacity-20"></div>
-        
+
         {/* Floating particles */}
         <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-white/30 rounded-full animate-pulse"></div>
         <div className="absolute top-1/3 right-1/4 w-2 h-2 bg-pink-300/50 rounded-full animate-bounce delay-1000"></div>
         <div className="absolute bottom-1/3 left-1/3 w-3 h-3 bg-blue-300/40 rounded-full animate-ping"></div>
-        
+
         {/* Gradient halos */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-blue-400/20 to-transparent rounded-full blur-3xl"></div>
@@ -29,7 +29,7 @@ export default function Hero() {
       {/* Main content */}
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-          
+
           {/* Left content */}
           <div className="text-center lg:text-left">
             {/* Welcome badge */}
@@ -97,8 +97,8 @@ export default function Hero() {
             {/* Action buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link href={`/${locale}/immediate-relief`}>
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 min-w-[200px] group"
                 >
                   {t('immediateRelief')}
@@ -106,18 +106,18 @@ export default function Hero() {
                 </Button>
               </Link>
               <Link href={`/${locale}/interactive-tools`}>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
+                <Button
+                  size="lg"
+                  variant="outline"
                   className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-all duration-300 min-w-[200px]"
                 >
                   {t('cta.primary')}
                 </Button>
               </Link>
               <Link href={`/${locale}/health-guide`}>
-                <Button 
-                  size="lg" 
-                  variant="outline" 
+                <Button
+                  size="lg"
+                  variant="outline"
                   className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-all duration-300 min-w-[200px]"
                 >
                   {t('cta.secondary')}

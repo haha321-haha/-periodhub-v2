@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback } from "react";
 
 interface UseAccessibilityOptions {
   announcePageChanges?: boolean;
@@ -9,7 +9,7 @@ interface UseAccessibilityOptions {
 
 interface AccessibilityAnnouncement {
   message: string;
-  priority?: 'polite' | 'assertive';
+  priority?: "polite" | "assertive";
   delay?: number;
 }
 
@@ -18,7 +18,7 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
     announcePageChanges = true,
     manageFocus = true,
     trapFocus = false,
-    skipLinks = true
+    skipLinks = true,
   } = options;
 
   const announcementRef = useRef<HTMLDivElement | null>(null);
@@ -29,12 +29,12 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
   useEffect(() => {
     if (!announcePageChanges) return;
 
-    const announcementRegion = document.createElement('div');
-    announcementRegion.setAttribute('aria-live', 'polite');
-    announcementRegion.setAttribute('aria-atomic', 'true');
-    announcementRegion.className = 'sr-only';
-    announcementRegion.id = 'accessibility-announcements';
-    
+    const announcementRegion = document.createElement("div");
+    announcementRegion.setAttribute("aria-live", "polite");
+    announcementRegion.setAttribute("aria-atomic", "true");
+    announcementRegion.className = "sr-only";
+    announcementRegion.id = "accessibility-announcements";
+
     document.body.appendChild(announcementRegion);
     announcementRef.current = announcementRegion;
 
@@ -49,12 +49,12 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
   const announce = useCallback((announcement: AccessibilityAnnouncement) => {
     if (!announcementRef.current) return;
 
-    const { message, priority = 'polite', delay = 100 } = announcement;
-    
+    const { message, priority = "polite", delay = 100 } = announcement;
+
     // Clear previous announcement
-    announcementRef.current.textContent = '';
-    announcementRef.current.setAttribute('aria-live', priority);
-    
+    announcementRef.current.textContent = "";
+    announcementRef.current.setAttribute("aria-live", priority);
+
     // Add new announcement with slight delay to ensure it's read
     setTimeout(() => {
       if (announcementRef.current) {
@@ -64,32 +64,35 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
   }, []);
 
   // Focus management utilities
-  const focusElement = useCallback((selector: string | HTMLElement) => {
-    if (!manageFocus) return;
+  const focusElement = useCallback(
+    (selector: string | HTMLElement) => {
+      if (!manageFocus) return;
 
-    let element: HTMLElement | null = null;
-    
-    if (typeof selector === 'string') {
-      element = document.querySelector(selector);
-    } else {
-      element = selector;
-    }
+      let element: HTMLElement | null = null;
 
-    if (element) {
-      // Store previous focus for restoration
-      previousFocusRef.current = document.activeElement as HTMLElement;
-      
-      // Focus the element
-      element.focus();
-      
-      // Scroll into view if needed
-      element.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'nearest',
-        inline: 'nearest'
-      });
-    }
-  }, [manageFocus]);
+      if (typeof selector === "string") {
+        element = document.querySelector(selector);
+      } else {
+        element = selector;
+      }
+
+      if (element) {
+        // Store previous focus for restoration
+        previousFocusRef.current = document.activeElement as HTMLElement;
+
+        // Focus the element
+        element.focus();
+
+        // Scroll into view if needed
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "nearest",
+        });
+      }
+    },
+    [manageFocus],
+  );
 
   // Restore previous focus
   const restoreFocus = useCallback(() => {
@@ -105,131 +108,146 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
   }, [manageFocus]);
 
   // Focus trap for modals and dialogs
-  const trapFocusInElement = useCallback((element: HTMLElement) => {
-    if (!trapFocus) return () => {};
+  const trapFocusInElement = useCallback(
+    (element: HTMLElement) => {
+      if (!trapFocus) return () => {};
 
-    const focusableElements = element.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    
-    const firstFocusable = focusableElements[0] as HTMLElement;
-    const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement;
+      const focusableElements = element.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
 
-    const handleTabKey = (e: KeyboardEvent) => {
-      if (e.key !== 'Tab') return;
+      const firstFocusable = focusableElements[0] as HTMLElement;
+      const lastFocusable = focusableElements[
+        focusableElements.length - 1
+      ] as HTMLElement;
 
-      if (e.shiftKey) {
-        // Shift + Tab
-        if (document.activeElement === firstFocusable) {
-          e.preventDefault();
-          lastFocusable.focus();
+      const handleTabKey = (e: KeyboardEvent) => {
+        if (e.key !== "Tab") return;
+
+        if (e.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === firstFocusable) {
+            e.preventDefault();
+            lastFocusable.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastFocusable) {
+            e.preventDefault();
+            firstFocusable.focus();
+          }
         }
-      } else {
-        // Tab
-        if (document.activeElement === lastFocusable) {
-          e.preventDefault();
-          firstFocusable.focus();
-        }
+      };
+
+      element.addEventListener("keydown", handleTabKey);
+
+      // Focus first element
+      if (firstFocusable) {
+        firstFocusable.focus();
       }
-    };
 
-    element.addEventListener('keydown', handleTabKey);
-    
-    // Focus first element
-    if (firstFocusable) {
-      firstFocusable.focus();
-    }
-
-    return () => {
-      element.removeEventListener('keydown', handleTabKey);
-    };
-  }, [trapFocus]);
+      return () => {
+        element.removeEventListener("keydown", handleTabKey);
+      };
+    },
+    [trapFocus],
+  );
 
   // Keyboard navigation helpers
-  const handleArrowNavigation = useCallback((
-    e: KeyboardEvent,
-    items: NodeListOf<Element> | Element[],
-    currentIndex: number,
-    options: {
-      horizontal?: boolean;
-      vertical?: boolean;
-      wrap?: boolean;
-      onNavigate?: (newIndex: number) => void;
-    } = {}
-  ) => {
-    const { horizontal = true, vertical = true, wrap = true, onNavigate } = options;
-    const itemsArray = Array.from(items);
-    let newIndex = currentIndex;
+  const handleArrowNavigation = useCallback(
+    (
+      e: KeyboardEvent,
+      items: NodeListOf<Element> | Element[],
+      currentIndex: number,
+      options: {
+        horizontal?: boolean;
+        vertical?: boolean;
+        wrap?: boolean;
+        onNavigate?: (newIndex: number) => void;
+      } = {},
+    ) => {
+      const {
+        horizontal = true,
+        vertical = true,
+        wrap = true,
+        onNavigate,
+      } = options;
+      const itemsArray = Array.from(items);
+      let newIndex = currentIndex;
 
-    switch (e.key) {
-      case 'ArrowRight':
-        if (horizontal) {
-          e.preventDefault();
-          newIndex = currentIndex + 1;
-          if (newIndex >= itemsArray.length) {
-            newIndex = wrap ? 0 : itemsArray.length - 1;
+      switch (e.key) {
+        case "ArrowRight":
+          if (horizontal) {
+            e.preventDefault();
+            newIndex = currentIndex + 1;
+            if (newIndex >= itemsArray.length) {
+              newIndex = wrap ? 0 : itemsArray.length - 1;
+            }
           }
-        }
-        break;
-      case 'ArrowLeft':
-        if (horizontal) {
-          e.preventDefault();
-          newIndex = currentIndex - 1;
-          if (newIndex < 0) {
-            newIndex = wrap ? itemsArray.length - 1 : 0;
+          break;
+        case "ArrowLeft":
+          if (horizontal) {
+            e.preventDefault();
+            newIndex = currentIndex - 1;
+            if (newIndex < 0) {
+              newIndex = wrap ? itemsArray.length - 1 : 0;
+            }
           }
-        }
-        break;
-      case 'ArrowDown':
-        if (vertical) {
-          e.preventDefault();
-          newIndex = currentIndex + 1;
-          if (newIndex >= itemsArray.length) {
-            newIndex = wrap ? 0 : itemsArray.length - 1;
+          break;
+        case "ArrowDown":
+          if (vertical) {
+            e.preventDefault();
+            newIndex = currentIndex + 1;
+            if (newIndex >= itemsArray.length) {
+              newIndex = wrap ? 0 : itemsArray.length - 1;
+            }
           }
-        }
-        break;
-      case 'ArrowUp':
-        if (vertical) {
-          e.preventDefault();
-          newIndex = currentIndex - 1;
-          if (newIndex < 0) {
-            newIndex = wrap ? itemsArray.length - 1 : 0;
+          break;
+        case "ArrowUp":
+          if (vertical) {
+            e.preventDefault();
+            newIndex = currentIndex - 1;
+            if (newIndex < 0) {
+              newIndex = wrap ? itemsArray.length - 1 : 0;
+            }
           }
-        }
-        break;
-      case 'Home':
-        e.preventDefault();
-        newIndex = 0;
-        break;
-      case 'End':
-        e.preventDefault();
-        newIndex = itemsArray.length - 1;
-        break;
-    }
+          break;
+        case "Home":
+          e.preventDefault();
+          newIndex = 0;
+          break;
+        case "End":
+          e.preventDefault();
+          newIndex = itemsArray.length - 1;
+          break;
+      }
 
-    if (newIndex !== currentIndex) {
-      const newElement = itemsArray[newIndex] as HTMLElement;
-      if (newElement) {
-        newElement.focus();
-        if (onNavigate) {
-          onNavigate(newIndex);
+      if (newIndex !== currentIndex) {
+        const newElement = itemsArray[newIndex] as HTMLElement;
+        if (newElement) {
+          newElement.focus();
+          if (onNavigate) {
+            onNavigate(newIndex);
+          }
         }
       }
-    }
-  }, []);
+    },
+    [],
+  );
 
   // Skip link functionality
   useEffect(() => {
     if (!skipLinks) return;
 
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main-content';
-    skipLink.textContent = 'Skip to main content';
-    skipLink.className = 'skip-link';
-    skipLink.addEventListener('click', (e) => {
+    const skipLink = document.createElement("a");
+    skipLink.href = "#main-content";
+    skipLink.textContent = "Skip to main content";
+    skipLink.className = "skip-link";
+    skipLink.addEventListener("click", (e) => {
       e.preventDefault();
-      const mainContent = document.getElementById('main-content') || document.querySelector('main');
+      const mainContent =
+        document.getElementById("main-content") ||
+        document.querySelector("main");
       if (mainContent) {
         mainContent.focus();
         mainContent.scrollIntoView();
@@ -247,19 +265,19 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
 
   // Detect user preferences
   const prefersReducedMotion = useCallback(() => {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }, []);
 
   const prefersHighContrast = useCallback(() => {
-    return window.matchMedia('(prefers-contrast: high)').matches;
+    return window.matchMedia("(prefers-contrast: high)").matches;
   }, []);
 
   const prefersDarkMode = useCallback(() => {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
   }, []);
 
   // Generate unique IDs for accessibility
-  const generateId = useCallback((prefix: string = 'accessibility') => {
+  const generateId = useCallback((prefix: string = "accessibility") => {
     return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
   }, []);
 
@@ -268,32 +286,50 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
     const warnings: string[] = [];
 
     // Check for required ARIA attributes
-    if (element.getAttribute('role') === 'button' && !element.hasAttribute('aria-label') && !element.textContent?.trim()) {
-      warnings.push('Button elements should have accessible text or aria-label');
+    if (
+      element.getAttribute("role") === "button" &&
+      !element.hasAttribute("aria-label") &&
+      !element.textContent?.trim()
+    ) {
+      warnings.push(
+        "Button elements should have accessible text or aria-label",
+      );
     }
 
-    if (element.getAttribute('role') === 'tab' && !element.hasAttribute('aria-controls')) {
-      warnings.push('Tab elements should have aria-controls attribute');
+    if (
+      element.getAttribute("role") === "tab" &&
+      !element.hasAttribute("aria-controls")
+    ) {
+      warnings.push("Tab elements should have aria-controls attribute");
     }
 
-    if (element.getAttribute('role') === 'tabpanel' && !element.hasAttribute('aria-labelledby')) {
-      warnings.push('Tabpanel elements should have aria-labelledby attribute');
+    if (
+      element.getAttribute("role") === "tabpanel" &&
+      !element.hasAttribute("aria-labelledby")
+    ) {
+      warnings.push("Tabpanel elements should have aria-labelledby attribute");
     }
 
     // Check for proper heading hierarchy
     if (element.tagName.match(/^H[1-6]$/)) {
       const level = parseInt(element.tagName.charAt(1));
-      const previousHeading = element.previousElementSibling?.closest('h1, h2, h3, h4, h5, h6');
+      const previousHeading = element.previousElementSibling?.closest(
+        "h1, h2, h3, h4, h5, h6",
+      );
       if (previousHeading) {
         const previousLevel = parseInt(previousHeading.tagName.charAt(1));
         if (level > previousLevel + 1) {
-          warnings.push(`Heading level ${level} follows heading level ${previousLevel}, consider using h${previousLevel + 1}`);
+          warnings.push(
+            `Heading level ${level} follows heading level ${previousLevel}, consider using h${
+              previousLevel + 1
+            }`,
+          );
         }
       }
     }
 
-    if (warnings.length > 0 && process.env.NODE_ENV === 'development') {
-      console.warn('Accessibility warnings for element:', element, warnings);
+    if (warnings.length > 0 && process.env.NODE_ENV === "development") {
+      console.warn("Accessibility warnings for element:", element, warnings);
     }
 
     return warnings;
@@ -309,7 +345,7 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
     prefersHighContrast,
     prefersDarkMode,
     generateId,
-    validateAriaAttributes
+    validateAriaAttributes,
   };
 }
 
@@ -318,10 +354,10 @@ export function useLiveRegion() {
   const regionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const region = document.createElement('div');
-    region.setAttribute('aria-live', 'polite');
-    region.setAttribute('aria-atomic', 'true');
-    region.className = 'sr-only';
+    const region = document.createElement("div");
+    region.setAttribute("aria-live", "polite");
+    region.setAttribute("aria-atomic", "true");
+    region.className = "sr-only";
     document.body.appendChild(region);
     regionRef.current = region;
 
@@ -332,18 +368,21 @@ export function useLiveRegion() {
     };
   }, []);
 
-  const announce = useCallback((message: string, priority: 'polite' | 'assertive' = 'polite') => {
-    if (!regionRef.current) return;
+  const announce = useCallback(
+    (message: string, priority: "polite" | "assertive" = "polite") => {
+      if (!regionRef.current) return;
 
-    regionRef.current.setAttribute('aria-live', priority);
-    regionRef.current.textContent = '';
-    
-    setTimeout(() => {
-      if (regionRef.current) {
-        regionRef.current.textContent = message;
-      }
-    }, 100);
-  }, []);
+      regionRef.current.setAttribute("aria-live", priority);
+      regionRef.current.textContent = "";
+
+      setTimeout(() => {
+        if (regionRef.current) {
+          regionRef.current.textContent = message;
+        }
+      }, 100);
+    },
+    [],
+  );
 
   return { announce };
 }
@@ -361,7 +400,7 @@ export function useFocusManagement() {
     if (!containerRef.current) return;
 
     const focusable = containerRef.current.querySelector(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     ) as HTMLElement;
 
     if (focusable) {
@@ -374,9 +413,11 @@ export function useFocusManagement() {
     if (!containerRef.current) return;
 
     const focusableElements = containerRef.current.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
-    const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement;
+    const lastFocusable = focusableElements[
+      focusableElements.length - 1
+    ] as HTMLElement;
 
     if (lastFocusable) {
       previousFocusRef.current = document.activeElement as HTMLElement;
@@ -400,6 +441,6 @@ export function useFocusManagement() {
     setContainer,
     focusFirst,
     focusLast,
-    restoreFocus
+    restoreFocus,
   };
 }

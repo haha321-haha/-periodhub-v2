@@ -59,7 +59,7 @@
 
 
 Robust DNS and Redirect Verification Script
-Code 
+Code
 
 #!/bin/bash
 
@@ -72,10 +72,10 @@ check_url() {
     local description=$2
     echo "🌐 Testing: $description"
     echo "URL: $url"
-    
+
     # Get response with timeout
     response=$(curl -s -o /dev/null -w "%{http_code},%{redirect_url},%{time_total}" --max-time 10 -L "$url" 2>/dev/null)
-    
+
     if [ $? -eq 0 ]; then
         IFS=',' read -r status redirect_url time_total <<< "$response"
         echo "Status: $status"
@@ -92,7 +92,7 @@ check_dns() {
     local domain=$1
     local record_type=$2
     echo "📡 DNS Check: $domain ($record_type)"
-    
+
     result=$(dig +short "$domain" "$record_type" 2>/dev/null)
     if [ -n "$result" ]; then
         echo "✅ $record_type: $result"
@@ -243,7 +243,7 @@ chmod +x verify-seo.sh
 **Critical Monitoring Points:**
 
 - **Week 1**: Verify redirects work and no 4xx/5xx errors appear
-- **Week 2**: Check Search Console for indexing changes  
+- **Week 2**: Check Search Console for indexing changes
 - **Week 3-4**: Monitor SEO score recovery
 
 **Additional Considerations:**
@@ -345,7 +345,7 @@ echo "�� 验证DNS配置..."
 echo "�� 检查periodhub.health A记录:"
 dig +short periodhub.health A
 
-# 检查CNAME记录  
+# 检查CNAME记录
 echo "📋 检查www.periodhub.health CNAME记录:"
 dig +short www.periodhub.health CNAME
 
@@ -414,7 +414,7 @@ const checkSEOHealth = async () => {
     // Sitemap可访问性
     () => fetch('https://www.periodhub.health/sitemap.xml').then(r => r.ok)
   ];
-  
+
   const results = await Promise.all(checks.map(check => check()));
   console.log('SEO健康检查结果:', results);
 };
@@ -474,7 +474,7 @@ const checkSEOHealth = async () => {
 
 **✅ 已经修复的部分：**
 - `app/layout.tsx` 第16行：`metadataBase: new URL('https://www.periodhub.health')` ✅
-- `app/sitemap.ts` 第7行：默认值使用带www的URL ✅  
+- `app/sitemap.ts` 第7行：默认值使用带www的URL ✅
 - `vercel.json` 第7行：环境变量使用带www的URL ✅
 - `seo-fixes/robots.txt` 第12行：Sitemap URL使用带www ✅
 
@@ -504,7 +504,7 @@ const checkSEOHealth = async () => {
   "value": "strict-origin-when-cross-origin"
 },
 {
-  "key": "Permissions-Policy", 
+  "key": "Permissions-Policy",
   "value": "camera=(), microphone=(), geolocation=()"
 }
 ```
@@ -519,7 +519,7 @@ const checkSEOHealth = async () => {
 
 **✅ 方案预期效果合理：**
 - SEO评分从73分恢复到100分 ✅
-- 解决500错误 ✅  
+- 解决500错误 ✅
 - URL统一性 ✅
 - 搜索引擎友好性 ✅
 
@@ -545,7 +545,7 @@ const checkSEOHealth = async () => {
 
 **建议执行顺序：**
 1. 先添加重定向规则
-2. 完善安全头配置  
+2. 完善安全头配置
 3. 部署并验证
 4. 监控SEO评分变化
 
@@ -564,13 +564,13 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   // ✅ 修复：统一使用带www的URL
   metadataBase: new URL('https://www.periodhub.health'),
-  
+
   title: {
     default: "PeriodHub - 经期健康管理平台",
     template: "%s | PeriodHub"
   },
   description: "专业的经期健康管理平台，提供经期追踪、健康建议和个性化护理方案",
-  
+
   // Open Graph 配置
   openGraph: {
     type: 'website',
@@ -581,14 +581,14 @@ export const metadata: Metadata = {
     title: 'PeriodHub - 经期健康管理平台',
     description: '专业的经期健康管理平台，提供经期追踪、健康建议和个性化护理方案',
   },
-  
+
   // Twitter Card 配置
   twitter: {
     card: 'summary_large_image',
     site: '@periodhub',
     creator: '@periodhub',
   },
-  
+
   // 其他SEO配置
   robots: {
     index: true,
@@ -598,7 +598,7 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-  
+
   // ✅ 确保canonical URL正确
   alternates: {
     canonical: 'https://www.periodhub.health',
@@ -626,7 +626,7 @@ import { MetadataRoute } from 'next';
 export default function sitemap(): MetadataRoute.Sitemap {
   // ✅ 确保使用统一的带www URL
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.periodhub.health';
-  
+
   return [
     {
       url: baseUrl,
@@ -883,13 +883,13 @@ Sitemap: https://periodhub.health/sitemap.xml     // ❌ 不带www
 // 修改前
 metadataBase: new URL('https://periodhub.health'),
 
-// 修改后  
+// 修改后
 metadataBase: new URL('https://www.periodhub.health'),
 ```
 
 2. **确保所有URL配置一致**：
    - ✅ vercel.json: `https://www.periodhub.health`
-   - ✅ sitemap.ts: `https://www.periodhub.health` 
+   - ✅ sitemap.ts: `https://www.periodhub.health`
    - ✅ robots.txt: `https://www.periodhub.health/sitemap.xml`
    - ❌ app/layout.tsx: 需要修改为带www
 

@@ -3,7 +3,7 @@
  * 基于HVsLYEp的性能需求，实现渲染性能优化和内存管理
  */
 
-import { useCallback, useMemo, useRef, useEffect } from 'react';
+import { useCallback, useMemo, useRef, useEffect } from "react";
 
 /**
  * 性能监控器
@@ -12,61 +12,62 @@ import { useCallback, useMemo, useRef, useEffect } from 'react';
 export class PerformanceMonitor {
   private static measurements = new Map<string, number[]>();
   private static observers = new Map<string, PerformanceObserver>();
-  
+
   /**
    * 开始性能测量
    */
   static startMeasure(name: string): void {
-    if (typeof window !== 'undefined' && 'performance' in window) {
+    if (typeof window !== "undefined" && "performance" in window) {
       performance.mark(`${name}-start`);
     }
   }
-  
+
   /**
    * 结束性能测量
    */
   static endMeasure(name: string): number {
-    if (typeof window !== 'undefined' && 'performance' in window) {
+    if (typeof window !== "undefined" && "performance" in window) {
       performance.mark(`${name}-end`);
       performance.measure(name, `${name}-start`, `${name}-end`);
-      
-      const measure = performance.getEntriesByName(name, 'measure')[0];
+
+      const measure = performance.getEntriesByName(name, "measure")[0];
       const duration = measure?.duration || 0;
-      
+
       // 记录测量结果
       if (!this.measurements.has(name)) {
         this.measurements.set(name, []);
       }
       this.measurements.get(name)!.push(duration);
-      
+
       // 清理标记
       performance.clearMarks(`${name}-start`);
       performance.clearMarks(`${name}-end`);
       performance.clearMeasures(name);
-      
+
       return duration;
     }
     return 0;
   }
-  
+
   /**
    * 获取性能统计
    */
   static getPerformanceStats(name: string) {
     const measurements = this.measurements.get(name) || [];
     if (measurements.length === 0) return null;
-    
+
     const sorted = [...measurements].sort((a, b) => a - b);
     return {
       count: measurements.length,
-      average: measurements.reduce((sum, val) => sum + val, 0) / measurements.length,
+      average:
+        measurements.reduce((sum, val) => sum + val, 0) / measurements.length,
       min: sorted[0],
       max: sorted[sorted.length - 1],
       median: sorted[Math.floor(sorted.length / 2)],
       p95: sorted[Math.floor(sorted.length * 0.95)],
     };
   }
-  
+
   /**
    * 清理性能数据
    */
@@ -77,33 +78,33 @@ export class PerformanceMonitor {
       this.measurements.clear();
     }
   }
-  
+
   /**
    * 监控Web Vitals
    */
   static observeWebVitals(): void {
-    if (typeof window === 'undefined') return;
-    
+    if (typeof window === "undefined") return;
+
     try {
       // 监控LCP (Largest Contentful Paint)
       const lcpObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
-        console.log('LCP:', lastEntry.startTime);
+        console.log("LCP:", lastEntry.startTime);
       });
-      lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-      this.observers.set('lcp', lcpObserver);
-      
+      lcpObserver.observe({ entryTypes: ["largest-contentful-paint"] });
+      this.observers.set("lcp", lcpObserver);
+
       // 监控FID (First Input Delay)
       const fidObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         entries.forEach((entry: any) => {
-          console.log('FID:', entry.processingStart - entry.startTime);
+          console.log("FID:", entry.processingStart - entry.startTime);
         });
       });
-      fidObserver.observe({ entryTypes: ['first-input'] });
-      this.observers.set('fid', fidObserver);
-      
+      fidObserver.observe({ entryTypes: ["first-input"] });
+      this.observers.set("fid", fidObserver);
+
       // 监控CLS (Cumulative Layout Shift)
       const clsObserver = new PerformanceObserver((list) => {
         let clsValue = 0;
@@ -113,16 +114,15 @@ export class PerformanceMonitor {
             clsValue += entry.value;
           }
         });
-        console.log('CLS:', clsValue);
+        console.log("CLS:", clsValue);
       });
-      clsObserver.observe({ entryTypes: ['layout-shift'] });
-      this.observers.set('cls', clsObserver);
-      
+      clsObserver.observe({ entryTypes: ["layout-shift"] });
+      this.observers.set("cls", clsObserver);
     } catch (error) {
-      console.warn('Web Vitals监控初始化失败:', error);
+      console.warn("Web Vitals监控初始化失败:", error);
     }
   }
-  
+
   /**
    * 停止所有监控
    */
@@ -140,7 +140,7 @@ export class MemoryMonitor {
    * 获取内存使用情况
    */
   static getMemoryInfo(): any {
-    if (typeof window !== 'undefined' && 'memory' in performance) {
+    if (typeof window !== "undefined" && "memory" in performance) {
       return {
         usedJSHeapSize: (performance as any).memory.usedJSHeapSize,
         totalJSHeapSize: (performance as any).memory.totalJSHeapSize,
@@ -149,24 +149,28 @@ export class MemoryMonitor {
     }
     return null;
   }
-  
+
   /**
    * 检查内存泄漏
    */
   static checkMemoryLeak(): boolean {
     const memoryInfo = this.getMemoryInfo();
     if (!memoryInfo) return false;
-    
-    const usagePercentage = memoryInfo.usedJSHeapSize / memoryInfo.jsHeapSizeLimit;
+
+    const usagePercentage =
+      memoryInfo.usedJSHeapSize / memoryInfo.jsHeapSizeLimit;
     return usagePercentage > 0.8; // 超过80%认为可能存在内存泄漏
   }
-  
+
   /**
    * 强制垃圾回收（仅在开发环境）
    */
   static forceGC(): void {
-    if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
-      if ('gc' in window) {
+    if (
+      process.env.NODE_ENV === "development" &&
+      typeof window !== "undefined"
+    ) {
+      if ("gc" in window) {
         (window as any).gc();
       }
     }
@@ -180,12 +184,12 @@ export class MemoryMonitor {
 export function useRenderOptimization() {
   const renderCount = useRef(0);
   const lastRenderTime = useRef(0);
-  
+
   useEffect(() => {
     renderCount.current += 1;
     lastRenderTime.current = Date.now();
   });
-  
+
   /**
    * 防抖渲染
    */
@@ -194,9 +198,9 @@ export function useRenderOptimization() {
       const timeoutId = setTimeout(callback, delay);
       return () => clearTimeout(timeoutId);
     },
-    []
+    [],
   );
-  
+
   /**
    * 节流渲染
    */
@@ -208,9 +212,9 @@ export function useRenderOptimization() {
         lastRenderTime.current = now;
       }
     },
-    []
+    [],
   );
-  
+
   /**
    * 检查渲染频率
    */
@@ -218,18 +222,19 @@ export function useRenderOptimization() {
     const now = Date.now();
     const timeDiff = now - lastRenderTime.current;
     const frequency = timeDiff > 0 ? 1000 / timeDiff : 0;
-    
-    if (frequency > 60) { // 超过60fps
-      console.warn('高频渲染检测:', frequency.toFixed(2), 'fps');
+
+    if (frequency > 60) {
+      // 超过60fps
+      console.warn("高频渲染检测:", frequency.toFixed(2), "fps");
     }
-    
+
     return {
       renderCount: renderCount.current,
       lastRenderTime: lastRenderTime.current,
       frequency,
     };
   }, []);
-  
+
   return {
     renderCount: renderCount.current,
     debouncedRender,
@@ -244,13 +249,10 @@ export function useRenderOptimization() {
  */
 export function useOptimizedSelector<T, R>(
   selector: (state: T) => R,
-  equalityFn?: (a: R, b: R) => boolean
+  equalityFn?: (a: R, b: R) => boolean,
 ): (state: T) => R {
-  const memoizedSelector = useMemo(
-    () => selector,
-    [selector]
-  );
-  
+  const memoizedSelector = useMemo(() => selector, [selector]);
+
   return memoizedSelector;
 }
 
@@ -261,7 +263,7 @@ export class ComponentCache {
   private static cache = new Map<string, any>();
   private static maxSize = 100;
   private static accessCount = new Map<string, number>();
-  
+
   /**
    * 设置缓存
    */
@@ -269,11 +271,11 @@ export class ComponentCache {
     if (this.cache.size >= this.maxSize) {
       this.evictLeastUsed();
     }
-    
+
     this.cache.set(key, value);
     this.accessCount.set(key, 1);
   }
-  
+
   /**
    * 获取缓存
    */
@@ -285,14 +287,14 @@ export class ComponentCache {
     }
     return value;
   }
-  
+
   /**
    * 检查缓存是否存在
    */
   static has(key: string): boolean {
     return this.cache.has(key);
   }
-  
+
   /**
    * 删除缓存
    */
@@ -300,26 +302,26 @@ export class ComponentCache {
     this.accessCount.delete(key);
     return this.cache.delete(key);
   }
-  
+
   /**
    * 清理最少使用的缓存
    */
   private static evictLeastUsed(): void {
-    let leastUsedKey = '';
+    let leastUsedKey = "";
     let leastUsedCount = Infinity;
-    
+
     for (const [key, count] of this.accessCount.entries()) {
       if (count < leastUsedCount) {
         leastUsedCount = count;
         leastUsedKey = key;
       }
     }
-    
+
     if (leastUsedKey) {
       this.delete(leastUsedKey);
     }
   }
-  
+
   /**
    * 清理所有缓存
    */
@@ -327,7 +329,7 @@ export class ComponentCache {
     this.cache.clear();
     this.accessCount.clear();
   }
-  
+
   /**
    * 获取缓存统计
    */
@@ -338,9 +340,12 @@ export class ComponentCache {
       hitRate: this.calculateHitRate(),
     };
   }
-  
+
   private static calculateHitRate(): number {
-    const totalAccess = Array.from(this.accessCount.values()).reduce((sum, count) => sum + count, 0);
+    const totalAccess = Array.from(this.accessCount.values()).reduce(
+      (sum, count) => sum + count,
+      0,
+    );
     const uniqueKeys = this.accessCount.size;
     return uniqueKeys > 0 ? (totalAccess - uniqueKeys) / totalAccess : 0;
   }
@@ -354,7 +359,7 @@ export class VirtualScrollOptimizer {
   private static itemHeight = 50;
   private static containerHeight = 400;
   private static overscan = 5;
-  
+
   /**
    * 计算可见范围
    */
@@ -362,9 +367,9 @@ export class VirtualScrollOptimizer {
     const startIndex = Math.floor(scrollTop / this.itemHeight);
     const endIndex = Math.min(
       startIndex + Math.ceil(this.containerHeight / this.itemHeight),
-      totalItems - 1
+      totalItems - 1,
     );
-    
+
     return {
       startIndex: Math.max(0, startIndex - this.overscan),
       endIndex: Math.min(totalItems - 1, endIndex + this.overscan),
@@ -372,7 +377,7 @@ export class VirtualScrollOptimizer {
       offsetY: startIndex * this.itemHeight,
     };
   }
-  
+
   /**
    * 设置配置
    */
@@ -394,7 +399,7 @@ export class VirtualScrollOptimizer {
 export class BatchUpdateOptimizer {
   private static updateQueue: (() => void)[] = [];
   private static isProcessing = false;
-  
+
   /**
    * 添加更新到队列
    */
@@ -402,38 +407,38 @@ export class BatchUpdateOptimizer {
     this.updateQueue.push(update);
     this.scheduleBatch();
   }
-  
+
   /**
    * 调度批量更新
    */
   private static scheduleBatch(): void {
     if (this.isProcessing) return;
-    
+
     this.isProcessing = true;
-    
+
     // 使用 requestAnimationFrame 确保在下一帧执行
     requestAnimationFrame(() => {
       const updates = [...this.updateQueue];
       this.updateQueue = [];
-      
+
       // 执行所有更新
-      updates.forEach(update => {
+      updates.forEach((update) => {
         try {
           update();
         } catch (error) {
-          console.error('批量更新执行失败:', error);
+          console.error("批量更新执行失败:", error);
         }
       });
-      
+
       this.isProcessing = false;
-      
+
       // 如果还有新的更新，继续处理
       if (this.updateQueue.length > 0) {
         this.scheduleBatch();
       }
     });
   }
-  
+
   /**
    * 清理队列
    */

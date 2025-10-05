@@ -1,13 +1,13 @@
 // Data converter utility to transform between PainEntry and PainRecord types
 // Bridges the gap between existing pain tracker data and analytics system
 
-import { 
-  PainRecord, 
-  PainType, 
-  PainLocation, 
-  Symptom, 
+import {
+  PainRecord,
+  PainType,
+  PainLocation,
+  Symptom,
   MenstrualStatus,
-  Medication 
+  Medication
 } from '../../../../../types/pain-tracker';
 
 // Temporary interface definition to avoid import issues
@@ -73,10 +73,10 @@ function extractTimeFromDate(isoString: string): string | null {
  */
 function convertLocationsToPainTypes(locations: string[]): PainType[] {
   const painTypes: PainType[] = [];
-  
+
   locations.forEach(location => {
     const lowerLocation = location.toLowerCase();
-    
+
     // Map locations to likely pain types
     if (lowerLocation.includes('cramp') || lowerLocation.includes('abdomen')) {
       painTypes.push('cramping');
@@ -95,7 +95,7 @@ function convertLocationsToPainTypes(locations: string[]): PainType[] {
       painTypes.push('cramping');
     }
   });
-  
+
   // Remove duplicates and ensure at least one pain type
   const uniquePainTypes = Array.from(new Set(painTypes));
   return uniquePainTypes.length > 0 ? uniquePainTypes : ['cramping'];
@@ -106,10 +106,10 @@ function convertLocationsToPainTypes(locations: string[]): PainType[] {
  */
 function convertToLocations(locations: string[]): PainLocation[] {
   const painLocations: PainLocation[] = [];
-  
+
   locations.forEach(location => {
     const lowerLocation = location.toLowerCase();
-    
+
     if (lowerLocation.includes('lower abdomen') || lowerLocation.includes('lower belly')) {
       painLocations.push('lower_abdomen');
     } else if (lowerLocation.includes('lower back') || lowerLocation.includes('back')) {
@@ -127,7 +127,7 @@ function convertToLocations(locations: string[]): PainLocation[] {
       painLocations.push('lower_abdomen');
     }
   });
-  
+
   // Remove duplicates and ensure at least one location
   const uniqueLocations = Array.from(new Set(painLocations));
   return uniqueLocations.length > 0 ? uniqueLocations : ['lower_abdomen'];
@@ -138,10 +138,10 @@ function convertToLocations(locations: string[]): PainLocation[] {
  */
 function convertToSymptoms(symptoms: string[]): Symptom[] {
   const standardSymptoms: Symptom[] = [];
-  
+
   symptoms.forEach(symptom => {
     const lowerSymptom = symptom.toLowerCase();
-    
+
     if (lowerSymptom.includes('nausea') || lowerSymptom.includes('sick')) {
       standardSymptoms.push('nausea');
     } else if (lowerSymptom.includes('vomit') || lowerSymptom.includes('throw up')) {
@@ -160,7 +160,7 @@ function convertToSymptoms(symptoms: string[]): Symptom[] {
       standardSymptoms.push('breast_tenderness');
     }
   });
-  
+
   // Remove duplicates
   return Array.from(new Set(standardSymptoms));
 }

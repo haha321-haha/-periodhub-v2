@@ -7,7 +7,7 @@
       <stop offset="50%" style="stop-color:#FCE7F3;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#DBEAFE;stop-opacity:1" />
     </linearGradient>
-    
+
     <linearGradient id="purple1" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#9333EA;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
@@ -24,16 +24,16 @@
       <stop offset="0%" style="stop-color:#F472B6;stop-opacity:1" />
       <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
     </linearGradient>
-    
+
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
     </filter>
-    
+
     <filter id="glass-effect" x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="0.5"/>
       <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
     </filter>
-    
+
     <linearGradient id="glass-purple1" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#9333EA;stop-opacity:0.9" />
       <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:0.85" />
@@ -51,16 +51,16 @@
       <stop offset="100%" style="stop-color:#EC4899;stop-opacity:0.85" />
     </linearGradient>
   </defs>
-  
+
   <!-- 背景 -->
   <rect width="800" height="400" fill="url(#bg)"/>
-  
+
   <!-- 标题区域 - 完美居中对齐 -->
   <rect x="47" y="25" width="706" height="65" fill="white" rx="20" opacity="0.9" filter="url(#shadow)"/>
   <!-- 优化主标题颜色为柔和蓝紫色 -->
   <text x="400" y="52" text-anchor="middle" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="28" font-weight="800" fill="#5B5BD6">月经健康统计数据</text>
   <text x="400" y="75" text-anchor="middle" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="16" fill="#6B7280">Period Health Statistics</text>
-  
+
   <!-- 第一行统计卡片 -->
   <rect x="50" y="110" width="165" height="110" fill="rgba(255,255,255,0.15)" rx="20" filter="url(#glass-effect)"/>
   <rect x="50" y="110" width="165" height="110" fill="url(#glass-purple1)" rx="20"/>
@@ -97,7 +97,7 @@
   <text x="672" y="175" text-anchor="middle" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="14" font-weight="700" fill="white">使用止痛药</text>
   <text x="672" y="192" text-anchor="middle" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="11" fill="rgba(255,255,255,0.95)">Use Painkillers</text>
   <text x="672" y="208" text-anchor="middle" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="10" fill="rgba(255,255,255,0.8)">缓解方式</text>
-  
+
   <!-- 第二行统计卡片 -->
   <rect x="90" y="240" width="200" height="90" fill="rgba(255,255,255,0.15)" rx="20" filter="url(#glass-effect)"/>
   <rect x="90" y="240" width="200" height="90" fill="url(#glass-purple1)" rx="20"/>
@@ -124,11 +124,11 @@
   <text x="630" y="290" text-anchor="middle" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="10" font-weight="600" fill="rgba(255,255,255,0.8)">(years)</text>
   <text x="630" y="305" text-anchor="middle" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="12" font-weight="700" fill="white">主要影响年龄段</text>
   <text x="630" y="320" text-anchor="middle" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="10" fill="rgba(255,255,255,0.9)">Primary Age Range</text>
-  
+
   <!-- 底部信息 - 重新定位居中 -->
   <rect x="47" y="350" width="706" height="35" fill="white" rx="16" opacity="0.95" filter="url(#shadow)"/>
   <text x="400" y="372" text-anchor="middle" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="14" font-weight="500" fill="#6B7280">数据来源：全球女性健康调查 | Data Source: Global Women's Health Survey</text>
-  
+
   <!-- 装饰元素 -->
   <circle cx="760" cy="40" r="8" fill="#EC4899" opacity="0.6"/>
   <circle cx="740" cy="60" r="6" fill="#9333EA" opacity="0.6"/>

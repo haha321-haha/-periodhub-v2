@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { performanceMonitor } from '../performance/monitor';
-import { useAppStore } from '../stores/appStore';
+import { performanceMonitor } from "../performance/monitor";
+import { useAppStore } from "../stores/appStore";
 
 // API响应类型
 export interface ApiResponse<T = any> {
@@ -19,22 +19,22 @@ export class ApiError extends Error {
     public status: number,
     public statusText: string,
     public data?: any,
-    public requestId?: string
+    public requestId?: string,
   ) {
     super(`API Error ${status}: ${statusText}`);
-    this.name = 'ApiError';
+    this.name = "ApiError";
   }
 }
 
 // 请求配置
 export interface RequestConfig {
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+  method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   headers?: Record<string, string>;
   body?: any;
   timeout?: number;
   retries?: number;
   retryDelay?: number;
-  cache?: 'no-cache' | 'reload' | 'force-cache' | 'only-if-cached';
+  cache?: "no-cache" | "reload" | "force-cache" | "only-if-cached";
   signal?: AbortSignal;
 }
 
@@ -56,19 +56,22 @@ class ApiClient {
   private baseUrl: string;
   private defaultHeaders: Record<string, string>;
   private cache: Map<string, CacheItem<any>> = new Map();
-  private requestInterceptors: Array<(config: RequestConfig) => RequestConfig> = [];
+  private requestInterceptors: Array<(config: RequestConfig) => RequestConfig> =
+    [];
   private responseInterceptors: Array<(response: any) => any> = [];
 
-  constructor(baseUrl: string = '') {
+  constructor(baseUrl: string = "") {
     this.baseUrl = baseUrl;
     this.defaultHeaders = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      "Content-Type": "application/json",
+      Accept: "application/json",
     };
   }
 
   // 添加请求拦截器
-  public addRequestInterceptor(interceptor: (config: RequestConfig) => RequestConfig) {
+  public addRequestInterceptor(
+    interceptor: (config: RequestConfig) => RequestConfig,
+  ) {
     this.requestInterceptors.push(interceptor);
   }
 
@@ -89,7 +92,9 @@ class ApiClient {
 
   // 缓存管理
   private getCacheKey(url: string, config: RequestConfig): string {
-    return `${config.method || 'GET'}_${url}_${JSON.stringify(config.body || {})}`;
+    return `${config.method || "GET"}_${url}_${JSON.stringify(
+      config.body || {},
+    )}`;
   }
 
   private getFromCache<T>(key: string): T | null {
@@ -127,7 +132,7 @@ class ApiClient {
   private async withRetry<T>(
     fn: () => Promise<T>,
     retries: number = 3,
-    delay: number = 1000
+    delay: number = 1000,
   ): Promise<T> {
     try {
       return await fn();
@@ -151,14 +156,14 @@ class ApiClient {
 
   // 延迟函数
   private delay(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   // 主要请求方法
   public async request<T = any>(
     url: string,
     config: RequestConfig = {},
-    cacheConfig?: CacheConfig
+    cacheConfig?: CacheConfig,
   ): Promise<ApiResponse<T>> {
     const requestId = this.generateRequestId();
     const startTime = performance.now();
@@ -171,7 +176,10 @@ class ApiClient {
       }
 
       // 检查缓存
-      if (cacheConfig && (finalConfig.method === 'GET' || !finalConfig.method)) {
+      if (
+        cacheConfig &&
+        (finalConfig.method === "GET" || !finalConfig.method)
+      ) {
         const cacheKey = this.getCacheKey(url, finalConfig);
         const cachedData = this.getFromCache<ApiResponse<T>>(cacheKey);
         if (cachedData) {
@@ -180,24 +188,25 @@ class ApiClient {
       }
 
       // 构建请求
-      const fullUrl = url.startsWith('http') ? url : `${this.baseUrl}${url}`;
+      const fullUrl = url.startsWith("http") ? url : `${this.baseUrl}${url}`;
       const headers = { ...this.defaultHeaders, ...finalConfig.headers };
-      
+
       const fetchConfig: RequestInit = {
-        method: finalConfig.method || 'GET',
+        method: finalConfig.method || "GET",
         headers,
         cache: finalConfig.cache,
         signal: finalConfig.signal,
       };
 
-      if (finalConfig.body && finalConfig.method !== 'GET') {
-        fetchConfig.body = typeof finalConfig.body === 'string' 
-          ? finalConfig.body 
-          : JSON.stringify(finalConfig.body);
+      if (finalConfig.body && finalConfig.method !== "GET") {
+        fetchConfig.body =
+          typeof finalConfig.body === "string"
+            ? finalConfig.body
+            : JSON.stringify(finalConfig.body);
       }
 
       // 设置超时
-      const timeoutSignal = finalConfig.timeout 
+      const timeoutSignal = finalConfig.timeout
         ? AbortSignal.timeout(finalConfig.timeout)
         : undefined;
 
@@ -209,7 +218,7 @@ class ApiClient {
       const response = await this.withRetry(
         () => fetch(fullUrl, fetchConfig),
         finalConfig.retries || 3,
-        finalConfig.retryDelay || 1000
+        finalConfig.retryDelay || 1000,
       );
 
       const endTime = performance.now();
@@ -217,11 +226,11 @@ class ApiClient {
       // 记录性能
       performanceMonitor.recordApiCall(
         fullUrl,
-        finalConfig.method || 'GET',
+        finalConfig.method || "GET",
         startTime,
         endTime,
         response.status,
-        parseInt(response.headers.get('content-length') || '0')
+        parseInt(response.headers.get("content-length") || "0"),
       );
 
       // 处理响应
@@ -231,12 +240,12 @@ class ApiClient {
           response.status,
           response.statusText,
           errorData,
-          requestId
+          requestId,
         );
       }
 
       const responseData = await response.json();
-      
+
       // 构建标准响应
       const apiResponse: ApiResponse<T> = {
         data: responseData,
@@ -252,23 +261,25 @@ class ApiClient {
       }
 
       // 缓存响应
-      if (cacheConfig && (finalConfig.method === 'GET' || !finalConfig.method)) {
+      if (
+        cacheConfig &&
+        (finalConfig.method === "GET" || !finalConfig.method)
+      ) {
         const cacheKey = this.getCacheKey(url, finalConfig);
         this.setCache(cacheKey, finalResponse, cacheConfig.ttl);
       }
 
       return finalResponse;
-
     } catch (error) {
       const endTime = performance.now();
-      
+
       // 记录错误性能
       performanceMonitor.recordApiCall(
         url,
-        config.method || 'GET',
+        config.method || "GET",
         startTime,
         endTime,
-        error instanceof ApiError ? error.status : 0
+        error instanceof ApiError ? error.status : 0,
       );
 
       // 更新应用状态
@@ -281,41 +292,41 @@ class ApiClient {
   // 便捷方法
   public async get<T = any>(
     url: string,
-    config?: Omit<RequestConfig, 'method'>,
-    cacheConfig?: CacheConfig
+    config?: Omit<RequestConfig, "method">,
+    cacheConfig?: CacheConfig,
   ): Promise<ApiResponse<T>> {
-    return this.request<T>(url, { ...config, method: 'GET' }, cacheConfig);
+    return this.request<T>(url, { ...config, method: "GET" }, cacheConfig);
   }
 
   public async post<T = any>(
     url: string,
     data?: any,
-    config?: Omit<RequestConfig, 'method' | 'body'>
+    config?: Omit<RequestConfig, "method" | "body">,
   ): Promise<ApiResponse<T>> {
-    return this.request<T>(url, { ...config, method: 'POST', body: data });
+    return this.request<T>(url, { ...config, method: "POST", body: data });
   }
 
   public async put<T = any>(
     url: string,
     data?: any,
-    config?: Omit<RequestConfig, 'method' | 'body'>
+    config?: Omit<RequestConfig, "method" | "body">,
   ): Promise<ApiResponse<T>> {
-    return this.request<T>(url, { ...config, method: 'PUT', body: data });
+    return this.request<T>(url, { ...config, method: "PUT", body: data });
   }
 
   public async delete<T = any>(
     url: string,
-    config?: Omit<RequestConfig, 'method'>
+    config?: Omit<RequestConfig, "method">,
   ): Promise<ApiResponse<T>> {
-    return this.request<T>(url, { ...config, method: 'DELETE' });
+    return this.request<T>(url, { ...config, method: "DELETE" });
   }
 
   public async patch<T = any>(
     url: string,
     data?: any,
-    config?: Omit<RequestConfig, 'method' | 'body'>
+    config?: Omit<RequestConfig, "method" | "body">,
   ): Promise<ApiResponse<T>> {
-    return this.request<T>(url, { ...config, method: 'PATCH', body: data });
+    return this.request<T>(url, { ...config, method: "PATCH", body: data });
   }
 
   // 清理缓存
@@ -339,11 +350,11 @@ export const apiClient = new ApiClient();
 // 设置默认拦截器
 apiClient.addRequestInterceptor((config) => {
   // 添加认证头部（如果需要）
-  const token = localStorage.getItem('auth_token');
+  const token = localStorage.getItem("auth_token");
   if (token) {
     config.headers = {
       ...config.headers,
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     };
   }
   return config;

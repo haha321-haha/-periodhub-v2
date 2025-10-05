@@ -5,7 +5,7 @@ PDF重复+热点地图+SEO综合修复方案
 
 ### 1. PDF资源重复问题
 - **疼痛追踪表**: 重复定义（2.5MB + 2.8MB版本）
-- **校园应急清单**: 重复显示 
+- **校园应急清单**: 重复显示
 - **映射系统混乱**: 多个虚拟ID映射到同一真实ID
 - **数据源重复**: pdfResources.ts中同ID被定义多次
 
@@ -47,7 +47,7 @@ export const pdfResources: PDFResource[] = [
     id: 'campus-emergency-checklist',
     title: '校园应急清单',
     description: '校园痛经应急处理完整清单',
-    category: 'immediate-help', 
+    category: 'immediate-help',
     tags: ['应急', '校园', '清单'],
     fileSize: 1800,
     filePath: '/pdfs/campus-emergency-checklist.pdf',
@@ -87,7 +87,7 @@ module.exports = {
       },
       {
         source: '/downloads-new',
-        destination: '/downloads', 
+        destination: '/downloads',
         permanent: true,
       },
       {
@@ -108,7 +108,7 @@ module.exports = {
       }
     ];
   },
-  
+
   // SEO优化配置
   async headers() {
     return [
@@ -136,20 +136,20 @@ const SimplePDFCenter: React.FC = () => {
     // 临时去重逻辑
     const deduplicateResources = (resources: PDFResource[]) => {
       const uniqueMap = new Map<string, PDFResource>();
-      
+
       resources.forEach(resource => {
         const existing = uniqueMap.get(resource.id);
         if (!existing || new Date(resource.lastUpdated) > new Date(existing.lastUpdated)) {
           uniqueMap.set(resource.id, resource);
         }
       });
-      
+
       return Array.from(uniqueMap.values());
     };
 
     const deduplicatedResources = deduplicateResources(pdfResources);
     setUniqueResources(deduplicatedResources);
-    
+
     console.log(`✅ 去重完成: ${pdfResources.length} → ${deduplicatedResources.length}`);
   }, []);
 
@@ -183,7 +183,7 @@ export class HeatmapDataManager {
 
     Object.entries(consolidationRules).forEach(([target, sources]) => {
       const consolidatedData: ClickData[] = [];
-      
+
       sources.forEach(source => {
         const sourceData = this.clickData.get(source) || [];
         consolidatedData.push(...sourceData);
@@ -192,7 +192,7 @@ export class HeatmapDataManager {
       // 合并到目标页面
       const existingData = this.clickData.get(target) || [];
       this.clickData.set(target, [...existingData, ...consolidatedData]);
-      
+
       // 清理源页面数据
       sources.forEach(source => this.clickData.delete(source));
     });
@@ -217,7 +217,7 @@ interface SEOHeadProps {
 
 export const SEOHead: React.FC<SEOHeadProps> = ({
   title,
-  description, 
+  description,
   canonicalUrl,
   structuredData
 }) => {
@@ -225,15 +225,15 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
-      
+
       {/* Canonical标签防止重复内容 */}
       <link rel="canonical" href={canonicalUrl} />
-      
+
       {/* Open Graph */}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonicalUrl} />
-      
+
       {/* 结构化数据 */}
       {structuredData && (
         <script
@@ -241,7 +241,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       )}
-      
+
       {/* 搜索引擎指示 */}
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow" />
@@ -309,7 +309,7 @@ export class SystemHealthChecker {
 
     // 生成修复建议
     report.recommendations = this.generateRecommendations(report.checks);
-    
+
     return report;
   }
 
@@ -317,8 +317,8 @@ export class SystemHealthChecker {
     const duplicates = await this.findDuplicatePDFs();
     return {
       status: duplicates.length === 0 ? 'pass' : 'fail',
-      message: duplicates.length === 0 
-        ? '✅ 未发现PDF重复问题' 
+      message: duplicates.length === 0
+        ? '✅ 未发现PDF重复问题'
         : `❌ 发现${duplicates.length}个重复PDF`,
       details: duplicates
     };
@@ -355,7 +355,7 @@ describe('PDF系统集成测试', () => {
   test('热点地图数据应该正确合并', () => {
     const heatmapManager = new HeatmapDataManager();
     heatmapManager.consolidateHeatmapData();
-    
+
     const downloadsData = heatmapManager.getConsolidatedHeatmapData('/downloads');
     expect(downloadsData.length).toBeGreaterThan(0);
   });
@@ -412,7 +412,7 @@ describe('PDF系统集成测试', () => {
 您的分析很全面！不过我注意到在搜索中没有找到您提到的具体修复建议文档。让我基于您提到的**PDF重复问题 + 热点地图问题 + SEO优化**来制定一个完整的修复方案：我制定了一个**综合修复方案**，同时解决您提到的三个核心问题：
 
 1. **PDF重复问题** - 数据源去重 + 映射系统优化
-2. **热点地图问题** - 数据整合 + 用户行为追踪修复  
+2. **热点地图问题** - 数据整合 + 用户行为追踪修复
 3. **SEO优化问题** - 重定向配置 + Canonical标签 + 结构化数据
 
 ## 🚨 建议立即执行的紧急修复：
@@ -428,7 +428,7 @@ describe('PDF系统集成测试', () => {
 ```javascript
 // next.config.js 中添加301重定向
 '/download-center' → '/downloads'
-'/downloads-new' → '/downloads' 
+'/downloads-new' → '/downloads'
 '/articles-pdf-center' → '/downloads'
 ```
 
@@ -440,15 +440,15 @@ describe('PDF系统集成测试', () => {
 
 ## 🎯 核心优势：
 
-✅ **解决重复显示** - 用户不再看到重复的PDF资源  
-✅ **修复SEO问题** - 页面权重集中，搜索排名提升  
-✅ **整合热点数据** - 准确的用户行为分析  
+✅ **解决重复显示** - 用户不再看到重复的PDF资源
+✅ **修复SEO问题** - 页面权重集中，搜索排名提升
+✅ **整合热点数据** - 准确的用户行为分析
 ✅ **提升用户体验** - 清晰的导航和下载流程
 
 **您希望我立即开始实施阶段1的紧急修复吗？** 我可以帮您：
 
 1. 🔧 修改具体的代码文件
-2. 📝 生成详细的修复脚本  
+2. 📝 生成详细的修复脚本
 3. 🧪 创建测试用例验证修复效果
 4. 📊 设置监控系统防止问题复发
 
@@ -509,7 +509,7 @@ export class PDFMappingManager {
   private initializeMaps(): void {
     // 验证并初始化数据
     validatePDFResources(pdfResources);
-    
+
     pdfResources.forEach(resource => {
       if (resource.isActive) {
         this.resourceMap.set(resource.id, resource);
@@ -628,15 +628,15 @@ export const validatePDFIntegrity = async (): Promise<ValidationResult> => {
 export const migratePDFResources = (): MigrationResult => {
   // 1. 备份现有数据
   const backup = JSON.stringify(pdfResources);
-  
+
   // 2. 识别并合并重复项
   const deduplicatedResources = deduplicateByStrategy(pdfResources, {
     strategy: 'latest-version', // 保留最新版本
     conflictResolver: (duplicates) => {
       // 自定义冲突解决逻辑
-      return duplicates.reduce((latest, current) => 
-        new Date(current.lastUpdated) > new Date(latest.lastUpdated) 
-          ? current 
+      return duplicates.reduce((latest, current) =>
+        new Date(current.lastUpdated) > new Date(latest.lastUpdated)
+          ? current
           : latest
       );
     }
@@ -816,7 +816,7 @@ module.exports = {
       },
       {
         source: '/downloads-new',
-        destination: '/downloads', 
+        destination: '/downloads',
         permanent: true,
       },
       // 多语言版本支持
@@ -958,13 +958,13 @@ curl -I https://www.periodhub.health/download-center
   permanent: true,
 },
 {
-  source: '/downloads/download-2', 
+  source: '/downloads/download-2',
   destination: '/downloads',
   permanent: true,
 },
 {
   source: '/downloads/download-3',
-  destination: '/downloads', 
+  destination: '/downloads',
   permanent: true,
 }
 缺失的重定向：
@@ -999,7 +999,7 @@ curl -I https://www.periodhub.health/download-center
   permanent: true,
 },
 {
-  source: '/downloads-new', 
+  source: '/downloads-new',
   destination: '/downloads',
   permanent: true,
 },

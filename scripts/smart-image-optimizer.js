@@ -2,7 +2,7 @@
 
 /**
  * 🖼️ PeriodHub 智能图片优化脚本
- * 
+ *
  * 安全优化策略：
  * 1. 保留所有现有图片文件
  * 2. 改进图片使用配置
@@ -19,7 +19,7 @@ class SmartImageOptimizer {
     this.projectRoot = process.cwd();
     this.publicDir = path.join(this.projectRoot, 'public');
     this.imagesDir = path.join(this.publicDir, 'images');
-    
+
     this.stats = {
       totalImages: 0,
       analyzed: 0,
@@ -30,30 +30,30 @@ class SmartImageOptimizer {
 
   async run() {
     console.log('🖼️ 开始智能图片优化分析...\n');
-    
+
     try {
       // 1. 分析现有图片结构
       console.log('📂 分析图片文件结构...');
       const imageAnalysis = await this.analyzeImageStructure();
-      
+
       // 2. 生成优化建议
       console.log('💡 生成优化建议...');
       const recommendations = this.generateRecommendations(imageAnalysis);
-      
+
       // 3. 改进Next.js配置
       console.log('⚙️  优化Next.js图片配置...');
       await this.optimizeNextConfig();
-      
+
       // 4. 创建智能图片组件
       console.log('🧩 创建智能图片组件...');
       await this.createSmartImageComponent();
-      
+
       // 5. 生成使用指南
       console.log('📖 生成使用指南...');
       await this.generateUsageGuide(recommendations);
-      
+
       console.log('\n🎉 智能图片优化完成！');
-      
+
     } catch (error) {
       console.error('❌ 优化过程中出现错误:', error.message);
       process.exit(1);
@@ -70,36 +70,36 @@ class SmartImageOptimizer {
 
     const scanDirectory = (dir, relativePath = '') => {
       if (!fs.existsSync(dir)) return;
-      
+
       const files = fs.readdirSync(dir);
-      
+
       for (const file of files) {
         const fullPath = path.join(dir, file);
         const relativeFilePath = path.join(relativePath, file);
         const stat = fs.statSync(fullPath);
-        
+
         if (stat.isDirectory()) {
           scanDirectory(fullPath, relativeFilePath);
         } else if (this.isImageFile(file)) {
           const ext = path.extname(file).toLowerCase();
           const size = stat.size;
-          
+
           // 统计目录
           if (!analysis.directories[relativePath]) {
             analysis.directories[relativePath] = { count: 0, size: 0 };
           }
           analysis.directories[relativePath].count++;
           analysis.directories[relativePath].size += size;
-          
+
           // 统计格式
           analysis.formats[ext] = (analysis.formats[ext] || 0) + 1;
-          
+
           // 统计尺寸（从文件名推断）
           const sizeMatch = file.match(/(\d+x\d+)/);
           if (sizeMatch) {
             analysis.sizes[sizeMatch[1]] = (analysis.sizes[sizeMatch[1]] || 0) + 1;
           }
-          
+
           analysis.totalSize += size;
           this.stats.totalImages++;
         }
@@ -120,7 +120,7 @@ class SmartImageOptimizer {
 
     // 分析格式分布
     const totalImages = Object.values(analysis.formats).reduce((sum, count) => sum + count, 0);
-    
+
     if (analysis.formats['.webp'] / totalImages < 0.5) {
       recommendations.push({
         type: 'format',
@@ -156,14 +156,14 @@ class SmartImageOptimizer {
 
   async optimizeNextConfig() {
     const nextConfigPath = path.join(this.projectRoot, 'next.config.js');
-    
+
     if (!fs.existsSync(nextConfigPath)) {
       console.log('⚠️  next.config.js 不存在，跳过配置优化');
       return;
     }
 
     const configContent = fs.readFileSync(nextConfigPath, 'utf8');
-    
+
     // 检查是否需要添加AVIF支持
     if (!configContent.includes('image/avif')) {
       console.log('📝 建议在next.config.js中添加AVIF格式支持');
@@ -179,7 +179,7 @@ class SmartImageOptimizer {
 
   async createSmartImageComponent() {
     const componentPath = path.join(this.projectRoot, 'components/ui/SmartImage.tsx');
-    
+
     const smartImageComponent = `'use client';
 
 import Image from 'next/image';
@@ -216,7 +216,7 @@ export default function SmartImage({
 
   // 获取优化配置
   const config = imageOptimization.configs[type];
-  
+
   // 生成响应式sizes
   const responsiveSizes = sizes || imageOptimization.utilities.generateSizesString({
     mobile: Math.min(width, 400),
@@ -226,7 +226,7 @@ export default function SmartImage({
 
   if (imageError) {
     return (
-      <div 
+      <div
         className={\`\${className} bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center\`}
         style={{ width: '100%', aspectRatio: \`\${width}/\${height}\` }}
       >
@@ -241,7 +241,7 @@ export default function SmartImage({
   return (
     <div className="relative">
       {isLoading && (
-        <div 
+        <div
           className={\`absolute inset-0 \${className} bg-gradient-to-br from-purple-50 to-pink-50 flex items-center justify-center animate-pulse\`}
           style={{ aspectRatio: \`\${width}/\${height}\` }}
         >
@@ -251,7 +251,7 @@ export default function SmartImage({
           </div>
         </div>
       )}
-      
+
       <Image
         src={src}
         alt={alt}
@@ -286,7 +286,7 @@ export default function SmartImage({
 
   async generateUsageGuide(recommendations) {
     const guidePath = path.join(this.projectRoot, 'IMAGE_OPTIMIZATION_GUIDE.md');
-    
+
     const guide = `# 🖼️ PeriodHub 图片优化指南
 
 ## 📊 当前状态分析

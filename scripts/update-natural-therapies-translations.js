@@ -610,10 +610,10 @@ const naturalTherapiesTranslations = {
 function loadExistingTranslations() {
   const zhPath = path.join(__dirname, '..', 'messages', 'zh.json');
   const enPath = path.join(__dirname, '..', 'messages', 'en.json');
-  
+
   let zhTranslations = {};
   let enTranslations = {};
-  
+
   try {
     if (fs.existsSync(zhPath)) {
       zhTranslations = JSON.parse(fs.readFileSync(zhPath, 'utf8'));
@@ -621,7 +621,7 @@ function loadExistingTranslations() {
   } catch (error) {
     console.error('Error loading zh.json:', error.message);
   }
-  
+
   try {
     if (fs.existsSync(enPath)) {
       enTranslations = JSON.parse(fs.readFileSync(enPath, 'utf8'));
@@ -629,35 +629,35 @@ function loadExistingTranslations() {
   } catch (error) {
     console.error('Error loading en.json:', error.message);
   }
-  
+
   return { zhTranslations, enTranslations };
 }
 
 // 合并翻译内容
 function mergeTranslations() {
   const { zhTranslations, enTranslations } = loadExistingTranslations();
-  
+
   // 合并naturalTherapiesPage翻译
   zhTranslations.naturalTherapiesPage = naturalTherapiesTranslations.zh.naturalTherapiesPage;
   enTranslations.naturalTherapiesPage = naturalTherapiesTranslations.en.naturalTherapiesPage;
-  
+
   return { zhTranslations, enTranslations };
 }
 
 // 保存翻译文件
 function saveTranslations() {
   const { zhTranslations, enTranslations } = mergeTranslations();
-  
+
   const zhPath = path.join(__dirname, '..', 'messages', 'zh.json');
   const enPath = path.join(__dirname, '..', 'messages', 'en.json');
-  
+
   try {
     fs.writeFileSync(zhPath, JSON.stringify(zhTranslations, null, 2), 'utf8');
     console.log('✅ 已更新 zh.json');
   } catch (error) {
     console.error('❌ 保存 zh.json 失败:', error.message);
   }
-  
+
   try {
     fs.writeFileSync(enPath, JSON.stringify(enTranslations, null, 2), 'utf8');
     console.log('✅ 已更新 en.json');

@@ -3,7 +3,7 @@
  * 处理用户个性化搜索和推荐
  */
 
-import { SearchResult, UnifiedSearchConfig } from '../types';
+import { SearchResult, UnifiedSearchConfig } from "../types";
 
 export class PersonalizationEngine {
   private config: UnifiedSearchConfig;
@@ -15,7 +15,10 @@ export class PersonalizationEngine {
   /**
    * 个性化搜索结果
    */
-  async personalizeResults(results: SearchResult[], userId: string): Promise<SearchResult[]> {
+  async personalizeResults(
+    results: SearchResult[],
+    userId: string,
+  ): Promise<SearchResult[]> {
     if (!this.config.personalization || !userId) {
       return results;
     }
@@ -27,7 +30,10 @@ export class PersonalizationEngine {
   /**
    * 生成个性化推荐
    */
-  async generateRecommendations(userId: string, limit: number = 10): Promise<SearchResult[]> {
+  async generateRecommendations(
+    userId: string,
+    limit: number = 10,
+  ): Promise<SearchResult[]> {
     // TODO: 实现推荐逻辑
     return [];
   }
@@ -46,4 +52,4 @@ export class PersonalizationEngine {
     // TODO: 实现用户画像获取
     return null;
   }
-} 
+}

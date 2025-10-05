@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useState, useRef, useEffect } from 'react';
+import Image from "next/image";
+import { useState, useRef, useEffect } from "react";
 
 interface EnhancedImageProps {
   src: string;
@@ -12,7 +12,7 @@ interface EnhancedImageProps {
   priority?: boolean;
   sizes?: string;
   quality?: number;
-  placeholder?: 'blur' | 'empty';
+  placeholder?: "blur" | "empty";
   style?: React.CSSProperties;
   onError?: (e: any) => void;
   onLoad?: () => void;
@@ -33,17 +33,17 @@ export default function EnhancedImage({
   alt,
   width,
   height,
-  className = '',
+  className = "",
   priority = false,
   sizes,
   quality = 85,
-  placeholder = 'empty',
+  placeholder = "empty",
   style = {},
   onError,
   onLoad,
   lazyThreshold = 100,
   responsive = true,
-  preload = false
+  preload = false,
 }: EnhancedImageProps) {
   const [imageError, setImageError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -63,8 +63,8 @@ export default function EnhancedImage({
       },
       {
         rootMargin: `${lazyThreshold}px`,
-        threshold: 0.1
-      }
+        threshold: 0.1,
+      },
     );
 
     if (imgRef.current) {
@@ -88,15 +88,16 @@ export default function EnhancedImage({
   };
 
   // 生成响应式sizes
-  const responsiveSizes = responsive && !sizes 
-    ? `(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw`
-    : sizes;
+  const responsiveSizes =
+    responsive && !sizes
+      ? `(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw`
+      : sizes;
 
   if (imageError) {
     return (
-      <div 
+      <div
         className={`${className} bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center`}
-        style={{ width: '100%', aspectRatio: `${width}/${height}`, ...style }}
+        style={{ width: "100%", aspectRatio: `${width}/${height}`, ...style }}
       >
         <div className="text-center p-4">
           <div className="text-4xl mb-2">🖼️</div>
@@ -110,7 +111,7 @@ export default function EnhancedImage({
     <div ref={imgRef} className="relative">
       {/* 加载状态 */}
       {isLoading && isInView && (
-        <div 
+        <div
           className={`absolute inset-0 ${className} bg-gradient-to-br from-purple-50 to-pink-50 flex items-center justify-center animate-pulse`}
           style={{ aspectRatio: `${width}/${height}` }}
         >
@@ -120,10 +121,10 @@ export default function EnhancedImage({
           </div>
         </div>
       )}
-      
+
       {/* 占位符 */}
       {!isInView && !priority && (
-        <div 
+        <div
           className={`${className} bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center`}
           style={{ aspectRatio: `${width}/${height}`, ...style }}
         >
@@ -139,30 +140,32 @@ export default function EnhancedImage({
         <>
           {/* 预加载提示 */}
           {preload && (
-            <link 
-              rel="preload" 
-              as="image" 
+            <link
+              rel="preload"
+              as="image"
               href={src}
               imageSizes={responsiveSizes}
               imageSrcSet={`${src} ${width}w`}
             />
           )}
-          
+
           <Image
             src={src}
             alt={alt}
             width={width}
             height={height}
-            className={`${className} ${isLoading ? 'opacity-0' : 'opacity-100'} transition-opacity duration-500 ease-in-out`}
+            className={`${className} ${
+              isLoading ? "opacity-0" : "opacity-100"
+            } transition-opacity duration-500 ease-in-out`}
             sizes={responsiveSizes}
             priority={priority}
             placeholder={placeholder}
             quality={quality}
             style={{
-              maxWidth: '100%',
-              height: 'auto',
-              objectFit: 'cover',
-              ...style
+              maxWidth: "100%",
+              height: "auto",
+              objectFit: "cover",
+              ...style,
             }}
             onError={handleError}
             onLoad={handleLoad}
@@ -180,27 +183,27 @@ export const EnhancedImagePresets = {
     quality: 90,
     responsive: true,
     preload: true,
-    lazyThreshold: 0
+    lazyThreshold: 0,
   },
   content: {
     priority: false,
     quality: 85,
     responsive: true,
     preload: false,
-    lazyThreshold: 100
+    lazyThreshold: 100,
   },
   thumbnail: {
     priority: false,
     quality: 75,
     responsive: true,
     preload: false,
-    lazyThreshold: 50
+    lazyThreshold: 50,
   },
   decorative: {
     priority: false,
     quality: 70,
     responsive: false,
     preload: false,
-    lazyThreshold: 200
-  }
+    lazyThreshold: 200,
+  },
 };

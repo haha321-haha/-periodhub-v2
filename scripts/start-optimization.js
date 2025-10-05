@@ -26,7 +26,7 @@ const CONFIG = {
       fcp: 0.8        // 目标FCP (秒)
     }
   },
-  
+
   // 当前问题
   current: {
     mobile: {
@@ -42,7 +42,7 @@ const CONFIG = {
       fcp: 0.6
     }
   },
-  
+
   // 优化文件路径
   files: {
     nextConfig: 'next.config.js',
@@ -58,7 +58,7 @@ const CONFIG = {
 function runCommand(command, description) {
   console.log(`\n🔧 ${description}...`);
   try {
-    const result = execSync(command, { 
+    const result = execSync(command, {
       encoding: 'utf8',
       stdio: 'pipe'
     });
@@ -73,16 +73,16 @@ function runCommand(command, description) {
 // 创建优化分支
 function createOptimizationBranch() {
   console.log('🚀 创建性能优化分支...');
-  
+
   try {
     // 检查当前分支
     const currentBranch = execSync('git branch --show-current', { encoding: 'utf8' }).trim();
     console.log(`当前分支: ${currentBranch}`);
-    
+
     // 创建新分支
     const branchName = 'performance-optimization';
     runCommand(`git checkout -b ${branchName}`, '创建性能优化分支');
-    
+
     return branchName;
   } catch (error) {
     console.error('❌ 创建分支失败:', error.message);
@@ -93,18 +93,18 @@ function createOptimizationBranch() {
 // 备份当前配置
 function backupCurrentConfig() {
   console.log('💾 备份当前配置...');
-  
+
   const backupDir = 'backup/performance-optimization';
   if (!fs.existsSync(backupDir)) {
     fs.mkdirSync(backupDir, { recursive: true });
   }
-  
+
   const filesToBackup = [
     'next.config.js',
     'package.json',
     'tailwind.config.js'
   ];
-  
+
   filesToBackup.forEach(file => {
     if (fs.existsSync(file)) {
       const backupFile = path.join(backupDir, `${file}.backup`);
@@ -117,7 +117,7 @@ function backupCurrentConfig() {
 // 应用性能优化配置
 function applyPerformanceOptimizations() {
   console.log('⚡ 应用性能优化配置...');
-  
+
   // 1. 更新next.config.js
   const nextConfigContent = `
 const path = require('path');
@@ -126,7 +126,7 @@ const path = require('path');
 const nextConfig = {
   // 性能优化
   compress: true,
-  
+
   // 图片优化
   images: {
     formats: ['image/webp', 'image/avif'],
@@ -134,18 +134,18 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  
+
   // 实验性功能
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['@/components', '@/lib'],
   },
-  
+
   // 编译器优化
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  
+
   // 重定向配置
   async redirects() {
     return [
@@ -160,7 +160,7 @@ const nextConfig = {
       { source: '/en/articles-pdf-center', destination: '/en/downloads', permanent: true },
     ];
   },
-  
+
   // 头部优化
   async headers() {
     return [
@@ -188,10 +188,10 @@ const nextConfig = {
 
 module.exports = nextConfig;
   `;
-  
+
   fs.writeFileSync(CONFIG.files.nextConfig, nextConfigContent);
   console.log('✅ 更新 next.config.js');
-  
+
   // 2. 创建性能优化CSS
   const performanceCSS = `
 /* 性能优化CSS */
@@ -264,7 +264,7 @@ module.exports = nextConfig;
     min-width: 48px;
     padding: 16px 20px;
   }
-  
+
   .btn {
     min-height: 48px;
     padding: 16px 28px;
@@ -304,7 +304,7 @@ module.exports = nextConfig;
   100% { transform: rotate(360deg); }
 }
   `;
-  
+
   const stylesDir = CONFIG.files.stylesDir || 'styles';
   const cssFile = path.join(stylesDir, 'performance.css');
   if (!fs.existsSync(stylesDir)) {
@@ -312,7 +312,7 @@ module.exports = nextConfig;
   }
   fs.writeFileSync(cssFile, performanceCSS);
   console.log('✅ 创建性能优化CSS');
-  
+
   // 3. 创建性能监控脚本
   const monitoringScript = `
 // 性能监控脚本
@@ -324,7 +324,7 @@ module.exports = nextConfig;
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
         console.log('LCP:', lastEntry.startTime);
-        
+
         // 发送到分析工具
         if (typeof gtag !== 'undefined') {
           gtag('event', 'lcp', {
@@ -333,11 +333,11 @@ module.exports = nextConfig;
           });
         }
       });
-      
+
       observer.observe({ entryTypes: ['largest-contentful-paint'] });
     }
   }
-  
+
   // 监控FCP
   function trackFCP() {
     if ('PerformanceObserver' in window) {
@@ -346,7 +346,7 @@ module.exports = nextConfig;
         const fcpEntry = entries.find(entry => entry.name === 'first-contentful-paint');
         if (fcpEntry) {
           console.log('FCP:', fcpEntry.startTime);
-          
+
           if (typeof gtag !== 'undefined') {
             gtag('event', 'fcp', {
               event_category: 'performance',
@@ -355,11 +355,11 @@ module.exports = nextConfig;
           }
         }
       });
-      
+
       observer.observe({ entryTypes: ['paint'] });
     }
   }
-  
+
   // 监控CLS
   function trackCLS() {
     if ('PerformanceObserver' in window) {
@@ -371,7 +371,7 @@ module.exports = nextConfig;
           }
         }
         console.log('CLS:', clsValue);
-        
+
         if (typeof gtag !== 'undefined') {
           gtag('event', 'cls', {
             event_category: 'performance',
@@ -379,11 +379,11 @@ module.exports = nextConfig;
           });
         }
       });
-      
+
       observer.observe({ entryTypes: ['layout-shift'] });
     }
   }
-  
+
   // 初始化监控
   document.addEventListener('DOMContentLoaded', function() {
     trackLCP();
@@ -392,7 +392,7 @@ module.exports = nextConfig;
   });
 })();
   `;
-  
+
   const monitoringFile = path.join(stylesDir, 'performance-monitoring.js');
   fs.writeFileSync(monitoringFile, monitoringScript);
   console.log('✅ 创建性能监控脚本');
@@ -401,26 +401,26 @@ module.exports = nextConfig;
 // 运行性能测试
 function runPerformanceTests() {
   console.log('🧪 运行性能测试...');
-  
+
   // 构建项目
   const buildResult = runCommand('npm run build', '构建项目');
   if (!buildResult) {
     console.error('❌ 构建失败，无法继续测试');
     return false;
   }
-  
+
   // 启动开发服务器进行测试
   console.log('🚀 启动开发服务器进行测试...');
   console.log('请在浏览器中访问 http://localhost:3000 进行性能测试');
   console.log('使用Google PageSpeed Insights测试移动端和桌面端性能');
-  
+
   return true;
 }
 
 // 生成优化报告
 function generateOptimizationReport() {
   console.log('📊 生成优化报告...');
-  
+
   const report = {
     timestamp: new Date().toISOString(),
     optimization: {
@@ -445,7 +445,7 @@ function generateOptimizationReport() {
         }
       }
     },
-    
+
     nextSteps: [
       '1. 测试移动端性能 (目标: 85分+)',
       '2. 测试桌面端性能 (目标: 98分+)',
@@ -453,7 +453,7 @@ function generateOptimizationReport() {
       '4. 实施代码分割',
       '5. 监控性能指标变化'
     ],
-    
+
     files: {
       nextConfig: 'next.config.js (已更新)',
       performanceCSS: 'styles/performance.css (已创建)',
@@ -461,18 +461,18 @@ function generateOptimizationReport() {
       backupDir: 'backup/performance-optimization/ (已创建)'
     }
   };
-  
+
   const reportFile = 'performance-optimization-report.json';
   fs.writeFileSync(reportFile, JSON.stringify(report, null, 2));
   console.log(`✅ 优化报告已保存: ${reportFile}`);
-  
+
   return report;
 }
 
 // 主函数
 async function main() {
   console.log('🚀 开始性能优化实施...\n');
-  
+
   try {
     // 1. 创建优化分支
     const branchName = createOptimizationBranch();
@@ -480,23 +480,23 @@ async function main() {
       console.error('❌ 无法创建优化分支');
       return;
     }
-    
+
     // 2. 备份当前配置
     backupCurrentConfig();
-    
+
     // 3. 应用性能优化
     applyPerformanceOptimizations();
-    
+
     // 4. 运行性能测试
     const testResult = runPerformanceTests();
     if (!testResult) {
       console.error('❌ 性能测试失败');
       return;
     }
-    
+
     // 5. 生成优化报告
     const report = generateOptimizationReport();
-    
+
     // 6. 输出总结
     console.log('\n🎉 性能优化实施完成！');
     console.log('=' .repeat(50));
@@ -506,22 +506,22 @@ async function main() {
     console.log('- ✅ 创建性能优化CSS');
     console.log('- ✅ 创建性能监控脚本');
     console.log('- ✅ 备份原始配置');
-    
+
     console.log('\n📋 下一步操作:');
     report.nextSteps.forEach(step => {
       console.log(`  ${step}`);
     });
-    
+
     console.log('\n🔍 测试建议:');
     console.log('1. 访问 http://localhost:3000');
     console.log('2. 使用Google PageSpeed Insights测试');
     console.log('3. 检查移动端和桌面端性能');
     console.log('4. 验证无效点击问题是否改善');
-    
+
     console.log('\n📊 预期效果:');
     console.log(`移动端性能: ${CONFIG.current.mobile.performance} → ${CONFIG.targets.mobile.performance} (+${report.optimization.mobile.improvement.performance})`);
     console.log(`桌面端性能: ${CONFIG.current.desktop.performance} → ${CONFIG.targets.desktop.performance} (+${report.optimization.desktop.improvement.performance})`);
-    
+
   } catch (error) {
     console.error('❌ 性能优化实施失败:', error.message);
     process.exit(1);

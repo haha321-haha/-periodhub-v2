@@ -23,15 +23,15 @@ export function aggregateRecommendations(
 ): AggregatedRecommendations {
   // 构建所有选择项数组 - 完全基于ziV1d3d的逻辑
   const allSelections: Array<{ category: string; key: string }> = [];
-  
+
   if (selections.menstrualPhase) {
     allSelections.push({ category: 'menstrualPhase', key: selections.menstrualPhase });
   }
-  
+
   selections.healthGoals.forEach(key => {
     allSelections.push({ category: 'healthGoals', key });
   });
-  
+
   selections.tcmConstitution.forEach(key => {
     allSelections.push({ category: 'tcmConstitution', key });
   });
@@ -48,16 +48,16 @@ export function aggregateRecommendations(
     const item = data[sel.category as keyof ZIV1D3DData][sel.key];
     if (item && item.recommendations) {
       const recs = item.recommendations;
-      
+
       // 使用ziV1d3d的键值策略：`${food.en}-${food.zh}`
       recs.recommendedFoods.forEach(food => {
         aggregated.recommendedFoods.set(`${food.en}-${food.zh}`, food);
       });
-      
+
       recs.foodsToAvoid.forEach(food => {
         aggregated.foodsToAvoid.set(`${food.en}-${food.zh}`, food);
       });
-      
+
       recs.lifestyleTips.forEach(tip => {
         aggregated.lifestyleTips.set(`${tip.en}-${tip.zh}`, tip);
       });
@@ -115,7 +115,7 @@ export function hasValidSelections(selections: {
 
 // 获取无选择时的消息 - 基于ziV1d3d的displayNoSelectionMessage
 export function getNoSelectionMessage(language: 'en' | 'zh'): string {
-  return language === 'zh' 
+  return language === 'zh'
     ? '请至少选择一个选项以生成建议'
     : 'Please make at least one selection to generate recommendations';
 }

@@ -16,7 +16,7 @@ export default function ReadingProgress({ locale }: ReadingProgressProps) {
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollPercent = (scrollTop / docHeight) * 100;
-      
+
       setProgress(Math.min(100, Math.max(0, scrollPercent)));
       setShowBackToTop(scrollTop > 300);
     };
@@ -47,12 +47,12 @@ export default function ReadingProgress({ locale }: ReadingProgressProps) {
 
   // 添加 locale 验证和默认值处理，防止 undefined 访问错误
   const validLocale = (locale === 'zh' || locale === 'en') ? locale : 'en';
-  
+
   // 如果 locale 无效，记录警告（仅在客户端）
   if (typeof window !== 'undefined' && locale !== validLocale) {
     console.warn(`[ReadingProgress] Invalid locale '${locale}', falling back to '${validLocale}'`);
   }
-  
+
   const text = t[validLocale];
 
   return (

@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -25,18 +21,11 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"]
     },
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "types": [
-      "node",
-      "react",
-      "react-dom",
-      "next-intl"
-    ]
+    "types": ["node", "react", "react-dom", "next-intl"]
   },
   "include": [
     "next-env.d.ts",

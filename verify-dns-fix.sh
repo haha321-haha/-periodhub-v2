@@ -29,4 +29,3 @@ curl -I https://periodhub.health 2>/dev/null | head -5
 echo ""
 echo "✅ DNS修复验证完成！"
 echo "如果看到正确的CNAME记录和200状态码，说明修复成功！"
-

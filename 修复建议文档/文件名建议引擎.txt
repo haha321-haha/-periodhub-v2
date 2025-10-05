@@ -15,10 +15,10 @@ class FilenameSuggestionEngine {
             conflicts: [], // 文件名冲突
             stats: {}
         };
-        
+
         // 加载分析数据
         this.loadAnalysisData();
-        
+
         // 文件名模式规则
         this.initializeNamingRules();
     }
@@ -161,13 +161,13 @@ class FilenameSuggestionEngine {
 
         // 处理已分类的文件
         await this.processClassifiedFiles();
-        
+
         // 处理需要手动审查的文件
         await this.processManualReviewFiles();
-        
+
         // 检查文件名冲突
         await this.detectNameConflicts();
-        
+
         // 生成建议报告
         await this.generateSuggestionReport();
 
@@ -183,11 +183,11 @@ class FilenameSuggestionEngine {
             const dirPath = path.join(this.classifiedDir, dir);
             if (fs.existsSync(dirPath)) {
                 const files = fs.readdirSync(dirPath).filter(f => f.startsWith('misc-'));
-                
+
                 for (const filename of files) {
                     const filePath = path.join(dirPath, filename);
                     const suggestion = await this.generateFilenameSuggestion(filePath, dir, filename);
-                    
+
                     if (suggestion.confidence >= 0.8) {
                         this.suggestions.highConfidence.push(suggestion);
                     } else if (suggestion.confidence >= 0.5) {
@@ -209,17 +209,17 @@ class FilenameSuggestionEngine {
         if (!fs.existsSync(manualReviewDir)) return;
 
         const files = fs.readdirSync(manualReviewDir);
-        
+
         for (const filename of files) {
             const filePath = path.join(manualReviewDir, filename);
-            
+
             // 从文件名中提取类型信息
             const typeMatch = filename.match(/^(\w+)_misc-/);
             const inferredType = typeMatch ? typeMatch[1] : 'unknown';
-            
+
             const suggestion = await this.generateFilenameSuggestion(filePath, inferredType, filename);
             suggestion.needsManualReview = true;
-            
+
             this.suggestions.lowConfidence.push(suggestion);
             console.log(`  📝 ${filename} → ${suggestion.suggestedName} (需要人工确认)`);
         }
@@ -228,7 +228,7 @@ class FilenameSuggestionEngine {
     async generateFilenameSuggestion(filePath, category, originalName) {
         const content = fs.readFileSync(filePath, 'utf8');
         const stats = fs.statSync(filePath);
-        
+
         const suggestion = {
             originalName,
             originalPath: filePath,
@@ -250,16 +250,16 @@ class FilenameSuggestionEngine {
         // 应用命名规则
         for (const rule of rules.patterns || []) {
             const matches = [...content.matchAll(rule.regex)];
-            
+
             if (matches.length > 0) {
                 for (const match of matches) {
                     let suggestedName = rule.template;
-                    
+
                     // 替换模板中的占位符
                     if (match[1] && rule.template.includes('{name}')) {
                         suggestedName = rule.template.replace('{name}', this.sanitizeFileName(match[1]));
                     }
-                    
+
                     if (rule.confidence > bestMatch.confidence) {
                         bestMatch = {
                             confidence: rule.confidence,
@@ -311,14 +311,14 @@ class FilenameSuggestionEngine {
             // 从注释中提取文件名
             { regex: /\/\*\s*(\w+\.(?:js|jsx|ts|tsx))\s*\*\//i, confidence: 0.85, source: 'comment' },
             { regex: /\/\/\s*(?:file:|filename:)\s*(\w+\.(?:js|jsx|ts|tsx))/i, confidence: 0.8, source: 'comment' },
-            
+
             // 从import路径推断
             { regex: /from\s+['"]\.\/(\w+)['"]/g, confidence: 0.6, source: 'import' },
-            
+
             // 从类名或函数名推断
             { regex: /class\s+(\w+)/g, confidence: 0.7, source: 'class' },
             { regex: /export\s+default\s+(\w+)/g, confidence: 0.65, source: 'export' },
-            
+
             // 从变量名推断
             { regex: /const\s+(\w+)Config/gi, confidence: 0.6, source: 'config variable' }
         ];
@@ -361,17 +361,17 @@ class FilenameSuggestionEngine {
 
         for (const suggestion of allSuggestions) {
             const key = suggestion.suggestedPath.toLowerCase();
-            
+
             if (nameMap.has(key)) {
                 const existing = nameMap.get(key);
-                
+
                 // 创建冲突记录
                 const conflict = {
                     suggestedPath: suggestion.suggestedPath,
                     conflictingFiles: [existing.originalName, suggestion.originalName],
                     resolutionSuggestion: this.resolveNameConflict(existing, suggestion)
                 };
-                
+
                 this.suggestions.conflicts.push(conflict);
                 console.log(`  ⚠️  冲突: ${suggestion.suggestedPath} (${existing.originalName} ↔ ${suggestion.originalName})`);
             } else {
@@ -401,8 +401,8 @@ class FilenameSuggestionEngine {
 
         // 计算统计信息
         const stats = {
-            totalFiles: this.suggestions.highConfidence.length + 
-                       this.suggestions.mediumConfidence.length + 
+            totalFiles: this.suggestions.highConfidence.length +
+                       this.suggestions.mediumConfidence.length +
                        this.suggestions.lowConfidence.length,
             highConfidence: this.suggestions.highConfidence.length,
             mediumConfidence: this.suggestions.mediumConfidence.length,
@@ -482,7 +482,7 @@ class FilenameSuggestionEngine {
 
     async generateHumanReadableReport(report) {
         let output = '# 🏷️ 文件名建议报告\n\n';
-        
+
         output += `**生成时间**: ${new Date(report.timestamp).toLocaleString()}\n\n`;
 
         output += '## 📊 建议统计\n';
@@ -541,7 +541,7 @@ class FilenameSuggestionEngine {
         let script = '#!/bin/bash\n\n';
         script += '# 自动生成的文件重命名脚本\n';
         script += '# 基于文件名建议引擎的结果\n\n';
-        
+
         script += 'echo "🏷️  开始执行文件重命名..."\n\n';
 
         // 高置信度重命名
@@ -589,16 +589,16 @@ async function main() {
 
         console.log('🏷️  初始化文件名建议引擎...');
         const engine = new FilenameSuggestionEngine(classifiedDir, analysisReportPath);
-        
+
         const results = await engine.generateSuggestions();
-        
+
         console.log('\n🎉 文件名建议生成完成！');
         console.log('\n📊 建议统计:');
         console.log(`- 🔥 高置信度: ${results.stats.highConfidence} 个`);
         console.log(`- ⚡ 中置信度: ${results.stats.mediumConfidence} 个`);
         console.log(`- 📝 低置信度: ${results.stats.lowConfidence} 个`);
         console.log(`- ⚠️  冲突: ${results.stats.conflicts} 个`);
-        
+
         console.log('\n📄 生成的文件:');
         console.log('- filename-suggestions-report.json (详细建议数据)');
         console.log('- FILENAME_SUGGESTIONS_REPORT.md (人类可读报告)');
@@ -635,7 +635,7 @@ module.exports = FilenameSuggestionEngine;
 
 ### 📊 **三层置信度分类**
 - **🔥 高置信度 (≥80%)** - 可立即应用的建议
-- **⚡ 中置信度 (50-80%)** - 需要确认的建议  
+- **⚡ 中置信度 (50-80%)** - 需要确认的建议
 - **📝 低置信度 (<50%)** - 需要手动调整的建议
 
 ### 🔍 **智能冲突检测**
@@ -652,7 +652,7 @@ misc-wWSa.ts → middleware.ts (95%置信度)
 ```
 
 ### 2. **Next.js配置文件精准识别**
-```javascript 
+```javascript
 // 基于内容识别：
 module.exports = {...next...} → next.config.js (95%置信度)
 tailwind... → tailwind.config.js (90%置信度)

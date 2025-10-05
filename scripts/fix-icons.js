@@ -2,7 +2,7 @@
 
 /**
  * 🎨 PeriodHub 图标修复脚本
- * 
+ *
  * 功能：
  * 1. 检查所有必需的图标文件
  * 2. 生成缺失的图标尺寸
@@ -18,7 +18,7 @@ class IconFixer {
   constructor() {
     this.projectRoot = process.cwd();
     this.publicDir = path.join(this.projectRoot, 'public');
-    
+
     // 需要的图标尺寸
     this.requiredIcons = [
       { name: 'icon-192.png', size: 192 },
@@ -27,7 +27,7 @@ class IconFixer {
       { name: 'favicon-32x32.png', size: 32 },
       { name: 'favicon-16x16.png', size: 16 }
     ];
-    
+
     this.results = {
       existing: [],
       generated: [],
@@ -37,16 +37,16 @@ class IconFixer {
 
   async run() {
     console.log('🎨 开始修复图标文件...\n');
-    
+
     try {
       await this.checkSharpInstallation();
       await this.checkExistingIcons();
       await this.generateMissingIcons();
       await this.updateManifest();
       await this.generateReport();
-      
+
       console.log('\n✅ 图标修复完成！');
-      
+
     } catch (error) {
       console.error('❌ 图标修复失败:', error.message);
       process.exit(1);
@@ -67,10 +67,10 @@ class IconFixer {
 
   async checkExistingIcons() {
     console.log('🔍 检查现有图标文件...');
-    
+
     for (const icon of this.requiredIcons) {
       const iconPath = path.join(this.publicDir, icon.name);
-      
+
       if (fs.existsSync(iconPath)) {
         console.log(`✅ 找到: ${icon.name}`);
         this.results.existing.push(icon.name);
@@ -82,18 +82,18 @@ class IconFixer {
 
   async generateMissingIcons() {
     console.log('🎨 生成缺失的图标...');
-    
+
     // 查找源图标文件
     const sourceIcon = this.findSourceIcon();
     if (!sourceIcon) {
       throw new Error('未找到源图标文件');
     }
-    
+
     console.log(`📄 使用源文件: ${sourceIcon}`);
-    
+
     for (const icon of this.requiredIcons) {
       const iconPath = path.join(this.publicDir, icon.name);
-      
+
       if (!fs.existsSync(iconPath)) {
         try {
           await this.generateIcon(sourceIcon, iconPath, icon.size);
@@ -117,19 +117,19 @@ class IconFixer {
       path.join(this.publicDir, 'icon-192.png'),
       path.join(this.publicDir, 'images', 'logo.png')
     ];
-    
+
     for (const source of possibleSources) {
       if (fs.existsSync(source)) {
         return source;
       }
     }
-    
+
     return null;
   }
 
   async generateIcon(sourcePath, outputPath, size) {
     const image = sharp(sourcePath);
-    
+
     // 如果是 SVG，需要设置密度
     if (path.extname(sourcePath) === '.svg') {
       await image
@@ -152,17 +152,17 @@ class IconFixer {
 
   async updateManifest() {
     console.log('📝 更新 manifest.json...');
-    
+
     const manifestPath = path.join(this.publicDir, 'manifest.json');
-    
+
     if (!fs.existsSync(manifestPath)) {
       console.log('⚠️ manifest.json 不存在，跳过更新');
       return;
     }
-    
+
     try {
       const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-      
+
       // 更新图标配置
       manifest.icons = [
         {
@@ -184,14 +184,14 @@ class IconFixer {
           "purpose": "any"
         }
       ];
-      
+
       // 更新主题色
       manifest.theme_color = "#9333ea";
       manifest.background_color = "#ffffff";
-      
+
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
       console.log('✅ manifest.json 更新完成');
-      
+
     } catch (error) {
       console.error('❌ 更新 manifest.json 失败:', error.message);
       this.results.errors.push({
@@ -229,7 +229,7 @@ class IconFixer {
     console.log(`   现有图标: ${report.summary.existingIcons} 个`);
     console.log(`   生成图标: ${report.summary.generatedIcons} 个`);
     console.log(`   错误数量: ${report.summary.errors}`);
-    
+
     if (report.summary.errors > 0) {
       console.log('\n❌ 错误详情:');
       this.results.errors.forEach(error => {

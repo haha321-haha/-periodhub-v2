@@ -192,7 +192,7 @@ Sitemap: https://www.periodhub.health/sitemap.xml
 
 #### **4. 内容质量优化** ⭐⭐⭐⭐
 **影响**: 用户参与度提升30-40%
-**策略**: 
+**策略**:
 - 确保每个页面有独特且有价值的内容
 - 优化关键词密度和分布
 - 添加相关内部链接
@@ -212,7 +212,7 @@ Sitemap: https://www.periodhub.health/sitemap.xml
 
 #### **6. 结构化数据实施** ⭐⭐⭐
 **影响**: 搜索结果展示提升15-20%
-**策略**: 
+**策略**:
 ```json
 {
   "@context": "https://schema.org",
@@ -355,7 +355,7 @@ Sitemap: https://www.periodhub.health/sitemap.xml
 #### **1. 核心功能页面链接缺失** ⭐⭐⭐⭐⭐
 **问题**: 最重要的页面类别完全没有内部链接
 - **interactive-tools**: 0/10 页面有链接
-- **health-guide**: 1/6 页面有链接  
+- **health-guide**: 1/6 页面有链接
 - **scenario-solutions**: 0/8 页面有链接
 - **homepage**: 0/1 页面有链接
 
@@ -413,7 +413,7 @@ const interactiveToolsLinks = {
     <li><a href="/zh/interactive-tools/symptom-assessment">症状评估工具</a></li>
     <li><a href="/zh/interactive-tools/pain-tracker">疼痛追踪器</a></li>
   </ul>
-  
+
   <h3>专业文章</h3>
   <ul>
     <li><a href="/zh/articles/understanding-dysmenorrhea">痛经机制详解</a></li>
@@ -484,18 +484,18 @@ const topicClusters = {
 class SmartRecommendationEngine {
   static getRelatedPages(currentPage: string, userBehavior?: any) {
     const recommendations = [];
-    
+
     // 基于内容相似性
     if (currentPage.includes('/articles/')) {
       recommendations.push(...this.getRelatedArticles(currentPage));
       recommendations.push(...this.getRelevantTools(currentPage));
     }
-    
+
     // 基于用户行为
     if (userBehavior?.interests?.includes('pain-management')) {
       recommendations.push(...this.getPainManagementPages());
     }
-    
+
     return recommendations.slice(0, 5); // 限制推荐数量
   }
 }

@@ -7,11 +7,11 @@ const constantsPath = path.join(__dirname, 'app/[locale]/interactive-tools/share
 
 try {
   const constantsContent = fs.readFileSync(constantsPath, 'utf8');
-  
+
   // Check if all required constants are present
   const requiredConstants = [
     'PAIN_LOCATIONS',
-    'SYMPTOMS', 
+    'SYMPTOMS',
     'REMEDIES',
     'MENSTRUAL_STATUS',
     'PAIN_LEVELS',
@@ -45,7 +45,7 @@ try {
 
   console.log('🧪 Pain Tracker Translation Test Results:');
   console.log('==========================================');
-  
+
   if (allPresent) {
     console.log('✅ All required constants are present');
     console.log(`   Found: ${requiredConstants.join(', ')}`);
@@ -66,12 +66,12 @@ try {
   const zhTranslationsPath = path.join(__dirname, 'messages/zh.json');
 
   let translationFilesExist = true;
-  
+
   if (!fs.existsSync(enTranslationsPath)) {
     console.log('❌ English translation file missing');
     translationFilesExist = false;
   }
-  
+
   if (!fs.existsSync(zhTranslationsPath)) {
     console.log('❌ Chinese translation file missing');
     translationFilesExist = false;
@@ -80,9 +80,9 @@ try {
   if (translationFilesExist) {
     const enContent = fs.readFileSync(enTranslationsPath, 'utf8');
     const zhContent = fs.readFileSync(zhTranslationsPath, 'utf8');
-    
+
     const hasPainTracker = enContent.includes('"painTracker"') && zhContent.includes('"painTracker"');
-    
+
     if (hasPainTracker) {
       console.log('✅ Pain tracker translations found in both language files');
     } else {
@@ -92,7 +92,7 @@ try {
 
   const overallSuccess = allPresent && localesPresent && translationFilesExist;
   console.log('\n🎯 Overall Result:', overallSuccess ? '✅ SUCCESS' : '❌ NEEDS ATTENTION');
-  
+
 } catch (error) {
   console.error('❌ Error reading files:', error.message);
 }

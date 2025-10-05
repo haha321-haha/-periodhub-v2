@@ -3,13 +3,13 @@
  * Based on HVsLYEp Header function design
  */
 
-'use client';
+"use client";
 
-import { Heart } from 'lucide-react';
-import { useTranslations, useLocale } from 'next-intl';
+import { Heart } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function Header() {
-  const t = useTranslations('workplaceWellness');
+  const t = useTranslations("workplaceWellness");
   const locale = useLocale();
 
   return (
@@ -21,14 +21,12 @@ export default function Header() {
             <Heart className="text-primary-500" size={28} />
             <div>
               <h1 className="text-xl font-bold text-neutral-900">
-                {t('header.title')}
+                {t("header.title")}
               </h1>
-              <p className="text-sm text-neutral-600">
-                {t('header.subtitle')}
-              </p>
+              <p className="text-sm text-neutral-600">{t("header.subtitle")}</p>
             </div>
           </div>
-          
+
           {/* 右侧操作区域 */}
           <div className="flex items-center gap-3">
             {/* 用户头像 */}

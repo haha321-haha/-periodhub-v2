@@ -39,15 +39,15 @@ function checkFile(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
     const lines = content.split('\n');
-    
+
     lines.forEach((line, index) => {
       // 检查是否包含不带www的URL
       if (line.includes('https://periodhub.health') && !line.includes('https://www.periodhub.health')) {
         // 检查是否在应该使用www的上下文中
-        const shouldFix = shouldUseWww.some(keyword => 
+        const shouldFix = shouldUseWww.some(keyword =>
           line.toLowerCase().includes(keyword.toLowerCase())
         );
-        
+
         if (shouldFix) {
           issues.push({
             file: filePath,
@@ -65,15 +65,15 @@ function checkFile(filePath) {
 
 function findFiles(dir, pattern) {
   const files = [];
-  
+
   function traverse(currentDir) {
     try {
       const items = fs.readdirSync(currentDir);
-      
+
       for (const item of items) {
         const fullPath = path.join(currentDir, item);
         const stat = fs.statSync(fullPath);
-        
+
         if (stat.isDirectory() && !item.startsWith('.') && item !== 'node_modules') {
           traverse(fullPath);
         } else if (stat.isFile() && (item.endsWith('.tsx') || item.endsWith('.ts'))) {
@@ -84,7 +84,7 @@ function findFiles(dir, pattern) {
       // 忽略无法访问的目录
     }
   }
-  
+
   traverse(dir);
   return files;
 }
@@ -112,7 +112,7 @@ if (issues.length === 0) {
   console.log('✅ 所有页面都使用 www.periodhub.health 域名');
 } else {
   console.log(`❌ 发现 ${issues.length} 个问题:\n`);
-  
+
   issues.forEach((issue, index) => {
     console.log(`${index + 1}. 文件: ${issue.file}`);
     console.log(`   行号: ${issue.line}`);
@@ -129,10 +129,10 @@ if (fs.existsSync(sitemapPath)) {
   const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
   const wwwCount = (sitemapContent.match(/https:\/\/www\.periodhub\.health/g) || []).length;
   const nonWwwCount = (sitemapContent.match(/https:\/\/periodhub\.health/g) || []).length;
-  
+
   console.log(`   www.periodhub.health: ${wwwCount} 个`);
   console.log(`   periodhub.health: ${nonWwwCount} 个`);
-  
+
   if (nonWwwCount > 0) {
     console.log('   ⚠️ sitemap.xml中仍有不带www的URL');
   } else {

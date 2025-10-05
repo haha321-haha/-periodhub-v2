@@ -512,11 +512,11 @@ class OfficeTranslationsCreator {
    */
   run() {
     console.log('🚀 开始创建办公页面翻译键...\n');
-    
+
     try {
       const { zhTranslations, enTranslations } = this.createOfficeTranslations();
       this.saveTranslations(zhTranslations, enTranslations);
-      
+
       console.log('\n📊 创建统计:');
       console.log(`  - 中文键数: ${Object.keys(zhTranslations.scenarios.office).length}`);
       console.log(`  - 英文键数: ${Object.keys(enTranslations.scenarios.office).length}`);

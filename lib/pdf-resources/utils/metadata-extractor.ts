@@ -1,7 +1,13 @@
 // lib/pdf-resources/utils/metadata-extractor.ts
 
-import { PDFResource, LocalizedString, QualityScore, ResourceCategory, SupportedLanguage } from '../types/resource-types';
-import { BUSINESS_CONSTANTS } from '../../../constants/business.constants';
+import {
+  PDFResource,
+  LocalizedString,
+  QualityScore,
+  ResourceCategory,
+  SupportedLanguage,
+} from "../types/resource-types";
+import { BUSINESS_CONSTANTS } from "../../../constants/business.constants";
 
 /**
  * 文件元数据接口
@@ -48,14 +54,14 @@ interface ContentAnalysis {
   language: SupportedLanguage;
   languageConfidence: number;
   readabilityScore: number;
-  sentiment: 'positive' | 'neutral' | 'negative';
+  sentiment: "positive" | "neutral" | "negative";
   sentimentScore: number;
   keyPhrases: string[];
   topics: Array<{
     topic: string;
     confidence: number;
   }>;
-  complexity: 'beginner' | 'intermediate' | 'advanced';
+  complexity: "beginner" | "intermediate" | "advanced";
   estimatedReadingTime: number; // 分钟
   wordCount: number;
   characters: number;
@@ -118,11 +124,11 @@ interface ExtractionResult {
   contentAnalysis?: ContentAnalysis;
   categorization?: AutoCategorizationResult;
   qualityAssessment?: QualityAssessment;
-  suggestedMetadata?: Partial<PDFResource['metadata']>;
+  suggestedMetadata?: Partial<PDFResource["metadata"]>;
   extractedKeywords?: string[];
   images?: Array<{
     pageNumber: number;
-    type: 'image' | 'chart' | 'diagram';
+    type: "image" | "chart" | "diagram";
     description?: string;
   }>;
   errors?: string[];
@@ -153,16 +159,16 @@ export class MetadataExtractor {
   async extractFromFile(
     file: File | Buffer,
     filename: string,
-    options: ExtractionOptions = {}
+    options: ExtractionOptions = {},
   ): Promise<ExtractionResult> {
     const result: ExtractionResult = {
       fileMetadata: {
         filename,
         fileSize: 0,
-        mimeType: 'application/pdf'
+        mimeType: "application/pdf",
       },
       errors: [],
-      warnings: []
+      warnings: [],
     };
 
     try {
@@ -183,7 +189,7 @@ export class MetadataExtractor {
       if (options.includeContentAnalysis && result.textContent) {
         result.contentAnalysis = await this.analyzeContent(
           result.textContent,
-          options.language || 'zh'
+          options.language || "zh",
         );
       }
 
@@ -191,7 +197,7 @@ export class MetadataExtractor {
       if (options.includeCategorization && result.textContent) {
         result.categorization = await this.categorizeContent(
           result.textContent,
-          result.pdfMetadata
+          result.pdfMetadata,
         );
       }
 
@@ -200,7 +206,7 @@ export class MetadataExtractor {
         result.qualityAssessment = await this.assessQuality(
           result.textContent,
           result.pdfMetadata,
-          result.fileMetadata
+          result.fileMetadata,
         );
       }
 
@@ -210,9 +216,8 @@ export class MetadataExtractor {
       // 8. 提取关键词
       result.extractedKeywords = this.extractKeywords(
         result.textContent,
-        result.pdfMetadata
+        result.pdfMetadata,
       );
-
     } catch (error) {
       result.errors?.push(`提取失败: ${(error as Error).message}`);
     }
@@ -225,11 +230,11 @@ export class MetadataExtractor {
    */
   async updateResourceMetadata(
     resource: PDFResource,
-    options: ExtractionOptions = {}
+    options: ExtractionOptions = {},
   ): Promise<Partial<PDFResource>> {
     // 模拟从现有资源更新元数据
     const updates: Partial<PDFResource> = {
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     try {
@@ -237,14 +242,14 @@ export class MetadataExtractor {
       if (resource.content.search.extractedText) {
         const contentAnalysis = await this.analyzeContent(
           resource.content.search.extractedText,
-          resource.language
+          resource.language,
         );
 
         if (contentAnalysis) {
           updates.metadata = {
             ...resource.metadata,
             difficulty: contentAnalysis.complexity,
-            estimatedReadTime: contentAnalysis.estimatedReadingTime
+            estimatedReadTime: contentAnalysis.estimatedReadingTime,
           };
 
           // 更新搜索关键词
@@ -252,14 +257,13 @@ export class MetadataExtractor {
             ...resource.content,
             search: {
               ...resource.content.search,
-              searchKeywords: contentAnalysis.keyPhrases
-            }
+              searchKeywords: contentAnalysis.keyPhrases,
+            },
           };
         }
       }
-
     } catch (error) {
-      console.error('更新资源元数据失败:', error);
+      console.error("更新资源元数据失败:", error);
     }
 
     return updates;
@@ -270,7 +274,7 @@ export class MetadataExtractor {
    */
   async batchExtract(
     files: Array<{ file: File | Buffer; filename: string }>,
-    options: ExtractionOptions = {}
+    options: ExtractionOptions = {},
   ): Promise<Array<{ filename: string; result: ExtractionResult }>> {
     const results = [];
 
@@ -282,9 +286,13 @@ export class MetadataExtractor {
         results.push({
           filename,
           result: {
-            fileMetadata: { filename, fileSize: 0, mimeType: 'application/pdf' },
-            errors: [`批量提取失败: ${(error as Error).message}`]
-          }
+            fileMetadata: {
+              filename,
+              fileSize: 0,
+              mimeType: "application/pdf",
+            },
+            errors: [`批量提取失败: ${(error as Error).message}`],
+          },
         });
       }
     }
@@ -307,49 +315,58 @@ export class MetadataExtractor {
       warnings: string[];
     } = {
       isValid: true,
-      errors: [],      // 明确是string[]，不是never[]
-      warnings: []     // 明确是string[]，不是never[]
+      errors: [], // 明确是string[]，不是never[]
+      warnings: [], // 明确是string[]，不是never[]
     };
 
     // 检查基础文件信息
     if (!result.fileMetadata.filename) {
       validation.isValid = false;
-      validation.errors.push('缺少文件名');
+      validation.errors.push("缺少文件名");
     }
 
     if (result.fileMetadata.fileSize <= 0) {
       validation.isValid = false;
-      validation.errors.push('无效的文件大小');
+      validation.errors.push("无效的文件大小");
     }
 
     // 检查PDF元数据
     if (result.pdfMetadata) {
       if (result.pdfMetadata.pageCount <= 0) {
         validation.isValid = false;
-        validation.errors.push('无效的页数');
+        validation.errors.push("无效的页数");
       }
 
       // 🎯 这就是第327行的问题，现在已修复
       if (!result.pdfMetadata.title && !result.textContent) {
-        validation.warnings.push('无法提取标题和内容');
+        validation.warnings.push("无法提取标题和内容");
       }
     }
 
     // 检查内容分析
     if (result.contentAnalysis) {
-      if (result.contentAnalysis.languageConfidence < BUSINESS_CONSTANTS.quality.minLanguageConfidence) {
-        validation.warnings.push('语言检测置信度较低');
+      if (
+        result.contentAnalysis.languageConfidence <
+        BUSINESS_CONSTANTS.quality.minLanguageConfidence
+      ) {
+        validation.warnings.push("语言检测置信度较低");
       }
 
-      if (result.contentAnalysis.wordCount < BUSINESS_CONSTANTS.quality.minWordCount) {
-        validation.warnings.push('文档内容过少');
+      if (
+        result.contentAnalysis.wordCount <
+        BUSINESS_CONSTANTS.quality.minWordCount
+      ) {
+        validation.warnings.push("文档内容过少");
       }
     }
 
     // 检查分类结果
     if (result.categorization) {
-      if (result.categorization.confidence < BUSINESS_CONSTANTS.quality.minCategorizationConfidence) {
-        validation.warnings.push('自动分类置信度较低');
+      if (
+        result.categorization.confidence <
+        BUSINESS_CONSTANTS.quality.minCategorizationConfidence
+      ) {
+        validation.warnings.push("自动分类置信度较低");
       }
     }
 
@@ -358,17 +375,17 @@ export class MetadataExtractor {
 
   private async extractFileMetadata(
     file: File | Buffer,
-    filename: string
+    filename: string,
   ): Promise<FileMetadata> {
     const metadata: FileMetadata = {
       filename,
       fileSize: 0,
-      mimeType: 'application/pdf'
+      mimeType: "application/pdf",
     };
 
     if (file instanceof File) {
       metadata.fileSize = file.size;
-      metadata.mimeType = file.type || 'application/pdf';
+      metadata.mimeType = file.type || "application/pdf";
       metadata.modifiedDate = new Date(file.lastModified);
     } else {
       metadata.fileSize = file.length;
@@ -383,7 +400,7 @@ export class MetadataExtractor {
   private async extractPDFMetadata(file: File | Buffer): Promise<PDFMetadata> {
     // 模拟PDF元数据提取
     // 实际实现中应使用 pdf-parse 或类似库
-    
+
     const metadata: PDFMetadata = {
       pageCount: this.estimatePageCount(file),
       encrypted: false,
@@ -391,19 +408,19 @@ export class MetadataExtractor {
         printing: true,
         copying: true,
         commenting: true,
-        formFilling: true
-      }
+        formFilling: true,
+      },
     };
 
     // 从文件名推断一些信息
-    const filename = file instanceof File ? file.name : 'unknown.pdf';
-    
-    if (filename.includes('guide') || filename.includes('指南')) {
-      metadata.subject = '用户指南';
+    const filename = file instanceof File ? file.name : "unknown.pdf";
+
+    if (filename.includes("guide") || filename.includes("指南")) {
+      metadata.subject = "用户指南";
     }
-    
-    if (filename.includes('manual') || filename.includes('手册')) {
-      metadata.subject = '操作手册';
+
+    if (filename.includes("manual") || filename.includes("手册")) {
+      metadata.subject = "操作手册";
     }
 
     return metadata;
@@ -411,30 +428,33 @@ export class MetadataExtractor {
 
   private async extractTextContent(
     file: File | Buffer,
-    options: ExtractionOptions
+    options: ExtractionOptions,
   ): Promise<string> {
     // 模拟文本提取
     // 实际实现中应使用 pdf-parse 等库
-    
+
     const sampleTexts = [
-      '经期疼痛是女性常见的健康问题，通过正确的方法可以有效缓解。本指南提供了多种自然、安全的缓解方法。',
-      '热疗法是缓解经期疼痛最有效的方法之一。使用热水袋或暖宫贴可以放松子宫肌肉，减轻痉挛。',
-      '呼吸练习和冥想可以帮助放松身心，减轻疼痛感受。深呼吸技巧特别适合急性疼痛时使用。',
-      '营养调理在经期健康管理中起重要作用。适当补充维生素和矿物质可以预防和缓解经期不适。'
+      "经期疼痛是女性常见的健康问题，通过正确的方法可以有效缓解。本指南提供了多种自然、安全的缓解方法。",
+      "热疗法是缓解经期疼痛最有效的方法之一。使用热水袋或暖宫贴可以放松子宫肌肉，减轻痉挛。",
+      "呼吸练习和冥想可以帮助放松身心，减轻疼痛感受。深呼吸技巧特别适合急性疼痛时使用。",
+      "营养调理在经期健康管理中起重要作用。适当补充维生素和矿物质可以预防和缓解经期不适。",
     ];
 
     // 基于文件大小选择合适的示例文本
     const fileSize = file instanceof File ? file.size : file.length;
     const textLength = Math.min(fileSize / 1000, 2000); // 估算文本长度
-    
-    let selectedText = sampleTexts[Math.floor(Math.random() * sampleTexts.length)];
-    
+
+    let selectedText =
+      sampleTexts[Math.floor(Math.random() * sampleTexts.length)];
+
     // 根据需要重复或截断文本
     while (selectedText.length < textLength) {
-      selectedText += ' ' + sampleTexts[Math.floor(Math.random() * sampleTexts.length)];
+      selectedText +=
+        " " + sampleTexts[Math.floor(Math.random() * sampleTexts.length)];
     }
 
-    const maxLength = options.maxTextLength || BUSINESS_CONSTANTS.quality.maxTextLength;
+    const maxLength =
+      options.maxTextLength || BUSINESS_CONSTANTS.quality.maxTextLength;
     if (selectedText.length > maxLength) {
       selectedText = selectedText.substring(0, maxLength);
     }
@@ -444,7 +464,7 @@ export class MetadataExtractor {
 
   private async analyzeContent(
     text: string,
-    language: SupportedLanguage
+    language: SupportedLanguage,
   ): Promise<ContentAnalysis> {
     const wordCount = text.split(/\s+/).length;
     const characters = text.length;
@@ -453,38 +473,41 @@ export class MetadataExtractor {
       language,
       languageConfidence: 0.95,
       readabilityScore: 7.5,
-      sentiment: 'positive',
+      sentiment: "positive",
       sentimentScore: 0.7,
       keyPhrases: this.extractKeyPhrases(text),
       topics: [
-        { topic: '经期健康', confidence: 0.9 },
-        { topic: '疼痛管理', confidence: 0.8 },
-        { topic: '自然疗法', confidence: 0.7 }
+        { topic: "经期健康", confidence: 0.9 },
+        { topic: "疼痛管理", confidence: 0.8 },
+        { topic: "自然疗法", confidence: 0.7 },
       ],
       complexity: this.assessComplexity(text),
-      estimatedReadingTime: Math.ceil(wordCount / BUSINESS_CONSTANTS.content.readingSpeed),
+      estimatedReadingTime: Math.ceil(
+        wordCount / BUSINESS_CONSTANTS.content.readingSpeed,
+      ),
       wordCount,
-      characters
+      characters,
     };
   }
 
   private async categorizeContent(
     text: string,
-    pdfMetadata?: PDFMetadata
+    pdfMetadata?: PDFMetadata,
   ): Promise<AutoCategorizationResult> {
     // 基于关键词的简单分类逻辑
     const categories: Record<ResourceCategory, string[]> = {
-      'immediate-relief': ['快速', '立即', '紧急', '缓解', '5分钟', '即时'],
-      'preparation': ['准备', '预防', '计划', '营养', '锻炼', '习惯'],
-      'learning': ['了解', '学习', '知识', '教育', '科普', '医学'],
-      'management': ['管理', '长期', '维护', '跟踪', '监控', '记录'],
-      'assessment': ['评估', '测试', '检查', '诊断', '问卷', '量表'],
-      'template': ['模板', '表格', '格式', '样本', '范例', '表单']
+      "immediate-relief": ["快速", "立即", "紧急", "缓解", "5分钟", "即时"],
+      preparation: ["准备", "预防", "计划", "营养", "锻炼", "习惯"],
+      learning: ["了解", "学习", "知识", "教育", "科普", "医学"],
+      management: ["管理", "长期", "维护", "跟踪", "监控", "记录"],
+      assessment: ["评估", "测试", "检查", "诊断", "问卷", "量表"],
+      template: ["模板", "表格", "格式", "样本", "范例", "表单"],
     };
 
-    let bestCategory: ResourceCategory = 'learning';
+    let bestCategory: ResourceCategory = "learning";
     let bestScore = 0;
-    const alternativeCategories: AutoCategorizationResult['alternativeCategories'] = [];
+    const alternativeCategories: AutoCategorizationResult["alternativeCategories"] =
+      [];
 
     for (const [category, keywords] of Object.entries(categories)) {
       let score = 0;
@@ -501,7 +524,7 @@ export class MetadataExtractor {
         alternativeCategories.push({
           category: category as ResourceCategory,
           confidence: score / keywords.length,
-          reasoning: `匹配关键词: ${matchedKeywords.join(', ')}`
+          reasoning: `匹配关键词: ${matchedKeywords.join(", ")}`,
         });
       }
 
@@ -518,16 +541,16 @@ export class MetadataExtractor {
       suggestedCategory: bestCategory,
       confidence: bestScore / (categories[bestCategory]?.length || 1),
       alternativeCategories: alternativeCategories.slice(0, 3),
-      reasoning: `基于内容关键词分析，推荐分类为 ${bestCategory}`
+      reasoning: `基于内容关键词分析，推荐分类为 ${bestCategory}`,
     };
   }
 
   private async assessQuality(
     text?: string,
     pdfMetadata?: PDFMetadata,
-    fileMetadata?: FileMetadata
+    fileMetadata?: FileMetadata,
   ): Promise<QualityAssessment> {
-    const factors: QualityAssessment['factors'] = [];
+    const factors: QualityAssessment["factors"] = [];
     let totalScore = 0;
     let totalWeight = 0;
 
@@ -535,10 +558,10 @@ export class MetadataExtractor {
     if (text) {
       const contentScore = this.assessContentQuality(text);
       factors.push({
-        factor: '内容质量',
+        factor: "内容质量",
         score: contentScore,
         weight: 0.4,
-        description: '基于文本长度、结构和可读性的评估'
+        description: "基于文本长度、结构和可读性的评估",
       });
       totalScore += contentScore * 0.4;
       totalWeight += 0.4;
@@ -548,10 +571,10 @@ export class MetadataExtractor {
     if (pdfMetadata) {
       const designScore = this.assessDesignQuality(pdfMetadata);
       factors.push({
-        factor: '设计质量',
+        factor: "设计质量",
         score: designScore,
         weight: 0.2,
-        description: '基于PDF元数据和结构的评估'
+        description: "基于PDF元数据和结构的评估",
       });
       totalScore += designScore * 0.2;
       totalWeight += 0.2;
@@ -561,10 +584,10 @@ export class MetadataExtractor {
     if (fileMetadata) {
       const fileScore = this.assessFileQuality(fileMetadata);
       factors.push({
-        factor: '文件质量',
+        factor: "文件质量",
         score: fileScore,
         weight: 0.2,
-        description: '基于文件大小和格式的评估'
+        description: "基于文件大小和格式的评估",
       });
       totalScore += fileScore * 0.2;
       totalWeight += 0.2;
@@ -573,10 +596,10 @@ export class MetadataExtractor {
     // 实用性评估（基于内容分析）
     const usefulnessScore = text ? this.assessUsefulness(text) : 7;
     factors.push({
-      factor: '实用性',
+      factor: "实用性",
       score: usefulnessScore,
       weight: 0.2,
-      description: '基于内容实用性和适用性的评估'
+      description: "基于内容实用性和适用性的评估",
     });
     totalScore += usefulnessScore * 0.2;
     totalWeight += 0.2;
@@ -585,38 +608,42 @@ export class MetadataExtractor {
 
     return {
       overallScore,
-      contentScore: factors.find(f => f.factor === '内容质量')?.score || 5,
-      designScore: factors.find(f => f.factor === '设计质量')?.score || 5,
+      contentScore: factors.find((f) => f.factor === "内容质量")?.score || 5,
+      designScore: factors.find((f) => f.factor === "设计质量")?.score || 5,
       accuracyScore: 8, // 默认假设准确性较高
       usefulnessScore,
       factors,
-      improvements: this.generateImprovementSuggestions(factors, overallScore)
+      improvements: this.generateImprovementSuggestions(factors, overallScore),
     };
   }
 
-  private generateSuggestedMetadata(result: ExtractionResult): Partial<PDFResource['metadata']> {
-    const metadata: Partial<PDFResource['metadata']> = {};
+  private generateSuggestedMetadata(
+    result: ExtractionResult,
+  ): Partial<PDFResource["metadata"]> {
+    const metadata: Partial<PDFResource["metadata"]> = {};
 
     // 生成标题
     if (result.pdfMetadata?.title) {
       metadata.title = {
         zh: result.pdfMetadata.title,
-        en: result.pdfMetadata.title
+        en: result.pdfMetadata.title,
       };
     } else {
-      const filename = result.fileMetadata.filename.replace(/\.[^/.]+$/, '');
+      const filename = result.fileMetadata.filename.replace(/\.[^/.]+$/, "");
       metadata.title = {
         zh: this.generateChineseTitle(filename),
-        en: filename.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+        en: filename
+          .replace(/-/g, " ")
+          .replace(/\b\w/g, (l) => l.toUpperCase()),
       };
     }
 
     // 生成描述
     if (result.textContent) {
-      const shortDescription = result.textContent.substring(0, 150) + '...';
+      const shortDescription = result.textContent.substring(0, 150) + "...";
       metadata.description = {
         zh: shortDescription,
-        en: shortDescription
+        en: shortDescription,
       };
     }
 
@@ -637,7 +664,7 @@ export class MetadataExtractor {
         design: result.qualityAssessment.designScore,
         accuracy: result.qualityAssessment.accuracyScore,
         usefulness: result.qualityAssessment.usefulnessScore,
-        overall: result.qualityAssessment.overallScore
+        overall: result.qualityAssessment.overallScore,
       };
     }
 
@@ -665,30 +692,44 @@ export class MetadataExtractor {
 
     // 去重和清理
     return [...new Set(keywords)]
-      .map(k => k.trim())
-      .filter(k => k.length > 1 && k.length < 50)
+      .map((k) => k.trim())
+      .filter((k) => k.length > 1 && k.length < 50)
       .slice(0, 20);
   }
 
   private extractKeyPhrases(text: string): string[] {
     // 简化的关键词提取
     const commonPhrases = [
-      '经期疼痛', '月经痛', '痛经', '疼痛缓解', '自然疗法',
-      '热疗法', '营养调理', '呼吸练习', '按摩手法', '草药茶',
-      '健康管理', '预防措施', '生活方式', '饮食建议', '运动锻炼'
+      "经期疼痛",
+      "月经痛",
+      "痛经",
+      "疼痛缓解",
+      "自然疗法",
+      "热疗法",
+      "营养调理",
+      "呼吸练习",
+      "按摩手法",
+      "草药茶",
+      "健康管理",
+      "预防措施",
+      "生活方式",
+      "饮食建议",
+      "运动锻炼",
     ];
 
-    return commonPhrases.filter(phrase => text.includes(phrase));
+    return commonPhrases.filter((phrase) => text.includes(phrase));
   }
 
-  private assessComplexity(text: string): 'beginner' | 'intermediate' | 'advanced' {
+  private assessComplexity(
+    text: string,
+  ): "beginner" | "intermediate" | "advanced" {
     const sentences = text.split(/[。！？]/).length;
     const words = text.split(/\s+/).length;
     const avgWordsPerSentence = words / sentences;
 
-    if (avgWordsPerSentence < 15) return 'beginner';
-    if (avgWordsPerSentence < 25) return 'intermediate';
-    return 'advanced';
+    if (avgWordsPerSentence < 15) return "beginner";
+    if (avgWordsPerSentence < 25) return "intermediate";
+    return "advanced";
   }
 
   private assessContentQuality(text: string): number {
@@ -703,11 +744,13 @@ export class MetadataExtractor {
     if (sentences > 10) score += 1;
 
     // 关键词密度
-    const keywords = ['缓解', '方法', '健康', '疼痛', '治疗'];
-    const keywordCount = keywords.reduce((count, keyword) => 
-      count + (text.match(new RegExp(keyword, 'g')) || []).length, 0
+    const keywords = ["缓解", "方法", "健康", "疼痛", "治疗"];
+    const keywordCount = keywords.reduce(
+      (count, keyword) =>
+        count + (text.match(new RegExp(keyword, "g")) || []).length,
+      0,
     );
-    
+
     if (keywordCount > 5) score += 1;
 
     return Math.min(score, 10);
@@ -737,7 +780,7 @@ export class MetadataExtractor {
 
     // 文件名质量
     if (fileMetadata.filename.length > 10) score += 1;
-    if (!fileMetadata.filename.includes('temp')) score += 1;
+    if (!fileMetadata.filename.includes("temp")) score += 1;
 
     return Math.min(score, 10);
   }
@@ -746,9 +789,10 @@ export class MetadataExtractor {
     let score = 5;
 
     // 实用性关键词
-    const usefulKeywords = ['方法', '步骤', '建议', '指南', '技巧', '注意事项'];
-    const usefulCount = usefulKeywords.reduce((count, keyword) => 
-      count + (text.includes(keyword) ? 1 : 0), 0
+    const usefulKeywords = ["方法", "步骤", "建议", "指南", "技巧", "注意事项"];
+    const usefulCount = usefulKeywords.reduce(
+      (count, keyword) => count + (text.includes(keyword) ? 1 : 0),
+      0,
     );
 
     score += Math.min(usefulCount, 3);
@@ -757,29 +801,29 @@ export class MetadataExtractor {
   }
 
   private generateImprovementSuggestions(
-    factors: QualityAssessment['factors'],
-    overallScore: number
+    factors: QualityAssessment["factors"],
+    overallScore: number,
   ): string[] {
     const suggestions: string[] = [];
 
     if (overallScore < 6) {
-      suggestions.push('考虑增加更多实用的内容和示例');
+      suggestions.push("考虑增加更多实用的内容和示例");
     }
 
-    factors.forEach(factor => {
+    factors.forEach((factor) => {
       if (factor.score < 6) {
         switch (factor.factor) {
-          case '内容质量':
-            suggestions.push('增加文档长度和结构化内容');
+          case "内容质量":
+            suggestions.push("增加文档长度和结构化内容");
             break;
-          case '设计质量':
-            suggestions.push('改善PDF格式和添加更多元数据');
+          case "设计质量":
+            suggestions.push("改善PDF格式和添加更多元数据");
             break;
-          case '文件质量':
-            suggestions.push('优化文件大小和命名规范');
+          case "文件质量":
+            suggestions.push("优化文件大小和命名规范");
             break;
-          case '实用性':
-            suggestions.push('增加更多实际应用的建议和指导');
+          case "实用性":
+            suggestions.push("增加更多实际应用的建议和指导");
             break;
         }
       }
@@ -791,12 +835,12 @@ export class MetadataExtractor {
   private generateChineseTitle(filename: string): string {
     // 简单的文件名到中文标题转换
     const titleMap: Record<string, string> = {
-      'immediate-relief': '快速缓解指南',
-      'pain-relief': '疼痛缓解方法',
-      'guide': '使用指南',
-      'manual': '操作手册',
-      'nutrition': '营养指导',
-      'exercise': '运动指导'
+      "immediate-relief": "快速缓解指南",
+      "pain-relief": "疼痛缓解方法",
+      guide: "使用指南",
+      manual: "操作手册",
+      nutrition: "营养指导",
+      exercise: "运动指导",
     };
 
     let title = filename;
@@ -806,7 +850,7 @@ export class MetadataExtractor {
       }
     }
 
-    return title.replace(/-/g, ' ');
+    return title.replace(/-/g, " ");
   }
 
   private estimatePageCount(file: File | Buffer): number {
@@ -820,11 +864,11 @@ export class MetadataExtractor {
     const data = file instanceof File ? await file.arrayBuffer() : file;
     let hash = 0;
     const view = new Uint8Array(data);
-    
+
     for (let i = 0; i < view.length; i++) {
       hash = ((hash << 5) - hash + view[i]) & 0xffffffff;
     }
-    
+
     return Math.abs(hash).toString(16);
   }
 }
@@ -834,14 +878,22 @@ export class MetadataExtractor {
  */
 export const metadataExtractor = {
   getInstance: MetadataExtractor.getInstance,
-  
+
   // 快捷方法
-  extractFromFile: (file: File | Buffer, filename: string, options?: ExtractionOptions) =>
-    MetadataExtractor.getInstance().extractFromFile(file, filename, options),
-  
-  updateResourceMetadata: (resource: PDFResource, options?: ExtractionOptions) =>
+  extractFromFile: (
+    file: File | Buffer,
+    filename: string,
+    options?: ExtractionOptions,
+  ) => MetadataExtractor.getInstance().extractFromFile(file, filename, options),
+
+  updateResourceMetadata: (
+    resource: PDFResource,
+    options?: ExtractionOptions,
+  ) =>
     MetadataExtractor.getInstance().updateResourceMetadata(resource, options),
-  
-  batchExtract: (files: Array<{ file: File | Buffer; filename: string }>, options?: ExtractionOptions) =>
-    MetadataExtractor.getInstance().batchExtract(files, options)
+
+  batchExtract: (
+    files: Array<{ file: File | Buffer; filename: string }>,
+    options?: ExtractionOptions,
+  ) => MetadataExtractor.getInstance().batchExtract(files, options),
 };

@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { Download, ExternalLink, Copy, Check, Eye } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { LocalizedPDFResource, Locale } from '@/types/pdf';
-import { 
-  formatFileSize, 
-  formatDate, 
-  getCategoryColor, 
+import {
+  formatFileSize,
+  formatDate,
+  getCategoryColor,
   getCategoryBgColor,
   downloadPDF,
   copyToClipboard,
@@ -21,11 +21,11 @@ interface PDFCardProps {
   onDownload?: (resource: LocalizedPDFResource) => void;
 }
 
-export default function PDFCard({ 
-  resource, 
-  locale, 
+export default function PDFCard({
+  resource,
+  locale,
   showDetails = true,
-  onDownload 
+  onDownload
 }: PDFCardProps) {
   const [isDownloading, setIsDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -33,20 +33,20 @@ export default function PDFCard({
 
   const handleDownload = async () => {
     if (isDownloading) return;
-    
+
     setIsDownloading(true);
-    
+
     try {
       // 记录下载事件
       const downloadEvent = createDownloadEvent(resource.id, locale);
       console.log('Download event:', downloadEvent);
-      
+
       // 触发下载
       downloadPDF(resource.downloadUrl, resource.localizedFilename);
-      
+
       // 调用回调
       onDownload?.(resource);
-      
+
     } catch (error) {
       console.error('Download failed:', error);
     } finally {
@@ -57,7 +57,7 @@ export default function PDFCard({
   const handleCopyLink = async () => {
     const fullUrl = `${window.location.origin}${resource.downloadUrl}`;
     const success = await copyToClipboard(fullUrl);
-    
+
     if (success) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -69,7 +69,7 @@ export default function PDFCard({
 
   return (
     <div className={`
-      group relative bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 
+      group relative bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20
       hover:shadow-xl hover:scale-[1.02] transition-all duration-300 overflow-hidden
       ${resource.featured ? 'ring-2 ring-purple-200' : ''}
     `}>
@@ -94,17 +94,17 @@ export default function PDFCard({
         {/* 图标和标题 */}
         <div className="flex items-start gap-4 mb-4">
           <div className={`
-            w-12 h-12 rounded-xl bg-gradient-to-r ${categoryColorClass} 
+            w-12 h-12 rounded-xl bg-gradient-to-r ${categoryColorClass}
             flex items-center justify-center text-white text-xl font-bold shadow-lg
           `}>
             {resource.icon}
           </div>
-          
+
           <div className="flex-1 min-w-0">
             <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors">
               {resource.title}
             </h3>
-            
+
             {showDetails && (
               <p className="text-sm text-gray-600 line-clamp-3 leading-relaxed">
                 {resource.description}
@@ -121,7 +121,7 @@ export default function PDFCard({
                 📄 {formatFileSize(resource.fileSize)}
               </span>
             )}
-            
+
             {resource.updatedAt && (
               <span className="flex items-center gap-1">
                 🕒 {formatDate(resource.updatedAt, locale)}

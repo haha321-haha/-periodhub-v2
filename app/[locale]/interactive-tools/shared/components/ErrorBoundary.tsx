@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { AlertTriangle, RefreshCw, Download, Home } from 'lucide-react';
-import { PainTrackerError } from '../../../../../types/pain-tracker';
+import React, { Component, ErrorInfo, ReactNode } from "react";
+import { AlertTriangle, RefreshCw, Download, Home } from "lucide-react";
+import { PainTrackerError } from "../../../../../types/pain-tracker";
 
 interface Props {
   children: ReactNode;
@@ -28,7 +28,7 @@ export class ErrorBoundary extends Component<Props, State> {
       hasError: false,
       error: null,
       errorInfo: null,
-      errorId: ''
+      errorId: "",
     };
   }
 
@@ -36,18 +36,18 @@ export class ErrorBoundary extends Component<Props, State> {
     return {
       hasError: true,
       error,
-      errorId: `error_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+      errorId: `error_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
     };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.setState({
       error,
-      errorInfo
+      errorInfo,
     });
 
     // Log error details
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    console.error("ErrorBoundary caught an error:", error, errorInfo);
 
     // Call custom error handler if provided
     if (this.props.onError) {
@@ -69,23 +69,26 @@ export class ErrorBoundary extends Component<Props, State> {
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent,
         url: window.location.href,
-        retryCount: this.retryCount
+        retryCount: this.retryCount,
       };
 
       // Store error report locally for debugging
       const existingReports = JSON.parse(
-        localStorage.getItem('pain_tracker_error_reports') || '[]'
+        localStorage.getItem("pain_tracker_error_reports") || "[]",
       );
       existingReports.push(errorReport);
-      
+
       // Keep only last 10 error reports
       if (existingReports.length > 10) {
         existingReports.splice(0, existingReports.length - 10);
       }
-      
-      localStorage.setItem('pain_tracker_error_reports', JSON.stringify(existingReports));
+
+      localStorage.setItem(
+        "pain_tracker_error_reports",
+        JSON.stringify(existingReports),
+      );
     } catch (reportingError) {
-      console.error('Failed to report error:', reportingError);
+      console.error("Failed to report error:", reportingError);
     }
   };
 
@@ -96,7 +99,7 @@ export class ErrorBoundary extends Component<Props, State> {
         hasError: false,
         error: null,
         errorInfo: null,
-        errorId: ''
+        errorId: "",
       });
     }
   };
@@ -107,7 +110,7 @@ export class ErrorBoundary extends Component<Props, State> {
       hasError: false,
       error: null,
       errorInfo: null,
-      errorId: ''
+      errorId: "",
     });
   };
 
@@ -121,14 +124,14 @@ export class ErrorBoundary extends Component<Props, State> {
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent,
         url: window.location.href,
-        retryCount: this.retryCount
+        retryCount: this.retryCount,
       };
 
       const blob = new Blob([JSON.stringify(errorReport, null, 2)], {
-        type: 'application/json'
+        type: "application/json",
       });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
       a.download = `pain-tracker-error-${this.state.errorId}.json`;
       document.body.appendChild(a);
@@ -136,78 +139,80 @@ export class ErrorBoundary extends Component<Props, State> {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (downloadError) {
-      console.error('Failed to download error report:', downloadError);
+      console.error("Failed to download error report:", downloadError);
     }
   };
 
-  private getErrorMessage = (error: Error): { title: string; description: string; suggestions: string[] } => {
+  private getErrorMessage = (
+    error: Error,
+  ): { title: string; description: string; suggestions: string[] } => {
     if (error instanceof PainTrackerError) {
       switch (error.code) {
-        case 'STORAGE_ERROR':
+        case "STORAGE_ERROR":
           return {
-            title: 'Storage Error',
-            description: 'Unable to save or load your pain tracking data.',
+            title: "Storage Error",
+            description: "Unable to save or load your pain tracking data.",
             suggestions: [
-              'Check if your browser has enough storage space',
-              'Try clearing browser cache and cookies',
-              'Export your data as a backup before retrying',
-              'Use a different browser if the problem persists'
-            ]
+              "Check if your browser has enough storage space",
+              "Try clearing browser cache and cookies",
+              "Export your data as a backup before retrying",
+              "Use a different browser if the problem persists",
+            ],
           };
-        case 'VALIDATION_ERROR':
+        case "VALIDATION_ERROR":
           return {
-            title: 'Data Validation Error',
-            description: 'The pain tracking data contains invalid information.',
+            title: "Data Validation Error",
+            description: "The pain tracking data contains invalid information.",
             suggestions: [
-              'Check that all required fields are filled correctly',
-              'Ensure pain levels are between 0-10',
-              'Verify that dates are not in the future',
-              'Review medication and symptom selections'
-            ]
+              "Check that all required fields are filled correctly",
+              "Ensure pain levels are between 0-10",
+              "Verify that dates are not in the future",
+              "Review medication and symptom selections",
+            ],
           };
-        case 'EXPORT_ERROR':
+        case "EXPORT_ERROR":
           return {
-            title: 'Export Error',
-            description: 'Unable to export your pain tracking data.',
+            title: "Export Error",
+            description: "Unable to export your pain tracking data.",
             suggestions: [
-              'Try exporting a smaller date range',
-              'Check if your browser supports file downloads',
-              'Try a different export format (HTML instead of PDF)',
-              'Ensure you have sufficient storage space'
-            ]
+              "Try exporting a smaller date range",
+              "Check if your browser supports file downloads",
+              "Try a different export format (HTML instead of PDF)",
+              "Ensure you have sufficient storage space",
+            ],
           };
-        case 'CHART_ERROR':
+        case "CHART_ERROR":
           return {
-            title: 'Chart Display Error',
-            description: 'Unable to display charts and visualizations.',
+            title: "Chart Display Error",
+            description: "Unable to display charts and visualizations.",
             suggestions: [
-              'Try refreshing the page',
-              'Check if you have sufficient data for charts',
-              'View your data in table format instead',
-              'Update your browser to the latest version'
-            ]
+              "Try refreshing the page",
+              "Check if you have sufficient data for charts",
+              "View your data in table format instead",
+              "Update your browser to the latest version",
+            ],
           };
-        case 'DATA_CORRUPTION':
+        case "DATA_CORRUPTION":
           return {
-            title: 'Data Corruption Detected',
-            description: 'Your pain tracking data may be corrupted.',
+            title: "Data Corruption Detected",
+            description: "Your pain tracking data may be corrupted.",
             suggestions: [
-              'Try restoring from a recent backup',
-              'Export any recoverable data immediately',
-              'Clear corrupted data and start fresh if necessary',
-              'Contact support if you need help recovering data'
-            ]
+              "Try restoring from a recent backup",
+              "Export any recoverable data immediately",
+              "Clear corrupted data and start fresh if necessary",
+              "Contact support if you need help recovering data",
+            ],
           };
-        case 'QUOTA_EXCEEDED':
+        case "QUOTA_EXCEEDED":
           return {
-            title: 'Storage Quota Exceeded',
-            description: 'Your browser storage is full.',
+            title: "Storage Quota Exceeded",
+            description: "Your browser storage is full.",
             suggestions: [
-              'Export and delete old pain tracking records',
-              'Clear browser cache and cookies',
-              'Use browser settings to increase storage quota',
-              'Consider using a different browser with more storage'
-            ]
+              "Export and delete old pain tracking records",
+              "Clear browser cache and cookies",
+              "Use browser settings to increase storage quota",
+              "Consider using a different browser with more storage",
+            ],
           };
         default:
           break;
@@ -216,15 +221,15 @@ export class ErrorBoundary extends Component<Props, State> {
 
     // Generic error handling
     return {
-      title: 'Unexpected Error',
-      description: 'An unexpected error occurred in the pain tracker.',
+      title: "Unexpected Error",
+      description: "An unexpected error occurred in the pain tracker.",
       suggestions: [
-        'Try refreshing the page',
-        'Check your internet connection',
-        'Clear browser cache and cookies',
-        'Try using a different browser',
-        'Export your data as a backup'
-      ]
+        "Try refreshing the page",
+        "Check your internet connection",
+        "Clear browser cache and cookies",
+        "Try using a different browser",
+        "Export your data as a backup",
+      ],
     };
   };
 
@@ -234,7 +239,9 @@ export class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
 
-      const { title, description, suggestions } = this.getErrorMessage(this.state.error!);
+      const { title, description, suggestions } = this.getErrorMessage(
+        this.state.error!,
+      );
       const canRetry = this.retryCount < this.maxRetries;
 
       return (
@@ -243,17 +250,15 @@ export class ErrorBoundary extends Component<Props, State> {
             <div className="flex justify-center mb-4">
               <AlertTriangle className="h-12 w-12 text-red-500" />
             </div>
-            
-            <h2 className="text-xl font-semibold text-red-800 mb-2">
-              {title}
-            </h2>
-            
-            <p className="text-red-700 mb-4">
-              {description}
-            </p>
+
+            <h2 className="text-xl font-semibold text-red-800 mb-2">{title}</h2>
+
+            <p className="text-red-700 mb-4">{description}</p>
 
             <div className="bg-white p-4 rounded-md border border-red-200 mb-4">
-              <h3 className="font-medium text-red-800 mb-2">Suggested Solutions:</h3>
+              <h3 className="font-medium text-red-800 mb-2">
+                Suggested Solutions:
+              </h3>
               <ul className="text-sm text-red-700 text-left space-y-1">
                 {suggestions.map((suggestion, index) => (
                   <li key={index} className="flex items-start">
@@ -274,7 +279,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   Retry ({this.maxRetries - this.retryCount} left)
                 </button>
               )}
-              
+
               <button
                 onClick={this.handleReset}
                 className="flex items-center justify-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
@@ -282,7 +287,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 <Home className="h-4 w-4 mr-2" />
                 Reset
               </button>
-              
+
               {this.props.showDetails && (
                 <button
                   onClick={this.downloadErrorReport}

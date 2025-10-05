@@ -247,7 +247,7 @@ import WebVitalsReporter from '@/components/WebVitalsReporter';
 import { useEffect, useState } from 'react';
 ```
 
-### 第二步：修复 app/layout.tsx  
+### 第二步：修复 app/layout.tsx
 ```typescript
 // 修改 app/layout.tsx 第11行
 import { WebVitalsReporter } from '@/components/WebVitalsReporter';
@@ -459,30 +459,30 @@ github/haha321-haha
 [15:56:10.022] Vercel CLI 47.0.4
 [15:56:10.415] Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
 [15:56:10.433] Installing dependencies...
-[15:56:13.025] 
+[15:56:13.025]
 [15:56:13.025] up to date in 2s
-[15:56:13.025] 
+[15:56:13.025]
 [15:56:13.026] 302 packages are looking for funding
 [15:56:13.026]   run `npm fund` for details
 [15:56:13.055] Detected Next.js version: 14.2.31
 [15:56:13.056] Running "npm run build"
-[15:56:13.197] 
+[15:56:13.197]
 [15:56:13.197] > periodhub-health@0.1.0 build
 [15:56:13.197] > next build
-[15:56:13.197] 
+[15:56:13.197]
 [15:56:13.950]   ▲ Next.js 14.2.31
 [15:56:13.951]   - Experiments (use with caution):
 [15:56:13.951]     · optimizeCss
 [15:56:13.951]     · scrollRestoration
-[15:56:13.951] 
+[15:56:13.951]
 [15:56:14.012]    Creating an optimized production build ...
 [15:57:08.769]  ✓ Compiled successfully
 [15:57:08.770]    Linting and checking validity of types ...
 [15:57:28.435] Failed to compile.
-[15:57:28.435] 
+[15:57:28.435]
 [15:57:28.438] ./components/PerformanceMonitor.tsx:44:33
 [15:57:28.438] Type error: Cannot find name 'useState'.
-[15:57:28.438] 
+[15:57:28.438]
 [15:57:28.438] [0m [90m 42 |[39m [90m// 性能指标显示组件[39m[0m
 [15:57:28.438] [0m [90m 43 |[39m [36mexport[39m [36mfunction[39m [33mPerformanceMetricsDisplay[39m() {[0m
 [15:57:28.438] [0m[31m[1m>[22m[39m[90m 44 |[39m   [36mconst[39m [metrics[33m,[39m setMetrics] [33m=[39m useState[33m<[39m[33many[39m[33m>[39m({})[33m;[39m[0m
@@ -505,31 +505,31 @@ github/haha321-haha
 [15:43:15.748] Vercel CLI 47.0.4
 [15:43:16.262] Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
 [15:43:16.277] Installing dependencies...
-[15:43:18.875] 
+[15:43:18.875]
 [15:43:18.876] up to date in 2s
-[15:43:18.876] 
+[15:43:18.876]
 [15:43:18.877] 302 packages are looking for funding
 [15:43:18.877]   run `npm fund` for details
 [15:43:18.904] Detected Next.js version: 14.2.31
 [15:43:18.905] Running "npm run build"
-[15:43:19.007] 
+[15:43:19.007]
 [15:43:19.007] > periodhub-health@0.1.0 build
 [15:43:19.007] > next build
-[15:43:19.007] 
+[15:43:19.007]
 [15:43:19.651]   ▲ Next.js 14.2.31
 [15:43:19.652]   - Experiments (use with caution):
 [15:43:19.652]     · optimizeCss
 [15:43:19.652]     · scrollRestoration
-[15:43:19.652] 
+[15:43:19.652]
 [15:43:19.723]    Creating an optimized production build ...
 [15:43:53.100] Failed to compile.
-[15:43:53.101] 
+[15:43:53.101]
 [15:43:53.101] ./components/PerformanceDashboard.tsx
-[15:43:53.101] Error: 
+[15:43:53.101] Error:
 [15:43:53.101]   [31mx[0m Unexpected token `div`. Expected jsx identifier
 [15:43:53.102]      ,-[[36;1;4m/vercel/path0/components/PerformanceDashboard.tsx[0m:117:1]
 [15:43:53.102]  [2m117[0m |   }
-[15:43:53.102]  [2m118[0m | 
+[15:43:53.102]  [2m118[0m |
 [15:43:53.102]  [2m119[0m |   return (
 [15:43:53.102]  [2m120[0m |     <div className="space-y-6">
 [15:43:53.102]      : [31;1m     ^^^[0m
@@ -537,15 +537,15 @@ github/haha321-haha
 [15:43:53.102]  [2m122[0m |       <div className="bg-white rounded-lg shadow p-4">
 [15:43:53.103]  [2m123[0m |         <div className="flex items-center space-x-4">
 [15:43:53.103]      `----
-[15:43:53.103] 
+[15:43:53.103]
 [15:43:53.103] Caused by:
 [15:43:53.103]     Syntax Error
-[15:43:53.103] 
+[15:43:53.103]
 [15:43:53.103] Import trace for requested module:
 [15:43:53.103] ./components/PerformanceDashboard.tsx
 [15:43:53.103] ./app/admin/performance-dashboard/page.tsx
-[15:43:53.103] 
-[15:43:53.103] 
+[15:43:53.103]
+[15:43:53.103]
 [15:43:53.103] > Build failed because of webpack errors
 [15:43:53.173] Error: Command "npm run build" exited with 1
 
@@ -560,30 +560,30 @@ github/haha321-haha
 [15:35:31.314] Vercel CLI 47.0.4
 [15:35:32.236] Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
 [15:35:32.253] Installing dependencies...
-[15:35:35.497] 
+[15:35:35.497]
 [15:35:35.498] up to date in 3s
-[15:35:35.499] 
+[15:35:35.499]
 [15:35:35.499] 302 packages are looking for funding
 [15:35:35.499]   run `npm fund` for details
 [15:35:35.528] Detected Next.js version: 14.2.31
 [15:35:35.529] Running "npm run build"
-[15:35:35.638] 
+[15:35:35.638]
 [15:35:35.639] > periodhub-health@0.1.0 build
 [15:35:35.639] > next build
-[15:35:35.639] 
+[15:35:35.639]
 [15:35:36.323]   ▲ Next.js 14.2.31
 [15:35:36.324]   - Experiments (use with caution):
 [15:35:36.324]     · optimizeCss
 [15:35:36.324]     · scrollRestoration
-[15:35:36.324] 
+[15:35:36.324]
 [15:35:36.391]    Creating an optimized production build ...
 [15:36:30.821]  ✓ Compiled successfully
 [15:36:30.822]    Linting and checking validity of types ...
 [15:36:50.626] Failed to compile.
-[15:36:50.626] 
+[15:36:50.626]
 [15:36:50.626] ./components/PerformanceDashboard.tsx:179:60
 [15:36:50.626] Type error: 'stats' is of type 'unknown'.
-[15:36:50.626] 
+[15:36:50.626]
 [15:36:50.626] [0m [90m 177 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"flex justify-between"[39m[33m>[39m[0m
 [15:36:50.627] [0m [90m 178 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m[32m"text-gray-600"[39m[33m>[39m[33mAverage[39m[33m:[39m[33m<[39m[33m/[39m[33mspan[39m[33m>[39m[0m
 [15:36:50.627] [0m[31m[1m>[22m[39m[90m 179 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m{getGradeColor(metric[33m,[39m stats[33m.[39maverage)}[33m>[39m[0m
@@ -605,30 +605,30 @@ e82ecb5
 [15:25:44.243] Vercel CLI 47.0.4
 [15:25:44.621] Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
 [15:25:44.637] Installing dependencies...
-[15:25:47.435] 
+[15:25:47.435]
 [15:25:47.436] up to date in 3s
-[15:25:47.436] 
+[15:25:47.436]
 [15:25:47.436] 302 packages are looking for funding
 [15:25:47.437]   run `npm fund` for details
 [15:25:47.466] Detected Next.js version: 14.2.31
 [15:25:47.467] Running "npm run build"
-[15:25:47.629] 
+[15:25:47.629]
 [15:25:47.629] > periodhub-health@0.1.0 build
 [15:25:47.629] > next build
-[15:25:47.629] 
+[15:25:47.629]
 [15:25:48.433]   ▲ Next.js 14.2.31
 [15:25:48.434]   - Experiments (use with caution):
 [15:25:48.434]     · optimizeCss
 [15:25:48.434]     · scrollRestoration
-[15:25:48.434] 
+[15:25:48.434]
 [15:25:48.500]    Creating an optimized production build ...
 [15:26:44.120]  ✓ Compiled successfully
 [15:26:44.121]    Linting and checking validity of types ...
 [15:27:04.581] Failed to compile.
-[15:27:04.581] 
+[15:27:04.581]
 [15:27:04.582] ./components/PerformanceDashboard.tsx:179:60
 [15:27:04.582] Type error: 'stats' is of type 'unknown'.
-[15:27:04.582] 
+[15:27:04.582]
 [15:27:04.582] [0m [90m 177 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"flex justify-between"[39m[33m>[39m[0m
 [15:27:04.583] [0m [90m 178 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m[32m"text-gray-600"[39m[33m>[39m[33mAverage[39m[33m:[39m[33m<[39m[33m/[39m[33mspan[39m[33m>[39m[0m
 [15:27:04.583] [0m[31m[1m>[22m[39m[90m 179 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m{getGradeColor(metric[33m,[39m stats[33m.[39maverage)}[33m>[39m[0m
@@ -651,30 +651,30 @@ e82ecb5
 [15:22:17.930] Vercel CLI 47.0.4
 [15:22:18.335] Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
 [15:22:18.353] Installing dependencies...
-[15:22:20.949] 
+[15:22:20.949]
 [15:22:20.950] up to date in 2s
-[15:22:20.951] 
+[15:22:20.951]
 [15:22:20.951] 302 packages are looking for funding
 [15:22:20.951]   run `npm fund` for details
 [15:22:20.981] Detected Next.js version: 14.2.31
 [15:22:20.982] Running "npm run build"
-[15:22:21.096] 
+[15:22:21.096]
 [15:22:21.096] > periodhub-health@0.1.0 build
 [15:22:21.096] > next build
-[15:22:21.097] 
+[15:22:21.097]
 [15:22:21.801]   ▲ Next.js 14.2.31
 [15:22:21.802]   - Experiments (use with caution):
 [15:22:21.802]     · optimizeCss
 [15:22:21.802]     · scrollRestoration
-[15:22:21.802] 
+[15:22:21.802]
 [15:22:21.877]    Creating an optimized production build ...
 [15:23:20.174]  ✓ Compiled successfully
 [15:23:20.176]    Linting and checking validity of types ...
 [15:23:41.731] Failed to compile.
-[15:23:41.732] 
+[15:23:41.732]
 [15:23:41.732] ./components/PerformanceDashboard.tsx:179:60
 [15:23:41.732] Type error: 'stats' is of type 'unknown'.
-[15:23:41.732] 
+[15:23:41.732]
 [15:23:41.732] [0m [90m 177 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"flex justify-between"[39m[33m>[39m[0m
 [15:23:41.732] [0m [90m 178 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m[32m"text-gray-600"[39m[33m>[39m[33mAverage[39m[33m:[39m[33m<[39m[33m/[39m[33mspan[39m[33m>[39m[0m
 [15:23:41.732] [0m[31m[1m>[22m[39m[90m 179 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m{getGradeColor(metric[33m,[39m stats[33m.[39maverage)}[33m>[39m[0m
@@ -696,30 +696,30 @@ e82ecb5
 [15:19:24.795] Vercel CLI 47.0.4
 [15:19:25.201] Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
 [15:19:25.220] Installing dependencies...
-[15:19:30.676] 
+[15:19:30.676]
 [15:19:30.677] up to date in 3s
-[15:19:30.678] 
+[15:19:30.678]
 [15:19:30.678] 302 packages are looking for funding
 [15:19:30.678]   run `npm fund` for details
 [15:19:30.711] Detected Next.js version: 14.2.31
 [15:19:30.712] Running "npm run build"
-[15:19:30.826] 
+[15:19:30.826]
 [15:19:30.827] > periodhub-health@0.1.0 build
 [15:19:30.827] > next build
-[15:19:30.827] 
+[15:19:30.827]
 [15:19:31.505]   ▲ Next.js 14.2.31
 [15:19:31.505]   - Experiments (use with caution):
 [15:19:31.505]     · optimizeCss
 [15:19:31.505]     · scrollRestoration
-[15:19:31.505] 
+[15:19:31.505]
 [15:19:31.581]    Creating an optimized production build ...
 [15:20:30.321]  ✓ Compiled successfully
 [15:20:30.323]    Linting and checking validity of types ...
 [15:20:51.689] Failed to compile.
-[15:20:51.690] 
+[15:20:51.690]
 [15:20:51.690] ./components/PerformanceDashboard.tsx:179:60
 [15:20:51.690] Type error: 'stats' is of type 'unknown'.
-[15:20:51.690] 
+[15:20:51.690]
 [15:20:51.690] [0m [90m 177 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"flex justify-between"[39m[33m>[39m[0m
 [15:20:51.690] [0m [90m 178 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m[32m"text-gray-600"[39m[33m>[39m[33mAverage[39m[33m:[39m[33m<[39m[33m/[39m[33mspan[39m[33m>[39m[0m
 [15:20:51.690] [0m[31m[1m>[22m[39m[90m 179 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m{getGradeColor(metric[33m,[39m stats[33m.[39maverage)}[33m>[39m[0m
@@ -742,30 +742,30 @@ e82ecb5
 [15:13:25.741] Vercel CLI 47.0.4
 [15:13:26.158] Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
 [15:13:26.176] Installing dependencies...
-[15:13:28.776] 
+[15:13:28.776]
 [15:13:28.777] up to date in 2s
-[15:13:28.777] 
+[15:13:28.777]
 [15:13:28.777] 302 packages are looking for funding
 [15:13:28.777]   run `npm fund` for details
 [15:13:28.808] Detected Next.js version: 14.2.31
 [15:13:28.809] Running "npm run build"
-[15:13:29.050] 
+[15:13:29.050]
 [15:13:29.051] > periodhub-health@0.1.0 build
 [15:13:29.051] > next build
-[15:13:29.051] 
+[15:13:29.051]
 [15:13:29.756]   ▲ Next.js 14.2.31
 [15:13:29.757]   - Experiments (use with caution):
 [15:13:29.757]     · optimizeCss
 [15:13:29.757]     · scrollRestoration
-[15:13:29.757] 
+[15:13:29.757]
 [15:13:29.831]    Creating an optimized production build ...
 [15:14:25.673]  ✓ Compiled successfully
 [15:14:25.674]    Linting and checking validity of types ...
 [15:14:47.203] Failed to compile.
-[15:14:47.204] 
+[15:14:47.204]
 [15:14:47.204] ./components/PerformanceDashboard.tsx:179:60
 [15:14:47.204] Type error: 'stats' is of type 'unknown'.
-[15:14:47.204] 
+[15:14:47.204]
 [15:14:47.204] [0m [90m 177 |[39m                   [33m<[39m[33mdiv[39m className[33m=[39m[32m"flex justify-between"[39m[33m>[39m[0m
 [15:14:47.205] [0m [90m 178 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m[32m"text-gray-600"[39m[33m>[39m[33mAverage[39m[33m:[39m[33m<[39m[33m/[39m[33mspan[39m[33m>[39m[0m
 [15:14:47.205] [0m[31m[1m>[22m[39m[90m 179 |[39m                     [33m<[39m[33mspan[39m className[33m=[39m{getGradeColor(metric[33m,[39m stats[33m.[39maverage)}[33m>[39m[0m
@@ -788,37 +788,37 @@ e82ecb5
 [15:08:47.792] Vercel CLI 47.0.4
 [15:08:48.148] Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
 [15:08:48.163] Installing dependencies...
-[15:08:50.718] 
+[15:08:50.718]
 [15:08:50.718] up to date in 2s
-[15:08:50.719] 
+[15:08:50.719]
 [15:08:50.719] 302 packages are looking for funding
 [15:08:50.719]   run `npm fund` for details
 [15:08:50.749] Detected Next.js version: 14.2.31
 [15:08:50.749] Running "npm run build"
-[15:08:51.314] 
+[15:08:51.314]
 [15:08:51.315] > periodhub-health@0.1.0 build
 [15:08:51.316] > next build
-[15:08:51.316] 
+[15:08:51.316]
 [15:08:52.017]   ▲ Next.js 14.2.31
 [15:08:52.018]   - Experiments (use with caution):
 [15:08:52.018]     · optimizeCss
 [15:08:52.018]     · scrollRestoration
-[15:08:52.019] 
+[15:08:52.019]
 [15:08:52.091]    Creating an optimized production build ...
 [15:09:44.218]  ⚠ Compiled with warnings
-[15:09:44.219] 
+[15:09:44.219]
 [15:09:44.219] ./app/layout.tsx
 [15:09:44.219] Attempted import error: '@/components/WebVitalsReporter' does not contain a default export (imported as 'WebVitalsReporter').
-[15:09:44.219] 
+[15:09:44.219]
 [15:09:44.219] Import trace for requested module:
 [15:09:44.219] ./app/layout.tsx
-[15:09:44.219] 
+[15:09:44.219]
 [15:09:44.220]    Linting and checking validity of types ...
 [15:10:04.047] Failed to compile.
-[15:10:04.048] 
+[15:10:04.048]
 [15:10:04.048] ./app/layout.tsx:11:8
 [15:10:04.048] Type error: Module '"/vercel/path0/components/WebVitalsReporter"' has no default export. Did you mean to use 'import { WebVitalsReporter } from "/vercel/path0/components/WebVitalsReporter"' instead?
-[15:10:04.048] 
+[15:10:04.048]
 [15:10:04.048] [0m [90m  9 |[39m   display[33m:[39m [32m'swap'[39m[33m,[39m[0m
 [15:10:04.048] [0m [90m 10 |[39m })[33m;[39m[0m
 [15:10:04.049] [0m[31m[1m>[22m[39m[90m 11 |[39m [36mimport[39m [33mWebVitalsReporter[39m [36mfrom[39m [32m'@/components/WebVitalsReporter'[39m[33m;[39m[0m
@@ -828,5 +828,3 @@ e82ecb5
 [15:10:04.049] [0m [90m 14 |[39m [90m// 🚀 Core Web Vitals 优化的根布局[39m[0m
 [15:10:04.088] Next.js build worker exited with code: 1 and signal: null
 [15:10:04.198] Error: Command "npm run build" exited with 1
-
-

@@ -55,8 +55,8 @@ button:disabled {
     min-width: 48px;
     padding: 12px;
   }
-  
-  button, 
+
+  button,
   [role="button"],
   input[type="button"],
   input[type="submit"] {
@@ -71,17 +71,17 @@ button:disabled {
     background-color: #ffffff;
     border: 2px solid #ec4899;
   }
-  
+
   .text-pink-600 {
     color: #be185d;
     font-weight: 600;
   }
-  
+
   .border-pink-500 {
     border-color: #ec4899;
     border-width: 2px;
   }
-  
+
   .bg-gradient-to-r {
     background: #ec4899;
   }
@@ -258,17 +258,17 @@ input[type="range"]:focus::-moz-range-thumb {
     font-size: 1.5rem;
     line-height: 1.4;
   }
-  
+
   h2 {
     font-size: 1.25rem;
     line-height: 1.4;
   }
-  
+
   h3 {
     font-size: 1.125rem;
     line-height: 1.4;
   }
-  
+
   p, li {
     font-size: 1rem;
     line-height: 1.6;
@@ -361,18 +361,18 @@ input[type="range"]:focus::-moz-range-thumb {
   .no-print {
     display: none !important;
   }
-  
+
   body {
     font-size: 12pt;
     line-height: 1.4;
     color: black;
     background: white;
   }
-  
+
   h1, h2, h3 {
     page-break-after: avoid;
   }
-  
+
   .page-break {
     page-break-before: always;
   }
@@ -384,7 +384,7 @@ input[type="range"]:focus::-moz-range-thumb {
     background-color: #1f2937;
     color: #f9fafb;
   }
-  
+
   .dark-mode-support input,
   .dark-mode-support select,
   .dark-mode-support textarea {
@@ -392,15 +392,15 @@ input[type="range"]:focus::-moz-range-thumb {
     border-color: #4b5563;
     color: #f9fafb;
   }
-  
+
   .dark-mode-support .bg-white {
     background-color: #1f2937;
   }
-  
+
   .dark-mode-support .text-gray-900 {
     color: #f9fafb;
   }
-  
+
   .dark-mode-support .text-gray-600 {
     color: #d1d5db;
   }
@@ -431,7 +431,7 @@ input[type="range"]:focus::-moz-range-thumb {
   textarea {
     min-height: 48px;
   }
-  
+
   .touch-spacing {
     margin: 8px 0;
   }

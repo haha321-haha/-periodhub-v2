@@ -35,7 +35,7 @@ export const CyclePatternChart: React.FC<CyclePatternChartProps> = ({
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     // Simulate loading delay for smooth rendering
     const timer = setTimeout(() => setIsLoading(false), 100);
 
@@ -69,7 +69,7 @@ export const CyclePatternChart: React.FC<CyclePatternChartProps> = ({
   const chartOptions = useMemo(() => {
     try {
       const options = ChartUtils.getCyclePatternOptions(isMobile);
-      
+
       // Override title display if showTitle is false
       if (!showTitle && options.plugins?.title) {
         options.plugins.title.display = false;
@@ -121,7 +121,7 @@ export const CyclePatternChart: React.FC<CyclePatternChartProps> = ({
     const highestPain = sortedByPain[0];
     const lowestPain = sortedByPain[sortedByPain.length - 1];
     const totalRecords = cyclePatterns.reduce((sum, pattern) => sum + pattern.frequency, 0);
-    
+
     return {
       highestPain,
       lowestPain,
@@ -147,7 +147,7 @@ export const CyclePatternChart: React.FC<CyclePatternChartProps> = ({
   // Loading state
   if (isLoading) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-gray-50 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
@@ -162,7 +162,7 @@ export const CyclePatternChart: React.FC<CyclePatternChartProps> = ({
   // Error state
   if (error) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-red-50 border border-red-200 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
@@ -182,7 +182,7 @@ export const CyclePatternChart: React.FC<CyclePatternChartProps> = ({
   // Empty data state
   if (!cyclePatterns || cyclePatterns.length === 0) {
     return (
-      <div 
+      <div
         className={`flex items-center justify-center bg-gray-50 border border-gray-200 rounded-lg ${className}`}
         style={{ height: containerHeight }}
       >
@@ -205,18 +205,18 @@ export const CyclePatternChart: React.FC<CyclePatternChartProps> = ({
   return (
     <div className={`relative ${className}`}>
       <div style={{ height: containerHeight }}>
-        <Bar 
-          data={chartData} 
+        <Bar
+          data={chartData}
           options={chartOptions}
           aria-label="Menstrual cycle pattern chart showing average pain levels by cycle phase"
           role="img"
         />
       </div>
-      
+
       {/* Chart summary for screen readers */}
       <div className="sr-only">
         <p>
-          Menstrual cycle pattern chart showing {cyclePatterns.length} different phases. 
+          Menstrual cycle pattern chart showing {cyclePatterns.length} different phases.
           {cycleStats && (
             <>
               Highest pain phase: {formatMenstrualStatus(cycleStats.highestPain.phase)} with average {cycleStats.highestPain.averagePainLevel.toFixed(1)}/10.
@@ -239,7 +239,7 @@ export const CyclePatternChart: React.FC<CyclePatternChartProps> = ({
             </div>
           </div>
           <div className="mt-2 pt-2 border-t border-gray-200">
-            <span className="font-medium">Phases Tracked:</span> {cycleStats.phasesTracked} | 
+            <span className="font-medium">Phases Tracked:</span> {cycleStats.phasesTracked} |
             <span className="font-medium ml-2">Total Records:</span> {cycleStats.totalRecords}
           </div>
         </div>

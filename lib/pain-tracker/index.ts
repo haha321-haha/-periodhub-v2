@@ -8,7 +8,7 @@ export { default as MigrationService } from './migration/MigrationService';
 export { default as PainDataManager } from './data/PainDataManager';
 
 // Analytics Services
-export { 
+export {
   AnalyticsEngine,
   ChartUtils,
   PainTrendChart,

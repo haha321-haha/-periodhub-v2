@@ -103,11 +103,11 @@ interface ReportGeneratorProps {
   onReportGenerated?: (report: ReportData) => void;
 }
 
-export default function ReportGenerator({ 
-  locale, 
+export default function ReportGenerator({
+  locale,
   userId,
   timeRange = 'quarter',
-  onReportGenerated 
+  onReportGenerated
 }: ReportGeneratorProps) {
   const t = useTranslations('interactiveTools.reports');
   const [reportData, setReportData] = useState<ReportData | null>(null);
@@ -120,11 +120,11 @@ export default function ReportGenerator({
   // 生成报告数据
   const generateReport = async () => {
     setLoading(true);
-    
+
     try {
       // 模拟报告生成过程
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       const mockReportData: ReportData = {
         userProfile: {
           name: '用户',
@@ -216,7 +216,7 @@ export default function ReportGenerator({
       };
 
       setReportData(mockReportData);
-      
+
       if (onReportGenerated) {
         onReportGenerated(mockReportData);
       }
@@ -230,7 +230,7 @@ export default function ReportGenerator({
   // 导出PDF
   const exportToPDF = () => {
     if (!reportData) return;
-    
+
     // 这里可以实现实际的PDF生成逻辑
     const reportContent = generateReportContent();
     const blob = new Blob([reportContent], { type: 'text/html' });
@@ -247,7 +247,7 @@ export default function ReportGenerator({
   // 生成报告内容
   const generateReportContent = () => {
     if (!reportData) return '';
-    
+
     return `
       <!DOCTYPE html>
       <html>
@@ -268,14 +268,14 @@ export default function ReportGenerator({
           <h1>PeriodHub 个人健康报告</h1>
           <p>生成时间: ${new Date().toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US')}</p>
         </div>
-        
+
         <div class="section">
           <h2>用户概况</h2>
           <p>姓名: ${reportData.userProfile.name}</p>
           <p>年龄: ${reportData.userProfile.age}岁</p>
           <p>评估次数: ${reportData.userProfile.assessmentCount}次</p>
         </div>
-        
+
         <div class="section">
           <h2>评估总结</h2>
           <p>总评估次数: ${reportData.assessmentSummary.totalAssessments}</p>
@@ -283,7 +283,7 @@ export default function ReportGenerator({
           <p>疼痛趋势: ${reportData.assessmentSummary.painTrend}</p>
           <p>最有效治疗方法: ${reportData.assessmentSummary.mostEffectiveTreatment}</p>
         </div>
-        
+
         <div class="section">
           <h2>智能洞察</h2>
           ${reportData.insights.map(insight => `
@@ -294,7 +294,7 @@ export default function ReportGenerator({
             </div>
           `).join('')}
         </div>
-        
+
         <div class="section">
           <h2>个性化建议</h2>
           ${reportData.recommendations.map(rec => `
@@ -343,7 +343,7 @@ export default function ReportGenerator({
             {locale === 'zh' ? '生成专业的个人健康报告和数据分析' : 'Generate professional personal health reports and data analysis'}
           </p>
         </div>
-        
+
         <div className="flex space-x-2 mt-4 sm:mt-0">
           <button
             onClick={generateReport}
@@ -362,7 +362,7 @@ export default function ReportGenerator({
               </>
             )}
           </button>
-          
+
           {reportData && (
             <button
               onClick={exportToPDF}
@@ -381,7 +381,7 @@ export default function ReportGenerator({
           <Settings className="w-5 h-5 mr-2" />
           {locale === 'zh' ? '报告配置' : 'Report Configuration'}
         </h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -397,7 +397,7 @@ export default function ReportGenerator({
               <option value="medical">{locale === 'zh' ? '医疗报告' : 'Medical Report'}</option>
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               {locale === 'zh' ? '时间范围' : 'Time Range'}
@@ -412,7 +412,7 @@ export default function ReportGenerator({
               <option value="year">{locale === 'zh' ? '最近1年' : 'Last Year'}</option>
             </select>
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               {locale === 'zh' ? '隐私级别' : 'Privacy Level'}
@@ -427,7 +427,7 @@ export default function ReportGenerator({
               <option value="maximum">{locale === 'zh' ? '最高' : 'Maximum'}</option>
             </select>
           </div>
-          
+
           <div className="space-y-2">
             <label className="flex items-center">
               <input
@@ -611,4 +611,3 @@ export default function ReportGenerator({
     </div>
   );
 }
-

@@ -59,7 +59,7 @@ export function localizeResource(
 ): LocalizedPDFResource {
   const localizedFilename = getLocalizedFilename(resource.filename, locale);
   const alternateFilename = getAlternateFilename(resource.filename, locale);
-  
+
   return {
     ...resource,
     title: t(resource.titleKey),

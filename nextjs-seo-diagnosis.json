@@ -4,24 +4,16 @@
     "hasDynamicRobots": true,
     "staticRobotsPath": null,
     "dynamicRobotsPath": "/Users/duting/Downloads/money💰/--main/app/robots.ts",
-    "conflicts": [
-      "只有动态 robots.ts，但可能无法正常工作"
-    ],
-    "recommendations": [
-      "检查动态生成是否正常工作"
-    ]
+    "conflicts": ["只有动态 robots.ts，但可能无法正常工作"],
+    "recommendations": ["检查动态生成是否正常工作"]
   },
   "sitemap": {
     "hasStaticSitemap": false,
     "hasDynamicSitemap": true,
     "staticSitemapPath": null,
     "dynamicSitemapPath": "/Users/duting/Downloads/money💰/--main/app/sitemap.ts",
-    "conflicts": [
-      "只有动态 sitemap.ts，但可能无法正常工作"
-    ],
-    "recommendations": [
-      "检查动态生成是否正常工作"
-    ]
+    "conflicts": ["只有动态 sitemap.ts，但可能无法正常工作"],
+    "recommendations": ["检查动态生成是否正常工作"]
   },
   "pdf": {
     "pdfFilesInSitemap": [

@@ -8,11 +8,11 @@ const enFile = './content/articles/en/when-to-seek-medical-care-comprehensive-gu
 function parseFrontMatter(content) {
   const frontMatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
   if (!frontMatterMatch) return null;
-  
+
   const frontMatter = frontMatterMatch[1];
   const lines = frontMatter.split('\n');
   const data = {};
-  
+
   lines.forEach(line => {
     if (line.includes(':')) {
       const [key, ...valueParts] = line.split(':');
@@ -20,7 +20,7 @@ function parseFrontMatter(content) {
       data[key.trim()] = value;
     }
   });
-  
+
   return data;
 }
 
@@ -28,14 +28,14 @@ function checkCharacterCount(text, fieldName, language) {
   const charCount = text.length;
   const targetMin = language === 'zh' ? 80 : 150;
   const targetMax = language === 'zh' ? 120 : 160;
-  
+
   let status = '✅ 符合要求';
   if (charCount < targetMin) {
     status = `❌ 太短 (需要${targetMin}-${targetMax}字符)`;
   } else if (charCount > targetMax) {
     status = `❌ 太长 (需要${targetMin}-${targetMax}字符)`;
   }
-  
+
   return {
     field: fieldName,
     language,

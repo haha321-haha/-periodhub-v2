@@ -3,9 +3,9 @@
  * 提供键盘导航、屏幕阅读器支持等功能
  */
 
-'use client';
+"use client";
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
 interface AccessibilityWrapperProps {
   children: React.ReactNode;
@@ -22,7 +22,7 @@ export default function AccessibilityWrapper({
   ariaLabel,
   ariaDescribedBy,
   tabIndex,
-  onKeyDown
+  onKeyDown,
 }: AccessibilityWrapperProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,17 +34,17 @@ export default function AccessibilityWrapper({
       }
 
       // 基于ziV1d3d的键盘快捷键
-      if (event.key === 'Enter' || event.key === ' ') {
+      if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        const button = ref.current?.querySelector('button');
+        const button = ref.current?.querySelector("button");
         if (button) {
           button.click();
         }
       }
 
       // 基于ziV1d3d的ESC键处理
-      if (event.key === 'Escape') {
-        const closeButton = ref.current?.querySelector('[data-close]');
+      if (event.key === "Escape") {
+        const closeButton = ref.current?.querySelector("[data-close]");
         if (closeButton) {
           (closeButton as HTMLButtonElement).click();
         }
@@ -53,8 +53,8 @@ export default function AccessibilityWrapper({
 
     const element = ref.current;
     if (element) {
-      element.addEventListener('keydown', handleKeyDown);
-      return () => element.removeEventListener('keydown', handleKeyDown);
+      element.addEventListener("keydown", handleKeyDown);
+      return () => element.removeEventListener("keydown", handleKeyDown);
     }
   }, [onKeyDown]);
 
@@ -74,11 +74,7 @@ export default function AccessibilityWrapper({
 
 // 基于ziV1d3d的屏幕阅读器支持
 export function ScreenReaderOnly({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="sr-only">
-      {children}
-    </span>
-  );
+  return <span className="sr-only">{children}</span>;
 }
 
 // 基于ziV1d3d的焦点管理
@@ -87,16 +83,18 @@ export function FocusManager({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const handleTabKey = (event: KeyboardEvent) => {
-      if (event.key === 'Tab') {
+      if (event.key === "Tab") {
         const container = containerRef.current;
         if (!container) return;
 
         const focusableElements = container.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
         );
-        
+
         const firstElement = focusableElements[0] as HTMLElement;
-        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+        const lastElement = focusableElements[
+          focusableElements.length - 1
+        ] as HTMLElement;
 
         if (event.shiftKey) {
           // Shift + Tab
@@ -116,32 +114,35 @@ export function FocusManager({ children }: { children: React.ReactNode }) {
 
     const container = containerRef.current;
     if (container) {
-      container.addEventListener('keydown', handleTabKey);
-      return () => container.removeEventListener('keydown', handleTabKey);
+      container.addEventListener("keydown", handleTabKey);
+      return () => container.removeEventListener("keydown", handleTabKey);
     }
   }, []);
 
   return (
-    <div ref={containerRef} className="focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2">
+    <div
+      ref={containerRef}
+      className="focus-within:ring-2 focus-within:ring-primary-500 focus-within:ring-offset-2"
+    >
       {children}
     </div>
   );
 }
 
 // 基于ziV1d3d的高对比度支持
-export function HighContrastWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="high-contrast">
-      {children}
-    </div>
-  );
+export function HighContrastWrapper({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <div className="high-contrast">{children}</div>;
 }
 
 // 基于ziV1d3d的动画控制
-export function ReducedMotionWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="reduced-motion">
-      {children}
-    </div>
-  );
+export function ReducedMotionWrapper({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <div className="reduced-motion">{children}</div>;
 }

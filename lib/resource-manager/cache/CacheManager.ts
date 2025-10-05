@@ -3,10 +3,11 @@
  * 缓存管理器
  */
 
-import { ResourceManagerConfig } from '../types';
+import { ResourceManagerConfig } from "../types";
 
 export class CacheManager {
-  private cache: Map<string, { data: any; timestamp: number; ttl: number }> = new Map();
+  private cache: Map<string, { data: any; timestamp: number; ttl: number }> =
+    new Map();
   private config: ResourceManagerConfig;
 
   constructor(config: ResourceManagerConfig) {
@@ -59,7 +60,7 @@ export class CacheManager {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
-      ttl
+      ttl,
     });
   }
 
@@ -74,10 +75,12 @@ export class CacheManager {
    * 清除匹配模式的缓存
    */
   async clearPattern(pattern: string): Promise<void> {
-    const regex = new RegExp(pattern.replace(/\*/g, '.*'));
-    const keysToDelete = Array.from(this.cache.keys()).filter(key => regex.test(key));
-    
-    keysToDelete.forEach(key => {
+    const regex = new RegExp(pattern.replace(/\*/g, ".*"));
+    const keysToDelete = Array.from(this.cache.keys()).filter((key) =>
+      regex.test(key),
+    );
+
+    keysToDelete.forEach((key) => {
       this.cache.delete(key);
     });
   }
@@ -87,7 +90,7 @@ export class CacheManager {
    */
   private cleanup(): void {
     const now = Date.now();
-    
+
     for (const [key, cached] of this.cache.entries()) {
       if (now - cached.timestamp > cached.ttl * 1000) {
         this.cache.delete(key);
@@ -106,7 +109,7 @@ export class CacheManager {
     return {
       size: this.cache.size,
       hitRate: 0, // 这里需要实现命中率统计
-      missRate: 0
+      missRate: 0,
     };
   }
-} 
+}

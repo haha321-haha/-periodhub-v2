@@ -49,13 +49,13 @@ const TEXTS = {
     subtitle: 'Professional Dysmenorrhea Evaluation Tool with Personalized Medical Recommendations, Scientific Severity Analysis and Lifestyle Guidance',
     description: 'Scientifically assess how menstrual pain affects your life and work',
     breadcrumbHome: 'Home',
-    breadcrumbTools: 'Interactive Tools', 
+    breadcrumbTools: 'Interactive Tools',
     breadcrumbCurrent: 'Work Impact Calculator',
     modeTitle: 'Choose Assessment Mode',
     simplifiedMode: 'Simplified Version',
     simplifiedDesc: 'Quick assessment, suitable for general users',
     detailedMode: 'Detailed Version',
-    detailedDesc: 'Comprehensive assessment, provides detailed recommendations', 
+    detailedDesc: 'Comprehensive assessment, provides detailed recommendations',
     medicalMode: 'Medical Professional Version',
     medicalDesc: 'Professional assessment, includes clinical guidance',
     startButton: 'Start Assessment',
@@ -68,13 +68,13 @@ const TEXTS = {
 // 痛经影响计算器专用推荐数据配置
 const getPainCalculatorRecommendations = (locale: string) => {
   const isZh = locale === 'zh';
-  
+
   // 推荐文章推荐
   const relatedArticles = [
     {
       id: 'menstrual-stress-management',
       title: isZh ? '经期压力管理完全指南' : 'Menstrual Stress Management Complete Guide',
-      description: isZh 
+      description: isZh
         ? '职场环境下的压力管理策略和经期健康维护'
         : 'Stress management strategies and menstrual health maintenance in workplace environment',
       href: `/${locale}/articles/menstrual-stress-management-complete-guide`,
@@ -207,15 +207,15 @@ const getPainCalculatorRecommendations = (locale: string) => {
   return { relatedArticles, relatedTools, scenarioSolutions };
 };
 
-export default function PeriodPainImpactCalculatorPage({ 
-  params 
-}: { 
-  params: Promise<{ locale: string }> 
+export default function PeriodPainImpactCalculatorPage({
+  params
+}: {
+  params: Promise<{ locale: string }>
 }) {
   const resolvedParams = use(params);
   const router = useRouter();
   const currentLocale = resolvedParams?.locale || 'zh';
-  
+
   // 获取当前语言的文本
   const t = TEXTS[currentLocale as keyof typeof TEXTS] || TEXTS.zh;
 
@@ -226,12 +226,12 @@ export default function PeriodPainImpactCalculatorPage({
   const [painLevel, setPainLevel] = useState<number>(0);
   const [workDaysAffected, setWorkDaysAffected] = useState<number>(0);
   const [productivityLoss, setProductivityLoss] = useState<number>(0);
-  
+
   // 使用统一标题管理器设置页面标题
   useEffect(() => {
     const correctTitle = t.metaTitle;
     titleManager.setTitle(correctTitle, currentLocale);
-    
+
     return () => {
       // 组件卸载时不需要清理，因为管理器是单例
     };
@@ -247,14 +247,14 @@ export default function PeriodPainImpactCalculatorPage({
       setSelectedMode('simplified');
     }
     console.log('开始职场影响分析, 模式:', selectedMode || 'simplified');
-    
+
     // 设置计算器状态，不再跳转到其他页面
     setShowCalculator(true);
   };
 
   const handleImpactAnalysis = () => {
     console.log('开始职场影响分析');
-    
+
     // 跳转到职场影响评估页面
     router.push(`/${currentLocale}/interactive-tools/workplace-wellness`);
   };
@@ -282,7 +282,7 @@ export default function PeriodPainImpactCalculatorPage({
 
   const handleBack = () => {
     console.log('返回互动工具页面');
-    
+
     // 返回到互动工具页面
     router.push(`/${currentLocale}/interactive-tools`);
   };
@@ -290,7 +290,7 @@ export default function PeriodPainImpactCalculatorPage({
   return (
         <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       {/* 面包屑导航 */}
-      <Breadcrumb 
+      <Breadcrumb
         items={[
           { label: currentLocale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${currentLocale}/interactive-tools` },
           { label: currentLocale === 'zh' ? '工作影响计算器' : 'Work Impact Calculator' }
@@ -303,7 +303,7 @@ export default function PeriodPainImpactCalculatorPage({
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 leading-tight">
             {t.pageTitle}
           </h1>
-          
+
           {/* 副标题 */}
           <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
             {t.subtitle}
@@ -316,10 +316,10 @@ export default function PeriodPainImpactCalculatorPage({
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
             {/* 简化版 */}
-            <div 
+            <div
               className={`p-6 rounded-lg border-2 cursor-pointer transition-all ${
-                selectedMode === 'simplified' 
-                  ? 'border-purple-500 bg-purple-50' 
+                selectedMode === 'simplified'
+                  ? 'border-purple-500 bg-purple-50'
                   : 'border-gray-200 hover:border-purple-300'
               }`}
               onClick={() => handleModeSelect('simplified')}
@@ -332,12 +332,12 @@ export default function PeriodPainImpactCalculatorPage({
                 {t.simplifiedDesc}
                         </p>
                       </div>
-                      
+
             {/* 详细版 */}
-            <div 
+            <div
               className={`p-6 rounded-lg border-2 cursor-pointer transition-all ${
-                selectedMode === 'detailed' 
-                  ? 'border-purple-500 bg-purple-50' 
+                selectedMode === 'detailed'
+                  ? 'border-purple-500 bg-purple-50'
                   : 'border-gray-200 hover:border-purple-300'
               }`}
               onClick={() => handleModeSelect('detailed')}
@@ -350,12 +350,12 @@ export default function PeriodPainImpactCalculatorPage({
                 {t.detailedDesc}
                         </p>
                       </div>
-                      
+
             {/* 医疗专业版 */}
-            <div 
+            <div
               className={`p-6 rounded-lg border-2 cursor-pointer transition-all ${
-                selectedMode === 'medical' 
-                  ? 'border-purple-500 bg-purple-50' 
+                selectedMode === 'medical'
+                  ? 'border-purple-500 bg-purple-50'
                   : 'border-gray-200 hover:border-purple-300'
               }`}
               onClick={() => handleModeSelect('medical')}
@@ -369,16 +369,16 @@ export default function PeriodPainImpactCalculatorPage({
               </p>
                   </div>
                 </div>
-                
+
           {/* 操作按钮 */}
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                  <button 
+                  <button
               onClick={handleStartAssessment}
               className="px-8 py-3 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition duration-300"
                   >
               {t.startButton}
                   </button>
-                  <button 
+                  <button
               onClick={handleImpactAnalysis}
               className="px-8 py-3 border border-purple-600 text-purple-600 font-semibold rounded-lg shadow-md hover:bg-purple-50 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition duration-300"
                   >
@@ -392,7 +392,7 @@ export default function PeriodPainImpactCalculatorPage({
               <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
                 {currentLocale === 'zh' ? '职场影响评估' : 'Workplace Impact Assessment'}
               </h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 {/* 疼痛程度 */}
                 <div className="bg-white p-6 rounded-lg shadow-sm">
@@ -490,7 +490,7 @@ export default function PeriodPainImpactCalculatorPage({
 
           {/* 返回按钮 */}
           <div className="mt-8 flex justify-center">
-            <button 
+            <button
               onClick={handleBack}
               className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium rounded-lg border border-gray-300 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300"
             >

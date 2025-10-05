@@ -15,7 +15,7 @@
 ```bash
 # 建议的修复顺序（从小到大）
 1. Breadcrumb.tsx - 预计 5-10 个硬编码
-2. Hero.tsx - 预计 10-15 个硬编码  
+2. Hero.tsx - 预计 10-15 个硬编码
 3. 其他小组件 - 每个 < 20 个硬编码
 4. 最后处理 SimplePDFCenter.tsx 的 181 个
 ```
@@ -61,7 +61,7 @@ const enhancedHardcodeDetector = {
     // 医学术语特殊检测
     /dosage|medication|treatment|diagnosis/i
   ],
-  
+
   // 北美市场特殊检查
   northAmericaChecks: {
     medicalAdvicePattern: /you should|we recommend|take.*mg/gi,
@@ -226,10 +226,10 @@ npm run i18n:report   # 综合报告
 const additionalFDAChecks = {
   // 检查是否含有医疗建议语气
   medicalAdvicePattern: /you should|we recommend|take.*mg|dosage/gi,
-  
+
   // 检查是否有足够的免责声明
   disclaimerPlacement: ['footer', 'before-medical-content'],
-  
+
   // 验证引用来源的权威性
   authorizedSources: ['FDA', 'CDC', 'NIH', 'Mayo Clinic', 'WebMD']
 };
@@ -336,13 +336,13 @@ report
 const namingConventions = {
   defaultLocale: 'en',  // 英语为默认语言
   fallbackLocale: 'en', // 回退到英语
-  
+
   medicalTerminology: {
     source: 'FDA_approved_terms', // 使用FDA认证术语
     style: 'american_english',    // 美式英语
     validation: 'medical_professional_review'
   },
-  
+
   contentPriority: {
     primary: 'en',   // 英语内容优先开发
     secondary: 'zh'  // 中文内容后续补充
@@ -392,7 +392,7 @@ const namingConventions = {
    - 检测逻辑相对简单
    - 投入产出比最高
 
-2. **页面模板生成器** - 中等优先级  
+2. **页面模板生成器** - 中等优先级
    - 标准化新页面创建流程
    - 减少重复工作
 
@@ -433,7 +433,7 @@ const medicalContentRules = {
 鉴于您要在国内完成硬编码修复，建议现在重点制定：
 
 1. **硬编码检测规则** - 确保国内修复时能快速识别遗漏
-2. **翻译键命名标准** - 保证修复时的键名一致性  
+2. **翻译键命名标准** - 保证修复时的键名一致性
 3. **医学术语处理规范** - 确保专业术语的准确性
 
 您希望我先帮您制定哪个具体的标准或工具？
@@ -463,7 +463,7 @@ const createPageTemplate = (pageName: string) => {
       description: `{{${pageName}.meta.description}}`,
       keywords: `{{${pageName}.meta.keywords}}`
     },
-    
+
     // 页面内容模板
     content: {
       hero: {
@@ -471,7 +471,7 @@ const createPageTemplate = (pageName: string) => {
         subtitle: `{{${pageName}.hero.subtitle}}`,
         description: `{{${pageName}.hero.description}}`
       },
-      
+
       sections: {
         // 动态section模板
         [sectionName]: {
@@ -576,14 +576,14 @@ const namingConventions = {
       sections: 'pages.naturalTherapies.sections'
     }
   },
-  
+
   // 组件级别
   components: {
     // 格式: components.[componentName].[prop]
     button: 'components.button.text',
     modal: 'components.modal.title'
   },
-  
+
   // 通用内容
   common: {
     // 格式: common.[category].[item]
@@ -629,12 +629,12 @@ class SimpleHardcodeDetector {
     /'([^']+)' : '([^']+)'/g,
     /"([^"]+)" : "([^"]+)"/g
   ];
-  
+
   // 检测单个文件
   detectInFile(filePath: string): HardcodeReport[] {
     const content = fs.readFileSync(filePath, 'utf-8');
     const reports: HardcodeReport[] = [];
-    
+
     this.patterns.forEach(pattern => {
       const matches = content.matchAll(pattern);
       for (const match of matches) {
@@ -646,23 +646,23 @@ class SimpleHardcodeDetector {
         });
       }
     });
-    
+
     return reports;
   }
-  
+
   // 检测整个项目
   detectInProject(): HardcodeReport[] {
     const files = this.getSourceFiles();
     const allReports: HardcodeReport[] = [];
-    
+
     files.forEach(file => {
       const reports = this.detectInFile(file);
       allReports.push(...reports);
     });
-    
+
     return allReports;
   }
-  
+
   // 生成修复建议
   private generateSuggestion(match: RegExpMatchArray): string {
     const [fullMatch, zhText, enText] = match;
@@ -680,10 +680,10 @@ class TranslationKeyChecker {
   checkCompleteness(): CompletenessReport {
     const usedKeys = this.extractUsedKeys();
     const availableKeys = this.extractAvailableKeys();
-    
+
     const missingKeys = usedKeys.filter(key => !availableKeys.includes(key));
     const unusedKeys = availableKeys.filter(key => !usedKeys.includes(key));
-    
+
     return {
       totalUsed: usedKeys.length,
       totalAvailable: availableKeys.length,
@@ -692,19 +692,19 @@ class TranslationKeyChecker {
       completeness: (usedKeys.length - missingKeys.length) / usedKeys.length
     };
   }
-  
+
   // 检查翻译键结构
   checkStructure(): StructureReport {
     const structureIssues: string[] = [];
-    
+
     // 检查命名规范
     const namingIssues = this.checkNamingConventions();
     structureIssues.push(...namingIssues);
-    
+
     // 检查嵌套深度
     const depthIssues = this.checkNestingDepth();
     structureIssues.push(...depthIssues);
-    
+
     return {
       issues: structureIssues,
       score: this.calculateStructureScore(structureIssues)
@@ -854,4 +854,3 @@ esac
 创建简单有效的内容模板
 制定个人工作的最佳实践文档
 开发轻量级的检测工具阻止新的硬编码
-

@@ -26,7 +26,7 @@ async function testSmartSearchArchitecture() {
 
     console.log('📁 检查核心文件...');
     let allFilesExist = true;
-    
+
     for (const file of coreFiles) {
       const filePath = path.join(__dirname, '..', file);
       if (fs.existsSync(filePath)) {
@@ -62,14 +62,14 @@ async function testSmartSearchArchitecture() {
 
     // 分析代码结构
     console.log('\n📊 代码结构分析...');
-    
+
     const typesFile = path.join(__dirname, '..', 'lib/smart-search/types/index.ts');
     const typesContent = fs.readFileSync(typesFile, 'utf8');
-    
+
     const interfaceCount = (typesContent.match(/interface\s+\w+/g) || []).length;
     const typeCount = (typesContent.match(/type\s+\w+/g) || []).length;
     const enumCount = (typesContent.match(/enum\s+\w+/g) || []).length;
-    
+
     console.log(`   - 接口定义: ${interfaceCount} 个`);
     console.log(`   - 类型定义: ${typeCount} 个`);
     console.log(`   - 枚举定义: ${enumCount} 个`);
@@ -78,10 +78,10 @@ async function testSmartSearchArchitecture() {
     // 检查主引擎代码
     const engineFile = path.join(__dirname, '..', 'lib/smart-search/engines/UnifiedSearchEngine.ts');
     const engineContent = fs.readFileSync(engineFile, 'utf8');
-    
+
     const methodCount = (engineContent.match(/async\s+\w+\(/g) || []).length;
     const privateMethodCount = (engineContent.match(/private\s+\w+\(/g) || []).length;
-    
+
     console.log(`\n🏗️ 统一搜索引擎分析:`);
     console.log(`   - 异步方法: ${methodCount} 个`);
     console.log(`   - 私有方法: ${privateMethodCount} 个`);
@@ -89,7 +89,7 @@ async function testSmartSearchArchitecture() {
 
     // 测试现有搜索功能集成
     console.log('\n🔗 测试与现有系统集成...');
-    
+
     // 检查现有搜索组件
     const existingSearchFiles = [
       'components/SearchBox.tsx',
@@ -110,7 +110,7 @@ async function testSmartSearchArchitecture() {
     console.log('   - ✅ 文章搜索');
     console.log('   - ✅ PDF资源搜索');
     console.log('   - ✅ 分类筛选');
-    
+
     console.log('\n   新增智能功能:');
     console.log('   - 🆕 统一搜索引擎');
     console.log('   - 🆕 多维度搜索算法');
@@ -154,4 +154,4 @@ testSmartSearchArchitecture()
       process.exit(1);
     }
   })
-  .catch(console.error); 
+  .catch(console.error);

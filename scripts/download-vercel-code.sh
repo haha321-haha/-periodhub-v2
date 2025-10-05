@@ -62,42 +62,42 @@ show_deployments() {
 # 下载最新部署
 download_latest() {
     log_info "下载最新部署..."
-    
+
     # 创建备份目录
     BACKUP_DIR="vercel-backup-$(date +%Y%m%d-%H%M%S)"
     mkdir -p "$BACKUP_DIR"
-    
+
     # 获取最新部署ID
     LATEST_DEPLOYMENT=$(vercel ls --json | jq -r '.[0].uid')
-    
+
     if [ "$LATEST_DEPLOYMENT" = "null" ] || [ -z "$LATEST_DEPLOYMENT" ]; then
         log_error "未找到部署"
         exit 1
     fi
-    
+
     log_info "最新部署ID: $LATEST_DEPLOYMENT"
-    
+
     # 下载部署
     cd "$BACKUP_DIR"
     vercel pull "$LATEST_DEPLOYMENT" --yes
-    
+
     log_success "部署已下载到: $BACKUP_DIR"
     log_info "文件列表:"
     ls -la
-    
+
     cd ..
 }
 
 # 导出为静态文件
 export_static() {
     log_info "导出为静态文件..."
-    
+
     EXPORT_DIR="vercel-static-$(date +%Y%m%d-%H%M%S)"
     mkdir -p "$EXPORT_DIR"
-    
+
     # 导出静态文件
     vercel export --output="$EXPORT_DIR"
-    
+
     log_success "静态文件已导出到: $EXPORT_DIR"
     log_info "文件列表:"
     ls -la "$EXPORT_DIR"
@@ -106,10 +106,10 @@ export_static() {
 # 从网站下载source maps
 download_sourcemaps() {
     log_info "尝试下载source maps..."
-    
+
     SOURCEMAP_DIR="sourcemaps-$(date +%Y%m%d-%H%M%S)"
     mkdir -p "$SOURCEMAP_DIR"
-    
+
     # 常见的source map URL
     SOURCEMAP_URLS=(
         "https://periodhub.health/_next/static/chunks/pages/_app.js.map"
@@ -117,13 +117,13 @@ download_sourcemaps() {
         "https://periodhub.health/_next/static/chunks/pages/zh.js.map"
         "https://periodhub.health/_next/static/chunks/pages/en.js.map"
     )
-    
+
     for url in "${SOURCEMAP_URLS[@]}"; do
         filename=$(basename "$url")
         log_info "下载: $filename"
         curl -s -o "$SOURCEMAP_DIR/$filename" "$url" || log_warning "下载失败: $url"
     done
-    
+
     log_success "Source maps已下载到: $SOURCEMAP_DIR"
 }
 
@@ -151,9 +151,9 @@ show_help() {
 # 主函数
 main() {
     local action=${1:-"help"}
-    
+
     log_info "Vercel代码下载工具"
-    
+
     case $action in
         "list")
             check_vercel_cli
@@ -189,16 +189,3 @@ main() {
 
 # 运行主函数
 main "$@"
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -41,4 +41,4 @@ export class SearchIndexManager {
   async removeFromIndex(itemId: string): Promise<void> {
     // TODO: 实现索引删除逻辑
   }
-} 
+}

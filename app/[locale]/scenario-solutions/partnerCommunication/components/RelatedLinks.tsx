@@ -113,7 +113,7 @@ export default function RelatedLinks({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {displayedLinks.map((link) => {
           const relevanceBadge = getRelevanceBadge(link.relevance);
-          
+
           return (
             <Link
               key={link.id}
@@ -128,15 +128,15 @@ export default function RelatedLinks({
                   </span>
                 )}
               </div>
-              
+
               <h4 className="font-semibold text-gray-800 mb-2">
                 {link.title}
               </h4>
-              
+
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
                 {link.description}
               </p>
-              
+
               <div className="flex items-center text-primary-600 text-sm font-medium">
                 <span>{tCommon('learnMore')}</span>
                 <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -150,8 +150,8 @@ export default function RelatedLinks({
 
       {/* 查看更多文章按钮 */}
       <div className="text-center">
-        <ViewMoreArticlesButton 
-          locale={locale} 
+        <ViewMoreArticlesButton
+          locale={locale}
           variant="primary"
           size="lg"
         />

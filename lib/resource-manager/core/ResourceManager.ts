@@ -3,10 +3,10 @@
  * 企业级资源管理器核心类
  */
 
-import { 
-  EnterpriseResource, 
-  ResourceSearchFilters, 
-  ResourceSearchResult, 
+import {
+  EnterpriseResource,
+  ResourceSearchFilters,
+  ResourceSearchResult,
   ResourceOperationResult,
   BulkOperationResult,
   ResourceAnalyticsReport,
@@ -48,12 +48,12 @@ export class ResourceManager {
       await this.cacheManager.initialize();
       await this.validator.initialize();
       await this.analyticsEngine.initialize();
-      
+
       // 加载现有资源
       await this.loadResources();
-      
+
       this.isInitialized = true;
-      
+
       return {
         success: true,
         timestamp: new Date()
@@ -81,7 +81,7 @@ export class ResourceManager {
 
     try {
       const cacheKey = `resource:${id}:${locale || 'default'}`;
-      
+
       // 尝试从缓存获取
       if (this.config.cacheEnabled) {
         const cached = await this.cacheManager.get<EnterpriseResource>(cacheKey);
@@ -135,7 +135,7 @@ export class ResourceManager {
    * 搜索资源
    */
   async searchResources(
-    searchTerm: string, 
+    searchTerm: string,
     filters: ResourceSearchFilters = {},
     locale?: Locale
   ): Promise<ResourceOperationResult<ResourceSearchResult>> {
@@ -149,10 +149,10 @@ export class ResourceManager {
 
     try {
       const startTime = Date.now();
-      
+
       // 构建缓存键
       const cacheKey = `search:${searchTerm}:${JSON.stringify(filters)}:${locale || 'default'}`;
-      
+
       // 尝试从缓存获取
       if (this.config.cacheEnabled) {
         const cached = await this.cacheManager.get<ResourceSearchResult>(cacheKey);
@@ -170,49 +170,49 @@ export class ResourceManager {
 
       // 应用状态过滤
       if (filters.status && filters.status.length > 0) {
-        filteredResources = filteredResources.filter(r => 
+        filteredResources = filteredResources.filter(r =>
           filters.status!.includes(r.status)
         );
       }
 
       // 应用类型过滤
       if (filters.type && filters.type.length > 0) {
-        filteredResources = filteredResources.filter(r => 
+        filteredResources = filteredResources.filter(r =>
           filters.type!.includes(r.type)
         );
       }
 
       // 应用分类过滤
       if (filters.categories && filters.categories.length > 0) {
-        filteredResources = filteredResources.filter(r => 
+        filteredResources = filteredResources.filter(r =>
           filters.categories!.includes(r.categoryId)
         );
       }
 
       // 应用标签过滤
       if (filters.tags && filters.tags.length > 0) {
-        filteredResources = filteredResources.filter(r => 
+        filteredResources = filteredResources.filter(r =>
           filters.tags!.some(tag => r.tags.includes(tag))
         );
       }
 
       // 应用难度过滤
       if (filters.difficulty && filters.difficulty.length > 0) {
-        filteredResources = filteredResources.filter(r => 
+        filteredResources = filteredResources.filter(r =>
           filters.difficulty!.includes(r.difficulty)
         );
       }
 
       // 应用目标用户过滤
       if (filters.targetAudience && filters.targetAudience.length > 0) {
-        filteredResources = filteredResources.filter(r => 
+        filteredResources = filteredResources.filter(r =>
           filters.targetAudience!.some(audience => r.targetAudience.includes(audience))
         );
       }
 
       // 应用评分过滤
       if (filters.minimumRating) {
-        filteredResources = filteredResources.filter(r => 
+        filteredResources = filteredResources.filter(r =>
           r.stats.userRating >= filters.minimumRating!
         );
       }
@@ -226,7 +226,7 @@ export class ResourceManager {
           const description = r.description[lang]?.toLowerCase() || '';
           const keywords = r.keywords[lang]?.join(' ').toLowerCase() || '';
           const tags = r.tags.join(' ').toLowerCase();
-          
+
           return title.includes(normalizedSearchTerm) ||
                  description.includes(normalizedSearchTerm) ||
                  keywords.includes(normalizedSearchTerm) ||
@@ -244,8 +244,8 @@ export class ResourceManager {
       const paginatedResources = filteredResources.slice(startIndex, startIndex + pageSize);
 
       // 应用本地化
-      const localizedResources = locale ? 
-        paginatedResources.map(r => this.localizeResource(r, locale)) : 
+      const localizedResources = locale ?
+        paginatedResources.map(r => this.localizeResource(r, locale)) :
         paginatedResources;
 
       const searchTime = Date.now() - startTime;
@@ -427,10 +427,10 @@ export class ResourceManager {
   private localizeResource(resource: EnterpriseResource, locale: Locale): EnterpriseResource {
     // 创建本地化副本
     const localized = { ...resource };
-    
+
     // 这里可以根据locale调整显示内容
     // 例如：只返回指定语言的内容
-    
+
     return localized;
   }
 
@@ -438,13 +438,13 @@ export class ResourceManager {
    * 私有方法：排序资源
    */
   private sortResources(
-    resources: EnterpriseResource[], 
-    sortBy: string, 
+    resources: EnterpriseResource[],
+    sortBy: string,
     sortOrder: 'asc' | 'desc'
   ): void {
     resources.sort((a, b) => {
       let comparison = 0;
-      
+
       switch (sortBy) {
         case 'popularity':
           comparison = a.stats.popularityScore - b.stats.popularityScore;
@@ -466,7 +466,7 @@ export class ResourceManager {
           comparison = scoreA - scoreB;
           break;
       }
-      
+
       return sortOrder === 'desc' ? -comparison : comparison;
     });
   }
@@ -475,13 +475,13 @@ export class ResourceManager {
    * 私有方法：生成搜索建议
    */
   private async generateSearchSuggestions(
-    searchTerm: string, 
+    searchTerm: string,
     locale?: Locale
   ): Promise<string[]> {
     // 基于搜索词生成建议
     const suggestions = ['疼痛', '缓解', '营养', '运动', '医学', '沟通'];
-    
-    return suggestions.filter(s => 
+
+    return suggestions.filter(s =>
       s.toLowerCase().includes(searchTerm.toLowerCase())
     ).slice(0, 5);
   }
@@ -508,12 +508,12 @@ export class ResourceManager {
     const downloadsWeight = 0.4;
     const ratingWeight = 0.2;
     const recencyWeight = 0.1;
-    
+
     const viewsScore = Math.min(stats.views / 1000, 1) * viewsWeight;
     const downloadsScore = Math.min(stats.downloads / 500, 1) * downloadsWeight;
     const ratingScore = (stats.userRating / 5) * ratingWeight;
     const recencyScore = Math.max(0, 1 - (Date.now() - stats.lastAccessed.getTime()) / (1000 * 60 * 60 * 24 * 30)) * recencyWeight;
-    
+
     return (viewsScore + downloadsScore + ratingScore + recencyScore) * 100;
   }
-} 
+}

@@ -65,30 +65,30 @@ function makeRequest(url) {
 function checkSitemap() {
   return new Promise(async (resolve) => {
     console.log('🔍 检查sitemap.xml...');
-    
+
     try {
       const response = await makeRequest(`${CONFIG.baseUrl}/sitemap.xml`);
-      
+
       if (response.status === 200) {
         console.log('✅ Sitemap可访问');
-        
+
         // 检查sitemap内容
         const sitemapContent = await fetch(`${CONFIG.baseUrl}/sitemap.xml`).then(r => r.text());
-        
+
         // 检查PDF路径
         const pdfPaths = sitemapContent.match(/\/downloads\/[^"]*\.pdf/g) || [];
         const oldPdfPaths = sitemapContent.match(/\/pdf-files\/[^"]*\.pdf/g) || [];
-        
+
         console.log(`📊 PDF文件统计:`);
         console.log(`   - 正确路径(/downloads/): ${pdfPaths.length}个`);
         console.log(`   - 错误路径(/pdf-files/): ${oldPdfPaths.length}个`);
-        
+
         if (oldPdfPaths.length > 0) {
           console.log('⚠️  发现错误路径，需要修复sitemap.ts');
         } else {
           console.log('✅ PDF路径配置正确');
         }
-        
+
         resolve({ success: true, pdfPaths, oldPdfPaths });
       } else {
         console.log(`❌ Sitemap访问失败: ${response.status}`);
@@ -104,30 +104,30 @@ function checkSitemap() {
 function checkRobots() {
   return new Promise(async (resolve) => {
     console.log('🔍 检查robots.txt...');
-    
+
     try {
       const response = await makeRequest(`${CONFIG.baseUrl}/robots.txt`);
-      
+
       if (response.status === 200) {
         console.log('✅ Robots.txt可访问');
-        
+
         // 检查robots内容
         const robotsContent = await fetch(`${CONFIG.baseUrl}/robots.txt`).then(r => r.text());
-        
+
         // 检查icon规则
         const iconRules = robotsContent.match(/Disallow:\s*\/icon/g) || [];
         const iconStarRules = robotsContent.match(/Disallow:\s*\/icon\*/g) || [];
-        
+
         console.log(`📊 Robots.txt规则:`);
         console.log(`   - Icon规则: ${iconRules.length}个`);
         console.log(`   - Icon*规则: ${iconStarRules.length}个`);
-        
+
         if (iconStarRules.length > 0) {
           console.log('⚠️  发现过于宽泛的/icon*规则，建议精确化');
         } else {
           console.log('✅ Icon规则配置合理');
         }
-        
+
         resolve({ success: true, iconRules, iconStarRules });
       } else {
         console.log(`❌ Robots.txt访问失败: ${response.status}`);
@@ -143,9 +143,9 @@ function checkRobots() {
 function checkPages() {
   return new Promise(async (resolve) => {
     console.log('🔍 检查问题页面...');
-    
+
     const results = [];
-    
+
     for (const page of CONFIG.testPages) {
       try {
         const response = await makeRequest(`${CONFIG.baseUrl}${page}`);
@@ -154,7 +154,7 @@ function checkPages() {
           status: response.status,
           success: response.status === 200
         });
-        
+
         if (response.status === 200) {
           console.log(`✅ ${page} - 可访问`);
         } else {
@@ -170,10 +170,10 @@ function checkPages() {
         console.log(`❌ ${page} - ${error.message}`);
       }
     }
-    
+
     const successCount = results.filter(r => r.success).length;
     console.log(`📊 页面检查结果: ${successCount}/${results.length} 可访问`);
-    
+
     resolve({ success: true, results });
   });
 }
@@ -181,9 +181,9 @@ function checkPages() {
 function checkPdfs() {
   return new Promise(async (resolve) => {
     console.log('🔍 检查PDF文件...');
-    
+
     const results = [];
-    
+
     for (const pdf of CONFIG.testPdfs) {
       try {
         const response = await makeRequest(`${CONFIG.baseUrl}${pdf}`);
@@ -192,7 +192,7 @@ function checkPdfs() {
           status: response.status,
           success: response.status === 200
         });
-        
+
         if (response.status === 200) {
           console.log(`✅ ${pdf} - 可访问`);
         } else {
@@ -208,10 +208,10 @@ function checkPdfs() {
         console.log(`❌ ${pdf} - ${error.message}`);
       }
     }
-    
+
     const successCount = results.filter(r => r.success).length;
     console.log(`📊 PDF检查结果: ${successCount}/${results.length} 可访问`);
-    
+
     resolve({ success: true, results });
   });
 }
@@ -219,9 +219,9 @@ function checkPdfs() {
 function checkIconPages() {
   return new Promise(async (resolve) => {
     console.log('🔍 检查Icon页面...');
-    
+
     const results = [];
-    
+
     for (const iconPage of CONFIG.iconPages) {
       try {
         const response = await makeRequest(`${CONFIG.baseUrl}${iconPage}`);
@@ -230,7 +230,7 @@ function checkIconPages() {
           status: response.status,
           success: response.status === 200
         });
-        
+
         if (response.status === 200) {
           console.log(`✅ ${iconPage} - 可访问`);
         } else {
@@ -246,10 +246,10 @@ function checkIconPages() {
         console.log(`❌ ${iconPage} - ${error.message}`);
       }
     }
-    
+
     const successCount = results.filter(r => r.success).length;
     console.log(`📊 Icon页面检查结果: ${successCount}/${results.length} 可访问`);
-    
+
     resolve({ success: true, results });
   });
 }
@@ -268,42 +268,42 @@ function generateReport(results) {
     },
     details: results
   };
-  
+
   // 保存报告
   const reportPath = path.join(__dirname, '..', 'reports', `seo-verification-${Date.now()}.json`);
   fs.mkdirSync(path.dirname(reportPath), { recursive: true });
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-  
+
   console.log(`\n📋 验证报告已保存: ${reportPath}`);
-  
+
   return report;
 }
 
 // 主函数
 async function main() {
   console.log('🚀 开始SEO修复验证...\n');
-  
+
   const results = {};
-  
+
   // 执行所有检查
   results.sitemap = await checkSitemap();
   console.log('');
-  
+
   results.robots = await checkRobots();
   console.log('');
-  
+
   results.pages = await checkPages();
   console.log('');
-  
+
   results.pdfs = await checkPdfs();
   console.log('');
-  
+
   results.icons = await checkIconPages();
   console.log('');
-  
+
   // 生成报告
   const report = generateReport(results);
-  
+
   // 输出总结
   console.log('📊 验证总结:');
   console.log(`   Sitemap: ${report.summary.sitemap}`);
@@ -311,15 +311,15 @@ async function main() {
   console.log(`   Pages: ${report.summary.pages}`);
   console.log(`   PDFs: ${report.summary.pdfs}`);
   console.log(`   Icons: ${report.summary.icons}`);
-  
+
   const allPassed = Object.values(report.summary).every(status => status === 'PASS');
-  
+
   if (allPassed) {
     console.log('\n🎉 所有检查通过！SEO配置正常。');
   } else {
     console.log('\n⚠️  发现问题，请根据上述信息进行修复。');
   }
-  
+
   console.log('\n✅ 验证完成！');
 }
 

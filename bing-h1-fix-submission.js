@@ -67,8 +67,3 @@ console.log('6. 等待Bing重新抓取和索引');
 
 console.log(`\n📊 提交报告已保存: ${reportPath}`);
 console.log('\n✅ 准备就绪！请按照上述步骤手动提交到Bing Webmaster Tools');
-
-
-
-
-

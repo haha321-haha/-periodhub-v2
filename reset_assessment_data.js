@@ -13,7 +13,7 @@ localStorage.removeItem('userPreferences');
 console.log('✅ 已清除相关数据');
 
 // 验证清除结果
-const remaining = Object.keys(localStorage).filter(key => 
+const remaining = Object.keys(localStorage).filter(key =>
   key.includes('assessment') || key.includes('history')
 );
 console.log('剩余相关数据:', remaining);

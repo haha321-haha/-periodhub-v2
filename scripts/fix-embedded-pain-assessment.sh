@@ -56,18 +56,18 @@ log_step() {
 
 check_environment() {
     log_step "Step 1: 环境检查"
-    
+
     # 检查文件是否存在
     if [ ! -f "$COMPONENT_FILE" ]; then
         log_error "原始文件不存在: $COMPONENT_FILE"
         exit 1
     fi
-    
+
     if [ ! -f "$FIXED_FILE" ]; then
         log_error "修复文件不存在: $FIXED_FILE"
         exit 1
     fi
-    
+
     # 检查Git状态
     if ! git diff --quiet; then
         log_warning "存在未提交的更改"
@@ -78,18 +78,18 @@ check_environment() {
             exit 0
         fi
     fi
-    
+
     # 检查翻译文件
     if ! grep -q "embeddedPainAssessment" messages/zh.json; then
         log_error "messages/zh.json 中缺少 embeddedPainAssessment 翻译键"
         exit 1
     fi
-    
+
     if ! grep -q "embeddedPainAssessment" messages/en.json; then
         log_error "messages/en.json 中缺少 embeddedPainAssessment 翻译键"
         exit 1
     fi
-    
+
     log_success "环境检查通过"
 }
 
@@ -99,14 +99,14 @@ check_environment() {
 
 create_backup() {
     log_step "Step 2: 创建安全备份"
-    
+
     # 创建备份目录
     mkdir -p "$BACKUP_DIR"
-    
+
     # 备份组件文件
     cp "$COMPONENT_FILE" "$BACKUP_DIR/EmbeddedPainAssessment.tsx.backup"
     log_success "已备份: $COMPONENT_FILE"
-    
+
     # 备份使用该组件的文件
     for file in "${TEST_FILES[@]}"; do
         if [ -f "$file" ]; then
@@ -114,15 +114,15 @@ create_backup() {
             log_success "已备份: $file"
         fi
     done
-    
+
     # 创建Git stash
     git add -A
     git stash push -m "Pre-fix: EmbeddedPainAssessment backup $(date +%Y%m%d_%H%M%S)"
     STASH_REF=$(git stash list | head -1 | cut -d: -f1)
-    
+
     log_success "Git备份完成: $STASH_REF"
     echo "$STASH_REF" > "$BACKUP_DIR/git_stash_ref.txt"
-    
+
     # 创建回滚脚本
     cat > "$BACKUP_DIR/rollback.sh" << 'EOF'
 #!/bin/bash
@@ -141,9 +141,9 @@ fi
 
 echo "✅ 回滚完成！"
 EOF
-    
+
     chmod +x "$BACKUP_DIR/rollback.sh"
-    
+
     log_success "备份目录: $BACKUP_DIR"
     log_info "回滚命令: bash $BACKUP_DIR/rollback.sh"
 }
@@ -154,16 +154,16 @@ EOF
 
 apply_fix() {
     log_step "Step 3: 应用修复"
-    
+
     # 创建修复分支
     BRANCH_NAME="fix/embedded-pain-assessment-i18n-$(date +%Y%m%d_%H%M%S)"
     git checkout -b "$BRANCH_NAME"
     log_success "创建分支: $BRANCH_NAME"
-    
+
     # 应用修复
     cp "$FIXED_FILE" "$COMPONENT_FILE"
     log_success "已应用修复到: $COMPONENT_FILE"
-    
+
     # 统计修改
     log_info "修改统计："
     echo "  - 删除 translations 对象（43行）"
@@ -177,9 +177,9 @@ apply_fix() {
 
 run_build_check() {
     log_step "Step 4: TypeScript 编译检查"
-    
+
     log_info "运行 TypeScript 类型检查..."
-    
+
     if npm run type-check 2>&1 | tee "$BACKUP_DIR/type-check.log"; then
         log_success "TypeScript 编译通过"
     else
@@ -194,9 +194,9 @@ run_build_check() {
 
 run_build_test() {
     log_step "Step 5: 构建测试"
-    
+
     log_info "执行生产构建..."
-    
+
     if npm run build 2>&1 | tee "$BACKUP_DIR/build.log"; then
         log_success "构建成功"
     else
@@ -211,7 +211,7 @@ run_build_test() {
 
 verify_translations() {
     log_step "Step 6: 翻译完整性检查"
-    
+
     log_info "检查中文翻译..."
     REQUIRED_KEYS=(
         "embeddedPainAssessment.title"
@@ -231,7 +231,7 @@ verify_translations() {
         "embeddedPainAssessment.results.severe"
         "embeddedPainAssessment.disclaimer"
     )
-    
+
     MISSING_COUNT=0
     for key in "${REQUIRED_KEYS[@]}"; do
         if ! grep -q "\"${key##*.}\"" messages/zh.json 2>/dev/null; then
@@ -239,7 +239,7 @@ verify_translations() {
             ((MISSING_COUNT++))
         fi
     done
-    
+
     if [ $MISSING_COUNT -eq 0 ]; then
         log_success "所有翻译键完整（16/16）"
     else
@@ -254,7 +254,7 @@ verify_translations() {
 
 generate_report() {
     log_step "Step 7: 生成修复报告"
-    
+
     cat > "$BACKUP_DIR/fix_report.md" << EOF
 # EmbeddedPainAssessment 组件修复报告
 
@@ -328,25 +328,25 @@ EOF
 
 rollback() {
     log_step "执行回滚"
-    
+
     log_warning "正在回滚所有更改..."
-    
+
     # 恢复文件
     if [ -f "$BACKUP_DIR/EmbeddedPainAssessment.tsx.backup" ]; then
         cp "$BACKUP_DIR/EmbeddedPainAssessment.tsx.backup" "$COMPONENT_FILE"
         log_success "已恢复原始文件"
     fi
-    
+
     # 恢复Git状态
     if [ -f "$BACKUP_DIR/git_stash_ref.txt" ]; then
         STASH_REF=$(cat "$BACKUP_DIR/git_stash_ref.txt")
         git stash pop "$STASH_REF" 2>/dev/null || log_warning "无法恢复Git stash"
     fi
-    
+
     # 删除分支
     git checkout main 2>/dev/null || git checkout master 2>/dev/null
     git branch -D "$BRANCH_NAME" 2>/dev/null || true
-    
+
     log_success "回滚完成"
 }
 
@@ -361,38 +361,38 @@ main() {
     echo "║  安全修复 16 处硬编码 + 完整回滚机制                    ║"
     echo "╚════════════════════════════════════════════════════════╝"
     echo ""
-    
+
     # 执行检查
     check_environment
-    
+
     # 创建备份
     create_backup
-    
+
     # 应用修复
     apply_fix
-    
+
     # 运行测试
     if ! verify_translations; then
         log_error "翻译完整性检查失败"
         rollback
         exit 1
     fi
-    
+
     if ! run_build_check; then
         log_error "TypeScript 编译检查失败"
         rollback
         exit 1
     fi
-    
+
     if ! run_build_test; then
         log_error "构建测试失败"
         rollback
         exit 1
     fi
-    
+
     # 生成报告
     generate_report
-    
+
     # 成功提示
     echo ""
     log_success "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -422,5 +422,3 @@ trap 'log_error "发生错误，执行回滚..."; rollback; exit 1' ERR
 main
 
 exit 0
-
-

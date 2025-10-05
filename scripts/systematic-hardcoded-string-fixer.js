@@ -73,11 +73,11 @@ class SystematicHardcodedStringFixer {
 
   scanDirectory(dirPath) {
     const items = fs.readdirSync(dirPath);
-    
+
     items.forEach(item => {
       const fullPath = path.join(dirPath, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         this.scanDirectory(fullPath);
       } else if (item.endsWith('.tsx') || item.endsWith('.ts')) {
@@ -91,13 +91,13 @@ class SystematicHardcodedStringFixer {
     try {
       const content = fs.readFileSync(filePath, 'utf8');
       const relativePath = path.relative(process.cwd(), filePath);
-      
+
       let modifiedContent = content;
       let hasChanges = false;
       const fileChanges = [];
 
       // Check if file already uses translation hooks
-      const hasTranslationHook = content.includes('useTranslations') || 
+      const hasTranslationHook = content.includes('useTranslations') ||
                                  content.includes('useSafeTranslations') ||
                                  content.includes('useInteractiveToolTranslations');
 
@@ -114,7 +114,7 @@ class SystematicHardcodedStringFixer {
         let match;
         while ((match = pattern.exec(content)) !== null) {
           const hardcodedString = match[1];
-          
+
           // Skip if it's already a translation key
           if (hardcodedString.includes('.') && /^[a-zA-Z][a-zA-Z0-9.]*$/.test(hardcodedString)) {
             continue;
@@ -147,10 +147,10 @@ class SystematicHardcodedStringFixer {
 
             const oldPattern = match[0];
             const newPattern = `{${replacement}}`;
-            
+
             modifiedContent = modifiedContent.replace(oldPattern, newPattern);
             hasChanges = true;
-            
+
             fileChanges.push({
               type: 'HARDCODED_STRING_FIX',
               old: oldPattern,
@@ -165,7 +165,7 @@ class SystematicHardcodedStringFixer {
       if (hasChanges) {
         // Write the modified content back to file
         fs.writeFileSync(filePath, modifiedContent);
-        
+
         this.fixes.push({
           file: relativePath,
           changes: fileChanges,
@@ -238,16 +238,16 @@ class SystematicHardcodedStringFixer {
   // Process all files
   processAllFiles() {
     console.log('🚀 Starting systematic hardcoded string fixing...');
-    
+
     this.findComponentFiles();
-    
+
     let totalChanges = 0;
     let processedFiles = 0;
     let skippedFiles = 0;
 
     this.componentFiles.forEach(filePath => {
       const result = this.fixHardcodedStringsInFile(filePath);
-      
+
       if (result.success) {
         processedFiles++;
         totalChanges += result.changes || 0;
@@ -288,7 +288,7 @@ class SystematicHardcodedStringFixer {
 
     const reportPath = path.join(process.cwd(), 'systematic-hardcoded-string-fixes-report.json');
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    
+
     console.log(`📋 Detailed report saved to: ${reportPath}`);
     return report;
   }

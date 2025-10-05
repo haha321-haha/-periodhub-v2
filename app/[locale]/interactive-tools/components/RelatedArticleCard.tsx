@@ -22,7 +22,7 @@ interface RelatedArticleCardProps {
 
 export default function RelatedArticleCard({ article, locale }: RelatedArticleCardProps) {
   const anchorT = useTranslations('anchorTexts');
-  
+
   // 根据图标颜色确定背景色和文字色
   const getIconColors = (color?: string) => {
     switch (color) {
@@ -71,7 +71,7 @@ export default function RelatedArticleCard({ article, locale }: RelatedArticleCa
           <p className="text-gray-600 text-sm mb-3">
             {article.description}
           </p>
-        <Link 
+        <Link
           href={article.href}
           className={`inline-flex items-center ${iconColors.text} hover:${iconColors.text.replace('600', '800')} font-medium text-sm transition-colors`}
           suppressHydrationWarning={true}

@@ -98,13 +98,13 @@ fixStringIssues(content) {
 
     fixed = this.fixMultilineStrings(fixed);
 
-    
 
-    // 2. 处理单行未闭合字符串  
+
+    // 2. 处理单行未闭合字符串
 
     fixed = this.fixSingleLineStrings(fixed);
 
-    
+
 
     // 3. 处理转义字符问题
 
@@ -134,13 +134,13 @@ countUnescapedQuotes(line, quote) {
 
     let escaped = false;
 
-    
+
 
     for (let i = 0; i < line.length; i++) {
 
         const char = line[i];
 
-        
+
 
         if (escaped) {
 
@@ -150,7 +150,7 @@ countUnescapedQuotes(line, quote) {
 
         }
 
-        
+
 
         if (char === '\\') {
 
@@ -160,7 +160,7 @@ countUnescapedQuotes(line, quote) {
 
         }
 
-        
+
 
         if (char === quote) {
 
@@ -170,7 +170,7 @@ countUnescapedQuotes(line, quote) {
 
     }
 
-    
+
 
     return count;
 
@@ -200,7 +200,7 @@ shouldEndString(line) {
 
     ];
 
-    
+
 
     return endPatterns.some(pattern => pattern.test(line.trim()));
 
@@ -264,7 +264,7 @@ shouldEndString(line) {
 
 - 成功修复: 2个文件
 
-- 修复失败: 0个文件  
+- 修复失败: 0个文件
 
 - 跳过处理: 12个文件
 
@@ -586,7 +586,7 @@ const nextConfig = {
 
     unoptimized: true,
 
-    domains: ['periodhub.health'], 
+    domains: ['periodhub.health'],
 
     formats: ['image/webp']
 

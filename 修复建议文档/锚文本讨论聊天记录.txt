@@ -72,7 +72,7 @@ Week 4: 效果稳定，可以评估ROI
 
 **交互工具页面（4个）**：
 - `/zh/interactive-tools/pain-tracker` - 疼痛追踪工具
-- `/zh/interactive-tools/symptom-assessment` - 症状评估工具  
+- `/zh/interactive-tools/symptom-assessment` - 症状评估工具
 - `/zh/interactive-tools/nutrition-recommendation-generator` - 营养推荐生成器
 - `/zh/interactive-tools/period-pain-impact-calculator` - 痛经影响计算器
 
@@ -125,7 +125,7 @@ const relatedArticles = [
   },
   {
     title: "热疗完全指南：天然止痛方案",
-    href: "/zh/articles/heat-therapy-complete-guide", 
+    href: "/zh/articles/heat-therapy-complete-guide",
     description: "深入了解热疗原理和正确使用方法，提升疼痛管理效果"
   },
   {
@@ -155,7 +155,7 @@ const relatedArticles = [
     description: "了解NSAID类止痛药的使用方法和注意事项"
   },
   {
-    title: "工作场景解决方案", 
+    title: "工作场景解决方案",
     href: "/zh/scenario-solutions/work",
     description: "工作中如何应对和管理经期症状"
   },
@@ -172,7 +172,7 @@ const relatedArticles = [
 const relatedArticles = [
   {
     title: "饮食场景解决方案",
-    href: "/zh/scenario-solutions/diet", 
+    href: "/zh/scenario-solutions/diet",
     description: "经期饮食管理的最佳实践和营养建议"
   },
   {
@@ -332,7 +332,7 @@ const relatedArticles = [
 ```typescript
 // 优化前 → 优化后
 "查看更多文章" → "阅读更多痛经缓解方法"
-"了解更多" → "深入了解热疗止痛原理"  
+"了解更多" → "深入了解热疗止痛原理"
 "阅读更多" → "学习自然物理疗法技巧"
 ```
 
@@ -365,7 +365,7 @@ const relatedArticles = [
 // 主页 → 一级页面（1次点击）
 const level1Pages = [
   '/zh/interactive-tools',
-  '/zh/scenario-solutions', 
+  '/zh/scenario-solutions',
   '/zh/health-guide',
   '/zh/natural-therapies',
   '/zh/teen-health'
@@ -381,7 +381,7 @@ const level2Pages = {
   ],
   scenarioSolutions: [
     '/zh/scenario-solutions/exercise',
-    '/zh/scenario-solutions/work', 
+    '/zh/scenario-solutions/work',
     '/zh/scenario-solutions/sleep',
     '/zh/scenario-solutions/diet'
   ]
@@ -402,16 +402,16 @@ const level3Articles = {
 const linkWeightStrategy = {
   // 主页链接权重最高
   homepage: { weight: 10, maxLinks: 15 },
-  
+
   // 一级分类页面权重较高
   categoryPages: { weight: 8, maxLinks: 12 },
-  
+
   // 工具页面权重中等
   toolPages: { weight: 6, maxLinks: 8 },
-  
+
   // 文章页面权重较低
   articlePages: { weight: 4, maxLinks: 5 },
-  
+
   // 相关文章推荐权重最低
   relatedArticles: { weight: 2, maxLinks: 3 }
 };
@@ -428,14 +428,14 @@ const breadcrumbStructure = {
     { label: '交互工具', href: '/zh/interactive-tools' },
     { label: '具体工具名称' }
   ],
-  
-  // 场景页面面包屑  
+
+  // 场景页面面包屑
   scenarioPage: [
     { label: '首页', href: '/zh' },
     { label: '场景解决方案', href: '/zh/scenario-solutions' },
     { label: '具体场景名称' }
   ],
-  
+
   // 文章页面面包屑
   articlePage: [
     { label: '首页', href: '/zh' },
@@ -449,7 +449,7 @@ const breadcrumbStructure = {
 
 #### **第1周：相关文章推荐系统**
 - **Day 1-2**: 交互工具页面相关文章推荐（4个页面）
-- **Day 3-4**: 场景解决方案页面相关文章推荐（4个页面）  
+- **Day 3-4**: 场景解决方案页面相关文章推荐（4个页面）
 - **Day 5**: 测试和验证相关文章推荐功能
 
 #### **第2周：锚文本和内链优化**
@@ -493,7 +493,7 @@ export default function RelatedArticles({ currentPage, articles, locale }: Relat
       </h3>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         {articles.map((article, index) => (
-          <Link 
+          <Link
             key={index}
             href={article.href}
             className="group block p-4 bg-white rounded-lg border border-neutral-200 hover:border-primary-300 hover:shadow-md transition-all duration-200"
@@ -518,7 +518,7 @@ export default function RelatedArticles({ currentPage, articles, locale }: Relat
 export class InternalLinkManager {
   static getRecommendedLinks(pageType: string, currentPage: string): LinkRecommendation[] {
     const recommendations = [];
-    
+
     switch (pageType) {
       case 'tool':
         recommendations.push(...this.getToolPageLinks(currentPage));
@@ -530,10 +530,10 @@ export class InternalLinkManager {
         recommendations.push(...this.getArticlePageLinks(currentPage));
         break;
     }
-    
+
     return recommendations.slice(0, 5); // 最多5个推荐链接
   }
-  
+
   static validateLinkHierarchy(pagePath: string): boolean {
     const pathDepth = pagePath.split('/').length;
     return pathDepth <= 4; // 确保不超过4层深度
@@ -548,7 +548,7 @@ export class InternalLinkManager {
 - 页面深度：平均3.2次点击到达
 - 相关文章推荐：8个页面完成
 
-#### **SEO指标**  
+#### **SEO指标**
 - 锚文本关键词密度：提升40%
 - 页面权重分布：更加均衡
 - 搜索排名：关键词排名提升
@@ -637,7 +637,7 @@ export const ANCHOR_TEXTS = {
     details: '查看完整指南',        // 7字符，保留动作词
     immediate: '立即查看方案'        // 7字符，保留动作词
   },
-  
+
   // 交互工具页面锚文本
   tools: {
     center: '使用工具中心',          // 6字符，简洁明了
@@ -646,7 +646,7 @@ export const ANCHOR_TEXTS = {
     test: '立即开始测试',           // 7字符，保留动作词
     all: '查看所有工具'            // 7字符，保留动作词
   },
-  
+
   // 场景解决方案页面锚文本
   scenarios: {
     exercise: '运动缓解方案',        // 7字符，含场景词
@@ -656,7 +656,7 @@ export const ANCHOR_TEXTS = {
     emergency: '紧急痛经处理',       // 7字符，含核心词
     medication: '药物使用指南'       // 7字符，含场景词
   },
-  
+
   // 导航和CTA按钮锚文本
   navigation: {
     main: '痛经管理指南',           // 7字符，含核心词
@@ -665,14 +665,14 @@ export const ANCHOR_TEXTS = {
     content: '查看完整内容',        // 7字符，保留动作词
     experience: '立即体验工具'        // 7字符，保留动作词
   },
-  
+
   // 青少年专区锚文本
   teen: {
     main: '青少年痛经指南',         // 8字符，含核心词
     development: '发育期健康管理',    // 8字符，含场景词
     education: '经期健康教育'        // 8字符，含场景词
   },
-  
+
   // 自然疗法锚文本
   therapy: {
     main: '自然缓解方法',           // 7字符，含场景词
@@ -680,7 +680,7 @@ export const ANCHOR_TEXTS = {
     yoga: '瑜伽缓解技巧',           // 7字符，含场景词
     diet: '饮食调理建议'            // 7字符，含场景词
   },
-  
+
   // PDF下载锚文本
   pdf: {
     download: '下载健康资料',        // 7字符，保留动作词
@@ -735,11 +735,11 @@ const testVariants = {
   // 测试1: 是否保留动作词
   withAction: '查看痛经指南',
   withoutAction: '痛经管理指南',
-  
+
   // 测试2: 关键词密度
   highKeyword: '痛经缓解方法',
   lowKeyword: '缓解方法指南',
-  
+
   // 测试3: 长度影响
   short: '痛经指南',
   medium: '痛经管理指南',

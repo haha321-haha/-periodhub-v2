@@ -94,7 +94,7 @@ export default function ResultsScreen({ results, onRestart, onBack }: ResultsScr
               </div>
             </div>
           </div>
-          
+
           {/* 进度条 */}
           <div className="w-full bg-white/50 rounded-full h-3">
             <div
@@ -135,7 +135,7 @@ export default function ResultsScreen({ results, onRestart, onBack }: ResultsScr
             <RotateCcw className="w-5 h-5 mr-2" />
             {t('restartButton') || '重新评估'}
           </button>
-          
+
           <button
             onClick={onBack}
             className="flex items-center justify-center px-6 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-300"

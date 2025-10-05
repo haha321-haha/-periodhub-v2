@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { 
-  Download, 
-  Upload, 
-  Shield, 
-  AlertTriangle, 
-  CheckCircle, 
+import {
+  Download,
+  Upload,
+  Shield,
+  AlertTriangle,
+  CheckCircle,
   Clock,
   FileText,
   Database,
@@ -75,7 +75,7 @@ export function BackupRestoreSystem({
 
     try {
       updateBackupProgress(20, 'Reading pain tracker data...');
-      
+
       // Get all pain tracker data
       const records = JSON.parse(localStorage.getItem('enhanced_pain_tracker_records') || '[]');
       const preferences = JSON.parse(localStorage.getItem('enhanced_pain_tracker_preferences') || '{}');
@@ -183,7 +183,7 @@ export function BackupRestoreSystem({
 
       // Restore data
       localStorage.setItem('enhanced_pain_tracker_records', JSON.stringify(backupData.records));
-      
+
       if (backupData.preferences) {
         localStorage.setItem('enhanced_pain_tracker_preferences', JSON.stringify(backupData.preferences));
       }
@@ -450,7 +450,7 @@ export function BackupRestoreSystem({
               <div className="flex items-start">
                 <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 mr-2 flex-shrink-0" />
                 <div className="text-sm text-yellow-800">
-                  <strong>Warning:</strong> Restoring from backup will replace all current data. 
+                  <strong>Warning:</strong> Restoring from backup will replace all current data.
                   A safety backup of your current data will be created automatically.
                 </div>
               </div>
@@ -485,7 +485,7 @@ export function BackupRestoreSystem({
               <div className="space-y-4">
                 <div className="bg-gray-50 rounded-lg p-4">
                   <h4 className="font-medium text-gray-900 mb-3">Integrity Report</h4>
-                  
+
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div className="text-center">
                       <div className="text-2xl font-bold text-gray-900">{integrityReport.totalRecords}</div>

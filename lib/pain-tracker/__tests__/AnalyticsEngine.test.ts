@@ -18,7 +18,7 @@ describe('AnalyticsEngine', () => {
 
   beforeEach(() => {
     analyticsEngine = new AnalyticsEngine();
-    
+
     // Create mock pain records for testing
     mockRecords = [
       {
@@ -134,7 +134,7 @@ describe('AnalyticsEngine', () => {
 
     it('should calculate pain type frequency correctly', () => {
       const analytics = analyticsEngine.calculateAnalytics(mockRecords);
-      
+
       // Cramping appears 3 times, aching 2 times, sharp 1 time, pressure 1 time
       // Total pain types: 7
       const crampingType = analytics.commonPainTypes.find(type => type.type === 'cramping');
@@ -145,7 +145,7 @@ describe('AnalyticsEngine', () => {
 
     it('should calculate treatment effectiveness correctly', () => {
       const analytics = analyticsEngine.calculateAnalytics(mockRecords);
-      
+
       const ibuprofenTreatment = analytics.effectiveTreatments.find(t => t.treatment === 'Ibuprofen');
       expect(ibuprofenTreatment).toBeDefined();
       expect(ibuprofenTreatment!.usageCount).toBe(3);
@@ -155,7 +155,7 @@ describe('AnalyticsEngine', () => {
 
     it('should calculate cycle patterns correctly', () => {
       const analytics = analyticsEngine.calculateAnalytics(mockRecords);
-      
+
       const day1Pattern = analytics.cyclePatterns.find(p => p.phase === 'day_1');
       expect(day1Pattern).toBeDefined();
       expect(day1Pattern!.averagePainLevel).toBe(8);
@@ -168,7 +168,7 @@ describe('AnalyticsEngine', () => {
   describe('identifyPatterns', () => {
     it('should identify menstrual patterns', () => {
       const patterns = analyticsEngine.identifyPatterns(mockRecords);
-      
+
       const menstrualPattern = patterns.find(p => p.type === 'menstrual_cycle');
       expect(menstrualPattern).toBeDefined();
       expect(menstrualPattern!.confidence).toBeGreaterThan(0);
@@ -178,7 +178,7 @@ describe('AnalyticsEngine', () => {
 
     it('should identify treatment patterns', () => {
       const patterns = analyticsEngine.identifyPatterns(mockRecords);
-      
+
       const treatmentPattern = patterns.find(p => p.type === 'treatment_response');
       expect(treatmentPattern).toBeDefined();
       expect(treatmentPattern!.confidence).toBeGreaterThan(0);
@@ -191,7 +191,7 @@ describe('AnalyticsEngine', () => {
 
     it('should sort patterns by confidence', () => {
       const patterns = analyticsEngine.identifyPatterns(mockRecords);
-      
+
       for (let i = 1; i < patterns.length; i++) {
         expect(patterns[i - 1].confidence).toBeGreaterThanOrEqual(patterns[i].confidence);
       }
@@ -204,11 +204,11 @@ describe('AnalyticsEngine', () => {
         ...record,
         painLevel: 8
       }));
-      
+
       const analytics = analyticsEngine.calculateAnalytics(highPainRecords);
       const insights = analyticsEngine.generateInsights(analytics);
-      
-      expect(insights.some(insight => 
+
+      expect(insights.some(insight =>
         insight.includes('high') && insight.includes('healthcare provider')
       )).toBe(true);
     });
@@ -218,11 +218,11 @@ describe('AnalyticsEngine', () => {
         ...record,
         painLevel: 2
       }));
-      
+
       const analytics = analyticsEngine.calculateAnalytics(lowPainRecords);
       const insights = analyticsEngine.generateInsights(analytics);
-      
-      expect(insights.some(insight => 
+
+      expect(insights.some(insight =>
         insight.includes('low') && insight.includes('working well')
       )).toBe(true);
     });
@@ -230,8 +230,8 @@ describe('AnalyticsEngine', () => {
     it('should generate insights for effective treatments', () => {
       const analytics = analyticsEngine.calculateAnalytics(mockRecords);
       const insights = analyticsEngine.generateInsights(analytics);
-      
-      expect(insights.some(insight => 
+
+      expect(insights.some(insight =>
         insight.includes('Ibuprofen') && insight.includes('effectiveness')
       )).toBe(true);
     });
@@ -239,8 +239,8 @@ describe('AnalyticsEngine', () => {
     it('should generate insights for data completeness', () => {
       const analytics = analyticsEngine.calculateAnalytics(mockRecords);
       const insights = analyticsEngine.generateInsights(analytics);
-      
-      expect(insights.some(insight => 
+
+      expect(insights.some(insight =>
         insight.includes('tracking') || insight.includes('data')
       )).toBe(true);
     });
@@ -263,10 +263,10 @@ describe('AnalyticsEngine', () => {
           painLevel: 5 + Math.random() * 3
         });
       }
-      
+
       const predictions = analyticsEngine.predictTrends(extendedRecords);
       expect(predictions).toHaveLength(7);
-      
+
       predictions.forEach(prediction => {
         expect(prediction.date).toBeDefined();
         expect(prediction.painLevel).toBeGreaterThanOrEqual(0);
@@ -284,15 +284,15 @@ describe('AnalyticsEngine', () => {
           painLevel: 5
         });
       }
-      
+
       const predictions = analyticsEngine.predictTrends(extendedRecords);
       const lastRecordDate = new Date(extendedRecords[extendedRecords.length - 1].date);
-      
+
       predictions.forEach((prediction, index) => {
         const predictionDate = new Date(prediction.date);
         const expectedDate = new Date(lastRecordDate);
         expectedDate.setDate(expectedDate.getDate() + index + 1);
-        
+
         expect(predictionDate.toDateString()).toBe(expectedDate.toDateString());
       });
     });
@@ -306,11 +306,11 @@ describe('AnalyticsEngine', () => {
 
     it('should calculate menstrual pain correlation', () => {
       const correlations = analyticsEngine.calculateCorrelations(mockRecords);
-      
-      const menstrualCorrelation = correlations.find(c => 
+
+      const menstrualCorrelation = correlations.find(c =>
         c.factor1 === 'Menstrual Phase' && c.factor2 === 'Pain Level'
       );
-      
+
       if (menstrualCorrelation) {
         expect(menstrualCorrelation.correlation).toBeGreaterThanOrEqual(-1);
         expect(menstrualCorrelation.correlation).toBeLessThanOrEqual(1);
@@ -322,7 +322,7 @@ describe('AnalyticsEngine', () => {
 
     it('should sort correlations by significance', () => {
       const correlations = analyticsEngine.calculateCorrelations(mockRecords);
-      
+
       for (let i = 1; i < correlations.length; i++) {
         expect(correlations[i - 1].significance).toBeGreaterThanOrEqual(correlations[i].significance);
       }
@@ -337,7 +337,7 @@ describe('AnalyticsEngine', () => {
           painLevel: NaN
         }
       ] as PainRecord[];
-      
+
       expect(() => {
         analyticsEngine.calculateAnalytics(invalidRecords);
       }).not.toThrow();
@@ -347,7 +347,7 @@ describe('AnalyticsEngine', () => {
       expect(() => {
         analyticsEngine.calculateAnalytics(null as any);
       }).toThrow();
-      
+
       expect(() => {
         analyticsEngine.calculateAnalytics(undefined as any);
       }).toThrow();
@@ -360,7 +360,7 @@ describe('AnalyticsEngine', () => {
         const insights = analyticsEngine.generateInsights(analytics);
         const predictions = analyticsEngine.predictTrends([]);
         const correlations = analyticsEngine.calculateCorrelations([]);
-        
+
         expect(analytics).toBeDefined();
         expect(patterns).toHaveLength(0);
         expect(insights).toBeInstanceOf(Array);
@@ -387,7 +387,7 @@ describe('AnalyticsEngine', () => {
         createdAt: new Date(),
         updatedAt: new Date()
       };
-      
+
       expect(() => {
         analyticsEngine.calculateAnalytics([minimalRecord]);
       }).not.toThrow();
@@ -398,7 +398,7 @@ describe('AnalyticsEngine', () => {
         { ...mockRecords[0], painLevel: 0 },
         { ...mockRecords[1], painLevel: 10 }
       ];
-      
+
       const analytics = analyticsEngine.calculateAnalytics(extremeRecords);
       expect(analytics.averagePainLevel).toBe(5);
     });

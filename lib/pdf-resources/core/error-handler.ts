@@ -1,33 +1,33 @@
 // lib/pdf-resources/core/error-handler.ts
 
-import { ErrorContext, SystemEvent } from '../types/resource-types';
-import { MonitoringConfig, LogLevel } from '../types/config-types';
+import { ErrorContext, SystemEvent } from "../types/resource-types";
+import { MonitoringConfig, LogLevel } from "../types/config-types";
 
 /**
  * 错误类型枚举
  */
 export enum ErrorType {
-  VALIDATION_ERROR = 'VALIDATION_ERROR',
-  RESOURCE_NOT_FOUND = 'RESOURCE_NOT_FOUND',
-  FILE_ACCESS_ERROR = 'FILE_ACCESS_ERROR',
-  CACHE_ERROR = 'CACHE_ERROR',
-  STORAGE_ERROR = 'STORAGE_ERROR',
-  NETWORK_ERROR = 'NETWORK_ERROR',
-  PERMISSION_ERROR = 'PERMISSION_ERROR',
-  CONFIGURATION_ERROR = 'CONFIGURATION_ERROR',
-  SYSTEM_ERROR = 'SYSTEM_ERROR',
-  USER_ERROR = 'USER_ERROR',
-  BUSINESS_LOGIC_ERROR = 'BUSINESS_LOGIC_ERROR'
+  VALIDATION_ERROR = "VALIDATION_ERROR",
+  RESOURCE_NOT_FOUND = "RESOURCE_NOT_FOUND",
+  FILE_ACCESS_ERROR = "FILE_ACCESS_ERROR",
+  CACHE_ERROR = "CACHE_ERROR",
+  STORAGE_ERROR = "STORAGE_ERROR",
+  NETWORK_ERROR = "NETWORK_ERROR",
+  PERMISSION_ERROR = "PERMISSION_ERROR",
+  CONFIGURATION_ERROR = "CONFIGURATION_ERROR",
+  SYSTEM_ERROR = "SYSTEM_ERROR",
+  USER_ERROR = "USER_ERROR",
+  BUSINESS_LOGIC_ERROR = "BUSINESS_LOGIC_ERROR",
 }
 
 /**
  * 错误严重级别
  */
 export enum ErrorSeverity {
-  LOW = 'low',
-  MEDIUM = 'medium',
-  HIGH = 'high',
-  CRITICAL = 'critical'
+  LOW = "low",
+  MEDIUM = "medium",
+  HIGH = "high",
+  CRITICAL = "critical",
 }
 
 /**
@@ -72,16 +72,16 @@ class LoggingErrorStrategy implements IErrorStrategy {
     const logEntry = this.formatLogEntry(error);
 
     switch (this.config.logging.destination) {
-      case 'console':
+      case "console":
         this.logToConsole(logLevel, logEntry);
         break;
-      case 'file':
+      case "file":
         await this.logToFile(logLevel, logEntry);
         break;
-      case 'remote':
+      case "remote":
         await this.logToRemote(logLevel, logEntry);
         break;
-      case 'multiple':
+      case "multiple":
         this.logToConsole(logLevel, logEntry);
         if (this.config.logging.file) {
           await this.logToFile(logLevel, logEntry);
@@ -96,15 +96,15 @@ class LoggingErrorStrategy implements IErrorStrategy {
   private getLogLevel(severity: ErrorSeverity): LogLevel {
     switch (severity) {
       case ErrorSeverity.LOW:
-        return 'info';
+        return "info";
       case ErrorSeverity.MEDIUM:
-        return 'warn';
+        return "warn";
       case ErrorSeverity.HIGH:
-        return 'error';
+        return "error";
       case ErrorSeverity.CRITICAL:
-        return 'fatal';
+        return "fatal";
       default:
-        return 'error';
+        return "error";
     }
   }
 
@@ -118,29 +118,31 @@ class LoggingErrorStrategy implements IErrorStrategy {
       code: error.code,
       details: error.details,
       context: error.context,
-      metadata: error.metadata
+      metadata: error.metadata,
     };
 
-    if (this.config.logging.format === 'json') {
+    if (this.config.logging.format === "json") {
       return JSON.stringify(entry);
     } else {
-      return `[${entry.timestamp}] ${entry.level.toUpperCase()}: ${entry.message} (${entry.type}${entry.code ? `:${entry.code}` : ''})`;
+      return `[${entry.timestamp}] ${entry.level.toUpperCase()}: ${
+        entry.message
+      } (${entry.type}${entry.code ? `:${entry.code}` : ""})`;
     }
   }
 
   private logToConsole(level: LogLevel, entry: any): void {
     switch (level) {
-      case 'debug':
+      case "debug":
         console.debug(entry);
         break;
-      case 'info':
+      case "info":
         console.info(entry);
         break;
-      case 'warn':
+      case "warn":
         console.warn(entry);
         break;
-      case 'error':
-      case 'fatal':
+      case "error":
+      case "fatal":
         console.error(entry);
         break;
     }
@@ -150,16 +152,16 @@ class LoggingErrorStrategy implements IErrorStrategy {
     if (!this.config.logging.file) return;
 
     try {
-      const fs = await import('fs/promises');
-      const path = await import('path');
-      
+      const fs = await import("fs/promises");
+      const path = await import("path");
+
       const logDir = path.dirname(this.config.logging.file.path);
       await fs.mkdir(logDir, { recursive: true });
-      
-      const logLine = typeof entry === 'string' ? entry : JSON.stringify(entry);
-      await fs.appendFile(this.config.logging.file.path, logLine + '\n');
+
+      const logLine = typeof entry === "string" ? entry : JSON.stringify(entry);
+      await fs.appendFile(this.config.logging.file.path, logLine + "\n");
     } catch (error) {
-      console.error('Failed to write to log file:', error);
+      console.error("Failed to write to log file:", error);
     }
   }
 
@@ -168,25 +170,28 @@ class LoggingErrorStrategy implements IErrorStrategy {
 
     try {
       const response = await fetch(this.config.logging.remote.endpoint, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           ...(this.config.logging.remote.apiKey && {
-            'Authorization': `Bearer ${this.config.logging.remote.apiKey}`
-          })
+            Authorization: `Bearer ${this.config.logging.remote.apiKey}`,
+          }),
         },
         body: JSON.stringify({
           timestamp: new Date().toISOString(),
           level,
-          entry: typeof entry === 'string' ? { message: entry } : entry
-        })
+          entry: typeof entry === "string" ? { message: entry } : entry,
+        }),
       });
 
       if (!response.ok) {
-        console.error('Failed to send log to remote endpoint:', response.statusText);
+        console.error(
+          "Failed to send log to remote endpoint:",
+          response.statusText,
+        );
       }
     } catch (error) {
-      console.error('Failed to send log to remote endpoint:', error);
+      console.error("Failed to send log to remote endpoint:", error);
     }
   }
 }
@@ -224,26 +229,29 @@ class MonitoringErrorStrategy implements IErrorStrategy {
           severity: error.severity,
           stackTrace: error.stackTrace,
           context: error.context,
-          metadata: error.metadata
-        }
+          metadata: error.metadata,
+        },
       };
 
       switch (this.config.errorTracking.service) {
-        case 'sentry':
+        case "sentry":
           await this.sendToSentry(payload);
           break;
-        case 'bugsnag':
+        case "bugsnag":
           await this.sendToBugsnag(payload);
           break;
-        case 'rollbar':
+        case "rollbar":
           await this.sendToRollbar(payload);
           break;
-        case 'custom':
+        case "custom":
           await this.sendToCustomEndpoint(payload);
           break;
       }
     } catch (monitoringError) {
-      console.error('Failed to send error to monitoring service:', monitoringError);
+      console.error(
+        "Failed to send error to monitoring service:",
+        monitoringError,
+      );
     }
   }
 
@@ -252,11 +260,11 @@ class MonitoringErrorStrategy implements IErrorStrategy {
 
     // 简化的Sentry集成
     const response = await fetch(this.config.errorTracking.dsn, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
@@ -266,17 +274,17 @@ class MonitoringErrorStrategy implements IErrorStrategy {
 
   private async sendToBugsnag(payload: any): Promise<void> {
     // Bugsnag集成实现
-    console.log('Sending to Bugsnag:', payload);
+    console.log("Sending to Bugsnag:", payload);
   }
 
   private async sendToRollbar(payload: any): Promise<void> {
     // Rollbar集成实现
-    console.log('Sending to Rollbar:', payload);
+    console.log("Sending to Rollbar:", payload);
   }
 
   private async sendToCustomEndpoint(payload: any): Promise<void> {
     // 自定义监控端点
-    console.log('Sending to custom monitoring:', payload);
+    console.log("Sending to custom monitoring:", payload);
   }
 }
 
@@ -289,26 +297,34 @@ class RetryErrorStrategy implements IErrorStrategy {
   private readonly retryDelay = 1000; // 1秒
 
   canHandle(error: ErrorDetails): boolean {
-    return error.retryable === true && this.getRetryCount(error) < this.maxRetries;
+    return (
+      error.retryable === true && this.getRetryCount(error) < this.maxRetries
+    );
   }
 
   async handle(error: ErrorDetails): Promise<void> {
     const retryKey = this.getRetryKey(error);
     const currentRetries = this.getRetryCount(error);
-    
+
     this.retryCount.set(retryKey, currentRetries + 1);
 
     // 指数退避
     const delay = this.retryDelay * Math.pow(2, currentRetries);
-    
+
     setTimeout(() => {
       // 这里应该重新执行失败的操作
-      console.log(`Retrying operation after ${delay}ms (attempt ${currentRetries + 1}/${this.maxRetries})`);
+      console.log(
+        `Retrying operation after ${delay}ms (attempt ${currentRetries + 1}/${
+          this.maxRetries
+        })`,
+      );
     }, delay);
   }
 
   private getRetryKey(error: ErrorDetails): string {
-    return `${error.type}:${error.context?.operation || 'unknown'}:${error.context?.resourceId || 'unknown'}`;
+    return `${error.type}:${error.context?.operation || "unknown"}:${
+      error.context?.resourceId || "unknown"
+    }`;
   }
 
   private getRetryCount(error: ErrorDetails): number {
@@ -322,7 +338,10 @@ class RetryErrorStrategy implements IErrorStrategy {
  */
 class NotificationErrorStrategy implements IErrorStrategy {
   canHandle(error: ErrorDetails): boolean {
-    return error.severity === ErrorSeverity.HIGH || error.severity === ErrorSeverity.CRITICAL;
+    return (
+      error.severity === ErrorSeverity.HIGH ||
+      error.severity === ErrorSeverity.CRITICAL
+    );
   }
 
   async handle(error: ErrorDetails): Promise<void> {
@@ -332,10 +351,10 @@ class NotificationErrorStrategy implements IErrorStrategy {
 
   private async sendNotification(error: ErrorDetails): Promise<void> {
     const message = this.formatNotificationMessage(error);
-    
+
     // 示例：发送到Slack、邮件、短信等
-    console.log('CRITICAL ERROR NOTIFICATION:', message);
-    
+    console.log("CRITICAL ERROR NOTIFICATION:", message);
+
     // 实际实现中可以集成:
     // - Slack Webhook
     // - SendGrid邮件
@@ -352,9 +371,9 @@ class NotificationErrorStrategy implements IErrorStrategy {
 严重级别: ${error.severity}
 消息: ${error.message}
 时间: ${error.timestamp.toISOString()}
-${error.context?.operation ? `操作: ${error.context.operation}` : ''}
-${error.context?.resourceId ? `资源ID: ${error.context.resourceId}` : ''}
-${error.suggestion ? `建议: ${error.suggestion}` : ''}
+${error.context?.operation ? `操作: ${error.context.operation}` : ""}
+${error.context?.resourceId ? `资源ID: ${error.context.resourceId}` : ""}
+${error.suggestion ? `建议: ${error.suggestion}` : ""}
     `.trim();
   }
 }
@@ -367,7 +386,7 @@ class RecoveryErrorStrategy implements IErrorStrategy {
     return [
       ErrorType.CACHE_ERROR,
       ErrorType.STORAGE_ERROR,
-      ErrorType.NETWORK_ERROR
+      ErrorType.NETWORK_ERROR,
     ].includes(error.type);
   }
 
@@ -385,12 +404,12 @@ class RecoveryErrorStrategy implements IErrorStrategy {
           break;
       }
     } catch (recoveryError) {
-      console.error('Error recovery failed:', recoveryError);
+      console.error("Error recovery failed:", recoveryError);
     }
   }
 
   private async recoverFromCacheError(error: ErrorDetails): Promise<void> {
-    console.log('Attempting cache error recovery...');
+    console.log("Attempting cache error recovery...");
     // 实现缓存恢复逻辑：
     // - 清除损坏的缓存
     // - 切换到备用缓存
@@ -398,7 +417,7 @@ class RecoveryErrorStrategy implements IErrorStrategy {
   }
 
   private async recoverFromStorageError(error: ErrorDetails): Promise<void> {
-    console.log('Attempting storage error recovery...');
+    console.log("Attempting storage error recovery...");
     // 实现存储恢复逻辑：
     // - 检查磁盘空间
     // - 切换到备用存储
@@ -406,7 +425,7 @@ class RecoveryErrorStrategy implements IErrorStrategy {
   }
 
   private async recoverFromNetworkError(error: ErrorDetails): Promise<void> {
-    console.log('Attempting network error recovery...');
+    console.log("Attempting network error recovery...");
     // 实现网络恢复逻辑：
     // - 切换到备用端点
     // - 启用离线模式
@@ -420,7 +439,8 @@ class RecoveryErrorStrategy implements IErrorStrategy {
 export class ErrorHandler {
   private strategies: IErrorStrategy[] = [];
   private config: MonitoringConfig;
-  private eventListeners: Map<ErrorType, Array<(error: ErrorDetails) => void>> = new Map();
+  private eventListeners: Map<ErrorType, Array<(error: ErrorDetails) => void>> =
+    new Map();
 
   constructor(config: MonitoringConfig) {
     this.config = config;
@@ -432,20 +452,20 @@ export class ErrorHandler {
    */
   async handleError(
     error: Error | ErrorDetails,
-    context?: Partial<ErrorContext>
+    context?: Partial<ErrorContext>,
   ): Promise<void> {
     const errorDetails = this.normalizeError(error, context);
-    
+
     // 触发事件监听器
     this.triggerEventListeners(errorDetails);
 
     // 执行所有适用的错误处理策略
-    const applicableStrategies = this.strategies.filter(strategy => 
-      strategy.canHandle(errorDetails)
+    const applicableStrategies = this.strategies.filter((strategy) =>
+      strategy.canHandle(errorDetails),
     );
 
     await Promise.allSettled(
-      applicableStrategies.map(strategy => strategy.handle(errorDetails))
+      applicableStrategies.map((strategy) => strategy.handle(errorDetails)),
     );
   }
 
@@ -455,7 +475,7 @@ export class ErrorHandler {
   logError(
     message: string,
     context?: Partial<ErrorContext>,
-    severity: ErrorSeverity = ErrorSeverity.MEDIUM
+    severity: ErrorSeverity = ErrorSeverity.MEDIUM,
   ): void {
     const errorDetails: ErrorDetails = {
       type: ErrorType.SYSTEM_ERROR,
@@ -463,7 +483,7 @@ export class ErrorHandler {
       message,
       context: this.buildContext(context),
       timestamp: new Date(),
-      retryable: false
+      retryable: false,
     };
 
     this.handleError(errorDetails);
@@ -472,31 +492,27 @@ export class ErrorHandler {
   /**
    * 记录警告
    */
-  logWarning(
-    message: string,
-    context?: Partial<ErrorContext>
-  ): void {
+  logWarning(message: string, context?: Partial<ErrorContext>): void {
     this.logError(message, context, ErrorSeverity.LOW);
   }
 
   /**
    * 记录信息
    */
-  logInfo(
-    message: string,
-    context?: Partial<ErrorContext>
-  ): void {
+  logInfo(message: string, context?: Partial<ErrorContext>): void {
     const errorDetails: ErrorDetails = {
       type: ErrorType.SYSTEM_ERROR,
       severity: ErrorSeverity.LOW,
       message,
       context: this.buildContext(context),
       timestamp: new Date(),
-      retryable: false
+      retryable: false,
     };
 
     // 只使用日志策略
-    const loggingStrategy = this.strategies.find(s => s instanceof LoggingErrorStrategy);
+    const loggingStrategy = this.strategies.find(
+      (s) => s instanceof LoggingErrorStrategy,
+    );
     if (loggingStrategy) {
       loggingStrategy.handle(errorDetails);
     }
@@ -508,7 +524,7 @@ export class ErrorHandler {
   createBusinessError(
     message: string,
     code?: string,
-    context?: Partial<ErrorContext>
+    context?: Partial<ErrorContext>,
   ): ErrorDetails {
     return {
       type: ErrorType.BUSINESS_LOGIC_ERROR,
@@ -517,7 +533,7 @@ export class ErrorHandler {
       code,
       context: this.buildContext(context),
       timestamp: new Date(),
-      retryable: false
+      retryable: false,
     };
   }
 
@@ -527,7 +543,7 @@ export class ErrorHandler {
   createValidationError(
     message: string,
     field?: string,
-    context?: Partial<ErrorContext>
+    context?: Partial<ErrorContext>,
   ): ErrorDetails {
     return {
       type: ErrorType.VALIDATION_ERROR,
@@ -536,7 +552,7 @@ export class ErrorHandler {
       details: field ? `验证失败字段: ${field}` : undefined,
       context: this.buildContext(context),
       timestamp: new Date(),
-      retryable: false
+      retryable: false,
     };
   }
 
@@ -545,7 +561,7 @@ export class ErrorHandler {
    */
   addEventListener(
     errorType: ErrorType,
-    listener: (error: ErrorDetails) => void
+    listener: (error: ErrorDetails) => void,
   ): void {
     if (!this.eventListeners.has(errorType)) {
       this.eventListeners.set(errorType, []);
@@ -558,7 +574,7 @@ export class ErrorHandler {
    */
   removeEventListener(
     errorType: ErrorType,
-    listener: (error: ErrorDetails) => void
+    listener: (error: ErrorDetails) => void,
   ): void {
     const listeners = this.eventListeners.get(errorType);
     if (listeners) {
@@ -601,7 +617,7 @@ export class ErrorHandler {
       totalErrors: 0,
       errorsByType: {} as Record<ErrorType, number>,
       errorsBySeverity: {} as Record<ErrorSeverity, number>,
-      recentErrors: []
+      recentErrors: [],
     };
   }
 
@@ -627,7 +643,7 @@ export class ErrorHandler {
       new MonitoringErrorStrategy(this.config),
       new RetryErrorStrategy(),
       new NotificationErrorStrategy(),
-      new RecoveryErrorStrategy()
+      new RecoveryErrorStrategy(),
     ];
   }
 
@@ -638,18 +654,18 @@ export class ErrorHandler {
 
   private normalizeError(
     error: Error | ErrorDetails,
-    context?: Partial<ErrorContext>
+    context?: Partial<ErrorContext>,
   ): ErrorDetails {
     if (this.isErrorDetails(error)) {
       // 合并现有ErrorDetails的上下文和新上下文
       const mergedContext = this.buildContext({
         ...error.context,
-        ...context
+        ...context,
       });
-      
+
       return {
         ...error,
-        context: mergedContext
+        context: mergedContext,
       };
     }
 
@@ -662,49 +678,49 @@ export class ErrorHandler {
       context: this.buildContext(context),
       timestamp: new Date(),
       stackTrace: error.stack,
-      retryable: this.isRetryableError(error)
+      retryable: this.isRetryableError(error),
     };
   }
 
   private isErrorDetails(obj: any): obj is ErrorDetails {
-    return obj && typeof obj === 'object' && 'type' in obj && 'severity' in obj;
+    return obj && typeof obj === "object" && "type" in obj && "severity" in obj;
   }
 
   private inferErrorType(error: Error): ErrorType {
     const message = error.message.toLowerCase();
-    
-    if (message.includes('not found')) {
+
+    if (message.includes("not found")) {
       return ErrorType.RESOURCE_NOT_FOUND;
     }
-    if (message.includes('permission') || message.includes('unauthorized')) {
+    if (message.includes("permission") || message.includes("unauthorized")) {
       return ErrorType.PERMISSION_ERROR;
     }
-    if (message.includes('network') || message.includes('fetch')) {
+    if (message.includes("network") || message.includes("fetch")) {
       return ErrorType.NETWORK_ERROR;
     }
-    if (message.includes('cache')) {
+    if (message.includes("cache")) {
       return ErrorType.CACHE_ERROR;
     }
-    if (message.includes('storage') || message.includes('file')) {
+    if (message.includes("storage") || message.includes("file")) {
       return ErrorType.STORAGE_ERROR;
     }
-    if (message.includes('validation')) {
+    if (message.includes("validation")) {
       return ErrorType.VALIDATION_ERROR;
     }
-    
+
     return ErrorType.SYSTEM_ERROR;
   }
 
   private inferErrorSeverity(error: Error): ErrorSeverity {
     const message = error.message.toLowerCase();
-    
-    if (message.includes('critical') || message.includes('fatal')) {
+
+    if (message.includes("critical") || message.includes("fatal")) {
       return ErrorSeverity.CRITICAL;
     }
-    if (message.includes('warning') || message.includes('deprecated')) {
+    if (message.includes("warning") || message.includes("deprecated")) {
       return ErrorSeverity.LOW;
     }
-    
+
     return ErrorSeverity.MEDIUM;
   }
 
@@ -714,28 +730,28 @@ export class ErrorHandler {
       /timeout/i,
       /connection/i,
       /temporary/i,
-      /rate.?limit/i
+      /rate.?limit/i,
     ];
-    
-    return retryablePatterns.some(pattern => pattern.test(error.message));
+
+    return retryablePatterns.some((pattern) => pattern.test(error.message));
   }
 
   private buildContext(context?: Partial<ErrorContext>): ErrorContext {
     return {
-      operation: 'unknown',
+      operation: "unknown",
       timestamp: new Date(),
-      ...context
+      ...context,
     };
   }
 
   private triggerEventListeners(error: ErrorDetails): void {
     const listeners = this.eventListeners.get(error.type);
     if (listeners) {
-      listeners.forEach(listener => {
+      listeners.forEach((listener) => {
         try {
           listener(error);
         } catch (listenerError) {
-          console.error('Error in event listener:', listenerError);
+          console.error("Error in event listener:", listenerError);
         }
       });
     }
@@ -781,9 +797,13 @@ export class ErrorHandlerFactory {
  */
 export function handleErrors(
   errorHandler: ErrorHandler,
-  context?: Partial<ErrorContext>
+  context?: Partial<ErrorContext>,
 ) {
-  return function (target: any, propertyName: string, descriptor: PropertyDescriptor) {
+  return function (
+    target: any,
+    propertyName: string,
+    descriptor: PropertyDescriptor,
+  ) {
     const method = descriptor.value;
 
     descriptor.value = async function (...args: any[]) {
@@ -792,7 +812,7 @@ export function handleErrors(
       } catch (error) {
         await errorHandler.handleError(error as Error, {
           ...context,
-          operation: `${target.constructor.name}.${propertyName}`
+          operation: `${target.constructor.name}.${propertyName}`,
         });
         throw error;
       }

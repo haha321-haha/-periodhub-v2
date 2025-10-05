@@ -22,7 +22,7 @@ const translationKeys = {};
 
 matches.forEach((match, index) => {
   const [, chineseText, englishText] = match;
-  
+
   // 基于英文文本生成键名
   let keyName = '';
   if (englishText) {
@@ -33,7 +33,7 @@ matches.forEach((match, index) => {
   } else {
     keyName = `key.${index}`;
   }
-  
+
   // 避免重复键名
   let finalKeyName = keyName;
   let counter = 1;
@@ -41,7 +41,7 @@ matches.forEach((match, index) => {
     finalKeyName = `${keyName}.${counter}`;
     counter++;
   }
-  
+
   translationKeys[finalKeyName] = {
     en: englishText,
     zh: chineseText

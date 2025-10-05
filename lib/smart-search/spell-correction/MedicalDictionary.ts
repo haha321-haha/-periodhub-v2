@@ -36,15 +36,15 @@ export class MedicalDictionary {
    */
   getMainTerm(term: string): string | null {
     const normalizedTerm = this.normalizeTerm(term);
-    
+
     if (this.medicalTerms.has(normalizedTerm)) {
       return normalizedTerm;
     }
-    
+
     if (this.synonymMap.has(normalizedTerm)) {
       return this.synonymMap.get(normalizedTerm) || null;
     }
-    
+
     return null;
   }
 
@@ -54,7 +54,7 @@ export class MedicalDictionary {
   getSynonyms(term: string): string[] {
     const mainTerm = this.getMainTerm(term);
     if (!mainTerm) return [];
-    
+
     const entry = this.medicalTerms.get(mainTerm);
     return entry ? entry.synonyms : [];
   }
@@ -77,17 +77,17 @@ export class MedicalDictionary {
    */
   getAllMedicalTerms(): string[] {
     const allTerms: Set<string> = new Set();
-    
+
     // 添加主词条
     for (const term of this.medicalTerms.keys()) {
       allTerms.add(term);
     }
-    
+
     // 添加同义词
     for (const synonym of this.synonymMap.keys()) {
       allTerms.add(synonym);
     }
-    
+
     return Array.from(allTerms);
   }
 
@@ -380,4 +380,4 @@ export class MedicalDictionary {
       this.addTerm(termData);
     }
   }
-} 
+}

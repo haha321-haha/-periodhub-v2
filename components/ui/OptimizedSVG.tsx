@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 
 interface OptimizedSVGProps {
   src: string;
@@ -21,13 +21,13 @@ interface OptimizedSVGProps {
 export default function OptimizedSVG({
   src,
   alt,
-  className = '',
+  className = "",
   width,
   height,
   priority = false,
   style = {},
   onError,
-  onLoad
+  onLoad,
 }: OptimizedSVGProps) {
   const [isInView, setIsInView] = useState(priority);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -46,9 +46,9 @@ export default function OptimizedSVG({
         }
       },
       {
-        rootMargin: '50px',
-        threshold: 0.1
-      }
+        rootMargin: "50px",
+        threshold: 0.1,
+      },
     );
 
     if (svgRef.current) {
@@ -73,9 +73,13 @@ export default function OptimizedSVG({
 
   if (hasError) {
     return (
-      <div 
+      <div
         className={`${className} bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center`}
-        style={{ width: '100%', aspectRatio: width && height ? `${width}/${height}` : '16/9', ...style }}
+        style={{
+          width: "100%",
+          aspectRatio: width && height ? `${width}/${height}` : "16/9",
+          ...style,
+        }}
       >
         <div className="text-center p-4">
           <div className="text-4xl mb-2">📊</div>
@@ -89,9 +93,11 @@ export default function OptimizedSVG({
     <div ref={svgRef} className="relative">
       {/* 加载状态 */}
       {!isLoaded && isInView && (
-        <div 
+        <div
           className={`absolute inset-0 ${className} bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center animate-pulse`}
-          style={{ aspectRatio: width && height ? `${width}/${height}` : '16/9' }}
+          style={{
+            aspectRatio: width && height ? `${width}/${height}` : "16/9",
+          }}
         >
           <div className="text-center">
             <div className="text-2xl mb-1">📊</div>
@@ -99,12 +105,15 @@ export default function OptimizedSVG({
           </div>
         </div>
       )}
-      
+
       {/* 占位符 */}
       {!isInView && !priority && (
-        <div 
+        <div
           className={`${className} bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center`}
-          style={{ aspectRatio: width && height ? `${width}/${height}` : '16/9', ...style }}
+          style={{
+            aspectRatio: width && height ? `${width}/${height}` : "16/9",
+            ...style,
+          }}
         >
           <div className="text-center">
             <div className="text-2xl mb-1">📊</div>
@@ -118,17 +127,19 @@ export default function OptimizedSVG({
         <img
           src={src}
           alt={alt}
-          className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500 ease-in-out`}
+          className={`${className} ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          } transition-opacity duration-500 ease-in-out`}
           width={width}
           height={height}
           style={{
-            maxWidth: '100%',
-            height: 'auto',
-            ...style
+            maxWidth: "100%",
+            height: "auto",
+            ...style,
           }}
           onError={handleError}
           onLoad={handleLoad}
-          loading={priority ? 'eager' : 'lazy'}
+          loading={priority ? "eager" : "lazy"}
         />
       )}
     </div>

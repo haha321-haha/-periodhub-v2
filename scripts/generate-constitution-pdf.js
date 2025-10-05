@@ -6,7 +6,7 @@ const path = require('path');
 
 async function generatePDFFromHTML() {
   console.log('🚀 开始生成constitution-guide-en.pdf...');
-  
+
   let browser;
   try {
     // 启动浏览器
@@ -14,18 +14,18 @@ async function generatePDFFromHTML() {
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
-    
+
     const page = await browser.newPage();
-    
+
     // 读取英文HTML文件
     const htmlPath = path.join('public/downloads/constitution-guide-en.html');
     const htmlContent = fs.readFileSync(htmlPath, 'utf8');
-    
+
     // 设置页面内容
     await page.setContent(htmlContent, {
       waitUntil: 'networkidle0'
     });
-    
+
     // 生成PDF
     const pdfBuffer = await page.pdf({
       format: 'A4',
@@ -48,24 +48,24 @@ async function generatePDFFromHTML() {
         </div>
       `
     });
-    
+
     // 保存PDF文件
     const outputPath = path.join('public/downloads/constitution-guide-en.pdf');
     fs.writeFileSync(outputPath, pdfBuffer);
-    
+
     console.log('✅ PDF生成成功！');
     console.log(`📁 文件位置: ${outputPath}`);
-    
+
     // 获取文件大小
     const stats = fs.statSync(outputPath);
     const fileSizeInBytes = stats.size;
     const fileSizeInKB = Math.round(fileSizeInBytes / 1024);
-    
+
     console.log(`📊 文件大小: ${fileSizeInKB} KB`);
     console.log(`🌐 预览地址: https://www.periodhub.health/downloads/constitution-guide-en.pdf`);
-    
+
     return outputPath;
-    
+
   } catch (error) {
     console.error('❌ PDF生成失败:', error);
     throw error;
@@ -79,16 +79,16 @@ async function generatePDFFromHTML() {
 // 验证生成的PDF
 async function validatePDF(pdfPath) {
   console.log('\n🔍 验证PDF文件...');
-  
+
   if (!fs.existsSync(pdfPath)) {
     throw new Error('PDF文件不存在');
   }
-  
+
   const stats = fs.statSync(pdfPath);
   if (stats.size < 1000) {
     throw new Error('PDF文件太小，可能生成失败');
   }
-  
+
   console.log('✅ PDF文件验证通过');
 }
 
@@ -103,16 +103,16 @@ async function main() {
       const { execSync } = require('child_process');
       execSync('npm install puppeteer', { stdio: 'inherit' });
     }
-    
+
     const pdfPath = await generatePDFFromHTML();
     await validatePDF(pdfPath);
-    
+
     console.log('\n🎉 constitution-guide-en.pdf 生成完成！');
     console.log('📋 下一步：');
     console.log('1. 预览PDF文件确认内容正确');
     console.log('2. 提交更改到Git');
     console.log('3. 部署到生产环境');
-    
+
   } catch (error) {
     console.error('\n❌ 生成失败:', error.message);
     process.exit(1);

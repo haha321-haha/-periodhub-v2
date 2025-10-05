@@ -16,7 +16,7 @@ class AutoFileClassifier {
             errors: [],
             stats: {}
         };
-        
+
         // 加载分析报告
         this.loadAnalysisReport();
         this.initializeOutputStructure();
@@ -59,13 +59,13 @@ class AutoFileClassifier {
 
         // 阶段1: 处理重复文件
         await this.handleDuplicates();
-        
+
         // 阶段2: 处理版本文件
         await this.handleVersions();
-        
+
         // 阶段3: 按类型分类文件
         await this.classifyByType();
-        
+
         // 阶段4: 生成分类报告
         await this.generateClassificationReport();
 
@@ -77,7 +77,7 @@ class AutoFileClassifier {
         console.log('🔄 阶段1: 处理重复文件...');
 
         const duplicates = this.analysisReport.duplicates || [];
-        
+
         for (const duplicateGroup of duplicates) {
             try {
                 const keepFile = duplicateGroup.keepNewest;
@@ -98,7 +98,7 @@ class AutoFileClassifier {
                 for (const removeFile of removeFiles) {
                     const removeSource = path.join(this.sourceDir, removeFile);
                     const removeDest = path.join(this.outputDir, 'duplicates', removeFile);
-                    
+
                     if (fs.existsSync(removeSource)) {
                         fs.copyFileSync(removeSource, removeDest);
                         this.classificationResults.duplicatesRemoved.push({
@@ -147,7 +147,7 @@ class AutoFileClassifier {
                     // 移动旧版本到versions目录
                     const oldSource = path.join(this.sourceDir, oldFile);
                     const oldDest = path.join(this.outputDir, 'versions', `${groupName}_${oldFile}`);
-                    
+
                     if (fs.existsSync(oldSource)) {
                         fs.copyFileSync(oldSource, oldDest);
                         this.classificationResults.versionsHandled.push({
@@ -206,7 +206,7 @@ class AutoFileClassifier {
 
     async classifyFile(fileInfo, categoryType) {
         const sourceFile = path.join(this.sourceDir, fileInfo.filename);
-        
+
         // 检查文件是否已经在temp目录（来自重复/版本处理）
         const tempFile = path.join(this.outputDir, 'temp', fileInfo.filename);
         const actualSource = fs.existsSync(tempFile) ? tempFile : sourceFile;
@@ -218,7 +218,7 @@ class AutoFileClassifier {
 
         // 根据类型和置信度决定分类策略
         let targetPath;
-        
+
         if (fileInfo.confidence >= 0.7) {
             // 高置信度：直接分类到对应目录
             targetPath = this.getHighConfidenceTargetPath(fileInfo, categoryType);
@@ -232,7 +232,7 @@ class AutoFileClassifier {
 
         // 创建目标目录
         fs.mkdirSync(path.dirname(targetPath), { recursive: true });
-        
+
         // 复制文件
         fs.copyFileSync(actualSource, targetPath);
 
@@ -247,9 +247,9 @@ class AutoFileClassifier {
             needsReview: fileInfo.confidence < 0.4
         });
 
-        const confidenceLevel = fileInfo.confidence >= 0.7 ? '🔥' : 
+        const confidenceLevel = fileInfo.confidence >= 0.7 ? '🔥' :
                               fileInfo.confidence >= 0.4 ? '⚡' : '📝';
-        
+
         console.log(`  ${confidenceLevel} ${fileInfo.filename} → ${path.relative(this.outputDir, targetPath)} (${(fileInfo.confidence * 100).toFixed(0)}%)`);
     }
 
@@ -269,7 +269,7 @@ class AutoFileClassifier {
         if (!fs.existsSync(tempDir)) return;
 
         console.log('🔄 处理临时文件...');
-        
+
         const tempFiles = fs.readdirSync(tempDir);
         for (const tempFile of tempFiles) {
             // 查找这个文件在分析报告中的信息
@@ -380,7 +380,7 @@ class AutoFileClassifier {
 
     async generateHumanReadableClassificationReport(report) {
         let output = '# 🎯 自动文件分类报告\n\n';
-        
+
         output += `**分类时间**: ${new Date(report.timestamp).toLocaleString()}\n\n`;
 
         output += '## 📊 分类统计\n';
@@ -433,21 +433,21 @@ async function main() {
 
         console.log('🎯 初始化自动文件分类系统...');
         const classifier = new AutoFileClassifier(analysisReportPath, sourceDir, outputDir);
-        
+
         console.log('🚀 开始自动分类...\n');
         const results = await classifier.classify();
-        
+
         console.log('\n🎉 自动分类完成！');
         console.log('\n📋 处理结果:');
         console.log(`- 📁 分类文件: ${results.classified.length}`);
         console.log(`- 🗑️ 移除重复: ${results.duplicatesRemoved.length}`);
         console.log(`- 📚 归档版本: ${results.versionsHandled.length}`);
         console.log(`- ❌ 处理错误: ${results.errors.length}`);
-        
+
         console.log('\n📄 生成的文件:');
         console.log('- classification-report.json (详细JSON报告)');
         console.log('- CLASSIFICATION_REPORT.md (人类可读报告)');
-        
+
         console.log('\n📂 输出目录结构:');
         console.log('- classified/components/ (React组件)');
         console.log('- classified/middleware/ (中间件文件)');
@@ -487,7 +487,7 @@ module.exports = AutoFileClassifier;
 
 ### 🎯 **置信度分层处理**
 - **🔥 高置信度 (≥70%)** - 直接分类到目标位置
-- **⚡ 中置信度 (40-70%)** - 分类但标记需要审查  
+- **⚡ 中置信度 (40-70%)** - 分类但标记需要审查
 - **📝 低置信度 (<40%)** - 放入manual-review目录
 
 ### 📁 **智能目录结构**
@@ -495,7 +495,7 @@ module.exports = AutoFileClassifier;
 classified/
 ├── middleware/     # 7个高置信度中间件文件
 ├── config/         # 15个配置文件
-├── i18n/          # 11个国际化文件  
+├── i18n/          # 11个国际化文件
 ├── components/     # React组件
 ├── manual-review/  # 21个需要手动审查的文件
 ├── duplicates/     # 18个重复文件

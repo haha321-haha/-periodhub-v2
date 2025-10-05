@@ -69,9 +69,9 @@ const getCachedArticle = unstable_cache(
     }
   },
   ['article-cache'],
-  { 
+  {
     revalidate: 3600, // 1小时缓存
-    tags: ['articles'] 
+    tags: ['articles']
   }
 );
 
@@ -79,24 +79,24 @@ export default async function ArticlePage({ params }: {
   params: { locale: string; slug: string }
 }) {
   const { locale, slug } = params;
-  
+
   try {
     // 使用缓存版本减少CPU时间
     const article = await getCachedArticle(slug, locale);
-    
+
     if (!article) {
       // 记录404但快速返回
       console.log(`404: ${locale}/${slug}`);
       notFound();
     }
-    
+
     return (
       <div className="container mx-auto px-4 py-8">
         <article className="prose prose-lg max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold text-purple-600 mb-6">
             {article.title}
           </h1>
-          <div 
+          <div
             className="article-content"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
@@ -115,14 +115,14 @@ export async function generateMetadata({ params }: {
 }) {
   try {
     const article = await getCachedArticle(params.slug, params.locale);
-    
+
     if (!article) {
       return {
         title: '文章未找到 | PeriodHub',
         description: '请求的文章不存在'
       };
     }
-    
+
     return {
       title: `${article.title} | PeriodHub`,
       description: article.excerpt || article.title,
@@ -148,12 +148,12 @@ export async function generateMetadata({ params }: {
 export async function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
   const locales = ['zh', 'en'];
-  
+
   try {
     for (const locale of locales) {
       // 确保只获取已发布的文章
       const articles = await getPublishedArticles(locale);
-      
+
       for (const article of articles) {
         // 验证文章文件确实存在
         if (article.slug && await articleExists(article.slug, locale)) {
@@ -163,7 +163,7 @@ export async function generateStaticParams() {
         }
       }
     }
-    
+
     console.log(`Generated ${params.length} static routes`);
     return params;
   } catch (error) {
@@ -195,17 +195,17 @@ export async function getArticleBySlug(slug: string, locale: string = 'zh') {
   try {
     const articlesDirectory = path.join(process.cwd(), 'content/articles', locale);
     const filePath = path.join(articlesDirectory, `${slug}.md`);
-    
+
     // 检查文件是否存在
     try {
       await fs.access(filePath);
     } catch {
       return null; // 文件不存在，返回null而不是抛出错误
     }
-    
+
     const fileContents = await fs.readFile(filePath, 'utf8');
     const { data, content } = matter(fileContents);
-    
+
     return {
       slug,
       title: data.title || slug,
@@ -223,7 +223,7 @@ export async function getArticleBySlug(slug: string, locale: string = 'zh') {
 export async function getPublishedArticles(locale: string = 'zh') {
   try {
     const articlesDirectory = path.join(process.cwd(), 'content/articles', locale);
-    
+
     // 检查目录是否存在
     try {
       await fs.access(articlesDirectory);
@@ -231,22 +231,22 @@ export async function getPublishedArticles(locale: string = 'zh') {
       console.warn(`Articles directory not found: ${articlesDirectory}`);
       return [];
     }
-    
+
     const fileNames = await fs.readdir(articlesDirectory);
     const articles = [];
-    
+
     for (const fileName of fileNames) {
       if (fileName.endsWith('.md')) {
         const slug = fileName.replace('.md', '');
         const article = await getArticleBySlug(slug, locale);
-        
+
         if (article && article.published) {
           articles.push(article);
         }
       }
     }
-    
-    return articles.sort((a, b) => 
+
+    return articles.sort((a, b) =>
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     );
   } catch (error) {
@@ -303,18 +303,18 @@ const intlMiddleware = createMiddleware({
 
 export default function middleware(request: NextRequest) {
   const start = Date.now();
-  
+
   try {
     const response = intlMiddleware(request);
-    
+
     // 添加性能监控头
     const duration = Date.now() - start;
     response.headers.set('X-Response-Time', `${duration}ms`);
-    
+
     return response;
   } catch (error) {
     console.error('Middleware error:', error);
-    
+
     // 快速降级，避免完全失败
     return NextResponse.next();
   }
@@ -342,9 +342,9 @@ export function trackError(context: string, error: any, metadata?: any) {
     timestamp: new Date().toISOString(),
     url: typeof window !== 'undefined' ? window.location.href : 'server'
   };
-  
+
   console.error('Error tracked:', errorData);
-  
+
   // 如果有外部错误服务，发送到那里
   if (process.env.NODE_ENV === 'production') {
     // 发送到Sentry或其他错误追踪服务
@@ -371,18 +371,18 @@ export function measurePerformance<T>(
 ): Promise<T> {
   return new Promise(async (resolve, reject) => {
     const start = performance.now();
-    
+
     try {
       const result = await fn();
       const end = performance.now();
-      
+
       console.log(`Performance [${name}]: ${end - start}ms`);
-      
+
       // 如果超过阈值，记录警告
       if (end - start > 1000) {
         console.warn(`Slow operation [${name}]: ${end - start}ms`);
       }
-      
+
       resolve(result);
     } catch (error) {
       const end = performance.now();
@@ -509,9 +509,9 @@ const getCachedArticle = unstable_cache(
     }
   },
   ['article-cache'],
-  { 
+  {
     revalidate: 3600, // 1小时缓存
-    tags: ['articles'] 
+    tags: ['articles']
   }
 );
 
@@ -519,24 +519,24 @@ export default async function ArticlePage({ params }: {
   params: { locale: string; slug: string }
 }) {
   const { locale, slug } = params;
-  
+
   try {
     // 使用缓存版本减少CPU时间
     const article = await getCachedArticle(slug, locale);
-    
+
     if (!article) {
       // 记录404但快速返回
       console.log(`404: ${locale}/${slug}`);
       notFound();
     }
-    
+
     return (
       <div className="container mx-auto px-4 py-8">
         <article className="prose prose-lg max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold text-purple-600 mb-6">
             {article.title}
           </h1>
-          <div 
+          <div
             className="article-content"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
@@ -555,14 +555,14 @@ export async function generateMetadata({ params }: {
 }) {
   try {
     const article = await getCachedArticle(params.slug, params.locale);
-    
+
     if (!article) {
       return {
         title: '文章未找到 | PeriodHub',
         description: '请求的文章不存在'
       };
     }
-    
+
     return {
       title: `${article.title} | PeriodHub`,
       description: article.excerpt || article.title,
@@ -588,12 +588,12 @@ export async function generateMetadata({ params }: {
 export async function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
   const locales = ['zh', 'en'];
-  
+
   try {
     for (const locale of locales) {
       // 确保只获取已发布的文章
       const articles = await getPublishedArticles(locale);
-      
+
       for (const article of articles) {
         // 验证文章文件确实存在
         if (article.slug && await articleExists(article.slug, locale)) {
@@ -603,7 +603,7 @@ export async function generateStaticParams() {
         }
       }
     }
-    
+
     console.log(`Generated ${params.length} static routes`);
     return params;
   } catch (error) {
@@ -635,17 +635,17 @@ export async function getArticleBySlug(slug: string, locale: string = 'zh') {
   try {
     const articlesDirectory = path.join(process.cwd(), 'content/articles', locale);
     const filePath = path.join(articlesDirectory, `${slug}.md`);
-    
+
     // 检查文件是否存在
     try {
       await fs.access(filePath);
     } catch {
       return null; // 文件不存在，返回null而不是抛出错误
     }
-    
+
     const fileContents = await fs.readFile(filePath, 'utf8');
     const { data, content } = matter(fileContents);
-    
+
     return {
       slug,
       title: data.title || slug,
@@ -663,7 +663,7 @@ export async function getArticleBySlug(slug: string, locale: string = 'zh') {
 export async function getPublishedArticles(locale: string = 'zh') {
   try {
     const articlesDirectory = path.join(process.cwd(), 'content/articles', locale);
-    
+
     // 检查目录是否存在
     try {
       await fs.access(articlesDirectory);
@@ -671,22 +671,22 @@ export async function getPublishedArticles(locale: string = 'zh') {
       console.warn(`Articles directory not found: ${articlesDirectory}`);
       return [];
     }
-    
+
     const fileNames = await fs.readdir(articlesDirectory);
     const articles = [];
-    
+
     for (const fileName of fileNames) {
       if (fileName.endsWith('.md')) {
         const slug = fileName.replace('.md', '');
         const article = await getArticleBySlug(slug, locale);
-        
+
         if (article && article.published) {
           articles.push(article);
         }
       }
     }
-    
-    return articles.sort((a, b) => 
+
+    return articles.sort((a, b) =>
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     );
   } catch (error) {
@@ -743,18 +743,18 @@ const intlMiddleware = createMiddleware({
 
 export default function middleware(request: NextRequest) {
   const start = Date.now();
-  
+
   try {
     const response = intlMiddleware(request);
-    
+
     // 添加性能监控头
     const duration = Date.now() - start;
     response.headers.set('X-Response-Time', `${duration}ms`);
-    
+
     return response;
   } catch (error) {
     console.error('Middleware error:', error);
-    
+
     // 快速降级，避免完全失败
     return NextResponse.next();
   }
@@ -782,9 +782,9 @@ export function trackError(context: string, error: any, metadata?: any) {
     timestamp: new Date().toISOString(),
     url: typeof window !== 'undefined' ? window.location.href : 'server'
   };
-  
+
   console.error('Error tracked:', errorData);
-  
+
   // 如果有外部错误服务，发送到那里
   if (process.env.NODE_ENV === 'production') {
     // 发送到Sentry或其他错误追踪服务
@@ -811,18 +811,18 @@ export function measurePerformance<T>(
 ): Promise<T> {
   return new Promise(async (resolve, reject) => {
     const start = performance.now();
-    
+
     try {
       const result = await fn();
       const end = performance.now();
-      
+
       console.log(`Performance [${name}]: ${end - start}ms`);
-      
+
       // 如果超过阈值，记录警告
       if (end - start > 1000) {
         console.warn(`Slow operation [${name}]: ${end - start}ms`);
       }
-      
+
       resolve(result);
     } catch (error) {
       const end = performance.now();
@@ -930,7 +930,7 @@ curl -I https://periodhub.health/zh/articles/test-slug
 - **606ms P75响应时间** → 用户体验较差
 - **27.1% CPU节流** → 资源使用效率低
 
-### 错误率问题  
+### 错误率问题
 - **7.7%-10.3%错误率** → 每10个访问就有1个失败
 - **峰值100%错误率** → 某些时段完全不可用
 
@@ -986,7 +986,7 @@ curl -I https://periodhub.health/zh/articles/test-slug
 
 我之前的判断**完全错误**：
 - 说"没有明显的错误率飙升" - **错误**
-- 说"性能表现正常" - **错误**  
+- 说"性能表现正常" - **错误**
 - 说"这很可能不是错误" - **错误**
 
 ### 现在的准确诊断 ✅
@@ -1050,7 +1050,7 @@ periodHub错误率优化建议
 #### 2. 用户行为导致的404
 ```
 - 手动输入错误的URL
-- 过期的书签链接  
+- 过期的书签链接
 - 社交媒体分享的错误链接
 ```
 
@@ -1102,16 +1102,16 @@ vercel teams add-webhook --url="your-webhook-url" --events="deployment.error"
 // app/[locale]/articles/[slug]/page.tsx
 export default async function ArticlePage({ params }: PageProps) {
   const { locale, slug } = params;
-  
+
   try {
     const article = await getArticleBySlug(slug, locale);
-    
+
     if (!article) {
       // 记录404访问，用于分析
       console.log(`Article not found: ${locale}/${slug}`);
       notFound();
     }
-    
+
     return <ArticleContent article={article} />;
   } catch (error) {
     // 记录错误但不影响用户体验
@@ -1143,7 +1143,7 @@ export default function ArticleNotFound() {
 export async function generateStaticParams() {
   const params = [];
   const locales = ['zh', 'en'];
-  
+
   for (const locale of locales) {
     const articles = await getPublishedArticles(locale);
     // 只为确实存在的文章生成路由
@@ -1153,7 +1153,7 @@ export async function generateStaticParams() {
       }
     });
   }
-  
+
   return params;
 }
 ```
@@ -1374,11 +1374,11 @@ vercel inspect [deployment-url]
 
 #### A. 如果是404错误
 **症状**: 某些文章页面无法访问
-**原因**: 
+**原因**:
 - 某些slug对应的文章文件不存在
 - 语言环境路径配置问题
 
-#### B. 如果是500服务器错误  
+#### B. 如果是500服务器错误
 **症状**: 页面加载时服务器内部错误
 **原因**:
 - 参数类型不匹配
@@ -1413,17 +1413,17 @@ interface PageProps {
 // 2. 添加更好的错误处理
 export async function generateMetadata({ params }: PageProps) {
   const { locale, slug } = params;
-  
+
   try {
     const article = await getArticleBySlug(slug, locale);
-    
+
     if (!article) {
       return {
         title: '文章未找到 | PeriodHub',
         description: '请求的文章不存在。'
       };
     }
-    
+
     return {
       title: `${article.title} | PeriodHub`,
       description: article.excerpt,
@@ -1446,23 +1446,23 @@ export async function generateMetadata({ params }: PageProps) {
 // 3. 页面组件优化
 export default async function ArticlePage({ params }: PageProps) {
   const { locale, slug } = params;
-  
+
   try {
     const article = await getArticleBySlug(slug, locale);
-    
+
     if (!article) {
       notFound(); // 正确处理404
     }
-    
+
     return (
       <div className="container mx-auto px-4 py-8">
         <article className="prose prose-lg max-w-none">
           <h1 className="text-3xl font-bold text-purple-600 mb-4">
             {article.title}
           </h1>
-          <div 
+          <div
             className="article-content"
-            dangerouslySetInnerHTML={{ __html: article.content }} 
+            dangerouslySetInnerHTML={{ __html: article.content }}
           />
         </article>
       </div>
@@ -1477,7 +1477,7 @@ export default async function ArticlePage({ params }: PageProps) {
 export async function generateStaticParams() {
   const locales = ['zh', 'en'];
   const params: { locale: string; slug: string }[] = [];
-  
+
   // 确保只为真实存在的文章生成路由
   for (const locale of locales) {
     try {
@@ -1489,7 +1489,7 @@ export async function generateStaticParams() {
       console.warn(`Failed to get articles for locale ${locale}:`, error);
     }
   }
-  
+
   return params;
 }
 ```
@@ -1511,26 +1511,26 @@ const intlMiddleware = createMiddleware({
 
 export default function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-  
+
   // 添加调试日志
   console.log(`Processing request: ${pathname}`);
-  
+
   try {
     // 处理文章路由
     if (pathname.match(/^\/[a-z]{2}\/articles\/[^\/]+$/)) {
       const response = intlMiddleware(request);
-      
+
       // 添加性能监控头
       response.headers.set('X-Route-Type', 'article');
       response.headers.set('X-Processing-Time', Date.now().toString());
-      
+
       return response;
     }
-    
+
     return intlMiddleware(request);
   } catch (error) {
     console.error('Middleware error:', error);
-    
+
     // 降级处理，避免完全失败
     return NextResponse.next();
   }
@@ -1563,17 +1563,17 @@ export function trackArticleLoad(slug: string, locale: string, success: boolean)
 // 在页面组件中使用
 export default async function ArticlePage({ params }: PageProps) {
   const { locale, slug } = params;
-  
+
   try {
     const article = await getArticleBySlug(slug, locale);
-    
+
     if (!article) {
       trackArticleLoad(slug, locale, false);
       notFound();
     }
-    
+
     trackArticleLoad(slug, locale, true);
-    
+
     return (
       // ... 页面内容
     );
@@ -1799,20 +1799,20 @@ import path from 'path';
 export async function generateStaticParams() {
   const locales = ['en', 'zh'];
   const params: { locale: string; slug: string }[] = [];
-  
+
   for (const locale of locales) {
     try {
       const articlesDir = path.join(
-        process.cwd(), 
-        'content/articles', 
+        process.cwd(),
+        'content/articles',
         locale
       );
-      
+
       if (fs.existsSync(articlesDir)) {
         const files = fs.readdirSync(articlesDir)
           .filter(file => file.endsWith('.md'))
           .map(file => file.replace('.md', ''));
-        
+
         files.forEach(slug => {
           params.push({ locale, slug });
         });
@@ -1821,7 +1821,7 @@ export async function generateStaticParams() {
       console.warn(`Failed to read articles for locale ${locale}:`, error);
     }
   }
-  
+
   return params;
 }
 
@@ -1832,17 +1832,17 @@ export async function generateMetadata({
   params: { locale: string; slug: string }
 }) {
   const { locale, slug } = params;
-  
+
   try {
     const article = await getArticleBySlug(slug, locale);
-    
+
     if (!article) {
       return {
         title: 'Article Not Found',
         description: 'The requested article could not be found.'
       };
     }
-    
+
     return {
       title: article.title,
       description: article.excerpt,
@@ -1868,14 +1868,14 @@ export default async function ArticlePage({
   params: { locale: string; slug: string }
 }) {
   const { locale, slug } = params;
-  
+
   try {
     const article = await getArticleBySlug(slug, locale);
-    
+
     if (!article) {
       notFound(); // 正确处理404情况
     }
-    
+
     return (
       <article>
         <h1>{article.title}</h1>
@@ -1897,16 +1897,16 @@ async function getArticleBySlug(slug: string, locale: string) {
       locale,
       `${slug}.md`
     );
-    
+
     if (!fs.existsSync(filePath)) {
       return null;
     }
-    
+
     const fileContent = fs.readFileSync(filePath, 'utf8');
-    
+
     // 处理 markdown 内容
     // ... 你的现有逻辑
-    
+
     return {
       title: '...', // 从 frontmatter 提取
       content: '...', // 处理后的 HTML
@@ -1938,7 +1938,7 @@ export default function middleware(request: NextRequest) {
   try {
     // 添加日志以便调试
     console.log('Processing request:', request.nextUrl.pathname);
-    
+
     return intlMiddleware(request);
   } catch (error) {
     console.error('Middleware error:', error);

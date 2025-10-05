@@ -4,9 +4,9 @@
  */
 
 import { Locale } from '@/i18n';
-import { 
+import {
   generateSEOValidationReport,
-  performSEOValidation 
+  performSEOValidation
 } from '../utils/seoValidator';
 import { generateAllStructuredData } from '../utils/seoOptimization';
 
@@ -16,10 +16,10 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>
 }) {
   const { locale } = await params;
-  
+
   return {
     title: locale === 'zh' ? 'SEO测试页面 - 职场健康助手' : 'SEO Test Page - Workplace Wellness Assistant',
-    description: locale === 'zh' 
+    description: locale === 'zh'
       ? '测试HVsLYEp职场健康助手的SEO优化功能，包括Meta信息和结构化数据验证。'
       : 'Test SEO optimization features for HVsLYEp Workplace Wellness Assistant, including meta information and structured data validation.',
     robots: {
@@ -35,12 +35,12 @@ export default async function SEOTestPage({
   params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
-  
+
   // 执行SEO验证
   const validation = performSEOValidation(locale);
   const validationReport = generateSEOValidationReport(locale);
   const structuredData = generateAllStructuredData(locale);
-  
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-4xl mx-auto px-4">
@@ -48,13 +48,13 @@ export default async function SEOTestPage({
           <h1 className="text-3xl font-bold text-gray-900 mb-8">
             {locale === 'zh' ? '🔍 SEO测试页面' : '🔍 SEO Test Page'}
           </h1>
-          
+
           {/* SEO验证结果 */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
               {locale === 'zh' ? 'SEO验证结果' : 'SEO Validation Results'}
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* 验证状态 */}
               <div className="bg-gray-50 p-4 rounded-lg">
@@ -65,7 +65,7 @@ export default async function SEOTestPage({
                   <div className="flex items-center">
                     <div className={`w-3 h-3 rounded-full mr-2 ${validation.isValid ? 'bg-green-500' : 'bg-red-500'}`}></div>
                     <span className="text-sm">
-                      {validation.isValid 
+                      {validation.isValid
                         ? (locale === 'zh' ? '✅ 验证通过' : '✅ Validation Passed')
                         : (locale === 'zh' ? '❌ 验证失败' : '❌ Validation Failed')
                       }
@@ -85,7 +85,7 @@ export default async function SEOTestPage({
                   </div>
                 </div>
               </div>
-              
+
               {/* SEO分数 */}
               <div className="bg-gray-50 p-4 rounded-lg">
                 <h3 className="text-lg font-medium text-gray-700 mb-2">
@@ -96,7 +96,7 @@ export default async function SEOTestPage({
                     {validation.score}/100
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                       style={{ width: `${validation.score}%` }}
                     ></div>
@@ -105,7 +105,7 @@ export default async function SEOTestPage({
               </div>
             </div>
           </div>
-          
+
           {/* 问题列表 */}
           {validation.issues.length > 0 && (
             <div className="mb-8">
@@ -124,7 +124,7 @@ export default async function SEOTestPage({
               </div>
             </div>
           )}
-          
+
           {/* 改进建议 */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
@@ -141,7 +141,7 @@ export default async function SEOTestPage({
               </ul>
             </div>
           </div>
-          
+
           {/* 结构化数据预览 */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
@@ -160,7 +160,7 @@ export default async function SEOTestPage({
               ))}
             </div>
           </div>
-          
+
           {/* 完整报告 */}
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">
@@ -172,7 +172,7 @@ export default async function SEOTestPage({
               </pre>
             </div>
           </div>
-          
+
           {/* 测试说明 */}
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
             <h3 className="text-lg font-medium text-yellow-800 mb-2">
@@ -180,7 +180,7 @@ export default async function SEOTestPage({
             </h3>
             <div className="text-yellow-700 space-y-2">
               <p>
-                {locale === 'zh' 
+                {locale === 'zh'
                   ? '此页面用于测试HVsLYEp职场健康助手的SEO优化功能。'
                   : 'This page is used to test SEO optimization features for HVsLYEp Workplace Wellness Assistant.'
                 }

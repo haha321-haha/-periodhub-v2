@@ -132,7 +132,7 @@ export default function HomePage() {
     <div>
       {/* 之前 */}
       <Link href="/guide">了解更多</Link>
-      
+
       {/* 优化后 */}
       <Link href="/guide">{ANCHOR_TEXTS.homepage.main}</Link>
     </div>
@@ -160,9 +160,9 @@ export const ANCHOR_TEXT_VARIANTS = {
 export function getAnchorText(page: string, position: string) {
   const userGroup = getUserABTestGroup(); // 50% control, 50% variant
   const variants = ANCHOR_TEXT_VARIANTS[page];
-  
-  return userGroup === 'control' 
-    ? variants.control 
+
+  return userGroup === 'control'
+    ? variants.control
     : variants.variant;
 }
 ```
@@ -189,13 +189,13 @@ const BANNED_ANCHOR_TEXTS = [
 function checkFile(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
   const issues = [];
-  
+
   BANNED_ANCHOR_TEXTS.forEach(text => {
     if (content.includes(`>${text}<`)) {
       issues.push(`发现通用锚文本: "${text}" in ${filePath}`);
     }
   });
-  
+
   return issues;
 }
 
@@ -633,7 +633,7 @@ Week 4: 效果稳定，可以评估ROI
 /**
  * 锚文本优化配置
  * 用于替换网站中的通用锚文本，提升SEO效果和用户体验
- * 
+ *
  * 优化原则：
  * 1. 长度控制在5-9个字符
  * 2. 包含核心关键词（痛经、经期）
@@ -648,14 +648,14 @@ export const ANCHOR_TEXTS = {
     secondary: '缓解方法详解',
     tertiary: '专业医学建议'
   },
-  
+
   // 健康指南页面
   healthGuide: {
     main: '经期健康指南',
     secondary: '健康管理方法',
     tips: '实用健康建议'
   },
-  
+
   // 场景解决方案
   scenarios: {
     office: '职场痛经应对',
@@ -665,14 +665,14 @@ export const ANCHOR_TEXTS = {
     travel: '旅行应对方案',
     exercise: '运动期间管理'
   },
-  
+
   // 青少年专区
   teen: {
     main: '青少年痛经指南',
     development: '发育期健康管理',
     education: '经期健康教育'
   },
-  
+
   // 互动工具
   tools: {
     main: '痛经评估工具',
@@ -680,7 +680,7 @@ export const ANCHOR_TEXTS = {
     tracker: '经期追踪工具',
     calculator: '症状评分工具'
   },
-  
+
   // 自然疗法
   therapy: {
     main: '自然缓解方法',
@@ -688,7 +688,7 @@ export const ANCHOR_TEXTS = {
     yoga: '瑜伽缓解技巧',
     diet: '饮食调理建议'
   },
-  
+
   // 文章相关
   articles: {
     more: '更多痛经知识',
@@ -696,21 +696,21 @@ export const ANCHOR_TEXTS = {
     comprehensive: '完整指南文章',
     latest: '最新健康资讯'
   },
-  
+
   // PDF下载中心
   pdf: {
     download: '下载健康资料',
     guide: '下载完整指南',
     checklist: '下载应急清单'
   },
-  
+
   // 日常调理
   daily: {
     care: '日常调理方法',
     routine: '日常护理技巧',
     prevention: '预防保健建议'
   },
-  
+
   // 医疗信息
   medical: {
     guide: '医疗诊断指南',
@@ -742,7 +742,7 @@ export function getAnchorText<T extends AnchorTextSection>(
  */
 export const ANCHOR_TEXT_AB_TEST = {
   enabled: false, // 设置为true启用A/B测试
-  
+
   variants: {
     homepage: {
       control: '了解更多',           // 原版（控制组）
@@ -759,7 +759,7 @@ export const ANCHOR_TEXT_AB_TEST = {
       }
     }
   },
-  
+
   /**
    * 获取A/B测试锚文本
    * @param section - 页面区域
@@ -769,12 +769,12 @@ export const ANCHOR_TEXT_AB_TEST = {
     if (!this.enabled) {
       return getAnchorText(section as AnchorTextSection, 'main' as any);
     }
-    
+
     const variant = this.variants[section as keyof typeof this.variants];
     if (!variant) {
       return getAnchorText(section as AnchorTextSection, 'main' as any);
     }
-    
+
     return variant[userGroup];
   }
 };
@@ -838,7 +838,7 @@ export const BANNED_ANCHOR_TEXTS = [
       "routine": "日常护理技巧"
     }
   },
-  
+
   "comment": "注意：如果需要支持多语言（如英文版），需要在 messages/en.json 中添加对应的英文锚文本"
 }
 
@@ -862,17 +862,17 @@ export default function HomePage() {
     <div>
       {/* ❌ 优化前 */}
       <Link href="/health-guide">了解更多</Link>
-      
+
       {/* ✅ 优化后 */}
       <Link href="/health-guide">
         {ANCHOR_TEXTS.homepage.main}
       </Link>
-      
+
       {/* 同一页面有多个链接时，使用不同的锚文本 */}
       <Link href="/natural-therapies">
         {ANCHOR_TEXTS.homepage.secondary}
       </Link>
-      
+
       <Link href="/medical-guide">
         {ANCHOR_TEXTS.homepage.tertiary}
       </Link>
@@ -895,30 +895,30 @@ export default async function HealthGuidePage({
   params: Promise<{ locale: Locale }>
 }) {
   const { locale } = await params;
-  
+
   // 获取国际化翻译
   const t = await getTranslations('healthGuidePage');
   const anchorT = await getTranslations('anchorTexts');
-  
+
   return (
     <div>
       <h1>{t('title')}</h1>
-      
+
       {/* ❌ 优化前 */}
       <Link href={`/${locale}/scenario-solutions/office`}>
         查看更多
       </Link>
-      
+
       {/* ✅ 优化后 - 使用国际化锚文本 */}
       <Link href={`/${locale}/scenario-solutions/office`}>
         {anchorT('scenarios.office')}
       </Link>
-      
+
       {/* 多个链接示例 */}
       <Link href={`/${locale}/scenario-solutions/social`}>
         {anchorT('scenarios.social')}
       </Link>
-      
+
       <Link href={`/${locale}/scenario-solutions/sleep`}>
         {anchorT('scenarios.sleep')}
       </Link>
@@ -943,22 +943,22 @@ interface NavigationCardProps {
   anchorTextKey: string; // 例如: 'scenarios.office'
 }
 
-export function NavigationCard({ 
-  href, 
-  title, 
-  description, 
-  anchorTextKey 
+export function NavigationCard({
+  href,
+  title,
+  description,
+  anchorTextKey
 }: NavigationCardProps) {
   const anchorT = useTranslations('anchorTexts');
-  
+
   return (
     <div className="card">
       <h3>{title}</h3>
       <p>{description}</p>
-      
+
       {/* ❌ 优化前 */}
       <Link href={href}>了解更多 →</Link>
-      
+
       {/* ✅ 优化后 */}
       <Link href={href}>
         {anchorT(anchorTextKey)} →
@@ -977,7 +977,7 @@ function ScenarioSolutions() {
         description="工作中的痛经应对策略"
         anchorTextKey="scenarios.office"
       />
-      
+
       <NavigationCard
         href="/scenario-solutions/social"
         title="社交场景"
@@ -1042,15 +1042,15 @@ interface TrackedLinkProps {
   className?: string;
 }
 
-export function TrackedLink({ 
-  href, 
-  anchorTextKey, 
+export function TrackedLink({
+  href,
+  anchorTextKey,
   section,
-  className 
+  className
 }: TrackedLinkProps) {
   const anchorT = useTranslations('anchorTexts');
   const anchorText = anchorT(`${section}.${anchorTextKey}`);
-  
+
   const handleClick = () => {
     // 追踪链接点击
     if (typeof window !== 'undefined' && window.gtag) {
@@ -1062,10 +1062,10 @@ export function TrackedLink({
       });
     }
   };
-  
+
   return (
-    <Link 
-      href={href} 
+    <Link
+      href={href}
       className={className}
       onClick={handleClick}
     >
@@ -1075,7 +1075,7 @@ export function TrackedLink({
 }
 
 // 使用示例
-<TrackedLink 
+<TrackedLink
   href="/scenario-solutions/office"
   section="scenarios"
   anchorTextKey="office"
@@ -1088,22 +1088,22 @@ export function TrackedLink({
 
 /**
  * 推荐实施顺序：
- * 
+ *
  * 1. 【高优先级页面】（预计2小时）
  *    - app/[locale]/page.tsx (首页)
  *    - app/[locale]/health-guide/page.tsx
  *    - app/[locale]/scenario-solutions/office/page.tsx
- * 
+ *
  * 2. 【中优先级页面】（预计2小时）
  *    - 其他场景解决方案页面
  *    - app/[locale]/teen-health/development-pain/page.tsx
  *    - app/[locale]/interactive-tools/page.tsx
- * 
+ *
  * 3. 【低优先级页面】（预计1小时）
  *    - app/[locale]/natural-therapies/page.tsx
  *    - app/[locale]/articles/[slug]/page.tsx
  *    - app/[locale]/articles-pdf-center/page.tsx
- * 
+ *
  * 4. 【测试与验证】（预计1小时）
  *    - 本地测试所有链接
  *    - 检查移动端显示
@@ -1439,7 +1439,7 @@ CTR: ___% (前一天: ___%)
 跳出率: ___% (前一天: ___%)
 平均停留时间: __分__秒 (前一天: __分__秒)
 
-异常情况: 
+异常情况:
 □ 无
 □ 有（描述：_____）
 ```
@@ -1670,7 +1670,7 @@ const navigation = {
   // 主导航（不用动作词）
   guide: '痛经管理指南',       // 6字，含核心词
   health: '经期健康中心',      // 6字，含核心词
-  
+
   // CTA按钮（使用动作词）
   viewMore: '查看完整内容',    // 6字，含动作词
   startNow: '立即开始使用',    // 6字，含动作词
@@ -1706,7 +1706,7 @@ export const ANCHOR_TEXTS = {
     comprehensive: '完整医学指南',
     related: '相关健康文章'
   },
-  
+
   // 交互工具（使用动作词）
   tools: {
     main: '使用健康工具',
@@ -1716,7 +1716,7 @@ export const ANCHOR_TEXTS = {
     calculator: '计算影响程度',
     all: '浏览全部工具'
   },
-  
+
   // 场景解决方案（场景词优先）
   scenarios: {
     exercise: '运动期间应对',
@@ -1727,7 +1727,7 @@ export const ANCHOR_TEXTS = {
     emergency: '紧急处理方法',
     medication: '药物使用建议'
   },
-  
+
   // 导航和主页（含核心词）
   navigation: {
     main: '痛经管理指南',
@@ -1736,7 +1736,7 @@ export const ANCHOR_TEXTS = {
     teen: '青少年专区',
     therapy: '自然疗法中心'
   },
-  
+
   // CTA按钮（含动作词）
   cta: {
     viewMore: '查看完整内容',
@@ -1745,7 +1745,7 @@ export const ANCHOR_TEXTS = {
     tryNow: '立即体验工具',
     download: '下载健康资料'
   },
-  
+
   // PDF下载（含动作词）
   pdf: {
     guide: '下载完整指南',
@@ -1786,7 +1786,7 @@ CTA按钮：需要引导点击 → 必须有动作词
 ```typescript
 // 正确的计算方法
 const allTexts = Object.values(ANCHOR_TEXTS).flat();
-const containsPainKeyword = allTexts.filter(text => 
+const containsPainKeyword = allTexts.filter(text =>
   text.includes('痛经') || text.includes('经期')
 );
 
@@ -1880,7 +1880,7 @@ NOT: 4-5个单词（太长，影响视觉和SEO）
       "comprehensive": "Complete Guide",        // 2词 ✅
       "related": "Related Articles"             // 2词 ✅
     },
-    
+
     "tools": {
       "main": "Use Health Tools",               // 3词 ✅
       "tracker": "Track Symptoms",              // 2词 ✅
@@ -1889,7 +1889,7 @@ NOT: 4-5个单词（太长，影响视觉和SEO）
       "calculator": "Calculate Impact",         // 2词 ✅
       "all": "View All Tools"                   // 3词 ✅
     },
-    
+
     "scenarios": {
       "exercise": "Exercise Management",        // 2词 ✅
       "office": "Workplace Solutions",          // 2词 ✅
@@ -1899,7 +1899,7 @@ NOT: 4-5个单词（太长，影响视觉和SEO）
       "emergency": "Emergency Care",            // 2词 ✅
       "medication": "Medication Guide"          // 2词 ✅
     },
-    
+
     "navigation": {
       "main": "Pain Management",                // 2词 ✅
       "health": "Health Center",                // 2词 ✅
@@ -1907,7 +1907,7 @@ NOT: 4-5个单词（太长，影响视觉和SEO）
       "teen": "Teen Health",                    // 2词 ✅
       "therapy": "Natural Therapy"              // 2词 ✅
     },
-    
+
     "cta": {
       "viewMore": "View Full Content",          // 3词 ✅
       "startNow": "Start Now",                  // 2词 ✅
@@ -1915,7 +1915,7 @@ NOT: 4-5个单词（太长，影响视觉和SEO）
       "tryNow": "Try Tool Now",                 // 3词 ✅
       "download": "Download Resources"          // 2词 ✅
     },
-    
+
     "pdf": {
       "guide": "Download Guide",                // 2词 ✅
       "checklist": "Download Checklist",        // 2词 ✅
@@ -2084,7 +2084,7 @@ NOT: 4-5个单词（太长，影响视觉和SEO）
       "routine": "日常护理技巧"
     }
   },
-  
+
   "comment": "注意：如果需要支持多语言（如英文版），需要在 messages/en.json 中添加对应的英文锚文本"
 }
 
@@ -2144,7 +2144,7 @@ NOT: 4-5个单词（太长，影响视觉和SEO）
 Period Pain Relief Methods (4词)
 └─ Period: 冗余（网站已经是经期主题）
 └─ Pain: 核心词 ✓
-└─ Relief: 核心词 ✓  
+└─ Relief: 核心词 ✓
 └─ Methods: 核心词 ✓
 
 优化为: Pain Relief Methods (3词)
@@ -2227,10 +2227,10 @@ Period Pain Relief Methods (4词)
 // 检查英文锚文本长度
 function validateEnglishAnchorTexts(texts) {
   const issues = [];
-  
+
   for (const [key, text] of Object.entries(texts)) {
     const wordCount = text.split(' ').length;
-    
+
     if (wordCount > 3) {
       issues.push({
         key,
@@ -2240,17 +2240,17 @@ function validateEnglishAnchorTexts(texts) {
       });
     }
   }
-  
+
   return issues;
 }
 
 // 检查中文锚文本长度
 function validateChineseAnchorTexts(texts) {
   const issues = [];
-  
+
   for (const [key, text] of Object.entries(texts)) {
     const charCount = text.length;
-    
+
     if (charCount !== 6) {
       issues.push({
         key,
@@ -2260,7 +2260,7 @@ function validateChineseAnchorTexts(texts) {
       });
     }
   }
-  
+
   return issues;
 }
 ```
@@ -2330,7 +2330,7 @@ function validateChineseAnchorTexts(texts) {
       "comprehensive": "Complete Guide",    // 2词 ✅
       "related": "Related Articles"         // 2词 ✅
     },
-    
+
     "tools": {
       "main": "Health Tools",               // 2词 ✅ (去掉Use)
       "tracker": "Track Symptoms",          // 2词 ✅
@@ -2339,7 +2339,7 @@ function validateChineseAnchorTexts(texts) {
       "calculator": "Impact Calculator",    // 2词 ✅ (不能只用Impact)
       "all": "All Tools"                    // 2词 ✅
     },
-    
+
     "scenarios": {
       "exercise": "Exercise Care",          // 2词 ✅
       "office": "Workplace Solutions",      // 2词 ✅
@@ -2349,7 +2349,7 @@ function validateChineseAnchorTexts(texts) {
       "emergency": "Emergency Care",        // 2词 ✅
       "medication": "Medication Guide"      // 2词 ✅
     },
-    
+
     "navigation": {
       "main": "Pain Management",            // 2词 ✅
       "health": "Health Center",            // 2词 ✅
@@ -2357,7 +2357,7 @@ function validateChineseAnchorTexts(texts) {
       "teen": "Teen Health",                // 2词 ✅
       "therapy": "Natural Therapy"          // 2词 ✅
     },
-    
+
     "cta": {
       "viewMore": "View More",              // 2词 ✅
       "startNow": "Start Now",              // 2词 ✅
@@ -2365,7 +2365,7 @@ function validateChineseAnchorTexts(texts) {
       "tryNow": "Try Now",                  // 2词 ✅
       "download": "Download Resources"      // 2词 ✅
     },
-    
+
     "pdf": {
       "guide": "Download Guide",            // 2词 ✅
       "checklist": "Download Checklist",    // 2词 ✅
@@ -2407,7 +2407,7 @@ function validateChineseAnchorTexts(texts) {
 ## ⚠️ **为什么不能用单个单词？**
 
 ```
-❌ "Impact" 
+❌ "Impact"
 问题：缺乏上下文，用户不知道是什么的影响
 
 ✅ "Impact Calculator"
@@ -2467,7 +2467,7 @@ function validateChineseAnchorTexts(texts) {
       "routine": "日常护理技巧"
     }
   },
-  
+
   "comment": "注意：如果需要支持多语言（如英文版），需要在 messages/en.json 中添加对应的英文锚文本"
 }
 
@@ -2695,12 +2695,12 @@ import Link from 'next/link';
 
 export default function HomePage() {
   const anchorT = useTranslations('anchorTexts');
-  
+
   return (
     <div>
       {/* 修改前 */}
       <Link href="/health-guide">了解更多</Link>
-      
+
       {/* 修改后 */}
       <Link href="/health-guide">{anchorT('homepage.main')}</Link>
     </div>
@@ -2715,7 +2715,7 @@ import Link from 'next/link';
 
 export default async function HomePage() {
   const anchorT = await getTranslations('anchorTexts');
-  
+
   return (
     <Link href="/health-guide">{anchorT('homepage.main')}</Link>
   );
@@ -2960,7 +2960,7 @@ const anchorT = await getTranslations('anchorTexts');
 
 **原因**: 该页面可能已经使用了不同的文案
 
-**解决方案**: 
+**解决方案**:
 1. 手动检查页面内容
 2. 使用VS Code搜索该页面中的所有Link标签
 3. 确认是否有其他需要优化的锚文本
@@ -3211,7 +3211,7 @@ import { useTranslations } from 'next-intl';
 
 export default function Page() {
   const t = useTranslations();  // 或 const anchorT = useTranslations('anchorTexts');
-  
+
   return (
     <Link href="/health-guide">{t('anchorTexts.navigation.main')}</Link>
   );

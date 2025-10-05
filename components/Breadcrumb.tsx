@@ -47,13 +47,13 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
           __html: JSON.stringify(breadcrumbData)
         }}
       />
-      
+
       {/* 面包屑导航 */}
       <nav aria-label="Breadcrumb" className={`mb-6 ${className}`}>
         <ol className="flex items-center space-x-2 text-sm text-gray-600">
           <li>
-            <Link 
-              href={`/${locale}`} 
+            <Link
+              href={`/${locale}`}
               className="flex items-center hover:text-primary-600 transition-colors"
               suppressHydrationWarning={true}
             >
@@ -61,12 +61,12 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
               {t('home')}
             </Link>
           </li>
-          
+
           {items.map((item, index) => (
             <li key={index} className="flex items-center">
               <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
               {item.href ? (
-                <Link 
+                <Link
                   href={item.href}
                   className="hover:text-primary-600 transition-colors"
                   suppressHydrationWarning={true}

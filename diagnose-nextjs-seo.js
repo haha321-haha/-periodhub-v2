@@ -154,7 +154,7 @@ function analyzePdfFiles() {
       // 提取 PDF 文件名
       const pdfMatches = content.match(/'([^']+\.pdf)'/g);
       if (pdfMatches) {
-        diagnosis.pdfFilesInSitemap = pdfMatches.map(match => 
+        diagnosis.pdfFilesInSitemap = pdfMatches.map(match =>
           match.replace(/'/g, '')
         );
       }
@@ -195,7 +195,7 @@ function checkNextjsConfig() {
   if (checkFileExists(nextConfigPath)) {
     diagnosis.hasNextConfig = true;
     diagnosis.nextConfigPath = nextConfigPath;
-    
+
     const content = readFileContent(nextConfigPath);
     if (content) {
       // 检查是否有 sitemap 相关配置
@@ -249,39 +249,39 @@ function generateFixRecommendations(robotsDiagnosis, sitemapDiagnosis, pdfDiagno
  */
 function generateDiagnosisReport(diagnosis) {
   const timestamp = new Date().toLocaleString('zh-CN');
-  
+
   let report = `# Next.js SEO 配置诊断报告\n\n`;
   report += `**诊断时间**: ${timestamp}\n\n`;
-  
+
   report += `## 🔍 问题概述\n\n`;
   report += `发现以下 Next.js SEO 配置问题：\n\n`;
-  
+
   if (diagnosis.robots.conflicts.length > 0) {
     report += `1. **Robots.txt 配置冲突**: ${diagnosis.robots.conflicts.length} 个问题\n`;
   }
-  
+
   if (diagnosis.sitemap.conflicts.length > 0) {
     report += `2. **Sitemap 配置冲突**: ${diagnosis.sitemap.conflicts.length} 个问题\n`;
   }
-  
+
   if (diagnosis.pdf.duplicatePdfFiles.length > 0) {
     report += `3. **PDF 文件重复问题**: ${diagnosis.pdf.duplicatePdfFiles.length} 个重复文件\n`;
   }
-  
+
   report += `\n## 📊 详细诊断\n\n`;
-  
+
   // Robots.txt 诊断
   report += `### 1. Robots.txt 配置\n\n`;
   report += `- **静态文件**: ${diagnosis.robots.hasStaticRobots ? '✅ 存在' : '❌ 不存在'}\n`;
   report += `- **动态文件**: ${diagnosis.robots.hasDynamicRobots ? '✅ 存在' : '❌ 不存在'}\n`;
-  
+
   if (diagnosis.robots.conflicts.length > 0) {
     report += `\n**冲突问题**:\n`;
     diagnosis.robots.conflicts.forEach(conflict => {
       report += `- ${conflict}\n`;
     });
   }
-  
+
   if (diagnosis.robots.recommendations.length > 0) {
     report += `\n**修复建议**:\n`;
     diagnosis.robots.recommendations.forEach(rec => {
@@ -289,19 +289,19 @@ function generateDiagnosisReport(diagnosis) {
     });
   }
   report += `\n`;
-  
+
   // Sitemap 诊断
   report += `### 2. Sitemap 配置\n\n`;
   report += `- **静态文件**: ${diagnosis.sitemap.hasStaticSitemap ? '✅ 存在' : '❌ 不存在'}\n`;
   report += `- **动态文件**: ${diagnosis.sitemap.hasDynamicSitemap ? '✅ 存在' : '❌ 不存在'}\n`;
-  
+
   if (diagnosis.sitemap.conflicts.length > 0) {
     report += `\n**冲突问题**:\n`;
     diagnosis.sitemap.conflicts.forEach(conflict => {
       report += `- ${conflict}\n`;
     });
   }
-  
+
   if (diagnosis.sitemap.recommendations.length > 0) {
     report += `\n**修复建议**:\n`;
     diagnosis.sitemap.recommendations.forEach(rec => {
@@ -309,20 +309,20 @@ function generateDiagnosisReport(diagnosis) {
     });
   }
   report += `\n`;
-  
+
   // PDF 文件诊断
   report += `### 3. PDF 文件问题\n\n`;
   report += `- **Sitemap 中的 PDF**: ${diagnosis.pdf.pdfFilesInSitemap.length} 个\n`;
   report += `- **Public 目录中的 PDF**: ${diagnosis.pdf.pdfFilesInPublic.length} 个\n`;
   report += `- **重复的 PDF**: ${diagnosis.pdf.duplicatePdfFiles.length} 个\n`;
-  
+
   if (diagnosis.pdf.duplicatePdfFiles.length > 0) {
     report += `\n**重复的 PDF 文件**:\n`;
     diagnosis.pdf.duplicatePdfFiles.forEach(file => {
       report += `- ${file}\n`;
     });
   }
-  
+
   if (diagnosis.pdf.recommendations.length > 0) {
     report += `\n**修复建议**:\n`;
     diagnosis.pdf.recommendations.forEach(rec => {
@@ -330,10 +330,10 @@ function generateDiagnosisReport(diagnosis) {
     });
   }
   report += `\n`;
-  
+
   // 修复建议
   report += `## 🔧 修复建议\n\n`;
-  
+
   if (diagnosis.recommendations.immediate.length > 0) {
     report += `### 立即修复\n\n`;
     diagnosis.recommendations.immediate.forEach((rec, index) => {
@@ -341,7 +341,7 @@ function generateDiagnosisReport(diagnosis) {
     });
     report += `\n`;
   }
-  
+
   if (diagnosis.recommendations.shortTerm.length > 0) {
     report += `### 短期修复\n\n`;
     diagnosis.recommendations.shortTerm.forEach((rec, index) => {
@@ -349,7 +349,7 @@ function generateDiagnosisReport(diagnosis) {
     });
     report += `\n`;
   }
-  
+
   if (diagnosis.recommendations.longTerm.length > 0) {
     report += `### 长期修复\n\n`;
     diagnosis.recommendations.longTerm.forEach((rec, index) => {
@@ -357,7 +357,7 @@ function generateDiagnosisReport(diagnosis) {
     });
     report += `\n`;
   }
-  
+
   return report;
 }
 
@@ -366,35 +366,35 @@ function generateDiagnosisReport(diagnosis) {
  */
 function diagnoseNextjsSeo() {
   console.log('🔍 开始诊断 Next.js SEO 配置...\n');
-  
+
   try {
     // 诊断各个组件
     console.log('🤖 诊断 robots.txt 配置...');
     const robotsDiagnosis = diagnoseRobotsConfig();
     console.log('✅ Robots.txt 诊断完成');
-    
+
     console.log('🗺️  诊断 sitemap 配置...');
     const sitemapDiagnosis = diagnoseSitemapConfig();
     console.log('✅ Sitemap 诊断完成');
-    
+
     console.log('📄 分析 PDF 文件问题...');
     const pdfDiagnosis = analyzePdfFiles();
     console.log('✅ PDF 文件分析完成');
-    
+
     console.log('⚙️  检查 Next.js 配置...');
     const nextjsDiagnosis = checkNextjsConfig();
     console.log('✅ Next.js 配置检查完成');
-    
+
     // 生成修复建议
     console.log('💡 生成修复建议...');
     const recommendations = generateFixRecommendations(
-      robotsDiagnosis, 
-      sitemapDiagnosis, 
-      pdfDiagnosis, 
+      robotsDiagnosis,
+      sitemapDiagnosis,
+      pdfDiagnosis,
       nextjsDiagnosis
     );
     console.log('✅ 修复建议生成完成');
-    
+
     // 合并诊断结果
     const diagnosis = {
       robots: robotsDiagnosis,
@@ -404,24 +404,24 @@ function diagnoseNextjsSeo() {
       recommendations: recommendations,
       diagnosisTime: new Date().toISOString()
     };
-    
+
     // 生成报告
     console.log('📄 生成诊断报告...');
     const jsonReport = JSON.stringify(diagnosis, null, 2);
     fs.writeFileSync(CONFIG.outputReport, jsonReport);
     console.log(`✅ JSON 报告已保存: ${CONFIG.outputReport}`);
-    
+
     const markdownReport = generateDiagnosisReport(diagnosis);
     fs.writeFileSync(CONFIG.outputSummary, markdownReport);
     console.log(`✅ Markdown 报告已保存: ${CONFIG.outputSummary}`);
-    
+
     // 输出摘要
     console.log('\n📊 诊断结果摘要:');
     console.log(`Robots.txt 冲突: ${robotsDiagnosis.conflicts.length}`);
     console.log(`Sitemap 冲突: ${sitemapDiagnosis.conflicts.length}`);
     console.log(`PDF 重复文件: ${pdfDiagnosis.duplicatePdfFiles.length}`);
     console.log(`立即修复项: ${recommendations.immediate.length}`);
-    
+
   } catch (error) {
     console.error('❌ 诊断过程中出错:', error.message);
   }
@@ -438,19 +438,3 @@ module.exports = {
   diagnoseSitemapConfig,
   analyzePdfFiles
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

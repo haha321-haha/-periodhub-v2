@@ -25,11 +25,11 @@ export function isServer() {
  */
 export function useHydrationSafe() {
   const [isMounted, setIsMounted] = useState(false);
-  
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
-  
+
   return { isMounted, isServer: !isMounted };
 }
 
@@ -39,15 +39,15 @@ export function useHydrationSafe() {
  */
 export function useDelayedRender(delay = 0) {
   const [shouldRender, setShouldRender] = useState(false);
-  
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setShouldRender(true);
     }, delay);
-    
+
     return () => clearTimeout(timer);
   }, [delay]);
-  
+
   return shouldRender;
 }
 
@@ -55,23 +55,23 @@ export function useDelayedRender(delay = 0) {
  * 客户端渲染包装器
  * 确保内容只在客户端渲染
  */
-export function ClientOnly({ 
-  children, 
-  fallback = null 
-}: { 
+export function ClientOnly({
+  children,
+  fallback = null
+}: {
   children: React.ReactNode;
   fallback?: React.ReactNode;
 }) {
   const [hasMounted, setHasMounted] = useState(false);
-  
+
   useEffect(() => {
     setHasMounted(true);
   }, []);
-  
+
   if (!hasMounted) {
     return fallback;
   }
-  
+
   return children;
 }
 
@@ -83,7 +83,7 @@ export function ServerOnly({ children }: { children: React.ReactNode }) {
   if (isClient()) {
     return null;
   }
-  
+
   return children;
 }
 

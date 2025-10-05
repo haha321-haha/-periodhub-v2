@@ -1,28 +1,43 @@
 // 性能优化工具 - 基于技术日志的成功经验
 
-import { lazy } from 'react';
-import React from 'react';
-import SafeSmartImage from '@/components/ui/SafeSmartImage';
+import { lazy } from "react";
+import React from "react";
+import SafeSmartImage from "@/components/ui/SafeSmartImage";
 
 // 懒加载组件工厂
-export function createLazyComponent(importFn: () => Promise<any>, fallback?: React.ComponentType) {
+export function createLazyComponent(
+  importFn: () => Promise<any>,
+  fallback?: React.ComponentType,
+) {
   return lazy(async () => {
     try {
       // 添加最小加载时间，避免闪烁
       const [component] = await Promise.all([
         importFn(),
-        new Promise(resolve => setTimeout(resolve, 100))
+        new Promise((resolve) => setTimeout(resolve, 100)),
       ]);
       return component;
     } catch (error) {
-      console.error('Component lazy loading failed:', error);
+      console.error("Component lazy loading failed:", error);
       // 返回错误组件
       return {
-        default: fallback || (() => React.createElement('div', {
-          className: "bg-red-50 border border-red-200 rounded-lg p-4 my-4"
-        }, React.createElement('p', {
-          className: "text-red-700"
-        }, "组件加载失败，请刷新页面重试。")))
+        default:
+          fallback ||
+          (() =>
+            React.createElement(
+              "div",
+              {
+                className:
+                  "bg-red-50 border border-red-200 rounded-lg p-4 my-4",
+              },
+              React.createElement(
+                "p",
+                {
+                  className: "text-red-700",
+                },
+                "组件加载失败，请刷新页面重试。",
+              ),
+            )),
       };
     }
   });
@@ -30,10 +45,10 @@ export function createLazyComponent(importFn: () => Promise<any>, fallback?: Rea
 
 // 预加载关键组件
 export function preloadComponents() {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     // 在空闲时间预加载组件
     const preloadComponent = (importFn: () => Promise<any>) => {
-      if ('requestIdleCallback' in window) {
+      if ("requestIdleCallback" in window) {
         (window as any).requestIdleCallback(() => {
           importFn().catch(console.error);
         });
@@ -45,10 +60,10 @@ export function preloadComponents() {
     };
 
     // 预加载核心组件
-    preloadComponent(() => import('../components/PainAssessmentTool'));
-    preloadComponent(() => import('../components/SymptomChecklist'));
-    preloadComponent(() => import('../components/DecisionTree'));
-    preloadComponent(() => import('../components/ComparisonTable'));
+    preloadComponent(() => import("../components/PainAssessmentTool"));
+    preloadComponent(() => import("../components/SymptomChecklist"));
+    preloadComponent(() => import("../components/DecisionTree"));
+    preloadComponent(() => import("../components/ComparisonTable"));
   }
 }
 
@@ -68,13 +83,13 @@ export class MedicalCareGuidePerformanceMonitor {
   recordComponentLoad(componentName: string, startTime: number) {
     const loadTime = performance.now() - startTime;
     this.metrics.set(`${componentName}_load_time`, loadTime);
-    
+
     // 发送到分析服务（如果配置了）
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'component_load', {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "component_load", {
         component_name: componentName,
         load_time: Math.round(loadTime),
-        page: 'medical-care-guide'
+        page: "medical-care-guide",
       });
     }
   }
@@ -83,12 +98,12 @@ export class MedicalCareGuidePerformanceMonitor {
   recordUserInteraction(interaction: string, componentName: string) {
     const timestamp = Date.now();
     this.metrics.set(`${componentName}_${interaction}_time`, timestamp);
-    
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'user_interaction', {
+
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "user_interaction", {
         interaction_type: interaction,
         component_name: componentName,
-        page: 'medical-care-guide'
+        page: "medical-care-guide",
       });
     }
   }
@@ -96,12 +111,12 @@ export class MedicalCareGuidePerformanceMonitor {
   // 记录评估完成
   recordAssessmentCompletion(assessmentType: string, duration: number) {
     this.metrics.set(`${assessmentType}_completion_time`, duration);
-    
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'assessment_completed', {
+
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "assessment_completed", {
         assessment_type: assessmentType,
         duration: Math.round(duration),
-        page: 'medical-care-guide'
+        page: "medical-care-guide",
       });
     }
   }
@@ -120,7 +135,7 @@ export class MedicalCareGuidePerformanceMonitor {
 // 错误边界HOC
 export function withErrorBoundary<P extends object>(
   Component: React.ComponentType<P>,
-  fallback?: React.ComponentType<{ error: Error; retry: () => void }>
+  fallback?: React.ComponentType<{ error: Error; retry: () => void }>,
 ) {
   return function WrappedComponent(props: P) {
     const [hasError, setHasError] = React.useState(false);
@@ -137,12 +152,15 @@ export function withErrorBoundary<P extends object>(
         setError(new Error(event.reason));
       };
 
-      window.addEventListener('error', handleError);
-      window.addEventListener('unhandledrejection', handleUnhandledRejection);
+      window.addEventListener("error", handleError);
+      window.addEventListener("unhandledrejection", handleUnhandledRejection);
 
       return () => {
-        window.removeEventListener('error', handleError);
-        window.removeEventListener('unhandledrejection', handleUnhandledRejection);
+        window.removeEventListener("error", handleError);
+        window.removeEventListener(
+          "unhandledrejection",
+          handleUnhandledRejection,
+        );
       };
     }, []);
 
@@ -156,15 +174,13 @@ export function withErrorBoundary<P extends object>(
         const FallbackComponent = fallback;
         return <FallbackComponent error={error!} retry={retry} />;
       }
-      
+
       return (
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 my-8">
           <h3 className="text-lg font-semibold text-red-800 mb-2">
             组件出现错误
           </h3>
-          <p className="text-red-700 mb-4">
-            {error?.message || '未知错误'}
-          </p>
+          <p className="text-red-700 mb-4">{error?.message || "未知错误"}</p>
           <button
             onClick={retry}
             className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
@@ -180,11 +196,11 @@ export function withErrorBoundary<P extends object>(
 }
 
 // 图片懒加载
-export function LazyImage({ 
-  src, 
-  alt, 
-  className = '', 
-  placeholder = '/images/placeholder.svg' 
+export function LazyImage({
+  src,
+  alt,
+  className = "",
+  placeholder = "/images/placeholder.svg",
 }: {
   src: string;
   alt: string;
@@ -203,7 +219,7 @@ export function LazyImage({
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (imgRef.current) {
@@ -219,7 +235,9 @@ export function LazyImage({
       alt={alt}
       width={400}
       height={300}
-      className={`transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-50'} ${className}`}
+      className={`transition-opacity duration-300 ${
+        isLoaded ? "opacity-100" : "opacity-50"
+      } ${className}`}
       onLoad={() => setIsLoaded(true)}
       priority={false}
       type="content"
@@ -250,12 +268,15 @@ export function useThrottle<T>(value: T, limit: number): T {
   const lastRan = React.useRef(Date.now());
 
   React.useEffect(() => {
-    const handler = setTimeout(() => {
-      if (Date.now() - lastRan.current >= limit) {
-        setThrottledValue(value);
-        lastRan.current = Date.now();
-      }
-    }, limit - (Date.now() - lastRan.current));
+    const handler = setTimeout(
+      () => {
+        if (Date.now() - lastRan.current >= limit) {
+          setThrottledValue(value);
+          lastRan.current = Date.now();
+        }
+      },
+      limit - (Date.now() - lastRan.current),
+    );
 
     return () => {
       clearTimeout(handler);
@@ -271,7 +292,7 @@ export function useMemoryMonitor() {
 
   React.useEffect(() => {
     const updateMemoryInfo = () => {
-      if ('memory' in performance) {
+      if ("memory" in performance) {
         setMemoryInfo((performance as any).memory);
       }
     };

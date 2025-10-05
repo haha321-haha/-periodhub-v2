@@ -9,17 +9,17 @@ if (typeof window !== 'undefined') {
       'quiz-answers',
       'web-vitals-cache'
     ];
-    
+
     keysToRemove.forEach(key => {
       if (localStorage.getItem(key)) {
         localStorage.removeItem(key);
         console.log('已清理:', key);
       }
     });
-    
+
     // 清理sessionStorage
     sessionStorage.clear();
-    
+
     console.log('✅ 浏览器缓存已清理');
   } catch (error) {
     console.error('清理缓存时出错:', error);

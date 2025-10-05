@@ -15,10 +15,10 @@ export const useProgressSave = () => {
   // 保存进度
   const saveProgress = useCallback(async () => {
     if (isSaving.current) return;
-    
+
     try {
       isSaving.current = true;
-      
+
       // 使用选择器获取当前状态
       const currentState = {
         stageProgress: store.stageProgress,
@@ -28,7 +28,7 @@ export const useProgressSave = () => {
         lastVisitDate: store.lastVisitDate
       };
       const success = progressManager.saveProgress(currentState);
-      
+
       if (success) {
         lastSaveTime.current = new Date();
         console.log('💾 进度保存成功');
@@ -99,7 +99,7 @@ export const useProgressSave = () => {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-        
+
         console.log('📤 进度导出成功');
         return true;
       }
@@ -183,7 +183,7 @@ export const useProgressSave = () => {
     const interval = setInterval(() => {
       const now = new Date();
       const timeSinceLastSave = now.getTime() - lastSaveTime.current.getTime();
-      
+
       // 如果距离上次保存超过30秒，则保存
       if (timeSinceLastSave > 30000) {
         saveProgress();
@@ -202,7 +202,7 @@ export const useProgressSave = () => {
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
-    
+
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
@@ -217,7 +217,7 @@ export const useProgressSave = () => {
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    
+
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
@@ -235,4 +235,3 @@ export const useProgressSave = () => {
     restoreSnapshot
   };
 };
-

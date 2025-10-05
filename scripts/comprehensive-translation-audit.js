@@ -48,7 +48,7 @@ class TranslationAuditor {
     try {
       const zhPath = path.join(process.cwd(), 'messages/zh.json');
       const enPath = path.join(process.cwd(), 'messages/en.json');
-      
+
       if (!fs.existsSync(zhPath) || !fs.existsSync(enPath)) {
         this.addIssue('CRITICAL', 'HIGH', 'Translation files not found', 'messages/');
         return false;
@@ -56,7 +56,7 @@ class TranslationAuditor {
 
       this.zhTranslations = JSON.parse(fs.readFileSync(zhPath, 'utf8'));
       this.enTranslations = JSON.parse(fs.readFileSync(enPath, 'utf8'));
-      
+
       this.log('Translation files loaded successfully');
       return true;
     } catch (error) {
@@ -68,22 +68,22 @@ class TranslationAuditor {
   // Check translation file structure consistency
   auditTranslationStructure() {
     this.log('Auditing translation file structure...');
-    
+
     const zhKeys = this.getAllKeys(this.zhTranslations);
     const enKeys = this.getAllKeys(this.enTranslations);
-    
+
     // Find missing keys
     const missingInEn = zhKeys.filter(key => !enKeys.includes(key));
     const missingInZh = enKeys.filter(key => !zhKeys.includes(key));
-    
+
     missingInEn.forEach(key => {
       this.addIssue('STRUCTURE', 'HIGH', `Missing English translation for key: ${key}`, 'messages/en.json');
     });
-    
+
     missingInZh.forEach(key => {
       this.addIssue('STRUCTURE', 'HIGH', `Missing Chinese translation for key: ${key}`, 'messages/zh.json');
     });
-    
+
     this.testResults.structureConsistency = {
       totalZhKeys: zhKeys.length,
       totalEnKeys: enKeys.length,
@@ -91,7 +91,7 @@ class TranslationAuditor {
       missingInZh: missingInZh.length,
       consistency: ((Math.min(zhKeys.length, enKeys.length) / Math.max(zhKeys.length, enKeys.length)) * 100).toFixed(2)
     };
-    
+
     this.log(`Structure audit complete. Consistency: ${this.testResults.structureConsistency.consistency}%`);
   }
 
@@ -112,23 +112,23 @@ class TranslationAuditor {
   // Check for mixed language content
   auditLanguageSeparation() {
     this.log('Auditing language separation...');
-    
+
     const chineseRegex = /[\u4e00-\u9fff]/;
     const englishRegex = /[a-zA-Z]/;
-    
+
     // Check English translations for Chinese content
     this.checkLanguageContamination(this.enTranslations, 'en', chineseRegex, 'Chinese characters in English translations');
-    
+
     // Check Chinese translations for unexpected English (excluding technical terms)
     this.checkLanguageContamination(this.zhTranslations, 'zh', /^[a-zA-Z\s]+$/, 'Pure English content in Chinese translations');
-    
+
     this.log('Language separation audit complete');
   }
 
   checkLanguageContamination(obj, lang, regex, description, prefix = '') {
     for (const [key, value] of Object.entries(obj)) {
       const fullKey = prefix ? `${prefix}.${key}` : key;
-      
+
       if (typeof value === 'string') {
         if ((lang === 'en' && regex.test(value)) || (lang === 'zh' && regex.test(value))) {
           this.addIssue('LANGUAGE_SEPARATION', 'MEDIUM', `${description}: "${value}"`, `messages/${lang}.json:${fullKey}`);
@@ -148,19 +148,19 @@ class TranslationAuditor {
   // Check for untranslated keys (translation keys appearing as content)
   auditUntranslatedKeys() {
     this.log('Auditing for untranslated keys...');
-    
+
     const keyPattern = /^[a-zA-Z][a-zA-Z0-9]*(\.[a-zA-Z][a-zA-Z0-9]*)+$/;
-    
+
     this.checkForTranslationKeys(this.zhTranslations, 'zh', keyPattern);
     this.checkForTranslationKeys(this.enTranslations, 'en', keyPattern);
-    
+
     this.log('Untranslated keys audit complete');
   }
 
   checkForTranslationKeys(obj, lang, pattern, prefix = '') {
     for (const [key, value] of Object.entries(obj)) {
       const fullKey = prefix ? `${prefix}.${key}` : key;
-      
+
       if (typeof value === 'string' && pattern.test(value)) {
         this.addIssue('UNTRANSLATED', 'HIGH', `Untranslated key found: "${value}"`, `messages/${lang}.json:${fullKey}`);
       } else if (Array.isArray(value)) {
@@ -178,7 +178,7 @@ class TranslationAuditor {
   // Check critical paths for interactive tools
   auditInteractiveToolsPaths() {
     this.log('Auditing interactive tools translation paths...');
-    
+
     const criticalPaths = [
       'painTracker.assessment.recommendations',
       'interactiveToolsPage.painTracker.assessment.recommendations',
@@ -186,11 +186,11 @@ class TranslationAuditor {
       'interactiveTools.breathingExercise',
       'interactiveTools.periodPainAssessment'
     ];
-    
+
     criticalPaths.forEach(pathStr => {
       const zhValue = this.getNestedValue(this.zhTranslations, pathStr);
       const enValue = this.getNestedValue(this.enTranslations, pathStr);
-      
+
       if (!zhValue && !enValue) {
         this.addIssue('MISSING_PATH', 'HIGH', `Critical path missing in both languages: ${pathStr}`, 'messages/');
       } else if (!zhValue) {
@@ -199,7 +199,7 @@ class TranslationAuditor {
         this.addIssue('MISSING_PATH', 'HIGH', `Critical path missing in English: ${pathStr}`, 'messages/en.json');
       }
     });
-    
+
     this.log('Interactive tools paths audit complete');
   }
 
@@ -223,11 +223,11 @@ class TranslationAuditor {
       fixes: this.fixes,
       recommendations: this.generateRecommendations()
     };
-    
+
     // Save report to file
     const reportPath = path.join(process.cwd(), 'translation-audit-report.json');
     fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-    
+
     this.log(`Comprehensive report saved to: ${reportPath}`, 'success');
     return report;
   }
@@ -246,22 +246,22 @@ class TranslationAuditor {
   // Main audit execution
   async runFullAudit() {
     this.log('Starting comprehensive translation audit...', 'info');
-    
+
     if (!this.loadTranslations()) {
       this.log('Cannot proceed without translation files', 'error');
       return null;
     }
-    
+
     this.auditTranslationStructure();
     this.auditLanguageSeparation();
     this.auditUntranslatedKeys();
     this.auditInteractiveToolsPaths();
-    
+
     const report = this.generateReport();
-    
+
     this.log('Comprehensive audit complete!', 'success');
     this.log(`Found ${report.summary.totalIssues} issues (${report.summary.criticalIssues} critical)`, 'info');
-    
+
     return report;
   }
 }

@@ -73,12 +73,7 @@
       "category": "网络优化",
       "priority": "中",
       "impact": "整体性能提升",
-      "actions": [
-        "使用CDN加速",
-        "启用HTTP/2",
-        "优化字体加载",
-        "减少DNS查询"
-      ]
+      "actions": ["使用CDN加速", "启用HTTP/2", "优化字体加载", "减少DNS查询"]
     }
   ],
   "recommendations": [

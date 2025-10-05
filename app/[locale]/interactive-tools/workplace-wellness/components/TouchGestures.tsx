@@ -4,15 +4,22 @@
  * 基于HVsLYEp的触控手势设计
  */
 
-'use client';
+"use client";
 
-import { ReactNode, useRef, useEffect, useState, TouchEvent, MouseEvent } from 'react';
+import {
+  ReactNode,
+  useRef,
+  useEffect,
+  useState,
+  TouchEvent,
+  MouseEvent,
+} from "react";
 
 // 触控手势类型
-type GestureType = 'swipe' | 'pinch' | 'tap' | 'longPress' | 'doubleTap';
+type GestureType = "swipe" | "pinch" | "tap" | "longPress" | "doubleTap";
 
 // 手势方向
-type SwipeDirection = 'up' | 'down' | 'left' | 'right';
+type SwipeDirection = "up" | "down" | "left" | "right";
 
 // 手势回调
 interface GestureCallbacks {
@@ -31,7 +38,7 @@ export function TouchGestureDetector({
   onTap,
   onLongPress,
   onDoubleTap,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   onSwipe?: (direction: SwipeDirection, distance: number) => void;
@@ -42,17 +49,21 @@ export function TouchGestureDetector({
   className?: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [touchStart, setTouchStart] = useState<{ x: number; y: number; time: number } | null>(null);
+  const [touchStart, setTouchStart] = useState<{
+    x: number;
+    y: number;
+    time: number;
+  } | null>(null);
   const [lastTap, setLastTap] = useState<number>(0);
 
   const handleTouchStart = (e: TouchEvent) => {
     const touch = e.touches[0];
     const now = Date.now();
-    
+
     setTouchStart({
       x: touch.clientX,
       y: touch.clientY,
-      time: now
+      time: now,
     });
 
     // 长按检测
@@ -63,10 +74,10 @@ export function TouchGestureDetector({
 
       const handleTouchEnd = () => {
         clearTimeout(longPressTimer);
-        document.removeEventListener('touchend', handleTouchEnd);
+        document.removeEventListener("touchend", handleTouchEnd);
       };
 
-      document.addEventListener('touchend', handleTouchEnd);
+      document.addEventListener("touchend", handleTouchEnd);
     }
   };
 
@@ -91,9 +102,9 @@ export function TouchGestureDetector({
     if (distance > 30 && deltaTime < 300) {
       let direction: SwipeDirection;
       if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        direction = deltaX > 0 ? 'right' : 'left';
+        direction = deltaX > 0 ? "right" : "left";
       } else {
-        direction = deltaY > 0 ? 'down' : 'up';
+        direction = deltaY > 0 ? "down" : "up";
       }
       onSwipe?.(direction, distance);
     } else if (distance < 10 && deltaTime < 300) {
@@ -124,7 +135,7 @@ export function SwipeableContainer({
   onSwipeRight,
   onSwipeUp,
   onSwipeDown,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   onSwipeLeft?: () => void;
@@ -137,26 +148,23 @@ export function SwipeableContainer({
     if (distance < 50) return; // 最小滑动距离
 
     switch (direction) {
-      case 'left':
+      case "left":
         onSwipeLeft?.();
         break;
-      case 'right':
+      case "right":
         onSwipeRight?.();
         break;
-      case 'up':
+      case "up":
         onSwipeUp?.();
         break;
-      case 'down':
+      case "down":
         onSwipeDown?.();
         break;
     }
   };
 
   return (
-    <TouchGestureDetector
-      onSwipe={handleSwipe}
-      className={className}
-    >
+    <TouchGestureDetector onSwipe={handleSwipe} className={className}>
       {children}
     </TouchGestureDetector>
   );
@@ -167,7 +175,7 @@ export function DraggableContainer({
   children,
   onDrag,
   onDragEnd,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   onDrag?: (deltaX: number, deltaY: number) => void;
@@ -175,7 +183,9 @@ export function DraggableContainer({
   className?: string;
 }) {
   const [isDragging, setIsDragging] = useState(false);
-  const [startPos, setStartPos] = useState<{ x: number; y: number } | null>(null);
+  const [startPos, setStartPos] = useState<{ x: number; y: number } | null>(
+    null,
+  );
 
   const handleTouchStart = (e: TouchEvent) => {
     const touch = e.touches[0];
@@ -189,7 +199,7 @@ export function DraggableContainer({
     const touch = e.touches[0];
     const deltaX = touch.clientX - startPos.x;
     const deltaY = touch.clientY - startPos.y;
-    
+
     onDrag?.(deltaX, deltaY);
   };
 
@@ -199,7 +209,7 @@ export function DraggableContainer({
     const touch = e.changedTouches[0];
     const deltaX = touch.clientX - startPos.x;
     const deltaY = touch.clientY - startPos.y;
-    
+
     onDragEnd?.(deltaX, deltaY);
     setIsDragging(false);
     setStartPos(null);
@@ -220,15 +230,13 @@ export function DraggableContainer({
 // 触控滚动容器
 export function TouchScrollContainer({
   children,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   className?: string;
 }) {
   return (
-    <div className={`overflow-auto touch-pan-y ${className}`}>
-      {children}
-    </div>
+    <div className={`overflow-auto touch-pan-y ${className}`}>{children}</div>
   );
 }
 
@@ -236,7 +244,7 @@ export function TouchScrollContainer({
 export function TouchFeedback({
   children,
   onPress,
-  className = ''
+  className = "",
 }: {
   children: ReactNode;
   onPress?: () => void;
@@ -275,8 +283,8 @@ export function TouchFeedback({
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
       style={{
-        transform: isPressed ? 'scale(0.95)' : 'scale(1)',
-        transition: 'transform 0.1s ease-out'
+        transform: isPressed ? "scale(0.95)" : "scale(1)",
+        transition: "transform 0.1s ease-out",
       }}
     >
       {children}

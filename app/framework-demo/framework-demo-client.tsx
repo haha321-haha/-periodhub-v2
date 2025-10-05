@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import {
   Rocket,
   Zap,
@@ -10,18 +10,18 @@ import {
   Bell,
   Database,
   Cpu,
-  Monitor
-} from 'lucide-react';
+  Monitor,
+} from "lucide-react";
 
 export default function FrameworkDemoClient() {
   // 演示数据
   const demoData = [
-    { label: '1月', value: 65 },
-    { label: '2月', value: 78 },
-    { label: '3月', value: 90 },
-    { label: '4月', value: 81 },
-    { label: '5月', value: 95 },
-    { label: '6月', value: 88 }
+    { label: "1月", value: 65 },
+    { label: "2月", value: 78 },
+    { label: "3月", value: 90 },
+    { label: "4月", value: 81 },
+    { label: "5月", value: 95 },
+    { label: "6月", value: 88 },
   ];
 
   // 演示功能
@@ -59,7 +59,7 @@ export default function FrameworkDemoClient() {
               高级通知系统，支持多种类型、自动关闭、动画效果
             </p>
             <button
-              onClick={() => showDemo('Toast通知')}
+              onClick={() => showDemo("Toast通知")}
               className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
               显示随机通知
@@ -76,7 +76,7 @@ export default function FrameworkDemoClient() {
               灵活的模态框系统，支持确认对话框、自定义内容、动画效果
             </p>
             <button
-              onClick={() => showDemo('模态框')}
+              onClick={() => showDemo("模态框")}
               className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
             >
               打开确认对话框
@@ -95,7 +95,7 @@ export default function FrameworkDemoClient() {
             <div className="mt-4 p-4 bg-gray-50 rounded-lg">
               <p className="text-sm text-gray-600">图表演示区域</p>
               <div className="mt-2 text-xs text-gray-500">
-                数据: {demoData.map(d => `${d.label}:${d.value}`).join(', ')}
+                数据: {demoData.map((d) => `${d.label}:${d.value}`).join(", ")}
               </div>
             </div>
           </div>
@@ -181,19 +181,19 @@ export default function FrameworkDemoClient() {
           <h3 className="text-2xl font-semibold mb-6">🚀 框架革命成果展示</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <button
-              onClick={() => showDemo('缓存系统')}
+              onClick={() => showDemo("缓存系统")}
               className="bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition-colors"
             >
               测试缓存系统
             </button>
             <button
-              onClick={() => showDemo('性能监控')}
+              onClick={() => showDemo("性能监控")}
               className="bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 transition-colors"
             >
               测试性能监控
             </button>
             <button
-              onClick={() => showDemo('状态管理')}
+              onClick={() => showDemo("状态管理")}
               className="bg-purple-600 text-white px-4 py-3 rounded-lg hover:bg-purple-700 transition-colors"
             >
               查看状态管理
@@ -201,7 +201,9 @@ export default function FrameworkDemoClient() {
           </div>
 
           <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg">
-            <h4 className="text-lg font-semibold text-gray-800 mb-2">✅ 框架革命完成！</h4>
+            <h4 className="text-lg font-semibold text-gray-800 mb-2">
+              ✅ 框架革命完成！
+            </h4>
             <p className="text-gray-600">
               我们成功实现了企业级的React框架，包含状态管理、性能监控、缓存系统、高级组件等功能。
               现在可以继续优化和扩展更多功能！

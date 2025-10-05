@@ -2,7 +2,7 @@
 
 /**
  * 🔧 PeriodHub SEO问题修复脚本
- * 
+ *
  * 基于技术SEO诊断报告，自动修复发现的问题
  */
 
@@ -18,7 +18,7 @@ class SEOIssuesFixer {
 
   async run() {
     console.log('🔧 开始修复SEO问题...\n');
-    
+
     try {
       await this.fixCoreWebVitalsMonitoring();
       await this.enhanceImageOptimization();
@@ -26,9 +26,9 @@ class SEOIssuesFixer {
       await this.improveFAQStructuredData();
       await this.optimizeInternalLinking();
       await this.addPerformanceMonitoring();
-      
+
       this.generateReport();
-      
+
     } catch (error) {
       console.error('❌ 修复过程中出现错误:', error.message);
       this.errors.push(error.message);
@@ -37,7 +37,7 @@ class SEOIssuesFixer {
 
   async fixCoreWebVitalsMonitoring() {
     console.log('📊 添加Core Web Vitals监控...');
-    
+
     try {
       // 1. 创建Web Vitals监控组件
       const webVitalsComponent = `'use client';
@@ -54,7 +54,7 @@ export default function WebVitalsReporter() {
         non_interaction: true,
       });
     }
-    
+
     // 发送到自定义分析服务
     if (process.env.NODE_ENV === 'production') {
       fetch('/api/analytics/web-vitals', {
@@ -63,7 +63,7 @@ export default function WebVitalsReporter() {
         body: JSON.stringify(metric),
       }).catch(console.error);
     }
-    
+
     // 开发环境下打印到控制台
     if (process.env.NODE_ENV === 'development') {
       console.log('📊 Web Vital:', metric);
@@ -75,14 +75,14 @@ export default function WebVitalsReporter() {
 
       const componentPath = path.join(this.projectRoot, 'components/WebVitalsReporter.tsx');
       fs.writeFileSync(componentPath, webVitalsComponent);
-      
+
       // 2. 创建API端点
       const apiEndpoint = `import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
     const metric = await request.json();
-    
+
     // 这里可以发送到你的分析服务
     console.log('Web Vitals Metric:', {
       name: metric.name,
@@ -91,10 +91,10 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
       url: request.headers.get('referer') || 'unknown'
     });
-    
+
     // 可以存储到数据库或发送到第三方服务
     // await saveMetricToDatabase(metric);
-    
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error processing web vitals:', error);
@@ -107,9 +107,9 @@ export async function POST(request: NextRequest) {
         fs.mkdirSync(apiDir, { recursive: true });
       }
       fs.writeFileSync(path.join(apiDir, 'route.ts'), apiEndpoint);
-      
+
       this.fixes.push('✅ 添加了Core Web Vitals监控组件和API端点');
-      
+
     } catch (error) {
       this.errors.push(`Core Web Vitals监控: ${error.message}`);
     }
@@ -117,12 +117,12 @@ export async function POST(request: NextRequest) {
 
   async enhanceImageOptimization() {
     console.log('🖼️ 增强图片优化配置...');
-    
+
     try {
       // 读取现有的next.config.js
       const configPath = path.join(this.projectRoot, 'next.config.js');
       let configContent = fs.readFileSync(configPath, 'utf8');
-      
+
       // 检查是否已经有优化配置
       if (!configContent.includes('formats: [\'image/webp\', \'image/avif\']')) {
         // 增强图片配置
@@ -149,19 +149,19 @@ export async function POST(request: NextRequest) {
       },
     ]
   },`;
-        
+
         // 替换现有的images配置
         configContent = configContent.replace(
           /images:\s*{[^}]*}/s,
           enhancedImageConfig.trim()
         );
-        
+
         fs.writeFileSync(configPath, configContent);
         this.fixes.push('✅ 增强了图片优化配置');
       } else {
         this.fixes.push('ℹ️ 图片优化配置已存在');
       }
-      
+
     } catch (error) {
       this.errors.push(`图片优化: ${error.message}`);
     }
@@ -169,7 +169,7 @@ export async function POST(request: NextRequest) {
 
   async addRelatedArticlesComponent() {
     console.log('🔗 创建相关文章组件...');
-    
+
     try {
       const relatedArticlesComponent = `'use client';
 
@@ -193,14 +193,14 @@ interface RelatedArticlesProps {
   maxResults?: number;
 }
 
-export default function RelatedArticles({ 
-  currentArticle, 
-  allArticles, 
-  locale, 
-  maxResults = 3 
+export default function RelatedArticles({
+  currentArticle,
+  allArticles,
+  locale,
+  maxResults = 3
 }: RelatedArticlesProps) {
   const t = useTranslations('article');
-  
+
   // 计算相关文章
   const getRelatedArticles = () => {
     const related = allArticles
@@ -208,27 +208,27 @@ export default function RelatedArticles({
       .map(article => {
         // 计算相关性分数
         let score = 0;
-        
+
         // 标签匹配
-        const commonTags = article.tags.filter(tag => 
+        const commonTags = article.tags.filter(tag =>
           currentArticle.tags.includes(tag)
         );
         score += commonTags.length * 3;
-        
+
         // 标题关键词匹配
         const titleWords = currentArticle.title.toLowerCase().split(' ');
         const articleTitleWords = article.title.toLowerCase().split(' ');
-        const commonWords = titleWords.filter(word => 
+        const commonWords = titleWords.filter(word =>
           articleTitleWords.includes(word) && word.length > 3
         );
         score += commonWords.length * 2;
-        
+
         return { ...article, score };
       })
       .filter(article => article.score > 0)
       .sort((a, b) => b.score - a.score)
       .slice(0, maxResults);
-    
+
     return related;
   };
 
@@ -244,7 +244,7 @@ export default function RelatedArticles({
         <span className="mr-2">🔗</span>
         {t('relatedArticles')}
       </h3>
-      
+
       <div className="grid md:grid-cols-3 gap-6">
         {relatedArticles.map((article) => (
           <Link
@@ -263,15 +263,15 @@ export default function RelatedArticles({
                 />
               </div>
             )}
-            
+
             <h4 className="font-semibold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors line-clamp-2">
               {article.title}
             </h4>
-            
+
             <p className="text-gray-600 text-sm mb-3 line-clamp-2">
               {article.description}
             </p>
-            
+
             <div className="flex items-center justify-between text-xs text-gray-500">
               <span>{article.readingTime} {t('minutesRead')}</span>
               <span className="text-purple-600 group-hover:text-purple-700">
@@ -287,9 +287,9 @@ export default function RelatedArticles({
 
       const componentPath = path.join(this.projectRoot, 'components/RelatedArticles.tsx');
       fs.writeFileSync(componentPath, relatedArticlesComponent);
-      
+
       this.fixes.push('✅ 创建了相关文章组件');
-      
+
     } catch (error) {
       this.errors.push(`相关文章组件: ${error.message}`);
     }
@@ -297,7 +297,7 @@ export default function RelatedArticles({
 
   async improveFAQStructuredData() {
     console.log('❓ 添加FAQ结构化数据...');
-    
+
     try {
       const faqStructuredData = `'use client';
 
@@ -352,7 +352,7 @@ export const commonFAQs = {
       answer: '许多自然疗法如热敷、瑜伽、草药茶等都有科学研究支持其有效性。但效果因人而异，建议结合医学治疗使用。'
     }
   ],
-  
+
   menstrualHealth: [
     {
       question: '正常的月经周期是多长？',
@@ -367,9 +367,9 @@ export const commonFAQs = {
 
       const componentPath = path.join(this.projectRoot, 'components/FAQStructuredData.tsx');
       fs.writeFileSync(componentPath, faqStructuredData);
-      
+
       this.fixes.push('✅ 创建了FAQ结构化数据组件');
-      
+
     } catch (error) {
       this.errors.push(`FAQ结构化数据: ${error.message}`);
     }
@@ -377,7 +377,7 @@ export const commonFAQs = {
 
   async optimizeInternalLinking() {
     console.log('🔗 优化内部链接策略...');
-    
+
     try {
       const internalLinkHelper = `// 内部链接优化工具
 export class InternalLinkOptimizer {
@@ -390,7 +390,7 @@ export class InternalLinkOptimizer {
     '经期管理': '/zh/interactive-tools',
     '症状评估': '/zh/interactive-tools/symptom-assessment',
     '疼痛追踪': '/zh/interactive-tools/pain-tracker',
-    
+
     // 英文关键词
     'period pain relief': '/en/articles/5-minute-period-pain-relief',
     'heat therapy': '/en/articles/heat-therapy-complete-guide',
@@ -401,14 +401,14 @@ export class InternalLinkOptimizer {
 
   static generateInternalLinks(content: string, currentPath: string): string {
     let optimizedContent = content;
-    
+
     Object.entries(this.keywordToPageMap).forEach(([keyword, targetPath]) => {
       // 避免链接到当前页面
       if (targetPath === currentPath) return;
-      
+
       // 创建链接的正则表达式
       const regex = new RegExp(\`\\\\b\${keyword}\\\\b\`, 'gi');
-      
+
       // 只替换第一次出现的关键词
       let hasReplaced = false;
       optimizedContent = optimizedContent.replace(regex, (match) => {
@@ -417,13 +417,13 @@ export class InternalLinkOptimizer {
         return \`<a href="\${targetPath}" class="internal-link text-purple-600 hover:text-purple-800 underline">\${match}</a>\`;
       });
     });
-    
+
     return optimizedContent;
   }
 
   static getRelatedPages(currentPath: string, tags: string[] = []): Array<{title: string, path: string, description: string}> {
     const relatedPages = [];
-    
+
     // 基于路径的相关页面推荐
     if (currentPath.includes('/articles/')) {
       relatedPages.push(
@@ -431,14 +431,14 @@ export class InternalLinkOptimizer {
         { title: '健康指南', path: '/health-guide', description: '全面的健康管理指南' }
       );
     }
-    
+
     if (currentPath.includes('/interactive-tools/')) {
       relatedPages.push(
         { title: '专业文章', path: '/articles', description: '深入了解月经健康知识' },
         { title: '场景解决方案', path: '/scenario-solutions', description: '针对特定情况的解决方案' }
       );
     }
-    
+
     return relatedPages;
   }
 }
@@ -454,22 +454,22 @@ export function generateBreadcrumbs(pathname: string, locale: string): Breadcrum
   const breadcrumbs: BreadcrumbItem[] = [
     { label: locale === 'zh' ? '首页' : 'Home', href: \`/\${locale}\` }
   ];
-  
+
   let currentPath = \`/\${locale}\`;
-  
+
   for (let i = 1; i < segments.length; i++) {
     const segment = segments[i];
     currentPath += \`/\${segment}\`;
-    
+
     // 最后一个段不需要链接
     const isLast = i === segments.length - 1;
-    
+
     breadcrumbs.push({
       label: formatSegmentLabel(segment, locale),
       href: isLast ? undefined : currentPath
     });
   }
-  
+
   return breadcrumbs;
 }
 
@@ -492,15 +492,15 @@ function formatSegmentLabel(segment: string, locale: string): string {
       'teen-health': 'Teen Health'
     }
   };
-  
+
   return labelMap[locale]?.[segment] || segment.replace(/-/g, ' ').replace(/\\b\\w/g, l => l.toUpperCase());
 }`;
 
       const utilPath = path.join(this.projectRoot, 'lib/internal-links.ts');
       fs.writeFileSync(utilPath, internalLinkHelper);
-      
+
       this.fixes.push('✅ 创建了内部链接优化工具');
-      
+
     } catch (error) {
       this.errors.push(`内部链接优化: ${error.message}`);
     }
@@ -508,7 +508,7 @@ function formatSegmentLabel(segment: string, locale: string): string {
 
   async addPerformanceMonitoring() {
     console.log('⚡ 添加性能监控...');
-    
+
     try {
       const performanceMonitor = `'use client';
 
@@ -520,7 +520,7 @@ export default function PerformanceMonitor() {
     const measurePageLoad = () => {
       if (typeof window !== 'undefined' && 'performance' in window) {
         const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-        
+
         const metrics = {
           // 页面加载时间
           pageLoadTime: navigation.loadEventEnd - navigation.navigationStart,
@@ -535,7 +535,7 @@ export default function PerformanceMonitor() {
           // 资源加载时间
           resourceLoadTime: navigation.loadEventEnd - navigation.domContentLoadedEventEnd,
         };
-        
+
         // 发送性能数据
         if (process.env.NODE_ENV === 'production') {
           fetch('/api/analytics/performance', {
@@ -549,7 +549,7 @@ export default function PerformanceMonitor() {
             }),
           }).catch(console.error);
         }
-        
+
         // 开发环境打印
         if (process.env.NODE_ENV === 'development') {
           console.table(metrics);
@@ -568,7 +568,7 @@ export default function PerformanceMonitor() {
     const handleResourceError = (event: Event) => {
       const target = event.target as HTMLElement;
       console.error('Resource failed to load:', target.tagName, target.getAttribute('src') || target.getAttribute('href'));
-      
+
       // 发送错误报告
       if (process.env.NODE_ENV === 'production') {
         fetch('/api/analytics/errors', {
@@ -605,7 +605,7 @@ export function usePerformanceOptimization() {
         '/images/hero/hero-main-banner.jpg',
         '/images/infographics/stats-infographic.svg',
       ];
-      
+
       criticalImages.forEach(src => {
         const link = document.createElement('link');
         link.rel = 'preload';
@@ -636,14 +636,14 @@ export function usePerformanceOptimization() {
 
       const componentPath = path.join(this.projectRoot, 'components/PerformanceMonitor.tsx');
       fs.writeFileSync(componentPath, performanceMonitor);
-      
+
       // 创建性能API端点
       const performanceAPI = `import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
     const performanceData = await request.json();
-    
+
     // 记录性能数据
     console.log('Performance Metrics:', {
       url: performanceData.url,
@@ -651,10 +651,10 @@ export async function POST(request: NextRequest) {
       ttfb: performanceData.ttfb,
       timestamp: performanceData.timestamp,
     });
-    
+
     // 这里可以存储到数据库或发送到监控服务
     // await savePerformanceData(performanceData);
-    
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error processing performance data:', error);
@@ -667,9 +667,9 @@ export async function POST(request: NextRequest) {
         fs.mkdirSync(performanceAPIDir, { recursive: true });
       }
       fs.writeFileSync(path.join(performanceAPIDir, 'route.ts'), performanceAPI);
-      
+
       this.fixes.push('✅ 添加了性能监控组件和API');
-      
+
     } catch (error) {
       this.errors.push(`性能监控: ${error.message}`);
     }
@@ -678,15 +678,15 @@ export async function POST(request: NextRequest) {
   generateReport() {
     console.log('\n📊 SEO修复报告');
     console.log('='.repeat(50));
-    
+
     console.log('\n✅ 成功修复的问题:');
     this.fixes.forEach(fix => console.log(`  ${fix}`));
-    
+
     if (this.errors.length > 0) {
       console.log('\n❌ 修复失败的问题:');
       this.errors.forEach(error => console.log(`  ❌ ${error}`));
     }
-    
+
     console.log('\n📋 后续手动操作清单:');
     console.log('  1. 在layout.tsx中添加 <WebVitalsReporter />');
     console.log('  2. 在layout.tsx中添加 <PerformanceMonitor />');
@@ -694,13 +694,13 @@ export async function POST(request: NextRequest) {
     console.log('  4. 在FAQ页面中使用 <FAQStructuredData /> 组件');
     console.log('  5. 配置Google Analytics ID');
     console.log('  6. 设置Google Search Console');
-    
+
     console.log('\n🎯 预期效果:');
     console.log('  • Core Web Vitals监控: 实时性能数据');
     console.log('  • 图片优化: 20-30%加载速度提升');
     console.log('  • 内部链接: SEO权重分布优化');
     console.log('  • 结构化数据: 搜索结果展示增强');
-    
+
     // 保存修复报告
     const report = {
       timestamp: new Date().toISOString(),
@@ -714,12 +714,12 @@ export async function POST(request: NextRequest) {
         '监控SEO指标变化'
       ]
     };
-    
+
     fs.writeFileSync(
       path.join(this.projectRoot, 'seo-fixes-report.json'),
       JSON.stringify(report, null, 2)
     );
-    
+
     console.log('\n📄 详细报告已保存到: seo-fixes-report.json');
   }
 }

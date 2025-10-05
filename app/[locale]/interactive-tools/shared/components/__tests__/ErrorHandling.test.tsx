@@ -94,7 +94,7 @@ describe('Error Handling System', () => {
   describe('ErrorBoundary', () => {
     it('should catch and display errors', () => {
       const onError = jest.fn();
-      
+
       render(
         <ErrorBoundary onError={onError}>
           <ErrorThrowingComponent shouldThrow={true} />
@@ -118,7 +118,7 @@ describe('Error Handling System', () => {
 
     it('should provide retry functionality', () => {
       const onError = jest.fn();
-      
+
       render(
         <ErrorBoundary onError={onError}>
           <ErrorThrowingComponent shouldThrow={true} />
@@ -127,7 +127,7 @@ describe('Error Handling System', () => {
 
       const retryButton = screen.getByText(/Retry/);
       expect(retryButton).toBeInTheDocument();
-      
+
       fireEvent.click(retryButton);
       // After retry, the error should be cleared and component should re-render
     });
@@ -227,16 +227,16 @@ describe('Error Handling System', () => {
     it('should display notifications correctly', () => {
       const TestComponent = () => {
         const { addErrorNotification, addSuccessNotification } = useNotifications();
-        
+
         return (
           <div>
-            <button 
+            <button
               onClick={() => addErrorNotification('Error Title', 'Error message')}
               data-testid="add-error-btn"
             >
               Add Error
             </button>
-            <button 
+            <button
               onClick={() => addSuccessNotification('Success Title', 'Success message')}
               data-testid="add-success-btn"
             >

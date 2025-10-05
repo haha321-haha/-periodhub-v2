@@ -31,7 +31,7 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'scenarioSolutionsPage' });
-  
+
   return {
     title: `${t('scenarios.office.title')} - ${t('title')}`,
     description: t('scenarios.office.description'),
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function OfficeScenarioPage({ params }: Props) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
-  
+
   const t = await getTranslations('scenarioSolutionsPage');
   const commonT = await getTranslations('common');
   const anchorT = await getTranslations('anchorTexts');
@@ -57,13 +57,13 @@ export default async function OfficeScenarioPage({ params }: Props) {
   // 推荐数据配置函数
   function getOfficeRecommendations(locale: Locale) {
     const isZh = locale === 'zh';
-    
+
     return {
       relatedTools: [
         {
           id: 'pain-tracker',
           title: isZh ? '痛经追踪器' : 'Pain Tracker',
-          description: isZh 
+          description: isZh
             ? '记录疼痛模式，分析职场环境下的症状变化趋势'
             : 'Record pain patterns and analyze symptom trends in workplace',
           href: `/${locale}/interactive-tools/pain-tracker`,
@@ -74,7 +74,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
         {
           id: 'workplace-wellness',
           title: isZh ? '职场健康管理' : 'Workplace Wellness',
-          description: isZh 
+          description: isZh
             ? '专业职场环境健康管理策略和压力缓解方案'
             : 'Professional workplace health management strategies and stress relief solutions',
           href: `/${locale}/interactive-tools/workplace-wellness`,
@@ -85,7 +85,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
         {
           id: 'symptom-assessment',
           title: isZh ? '症状评估工具' : 'Symptom Assessment',
-          description: isZh 
+          description: isZh
             ? '评估痛经严重程度，获得个性化职场适应建议'
             : 'Assess period pain severity and get personalized workplace adaptation advice',
           href: `/${locale}/interactive-tools/symptom-assessment`,
@@ -98,7 +98,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
         {
           id: 'menstrual-stress-management-complete-guide',
           title: isZh ? '经期压力管理完全指南' : 'Complete Guide to Menstrual Stress Management',
-          description: isZh 
+          description: isZh
             ? '基于循证医学研究的经期压力管理指南，为职场女性提供科学的压力缓解策略'
             : 'Evidence-based menstrual stress management guide providing scientific stress relief strategies for working women',
           href: `/${locale}/articles/menstrual-stress-management-complete-guide`,
@@ -111,7 +111,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
         {
           id: 'menstrual-sleep-quality-improvement-guide',
           title: isZh ? '经期睡眠质量改善指南' : 'Menstrual Sleep Quality Improvement Guide',
-          description: isZh 
+          description: isZh
             ? '全面的经期睡眠质量改善指南，涵盖睡眠问题识别、环境优化和习惯建立'
             : 'Comprehensive menstrual sleep quality improvement guide covering sleep problem identification, environment optimization and habit building',
           href: `/${locale}/articles/menstrual-sleep-quality-improvement-guide`,
@@ -124,7 +124,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
         {
           id: 'anti-inflammatory-diet-period-pain',
           title: isZh ? '抗炎饮食缓解痛经指南' : 'Anti-Inflammatory Diet for Period Pain Relief',
-          description: isZh 
+          description: isZh
             ? '通过抗炎饮食缓解经期疼痛，改善经期整体健康的科学指导'
             : 'Scientific guidance on reducing period pain and improving overall menstrual health through anti-inflammatory diet',
           href: `/${locale}/articles/anti-inflammatory-diet-period-pain`,
@@ -139,7 +139,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
         {
           id: 'emergency-kit',
           title: isZh ? '痛经应急包指南' : 'Emergency Kit Guide',
-          description: isZh 
+          description: isZh
             ? '疼痛发作时的快速缓解方法和应急处理'
             : 'Quick relief methods and emergency treatment when pain occurs',
           href: `/${locale}/scenario-solutions/emergency-kit`,
@@ -150,7 +150,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
         {
           id: 'commute',
           title: isZh ? '通勤场景' : 'Commute Scenario',
-          description: isZh 
+          description: isZh
             ? '通勤途中经期疼痛应急处理指南'
             : 'Emergency period pain management guide for commuting',
           href: `/${locale}/scenario-solutions/commute`,
@@ -464,7 +464,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12" data-page="scenario-office">
       {/* Breadcrumb */}
-      <Breadcrumb 
+      <Breadcrumb
         items={[
           { label: t('title'), href: `/${locale}/scenario-solutions` },
           { label: t('scenarios.office.title') }
@@ -492,7 +492,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
             {t('scenarios.office.emergencyKit.title')}
           </h2>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
           {emergencyKitItems.map((category, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
@@ -642,7 +642,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
                   <span className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs font-bold mr-2">中</span>
                   中文版
                 </h4>
-                
+
                 <div className="space-y-4">
                   <div>
                     <strong className="text-sm text-neutral-700">主题：</strong>
@@ -650,7 +650,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
                       <p className="text-sm text-gray-800">{t('scenarios.office.communication.leaveRequest.chinese.subject')}</p>
                     </div>
                   </div>
-                  
+
                   <div>
                     <strong className="text-sm text-neutral-700">邮件正文：</strong>
                     <div className="bg-gray-50 p-3 rounded mt-1">
@@ -683,7 +683,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
                   <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-2">EN</span>
                   English Version
                 </h4>
-                
+
                 <div className="space-y-4">
                   <div>
                     <strong className="text-sm text-neutral-700">Subject:</strong>
@@ -691,7 +691,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
                       <p className="text-sm text-gray-800">{t('scenarios.office.communication.leaveRequest.english.subject')}</p>
                     </div>
                   </div>
-                  
+
                   <div>
                     <strong className="text-sm text-neutral-700">Email Body:</strong>
                     <div className="bg-gray-50 p-3 rounded mt-1">
@@ -827,7 +827,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
       <section className="bg-gradient-to-br from-blue-50 to-purple-50 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="space-y-12">
-            
+
             {/* 相关工具区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">

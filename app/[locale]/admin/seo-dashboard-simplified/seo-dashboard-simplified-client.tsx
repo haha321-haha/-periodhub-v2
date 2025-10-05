@@ -1,20 +1,25 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export default function SEODashboardSimplifiedClient() {
   const [loading, setLoading] = useState(true);
   const [keywords] = useState([
-    { keyword: '痛经缓解', searchVolume: 22200, competition: 0.42, cpc: 3.20 },
-    { keyword: '经期健康管理', searchVolume: 8100, competition: 0.35, cpc: 2.80 },
-    { keyword: '痛经治疗', searchVolume: 18100, competition: 0.55, cpc: 4.10 },
-    { keyword: '月经疼痛', searchVolume: 15600, competition: 0.48, cpc: 3.50 },
-    { keyword: '经期护理', searchVolume: 9200, competition: 0.38, cpc: 2.90 },
-    { keyword: '痛经药物', searchVolume: 13400, competition: 0.52, cpc: 3.80 },
-    { keyword: '经期症状', searchVolume: 6800, competition: 0.32, cpc: 2.60 },
-    { keyword: '月经周期', searchVolume: 18900, competition: 0.45, cpc: 3.30 },
-    { keyword: '经期饮食', searchVolume: 5600, competition: 0.28, cpc: 2.40 },
-    { keyword: '痛经按摩', searchVolume: 4200, competition: 0.25, cpc: 2.10 }
+    { keyword: "痛经缓解", searchVolume: 22200, competition: 0.42, cpc: 3.2 },
+    {
+      keyword: "经期健康管理",
+      searchVolume: 8100,
+      competition: 0.35,
+      cpc: 2.8,
+    },
+    { keyword: "痛经治疗", searchVolume: 18100, competition: 0.55, cpc: 4.1 },
+    { keyword: "月经疼痛", searchVolume: 15600, competition: 0.48, cpc: 3.5 },
+    { keyword: "经期护理", searchVolume: 9200, competition: 0.38, cpc: 2.9 },
+    { keyword: "痛经药物", searchVolume: 13400, competition: 0.52, cpc: 3.8 },
+    { keyword: "经期症状", searchVolume: 6800, competition: 0.32, cpc: 2.6 },
+    { keyword: "月经周期", searchVolume: 18900, competition: 0.45, cpc: 3.3 },
+    { keyword: "经期饮食", searchVolume: 5600, competition: 0.28, cpc: 2.4 },
+    { keyword: "痛经按摩", searchVolume: 4200, competition: 0.25, cpc: 2.1 },
   ]);
 
   useEffect(() => {
@@ -39,7 +44,9 @@ export default function SEODashboardSimplifiedClient() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">SEO Dashboard - Simplified</h1>
+          <h1 className="text-3xl font-bold text-gray-900">
+            SEO Dashboard - Simplified
+          </h1>
           <p className="mt-2 text-gray-600">PeriodHub SEO Keywords Analysis</p>
         </div>
 
@@ -53,8 +60,12 @@ export default function SEODashboardSimplifiedClient() {
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Total Keywords</p>
-                <p className="text-2xl font-semibold text-gray-900">{keywords.length}</p>
+                <p className="text-sm font-medium text-gray-500">
+                  Total Keywords
+                </p>
+                <p className="text-2xl font-semibold text-gray-900">
+                  {keywords.length}
+                </p>
               </div>
             </div>
           </div>
@@ -67,9 +78,14 @@ export default function SEODashboardSimplifiedClient() {
                 </div>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-500">Avg Search Volume</p>
+                <p className="text-sm font-medium text-gray-500">
+                  Avg Search Volume
+                </p>
                 <p className="text-2xl font-semibold text-gray-900">
-                  {Math.round(keywords.reduce((sum, kw) => sum + kw.searchVolume, 0) / keywords.length).toLocaleString()}
+                  {Math.round(
+                    keywords.reduce((sum, kw) => sum + kw.searchVolume, 0) /
+                      keywords.length,
+                  ).toLocaleString()}
                 </p>
               </div>
             </div>
@@ -85,7 +101,11 @@ export default function SEODashboardSimplifiedClient() {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-500">Avg CPC</p>
                 <p className="text-2xl font-semibold text-gray-900">
-                  ${(keywords.reduce((sum, kw) => sum + kw.cpc, 0) / keywords.length).toFixed(2)}
+                  $
+                  {(
+                    keywords.reduce((sum, kw) => sum + kw.cpc, 0) /
+                    keywords.length
+                  ).toFixed(2)}
                 </p>
               </div>
             </div>
@@ -95,7 +115,9 @@ export default function SEODashboardSimplifiedClient() {
         {/* Keywords Table */}
         <div className="bg-white rounded-lg shadow">
           <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Keywords Analysis</h2>
+            <h2 className="text-lg font-semibold text-gray-900">
+              Keywords Analysis
+            </h2>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">

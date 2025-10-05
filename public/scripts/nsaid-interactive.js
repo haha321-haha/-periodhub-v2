@@ -171,7 +171,7 @@ class NSAIDAnimationPlayer {
         if (this.prevButton) {
             this.prevButton.addEventListener('click', () => this.playPrevScene());
         }
-        
+
         if (this.nextButton) {
             this.nextButton.addEventListener('click', () => this.playNextScene());
         }
@@ -203,7 +203,7 @@ class NSAIDAnimationPlayer {
         if (this.videoPlayer) {
             this.videoPlayer.src = scene.videoUrl;
             this.videoPlayer.load();
-            
+
             // Try to play the video
             const playPromise = this.videoPlayer.play();
             if (playPromise !== undefined) {
@@ -233,7 +233,7 @@ class NSAIDAnimationPlayer {
         if (this.prevButton) {
             this.prevButton.disabled = this.currentSceneIndex === 0;
         }
-        
+
         if (this.nextButton) {
             this.nextButton.disabled = this.currentSceneIndex === this.scenes.length - 1;
         }
@@ -343,7 +343,7 @@ class NSAIDCalculator {
         if (this.resultSingleDose) this.resultSingleDose.textContent = singleDose;
         if (this.resultMaxDailyDose) this.resultMaxDailyDose.textContent = maxDailyDose;
         if (this.resultNotes) this.resultNotes.textContent = notes;
-        
+
         if (this.doseResultDiv) {
             this.doseResultDiv.classList.remove('hidden');
         }
@@ -353,7 +353,7 @@ class NSAIDCalculator {
         if (this.doseResultDiv) {
             this.doseResultDiv.classList.add('hidden');
         }
-        
+
         if (this.resultDrugName) this.resultDrugName.textContent = '';
         if (this.resultSingleDose) this.resultSingleDose.textContent = '';
         if (this.resultMaxDailyDose) this.resultMaxDailyDose.textContent = '';

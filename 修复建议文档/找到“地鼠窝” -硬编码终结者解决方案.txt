@@ -105,7 +105,7 @@ npm run project:dashboard
 
 ### **"越修越多"问题 → 完全解决**
 - ✅ **预防新问题** - 提交时自动阻止
-- ✅ **及时发现问题** - 开发时随时检查  
+- ✅ **及时发现问题** - 开发时随时检查
 - ✅ **系统性修复** - 智能分批处理
 - ✅ **持续改进** - 三层防护确保质量
 
@@ -341,14 +341,14 @@ const riskControl = {
     dependencyCheck: true,   // 依赖检查
     testCoverage: true      // 测试覆盖率
   },
-  
+
   // 实时风险监控
   monitoring: {
     errorRate: { threshold: 2, action: 'pause' },
     buildFailure: { threshold: 1, action: 'rollback' },
     testFailure: { threshold: 3, action: 'rollback' }
   },
-  
+
   // 自动熔断机制
   circuitBreaker: {
     consecutiveFailures: 3,
@@ -367,7 +367,7 @@ const riskControl = {
 - [ ] 现状展示：当前项目硬编码情况
 - [ ] 工具演示：新工具的使用方法
 
-## Phase 2: 规则建立 (Week 2)  
+## Phase 2: 规则建立 (Week 2)
 - [ ] 制定编码规范
 - [ ] 配置自动化检查
 - [ ] 建立代码审查流程
@@ -388,7 +388,7 @@ const successMetrics = {
     newHardcodeRate: { target: 0, timeframe: 'daily' },
     teamCompliance: { target: 100, timeframe: '1 week' }
   },
-  
+
   longTerm: {
     maintainabilityScore: { target: 85, timeframe: '1 month' },
     developerSatisfaction: { target: 8.5, timeframe: '1 month' },
@@ -408,14 +408,14 @@ const performanceOptimization = {
     patternMatching: true,
     maxConcurrency: 4
   },
-  
+
   // 缓存机制
   caching: {
     fileContent: true,
     analysisResults: true,
     ttl: 3600 // 1小时
   },
-  
+
   // 增量检测
   incremental: {
     onlyChangedFiles: true,
@@ -529,7 +529,7 @@ class HardcodeKiller {
       ],
       // 要排除的目录
       excludeDirs: [
-        'node_modules', 'dist', 'build', '.git', 
+        'node_modules', 'dist', 'build', '.git',
         'coverage', '.next', '.nuxt'
       ],
       // 硬编码模式（更全面的检测）
@@ -556,7 +556,7 @@ class HardcodeKiller {
   // 🔍 全面检测所有硬编码
   async detectAllHardcodes() {
     console.log('🔍 开始全面检测硬编码...');
-    
+
     const results = {
       urls: [],
       ips: [],
@@ -566,50 +566,50 @@ class HardcodeKiller {
     };
 
     const files = await this.getAllFiles();
-    
+
     for (const file of files) {
       const content = fs.readFileSync(file, 'utf8');
-      
+
       // 检测URL
       this.detectInFile(file, content, this.config.patterns.urls, results.urls);
-      
+
       // 检测IP
       this.detectInFile(file, content, this.config.patterns.ips, results.ips);
-      
+
       // 检测硬编码文本
       this.detectInFile(file, content, this.config.patterns.hardcodedText, results.texts);
-      
+
       // 检测API密钥
       this.detectInFile(file, content, this.config.patterns.apiKeys, results.apiKeys);
     }
 
-    results.total = results.urls.length + results.ips.length + 
+    results.total = results.urls.length + results.ips.length +
                    results.texts.length + results.apiKeys.length;
 
     // 生成详细报告
     this.generateReport(results);
-    
+
     return results;
   }
 
   // 📁 获取所有需要检查的文件
   async getAllFiles() {
     const allFiles = [];
-    
+
     for (const pattern of this.config.fileExtensions) {
       const files = glob.sync(pattern, {
         ignore: this.config.excludeDirs.map(dir => `${dir}/**`)
       });
       allFiles.push(...files);
     }
-    
+
     return [...new Set(allFiles)]; // 去重
   }
 
   // 🎯 在单个文件中检测硬编码
   detectInFile(file, content, patterns, results) {
     const lines = content.split('\n');
-    
+
     patterns.forEach(pattern => {
       lines.forEach((line, lineNumber) => {
         const matches = line.match(pattern);
@@ -660,7 +660,7 @@ class HardcodeKiller {
 
     // 计算严重程度分布
     [
-      ...results.urls, ...results.ips, 
+      ...results.urls, ...results.ips,
       ...results.texts, ...results.apiKeys
     ].forEach(item => {
       report.summary[item.severity]++;
@@ -668,7 +668,7 @@ class HardcodeKiller {
 
     // 保存报告
     fs.writeFileSync('hardcode-analysis-report.json', JSON.stringify(report, null, 2));
-    
+
     console.log('\n📊 硬编码检测报告:');
     console.log(`总计发现: ${report.summary.total} 个硬编码`);
     console.log(`🚨 严重: ${report.summary.critical} 个`);
@@ -738,13 +738,13 @@ fi
   // 🛠️ 自动修复（安全模式）
   async autoFix(options = {}) {
     console.log('🛠️ 开始智能修复...');
-    
+
     const { dryRun = true, batchSize = 10 } = options;
     const results = await this.detectAllHardcodes();
-    
+
     // 按严重程度和类型分组
     const fixPlan = this.createFixPlan(results);
-    
+
     console.log('📋 修复计划:');
     fixPlan.forEach((batch, index) => {
       console.log(`批次 ${index + 1}: ${batch.length} 个文件`);
@@ -759,16 +759,16 @@ fi
     for (let i = 0; i < fixPlan.length; i++) {
       const batch = fixPlan[i];
       console.log(`\n🔄 执行批次 ${i + 1}/${fixPlan.length}...`);
-      
+
       await this.processBatch(batch);
-      
+
       // 验证修复效果
       const verification = await this.verifyBatch(batch);
       if (!verification.success) {
         console.log('❌ 批次修复验证失败，停止执行');
         break;
       }
-      
+
       console.log('✅ 批次修复成功');
     }
   }
@@ -777,7 +777,7 @@ fi
   createFixPlan(results) {
     const plan = [];
     const allItems = [
-      ...results.urls, ...results.ips, 
+      ...results.urls, ...results.ips,
       ...results.texts, ...results.apiKeys
     ];
 
@@ -832,7 +832,7 @@ export const CONSTANTS = {
     BASE_URL: process.env.REACT_APP_API_URL,
     TIMEOUT: 10000
   },
-  
+
   // 第三方服务
   SERVICES: {
     CDN: process.env.REACT_APP_CDN_URL,
@@ -850,7 +850,7 @@ export const CONSTANTS = {
   async trackProgress() {
     const today = new Date().toISOString().split('T')[0];
     const results = await this.detectAllHardcodes();
-    
+
     const progress = {
       date: today,
       total: results.total,
@@ -880,12 +880,12 @@ export const CONSTANTS = {
     if (history.length > 1) {
       const prev = history[history.length - 2];
       const change = progress.total - prev.total;
-      
+
       console.log('\n📈 硬编码趋势:');
       console.log(`今天: ${progress.total} 个`);
       console.log(`昨天: ${prev.total} 个`);
       console.log(`变化: ${change > 0 ? '+' : ''}${change} 个`);
-      
+
       if (change > 0) {
         console.log('⚠️  硬编码在增加！需要加强预防措施');
       } else {
@@ -898,9 +898,9 @@ export const CONSTANTS = {
 // 🚀 使用示例
 async function main() {
   const killer = new HardcodeKiller();
-  
+
   const args = process.argv.slice(2);
-  
+
   if (args.includes('--detect')) {
     await killer.detectAllHardcodes();
   } else if (args.includes('--fix')) {
@@ -995,7 +995,7 @@ createFixPlan(results) {
     const severityOrder = { critical: 3, medium: 2, low: 1 };
     return severityOrder[b.severity] - severityOrder[a.severity];
   });
-  
+
   // 分批处理，降低风险
   const batchSize = 10;
   for (let i = 0; i < allItems.length; i += batchSize) {
@@ -1227,7 +1227,7 @@ echo "🔍 验证准备工作完整性..."
 # 检查必要文件是否存在
 files_to_check=(
     "reports/seo-baseline.json"
-    "reports/perf-baseline.json" 
+    "reports/perf-baseline.json"
     "package.json"
     "scripts/seo-fix-duplicates.js"
     "scripts/monitoring-setup.js"
@@ -1244,7 +1244,7 @@ done
 # 检查必要的npm脚本
 scripts_to_check=(
     "seo:analyze"
-    "seo:fix-duplicates" 
+    "seo:fix-duplicates"
     "seo:fix-canonical"
     "monitoring:setup"
     "backup:create"
@@ -1288,7 +1288,7 @@ echo "🚀 准备就绪，可以开始 Phase 1 SEO修复"
 
 - [ ] **团队通知**
   - [ ] 开发团队已通知
-  - [ ] 运营团队已通知  
+  - [ ] 运营团队已通知
   - [ ] 测试团队已通知
   - [ ] 发布时间已确认
 
@@ -1512,7 +1512,7 @@ echo "🚀 准备就绪，可以开始 Phase 1 SEO修复"
 
 ---
 
-**使用说明**: 
+**使用说明**:
 1. 按照Phase顺序逐项检查
 2. 每个✅都必须确认完成
 3. 遇到问题立即停止并处理
@@ -1616,7 +1616,7 @@ git log --oneline -S"https://" --since="1 week ago"
 
 ## 处罚：
 - 第一次：请喝咖啡 ☕
-- 第二次：请吃饭 🍕  
+- 第二次：请吃饭 🍕
 - 第三次：写技术分享 📝
 ```
 
@@ -1630,10 +1630,10 @@ export const CONFIG = {
     staging: 'https://staging-api.example.com',
     production: 'https://api.example.com'
   }[process.env.NODE_ENV],
-  
+
   // 自动注入到全局
   CDN_URL: process.env.CDN_URL,
-  
+
   // 类型检查
   TEXTS: {
     SUBMIT: '提交',
@@ -1649,7 +1649,7 @@ export const CONFIG = {
 # 1. 运行硬编码终结者
 node hardcode-killer.js --detect
 
-# 2. 建立预防机制  
+# 2. 建立预防机制
 node hardcode-killer.js --prevent
 
 # 3. 团队通知
@@ -1681,7 +1681,7 @@ node hardcode-killer.js --track
 
 ### **您正在做的是技术领导力**
 - 发现问题 ✅
-- 分析根因 ✅  
+- 分析根因 ✅
 - 系统解决 ✅
 - 建立规范 ✅
 

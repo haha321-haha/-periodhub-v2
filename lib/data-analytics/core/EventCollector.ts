@@ -12,72 +12,72 @@ export interface UserEvent {
   metadata: EventMetadata;
 }
 
-export type EventType = 
+export type EventType =
   // DAU相关事件
-  | 'session_start'
-  | 'session_end'
-  | 'page_view'
-  
+  | "session_start"
+  | "session_end"
+  | "page_view"
+
   // 留存率相关事件
-  | 'user_first_visit'
-  | 'user_return'
-  | 'user_registration'
-  
+  | "user_first_visit"
+  | "user_return"
+  | "user_registration"
+
   // 使用深度相关事件
-  | 'content_view'
-  | 'search_performed'
-  | 'pdf_download'
-  | 'tool_usage'
-  | 'content_share'
-  | 'content_bookmark'
-  
+  | "content_view"
+  | "search_performed"
+  | "pdf_download"
+  | "tool_usage"
+  | "content_share"
+  | "content_bookmark"
+
   // 获客成本相关事件
-  | 'user_acquisition'
-  | 'traffic_source'
-  | 'conversion_goal'
-  
+  | "user_acquisition"
+  | "traffic_source"
+  | "conversion_goal"
+
   // 生命周期价值相关事件
-  | 'user_engagement'
-  | 'value_action'
-  | 'feedback_submitted';
+  | "user_engagement"
+  | "value_action"
+  | "feedback_submitted";
 
 export interface EventData {
   // 页面相关
   pageUrl?: string;
   pageTitle?: string;
   referrer?: string;
-  
+
   // 搜索相关
   searchQuery?: string;
   searchResults?: number;
   searchClickPosition?: number;
-  
+
   // 内容相关
   contentId?: string;
-  contentType?: 'article' | 'pdf' | 'tool' | 'page';
+  contentType?: "article" | "pdf" | "tool" | "page";
   contentCategory?: string;
-  
+
   // 用户行为
   sessionDuration?: number;
   scrollDepth?: number;
   clickCount?: number;
-  
+
   // 获客相关
   trafficSource?: string;
   campaign?: string;
   medium?: string;
-  
+
   // 价值相关
   actionValue?: number;
   engagementScore?: number;
-  
+
   // 扩展数据
   customData?: Record<string, any>;
 }
 
 export interface EventMetadata {
   userAgent: string;
-  deviceType: 'desktop' | 'mobile' | 'tablet';
+  deviceType: "desktop" | "mobile" | "tablet";
   platform: string;
   language: string;
   timezone: string;
@@ -161,15 +161,15 @@ export class EventCollector {
   /**
    * 记录用户事件
    */
-  recordEvent(event: Omit<UserEvent, 'timestamp'>): void {
+  recordEvent(event: Omit<UserEvent, "timestamp">): void {
     const fullEvent: UserEvent = {
       ...event,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     this.events.push(fullEvent);
     this.processEventForMetrics(fullEvent);
-    
+
     // 限制内存中的事件数量
     if (this.events.length > 10000) {
       this.events = this.events.slice(-5000);
@@ -180,20 +180,20 @@ export class EventCollector {
    * 记录页面访问（DAU关键事件）
    */
   recordPageView(
-    userId: string, 
-    sessionId: string, 
-    pageUrl: string, 
-    metadata: EventMetadata
+    userId: string,
+    sessionId: string,
+    pageUrl: string,
+    metadata: EventMetadata,
   ): void {
     this.recordEvent({
       userId,
       sessionId,
-      eventType: 'page_view',
+      eventType: "page_view",
       data: {
         pageUrl,
-        pageTitle: this.extractPageTitle(pageUrl)
+        pageTitle: this.extractPageTitle(pageUrl),
       },
-      metadata
+      metadata,
     });
 
     // 更新会话信息
@@ -208,17 +208,17 @@ export class EventCollector {
     sessionId: string,
     searchQuery: string,
     resultsCount: number,
-    metadata: EventMetadata
+    metadata: EventMetadata,
   ): void {
     this.recordEvent({
       userId,
       sessionId,
-      eventType: 'search_performed',
+      eventType: "search_performed",
       data: {
         searchQuery,
-        searchResults: resultsCount
+        searchResults: resultsCount,
       },
-      metadata
+      metadata,
     });
   }
 
@@ -230,19 +230,19 @@ export class EventCollector {
     sessionId: string,
     contentId: string,
     contentCategory: string,
-    metadata: EventMetadata
+    metadata: EventMetadata,
   ): void {
     this.recordEvent({
       userId,
       sessionId,
-      eventType: 'pdf_download',
+      eventType: "pdf_download",
       data: {
         contentId,
-        contentType: 'pdf',
+        contentType: "pdf",
         contentCategory,
-        actionValue: 1 // PDF下载价值权重
+        actionValue: 1, // PDF下载价值权重
       },
-      metadata
+      metadata,
     });
   }
 
@@ -255,18 +255,18 @@ export class EventCollector {
     trafficSource: string,
     campaign?: string,
     cost?: number,
-    metadata?: EventMetadata
+    metadata?: EventMetadata,
   ): void {
     this.recordEvent({
       userId,
       sessionId,
-      eventType: 'user_acquisition',
+      eventType: "user_acquisition",
       data: {
         trafficSource,
         campaign,
-        actionValue: cost
+        actionValue: cost,
       },
-      metadata: metadata || this.getDefaultMetadata()
+      metadata: metadata || this.getDefaultMetadata(),
     });
   }
 
@@ -278,18 +278,18 @@ export class EventCollector {
     sessionId: string,
     actionType: string,
     value: number,
-    metadata: EventMetadata
+    metadata: EventMetadata,
   ): void {
     this.recordEvent({
       userId,
       sessionId,
-      eventType: 'value_action',
+      eventType: "value_action",
       data: {
         customData: { actionType },
         actionValue: value,
-        engagementScore: this.calculateEngagementScore(actionType, value)
+        engagementScore: this.calculateEngagementScore(actionType, value),
       },
-      metadata
+      metadata,
     });
   }
 
@@ -302,31 +302,46 @@ export class EventCollector {
     const dayEnd = new Date(date);
     dayEnd.setHours(23, 59, 59, 999);
 
-    const dayEvents = this.events.filter(event => 
-      event.timestamp >= dayStart.getTime() && 
-      event.timestamp <= dayEnd.getTime()
+    const dayEvents = this.events.filter(
+      (event) =>
+        event.timestamp >= dayStart.getTime() &&
+        event.timestamp <= dayEnd.getTime(),
     );
 
-    const activeUsers = new Set(dayEvents.map(e => e.userId)).size;
-    
+    const activeUsers = new Set(dayEvents.map((e) => e.userId)).size;
+
     // 计算新用户（首次访问）
-    const newUserEvents = dayEvents.filter(e => e.eventType === 'user_first_visit');
-    const newUsers = new Set(newUserEvents.map(e => e.userId)).size;
-    
+    const newUserEvents = dayEvents.filter(
+      (e) => e.eventType === "user_first_visit",
+    );
+    const newUsers = new Set(newUserEvents.map((e) => e.userId)).size;
+
     const returningUsers = activeUsers - newUsers;
 
     // 计算增长率（需要历史数据）
     const weekAgo = new Date(dayStart);
     weekAgo.setDate(weekAgo.getDate() - 7);
-    const weekAgoMetrics = this.getStoredMetrics('dau', weekAgo.toISOString().split('T')[0]);
-    const weeklyGrowth = weekAgoMetrics ? 
-      ((activeUsers - weekAgoMetrics.activeUsers) / weekAgoMetrics.activeUsers) * 100 : 0;
+    const weekAgoMetrics = this.getStoredMetrics(
+      "dau",
+      weekAgo.toISOString().split("T")[0],
+    );
+    const weeklyGrowth = weekAgoMetrics
+      ? ((activeUsers - weekAgoMetrics.activeUsers) /
+          weekAgoMetrics.activeUsers) *
+        100
+      : 0;
 
     const monthAgo = new Date(dayStart);
     monthAgo.setDate(monthAgo.getDate() - 30);
-    const monthAgoMetrics = this.getStoredMetrics('dau', monthAgo.toISOString().split('T')[0]);
-    const monthlyGrowth = monthAgoMetrics ? 
-      ((activeUsers - monthAgoMetrics.activeUsers) / monthAgoMetrics.activeUsers) * 100 : 0;
+    const monthAgoMetrics = this.getStoredMetrics(
+      "dau",
+      monthAgo.toISOString().split("T")[0],
+    );
+    const monthlyGrowth = monthAgoMetrics
+      ? ((activeUsers - monthAgoMetrics.activeUsers) /
+          monthAgoMetrics.activeUsers) *
+        100
+      : 0;
 
     const metrics: DAUMetrics = {
       date,
@@ -334,10 +349,10 @@ export class EventCollector {
       newUsers,
       returningUsers,
       weeklyGrowth,
-      monthlyGrowth
+      monthlyGrowth,
     };
 
-    this.storeMetrics('dau', date, metrics);
+    this.storeMetrics("dau", date, metrics);
     return metrics;
   }
 
@@ -353,12 +368,13 @@ export class EventCollector {
     // 获取队列用户（当日新用户）
     const cohortUsers = new Set(
       this.events
-        .filter(e => 
-          e.eventType === 'user_first_visit' &&
-          e.timestamp >= cohortStart.getTime() && 
-          e.timestamp <= cohortEnd.getTime()
+        .filter(
+          (e) =>
+            e.eventType === "user_first_visit" &&
+            e.timestamp >= cohortStart.getTime() &&
+            e.timestamp <= cohortEnd.getTime(),
         )
-        .map(e => e.userId)
+        .map((e) => e.userId),
     );
 
     const totalUsers = cohortUsers.size;
@@ -369,14 +385,26 @@ export class EventCollector {
         day7Retention: 0,
         day30Retention: 0,
         totalUsers: 0,
-        retainedUsers: { day1: 0, day7: 0, day30: 0 }
+        retainedUsers: { day1: 0, day7: 0, day30: 0 },
       };
     }
 
     // 计算各时期留存
-    const day1Retained = this.calculateRetentionForPeriod(cohortUsers, cohortStart, 1);
-    const day7Retained = this.calculateRetentionForPeriod(cohortUsers, cohortStart, 7);
-    const day30Retained = this.calculateRetentionForPeriod(cohortUsers, cohortStart, 30);
+    const day1Retained = this.calculateRetentionForPeriod(
+      cohortUsers,
+      cohortStart,
+      1,
+    );
+    const day7Retained = this.calculateRetentionForPeriod(
+      cohortUsers,
+      cohortStart,
+      7,
+    );
+    const day30Retained = this.calculateRetentionForPeriod(
+      cohortUsers,
+      cohortStart,
+      30,
+    );
 
     const metrics: RetentionMetrics = {
       cohort: cohortDate,
@@ -387,11 +415,11 @@ export class EventCollector {
       retainedUsers: {
         day1: day1Retained,
         day7: day7Retained,
-        day30: day30Retained
-      }
+        day30: day30Retained,
+      },
     };
 
-    this.storeMetrics('retention', cohortDate, metrics);
+    this.storeMetrics("retention", cohortDate, metrics);
     return metrics;
   }
 
@@ -404,43 +432,47 @@ export class EventCollector {
     const dayEnd = new Date(date);
     dayEnd.setHours(23, 59, 59, 999);
 
-    const dayEvents = this.events.filter(event => 
-      event.timestamp >= dayStart.getTime() && 
-      event.timestamp <= dayEnd.getTime()
+    const dayEvents = this.events.filter(
+      (event) =>
+        event.timestamp >= dayStart.getTime() &&
+        event.timestamp <= dayEnd.getTime(),
     );
 
     // 按用户分组统计
-    const userStats = new Map<string, {
-      sessionDuration: number;
-      pageViews: number;
-      searches: number;
-      downloads: number;
-      sessions: Set<string>;
-    }>();
+    const userStats = new Map<
+      string,
+      {
+        sessionDuration: number;
+        pageViews: number;
+        searches: number;
+        downloads: number;
+        sessions: Set<string>;
+      }
+    >();
 
-    dayEvents.forEach(event => {
+    dayEvents.forEach((event) => {
       const userId = event.userId;
       const stats = userStats.get(userId) || {
         sessionDuration: 0,
         pageViews: 0,
         searches: 0,
         downloads: 0,
-        sessions: new Set()
+        sessions: new Set(),
       };
 
       stats.sessions.add(event.sessionId);
 
       switch (event.eventType) {
-        case 'page_view':
+        case "page_view":
           stats.pageViews++;
           break;
-        case 'search_performed':
+        case "search_performed":
           stats.searches++;
           break;
-        case 'pdf_download':
+        case "pdf_download":
           stats.downloads++;
           break;
-        case 'session_end':
+        case "session_end":
           stats.sessionDuration += event.data.sessionDuration || 0;
           break;
       }
@@ -457,7 +489,7 @@ export class EventCollector {
         avgSearchesPerUser: 0,
         avgPDFDownloadsPerUser: 0,
         returnVisitRate: 0,
-        engagementScore: 0
+        engagementScore: 0,
       };
     }
 
@@ -475,7 +507,7 @@ export class EventCollector {
       totalSearches += stats.searches;
       totalDownloads += stats.downloads;
       totalSessions += stats.sessions.size;
-      
+
       // 检查是否为回访用户
       if (this.isReturningUser(userId, dayStart)) {
         returningUsers++;
@@ -483,18 +515,19 @@ export class EventCollector {
     }
 
     const avgSessionDuration = totalSessionDuration / userCount;
-    const avgPagesPerSession = totalSessions > 0 ? totalPageViews / totalSessions : 0;
+    const avgPagesPerSession =
+      totalSessions > 0 ? totalPageViews / totalSessions : 0;
     const avgSearchesPerUser = totalSearches / userCount;
     const avgPDFDownloadsPerUser = totalDownloads / userCount;
     const returnVisitRate = (returningUsers / userCount) * 100;
-    
+
     // 计算综合参与度评分
     const engagementScore = this.calculateOverallEngagementScore({
       sessionDuration: avgSessionDuration,
       pagesPerSession: avgPagesPerSession,
       searchesPerUser: avgSearchesPerUser,
       downloadsPerUser: avgPDFDownloadsPerUser,
-      returnRate: returnVisitRate
+      returnRate: returnVisitRate,
     });
 
     const metrics: EngagementMetrics = {
@@ -504,10 +537,10 @@ export class EventCollector {
       avgSearchesPerUser,
       avgPDFDownloadsPerUser,
       returnVisitRate,
-      engagementScore
+      engagementScore,
     };
 
-    this.storeMetrics('engagement', date, metrics);
+    this.storeMetrics("engagement", date, metrics);
     return metrics;
   }
 
@@ -532,15 +565,15 @@ export class EventCollector {
     recentEvents: UserEvent[];
   } {
     const eventsByType: Record<string, number> = {};
-    
-    this.events.forEach(event => {
+
+    this.events.forEach((event) => {
       eventsByType[event.eventType] = (eventsByType[event.eventType] || 0) + 1;
     });
 
     return {
       totalEvents: this.events.length,
       eventsByType,
-      recentEvents: this.events.slice(-10)
+      recentEvents: this.events.slice(-10),
     };
   }
 
@@ -569,33 +602,37 @@ export class EventCollector {
   // ========== 私有方法 ==========
 
   private initializeCollector(): void {
-    console.log('📊 EventCollector initialized for core metrics tracking');
+    console.log("📊 EventCollector initialized for core metrics tracking");
   }
 
   private processEventForMetrics(event: UserEvent): void {
     // 实时处理事件，更新内存中的指标
-    const today = new Date().toISOString().split('T')[0];
-    
+    const today = new Date().toISOString().split("T")[0];
+
     // 根据事件类型更新相应指标
     switch (event.eventType) {
-      case 'page_view':
+      case "page_view":
         this.updateDAUMetrics(today, event.userId);
         break;
-      case 'user_first_visit':
+      case "user_first_visit":
         this.updateRetentionMetrics(today, event.userId);
         break;
       // 其他事件类型...
     }
   }
 
-  private updateSession(userId: string, sessionId: string, metadata: EventMetadata): void {
+  private updateSession(
+    userId: string,
+    sessionId: string,
+    metadata: EventMetadata,
+  ): void {
     const session = this.sessionStore.get(sessionId) || {
       userId,
       sessionId,
       startTime: Date.now(),
       lastActivity: Date.now(),
       pageViews: 0,
-      events: []
+      events: [],
     };
 
     session.lastActivity = Date.now();
@@ -604,24 +641,25 @@ export class EventCollector {
   }
 
   private calculateRetentionForPeriod(
-    cohortUsers: Set<string>, 
-    cohortStart: Date, 
-    days: number
+    cohortUsers: Set<string>,
+    cohortStart: Date,
+    days: number,
   ): number {
     const targetStart = new Date(cohortStart);
     targetStart.setDate(targetStart.getDate() + days);
     targetStart.setHours(0, 0, 0, 0);
-    
+
     const targetEnd = new Date(targetStart);
     targetEnd.setHours(23, 59, 59, 999);
 
     const activeUsersInPeriod = new Set(
       this.events
-        .filter(e => 
-          e.timestamp >= targetStart.getTime() && 
-          e.timestamp <= targetEnd.getTime()
+        .filter(
+          (e) =>
+            e.timestamp >= targetStart.getTime() &&
+            e.timestamp <= targetEnd.getTime(),
         )
-        .map(e => e.userId)
+        .map((e) => e.userId),
     );
 
     let retainedCount = 0;
@@ -635,12 +673,12 @@ export class EventCollector {
   }
 
   private isReturningUser(userId: string, currentDate: Date): boolean {
-    const firstVisit = this.events.find(e => 
-      e.userId === userId && e.eventType === 'user_first_visit'
+    const firstVisit = this.events.find(
+      (e) => e.userId === userId && e.eventType === "user_first_visit",
     );
-    
+
     if (!firstVisit) return false;
-    
+
     const firstVisitDate = new Date(firstVisit.timestamp);
     return firstVisitDate < currentDate;
   }
@@ -648,13 +686,13 @@ export class EventCollector {
   private calculateEngagementScore(actionType: string, value: number): number {
     // 简化的参与度评分算法
     const weights = {
-      'pdf_download': 3,
-      'search': 2,
-      'page_view': 1,
-      'share': 4,
-      'bookmark': 3
+      pdf_download: 3,
+      search: 2,
+      page_view: 1,
+      share: 4,
+      bookmark: 3,
     };
-    
+
     const weight = weights[actionType as keyof typeof weights] || 1;
     return Math.min(weight * value, 10);
   }
@@ -673,13 +711,18 @@ export class EventCollector {
     const downloadScore = Math.min(metrics.downloadsPerUser / 2, 1) * 20; // 2次下载为满分
     const returnScore = Math.min(metrics.returnRate / 100, 1) * 15; // 100%回访为满分
 
-    return Math.round(durationScore + pageScore + searchScore + downloadScore + returnScore);
+    return Math.round(
+      durationScore + pageScore + searchScore + downloadScore + returnScore,
+    );
   }
 
   private updateDAUMetrics(date: string, userId: string): void {
     // 实时更新DAU统计
     const key = `dau_${date}`;
-    const existing = this.dailyMetrics.get(key) || { users: new Set(), newUsers: new Set() };
+    const existing = this.dailyMetrics.get(key) || {
+      users: new Set(),
+      newUsers: new Set(),
+    };
     existing.users.add(userId);
     this.dailyMetrics.set(key, existing);
   }
@@ -704,17 +747,17 @@ export class EventCollector {
 
   private extractPageTitle(pageUrl: string): string {
     // 从URL提取页面标题的简单实现
-    const urlParts = pageUrl.split('/');
-    return urlParts[urlParts.length - 1] || 'Home';
+    const urlParts = pageUrl.split("/");
+    return urlParts[urlParts.length - 1] || "Home";
   }
 
   private getDefaultMetadata(): EventMetadata {
     return {
-      userAgent: 'Unknown',
-      deviceType: 'desktop',
-      platform: 'Unknown',
-      language: 'zh',
-      timezone: 'Asia/Shanghai'
+      userAgent: "Unknown",
+      deviceType: "desktop",
+      platform: "Unknown",
+      language: "zh",
+      timezone: "Asia/Shanghai",
     };
   }
 }
@@ -726,4 +769,4 @@ interface SessionData {
   lastActivity: number;
   pageViews: number;
   events: any[];
-} 
+}

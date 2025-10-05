@@ -5,8 +5,8 @@
 
 'use client';
 
+import React, { ComponentType, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { ComponentType, useState } from 'react';
 
 // 加载组件
 export const LoadingSpinner = () => (

@@ -23,12 +23,28 @@ import {
   Share2
 } from 'lucide-react';
 
-// 导入P2组件
-import AnalyticsDashboard from '../shared/components/AnalyticsDashboard';
-import PersonalizedRecommendationEngine from '../shared/components/PersonalizedRecommendationEngine';
-import SocialFeatures from '../shared/components/SocialFeatures';
-import DataSync from '../shared/components/DataSync';
-import ReportGenerator from '../shared/components/ReportGenerator';
+// 动态导入P2组件 - 代码分割优化
+import dynamic from 'next/dynamic';
+
+const AnalyticsDashboard = dynamic(() => import('../shared/components/AnalyticsDashboard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const PersonalizedRecommendationEngine = dynamic(() => import('../shared/components/PersonalizedRecommendationEngine'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const SocialFeatures = dynamic(() => import('../shared/components/SocialFeatures'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const DataSync = dynamic(() => import('../shared/components/DataSync'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
+
+const ReportGenerator = dynamic(() => import('../shared/components/ReportGenerator'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+});
 
 interface P2AdvancedFeaturesProps {
   locale: string;

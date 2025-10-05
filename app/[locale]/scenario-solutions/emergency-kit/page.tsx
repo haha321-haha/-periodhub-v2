@@ -164,10 +164,7 @@ export default async function EmergencyKitPage({ params }: Props) {
   
   const t = await getTranslations('scenarioSolutionsPage');
   const commonT = await getTranslations('common');
-  
-  // 预加载面包屑所需的翻译
-  const breadcrumbTitle = t('title');
-  const breadcrumbEmergencyKitTitle = locale === 'zh' ? '应急包清单' : 'Emergency Kit List';
+  const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
   
   // 获取推荐数据（侧重应急）
   const recommendations = getEmergencyKitRecommendations(locale);
@@ -339,8 +336,8 @@ export default async function EmergencyKitPage({ params }: Props) {
       {/* Breadcrumb */}
       <Breadcrumb 
         items={[
-          { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
-          { label: breadcrumbEmergencyKitTitle }
+          { label: breadcrumbT('scenarioSolutions'), href: `/${locale}/scenario-solutions` },
+          { label: breadcrumbT('emergencyKit') }
         ]}
       />
 

@@ -71,11 +71,7 @@ export default async function EmotionalSupportPage({
   unstable_setRequestLocale(locale);
   
   const t = await getTranslations('scenarioSolutionsPage');
-  
-  // 预加载面包屑所需的翻译
-  const breadcrumbScenarioSolutionsTitle = t('title');
-  const breadcrumbTeenHealthTitle = locale === 'zh' ? '青少年专区' : 'Teen Zone';
-  const breadcrumbEmotionalSupportTitle = locale === 'zh' ? '情绪支持与心理健康' : 'Emotional Support & Mental Health';
+  const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
 
   const emotionalSymptoms = [
     {
@@ -173,9 +169,9 @@ export default async function EmotionalSupportPage({
       {/* Breadcrumb */}
       <Breadcrumb 
         items={[
-          { label: breadcrumbScenarioSolutionsTitle, href: `/${locale}/scenario-solutions` },
-          { label: breadcrumbTeenHealthTitle, href: `/${locale}/teen-health` },
-          { label: breadcrumbEmotionalSupportTitle }
+          { label: breadcrumbT('scenarioSolutions'), href: `/${locale}/scenario-solutions` },
+          { label: breadcrumbT('teenHealth'), href: `/${locale}/teen-health` },
+          { label: breadcrumbT('emotionalSupport') }
         ]}
       />
 

@@ -36,10 +36,7 @@ export default async function MythsFactsPage({
   const { locale } = await params;
   // Enable static rendering
   unstable_setRequestLocale(locale);
-
-  // 预加载面包屑所需的翻译
-  const breadcrumbHealthGuideTitle = locale === 'zh' ? '痛经健康指南' : 'Health Guide';
-  const breadcrumbMythsFactsTitle = locale === 'zh' ? '误区与事实' : 'Myths vs Facts';
+  const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
 
   const mythsFacts = [
     {
@@ -105,8 +102,8 @@ export default async function MythsFactsPage({
           {/* Breadcrumb */}
           <Breadcrumb 
             items={[
-              { label: breadcrumbHealthGuideTitle, href: `/${locale}/health-guide` },
-              { label: breadcrumbMythsFactsTitle }
+              { label: breadcrumbT('healthGuide'), href: `/${locale}/health-guide` },
+              { label: breadcrumbT('mythsFacts') }
             ]}
           />
 

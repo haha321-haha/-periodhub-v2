@@ -46,11 +46,7 @@ export default async function CommunicationGuidePage({
   unstable_setRequestLocale(locale);
   
   const t = await getTranslations('scenarioSolutionsPage');
-  
-  // 预加载面包屑所需的翻译
-  const breadcrumbScenarioSolutionsTitle = t('title');
-  const breadcrumbTeenHealthTitle = locale === 'zh' ? '青少年专区' : 'Teen Zone';
-  const breadcrumbCommunicationGuideTitle = locale === 'zh' ? '沟通指导' : 'Communication Guide';
+  const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
 
   const communicationScenarios = [
     {
@@ -173,9 +169,9 @@ export default async function CommunicationGuidePage({
       {/* Breadcrumb */}
       <Breadcrumb 
         items={[
-          { label: breadcrumbScenarioSolutionsTitle, href: `/${locale}/scenario-solutions` },
-          { label: breadcrumbTeenHealthTitle, href: `/${locale}/teen-health` },
-          { label: breadcrumbCommunicationGuideTitle }
+          { label: breadcrumbT('scenarioSolutions'), href: `/${locale}/scenario-solutions` },
+          { label: breadcrumbT('teenHealth'), href: `/${locale}/teen-health` },
+          { label: breadcrumbT('communicationGuide') }
         ]}
       />
 

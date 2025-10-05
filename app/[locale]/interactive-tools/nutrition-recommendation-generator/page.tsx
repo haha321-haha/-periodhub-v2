@@ -76,6 +76,7 @@ export default async function NutritionRecommendationGeneratorPage({
   const { locale } = await params;
   const isZh = locale === 'zh';
   const anchorT = await getTranslations('anchorTexts');
+  const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
@@ -83,8 +84,8 @@ export default async function NutritionRecommendationGeneratorPage({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <Breadcrumb 
           items={[
-            { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
-            { label: locale === 'zh' ? '营养推荐生成器' : 'Nutrition Recommendation Generator' }
+            { label: breadcrumbT('interactiveTools'), href: `/${locale}/interactive-tools` },
+            { label: breadcrumbT('nutritionGenerator') }
           ]}
         />
       </div>

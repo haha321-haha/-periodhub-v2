@@ -239,6 +239,7 @@ const getWorkplaceWellnessRecommendations = (locale: string) => {
 export default function WorkplaceWellnessPage() {
   const { activeTab } = useWorkplaceWellnessStore();
   const t = useTranslations('workplaceWellness');
+  const breadcrumbT = useTranslations('interactiveTools.breadcrumb');
   const [isLoading, setIsLoading] = useState(true);
   const [previousTab, setPreviousTab] = useState(activeTab);
   const locale = useLocale();
@@ -327,8 +328,8 @@ export default function WorkplaceWellnessPage() {
         <div className="max-w-6xl mx-auto px-4">
           <Breadcrumb 
             items={[
-              { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
-              { label: locale === 'zh' ? '职场健康助手' : 'Workplace Wellness Assistant' }
+              { label: breadcrumbT('interactiveTools'), href: `/${locale}/interactive-tools` },
+              { label: breadcrumbT('workplaceWellness') }
             ]}
           />
         </div>

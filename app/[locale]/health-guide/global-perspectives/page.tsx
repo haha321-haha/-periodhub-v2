@@ -36,10 +36,7 @@ export default async function GlobalPerspectivesPage({
   const { locale } = await params;
   // Enable static rendering
   unstable_setRequestLocale(locale);
-
-  // 预加载面包屑所需的翻译
-  const breadcrumbHealthGuideTitle = locale === 'zh' ? '痛经健康指南' : 'Health Guide';
-  const breadcrumbGlobalPerspectivesTitle = locale === 'zh' ? '全球视角' : 'Global Perspectives';
+  const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
 
   const globalPractices = [
     {
@@ -123,8 +120,8 @@ export default async function GlobalPerspectivesPage({
           {/* Breadcrumb */}
           <Breadcrumb 
             items={[
-              { label: breadcrumbHealthGuideTitle, href: `/${locale}/health-guide` },
-              { label: breadcrumbGlobalPerspectivesTitle }
+              { label: breadcrumbT('healthGuide'), href: `/${locale}/health-guide` },
+              { label: breadcrumbT('globalPerspectives') }
             ]}
           />
 

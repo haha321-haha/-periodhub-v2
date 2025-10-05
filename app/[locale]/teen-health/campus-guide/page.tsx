@@ -46,11 +46,7 @@ export default async function CampusGuidePage({
 }) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
-  
-  // 预加载面包屑所需的翻译
-  const breadcrumbScenarioSolutionsTitle = locale === 'zh' ? '场景解决方案' : 'Scenario Solutions';
-  const breadcrumbTeenHealthTitle = locale === 'zh' ? '青少年专区' : 'Teen Zone';
-  const breadcrumbCampusGuideTitle = locale === 'zh' ? '校园应急指南' : 'Campus Emergency Guide';
+  const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
 
   const emergencySteps = [
     {
@@ -98,9 +94,9 @@ export default async function CampusGuidePage({
       {/* Breadcrumb */}
       <Breadcrumb 
         items={[
-          { label: breadcrumbScenarioSolutionsTitle, href: `/${locale}/scenario-solutions` },
-          { label: breadcrumbTeenHealthTitle, href: `/${locale}/teen-health` },
-          { label: breadcrumbCampusGuideTitle }
+          { label: breadcrumbT('scenarioSolutions'), href: `/${locale}/scenario-solutions` },
+          { label: breadcrumbT('teenHealth'), href: `/${locale}/teen-health` },
+          { label: breadcrumbT('campusGuide') }
         ]}
       />
 

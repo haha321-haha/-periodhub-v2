@@ -55,11 +55,7 @@ export default async function DevelopmentPainPage({
   unstable_setRequestLocale(locale);
   
   const t = await getTranslations('scenarioSolutionsPage');
-  
-  // 预加载面包屑所需的翻译
-  const breadcrumbScenarioSolutionsTitle = t('title');
-  const breadcrumbTeenHealthTitle = locale === 'zh' ? '青少年专区' : 'Teen Zone';
-  const breadcrumbDevelopmentPainTitle = locale === 'zh' ? '发育期疼痛管理' : 'Developmental Pain Management';
+  const breadcrumbT = await getTranslations('interactiveTools.breadcrumb');
 
   const painCharacteristics = [
     {
@@ -138,9 +134,9 @@ export default async function DevelopmentPainPage({
       {/* Breadcrumb */}
       <Breadcrumb 
         items={[
-          { label: breadcrumbScenarioSolutionsTitle, href: `/${locale}/scenario-solutions` },
-          { label: breadcrumbTeenHealthTitle, href: `/${locale}/teen-health` },
-          { label: breadcrumbDevelopmentPainTitle }
+          { label: breadcrumbT('scenarioSolutions'), href: `/${locale}/scenario-solutions` },
+          { label: breadcrumbT('teenHealth'), href: `/${locale}/teen-health` },
+          { label: breadcrumbT('developmentPain') }
         ]}
       />
 

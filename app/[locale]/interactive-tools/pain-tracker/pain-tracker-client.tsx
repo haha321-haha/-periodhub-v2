@@ -17,6 +17,7 @@ interface Props {
 export default function PainTrackerClient({ params: { locale } }: Props) {
   const t = useTranslations('interactiveTools');
   const anchorT = useTranslations('anchorTexts');
+  const breadcrumbT = useTranslations('interactiveTools.breadcrumb');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
@@ -35,8 +36,8 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
           {/* 面包屑导航 */}
           <Breadcrumb 
             items={[
-              { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
-              { label: locale === 'zh' ? '疼痛追踪工具' : 'Pain Tracking Tool' }
+              { label: breadcrumbT('interactiveTools'), href: `/${locale}/interactive-tools` },
+              { label: breadcrumbT('painTracker') }
             ]}
           />
 

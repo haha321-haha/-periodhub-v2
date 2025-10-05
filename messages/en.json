@@ -2231,7 +2231,23 @@
     },
     "breadcrumb": {
       "home": "Home",
-      "interactiveTools": "Interactive Tools"
+      "interactiveTools": "Interactive Tools",
+      "painTracker": "Pain Tracking Tool",
+      "symptomAssessment": "Symptom Assessment Tool",
+      "nutritionGenerator": "Nutrition Recommendation Generator",
+      "workplaceWellness": "Workplace Wellness Assistant",
+      "scenarioSolutions": "Scenario Solutions",
+      "teenHealth": "Teen Zone",
+      "campusGuide": "Campus Emergency Guide",
+      "emotionalSupport": "Emotional Support & Mental Health",
+      "communicationGuide": "Communication Guide",
+      "developmentPain": "Developmental Pain Management",
+      "healthGuide": "Health Guide",
+      "globalPerspectives": "Global Perspectives",
+      "medicalCare": "When to Seek Help",
+      "lifestyle": "Lifestyle Management",
+      "mythsFacts": "Myths vs Facts",
+      "emergencyKit": "Emergency Kit List"
     },
     "common": {
       "loading": "Loading...",

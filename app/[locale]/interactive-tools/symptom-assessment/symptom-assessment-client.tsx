@@ -171,6 +171,7 @@ const getSymptomAssessmentRecommendations = (locale: string) => {
 
 export default function SymptomAssessmentClient({ params: { locale } }: Props) {
   const t = useTranslations('interactiveTools');
+  const breadcrumbT = useTranslations('interactiveTools.breadcrumb');
   const searchParams = useSearchParams();
   const mode = searchParams.get('mode') || 'simplified';
 
@@ -199,8 +200,8 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
           {/* 面包屑导航 */}
           <Breadcrumb 
             items={[
-              { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
-              { label: locale === 'zh' ? '症状评估工具' : 'Symptom Assessment Tool' }
+              { label: breadcrumbT('interactiveTools'), href: `/${locale}/interactive-tools` },
+              { label: breadcrumbT('symptomAssessment') }
             ]}
           />
 

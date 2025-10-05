@@ -3313,7 +3313,23 @@
     },
     "breadcrumb": {
       "home": "首页",
-      "interactiveTools": "互动工具"
+      "interactiveTools": "互动工具",
+      "painTracker": "疼痛追踪工具",
+      "symptomAssessment": "症状评估工具",
+      "nutritionGenerator": "营养推荐生成器",
+      "workplaceWellness": "职场健康助手",
+      "scenarioSolutions": "场景解决方案",
+      "teenHealth": "青少年专区",
+      "campusGuide": "校园应急指南",
+      "emotionalSupport": "情绪支持与心理健康",
+      "communicationGuide": "沟通指导",
+      "developmentPain": "发育期疼痛管理",
+      "healthGuide": "痛经健康指南",
+      "globalPerspectives": "全球视角",
+      "medicalCare": "何时寻求帮助",
+      "lifestyle": "生活方式管理",
+      "mythsFacts": "误区与事实",
+      "emergencyKit": "应急包清单"
     },
     "common": {
       "loading": "加载中...",

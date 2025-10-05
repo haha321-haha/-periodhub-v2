@@ -3,13 +3,23 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
-import Breadcrumb from '@/components/Breadcrumb';
 import dynamic from 'next/dynamic';
-import RelatedToolCard from '../components/RelatedToolCard';
-import RelatedArticleCard from '../components/RelatedArticleCard';
-import ScenarioSolutionCard from '../components/ScenarioSolutionCard';
+import Breadcrumb from '@/components/Breadcrumb';
 import { generateToolStructuredData, ToolStructuredDataScript } from '@/lib/seo/tool-structured-data';
 import { generateBreadcrumbStructuredData, BreadcrumbStructuredDataScript } from '@/lib/seo/breadcrumb-structured-data';
+
+// 动态导入相关组件 - 代码分割优化
+const RelatedToolCard = dynamic(() => import('../components/RelatedToolCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const RelatedArticleCard = dynamic(() => import('../components/RelatedArticleCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const ScenarioSolutionCard = dynamic(() => import('../components/ScenarioSolutionCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
 
 // 动态导入互动工具组件 - 代码分割优化
 const PainTrackerTool = dynamic(() => import('../components/PainTrackerTool'), {

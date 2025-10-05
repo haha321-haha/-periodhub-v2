@@ -2,18 +2,29 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { useSafeTranslations } from '@/hooks/useSafeTranslations';
 import { usePartnerHandbookStore, useStageActions } from '../stores/partnerHandbookStore';
 import { Locale } from '../types/common';
 import { QuizResult, QuizStage } from '../types/quiz';
 import Breadcrumb from '@/components/Breadcrumb';
-import RelatedToolCard from '@/app/[locale]/interactive-tools/components/RelatedToolCard';
-import RelatedArticleCard from '@/app/[locale]/interactive-tools/components/RelatedArticleCard';
-import ScenarioSolutionCard from '@/app/[locale]/interactive-tools/components/ScenarioSolutionCard';
-import { ArrowLeft, AlertTriangle } from 'lucide-react';
 
-// 懒加载组件
-import dynamic from 'next/dynamic';
+// 动态导入相关组件 - 代码分割优化
+const RelatedToolCard = dynamic(() => import('@/app/[locale]/interactive-tools/components/RelatedToolCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const RelatedArticleCard = dynamic(() => import('@/app/[locale]/interactive-tools/components/RelatedArticleCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+const ScenarioSolutionCard = dynamic(() => import('@/app/[locale]/interactive-tools/components/ScenarioSolutionCard'), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+});
+
+// 动态导入图标 - 按需加载
+const ArrowLeft = dynamic(() => import('lucide-react').then(mod => ({ default: mod.ArrowLeft })), { ssr: false });
+const AlertTriangle = dynamic(() => import('lucide-react').then(mod => ({ default: mod.AlertTriangle })), { ssr: false });
 
 // 动态导入组件以优化性能
 const PartnerUnderstandingQuiz = dynamic(

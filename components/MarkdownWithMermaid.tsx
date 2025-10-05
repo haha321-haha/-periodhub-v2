@@ -3,7 +3,20 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
-import MermaidChart from './MermaidChart';
+import dynamic from 'next/dynamic';
+
+// 动态导入MermaidChart组件，实现懒加载
+const MermaidChart = dynamic(() => import('./MermaidChart'), {
+  loading: () => (
+    <div className="my-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+      <div className="flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-primary-600 border-t-transparent rounded-full animate-spin mr-2"></div>
+        <p className="text-gray-600 text-sm">正在加载图表...</p>
+      </div>
+    </div>
+  ),
+  ssr: false // 禁用服务端渲染，确保只在客户端加载
+});
 
 interface MarkdownWithMermaidProps {
   content: string;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, useMemo } from 'react';
-import mermaid from 'mermaid';
+import dynamic from 'next/dynamic';
 
 interface MermaidChartProps {
   chart: string;
@@ -10,6 +10,12 @@ interface MermaidChartProps {
   className?: string;
   id?: string;
 }
+
+// 动态导入Mermaid库 - 只在需要时加载
+const loadMermaid = async () => {
+  const mermaid = await import('mermaid');
+  return mermaid.default;
+};
 
 export default function MermaidChart({ 
   chart, 
@@ -20,6 +26,9 @@ export default function MermaidChart({
 }: MermaidChartProps) {
   const chartRef = useRef<HTMLDivElement>(null);
   const [isClient, setIsClient] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [mermaidLoaded, setMermaidLoaded] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   // 使用稳定的ID生成策略，避免水合错误
   const chartId = useMemo(() => {
@@ -40,41 +49,49 @@ export default function MermaidChart({
     // 只在客户端渲染图表
     if (!isClient) return;
 
-    // Initialize Mermaid with configuration
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'default',
-      themeVariables: {
-        primaryColor: '#9333ea',
-        primaryTextColor: '#ffffff',
-        primaryBorderColor: '#7c3aed',
-        lineColor: '#6b7280',
-        sectionBkgColor: '#f3f4f6',
-        altSectionBkgColor: '#e5e7eb',
-        gridColor: '#d1d5db',
-        secondaryColor: '#ec4899',
-        tertiaryColor: '#f59e0b'
-      },
-      flowchart: {
-        useMaxWidth: true,
-        htmlLabels: true,
-        curve: 'basis'
-      },
-      fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
-      // 添加安全配置
-      securityLevel: 'loose'
-    });
-
     const renderChart = async () => {
       if (chartRef.current && chart) {
         try {
-          // Clear previous content
-          chartRef.current.innerHTML = '';
+          setIsLoading(true);
+          setError(null);
 
           // 验证图表内容
           if (!chart.trim()) {
             throw new Error('Empty chart definition');
           }
+
+          // 动态加载Mermaid库
+          const mermaid = await loadMermaid();
+          
+          // 只在第一次加载时初始化
+          if (!mermaidLoaded) {
+            mermaid.initialize({
+              startOnLoad: false,
+              theme: 'default',
+              themeVariables: {
+                primaryColor: '#9333ea',
+                primaryTextColor: '#ffffff',
+                primaryBorderColor: '#7c3aed',
+                lineColor: '#6b7280',
+                sectionBkgColor: '#f3f4f6',
+                altSectionBkgColor: '#e5e7eb',
+                gridColor: '#d1d5db',
+                secondaryColor: '#ec4899',
+                tertiaryColor: '#f59e0b'
+              },
+              flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+              },
+              fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif',
+              securityLevel: 'loose'
+            });
+            setMermaidLoaded(true);
+          }
+
+          // Clear previous content
+          chartRef.current.innerHTML = '';
 
           // Render the chart
           const { svg } = await mermaid.render(chartId, chart);
@@ -102,6 +119,7 @@ export default function MermaidChart({
           console.error('Mermaid rendering error:', error);
           console.error('Chart content:', chart);
           const errorMessage = error instanceof Error ? error.message : String(error);
+          setError(errorMessage);
           chartRef.current.innerHTML = `
             <div class="p-4 bg-red-50 border border-red-200 rounded-lg">
               <p class="text-red-800 font-medium">图表渲染失败</p>
@@ -112,6 +130,8 @@ export default function MermaidChart({
               </details>
             </div>
           `;
+        } finally {
+          setIsLoading(false);
         }
       }
     };
@@ -119,7 +139,7 @@ export default function MermaidChart({
     // 延迟渲染以确保DOM已准备好
     const timer = setTimeout(renderChart, 100);
     return () => clearTimeout(timer);
-  }, [isClient, chart, chartId, description]);
+  }, [isClient, chart, chartId, description, mermaidLoaded]);
 
   // 服务端渲染时显示占位符，客户端渲染时显示图表
   if (!isClient) {
@@ -193,6 +213,16 @@ export default function MermaidChart({
           alignItems: 'center'
         }}
       />
+      
+      {/* 加载状态指示器 */}
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
+          <div className="text-center">
+            <div className="w-6 h-6 border-2 border-primary-600 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+            <p className="text-gray-600 text-sm">正在渲染图表...</p>
+          </div>
+        </div>
+      )}
       
       {/* Print-specific styles */}
       <style jsx>{`

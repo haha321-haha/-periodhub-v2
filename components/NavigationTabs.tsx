@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 interface NavigationTabsProps {
   locale: string;
 }
 
 export default function NavigationTabs({ locale }: NavigationTabsProps) {
-  const t = useTranslations('navigationTabs');
+  const t = useTranslations("navigationTabs");
 
   return (
     <section className="flex justify-center">
@@ -18,14 +18,14 @@ export default function NavigationTabs({ locale }: NavigationTabsProps) {
           className="px-6 py-2 rounded-md text-neutral-700 hover:bg-white hover:shadow-sm transition-all"
           suppressHydrationWarning={true}
         >
-          {locale === 'en' ? '📚 Articles' : '📚 专业文章'}
+          {t("professionalArticles")}
         </Link>
         <Link
           href={`/${locale}/downloads`}
           className="px-6 py-2 rounded-md text-neutral-700 hover:bg-white hover:shadow-sm transition-all"
           suppressHydrationWarning={true}
         >
-          {locale === 'en' ? '📥 PDF Downloads' : '📥 PDF下载'}
+          {t("pdfDownloads")}
         </Link>
       </div>
     </section>

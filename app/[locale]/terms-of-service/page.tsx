@@ -786,10 +786,10 @@ export default async function TermsOfServicePage({
           <div className="max-w-4xl mx-auto">
             <div className="bg-blue-100 border border-blue-200 rounded-lg p-6">
               <h3 className="text-lg font-semibold mb-2 text-blue-800">
-                {t("finalNotice.title")}
+                {t("sections.finalNotice.title")}
               </h3>
               <p className="text-blue-700 text-sm">
-                {t("finalNotice.content")}
+                {t("sections.finalNotice.content")}
               </p>
             </div>
           </div>

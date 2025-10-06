@@ -230,7 +230,10 @@
     "breadcrumb": {
       "scenarioSolutions": "Scenario Solutions",
       "teenHealth": "Teen Health",
-      "immediateRelief": "Immediate Relief"
+      "immediateRelief": "Immediate Relief",
+      "campusGuide": "Campus Guide",
+      "interactiveTools": "Interactive Tools",
+      "workplaceWellness": "Workplace Wellness"
     }
   },
   "anchorTexts": {
@@ -246,7 +249,9 @@
       "symptom_assessment": "Symptom Assessment",
       "constitution_test": "Constitution Test",
       "cycle_tracker": "Cycle Tracker",
-      "constitution": "Constitution Test"
+      "constitution": "Constitution Test",
+      "tracker": "Tracker",
+      "nutrition": "Nutrition"
     },
     "teen": {
       "main": "Learn More"
@@ -255,12 +260,18 @@
       "medical_guide": "Dysmenorrhea Medical Guide",
       "heat_therapy": "Complete Heat Therapy Guide",
       "herbal_tea": "Herbal Tea for Period Pain Relief",
-      "related": "Learn More"
+      "related": "Learn More",
+      "nutrition_guide": "Nutrition Guide",
+      "workplace_health": "Workplace Health",
+      "pain_management": "Pain Management"
     },
     "solutions": {
       "exercise_balance_new": "Exercise & Periods",
       "office": "Office Relief Solutions",
-      "emergency": "Emergency Kit Preparation"
+      "emergency": "Emergency Kit Preparation",
+      "sleep": "Sleep",
+      "exercise": "Exercise",
+      "workplace_wellness": "Workplace Wellness"
     }
   },
   "healthStatistics": {
@@ -1795,48 +1806,23 @@
       "questions": {
         "q1": {
           "question": "Have you frequently felt anxious or tense recently?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q2": {
           "question": "How is your sleep quality?",
-          "options": [
-            "Very Good",
-            "Good",
-            "Poor",
-            "Very Poor"
-          ]
+          "options": ["Very Good", "Good", "Poor", "Very Poor"]
         },
         "q3": {
           "question": "Do you often feel tired or lack energy?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q4": {
           "question": "Do you easily feel irritable or angry?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q5": {
           "question": "Do you often worry about period-related issues?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         }
       },
       "benefits": {

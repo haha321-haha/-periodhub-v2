@@ -95,7 +95,7 @@ export default function Header() {
                   🇨🇳
                 </span>
                 <span className="hidden sm:inline text-xs lg:text-sm">
-                  中文
+                  {t("language")}
                 </span>
               </div>
             </div>
@@ -157,7 +157,7 @@ export default function Header() {
               aria-controls="mobile-menu"
               aria-expanded={isMenuOpen}
             >
-              <span className="sr-only">Open main menu</span>
+              <span className="sr-only">{t("openMainMenu")}</span>
               {/* 修复SVG hydration问题 - 使用条件渲染而不是CSS隐藏 */}
               {!isMenuOpen && (
                 <Menu

@@ -1,11 +1,11 @@
 {
-  "timestamp": "2025-10-05T20:57:19.443Z",
+  "timestamp": "2025-10-05T21:19:14.232Z",
   "summary": {
     "totalFiles": 14,
-    "totalKeys": 774,
-    "totalMissing": 569,
-    "completeness": "26.5",
-    "filesWithMissing": 8
+    "totalKeys": 762,
+    "totalMissing": 555,
+    "completeness": "27.2",
+    "filesWithMissing": 7
   },
   "results": [
     {
@@ -203,24 +203,9 @@
       "missingKeys": {
         "en": [],
         "zh": [],
-        "both": [
-          "introText",
-          "introTitle",
-          "scenarios.commute.description",
-          "scenarios.commute.title",
-          "scenarios.exercise.description",
-          "scenarios.exercise.title",
-          "scenarios.life_stages.description",
-          "scenarios.life_stages.title",
-          "scenarios.office.description",
-          "scenarios.office.title",
-          "scenarios.sleep.description",
-          "scenarios.sleep.title",
-          "scenarios.social.description",
-          "scenarios.social.title"
-        ]
+        "both": []
       },
-      "totalMissing": 14
+      "totalMissing": 0
     },
     {
       "file": "app/[locale]/interactive-tools/page.tsx",
@@ -247,7 +232,7 @@
     {
       "file": "app/[locale]/health-guide/page.tsx",
       "namespace": "healthGuidePage",
-      "totalKeys": 83,
+      "totalKeys": 77,
       "missingKeys": {
         "en": [],
         "zh": [],
@@ -361,7 +346,7 @@
     {
       "file": "app/[locale]/natural-therapies/page.tsx",
       "namespace": "naturalTherapiesPage",
-      "totalKeys": 158,
+      "totalKeys": 152,
       "missingKeys": {
         "en": [],
         "zh": [],

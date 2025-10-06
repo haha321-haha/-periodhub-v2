@@ -95,7 +95,7 @@ export default function OptimizedScripts() {
       )}
 
       {/* Microsoft Clarity - 智能延迟加载 */}
-      {shouldLoadScripts && (
+      {shouldLoadScripts && isProduction && (
         <Script
           id="clarity-init"
           strategy="lazyOnload"

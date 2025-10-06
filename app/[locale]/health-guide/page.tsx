@@ -179,6 +179,9 @@ export default async function HealthGuidePage({
   // Enable static rendering
   unstable_setRequestLocale(locale);
 
+  // Define locale helper
+  const isZh = locale === "zh";
+
   const t = await getTranslations({ locale, namespace: "healthGuidePage" });
   const commonT = await getTranslations({ locale, namespace: "common" });
 
@@ -1430,7 +1433,7 @@ export default async function HealthGuidePage({
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
                   <span className="mr-3">🔧</span>
-                  {isZh ? "专业评估工具" : "Professional Assessment Tools"}
+                  {t("contentSections.professionalAssessmentTools")}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {recommendations.relatedTools.map((tool) => (
@@ -1447,7 +1450,7 @@ export default async function HealthGuidePage({
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
                   <span className="mr-3">📚</span>
-                  {isZh ? "深度健康文章" : "In-Depth Health Articles"}
+                  {t("contentSections.depthHealthArticles")}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {recommendations.relatedArticles.map((article) => (
@@ -1464,7 +1467,7 @@ export default async function HealthGuidePage({
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
                   <span className="mr-3">🎯</span>
-                  {isZh ? "健康管理专题" : "Health Management Topics"}
+                  {t("contentSections.healthManagementTopics")}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   {recommendations.healthTopics.map((topic) => (

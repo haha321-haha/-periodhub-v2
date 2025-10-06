@@ -5,7 +5,7 @@
       "subtitle": "Traditional pressure point therapy"
     },
     "acupressureDescription": "Acupressure uses finger pressure on specific points to relieve pain. It's based on traditional Chinese medicine and supported by modern research.",
-    
+
     "acupressureDetails": {
       "title": "Key Acupressure Points:",
       "acupoints": [
@@ -36,13 +36,13 @@
         "precautions": "Avoid SP6 during pregnancy. Stop if pain increases."
       }
     },
-    
+
     "otcOptions": {
       "title": "Over-the-Counter Pain Relief",
       "subtitle": "When you need medication"
     },
     "otcOptionsDescription": "NSAIDs (Non-Steroidal Anti-Inflammatory Drugs) like ibuprofen are highly effective for menstrual pain. They work by blocking prostaglandin production.",
-    
+
     "combinationTherapy": {
       "title": "Combination Therapy",
       "subtitle": "Maximize relief by combining methods"

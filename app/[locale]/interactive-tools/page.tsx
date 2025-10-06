@@ -235,7 +235,7 @@ export default async function InteractiveToolsPage({
                 <div className="flex justify-center order-first md:order-last">
                   <SafeSmartImage
                     src="/images/tools/assessment-illustration.jpg"
-                    alt="Woman using digital health assessment tool on tablet in comfortable home setting"
+                    alt={t("assessmentIllustrationAlt")}
                     width={400}
                     height={300}
                     type="content"

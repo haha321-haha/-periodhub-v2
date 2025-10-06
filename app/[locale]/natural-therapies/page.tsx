@@ -1576,7 +1576,7 @@ export default async function NaturalTherapiesPage({
                         1
                       </span>
                       <p className="text-gray-700">
-                        {t("evidenceBased.longTermStudies.study1")}
+                        {t("evidenceBased.longTermStudies.study1Value")}
                       </p>
                     </div>
                     <div className="flex items-start">
@@ -1584,7 +1584,7 @@ export default async function NaturalTherapiesPage({
                         2
                       </span>
                       <p className="text-gray-700">
-                        {t("evidenceBased.longTermStudies.study2")}
+                        {t("evidenceBased.longTermStudies.study2Value")}
                       </p>
                     </div>
                   </div>
@@ -1594,7 +1594,7 @@ export default async function NaturalTherapiesPage({
                         3
                       </span>
                       <p className="text-gray-700">
-                        {t("evidenceBased.longTermStudies.study3")}
+                        {t("evidenceBased.longTermStudies.study3Value")}
                       </p>
                     </div>
                     <div className="flex items-start">
@@ -1602,7 +1602,7 @@ export default async function NaturalTherapiesPage({
                         4
                       </span>
                       <p className="text-gray-700">
-                        {t("evidenceBased.longTermStudies.study4")}
+                        {t("evidenceBased.longTermStudies.study4Value")}
                       </p>
                     </div>
                   </div>

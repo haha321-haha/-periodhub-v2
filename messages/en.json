@@ -19,7 +19,12 @@
     "naturalCare": "Natural Therapies",
     "healthGuide": "Health Guide",
     "frameworkDemo": "Framework Demo",
-    "language": "Language"
+    "language": "Language",
+    "openMainMenu": "Open main menu",
+    "languages": {
+      "en": "English",
+      "zh": "中文"
+    }
   },
   "footer": {
     "companyName": "PeriodHub",
@@ -48,10 +53,13 @@
   "common": {
     "breadcrumb": {
       "home": "Home",
-      "separator": "/"
+      "separator": "/",
+      "immediateRelief": "Immediate Relief"
     },
+    "readMore": "Read More",
     "importantNote": "Important Note",
-    "medicalDisclaimer": "This website content is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional if you have any health concerns."
+    "medicalDisclaimer": "This website content is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional if you have any health concerns.",
+    "learnMore": "Learn More"
   },
   "hero": {
     "welcomeBadge": "Welcome to Professional Period Pain Management",
@@ -218,6 +226,13 @@
       "answer": "After registering an account, complete the basic assessment to start using all features."
     }
   },
+  "interactiveTools": {
+    "breadcrumb": {
+      "scenarioSolutions": "Scenario Solutions",
+      "teenHealth": "Teen Health",
+      "immediateRelief": "Immediate Relief"
+    }
+  },
   "anchorTexts": {
     "navigation": {
       "main": "Main Navigation"
@@ -230,7 +245,22 @@
       "pain_tracker": "Pain Tracker",
       "symptom_assessment": "Symptom Assessment",
       "constitution_test": "Constitution Test",
-      "cycle_tracker": "Cycle Tracker"
+      "cycle_tracker": "Cycle Tracker",
+      "constitution": "Constitution Test"
+    },
+    "teen": {
+      "main": "Learn More"
+    },
+    "articles": {
+      "medical_guide": "Dysmenorrhea Medical Guide",
+      "heat_therapy": "Complete Heat Therapy Guide",
+      "herbal_tea": "Herbal Tea for Period Pain Relief",
+      "related": "Learn More"
+    },
+    "solutions": {
+      "exercise_balance_new": "Exercise & Periods",
+      "office": "Office Relief Solutions",
+      "emergency": "Emergency Kit Preparation"
     }
   },
   "healthStatistics": {
@@ -259,100 +289,775 @@
     "articles": "Articles Center",
     "tools": "Interactive Tools",
     "downloads": "Resource Downloads",
-    "guide": "Health Guide"
+    "guide": "Health Guide",
+    "professionalArticles": "📚 Articles",
+    "pdfDownloads": "📥 PDF Downloads"
+  },
+  "articlesPage": {
+    "categories": {
+      "immediateRelief": {
+        "title": "Immediate Relief",
+        "articles": {
+          "fiveMinuteRelief": "5-Minute Period Pain Relief",
+          "heatTherapy": "Complete Heat Therapy Guide"
+        }
+      },
+      "understandingEducation": {
+        "title": "Understanding & Education",
+        "articles": {
+          "painDifferential": "Menstrual Pain vs Other Abdominal Pain Guide",
+          "lifecycleAnalysis": "Menstrual Lifecycle Analysis",
+          "researchProgress2024": "2024 Research Progress",
+          "understandingCycle": "Understanding Menstrual Cycle",
+          "insuranceCoverage": "Insurance Coverage Guide"
+        }
+      },
+      "nutritionHealth": {
+        "title": "Nutrition & Health",
+        "articles": {
+          "sleepQuality": "Comprehensive Menstrual Sleep Quality Guide",
+          "preventiveCare": "Preventive Care Guide",
+          "stressManagement": "Stress Management Guide"
+        }
+      },
+      "naturalTherapies": {
+        "title": "Natural Therapies",
+        "articles": {
+          "physicalTherapy": "Menstrual Back Pain Comprehensive Care Guide",
+          "traditionalMethods": "Ginger Menstrual Pain Relief Guide",
+          "zhanZhuang": "Zhan Zhuang Standing Meditation Guide",
+          "herbalTea": "Herbal Tea Guide"
+        }
+      },
+      "medicalGuidance": {
+        "title": "Medical Guidance",
+        "articles": {
+          "nsaidProfessionalGuide": "NSAID Professional Guide",
+          "whenToSeeDoctor": "When to See Doctor",
+          "medicalCare": "Medical Care Guide"
+        }
+      },
+      "specializedGuides": {
+        "title": "Specialized Guides",
+        "articles": {
+          "readingList": "Reading List"
+        }
+      }
+    }
+  },
+  "simplePdfCenter": {
+    "categories": {
+      "immediate": "Immediate Relief",
+      "preparation": "Preparation & Planning",
+      "learning": "Learning & Education",
+      "management": "Management & Tracking"
+    },
+    "subtitles": {
+      "immediate": "Quick relief when you need it most",
+      "preparation": "Be ready for next time",
+      "learning": "Understand your body better",
+      "management": "Track and improve over time"
+    },
+    "labels": {
+      "topPick": "Top Pick",
+      "recommended": "Recommended",
+      "optional": "Optional",
+      "important": "Important"
+    },
+    "actions": {
+      "readArticle": "Read Article",
+      "downloadHtmlPdf": "Download PDF",
+      "share": "Share"
+    },
+    "tags": {
+      "heatTherapy": "Heat Therapy",
+      "heatTherapyMethod": "Heat Therapy Method",
+      "heatTherapyTreatment": "Heat Therapy Treatment",
+      "heatTherapyTreatment2": "Heat Therapy Treatment",
+      "warmWaterBottle": "Warm Water Bottle",
+      "warmPatch": "Warm Patch",
+      "massage": "Massage",
+      "acupressure": "Acupressure",
+      "muscleRelaxation": "Muscle Relaxation",
+      "abdominalMassage": "Abdominal Massage",
+      "menstrualMassage": "Menstrual Massage",
+      "painMassage": "Pain Massage",
+      "bellyRub": "Belly Rub",
+      "painkiller": "Painkiller",
+      "nsaid": "NSAID",
+      "antiInflammatoryDrug": "Anti-inflammatory Drug",
+      "ibuprofen": "Ibuprofen",
+      "acetaminophen": "Acetaminophen",
+      "painMedication": "Pain Medication",
+      "medication": "Medication",
+      "nutrition": "Nutrition",
+      "diet": "Diet",
+      "health": "Health",
+      "habit": "Habit",
+      "preparation": "Preparation",
+      "prevention": "Prevention",
+      "plan": "Plan",
+      "advance": "Advance",
+      "wellness": "Wellness",
+      "exercise": "Exercise",
+      "yoga": "Yoga",
+      "baduanjin": "Baduanjin",
+      "doctor": "Doctor",
+      "medical": "Medical",
+      "seeDoctor": "See Doctor",
+      "cycle": "Cycle",
+      "understand": "Understand",
+      "guide": "Guide",
+      "education": "Education",
+      "knowledge": "Knowledge",
+      "learning": "Learning",
+      "research": "Research",
+      "science": "Science",
+      "evidenceBased": "Evidence-based",
+      "diagnosis": "Diagnosis",
+      "examination": "Examination",
+      "longTerm": "Long-term",
+      "management": "Management",
+      "life": "Life",
+      "archive": "Archive",
+      "record": "Record",
+      "continuous": "Continuous",
+      "tracking": "Tracking",
+      "monitoring": "Monitoring",
+      "analysis": "Analysis",
+      "report": "Report",
+      "template": "Template",
+      "communication": "Communication",
+      "pain": "Pain",
+      "relief": "Relief",
+      "quick": "Quick",
+      "immediate": "Immediate",
+      "emergency": "Emergency",
+      "urgent": "Urgent",
+      "important": "Important",
+      "method": "Method"
+    }
+  },
+  "resourcesPage": {
+    "meta": {
+      "title": "PDF Resource Download Center - PeriodHub | Professional Menstrual Health Guides",
+      "description": "PeriodHub PDF Resource Center: Download professionally crafted menstrual health guides, pain tracking forms, nutrition plans and other PDF resources to help you manage your menstrual health scientifically.",
+      "keywords": [
+        "PDF download",
+        "menstrual health guides",
+        "period pain management",
+        "health resources",
+        "download center",
+        "menstrual care"
+      ],
+      "ogTitle": "PDF Resource Download Center - PeriodHub",
+      "ogDescription": "Professional menstrual health PDF resource download center"
+    }
   },
   "downloadsPage": {
-    "title": "PDF Resources Download Center - Period Hub",
-    "description": "Period Hub Articles PDF Download Center, 42 curated menstrual health resources including 42 expert articles and 0 PDF resources, bilingual support, mobile-optimized experience.",
-    "keywords": "menstrual health,PDF download,health resources,period management,women health,bilingual,mobile optimized",
+    "title": "PDF Download Center - Period Health Resource Library | PeriodHub",
+    "description": "Download professional period health PDF resources for free, including dysmenorrhea management guides, nutrition advice, exercise plans, and more. Available in Chinese and English, access reliable health information anytime, anywhere.",
+    "keywords": "period health PDF,dysmenorrhea management guide,menstrual health materials,free health resources,period care handbook,TCM wellness guide",
     "openGraph": {
-      "title": "PDF Resources Download Center - Period Hub",
-      "description": "Period Hub Articles PDF Download Center, 42 curated menstrual health resources including 42 expert articles and 0 PDF resources, bilingual support, mobile-optimized experience."
+      "title": "PDF Download Center - Period Health Resource Library | PeriodHub",
+      "description": "Download professional period health PDF resources for free, including dysmenorrhea management guides, nutrition advice, and exercise plans"
     },
     "banner": {
-      "text": "🎉 New PDF Download Center - 42 curated resources, mobile-optimized experience, smart categorized by urgency"
+      "text": "🎉 New PDF Download Center Launched! More professional resources, better reading experience"
     },
     "structuredData": {
-      "name": "PDF Resources Download Center",
-      "description": "Period Hub Articles PDF Download Center, 42 curated menstrual health resources"
+      "name": "PeriodHub PDF Download Center",
+      "description": "Professional period health PDF resource download service"
     },
     "breadcrumb": {
       "home": "Home",
-      "downloadCenter": "PDF Download Center"
+      "downloadCenter": "Download Center"
     },
     "content": {
-      "title": "📚 Articles PDF Download Center",
-      "description": "42 curated resources, smart categorized by urgency, helping you quickly find the right solutions when needed",
+      "title": "📥 PDF Download Center",
+      "description": "Curated professional health resources for offline reading. All PDFs are reviewed by medical experts for scientific accuracy.",
       "statistics": {
         "expertArticles": "Expert Articles",
         "pdfResources": "PDF Resources",
         "languages": "Languages"
       },
       "banner": {
-        "title": "💡 Try New Download Center",
-        "description": "Mobile optimized • Smart search • Emergency mode • 42 curated resources",
-        "feedbackButton": "Share Feedback"
+        "title": "💡 Need Help?",
+        "description": "Tell us your needs, we'll continuously improve our resource library",
+        "feedbackButton": "Submit Feedback"
       }
     }
   },
   "naturalTherapiesPage": {
-    "title": "Natural Therapies - PeriodHub",
-    "description": "Explore scientific natural therapies for period pain relief, including heat therapy, herbal teas, acupressure, exercise therapy, and traditional-modern integrated natural health solutions.",
-    "keywords": "natural therapies,period pain relief,heat therapy,herbal tea,acupressure,exercise therapy,TCM constitution,nutrition therapy",
-    "recommendations": {
-      "relatedTools": {
-        "nutritionGenerator": {
-          "title": "Nutrition Recommendation Generator",
-          "description": "Generate personalized natural dietary plans based on constitution to improve period pain through nutrition"
+    "meta": {
+      "title": "Natural Therapies for Period Pain Relief - Complete Guide | PeriodHub",
+      "description": "Evidence-based natural therapies for menstrual pain: heat therapy, herbal remedies, dietary adjustments, yoga, aromatherapy, acupressure. Safe, effective, and side-effect free.",
+      "keywords": "natural therapies,period pain relief,heat therapy,herbal remedies,dietary adjustments,yoga,aromatherapy,acupressure,menstrual health,side-effect free"
+    },
+    "hero": {
+      "title": "🌿 Natural Therapies for Period Pain",
+      "subtitle": "Science-backed natural methods, gentle and effective, with no side effects"
+    },
+    "scientificFoundation": {
+      "title": "🔬 Scientific Foundation",
+      "description": "Natural therapies combine modern medical research with traditional wisdom, providing safe and effective options for menstrual pain management. Multiple clinical studies confirm their efficacy.",
+      "benefits": {
+        "noSideEffects": {
+          "title": "No Side Effects",
+          "description": "Gentle and natural, without drug dependency or adverse reactions"
         },
-        "constitutionTest": {
-          "title": "TCM Constitution Test",
-          "description": "Understand your TCM constitution to choose the most suitable natural therapies and herbal treatments"
+        "holisticApproach": {
+          "title": "Holistic Approach",
+          "description": "Fundamentally improves constitution and overall health"
         },
-        "painTracker": {
-          "title": "Pain Tracker",
-          "description": "Record the effectiveness of natural therapies and track which methods best relieve your period pain"
-        }
-      },
-      "relatedArticles": {
-        "medicalGuide": {
-          "title": "Medical Guide to Dysmenorrhea",
-          "description": "Deep understanding of dysmenorrhea causes and scientific principles and application timing of natural therapies",
-          "readTime": "18 min read",
-          "category": "Medical Guide"
-        },
-        "heatTherapy": {
-          "title": "Heat Therapy Complete Guide",
-          "description": "In-depth analysis of heat therapy principles for period pain relief, temperature control and best practices",
-          "readTime": "15 min read",
-          "category": "Natural Therapy"
-        },
-        "herbalTea": {
-          "title": "Herbal Tea Pain Relief",
-          "description": "Herbal tea recipes and drinking guides, traditional herbal remedies like ginger tea and angelica tea",
-          "readTime": "12 min read",
-          "category": "Herbal Therapy"
-        }
-      },
-      "scenarioSolutions": {
-        "exercise": {
-          "title": "Exercise Scenario Management",
-          "description": "Apply natural therapies in exercise, relieve menstrual discomfort through yoga and stretching"
-        },
-        "office": {
-          "title": "Office Environment Health Management",
-          "description": "Natural relief techniques in workplace, discreet acupressure points and heat therapy applications"
-        },
-        "emergencyKit": {
-          "title": "Period Pain Emergency Kit Guide",
-          "description": "Prepare portable natural therapy emergency kit to relieve sudden pain anytime, anywhere"
+        "costEffective": {
+          "title": "Cost-Effective",
+          "description": "Most methods are affordable and sustainable long-term"
         }
       }
+    },
+    "therapies": {
+      "title": "🌟 Natural Therapy Options",
+      "heatTherapy": {
+        "title": "Heat Therapy",
+        "subtitle": "The simplest and most effective physical therapy",
+        "description": "Heat therapy promotes blood circulation and relaxes uterine smooth muscle through thermal effects, making it one of the most direct and effective methods for relieving menstrual pain.",
+        "parameters": {
+          "title": "Scientific Parameters",
+          "temperature": "Temperature:",
+          "temperatureValue": "40-45°C (warm but not burning)",
+          "duration": "Duration:",
+          "durationValue": "15-20 minutes per session",
+          "frequency": "Frequency:",
+          "frequencyValue": "2-3 times daily, increase during pain",
+          "timing": "Timing:",
+          "timingValue": "Start 1-2 days before period for prevention",
+          "mechanism": "Mechanism:",
+          "mechanismValue": "Heat stimulates skin temperature receptors, blocking pain signals through 'gate control theory'"
+        },
+        "mechanism": {
+          "title": "Scientific Mechanism",
+          "gateControl": {
+            "title": "Gate Control Theory",
+            "description": "Thermal stimulation activates large fiber nerves, inhibiting pain signals from small fibers"
+          },
+          "vasodilation": {
+            "title": "Vasodilation Effect",
+            "description": "Heat promotes local vasodilation, improving uterine blood supply and relieving ischemic pain"
+          }
+        },
+        "safety": {
+          "title": "⚠️ Safety Tips",
+          "guidelines": {
+            "0": "Avoid direct skin contact, use a towel barrier",
+            "1": "Do not use while sleeping to prevent low-temperature burns",
+            "2": "Stop if skin is broken or infected"
+          }
+        }
+      },
+      "herbalTherapy": {
+        "title": "Herbal Therapy",
+        "subtitle": "Traditional wisdom meets modern validation",
+        "description": "Herbal medicine has a long history in treating menstrual pain. Modern research confirms that active compounds have anti-inflammatory, analgesic, and hormone-regulating effects.",
+        "herbs": {
+          "ginger": {
+            "title": "Ginger (Zingiber officinale)",
+            "activeCompounds": "Active Compounds:",
+            "activeCompoundsValue": "Gingerols, shogaols",
+            "mechanism": "Mechanism:",
+            "mechanismValue": "Inhibits prostaglandin synthesis, reduces uterine contractions",
+            "clinicalEvidence": "Clinical Evidence:",
+            "clinicalEvidenceValue": "Studies show efficacy comparable to ibuprofen (Ozgoli et al., 2009)"
+          },
+          "angelica": {
+            "title": "Angelica (Angelica sinensis)",
+            "activeCompounds": "Active Compounds:",
+            "activeCompoundsValue": "Ferulic acid, ligustilide",
+            "mechanism": "Mechanism:",
+            "mechanismValue": "Regulates estrogen levels, improves uterine blood circulation",
+            "classicFormula": "Classic Formula:",
+            "classicFormulaValue": "Si Wu Tang, Dang Gui Shao Yao San"
+          }
+        },
+        "usage": {
+          "title": "Usage Methods",
+          "gingerTea": {
+            "title": "Ginger Tea",
+            "description": "Slice 10g fresh ginger, steep in boiling water for 10 minutes, start 3 days before period, 2-3 times daily"
+          },
+          "angelicaDecoction": {
+            "title": "Angelica Decoction",
+            "description": "10g angelica, add 300ml water, simmer for 20 minutes, take during menstruation"
+          }
+        },
+        "safety": {
+          "title": "⚠️ Important Notes",
+          "guidelines": {
+            "0": "Angelica contraindicated in pregnancy",
+            "1": "Use ginger cautiously with anticoagulants",
+            "2": "Consult TCM practitioner for first use"
+          }
+        }
+      },
+      "dietaryAdjustment": {
+        "title": "Dietary Adjustments",
+        "subtitle": "Nutritional support from within",
+        "description": "A balanced diet can regulate hormone levels, reduce inflammation, and provide adequate nutritional support.",
+        "nutrients": {
+          "omega3": {
+            "title": "Omega-3 Fatty Acids",
+            "sourcesValue": "Deep-sea fish, flaxseeds, walnuts",
+            "mechanismValue": "Anti-inflammatory effects, reduces prostaglandin production"
+          },
+          "magnesium": {
+            "title": "Magnesium",
+            "sourcesValue": "Dark leafy greens, nuts, whole grains",
+            "mechanismValue": "Relaxes muscles, relieves spasms"
+          },
+          "vitaminB6": {
+            "title": "Vitamin B6",
+            "sourcesValue": "Bananas, chicken, potatoes",
+            "mechanismValue": "Regulates neurotransmitters, improves mood"
+          }
+        },
+        "foods": {
+          "title": "Anti-inflammatory Foods",
+          "recommended": {
+            "title": "Recommended Foods",
+            "list": [
+              "Omega-3 rich fish (salmon, sardines)",
+              "Leafy green vegetables (spinach, kale)",
+              "Turmeric and ginger",
+              "Magnesium-rich foods (nuts, seeds)"
+            ]
+          },
+          "avoid": {
+            "title": "Foods to Avoid",
+            "list": [
+              "Processed foods high in trans fats",
+              "Excessive caffeine and alcohol",
+              "High-sugar foods and drinks",
+              "Foods high in sodium"
+            ]
+          }
+        }
+      },
+      "yogaExercise": {
+        "title": "Yoga & Exercise",
+        "subtitle": "Gentle movement, stress release",
+        "description": "Moderate yoga practice can improve blood circulation, relax muscles, and reduce pain.",
+        "poses": {
+          "title": "Recommended Poses",
+          "catCow": {
+            "title": "Cat-Cow Pose",
+            "description": "Gentle spinal movement"
+          },
+          "childPose": {
+            "title": "Child's Pose",
+            "description": "Restorative forward fold"
+          },
+          "supineTwist": {
+            "title": "Supine Twist",
+            "description": "Gentle spinal rotation"
+          }
+        },
+        "science": {
+          "title": "Scientific Basis",
+          "endorphinRelease": "Endorphin Release:",
+          "endorphinReleaseValue": "Yoga stimulates natural pain-relieving endorphins",
+          "bloodCirculation": "Blood Circulation:",
+          "bloodCirculationValue": "Improves pelvic blood flow and reduces muscle tension",
+          "muscleRelaxation": "Muscle Relaxation:",
+          "muscleRelaxationValue": "Gentle stretching releases uterine muscle spasms"
+        },
+        "practice": {
+          "title": "Practice Guidelines",
+          "timing": {
+            "1": "Preventive practice before period",
+            "2": "Practice during mild pain",
+            "3": "Avoid during severe pain",
+            "title": "Practice Timing"
+          },
+          "precautions": {
+            "1": "Listen to your body, don't overstretch",
+            "2": "Avoid inverted poses during heavy flow",
+            "3": "Stop if you feel dizzy or nauseous",
+            "title": "Precautions"
+          }
+        }
+      },
+      "aromatherapy": {
+        "title": "Aromatherapy",
+        "subtitle": "The healing power of essential oils",
+        "description": "Certain essential oils have analgesic, relaxing, and mood-regulating effects, used through massage or diffusion.",
+        "oils": {
+          "lavender": {
+            "title": "Lavender Essential Oil",
+            "effects": "Effects:",
+            "mechanism": "Mechanism:"
+          },
+          "clarySage": {
+            "title": "Clary Sage Essential Oil",
+            "effects": "Effects:",
+            "mechanism": "Mechanism:"
+          },
+          "romanChamomile": {
+            "title": "Roman Chamomile Essential Oil",
+            "effects": "Effects:",
+            "effectsValue": "Anti-inflammatory, calming, muscle spasm relief",
+            "mechanism": "Mechanism:",
+            "mechanismValue": "Absorbed through olfactory and skin pathways, directly affecting the nervous system"
+          }
+        },
+        "usage": {
+          "title": "Usage Methods",
+          "massageOil": {
+            "title": "Massage Oil",
+            "recipe": "Recipe",
+            "recipeValue": "10ml carrier oil + 2-3 drops essential oil",
+            "instructions": "Usage Instructions",
+            "instructionsValue": "Gently massage lower abdomen, avoid mucous membranes"
+          },
+          "diffusion": {
+            "title": "Diffusion",
+            "recipe": "Recipe",
+            "recipeValue": "3 drops lavender + 2 drops clary sage",
+            "instructions": "Usage Instructions",
+            "instructionsValue": "Use diffuser, 15-20 minutes per session"
+          }
+        },
+        "science": {
+          "title": "Scientific Mechanism",
+          "mechanism": "Mechanism:",
+          "mechanismValue": "Essential oils enter through olfactory and skin pathways, directly affecting the nervous system and endocrine system",
+          "effects": "Effects:",
+          "effectsValue": "Analgesic, relaxing, and mood-regulating effects",
+          "duration": "Duration:",
+          "durationValue": "15-30 minutes, can be used multiple times daily",
+          "bioavailability": "Bioavailability:",
+          "bioavailabilityValue": "Absorbed through skin and respiratory system, bypassing liver metabolism"
+        },
+        "safety": {
+          "title": "⚠️ Safety Tips",
+          "guidelines": {
+            "0": "Essential oils must be diluted before use, do not apply directly",
+            "1": "Use cautiously during pregnancy",
+            "2": "Perform skin test for allergies"
+          }
+        }
+      },
+      "acupuncture": {
+        "title": "Acupuncture & Massage",
+        "subtitle": "Traditional Chinese medicine therapy",
+        "description": "Acupuncture relieves pain by stimulating specific points and regulating qi and blood.",
+        "acupoints": {
+          "title": "Key Acupoints",
+          "sanyinjiao": {
+            "title": "Sanyinjiao (SP6)",
+            "location": "Location:",
+            "locationValue": "3 inches above medial malleolus, behind tibia",
+            "effects": "Effects:",
+            "effectsValue": "Regulates menstruation, relieves pelvic pain",
+            "description": "Sanyinjiao is a key gynecological point with significant effects on regulating menstruation and relieving dysmenorrhea"
+          },
+          "guanyuan": {
+            "title": "Guanyuan (CV4)",
+            "location": "Location:",
+            "locationValue": "3 inches below navel",
+            "effects": "Effects:",
+            "effectsValue": "Tonifies kidney qi, warms lower abdomen",
+            "description": "Guanyuan is a key point for tonifying vital energy and has excellent effects on dysmenorrhea"
+          },
+          "shenque": {
+            "title": "Shenque (CV8)",
+            "description": "Shenque is located at the navel center and is an important point for regulating organ functions"
+          }
+        },
+        "mechanisms": {
+          "title": "Mechanisms of Action",
+          "gateControl": {
+            "title": "Gate Control Theory",
+            "description": "Stimulates nerve fibers to block pain signals"
+          },
+          "endorphin": {
+            "title": "Endorphin Release",
+            "description": "Promotes release of natural pain-relieving chemicals"
+          },
+          "circulation": {
+            "title": "Improved Circulation",
+            "description": "Enhances blood flow to pelvic organs"
+          },
+          "neuralRegulation": "Neural Regulation:",
+          "neuralRegulationValue": "Stimulates nerve endings to regulate pain transmission",
+          "endocrineRegulation": "Endocrine Regulation:",
+          "endocrineRegulationValue": "Balances hormone levels and reduces inflammatory responses",
+          "evidenceBased": "Evidence-Based:",
+          "evidenceBasedValue": "Multiple studies confirm acupuncture's effectiveness for dysmenorrhea"
+        },
+        "selfMassage": {
+          "title": "Self-Massage",
+          "techniques": {
+            "1": "Gentle circular massage on lower abdomen",
+            "2": "Apply pressure to acupoints for 30-60 seconds",
+            "3": "Massage along meridian lines",
+            "title": "Massage Techniques"
+          },
+          "precautions": {
+            "1": "Use gentle pressure, avoid excessive force",
+            "2": "Stop if pain increases",
+            "3": "Avoid during heavy bleeding",
+            "title": "Precautions"
+          },
+          "sanyinjiao": {
+            "title": "Sanyinjiao Massage",
+            "instructions": "Press with thumb, 1-2 minutes per session, moderate pressure"
+          },
+          "guanyuan": {
+            "title": "Guanyuan Massage",
+            "instructions": "Gently massage clockwise, 3-5 minutes per session"
+          },
+          "note": "Precautions",
+          "noteValue": "Moderate pressure, avoid excessive force; stop immediately if discomfort occurs"
+        }
+      },
+      "psychological": {
+        "title": "Psychological Regulation",
+        "subtitle": "Mind-body balance",
+        "description": "Stress and anxiety can worsen pain; psychological regulation techniques can help relieve it.",
+        "breathing": {
+          "title": "Deep Breathing Exercise",
+          "steps": "Steps:",
+          "stepsValue": "Abdominal breathing, 5-10 minutes each time",
+          "frequency": "Frequency:",
+          "frequencyValue": "2-3 times daily, or as needed",
+          "effect": "Effect:",
+          "effectValue": "Reduces stress hormones, relaxes muscles"
+        },
+        "mindfulness": {
+          "title": "Mindfulness Meditation",
+          "method": "Method:",
+          "methodValue": "Focus on present moment, observe sensations without judgment",
+          "effect": "Effect:",
+          "effectValue": "Reduces pain perception, improves emotional regulation",
+          "duration": "Duration:",
+          "durationValue": "10-20 minutes per session, 1-2 times daily"
+        },
+        "muscleRelaxation": {
+          "title": "Progressive Muscle Relaxation",
+          "step1": "Tense each muscle group for 5 seconds, then release",
+          "step2": "Progress from feet upward to head",
+          "step3": "Combine with deep breathing, feel tension and relaxation",
+          "step1Value": "Tense each muscle group for 5 seconds",
+          "step2Value": "Release tension and feel relaxation for 10 seconds",
+          "step3Value": "Progress through all major muscle groups",
+          "effect": "Effect:",
+          "effectValue": "Reduces overall muscle tension and stress"
+        }
+      },
+      "comprehensive": {
+        "title": "Comprehensive Approach",
+        "subtitle": "Combining multiple methods",
+        "description": "Depending on pain severity, combining multiple natural therapies can achieve better results.",
+        "painLevels": {
+          "mild": {
+            "title": "Mild Pain",
+            "plan1": "Heat therapy + Ginger tea",
+            "plan2": "Yoga + Deep breathing",
+            "plan3": "Dietary adjustments"
+          },
+          "moderate": {
+            "title": "Moderate Pain",
+            "plan1": "Heat therapy + Acupressure + Herbal tea",
+            "plan2": "Yoga + Aromatherapy + Breathing exercises",
+            "plan3": "Dietary adjustments + Magnesium supplements"
+          },
+          "severe": {
+            "title": "Severe Pain",
+            "plan1": "Multiple therapies + Professional consultation",
+            "plan2": "Comprehensive approach + Medical evaluation",
+            "plan3": "All available methods + Support system"
+          }
+        },
+        "synergistic": {
+          "title": "Synergistic Effects",
+          "description": "Combining multiple therapies creates synergistic effects that are greater than the sum of individual treatments",
+          "benefits": {
+            "1": "Faster pain relief",
+            "2": "Longer-lasting effects",
+            "3": "Reduced medication dependency",
+            "4": "Improved overall well-being",
+            "title": "Benefits"
+          },
+          "enhancing": {
+            "title": "Enhancing Effects",
+            "combination1": "Heat therapy + Yoga: Dual relaxation effects",
+            "combination2": "Herbal tea + Massage: Internal and external treatment",
+            "combination3": "Meditation + Acupuncture: Mind-body synchronization"
+          },
+          "personalized": {
+            "title": "Personalized Plans",
+            "coldConstitution": "Cold constitution: Warm tonification with heat therapy",
+            "hotConstitution": "Hot constitution: Heat clearing with cold compress",
+            "qiDeficiency": "Qi deficiency: Qi tonification with breathing exercises"
+          }
+        }
+      }
+    },
+    "evidenceBased": {
+      "title": "Evidence-Based Medicine Support",
+      "coreEfficacy": {
+        "heatTherapy": {
+          "title": "Heat Therapy",
+          "source": "Source",
+          "sourceValue": "Cochrane Review (2020): 73% pain reduction in 15 minutes",
+          "efficacy": "Efficacy:",
+          "efficacyValue": "Significantly reduces pain intensity and duration"
+        },
+        "tens": {
+          "title": "TENS Therapy",
+          "source": "Source",
+          "sourceValue": "BMJ Study (2019): 65% pain reduction with TENS",
+          "efficacy": "Efficacy:",
+          "efficacyValue": "Effective for moderate to severe pain"
+        },
+        "acupuncture": {
+          "title": "Acupuncture",
+          "source": "Source",
+          "sourceValue": "JCM Research (2021): 70% of patients report significant improvement",
+          "efficacy": "Efficacy:",
+          "efficacyValue": "Long-term pain relief with minimal side effects"
+        },
+        "aromatherapy": {
+          "title": "Aromatherapy",
+          "source": "Source",
+          "sourceValue": "Aromatherapy Journal (2020): 58% pain reduction with lavender oil",
+          "efficacy": "Efficacy:",
+          "efficacyValue": "Safe and effective complementary therapy"
+        }
+      },
+      "highLevelEvidence": {
+        "title": "High-Quality Evidence",
+        "cochrane": "Cochrane Systematic Reviews",
+        "cochraneValue": "Gold standard for evidence-based medicine",
+        "rct": "Randomized Controlled Trials",
+        "rctValue": "Rigorous scientific studies with control groups",
+        "who": "WHO Recognized",
+        "whoValue": "World Health Organization endorsed therapies",
+        "nih": "NIH Supported",
+        "nihValue": "National Institutes of Health research funding"
+      },
+      "longTermStudies": {
+        "title": "Long-term Studies",
+        "study1": "Study 1",
+        "study1Value": "6-month follow-up: 85% maintained pain relief",
+        "study2": "Study 2",
+        "study2Value": "12-month study: 78% reduced medication use",
+        "study3": "Study 3",
+        "study3Value": "2-year follow-up: 92% improved quality of life",
+        "study4": "Study 4",
+        "study4Value": "5-year study: 65% achieved long-term pain management"
+      }
+    },
+    "medicalDisclaimer": {
+      "title": "Medical Disclaimer",
+      "content": "The information provided on this page is for educational and reference purposes only and does not constitute medical advice. If you have severe or persistent menstrual pain symptoms, please consult a healthcare professional.",
+      "warnings": {
+        "1": "Seek immediate medical attention for severe pain",
+        "2": "Consult healthcare provider before starting new therapies",
+        "3": "Discontinue use if adverse reactions occur",
+        "4": "Not a substitute for professional medical treatment",
+        "title": "Important Warnings"
+      }
+    },
+    "faq": {
+      "dysmenorrhea": "Dysmenorrhea",
+      "effectiveTherapies": "Which natural therapies are most effective?",
+      "effectiveTherapiesAnswer": "Heat therapy, ginger tea, and moderate exercise are the most scientifically supported natural therapies.",
+      "timeToEffect": "How long does it take for natural therapies to work?",
+      "timeToEffectAnswer": "Heat therapy usually works within 15-20 minutes, while herbal therapies need 2-3 menstrual cycles of consistent use to see significant improvement.",
+      "safety": "Are natural therapies safe?",
+      "safetyAnswer": "Most natural therapies are safe when used correctly, but consult a healthcare provider for severe pain.",
+      "combination": "Can I combine multiple natural therapies?",
+      "combinationAnswer": "Yes, combining therapies often produces better results than using them individually.",
+      "whenToSeekHelp": "When should I seek medical help?",
+      "whenToSeekHelpAnswer": "Seek immediate medical attention if pain is severe, sudden, or accompanied by other symptoms.",
+      "pregnancy": "Can I use natural therapies during pregnancy?",
+      "pregnancyAnswer": "Some therapies are safe during pregnancy, but always consult your healthcare provider first.",
+      "medication": "Can I use natural therapies with medication?",
+      "medicationAnswer": "Most natural therapies can be used alongside medication, but discuss with your healthcare provider."
     },
     "sections": {
       "relatedTools": "Related Tools",
       "relatedArticles": "Related Articles",
       "scenarioSolutions": "Scenario Solutions"
+    },
+    "recommendations": {
+      "relatedTools": {
+        "nutritionGenerator": {
+          "title": "Nutrition Recommendation Generator",
+          "description": "Get personalized dietary advice",
+          "benefits": "Benefits:",
+          "benefitsValue": "Customized meal plans for pain relief and hormonal balance"
+        },
+        "constitutionTest": {
+          "title": "Constitution Test",
+          "description": "Understand your TCM constitution type",
+          "benefits": "Benefits:",
+          "benefitsValue": "Personalized therapy recommendations based on your constitution"
+        },
+        "painTracker": {
+          "title": "Pain Tracker",
+          "description": "Record and analyze your pain patterns",
+          "benefits": "Benefits:",
+          "benefitsValue": "Track pain intensity, triggers, and therapy effectiveness over time"
+        }
+      },
+      "relatedArticles": {
+        "medicalGuide": {
+          "title": "Dysmenorrhea Medical Guide",
+          "description": "Comprehensive medical knowledge",
+          "readTime": "15 min read",
+          "category": "Medical Guide",
+          "benefits": "Benefits:",
+          "benefitsValue": "In-depth understanding of causes, symptoms, and treatments"
+        },
+        "heatTherapy": {
+          "title": "Complete Heat Therapy Guide",
+          "description": "Deep dive into the science of heat therapy",
+          "readTime": "10 min read",
+          "category": "Natural Therapy",
+          "benefits": "Benefits:",
+          "benefitsValue": "Scientific evidence and practical application techniques"
+        },
+        "herbalTea": {
+          "title": "Herbal Tea for Period Pain Relief",
+          "description": "Modern applications of traditional herbs",
+          "readTime": "8 min read",
+          "category": "Herbal Therapy",
+          "benefits": "Benefits:",
+          "benefitsValue": "Traditional wisdom meets modern science for natural relief"
+        }
+      },
+      "scenarioSolutions": {
+        "exercise": {
+          "title": "Exercise & Periods",
+          "description": "How to exercise safely during menstruation",
+          "benefits": "Benefits:",
+          "benefitsValue": "Safe exercise routines that can actually help reduce period pain"
+        },
+        "office": {
+          "title": "Office Relief Solutions",
+          "description": "Managing period pain at work",
+          "benefits": "Benefits:",
+          "benefitsValue": "Discrete and effective pain relief methods for workplace settings"
+        },
+        "emergencyKit": {
+          "title": "Emergency Kit Preparation",
+          "description": "Portable relief tools",
+          "benefits": "Benefits:",
+          "benefitsValue": "Always-prepared toolkit for unexpected period pain relief"
+        }
+      }
     }
   },
   "articlePage": {
@@ -379,24 +1084,310 @@
       }
     }
   },
-  "privacyPolicy": {
-    "title": "Privacy Policy",
-    "description": "Learn how periodhub.health protects your privacy information. We strictly comply with GDPR and other data protection regulations, committed to protecting users' menstrual health data privacy.",
-    "openGraph": {
-      "description": "Learn how periodhub.health protects your privacy information. We strictly comply with GDPR and other data protection regulations, committed to protecting users' menstrual health data privacy."
-    },
-    "dataTable": {
-      "type": "Type",
-      "purpose": "Purpose",
-      "duration": "Duration",
-      "required": "Required"
-    }
-  },
   "termsOfService": {
     "title": "Terms of Service",
     "description": "Learn about the terms and conditions for using periodhub.health, including user responsibilities and service limitations.",
     "openGraph": {
       "description": "Learn about the terms and conditions for using periodhub.health, including user responsibilities and service limitations."
+    },
+    "lastUpdated": "Last Updated: January 2025",
+    "intro": "Welcome to PeriodHub. These Terms of Service govern your use of our platform and services.",
+    "importantNotice": "Important Notice",
+    "importantNoticeText": "Please read the following terms carefully. By using our services, you agree to comply with these terms.",
+    "importantReminder": "Important Reminder",
+    "importantReminderText": "These Terms of Service may be updated from time to time. Please check for the latest version regularly.",
+    "questionsTerms": "Terms of Service Questions",
+    "questionsDescriptionTerms": "If you have any questions about the Terms of Service, please contact us through the following methods.",
+    "contactUsTerms": "Contact Us",
+    "contact": {
+      "title": "Contact Information",
+      "description": "If you have any questions about the Terms of Service, please contact us through the following methods.",
+      "email": "Email: tiyibaofu@outlook.com",
+      "mailingAddress": "Mailing Address: [Your Company Address]",
+      "onlineFeedback": "Online Feedback: Use our contact form on the website",
+      "responseTime": "Response Time: We will respond within 24-48 hours"
+    },
+    "tableOfContents": "Table of Contents",
+    "tableOfContentsData": [
+      {
+        "id": "user-eligibility",
+        "title": "User Eligibility"
+      },
+      {
+        "id": "service-content",
+        "title": "Service Content"
+      },
+      {
+        "id": "user-conduct",
+        "title": "User Conduct"
+      },
+      {
+        "id": "privacy-protection",
+        "title": "Privacy Protection"
+      },
+      {
+        "id": "medical-disclaimer",
+        "title": "Medical Disclaimer"
+      },
+      {
+        "id": "intellectual-property",
+        "title": "Intellectual Property"
+      },
+      {
+        "id": "service-changes",
+        "title": "Service Changes"
+      },
+      {
+        "id": "liability-limitation",
+        "title": "Liability Limitation"
+      },
+      {
+        "id": "dispute-resolution",
+        "title": "Dispute Resolution"
+      }
+    ],
+    "sections": {
+      "serviceDescription": {
+        "title": "Service Description",
+        "content": "PeriodHub is a professional menstrual health management platform dedicated to providing women with scientific and reliable period pain relief and health management solutions.",
+        "items": {
+          "educationalContent": "Educational Content: Evidence-based professional health knowledge",
+          "interactiveTools": "Interactive Tools: Smart symptom assessment and personalized recommendations",
+          "resourceLibrary": "Resource Library: Professional articles, guides, and PDF downloads",
+          "communitySupport": "Community Support: Experience sharing and mutual assistance"
+        },
+        "medicalNotice": "Important Notice: Information provided on this platform is for educational and reference purposes only and does not constitute medical advice, diagnosis, or treatment.",
+        "mvpNotice": "Current Version: We are continuously improving platform features. Thank you for your understanding and support."
+      },
+      "userEligibility": {
+        "title": "User Eligibility",
+        "ageRequirementTitle": "Age Requirements",
+        "ageRequirement": "You must be at least 13 years old to use our services. Users under 18 should have parental supervision.",
+        "accountAccuracyTitle": "Account Information Accuracy",
+        "accountAccuracy": "You are responsible for providing accurate and up-to-date information when creating your account.",
+        "accountSecurityTitle": "Account Security",
+        "accountSecurity": "You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account."
+      },
+      "serviceContent": {
+        "title": "Service Content",
+        "availabilityTitle": "Service Availability",
+        "availability": "We strive to provide continuous service availability, but cannot guarantee uninterrupted access to our platform.",
+        "contentLicenseTitle": "Content License",
+        "contentLicense": "All content on our platform is provided for informational and educational purposes only.",
+        "assessmentToolsTitle": "Assessment Tools",
+        "assessmentTools": "Our health assessment tools are designed to provide general guidance and should not replace professional medical advice.",
+        "personalizedAdviceTitle": "Personalized Advice",
+        "personalizedAdvice": "Any personalized recommendations are based on general health information and should be discussed with healthcare professionals."
+      },
+      "userConduct": {
+        "title": "User Conduct",
+        "prohibitedBehaviorsTitle": "Prohibited Behaviors",
+        "prohibitedBehaviors": "The following behaviors are strictly prohibited on our platform:",
+        "prohibitedList": [
+          "Providing false or misleading health information",
+          "Attempting to hack or compromise our systems",
+          "Harassment or inappropriate communication",
+          "Violation of intellectual property rights",
+          "Commercial use without authorization"
+        ],
+        "contentAccuracyTitle": "Content Accuracy",
+        "contentAccuracy": "Users should verify health information with qualified professionals before making medical decisions.",
+        "dataSharingTitle": "Data Sharing",
+        "dataSharing": "Users must not share personal health information of others without explicit consent.",
+        "complianceTitle": "Compliance",
+        "compliance": "Users must comply with all applicable laws and regulations when using our services.",
+        "respectOthersTitle": "Respect Others",
+        "respectOthers": "Please respect other users and avoid inappropriate comments or harassment."
+      },
+      "privacyProtection": {
+        "title": "Privacy Protection",
+        "dataCollectionTitle": "Data Collection",
+        "dataCollection": "We collect only necessary information to provide our services and improve user experience.",
+        "usagePurposes": [
+          "Service delivery and improvement",
+          "Personalized recommendations",
+          "Technical support",
+          "Security and fraud prevention",
+          "Legal compliance"
+        ],
+        "privacyPolicyRefTitle": "Privacy Policy Reference",
+        "privacyPolicyRef": "For detailed information about how we collect, use, and protect your personal information, please refer to our Privacy Policy.",
+        "dataUsageTitle": "Data Usage",
+        "dataUsage": "We use collected data to provide and improve services, including personalized recommendations, technical support, and security protection.",
+        "dataSecurityTitle": "Data Security",
+        "dataSecurity": {
+          "measures": "We implement industry-standard security measures to protect your information:",
+          "securityList": [
+            "Encrypted data transmission",
+            "Secure data storage",
+            "Regular security audits",
+            "Access controls and monitoring",
+            "Incident response procedures"
+          ]
+        },
+        "thirdPartySharingTitle": "Third-Party Sharing",
+        "thirdPartySharing": "We do not sell your personal information to third parties. We only share data in the following circumstances:",
+        "dataTypes": {
+          "basicInfo": "Basic Information: Name, email, age, etc.",
+          "healthInfo": "Health Information: Symptoms, pain levels, etc.",
+          "deviceInfo": "Device Information: IP address, browser type, etc.",
+          "usageData": "Usage Data: Access records, feature usage, etc."
+        }
+      },
+      "medicalDisclaimer": {
+        "title": "Medical Disclaimer",
+        "importantMedicalDisclaimer": "Important Medical Disclaimer",
+        "generalDisclaimerTitle": "General Disclaimer",
+        "generalDisclaimer": "Our platform provides educational information only and does not constitute medical advice, diagnosis, or treatment.",
+        "medicalProfessionals": [
+          "We are not licensed medical professionals",
+          "Our content is for educational purposes only",
+          "Always consult qualified healthcare providers",
+          "Emergency situations require immediate medical attention",
+          "Individual results may vary"
+        ],
+        "emergencyGuidanceTitle": "Emergency Guidance",
+        "emergencyGuidance": "In case of medical emergencies, please contact emergency services immediately.",
+        "personalResponsibility": "Personal Responsibility",
+        "emergencyHandling": "Emergency Handling",
+        "disclaimerText": "This platform provides educational information only and does not constitute medical advice, diagnosis, or treatment.",
+        "disclaimerTitle": "Disclaimer",
+        "nonMedicalService": "We are not a medical service provider and do not provide medical advice.",
+        "personalResponsibilityTitle": "Personal Responsibility",
+        "emergencyHandlingTitle": "Emergency Handling",
+        "informationAccuracyTitle": "Information Accuracy",
+        "informationAccuracy": "While we strive to provide accurate information, individual health conditions may vary.",
+        "resultVariabilityTitle": "Result Variability",
+        "resultVariability": "Results may vary from person to person based on individual health conditions.",
+        "medicationWarningTitle": "Medication Warning",
+        "medicationWarning": "Always consult with healthcare professionals before making any medication decisions.",
+        "emergencySymptoms": [
+          "Severe or sudden abdominal pain",
+          "High fever with pelvic pain",
+          "Heavy bleeding with dizziness",
+          "Signs of infection",
+          "Any concerning new symptoms"
+        ]
+      },
+      "intellectualProperty": {
+        "title": "Intellectual Property",
+        "ownershipTitle": "Ownership Rights",
+        "ownership": "All content, trademarks, and intellectual property on our platform are owned by PeriodHub or our licensors.",
+        "contentOwnership": "All content, trademarks, and intellectual property on our platform are owned by PeriodHub or our licensors.",
+        "restrictionsTitle": "Usage Restrictions",
+        "restrictions": "Users may not:",
+        "usageRestrictionsTitle": "Usage Restrictions",
+        "usageRestrictions": "Users may not copy, reproduce, or distribute our content without permission.",
+        "restrictionsList": [
+          "Copy or reproduce our content without permission",
+          "Use our trademarks or logos",
+          "Reverse engineer our software",
+          "Create derivative works",
+          "Distribute our content commercially"
+        ],
+        "fairUseTitle": "Fair Use",
+        "fairUse": "Limited fair use is permitted for:",
+        "fairUseList": [
+          "Personal educational purposes",
+          "Non-commercial research",
+          "Properly attributed citations",
+          "Academic discussions",
+          "News reporting"
+        ],
+        "thirdPartyContentTitle": "Third-Party Content",
+        "thirdPartyContent": "Some content on our platform may be provided by third parties and is subject to their respective licenses.",
+        "infringementNoticeTitle": "Infringement Notice",
+        "infringementNotice": "If you believe your intellectual property rights have been infringed, please contact us immediately."
+      },
+      "serviceChanges": {
+        "title": "Service Changes",
+        "modificationsTitle": "Service Modifications",
+        "modifications": "We reserve the right to modify, suspend, or discontinue any part of our services at any time.",
+        "modificationRightsTitle": "Modification Rights",
+        "modificationRights": "We reserve the right to modify, suspend, or discontinue any part of our services at any time.",
+        "changesList": [
+          "Feature updates and improvements",
+          "Security enhancements",
+          "Performance optimizations",
+          "Content additions or removals",
+          "Interface changes"
+        ],
+        "accountTerminationTitle": "Account Termination",
+        "accountTermination": {
+          "terminationReasons": [
+            "Violation of terms of service",
+            "Fraudulent or illegal activity",
+            "Extended account inactivity",
+            "User request for deletion",
+            "Technical or security issues"
+          ],
+          "consequencesTitle": "Termination Consequences",
+          "consequencesList": [
+            "Loss of access to platform features",
+            "Deletion of account data",
+            "Cancellation of active subscriptions",
+            "Loss of personalized settings",
+            "Inability to recover account"
+          ],
+          "ourRights": "We reserve the right to terminate accounts that violate our terms of service.",
+          "userRights": "Users have the right to request account deletion and data removal at any time.",
+          "consequences": "Account termination may result in loss of access to platform features and data."
+        },
+        "consequencesTitle": "Consequences",
+        "termsChangesTitle": "Terms Changes",
+        "termsChanges": "We may update these terms from time to time. Continued use of our services constitutes acceptance of the updated terms.",
+        "userRightsTitle": "User Rights"
+      },
+      "finalNotice": {
+        "title": "Final Notice",
+        "content": "By using our services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services."
+      },
+      "liabilityLimitation": {
+        "title": "Liability Limitation",
+        "disclaimerTitle": "Liability Disclaimer",
+        "disclaimer": "To the maximum extent permitted by law, we disclaim all liability for:",
+        "serviceProvisionTitle": "Service Provision",
+        "serviceProvision": "We provide our services on an 'as is' basis without warranties of any kind.",
+        "disclaimerScopeTitle": "Disclaimer Scope",
+        "disclaimerScope": "This disclaimer applies to all aspects of our service provision.",
+        "disclaimerList": [
+          "Indirect or consequential damages",
+          "Loss of data or profits",
+          "Service interruptions",
+          "Third-party content accuracy",
+          "User decisions based on our content"
+        ],
+        "limitationsTitle": "Liability Limitations",
+        "limitations": "Our total liability shall not exceed the amount paid by you for our services in the 12 months preceding the claim.",
+        "liabilityLimitTitle": "Liability Limit",
+        "liabilityLimit": "Our total liability shall not exceed the amount paid by you for our services in the 12 months preceding the claim.",
+        "forceMajeureTitle": "Force Majeure",
+        "forceMajeure": "We shall not be liable for any failure to perform due to circumstances beyond our reasonable control.",
+        "userLiabilityTitle": "User Liability",
+        "userLiability": "Users are responsible for their own actions and decisions when using our services."
+      },
+      "disputeResolution": {
+        "title": "Dispute Resolution",
+        "applicableLawTitle": "Applicable Law",
+        "applicableLaw": "These terms are governed by the laws of [Jurisdiction] and any disputes will be resolved through binding arbitration.",
+        "disputeResolutionProcessTitle": "Dispute Resolution Process",
+        "disputeResolutionProcess": "In case of disputes, we follow a structured resolution process:",
+        "resolutionSteps": [
+          "Informal negotiation period",
+          "Mediation with neutral third party",
+          "Binding arbitration if mediation fails",
+          "Limited right to court proceedings",
+          "Class action waiver"
+        ],
+        "jurisdictionTitle": "Jurisdiction",
+        "jurisdiction": "Any legal proceedings shall be conducted in the courts of [Jurisdiction].",
+        "severabilityTitle": "Severability",
+        "severability": "If any provision of these terms is found to be unenforceable, the remaining provisions will remain in full force and effect.",
+        "entireAgreementTitle": "Entire Agreement",
+        "entireAgreement": "These terms constitute the entire agreement between you and PeriodHub regarding your use of our services.",
+        "contactTitle": "Contact Information",
+        "contact": "For questions about these terms, please contact us at legal@periodhub.health"
+      }
     }
   },
   "frameworkDemo": {
@@ -410,71 +1401,6 @@
     },
     "keywords": "data dashboard,platform analytics,user data,activity,engagement,data insights,decision support"
   },
-  "teenHealth": {
-    "meta": {
-      "title": "Teen Menstrual Health Zone - PeriodHub",
-      "description": "Period health education and management guide designed for teens aged 12-18, providing campus emergency, developmental pain management, emotional support and other professional services."
-    },
-    "keywords": "teen menstrual health,puberty education,period management,school health,mental health,growth support,scientific education"
-  },
-  "healthGuidePage": {
-    "title": "Period Pain Health Guide - PeriodHub",
-    "description": "Professional period pain health management guide providing symptom assessment, pain tracking, natural therapies and other scientific solutions to help you effectively manage menstrual health.",
-    "breadcrumb": {
-      "home": "Home",
-      "current": "Health Guide"
-    },
-    "recommendations": {
-      "relatedTools": {
-        "symptomAssessment": {
-          "title": "Symptom Assessment",
-          "description": "Professional symptom assessment system, scientifically analyze pain type and severity, get personalized health advice"
-        },
-        "painTracker": {
-          "title": "Pain Tracker",
-          "description": "Smart pain tracking system, record symptom patterns, generate health reports, assist doctor diagnosis"
-        },
-        "painImpactCalculator": {
-          "title": "Pain Impact Calculator",
-          "description": "Assess period pain impact on quality of life, quantify health loss, create scientific management plans"
-        }
-      },
-      "relatedArticles": {
-        "medicalGuide": {
-          "title": "Medical Guide to Dysmenorrhea",
-          "description": "Comprehensive dysmenorrhea medical knowledge, complete medical guide from causes to treatment",
-          "readTime": "18 min read",
-          "category": "Medical Guide"
-        },
-        "medicalCare": {
-          "title": "When to Seek Medical Care",
-          "description": "Identify warning signs requiring medical care, master medical timing and health management strategies",
-          "readTime": "15 min read",
-          "category": "Medical Care"
-        },
-        "faq": {
-          "title": "Period Pain FAQ",
-          "description": "Expert answers to common period pain questions, scientifically debunk health myths and concerns",
-          "readTime": "12 min read",
-          "category": "FAQ"
-        }
-      },
-      "healthTopics": {
-        "naturalTherapies": {
-          "title": "Natural Therapies Guide",
-          "description": "Explore 8 scientifically validated natural therapies, side-effect-free health relief solutions"
-        },
-        "scenarioSolutions": {
-          "title": "Scenario Solutions",
-          "description": "Personalized health management strategies for commute, office, exercise and other scenarios"
-        },
-        "teenHealth": {
-          "title": "Teen Health Zone",
-          "description": "Period health education and management guide designed for teens aged 12-18"
-        }
-      }
-    }
-  },
   "scenarioSolutionsPage": {
     "title": "Scenario-Based Period Pain Solutions - PeriodHub",
     "description": "Period pain management solutions for different life scenarios, including professional workplace, exercise, social situations with expert coping strategies and emergency kit preparation guides.",
@@ -483,32 +1409,56 @@
       "office": {
         "title": "Office Work",
         "description": "Professional workplace period pain management strategies",
-        "features": ["Desk ergonomics", "Stress management", "Discrete pain relief"]
+        "features": [
+          "Desk ergonomics",
+          "Stress management",
+          "Discrete pain relief"
+        ]
       },
       "commute": {
         "title": "Commute & Travel",
         "description": "Managing period pain during daily commute and travel",
-        "features": ["Portable relief items", "Comfort positioning", "Emergency planning"]
+        "features": [
+          "Portable relief items",
+          "Comfort positioning",
+          "Emergency planning"
+        ]
       },
       "exercise": {
         "title": "Exercise & Sports",
         "description": "Safe exercise modifications during menstruation",
-        "features": ["Low-impact alternatives", "Pain-relieving stretches", "Hydration strategies"]
+        "features": [
+          "Low-impact alternatives",
+          "Pain-relieving stretches",
+          "Hydration strategies"
+        ]
       },
       "sleep": {
         "title": "Sleep & Rest",
         "description": "Optimizing sleep quality during period pain",
-        "features": ["Sleep positioning", "Bedroom environment", "Relaxation techniques"]
+        "features": [
+          "Sleep positioning",
+          "Bedroom environment",
+          "Relaxation techniques"
+        ]
       },
       "social": {
         "title": "Social Situations",
         "description": "Managing period pain in social and public settings",
-        "features": ["Discrete management", "Communication strategies", "Backup plans"]
+        "features": [
+          "Discrete management",
+          "Communication strategies",
+          "Backup plans"
+        ]
       },
       "life_stages": {
         "title": "Life Stages",
         "description": "Period pain management across different life stages",
-        "features": ["Adolescent care", "Adult management", "Menopause transition"]
+        "features": [
+          "Adolescent care",
+          "Adult management",
+          "Menopause transition"
+        ]
       }
     },
     "introTitle": "Comprehensive Scenario-Based Solutions",
@@ -559,6 +1509,7 @@
     "title": "Interactive Health Tools - PeriodHub",
     "description": "Professional menstrual health management tools providing symptom assessment, pain tracking, cycle management and personalized health solutions",
     "keywords": "menstrual health management,symptom assessment,pain tracking,period pain management,health tools,personalized recommendations,data analytics",
+    "assessmentIllustrationAlt": "Woman using digital health assessment tool on tablet in comfortable home setting",
     "workplaceWellness": {
       "title": "Workplace Wellness Column",
       "description": "Tailored menstrual health management solutions for working women to better manage period health in the workplace",
@@ -844,23 +1795,48 @@
       "questions": {
         "q1": {
           "question": "Have you frequently felt anxious or tense recently?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         },
         "q2": {
           "question": "How is your sleep quality?",
-          "options": ["Very Good", "Good", "Poor", "Very Poor"]
+          "options": [
+            "Very Good",
+            "Good",
+            "Poor",
+            "Very Poor"
+          ]
         },
         "q3": {
           "question": "Do you often feel tired or lack energy?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         },
         "q4": {
           "question": "Do you easily feel irritable or angry?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         },
         "q5": {
           "question": "Do you often worry about period-related issues?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         }
       },
       "benefits": {
@@ -1327,6 +2303,1376 @@
         "buttonText": "Start Tracking",
         "buttonLink": "/en/interactive-tools/pain-tracker"
       }
+    }
+  },
+  "teenHealth": {
+    "meta": {
+      "title": "Teen Period Health Guide | Period Hub",
+      "description": "Comprehensive menstrual health guide for teenagers. Learn about period pain, campus management, emotional support, and communication tips."
+    },
+    "keywords": "teen period health, teenage menstruation, period pain teens, campus period management, teen health education",
+    "hero": {
+      "title": "Teen Period Health Zone",
+      "subtitle": "Your trusted guide to understanding and managing periods",
+      "description": "A safe, supportive space designed specifically for teenagers. Get accurate information, practical tips, and emotional support for your menstrual health journey."
+    },
+    "features": {
+      "title": "What We Offer",
+      "description": "Comprehensive resources tailored for teenage needs",
+      "campusGuide": {
+        "title": "Campus Period Management",
+        "description": "Practical tips for managing your period at school, including discreet solutions and emergency preparedness.",
+        "highlights": [
+          "Locker emergency kit essentials",
+          "Discreet period management in class",
+          "Talking to school nurse or counselor",
+          "Managing period during exams and sports"
+        ]
+      },
+      "developmentPain": {
+        "title": "Understanding Period Pain",
+        "description": "Learn why period pain happens during adolescence and how to manage it effectively.",
+        "highlights": [
+          "Why teens experience period pain",
+          "Normal vs. concerning symptoms",
+          "Safe pain relief methods for teens",
+          "When to talk to a parent or doctor"
+        ]
+      },
+      "emotionalSupport": {
+        "title": "Emotional Well-being",
+        "description": "Navigate the emotional changes that come with your menstrual cycle with confidence.",
+        "highlights": [
+          "Understanding mood changes",
+          "Managing stress and anxiety",
+          "Building self-confidence",
+          "Peer support and communication"
+        ]
+      },
+      "communicationGuide": {
+        "title": "Communication Guide",
+        "description": "Learn how to talk about periods with parents, friends, and healthcare providers.",
+        "highlights": [
+          "Talking to parents about period concerns",
+          "Discussing periods with friends",
+          "What to tell your doctor",
+          "Handling period stigma and myths"
+        ]
+      }
+    },
+    "quickHelp": {
+      "title": "Quick Help",
+      "description": "Need immediate assistance? Start here",
+      "immediateMethods": "Immediate Relief Methods",
+      "campusGuide": "Campus Emergency Guide",
+      "methods": [
+        "Heat therapy with warm compress",
+        "Gentle stretching exercises",
+        "Deep breathing techniques",
+        "Over-the-counter pain relief"
+      ]
+    },
+    "painAssessment": {
+      "title": "Teen Pain Assessment",
+      "description": "Understand your period pain level and get personalized recommendations",
+      "useFullTool": "Use Full Assessment Tool",
+      "detailedAssessment": "Get detailed analysis and recommendations"
+    },
+    "resources": {
+      "title": "Helpful Resources",
+      "description": "Curated materials to support your menstrual health journey",
+      "readingList": {
+        "title": "Recommended Reading",
+        "description": "Age-appropriate books and articles about menstrual health",
+        "action": "View Reading List"
+      },
+      "nutritionRecipes": {
+        "title": "Teen-Friendly Nutrition",
+        "description": "Easy recipes and nutrition tips to help manage period symptoms",
+        "action": "Explore Recipes"
+      },
+      "communicationTemplates": {
+        "title": "Communication Templates",
+        "description": "Sample scripts for talking about periods with parents, doctors, and friends",
+        "action": "Get Templates"
+      }
+    },
+    "cta": {
+      "title": "Ready to Take Control of Your Period Health?",
+      "description": "Join thousands of teens who are learning to manage their periods with confidence",
+      "button": "Start Your Journey"
+    },
+    "immediateReliefPage": {
+      "title": "Immediate Period Pain Relief",
+      "description": "Quick and effective methods to relieve menstrual pain right now. Science-backed techniques you can use immediately.",
+      "seoKeywords": [
+        "period pain emergency relief",
+        "immediate period pain relief",
+        "heat therapy for cramps",
+        "menstrual pain management",
+        "dysmenorrhea treatment",
+        "cramp relief methods"
+      ],
+      "contentSectionTitle": "Relief Methods",
+      "introTitle": "When You Need Relief Right Now",
+      "introText": "Menstrual pain can strike suddenly and severely. Whether you're at home, work, or on the go, these evidence-based methods can provide quick relief.",
+      "introText2": "Each method below includes scientific parameters and practical guidance to help you find what works best for your body.",
+      "typesTitle": "Immediate Relief Methods",
+      "heatTherapy": {
+        "title": "Heat Therapy",
+        "subtitle": "Fast-acting muscle relaxation"
+      },
+      "heatTherapyDescription": "Heat therapy is one of the most effective immediate relief methods. It works by increasing blood flow, relaxing uterine muscles, and blocking pain signals.",
+      "heatTherapyGuideTitle": "Complete Heat Therapy Guide",
+      "heatTherapyGuideDescription": "Learn the science and best practices",
+      "gentleMovement": {
+        "title": "Gentle Movement & Yoga",
+        "subtitle": "Natural pain relief through movement"
+      },
+      "gentleMovementDescription": "Gentle stretching and yoga poses can help relieve menstrual cramps by improving circulation, releasing muscle tension, and promoting relaxation.",
+      "gentleMovementDetails": {
+        "yogaPoses": {
+          "title": "Recommended Yoga Poses:",
+          "poses": [
+            {
+              "name": "Child's Pose (Balasana)",
+              "description": "Kneel and fold forward, arms extended or by your sides",
+              "benefits": "Relieves back pain, calms the mind, gentle compression on abdomen"
+            },
+            {
+              "name": "Cat-Cow Pose (Marjaryasana-Bitilasana)",
+              "description": "On hands and knees, alternate between arching and rounding your spine",
+              "benefits": "Increases spinal flexibility, massages abdominal organs, improves circulation"
+            },
+            {
+              "name": "Supine Twist",
+              "description": "Lie on back, bring knees to chest, gently drop to one side",
+              "benefits": "Releases lower back tension, aids digestion, promotes relaxation"
+            }
+          ]
+        },
+        "breathingExercises": {
+          "title": "Breathing Exercises:",
+          "exercises": [
+            {
+              "name": "Deep Belly Breathing",
+              "steps": "Place hand on belly, breathe deeply so belly expands, exhale slowly",
+              "benefits": "Reduces stress hormones, promotes muscle relaxation"
+            },
+            {
+              "name": "4-7-8 Breathing",
+              "steps": "Inhale through nose for 4 counts, hold for 7, exhale through mouth for 8",
+              "benefits": "Calms nervous system, reduces pain perception, induces relaxation"
+            }
+          ]
+        },
+        "timing": {
+          "title": "When to Practice:",
+          "preventive": "Preventive: Practice daily during the week before your period starts",
+          "during": "During pain: Use gentle movements only, listen to your body's signals",
+          "continuous": "Continuous: Regular practice improves long-term pain management"
+        }
+      },
+      "breathingExerciseTitle": "Breathing Exercises",
+      "breathingExercise": {
+        "subtitle": "Calm your nervous system"
+      },
+      "breathingExerciseDescription": "Controlled breathing activates your body's relaxation response, reducing stress hormones and pain perception. It's free, portable, and can be done anywhere, anytime.",
+      "acupressure": {
+        "title": "Acupressure",
+        "subtitle": "Traditional pressure point therapy"
+      },
+      "acupressureDescription": "Acupressure uses finger pressure on specific points to relieve pain. It's based on traditional Chinese medicine and supported by modern research showing effectiveness for menstrual pain.",
+      "acupressureDetails": {
+        "title": "Key Acupressure Points:",
+        "acupoints": [
+          {
+            "name": "Sanyinjiao (SP6)",
+            "location": "3 finger-widths (about 4 fingers) above the inner ankle bone",
+            "method": "Press firmly with thumb in circular motion for 1-2 minutes",
+            "benefits": "Regulates menstruation, relieves cramps, reduces pain intensity"
+          },
+          {
+            "name": "Hegu (LI4)",
+            "location": "In the webbing between thumb and index finger",
+            "method": "Pinch and massage firmly for 1-2 minutes on each hand",
+            "benefits": "General pain relief, reduces tension, promotes energy flow"
+          },
+          {
+            "name": "Taichong (LV3)",
+            "location": "On top of foot, in the depression between big toe and second toe",
+            "method": "Press and hold firmly for 30-60 seconds, breathe deeply",
+            "benefits": "Relieves stress, regulates liver qi, reduces irritability"
+          }
+        ],
+        "technique": {
+          "title": "Massage Technique Guide:",
+          "pressure": "Apply firm but comfortable pressure - you should feel sensation but not sharp pain",
+          "time": "Hold each point for 1-2 minutes, or until you feel relief",
+          "frequency": "Repeat 2-3 times daily during menstruation, or as needed",
+          "precautions": "⚠️ Avoid SP6 during pregnancy. Stop if pain increases or you feel dizzy."
+        }
+      },
+      "otcOptions": {
+        "title": "Over-the-Counter Pain Relief",
+        "subtitle": "When you need medication"
+      },
+      "otcOptionsDescription": "NSAIDs (Non-Steroidal Anti-Inflammatory Drugs) like ibuprofen are highly effective for menstrual pain. They work by blocking prostaglandin production, which causes cramps.",
+      "nsaidGuideTitle": "NSAID Professional Guide",
+      "nsaidGuideDescription": "Complete medication information",
+      "combinationTherapy": {
+        "title": "Combination Therapy",
+        "subtitle": "Maximize relief by combining methods"
+      },
+      "meditationTitle": "Meditation & Mindfulness",
+      "meditationDescription": "Reduce pain perception through mental techniques",
+      "dietaryPlanTitle": "Anti-Inflammatory Diet",
+      "dietaryPlanDescription": "Foods that help reduce menstrual pain",
+      "workTipsTitle": "Managing Pain at Work",
+      "workTipsDescription": "Discreet relief methods for the workplace",
+      "scenarioSolutionsTitle": "Scenario-Based Solutions",
+      "scenarioSolutionsDescription": "Relief strategies for different situations",
+      "emergencyResponse": {
+        "title": "Emergency Response",
+        "subtitle": "When pain is severe",
+        "immediateActionsTitle": "Immediate Actions:",
+        "immediateActions": {
+          "action1": "Apply heat or cold therapy immediately",
+          "action2": "Take prescribed pain medication",
+          "action3": "Rest in a comfortable position",
+          "action4": "Practice deep breathing exercises",
+          "action5": "Contact your healthcare provider if pain persists"
+        },
+        "medicalIndicators": {
+          "title": "Seek Medical Care If:",
+          "indicators": {
+            "indicator1": "Severe pain that doesn't respond to treatment",
+            "indicator2": "Fever accompanying the pain",
+            "indicator3": "Unusual bleeding or discharge",
+            "indicator4": "Pain that worsens rapidly",
+            "indicator5": "Symptoms of infection"
+          }
+        },
+        "emergencyKit": {
+          "title": "Emergency Relief Kit:",
+          "items": {
+            "item1": "Heat pack or hot water bottle",
+            "item2": "Cold pack or ice pack",
+            "item3": "Pain medication",
+            "item4": "Comfortable clothing",
+            "item5": "Emergency contact numbers"
+          }
+        }
+      },
+      "findingWhatWorksTitle": "Finding What Works for You",
+      "findingWhatWorksText": "Everyone's body responds differently to pain relief methods. Keep track of what works best for you.",
+      "findingWhatWorksText2": "Consider keeping a pain diary to identify patterns and effective strategies.",
+      "disclaimerTitle": "Medical Disclaimer",
+      "disclaimerText": "This information is for educational purposes only and does not replace professional medical advice. If you experience severe or unusual pain, please consult a healthcare provider.",
+      "parameters": {
+        "scientificParameters": "Scientific Parameters:",
+        "heatTherapy": {
+          "temperature": "40-45°C (104-113°F)",
+          "duration": "15-20 minutes per session",
+          "frequency": "Every 2-3 hours as needed",
+          "timing": "Start at first sign of pain for best results",
+          "mechanism": "Increases blood flow, relaxes smooth muscle tissue, activates heat receptors to block pain signals"
+        },
+        "breathing": {
+          "title": "Breathing Exercise Parameters:",
+          "technique": "4-7-8 breathing (inhale 4 seconds, hold 7 seconds, exhale 8 seconds)",
+          "cycles": "5-10 cycles per session",
+          "frequency": "Every 1-2 hours or as needed",
+          "timing": "Anytime, especially during pain spikes or stress",
+          "mechanism": "Activates parasympathetic nervous system, reduces stress hormones (cortisol), promotes muscle relaxation"
+        },
+        "nsaid": {
+          "title": "NSAID Parameters:",
+          "dosage": "Follow package instructions (typically 200-400mg ibuprofen every 4-6 hours)",
+          "timing": "Take at first sign of pain, with food to protect stomach",
+          "mechanism": "Blocks prostaglandin production by inhibiting COX enzymes, reducing inflammation and pain",
+          "contraindications": "⚠️ Avoid if you have stomach ulcers, kidney issues, bleeding disorders, or are allergic to NSAIDs. Consult doctor if taking blood thinners."
+        }
+      },
+      "labels": {
+        "temperature": "Temperature: ",
+        "duration": "Duration: ",
+        "frequency": "Frequency: ",
+        "timing": "Timing: ",
+        "mechanism": "Mechanism: ",
+        "technique": "Technique: ",
+        "cycles": "Cycles: ",
+        "dosage": "Dosage: ",
+        "contraindications": "Contraindications: ",
+        "location": "Location: ",
+        "method": "Method: "
+      },
+      "actions": {
+        "learnMore": "Learn More →",
+        "startPractice": "Start Practice →"
+      },
+      "structuredData": {
+        "howTo": {
+          "name": "How to Relieve Period Pain Immediately",
+          "description": "Step-by-step guide to immediate menstrual pain relief using evidence-based methods"
+        },
+        "steps": {
+          "heatTherapy": {
+            "name": "Apply Heat Therapy",
+            "text": "Apply a heating pad or hot water bottle to your lower abdomen at 40-45°C for 15-20 minutes"
+          },
+          "breathing": {
+            "name": "Practice Breathing Exercises",
+            "text": "Use 4-7-8 breathing technique: inhale for 4 seconds, hold for 7, exhale for 8. Repeat 5-10 times"
+          },
+          "acupressure": {
+            "name": "Try Acupressure Points",
+            "text": "Press Sanyinjiao (SP6) point, located 3 finger-widths above inner ankle, for 1-2 minutes"
+          },
+          "medication": {
+            "name": "Consider OTC Medication",
+            "text": "Take ibuprofen (200-400mg) at first sign of pain, with food"
+          },
+          "medicalCare": {
+            "name": "Seek Medical Care if Needed",
+            "text": "Consult a healthcare provider if pain is severe, sudden, or accompanied by fever or unusual symptoms"
+          }
+        }
+      }
+    },
+    "healthGuidePage": {
+      "title": "Comprehensive Period Health Guide | Period Hub",
+      "description": "Evidence-based guide to understanding menstrual health, period pain causes, relief methods, and when to seek medical care.",
+      "keywords": "period health guide, menstrual health education, dysmenorrhea causes, period pain relief, women's health",
+      "hero": {
+        "title": "Your Complete Period Health Guide",
+        "description": "Evidence-based information to help you understand and manage your menstrual health with confidence."
+      },
+      "whyGuide": {
+        "title": "Why This Guide Matters",
+        "description": "Understanding your menstrual health empowers you to make informed decisions, recognize when to seek help, and improve your quality of life during your period."
+      },
+      "sections": {
+        "title": "Explore Health Topics",
+        "understandingPain": {
+          "title": "Understanding Period Pain",
+          "description": "Learn about the causes, types, and mechanisms of menstrual pain",
+          "cta": "Learn More"
+        },
+        "reliefMethods": {
+          "title": "Relief Methods",
+          "description": "Discover evidence-based techniques to manage and reduce period pain",
+          "cta": "Explore Methods"
+        },
+        "whenSeekHelp": {
+          "title": "When to Seek Medical Care",
+          "description": "Recognize warning signs and know when professional help is needed",
+          "cta": "Read Guide"
+        },
+        "lifestyleManagement": {
+          "title": "Lifestyle & Prevention",
+          "description": "Long-term strategies for better menstrual health",
+          "cta": "Get Tips"
+        },
+        "mythsFacts": {
+          "title": "Myths vs. Facts",
+          "description": "Separate truth from fiction about menstrual health",
+          "cta": "Discover Truth"
+        },
+        "globalPerspective": {
+          "title": "Global Perspectives",
+          "description": "Traditional and cultural approaches to menstrual health",
+          "cta": "Explore Traditions"
+        }
+      },
+      "medicalPrinciples": {
+        "title": "Medical Principles",
+        "description": "Understanding the science behind menstrual pain",
+        "anatomy": {
+          "title": "Reproductive Anatomy",
+          "imageAlt": "Female reproductive system anatomy diagram",
+          "uterus": {
+            "title": "Uterus",
+            "description": "The muscular organ where menstruation originates"
+          },
+          "ovaries": {
+            "title": "Ovaries",
+            "description": "Produce hormones that regulate the menstrual cycle"
+          },
+          "endometrium": {
+            "title": "Endometrium",
+            "description": "The uterine lining that sheds during menstruation"
+          }
+        },
+        "hormonalControl": {
+          "title": "Hormonal Regulation",
+          "estrogen": {
+            "title": "Estrogen & Progesterone",
+            "description": "Key hormones that control the menstrual cycle"
+          }
+        },
+        "prostaglandinMechanism": {
+          "title": "Prostaglandin Mechanism",
+          "description": "Chemical compounds that cause uterine contractions and pain"
+        },
+        "neuralConduction": {
+          "title": "Pain Signal Transmission",
+          "description": "How pain signals travel from the uterus to the brain"
+        },
+        "treatmentMechanisms": {
+          "title": "Treatment Mechanisms",
+          "description": "How different therapies work to relieve pain"
+        },
+        "clinicalEvidence": {
+          "title": "Clinical Evidence",
+          "description": "Research-backed effectiveness of various treatments"
+        },
+        "researchProgress": {
+          "title": "Latest Research",
+          "description": "Recent advances in menstrual pain understanding and treatment"
+        },
+        "geneTherapy": {
+          "title": "Future Treatments",
+          "description": "Emerging therapies and personalized medicine approaches"
+        }
+      },
+      "tools": {
+        "title": "Interactive Tools",
+        "painTracker": {
+          "title": "Pain Tracker",
+          "description": "Monitor your symptoms and identify patterns"
+        },
+        "painAssessment": {
+          "title": "Pain Assessment",
+          "description": "Evaluate your pain level and get personalized recommendations"
+        }
+      },
+      "quickAccess": {
+        "title": "Quick Access",
+        "medicalDisclaimer": "Medical Disclaimer",
+        "medicalDisclaimerText": "This information is for educational purposes only and does not replace professional medical advice.",
+        "emergencyRelief": "Emergency Relief",
+        "emergencyReliefDescription": "Need immediate help? Access quick relief methods",
+        "personalizedAssessment": "Personalized Assessment",
+        "personalizedAssessmentDescription": "Get customized recommendations based on your symptoms",
+        "startAssessment": "Start Assessment",
+        "methodsTechniques": "Methods & Techniques"
+      }
+    },
+    "campusGuide": {
+      "title": "Campus Emergency Guide",
+      "subtitle": "What to do when pain strikes at school",
+      "description": "Comprehensive guide for managing period pain in school settings, including classroom emergencies, dorm management, and PE class strategies.",
+      "sections": {
+        "classroom": {
+          "title": "Classroom Emergency Response",
+          "description": "How to handle sudden pain during class",
+          "tips": [
+            "Ask teacher for permission to use restroom",
+            "Apply heat therapy with warm water bottle",
+            "Use breathing exercises to manage pain",
+            "Take over-the-counter pain medication if needed"
+          ]
+        },
+        "dormitory": {
+          "title": "Dormitory Management",
+          "description": "Managing period pain in dormitory settings",
+          "tips": [
+            "Keep emergency supplies in dorm room",
+            "Use heating pad or warm water bottle",
+            "Practice relaxation techniques",
+            "Communicate with roommates about needs"
+          ]
+        },
+        "peClass": {
+          "title": "PE Class Strategies",
+          "description": "How to handle physical education during periods",
+          "tips": [
+            "Inform PE teacher about condition",
+            "Request modified activities when needed",
+            "Focus on gentle exercises and stretching",
+            "Stay hydrated and take breaks"
+          ]
+        },
+        "emergencyKit": {
+          "title": "Campus Emergency Kit",
+          "description": "Essential items to keep on campus",
+          "items": [
+            "Pain medication (ibuprofen)",
+            "Heating pad or warm water bottle",
+            "Sanitary products",
+            "Comfortable clothing",
+            "Healthy snacks"
+          ]
+        }
+      },
+      "emergencyContacts": {
+        "title": "Emergency Contacts",
+        "schoolNurse": "School Nurse",
+        "counselor": "School Counselor",
+        "trustedAdult": "Trusted Adult",
+        "parent": "Parent/Guardian"
+      },
+      "communication": {
+        "title": "Communication Tips",
+        "withTeachers": "Talking to Teachers",
+        "withPeers": "Talking to Peers",
+        "withParents": "Talking to Parents",
+        "sampleScripts": "Sample Conversation Scripts"
+      }
+    }
+  },
+  "healthGuidePage": {
+    "title": "Comprehensive Period Health Guide | Period Hub",
+    "description": "Evidence-based guide to understanding menstrual health, period pain causes, relief methods, and when to seek medical care.",
+    "keywords": "period health guide, menstrual health education, dysmenorrhea causes, period pain relief, women's health",
+    "hero": {
+      "title": "Your Complete Period Health Guide",
+      "description": "Evidence-based information to help you understand and manage your menstrual health with confidence."
+    },
+    "whyGuide": {
+      "title": "Why This Guide Matters",
+      "description": "Understanding your menstrual health empowers you to make informed decisions, recognize when to seek help, and improve your quality of life during your period."
+    },
+    "sections": {
+      "title": "Explore Health Topics",
+      "understandingPain": {
+        "title": "Understanding Period Pain",
+        "description": "Learn about the causes, types, and mechanisms of menstrual pain",
+        "cta": "Learn More"
+      },
+      "reliefMethods": {
+        "title": "Relief Methods",
+        "description": "Discover evidence-based techniques to manage and reduce period pain",
+        "cta": "Explore Methods"
+      },
+      "whenSeekHelp": {
+        "title": "When to Seek Medical Care",
+        "description": "Recognize warning signs and know when professional help is needed",
+        "cta": "Read Guide"
+      },
+      "lifestyleManagement": {
+        "title": "Lifestyle & Prevention",
+        "description": "Long-term strategies for better menstrual health",
+        "cta": "Get Tips"
+      },
+      "mythsFacts": {
+        "title": "Myths vs. Facts",
+        "description": "Separate truth from fiction about menstrual health",
+        "cta": "Discover Truth"
+      },
+      "globalPerspective": {
+        "title": "Global Perspectives",
+        "description": "Traditional and cultural approaches to menstrual health",
+        "cta": "Explore Traditions"
+      }
+    },
+    "medicalPrinciples": {
+      "title": "Medical Principles",
+      "description": "Understanding the science behind menstrual pain",
+      "anatomy": {
+        "title": "Reproductive Anatomy",
+        "imageAlt": "Female reproductive system anatomy diagram",
+        "uterus": {
+          "title": "Uterus",
+          "description": "The muscular organ where menstruation originates"
+        },
+        "ovaries": {
+          "title": "Ovaries",
+          "description": "Produce hormones that regulate the menstrual cycle"
+        },
+        "endometrium": {
+          "title": "Endometrium",
+          "description": "The uterine lining that sheds during menstruation"
+        }
+      },
+      "hormonalControl": {
+        "title": "Hormonal Regulation",
+        "estrogen": {
+          "title": "Estrogen & Progesterone",
+          "description": "Key hormones that control the menstrual cycle"
+        }
+      },
+      "prostaglandinMechanism": {
+        "title": "Prostaglandin Mechanism",
+        "description": "Chemical compounds that cause uterine contractions and pain"
+      },
+      "neuralConduction": {
+        "title": "Pain Signal Transmission",
+        "description": "How pain signals travel from the uterus to the brain"
+      },
+      "treatmentMechanisms": {
+        "title": "Treatment Mechanisms",
+        "description": "How different therapies work to relieve pain"
+      },
+      "clinicalEvidence": {
+        "title": "Clinical Evidence",
+        "description": "Research-backed effectiveness of various treatments",
+        "importantStudies": {
+          "title": "Important Research Studies",
+          "cochrane2020": {
+            "title": "Cochrane Review 2020",
+            "studyContent": "NSAIDs for Primary Dysmenorrhea",
+            "studyContentDescription": "Comprehensive meta-analysis of NSAID effectiveness",
+            "sampleSize": "73 studies, 5,156 participants",
+            "sampleSizeDescription": "Large-scale systematic review",
+            "conclusion": "NSAIDs significantly reduce menstrual pain",
+            "conclusionDescription": "Strong evidence for NSAID effectiveness"
+          },
+          "bmj2019": {
+            "title": "BMJ Study 2019",
+            "studyContent": "Heat Therapy for Dysmenorrhea",
+            "studyContentDescription": "Randomized controlled trial",
+            "method": "40°C heat application for 20 minutes",
+            "methodDescription": "Standardized heat therapy protocol",
+            "conclusion": "Heat therapy reduces pain by 45%",
+            "conclusionDescription": "Effective non-pharmacological treatment"
+          },
+          "jcm2021": {
+            "title": "Journal of Clinical Medicine 2021",
+            "studyContent": "Acupressure for Menstrual Pain",
+            "studyContentDescription": "Multi-center randomized trial",
+            "design": "Double-blind placebo-controlled study",
+            "designDescription": "Rigorous experimental design",
+            "conclusion": "Acupressure reduces pain intensity by 60%",
+            "conclusionDescription": "Significant pain reduction with acupressure"
+          }
+        },
+        "evidenceLevel": {
+          "title": "Evidence Levels",
+          "description": "Understanding research quality and reliability"
+        }
+      },
+      "researchProgress": {
+        "title": "Latest Research",
+        "description": "Recent advances in menstrual pain understanding and treatment"
+      },
+      "geneTherapy": {
+        "title": "Future Treatments",
+        "description": "Emerging therapies and personalized medicine approaches"
+      }
+    },
+    "tools": {
+      "title": "Interactive Tools",
+      "painTracker": {
+        "title": "Pain Tracker",
+        "description": "Monitor your symptoms and identify patterns"
+      },
+      "painAssessment": {
+        "title": "Pain Assessment",
+        "description": "Evaluate your pain level and get personalized recommendations"
+      }
+    },
+    "quickAccess": {
+      "title": "Quick Access",
+      "medicalDisclaimer": "Medical Disclaimer",
+      "medicalDisclaimerText": "This information is for educational purposes only and does not replace professional medical advice.",
+      "emergencyRelief": "Emergency Relief",
+      "emergencyReliefDescription": "Need immediate help? Access quick relief methods",
+      "personalizedAssessment": "Personalized Assessment",
+      "personalizedAssessmentDescription": "Get customized recommendations based on your symptoms",
+      "startAssessment": "Start Assessment",
+      "methodsTechniques": "Methods & Techniques"
+    },
+    "contentSections": {
+      "professionalAssessmentTools": "Professional Assessment Tools",
+      "depthHealthArticles": "In-Depth Health Articles",
+      "healthManagementTopics": "Health Management Topics"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Health Guide"
+    },
+    "recommendations": {
+      "relatedTools": {
+        "symptomAssessment": {
+          "title": "Symptom Assessment",
+          "description": "Evaluate your menstrual pain symptoms with our professional assessment tool"
+        },
+        "painTracker": {
+          "title": "Pain Tracker",
+          "description": "Track and analyze your pain patterns over time"
+        },
+        "painImpactCalculator": {
+          "title": "Pain Impact Calculator",
+          "description": "Calculate how period pain affects your daily life"
+        }
+      },
+      "relatedArticles": {
+        "medicalGuide": {
+          "title": "Comprehensive Medical Guide to Dysmenorrhea",
+          "description": "Complete medical guide covering causes, diagnosis, and treatment options",
+          "readTime": "15 min read",
+          "category": "Medical Guide"
+        },
+        "medicalCare": {
+          "title": "When to Seek Medical Care",
+          "description": "Learn when period pain requires professional medical attention",
+          "readTime": "10 min read",
+          "category": "Medical Advice"
+        },
+        "faq": {
+          "title": "Menstrual Pain FAQ",
+          "description": "Expert answers to common questions about period pain",
+          "readTime": "8 min read",
+          "category": "FAQ"
+        }
+      },
+      "healthTopics": {
+        "naturalTherapies": {
+          "title": "Natural Therapies",
+          "description": "Explore natural and holistic approaches to managing period pain"
+        },
+        "scenarioSolutions": {
+          "title": "Scenario Solutions",
+          "description": "Practical solutions for managing period pain in different situations"
+        },
+        "teenHealth": {
+          "title": "Teen Health",
+          "description": "Period health information specifically for teenagers"
+        }
+      }
+    }
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "description": "Learn how Period Hub collects, uses, and protects your personal information and health data.",
+    "openGraph": {
+      "description": "Comprehensive privacy policy explaining how we handle your data with transparency and security."
+    },
+    "dataTable": {
+      "type": "Type",
+      "purpose": "Purpose",
+      "duration": "Duration",
+      "required": "Required"
+    },
+    "lastUpdated": "Last Updated: January 2025",
+    "intro": "At Period Hub, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your data.",
+    "importantNotice": "Important Notice",
+    "importantNoticeText": "Period Hub is currently in MVP (Minimum Viable Product) stage. We collect minimal data and do not share your information with third parties. All health data is stored locally on your device.",
+    "tableOfContents": "Table of Contents",
+    "mvpNotice": {
+      "title": "MVP Stage Notice",
+      "text": "As an MVP product, we prioritize your privacy by minimizing data collection and keeping all sensitive health information on your device."
+    },
+    "sections": {
+      "informationCollection": {
+        "title": "Information We Collect",
+        "subtitle": "Understanding what data we gather",
+        "importantNote": {
+          "title": "Local Storage Priority",
+          "text": "Most of your health data (pain tracking, cycle information) is stored locally on your device and never sent to our servers."
+        },
+        "userProvided": {
+          "title": "Information You Provide",
+          "description": "Data you voluntarily share when using our services",
+          "items": [
+            "Account registration information",
+            "Profile details and preferences",
+            "Feedback and support requests",
+            "Survey responses",
+            "Communication preferences"
+          ]
+        },
+        "symptomData": {
+          "title": "Symptom & Health Data",
+          "description": "Pain levels, cycle tracking, and symptom information (stored locally)",
+          "items": [
+            "Pain intensity levels",
+            "Menstrual cycle dates",
+            "Symptom patterns",
+            "Medication usage",
+            "Lifestyle factors"
+          ]
+        },
+        "technicalInfo": {
+          "title": "Technical Information",
+          "description": "Browser type, device information, and usage analytics",
+          "items": [
+            "Browser type and version",
+            "Device information",
+            "IP address (anonymized)",
+            "Usage analytics",
+            "Error logs"
+          ]
+        }
+      },
+      "informationUse": {
+        "title": "How We Use Your Information",
+        "mainPurposes": {
+          "title": "Main Purposes",
+          "items": [
+            "Provide and improve our services",
+            "Personalize your experience",
+            "Analyze usage patterns to enhance features",
+            "Communicate important updates",
+            "Ensure platform security"
+          ]
+        },
+        "neverUsedFor": {
+          "title": "We Never Use Your Data For",
+          "items": [
+            "Selling to third parties",
+            "Targeted advertising",
+            "Sharing with insurance companies",
+            "Any purpose without your consent"
+          ]
+        }
+      },
+      "informationSharing": {
+        "title": "Information Sharing",
+        "content": "We do not sell, trade, or rent your personal information to third parties. Your health data remains private and is only accessible to you.",
+        "exceptions": [
+          "Legal requirements",
+          "Emergency situations",
+          "With your explicit consent",
+          "Service providers (under strict agreements)",
+          "Business transfers (with notice)"
+        ]
+      },
+      "dataSecurity": {
+        "title": "Data Security",
+        "disclaimer": "While we implement industry-standard security measures, no method of transmission over the internet is 100% secure.",
+        "encryption": {
+          "title": "Encryption",
+          "description": "All data transmission uses HTTPS encryption"
+        },
+        "accessControl": {
+          "title": "Access Control",
+          "description": "Strict access controls limit who can view your data"
+        },
+        "regularAudit": {
+          "title": "Regular Security Audits",
+          "description": "We regularly review and update our security practices"
+        }
+      },
+      "cookieUsage": {
+        "title": "Cookie Usage",
+        "cookieTypes": {
+          "title": "Types of Cookies We Use",
+          "necessary": {
+            "type": "Essential Cookies",
+            "description": "Required for basic site functionality",
+            "purpose": "Essential site functionality",
+            "duration": "Session only",
+            "required": "Yes"
+          },
+          "functional": {
+            "type": "Functional Cookies",
+            "purpose": "Enhanced user experience",
+            "duration": "30 days",
+            "required": "No"
+          },
+          "analytical": {
+            "type": "Analytical Cookies",
+            "purpose": "Usage analytics",
+            "duration": "90 days",
+            "required": "No"
+          }
+        },
+        "management": {
+          "title": "Managing Cookies",
+          "text": "You can control cookies through your browser settings. Note that disabling cookies may affect site functionality."
+        },
+        "dataTable": {
+          "type": "Type",
+          "purpose": "Purpose",
+          "duration": "Duration",
+          "required": "Required"
+        }
+      },
+      "userRights": {
+        "title": "Your Rights",
+        "subtitle": "You have control over your data",
+        "rights": [
+          "Access your personal data",
+          "Correct inaccurate information",
+          "Delete your data",
+          "Export your data",
+          "Opt-out of communications"
+        ]
+      },
+      "contactUs": {
+        "title": "Contact Us",
+        "description": "If you have questions about this Privacy Policy or your data:",
+        "dpo": {
+          "title": "Data Protection Officer",
+          "email": "privacy@periodhub.health",
+          "responsibility": "Handles all privacy-related inquiries",
+          "languages": "Available in English and Chinese"
+        },
+        "dataProtection": {
+          "title": "Data Protection Inquiries",
+          "email": "privacy@periodhub.health",
+          "subject": "Subject: Privacy Policy Question",
+          "responseTime": "We aim to respond within 48 hours"
+        }
+      }
+    },
+    "policyUpdates": {
+      "title": "Policy Updates",
+      "content": "We may update this Privacy Policy from time to time. We will notify you of any significant changes via email or prominent notice on our website.",
+      "recommendation": "We recommend reviewing this policy periodically to stay informed about how we protect your information.",
+      "procedures": [
+        "Email notification to registered users",
+        "Website banner announcement",
+        "Updated effective date",
+        "Archive of previous versions",
+        "Summary of key changes"
+      ]
+    },
+    "questions": "Questions?",
+    "questionsDescription": "If you have any questions about this Privacy Policy, please contact us at privacy@periodhub.health",
+    "contactUs": "Contact Us"
+  },
+  "immediateReliefPage": {
+    "title": "Immediate Period Pain Relief",
+    "description": "Quick and effective methods to relieve menstrual pain right now. Science-backed techniques you can use immediately.",
+    "contentSectionTitle": "Relief Methods",
+    "introTitle": "When You Need Relief Right Now",
+    "introText": "Menstrual pain can strike suddenly and severely. Whether you're at home, work, or on the go, these evidence-based methods can provide quick relief.",
+    "introText2": "Each method below includes scientific parameters and practical guidance to help you find what works best for your body.",
+    "typesTitle": "Immediate Relief Methods",
+    "heatTherapy": {
+      "title": "Heat Therapy",
+      "subtitle": "Fast-acting muscle relaxation"
+    },
+    "heatTherapyDescription": "Heat therapy is one of the most effective immediate relief methods. It works by increasing blood flow, relaxing uterine muscles, and blocking pain signals.",
+    "heatTherapyGuideTitle": "Complete Heat Therapy Guide",
+    "heatTherapyGuideDescription": "Learn the science and best practices",
+    "gentleMovement": {
+      "title": "Gentle Movement & Yoga",
+      "subtitle": "Natural pain relief through movement"
+    },
+    "gentleMovementDescription": "Gentle stretching and yoga poses can help relieve menstrual cramps by improving circulation, releasing muscle tension, and promoting relaxation.",
+    "gentleMovementDetails": {
+      "yogaPoses": {
+        "title": "Recommended Yoga Poses:",
+        "poses": [
+          {
+            "name": "Child's Pose (Balasana)",
+            "description": "Kneel and fold forward, arms extended or by your sides",
+            "benefits": "Relieves back pain, calms the mind, gentle compression on abdomen"
+          },
+          {
+            "name": "Cat-Cow Pose (Marjaryasana-Bitilasana)",
+            "description": "On hands and knees, alternate between arching and rounding your spine",
+            "benefits": "Increases spinal flexibility, massages abdominal organs, improves circulation"
+          },
+          {
+            "name": "Supine Twist",
+            "description": "Lie on back, bring knees to chest, gently drop to one side",
+            "benefits": "Releases lower back tension, aids digestion, promotes relaxation"
+          }
+        ]
+      },
+      "breathingExercises": {
+        "title": "Breathing Exercises:",
+        "exercises": [
+          {
+            "name": "Deep Belly Breathing",
+            "steps": "Place hand on belly, breathe deeply so belly expands, exhale slowly",
+            "benefits": "Reduces stress hormones, promotes muscle relaxation"
+          },
+          {
+            "name": "4-7-8 Breathing",
+            "steps": "Inhale through nose for 4 counts, hold for 7, exhale through mouth for 8",
+            "benefits": "Calms nervous system, reduces pain perception, induces relaxation"
+          }
+        ]
+      },
+      "timing": {
+        "title": "When to Practice:",
+        "preventive": "Preventive: Practice daily during the week before your period starts",
+        "during": "During pain: Use gentle movements only, listen to your body's signals",
+        "continuous": "Continuous: Regular practice improves long-term pain management"
+      }
+    },
+    "breathingExerciseTitle": "Breathing Exercises",
+    "breathingExercise": {
+      "subtitle": "Calm your nervous system"
+    },
+    "breathingExerciseDescription": "Controlled breathing activates your body's relaxation response, reducing stress hormones and pain perception. It's free, portable, and can be done anywhere, anytime.",
+    "acupressure": {
+      "title": "Acupressure",
+      "subtitle": "Traditional pressure point therapy"
+    },
+    "acupressureDescription": "Acupressure uses finger pressure on specific points to relieve pain. It's based on traditional Chinese medicine and supported by modern research showing effectiveness for menstrual pain.",
+    "acupressureDetails": {
+      "title": "Key Acupressure Points:",
+      "acupoints": [
+        {
+          "name": "Sanyinjiao (SP6)",
+          "location": "3 finger-widths (about 4 fingers) above the inner ankle bone",
+          "method": "Press firmly with thumb in circular motion for 1-2 minutes",
+          "benefits": "Regulates menstruation, relieves cramps, reduces pain intensity"
+        },
+        {
+          "name": "Hegu (LI4)",
+          "location": "In the webbing between thumb and index finger",
+          "method": "Pinch and massage firmly for 1-2 minutes on each hand",
+          "benefits": "General pain relief, reduces tension, promotes energy flow"
+        },
+        {
+          "name": "Taichong (LV3)",
+          "location": "On top of foot, in the depression between big toe and second toe",
+          "method": "Press and hold firmly for 30-60 seconds, breathe deeply",
+          "benefits": "Relieves stress, regulates liver qi, reduces irritability"
+        }
+      ],
+      "technique": {
+        "title": "Massage Technique Guide:",
+        "pressure": "Apply firm but comfortable pressure - you should feel sensation but not sharp pain",
+        "time": "Hold each point for 1-2 minutes, or until you feel relief",
+        "frequency": "Repeat 2-3 times daily during menstruation, or as needed",
+        "precautions": "⚠️ Avoid SP6 during pregnancy. Stop if pain increases or you feel dizzy."
+      }
+    },
+    "otcOptions": {
+      "title": "Over-the-Counter Pain Relief",
+      "subtitle": "When you need medication"
+    },
+    "otcOptionsDescription": "NSAIDs (Non-Steroidal Anti-Inflammatory Drugs) like ibuprofen are highly effective for menstrual pain. They work by blocking prostaglandin production, which causes cramps.",
+    "nsaidGuideTitle": "NSAID Professional Guide",
+    "nsaidGuideDescription": "Complete medication information",
+    "combinationTherapy": {
+      "title": "Combination Therapy",
+      "subtitle": "Maximize relief by combining methods",
+      "combinations": [
+        {
+          "level": "Heat + Breathing",
+          "methods": {
+            "method1": "Apply heat therapy while practicing deep breathing exercises",
+            "method2": "Enhanced muscle relaxation and stress reduction"
+          }
+        },
+        {
+          "level": "Acupressure + Meditation",
+          "methods": {
+            "method1": "Combine acupressure with mindfulness meditation",
+            "method2": "Dual approach to pain relief and mental calm"
+          }
+        },
+        {
+          "level": "Movement + Heat",
+          "methods": {
+            "method1": "Gentle yoga followed by heat therapy",
+            "method2": "Improved circulation and sustained warmth"
+          }
+        }
+      ]
+    },
+    "meditationTitle": "Meditation & Mindfulness",
+    "meditationDescription": "Reduce pain perception through mental techniques",
+    "dietaryPlanTitle": "Anti-Inflammatory Diet",
+    "dietaryPlanDescription": "Foods that help reduce menstrual pain",
+    "workTipsTitle": "Managing Pain at Work",
+    "workTipsDescription": "Discreet relief methods for the workplace",
+    "scenarioSolutionsTitle": "Scenario-Based Solutions",
+    "scenarioSolutionsDescription": "Relief strategies for different situations",
+    "emergencyResponse": {
+      "title": "Emergency Response",
+      "subtitle": "When pain is severe",
+      "immediateActionsTitle": "Immediate Actions:",
+      "immediateActions": {
+        "action1": "Apply heat or cold therapy immediately",
+        "action2": "Take prescribed pain medication",
+        "action3": "Rest in a comfortable position",
+        "action4": "Practice deep breathing exercises",
+        "action5": "Contact your healthcare provider if pain persists"
+      },
+      "medicalIndicators": {
+        "title": "Seek Medical Care If:",
+        "indicators": {
+          "indicator1": "Severe pain that doesn't respond to treatment",
+          "indicator2": "Fever accompanying the pain",
+          "indicator3": "Unusual bleeding or discharge",
+          "indicator4": "Pain that worsens rapidly",
+          "indicator5": "Symptoms of infection"
+        }
+      },
+      "emergencyKit": {
+        "title": "Emergency Relief Kit:",
+        "items": {
+          "item1": "Heat pack or hot water bottle",
+          "item2": "Cold pack or ice pack",
+          "item3": "Pain medication",
+          "item4": "Comfortable clothing",
+          "item5": "Emergency contact numbers"
+        }
+      }
+    },
+    "findingWhatWorksTitle": "Finding What Works for You",
+    "findingWhatWorksText": "Everyone's body responds differently to pain relief methods. Keep track of what works best for you.",
+    "findingWhatWorksText2": "Consider keeping a pain diary to identify patterns and effective strategies.",
+    "disclaimerTitle": "Medical Disclaimer",
+    "disclaimerText": "This information is for educational purposes only and does not replace professional medical advice. If you experience severe or unusual pain, please consult a healthcare provider.",
+    "parameters": {
+      "scientificParameters": "Scientific Parameters:",
+      "heatTherapy": {
+        "temperature": "40-45°C (104-113°F)",
+        "duration": "15-20 minutes per session",
+        "frequency": "Every 2-3 hours as needed",
+        "timing": "Start at first sign of pain for best results",
+        "mechanism": "Increases blood flow, relaxes smooth muscle tissue, activates heat receptors to block pain signals"
+      },
+      "breathing": {
+        "title": "Breathing Exercise Parameters:",
+        "technique": "4-7-8 breathing (inhale 4 seconds, hold 7 seconds, exhale 8 seconds)",
+        "cycles": "5-10 cycles per session",
+        "frequency": "Every 1-2 hours or as needed",
+        "timing": "Anytime, especially during pain spikes or stress",
+        "mechanism": "Activates parasympathetic nervous system, reduces stress hormones (cortisol), promotes muscle relaxation"
+      },
+      "nsaid": {
+        "title": "NSAID Parameters:",
+        "dosage": "Follow package instructions (typically 200-400mg ibuprofen every 4-6 hours)",
+        "timing": "Take at first sign of pain, with food to protect stomach",
+        "mechanism": "Blocks prostaglandin production by inhibiting COX enzymes, reducing inflammation and pain",
+        "contraindications": "⚠️ Avoid if you have stomach ulcers, kidney issues, bleeding disorders, or are allergic to NSAIDs. Consult doctor if taking blood thinners."
+      }
+    },
+    "labels": {
+      "temperature": "Temperature: ",
+      "duration": "Duration: ",
+      "frequency": "Frequency: ",
+      "timing": "Timing: ",
+      "mechanism": "Mechanism: ",
+      "technique": "Technique: ",
+      "cycles": "Cycles: ",
+      "dosage": "Dosage: ",
+      "contraindications": "Contraindications: ",
+      "location": "Location: ",
+      "method": "Method: "
+    },
+    "actions": {
+      "learnMore": "Learn More →",
+      "startPractice": "Start Practice →"
+    },
+    "structuredData": {
+      "howTo": {
+        "name": "How to Relieve Period Pain Immediately",
+        "description": "Step-by-step guide to immediate menstrual pain relief using evidence-based methods"
+      },
+      "steps": {
+        "heatTherapy": {
+          "name": "Apply Heat Therapy",
+          "text": "Apply a heating pad or hot water bottle to your lower abdomen at 40-45°C for 15-20 minutes"
+        },
+        "breathing": {
+          "name": "Practice Breathing Exercises",
+          "text": "Use 4-7-8 breathing technique: inhale for 4 seconds, hold for 7, exhale for 8. Repeat 5-10 times"
+        },
+        "acupressure": {
+          "name": "Try Acupressure Points",
+          "text": "Press Sanyinjiao (SP6) point, located 3 finger-widths above inner ankle, for 1-2 minutes"
+        },
+        "medication": {
+          "name": "Consider OTC Medication",
+          "text": "Take ibuprofen (200-400mg) at first sign of pain, with food"
+        },
+        "medicalCare": {
+          "name": "Seek Medical Care if Needed",
+          "text": "Consult a healthcare provider if pain is severe, sudden, or accompanied by fever or unusual symptoms"
+        }
+      }
+    }
+  },
+  "breathingExercise": {
+    "title": "4-7-8 Breathing Exercise",
+    "description": "Based on scientifically validated 4-7-8 breathing method, quickly relieves pain by regulating the nervous system. No download required, start practicing immediately.",
+    "usageTips": {
+      "title": "Usage suggestions:",
+      "bestTiming": {
+        "title": "Best timing:",
+        "items": [
+          "When pain first starts",
+          "When feeling anxious or tense",
+          "Before bedtime relaxation"
+        ]
+      },
+      "precautions": {
+        "title": "Precautions:",
+        "items": [
+          "Find a comfortable sitting or lying position",
+          "Beginners can do 3-4 cycles",
+          "Stop if feeling dizzy"
+        ]
+      }
+    },
+    "subtitle": "Achieve natural pain relief through nervous system regulation",
+    "phases": {
+      "inhale": "Inhale",
+      "hold": "Hold",
+      "exhale": "Exhale"
+    },
+    "instructions": {
+      "title": "Practice Guidance",
+      "inhale": "Inhale",
+      "hold": "Hold",
+      "exhale": "Exhale"
+    },
+    "buttons": {
+      "startPractice": "Start Practice",
+      "stopPractice": "Stop Practice",
+      "practiceAgain": "Practice Again",
+      "oneCycleCompleted": "✅ One cycle completed!"
+    },
+    "currentPhase": "Current phase:",
+    "benefits": {
+      "title": "Scientific benefits:",
+      "painPerception": "Pain perception",
+      "muscleTension": "Muscle tension",
+      "relaxation": "Relaxation level"
+    },
+    "tip": "💡 Tip: Find a comfortable sitting or lying position, relax all muscles. Beginners can do 3-4 cycles.",
+    "timeUnit": "seconds"
+  },
+  "workplaceWellness": {
+    "meta": {
+      "title": "Workplace Wellness Calendar - Period Management & Work Optimization | Period Hub",
+      "description": "Professional workplace health management tool to help you track period impact on work, providing personalized work adjustment suggestions and health management solutions.",
+      "keywords": "workplace wellness,period management,work optimization,menstrual health,workplace adaptation,period tracking,work efficiency,health management"
+    },
+    "header": {
+      "title": "Workplace Wellness Calendar",
+      "subtitle": "Workplace Health Assistant"
+    },
+    "nav": {
+      "calendar": "Period Calendar",
+      "nutrition": "Nutrition Advice",
+      "workImpact": "Work Impact",
+      "analysis": "Data Analysis",
+      "export": "Data Management",
+      "settings": "Settings"
+    },
+    "calendar": {
+      "title": "Period Work Calendar",
+      "subtitle": "Track periods and plan work arrangements",
+      "recordButton": "+ Record Period",
+      "days": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat"
+      },
+      "legendPeriod": "Period",
+      "legendPredicted": "Predicted",
+      "statCycle": "Average Cycle",
+      "statLength": "Average Length",
+      "statNext": "Next Prediction",
+      "addRecord": "Add Record",
+      "date": "Date",
+      "type": "Type",
+      "typePeriod": "Period",
+      "typePredicted": "Predicted",
+      "typeOvulation": "Ovulation",
+      "painLevel": "Pain Level"
+    },
+    "workImpact": {
+      "title": "Symptoms & Work Impact Recording",
+      "painLevel": "Pain Level (1-10)",
+      "efficiency": "Work Efficiency (%)",
+      "adjustment": "Today's Work Adjustment",
+      "adjustOptions": {
+        "takeLeave": "Take Leave",
+        "workFromHome": "Work from Home",
+        "postponeMeeting": "Postpone Meeting",
+        "reduceTasks": "Reduce Tasks"
+      },
+      "saveButton": "Save Record",
+      "templatesTitle": "Leave Application Templates",
+      "severity": {
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe"
+      },
+      "preview": "Email Preview",
+      "subject": "Subject:",
+      "content": "Content:",
+      "copyButton": "Copy Template"
+    },
+    "nutrition": {
+      "title": "Personalized Nutrition Advice",
+      "phaseLabel": "Current Menstrual Phase",
+      "phases": {
+        "menstrual": "Menstrual",
+        "follicular": "Follicular",
+        "ovulation": "Ovulation",
+        "luteal": "Luteal"
+      },
+      "phaseIcons": {
+        "menstrual": "🩸",
+        "follicular": "🌱",
+        "ovulation": "⭐",
+        "luteal": "🌙"
+      },
+      "constitutionLabel": "TCM Constitution Type",
+      "constitutions": {
+        "qi_deficiency": "Qi Deficiency",
+        "yang_deficiency": "Yang Deficiency",
+        "yin_deficiency": "Yin Deficiency",
+        "blood_deficiency": "Blood Deficiency",
+        "balanced": "Balanced"
+      },
+      "foodTitle": "Recommended Foods",
+      "searchPlaceholder": "Search foods...",
+      "tcmNature": {
+        "warm": "Warm",
+        "cool": "Cool",
+        "neutral": "Neutral"
+      },
+      "benefitsLabel": "Main Benefits",
+      "nutrientsLabel": "Key Nutrients",
+      "addButton": "Add to Menu",
+      "noResults": "No related food recommendations found, please try other searches.",
+      "planTitle": "Today's Menu",
+      "meals": {
+        "breakfast": "Breakfast",
+        "lunch": "Lunch",
+        "dinner": "Dinner",
+        "snack": "Snack"
+      },
+      "generateButton": "Generate Shopping List",
+      "selectedFoods": "Selected Foods",
+      "planGenerated": "Meal plan generated successfully!",
+      "mealSuggestions": {
+        "breakfast": "Add some nutritious breakfast to start the day",
+        "lunch": "Include balanced lunch options to maintain sustained energy",
+        "dinner": "Choose light dinner options to promote digestion",
+        "snack": "Add healthy snacks to maintain energy levels"
+      }
+    },
+    "analysis": {
+      "title": "Data Analysis Dashboard",
+      "cycleAnalysis": "Cycle Analysis",
+      "workImpactAnalysis": "Work Impact Analysis",
+      "symptomPatterns": "Symptom Patterns",
+      "efficiencyTrends": "Efficiency Trends",
+      "recommendations": "Personalized Recommendations"
+    },
+    "export": {
+      "title": "Data Management",
+      "exportData": "Export Data",
+      "backupData": "Backup Data",
+      "restoreData": "Restore Data",
+      "deleteData": "Delete Data",
+      "formats": {
+        "pdf": "PDF Report",
+        "excel": "Excel Spreadsheet",
+        "csv": "CSV File"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "notifications": "Notifications",
+      "privacy": "Privacy",
+      "language": "Language",
+      "theme": "Theme",
+      "dataRetention": "Data Retention"
     }
   }
 }

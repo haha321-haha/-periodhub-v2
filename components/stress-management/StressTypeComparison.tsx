@@ -19,49 +19,29 @@ export default function StressTypeComparison({
   const stressTypes = {
     acute: {
       icon: Clock,
-      title: locale === "zh" ? "急性压力" : "Acute Stress",
-      subtitle:
-        locale === "zh" ? "短期、突发性压力" : "Short-term, sudden stress",
+      title: t("acute.title"),
+      subtitle: t("acute.subtitle"),
       color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-50",
       borderColor: "border-blue-200",
       textColor: "text-blue-800",
-      duration: locale === "zh" ? "几分钟到几小时" : "Minutes to hours",
-      examples:
-        locale === "zh"
-          ? "工作截止日期、考试、突发事件"
-          : "Work deadlines, exams, emergencies",
-      effects:
-        locale === "zh"
-          ? "暂时性影响，通常可恢复"
-          : "Temporary effects, usually recoverable",
-      management:
-        locale === "zh"
-          ? "深呼吸、短暂休息、问题解决"
-          : "Deep breathing, short breaks, problem-solving",
+      duration: t("acute.duration"),
+      examples: t("acute.examples"),
+      effects: t("acute.impact"),
+      management: t("acute.management"),
     },
     chronic: {
       icon: AlertTriangle,
-      title: locale === "zh" ? "慢性压力" : "Chronic Stress",
-      subtitle:
-        locale === "zh" ? "长期、持续性压力" : "Long-term, persistent stress",
+      title: t("chronic.title"),
+      subtitle: t("chronic.subtitle"),
       color: "from-red-500 to-red-600",
       bgColor: "bg-red-50",
       borderColor: "border-red-200",
       textColor: "text-red-800",
-      duration: locale === "zh" ? "数周到数月" : "Weeks to months",
-      examples:
-        locale === "zh"
-          ? "长期工作压力、人际关系问题、经济困难"
-          : "Long-term work stress, relationship issues, financial difficulties",
-      effects:
-        locale === "zh"
-          ? "持续性影响，可能长期损害健康"
-          : "Persistent effects, potential long-term health damage",
-      management:
-        locale === "zh"
-          ? "生活方式改变、专业帮助、长期策略"
-          : "Lifestyle changes, professional help, long-term strategies",
+      duration: t("chronic.duration"),
+      examples: t("chronic.examples"),
+      effects: t("chronic.impact"),
+      management: t("chronic.management"),
     },
   };
 

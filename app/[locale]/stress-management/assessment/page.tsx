@@ -16,10 +16,7 @@ export async function generateMetadata({
   return {
     title: t("assessment.title") + " - PeriodHub",
     description: t("assessment.subtitle"),
-    keywords:
-      locale === "zh"
-        ? "压力评估,压力测试,经期压力,压力管理,心理健康"
-        : "stress assessment,stress test,period stress,stress management,mental health",
+    keywords: t("assessment.keywords"),
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"

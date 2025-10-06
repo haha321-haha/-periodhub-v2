@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-10-06T17:41:01.036Z",
+  "timestamp": "2025-10-06T17:41:57.015Z",
   "sitemap": {
     "totalUrls": 180,
     "urls": [
@@ -184,7 +184,7 @@
       "https://www.periodhub.health/downloads/teacher-health-manual-en.html",
       "https://www.periodhub.health/downloads/constitution-guide-en.html"
     ],
-    "lastModified": "2025-10-06T17:41:01.608Z"
+    "lastModified": "2025-10-06T17:41:57.469Z"
   },
   "duplicatePages": [
     "https://www.periodhub.health/pdf-files/zhan-zhuang-baduanjin-illustrated-guide-zh.pdf",
@@ -208,7 +208,7 @@
     "tbt": 2910,
     "mobileScore": 45,
     "desktopScore": 94,
-    "timestamp": "2025-10-06T17:41:12.785Z",
+    "timestamp": "2025-10-06T17:42:08.882Z",
     "testUrl": "https://www.periodhub.health"
   },
   "recommendations": [
@@ -244,5 +244,9 @@
   ],
   "riskLevel": "critical",
   "riskScore": 75,
-  "riskFactors": ["重复页面过多", "LCP性能差", "移动端性能差"]
+  "riskFactors": [
+    "重复页面过多",
+    "LCP性能差",
+    "移动端性能差"
+  ]
 }

@@ -16,10 +16,7 @@ export async function generateMetadata({
   return {
     title: t("techniques.title") + " - PeriodHub",
     description: t("techniques.subtitle"),
-    keywords:
-      locale === "zh"
-        ? "放松技巧,呼吸练习,冥想,压力缓解,放松方法"
-        : "relaxation techniques,breathing exercises,meditation,stress relief,relaxation methods",
+    keywords: t("techniques.keywords"),
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"

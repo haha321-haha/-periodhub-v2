@@ -16,10 +16,7 @@ export async function generateMetadata({
   return {
     title: t("progress.title") + " - PeriodHub",
     description: t("progress.subtitle"),
-    keywords:
-      locale === "zh"
-        ? "进度追踪,压力管理,健康记录,数据追踪,个人健康"
-        : "progress tracking,stress management,health records,data tracking,personal health",
+    keywords: t("progress.keywords"),
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"

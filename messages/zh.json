@@ -6469,7 +6469,33 @@
   "lifestyleRecommendations": "生活方式建议",
   "sleep": "睡眠",
   "stress": "压力",
-  "stressManagement": "压力管理",
+  "stressManagement": {
+    "acute": {
+      "title": "急性压力",
+      "subtitle": "短期、突发性压力",
+      "duration": "几分钟到几小时",
+      "examples": "工作截止日期、考试、突发事件",
+      "impact": "暂时性影响，通常可恢复",
+      "management": "深呼吸、短暂休息、问题解决"
+    },
+    "chronic": {
+      "title": "慢性压力",
+      "subtitle": "长期、持续性压力",
+      "duration": "几周到几个月",
+      "examples": "长期工作压力、人际关系问题、经济困难",
+      "impact": "持续性影响，可能长期损害健康",
+      "management": "生活方式改变、专业帮助、长期策略"
+    },
+    "assessment": {
+      "keywords": "压力评估,压力测试,经期压力,压力管理,心理健康"
+    },
+    "progress": {
+      "keywords": "进度追踪,压力管理,健康记录,数据追踪,个人健康"
+    },
+    "techniques": {
+      "keywords": "放松技巧,呼吸练习,冥想,压力缓解,放松方法"
+    }
+  },
   "medical": "医疗",
   "medicalAdvice": "医疗建议",
   "doctor": "医生",

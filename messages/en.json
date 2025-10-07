@@ -255,6 +255,52 @@
       "developmentPain": "Development Pain",
       "painTracker": "Pain Tracker"
     },
+    "p2": {
+      "title": "P2 Phase: Advanced Features",
+      "description": "Experience next-generation menstrual health management tools with AI analytics, social features, real-time sync, and advanced reporting",
+      "features": {
+        "analytics": {
+          "title": "Data Analytics & Visualization",
+          "description": "Deep insights into your health patterns and trends"
+        },
+        "ai": {
+          "title": "AI Personalized Recommendations",
+          "description": "Machine learning-powered intelligent recommendation system"
+        },
+        "social": {
+          "title": "Social Features Integration",
+          "description": "Share experiences with community members and get support"
+        },
+        "sync": {
+          "title": "Real-time Data Sync",
+          "description": "Securely sync your health data across devices"
+        },
+        "reports": {
+          "title": "Advanced Report Generation",
+          "description": "Generate professional personal health reports"
+        }
+      },
+      "cta": {
+        "title": "Ready to experience the full features?",
+        "description": "Start using all P2 advanced features now for a smarter, more personalized menstrual health management experience",
+        "getStarted": "Get Started Now",
+        "shareWithFriends": "Share with Friends"
+      },
+      "technicalFeatures": {
+        "security": {
+          "title": "Enterprise Security",
+          "description": "End-to-end encryption, GDPR and HIPAA compliant"
+        },
+        "performance": {
+          "title": "Real-time Performance",
+          "description": "Millisecond response time, 99.9% uptime guarantee"
+        },
+        "validation": {
+          "title": "Scientifically Validated",
+          "description": "Based on 50+ medical studies, 92% accuracy rate"
+        }
+      }
+    },
     "p3": {
       "title": "P3 Phase: System Optimization and Performance Enhancement",
       "description": "Complete internationalization, performance optimization, testing, and documentation to ensure system quality and stability",

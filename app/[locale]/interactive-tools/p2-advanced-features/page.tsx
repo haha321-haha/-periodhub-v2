@@ -102,57 +102,40 @@ export default function P2AdvancedFeatures({
   const features = [
     {
       id: "analytics",
-      title:
-        locale === "zh" ? "数据分析与可视化" : "Data Analytics & Visualization",
-      description:
-        locale === "zh"
-          ? "深入了解您的健康模式和趋势"
-          : "Deep insights into your health patterns and trends",
+      title: t("p2.features.analytics.title"),
+      description: t("p2.features.analytics.description"),
       icon: BarChart3,
       color: "blue",
       stats: { charts: 5, insights: 12, accuracy: "95%" },
     },
     {
       id: "ai",
-      title:
-        locale === "zh" ? "AI个性化推荐" : "AI Personalized Recommendations",
-      description:
-        locale === "zh"
-          ? "基于机器学习的智能建议系统"
-          : "Machine learning-powered intelligent recommendation system",
+      title: t("p2.features.ai.title"),
+      description: t("p2.features.ai.description"),
       icon: Brain,
       color: "purple",
       stats: { algorithms: 8, accuracy: "92%", studies: 50 },
     },
     {
       id: "social",
-      title: locale === "zh" ? "社交功能集成" : "Social Features Integration",
-      description:
-        locale === "zh"
-          ? "与社区成员分享经验获得支持"
-          : "Share experiences with community members and get support",
+      title: t("p2.features.social.title"),
+      description: t("p2.features.social.description"),
       icon: Users,
       color: "green",
       stats: { members: "10K+", posts: "5K+", groups: 25 },
     },
     {
       id: "sync",
-      title: locale === "zh" ? "实时数据同步" : "Real-time Data Sync",
-      description:
-        locale === "zh"
-          ? "跨设备安全同步您的健康数据"
-          : "Securely sync your health data across devices",
+      title: t("p2.features.sync.title"),
+      description: t("p2.features.sync.description"),
       icon: Cloud,
       color: "indigo",
       stats: { devices: 3, uptime: "99.9%", security: "A+" },
     },
     {
       id: "reports",
-      title: locale === "zh" ? "高级报告生成" : "Advanced Report Generation",
-      description:
-        locale === "zh"
-          ? "生成专业的个人健康报告"
-          : "Generate professional personal health reports",
+      title: t("p2.features.reports.title"),
+      description: t("p2.features.reports.description"),
       icon: FileText,
       color: "emerald",
       stats: { formats: 3, templates: 12, exports: "PDF/HTML" },
@@ -187,14 +170,10 @@ export default function P2AdvancedFeatures({
         {/* 页面标题 */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4 animate-fade-in">
-            {locale === "zh"
-              ? "P2阶段：高级功能"
-              : "P2 Phase: Advanced Features"}
+            {t("p2.title")}
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-slide-up">
-            {locale === "zh"
-              ? "体验下一代经期健康管理工具，包含AI智能分析、社交功能、实时同步和高级报告生成"
-              : "Experience next-generation menstrual health management tools with AI analytics, social features, real-time sync, and advanced reporting"}
+            {t("p2.description")}
           </p>
         </div>
 
@@ -323,24 +302,18 @@ export default function P2AdvancedFeatures({
         {/* 底部行动号召 */}
         <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
-            <h2 className="text-2xl font-bold mb-4">
-              {locale === "zh"
-                ? "准备体验完整功能？"
-                : "Ready to experience the full features?"}
-            </h2>
+            <h2 className="text-2xl font-bold mb-4">{t("p2.cta.title")}</h2>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              {locale === "zh"
-                ? "立即开始使用P2阶段的所有高级功能，获得更智能、更个性化的经期健康管理体验"
-                : "Start using all P2 advanced features now for a smarter, more personalized menstrual health management experience"}
+              {t("p2.cta.description")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors flex items-center justify-center">
                 <Zap className="w-5 h-5 mr-2" />
-                {locale === "zh" ? "立即开始" : "Get Started Now"}
+                {t("p2.cta.getStarted")}
               </button>
               <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors flex items-center justify-center">
                 <Share2 className="w-5 h-5 mr-2" />
-                {locale === "zh" ? "分享给朋友" : "Share with Friends"}
+                {t("p2.cta.shareWithFriends")}
               </button>
             </div>
           </div>
@@ -353,12 +326,10 @@ export default function P2AdvancedFeatures({
               <Shield className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {locale === "zh" ? "企业级安全" : "Enterprise Security"}
+              {t("p2.technicalFeatures.security.title")}
             </h3>
             <p className="text-gray-600">
-              {locale === "zh"
-                ? "端到端加密，符合GDPR和HIPAA标准"
-                : "End-to-end encryption, GDPR and HIPAA compliant"}
+              {t("p2.technicalFeatures.security.description")}
             </p>
           </div>
 
@@ -367,12 +338,10 @@ export default function P2AdvancedFeatures({
               <Activity className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {locale === "zh" ? "实时性能" : "Real-time Performance"}
+              {t("p2.technicalFeatures.performance.title")}
             </h3>
             <p className="text-gray-600">
-              {locale === "zh"
-                ? "毫秒级响应，99.9%可用性保证"
-                : "Millisecond response time, 99.9% uptime guarantee"}
+              {t("p2.technicalFeatures.performance.description")}
             </p>
           </div>
 
@@ -381,12 +350,10 @@ export default function P2AdvancedFeatures({
               <Award className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
-              {locale === "zh" ? "科学验证" : "Scientifically Validated"}
+              {t("p2.technicalFeatures.validation.title")}
             </h3>
             <p className="text-gray-600">
-              {locale === "zh"
-                ? "基于50+医学研究，92%准确率"
-                : "Based on 50+ medical studies, 92% accuracy rate"}
+              {t("p2.technicalFeatures.validation.description")}
             </p>
           </div>
         </div>

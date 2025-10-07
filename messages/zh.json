@@ -4148,6 +4148,52 @@
         "generateReport": "生成报告"
       }
     },
+    "p2": {
+      "title": "P2阶段：高级功能",
+      "description": "体验下一代经期健康管理工具，包含AI智能分析、社交功能、实时同步和高级报告生成",
+      "features": {
+        "analytics": {
+          "title": "数据分析与可视化",
+          "description": "深入了解您的健康模式和趋势"
+        },
+        "ai": {
+          "title": "AI个性化推荐",
+          "description": "基于机器学习的智能建议系统"
+        },
+        "social": {
+          "title": "社交功能集成",
+          "description": "与社区成员分享经验获得支持"
+        },
+        "sync": {
+          "title": "实时数据同步",
+          "description": "跨设备安全同步您的健康数据"
+        },
+        "reports": {
+          "title": "高级报告生成",
+          "description": "生成专业的个人健康报告"
+        }
+      },
+      "cta": {
+        "title": "准备体验完整功能？",
+        "description": "立即开始使用P2阶段的所有高级功能，获得更智能、更个性化的经期健康管理体验",
+        "getStarted": "立即开始",
+        "shareWithFriends": "分享给朋友"
+      },
+      "technicalFeatures": {
+        "security": {
+          "title": "企业级安全",
+          "description": "端到端加密，符合GDPR和HIPAA标准"
+        },
+        "performance": {
+          "title": "实时性能",
+          "description": "毫秒级响应，99.9%可用性保证"
+        },
+        "validation": {
+          "title": "科学验证",
+          "description": "基于50+医学研究，92%准确率"
+        }
+      }
+    },
     "p3": {
       "title": "P3阶段：系统优化和性能提升",
       "description": "完善国际化、性能优化、测试和文档，确保系统质量和稳定性",

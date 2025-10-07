@@ -167,7 +167,7 @@ export default function PDFPreviewPage({
     }
 
     console.log("最终 htmlFilename:", htmlFilename);
-    const fetchUrl = `/pdf-files/${htmlFilename}`;
+    const fetchUrl = `/downloads/${htmlFilename}`;
     console.log("fetch URL:", fetchUrl);
 
     // 加载HTML内容

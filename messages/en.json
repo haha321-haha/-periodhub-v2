@@ -685,7 +685,10 @@
       "workplace": "Stress Management",
       "nutrition": "Nutrition Therapy",
       "ginger": "Ginger Therapy Guide",
-      "heat": "Heat Therapy Guide"
+      "heat": "Heat Therapy Guide",
+      "tcm_guide": "TCM Theory Guide",
+      "acupoint_massage": "Acupoint Massage Guide",
+      "tcm_nutrition": "TCM Nutrition Therapy"
     }
   },
   "healthStatistics": {
@@ -2459,7 +2462,42 @@
     "constitutionTest": {
       "title": "Constitution Test",
       "description": "Traditional Chinese Medicine constitution identification with personalized care recommendations",
-      "cta": "Start Test"
+      "cta": "Start Test",
+      "subtitle": "Understand your TCM constitution type through professional questionnaire and get personalized health recommendations",
+      "features": {
+        "quick": {
+          "title": "Quick & Convenient",
+          "description": "Complete in 5-8 minutes"
+        },
+        "professional": {
+          "title": "Professional & Reliable",
+          "description": "Based on TCM theory"
+        },
+        "personalized": {
+          "title": "Personalized Recommendations",
+          "description": "Tailored to your constitution"
+        },
+        "practical": {
+          "title": "Practical Guidance",
+          "description": "Acupoint, diet, lifestyle advice"
+        }
+      },
+      "instructions": {
+        "title": "Test Instructions",
+        "item1": "Answer based on your condition over the past 3 months",
+        "item2": "Choose the option that best matches your situation",
+        "item3": "If unsure, choose the relatively more applicable option",
+        "item4": "Test results are for reference only, not a substitute for medical diagnosis"
+      },
+      "navigation": {
+        "startTest": "Start Test",
+        "nextQuestion": "Next Question",
+        "previousQuestion": "Previous Question",
+        "completeTest": "Complete Test",
+        "retakeTest": "Retake Test",
+        "previous": "Previous",
+        "next": "Next"
+      }
     },
     "breathingExercise": {
       "title": "4-7-8 Breathing Exercise",

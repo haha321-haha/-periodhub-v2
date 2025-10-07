@@ -241,6 +241,159 @@
       "mythsFacts": "Myths & Facts",
       "office": "Office Scenario",
       "developmentPain": "Development Pain"
+    },
+    "p3": {
+      "title": "P3 Phase: System Optimization and Performance Enhancement",
+      "description": "Complete internationalization, performance optimization, testing, and documentation to ensure system quality and stability",
+      "modules": {
+        "i18n": "Internationalization Enhancement",
+        "performance": "Performance Optimization",
+        "testing": "Testing Enhancement",
+        "documentation": "Documentation Enhancement"
+      },
+      "statistics": {
+        "optimizationModules": "Optimization Modules",
+        "completedTasks": "Completed Tasks",
+        "activeTasks": "Active Tasks",
+        "overallProgress": "Overall Progress"
+      },
+      "completion": {
+        "title": "P3 Phase Complete!",
+        "description": "All system optimization and performance enhancement tasks are complete, system is now production-ready",
+        "deployToProduction": "Deploy to Production"
+      }
+    },
+    "performance": {
+      "title": "Performance Optimization",
+      "description": "Improve application performance and optimize user experience",
+      "metrics": {
+        "bundleSize": "Bundle Size",
+        "loadTime": "Load Time",
+        "memoryUsage": "Memory Usage",
+        "renderTime": "Render Time",
+        "cacheHitRate": "Cache Hit Rate",
+        "networkRequests": "Network Requests"
+      },
+      "optimization": {
+        "codeSplitting": "Code Splitting",
+        "lazyLoading": "Lazy Loading",
+        "cacheStrategy": "Cache Strategy",
+        "memoryOptimization": "Memory Optimization",
+        "networkOptimization": "Network Optimization"
+      },
+      "recommendations": {
+        "title": "Performance Optimization Recommendations",
+        "bundleSize": "Bundle Size Optimization",
+        "loadTime": "Load Time Optimization",
+        "cacheHitRate": "Cache Hit Rate",
+        "networkRequests": "Network Request Optimization"
+      },
+      "actions": {
+        "startOptimization": "Start Optimization",
+        "reset": "Reset"
+      }
+    },
+    "i18n": {
+      "title": "Internationalization Optimization",
+      "description": "Improve translation quality and optimize multi-language support",
+      "status": {
+        "totalKeys": "Total Translation Keys",
+        "missingKeys": "Missing Translations",
+        "inconsistentKeys": "Inconsistent Translations",
+        "qualityScore": "Quality Score"
+      },
+      "optimization": {
+        "title": "Optimization Recommendations",
+        "addMissing": "Add Missing Translations",
+        "unifyStyle": "Unify Translation Style",
+        "optimizeLayout": "Optimize Layout Adaptation",
+        "culturalAdaptation": "Cultural Adaptation"
+      },
+      "actions": {
+        "startOptimization": "Start Optimization",
+        "exportReport": "Export Report"
+      }
+    },
+    "recommendations": {
+      "title": "Personalized Recommendations",
+      "description": "Data-driven personalized health recommendations",
+      "generate": "Generate Recommendations",
+      "results": "Recommendation Results",
+      "categories": {
+        "lifestyle": "Lifestyle Recommendations",
+        "nutrition": "Nutrition Advice",
+        "exercise": "Exercise Plans",
+        "stress": "Stress Management"
+      },
+      "actions": {
+        "regenerate": "Regenerate",
+        "save": "Save Recommendations"
+      }
+    },
+    "analytics": {
+      "title": "Data Analytics",
+      "description": "User behavior data analysis and insights",
+      "dashboard": "Analytics Dashboard",
+      "reports": "Analysis Reports",
+      "metrics": {
+        "userActivity": "User Activity",
+        "engagement": "Engagement Rate",
+        "retention": "Retention Rate",
+        "conversion": "Conversion Rate"
+      },
+      "actions": {
+        "viewDetails": "View Details",
+        "exportData": "Export Data"
+      }
+    },
+    "social": {
+      "title": "Social Features",
+      "description": "User social interaction features",
+      "community": "Community",
+      "sharing": "Sharing",
+      "features": {
+        "share": "Share Experience",
+        "discuss": "Discussions",
+        "support": "Mutual Support"
+      },
+      "actions": {
+        "joinCommunity": "Join Community",
+        "shareNow": "Share Now"
+      }
+    },
+    "reports": {
+      "title": "Report Generation",
+      "description": "Generate various health reports",
+      "generate": "Generate Report",
+      "export": "Export Report",
+      "types": {
+        "monthly": "Monthly Report",
+        "symptoms": "Symptom Report",
+        "progress": "Progress Report",
+        "comprehensive": "Comprehensive Report"
+      },
+      "actions": {
+        "generate": "Generate",
+        "download": "Download",
+        "share": "Share"
+      }
+    },
+    "sync": {
+      "title": "Data Synchronization",
+      "description": "Data synchronization features",
+      "status": "Sync Status",
+      "sync": "Start Sync",
+      "lastSync": "Last Synced",
+      "states": {
+        "synced": "Synced",
+        "syncing": "Syncing...",
+        "failed": "Sync Failed",
+        "pending": "Pending Sync"
+      },
+      "actions": {
+        "syncNow": "Sync Now",
+        "viewHistory": "View History"
+      }
     }
   },
   "anchorTexts": {
@@ -613,6 +766,104 @@
         "title": "💡 Need Help?",
         "description": "Tell us your needs, we'll continuously improve our resource library",
         "feedbackButton": "Submit Feedback"
+      }
+    },
+    "resources": {
+      "painTrackingForm": {
+        "title": "Pain Tracking Form",
+        "description": "Record and analyze your pain patterns to provide important references for medical diagnosis"
+      },
+      "menstrualCycleNutritionPlan": {
+        "title": "Menstrual Cycle Nutrition Plan",
+        "description": "Scientific nutrition guidance for your menstrual cycle to help relieve symptoms and promote overall health"
+      },
+      "campusEmergencyChecklist": {
+        "title": "Campus Emergency Checklist",
+        "description": "Student-specific menstrual emergency response guide and essential items checklist"
+      },
+      "magnesiumGutHealthGuide": {
+        "title": "Magnesium & Gut Health Guide",
+        "description": "In-depth understanding of magnesium's important role in menstrual health and supplementation methods"
+      },
+      "naturalTherapyAssessment": {
+        "title": "Natural Therapy Assessment",
+        "description": "Evaluate and choose natural therapies and wellness plans that suit you"
+      },
+      "healthyHabitsChecklist": {
+        "title": "Healthy Habits Checklist",
+        "description": "Establish daily habits and routines beneficial for menstrual health"
+      },
+      "menstrualPainComplicationsManagement": {
+        "title": "Complications Management Guide",
+        "description": "Professional guidance for identifying and managing menstrual pain-related complications"
+      },
+      "parentCommunicationGuide": {
+        "title": "Parent Communication Guide",
+        "description": "Guide to help parents communicate effectively with teenagers about menstrual health"
+      },
+      "teacherCollaborationHandbook": {
+        "title": "Teacher Collaboration Handbook",
+        "description": "Practical handbook for teachers on how to support students' menstrual health management"
+      },
+      "teacherHealthManual": {
+        "title": "Teacher Health Manual",
+        "description": "Menstrual health education resources and guidance for educators"
+      },
+      "usInsuranceQuickReference": {
+        "title": "US Health Insurance Quick Reference Card",
+        "description": "Quick reference for key US health insurance information for dysmenorrhea treatment, including cost comparison, appeals process, and emergency contacts"
+      },
+      "recommendedReadingList": {
+        "title": "Recommended Reading List",
+        "description": "Curated recommendations of menstrual health-related books, articles, and research materials"
+      },
+      "specificMenstrualPainManagementGuide": {
+        "title": "Specific Menstrual Pain Management Guide",
+        "description": "Personalized management strategies and treatment plans for different types of menstrual pain"
+      },
+      "zhanZhuangBaduanjinIllustratedGuide": {
+        "title": "Zhan Zhuang Baduanjin Illustrated Guide",
+        "description": "Guidance on applying traditional Chinese medicine wellness exercises to menstrual health management"
+      }
+    }
+  },
+  "periodPainAssessmentPage": {
+    "tool": {
+      "title": "Period Pain Assessment Tool",
+      "subtitle": "Understand your menstrual pain patterns and get personalized advice",
+      "intensityTitle": "How severe is your menstrual pain?",
+      "intensityOptions": {
+        "mild": "Mild - Bearable, does not affect daily activities",
+        "moderate": "Moderate - Affects some activities but is tolerable",
+        "severe": "Severe - Completely affects daily activities, requires rest"
+      },
+      "onsetTitle": "When does your menstrual pain usually start?",
+      "onsetOptions": {
+        "before": "1-2 days before period starts",
+        "first_day": "First day of period",
+        "second_day": "Second day of period",
+        "throughout": "Throughout the entire period"
+      },
+      "symptomsTitle": "Do you have any of the following severe symptoms?",
+      "symptomsOptions": {
+        "nausea": "Nausea or vomiting",
+        "diarrhea": "Diarrhea or digestive issues",
+        "headache": "Severe headache or migraine",
+        "fainting": "Fainting or dizziness",
+        "heavy_bleeding": "Extremely heavy menstrual flow",
+        "irregular_cycles": "Highly irregular menstrual cycles"
+      },
+      "assessButton": "Get Assessment Results",
+      "resultTitle": "Assessment Results",
+      "consultAdvice": "⚠️ Based on your symptoms, we recommend consulting a healthcare professional for proper evaluation and treatment.",
+      "resetButton": "Reset Assessment",
+      "moreInfoButton": "Learn More About Period Health",
+      "disclaimer": "This assessment is for reference only and cannot replace professional medical advice.",
+      "advice": {
+        "severeSymptoms": "Your symptoms indicate a need for professional medical consultation. Please see a healthcare provider as soon as possible.",
+        "severeIntensity": "Severe menstrual pain may affect your quality of life. We recommend consulting a healthcare provider to explore treatment options.",
+        "moderateIntensity": "Moderate pain can often be managed with self-care and natural remedies. Consider trying heat therapy, gentle exercise, and stress management techniques.",
+        "mildIntensity": "Mild pain is manageable with self-care. Continue with healthy habits and monitor your symptoms."
       }
     }
   },
@@ -1901,7 +2152,63 @@
     "painTracker": {
       "title": "Pain Tracker",
       "description": "Smart pain pattern recording and symptom analysis",
-      "startButton": "Start Tracking"
+      "startButton": "Start Tracking",
+      "export": {
+        "title": "Export Data",
+        "description": "Export your pain records as files for backup or sharing with your doctor",
+        "format": "Export Format",
+        "json": "JSON Format",
+        "csv": "CSV Format",
+        "pdf": "PDF Report",
+        "dateRange": "Date Range",
+        "allData": "All Data",
+        "lastMonth": "Last Month",
+        "lastThreeMonths": "Last 3 Months",
+        "lastSixMonths": "Last 6 Months",
+        "customRange": "Custom Range",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "includeCharts": "Include Charts",
+        "includeStatistics": "Include Statistics",
+        "export": "Export",
+        "exporting": "Exporting...",
+        "exportSuccess": "Export Successful",
+        "exportError": "Export failed, please try again",
+        "inDevelopment": "Export feature is under development..."
+      },
+      "statistics": {
+        "title": "Statistical Analysis",
+        "overview": "Overview",
+        "trends": "Trend Analysis",
+        "patterns": "Pain Patterns",
+        "remedies": "Remedy Effectiveness",
+        "totalEntries": "Total Entries",
+        "averagePain": "Average Pain Intensity",
+        "maxPain": "Maximum Pain Intensity",
+        "minPain": "Minimum Pain Intensity",
+        "trendDirection": "Pain Trend",
+        "improving": "Improving",
+        "worsening": "Worsening",
+        "stable": "Stable",
+        "mostCommonSymptoms": "Most Common Symptoms",
+        "mostEffectiveRemedies": "Most Effective Remedies",
+        "painFrequency": "Pain Intensity Distribution",
+        "noData": "No Data",
+        "noDataDescription": "Add more records to view statistical analysis",
+        "painLevelChart": "Pain Intensity Trend",
+        "cyclePatterns": "Menstrual Cycle Pain Patterns",
+        "remedyEffectiveness": "Remedy Effectiveness",
+        "inDevelopment": "Statistics feature is under development..."
+      },
+      "insights": {
+        "title": "Health Insights",
+        "painPatterns": "Pain Pattern Analysis",
+        "recommendations": "Personalized Recommendations",
+        "trends": "Trend Analysis",
+        "alerts": "Health Alerts",
+        "noInsights": "No Insights Yet",
+        "noInsightsDescription": "Record more data to get personalized health insights"
+      }
     },
     "cycleTracker": {
       "title": "Cycle Tracker",
@@ -3894,6 +4201,267 @@
         "medicalCare": {
           "name": "Seek Medical Care if Needed",
           "text": "Consult a healthcare provider if pain is severe, sudden, or accompanied by fever or unusual symptoms"
+        }
+      }
+    }
+  },
+  "painTracker": {
+    "title": "Pain Tracker",
+    "subtitle": "Record and track your menstrual pain, understand pain patterns, and find the most effective relief methods",
+    "description": "Help you better manage your menstrual health through detailed pain recording",
+    "navigation": {
+      "overview": "Overview",
+      "addEntry": "Add Entry",
+      "viewEntries": "View Entries",
+      "statistics": "Statistics",
+      "export": "Export Data"
+    },
+    "form": {
+      "title": "Pain Entry",
+      "editTitle": "Edit Pain Entry",
+      "date": "Date",
+      "painLevel": "Pain Intensity",
+      "duration": "Duration",
+      "location": "Pain Location",
+      "menstrualStatus": "Menstrual Status",
+      "symptoms": "Associated Symptoms",
+      "remedies": "Relief Methods Used",
+      "effectiveness": "Effectiveness Rating",
+      "notes": "Notes",
+      "optional": "Optional",
+      "minutes": "minutes",
+      "save": "Save Entry",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "edit": "Edit Entry",
+      "update": "Update Entry",
+      "updating": "Updating...",
+      "notesPlaceholder": "Record any additional information, such as triggers, emotional state, etc..."
+    },
+    "entries": {
+      "title": "Pain Entries",
+      "noEntries": "No pain entries yet",
+      "noEntriesDescription": "Start recording your pain information to better understand pain patterns",
+      "addFirst": "Add First Entry",
+      "totalEntries": "Total Entries",
+      "lastEntry": "Latest Entry",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Confirm Delete",
+      "deleteMessage": "Are you sure you want to delete this entry? This action cannot be undone.",
+      "deleteSuccess": "Entry deleted",
+      "deleteError": "Delete failed, please try again",
+      "painIntensity": "Pain Intensity",
+      "duration": "Duration",
+      "minutes": "minutes"
+    },
+    "statistics": {
+      "title": "Statistical Analysis",
+      "overview": "Overview",
+      "trends": "Trend Analysis",
+      "patterns": "Pain Patterns",
+      "remedies": "Remedy Effectiveness",
+      "totalEntries": "Total Entries",
+      "averagePain": "Average Pain Intensity",
+      "maxPain": "Maximum Pain Intensity",
+      "minPain": "Minimum Pain Intensity",
+      "trendDirection": "Pain Trend",
+      "improving": "Improving",
+      "worsening": "Worsening",
+      "stable": "Stable",
+      "mostCommonSymptoms": "Most Common Symptoms",
+      "mostEffectiveRemedies": "Most Effective Remedies",
+      "painFrequency": "Pain Intensity Distribution",
+      "noData": "No Data",
+      "noDataDescription": "Add more entries to view statistical analysis",
+      "painLevelChart": "Pain Intensity Trend",
+      "cyclePatterns": "Menstrual Cycle Pain Patterns",
+      "remedyEffectiveness": "Remedy Effectiveness",
+      "inDevelopment": "Statistics feature is under development..."
+    },
+    "export": {
+      "title": "Export Data",
+      "description": "Export your pain records as files for backup or sharing with your doctor",
+      "format": "Export Format",
+      "json": "JSON Format",
+      "csv": "CSV Format",
+      "pdf": "PDF Report",
+      "dateRange": "Date Range",
+      "allData": "All Data",
+      "lastMonth": "Last Month",
+      "lastThreeMonths": "Last 3 Months",
+      "lastSixMonths": "Last 6 Months",
+      "customRange": "Custom Range",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "includeCharts": "Include Charts",
+      "includeStatistics": "Include Statistics",
+      "export": "Export",
+      "exporting": "Exporting...",
+      "exportSuccess": "Export Successful",
+      "exportError": "Export failed, please try again",
+      "inDevelopment": "Export feature is under development..."
+    },
+    "insights": {
+      "title": "Health Insights",
+      "painPatterns": "Pain Pattern Analysis",
+      "recommendations": "Personalized Recommendations",
+      "trends": "Trend Analysis",
+      "alerts": "Health Alerts",
+      "noInsights": "No Insights Yet",
+      "noInsightsDescription": "Record more data to get personalized health insights"
+    },
+    "settings": {
+      "title": "Settings",
+      "notifications": "Notification Settings",
+      "reminders": "Entry Reminders",
+      "privacy": "Privacy Settings",
+      "dataManagement": "Data Management",
+      "clearAllData": "Clear All Data",
+      "clearDataWarning": "This will permanently delete all pain entries and cannot be recovered",
+      "clearDataConfirm": "Confirm Clear",
+      "clearDataSuccess": "Data cleared",
+      "clearDataError": "Clear failed, please try again"
+    },
+    "messages": {
+      "saveSuccess": "Entry saved successfully",
+      "saveError": "Save failed, please try again",
+      "updateSuccess": "Entry updated successfully",
+      "updateError": "Update failed, please try again",
+      "deleteSuccess": "Entry deleted successfully",
+      "deleteError": "Delete failed, please try again",
+      "confirmDelete": "Are you sure you want to delete this entry? This action cannot be undone.",
+      "loadError": "Failed to load data, please refresh the page",
+      "networkError": "Network error, please check your connection",
+      "validationError": "Please check your input",
+      "duplicateDate": "An entry already exists for this date, please choose another date or edit the existing entry",
+      "assessmentComplete": "Assessment Complete",
+      "assessmentCompleteDesc": "Your personalized recommendations have been generated",
+      "assessmentFailed": "Assessment Failed",
+      "assessmentFailedDesc": "Unable to generate assessment results, please try again",
+      "resultsSaved": "Results Saved",
+      "resultsSavedDesc": "You can view your assessment results anytime",
+      "close": "Close"
+    },
+    "help": {
+      "title": "Help & Guide",
+      "gettingStarted": "Getting Started",
+      "recordingPain": "Recording Pain",
+      "viewingData": "Viewing Data",
+      "exportingData": "Exporting Data",
+      "tips": "Usage Tips",
+      "faq": "FAQ"
+    },
+    "assessment": {
+      "title": "Symptom Assessment Tool",
+      "subtitle": "Quickly identify pain types through professional questionnaire and get precise personalized recommendations.",
+      "start": {
+        "title": "Before Starting Assessment",
+        "description": "Please ensure you're in a quiet, private environment where you can focus on answering questions. This assessment will help you better understand your symptom patterns.",
+        "feature1": "Professional symptom analysis",
+        "feature2": "Personalized recommendations",
+        "feature3": "Scientific assessment methods",
+        "feature4": "Instant result feedback",
+        "startButton": "Start Assessment",
+        "disclaimer": "This assessment is for reference only and cannot replace professional medical diagnosis."
+      },
+      "progress": {
+        "questionOf": "Question {current} of {total}"
+      },
+      "navigation": {
+        "previous": "Previous",
+        "next": "Next",
+        "skip": "Skip",
+        "finish": "Finish Assessment"
+      },
+      "result": {
+        "title": "Assessment Results",
+        "yourScore": "Your Score",
+        "severity": "Severity Level",
+        "riskLevel": "Risk Level",
+        "summary": "Result Summary",
+        "recommendations": "Recommended Plans",
+        "timeframe": "Timeframe:",
+        "actionSteps": "Action Steps",
+        "retakeAssessment": "Retake Assessment",
+        "saveResults": "Save Results",
+        "nextSteps": {
+          "trackSymptoms": "Use pain tracker to record symptoms",
+          "tryRecommendations": "Try recommended relief methods",
+          "consultDoctor": "Consult a doctor if symptoms persist or worsen"
+        }
+      },
+      "severity": {
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe",
+        "emergency": "Emergency"
+      },
+      "priority": {
+        "high": "High Priority",
+        "medium": "Medium Priority",
+        "low": "Low Priority"
+      },
+      "messages": {
+        "assessmentComplete": "Assessment Complete",
+        "assessmentCompleteDesc": "Your symptom assessment is complete, please review the results and recommendations.",
+        "assessmentFailed": "Assessment Failed",
+        "assessmentFailedDesc": "An error occurred during assessment, please try again.",
+        "resultsSaved": "Results Saved",
+        "resultsSavedDesc": "Your assessment results have been saved to local storage."
+      },
+      "resultMessages": {
+        "emergency": "Your symptoms are quite severe, please consult a healthcare professional as soon as possible.",
+        "emergencySummary": "Assessment indicates you may need professional medical attention.",
+        "severe": "Your symptoms are relatively severe, comprehensive management strategies are recommended.",
+        "severeSummary": "Your symptoms require active management and possible medical intervention.",
+        "moderate": "You have moderate symptoms that can be managed through various methods.",
+        "moderateSummary": "Your symptoms are manageable, multiple relief strategies are recommended.",
+        "mild": "Your symptoms are relatively mild and can be well managed through simple self-care.",
+        "mildSummary": "Your symptoms are mild and can be improved through lifestyle adjustments."
+      },
+      "recommendations": {
+        "emergencyMedical": {
+          "title": "Recommend Immediate Medical Attention",
+          "description": "Your symptoms may require professional medical evaluation and treatment",
+          "timeframe": "Immediately",
+          "actionSteps": {
+            "0": "Contact your gynecologist",
+            "1": "Consider emergency care if pain is severe",
+            "2": "Keep a detailed symptom log"
+          }
+        },
+        "painManagement": {
+          "title": "Pain Management Strategies",
+          "description": "Various methods can help relieve menstrual pain",
+          "timeframe": "Available immediately",
+          "actionSteps": {
+            "0": "Use heating pad or hot water bottle",
+            "1": "Try light exercise like walking",
+            "2": "Consider OTC pain relievers (follow instructions)"
+          }
+        },
+        "lifestyleChanges": {
+          "title": "Lifestyle Adjustments",
+          "description": "Long-term lifestyle changes can significantly improve symptoms",
+          "timeframe": "Results in 2-3 months",
+          "actionSteps": {
+            "0": "Maintain regular exercise habits",
+            "1": "Ensure adequate sleep",
+            "2": "Learn stress management techniques",
+            "3": "Maintain balanced diet"
+          }
+        },
+        "selfcarePractices": {
+          "title": "Self-Care Practices",
+          "description": "Daily self-care can help you better manage symptoms",
+          "timeframe": "Ongoing",
+          "actionSteps": {
+            "0": "Practice deep breathing and meditation",
+            "1": "Use pain tracker to record symptoms",
+            "2": "Build a support network",
+            "3": "Learn relaxation techniques"
+          }
         }
       }
     }

@@ -3374,6 +3374,11 @@
           "description": "分析症状对工作和日常生活的影响，提供个性化管理建议",
           "cta": "开始计算"
         }
+      },
+      "sections": {
+        "workplaceArticles": "职场健康文章",
+        "relatedTools": "相关工具",
+        "scenarioSolutions": "场景解决方案"
       }
     },
     "otherTools": {

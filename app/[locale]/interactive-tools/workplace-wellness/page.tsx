@@ -440,7 +440,7 @@ export default function WorkplaceWellnessPage() {
             {/* 推荐文章区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {locale === "zh" ? "职场健康文章" : "Workplace Health Articles"}
+                {t("sections.workplaceArticles")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {getWorkplaceWellnessRecommendations(
@@ -458,7 +458,7 @@ export default function WorkplaceWellnessPage() {
             {/* 相关工具区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {locale === "zh" ? "相关工具" : "Related Tools"}
+                {t("sections.relatedTools")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {getWorkplaceWellnessRecommendations(locale).relatedTools.map(
@@ -476,7 +476,7 @@ export default function WorkplaceWellnessPage() {
             {/* 场景解决方案区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {locale === "zh" ? "场景解决方案" : "Scenario Solutions"}
+                {t("sections.scenarioSolutions")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {getWorkplaceWellnessRecommendations(

@@ -227,6 +227,14 @@
     }
   },
   "interactiveTools": {
+    "meta": {
+      "title": "Interactive Health Tools - Period Management Assistant",
+      "description": "Use our professional tools to track symptoms, assess pain levels, and better manage your menstrual health",
+      "ogTitle": "Interactive Menstrual Health Tools | Symptom Tracking & Pain Management",
+      "ogDescription": "Professional menstrual health management tools to help you track symptoms, record pain levels, and get personalized health recommendations",
+      "twitterTitle": "Interactive Menstrual Health Tools",
+      "twitterDescription": "Professional tools for tracking symptoms, managing pain, and optimizing menstrual health"
+    },
     "breadcrumb": {
       "scenarioSolutions": "Scenario Solutions",
       "teenHealth": "Teen Health",
@@ -416,6 +424,20 @@
       "assessment": "Assessment",
       "calculator": "Impact Calculator",
       "workplace": "Workplace Health Management"
+    },
+    "solutions": {
+      "exercise_balance_new": "Exercise & Menstruation",
+      "office": "Office Relief Solutions",
+      "emergency": "Emergency Kit Preparation",
+      "sleep": "Sleep",
+      "exercise": "Exercise",
+      "workplace_wellness": "Workplace Wellness",
+      "relief": "Relief Methods",
+      "natural_therapies": "Natural Therapies",
+      "scenarios": "Scenario Solutions",
+      "teen_main": "Teen Health",
+      "commute": "Commute Scenarios",
+      "social": "Social Scenarios"
     },
     "teen": {
       "main": "Learn More"
@@ -4723,6 +4745,28 @@
     "breadcrumb": {
       "home": "Home",
       "current": "Period Health Guide"
+    }
+  },
+  "toolPage": {
+    "backToTools": "Back to Tools List",
+    "toolNotFound": "Tool Not Found",
+    "toolNotFoundDesc": "Sorry, we couldn't find the tool you're looking for.",
+    "medicalDisclaimer": "Medical Disclaimer",
+    "medicalDisclaimerText": "This tool is for reference only and cannot replace professional medical advice, diagnosis, or treatment. Please consult a medical professional for health concerns.",
+    "categories": {
+      "assessment": "Assessment Tools",
+      "tracking": "Tracking Tools",
+      "constitutionAssessment": "Constitution Assessment",
+      "healthAssessment": "Health Assessment"
+    },
+    "difficulty": {
+      "easy": "Easy"
+    },
+    "estimatedTime": {
+      "5to10min": "5-10 minutes",
+      "2to3minDaily": "2-3 minutes daily",
+      "5to8min": "5-8 minutes",
+      "3to5min": "3-5 minutes"
     }
   }
 }

@@ -353,21 +353,14 @@ export default function PersonalizedRecommendationEngine({
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
             <Brain className="w-6 h-6 mr-2 text-purple-600" />
-            {locale === "zh"
-              ? "AI个性化推荐引擎"
-              : "AI Personalized Recommendation Engine"}
+            {t("title")}
           </h2>
-          <p className="text-gray-600">
-            {locale === "zh"
-              ? "基于您的个人数据和科学研究的智能推荐"
-              : "Smart recommendations based on your personal data and scientific research"}
-          </p>
+          <p className="text-gray-600">{t("description")}</p>
         </div>
 
         <div className="mt-4 sm:mt-0">
           <div className="text-sm text-gray-500 mb-2">
-            {locale === "zh" ? "总推荐数" : "Total Recommendations"}:{" "}
-            {categoryStats.all}
+            {t("totalRecommendations")}: {categoryStats.all}
           </div>
           <div className="flex space-x-2">
             {Object.entries(categoryStats).map(([category, count]) => (
@@ -396,15 +389,7 @@ export default function PersonalizedRecommendationEngine({
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
-            {category === "all" && (locale === "zh" ? "全部" : "All")}
-            {category === "treatment" &&
-              (locale === "zh" ? "治疗" : "Treatment")}
-            {category === "lifestyle" &&
-              (locale === "zh" ? "生活方式" : "Lifestyle")}
-            {category === "prevention" &&
-              (locale === "zh" ? "预防" : "Prevention")}
-            {category === "emergency" &&
-              (locale === "zh" ? "紧急" : "Emergency")}
+            {t(`categories.${category}`)}
           </button>
         ))}
       </div>
@@ -445,12 +430,7 @@ export default function PersonalizedRecommendationEngine({
                         : "bg-green-100 text-green-700"
                   }`}
                 >
-                  {recommendation.priority === "high" &&
-                    (locale === "zh" ? "高优先级" : "High Priority")}
-                  {recommendation.priority === "medium" &&
-                    (locale === "zh" ? "中优先级" : "Medium Priority")}
-                  {recommendation.priority === "low" &&
-                    (locale === "zh" ? "低优先级" : "Low Priority")}
+                  {t(`priority.${recommendation.priority}`)}
                 </span>
                 <div className="flex items-center text-xs text-purple-600">
                   <Star className="w-3 h-3 mr-1" />
@@ -469,7 +449,7 @@ export default function PersonalizedRecommendationEngine({
                   {Math.round(recommendation.effectiveness * 100)}%
                 </div>
                 <div className="text-xs text-gray-600">
-                  {locale === "zh" ? "有效性" : "Effectiveness"}
+                  {t("metrics.effectiveness")}
                 </div>
               </div>
               <div className="text-center">
@@ -477,7 +457,7 @@ export default function PersonalizedRecommendationEngine({
                   {Math.round(recommendation.confidence * 100)}%
                 </div>
                 <div className="text-xs text-gray-600">
-                  {locale === "zh" ? "置信度" : "Confidence"}
+                  {t("metrics.confidence")}
                 </div>
               </div>
               <div className="text-center">
@@ -485,7 +465,7 @@ export default function PersonalizedRecommendationEngine({
                   {recommendation.scientificEvidence.studies}
                 </div>
                 <div className="text-xs text-gray-600">
-                  {locale === "zh" ? "研究数量" : "Studies"}
+                  {t("metrics.studies")}
                 </div>
               </div>
             </div>
@@ -494,7 +474,7 @@ export default function PersonalizedRecommendationEngine({
             <div className="mb-4">
               <h4 className="font-medium text-gray-900 mb-2 flex items-center">
                 <CheckCircle className="w-4 h-4 mr-1 text-green-500" />
-                {locale === "zh" ? "行动步骤" : "Action Steps"}
+                {t("actionSteps")}
               </h4>
               <ul className="text-sm text-gray-700 space-y-1">
                 {recommendation.actionSteps.map((step, index) => (
@@ -513,7 +493,7 @@ export default function PersonalizedRecommendationEngine({
                 {recommendation.timeframe}
               </div>
               <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-                {locale === "zh" ? "开始执行" : "Start Implementation"}
+                {t("startImplementation")}
               </button>
             </div>
 
@@ -521,7 +501,7 @@ export default function PersonalizedRecommendationEngine({
             {recommendation.contraindications && (
               <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <h5 className="font-medium text-yellow-800 mb-1">
-                  {locale === "zh" ? "注意事项" : "Precautions"}
+                  {t("precautions")}
                 </h5>
                 <ul className="text-sm text-yellow-700">
                   {recommendation.contraindications.map(
@@ -540,7 +520,7 @@ export default function PersonalizedRecommendationEngine({
       <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
         <h3 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
           <TrendingUp className="w-5 h-5 mr-2" />
-          {locale === "zh" ? "科学证据总结" : "Scientific Evidence Summary"}
+          {t("scientificEvidence")}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center">
@@ -550,9 +530,7 @@ export default function PersonalizedRecommendationEngine({
                 0,
               )}
             </div>
-            <div className="text-sm text-blue-700">
-              {locale === "zh" ? "总研究数量" : "Total Studies"}
-            </div>
+            <div className="text-sm text-blue-700">{t("totalStudies")}</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-green-600">
@@ -567,7 +545,7 @@ export default function PersonalizedRecommendationEngine({
               %
             </div>
             <div className="text-sm text-green-700">
-              {locale === "zh" ? "平均有效性" : "Average Effectiveness"}
+              {t("averageEffectiveness")}
             </div>
           </div>
           <div className="text-center">
@@ -583,7 +561,7 @@ export default function PersonalizedRecommendationEngine({
               %
             </div>
             <div className="text-sm text-purple-700">
-              {locale === "zh" ? "平均安全性" : "Average Safety"}
+              {t("averageSafety")}
             </div>
           </div>
         </div>

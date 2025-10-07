@@ -3884,22 +3884,6 @@
         "exportReport": "导出报告"
       }
     },
-    "recommendations": {
-      "title": "个性化推荐",
-      "description": "基于数据的个性化健康建议",
-      "generate": "生成推荐",
-      "results": "推荐结果",
-      "categories": {
-        "lifestyle": "生活方式建议",
-        "nutrition": "营养建议",
-        "exercise": "运动计划",
-        "stress": "压力管理"
-      },
-      "actions": {
-        "regenerate": "重新生成",
-        "save": "保存推荐"
-      }
-    },
     "analytics": {
       "title": "数据分析",
       "description": "用户行为数据分析和洞察",
@@ -4073,6 +4057,35 @@
         "deployToProduction": "进入生产环境",
         "viewReport": "查看系统报告"
       }
+    },
+    "recommendations": {
+      "title": "AI个性化推荐引擎",
+      "description": "基于您的个人数据和科学研究的智能推荐",
+      "totalRecommendations": "总推荐数",
+      "categories": {
+        "all": "全部",
+        "treatment": "治疗",
+        "lifestyle": "生活方式",
+        "prevention": "预防",
+        "emergency": "紧急"
+      },
+      "priority": {
+        "high": "高优先级",
+        "medium": "中优先级",
+        "low": "低优先级"
+      },
+      "metrics": {
+        "effectiveness": "有效性",
+        "confidence": "置信度",
+        "studies": "研究数量"
+      },
+      "actionSteps": "行动步骤",
+      "startImplementation": "开始执行",
+      "precautions": "注意事项",
+      "scientificEvidence": "科学证据总结",
+      "totalStudies": "总研究数量",
+      "averageEffectiveness": "平均有效性",
+      "averageSafety": "平均安全性"
     }
   },
   "scenarioSolutionsPage": {

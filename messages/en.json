@@ -279,6 +279,35 @@
         "viewReport": "View System Report"
       }
     },
+    "recommendations": {
+      "title": "AI Personalized Recommendation Engine",
+      "description": "Smart recommendations based on your personal data and scientific research",
+      "totalRecommendations": "Total Recommendations",
+      "categories": {
+        "all": "All",
+        "treatment": "Treatment",
+        "lifestyle": "Lifestyle",
+        "prevention": "Prevention",
+        "emergency": "Emergency"
+      },
+      "priority": {
+        "high": "High Priority",
+        "medium": "Medium Priority",
+        "low": "Low Priority"
+      },
+      "metrics": {
+        "effectiveness": "Effectiveness",
+        "confidence": "Confidence",
+        "studies": "Studies"
+      },
+      "actionSteps": "Action Steps",
+      "startImplementation": "Start Implementation",
+      "precautions": "Precautions",
+      "scientificEvidence": "Scientific Evidence Summary",
+      "totalStudies": "Total Studies",
+      "averageEffectiveness": "Average Effectiveness",
+      "averageSafety": "Average Safety"
+    },
     "performance": {
       "title": "Performance Optimization",
       "description": "Improve application performance and optimize user experience",
@@ -347,22 +376,6 @@
         "startOptimization": "Start Optimization",
         "optimizing": "Optimizing...",
         "exportReport": "Export Report"
-      }
-    },
-    "recommendations": {
-      "title": "Personalized Recommendations",
-      "description": "Data-driven personalized health recommendations",
-      "generate": "Generate Recommendations",
-      "results": "Recommendation Results",
-      "categories": {
-        "lifestyle": "Lifestyle Recommendations",
-        "nutrition": "Nutrition Advice",
-        "exercise": "Exercise Plans",
-        "stress": "Stress Management"
-      },
-      "actions": {
-        "regenerate": "Regenerate",
-        "save": "Save Recommendations"
       }
     },
     "analytics": {

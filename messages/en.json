@@ -235,6 +235,10 @@
       "twitterTitle": "Interactive Menstrual Health Tools",
       "twitterDescription": "Professional tools for tracking symptoms, managing pain, and optimizing menstrual health"
     },
+    "painTracker": {
+      "title": "Pain Tracker",
+      "description": "Record and track your menstrual pain, understand pain patterns, and find the most effective relief methods"
+    },
     "breadcrumb": {
       "scenarioSolutions": "Scenario Solutions",
       "teenHealth": "Teen Health",

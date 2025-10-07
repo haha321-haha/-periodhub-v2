@@ -8,7 +8,10 @@
   },
   "scripts": {
     "dev": "next dev -p 3001",
+    "dev:safe": "npm run verify:translations && npm run dev",
     "build": "next build",
+    "build:safe": "npm run verify:translations && npm run build",
+    "verify:translations": "node scripts/verify-translation-sync.js",
     "check-client-usage": "node scripts/check-client-components.js",
     "build:unsafe": "next build",
     "start": "next start",
@@ -174,6 +177,7 @@
     "eslint-config-next": "^14.2.21",
     "glob": "^11.0.2",
     "jest": "^30.0.3",
+    "lighthouse": "^12.8.2",
     "lucide-react": "^0.539.0",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",

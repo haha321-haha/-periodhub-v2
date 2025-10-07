@@ -163,3 +163,22 @@ temp/
 *.njsproj
 *.sln
 *.sw?
+
+# 翻译键修复相关
+reports/
+test-results/
+structure-consistency-report-*.json
+performance-test-report.json
+fix-monitor-*.json
+structure-fix-progress.json
+chain-reaction-monitor.log
+namespace-dependencies.dot
+
+# 备份文件
+*.backup
+messages/*.backup*
+
+# 临时文件
+*.tmp
+*.temp
+scripts/metadata-fix-commands.json

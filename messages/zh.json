@@ -1,17 +1,4 @@
 {
-  "homePage": {
-    "metadata": {
-      "title": "PeriodHub - 专业痛经缓解方法和月经健康管理平台 | 42篇医学指南+8个评估工具",
-      "description": "PeriodHub - 专业痛经缓解方案与经期健康管理平台。基于42篇医学指南和24个自测工具，已帮助60万+女性科学应对痛经困扰，获取个性化解决方案，改善生活质量。提供科学痛经缓解方法、互动工具和个性化健康指导。",
-      "keywords": "痛经怎么缓解最快方法,痛经吃什么药最有效,月经推迟几天算正常,月经量少是什么原因,痛经缓解,月经疼痛,经期健康,女性健康,月经健康管理,经期疼痛怎么办,中医调理,热敷,敷热水袋,暖宝宝,按摩,揉肚子,止痛药,月经周期,经期护理,生理期,大姨妈,例假,月经不调,经期症状",
-      "ogTitle": "PeriodHub - 专业痛经缓解方法和月经健康管理平台 | 42篇医学指南+8个评估工具",
-      "ogDescription": "专业的痛经缓解和疼痛管理平台，提供科学的缓解方法，42篇医学指南、8个实用工具和PDF下载。",
-      "twitterTitle": "PeriodHub - 专业痛经缓解方法和月经健康管理平台 | 42篇医学指南+8个评估工具",
-      "twitterDescription": "专业的痛经缓解和疼痛管理平台，提供科学的缓解方法，42篇医学指南、8个实用工具和PDF下载。"
-    }
-  },
-  "0": "益处",
-  "4": "4",
   "site": {
     "name": "Period Hub",
     "title": "Period Hub - 经期健康管理平台",
@@ -2181,41 +2168,13 @@
   "downloadsPage": {
     "title": "PDF资源下载中心",
     "description": "下载专业制作的PDF指南、表格和工具，帮助您更好地管理经期健康。所有资源均提供中英文版本。",
-    "keywords": "经期健康PDF,痛经管理指南,月经健康材料,免费健康资源,经期护理手册,中医养生指南",
-    "openGraph": {
-      "title": "PDF资源下载中心 - 经期健康专业资源库 | PeriodHub",
-      "description": "免费下载专业的经期健康PDF资源，包括痛经管理指南、营养建议、运动计划等。提供中英文版本，随时随地获取可靠的健康信息。"
-    },
     "seo": {
       "title": "文章PDF下载中心 - Period Hub 经期健康专业资源",
       "description": "Period Hub文章PDF下载中心，38个精选经期健康资源，基于紧急程度智能分类，支持中英双语下载",
       "keywords": "经期健康,PDF下载,痛经缓解,文章资源,Period Hub"
     },
     "banner": {
-      "text": "🎉 全新PDF下载中心上线！更多专业资源，更好的阅读体验",
       "newVersion": "🎉 全新PDF下载中心 - 38个精选资源，移动端优化体验，基于紧急程度智能分类"
-    },
-    "structuredData": {
-      "name": "PeriodHub PDF下载中心",
-      "description": "专业的经期健康PDF资源下载服务"
-    },
-    "breadcrumb": {
-      "home": "首页",
-      "downloadCenter": "下载中心"
-    },
-    "content": {
-      "title": "📥 PDF下载中心",
-      "description": "精选的专业健康资源，支持离线阅读。所有PDF均由医学专家审核，确保科学准确性。",
-      "statistics": {
-        "expertArticles": "专家文章",
-        "pdfResources": "PDF资源",
-        "languages": "语言版本"
-      },
-      "banner": {
-        "title": "💡 需要帮助？",
-        "description": "告诉我们您的需求，我们将持续改进我们的资源库",
-        "feedbackButton": "提交反馈"
-      }
     },
     "navigation": {
       "backToArticles": "返回文章"
@@ -2984,14 +2943,14 @@
       },
       "longTermStudies": {
         "title": "长期研究",
-        "study1": "研究1",
-        "study1Value": "6个月随访：85%维持疼痛缓解",
-        "study2": "研究2",
-        "study2Value": "12个月研究：78%减少药物使用",
-        "study3": "研究3",
-        "study3Value": "2年随访：92%改善生活质量",
-        "study4": "研究4",
-        "study4Value": "5年研究：65%实现长期疼痛管理"
+        "study1": "12个月随访，症状改善持续",
+        "study2": "生活质量显著提升",
+        "study3": "药物使用量减少60%",
+        "study4": "复发率降低40%",
+        "study1Value": "12个月随访，症状改善持续",
+        "study2Value": "生活质量显著提升",
+        "study3Value": "药物使用量减少60%",
+        "study4Value": "复发率降低40%"
       }
     },
     "medicalDisclaimer": {
@@ -3014,67 +2973,49 @@
       "relatedTools": {
         "nutritionGenerator": {
           "title": "营养推荐生成器",
-          "description": "基于您的月经周期、健康目标和中医体质，获取个性化营养建议。请先完成周期追踪和体质测试。",
-          "benefits": "益处：",
-          "benefitsValue": "为疼痛缓解和激素平衡定制的膳食计划"
+          "description": "根据您的体质和症状，生成个性化的营养建议和食谱推荐"
         },
         "constitutionTest": {
-          "title": "体质测试",
-          "description": "传统中医体质识别，提供个性化护理建议",
-          "benefits": "益处：",
-          "benefitsValue": "基于您的体质特征提供个性化治疗建议"
+          "title": "中医体质测试",
+          "description": "通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议"
         },
         "painTracker": {
-          "title": "疼痛追踪器",
-          "description": "智能疼痛模式记录和症状分析",
-          "benefits": "益处：",
-          "benefitsValue": "追踪疼痛强度、触发因素和治疗效果"
+          "title": "痛经计算器",
+          "description": "智能分析疼痛等级，计算疼痛模式和周期趋势，识别触发因素和有效缓解方法"
         }
       },
       "relatedArticles": {
         "medicalGuide": {
           "category": "医学指南",
-          "readTime": "15分钟阅读",
+          "readTime": "15分钟",
           "title": "痛经医学指南",
-          "description": "全面的医学知识，深入理解痛经的成因、症状识别和治疗方法",
-          "benefits": "益处：",
-          "benefitsValue": "深入了解病因、症状和治疗方案的专业医学指导"
+          "description": "基于循证医学的痛经诊断和治疗指南"
         },
         "heatTherapy": {
-          "category": "热敷疗法",
-          "readTime": "10分钟阅读",
-          "title": "完整热敷疗法指南",
-          "description": "深入探索热疗的科学原理和实用技巧",
-          "benefits": "益处：",
-          "benefitsValue": "科学证据支撑的实用热敷应用技术"
+          "category": "热疗指南",
+          "readTime": "12分钟",
+          "title": "热疗完全指南",
+          "description": "科学验证的热敷疗法详细指南，包含温度、时长、频率等专业参数"
         },
         "herbalTea": {
           "category": "草药茶",
-          "readTime": "8分钟阅读",
-          "title": "草药茶缓解痛经",
-          "description": "传统草药的现代应用和科学配方",
-          "benefits": "益处：",
-          "benefitsValue": "传统智慧与现代科学结合的安全有效配方"
+          "readTime": "10分钟",
+          "title": "痛经缓解花草茶",
+          "description": "传统草药茶配方，科学验证的植物疗法应用指南"
         }
       },
       "scenarioSolutions": {
         "exercise": {
           "title": "运动与经期",
-          "description": "经期安全运动指南：适合经期的运动类型、强度调节和注意事项",
-          "benefits": "益处：",
-          "benefitsValue": "安全有效的运动方案，实际有助于减少经期疼痛"
+          "description": "经期运动安全防护专业指南，适合经期的运动类型和注意事项"
         },
         "office": {
           "title": "办公室缓解方案",
-          "description": "职场痛经管理：工作环境中的隐私和有效疼痛缓解方法",
-          "benefits": "益处：",
-          "benefitsValue": "适合职场环境的隐蔽且有效的疼痛缓解技巧"
+          "description": "职场环境下的经期疼痛管理策略"
         },
         "emergencyKit": {
           "title": "应急包准备",
-          "description": "便携式缓解工具：随时准备的应急疼痛缓解工具包",
-          "benefits": "益处：",
-          "benefitsValue": "为突发经期疼痛准备的完整应急工具包"
+          "description": "经期应急物品清单和快速缓解方法"
         }
       }
     }
@@ -3354,39 +3295,39 @@
       "description": "智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律。",
       "cta": "开始追踪"
     },
-    "keywords": "月经健康管理,症状评估,疼痛追踪,痛经管理,健康工具,个性化建议,数据分析",
-    "assessmentIllustrationAlt": "女性在舒适的家庭环境中使用平板电脑进行数字健康评估工具",
     "nutritionGenerator": {
       "title": "营养推荐生成器",
-      "description": "基于您的月经周期、健康目标和中医体质，获得个性化营养建议。请先完成周期追踪和体质测试。",
-      "cta": "开始营养分析"
+      "description": "根据您的体质和症状，生成个性化的营养建议和食谱推荐",
+      "cta": "生成营养方案"
     },
-    "otherTools": {
-      "title": "其他实用工具",
-      "description": "更多专业的月经健康管理工具，帮助您全面了解和管理经期健康"
-    },
-    "prerequisites": {
-      "label": "前提条件",
-      "completeFirst": "请先完成：",
-      "cycleTracker": "周期追踪器",
-      "constitutionTest": "体质测试"
-    },
+    "assessmentIllustrationAlt": "症状评估工具插图 - 女性使用手机进行健康评估",
     "workplaceWellness": {
-      "title": "职场健康专栏",
-      "description": "为职场女性量身定制的月经健康管理解决方案，帮助更好地在职场中管理经期健康",
+      "title": "职场健康管理",
+      "description": "专业的职场环境健康管理策略和压力缓解方案，帮助职场女性在经期保持最佳工作状态。",
       "tools": {
         "calendar": {
           "title": "职场健康日历",
-          "description": "专业的职场健康管理工具，追踪经期对工作的影响，提供个性化工作调整建议。",
-          "cta": "开始健康管理"
+          "description": "追踪经期对工作的影响，提供个性化的工作调整建议",
+          "cta": "开始管理"
         },
         "calculator": {
           "title": "工作影响计算器",
-          "description": "专业的痛经影响评估工具，分析症状对工作和日常生活的影响，提供个性化管理建议和职场适应策略。",
-          "cta": "开始评估"
+          "description": "分析症状对工作和日常生活的影响，提供个性化管理建议",
+          "cta": "开始计算"
         }
       }
-    }
+    },
+    "otherTools": {
+      "title": "其他实用工具",
+      "description": "更多专业工具帮助您全面管理经期健康"
+    },
+    "prerequisites": {
+      "label": "需先完成",
+      "completeFirst": "请先完成以下工具：",
+      "cycleTracker": "周期追踪器",
+      "constitutionTest": "体质测试"
+    },
+    "keywords": "经期健康管理,症状评估,疼痛追踪,数据分析,个性化建议,痛经缓解,健康工具,经期管理,疼痛分析,健康评估"
   },
   "periodPainAssessmentPage": {
     "tool": {
@@ -3432,10 +3373,20 @@
       "twitterDescription": "追踪症状、管理疼痛、优化月经健康的专业工具"
     },
     "breadcrumb": {
-      "home": "首页",
-      "interactiveTools": "互动工具",
       "scenarioSolutions": "场景解决方案",
-      "teenHealth": "青少年健康"
+      "teenHealth": "青少年健康",
+      "immediateRelief": "即时缓解",
+      "campusGuide": "校园指南",
+      "interactiveTools": "互动工具",
+      "workplaceWellness": "职场健康",
+      "home": "首页",
+      "healthGuide": "健康指南",
+      "lifestyle": "生活方式管理",
+      "understandingPain": "了解疼痛",
+      "mythsFacts": "误区与事实",
+      "office": "办公场景",
+      "developmentPain": "发育疼痛",
+      "emergencyKit": "应急包"
     },
     "common": {
       "loading": "加载中...",
@@ -4017,24 +3968,8 @@
   "scenarioSolutionsPage": {
     "title": "场景化痛经解决方案 - 职场、运动、社交全方位应对指南",
     "description": "专业的场景化痛经应对方案，涵盖职场、运动、社交等生活场景。提供针对性缓解策略和实用技巧，确保生活品质。",
-    "keywords": "场景化痛经解决方案,职场痛经管理,运动痛经缓解,社交痛经应对,痛经应急包,痛经缓解技巧",
     "introTitle": "生活场景全覆盖",
     "introText": "每个女性的生活都是多元化的，从职场到家庭，从运动到社交，不同的场景需要不同的应对策略。我们为您精心准备了全方位的场景化解决方案，让您无论身处何地，都能优雅从容地应对痛经困扰。",
-    "teenHealth": {
-      "title": "🌸 青少年经期健康专区 🌸",
-      "subtitle": "专为12-18岁的你打造的私密空间",
-      "description": "青春期有太多烦恼，而每个月的\"那几天\"更是让人担心。疼痛、情绪波动、身体变化……别担心，你不是一个人在战斗。我们为你准备了校园应急指南、发育期疼痛管理、情感支持和沟通技巧，帮助你自信地度过每一个经期。",
-      "enterZone": "进入专区",
-      "campusGuide": "校园应急指南",
-      "helpTitle": "我们能为你做什么？",
-      "services": {
-        "campusGuide": "校园应急指南",
-        "painManagement": "发育期疼痛管理",
-        "emotionalSupport": "情感与心理支持",
-        "communication": "与父母和老师沟通",
-        "peerSharing": "同龄人经验分享"
-      }
-    },
     "scenarios": {
       "office": {
         "title": "办公/职场场景",
@@ -4315,37 +4250,53 @@
         "backToOverview": "返回场景解决方案总览"
       },
       "life_stages": {
-        "title": "人生阶段",
-        "description": "不同人生阶段的痛经管理策略",
-        "features": ["青少年护理", "成人管理", "更年期过渡"]
+        "title": "特殊生理阶段",
+        "description": "女性不同生理阶段经期管理专业指导：青春期经期教育、育龄期健康管理、围绝经期调理方案。提供针对各年龄段特点的个性化经期健康管理策略，帮助女性科学应对不同生命阶段的生理变化。基于循证医学的专业指导，确保各阶段健康。",
+        "features": ["青春期经期教育", "育龄期健康管理", "围绝经期调理"]
+      }
+    },
+    "teenHealth": {
+      "title": "青少年健康专区",
+      "subtitle": "专为12-18岁青少年打造",
+      "description": "青春期有太多烦恼，而每个月的\"那几天\"更是让人担心。疼痛、情绪波动、身体变化……别担心，你不是一个人在战斗。在这里，你会找到科学、贴心、好懂的经期知识和应对方法。",
+      "enterZone": "进入青少年专区",
+      "campusGuide": "校园应急指南",
+      "helpTitle": "我们能为你提供什么帮助？",
+      "services": {
+        "campusGuide": "校园应急处理",
+        "painManagement": "疼痛管理指导",
+        "emotionalSupport": "情感支持服务",
+        "communication": "沟通技巧指导",
+        "peerSharing": "同伴分享交流"
       }
     },
     "emergencyKit": {
       "specialRecommendation": "特别推荐",
-      "title": "多场景应急包清单",
-      "description": "从办公室到通勤，从运动场到社交聚会，详细的应急包准备清单帮助您在任何场景下都能自信应对经期不适。",
+      "title": "经期应急包",
+      "description": "专业的经期应急包配置指南，包含各种生活场景下的必备物品和应急处理方案。",
       "scenarios": {
         "office": {
-          "title": "办公场景",
-          "description": "隐蔽暖贴、止痛药、姜茶..."
+          "title": "办公场景应急包",
+          "description": "适合办公室环境的应急物品配置"
         },
         "commute": {
-          "title": "通勤场景",
-          "description": "便携暖宝、耳机、温水..."
+          "title": "通勤场景应急包",
+          "description": "适合通勤途中的应急物品配置"
         },
         "social": {
-          "title": "社交场景",
-          "description": "迷你暖贴、舒适衣物、围巾..."
+          "title": "社交场景应急包",
+          "description": "适合社交场合的应急物品配置"
         }
       },
-      "viewCompleteList": "查看完整应急包清单"
+      "viewCompleteList": "查看完整清单"
     },
     "cta": {
-      "title": "开始您的个性化疼痛管理之旅",
-      "description": "结合我们的症状评估工具和疼痛追踪系统，为您创建最适合的场景化解决方案。",
+      "title": "开始您的个性化经期管理",
+      "description": "通过专业评估和追踪，获得最适合您的经期管理方案",
       "startAssessment": "开始症状评估",
       "startTracking": "开始疼痛追踪"
-    }
+    },
+    "keywords": "场景化痛经解决方案,职场经期管理,通勤疼痛应对,运动经期安全,睡眠质量改善,社交场合应对,青少年经期健康,特殊生理阶段管理,经期应急包,痛经缓解策略"
   },
   "header": {
     "logo": "PeriodHub",
@@ -4387,8 +4338,7 @@
   },
   "navigationTabs": {
     "articles": "📚 专业文章",
-    "pdfDownloads": "📥 PDF下载",
-    "professionalArticles": "📚 专业文章"
+    "pdfDownloads": "📥 PDF下载"
   },
   "userSuccessStories": {
     "title": "用户成功案例",
@@ -4653,6 +4603,260 @@
         "moderate_late": "中度痛经在初潮较晚后开始，建议咨询医生排除继发性痛经的可能性。",
         "normal": "基于您提供的信息，您的痛经情况属于常见范围，可能是原发性痛经。建议尝试自然缓解方法，如热敷、轻度运动和健康饮食习惯等。如症状加重或出现异常，请及时咨询医生。"
       }
+    }
+  },
+  "understandingPain": {
+    "painPatterns": {
+      "title": "疼痛模式识别",
+      "subtitle": "每个女性的疼痛模式都是独特的，但通常遵循某些规律。通过详细观察和记录，您可以识别自己的疼痛模式，制定更有效的预防和管理策略。",
+      "description": "了解不同类型的痛经模式，帮助您更好地识别和管理疼痛",
+      "types": {
+        "title": "常见疼痛模式类型",
+        "menstrualFocused": {
+          "title": "经期集中型 (70%)",
+          "characteristics": [
+            "疼痛集中在月经前1-2天和月经期1-2天",
+            "第3天后疼痛明显减轻或消失",
+            "疼痛强度在第1天达到峰值",
+            "常见于原发性痛经"
+          ]
+        },
+        "wholePeriodPersistent": {
+          "title": "全经期持续型 (20%)",
+          "characteristics": [
+            "疼痛从月经前1周开始",
+            "持续整个月经期",
+            "疼痛强度相对稳定",
+            "可能提示继发性痛经"
+          ]
+        },
+        "premenstrualProminent": {
+          "title": "经前突出型 (8%)",
+          "characteristics": [
+            "月经前1-3天疼痛最严重",
+            "月经开始后疼痛减轻",
+            "常伴有经前综合征",
+            "与激素波动密切相关"
+          ]
+        },
+        "irregularFluctuation": {
+          "title": "不规则波动型 (2%)",
+          "characteristics": [
+            "疼痛时间无明显规律",
+            "强度变化很大",
+            "可能与压力、生活方式等因素相关",
+            "需要进一步医学评估"
+          ]
+        }
+      },
+      "cta": {
+        "title": "开始您的疼痛管理之旅",
+        "description": "通过专业的疼痛评估工具，了解您的个人疼痛模式，获得个性化的管理建议。",
+        "buttonText": "开始疼痛评估",
+        "buttonLink": "/zh/interactive-tools/pain-tracker"
+      },
+      "recordingImportance": {
+        "title": "疼痛记录的重要性",
+        "description": "保持详细的疼痛日记是了解个人模式最有效的方法。通过连续3-6个月的记录，您将能够清楚地看到自己的疼痛模式。",
+        "recordingElements": {
+          "title": "记录要素",
+          "items": [
+            "疼痛强度（0-10分制）",
+            "疼痛性质（痉挛、钝痛等）",
+            "持续时间",
+            "伴随症状",
+            "触发或缓解因素",
+            "治疗方法及效果"
+          ]
+        },
+        "analysisDimensions": {
+          "title": "分析维度",
+          "items": [
+            "月经周期中哪一天疼痛最严重",
+            "疼痛持续时间趋势",
+            "治疗效果对比",
+            "生活方式因素影响",
+            "季节性变化",
+            "与压力事件的相关性"
+          ]
+        }
+      },
+      "influencingFactors": {
+        "title": "影响因素",
+        "description": "了解影响痛经严重程度的各种因素",
+        "physiologicalFactors": {
+          "title": "生理因素",
+          "ageAndDevelopment": {
+            "title": "年龄和发育阶段",
+            "items": [
+              "青春期（13-19岁）：周期往往不规律，疼痛可能更严重",
+              "成年期（20-35岁）：周期一般稳定，疼痛模式固定",
+              "产后：约60%的女性疼痛减轻",
+              "围绝经期：周期变化显著，疼痛模式可能改变"
+            ]
+          },
+          "bodyCharacteristics": {
+            "title": "身体特征",
+            "items": [
+              "BMI影响激素水平",
+              "体脂率与雌激素代谢相关",
+              "个体敏感性差异很大",
+              "遗传因素占重要比例"
+            ]
+          },
+          "healthStatus": {
+            "title": "健康状况",
+            "items": [
+              "甲状腺功能影响月经规律性",
+              "多囊卵巢综合征导致周期异常",
+              "糖尿病影响血液循环和疼痛感知",
+              "自身免疫疾病可能加重症状"
+            ]
+          },
+          "medicationUse": {
+            "title": "药物使用",
+            "items": [
+              "长期使用避孕药可能影响疼痛模式",
+              "某些药物可能加重或减轻疼痛",
+              "药物相互作用影响治疗效果",
+              "停药后疼痛模式可能改变"
+            ]
+          }
+        },
+        "lifestyleFactors": {
+          "title": "生活方式因素",
+          "dietaryHabits": {
+            "title": "饮食习惯",
+            "items": [
+              "高糖饮食增加炎症反应",
+              "咖啡因摄入影响血管收缩",
+              "缺乏镁和钙加重肌肉痉挛",
+              "过度节食影响激素平衡"
+            ]
+          },
+          "exercisePatterns": {
+            "title": "运动模式",
+            "items": [
+              "久坐不动加重盆腔充血",
+              "适度有氧运动改善血液循环",
+              "瑜伽和拉伸缓解肌肉紧张",
+              "过度运动可能加重症状"
+            ]
+          },
+          "stressManagement": {
+            "title": "压力管理",
+            "items": [
+              "慢性压力影响激素水平",
+              "工作压力加重疼痛感知",
+              "睡眠不足影响恢复能力",
+              "情绪波动影响疼痛阈值"
+            ]
+          },
+          "sleepAndStress": {
+            "title": "睡眠与压力",
+            "items": [
+              "睡眠质量直接影响疼痛感知",
+              "压力激素增加炎症反应",
+              "规律作息有助于激素平衡",
+              "放松技巧可缓解疼痛"
+            ]
+          }
+        },
+        "environmentalFactors": {
+          "title": "环境因素",
+          "environmentalImpact": {
+            "title": "环境影响",
+            "items": [
+              "气候变化影响身体适应性",
+              "空气质量影响呼吸系统",
+              "噪音污染增加压力水平",
+              "室内环境质量影响舒适度"
+            ]
+          },
+          "socialPsychological": {
+            "title": "社会心理",
+            "items": [
+              "社会支持影响疼痛应对",
+              "工作环境压力加重症状",
+              "人际关系影响情绪状态",
+              "文化背景影响疼痛表达"
+            ]
+          }
+        }
+      },
+      "optimizationStrategies": {
+        "title": "优化策略",
+        "description": "基于疼痛模式的个性化管理策略",
+        "preventiveIntervention": {
+          "title": "预防性干预",
+          "earlyLutealPhase": {
+            "title": "黄体早期（月经前7-10天）",
+            "items": [
+              "开始抗炎饮食",
+              "增加镁补充剂",
+              "开始温和运动",
+              "练习压力管理技巧"
+            ]
+          },
+          "premenstrualDays": {
+            "title": "经前期（月经前3-7天）",
+            "items": [
+              "预防性使用热敷",
+              "在疼痛开始前服用NSAIDs",
+              "避免触发食物和咖啡因",
+              "保持规律睡眠时间"
+            ]
+          },
+          "peakPainDays": {
+            "title": "疼痛高峰期（月经第1-2天）",
+            "items": [
+              "应用热疗（40-45°C）",
+              "按处方服用NSAIDs",
+              "练习深呼吸练习",
+              "使用穴位按摩"
+            ]
+          }
+        },
+        "treatmentOptimization": {
+          "title": "治疗优化",
+          "medicationTiming": {
+            "title": "药物时机",
+            "items": [
+              "在疼痛开始前30-60分钟服用NSAIDs",
+              "避免空腹服药以减少胃部刺激",
+              "根据疼痛模式调整用药时间",
+              "记录药物效果以优化剂量"
+            ]
+          },
+          "recoveryOptimization": {
+            "title": "恢复优化",
+            "items": [
+              "疼痛缓解后逐步恢复活动",
+              "避免过度劳累导致复发",
+              "保持良好的睡眠质量",
+              "补充足够的营养和水分"
+            ]
+          }
+        },
+        "keyTakeaways": {
+          "title": "关键要点",
+          "items": [
+            "疼痛模式识别是有效管理的基础",
+            "预防性干预比被动治疗更有效",
+            "个性化策略需要持续调整",
+            "生活方式因素影响疼痛严重程度",
+            "及时就医是排除严重疾病的关键"
+          ]
+        },
+        "medicalDisclaimer": {
+          "title": "医疗免责声明",
+          "content": "本内容仅供教育目的，不能替代专业医疗建议。如有严重或持续性疼痛，请及时咨询医生。"
+        }
+      }
+    },
+    "tcmAnalysis": {
+      "title": "中医证型分析",
+      "description": "根据症状特点，中医将痛经细分为几种主要证型，每种证型都有其独特的病理机制和治疗方法："
     }
   },
   "healthGuidePage": {
@@ -4962,6 +5166,65 @@
       "startAssessment": "开始评估",
       "medicalDisclaimer": "医疗免责声明：",
       "medicalDisclaimerText": "本指南仅供参考，不能替代专业医疗建议。如有严重症状，请及时就医。"
+    },
+    "recommendations": {
+      "relatedTools": {
+        "symptomAssessment": {
+          "title": "症状评估工具",
+          "description": "科学评估经期症状，获取个性化建议"
+        },
+        "painTracker": {
+          "title": "痛经计算器",
+          "description": "智能分析疼痛等级，计算疼痛模式"
+        },
+        "painImpactCalculator": {
+          "title": "影响计算器",
+          "description": "分析症状对工作和日常生活的影响"
+        }
+      },
+      "relatedArticles": {
+        "medicalGuide": {
+          "title": "痛经医学指南",
+          "description": "基于循证医学的痛经诊断和治疗指南",
+          "readTime": "15分钟",
+          "category": "医学指南"
+        },
+        "medicalCare": {
+          "title": "医疗护理指南",
+          "description": "何时就医和医疗护理的专业建议",
+          "readTime": "12分钟",
+          "category": "医疗护理"
+        },
+        "faq": {
+          "title": "常见问题解答",
+          "description": "关于痛经的常见疑问和科学解答",
+          "readTime": "10分钟",
+          "category": "常见问题"
+        }
+      },
+      "healthTopics": {
+        "naturalTherapies": {
+          "title": "自然疗法",
+          "description": "安全有效的自然缓解方法"
+        },
+        "scenarioSolutions": {
+          "title": "场景解决方案",
+          "description": "不同生活场景的应对策略"
+        },
+        "teenHealth": {
+          "title": "青少年健康",
+          "description": "专为青少年设计的健康指导"
+        }
+      }
+    },
+    "contentSections": {
+      "professionalAssessmentTools": "专业评估工具",
+      "depthHealthArticles": "深度健康文章",
+      "healthManagementTopics": "健康管理主题"
+    },
+    "breadcrumb": {
+      "home": "首页",
+      "current": "健康指南"
     }
   },
   "bottomRecommendations": {
@@ -4977,203 +5240,12 @@
       "actionText": "个性化症状分析"
     }
   },
-  "privacyPolicy": {
-    "title": "隐私政策",
-    "description": "了解Period Hub如何收集、使用和保护您的个人信息和健康数据。",
-    "openGraph": {
-      "description": "全面的隐私政策，说明我们如何以透明和安全的方式处理您的数据。"
-    },
-    "dataTable": {
-      "type": "类型",
-      "purpose": "用途",
-      "duration": "持续时间",
-      "required": "必需"
-    },
-    "lastUpdated": "最后更新：2025年1月",
-    "intro": "在Period Hub，我们致力于保护您的隐私并确保您个人信息的安全。本隐私政策说明了我们如何收集、使用和保护您的数据。",
-    "importantNotice": "重要通知",
-    "importantNoticeText": "Period Hub目前处于MVP（最小可行产品）阶段。我们收集最少的数据，不与第三方分享您的信息。所有健康数据都存储在您的设备本地。",
-    "tableOfContents": "目录",
-    "mvpNotice": {
-      "title": "MVP阶段通知",
-      "text": "作为MVP产品，我们通过最小化数据收集并将所有敏感健康信息保存在您的设备上来优先保护您的隐私。"
-    },
-    "sections": {
-      "informationCollection": {
-        "title": "我们收集的信息",
-        "subtitle": "了解我们收集的数据",
-        "importantNote": {
-          "title": "本地存储优先",
-          "text": "您的大部分健康数据（疼痛追踪、周期信息）都存储在您的设备本地，永远不会发送到我们的服务器。"
-        },
-        "userProvided": {
-          "title": "您提供的信息",
-          "description": "您在使用我们的服务时自愿分享的数据",
-          "items": [
-            "账户注册信息",
-            "个人资料详情和偏好设置",
-            "反馈和支持请求",
-            "调查回复",
-            "通信偏好"
-          ]
-        },
-        "symptomData": {
-          "title": "症状和健康数据",
-          "description": "疼痛程度、周期追踪和症状信息（本地存储）",
-          "items": [
-            "疼痛强度等级",
-            "月经周期日期",
-            "症状模式",
-            "药物使用情况",
-            "生活方式因素"
-          ]
-        },
-        "technicalInfo": {
-          "title": "技术信息",
-          "description": "浏览器类型、设备信息和使用分析",
-          "items": [
-            "浏览器类型和版本",
-            "设备信息",
-            "IP地址（匿名化）",
-            "使用分析",
-            "错误日志"
-          ]
-        }
-      },
-      "informationUse": {
-        "title": "我们如何使用您的信息",
-        "mainPurposes": {
-          "title": "主要用途",
-          "items": [
-            "提供和改进我们的服务",
-            "个性化您的体验",
-            "分析使用模式以增强功能",
-            "传达重要更新",
-            "确保平台安全"
-          ]
-        },
-        "neverUsedFor": {
-          "title": "我们绝不将您的数据用于",
-          "items": [
-            "出售给第三方",
-            "定向广告",
-            "与保险公司分享",
-            "未经您同意的任何用途"
-          ]
-        }
-      },
-      "informationSharing": {
-        "title": "信息分享",
-        "content": "我们不出售、交易或出租您的个人信息给第三方。您的健康数据保持私密，只有您可以访问。",
-        "exceptions": [
-          "法律要求",
-          "紧急情况",
-          "在您明确同意的情况下",
-          "服务提供商（在严格协议下）",
-          "业务转让（有通知）"
-        ]
-      },
-      "dataSecurity": {
-        "title": "数据安全",
-        "disclaimer": "虽然我们实施了行业标准的安全措施，但没有一种通过互联网传输的方法是100%安全的。",
-        "encryption": {
-          "title": "加密",
-          "description": "所有数据传输都使用HTTPS加密"
-        },
-        "accessControl": {
-          "title": "访问控制",
-          "description": "严格的访问控制限制了谁可以查看您的数据"
-        },
-        "regularAudit": {
-          "title": "定期安全审计",
-          "description": "我们定期审查和更新我们的安全实践"
-        }
-      },
-      "cookieUsage": {
-        "title": "Cookie使用",
-        "cookieTypes": {
-          "title": "我们使用的Cookie类型",
-          "necessary": {
-            "type": "必要Cookie",
-            "description": "基本网站功能所需",
-            "purpose": "基本网站功能",
-            "duration": "仅会话期间",
-            "required": "是"
-          },
-          "functional": {
-            "type": "功能Cookie",
-            "purpose": "增强用户体验",
-            "duration": "30天",
-            "required": "否"
-          },
-          "analytical": {
-            "type": "分析Cookie",
-            "purpose": "使用分析",
-            "duration": "90天",
-            "required": "否"
-          }
-        },
-        "management": {
-          "title": "管理Cookie",
-          "text": "您可以通过浏览器设置控制Cookie。请注意，禁用Cookie可能会影响网站功能。"
-        },
-        "dataTable": {
-          "type": "类型",
-          "purpose": "用途",
-          "duration": "持续时间",
-          "required": "必需"
-        }
-      },
-      "userRights": {
-        "title": "您的权利",
-        "subtitle": "您对数据有控制权",
-        "rights": [
-          "访问您的个人数据",
-          "更正不准确的信息",
-          "删除您的数据",
-          "导出您的数据",
-          "选择退出通信"
-        ]
-      },
-      "contactUs": {
-        "title": "联系我们",
-        "description": "如果您对本隐私政策或您的数据有疑问：",
-        "dpo": {
-          "title": "数据保护官",
-          "email": "privacy@periodhub.health",
-          "responsibility": "处理所有隐私相关询问",
-          "languages": "提供英语和中文服务"
-        },
-        "dataProtection": {
-          "title": "数据保护询问",
-          "email": "privacy@periodhub.health",
-          "subject": "主题：隐私政策问题",
-          "responseTime": "我们力争在48小时内回复"
-        }
-      }
-    },
-    "policyUpdates": {
-      "title": "政策更新",
-      "content": "我们可能会不时更新此隐私政策。我们将通过电子邮件或网站上的显著通知告知您任何重大变更。",
-      "recommendation": "我们建议定期查看此政策，以了解我们如何保护您的信息。",
-      "procedures": [
-        "向注册用户发送电子邮件通知",
-        "网站横幅公告",
-        "更新生效日期",
-        "以前版本的存档",
-        "关键变更摘要"
-      ]
-    },
-    "questions": "有问题吗？",
-    "questionsDescription": "如果您对此隐私政策有任何疑问，请通过privacy@periodhub.health联系我们",
-    "contactUs": "联系我们"
-  },
   "teenHealth": {
     "meta": {
       "title": "青少年经期健康指南 - 科学教育与成长支持",
       "description": "专为青少年设计的经期健康教育资源，涵盖青春期发育、经期管理、心理健康、校园生活等主题。提供科学、实用的经期管理知识，帮助青少年建立正确的健康观念，顺利度过青春期。包含校园指南、沟通技巧、情感支持等专业内容。"
     },
-    "keywords": "青少年经期健康,青春期月经,青少年痛经,校园经期管理,青少年健康教育",
+    "keywords": "青少年经期健康,青春期痛经,校园应急指南,发育期疼痛管理,青少年心理健康,经期教育,校园生活指导,青春期健康管理,青少年痛经缓解,校园经期管理",
     "hero": {
       "title": "🌸 青少年经期健康专区 🌸",
       "subtitle": "专为12-18岁的你打造的私密空间",
@@ -6422,8 +6494,10 @@
     "impactButton": "职场影响分析",
     "cta": "开始评估"
   },
+  "0": "益处",
   "0-2": "0-2",
   "3-4": "3-4",
+  "4": "4",
   "5-7": "5-7",
   "8-10": "8-10",
   "benefitsLabel": "益处标签",
@@ -6469,33 +6543,7 @@
   "lifestyleRecommendations": "生活方式建议",
   "sleep": "睡眠",
   "stress": "压力",
-  "stressManagement": {
-    "acute": {
-      "title": "急性压力",
-      "subtitle": "短期、突发性压力",
-      "duration": "几分钟到几小时",
-      "examples": "工作截止日期、考试、突发事件",
-      "impact": "暂时性影响，通常可恢复",
-      "management": "深呼吸、短暂休息、问题解决"
-    },
-    "chronic": {
-      "title": "慢性压力",
-      "subtitle": "长期、持续性压力",
-      "duration": "几周到几个月",
-      "examples": "长期工作压力、人际关系问题、经济困难",
-      "impact": "持续性影响，可能长期损害健康",
-      "management": "生活方式改变、专业帮助、长期策略"
-    },
-    "assessment": {
-      "keywords": "压力评估,压力测试,经期压力,压力管理,心理健康"
-    },
-    "progress": {
-      "keywords": "进度追踪,压力管理,健康记录,数据追踪,个人健康"
-    },
-    "techniques": {
-      "keywords": "放松技巧,呼吸练习,冥想,压力缓解,放松方法"
-    }
-  },
+  "stressManagement": "压力管理",
   "medical": "医疗",
   "medicalAdvice": "医疗建议",
   "doctor": "医生",
@@ -6964,6 +7012,60 @@
       "info": "信息"
     }
   },
+  "anchorTexts": {
+    "navigation": {
+      "main": "主导航"
+    },
+    "cta": {
+      "startNow": "立即开始"
+    },
+    "tools": {
+      "nutrition_generator": "营养生成器",
+      "pain_tracker": "疼痛追踪器",
+      "symptom_assessment": "症状评估",
+      "constitution_test": "体质测试",
+      "cycle_tracker": "周期追踪器",
+      "constitution": "体质测试",
+      "tracker": "追踪器",
+      "nutrition": "营养",
+      "assessment": "评估",
+      "calculator": "影响计算器",
+      "workplace": "职场健康管理"
+    },
+    "teen": {
+      "main": "了解更多"
+    },
+    "articles": {
+      "medical_guide": "痛经医学指南",
+      "heat_therapy": "热疗完全指南",
+      "herbal_tea": "痛经缓解花草茶",
+      "related": "了解更多",
+      "nutrition_guide": "营养指南",
+      "workplace_health": "职场健康",
+      "pain_management": "疼痛管理",
+      "quick_relief": "快速缓解",
+      "medical": "医学指南",
+      "faq": "常见问题",
+      "workplace": "压力管理",
+      "nutrition": "营养调理",
+      "medication": "药物治疗"
+    },
+    "solutions": {
+      "exercise_balance_new": "运动与经期",
+      "office": "办公室缓解方案",
+      "emergency": "应急包准备",
+      "sleep": "睡眠",
+      "exercise": "运动",
+      "workplace_wellness": "职场健康",
+      "relief": "缓解方法",
+      "natural_therapies": "自然疗法",
+      "scenarios": "场景解决方案",
+      "teen_main": "青少年健康",
+      "commute": "通勤场景",
+      "campus_emergency": "校园应急",
+      "social": "社交场景"
+    }
+  },
   "termsOfService": {
     "title": "服务条款",
     "description": "了解使用periodhub.health的条款和条件，包括用户责任和服务限制。",
@@ -7268,36 +7370,6 @@
         "contactTitle": "联系信息",
         "contact": "有关这些条款的问题，请通过legal@periodhub.health联系我们"
       }
-    }
-  },
-  "anchorTexts": {
-    "navigation": {
-      "main": "主导航"
-    },
-    "cta": {
-      "startNow": "立即开始"
-    },
-    "tools": {
-      "nutrition_generator": "营养推荐生成器",
-      "pain_tracker": "疼痛追踪器",
-      "symptom_assessment": "症状评估",
-      "constitution_test": "体质测试",
-      "cycle_tracker": "周期追踪器",
-      "constitution": "体质测试"
-    },
-    "teen": {
-      "main": "了解更多"
-    },
-    "articles": {
-      "medical_guide": "痛经医学指南",
-      "heat_therapy": "完整热敷疗法指南",
-      "herbal_tea": "草药茶缓解痛经",
-      "related": "了解更多"
-    },
-    "solutions": {
-      "exercise_balance_new": "运动与经期",
-      "office": "办公室缓解方案",
-      "emergency": "应急包准备"
     }
   }
 }

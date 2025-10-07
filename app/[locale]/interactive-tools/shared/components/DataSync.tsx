@@ -133,8 +133,7 @@ export default function DataSync({
     if (!syncStatus.isOnline) {
       setSyncStatus((prev) => ({
         ...prev,
-        syncError:
-          locale === "zh" ? "网络连接不可用" : "Network connection unavailable",
+        syncError: t("errors.networkUnavailable"),
       }));
       return;
     }
@@ -166,11 +165,7 @@ export default function DataSync({
           onSyncComplete({ timestamp: new Date(), changes: 0 });
         }
       } else {
-        throw new Error(
-          locale === "zh"
-            ? "同步失败，请重试"
-            : "Sync failed, please try again",
-        );
+        throw new Error(t("errors.syncFailed"));
       }
     } catch (error) {
       const errorMessage =
@@ -185,7 +180,7 @@ export default function DataSync({
         onSyncError(errorMessage);
       }
     }
-  }, [syncStatus.isOnline, locale, onSyncComplete, onSyncError]);
+  }, [syncStatus.isOnline, t, onSyncComplete, onSyncError]);
 
   // 手动同步
   const handleManualSync = () => {
@@ -257,13 +252,9 @@ export default function DataSync({
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
             <Cloud className="w-6 h-6 mr-2 text-blue-600" />
-            {locale === "zh" ? "数据同步" : "Data Sync"}
+            {t("title")}
           </h2>
-          <p className="text-gray-600">
-            {locale === "zh"
-              ? "跨设备同步您的健康数据，确保数据安全"
-              : "Sync your health data across devices securely"}
-          </p>
+          <p className="text-gray-600">{t("description")}</p>
         </div>
 
         <div className="flex items-center space-x-2 mt-4 sm:mt-0">
@@ -271,14 +262,14 @@ export default function DataSync({
             <div className="flex items-center text-green-600">
               <Wifi className="w-4 h-4 mr-1" />
               <span className="text-sm font-medium">
-                {locale === "zh" ? "在线" : "Online"}
+                {t("networkStatus.online")}
               </span>
             </div>
           ) : (
             <div className="flex items-center text-red-600">
               <WifiOff className="w-4 h-4 mr-1" />
               <span className="text-sm font-medium">
-                {locale === "zh" ? "离线" : "Offline"}
+                {t("networkStatus.offline")}
               </span>
             </div>
           )}
@@ -307,25 +298,17 @@ export default function DataSync({
               )}`}
             >
               {syncStatus.isOnline
-                ? locale === "zh"
-                  ? "已连接"
-                  : "Connected"
-                : locale === "zh"
-                  ? "离线"
-                  : "Offline"}
+                ? t("networkStatus.connected")
+                : t("networkStatus.offline")}
             </span>
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            {locale === "zh" ? "网络状态" : "Network Status"}
+            {t("networkStatus.title")}
           </h3>
           <p className="text-sm text-gray-600">
             {syncStatus.isOnline
-              ? locale === "zh"
-                ? "云端连接正常"
-                : "Cloud connection active"
-              : locale === "zh"
-                ? "无法连接到云端"
-                : "Cannot connect to cloud"}
+              ? t("networkStatus.cloudActive")
+              : t("networkStatus.cloudUnavailable")}
           </p>
         </div>
 
@@ -337,25 +320,19 @@ export default function DataSync({
             </div>
             <span className="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
               {syncStatus.lastSync
-                ? locale === "zh"
-                  ? "已同步"
-                  : "Synced"
-                : locale === "zh"
-                  ? "未同步"
-                  : "Not Synced"}
+                ? t("lastSync.synced")
+                : t("lastSync.notSynced")}
             </span>
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            {locale === "zh" ? "最后同步" : "Last Sync"}
+            {t("lastSync.title")}
           </h3>
           <p className="text-sm text-gray-600">
             {syncStatus.lastSync
               ? syncStatus.lastSync.toLocaleString(
                   locale === "zh" ? "zh-CN" : "en-US",
                 )
-              : locale === "zh"
-                ? "从未同步"
-                : "Never synced"}
+              : t("lastSync.neverSynced")}
           </p>
         </div>
 
@@ -366,21 +343,16 @@ export default function DataSync({
               <Database className="w-6 h-6 text-yellow-600" />
             </div>
             <span className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">
-              {syncStatus.pendingChanges}{" "}
-              {locale === "zh" ? "待同步" : "Pending"}
+              {syncStatus.pendingChanges} {t("pendingChanges.pending")}
             </span>
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            {locale === "zh" ? "待同步更改" : "Pending Changes"}
+            {t("pendingChanges.title")}
           </h3>
           <p className="text-sm text-gray-600">
             {syncStatus.pendingChanges === 0
-              ? locale === "zh"
-                ? "所有数据已同步"
-                : "All data synced"
-              : `${syncStatus.pendingChanges} ${
-                  locale === "zh" ? "项更改待同步" : "changes pending"
-                }`}
+              ? t("pendingChanges.allSynced")
+              : `${syncStatus.pendingChanges} ${t("pendingChanges.changesPending")}`}
           </p>
         </div>
 
@@ -391,21 +363,16 @@ export default function DataSync({
               <AlertCircle className="w-6 h-6 text-red-600" />
             </div>
             <span className="px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
-              {syncStatus.conflictCount}{" "}
-              {locale === "zh" ? "冲突" : "Conflicts"}
+              {syncStatus.conflictCount} {t("conflicts.conflicts")}
             </span>
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">
-            {locale === "zh" ? "数据冲突" : "Data Conflicts"}
+            {t("conflicts.title")}
           </h3>
           <p className="text-sm text-gray-600">
             {syncStatus.conflictCount === 0
-              ? locale === "zh"
-                ? "无冲突"
-                : "No conflicts"
-              : `${syncStatus.conflictCount} ${
-                  locale === "zh" ? "个冲突需解决" : "conflicts to resolve"
-                }`}
+              ? t("conflicts.noConflicts")
+              : `${syncStatus.conflictCount} ${t("conflicts.conflictsToResolve")}`}
           </p>
         </div>
       </div>
@@ -414,14 +381,14 @@ export default function DataSync({
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200 mb-8">
         <h3 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
           <Sync className="w-5 h-5 mr-2" />
-          {locale === "zh" ? "同步控制" : "Sync Control"}
+          {t("control.title")}
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <label className="text-sm font-medium text-gray-700">
-                {locale === "zh" ? "自动同步" : "Auto Sync"}
+                {t("control.autoSync")}
               </label>
               <button
                 onClick={() => setAutoSync(!autoSync)}
@@ -440,25 +407,17 @@ export default function DataSync({
             {autoSync && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "同步间隔" : "Sync Interval"}
+                  {t("control.syncInterval")}
                 </label>
                 <select
                   value={syncInterval}
                   onChange={(e) => setSyncInterval(Number(e.target.value))}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value={1}>
-                    {locale === "zh" ? "1分钟" : "1 minute"}
-                  </option>
-                  <option value={5}>
-                    {locale === "zh" ? "5分钟" : "5 minutes"}
-                  </option>
-                  <option value={15}>
-                    {locale === "zh" ? "15分钟" : "15 minutes"}
-                  </option>
-                  <option value={30}>
-                    {locale === "zh" ? "30分钟" : "30 minutes"}
-                  </option>
+                  <option value={1}>{t("control.intervals.1min")}</option>
+                  <option value={5}>{t("control.intervals.5min")}</option>
+                  <option value={15}>{t("control.intervals.15min")}</option>
+                  <option value={30}>{t("control.intervals.30min")}</option>
                 </select>
               </div>
             )}
@@ -473,12 +432,12 @@ export default function DataSync({
               {syncStatus.syncInProgress ? (
                 <>
                   <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
-                  {locale === "zh" ? "同步中..." : "Syncing..."}
+                  {t("control.syncing")}
                 </>
               ) : (
                 <>
                   <Sync className="w-4 h-4 mr-2" />
-                  {locale === "zh" ? "立即同步" : "Sync Now"}
+                  {t("control.syncNow")}
                 </>
               )}
             </button>
@@ -489,7 +448,7 @@ export default function DataSync({
                 className="w-full bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors flex items-center justify-center"
               >
                 <AlertCircle className="w-4 h-4 mr-2" />
-                {locale === "zh" ? "解决冲突" : "Resolve Conflicts"}
+                {t("conflicts.resolve")}
               </button>
             )}
           </div>
@@ -500,7 +459,7 @@ export default function DataSync({
       <div className="mb-8">
         <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
           <Server className="w-5 h-5 mr-2" />
-          {locale === "zh" ? "设备管理" : "Device Management"}
+          {t("devices.title")}
         </h3>
 
         <div className="space-y-4">
@@ -534,12 +493,8 @@ export default function DataSync({
                     }`}
                   >
                     {device.isActive
-                      ? locale === "zh"
-                        ? "活跃"
-                        : "Active"
-                      : locale === "zh"
-                        ? "离线"
-                        : "Offline"}
+                      ? t("devices.active")
+                      : t("devices.offline")}
                   </span>
                   <button className="text-gray-400 hover:text-gray-600">
                     <Shield className="w-4 h-4" />
@@ -555,7 +510,7 @@ export default function DataSync({
       <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-6 border border-gray-200">
         <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
           <Database className="w-5 h-5 mr-2" />
-          {locale === "zh" ? "数据管理" : "Data Management"}
+          {t("dataManagement.title")}
         </h3>
 
         <div className="flex flex-col sm:flex-row gap-4">
@@ -564,7 +519,7 @@ export default function DataSync({
             className="flex items-center justify-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
           >
             <Download className="w-4 h-4 mr-2" />
-            {locale === "zh" ? "导出数据" : "Export Data"}
+            {t("dataManagement.exportData")}
           </button>
 
           <button
@@ -572,7 +527,7 @@ export default function DataSync({
             className="flex items-center justify-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
           >
             <Shield className="w-4 h-4 mr-2" />
-            {locale === "zh" ? "高级设置" : "Advanced Settings"}
+            {t("dataManagement.advancedSettings")}
           </button>
         </div>
 
@@ -581,37 +536,37 @@ export default function DataSync({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "数据保留期限" : "Data Retention Period"}
+                  {t("dataManagement.retentionPeriod")}
                 </label>
                 <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                   <option value="1year">
-                    {locale === "zh" ? "1年" : "1 Year"}
+                    {t("dataManagement.retention.1year")}
                   </option>
                   <option value="2years">
-                    {locale === "zh" ? "2年" : "2 Years"}
+                    {t("dataManagement.retention.2years")}
                   </option>
                   <option value="5years">
-                    {locale === "zh" ? "5年" : "5 Years"}
+                    {t("dataManagement.retention.5years")}
                   </option>
                   <option value="forever">
-                    {locale === "zh" ? "永久" : "Forever"}
+                    {t("dataManagement.retention.forever")}
                   </option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "加密级别" : "Encryption Level"}
+                  {t("dataManagement.encryptionLevel")}
                 </label>
                 <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                   <option value="standard">
-                    {locale === "zh" ? "标准" : "Standard"}
+                    {t("dataManagement.encryption.standard")}
                   </option>
                   <option value="high">
-                    {locale === "zh" ? "高级" : "High"}
+                    {t("dataManagement.encryption.high")}
                   </option>
                   <option value="maximum">
-                    {locale === "zh" ? "最高" : "Maximum"}
+                    {t("dataManagement.encryption.maximum")}
                   </option>
                 </select>
               </div>

@@ -466,20 +466,74 @@
       }
     },
     "sync": {
-      "title": "Data Synchronization",
-      "description": "Data synchronization features",
-      "status": "Sync Status",
-      "sync": "Start Sync",
-      "lastSync": "Last Synced",
-      "states": {
-        "synced": "Synced",
-        "syncing": "Syncing...",
-        "failed": "Sync Failed",
-        "pending": "Pending Sync"
+      "title": "Data Sync",
+      "description": "Sync your health data across devices securely",
+      "networkStatus": {
+        "title": "Network Status",
+        "online": "Online",
+        "offline": "Offline",
+        "connected": "Connected",
+        "cloudActive": "Cloud connection active",
+        "cloudUnavailable": "Cannot connect to cloud"
       },
-      "actions": {
+      "lastSync": {
+        "title": "Last Sync",
+        "synced": "Synced",
+        "notSynced": "Not Synced",
+        "neverSynced": "Never synced"
+      },
+      "pendingChanges": {
+        "title": "Pending Changes",
+        "pending": "Pending",
+        "allSynced": "All data synced",
+        "changesPending": "changes pending"
+      },
+      "conflicts": {
+        "title": "Data Conflicts",
+        "conflicts": "Conflicts",
+        "noConflicts": "No conflicts",
+        "conflictsToResolve": "conflicts to resolve",
+        "resolve": "Resolve Conflicts"
+      },
+      "control": {
+        "title": "Sync Control",
+        "autoSync": "Auto Sync",
+        "syncInterval": "Sync Interval",
         "syncNow": "Sync Now",
-        "viewHistory": "View History"
+        "syncing": "Syncing...",
+        "intervals": {
+          "1min": "1 minute",
+          "5min": "5 minutes",
+          "15min": "15 minutes",
+          "30min": "30 minutes"
+        }
+      },
+      "devices": {
+        "title": "Device Management",
+        "active": "Active",
+        "offline": "Offline"
+      },
+      "dataManagement": {
+        "title": "Data Management",
+        "exportData": "Export Data",
+        "advancedSettings": "Advanced Settings",
+        "retentionPeriod": "Data Retention Period",
+        "encryptionLevel": "Encryption Level",
+        "retention": {
+          "1year": "1 Year",
+          "2years": "2 Years",
+          "5years": "5 Years",
+          "forever": "Forever"
+        },
+        "encryption": {
+          "standard": "Standard",
+          "high": "High",
+          "maximum": "Maximum"
+        }
+      },
+      "errors": {
+        "networkUnavailable": "Network connection unavailable",
+        "syncFailed": "Sync failed, please try again"
       }
     }
   },

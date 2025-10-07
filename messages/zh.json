@@ -3944,19 +3944,73 @@
     },
     "sync": {
       "title": "数据同步",
-      "description": "数据同步功能",
-      "status": "同步状态",
-      "sync": "开始同步",
-      "lastSync": "最后同步时间",
-      "states": {
-        "synced": "已同步",
-        "syncing": "同步中...",
-        "failed": "同步失败",
-        "pending": "等待同步"
+      "description": "跨设备同步您的健康数据，确保数据安全",
+      "networkStatus": {
+        "title": "网络状态",
+        "online": "在线",
+        "offline": "离线",
+        "connected": "已连接",
+        "cloudActive": "云端连接正常",
+        "cloudUnavailable": "无法连接到云端"
       },
-      "actions": {
+      "lastSync": {
+        "title": "最后同步",
+        "synced": "已同步",
+        "notSynced": "未同步",
+        "neverSynced": "从未同步"
+      },
+      "pendingChanges": {
+        "title": "待同步更改",
+        "pending": "待同步",
+        "allSynced": "所有数据已同步",
+        "changesPending": "项更改待同步"
+      },
+      "conflicts": {
+        "title": "数据冲突",
+        "conflicts": "冲突",
+        "noConflicts": "无冲突",
+        "conflictsToResolve": "个冲突需解决",
+        "resolve": "解决冲突"
+      },
+      "control": {
+        "title": "同步控制",
+        "autoSync": "自动同步",
+        "syncInterval": "同步间隔",
         "syncNow": "立即同步",
-        "viewHistory": "查看历史"
+        "syncing": "同步中...",
+        "intervals": {
+          "1min": "1分钟",
+          "5min": "5分钟",
+          "15min": "15分钟",
+          "30min": "30分钟"
+        }
+      },
+      "devices": {
+        "title": "设备管理",
+        "active": "活跃",
+        "offline": "离线"
+      },
+      "dataManagement": {
+        "title": "数据管理",
+        "exportData": "导出数据",
+        "advancedSettings": "高级设置",
+        "retentionPeriod": "数据保留期限",
+        "encryptionLevel": "加密级别",
+        "retention": {
+          "1year": "1年",
+          "2years": "2年",
+          "5years": "5年",
+          "forever": "永久"
+        },
+        "encryption": {
+          "standard": "标准",
+          "high": "高级",
+          "maximum": "最高"
+        }
+      },
+      "errors": {
+        "networkUnavailable": "网络连接不可用",
+        "syncFailed": "同步失败，请重试"
       }
     },
     "performance": {

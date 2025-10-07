@@ -3194,6 +3194,62 @@
             }
           }
         }
+      },
+      "analytics": {
+        "title": "数据分析",
+        "subtitle": "深入了解您的疼痛模式和趋势",
+        "period": {
+          "title": "分析周期",
+          "week": "周",
+          "month": "月",
+          "quarter": "季度",
+          "year": "年"
+        },
+        "metrics": {
+          "averagePainLevel": "平均疼痛程度",
+          "totalRecords": "总记录数",
+          "daysAnalyzed": "分析天数"
+        },
+        "distribution": {
+          "title": "疼痛程度分布",
+          "mild": "轻度",
+          "moderate": "中度",
+          "severe": "重度"
+        },
+        "locations": {
+          "title": "常见疼痛位置",
+          "lowerAbdomen": "下腹部",
+          "lowerBack": "下背部",
+          "thighs": "大腿"
+        },
+        "types": {
+          "title": "常见疼痛类型",
+          "cramping": "痉挛性疼痛",
+          "dullPain": "钝痛",
+          "sharpPain": "锐痛"
+        },
+        "insights": {
+          "title": "智能洞察",
+          "pattern": {
+            "title": "疼痛模式识别",
+            "description": "您的疼痛通常在经期前2-3天开始加重，建议提前准备缓解措施。"
+          },
+          "recommendation": {
+            "title": "个性化建议",
+            "description": "基于您的数据，热敷和轻度拉伸对缓解疼痛最有效。"
+          }
+        },
+        "priority": {
+          "high": "高优先级",
+          "medium": "中优先级",
+          "low": "低优先级"
+        },
+        "chart": {
+          "title": "疼痛趋势图",
+          "placeholder": "图表将在此处显示",
+          "description": "当您有足够的疼痛记录数据时，这里将显示您的疼痛趋势图表，帮助您了解疼痛模式的变化。",
+          "ariaDescription": "疼痛趋势图表占位符。当有足够数据时，将显示您的疼痛水平随时间变化的图表。"
+        }
       }
     },
     "embeddedPainAssessment": {

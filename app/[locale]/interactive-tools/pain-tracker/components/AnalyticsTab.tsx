@@ -10,7 +10,7 @@ interface AnalyticsTabProps {
 }
 
 export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
-  const t = useTranslations("interactiveTools");
+  const t = useTranslations("interactiveToolsPage.painTracker.analytics");
   const [selectedPeriod, setSelectedPeriod] = useState<
     "week" | "month" | "quarter" | "year"
   >("month");
@@ -35,34 +35,34 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
     },
     commonLocations: [
       {
-        location: locale === "zh" ? "下腹部" : "Lower Abdomen",
+        location: t("locations.lowerAbdomen"),
         count: 15,
         percentage: 62.5,
       },
       {
-        location: locale === "zh" ? "下背部" : "Lower Back",
+        location: t("locations.lowerBack"),
         count: 6,
         percentage: 25,
       },
       {
-        location: locale === "zh" ? "大腿" : "Thighs",
+        location: t("locations.thighs"),
         count: 3,
         percentage: 12.5,
       },
     ],
     commonTypes: [
       {
-        type: locale === "zh" ? "痉挛性疼痛" : "Cramping",
+        type: t("types.cramping"),
         count: 12,
         percentage: 50,
       },
       {
-        type: locale === "zh" ? "钝痛" : "Dull Pain",
+        type: t("types.dullPain"),
         count: 8,
         percentage: 33.3,
       },
       {
-        type: locale === "zh" ? "锐痛" : "Sharp Pain",
+        type: t("types.sharpPain"),
         count: 4,
         percentage: 16.7,
       },
@@ -70,20 +70,14 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
     insights: [
       {
         type: "pattern",
-        title: locale === "zh" ? "疼痛模式识别" : "Pain Pattern Recognition",
-        description:
-          locale === "zh"
-            ? "您的疼痛通常在经期前2-3天开始加重，建议提前准备缓解措施。"
-            : "Your pain typically intensifies 2-3 days before menstruation. Consider preparing relief measures in advance.",
+        title: t("insights.pattern.title"),
+        description: t("insights.pattern.description"),
         severity: "medium",
       },
       {
         type: "recommendation",
-        title: locale === "zh" ? "个性化建议" : "Personalized Recommendation",
-        description:
-          locale === "zh"
-            ? "基于您的数据，热敷和轻度拉伸对缓解疼痛最有效。"
-            : "Based on your data, heat therapy and light stretching are most effective for pain relief.",
+        title: t("insights.recommendation.title"),
+        description: t("insights.recommendation.description"),
         severity: "low",
       },
     ],
@@ -105,11 +99,11 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
   const getSeverityLabel = (severity: string) => {
     switch (severity) {
       case "high":
-        return locale === "zh" ? "高优先级" : "High Priority";
+        return t("priority.high");
       case "medium":
-        return locale === "zh" ? "中优先级" : "Medium Priority";
+        return t("priority.medium");
       case "low":
-        return locale === "zh" ? "低优先级" : "Low Priority";
+        return t("priority.low");
       default:
         return "";
     }
@@ -120,12 +114,10 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
       {/* Header */}
       <header className="text-center mb-6 sm:mb-8">
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
-          {locale === "zh" ? "数据分析" : "Data Analytics"}
+          {t("title")}
         </h1>
         <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-          {locale === "zh"
-            ? "深入了解您的疼痛模式和趋势"
-            : "Gain insights into your pain patterns and trends"}
+          {t("subtitle")}
         </p>
       </header>
 
@@ -133,14 +125,14 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
       <div className="bg-white rounded-lg shadow-sm p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-medium text-gray-900">
-            {locale === "zh" ? "分析周期" : "Analysis Period"}
+            {t("period.title")}
           </h3>
           <div className="flex space-x-2">
             {[
-              { key: "week", label: locale === "zh" ? "周" : "Week" },
-              { key: "month", label: locale === "zh" ? "月" : "Month" },
-              { key: "quarter", label: locale === "zh" ? "季度" : "Quarter" },
-              { key: "year", label: locale === "zh" ? "年" : "Year" },
+              { key: "week", label: t("period.week") },
+              { key: "month", label: t("period.month") },
+              { key: "quarter", label: t("period.quarter") },
+              { key: "year", label: t("period.year") },
             ].map((period) => (
               <button
                 key={period.key}
@@ -180,7 +172,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
             {mockAnalytics.averagePainLevel}
           </div>
           <div className="text-sm text-gray-600">
-            {locale === "zh" ? "平均疼痛程度" : "Average Pain Level"}
+            {t("metrics.averagePainLevel")}
           </div>
         </div>
 
@@ -204,7 +196,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
             {mockAnalytics.totalRecords}
           </div>
           <div className="text-sm text-gray-600">
-            {locale === "zh" ? "总记录数" : "Total Records"}
+            {t("metrics.totalRecords")}
           </div>
         </div>
 
@@ -228,7 +220,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
             {mockAnalytics.painTrend.length}
           </div>
           <div className="text-sm text-gray-600">
-            {locale === "zh" ? "分析天数" : "Days Analyzed"}
+            {t("metrics.daysAnalyzed")}
           </div>
         </div>
       </div>
@@ -236,7 +228,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
       {/* Pain Distribution */}
       <div className="bg-white rounded-lg shadow-sm p-6">
         <h3 className="text-lg font-medium text-gray-900 mb-4">
-          {locale === "zh" ? "疼痛程度分布" : "Pain Level Distribution"}
+          {t("distribution.title")}
         </h3>
 
         <div className="space-y-4">
@@ -245,16 +237,10 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
               const percentage = (count / mockAnalytics.totalRecords) * 100;
               const levelLabel =
                 level === "mild"
-                  ? locale === "zh"
-                    ? "轻度"
-                    : "Mild"
+                  ? t("distribution.mild")
                   : level === "moderate"
-                    ? locale === "zh"
-                      ? "中度"
-                      : "Moderate"
-                    : locale === "zh"
-                      ? "重度"
-                      : "Severe";
+                    ? t("distribution.moderate")
+                    : t("distribution.severe");
 
               const levelColor =
                 level === "mild"
@@ -289,7 +275,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
         {/* Common Locations */}
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">
-            {locale === "zh" ? "常见疼痛位置" : "Common Pain Locations"}
+            {t("locations.title")}
           </h3>
 
           <div className="space-y-3">
@@ -316,7 +302,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
         {/* Common Types */}
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">
-            {locale === "zh" ? "常见疼痛类型" : "Common Pain Types"}
+            {t("types.title")}
           </h3>
 
           <div className="space-y-3">
@@ -344,7 +330,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
       {/* Insights and Recommendations */}
       <div className="bg-white rounded-lg shadow-sm p-6">
         <h3 className="text-lg font-medium text-gray-900 mb-4">
-          {locale === "zh" ? "智能洞察" : "Smart Insights"}
+          {t("insights.title")}
         </h3>
 
         <div className="space-y-4">
@@ -377,7 +363,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
           id="chart-heading"
           className="text-base sm:text-lg font-medium text-gray-900 mb-4"
         >
-          {locale === "zh" ? "疼痛趋势图" : "Pain Trend Chart"}
+          {t("chart.title")}
         </h2>
 
         <div
@@ -401,27 +387,19 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
               />
             </svg>
             <h3 className="text-sm sm:text-base font-medium text-gray-700 mb-2">
-              {locale === "zh"
-                ? "图表将在此处显示"
-                : "Chart will be displayed here"}
+              {t("chart.placeholder")}
             </h3>
             <p
               id="chart-description"
               className="text-xs sm:text-sm text-gray-500"
             >
-              {locale === "zh"
-                ? "当您有足够的疼痛记录数据时，这里将显示您的疼痛趋势图表，帮助您了解疼痛模式的变化。"
-                : "When you have sufficient pain record data, this area will display your pain trend charts to help you understand changes in your pain patterns."}
+              {t("chart.description")}
             </p>
           </div>
         </div>
 
         {/* Alternative text description for screen readers */}
-        <div className="sr-only">
-          {locale === "zh"
-            ? "疼痛趋势图表占位符。当有足够数据时，将显示您的疼痛水平随时间变化的图表。"
-            : "Pain trend chart placeholder. When sufficient data is available, this will show a chart of your pain levels over time."}
-        </div>
+        <div className="sr-only">{t("chart.ariaDescription")}</div>
       </section>
     </div>
   );

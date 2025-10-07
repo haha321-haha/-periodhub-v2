@@ -2453,6 +2453,62 @@
         "alerts": "Health Alerts",
         "noInsights": "No Insights Yet",
         "noInsightsDescription": "Record more data to get personalized health insights"
+      },
+      "analytics": {
+        "title": "Data Analytics",
+        "subtitle": "Gain insights into your pain patterns and trends",
+        "period": {
+          "title": "Analysis Period",
+          "week": "Week",
+          "month": "Month",
+          "quarter": "Quarter",
+          "year": "Year"
+        },
+        "metrics": {
+          "averagePainLevel": "Average Pain Level",
+          "totalRecords": "Total Records",
+          "daysAnalyzed": "Days Analyzed"
+        },
+        "distribution": {
+          "title": "Pain Level Distribution",
+          "mild": "Mild",
+          "moderate": "Moderate",
+          "severe": "Severe"
+        },
+        "locations": {
+          "title": "Common Pain Locations",
+          "lowerAbdomen": "Lower Abdomen",
+          "lowerBack": "Lower Back",
+          "thighs": "Thighs"
+        },
+        "types": {
+          "title": "Common Pain Types",
+          "cramping": "Cramping",
+          "dullPain": "Dull Pain",
+          "sharpPain": "Sharp Pain"
+        },
+        "insights": {
+          "title": "Smart Insights",
+          "pattern": {
+            "title": "Pain Pattern Recognition",
+            "description": "Your pain typically intensifies 2-3 days before menstruation. Consider preparing relief measures in advance."
+          },
+          "recommendation": {
+            "title": "Personalized Recommendation",
+            "description": "Based on your data, heat therapy and light stretching are most effective for pain relief."
+          }
+        },
+        "priority": {
+          "high": "High Priority",
+          "medium": "Medium Priority",
+          "low": "Low Priority"
+        },
+        "chart": {
+          "title": "Pain Trend Chart",
+          "placeholder": "Chart will be displayed here",
+          "description": "When you have sufficient pain record data, this area will display your pain trend charts to help you understand changes in your pain patterns.",
+          "ariaDescription": "Pain trend chart placeholder. When sufficient data is available, this will show a chart of your pain levels over time."
+        }
       }
     },
     "cycleTracker": {

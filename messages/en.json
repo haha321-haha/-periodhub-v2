@@ -633,6 +633,99 @@
         "networkUnavailable": "Network connection unavailable",
         "syncFailed": "Sync failed, please try again"
       }
+    },
+    "history": {
+      "title": "Pain Record History",
+      "subtitle": "View and manage your pain records",
+      "filters": {
+        "title": "Filters",
+        "dateRange": {
+          "label": "Date Range",
+          "all": "All",
+          "week": "Last 7 days",
+          "month": "Last 30 days",
+          "quarter": "Last 90 days"
+        },
+        "painLevel": {
+          "label": "Pain Level",
+          "all": "All",
+          "low": "Low (1-3)",
+          "medium": "Medium (4-6)",
+          "high": "High (7-10)"
+        }
+      },
+      "stats": {
+        "totalRecords": "Total Records",
+        "recordsInRange": "Records in Range",
+        "averagePain": "Average Pain",
+        "noRecords": "No Records"
+      },
+      "painLevels": {
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe"
+      },
+      "locations": {
+        "lower_abdomen": "Lower Abdomen",
+        "lower_back": "Lower Back",
+        "upper_thighs": "Upper Thighs",
+        "pelvis": "Pelvis",
+        "side": "Side",
+        "whole_abdomen": "Whole Abdomen"
+      },
+      "painTypes": {
+        "cramping": "Cramping",
+        "aching": "Aching",
+        "sharp": "Sharp",
+        "throbbing": "Throbbing",
+        "burning": "Burning",
+        "pressure": "Pressure"
+      },
+      "recordCard": {
+        "painLevel": "Pain Level",
+        "painLevelLabel": "Pain level: ",
+        "duration": "Duration",
+        "location": "Location",
+        "locationLabel": "Location: ",
+        "type": "Type",
+        "typeLabel": "Type: ",
+        "notes": "Notes",
+        "notesLabel": "Notes: ",
+        "effectiveness": "Effectiveness",
+        "edit": "Edit",
+        "editRecord": "Edit record",
+        "delete": "Delete",
+        "deleteRecord": "Delete record",
+        "minutes": "minutes",
+        "noNotes": "No notes"
+      },
+      "emptyState": {
+        "title": "No Pain Records",
+        "titleShort": "No Records Found",
+        "description": "Start recording your pain information to better understand pain patterns",
+        "addFirst": "Add First Record"
+      },
+      "stats": {
+        "title": "Summary Statistics",
+        "totalRecords": "Total Records",
+        "recordsInRange": "Records in Range",
+        "averagePain": "Average Pain",
+        "averagePainLevel": "Average Pain Level",
+        "highestPainLevel": "Highest Pain Level",
+        "noRecords": "No Records"
+      },
+      "pagination": {
+        "showing": "Showing",
+        "of": "of",
+        "records": "records",
+        "loadMore": "Load More",
+        "loading": "Loading...",
+        "noMore": "No more records"
+      },
+      "list": {
+        "title": "Pain Records List",
+        "noRecordsFound": "No Records Found"
+      }
     }
   },
   "anchorTexts": {

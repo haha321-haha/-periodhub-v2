@@ -192,57 +192,19 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
   };
 
   const getPainLevelLabel = (level: number) => {
-    if (level <= 3) return locale === "zh" ? "轻度" : "Mild";
-    if (level <= 6) return locale === "zh" ? "中度" : "Moderate";
-    return locale === "zh" ? "重度" : "Severe";
+    if (level <= 3) return t("painLevels.mild");
+    if (level <= 6) return t("painLevels.moderate");
+    return t("painLevels.severe");
   };
 
-  const getLocationNameZh = (location: string) => {
-    const locationMap: Record<string, string> = {
-      lower_abdomen: "下腹部",
-      lower_back: "下背部",
-      upper_thighs: "大腿上部",
-      pelvis: "骨盆",
-      side: "侧腹",
-      whole_abdomen: "整个腹部",
-    };
-    return locationMap[location] || location;
+  const getLocationName = (location: string) => {
+    const key = `locations.${location}` as any;
+    return t(key, { default: location });
   };
 
-  const getLocationNameEn = (location: string) => {
-    const locationMap: Record<string, string> = {
-      lower_abdomen: "Lower Abdomen",
-      lower_back: "Lower Back",
-      upper_thighs: "Upper Thighs",
-      pelvis: "Pelvis",
-      side: "Side",
-      whole_abdomen: "Whole Abdomen",
-    };
-    return locationMap[location] || location;
-  };
-
-  const getPainTypeNameZh = (type: string) => {
-    const typeMap: Record<string, string> = {
-      cramping: "痉挛性疼痛",
-      aching: "钝痛",
-      sharp: "尖锐疼痛",
-      throbbing: "跳动性疼痛",
-      burning: "灼烧感",
-      pressure: "压迫感",
-    };
-    return typeMap[type] || type;
-  };
-
-  const getPainTypeNameEn = (type: string) => {
-    const typeMap: Record<string, string> = {
-      cramping: "Cramping",
-      aching: "Aching",
-      sharp: "Sharp",
-      throbbing: "Throbbing",
-      burning: "Burning",
-      pressure: "Pressure",
-    };
-    return typeMap[type] || type;
+  const getPainTypeName = (type: string) => {
+    const key = `painTypes.${type}` as any;
+    return t(key, { default: type });
   };
 
   return (
@@ -250,12 +212,10 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
       {/* Header */}
       <header className="text-center mb-6 sm:mb-8">
         <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-900 mb-2">
-          {locale === "zh" ? "疼痛记录历史" : "Pain Record History"}
+          {t("title")}
         </h1>
         <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-          {locale === "zh"
-            ? "查看和管理您的疼痛记录"
-            : "View and manage your pain records"}
+          {t("subtitle")}
         </p>
       </header>
 
@@ -268,7 +228,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
           id="filters-heading"
           className="text-base sm:text-lg font-medium text-gray-900 mb-4"
         >
-          {locale === "zh" ? "筛选条件" : "Filters"}
+          {t("filters.title")}
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -278,7 +238,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
               htmlFor="date-range-filter"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              {locale === "zh" ? "时间范围" : "Date Range"}
+              {t("filters.dateRange.label")}
             </label>
             <select
               id="date-range-filter"
@@ -287,16 +247,10 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
               className="w-full px-3 py-2 sm:py-3 text-base sm:text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors"
               aria-describedby="date-range-help"
             >
-              <option value="all">{locale === "zh" ? "全部" : "All"}</option>
-              <option value="week">
-                {locale === "zh" ? "最近7天" : "Last 7 days"}
-              </option>
-              <option value="month">
-                {locale === "zh" ? "最近30天" : "Last 30 days"}
-              </option>
-              <option value="quarter">
-                {locale === "zh" ? "最近90天" : "Last 90 days"}
-              </option>
+              <option value="all">{t("filters.dateRange.all")}</option>
+              <option value="week">{t("filters.dateRange.week")}</option>
+              <option value="month">{t("filters.dateRange.month")}</option>
+              <option value="quarter">{t("filters.dateRange.quarter")}</option>
             </select>
             <p id="date-range-help" className="text-xs text-gray-500 mt-1">
               {locale === "zh"
@@ -311,7 +265,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
               htmlFor="pain-level-filter"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              {locale === "zh" ? "疼痛程度" : "Pain Level"}
+              {t("filters.painLevel.label")}
             </label>
             <select
               id="pain-level-filter"
@@ -320,15 +274,15 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
               className="w-full px-3 py-2 sm:py-3 text-base sm:text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors"
               aria-describedby="pain-level-help"
             >
-              <option value="all">{locale === "zh" ? "全部" : "All"}</option>
+              <option value="all">{t("filters.dateRange.all")}</option>
               <option value="low">
-                {locale === "zh" ? "轻度 (1-3)" : "Mild (1-3)"}
+                {t("filters.painLevel.low")}
               </option>
               <option value="medium">
-                {locale === "zh" ? "中度 (4-6)" : "Moderate (4-6)"}
+                {t("filters.painLevel.medium")}
               </option>
               <option value="high">
-                {locale === "zh" ? "重度 (7-10)" : "Severe (7-10)"}
+                {t("filters.painLevel.high")}
               </option>
             </select>
             <p id="pain-level-help" className="text-xs text-gray-500 mt-1">
@@ -348,7 +302,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
         aria-atomic="false"
       >
         <h2 id="records-heading" className="sr-only">
-          {locale === "zh" ? "疼痛记录列表" : "Pain Records List"}
+          {t("list.title")}
         </h2>
 
         {records.length === 0 && !loading ? (
@@ -370,7 +324,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
               </svg>
             </div>
             <h3 className="text-lg sm:text-xl font-medium text-gray-900 mb-2">
-              {locale === "zh" ? "暂无记录" : "No Records Found"}
+              {t("emptyState.titleShort")}
             </h3>
             <p className="text-sm sm:text-base text-gray-500 max-w-md mx-auto">
               {locale === "zh"
@@ -413,7 +367,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                         )}`}
                       >
                         <span className="sr-only">
-                          {locale === "zh" ? "疼痛程度：" : "Pain level: "}
+                          {t("recordCard.painLevelLabel")}
                         </span>
                         {getPainLevelLabel(record.painLevel)} (
                         {record.painLevel}/10)
@@ -423,7 +377,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                     <dl className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-sm text-gray-600">
                       <div>
                         <dt className="font-medium inline">
-                          {locale === "zh" ? "位置：" : "Location: "}
+                          {t("recordCard.locationLabel")}
                         </dt>
                         <dd className="inline">
                           {record.locations
@@ -437,7 +391,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                       </div>
                       <div>
                         <dt className="font-medium inline">
-                          {locale === "zh" ? "类型：" : "Type: "}
+                          {t("recordCard.typeLabel")}
                         </dt>
                         <dd className="inline">
                           {record.painTypes
@@ -454,7 +408,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                     {record.notes && (
                       <div className="mt-3 text-sm text-gray-600">
                         <dt className="font-medium inline">
-                          {locale === "zh" ? "备注：" : "Notes: "}
+                          {t("recordCard.notesLabel")}
                         </dt>
                         <dd className="inline">{record.notes}</dd>
                       </div>
@@ -465,7 +419,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                     <button
                       className="p-2 text-gray-400 hover:text-gray-600 focus:text-gray-600 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
                       aria-label={`${
-                        locale === "zh" ? "编辑记录" : "Edit record"
+                        t("recordCard.editRecord")
                       } ${new Date(record.date).toLocaleDateString()}`}
                     >
                       <svg
@@ -486,7 +440,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                     <button
                       className="p-2 text-gray-400 hover:text-red-600 focus:text-red-600 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                       aria-label={`${
-                        locale === "zh" ? "删除记录" : "Delete record"
+                        t("recordCard.deleteRecord")
                       } ${new Date(record.date).toLocaleDateString()}`}
                     >
                       <svg
@@ -515,7 +469,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                 <div className="inline-flex items-center space-x-2">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-pink-600"></div>
                   <span className="text-sm text-gray-600">
-                    {locale === "zh" ? "加载中..." : "Loading..."}
+                    {t("pagination.loading")}
                   </span>
                 </div>
               </div>
@@ -528,7 +482,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                   onClick={handleLoadMore}
                   className="px-4 py-2 bg-pink-600 text-white rounded-md hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition-colors"
                 >
-                  {locale === "zh" ? "加载更多" : "Load More"}
+                  {t("pagination.loadMore")}
                 </button>
               </div>
             )}
@@ -540,7 +494,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
       {records.length > 0 && (
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">
-            {locale === "zh" ? "统计摘要" : "Summary Statistics"}
+            {t("stats.title")}
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -549,7 +503,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                 {pagination.totalItems}
               </div>
               <div className="text-sm text-gray-600">
-                {locale === "zh" ? "总记录数" : "Total Records"}
+                {t("stats.totalRecords")}
               </div>
             </div>
 
@@ -565,7 +519,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                   : "0"}
               </div>
               <div className="text-sm text-gray-600">
-                {locale === "zh" ? "平均疼痛程度" : "Average Pain Level"}
+                {t("stats.averagePainLevel")}
               </div>
             </div>
 
@@ -576,7 +530,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                   : "0"}
               </div>
               <div className="text-sm text-gray-600">
-                {locale === "zh" ? "最高疼痛程度" : "Highest Pain Level"}
+                {t("stats.highestPainLevel")}
               </div>
             </div>
           </div>

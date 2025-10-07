@@ -265,15 +265,18 @@
         "documentation": "Documentation Enhancement"
       },
       "statistics": {
+        "title": "P3 Phase Statistics",
         "optimizationModules": "Optimization Modules",
         "completedTasks": "Completed Tasks",
         "activeTasks": "Active Tasks",
-        "overallProgress": "Overall Progress"
+        "overallProgress": "Overall Progress",
+        "complete": "Complete"
       },
       "completion": {
         "title": "P3 Phase Complete!",
         "description": "All system optimization and performance enhancement tasks are complete, system is now production-ready",
-        "deployToProduction": "Deploy to Production"
+        "deployToProduction": "Deploy to Production",
+        "viewReport": "View System Report"
       }
     },
     "performance": {

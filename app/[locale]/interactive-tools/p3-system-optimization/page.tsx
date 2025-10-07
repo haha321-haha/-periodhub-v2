@@ -240,15 +240,9 @@ export default function P3Phase({ locale }: P3PhaseProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 页面标题 */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            {locale === "zh"
-              ? "P3阶段：系统优化和性能提升"
-              : "P3 Phase: System Optimization and Performance Enhancement"}
-          </h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t("title")}</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {locale === "zh"
-              ? "完善国际化、性能优化、测试和文档，确保系统质量和稳定性"
-              : "Complete internationalization, performance optimization, testing, and documentation to ensure system quality and stability"}
+            {t("description")}
           </p>
         </div>
 
@@ -299,7 +293,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
                 </div>
 
                 <p className="text-xs text-gray-500 mt-2">
-                  {task.progress}% {locale === "zh" ? "完成" : "Complete"}
+                  {task.progress}% {t("statistics.complete")}
                 </p>
               </div>
             );
@@ -310,14 +304,14 @@ export default function P3Phase({ locale }: P3PhaseProps) {
         <div className="bg-white rounded-xl shadow-lg p-8 mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
             <BarChart3 className="w-6 h-6 mr-2 text-blue-600" />
-            {locale === "zh" ? "P3阶段统计" : "P3 Phase Statistics"}
+            {t("statistics.title")}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-3xl font-bold text-blue-600 mb-2">4</div>
               <div className="text-sm text-gray-600">
-                {locale === "zh" ? "优化模块" : "Optimization Modules"}
+                {t("statistics.optimizationModules")}
               </div>
             </div>
 
@@ -326,7 +320,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
                 {completedTasks.size}
               </div>
               <div className="text-sm text-gray-600">
-                {locale === "zh" ? "已完成任务" : "Completed Tasks"}
+                {t("statistics.completedTasks")}
               </div>
             </div>
 
@@ -338,7 +332,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
                 }
               </div>
               <div className="text-sm text-gray-600">
-                {locale === "zh" ? "进行中任务" : "Active Tasks"}
+                {t("statistics.activeTasks")}
               </div>
             </div>
 
@@ -347,7 +341,7 @@ export default function P3Phase({ locale }: P3PhaseProps) {
                 {Math.round((completedTasks.size / p3Tasks.length) * 100)}%
               </div>
               <div className="text-sm text-gray-600">
-                {locale === "zh" ? "总体进度" : "Overall Progress"}
+                {t("statistics.overallProgress")}
               </div>
             </div>
           </div>
@@ -393,19 +387,15 @@ export default function P3Phase({ locale }: P3PhaseProps) {
           <div className="bg-green-50 border border-green-200 rounded-xl p-8">
             <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-green-900 mb-2">
-              {locale === "zh" ? "P3阶段完成！" : "P3 Phase Complete!"}
+              {t("completion.title")}
             </h3>
-            <p className="text-green-700 mb-6">
-              {locale === "zh"
-                ? "所有系统优化和性能提升任务已完成，系统已达到生产就绪状态"
-                : "All system optimization and performance enhancement tasks are complete, system is production-ready"}
-            </p>
+            <p className="text-green-700 mb-6">{t("completion.description")}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors">
-                {locale === "zh" ? "进入生产环境" : "Deploy to Production"}
+                {t("completion.deployToProduction")}
               </button>
               <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-                {locale === "zh" ? "查看系统报告" : "View System Report"}
+                {t("completion.viewReport")}
               </button>
             </div>
           </div>

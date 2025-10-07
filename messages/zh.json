@@ -4060,15 +4060,18 @@
         "documentation": "文档完善"
       },
       "statistics": {
+        "title": "P3阶段统计",
         "optimizationModules": "优化模块",
         "completedTasks": "已完成任务",
         "activeTasks": "进行中任务",
-        "overallProgress": "总体进度"
+        "overallProgress": "总体进度",
+        "complete": "完成"
       },
       "completion": {
         "title": "P3阶段完成！",
         "description": "所有系统优化和性能提升任务已完成，系统已达到生产就绪状态",
-        "deployToProduction": "进入生产环境"
+        "deployToProduction": "进入生产环境",
+        "viewReport": "查看系统报告"
       }
     }
   },

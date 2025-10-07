@@ -461,19 +461,6 @@
       "nutrition": "Nutrition Therapy",
       "ginger": "Ginger Therapy Guide",
       "heat": "Heat Therapy Guide"
-    },
-    "solutions": {
-      "exercise_balance_new": "Exercise & Periods",
-      "office": "Office Relief Solutions",
-      "emergency": "Emergency Kit Preparation",
-      "sleep": "Sleep",
-      "exercise": "Exercise",
-      "workplace_wellness": "Workplace Wellness",
-      "relief": "Relief Methods",
-      "natural_therapies": "Natural Therapies",
-      "scenarios": "Scenario Solutions",
-      "teen_main": "Teen Health",
-      "commute": "Commute Scenario"
     }
   },
   "healthStatistics": {

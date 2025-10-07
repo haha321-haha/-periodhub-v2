@@ -3392,7 +3392,8 @@
       "mythsFacts": "误区与事实",
       "office": "办公场景",
       "developmentPain": "发育疼痛",
-      "emergencyKit": "应急包"
+      "emergencyKit": "应急包",
+      "painTracker": "疼痛追踪器"
     },
     "common": {
       "loading": "加载中...",
@@ -7133,6 +7134,8 @@
       "quick_relief": "快速缓解",
       "medical": "医学指南",
       "faq": "常见问题",
+      "ginger": "生姜疗法指南",
+      "heat": "热敷疗法指南",
       "workplace": "压力管理",
       "nutrition": "营养调理",
       "medication": "药物治疗"

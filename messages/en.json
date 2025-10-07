@@ -240,7 +240,8 @@
       "understandingPain": "Understanding Pain",
       "mythsFacts": "Myths & Facts",
       "office": "Office Scenario",
-      "developmentPain": "Development Pain"
+      "developmentPain": "Development Pain",
+      "painTracker": "Pain Tracker"
     },
     "p3": {
       "title": "P3 Phase: System Optimization and Performance Enhancement",
@@ -431,7 +432,9 @@
       "medical": "Medical Guide",
       "faq": "FAQ",
       "workplace": "Stress Management",
-      "nutrition": "Nutrition Therapy"
+      "nutrition": "Nutrition Therapy",
+      "ginger": "Ginger Therapy Guide",
+      "heat": "Heat Therapy Guide"
     },
     "solutions": {
       "exercise_balance_new": "Exercise & Periods",

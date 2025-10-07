@@ -239,7 +239,7 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
               href={`/${locale}/interactive-tools/period-pain-impact-calculator`}
               className="px-6 py-2 text-gray-600 hover:text-gray-800 font-medium rounded-lg border border-gray-300 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-300"
             >
-              ← {locale === "zh" ? "返回" : "Back"}
+              ← {t("sections.back")}
             </Link>
           </div>
         </div>
@@ -252,7 +252,7 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
             {/* 推荐文章区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {locale === "zh" ? "相关健康文章" : "Related Health Articles"}
+                {t("sections.relatedArticles")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {getSymptomAssessmentRecommendations(
@@ -270,7 +270,7 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
             {/* 相关工具区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {locale === "zh" ? "相关工具" : "Related Tools"}
+                {t("sections.relatedTools")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {getSymptomAssessmentRecommendations(locale).relatedTools.map(
@@ -288,7 +288,7 @@ export default function SymptomAssessmentClient({ params: { locale } }: Props) {
             {/* 场景解决方案区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {locale === "zh" ? "场景解决方案" : "Scenario Solutions"}
+                {t("sections.scenarioSolutions")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {getSymptomAssessmentRecommendations(

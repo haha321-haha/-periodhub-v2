@@ -750,6 +750,12 @@
         "detailed": "Detailed Assessment",
         "medical": "Medical Professional Assessment"
       }
+    },
+    "sections": {
+      "back": "Back",
+      "relatedArticles": "Related Health Articles",
+      "relatedTools": "Related Tools",
+      "scenarioSolutions": "Scenario Solutions"
     }
   },
   "anchorTexts": {

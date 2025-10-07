@@ -3825,6 +3825,12 @@
         "medical": "医疗专业版评估"
       }
     },
+    "sections": {
+      "back": "返回",
+      "relatedArticles": "相关健康文章",
+      "relatedTools": "相关工具",
+      "scenarioSolutions": "场景解决方案"
+    },
     "workplaceAssessment": {
       "metaTitle": "职场影响评估 - 专业痛经对工作影响分析工具 | Period Hub",
       "title": "职场影响评估",

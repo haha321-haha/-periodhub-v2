@@ -3885,18 +3885,44 @@
       }
     },
     "social": {
-      "title": "社交功能",
-      "description": "用户社交互动功能",
-      "community": "社区",
-      "sharing": "分享",
-      "features": {
-        "share": "分享经验",
-        "discuss": "讨论交流",
-        "support": "互相支持"
+      "title": "社区功能",
+      "description": "与社区成员分享经验，获得支持和帮助",
+      "tabs": {
+        "feed": "动态",
+        "groups": "群组",
+        "create": "发布"
       },
-      "actions": {
-        "joinCommunity": "加入社区",
-        "shareNow": "立即分享"
+      "userLevels": {
+        "expert": "专家",
+        "experienced": "有经验",
+        "newbie": "新手"
+      },
+      "postTypes": {
+        "tip": "小贴士",
+        "experience": "经验分享",
+        "question": "问题",
+        "support": "支持"
+      },
+      "privacy": {
+        "public": "公开",
+        "friends": "仅好友",
+        "private": "私密",
+        "publicVisible": "所有人可见",
+        "friendsVisible": "仅好友可见",
+        "privateVisible": "仅自己可见"
+      },
+      "groups": {
+        "members": "成员",
+        "joined": "已加入",
+        "join": "加入"
+      },
+      "createPost": {
+        "title": "分享您的经验",
+        "contentLabel": "内容",
+        "contentPlaceholder": "分享您的经验、问题或建议...",
+        "typeLabel": "类型",
+        "privacyLabel": "隐私设置",
+        "publish": "发布"
       }
     },
     "reports": {

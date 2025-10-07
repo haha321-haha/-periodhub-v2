@@ -408,18 +408,44 @@
       }
     },
     "social": {
-      "title": "Social Features",
-      "description": "User social interaction features",
-      "community": "Community",
-      "sharing": "Sharing",
-      "features": {
-        "share": "Share Experience",
-        "discuss": "Discussions",
-        "support": "Mutual Support"
+      "title": "Community Features",
+      "description": "Share experiences with community members and get support",
+      "tabs": {
+        "feed": "Feed",
+        "groups": "Groups",
+        "create": "Create"
       },
-      "actions": {
-        "joinCommunity": "Join Community",
-        "shareNow": "Share Now"
+      "userLevels": {
+        "expert": "Expert",
+        "experienced": "Experienced",
+        "newbie": "Newbie"
+      },
+      "postTypes": {
+        "tip": "Tip",
+        "experience": "Experience",
+        "question": "Question",
+        "support": "Support"
+      },
+      "privacy": {
+        "public": "Public",
+        "friends": "Friends Only",
+        "private": "Private",
+        "publicVisible": "Visible to everyone",
+        "friendsVisible": "Visible to friends only",
+        "privateVisible": "Visible to you only"
+      },
+      "groups": {
+        "members": "members",
+        "joined": "Joined",
+        "join": "Join"
+      },
+      "createPost": {
+        "title": "Share Your Experience",
+        "contentLabel": "Content",
+        "contentPlaceholder": "Share your experience, questions, or suggestions...",
+        "typeLabel": "Type",
+        "privacyLabel": "Privacy",
+        "publish": "Publish"
       }
     },
     "reports": {

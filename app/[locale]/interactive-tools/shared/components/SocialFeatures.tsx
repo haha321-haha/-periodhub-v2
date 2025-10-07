@@ -337,13 +337,9 @@ export default function SocialFeatures({
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
             <Users className="w-6 h-6 mr-2 text-blue-600" />
-            {locale === "zh" ? "社区功能" : "Community Features"}
+            {t("title")}
           </h2>
-          <p className="text-gray-600">
-            {locale === "zh"
-              ? "与社区成员分享经验，获得支持和帮助"
-              : "Share experiences with community members and get support"}
-          </p>
+          <p className="text-gray-600">{t("description")}</p>
         </div>
 
         <div className="flex space-x-2 mt-4 sm:mt-0">
@@ -357,9 +353,7 @@ export default function SocialFeatures({
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              {tab === "feed" && (locale === "zh" ? "动态" : "Feed")}
-              {tab === "groups" && (locale === "zh" ? "群组" : "Groups")}
-              {tab === "create" && (locale === "zh" ? "发布" : "Create")}
+              {t(`tabs.${tab}`)}
             </button>
           ))}
         </div>
@@ -389,12 +383,7 @@ export default function SocialFeatures({
                           post.author.level,
                         )}`}
                       >
-                        {post.author.level === "expert" &&
-                          (locale === "zh" ? "专家" : "Expert")}
-                        {post.author.level === "experienced" &&
-                          (locale === "zh" ? "有经验" : "Experienced")}
-                        {post.author.level === "newbie" &&
-                          (locale === "zh" ? "新手" : "Newbie")}
+                        {t(`userLevels.${post.author.level}`)}
                       </span>
                     </div>
                     <div className="flex items-center space-x-2 text-sm text-gray-500">
@@ -416,14 +405,7 @@ export default function SocialFeatures({
                 <div className="flex items-center space-x-2">
                   {getTypeIcon(post.type)}
                   <span className="text-sm text-gray-600">
-                    {post.type === "tip" &&
-                      (locale === "zh" ? "小贴士" : "Tip")}
-                    {post.type === "experience" &&
-                      (locale === "zh" ? "经验分享" : "Experience")}
-                    {post.type === "question" &&
-                      (locale === "zh" ? "问题" : "Question")}
-                    {post.type === "support" &&
-                      (locale === "zh" ? "支持" : "Support")}
+                    {t(`postTypes.${post.type}`)}
                   </span>
                 </div>
               </div>
@@ -514,13 +496,7 @@ export default function SocialFeatures({
                       : "bg-gray-100 text-gray-700"
                   }`}
                 >
-                  {group.privacy === "public"
-                    ? locale === "zh"
-                      ? "公开"
-                      : "Public"
-                    : locale === "zh"
-                      ? "私密"
-                      : "Private"}
+                  {t(`privacy.${group.privacy}`)}
                 </span>
               </div>
 
@@ -539,7 +515,7 @@ export default function SocialFeatures({
                 <div className="flex items-center text-sm text-gray-600">
                   <Users className="w-4 h-4 mr-1" />
                   <span>
-                    {group.memberCount} {locale === "zh" ? "成员" : "members"}
+                    {group.memberCount} {t("groups.members")}
                   </span>
                 </div>
                 <button
@@ -550,13 +526,7 @@ export default function SocialFeatures({
                       : "bg-blue-600 text-white hover:bg-blue-700"
                   }`}
                 >
-                  {group.isJoined
-                    ? locale === "zh"
-                      ? "已加入"
-                      : "Joined"
-                    : locale === "zh"
-                      ? "加入"
-                      : "Join"}
+                  {group.isJoined ? t("groups.joined") : t("groups.join")}
                 </button>
               </div>
             </div>
@@ -568,24 +538,20 @@ export default function SocialFeatures({
       {activeTab === "create" && (
         <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-6 border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            {locale === "zh" ? "分享您的经验" : "Share Your Experience"}
+            {t("createPost.title")}
           </h3>
 
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                {locale === "zh" ? "内容" : "Content"}
+                {t("createPost.contentLabel")}
               </label>
               <textarea
                 value={newPost.content}
                 onChange={(e) =>
                   setNewPost({ ...newPost, content: e.target.value })
                 }
-                placeholder={
-                  locale === "zh"
-                    ? "分享您的经验、问题或建议..."
-                    : "Share your experience, questions, or suggestions..."
-                }
+                placeholder={t("createPost.contentPlaceholder")}
                 className="w-full h-32 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -593,7 +559,7 @@ export default function SocialFeatures({
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "类型" : "Type"}
+                  {t("createPost.typeLabel")}
                 </label>
                 <select
                   value={newPost.type}
@@ -602,24 +568,16 @@ export default function SocialFeatures({
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="experience">
-                    {locale === "zh" ? "经验分享" : "Experience"}
-                  </option>
-                  <option value="tip">
-                    {locale === "zh" ? "小贴士" : "Tip"}
-                  </option>
-                  <option value="question">
-                    {locale === "zh" ? "问题" : "Question"}
-                  </option>
-                  <option value="support">
-                    {locale === "zh" ? "支持" : "Support"}
-                  </option>
+                  <option value="experience">{t("postTypes.experience")}</option>
+                  <option value="tip">{t("postTypes.tip")}</option>
+                  <option value="question">{t("postTypes.question")}</option>
+                  <option value="support">{t("postTypes.support")}</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "隐私设置" : "Privacy"}
+                  {t("createPost.privacyLabel")}
                 </label>
                 <select
                   value={newPost.privacy}
@@ -628,15 +586,9 @@ export default function SocialFeatures({
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="public">
-                    {locale === "zh" ? "公开" : "Public"}
-                  </option>
-                  <option value="friends">
-                    {locale === "zh" ? "仅好友" : "Friends Only"}
-                  </option>
-                  <option value="private">
-                    {locale === "zh" ? "私密" : "Private"}
-                  </option>
+                  <option value="public">{t("privacy.public")}</option>
+                  <option value="friends">{t("privacy.friends")}</option>
+                  <option value="private">{t("privacy.private")}</option>
                 </select>
               </div>
             </div>
@@ -653,14 +605,7 @@ export default function SocialFeatures({
                   <EyeOff className="w-4 h-4 text-red-500" />
                 )}
                 <span className="text-sm text-gray-600">
-                  {newPost.privacy === "public" &&
-                    (locale === "zh" ? "所有人可见" : "Visible to everyone")}
-                  {newPost.privacy === "friends" &&
-                    (locale === "zh"
-                      ? "仅好友可见"
-                      : "Visible to friends only")}
-                  {newPost.privacy === "private" &&
-                    (locale === "zh" ? "仅自己可见" : "Visible to you only")}
+                  {t(`privacy.${newPost.privacy}Visible`)}
                 </span>
               </div>
 
@@ -669,7 +614,7 @@ export default function SocialFeatures({
                 disabled={!newPost.content.trim()}
                 className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {locale === "zh" ? "发布" : "Publish"}
+                {t("createPost.publish")}
               </button>
             </div>
           </div>

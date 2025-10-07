@@ -449,20 +449,70 @@
       }
     },
     "reports": {
-      "title": "Report Generation",
-      "description": "Generate various health reports",
-      "generate": "Generate Report",
-      "export": "Export Report",
-      "types": {
-        "monthly": "Monthly Report",
-        "symptoms": "Symptom Report",
-        "progress": "Progress Report",
-        "comprehensive": "Comprehensive Report"
+      "title": "Advanced Report Generation",
+      "description": "Generate professional personal health reports and data analysis",
+      "buttons": {
+        "generate": "Generate Report",
+        "generating": "Generating...",
+        "export": "Export PDF"
       },
-      "actions": {
-        "generate": "Generate",
-        "download": "Download",
-        "share": "Share"
+      "configuration": {
+        "title": "Report Configuration",
+        "reportType": "Report Type",
+        "timeRange": "Time Range",
+        "privacyLevel": "Privacy Level",
+        "includeCharts": "Include Charts",
+        "includeRecommendations": "Include Recommendations"
+      },
+      "types": {
+        "summary": "Summary Report",
+        "detailed": "Detailed Report",
+        "medical": "Medical Report"
+      },
+      "timeRanges": {
+        "month": "Last Month",
+        "quarter": "Last Quarter",
+        "year": "Last Year"
+      },
+      "privacyLevels": {
+        "standard": "Standard",
+        "enhanced": "Enhanced",
+        "maximum": "Maximum"
+      },
+      "userProfile": {
+        "title": "User Profile",
+        "age": "Age",
+        "assessments": "Assessments",
+        "avgPainLevel": "Avg Pain Level",
+        "painTrend": "Pain Trend"
+      },
+      "insights": {
+        "title": "Smart Insights",
+        "confidence": "Confidence",
+        "actionable": "Actionable Recommendation"
+      },
+      "recommendations": {
+        "title": "Personalized Recommendations",
+        "priority": {
+          "high": "High Priority",
+          "medium": "Medium Priority",
+          "low": "Low Priority"
+        },
+        "effectiveness": "Effectiveness"
+      },
+      "charts": {
+        "title": "Data Visualization",
+        "painTrend": "Pain Trend",
+        "treatmentEffectiveness": "Treatment Effectiveness"
+      },
+      "privacy": {
+        "title": "Privacy Protection",
+        "dataEncryption": "Data Encryption",
+        "dataEncryptionDesc": "End-to-end encryption for all data",
+        "privacyControl": "Privacy Control",
+        "privacyControlDesc": "You have full control over data usage",
+        "compliance": "Compliance",
+        "complianceDesc": "GDPR and HIPAA compliant"
       }
     },
     "sync": {

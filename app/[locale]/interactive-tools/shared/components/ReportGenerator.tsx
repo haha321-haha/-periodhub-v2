@@ -368,13 +368,9 @@ export default function ReportGenerator({
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
             <FileText className="w-6 h-6 mr-2 text-green-600" />
-            {locale === "zh" ? "高级报告生成" : "Advanced Report Generation"}
+            {t("title")}
           </h2>
-          <p className="text-gray-600">
-            {locale === "zh"
-              ? "生成专业的个人健康报告和数据分析"
-              : "Generate professional personal health reports and data analysis"}
-          </p>
+          <p className="text-gray-600">{t("description")}</p>
         </div>
 
         <div className="flex space-x-2 mt-4 sm:mt-0">
@@ -386,12 +382,12 @@ export default function ReportGenerator({
             {loading ? (
               <>
                 <Clock className="w-4 h-4 mr-2 animate-spin" />
-                {locale === "zh" ? "生成中..." : "Generating..."}
+                {t("buttons.generating")}
               </>
             ) : (
               <>
                 <FileText className="w-4 h-4 mr-2" />
-                {locale === "zh" ? "生成报告" : "Generate Report"}
+                {t("buttons.generate")}
               </>
             )}
           </button>
@@ -402,7 +398,7 @@ export default function ReportGenerator({
               className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center"
             >
               <Download className="w-4 h-4 mr-2" />
-              {locale === "zh" ? "导出PDF" : "Export PDF"}
+              {t("buttons.export")}
             </button>
           )}
         </div>
@@ -412,34 +408,28 @@ export default function ReportGenerator({
       <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-6 border border-gray-200 mb-8">
         <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
           <Settings className="w-5 h-5 mr-2" />
-          {locale === "zh" ? "报告配置" : "Report Configuration"}
+          {t("configuration.title")}
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              {locale === "zh" ? "报告类型" : "Report Type"}
+              {t("configuration.reportType")}
             </label>
             <select
               value={reportType}
               onChange={(e) => setReportType(e.target.value as any)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="summary">
-                {locale === "zh" ? "摘要报告" : "Summary Report"}
-              </option>
-              <option value="detailed">
-                {locale === "zh" ? "详细报告" : "Detailed Report"}
-              </option>
-              <option value="medical">
-                {locale === "zh" ? "医疗报告" : "Medical Report"}
-              </option>
+              <option value="summary">{t("types.summary")}</option>
+              <option value="detailed">{t("types.detailed")}</option>
+              <option value="medical">{t("types.medical")}</option>
             </select>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              {locale === "zh" ? "时间范围" : "Time Range"}
+              {t("configuration.timeRange")}
             </label>
             <select
               value={timeRange}
@@ -448,36 +438,24 @@ export default function ReportGenerator({
               }}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="month">
-                {locale === "zh" ? "最近1个月" : "Last Month"}
-              </option>
-              <option value="quarter">
-                {locale === "zh" ? "最近3个月" : "Last Quarter"}
-              </option>
-              <option value="year">
-                {locale === "zh" ? "最近1年" : "Last Year"}
-              </option>
+              <option value="month">{t("timeRanges.month")}</option>
+              <option value="quarter">{t("timeRanges.quarter")}</option>
+              <option value="year">{t("timeRanges.year")}</option>
             </select>
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              {locale === "zh" ? "隐私级别" : "Privacy Level"}
+              {t("configuration.privacyLevel")}
             </label>
             <select
               value={privacyLevel}
               onChange={(e) => setPrivacyLevel(e.target.value as any)}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
-              <option value="standard">
-                {locale === "zh" ? "标准" : "Standard"}
-              </option>
-              <option value="enhanced">
-                {locale === "zh" ? "增强" : "Enhanced"}
-              </option>
-              <option value="maximum">
-                {locale === "zh" ? "最高" : "Maximum"}
-              </option>
+              <option value="standard">{t("privacyLevels.standard")}</option>
+              <option value="enhanced">{t("privacyLevels.enhanced")}</option>
+              <option value="maximum">{t("privacyLevels.maximum")}</option>
             </select>
           </div>
 
@@ -490,7 +468,7 @@ export default function ReportGenerator({
                 className="mr-2"
               />
               <span className="text-sm text-gray-700">
-                {locale === "zh" ? "包含图表" : "Include Charts"}
+                {t("configuration.includeCharts")}
               </span>
             </label>
             <label className="flex items-center">
@@ -501,7 +479,7 @@ export default function ReportGenerator({
                 className="mr-2"
               />
               <span className="text-sm text-gray-700">
-                {locale === "zh" ? "包含建议" : "Include Recommendations"}
+                {t("configuration.includeRecommendations")}
               </span>
             </label>
           </div>
@@ -515,7 +493,7 @@ export default function ReportGenerator({
           <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
             <h3 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
               <User className="w-5 h-5 mr-2" />
-              {locale === "zh" ? "用户概况" : "User Profile"}
+              {t("userProfile.title")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div className="text-center">
@@ -523,7 +501,7 @@ export default function ReportGenerator({
                   {reportData.userProfile.age}
                 </div>
                 <div className="text-sm text-blue-700">
-                  {locale === "zh" ? "年龄" : "Age"}
+                  {t("userProfile.age")}
                 </div>
               </div>
               <div className="text-center">
@@ -531,7 +509,7 @@ export default function ReportGenerator({
                   {reportData.userProfile.assessmentCount}
                 </div>
                 <div className="text-sm text-green-700">
-                  {locale === "zh" ? "评估次数" : "Assessments"}
+                  {t("userProfile.assessments")}
                 </div>
               </div>
               <div className="text-center">
@@ -539,7 +517,7 @@ export default function ReportGenerator({
                   {reportData.assessmentSummary.averagePainLevel}
                 </div>
                 <div className="text-sm text-purple-700">
-                  {locale === "zh" ? "平均疼痛等级" : "Avg Pain Level"}
+                  {t("userProfile.avgPainLevel")}
                 </div>
               </div>
               <div className="text-center">
@@ -551,7 +529,7 @@ export default function ReportGenerator({
                     "↘"}
                 </div>
                 <div className="text-sm text-orange-700">
-                  {locale === "zh" ? "疼痛趋势" : "Pain Trend"}
+                  {t("userProfile.painTrend")}
                 </div>
               </div>
             </div>
@@ -561,7 +539,7 @@ export default function ReportGenerator({
           <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 border border-purple-200">
             <h3 className="text-lg font-semibold text-purple-900 mb-4 flex items-center">
               <Brain className="w-5 h-5 mr-2" />
-              {locale === "zh" ? "智能洞察" : "Smart Insights"}
+              {t("insights.title")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {reportData.insights.map((insight, index) => (
@@ -578,7 +556,7 @@ export default function ReportGenerator({
                     </div>
                     <span className="text-xs bg-purple-100 text-purple-700 px-2 py-1 rounded-full">
                       {Math.round(insight.confidence * 100)}%{" "}
-                      {locale === "zh" ? "置信度" : "Confidence"}
+                      {t("insights.confidence")}
                     </span>
                   </div>
                   <p className="text-sm text-gray-700 mb-3">
@@ -587,9 +565,7 @@ export default function ReportGenerator({
                   {insight.actionable && (
                     <div className="flex items-center text-xs text-green-600">
                       <CheckCircle className="w-3 h-3 mr-1" />
-                      {locale === "zh"
-                        ? "可执行建议"
-                        : "Actionable Recommendation"}
+                      {t("insights.actionable")}
                     </div>
                   )}
                 </div>
@@ -602,9 +578,7 @@ export default function ReportGenerator({
             <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200">
               <h3 className="text-lg font-semibold text-green-900 mb-4 flex items-center">
                 <Target className="w-5 h-5 mr-2" />
-                {locale === "zh"
-                  ? "个性化建议"
-                  : "Personalized Recommendations"}
+                {t("recommendations.title")}
               </h3>
               <div className="space-y-4">
                 {reportData.recommendations.map((rec, index) => (
@@ -624,12 +598,7 @@ export default function ReportGenerator({
                           rec.priority,
                         )}`}
                       >
-                        {rec.priority === "high" &&
-                          (locale === "zh" ? "高优先级" : "High Priority")}
-                        {rec.priority === "medium" &&
-                          (locale === "zh" ? "中优先级" : "Medium Priority")}
-                        {rec.priority === "low" &&
-                          (locale === "zh" ? "低优先级" : "Low Priority")}
+                        {t(`recommendations.priority.${rec.priority}`)}
                       </span>
                     </div>
                     <p className="text-sm text-gray-700 mb-3">
@@ -643,7 +612,7 @@ export default function ReportGenerator({
                       <div className="flex items-center text-green-600">
                         <Star className="w-4 h-4 mr-1" />
                         {Math.round(rec.effectiveness * 100)}%{" "}
-                        {locale === "zh" ? "有效性" : "Effectiveness"}
+                        {t("recommendations.effectiveness")}
                       </div>
                     </div>
                   </div>
@@ -657,12 +626,12 @@ export default function ReportGenerator({
             <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-6 border border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <BarChart3 className="w-5 h-5 mr-2" />
-                {locale === "zh" ? "数据可视化" : "Data Visualization"}
+                {t("charts.title")}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-white rounded-lg p-4 border border-gray-200">
                   <h4 className="font-semibold text-gray-900 mb-3">
-                    {locale === "zh" ? "疼痛趋势" : "Pain Trend"}
+                    {t("charts.painTrend")}
                   </h4>
                   <div className="h-48 bg-gray-100 rounded flex items-center justify-center">
                     <LineChart className="w-8 h-8 text-gray-400" />
@@ -670,9 +639,7 @@ export default function ReportGenerator({
                 </div>
                 <div className="bg-white rounded-lg p-4 border border-gray-200">
                   <h4 className="font-semibold text-gray-900 mb-3">
-                    {locale === "zh"
-                      ? "治疗方法效果"
-                      : "Treatment Effectiveness"}
+                    {t("charts.treatmentEffectiveness")}
                   </h4>
                   <div className="h-48 bg-gray-100 rounded flex items-center justify-center">
                     <PieChart className="w-8 h-8 text-gray-400" />
@@ -686,7 +653,7 @@ export default function ReportGenerator({
           <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-6 border border-yellow-200">
             <h3 className="text-lg font-semibold text-yellow-900 mb-4 flex items-center">
               <Shield className="w-5 h-5 mr-2" />
-              {locale === "zh" ? "隐私保护" : "Privacy Protection"}
+              {t("privacy.title")}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center">
@@ -694,12 +661,10 @@ export default function ReportGenerator({
                   <Eye className="w-6 h-6 text-yellow-600" />
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-1">
-                  {locale === "zh" ? "数据加密" : "Data Encryption"}
+                  {t("privacy.dataEncryption")}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === "zh"
-                    ? "所有数据采用端到端加密"
-                    : "End-to-end encryption for all data"}
+                  {t("privacy.dataEncryptionDesc")}
                 </p>
               </div>
               <div className="text-center">
@@ -707,12 +672,10 @@ export default function ReportGenerator({
                   <Shield className="w-6 h-6 text-yellow-600" />
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-1">
-                  {locale === "zh" ? "隐私控制" : "Privacy Control"}
+                  {t("privacy.privacyControl")}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === "zh"
-                    ? "您完全控制数据的使用"
-                    : "You have full control over data usage"}
+                  {t("privacy.privacyControlDesc")}
                 </p>
               </div>
               <div className="text-center">
@@ -720,12 +683,10 @@ export default function ReportGenerator({
                   <CheckCircle className="w-6 h-6 text-yellow-600" />
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-1">
-                  {locale === "zh" ? "合规认证" : "Compliance"}
+                  {t("privacy.compliance")}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === "zh"
-                    ? "符合GDPR和HIPAA标准"
-                    : "GDPR and HIPAA compliant"}
+                  {t("privacy.complianceDesc")}
                 </p>
               </div>
             </div>

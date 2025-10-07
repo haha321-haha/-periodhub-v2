@@ -3926,20 +3926,70 @@
       }
     },
     "reports": {
-      "title": "报告生成",
-      "description": "生成各种健康报告",
-      "generate": "生成报告",
-      "export": "导出报告",
-      "types": {
-        "monthly": "月度报告",
-        "symptoms": "症状报告",
-        "progress": "进度报告",
-        "comprehensive": "综合报告"
+      "title": "高级报告生成",
+      "description": "生成专业的个人健康报告和数据分析",
+      "buttons": {
+        "generate": "生成报告",
+        "generating": "生成中...",
+        "export": "导出PDF"
       },
-      "actions": {
-        "generate": "生成",
-        "download": "下载",
-        "share": "分享"
+      "configuration": {
+        "title": "报告配置",
+        "reportType": "报告类型",
+        "timeRange": "时间范围",
+        "privacyLevel": "隐私级别",
+        "includeCharts": "包含图表",
+        "includeRecommendations": "包含建议"
+      },
+      "types": {
+        "summary": "摘要报告",
+        "detailed": "详细报告",
+        "medical": "医疗报告"
+      },
+      "timeRanges": {
+        "month": "最近1个月",
+        "quarter": "最近3个月",
+        "year": "最近1年"
+      },
+      "privacyLevels": {
+        "standard": "标准",
+        "enhanced": "增强",
+        "maximum": "最高"
+      },
+      "userProfile": {
+        "title": "用户概况",
+        "age": "年龄",
+        "assessments": "评估次数",
+        "avgPainLevel": "平均疼痛等级",
+        "painTrend": "疼痛趋势"
+      },
+      "insights": {
+        "title": "智能洞察",
+        "confidence": "置信度",
+        "actionable": "可执行建议"
+      },
+      "recommendations": {
+        "title": "个性化建议",
+        "priority": {
+          "high": "高优先级",
+          "medium": "中优先级",
+          "low": "低优先级"
+        },
+        "effectiveness": "有效性"
+      },
+      "charts": {
+        "title": "数据可视化",
+        "painTrend": "疼痛趋势",
+        "treatmentEffectiveness": "治疗方法效果"
+      },
+      "privacy": {
+        "title": "隐私保护",
+        "dataEncryption": "数据加密",
+        "dataEncryptionDesc": "所有数据采用端到端加密",
+        "privacyControl": "隐私控制",
+        "privacyControlDesc": "您完全控制数据的使用",
+        "compliance": "合规认证",
+        "complianceDesc": "符合GDPR和HIPAA标准"
       }
     },
     "sync": {

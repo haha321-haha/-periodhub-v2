@@ -508,21 +508,18 @@ const getToolBySlug = async (
   slug: string,
   locale: Locale,
 ): Promise<Tool | null> => {
+  // Get translations
+  const tTool = await getTranslations({ locale, namespace: "toolPage" });
+  
   const sampleTools: Tool[] = [
     {
       slug: "symptom-assessment",
       frontmatter: {
-        title:
-          locale === "zh"
-            ? "痛经症状评估工具 | 疼痛类型智能识别"
-            : "Period Pain Symptom Assessment | Smart Pain Type Identification",
-        description:
-          locale === "zh"
-            ? "痛经症状评估工具：通过专业医学问卷快速识别痛经类型和疼痛程度，智能分析症状模式，为您提供科学的个性化缓解建议和治疗方案。"
-            : "Period pain symptom assessment tool: Quickly identify menstrual pain types and severity through professional medical questionnaires, intelligently analyze symptom patterns, and provide scientific personalized relief recommendations.",
-        category: locale === "zh" ? "评估工具" : "Assessment",
-        difficulty: locale === "zh" ? "简单" : "Easy",
-        estimatedTime: locale === "zh" ? "5-10分钟" : "5-10 minutes",
+        title: tTool("tools.symptomAssessment.title"),
+        description: tTool("tools.symptomAssessment.description"),
+        category: tTool("categories.assessment"),
+        difficulty: tTool("difficulty.easy"),
+        estimatedTime: tTool("estimatedTime.5to10min"),
       },
       content:
         locale === "zh"
@@ -693,17 +690,11 @@ const getToolBySlug = async (
     {
       slug: "pain-tracker",
       frontmatter: {
-        title:
-          locale === "zh"
-            ? "痛经计算器 | 智能疼痛追踪分析"
-            : "Period Pain Calculator | Smart Pain Tracking & Analysis",
-        description:
-          locale === "zh"
-            ? "痛经严重度计算器：智能分析疼痛模式，计算疼痛等级，预测周期趋势，为您提供个性化缓解建议和治疗优化方案。"
-            : "Period pain severity calculator: Intelligently analyze pain patterns, calculate pain levels, predict cycle trends, and provide personalized relief recommendations.",
-        category: locale === "zh" ? "计算器工具" : "Calculator Tool",
-        difficulty: locale === "zh" ? "简单" : "Easy",
-        estimatedTime: locale === "zh" ? "每日2-3分钟" : "2-3 minutes daily",
+        title: tTool("tools.painTracker.title"),
+        description: tTool("tools.painTracker.description"),
+        category: tTool("categories.calculatorTool"),
+        difficulty: tTool("difficulty.easy"),
+        estimatedTime: tTool("estimatedTime.2to3minDaily"),
       },
       content:
         locale === "zh"
@@ -854,14 +845,11 @@ const getToolBySlug = async (
     {
       slug: "constitution-test",
       frontmatter: {
-        title: locale === "zh" ? "中医体质测试" : "TCM Constitution Test",
-        description:
-          locale === "zh"
-            ? "通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议。"
-            : "Discover your TCM constitution type through 11 questions and get personalized acupoint, diet, and lifestyle recommendations.",
-        category: locale === "zh" ? "体质评估" : "Constitution Assessment",
-        difficulty: locale === "zh" ? "简单" : "Easy",
-        estimatedTime: locale === "zh" ? "5-8分钟" : "5-8 minutes",
+        title: tTool("tools.constitutionTest.title"),
+        description: tTool("tools.constitutionTest.description"),
+        category: tTool("categories.constitutionAssessment"),
+        difficulty: tTool("difficulty.easy"),
+        estimatedTime: tTool("estimatedTime.5to8min"),
       },
       content: "", // Content will be handled by the ConstitutionTestTool component
       locale,
@@ -869,17 +857,11 @@ const getToolBySlug = async (
     {
       slug: "period-pain-assessment",
       frontmatter: {
-        title:
-          locale === "zh"
-            ? "痛经严重度评估计算器 | 快速疼痛分析"
-            : "Period Pain Severity Calculator | Quick Pain Analysis",
-        description:
-          locale === "zh"
-            ? "回答几个简单问题，初步了解你的痛经类型和严重程度，获得个性化的健康建议。"
-            : "Answer a few simple questions to understand your period pain type and severity, and get personalized health recommendations.",
-        category: locale === "zh" ? "健康评估" : "Health Assessment",
-        difficulty: locale === "zh" ? "简单" : "Easy",
-        estimatedTime: locale === "zh" ? "3-5分钟" : "3-5 minutes",
+        title: tTool("tools.periodPainAssessment.title"),
+        description: tTool("tools.periodPainAssessment.description"),
+        category: tTool("categories.healthAssessment"),
+        difficulty: tTool("difficulty.easy"),
+        estimatedTime: tTool("estimatedTime.3to5min"),
       },
       content: "", // Content will be handled by the PeriodPainAssessmentTool component
       locale,
@@ -887,14 +869,11 @@ const getToolBySlug = async (
     {
       slug: "cycle-tracker",
       frontmatter: {
-        title: locale === "zh" ? "智能周期追踪器" : "Smart Cycle Tracker",
-        description:
-          locale === "zh"
-            ? "智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律。"
-            : "Intelligently track your menstrual cycle, predict next period, record symptom changes, and help you better understand your body patterns.",
-        category: locale === "zh" ? "追踪工具" : "Tracking Tool",
-        difficulty: locale === "zh" ? "简单" : "Easy",
-        estimatedTime: locale === "zh" ? "每日1-2分钟" : "1-2 minutes daily",
+        title: tTool("tools.cycleTracker.title"),
+        description: tTool("tools.cycleTracker.description"),
+        category: tTool("categories.trackingTool"),
+        difficulty: tTool("difficulty.easy"),
+        estimatedTime: tTool("estimatedTime.1to2minDaily"),
       },
       content: "", // Content will be handled by the CycleTrackerTool component
       locale,
@@ -902,14 +881,11 @@ const getToolBySlug = async (
     {
       slug: "symptom-tracker",
       frontmatter: {
-        title: locale === "zh" ? "症状记录器" : "Symptom Tracker",
-        description:
-          locale === "zh"
-            ? "详细记录经期症状，包括疼痛强度、情绪变化、身体反应等，为健康管理提供数据支持。"
-            : "Detailed recording of menstrual symptoms including pain intensity, mood changes, physical reactions, providing data support for health management.",
-        category: locale === "zh" ? "记录工具" : "Recording Tool",
-        difficulty: locale === "zh" ? "简单" : "Easy",
-        estimatedTime: locale === "zh" ? "每日3-5分钟" : "3-5 minutes daily",
+        title: tTool("tools.symptomTracker.title"),
+        description: tTool("tools.symptomTracker.description"),
+        category: tTool("categories.recordingTool"),
+        difficulty: tTool("difficulty.easy"),
+        estimatedTime: tTool("estimatedTime.3to5minDaily"),
       },
       content: "", // Content will be handled by the SymptomTrackerTool component
       locale,
@@ -997,15 +973,15 @@ export default async function ToolPage({
     toolName: toolData.frontmatter.title,
     description: toolData.frontmatter.description,
     features: [
-      locale === "zh" ? "症状评估" : "Symptom Assessment",
-      locale === "zh" ? "个性化建议" : "Personalized Recommendations",
-      locale === "zh" ? "健康报告" : "Health Reports",
+      tTool("structuredData.features.symptomAssessment"),
+      tTool("structuredData.features.personalizedRecommendations"),
+      tTool("structuredData.features.healthReports"),
     ],
     category: "HealthApplication",
     rating: { value: 4.8, count: 1250 },
     breadcrumbs: [
       {
-        name: locale === "zh" ? "互动工具" : "Interactive Tools",
+        name: tTool("breadcrumb.interactiveTools"),
         url: `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
         }/${locale}/interactive-tools`,
@@ -1025,7 +1001,7 @@ export default async function ToolPage({
     path: `/interactive-tools/${tool}`,
     breadcrumbs: [
       {
-        name: locale === "zh" ? "互动工具" : "Interactive Tools",
+        name: tTool("breadcrumb.interactiveTools"),
         url: `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
         }/${locale}/interactive-tools`,
@@ -1049,7 +1025,7 @@ export default async function ToolPage({
         <Breadcrumb
           items={[
             {
-              label: locale === "zh" ? "互动工具" : "Interactive Tools",
+              label: tTool("breadcrumb.interactiveTools"),
               href: `/${locale}/interactive-tools`,
             },
             { label: toolData.frontmatter.title },
@@ -1139,7 +1115,7 @@ export default async function ToolPage({
               {/* 相关工具区域 */}
               <section>
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                  {locale === "zh" ? "相关工具" : "Related Tools"}
+                  {tTool("relatedTools")}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {relatedTools.map((tool) => (
@@ -1156,16 +1132,10 @@ export default async function ToolPage({
               <section>
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">
                   {tool === "cycle-tracker"
-                    ? locale === "zh"
-                      ? "周期健康文章"
-                      : "Cycle Health Articles"
+                    ? tTool("relatedArticles.cycleTracker")
                     : tool === "constitution-test"
-                      ? locale === "zh"
-                        ? "中医体质调理文章"
-                        : "TCM Constitution Articles"
-                      : locale === "zh"
-                        ? "相关健康文章"
-                        : "Related Health Articles"}
+                      ? tTool("relatedArticles.constitutionTest")
+                      : tTool("relatedArticles.default")}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {relatedArticles.map((article) => (
@@ -1182,16 +1152,10 @@ export default async function ToolPage({
               <section>
                 <h2 className="text-xl font-semibold text-gray-900 mb-6">
                   {tool === "cycle-tracker"
-                    ? locale === "zh"
-                      ? "生活场景指导"
-                      : "Life Scenario Guidance"
+                    ? tTool("scenarioSolutions.cycleTracker")
                     : tool === "constitution-test"
-                      ? locale === "zh"
-                        ? "体质调理方案"
-                        : "Constitution Solutions"
-                      : locale === "zh"
-                        ? "场景解决方案"
-                        : "Scenario Solutions"}
+                      ? tTool("scenarioSolutions.constitutionTest")
+                      : tTool("scenarioSolutions.default")}
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {scenarioSolutions.map((solution) => (

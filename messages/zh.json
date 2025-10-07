@@ -5641,7 +5641,10 @@
       "assessment": "评估工具",
       "tracking": "追踪工具",
       "constitutionAssessment": "体质评估",
-      "healthAssessment": "健康评估"
+      "healthAssessment": "健康评估",
+      "calculatorTool": "计算器工具",
+      "recordingTool": "记录工具",
+      "trackingTool": "追踪工具"
     },
     "difficulty": {
       "easy": "简单"
@@ -5650,7 +5653,56 @@
       "5to10min": "5-10分钟",
       "2to3minDaily": "每日2-3分钟",
       "5to8min": "5-8分钟",
-      "3to5min": "3-5分钟"
+      "3to5min": "3-5分钟",
+      "1to2minDaily": "每日1-2分钟",
+      "3to5minDaily": "每日3-5分钟"
+    },
+    "tools": {
+      "symptomAssessment": {
+        "title": "痛经症状评估工具 | 疼痛类型智能识别",
+        "description": "痛经症状评估工具：通过专业医学问卷快速识别痛经类型和疼痛程度，智能分析症状模式，为您提供科学的个性化缓解建议和治疗方案。"
+      },
+      "painTracker": {
+        "title": "痛经计算器 | 智能疼痛追踪分析",
+        "description": "痛经严重度计算器：智能分析疼痛模式，计算疼痛等级，预测周期趋势，为您提供个性化缓解建议和治疗优化方案。"
+      },
+      "constitutionTest": {
+        "title": "中医体质测试",
+        "description": "通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议。"
+      },
+      "periodPainAssessment": {
+        "title": "痛经评估工具",
+        "description": "回答几个简单问题，初步了解你的痛经类型和严重程度，获得个性化的健康建议。"
+      },
+      "cycleTracker": {
+        "title": "智能周期追踪器",
+        "description": "智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律。"
+      },
+      "symptomTracker": {
+        "title": "症状记录器",
+        "description": "详细记录经期症状，包括疼痛强度、情绪变化、身体反应等，为健康管理提供数据支持。"
+      }
+    },
+    "breadcrumb": {
+      "interactiveTools": "互动工具"
+    },
+    "relatedTools": "相关工具",
+    "relatedArticles": {
+      "default": "相关健康文章",
+      "cycleTracker": "周期健康文章",
+      "constitutionTest": "中医体质调理文章"
+    },
+    "scenarioSolutions": {
+      "default": "场景解决方案",
+      "cycleTracker": "生活场景指导",
+      "constitutionTest": "体质调理方案"
+    },
+    "structuredData": {
+      "features": {
+        "symptomAssessment": "症状评估",
+        "personalizedRecommendations": "个性化建议",
+        "healthReports": "健康报告"
+      }
     }
   },
   "downloads": {

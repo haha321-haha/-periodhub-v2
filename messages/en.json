@@ -4972,7 +4972,10 @@
       "assessment": "Assessment Tools",
       "tracking": "Tracking Tools",
       "constitutionAssessment": "Constitution Assessment",
-      "healthAssessment": "Health Assessment"
+      "healthAssessment": "Health Assessment",
+      "calculatorTool": "Calculator Tool",
+      "recordingTool": "Recording Tool",
+      "trackingTool": "Tracking Tool"
     },
     "difficulty": {
       "easy": "Easy"
@@ -4981,7 +4984,56 @@
       "5to10min": "5-10 minutes",
       "2to3minDaily": "2-3 minutes daily",
       "5to8min": "5-8 minutes",
-      "3to5min": "3-5 minutes"
+      "3to5min": "3-5 minutes",
+      "1to2minDaily": "1-2 minutes daily",
+      "3to5minDaily": "3-5 minutes daily"
+    },
+    "tools": {
+      "symptomAssessment": {
+        "title": "Period Pain Symptom Assessment | Smart Pain Type Identification",
+        "description": "Period pain symptom assessment tool: Quickly identify menstrual pain types and severity through professional medical questionnaires, intelligently analyze symptom patterns, and provide scientific personalized relief recommendations."
+      },
+      "painTracker": {
+        "title": "Period Pain Calculator | Smart Pain Tracking Analysis",
+        "description": "Period pain severity calculator: Intelligently analyze pain patterns, calculate pain levels, predict cycle trends, and provide personalized relief recommendations."
+      },
+      "constitutionTest": {
+        "title": "TCM Constitution Test",
+        "description": "Discover your TCM constitution type through 11 questions and get personalized acupoint, diet, and lifestyle recommendations."
+      },
+      "periodPainAssessment": {
+        "title": "Period Pain Assessment Tool",
+        "description": "Answer a few simple questions to understand your period pain type and severity, and get personalized health recommendations."
+      },
+      "cycleTracker": {
+        "title": "Smart Cycle Tracker",
+        "description": "Intelligently track your menstrual cycle, predict next period, record symptom changes, and help you better understand your body patterns."
+      },
+      "symptomTracker": {
+        "title": "Symptom Tracker",
+        "description": "Detailed recording of menstrual symptoms including pain intensity, mood changes, physical reactions, providing data support for health management."
+      }
+    },
+    "breadcrumb": {
+      "interactiveTools": "Interactive Tools"
+    },
+    "relatedTools": "Related Tools",
+    "relatedArticles": {
+      "default": "Related Health Articles",
+      "cycleTracker": "Cycle Health Articles",
+      "constitutionTest": "TCM Constitution Articles"
+    },
+    "scenarioSolutions": {
+      "default": "Scenario Solutions",
+      "cycleTracker": "Life Scenario Guidance",
+      "constitutionTest": "Constitution Solutions"
+    },
+    "structuredData": {
+      "features": {
+        "symptomAssessment": "Symptom Assessment",
+        "personalizedRecommendations": "Personalized Recommendations",
+        "healthReports": "Health Reports"
+      }
     }
   }
 }

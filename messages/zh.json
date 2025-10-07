@@ -3075,7 +3075,10 @@
         "effectiveness": "有效性",
         "notes": "备注",
         "save": "保存记录",
-        "cancel": "取消"
+        "cancel": "取消",
+        "overwrite": "覆盖",
+        "duplicateTitle": "该日期已有记录",
+        "duplicateWarning": "该日期已经有疼痛记录了。您想要覆盖现有记录吗？"
       },
       "insights": {
         "title": "您的疼痛洞察",

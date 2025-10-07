@@ -242,14 +242,10 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
               </div>
               <div className="ml-3 flex-1">
                 <h3 className="text-sm font-medium text-yellow-800">
-                  {locale === "zh"
-                    ? "该日期已有记录"
-                    : "Entry exists for this date"}
+                  {t("entryForm.duplicateTitle")}
                 </h3>
                 <p className="mt-1 text-sm text-yellow-700">
-                  {locale === "zh"
-                    ? "该日期已经有疼痛记录了。您想要覆盖现有记录吗？"
-                    : "There is already a pain entry for this date. Do you want to overwrite the existing entry?"}
+                  {t("entryForm.duplicateWarning")}
                 </p>
                 <div className="mt-3 flex space-x-3">
                   <button
@@ -257,14 +253,14 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
                     onClick={handleOverwriteConfirm}
                     className="bg-yellow-600 text-white px-3 py-1 rounded text-sm hover:bg-yellow-700 transition-colors"
                   >
-                    {locale === "zh" ? "覆盖" : "Overwrite"}
+                    {t("entryForm.overwrite")}
                   </button>
                   <button
                     type="button"
                     onClick={handleOverwriteCancel}
                     className="bg-gray-300 text-gray-700 px-3 py-1 rounded text-sm hover:bg-gray-400 transition-colors"
                   >
-                    {locale === "zh" ? "取消" : "Cancel"}
+                    {t("entryForm.cancel")}
                   </button>
                 </div>
               </div>

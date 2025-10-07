@@ -308,6 +308,35 @@
       "averageEffectiveness": "Average Effectiveness",
       "averageSafety": "Average Safety"
     },
+    "analytics": {
+      "title": "Analytics Dashboard",
+      "description": "Deep insights into your menstrual health patterns and trends",
+      "noData": "No Data Available",
+      "noDataDescription": "Start recording your symptom data to see analytics",
+      "metrics": {
+        "pain": "Pain",
+        "mood": "Mood",
+        "activity": "Activity"
+      },
+      "trends": {
+        "painTrend": "Pain Trend",
+        "moodTrend": "Mood Trend",
+        "activityTrend": "Activity Trend",
+        "improving": "Improving",
+        "stable": "Stable",
+        "worsening": "Worsening",
+        "basedOnData": "Based on last 30 days of data"
+      },
+      "charts": {
+        "symptomTrends": "Symptom Trends",
+        "treatmentEffectiveness": "Treatment Effectiveness"
+      },
+      "insights": {
+        "title": "Smart Insights",
+        "confidence": "Confidence",
+        "viewRecommendation": "View Recommendation"
+      }
+    },
     "performance": {
       "title": "Performance Optimization",
       "description": "Improve application performance and optimize user experience",
@@ -376,22 +405,6 @@
         "startOptimization": "Start Optimization",
         "optimizing": "Optimizing...",
         "exportReport": "Export Report"
-      }
-    },
-    "analytics": {
-      "title": "Data Analytics",
-      "description": "User behavior data analysis and insights",
-      "dashboard": "Analytics Dashboard",
-      "reports": "Analysis Reports",
-      "metrics": {
-        "userActivity": "User Activity",
-        "engagement": "Engagement Rate",
-        "retention": "Retention Rate",
-        "conversion": "Conversion Rate"
-      },
-      "actions": {
-        "viewDetails": "View Details",
-        "exportData": "Export Data"
       }
     },
     "social": {

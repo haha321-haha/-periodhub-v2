@@ -218,13 +218,9 @@ export default function AnalyticsDashboard({
       <div className="bg-white rounded-xl shadow-lg p-8 text-center">
         <Activity className="w-16 h-16 text-gray-400 mx-auto mb-4" />
         <h3 className="text-lg font-semibold text-gray-900 mb-2">
-          {locale === "zh" ? "暂无数据" : "No Data Available"}
+          {t("noData")}
         </h3>
-        <p className="text-gray-600">
-          {locale === "zh"
-            ? "开始记录您的症状数据以查看分析结果"
-            : "Start recording your symptom data to see analytics"}
-        </p>
+        <p className="text-gray-600">{t("noDataDescription")}</p>
       </div>
     );
   }
@@ -235,13 +231,9 @@ export default function AnalyticsDashboard({
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
-            {locale === "zh" ? "数据分析仪表板" : "Analytics Dashboard"}
+            {t("title")}
           </h2>
-          <p className="text-gray-600">
-            {locale === "zh"
-              ? "深入了解您的经期健康模式和趋势"
-              : "Deep insights into your menstrual health patterns and trends"}
-          </p>
+          <p className="text-gray-600">{t("description")}</p>
         </div>
 
         <div className="flex space-x-2 mt-4 sm:mt-0">
@@ -255,9 +247,7 @@ export default function AnalyticsDashboard({
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              {metric === "pain" && (locale === "zh" ? "疼痛" : "Pain")}
-              {metric === "mood" && (locale === "zh" ? "情绪" : "Mood")}
-              {metric === "activity" && (locale === "zh" ? "活动" : "Activity")}
+              {t(`metrics.${metric}`)}
             </button>
           ))}
         </div>
@@ -294,28 +284,14 @@ export default function AnalyticsDashboard({
                     <TrendingDown className="w-5 h-5 mr-1" />
                   )}
                   <span className="text-sm font-medium">
-                    {trend === "improving" &&
-                      (locale === "zh" ? "改善中" : "Improving")}
-                    {trend === "stable" &&
-                      (locale === "zh" ? "稳定" : "Stable")}
-                    {trend === "worsening" &&
-                      (locale === "zh" ? "下降中" : "Worsening")}
+                    {t(`trends.${trend}`)}
                   </span>
                 </div>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {key === "painTrend" &&
-                  (locale === "zh" ? "疼痛趋势" : "Pain Trend")}
-                {key === "moodTrend" &&
-                  (locale === "zh" ? "情绪趋势" : "Mood Trend")}
-                {key === "activityTrend" &&
-                  (locale === "zh" ? "活动趋势" : "Activity Trend")}
+                {t(`trends.${key}`)}
               </h3>
-              <p className="text-sm text-gray-600">
-                {locale === "zh"
-                  ? "基于最近30天的数据分析"
-                  : "Based on last 30 days of data"}
-              </p>
+              <p className="text-sm text-gray-600">{t("trends.basedOnData")}</p>
             </div>
           );
         })}
@@ -326,7 +302,7 @@ export default function AnalyticsDashboard({
         {/* 时间序列图表 */}
         <div className="bg-gray-50 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            {locale === "zh" ? "症状趋势图" : "Symptom Trends"}
+            {t("charts.symptomTrends")}
           </h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={chartData}>
@@ -348,7 +324,7 @@ export default function AnalyticsDashboard({
         {/* 治疗方法效果 */}
         <div className="bg-gray-50 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            {locale === "zh" ? "治疗方法效果" : "Treatment Effectiveness"}
+            {t("charts.treatmentEffectiveness")}
           </h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -378,7 +354,7 @@ export default function AnalyticsDashboard({
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200">
         <h3 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
           <Award className="w-5 h-5 mr-2" />
-          {locale === "zh" ? "智能洞察" : "Smart Insights"}
+          {t("insights.title")}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {data.insights.map((insight, index) => (
@@ -389,8 +365,7 @@ export default function AnalyticsDashboard({
               <div className="flex items-start justify-between mb-3">
                 <h4 className="font-semibold text-gray-900">{insight.title}</h4>
                 <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                  {Math.round(insight.confidence * 100)}%{" "}
-                  {locale === "zh" ? "置信度" : "Confidence"}
+                  {Math.round(insight.confidence * 100)}% {t("insights.confidence")}
                 </span>
               </div>
               <p className="text-sm text-gray-700 mb-3">
@@ -398,7 +373,7 @@ export default function AnalyticsDashboard({
               </p>
               {insight.actionable && (
                 <button className="text-xs bg-blue-600 text-white px-3 py-1 rounded-full hover:bg-blue-700 transition-colors">
-                  {locale === "zh" ? "查看建议" : "View Recommendation"}
+                  {t("insights.viewRecommendation")}
                 </button>
               )}
             </div>

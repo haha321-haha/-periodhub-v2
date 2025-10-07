@@ -3884,22 +3884,6 @@
         "exportReport": "导出报告"
       }
     },
-    "analytics": {
-      "title": "数据分析",
-      "description": "用户行为数据分析和洞察",
-      "dashboard": "分析仪表板",
-      "reports": "分析报告",
-      "metrics": {
-        "userActivity": "用户活跃度",
-        "engagement": "参与率",
-        "retention": "留存率",
-        "conversion": "转化率"
-      },
-      "actions": {
-        "viewDetails": "查看详情",
-        "exportData": "导出数据"
-      }
-    },
     "social": {
       "title": "社交功能",
       "description": "用户社交互动功能",
@@ -4086,6 +4070,35 @@
       "totalStudies": "总研究数量",
       "averageEffectiveness": "平均有效性",
       "averageSafety": "平均安全性"
+    },
+    "analytics": {
+      "title": "数据分析仪表板",
+      "description": "深入了解您的经期健康模式和趋势",
+      "noData": "暂无数据",
+      "noDataDescription": "开始记录您的症状数据以查看分析结果",
+      "metrics": {
+        "pain": "疼痛",
+        "mood": "情绪",
+        "activity": "活动"
+      },
+      "trends": {
+        "painTrend": "疼痛趋势",
+        "moodTrend": "情绪趋势",
+        "activityTrend": "活动趋势",
+        "improving": "改善中",
+        "stable": "稳定",
+        "worsening": "下降中",
+        "basedOnData": "基于最近30天的数据分析"
+      },
+      "charts": {
+        "symptomTrends": "症状趋势图",
+        "treatmentEffectiveness": "治疗方法效果"
+      },
+      "insights": {
+        "title": "智能洞察",
+        "confidence": "置信度",
+        "viewRecommendation": "查看建议"
+      }
     }
   },
   "scenarioSolutionsPage": {

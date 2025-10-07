@@ -170,15 +170,9 @@ export default function I18nOptimizer({
         <div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
             <Globe className="w-6 h-6 mr-2 text-blue-600" />
-            {locale === "zh"
-              ? "国际化优化"
-              : "Internationalization Optimization"}
+            {t("title")}
           </h2>
-          <p className="text-gray-600">
-            {locale === "zh"
-              ? "完善翻译质量，优化多语言支持"
-              : "Improve translation quality and optimize multilingual support"}
-          </p>
+          <p className="text-gray-600">{t("description")}</p>
         </div>
 
         <div className="flex items-center space-x-2 mt-4 sm:mt-0">
@@ -193,8 +187,7 @@ export default function I18nOptimizer({
                   : "bg-red-100 text-red-700"
             }`}
           >
-            {translationStatus?.qualityScore}%{" "}
-            {locale === "zh" ? "质量分数" : "Quality Score"}
+            {translationStatus?.qualityScore}% {t("status.qualityScore")}
           </div>
         </div>
       </div>
@@ -210,12 +203,10 @@ export default function I18nOptimizer({
               </span>
             </div>
             <h3 className="text-lg font-semibold text-blue-900 mb-2">
-              {locale === "zh" ? "总翻译键" : "Total Keys"}
+              {t("status.totalKeys")}
             </h3>
             <p className="text-sm text-blue-700">
-              {locale === "zh"
-                ? "中英文翻译键总数"
-                : "Total translation keys in both languages"}
+              {t("status.totalKeysDesc")}
             </p>
           </div>
 
@@ -227,12 +218,10 @@ export default function I18nOptimizer({
               </span>
             </div>
             <h3 className="text-lg font-semibold text-red-900 mb-2">
-              {locale === "zh" ? "缺失翻译" : "Missing Keys"}
+              {t("status.missingKeys")}
             </h3>
             <p className="text-sm text-red-700">
-              {locale === "zh"
-                ? "需要补充的翻译键"
-                : "Translation keys that need to be added"}
+              {t("status.missingKeysDesc")}
             </p>
           </div>
 
@@ -244,12 +233,10 @@ export default function I18nOptimizer({
               </span>
             </div>
             <h3 className="text-lg font-semibold text-yellow-900 mb-2">
-              {locale === "zh" ? "不一致翻译" : "Inconsistent Keys"}
+              {t("status.inconsistentKeys")}
             </h3>
             <p className="text-sm text-yellow-700">
-              {locale === "zh"
-                ? "需要修复的翻译键"
-                : "Translation keys that need to be fixed"}
+              {t("status.inconsistentKeysDesc")}
             </p>
           </div>
 
@@ -261,12 +248,10 @@ export default function I18nOptimizer({
               </span>
             </div>
             <h3 className="text-lg font-semibold text-green-900 mb-2">
-              {locale === "zh" ? "质量分数" : "Quality Score"}
+              {t("status.qualityScore")}
             </h3>
             <p className="text-sm text-green-700">
-              {locale === "zh"
-                ? "整体翻译质量评分"
-                : "Overall translation quality score"}
+              {t("status.qualityScoreDesc")}
             </p>
           </div>
         </div>
@@ -277,7 +262,7 @@ export default function I18nOptimizer({
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 border border-blue-200 mb-8">
           <h3 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
             <RefreshCw className="w-5 h-5 mr-2 animate-spin" />
-            {locale === "zh" ? "正在优化翻译..." : "Optimizing translations..."}
+            {t("optimization.optimizing")}
           </h3>
 
           <div className="w-full bg-blue-200 rounded-full h-3 mb-4">
@@ -288,7 +273,7 @@ export default function I18nOptimizer({
           </div>
 
           <p className="text-sm text-blue-700">
-            {optimizationProgress}% {locale === "zh" ? "完成" : "Complete"}
+            {optimizationProgress}% {t("optimization.complete")}
           </p>
         </div>
       )}
@@ -298,7 +283,7 @@ export default function I18nOptimizer({
         <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-6 border border-red-200 mb-8">
           <h3 className="text-lg font-semibold text-red-900 mb-4 flex items-center">
             <AlertTriangle className="w-5 h-5 mr-2" />
-            {locale === "zh" ? "缺失翻译键" : "Missing Translation Keys"}
+            {t("missing.title")}
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -314,13 +299,9 @@ export default function I18nOptimizer({
 
           {translationStatus.missingKeys.length > 10 && (
             <p className="text-sm text-red-600">
-              {locale === "zh"
-                ? `还有 ${
-                    translationStatus.missingKeys.length - 10
-                  } 个缺失的翻译键...`
-                : `And ${
-                    translationStatus.missingKeys.length - 10
-                  } more missing keys...`}
+              {t("missing.more", {
+                count: translationStatus.missingKeys.length - 10,
+              })}
             </p>
           )}
         </div>
@@ -331,7 +312,7 @@ export default function I18nOptimizer({
         <div className="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg p-6 border border-yellow-200 mb-8">
           <h3 className="text-lg font-semibold text-yellow-900 mb-4 flex items-center">
             <RefreshCw className="w-5 h-5 mr-2" />
-            {locale === "zh" ? "不一致翻译键" : "Inconsistent Translation Keys"}
+            {t("inconsistent.title")}
           </h3>
 
           <div className="space-y-3">
@@ -342,9 +323,7 @@ export default function I18nOptimizer({
               >
                 <code className="text-sm text-yellow-700 font-mono">{key}</code>
                 <p className="text-xs text-yellow-600 mt-1">
-                  {locale === "zh"
-                    ? "需要统一翻译风格"
-                    : "Needs consistent translation style"}
+                  {t("inconsistent.needsUnification")}
                 </p>
               </div>
             ))}
@@ -356,7 +335,7 @@ export default function I18nOptimizer({
       <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border border-green-200 mb-8">
         <h3 className="text-lg font-semibold text-green-900 mb-4 flex items-center">
           <BarChart3 className="w-5 h-5 mr-2" />
-          {locale === "zh" ? "优化建议" : "Optimization Recommendations"}
+          {t("optimization.title")}
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -365,14 +344,10 @@ export default function I18nOptimizer({
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-gray-900">
-                  {locale === "zh"
-                    ? "补充缺失翻译"
-                    : "Add Missing Translations"}
+                  {t("optimization.addMissing")}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === "zh"
-                    ? "补充210个缺失的英文翻译键"
-                    : "Add 210 missing English translation keys"}
+                  {t("optimization.addMissingDesc")}
                 </p>
               </div>
             </div>
@@ -381,12 +356,10 @@ export default function I18nOptimizer({
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-gray-900">
-                  {locale === "zh" ? "统一翻译风格" : "Unify Translation Style"}
+                  {t("optimization.unifyStyle")}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === "zh"
-                    ? "确保医学术语翻译的一致性"
-                    : "Ensure consistency in medical terminology"}
+                  {t("optimization.unifyStyleDesc")}
                 </p>
               </div>
             </div>
@@ -397,14 +370,10 @@ export default function I18nOptimizer({
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-gray-900">
-                  {locale === "zh"
-                    ? "优化布局适配"
-                    : "Optimize Layout Adaptation"}
+                  {t("optimization.optimizeLayout")}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === "zh"
-                    ? "调整长文本的显示布局"
-                    : "Adjust layout for long text content"}
+                  {t("optimization.optimizeLayoutDesc")}
                 </p>
               </div>
             </div>
@@ -413,12 +382,10 @@ export default function I18nOptimizer({
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-gray-900">
-                  {locale === "zh" ? "文化适应性" : "Cultural Adaptation"}
+                  {t("optimization.culturalAdaptation")}
                 </h4>
                 <p className="text-sm text-gray-600">
-                  {locale === "zh"
-                    ? "根据文化背景调整表达方式"
-                    : "Adjust expressions based on cultural context"}
+                  {t("optimization.culturalAdaptationDesc")}
                 </p>
               </div>
             </div>
@@ -436,12 +403,12 @@ export default function I18nOptimizer({
           {isOptimizing ? (
             <>
               <RefreshCw className="w-5 h-5 mr-2 animate-spin" />
-              {locale === "zh" ? "优化中..." : "Optimizing..."}
+              {t("actions.optimizing")}
             </>
           ) : (
             <>
               <Settings className="w-5 h-5 mr-2" />
-              {locale === "zh" ? "开始优化" : "Start Optimization"}
+              {t("actions.startOptimization")}
             </>
           )}
         </button>
@@ -451,7 +418,7 @@ export default function I18nOptimizer({
           className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center"
         >
           <Download className="w-5 h-5 mr-2" />
-          {locale === "zh" ? "导出报告" : "Export Report"}
+          {t("actions.exportReport")}
         </button>
       </div>
     </div>

@@ -3849,19 +3849,38 @@
       "description": "完善翻译质量，优化多语言支持",
       "status": {
         "totalKeys": "总翻译键",
+        "totalKeysDesc": "中英文翻译键总数",
         "missingKeys": "缺失翻译",
+        "missingKeysDesc": "需要补充的翻译键",
         "inconsistentKeys": "不一致翻译",
-        "qualityScore": "质量分数"
+        "inconsistentKeysDesc": "需要修复的翻译键",
+        "qualityScore": "质量分数",
+        "qualityScoreDesc": "整体翻译质量评分"
       },
       "optimization": {
         "title": "优化建议",
+        "optimizing": "正在优化翻译...",
+        "complete": "完成",
         "addMissing": "补充缺失翻译",
+        "addMissingDesc": "补充210个缺失的英文翻译键",
         "unifyStyle": "统一翻译风格",
+        "unifyStyleDesc": "确保医学术语翻译的一致性",
         "optimizeLayout": "优化布局适配",
-        "culturalAdaptation": "文化适应性"
+        "optimizeLayoutDesc": "调整长文本的显示布局",
+        "culturalAdaptation": "文化适应性",
+        "culturalAdaptationDesc": "根据文化背景调整表达方式"
+      },
+      "missing": {
+        "title": "缺失翻译键",
+        "more": "还有 {count} 个缺失的翻译键..."
+      },
+      "inconsistent": {
+        "title": "不一致翻译键",
+        "needsUnification": "需要统一翻译风格"
       },
       "actions": {
         "startOptimization": "开始优化",
+        "optimizing": "优化中...",
         "exportReport": "导出报告"
       }
     },

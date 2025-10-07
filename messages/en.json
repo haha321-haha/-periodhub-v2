@@ -310,20 +310,39 @@
       "title": "Internationalization Optimization",
       "description": "Improve translation quality and optimize multi-language support",
       "status": {
-        "totalKeys": "Total Translation Keys",
-        "missingKeys": "Missing Translations",
-        "inconsistentKeys": "Inconsistent Translations",
-        "qualityScore": "Quality Score"
+        "totalKeys": "Total Keys",
+        "totalKeysDesc": "Total translation keys in both languages",
+        "missingKeys": "Missing Keys",
+        "missingKeysDesc": "Translation keys that need to be added",
+        "inconsistentKeys": "Inconsistent Keys",
+        "inconsistentKeysDesc": "Translation keys that need to be fixed",
+        "qualityScore": "Quality Score",
+        "qualityScoreDesc": "Overall translation quality score"
       },
       "optimization": {
         "title": "Optimization Recommendations",
+        "optimizing": "Optimizing translations...",
+        "complete": "Complete",
         "addMissing": "Add Missing Translations",
+        "addMissingDesc": "Add 210 missing English translation keys",
         "unifyStyle": "Unify Translation Style",
+        "unifyStyleDesc": "Ensure consistency in medical terminology",
         "optimizeLayout": "Optimize Layout Adaptation",
-        "culturalAdaptation": "Cultural Adaptation"
+        "optimizeLayoutDesc": "Adjust layout for long text content",
+        "culturalAdaptation": "Cultural Adaptation",
+        "culturalAdaptationDesc": "Adjust expressions based on cultural context"
+      },
+      "missing": {
+        "title": "Missing Translation Keys",
+        "more": "And {count} more missing keys..."
+      },
+      "inconsistent": {
+        "title": "Inconsistent Translation Keys",
+        "needsUnification": "Needs consistent translation style"
       },
       "actions": {
         "startOptimization": "Start Optimization",
+        "optimizing": "Optimizing...",
         "exportReport": "Export Report"
       }
     },

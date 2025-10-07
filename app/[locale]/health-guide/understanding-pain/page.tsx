@@ -42,6 +42,10 @@ export default async function UnderstandingPainPage({
   unstable_setRequestLocale(locale);
 
   const commonT = await getTranslations({ locale, namespace: "common" });
+  const tcmT = await getTranslations({
+    locale,
+    namespace: "understandingPain.tcmAnalysis",
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
@@ -198,15 +202,11 @@ export default async function UnderstandingPainPage({
           {/* Traditional Chinese Medicine Perspective */}
           <section className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 md:p-8 rounded-xl">
             <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
-              {locale === "zh"
-                ? "中医证型分析"
-                : "Traditional Chinese Medicine Analysis"}
+              {tcmT("title")}
             </h2>
 
             <p className="text-neutral-700 leading-relaxed mb-6">
-              {locale === "zh"
-                ? "根据症状特点，中医将痛经细分为几种主要证型，每种证型都有其独特的病理机制和治疗方法："
-                : "Based on symptom characteristics, Traditional Chinese Medicine categorizes menstrual pain into several main syndrome types, each with unique pathological mechanisms and treatment approaches:"}
+              {tcmT("description")}
             </p>
 
             <div className="grid md:grid-cols-2 gap-6">

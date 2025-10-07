@@ -56,6 +56,14 @@ export default async function LocaleLayout({
 
   return (
     <html lang={getHTMLLang(validLocale)} suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        {/* 防止浏览器扩展干扰hydration */}
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="theme-color" content="#8B5CF6" />
+      </head>
       <body suppressHydrationWarning>
         <NextIntlClientProvider locale={validLocale} messages={messages as any}>
           <Suspense fallback={<LoadingState />}>

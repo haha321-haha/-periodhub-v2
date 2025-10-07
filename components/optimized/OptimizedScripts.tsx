@@ -49,9 +49,8 @@ export default function OptimizedScripts() {
     };
   }, []);
 
-  // 开发环境也加载脚本，但使用测试配置
-  const shouldLoadGA =
-    process.env.NEXT_PUBLIC_GA_ID || process.env.NODE_ENV === "development";
+  // 只在生产环境且有有效GA ID时加载GA脚本
+  const shouldLoadGA = isProduction && process.env.NEXT_PUBLIC_GA_ID;
 
   return (
     <>
@@ -61,9 +60,7 @@ export default function OptimizedScripts() {
           <Script
             id="gtag-config"
             strategy="afterInteractive"
-            src={`https://www.googletagmanager.com/gtag/js?id=${
-              process.env.NEXT_PUBLIC_GA_ID || "G-TEST-ID"
-            }`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
             onLoad={() => console.log("✅ GA4 script loaded")}
             onError={(e) => console.error("❌ GA4 script failed:", e)}
           />
@@ -76,9 +73,7 @@ export default function OptimizedScripts() {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${
-                  process.env.NEXT_PUBLIC_GA_ID || "G-TEST-ID"
-                }', {
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
               page_title: document.title,
               page_location: window.location.href,
               anonymize_ip: true,
@@ -92,6 +87,23 @@ export default function OptimizedScripts() {
             }}
           />
         </>
+      )}
+
+      {/* 开发环境提示 */}
+      {!isProduction && (
+        <Script
+          id="dev-analytics-mock"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              // 开发环境模拟GA函数，避免错误
+              window.gtag = function() {
+                console.log('🔧 Dev Mode: GA call mocked:', arguments);
+              };
+              console.log('🔧 开发环境：GA脚本已模拟，不会发送真实数据');
+            `,
+          }}
+        />
       )}
 
       {/* Microsoft Clarity - 智能延迟加载 */}

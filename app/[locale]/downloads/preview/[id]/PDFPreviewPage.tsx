@@ -107,6 +107,7 @@ export default function PDFPreviewPage({
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
+  const [htmlContent, setHtmlContent] = useState<string>("");
 
   const resource = getPDFResourceById(resourceId);
   const previewContent = getPreviewContentById(resourceId);
@@ -167,7 +168,7 @@ export default function PDFPreviewPage({
     }
 
     console.log("最终 htmlFilename:", htmlFilename);
-    const fetchUrl = `/downloads/${htmlFilename}`;
+    const fetchUrl = `/downloads/${htmlFilename}?v=${Date.now()}`;
     console.log("fetch URL:", fetchUrl);
 
     // 加载HTML内容
@@ -191,7 +192,7 @@ export default function PDFPreviewPage({
         console.log("HTML 长度:", html.length);
         console.log("HTML 开头:", html.substring(0, 100));
 
-        // setHtmlContent(html); // 不再需要，使用预览内容配置
+        setHtmlContent(html);
         setLoading(false);
         console.log("✅ 状态更新完成，loading = false");
       })
@@ -593,9 +594,18 @@ export default function PDFPreviewPage({
       {/* HTML内容展示区域 */}
       <div className="pt-16">
         <div className="container mx-auto px-4 py-8">
-          <p className="text-center text-gray-600">
-            {locale === "zh" ? "HTML内容加载中..." : "Loading HTML content..."}
-          </p>
+          {htmlContent ? (
+            <div
+              className="preview-content"
+              dangerouslySetInnerHTML={{ __html: htmlContent }}
+            />
+          ) : (
+            <p className="text-center text-gray-600">
+              {locale === "zh"
+                ? "HTML内容加载中..."
+                : "Loading HTML content..."}
+            </p>
+          )}
         </div>
       </div>
 

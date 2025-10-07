@@ -2,20 +2,31 @@
 
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
   const t = useTranslations("footer");
   const rawLocale = useLocale();
+  const [currentYear, setCurrentYear] = useState(2024);
+  const [isClient, setIsClient] = useState(false);
+
   // 规范化 zh/zh-CN/en/en-US 为 zh/en，避免路径不匹配
   const locale = rawLocale?.startsWith("zh")
     ? "zh"
     : rawLocale?.startsWith("en")
       ? "en"
       : "zh";
-  const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    setIsClient(true);
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   return (
-    <footer className="bg-neutral-100 border-t border-neutral-200">
+    <footer
+      className="bg-neutral-100 border-t border-neutral-200"
+      suppressHydrationWarning={true}
+    >
       <div className="container-custom py-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -126,7 +137,9 @@ export default function Footer() {
         {/* Copyright and Medical Disclaimer */}
         <div className="mt-8 pt-8 border-t border-neutral-200 text-center">
           <p className="text-sm text-neutral-500">
-            {t("copyright", { currentYear })}
+            {isClient
+              ? t("copyright", { currentYear })
+              : t("copyright", { currentYear: 2024 })}
           </p>
           <p className="mt-4 text-xs text-neutral-500 max-w-2xl mx-auto">
             {t("medicalDisclaimerFull")}

@@ -54,7 +54,7 @@ class PerformanceTester {
     console.log('🔍 检查本地服务器...');
 
     try {
-      const response = await fetch('http://localhost:3000');
+      const response = await fetch('http://localhost:3001');
       if (response.ok) {
         console.log('✅ 本地服务器运行正常');
         return;
@@ -107,7 +107,7 @@ class PerformanceTester {
         hasTouch: true
       });
 
-      const url = `http://localhost:3000${testPage.path}`;
+      const url = `http://localhost:3001${testPage.path}`;
       const result = {
         name: testPage.name,
         path: testPage.path,

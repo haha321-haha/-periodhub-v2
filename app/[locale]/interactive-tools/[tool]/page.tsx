@@ -949,15 +949,13 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale; tool: string }>;
 }): Promise<Metadata> {
   const { locale, tool } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
   const toolData = await getToolBySlug(tool, locale);
 
   if (!toolData) {
     return {
-      title: locale === "zh" ? "工具未找到" : "Tool Not Found",
-      description:
-        locale === "zh"
-          ? "抱歉，我们找不到您要查找的工具。"
-          : "Sorry, we could not find the tool you are looking for.",
+      title: t("tools.notFound.title"),
+      description: t("tools.notFound.description"),
     };
   }
 

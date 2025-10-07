@@ -208,7 +208,7 @@ export default async function InteractiveToolsPage({
           {/* <Breadcrumb
             items={[
               {
-                label: locale === 'zh' ? '互动工具' : 'Interactive Tools'
+                label: t("breadcrumb.label")
               }
             ]}
           /> */}

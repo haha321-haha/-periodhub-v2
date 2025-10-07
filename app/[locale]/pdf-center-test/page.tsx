@@ -11,11 +11,11 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "common" });
+  const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
-    title: `PDF资源中心测试 - ${locale === "zh" ? "Period Hub" : "Period Hub"}`,
-    description: "测试新的PDF资源分类和优化系统",
+    title: t("pdf-center-test.title"),
+    description: t("pdf-center-test.description"),
     robots: {
       index: false,
       follow: false,

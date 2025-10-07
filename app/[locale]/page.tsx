@@ -397,11 +397,7 @@ export default async function HomePage({
               <div className="bg-white/70 backdrop-blur rounded-2xl shadow-sm p-4 sm:p-6">
                 <OptimizedSVG
                   src="/images/infographics/stats-infographic.svg"
-                  alt={
-                    isZh
-                      ? "月经健康统计数据信息图"
-                      : "Period Health Statistics Infographic"
-                  }
+                  alt={t("healthStatistics.infographicAlt")}
                   className="w-full h-auto"
                   priority={false}
                 />

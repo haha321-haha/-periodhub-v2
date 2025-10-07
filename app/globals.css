@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 导入移动端优化样式 */
-@import '../styles/mobile-optimization.css';
-
 @layer base {
   html {
     font-family: system-ui, sans-serif;

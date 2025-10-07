@@ -255,7 +255,8 @@
       "mythsFacts": "Myths & Facts",
       "office": "Office Scenario",
       "developmentPain": "Development Pain",
-      "painTracker": "Pain Tracker"
+      "painTracker": "Pain Tracker",
+      "symptomAssessment": "Symptom Assessment"
     },
     "p2": {
       "title": "P2 Phase: Advanced Features",
@@ -726,6 +727,29 @@
         "title": "Pain Records List",
         "noRecordsFound": "No Records Found"
       }
+    },
+    "symptomAssessment": {
+      "title": "Symptom Assessment Tool",
+      "description": "Professional menstrual pain symptom assessment tool to help you understand pain levels and get personalized recommendations",
+      "subtitle": "Professional Medical Assessment",
+      "start": {
+        "title": "Start Symptom Assessment",
+        "description": "Quick assessment of your menstrual pain symptoms through 3 core questions",
+        "descriptionSimplified": "Quick assessment of your menstrual pain symptoms through 3 core questions",
+        "descriptionDetailed": "Comprehensive assessment through 13 professional questions",
+        "descriptionMedical": "In-depth analysis through 21 medical-grade questions",
+        "feature1": "Professional Assessment",
+        "feature2": "Personalized Recommendations",
+        "feature3": "Immediate Relief",
+        "feature4": "Long-term Management",
+        "startButton": "Start Assessment",
+        "disclaimer": "This assessment is for reference only and cannot replace professional medical diagnosis"
+      },
+      "modes": {
+        "simplified": "Simplified Assessment",
+        "detailed": "Detailed Assessment",
+        "medical": "Medical Professional Assessment"
+      }
     }
   },
   "anchorTexts": {
@@ -782,7 +806,9 @@
       "heat": "Heat Therapy Guide",
       "tcm_guide": "TCM Theory Guide",
       "acupoint_massage": "Acupoint Massage Guide",
-      "tcm_nutrition": "TCM Nutrition Therapy"
+      "tcm_nutrition": "TCM Nutrition Therapy",
+      "natural": "Natural Therapies Guide",
+      "comprehensive": "Comprehensive Treatment Guide"
     }
   },
   "healthStatistics": {

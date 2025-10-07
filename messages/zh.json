@@ -3454,7 +3454,8 @@
       "office": "办公场景",
       "developmentPain": "发育疼痛",
       "emergencyKit": "应急包",
-      "painTracker": "疼痛追踪器"
+      "painTracker": "疼痛追踪器",
+      "symptomAssessment": "症状评估"
     },
     "common": {
       "loading": "加载中...",
@@ -7562,7 +7563,12 @@
       "heat": "热敷疗法指南",
       "workplace": "压力管理",
       "nutrition": "营养调理",
-      "medication": "药物治疗"
+      "medication": "药物治疗",
+      "tcm_guide": "中医理论指南",
+      "acupoint_massage": "穴位按摩指南",
+      "tcm_nutrition": "中医营养调理",
+      "natural": "自然疗法指南",
+      "comprehensive": "综合治疗指南"
     },
     "solutions": {
       "exercise_balance_new": "运动与经期",

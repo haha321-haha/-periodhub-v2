@@ -2,15 +2,6 @@
   {
     "id": "P0-1",
     "priority": "P0",
-    "file": "app/[locale]/interactive-tools/[tool]/page.tsx",
-    "category": "工具详情页",
-    "hardcodeCount": 43,
-    "status": "待修复",
-    "estimatedTime": "2-4小时"
-  },
-  {
-    "id": "P0-2",
-    "priority": "P0",
     "file": "app/[locale]/interactive-tools/pain-tracker/page.tsx",
     "category": "疼痛追踪页",
     "hardcodeCount": 7,
@@ -18,7 +9,7 @@
     "estimatedTime": "2-4小时"
   },
   {
-    "id": "P0-3",
+    "id": "P0-2",
     "priority": "P0",
     "file": "app/[locale]/interactive-tools/symptom-assessment/page.tsx",
     "category": "症状评估页",

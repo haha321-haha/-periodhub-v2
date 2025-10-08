@@ -423,6 +423,90 @@
         "collapse": "Collapse"
       }
     },
+    "symptomTracker": {
+      "title": "Symptom Tracker",
+      "description": "Record your menstrual symptoms in detail to help identify patterns and provide accurate information for medical consultations.",
+      "subtitle": "Symptom History",
+      "tabs": {
+        "record": "Record Symptoms",
+        "history": "History"
+      },
+      "form": {
+        "basicInfo": "Basic Information",
+        "date": "Date",
+        "painLevel": "Pain Level (0-10)",
+        "noPain": "No pain",
+        "extreme": "Extreme",
+        "pain": "Pain",
+        "mood": "Mood",
+        "flow": "Menstrual Flow",
+        "symptomsAndMeds": "Symptoms & Medications",
+        "symptoms": "Symptoms",
+        "medications": "Medications Used",
+        "notes": "Notes",
+        "pleaseSelect": "Please select",
+        "notRecorded": "Not recorded",
+        "save": "Save Record",
+        "tips": "Recording Tips",
+        "notesPlaceholder": "Record any other symptoms, feelings, or observations..."
+      },
+      "history": {
+        "title": "Symptom History",
+        "noRecords": "No symptom records yet",
+        "pain": "Pain",
+        "mood": "Mood",
+        "flow": "Flow",
+        "symptoms": "Symptoms",
+        "medications": "Medications",
+        "notes": "Notes"
+      },
+      "tips": {
+        "title": "Recording Tips",
+        "tip1": "Record daily, even when you have no symptoms",
+        "tip2": "Detailed records help identify symptom patterns",
+        "tip3": "Share records with your doctor for diagnostic reference"
+      },
+      "alerts": {
+        "futureDate": "Cannot select future dates. Symptoms can only be recorded for events that have occurred",
+        "saved": "Symptom record saved successfully!"
+      },
+      "painLevels": {
+        "none": "No pain",
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe",
+        "extreme": "Extreme"
+      },
+      "commonSymptoms": ["Abdominal pain", "Headache", "Breast tenderness", "Mood swings", "Fatigue", "Back pain", "Nausea", "Insomnia", "Bloating", "Constipation", "Diarrhea", "Appetite changes"],
+      "moodOptions": ["Normal", "Anxious", "Depressed", "Irritable", "Low mood", "Excited", "Tense"],
+      "flowOptions": ["None", "Spotting", "Light", "Medium", "Heavy", "Very heavy"],
+      "medicationOptions": ["Ibuprofen", "Acetaminophen", "Naproxen", "Aspirin", "Traditional medicine", "Vitamins", "Other"]
+    },
+    "symptomAssessmentTool": {
+      "trends": {
+        "title": "Your Assessment Trends",
+        "totalAssessments": "Total Assessments",
+        "averageScore": "Average Score",
+        "scoreTrend": "Trend",
+        "improving": "Improving",
+        "declining": "Declining",
+        "stable": "Stable",
+        "lastAssessment": "Last assessment: "
+      },
+      "settings": "Settings",
+      "recommendations": {
+        "title": "Personalized Recommendations",
+        "priority": {
+          "high": "High Priority",
+          "medium": "Medium Priority",
+          "low": "Low Priority"
+        },
+        "match": "Match",
+        "reason": "Why recommended: ",
+        "timeframe": "Timeframe: ",
+        "actionSteps": "Action Steps:"
+      }
+    },
     "healthDashboard": {
       "alerts": {
         "importSuccess": "Data imported successfully!",

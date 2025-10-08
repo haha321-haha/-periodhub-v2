@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 interface SymptomEntry {
   id: string;
@@ -20,6 +21,7 @@ interface SymptomTrackerToolProps {
 export default function SymptomTrackerTool({
   locale,
 }: SymptomTrackerToolProps) {
+  const t = useTranslations("interactiveTools.symptomTracker");
   const [currentEntry, setCurrentEntry] = useState<Omit<SymptomEntry, "id">>({
     date: new Date().toISOString().split("T")[0],
     painLevel: 0,
@@ -69,11 +71,7 @@ export default function SymptomTrackerTool({
     const today = getTodayDate();
 
     if (selectedDate > today) {
-      setDateError(
-        locale === "zh"
-          ? "不能选择未来的日期，症状只能记录已发生的事件"
-          : "Cannot select future dates. Symptoms can only be recorded for events that have occurred",
-      );
+      setDateError(t("alerts.futureDate"));
       return;
     }
 
@@ -84,11 +82,7 @@ export default function SymptomTrackerTool({
   const handleSave = () => {
     // Validate date before saving
     if (currentEntry.date > getTodayDate()) {
-      setDateError(
-        locale === "zh"
-          ? "不能选择未来的日期，症状只能记录已发生的事件"
-          : "Cannot select future dates. Symptoms can only be recorded for events that have occurred",
-      );
+      setDateError(t("alerts.futureDate"));
       return;
     }
 
@@ -113,12 +107,15 @@ export default function SymptomTrackerTool({
     });
 
     setDateError("");
-    alert(
-      locale === "zh"
-        ? "症状记录已保存！"
-        : "Symptom record saved successfully!",
-    );
+    alert(t("alerts.saved"));
   };
+
+  const commonSymptoms: string[] = t("commonSymptoms", { returnObjects: true });
+  const moodOptions: string[] = t("moodOptions", { returnObjects: true });
+  const flowOptions: string[] = t("flowOptions", { returnObjects: true });
+  const commonMedications: string[] = t("medicationOptions", {
+    returnObjects: true,
+  });
 
   const getPainLevelColor = (level: number) => {
     if (level <= 2) return "text-green-600";
@@ -128,102 +125,23 @@ export default function SymptomTrackerTool({
   };
 
   const getPainLevelText = (level: number) => {
-    if (locale === "zh") {
-      if (level === 0) return "无痛";
-      if (level <= 2) return "轻微";
-      if (level <= 5) return "中度";
-      if (level <= 7) return "重度";
-      return "极重";
-    } else {
-      if (level === 0) return "No pain";
-      if (level <= 2) return "Mild";
-      if (level <= 5) return "Moderate";
-      if (level <= 7) return "Severe";
-      return "Extreme";
-    }
+    if (level === 0) return t("painLevels.none");
+    if (level <= 2) return t("painLevels.mild");
+    if (level <= 5) return t("painLevels.moderate");
+    if (level <= 7) return t("painLevels.severe");
+    return t("painLevels.extreme");
   };
 
-  const commonSymptoms =
-    locale === "zh"
-      ? [
-          "腹痛",
-          "头痛",
-          "乳房胀痛",
-          "情绪波动",
-          "疲劳",
-          "腰痛",
-          "恶心",
-          "失眠",
-          "腹胀",
-          "便秘",
-          "腹泻",
-          "食欲改变",
-        ]
-      : [
-          "Abdominal pain",
-          "Headache",
-          "Breast tenderness",
-          "Mood swings",
-          "Fatigue",
-          "Back pain",
-          "Nausea",
-          "Insomnia",
-          "Bloating",
-          "Constipation",
-          "Diarrhea",
-          "Appetite changes",
-        ];
-
-  const moodOptions =
-    locale === "zh"
-      ? ["正常", "焦虑", "抑郁", "易怒", "情绪低落", "兴奋", "紧张"]
-      : [
-          "Normal",
-          "Anxious",
-          "Depressed",
-          "Irritable",
-          "Low mood",
-          "Excited",
-          "Tense",
-        ];
-
-  const flowOptions =
-    locale === "zh"
-      ? ["无", "点滴", "轻量", "中量", "大量", "非常大量"]
-      : ["None", "Spotting", "Light", "Medium", "Heavy", "Very heavy"];
-
-  const commonMedications =
-    locale === "zh"
-      ? [
-          "布洛芬",
-          "对乙酰氨基酚",
-          "萘普生",
-          "阿司匹林",
-          "中药",
-          "维生素",
-          "其他",
-        ]
-      : [
-          "Ibuprofen",
-          "Acetaminophen",
-          "Naproxen",
-          "Aspirin",
-          "Herbal medicine",
-          "Vitamins",
-          "Other",
-        ];
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header */}
       <div className="text-center">
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-          {locale === "zh" ? "症状记录器" : "Symptom Tracker"}
+          {t("title")}
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          {locale === "zh"
-            ? "详细记录您的经期症状，帮助识别模式并为医疗咨询提供准确信息。"
-            : "Record your menstrual symptoms in detail to help identify patterns and provide accurate information for medical consultations."}
+          {t("description")}
         </p>
       </div>
 
@@ -237,7 +155,7 @@ export default function SymptomTrackerTool({
               : "bg-gray-200 text-gray-700 hover:bg-gray-300"
           }`}
         >
-          {locale === "zh" ? "记录症状" : "Record Symptoms"}
+          {t("tabs.record")}
         </button>
         <button
           onClick={() => setShowHistory(true)}
@@ -247,7 +165,7 @@ export default function SymptomTrackerTool({
               : "bg-gray-200 text-gray-700 hover:bg-gray-300"
           }`}
         >
-          {locale === "zh" ? "历史记录" : "History"} ({entries.length})
+          {t("tabs.history")} ({entries.length})
         </button>
       </div>
 
@@ -257,13 +175,13 @@ export default function SymptomTrackerTool({
           {/* Left Column - Basic Info */}
           <div className="bg-white rounded-xl shadow-lg p-6">
             <h3 className="text-xl font-semibold mb-6 text-gray-800">
-              {locale === "zh" ? "基本信息" : "Basic Information"}
+              {t("form.basicInfo")}
             </h3>
 
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "日期" : "Date"}
+                  {t("form.date")}
                 </label>
                 <input
                   type="date"
@@ -294,7 +212,7 @@ export default function SymptomTrackerTool({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "疼痛强度 (0-10)" : "Pain Level (0-10)"}
+                  {t("form.painLevel")}
                 </label>
                 <div className="relative mb-2">
                   {/* Gradient background track */}
@@ -314,7 +232,7 @@ export default function SymptomTrackerTool({
                   />
                 </div>
                 <div className="flex justify-between text-xs text-gray-500 mt-1">
-                  <span>{locale === "zh" ? "无痛" : "No pain"}</span>
+                  <span>{t("form.noPain")}</span>
                   <span
                     className={`font-semibold ${getPainLevelColor(
                       currentEntry.painLevel,
@@ -323,7 +241,7 @@ export default function SymptomTrackerTool({
                     {currentEntry.painLevel} -{" "}
                     {getPainLevelText(currentEntry.painLevel)}
                   </span>
-                  <span>{locale === "zh" ? "极痛" : "Extreme"}</span>
+                  <span>{t("form.extreme")}</span>
                 </div>
 
                 {/* Custom CSS for slider thumb */}
@@ -374,7 +292,7 @@ export default function SymptomTrackerTool({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "情绪状态" : "Mood"}
+                  {t("form.mood")}
                 </label>
                 <select
                   value={currentEntry.mood}
@@ -387,7 +305,7 @@ export default function SymptomTrackerTool({
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">
-                    {locale === "zh" ? "请选择" : "Please select"}
+                    {t("form.pleaseSelect")}
                   </option>
                   {moodOptions.map((mood, index) => (
                     <option key={index} value={mood}>
@@ -399,7 +317,7 @@ export default function SymptomTrackerTool({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "月经流量" : "Menstrual Flow"}
+                  {t("form.flow")}
                 </label>
                 <select
                   value={currentEntry.flow}
@@ -412,7 +330,7 @@ export default function SymptomTrackerTool({
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">
-                    {locale === "zh" ? "请选择" : "Please select"}
+                    {t("form.pleaseSelect")}
                   </option>
                   {flowOptions.map((flow, index) => (
                     <option key={index} value={flow}>
@@ -427,13 +345,13 @@ export default function SymptomTrackerTool({
           {/* Right Column - Symptoms and Medications */}
           <div className="bg-white rounded-xl shadow-lg p-6">
             <h3 className="text-xl font-semibold mb-6 text-gray-800">
-              {locale === "zh" ? "症状与用药" : "Symptoms & Medications"}
+              {t("form.symptomsAndMeds")}
             </h3>
 
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "症状" : "Symptoms"}
+                  {t("form.symptoms")}
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   {commonSymptoms.map((symptom, index) => (
@@ -452,7 +370,7 @@ export default function SymptomTrackerTool({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "使用的药物" : "Medications Used"}
+                  {t("form.medications")}
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   {commonMedications.map((medication, index) => (
@@ -471,7 +389,7 @@ export default function SymptomTrackerTool({
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {locale === "zh" ? "备注" : "Notes"}
+                  {t("form.notes")}
                 </label>
                 <textarea
                   value={currentEntry.notes}
@@ -483,11 +401,7 @@ export default function SymptomTrackerTool({
                   }
                   rows={4}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  placeholder={
-                    locale === "zh"
-                      ? "记录任何其他症状、感受或观察..."
-                      : "Record any other symptoms, feelings, or observations..."
-                  }
+                  placeholder={t("form.notesPlaceholder")}
                 />
               </div>
 
@@ -495,7 +409,7 @@ export default function SymptomTrackerTool({
                 onClick={handleSave}
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300"
               >
-                {locale === "zh" ? "保存记录" : "Save Record"}
+                {t("form.save")}
               </button>
             </div>
           </div>
@@ -504,7 +418,7 @@ export default function SymptomTrackerTool({
         /* History View */
         <div className="bg-white rounded-xl shadow-lg p-6">
           <h3 className="text-xl font-semibold mb-6 text-gray-800">
-            {locale === "zh" ? "症状历史记录" : "Symptom History"}
+            {t("history.title")}
           </h3>
 
           {entries.length === 0 ? (
@@ -525,7 +439,7 @@ export default function SymptomTrackerTool({
                 </svg>
               </div>
               <p className="text-gray-500">
-                {locale === "zh" ? "暂无症状记录" : "No symptom records yet"}
+                {t("history.noRecords")}
               </p>
             </div>
           ) : (
@@ -544,37 +458,31 @@ export default function SymptomTrackerTool({
                         entry.painLevel,
                       )}`}
                     >
-                      {locale === "zh" ? "疼痛" : "Pain"}: {entry.painLevel}/10
+                      {t("history.pain")}: {entry.painLevel}/10
                     </span>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div>
                       <p>
-                        <strong>{locale === "zh" ? "情绪" : "Mood"}:</strong>{" "}
-                        {entry.mood ||
-                          (locale === "zh" ? "未记录" : "Not recorded")}
+                        <strong>{t("history.mood")}:</strong>{" "}
+                        {entry.mood || t("form.notRecorded")}
                       </p>
                       <p>
-                        <strong>{locale === "zh" ? "流量" : "Flow"}:</strong>{" "}
-                        {entry.flow ||
-                          (locale === "zh" ? "未记录" : "Not recorded")}
+                        <strong>{t("history.flow")}:</strong>{" "}
+                        {entry.flow || t("form.notRecorded")}
                       </p>
                     </div>
                     <div>
                       {entry.symptoms.length > 0 && (
                         <p>
-                          <strong>
-                            {locale === "zh" ? "症状" : "Symptoms"}:
-                          </strong>{" "}
+                          <strong>{t("history.symptoms")}:</strong>{" "}
                           {entry.symptoms.join(", ")}
                         </p>
                       )}
                       {entry.medications.length > 0 && (
                         <p>
-                          <strong>
-                            {locale === "zh" ? "用药" : "Medications"}:
-                          </strong>{" "}
+                          <strong>{t("history.medications")}:</strong>{" "}
                           {entry.medications.join(", ")}
                         </p>
                       )}
@@ -583,7 +491,7 @@ export default function SymptomTrackerTool({
 
                   {entry.notes && (
                     <p className="mt-2 text-sm text-gray-600">
-                      <strong>{locale === "zh" ? "备注" : "Notes"}:</strong>{" "}
+                      <strong>{t("history.notes")}:</strong>{" "}
                       {entry.notes}
                     </p>
                   )}
@@ -597,27 +505,12 @@ export default function SymptomTrackerTool({
       {/* Tips Section */}
       <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
         <h4 className="font-semibold text-green-800 mb-2">
-          {locale === "zh" ? "记录建议" : "Recording Tips"}
+          {t("tips.title")}
         </h4>
         <ul className="text-green-700 space-y-1 text-sm">
-          <li>
-            •{" "}
-            {locale === "zh"
-              ? "建议每天记录，即使没有症状也要记录"
-              : "Record daily, even when you have no symptoms"}
-          </li>
-          <li>
-            •{" "}
-            {locale === "zh"
-              ? "详细记录有助于识别症状模式"
-              : "Detailed records help identify symptom patterns"}
-          </li>
-          <li>
-            •{" "}
-            {locale === "zh"
-              ? "可以将记录分享给医生作为诊断参考"
-              : "Share records with your doctor for diagnostic reference"}
-          </li>
+          <li>• {t("tips.tip1")}</li>
+          <li>• {t("tips.tip2")}</li>
+          <li>• {t("tips.tip3")}</li>
         </ul>
       </div>
     </div>

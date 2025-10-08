@@ -37,6 +37,7 @@ export default function SymptomAssessmentTool({
   mode = "simplified",
 }: SymptomAssessmentToolProps) {
   const { t } = useSafeTranslations("interactiveTools.symptomAssessment");
+  const tTool = useTranslations("interactiveTools.symptomAssessmentTool");
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, any>>(
     {},
   );
@@ -328,9 +329,7 @@ export default function SymptomAssessmentTool({
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-indigo-900 flex items-center">
                     <BarChart3 className="w-5 h-5 mr-2" />
-                    {locale === "zh"
-                      ? "您的评估趋势"
-                      : "Your Assessment Trends"}
+                    {tTool("trends.title")}
                   </h3>
                   <button
                     onClick={() => setShowSettings(true)}
@@ -347,7 +346,7 @@ export default function SymptomAssessmentTool({
                         {trends.totalAssessments}
                       </div>
                       <div className="text-sm text-indigo-700">
-                        {locale === "zh" ? "总评估次数" : "Total Assessments"}
+                        {tTool("trends.totalAssessments")}
                       </div>
                     </div>
                     <div className="bg-white rounded-lg p-4 text-center">
@@ -355,7 +354,7 @@ export default function SymptomAssessmentTool({
                         {trends.averageScore}%
                       </div>
                       <div className="text-sm text-purple-700">
-                        {locale === "zh" ? "平均分数" : "Average Score"}
+                        {tTool("trends.averageScore")}
                       </div>
                     </div>
                     <div className="bg-white rounded-lg p-4 text-center">
@@ -379,20 +378,14 @@ export default function SymptomAssessmentTool({
                           }`}
                         >
                           {trends.scoreTrend === "improving"
-                            ? locale === "zh"
-                              ? "改善中"
-                              : "Improving"
+                            ? tTool("trends.improving")
                             : trends.scoreTrend === "declining"
-                              ? locale === "zh"
-                                ? "下降中"
-                                : "Declining"
-                              : locale === "zh"
-                                ? "稳定"
-                                : "Stable"}
+                              ? tTool("trends.declining")
+                              : tTool("trends.stable")}
                         </span>
                       </div>
                       <div className="text-xs text-gray-600 mt-1">
-                        {locale === "zh" ? "趋势" : "Trend"}
+                        {tTool("trends.scoreTrend")}
                       </div>
                     </div>
                   </div>
@@ -400,15 +393,10 @@ export default function SymptomAssessmentTool({
 
                 <div className="text-center">
                   <p className="text-sm text-indigo-700">
-                    {locale === "zh"
-                      ? `最近评估：${new Date(
-                          trends?.lastAssessmentDate || "",
-                        ).toLocaleDateString(
-                          locale === "zh" ? "zh-CN" : "en-US",
-                        )}`
-                      : `Last assessment: ${new Date(
-                          trends?.lastAssessmentDate || "",
-                        ).toLocaleDateString("en-US")}`}
+                    {tTool("trends.lastAssessment")}
+                    {new Date(trends?.lastAssessmentDate || "").toLocaleDateString(
+                      locale === "zh" ? "zh-CN" : "en-US",
+                    )}
                   </p>
                 </div>
               </div>
@@ -603,7 +591,7 @@ export default function SymptomAssessmentTool({
               className="px-6 py-3 border-2 border-gray-300 text-gray-600 rounded-lg font-medium hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 active:scale-95"
             >
               <Settings className="w-4 h-4 inline mr-2" />
-              {locale === "zh" ? "设置" : "Settings"}
+              {tTool("settings")}
             </button>
           </div>
 
@@ -616,9 +604,7 @@ export default function SymptomAssessmentTool({
               >
                 <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
                   <span className="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
-                  {locale === "zh"
-                    ? "个性化建议"
-                    : "Personalized Recommendations"}
+                  {tTool("recommendations.title")}
                 </h3>
                 <div className="space-y-4">
                   {recommendations.slice(0, 3).map((rec, index) => (
@@ -642,20 +628,13 @@ export default function SymptomAssessmentTool({
                             }`}
                           >
                             {rec.priority === "high"
-                              ? locale === "zh"
-                                ? "高优先级"
-                                : "High Priority"
+                              ? tTool("recommendations.priority.high")
                               : rec.priority === "medium"
-                                ? locale === "zh"
-                                  ? "中优先级"
-                                  : "Medium Priority"
-                                : locale === "zh"
-                                  ? "低优先级"
-                                  : "Low Priority"}
+                                ? tTool("recommendations.priority.medium")
+                                : tTool("recommendations.priority.low")}
                           </span>
                           <span className="text-xs text-purple-600 bg-purple-100 px-2 py-1 rounded-full">
-                            {rec.confidence}%{" "}
-                            {locale === "zh" ? "匹配度" : "Match"}
+                            {rec.confidence}% {tTool("recommendations.match")}
                           </span>
                         </div>
                       </div>
@@ -663,21 +642,17 @@ export default function SymptomAssessmentTool({
                         {rec.description}
                       </p>
                       <p className="text-sm text-purple-600 mb-3">
-                        <strong>
-                          {locale === "zh" ? "推荐原因：" : "Why recommended: "}
-                        </strong>
+                        <strong>{tTool("recommendations.reason")}</strong>
                         {rec.reason}
                       </p>
                       <p className="text-sm text-purple-500 mb-3">
-                        <strong>
-                          {locale === "zh" ? "时间框架：" : "Timeframe: "}
-                        </strong>
+                        <strong>{tTool("recommendations.timeframe")}</strong>
                         {rec.timeframe}
                       </p>
                       {rec.actionSteps && rec.actionSteps.length > 0 && (
                         <div>
                           <h5 className="font-medium text-purple-900 mb-2">
-                            {locale === "zh" ? "行动步骤：" : "Action Steps:"}
+                            {tTool("recommendations.actionSteps")}
                           </h5>
                           <ul className="list-disc list-inside text-sm text-purple-700 space-y-1">
                             {rec.actionSteps.map((step, stepIndex) => (

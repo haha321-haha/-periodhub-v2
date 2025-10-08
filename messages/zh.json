@@ -3924,6 +3924,90 @@
         "collapse": "收起"
       }
     },
+    "symptomTracker": {
+      "title": "症状记录器",
+      "description": "详细记录您的经期症状，帮助识别模式并为医疗咨询提供准确信息。",
+      "subtitle": "症状历史记录",
+      "tabs": {
+        "record": "记录症状",
+        "history": "历史记录"
+      },
+      "form": {
+        "basicInfo": "基本信息",
+        "date": "日期",
+        "painLevel": "疼痛强度 (0-10)",
+        "noPain": "无痛",
+        "extreme": "极痛",
+        "pain": "疼痛",
+        "mood": "情绪状态",
+        "flow": "月经流量",
+        "symptomsAndMeds": "症状与用药",
+        "symptoms": "症状",
+        "medications": "使用的药物",
+        "notes": "备注",
+        "pleaseSelect": "请选择",
+        "notRecorded": "未记录",
+        "save": "保存记录",
+        "tips": "记录建议",
+        "notesPlaceholder": "记录任何其他症状、感受或观察..."
+      },
+      "history": {
+        "title": "症状历史记录",
+        "noRecords": "暂无症状记录",
+        "pain": "疼痛",
+        "mood": "情绪",
+        "flow": "流量",
+        "symptoms": "症状",
+        "medications": "用药",
+        "notes": "备注"
+      },
+      "tips": {
+        "title": "记录建议",
+        "tip1": "建议每天记录，即使没有症状也要记录",
+        "tip2": "详细记录有助于识别症状模式",
+        "tip3": "可以将记录分享给医生作为诊断参考"
+      },
+      "alerts": {
+        "futureDate": "不能选择未来的日期，症状只能记录已发生的事件",
+        "saved": "症状记录已保存！"
+      },
+      "painLevels": {
+        "none": "无痛",
+        "mild": "轻微",
+        "moderate": "中度",
+        "severe": "重度",
+        "extreme": "极重"
+      },
+      "commonSymptoms": ["腹痛", "头痛", "乳房胀痛", "情绪波动", "疲劳", "腰痛", "恶心", "失眠", "腹胀", "便秘", "腹泻", "食欲改变"],
+      "moodOptions": ["正常", "焦虑", "抑郁", "易怒", "情绪低落", "兴奋", "紧张"],
+      "flowOptions": ["无", "点滴", "轻量", "中量", "大量", "非常大量"],
+      "medicationOptions": ["布洛芬", "对乙酰氨基酚", "萘普生", "阿司匹林", "中药", "维生素", "其他"]
+    },
+    "symptomAssessmentTool": {
+      "trends": {
+        "title": "您的评估趋势",
+        "totalAssessments": "总评估次数",
+        "averageScore": "平均分数",
+        "scoreTrend": "趋势",
+        "improving": "改善中",
+        "declining": "下降中",
+        "stable": "稳定",
+        "lastAssessment": "最近评估："
+      },
+      "settings": "设置",
+      "recommendations": {
+        "title": "个性化建议",
+        "priority": {
+          "high": "高优先级",
+          "medium": "中优先级",
+          "low": "低优先级"
+        },
+        "match": "匹配度",
+        "reason": "推荐原因：",
+        "timeframe": "时间框架：",
+        "actionSteps": "行动步骤："
+      }
+    },
     "healthDashboard": {
       "alerts": {
         "importSuccess": "数据导入成功！",

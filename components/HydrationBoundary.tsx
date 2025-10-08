@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface HydrationBoundaryProps {
   children: React.ReactNode;
@@ -84,7 +85,7 @@ export function useSafeTranslations(namespace?: string) {
 interface TranslationErrorBoundaryProps {
   children: React.ReactNode;
   fallback?: React.ReactNode;
-  onError?: (error: Error, errorInfo: any) => void;
+  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
 }
 
 export class TranslationErrorBoundary extends React.Component<
@@ -108,7 +109,7 @@ export class TranslationErrorBoundary extends React.Component<
     return { hasError: false };
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error(
       "Translation Error Boundary caught an error:",
       error,
@@ -164,7 +165,10 @@ export function useBrowserExtensionDetection() {
     });
 
     // 检测全局对象
-    if ((window as any).google && (window as any).google.translate) {
+    if (
+      (window as Window & { google?: { translate?: unknown } }).google
+        ?.translate
+    ) {
       detectedExtensions.push("Google Translate (Global)");
     }
 

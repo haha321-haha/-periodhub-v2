@@ -1,0 +1,22 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 运行 pre-commit 检查..."
+echo ""
+
+# 运行 lint-staged
+npx lint-staged
+
+# 运行翻译键同步检查
+echo ""
+echo "🔍 检查翻译键同步性..."
+if ! node scripts/check-translation-sync.js; then
+    echo ""
+    echo "❌ 翻译键同步检查失败！"
+    echo "请修复翻译键问题后重新提交。"
+    echo ""
+    exit 1
+fi
+
+echo ""
+echo "✅ 所有 pre-commit 检查通过！"

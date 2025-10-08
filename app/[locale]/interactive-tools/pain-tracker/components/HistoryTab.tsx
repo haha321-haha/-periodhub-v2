@@ -39,6 +39,61 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
   // Performance manager instance
   const performanceManager = useMemo(() => new PerformanceManager(), []);
 
+  // Mock data fallback for demo
+  const getMockRecords = (): PainRecord[] => [
+    {
+      id: "1",
+      date: "2024-01-15",
+      time: "14:30",
+      painLevel: 7,
+      painTypes: ["cramping"],
+      locations: ["lower_abdomen"],
+      symptoms: ["nausea"],
+      menstrualStatus: "day_1",
+      medications: [{ name: "Ibuprofen", timing: "during pain" }],
+      effectiveness: 6,
+      lifestyleFactors: [],
+      notes:
+        locale === "zh"
+          ? "经期第一天，疼痛较重"
+          : "First day of period, severe pain",
+      createdAt: new Date("2024-01-15"),
+      updatedAt: new Date("2024-01-15"),
+    },
+    {
+      id: "2",
+      date: "2024-01-14",
+      time: "16:00",
+      painLevel: 5,
+      painTypes: ["aching"],
+      locations: ["lower_back"],
+      symptoms: ["fatigue"],
+      menstrualStatus: "before_period",
+      medications: [{ name: "Heat pad", timing: "during pain" }],
+      effectiveness: 7,
+      lifestyleFactors: [],
+      notes: locale === "zh" ? "经期前症状" : "Pre-menstrual symptoms",
+      createdAt: new Date("2024-01-14"),
+      updatedAt: new Date("2024-01-14"),
+    },
+    {
+      id: "3",
+      date: "2024-01-13",
+      time: "10:15",
+      painLevel: 3,
+      painTypes: ["aching"],
+      locations: ["upper_thighs"],
+      symptoms: [],
+      menstrualStatus: "before_period",
+      medications: [],
+      effectiveness: 0,
+      lifestyleFactors: [],
+      notes: undefined,
+      createdAt: new Date("2024-01-13"),
+      updatedAt: new Date("2024-01-13"),
+    },
+  ];
+
   // Load records with lazy loading and performance optimization
   const loadRecords = useCallback(
     async (page: number = 1, resetData: boolean = false) => {
@@ -46,7 +101,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
 
       try {
         // Build filters based on current filter state
-        const filters: Record<string, any> = {};
+        const filters: Record<string, string | number | Date> = {};
 
         // Date range filter
         if (filterDateRange !== "all") {
@@ -108,6 +163,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
 
         setPagination(result.pagination);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error("Failed to load records:", error);
         // Fallback to mock data for demo
         setRecords(getMockRecords());
@@ -115,68 +171,15 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
         setLoading(false);
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [filterDateRange, filterPainLevel, pagination.pageSize, performanceManager],
   );
 
   // Load initial data
   useEffect(() => {
     loadRecords(1, true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterDateRange, filterPainLevel]);
-
-  // Mock data fallback for demo
-  const getMockRecords = (): PainRecord[] => [
-    {
-      id: "1",
-      date: "2024-01-15",
-      time: "14:30",
-      painLevel: 7,
-      painTypes: ["cramping"],
-      locations: ["lower_abdomen"],
-      symptoms: ["nausea"],
-      menstrualStatus: "day_1",
-      medications: [{ name: "Ibuprofen", timing: "during pain" }],
-      effectiveness: 6,
-      lifestyleFactors: [],
-      notes:
-        locale === "zh"
-          ? "经期第一天，疼痛较重"
-          : "First day of period, severe pain",
-      createdAt: new Date("2024-01-15"),
-      updatedAt: new Date("2024-01-15"),
-    },
-    {
-      id: "2",
-      date: "2024-01-14",
-      time: "16:00",
-      painLevel: 5,
-      painTypes: ["aching"],
-      locations: ["lower_back"],
-      symptoms: ["fatigue"],
-      menstrualStatus: "before_period",
-      medications: [{ name: "Heat pad", timing: "during pain" }],
-      effectiveness: 7,
-      lifestyleFactors: [],
-      notes: locale === "zh" ? "经期前症状" : "Pre-menstrual symptoms",
-      createdAt: new Date("2024-01-14"),
-      updatedAt: new Date("2024-01-14"),
-    },
-    {
-      id: "3",
-      date: "2024-01-13",
-      time: "10:15",
-      painLevel: 3,
-      painTypes: ["aching"],
-      locations: ["upper_thighs"],
-      symptoms: [],
-      menstrualStatus: "before_period",
-      medications: [],
-      effectiveness: 0,
-      lifestyleFactors: [],
-      notes: undefined,
-      createdAt: new Date("2024-01-13"),
-      updatedAt: new Date("2024-01-13"),
-    },
-  ];
 
   // Handle load more for pagination
   const handleLoadMore = useCallback(() => {
@@ -198,13 +201,13 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
   };
 
   const getLocationName = (location: string) => {
-    const key = `locations.${location}` as any;
-    return t(key, { default: location });
+    const key = `locations.${location}`;
+    return t(key as never, { default: location });
   };
 
   const getPainTypeName = (type: string) => {
-    const key = `painTypes.${type}` as any;
-    return t(key, { default: type });
+    const key = `painTypes.${type}`;
+    return t(key as never, { default: type });
   };
 
   return (
@@ -243,7 +246,11 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
             <select
               id="date-range-filter"
               value={filterDateRange}
-              onChange={(e) => setFilterDateRange(e.target.value as any)}
+              onChange={(e) =>
+                setFilterDateRange(
+                  e.target.value as "all" | "week" | "month" | "quarter",
+                )
+              }
               className="w-full px-3 py-2 sm:py-3 text-base sm:text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors"
               aria-describedby="date-range-help"
             >
@@ -270,20 +277,18 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
             <select
               id="pain-level-filter"
               value={filterPainLevel}
-              onChange={(e) => setFilterPainLevel(e.target.value as any)}
+              onChange={(e) =>
+                setFilterPainLevel(
+                  e.target.value as "all" | "low" | "medium" | "high",
+                )
+              }
               className="w-full px-3 py-2 sm:py-3 text-base sm:text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-colors"
               aria-describedby="pain-level-help"
             >
               <option value="all">{t("filters.dateRange.all")}</option>
-              <option value="low">
-                {t("filters.painLevel.low")}
-              </option>
-              <option value="medium">
-                {t("filters.painLevel.medium")}
-              </option>
-              <option value="high">
-                {t("filters.painLevel.high")}
-              </option>
+              <option value="low">{t("filters.painLevel.low")}</option>
+              <option value="medium">{t("filters.painLevel.medium")}</option>
+              <option value="high">{t("filters.painLevel.high")}</option>
             </select>
             <p id="pain-level-help" className="text-xs text-gray-500 mt-1">
               {locale === "zh"
@@ -339,7 +344,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                 ? `找到 ${pagination.totalItems} 条记录`
                 : `Found ${pagination.totalItems} records`}
             </div>
-            {records.map((record, index) => (
+            {records.map((record) => (
               <article
                 key={record.id}
                 className="p-4 sm:p-6 hover:bg-gray-50 focus-within:bg-gray-50 transition-colors"
@@ -381,11 +386,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                         </dt>
                         <dd className="inline">
                           {record.locations
-                            .map((loc) =>
-                              locale === "zh"
-                                ? getLocationNameZh(loc)
-                                : getLocationNameEn(loc),
-                            )
+                            .map((loc) => getLocationName(loc))
                             .join(", ")}
                         </dd>
                       </div>
@@ -395,11 +396,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                         </dt>
                         <dd className="inline">
                           {record.painTypes
-                            .map((type) =>
-                              locale === "zh"
-                                ? getPainTypeNameZh(type)
-                                : getPainTypeNameEn(type),
-                            )
+                            .map((type) => getPainTypeName(type))
                             .join(", ")}
                         </dd>
                       </div>
@@ -418,9 +415,9 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                   <div className="flex items-center space-x-2 sm:ml-4 flex-shrink-0">
                     <button
                       className="p-2 text-gray-400 hover:text-gray-600 focus:text-gray-600 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
-                      aria-label={`${
-                        t("recordCard.editRecord")
-                      } ${new Date(record.date).toLocaleDateString()}`}
+                      aria-label={`${t(
+                        "recordCard.editRecord",
+                      )} ${new Date(record.date).toLocaleDateString()}`}
                     >
                       <svg
                         className="w-4 h-4"
@@ -439,9 +436,9 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                     </button>
                     <button
                       className="p-2 text-gray-400 hover:text-red-600 focus:text-red-600 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                      aria-label={`${
-                        t("recordCard.deleteRecord")
-                      } ${new Date(record.date).toLocaleDateString()}`}
+                      aria-label={`${t(
+                        "recordCard.deleteRecord",
+                      )} ${new Date(record.date).toLocaleDateString()}`}
                     >
                       <svg
                         className="w-4 h-4"

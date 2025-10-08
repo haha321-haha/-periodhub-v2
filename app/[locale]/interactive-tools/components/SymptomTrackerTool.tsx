@@ -18,9 +18,7 @@ interface SymptomTrackerToolProps {
   locale: string;
 }
 
-export default function SymptomTrackerTool({
-  locale,
-}: SymptomTrackerToolProps) {
+export default function SymptomTrackerTool({}: SymptomTrackerToolProps) {
   const t = useTranslations("interactiveTools.symptomTracker");
   const [currentEntry, setCurrentEntry] = useState<Omit<SymptomEntry, "id">>({
     date: new Date().toISOString().split("T")[0],
@@ -111,16 +109,28 @@ export default function SymptomTrackerTool({
   };
 
   const commonSymptoms: string[] = Object.values(
-    t("commonSymptoms", { returnObjects: true }) as Record<string, string>
+    t("commonSymptoms", { returnObjects: true }) as unknown as Record<
+      string,
+      string
+    >,
   );
   const moodOptions: string[] = Object.values(
-    t("moodOptionsData", { returnObjects: true }) as Record<string, string>
+    t("moodOptionsData", { returnObjects: true }) as unknown as Record<
+      string,
+      string
+    >,
   );
   const flowOptions: string[] = Object.values(
-    t("flowOptionsData", { returnObjects: true }) as Record<string, string>
+    t("flowOptionsData", { returnObjects: true }) as unknown as Record<
+      string,
+      string
+    >,
   );
   const commonMedications: string[] = Object.values(
-    t("medicationOptionsData", { returnObjects: true }) as Record<string, string>
+    t("medicationOptionsData", { returnObjects: true }) as unknown as Record<
+      string,
+      string
+    >,
   );
 
   const getPainLevelColor = (level: number) => {
@@ -138,7 +148,6 @@ export default function SymptomTrackerTool({
     return t("painLevels.extreme");
   };
 
-
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Header */}
@@ -146,9 +155,7 @@ export default function SymptomTrackerTool({
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
           {t("title")}
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto">
-          {t("description")}
-        </p>
+        <p className="text-gray-600 max-w-2xl mx-auto">{t("description")}</p>
       </div>
 
       {/* Navigation Tabs */}
@@ -310,9 +317,7 @@ export default function SymptomTrackerTool({
                   }
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
-                  <option value="">
-                    {t("form.pleaseSelect")}
-                  </option>
+                  <option value="">{t("form.pleaseSelect")}</option>
                   {moodOptions.map((mood, index) => (
                     <option key={index} value={mood}>
                       {mood}
@@ -335,9 +340,7 @@ export default function SymptomTrackerTool({
                   }
                   className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
-                  <option value="">
-                    {t("form.pleaseSelect")}
-                  </option>
+                  <option value="">{t("form.pleaseSelect")}</option>
                   {flowOptions.map((flow, index) => (
                     <option key={index} value={flow}>
                       {flow}
@@ -444,9 +447,7 @@ export default function SymptomTrackerTool({
                   />
                 </svg>
               </div>
-              <p className="text-gray-500">
-                {t("history.noRecords")}
-              </p>
+              <p className="text-gray-500">{t("history.noRecords")}</p>
             </div>
           ) : (
             <div className="space-y-4 max-h-96 overflow-y-auto">
@@ -497,8 +498,7 @@ export default function SymptomTrackerTool({
 
                   {entry.notes && (
                     <p className="mt-2 text-sm text-gray-600">
-                      <strong>{t("history.notes")}:</strong>{" "}
-                      {entry.notes}
+                      <strong>{t("history.notes")}:</strong> {entry.notes}
                     </p>
                   )}
                 </div>
@@ -510,9 +510,7 @@ export default function SymptomTrackerTool({
 
       {/* Tips Section */}
       <div className="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
-        <h4 className="font-semibold text-green-800 mb-2">
-          {t("tips.title")}
-        </h4>
+        <h4 className="font-semibold text-green-800 mb-2">{t("tips.title")}</h4>
         <ul className="text-green-700 space-y-1 text-sm">
           <li>• {t("tips.tip1")}</li>
           <li>• {t("tips.tip2")}</li>

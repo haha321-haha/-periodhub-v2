@@ -4812,6 +4812,15 @@
         "highestPainLevel": "最高疼痛程度",
         "noRecords": "暂无记录"
       },
+      "statsSummary": {
+        "title": "统计摘要",
+        "totalRecords": "总记录数",
+        "recordsInRange": "范围内记录",
+        "averagePain": "平均疼痛",
+        "averagePainLevel": "平均疼痛等级",
+        "highestPainLevel": "最高疼痛等级",
+        "noRecords": "无记录"
+      },
       "painLevels": {
         "mild": "轻度",
         "moderate": "中度",

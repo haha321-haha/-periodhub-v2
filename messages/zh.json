@@ -1057,6 +1057,7 @@
     "naturalTherapies": "自然疗法",
     "breadcrumb": {
       "home": "首页",
+      "separator": "/",
       "immediateRelief": "即时缓解"
     },
     "submit": "提交",

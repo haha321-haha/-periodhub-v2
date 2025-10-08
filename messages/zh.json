@@ -3118,11 +3118,19 @@
           "title": "主要穴位",
           "sanyinjiao": {
             "title": "三阴交",
-            "description": "小腿内侧，踝关节上3寸，调理肝脾肾三经"
+            "location": "位置：",
+            "locationValue": "小腿内侧，内踝尖上3寸，胫骨后缘",
+            "effects": "功效：",
+            "effectsValue": "调理月经，缓解盆腔疼痛",
+            "description": "三阴交是重要的妇科要穴，对调理月经、缓解痛经有显著效果"
           },
           "guanyuan": {
             "title": "关元穴",
-            "description": "下腹部，肚脐下3寸，温肾固本"
+            "location": "位置：",
+            "locationValue": "下腹部，肚脐下3寸",
+            "effects": "功效：",
+            "effectsValue": "温肾固本，调理月经",
+            "description": "关元穴是任脉要穴，温补下焦，对痛经有很好的缓解作用"
           },
           "shenque": {
             "title": "神阙穴",

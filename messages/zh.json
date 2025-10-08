@@ -5265,6 +5265,9 @@
   },
   "navigationTabs": {
     "articles": "📚 专业文章",
+    "tools": "互动工具",
+    "downloads": "资源下载",
+    "guide": "健康指南",
     "professionalArticles": "📚 专业文章",
     "pdfDownloads": "📥 PDF下载"
   },

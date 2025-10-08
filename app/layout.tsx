@@ -1,8 +1,8 @@
 import "./globals.css";
 import { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { URL_CONFIG } from "@/lib/url-config";
-import MobileOptimization from "@/components/MobileOptimization";
+// import { URL_CONFIG } from "@/lib/url-config";
+// import MobileOptimization from "@/components/MobileOptimization";
 import OptimizedScripts, {
   OptimizedChartJS,
   OptimizedLucide,
@@ -50,6 +50,7 @@ const notoSansSC = localFont({
 import { WebVitalsReporter } from "@/components/WebVitalsReporter";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 import HydrationFix from "@/components/HydrationFix";
+import EnhancedHydrationFix from "@/components/EnhancedHydrationFix";
 import HydrationErrorBoundary from "@/components/HydrationErrorBoundary";
 
 // 🚀 Core Web Vitals 优化的根布局
@@ -226,6 +227,7 @@ export default function RootLayout({
       <body className={notoSansSC.className} suppressHydrationWarning>
         {/* 🔧 Hydration修复 - 解决浏览器扩展导致的hydration不匹配 */}
         <HydrationFix />
+        <EnhancedHydrationFix />
 
         <HydrationErrorBoundary>{children}</HydrationErrorBoundary>
 

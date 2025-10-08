@@ -12,15 +12,17 @@ export default function HydrationFix() {
   useEffect(() => {
     setIsClient(true);
 
-    // 修复浏览器扩展可能添加的类名导致的hydration不匹配
+    // 🔧 立即修复 hydration 不匹配问题
     const htmlElement = document.documentElement;
 
-    // 移除可能由浏览器扩展添加的类名
+    // 1. 移除可能由浏览器扩展添加的类名
     const extensionClasses = [
       "tongyi-design-pc",
       "tongyi-design-mobile",
       "alibaba-design",
       "taobao-design",
+      "doubao-translate-active",
+      "google-translate-active",
     ];
 
     extensionClasses.forEach((className) => {
@@ -30,58 +32,116 @@ export default function HydrationFix() {
       }
     });
 
-    // 移除翻译扩展添加的属性
-    const elementsWithTranslationMarks = document.querySelectorAll(
-      "[data-doubao-translate-traverse-mark]",
-    );
-    elementsWithTranslationMarks.forEach((element) => {
-      element.removeAttribute("data-doubao-translate-traverse-mark");
-      console.log("[HydrationFix] 移除了翻译扩展添加的属性");
-    });
-
-    // 移除其他可能的翻译扩展属性
-    const allElements = document.querySelectorAll("*");
-    allElements.forEach((element) => {
-      // 移除豆包翻译扩展的属性
-      if (element.hasAttribute("data-doubao-translate-traverse-mark")) {
-        element.removeAttribute("data-doubao-translate-traverse-mark");
-      }
-      // 移除其他可能的翻译扩展属性
-      const attributesToRemove = [
-        "data-google-translate",
-        "data-translate",
-        "data-microsoft-translate",
-        "data-baidu-translate",
-      ];
-      attributesToRemove.forEach((attr) => {
-        if (element.hasAttribute(attr)) {
-          element.removeAttribute(attr);
-        }
+    // 2. 立即移除所有翻译扩展属性，防止hydration错误
+    const removeTranslationAttributes = () => {
+      const allElements = document.querySelectorAll("*");
+      allElements.forEach((element) => {
+        const attributesToRemove = [
+          "data-doubao-translate-traverse-mark",
+          "data-google-translate",
+          "data-translate",
+          "data-microsoft-translate",
+          "data-baidu-translate",
+          "data-deepl-translate",
+        ];
+        attributesToRemove.forEach((attr) => {
+          if (element.hasAttribute(attr)) {
+            element.removeAttribute(attr);
+          }
+        });
       });
-    });
+    };
+
+    // 立即执行一次清理
+    removeTranslationAttributes();
+
+    // 3. 修复翻译键重复显示问题
+    const fixDuplicateText = () => {
+      // 查找可能的重复文本节点
+      const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false,
+      );
+
+      let node;
+      while ((node = walker.nextNode())) {
+        const text = node.textContent?.trim();
+        if (
+          text &&
+          (text.includes("语言语言") || text.includes("Language Language"))
+        ) {
+          // 修复重复的文本
+          node.textContent = text
+            .replace(/语言语言/g, "语言")
+            .replace(/Language Language/g, "Language");
+          console.log("[HydrationFix] 修复了重复文本:", text);
+        }
+      }
+    };
+
+    // 执行文本修复
+    fixDuplicateText();
 
     // 确保html元素有正确的类名
     if (!htmlElement.classList.contains("hydrated")) {
       htmlElement.classList.add("hydrated");
     }
 
-    // 监听DOM变化，持续清理扩展添加的属性
+    // 4. 监听DOM变化，持续清理扩展添加的属性
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === "attributes") {
           const target = mutation.target as Element;
-          if (target.hasAttribute("data-doubao-translate-traverse-mark")) {
-            target.removeAttribute("data-doubao-translate-traverse-mark");
-            console.log("[HydrationFix] 动态移除了翻译扩展添加的属性");
-          }
+          const attributesToRemove = [
+            "data-doubao-translate-traverse-mark",
+            "data-google-translate",
+            "data-translate",
+            "data-microsoft-translate",
+            "data-baidu-translate",
+            "data-deepl-translate",
+          ];
+          attributesToRemove.forEach((attr) => {
+            if (target.hasAttribute(attr)) {
+              target.removeAttribute(attr);
+              console.log(`[HydrationFix] 动态移除了翻译扩展属性: ${attr}`);
+            }
+          });
         }
         if (mutation.type === "childList") {
           mutation.addedNodes.forEach((node) => {
             if (node.nodeType === Node.ELEMENT_NODE) {
               const element = node as Element;
-              if (element.hasAttribute("data-doubao-translate-traverse-mark")) {
-                element.removeAttribute("data-doubao-translate-traverse-mark");
-                console.log("[HydrationFix] 移除了新添加元素的翻译扩展属性");
+              const attributesToRemove = [
+                "data-doubao-translate-traverse-mark",
+                "data-google-translate",
+                "data-translate",
+                "data-microsoft-translate",
+                "data-baidu-translate",
+                "data-deepl-translate",
+              ];
+              attributesToRemove.forEach((attr) => {
+                if (element.hasAttribute(attr)) {
+                  element.removeAttribute(attr);
+                  console.log(
+                    `[HydrationFix] 移除了新添加元素的翻译扩展属性: ${attr}`,
+                  );
+                }
+              });
+            }
+            // 修复新添加的文本节点中的重复文本
+            if (node.nodeType === Node.TEXT_NODE) {
+              const text = node.textContent?.trim();
+              if (
+                text &&
+                (text.includes("语言语言") ||
+                  text.includes("Language Language"))
+              ) {
+                node.textContent = text
+                  .replace(/语言语言/g, "语言")
+                  .replace(/Language Language/g, "Language");
+                console.log("[HydrationFix] 修复了新添加节点的重复文本:", text);
               }
             }
           });
@@ -93,7 +153,15 @@ export default function HydrationFix() {
       attributes: true,
       childList: true,
       subtree: true,
-      attributeFilter: ["data-doubao-translate-traverse-mark"],
+      characterData: true,
+      attributeFilter: [
+        "data-doubao-translate-traverse-mark",
+        "data-google-translate",
+        "data-translate",
+        "data-microsoft-translate",
+        "data-baidu-translate",
+        "data-deepl-translate",
+      ],
     });
 
     // 清理函数

@@ -3244,17 +3244,25 @@
         },
         "synergistic": {
           "title": "协同增效",
+          "description": "结合多种疗法产生协同效应，效果大于单一治疗的总和",
+          "benefits": {
+            "1": "更快缓解疼痛",
+            "2": "效果更持久",
+            "3": "减少药物依赖",
+            "4": "改善整体健康",
+            "title": "益处"
+          },
           "enhancing": {
             "title": "增强效果",
-            "combination1": "热敷 + 芳香疗法：温度促进精油吸收",
-            "combination2": "瑜伽 + 呼吸调节：运动配合心理调节",
-            "combination3": "穴位按摩 + 正念冥想：身体与心理结合"
+            "combination1": "热疗 + 瑜伽：双重放松效果",
+            "combination2": "草药茶 + 按摩：内外兼治",
+            "combination3": "冥想 + 针灸：身心同步"
           },
           "personalized": {
             "title": "个性化方案",
-            "coldConstitution": "寒性体质：热敷 + 温性精油 + 温补穴位",
-            "hotConstitution": "热性体质：凉性疗法 + 清热穴位 + 清凉精油",
-            "qiDeficiency": "气虚体质：补气穴位 + 温和运动 + 补气精油"
+            "coldConstitution": "寒性体质：热敷温补",
+            "hotConstitution": "热性体质：冷敷清热",
+            "qiDeficiency": "气虚体质：呼吸练习补气"
           }
         }
       }

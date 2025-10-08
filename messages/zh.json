@@ -2411,6 +2411,22 @@
       "rating": "用户评分"
     }
   },
+  "resourcesPage": {
+    "meta": {
+      "title": "PDF资源下载中心 - PeriodHub | 专业经期健康指南",
+      "description": "PeriodHub PDF资源中心：下载专业制作的经期健康指南、疼痛追踪表格、营养计划等PDF资源，帮助您科学管理经期健康。",
+      "keywords": [
+        "PDF下载",
+        "经期健康指南",
+        "痛经管理",
+        "健康资源",
+        "下载中心",
+        "经期护理"
+      ],
+      "ogTitle": "PDF资源下载中心 - PeriodHub",
+      "ogDescription": "专业经期健康PDF资源下载中心"
+    }
+  },
   "downloadsPage": {
     "title": "PDF资源下载中心",
     "description": "下载专业制作的PDF指南、表格和工具，帮助您更好地管理经期健康。所有资源均提供中英文版本。",

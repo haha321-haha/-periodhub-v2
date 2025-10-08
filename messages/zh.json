@@ -5228,17 +5228,19 @@
     }
   },
   "footer": {
+    "companyName": "PeriodHub",
     "description": "专业经期健康信息平台",
-    "copyright": "© {currentYear, number, integer} www.periodhub.health。保留所有权利。",
+    "linksTitle": "链接",
     "privacy": "隐私政策",
     "terms": "服务条款",
-    "contact_email": "tiyibaofu@outlook.com",
-    "disclaimer": "此内容仅供参考，不能替代专业医疗建议。",
-    "linksTitle": "链接",
-    "contactTitle": "联系我们",
     "medicalDisclaimer": "医疗免责声明",
     "articles": "文章PDF下载中心",
     "naturalTherapies": "平时调理",
+    "contactTitle": "联系我们",
+    "contactEmail": "tiyibaofu@outlook.com",
+    "socialTwitter": "Twitter",
+    "socialInstagram": "Instagram",
+    "copyright": "© {currentYear, number, integer} www.periodhub.health。保留所有权利。",
     "medicalDisclaimerFull": "医疗免责声明：本网站内容仅供信息和教育目的，不能替代专业医疗建议、诊断或治疗。我们不是医疗专业人员。如有任何医疗问题，请咨询您的医生或其他合格的医疗服务提供者。紧急情况下，请立即寻求医疗救助。使用本网站不构成医患关系。"
   },
   "navigationTabs": {

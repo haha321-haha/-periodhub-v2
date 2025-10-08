@@ -3359,15 +3359,21 @@
       "relatedTools": {
         "nutritionGenerator": {
           "title": "营养推荐生成器",
-          "description": "根据您的体质和症状，生成个性化的营养建议和食谱推荐"
+          "description": "根据您的体质和症状，生成个性化的营养建议和食谱推荐",
+          "benefits": "益处：",
+          "benefitsValue": "个性化饮食计划，缓解疼痛和平衡激素"
         },
         "constitutionTest": {
           "title": "中医体质测试",
-          "description": "通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议"
+          "description": "通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议",
+          "benefits": "益处：",
+          "benefitsValue": "基于您的体质的个性化疗法推荐"
         },
         "painTracker": {
           "title": "痛经计算器",
-          "description": "智能分析疼痛等级，计算疼痛模式和周期趋势，识别触发因素和有效缓解方法"
+          "description": "智能分析疼痛等级，计算疼痛模式和周期趋势，识别触发因素和有效缓解方法",
+          "benefits": "益处：",
+          "benefitsValue": "追踪疼痛强度、触发因素和疗法有效性"
         }
       },
       "relatedArticles": {
@@ -3375,7 +3381,9 @@
           "category": "医学指南",
           "readTime": "15分钟",
           "title": "痛经医学指南",
-          "description": "基于循证医学的痛经诊断和治疗指南"
+          "description": "基于循证医学的痛经诊断和治疗指南",
+          "benefits": "益处：",
+          "benefitsValue": "深入了解原因、症状和治疗方法"
         },
         "heatTherapy": {
           "category": "热疗指南",

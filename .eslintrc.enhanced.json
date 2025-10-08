@@ -1,88 +1,49 @@
 {
   "extends": ["next/core-web-vitals", "next/typescript"],
+  "plugins": ["custom-rules"],
   "rules": {
-    // 未使用变量规则
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_",
-        "caughtErrorsIgnorePattern": "^_"
-      }
-    ],
-
-    // any类型规则
-    "@typescript-eslint/no-explicit-any": [
-      "warn",
-      {
-        "ignoreRestArgs": true
-      }
-    ],
-
-    // React Hooks规则
-    "react-hooks/exhaustive-deps": "warn",
-    "react-hooks/rules-of-hooks": "error",
-
-    // 导入规则
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          "sibling",
-          "index"
-        ],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ],
-
-    // 代码质量规则
-    "prefer-const": "error",
-    "no-var": "error",
     "no-console": "warn",
-    "no-debugger": "error",
-
-    // TypeScript规则
-    "@typescript-eslint/prefer-nullish-coalescing": "error",
-    "@typescript-eslint/prefer-optional-chain": "error",
-    "@typescript-eslint/no-non-null-assertion": "warn",
-
-    // React规则
-    "react/jsx-key": "error",
-    "react/jsx-no-duplicate-props": "error",
-    "react/jsx-no-undef": "error",
-    "react/no-array-index-key": "warn",
-    "react/no-unescaped-entities": "error",
-
-    // Next.js规则
-    "@next/next/no-img-element": "warn",
-    "@next/next/no-html-link-for-pages": "error"
+    "no-debugger": "warn",
+    
+    "custom-rules/no-hardcoded-strings": ["error", {
+      "allowedStrings": [
+        " ", ",", ".", ":", ";", "!", "?", "-", "_", "/", "\\",
+        "(", ")", "[", "]", "{", "}", "<", ">", "|", "&", "%",
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+        "", "N/A", "ID", "URL", "API", "HTTP", "HTTPS", "PDF"
+      ],
+      "allowedPatterns": [
+        "^\\d+$",
+        "^[a-zA-Z]$",
+        "^\\s*$",
+        "^[\\W_]+$",
+        "^#[0-9a-fA-F]+$",
+        "^\\d+px$",
+        "^\\d+%$"
+      ]
+    }],
+    
+    "custom-rules/enforce-translation-keys": "error"
   },
   "overrides": [
     {
-      "files": [
-        "**/*.test.ts",
-        "**/*.test.tsx",
-        "**/*.spec.ts",
-        "**/*.spec.tsx"
-      ],
+      "files": ["app/**/*.tsx", "app/**/*.ts", "components/**/*.tsx"],
       "rules": {
-        "@typescript-eslint/no-explicit-any": "off",
-        "no-console": "off"
+        "custom-rules/no-hardcoded-strings": "error",
+        "custom-rules/enforce-translation-keys": "error"
       }
     },
     {
-      "files": ["**/*.config.js", "**/*.config.ts"],
+      "files": ["scripts/**/*.js", "*.config.js", "*.config.ts"],
       "rules": {
-        "@typescript-eslint/no-var-requires": "off"
+        "custom-rules/no-hardcoded-strings": "off",
+        "custom-rules/enforce-translation-keys": "off"
       }
     }
-  ]
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }

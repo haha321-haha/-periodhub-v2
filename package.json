@@ -12,6 +12,12 @@
     "build": "next build",
     "build:safe": "npm run verify:translations && npm run build",
     "verify:translations": "node scripts/verify-translation-sync.js",
+    "setup:hooks": "bash scripts/setup-git-hooks.sh",
+    "types:generate": "node scripts/generate-translation-types.js",
+    "translations:check": "node scripts/check-translation-sync.js",
+    "translations:report": "node scripts/generate-validation-report.js",
+    "translations:validate": "npm run translations:check && npm run types:generate",
+    "translations:full-check": "npm run translations:check && npm run types:generate && npm run translations:report",
     "check-client-usage": "node scripts/check-client-components.js",
     "build:unsafe": "next build",
     "start": "next start",
@@ -131,7 +137,8 @@
     "test:validate": "npm run test:simple && npm run test:pre-upload",
     "test:all": "npm run test:enhanced && npm run test:pre-upload",
     "eslint:simple-fix": "node scripts/simple-eslint-fix.js",
-    "eslint:check-clean": "npx eslint . --ext .ts,.tsx --ignore-pattern 'recovery-workspace/**' --ignore-pattern 'backup/**' --ignore-pattern 'recovered/**'"
+    "eslint:check-clean": "npx eslint . --ext .ts,.tsx --ignore-pattern 'recovery-workspace/**' --ignore-pattern 'backup/**' --ignore-pattern 'recovered/**'",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@formatjs/intl": "^3.1.6",
@@ -176,8 +183,10 @@
     "eslint": "^8.55.0",
     "eslint-config-next": "^14.2.21",
     "glob": "^11.0.2",
+    "husky": "^9.1.7",
     "jest": "^30.0.3",
     "lighthouse": "^12.8.2",
+    "lint-staged": "^16.2.3",
     "lucide-react": "^0.539.0",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",

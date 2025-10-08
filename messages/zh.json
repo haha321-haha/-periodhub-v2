@@ -4,6 +4,236 @@
     "title": "Period Hub - 经期健康管理平台",
     "description": "Period Hub - 专业经期健康管理平台，提供科学痛经缓解方案、互动工具和个性化健康指导。从即时缓解到长期管理，全方位支持女性经期健康，已帮助千万女性科学管理生理期。基于循证医学的专业内容，涵盖42篇专业文章、24个PDF资源、6大互动工具，为各年龄段女性提供科学指导。"
   },
+  "homePage": {
+    "metadata": {
+      "title": "Period Hub - 痛经缓解与经期管理 | 42篇医学指南 + 8大评估工具",
+      "description": "Period Hub - 专业痛经缓解与经期管理平台。42篇医学指南涵盖最快缓解方法和有效药物,8大症状评估工具，PDF下载。已帮助60万+女性通过个性化方案管理经期疼痛。立即开始！",
+      "keywords": "痛经缓解,经期疼痛管理,女性健康,经期追踪,疼痛管理,症状评估,健康工具,医学指南,PDF下载",
+      "ogTitle": "Period Hub - 痛经缓解与经期管理 | 42篇医学指南 + 8大评估工具",
+      "ogDescription": "专业痛经缓解与经期管理平台，提供科学方法和个性化方案，42篇医学指南和PDF下载。",
+      "twitterTitle": "Period Hub - 痛经缓解与经期管理 | 42篇医学指南 + 8大评估工具",
+      "twitterDescription": "专业痛经缓解与经期管理平台，提供科学方法，42篇医学指南和PDF下载。"
+    }
+  },
+  "privacyPolicy": {
+    "title": "隐私政策",
+    "description": "了解 Period Hub 如何收集、使用和保护您的个人信息和健康数据。",
+    "openGraph": {
+      "description": "全面的隐私政策，透明说明我们如何以安全的方式处理您的数据。"
+    },
+    "dataTable": {
+      "type": "类型",
+      "purpose": "用途",
+      "duration": "保留期限",
+      "required": "是否必需"
+    },
+    "lastUpdated": "最后更新：2025年1月",
+    "intro": "在 Period Hub，我们致力于保护您的隐私并确保您个人信息的安全。本隐私政策说明我们如何收集、使用和保护您的数据。",
+    "importantNotice": "重要提示",
+    "importantNoticeText": "Period Hub 目前处于 MVP（最小可行产品）阶段。我们收集最少的数据，不与第三方共享您的信息。所有健康数据都存储在您的设备本地。",
+    "tableOfContents": "目录",
+    "mvpNotice": {
+      "title": "MVP 阶段说明",
+      "text": "作为 MVP 产品，我们优先考虑您的隐私，通过最小化数据收集并将所有敏感健康信息保存在您的设备上。"
+    },
+    "sections": {
+      "informationCollection": {
+        "title": "我们收集的信息",
+        "subtitle": "了解我们收集哪些数据",
+        "importantNote": {
+          "title": "本地存储优先",
+          "text": "您的大部分健康数据（疼痛追踪、周期信息）都存储在您的设备本地，永远不会发送到我们的服务器。"
+        },
+        "userProvided": {
+          "title": "您提供的信息",
+          "description": "您在使用我们服务时自愿分享的数据",
+          "items": [
+            "账户注册信息",
+            "个人资料和偏好设置",
+            "反馈和支持请求",
+            "调查问卷回复",
+            "通信偏好"
+          ]
+        },
+        "symptomData": {
+          "title": "症状和健康数据",
+          "description": "疼痛程度、周期追踪和症状信息（本地存储）",
+          "items": [
+            "疼痛强度等级",
+            "月经周期日期",
+            "症状模式",
+            "用药记录",
+            "生活方式因素"
+          ]
+        },
+        "technicalInfo": {
+          "title": "技术信息",
+          "description": "浏览器类型、设备信息和使用分析",
+          "items": [
+            "浏览器类型和版本",
+            "设备信息",
+            "IP 地址（匿名化）",
+            "使用分析数据",
+            "错误日志"
+          ]
+        }
+      },
+      "informationUse": {
+        "title": "我们如何使用您的信息",
+        "mainPurposes": {
+          "title": "主要用途",
+          "items": [
+            "提供和改进我们的服务",
+            "个性化您的体验",
+            "分析使用模式以增强功能",
+            "传达重要更新",
+            "确保平台安全"
+          ]
+        },
+        "neverUsedFor": {
+          "title": "我们绝不会将您的数据用于",
+          "items": [
+            "出售给第三方",
+            "定向广告",
+            "与保险公司共享",
+            "未经您同意的任何用途"
+          ]
+        }
+      },
+      "informationSharing": {
+        "title": "信息共享",
+        "content": "我们不会向第三方出售、交易或出租您的个人信息。您的健康数据保持私密，只有您可以访问。",
+        "exceptions": [
+          "法律要求",
+          "紧急情况",
+          "经您明确同意",
+          "服务提供商（在严格协议下）",
+          "业务转让（需提前通知）"
+        ]
+      },
+      "dataSecurity": {
+        "title": "数据安全",
+        "disclaimer": "虽然我们采用行业标准的安全措施，但没有任何互联网传输方法是 100% 安全的。",
+        "encryption": {
+          "title": "加密",
+          "description": "所有数据传输使用 HTTPS 加密"
+        },
+        "accessControl": {
+          "title": "访问控制",
+          "description": "严格的访问控制限制谁可以查看您的数据"
+        },
+        "regularAudit": {
+          "title": "定期安全审计",
+          "description": "我们定期审查和更新我们的安全实践"
+        }
+      },
+      "cookieUsage": {
+        "title": "Cookie 使用",
+        "cookieTypes": {
+          "title": "我们使用的 Cookie 类型",
+          "necessary": {
+            "type": "必要 Cookies",
+            "description": "基本网站功能所需",
+            "purpose": "基本网站功能",
+            "duration": "仅会话期间",
+            "required": "是"
+          },
+          "functional": {
+            "type": "功能性 Cookies",
+            "purpose": "增强用户体验",
+            "duration": "30天",
+            "required": "否"
+          },
+          "analytical": {
+            "type": "分析性 Cookies",
+            "purpose": "使用分析",
+            "duration": "90天",
+            "required": "否"
+          }
+        },
+        "management": {
+          "title": "管理 Cookies",
+          "text": "您可以通过浏览器设置控制 Cookies。请注意，禁用 Cookies 可能会影响网站功能。"
+        },
+        "dataTable": {
+          "type": "类型",
+          "purpose": "用途",
+          "duration": "保留期限",
+          "required": "是否必需"
+        }
+      },
+      "userRights": {
+        "title": "您的数据权利",
+        "subtitle": "您可以控制自己的数据",
+        "rights": [
+          {
+            "name": "访问权",
+            "description": "您可以要求查看我们存储的关于您的所有个人信息，我们将在30天内提供相关数据的副本。"
+          },
+          {
+            "name": "更正权",
+            "description": "如果您发现个人信息有误，您有权要求我们更正或更新这些信息。"
+          },
+          {
+            "name": "删除权",
+            "description": "在特定情况下，您可以要求我们删除您的个人信息，我们将根据法律要求进行处理。"
+          },
+          {
+            "name": "限制处理权",
+            "description": "在某些情况下，您可以要求我们限制对您个人信息的处理。"
+          },
+          {
+            "name": "数据可携权",
+            "description": "您有权以结构化、常用的机器可读格式获取您的个人信息。"
+          },
+          {
+            "name": "反对权",
+            "description": "在基于合法利益的处理活动中，您有权反对我们处理您的个人信息。"
+          }
+        ],
+        "howToExercise": {
+          "title": "如何行使您的权利",
+          "description": "如需行使上述任何权利，请通过以下方式联系我们：",
+          "methods": [
+            "邮箱：tiyibaofu@outlook.com",
+            "在线表单：通过我们的联系页面",
+            "我们将在收到请求后15个工作日内回复"
+          ]
+        }
+      },
+      "contactUs": {
+        "title": "联系我们",
+        "description": "如果您对本隐私政策或您的数据有任何问题：",
+        "dpo": {
+          "title": "数据保护官",
+          "email": "tiyibaofu@outlook.com",
+          "responsibility": "处理所有与隐私相关的咨询",
+          "languages": "提供中英文服务"
+        },
+        "dataProtection": {
+          "title": "数据保护咨询",
+          "email": "tiyibaofu@outlook.com",
+          "subject": "主题：隐私政策问题",
+          "responseTime": "我们会在 48 小时内回复"
+        }
+      }
+    },
+    "policyUpdates": {
+      "title": "政策更新",
+      "content": "我们可能会不时更新本隐私政策。我们会通过电子邮件或网站上的显著通知告知您任何重大变更。",
+      "recommendation": "我们建议您定期查看本政策，以了解我们如何保护您的信息。",
+      "procedures": [
+        "向注册用户发送电子邮件通知",
+        "网站横幅公告",
+        "更新生效日期",
+        "存档以前的版本",
+        "关键变更摘要"
+      ]
+    },
+    "questions": "有疑问？",
+    "questionsDescription": "如果您对本隐私政策有任何疑问，请通过 tiyibaofu@outlook.com 联系我们",
+    "contactUs": "联系我们"
+  },
   "metadata": {
     "home": {
       "title": "2024痛经治疗完整指南：症状缓解+用药建议+热敷方法",
@@ -2168,16 +2398,30 @@
   "downloadsPage": {
     "title": "PDF资源下载中心",
     "description": "下载专业制作的PDF指南、表格和工具，帮助您更好地管理经期健康。所有资源均提供中英文版本。",
+    "keywords": "经期健康,PDF下载,痛经缓解,文章资源,Period Hub",
     "seo": {
       "title": "文章PDF下载中心 - Period Hub 经期健康专业资源",
       "description": "Period Hub文章PDF下载中心，38个精选经期健康资源，基于紧急程度智能分类，支持中英双语下载",
       "keywords": "经期健康,PDF下载,痛经缓解,文章资源,Period Hub"
     },
+    "openGraph": {
+      "title": "PDF资源下载中心 - Period Hub 经期健康专业资源",
+      "description": "下载专业制作的PDF指南、表格和工具，帮助您更好地管理经期健康。所有资源均提供中英文版本。"
+    },
     "banner": {
-      "newVersion": "🎉 全新PDF下载中心 - 38个精选资源，移动端优化体验，基于紧急程度智能分类"
+      "newVersion": "🎉 全新PDF下载中心 - 38个精选资源，移动端优化体验，基于紧急程度智能分类",
+      "text": "🎉 全新PDF下载中心上线！更多专业资源，更好的阅读体验"
     },
     "navigation": {
       "backToArticles": "返回文章"
+    },
+    "structuredData": {
+      "name": "PeriodHub PDF下载中心",
+      "description": "专业的经期健康PDF资源下载服务"
+    },
+    "breadcrumb": {
+      "home": "首页",
+      "downloadCenter": "下载中心"
     },
     "pageTitle": "📚 文章PDF下载中心",
     "stats": {
@@ -2259,6 +2503,20 @@
       "zhanZhuangBaduanjinIllustratedGuide": {
         "title": "站桩八段锦图解指南",
         "description": "传统中医养生功法在经期健康管理中的应用指导"
+      }
+    },
+    "content": {
+      "title": "📥 PDF下载中心",
+      "description": "专业的经期健康资源库，为您提供科学、实用的PDF指南和工具",
+      "statistics": {
+        "expertArticles": "专业文章",
+        "pdfResources": "PDF资源",
+        "languages": "语言版本"
+      },
+      "banner": {
+        "title": "💡 需要帮助？",
+        "description": "告诉我们您的需求，我们会持续改进我们的资源库",
+        "feedbackButton": "提交反馈"
       }
     },
     "backToArticles": "返回文章页面"
@@ -4985,6 +5243,7 @@
   },
   "navigationTabs": {
     "articles": "📚 专业文章",
+    "professionalArticles": "📚 专业文章",
     "pdfDownloads": "📥 PDF下载"
   },
   "userSuccessStories": {
@@ -5020,6 +5279,7 @@
     "subtitle": "基于全球女性健康调查的权威数据，帮助您了解月经健康的真实现状",
     "chartTitle": "月经健康统计数据",
     "chartSubtitle": "Period Health Statistics",
+    "infographicAlt": "月经健康统计数据信息图表",
     "stats": {
       "experiencePain": {
         "label": "女性经历痛经",
@@ -5816,8 +6076,8 @@
     },
     "recommendations": {
       "relatedTools": {
-        "symptomAssessment": {
-          "title": "症状评估工具",
+    "symptomAssessment": {
+      "title": "症状评估工具",
           "description": "科学评估经期症状，获取个性化建议"
         },
         "painTracker": {

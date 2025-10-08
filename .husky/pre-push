@@ -1,0 +1,33 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 运行 pre-push 验证..."
+echo ""
+
+# 验证 JSON 语法
+echo "🔍 验证 JSON 语法..."
+if ! node -e "JSON.parse(require('fs').readFileSync('messages/zh.json', 'utf8'))"; then
+    echo "❌ messages/zh.json 语法错误！"
+    exit 1
+fi
+
+if ! node -e "JSON.parse(require('fs').readFileSync('messages/en.json', 'utf8'))"; then
+    echo "❌ messages/en.json 语法错误！"
+    exit 1
+fi
+
+echo "✅ JSON 语法验证通过"
+echo ""
+
+# 运行完整的翻译键验证
+echo "🔍 运行完整翻译键验证..."
+if ! node scripts/check-translation-sync.js; then
+    echo ""
+    echo "❌ 翻译键验证失败！"
+    echo "请修复所有翻译键问题后再推送。"
+    echo ""
+    exit 1
+fi
+
+echo ""
+echo "✅ 所有 pre-push 验证通过！"

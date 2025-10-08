@@ -459,27 +459,57 @@ export default async function PrivacyPolicyPage({
                       {t
                         .raw("sections.userRights.rights")
                         .slice(0, 4)
-                        .map((right: any, i: number) => (
-                          <li key={i} className="flex items-center">
-                            <span className="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
-                            <span>
-                              <strong>{right.name}：</strong>
-                              {right.description}
-                            </span>
-                          </li>
-                        ))}
+                        .map(
+                          (
+                            right: { name: string; description: string },
+                            i: number,
+                          ) => (
+                            <li key={i} className="flex items-center">
+                              <span className="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                              <span>
+                                <strong>{right.name}：</strong>
+                                {right.description}
+                              </span>
+                            </li>
+                          ),
+                        )}
                     </ul>
                     <ul className="space-y-3">
                       {t
                         .raw("sections.userRights.rights")
                         .slice(4)
-                        .map((right: any, i: number) => (
-                          <li key={i} className="flex items-center">
-                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
-                            <span>
-                              <strong>{right.name}：</strong>
-                              {right.description}
-                            </span>
+                        .map(
+                          (
+                            right: { name: string; description: string },
+                            i: number,
+                          ) => (
+                            <li key={i} className="flex items-center">
+                              <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                              <span>
+                                <strong>{right.name}：</strong>
+                                {right.description}
+                              </span>
+                            </li>
+                          ),
+                        )}
+                    </ul>
+                  </div>
+
+                  {/* How to Exercise Rights */}
+                  <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-6">
+                    <h3 className="font-semibold text-green-700 mb-3 text-lg">
+                      {t("sections.userRights.howToExercise.title")}
+                    </h3>
+                    <p className="text-sm text-green-600 mb-3">
+                      {t("sections.userRights.howToExercise.description")}
+                    </p>
+                    <ul className="text-sm text-green-600 space-y-2">
+                      {t
+                        .raw("sections.userRights.howToExercise.methods")
+                        .map((method: string, i: number) => (
+                          <li key={i} className="flex items-start">
+                            <span className="text-green-500 mr-2">•</span>
+                            <span>{method}</span>
                           </li>
                         ))}
                     </ul>

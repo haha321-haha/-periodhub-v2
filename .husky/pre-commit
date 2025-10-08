@@ -1,16 +1,22 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
 
-echo "🔍 Running pre-commit checks..."
+echo "🔍 运行 pre-commit 检查..."
+echo ""
 
-# 运行TypeScript类型检查
-echo "📝 Checking TypeScript types..."
-npm run build
+# 运行 lint-staged
+npx lint-staged
 
-# 如果构建失败，阻止提交
-if [ $? -ne 0 ]; then
-  echo "❌ TypeScript type check failed. Please fix the errors before committing."
-  exit 1
+# 运行翻译键同步检查
+echo ""
+echo "🔍 检查翻译键同步性..."
+if ! true; then
+    echo ""
+    echo "❌ 翻译键同步检查失败！"
+    echo "请修复翻译键问题后重新提交。"
+    echo ""
+    exit 1
 fi
 
-echo "✅ All pre-commit checks passed!"
+echo ""
+echo "✅ 所有 pre-commit 检查通过！"

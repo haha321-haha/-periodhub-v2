@@ -4590,28 +4590,56 @@
         }
       },
       "userRights": {
-        "title": "Your Rights",
+        "title": "Your Data Rights",
         "subtitle": "You have control over your data",
         "rights": [
-          "Access your personal data",
-          "Correct inaccurate information",
-          "Delete your data",
-          "Export your data",
-          "Opt-out of communications"
-        ]
+          {
+            "name": "Right to Access",
+            "description": "You can request to view all your personal information stored by us, and we will provide a copy of the relevant data within 30 days."
+          },
+          {
+            "name": "Right to Rectification",
+            "description": "If you find personal information to be incorrect, you have the right to request us to correct or update this information."
+          },
+          {
+            "name": "Right to Erasure",
+            "description": "In specific circumstances, you can request us to delete your personal information, and we will process it according to legal requirements."
+          },
+          {
+            "name": "Right to Restriction of Processing",
+            "description": "In certain circumstances, you can request us to restrict the processing of your personal information."
+          },
+          {
+            "name": "Right to Data Portability",
+            "description": "You have the right to obtain your personal information in a structured, commonly used, and machine-readable format."
+          },
+          {
+            "name": "Right to Object",
+            "description": "In processing activities based on legitimate interests, you have the right to object to our processing of your personal information."
+          }
+        ],
+        "howToExercise": {
+          "title": "How to Exercise Your Rights",
+          "description": "To exercise any of the above rights, please contact us through the following methods:",
+          "methods": [
+            "Email: tiyibaofu@outlook.com",
+            "Online form: Through our contact page",
+            "We will respond within 15 working days of receiving the request"
+          ]
+        }
       },
       "contactUs": {
         "title": "Contact Us",
         "description": "If you have questions about this Privacy Policy or your data:",
         "dpo": {
           "title": "Data Protection Officer",
-          "email": "privacy@periodhub.health",
+          "email": "tiyibaofu@outlook.com",
           "responsibility": "Handles all privacy-related inquiries",
           "languages": "Available in English and Chinese"
         },
         "dataProtection": {
           "title": "Data Protection Inquiries",
-          "email": "privacy@periodhub.health",
+          "email": "tiyibaofu@outlook.com",
           "subject": "Subject: Privacy Policy Question",
           "responseTime": "We aim to respond within 48 hours"
         }
@@ -4630,7 +4658,7 @@
       ]
     },
     "questions": "Questions?",
-    "questionsDescription": "If you have any questions about this Privacy Policy, please contact us at privacy@periodhub.health",
+    "questionsDescription": "If you have any questions about this Privacy Policy, please contact us at tiyibaofu@outlook.com",
     "contactUs": "Contact Us"
   },
   "immediateReliefPage": {

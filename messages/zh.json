@@ -3067,21 +3067,27 @@
           },
           "romanChamomile": {
             "title": "罗马洋甘菊精油",
-            "effects": "抗炎、镇静、缓解肌肉紧张",
-            "mechanism": "抑制前列腺素合成，减少炎症反应"
+            "effects": "功效：",
+            "effectsValue": "抗炎、镇静、缓解肌肉紧张",
+            "mechanism": "机制：",
+            "mechanismValue": "抑制前列腺素合成，减少炎症反应"
           }
         },
         "usage": {
           "title": "使用方法",
           "massageOil": {
             "title": "按摩油配方",
-            "recipe": "基础油10ml + 精油2-3滴",
-            "instructions": "轻柔按摩下腹部，顺时针方向"
+            "recipe": "配方：",
+            "recipeValue": "基础油10ml + 精油2-3滴",
+            "instructions": "使用说明：",
+            "instructionsValue": "轻柔按摩下腹部，顺时针方向"
           },
           "diffusion": {
             "title": "香薰扩散",
-            "recipe": "精油3-5滴 + 水100ml",
-            "instructions": "使用香薰机，每次15-20分钟"
+            "recipe": "配方：",
+            "recipeValue": "精油3-5滴 + 水100ml",
+            "instructions": "使用说明：",
+            "instructionsValue": "使用香薰机，每次15-20分钟"
           }
         },
         "safety": {
@@ -3091,6 +3097,17 @@
             "1": "避免直接接触皮肤，需稀释使用",
             "2": "使用前进行皮肤过敏测试"
           }
+        },
+        "science": {
+          "title": "科学机制",
+          "mechanism": "作用机制：",
+          "mechanismValue": "精油通过嗅觉和皮肤途径进入，直接作用于神经系统和内分泌系统",
+          "effects": "功效：",
+          "effectsValue": "镇痛、放松和调节情绪作用",
+          "duration": "持续时间：",
+          "durationValue": "15-30分钟，可每日多次使用",
+          "bioavailability": "生物利用度：",
+          "bioavailabilityValue": "通过皮肤和呼吸系统吸收，绕过肝脏代谢"
         }
       },
       "acupuncture": {

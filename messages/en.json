@@ -518,6 +518,57 @@
         "6": "Other"
       }
     },
+    "workplaceImpactAssessment": {
+      "meta": {
+        "title": "Workplace Impact Assessment - Professional Period Pain Work Impact Analysis Tool | Period Hub",
+        "description": "Professional workplace impact assessment tool that analyzes how menstrual pain affects work efficiency, concentration, and communication, providing personalized workplace adaptation recommendations.",
+        "keywords": "workplace impact assessment,period pain work impact,work efficiency analysis,workplace adaptation strategies,women health management",
+        "ogTitle": "Workplace Impact Assessment - Professional Period Pain Work Impact Analysis Tool",
+        "ogDescription": "Professional workplace impact assessment tool that analyzes how menstrual pain affects work efficiency, concentration, and communication.",
+        "twitterTitle": "Workplace Impact Assessment - Professional Period Pain Work Impact Analysis Tool",
+        "twitterDescription": "Professional workplace impact assessment tool that analyzes how menstrual pain affects work efficiency, concentration, and communication."
+      }
+    },
+    "constitutionTest": {
+      "title": "TCM Constitution Test",
+      "description": "Understand your Traditional Chinese Medicine constitution type through 8 questions and get personalized acupoint, diet, and lifestyle recommendations",
+      "cta": "Start Test",
+      "subtitle": "Understand your TCM constitution type through professional questionnaire and get personalized health recommendations",
+      "features": {
+        "quick": {
+          "title": "Quick & Convenient",
+          "description": "Complete in just 5-8 minutes"
+        },
+        "professional": {
+          "title": "Professional & Reliable",
+          "description": "Based on TCM theory"
+        },
+        "personalized": {
+          "title": "Personalized Advice",
+          "description": "Tailored to your constitution"
+        },
+        "practical": {
+          "title": "Practical Guidance",
+          "description": "Acupoint, diet, lifestyle advice"
+        }
+      },
+      "instructions": {
+        "title": "Test Instructions",
+        "item1": "Answer based on your physical condition in the past 3 months",
+        "item2": "Choose the option that best describes you",
+        "item3": "If unsure, choose the relatively more applicable option",
+        "item4": "Results are for reference only and do not replace medical diagnosis"
+      },
+      "navigation": {
+        "startTest": "Start Test",
+        "nextQuestion": "Next Question",
+        "previousQuestion": "Previous Question",
+        "completeTest": "Complete Test",
+        "retakeTest": "Retake Test",
+        "previous": "Previous",
+        "next": "Next"
+      }
+    },
     "symptomAssessmentTool": {
       "trends": {
         "title": "Your Assessment Trends",

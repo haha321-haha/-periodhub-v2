@@ -11,6 +11,7 @@ interface EmergencyReliefGuideProps {
 export default function EmergencyReliefGuide({
   locale,
 }: EmergencyReliefGuideProps) {
+  const t = useTranslations("interactiveTools.emergencyRelief");
   const [isExpanded, setIsExpanded] = useState(false);
 
   const emergencySteps = [
@@ -40,22 +41,14 @@ export default function EmergencyReliefGuide({
         <div className="flex items-center">
           <AlertTriangle className="w-6 h-6 text-red-600 mr-3" />
           <h2 className="text-xl font-semibold text-red-800">
-            {locale === "zh"
-              ? "💢 经期剧痛紧急处理"
-              : "💢 Emergency Period Pain Relief"}
+            {t("title")}
           </h2>
         </div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="text-red-600 hover:text-red-800 font-medium text-sm"
         >
-          {isExpanded
-            ? locale === "zh"
-              ? "收起"
-              : "Collapse"
-            : locale === "zh"
-              ? "展开"
-              : "Expand"}
+          {isExpanded ? t("buttons.collapse") : t("buttons.expand")}
         </button>
       </div>
 

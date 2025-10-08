@@ -3917,6 +3917,13 @@
         "clearHistory": "确定要清除所有评估历史吗？此操作不可撤销。"
       }
     },
+    "emergencyRelief": {
+      "title": "💢 经期剧痛紧急处理",
+      "buttons": {
+        "expand": "展开",
+        "collapse": "收起"
+      }
+    },
     "healthDashboard": {
       "alerts": {
         "importSuccess": "数据导入成功！",

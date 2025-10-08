@@ -416,6 +416,13 @@
         "reset": "Reset"
       }
     },
+    "emergencyRelief": {
+      "title": "💢 Emergency Period Pain Relief",
+      "buttons": {
+        "expand": "Expand",
+        "collapse": "Collapse"
+      }
+    },
     "healthDashboard": {
       "alerts": {
         "importSuccess": "Data imported successfully!",

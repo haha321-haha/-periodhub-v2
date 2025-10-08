@@ -416,6 +416,43 @@
         "reset": "Reset"
       }
     },
+    "healthDashboard": {
+      "alerts": {
+        "importSuccess": "Data imported successfully!",
+        "importFailed": "Data import failed. Please check file format.",
+        "clearConfirm": "Are you sure you want to clear all data? This action cannot be undone.",
+        "cleared": "Data cleared."
+      },
+      "metrics": {
+        "painEntries": "Pain Entries",
+        "averagePainLevel": "Average Pain Level",
+        "constitutionTests": "Constitution Tests",
+        "lastSync": "Last Sync"
+      },
+      "sections": {
+        "commonSymptoms": "Most Common Symptoms",
+        "painTrends": "Pain Trends",
+        "dataManagement": "Data Management",
+        "userPreferences": "User Preferences"
+      },
+      "actions": {
+        "exportData": "Export Data",
+        "importData": "Import Data",
+        "clearData": "Clear Data"
+      },
+      "preferences": {
+        "language": "Language: ",
+        "theme": "Theme: ",
+        "painReminders": "Pain Reminders: ",
+        "analytics": "Analytics: ",
+        "on": "On",
+        "off": "Off"
+      },
+      "trends": {
+        "noData": "No data available",
+        "level": "Level"
+      }
+    },
     "i18n": {
       "title": "Internationalization Optimization",
       "description": "Improve translation quality and optimize multi-language support",
@@ -706,7 +743,7 @@
         "description": "Start recording your pain information to better understand pain patterns",
         "addFirst": "Add First Record"
       },
-      "stats": {
+      "statsSummary": {
         "title": "Summary Statistics",
         "totalRecords": "Total Records",
         "recordsInRange": "Records in Range",

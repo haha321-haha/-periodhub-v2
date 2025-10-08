@@ -21,7 +21,7 @@ interface HealthDataDashboardProps {
 export default function HealthDataDashboard({
   locale,
 }: HealthDataDashboardProps) {
-  const { t } = useInteractiveToolTranslations();
+  const { t } = useInteractiveToolTranslations("healthDashboard");
 
   const {
     painEntries,
@@ -63,15 +63,9 @@ export default function HealthDataDashboard({
         const data = e.target?.result as string;
         const success = importData(data);
         if (success) {
-          alert(
-            locale === "zh" ? "数据导入成功！" : "Data imported successfully!",
-          );
+          alert(t("alerts.importSuccess"));
         } else {
-          alert(
-            locale === "zh"
-              ? "数据导入失败，请检查文件格式。"
-              : "Data import failed. Please check file format.",
-          );
+          alert(t("alerts.importFailed"));
         }
       };
       reader.readAsText(file);
@@ -79,14 +73,9 @@ export default function HealthDataDashboard({
   };
 
   const handleClearData = () => {
-    const confirmMessage =
-      locale === "zh"
-        ? "确定要清除所有数据吗？此操作不可撤销。"
-        : "Are you sure you want to clear all data? This action cannot be undone.";
-
-    if (confirm(confirmMessage)) {
+    if (confirm(t("alerts.clearConfirm"))) {
       clearAllData();
-      alert(locale === "zh" ? "数据已清除。" : "Data cleared.");
+      alert(t("alerts.cleared"));
     }
   };
 
@@ -98,7 +87,7 @@ export default function HealthDataDashboard({
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-blue-600 font-medium">
-                {locale === "zh" ? "疼痛记录" : "Pain Entries"}
+                {t("metrics.painEntries")}
               </p>
               <p className="text-2xl font-bold text-blue-700">
                 {painEntries.length}
@@ -112,7 +101,7 @@ export default function HealthDataDashboard({
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-green-600 font-medium">
-                {locale === "zh" ? "平均疼痛等级" : "Average Pain Level"}
+                {t("metrics.averagePainLevel")}
               </p>
               <p className="text-2xl font-bold text-green-700">
                 {averagePainLevel}/10
@@ -126,7 +115,7 @@ export default function HealthDataDashboard({
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-purple-600 font-medium">
-                {locale === "zh" ? "体质测试" : "Constitution Tests"}
+                {t("metrics.constitutionTests")}
               </p>
               <p className="text-2xl font-bold text-purple-700">
                 {constitutionResults.length}
@@ -140,7 +129,7 @@ export default function HealthDataDashboard({
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-orange-600 font-medium">
-                {locale === "zh" ? "最后同步" : "Last Sync"}
+                {t("metrics.lastSync")}
               </p>
               <p className="text-sm font-medium text-orange-700">
                 {lastSyncTime
@@ -158,7 +147,7 @@ export default function HealthDataDashboard({
         <div className="bg-white p-6 rounded-lg border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
             <AlertCircle className="w-5 h-5 mr-2 text-red-500" />
-            {locale === "zh" ? "最常见症状" : "Most Common Symptoms"}
+            {t("sections.commonSymptoms")}
           </h3>
           <div className="flex flex-wrap gap-2">
             {mostCommonSymptoms.map((symptom, index) => (
@@ -178,7 +167,7 @@ export default function HealthDataDashboard({
         <div className="bg-white p-6 rounded-lg border border-gray-200">
           <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
             <TrendingUp className="w-5 h-5 mr-2 text-blue-500" />
-            {locale === "zh" ? "疼痛趋势" : "Pain Trends"}
+            {t("sections.painTrends")}
           </h3>
           <div className="space-y-2">
             {Object.entries(painTrends)
@@ -211,7 +200,7 @@ export default function HealthDataDashboard({
       {/* 数据管理 */}
       <div className="bg-white p-6 rounded-lg border border-gray-200">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">
-          {locale === "zh" ? "数据管理" : "Data Management"}
+          {t("sections.dataManagement")}
         </h3>
         <div className="flex flex-wrap gap-4">
           <button
@@ -219,12 +208,12 @@ export default function HealthDataDashboard({
             className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             <Download className="w-4 h-4 mr-2" />
-            {locale === "zh" ? "导出数据" : "Export Data"}
+            {t("actions.exportData")}
           </button>
 
           <label className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors cursor-pointer">
             <Upload className="w-4 h-4 mr-2" />
-            {locale === "zh" ? "导入数据" : "Import Data"}
+            {t("actions.importData")}
             <input
               type="file"
               accept=".json"
@@ -238,7 +227,7 @@ export default function HealthDataDashboard({
             className="flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
           >
             <Trash2 className="w-4 h-4 mr-2" />
-            {locale === "zh" ? "清除数据" : "Clear Data"}
+            {t("actions.clearData")}
           </button>
         </div>
       </div>
@@ -246,47 +235,39 @@ export default function HealthDataDashboard({
       {/* 用户偏好 */}
       <div className="bg-white p-6 rounded-lg border border-gray-200">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">
-          {locale === "zh" ? "用户偏好" : "User Preferences"}
+          {t("sections.userPreferences")}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div>
             <span className="font-medium text-gray-700">
-              {locale === "zh" ? "语言：" : "Language: "}
+              {t("preferences.language")}
             </span>
             <span className="text-gray-600">{preferences.language}</span>
           </div>
           <div>
             <span className="font-medium text-gray-700">
-              {locale === "zh" ? "主题：" : "Theme: "}
+              {t("preferences.theme")}
             </span>
             <span className="text-gray-600">{preferences.theme}</span>
           </div>
           <div>
             <span className="font-medium text-gray-700">
-              {locale === "zh" ? "疼痛提醒：" : "Pain Reminders: "}
+              {t("preferences.painReminders")}
             </span>
             <span className="text-gray-600">
               {preferences.notifications.painReminders
-                ? locale === "zh"
-                  ? "开启"
-                  : "On"
-                : locale === "zh"
-                  ? "关闭"
-                  : "Off"}
+                ? t("preferences.on")
+                : t("preferences.off")}
             </span>
           </div>
           <div>
             <span className="font-medium text-gray-700">
-              {locale === "zh" ? "数据分析：" : "Analytics: "}
+              {t("preferences.analytics")}
             </span>
             <span className="text-gray-600">
               {preferences.privacy.analytics
-                ? locale === "zh"
-                  ? "开启"
-                  : "On"
-                : locale === "zh"
-                  ? "关闭"
-                  : "Off"}
+                ? t("preferences.on")
+                : t("preferences.off")}
             </span>
           </div>
         </div>

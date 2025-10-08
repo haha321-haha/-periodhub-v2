@@ -3917,6 +3917,43 @@
         "clearHistory": "确定要清除所有评估历史吗？此操作不可撤销。"
       }
     },
+    "healthDashboard": {
+      "alerts": {
+        "importSuccess": "数据导入成功！",
+        "importFailed": "数据导入失败，请检查文件格式。",
+        "clearConfirm": "确定要清除所有数据吗？此操作不可撤销。",
+        "cleared": "数据已清除。"
+      },
+      "metrics": {
+        "painEntries": "疼痛记录",
+        "averagePainLevel": "平均疼痛等级",
+        "constitutionTests": "体质测试",
+        "lastSync": "最后同步"
+      },
+      "sections": {
+        "commonSymptoms": "最常见症状",
+        "painTrends": "疼痛趋势",
+        "dataManagement": "数据管理",
+        "userPreferences": "用户偏好"
+      },
+      "actions": {
+        "exportData": "导出数据",
+        "importData": "导入数据",
+        "clearData": "清除数据"
+      },
+      "preferences": {
+        "language": "语言：",
+        "theme": "主题：",
+        "painReminders": "疼痛提醒：",
+        "analytics": "数据分析：",
+        "on": "开启",
+        "off": "关闭"
+      },
+      "trends": {
+        "noData": "暂无数据",
+        "level": "等级"
+      }
+    },
     "i18n": {
       "title": "国际化优化",
       "description": "完善翻译质量，优化多语言支持",

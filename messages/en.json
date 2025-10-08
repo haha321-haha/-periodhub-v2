@@ -477,10 +477,46 @@
         "severe": "Severe",
         "extreme": "Extreme"
       },
-      "commonSymptoms": ["Abdominal pain", "Headache", "Breast tenderness", "Mood swings", "Fatigue", "Back pain", "Nausea", "Insomnia", "Bloating", "Constipation", "Diarrhea", "Appetite changes"],
-      "moodOptions": ["Normal", "Anxious", "Depressed", "Irritable", "Low mood", "Excited", "Tense"],
-      "flowOptions": ["None", "Spotting", "Light", "Medium", "Heavy", "Very heavy"],
-      "medicationOptions": ["Ibuprofen", "Acetaminophen", "Naproxen", "Aspirin", "Traditional medicine", "Vitamins", "Other"]
+      "commonSymptoms": {
+        "0": "Abdominal pain",
+        "1": "Headache",
+        "2": "Breast tenderness",
+        "3": "Mood swings",
+        "4": "Fatigue",
+        "5": "Back pain",
+        "6": "Nausea",
+        "7": "Insomnia",
+        "8": "Bloating",
+        "9": "Constipation",
+        "10": "Diarrhea",
+        "11": "Appetite changes"
+      },
+      "moodOptionsData": {
+        "0": "Normal",
+        "1": "Anxious",
+        "2": "Depressed",
+        "3": "Irritable",
+        "4": "Low mood",
+        "5": "Excited",
+        "6": "Tense"
+      },
+      "flowOptionsData": {
+        "0": "None",
+        "1": "Spotting",
+        "2": "Light",
+        "3": "Medium",
+        "4": "Heavy",
+        "5": "Very heavy"
+      },
+      "medicationOptionsData": {
+        "0": "Ibuprofen",
+        "1": "Acetaminophen",
+        "2": "Naproxen",
+        "3": "Aspirin",
+        "4": "Traditional medicine",
+        "5": "Vitamins",
+        "6": "Other"
+      }
     },
     "symptomAssessmentTool": {
       "trends": {

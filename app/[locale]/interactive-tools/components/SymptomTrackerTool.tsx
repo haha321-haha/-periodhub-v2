@@ -110,12 +110,18 @@ export default function SymptomTrackerTool({
     alert(t("alerts.saved"));
   };
 
-  const commonSymptoms: string[] = t("commonSymptoms", { returnObjects: true });
-  const moodOptions: string[] = t("moodOptions", { returnObjects: true });
-  const flowOptions: string[] = t("flowOptions", { returnObjects: true });
-  const commonMedications: string[] = t("medicationOptions", {
-    returnObjects: true,
-  });
+  const commonSymptoms: string[] = Object.values(
+    t("commonSymptoms", { returnObjects: true }) as Record<string, string>
+  );
+  const moodOptions: string[] = Object.values(
+    t("moodOptionsData", { returnObjects: true }) as Record<string, string>
+  );
+  const flowOptions: string[] = Object.values(
+    t("flowOptionsData", { returnObjects: true }) as Record<string, string>
+  );
+  const commonMedications: string[] = Object.values(
+    t("medicationOptionsData", { returnObjects: true }) as Record<string, string>
+  );
 
   const getPainLevelColor = (level: number) => {
     if (level <= 2) return "text-green-600";

@@ -3139,6 +3139,18 @@
         },
         "mechanisms": {
           "title": "作用机制",
+          "gateControl": {
+            "title": "闸门控制理论",
+            "description": "刺激神经纤维，阻断疼痛信号传递"
+          },
+          "endorphin": {
+            "title": "内啡肽释放",
+            "description": "促进天然镇痛化学物质的释放"
+          },
+          "circulation": {
+            "title": "改善循环",
+            "description": "增强盆腔器官的血液流动"
+          },
           "neuralRegulation": "神经调节：",
           "neuralRegulationValue": "激活内源性阿片肽系统，产生镇痛效果",
           "endocrineRegulation": "内分泌调节：",

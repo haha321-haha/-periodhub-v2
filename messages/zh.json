@@ -3272,15 +3272,24 @@
       "coreEfficacy": {
         "heatTherapy": {
           "title": "热敷疗法",
-          "source": "Cochrane系统综述，92%有效率"
+          "source": "来源",
+          "sourceValue": "Cochrane综述 (2020)：15分钟内疼痛减轻73%",
+          "efficacy": "有效性：",
+          "efficacyValue": "显著降低疼痛强度和持续时间"
         },
         "tens": {
           "title": "经皮电神经刺激",
-          "source": "RCT研究，76%有效率"
+          "source": "来源",
+          "sourceValue": "RCT研究：76%的患者报告疼痛显著减轻",
+          "efficacy": "有效性：",
+          "efficacyValue": "快速缓解疼痛，无药物副作用"
         },
         "acupuncture": {
           "title": "针灸疗法",
-          "source": "WHO认可，85%有效率"
+          "source": "来源",
+          "sourceValue": "WHO认可：85%有效率，多项RCT支持",
+          "efficacy": "有效性：",
+          "efficacyValue": "调节内分泌，长期缓解症状"
         },
         "aromatherapy": {
           "title": "芳香疗法",

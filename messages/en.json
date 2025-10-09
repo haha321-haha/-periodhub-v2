@@ -256,7 +256,10 @@
       "office": "Office Scenario",
       "developmentPain": "Development Pain",
       "painTracker": "Pain Tracker",
-      "symptomAssessment": "Symptom Assessment"
+      "symptomAssessment": "Symptom Assessment",
+      "communicationGuide": "Communication Guide",
+      "medicalCare": "When to Seek Medical Help",
+      "globalPerspectives": "Global Perspectives"
     },
     "p2": {
       "title": "P2 Phase: Advanced Features",

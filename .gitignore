@@ -182,3 +182,12 @@ messages/*.backup*
 *.tmp
 *.temp
 scripts/metadata-fix-commands.json
+# 压力管理相关文件（暂不上传GitHub）
+app/[locale]/stress-management/
+components/stress-management/
+scripts/detect-stress-management-hardcode.js
+stress-management-translation-keys.json
+content/articles/*/menstrual-stress-management-*.md
+参考代码/*/articles/stress-menstrual-health.html
+hub-latest-main*/content/articles/*/menstrual-stress-management-*.md
+hub-latest-main*/参考代码/*/articles/stress-menstrual-health.html

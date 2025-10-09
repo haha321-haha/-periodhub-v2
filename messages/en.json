@@ -2346,6 +2346,565 @@
       }
     }
   },
+  "medicalCareGuide": {
+    "meta": {
+      "title": "Don't Ignore Period Pain! Doctor Explains 7 Gynecological Warning Signs - When to Seek Medical Help",
+      "description": "Is your period pain normal? Learn how to self-assess symptoms and identify 7 critical warning signs requiring medical attention. Interactive pain assessment tools, symptom checklists, and smart decision trees for scientific health management.",
+      "keywords": "dysmenorrhea, when to see doctor, gynecological conditions, symptom self-assessment, medical guide, menstrual pain, health evaluation, pain scale, warning signs"
+    },
+    "navigation": {
+      "backToArticles": "Back to Articles"
+    },
+    "header": {
+      "title": "Period Pain or Health Alert? Doctor Teaches You to Identify 7 Warning Signs Requiring Medical Attention",
+      "subtitle": "When 'monthly suffering' becomes a health alert, learning to listen to your body's signals is crucial."
+    },
+    "article": {
+      "section1": {
+        "title": "Dysmenorrhea: Normal Physiology or Health Alert?",
+        "quote": "\"Doctor, I'm in agony every time I get my period. Is this normal?\" - This is one of the most common questions heard in gynecology clinics.",
+        "p1": "Dysmenorrhea is a physiological phenomenon that many women experience. However, what level of pain is normal? When should you seek medical help? These questions often confuse women.",
+        "p2": "As a gynecologist, I want to tell you: pain is a signal from your body, and learning to correctly interpret these signals is the first step in protecting your health.",
+        "p3": "In this article, I will detail 7 warning signs that require medical attention and provide practical assessment tools to help you make informed medical decisions.",
+        "li1": "How to distinguish between normal period pain and abnormal pain",
+        "li2": "7 warning signs requiring immediate medical attention",
+        "li3": "Practical pain assessment and symptom self-check tools",
+        "li4": "Scientific medical decision-making guidance",
+        "p4": "Remember: your health - you have the right to understand and protect it."
+      },
+      "section2": {
+        "title": "Step 1: Quantify Your Pain Level",
+        "p1": "Pain is subjective, but we can quantify it through standardized assessment methods. The medical pain rating scale (0-10) can help you describe your symptoms more accurately.",
+        "p2": "Use the pain assessment tool below to honestly evaluate your pain level:",
+        "li1": "<strong>0-3 points</strong>: Mild discomfort, doesn't affect daily activities",
+        "li2": "<strong>4-6 points</strong>: Moderate pain, affects some daily activities",
+        "p3": "Please move the slider to select the value that best matches your pain level:"
+      },
+      "section3": {
+        "title": "Identify 7 Warning Signs Requiring Medical Attention",
+        "p1": "The following symptom checklist is based on international gynecological association diagnostic criteria. Please carefully check if you have any of the following symptoms:",
+        "h3_1": "🚨 Emergency Signals: Seek Immediate Medical Care",
+        "p2": "<strong>Sudden Severe Pain</strong>: If pain suddenly intensifies to an unbearable level, it may indicate ovarian cyst rupture, torsion, or other acute gynecological conditions.",
+        "h3_2": "🩸 Abnormal Bleeding: High Alert",
+        "p3": "<strong>Abnormal Bleeding Pattern</strong>: Menstrual flow suddenly doubles or more, or large blood clots (diameter >2.5cm) appear, possibly indicating uterine fibroids, adenomyosis, or coagulation disorders.",
+        "h3_3": "🤒 Systemic Symptoms: Cannot Be Ignored",
+        "p4": "<strong>Fever and Systemic Symptoms</strong>: Period pain accompanied by fever (>38°C), nausea, vomiting, dizziness, and fatigue may indicate pelvic inflammation or infection.",
+        "h3_4": "⚡ Change in Pain Character",
+        "p5": "<strong>Sudden Change in Pain Pattern</strong>: Previously regular period pain suddenly becomes irregular, or the nature of pain changes significantly, requiring exclusion of organic disease.",
+        "h3_5": "🔴 Persistent Pain",
+        "p6": "<strong>Non-menstrual Pain</strong>: Pelvic pain also occurs during non-menstrual periods, possibly indicating endometriosis, chronic pelvic inflammatory disease, etc.",
+        "h3_6": "📈 Progressive Pain Worsening",
+        "p7": "<strong>Gradually Worsening Pain</strong>: Each menstrual pain episode is worse than the last, and pain medication becomes less effective, highly suspicious of endometriosis.",
+        "h3_7": "💊 Medication Ineffective",
+        "p8": "After proper use of NSAIDs (such as ibuprofen) for 3 menstrual cycles, pain shows no significant improvement, requiring further investigation.",
+        "quote": "<strong>Important Reminder</strong>: If you have any emergency signal, seek immediate medical care. If you have 2 or more high-risk symptoms, seek medical attention within 48 hours."
+      },
+      "section4": {
+        "title": "Smart Medical Decision Tree: 3 Steps to Determine if Medical Care is Needed",
+        "p1": "Based on your symptom assessment results, use the decision tree below to determine whether medical care is needed and the urgency level:"
+      },
+      "section5": {
+        "title": "Summary: Scientifically Manage Period Pain, Protect Women's Health",
+        "p1": "Period pain is not a 'fate' that women must endure. Proper assessment and timely medical intervention can significantly improve quality of life.",
+        "p2": "Through the assessment tools in this article, you've learned how to scientifically evaluate your own symptoms. Remember, any symptoms that concern you are worth consulting a professional doctor about.",
+        "p3": "Finally, I want to emphasize: caring for your body and listening to your body's signals is a life skill every woman should master.",
+        "callout": {
+          "title": "Next Step Recommendations",
+          "text": "If assessment results suggest seeing a doctor, don't delay. Prepare your symptom records, choose an appropriate appointment time, and proactively communicate your concerns with your doctor."
+        }
+      }
+    },
+    "painTool": {
+      "title": "Pain Level Assessment Tool",
+      "description": "Please rate your pain level based on your most recent menstrual period. This tool is based on internationally recognized pain rating standards.",
+      "sliderLabel": "Pain Level Slider",
+      "sliderMin": "No Pain",
+      "sliderMax": "Severe Pain",
+      "currentLevel": "Current Pain Level",
+      "outOf10": "out of 10",
+      "sliderDescription": "Use the slider to select a pain level between 0 and 10, where 0 means no pain and 10 means unbearable severe pain",
+      "recommendations": "Personalized Recommendations",
+      "initialAdvice": "Please move the slider to assess your pain level",
+      "historyHint": "{count} assessment records saved",
+      "emergency": {
+        "title": "Emergency Alert",
+        "text": "Your pain level is high. Immediate medical attention is recommended. If pain suddenly intensifies, consider emergency care."
+      },
+      "levels": {
+        "0": {
+          "title": "No Pain",
+          "advice": "Great! No pain is the ideal state. Continue maintaining a healthy lifestyle.",
+          "rec1": "Continue monitoring symptom changes",
+          "rec2": "Maintain regular daily routine"
+        },
+        "1": {
+          "title": "Mild Discomfort",
+          "advice": "Mild discomfort is normal and won't affect daily activities.",
+          "rec1": "Try warm compresses for relief",
+          "rec2": "Maintain moderate exercise"
+        },
+        "2": {
+          "title": "Light Pain",
+          "advice": "Mild pain that you may notice but doesn't affect normal activities.",
+          "rec1": "Try relaxation techniques and deep breathing",
+          "rec2": "Consider warm baths for relief"
+        },
+        "3": {
+          "title": "Mild to Moderate Pain",
+          "advice": "Pain beginning to affect concentration, but most daily activities can still be performed.",
+          "rec1": "Consider over-the-counter pain medication",
+          "rec2": "Pay attention to rest and warmth"
+        },
+        "4": {
+          "title": "Moderate Pain",
+          "advice": "Noticeable pain beginning to affect daily activities and work efficiency.",
+          "rec1": "Recommend using NSAIDs like ibuprofen",
+          "rec2": "Avoid strenuous exercise, get adequate rest"
+        },
+        "5": {
+          "title": "Moderate to Severe Pain",
+          "advice": "Significant pain noticeably affecting daily activities, requiring measures for relief.",
+          "rec1": "Use pain medication as prescribed",
+          "rec2": "Consider heat therapy and massage"
+        },
+        "6": {
+          "title": "Severe Pain",
+          "advice": "Severe pain making it difficult to concentrate, affecting normal life.",
+          "rec1": "Recommend consulting doctor to adjust treatment plan",
+          "rec2": "Record pain patterns and triggering factors"
+        },
+        "7": {
+          "title": "Very Severe Pain",
+          "advice": "Severe pain affecting sleep and basic activities, medical evaluation recommended.",
+          "rec1": "Recommend seeking medical consultation within this cycle",
+          "rec2": "Prepare detailed symptom records"
+        },
+        "8": {
+          "title": "Extremely Severe Pain",
+          "advice": "Extremely severe pain preventing normal activities, strongly recommend seeking medical care.",
+          "rec1": "Recommend seeking medical care soon, don't delay",
+          "rec2": "If pain suddenly intensifies, consider emergency care"
+        },
+        "9": {
+          "title": "Nearly Unbearable",
+          "advice": "Pain nearly unbearable, seriously affecting quality of life, requiring urgent medical evaluation.",
+          "rec1": "Seek immediate medical help",
+          "rec2": "Prepare for medical visit, may need emergency care"
+        },
+        "10": {
+          "title": "Unbearable",
+          "advice": "Pain completely unbearable, this is a medical emergency requiring immediate medical attention.",
+          "rec1": "Seek immediate medical care or call emergency services",
+          "rec2": "Don't go to hospital alone, seek assistance"
+        }
+      }
+    },
+    "hero": {
+      "title": "\"Why Does It Hurt So Much?\" - You're Not Alone",
+      "subtitle": "If you've ever curled up in bed wondering why your period feels like your body is rebelling, you're absolutely not alone. About 80% of women experience period pain at some point.",
+      "story": "Sarah's Story: \"I used to think severe period pain was something I had to endure. It wasn't until I understood what was actually happening in my body that I felt empowered to control it.\""
+    },
+    "explanation": {
+      "title": "What Actually Happens During Period Pain?",
+      "step1": {
+        "title": "The Trigger",
+        "description": "Your body releases natural chemicals called prostaglandins (think of them as 'contraction messengers')."
+      },
+      "step2": {
+        "title": "The Squeeze",
+        "description": "These chemicals tell your uterine muscles to contract."
+      },
+      "step3": {
+        "title": "The Pain",
+        "description": "Strong contractions temporarily cut off oxygen supply to the muscles, causing cramping pain."
+      },
+      "analogy": {
+        "title": "Simple Analogy:",
+        "description": "This is similar to the feeling of a leg muscle cramp during exercise."
+      }
+    },
+    "assessment": {
+      "title": "Is Your Period Pain Normal?",
+      "subtitle": "Use our interactive assessment tool to understand your pain level and get personalized recommendations."
+    },
+    "tracker": {
+      "title": "Pain & Symptom Tracker",
+      "subtitle": "Track your symptoms long-term to identify patterns and find the relief methods that work best for you."
+    },
+    "toolkit": {
+      "title": "Your Period Pain Management Toolkit",
+      "immediate": {
+        "title": "Immediate Relief Strategies (0-30 minutes)",
+        "heat": {
+          "title": "Heat Therapy - Your Best Friend",
+          "description": "Heat can relax uterine muscles and increase blood flow. Apply heat to your lower abdomen or back.",
+          "items": [
+            "Heating pad (15-20 minutes at a time)",
+            "Hot water bottle",
+            "Warm bath or shower",
+            "Heat patches (suitable for work/school)"
+          ]
+        }
+      },
+      "medication": {
+        "title": "Complete Medication Guide",
+        "options": [
+          {
+            "name": "Ibuprofen",
+            "dosage": "Dosage: 400-600mg, every 6-8 hours.",
+            "bestFor": "Best Use: Take 1-2 days before period starts or at first sign of pain to block prostaglandin formation."
+          },
+          {
+            "name": "Naproxen",
+            "dosage": "Dosage: 220mg, every 8-12 hours.",
+            "bestFor": "Best Use: Its longer duration of action is ideal for all-day or overnight continuous relief."
+          },
+          {
+            "name": "Acetaminophen",
+            "dosage": "Dosage: 500-1000mg, every 6-8 hours.",
+            "bestFor": "Best Use: A good alternative if you have a sensitive stomach or cannot take NSAIDs like ibuprofen."
+          }
+        ]
+      }
+    },
+    "doctorGuide": {
+      "title": "When to See a Doctor: Your Decision Guide",
+      "immediate": {
+        "title": "Seek Immediate Medical Care",
+        "points": [
+          "Pain so severe you cannot stand or walk.",
+          "Fainting or dizziness with pain.",
+          "Fever above 38.3°C accompanied by period pain."
+        ]
+      },
+      "appointment": {
+        "title": "Schedule a Doctor's Appointment If:",
+        "points": [
+          "Pain pattern changes significantly.",
+          "Over-the-counter medications are no longer effective.",
+          "You frequently miss work or school due to period pain."
+        ]
+      }
+    },
+    "stories": {
+      "title": "Real Stories: How They Found Relief",
+      "cases": [
+        {
+          "name": "Emma, 24 (University Student)",
+          "problemTitle": "Problem:",
+          "problemDescription": "Severe period pain affecting studies and exams.",
+          "solutionTitle": "Solution:",
+          "solutionDescription": "Combination of taking ibuprofen in advance, using portable heating pad, and light yoga."
+        },
+        {
+          "name": "Maria, 32 (Working Mother)",
+          "problemTitle": "Problem:",
+          "problemDescription": "Pain worsening over time, affecting work.",
+          "solutionTitle": "Solution:",
+          "solutionDescription": "Diagnosed with endometriosis. Managing condition through hormone therapy and dietary adjustments."
+        }
+      ]
+    },
+    "nextSteps": {
+      "title": "Your Next Steps: Take Control of Period Health",
+      "description": "Understanding your body is the first step to taking control of your health. You deserve to feel comfortable and confident every day of the month. Use our tools to build your personal management plan.",
+      "trackPainButton": "Start Pain Tracking",
+      "exploreToolsButton": "Explore All Tools"
+    },
+    "disclaimer": {
+      "title": "⚠️ Medical Disclaimer",
+      "text": "This content is for educational and informational purposes only and cannot replace professional medical advice, diagnosis, or treatment. If you have any health concerns or questions, please consult a qualified healthcare professional."
+    },
+    "footer": {
+      "reviewed": "This article was medically reviewed by Dr. Emily Carter, OB-GYN, on December 19, 2024.",
+      "sourcesTitle": "Sources:",
+      "sources": [
+        {
+          "name": "Mayo Clinic"
+        },
+        {
+          "name": "World Health Organization"
+        },
+        {
+          "name": "ACOG"
+        }
+      ]
+    },
+    "decisionTree": {
+      "title": "Smart Medical Decision Tree",
+      "description": "Get personalized medical advice by answering a few simple questions. This decision tree is designed based on clinical practice guidelines.",
+      "questionTitle": "Question {step}",
+      "pathTitle": "Decision Path",
+      "startButton": "Start Assessment",
+      "yesButton": "Yes",
+      "noButton": "No",
+      "restartButton": "Restart",
+      "resetButton": "Reset",
+      "progress": "Progress: {current} / {total}",
+      "completed": "Assessment Complete",
+      "recommendedActions": "Recommended Actions",
+      "questions": {
+        "start": "Are you experiencing severe period pain with a pain level above 7 out of 10?",
+        "severePain": "Did this severe pain appear suddenly, or is it worse than ever before?",
+        "duration": "Does your period pain last longer than 7 days, or do you have pelvic pain even during non-menstrual periods?",
+        "pattern": "Has your period pain pattern changed significantly in recent months?"
+      },
+      "options": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "results": {
+        "emergency": {
+          "title": "Emergency - Seek Immediate Medical Care",
+          "text": "Based on your symptoms, immediate medical attention is recommended. This may be a gynecological condition requiring emergency treatment.",
+          "action1": "Go to emergency department immediately or contact gynecologist",
+          "action2": "Prepare to describe symptom onset time and severity in detail",
+          "action3": "If pain is severe, don't go to hospital alone"
+        },
+        "urgent": {
+          "title": "Urgent - See Doctor Within 48 Hours",
+          "text": "Your symptoms need professional medical evaluation and treatment as soon as possible.",
+          "action1": "Schedule gynecologist appointment within 48 hours",
+          "action2": "Record detailed symptom information and changes",
+          "action3": "If symptoms worsen, seek immediate medical care"
+        },
+        "routine": {
+          "title": "Recommended Medical Care - Within 1-2 Weeks",
+          "text": "Your symptoms need professional evaluation, but it's not an emergency. Recommend scheduling routine gynecological checkup.",
+          "action1": "Schedule gynecologist appointment within 1-2 weeks",
+          "action2": "Start keeping pain diary including pain level and timing",
+          "action3": "Prepare detailed information about menstrual cycle and symptoms"
+        },
+        "observe": {
+          "title": "Continue Monitoring - Seek Care if Necessary",
+          "text": "Your symptoms are relatively mild and can be monitored. However, pay attention to symptom changes.",
+          "action1": "Continue monitoring symptoms, record pain patterns",
+          "action2": "Try non-pharmacological relief methods like heat therapy, moderate exercise",
+          "action3": "If symptoms worsen or new symptoms appear, seek timely medical care"
+        }
+      },
+      "urgencyLevels": {
+        "emergency": "Emergency (Immediate)",
+        "urgent": "Urgent (Within 48 hours)",
+        "routine": "Routine (Within 1-2 weeks)",
+        "observe": "Monitor (As needed)"
+      },
+      "emergency": {
+        "title": "Emergency Alert",
+        "text": "Based on your responses, immediate medical attention is recommended. Don't delay - timely medical care is the best choice for protecting your health."
+      },
+      "symptoms": {
+        "s1": {
+          "text": "Sudden severe pain, pain level suddenly changing from mild to unbearable",
+          "description": "May indicate ovarian cyst rupture, torsion, or other acute gynecological conditions requiring emergency medical evaluation"
+        },
+        "s2": {
+          "text": "Menstrual flow suddenly significantly increases, blood clots larger than 2.5cm in diameter",
+          "description": "May indicate uterine fibroids, adenomyosis, or coagulation disorders, requiring urgent examination"
+        },
+        "s3": {
+          "text": "Period pain duration exceeds 7 days, or pelvic pain during non-menstrual periods",
+          "description": "May indicate endometriosis, pelvic inflammatory disease, or other chronic gynecological conditions"
+        },
+        "s4": {
+          "text": "Period pain pattern has changed significantly in recent months",
+          "description": "May indicate new onset disease or condition change, requiring professional evaluation"
+        },
+        "s5": {
+          "text": "Accompanied by fever, chills, nausea, vomiting, or other systemic symptoms",
+          "description": "May indicate infection or other serious illness, requiring immediate medical attention"
+        },
+        "s6": {
+          "text": "Pain affects daily activities, requiring sick leave or bed rest",
+          "description": "Indicates severe pain level, recommend seeking medical help"
+        },
+        "s7": {
+          "text": "Pain not significantly relieved after taking pain medication",
+          "description": "May indicate need for stronger treatment or presence of other conditions"
+        },
+        "s8": {
+          "text": "Pain accompanied by difficulty urinating or urinary frequency/urgency",
+          "description": "May indicate urinary system disease or pelvic organ compression"
+        },
+        "s9": {
+          "text": "Pain accompanied by constipation, diarrhea, or other digestive symptoms",
+          "description": "May indicate intestinal disease or pelvic organ adhesions"
+        },
+        "s10": {
+          "text": "Pain accompanied by headache, dizziness, fatigue, or other systemic symptoms",
+          "description": "May indicate anemia, infection, or other systemic diseases"
+        }
+      }
+    },
+    "comparisonTable": {
+      "title": "Normal vs. Abnormal Period Pain Comparison",
+      "description": "Use this comparison table to better understand what constitutes normal period pain and when medical care is needed.",
+      "expand": "Expand Details",
+      "collapse": "Collapse Details",
+      "normalTitle": "Normal Period Pain",
+      "concerningTitle": "Concerning Signs",
+      "normalNote": "Normal period pain can usually be managed through self-care",
+      "concerningNote": "These situations recommend seeking professional medical help",
+      "mobileHint": "Tip: Click on table rows to view more detailed information",
+      "headers": {
+        "condition": "Assessment Item",
+        "normal": "Normal Situation",
+        "concerning": "Concerning Situation",
+        "action": "Recommended Action"
+      },
+      "rows": {
+        "painIntensity": {
+          "condition": "Pain Intensity",
+          "normal": "Mild to moderate pain (1-6 points), tolerable, doesn't seriously affect daily activities",
+          "concerning": "Severe pain (7-10 points), unbearable, seriously affects work and life",
+          "action": "Recommend medical evaluation when pain score ≥7"
+        },
+        "painDuration": {
+          "condition": "Pain Duration",
+          "normal": "Pain lasts 1-3 days, mainly concentrated 1-2 days before menstruation and first day of period",
+          "concerning": "Pain lasts more than 3 days, or severe pain throughout entire menstrual period",
+          "action": "Recommend gynecological checkup if pain lasts >3 days"
+        },
+        "painLocation": {
+          "condition": "Pain Location",
+          "normal": "Lower abdominal central pain, possibly radiating to lower back and inner thighs",
+          "concerning": "Pain location not fixed, or accompanied by pronounced sharp pain on one side",
+          "action": "Atypical pain location requires doctor's evaluation"
+        },
+        "associatedSymptoms": {
+          "condition": "Associated Symptoms",
+          "normal": "Mild nausea, fatigue, mood swings - symptoms are mild and tolerable",
+          "concerning": "Severe nausea/vomiting, fever, dizziness/fainting, heavy bleeding",
+          "action": "Seek immediate medical care if severe associated symptoms appear"
+        },
+        "medicationResponse": {
+          "condition": "Medication Response",
+          "normal": "Over-the-counter pain medication (like ibuprofen) effectively relieves pain",
+          "concerning": "Pain medication completely ineffective, or increasingly larger doses needed for relief",
+          "action": "Professional treatment plan needed when medication ineffective"
+        },
+        "dailyImpact": {
+          "condition": "Impact on Daily Life",
+          "normal": "Mild impact, can work and study normally, only need appropriate rest",
+          "concerning": "Severe impact, unable to work or study normally, requires bed rest",
+          "action": "Recommend medical care when quality of life severely affected"
+        },
+        "cycleChanges": {
+          "condition": "Cycle Changes",
+          "normal": "Pain pattern relatively stable, similar pain level each menstrual cycle",
+          "concerning": "Pain gradually worsening, or pain pattern suddenly changes",
+          "action": "Doctor's evaluation needed when pain pattern changes"
+        }
+      },
+      "reminder": {
+        "title": "Important Reminder",
+        "text": "This comparison table is for reference only and cannot replace professional medical diagnosis. If you have any concerns about your symptoms, please consult a professional doctor."
+      }
+    },
+    "symptomChecker": {
+      "title": "Symptom Checklist",
+      "description": "Please carefully review the following symptoms and select all that apply to your situation. This tool is based on international gynecological association diagnostic criteria.",
+      "instructions": "Please honestly select symptoms you've experienced in the last 3 menstrual cycles. After completing selection, click 'Analyze Symptoms' to get personalized recommendations.",
+      "analyzeButton": "Analyze Symptoms",
+      "analyzing": "Analyzing...",
+      "resetButton": "Reset Selection",
+      "summary": "Selected {count} / {total} symptoms",
+      "riskLevels": {
+        "emergency": {
+          "title": "🚨 Emergency Signals",
+          "badge": "Seek Immediate Care"
+        },
+        "high": {
+          "title": "⚠️ High-Risk Symptoms",
+          "badge": "See Doctor Soon"
+        },
+        "medium": {
+          "title": "⚡ Needs Attention",
+          "badge": "Medical Visit Recommended"
+        }
+      },
+      "results": {
+        "title": "Symptom Analysis Results",
+        "riskLevels": {
+          "emergency": {
+            "title": "🚨 Emergency Signals: Seek Immediate Medical Care",
+            "description": "Your symptoms suggest possible gynecological conditions requiring emergency treatment. Immediate medical attention is recommended."
+          },
+          "high": {
+            "title": "⚠️ High-Risk Symptoms: See Doctor Soon",
+            "description": "Your symptoms need professional medical evaluation and treatment. Recommend seeking medical care within 48 hours."
+          },
+          "medium": {
+            "title": "⚡ Needs Attention: Medical Visit Recommended",
+            "description": "Your symptoms need attention. Recommend scheduling gynecological checkup within 1-2 weeks."
+          },
+          "low": {
+            "title": "✅ Mild Symptoms: Continue Monitoring",
+            "description": "Your symptoms are relatively mild and can be monitored while implementing self-care measures."
+          }
+        },
+        "urgency": {
+          "immediate": "Immediate Care",
+          "within_week": "Within One Week",
+          "routine": "Routine Care",
+          "monitor": "Continue Monitoring"
+        },
+        "recommendations": "Recommended Actions",
+        "actions": {
+          "emergency": [
+            "Seek immediate emergency medical care",
+            "Don't delay medical attention",
+            "Call emergency services if needed",
+            "Have someone accompany you to hospital"
+          ],
+          "high": [
+            "Schedule urgent medical appointment",
+            "Contact your doctor within 24-48 hours",
+            "Closely monitor if symptoms worsen",
+            "Prepare detailed symptom list for doctor's visit"
+          ],
+          "medium": [
+            "Schedule routine medical appointment",
+            "Continue monitoring symptoms",
+            "Keep detailed symptom diary",
+            "Consider lifestyle adjustments"
+          ],
+          "low": [
+            "Continue self-monitoring",
+            "Maintain healthy lifestyle habits",
+            "Consider preventive measures",
+            "Schedule routine checkup if symptoms persist or worsen"
+          ]
+        },
+        "personalizedRecommendations": {
+          "pain": [
+            "Track pain intensity and patterns",
+            "Try heat therapy for pain relief",
+            "Consider light exercise when possible"
+          ],
+          "bleeding": [
+            "Monitor bleeding patterns and flow",
+            "Record cycle changes",
+            "Maintain iron-rich diet"
+          ],
+          "systemic": [
+            "Monitor overall health symptoms",
+            "Ensure adequate rest and hydration",
+            "Consider stress management techniques"
+          ],
+          "pattern": [
+            "Keep detailed menstrual cycle diary",
+            "Track symptom patterns over time",
+            "Note any triggers or patterns"
+          ],
+          "general": [
+            "Continue regular health monitoring",
+            "Maintain healthy lifestyle habits"
+          ]
+        }
+      }
+    }
+  },
   "frameworkDemo": {
     "title": "Framework Demo - PeriodHub | Technical Feature Showcase",
     "description": "PeriodHub Framework Demo: Showcase technical features, performance optimizations and user experience features of the website. Provides feature demonstrations for developers and technical teams."

@@ -55,7 +55,6 @@ export default function EnhancedHydrationFix() {
           document.body,
           NodeFilter.SHOW_TEXT,
           null,
-          false,
         );
 
         let fixedCount = 0;

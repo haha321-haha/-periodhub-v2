@@ -62,7 +62,6 @@ export default function HydrationFix() {
         document.body,
         NodeFilter.SHOW_TEXT,
         null,
-        false,
       );
 
       let node;

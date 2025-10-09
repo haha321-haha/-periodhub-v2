@@ -6189,8 +6189,21 @@
         "title": "Symptom Assessment",
         "description": "Professional symptom evaluation tool",
         "feature": "Personalized health recommendations"
+      },
+      "emergencyMedication": {
+        "title": "Emergency Medication Guide",
+        "description": "Quick access to emergency medication information and protocols for severe pain situations.",
+        "feature": "Emergency protocols & dosages"
+      },
+      "medicationVsNatural": {
+        "title": "Medication vs Natural Remedies",
+        "description": "Compare effectiveness of medications versus natural pain relief methods.",
+        "feature": "Side-by-side comparison"
       }
-    }
+    },
+    "breadcrumbTitle": "Medication Guide",
+    "medicalReview": "Medical Review:",
+    "medicalReviewText": " This content has been reviewed by healthcare professionals and follows current medical guidelines."
   },
   "navigation": {
     "home": "Home",

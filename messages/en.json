@@ -1008,6 +1008,8 @@
       "natural_therapies": "Natural Therapies",
       "scenarios": "Scenario Solutions",
       "teen_main": "Teen Health",
+      "teen_health": "Teen Menstrual Health",
+      "partner_communication": "Partner Communication Guide",
       "commute": "Commute Scenarios",
       "social": "Social Scenarios"
     },
@@ -1033,7 +1035,8 @@
       "acupoint_massage": "Acupoint Massage Guide",
       "tcm_nutrition": "TCM Nutrition Therapy",
       "natural": "Natural Therapies Guide",
-      "comprehensive": "Comprehensive Treatment Guide"
+      "comprehensive": "Comprehensive Treatment Guide",
+      "medication": "Medication Guide"
     }
   },
   "healthStatistics": {
@@ -2629,7 +2632,12 @@
           "Adolescent care",
           "Adult management",
           "Menopause transition"
-        ]
+        ],
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially regarding medication use and assessment of severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       }
     },
     "introTitle": "Comprehensive Scenario-Based Solutions",

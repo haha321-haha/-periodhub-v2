@@ -1643,6 +1643,21 @@
             "3": "Stop if you feel dizzy or nauseous",
             "title": "Precautions"
           }
+        },
+        "poses": {
+          "title": "Recommended Yoga Poses",
+          "catCow": {
+            "title": "Cat-Cow Pose",
+            "description": "Relieves lower back tension and improves spinal flexibility"
+          },
+          "childPose": {
+            "title": "Child's Pose",
+            "description": "Relaxes the pelvis and stretches the lower back"
+          },
+          "supineTwist": {
+            "title": "Supine Twist",
+            "description": "Releases tension in the lower back and hips"
+          }
         }
       },
       "aromatherapy": {

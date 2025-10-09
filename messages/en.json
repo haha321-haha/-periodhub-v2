@@ -59,7 +59,10 @@
     "readMore": "Read More",
     "importantNote": "Important Note",
     "medicalDisclaimer": "This website content is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional if you have any health concerns.",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "navigation": {
+      "backToArticles": "Back to Articles"
+    }
   },
   "hero": {
     "welcomeBadge": "Welcome to Professional Period Pain Management",
@@ -6052,5 +6055,155 @@
         }
       }
     }
+  },
+  "medicationGuide": {
+    "title": "Complete Guide to Safe Medication for Period Pain: NSAIDs Usage Guidelines",
+    "description": "Complete guide to safe medication for period pain: NSAIDs usage guidelines, dosage calculation, contraindication reminders, and drug interaction details. Includes medication timing reminder tool to calculate your safe dosage and avoid medication risks.",
+    "introTitle": "Understanding Period Pain Medication",
+    "introText": "Proper medication use can safely and effectively relieve period pain. This guide will help you understand how to use common medications, precautions, and safety recommendations.",
+    "nsaidTitle": "Non-Steroidal Anti-Inflammatory Drugs (NSAIDs)",
+    "dosage": "Dosage",
+    "timing": "Timing",
+    "mechanism": "Mechanism of Action",
+    "ibuprofen": {
+      "title": "Ibuprofen",
+      "dosage": "200-400mg every 4-6 hours, maximum 2400mg daily",
+      "timing": "Take with food, start 1-2 days before expected period",
+      "mechanism": "Inhibits prostaglandin synthesis, reduces inflammation and pain"
+    },
+    "naproxen": {
+      "title": "Naproxen",
+      "dosage": "220-440mg every 8-12 hours, maximum 660mg daily",
+      "timing": "Take with food, start 1-2 days before expected period",
+      "mechanism": "Longer-acting NSAID, provides sustained pain relief"
+    },
+    "comparisonTitle": "Ibuprofen vs Naproxen: Detailed Comparison",
+    "comparisonTable": {
+      "headers": {
+        "feature": "Feature",
+        "ibuprofen": "Ibuprofen",
+        "naproxen": "Naproxen"
+      },
+      "rows": {
+        "onset": {
+          "feature": "Onset of Action",
+          "ibuprofen": "30-60 minutes",
+          "naproxen": "1-2 hours"
+        },
+        "duration": {
+          "feature": "Duration",
+          "ibuprofen": "4-6 hours",
+          "naproxen": "8-12 hours"
+        },
+        "dosage": {
+          "feature": "Typical Dosage",
+          "ibuprofen": "200-400mg",
+          "naproxen": "220-440mg"
+        },
+        "frequency": {
+          "feature": "Frequency",
+          "ibuprofen": "Every 4-6 hours",
+          "naproxen": "Every 8-12 hours"
+        },
+        "bestFor": {
+          "feature": "Best For",
+          "ibuprofen": "Acute pain relief",
+          "naproxen": "Long-term pain management"
+        },
+        "sideEffects": {
+          "feature": "Side Effects",
+          "ibuprofen": "Stomach upset, dizziness",
+          "naproxen": "Stomach upset, headache"
+        }
+      }
+    },
+    "selectionGuide": {
+      "title": "How to Choose",
+      "ibuprofen": {
+        "title": "Choose Ibuprofen if:",
+        "points": [
+          "You need quick pain relief",
+          "You prefer shorter-acting medication",
+          "You have used it successfully before"
+        ]
+      },
+      "naproxen": {
+        "title": "Choose Naproxen if:",
+        "points": [
+          "You need longer-lasting relief",
+          "You prefer fewer daily doses",
+          "You have moderate to severe pain"
+        ]
+      }
+    },
+    "safetyTitle": "Safety Guidelines",
+    "contraindications": "Contraindications",
+    "contraindicationsList": {
+      "asthma": "Asthma (especially aspirin-sensitive)",
+      "ulcer": "Stomach ulcers or bleeding",
+      "kidney": "Kidney disease",
+      "liver": "Liver disease"
+    },
+    "sideEffects": "Common Side Effects",
+    "sideEffectsList": {
+      "stomach": "Stomach upset or pain",
+      "dizziness": "Dizziness or drowsiness",
+      "headache": "Headache"
+    },
+    "usageTipsTitle": "Usage Tips",
+    "tips": {
+      "timing": {
+        "title": "Optimal Timing",
+        "description": "Start taking medication 1-2 days before your expected period for best results"
+      },
+      "food": {
+        "title": "Take with Food",
+        "description": "Always take NSAIDs with food to reduce stomach irritation"
+      },
+      "duration": {
+        "title": "Duration",
+        "description": "Do not exceed recommended daily doses or use for more than 10 days without consulting a doctor"
+      },
+      "alternatives": {
+        "title": "Alternatives",
+        "description": "Consider heat therapy, massage, or other non-medication approaches alongside or instead of medication"
+      }
+    },
+    "seeDoctorTitle": "When to See a Doctor",
+    "seeDoctorList": {
+      "severe": "Severe or worsening pain",
+      "persistent": "Pain persists despite medication",
+      "newSymptoms": "New or unusual symptoms",
+      "medication": "Concerns about medication side effects"
+    },
+    "disclaimerTitle": "Medical Disclaimer",
+    "disclaimerText": "This guide is for informational purposes only and cannot replace professional medical advice. Please consult your doctor if you have any questions.",
+    "relatedToolsTitle": "Related Tools",
+    "relatedTools": {
+      "nsaidGuide": {
+        "title": "NSAID Guide",
+        "description": "Comprehensive guide to NSAID medications",
+        "feature": "Detailed dosage and safety information"
+      },
+      "symptomAssessment": {
+        "title": "Symptom Assessment",
+        "description": "Professional symptom evaluation tool",
+        "feature": "Personalized health recommendations"
+      }
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "articles": "Articles & PDF Downloads",
+    "therapies": "Therapies",
+    "instantRelief": "Instant Relief Solutions",
+    "naturalTherapies": "Natural Therapies",
+    "culturalCharms": "Cultural Comforts",
+    "scenarioSolutions": "Scenario Solutions",
+    "downloads": "PDF Downloads",
+    "interactiveTools": "Interactive Tools",
+    "symptomAssessment": "Symptom Assessment",
+    "painTracker": "Pain Tracker",
+    "healthGuide": "Health Guide"
   }
 }

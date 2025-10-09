@@ -6934,6 +6934,16 @@
         "title": "症状评估工具",
         "description": "科学评估经期症状，获取个性化建议",
         "feature": "个性化症状分析"
+      },
+      "emergencyMedication": {
+        "title": "紧急用药指南",
+        "description": "快速获取紧急用药信息和严重疼痛情况下的治疗方案。",
+        "feature": "紧急方案和剂量"
+      },
+      "medicationVsNatural": {
+        "title": "药物vs自然疗法",
+        "description": "比较药物与自然疼痛缓解方法的有效性。",
+        "feature": "并排比较"
       }
     },
     "breadcrumbTitle": "用药指南",

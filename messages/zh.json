@@ -2638,6 +2638,7 @@
     "emergencyResponse": {
       "title": "紧急疼痛应对",
       "subtitle": "当疼痛等级≥7分时的立即行动清单",
+      "immediateActionsTitle": "紧急情况立即处理",
       "immediateActions": {
         "0": "立即服用NSAID类药物（如布洛芬）",
         "1": "使用热敷垫或热水袋敷下腹部",
@@ -2798,11 +2799,19 @@
       "technique": "技巧：",
       "cycles": "循环次数：",
       "dosage": "剂量：",
-      "contraindications": "禁忌症："
+      "contraindications": "禁忌症：",
+      "method": "方法",
+      "location": "位置："
     },
     "actions": {
       "startPractice": "开始练习 →",
-      "learnMore": "了解详情 →"
+      "learnMore": "了解详情 →",
+      "viewChecklist": "查看清单 →",
+      "startAssessment": "开始评估 →",
+      "viewGuide": "查看指南 →",
+      "viewSolutions": "查看方案 →",
+      "viewMethods": "查看方法 →",
+      "viewDietPlan": "查看调理 →"
     },
     "structuredData": {
       "howTo": {
@@ -2826,12 +2835,30 @@
           "name": "药物使用",
           "text": "按医嘱使用NSAID类药物"
         },
-        "medicalCare": {
+        "medicalCare":         {
           "name": "就医指征",
           "text": "疼痛≥7分或出现异常症状时立即就医"
         }
       }
-    }
+    },
+    "scenarioSolutionsTitle": "场景解决方案",
+    "scenarioSolutionsDescription": "根据不同生活场景提供针对性的缓解方案",
+    "heatTherapyGuideTitle": "热疗指南",
+    "heatTherapyGuideDescription": "科学的热疗方法和注意事项",
+    "dietaryPlanTitle": "饮食调理",
+    "dietaryPlanDescription": "通过饮食调理缓解经期不适",
+    "nsaidGuideTitle": "NSAID用药指南",
+    "nsaidGuideDescription": "安全有效的非甾体抗炎药使用指南",
+    "seoKeywords": [
+      "痛经急救",
+      "经期疼痛缓解",
+      "痛经快速缓解",
+      "经期痉挛治疗",
+      "痛经应急处理",
+      "经期疼痛管理",
+      "痛经缓解方法",
+      "经期不适处理"
+    ]
   },
   "naturalTherapiesPage": {
     "title": "经期健康自然疗法与平时调理",
@@ -3854,7 +3881,11 @@
       "developmentPain": "发育疼痛",
       "emergencyKit": "应急包",
       "painTracker": "疼痛追踪器",
-      "symptomAssessment": "症状评估"
+      "symptomAssessment": "症状评估",
+      "emotionalSupport": "情绪支持与心理健康",
+      "communicationGuide": "沟通指导",
+      "medicalCare": "何时寻求医疗帮助",
+      "globalPerspectives": "全球视角：传统疗法与文化智慧"
     },
     "common": {
       "loading": "加载中...",
@@ -5289,20 +5320,15 @@
         },
         "backToOverview": "返回场景解决方案总览"
       },
-      "lifeStages": {
+      "life_stages": {
         "title": "特殊生理阶段",
         "description": "女性不同生理阶段经期管理专业指导：青春期经期教育、育龄期健康管理、围绝经期调理方案。提供针对各年龄段特点的个性化经期健康管理策略，帮助女性科学应对不同生命阶段的生理变化。基于循证医学的专业指导，确保各阶段健康。",
-        "features": ["青春期专项", "备孕期专项", "围绝经期专项"],
+        "features": ["青春期经期教育", "育龄期健康管理", "围绝经期调理"],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
         },
         "backToOverview": "返回场景解决方案总览"
-      },
-      "life_stages": {
-        "title": "特殊生理阶段",
-        "description": "女性不同生理阶段经期管理专业指导：青春期经期教育、育龄期健康管理、围绝经期调理方案。提供针对各年龄段特点的个性化经期健康管理策略，帮助女性科学应对不同生命阶段的生理变化。基于循证医学的专业指导，确保各阶段健康。",
-        "features": ["青春期经期教育", "育龄期健康管理", "围绝经期调理"]
       }
     },
     "teenHealth": {
@@ -6888,11 +6914,6 @@
     "treatmentGuide": {
       "title": "专业治疗指南",
       "subtitle": "科学的疼痛管理方案",
-      "medicationGuide": {
-        "title": "用药指南",
-        "description": "安全有效的药物使用建议",
-        "cta": "查看指南 →"
-      },
       "heatTherapy": {
         "title": "热疗方法",
         "description": "温热疗法的科学应用",
@@ -7579,7 +7600,15 @@
       },
       "interactiveTools": {
         "title": "互动工具",
-        "description": "专业的评估和追踪工具"
+        "description": "专业的评估和追踪工具",
+      "breadcrumb": {
+        "emotionalSupport": "情绪支持与心理健康",
+        "communicationGuide": "沟通指导",
+        "teenHealth": "青少年健康",
+        "medicalCare": "何时寻求医疗帮助",
+        "globalPerspectives": "全球视角：传统疗法与文化智慧",
+        "healthGuide": "健康指南"
+      }
       },
       "healthGuide": {
         "title": "健康指南",
@@ -8180,6 +8209,9 @@
       "commute": "通勤场景",
       "campus_emergency": "校园应急",
       "social": "社交场景"
+    },
+    "solutionsLifeStages": {
+      "life_stages": "人生阶段管理"
     }
   },
   "termsOfService": {
@@ -8488,4 +8520,25 @@
       }
     }
   }
-}
+,
+  "articlePage": {
+    "breadcrumb": {
+      "home": "首页",
+      "articles": "健康文章"
+    },
+    "content": {
+      "articleSummary": "精心挑选5-7本优秀书籍，涵盖女性健康、经期护理、情绪管理和中医调理等多个领域，帮助你更深入地了解自己的身体，温柔地关爱自己。",
+      "healthExpert": "PeriodHub团队",
+      "quickActions": "快速操作",
+      "moreArticles": "更多文章",
+      "medicalDisclaimer": {
+        "title": "医疗免责声明",
+        "content": "本网站内容仅供信息和教育目的，不能替代专业医疗建议、诊断或治疗。我们不是医疗专业人员。如有任何医疗问题，请咨询您的医生或其他合格的医疗服务提供者。紧急情况下，请立即寻求医疗救助。使用本网站不构成医患关系。"
+      },
+      "relatedArticles": {
+        "title": "相关文章推荐",
+        "subtitle": "继续深入了解经期健康",
+        "readMore": "阅读更多"
+      }
+    }
+  }}

@@ -1610,21 +1610,6 @@
         "title": "Yoga & Exercise",
         "subtitle": "Gentle movement, stress release",
         "description": "Moderate yoga practice can improve blood circulation, relax muscles, and reduce pain.",
-        "poses": {
-          "title": "Recommended Poses",
-          "catCow": {
-            "title": "Cat-Cow Pose",
-            "description": "Gentle spinal movement"
-          },
-          "childPose": {
-            "title": "Child's Pose",
-            "description": "Restorative forward fold"
-          },
-          "supineTwist": {
-            "title": "Supine Twist",
-            "description": "Gentle spinal rotation"
-          }
-        },
         "science": {
           "title": "Scientific Basis",
           "endorphinRelease": "Endorphin Release:",
@@ -3129,23 +3114,48 @@
       "questions": {
         "q1": {
           "question": "Have you frequently felt anxious or tense recently?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         },
         "q2": {
           "question": "How is your sleep quality?",
-          "options": ["Very Good", "Good", "Poor", "Very Poor"]
+          "options": [
+            "Very Good",
+            "Good",
+            "Poor",
+            "Very Poor"
+          ]
         },
         "q3": {
           "question": "Do you often feel tired or lack energy?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         },
         "q4": {
           "question": "Do you easily feel irritable or angry?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         },
         "q5": {
           "question": "Do you often worry about period-related issues?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         }
       },
       "benefits": {
@@ -3714,244 +3724,6 @@
       "title": "Ready to Take Control of Your Period Health?",
       "description": "Join thousands of teens who are learning to manage their periods with confidence",
       "button": "Start Your Journey"
-    },
-    "immediateReliefPage": {
-      "title": "Immediate Period Pain Relief",
-      "description": "Quick and effective methods to relieve menstrual pain right now. Science-backed techniques you can use immediately.",
-      "seoKeywords": [
-        "period pain emergency relief",
-        "immediate period pain relief",
-        "heat therapy for cramps",
-        "menstrual pain management",
-        "dysmenorrhea treatment",
-        "cramp relief methods"
-      ],
-      "contentSectionTitle": "Relief Methods",
-      "introTitle": "When You Need Relief Right Now",
-      "introText": "Menstrual pain can strike suddenly and severely. Whether you're at home, work, or on the go, these evidence-based methods can provide quick relief.",
-      "introText2": "Each method below includes scientific parameters and practical guidance to help you find what works best for your body.",
-      "typesTitle": "Immediate Relief Methods",
-      "heatTherapy": {
-        "title": "Heat Therapy",
-        "subtitle": "Fast-acting muscle relaxation"
-      },
-      "heatTherapyDescription": "Heat therapy is one of the most effective immediate relief methods. It works by increasing blood flow, relaxing uterine muscles, and blocking pain signals.",
-      "heatTherapyGuideTitle": "Complete Heat Therapy Guide",
-      "heatTherapyGuideDescription": "Learn the science and best practices",
-      "gentleMovement": {
-        "title": "Gentle Movement & Yoga",
-        "subtitle": "Natural pain relief through movement"
-      },
-      "gentleMovementDescription": "Gentle stretching and yoga poses can help relieve menstrual cramps by improving circulation, releasing muscle tension, and promoting relaxation.",
-      "gentleMovementDetails": {
-        "yogaPoses": {
-          "title": "Recommended Yoga Poses:",
-          "poses": [
-            {
-              "name": "Child's Pose (Balasana)",
-              "description": "Kneel and fold forward, arms extended or by your sides",
-              "benefits": "Relieves back pain, calms the mind, gentle compression on abdomen"
-            },
-            {
-              "name": "Cat-Cow Pose (Marjaryasana-Bitilasana)",
-              "description": "On hands and knees, alternate between arching and rounding your spine",
-              "benefits": "Increases spinal flexibility, massages abdominal organs, improves circulation"
-            },
-            {
-              "name": "Supine Twist",
-              "description": "Lie on back, bring knees to chest, gently drop to one side",
-              "benefits": "Releases lower back tension, aids digestion, promotes relaxation"
-            }
-          ]
-        },
-        "breathingExercises": {
-          "title": "Breathing Exercises:",
-          "exercises": [
-            {
-              "name": "Deep Belly Breathing",
-              "steps": "Place hand on belly, breathe deeply so belly expands, exhale slowly",
-              "benefits": "Reduces stress hormones, promotes muscle relaxation"
-            },
-            {
-              "name": "4-7-8 Breathing",
-              "steps": "Inhale through nose for 4 counts, hold for 7, exhale through mouth for 8",
-              "benefits": "Calms nervous system, reduces pain perception, induces relaxation"
-            }
-          ]
-        },
-        "timing": {
-          "title": "When to Practice:",
-          "preventive": "Preventive: Practice daily during the week before your period starts",
-          "during": "During pain: Use gentle movements only, listen to your body's signals",
-          "continuous": "Continuous: Regular practice improves long-term pain management"
-        }
-      },
-      "breathingExerciseTitle": "Breathing Exercises",
-      "breathingExercise": {
-        "subtitle": "Calm your nervous system"
-      },
-      "breathingExerciseDescription": "Controlled breathing activates your body's relaxation response, reducing stress hormones and pain perception. It's free, portable, and can be done anywhere, anytime.",
-      "acupressure": {
-        "title": "Acupressure",
-        "subtitle": "Traditional pressure point therapy"
-      },
-      "acupressureDescription": "Acupressure uses finger pressure on specific points to relieve pain. It's based on traditional Chinese medicine and supported by modern research showing effectiveness for menstrual pain.",
-      "acupressureDetails": {
-        "title": "Key Acupressure Points:",
-        "acupoints": [
-          {
-            "name": "Sanyinjiao (SP6)",
-            "location": "3 finger-widths (about 4 fingers) above the inner ankle bone",
-            "method": "Press firmly with thumb in circular motion for 1-2 minutes",
-            "benefits": "Regulates menstruation, relieves cramps, reduces pain intensity"
-          },
-          {
-            "name": "Hegu (LI4)",
-            "location": "In the webbing between thumb and index finger",
-            "method": "Pinch and massage firmly for 1-2 minutes on each hand",
-            "benefits": "General pain relief, reduces tension, promotes energy flow"
-          },
-          {
-            "name": "Taichong (LV3)",
-            "location": "On top of foot, in the depression between big toe and second toe",
-            "method": "Press and hold firmly for 30-60 seconds, breathe deeply",
-            "benefits": "Relieves stress, regulates liver qi, reduces irritability"
-          }
-        ],
-        "technique": {
-          "title": "Massage Technique Guide:",
-          "pressure": "Apply firm but comfortable pressure - you should feel sensation but not sharp pain",
-          "time": "Hold each point for 1-2 minutes, or until you feel relief",
-          "frequency": "Repeat 2-3 times daily during menstruation, or as needed",
-          "precautions": "⚠️ Avoid SP6 during pregnancy. Stop if pain increases or you feel dizzy."
-        }
-      },
-      "otcOptions": {
-        "title": "Over-the-Counter Pain Relief",
-        "subtitle": "When you need medication"
-      },
-      "otcOptionsDescription": "NSAIDs (Non-Steroidal Anti-Inflammatory Drugs) like ibuprofen are highly effective for menstrual pain. They work by blocking prostaglandin production, which causes cramps.",
-      "nsaidGuideTitle": "NSAID Professional Guide",
-      "nsaidGuideDescription": "Complete medication information",
-      "combinationTherapy": {
-        "title": "Combination Therapy",
-        "subtitle": "Maximize relief by combining methods"
-      },
-      "meditationTitle": "Meditation & Mindfulness",
-      "meditationDescription": "Reduce pain perception through mental techniques",
-      "dietaryPlanTitle": "Anti-Inflammatory Diet",
-      "dietaryPlanDescription": "Foods that help reduce menstrual pain",
-      "workTipsTitle": "Managing Pain at Work",
-      "workTipsDescription": "Discreet relief methods for the workplace",
-      "scenarioSolutionsTitle": "Scenario-Based Solutions",
-      "scenarioSolutionsDescription": "Relief strategies for different situations",
-      "emergencyResponse": {
-        "title": "Emergency Response",
-        "subtitle": "When pain is severe",
-        "immediateActionsTitle": "Immediate Actions:",
-        "immediateActions": {
-          "action1": "Apply heat or cold therapy immediately",
-          "action2": "Take prescribed pain medication",
-          "action3": "Rest in a comfortable position",
-          "action4": "Practice deep breathing exercises",
-          "action5": "Contact your healthcare provider if pain persists"
-        },
-        "medicalIndicators": {
-          "title": "Seek Medical Care If:",
-          "indicators": {
-            "indicator1": "Severe pain that doesn't respond to treatment",
-            "indicator2": "Fever accompanying the pain",
-            "indicator3": "Unusual bleeding or discharge",
-            "indicator4": "Pain that worsens rapidly",
-            "indicator5": "Symptoms of infection"
-          }
-        },
-        "emergencyKit": {
-          "title": "Emergency Relief Kit:",
-          "items": {
-            "item1": "Heat pack or hot water bottle",
-            "item2": "Cold pack or ice pack",
-            "item3": "Pain medication",
-            "item4": "Comfortable clothing",
-            "item5": "Emergency contact numbers"
-          }
-        }
-      },
-      "findingWhatWorksTitle": "Finding What Works for You",
-      "findingWhatWorksText": "Everyone's body responds differently to pain relief methods. Keep track of what works best for you.",
-      "findingWhatWorksText2": "Consider keeping a pain diary to identify patterns and effective strategies.",
-      "disclaimerTitle": "Medical Disclaimer",
-      "disclaimerText": "This information is for educational purposes only and does not replace professional medical advice. If you experience severe or unusual pain, please consult a healthcare provider.",
-      "parameters": {
-        "scientificParameters": "Scientific Parameters:",
-        "heatTherapy": {
-          "temperature": "40-45°C (104-113°F)",
-          "duration": "15-20 minutes per session",
-          "frequency": "Every 2-3 hours as needed",
-          "timing": "Start at first sign of pain for best results",
-          "mechanism": "Increases blood flow, relaxes smooth muscle tissue, activates heat receptors to block pain signals"
-        },
-        "breathing": {
-          "title": "Breathing Exercise Parameters:",
-          "technique": "4-7-8 breathing (inhale 4 seconds, hold 7 seconds, exhale 8 seconds)",
-          "cycles": "5-10 cycles per session",
-          "frequency": "Every 1-2 hours or as needed",
-          "timing": "Anytime, especially during pain spikes or stress",
-          "mechanism": "Activates parasympathetic nervous system, reduces stress hormones (cortisol), promotes muscle relaxation"
-        },
-        "nsaid": {
-          "title": "NSAID Parameters:",
-          "dosage": "Follow package instructions (typically 200-400mg ibuprofen every 4-6 hours)",
-          "timing": "Take at first sign of pain, with food to protect stomach",
-          "mechanism": "Blocks prostaglandin production by inhibiting COX enzymes, reducing inflammation and pain",
-          "contraindications": "⚠️ Avoid if you have stomach ulcers, kidney issues, bleeding disorders, or are allergic to NSAIDs. Consult doctor if taking blood thinners."
-        }
-      },
-      "labels": {
-        "temperature": "Temperature: ",
-        "duration": "Duration: ",
-        "frequency": "Frequency: ",
-        "timing": "Timing: ",
-        "mechanism": "Mechanism: ",
-        "technique": "Technique: ",
-        "cycles": "Cycles: ",
-        "dosage": "Dosage: ",
-        "contraindications": "Contraindications: ",
-        "location": "Location: ",
-        "method": "Method: "
-      },
-      "actions": {
-        "learnMore": "Learn More →",
-        "startPractice": "Start Practice →"
-      },
-      "structuredData": {
-        "howTo": {
-          "name": "How to Relieve Period Pain Immediately",
-          "description": "Step-by-step guide to immediate menstrual pain relief using evidence-based methods"
-        },
-        "steps": {
-          "heatTherapy": {
-            "name": "Apply Heat Therapy",
-            "text": "Apply a heating pad or hot water bottle to your lower abdomen at 40-45°C for 15-20 minutes"
-          },
-          "breathing": {
-            "name": "Practice Breathing Exercises",
-            "text": "Use 4-7-8 breathing technique: inhale for 4 seconds, hold for 7, exhale for 8. Repeat 5-10 times"
-          },
-          "acupressure": {
-            "name": "Try Acupressure Points",
-            "text": "Press Sanyinjiao (SP6) point, located 3 finger-widths above inner ankle, for 1-2 minutes"
-          },
-          "medication": {
-            "name": "Consider OTC Medication",
-            "text": "Take ibuprofen (200-400mg) at first sign of pain, with food"
-          },
-          "medicalCare": {
-            "name": "Seek Medical Care if Needed",
-            "text": "Consult a healthcare provider if pain is severe, sudden, or accompanied by fever or unusual symptoms"
-          }
-        }
-      }
     },
     "healthGuidePage": {
       "title": "Comprehensive Period Health Guide | Period Hub",
@@ -4661,259 +4433,6 @@
     "questionsDescription": "If you have any questions about this Privacy Policy, please contact us at tiyibaofu@outlook.com",
     "contactUs": "Contact Us"
   },
-  "immediateReliefPage": {
-    "title": "Immediate Period Pain Relief",
-    "description": "Quick and effective methods to relieve menstrual pain right now. Science-backed techniques you can use immediately.",
-    "contentSectionTitle": "Relief Methods",
-    "introTitle": "When You Need Relief Right Now",
-    "introText": "Menstrual pain can strike suddenly and severely. Whether you're at home, work, or on the go, these evidence-based methods can provide quick relief.",
-    "introText2": "Each method below includes scientific parameters and practical guidance to help you find what works best for your body.",
-    "typesTitle": "Immediate Relief Methods",
-    "heatTherapy": {
-      "title": "Heat Therapy",
-      "subtitle": "Fast-acting muscle relaxation"
-    },
-    "heatTherapyDescription": "Heat therapy is one of the most effective immediate relief methods. It works by increasing blood flow, relaxing uterine muscles, and blocking pain signals.",
-    "heatTherapyGuideTitle": "Complete Heat Therapy Guide",
-    "heatTherapyGuideDescription": "Learn the science and best practices",
-    "gentleMovement": {
-      "title": "Gentle Movement & Yoga",
-      "subtitle": "Natural pain relief through movement"
-    },
-    "gentleMovementDescription": "Gentle stretching and yoga poses can help relieve menstrual cramps by improving circulation, releasing muscle tension, and promoting relaxation.",
-    "gentleMovementDetails": {
-      "yogaPoses": {
-        "title": "Recommended Yoga Poses:",
-        "poses": [
-          {
-            "name": "Child's Pose (Balasana)",
-            "description": "Kneel and fold forward, arms extended or by your sides",
-            "benefits": "Relieves back pain, calms the mind, gentle compression on abdomen"
-          },
-          {
-            "name": "Cat-Cow Pose (Marjaryasana-Bitilasana)",
-            "description": "On hands and knees, alternate between arching and rounding your spine",
-            "benefits": "Increases spinal flexibility, massages abdominal organs, improves circulation"
-          },
-          {
-            "name": "Supine Twist",
-            "description": "Lie on back, bring knees to chest, gently drop to one side",
-            "benefits": "Releases lower back tension, aids digestion, promotes relaxation"
-          }
-        ]
-      },
-      "breathingExercises": {
-        "title": "Breathing Exercises:",
-        "exercises": [
-          {
-            "name": "Deep Belly Breathing",
-            "steps": "Place hand on belly, breathe deeply so belly expands, exhale slowly",
-            "benefits": "Reduces stress hormones, promotes muscle relaxation"
-          },
-          {
-            "name": "4-7-8 Breathing",
-            "steps": "Inhale through nose for 4 counts, hold for 7, exhale through mouth for 8",
-            "benefits": "Calms nervous system, reduces pain perception, induces relaxation"
-          }
-        ]
-      },
-      "timing": {
-        "title": "When to Practice:",
-        "preventive": "Preventive: Practice daily during the week before your period starts",
-        "during": "During pain: Use gentle movements only, listen to your body's signals",
-        "continuous": "Continuous: Regular practice improves long-term pain management"
-      }
-    },
-    "breathingExerciseTitle": "Breathing Exercises",
-    "breathingExercise": {
-      "subtitle": "Calm your nervous system"
-    },
-    "breathingExerciseDescription": "Controlled breathing activates your body's relaxation response, reducing stress hormones and pain perception. It's free, portable, and can be done anywhere, anytime.",
-    "acupressure": {
-      "title": "Acupressure",
-      "subtitle": "Traditional pressure point therapy"
-    },
-    "acupressureDescription": "Acupressure uses finger pressure on specific points to relieve pain. It's based on traditional Chinese medicine and supported by modern research showing effectiveness for menstrual pain.",
-    "acupressureDetails": {
-      "title": "Key Acupressure Points:",
-      "acupoints": [
-        {
-          "name": "Sanyinjiao (SP6)",
-          "location": "3 finger-widths (about 4 fingers) above the inner ankle bone",
-          "method": "Press firmly with thumb in circular motion for 1-2 minutes",
-          "benefits": "Regulates menstruation, relieves cramps, reduces pain intensity"
-        },
-        {
-          "name": "Hegu (LI4)",
-          "location": "In the webbing between thumb and index finger",
-          "method": "Pinch and massage firmly for 1-2 minutes on each hand",
-          "benefits": "General pain relief, reduces tension, promotes energy flow"
-        },
-        {
-          "name": "Taichong (LV3)",
-          "location": "On top of foot, in the depression between big toe and second toe",
-          "method": "Press and hold firmly for 30-60 seconds, breathe deeply",
-          "benefits": "Relieves stress, regulates liver qi, reduces irritability"
-        }
-      ],
-      "technique": {
-        "title": "Massage Technique Guide:",
-        "pressure": "Apply firm but comfortable pressure - you should feel sensation but not sharp pain",
-        "time": "Hold each point for 1-2 minutes, or until you feel relief",
-        "frequency": "Repeat 2-3 times daily during menstruation, or as needed",
-        "precautions": "⚠️ Avoid SP6 during pregnancy. Stop if pain increases or you feel dizzy."
-      }
-    },
-    "otcOptions": {
-      "title": "Over-the-Counter Pain Relief",
-      "subtitle": "When you need medication"
-    },
-    "otcOptionsDescription": "NSAIDs (Non-Steroidal Anti-Inflammatory Drugs) like ibuprofen are highly effective for menstrual pain. They work by blocking prostaglandin production, which causes cramps.",
-    "nsaidGuideTitle": "NSAID Professional Guide",
-    "nsaidGuideDescription": "Complete medication information",
-    "combinationTherapy": {
-      "title": "Combination Therapy",
-      "subtitle": "Maximize relief by combining methods",
-      "combinations": [
-        {
-          "level": "Heat + Breathing",
-          "methods": {
-            "method1": "Apply heat therapy while practicing deep breathing exercises",
-            "method2": "Enhanced muscle relaxation and stress reduction"
-          }
-        },
-        {
-          "level": "Acupressure + Meditation",
-          "methods": {
-            "method1": "Combine acupressure with mindfulness meditation",
-            "method2": "Dual approach to pain relief and mental calm"
-          }
-        },
-        {
-          "level": "Movement + Heat",
-          "methods": {
-            "method1": "Gentle yoga followed by heat therapy",
-            "method2": "Improved circulation and sustained warmth"
-          }
-        }
-      ]
-    },
-    "meditationTitle": "Meditation & Mindfulness",
-    "meditationDescription": "Reduce pain perception through mental techniques",
-    "dietaryPlanTitle": "Anti-Inflammatory Diet",
-    "dietaryPlanDescription": "Foods that help reduce menstrual pain",
-    "workTipsTitle": "Managing Pain at Work",
-    "workTipsDescription": "Discreet relief methods for the workplace",
-    "scenarioSolutionsTitle": "Scenario-Based Solutions",
-    "scenarioSolutionsDescription": "Relief strategies for different situations",
-    "emergencyResponse": {
-      "title": "Emergency Response",
-      "subtitle": "When pain is severe",
-      "immediateActionsTitle": "Immediate Actions:",
-      "immediateActions": {
-        "action1": "Apply heat or cold therapy immediately",
-        "action2": "Take prescribed pain medication",
-        "action3": "Rest in a comfortable position",
-        "action4": "Practice deep breathing exercises",
-        "action5": "Contact your healthcare provider if pain persists"
-      },
-      "medicalIndicators": {
-        "title": "Seek Medical Care If:",
-        "indicators": {
-          "indicator1": "Severe pain that doesn't respond to treatment",
-          "indicator2": "Fever accompanying the pain",
-          "indicator3": "Unusual bleeding or discharge",
-          "indicator4": "Pain that worsens rapidly",
-          "indicator5": "Symptoms of infection"
-        }
-      },
-      "emergencyKit": {
-        "title": "Emergency Relief Kit:",
-        "items": {
-          "item1": "Heat pack or hot water bottle",
-          "item2": "Cold pack or ice pack",
-          "item3": "Pain medication",
-          "item4": "Comfortable clothing",
-          "item5": "Emergency contact numbers"
-        }
-      }
-    },
-    "findingWhatWorksTitle": "Finding What Works for You",
-    "findingWhatWorksText": "Everyone's body responds differently to pain relief methods. Keep track of what works best for you.",
-    "findingWhatWorksText2": "Consider keeping a pain diary to identify patterns and effective strategies.",
-    "disclaimerTitle": "Medical Disclaimer",
-    "disclaimerText": "This information is for educational purposes only and does not replace professional medical advice. If you experience severe or unusual pain, please consult a healthcare provider.",
-    "parameters": {
-      "scientificParameters": "Scientific Parameters:",
-      "heatTherapy": {
-        "temperature": "40-45°C (104-113°F)",
-        "duration": "15-20 minutes per session",
-        "frequency": "Every 2-3 hours as needed",
-        "timing": "Start at first sign of pain for best results",
-        "mechanism": "Increases blood flow, relaxes smooth muscle tissue, activates heat receptors to block pain signals"
-      },
-      "breathing": {
-        "title": "Breathing Exercise Parameters:",
-        "technique": "4-7-8 breathing (inhale 4 seconds, hold 7 seconds, exhale 8 seconds)",
-        "cycles": "5-10 cycles per session",
-        "frequency": "Every 1-2 hours or as needed",
-        "timing": "Anytime, especially during pain spikes or stress",
-        "mechanism": "Activates parasympathetic nervous system, reduces stress hormones (cortisol), promotes muscle relaxation"
-      },
-      "nsaid": {
-        "title": "NSAID Parameters:",
-        "dosage": "Follow package instructions (typically 200-400mg ibuprofen every 4-6 hours)",
-        "timing": "Take at first sign of pain, with food to protect stomach",
-        "mechanism": "Blocks prostaglandin production by inhibiting COX enzymes, reducing inflammation and pain",
-        "contraindications": "⚠️ Avoid if you have stomach ulcers, kidney issues, bleeding disorders, or are allergic to NSAIDs. Consult doctor if taking blood thinners."
-      }
-    },
-    "labels": {
-      "temperature": "Temperature: ",
-      "duration": "Duration: ",
-      "frequency": "Frequency: ",
-      "timing": "Timing: ",
-      "mechanism": "Mechanism: ",
-      "technique": "Technique: ",
-      "cycles": "Cycles: ",
-      "dosage": "Dosage: ",
-      "contraindications": "Contraindications: ",
-      "location": "Location: ",
-      "method": "Method: "
-    },
-    "actions": {
-      "learnMore": "Learn More →",
-      "startPractice": "Start Practice →"
-    },
-    "structuredData": {
-      "howTo": {
-        "name": "How to Relieve Period Pain Immediately",
-        "description": "Step-by-step guide to immediate menstrual pain relief using evidence-based methods"
-      },
-      "steps": {
-        "heatTherapy": {
-          "name": "Apply Heat Therapy",
-          "text": "Apply a heating pad or hot water bottle to your lower abdomen at 40-45°C for 15-20 minutes"
-        },
-        "breathing": {
-          "name": "Practice Breathing Exercises",
-          "text": "Use 4-7-8 breathing technique: inhale for 4 seconds, hold for 7, exhale for 8. Repeat 5-10 times"
-        },
-        "acupressure": {
-          "name": "Try Acupressure Points",
-          "text": "Press Sanyinjiao (SP6) point, located 3 finger-widths above inner ankle, for 1-2 minutes"
-        },
-        "medication": {
-          "name": "Consider OTC Medication",
-          "text": "Take ibuprofen (200-400mg) at first sign of pain, with food"
-        },
-        "medicalCare": {
-          "name": "Seek Medical Care if Needed",
-          "text": "Consult a healthcare provider if pain is severe, sudden, or accompanied by fever or unusual symptoms"
-        }
-      }
-    }
-  },
   "painTracker": {
     "title": "Pain Tracker",
     "subtitle": "Record and track your menstrual pain, understand pain patterns, and find the most effective relief methods",
@@ -5505,6 +5024,279 @@
         "symptomAssessment": "Symptom Assessment",
         "personalizedRecommendations": "Personalized Recommendations",
         "healthReports": "Health Reports"
+      }
+    }
+  },
+  "immediateReliefPage": {
+    "title": "Immediate Period Pain Relief",
+    "description": "Quick and effective methods to relieve menstrual pain right now. Science-backed techniques you can use immediately.",
+    "seoKeywords": [
+      "period pain emergency relief",
+      "immediate period pain relief",
+      "heat therapy for cramps",
+      "menstrual pain management",
+      "dysmenorrhea treatment",
+      "cramp relief methods"
+    ],
+    "contentSectionTitle": "Relief Methods",
+    "introTitle": "When You Need Relief Right Now",
+    "introText": "Menstrual pain can strike suddenly and severely. Whether you're at home, work, or on the go, these evidence-based methods can provide quick relief.",
+    "introText2": "Each method below includes scientific parameters and practical guidance to help you find what works best for your body.",
+    "typesTitle": "Immediate Relief Methods",
+    "heatTherapy": {
+      "title": "Heat Therapy",
+      "subtitle": "Fast-acting muscle relaxation"
+    },
+    "heatTherapyDescription": "Heat therapy is one of the most effective immediate relief methods. It works by increasing blood flow, relaxing uterine muscles, and blocking pain signals.",
+    "heatTherapyGuideTitle": "Complete Heat Therapy Guide",
+    "heatTherapyGuideDescription": "Learn the science and best practices",
+    "gentleMovement": {
+      "title": "Gentle Movement & Yoga",
+      "subtitle": "Natural pain relief through movement"
+    },
+    "gentleMovementDescription": "Gentle stretching and yoga poses can help relieve menstrual cramps by improving circulation, releasing muscle tension, and promoting relaxation.",
+    "gentleMovementDetails": {
+      "yogaPoses": {
+        "title": "Recommended Yoga Poses:",
+        "poses": [
+          {
+            "name": "Child's Pose (Balasana)",
+            "description": "Kneel and fold forward, arms extended or by your sides",
+            "benefits": "Relieves back pain, calms the mind, gentle compression on abdomen"
+          },
+          {
+            "name": "Cat-Cow Pose (Marjaryasana-Bitilasana)",
+            "description": "On hands and knees, alternate between arching and rounding your spine",
+            "benefits": "Increases spinal flexibility, massages abdominal organs, improves circulation"
+          },
+          {
+            "name": "Supine Twist",
+            "description": "Lie on back, bring knees to chest, gently drop to one side",
+            "benefits": "Releases lower back tension, aids digestion, promotes relaxation"
+          }
+        ]
+      },
+      "breathingExercises": {
+        "title": "Breathing Exercises:",
+        "exercises": [
+          {
+            "name": "Deep Belly Breathing",
+            "steps": "Place hand on belly, breathe deeply so belly expands, exhale slowly",
+            "benefits": "Reduces stress hormones, promotes muscle relaxation"
+          },
+          {
+            "name": "4-7-8 Breathing",
+            "steps": "Inhale through nose for 4 counts, hold for 7, exhale through mouth for 8",
+            "benefits": "Calms nervous system, reduces pain perception, induces relaxation"
+          }
+        ]
+      },
+      "timing": {
+        "title": "When to Practice:",
+        "preventive": "Preventive: Practice daily during the week before your period starts",
+        "during": "During pain: Use gentle movements only, listen to your body's signals",
+        "continuous": "Continuous: Regular practice improves long-term pain management"
+      }
+    },
+    "breathingExerciseTitle": "Breathing Exercises",
+    "breathingExercise": {
+      "subtitle": "Calm your nervous system"
+    },
+    "breathingExerciseDescription": "Controlled breathing activates your body's relaxation response, reducing stress hormones and pain perception. It's free, portable, and can be done anywhere, anytime.",
+    "acupressure": {
+      "title": "Acupressure",
+      "subtitle": "Traditional pressure point therapy"
+    },
+    "acupressureDescription": "Acupressure uses finger pressure on specific points to relieve pain. It's based on traditional Chinese medicine and supported by modern research showing effectiveness for menstrual pain.",
+    "acupressureDetails": {
+      "title": "Key Acupressure Points:",
+      "acupoints": [
+        {
+          "name": "Sanyinjiao (SP6)",
+          "location": "3 finger-widths (about 4 fingers) above the inner ankle bone",
+          "method": "Press firmly with thumb in circular motion for 1-2 minutes",
+          "benefits": "Regulates menstruation, relieves cramps, reduces pain intensity"
+        },
+        {
+          "name": "Hegu (LI4)",
+          "location": "In the webbing between thumb and index finger",
+          "method": "Pinch and massage firmly for 1-2 minutes on each hand",
+          "benefits": "General pain relief, reduces tension, promotes energy flow"
+        },
+        {
+          "name": "Taichong (LV3)",
+          "location": "On top of foot, in the depression between big toe and second toe",
+          "method": "Press and hold firmly for 30-60 seconds, breathe deeply",
+          "benefits": "Relieves stress, regulates liver qi, reduces irritability"
+        }
+      ],
+      "technique": {
+        "title": "Massage Technique Guide:",
+        "pressure": "Apply firm but comfortable pressure - you should feel sensation but not sharp pain",
+        "time": "Hold each point for 1-2 minutes, or until you feel relief",
+        "frequency": "Repeat 2-3 times daily during menstruation, or as needed",
+        "precautions": "⚠️ Avoid SP6 during pregnancy. Stop if pain increases or you feel dizzy."
+      }
+    },
+    "otcOptions": {
+      "title": "Over-the-Counter Pain Relief",
+      "subtitle": "When you need medication"
+    },
+    "otcOptionsDescription": "NSAIDs (Non-Steroidal Anti-Inflammatory Drugs) like ibuprofen are highly effective for menstrual pain. They work by blocking prostaglandin production, which causes cramps.",
+    "nsaidGuideTitle": "NSAID Professional Guide",
+    "nsaidGuideDescription": "Complete medication information",
+    "combinationTherapy": {
+      "title": "Combination Therapy",
+      "subtitle": "Maximize relief by combining methods",
+      "combinations": [
+        {
+          "level": "Level 1: Mild Pain (1-3)",
+          "methods": [
+            "Heat therapy",
+            "Gentle massage",
+            "Breathing exercises"
+          ],
+          "description": "Start with simple, non-invasive methods that can be done anywhere."
+        },
+        {
+          "level": "Level 2: Moderate Pain (4-6)",
+          "methods": [
+            "Heat therapy + NSAIDs",
+            "Acupressure points",
+            "Yoga poses"
+          ],
+          "description": "Combine multiple approaches for better relief when pain is more noticeable."
+        },
+        {
+          "level": "Level 3: Severe Pain (7-10)",
+          "methods": [
+            "NSAIDs + Heat + Rest",
+            "Medical consultation",
+            "Emergency response"
+          ],
+          "description": "Use all available methods and consider medical attention for severe pain."
+        }
+      ]
+    },
+    "meditationTitle": "Meditation & Mindfulness",
+    "meditationDescription": "Reduce pain perception through mental techniques",
+    "dietaryPlanTitle": "Anti-Inflammatory Diet",
+    "dietaryPlanDescription": "Foods that help reduce menstrual pain",
+    "workTipsTitle": "Managing Pain at Work",
+    "workTipsDescription": "Discreet relief methods for the workplace",
+    "scenarioSolutionsTitle": "Scenario-Based Solutions",
+    "scenarioSolutionsDescription": "Relief strategies for different situations",
+    "emergencyResponse": {
+      "title": "Emergency Response",
+      "subtitle": "When pain is severe",
+      "immediateActionsTitle": "Immediate Actions:",
+      "immediateActions": {
+        "action1": "Apply heat or cold therapy immediately",
+        "action2": "Take prescribed pain medication",
+        "action3": "Rest in a comfortable position",
+        "action4": "Practice deep breathing exercises",
+        "action5": "Contact your healthcare provider if pain persists"
+      },
+      "medicalIndicators": {
+        "title": "Seek Medical Care If:",
+        "indicators": {
+          "indicator1": "Severe pain that doesn't respond to treatment",
+          "indicator2": "Fever accompanying the pain",
+          "indicator3": "Unusual bleeding or discharge",
+          "indicator4": "Pain that worsens rapidly",
+          "indicator5": "Symptoms of infection"
+        }
+      },
+      "emergencyKit": {
+        "title": "Emergency Relief Kit:",
+        "items": {
+          "item1": "Heat pack or hot water bottle",
+          "item2": "Cold pack or ice pack",
+          "item3": "Pain medication",
+          "item4": "Comfortable clothing",
+          "item5": "Emergency contact numbers"
+        }
+      }
+    },
+    "findingWhatWorksTitle": "Finding What Works for You",
+    "findingWhatWorksText": "Everyone's body responds differently to pain relief methods. Keep track of what works best for you.",
+    "findingWhatWorksText2": "Consider keeping a pain diary to identify patterns and effective strategies.",
+    "disclaimerTitle": "Medical Disclaimer",
+    "disclaimerText": "This information is for educational purposes only and does not replace professional medical advice. If you experience severe or unusual pain, please consult a healthcare provider.",
+    "actions": {
+      "learnMore": "Learn More →",
+      "startPractice": "Start Practice →",
+      "viewChecklist": "View Checklist →",
+      "startAssessment": "Start Assessment →",
+      "viewGuide": "View Guide →",
+      "viewSolutions": "View Solutions →",
+      "viewMethods": "View Methods →",
+      "viewDietPlan": "View Diet Plan →"
+    },
+    "parameters": {
+      "scientificParameters": "Scientific Parameters:",
+      "heatTherapy": {
+        "temperature": "40-45°C (104-113°F)",
+        "duration": "15-20 minutes per session",
+        "frequency": "Every 2-3 hours as needed",
+        "timing": "Start at first sign of pain for best results",
+        "mechanism": "Increases blood flow, relaxes smooth muscle tissue, activates heat receptors to block pain signals"
+      },
+      "breathing": {
+        "title": "Breathing Exercise Parameters:",
+        "technique": "4-7-8 breathing (inhale 4 seconds, hold 7 seconds, exhale 8 seconds)",
+        "cycles": "5-10 cycles per session",
+        "frequency": "Every 1-2 hours or as needed",
+        "timing": "Anytime, especially during pain spikes or stress",
+        "mechanism": "Activates parasympathetic nervous system, reduces stress hormones (cortisol), promotes muscle relaxation"
+      },
+      "nsaid": {
+        "title": "NSAID Parameters:",
+        "dosage": "Follow package instructions (typically 200-400mg ibuprofen every 4-6 hours)",
+        "timing": "Take at first sign of pain, with food to protect stomach",
+        "mechanism": "Blocks prostaglandin production by inhibiting COX enzymes, reducing inflammation and pain",
+        "contraindications": "⚠️ Avoid if you have stomach ulcers, kidney issues, bleeding disorders, or are allergic to NSAIDs. Consult doctor if taking blood thinners."
+      }
+    },
+    "labels": {
+      "temperature": "Temperature: ",
+      "duration": "Duration: ",
+      "frequency": "Frequency: ",
+      "timing": "Timing: ",
+      "mechanism": "Mechanism: ",
+      "technique": "Technique: ",
+      "cycles": "Cycles: ",
+      "dosage": "Dosage: ",
+      "contraindications": "Contraindications: ",
+      "location": "Location: ",
+      "method": "Method: "
+    },
+    "structuredData": {
+      "howTo": {
+        "name": "How to Relieve Period Pain Immediately",
+        "description": "Step-by-step guide to immediate menstrual pain relief using evidence-based methods"
+      },
+      "steps": {
+        "heatTherapy": {
+          "name": "Apply Heat Therapy",
+          "text": "Apply a heating pad or hot water bottle to your lower abdomen at 40-45°C for 15-20 minutes"
+        },
+        "breathing": {
+          "name": "Practice Breathing Exercises",
+          "text": "Use 4-7-8 breathing technique: inhale for 4 seconds, hold for 7, exhale for 8. Repeat 5-10 times"
+        },
+        "acupressure": {
+          "name": "Try Acupressure Points",
+          "text": "Press Sanyinjiao (SP6) point, located 3 finger-widths above inner ankle, for 1-2 minutes"
+        },
+        "medication": {
+          "name": "Consider OTC Medication",
+          "text": "Take ibuprofen (200-400mg) at first sign of pain, with food"
+        },
+        "medicalCare": {
+          "name": "Seek Medical Care if Needed",
+          "text": "Consult a healthcare provider if pain is severe, sudden, or accompanied by fever or unusual symptoms"
+        }
       }
     }
   }

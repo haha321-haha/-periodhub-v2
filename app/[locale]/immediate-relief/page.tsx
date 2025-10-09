@@ -5,7 +5,7 @@ import {
 } from "next-intl/server";
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
-import { URL_CONFIG } from "@/lib/url-config";
+// import { URL_CONFIG } from "@/lib/url-config";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -267,22 +267,31 @@ export default async function ImmediateReliefPage({
                 <div className="space-y-3">
                   {t
                     .raw("gentleMovementDetails.yogaPoses.poses")
-                    .map((pose: any, index: number) => (
-                      <div
-                        key={index}
-                        className="border-l-2 border-secondary-300 pl-3"
-                      >
-                        <h5 className="font-medium text-secondary-700">
-                          {pose.name}
-                        </h5>
-                        <p className="text-sm text-secondary-600 mb-1">
-                          {pose.description}
-                        </p>
-                        <p className="text-xs text-secondary-500">
-                          {pose.benefits}
-                        </p>
-                      </div>
-                    ))}
+                    .map(
+                      (
+                        pose: {
+                          name: string;
+                          description: string;
+                          benefits: string;
+                        },
+                        index: number,
+                      ) => (
+                        <div
+                          key={index}
+                          className="border-l-2 border-secondary-300 pl-3"
+                        >
+                          <h5 className="font-medium text-secondary-700">
+                            {pose.name}
+                          </h5>
+                          <p className="text-sm text-secondary-600 mb-1">
+                            {pose.description}
+                          </p>
+                          <p className="text-xs text-secondary-500">
+                            {pose.benefits}
+                          </p>
+                        </div>
+                      ),
+                    )}
                 </div>
               </div>
 
@@ -294,22 +303,31 @@ export default async function ImmediateReliefPage({
                 <div className="space-y-2">
                   {t
                     .raw("gentleMovementDetails.breathingExercises.exercises")
-                    .map((exercise: any, index: number) => (
-                      <div
-                        key={index}
-                        className="border-l-2 border-blue-300 pl-3"
-                      >
-                        <h5 className="font-medium text-blue-700">
-                          {exercise.name}
-                        </h5>
-                        <p className="text-sm text-blue-600 mb-1">
-                          {exercise.steps}
-                        </p>
-                        <p className="text-xs text-blue-500">
-                          {exercise.benefits}
-                        </p>
-                      </div>
-                    ))}
+                    .map(
+                      (
+                        exercise: {
+                          name: string;
+                          steps: string;
+                          benefits: string;
+                        },
+                        index: number,
+                      ) => (
+                        <div
+                          key={index}
+                          className="border-l-2 border-blue-300 pl-3"
+                        >
+                          <h5 className="font-medium text-blue-700">
+                            {exercise.name}
+                          </h5>
+                          <p className="text-sm text-blue-600 mb-1">
+                            {exercise.steps}
+                          </p>
+                          <p className="text-xs text-blue-500">
+                            {exercise.benefits}
+                          </p>
+                        </div>
+                      ),
+                    )}
                 </div>
               </div>
 
@@ -445,27 +463,37 @@ export default async function ImmediateReliefPage({
                 <div className="space-y-3">
                   {t
                     .raw("acupressureDetails.acupoints")
-                    .map((point: any, index: number) => (
-                      <div
-                        key={index}
-                        className="border-l-2 border-accent-300 pl-3"
-                      >
-                        <h5 className="font-medium text-accent-700">
-                          {point.name}
-                        </h5>
-                        <p className="text-sm text-accent-600 mb-1">
-                          <strong>{t("labels.location")}</strong>
-                          {point.location}
-                        </p>
-                        <p className="text-sm text-accent-600 mb-1">
-                          <strong>{t("labels.method")}</strong>
-                          {point.method}
-                        </p>
-                        <p className="text-xs text-accent-500">
-                          {point.benefits}
-                        </p>
-                      </div>
-                    ))}
+                    .map(
+                      (
+                        point: {
+                          name: string;
+                          location: string;
+                          method: string;
+                          benefits: string;
+                        },
+                        index: number,
+                      ) => (
+                        <div
+                          key={index}
+                          className="border-l-2 border-accent-300 pl-3"
+                        >
+                          <h5 className="font-medium text-accent-700">
+                            {point.name}
+                          </h5>
+                          <p className="text-sm text-accent-600 mb-1">
+                            <strong>{t("labels.location")}</strong>
+                            {point.location}
+                          </p>
+                          <p className="text-sm text-accent-600 mb-1">
+                            <strong>{t("labels.method")}</strong>
+                            {point.method}
+                          </p>
+                          <p className="text-xs text-accent-500">
+                            {point.benefits}
+                          </p>
+                        </div>
+                      ),
+                    )}
                 </div>
               </div>
 
@@ -574,32 +602,41 @@ export default async function ImmediateReliefPage({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {t
               .raw("combinationTherapy.combinations")
-              .map((combination: any, index: number) => (
-                <div
-                  key={index}
-                  className="bg-white p-6 rounded-lg shadow-sm border border-purple-100"
-                >
-                  <h3 className="text-lg font-semibold text-purple-700 mb-3">
-                    {combination.level}
-                  </h3>
-                  <div className="space-y-2 mb-4">
-                    {Object.values(combination.methods).map(
-                      (method: any, methodIndex: number) => (
-                        <div
-                          key={methodIndex}
-                          className="flex items-center text-sm text-purple-600"
-                        >
-                          <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                          {method}
-                        </div>
-                      ),
-                    )}
+              .map(
+                (
+                  combination: {
+                    level: string;
+                    methods: string[];
+                    description: string;
+                  },
+                  index: number,
+                ) => (
+                  <div
+                    key={index}
+                    className="bg-white p-6 rounded-lg shadow-sm border border-purple-100"
+                  >
+                    <h3 className="text-lg font-semibold text-purple-700 mb-3">
+                      {combination.level}
+                    </h3>
+                    <div className="space-y-2 mb-4">
+                      {Object.values(combination.methods).map(
+                        (method: string, methodIndex: number) => (
+                          <div
+                            key={methodIndex}
+                            className="flex items-center text-sm text-purple-600"
+                          >
+                            <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                            {method}
+                          </div>
+                        ),
+                      )}
+                    </div>
+                    <p className="text-sm text-neutral-600">
+                      {combination.description}
+                    </p>
                   </div>
-                  <p className="text-sm text-neutral-600">
-                    {combination.description}
-                  </p>
-                </div>
-              ))}
+                ),
+              )}
           </div>
         </section>
 
@@ -618,7 +655,7 @@ export default async function ImmediateReliefPage({
               </h3>
               <ul className="space-y-2">
                 {Object.values(t.raw("emergencyResponse.immediateActions")).map(
-                  (action: any, index: number) => (
+                  (action: string, index: number) => (
                     <li
                       key={index}
                       className="flex items-start text-sm text-red-600"
@@ -639,7 +676,7 @@ export default async function ImmediateReliefPage({
               <ul className="space-y-2">
                 {Object.values(
                   t.raw("emergencyResponse.medicalIndicators.indicators"),
-                ).map((indicator: any, index: number) => (
+                ).map((indicator: string, index: number) => (
                   <li
                     key={index}
                     className="flex items-start text-sm text-red-600"
@@ -659,7 +696,7 @@ export default async function ImmediateReliefPage({
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {Object.values(t.raw("emergencyResponse.emergencyKit.items")).map(
-                (item: any, index: number) => (
+                (item: string, index: number) => (
                   <div
                     key={index}
                     className="flex items-center text-sm text-red-600"
@@ -705,7 +742,7 @@ export default async function ImmediateReliefPage({
                   {t("workTipsDescription")}
                 </p>
                 <span className="font-medium text-primary-500 group-hover:text-primary-600 transition-colors">
-                  {commonT("readMore")} →
+                  {t("actions.viewChecklist")}
                 </span>
               </Link>
             </div>
@@ -722,7 +759,7 @@ export default async function ImmediateReliefPage({
                   {t("meditationDescription")}
                 </p>
                 <span className="font-medium text-primary-500 group-hover:text-primary-600 transition-colors">
-                  {commonT("readMore")} →
+                  {t("actions.startAssessment")}
                 </span>
               </Link>
             </div>
@@ -740,7 +777,7 @@ export default async function ImmediateReliefPage({
                   {t("nsaidGuideDescription")}
                 </p>
                 <span className="font-medium text-primary-500 group-hover:text-primary-600 transition-colors">
-                  {commonT("readMore")} →
+                  {t("actions.viewGuide")}
                 </span>
               </Link>
             </div>
@@ -758,7 +795,7 @@ export default async function ImmediateReliefPage({
                   {t("scenarioSolutionsDescription")}
                 </p>
                 <span className="font-medium text-primary-500 group-hover:text-primary-600 transition-colors">
-                  {commonT("readMore")} →
+                  {t("actions.viewSolutions")}
                 </span>
               </Link>
             </div>
@@ -776,7 +813,7 @@ export default async function ImmediateReliefPage({
                   {t("heatTherapyGuideDescription")}
                 </p>
                 <span className="font-medium text-primary-500 group-hover:text-primary-600 transition-colors">
-                  {commonT("readMore")} →
+                  {t("actions.viewMethods")}
                 </span>
               </Link>
             </div>
@@ -794,7 +831,7 @@ export default async function ImmediateReliefPage({
                   {t("dietaryPlanDescription")}
                 </p>
                 <span className="font-medium text-primary-500 group-hover:text-primary-600 transition-colors">
-                  {commonT("readMore")} →
+                  {t("actions.viewDietPlan")}
                 </span>
               </Link>
             </div>

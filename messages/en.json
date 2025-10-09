@@ -2823,6 +2823,48 @@
           "badge": "Medical Visit Recommended"
         }
       },
+      "symptoms": {
+        "s1": {
+          "text": "Sudden severe pain, pain level suddenly changing from mild to unbearable",
+          "description": "May indicate ovarian cyst rupture, torsion, or other acute gynecological conditions requiring emergency medical evaluation"
+        },
+        "s2": {
+          "text": "Menstrual flow suddenly significantly increases, blood clots larger than 2.5cm in diameter",
+          "description": "May indicate uterine fibroids, adenomyosis, or coagulation disorders, requiring urgent examination"
+        },
+        "s3": {
+          "text": "Period pain duration exceeds 7 days, or pelvic pain during non-menstrual periods",
+          "description": "May indicate endometriosis, pelvic inflammatory disease, or other chronic gynecological conditions"
+        },
+        "s4": {
+          "text": "Period pain pattern has changed significantly in recent months",
+          "description": "May indicate new onset disease or condition change, requiring professional evaluation"
+        },
+        "s5": {
+          "text": "Accompanied by fever, chills, nausea, vomiting, or other systemic symptoms",
+          "description": "May indicate infection or other serious illness, requiring immediate medical attention"
+        },
+        "s6": {
+          "text": "Pain affects daily activities, requiring sick leave or bed rest",
+          "description": "Indicates severe pain level, recommend seeking medical help"
+        },
+        "s7": {
+          "text": "Pain not significantly relieved after taking pain medication",
+          "description": "May indicate need for stronger treatment or presence of other conditions"
+        },
+        "s8": {
+          "text": "Pain accompanied by difficulty urinating or urinary frequency/urgency",
+          "description": "May indicate urinary system disease or pelvic organ compression"
+        },
+        "s9": {
+          "text": "Pain accompanied by constipation, diarrhea, or other digestive symptoms",
+          "description": "May indicate intestinal disease or pelvic organ adhesions"
+        },
+        "s10": {
+          "text": "Pain accompanied by headache, dizziness, fatigue, or other systemic symptoms",
+          "description": "May indicate anemia, infection, or other systemic diseases"
+        }
+      },
       "results": {
         "title": "Symptom Analysis Results",
         "riskLevels": {

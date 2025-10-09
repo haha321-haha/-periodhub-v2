@@ -6914,6 +6914,11 @@
     "treatmentGuide": {
       "title": "专业治疗指南",
       "subtitle": "科学的疼痛管理方案",
+      "medicationGuide": {
+        "title": "用药指南",
+        "description": "安全有效的药物选择",
+        "cta": "查看用药指南 →"
+      },
       "heatTherapy": {
         "title": "热疗方法",
         "description": "温热疗法的科学应用",

@@ -8612,6 +8612,50 @@
     }
   },
   "workplaceWellness": {
+    "header": {
+      "title": "职场健康助手",
+      "subtitle": "科学管理经期，优化工作表现"
+    },
+    "nav": {
+      "calendar": "日历",
+      "nutrition": "营养",
+      "workImpact": "工作影响",
+      "analysis": "分析",
+      "export": "导出",
+      "settings": "设置"
+    },
+    "calendar": {
+      "title": "经期日历",
+      "subtitle": "记录和追踪您的经期周期",
+      "recordButton": "记录经期",
+      "days": {
+        "sun": "日",
+        "mon": "一",
+        "tue": "二",
+        "wed": "三",
+        "thu": "四",
+        "fri": "五",
+        "sat": "六"
+      },
+      "legendPeriod": "月经期",
+      "legendPredicted": "预测期",
+      "statCycle": "周期天数",
+      "statLength": "经期长度",
+      "statNext": "下次月经"
+    },
+    "history": {
+      "title": "历史记录",
+      "addRecord": "添加记录",
+      "export": "导出",
+      "searchPlaceholder": "搜索记录...",
+      "filters": "筛选",
+      "painLevel": "疼痛等级"
+    },
+    "sections": {
+      "workplaceArticles": "职场文章",
+      "relatedTools": "相关工具",
+      "scenarioSolutions": "场景方案"
+    },
     "charts": {
       "totalCycles": "总周期数",
       "averageCycleLength": "平均周期长度",

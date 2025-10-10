@@ -2372,6 +2372,50 @@
     }
   },
   "workplaceWellness": {
+    "header": {
+      "title": "Workplace Wellness Assistant",
+      "subtitle": "Scientific period management for optimal work performance"
+    },
+    "nav": {
+      "calendar": "Calendar",
+      "nutrition": "Nutrition",
+      "workImpact": "Work Impact",
+      "analysis": "Analysis",
+      "export": "Export",
+      "settings": "Settings"
+    },
+    "calendar": {
+      "title": "Period Calendar",
+      "subtitle": "Record and track your menstrual cycle",
+      "recordButton": "Record Period",
+      "days": {
+        "sun": "Sun",
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat"
+      },
+      "legendPeriod": "Period",
+      "legendPredicted": "Predicted",
+      "statCycle": "Cycle Days",
+      "statLength": "Period Length",
+      "statNext": "Next Period"
+    },
+    "history": {
+      "title": "History Records",
+      "addRecord": "Add Record",
+      "export": "Export",
+      "searchPlaceholder": "Search records...",
+      "filters": "Filters",
+      "painLevel": "Pain Level"
+    },
+    "sections": {
+      "workplaceArticles": "Workplace Articles",
+      "relatedTools": "Related Tools",
+      "scenarioSolutions": "Scenario Solutions"
+    },
     "charts": {
       "totalCycles": "Total Cycles",
       "averageCycleLength": "Average Cycle Length",

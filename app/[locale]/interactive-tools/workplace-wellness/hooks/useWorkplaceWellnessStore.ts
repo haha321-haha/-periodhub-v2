@@ -4,7 +4,7 @@
  */
 
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, StorageValue } from "zustand/middleware";
 import {
   WorkplaceWellnessState,
   CalendarState,
@@ -639,7 +639,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           try {
             if (typeof window !== "undefined" && window.localStorage) {
               const value = localStorage.getItem(name);
-              return value;
+              return value as unknown as StorageValue<WorkplaceWellnessStore> | null;
             }
             return null;
           } catch (error) {
@@ -650,7 +650,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
         setItem: (name, value) => {
           try {
             if (typeof window !== "undefined" && window.localStorage) {
-              localStorage.setItem(name, value);
+              localStorage.setItem(name, value as unknown as string);
             }
           } catch (error) {
             if (
@@ -663,7 +663,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
                 if (typeof window !== "undefined" && window.localStorage) {
                   localStorage.removeItem(name);
                   // 尝试只保存最小化的状态
-                  const parsed = JSON.parse(value);
+                  const parsed = JSON.parse(value as unknown as string);
                   if (parsed?.state) {
                     // 只保留必要的数据
                     const minimalState = {
@@ -706,24 +706,6 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           }
         },
       },
-      partialize: (state) => ({
-        activeTab: state.activeTab,
-        calendar: {
-          ...state.calendar,
-          currentDate: state.calendar.currentDate.toISOString(),
-          selectedDate: state.calendar.selectedDate?.toISOString() || null,
-        },
-        workImpact: state.workImpact,
-        nutrition: state.nutrition,
-        export: state.export,
-        // Day 11: 扩展持久化状态 - 限制存储大小
-        userPreferences: state.userPreferences,
-        exportTemplates: state.exportTemplates,
-        activeTemplate: state.activeTemplate,
-        // 限制exportHistory存储大小，只保留最近10条记录
-        exportHistory: state.exportHistory.slice(-10),
-        systemSettings: state.systemSettings,
-      }),
       // 添加SSR安全配置
       skipHydration: false,
       onRehydrateStorage: () => (state) => {

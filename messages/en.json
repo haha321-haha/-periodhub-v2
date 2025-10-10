@@ -2397,11 +2397,25 @@
       "avgPainLevel": "Average Pain Level",
       "avgPain": "Average Pain",
       "confidence": "Confidence",
-      "cycleLength": "Cycle Length"
+      "cycleLength": "Cycle Length",
+      "noComparisonData": "No comparison data available"
     },
     "insights": {
       "irregularCycle": "Irregular Cycle",
       "irregularCycleDesc": "Irregular cycle pattern detected, consider consulting a healthcare provider"
+    },
+    "common": {
+      "loading": "Loading...",
+      "error": "Error",
+      "success": "Success",
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "add": "Add",
+      "search": "Search",
+      "confirm": "Confirm",
+      "reset": "Reset"
     },
     "symptoms": {
       "title": "Symptoms & Work Impact Record",

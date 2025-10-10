@@ -3930,6 +3930,11 @@
     },
     "toolsIntroduction": "我们的互动工具旨在为您提供知识和个性化策略，帮助您管理经期健康。通过了解您独特的症状和模式，您可以做出明智的决定并找到更有效的缓解方法。",
     "developmentNote": "我们正在不断开发新的工具和资源。请经常回来查看更新！",
+    "stressManagement": {
+      "title": "压力管理",
+      "description": "科学管理经期压力，提升生活质量",
+      "cta": "开始管理"
+    },
     "cycleTracker": {
       "title": "智能周期追踪器",
       "description": "智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律。",
@@ -8060,7 +8065,455 @@
   "lifestyleRecommendations": "生活方式建议",
   "sleep": "睡眠",
   "stress": "压力",
-  "stressManagement": "压力管理",
+  "stressManagement": {
+    "title": "[ZH] Stress Management",
+    "description": "[ZH] Scientific management of menstrual stress to improve quality of life",
+    "pageTitle": "[ZH] Stress Management - PeriodHub",
+    "keywords": "[ZH] stress management,period stress,menstrual health,stress relief,relaxation techniques,workplace stress,women health",
+    "subtitle": "[ZH] Help you effectively manage period-related stress and anxiety",
+    "startAssessment": "[ZH] Start Assessment",
+    "learnMore": "[ZH] Learn More",
+    "backToTools": "[ZH] Back to Tools",
+    "next": "下一步",
+    "previous": "上一步",
+    "complete": "完成",
+    "restart": "重新开始",
+    "save": "保存",
+    "cancel": "取消",
+    "continue": "继续",
+    "skip": "跳过",
+    "stressLevels": {
+      "low": "低",
+      "moderate": "中等",
+      "high": "高",
+      "severe": "严重",
+      "lowDesc": "[ZH] Low stress level, maintaining good condition",
+      "moderateDesc": "[ZH] Moderate stress, requires attention and regulation",
+      "highDesc": "[ZH] High stress, recommend taking relief measures",
+      "severeDesc": "[ZH] Severe stress, requires professional help"
+    },
+    "resources": {
+      "title": "[ZH] Resource Recommendations",
+      "subtitle": "[ZH] More resources to help you manage stress",
+      "articles": {
+        "title": "[ZH] Related Articles",
+        "stressAndMenstruation": "[ZH] Relationship between Stress and Menstruation",
+        "relaxationTechniques": "[ZH] Detailed Relaxation Techniques",
+        "mindfulnessBenefits": "[ZH] Benefits of Mindfulness Practice"
+      },
+      "tools": {
+        "title": "[ZH] Related Tools",
+        "painTracker": "[ZH] Pain Tracker",
+        "cycleTracker": "[ZH] Cycle Tracker",
+        "breathingExercise": "[ZH] Breathing Exercise"
+      },
+      "support": {
+        "title": "[ZH] Support Resources",
+        "community": "[ZH] Community Support",
+        "professionalHelp": "[ZH] Professional Help",
+        "emergencyContacts": "[ZH] Emergency Contacts"
+      }
+    },
+    "tips": {
+      "title": "[ZH] Practical Tips",
+      "subtitle": "[ZH] Daily life stress management techniques",
+      "daily": {
+        "title": "[ZH] Daily Habits",
+        "regularSleep": "[ZH] Maintain Regular Sleep Schedule",
+        "healthyDiet": "[ZH] Balanced Diet",
+        "moderateExercise": "[ZH] Moderate Exercise",
+        "socialConnection": "[ZH] Maintain Social Connections"
+      },
+      "emergency": {
+        "title": "[ZH] Emergency Relief",
+        "deepBreathing": "[ZH] Deep Breathing",
+        "progressiveRelaxation": "[ZH] Progressive Relaxation",
+        "positiveThinking": "[ZH] Positive Thinking",
+        "seekHelp": "[ZH] Seek Help"
+      },
+      "prevention": {
+        "title": "[ZH] Prevention Measures",
+        "identifyTriggers": "[ZH] Identify Stress Triggers",
+        "timeManagement": "[ZH] Time Management",
+        "boundarySetting": "[ZH] Set Boundaries",
+        "selfCare": "[ZH] Self-Care"
+      }
+    },
+    "common": {
+      "loading": "[ZH] Loading...",
+      "error": "[ZH] An error occurred",
+      "retry": "[ZH] Retry",
+      "success": "[ZH] Success",
+      "failed": "[ZH] Failed",
+      "saved": "[ZH] Saved",
+      "deleted": "[ZH] Deleted",
+      "updated": "[ZH] Updated",
+      "created": "[ZH] Created",
+      "noData": "[ZH] No data available",
+      "tryAgain": "[ZH] Please try again",
+      "contactSupport": "[ZH] Contact Support",
+      "importantNote": "[ZH] Important Note",
+      "medicalDisclaimer": "[ZH] This website content is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional for any health concerns.",
+      "showDetails": "[ZH] Show Details",
+      "hideDetails": "[ZH] Hide Details",
+      "learnMore": "[ZH] Learn More",
+      "breadcrumb": {
+        "home": "[ZH] Home"
+      }
+    },
+    "neuroendocrine": {
+      "title": "[ZH] Neuroendocrine Cascade",
+      "subtitle": "[ZH] Understanding how stress affects menstruation through complex physiological mechanisms",
+      "detailedExplanation": "[ZH] Detailed Explanation",
+      "acute": {
+        "title": "[ZH] Acute Stress Response",
+        "description": "[ZH] Short-term stress activates HPA axis, releases cortisol, usually recovers quickly"
+      },
+      "chronic": {
+        "title": "[ZH] Chronic Stress Impact",
+        "description": "[ZH] Long-term stress causes persistent cortisol elevation, may severely affect menstrual cycle"
+      },
+      "keyInsight": "[ZH] Key Insight",
+      "keyInsightDescription": "[ZH] Understanding these mechanisms helps better manage stress impact on menstruation"
+    },
+    "evolutionary": {
+      "title": "[ZH] Evolutionary Biology Perspective",
+      "subtitle": "[ZH] Why does stress affect menstruation? The ancient wisdom of the body",
+      "mainTitle": "[ZH] Body's Survival Wisdom",
+      "mainDescription": "[ZH] Stress effects on menstruation are actually protective mechanisms",
+      "storyTitle": "[ZH] Ancient Protection Mechanism",
+      "storyContent": "[ZH] When our ancestors faced life threats, the body would automatically judge that it's not a good time for reproduction and pause ovulation and menstruation.",
+      "modernTitle": "[ZH] Modern Misinterpretation",
+      "modernContent": "[ZH] Work stress, relationship issues and other psychological pressures are misinterpreted by the body as survival threats, continuously activating ancient systems.",
+      "realizationTitle": "[ZH] Key Realizations",
+      "realization1": "[ZH] Your body's response is not a malfunction",
+      "realization2": "[ZH] It's executing an ancient protection program",
+      "realization3": "[ZH] Understanding this can reduce self-blame and anxiety",
+      "practicalTitle": "[ZH] Practical Advice",
+      "practicalDescription": "[ZH] When you feel stress affecting your menstruation, try telling yourself:",
+      "selfTalk": "[ZH] My body is protecting me, this is a normal physiological response. Now I need to tell it: the crisis is over, you can relax.",
+      "action1": {
+        "title": "[ZH] Cognitive Reframing",
+        "description": "[ZH] View stress response as protection rather than problem"
+      },
+      "action2": {
+        "title": "[ZH] Relaxation Training",
+        "description": "[ZH] Tell your body the crisis is over through relaxation techniques"
+      },
+      "detailsTitle": "[ZH] Deeper Understanding",
+      "detail1": {
+        "title": "[ZH] Survival Advantage",
+        "content": "[ZH] This mechanism helped our ancestors survive in crises"
+      },
+      "detail2": {
+        "title": "[ZH] Modern Adaptation",
+        "content": "[ZH] Need to learn to distinguish real threats from psychological stress"
+      },
+      "detail3": {
+        "title": "[ZH] Self-Compassion",
+        "content": "[ZH] Maintain understanding and compassion for body's responses"
+      }
+    },
+    "stressTypes": {
+      "comparison": {
+        "title": "[ZH] Acute vs Chronic Stress",
+        "subtitle": "[ZH] Understanding characteristics and impacts of different stress types",
+        "keyTakeaway": "[ZH] Key Takeaway",
+        "keyTakeawayContent": "[ZH] Acute stress is usually manageable, chronic stress requires systematic intervention.",
+        "action1": {
+          "title": "[ZH] Acute Stress Management",
+          "description": "[ZH] Use immediate relief techniques like deep breathing and short breaks"
+        },
+        "action2": {
+          "title": "[ZH] Chronic Stress Intervention",
+          "description": "[ZH] Requires long-term strategies and possibly professional help"
+        }
+      }
+    },
+    "assessment": {
+      "title": "[ZH] Stress Assessment",
+      "subtitle": "[ZH] Understand your stress condition through scientific assessment",
+      "instructions": "[ZH] Assessment Instructions",
+      "instructionsDetail": "[ZH] Please answer the following questions honestly based on your actual situation. This will help us provide you with personalized stress management recommendations.",
+      "questionsPreview": {
+        "title": "[ZH] Assessment Questions Preview"
+      },
+      "questions": {
+        "q1": {
+          "question": "[ZH] Have you frequently felt anxious or tense recently?",
+          "options": [
+            "[ZH] Never",
+            "[ZH] Occasionally",
+            "[ZH] Often",
+            "[ZH] Always"
+          ]
+        },
+        "q2": {
+          "question": "[ZH] How is your sleep quality?",
+          "options": [
+            "[ZH] Very Good",
+            "[ZH] Good",
+            "[ZH] Poor",
+            "[ZH] Very Poor"
+          ]
+        },
+        "q3": {
+          "question": "[ZH] Do you often feel tired or lack energy?",
+          "options": [
+            "[ZH] Never",
+            "[ZH] Occasionally",
+            "[ZH] Often",
+            "[ZH] Always"
+          ]
+        },
+        "q4": {
+          "question": "[ZH] Do you easily feel irritable or angry?",
+          "options": [
+            "[ZH] Never",
+            "[ZH] Occasionally",
+            "[ZH] Often",
+            "[ZH] Always"
+          ]
+        },
+        "q5": {
+          "question": "[ZH] Do you often worry about period-related issues?",
+          "options": [
+            "[ZH] Never",
+            "[ZH] Occasionally",
+            "[ZH] Often",
+            "[ZH] Always"
+          ]
+        }
+      },
+      "benefits": {
+        "title": "[ZH] Benefits of Assessment",
+        "personalized": {
+          "title": "[ZH] Personalized Recommendations",
+          "description": "[ZH] Provide customized stress management strategies based on your answers"
+        },
+        "tracking": {
+          "title": "[ZH] Progress Tracking",
+          "description": "[ZH] Record your stress management progress and improvements"
+        },
+        "insights": {
+          "title": "[ZH] Deep Insights",
+          "description": "[ZH] Understand how stress affects your menstruation and overall health"
+        }
+      },
+      "keywords": "压力评估,经期压力,压力管理,经期应激,心理健康评估"
+    },
+    "techniques": {
+      "title": "[ZH] Relaxation Techniques",
+      "subtitle": "[ZH] Scientific relaxation methods to help you relieve stress",
+      "benefits": {
+        "title": "[ZH] Benefits"
+      },
+      "breathing": {
+        "title": "[ZH] Breathing Exercise",
+        "description": "[ZH] Relax body and mind through breathing regulation",
+        "start": "[ZH] Start Exercise",
+        "instructions": "[ZH] Exercise Instructions",
+        "instructionsDetail": "[ZH] Follow audio guidance for deep breathing exercises, practice for 5-10 minutes each time.",
+        "benefits": {
+          "benefit1": "[ZH] Immediate relief from tension",
+          "benefit2": "[ZH] Lower heart rate and blood pressure",
+          "benefit3": "[ZH] Improve sleep quality"
+        }
+      },
+      "meditation": {
+        "title": "[ZH] Meditation Practice",
+        "description": "[ZH] Achieve inner peace through meditation",
+        "start": "[ZH] Start Meditation",
+        "instructions": "[ZH] Meditation Instructions",
+        "instructionsDetail": "[ZH] Follow guided audio for meditation practice, start with 5 minutes and gradually extend.",
+        "benefits": {
+          "benefit1": "[ZH] Reduce anxiety and depression",
+          "benefit2": "[ZH] Improve concentration",
+          "benefit3": "[ZH] Enhance emotional regulation"
+        }
+      },
+      "exercise": {
+        "title": "[ZH] Light Exercise",
+        "description": "[ZH] Gentle exercises suitable for menstrual periods",
+        "start": "[ZH] Start Exercise",
+        "instructions": "[ZH] Exercise Instructions",
+        "instructionsDetail": "[ZH] Choose gentle exercises suitable for menstrual periods, such as yoga, walking or stretching.",
+        "benefits": {
+          "benefit1": "[ZH] Release endorphins",
+          "benefit2": "[ZH] Improve blood circulation",
+          "benefit3": "[ZH] Relieve muscle tension"
+        }
+      },
+      "music": {
+        "title": "[ZH] Music Therapy",
+        "description": "[ZH] Relax your mood through music",
+        "start": "[ZH] Start Listening",
+        "instructions": "[ZH] Music Instructions",
+        "instructionsDetail": "[ZH] Choose soothing music, close your eyes and listen for 10-15 minutes.",
+        "benefits": {
+          "benefit1": "[ZH] Activate parasympathetic nervous system",
+          "benefit2": "[ZH] Reduce cortisol secretion",
+          "benefit3": "[ZH] Enhance overall well-being"
+        }
+      },
+      "quickTips": {
+        "title": "[ZH] Quick Tips",
+        "timing": {
+          "title": "[ZH] Best Timing",
+          "tip1": "[ZH] Practice after waking up or before bed",
+          "tip2": "[ZH] Preventive practice before stress peaks",
+          "tip3": "[ZH] Increase practice frequency one week before period",
+          "tip4": "[ZH] Brief practice during work breaks"
+        },
+        "precautions": {
+          "title": "[ZH] Precautions",
+          "tip1": "[ZH] Choose a quiet and comfortable environment",
+          "tip2": "[ZH] Wear loose and comfortable clothing",
+          "tip3": "[ZH] Avoid practicing immediately after meals",
+          "tip4": "[ZH] Stop immediately if you feel unwell"
+        }
+      }
+    },
+    "progress": {
+      "title": "进度跟踪",
+      "subtitle": "记录你的压力管理进展",
+      "keywords": "压力管理进度,压力追踪,情绪追踪,压力缓解技巧,压力监测,心理健康追踪",
+      "today": "今天",
+      "week": "本周",
+      "month": "本月",
+      "addEntry": {
+        "title": "添加条目",
+        "subtitle": "记录你今天的压力状况和所使用的方法"
+      },
+      "features": {
+        "stressLevel": {
+          "title": "压力水平",
+          "description": "1-10分制评估"
+        },
+        "techniquesUsed": {
+          "title": "所用技巧",
+          "description": "记录已练习的方法"
+        },
+        "moodRating": {
+          "title": "情绪评分",
+          "description": "整体情绪状态"
+        },
+        "notes": {
+          "title": "笔记",
+          "description": "记录特殊感受"
+        }
+      },
+      "viewHistory": {
+        "title": "查看历史",
+        "today": {
+          "description": "查看今天的记录"
+        },
+        "week": {
+          "description": "查看本周的趋势"
+        },
+        "month": {
+          "description": "查看月度统计"
+        }
+      },
+      "sampleData": {
+        "title": "数据预览",
+        "averageStress": "平均压力水平",
+        "techniquesUsed": "技巧使用率",
+        "averageMood": "平均情绪评分"
+      },
+      "benefits": {
+        "title": "追踪的好处",
+        "insights": {
+          "title": "深度洞察",
+          "description": "了解你的压力模式和触发因素"
+        },
+        "trends": {
+          "title": "趋势分析",
+          "description": "发现需要改进和关注的领域"
+        },
+        "motivation": {
+          "title": "持续动力",
+          "description": "看到进展以增强坚持性"
+        }
+      }
+    },
+    "quantifiedImpact": {
+      "title": "[ZH] Quantified Impact Data",
+      "subtitle": "[ZH] Stress impact data based on scientific research",
+      "metrics": {
+        "anxiety": {
+          "title": "[ZH] Anxiety and Tension"
+        },
+        "depression": {
+          "title": "[ZH] Depression"
+        },
+        "irritability": {
+          "title": "[ZH] Irritability"
+        }
+      },
+      "emotionalImpact": {
+        "title": "[ZH] Emotional Impact",
+        "subtitle": "[ZH] Symptom severity under high stress",
+        "lowStress": "[ZH] Low Stress State",
+        "highStress": "[ZH] High Stress State",
+        "details": {
+          "title": "[ZH] Detailed Description",
+          "anxiety": "[ZH] Anxiety symptoms significantly worsen under high stress, affecting daily life and work performance.",
+          "depression": "[ZH] Depression is more likely to occur in high-stress environments and needs timely attention.",
+          "irritability": "[ZH] Irritability and mood swings are most obvious under high stress, affecting relationships."
+        }
+      },
+      "menstrualImpact": {
+        "title": "[ZH] Menstrual Impact",
+        "cycleLength": {
+          "title": "[ZH] Cycle Length Changes",
+          "lowStress": "[ZH] Regular cycle (28±3 days)",
+          "highStress": "[ZH] Irregular or prolonged cycle"
+        },
+        "painIntensity": {
+          "title": "[ZH] Pain Intensity",
+          "lowStress": "[ZH] Mild discomfort",
+          "highStress": "[ZH] Increased pain"
+        },
+        "flowChanges": {
+          "title": "[ZH] Flow Changes",
+          "lowStress": "[ZH] Normal flow",
+          "highStress": "[ZH] Abnormal flow"
+        },
+        "lowStress": "[ZH] Low Stress",
+        "highStress": "[ZH] High Stress"
+      },
+      "keyInsights": {
+        "title": "[ZH] Key Insights",
+        "insight1": {
+          "title": "[ZH] Stress Accumulation Effect",
+          "description": "[ZH] Long-term stress has greater impact on menstruation than short-term stress"
+        },
+        "insight2": {
+          "title": "[ZH] Individual Differences",
+          "description": "[ZH] Everyone has different sensitivity to stress"
+        },
+        "insight3": {
+          "title": "[ZH] Reversibility",
+          "description": "[ZH] Most stress effects can recover after stress relief"
+        },
+        "insight4": {
+          "title": "[ZH] Importance of Prevention",
+          "description": "[ZH] Early stress management is more effective than later treatment"
+        }
+      },
+      "actionItems": {
+        "immediate": {
+          "title": "[ZH] Immediate Action",
+          "description": "[ZH] Identify stress sources and take relief measures"
+        },
+        "longterm": {
+          "title": "[ZH] Long-term Strategy",
+          "description": "[ZH] Establish a continuous stress management system"
+        }
+      }
+    }
+  },
   "medical": "医疗",
   "medicalAdvice": "医疗建议",
   "doctor": "医生",
@@ -8951,7 +9404,198 @@
       "health-education": "健康教育",
       "理解与教育": "理解与教育",
       "即时缓解方案": "即时缓解方案",
-      "自然疗法与平时调理": "自然疗法与平时调理"
+      "自然疗法与平时调理": "自然疗法与平时调理",
+      "快速缓解": "快速缓解",
+      "即时缓解": "即时缓解",
+      "痛经": "痛经",
+      "痉挛": "痉挛",
+      "紧急技巧": "紧急技巧",
+      "立即缓解": "立即缓解",
+      "抗炎饮食": "抗炎饮食",
+      "营养": "营养",
+      "经期饮食": "经期饮食",
+      "自然疗法": "自然疗法",
+      "月经健康": "月经健康",
+      "经期食物": "经期食物",
+      "避孕": "避孕",
+      "IUD": "IUD",
+      "宫内节育器": "宫内节育器",
+      "女性健康": "女性健康",
+      "生殖健康": "生殖健康",
+      "医学诊断": "医学诊断",
+      "药物治疗": "药物治疗",
+      "妇科疾病": "妇科疾病",
+      "前列腺素": "前列腺素",
+      "继发性痛经": "继发性痛经",
+      "NSAIDs": "NSAIDs",
+      "激素治疗": "激素治疗",
+      "睡眠质量": "睡眠质量",
+      "21天计划": "21天计划",
+      "睡眠卫生": "睡眠卫生",
+      "激素睡眠": "激素睡眠",
+      "睡眠监测": "睡眠监测",
+      "痛经管理": "痛经管理",
+      "职业压力": "职业压力",
+      "生活方式": "生活方式",
+      "环境因素": "环境因素",
+      "健康管理": "健康管理",
+      "草药茶": "草药茶",
+      "痛经缓解": "痛经缓解",
+      "传统医学": "传统医学",
+      "植物疗法": "植物疗法",
+      "精油疗法": "精油疗法",
+      "芳香疗法": "芳香疗法",
+      "生姜疗法": "生姜疗法",
+      "草药治疗": "草药治疗",
+      "科学方法": "科学方法",
+      "阿育吠陀": "阿育吠陀",
+      "中医": "中医",
+      "热敷疗法": "热敷疗法",
+      "物理疗法": "物理疗法",
+      "温度控制": "温度控制",
+      "预防调理": "预防调理",
+      "科学配方": "科学配方",
+      "心理健康": "心理健康",
+      "压力缓解": "压力缓解",
+      "心理疏导": "心理疏导",
+      "认知行为疗法": "认知行为疗法",
+      "正念疗法": "正念疗法",
+      "自主神经检测": "自主神经检测",
+      "快速缓解技巧": "快速缓解技巧",
+      "家庭护理": "家庭护理",
+      "穴位按压": "穴位按压",
+      "营养调理": "营养调理",
+      "居家治疗": "居家治疗",
+      "长期健康": "长期健康",
+      "经期管理": "经期管理",
+      "预防保健": "预防保健",
+      "可持续发展": "可持续发展",
+      "健康习惯": "健康习惯",
+      "镁补充": "镁补充",
+      "肠道健康": "肠道健康",
+      "雌激素代谢": "雌激素代谢",
+      "益生菌": "益生菌",
+      "饮食指导": "饮食指导",
+      "就医指南": "就医指南",
+      "治疗选择": "治疗选择",
+      "个性化医疗": "个性化医疗",
+      "腰部护理": "腰部护理",
+      "经期腰痛": "经期腰痛",
+      "疼痛管理": "疼痛管理",
+      "医学指导": "医学指导",
+      "经期恶心": "经期恶心",
+      "痛经呕吐": "痛经呕吐",
+      "应急处理": "应急处理",
+      "痛经伴随症状": "痛经伴随症状",
+      "经期腹胀": "经期腹胀",
+      "经期呕吐": "经期呕吐",
+      "经期发烧": "经期发烧",
+      "症状矩阵": "症状矩阵",
+      "危险信号": "危险信号",
+      "背痛": "背痛",
+      "疼痛机制": "疼痛机制",
+      "神经传导": "神经传导",
+      "症状管理": "症状管理",
+      "牵涉痛": "牵涉痛",
+      "自然缓解": "自然缓解",
+      "应急药物": "应急药物",
+      "药物携带": "药物携带",
+      "用药安全": "用药安全",
+      "紧急处理": "紧急处理",
+      "痛经FAQ": "痛经FAQ",
+      "专家解答": "专家解答",
+      "痛经机制": "痛经机制",
+      "疼痛评估": "疼痛评估",
+      "医学科普": "医学科普",
+      "循证医学": "循证医学",
+      "研究进展": "研究进展",
+      "新药开发": "新药开发",
+      "病理机制": "病理机制",
+      "临床试验": "临床试验",
+      "痛经鉴别": "痛经鉴别",
+      "腹痛诊断": "腹痛诊断",
+      "预防性护理": "预防性护理",
+      "全周期管理": "全周期管理",
+      "个体化方案": "个体化方案",
+      "症状监测": "症状监测",
+      "经期睡眠": "经期睡眠",
+      "睡眠改善": "睡眠改善",
+      "激素影响": "激素影响",
+      "睡眠环境": "睡眠环境",
+      "压力管理": "压力管理",
+      "职场健康": "职场健康",
+      "心理调节": "心理调节",
+      "HPA轴": "HPA轴",
+      "皮质醇管理": "皮质醇管理",
+      "热疗": "热疗",
+      "冷疗": "冷疗",
+      "按摩疗法": "按摩疗法",
+      "瑜伽": "瑜伽",
+      "针灸": "针灸",
+      "艾灸": "艾灸",
+      "草药疗法": "草药疗法",
+      "营养补充": "营养补充",
+      "呼吸法": "呼吸法",
+      "冥想": "冥想",
+      "安全用药": "安全用药",
+      "剂量计算": "剂量计算",
+      "医学专业": "医学专业",
+      "营养饮食": "营养饮食",
+      "经期护理": "经期护理",
+      "食疗养生": "食疗养生",
+      "健康食谱": "健康食谱",
+      "经痛模拟器": "经痛模拟器",
+      "疼痛科学": "疼痛科学",
+      "医学设备": "医学设备",
+      "疼痛教育": "疼痛教育",
+      "性别理解": "性别理解",
+      "经期追踪": "经期追踪",
+      "健康档案": "健康档案",
+      "症状记录": "症状记录",
+      "个性化管理": "个性化管理",
+      "数据分析": "数据分析",
+      "阅读推荐": "阅读推荐",
+      "经期教育": "经期教育",
+      "激素原理": "激素原理",
+      "子宫内膜异位症": "子宫内膜异位症",
+      "IUD痛经": "IUD痛经",
+      "更年期痛经": "更年期痛经",
+      "疼痛识别": "疼痛识别",
+      "个性化治疗": "个性化治疗",
+      "月经周期": "月经周期",
+      "激素": "激素",
+      "科普教育": "科普教育",
+      "医疗保险": "医疗保险",
+      "ACA政策": "ACA政策",
+      "Medicare改革": "Medicare改革",
+      "保险理赔": "保险理赔",
+      "医疗费用": "医疗费用",
+      "痛经急诊": "痛经急诊",
+      "何时就医": "何时就医",
+      "医疗急诊": "医疗急诊",
+      "经期警示": "经期警示",
+      "紧急症状": "紧急症状",
+      "就医指导": "就医指导",
+      "经期健康": "经期健康",
+      "警示信号": "警示信号",
+      "生命周期": "生命周期",
+      "年龄特点": "年龄特点",
+      "科学管理": "科学管理",
+      "全程指导": "全程指导",
+      "北美指南": "北美指南",
+      "站桩": "站桩",
+      "八段锦": "八段锦",
+      "太极拳": "太极拳",
+      "传统功法": "传统功法",
+      "科学研究": "科学研究",
+      "中医养生": "中医养生",
+      "气血调理": "气血调理",
+      "避孕指导": "避孕指导",
+      "医学知识与教育": "医学知识与教育",
+      "营养与健康": "营养与健康",
+      "计划准备": "计划准备",
+      "健康管理与自我护理": "健康管理与自我护理",
+      "传统疗法与现代应用": "传统疗法与现代应用"
     }
   }
 }

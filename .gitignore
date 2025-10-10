@@ -184,6 +184,7 @@ messages/*.backup*
 scripts/metadata-fix-commands.json
 # 压力管理相关文件（暂不上传GitHub）
 app/[locale]/stress-management/
+app/[locale]/interactive-tools/stress-management/
 components/stress-management/
 scripts/detect-stress-management-hardcode.js
 stress-management-translation-keys.json

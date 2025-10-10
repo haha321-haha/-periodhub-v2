@@ -8952,6 +8952,12 @@
       "update": "更新通知",
       "alert": "警报通知"
     },
+    "notificationChannels": {
+      "browser": "浏览器通知",
+      "email": "邮件通知",
+      "sms": "短信通知",
+      "push": "推送通知"
+    },
     "themeConfig": {
       "light": {
         "name": "浅色主题",

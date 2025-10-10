@@ -2510,6 +2510,12 @@
       "update": "Update Notifications",
       "alert": "Alert Notifications"
     },
+    "notificationChannels": {
+      "browser": "Browser Notifications",
+      "email": "Email Notifications",
+      "sms": "SMS Notifications",
+      "push": "Push Notifications"
+    },
     "themeConfig": {
       "light": {
         "name": "Light Theme",

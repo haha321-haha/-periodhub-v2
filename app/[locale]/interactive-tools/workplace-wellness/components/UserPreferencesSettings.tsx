@@ -443,7 +443,7 @@ export default function UserPreferencesSettings() {
                           className="flex items-center justify-between"
                         >
                           <span className="text-sm text-neutral-700">
-                            {t(`userPreferences.${channel}`) || channel}
+                            {t(`notificationChannels.${channel}`) || channel}
                           </span>
                           <button
                             onClick={() =>

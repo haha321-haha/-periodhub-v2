@@ -370,7 +370,24 @@
     },
     "painTracker": {
       "title": "Pain Tracker",
-      "description": "Record and track your menstrual pain, understand pain patterns, and find the most effective relief methods"
+      "description": "Record and track your menstrual pain, understand pain patterns, and find the most effective relief methods",
+      "toolTitle": "疼痛记录",
+      "toolDescription": "记录您今天的疼痛情况，帮助我们更好地了解您的疼痛模式。",
+      "painLevel": "疼痛程度（1-10）",
+      "painLocation": "疼痛位置",
+      "painLocationPlaceholder": "请选择位置",
+      "painType": "疼痛类型",
+      "painTypePlaceholder": "请选择类型",
+      "lowerAbdomen": "下腹部",
+      "lowerBack": "腰部",
+      "thighs": "大腿",
+      "other": "其他",
+      "cramping": "绞痛",
+      "dullPain": "钝痛",
+      "sharpPain": "刺痛",
+      "recording": "记录中...",
+      "recordPain": "记录疼痛",
+      "cta": "[EN] Start Tracking"
     },
     "breadcrumb": {
       "scenarioSolutions": "Scenario Solutions",
@@ -392,7 +409,8 @@
       "communicationGuide": "Communication Guide",
       "medicalCare": "When to Seek Medical Help",
       "globalPerspectives": "Global Perspectives",
-      "nutritionGenerator": "Nutrition Recommendation Generator"
+      "nutritionGenerator": "Nutrition Recommendation Generator",
+      "emergencyKit": "应急包"
     },
     "p2": {
       "title": "P2 Phase: Advanced Features",
@@ -703,6 +721,98 @@
         "retakeTest": "Retake Test",
         "previous": "Previous",
         "next": "Next"
+      },
+      "painScale": {
+        "title": "疼痛程度：",
+        "reference": "疼痛程度参考",
+        "levels": {
+          "none": "无痛",
+          "mild": "轻微",
+          "moderate": "中度",
+          "severe": "严重",
+          "extreme": "极重"
+        },
+        "descriptions": {
+          "0-2": "无痛或轻微不适",
+          "3-4": "轻度疼痛，可忍受",
+          "5-7": "中度疼痛，影响活动",
+          "8-10": "重度疼痛，难以忍受"
+        }
+      },
+      "progress": {
+        "questionOf": "第 {current} 题，共 {total} 题",
+        "complete": "完成"
+      },
+      "result": {
+        "title": "测试结果",
+        "subtitle": "您的中医体质类型分析",
+        "match": "匹配度",
+        "constitutionFeatures": "体质特征",
+        "commonSymptoms": "常见症状",
+        "menstrualFeatures": "月经特点"
+      },
+      "recommendations": {
+        "acupoints": {
+          "title": "穴位调理建议",
+          "primaryAcupoints": "主要穴位",
+          "location": "位置：",
+          "function": "功效：",
+          "method": "方法：",
+          "guidelines": "按摩指导",
+          "technique": "手法：",
+          "frequency": "频率：",
+          "duration": "时长："
+        },
+        "dietary": {
+          "title": "饮食调理建议",
+          "beneficialFoods": "适宜食物",
+          "foodsToAvoid": "避免食物",
+          "dietaryPrinciples": "饮食原则"
+        },
+        "lifestyle": {
+          "title": "场景化生活建议",
+          "description": "根据您的体质特点，为不同生活场景提供个性化建议",
+          "reminder": "温馨提醒：",
+          "reminderText": "以上建议需要持续实践才能看到效果，建议结合专业医师指导。"
+        },
+        "menstrualPain": {
+          "title": "痛经专项建议",
+          "acupointTherapy": "穴位疗法",
+          "lifestyleAdjustments": "生活调理"
+        }
+      },
+      "messages": {
+        "testComplete": "测试完成",
+        "testCompleteDesc": "您的个性化体质分析已生成",
+        "testFailed": "测试失败",
+        "testFailedDesc": "无法生成测试结果，请重试"
+      },
+      "emergencyKit": {
+        "title": "个性化应急包推荐",
+        "description": "根据您的体质特点，为您推荐专属的应急包物品清单。提前准备，让经期更从容。",
+        "priority": {
+          "high": "必需",
+          "medium": "推荐",
+          "low": "可选"
+        },
+        "packingTips": "📦 打包建议：",
+        "packingAdvice": "优先携带\"必需\"物品，根据外出时间和场景选择\"推荐\"和\"可选\"物品。建议准备一个专用的小包，方便随时取用。"
+      },
+      "articles": {
+        "title": "为您推荐的健康文章",
+        "readMore": "阅读全文"
+      },
+      "communication": {
+        "title": "沟通模板助手",
+        "description": "经期不适时，与身边的人沟通很重要。这些模板可以帮助你更好地表达需求和寻求理解。",
+        "styles": {
+          "intimate": "亲密",
+          "casual": "随意",
+          "formal": "正式"
+        },
+        "copyText": "复制文本",
+        "usageTips": "💡 使用提示：",
+        "usageAdvice": "这些模板仅供参考，请根据你的实际情况和关系亲密度进行调整。真诚的沟通是建立理解的关键。"
       }
     },
     "symptomAssessmentTool": {
@@ -1010,7 +1120,10 @@
         "totalRecords": "Total Records",
         "recordsInRange": "Records in Range",
         "averagePain": "Average Pain",
-        "noRecords": "No Records"
+        "noRecords": "No Records",
+        "title": "统计摘要",
+        "averagePainLevel": "平均疼痛程度",
+        "highestPainLevel": "最高疼痛程度"
       },
       "painLevels": {
         "mild": "Mild",
@@ -1100,6 +1213,136 @@
         "simplified": "Simplified Assessment",
         "detailed": "Detailed Assessment",
         "medical": "Medical Professional Assessment"
+      },
+      "messages": {
+        "assessmentComplete": "评估完成",
+        "assessmentCompleteDesc": "您的症状评估已完成。请查看结果和建议。",
+        "assessmentFailed": "评估失败",
+        "assessmentFailedDesc": "评估过程中发生错误。请重试。",
+        "loading": "正在加载...",
+        "calculating": "正在计算...",
+        "generatingRecommendations": "正在生成建议..."
+      },
+      "severity": {
+        "mild": "轻度",
+        "moderate": "中度",
+        "severe": "重度",
+        "workplace": "职场影响",
+        "verySevere": "极重度"
+      },
+      "priority": {
+        "high": "高优先级",
+        "medium": "中等优先级",
+        "low": "低优先级"
+      },
+      "questions": {
+        "painLevel": "疼痛程度",
+        "painDuration": "疼痛持续时间",
+        "painLocation": "疼痛位置",
+        "accompanyingSymptoms": "伴随症状",
+        "reliefPreference": "缓解偏好",
+        "cyclePattern": "周期模式",
+        "workplaceImpact": "职场影响",
+        "sleepQuality": "睡眠质量",
+        "moodChanges": "情绪变化",
+        "energyLevel": "精力水平"
+      },
+      "options": {
+        "mild": "轻度 (1-3/10)",
+        "moderate": "中度 (4-6/10)",
+        "severe": "重度 (7-8/10)",
+        "verySevere": "极重度 (9-10/10)",
+        "hours": "持续几个小时",
+        "days": "持续1-2天",
+        "long": "持续3天或更长时间",
+        "variable": "疼痛不可预测",
+        "regular": "规律",
+        "irregular": "不规律",
+        "yes": "是",
+        "no": "否",
+        "sometimes": "有时"
+      },
+      "progress": {
+        "questionOf": "第 {current} 题，共 {total} 题",
+        "step": "步骤",
+        "completed": "已完成",
+        "remaining": "剩余"
+      },
+      "navigation": {
+        "previous": "上一步",
+        "next": "下一步",
+        "skip": "跳过",
+        "back": "返回",
+        "continue": "继续",
+        "finish": "完成"
+      },
+      "buttons": {
+        "next": "下一步",
+        "previous": "上一步",
+        "submit": "提交评估",
+        "restart": "重新开始",
+        "viewResults": "查看结果",
+        "downloadReport": "下载报告",
+        "shareResults": "分享结果"
+      },
+      "results": {
+        "title": "评估结果",
+        "score": "疼痛评分",
+        "severity": "严重程度",
+        "recommendations": "个性化建议",
+        "immediate": "即时缓解",
+        "longTerm": "长期管理",
+        "workplace": "职场支持",
+        "medical": "医疗建议"
+      },
+      "result": {
+        "title": "评估结果",
+        "yourScore": "您的评分",
+        "severity": "严重程度",
+        "riskLevel": "风险等级",
+        "summary": "总结",
+        "recommendations": "建议",
+        "timeframe": "时间框架",
+        "actionSteps": "行动步骤",
+        "retakeAssessment": "重新评估",
+        "saveResults": "保存结果",
+        "settings": "设置",
+        "workplaceSupport": "职场支持建议",
+        "mediumPriority": "中等优先级",
+        "highPriority": "高优先级",
+        "lowPriority": "低优先级",
+        "immediate": "即时",
+        "shortTerm": "短期",
+        "longTerm": "长期",
+        "workplaceImpact": "职场影响",
+        "personalCare": "个人护理",
+        "medicalAdvice": "医疗建议"
+      },
+      "recommendations": {
+        "workplaceSupport": {
+          "title": "职场支持建议",
+          "description": "您的症状严重影响了您的工作。寻求支持非常重要。",
+          "action1": "首先记录症状对工作的影响。将我们的完整报告作为个人工具。",
+          "action2": "研究您公司现有的病假和弹性工作政策。",
+          "action3": "与HR部门讨论合理的住宿安排。",
+          "timeframe": "建议实施"
+        },
+        "personalCare": {
+          "title": "个人护理建议",
+          "description": "关注您的个人健康和舒适度。",
+          "action1": "建立规律的作息时间。",
+          "action2": "练习放松技巧，如深呼吸或冥想。",
+          "action3": "保持健康的饮食习惯。",
+          "timeframe": "建议实施"
+        },
+        "medicalAdvice": {
+          "title": "医疗建议",
+          "description": "考虑寻求专业医疗建议。",
+          "action1": "预约妇科医生进行详细检查。",
+          "action2": "讨论疼痛管理方案。",
+          "action3": "了解可能的治疗方案。",
+          "timeframe": "建议实施"
+        }
       }
     },
     "sections": {
@@ -1107,6 +1350,208 @@
       "relatedArticles": "Related Health Articles",
       "relatedTools": "Related Tools",
       "scenarioSolutions": "Scenario Solutions"
+    },
+    "common": {
+      "loading": "加载中...",
+      "error": "发生错误，请重试",
+      "submit": "提交",
+      "cancel": "取消",
+      "save": "保存",
+      "reset": "重置",
+      "back": "返回",
+      "next": "下一步",
+      "previous": "上一步",
+      "close": "关闭",
+      "startNow": "立即开始",
+      "tryNow": "立即尝试",
+      "learnMore": "了解更多"
+    },
+    "navigation": {
+      "backToTools": "返回工具列表",
+      "toolsTitle": "互动工具",
+      "toolsDescription": "专业的经期健康管理工具，帮助您更好地了解和管理自己的健康状况"
+    },
+    "categories": {
+      "assessment": "评估工具",
+      "tracking": "追踪工具",
+      "constitutionAssessment": "体质评估",
+      "healthAssessment": "健康评估"
+    },
+    "difficulty": {
+      "easy": "简单",
+      "medium": "中等",
+      "hard": "困难"
+    },
+    "estimatedTime": {
+      "5to10min": "5-10分钟",
+      "2to3minDaily": "每日2-3分钟",
+      "5to8min": "5-8分钟",
+      "3to5min": "3-5分钟"
+    },
+    "medicalDisclaimer": {
+      "title": "医疗免责声明",
+      "text": "此工具仅供参考，不能替代专业医疗建议、诊断或治疗。如有健康问题，请咨询医疗专业人士。",
+      "shortText": "⚠️ 本工具仅供参考，不能替代专业医疗诊断。如有疑虑，请咨询医生。"
+    },
+    "breathingExercise": {
+      "title": "即时呼吸练习工具",
+      "description": "基于科学验证的4-7-8呼吸法，通过调节神经系统快速缓解疼痛。无需下载，立即开始练习。",
+      "usageTips": {
+        "title": "使用建议：",
+        "bestTiming": {
+          "title": "最佳时机：",
+          "items": [
+            "疼痛刚开始时",
+            "感到焦虑紧张时",
+            "睡前放松时"
+          ]
+        },
+        "precautions": {
+          "title": "注意事项：",
+          "items": [
+            "找舒适的坐位或躺位",
+            "初学者3-4个循环即可",
+            "如感到头晕请停止练习"
+          ]
+        }
+      }
+    },
+    "title": "互动工具",
+    "workplaceAssessment": {
+      "metaTitle": "职场影响评估 - 专业痛经对工作影响分析工具 | Period Hub",
+      "title": "职场影响评估",
+      "subtitle": "了解您的症状如何影响工作，有助于找到有效的支持措施。",
+      "startButton": "开始评估",
+      "features": {
+        "assessment": "专业评估",
+        "assessmentDesc": "4个专业问题，全面评估工作影响",
+        "quick": "快速便捷",
+        "quickDesc": "仅需3-5分钟，获得专业分析",
+        "personalized": "个性化建议",
+        "personalizedDesc": "基于评估结果提供针对性建议"
+      },
+      "resultsTitle": "评估结果",
+      "resultsSubtitle": "基于您的回答，我们为您生成了以下分析结果",
+      "recommendationsTitle": "个性化建议",
+      "restartButton": "重新评估",
+      "questions": {
+        "concentration": {
+          "title": "您的痛经如何影响您在工作或学习时的注意力？",
+          "options": {
+            "none": "对我的注意力没有影响。",
+            "slight": "会稍微分散注意力，但我能应付。",
+            "difficult": "让我很难专注于任务。",
+            "impossible": "几乎无法集中注意力或保持工作效率。"
+          }
+        },
+        "absenteeism": {
+          "title": "您是否曾因经期症状而不得不缺勤、缺课或错过重要活动？",
+          "options": {
+            "never": "从未",
+            "rarely": "很少（例如，每年一次或更少）",
+            "sometimes": "有时（每年几次）",
+            "frequently": "经常（在大多数或所有周期中）"
+          }
+        },
+        "communication": {
+          "title": "如果因痛经需要向您的上司提出调整请求（例如，短暂休息、在家工作），您的自在程度如何？",
+          "options": {
+            "comfortable": "非常自在，我相信他们会支持。",
+            "hesitant": "有些犹豫，不确定他们会作何反应。",
+            "uncomfortable": "非常不自在，我会避免进行这种沟通。",
+            "na": "不适用 / 我没有上司"
+          }
+        },
+        "support": {
+          "title": "您认为哪些支持措施对您最有帮助？（可多选）",
+          "options": {
+            "flexHours": "弹性的上下班时间",
+            "remoteWork": "可选择在家工作",
+            "restArea": "有安静的休息区可供使用",
+            "understanding": "对月经健康有更开放和理解的文化氛围",
+            "leave": "有明确的经期休假政策",
+            "none": "不需要特殊支持"
+          }
+        }
+      }
+    },
+    "settings": {
+      "title": "设置",
+      "general": "常规设置",
+      "notifications": "通知设置",
+      "privacy": "隐私设置",
+      "dataManagement": "数据管理",
+      "preferences": {
+        "trackAssessmentHistory": "记录评估历史",
+        "personalizedRecommendations": "个性化建议",
+        "notifications": "通知提醒",
+        "dataSharing": "数据共享"
+      },
+      "actions": {
+        "resetSettings": "重置设置",
+        "exportData": "导出数据",
+        "clearHistory": "清除历史",
+        "save": "保存"
+      },
+      "confirmations": {
+        "resetSettings": "确定要重置所有设置吗？此操作不可撤销。",
+        "clearHistory": "确定要清除所有评估历史吗？此操作不可撤销。"
+      }
+    },
+    "testing": {
+      "title": "测试框架",
+      "description": "全面的测试覆盖，确保代码质量",
+      "suites": {
+        "unitTests": "单元测试",
+        "integrationTests": "集成测试",
+        "userExperienceTests": "用户体验测试",
+        "securityTests": "安全测试"
+      },
+      "status": {
+        "totalTests": "总测试数",
+        "passedTests": "通过测试",
+        "failedTests": "失败测试",
+        "averageCoverage": "平均覆盖率"
+      },
+      "recommendations": {
+        "title": "测试建议",
+        "unitTestCoverage": "单元测试覆盖",
+        "integrationTesting": "集成测试",
+        "userExperienceTesting": "用户体验测试",
+        "securityTesting": "安全测试"
+      },
+      "actions": {
+        "runTests": "运行测试",
+        "reset": "重置",
+        "exportReport": "导出报告"
+      }
+    },
+    "documentation": {
+      "title": "文档框架",
+      "description": "完善的文档体系，提升开发效率",
+      "types": {
+        "apiDocs": "API文档",
+        "userGuide": "用户指南",
+        "deploymentGuide": "部署指南",
+        "codeComments": "代码注释"
+      },
+      "status": {
+        "totalDocuments": "文档总数",
+        "completed": "已完成",
+        "incomplete": "未完成",
+        "totalWords": "总字数"
+      },
+      "recommendations": {
+        "title": "文档完善建议",
+        "apiDocumentation": "API文档完善",
+        "userGuide": "用户指南优化",
+        "deploymentGuide": "部署指南更新",
+        "codeCommentStandards": "代码注释规范"
+      },
+      "actions": {
+        "exportAllDocuments": "导出所有文档",
+        "generateReport": "生成报告"
+      }
     }
   },
   "anchorTexts": {

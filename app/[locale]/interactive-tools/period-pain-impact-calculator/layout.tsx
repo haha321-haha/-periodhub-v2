@@ -75,8 +75,12 @@ export async function generateMetadata({
     alternates: {
       canonical: `https://www.periodhub.health/${locale}/interactive-tools/period-pain-impact-calculator`,
       languages: {
-        zh: "https://www.periodhub.health/zh/interactive-tools/period-pain-impact-calculator",
-        en: "https://www.periodhub.health/en/interactive-tools/period-pain-impact-calculator",
+        "zh-CN":
+          "https://www.periodhub.health/zh/interactive-tools/period-pain-impact-calculator",
+        "en-US":
+          "https://www.periodhub.health/en/interactive-tools/period-pain-impact-calculator",
+        "x-default":
+          "https://www.periodhub.health/zh/interactive-tools/period-pain-impact-calculator",
       },
     },
   };

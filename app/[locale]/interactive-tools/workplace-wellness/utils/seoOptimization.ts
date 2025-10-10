@@ -36,6 +36,11 @@ export function generatePageMetadata(
     keywords: config.keywords,
     alternates: {
       canonical: config.canonical,
+      languages: {
+        "zh-CN": pageData.zh.canonical,
+        "en-US": pageData.en.canonical,
+        "x-default": pageData.zh.canonical,
+      },
     },
     openGraph: {
       title: config.title,

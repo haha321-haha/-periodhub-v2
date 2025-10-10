@@ -9,6 +9,7 @@ import {
   performSEOValidation,
 } from "../utils/seoValidator";
 import { generateAllStructuredData } from "../utils/seoOptimization";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 
 export async function generateMetadata({
   params,
@@ -16,6 +17,12 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
+
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "interactive-tools/workplace-wellness/seo-test",
+  );
 
   return {
     title:
@@ -26,6 +33,7 @@ export async function generateMetadata({
       locale === "zh"
         ? "测试HVsLYEp职场健康助手的SEO优化功能，包括Meta信息和结构化数据验证。"
         : "Test SEO optimization features for HVsLYEp Workplace Wellness Assistant, including meta information and structured data validation.",
+    alternates,
     robots: {
       index: false,
       follow: false,

@@ -31,8 +31,12 @@ export async function generateMetadata({
     alternates: {
       canonical: `https://www.periodhub.health/${locale}/interactive-tools/workplace-impact-assessment`,
       languages: {
-        zh: "https://www.periodhub.health/zh/interactive-tools/workplace-impact-assessment",
-        en: "https://www.periodhub.health/en/interactive-tools/workplace-impact-assessment",
+        "zh-CN":
+          "https://www.periodhub.health/zh/interactive-tools/workplace-impact-assessment",
+        "en-US":
+          "https://www.periodhub.health/en/interactive-tools/workplace-impact-assessment",
+        "x-default":
+          "https://www.periodhub.health/zh/interactive-tools/workplace-impact-assessment",
       },
     },
   };

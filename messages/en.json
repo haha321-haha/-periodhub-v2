@@ -2371,6 +2371,164 @@
       }
     }
   },
+  "workplaceWellness": {
+    "charts": {
+      "totalCycles": "Total Cycles",
+      "averageCycleLength": "Average Cycle Length",
+      "averagePainLevel": "Average Pain Level",
+      "cycleRegularity": "Cycle Regularity",
+      "regularity": {
+        "regular": "Regular",
+        "irregular": "Irregular"
+      },
+      "predictions": "Predictions",
+      "nextPeriod": "Next Period",
+      "nextOvulation": "Next Ovulation",
+      "currentPhase": "Current Phase",
+      "confidence": "Confidence",
+      "tabs": {
+        "overview": "Overview",
+        "cycleLength": "Cycle Length",
+        "painLevel": "Pain Level",
+        "flowType": "Flow Type"
+      }
+    },
+    "history": {
+      "flow": "Flow",
+      "date": "Date",
+      "type": "Type",
+      "pain": "Pain",
+      "notes": "Notes",
+      "actions": "Actions"
+    },
+    "nutrition": {
+      "phaseLabel": "Phase Label",
+      "phaseIcons": {
+        "menstrual": "Menstrual",
+        "follicular": "Follicular",
+        "ovulation": "Ovulation",
+        "luteal": "Luteal"
+      },
+      "phases": {
+        "menstrual": "Menstrual Phase",
+        "follicular": "Follicular Phase",
+        "ovulation": "Ovulation Phase",
+        "luteal": "Luteal Phase"
+      },
+      "constitutionLabel": "Constitution Label",
+      "constitutions": {
+        "balanced": "Balanced",
+        "qiDeficient": "Qi Deficient",
+        "bloodDeficient": "Blood Deficient",
+        "yangDeficient": "Yang Deficient",
+        "yinDeficient": "Yin Deficient",
+        "dampHeat": "Damp Heat",
+        "cold": "Cold"
+      },
+      "foodTitle": "Food Recommendations",
+      "searchPlaceholder": "Search foods...",
+      "tcmNature": {
+        "cold": "Cold",
+        "cool": "Cool",
+        "neutral": "Neutral",
+        "warm": "Warm",
+        "hot": "Hot"
+      },
+      "benefitsLabel": "Benefits",
+      "nutrientsLabel": "Nutrients",
+      "addButton": "Add",
+      "planTitle": "Nutrition Plan",
+      "meals": {
+        "breakfast": "Breakfast",
+        "lunch": "Lunch",
+        "dinner": "Dinner",
+        "snack": "Snack"
+      },
+      "mealSuggestions": {
+        "breakfast": "Breakfast Suggestions",
+        "lunch": "Lunch Suggestions",
+        "dinner": "Dinner Suggestions",
+        "snack": "Snack Suggestions"
+      },
+      "generateButton": "Generate Plan"
+    },
+    "workImpact": {
+      "adjustOptions": {
+        "takeLeave": "Take Leave",
+        "workFromHome": "Work From Home",
+        "postponeMeeting": "Postpone Meeting",
+        "reduceTasks": "Reduce Tasks"
+      },
+      "saveButton": "Save",
+      "templatesTitle": "Templates",
+      "subject": "Subject",
+      "severity": {
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe"
+      }
+    },
+    "workAnalysis": {
+      "tabs": {
+        "overview": "Overview",
+        "patterns": "Patterns",
+        "productivity": "Productivity",
+        "insights": "Insights"
+      },
+      "avgPain": "Average Pain",
+      "avgProductivity": "Average Productivity",
+      "adjustmentRate": "Adjustment Rate"
+    },
+    "export": {
+      "contentLabel": "Export Content",
+      "types": {
+        "period": "Period Data",
+        "period_desc": "Includes cycle, pain, and flow information",
+        "nutrition": "Nutrition Data",
+        "nutrition_desc": "Includes food recommendations and nutrition plans",
+        "all": "All Data",
+        "all_desc": "Includes all recorded data"
+      },
+      "formatLabel": "Export Format",
+      "formats": {
+        "json": "JSON Format",
+        "json_desc": "Structured data format",
+        "csv": "CSV Format",
+        "csv_desc": "Table data format",
+        "pdf": "PDF Format",
+        "pdf_desc": "Printable document format"
+      },
+      "exportButton": "Export Data",
+      "privacyTitle": "Privacy Notice",
+      "privacyContent": "All data is encrypted to ensure your privacy and security",
+      "showSettings": "Show Settings",
+      "periodTypes": {
+        "period": "Period",
+        "predicted": "Predicted",
+        "ovulation": "Ovulation"
+      },
+      "flowTypes": {
+        "light": "Light",
+        "medium": "Medium",
+        "heavy": "Heavy"
+      }
+    },
+    "userPreferences": {
+      "reset": "Reset",
+      "save": "Save",
+      "uiPreferences": "UI Preferences",
+      "notificationSettings": "Notification Settings",
+      "privacySettings": "Privacy Settings",
+      "accessibilitySettings": "Accessibility Settings",
+      "exportPreferences": "Export Preferences",
+      "theme": "Theme",
+      "fontSize": "Font Size",
+      "animations": "Animations",
+      "compactMode": "Compact Mode",
+      "dateFormat": "Date Format",
+      "timeFormat": "Time Format"
+    }
+  },
   "articlePage": {
     "breadcrumb": {
       "home": "Home",

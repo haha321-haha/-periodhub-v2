@@ -8611,6 +8611,164 @@
       }
     }
   },
+  "workplaceWellness": {
+    "charts": {
+      "totalCycles": "总周期数",
+      "averageCycleLength": "平均周期长度",
+      "averagePainLevel": "平均疼痛等级",
+      "cycleRegularity": "周期规律性",
+      "regularity": {
+        "regular": "规律",
+        "irregular": "不规律"
+      },
+      "predictions": "预测",
+      "nextPeriod": "下次月经",
+      "nextOvulation": "下次排卵",
+      "currentPhase": "当前阶段",
+      "confidence": "置信度",
+      "tabs": {
+        "overview": "概览",
+        "cycleLength": "周期长度",
+        "painLevel": "疼痛等级",
+        "flowType": "流量类型"
+      }
+    },
+    "history": {
+      "flow": "流量",
+      "date": "日期",
+      "type": "类型",
+      "pain": "疼痛",
+      "notes": "备注",
+      "actions": "操作"
+    },
+    "nutrition": {
+      "phaseLabel": "阶段标签",
+      "phaseIcons": {
+        "menstrual": "月经期",
+        "follicular": "卵泡期",
+        "ovulation": "排卵期",
+        "luteal": "黄体期"
+      },
+      "phases": {
+        "menstrual": "月经期",
+        "follicular": "卵泡期",
+        "ovulation": "排卵期",
+        "luteal": "黄体期"
+      },
+      "constitutionLabel": "体质标签",
+      "constitutions": {
+        "balanced": "平衡体质",
+        "qiDeficient": "气虚体质",
+        "bloodDeficient": "血虚体质",
+        "yangDeficient": "阳虚体质",
+        "yinDeficient": "阴虚体质",
+        "dampHeat": "湿热体质",
+        "cold": "寒性体质"
+      },
+      "foodTitle": "食物推荐",
+      "searchPlaceholder": "搜索食物...",
+      "tcmNature": {
+        "cold": "寒性",
+        "cool": "凉性",
+        "neutral": "平性",
+        "warm": "温性",
+        "hot": "热性"
+      },
+      "benefitsLabel": "功效",
+      "nutrientsLabel": "营养成分",
+      "addButton": "添加",
+      "planTitle": "营养计划",
+      "meals": {
+        "breakfast": "早餐",
+        "lunch": "午餐",
+        "dinner": "晚餐",
+        "snack": "零食"
+      },
+      "mealSuggestions": {
+        "breakfast": "早餐建议",
+        "lunch": "午餐建议",
+        "dinner": "晚餐建议",
+        "snack": "零食建议"
+      },
+      "generateButton": "生成计划"
+    },
+    "workImpact": {
+      "adjustOptions": {
+        "takeLeave": "请假",
+        "workFromHome": "居家办公",
+        "postponeMeeting": "推迟会议",
+        "reduceTasks": "减少任务"
+      },
+      "saveButton": "保存",
+      "templatesTitle": "模板",
+      "subject": "主题",
+      "severity": {
+        "mild": "轻微",
+        "moderate": "中等",
+        "severe": "严重"
+      }
+    },
+    "workAnalysis": {
+      "tabs": {
+        "overview": "概览",
+        "patterns": "模式",
+        "productivity": "生产力",
+        "insights": "洞察"
+      },
+      "avgPain": "平均疼痛",
+      "avgProductivity": "平均生产力",
+      "adjustmentRate": "调整率"
+    },
+    "export": {
+      "contentLabel": "导出内容",
+      "types": {
+        "period": "经期数据",
+        "period_desc": "包含周期、疼痛和流量信息",
+        "nutrition": "营养数据",
+        "nutrition_desc": "包含食物推荐和营养计划",
+        "all": "全部数据",
+        "all_desc": "包含所有记录的数据"
+      },
+      "formatLabel": "导出格式",
+      "formats": {
+        "json": "JSON格式",
+        "json_desc": "结构化数据格式",
+        "csv": "CSV格式",
+        "csv_desc": "表格数据格式",
+        "pdf": "PDF格式",
+        "pdf_desc": "可打印的文档格式"
+      },
+      "exportButton": "导出数据",
+      "privacyTitle": "隐私说明",
+      "privacyContent": "所有数据都经过加密处理，确保您的隐私安全",
+      "showSettings": "显示设置",
+      "periodTypes": {
+        "period": "月经",
+        "predicted": "预测",
+        "ovulation": "排卵"
+      },
+      "flowTypes": {
+        "light": "少量",
+        "medium": "中等",
+        "heavy": "大量"
+      }
+    },
+    "userPreferences": {
+      "reset": "重置",
+      "save": "保存",
+      "uiPreferences": "界面偏好",
+      "notificationSettings": "通知设置",
+      "privacySettings": "隐私设置",
+      "accessibilitySettings": "无障碍设置",
+      "exportPreferences": "导出偏好",
+      "theme": "主题",
+      "fontSize": "字体大小",
+      "animations": "动画效果",
+      "compactMode": "紧凑模式",
+      "dateFormat": "日期格式",
+      "timeFormat": "时间格式"
+    }
+  },
   "articlePage": {
     "breadcrumb": {
       "home": "首页",

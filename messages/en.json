@@ -4710,7 +4710,12 @@
           "Discrete management",
           "Communication strategies",
           "Backup plans"
-        ]
+        ],
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially regarding medication use and assessment of severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       },
       "life_stages": {
         "title": "Life Stages",

@@ -149,6 +149,35 @@
       "supportTime": "Within 12 hours"
     }
   },
+  "cycleTracker": {
+    "title": "Menstrual Cycle Tracker",
+    "subtitle": "Record your menstrual cycle, predict next period and ovulation.",
+    "lastPeriodLabel": "Last Period Start Date",
+    "cycleLengthLabel": "Average Cycle Length (days)",
+    "calculateButton": "Calculate Prediction",
+    "resetButton": "Recalculate",
+    "predictionTitle": "Prediction Results",
+    "nextPeriodLabel": "Next Period Expected Date",
+    "ovulationLabel": "Ovulation Expected Date",
+    "fertilityWindowLabel": "Fertile Window",
+    "disclaimer": "This tool is for reference only and cannot replace professional medical advice. Each person's cycle may vary.",
+    "dateValidation": "Last period start date cannot be in the future",
+    "cycleLengthRange": "Cycle length is typically between 21-35 days",
+    "to": "to",
+    "loading": "Loading saved data...",
+    "saveSuccess": "Data saved",
+    "historyTitle": "History",
+    "showHistory": "View History",
+    "hideHistory": "Hide History",
+    "noHistory": "No history records",
+    "deleteRecord": "Delete",
+    "clearAllHistory": "Clear All Records",
+    "exportData": "Export Data",
+    "confirmClearAll": "Are you sure you want to clear all history records?",
+    "recordedOn": "Recorded on",
+    "cycleLength": "Cycle Length",
+    "days": "days"
+  },
   "workplaceWellness": {
     "meta": {
       "title": "Workplace Wellness Calendar - Period Management & Work Optimization | Period Hub",
@@ -1335,7 +1364,10 @@
       "tcm_nutrition": "TCM Nutrition Therapy",
       "natural": "Natural Therapies Guide",
       "comprehensive": "Comprehensive Treatment Guide",
-      "medication": "Medication Guide"
+      "medication": "Medication Guide",
+      "cycle_knowledge": "Understanding Your Menstrual Cycle",
+      "cycle_nutrition": "Period-Friendly Recipes",
+      "cycle_management": "When to Seek Medical Care"
     }
   },
   "healthStatistics": {

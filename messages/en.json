@@ -2386,8 +2386,11 @@
       }
     },
     "userPreferences": {
+      "title": "User Preferences",
       "reset": "Reset",
       "save": "Save",
+      "saving": "Saving...",
+      "resetConfirm": "Are you sure you want to reset all settings?",
       "uiPreferences": "UI Preferences",
       "notificationSettings": "Notification Settings",
       "privacySettings": "Privacy Settings",
@@ -2398,7 +2401,36 @@
       "animations": "Animations",
       "compactMode": "Compact Mode",
       "dateFormat": "Date Format",
-      "timeFormat": "Time Format"
+      "timeFormat": "Time Format",
+      "notifications": "Notifications",
+      "browser": "Browser Notifications",
+      "email": "Email Notifications",
+      "sms": "SMS Notifications",
+      "push": "Push Notifications",
+      "reminderTime": "Reminder Time",
+      "dataCollection": "Data Collection",
+      "analytics": "Analytics",
+      "personalization": "Personalization",
+      "shareProgress": "Share Progress",
+      "anonymousMode": "Anonymous Mode",
+      "exportPassword": "Export Password Protection",
+      "dataRetention": "Data Retention",
+      "autoDelete": "Auto Delete",
+      "highContrast": "High Contrast",
+      "reducedMotion": "Reduced Motion",
+      "screenReader": "Screen Reader",
+      "keyboardNavigation": "Keyboard Navigation",
+      "focusIndicators": "Focus Indicators",
+      "textScaling": "Text Scaling",
+      "defaultFormat": "Default Format",
+      "autoSave": "Auto Save",
+      "includeCharts": "Include Charts"
+    },
+    "notificationTypes": {
+      "reminder": "Reminder Notifications",
+      "insight": "Insight Notifications",
+      "update": "Update Notifications",
+      "alert": "Alert Notifications"
     }
   },
   "articlePage": {

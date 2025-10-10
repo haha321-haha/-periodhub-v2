@@ -634,22 +634,21 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
     {
       name: "workplace-wellness-storage",
       partialize: (state) => ({
-        // 只保存核心状态，避免存储空间不足
         activeTab: state.activeTab,
         calendar: {
+          ...state.calendar,
           currentDate: state.calendar.currentDate.toISOString(),
           selectedDate: state.calendar.selectedDate?.toISOString() || null,
-          // 不保存大量历史数据
         },
+        workImpact: state.workImpact,
+        nutrition: state.nutrition,
+        export: state.export,
+        // Day 11: 扩展持久化状态
         userPreferences: state.userPreferences,
+        exportTemplates: state.exportTemplates,
+        activeTemplate: state.activeTemplate,
+        exportHistory: state.exportHistory,
         systemSettings: state.systemSettings,
-        // 移除可能导致存储空间不足的大数据
-        // workImpact: state.workImpact,
-        // nutrition: state.nutrition,
-        // export: state.export,
-        // exportTemplates: state.exportTemplates,
-        // activeTemplate: state.activeTemplate,
-        // exportHistory: state.exportHistory,
       }),
       // 添加SSR安全配置
       skipHydration: false,
@@ -670,17 +669,6 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           }
           // eslint-disable-next-line no-console
           console.log("Workplace Wellness Store rehydrated successfully");
-        }
-      },
-      // 添加存储错误处理
-      onError: (error) => {
-        // eslint-disable-next-line no-console
-        console.warn("Storage error:", error);
-        // 如果存储空间不足，清除存储
-        if (error.name === "QuotaExceededError") {
-          localStorage.removeItem("workplace-wellness-storage");
-          // eslint-disable-next-line no-console
-          console.log("Cleared storage due to quota exceeded");
         }
       },
     },

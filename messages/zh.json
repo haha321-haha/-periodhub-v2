@@ -3894,7 +3894,8 @@
       "emotionalSupport": "情绪支持与心理健康",
       "communicationGuide": "沟通指导",
       "medicalCare": "何时寻求医疗帮助",
-      "globalPerspectives": "全球视角：传统疗法与文化智慧"
+      "globalPerspectives": "全球视角：传统疗法与文化智慧",
+      "nutritionGenerator": "营养推荐生成器"
     },
     "common": {
       "loading": "加载中...",
@@ -8282,7 +8283,9 @@
       "comprehensive": "综合治疗指南",
       "cycle_knowledge": "了解你的月经周期",
       "cycle_nutrition": "经期友好食谱",
-      "cycle_management": "何时寻求医疗护理"
+      "cycle_management": "何时寻求医疗护理",
+      "anti_inflammatory": "抗炎饮食指南",
+      "ginger_tea": "生姜茶缓解经期疼痛"
     },
     "solutions": {
       "exercise_balance_new": "运动与经期",

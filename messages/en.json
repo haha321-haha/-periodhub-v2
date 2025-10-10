@@ -588,7 +588,8 @@
       "emotionalSupport": "Emotional & Mental Support",
       "communicationGuide": "Communication Guide",
       "medicalCare": "When to Seek Medical Help",
-      "globalPerspectives": "Global Perspectives"
+      "globalPerspectives": "Global Perspectives",
+      "nutritionGenerator": "Nutrition Recommendation Generator"
     },
     "p2": {
       "title": "P2 Phase: Advanced Features",
@@ -1367,7 +1368,9 @@
       "medication": "Medication Guide",
       "cycle_knowledge": "Understanding Your Menstrual Cycle",
       "cycle_nutrition": "Period-Friendly Recipes",
-      "cycle_management": "When to Seek Medical Care"
+      "cycle_management": "When to Seek Medical Care",
+      "anti_inflammatory": "Anti-Inflammatory Diet Guide",
+      "ginger_tea": "Ginger Tea for Menstrual Pain Relief"
     }
   },
   "healthStatistics": {

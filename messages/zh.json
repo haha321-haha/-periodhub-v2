@@ -6609,6 +6609,136 @@
       "title": "开始你的健康之旅",
       "description": "让我们一起学习，自信地面对经期，不再让疼痛和烦恼影响你的生活！",
       "button": "开始探索"
+    },
+    "healthGuidePage": {
+      "title": "健康指南",
+      "description": "全面的经期健康知识和科学管理方法",
+      "keywords": "青少年经期健康,痛经缓解,月经知识,健康指南",
+      "hero": {
+        "title": "青少年健康指南",
+        "description": "专为青少年设计的经期健康指南"
+      },
+      "whyGuide": {
+        "title": "为什么需要这份指南",
+        "description": "青春期的身体变化需要正确的指导和支持"
+      },
+      "sections": {
+        "title": "健康主题",
+        "understandingPain": {
+          "title": "理解疼痛",
+          "description": "了解经期疼痛的原因和机制",
+          "cta": "了解更多"
+        },
+        "reliefMethods": {
+          "title": "缓解方法",
+          "description": "科学有效的疼痛缓解技巧",
+          "cta": "查看方法"
+        },
+        "whenSeekHelp": {
+          "title": "何时就医",
+          "description": "识别需要医疗帮助的症状",
+          "cta": "了解详情"
+        },
+        "lifestyleManagement": {
+          "title": "生活方式管理",
+          "description": "通过健康习惯改善经期体验",
+          "cta": "了解更多"
+        },
+        "mythsFacts": {
+          "title": "误区与真相",
+          "description": "澄清常见的经期误解",
+          "cta": "查看真相"
+        },
+        "globalPerspective": {
+          "title": "全球视角",
+          "description": "了解不同文化的经期观念",
+          "cta": "探索更多"
+        }
+      },
+      "tools": {
+        "title": "实用工具",
+        "painTracker": {
+          "title": "疼痛追踪",
+          "description": "记录和分析疼痛模式"
+        },
+        "painAssessment": {
+          "title": "疼痛评估",
+          "description": "评估疼痛程度和影响"
+        }
+      },
+      "quickAccess": {
+        "title": "Quick Access",
+        "medicalDisclaimer": "Medical Disclaimer",
+        "medicalDisclaimerText": "This information is for educational purposes only and does not replace professional medical advice.",
+        "emergencyRelief": "Emergency Relief",
+        "emergencyReliefDescription": "Need immediate help? Access quick relief methods",
+        "personalizedAssessment": "Personalized Assessment",
+        "personalizedAssessmentDescription": "Get customized recommendations based on your symptoms",
+        "startAssessment": "Start Assessment",
+        "methodsTechniques": "Methods & Techniques"
+      }
+    },
+    "campusGuide": {
+      "title": "校园指南",
+      "subtitle": "在学校安全管理经期健康",
+      "description": "专为学生设计的校园经期应急和管理指南",
+      "sections": {
+        "classroom": {
+          "title": "Classroom Emergency Response",
+          "description": "How to handle sudden pain during class",
+          "tips": [
+            "Ask teacher for permission to use restroom",
+            "Apply heat therapy with warm water bottle",
+            "Use breathing exercises to manage pain",
+            "Take over-the-counter pain medication if needed"
+          ]
+        },
+        "dormitory": {
+          "title": "Dormitory Management",
+          "description": "Managing period pain in dormitory settings",
+          "tips": [
+            "Keep emergency supplies in dorm room",
+            "Use heating pad or warm water bottle",
+            "Practice relaxation techniques",
+            "Communicate with roommates about needs"
+          ]
+        },
+        "peClass": {
+          "title": "PE Class Strategies",
+          "description": "How to handle physical education during periods",
+          "tips": [
+            "Inform PE teacher about condition",
+            "Request modified activities when needed",
+            "Focus on gentle exercises and stretching",
+            "Stay hydrated and take breaks"
+          ]
+        },
+        "emergencyKit": {
+          "title": "Campus Emergency Kit",
+          "description": "Essential items to keep on campus",
+          "items": [
+            "Pain medication (ibuprofen)",
+            "Heating pad or warm water bottle",
+            "Sanitary products",
+            "Comfortable clothing",
+            "Healthy snacks"
+          ]
+        }
+      },
+      "emergencyContacts": {
+        "title": "Emergency Contacts",
+        "schoolNurse": "School Nurse",
+        "counselor": "School Counselor",
+        "trustedAdult": "Trusted Adult",
+        "parent": "Parent/Guardian"
+      },
+      "communication": {
+        "title": "Communication Tips",
+        "withTeachers": "Talking to Teachers",
+        "withPeers": "Talking to Peers",
+        "withParents": "Talking to Parents",
+        "sampleScripts": "Sample Conversation Scripts"
+      }
     }
   },
   "toolPage": {
@@ -7280,6 +7410,22 @@
       "constitutionTest": "体质评估",
       "symptomAssessment": "症状评估",
       "painTracker": "疼痛追踪"
+    },
+    "faq": {
+      "title": "常见问题",
+      "subtitle": "解答您的常见疑问",
+      "q1": {
+        "question": "如何开始使用？",
+        "answer": "从首页选择任意工具，按照引导步骤操作即可。所有工具都无需注册，立即可用。"
+      },
+      "q2": {
+        "question": "我的数据安全吗？",
+        "answer": "是的，所有数据都存储在您的设备本地，永不上传到服务器。我们重视您的隐私，采用多重加密保护。"
+      },
+      "q3": {
+        "question": "需要创建账户吗？",
+        "answer": "不需要，所有工具都可以直接使用，无需注册或登录。"
+      }
     }
   },
   "homePageContent": {

@@ -5790,7 +5790,8 @@
         "Gentle stretching exercises",
         "Deep breathing techniques",
         "Over-the-counter pain relief"
-      ]
+      ],
+      "emergencyKit": "Emergency Kit Checklist"
     },
     "painAssessment": {
       "title": "Teen Pain Assessment",
@@ -7818,6 +7819,81 @@
         "severe_early": "您的痛经严重程度较高。虽然可能是原发性痛经，但影响日常生活的严重疼痛建议医学评估，以获得有效的疼痛管理方案。",
         "moderate_late": "中度痛经在初潮较晚后开始，建议咨询医生排除继发性痛经的可能性。",
         "normal": "基于您提供的信息，您的痛经情况属于常见范围，可能是原发性痛经。建议尝试自然缓解方法，如热敷、轻度运动和健康饮食习惯等。如症状加重或出现异常，请及时咨询医生。"
+      }
+    }
+  },
+  "homeClean": {
+    "meta": {
+      "title": "Your Professional Health Management Partner",
+      "description": "Professional constitution testing, symptom assessment, and pain tracking tools"
+    },
+    "hero": {
+      "title": "Period Health Management Expert",
+      "subtitle": "Scientific period tracking, health advice, and personalized care plans",
+      "cta": "Get Started"
+    },
+    "features": {
+      "title": "Professional Features",
+      "assessment": {
+        "icon": "🧭",
+        "title": "Symptom Assessment Tool",
+        "description": "Answer a few questions for personalized relief recommendations",
+        "cta": "Start Assessment"
+      },
+      "tracking": {
+        "icon": "📈",
+        "title": "Pain Tracker",
+        "description": "Track pain patterns and gain trend insights",
+        "cta": "Start Tracking"
+      },
+      "constitution": {
+        "icon": "🧩",
+        "title": "TCM Constitution Test",
+        "description": "8 questions to understand your constitution and get care recommendations",
+        "cta": "Start Test"
+      }
+    },
+    "trusted": {
+      "title": "Trusted Professional Platform",
+      "metrics": {
+        "activeUsers": {
+          "number": "50K+",
+          "label": "Active Users"
+        },
+        "articles": {
+          "number": "42",
+          "label": "Professional Articles"
+        },
+        "resources": {
+          "number": "24",
+          "label": "PDF Resources"
+        },
+        "satisfaction": {
+          "number": "98%",
+          "label": "User Satisfaction"
+        }
+      }
+    },
+    "quickNav": {
+      "title": "Quick Navigation",
+      "constitutionTest": "Constitution Assessment",
+      "symptomAssessment": "Symptom Assessment",
+      "painTracker": "Pain Tracker"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Answers to common questions",
+      "q1": {
+        "question": "How do I get started?",
+        "answer": "Choose any tool from the homepage and follow the guided steps. All tools are available immediately without registration."
+      },
+      "q2": {
+        "question": "Is my data secure?",
+        "answer": "Yes, all data is stored locally on your device and never uploaded to our servers. We prioritize your privacy with multiple layers of encryption."
+      },
+      "q3": {
+        "question": "Do I need to create an account?",
+        "answer": "No, all tools can be used directly without registration or login."
       }
     }
   }

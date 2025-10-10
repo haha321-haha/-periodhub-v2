@@ -178,208 +178,6 @@
     "cycleLength": "Cycle Length",
     "days": "days"
   },
-  "workplaceWellness": {
-    "meta": {
-      "title": "Workplace Wellness Calendar - Period Management & Work Optimization | Period Hub",
-      "description": "Professional workplace health management tool to help you track how your period affects work, providing personalized work adjustment recommendations and health management plans.",
-      "keywords": "workplace health,period management,work optimization,menstrual health,workplace adaptation,period tracking,work efficiency,health management"
-    },
-    "header": {
-      "title": "Workplace Wellness Calendar",
-      "subtitle": "Workplace Health Assistant"
-    },
-    "nav": {
-      "calendar": "Period Calendar",
-      "nutrition": "Nutrition Advice",
-      "workImpact": "Work Impact",
-      "analysis": "Data Analysis",
-      "export": "Data Management",
-      "settings": "Settings"
-    },
-    "calendar": {
-      "title": "Menstrual Work Calendar",
-      "subtitle": "Track periods and plan work arrangements",
-      "recordButton": "+ Record Period",
-      "days": {
-        "sun": "Sun",
-        "mon": "Mon",
-        "tue": "Tue",
-        "wed": "Wed",
-        "thu": "Thu",
-        "fri": "Fri",
-        "sat": "Sat"
-      },
-      "legendPeriod": "Period",
-      "legendPredicted": "Predicted",
-      "statCycle": "Average Cycle",
-      "statLength": "Average Length",
-      "statNext": "Next Predicted",
-      "addRecord": "Add Record",
-      "date": "Date",
-      "type": "Type",
-      "typePeriod": "Period",
-      "typePredicted": "Predicted",
-      "typeOvulation": "Ovulation",
-      "painLevel": "Pain Level"
-    },
-    "workImpact": {
-      "title": "Symptoms & Work Impact Record",
-      "painLevel": "Pain Level (1-10)",
-      "efficiency": "Work Efficiency (%)",
-      "adjustment": "Today's Work Adjustment",
-      "adjustOptions": {
-        "normal": "Normal workload",
-        "reduce": "Reduce workload",
-        "remote": "Work from home",
-        "leave": "Take leave"
-      },
-      "notes": "Additional notes",
-      "submit": "Submit Record"
-    },
-    "nutrition": {
-      "title": "Personalized Nutrition Recommendations",
-      "subtitle": "Nutrition plan based on menstrual phase and work intensity",
-      "currentPhase": "Current Phase",
-      "workIntensity": "Work Intensity",
-      "intensityHigh": "High",
-      "intensityMedium": "Medium",
-      "intensityLow": "Low",
-      "recommendations": "Today's Recommendations",
-      "breakfast": "Breakfast",
-      "lunch": "Lunch",
-      "dinner": "Dinner",
-      "snacks": "Snacks"
-    },
-    "export": {
-      "title": "Data Management",
-      "exportData": "Export Data",
-      "exportFormat": "Export Format",
-      "formatCSV": "CSV File",
-      "formatPDF": "PDF Report",
-      "dateRange": "Date Range",
-      "customRange": "Custom Range",
-      "export": "Export",
-      "importData": "Import Data",
-      "import": "Import"
-    },
-    "charts": {
-      "title": "Data Visualization",
-      "cycleTrend": "Cycle Trend",
-      "painTrend": "Pain Level Trend",
-      "efficiencyTrend": "Work Efficiency Trend",
-      "days": "days",
-      "level": "Level",
-      "percent": "%"
-    },
-    "history": {
-      "title": "Historical Records",
-      "date": "Date",
-      "type": "Type",
-      "painLevel": "Pain",
-      "efficiency": "Efficiency",
-      "adjustment": "Adjustment",
-      "notes": "Notes",
-      "actions": "Actions",
-      "edit": "Edit",
-      "delete": "Delete",
-      "noRecords": "No records yet"
-    },
-    "analysis": {
-      "title": "Data Analysis",
-      "advancedTitle": "Advanced Analysis",
-      "tabs": {
-        "overview": "Overview",
-        "trends": "Trends",
-        "comparison": "Comparison",
-        "insights": "Insights"
-      },
-      "avgCycleLength": "Average Cycle Length",
-      "avgPeriodLength": "Average Period Length",
-      "avgPainLevel": "Average Pain Level",
-      "confidence": "Prediction Confidence"
-    },
-    "symptoms": {
-      "title": "Symptom Tracking",
-      "tabs": {
-        "overview": "Overview",
-        "patterns": "Patterns",
-        "trends": "Trends",
-        "recommendations": "Recommendations"
-      },
-      "noData": "No symptom data yet"
-    },
-    "patterns": {
-      "title": "Pattern Analysis",
-      "cyclePattern": "Cycle Pattern",
-      "painPattern": "Pain Pattern",
-      "efficiencyPattern": "Efficiency Pattern"
-    },
-    "recommendations": {
-      "title": "Personalized Recommendations",
-      "workAdjustment": "Work Adjustment Recommendations",
-      "nutrition": "Nutrition Recommendations",
-      "lifestyle": "Lifestyle Recommendations"
-    },
-    "workAnalysis": {
-      "title": "Work Impact Analysis",
-      "avgEfficiency": "Average Work Efficiency",
-      "lostDays": "Affected Work Days",
-      "peakPainDays": "Peak Pain Days",
-      "recommendations": "Work Optimization Recommendations"
-    },
-    "workInsights": {
-      "title": "Work Insights",
-      "highImpactDays": "High Impact Days",
-      "lowImpactDays": "Low Impact Days",
-      "optimalWorkDays": "Optimal Work Days"
-    },
-    "insights": {
-      "title": "Health Insights",
-      "irregularCycle": "Irregular Cycle Detected",
-      "irregularCycleDesc": "Your cycle length varies significantly. Consider consulting a healthcare provider.",
-      "highPainLevel": "Consistently High Pain Levels",
-      "highPainLevelDesc": "Your pain levels are consistently high. Professional medical advice is recommended.",
-      "lowEfficiency": "Work Efficiency Impact",
-      "lowEfficiencyDesc": "Your work efficiency is significantly affected during menstruation. Consider work adjustments."
-    },
-    "userPreferences": {
-      "title": "User Preferences",
-      "cycleLength": "Average Cycle Length",
-      "periodLength": "Average Period Length",
-      "workSchedule": "Work Schedule",
-      "notifications": "Notification Settings",
-      "browser": "Browser Notifications",
-      "email": "Email Notifications",
-      "sms": "SMS Notifications",
-      "push": "Push Notifications",
-      "reminderTime": "Reminder Frequency"
-    },
-    "notificationTypes": {
-      "periodReminder": "Period Reminder",
-      "ovulationReminder": "Ovulation Reminder",
-      "workAdjustment": "Work Adjustment Reminder",
-      "healthTips": "Health Tips"
-    },
-    "common": {
-      "save": "Save",
-      "cancel": "Cancel",
-      "delete": "Delete",
-      "edit": "Edit",
-      "confirm": "Confirm",
-      "back": "Back",
-      "next": "Next",
-      "previous": "Previous",
-      "loading": "Loading...",
-      "noData": "No data available",
-      "error": "An error occurred",
-      "success": "Operation successful"
-    },
-    "sections": {
-      "workplaceArticles": "Workplace Health Articles",
-      "relatedTools": "Related Tools",
-      "scenarioSolutions": "Scenario Solutions"
-    }
-  },
   "hero": {
     "welcomeBadge": "Welcome to Professional Period Pain Management",
     "title": "Scientific Management",
@@ -2512,6 +2310,12 @@
         "severe": "Severe"
       }
     },
+    "workImpact": {
+      "title": "Work Impact Record",
+      "painLevel": "Pain Level",
+      "efficiency": "Work Efficiency",
+      "adjustment": "Today's Work Adjustment"
+    },
     "workAnalysis": {
       "tabs": {
         "overview": "Overview",
@@ -2521,7 +2325,35 @@
       },
       "avgPain": "Average Pain",
       "avgProductivity": "Average Productivity",
-      "adjustmentRate": "Adjustment Rate"
+      "avgEfficiency": "Average Work Efficiency",
+      "adjustmentRate": "Adjustment Rate",
+      "recentTrends": "Recent Trends"
+    },
+    "analysis": {
+      "advancedTitle": "Advanced Analysis",
+      "tabs": {
+        "overview": "Overview",
+        "trends": "Trends",
+        "comparison": "Comparison",
+        "insights": "Insights"
+      },
+      "avgCycleLength": "Average Cycle Length",
+      "avgPeriodLength": "Average Period Length",
+      "avgPainLevel": "Average Pain Level",
+      "confidence": "Confidence"
+    },
+    "insights": {
+      "irregularCycle": "Irregular Cycle",
+      "irregularCycleDesc": "Irregular cycle pattern detected, consider consulting a healthcare provider"
+    },
+    "symptoms": {
+      "title": "Symptoms & Work Impact Record",
+      "tabs": {
+        "overview": "Overview",
+        "patterns": "Patterns",
+        "trends": "Trends",
+        "recommendations": "Recommendations"
+      }
     },
     "export": {
       "contentLabel": "Export Content",

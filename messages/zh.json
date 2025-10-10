@@ -8752,6 +8752,12 @@
         "severe": "严重"
       }
     },
+    "workImpact": {
+      "title": "工作影响记录",
+      "painLevel": "疼痛等级",
+      "efficiency": "工作效率",
+      "adjustment": "今日工作调整"
+    },
     "workAnalysis": {
       "tabs": {
         "overview": "概览",
@@ -8761,7 +8767,35 @@
       },
       "avgPain": "平均疼痛",
       "avgProductivity": "平均生产力",
-      "adjustmentRate": "调整率"
+      "avgEfficiency": "平均工作效率",
+      "adjustmentRate": "调整率",
+      "recentTrends": "近期趋势"
+    },
+    "analysis": {
+      "advancedTitle": "高级分析",
+      "tabs": {
+        "overview": "概览",
+        "trends": "趋势",
+        "comparison": "对比",
+        "insights": "洞察"
+      },
+      "avgCycleLength": "平均周期长度",
+      "avgPeriodLength": "平均经期长度",
+      "avgPainLevel": "平均疼痛等级",
+      "confidence": "置信度"
+    },
+    "insights": {
+      "irregularCycle": "不规律周期",
+      "irregularCycleDesc": "检测到您的周期存在不规律模式，建议咨询医生"
+    },
+    "symptoms": {
+      "title": "症状与工作影响记录",
+      "tabs": {
+        "overview": "概览",
+        "patterns": "模式",
+        "trends": "趋势",
+        "recommendations": "建议"
+      }
     },
     "export": {
       "contentLabel": "导出内容",

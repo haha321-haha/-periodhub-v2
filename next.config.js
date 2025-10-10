@@ -289,20 +289,58 @@ const nextConfig = {
         destination: '/en/downloads', // 默认英文版本
         permanent: true
       },
-      // 🎯 修复重复的downloads页面问题 - 添加语言前缀
+      // 🎯 修复重复的downloads页面问题 - 支持多语言重定向
+      // 中文用户重定向
       {
         source: '/download-center',
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: '.*zh.*',
+          },
+        ],
         destination: '/zh/downloads',
         permanent: true
       },
       {
         source: '/downloads-new',
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: '.*zh.*',
+          },
+        ],
         destination: '/zh/downloads',
         permanent: true
       },
       {
         source: '/articles-pdf-center',
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: '.*zh.*',
+          },
+        ],
         destination: '/zh/downloads',
+        permanent: true
+      },
+      // 英文用户重定向（默认）
+      {
+        source: '/download-center',
+        destination: '/en/downloads',
+        permanent: true
+      },
+      {
+        source: '/downloads-new',
+        destination: '/en/downloads',
+        permanent: true
+      },
+      {
+        source: '/articles-pdf-center',
+        destination: '/en/downloads',
         permanent: true
       },
       // 🎯 修复不存在的文章重定向 - pain-relief-methods

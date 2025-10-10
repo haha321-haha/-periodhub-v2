@@ -637,8 +637,11 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       storage: {
         getItem: (name) => {
           try {
-            const value = localStorage.getItem(name);
-            return value;
+            if (typeof window !== "undefined" && window.localStorage) {
+              const value = localStorage.getItem(name);
+              return value;
+            }
+            return null;
           } catch (error) {
             console.error("Error reading from localStorage:", error);
             return null;
@@ -646,7 +649,9 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
         },
         setItem: (name, value) => {
           try {
-            localStorage.setItem(name, value);
+            if (typeof window !== "undefined" && window.localStorage) {
+              localStorage.setItem(name, value);
+            }
           } catch (error) {
             if (
               error instanceof DOMException &&
@@ -655,20 +660,22 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
               console.warn("LocalStorage quota exceeded, clearing old data...");
               try {
                 // 清除当前存储
-                localStorage.removeItem(name);
-                // 尝试只保存最小化的状态
-                const parsed = JSON.parse(value);
-                if (parsed?.state) {
-                  // 只保留必要的数据
-                  const minimalState = {
-                    ...parsed,
-                    state: {
-                      ...parsed.state,
-                      exportHistory: [], // 清空导出历史
-                    },
-                  };
-                  localStorage.setItem(name, JSON.stringify(minimalState));
-                  console.log("Successfully saved minimal state");
+                if (typeof window !== "undefined" && window.localStorage) {
+                  localStorage.removeItem(name);
+                  // 尝试只保存最小化的状态
+                  const parsed = JSON.parse(value);
+                  if (parsed?.state) {
+                    // 只保留必要的数据
+                    const minimalState = {
+                      ...parsed,
+                      state: {
+                        ...parsed.state,
+                        exportHistory: [], // 清空导出历史
+                      },
+                    };
+                    localStorage.setItem(name, JSON.stringify(minimalState));
+                    console.log("Successfully saved minimal state");
+                  }
                 }
               } catch (clearError) {
                 console.error(
@@ -677,7 +684,9 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
                 );
                 // 如果还是失败，完全清除
                 try {
-                  localStorage.removeItem(name);
+                  if (typeof window !== "undefined" && window.localStorage) {
+                    localStorage.removeItem(name);
+                  }
                 } catch (removeError) {
                   console.error("Failed to remove storage:", removeError);
                 }
@@ -689,7 +698,9 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
         },
         removeItem: (name) => {
           try {
-            localStorage.removeItem(name);
+            if (typeof window !== "undefined" && window.localStorage) {
+              localStorage.removeItem(name);
+            }
           } catch (error) {
             console.error("Error removing from localStorage:", error);
           }

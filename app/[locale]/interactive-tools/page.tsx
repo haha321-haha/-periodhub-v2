@@ -15,7 +15,6 @@ import {
 } from "lucide-react"; // Icons for cards
 import { Locale, locales } from "@/i18n";
 import StructuredData from "@/components/StructuredData";
-import { URL_CONFIG } from "@/lib/url-config";
 import {
   generateHreflangConfig,
   HreflangScript,
@@ -154,6 +153,14 @@ export default async function InteractiveToolsPage({
       iconColor: "text-orange-600",
       cta: t("nutritionGenerator.cta"),
       requiresPrerequisites: true,
+    },
+    {
+      title: t("stressManagement.title"),
+      description: t("stressManagement.description"),
+      href: `/${locale}/interactive-tools/stress-management`,
+      iconType: "Lightbulb",
+      iconColor: "text-indigo-600",
+      cta: t("stressManagement.cta"),
     },
   ];
 

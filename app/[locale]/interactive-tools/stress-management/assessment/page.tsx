@@ -20,17 +20,17 @@ export async function generateMetadata({
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-      }/${locale}/stress-management/assessment`,
+      }/${locale}/interactive-tools/stress-management/assessment`,
       languages: {
         "zh-CN": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/stress-management/assessment`,
+        }/zh/interactive-tools/stress-management/assessment`,
         "en-US": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en/stress-management/assessment`,
+        }/en/interactive-tools/stress-management/assessment`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/stress-management/assessment`,
+        }/zh/interactive-tools/stress-management/assessment`,
       },
     },
     openGraph: {
@@ -65,7 +65,7 @@ export default async function StressAssessmentPage({
         description={t("assessment.subtitle")}
         url={`${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}/stress-management/assessment`}
+        }/${locale}/interactive-tools/stress-management/assessment`}
       />
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -149,7 +149,7 @@ export default async function StressAssessmentPage({
             {/* Start Assessment Button */}
             <div className="text-center mt-8">
               <Link
-                href={`/${locale}/stress-management/assessment/start`}
+                href={`/${locale}/interactive-tools/stress-management/assessment/start`}
                 className="btn-primary text-lg px-8 py-4 inline-flex items-center gap-2"
               >
                 <span>{t("startAssessment")}</span>

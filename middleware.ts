@@ -22,7 +22,16 @@ export function middleware(request: NextRequest) {
       pathname.startsWith("/scripts/") ||
       pathname.startsWith("/images/") ||
       pathname.startsWith("/icons/") ||
-      pathname.startsWith("/fonts/")
+      pathname.startsWith("/fonts/") ||
+      pathname.includes("/icon") ||
+      pathname.includes("/favicon") ||
+      pathname.endsWith(".png") ||
+      pathname.endsWith(".ico") ||
+      pathname.endsWith(".svg") ||
+      pathname.endsWith(".jpg") ||
+      pathname.endsWith(".jpeg") ||
+      pathname.endsWith(".gif") ||
+      pathname.endsWith(".webp")
     ) {
       return NextResponse.next();
     }

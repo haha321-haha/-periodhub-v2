@@ -20,17 +20,17 @@ export async function generateMetadata({
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-      }/${locale}/stress-management/techniques`,
+      }/${locale}/interactive-tools/stress-management/techniques`,
       languages: {
         "zh-CN": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/stress-management/techniques`,
+        }/zh/interactive-tools/stress-management/techniques`,
         "en-US": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en/stress-management/techniques`,
+        }/en/interactive-tools/stress-management/techniques`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/stress-management/techniques`,
+        }/zh/interactive-tools/stress-management/techniques`,
       },
     },
     openGraph: {
@@ -96,7 +96,7 @@ export default async function RelaxationTechniquesPage({
         description={t("techniques.subtitle")}
         url={`${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}/stress-management/techniques`}
+        }/${locale}/interactive-tools/stress-management/techniques`}
       />
 
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
@@ -186,7 +186,7 @@ export default async function RelaxationTechniquesPage({
                 {/* Start Button */}
                 <div className="text-center">
                   <Link
-                    href={`/${locale}/stress-management/techniques/${technique.key}`}
+                    href={`/${locale}/interactive-tools/stress-management/techniques/${technique.key}`}
                     className={`bg-gradient-to-r ${technique.color} text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-shadow inline-flex items-center gap-2`}
                   >
                     <span>{t(`techniques.${technique.key}.start`)}</span>

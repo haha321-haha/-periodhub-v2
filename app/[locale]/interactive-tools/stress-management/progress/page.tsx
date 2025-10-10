@@ -20,17 +20,17 @@ export async function generateMetadata({
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-      }/${locale}/stress-management/progress`,
+      }/${locale}/interactive-tools/interactive-tools/stress-management/progress`,
       languages: {
         "zh-CN": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/stress-management/progress`,
+        }/zh/interactive-tools/interactive-tools/stress-management/progress`,
         "en-US": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en/stress-management/progress`,
+        }/en/interactive-tools/interactive-tools/stress-management/progress`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/stress-management/progress`,
+        }/zh/interactive-tools/interactive-tools/stress-management/progress`,
       },
     },
     openGraph: {
@@ -117,7 +117,7 @@ export default async function ProgressTrackingPage({
         description={t("progress.subtitle")}
         url={`${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}/stress-management/progress`}
+        }/${locale}/interactive-tools/interactive-tools/stress-management/progress`}
       />
 
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
@@ -129,7 +129,14 @@ export default async function ProgressTrackingPage({
             </Link>
             <span>/</span>
             <Link
-              href={`/${locale}/stress-management`}
+              href={`/${locale}/interactive-tools`}
+              className="hover:text-blue-600"
+            >
+              {t("common.breadcrumb.interactiveTools")}
+            </Link>
+            <span>/</span>
+            <Link
+              href={`/${locale}/interactive-tools/stress-management`}
               className="hover:text-blue-600"
             >
               {t("title")}
@@ -177,7 +184,7 @@ export default async function ProgressTrackingPage({
 
             <div className="text-center">
               <Link
-                href={`/${locale}/stress-management/progress/add`}
+                href={`/${locale}/interactive-tools/interactive-tools/stress-management/progress/add`}
                 className="btn-primary text-lg px-8 py-4 inline-flex items-center gap-2"
               >
                 <span>{t("progress.addEntry.title")}</span>
@@ -208,7 +215,7 @@ export default async function ProgressTrackingPage({
               {timePeriods.map((period) => (
                 <Link
                   key={period.key}
-                  href={`/${locale}/stress-management/progress/${period.key}`}
+                  href={`/${locale}/interactive-tools/interactive-tools/stress-management/progress/${period.key}`}
                   className={`bg-gradient-to-r ${period.color} text-white rounded-lg p-6 text-center hover:shadow-lg transition-shadow`}
                 >
                   <div className="text-3xl mb-3">{period.icon}</div>
@@ -299,7 +306,7 @@ export default async function ProgressTrackingPage({
           {/* Back Button */}
           <div className="text-center">
             <Link
-              href={`/${locale}/stress-management`}
+              href={`/${locale}/interactive-tools/stress-management`}
               className="btn-secondary text-lg px-6 py-3 inline-flex items-center gap-2"
             >
               <svg

@@ -1310,8 +1310,15 @@
         "title": "Immediate Relief",
         "articles": {
           "fiveMinuteRelief": "5-Minute Period Pain Relief",
-          "heatTherapy": "Complete Heat Therapy Guide"
-        }
+          "heatTherapy": "Complete Heat Therapy Guide",
+          "fiveMinuteReliefDesc": "Need quick relief from period cramps? Explore simple, actionable techniques you can use right now",
+          "heatTherapyDesc": "Comprehensive understanding of heat therapy's scientific principles, application methods, and safety precautions",
+          "nsaidGuide": "Professional NSAID Guide",
+          "nsaidGuideDesc": "Professional medical guidance: How to safely and effectively use NSAIDs for period pain relief",
+          "specificManagement": "Specific Dysmenorrhea Management Guide",
+          "specificManagementDesc": "Personalized management strategies and treatment plans for different types of dysmenorrhea"
+        },
+        "description": "Professional solutions for immediate period pain relief: 5-minute quick relief techniques, proper heat therapy methods, emergency pain strategies, workplace first aid. Evidence-based professional guidance for quick and effective relief when pain strikes. Includes detailed steps and precautions for safe and effective use, improving quality of life."
       },
       "understandingEducation": {
         "title": "Understanding & Education",
@@ -1320,16 +1327,36 @@
           "lifecycleAnalysis": "Menstrual Lifecycle Analysis",
           "researchProgress2024": "2024 Research Progress",
           "understandingCycle": "Understanding Menstrual Cycle",
-          "insuranceCoverage": "Insurance Coverage Guide"
-        }
+          "insuranceCoverage": "Insurance Coverage Guide",
+          "understandingCycleDesc": "Comprehensive understanding of scientific knowledge and health management of the female physiological cycle",
+          "hiddenCulprits": "Hidden Culprits of Period Pain",
+          "hiddenCulpritsDesc": "Revealing hidden factors and lifestyle habits that may worsen period pain",
+          "painDifferentialDesc": "Learn to distinguish important characteristics between menstrual pain and other abdominal pain",
+          "faqExpert": "Expert Q&A on Period Pain",
+          "faqExpertDesc": "Professional doctors answer common questions and misconceptions about period pain",
+          "insuranceCoverageDesc": "Complete guide to U.S. dysmenorrhea treatment medical insurance coverage based on latest ACA policies, covering insurance selection strategies, claims tips, cost optimization, and rights protection",
+          "researchProgress2024Desc": "2024 dysmenorrhea research progress report based on PubMed database, FDA approval information, and published research in authoritative journals, covering new discoveries in pathological mechanisms, innovative breakthroughs in treatment methods, and digital health technology applications",
+          "lifecycleAnalysisDesc": "Based on latest clinical guidelines from ACOG, The Menopause Society, and NIH, providing scientific dysmenorrhea management solutions for North American women throughout their lifecycle, covering age-specific characteristics analysis and management strategies"
+        },
+        "description": "Deep understanding of menstrual physiology and health education"
       },
       "nutritionHealth": {
         "title": "Nutrition & Health",
         "articles": {
           "sleepQuality": "Comprehensive Menstrual Sleep Quality Guide",
           "preventiveCare": "Preventive Care Guide",
-          "stressManagement": "Stress Management Guide"
-        }
+          "stressManagement": "Stress Management Guide",
+          "stressManagementDesc": "Evidence-based stress management guide for period pain based on latest ACOG, APA, and NIH research, providing scientific stress relief strategies for North American working women, covering immediate stress reduction techniques, long-term management plans, and workplace coping solutions",
+          "antiInflammatory": "Anti-inflammatory Diet for Period Pain Guide",
+          "antiInflammatoryDesc": "Scientific anti-inflammatory dietary strategies to reduce period inflammation and pain through nutrition",
+          "magnesiumGuide": "Comprehensive Guide to Magnesium & Gut Health",
+          "magnesiumGuideDesc": "Deep understanding of magnesium's important role in menstrual health and gut health management",
+          "periodRecipes": "Period-Friendly Recipes",
+          "periodRecipesDesc": "Nutritious recipes specifically designed for menstruation to relieve discomfort symptoms",
+          "sleepQualityDesc": "Evidence-based menstrual sleep improvement guide based on latest research from American Academy of Sleep Medicine (AASM), ACOG, and NIH, providing a systematic 21-day sleep quality enhancement plan",
+          "preventiveCareDesc": "Evidence-based preventive care strategies for North American women based on latest ACOG, NIH, and FDA research, covering comprehensive cycle care including pre-menstrual preparation, menstrual management, and post-menstrual recovery"
+        },
+        "description": "Scientific nutrition guidance and healthy lifestyle recommendations"
       },
       "naturalTherapies": {
         "title": "Natural Therapies",
@@ -1337,23 +1364,61 @@
           "physicalTherapy": "Menstrual Back Pain Comprehensive Care Guide",
           "traditionalMethods": "Ginger Menstrual Pain Relief Guide",
           "zhanZhuang": "Zhan Zhuang Standing Meditation Guide",
-          "herbalTea": "Herbal Tea Guide"
-        }
+          "herbalTea": "Herbal Tea Guide",
+          "physicalTherapyDesc": "Explore scientific applications of natural physical therapies including massage, stretching, and exercise",
+          "essentialOils": "Essential Oils for Period Pain Guide",
+          "essentialOilsDesc": "Understanding aromatherapy applications and precautions for period pain relief",
+          "herbalTeaDesc": "Explore traditional herbal tea applications and preparation methods for period pain relief",
+          "traditionalMethodsDesc": "Explore period pain relief wisdom from traditional cultures around the world",
+          "zhanZhuangDesc": "Learn applications of traditional Chinese medicine health practices in menstrual health management"
+        },
+        "description": "Scientifically validated comprehensive natural therapies for period pain: covering 8 safe and effective natural relief methods including heat therapy, yoga, massage, herbal tea, aromatherapy, and acupuncture. Evidence-based professional guidance with no side effects, suitable for all ages from teenagers to working women. Provides detailed usage instructions and precautions to help you safely and effectively relieve period pain and improve quality of life."
       },
       "medicalGuidance": {
         "title": "Medical Guidance",
         "articles": {
           "nsaidProfessionalGuide": "NSAID Professional Guide",
           "whenToSeeDoctor": "When to See Doctor",
-          "medicalCare": "Medical Care Guide"
-        }
+          "medicalCare": "Medical Care Guide",
+          "comprehensiveMedical": "Comprehensive Medical Guide to Dysmenorrhea",
+          "comprehensiveMedicalDesc": "Comprehensive medical perspective: causes, diagnosis, treatment, and prevention of dysmenorrhea",
+          "whenToSeeDoctorDesc": "Identifying period pain symptoms and emergency situations that require medical intervention",
+          "medicalCareDesc": "Detailed guidance on when professional medical evaluation and treatment are needed",
+          "complications": "Dysmenorrhea Complications Management",
+          "complicationsDesc": "Understanding potential complications of period pain and their prevention and management strategies",
+          "nsaidProfessionalGuideDesc": "Professional NSAIDs dysmenorrhea treatment guide: detailed explanation of pharmacological mechanisms, safe medication use, dosage calculation, and effectiveness optimization"
+        },
+        "description": "Professional medical knowledge and scientific treatment guidance"
       },
       "specializedGuides": {
         "title": "Specialized Guides",
         "articles": {
-          "readingList": "Reading List"
-        }
+          "readingList": "Reading List",
+          "iudGuide": "Comprehensive IUD Guide",
+          "iudGuideDesc": "Comprehensive understanding of IUD types, effects, side effects, and precautions",
+          "medicalGuide": "Medical Guide to Period Pain",
+          "medicalGuideDesc": "Evidence-based medical guide to period pain diagnosis and treatment",
+          "readingListDesc": "Curated selection of period health-related books, research, and resource recommendations"
+        },
+        "description": "Professional guidance and in-depth analysis for specific situations"
+      },
+      "longTermManagement": {
+        "title": "Long-term Management",
+        "description": "Build sustainable healthy lifestyle and long-term management strategies"
       }
+    },
+    "title": "Health Articles & Guides",
+    "description": "Comprehensive period health articles and professional guides",
+    "searchPlaceholder": "Search articles...",
+    "cta": {
+      "title": "Need Personalized Help?",
+      "subtitle": "Try our interactive tools for personalized period pain management solutions",
+      "button": "Explore Tools"
+    },
+    "stats": {
+      "articles": "Professional Articles",
+      "categories": "Content Categories",
+      "evidenceBased": "Evidence-Based"
     }
   },
   "simplePdfCenter": {
@@ -6849,6 +6914,87 @@
     },
     "viewMoreArticles": {
       "buttonText": "View More Articles"
+    }
+  },
+  "articles": {
+    "insuranceGuide": {
+      "formula": {
+        "title": "Insurance Cost Calculation Formula",
+        "mainFormula": "Out-of-Pocket Cost = Deductible + (Total Cost - Deductible) × Coinsurance Rate",
+        "ariaLabel": "Interactive insurance cost calculator",
+        "variables": {
+          "symbols": {
+            "outOfPocket": "Out-of-Pocket Cost",
+            "deductible": "Deductible",
+            "totalCost": "Total Medical Cost",
+            "coinsuranceRate": "Coinsurance Rate"
+          },
+          "descriptions": {
+            "outOfPocket": "The amount you need to pay out of pocket",
+            "deductible": "The amount you must pay before insurance coverage begins",
+            "totalCost": "Total cost of medical treatment",
+            "coinsuranceRate": "Percentage of costs you pay after meeting deductible"
+          }
+        },
+        "calculator": {
+          "title": "Interactive Cost Calculator",
+          "subtitle": "Calculate your estimated out-of-pocket costs",
+          "inputs": {
+            "deductibleLabel": "Annual Deductible ($)",
+            "deductiblePlaceholder": "e.g., 1000",
+            "totalCostLabel": "Total Medical Cost ($)",
+            "totalCostPlaceholder": "e.g., 5000",
+            "coinsuranceLabel": "Coinsurance Rate (%)",
+            "coinsurancePlaceholder": "e.g., 20"
+          },
+          "result": {
+            "title": "Estimated Out-of-Pocket Cost",
+            "amount": "Amount",
+            "breakdown": "Cost Breakdown",
+            "deductiblePortion": "Deductible Portion",
+            "coinsurancePortion": "Coinsurance Portion",
+            "totalAmount": "Total Out-of-Pocket"
+          },
+          "validation": {
+            "deductibleRequired": "Please enter deductible amount",
+            "totalCostRequired": "Please enter total medical cost",
+            "coinsuranceRequired": "Please enter coinsurance rate",
+            "positiveNumberRequired": "Please enter a positive number",
+            "validPercentageRequired": "Please enter a valid percentage (0-100)"
+          }
+        },
+        "steps": {
+          "title": "Calculation Steps",
+          "subtitle": "Step-by-step breakdown of the formula",
+          "step1": {
+            "number": "Step 1",
+            "title": "Pay Deductible",
+            "description": "First, you need to pay the full deductible amount",
+            "example": "Example: If deductible is $1,000, you pay $1,000 first"
+          },
+          "step2": {
+            "number": "Step 2",
+            "title": "Calculate Remaining Cost",
+            "description": "Subtract deductible from total cost to get remaining amount",
+            "formula": "Remaining Cost = Total Cost - Deductible",
+            "example": "Example: $5,000 - $1,000 = $4,000"
+          },
+          "step3": {
+            "number": "Step 3",
+            "title": "Apply Coinsurance",
+            "description": "Multiply remaining cost by your coinsurance rate",
+            "formula": "Coinsurance Amount = Remaining Cost × Coinsurance Rate",
+            "example": "Example: $4,000 × 20% = $800"
+          },
+          "finalResult": {
+            "title": "Final Result",
+            "description": "Add deductible and coinsurance amount for total out-of-pocket cost",
+            "formula": "Total Out-of-Pocket = Deductible + Coinsurance Amount",
+            "example": "Example: $1,000 + $800 = $1,800",
+            "conclusion": "You will pay $1,800 out of pocket for $5,000 in medical costs"
+          }
+        }
+      }
     }
   }
 }

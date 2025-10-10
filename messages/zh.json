@@ -8856,6 +8856,8 @@
       "noData": "暂无症状数据"
     },
     "export": {
+      "title": "数据导出与管理",
+      "securityWarnings": "安全警告",
       "contentLabel": "导出内容",
       "types": {
         "period": "经期数据",

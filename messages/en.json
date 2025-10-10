@@ -2414,6 +2414,8 @@
       "noData": "No symptom data available"
     },
     "export": {
+      "title": "Data Export & Management",
+      "securityWarnings": "Security Warnings",
       "contentLabel": "Export Content",
       "types": {
         "period": "Period Data",

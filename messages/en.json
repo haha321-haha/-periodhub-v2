@@ -1984,7 +1984,8 @@
       "description": "Download professional period health PDF resources for free, including dysmenorrhea management guides, nutrition advice, and exercise plans"
     },
     "banner": {
-      "text": "🎉 New PDF Download Center Launched! More professional resources, better reading experience"
+      "text": "🎉 New PDF Download Center Launched! More professional resources, better reading experience",
+      "newVersion": "🎉 全新PDF下载中心 - 38个精选资源，移动端优化体验，基于紧急程度智能分类"
     },
     "structuredData": {
       "name": "PeriodHub PDF Download Center",
@@ -2065,7 +2066,40 @@
         "title": "Zhan Zhuang Baduanjin Illustrated Guide",
         "description": "Guidance on applying traditional Chinese medicine wellness exercises to menstrual health management"
       }
-    }
+    },
+    "seo": {
+      "title": "文章PDF下载中心 - Period Hub 经期健康专业资源",
+      "description": "Period Hub文章PDF下载中心，38个精选经期健康资源，基于紧急程度智能分类，支持中英双语下载",
+      "keywords": "经期健康,PDF下载,痛经缓解,文章资源,Period Hub"
+    },
+    "navigation": {
+      "backToArticles": "返回文章"
+    },
+    "pageTitle": "📚 文章PDF下载中心",
+    "stats": {
+      "totalResources": "专业资源",
+      "categories": "分类目录",
+      "languages": "语言版本"
+    },
+    "categories": {
+      "managementTools": {
+        "title": "管理工具",
+        "description": "实用的追踪表格、评估工具和管理指南"
+      },
+      "healthManagement": {
+        "title": "健康管理",
+        "description": "营养指导、健康习惯和专业医学指南"
+      },
+      "communicationGuidance": {
+        "title": "沟通指导",
+        "description": "家长、教师和学校的沟通协作指南"
+      },
+      "educationalResources": {
+        "title": "教育资源",
+        "description": "为教育工作者提供的专业健康教育资源"
+      }
+    },
+    "backToArticles": "返回文章页面"
   },
   "periodPainAssessmentPage": {
     "tool": {

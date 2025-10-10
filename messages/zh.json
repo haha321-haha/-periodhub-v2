@@ -8727,7 +8727,11 @@
         "yangDeficient": "阳虚体质",
         "yinDeficient": "阴虚体质",
         "dampHeat": "湿热体质",
-        "cold": "寒性体质"
+        "cold": "寒性体质",
+        "qi_deficiency": "气虚",
+        "yang_deficiency": "阳虚",
+        "yin_deficiency": "阴虚",
+        "blood_deficiency": "血虚"
       },
       "foodTitle": "食物推荐",
       "searchPlaceholder": "搜索食物...",

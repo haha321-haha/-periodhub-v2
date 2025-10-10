@@ -2285,7 +2285,11 @@
         "yangDeficient": "Yang Deficient",
         "yinDeficient": "Yin Deficient",
         "dampHeat": "Damp Heat",
-        "cold": "Cold"
+        "cold": "Cold",
+        "qi_deficiency": "Qi Deficiency",
+        "yang_deficiency": "Yang Deficiency",
+        "yin_deficiency": "Yin Deficiency",
+        "blood_deficiency": "Blood Deficiency"
       },
       "foodTitle": "Food Recommendations",
       "searchPlaceholder": "Search foods...",

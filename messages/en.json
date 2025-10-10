@@ -1,4 +1,11 @@
 {
+  "0": "Benefits",
+  "4": "4",
+  "site": {
+    "name": "Period Hub",
+    "title": "Period Hub - Period Health Management Platform",
+    "description": "Period Hub - Professional period health management platform, providing scientific dysmenorrhea relief solutions, interactive tools and personalized health guidance. From immediate relief to long-term management, comprehensive support for women's menstrual health. Already helped tens of millions of women manage their periods scientifically. Professional content based on evidence-based medicine, covering 42 professional articles, 24 PDF resources, 6 major interactive tools, providing scientific guidance for women of all ages."
+  },
   "homePage": {
     "metadata": {
       "title": "PeriodHub - Period Pain Relief & Pain Management | 42 Medical Guides + 8 Assessment Tools",
@@ -51,17 +58,95 @@
     }
   },
   "common": {
+    "PeriodHub": "Period Health Center",
+    "home": "Home",
+    "articles": "Health Articles",
+    "interactiveTools": "Interactive Tools",
+    "teenHealth": "Teen Zone",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "search": "Search",
+    "readMore": "Read More",
+    "loading": "Loading...",
+    "error": "Error occurred",
+    "tryAgain": "Try Again",
+    "healthGuide": "Health Guide",
+    "naturalTherapies": "Natural Therapies",
     "breadcrumb": {
       "home": "Home",
       "separator": "/",
       "immediateRelief": "Immediate Relief"
     },
-    "readMore": "Read More",
-    "importantNote": "Important Note",
-    "medicalDisclaimer": "This website content is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional if you have any health concerns.",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
     "learnMore": "Learn More",
+    "seeAll": "See All",
+    "tryNow": "Try Now",
+    "startNow": "Start Now",
+    "comingSoon": "Coming Soon",
+    "importantNote": "Important Note",
+    "medicalDisclaimer": "This information is for educational purposes only and is not intended to replace professional medical advice. If you have medical concerns, please consult a healthcare professional.",
     "navigation": {
       "backToArticles": "Back to Articles"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help you on your menstrual health journey. Feel free to reach out to us anytime.",
+    "form": {
+      "title": "Send a Message",
+      "name": "Name",
+      "namePlaceholder": "Please enter your name",
+      "email": "Email Address",
+      "emailPlaceholder": "Please enter your email address",
+      "subject": "Subject",
+      "selectSubject": "Please select a subject",
+      "subjects": {
+        "general": "General Inquiry",
+        "medical": "Medical Question",
+        "technical": "Technical Support",
+        "feedback": "Feedback"
+      },
+      "message": "Message",
+      "messagePlaceholder": "Tell us how we can help you...",
+      "submit": "Send Message",
+      "success": "Thank you! Your message has been sent successfully."
+    },
+    "methods": {
+      "title": "Other Contact Methods",
+      "email": {
+        "title": "Email Support",
+        "description": "Get detailed answers to your questions",
+        "action": "Send Email"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Get help immediately when you need it",
+        "value": "Always Available",
+        "action": "Get Help"
+      },
+      "social": {
+        "title": "Social Media",
+        "description": "Follow us for health tips and updates",
+        "value": "Connect With Us",
+        "action": "Follow Us"
+      }
+    },
+    "response": {
+      "title": "Response Time",
+      "urgent": "Urgent Matters",
+      "urgentTime": "Within 2 hours",
+      "general": "General Inquiries",
+      "generalTime": "Within 24 hours",
+      "support": "Support Requests",
+      "supportTime": "Within 12 hours"
     }
   },
   "hero": {

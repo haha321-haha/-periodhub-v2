@@ -643,15 +643,31 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
         workImpact: state.workImpact,
         nutrition: state.nutrition,
         export: state.export,
-        // Day 11: 扩展持久化状态
+        // Day 11: 扩展持久化状态 - 限制存储大小
         userPreferences: state.userPreferences,
         exportTemplates: state.exportTemplates,
         activeTemplate: state.activeTemplate,
-        exportHistory: state.exportHistory,
+        // 限制exportHistory存储大小，只保留最近10条记录
+        exportHistory: state.exportHistory.slice(-10),
         systemSettings: state.systemSettings,
       }),
       // 添加SSR安全配置
       skipHydration: false,
+      // 添加存储错误处理
+      onError: (error) => {
+        console.warn("Workplace Wellness storage error:", error);
+        // 如果是存储空间不足错误，清理旧数据
+        if (error.name === "QuotaExceededError") {
+          try {
+            localStorage.removeItem("workplace-wellness-storage");
+            console.log(
+              "Cleared workplace-wellness storage due to quota exceeded",
+            );
+          } catch (clearError) {
+            console.error("Failed to clear storage:", clearError);
+          }
+        }
+      },
       onRehydrateStorage: () => (state) => {
         if (state) {
           // 确保 Date 对象正确反序列化

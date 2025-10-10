@@ -2387,6 +2387,33 @@
         "description": "We are preparing more high-quality health content, stay tuned.",
         "browseAll": "Browse All Articles"
       }
+    },
+    "tags": {
+      "health": "Health",
+      "nutrition": "Nutrition",
+      "exercise": "Exercise",
+      "medical": "Medical",
+      "lifestyle": "Lifestyle",
+      "wellness": "Wellness",
+      "therapy": "Therapy",
+      "management": "Management",
+      "natural-therapies": "Natural Therapies",
+      "natural-therapy": "Natural Therapy",
+      "traditional-therapies": "Traditional Therapies",
+      "traditional-therapy": "Traditional Therapy",
+      "immediate-relief": "Immediate Relief",
+      "understanding-education": "Understanding & Education",
+      "health-management": "Health Management",
+      "medical-education": "Medical Education",
+      "medical-knowledge": "Medical Knowledge",
+      "medical-guide": "Medical Guide",
+      "nutrition-health": "Nutrition & Health",
+      "preparation-planning": "Preparation Planning",
+      "symptom-management": "Symptom Management",
+      "comprehensive-guides": "Comprehensive Guides",
+      "contraception-guide": "Contraception Guide",
+      "education": "Education",
+      "health-education": "Health Education"
     }
   },
   "termsOfService": {

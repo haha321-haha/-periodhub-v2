@@ -4,9 +4,9 @@ import { unstable_setRequestLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+// import fs from "fs";
+// import path from "path";
+// import matter from "gray-matter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -44,7 +44,7 @@ const NSAIDContentSimple = dynamic(
   },
 );
 
-const StructuredData = dynamic(() => import("@/components/StructuredData"));
+// const StructuredData = dynamic(() => import("@/components/StructuredData"));
 
 const ArticleInteractions = dynamic(
   () => import("@/components/ArticleInteractions"),
@@ -78,7 +78,6 @@ interface BreadcrumbItem {
 
 function ServerBreadcrumb({
   items,
-  locale,
 }: {
   items: BreadcrumbItem[];
   locale: string;
@@ -117,29 +116,29 @@ function ServerBreadcrumb({
 type Locale = "en" | "zh";
 
 // Article interface
-interface Article {
-  slug: string;
-  title: string;
-  title_zh?: string;
-  date: string;
-  summary: string;
-  summary_zh?: string;
-  tags: string[];
-  tags_zh?: string[];
-  category: string;
-  category_zh?: string;
-  author: string;
-  featured_image: string;
-  reading_time: string;
-  reading_time_zh?: string;
-  content: string;
-  seo_title?: string;
-  seo_title_zh?: string;
-  seo_description?: string;
-  seo_description_zh?: string;
-  canonical_url?: string;
-  schema_type?: string;
-}
+// interface Article {
+//   slug: string;
+//   title: string;
+//   title_zh?: string;
+//   date: string;
+//   summary: string;
+//   summary_zh?: string;
+//   tags: string[];
+//   tags_zh?: string[];
+//   category: string;
+//   category_zh?: string;
+//   author: string;
+//   featured_image: string;
+//   reading_time: string;
+//   reading_time_zh?: string;
+//   content: string;
+//   seo_title?: string;
+//   seo_title_zh?: string;
+//   seo_description?: string;
+//   seo_description_zh?: string;
+//   canonical_url?: string;
+//   schema_type?: string;
+// }
 
 // 使用lib/articles.ts中的函数
 
@@ -302,20 +301,26 @@ export default async function ArticlePage({
   const requestStart = Date.now();
 
   try {
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
     console.log(
       `[PROD-MONITOR] Request start: ${locale}/${slug} at ${new Date().toISOString()}`,
     );
 
     // 检测冷启动
     const coldStartCheck = Date.now();
-    if (!(global as any).isWarm) {
-      (global as any).isWarm = true;
+    if (!(global as Record<string, unknown>).isWarm) {
+      (global as Record<string, unknown>).isWarm = true;
+      // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console
       console.log(
         `[PROD-MONITOR] Cold start detected - initialization: ${
           Date.now() - coldStartCheck
         }ms`,
       );
     } else {
+      // eslint-disable-next-line no-console
       console.log(
         `[PROD-MONITOR] Warm start - check: ${Date.now() - coldStartCheck}ms`,
       );
@@ -323,11 +328,17 @@ export default async function ArticlePage({
 
     // 文章获取计时
     const articleFetchStart = Date.now();
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
     console.log("ArticlePage - Processing:", { locale, slug });
 
     const article = await getArticleBySlug(slug, locale);
     const articleFetchTime = Date.now() - articleFetchStart;
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
     console.log(`[PROD-MONITOR] Article fetch: ${articleFetchTime}ms`);
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
     console.log("ArticlePage - Article found:", !!article, article?.title);
 
     if (!article) {
@@ -339,9 +350,13 @@ export default async function ArticlePage({
     const relatedArticlesStart = Date.now();
     const relatedArticles = await getRelatedArticles(slug, locale, 3);
     const relatedArticlesTime = Date.now() - relatedArticlesStart;
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
     console.log(
       `[PROD-MONITOR] Related articles calculation: ${relatedArticlesTime}ms`,
     );
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
     console.log(
       "ArticlePage - Related articles found:",
       relatedArticles.length,
@@ -355,8 +370,10 @@ export default async function ArticlePage({
       locale === "zh" ? article.summary_zh || article.summary : article.summary;
     const category =
       locale === "zh"
-        ? article.category_zh || article.category
-        : article.category;
+        ? article.category_zh ||
+          t(`tags.${article.category}`) ||
+          article.category
+        : t(`tags.${article.category}`) || article.category;
     const readingTime =
       locale === "zh"
         ? article.reading_time_zh || article.reading_time
@@ -374,9 +391,13 @@ export default async function ArticlePage({
 
     // 🔍 渲染准备完成计时
     const renderPrepTime = Date.now() - requestStart;
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
     console.log(
       `[PROD-MONITOR] Render preparation completed: ${renderPrepTime}ms`,
     );
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
     console.log(
       `[PROD-MONITOR] Component breakdown - Article: ${articleFetchTime}ms, Related: ${relatedArticlesTime}ms, Other: ${
         renderPrepTime - articleFetchTime - relatedArticlesTime
@@ -710,8 +731,10 @@ export default async function ArticlePage({
                       const relatedCategory =
                         locale === "zh"
                           ? relatedArticle.category_zh ||
+                            t(`tags.${relatedArticle.category}`) ||
                             relatedArticle.category
-                          : relatedArticle.category;
+                          : t(`tags.${relatedArticle.category}`) ||
+                            relatedArticle.category;
 
                       return (
                         <Link

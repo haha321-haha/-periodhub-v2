@@ -8633,6 +8633,33 @@
         "subtitle": "继续深入了解经期健康",
         "readMore": "阅读更多"
       }
+    },
+    "tags": {
+      "health": "健康",
+      "nutrition": "营养",
+      "exercise": "运动",
+      "medical": "医学",
+      "lifestyle": "生活方式",
+      "wellness": "养生",
+      "therapy": "疗法",
+      "management": "管理",
+      "natural-therapies": "自然疗法",
+      "natural-therapy": "自然疗法",
+      "traditional-therapies": "传统疗法",
+      "traditional-therapy": "传统疗法",
+      "immediate-relief": "即时缓解方案",
+      "understanding-education": "理解与教育",
+      "health-management": "健康管理",
+      "medical-education": "医学教育",
+      "medical-knowledge": "医学知识",
+      "medical-guide": "医学指导",
+      "nutrition-health": "营养健康",
+      "preparation-planning": "计划准备",
+      "symptom-management": "症状管理",
+      "comprehensive-guides": "综合指南",
+      "contraception-guide": "避孕指导",
+      "education": "教育",
+      "health-education": "健康教育"
     }
   }
 }

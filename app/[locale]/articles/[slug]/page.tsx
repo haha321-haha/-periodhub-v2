@@ -368,12 +368,16 @@ export default async function ArticlePage({
       locale === "zh" ? article.title_zh || article.title : article.title;
     const summary =
       locale === "zh" ? article.summary_zh || article.summary : article.summary;
+    // 将category转换为安全的翻译键名
+    const categoryKey = article.category
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^\w\u4e00-\u9fff-]/g, "");
+
     const category =
       locale === "zh"
-        ? article.category_zh ||
-          t(`tags.${article.category}`) ||
-          article.category
-        : t(`tags.${article.category}`) || article.category;
+        ? article.category_zh || t(`tags.${categoryKey}`) || article.category
+        : t(`tags.${categoryKey}`) || article.category;
     const readingTime =
       locale === "zh"
         ? article.reading_time_zh || article.reading_time
@@ -728,12 +732,18 @@ export default async function ArticlePage({
                         locale === "zh"
                           ? relatedArticle.summary_zh || relatedArticle.summary
                           : relatedArticle.summary;
+                      // 将relatedArticle.category转换为安全的翻译键名
+                      const relatedCategoryKey = relatedArticle.category
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")
+                        .replace(/[^\w\u4e00-\u9fff-]/g, "");
+
                       const relatedCategory =
                         locale === "zh"
                           ? relatedArticle.category_zh ||
-                            t(`tags.${relatedArticle.category}`) ||
+                            t(`tags.${relatedCategoryKey}`) ||
                             relatedArticle.category
-                          : t(`tags.${relatedArticle.category}`) ||
+                          : t(`tags.${relatedCategoryKey}`) ||
                             relatedArticle.category;
 
                       return (

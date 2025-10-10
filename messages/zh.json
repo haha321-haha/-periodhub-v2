@@ -8632,6 +8632,8 @@
       "date": "日期",
       "type": "类型",
       "typePeriod": "月经",
+      "typePredicted": "预测",
+      "typeOvulation": "排卵",
       "painLevel": "疼痛等级",
       "days": {
         "sun": "日",

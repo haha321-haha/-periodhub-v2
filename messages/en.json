@@ -2190,6 +2190,8 @@
       "date": "Date",
       "type": "Type",
       "typePeriod": "Period",
+      "typePredicted": "Predicted",
+      "typeOvulation": "Ovulation",
       "painLevel": "Pain Level",
       "days": {
         "sun": "Sun",

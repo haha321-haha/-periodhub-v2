@@ -76,6 +76,25 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl, 301);
     }
 
+    // 🎯 修复错误的 /downloads/articles/ 路径 - 重定向到 /articles/
+    if (pathname.match(/^\/(zh|en)\/downloads\/articles\/.+/)) {
+      // 带语言前缀的情况: /zh/downloads/articles/* → /zh/articles/*
+      const correctPath = pathname.replace('/downloads/articles/', '/articles/');
+      console.log(`[Middleware] Redirecting ${pathname} to ${correctPath}`);
+      const redirectUrl = new URL(correctPath, request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+    if (pathname.match(/^\/downloads\/articles\/.+/)) {
+      // 不带语言前缀的情况: /downloads/articles/* → 根据语言检测
+      const acceptLanguage = request.headers.get('accept-language') || '';
+      const isChinese = acceptLanguage.includes('zh');
+      const articleSlug = pathname.replace('/downloads/articles/', '');
+      const redirectPath = isChinese ? `/zh/articles/${articleSlug}` : `/en/articles/${articleSlug}`;
+      console.log(`[Middleware] Redirecting ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      const redirectUrl = new URL(redirectPath, request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+
     // 记录请求信息用于调试
     if (process.env.NODE_ENV === "development") {
       console.log(`[Middleware] Processing: ${pathname}`);

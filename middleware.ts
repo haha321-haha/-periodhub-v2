@@ -36,17 +36,29 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // 🎯 让Next.js重定向规则优先处理特定路径
-    const redirectPaths = [
-      '/teen-health',
-      '/articles', 
-      '/zh/assessment',
-      '/assessment'
-    ];
+    // 🎯 手动处理重定向，确保返回301状态码
+    if (pathname === '/teen-health') {
+      const redirectUrl = new URL('/zh/teen-health', request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
     
-    if (redirectPaths.includes(pathname)) {
-      // 直接传递给Next.js处理重定向，不经过国际化中间件
-      return NextResponse.next();
+    if (pathname === '/articles') {
+      // 检查Accept-Language头部
+      const acceptLanguage = request.headers.get('accept-language') || '';
+      const isChinese = acceptLanguage.includes('zh');
+      const redirectPath = isChinese ? '/zh/downloads' : '/en/downloads';
+      const redirectUrl = new URL(redirectPath, request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+    
+    if (pathname === '/zh/assessment') {
+      const redirectUrl = new URL('/zh/interactive-tools/symptom-assessment', request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+    
+    if (pathname === '/assessment') {
+      const redirectUrl = new URL('/en/interactive-tools/symptom-assessment', request.url);
+      return NextResponse.redirect(redirectUrl, 301);
     }
 
     // 记录请求信息用于调试

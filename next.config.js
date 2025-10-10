@@ -269,8 +269,7 @@ const nextConfig = {
       {
         source: '/zh/assessment',
         destination: '/zh/interactive-tools/symptom-assessment',
-        permanent: true,
-        statusCode: 301
+        permanent: true
       },
       // 🎯 修复articles页面重定向问题 - 重定向到下载中心（用户实际使用的页面）
       {
@@ -283,14 +282,12 @@ const nextConfig = {
           },
         ],
         destination: '/zh/downloads',
-        permanent: true,
-        statusCode: 301
+        permanent: true
       },
       {
         source: '/articles',
         destination: '/en/downloads', // 默认英文版本
-        permanent: true,
-        statusCode: 301
+        permanent: true
       },
       // 🎯 修复不存在的文章重定向 - pain-relief-methods
       {
@@ -307,8 +304,7 @@ const nextConfig = {
       {
         source: '/teen-health',
         destination: '/zh/teen-health',
-        permanent: true,
-        statusCode: 301
+        permanent: true
       },
       // 🎯 重定向旧的special-therapies页面到natural-therapies
       {

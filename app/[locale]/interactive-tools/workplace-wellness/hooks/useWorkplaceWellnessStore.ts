@@ -11,9 +11,6 @@ import {
   WorkImpactData,
   NutritionData,
   ExportConfig,
-  PeriodRecord,
-  LeaveTemplate,
-  NutritionRecommendation,
   PainLevel,
   MenstrualPhase,
   TCMConstitution,
@@ -26,13 +23,8 @@ import {
   BatchExportItem,
   ExportHistory,
   SystemSettings,
-  ExtendedExportFormat,
   Theme,
   FontSize,
-  DateFormat,
-  TimeFormat,
-  NotificationType,
-  NotificationChannel,
   SettingsValidationResult,
   PreferenceChange,
 } from "../types";
@@ -211,7 +203,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
         set((state) => ({
           workImpact: {
             ...state.workImpact,
-            painLevel: level as any, // 临时类型断言
+            painLevel: level as PainLevel, // 类型断言
           },
         })),
 
@@ -398,7 +390,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       },
 
       resetPreferences: () =>
-        set((state) => ({
+        set(() => ({
           userPreferences: DEFAULT_USER_PREFERENCES,
         })),
 
@@ -605,6 +597,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       // Day 11: 偏好设置变更追踪
       addPreferenceChange: (change) => {
         // 这里可以扩展为存储到历史记录中
+        // eslint-disable-next-line no-console
         console.log("Preference change:", change);
       },
 
@@ -641,21 +634,22 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
     {
       name: "workplace-wellness-storage",
       partialize: (state) => ({
+        // 只保存核心状态，避免存储空间不足
         activeTab: state.activeTab,
         calendar: {
-          ...state.calendar,
           currentDate: state.calendar.currentDate.toISOString(),
           selectedDate: state.calendar.selectedDate?.toISOString() || null,
+          // 不保存大量历史数据
         },
-        workImpact: state.workImpact,
-        nutrition: state.nutrition,
-        export: state.export,
-        // Day 11: 扩展持久化状态
         userPreferences: state.userPreferences,
-        exportTemplates: state.exportTemplates,
-        activeTemplate: state.activeTemplate,
-        exportHistory: state.exportHistory,
         systemSettings: state.systemSettings,
+        // 移除可能导致存储空间不足的大数据
+        // workImpact: state.workImpact,
+        // nutrition: state.nutrition,
+        // export: state.export,
+        // exportTemplates: state.exportTemplates,
+        // activeTemplate: state.activeTemplate,
+        // exportHistory: state.exportHistory,
       }),
       // 添加SSR安全配置
       skipHydration: false,
@@ -674,7 +668,19 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           ) {
             state.calendar.selectedDate = new Date(state.calendar.selectedDate);
           }
+          // eslint-disable-next-line no-console
           console.log("Workplace Wellness Store rehydrated successfully");
+        }
+      },
+      // 添加存储错误处理
+      onError: (error) => {
+        // eslint-disable-next-line no-console
+        console.warn("Storage error:", error);
+        // 如果存储空间不足，清除存储
+        if (error.name === "QuotaExceededError") {
+          localStorage.removeItem("workplace-wellness-storage");
+          // eslint-disable-next-line no-console
+          console.log("Cleared storage due to quota exceeded");
         }
       },
     },

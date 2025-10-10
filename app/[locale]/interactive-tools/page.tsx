@@ -154,14 +154,6 @@ export default async function InteractiveToolsPage({
       cta: t("nutritionGenerator.cta"),
       requiresPrerequisites: true,
     },
-    {
-      title: t("stressManagement.title"),
-      description: t("stressManagement.description"),
-      href: `/${locale}/interactive-tools/stress-management`,
-      iconType: "Lightbulb",
-      iconColor: "text-indigo-600",
-      cta: t("stressManagement.cta"),
-    },
   ];
 
   // Helper function to render icons

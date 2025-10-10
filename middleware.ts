@@ -13,6 +13,9 @@ const intlMiddleware = createMiddleware({
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // 添加调试信息
+  console.log(`[Middleware] Processing: ${pathname}`);
+
   try {
     // 排除静态文件路径，避免国际化中间件干扰
     if (
@@ -38,6 +41,7 @@ export function middleware(request: NextRequest) {
 
     // 🎯 手动处理重定向，确保返回301状态码
     if (pathname === '/teen-health') {
+      console.log(`[Middleware] Redirecting /teen-health to /zh/teen-health`);
       const redirectUrl = new URL('/zh/teen-health', request.url);
       return NextResponse.redirect(redirectUrl, 301);
     }
@@ -85,6 +89,12 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    // 包含所有路径，除了静态文件
     "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images|styles|scripts|fonts|icons).*)",
+    // 特别包含我们要处理的路径
+    "/teen-health",
+    "/articles", 
+    "/zh/assessment",
+    "/assessment"
   ],
 };

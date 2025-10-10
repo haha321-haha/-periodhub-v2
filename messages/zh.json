@@ -8229,6 +8229,11 @@
       "success": "成功",
       "warning": "警告",
       "info": "信息"
+    },
+    "sections": {
+      "workplaceArticles": "职场健康文章",
+      "relatedTools": "相关工具",
+      "scenarioSolutions": "场景解决方案"
     }
   },
   "anchorTexts": {

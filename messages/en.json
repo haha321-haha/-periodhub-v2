@@ -2186,6 +2186,11 @@
       "title": "Period Calendar",
       "subtitle": "Record and track your menstrual cycle",
       "recordButton": "Record Period",
+      "addRecord": "Add Record",
+      "date": "Date",
+      "type": "Type",
+      "typePeriod": "Period",
+      "painLevel": "Pain Level",
       "days": {
         "sun": "Sun",
         "mon": "Mon",
@@ -2243,6 +2248,14 @@
       "cycleLengthDistribution": "Cycle Length Distribution",
       "painLevelDistribution": "Pain Level Distribution",
       "flowTypeDistribution": "Flow Type Distribution",
+      "cycleLength": "Cycle Length",
+      "painLevel": "Pain Level",
+      "flowType": "Flow Type",
+      "flowTypes": {
+        "light": "Light",
+        "medium": "Medium",
+        "heavy": "Heavy"
+      },
       "tabs": {
         "overview": "Overview",
         "cycleLength": "Cycle Length",

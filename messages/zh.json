@@ -8628,6 +8628,11 @@
       "title": "经期日历",
       "subtitle": "记录和追踪您的经期周期",
       "recordButton": "记录经期",
+      "addRecord": "添加记录",
+      "date": "日期",
+      "type": "类型",
+      "typePeriod": "月经",
+      "painLevel": "疼痛等级",
       "days": {
         "sun": "日",
         "mon": "一",
@@ -8685,6 +8690,14 @@
       "cycleLengthDistribution": "周期长度分布",
       "painLevelDistribution": "疼痛等级分布",
       "flowTypeDistribution": "流量类型分布",
+      "cycleLength": "周期长度",
+      "painLevel": "疼痛等级",
+      "flowType": "流量类型",
+      "flowTypes": {
+        "light": "少量",
+        "medium": "中等",
+        "heavy": "大量"
+      },
       "tabs": {
         "overview": "概览",
         "cycleLength": "周期长度",

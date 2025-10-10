@@ -1716,17 +1716,23 @@
           "omega3": {
             "title": "Omega-3 Fatty Acids",
             "sourcesValue": "Deep-sea fish, flaxseeds, walnuts",
-            "mechanismValue": "Anti-inflammatory effects, reduces prostaglandin production"
+            "mechanismValue": "Anti-inflammatory effects, reduces prostaglandin production",
+            "mechanism": "Anti-inflammatory effects, reduces prostaglandin production",
+            "sources": "Fatty fish (salmon, mackerel), flaxseeds, walnuts, chia seeds"
           },
           "magnesium": {
             "title": "Magnesium",
             "sourcesValue": "Dark leafy greens, nuts, whole grains",
-            "mechanismValue": "Relaxes muscles, relieves spasms"
+            "mechanismValue": "Relaxes muscles, relieves spasms",
+            "mechanism": "Relaxes uterine muscles and reduces cramping",
+            "sources": "Leafy greens, nuts, whole grains, dark chocolate"
           },
           "vitaminB6": {
             "title": "Vitamin B6",
             "sourcesValue": "Bananas, chicken, potatoes",
-            "mechanismValue": "Regulates neurotransmitters, improves mood"
+            "mechanismValue": "Regulates neurotransmitters, improves mood",
+            "mechanism": "Regulates hormones and neurotransmitters, reduces bloating",
+            "sources": "Bananas, chicken, potatoes, chickpeas"
           }
         },
         "foods": {
@@ -2167,7 +2173,20 @@
           "benefitsValue": "Always-prepared toolkit for unexpected period pain relief"
         }
       }
-    }
+    },
+    "title": "Natural Therapies for Period Pain",
+    "description": "Evidence-based natural methods for menstrual pain relief",
+    "consistencyIsKeyTitle": "Consistency is Key",
+    "consistencyIsKeyText": "Natural therapies work best with regular, long-term use. Most methods show significant improvement after 2-3 cycles of consistent practice.",
+    "contentSectionTitle": "Natural Therapy Methods",
+    "introTitle": "Introduction to Natural Therapies",
+    "introText": "Natural therapies combine traditional wisdom with modern science to provide safe, effective period pain management without side effects.",
+    "holisticApproachesTitle": "Holistic Approaches to Period Wellness",
+    "dietNutrition": "Diet & Nutrition",
+    "movementExercise": "Movement & Exercise",
+    "mindBodyPractices": "Mind-Body Practices",
+    "herbalRemedies": "Herbal Remedies",
+    "traditionalPractices": "Traditional Practices"
   },
   "workplaceWellness": {
     "header": {
@@ -3529,6 +3548,10 @@
             "Maintain healthy lifestyle habits"
           ]
         }
+      },
+      "emergency": {
+        "title": "⚠️ Emergency Symptoms",
+        "text": "Seek immediate medical attention if you experience any of the following symptoms:"
       }
     }
   },

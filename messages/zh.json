@@ -6294,8 +6294,8 @@
     },
     "recommendations": {
       "relatedTools": {
-        "symptomAssessment": {
-          "title": "症状评估工具",
+    "symptomAssessment": {
+      "title": "症状评估工具",
           "description": "科学评估经期症状，获取个性化建议"
         },
         "painTracker": {
@@ -8185,10 +8185,10 @@
       "dateFormat": "日期格式",
       "timeFormat": "时间格式",
       "notifications": "通知设置",
-      "browser": "浏览器通知",
-      "email": "邮件通知",
-      "sms": "短信通知",
-      "push": "推送通知",
+        "browser": "浏览器通知",
+        "email": "邮件通知",
+        "sms": "短信通知",
+        "push": "推送通知",
       "reminderTime": "提醒频率",
       "highContrast": "高对比度模式",
       "reducedMotion": "减少动画效果",
@@ -8788,17 +8788,26 @@
       }
     },
     "workAnalysis": {
+      "title": "工作影响分析",
       "tabs": {
         "overview": "概览",
         "patterns": "模式",
         "productivity": "生产力",
         "insights": "洞察"
       },
+      "noData": "暂无工作影响数据",
       "avgPain": "平均疼痛",
       "avgProductivity": "平均生产力",
       "avgEfficiency": "平均工作效率",
       "adjustmentRate": "调整率",
-      "recentTrends": "近期趋势"
+      "recentTrends": "近期趋势",
+      "efficiency": "工作效率",
+      "painLevel": "疼痛等级",
+      "commonAdjustments": "常见调整",
+      "productivityTitle": "生产力分析",
+      "efficiencyVsPain": "效率vs疼痛",
+      "productivityTrend": "生产力趋势",
+      "recommendation": "建议"
     },
     "analysis": {
       "advancedTitle": "高级分析",
@@ -8811,7 +8820,9 @@
       "avgCycleLength": "平均周期长度",
       "avgPeriodLength": "平均经期长度",
       "avgPainLevel": "平均疼痛等级",
-      "confidence": "置信度"
+      "avgPain": "平均疼痛",
+      "confidence": "置信度",
+      "cycleLength": "周期长度"
     },
     "insights": {
       "irregularCycle": "不规律周期",

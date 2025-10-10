@@ -2346,17 +2346,26 @@
       }
     },
     "workAnalysis": {
+      "title": "Work Impact Analysis",
       "tabs": {
         "overview": "Overview",
         "patterns": "Patterns",
         "productivity": "Productivity",
         "insights": "Insights"
       },
+      "noData": "No work impact data available",
       "avgPain": "Average Pain",
       "avgProductivity": "Average Productivity",
       "avgEfficiency": "Average Work Efficiency",
       "adjustmentRate": "Adjustment Rate",
-      "recentTrends": "Recent Trends"
+      "recentTrends": "Recent Trends",
+      "efficiency": "Work Efficiency",
+      "painLevel": "Pain Level",
+      "commonAdjustments": "Common Adjustments",
+      "productivityTitle": "Productivity Analysis",
+      "efficiencyVsPain": "Efficiency vs Pain",
+      "productivityTrend": "Productivity Trend",
+      "recommendation": "Recommendation"
     },
     "analysis": {
       "advancedTitle": "Advanced Analysis",
@@ -2369,7 +2378,9 @@
       "avgCycleLength": "Average Cycle Length",
       "avgPeriodLength": "Average Period Length",
       "avgPainLevel": "Average Pain Level",
-      "confidence": "Confidence"
+      "avgPain": "Average Pain",
+      "confidence": "Confidence",
+      "cycleLength": "Cycle Length"
     },
     "insights": {
       "irregularCycle": "Irregular Cycle",

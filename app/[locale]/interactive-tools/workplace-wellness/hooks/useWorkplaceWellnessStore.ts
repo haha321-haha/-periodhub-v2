@@ -633,6 +633,68 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
     }),
     {
       name: "workplace-wellness-storage",
+      // 自定义存储引擎，捕获QuotaExceededError
+      storage: {
+        getItem: (name) => {
+          try {
+            const value = localStorage.getItem(name);
+            return value;
+          } catch (error) {
+            console.error("Error reading from localStorage:", error);
+            return null;
+          }
+        },
+        setItem: (name, value) => {
+          try {
+            localStorage.setItem(name, value);
+          } catch (error) {
+            if (
+              error instanceof DOMException &&
+              error.name === "QuotaExceededError"
+            ) {
+              console.warn("LocalStorage quota exceeded, clearing old data...");
+              try {
+                // 清除当前存储
+                localStorage.removeItem(name);
+                // 尝试只保存最小化的状态
+                const parsed = JSON.parse(value);
+                if (parsed?.state) {
+                  // 只保留必要的数据
+                  const minimalState = {
+                    ...parsed,
+                    state: {
+                      ...parsed.state,
+                      exportHistory: [], // 清空导出历史
+                    },
+                  };
+                  localStorage.setItem(name, JSON.stringify(minimalState));
+                  console.log("Successfully saved minimal state");
+                }
+              } catch (clearError) {
+                console.error(
+                  "Failed to clear and save minimal state:",
+                  clearError,
+                );
+                // 如果还是失败，完全清除
+                try {
+                  localStorage.removeItem(name);
+                } catch (removeError) {
+                  console.error("Failed to remove storage:", removeError);
+                }
+              }
+            } else {
+              console.error("Error writing to localStorage:", error);
+            }
+          }
+        },
+        removeItem: (name) => {
+          try {
+            localStorage.removeItem(name);
+          } catch (error) {
+            console.error("Error removing from localStorage:", error);
+          }
+        },
+      },
       partialize: (state) => ({
         activeTab: state.activeTab,
         calendar: {
@@ -653,21 +715,6 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       }),
       // 添加SSR安全配置
       skipHydration: false,
-      // 添加存储错误处理
-      onError: (error) => {
-        console.warn("Workplace Wellness storage error:", error);
-        // 如果是存储空间不足错误，清理旧数据
-        if (error.name === "QuotaExceededError") {
-          try {
-            localStorage.removeItem("workplace-wellness-storage");
-            console.log(
-              "Cleared workplace-wellness storage due to quota exceeded",
-            );
-          } catch (clearError) {
-            console.error("Failed to clear storage:", clearError);
-          }
-        }
-      },
       onRehydrateStorage: () => (state) => {
         if (state) {
           // 确保 Date 对象正确反序列化

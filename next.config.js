@@ -291,6 +291,31 @@ const nextConfig = {
       },
       // 🎯 修复重复的downloads页面问题 - 由middleware.ts处理多语言重定向
       // 这些重定向现在由middleware.ts处理，支持更灵活的语言检测
+      // 🎯 修复错误的 /downloads/articles/ 路径 - 重定向到正确的 /articles/
+      {
+        source: '/:locale/downloads/articles/:slug',
+        destination: '/:locale/articles/:slug',
+        permanent: true
+      },
+      // 处理不带语言前缀的情况（中文用户）
+      {
+        source: '/downloads/articles/:slug',
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: '.*zh.*',
+          },
+        ],
+        destination: '/zh/articles/:slug',
+        permanent: true
+      },
+      // 处理不带语言前缀的情况（英文用户，默认）
+      {
+        source: '/downloads/articles/:slug',
+        destination: '/en/articles/:slug',
+        permanent: true
+      },
       // 🎯 修复不存在的文章重定向 - pain-relief-methods
       {
         source: '/zh/articles/pain-relief-methods',

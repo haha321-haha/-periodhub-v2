@@ -347,7 +347,12 @@
       "cycleLength": "Average Cycle Length",
       "periodLength": "Average Period Length",
       "workSchedule": "Work Schedule",
-      "notifications": "Notification Preferences"
+      "notifications": "Notification Settings",
+      "browser": "Browser Notifications",
+      "email": "Email Notifications",
+      "sms": "SMS Notifications",
+      "push": "Push Notifications",
+      "reminderTime": "Reminder Frequency"
     },
     "notificationTypes": {
       "periodReminder": "Period Reminder",

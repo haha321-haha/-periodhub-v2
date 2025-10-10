@@ -32,7 +32,13 @@ export function middleware(request: NextRequest) {
       console.log(`[Middleware] Processing: ${pathname}`);
     }
 
-    return intlMiddleware(request);
+    // 添加pathname到headers供layout使用
+    const response = intlMiddleware(request);
+    if (response) {
+      response.headers.set("x-pathname", pathname);
+    }
+    
+    return response;
   } catch (error) {
     console.error("[Middleware] Error processing request:", error);
     console.error("[Middleware] Request pathname:", pathname);

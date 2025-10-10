@@ -4,7 +4,7 @@
  */
 
 import { create } from "zustand";
-import { persist, StorageValue } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 import {
   WorkplaceWellnessState,
   CalendarState,
@@ -633,100 +633,8 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
     }),
     {
       name: "workplace-wellness-storage",
-      // 自定义存储引擎，捕获QuotaExceededError
-      storage: {
-        getItem: (name) => {
-          try {
-            if (typeof window !== "undefined" && window.localStorage) {
-              const value = localStorage.getItem(name);
-              return value as unknown as StorageValue<WorkplaceWellnessStore> | null;
-            }
-            return null;
-          } catch (error) {
-            console.error("Error reading from localStorage:", error);
-            return null;
-          }
-        },
-        setItem: (name, value) => {
-          try {
-            if (typeof window !== "undefined" && window.localStorage) {
-              localStorage.setItem(name, value as unknown as string);
-            }
-          } catch (error) {
-            if (
-              error instanceof DOMException &&
-              error.name === "QuotaExceededError"
-            ) {
-              console.warn("LocalStorage quota exceeded, clearing old data...");
-              try {
-                // 清除当前存储
-                if (typeof window !== "undefined" && window.localStorage) {
-                  localStorage.removeItem(name);
-                  // 尝试只保存最小化的状态
-                  const parsed = JSON.parse(value as unknown as string);
-                  if (parsed?.state) {
-                    // 只保留必要的数据
-                    const minimalState = {
-                      ...parsed,
-                      state: {
-                        ...parsed.state,
-                        exportHistory: [], // 清空导出历史
-                      },
-                    };
-                    localStorage.setItem(name, JSON.stringify(minimalState));
-                    console.log("Successfully saved minimal state");
-                  }
-                }
-              } catch (clearError) {
-                console.error(
-                  "Failed to clear and save minimal state:",
-                  clearError,
-                );
-                // 如果还是失败，完全清除
-                try {
-                  if (typeof window !== "undefined" && window.localStorage) {
-                    localStorage.removeItem(name);
-                  }
-                } catch (removeError) {
-                  console.error("Failed to remove storage:", removeError);
-                }
-              }
-            } else {
-              console.error("Error writing to localStorage:", error);
-            }
-          }
-        },
-        removeItem: (name) => {
-          try {
-            if (typeof window !== "undefined" && window.localStorage) {
-              localStorage.removeItem(name);
-            }
-          } catch (error) {
-            console.error("Error removing from localStorage:", error);
-          }
-        },
-      },
       // 添加SSR安全配置
       skipHydration: false,
-      onRehydrateStorage: () => (state) => {
-        if (state) {
-          // 确保 Date 对象正确反序列化
-          if (
-            state.calendar.currentDate &&
-            typeof state.calendar.currentDate === "string"
-          ) {
-            state.calendar.currentDate = new Date(state.calendar.currentDate);
-          }
-          if (
-            state.calendar.selectedDate &&
-            typeof state.calendar.selectedDate === "string"
-          ) {
-            state.calendar.selectedDate = new Date(state.calendar.selectedDate);
-          }
-          // eslint-disable-next-line no-console
-          console.log("Workplace Wellness Store rehydrated successfully");
-        }
-      },
     },
   ),
 );

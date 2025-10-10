@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { headers } from "next/headers";
 // import { URL_CONFIG } from "@/lib/url-config";
 // import MobileOptimization from "@/components/MobileOptimization";
 import OptimizedScripts, {
@@ -138,13 +139,18 @@ export const viewport: Viewport = {
 };
 
 // 根级别layout - 必须包含html和body标签
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // 从请求头中获取locale
+  const headersList = await headers();
+  const pathname = headersList.get("x-pathname") || "";
+  const locale = pathname.startsWith("/en") ? "en" : "zh";
+
   return (
-    <html lang="zh" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         {/* 🚀 性能优化 - DNS 预解析 */}
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />

@@ -1,11 +1,8 @@
-import "../globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { getValidLocale, getHTMLLang } from "@/lib/locale-utils";
-import LanguageSetter from "@/components/LanguageSetter";
 
 export const dynamic = "force-dynamic";
 export const dynamicParams = true;
@@ -36,8 +33,9 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
 
-  // 使用安全的 locale 验证和处理
-  const validLocale = getValidLocale(locale);
+  // 确保locale是有效的类型
+  const validLocale = locale === "en" || locale === "zh" ? locale : "zh";
+
   unstable_setRequestLocale(validLocale);
 
   // 使用静态导入避免动态路径解析问题，添加错误处理
@@ -49,30 +47,22 @@ export default async function LocaleLayout({
       messages = (await import("../../messages/en.json")).default;
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("[Layout] Failed to import messages:", error);
     // 回退到默认语言
     messages = (await import("../../messages/zh.json")).default;
   }
 
   return (
-    <html lang={getHTMLLang(validLocale)} suppressHydrationWarning>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        {/* 防止浏览器扩展干扰hydration */}
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="theme-color" content="#8B5CF6" />
-      </head>
-      <body suppressHydrationWarning>
-        <NextIntlClientProvider locale={validLocale} messages={messages as any}>
-          <Suspense fallback={<LoadingState />}>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </Suspense>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider
+      locale={validLocale}
+      messages={messages as Record<string, unknown>}
+    >
+      <Suspense fallback={<LoadingState />}>
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </Suspense>
+    </NextIntlClientProvider>
   );
 }

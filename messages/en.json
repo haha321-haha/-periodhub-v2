@@ -2207,7 +2207,13 @@
       "export": "Export",
       "searchPlaceholder": "Search records...",
       "filters": "Filters",
-      "painLevel": "Pain Level"
+      "painLevel": "Pain Level",
+      "flow": "Flow",
+      "date": "Date",
+      "type": "Type",
+      "pain": "Pain",
+      "notes": "Notes",
+      "actions": "Actions"
     },
     "sections": {
       "workplaceArticles": "Workplace Articles",
@@ -2234,14 +2240,6 @@
         "painLevel": "Pain Level",
         "flowType": "Flow Type"
       }
-    },
-    "history": {
-      "flow": "Flow",
-      "date": "Date",
-      "type": "Type",
-      "pain": "Pain",
-      "notes": "Notes",
-      "actions": "Actions"
     },
     "nutrition": {
       "phaseLabel": "Phase Label",
@@ -2295,6 +2293,10 @@
       "generateButton": "Generate Plan"
     },
     "workImpact": {
+      "title": "Work Impact Record",
+      "painLevel": "Pain Level",
+      "efficiency": "Work Efficiency",
+      "adjustment": "Today's Work Adjustment",
       "adjustOptions": {
         "takeLeave": "Take Leave",
         "workFromHome": "Work From Home",
@@ -2309,12 +2311,6 @@
         "moderate": "Moderate",
         "severe": "Severe"
       }
-    },
-    "workImpact": {
-      "title": "Work Impact Record",
-      "painLevel": "Pain Level",
-      "efficiency": "Work Efficiency",
-      "adjustment": "Today's Work Adjustment"
     },
     "workAnalysis": {
       "tabs": {

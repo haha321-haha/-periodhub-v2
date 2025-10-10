@@ -4683,7 +4683,12 @@
           "Portable relief items",
           "Comfort positioning",
           "Emergency planning"
-        ]
+        ],
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially regarding medication use and assessment of severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       },
       "exercise": {
         "title": "Exercise & Sports",
@@ -4692,7 +4697,12 @@
           "Low-impact alternatives",
           "Pain-relieving stretches",
           "Hydration strategies"
-        ]
+        ],
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially regarding medication use and assessment of severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       },
       "sleep": {
         "title": "Sleep & Rest",
@@ -4701,7 +4711,12 @@
           "Sleep positioning",
           "Bedroom environment",
           "Relaxation techniques"
-        ]
+        ],
+        "disclaimer": {
+          "title": "Disclaimer",
+          "content": "The content of this report is for informational and educational purposes only and cannot replace professional medical diagnosis and treatment advice. Please consult a licensed physician before taking any health management measures, especially regarding medication use and assessment of severe pain."
+        },
+        "backToOverview": "Back to Scenario Solutions Overview"
       },
       "social": {
         "title": "Social Situations",

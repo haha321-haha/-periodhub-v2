@@ -242,22 +242,6 @@ const nextConfig = {
       {
         source: '/pdf-files/:path*',
         destination: '/downloads/:path*'
-      },
-      // 修复重复的downloads页面问题
-      {
-        source: '/download-center',
-        destination: '/downloads',
-        permanent: true
-      },
-      {
-        source: '/downloads-new',
-        destination: '/downloads',
-        permanent: true
-      },
-      {
-        source: '/articles-pdf-center',
-        destination: '/downloads',
-        permanent: true
       }
     ];
   },
@@ -303,6 +287,22 @@ const nextConfig = {
       {
         source: '/articles',
         destination: '/en/downloads', // 默认英文版本
+        permanent: true
+      },
+      // 🎯 修复重复的downloads页面问题
+      {
+        source: '/download-center',
+        destination: '/downloads',
+        permanent: true
+      },
+      {
+        source: '/downloads-new',
+        destination: '/downloads',
+        permanent: true
+      },
+      {
+        source: '/articles-pdf-center',
+        destination: '/downloads',
         permanent: true
       },
       // 🎯 修复不存在的文章重定向 - pain-relief-methods

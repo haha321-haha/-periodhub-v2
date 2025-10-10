@@ -2,6 +2,7 @@ import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 import RelatedToolCard from "@/app/[locale]/interactive-tools/components/RelatedToolCard";
 import RelatedArticleCard from "@/app/[locale]/interactive-tools/components/RelatedArticleCard";
 import ScenarioSolutionCard from "@/app/[locale]/interactive-tools/components/ScenarioSolutionCard";
@@ -154,9 +155,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     namespace: "scenarioSolutionsPage",
   });
 
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "scenario-solutions/life_stages",
+  );
+
   return {
     title: `${t("scenarios.life_stages.title")} - ${t("title")}`,
     description: t("scenarios.life_stages.description"),
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

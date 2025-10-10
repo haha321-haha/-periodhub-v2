@@ -1,9 +1,9 @@
-import { useTranslations } from "next-intl";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Locale, locales } from "@/i18n";
 import Breadcrumb from "@/components/Breadcrumb";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -21,9 +21,20 @@ export async function generateMetadata({
       ? "探索世界各地的传统疗法和文化观点，了解不同文化如何处理经期健康。"
       : "Explore traditional therapies and cultural perspectives from around the world, understand how different cultures approach menstrual health.";
 
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "health-guide/global-perspectives",
+  );
+
   return {
     title,
     description,
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

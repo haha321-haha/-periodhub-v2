@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Locale, locales } from "@/i18n";
 import Breadcrumb from "@/components/Breadcrumb";
 import PainPatternEducationContent from "@/components/PainPatternEducationContent";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -21,9 +22,20 @@ export async function generateMetadata({
       ? "深入了解痛经的原因、类型和生理机制，掌握科学的痛经知识基础。"
       : "Deep dive into the causes, types, and physiological mechanisms of menstrual pain, master the scientific foundation of menstrual pain knowledge.";
 
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "health-guide/understanding-pain",
+  );
+
   return {
     title,
     description,
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -41,7 +53,6 @@ export default async function UnderstandingPainPage({
   // Enable static rendering
   unstable_setRequestLocale(locale);
 
-  const commonT = await getTranslations({ locale, namespace: "common" });
   const tcmT = await getTranslations({
     locale,
     namespace: "understandingPain.tcmAnalysis",

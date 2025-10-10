@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import Breadcrumb from "@/components/Breadcrumb";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 import {
   generateToolStructuredData,
   ToolStructuredDataScript,
@@ -510,7 +510,7 @@ const getToolBySlug = async (
 ): Promise<Tool | null> => {
   // Get translations
   const tTool = await getTranslations({ locale, namespace: "toolPage" });
-  
+
   const sampleTools: Tool[] = [
     {
       slug: "symptom-assessment",
@@ -928,16 +928,32 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "metadata" });
   const toolData = await getToolBySlug(tool, locale);
 
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    `interactive-tools/${tool}`,
+  );
+
   if (!toolData) {
     return {
       title: t("tools.notFound.title"),
       description: t("tools.notFound.description"),
+      alternates,
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
   return {
     title: `${toolData.frontmatter.title} | periodhub.health`,
     description: toolData.frontmatter.description,
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
     openGraph: {
       title: toolData.frontmatter.title,
       description: toolData.frontmatter.description,
@@ -955,7 +971,6 @@ export default async function ToolPage({
   unstable_setRequestLocale(locale);
 
   const toolData = await getToolBySlug(tool, locale);
-  const t = await getTranslations({ locale, namespace: "common" });
   const tTool = await getTranslations({ locale, namespace: "toolPage" });
 
   if (!toolData) {

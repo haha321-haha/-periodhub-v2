@@ -1,9 +1,9 @@
-import { useTranslations } from "next-intl";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Locale, locales } from "@/i18n";
 import Breadcrumb from "@/components/Breadcrumb";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -21,9 +21,17 @@ export async function generateMetadata({
       ? "通过饮食、运动和日常习惯改善经期健康，建立长期有效的痛经管理策略。"
       : "Improve menstrual health through diet, exercise, and daily habits, establishing long-term effective menstrual pain management strategies.";
 
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(locale, "health-guide/lifestyle");
+
   return {
     title,
     description,
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

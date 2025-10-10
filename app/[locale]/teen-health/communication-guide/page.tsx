@@ -1,6 +1,7 @@
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 import {
   MessageCircle,
   Heart,
@@ -14,7 +15,6 @@ import {
   AlertTriangle,
   BookOpen,
   Phone,
-  Mail,
   Clock,
 } from "lucide-react";
 import type { Metadata } from "next";
@@ -27,7 +27,12 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "teenHealth" });
+
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "teen-health/communication-guide",
+  );
 
   return {
     title:
@@ -38,6 +43,11 @@ export async function generateMetadata({
       locale === "zh"
         ? "如何与家长、老师、医生有效沟通？提供对话模板和沟通技巧，让你勇敢表达需求。"
         : "How to effectively communicate with parents, teachers, and doctors? Conversation templates and communication skills.",
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -49,7 +59,6 @@ export default async function CommunicationGuidePage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
 
-  const t = await getTranslations("scenarioSolutionsPage");
   const breadcrumbT = await getTranslations("interactiveTools.breadcrumb");
 
   const communicationScenarios = [

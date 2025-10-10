@@ -2,6 +2,7 @@ import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 import RelatedToolCard from "@/app/[locale]/interactive-tools/components/RelatedToolCard";
 import RelatedArticleCard from "@/app/[locale]/interactive-tools/components/RelatedArticleCard";
 import ScenarioSolutionCard from "@/app/[locale]/interactive-tools/components/ScenarioSolutionCard";
@@ -142,9 +143,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     namespace: "scenarioSolutionsPage",
   });
 
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "scenario-solutions/exercise",
+  );
+
   return {
     title: `${t("scenarios.exercise.title")} - ${t("title")}`,
     description: t("scenarios.exercise.description"),
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
@@ -153,7 +165,6 @@ export default async function ExerciseScenarioPage({ params }: Props) {
   unstable_setRequestLocale(locale);
 
   const t = await getTranslations("scenarioSolutionsPage");
-  const commonT = await getTranslations("common");
 
   // 预加载面包屑所需的翻译
   const breadcrumbTitle = t("title");

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Locale, locales } from "@/i18n";
 import { getTranslations } from "next-intl/server";
 import Breadcrumb from "@/components/Breadcrumb";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -13,9 +14,20 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
 
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "health-guide/relief-methods",
+  );
+
   return {
     title: t("health-guide.relief-methods.title"),
     description: t("health-guide.relief-methods.description"),
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

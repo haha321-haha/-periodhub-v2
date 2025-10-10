@@ -1,9 +1,9 @@
-import { useTranslations } from "next-intl";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Locale, locales } from "@/i18n";
 import Breadcrumb from "@/components/Breadcrumb";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -21,9 +21,20 @@ export async function generateMetadata({
       ? "识别需要医疗关注的症状和情况，了解何时应该寻求专业医疗帮助。"
       : "Recognize symptoms and situations that require medical attention, understand when to seek professional medical help.";
 
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "health-guide/medical-care",
+  );
+
   return {
     title,
     description,
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

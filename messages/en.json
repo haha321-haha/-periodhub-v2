@@ -2431,6 +2431,60 @@
       "insight": "Insight Notifications",
       "update": "Update Notifications",
       "alert": "Alert Notifications"
+    },
+    "themeConfig": {
+      "light": {
+        "name": "Light Theme",
+        "description": "Bright theme suitable for daytime use"
+      },
+      "dark": {
+        "name": "Dark Theme",
+        "description": "Dark theme suitable for nighttime use"
+      },
+      "auto": {
+        "name": "Auto Theme",
+        "description": "Automatically switch based on system settings"
+      },
+      "system": {
+        "name": "System Theme",
+        "description": "Follow system theme settings"
+      }
+    },
+    "fontSizeConfig": {
+      "small": {
+        "name": "Small Font",
+        "description": "Compact font size"
+      },
+      "medium": {
+        "name": "Medium Font",
+        "description": "Standard font size"
+      },
+      "large": {
+        "name": "Large Font",
+        "description": "Enlarged font size"
+      }
+    },
+    "timeFormatConfig": {
+      "24h": "24-hour format",
+      "12h": "12-hour format"
+    },
+    "frequencyConfig": {
+      "immediate": "Immediate",
+      "daily": "Daily",
+      "weekly": "Weekly"
+    },
+    "exportFormatConfig": {
+      "pdf": "PDF",
+      "json": "JSON",
+      "csv": "CSV",
+      "xlsx": "Excel"
+    },
+    "descriptions": {
+      "animations": "Enable interface animations",
+      "compactMode": "Use compact interface layout",
+      "notifications": "Enable all notification features",
+      "autoSave": "Auto-save export settings",
+      "includeCharts": "Include charts in export"
     }
   },
   "articlePage": {

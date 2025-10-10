@@ -8873,6 +8873,60 @@
       "insight": "洞察通知",
       "update": "更新通知",
       "alert": "警报通知"
+    },
+    "themeConfig": {
+      "light": {
+        "name": "浅色主题",
+        "description": "适合日间使用的明亮主题"
+      },
+      "dark": {
+        "name": "深色主题",
+        "description": "适合夜间使用的深色主题"
+      },
+      "auto": {
+        "name": "自动主题",
+        "description": "根据系统设置自动切换"
+      },
+      "system": {
+        "name": "系统主题",
+        "description": "跟随系统主题设置"
+      }
+    },
+    "fontSizeConfig": {
+      "small": {
+        "name": "小字体",
+        "description": "紧凑的字体大小"
+      },
+      "medium": {
+        "name": "中等字体",
+        "description": "标准的字体大小"
+      },
+      "large": {
+        "name": "大字体",
+        "description": "放大的字体大小"
+      }
+    },
+    "timeFormatConfig": {
+      "24h": "24小时制",
+      "12h": "12小时制"
+    },
+    "frequencyConfig": {
+      "immediate": "立即",
+      "daily": "每日",
+      "weekly": "每周"
+    },
+    "exportFormatConfig": {
+      "pdf": "PDF",
+      "json": "JSON",
+      "csv": "CSV",
+      "xlsx": "Excel"
+    },
+    "descriptions": {
+      "animations": "启用界面动画效果",
+      "compactMode": "使用紧凑的界面布局",
+      "notifications": "启用所有通知功能",
+      "autoSave": "自动保存导出设置",
+      "includeCharts": "导出时包含图表"
     }
   },
   "articlePage": {

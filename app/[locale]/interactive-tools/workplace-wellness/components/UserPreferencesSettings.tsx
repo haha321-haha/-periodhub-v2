@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Settings,
   Palette,
@@ -17,20 +17,13 @@ import {
 } from "../hooks/useWorkplaceWellnessStore";
 import { useTranslations } from "next-intl";
 import {
-  UserPreferences,
   Theme,
   FontSize,
   DateFormat,
   TimeFormat,
-  NotificationType,
-  NotificationChannel,
   SettingsValidationResult,
 } from "../types";
-import {
-  THEME_CONFIG,
-  FONT_SIZE_CONFIG,
-  VALIDATION_RULES,
-} from "../types/defaults";
+import { THEME_CONFIG, FONT_SIZE_CONFIG } from "../types/defaults";
 
 export default function UserPreferencesSettings() {
   const preferences = useUserPreferences();
@@ -81,8 +74,10 @@ export default function UserPreferencesSettings() {
         lastUpdated: new Date().toISOString(),
       });
 
+      // eslint-disable-next-line no-console
       console.log("Settings saved successfully");
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Failed to save settings:", error);
     } finally {
       setIsSaving(false);
@@ -196,14 +191,14 @@ export default function UserPreferencesSettings() {
                   onChange={(e) => setTheme(e.target.value as Theme)}
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 >
-                  {Object.entries(THEME_CONFIG).map(([key, config]) => (
+                  {Object.keys(THEME_CONFIG).map((key) => (
                     <option key={key} value={key}>
-                      {config.name}
+                      {t(`themeConfig.${key}.name`)}
                     </option>
                   ))}
                 </select>
                 <p className="text-xs text-neutral-500 mt-1">
-                  {THEME_CONFIG[preferences.ui.theme]?.description}
+                  {t(`themeConfig.${preferences.ui.theme}.description`)}
                 </p>
               </div>
 
@@ -216,14 +211,14 @@ export default function UserPreferencesSettings() {
                   onChange={(e) => setFontSize(e.target.value as FontSize)}
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 >
-                  {Object.entries(FONT_SIZE_CONFIG).map(([key, config]) => (
+                  {Object.keys(FONT_SIZE_CONFIG).map((key) => (
                     <option key={key} value={key}>
-                      {config.name}
+                      {t(`fontSizeConfig.${key}.name`)}
                     </option>
                   ))}
                 </select>
                 <p className="text-xs text-neutral-500 mt-1">
-                  {FONT_SIZE_CONFIG[preferences.ui.fontSize]?.description}
+                  {t(`fontSizeConfig.${preferences.ui.fontSize}.description`)}
                 </p>
               </div>
             </div>
@@ -236,7 +231,9 @@ export default function UserPreferencesSettings() {
                     <label className="text-sm font-medium text-neutral-700">
                       {t("userPreferences.animations")}
                     </label>
-                    <p className="text-xs text-neutral-500">启用界面动画效果</p>
+                    <p className="text-xs text-neutral-500">
+                      {t("descriptions.animations")}
+                    </p>
                   </div>
                   <button
                     onClick={toggleAnimations}
@@ -268,7 +265,7 @@ export default function UserPreferencesSettings() {
                       {t("userPreferences.compactMode")}
                     </label>
                     <p className="text-xs text-neutral-500">
-                      使用紧凑的界面布局
+                      {t("descriptions.compactMode")}
                     </p>
                   </div>
                   <button
@@ -335,8 +332,8 @@ export default function UserPreferencesSettings() {
                     }
                     className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   >
-                    <option value="24h">24小时制</option>
-                    <option value="12h">12小时制</option>
+                    <option value="24h">{t("timeFormatConfig.24h")}</option>
+                    <option value="12h">{t("timeFormatConfig.12h")}</option>
                   </select>
                 </div>
               </div>
@@ -357,7 +354,9 @@ export default function UserPreferencesSettings() {
                 <label className="text-sm font-medium text-neutral-700">
                   {t("userPreferences.notifications")}
                 </label>
-                <p className="text-xs text-neutral-500">启用所有通知功能</p>
+                <p className="text-xs text-neutral-500">
+                  {t("descriptions.notifications")}
+                </p>
               </div>
               <button
                 onClick={() =>
@@ -499,14 +498,23 @@ export default function UserPreferencesSettings() {
                       value={preferences.notifications.frequency}
                       onChange={(e) =>
                         updateNotificationSettings({
-                          frequency: e.target.value as any,
+                          frequency: e.target.value as
+                            | "immediate"
+                            | "daily"
+                            | "weekly",
                         })
                       }
                       className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     >
-                      <option value="immediate">立即</option>
-                      <option value="daily">每日</option>
-                      <option value="weekly">每周</option>
+                      <option value="immediate">
+                        {t("frequencyConfig.immediate")}
+                      </option>
+                      <option value="daily">
+                        {t("frequencyConfig.daily")}
+                      </option>
+                      <option value="weekly">
+                        {t("frequencyConfig.weekly")}
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -539,7 +547,10 @@ export default function UserPreferencesSettings() {
                   {typeof value === "boolean" ? (
                     <button
                       onClick={() =>
-                        updatePrivacySettings({ [key]: !value } as any)
+                        updatePrivacySettings({ [key]: !value } as Record<
+                          string,
+                          boolean
+                        >)
                       }
                       className={`
                         relative inline-flex h-6 w-11 items-center rounded-full transition-colors
@@ -560,7 +571,7 @@ export default function UserPreferencesSettings() {
                       onChange={(e) =>
                         updatePrivacySettings({
                           [key]: parseInt(e.target.value),
-                        } as any)
+                        } as Record<string, number>)
                       }
                       className="w-20 px-2 py-1 text-sm border border-neutral-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                       min="30"
@@ -597,7 +608,10 @@ export default function UserPreferencesSettings() {
                   {typeof value === "boolean" ? (
                     <button
                       onClick={() =>
-                        updateAccessibilitySettings({ [key]: !value } as any)
+                        updateAccessibilitySettings({ [key]: !value } as Record<
+                          string,
+                          boolean
+                        >)
                       }
                       className={`
                         relative inline-flex h-6 w-11 items-center rounded-full transition-colors
@@ -621,7 +635,7 @@ export default function UserPreferencesSettings() {
                       onChange={(e) =>
                         updateAccessibilitySettings({
                           [key]: parseFloat(e.target.value),
-                        } as any)
+                        } as Record<string, number>)
                       }
                       className="w-24"
                     />
@@ -650,16 +664,20 @@ export default function UserPreferencesSettings() {
                     updateUserPreferences({
                       export: {
                         ...preferences.export,
-                        defaultFormat: e.target.value as any,
+                        defaultFormat: e.target.value as
+                          | "pdf"
+                          | "json"
+                          | "csv"
+                          | "xlsx",
                       },
                     })
                   }
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 >
-                  <option value="pdf">PDF</option>
-                  <option value="json">JSON</option>
-                  <option value="csv">CSV</option>
-                  <option value="xlsx">Excel</option>
+                  <option value="pdf">{t("exportFormatConfig.pdf")}</option>
+                  <option value="json">{t("exportFormatConfig.json")}</option>
+                  <option value="csv">{t("exportFormatConfig.csv")}</option>
+                  <option value="xlsx">{t("exportFormatConfig.xlsx")}</option>
                 </select>
               </div>
 
@@ -669,7 +687,9 @@ export default function UserPreferencesSettings() {
                     <label className="text-sm font-medium text-neutral-700">
                       {t("userPreferences.autoSave")}
                     </label>
-                    <p className="text-xs text-neutral-500">自动保存导出设置</p>
+                    <p className="text-xs text-neutral-500">
+                      {t("descriptions.autoSave")}
+                    </p>
                   </div>
                   <button
                     onClick={() =>
@@ -707,7 +727,9 @@ export default function UserPreferencesSettings() {
                     <label className="text-sm font-medium text-neutral-700">
                       {t("userPreferences.includeCharts")}
                     </label>
-                    <p className="text-xs text-neutral-500">导出时包含图表</p>
+                    <p className="text-xs text-neutral-500">
+                      {t("descriptions.includeCharts")}
+                    </p>
                   </div>
                   <button
                     onClick={() =>

@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { Metadata } from "next";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 
 export async function generateMetadata({
   params,
@@ -8,6 +9,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isZh = locale === "zh";
+
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "articles/pain-management/medication-guide",
+  );
 
   return {
     title: isZh
@@ -35,6 +42,7 @@ export async function generateMetadata({
           "safe medication",
           "dosage guidance",
         ],
+    alternates,
     robots: {
       index: true,
       follow: true,

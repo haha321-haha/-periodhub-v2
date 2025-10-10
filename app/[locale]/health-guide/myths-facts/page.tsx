@@ -1,7 +1,7 @@
-import { useTranslations } from "next-intl";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 import { Locale, locales } from "@/i18n";
 import Breadcrumb from "@/components/Breadcrumb";
 
@@ -21,9 +21,20 @@ export async function generateMetadata({
       ? "澄清关于经期健康的常见误解，用科学事实替代错误观念。"
       : "Clarify common misconceptions about menstrual health, replace false beliefs with scientific facts.";
 
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "health-guide/myths-facts",
+  );
+
   return {
     title,
     description,
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

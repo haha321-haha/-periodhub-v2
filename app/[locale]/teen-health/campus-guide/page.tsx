@@ -1,6 +1,7 @@
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 import {
   School,
   Clock,
@@ -29,7 +30,12 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "teenHealth" });
+
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "teen-health/campus-guide",
+  );
 
   return {
     title:
@@ -40,6 +46,11 @@ export async function generateMetadata({
       locale === "zh"
         ? "在学校突然痛起来怎么办？课堂应急、宿舍管理、体育课应对，全方位校园生存指南。"
         : "What to do when pain strikes at school? Classroom emergencies, dorm management, PE class strategies.",
+    alternates,
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

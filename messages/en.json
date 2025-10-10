@@ -186,6 +186,14 @@
     }
   },
   "home": {
+    "hero": {
+      "title": "Period Health Management Expert",
+      "subtitle": "Scientific period tracking, health advice, and personalized care plans",
+      "cta": {
+        "primary": "Get Started",
+        "secondary": "Learn More"
+      }
+    },
     "features": {
       "title": "Professional Features",
       "subtitle": "Comprehensive period pain management solutions",
@@ -203,8 +211,10 @@
       },
       "immediateRelief": {
         "title": "Immediate Relief",
-        "description": "Quick pain relief solutions"
-      }
+        "description": "Quick pain relief solutions",
+        "cta": "Get Relief Now →"
+      },
+      "learnMore": "Learn More"
     },
     "trusted": {
       "title": "Trusted Platform",
@@ -245,6 +255,7 @@
         "description": "Professional health assessment tools",
         "cta": "Start Assessment"
       },
+      "assessmentDesc": "Professional tools to help you understand your dysmenorrhea type",
       "resources": "Medical Resources",
       "resourcesDesc": "Professional medical guide downloads",
       "downloads": {
@@ -255,6 +266,9 @@
       "scenarios": {
         "cta": "View Solutions"
       }
+    },
+    "healthStatistics": {
+      "dataSource": "Data source: Based on user feedback and medical research statistics"
     }
   },
   "userSuccessStories": {

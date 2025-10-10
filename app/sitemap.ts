@@ -65,6 +65,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/en/medical-disclaimer",
   ];
 
+  // 下载页面子页面
+  const downloadsPages = [
+    "/zh/downloads/medication-guide",
+    "/en/downloads/medication-guide",
+  ];
+
   // 互动工具子页面
   const interactiveTools = [
     "/zh/interactive-tools/symptom-assessment",
@@ -138,6 +144,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 所有静态页面
   const staticPages = [
     ...mainPages,
+    ...downloadsPages,
     ...interactiveTools,
     ...healthGuidePages,
     ...teenHealthPages,

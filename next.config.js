@@ -242,6 +242,22 @@ const nextConfig = {
       {
         source: '/pdf-files/:path*',
         destination: '/downloads/:path*'
+      },
+      // 修复重复的downloads页面问题
+      {
+        source: '/download-center',
+        destination: '/downloads',
+        permanent: true
+      },
+      {
+        source: '/downloads-new',
+        destination: '/downloads',
+        permanent: true
+      },
+      {
+        source: '/articles-pdf-center',
+        destination: '/downloads',
+        permanent: true
       }
     ];
   },

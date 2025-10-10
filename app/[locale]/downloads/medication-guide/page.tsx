@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
+import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -11,6 +12,12 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "medicationGuide" });
+
+  // 生成canonical和hreflang配置
+  const alternates = generateAlternatesConfig(
+    locale,
+    "downloads/medication-guide",
+  );
 
   return {
     title: t("title"),
@@ -33,11 +40,16 @@ export async function generateMetadata({
       "naproxen safety",
       "NSAID guidelines",
     ],
+    alternates,
     openGraph: {
       title: t("title"),
       description: t("description"),
       type: "article",
       publishedTime: new Date().toISOString(),
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

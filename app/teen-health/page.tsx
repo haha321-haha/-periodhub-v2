@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -15,5 +15,5 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function TeenHealthRootPage() {
   // 301永久重定向到中文青少年健康页面
-  redirect("/zh/teen-health");
+  redirect("/zh/teen-health", RedirectType.replace);
 }

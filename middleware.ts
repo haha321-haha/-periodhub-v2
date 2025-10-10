@@ -36,6 +36,19 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
+    // 🎯 让Next.js重定向规则优先处理特定路径
+    const redirectPaths = [
+      '/teen-health',
+      '/articles', 
+      '/zh/assessment',
+      '/assessment'
+    ];
+    
+    if (redirectPaths.includes(pathname)) {
+      // 直接传递给Next.js处理重定向，不经过国际化中间件
+      return NextResponse.next();
+    }
+
     // 记录请求信息用于调试
     if (process.env.NODE_ENV === "development") {
       console.log(`[Middleware] Processing: ${pathname}`);

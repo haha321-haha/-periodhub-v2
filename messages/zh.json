@@ -3561,7 +3561,13 @@
       "insights": {
         "title": "您的疼痛洞察",
         "description": "根据您的追踪历史，以下是我们注意到的一些模式：",
-        "noData": "数据还不够。继续追踪以查看洞察。"
+        "noData": "数据还不够。继续追踪以查看洞察。",
+        "painPatterns": "Pain Pattern Analysis",
+        "recommendations": "Personalized Recommendations",
+        "trends": "Trend Analysis",
+        "alerts": "Health Alerts",
+        "noInsights": "No Insights Yet",
+        "noInsightsDescription": "Record more data to get personalized health insights"
       },
       "assessment": {
         "title": "症状评估工具",
@@ -3731,6 +3737,53 @@
           "description": "当您有足够的疼痛记录数据时，这里将显示您的疼痛趋势图表，帮助您了解疼痛模式的变化。",
           "ariaDescription": "疼痛趋势图表占位符。当有足够数据时，将显示您的疼痛水平随时间变化的图表。"
         }
+      },
+      "export": {
+        "title": "Export Data",
+        "description": "Export your pain records as files for backup or sharing with your doctor",
+        "format": "Export Format",
+        "json": "JSON Format",
+        "csv": "CSV Format",
+        "pdf": "PDF Report",
+        "dateRange": "Date Range",
+        "allData": "All Data",
+        "lastMonth": "Last Month",
+        "lastThreeMonths": "Last 3 Months",
+        "lastSixMonths": "Last 6 Months",
+        "customRange": "Custom Range",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "includeCharts": "Include Charts",
+        "includeStatistics": "Include Statistics",
+        "export": "Export",
+        "exporting": "Exporting...",
+        "exportSuccess": "Export Successful",
+        "exportError": "Export failed, please try again",
+        "inDevelopment": "Export feature is under development..."
+      },
+      "statistics": {
+        "title": "Statistical Analysis",
+        "overview": "Overview",
+        "trends": "Trend Analysis",
+        "patterns": "Pain Patterns",
+        "remedies": "Remedy Effectiveness",
+        "totalEntries": "Total Entries",
+        "averagePain": "Average Pain Intensity",
+        "maxPain": "Maximum Pain Intensity",
+        "minPain": "Minimum Pain Intensity",
+        "trendDirection": "Pain Trend",
+        "improving": "Improving",
+        "worsening": "Worsening",
+        "stable": "Stable",
+        "mostCommonSymptoms": "Most Common Symptoms",
+        "mostEffectiveRemedies": "Most Effective Remedies",
+        "painFrequency": "Pain Intensity Distribution",
+        "noData": "No Data",
+        "noDataDescription": "Add more records to view statistical analysis",
+        "painLevelChart": "Pain Intensity Trend",
+        "cyclePatterns": "Menstrual Cycle Pain Patterns",
+        "remedyEffectiveness": "Remedy Effectiveness",
+        "inDevelopment": "Statistics feature is under development..."
       }
     },
     "embeddedPainAssessment": {
@@ -3808,7 +3861,13 @@
         "relaxation": "[ZH] Relaxation"
       },
       "tip": "[ZH] 💡 Tip: Find a comfortable sitting or lying position, relax all muscles. Beginners should do 3-4 cycles.",
-      "timeUnit": "[ZH] s"
+      "timeUnit": "[ZH] s",
+      "buttons": {
+        "startPractice": "Start Practice",
+        "stopPractice": "Stop Practice",
+        "practiceAgain": "Practice Again",
+        "oneCycleCompleted": "✅ One cycle completed!"
+      }
     },
     "painDifferentialDiagnosis": {
       "title": "疼痛鉴别诊断",
@@ -3822,7 +3881,42 @@
     "constitutionTest": {
       "title": "中医体质测试",
       "description": "通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议",
-      "cta": "开始测试"
+      "cta": "开始测试",
+      "subtitle": "Understand your TCM constitution type through professional questionnaire and get personalized health recommendations",
+      "features": {
+        "quick": {
+          "title": "Quick & Convenient",
+          "description": "Complete in 5-8 minutes"
+        },
+        "professional": {
+          "title": "Professional & Reliable",
+          "description": "Based on TCM theory"
+        },
+        "personalized": {
+          "title": "Personalized Recommendations",
+          "description": "Tailored to your constitution"
+        },
+        "practical": {
+          "title": "Practical Guidance",
+          "description": "Acupoint, diet, lifestyle advice"
+        }
+      },
+      "instructions": {
+        "title": "Test Instructions",
+        "item1": "Answer based on your condition over the past 3 months",
+        "item2": "Choose the option that best matches your situation",
+        "item3": "If unsure, choose the relatively more applicable option",
+        "item4": "Test results are for reference only, not a substitute for medical diagnosis"
+      },
+      "navigation": {
+        "startTest": "Start Test",
+        "nextQuestion": "Next Question",
+        "previousQuestion": "Previous Question",
+        "completeTest": "Complete Test",
+        "retakeTest": "Retake Test",
+        "previous": "Previous",
+        "next": "Next"
+      }
     },
     "periodPainAssessment": {
       "title": "痛经速测小工具",

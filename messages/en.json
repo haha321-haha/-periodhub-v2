@@ -2213,7 +2213,10 @@
       "type": "Type",
       "pain": "Pain",
       "notes": "Notes",
-      "actions": "Actions"
+      "actions": "Actions",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete"
     },
     "sections": {
       "workplaceArticles": "Workplace Articles",
@@ -2221,6 +2224,9 @@
       "scenarioSolutions": "Scenario Solutions"
     },
     "charts": {
+      "title": "Charts",
+      "selectChart": "Select Chart",
+      "days": "Days",
       "totalCycles": "Total Cycles",
       "averageCycleLength": "Average Cycle Length",
       "averagePainLevel": "Average Pain Level",
@@ -2234,6 +2240,9 @@
       "nextOvulation": "Next Ovulation",
       "currentPhase": "Current Phase",
       "confidence": "Confidence",
+      "cycleLengthDistribution": "Cycle Length Distribution",
+      "painLevelDistribution": "Pain Level Distribution",
+      "flowTypeDistribution": "Flow Type Distribution",
       "tabs": {
         "overview": "Overview",
         "cycleLength": "Cycle Length",

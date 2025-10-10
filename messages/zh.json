@@ -8655,7 +8655,10 @@
       "type": "类型",
       "pain": "疼痛",
       "notes": "备注",
-      "actions": "操作"
+      "actions": "操作",
+      "view": "查看",
+      "edit": "编辑",
+      "delete": "删除"
     },
     "sections": {
       "workplaceArticles": "职场文章",
@@ -8663,6 +8666,9 @@
       "scenarioSolutions": "场景方案"
     },
     "charts": {
+      "title": "图表",
+      "selectChart": "选择图表",
+      "days": "天数",
       "totalCycles": "总周期数",
       "averageCycleLength": "平均周期长度",
       "averagePainLevel": "平均疼痛等级",
@@ -8676,6 +8682,9 @@
       "nextOvulation": "下次排卵",
       "currentPhase": "当前阶段",
       "confidence": "置信度",
+      "cycleLengthDistribution": "周期长度分布",
+      "painLevelDistribution": "疼痛等级分布",
+      "flowTypeDistribution": "流量类型分布",
       "tabs": {
         "overview": "概览",
         "cycleLength": "周期长度",

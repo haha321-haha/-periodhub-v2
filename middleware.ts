@@ -65,6 +65,17 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl, 301);
     }
 
+    // 🎯 处理重复的downloads页面重定向 - 支持多语言检测
+    if (pathname === '/download-center' || pathname === '/downloads-new' || pathname === '/articles-pdf-center') {
+      // 检查Accept-Language头部
+      const acceptLanguage = request.headers.get('accept-language') || '';
+      const isChinese = acceptLanguage.includes('zh');
+      const redirectPath = isChinese ? '/zh/downloads' : '/en/downloads';
+      console.log(`[Middleware] Redirecting ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      const redirectUrl = new URL(redirectPath, request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+
     // 记录请求信息用于调试
     if (process.env.NODE_ENV === "development") {
       console.log(`[Middleware] Processing: ${pathname}`);
@@ -95,6 +106,9 @@ export const config = {
     "/teen-health",
     "/articles", 
     "/zh/assessment",
-    "/assessment"
+    "/assessment",
+    "/download-center",
+    "/downloads-new",
+    "/articles-pdf-center"
   ],
 };

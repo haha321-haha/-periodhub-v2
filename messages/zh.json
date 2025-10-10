@@ -8852,7 +8852,8 @@
         "patterns": "模式",
         "trends": "趋势",
         "recommendations": "建议"
-      }
+      },
+      "noData": "暂无症状数据"
     },
     "export": {
       "contentLabel": "导出内容",

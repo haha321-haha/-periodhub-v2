@@ -2410,7 +2410,8 @@
         "patterns": "Patterns",
         "trends": "Trends",
         "recommendations": "Recommendations"
-      }
+      },
+      "noData": "No symptom data available"
     },
     "export": {
       "contentLabel": "Export Content",

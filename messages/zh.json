@@ -8741,7 +8741,31 @@
         "dinner": "晚餐建议",
         "snack": "零食建议"
       },
-      "generateButton": "生成计划"
+      "generateButton": "生成计划",
+      "title": "营养建议",
+      "noResults": "没有找到相关食物",
+      "selectedFoods": "已选食物",
+      "planGenerated": "膳食计划已生成"
+    },
+    "patterns": {
+      "crampsBloating": "痉挛腹胀",
+      "headacheFatigue": "头痛疲劳",
+      "moodAnxiety": "情绪焦虑",
+      "occurrences": "发生次数",
+      "frequency": "频率",
+      "severity": "严重程度"
+    },
+    "recommendations": {
+      "warmCompress": "热敷缓解",
+      "gentleExercise": "轻柔运动",
+      "hydration": "充足饮水",
+      "rest": "充分休息",
+      "caffeineReduction": "减少咖啡因",
+      "stressManagement": "压力管理",
+      "mindfulness": "正念练习",
+      "socialSupport": "社交支持",
+      "sleepHygiene": "睡眠卫生",
+      "generalCare": "一般护理"
     },
     "workImpact": {
       "title": "工作影响记录",

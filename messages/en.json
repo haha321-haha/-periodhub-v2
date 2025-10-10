@@ -2299,7 +2299,31 @@
         "dinner": "Dinner Suggestions",
         "snack": "Snack Suggestions"
       },
-      "generateButton": "Generate Plan"
+      "generateButton": "Generate Plan",
+      "title": "Nutrition Recommendations",
+      "noResults": "No food found",
+      "selectedFoods": "Selected Foods",
+      "planGenerated": "Meal plan generated"
+    },
+    "patterns": {
+      "crampsBloating": "Cramps & Bloating",
+      "headacheFatigue": "Headache & Fatigue",
+      "moodAnxiety": "Mood & Anxiety",
+      "occurrences": "Occurrences",
+      "frequency": "Frequency",
+      "severity": "Severity"
+    },
+    "recommendations": {
+      "warmCompress": "Warm Compress",
+      "gentleExercise": "Gentle Exercise",
+      "hydration": "Stay Hydrated",
+      "rest": "Get Rest",
+      "caffeineReduction": "Reduce Caffeine",
+      "stressManagement": "Stress Management",
+      "mindfulness": "Mindfulness Practice",
+      "socialSupport": "Social Support",
+      "sleepHygiene": "Sleep Hygiene",
+      "generalCare": "General Care"
     },
     "workImpact": {
       "title": "Work Impact Record",

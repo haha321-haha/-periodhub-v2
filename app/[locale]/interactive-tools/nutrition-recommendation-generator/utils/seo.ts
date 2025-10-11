@@ -51,8 +51,6 @@ export const openGraphConfig = {
   images: [
     {
       url: "https://www.periodhub.health/images/logo.png",
-      width: 1200,
-      height: 630,
       alt: "Nutrition Recommendation Generator",
     },
   ],

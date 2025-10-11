@@ -51,8 +51,6 @@ export async function generateMetadata({
       images: [
         {
           url: "/images/logo.png",
-          width: 1200,
-          height: 630,
           alt: title,
         },
       ],

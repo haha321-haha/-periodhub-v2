@@ -1026,231 +1026,229 @@ export default async function ToolPage({
     if (!["en", "zh"].includes(locale)) {
       notFound();
     }
+
+    unstable_setRequestLocale(locale);
+
+    const toolData = await getToolBySlug(tool, locale);
+    const tTool = await getTranslations({ locale, namespace: "toolPage" });
+
+    if (!toolData) {
+      notFound();
+    }
+
+    // 获取推荐数据
+    const { relatedTools, relatedArticles, scenarioSolutions } =
+      getRecommendationData(locale, tool);
+
+    // 生成工具结构化数据
+    const toolStructuredData = await generateToolStructuredData({
+      locale,
+      toolSlug: tool,
+      toolName: toolData.frontmatter.title,
+      description: toolData.frontmatter.description,
+      features: [
+        tTool("structuredData.features.symptomAssessment"),
+        tTool("structuredData.features.personalizedRecommendations"),
+        tTool("structuredData.features.healthReports"),
+      ],
+      category: "HealthApplication",
+      rating: { value: 4.8, count: 1250 },
+      breadcrumbs: [
+        {
+          name: tTool("breadcrumb.interactiveTools"),
+          url: `${
+            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+          }/${locale}/interactive-tools`,
+        },
+        {
+          name: toolData.frontmatter.title,
+          url: `${
+            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+          }/${locale}/interactive-tools/${tool}`,
+        },
+      ],
+    });
+
+    // 生成面包屑结构化数据
+    const breadcrumbStructuredData = generateBreadcrumbStructuredData({
+      locale,
+      path: `/interactive-tools/${tool}`,
+      breadcrumbs: [
+        {
+          name: tTool("breadcrumb.interactiveTools"),
+          url: `${
+            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+          }/${locale}/interactive-tools`,
+        },
+        {
+          name: toolData.frontmatter.title,
+          url: `${
+            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+          }/${locale}/interactive-tools/${tool}`,
+        },
+      ],
+    });
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
+        {/* 工具结构化数据 */}
+        <ToolStructuredDataScript data={toolStructuredData} />
+        <BreadcrumbStructuredDataScript data={breadcrumbStructuredData} />
+        {/* 面包屑导航 */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <Breadcrumb
+            items={[
+              {
+                label: tTool("breadcrumb.interactiveTools"),
+                href: `/${locale}/interactive-tools`,
+              },
+              { label: toolData.frontmatter.title },
+            ]}
+          />
+        </div>
+
+        {/* Tool Header */}
+        <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="flex items-center justify-center space-x-4 text-sm text-neutral-600 mb-4">
+              <span className="bg-secondary-100 text-secondary-700 px-3 py-1 rounded-full">
+                {toolData.frontmatter.category}
+              </span>
+              <span>• {toolData.frontmatter.difficulty}</span>
+              <span>• {toolData.frontmatter.estimatedTime}</span>
+            </div>
+
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-800 mb-6">
+              {toolData.frontmatter.title}
+            </h1>
+
+            <p className="text-lg md:text-xl text-neutral-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+              {toolData.frontmatter.description}
+            </p>
+          </div>
+        </header>
+
+        {/* Emergency Relief Guide for symptom assessment and pain-related tools */}
+        {(tool === "symptom-assessment" ||
+          tool === "period-pain-assessment" ||
+          tool === "pain-tracker") && (
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="max-w-4xl mx-auto">
+              <EmergencyReliefGuide locale={locale} />
+            </div>
+          </section>
+        )}
+
+        {/* Tool Content */}
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="max-w-6xl mx-auto">
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center py-12">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+                </div>
+              }
+            >
+              {/* Render interactive tool if available */}
+              {tool === "pain-tracker" ? (
+                <PainTrackerTool locale={locale} />
+              ) : tool === "symptom-assessment" ? (
+                <SymptomAssessmentTool locale={locale} />
+              ) : tool === "constitution-test" ? (
+                <ConstitutionTestTool locale={locale} />
+              ) : tool === "period-pain-assessment" ? (
+                <PeriodPainAssessmentTool locale={locale} />
+              ) : tool === "cycle-tracker" ? (
+                <CycleTrackerTool locale={locale} />
+              ) : tool === "symptom-tracker" ? (
+                <SymptomTrackerTool locale={locale} />
+              ) : (
+                <div
+                  className="prose prose-lg max-w-none prose-primary prose-headings:text-neutral-800 prose-p:text-neutral-700"
+                  dangerouslySetInnerHTML={{ __html: toolData.content }}
+                />
+              )}
+            </Suspense>
+          </div>
+        </main>
+
+        {/* Medical Disclaimer */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="max-w-4xl mx-auto">
+            <MedicalDisclaimer locale={locale} />
+          </div>
+        </section>
+
+        {/* 相关推荐区域 - 仅限痛经评估、周期追踪和中医体质测试页面 */}
+        {(tool === "period-pain-assessment" ||
+          tool === "cycle-tracker" ||
+          tool === "constitution-test") && (
+          <div className="bg-white mt-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+              <div className="space-y-12">
+                {/* 相关工具区域 */}
+                <section>
+                  <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                    {tTool("relatedTools")}
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {relatedTools.map((tool) => (
+                      <RelatedToolCard
+                        key={tool.id}
+                        tool={tool}
+                        locale={locale}
+                      />
+                    ))}
+                  </div>
+                </section>
+
+                {/* 相关文章区域 */}
+                <section>
+                  <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                    {tool === "cycle-tracker"
+                      ? tTool("relatedArticles.cycleTracker")
+                      : tool === "constitution-test"
+                        ? tTool("relatedArticles.constitutionTest")
+                        : tTool("relatedArticles.default")}
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {relatedArticles.map((article) => (
+                      <RelatedArticleCard
+                        key={article.id}
+                        article={article}
+                        locale={locale}
+                      />
+                    ))}
+                  </div>
+                </section>
+
+                {/* 场景解决方案区域 */}
+                <section>
+                  <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                    {tool === "cycle-tracker"
+                      ? tTool("scenarioSolutions.cycleTracker")
+                      : tool === "constitution-test"
+                        ? tTool("scenarioSolutions.constitutionTest")
+                        : tTool("scenarioSolutions.default")}
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {scenarioSolutions.map((solution) => (
+                      <ScenarioSolutionCard
+                        key={solution.id}
+                        solution={solution}
+                        locale={locale}
+                      />
+                    ))}
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
   } catch {
     // 如果参数解析失败，返回404
     notFound();
   }
-
-  const { locale, tool } = await params;
-
-  unstable_setRequestLocale(locale);
-
-  const toolData = await getToolBySlug(tool, locale);
-  const tTool = await getTranslations({ locale, namespace: "toolPage" });
-
-  if (!toolData) {
-    notFound();
-  }
-
-  // 获取推荐数据
-  const { relatedTools, relatedArticles, scenarioSolutions } =
-    getRecommendationData(locale, tool);
-
-  // 生成工具结构化数据
-  const toolStructuredData = await generateToolStructuredData({
-    locale,
-    toolSlug: tool,
-    toolName: toolData.frontmatter.title,
-    description: toolData.frontmatter.description,
-    features: [
-      tTool("structuredData.features.symptomAssessment"),
-      tTool("structuredData.features.personalizedRecommendations"),
-      tTool("structuredData.features.healthReports"),
-    ],
-    category: "HealthApplication",
-    rating: { value: 4.8, count: 1250 },
-    breadcrumbs: [
-      {
-        name: tTool("breadcrumb.interactiveTools"),
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}/interactive-tools`,
-      },
-      {
-        name: toolData.frontmatter.title,
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}/interactive-tools/${tool}`,
-      },
-    ],
-  });
-
-  // 生成面包屑结构化数据
-  const breadcrumbStructuredData = generateBreadcrumbStructuredData({
-    locale,
-    path: `/interactive-tools/${tool}`,
-    breadcrumbs: [
-      {
-        name: tTool("breadcrumb.interactiveTools"),
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}/interactive-tools`,
-      },
-      {
-        name: toolData.frontmatter.title,
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}/interactive-tools/${tool}`,
-      },
-    ],
-  });
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
-      {/* 工具结构化数据 */}
-      <ToolStructuredDataScript data={toolStructuredData} />
-      <BreadcrumbStructuredDataScript data={breadcrumbStructuredData} />
-      {/* 面包屑导航 */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <Breadcrumb
-          items={[
-            {
-              label: tTool("breadcrumb.interactiveTools"),
-              href: `/${locale}/interactive-tools`,
-            },
-            { label: toolData.frontmatter.title },
-          ]}
-        />
-      </div>
-
-      {/* Tool Header */}
-      <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="flex items-center justify-center space-x-4 text-sm text-neutral-600 mb-4">
-            <span className="bg-secondary-100 text-secondary-700 px-3 py-1 rounded-full">
-              {toolData.frontmatter.category}
-            </span>
-            <span>• {toolData.frontmatter.difficulty}</span>
-            <span>• {toolData.frontmatter.estimatedTime}</span>
-          </div>
-
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-800 mb-6">
-            {toolData.frontmatter.title}
-          </h1>
-
-          <p className="text-lg md:text-xl text-neutral-600 mb-8 leading-relaxed max-w-3xl mx-auto">
-            {toolData.frontmatter.description}
-          </p>
-        </div>
-      </header>
-
-      {/* Emergency Relief Guide for symptom assessment and pain-related tools */}
-      {(tool === "symptom-assessment" ||
-        tool === "period-pain-assessment" ||
-        tool === "pain-tracker") && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="max-w-4xl mx-auto">
-            <EmergencyReliefGuide locale={locale} />
-          </div>
-        </section>
-      )}
-
-      {/* Tool Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="max-w-6xl mx-auto">
-          <Suspense
-            fallback={
-              <div className="flex items-center justify-center py-12">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-              </div>
-            }
-          >
-            {/* Render interactive tool if available */}
-            {tool === "pain-tracker" ? (
-              <PainTrackerTool locale={locale} />
-            ) : tool === "symptom-assessment" ? (
-              <SymptomAssessmentTool locale={locale} />
-            ) : tool === "constitution-test" ? (
-              <ConstitutionTestTool locale={locale} />
-            ) : tool === "period-pain-assessment" ? (
-              <PeriodPainAssessmentTool locale={locale} />
-            ) : tool === "cycle-tracker" ? (
-              <CycleTrackerTool locale={locale} />
-            ) : tool === "symptom-tracker" ? (
-              <SymptomTrackerTool locale={locale} />
-            ) : (
-              <div
-                className="prose prose-lg max-w-none prose-primary prose-headings:text-neutral-800 prose-p:text-neutral-700"
-                dangerouslySetInnerHTML={{ __html: toolData.content }}
-              />
-            )}
-          </Suspense>
-        </div>
-      </main>
-
-      {/* Medical Disclaimer */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="max-w-4xl mx-auto">
-          <MedicalDisclaimer locale={locale} />
-        </div>
-      </section>
-
-      {/* 相关推荐区域 - 仅限痛经评估、周期追踪和中医体质测试页面 */}
-      {(tool === "period-pain-assessment" ||
-        tool === "cycle-tracker" ||
-        tool === "constitution-test") && (
-        <div className="bg-white mt-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="space-y-12">
-              {/* 相关工具区域 */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                  {tTool("relatedTools")}
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {relatedTools.map((tool) => (
-                    <RelatedToolCard
-                      key={tool.id}
-                      tool={tool}
-                      locale={locale}
-                    />
-                  ))}
-                </div>
-              </section>
-
-              {/* 相关文章区域 */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                  {tool === "cycle-tracker"
-                    ? tTool("relatedArticles.cycleTracker")
-                    : tool === "constitution-test"
-                      ? tTool("relatedArticles.constitutionTest")
-                      : tTool("relatedArticles.default")}
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {relatedArticles.map((article) => (
-                    <RelatedArticleCard
-                      key={article.id}
-                      article={article}
-                      locale={locale}
-                    />
-                  ))}
-                </div>
-              </section>
-
-              {/* 场景解决方案区域 */}
-              <section>
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                  {tool === "cycle-tracker"
-                    ? tTool("scenarioSolutions.cycleTracker")
-                    : tool === "constitution-test"
-                      ? tTool("scenarioSolutions.constitutionTest")
-                      : tTool("scenarioSolutions.default")}
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {scenarioSolutions.map((solution) => (
-                    <ScenarioSolutionCard
-                      key={solution.id}
-                      solution={solution}
-                      locale={locale}
-                    />
-                  ))}
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
 }

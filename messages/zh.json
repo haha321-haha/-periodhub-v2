@@ -1138,7 +1138,8 @@
     "importantNote": "重要提示",
     "medicalDisclaimer": "本信息仅供教育目的，不旨在替代专业医疗建议。如有医疗问题，请咨询医疗专业人士。",
     "navigation": {
-      "backToArticles": "返回文章页面"
+      "backToArticles": "返回文章页面",
+      "backToDownloads": "返回下载中心"
     }
   },
   "hero": {

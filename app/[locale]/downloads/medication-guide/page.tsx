@@ -653,10 +653,10 @@ export default async function MedicationGuidePage({
           </div>
         </section>
 
-        {/* Back to Articles */}
+        {/* Back to Downloads */}
         <div className="text-center">
-          <Link href={`/${locale}/articles`} className="btn-secondary">
-            {commonT("navigation.backToArticles")}
+          <Link href={`/${locale}/downloads`} className="btn-secondary">
+            {commonT("navigation.backToDownloads")}
           </Link>
         </div>
       </div>

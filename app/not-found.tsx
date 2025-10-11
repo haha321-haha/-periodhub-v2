@@ -20,7 +20,7 @@ export default function NotFound() {
           </Link>
           <div className="text-sm text-gray-500">
             <Link
-              href="/zh/articles"
+              href="/zh/downloads"
               className="text-primary-600 hover:underline mr-4"
             >
               文章中心

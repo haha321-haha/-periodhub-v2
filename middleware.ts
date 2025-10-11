@@ -59,6 +59,17 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl, 301);
     }
     
+    // 🎯 处理带语言前缀的articles路径重定向
+    if (pathname === '/zh/articles') {
+      const redirectUrl = new URL('/zh/downloads', request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+    
+    if (pathname === '/en/articles') {
+      const redirectUrl = new URL('/en/downloads', request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+    
     if (pathname === '/zh/assessment') {
       const redirectUrl = new URL('/zh/interactive-tools/symptom-assessment', request.url);
       return NextResponse.redirect(redirectUrl, 301);

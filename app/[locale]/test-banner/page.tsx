@@ -93,8 +93,9 @@ export default async function TestBannerPage({
               textAlign: "center",
               boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
               border: "4px solid #fbbf24",
-              display: "block !important" as any,
-              visibility: "visible !important" as any,
+              display: "block !important" as React.CSSProperties["display"],
+              visibility:
+                "visible !important" as React.CSSProperties["visibility"],
               position: "relative",
               zIndex: 9999,
             }}
@@ -132,7 +133,7 @@ export default async function TestBannerPage({
 
         <div className="text-center mt-12">
           <a
-            href="/zh/articles"
+            href="/zh/downloads"
             className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
           >
             返回文章页面

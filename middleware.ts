@@ -115,7 +115,7 @@ export function middleware(request: NextRequest) {
 
     // 🎯 通用修复: 处理所有错误的 /downloads/[section] 路径（除了已处理的特殊情况）
     // 排除: articles, immediate-relief, medication-guide, preview (这些有专门的处理)
-    if (pathname.match(/^\/(zh|en)\/downloads\/(?!articles|immediate-relief|medication-guide|preview)[^\/]+/)) {
+    if (pathname.match(/^\/(zh|en)\/downloads\/(?!articles|immediate-relief|medication-guide|preview)[^\/\?]+/)) {
       // 中文路径到英文路径的映射
       const chineseToEnglishMap: { [key: string]: string } = {
         '青少年健康': 'teen-health',

@@ -116,11 +116,31 @@ export function middleware(request: NextRequest) {
     // 🎯 通用修复: 处理所有错误的 /downloads/[section] 路径（除了已处理的特殊情况）
     // 排除: articles, immediate-relief, medication-guide, preview (这些有专门的处理)
     if (pathname.match(/^\/(zh|en)\/downloads\/(?!articles|immediate-relief|medication-guide|preview)[^\/]+/)) {
-      // 带语言前缀的情况: /zh/downloads/[section]/* → /zh/[section]/*
-      const correctPath = pathname.replace('/downloads/', '/');
-      console.log(`[Middleware] Generic redirect: ${pathname} to ${correctPath}`);
-      const redirectUrl = new URL(correctPath, request.url);
-      return NextResponse.redirect(redirectUrl, 301);
+      // 中文路径到英文路径的映射
+      const chineseToEnglishMap: { [key: string]: string } = {
+        '青少年健康': 'teen-health',
+        '健康指南': 'health-guide',
+        '场景解决方案': 'scenario-solutions',
+        '交互式工具': 'interactive-tools',
+        '自然疗法': 'natural-therapies',
+        '立即救济': 'immediate-relief',
+        '文化魅力': 'cultural-charms',
+        '隐私政策': 'privacy-policy',
+        '服务条款': 'terms-of-service',
+        '医疗免责声明': 'medical-disclaimer'
+      };
+      
+      // 提取section部分
+      const sectionMatch = pathname.match(/^\/(zh|en)\/downloads\/([^\/]+)/);
+      if (sectionMatch) {
+        const [, locale, section] = sectionMatch;
+        // 检查是否是中文路径，如果是则映射到英文路径
+        const englishSection = chineseToEnglishMap[section] || section;
+        const correctPath = `/${locale}/${englishSection}`;
+        console.log(`[Middleware] Chinese path redirect: ${pathname} to ${correctPath}`);
+        const redirectUrl = new URL(correctPath, request.url);
+        return NextResponse.redirect(redirectUrl, 301);
+      }
     }
     if (pathname.match(/^\/downloads\/(?!articles|immediate-relief|medication-guide|preview)[^\/]+/)) {
       // 不带语言前缀的情况: /downloads/[section]/* → 根据语言检测

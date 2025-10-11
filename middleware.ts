@@ -113,6 +113,26 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl, 301);
     }
 
+    // 🎯 通用修复: 处理所有错误的 /downloads/[section] 路径（除了已处理的特殊情况）
+    // 排除: articles, immediate-relief, medication-guide, preview (这些有专门的处理)
+    if (pathname.match(/^\/(zh|en)\/downloads\/(?!articles|immediate-relief|medication-guide|preview)[^\/]+/)) {
+      // 带语言前缀的情况: /zh/downloads/[section]/* → /zh/[section]/*
+      const correctPath = pathname.replace('/downloads/', '/');
+      console.log(`[Middleware] Generic redirect: ${pathname} to ${correctPath}`);
+      const redirectUrl = new URL(correctPath, request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+    if (pathname.match(/^\/downloads\/(?!articles|immediate-relief|medication-guide|preview)[^\/]+/)) {
+      // 不带语言前缀的情况: /downloads/[section]/* → 根据语言检测
+      const acceptLanguage = request.headers.get('accept-language') || '';
+      const isChinese = acceptLanguage.includes('zh');
+      const sectionPath = pathname.replace('/downloads/', '');
+      const redirectPath = isChinese ? `/zh/${sectionPath}` : `/en/${sectionPath}`;
+      console.log(`[Middleware] Generic redirect: ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      const redirectUrl = new URL(redirectPath, request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+
     // 记录请求信息用于调试
     if (process.env.NODE_ENV === "development") {
       console.log(`[Middleware] Processing: ${pathname}`);

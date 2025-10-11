@@ -126,7 +126,8 @@ export function middleware(request: NextRequest) {
       // 不带语言前缀的情况: /downloads/[section]/* → 根据语言检测
       const acceptLanguage = request.headers.get('accept-language') || '';
       const isChinese = acceptLanguage.includes('zh');
-      const sectionPath = pathname.replace('/downloads/', '');
+      // 正确提取section路径：从 /downloads/interactive-tools 提取 interactive-tools
+      const sectionPath = pathname.substring('/downloads/'.length);
       const redirectPath = isChinese ? `/zh/${sectionPath}` : `/en/${sectionPath}`;
       console.log(`[Middleware] Generic redirect: ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
       const redirectUrl = new URL(redirectPath, request.url);

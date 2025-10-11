@@ -925,6 +925,19 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale; tool: string }>;
 }): Promise<Metadata> {
   const { locale, tool } = await params;
+
+  // 添加路径验证，防止INSUFFICIENT_PATH错误
+  if (!tool || !locale) {
+    return {
+      title: "Tool Not Found",
+      description: "The requested tool could not be found.",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
   const t = await getTranslations({ locale, namespace: "metadata" });
   const toolData = await getToolBySlug(tool, locale);
 
@@ -968,6 +981,12 @@ export default async function ToolPage({
   params: Promise<{ locale: Locale; tool: string }>;
 }) {
   const { locale, tool } = await params;
+
+  // 添加路径验证，防止INSUFFICIENT_PATH错误
+  if (!tool || !locale) {
+    notFound();
+  }
+
   unstable_setRequestLocale(locale);
 
   const toolData = await getToolBySlug(tool, locale);

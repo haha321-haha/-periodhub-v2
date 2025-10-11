@@ -50,7 +50,7 @@ export const openGraphConfig = {
   url: "https://www.periodhub.health/nutrition-recommendation-generator",
   images: [
     {
-      url: "https://www.periodhub.health/images/nutrition-generator-og.jpg",
+      url: "https://www.periodhub.health/images/logo.png",
       width: 1200,
       height: 630,
       alt: "Nutrition Recommendation Generator",
@@ -66,9 +66,7 @@ export const twitterConfig = {
   title: "Nutrition Recommendation Generator | Period Hub",
   description:
     "Professional nutrition suggestion generator based on your menstrual cycle, health goals, and TCM constitution.",
-  images: [
-    "https://www.periodhub.health/images/nutrition-generator-twitter.jpg",
-  ],
+  images: ["https://www.periodhub.health/images/logo.png"],
 };
 
 // 基于ziV1d3d的结构化数据

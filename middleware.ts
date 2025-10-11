@@ -13,8 +13,10 @@ const intlMiddleware = createMiddleware({
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // 添加调试信息
-  console.log(`[Middleware] Processing: ${pathname}`);
+  // 添加调试信息（仅在开发环境）
+  if (process.env.NODE_ENV === "development") {
+    console.log(`[Middleware] Processing: ${pathname}`);
+  }
 
   try {
     // 排除静态文件路径，避免国际化中间件干扰
@@ -41,7 +43,9 @@ export function middleware(request: NextRequest) {
 
     // 🎯 手动处理重定向，确保返回301状态码
     if (pathname === '/teen-health') {
-      console.log(`[Middleware] Redirecting /teen-health to /zh/teen-health`);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[Middleware] Redirecting /teen-health to /zh/teen-health`);
+      }
       const redirectUrl = new URL('/zh/teen-health', request.url);
       return NextResponse.redirect(redirectUrl, 301);
     }
@@ -71,7 +75,9 @@ export function middleware(request: NextRequest) {
       const acceptLanguage = request.headers.get('accept-language') || '';
       const isChinese = acceptLanguage.includes('zh');
       const redirectPath = isChinese ? '/zh/downloads' : '/en/downloads';
-      console.log(`[Middleware] Redirecting ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[Middleware] Redirecting ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      }
       const redirectUrl = new URL(redirectPath, request.url);
       return NextResponse.redirect(redirectUrl, 301);
     }
@@ -80,7 +86,9 @@ export function middleware(request: NextRequest) {
     if (pathname === '/zh/downloads/immediate-relief' || pathname === '/en/downloads/immediate-relief') {
       // 带语言前缀的情况: /zh/downloads/immediate-relief → /zh/immediate-relief
       const correctPath = pathname.replace('/downloads/immediate-relief', '/immediate-relief');
-      console.log(`[Middleware] Redirecting ${pathname} to ${correctPath}`);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[Middleware] Redirecting ${pathname} to ${correctPath}`);
+      }
       const redirectUrl = new URL(correctPath, request.url);
       return NextResponse.redirect(redirectUrl, 301);
     }
@@ -89,7 +97,9 @@ export function middleware(request: NextRequest) {
       const acceptLanguage = request.headers.get('accept-language') || '';
       const isChinese = acceptLanguage.includes('zh');
       const redirectPath = isChinese ? '/zh/immediate-relief' : '/en/immediate-relief';
-      console.log(`[Middleware] Redirecting ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[Middleware] Redirecting ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      }
       const redirectUrl = new URL(redirectPath, request.url);
       return NextResponse.redirect(redirectUrl, 301);
     }
@@ -98,7 +108,9 @@ export function middleware(request: NextRequest) {
     if (pathname.match(/^\/(zh|en)\/downloads\/articles\/.+/)) {
       // 带语言前缀的情况: /zh/downloads/articles/* → /zh/articles/*
       const correctPath = pathname.replace('/downloads/articles/', '/articles/');
-      console.log(`[Middleware] Redirecting ${pathname} to ${correctPath}`);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[Middleware] Redirecting ${pathname} to ${correctPath}`);
+      }
       const redirectUrl = new URL(correctPath, request.url);
       return NextResponse.redirect(redirectUrl, 301);
     }
@@ -108,7 +120,9 @@ export function middleware(request: NextRequest) {
       const isChinese = acceptLanguage.includes('zh');
       const articleSlug = pathname.replace('/downloads/articles/', '');
       const redirectPath = isChinese ? `/zh/articles/${articleSlug}` : `/en/articles/${articleSlug}`;
-      console.log(`[Middleware] Redirecting ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[Middleware] Redirecting ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      }
       const redirectUrl = new URL(redirectPath, request.url);
       return NextResponse.redirect(redirectUrl, 301);
     }
@@ -132,14 +146,14 @@ export function middleware(request: NextRequest) {
       
       // 提取section部分
       const sectionMatch = pathname.match(/^\/(zh|en)\/downloads\/([^\/]+)/);
-      console.log(`[Middleware] Generic redirect check: ${pathname}, sectionMatch:`, sectionMatch);
       if (sectionMatch) {
         const [, locale, section] = sectionMatch;
-        console.log(`[Middleware] Extracted - locale: ${locale}, section: ${section}`);
         // 检查是否是中文路径，如果是则映射到英文路径
         const englishSection = chineseToEnglishMap[section] || section;
         const correctPath = `/${locale}/${englishSection}`;
-        console.log(`[Middleware] Chinese path redirect: ${pathname} to ${correctPath}`);
+        if (process.env.NODE_ENV === "development") {
+          console.log(`[Middleware] Chinese path redirect: ${pathname} to ${correctPath}`);
+        }
         const redirectUrl = new URL(correctPath, request.url);
         return NextResponse.redirect(redirectUrl, 301);
       }
@@ -151,7 +165,9 @@ export function middleware(request: NextRequest) {
       // 正确提取section路径：从 /downloads/interactive-tools 提取 interactive-tools
       const sectionPath = pathname.substring('/downloads/'.length);
       const redirectPath = isChinese ? `/zh/${sectionPath}` : `/en/${sectionPath}`;
-      console.log(`[Middleware] Generic redirect: ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[Middleware] Generic redirect: ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage})`);
+      }
       const redirectUrl = new URL(redirectPath, request.url);
       return NextResponse.redirect(redirectUrl, 301);
     }

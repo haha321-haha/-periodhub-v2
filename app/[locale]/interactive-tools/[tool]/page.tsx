@@ -924,10 +924,75 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: Locale; tool: string }>;
 }): Promise<Metadata> {
-  const { locale, tool } = await params;
+  try {
+    const { locale, tool } = await params;
 
-  // 添加路径验证，防止INSUFFICIENT_PATH错误
-  if (!tool || !locale) {
+    // 添加路径验证，防止INSUFFICIENT_PATH错误
+    if (
+      !tool ||
+      !locale ||
+      typeof tool !== "string" ||
+      typeof locale !== "string"
+    ) {
+      return {
+        title: "Tool Not Found",
+        description: "The requested tool could not be found.",
+        robots: {
+          index: false,
+          follow: false,
+        },
+      };
+    }
+
+    // 验证locale值是否有效
+    if (!["en", "zh"].includes(locale)) {
+      return {
+        title: "Tool Not Found",
+        description: "The requested tool could not be found.",
+        robots: {
+          index: false,
+          follow: false,
+        },
+      };
+    }
+
+    const t = await getTranslations({ locale, namespace: "metadata" });
+    const toolData = await getToolBySlug(tool, locale);
+
+    // 生成canonical和hreflang配置
+    const alternates = generateAlternatesConfig(
+      locale,
+      `interactive-tools/${tool}`,
+    );
+
+    if (!toolData) {
+      return {
+        title: t("tools.notFound.title"),
+        description: t("tools.notFound.description"),
+        alternates,
+        robots: {
+          index: false,
+          follow: false,
+        },
+      };
+    }
+
+    return {
+      title: `${toolData.frontmatter.title} | periodhub.health`,
+      description: toolData.frontmatter.description,
+      alternates,
+      robots: {
+        index: true,
+        follow: true,
+      },
+      openGraph: {
+        title: toolData.frontmatter.title,
+        description: toolData.frontmatter.description,
+        type: "website",
+      },
+    };
+  } catch {
+    // 如果参数解析失败，返回默认metadata
     return {
       title: "Tool Not Found",
       description: "The requested tool could not be found.",
@@ -937,42 +1002,6 @@ export async function generateMetadata({
       },
     };
   }
-
-  const t = await getTranslations({ locale, namespace: "metadata" });
-  const toolData = await getToolBySlug(tool, locale);
-
-  // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
-    `interactive-tools/${tool}`,
-  );
-
-  if (!toolData) {
-    return {
-      title: t("tools.notFound.title"),
-      description: t("tools.notFound.description"),
-      alternates,
-      robots: {
-        index: false,
-        follow: false,
-      },
-    };
-  }
-
-  return {
-    title: `${toolData.frontmatter.title} | periodhub.health`,
-    description: toolData.frontmatter.description,
-    alternates,
-    robots: {
-      index: true,
-      follow: true,
-    },
-    openGraph: {
-      title: toolData.frontmatter.title,
-      description: toolData.frontmatter.description,
-      type: "website",
-    },
-  };
 }
 
 export default async function ToolPage({
@@ -980,12 +1009,29 @@ export default async function ToolPage({
 }: {
   params: Promise<{ locale: Locale; tool: string }>;
 }) {
-  const { locale, tool } = await params;
+  try {
+    const { locale, tool } = await params;
 
-  // 添加路径验证，防止INSUFFICIENT_PATH错误
-  if (!tool || !locale) {
+    // 添加路径验证，防止INSUFFICIENT_PATH错误
+    if (
+      !tool ||
+      !locale ||
+      typeof tool !== "string" ||
+      typeof locale !== "string"
+    ) {
+      notFound();
+    }
+
+    // 验证locale值是否有效
+    if (!["en", "zh"].includes(locale)) {
+      notFound();
+    }
+  } catch {
+    // 如果参数解析失败，返回404
     notFound();
   }
+
+  const { locale, tool } = await params;
 
   unstable_setRequestLocale(locale);
 

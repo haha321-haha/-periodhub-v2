@@ -132,8 +132,10 @@ export function middleware(request: NextRequest) {
       
       // 提取section部分
       const sectionMatch = pathname.match(/^\/(zh|en)\/downloads\/([^\/]+)/);
+      console.log(`[Middleware] Generic redirect check: ${pathname}, sectionMatch:`, sectionMatch);
       if (sectionMatch) {
         const [, locale, section] = sectionMatch;
+        console.log(`[Middleware] Extracted - locale: ${locale}, section: ${section}`);
         // 检查是否是中文路径，如果是则映射到英文路径
         const englishSection = chineseToEnglishMap[section] || section;
         const correctPath = `/${locale}/${englishSection}`;

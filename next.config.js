@@ -156,7 +156,7 @@ const nextConfig = {
     return [
       {
         source: '/zh/manifest.json',
-        destination: '/manifest.json'
+        destination: '/manifest.webmanifest'
       },
       {
         source: '/zh/manifest.webmanifest',

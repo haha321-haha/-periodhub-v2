@@ -144,7 +144,6 @@ dist
 
 # 排除Gatsby文件
 .cache/
-public
 
 # 排除Storybook构建输出
 .out

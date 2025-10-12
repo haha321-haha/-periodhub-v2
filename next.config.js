@@ -159,6 +159,10 @@ const nextConfig = {
         destination: '/manifest.json'
       },
       {
+        source: '/zh/manifest.webmanifest',
+        destination: '/manifest.webmanifest'
+      },
+      {
         source: '/zh/icon.svg',
         destination: '/icon.svg'
       },
@@ -169,6 +173,10 @@ const nextConfig = {
       {
         source: '/en/manifest.json',
         destination: '/manifest.json'
+      },
+      {
+        source: '/en/manifest.webmanifest',
+        destination: '/manifest.webmanifest'
       },
       {
         source: '/en/icon.svg',

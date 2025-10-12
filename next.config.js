@@ -399,6 +399,57 @@ const nextConfig = {
         destination: '/zh/articles/long-term-healthy-lifestyle-guide',
         permanent: true
       },
+      // 🎯 中文工具路径重定向
+      {
+        source: '/zh/疼痛追踪器',
+        destination: '/zh/interactive-tools/pain-tracker',
+        permanent: true
+      },
+      {
+        source: '/zh/症状评估',
+        destination: '/zh/interactive-tools/symptom-assessment',
+        permanent: true
+      },
+      {
+        source: '/zh/周期追踪器',
+        destination: '/zh/interactive-tools/cycle-tracker',
+        permanent: true
+      },
+      {
+        source: '/zh/体质测试',
+        destination: '/zh/interactive-tools/constitution-test',
+        permanent: true
+      },
+      {
+        source: '/zh/痛经评估',
+        destination: '/zh/interactive-tools/period-pain-assessment',
+        permanent: true
+      },
+      {
+        source: '/zh/症状追踪器',
+        destination: '/zh/interactive-tools/symptom-tracker',
+        permanent: true
+      },
+      {
+        source: '/zh/营养推荐生成器',
+        destination: '/zh/interactive-tools/nutrition-recommendation-generator',
+        permanent: true
+      },
+      {
+        source: '/zh/职场健康',
+        destination: '/zh/interactive-tools/workplace-wellness',
+        permanent: true
+      },
+      {
+        source: '/zh/职场影响评估',
+        destination: '/zh/interactive-tools/workplace-impact-assessment',
+        permanent: true
+      },
+      {
+        source: '/zh/压力管理',
+        destination: '/zh/interactive-tools/stress-management',
+        permanent: true
+      },
       {
         source: '/articles/long-term-healthy-lifestyle-guide',
         destination: '/en/articles/long-term-healthy-lifestyle-guide',

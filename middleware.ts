@@ -84,12 +84,13 @@ export function middleware(request: NextRequest) {
       '压力管理': 'stress-management'
     };
 
-    // 处理 /zh/工具名称 的路径
+    // 处理 /zh/工具名称 的路径（支持 URL 编码）
+    const decodedPathname = decodeURIComponent(pathname);
     for (const [chineseName, englishSlug] of Object.entries(chineseToolPaths)) {
-      if (pathname === `/zh/${chineseName}`) {
+      if (pathname === `/zh/${chineseName}` || decodedPathname === `/zh/${chineseName}`) {
         const redirectUrl = new URL(`/zh/interactive-tools/${englishSlug}`, request.url);
         if (process.env.NODE_ENV === "development") {
-          console.log(`[Middleware] Redirecting ${pathname} to /zh/interactive-tools/${englishSlug}`);
+          console.log(`[Middleware] Redirecting ${pathname} (decoded: ${decodedPathname}) to /zh/interactive-tools/${englishSlug}`);
         }
         return NextResponse.redirect(redirectUrl, 301);
       }

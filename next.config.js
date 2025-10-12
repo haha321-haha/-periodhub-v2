@@ -242,6 +242,11 @@ const nextConfig = {
       {
         source: '/pdf-files/:path*',
         destination: '/downloads/:path*'
+      },
+      // 🎯 修复图片URL问题 - 将不带尺寸后缀的图片重定向到800x800版本
+      {
+        source: '/images/medical/female_reproductive_system_anatomy.webp',
+        destination: '/images/medical/female_reproductive_system_anatomy_800x800.webp'
       }
     ];
   },

@@ -48,10 +48,10 @@
       ]
     },
     {
-      "name": "文章中心",
-      "short_name": "文章",
+      "name": "下载中心",
+      "short_name": "下载",
       "description": "专业健康文章和PDF资源",
-      "url": "/zh/articles",
+      "url": "/zh/downloads",
       "icons": [
         {
           "src": "/icon-192.png",

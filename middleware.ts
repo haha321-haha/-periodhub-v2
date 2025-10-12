@@ -69,6 +69,31 @@ export function middleware(request: NextRequest) {
       const redirectUrl = new URL('/en/downloads', request.url);
       return NextResponse.redirect(redirectUrl, 301);
     }
+
+    // 🎯 处理中文工具路径重定向
+    const chineseToolPaths: { [key: string]: string } = {
+      '疼痛追踪器': 'pain-tracker',
+      '症状评估': 'symptom-assessment', 
+      '周期追踪器': 'cycle-tracker',
+      '体质测试': 'constitution-test',
+      '痛经评估': 'period-pain-assessment',
+      '症状追踪器': 'symptom-tracker',
+      '营养推荐生成器': 'nutrition-recommendation-generator',
+      '职场健康': 'workplace-wellness',
+      '职场影响评估': 'workplace-impact-assessment',
+      '压力管理': 'stress-management'
+    };
+
+    // 处理 /zh/工具名称 的路径
+    for (const [chineseName, englishSlug] of Object.entries(chineseToolPaths)) {
+      if (pathname === `/zh/${chineseName}`) {
+        const redirectUrl = new URL(`/zh/interactive-tools/${englishSlug}`, request.url);
+        if (process.env.NODE_ENV === "development") {
+          console.log(`[Middleware] Redirecting ${pathname} to /zh/interactive-tools/${englishSlug}`);
+        }
+        return NextResponse.redirect(redirectUrl, 301);
+      }
+    }
     
     if (pathname === '/zh/assessment') {
       const redirectUrl = new URL('/zh/interactive-tools/symptom-assessment', request.url);

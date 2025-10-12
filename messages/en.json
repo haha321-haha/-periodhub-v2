@@ -8119,5 +8119,27 @@
         "answer": "No, all tools can be used directly without registration or login."
       }
     }
+  },
+  "manifest": {
+    "name": "PeriodHub - Professional Women's Health Platform",
+    "shortName": "PeriodHub",
+    "description": "Professional women's menstrual health management platform, providing integrated solutions combining Eastern and Western medicine, scientific guidance, and caring support.",
+    "shortcuts": {
+      "immediateRelief": {
+        "name": "Immediate Relief",
+        "shortName": "Relief",
+        "description": "Quick tips and methods for menstrual pain relief"
+      },
+      "articles": {
+        "name": "Download Center",
+        "shortName": "Downloads",
+        "description": "Professional health articles and PDF resources"
+      },
+      "tools": {
+        "name": "Interactive Tools",
+        "shortName": "Tools",
+        "description": "Symptom assessment and pain tracking tools"
+      }
+    }
   }
 }

@@ -9600,5 +9600,27 @@
       "健康管理与自我护理": "健康管理与自我护理",
       "传统疗法与现代应用": "传统疗法与现代应用"
     }
+  },
+  "manifest": {
+    "name": "PeriodHub - 专业女性健康管理平台",
+    "shortName": "PeriodHub",
+    "description": "专业的女性月经健康管理平台，提供中西医结合的痛经解决方案，科学指导，贴心陪伴。",
+    "shortcuts": {
+      "immediateRelief": {
+        "name": "即时缓解",
+        "shortName": "即时缓解",
+        "description": "快速缓解痛经的技巧和方法"
+      },
+      "articles": {
+        "name": "下载中心",
+        "shortName": "下载",
+        "description": "专业健康文章和PDF资源"
+      },
+      "tools": {
+        "name": "互动工具",
+        "shortName": "工具",
+        "description": "症状评估和疼痛追踪工具"
+      }
+    }
   }
 }

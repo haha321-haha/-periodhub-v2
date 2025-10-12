@@ -172,11 +172,11 @@ const nextConfig = {
       },
       {
         source: '/en/manifest.json',
-        destination: '/manifest.json'
+        destination: '/manifest-en.webmanifest'
       },
       {
         source: '/en/manifest.webmanifest',
-        destination: '/manifest.webmanifest'
+        destination: '/manifest-en.webmanifest'
       },
       {
         source: '/en/icon.svg',

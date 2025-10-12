@@ -241,6 +241,17 @@ export const config = {
     "/assessment",
     "/download-center",
     "/downloads-new",
-    "/articles-pdf-center"
+    "/articles-pdf-center",
+    // 中文工具路径
+    "/zh/疼痛追踪器",
+    "/zh/症状评估",
+    "/zh/周期追踪器",
+    "/zh/体质测试",
+    "/zh/痛经评估",
+    "/zh/症状追踪器",
+    "/zh/营养推荐生成器",
+    "/zh/职场健康",
+    "/zh/职场影响评估",
+    "/zh/压力管理"
   ],
 };

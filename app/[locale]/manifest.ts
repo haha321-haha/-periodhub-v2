@@ -1,3 +1,28 @@
+/**
+ * 动态Manifest生成器（当前未使用）
+ *
+ * 📝 设计决策说明：
+ * 当前使用静态文件 public/manifest.webmanifest 作为manifest源。
+ * 此文件保留作为未来参考，暂不启用。
+ *
+ * 🎯 为什么不使用动态方案：
+ * 1. 静态方案已完全满足需求（ROI最优）
+ * 2. 避免与next-intl middleware冲突（稳定性优先）
+ * 3. 静态文件性能更优（CDN缓存）
+ * 4. 多语言manifest的实际用户价值有限
+ *
+ * 🔄 何时重新评估：
+ * - 英文用户占比超过30%
+ * - Next.js改进 app/[locale]/manifest.ts 支持
+ * - 出现明确的业务需求
+ *
+ * 📚 详细分析见: MANIFEST_DYNAMIC_ROUTING_ANALYSIS.md
+ *
+ * @created 2025-10-13
+ * @status INACTIVE - Using static fallback
+ * @see public/manifest.webmanifest
+ */
+
 import { MetadataRoute } from "next";
 import { getTranslations } from "next-intl/server";
 

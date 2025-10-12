@@ -247,6 +247,14 @@ const nextConfig = {
       {
         source: '/images/medical/female_reproductive_system_anatomy.webp',
         destination: '/images/medical/female_reproductive_system_anatomy_800x800.webp'
+      },
+      {
+        source: '/images/medical/copper_iud_structure_medical_illustration.webp',
+        destination: '/images/medical/copper_iud_structure_medical_illustration_800x800.webp'
+      },
+      {
+        source: '/images/medical/hormonal_iud_structure_medical_illustration.webp',
+        destination: '/images/medical/hormonal_iud_structure_medical_illustration_800x800.webp'
       }
     ];
   },

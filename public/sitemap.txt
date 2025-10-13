@@ -1,0 +1,4 @@
+# Sitemap for PeriodHub
+# Generated on 2025-10-13
+
+https://www.periodhub.health/sitemap.xml

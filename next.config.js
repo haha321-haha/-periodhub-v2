@@ -399,78 +399,6 @@ const nextConfig = {
         destination: '/zh/articles/long-term-healthy-lifestyle-guide',
         permanent: true
       },
-      // 🎯 中文工具路径重定向
-      {
-        source: '/zh/疼痛追踪器',
-        destination: '/zh/interactive-tools/pain-tracker',
-        permanent: true
-      },
-      {
-        source: '/zh/症状评估',
-        destination: '/zh/interactive-tools/symptom-assessment',
-        permanent: true
-      },
-      {
-        source: '/zh/周期追踪器',
-        destination: '/zh/interactive-tools/cycle-tracker',
-        permanent: true
-      },
-      {
-        source: '/zh/体质测试',
-        destination: '/zh/interactive-tools/constitution-test',
-        permanent: true
-      },
-      {
-        source: '/zh/痛经评估',
-        destination: '/zh/interactive-tools/period-pain-assessment',
-        permanent: true
-      },
-      {
-        source: '/zh/症状追踪器',
-        destination: '/zh/interactive-tools/symptom-tracker',
-        permanent: true
-      },
-      {
-        source: '/zh/营养推荐生成器',
-        destination: '/zh/interactive-tools/nutrition-recommendation-generator',
-        permanent: true
-      },
-      {
-        source: '/zh/职场健康',
-        destination: '/zh/interactive-tools/workplace-wellness',
-        permanent: true
-      },
-      {
-        source: '/zh/职场影响评估',
-        destination: '/zh/interactive-tools/workplace-impact-assessment',
-        permanent: true
-      },
-      {
-        source: '/zh/压力管理',
-        destination: '/zh/interactive-tools/stress-management',
-        permanent: true
-      },
-      // 🎯 处理测试和开发相关路径
-      {
-        source: '/zh/测试',
-        destination: '/zh/interactive-tools',
-        permanent: true
-      },
-      {
-        source: '/zh/备份',
-        destination: '/zh/downloads',
-        permanent: true
-      },
-      {
-        source: '/zh/2018',
-        destination: '/zh/articles',
-        permanent: true
-      },
-      {
-        source: '/zh/2019',
-        destination: '/zh/articles',
-        permanent: true
-      },
       {
         source: '/articles/long-term-healthy-lifestyle-guide',
         destination: '/en/articles/long-term-healthy-lifestyle-guide',
@@ -512,6 +440,17 @@ const nextConfig = {
       {
         source: '/en/articles/myths-facts',
         destination: '/en/health-guide/myths-facts',
+        permanent: true
+      },
+      // 🎯 站点地图文件重定向
+      {
+        source: '/zh/sitemap_index.xml',
+        destination: '/sitemap_index.xml',
+        permanent: true
+      },
+      {
+        source: '/zh/sitemap.txt',
+        destination: '/sitemap.txt',
         permanent: true
       }
     ];

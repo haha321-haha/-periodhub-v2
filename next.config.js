@@ -452,6 +452,17 @@ const nextConfig = {
         source: '/zh/sitemap.txt',
         destination: '/sitemap.txt',
         permanent: true
+      },
+      // 🎯 Atom Feed 重定向
+      {
+        source: '/zh/atom.xml',
+        destination: '/feed.xml',
+        permanent: true
+      },
+      {
+        source: '/atom.xml',
+        destination: '/feed.xml',
+        permanent: true
       }
     ];
   }

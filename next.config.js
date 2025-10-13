@@ -450,6 +450,27 @@ const nextConfig = {
         destination: '/zh/interactive-tools/stress-management',
         permanent: true
       },
+      // 🎯 处理测试和开发相关路径
+      {
+        source: '/zh/测试',
+        destination: '/zh/interactive-tools',
+        permanent: true
+      },
+      {
+        source: '/zh/备份',
+        destination: '/zh/downloads',
+        permanent: true
+      },
+      {
+        source: '/zh/2018',
+        destination: '/zh/articles',
+        permanent: true
+      },
+      {
+        source: '/zh/2019',
+        destination: '/zh/articles',
+        permanent: true
+      },
       {
         source: '/articles/long-term-healthy-lifestyle-guide',
         destination: '/en/articles/long-term-healthy-lifestyle-guide',

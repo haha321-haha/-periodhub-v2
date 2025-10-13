@@ -956,6 +956,27 @@ export async function generateMetadata({
       };
     }
 
+    // 验证工具名称是否有效，防止INSUFFICIENT_PATH错误
+    const validTools = [
+      "symptom-assessment",
+      "pain-tracker",
+      "constitution-test",
+      "period-pain-assessment",
+      "cycle-tracker",
+      "symptom-tracker",
+    ];
+
+    if (!validTools.includes(tool)) {
+      return {
+        title: "Tool Not Found",
+        description: "The requested tool could not be found.",
+        robots: {
+          index: false,
+          follow: false,
+        },
+      };
+    }
+
     const t = await getTranslations({ locale, namespace: "metadata" });
     const toolData = await getToolBySlug(tool, locale);
 
@@ -1024,6 +1045,20 @@ export default async function ToolPage({
 
     // 验证locale值是否有效
     if (!["en", "zh"].includes(locale)) {
+      notFound();
+    }
+
+    // 验证工具名称是否有效，防止INSUFFICIENT_PATH错误
+    const validTools = [
+      "symptom-assessment",
+      "pain-tracker",
+      "constitution-test",
+      "period-pain-assessment",
+      "cycle-tracker",
+      "symptom-tracker",
+    ];
+
+    if (!validTools.includes(tool)) {
       notFound();
     }
 

@@ -9,7 +9,7 @@
   "homePage": {
     "metadata": {
       "title": "Period Pain Relief | Free Medical Tools & Guides",
-      "description": "Get instant period pain relief with 42 expert articles & 8 free interactive tools. Medical guides, symptom assessments & personalized care solutions. Start today!",
+      "description": "PeriodHub: 42 clinical guides + 8 smart tools for period pain relief. Fast solutions, medication advice, acupressure techniques. Evidence-based, expert care!",
       "keywords": "period pain relief,menstrual pain management,women health,period tracking,pain management,symptom assessment,health tools,medical guides,PDF downloads",
       "ogTitle": "Period Pain Relief | Free Medical Tools & Guides",
       "ogDescription": "Get instant period pain relief with 42 expert articles & 8 free interactive tools. Medical guides, symptom assessments & personalized care solutions. Start today!",
@@ -1978,7 +1978,7 @@
   },
   "downloadsPage": {
     "title": "PDF Download Center - Period Health Resource Library | PeriodHub",
-    "description": "Download professional period health PDF resources for free, including dysmenorrhea management guides, nutrition advice, exercise plans, and more. Available in Chinese and English, access reliable health information anytime, anywhere.",
+    "description": "Professional PDF downloads: 42 medical guides + 24 tools for period pain relief, medication guidance, diet & exercise plans. Medically reviewed, free access!",
     "keywords": "period health PDF,dysmenorrhea management guide,menstrual health materials,free health resources,period care handbook,TCM wellness guide",
     "openGraph": {
       "title": "PDF Download Center - Period Health Resource Library | PeriodHub",
@@ -4795,7 +4795,7 @@
   },
   "interactiveToolsPage": {
     "title": "Interactive Health Tools",
-    "description": "Professional menstrual health management tools providing symptom assessment, pain tracking, cycle management and personalized health solutions",
+    "description": "8 professional period health tools: symptom assessment, pain tracking, cycle prediction & nutrition generator. AI-powered personalized health advice. Start now!",
     "keywords": "menstrual health management,symptom assessment,pain tracking,period pain management,health tools,personalized recommendations,data analytics",
     "assessmentIllustrationAlt": "Woman using digital health assessment tool on tablet in comfortable home setting",
     "workplaceWellness": {
@@ -7143,6 +7143,10 @@
     }
   },
   "immediateReliefPage": {
+    "metadata": {
+      "title": "Immediate Period Pain Relief - 5-Step Emergency Guide",
+      "description": "Fast period pain relief: 5-step emergency guide with ginger tea, acupressure, heat therapy & breathing. For severe cramps (7-10 scale). Clinically validated!"
+    },
     "title": "Immediate Period Pain Relief",
     "description": "Quick and effective methods to relieve menstrual pain right now. Science-backed techniques you can use immediately.",
     "seoKeywords": [

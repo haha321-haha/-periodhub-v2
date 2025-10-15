@@ -17,8 +17,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "immediateReliefPage" });
 
   return {
-    title: t("title"),
-    description: t("description"),
+    title: t("metadata.title"),
+    description: t("metadata.description"),
     keywords: t.raw("seoKeywords").join(", "),
     alternates: {
       canonical: `${
@@ -37,8 +37,8 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: t("title"),
-      description: t("description"),
+      title: t("metadata.title"),
+      description: t("metadata.description"),
       type: "article",
       publishedTime: new Date().toISOString(),
     },
@@ -265,33 +265,31 @@ export default async function ImmediateReliefPage({
                   {t("gentleMovementDetails.yogaPoses.title")}
                 </h4>
                 <div className="space-y-3">
-                  {t
-                    .raw("gentleMovementDetails.yogaPoses.poses")
-                    .map(
-                      (
-                        pose: {
-                          name: string;
-                          description: string;
-                          benefits: string;
-                        },
-                        index: number,
-                      ) => (
-                        <div
-                          key={index}
-                          className="border-l-2 border-secondary-300 pl-3"
-                        >
-                          <h5 className="font-medium text-secondary-700">
-                            {pose.name}
-                          </h5>
-                          <p className="text-sm text-secondary-600 mb-1">
-                            {pose.description}
-                          </p>
-                          <p className="text-xs text-secondary-500">
-                            {pose.benefits}
-                          </p>
-                        </div>
-                      ),
-                    )}
+                  {t.raw("gentleMovementDetails.yogaPoses.poses").map(
+                    (
+                      pose: {
+                        name: string;
+                        description: string;
+                        benefits: string;
+                      },
+                      index: number,
+                    ) => (
+                      <div
+                        key={index}
+                        className="border-l-2 border-secondary-300 pl-3"
+                      >
+                        <h5 className="font-medium text-secondary-700">
+                          {pose.name}
+                        </h5>
+                        <p className="text-sm text-secondary-600 mb-1">
+                          {pose.description}
+                        </p>
+                        <p className="text-xs text-secondary-500">
+                          {pose.benefits}
+                        </p>
+                      </div>
+                    ),
+                  )}
                 </div>
               </div>
 
@@ -461,39 +459,37 @@ export default async function ImmediateReliefPage({
                   {t("acupressureDetails.title")}
                 </h4>
                 <div className="space-y-3">
-                  {t
-                    .raw("acupressureDetails.acupoints")
-                    .map(
-                      (
-                        point: {
-                          name: string;
-                          location: string;
-                          method: string;
-                          benefits: string;
-                        },
-                        index: number,
-                      ) => (
-                        <div
-                          key={index}
-                          className="border-l-2 border-accent-300 pl-3"
-                        >
-                          <h5 className="font-medium text-accent-700">
-                            {point.name}
-                          </h5>
-                          <p className="text-sm text-accent-600 mb-1">
-                            <strong>{t("labels.location")}</strong>
-                            {point.location}
-                          </p>
-                          <p className="text-sm text-accent-600 mb-1">
-                            <strong>{t("labels.method")}</strong>
-                            {point.method}
-                          </p>
-                          <p className="text-xs text-accent-500">
-                            {point.benefits}
-                          </p>
-                        </div>
-                      ),
-                    )}
+                  {t.raw("acupressureDetails.acupoints").map(
+                    (
+                      point: {
+                        name: string;
+                        location: string;
+                        method: string;
+                        benefits: string;
+                      },
+                      index: number,
+                    ) => (
+                      <div
+                        key={index}
+                        className="border-l-2 border-accent-300 pl-3"
+                      >
+                        <h5 className="font-medium text-accent-700">
+                          {point.name}
+                        </h5>
+                        <p className="text-sm text-accent-600 mb-1">
+                          <strong>{t("labels.location")}</strong>
+                          {point.location}
+                        </p>
+                        <p className="text-sm text-accent-600 mb-1">
+                          <strong>{t("labels.method")}</strong>
+                          {point.method}
+                        </p>
+                        <p className="text-xs text-accent-500">
+                          {point.benefits}
+                        </p>
+                      </div>
+                    ),
+                  )}
                 </div>
               </div>
 
@@ -600,43 +596,41 @@ export default async function ImmediateReliefPage({
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {t
-              .raw("combinationTherapy.combinations")
-              .map(
-                (
-                  combination: {
-                    level: string;
-                    methods: string[];
-                    description: string;
-                  },
-                  index: number,
-                ) => (
-                  <div
-                    key={index}
-                    className="bg-white p-6 rounded-lg shadow-sm border border-purple-100"
-                  >
-                    <h3 className="text-lg font-semibold text-purple-700 mb-3">
-                      {combination.level}
-                    </h3>
-                    <div className="space-y-2 mb-4">
-                      {Object.values(combination.methods).map(
-                        (method: string, methodIndex: number) => (
-                          <div
-                            key={methodIndex}
-                            className="flex items-center text-sm text-purple-600"
-                          >
-                            <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
-                            {method}
-                          </div>
-                        ),
-                      )}
-                    </div>
-                    <p className="text-sm text-neutral-600">
-                      {combination.description}
-                    </p>
+            {t.raw("combinationTherapy.combinations").map(
+              (
+                combination: {
+                  level: string;
+                  methods: string[];
+                  description: string;
+                },
+                index: number,
+              ) => (
+                <div
+                  key={index}
+                  className="bg-white p-6 rounded-lg shadow-sm border border-purple-100"
+                >
+                  <h3 className="text-lg font-semibold text-purple-700 mb-3">
+                    {combination.level}
+                  </h3>
+                  <div className="space-y-2 mb-4">
+                    {Object.values(combination.methods).map(
+                      (method: string, methodIndex: number) => (
+                        <div
+                          key={methodIndex}
+                          className="flex items-center text-sm text-purple-600"
+                        >
+                          <span className="w-2 h-2 bg-purple-400 rounded-full mr-2"></span>
+                          {method}
+                        </div>
+                      ),
+                    )}
                   </div>
-                ),
-              )}
+                  <p className="text-sm text-neutral-600">
+                    {combination.description}
+                  </p>
+                </div>
+              ),
+            )}
           </div>
         </section>
 

@@ -246,11 +246,6 @@ const nextConfig = {
         source: '/en/images/:path*',
         destination: '/images/:path*'
       },
-      // PDF文件路径重写规则 - 将旧的pdf-files路径重定向到新的downloads路径
-      {
-        source: '/pdf-files/:path*',
-        destination: '/downloads/:path*'
-      },
       // 🎯 修复图片URL问题 - 将不带尺寸后缀的图片重定向到800x800版本
       {
         source: '/images/medical/female_reproductive_system_anatomy.webp',
@@ -462,6 +457,13 @@ const nextConfig = {
       {
         source: '/atom.xml',
         destination: '/feed.xml',
+        permanent: true
+      },
+      // 🎯 修复 PDF 重复路径问题 - 将 /pdf-files/ 重定向到 /downloads/
+      // 这解决了 Google Search Console 报告的"重复网页"问题
+      {
+        source: '/pdf-files/:filename',
+        destination: '/downloads/:filename',
         permanent: true
       }
     ];

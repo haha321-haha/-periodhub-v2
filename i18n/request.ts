@@ -16,12 +16,23 @@ export default getRequestConfig(async ({ requestLocale }) => {
       console.warn("[i18n] No locale provided, using default:", defaultLocale);
       locale = defaultLocale;
     } else if (!locales.includes(locale as any)) {
-      console.warn(
-        "[i18n] Invalid locale provided:",
-        locale,
-        "falling back to:",
-        defaultLocale,
-      );
+      // 🎯 特殊处理：如果locale是图片文件名或包含图片扩展名，直接使用默认locale
+      if (locale.includes('.jpg') || locale.includes('.jpeg') || locale.includes('.png') || 
+          locale.includes('.gif') || locale.includes('.webp') || locale.includes('.svg')) {
+        console.warn(
+          "[i18n] Locale appears to be an image filename:",
+          locale,
+          "falling back to:",
+          defaultLocale,
+        );
+      } else {
+        console.warn(
+          "[i18n] Invalid locale provided:",
+          locale,
+          "falling back to:",
+          defaultLocale,
+        );
+      }
       locale = defaultLocale;
     }
 

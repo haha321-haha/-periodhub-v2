@@ -42,7 +42,12 @@ export function middleware(request: NextRequest) {
       pathname.endsWith(".jpeg") ||
       pathname.endsWith(".gif") ||
       pathname.endsWith(".webp") ||
-      pathname.endsWith(".txt") // 排除.txt文件（包括IndexNow密钥文件）
+      pathname.endsWith(".txt") || // 排除.txt文件（包括IndexNow密钥文件）
+      // 🎯 修复locale错误问题 - 排除任何包含图片文件名的路径
+      pathname.includes("menstrual-pain-complications.jpg") ||
+      pathname.includes("menstrual-pain-complications") ||
+      // 排除其他可能被误认为locale的图片路径
+      /^\/[^\/]*\.(jpg|jpeg|png|gif|webp|svg|ico)$/.test(pathname)
     ) {
       return NextResponse.next();
     }
@@ -204,7 +209,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // 包含所有路径，除了静态文件 - 明确排除所有.txt文件
+    // 包含所有路径，除了静态文件 - 明确排除所有静态资源
     "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images|styles|scripts|fonts|icons|atom.xml|feed.xml|.*\\.txt|a3f202e9872f45238294db525b233bf5\\.txt).*)",
     // 特别包含我们要处理的路径
     "/download-center",

@@ -65,7 +65,9 @@ const nextConfig = {
 
   // 编译器优化
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production' 
+      ? { exclude: ['error', 'warn'] }
+      : false,
   },
 
   // 移动端性能优化头部配置

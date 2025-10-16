@@ -197,7 +197,7 @@
           "title": "如何行使您的权利",
           "description": "如需行使上述任何权利，请通过以下方式联系我们：",
           "methods": [
-            "邮箱：tiyibaofu@outlook.com",
+            "邮箱：联系我们获取邮箱地址",
             "在线表单：通过我们的联系页面",
             "我们将在收到请求后15个工作日内回复"
           ]
@@ -208,13 +208,13 @@
         "description": "如果您对本隐私政策或您的数据有任何问题：",
         "dpo": {
           "title": "数据保护官",
-          "email": "tiyibaofu@outlook.com",
+          "email": "数据保护官邮箱",
           "responsibility": "处理所有与隐私相关的咨询",
           "languages": "提供中英文服务"
         },
         "dataProtection": {
           "title": "数据保护咨询",
-          "email": "tiyibaofu@outlook.com",
+          "email": "数据保护咨询邮箱",
           "subject": "主题：隐私政策问题",
           "responseTime": "我们会在 48 小时内回复"
         }
@@ -233,7 +233,7 @@
       ]
     },
     "questions": "有疑问？",
-    "questionsDescription": "如果您对本隐私政策有任何疑问，请通过 tiyibaofu@outlook.com 联系我们",
+    "questionsDescription": "如果您对本隐私政策有任何疑问，请通过联系我们页面与我们联系",
     "contactUs": "联系我们"
   },
   "metadata": {
@@ -5611,7 +5611,7 @@
     "articles": "文章PDF下载中心",
     "naturalTherapies": "平时调理",
     "contactTitle": "联系我们",
-    "contactEmail": "tiyibaofu@outlook.com",
+    "contactEmail": "联系我们获取邮箱地址",
     "socialTwitter": "Twitter",
     "socialInstagram": "Instagram",
     "copyright": "© {currentYear, number, integer} www.periodhub.health。保留所有权利。",
@@ -9073,7 +9073,7 @@
     "contact": {
       "title": "联系信息",
       "description": "如果您对服务条款有任何疑问，请通过以下方式联系我们。",
-      "email": "邮箱：tiyibaofu@outlook.com",
+      "email": "邮箱：联系我们获取邮箱地址",
       "mailingAddress": "邮寄地址：[您的公司地址]",
       "onlineFeedback": "在线反馈：使用我们网站上的联系表单",
       "responseTime": "响应时间：我们将在24-48小时内回复"

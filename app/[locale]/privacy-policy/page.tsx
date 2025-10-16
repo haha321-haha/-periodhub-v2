@@ -1,6 +1,7 @@
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { URL_CONFIG } from "@/lib/url-config";
+import { generateMailtoLink } from "@/lib/email-protection";
 
 // Types
 type Locale = "en" | "zh";
@@ -619,7 +620,13 @@ export default async function PrivacyPolicyPage({
               {t("questions")}
             </h2>
             <p className="text-purple-700 mb-6">{t("questionsDescription")}</p>
-            <a href="mailto:tiyibaofu@outlook.com" className="btn-primary">
+            <a
+              href={generateMailtoLink(
+                "隐私政策咨询",
+                "您好，我想咨询关于隐私政策的问题。",
+              )}
+              className="btn-primary"
+            >
               {t("contactUs")}
             </a>
           </div>

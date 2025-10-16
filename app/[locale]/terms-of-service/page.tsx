@@ -1,6 +1,7 @@
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { URL_CONFIG } from "@/lib/url-config";
+import { generateMailtoLink } from "@/lib/email-protection";
 
 // Types
 type Locale = "en" | "zh";
@@ -773,7 +774,13 @@ export default async function TermsOfServicePage({
             <p className="text-neutral-600 mb-6">
               {t("questionsDescriptionTerms")}
             </p>
-            <a href="mailto:tiyibaofu@outlook.com" className="btn-primary">
+            <a
+              href={generateMailtoLink(
+                "服务条款咨询",
+                "您好，我想咨询关于服务条款的问题。",
+              )}
+              className="btn-primary"
+            >
               {t("contactUsTerms")}
             </a>
           </div>

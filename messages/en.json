@@ -43,7 +43,7 @@
     "articles": "Articles & Downloads",
     "naturalTherapies": "Natural Therapies",
     "contactTitle": "Contact Us",
-    "contactEmail": "tiyibaofu@outlook.com",
+    "contactEmail": "Contact us for email address",
     "socialTwitter": "Twitter",
     "socialInstagram": "Instagram",
     "copyright": "© 2,025 www.periodhub.health. All rights reserved.",
@@ -3402,7 +3402,7 @@
     "contact": {
       "title": "Contact Information",
       "description": "If you have any questions about the Terms of Service, please contact us through the following methods.",
-      "email": "Email: tiyibaofu@outlook.com",
+      "email": "Email: Contact us for email address",
       "mailingAddress": "Mailing Address: [Your Company Address]",
       "onlineFeedback": "Online Feedback: Use our contact form on the website",
       "responseTime": "Response Time: We will respond within 24-48 hours"
@@ -6715,7 +6715,7 @@
           "title": "How to Exercise Your Rights",
           "description": "To exercise any of the above rights, please contact us through the following methods:",
           "methods": [
-            "Email: tiyibaofu@outlook.com",
+            "Email: Contact us for email address",
             "Online form: Through our contact page",
             "We will respond within 15 working days of receiving the request"
           ]
@@ -6726,13 +6726,13 @@
         "description": "If you have questions about this Privacy Policy or your data:",
         "dpo": {
           "title": "Data Protection Officer",
-          "email": "tiyibaofu@outlook.com",
+          "email": "Data Protection Officer Email",
           "responsibility": "Handles all privacy-related inquiries",
           "languages": "Available in English and Chinese"
         },
         "dataProtection": {
           "title": "Data Protection Inquiries",
-          "email": "tiyibaofu@outlook.com",
+          "email": "Data Protection Inquiry Email",
           "subject": "Subject: Privacy Policy Question",
           "responseTime": "We aim to respond within 48 hours"
         }
@@ -6751,7 +6751,7 @@
       ]
     },
     "questions": "Questions?",
-    "questionsDescription": "If you have any questions about this Privacy Policy, please contact us at tiyibaofu@outlook.com",
+    "questionsDescription": "If you have any questions about this Privacy Policy, please contact us through our contact page",
     "contactUs": "Contact Us"
   },
   "painTracker": {

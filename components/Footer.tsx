@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useTranslations, useLocale } from "next-intl";
 import { useEffect, useState } from "react";
+import { generateMailtoLink, displayEmail } from "@/lib/email-protection";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -89,10 +90,22 @@ export default function Footer() {
               {t("contactTitle")}
             </h3>
             <a
-              href="mailto:tiyibaofu@outlook.com"
+              href={generateMailtoLink(
+                "网站咨询",
+                "您好，我想咨询关于经期健康管理的问题。",
+              )}
               className="text-sm text-neutral-600 hover:text-primary-600 transition-colors"
+              onClick={(e) => {
+                // 防止右键复制邮箱地址
+                e.preventDefault();
+                window.location.href = generateMailtoLink(
+                  "网站咨询",
+                  "您好，我想咨询关于经期健康管理的问题。",
+                );
+              }}
+              onContextMenu={(e) => e.preventDefault()}
             >
-              tiyibaofu@outlook.com
+              {displayEmail()}
             </a>
 
             {/* Social Media Links (placeholders) */}

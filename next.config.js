@@ -307,6 +307,17 @@ const nextConfig = {
         destination: '/en/downloads', // 默认英文版本
         permanent: true
       },
+      // 🎯 处理带语言前缀的articles路径重定向
+      {
+        source: '/zh/articles',
+        destination: '/zh/downloads',
+        permanent: true
+      },
+      {
+        source: '/en/articles',
+        destination: '/en/downloads',
+        permanent: true
+      },
       // 🎯 修复重复的downloads页面问题 - 由middleware.ts处理多语言重定向
       // 这些重定向现在由middleware.ts处理，支持更灵活的语言检测
       // 🎯 修复错误的 /downloads/articles/ 路径 - 重定向到正确的 /articles/
@@ -348,6 +359,12 @@ const nextConfig = {
       // 🎯 修复teen-health重定向问题 - 使用301状态码
       {
         source: '/teen-health',
+        destination: '/zh/teen-health',
+        permanent: true
+      },
+      // 🎯 修复teen-health路径末尾斜杠问题
+      {
+        source: '/teen-health/',
         destination: '/zh/teen-health',
         permanent: true
       },

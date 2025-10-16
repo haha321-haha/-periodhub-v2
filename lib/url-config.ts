@@ -23,7 +23,6 @@ export const URL_CONFIG = {
     teenHealth: `${BASE_URL}/teen-health`,
     scenarioSolutions: `${BASE_URL}/scenario-solutions`,
     naturalTherapies: `${BASE_URL}/natural-therapies`,
-    specialTherapies: `${BASE_URL}/special-therapies`,
     culturalCharms: `${BASE_URL}/cultural-charms`,
     immediateRelief: `${BASE_URL}/immediate-relief`,
     downloads: `${BASE_URL}/downloads`,

@@ -41,34 +41,7 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // 🎯 手动处理重定向，确保返回301状态码
-    if (pathname === '/teen-health') {
-      if (process.env.NODE_ENV === "development") {
-        console.log(`[Middleware] Redirecting /teen-health to /zh/teen-health`);
-      }
-      const redirectUrl = new URL('/zh/teen-health', request.url);
-      return NextResponse.redirect(redirectUrl, 301);
-    }
     
-    if (pathname === '/articles') {
-      // 检查Accept-Language头部
-      const acceptLanguage = request.headers.get('accept-language') || '';
-      const isChinese = acceptLanguage.includes('zh');
-      const redirectPath = isChinese ? '/zh/downloads' : '/en/downloads';
-      const redirectUrl = new URL(redirectPath, request.url);
-      return NextResponse.redirect(redirectUrl, 301);
-    }
-    
-    // 🎯 处理带语言前缀的articles路径重定向
-    if (pathname === '/zh/articles') {
-      const redirectUrl = new URL('/zh/downloads', request.url);
-      return NextResponse.redirect(redirectUrl, 301);
-    }
-    
-    if (pathname === '/en/articles') {
-      const redirectUrl = new URL('/en/downloads', request.url);
-      return NextResponse.redirect(redirectUrl, 301);
-    }
 
     // 🎯 处理中文工具路径重定向
     const chineseToolPaths: { [key: string]: string } = {
@@ -96,15 +69,7 @@ export function middleware(request: NextRequest) {
       }
     }
     
-    if (pathname === '/zh/assessment') {
-      const redirectUrl = new URL('/zh/interactive-tools/symptom-assessment', request.url);
-      return NextResponse.redirect(redirectUrl, 301);
-    }
     
-    if (pathname === '/assessment') {
-      const redirectUrl = new URL('/en/interactive-tools/symptom-assessment', request.url);
-      return NextResponse.redirect(redirectUrl, 301);
-    }
 
     // 🎯 处理重复的downloads页面重定向 - 支持多语言检测
     if (pathname === '/download-center' || pathname === '/downloads-new' || pathname === '/articles-pdf-center') {
@@ -236,10 +201,6 @@ export const config = {
     // 包含所有路径，除了静态文件
     "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images|styles|scripts|fonts|icons|atom.xml|feed.xml).*)",
     // 特别包含我们要处理的路径
-    "/teen-health",
-    "/articles", 
-    "/zh/assessment",
-    "/assessment",
     "/download-center",
     "/downloads-new",
     "/articles-pdf-center",

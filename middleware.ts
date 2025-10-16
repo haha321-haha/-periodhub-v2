@@ -18,6 +18,11 @@ export function middleware(request: NextRequest) {
     console.log(`[Middleware] Processing: ${pathname}`);
   }
 
+  // 🎯 立即排除IndexNow密钥文件 - 最高优先级
+  if (pathname === '/a3f202e9872f45238294db525b233bf5.txt') {
+    return NextResponse.next();
+  }
+
   try {
     // 排除静态文件路径，避免国际化中间件干扰
     if (
@@ -199,8 +204,8 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // 包含所有路径，除了静态文件
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images|styles|scripts|fonts|icons|atom.xml|feed.xml|.*\\.txt).*)",
+    // 包含所有路径，除了静态文件 - 明确排除所有.txt文件
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images|styles|scripts|fonts|icons|atom.xml|feed.xml|.*\\.txt|a3f202e9872f45238294db525b233bf5\\.txt).*)",
     // 特别包含我们要处理的路径
     "/download-center",
     "/downloads-new",

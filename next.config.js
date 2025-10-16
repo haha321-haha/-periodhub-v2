@@ -156,6 +156,19 @@ const nextConfig = {
   // 重写规则 - 修复静态资源路径
   async rewrites() {
     return [
+      // 🎯 确保IndexNow密钥文件正确返回 - 最高优先级
+      {
+        source: '/a3f202e9872f45238294db525b233bf5.txt',
+        destination: '/a3f202e9872f45238294db525b233bf5.txt'
+      },
+      {
+        source: '/zh/a3f202e9872f45238294db525b233bf5.txt',
+        destination: '/a3f202e9872f45238294db525b233bf5.txt'
+      },
+      {
+        source: '/en/a3f202e9872f45238294db525b233bf5.txt',
+        destination: '/a3f202e9872f45238294db525b233bf5.txt'
+      },
       {
         source: '/zh/manifest.json',
         destination: '/manifest.webmanifest'

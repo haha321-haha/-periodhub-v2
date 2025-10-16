@@ -36,7 +36,8 @@ export function middleware(request: NextRequest) {
       pathname.endsWith(".jpg") ||
       pathname.endsWith(".jpeg") ||
       pathname.endsWith(".gif") ||
-      pathname.endsWith(".webp")
+      pathname.endsWith(".webp") ||
+      pathname.endsWith(".txt") // 排除.txt文件（包括IndexNow密钥文件）
     ) {
       return NextResponse.next();
     }
@@ -199,7 +200,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // 包含所有路径，除了静态文件
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images|styles|scripts|fonts|icons|atom.xml|feed.xml).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images|styles|scripts|fonts|icons|atom.xml|feed.xml|.*\\.txt).*)",
     // 特别包含我们要处理的路径
     "/download-center",
     "/downloads-new",

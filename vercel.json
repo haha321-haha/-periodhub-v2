@@ -52,7 +52,16 @@
       ]
     },
     {
-      "source": "/:locale(en|zh)/(articles|scenario-solutions|health-guide|teen-health|privacy-policy|terms-of-service|medical-disclaimer)/:path*",
+      "source": "/(en|zh)/(articles|scenario-solutions|health-guide|teen-health|privacy-policy|terms-of-service|medical-disclaimer)(/.*)?",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, s-maxage=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(en|zh)/health-guide",
       "headers": [
         {
           "key": "Cache-Control",

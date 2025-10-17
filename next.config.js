@@ -97,6 +97,19 @@ const nextConfig = {
           //   key: 'Cache-Control',
           //   value: 'public, max-age=31536000, immutable'
           // }
+          // 🔧 修复CORS预检请求400错误
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*'
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, PUT, DELETE, OPTIONS'
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type, Authorization'
+          }
         ]
       },
       // CSS文件MIME类型修复

@@ -315,6 +315,67 @@ const nextConfig = {
         destination: '/zh/interactive-tools/symptom-assessment',
         permanent: true
       },
+      // 🎯 修复交互工具路径404错误 - 重定向到正确的interactive-tools路径
+      {
+        source: '/zh/pain-tracker',
+        destination: '/zh/interactive-tools/pain-tracker',
+        permanent: true
+      },
+      {
+        source: '/en/pain-tracker',
+        destination: '/en/interactive-tools/pain-tracker',
+        permanent: true
+      },
+      {
+        source: '/zh/symptom-assessment',
+        destination: '/zh/interactive-tools/symptom-assessment',
+        permanent: true
+      },
+      {
+        source: '/en/symptom-assessment',
+        destination: '/en/interactive-tools/symptom-assessment',
+        permanent: true
+      },
+      {
+        source: '/zh/constitution-test',
+        destination: '/zh/interactive-tools/constitution-test',
+        permanent: true
+      },
+      {
+        source: '/en/constitution-test',
+        destination: '/en/interactive-tools/constitution-test',
+        permanent: true
+      },
+      {
+        source: '/zh/period-pain-assessment',
+        destination: '/zh/interactive-tools/period-pain-assessment',
+        permanent: true
+      },
+      {
+        source: '/en/period-pain-assessment',
+        destination: '/en/interactive-tools/period-pain-assessment',
+        permanent: true
+      },
+      {
+        source: '/zh/cycle-tracker',
+        destination: '/zh/interactive-tools/cycle-tracker',
+        permanent: true
+      },
+      {
+        source: '/en/cycle-tracker',
+        destination: '/en/interactive-tools/cycle-tracker',
+        permanent: true
+      },
+      {
+        source: '/zh/symptom-tracker',
+        destination: '/zh/interactive-tools/symptom-tracker',
+        permanent: true
+      },
+      {
+        source: '/en/symptom-tracker',
+        destination: '/en/interactive-tools/symptom-tracker',
+        permanent: true
+      },
       // 🎯 修复articles页面重定向问题 - 重定向到下载中心（用户实际使用的页面）
       {
         source: '/articles',

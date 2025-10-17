@@ -92,11 +92,11 @@ const nextConfig = {
           //   value: '</_next/static/css/app/layout.css>; rel=preload; as=style'
           // },
           // webpack.js预加载优化 - 已移除，Next.js 15.5.4会自动处理
-          // 缓存控制
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
+          // 缓存控制 - 已移除，由 vercel.json 统一管理
+          // {
+          //   key: 'Cache-Control',
+          //   value: 'public, max-age=31536000, immutable'
+          // }
         ]
       },
       // CSS文件MIME类型修复

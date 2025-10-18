@@ -20,6 +20,7 @@ seo_title_en: "How to Use Ginger for Menstrual Pain Relief: 5 Scientifically Pro
 seo_description: "Comprehensive guide to using ginger for menstrual pain relief based on medical research, covering 5 effective methods and safety guidelines for natural pain management."
 seo_description_en: "Comprehensive guide to using ginger for menstrual pain relief based on medical research, covering 5 effective methods and safety guidelines for natural pain management."
 canonical_url: "/en/articles/ginger-menstrual-pain-relief-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 ---
 

@@ -5,6 +5,7 @@ summary: "Detailed explanation of 5 scientifically validated herbal tea recipes 
 category: "Preparation Planning"
 tags: ["herbal tea", "menstrual pain relief", "natural remedies", "preventive care", "scientific formulas"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

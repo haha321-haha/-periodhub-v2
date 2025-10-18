@@ -15,6 +15,7 @@ seo_description: "抗炎饮食缓解痛经 - 科学饮食方案减少经期炎�
 seo_description_en: "Reduce menstrual cramp pain naturally with an anti-inflammatory diet. Get a guide to anti-inflammatory foods for periods and learn which foods to limit."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/anti-inflammatory-diet-period-pain"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "10分钟"
 reading_time_en: "10 minutes"

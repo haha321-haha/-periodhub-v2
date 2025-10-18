@@ -5,6 +5,7 @@ summary: "详细介绍经期睡眠障碍的识别方法、卧室环境优化技�
 category: "理解与教育"
 tags: ["经期睡眠", "睡眠质量", "睡眠改善", "激素影响", "睡眠环境"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

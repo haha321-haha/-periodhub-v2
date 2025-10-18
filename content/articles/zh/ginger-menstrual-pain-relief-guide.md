@@ -5,6 +5,7 @@ summary: "详解生姜缓解痛经的科学机制和实用方法，包含黄金�
 category: "即时缓解方案"
 tags: ["生姜疗法", "痛经缓解", "自然疗法", "草药治疗", "科学方法"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

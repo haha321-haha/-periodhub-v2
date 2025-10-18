@@ -15,6 +15,7 @@ seo_description: "学习科学验证的痛经自然缓解方法，包括抗炎�
 seo_description_en: "Learn scientifically-validated natural period pain relief methods including anti-inflammatory diet, heat therapy, and quick techniques. Understand important warning signs for when to seek medical care and take control of your menstrual health."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/when-to-seek-medical-care-comprehensive-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "15分钟"
 reading_time_en: "15 minutes"

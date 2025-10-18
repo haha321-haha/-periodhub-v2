@@ -5,6 +5,7 @@ summary: "Prevention is better than cure. Through scientific preventive care, me
 category: "Nutrition & Health"
 tags: ["preventive care", "full-cycle management", "evidence-based medicine", "individualized plans", "symptom monitoring"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

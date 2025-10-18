@@ -5,6 +5,7 @@ summary: "Over 60% of women experience decreased sleep quality during menstruati
 category: "Nutrition & Health"
 tags: ["sleep quality", "21-day plan", "sleep hygiene", "hormonal sleep", "sleep monitoring"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

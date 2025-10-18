@@ -15,6 +15,7 @@ seo_description: "Scientific analysis of magnesium supplementation mechanisms fo
 seo_description_en: "Scientific analysis of magnesium supplementation mechanisms for menstrual pain relief, exploring gut health and menstrual cycle connections, providing dietary therapy plans and medical guidance. Evidence-based women's menstrual health management guide."
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/magnesium-gut-health-comprehensive-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "30 minutes"
 reading_time_en: "30 minutes"

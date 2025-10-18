@@ -11,6 +11,7 @@ featured: true
 reading_time: "8分钟"
 reading_time_zh: "8分钟"
 canonical_url: "/zh/articles/heat-therapy-complete-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 ---
 

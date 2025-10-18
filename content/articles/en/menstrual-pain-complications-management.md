@@ -13,9 +13,10 @@ seo_title: "Complete Menstrual Pain Complications Guide: Scientific Relief for B
 seo_title_zh: "痛经伴随症状完整管理指南：腹胀恶心腰痛的科学缓解方法 | 专业女性健康"
 seo_description: "Menstrual pain complications guide: Manage bloating, nausea, back pain with scientific relief strategies. Symptom analysis, acupressure techniques, diet recommendations."
 seo_description_zh: "专业痛经伴随症状管理指南：深度解析腹胀、恶心呕吐、腰痛的成因机制，提供科学缓解策略。包含症状关联分析、经期不适缓解指南、腰痛管理、穴位按压技巧、抗炎饮食建议。基于前列腺素理论和临床实践的综合症状管理，涵盖急性缓解和长期预防的完整解决方案，专业医学指导，科学有效的症状控制方法，全面的健康管理策略方案。"
-featured_image: "/images/articles/menstrual-pain-complications.jpg"
+# featured_image: "/images/articles/menstrual-pain-complications.jpg" # 图片文件不存在，已临时注释
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/menstrual-pain-complications-management"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "28 minutes"
 reading_time_zh: "28 分钟"

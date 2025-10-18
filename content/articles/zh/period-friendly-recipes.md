@@ -10,6 +10,7 @@ tags: ["营养饮食", "经期护理", "食疗养生", "健康食谱"]
 tags_zh: ["营养饮食", "经期护理", "食疗养生", "健康食谱"]
 category: "health"
 author: "PeriodHub团队"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 ---
 
 # 经期友好食谱：滋养身心，舒适度过那几天

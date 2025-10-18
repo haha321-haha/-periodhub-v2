@@ -10,6 +10,7 @@ tags: ["nutrition", "period care", "healthy recipes", "wellness"]
 tags_zh: ["营养饮食", "经期护理", "食疗养生", "健康食谱"]
 category: "health"
 author: "PeriodHub Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 ---
 
 # Period-Friendly Recipes: Nourish Your Body and Soul During Those Days

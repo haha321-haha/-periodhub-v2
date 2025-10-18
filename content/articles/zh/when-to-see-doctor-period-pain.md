@@ -15,6 +15,7 @@ seo_description: "何时就医 - 经期疼痛就医指南，详细说明什么�
 seo_description_en: "Identify 7 warning signs of menstrual pain and know when emergency care is needed. Complete medical guidance from self-assessment to professional treatment to protect your health and safety."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/when-to-see-doctor-period-pain"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "12分钟"
 reading_time_en: "12 minutes"

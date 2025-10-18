@@ -15,6 +15,7 @@ seo_description: "经期恶心呕吐怎么缓解？医学机制深度解析+分�
 seo_description_en: "Period nausea relief: medical mechanisms + graded solutions. 6 strategies including ginger tea, acupressure & medication. Expert-recommended guidelines!"
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/menstrual-nausea-relief-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "12分钟"
 ---

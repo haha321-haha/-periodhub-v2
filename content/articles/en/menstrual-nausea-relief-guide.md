@@ -15,6 +15,7 @@ seo_description: "Period pain causing nausea and vomiting? Learn the medical mec
 seo_description_en: "Period pain causing nausea and vomiting? Learn the medical mechanisms and master graded response strategies, from dietary adjustments to medication interventions for complete relief."
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/menstrual-nausea-relief-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "12 minutes"
 ---

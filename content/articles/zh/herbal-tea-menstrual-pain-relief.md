@@ -5,6 +5,7 @@ summary: "详解5种科学验证的痛经草药茶配方，包含黄金姜茶、
 category: "计划准备"
 tags: ["草药茶", "痛经缓解", "自然疗法", "预防调理", "科学配方"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

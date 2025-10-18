@@ -5,6 +5,7 @@ summary: "Menstrual pain affects up to 90% of women, presenting unique character
 category: "Understanding & Education"
 tags: ["lifecycle", "age characteristics", "scientific management", "comprehensive guidance", "North American guide"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

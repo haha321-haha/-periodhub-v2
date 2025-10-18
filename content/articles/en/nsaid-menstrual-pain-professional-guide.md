@@ -11,7 +11,7 @@ tags_zh: ["NSAIDs", "药物治疗", "安全用药", "剂量计算", "医学专�
 category: "medical"
 category_zh: "医学专业"
 author: "periodhub.health Expert Team"
-featured_image: "/images/articles/nsaid-professional-guide.jpg"
+featured_image: "/images/articles/nsaid-menstrual-pain-professional-guide-cover.jpg"
 seo_title: "Professional NSAID Guide for Menstrual Pain: Safe Usage & Dosage Calculator | periodhub.health"
 seo_title_zh: "NSAIDs痛经治疗专业指南：安全用药与剂量计算 | periodhub.health"
 seo_description: "NSAID guide for menstrual pain: Pharmacological mechanisms, safe usage protocols, dosage calculation. Professional guidance for scientific and safe pain relief methods."

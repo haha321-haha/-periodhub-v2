@@ -10,6 +10,7 @@ tags: ["阅读推荐", "女性健康", "经期教育", "心理健康"]
 tags_zh: ["阅读推荐", "女性健康", "经期教育", "心理健康"]
 category: "education"
 author: "PeriodHub团队"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 ---
 
 # 推荐书单：成为自己的经期健康专家

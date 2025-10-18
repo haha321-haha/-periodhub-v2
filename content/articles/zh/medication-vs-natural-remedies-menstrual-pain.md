@@ -5,6 +5,7 @@ summary: "深入分析药物治疗和自然疗法的优缺点，包括NSAIDs、�
 category: "理解与教育"
 tags: ["药物治疗", "自然疗法", "痛经缓解", "治疗选择", "个性化医疗"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

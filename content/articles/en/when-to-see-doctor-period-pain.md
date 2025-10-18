@@ -15,6 +15,7 @@ seo_description: "When to See a Doctor for Period Pain - Comprehensive guide on 
 seo_description_zh: "When to See a Doctor for Period Pain - Comprehensive guide on when to seek medical help for menstrual pain, how to describe symptoms, diagnostic tests, and treatment options for timely professional care and health safety."
 author: "periodhub.health Expert Team"
 canonical_url: "/articles/when-to-see-doctor-period-pain"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "7 minutes"
 reading_time_zh: "7分钟"

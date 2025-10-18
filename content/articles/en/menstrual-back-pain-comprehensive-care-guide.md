@@ -17,6 +17,7 @@ reading_time_zh: "12分钟"
 seo_title: "Menstrual Back Pain Relief Guide: Expert Care & Scientific Methods"
 seo_description: "Comprehensive menstrual back pain care guide with WHO and ACOG-based strategies. Learn pain classification, immediate relief methods, exercise therapy, and warning signs for effective back pain management."
 canonical_url: "/en/articles/menstrual-back-pain-comprehensive-care-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 ---
 
 # Comprehensive Menstrual Back Pain Care Guide: Scientific Relief & Expert Recommendations

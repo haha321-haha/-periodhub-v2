@@ -15,6 +15,7 @@ seo_description: "5-minute period pain relief: 4 proven techniques - breathing, 
 seo_description_zh: "5分钟痛经缓解法 - 4种科学验证的经期不适缓解技巧：呼吸练习、穴位按摩、热敷和放松方法。简单易学的应急缓解方案，有助于减轻痛经症状，改善日常活动质量。专业指导，安全实用的经期健康管理方法，无副作用，随时随地可操作，适合各种程度的经期不适症状缓解，科学有效的疼痛管理解决方案，专业可靠的健康指导，立即开始缓解。"
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/5-minute-period-pain-relief"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "6 minutes"
 reading_time_zh: "6分钟"

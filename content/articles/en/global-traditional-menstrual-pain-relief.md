@@ -5,6 +5,7 @@ summary: "Explore global traditional medicine wisdom, integrating Ayurveda, Trad
 category: "Traditional Therapies"
 tags: ["menstrual pain relief", "ayurveda", "traditional chinese medicine", "natural remedies", "women's health", "holistic healing"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

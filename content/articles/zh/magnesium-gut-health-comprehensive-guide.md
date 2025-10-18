@@ -15,6 +15,7 @@ seo_description: "科学解析镁补充剂缓解痛经机制，探索肠道健�
 seo_description_en: "Scientific analysis of magnesium supplementation mechanisms for menstrual pain relief, exploring gut health and menstrual cycle connections, providing dietary therapy plans and medical guidance. Evidence-based women's menstrual health management guide."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/magnesium-gut-health-comprehensive-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "30分钟"
 reading_time_en: "30 minutes"

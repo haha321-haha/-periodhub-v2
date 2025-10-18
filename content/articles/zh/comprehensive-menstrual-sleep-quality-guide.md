@@ -5,6 +5,7 @@ summary: "超过60%的女性在经期经历睡眠质量下降。本指南基于�
 category: "营养与健康"
 tags: ["睡眠质量", "21天计划", "睡眠卫生", "激素睡眠", "睡眠监测"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

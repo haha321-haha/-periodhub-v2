@@ -5,6 +5,7 @@ summary: "Detailed introduction to identifying menstrual sleep disorders, bedroo
 category: "Understanding & Education"
 tags: ["menstrual sleep", "sleep quality", "sleep improvement", "hormonal effects", "sleep environment"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

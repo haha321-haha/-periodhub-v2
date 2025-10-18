@@ -11,6 +11,7 @@ featured: true
 reading_time: "12分钟"
 reading_time_zh: "12分钟"
 canonical_url: "/zh/articles/menstrual-back-pain-comprehensive-care-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 ---
 

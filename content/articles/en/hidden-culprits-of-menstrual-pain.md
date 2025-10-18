@@ -10,6 +10,7 @@ tags: ["mental health", "menstrual pain management", "stress relief", "psycholog
 tags_en: ["mental health", "menstrual pain management", "stress relief", "psychological guidance", "cognitive behavioral therapy", "mindfulness therapy", "autonomic nervous testing", "quick relief techniques"]
 category: "health"
 author: "PeriodHub Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 ---
 
 # Hidden Culprits of Menstrual Pain: Psychological Stress and Pathways to Relief - Complete Psychological Guidance

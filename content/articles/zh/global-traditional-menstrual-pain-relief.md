@@ -5,6 +5,7 @@ summary: "探索全球传统医学智慧，融合阿育吠陀、中医、欧洲�
 category: "健康管理"
 tags: ["痛经缓解", "阿育吠陀", "中医", "传统医学", "自然疗法", "女性健康"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

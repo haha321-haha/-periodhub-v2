@@ -14,6 +14,7 @@ seo_description: "Medical guide to menstrual pain: 10 major causes from prostagl
 seo_description_zh: "权威医学指南深度解析痛经10大病因，从前列腺素机制到子宫内膜异位症，详细阐述原发性与继发性痛经的鉴别诊断。提供专业疼痛评估方法、标准化治疗流程和就医指征，帮助女性科学认知痛经，实现精准健康管理。包含疼痛量表、诊断流程图、治疗决策树等实用医学工具，权威专业的医学参考指南，临床验证的诊疗标准规范方案指导。"
 author: "Period Hub Medical Team"
 canonical_url: "/en/articles/menstrual-pain-medical-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "20 minutes"
 reading_time_zh: "20分钟"

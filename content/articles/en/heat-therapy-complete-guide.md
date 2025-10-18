@@ -15,6 +15,7 @@ seo_description: "Heat therapy for period pain: 5-step guide with temperature co
 seo_description_zh: "Complete Heat Therapy Guide - Scientifically validated menstrual heat therapy methods including temperature control, timing, safety considerations, and effectiveness optimization techniques for safe and effective pain relief."
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/heat-therapy-complete-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "12 minutes"
 reading_time_zh: "12分钟"

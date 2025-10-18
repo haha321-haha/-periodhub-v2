@@ -5,6 +5,7 @@ summary: "痛经影响着高达90%的女性，在不同年龄段呈现出独特�
 category: "理解与教育"
 tags: ["生命周期", "年龄特点", "科学管理", "全程指导", "北美指南"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

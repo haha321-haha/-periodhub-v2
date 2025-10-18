@@ -19,9 +19,10 @@ seo_title: "IUD宫内节育器完整指南：类型对比、适用人群、放�
 seo_title_en: "Complete IUD Guide: Types Comparison, Candidates, Insertion Process | Authoritative Medical Guidance"
 seo_description: "权威IUD指南：详解含铜vs含激素IUD区别，适用禁忌人群，放置取出流程，副作用管理。基于WHO/ACOG/NHS最新指南，帮助您选择合适的长效避孕方法。专业咨询，科学可靠的避孕健康指导，包含费用分析、效果对比、安全性评估，为女性提供全面的避孕决策参考，专业医疗机构推荐，安全有效的长期避孕解决方案。"
 seo_description_en: "Authoritative IUD guide: Detailed comparison of copper vs hormonal IUD, suitable/contraindicated populations, insertion/removal procedures, side effect management. Based on latest WHO/ACOG/NHS guidelines to help you choose the most suitable long-term contraception."
-featured_image: "/images/articles/comprehensive-iud-guide.jpg"
+# featured_image: "/images/articles/comprehensive-iud-guide.jpg" # 图片文件不存在，已临时注释
 author: "periodhub.health Expert Team"
 canonical_url: "/zh/articles/comprehensive-iud-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "25分钟"
 reading_time_zh: "25 分钟"

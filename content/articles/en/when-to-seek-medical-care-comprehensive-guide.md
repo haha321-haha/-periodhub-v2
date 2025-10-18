@@ -8,6 +8,7 @@ seo_title: "Natural Period Pain Relief & Medical Care Guide: Complete Strategy f
 seo_description: "Learn natural period pain relief methods including anti-inflammatory diet, heat therapy, and quick techniques. Understand warning signs for medical care."
 author: "periodhub.health Expert Team"
 canonical_url: "/articles/when-to-seek-medical-care-comprehensive-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "15 minutes"
 ---

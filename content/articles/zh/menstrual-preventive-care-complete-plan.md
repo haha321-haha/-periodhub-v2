@@ -5,6 +5,7 @@ summary: "预防胜于治疗。通过科学的预防性护理，可以显著改�
 category: "营养与健康"
 tags: ["预防性护理", "全周期管理", "循证医学", "个体化方案", "症状监测"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

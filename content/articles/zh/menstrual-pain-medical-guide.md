@@ -15,6 +15,7 @@ seo_description: "痛经是什么原因引起的？权威医学指南：原发�
 seo_description_en: "What causes period pain? Medical guide: primary vs secondary diagnosis, 10 major causes. Pain assessment & treatment protocols. Doctor-guided professional analysis!"
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/menstrual-pain-medical-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "20分钟"
 reading_time_en: "20 minutes"

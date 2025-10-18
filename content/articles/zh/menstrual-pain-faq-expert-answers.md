@@ -13,9 +13,10 @@ seo_title: "痛经常见疑问专家解答：前列腺素机制与危险信号�
 seo_title_en: "Menstrual Pain FAQ: Expert Guide to Prostaglandin Mechanisms and Warning Signs"
 seo_description: "权威专家解答痛经5大高频疑问：为何如此痛苦、疼痛加重原因、是否致命、模拟器准确性等。基于科学证据的专业指导，帮助女性正确认知痛经。"
 seo_description_en: "Authoritative expert answers to 5 major menstrual pain questions: why so painful, causes of worsening, lethality concerns, simulator accuracy. Evidence-based professional guidance for proper dysmenorrhea understanding."
-featured_image: "/images/articles/menstrual-pain-faq-expert-answers.jpg"
+# featured_image: "/images/articles/menstrual-pain-faq-expert-answers.jpg" # 图片文件不存在，已临时注释
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/menstrual-pain-faq-expert-answers"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "15分钟"
 reading_time_en: "15 minutes"

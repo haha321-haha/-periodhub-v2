@@ -5,6 +5,7 @@ summary: "Detailed introduction to selection criteria, dosage guidance, and carr
 category: "Understanding & Education"
 tags: ["emergency medication", "menstrual pain relief", "medication carrying", "drug safety", "emergency management"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

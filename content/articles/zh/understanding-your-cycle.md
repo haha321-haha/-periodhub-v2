@@ -15,6 +15,7 @@ seo_description: "全面了解月经周期阶段、激素变化，以及如何�
 seo_description_en: "Comprehensive guide to understanding your menstrual cycle phases, hormonal changes, and how to use this knowledge for better health management and pain relief."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/understanding-your-cycle"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "8分钟"
 reading_time_zh: "8分钟"

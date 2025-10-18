@@ -15,6 +15,7 @@ seo_description: "Anti-Inflammatory Diet for Period Pain - Scientific dietary ap
 seo_description_zh: "Anti-Inflammatory Diet for Period Pain - Scientific dietary approach to reduce menstrual inflammation and pain including recommended foods, foods to avoid, nutritional balance, and recipe suggestions for improved menstrual health."
 author: "periodhub.health Expert Team"
 canonical_url: "/articles/anti-inflammatory-diet-period-pain"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "10 minutes"
 reading_time_zh: "10分钟"

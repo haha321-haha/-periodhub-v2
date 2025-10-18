@@ -13,7 +13,7 @@ seo_title: "痛经自然疗法完整指南：15种科学验证的缓解方法 | 
 seo_title_en: "Complete Natural Therapy Guide for Menstrual Pain: 15 Scientifically Validated Relief Methods"
 seo_description: "专业痛经自然疗法指南：详解15种科学验证的缓解方法，包括热疗冷疗、按摩瑜伽、针灸艾灸、草药营养、阿育吠陀疗法。融合传统中医理论与现代研究，提供个性化自然疗法选择。安全温和的长期自然健康管理方法，涵盖理论基础、操作技巧、安全注意事项等全面指导内容，专业可靠的自然疗法解决方案，无副作用的健康管理方式指导。"
 seo_description_en: "Natural therapy guide for menstrual pain: Detailed explanation of 15 scientifically validated relief methods including heat/cold therapy, massage yoga, acupuncture moxibustion, herbal nutrition, and Ayurvedic therapies. Integrating Yellow Emperor's Classic and I Ching theories with modern research for personalized natural therapy selection."
-featured_image: "/images/articles/natural-physical-therapy-guide.jpg"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/natural-physical-therapy-comprehensive-guide"
 schema_type: "Article"

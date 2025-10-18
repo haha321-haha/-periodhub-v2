@@ -13,9 +13,10 @@ seo_title: "痛经管理完整指南：激素原理+疾病识别+特定情况治
 seo_title_en: "Complete Dysmenorrhea Management Guide: Hormonal Mechanisms + Disease Recognition + Specific Treatment Plans"
 seo_description: "专业痛经管理指南：深度解析激素原理，识别7个妇科疾病危险信号，掌握IUD、孕期、更年期痛经管理。包含5分钟自检指南、症状对照表、长期治疗方案。基于权威医学研究，帮助您科学应对各种痛经情况的全面健康管理，提供个性化解决方案和专业医疗建议参考，权威可靠的专业医学指导，科学有效的全面管理方案指南手册指导。"
 seo_description_en: "Dysmenorrhea management guide: In-depth analysis of hormonal mechanisms, identification of 7 gynecological disease warning signs, management of IUD, pregnancy, and perimenopausal pain. Includes 5-minute self-assessment guide, symptom comparison charts, and long-term treatment plans based on authoritative medical research."
-featured_image: "/images/articles/specific-menstrual-pain-management.jpg"
+# featured_image: "/images/articles/specific-menstrual-pain-management.jpg" # 图片文件不存在，已临时注释
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/specific-menstrual-pain-management-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "35 分钟"
 reading_time_en: "35 minutes"

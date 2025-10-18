@@ -11,12 +11,13 @@ tags_zh: ["痛经管理", "职业压力", "生活方式", "环境因素", "健�
 category: "Health Management"
 category_zh: "健康管理"
 author: "PeriodHub Expert Team"
-featured_image: "/images/articles/non-medical-factors-menstrual-pain.jpg"
+# featured_image: "/images/articles/non-medical-factors-menstrual-pain.jpg" # 图片文件不存在，已临时注释
 seo_title: "Comprehensive Report: Non-Medical Factors Affecting Menstrual Pain - Occupational Stress & Lifestyle Analysis"
 seo_title_zh: "综合报告：非医疗因素对痛经的影响 - 职业压力与生活方式深度解析"
 seo_description: "Non-medical factors in menstrual pain: Work stress, sleep quality, diet, exercise impact analysis. Evidence-based lifestyle strategies for better period health."
 seo_description_zh: "专业分析职业压力、睡眠质量、饮食习惯、运动状况等非医疗因素对痛经的影响机制。基于最新科学研究，提供系统性的痛经管理策略，帮助女性从生活方式改善经期健康。科学实用的生活方式健康管理指导，包含行为调整建议、环境因素优化、心理健康维护等综合性改善方案，专业可靠的健康管理方法，系统化的生活方式优化指南手册。"
 canonical_url: "/en/articles/comprehensive-report-non-medical-factors-menstrual-pain"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 ---
 

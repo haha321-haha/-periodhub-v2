@@ -5,6 +5,7 @@ summary: "In-depth analysis of the pros and cons of medication and natural remed
 category: "Understanding & Education"
 tags: ["medication treatment", "natural remedies", "menstrual pain relief", "treatment options", "personalized medicine"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

@@ -5,6 +5,7 @@ summary: "基于最新医学研究，详细解析痛经引起背痛的生理机�
 category: "理解与教育"
 tags: ["痛经", "背痛", "疼痛机制", "神经传导", "疼痛管理"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

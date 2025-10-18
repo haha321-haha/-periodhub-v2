@@ -5,6 +5,7 @@ summary: "详细解析2025年美国医疗保险政策变化，提供痛经治疗
 category: "理解与教育"
 tags: ["医疗保险", "ACA政策", "Medicare改革", "保险理赔", "医疗费用"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2025-07-03"
 lastModified: "2025-07-03"
 featured: true

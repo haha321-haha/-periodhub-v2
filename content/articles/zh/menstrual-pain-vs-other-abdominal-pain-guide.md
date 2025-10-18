@@ -5,6 +5,7 @@ summary: "详细对比痛经与心脏病发作、急性阑尾炎、肾结石等�
 category: "理解与教育"
 tags: ["痛经鉴别", "腹痛诊断", "危险信号", "医学指导", "紧急处理"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

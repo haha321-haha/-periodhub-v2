@@ -5,6 +5,7 @@ summary: "超过70%的女性在月经期间经历情绪波动和疼痛加剧。�
 category: "营养与健康"
 tags: ["压力管理", "职场健康", "心理调节", "HPA轴", "皮质醇管理"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

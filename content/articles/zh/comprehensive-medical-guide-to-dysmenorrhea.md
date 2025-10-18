@@ -15,6 +15,7 @@ seo_description: "全面解析痛经原因、评估工具、管理策略和就�
 seo_description_en: "Authoritative medical guide: detailed explanation of dysmenorrhea pathophysiology, diagnostic criteria, and treatment protocols. Including differentiation between primary and secondary dysmenorrhea, medication selection, and comprehensive management strategies."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/comprehensive-medical-guide-to-dysmenorrhea"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "20分钟"
 reading_time_en: "20 minutes"

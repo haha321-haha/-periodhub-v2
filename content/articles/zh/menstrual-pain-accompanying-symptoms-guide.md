@@ -15,6 +15,7 @@ seo_description: "痛经伴随腹胀、呕吐、发烧？了解症状成因，�
 seo_description_en: "Menstrual pain with bloating, vomiting, fever? Learn symptom causes, master graded response plans, identify warning signs, and scientifically manage complex menstrual symptoms."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/menstrual-pain-accompanying-symptoms-guide"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "15分钟"
 ---

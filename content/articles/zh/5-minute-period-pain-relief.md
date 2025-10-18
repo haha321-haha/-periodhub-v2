@@ -15,6 +15,7 @@ seo_description: "5分钟快速缓解痛经方法：4种科学验证技巧-呼�
 seo_description_en: "5-minute period pain relief: 4 proven methods - breathing, acupressure, heat & relaxation. Works anywhere: office, school, travel. Doctor-guided. Instant results!"
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/5-minute-period-pain-relief"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "6分钟"
 reading_time_zh: "6分钟"

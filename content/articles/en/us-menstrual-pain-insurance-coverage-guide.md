@@ -5,6 +5,7 @@ summary: "2025 US health insurance guide for menstrual pain treatment. Covers AC
 category: "Understanding & Education"
 tags: ["medical insurance", "ACA policy", "Medicare reform", "insurance claims", "healthcare costs"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2025-07-03"
 lastModified: "2025-07-03"
 featured: true

@@ -5,6 +5,7 @@ summary: "详细介绍布洛芬、对乙酰氨基酚等非处方痛经药物的�
 category: "理解与教育"
 tags: ["应急药物", "痛经缓解", "药物携带", "用药安全", "紧急处理"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

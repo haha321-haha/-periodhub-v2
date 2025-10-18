@@ -8,6 +8,7 @@ seo_title: "Standing Meditation, Baduanjin and Tai Chi for Menstrual Pain: Evide
 seo_description: "Evidence-based guide to using standing meditation, Baduanjin, and Tai Chi for menstrual pain relief. Detailed practice methods, modern medical mechanisms, and personalized plans to help women safely and effectively manage period pain."
 author: "periodhub.health Expert Team"
 canonical_url: "/articles/zhan-zhuang-baduanjin-for-menstrual-pain-relief"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "25 minutes"
 ---

@@ -20,6 +20,7 @@ seo_title_en: "Are Period Pain Simulators Accurate? Scientific Analysis and Expe
 seo_description: "深入分析经痛模拟器的科学原理、准确性和局限性，基于医学专家观点和临床研究，客观评估这一疼痛教育工具的价值和意义。"
 seo_description_en: "In-depth analysis of period pain simulators' scientific principles, accuracy, and limitations, based on medical expert opinions and clinical research, objectively evaluating the value and significance of this pain education tool."
 canonical_url: "/zh/articles/period-pain-simulator-accuracy-analysis"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 ---
 

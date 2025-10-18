@@ -20,6 +20,7 @@ seo_title_zh: "2024年痛经研究进展报告：循证医学与临床转化 | �
 seo_description: "2024 menstrual pain research progress report based on PubMed database and FDA approval information, covering new pathological mechanism discoveries, innovative treatment breakthroughs, evidence-based prevention strategies, and digital health technology applications. Providing the latest evidence-based medical guidance for American women."
 seo_description_zh: "2024年痛经研究进展报告：基于PubMed数据库和FDA批准信息的最新循证医学研究，涵盖病理机制新发现、治疗方法创新突破、循证预防策略和数字健康技术应用。为美国女性提供最新循证医学指导，包括HMI-115等新药进展、中枢敏化机制发现、个性化医疗方向和数字健康技术应用。"
 canonical_url: "/en/articles/menstrual-pain-research-progress-2024"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 ---
 

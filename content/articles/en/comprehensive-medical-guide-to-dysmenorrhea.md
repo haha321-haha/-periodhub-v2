@@ -14,6 +14,7 @@ seo_description: "Medical dysmenorrhea guide: Pathophysiology, diagnosis standar
 seo_description_zh: "权威痛经医学指南：详细解释痛经病理生理学、诊断标准和治疗方案。包括原发性和继发性痛经的鉴别、药物选择和综合管理策略。基于最新医学研究，提供专业诊断流程、个性化治疗建议和长期健康管理方案，涵盖疼痛评估、治疗监测、预防保健等全方位医学指导内容，权威医学专家编写，临床验证有效，科学严谨的医学参考资料指南。"
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/comprehensive-medical-guide-to-dysmenorrhea"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "20 minutes"
 reading_time_zh: "20分钟"

@@ -5,6 +5,7 @@ summary: "Detailed comparison of menstrual pain with heart attacks, acute append
 category: "Understanding & Education"
 tags: ["menstrual pain identification", "abdominal pain diagnosis", "warning signs", "medical guidance", "emergency management"]
 author: "Period Hub Health Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
 featured: true

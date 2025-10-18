@@ -10,6 +10,7 @@ tags: ["reading recommendations", "women's health", "menstrual education", "ment
 tags_zh: ["阅读推荐", "女性健康", "经期教育", "心理健康"]
 category: "education"
 author: "PeriodHub Team"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 ---
 
 # Recommended Reading List: Become Your Own Menstrual Health Expert

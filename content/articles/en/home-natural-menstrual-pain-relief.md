@@ -15,6 +15,7 @@ seo_description: "Relieve menstrual pain at home! Scientifically validated natur
 seo_description_en: "Relieve menstrual pain at home! Scientifically validated natural therapies including heat therapy, acupressure, and nutritional care, effective in 5 minutes, safe with no side effects."
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/home-natural-menstrual-pain-relief"
+featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "10 minutes"
 ---

@@ -23,6 +23,27 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // 🎯 修复 privacy-policy 被误认为 locale 的问题
+  if (pathname.startsWith('/privacy-policy/')) {
+    // 提取实际路径
+    const actualPath = pathname.replace('/privacy-policy/', '/');
+    const redirectUrl = new URL(`/zh${actualPath}`, request.url);
+    if (process.env.NODE_ENV === "development") {
+      console.log(`[Middleware] Redirecting ${pathname} to /zh${actualPath}`);
+    }
+    return NextResponse.redirect(redirectUrl, 301);
+  }
+
+  // 🎯 修复 terms-of-service 被误认为 locale 的问题
+  if (pathname.startsWith('/terms-of-service/')) {
+    const actualPath = pathname.replace('/terms-of-service/', '/');
+    const redirectUrl = new URL(`/zh${actualPath}`, request.url);
+    if (process.env.NODE_ENV === "development") {
+      console.log(`[Middleware] Redirecting ${pathname} to /zh${actualPath}`);
+    }
+    return NextResponse.redirect(redirectUrl, 301);
+  }
+
   try {
     // 🎯 关键修复：在路由匹配之前拦截所有静态资源请求
     // 这样可以防止 /images/articles/xxx.jpg 被解析为 [locale]/articles/[slug]

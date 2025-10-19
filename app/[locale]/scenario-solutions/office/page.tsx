@@ -48,6 +48,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
       }/${locale}/scenario-solutions/office`,
       siteName: "PeriodHub",
+      // Facebook App ID for better sharing
+      appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
       locale: isZh ? "zh_CN" : "en_US",
       type: "website",
       images: [

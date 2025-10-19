@@ -31,9 +31,11 @@ export async function generateMetadata({
       siteName: "PeriodHub",
       locale: locale === "zh" ? "zh_CN" : "en_US",
       type: "website",
+      // Facebook App ID for better sharing
+      appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
       images: [
         {
-          url: "/images/hero/hero-main-banner.jpg",
+          url: "/images/hero-bg.jpg",
           width: 1200,
           height: 630,
           alt: t("metadata.ogTitle"),
@@ -44,7 +46,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t("metadata.twitterTitle"),
       description: t("metadata.twitterDescription"),
-      images: ["/images/hero/hero-main-banner.jpg"],
+      images: ["/images/hero-bg.jpg"],
     },
     alternates: {
       canonical: `${

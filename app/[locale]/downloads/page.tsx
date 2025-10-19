@@ -38,6 +38,8 @@ export async function generateMetadata({
       siteName: "PeriodHub",
       locale: locale === "zh" ? "zh_CN" : "en_US",
       type: "website",
+      // Facebook App ID for better sharing
+      appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
       images: [
         {
           url: "/images/downloads-og.jpg",

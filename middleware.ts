@@ -24,31 +24,47 @@ export function middleware(request: NextRequest) {
   }
 
   try {
-    // 排除静态文件路径，避免国际化中间件干扰
+    // 🎯 关键修复：在路由匹配之前拦截所有静态资源请求
+    // 这样可以防止 /images/articles/xxx.jpg 被解析为 [locale]/articles/[slug]
+    
+    // 1. 检查是否是图片文件（任何位置的图片）
+    if (/\.(jpg|jpeg|png|gif|webp|svg|ico|bmp|tiff)$/i.test(pathname)) {
+      return NextResponse.next();
+    }
+    
+    // 2. 检查是否以静态资源目录开头
     if (
-      (pathname.startsWith("/downloads/") &&
-        (pathname.endsWith(".html") || pathname.endsWith(".pdf"))) ||
+      pathname.startsWith("/images/") ||
+      pathname.startsWith("/static/") ||
+      pathname.startsWith("/assets/") ||
       pathname.startsWith("/styles/") ||
       pathname.startsWith("/scripts/") ||
-      pathname.startsWith("/images/") ||
       pathname.startsWith("/icons/") ||
       pathname.startsWith("/fonts/") ||
-      pathname.includes("/icon") ||
-      pathname.includes("/favicon") ||
-      pathname.endsWith(".png") ||
-      pathname.endsWith(".ico") ||
-      pathname.endsWith(".svg") ||
-      pathname.endsWith(".jpg") ||
-      pathname.endsWith(".jpeg") ||
-      pathname.endsWith(".gif") ||
-      pathname.endsWith(".webp") ||
-      pathname.endsWith(".txt") || // 排除.txt文件（包括IndexNow密钥文件）
-      // 🎯 修复locale错误问题 - 排除任何包含图片文件名的路径
-      pathname.includes("menstrual-pain-complications.jpg") ||
-      pathname.includes("menstrual-pain-complications") ||
-      // 排除其他可能被误认为locale的图片路径
-      /^\/[^\/]*\.(jpg|jpeg|png|gif|webp|svg|ico)$/.test(pathname)
+      pathname.startsWith("/_next/") ||
+      pathname.startsWith("/public/")
     ) {
+      return NextResponse.next();
+    }
+    
+    // 3. 检查是否是其他静态文件
+    if (
+      pathname.endsWith(".txt") ||
+      pathname.endsWith(".pdf") ||
+      pathname.endsWith(".html") ||
+      pathname.endsWith(".css") ||
+      pathname.endsWith(".js") ||
+      pathname.endsWith(".json") ||
+      pathname.endsWith(".xml") ||
+      pathname.includes("/icon") ||
+      pathname.includes("/favicon")
+    ) {
+      return NextResponse.next();
+    }
+    
+    // 4. 特殊处理：检查路径中是否包含图片文件名模式
+    // 例如：/zh/articles/xxx.jpg 或 /images/articles/xxx.jpg
+    if (pathname.match(/\/[^\/]+\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
       return NextResponse.next();
     }
 
@@ -209,8 +225,14 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // 包含所有路径，除了静态文件 - 明确排除所有静态资源
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images|styles|scripts|fonts|icons|atom.xml|feed.xml|.*\\.txt|a3f202e9872f45238294db525b233bf5\\.txt).*)",
+    // 🎯 关键修复：明确排除所有静态资源，防止被动态路由匹配
+    // 排除规则：
+    // - api: API路由
+    // - _next: Next.js内部资源
+    // - images, static, assets: 静态资源目录
+    // - 所有图片文件扩展名
+    // - 其他静态文件（txt, pdf, xml等）
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images|static|assets|styles|scripts|fonts|icons|public|atom.xml|feed.xml|.*\\.(txt|pdf|jpg|jpeg|png|gif|webp|svg|ico|bmp|tiff|css|js|json|xml)).*)",
     // 特别包含我们要处理的路径
     "/download-center",
     "/downloads-new",

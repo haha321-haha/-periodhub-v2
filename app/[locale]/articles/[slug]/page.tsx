@@ -255,6 +255,8 @@ export async function generateMetadata({
       type: "article",
       publishedTime: article.date,
       authors: [article.author],
+      // Facebook App ID for better sharing
+      appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
       images: [
         {
           url: article.featured_image || "/images/article-image.jpg",

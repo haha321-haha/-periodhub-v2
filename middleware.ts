@@ -225,22 +225,14 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // 🎯 关键修复：明确排除所有静态资源，防止被动态路由匹配
-    // 排除规则：
-    // - api: API路由
-    // - _next: Next.js内部资源
-    // - images, static, assets: 静态资源目录
-    // - 所有图片文件扩展名
-    // - 其他静态文件（txt, pdf, xml等）
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images|static|assets|styles|scripts|fonts|icons|public|atom.xml|feed.xml|.*\\.(txt|pdf|jpg|jpeg|png|gif|webp|svg|ico|bmp|tiff|css|js|json|xml)).*)",
-    // 特别包含我们要处理的路径
+    // 🎯 简化matcher配置，只匹配特定路径
     "/download-center",
-    "/downloads-new",
+    "/downloads-new", 
     "/articles-pdf-center",
     // 中文工具路径
     "/zh/疼痛追踪器",
     "/zh/症状评估",
-    "/zh/周期追踪器",
+    "/zh/周期追踪器", 
     "/zh/体质测试",
     "/zh/痛经评估",
     "/zh/症状追踪器",

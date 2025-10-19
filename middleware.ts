@@ -128,13 +128,36 @@ export function middleware(request: NextRequest) {
     '医疗免责声明': 'medical-disclaimer'
   };
 
+  // 🎯 递归翻译函数：处理路径中所有中文段
+  function translateChinesePath(path: string): string {
+    let translatedPath = path;
+    let hasChanges = true;
+    
+    // 循环翻译直到没有更多中文路径段
+    while (hasChanges) {
+      hasChanges = false;
+      for (const [chinesePath, englishPath] of Object.entries(chinesePathMappings)) {
+        if (translatedPath.includes(`/${chinesePath}/`)) {
+          translatedPath = translatedPath.replace(`/${chinesePath}/`, `/${englishPath}/`);
+          hasChanges = true;
+        } else if (translatedPath.endsWith(`/${chinesePath}`)) {
+          translatedPath = translatedPath.replace(`/${chinesePath}`, `/${englishPath}`);
+          hasChanges = true;
+        }
+      }
+    }
+    
+    return translatedPath;
+  }
+
   // 检查是否是中文路径（不带语言前缀）
   for (const [chinesePath, englishPath] of Object.entries(chinesePathMappings)) {
     if (pathname.startsWith(`/${chinesePath}/`)) {
-      const actualPath = pathname.replace(`/${chinesePath}/`, '/');
-      const redirectUrl = new URL(`/zh/${englishPath}${actualPath}`, request.url);
+      // 🎯 使用递归翻译函数处理所有中文段
+      const translatedPath = translateChinesePath(pathname);
+      const redirectUrl = new URL(`/zh${translatedPath}`, request.url);
       if (process.env.NODE_ENV === "development") {
-        console.log(`[Middleware] Redirecting Chinese path ${pathname} to /zh/${englishPath}${actualPath}`);
+        console.log(`[Middleware] Redirecting Chinese path ${pathname} to /zh${translatedPath}`);
       }
       return NextResponse.redirect(redirectUrl, 301);
     }
@@ -342,20 +365,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // 🎯 简化matcher配置，只匹配特定路径
-    "/download-center",
-    "/downloads-new", 
-    "/articles-pdf-center",
-    // 中文工具路径
-    "/zh/疼痛追踪器",
-    "/zh/症状评估",
-    "/zh/周期追踪器", 
-    "/zh/体质测试",
-    "/zh/痛经评估",
-    "/zh/症状追踪器",
-    "/zh/营养推荐生成器",
-    "/zh/职场健康",
-    "/zh/职场影响评估",
-    "/zh/压力管理"
+    // 🎯 修复matcher配置：匹配所有路径，排除静态资源
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|.*\\.(?:jpg|jpeg|png|gif|webp|svg|ico|css|js|txt|pdf|xml)).*)',
   ],
 };

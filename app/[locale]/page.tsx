@@ -33,7 +33,7 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: "/images/hero-bg.jpg",
+          url: "/images/hero/hero-main-banner.jpg",
           width: 1200,
           height: 630,
           alt: t("metadata.ogTitle"),
@@ -44,7 +44,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: t("metadata.twitterTitle"),
       description: t("metadata.twitterDescription"),
-      images: ["/images/hero-bg.jpg"],
+      images: ["/images/hero/hero-main-banner.jpg"],
     },
     alternates: {
       canonical: `${

@@ -22,6 +22,10 @@ export async function generateMetadata({
     title: t("metadata.title"),
     description: t("metadata.description"),
     keywords: t("metadata.keywords").split(","),
+    other: {
+      "fb:app_id":
+        process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
+    },
     openGraph: {
       title: t("metadata.ogTitle"),
       description: t("metadata.ogDescription"),
@@ -31,8 +35,6 @@ export async function generateMetadata({
       siteName: "PeriodHub",
       locale: locale === "zh" ? "zh_CN" : "en_US",
       type: "website",
-      // Facebook App ID for better sharing
-      appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
       images: [
         {
           url: "/images/hero-bg.jpg",

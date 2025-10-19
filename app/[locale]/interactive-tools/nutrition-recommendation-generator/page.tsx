@@ -41,6 +41,8 @@ export async function generateMetadata({
     other: {
       "http-equiv": "content-language",
       content: isZh ? "zh-CN" : "en-US",
+      "fb:app_id":
+        process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
     },
     openGraph: {
       title,
@@ -48,8 +50,6 @@ export async function generateMetadata({
       type: "website",
       locale: isZh ? "zh_CN" : "en_US",
       siteName: "Period Hub",
-      // Facebook App ID for better sharing
-      appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
       images: [
         {
           url: "/images/nutrition-generator-og.jpg",

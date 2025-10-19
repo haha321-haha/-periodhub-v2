@@ -248,6 +248,10 @@ export async function generateMetadata({
     description: seoDescription,
     keywords: locale === "zh" ? article.tags_zh : article.tags,
     authors: [{ name: article.author }],
+    other: {
+      "fb:app_id":
+        process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
+    },
     openGraph: {
       title: seoTitle,
       description: seoDescription,
@@ -255,8 +259,6 @@ export async function generateMetadata({
       type: "article",
       publishedTime: article.date,
       authors: [article.author],
-      // Facebook App ID for better sharing
-      appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
       images: [
         {
           url: article.featured_image || "/images/article-image.jpg",

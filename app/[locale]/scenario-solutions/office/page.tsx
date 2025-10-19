@@ -41,6 +41,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${t("scenarios.office.title")} - ${t("title")}`,
     description: t("scenarios.office.description"),
+    other: {
+      "fb:app_id":
+        process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
+    },
     openGraph: {
       title: `${t("scenarios.office.title")} - ${t("title")}`,
       description: t("scenarios.office.description"),
@@ -48,8 +52,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
       }/${locale}/scenario-solutions/office`,
       siteName: "PeriodHub",
-      // Facebook App ID for better sharing
-      appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
       locale: isZh ? "zh_CN" : "en_US",
       type: "website",
       images: [

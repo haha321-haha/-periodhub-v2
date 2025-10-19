@@ -24,6 +24,10 @@ export async function generateMetadata({
     title: t("title"),
     description: t("description"),
     keywords: t("keywords").split(","),
+    other: {
+      "fb:app_id":
+        process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
+    },
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
@@ -38,8 +42,6 @@ export async function generateMetadata({
       siteName: "PeriodHub",
       locale: locale === "zh" ? "zh_CN" : "en_US",
       type: "website",
-      // Facebook App ID for better sharing
-      appId: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
       images: [
         {
           url: "/images/downloads-og.jpg",

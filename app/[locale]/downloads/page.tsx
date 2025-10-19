@@ -5,7 +5,6 @@ import { Locale, locales } from "@/i18n";
 import OptimizedMobilePDFCenter from "@/components/OptimizedMobilePDFCenter";
 import { SITE_CONFIG } from "@/config/site.config";
 import { pdfResources } from "@/config/pdfResources";
-import { URL_CONFIG } from "@/lib/url-config";
 import { SmartPreloadProvider } from "@/components/SmartPreloadProvider";
 import {
   generateHreflangConfig,
@@ -33,6 +32,25 @@ export async function generateMetadata({
     openGraph: {
       title: t("openGraph.title"),
       description: t("openGraph.description"),
+      url: `${
+        process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+      }/${locale}/downloads`,
+      siteName: "PeriodHub",
+      locale: locale === "zh" ? "zh_CN" : "en_US",
+      type: "website",
+      images: [
+        {
+          url: "/images/downloads-og.jpg",
+          width: 1200,
+          height: 630,
+          alt: t("openGraph.title"),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("openGraph.title"),
+      description: t("openGraph.description"),
       images: ["/images/downloads-og.jpg"],
     },
   };
@@ -51,8 +69,6 @@ export default async function DownloadsPage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
 
-  const totalResources =
-    SITE_CONFIG.statistics.articles + SITE_CONFIG.statistics.pdfResources;
   const t = await getTranslations({ locale, namespace: "downloadsPage" });
   const bannerText = t("banner.text");
 

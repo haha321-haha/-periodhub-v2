@@ -1,4 +1,3 @@
-import { useTranslations } from "next-intl";
 import Link from "next/link";
 import {
   unstable_setRequestLocale as setRequestLocale,
@@ -9,7 +8,6 @@ import Hero from "@/components/layout/Hero";
 import UserSuccessStories from "@/components/UserSuccessStories";
 import NavigationTabs from "@/components/NavigationTabs";
 import OptimizedSVG from "@/components/ui/OptimizedSVG";
-import { URL_CONFIG } from "@/lib/url-config";
 
 // 页面级别的metadata
 export async function generateMetadata({
@@ -33,11 +31,20 @@ export async function generateMetadata({
       siteName: "PeriodHub",
       locale: locale === "zh" ? "zh_CN" : "en_US",
       type: "website",
+      images: [
+        {
+          url: "/images/og-default.jpg",
+          width: 1200,
+          height: 630,
+          alt: t("metadata.ogTitle"),
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: t("metadata.twitterTitle"),
       description: t("metadata.twitterDescription"),
+      images: ["/images/og-default.jpg"],
     },
     alternates: {
       canonical: `${
@@ -210,8 +217,6 @@ export default async function HomePage({
   setRequestLocale(locale);
   const t = await getTranslations("");
   const anchorT = await getTranslations("anchorTexts");
-  const isZh =
-    typeof locale === "string" && (locale === "zh" || locale.startsWith("zh"));
   const structuredData = await getStructuredData(locale);
 
   return (

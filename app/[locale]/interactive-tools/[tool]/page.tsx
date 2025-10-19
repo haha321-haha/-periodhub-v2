@@ -925,14 +925,30 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale; tool: string }>;
 }): Promise<Metadata> {
   try {
-    const { locale, tool } = await params;
+    const resolvedParams = await params;
 
-    // 添加路径验证，防止INSUFFICIENT_PATH错误
+    // 添加更严格的参数验证，防止INSUFFICIENT_PATH错误
+    if (!resolvedParams || typeof resolvedParams !== "object") {
+      return {
+        title: "Tool Not Found",
+        description: "The requested tool could not be found.",
+        robots: {
+          index: false,
+          follow: false,
+        },
+      };
+    }
+
+    const { locale, tool } = resolvedParams;
+
+    // 验证参数存在性和类型
     if (
       !tool ||
       !locale ||
       typeof tool !== "string" ||
-      typeof locale !== "string"
+      typeof locale !== "string" ||
+      tool.trim() === "" ||
+      locale.trim() === ""
     ) {
       return {
         title: "Tool Not Found",
@@ -1031,14 +1047,23 @@ export default async function ToolPage({
   params: Promise<{ locale: Locale; tool: string }>;
 }) {
   try {
-    const { locale, tool } = await params;
+    const resolvedParams = await params;
 
-    // 添加路径验证，防止INSUFFICIENT_PATH错误
+    // 添加更严格的参数验证，防止INSUFFICIENT_PATH错误
+    if (!resolvedParams || typeof resolvedParams !== "object") {
+      notFound();
+    }
+
+    const { locale, tool } = resolvedParams;
+
+    // 验证参数存在性和类型
     if (
       !tool ||
       !locale ||
       typeof tool !== "string" ||
-      typeof locale !== "string"
+      typeof locale !== "string" ||
+      tool.trim() === "" ||
+      locale.trim() === ""
     ) {
       notFound();
     }

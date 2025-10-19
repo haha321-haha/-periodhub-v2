@@ -107,6 +107,17 @@ export function getArticleBySlug(
   locale: string = "en",
 ): Article | null {
   try {
+    // 添加输入验证
+    if (!slug || typeof slug !== 'string' || slug.trim() === '') {
+      console.warn(`[ARTICLES] Invalid slug provided: ${slug}`);
+      return null;
+    }
+    
+    if (!locale || typeof locale !== 'string' || !['en', 'zh'].includes(locale)) {
+      console.warn(`[ARTICLES] Invalid locale provided: ${locale}`);
+      return null;
+    }
+
     const articlesPath =
       locale === "zh"
         ? path.join(articlesDirectory, "zh")
@@ -133,6 +144,7 @@ export function getArticleBySlug(
     }
 
     if (!fs.existsSync(fullPath)) {
+      console.warn(`[ARTICLES] Article not found: ${slug} for locale: ${locale}`);
       return null;
     }
 

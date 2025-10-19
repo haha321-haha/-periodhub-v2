@@ -255,23 +255,21 @@ export async function generateMetadata({
       type: "article",
       publishedTime: article.date,
       authors: [article.author],
-      images: article.featured_image
-        ? [
-            {
-              url: article.featured_image,
-              width: 1200,
-              height: 630,
-              alt: title,
-            },
-          ]
-        : undefined,
+      images: [
+        {
+          url: article.featured_image || "/images/article-image.jpg",
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
       locale: locale === "zh" ? "zh_CN" : "en_US",
     },
     twitter: {
       card: "summary_large_image",
       title: seoTitle,
       description: seoDescription,
-      images: article.featured_image ? [article.featured_image] : undefined,
+      images: [article.featured_image || "/images/article-image.jpg"],
     },
     alternates: {
       canonical: articleUrl,
@@ -294,7 +292,35 @@ export default async function ArticlePage({
 }: {
   params: Promise<{ locale: Locale; slug: string }>;
 }) {
-  const { locale, slug } = await params;
+  const resolvedParams = await params;
+  const { locale, slug } = resolvedParams;
+
+  // 添加路径验证，防止图片请求被误解析为文章请求
+  if (!slug || typeof slug !== "string" || slug.trim() === "") {
+    notFound();
+  }
+
+  // 检查是否是图片请求（包含文件扩展名）
+  if (
+    slug.includes(".") &&
+    (slug.endsWith(".jpg") ||
+      slug.endsWith(".jpeg") ||
+      slug.endsWith(".png") ||
+      slug.endsWith(".webp") ||
+      slug.endsWith(".gif"))
+  ) {
+    notFound();
+  }
+
+  // 检查是否是静态资源请求
+  if (
+    slug.startsWith("images/") ||
+    slug.startsWith("static/") ||
+    slug.startsWith("assets/")
+  ) {
+    notFound();
+  }
+
   unstable_setRequestLocale(locale);
 
   // 🔍 生产性能监控开始

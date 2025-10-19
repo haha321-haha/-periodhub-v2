@@ -50,7 +50,9 @@ export async function generateMetadata({
       siteName: "Period Hub",
       images: [
         {
-          url: "/images/logo.png",
+          url: "/images/nutrition-generator-og.jpg",
+          width: 1200,
+          height: 630,
           alt: title,
         },
       ],
@@ -59,7 +61,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: ["/images/logo.png"],
+      images: ["/images/nutrition-generator-twitter.jpg"],
     },
     alternates: {
       canonical: `https://www.periodhub.health/${locale}/interactive-tools/nutrition-recommendation-generator`,

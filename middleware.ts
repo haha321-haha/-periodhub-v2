@@ -61,6 +61,14 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // 🎯 拦截恶意PHP文件请求 - 直接返回404
+  if (pathname.endsWith('.php')) {
+    if (process.env.NODE_ENV === "development") {
+      console.log(`[Middleware] Blocking malicious PHP request: ${pathname}`);
+    }
+    return new NextResponse(null, { status: 404 });
+  }
+
   // 🎯 修复 privacy-policy 被误认为 locale 的问题
   if (pathname.startsWith('/privacy-policy/')) {
     // 提取实际路径
@@ -104,6 +112,32 @@ export function middleware(request: NextRequest) {
       console.log(`[Middleware] Redirecting ${pathname} to /zh${actualPath}`);
     }
     return NextResponse.redirect(redirectUrl, 301);
+  }
+
+  // 🎯 修复中文路径被误认为 locale 的问题
+  const chinesePathMappings: { [key: string]: string } = {
+    '交互式工具': 'interactive-tools',
+    '场景解决方案': 'scenario-solutions',
+    '青少年健康': 'teen-health',
+    '健康指南': 'health-guide',
+    '自然疗法': 'natural-therapies',
+    '立即救济': 'immediate-relief',
+    '文化魅力': 'cultural-charms',
+    '隐私政策': 'privacy-policy',
+    '服务条款': 'terms-of-service',
+    '医疗免责声明': 'medical-disclaimer'
+  };
+
+  // 检查是否是中文路径（不带语言前缀）
+  for (const [chinesePath, englishPath] of Object.entries(chinesePathMappings)) {
+    if (pathname.startsWith(`/${chinesePath}/`)) {
+      const actualPath = pathname.replace(`/${chinesePath}/`, '/');
+      const redirectUrl = new URL(`/zh/${englishPath}${actualPath}`, request.url);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[Middleware] Redirecting Chinese path ${pathname} to /zh/${englishPath}${actualPath}`);
+      }
+      return NextResponse.redirect(redirectUrl, 301);
+    }
   }
 
   try {

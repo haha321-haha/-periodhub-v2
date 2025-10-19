@@ -293,11 +293,11 @@ const nextConfig = {
   // 重定向规则 - 修复格式错误的URL
   async redirects() {
     return [
-      // 🎯 根路径重定向到中文首页 - 避免循环重定向
+      // 🎯 根路径重定向到中文首页 - 使用301永久重定向，避免Facebook调试工具问题
       {
         source: '/',
         destination: '/zh',
-        permanent: false
+        permanent: true
       },
       {
         source: '/&',

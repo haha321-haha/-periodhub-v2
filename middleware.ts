@@ -26,14 +26,14 @@ function getPreferredLocale(request: NextRequest): string {
   // 查找匹配的语言
   for (const { locale } of languages) {
     // 精确匹配
-    if (locales.includes(locale)) {
-      return locale;
+    if (locales.includes(locale as "en" | "zh")) {
+      return locale as "en" | "zh";
     }
     
     // 语言代码匹配（如 en-US -> en）
     const languageCode = locale.split('-')[0];
-    if (locales.includes(languageCode)) {
-      return languageCode;
+    if (locales.includes(languageCode as "en" | "zh")) {
+      return languageCode as "en" | "zh";
     }
   }
   

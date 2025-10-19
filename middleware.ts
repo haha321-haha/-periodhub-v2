@@ -3,6 +3,44 @@ import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { locales, defaultLocale } from "./i18n/request";
 
+// 🎯 根据 Accept-Language 头部获取首选语言
+function getPreferredLocale(request: NextRequest): string {
+  const acceptLanguage = request.headers.get('accept-language');
+  
+  if (!acceptLanguage) {
+    return defaultLocale;
+  }
+  
+  // 解析 Accept-Language 头部
+  const languages = acceptLanguage
+    .split(',')
+    .map(lang => {
+      const [locale, qValue] = lang.trim().split(';q=');
+      return {
+        locale: locale.toLowerCase(),
+        quality: qValue ? parseFloat(qValue) : 1.0
+      };
+    })
+    .sort((a, b) => b.quality - a.quality);
+  
+  // 查找匹配的语言
+  for (const { locale } of languages) {
+    // 精确匹配
+    if (locales.includes(locale)) {
+      return locale;
+    }
+    
+    // 语言代码匹配（如 en-US -> en）
+    const languageCode = locale.split('-')[0];
+    if (locales.includes(languageCode)) {
+      return languageCode;
+    }
+  }
+  
+  // 默认返回中文
+  return defaultLocale;
+}
+
 const intlMiddleware = createMiddleware({
   locales,
   defaultLocale,
@@ -27,9 +65,11 @@ export function middleware(request: NextRequest) {
   if (pathname.startsWith('/privacy-policy/')) {
     // 提取实际路径
     const actualPath = pathname.replace('/privacy-policy/', '/');
-    const redirectUrl = new URL(`/zh${actualPath}`, request.url);
+    // 根据 Accept-Language 头部动态选择语言
+    const preferredLocale = getPreferredLocale(request);
+    const redirectUrl = new URL(`/${preferredLocale}${actualPath}`, request.url);
     if (process.env.NODE_ENV === "development") {
-      console.log(`[Middleware] Redirecting ${pathname} to /zh${actualPath}`);
+      console.log(`[Middleware] Redirecting ${pathname} to /${preferredLocale}${actualPath}`);
     }
     return NextResponse.redirect(redirectUrl, 301);
   }
@@ -37,9 +77,11 @@ export function middleware(request: NextRequest) {
   // 🎯 修复 terms-of-service 被误认为 locale 的问题
   if (pathname.startsWith('/terms-of-service/')) {
     const actualPath = pathname.replace('/terms-of-service/', '/');
-    const redirectUrl = new URL(`/zh${actualPath}`, request.url);
+    // 根据 Accept-Language 头部动态选择语言
+    const preferredLocale = getPreferredLocale(request);
+    const redirectUrl = new URL(`/${preferredLocale}${actualPath}`, request.url);
     if (process.env.NODE_ENV === "development") {
-      console.log(`[Middleware] Redirecting ${pathname} to /zh${actualPath}`);
+      console.log(`[Middleware] Redirecting ${pathname} to /${preferredLocale}${actualPath}`);
     }
     return NextResponse.redirect(redirectUrl, 301);
   }

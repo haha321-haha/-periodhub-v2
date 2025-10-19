@@ -251,6 +251,9 @@ export async function generateMetadata({
     other: {
       "fb:app_id":
         process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
+      "article:published_time": article.date,
+      "article:author": article.author,
+      "Content-Language": locale === "zh" ? "zh-CN" : "en-US",
     },
     openGraph: {
       title: seoTitle,
@@ -282,11 +285,6 @@ export async function generateMetadata({
         "zh-CN": `${baseUrl}/zh/articles/${slug}`,
         "x-default": `${baseUrl}/en/articles/${slug}`,
       },
-    },
-    other: {
-      "article:published_time": article.date,
-      "article:author": article.author,
-      "Content-Language": locale === "zh" ? "zh-CN" : "en-US",
     },
   };
 }

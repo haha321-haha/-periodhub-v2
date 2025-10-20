@@ -365,7 +365,8 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // 🎯 修复matcher配置：匹配所有路径，但允许/images/路径通过middleware
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images/.*\\.(?:jpg|jpeg|png|gif|webp|svg|ico)|.*\\.(?:css|js|txt|pdf|xml)).*)',
+    // 🎯 简化matcher配置：只排除明确的系统路径，其他都交给middleware处理
+    // 使用精确匹配（带/）避免误排除包含关键字的路径
+    '/((?!api/|_next/|favicon\\.ico|sitemap\\.xml|robots\\.txt).*)',
   ],
 };

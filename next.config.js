@@ -532,6 +532,17 @@ const nextConfig = {
         source: '/pdf-files/:filename',
         destination: '/downloads/:filename',
         permanent: true
+      },
+      // 🎯 修复穴位按摩文章404错误 - 重定向到自然疗法综合指南
+      {
+        source: '/zh/articles/穴位按摩完整指南',
+        destination: '/zh/articles/natural-physical-therapy-comprehensive-guide',
+        permanent: true
+      },
+      {
+        source: '/en/articles/acupoint-massage-complete-guide',
+        destination: '/en/articles/natural-physical-therapy-comprehensive-guide',
+        permanent: true
       }
     ];
   }

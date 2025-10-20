@@ -12,7 +12,7 @@ export const SITE_CONFIG = {
   statistics: {
     articles: 43, // 修正为实际文章数量（中文或英文版本）
     pdfResources: 13, // 修正为实际核心资源数量
-    interactiveTools: 5,
+    interactiveTools: 8,
     supportHours: 24,
   },
 

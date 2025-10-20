@@ -33,7 +33,7 @@ export async function generateMetadata({
         }/en/immediate-relief`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/immediate-relief`,
+        }/en/immediate-relief`,  // ✅ 修复：默认英文版本
       },
     },
     openGraph: {

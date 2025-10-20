@@ -21,7 +21,7 @@ export async function generateHreflangConfig({
   };
 
   if (includeXDefault) {
-    hreflangUrls["x-default"] = `${baseUrl}/zh${cleanPath}`; // 默认中文版本
+    hreflangUrls["x-default"] = `${baseUrl}/en${cleanPath}`; // ✅ 修复：默认英文版本（北美市场优先）
   }
 
   return hreflangUrls;

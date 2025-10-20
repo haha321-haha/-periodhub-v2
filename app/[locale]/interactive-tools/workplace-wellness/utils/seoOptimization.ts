@@ -39,7 +39,7 @@ export function generatePageMetadata(
       languages: {
         "zh-CN": pageData.zh.canonical,
         "en-US": pageData.en.canonical,
-        "x-default": pageData.zh.canonical,
+        "x-default": pageData.en.canonical, // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
     openGraph: {

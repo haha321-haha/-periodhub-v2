@@ -23,7 +23,7 @@ export async function generateMetadata({
       languages: {
         "zh-CN": `${URL_CONFIG.baseUrl}/zh/privacy-policy`,
         "en-US": `${URL_CONFIG.baseUrl}/en/privacy-policy`,
-        "x-default": `${URL_CONFIG.baseUrl}/zh/privacy-policy`, // 修复：默认指向中文版本
+        "x-default": `${URL_CONFIG.baseUrl}/en/privacy-policy`, // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
     openGraph: {

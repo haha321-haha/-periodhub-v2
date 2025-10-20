@@ -4,17 +4,17 @@
   "site": {
     "name": "Period Hub",
     "title": "Period Hub - Period Health Management Platform",
-    "description": "Period Hub - Professional period health management platform, providing scientific dysmenorrhea relief solutions, interactive tools and personalized health guidance. From immediate relief to long-term management, comprehensive support for women's menstrual health. Already helped tens of millions of women manage their periods scientifically. Professional content based on evidence-based medicine, covering 42 professional articles, 24 PDF resources, 6 major interactive tools, providing scientific guidance for women of all ages."
+    "description": "Period Hub - Professional period health management platform, providing scientific dysmenorrhea relief solutions, interactive tools and personalized health guidance. From immediate relief to long-term management, comprehensive support for women's menstrual health. Already helped tens of millions of women manage their periods scientifically. Professional content based on evidence-based medicine, covering 43 professional articles, 13 PDF resources, 6 major interactive tools, providing scientific guidance for women of all ages."
   },
   "homePage": {
     "metadata": {
       "title": "Period Pain Relief | Free Medical Tools & Guides",
-      "description": "PeriodHub: 42 clinical guides + 8 smart tools for period pain relief. Fast solutions, medication advice, acupressure techniques. Evidence-based, expert care!",
+      "description": "PeriodHub: 43 clinical guides + 8 smart tools for period pain relief. Fast solutions, medication advice, acupressure techniques. Evidence-based, expert care!",
       "keywords": "period pain relief,menstrual pain management,women health,period tracking,pain management,symptom assessment,health tools,medical guides,PDF downloads",
       "ogTitle": "Period Pain Relief | Free Medical Tools & Guides",
-      "ogDescription": "Get instant period pain relief with 42 expert articles & 8 free interactive tools. Medical guides, symptom assessments & personalized care solutions. Start today!",
+      "ogDescription": "Get instant period pain relief with 43 expert articles & 8 free interactive tools. Medical guides, symptom assessments & personalized care solutions. Start today!",
       "twitterTitle": "Period Pain Relief | Free Medical Tools & Guides",
-      "twitterDescription": "Instant period pain relief with 42 expert articles & 8 free interactive tools. Start managing your pain today!"
+      "twitterDescription": "Instant period pain relief with 43 expert articles & 8 free interactive tools. Start managing your pain today!"
     }
   },
   "header": {
@@ -188,7 +188,7 @@
       "personalizedRecord": "Personalized Tracking",
       "personalizedRecordDesc": "Smart symptom monitoring",
       "evidenceBasedGuide": "Evidence-Based Guide",
-      "evidenceBasedGuideDesc": "42 medical guides",
+      "evidenceBasedGuideDesc": "43 medical guides",
       "privacyFirst": "Privacy First",
       "privacyFirstDesc": "Data security protection",
       "precisionPrediction": "Precision Prediction",
@@ -200,7 +200,7 @@
       "secondary": "Health Guide"
     },
     "toolsCount": "8+",
-    "articlesCount": "42",
+    "articlesCount": "43",
     "stats": {
       "tools": "Professional Tools",
       "content": "Medical Guides",
@@ -237,7 +237,7 @@
       },
       "resources": {
         "title": "Medical Resources",
-        "description": "42 professional medical guides"
+        "description": "43 professional medical guides"
       },
       "immediateRelief": {
         "title": "Immediate Relief",
@@ -1647,7 +1647,7 @@
     },
     "articles": {
       "title": "Health Articles Center - Professional Period Pain Relief Guide & Menstrual Health Management | Period Hub",
-      "description": "42 evidence-based menstrual health articles covering period pain relief, nutritional therapy, lifestyle improvements and more, providing scientific health management solutions for women"
+      "description": "43 evidence-based menstrual health articles covering period pain relief, nutritional therapy, lifestyle improvements and more, providing scientific health management solutions for women"
     },
     "tools": {
       "title": "Interactive Tools - Period Hub",
@@ -1978,11 +1978,11 @@
     }
   },
   "downloadsPage": {
-    "title": "Health Articles & PDF Resources - 42 Medical Guides | PeriodHub",
+    "title": "Health Articles & PDF Resources - 43 Medical Guides | PeriodHub",
     "description": "Health articles & PDF guides for period pain relief, medication advice & nutrition. Evidence-based, medically reviewed. 42+ free!",
     "keywords": "period health PDF,dysmenorrhea management guide,menstrual health materials,free health resources,period care handbook,TCM wellness guide",
     "openGraph": {
-      "title": "Health Articles & PDF Resources - 42 Medical Guides | PeriodHub",
+      "title": "Health Articles & PDF Resources - 43 Medical Guides | PeriodHub",
       "description": "Health articles & PDF guides for period pain relief, medication advice & nutrition. Evidence-based, medically reviewed. 42+ free!"
     },
     "banner": {
@@ -8089,11 +8089,11 @@
           "label": "Active Users"
         },
         "articles": {
-          "number": "42",
+          "number": "43",
           "label": "Professional Articles"
         },
         "resources": {
-          "number": "24",
+          "number": "13",
           "label": "PDF Resources"
         },
         "satisfaction": {

@@ -365,7 +365,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // 🎯 修复matcher配置：匹配所有路径，排除静态资源
-    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|.*\\.(?:jpg|jpeg|png|gif|webp|svg|ico|css|js|txt|pdf|xml)).*)',
+    // 🎯 修复matcher配置：匹配所有路径，但允许/images/路径通过middleware
+    '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|manifest.json|icon.svg|apple-touch-icon.png|images/.*\\.(?:jpg|jpeg|png|gif|webp|svg|ico)|.*\\.(?:css|js|txt|pdf|xml)).*)',
   ],
 };

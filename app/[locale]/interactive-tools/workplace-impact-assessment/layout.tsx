@@ -36,7 +36,7 @@ export async function generateMetadata({
         "en-US":
           "https://www.periodhub.health/en/interactive-tools/workplace-impact-assessment",
         "x-default":
-          "https://www.periodhub.health/zh/interactive-tools/workplace-impact-assessment",
+          "https://www.periodhub.health/en/interactive-tools/workplace-impact-assessment", // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
   };

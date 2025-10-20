@@ -49,7 +49,7 @@ export async function generateMetadata({
         }/en/interactive-tools`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/interactive-tools`,
+        }/en/interactive-tools`, // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
     openGraph: {

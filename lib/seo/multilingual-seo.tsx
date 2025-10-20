@@ -53,7 +53,7 @@ export const defaultLanguageDetectionConfig: LanguageDetectionConfig = {
   geoBasedDetection: true,
   browserLanguageDetection: true,
   userHistoryDetection: true,
-  fallbackLanguage: "zh",
+  fallbackLanguage: "en", // ✅ 修复：回退到英文（与北美市场优先策略一致）
 };
 
 // 多语言内容优化配置

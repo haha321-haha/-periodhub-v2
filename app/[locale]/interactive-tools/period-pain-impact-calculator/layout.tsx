@@ -80,7 +80,7 @@ export async function generateMetadata({
         "en-US":
           "https://www.periodhub.health/en/interactive-tools/period-pain-impact-calculator",
         "x-default":
-          "https://www.periodhub.health/zh/interactive-tools/period-pain-impact-calculator",
+          "https://www.periodhub.health/en/interactive-tools/period-pain-impact-calculator", // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
   };

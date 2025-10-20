@@ -153,7 +153,7 @@ export async function generateMetadata({
         }/en/health-guide`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/health-guide`,
+        }/en/health-guide`, // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
     openGraph: {

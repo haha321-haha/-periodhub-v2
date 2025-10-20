@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         }/en/scenario-solutions`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/scenario-solutions`,
+        }/en/scenario-solutions`, // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
     openGraph: {

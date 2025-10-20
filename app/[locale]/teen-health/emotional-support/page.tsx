@@ -51,7 +51,7 @@ export async function generateMetadata({
         "en-US":
           "https://www.periodhub.health/en/teen-health/emotional-support",
         "x-default":
-          "https://www.periodhub.health/zh/teen-health/emotional-support",
+          "https://www.periodhub.health/en/teen-health/emotional-support", // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
     openGraph: {

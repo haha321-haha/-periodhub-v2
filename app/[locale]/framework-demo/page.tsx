@@ -27,7 +27,7 @@ export async function generateMetadata({
         }/en/framework-demo`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/framework-demo`,
+        }/en/framework-demo`, // ✅ 修复：默认英文版本
       },
     },
     robots: {

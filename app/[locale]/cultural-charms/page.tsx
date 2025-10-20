@@ -28,7 +28,7 @@ export async function generateMetadata({
         }/en/cultural-charms`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/cultural-charms`,
+        }/en/cultural-charms`, // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
   };

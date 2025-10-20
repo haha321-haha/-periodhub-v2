@@ -2476,8 +2476,8 @@
     }
   },
   "downloadsPage": {
-    "title": "PDF资源下载中心",
-    "description": "痛经管理资源下载中心：42篇临床指南PDF+24个实用工具模板，涵盖快速缓解、用药指导、饮食调理、运动方案。专业医学资源，可打印保存。免费下载，立即获取！",
+    "title": "健康文章与PDF资源 - 42篇医学指南 | PeriodHub",
+    "description": "健康文章与PDF指南，涵盖痛经缓解、用药建议和营养指导。循证医学，专业审核。42+免费资源！",
     "keywords": "经期健康,PDF下载,痛经缓解,文章资源,Period Hub",
     "seo": {
       "title": "文章PDF下载中心 - Period Hub 经期健康专业资源",
@@ -2485,8 +2485,8 @@
       "keywords": "经期健康,PDF下载,痛经缓解,文章资源,Period Hub"
     },
     "openGraph": {
-      "title": "PDF资源下载中心 - Period Hub 经期健康专业资源",
-      "description": "下载专业制作的PDF指南、表格和工具，帮助您更好地管理经期健康。所有资源均提供中英文版本。"
+      "title": "健康文章与PDF资源 - 42篇医学指南 | PeriodHub",
+      "description": "健康文章与PDF指南，涵盖痛经缓解、用药建议和营养指导。循证医学，专业审核。42+免费资源！"
     },
     "banner": {
       "newVersion": "🎉 全新PDF下载中心 - 38个精选资源，移动端优化体验，基于紧急程度智能分类",
@@ -2501,7 +2501,7 @@
     },
     "breadcrumb": {
       "home": "首页",
-      "downloadCenter": "下载中心"
+      "downloadCenter": "文章与资源"
     },
     "pageTitle": "📚 文章PDF下载中心",
     "stats": {
@@ -2586,8 +2586,8 @@
       }
     },
     "content": {
-      "title": "📥 PDF下载中心",
-      "description": "专业的经期健康资源库，为您提供科学、实用的PDF指南和工具",
+      "title": "专业健康文章与PDF资源库",
+      "description": "浏览42+专业健康文章和PDF资源，涵盖痛经缓解、用药指导、营养和运动策略。",
       "statistics": {
         "expertArticles": "专业文章",
         "pdfResources": "PDF资源",

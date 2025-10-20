@@ -1978,12 +1978,12 @@
     }
   },
   "downloadsPage": {
-    "title": "PDF Download Center - Period Health Resource Library | PeriodHub",
-    "description": "Professional PDF downloads: 42 medical guides + 24 tools for period pain relief, medication guidance, diet & exercise plans. Medically reviewed, free access!",
+    "title": "Health Articles & PDF Resources - 42 Medical Guides | PeriodHub",
+    "description": "Health articles & PDF guides for period pain relief, medication advice & nutrition. Evidence-based, medically reviewed. 42+ free!",
     "keywords": "period health PDF,dysmenorrhea management guide,menstrual health materials,free health resources,period care handbook,TCM wellness guide",
     "openGraph": {
-      "title": "PDF Download Center - Period Health Resource Library | PeriodHub",
-      "description": "Download professional period health PDF resources for free, including dysmenorrhea management guides, nutrition advice, and exercise plans"
+      "title": "Health Articles & PDF Resources - 42 Medical Guides | PeriodHub",
+      "description": "Health articles & PDF guides for period pain relief, medication advice & nutrition. Evidence-based, medically reviewed. 42+ free!"
     },
     "banner": {
       "text": "🎉 New PDF Download Center Launched! More professional resources, better reading experience",
@@ -1995,11 +1995,11 @@
     },
     "breadcrumb": {
       "home": "Home",
-      "downloadCenter": "Download Center"
+      "downloadCenter": "Articles & Resources"
     },
     "content": {
-      "title": "📥 PDF Download Center",
-      "description": "Curated professional health resources for offline reading. All PDFs are reviewed by medical experts for scientific accuracy.",
+      "title": "Professional Health Articles & PDF Resource Library",
+      "description": "Browse 42+ expert health articles and PDF resources on period pain relief, medication guidance, nutrition, and exercise strategies.",
       "statistics": {
         "expertArticles": "Expert Articles",
         "pdfResources": "PDF Resources",

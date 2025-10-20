@@ -197,7 +197,7 @@ export default async function RootLayout({
           type="image/png"
         />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/manifest.webmanifest" />
 
         {/* 🚀 优化的第三方脚本 - 智能延迟加载 */}
         <OptimizedScripts />

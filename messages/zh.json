@@ -7394,27 +7394,6 @@
         "cta": "开始测试"
       }
     },
-    "trusted": {
-      "title": "值得信赖的专业平台",
-      "metrics": {
-        "activeUsers": {
-          "number": "50K+",
-          "label": "活跃用户"
-        },
-        "articles": {
-          "number": "43",
-          "label": "专业文章"
-        },
-        "resources": {
-          "number": "13",
-          "label": "PDF资源"
-        },
-        "satisfaction": {
-          "number": "98%",
-          "label": "用户满意度"
-        }
-      }
-    },
     "quickNav": {
       "title": "快速导航",
       "constitutionTest": "体质评估",

@@ -8081,27 +8081,6 @@
         "cta": "Start Test"
       }
     },
-    "trusted": {
-      "title": "Trusted Professional Platform",
-      "metrics": {
-        "activeUsers": {
-          "number": "50K+",
-          "label": "Active Users"
-        },
-        "articles": {
-          "number": "43",
-          "label": "Professional Articles"
-        },
-        "resources": {
-          "number": "13",
-          "label": "PDF Resources"
-        },
-        "satisfaction": {
-          "number": "98%",
-          "label": "User Satisfaction"
-        }
-      }
-    },
     "quickNav": {
       "title": "Quick Navigation",
       "constitutionTest": "Constitution Assessment",

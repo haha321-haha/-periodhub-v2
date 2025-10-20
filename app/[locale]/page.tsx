@@ -8,6 +8,7 @@ import Hero from "@/components/layout/Hero";
 import UserSuccessStories from "@/components/UserSuccessStories";
 import NavigationTabs from "@/components/NavigationTabs";
 import OptimizedSVG from "@/components/ui/OptimizedSVG";
+import { SITE_CONFIG } from "@/config/site.config";
 
 // 页面级别的metadata
 export async function generateMetadata({
@@ -440,7 +441,7 @@ export default async function HomePage({
                 </div>
                 <div className="bg-white rounded-xl p-6 shadow-sm">
                   <div className="text-3xl font-bold text-pink-600 mb-2">
-                    42
+                    {SITE_CONFIG.statistics.articles}
                   </div>
                   <div className="text-gray-600">
                     {t("home.trusted.metrics.articles")}
@@ -448,7 +449,7 @@ export default async function HomePage({
                 </div>
                 <div className="bg-white rounded-xl p-6 shadow-sm">
                   <div className="text-3xl font-bold text-blue-600 mb-2">
-                    24
+                    {SITE_CONFIG.statistics.pdfResources}
                   </div>
                   <div className="text-gray-600">
                     {t("home.trusted.metrics.resources")}

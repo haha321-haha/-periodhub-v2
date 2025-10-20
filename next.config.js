@@ -182,6 +182,7 @@ const nextConfig = {
         source: '/en/a3f202e9872f45238294db525b233bf5.txt',
         destination: '/a3f202e9872f45238294db525b233bf5.txt'
       },
+      // ===== Manifest文件 (保持4个 - 因为destination不同) =====
       {
         source: '/zh/manifest.json',
         destination: '/manifest.webmanifest'
@@ -191,14 +192,6 @@ const nextConfig = {
         destination: '/manifest.webmanifest'
       },
       {
-        source: '/zh/icon.svg',
-        destination: '/icon.svg'
-      },
-      {
-        source: '/zh/apple-touch-icon.png',
-        destination: '/apple-touch-icon.png'
-      },
-      {
         source: '/en/manifest.json',
         destination: '/manifest-en.webmanifest'
       },
@@ -206,61 +199,29 @@ const nextConfig = {
         source: '/en/manifest.webmanifest',
         destination: '/manifest-en.webmanifest'
       },
+      
+      // ===== Favicon文件 (12个→3个) ✅ =====
       {
-        source: '/en/icon.svg',
+        source: '/:locale/favicon.ico',
+        destination: '/favicon.ico'
+      },
+      {
+        source: '/:locale/favicon-16x16.png',
+        destination: '/favicon-16x16.png'
+      },
+      {
+        source: '/:locale/favicon-32x32.png',
+        destination: '/favicon-32x32.png'
+      },
+      
+      // ===== Icon文件 (6个→2个) ✅ =====
+      {
+        source: '/:locale/icon.svg',
         destination: '/icon.svg'
       },
       {
-        source: '/en/apple-touch-icon.png',
+        source: '/:locale/apple-touch-icon.png',
         destination: '/apple-touch-icon.png'
-      },
-      {
-        source: '/zh/favicon-32x32.png',
-        destination: '/favicon-32x32.png'
-      },
-      {
-        source: '/zh/favicon-16x16.png',
-        destination: '/favicon-16x16.png'
-      },
-      {
-        source: '/zh/favicon.ico',
-        destination: '/favicon.ico'
-      },
-      {
-        source: '/en/favicon-32x32.png',
-        destination: '/favicon-32x32.png'
-      },
-      {
-        source: '/en/favicon-16x16.png',
-        destination: '/favicon-16x16.png'
-      },
-      {
-        source: '/en/favicon.ico',
-        destination: '/favicon.ico'
-      },
-      {
-        source: '/zh/favicon.ico',
-        destination: '/favicon.ico'
-      },
-      {
-        source: '/en/favicon.ico',
-        destination: '/favicon.ico'
-      },
-      {
-        source: '/zh/favicon-16x16.png',
-        destination: '/favicon-16x16.png'
-      },
-      {
-        source: '/en/favicon-16x16.png',
-        destination: '/favicon-16x16.png'
-      },
-      {
-        source: '/zh/favicon-32x32.png',
-        destination: '/favicon-32x32.png'
-      },
-      {
-        source: '/en/favicon-32x32.png',
-        destination: '/favicon-32x32.png'
       },
       {
         source: '/fonts/:path*',

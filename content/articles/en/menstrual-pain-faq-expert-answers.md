@@ -13,7 +13,6 @@ seo_title: "Menstrual Pain FAQ: Expert Guide to Prostaglandin Mechanisms and War
 seo_title_en: "Menstrual Pain FAQ: Expert Guide to Prostaglandin Mechanisms and Warning Signs"
 seo_description: "Authoritative expert answers to 5 major menstrual pain questions: why so painful, causes of worsening, lethality concerns, simulator accuracy. Evidence-based professional guidance for proper dysmenorrhea understanding."
 seo_description_en: "Authoritative expert answers to 5 major menstrual pain questions: why so painful, causes of worsening, lethality concerns, simulator accuracy. Evidence-based professional guidance for proper dysmenorrhea understanding."
-# featured_image: "/images/articles/menstrual-pain-faq-expert-answers.jpg" # 图片文件不存在，已临时注释
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/menstrual-pain-faq-expert-answers"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"

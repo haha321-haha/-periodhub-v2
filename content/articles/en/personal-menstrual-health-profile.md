@@ -11,7 +11,6 @@ tags_zh: ["经期追踪", "健康档案", "症状记录", "个性化管理", "�
 category: "Health Management"
 category_zh: "健康管理"
 author: "PeriodHub Expert Team"
-# featured_image: "/images/articles/personal-menstrual-health-profile.jpg" # 图片文件不存在，已临时注释
 seo_title: "Building Your Personal Menstrual Health Profile - Scientific Tracking & Personalized Management Guide"
 seo_title_zh: "建立个人经期健康档案 - 科学追踪与个性化管理指南"
 seo_description: "Personal menstrual health profile guide: Build comprehensive tracking with cycle monitoring, symptom recording, factor analysis for personalized management solutions."

@@ -11,7 +11,6 @@ tags_zh: ["草药茶", "自然疗法", "痛经缓解", "传统医学", "植物�
 category: "Health Management"
 category_zh: "健康管理"
 author: "PeriodHub Expert Team"
-# featured_image: "/images/articles/herbal-tea-menstrual-pain.jpg" # 图片文件不存在，已临时注释
 seo_title: "Most Effective Herbal Tea Recipes for Menstrual Pain - Scientifically Validated Natural Therapy Guide"
 seo_title_zh: "最有效的痛经草药茶配方 - 科学验证的自然疗法指南"
 seo_description: "7 herbal teas for menstrual pain: Ginger, cinnamon, fennel tea recipes. Preparation methods, action mechanisms, safety guidelines for natural period pain relief."

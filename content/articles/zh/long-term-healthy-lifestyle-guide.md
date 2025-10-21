@@ -9,7 +9,6 @@ tags_en: ["long-term health", "lifestyle", "menstrual management", "preventive c
 category: "健康管理"
 category_en: "Health Management"
 author: "PeriodHub专家团队"
-# featured_image: "/images/articles/long-term-healthy-lifestyle.jpg" # 图片文件不存在，已临时注释
 seo_title: "长期健康生活方式指南：建立可持续的经期健康管理策略 | 专业女性健康"
 seo_title_en: "Long-term Healthy Lifestyle Guide: Sustainable Menstrual Health Management | Professional Women's Health"
 seo_description: "专业长期健康生活方式指南：通过科学的饮食、运动、睡眠和压力管理策略，建立可持续的经期健康管理方案。提供21天习惯养成计划、个性化健康档案建立方法和长期健康维护策略。科学实用的健康生活方式指导，包含目标设定、进度追踪、效果评估等系统化健康管理工具，专业可靠的长期健康维护解决方案，科学有效的生活方式改善指导。"

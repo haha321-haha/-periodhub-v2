@@ -1,5 +1,8 @@
 ---
 title: "US Medical Insurance Guide for Menstrual Pain Treatment (2025)"
+seo_title: "US Menstrual Pain Insurance Coverage Guide - Healthcare Access | PeriodHub"
+seo_description: "Navigate US insurance coverage for menstrual pain treatment. Healthcare access guide, coverage options, and tips for getting period pain care covered by insurance."
+canonical_url: "/en/articles/us-menstrual-pain-insurance-coverage-guide"
 description: "Complete guide to US medical insurance coverage for menstrual pain treatment. Learn ACA policies, insurance selection strategies, claims tips, and cost optimization for American women."
 summary: "2025 US health insurance guide for menstrual pain treatment. Covers ACA policies, insurance strategies, medication costs, and appeal techniques to maximize benefits."
 category: "Understanding & Education"

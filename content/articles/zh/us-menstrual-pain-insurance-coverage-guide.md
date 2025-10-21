@@ -1,5 +1,8 @@
 ---
 title: "美国痛经治疗医疗保险覆盖完全指南（2025年修正版）"
+seo_title: "美国痛经保险覆盖指南 - 医疗保健获取 | PeriodHub"
+seo_description: "导航美国痛经治疗的保险覆盖。医疗保健获取指南、覆盖选项和经期护理保险报销技巧。"
+canonical_url: "/zh/articles/us-menstrual-pain-insurance-coverage-guide"
 description: "基于ACA最新政策的美国痛经治疗医疗保险覆盖完全指南，涵盖保险选择策略、理赔技巧、费用优化和权益保护，为美国女性提供专业的医疗保险导航服务。"
 summary: "详细解析2025年美国医疗保险政策变化，提供痛经治疗的保险覆盖策略、金属计划对比、药物费用参考和申诉成功技巧，帮助美国女性最大化医疗保险权益。"
 category: "理解与教育"

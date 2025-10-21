@@ -1,5 +1,8 @@
 ---
 title: "痛经应急药物携带完全指南：随时随地缓解疼痛的专业方案"
+seo_title: "痛经应急用药指南 - 快速缓解 | PeriodHub"
+seo_description: "痛经应急用药指南。快速缓解选项、剂量建议和严重痛经需要立即就医的情况。"
+canonical_url: "/zh/articles/menstrual-pain-emergency-medication-guide"
 description: "全面的痛经应急药物携带指南，涵盖非处方药物选择、携带合规要求、紧急用药决策流程和安全使用注意事项，帮助女性在学校、工作场所和旅行中做好充分准备。"
 summary: "详细介绍布洛芬、对乙酰氨基酚等非处方痛经药物的选择标准、剂量指导和携带方法，提供紧急用药决策流程和安全使用注意事项，确保女性在任何场合都能及时有效缓解痛经。"
 category: "理解与教育"

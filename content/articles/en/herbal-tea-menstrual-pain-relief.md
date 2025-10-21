@@ -1,5 +1,8 @@
 ---
 title: "Most Effective Herbal Tea Recipes for Menstrual Pain: 5 Scientifically Proven Natural Remedies"
+seo_title: "Herbal Tea for Menstrual Pain Relief - Natural Remedy Guide | PeriodHub"
+seo_description: "Discover effective herbal teas for menstrual pain relief. Natural remedies, brewing methods, and scientifically-backed herbal solutions for period cramps."
+canonical_url: "/en/articles/herbal-tea-menstrual-pain-relief"
 description: "Comprehensive guide to herbal teas for menstrual pain relief based on authoritative medical research, covering 5 scientifically validated recipes, comparative effectiveness studies, professional brewing techniques, and safety guidelines for natural menstrual health management."
 summary: "Detailed explanation of 5 scientifically validated herbal tea recipes for menstrual pain, including golden ginger tea, cinnamon red tea, fennel seed tea, and other classic formulas, providing professional brewing techniques and drinking schedules based on clinical research data."
 category: "Preparation Planning"

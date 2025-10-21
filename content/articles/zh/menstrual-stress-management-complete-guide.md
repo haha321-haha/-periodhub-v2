@@ -1,5 +1,8 @@
 ---
 title: "经期压力管理完全指南：从心理到生理的全面缓解"
+seo_title: "月经压力管理完整指南 - 情绪健康 | PeriodHub"
+seo_description: "月经期间压力管理的完整指南。情绪健康策略、放松技巧和经期心理健康的有效方法。"
+canonical_url: "/zh/articles/menstrual-stress-management-complete-guide"
 description: "基于ACOG、APA及NIH最新循证医学研究的经期压力管理指南，为北美职场女性提供科学的压力缓解策略，涵盖即时减压技术、长期管理计划和职场应对方案。"
 summary: "超过70%的女性在月经期间经历情绪波动和疼痛加剧。本指南系统解析压力与痛经的科学关联，提供北美职场女性专属的压力管理方案，包括5分钟快速减压法、办公室隐蔽技术和职场权益保护。"
 category: "营养与健康"

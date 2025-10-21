@@ -1,5 +1,8 @@
 ---
 title: "痛经会导致背痛吗？5个令人惊讶的事实"
+seo_title: "痛经与背痛的联系 - 完整指南 | PeriodHub"
+seo_description: "了解痛经与背痛之间的联系。原因、缓解方法和有效管理经期和背痛的有效策略。"
+canonical_url: "/zh/articles/menstrual-pain-back-pain-connection"
 description: "深入探讨痛经与背痛之间的科学联系，揭示5个令人惊讶的医学事实，包括解剖学原理、神经传导机制和有效的综合管理策略。"
 summary: "基于最新医学研究，详细解析痛经引起背痛的生理机制，提供专业的识别方法和针对性治疗建议，帮助女性更好地理解和管理经期疼痛。"
 category: "理解与教育"

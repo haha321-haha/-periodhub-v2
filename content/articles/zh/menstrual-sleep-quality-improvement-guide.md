@@ -1,5 +1,8 @@
 ---
 title: "经期睡眠质量全面改善指南：科学方法重获优质睡眠"
+seo_title: "月经睡眠质量改善指南 - 经期更好休息 | PeriodHub"
+seo_description: "用有效策略改善月经期间的睡眠质量。睡眠卫生技巧、疼痛管理和经期更好休息的自然解决方案。"
+canonical_url: "/zh/articles/menstrual-sleep-quality-improvement-guide"
 description: "全面的经期睡眠质量改善指南，涵盖睡眠问题识别、环境优化、习惯建立和特殊情况应对策略，基于权威医学研究提供21天睡眠改善计划和专业解决方案。"
 summary: "详细介绍经期睡眠障碍的识别方法、卧室环境优化技巧、21天睡眠改善计划和应急处理策略，帮助女性通过科学方法改善经期睡眠质量，重获优质睡眠体验。"
 category: "理解与教育"

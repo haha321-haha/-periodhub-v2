@@ -1,5 +1,8 @@
 ---
 title: "经期睡眠质量全面改善指南：循证医学方法"
+seo_title: "全面月经睡眠质量指南 - 经期改善睡眠 | PeriodHub"
+seo_description: "全面的月经期间睡眠质量改善指南。循证策略、睡眠卫生技巧和经期更好休息的有效方法。"
+canonical_url: "/zh/articles/comprehensive-menstrual-sleep-quality-guide"
 description: "基于美国睡眠医学会(AASM)、美国妇产科学院(ACOG)及NIH最新研究成果的经期睡眠改善指南，提供21天系统性睡眠质量提升计划，涵盖环境优化、习惯建立和专业干预策略。"
 summary: "超过60%的女性在经期经历睡眠质量下降。本指南基于最新循证医学研究，提供科学的21天睡眠改善计划，包括环境优化、习惯建立、疼痛管理和专业干预策略，帮助女性建立长期优质睡眠模式。"
 category: "营养与健康"

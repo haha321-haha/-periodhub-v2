@@ -1,5 +1,8 @@
 ---
 title: "药物vs自然疗法：哪种痛经缓解方法最适合你？"
+seo_title: "药物vs自然疗法治疗痛经 - 哪种最有效 | PeriodHub"
+seo_description: "比较药物和自然疗法治疗痛经。循证分析、优缺点和专家对有效痛经缓解的建议。"
+canonical_url: "/zh/articles/medication-vs-natural-remedies-menstrual-pain"
 description: "全面对比药物治疗与自然疗法在痛经缓解中的效果、安全性和适用性，基于科学证据为您提供个性化选择指南，帮助找到最适合的痛经管理方案。"
 summary: "深入分析药物治疗和自然疗法的优缺点，包括NSAIDs、激素疗法、草药、物理疗法等多种选择，提供基于个人情况的决策框架和专业建议。"
 category: "理解与教育"

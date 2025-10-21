@@ -1,5 +1,8 @@
 ---
 title: "经期预防性护理完全方案：循证医学指导"
+seo_title: "月经预防护理完整计划 - 长期缓解 | PeriodHub"
+seo_description: "全面的痛经预防护理计划。长期策略、生活方式改变和主动措施，随着时间推移减少痛经。"
+canonical_url: "/zh/articles/menstrual-preventive-care-complete-plan"
 description: "基于ACOG、NIH及FDA最新循证医学研究，为北美女性提供科学的预防性护理策略，涵盖经前准备、经期管理、经后恢复的全周期护理方案，帮助显著改善经期体验。"
 summary: "预防胜于治疗。通过科学的预防性护理，可以显著改善经期体验，减少疼痛和不适。本指南基于权威医学机构的最新研究，提供全面的经期预防管理方案，包括个体化护理计划、循证营养方案和专业监测评估。"
 category: "营养与健康"

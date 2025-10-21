@@ -1,5 +1,8 @@
 ---
 title: "Comprehensive Menstrual Sleep Quality Improvement Guide: Evidence-Based Medical Methods"
+seo_title: "Comprehensive Menstrual Sleep Quality Guide - Sleep Better During Period | PeriodHub"
+seo_description: "Complete guide to improving sleep quality during menstruation. Evidence-based strategies, sleep hygiene tips, and proven methods for better rest during your period."
+canonical_url: "/en/articles/comprehensive-menstrual-sleep-quality-guide"
 description: "Evidence-based menstrual sleep improvement guide based on the latest research from the American Academy of Sleep Medicine (AASM), American College of Obstetricians and Gynecologists (ACOG), and NIH, providing a systematic 21-day sleep quality enhancement plan covering environment optimization, habit formation, and professional intervention strategies."
 summary: "Over 60% of women experience decreased sleep quality during menstruation. This guide, based on the latest evidence-based medical research, provides a scientific 21-day sleep improvement plan including environment optimization, habit formation, pain management, and professional intervention strategies to help women establish long-term quality sleep patterns."
 category: "Nutrition & Health"

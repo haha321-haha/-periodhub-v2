@@ -1,5 +1,8 @@
 ---
 title: "痛经与其他腹部疼痛全面对比指南：识别危险信号，做出明智决策"
+seo_title: "痛经vs其他腹痛 - 如何区分 | PeriodHub"
+seo_description: "学习区分痛经和其他腹部疾病。警示信号、诊断技巧和痛经何时需要医学评估。"
+canonical_url: "/zh/articles/menstrual-pain-vs-other-abdominal-pain-guide"
 description: "权威医学指南帮助女性准确鉴别痛经与其他危险腹痛，包含心脏病发作、急性阑尾炎、肾结石等5大疾病对比分析，提供关键危险信号识别和紧急处理建议。"
 summary: "详细对比痛经与心脏病发作、急性阑尾炎、肾结石等常见腹痛的关键区别，提供科学的鉴别诊断方法和危险信号识别清单，帮助女性在关键时刻做出正确的医疗决策。"
 category: "理解与教育"

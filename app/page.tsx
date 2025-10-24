@@ -3,17 +3,31 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "PeriodHub - 专业痛经缓解方法和月经健康管理平台",
-    description:
-      "PeriodHub｜专业痛经缓解方案与经期健康管理平台。基于42篇医学指南和8个自测工具，三甲医院合作机构已帮助60万+女性科学应对痛经困扰。",
+    title: "Period Hub - Redirecting...",
+    description: "Redirecting to English version",
     robots: {
-      index: true,
+      index: false,  // ✅ 禁止索引重定向页面
       follow: true,
     },
+    // ❌ 不设置 alternates 配置，因为这不是内容页面
   };
 }
 
 export default function RootPage() {
-  // 301永久重定向到中文首页
-  redirect("/zh");
+  // next.config.js 的重定向会优先执行，这里作为后备
+  return (
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="text-center p-8">
+        <h1 className="text-2xl font-bold text-gray-900 mb-4">
+          Redirecting to English Version...
+        </h1>
+        <p className="text-gray-600">
+          If you are not redirected automatically, 
+          <a href="/en" className="text-blue-600 hover:text-blue-800 ml-1">
+            click here
+          </a>
+        </p>
+      </div>
+    </div>
+  );
 }

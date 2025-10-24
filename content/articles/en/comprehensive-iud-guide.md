@@ -13,11 +13,12 @@ summary: "Comprehensive IUD guide based on WHO, ACOG, NHS authoritative guidelin
 summary_zh: "基于WHO、ACOG、NHS权威指南的IUD全面指导：深入解析含铜与含激素IUD的区别、适用人群、放置流程、副作用管理及常见问题。"
 category: "contraception guide"
 category_zh: "避孕指导"
+keywords: ["IUD", "intrauterine device", "contraception", "copper IUD", "hormonal IUD", "women's health", "PeriodHub"]
 description: "Comprehensive IUD guide based on WHO, ACOG, NHS authoritative guidelines: In-depth analysis of copper vs hormonal IUD differences, suitable candidates, insertion procedures, side effect management, and FAQs. Helping women make informed long-term contraceptive choices."
 description_zh: "基于WHO、ACOG、NHS权威指南的IUD全面指导：深入解析含铜与含激素IUD的区别、适用人群、放置流程、副作用管理及常见问题。帮助女性做出明智的长效避孕选择。"
 seo_title: "Complete IUD Guide: Types Comparison, Candidates, Insertion Process | Authoritative Medical Guidance"
 seo_title_zh: "IUD宫内节育器完整指南：类型对比、适用人群、放置流程 | 权威医学指导"
-seo_description: "Complete IUD guide: Compare copper vs hormonal types, eligibility criteria, insertion procedures, side effects. WHO/ACOG/NHS guidelines for informed contraception choices."
+seo_description: "Complete IUD guide: Types, insertion, side effects, and impact on menstrual pain. Evidence-based information for informed decisions."
 seo_description_zh: "权威IUD指南：详解含铜vs含激素IUD区别，适用禁忌人群，放置取出流程，副作用管理。基于WHO/ACOG/NHS最新指南，帮助您选择合适的长效避孕方法。专业咨询，科学可靠的避孕健康指导，包含费用分析、效果对比、安全性评估，为女性提供全面的避孕决策参考，专业医疗机构推荐，安全有效的长期避孕解决方案。"
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/comprehensive-iud-guide"

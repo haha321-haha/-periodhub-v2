@@ -21,6 +21,7 @@ reading_time: "28 分钟"
 reading_time_en: "28 minutes"
 pdf_available: true
 pdf_download_url: "/downloads/menstrual-pain-complications-management.pdf"
+keywords: ["经期并发症", "腹胀缓解", "恶心管理", "背痛", "症状控制", "前列腺素", "PeriodHub"]
 ---
 
 # 痛经并发症与伴随症状管理：腹胀、恶心、腰痛的科学应对指南

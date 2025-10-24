@@ -7,11 +7,12 @@ summary: "Understand the medical mechanisms behind menstrual nausea and master g
 summary_en: "Understand the medical mechanisms behind menstrual nausea and master graded response strategies. From mild nausea to severe vomiting, discover scientifically effective relief strategies including dietary adjustments, acupressure, and medication interventions."
 tags: ["menstrual nausea", "period pain vomiting", "immediate relief", "prostaglandins", "acupressure", "medication treatment", "emergency care"]
 tags_en: ["menstrual nausea", "period pain vomiting", "immediate relief", "prostaglandins", "acupressure", "medication treatment", "emergency care"]
+keywords: ["menstrual nausea", "period vomiting", "nausea relief", "prostaglandins", "acupressure", "immediate relief", "PeriodHub"]
 category: "immediate-relief"
 category_en: "immediate-relief"
 seo_title: "Menstrual Nausea Relief Guide: Scientific Solutions for Pain and Vomiting"
 seo_title_en: "Menstrual Nausea Relief Guide: Scientific Solutions for Pain and Vomiting"
-seo_description: "Period pain causing nausea and vomiting? Learn the medical mechanisms and master graded response strategies, from dietary adjustments to medication interventions for complete relief."
+seo_description: "Menstrual nausea relief guide: Causes, evidence-based remedies, dietary strategies, and when to seek medical help for period-related nausea."
 seo_description_en: "Period pain causing nausea and vomiting? Learn the medical mechanisms and master graded response strategies, from dietary adjustments to medication interventions for complete relief."
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/menstrual-nausea-relief-guide"

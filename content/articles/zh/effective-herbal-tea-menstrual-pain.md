@@ -17,6 +17,7 @@ seo_description_zh: "详细介绍7种科学验证的痛经草药茶配方，包�
 canonical_url: "/zh/articles/effective-herbal-tea-menstrual-pain"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
+keywords: ["草药茶", "自然疗法", "痛经缓解", "传统医学", "植物疗法", "自然治愈", "PeriodHub"]
 ---
 
 # 最有效的痛经草药茶配方

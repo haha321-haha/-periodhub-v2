@@ -1,7 +1,7 @@
 ---
 title: "女性生命周期痛经特点全解析：北美科学管理指南"
 seo_title: "女性生命周期痛经分析 - 年龄相关变化 | PeriodHub"
-seo_description: "女性生命周期痛经的全面分析。年龄相关变化、激素变化和痛经从青春期到更年期的演变。"
+seo_description: "女性生命周期痛经的全面分析。年龄相关变化、激素变化和痛经从青春期到更年期的演变。基于ACOG、The Menopause Society及NIH最新临床指南，为北美女性提供全生命周期的科学管理方案，包括各年龄段特点分析、管理策略和专业资源指导。"
 canonical_url: "/zh/articles/womens-lifecycle-menstrual-pain-analysis"
 description: "基于ACOG（美国妇产科学院）、The Menopause Society及NIH最新临床指南，为北美女性提供全生命周期的痛经科学管理方案，涵盖青春期、成年早期、职业发展期、职业稳定期和围绝经期的特点分析与管理策略。"
 summary: "痛经影响着高达90%的女性，在不同年龄段呈现出独特的特点和管理需求。本指南基于最新循证医学证据，为北美女性提供全生命周期的科学管理方案，包括各年龄段特点分析、管理策略和专业资源指导。"
@@ -14,6 +14,7 @@ lastModified: "2024-12-19"
 featured: true
 reading_time: "24分钟"
 reading_time_zh: "24分钟"
+keywords: ["生命周期", "年龄特点", "痛经管理", "全程指导", "激素变化", "科学管理", "PeriodHub"]
 ---
 
 # 女性生命周期痛经特点全解析：北美科学管理指南

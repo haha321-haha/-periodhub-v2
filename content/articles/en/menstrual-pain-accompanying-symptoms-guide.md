@@ -7,11 +7,12 @@ summary: "Comprehensive analysis of the causes and response strategies for sympt
 summary_en: "Comprehensive analysis of the causes and response strategies for symptoms accompanying menstrual pain such as bloating, vomiting, and fever. Provides symptom correlation matrix, graded treatment plans, and danger signal identification to help women scientifically manage complex menstrual symptoms."
 tags: ["menstrual pain symptoms", "period bloating", "period vomiting", "period fever", "symptom matrix", "emergency care", "warning signs"]
 tags_en: ["menstrual pain symptoms", "period bloating", "period vomiting", "period fever", "symptom matrix", "emergency care", "warning signs"]
+keywords: ["menstrual pain symptoms", "period bloating", "period vomiting", "period fever", "warning signs", "symptom management", "PeriodHub"]
 category: "immediate-relief"
 category_en: "immediate-relief"
 seo_title: "Complete Guide to Menstrual Pain Symptoms: Scientific Solutions for Bloating, Vomiting & Fever"
 seo_title_en: "Complete Guide to Menstrual Pain Symptoms: Scientific Solutions for Bloating, Vomiting & Fever"
-seo_description: "Menstrual pain with bloating, vomiting, fever? Learn symptom causes, master graded response plans, identify warning signs, and scientifically manage complex menstrual symptoms."
+seo_description: "Guide to common period pain symptoms: fatigue, nausea, headaches. Evidence-based management strategies and when to consult a doctor."
 seo_description_en: "Menstrual pain with bloating, vomiting, fever? Learn symptom causes, master graded response plans, identify warning signs, and scientifically manage complex menstrual symptoms."
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/menstrual-pain-accompanying-symptoms-guide"

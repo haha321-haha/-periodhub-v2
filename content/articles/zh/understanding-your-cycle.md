@@ -11,7 +11,7 @@ category: "理解与教育"
 category_en: "health-education"
 seo_title: "了解您的月经周期：阶段与激素的完整指南"
 seo_title_en: "Understanding Your Menstrual Cycle: Complete Guide to Phases and Hormones"
-seo_description: "全面了解月经周期阶段、激素变化，以及如何运用这些知识进行更好的健康管理和疼痛缓解。"
+seo_description: "全面了解月经周期阶段、激素变化，以及如何运用这些知识进行更好的健康管理和疼痛缓解。深入了解月经周期的复杂各个阶段、激素影响，掌握科学的健康管理方法，有效应对每月的生理变化，实现精准的经期健康管理。"
 seo_description_en: "Comprehensive guide to understanding your menstrual cycle phases, hormonal changes, and how to use this knowledge for better health management and pain relief."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/understanding-your-cycle"
@@ -20,6 +20,7 @@ schema_type: "Article"
 reading_time: "8分钟"
 reading_time_zh: "8分钟"
 reading_time_en: "8 minutes"
+keywords: ["月经周期", "激素", "女性健康", "科普教育", "生殖健康", "痛经", "PeriodHub"]
 ---
 
 ## 引言：女性健康的基础

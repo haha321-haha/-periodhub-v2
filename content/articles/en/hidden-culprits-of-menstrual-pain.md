@@ -1,7 +1,7 @@
 ---
 title: "Hidden Culprits of Menstrual Pain: Psychological Stress and Pathways to Relief - Complete Psychological Guidance"
 seo_title: "Hidden Culprits of Menstrual Pain - Surprising Causes | PeriodHub"
-seo_description: "Uncover hidden causes of menstrual pain you might not know about. Diet, lifestyle, and environmental factors that worsen period cramps and how to fix them."
+seo_description: "Hidden causes of period pain: Psychological stress, diet, lifestyle, and environmental factors that worsen cramps and evidence-based solutions."
 canonical_url: "/en/articles/hidden-culprits-of-menstrual-pain"
 title_en: "Hidden Culprits of Menstrual Pain: Psychological Stress and Pathways to Relief - Complete Psychological Guidance"
 summary: "Explore the complex relationship between menstrual pain and psychological stress, revealing how psychological factors become hidden drivers of menstrual pain, and providing scientific psychological guidance methods and comprehensive coping strategies."
@@ -11,6 +11,7 @@ reading_time: "35 min read"
 reading_time_en: "35 min read"
 tags: ["mental health", "menstrual pain management", "stress relief", "psychological guidance", "cognitive behavioral therapy", "mindfulness therapy", "autonomic nervous testing", "quick relief techniques"]
 tags_en: ["mental health", "menstrual pain management", "stress relief", "psychological guidance", "cognitive behavioral therapy", "mindfulness therapy", "autonomic nervous testing", "quick relief techniques"]
+keywords: ["menstrual pain", "psychological stress", "mental health", "stress relief", "cognitive behavioral therapy", "mindfulness", "pain management", "PeriodHub"]
 category: "health"
 author: "PeriodHub Team"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"

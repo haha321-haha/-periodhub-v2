@@ -1,12 +1,13 @@
 ---
 title: "Complete Guide to Emergency Menstrual Pain Medication: Professional Solutions for Pain Relief Anywhere, Anytime"
 seo_title: "Emergency Menstrual Pain Medication Guide - Fast Relief | PeriodHub"
-seo_description: "Emergency guide to menstrual pain medication. Fast-acting relief options, dosage recommendations, and when to seek immediate medical attention for severe cramps."
+seo_description: "Emergency period pain medication guide: Fast-acting relief options, dosage recommendations, and when to seek immediate medical attention."
 canonical_url: "/en/articles/menstrual-pain-emergency-medication-guide"
 description: "Comprehensive guide to emergency menstrual pain medication, covering over-the-counter drug selection, carrying compliance requirements, emergency medication decision processes, and safe usage precautions to help women prepare adequately at school, workplace, and during travel."
 summary: "Detailed introduction to selection criteria, dosage guidance, and carrying methods for over-the-counter menstrual pain medications like ibuprofen and acetaminophen, providing emergency medication decision processes and safe usage precautions to ensure women can effectively relieve menstrual pain in any situation."
 category: "Understanding & Education"
 tags: ["emergency medication", "menstrual pain relief", "medication carrying", "drug safety", "emergency management"]
+keywords: ["emergency medication", "menstrual pain relief", "ibuprofen", "acetaminophen", "drug safety", "pain management", "PeriodHub"]
 author: "Period Hub Health Team"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"

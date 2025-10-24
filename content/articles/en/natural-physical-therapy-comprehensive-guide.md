@@ -7,11 +7,12 @@ summary: "Comprehensive introduction to 15 scientifically validated natural reli
 summary_zh: "全面介绍15种经过科学验证的痛经自然缓解方法，包括热疗、冷疗、按摩、瑜伽、针灸、艾灸、草药疗法、营养补充、阿育吠陀疗法等。融合现代科学与传统智慧，提供个性化的自然疗法选择指南。"
 tags: ["natural remedies", "physical therapy", "heat therapy", "cold therapy", "massage therapy", "yoga", "acupuncture", "moxibustion", "herbal remedies", "nutritional supplements", "ayurveda", "acupressure", "aromatherapy", "breathing techniques", "meditation"]
 tags_zh: ["自然疗法", "物理疗法", "热疗", "冷疗", "按摩疗法", "瑜伽", "针灸", "艾灸", "草药疗法", "营养补充", "阿育吠陀", "穴位按压", "精油疗法", "呼吸法", "冥想"]
+keywords: ["natural remedies", "physical therapy", "menstrual pain", "heat therapy", "massage", "yoga", "acupuncture", "PeriodHub"]
 category: "natural-therapies"
 category_zh: "natural-therapies"
 seo_title: "Complete Natural Therapy Guide for Menstrual Pain: 15 Scientifically Validated Relief Methods"
 seo_title_zh: "痛经自然疗法完整指南：15种科学验证的缓解方法 | 热疗按摩瑜伽针灸艾灸"
-seo_description: "Natural therapy guide: 15 scientifically validated methods - heat/cold therapy, massage, yoga, acupuncture, herbal nutrition for comprehensive menstrual pain relief."
+seo_description: "Natural therapy for period pain: 15 validated methods including heat/cold therapy, massage, yoga, acupuncture, and herbal nutrition for relief."
 seo_description_zh: "专业痛经自然疗法指南：详解15种科学验证的缓解方法，包括热疗冷疗、按摩瑜伽、针灸艾灸、草药营养、阿育吠陀疗法。融合传统中医理论与现代研究，提供个性化自然疗法选择。安全温和的长期自然健康管理方法，涵盖理论基础、操作技巧、安全注意事项等全面指导内容，专业可靠的自然疗法解决方案，无副作用的健康管理方式指导。"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 author: "periodhub.health Expert Team"

@@ -11,13 +11,14 @@ category: "即时缓解方案"
 category_en: "immediate-relief"
 seo_title: "经期恶心缓解指南：疼痛呕吐的科学应对方案"
 seo_title_en: "Menstrual Nausea Relief Guide: Scientific Solutions for Pain and Vomiting"
-seo_description: "经期恶心呕吐怎么缓解？医学机制深度解析+分级应对方案：生姜茶、穴位按压、药物干预等6种科学策略。含严重程度判断标准和就医指征。妇科专家推荐，立即查看详细方法！"
+seo_description: "经期恶心呕吐怎么缓解？医学机制深度解析+分级应对方案：生姜茶、穴位按压、药物干预等6种科学策略。含严重程度判断标准和就医指征。深入了解经期恶心的医学机制，从轻度恶心到重度呕吐，提供科学有效的缓解策略，妇科专家推荐，立即查看详细方法！"
 seo_description_en: "Period nausea relief: medical mechanisms + graded solutions. 6 strategies including ginger tea, acupressure & medication. Expert-recommended guidelines!"
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/menstrual-nausea-relief-guide"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "12分钟"
+keywords: ["经期恶心", "痛经呕吐", "即时缓解", "前列腺素", "穴位按压", "药物治疗", "PeriodHub"]
 ---
 
 # 经期恶心缓解指南：疼痛与呕吐的科学应对

@@ -11,7 +11,7 @@ category: "medical-education"
 category_en: "medical-education"
 seo_title: "痛经常见疑问专家解答：前列腺素机制与危险信号识别指南"
 seo_title_en: "Menstrual Pain FAQ: Expert Guide to Prostaglandin Mechanisms and Warning Signs"
-seo_description: "权威专家解答痛经5大高频疑问：为何如此痛苦、疼痛加重原因、是否致命、模拟器准确性等。基于科学证据的专业指导，帮助女性正确认知痛经。"
+seo_description: "权威专家解答痛经5大高频疑问：为何如此痛苦、疼痛加重原因、是否致命、模拟器准确性等。基于科学证据的专业指导，深度解析痛经机制、危险信号识别和疼痛评估方法，帮助女性正确认知痛经本质，实现科学健康管理。"
 seo_description_en: "Authoritative expert answers to 5 major menstrual pain questions: why so painful, causes of worsening, lethality concerns, simulator accuracy. Evidence-based professional guidance for proper dysmenorrhea understanding."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/menstrual-pain-faq-expert-answers"
@@ -21,6 +21,7 @@ reading_time: "15分钟"
 reading_time_en: "15 minutes"
 pdf_available: true
 pdf_download_url: "/downloads/menstrual-pain-faq-expert-answers.pdf"
+keywords: ["痛经FAQ", "专家解答", "痛经", "前列腺素", "医学教育", "疼痛评估", "PeriodHub"]
 ---
 
 # 痛经常见疑问与专家解答：5个高频问题的权威回应

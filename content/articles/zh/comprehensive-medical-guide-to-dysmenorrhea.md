@@ -11,7 +11,7 @@ category: "医学知识与教育"
 category_en: "medical-knowledge"
 seo_title: "痛经全解析：理解和管理月经疼痛的完整指南"
 seo_title_en: "Medical Guide to Dysmenorrhea: Authoritative Analysis of Professional Diagnosis and Treatment"
-seo_description: "全面解析痛经原因、评估工具、管理策略和就医指导。包含交互式疼痛追踪器和个性化建议，帮助女性科学管理经期疼痛。"
+seo_description: "全面解析痛经原因、评估工具、管理策略和就医指导。包含交互式疼痛追踪器和个性化建议，帮助女性科学管理经期疼痛。深入解析痛经的医学原理、诊断流程和科学治疗方法，从前列腺素机制到继发性痛经识别，从药物治疗到自然疗法，为女性提供全面的医学指导。"
 seo_description_en: "Authoritative medical guide: detailed explanation of dysmenorrhea pathophysiology, diagnostic criteria, and treatment protocols. Including differentiation between primary and secondary dysmenorrhea, medication selection, and comprehensive management strategies."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/comprehensive-medical-guide-to-dysmenorrhea"
@@ -19,6 +19,7 @@ featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-c
 schema_type: "Article"
 reading_time: "20分钟"
 reading_time_en: "20 minutes"
+keywords: ["痛经治疗", "医学诊断", "专业护理", "医学研究", "循证治疗", "妇科护理", "PeriodHub"]
 ---
 
 # 痛经医学指南：病因、诊断与科学治疗的完整解析

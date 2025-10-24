@@ -3,6 +3,7 @@ title: "Recommended Reading List: Become Your Own Menstrual Health Expert"
 seo_title: "Menstrual Health Recommended Reading List - Expert Resources | PeriodHub"
 seo_description: "Curated list of recommended books and resources on menstrual health. Expert-reviewed literature, scientific studies, and educational materials for period wellness."
 canonical_url: "/en/articles/recommended-reading-list"
+keywords: ["reading recommendations", "menstrual health books", "women's health education", "health resources", "expert literature", "educational materials", "PeriodHub"]
 title_zh: "推荐书单：成为自己的经期健康专家"
 summary: "Carefully selected 5-7 excellent books covering women's health, menstrual care, emotional management, and traditional medicine, helping you understand your body more deeply and care for yourself gently."
 summary_zh: "精心挑选5-7本优秀书籍，涵盖女性健康、经期护理、情绪管理和中医调理等多个领域，帮助你更深入地了解自己的身体，温柔地关爱自己。"

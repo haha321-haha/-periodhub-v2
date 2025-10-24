@@ -11,7 +11,7 @@ category: "自然疗法与平时调理"
 category_en: "natural-therapies"
 seo_title: "抗炎饮食缓解痛经：推荐食物与禁忌食物"
 seo_title_en: "Anti-Inflammatory Diet for Period Pain: Foods to Eat & Avoid"
-seo_description: "抗炎饮食缓解痛经 - 科学饮食方案减少经期炎症和疼痛，包括推荐食物、避免食物、营养搭配和食谱建议。通过饮食调理改善经期健康，从根源上减少痛经发生。"
+seo_description: "抗炎饮食缓解痛经 - 科学饮食方案减少经期炎症和疼痛，包括推荐食物、避免食物、营养搭配和食谱建议。通过饮食调理改善经期健康，从根源上减少痛经发生。了解如何采用抗炎饮食，作为一种有效策略来减轻经期痉挛的严重程度并改善经期整体健康，发现关键的推荐食物和应限制的食物。"
 seo_description_en: "Reduce menstrual cramp pain naturally with an anti-inflammatory diet. Get a guide to anti-inflammatory foods for periods and learn which foods to limit."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/anti-inflammatory-diet-period-pain"
@@ -19,6 +19,7 @@ featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-c
 schema_type: "Article"
 reading_time: "10分钟"
 reading_time_en: "10 minutes"
+keywords: ["抗炎饮食", "痛经营养", "经期饮食", "自然疗法", "月经健康", "食物疗法", "PeriodHub"]
 ---
 
 # 抗炎饮食：通过食物缓解经期疼痛指南

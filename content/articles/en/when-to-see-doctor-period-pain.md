@@ -7,11 +7,12 @@ summary: "Learn to recognize the warning signs that indicate your period pain ma
 summary_zh: "学会识别表明您的经期疼痛可能需要医疗关注的警示信号。了解正常不适与需要立即护理的症状之间的区别。"
 tags: ["medical emergency", "severe period pain", "when to see doctor", "period warning signs", "menstrual health", "emergency symptoms"]
 tags_zh: ["医疗急诊", "严重痛经", "何时就医", "经期警示信号", "月经健康", "紧急症状"]
+keywords: ["when to see doctor", "period pain", "warning signs", "medical emergency", "severe cramps", "menstrual health", "PeriodHub"]
 category: "medical-knowledge"
 category_zh: "医学知识与教育"
 seo_title: "Period Pain Warning Signs: When to See a Doctor Immediately"
 seo_title_zh: "痛经警示信号：何时需要立即就医"
-seo_description: "When to See a Doctor for Period Pain - Comprehensive guide on when to seek medical help for menstrual pain, how to describe symptoms, diagnostic tests, and treatment options for timely professional care and health safety."
+seo_description: "Period pain warning signs guide: When to seek medical help, symptom description, diagnostic tests, and treatment options for timely care."
 seo_description_zh: "When to See a Doctor for Period Pain - Comprehensive guide on when to seek medical help for menstrual pain, how to describe symptoms, diagnostic tests, and treatment options for timely professional care and health safety."
 author: "periodhub.health Expert Team"
 canonical_url: "/articles/when-to-see-doctor-period-pain"

@@ -8,6 +8,7 @@ category: "immediate-relief"
 category_zh: "即时缓解方案"
 tags: ["back pain care", "menstrual back pain", "pain management", "physical therapy", "medical guidance"]
 tags_zh: ["腰部护理", "经期腰痛", "疼痛管理", "物理疗法", "医学指导"]
+keywords: ["menstrual back pain", "back pain care", "pain management", "physical therapy", "relief methods", "PeriodHub"]
 author: "Period Hub Health Team"
 publishDate: "2024-12-19"
 lastModified: "2024-12-19"
@@ -15,7 +16,7 @@ featured: true
 reading_time: "12 minutes"
 reading_time_zh: "12分钟"
 seo_title: "Menstrual Back Pain Relief Guide: Expert Care & Scientific Methods"
-seo_description: "Comprehensive menstrual back pain care guide with WHO and ACOG-based strategies. Learn pain classification, immediate relief methods, exercise therapy, and warning signs for effective back pain management."
+seo_description: "Menstrual back pain care: WHO/ACOG-based strategies, pain classification, immediate relief, exercise therapy, and warning signs for effective management."
 canonical_url: "/en/articles/menstrual-back-pain-comprehensive-care-guide"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 ---

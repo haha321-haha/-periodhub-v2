@@ -6,6 +6,7 @@ summary: "Comprehensive guide on building long-term sustainable healthy lifestyl
 summary_zh: "全面指导如何建立长期可持续的健康生活方式，通过科学的饮食、运动、睡眠和压力管理策略，从根本上改善经期健康，减少痛经发生频率和严重程度。"
 tags: ["long-term health", "lifestyle", "menstrual management", "preventive care", "sustainability", "healthy habits"]
 tags_zh: ["长期健康", "生活方式", "经期管理", "预防保健", "可持续发展", "健康习惯"]
+keywords: ["long-term health", "healthy lifestyle", "menstrual management", "preventive care", "sustainable habits", "wellness", "PeriodHub"]
 category: "Health Management"
 category_zh: "健康管理"
 author: "PeriodHub Expert Team"

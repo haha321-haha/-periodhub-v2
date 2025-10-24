@@ -7,11 +7,12 @@ summary: "Comprehensive expert answers to 5 most frequently asked questions abou
 summary_en: "Comprehensive expert answers to 5 most frequently asked questions about menstrual pain. In-depth analysis of pain mechanisms, warning signs, causes of worsening pain, and simulator accuracy, helping women scientifically understand dysmenorrhea."
 tags: ["menstrual pain FAQ", "expert answers", "dysmenorrhea mechanism", "prostaglandins", "secondary dysmenorrhea", "warning signs", "pain assessment", "medical education"]
 tags_en: ["menstrual pain FAQ", "expert answers", "dysmenorrhea mechanism", "prostaglandins", "secondary dysmenorrhea", "warning signs", "pain assessment", "medical education"]
+keywords: ["menstrual pain FAQ", "expert answers", "dysmenorrhea", "prostaglandins", "warning signs", "pain assessment", "medical education", "PeriodHub"]
 category: "medical-education"
 category_en: "medical-education"
 seo_title: "Menstrual Pain FAQ: Expert Guide to Prostaglandin Mechanisms and Warning Signs"
 seo_title_en: "Menstrual Pain FAQ: Expert Guide to Prostaglandin Mechanisms and Warning Signs"
-seo_description: "Authoritative expert answers to 5 major menstrual pain questions: why so painful, causes of worsening, lethality concerns, simulator accuracy. Evidence-based professional guidance for proper dysmenorrhea understanding."
+seo_description: "Expert answers to 5 major period pain questions: pain causes, worsening factors, severity concerns, and simulator accuracy for better understanding."
 seo_description_en: "Authoritative expert answers to 5 major menstrual pain questions: why so painful, causes of worsening, lethality concerns, simulator accuracy. Evidence-based professional guidance for proper dysmenorrhea understanding."
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/menstrual-pain-faq-expert-answers"

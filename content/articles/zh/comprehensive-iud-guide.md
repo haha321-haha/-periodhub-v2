@@ -26,6 +26,7 @@ schema_type: "Article"
 reading_time: "25分钟"
 reading_time_zh: "25 分钟"
 pdf_available: false
+keywords: ["IUD指南", "避孕", "宫内节育器", "女性健康", "生殖健康", "避孕选择", "PeriodHub"]
 ---
 
 ## 引言

@@ -7,11 +7,12 @@ summary: "Understanding the role of nutrients, the connection between gut and ho
 summary_en: "Understanding the role of nutrients, the connection between gut and hormones, and when to seek medical help is key to achieving menstrual comfort. This article provides a comprehensive guide from scientific mechanisms to practical advice to help you better manage your menstrual health."
 tags: ["magnesium supplementation", "gut health", "menstrual pain relief", "nutritional therapy", "period management", "estrogen metabolism", "probiotics", "dietary guidance", "medical consultation", "women's health"]
 tags_en: ["magnesium supplementation", "gut health", "menstrual pain relief", "nutritional therapy", "period management", "estrogen metabolism", "probiotics", "dietary guidance", "medical consultation", "women's health"]
+keywords: ["magnesium", "gut health", "menstrual pain relief", "nutritional therapy", "probiotics", "estrogen metabolism", "dietary guidance", "PeriodHub"]
 category: "nutrition-health"
 category_en: "nutrition-health"
 seo_title: "Magnesium Balance Gut Health Menstrual Pain Relief: Evidence-Based Complete Guide to Period Care"
 seo_title_en: "Magnesium Balance Gut Health Menstrual Pain Relief: Evidence-Based Complete Guide to Period Care"
-seo_description: "Scientific analysis of magnesium supplementation mechanisms for menstrual pain relief, exploring gut health and menstrual cycle connections, providing dietary therapy plans and medical guidance. Evidence-based women's menstrual health management guide."
+seo_description: "Magnesium and gut health for period pain: Mechanisms, dietary plans, and medical guidance for effective menstrual health management."
 seo_description_en: "Scientific analysis of magnesium supplementation mechanisms for menstrual pain relief, exploring gut health and menstrual cycle connections, providing dietary therapy plans and medical guidance. Evidence-based women's menstrual health management guide."
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/magnesium-gut-health-comprehensive-guide"

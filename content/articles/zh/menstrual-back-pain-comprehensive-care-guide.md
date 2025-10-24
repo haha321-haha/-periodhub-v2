@@ -1,7 +1,7 @@
 ---
 title: "经期腰部深度护理指南：科学缓解与权威建议"
 seo_title: "月经背痛综合护理指南 - 全面缓解方案 | PeriodHub"
-seo_description: "月经背痛的综合护理指南。原因分析、缓解方法和预防策略，帮助女性有效管理经期背痛问题。"
+seo_description: "月经背痛的综合护理指南。原因分析、缓解方法和预防策略，帮助女性有效管理经期背痛问题。基于WHO和ACOG权威指南，详解经期腰痛的医学原理和科学护理方法，包含疼痛类型分类、即时缓解方案、运动疗法、营养干预和医疗预警信号。"
 description: "基于WHO和ACOG权威指南的经期腰痛深度护理方案，涵盖医学原理、疼痛分类、多维度缓解策略和预警信号识别，为女性提供专业的腰部护理指导。"
 summary: "详解经期腰痛的医学原理和科学护理方法，包含疼痛类型分类、即时缓解方案、运动疗法、营养干预和医疗预警信号，基于权威医学机构指南为女性提供全面的腰部深度护理方案。"
 category: "即时缓解方案"
@@ -15,6 +15,7 @@ reading_time_zh: "12分钟"
 canonical_url: "/zh/articles/menstrual-back-pain-comprehensive-care-guide"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
+keywords: ["背痛缓解", "经期背痛", "物理疗法", "疼痛管理", "运动疗法", "即时缓解", "PeriodHub"]
 ---
 
 # 经期腰部深度护理指南：科学缓解与权威建议

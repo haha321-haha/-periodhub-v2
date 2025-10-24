@@ -6,11 +6,12 @@ summary: "In-depth analysis of the medical principles, diagnostic procedures, an
 summary_zh: "深入分析痛经的医学原理、诊断程序和循证治疗方法。从前列腺素机制到继发性痛经识别，从药物治疗到自然疗法，为女性提供全面的医学指导。"
 tags: ["dysmenorrhea", "medical diagnosis", "pharmacological treatment", "gynecological diseases", "prostaglandins", "secondary dysmenorrhea", "NSAIDs", "hormone therapy"]
 tags_zh: ["痛经", "医学诊断", "药物治疗", "妇科疾病", "前列腺素", "继发性痛经", "NSAIDs", "激素治疗"]
+keywords: ["dysmenorrhea", "medical diagnosis", "pharmacological treatment", "prostaglandins", "secondary dysmenorrhea", "NSAIDs", "gynecological diseases", "PeriodHub"]
 category: "medical-knowledge"
 category_zh: "医学知识"
 seo_title: "Medical Guide to Dysmenorrhea: Authoritative Analysis of Professional Diagnosis and Treatment"
 seo_title_zh: "痛经医学指南：专业诊断与治疗权威分析"
-seo_description: "Medical dysmenorrhea guide: Pathophysiology, diagnosis standards, treatment protocols. Primary vs secondary differentiation, medication choices, management strategies."
+seo_description: "Dysmenorrhea medical guide: Pathophysiology, diagnosis standards, treatment protocols. Primary vs secondary differentiation and management strategies."
 seo_description_zh: "权威痛经医学指南：详细解释痛经病理生理学、诊断标准和治疗方案。包括原发性和继发性痛经的鉴别、药物选择和综合管理策略。基于最新医学研究，提供专业诊断流程、个性化治疗建议和长期健康管理方案，涵盖疼痛评估、治疗监测、预防保健等全方位医学指导内容，权威医学专家编写，临床验证有效，科学严谨的医学参考资料指南。"
 author: "periodhub.health Expert Team"
 canonical_url: "/en/articles/comprehensive-medical-guide-to-dysmenorrhea"

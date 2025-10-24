@@ -16,6 +16,7 @@ seo_description_en: "Natural therapy guide for menstrual pain: Detailed explanat
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/natural-physical-therapy-comprehensive-guide"
+keywords: ["自然疗法", "物理疗法", "热疗", "按摩", "瑜伽", "针灸", "艾灸", "草药疗法", "PeriodHub"]
 schema_type: "Article"
 reading_time: "32 分钟"
 reading_time_en: "32 minutes"

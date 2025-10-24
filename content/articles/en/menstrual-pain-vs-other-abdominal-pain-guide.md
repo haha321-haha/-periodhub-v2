@@ -1,12 +1,13 @@
 ---
 title: "Comprehensive Guide to Menstrual Pain vs Other Abdominal Pain: Recognizing Warning Signs and Making Informed Decisions"
 seo_title: "Menstrual Pain vs Other Abdominal Pain - How to Tell the Difference | PeriodHub"
-seo_description: "Learn to distinguish menstrual pain from other abdominal conditions. Warning signs, diagnostic tips, and when period pain requires medical evaluation."
+seo_description: "Distinguish period pain from other abdominal conditions: Warning signs, diagnostic tips, and when to seek medical evaluation for accurate diagnosis."
 canonical_url: "/en/articles/menstrual-pain-vs-other-abdominal-pain-guide"
 description: "Authoritative medical guide helping women accurately distinguish menstrual pain from other dangerous abdominal pain, including comparative analysis of heart attacks, acute appendicitis, kidney stones, and 5 major conditions with key warning sign identification and emergency management advice."
 summary: "Detailed comparison of menstrual pain with heart attacks, acute appendicitis, kidney stones, and other common abdominal pain, providing scientific differential diagnosis methods and warning sign identification checklists to help women make correct medical decisions at critical moments."
 category: "Understanding & Education"
 tags: ["menstrual pain identification", "abdominal pain diagnosis", "warning signs", "medical guidance", "emergency management"]
+keywords: ["menstrual pain", "abdominal pain", "pain diagnosis", "warning signs", "differential diagnosis", "emergency care", "PeriodHub"]
 author: "Period Hub Health Team"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"

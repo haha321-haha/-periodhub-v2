@@ -20,6 +20,7 @@ seo_title_en: "Complete Menstrual Stress Management Guide: Comprehensive Relief 
 seo_description: "Evidence-based menstrual stress management guide based on ACOG, APA, and NIH research, providing scientific stress relief strategies for North American working women."
 seo_description_en: "Evidence-based menstrual stress management guide based on ACOG, APA, and NIH research, providing scientific stress relief strategies for North American working women."
 canonical_url: "/en/articles/menstrual-stress-management-complete-guide"
+keywords: ["stress management", "menstrual stress", "workplace wellness", "psychological relief", "HPA axis", "cortisol management", "mental health", "PeriodHub"]
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 ---

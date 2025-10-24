@@ -5,9 +5,10 @@ summary: "Based on latest scientific research, an in-depth exploration of how th
 tags: ["standing meditation", "baduanjin", "tai chi", "menstrual pain relief", "traditional practices", "scientific research", "TCM wellness", "qi blood regulation", "natural therapy", "women's health"]
 category: "traditional-therapy"
 seo_title: "Standing Meditation, Baduanjin and Tai Chi for Menstrual Pain: Evidence-Based Traditional Practice Guide"
-seo_description: "Evidence-based guide to using standing meditation, Baduanjin, and Tai Chi for menstrual pain relief. Detailed practice methods, modern medical mechanisms, and personalized plans to help women safely and effectively manage period pain."
+seo_description: "Evidence-based guide: Zhan Zhuang, Baduanjin, Tai Chi for period pain relief. Practice methods, mechanisms, and safe personalized plans."
 author: "periodhub.health Expert Team"
 canonical_url: "/articles/zhan-zhuang-baduanjin-for-menstrual-pain-relief"
+keywords: ["standing meditation", "baduanjin", "tai chi", "traditional practices", "menstrual pain relief", "TCM wellness", "natural therapy", "PeriodHub"]
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "25 minutes"

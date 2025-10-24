@@ -7,11 +7,12 @@ summary: "Learn how adopting an anti-inflammatory diet can be a powerful strateg
 summary_zh: "了解如何采用抗炎饮食，作为一种有效策略来减轻经期痉挛的严重程度并改善经期整体健康。发现关键的推荐食物和应限制的食物。"
 tags: ["anti-inflammatory diet", "period pain", "nutrition", "diet for cramps", "natural remedies", "menstrual health", "food for periods"]
 tags_zh: ["抗炎饮食", "痛经", "营养", "经期饮食", "自然疗法", "月经健康", "经期食物"]
+keywords: ["anti-inflammatory diet", "period pain", "nutrition", "menstrual health", "diet for cramps", "natural remedies", "PeriodHub"]
 category: "natural-therapies"
 category_zh: "自然疗法与平时调理"
 seo_title: "Anti-Inflammatory Diet for Period Pain: Foods to Eat & Avoid"
 seo_title_zh: "抗炎饮食缓解痛经：推荐食物与禁忌食物"
-seo_description: "Anti-Inflammatory Diet for Period Pain - Scientific dietary approach to reduce menstrual inflammation and pain including recommended foods, foods to avoid, nutritional balance, and recipe suggestions for improved menstrual health."
+seo_description: "Anti-inflammatory diet for period pain: Science-backed foods to reduce inflammation. Nutritional balance tips and easy recipes for better menstrual health."
 seo_description_zh: "Anti-Inflammatory Diet for Period Pain - Scientific dietary approach to reduce menstrual inflammation and pain including recommended foods, foods to avoid, nutritional balance, and recipe suggestions for improved menstrual health."
 author: "periodhub.health Expert Team"
 canonical_url: "/articles/anti-inflammatory-diet-period-pain"

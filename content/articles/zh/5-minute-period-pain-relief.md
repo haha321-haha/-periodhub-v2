@@ -11,7 +11,7 @@ category: "即时缓解方案"
 category_en: "immediate-relief"
 seo_title: "5分钟快速缓解痛经：即时痉挛技巧"
 seo_title_en: "Quick Period Pain Relief in 5 Minutes: Instant Cramp Tips"
-seo_description: "5分钟快速缓解痛经方法：4种科学验证技巧-呼吸练习+穴位按摩+热敷+肌肉放松。办公室、学校、外出均可用。临床医生指导，立即见效，免费获取详细步骤！"
+seo_description: "5分钟快速缓解痛经方法：4种科学验证技巧-呼吸练习+穴位按摩+热敷+肌肉放松。办公室、学校、外出均可用。临床医生指导，立即见效，免费获取详细步骤！探索简单、可操作的技巧，在短短5分钟内快速缓解经期疼痛，非常适合紧急情况。"
 seo_description_en: "5-minute period pain relief: 4 proven methods - breathing, acupressure, heat & relaxation. Works anywhere: office, school, travel. Doctor-guided. Instant results!"
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/5-minute-period-pain-relief"
@@ -20,6 +20,7 @@ schema_type: "Article"
 reading_time: "6分钟"
 reading_time_zh: "6分钟"
 reading_time_en: "6 minutes"
+keywords: ["痛经缓解", "快速缓解方法", "即时缓解", "紧急技巧", "自然疗法", "立即缓解", "PeriodHub"]
 ---
 
 # 5分钟快速缓解痛经技巧

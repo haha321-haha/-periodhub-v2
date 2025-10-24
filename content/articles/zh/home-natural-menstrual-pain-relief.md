@@ -11,13 +11,14 @@ category: "自然疗法与平时调理"
 category_en: "natural-therapies"
 seo_title: "家庭自然痛经缓解方案：5分钟见效的居家护理方法"
 seo_title_en: "Home Natural Menstrual Pain Relief: 5-Minute Effective Home Care Methods"
-seo_description: "在家就能缓解痛经！科学验证的自然疗法包含热敷、穴位按压、营养调理等方法，5分钟快速见效，安全无副作用。"
+seo_description: "在家就能缓解痛经！科学验证的自然疗法包含热敷、穴位按压、营养调理等方法，5分钟快速见效，安全无副作用。专为家庭环境设计的自然痛经缓解方案，从5分钟快速缓解到长期调理计划，让您在家就能有效管理经期疼痛。"
 seo_description_en: "Relieve menstrual pain at home! Scientifically validated natural therapies including heat therapy, acupressure, and nutritional care, effective in 5 minutes, safe with no side effects."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/home-natural-menstrual-pain-relief"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "10分钟"
+keywords: ["家庭疗法", "自然缓解", "自我护理", "热敷疗法", "穴位按压", "居家治疗", "PeriodHub"]
 ---
 
 # 家庭自我护理方案：5分钟见效的自然痛经缓解方法

@@ -17,6 +17,7 @@ seo_title_zh: "NSAIDs痛经治疗专业指南：安全用药与剂量计算 | pe
 seo_description: "NSAID guide for menstrual pain: Pharmacological mechanisms, safe usage protocols, dosage calculation. Professional guidance for scientific and safe pain relief methods."
 seo_description_zh: "NSAIDs痛经治疗专业指南 - 详解布洛芬、萘普生等非甾体抗炎药的药理机制、安全用药、剂量计算和效果优化。包含互动式用药计算器和副作用管理，帮助您科学安全地缓解痛经。专业安全的科学用药指导，涵盖药物选择、用药时机、剂量调整、不良反应监测等完整用药管理方案，权威医学专家指导，安全有效的药物治疗方法。"
 canonical_url: "/en/articles/nsaid-menstrual-pain-professional-guide"
+keywords: ["NSAIDs", "medication guide", "safe usage", "ibuprofen", "naproxen", "dosage calculation", "pain medication", "PeriodHub"]
 schema_type: "Article"
 ---
 

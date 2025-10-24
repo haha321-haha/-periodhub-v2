@@ -3,9 +3,10 @@ title: "Natural Period Pain Relief & When to Seek Medical Care: A Comprehensive 
 date: "2024-12-19"
 summary: "Learn safe natural period pain relief methods while understanding when to seek medical help. Master anti-inflammatory diet, heat therapy, and quick techniques."
 tags: ["period pain relief", "natural remedies", "when to see doctor", "anti-inflammatory diet", "heat therapy", "menstrual health", "warning signs", "period care"]
+keywords: ["period pain relief", "natural remedies", "when to see doctor", "medical care", "warning signs", "menstrual health", "PeriodHub"]
 category: "health-management"
 seo_title: "Natural Period Pain Relief & Medical Care Guide: Complete Strategy for Menstrual Health"
-seo_description: "Learn natural period pain relief methods including anti-inflammatory diet, heat therapy, and quick techniques. Understand warning signs for medical care."
+seo_description: "Natural period pain relief and medical care guide: Anti-inflammatory diet, heat therapy, quick techniques, and warning signs for seeking help."
 author: "periodhub.health Expert Team"
 canonical_url: "/articles/when-to-seek-medical-care-comprehensive-guide"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"

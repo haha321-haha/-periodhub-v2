@@ -1,12 +1,13 @@
 ---
 title: "Can Menstrual Pain Cause Back Pain? 5 Surprising Facts"
 seo_title: "Menstrual Pain and Back Pain Connection - Complete Guide | PeriodHub"
-seo_description: "Understand the connection between menstrual pain and back pain. Causes, relief methods, and proven strategies to manage both period and back pain effectively."
+seo_description: "Period pain and back pain connection: Causes, relief methods, and proven strategies to manage both menstrual and back pain effectively."
 canonical_url: "/en/articles/menstrual-pain-back-pain-connection"
 description: "In-depth exploration of the scientific connection between menstrual pain and back pain, revealing 5 surprising medical facts including anatomical principles, neural conduction mechanisms, and effective comprehensive management strategies."
 summary: "Based on latest medical research, detailed analysis of physiological mechanisms behind menstrual pain-induced back pain, providing professional identification methods and targeted treatment recommendations to help women better understand and manage menstrual pain."
 category: "Understanding & Education"
 tags: ["menstrual pain", "back pain", "pain mechanisms", "neural conduction", "pain management"]
+keywords: ["menstrual pain", "back pain", "pain connection", "neural conduction", "pain mechanisms", "relief strategies", "PeriodHub"]
 author: "Period Hub Health Team"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"

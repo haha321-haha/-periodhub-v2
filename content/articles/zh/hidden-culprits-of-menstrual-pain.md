@@ -1,7 +1,7 @@
 ---
 title: "痛经的隐藏帮凶：心理压力与缓解之道——心理疏导全解析"
 seo_title: "痛经的隐藏罪魁祸首 - 意外原因 | PeriodHub"
-seo_description: "揭示你可能不知道的痛经隐藏原因。饮食、生活方式和环境因素如何加重痛经以及如何解决。"
+seo_description: "揭示你可能不知道的痛经隐藏原因。饮食、生活方式和环境因素如何加重痛经以及如何解决。深入探讨痛经与心理压力之间的复杂关系，揭示心理因素如何成为痛经的隐形推手，并提供科学的心理疏导方法和综合应对策略。"
 canonical_url: "/zh/articles/hidden-culprits-of-menstrual-pain"
 title_zh: "痛经的隐藏帮凶：心理压力与缓解之道——心理疏导全解析"
 summary: "深入探讨痛经与心理压力之间的复杂关系，揭示心理因素如何成为痛经的隐形推手，并提供科学的心理疏导方法和综合应对策略。"
@@ -14,6 +14,7 @@ tags_zh: ["心理健康", "痛经管理", "压力缓解", "心理疏导", "认�
 category: "health"
 author: "PeriodHub团队"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
+keywords: ["心理压力", "心理健康", "压力管理", "隐藏原因", "情绪健康", "身心联系", "PeriodHub"]
 ---
 
 # 痛经的隐藏帮凶：心理压力与缓解之道——心理疏导全解析

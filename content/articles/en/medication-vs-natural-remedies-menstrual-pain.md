@@ -1,12 +1,13 @@
 ---
 title: "Medication vs Natural Remedies: Which Menstrual Pain Relief Method Is Right for You?"
 seo_title: "Medication vs Natural Remedies for Menstrual Pain - What Works Best | PeriodHub"
-seo_description: "Compare medication and natural remedies for menstrual pain. Evidence-based analysis, pros and cons, and expert recommendations for effective period pain relief."
+seo_description: "Medication vs natural remedies for period pain: Evidence-based comparison, pros and cons, and expert recommendations for effective relief choices."
 canonical_url: "/en/articles/medication-vs-natural-remedies-menstrual-pain"
 description: "Comprehensive comparison of medication and natural remedies for menstrual pain relief, covering effectiveness, safety, and suitability based on scientific evidence to provide personalized selection guidance for optimal menstrual pain management."
 summary: "In-depth analysis of the pros and cons of medication and natural remedies, including NSAIDs, hormonal therapy, herbs, physical therapy, and other options, providing evidence-based decision framework and professional recommendations."
 category: "Understanding & Education"
 tags: ["medication treatment", "natural remedies", "menstrual pain relief", "treatment options", "personalized medicine"]
+keywords: ["medication treatment", "natural remedies", "menstrual pain relief", "NSAIDs", "treatment comparison", "personalized medicine", "PeriodHub"]
 author: "Period Hub Health Team"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 publishDate: "2024-12-19"

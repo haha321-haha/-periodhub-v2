@@ -7,6 +7,7 @@ summary: "Need fast relief from menstrual cramps? Explore simple, actionable tec
 summary_zh: "需要快速缓解经期痉挛？探索您现在就可以使用的简单、可操作的技巧，在短短5分钟内快速缓解经期疼痛，非常适合紧急情况。"
 tags: ["quick relief", "immediate relief", "period pain", "cramps", "emergency tips", "instant relief"]
 tags_zh: ["快速缓解", "即时缓解", "痛经", "痉挛", "紧急技巧", "立即缓解"]
+keywords: ["quick relief", "immediate relief", "period pain", "menstrual cramps", "emergency tips", "PeriodHub"]
 category: "immediate-relief"
 category_zh: "即时缓解方案"
 seo_title: "Quick Period Pain Relief in 5 Minutes: Instant Cramp Tips"

@@ -8,8 +8,9 @@ category: "自然疗法"
 tags: ["精油疗法", "痛经缓解", "自然疗法", "芳香疗法", "女性健康"]
 featured_image: "/images/essential-oils/lavender_essential_oil_800x800.png"
 seo_title: "精油芳香疗法缓解痛经：科学有效的自然疗法指南"
-seo_description: "专业详解6种核心精油缓解痛经的科学原理与使用方法。薰衣草、肉桂、玫瑰等精油的功效、安全指南，基于科学研究的自然痛经缓解方案。"
+seo_description: "专业详解6种核心精油缓解痛经的科学原理与使用方法。薰衣草、肉桂、玫瑰等精油的功效、安全指南，基于科学研究的自然痛经缓解方案。权威专业的精油缓解痛经指南，详解薰衣草、肉桂、玫瑰、马郁兰、生姜、罗马洋甘菊六种核心精油的科学功效、使用方法和安全指南。"
 canonical_url: "/zh/articles/essential-oils-aromatherapy-menstrual-pain-guide"
+keywords: ["精油疗法", "痛经缓解", "自然疗法", "芳香疗法", "女性健康", "精油", "PeriodHub"]
 ---
 
 # 精油芳香疗法缓解痛经：全面指南

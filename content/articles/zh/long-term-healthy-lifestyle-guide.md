@@ -18,6 +18,7 @@ featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-c
 schema_type: "Article"
 reading_time: "25分钟"
 reading_time_en: "25 minutes"
+keywords: ["长期健康", "生活方式", "经期管理", "预防保健", "可持续发展", "健康习惯", "PeriodHub"]
 ---
 
 # 长期健康生活方式指南：建立可持续的经期健康管理策略

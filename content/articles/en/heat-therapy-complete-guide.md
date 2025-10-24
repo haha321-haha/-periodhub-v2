@@ -7,6 +7,7 @@ summary: "Discover how applying heat is a scientifically supported, simple, yet 
 summary_zh: "了解热敷这一科学支持的简便方法如何有效缓解经期痉挛和不适。探索其背后的科学原理、不同应用方法及重要的安全注意事项。"
 tags: ["heat therapy", "period pain relief", "natural remedies", "immediate relief", "physical therapy", "menstrual cramps"]
 tags_zh: ["热敷疗法", "痛经缓解", "自然疗法", "即时缓解", "物理疗法", "经期痉挛"]
+keywords: ["heat therapy", "period pain relief", "heating pad", "natural remedies", "menstrual cramps", "immediate relief", "PeriodHub"]
 category: "immediate-relief"
 category_zh: "即时缓解方案"
 seo_title: "Heat Therapy for Period Pain: Complete Guide & How it Works"

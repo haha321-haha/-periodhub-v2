@@ -11,13 +11,14 @@ category: "即时缓解方案"
 category_en: "immediate-relief"
 seo_title: "痛经伴随症状大全：腹胀呕吐发烧的科学应对"
 seo_title_en: "Complete Guide to Menstrual Pain Symptoms: Scientific Solutions for Bloating, Vomiting & Fever"
-seo_description: "痛经伴随腹胀、呕吐、发烧？了解症状成因，掌握分级应对方案，识别危险信号，科学管理复杂经期症状。"
+seo_description: "痛经伴随腹胀、呕吐、发烧？了解症状成因，掌握分级应对方案，识别危险信号，科学管理复杂经期症状。全面解析痛经伴随症状的成因与应对策略，提供症状关联矩阵、分级处理方案和危险信号识别，帮助女性科学应对复杂经期症状。"
 seo_description_en: "Menstrual pain with bloating, vomiting, fever? Learn symptom causes, master graded response plans, identify warning signs, and scientifically manage complex menstrual symptoms."
 author: "periodhub.health 专家团队"
 canonical_url: "/zh/articles/menstrual-pain-accompanying-symptoms-guide"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 reading_time: "15分钟"
+keywords: ["痛经伴随症状", "经期腹胀", "经期呕吐", "经期发烧", "症状矩阵", "应急处理", "PeriodHub"]
 ---
 
 # 痛经伴随症状大全：腹胀、呕吐、发烧的应对方案

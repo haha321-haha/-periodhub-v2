@@ -17,6 +17,7 @@ seo_description_zh: "专业分析职业压力、睡眠质量、饮食习惯、�
 canonical_url: "/zh/articles/comprehensive-report-non-medical-factors-menstrual-pain"
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
+keywords: ["痛经管理", "职业压力", "生活方式因素", "环境因素", "健康管理", "非医疗因素", "PeriodHub"]
 ---
 
 # 综合报告：非医疗因素对痛经的影响

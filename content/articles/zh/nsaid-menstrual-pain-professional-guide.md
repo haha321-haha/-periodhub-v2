@@ -17,6 +17,7 @@ seo_title_zh: "NSAIDs痛经治疗专业指南：安全用药与剂量计算 | pe
 seo_description: "NSAIDs痛经治疗专业指南 - 详解布洛芬、萘普生等非甾体抗炎药的药理机制、安全用药、剂量计算和效果优化。包含互动式用药计算器和副作用管理，帮助您科学安全地缓解痛经。专业安全的科学用药指导，涵盖药物选择、用药时机、剂量调整、不良反应监测等完整用药管理方案，权威医学专家指导，安全有效的药物治疗方法。"
 seo_description_zh: "NSAIDs痛经治疗专业指南 - 详解布洛芬、萘普生等非甾体抗炎药的药理机制、安全用药、剂量计算和效果优化。包含互动式用药计算器和副作用管理，助您科学安全地缓解痛经。"
 canonical_url: "/zh/articles/nsaid-menstrual-pain-professional-guide"
+keywords: ["NSAIDs", "药物治疗", "安全用药", "布洛芬", "萘普生", "剂量计算", "副作用管理", "PeriodHub"]
 schema_type: "Article"
 ---
 

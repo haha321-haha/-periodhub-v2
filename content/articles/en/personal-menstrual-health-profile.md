@@ -16,6 +16,7 @@ seo_title_zh: "建立个人经期健康档案 - 科学追踪与个性化管理�
 seo_description: "Personal menstrual health profile guide: Build comprehensive tracking with cycle monitoring, symptom recording, factor analysis for personalized management solutions."
 seo_description_zh: "详细指导如何建立完整的个人经期健康档案，包括周期追踪、症状记录、影响因素分析。提供实用工具和方法，帮助女性实现个性化的经期健康管理。科学系统的个性化健康追踪与管理方案，涵盖数据收集、趋势分析、健康评估、改善建议等全方位健康档案管理工具和方法，专业可靠的个人健康管理系统，科学有效的健康监测工具方案指导。"
 canonical_url: "/en/articles/personal-menstrual-health-profile"
+keywords: ["menstrual tracking", "health profile", "symptom recording", "personalized management", "cycle monitoring", "data analysis", "health tracking", "PeriodHub"]
 featured_image: "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg"
 schema_type: "Article"
 ---

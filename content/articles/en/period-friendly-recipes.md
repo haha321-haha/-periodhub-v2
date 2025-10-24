@@ -3,6 +3,7 @@ title: "Period-Friendly Recipes: Nourish Your Body and Soul During 'Those Days'"
 seo_title: "Period-Friendly Recipes - Nutritious Meals for Menstrual Health | PeriodHub"
 seo_description: "Delicious period-friendly recipes to ease menstrual symptoms. Anti-inflammatory meals, nutritious dishes, and foods that help reduce period pain naturally."
 canonical_url: "/en/articles/period-friendly-recipes"
+keywords: ["period-friendly recipes", "menstrual nutrition", "anti-inflammatory diet", "healthy recipes", "period care", "nutritious meals", "food therapy", "PeriodHub"]
 title_zh: "经期友好食谱：滋养身心，舒适度过\"那几天\""
 description: "Anti-Inflammatory Diet Recipes: Omega-3 and magnesium-rich meals for menstrual pain relief. 8-10 simple, delicious, nutritious recipes covering breakfast, lunch, dinner, and snacks"
 summary_zh: "精选8-10款简单易学、美味又营养的食谱，涵盖早餐、午餐、晚餐及零食饮品，帮助你通过天然食物调理身体，舒适度过经期。"

@@ -121,18 +121,6 @@
     <priority>1</priority>
   </url>
   <url>
-    <loc>https://www.periodhub.health/zh/special-therapies</loc>
-    <lastmod>2025-09-15T12:48:11.628Z</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.periodhub.health/en/special-therapies</loc>
-    <lastmod>2025-09-15T12:48:11.628Z</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1</priority>
-  </url>
-  <url>
     <loc>https://www.periodhub.health/zh/privacy-policy</loc>
     <lastmod>2025-09-15T12:48:11.628Z</lastmod>
     <changefreq>weekly</changefreq>

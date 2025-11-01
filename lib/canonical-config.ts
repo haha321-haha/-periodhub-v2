@@ -28,7 +28,7 @@ export function getHreflangUrls(path: string = "") {
   return {
     "zh-CN": `${CANONICAL_BASE_URL}/zh${cleanPath}`,
     "en-US": `${CANONICAL_BASE_URL}/en${cleanPath}`,
-    "x-default": `${CANONICAL_BASE_URL}/zh${cleanPath}`, // 默认中文版本
+    "x-default": `${CANONICAL_BASE_URL}/en${cleanPath}`, // ✅ 修复：默认英文版本（北美市场优先）
   };
 }
 

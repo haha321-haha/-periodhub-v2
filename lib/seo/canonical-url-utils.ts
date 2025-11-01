@@ -21,7 +21,7 @@ export function generateHreflangUrls(locale: string, path: string) {
   return {
     "zh-CN": `${BASE_URL}/zh${cleanPath}`,
     "en-US": `${BASE_URL}/en${cleanPath}`,
-    "x-default": `${BASE_URL}/zh${cleanPath}`, // 默认中文版本
+    "x-default": `${BASE_URL}/en${cleanPath}`, // ✅ 修复：默认英文版本（北美市场优先）
   };
 }
 

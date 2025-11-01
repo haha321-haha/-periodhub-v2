@@ -1158,7 +1158,7 @@
       "precisionPrediction": "精准预测",
       "precisionPredictionDesc": "基于数据的周期预测"
     },
-    "immediateRelief": "⚡ 即时缓解",
+    "immediateRelief": "获取缓解方案",
     "toolsCount": "8个",
     "articlesCount": "43篇",
     "cta": {
@@ -1177,7 +1177,8 @@
       "cycleTrackerDesc": "基于历史数据的智能预测，提前做好准备",
       "constitutionTest": "体质评估",
       "constitutionTestDesc": "中医体质辨识与调理建议，个性化健康方案"
-    }
+    },
+    "ctaSupportText": "免费 • 3分钟 • 科学依据"
   },
   "navigation": {
     "home": "首页",

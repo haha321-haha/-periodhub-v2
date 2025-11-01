@@ -188,6 +188,9 @@ components/stress-management/
 scripts/detect-stress-management-hardcode.js
 stress-management-translation-keys.json
 content/articles/*/menstrual-stress-management-*.md
-参考代码/*/articles/stress-menstrual-health.html
-hub-latest-main*/content/articles/*/menstrual-stress-management-*.md
-hub-latest-main*/参考代码/*/articles/stress-menstrual-health.html
+参考代码/
+女性经期管理营销推广/
+修复建议文档/
+backups/
+seo-validation-report.json
+.vercel

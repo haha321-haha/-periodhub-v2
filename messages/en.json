@@ -194,7 +194,7 @@
       "precisionPrediction": "Precision Prediction",
       "precisionPredictionDesc": "AI intelligent analysis"
     },
-    "immediateRelief": "Immediate Relief",
+    "immediateRelief": "Get My Relief Plan",
     "cta": {
       "primary": "Interactive Tools",
       "secondary": "Health Guide"
@@ -213,7 +213,8 @@
       "cycleTrackerDesc": "Comprehensive menstrual cycle management",
       "constitutionTest": "TCM Constitution Test",
       "constitutionTestDesc": "Personalized health assessment"
-    }
+    },
+    "ctaSupportText": "Free • 3 minutes • Science-based"
   },
   "home": {
     "hero": {

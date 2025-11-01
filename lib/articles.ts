@@ -28,6 +28,68 @@ export interface Article {
 
 const articlesDirectory = path.join(process.cwd(), "content/articles");
 
+// ===== Day 2: 基于预生成索引的缓存和加载函数 =====
+
+// 运行时缓存（基于预生成索引）
+let cachedArticlesIndex: Record<string, Article[]> | null = null;
+
+/**
+ * 从预生成的索引加载文章列表
+ * ✅ 避免运行时文件系统扫描
+ * ✅ 兼容Vercel Edge Functions
+ */
+function loadArticlesIndex(): Record<string, Article[]> {
+  if (cachedArticlesIndex !== null) {
+    return cachedArticlesIndex;
+  }
+
+  try {
+    const indexPath = path.join(process.cwd(), 'public/articles-index.json');
+    const indexData = fs.readFileSync(indexPath, 'utf8');
+    cachedArticlesIndex = JSON.parse(indexData);
+    return cachedArticlesIndex;
+  } catch (error) {
+    console.error('❌ Failed to load articles index:', error);
+    // 降级到空数组
+    return { en: [], zh: [] };
+  }
+}
+
+/**
+ * 获取文章列表（分页）
+ * ✅ 基于预生成索引
+ * ✅ 支持分页参数
+ * ✅ 不包含content字段
+ */
+export function getArticlesList(
+  locale: string = 'en',
+  page: number = 1,
+  limit: number = 10
+) {
+  const articlesIndex = loadArticlesIndex();
+  const articles = articlesIndex[locale] || [];
+
+  // 按日期排序（最新优先）
+  const sortedArticles = articles.sort((a, b) => 
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+  // 分页逻辑
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const paginatedArticles = sortedArticles.slice(startIndex, endIndex);
+
+  return {
+    articles: paginatedArticles,
+    total: articles.length,
+    page,
+    limit,
+    totalPages: Math.ceil(articles.length / limit)
+  };
+}
+
+// ===== End Day 2 additions =====
+
 // 递归扫描目录获取所有markdown文件
 function scanDirectoryRecursively(
   dir: string,
@@ -61,31 +123,13 @@ function scanDirectoryRecursively(
 }
 
 export function getAllArticles(locale: string = "en"): Article[] {
-  try {
-    const articlesPath =
-      locale === "zh"
-        ? path.join(articlesDirectory, "zh")
-        : path.join(articlesDirectory, "en");
-
-    if (!fs.existsSync(articlesPath)) {
-      return [];
-    }
-
-    // 使用递归扫描获取所有文章slug
-    const articleSlugs = scanDirectoryRecursively(articlesPath);
-
-    const articles = articleSlugs
-      .map((slug) => getArticleBySlug(slug, locale))
-      .filter((article) => article !== null) as Article[];
-
-    // Sort articles by date (newest first)
-    return articles.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-    );
-  } catch (error) {
-    console.error("Error reading articles:", error);
-    return [];
-  }
+  // Day 2: 使用预生成索引（保留向后兼容）
+  const articlesIndex = loadArticlesIndex();
+  const articles = articlesIndex[locale] || [];
+  
+  return articles.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
 }
 
 // Slug映射表 - 处理URL slug与实际文件名的映射

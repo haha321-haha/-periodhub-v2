@@ -11,16 +11,16 @@ const ENCODED_EMAIL = 'dGl5aWJhb2Z1QG91dGxvb2suY29t';
  * @returns 解码后的邮箱地址
  */
 export function decodeEmail(): string {
+  // 服务端和客户端都返回相同的邮箱地址，避免hydration错误
   if (typeof window === 'undefined') {
-    // 服务端渲染时返回占位符
-    return 'contact@example.com';
+    return 'tiyibaofu@outlook.com';
   }
   
   try {
     return atob(ENCODED_EMAIL);
   } catch (error) {
     console.error('Failed to decode email:', error);
-    return 'contact@example.com';
+    return 'tiyibaofu@outlook.com';
   }
 }
 
@@ -63,8 +63,9 @@ export function generateMailtoLink(subject?: string, body?: string): string {
  * @returns 格式化的邮箱显示文本
  */
 export function displayEmail(): string {
+  // 服务端和客户端初始渲染都返回相同内容，避免hydration错误
   if (typeof window === 'undefined') {
-    return '联系我们';
+    return 'tiyibaofu [at] outlook.com';
   }
   
   const email = decodeEmail();

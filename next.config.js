@@ -504,17 +504,6 @@ const nextConfig = {
         destination: '/en/health-guide/myths-facts',
         permanent: true
       },
-      // 🎯 站点地图文件重定向
-      {
-        source: '/zh/sitemap_index.xml',
-        destination: '/sitemap_index.xml',
-        permanent: true
-      },
-      {
-        source: '/zh/sitemap.txt',
-        destination: '/sitemap.txt',
-        permanent: true
-      },
       // 🎯 Atom Feed 重定向
       {
         source: '/zh/atom.xml',

@@ -211,7 +211,7 @@
       "painTrackerDesc": "Smart pain pattern recording",
       "cycleTracker": "Cycle Tracker",
       "cycleTrackerDesc": "Comprehensive menstrual cycle management",
-      "constitutionTest": "Constitution Test",
+      "constitutionTest": "TCM Constitution Test",
       "constitutionTestDesc": "Personalized health assessment"
     }
   },
@@ -1566,9 +1566,9 @@
       "nutrition_generator": "Nutrition Generator",
       "pain_tracker": "Pain Tracker",
       "symptom_assessment": "Symptom Assessment",
-      "constitution_test": "Constitution Test",
+      "constitution_test": "TCM Constitution Test",
       "cycle_tracker": "Cycle Tracker",
-      "constitution": "Constitution Test",
+      "constitution": "TCM Constitution Test",
       "tracker": "Tracker",
       "nutrition": "Nutrition",
       "assessment": "Assessment",
@@ -1621,7 +1621,10 @@
       "cycle_nutrition": "Period-Friendly Recipes",
       "cycle_management": "When to Seek Medical Care",
       "anti_inflammatory": "Anti-Inflammatory Diet Guide",
-      "ginger_tea": "Ginger Tea for Menstrual Pain Relief"
+      "ginger_tea": "Ginger Tea for Menstrual Pain Relief",
+      "natural_therapy": "Natural Physical Therapy Guide",
+      "tcm_exercise": "TCM Exercise Guide",
+      "diet": "Anti-Inflammatory Diet Guide"
     }
   },
   "healthStatistics": {
@@ -2661,7 +2664,7 @@
           "benefitsValue": "Customized meal plans for pain relief and hormonal balance"
         },
         "constitutionTest": {
-          "title": "Constitution Test",
+          "title": "TCM Constitution Test",
           "description": "Understand your TCM constitution type",
           "benefits": "Benefits:",
           "benefitsValue": "Personalized therapy recommendations based on your constitution"
@@ -4824,7 +4827,7 @@
       "label": "Prerequisites",
       "completeFirst": "Complete first:",
       "cycleTracker": "Cycle Tracker",
-      "constitutionTest": "Constitution Test"
+      "constitutionTest": "TCM Constitution Test"
     },
     "nutritionGenerator": {
       "title": "Nutrition Recommendation Generator",
@@ -5114,7 +5117,7 @@
       "cta": "Start Tracking"
     },
     "constitutionTest": {
-      "title": "Constitution Test",
+      "title": "TCM Constitution Test",
       "description": "Traditional Chinese Medicine constitution identification with personalized care recommendations",
       "cta": "Start Test",
       "subtitle": "Understand your TCM constitution type through professional questionnaire and get personalized health recommendations",

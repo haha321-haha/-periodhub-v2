@@ -287,49 +287,49 @@ const getConstitutionTestRecommendations = (locale: Locale) => {
     },
   ];
 
-  // 相关文章推荐
+  // 相关文章推荐 - 使用存在的文章
   const relatedArticles = [
     {
-      id: "tcm-constitution-guide",
-      title: isZh ? "中医体质调理完全指南" : "Complete TCM Constitution Guide",
+      id: "natural-physical-therapy-comprehensive-guide",
+      title: isZh ? "自然物理疗法综合指南" : "Natural Physical Therapy Guide",
       description: isZh
-        ? "深入了解中医体质理论，掌握体质调理的科学方法"
-        : "Deep understanding of TCM constitution theory and scientific conditioning methods",
-      href: `/${locale}/articles/tcm-constitution-complete-guide`,
-      category: isZh ? "中医调理" : "tcm-conditioning",
-      readTime: isZh ? "12分钟阅读" : "12 min read",
+        ? "探索多种自然疗法，找到适合你体质的缓解方法"
+        : "Explore various natural therapies to find relief methods suitable for your constitution",
+      href: `/${locale}/articles/natural-physical-therapy-comprehensive-guide`,
+      category: isZh ? "自然疗法" : "natural-therapy",
+      readTime: isZh ? "10分钟阅读" : "10 min read",
       priority: "high",
       icon: "🌿",
       iconColor: "green",
-      anchorTextType: "tcm_guide",
+      anchorTextType: "natural_therapy",
     },
     {
-      id: "acupoint-massage-techniques",
-      title: isZh ? "穴位按摩技巧大全" : "Complete Acupoint Massage Guide",
+      id: "zhan-zhuang-baduanjin-for-menstrual-pain-relief",
+      title: isZh ? "站桩八段锦缓解痛经" : "Zhan Zhuang & Baduanjin for Pain Relief",
       description: isZh
-        ? "掌握专业穴位按摩手法，缓解经期不适"
-        : "Master professional acupoint massage techniques for menstrual relief",
-      href: `/${locale}/articles/acupoint-massage-complete-guide`,
-      category: isZh ? "穴位疗法" : "acupoint-therapy",
-      readTime: isZh ? "10分钟阅读" : "10 min read",
+        ? "传统中医功法，调理体质改善痛经"
+        : "Traditional Chinese exercises to improve constitution and relieve pain",
+      href: `/${locale}/articles/zhan-zhuang-baduanjin-for-menstrual-pain-relief`,
+      category: isZh ? "中医调理" : "tcm-conditioning",
+      readTime: isZh ? "12分钟阅读" : "12 min read",
       priority: "high",
-      icon: "👐",
+      icon: "🧘‍♀️",
       iconColor: "purple",
-      anchorTextType: "acupoint_massage",
+      anchorTextType: "tcm_exercise",
     },
     {
-      id: "menstrual-nutrition-tcm",
-      title: isZh ? "经期营养中医调理" : "Menstrual Nutrition TCM Guide",
+      id: "anti-inflammatory-diet-period-pain",
+      title: isZh ? "抗炎饮食缓解痛经" : "Anti-Inflammatory Diet for Period Pain",
       description: isZh
-        ? "根据体质类型制定个性化营养方案"
-        : "Personalized nutrition plans based on constitution types",
-      href: `/${locale}/articles/menstrual-nutrition-tcm-guide`,
-      category: isZh ? "营养调理" : "nutrition-conditioning",
+        ? "通过饮食调理体质，从根本上改善痛经"
+        : "Improve constitution through diet to fundamentally relieve period pain",
+      href: `/${locale}/articles/anti-inflammatory-diet-period-pain`,
+      category: isZh ? "营养调理" : "nutrition",
       readTime: isZh ? "8分钟阅读" : "8 min read",
       priority: "medium",
       icon: "🥗",
       iconColor: "orange",
-      anchorTextType: "tcm_nutrition",
+      anchorTextType: "diet",
     },
   ];
 

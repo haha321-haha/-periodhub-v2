@@ -2,7 +2,19 @@
 *.md
 *.sh
 *.py
+# 排除所有JS文件，但保留scripts目录下的构建脚本
 *.js
+!scripts/build-articles-index.js
+!scripts/verify-translation-sync.js
+!scripts/generate-translation-types.js
+!scripts/check-translation-sync.js
+!scripts/generate-validation-report.js
+!scripts/check-client-components.js
+!scripts/detect-hardcode.js
+!scripts/detect-stress-management-hardcode.js
+!scripts/detect-seo-critical-hardcode.js
+!scripts/setup-git-hooks.sh
+!scripts/setup-pre-commit.sh
 *.json.backup.*
 *.backup.*
 *.debug

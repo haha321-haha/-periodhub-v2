@@ -5,6 +5,7 @@
 # 排除所有JS文件，但保留scripts目录下的构建脚本
 *.js
 !scripts/build-articles-index.js
+!scripts/build-articles-index-wrapper.js
 !scripts/verify-translation-sync.js
 !scripts/generate-translation-types.js
 !scripts/check-translation-sync.js

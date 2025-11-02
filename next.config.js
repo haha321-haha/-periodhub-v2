@@ -534,6 +534,34 @@ const nextConfig = {
         source: '/en/articles/acupoint-massage-complete-guide',
         destination: '/en/articles/natural-physical-therapy-comprehensive-guide',
         permanent: true
+      },
+      // 🎯 废弃的预览路由重定向 - 将旧的 /downloads/preview/* 重定向到对应的HTML页面
+      {
+        source: '/zh/downloads/preview/:previewId',
+        destination: '/downloads/:previewId.html',
+        permanent: true
+      },
+      {
+        source: '/en/downloads/preview/:previewId',
+        destination: '/downloads/:previewId-en.html',
+        permanent: true
+      },
+      {
+        source: '/downloads/preview/:previewId',
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: '(zh|zh-CN|zh-TW)',
+          },
+        ],
+        destination: '/downloads/:previewId.html',
+        permanent: true
+      },
+      {
+        source: '/downloads/preview/:previewId',
+        destination: '/downloads/:previewId-en.html',
+        permanent: true
       }
     ];
   }

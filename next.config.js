@@ -2,7 +2,9 @@
 const path = require('path');
 const createNextIntlPlugin = require('next-intl/plugin');
 
-const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
+const withNextIntl = createNextIntlPlugin(
+  path.join(__dirname, './i18n/request.ts')
+);
 
 // Bundle Analyzer配置
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

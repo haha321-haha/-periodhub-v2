@@ -1,8 +1,17 @@
+"use client";
+
 import React from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Heart, Users, BookOpen } from "lucide-react";
+import dynamic from "next/dynamic";
+
+// 动态导入A/B测试组件（避免SSR问题）
+const HeroABTest = dynamic(() => import("./HeroABTest"), {
+  ssr: false,
+  loading: () => null
+});
 
 export default function Hero() {
   const t = useTranslations("hero");
@@ -116,18 +125,24 @@ export default function Hero() {
             {/* Action buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <div className="flex flex-col items-center lg:items-start gap-2">
-                <Link href={`/${locale}/immediate-relief`}>
-                  <Button
-                    size="lg"
-                    className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 min-w-[200px] group"
-                  >
-                    {t("immediateRelief")}
-                    <ArrowRight className="w-5 h-5 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-                <p className="text-xs text-white/80 mt-1">
-                  {t("ctaSupportText")}
-                </p>
+                {/* A/B测试版本的主CTA */}
+                <HeroABTest />
+                
+                {/* 备用版本（A/B测试加载失败时显示） */}
+                <div className="hidden">
+                  <Link href={`/${locale}/immediate-relief`}>
+                    <Button
+                      size="lg"
+                      className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 min-w-[200px] group"
+                    >
+                      {t("immediateRelief")}
+                      <ArrowRight className="w-5 h-5 ml-2 inline-block group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                  <p className="text-xs text-white/80 mt-1">
+                    {t("ctaSupportText")}
+                  </p>
+                </div>
               </div>
               <Link href={`/${locale}/interactive-tools`}>
                 <Button

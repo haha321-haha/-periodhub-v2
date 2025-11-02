@@ -144,6 +144,8 @@ const slugMapping: Record<string, string> = {
   "iud-comprehensive-guide": "comprehensive-iud-guide",
   // 其他可能的映射
   "long-term-healthy-lifestyle-guide": "long-term-healthy-lifestyle-guide", // 新创建的文件
+  // 404错误修复映射 - 已删除的文章重定向到相似主题
+  "menstrual-nutrition-tcm-guide": "anti-inflammatory-diet-period-pain", // 营养主题映射到抗炎饮食
 };
 
 export function getArticleBySlug(

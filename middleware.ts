@@ -365,8 +365,15 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // 🎯 简化matcher配置：只排除明确的系统路径，其他都交给middleware处理
-    // 使用精确匹配（带/）避免误排除包含关键字的路径
-    '/((?!api/|_next/|favicon\\.ico|sitemap\\.xml|robots\\.txt).*)',
+    // 🎯 优化matcher配置：明确排除静态资源路径，防止被误解析为动态路由
+    // 排除列表：
+    // - api/：API路由
+    // - _next/：Next.js内部资源
+    // - images/：图片资源目录
+    // - static/：静态资源目录
+    // - assets/：资源目录
+    // - fonts/：字体文件
+    // - favicon.ico, sitemap.xml, robots.txt：系统文件
+    '/((?!api/|_next/|images/|static/|assets/|fonts/|favicon\\.ico|sitemap\\.xml|robots\\.txt).*)',
   ],
 };

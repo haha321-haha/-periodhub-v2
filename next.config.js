@@ -563,6 +563,34 @@ const nextConfig = {
         destination: '/downloads/:previewId-en.html',
         permanent: true
       },
+      // 🎯 修复 /workplace-wellness 顶层路径404，重定向到互动工具页面
+      {
+        source: '/zh/workplace-wellness',
+        destination: '/zh/interactive-tools/workplace-wellness',
+        permanent: true
+      },
+      {
+        source: '/en/workplace-wellness',
+        destination: '/en/interactive-tools/workplace-wellness',
+        permanent: true
+      },
+      {
+        source: '/workplace-wellness',
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: '(zh|zh-CN|zh-TW)'
+          }
+        ],
+        destination: '/zh/interactive-tools/workplace-wellness',
+        permanent: true
+      },
+      {
+        source: '/workplace-wellness',
+        destination: '/en/interactive-tools/workplace-wellness',
+        permanent: true
+      },
       // 🎯 修复 Google Search Console 重定向问题 - medication-guide 路径重定向
       {
         source: '/zh/articles/pain-management/medication-guide',

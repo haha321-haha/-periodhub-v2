@@ -146,6 +146,8 @@ const slugMapping: Record<string, string> = {
   "long-term-healthy-lifestyle-guide": "long-term-healthy-lifestyle-guide", // 新创建的文件
   // 404错误修复映射 - 已删除的文章重定向到相似主题
   "menstrual-nutrition-tcm-guide": "anti-inflammatory-diet-period-pain", // 营养主题映射到抗炎饮食
+  // 新增：体质相关旧链接映射到综合自然与物理疗法指南（主题最相关，避免404）
+  "tcm-constitution-complete-guide": "natural-physical-therapy-comprehensive-guide",
 };
 
 export function getArticleBySlug(

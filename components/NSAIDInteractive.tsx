@@ -8,6 +8,15 @@ interface NSAIDInteractiveProps {
 }
 
 export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
+  // Feature flag: enable via NEXT_PUBLIC_ENABLE_NSAID_INTERACTIVE=true
+  const ENABLE_NSAID_INTERACTIVE =
+    process.env.NEXT_PUBLIC_ENABLE_NSAID_INTERACTIVE === "true";
+
+  // If feature is disabled, render nothing (progressive enhancement)
+  if (!ENABLE_NSAID_INTERACTIVE) {
+    return null;
+  }
+
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {

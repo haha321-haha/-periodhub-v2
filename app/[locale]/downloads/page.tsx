@@ -20,6 +20,11 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "downloadsPage" });
 
+  // 🎯 修复 Google Search Console 重复网页问题 - 添加完整的 hreflang 配置
+  const hreflangUrls = await generateHreflangConfig({ locale, path: "downloads" });
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
+
   return {
     title: t("title"),
     description: t("description"),
@@ -29,9 +34,12 @@ export async function generateMetadata({
         process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
     },
     alternates: {
-      canonical: `${
-        process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-      }/${locale}/downloads`,
+      canonical: `${baseUrl}/${locale}/downloads`,
+      languages: {
+        "zh-CN": hreflangUrls["zh-CN"],
+        "en-US": hreflangUrls["en-US"],
+        "x-default": hreflangUrls["x-default"] || hreflangUrls["en-US"],
+      },
     },
     openGraph: {
       title: t("openGraph.title"),

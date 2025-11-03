@@ -562,6 +562,34 @@ const nextConfig = {
         source: '/downloads/preview/:previewId',
         destination: '/downloads/:previewId-en.html',
         permanent: true
+      },
+      // 🎯 修复 Google Search Console 重定向问题 - medication-guide 路径重定向
+      {
+        source: '/zh/articles/pain-management/medication-guide',
+        destination: '/zh/downloads/medication-guide',
+        permanent: true
+      },
+      {
+        source: '/en/articles/pain-management/medication-guide',
+        destination: '/en/downloads/medication-guide',
+        permanent: true
+      },
+      {
+        source: '/articles/pain-management/medication-guide',
+        has: [
+          {
+            type: 'header',
+            key: 'accept-language',
+            value: '(zh|zh-CN|zh-TW)',
+          },
+        ],
+        destination: '/zh/downloads/medication-guide',
+        permanent: true
+      },
+      {
+        source: '/articles/pain-management/medication-guide',
+        destination: '/en/downloads/medication-guide',
+        permanent: true
       }
     ];
   }

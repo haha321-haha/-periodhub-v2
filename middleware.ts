@@ -51,6 +51,20 @@ const intlMiddleware = createMiddleware({
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // 🎯 处理 OPTIONS 预检请求（CORS）
+  // 在路由处理之前拦截 OPTIONS 请求，返回正确的 CORS 响应头
+  if (request.method === 'OPTIONS') {
+    return new NextResponse(null, {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        'Access-Control-Max-Age': '86400', // 缓存 24 小时
+      },
+    });
+  }
+
   // 添加调试信息（仅在开发环境）
   if (process.env.NODE_ENV === "development") {
     console.log(`[Middleware] Processing: ${pathname}`);

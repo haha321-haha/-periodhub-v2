@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Script from "next/script";
+// ✅ 静态导入CSS文件（修复动态加载问题）
+import "@/app/styles/nsaid-interactive.css";
 
 interface NSAIDInteractiveProps {
   locale: "en" | "zh";
@@ -22,21 +24,7 @@ export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
   useEffect(() => {
     console.log("🔧 NSAIDInteractive component mounted");
     setIsClient(true);
-
-    // Load the CSS file dynamically with absolute URL to avoid i18n middleware interference
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = `${window.location.origin}/styles/nsaid-interactive.css`;
-    document.head.appendChild(link);
-
-    console.log("✅ CSS file loaded");
-
-    return () => {
-      // Cleanup: remove the CSS link when component unmounts
-      if (document.head.contains(link)) {
-        document.head.removeChild(link);
-      }
-    };
+    // ✅ CSS已通过静态导入加载，无需动态加载
   }, []);
 
   // Only render scripts on client side to avoid preloading

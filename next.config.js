@@ -70,7 +70,7 @@ const nextConfig = {
     // 修复 @opentelemetry 和 @formatjs 等模块的 vendor chunks 问题
     if (isServer) {
       // 服务端：防止这些模块被错误地分割到 vendor chunks
-      // 通过配置 externals 或调整 splitChunks 来解决
+      // 使用 test 属性的反向逻辑来排除特定模块
       config.optimization = {
         ...config.optimization,
         splitChunks: {
@@ -79,13 +79,25 @@ const nextConfig = {
             default: false,
             vendors: false,
             // 防止 @opentelemetry 和 @formatjs 被分割
+            // 使用 test 属性排除这些模块（只匹配不包含这些模块的 node_modules）
             vendor: {
-              test: /[\\/]node_modules[\\/]/,
+              test: (module) => {
+                // 匹配 node_modules，但排除 @opentelemetry 和 @formatjs
+                const modulePath = module.resource || '';
+                return /[\\/]node_modules[\\/]/.test(modulePath) &&
+                       !/[\\/]node_modules[\\/](@opentelemetry|@formatjs)[\\/]/.test(modulePath);
+              },
               name: 'vendor',
               chunks: 'all',
               enforce: true,
-              // 排除可能导致问题的模块
-              exclude: /[\\/]node_modules[\\/](@opentelemetry|@formatjs)[\\/]/,
+            },
+            // 单独处理 @opentelemetry 和 @formatjs，不分割它们
+            opentelemetryFormatjs: {
+              test: /[\\/]node_modules[\\/](@opentelemetry|@formatjs)[\\/]/,
+              name: false, // 不创建单独的 chunk
+              chunks: 'all',
+              enforce: false,
+              priority: -10, // 低优先级，让它们保持原样
             },
           },
         },

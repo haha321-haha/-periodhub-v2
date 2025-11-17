@@ -104,14 +104,18 @@ export default function WorkImpactComponent() {
               {t("workImpact.painLevel")}
             </label>
             <div className="flex items-center gap-2">
-              <input
-                type="range"
-                min="1"
-                max="10"
-                value={workImpact.painLevel}
-                onChange={handlePainLevelChange}
-                className="flex-1"
-              />
+              <div className="flex-1 relative">
+                {/* 渐变背景轨道 - 绿色到红色 */}
+                <div className="absolute inset-0 h-3 bg-gradient-to-r from-green-400 via-yellow-400 via-orange-400 to-red-500 rounded-lg top-1/2 transform -translate-y-1/2"></div>
+                <input
+                  type="range"
+                  min="1"
+                  max="10"
+                  value={workImpact.painLevel}
+                  onChange={handlePainLevelChange}
+                  className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider"
+                />
+              </div>
               <div className="w-12 text-center">
                 <span className={getBadgeClasses(workImpact.painLevel, "pain")}>
                   {workImpact.painLevel}
@@ -126,14 +130,18 @@ export default function WorkImpactComponent() {
               {t("workImpact.efficiency")}
             </label>
             <div className="flex items-center gap-2">
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={workImpact.efficiency}
-                onChange={handleEfficiencyChange}
-                className="flex-1"
-              />
+              <div className="flex-1 relative">
+                {/* 渐变背景轨道 - 红色到绿色 */}
+                <div className="absolute inset-0 h-3 bg-gradient-to-r from-red-500 via-orange-400 via-yellow-400 to-green-400 rounded-lg top-1/2 transform -translate-y-1/2"></div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={workImpact.efficiency}
+                  onChange={handleEfficiencyChange}
+                  className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 efficiency-slider"
+                />
+              </div>
               <div className="w-16 text-center">
                 <span
                   className={getBadgeClasses(
@@ -248,5 +256,80 @@ export default function WorkImpactComponent() {
         )}
       </div>
     </div>
+    
+    {/* 自定义滑块样式 */}
+    <style jsx>{`
+      .pain-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 2px solid #6b7280;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+      }
+
+      .pain-slider::-webkit-slider-thumb:hover {
+        border-color: #9333ea;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: scale(1.1);
+      }
+
+      .pain-slider::-moz-range-thumb {
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 2px solid #6b7280;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+      }
+
+      .pain-slider::-moz-range-thumb:hover {
+        border-color: #9333ea;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: scale(1.1);
+      }
+      
+      .efficiency-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 2px solid #6b7280;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+      }
+
+      .efficiency-slider::-webkit-slider-thumb:hover {
+        border-color: #9333ea;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: scale(1.1);
+      }
+
+      .efficiency-slider::-moz-range-thumb {
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 2px solid #6b7280;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+      }
+
+      .efficiency-slider::-moz-range-thumb:hover {
+        border-color: #9333ea;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transform: scale(1.1);
+      }
+    `}</style>
   );
 }

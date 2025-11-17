@@ -202,6 +202,12 @@ export default function PeriodPainCalculatorClient({ params }: PeriodPainCalcula
           </button>
         </div>
       </div>
+      
+      {/* 评估进行中的推荐内容 - 提升SEO和用户体验 */}
+      <RecommendedContent 
+        locale={currentLocale} 
+        severity={undefined} 
+      />
     </main>
   );
 }

@@ -7,6 +7,7 @@
 
 import { useState } from "react";
 import { Activity, Copy, Mail, CheckCircle } from "lucide-react";
+import styles from "./WorkImpactComponent.module.css";
 import {
   useWorkImpact,
   useWorkplaceWellnessActions,
@@ -113,7 +114,7 @@ export default function WorkImpactComponent() {
                   max="10"
                   value={workImpact.painLevel}
                   onChange={handlePainLevelChange}
-                  className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider"
+                  className={`relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 ${styles["pain-slider"]}`}
                 />
               </div>
               <div className="w-12 text-center">
@@ -139,7 +140,7 @@ export default function WorkImpactComponent() {
                   max="100"
                   value={workImpact.efficiency}
                   onChange={handleEfficiencyChange}
-                  className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 efficiency-slider"
+                  className={`relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 ${styles["efficiency-slider"]}`}
                 />
               </div>
               <div className="w-16 text-center">
@@ -256,80 +257,5 @@ export default function WorkImpactComponent() {
         )}
       </div>
     </div>
-    
-    {/* 自定义滑块样式 */}
-    <style jsx>{`
-      .pain-slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        height: 20px;
-        width: 20px;
-        border-radius: 50%;
-        background: #ffffff;
-        border: 2px solid #6b7280;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        transition: all 0.2s ease;
-      }
-
-      .pain-slider::-webkit-slider-thumb:hover {
-        border-color: #9333ea;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        transform: scale(1.1);
-      }
-
-      .pain-slider::-moz-range-thumb {
-        height: 20px;
-        width: 20px;
-        border-radius: 50%;
-        background: #ffffff;
-        border: 2px solid #6b7280;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        transition: all 0.2s ease;
-      }
-
-      .pain-slider::-moz-range-thumb:hover {
-        border-color: #9333ea;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        transform: scale(1.1);
-      }
-      
-      .efficiency-slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        height: 20px;
-        width: 20px;
-        border-radius: 50%;
-        background: #ffffff;
-        border: 2px solid #6b7280;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        transition: all 0.2s ease;
-      }
-
-      .efficiency-slider::-webkit-slider-thumb:hover {
-        border-color: #9333ea;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        transform: scale(1.1);
-      }
-
-      .efficiency-slider::-moz-range-thumb {
-        height: 20px;
-        width: 20px;
-        border-radius: 50%;
-        background: #ffffff;
-        border: 2px solid #6b7280;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        transition: all 0.2s ease;
-      }
-
-      .efficiency-slider::-moz-range-thumb:hover {
-        border-color: #9333ea;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        transform: scale(1.1);
-      }
-    `}</style>
   );
 }

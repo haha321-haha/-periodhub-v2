@@ -545,7 +545,7 @@ const generateRecommendations = (
       title: texts.stress_management.title,
       description: texts.stress_management.description,
       priority: 'medium',
-      timeframe: isZh ? '2-4周' : '2-4 weeks',
+      timeframe: getTimeframeTranslation('twoToFourWeeks', locale),
       actionSteps: texts.stress_management.actionSteps
     });
   }

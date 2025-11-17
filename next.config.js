@@ -67,9 +67,31 @@ const nextConfig = {
   
   // Webpack 配置 - 修复 vendor chunks 问题
   webpack: (config, { isServer, webpack }) => {
-    // 确保 lucide-react 正确打包
-    if (!isServer) {
-      // 确保 lucide-react 不被分割到 vendor chunks
+    // 修复 @opentelemetry 和 @formatjs 等模块的 vendor chunks 问题
+    if (isServer) {
+      // 服务端：防止这些模块被错误地分割到 vendor chunks
+      // 通过配置 externals 或调整 splitChunks 来解决
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            default: false,
+            vendors: false,
+            // 防止 @opentelemetry 和 @formatjs 被分割
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendor',
+              chunks: 'all',
+              enforce: true,
+              // 排除可能导致问题的模块
+              exclude: /[\\/]node_modules[\\/](@opentelemetry|@formatjs)[\\/]/,
+            },
+          },
+        },
+      };
+    } else {
+      // 客户端：确保 lucide-react 正确打包
       config.optimization = {
         ...config.optimization,
         splitChunks: {

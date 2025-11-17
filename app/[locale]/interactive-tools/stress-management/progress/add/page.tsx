@@ -157,14 +157,18 @@ export default function AddEntryPage() {
             </label>
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600 w-16">Low (1)</span>
-              <input
-                type="range"
-                min="1"
-                max="10"
-                value={stressLevel}
-                onChange={(e) => setStressLevel(Number(e.target.value))}
-                className="flex-1 h-2 bg-gray-200 rounded-lg cursor-pointer"
-              />
+              <div className="flex-1 relative">
+                {/* 渐变背景轨道 - 从绿色到红色 */}
+                <div className="absolute inset-0 h-3 bg-gradient-to-r from-green-400 via-yellow-400 via-orange-400 to-red-500 rounded-lg"></div>
+                <input
+                  type="range"
+                  min="1"
+                  max="10"
+                  value={stressLevel}
+                  onChange={(e) => setStressLevel(Number(e.target.value))}
+                  className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 stress-slider"
+                />
+              </div>
               <span className="text-sm text-gray-600 w-20">High (10)</span>
             </div>
             <div className="text-center mt-2">
@@ -172,6 +176,50 @@ export default function AddEntryPage() {
                 {stressLevel}
               </span>
             </div>
+            {/* 自定义滑块样式 */}
+            <style jsx>{`
+              .stress-slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background: #ffffff;
+                border: 2px solid #6b7280;
+                cursor: pointer;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                transition: all 0.2s ease;
+              }
+
+              .stress-slider::-webkit-slider-thumb:hover {
+                border-color: #9333ea;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                transform: scale(1.1);
+              }
+
+              .stress-slider::-moz-range-thumb {
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background: #ffffff;
+                border: 2px solid #6b7280;
+                cursor: pointer;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                transition: all 0.2s ease;
+                -moz-appearance: none;
+              }
+
+              .stress-slider::-moz-range-thumb:hover {
+                border-color: #9333ea;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                transform: scale(1.1);
+              }
+
+              .stress-slider::-moz-range-track {
+                background: transparent;
+                height: 12px;
+              }
+            `}</style>
           </div>
 
           {/* Techniques Used */}
@@ -215,14 +263,18 @@ export default function AddEntryPage() {
             </label>
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-600 w-16">Bad (1)</span>
-              <input
-                type="range"
-                min="1"
-                max="10"
-                value={moodRating}
-                onChange={(e) => setMoodRating(Number(e.target.value))}
-                className="flex-1 h-2 bg-gray-200 rounded-lg cursor-pointer"
-              />
+              <div className="flex-1 relative">
+                {/* 渐变背景轨道 - 从红色到绿色（情绪：差=红，好=绿） */}
+                <div className="absolute inset-0 h-3 bg-gradient-to-r from-red-500 via-orange-400 via-yellow-400 to-green-400 rounded-lg"></div>
+                <input
+                  type="range"
+                  min="1"
+                  max="10"
+                  value={moodRating}
+                  onChange={(e) => setMoodRating(Number(e.target.value))}
+                  className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 mood-slider"
+                />
+              </div>
               <span className="text-sm text-gray-600 w-20">Great (10)</span>
             </div>
             <div className="text-center mt-2">
@@ -230,6 +282,50 @@ export default function AddEntryPage() {
                 {moodRating}
               </span>
             </div>
+            {/* 自定义滑块样式 */}
+            <style jsx>{`
+              .mood-slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background: #ffffff;
+                border: 2px solid #6b7280;
+                cursor: pointer;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                transition: all 0.2s ease;
+              }
+
+              .mood-slider::-webkit-slider-thumb:hover {
+                border-color: #9333ea;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                transform: scale(1.1);
+              }
+
+              .mood-slider::-moz-range-thumb {
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background: #ffffff;
+                border: 2px solid #6b7280;
+                cursor: pointer;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                transition: all 0.2s ease;
+                -moz-appearance: none;
+              }
+
+              .mood-slider::-moz-range-thumb:hover {
+                border-color: #9333ea;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                transform: scale(1.1);
+              }
+
+              .mood-slider::-moz-range-track {
+                background: transparent;
+                height: 12px;
+              }
+            `}</style>
           </div>
 
           {/* Notes */}

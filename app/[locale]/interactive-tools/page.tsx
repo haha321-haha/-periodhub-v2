@@ -19,6 +19,7 @@ import {
   generateHreflangConfig,
   HreflangScript,
 } from "@/lib/seo/multilingual-seo";
+import { generatePageSEO, StructuredDataType } from "@/lib/seo/page-seo";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -32,33 +33,20 @@ export async function generateMetadata({
     namespace: "interactiveToolsPage",
   });
 
-  return {
+  const { metadata } = generatePageSEO({
+    locale,
+    path: "/interactive-tools",
     title: t("title"),
     description: t("description"),
     keywords: t("keywords").split(","),
-    alternates: {
-      canonical: `${
-        process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-      }/${locale}/interactive-tools`,
-      languages: {
-        "zh-CN": `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/interactive-tools`,
-        "en-US": `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en/interactive-tools`,
-        "x-default": `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en/interactive-tools`, // ✅ 修复：默认英文版本（北美市场优先）
-      },
+    structuredDataType: "CollectionPage" as StructuredDataType,
+    additionalStructuredData: {
+      numberOfItems: 8, // 更新为实际工具数量
+      description: t("structuredData.description"),
     },
-    openGraph: {
-      title: t("title"),
-      description: t("description"),
-      type: "website",
-      locale: locale,
-    },
-  };
+  });
+
+  return metadata;
 }
 
 // Generate static params for all supported locales
@@ -189,17 +177,31 @@ export default async function InteractiveToolsPage({
     path: "/interactive-tools",
   });
 
+  // 生成结构化数据
+  const { structuredData } = generatePageSEO({
+    locale,
+    path: "/interactive-tools",
+    title: t("title"),
+    description: t("description"),
+    keywords: t("keywords").split(","),
+    structuredDataType: "CollectionPage",
+    additionalStructuredData: {
+      numberOfItems: 8, // 更新为实际工具数量
+      description: t("structuredData.description"),
+    },
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
       {/* hreflang标签 */}
       <HreflangScript hreflangUrls={hreflangUrls} />
 
       {/* SEO结构化数据 */}
-      <StructuredData
-        type="healthTopicPage"
-        title={t("title")}
-        description={t("description")}
-        url={pageUrl}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData),
+        }}
       />
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-8 sm:space-y-12 mobile-safe-area">

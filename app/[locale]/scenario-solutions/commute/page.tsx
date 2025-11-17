@@ -7,6 +7,10 @@ import RelatedToolCard from "@/app/[locale]/interactive-tools/components/Related
 import RelatedArticleCard from "@/app/[locale]/interactive-tools/components/RelatedArticleCard";
 import ScenarioSolutionCard from "@/app/[locale]/interactive-tools/components/ScenarioSolutionCard";
 import {
+  generateHowToStructuredData,
+  HowToStructuredDataScript,
+} from "@/lib/seo/howto-structured-data";
+import {
   Car,
   Train,
   Bus,
@@ -176,6 +180,52 @@ export default async function CommuteScenarioPage({ params }: Props) {
   // 获取推荐数据
   const recommendations = getCommuteRecommendations(locale);
   const isZh = locale === "zh";
+
+  // 生成 HowTo 结构化数据
+  const howToData = await generateHowToStructuredData({
+    locale,
+    scenarioSlug: "commute",
+    name: isZh ? "通勤途中痛经应急管理指南" : "Commute Period Pain Emergency Management Guide",
+    description: isZh 
+      ? "通勤途中的痛经应急处理方法，包含便携应急包准备和应急路线规划"
+      : "Period pain emergency management during commute, including portable emergency kit preparation and emergency route planning",
+    steps: [
+      { 
+        name: isZh ? "准备便携应急包" : "Prepare Portable Emergency Kit",
+        text: isZh ? "准备小巧的应急包，包含止痛药、卫生用品和热敷贴" : "Prepare compact emergency kit with pain medication, hygiene products and heat patches"
+      },
+      { 
+        name: isZh ? "选择舒适的通勤方式" : "Choose Comfortable Commute Method",
+        text: isZh ? "根据疼痛程度选择最舒适的交通方式" : "Choose the most comfortable transportation based on pain level"
+      },
+      { 
+        name: isZh ? "规划应急路线" : "Plan Emergency Routes",
+        text: isZh ? "了解沿途的洗手间和休息点位置" : "Know the locations of restrooms and rest points along the way"
+      },
+      { 
+        name: isZh ? "携带必备物品" : "Carry Essential Items",
+        text: isZh ? "确保随身携带手机、水和应急联系信息" : "Ensure you carry phone, water and emergency contact information"
+      },
+      { 
+        name: isZh ? "了解沿途设施" : "Know Facilities Along the Way",
+        text: isZh ? "提前了解沿途的药店和医疗设施" : "Know pharmacies and medical facilities along the way in advance"
+      },
+      { 
+        name: isZh ? "掌握应急处理方法" : "Master Emergency Response Methods",
+        text: isZh ? "学习简单的呼吸和放松技巧，缓解突发疼痛" : "Learn simple breathing and relaxation techniques to relieve sudden pain"
+      },
+    ],
+    tools: [
+      { name: isZh ? "便携应急包" : "Portable Emergency Kit" },
+      { name: isZh ? "手机" : "Mobile Phone" },
+    ],
+    supplies: [
+      isZh ? "止痛药" : "Pain Medication",
+      isZh ? "卫生用品" : "Hygiene Products",
+      isZh ? "热敷贴" : "Heat Patches",
+    ],
+    totalTime: "PT15M",
+  });
 
   const emergencyKit = [
     {
@@ -527,11 +577,13 @@ export default async function CommuteScenarioPage({ params }: Props) {
   ];
 
   return (
-    <div
-      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
-      data-page="scenario-commute"
-    >
-      {/* Breadcrumb */}
+    <>
+      <HowToStructuredDataScript data={howToData} />
+      <div
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
+        data-page="scenario-commute"
+      >
+        {/* Breadcrumb */}
       <Breadcrumb
         items={[
           { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
@@ -940,6 +992,7 @@ export default async function CommuteScenarioPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

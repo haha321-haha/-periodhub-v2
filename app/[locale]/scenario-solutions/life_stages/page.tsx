@@ -7,6 +7,10 @@ import RelatedToolCard from "@/app/[locale]/interactive-tools/components/Related
 import RelatedArticleCard from "@/app/[locale]/interactive-tools/components/RelatedArticleCard";
 import ScenarioSolutionCard from "@/app/[locale]/interactive-tools/components/ScenarioSolutionCard";
 import {
+  generateHowToStructuredData,
+  HowToStructuredDataScript,
+} from "@/lib/seo/howto-structured-data";
+import {
   Heart,
   BookOpen,
   Baby,
@@ -185,6 +189,68 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
   // 获取推荐数据
   const recommendations = getLifeStagesRecommendations(locale);
   const isZh = locale === "zh";
+
+  // 生成 HowTo 结构化数据
+  const howToData = await generateHowToStructuredData({
+    locale,
+    scenarioSlug: "life_stages",
+    name: isZh
+      ? "不同生命阶段的痛经管理指南"
+      : "Period Pain Management Guide Across Life Stages",
+    description: isZh
+      ? "从青春期到围绝经期，全面的痛经管理策略和健康指导"
+      : "Comprehensive period pain management strategies and health guidance from adolescence to perimenopause",
+    steps: [
+      {
+        name: isZh ? "青春期痛经管理（12-18岁）" : "Adolescent Period Pain Management (12-18 years)",
+        text: isZh
+          ? "建立正确的健康观念，学习基础痛经知识，调整生活方式，获得校园应急支持"
+          : "Establish correct health concepts, learn basic period pain knowledge, adjust lifestyle, get campus emergency support",
+      },
+      {
+        name: isZh ? "育龄期健康管理（18-35岁）" : "Reproductive Age Health Management (18-35 years)",
+        text: isZh
+          ? "平衡工作与健康，采用自然疗法和医疗干预相结合的方式管理痛经"
+          : "Balance work and health, manage period pain with combination of natural therapy and medical intervention",
+      },
+      {
+        name: isZh ? "备孕期优化方案（25-35岁）" : "Pre-pregnancy Optimization (25-35 years)",
+        text: isZh
+          ? "进行孕前检查，排除继发性痛经，优化生育健康，调整生活方式"
+          : "Conduct pre-pregnancy examination, rule out secondary dysmenorrhea, optimize reproductive health, adjust lifestyle",
+      },
+      {
+        name: isZh ? "围绝经期过渡管理（45-55岁）" : "Perimenopause Transition Management (45-55 years)",
+        text: isZh
+          ? "在医生指导下考虑荷尔蒙疗法，调整生活方式，获得心理支持"
+          : "Consider hormone therapy under doctor's guidance, adjust lifestyle, get psychological support",
+      },
+      {
+        name: isZh ? "建立专业支持网络" : "Establish Professional Support Network",
+        text: isZh
+          ? "联系妇产科医生、内分泌科医生、营养师和心理咨询师，建立长期健康管理关系"
+          : "Contact gynecologists, endocrinologists, nutritionists and psychologists, establish long-term health management relationships",
+      },
+      {
+        name: isZh ? "持续健康监测与调整" : "Continuous Health Monitoring and Adjustment",
+        text: isZh
+          ? "定期进行身体检查，追踪症状变化，根据不同生命阶段调整管理策略"
+          : "Regular physical examinations, track symptom changes, adjust management strategies according to different life stages",
+      },
+    ],
+    tools: [
+      { name: isZh ? "症状评估工具" : "Symptom Assessment Tool" },
+      { name: isZh ? "痛经追踪器" : "Pain Tracker" },
+      { name: isZh ? "痛经影响计算器" : "Pain Impact Calculator" },
+    ],
+    supplies: [
+      isZh ? "应急药品" : "Emergency Medications",
+      isZh ? "热敷工具" : "Heat Therapy Tools",
+      isZh ? "营养补充剂" : "Nutritional Supplements",
+      isZh ? "舒适用品" : "Comfort Items",
+    ],
+    totalTime: "PT30M",
+  });
 
   const lifeStages = [
     {
@@ -464,10 +530,12 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
   ];
 
   return (
-    <div
-      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
-      data-page="scenario-lifestages"
-    >
+    <>
+      <HowToStructuredDataScript data={howToData} />
+      <div
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
+        data-page="scenario-lifestages"
+      >
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
@@ -838,6 +906,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

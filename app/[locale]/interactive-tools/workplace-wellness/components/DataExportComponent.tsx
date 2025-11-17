@@ -19,9 +19,10 @@ import {
 import {
   useExport,
   useWorkplaceWellnessActions,
+  useCalendar,
 } from "../hooks/useWorkplaceWellnessStore";
 import { useLocale } from "next-intl";
-import { getPeriodData, getNutritionData } from "../data";
+import { getNutritionData } from "../data";
 import { useTranslations } from "next-intl";
 import { ExportFormat, ExportType } from "../types";
 import { PDFGenerator, PDFReportData } from "../utils/pdfGenerator";
@@ -33,6 +34,7 @@ import {
 export default function DataExportComponent() {
   const exportConfig = useExport();
   const locale = useLocale();
+  const calendar = useCalendar();
   const { updateExport, setExporting } = useWorkplaceWellnessActions();
   const t = useTranslations("workplaceWellness");
 
@@ -44,7 +46,8 @@ export default function DataExportComponent() {
   const [password, setPassword] = useState("");
   const [privacyManager] = useState(() => new PrivacyProtectionManager(locale));
 
-  const periodData = getPeriodData();
+  // 从 store 读取 periodData
+  const periodData = calendar.periodData || [];
   const nutritionData = getNutritionData();
 
   // 导出类型选择

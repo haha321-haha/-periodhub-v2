@@ -415,6 +415,26 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
           [t("tags.medication"), t("tags.medication"), t("tags.relief")],
           "ginger-menstrual-pain-relief-guide",
         ),
+        // === 新增：精油芳香疗法文章 ===
+        createArticleResource(
+          "naturalTherapies",
+          "essentialOilsAromatherapyGuide",
+          25,
+          "highest",
+          [
+            "精油",
+            "芳疗",
+            "芳香疗法",
+            "薰衣草",
+            "essential oils",
+            "aromatherapy",
+            "疼痛",
+            "缓解",
+            "自然疗法",
+            "治疗",
+          ],
+          "essential-oils-aromatherapy-menstrual-pain-guide",
+        ),
         ...PDF_RESOURCES.filter((pdf) =>
           [
             "pain-tracking-form",
@@ -456,6 +476,10 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
           [t("tags.exercise"), t("tags.baduanjin"), t("tags.relief")],
           "zhan-zhuang-baduanjin-for-menstrual-pain-relief",
         ),
+        // 注意：膳食补充剂和草药疗法文章已移除，因为内容文件尚未创建
+        // 将在P1或P2阶段创建内容后重新添加
+        // TODO: 创建 dietary-supplements-menstrual-pain-guide.md
+        // TODO: 创建 herbal-remedies-menstrual-pain-guide.md
         ...PDF_RESOURCES.filter((pdf) =>
           [
             "healthy-habits-checklist",
@@ -576,6 +600,47 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
             t("tags.communication"),
           ],
           "when-to-seek-medical-care-comprehensive-guide",
+        ),
+        // === 新增：IUD综合指南文章 ===
+        createArticleResource(
+          "medicalGuidance",
+          "comprehensiveIudGuide",
+          25,
+          "highest",
+          [
+            "IUD",
+            "宫内节育器",
+            "节育环",
+            "避孕",
+            "intrauterine device",
+            "contraception",
+            "医疗",
+            "健康",
+            "指南",
+            "预防",
+          ],
+          "comprehensive-iud-guide",
+        ),
+        // === 新增：痛经并发症管理文章 ===
+        createArticleResource(
+          "medicalGuidance",
+          "menstrualPainComplications",
+          20,
+          "high",
+          [
+            "并发症",
+            "子宫内膜异位症",
+            "子宫腺肌症",
+            "子宫肌瘤",
+            "complications",
+            "endometriosis",
+            "adenomyosis",
+            "医疗",
+            "健康",
+            "诊断",
+            "紧急",
+          ],
+          "menstrual-pain-complications-management",
         ),
         ...PDF_RESOURCES.filter((pdf) =>
           [
@@ -938,6 +1003,29 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
             "布洛芬",
             "对乙酰氨基酚",
             "止痛药物",
+            // === 新增：精油/芳香疗法关键词 ===
+            "精油",
+            "芳疗",
+            "芳香疗法",
+            "薰衣草精油",
+            "生姜精油",
+            "玫瑰精油",
+            "马郁兰精油",
+            "肉桂精油",
+            "洋甘菊精油",
+            "精油按摩",
+            "香薰",
+            "精油缓解",
+            // === 新增：NSAIDs药物品牌名 ===
+            "萘普生",
+            "艾德维尔",
+            "安乃威",
+            "阿司匹林",
+            // === 新增：热疗工具 ===
+            "热敷袋",
+            "热水袋",
+            "电热毯",
+            "暖手宝",
             // 其他紧急相关词汇
             "疼",
             "痛",
@@ -976,6 +1064,27 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
             "ibuprofen",
             "acetaminophen",
             "pain medication",
+            // === NEW: Essential oils/aromatherapy keywords ===
+            "essential oils",
+            "aromatherapy",
+            "lavender oil",
+            "ginger oil",
+            "rose oil",
+            "marjoram oil",
+            "cinnamon oil",
+            "chamomile oil",
+            "essential oil massage",
+            "aromatherapy relief",
+            // === NEW: NSAIDs drug brand names ===
+            "naproxen",
+            "advil",
+            "aleve",
+            "aspirin",
+            // === NEW: Heat therapy tools ===
+            "heating pad",
+            "hot water bottle",
+            "electric blanket",
+            "hand warmer",
             // 其他紧急相关词汇
             "hurt",
             "pain",
@@ -1073,6 +1182,48 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
             "用药指南",
             "药物对比",
             "用药学习",
+            // === 新增：IUD/避孕关键词 ===
+            "宫内节育器",
+            "节育环",
+            "IUD",
+            "避孕",
+            "避孕环",
+            "含铜节育环",
+            "激素节育环",
+            "曼月乐",
+            "避孕方法",
+            "宫内节育",
+            "节育器",
+            "避孕装置",
+            // === 新增：并发症关键词 ===
+            "并发症",
+            "严重疼痛",
+            "子宫内膜异位症",
+            "子宫腺肌症",
+            "子宫肌瘤",
+            "多囊卵巢",
+            "卵巢囊肿",
+            "盆腔炎",
+            // === 新增：营养补充剂关键词 ===
+            "补充剂",
+            "维生素",
+            "镁",
+            "欧米茄3",
+            "营养素",
+            "膳食补充",
+            "矿物质",
+            "维生素B",
+            "钙",
+            // === 新增：草药关键词 ===
+            "草药",
+            "中药",
+            "姜茶",
+            "姜黄",
+            "甘菊茶",
+            "传统疗法",
+            "中医",
+            "草本",
+            "天然疗法",
           ]
         : [
             "doctor",
@@ -1104,6 +1255,46 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
             "medication guide",
             "medication comparison",
             "medication learning",
+            // === NEW: IUD/contraception keywords ===
+            "intrauterine device",
+            "IUD",
+            "contraception",
+            "birth control",
+            "copper IUD",
+            "hormonal IUD",
+            "Mirena",
+            "coil",
+            "contraceptive",
+            "intrauterine",
+            "contraceptive device",
+            // === NEW: Complications keywords ===
+            "complications",
+            "severe pain",
+            "endometriosis",
+            "adenomyosis",
+            "fibroids",
+            "PCOS",
+            "ovarian cysts",
+            "pelvic inflammatory disease",
+            // === NEW: Nutrition/supplements keywords ===
+            "supplements",
+            "vitamins",
+            "magnesium",
+            "omega 3",
+            "nutrients",
+            "dietary supplements",
+            "minerals",
+            "vitamin B",
+            "calcium",
+            // === NEW: Herbal keywords ===
+            "herbal",
+            "traditional medicine",
+            "ginger tea",
+            "turmeric",
+            "chamomile tea",
+            "herbal remedies",
+            "TCM",
+            "natural remedies",
           ];
 
     const managementKeywords =
@@ -1194,6 +1385,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
 
     // 定义同义词映射表
     const synonymMap: Record<string, string[]> = {
+      // === 现有映射 ===
       [t("tags.heatTherapy")]: [
         t("tags.heatTherapyMethod"),
         t("tags.heatTherapyTreatment"),
@@ -1232,6 +1424,170 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         t("tags.heatTherapy"),
         t("tags.heatTherapyMethod"),
         t("tags.heatTherapyTreatment"),
+      ],
+      
+      // === 新增：精油/芳香疗法同义词映射 ===
+      "精油": [
+        "芳疗",
+        "芳香疗法",
+        "薰衣草精油",
+        "生姜精油",
+        "玫瑰精油",
+        "精油按摩",
+        "香薰",
+        "essential oils",
+        "aromatherapy",
+        "lavender oil",
+      ],
+      "芳疗": [
+        "精油",
+        "芳香疗法",
+        "精油按摩",
+        "aromatherapy",
+        "essential oils",
+      ],
+      "essential oils": [
+        "aromatherapy",
+        "lavender oil",
+        "ginger oil",
+        "rose oil",
+        "essential oil massage",
+        "精油",
+        "芳疗",
+      ],
+      "aromatherapy": [
+        "essential oils",
+        "lavender oil",
+        "aromatherapy relief",
+        "芳疗",
+        "芳香疗法",
+      ],
+      
+      // === 新增：IUD/避孕同义词映射 ===
+      "宫内节育器": [
+        "节育环",
+        "IUD",
+        "避孕环",
+        "含铜节育环",
+        "激素节育环",
+        "曼月乐",
+        "intrauterine device",
+        "coil",
+      ],
+      "节育环": [
+        "宫内节育器",
+        "IUD",
+        "避孕环",
+        "IUD",
+        "coil",
+      ],
+      "IUD": [
+        "宫内节育器",
+        "节育环",
+        "intrauterine device",
+        "coil",
+        "contraceptive device",
+      ],
+      "intrauterine device": [
+        "IUD",
+        "coil",
+        "contraceptive device",
+        "宫内节育器",
+        "节育环",
+      ],
+      
+      // === 新增：NSAIDs/药物品牌同义词映射 ===
+      "NSAID": [
+        "非甾体抗炎药",
+        "布洛芬",
+        "萘普生",
+        "艾德维尔",
+        "安乃威",
+        "ibuprofen",
+        "naproxen",
+        "advil",
+        "aleve",
+      ],
+      "布洛芬": [
+        "NSAID",
+        "非甾体抗炎药",
+        "艾德维尔",
+        "ibuprofen",
+        "advil",
+      ],
+      "萘普生": [
+        "NSAID",
+        "非甾体抗炎药",
+        "安乃威",
+        "naproxen",
+        "aleve",
+      ],
+      "ibuprofen": [
+        "NSAID",
+        "advil",
+        "布洛芬",
+        "艾德维尔",
+      ],
+      "naproxen": [
+        "NSAID",
+        "aleve",
+        "萘普生",
+        "安乃威",
+      ],
+      
+      // === 新增：并发症同义词映射 ===
+      "并发症": [
+        "严重疼痛",
+        "子宫内膜异位症",
+        "子宫腺肌症",
+        "子宫肌瘤",
+        "complications",
+        "severe pain",
+        "endometriosis",
+      ],
+      "子宫内膜异位症": [
+        "并发症",
+        "严重疼痛",
+        "endometriosis",
+        "complications",
+      ],
+      "子宫腺肌症": [
+        "并发症",
+        "严重疼痛",
+        "adenomyosis",
+        "complications",
+      ],
+      "endometriosis": [
+        "complications",
+        "severe pain",
+        "子宫内膜异位症",
+        "并发症",
+      ],
+      
+      // === 新增：营养补充剂同义词映射 ===
+      "补充剂": [
+        "维生素",
+        "镁",
+        "欧米茄3",
+        "营养素",
+        "膳食补充",
+        "supplements",
+        "vitamins",
+        "magnesium",
+      ],
+      "维生素": [
+        "补充剂",
+        "营养素",
+        "vitamins",
+        "supplements",
+      ],
+      "supplements": [
+        "vitamins",
+        "magnesium",
+        "omega 3",
+        "dietary supplements",
+        "补充剂",
+        "维生素",
       ],
     };
 
@@ -1319,7 +1675,22 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
       .filter((resource) => resource.relevanceScore > 0)
       .sort((a, b) => b.relevanceScore - a.relevanceScore);
 
-    return scoredResources;
+    // 去重：基于资源ID去重，保留评分最高的
+    const uniqueResources = scoredResources.reduce((acc, current) => {
+      const existingIndex = acc.findIndex((item) => item.id === current.id);
+      if (existingIndex === -1) {
+        // 如果不存在，添加
+        acc.push(current);
+      } else {
+        // 如果存在，保留评分更高的
+        if (current.relevanceScore > acc[existingIndex].relevanceScore) {
+          acc[existingIndex] = current;
+        }
+      }
+      return acc;
+    }, [] as typeof scoredResources);
+
+    return uniqueResources;
   }, [searchTerm, optimizedCategories]);
 
   // 渐进式加载

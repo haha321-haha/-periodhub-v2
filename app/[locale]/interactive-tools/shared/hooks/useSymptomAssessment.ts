@@ -12,6 +12,8 @@ import { getQuestionsByMode } from "../data/assessmentQuestions";
 import {
   calculateSymptomImpact,
   calculateWorkplaceImpact,
+  calculateDetailedImpact,
+  calculateMedicalImpact,
 } from "../data/calculationAlgorithms";
 import { saveToStorage, loadFromStorage, createStorageKey } from "../utils";
 
@@ -559,17 +561,20 @@ export const useSymptomAssessment = (
 
         // 根据评估模式选择计算函数
         let calculationResult;
-        if (
-          currentSession.mode === "medical" &&
-          answersForCalculation.concentration
-        ) {
-          // 职场评估
-          calculationResult = calculateWorkplaceImpact(
+        if (currentSession.mode === "medical") {
+          // 医疗专业版：使用综合评估（症状+职场）
+          calculationResult = calculateMedicalImpact(
+            answersForCalculation,
+            effectiveLocale,
+          );
+        } else if (currentSession.mode === "detailed") {
+          // 详细版：使用详细症状评估
+          calculationResult = calculateDetailedImpact(
             answersForCalculation,
             effectiveLocale,
           );
         } else {
-          // 症状评估
+          // 简化版：使用基础症状评估
           calculationResult = calculateSymptomImpact(
             answersForCalculation,
             effectiveLocale,

@@ -21,8 +21,8 @@ import {
   Activity,
 } from "lucide-react";
 import { useLocale } from "next-intl";
-import { getPeriodData } from "../data";
 import { useTranslations } from "next-intl";
+import { useCalendar } from "../hooks/useWorkplaceWellnessStore";
 import { PeriodRecord, WorkAdjustment } from "../types";
 
 interface WorkImpactData {
@@ -54,6 +54,7 @@ interface ProductivityInsight {
 export default function WorkImpactAnalysis() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
+  const calendar = useCalendar();
   const [activeTab, setActiveTab] = useState<
     "overview" | "patterns" | "productivity" | "insights"
   >("overview");
@@ -61,7 +62,8 @@ export default function WorkImpactAnalysis() {
   const [patterns, setPatterns] = useState<WorkPattern[]>([]);
   const [insights, setInsights] = useState<ProductivityInsight[]>([]);
 
-  const periodData = getPeriodData();
+  // 从 store 读取 periodData
+  const periodData = calendar.periodData || [];
 
   useEffect(() => {
     analyzeWorkImpact();

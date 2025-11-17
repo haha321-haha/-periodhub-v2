@@ -128,9 +128,26 @@ export interface CalendarState {
   currentDate: Date;
   selectedDate: Date | null;
   showAddForm: boolean;
+  periodData: PeriodRecord[];
 }
 
 // 应用状态接口 - 基于HVsLYEp的appState结构
+// 推荐反馈接口
+export interface RecommendationFeedback {
+  recommendationId: string;
+  action: 'clicked' | 'dismissed' | 'saved' | 'rated';
+  rating?: 1 | 2 | 3 | 4 | 5;
+  timestamp: string;
+}
+
+// 推荐反馈历史接口
+export interface RecommendationFeedbackHistory {
+  feedbacks: RecommendationFeedback[];
+  ignoredItems: string[]; // 用户忽略的推荐ID
+  savedItems: string[]; // 用户收藏的推荐ID
+  itemRatings: Record<string, number>; // 推荐ID -> 平均评分
+}
+
 export interface WorkplaceWellnessState {
   activeTab:
     | "calendar"
@@ -138,7 +155,11 @@ export interface WorkplaceWellnessState {
     | "export"
     | "settings"
     | "work-impact"
-    | "analysis";
+    | "analysis"
+    | "assessment"
+    | "recommendations"
+    | "tracking"
+    | "analytics";
   calendar: CalendarState;
   workImpact: WorkImpactData;
   nutrition: NutritionData;
@@ -151,6 +172,9 @@ export interface WorkplaceWellnessState {
   batchExportQueue: BatchExportQueue | null;
   exportHistory: ExportHistory[];
   systemSettings: SystemSettings;
+  
+  // 推荐反馈
+  recommendationFeedback: RecommendationFeedbackHistory;
 }
 
 // 翻译函数类型

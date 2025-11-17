@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import {
   Play,
@@ -42,6 +43,13 @@ export default function SymptomAssessmentTool({
     {},
   );
   const [showSettings, setShowSettings] = useState(false);
+  const [sessionData, setSessionData] = useState({
+    sessionId: '',
+    startTime: '',
+    endTime: '',
+    completionTime: 0,
+    upgraded: false
+  });
 
   const {
     currentSession,
@@ -61,7 +69,57 @@ export default function SymptomAssessmentTool({
     resetAssessment,
   } = useSymptomAssessment();
 
-  // Personalized features
+  // 生成会话ID
+  const generateSessionId = () => {
+    return `symptom_assessment_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  };
+
+  // 记录评估数据（匿名）
+  const recordAssessmentData = (completed: boolean = false) => {
+    try {
+      const data = {
+        sessionId: sessionData.sessionId || generateSessionId(),
+        type: "symptom",
+        startTime: sessionData.startTime || new Date().toISOString(),
+        endTime: completed ? new Date().toISOString() : '',
+        duration: completed ? Date.now() - new Date(sessionData.startTime).getTime() : 0,
+        completionTime: completed ? sessionData.completionTime + Date.now() - new Date(sessionData.startTime).getTime() : 0,
+        answers: selectedAnswers,
+        score: result?.score || 0,
+        profile: result?.severity || '',
+        completed: completed,
+        upgraded: sessionData.upgraded,
+        locale: locale,
+        timestamp: Date.now()
+      };
+
+      // 保存到localStorage（仅用于本地分析，不上传服务器）
+      const existingData = JSON.parse(localStorage.getItem('assessmentAnalytics') || '[]');
+      existingData.push(data);
+      
+      // 只保留最近100次记录，避免localStorage过大
+      if (existingData.length > 100) {
+        existingData.splice(0, existingData.length - 100);
+      }
+      
+      localStorage.setItem('assessmentAnalytics', JSON.stringify(existingData));
+      
+      console.log('症状评估数据已记录（匿名）:', data);
+    } catch (error) {
+      console.warn('记录评估数据失败:', error);
+    }
+  };
+
+  // 组件加载时初始化会话数据
+  useEffect(() => {
+    setSessionData(prev => ({
+      ...prev,
+      sessionId: generateSessionId(),
+      startTime: new Date().toISOString()
+    }));
+  }, []);
+
+  //  Personalized features
   const { preferences } = useUserPreferences();
   const { history, trends, saveAssessmentResult, getRecentAssessments } =
     useAssessmentHistory();
@@ -75,6 +133,63 @@ export default function SymptomAssessmentTool({
       saveAssessmentResult(result);
     }
   }, [result, preferences.trackAssessmentHistory, saveAssessmentResult]);
+
+  // 监听评估完成并记录数据
+  useEffect(() => {
+    if (result) {
+      // 评估完成，记录数据
+      recordAssessmentData(true);
+    } else if (currentSession && Object.keys(selectedAnswers).length > 0) {
+      // 评估进行中，记录部分数据
+      recordAssessmentData(false);
+    }
+  }, [result, currentSession, selectedAnswers]);
+
+  // 保存进度到localStorage
+  const saveProgress = (answers: Record<string, any>) => {
+    const progressData = {
+      answers: answers,
+      timestamp: Date.now(),
+      locale: locale,
+      mode: mode
+    };
+    try {
+      localStorage.setItem('symptomAssessmentProgress', JSON.stringify(progressData));
+    } catch (error) {
+      console.warn('保存进度失败:', error);
+    }
+  };
+
+  // 从localStorage恢复进度
+  const loadProgress = () => {
+    try {
+      const saved = localStorage.getItem('symptomAssessmentProgress');
+      if (saved) {
+        const progressData = JSON.parse(saved);
+        // 检查数据是否过期（24小时）
+        const isExpired = Date.now() - progressData.timestamp > 24 * 60 * 60 * 1000;
+        if (!isExpired && progressData.locale === locale && progressData.mode === mode) {
+          return progressData.answers || {};
+        } else {
+          // 清除过期数据
+          localStorage.removeItem('symptomAssessmentProgress');
+        }
+      }
+    } catch (error) {
+      console.warn('恢复进度失败:', error);
+    }
+    return {};
+  };
+
+  // 初始化时恢复进度
+  useEffect(() => {
+    if (!currentSession) {
+      const savedAnswers = loadProgress();
+      if (Object.keys(savedAnswers).length > 0) {
+        setSelectedAnswers(savedAnswers);
+      }
+    }
+  }, [currentSession]);
 
   // 生成个性化建议
   useEffect(() => {
@@ -169,16 +284,45 @@ export default function SymptomAssessmentTool({
     console.log("Starting assessment with locale:", locale, "mode:", mode);
     // Clear any existing session first to ensure fresh start with correct locale
     resetAssessment();
+    // 清除保存的进度
+    try {
+      localStorage.removeItem('symptomAssessmentProgress');
+    } catch (error) {
+      console.warn('清除进度失败:', error);
+    }
     startAssessment(locale, mode);
+  };
+
+  // 重新评估（清除所有数据）
+  const handleRestart = () => {
+    resetAssessment();
+    // 清除保存的进度和会话数据
+    try {
+      localStorage.removeItem('symptomAssessmentProgress');
+      localStorage.removeItem('assessmentAnalytics');
+    } catch (error) {
+      console.warn('清除数据失败:', error);
+    }
+    // 重置状态
+    setSelectedAnswers({});
+    setSessionData({
+      sessionId: '',
+      startTime: '',
+      endTime: '',
+      completionTime: 0,
+      upgraded: false
+    });
   };
 
   const handleAnswerChange = (value: any) => {
     if (!currentQuestion) return;
 
-    setSelectedAnswers((prev) => ({
-      ...prev,
+    const newAnswers = {
+      ...selectedAnswers,
       [currentQuestion.id]: value,
-    }));
+    };
+
+    setSelectedAnswers(newAnswers);
 
     const answer: AssessmentAnswer = {
       questionId: currentQuestion.id,
@@ -187,6 +331,9 @@ export default function SymptomAssessmentTool({
     };
 
     answerQuestion(answer);
+
+    // 保存进度
+    saveProgress(newAnswers);
   };
 
   const handleNext = () => {
@@ -420,11 +567,21 @@ export default function SymptomAssessmentTool({
 
   // Results screen
   if (result) {
+    const isZh = locale === "zh";
+    const referenceData: any = result.referenceData || {};
+    const isSevere = result.severity === "severe" || result.emergency;
+    const highScore = (result.percentage || 0) >= 70;
+    const hasWorkplaceScore =
+      typeof referenceData.workplaceScore === "number";
+    const highWorkImpact =
+      (result.mode === "medical" && hasWorkplaceScore) ||
+      result.type === "workplace";
+
     return (
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-xl p-8 animate-fade-in">
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 rounded-xl p-8 animate-fade-in">
         <div className="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto transform hover:scale-105 transition-all duration-300">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-r from-green-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
+            <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-violet-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
               <CheckCircle className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4 animate-slide-up">
@@ -455,11 +612,11 @@ export default function SymptomAssessmentTool({
               className="card text-center transform hover:scale-105 transition-all duration-300 animate-slide-up"
               style={{ animationDelay: "200ms" }}
             >
-              <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg">
-                <h3 className="text-sm font-medium text-purple-700 mb-2">
+              <div className="bg-gradient-to-br from-violet-50 to-violet-100 p-4 rounded-lg">
+                <h3 className="text-sm font-medium text-violet-700 mb-2">
                   {t("result.severity")}
                 </h3>
-                <p className="text-xl font-bold text-purple-600">
+                <p className="text-xl font-bold text-violet-600">
                   {t(`severity.${result.severity}`)}
                 </p>
               </div>
@@ -493,6 +650,60 @@ export default function SymptomAssessmentTool({
             </h3>
             <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-6 rounded-lg border border-gray-200">
               <p className="text-gray-700 leading-relaxed">{result.message}</p>
+            </div>
+          </div>
+
+          {/* 智能分流：下一步路径推荐 */}
+          <div
+            className="mb-8 animate-slide-up"
+            style={{ animationDelay: "450ms" }}
+          >
+            <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+              <span className="w-2 h-2 bg-violet-500 rounded-full mr-2"></span>
+              {t("result.nextStepsRecommendations.title")}
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {highWorkImpact && (
+                <div className="bg-gradient-to-r from-violet-50 to-blue-50 p-5 rounded-lg border border-violet-200">
+                  <h4 className="text-lg font-semibold text-violet-900 mb-2">
+                    {t("result.nextStepsRecommendations.workImpact.title")}
+                  </h4>
+                  <p className="text-sm text-gray-700 mb-4">
+                    {t("result.nextStepsRecommendations.workImpact.description")}
+                  </p>
+                  <Link
+                    href={`/${locale}/interactive-tools/period-pain-impact-calculator`}
+                    className="inline-flex items-center justify-center px-4 py-2 rounded-md bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-medium hover:from-violet-700 hover:to-indigo-700 transition-colors"
+                  >
+                    {t("result.nextStepsRecommendations.workImpact.cta")}
+                  </Link>
+                </div>
+              )}
+
+              {(isSevere || highScore) && (
+                <div className="bg-gradient-to-r from-red-50 to-orange-50 p-5 rounded-lg border border-red-200">
+                  <h4 className="text-lg font-semibold text-red-900 mb-2">
+                    {t("result.nextStepsRecommendations.medicalConsultation.title")}
+                  </h4>
+                  <p className="text-sm text-gray-700 mb-4">
+                    {t("result.nextStepsRecommendations.medicalConsultation.description")}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <Link
+                      href={`/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`}
+                      className="inline-flex items-center justify-center px-4 py-2 rounded-md border border-red-300 text-red-800 text-sm font-medium hover:bg-red-50 transition-colors"
+                    >
+                      {t("result.nextStepsRecommendations.medicalConsultation.medicalGuideCTA")}
+                    </Link>
+                    <Link
+                      href={`/${locale}/scenario-solutions/emergency-kit`}
+                      className="inline-flex items-center justify-center px-4 py-2 rounded-md border border-red-300 text-red-800 text-sm font-medium hover:bg-red-50 transition-colors"
+                    >
+                      {t("result.nextStepsRecommendations.medicalConsultation.emergencyKitCTA")}
+                    </Link>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -570,7 +781,7 @@ export default function SymptomAssessmentTool({
             style={{ animationDelay: "800ms" }}
           >
             <button
-              onClick={resetAssessment}
+              onClick={handleRestart}
               className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 active:scale-95"
             >
               {t("result.retakeAssessment")}

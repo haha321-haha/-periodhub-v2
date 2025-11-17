@@ -4,7 +4,7 @@
  */
 
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 import {
   WorkplaceWellnessState,
   CalendarState,
@@ -27,6 +27,9 @@ import {
   FontSize,
   SettingsValidationResult,
   PreferenceChange,
+  PeriodRecord,
+  RecommendationFeedback,
+  RecommendationFeedbackHistory,
 } from "../types";
 
 // Day 11: 导入默认值
@@ -35,17 +38,21 @@ import {
   DEFAULT_EXPORT_TEMPLATES,
   DEFAULT_SYSTEM_SETTINGS,
 } from "../types/defaults";
+import { mockPeriodData } from "../data";
 
 // 扩展状态接口，添加Actions
 interface WorkplaceWellnessStore extends WorkplaceWellnessState {
   // 标签页相关Actions
-  setActiveTab: (tab: "calendar" | "nutrition" | "export" | "settings") => void;
+  setActiveTab: (tab: "calendar" | "nutrition" | "export" | "settings" | "assessment" | "recommendations" | "tracking" | "analytics" | "work-impact" | "analysis") => void;
 
   // 日历相关Actions
   updateCalendar: (updates: Partial<CalendarState>) => void;
   setCurrentDate: (date: Date) => void;
   setSelectedDate: (date: Date | null) => void;
   toggleAddForm: () => void;
+  addPeriodRecord: (record: PeriodRecord) => void;
+  updatePeriodRecord: (date: string, record: Partial<PeriodRecord>) => void;
+  deletePeriodRecord: (date: string) => void;
 
   // 工作影响相关Actions
   updateWorkImpact: (updates: Partial<WorkImpactData>) => void;
@@ -122,15 +129,22 @@ interface WorkplaceWellnessStore extends WorkplaceWellnessState {
   addPreferenceChange: (change: PreferenceChange) => void;
   getPreferenceHistory: () => PreferenceChange[];
   clearPreferenceHistory: () => void;
+  
+  // 推荐反馈 Actions
+  addRecommendationFeedback: (feedback: Omit<RecommendationFeedback, 'timestamp'>) => void;
+  clearIgnoredItem: (id: string) => void;
+  clearAllIgnored: () => void;
+  getFeedbackHistory: () => RecommendationFeedbackHistory;
 }
 
 // 初始状态 - 基于HVsLYEp的appState
 const initialState: WorkplaceWellnessState = {
-  activeTab: "calendar",
+  activeTab: "assessment",
   calendar: {
     currentDate: new Date(),
     selectedDate: null,
     showAddForm: false,
+    periodData: mockPeriodData,
   },
   workImpact: {
     painLevel: 0 as PainLevel,
@@ -155,6 +169,14 @@ const initialState: WorkplaceWellnessState = {
   batchExportQueue: null,
   exportHistory: [],
   systemSettings: DEFAULT_SYSTEM_SETTINGS,
+  
+  // 推荐反馈
+  recommendationFeedback: {
+    feedbacks: [],
+    ignoredItems: [],
+    savedItems: [],
+    itemRatings: {},
+  },
 };
 
 // 创建Zustand Store - 使用persist进行本地存储持久化
@@ -192,6 +214,73 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
             showAddForm: !state.calendar.showAddForm,
           },
         })),
+
+      addPeriodRecord: (record) =>
+        set((state) => {
+          // 检查是否已存在相同日期的记录，如果存在则更新，否则添加
+          const existingIndex = state.calendar.periodData.findIndex(
+            (r) => r.date === record.date,
+          );
+          let updatedPeriodData =
+            existingIndex >= 0
+              ? state.calendar.periodData.map((r, index) =>
+                  index === existingIndex ? record : r,
+                )
+              : [...state.calendar.periodData, record];
+
+          // 数据清理：只保留最近 6 个月的记录（更激进）
+          const sixMonthsAgo = new Date();
+          sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+          
+          updatedPeriodData = updatedPeriodData.filter((r) => {
+            try {
+              const recordDate = new Date(r.date);
+              return recordDate >= sixMonthsAgo;
+            } catch {
+              return false; // 无效日期，删除
+            }
+          });
+
+          // 按日期排序（最新的在前）
+          updatedPeriodData.sort((a, b) => 
+            new Date(b.date).getTime() - new Date(a.date).getTime()
+          );
+
+          return {
+            calendar: {
+              ...state.calendar,
+              periodData: updatedPeriodData,
+            },
+          };
+        }),
+
+      updatePeriodRecord: (date, updates) =>
+        set((state) => {
+          const updatedPeriodData = state.calendar.periodData.map((r) =>
+            r.date === date ? { ...r, ...updates } : r,
+          );
+
+          return {
+            calendar: {
+              ...state.calendar,
+              periodData: updatedPeriodData,
+            },
+          };
+        }),
+
+      deletePeriodRecord: (date) =>
+        set((state) => {
+          const updatedPeriodData = state.calendar.periodData.filter(
+            (r) => r.date !== date,
+          );
+
+          return {
+            calendar: {
+              ...state.calendar,
+              periodData: updatedPeriodData,
+            },
+          };
+        }),
 
       // 工作影响相关Actions
       updateWorkImpact: (updates) =>
@@ -609,6 +698,72 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       clearPreferenceHistory: () => {
         // 清除偏好设置变更历史
       },
+      
+      // 推荐反馈 Actions
+      addRecommendationFeedback: (feedback) => {
+        const newFeedback: RecommendationFeedback = {
+          ...feedback,
+          timestamp: new Date().toISOString(),
+        };
+        
+        set((state) => {
+          const newState = {
+            ...state.recommendationFeedback,
+            feedbacks: [...state.recommendationFeedback.feedbacks, newFeedback],
+          };
+          
+          // 更新忽略列表
+          if (feedback.action === 'dismissed') {
+            newState.ignoredItems = [
+              ...state.recommendationFeedback.ignoredItems,
+              feedback.recommendationId,
+            ];
+          }
+          
+          // 更新收藏列表
+          if (feedback.action === 'saved') {
+            newState.savedItems = [
+              ...state.recommendationFeedback.savedItems,
+              feedback.recommendationId,
+            ];
+          }
+          
+          // 更新评分
+          if (feedback.rating) {
+            const existingRating = state.recommendationFeedback.itemRatings[feedback.recommendationId];
+            newState.itemRatings = {
+              ...state.recommendationFeedback.itemRatings,
+              [feedback.recommendationId]: existingRating 
+                ? (existingRating + feedback.rating) / 2 
+                : feedback.rating,
+            };
+          }
+          
+          return { recommendationFeedback: newState };
+        });
+      },
+      
+      clearIgnoredItem: (id) => {
+        set((state) => ({
+          recommendationFeedback: {
+            ...state.recommendationFeedback,
+            ignoredItems: state.recommendationFeedback.ignoredItems.filter(i => i !== id),
+          },
+        }));
+      },
+      
+      clearAllIgnored: () => {
+        set((state) => ({
+          recommendationFeedback: {
+            ...state.recommendationFeedback,
+            ignoredItems: [],
+          },
+        }));
+      },
+      
+      getFeedbackHistory: () => {
+        return get().recommendationFeedback;
+      },
 
       // 工具方法
       resetState: () => set(initialState),
@@ -635,6 +790,411 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       name: "workplace-wellness-storage",
       // 添加SSR安全配置
       skipHydration: false,
+      // 自定义存储适配器，添加错误处理、降级、智能清理和防抖保存
+      storage: createJSONStorage(() => {
+        // 错误标志键（使用 sessionStorage 避免循环）
+        const ERROR_FLAG_KEY = 'workplace-wellness-storage-error';
+        const FAILURE_COUNT_KEY = 'workplace-wellness-storage-failures';
+        const MAX_FAILURES = 3;
+
+        // 防抖保存：减少保存频率
+        let saveTimer: NodeJS.Timeout | null = null;
+        let pendingValue: string | null = null;
+        const DEBOUNCE_DELAY = 500; // 500ms 防抖延迟
+
+        // 关键数据键（需要立即保存）
+        const CRITICAL_KEYS = ['userPreferences', 'systemSettings'];
+        
+        // 判断是否为关键数据
+        const isCriticalData = (data: string): boolean => {
+          try {
+            const parsed = JSON.parse(data);
+            const state = parsed?.state || {};
+            // 检查是否包含关键数据的变化
+            return CRITICAL_KEYS.some(key => state.hasOwnProperty(key));
+          } catch {
+            return false;
+          }
+        };
+
+        // 检查错误标志
+        const checkErrorFlag = (): boolean => {
+          try {
+            return sessionStorage.getItem(ERROR_FLAG_KEY) === 'disabled';
+          } catch {
+            return false;
+          }
+        };
+
+        // 增加失败计数
+        const incrementFailureCount = (): number => {
+          try {
+            const count = parseInt(sessionStorage.getItem(FAILURE_COUNT_KEY) || '0', 10) + 1;
+            sessionStorage.setItem(FAILURE_COUNT_KEY, count.toString());
+            if (count >= MAX_FAILURES) {
+              sessionStorage.setItem(ERROR_FLAG_KEY, 'disabled');
+            }
+            return count;
+          } catch {
+            return MAX_FAILURES;
+          }
+        };
+
+        // 重置失败计数
+        const resetFailureCount = (): void => {
+          try {
+            sessionStorage.removeItem(FAILURE_COUNT_KEY);
+            sessionStorage.removeItem(ERROR_FLAG_KEY);
+          } catch {
+            // 忽略错误
+          }
+        };
+
+        // 智能清理：清理所有相关键和临时数据
+        const aggressiveCleanup = (targetKey: string): boolean => {
+          try {
+            // 1. 清理所有以 'workplace-wellness-' 开头的键
+            const keysToRemove: string[] = [];
+            for (let i = localStorage.length - 1; i >= 0; i--) {
+              const key = localStorage.key(i);
+              if (key && key.startsWith('workplace-wellness-')) {
+                keysToRemove.push(key);
+              }
+            }
+            keysToRemove.forEach(key => {
+              try {
+                localStorage.removeItem(key);
+              } catch {
+                // 忽略错误
+              }
+            });
+
+            // 2. 清理临时数据（_temp, _cache 后缀）
+            const tempKeys: string[] = [];
+            for (let i = localStorage.length - 1; i >= 0; i--) {
+              const key = localStorage.key(i);
+              if (key && (key.includes('_temp') || key.includes('_cache'))) {
+                tempKeys.push(key);
+              }
+            }
+            tempKeys.forEach(key => {
+              try {
+                localStorage.removeItem(key);
+              } catch {
+                // 忽略错误
+              }
+            });
+
+            return true;
+          } catch {
+            return false;
+          }
+        };
+
+        // 清理并优化数据
+        const cleanAndOptimizeData = (data: any): any => {
+          if (!data?.state) return data;
+
+          // 清理 periodData：只保留最近 3 个月
+          if (data.state.calendar?.periodData) {
+            const threeMonthsAgo = new Date();
+            threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+            
+            data.state.calendar.periodData = data.state.calendar.periodData
+              .filter((r: any) => {
+                try {
+                  const recordDate = new Date(r.date);
+                  return recordDate >= threeMonthsAgo;
+                } catch {
+                  return false;
+                }
+              })
+              .sort((a: any, b: any) => 
+                new Date(b.date).getTime() - new Date(a.date).getTime()
+              );
+          }
+
+          // 清理 exportHistory：只保留最近 20 条
+          if (data.state.exportHistory) {
+            data.state.exportHistory = data.state.exportHistory
+              .slice(-20)
+              .sort((a: any, b: any) => 
+                new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+              );
+          }
+
+          return data;
+        };
+
+        // 创建自定义存储对象
+        const customStorage: Storage = {
+          ...localStorage,
+          getItem: (key: string): string | null => {
+            try {
+              return localStorage.getItem(key);
+            } catch {
+              return null;
+            }
+          },
+          setItem: (name: string, value: string): void => {
+            // 检查错误标志
+            if (checkErrorFlag()) {
+              // 已禁用，尝试降级到 sessionStorage
+              try {
+                sessionStorage.setItem(name, value);
+                return;
+              } catch {
+                // sessionStorage 也失败，放弃保存
+                return;
+              }
+            }
+
+            // 判断是否为关键数据
+            const critical = isCriticalData(value);
+            
+            // 处理保存错误
+            const handleSaveError = (saveName: string, saveValue: string, saveError: unknown): void => {
+              // 处理配额超出错误
+              if (
+                saveError instanceof DOMException &&
+                (saveError.code === 22 || saveError.name === "QuotaExceededError")
+              ) {
+                const failureCount = incrementFailureCount();
+                
+                // 如果失败次数过多，禁用持久化
+                if (failureCount >= MAX_FAILURES) {
+                  console.warn("Storage disabled after multiple failures, using sessionStorage");
+                  try {
+                    sessionStorage.setItem(saveName, saveValue);
+                    return;
+                  } catch {
+                    return;
+                  }
+                }
+
+                // 尝试智能清理
+                aggressiveCleanup(saveName);
+
+                // 尝试清理并优化现有数据
+                try {
+                  const existingData = localStorage.getItem(saveName);
+                  if (existingData) {
+                    let parsed: any;
+                    try {
+                      parsed = JSON.parse(existingData);
+                    } catch {
+                      // 数据损坏，删除
+                      localStorage.removeItem(saveName);
+                      // 尝试降级到 sessionStorage
+                      try {
+                        sessionStorage.setItem(saveName, saveValue);
+                        return;
+                      } catch {
+                        return;
+                      }
+                    }
+
+                    // 清理并优化数据
+                    const cleaned = cleanAndOptimizeData(parsed);
+                    const cleanedData = JSON.stringify(cleaned);
+
+                    try {
+                      localStorage.setItem(saveName, cleanedData);
+                      resetFailureCount();
+                      return;
+                    } catch {
+                      // 继续尝试其他方案
+                    }
+                  }
+                } catch {
+                  // 继续尝试其他方案
+                }
+
+                // 尝试保存最小数据集
+                try {
+                  localStorage.removeItem(saveName);
+                  const minimalData = {
+                    state: {
+                      activeTab: "assessment",
+                      calendar: {
+                        currentDate: new Date().toISOString(),
+                        selectedDate: null,
+                        showAddForm: false,
+                        periodData: [],
+                      },
+                    },
+                  };
+                  localStorage.setItem(saveName, JSON.stringify(minimalData));
+                  resetFailureCount();
+                  return;
+                } catch {
+                  // 最后尝试：降级到 sessionStorage
+                  try {
+                    sessionStorage.setItem(saveName, saveValue);
+                    return;
+                  } catch {
+                    // 完全失败，放弃保存
+                    return;
+                  }
+                }
+              } else {
+                console.error("Failed to set item in localStorage:", saveError);
+              }
+            };
+
+            // 关键数据立即保存，非关键数据防抖保存
+            const performSave = () => {
+              const valueToSave = pendingValue || value;
+              try {
+                localStorage.setItem(name, valueToSave);
+                // 成功保存，重置失败计数
+                resetFailureCount();
+                pendingValue = null;
+              } catch (error) {
+                // 处理保存错误
+                handleSaveError(name, valueToSave, error);
+              }
+            };
+
+            // 如果是关键数据，立即保存
+            if (critical) {
+              // 清除待保存的数据
+              if (saveTimer) {
+                clearTimeout(saveTimer);
+                saveTimer = null;
+              }
+              pendingValue = null;
+              performSave();
+              return;
+            }
+
+            // 非关键数据：防抖保存
+            pendingValue = value;
+            if (saveTimer) {
+              clearTimeout(saveTimer);
+            }
+            saveTimer = setTimeout(() => {
+              performSave();
+              saveTimer = null;
+            }, DEBOUNCE_DELAY);
+          },
+          removeItem: (key: string): void => {
+            try {
+              localStorage.removeItem(key);
+            } catch {
+              // 忽略错误
+            }
+          },
+          clear: (): void => {
+            try {
+              localStorage.clear();
+            } catch {
+              // 忽略错误
+            }
+          },
+          get length(): number {
+            try {
+              return localStorage.length;
+            } catch {
+              return 0;
+            }
+          },
+          key: (index: number): string | null => {
+            try {
+              return localStorage.key(index);
+            } catch {
+              return null;
+            }
+          },
+        } as Storage;
+        return customStorage;
+      }),
+      // 部分持久化：只持久化关键数据，减少存储大小
+      // 分层存储：关键数据用 localStorage，会话数据用 sessionStorage
+      partialize: (state) => {
+        // 清理 periodData：只保留最近 6 个月的记录（更激进）
+        const sixMonthsAgo = new Date();
+        sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+        
+        const cleanedPeriodData = state.calendar.periodData
+          .filter((r) => {
+            try {
+              const recordDate = new Date(r.date);
+              return recordDate >= sixMonthsAgo;
+            } catch {
+              return false; // 无效日期，删除
+            }
+          })
+          .sort((a, b) => 
+            new Date(b.date).getTime() - new Date(a.date).getTime()
+          );
+
+        // 限制 exportHistory 数量（只保留最近 20 条）
+        const limitedExportHistory = state.exportHistory
+          .slice(-20)
+          .sort((a, b) => 
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+
+        // 关键数据：持久化到 localStorage
+        // 非关键数据：不持久化或使用 sessionStorage
+        return {
+          // 关键数据（必须持久化）
+          activeTab: state.activeTab,
+          userPreferences: state.userPreferences,
+          systemSettings: state.systemSettings,
+          exportTemplates: state.exportTemplates,
+          activeTemplate: state.activeTemplate,
+          
+          // 重要数据（持久化但限制大小）
+          calendar: {
+            ...state.calendar,
+            periodData: cleanedPeriodData,
+          },
+          workImpact: state.workImpact,
+          nutrition: state.nutrition,
+          export: {
+            ...state.export,
+            // 不持久化 isExporting（临时状态）
+            isExporting: false,
+          },
+          exportHistory: limitedExportHistory,
+          
+          // 不持久化 batchExportQueue（临时数据，只在内存中）
+        };
+      },
+      // 数据迁移：清理旧数据
+      onRehydrateStorage: () => (state) => {
+        if (state) {
+          // 清理 periodData：只保留最近 6 个月
+          const sixMonthsAgo = new Date();
+          sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+          
+          const cleanedPeriodData = state.calendar.periodData
+            .filter((r) => {
+              try {
+                const recordDate = new Date(r.date);
+                return recordDate >= sixMonthsAgo;
+              } catch {
+                return false; // 无效日期，删除
+              }
+            })
+            .sort((a, b) => 
+              new Date(b.date).getTime() - new Date(a.date).getTime()
+            );
+
+          // 限制 exportHistory：只保留最近 20 条
+          const limitedExportHistory = state.exportHistory
+            .slice(-20)
+            .sort((a, b) => 
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+
+          // 更新状态
+          state.calendar.periodData = cleanedPeriodData;
+          state.exportHistory = limitedExportHistory;
+        }
+      },
     },
   ),
 );
@@ -674,6 +1234,15 @@ export const useWorkplaceWellnessActions = () => {
   const setCurrentDate = useWorkplaceWellnessStore(
     (state) => state.setCurrentDate,
   );
+  const addPeriodRecord = useWorkplaceWellnessStore(
+    (state) => state.addPeriodRecord,
+  );
+  const updatePeriodRecord = useWorkplaceWellnessStore(
+    (state) => state.updatePeriodRecord,
+  );
+  const deletePeriodRecord = useWorkplaceWellnessStore(
+    (state) => state.deletePeriodRecord,
+  );
   const updateWorkImpact = useWorkplaceWellnessStore(
     (state) => state.updateWorkImpact,
   );
@@ -691,6 +1260,9 @@ export const useWorkplaceWellnessActions = () => {
     setActiveTab,
     updateCalendar,
     setCurrentDate,
+    addPeriodRecord,
+    updatePeriodRecord,
+    deletePeriodRecord,
     updateWorkImpact,
     selectTemplate,
     updateNutrition,
@@ -830,5 +1402,28 @@ export const useSystemSettingsActions = () => {
   return {
     updateSystemSettings,
     resetSystemSettings,
+  };
+};
+
+// 推荐反馈 Actions Hook
+export const useRecommendationFeedbackActions = () => {
+  const addRecommendationFeedback = useWorkplaceWellnessStore(
+    (state) => state.addRecommendationFeedback,
+  );
+  const clearIgnoredItem = useWorkplaceWellnessStore(
+    (state) => state.clearIgnoredItem,
+  );
+  const clearAllIgnored = useWorkplaceWellnessStore(
+    (state) => state.clearAllIgnored,
+  );
+  const getFeedbackHistory = useWorkplaceWellnessStore(
+    (state) => state.getFeedbackHistory,
+  );
+
+  return {
+    addRecommendationFeedback,
+    clearIgnoredItem,
+    clearAllIgnored,
+    getFeedbackHistory,
   };
 };

@@ -439,20 +439,13 @@ export default async function ArticlePage({
     // 生成增强的结构化数据
     const articleStructuredData = await generateArticleStructuredData({
       locale,
-      slug,
+      articleSlug: slug,
       title,
       description: summary || "",
       author: article.author,
       datePublished: article.date,
       dateModified: article.date,
       image: article.featured_image,
-      breadcrumbs: [
-        {
-          name: t("breadcrumb.articles"),
-          url: `${baseUrl}/${locale}/downloads`,
-        },
-        { name: title, url: articleUrl },
-      ],
     });
 
     // 生成面包屑结构化数据

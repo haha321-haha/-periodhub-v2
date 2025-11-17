@@ -59,10 +59,32 @@ const nextConfig = {
   // 实验性功能
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['@/components', '@/lib'],
+    optimizePackageImports: ['@/components', '@/lib', 'lucide-react'],
     // 移动端性能优化
     optimizeServerReact: true,
     webVitalsAttribution: ['CLS', 'LCP'],
+  },
+  
+  // Webpack 配置 - 修复 vendor chunks 问题
+  webpack: (config, { isServer, webpack }) => {
+    // 确保 lucide-react 正确打包
+    if (!isServer) {
+      // 确保 lucide-react 不被分割到 vendor chunks
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          ...config.optimization.splitChunks,
+          cacheGroups: {
+            ...config.optimization.splitChunks?.cacheGroups,
+            default: {
+              ...config.optimization.splitChunks?.cacheGroups?.default,
+              minChunks: 1,
+            },
+          },
+        },
+      };
+    }
+    return config;
   },
 
   // 编译器优化

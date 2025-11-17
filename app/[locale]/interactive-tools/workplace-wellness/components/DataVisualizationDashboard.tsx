@@ -21,8 +21,8 @@ import {
   Info,
 } from "lucide-react";
 import { useLocale } from "next-intl";
-import { getPeriodData } from "../data";
 import { useTranslations } from "next-intl";
+import { useCalendar } from "../hooks/useWorkplaceWellnessStore";
 import {
   CyclePredictor,
   CycleAnalysis,
@@ -50,6 +50,7 @@ interface DashboardData {
 export default function DataVisualizationDashboard() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
+  const calendar = useCalendar();
   const [activeView, setActiveView] = useState<
     "overview" | "detailed" | "comparison"
   >("overview");
@@ -58,7 +59,8 @@ export default function DataVisualizationDashboard() {
   );
   const [loading, setLoading] = useState(true);
 
-  const periodData = getPeriodData();
+  // 从 store 读取 periodData
+  const periodData = calendar.periodData || [];
 
   useEffect(() => {
     generateDashboardData();

@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Locale, locales } from "@/i18n";
 import StructuredData from "@/components/StructuredData";
+import StressManagementRecommendations from "../components/StressManagementRecommendations";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -102,19 +103,26 @@ export default async function RelaxationTechniquesPage({
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
         <div className="container mx-auto px-4 py-8 max-w-6xl">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-gray-600 mb-8">
-            <Link href={`/${locale}`} className="hover:text-blue-600">
+          <nav className="text-sm text-neutral-600 mb-8">
+            <Link href={`/${locale}`} className="hover:text-primary-600">
               {t("common.breadcrumb.home")}
             </Link>
-            <span>/</span>
+            <span className="mx-2">›</span>
             <Link
-              href={`/${locale}/stress-management`}
-              className="hover:text-blue-600"
+              href={`/${locale}/interactive-tools`}
+              className="hover:text-primary-600"
+            >
+              {t("common.breadcrumb.interactiveTools")}
+            </Link>
+            <span className="mx-2">›</span>
+            <Link
+              href={`/${locale}/interactive-tools/stress-management`}
+              className="hover:text-primary-600"
             >
               {t("title")}
             </Link>
-            <span>/</span>
-            <span className="text-gray-800">{t("techniques.title")}</span>
+            <span className="mx-2">›</span>
+            <span className="text-neutral-800">{t("techniques.title")}</span>
           </nav>
 
           {/* Header */}
@@ -266,6 +274,9 @@ export default async function RelaxationTechniquesPage({
               <span>{t("backToTools")}</span>
             </Link>
           </div>
+
+          {/* Related Recommendations */}
+          <StressManagementRecommendations locale={locale} />
 
           {/* Medical Disclaimer */}
           <div

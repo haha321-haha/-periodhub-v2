@@ -8,6 +8,8 @@
  * 4. 支持A/B测试
  */
 
+import { useState, useEffect } from 'react';
+
 interface CTAEventData {
   eventName?: string; // 'hero_cta_impression' | 'hero_cta_click'
   buttonText: string;
@@ -33,6 +35,7 @@ interface UserSession {
 
 /**
  * 生成会话ID
+ * 注意：此函数仅应在客户端调用，且不应用于渲染期间
  */
 function generateSessionId(): string {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -146,8 +149,32 @@ function getDeviceInfo(): {
  * CTA事件追踪Hook
  */
 export function useCTATracking() {
-  const session = getUserSession();
-  const deviceInfo = getDeviceInfo();
+  // 使用useState延迟初始化会话，防止服务器/客户端不一致
+  const [session, setSession] = useState<UserSession>(() => ({
+    id: 'client-initializing',
+    startTime: new Date().toISOString(),
+    pageViews: 0,
+    ctaClicks: 0,
+    lastActivity: new Date().toISOString()
+  }));
+  
+  const [deviceInfo, setDeviceInfo] = useState<{
+    userAgent: string;
+    screenWidth: number;
+    screenHeight: number;
+    deviceType: 'desktop' | 'tablet' | 'mobile';
+  }>(() => ({
+    userAgent: 'client-initializing',
+    screenWidth: 0,
+    screenHeight: 0,
+    deviceType: 'desktop'
+  }));
+  
+  // 仅在客户端初始化会话和设备信息
+  useEffect(() => {
+    setSession(getUserSession());
+    setDeviceInfo(getDeviceInfo());
+  }, []);
   
   /**
    * 追踪CTA点击事件

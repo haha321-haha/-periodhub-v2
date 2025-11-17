@@ -12,18 +12,30 @@ import {
   useWorkplaceWellnessActions,
 } from "../hooks/useWorkplaceWellnessStore";
 import { useLocale } from "next-intl";
-import { getPeriodData } from "../data";
 import { useTranslations } from "next-intl";
-import { PeriodRecord } from "../types";
+import { PeriodRecord, PeriodType, PainLevel } from "../types";
 
 export default function CalendarComponent() {
   const calendar = useCalendar();
   const locale = useLocale();
-  const { updateCalendar, setCurrentDate } = useWorkplaceWellnessActions();
+  const { updateCalendar, setCurrentDate, addPeriodRecord } =
+    useWorkplaceWellnessActions();
   const t = useTranslations("workplaceWellness");
 
-  const periodData = getPeriodData();
+  // 从 store 读取 periodData
+  const periodData = calendar.periodData || [];
   const [showAddForm, setShowAddForm] = useState(false);
+
+  // 表单状态
+  const [formData, setFormData] = useState<{
+    date: string;
+    type: PeriodType;
+    painLevel: number;
+  }>({
+    date: new Date().toISOString().split("T")[0],
+    type: "period",
+    painLevel: 0,
+  });
 
   // 基于HVsLYEp的日历逻辑
   const { currentDate } = calendar;
@@ -104,7 +116,29 @@ export default function CalendarComponent() {
 
   // 添加经期记录
   const handleAddRecord = () => {
+    setFormData({
+      date: new Date().toISOString().split("T")[0],
+      type: "period",
+      painLevel: 0,
+    });
     setShowAddForm(true);
+  };
+
+  // 保存记录
+  const handleSaveRecord = () => {
+    const record: PeriodRecord = {
+      date: formData.date,
+      type: formData.type,
+      painLevel: formData.painLevel > 0 ? (formData.painLevel as PainLevel) : null,
+      flow: null, // 可以根据需要添加流量选择
+    };
+    addPeriodRecord(record);
+    setShowAddForm(false);
+  };
+
+  // 取消添加
+  const handleCancel = () => {
+    setShowAddForm(false);
   };
 
   return (
@@ -219,15 +253,27 @@ export default function CalendarComponent() {
               </label>
               <input
                 type="date"
+                value={formData.date}
+                onChange={(e) =>
+                  setFormData({ ...formData, date: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                defaultValue={new Date().toISOString().split("T")[0]}
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-neutral-800 mb-2">
                 {t("calendar.type")}
               </label>
-              <select className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+              <select
+                value={formData.type}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    type: e.target.value as PeriodType,
+                  })
+                }
+                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
                 <option value="period">{t("calendar.typePeriod")}</option>
                 <option value="predicted">{t("calendar.typePredicted")}</option>
                 <option value="ovulation">{t("calendar.typeOvulation")}</option>
@@ -235,25 +281,31 @@ export default function CalendarComponent() {
             </div>
             <div>
               <label className="block text-sm font-medium text-neutral-800 mb-2">
-                {t("calendar.painLevel")}
+                {t("calendar.painLevel")} ({formData.painLevel})
               </label>
               <input
                 type="range"
                 min="0"
                 max="10"
-                defaultValue="0"
+                value={formData.painLevel}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    painLevel: parseInt(e.target.value, 10),
+                  })
+                }
                 className="w-full"
               />
             </div>
             <div className="flex gap-3">
               <button
-                onClick={() => setShowAddForm(false)}
+                onClick={handleSaveRecord}
                 className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200"
               >
                 {t("common.save")}
               </button>
               <button
-                onClick={() => setShowAddForm(false)}
+                onClick={handleCancel}
                 className="px-4 py-2 bg-neutral-200 text-neutral-800 rounded-lg hover:bg-neutral-300 transition-colors duration-200"
               >
                 {t("common.cancel")}

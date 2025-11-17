@@ -4,6 +4,10 @@ import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
 import SafeSmartImage from "@/components/ui/SafeSmartImage";
 import {
+  generateCollectionStructuredData,
+  CollectionStructuredDataScript,
+} from "@/lib/seo/collection-structured-data";
+import {
   Briefcase,
   Car,
   Dumbbell,
@@ -67,6 +71,8 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
 
   const t = await getTranslations("scenarioSolutionsPage");
   const commonT = await getTranslations("common");
+
+  const isZh = locale === "zh";
 
   // 场景图片映射
   const scenarioImages: Record<string, { filename: string; alt: string }> = {
@@ -157,6 +163,23 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
     },
   ];
 
+  // 生成 CollectionPage 结构化数据
+  const collectionData = await generateCollectionStructuredData({
+    locale,
+    pagePath: "/scenario-solutions",
+    name: t("title"),
+    description: t("description"),
+    items: scenarios.map((scenario) => ({
+      title: scenario.title,
+      description: scenario.description,
+      href: `/${locale}/scenario-solutions/${scenario.id}`,
+    })),
+    additionalInfo: {
+      about: isZh ? "痛经场景解决方案" : "Period Pain Scenario Solutions",
+      audience: isZh ? "经期女性" : "Menstruating Women",
+    },
+  });
+
   const getIcon = (iconName: string) => {
     const iconProps = { className: "w-8 h-8" };
     switch (iconName) {
@@ -178,19 +201,12 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
   };
 
   return (
-    <div
-      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-12"
-      data-page="scenario-solutions"
-    >
-      {/* SEO结构化数据 */}
-      <StructuredData
-        type="healthTopicPage"
-        title={t("title")}
-        description={t("description")}
-        url={`${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}/scenario-solutions`}
-      />
+    <>
+      <CollectionStructuredDataScript data={collectionData} />
+      <div
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-12"
+        data-page="scenario-solutions"
+      >
 
       {/* Page Header */}
       <header className="text-center py-8 md:py-12">
@@ -465,6 +481,7 @@ export default async function ScenarioSolutionsPage({ params }: Props) {
           </Link>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

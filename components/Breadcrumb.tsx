@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
+import { useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { URL_CONFIG } from "@/lib/url-config";
 
@@ -44,16 +45,37 @@ export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
     ],
   };
 
+  // 使用 useEffect 在客户端动态插入结构化数据脚本到 document.head
+  // 这样可以避免服务器端和客户端渲染不一致导致的 hydration 错误
+  useEffect(() => {
+    // 生成唯一的 ID 来标识这个面包屑的脚本
+    const scriptId = `breadcrumb-script-${locale}-${items.map(i => i.label).join('-')}`;
+    
+    // 检查是否已经存在相同的脚本
+    const existingScript = document.getElementById(scriptId);
+    
+    if (!existingScript) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.type = "application/ld+json";
+      script.textContent = JSON.stringify(breadcrumbData);
+      document.head.appendChild(script);
+    } else {
+      // 如果脚本已存在，更新其内容
+      existingScript.textContent = JSON.stringify(breadcrumbData);
+    }
+
+    // 清理函数：组件卸载时移除脚本
+    return () => {
+      const script = document.getElementById(scriptId);
+      if (script) {
+        script.remove();
+      }
+    };
+  }, [breadcrumbData, locale, items]);
+
   return (
     <>
-      {/* 结构化数据 */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbData),
-        }}
-      />
-
       {/* 面包屑导航 */}
       <nav aria-label="Breadcrumb" className={`mb-6 ${className}`}>
         <ol className="flex items-center space-x-2 text-sm text-gray-600">

@@ -14,7 +14,19 @@
       "ogTitle": "Period Pain Relief | Free Medical Tools & Guides",
       "ogDescription": "Explore 43 professional health articles and 13 downloadable PDF resources, including 8 assessment tools, for science-backed period pain management.",
       "twitterTitle": "Period Pain Relief | Free Medical Tools & Guides",
-      "twitterDescription": "Explore 43 professional health articles and 13 downloadable PDF resources, including 8 assessment tools, for science-backed period pain management."
+      "twitterDescription": "Explore 43 professional health articles and 13 downloadable PDF resources, including 8 assessment tools, for science-backed period pain management.",
+      "home": {
+        "structuredData": {
+          "description": "Professional women's menstrual health management platform providing period pain tracking, cycle prediction, constitution assessment and more",
+          "featureList": {
+            "painTracking": "Pain Tracking",
+            "cyclePrediction": "Cycle Prediction",
+            "constitutionAssessment": "Constitution Assessment",
+            "healthGuides": "Health Guides",
+            "scenarioSolutions": "Scenario Solutions"
+          }
+        }
+      }
     }
   },
   "header": {
@@ -46,6 +58,9 @@
     "contactEmail": "Contact us for email address",
     "socialTwitter": "Twitter",
     "socialInstagram": "Instagram",
+    "socialDiscord": "Join Discord Community",
+    "contactEmailSubject": "Website Inquiry",
+    "contactEmailBody": "Hello, I would like to inquire about menstrual health management.",
     "copyright": "© 2,025 www.periodhub.health. All rights reserved.",
     "medicalDisclaimerFull": "Medical Disclaimer: The content on this website is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. We are not medical professionals. If you have any medical questions, please consult your doctor or other qualified healthcare provider. In case of emergency, please seek medical assistance immediately. Using this website does not constitute a doctor-patient relationship."
   },
@@ -72,6 +87,7 @@
     "tryAgain": "Try Again",
     "healthGuide": "Health Guide",
     "naturalTherapies": "Natural Therapies",
+    "minutes": "minutes",
     "breadcrumb": {
       "home": "Home",
       "separator": "/",
@@ -359,12 +375,24 @@
       "answer": "After registering an account, complete the basic assessment to start using all features."
     }
   },
+  "q8": {
+    "question": "How do I know if my period pain is severe?",
+    "answer": "If your period pain significantly affects daily life, such as being unable to work or study normally, or is accompanied by other symptoms (such as fever, vomiting, abnormal bleeding, etc.), it is recommended to seek medical attention promptly. Medically, pain rating scales are usually used to assess severity."
+  },
+  "q9": {
+    "question": "Besides medication, what other methods can relieve period pain?",
+    "answer": "Non-medical methods include: heat therapy (hot water bottle, warm patch), light exercise (such as yoga, walking), dietary adjustments (increasing intake of magnesium, calcium, vitamin B1), acupressure (Sanyinjiao, Hegu points), etc. For mild to moderate period pain, these methods may provide effective relief."
+  },
+  "q10": {
+    "question": "Can period pain affect fertility?",
+    "answer": "Most primary period pain (i.e., pain without organic lesions) does not affect fertility. But if it is secondary period pain (caused by diseases such as endometriosis, uterine fibroids, etc.), the related diseases may need treatment. If you have fertility concerns, it is recommended to consult a specialist for detailed examination."
+  },
   "interactiveTools": {
     "meta": {
       "title": "Interactive Health Tools - Period Management Assistant",
       "description": "Use our professional tools to track symptoms, assess pain levels, and better manage your menstrual health",
       "keywords": "pain tracking tool,menstrual pain recording,period pain analysis,pain management tool,health tracking,menstrual health",
-      "symptomAssessmentKeywords": "period pain calculator,menstrual pain assessment,dysmenorrhea severity test,period pain mechanisms,magnesium for cramps,menstrual pain relief,period pain evaluation tool",
+      "symptomAssessmentKeywords": "symptom checker,menstrual symptom assessment,period symptom evaluation,menstrual health screening,comprehensive symptom analysis,period health check,menstrual symptom questionnaire",
       "ogTitle": "Interactive Menstrual Health Tools | Symptom Tracking & Pain Management",
       "ogDescription": "Professional menstrual health management tools to help you track symptoms, record pain levels, and get personalized health recommendations",
       "twitterTitle": "Interactive Menstrual Health Tools",
@@ -392,13 +420,14 @@
       "cta": "Start Tracking"
     },
     "breadcrumb": {
+      "home": "Home",
+      "tools": "Interactive Tools",
       "scenarioSolutions": "Scenario Solutions",
       "teenHealth": "Teen Health",
       "immediateRelief": "Immediate Relief",
       "campusGuide": "Campus Guide",
       "interactiveTools": "Interactive Tools",
       "workplaceWellness": "Workplace Wellness",
-      "home": "Home",
       "healthGuide": "Health Guide",
       "lifestyle": "Lifestyle Management",
       "understandingPain": "Understanding Pain",
@@ -457,6 +486,41 @@
         "validation": {
           "title": "Scientifically Validated",
           "description": "Based on 50+ medical studies, 92% accuracy rate"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -1217,13 +1281,15 @@
         "medical": "Medical Professional Assessment"
       },
       "messages": {
-        "assessmentComplete": "评估完成",
-        "assessmentCompleteDesc": "您的症状评估已完成。请查看结果和建议。",
-        "assessmentFailed": "评估失败",
-        "assessmentFailedDesc": "评估过程中发生错误。请重试。",
-        "loading": "正在加载...",
-        "calculating": "正在计算...",
-        "generatingRecommendations": "正在生成建议..."
+        "assessmentComplete": "Assessment Complete",
+        "assessmentCompleteDesc": "Your symptom assessment is complete, please review the results and recommendations.",
+        "assessmentFailed": "Assessment Failed",
+        "assessmentFailedDesc": "An error occurred during assessment, please try again.",
+        "loading": "Loading...",
+        "calculating": "Calculating...",
+        "generatingRecommendations": "Generating recommendations...",
+        "resultsSaved": "Results Saved",
+        "resultsSavedDesc": "Your assessment results have been saved to local storage."
       },
       "severity": {
         "mild": "轻度",
@@ -1318,7 +1384,61 @@
         "longTerm": "长期",
         "workplaceImpact": "职场影响",
         "personalCare": "个人护理",
-        "medicalAdvice": "医疗建议"
+        "medicalAdvice": "医疗建议",
+        "nextStepsRecommendations": {
+          "title": "Smart Next-Step Recommendations",
+          "workImpact": {
+            "title": "Want to understand the impact on work and daily life?",
+            "description": "Based on your answers, work or daily functioning may be affected. Use the Period Pain Impact Calculator to quantify how symptoms affect your work and life, and get more tailored workplace recommendations.",
+            "cta": "Go to Period Pain Impact Calculator"
+          },
+          "medicalConsultation": {
+            "title": "Should you consider medical evaluation?",
+            "description": "If your pain is worsening, accompanied by unusual bleeding, or significantly affecting daily life, we recommend consulting a gynecologist. You can also review our medical guides to understand when to seek medical help.",
+            "medicalGuideCTA": "Read Medical Guide",
+            "emergencyKitCTA": "View Emergency Coping Tips"
+          }
+        }
+      },
+      "relatedTools": {
+        "painTracker": {
+          "title": "Pain Tracker",
+          "description": "Track pain patterns, analyze trends",
+          "category": "Tracking Tool",
+          "difficulty": "Easy",
+          "estimatedTime": "2-3 minutes"
+        },
+        "constitutionTest": {
+          "title": "Constitution Test",
+          "description": "Know your type, get care advice",
+          "category": "Constitution Assessment",
+          "difficulty": "Medium",
+          "estimatedTime": "5-8 minutes"
+        },
+        "impactCalculator": {
+          "title": "Pain Impact Calculator",
+          "description": "Assess pain impact on work & life",
+          "category": "Impact Assessment",
+          "difficulty": "Medium",
+          "estimatedTime": "3-5 minutes"
+        }
+      },
+      "scenarioSolutions": {
+        "emergencyKit": {
+          "title": "Emergency Relief Kit",
+          "description": "Quick relief for pain episodes"
+        },
+        "office": {
+          "title": "Office Relief Solutions",
+          "description": "Office menstrual health strategies"
+        },
+        "teenHealth": {
+          "title": "Teen Health Guidance",
+          "description": "Period health education for teens 12-18"
+        }
+      },
+      "common": {
+        "minutes": "minutes"
       },
       "recommendations": {
         "workplaceSupport": {
@@ -1344,6 +1464,41 @@
           "action2": "讨论疼痛管理方案。",
           "action3": "了解可能的治疗方案。",
           "timeframe": "建议实施"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -1415,6 +1570,41 @@
             "初学者3-4个循环即可",
             "如感到头晕请停止练习"
           ]
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -1474,6 +1664,41 @@
             "leave": "有明确的经期休假政策",
             "none": "不需要特殊支持"
           }
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -1574,7 +1799,10 @@
       "nutrition": "Nutrition",
       "assessment": "Assessment",
       "calculator": "Impact Calculator",
-      "workplace": "Workplace Health Management"
+      "workplace": "Workplace Health Management",
+      "start_tracking": "Start Tracking →",
+      "start_test": "Take Test →",
+      "start_assessment": "Start Assessment →"
     },
     "solutions": {
       "exercise_balance_new": "Exercise & Menstruation",
@@ -1583,6 +1811,11 @@
       "sleep": "Sleep",
       "exercise": "Exercise",
       "workplace_wellness": "Workplace Wellness",
+      "workplace": "Workplace Health Management",
+      "workplace_cycle": "Workplace Cycle Management",
+      "student_cycle": "Student Cycle Management",
+      "fitness_cycle": "Fitness Cycle Management",
+      "exercise_balance": "Exercise Balance",
       "relief": "Relief Methods",
       "natural_therapies": "Natural Therapies",
       "scenarios": "Scenario Solutions",
@@ -1592,10 +1825,14 @@
       "life_stages": "Life Stages Management",
       "commute": "Commute Scenarios",
       "campus_emergency": "Campus Emergency",
-      "social": "Social Scenarios"
+      "social": "Social Scenarios",
+      "view_guide": "View Guide →",
+      "view_zone": "View Zone →",
+      "view_solution": "Learn More →"
     },
     "teen": {
-      "main": "Learn More"
+      "main": "Learn More",
+      "view_zone": "View Zone →"
     },
     "articles": {
       "medical_guide": "Dysmenorrhea Medical Guide",
@@ -1819,6 +2056,8 @@
           "physicalTherapyDesc": "Explore scientific applications of natural physical therapies including massage, stretching, and exercise",
           "essentialOils": "Essential Oils for Period Pain Guide",
           "essentialOilsDesc": "Understanding aromatherapy applications and precautions for period pain relief",
+          "essentialOilsAromatherapyGuide": "Essential Oils Aromatherapy for Menstrual Pain Relief: Complete Guide",
+          "essentialOilsAromatherapyGuideDesc": "In-depth understanding of the scientific principles, usage methods, and safety precautions of essential oils aromatherapy, including applications of lavender, ginger, rose, and other essential oils",
           "herbalTeaDesc": "Explore traditional herbal tea applications and preparation methods for period pain relief",
           "traditionalMethodsDesc": "Explore period pain relief wisdom from traditional cultures around the world",
           "zhanZhuangDesc": "Learn applications of traditional Chinese medicine health practices in menstrual health management"
@@ -1829,6 +2068,8 @@
         "title": "Medical Guidance",
         "articles": {
           "nsaidProfessionalGuide": "NSAID Professional Guide",
+          "comprehensiveIudGuide": "Intrauterine Device (IUD): Comprehensive Guide and User Manual",
+          "comprehensiveIudGuideDesc": "Detailed understanding of IUD types, working principles, pros and cons, side effects, and usage precautions to help you make informed contraceptive choices",
           "whenToSeeDoctor": "When to See Doctor",
           "medicalCare": "Medical Care Guide",
           "comprehensiveMedical": "Comprehensive Medical Guide to Dysmenorrhea",
@@ -1837,6 +2078,8 @@
           "medicalCareDesc": "Detailed guidance on when professional medical evaluation and treatment are needed",
           "complications": "Dysmenorrhea Complications Management",
           "complicationsDesc": "Understanding potential complications of period pain and their prevention and management strategies",
+          "menstrualPainComplications": "Menstrual Pain Complications: Identification and Management of Severe Cases",
+          "menstrualPainComplicationsDesc": "Identify and manage menstrual pain-related complications, including coping methods for serious conditions such as endometriosis, adenomyosis, and fibroids",
           "nsaidProfessionalGuideDesc": "Professional NSAIDs dysmenorrhea treatment guide: detailed explanation of pharmacological mechanisms, safe medication use, dosage calculation, and effectiveness optimization"
         },
         "description": "Professional medical knowledge and scientific treatment guidance"
@@ -2144,6 +2387,54 @@
         "severeIntensity": "Severe menstrual pain may affect your quality of life. We recommend consulting a healthcare provider to explore treatment options.",
         "moderateIntensity": "Moderate pain can often be managed with self-care and natural remedies. Consider trying heat therapy, gentle exercise, and stress management techniques.",
         "mildIntensity": "Mild pain is manageable with self-care. Continue with healthy habits and monitor your symptoms."
+      },
+      "navigation": {
+        "title": "Choose Your Path",
+        "subtitle": "Select the tool that best matches your current needs and get professional guidance",
+        "calculator": {
+          "title": "Assess Work & Life Impact",
+          "description": "For those who know they have period pain and want to understand how it affects their daily activities and work productivity.",
+          "features": [
+            "Quantified work impact analysis",
+            "Daily life assessment",
+            "Medical decision support",
+            "Personalized severity rating"
+          ],
+          "primaryCTA": "Start Impact Assessment",
+          "secondaryCTA": "Learn More About This Tool"
+        },
+        "assessment": {
+          "title": "Comprehensive Symptom Check",
+          "description": "For those experiencing various menstrual symptoms and need help identifying what type of menstrual issues they might have.",
+          "features": [
+            "Full symptom screening",
+            "Pattern identification",
+            "Severity classification",
+            "Next steps recommendations"
+          ],
+          "primaryCTA": "Start Symptom Assessment",
+          "secondaryCTA": "View Assessment Details"
+        },
+        "relief": {
+          "title": "Immediate Relief Strategies",
+          "description": "For those seeking quick relief methods and lifestyle tips to manage period pain effectively.",
+          "features": [
+            "Evidence-based relief methods",
+            "Lifestyle recommendations",
+            "Natural remedies guide",
+            "When to seek medical help"
+          ],
+          "primaryCTA": "Get Relief Tips",
+          "secondaryCTA": "Browse Relief Resources"
+        }
+      },
+      "trust": {
+        "usersHelped": "2.5M+",
+        "usersHelpedDesc": "Women helped find relief",
+        "averageTime": "5 min",
+        "averageTimeDesc": "Average assessment time",
+        "expertContent": "43",
+        "expertContentDesc": "Evidence-based articles"
       }
     }
   },
@@ -2172,6 +2463,41 @@
         "costEffective": {
           "title": "Cost-Effective",
           "description": "Most methods are affordable and sustainable long-term"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -2565,6 +2891,41 @@
             "hotConstitution": "Hot constitution: Heat clearing with cold compress",
             "qiDeficiency": "Qi deficiency: Qi tonification with breathing exercises"
           }
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -2721,6 +3082,41 @@
           "description": "Portable relief tools",
           "benefits": "Benefits:",
           "benefitsValue": "Always-prepared toolkit for unexpected period pain relief"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -2739,9 +3135,16 @@
     "traditionalPractices": "Traditional Practices"
   },
   "workplaceWellness": {
+    "title": "Workplace Wellness",
     "header": {
       "title": "Workplace Wellness Assistant",
       "subtitle": "Scientific period management for optimal work performance"
+    },
+    "tabs": {
+      "assessment": "Work Environment Assessment",
+      "recommendations": "Personalized Recommendations",
+      "tracking": "Tracking Records",
+      "analytics": "Data Analytics"
     },
     "nav": {
       "calendar": "Calendar",
@@ -2927,6 +3330,9 @@
       "saveButton": "Save",
       "templatesTitle": "Templates",
       "subject": "Subject",
+      "preview": "Preview",
+      "content": "Content",
+      "copyButton": "Copy",
       "severity": {
         "mild": "Mild",
         "moderate": "Moderate",
@@ -2974,6 +3380,312 @@
     "insights": {
       "irregularCycle": "Irregular Cycle",
       "irregularCycleDesc": "Irregular cycle pattern detected, consider consulting a healthcare provider"
+    },
+    "recommendations": {
+      "title": "Personalized Recommendations",
+      "subtitle": "Based on your data",
+      "sectionTitle": "Recommended for You",
+      "loading": "Generating recommendations...",
+      "error": "Recommendation system temporarily unavailable, please try again later",
+      "insights": {
+        "title": "Data Insights",
+        "subtitle": "Analysis based on your data",
+        "painPattern": {
+          "title": "Pain Pattern",
+          "increasing": "Detected increasing pain trend",
+          "decreasing": "Pain is improving",
+          "stable": "Pain remains stable",
+          "irregular": "Pain pattern is irregular"
+        },
+        "efficiencyPattern": {
+          "title": "Work Efficiency",
+          "improving": "Work efficiency is improving",
+          "declining": "Work efficiency has declined",
+          "stable": "Work efficiency remains stable"
+        },
+        "cycleHealth": {
+          "title": "Cycle Health",
+          "healthy": "Healthy cycle",
+          "irregular": "Irregular cycle",
+          "needs_attention": "Medical consultation recommended"
+        }
+      },
+      "categories": {
+        "all": "All",
+        "pain-relief": "Pain Relief",
+        "tracking": "Data Tracking",
+        "medical": "Medical Advice",
+        "work-adjustment": "Work Adjustment",
+        "nutrition": "Nutrition",
+        "natural-therapy": "Natural Therapy",
+        "assessment": "Assessment Tools",
+        "scenario": "Scenario Solutions",
+        "mental-health": "Mental Health",
+        "emergency": "Emergency"
+      },
+      "types": {
+        "article": "Article",
+        "tool": "Tool",
+        "scenario": "Scenario Solution",
+        "tip": "Practical Tip",
+        "action": "Action Item"
+      },
+      "priority": {
+        "high": "Important",
+        "medium": "Recommended",
+        "low": "Optional",
+        "urgent": "Urgent"
+      },
+      "actions": {
+        "dismiss": "Dismiss",
+        "save": "Save",
+        "rate": "Rate",
+        "click": "View Details",
+        "loadMore": "Load More Recommendations",
+        "refresh": "Refresh Recommendations",
+        "viewAll": "View All",
+        "undoDismiss": "Undo Dismiss"
+      },
+      "reasons": {
+        "prefix": "Reason:",
+        "highPainLevel": "Your current pain level is high ({level}/10)",
+        "moderatePainLevel": "Your current pain level is moderate ({level}/10)",
+        "lowPainLevel": "Your pain level is low ({level}/10)",
+        "painTrendIncreasing": "Detected increasing pain trend",
+        "painTrendDecreasing": "Pain is improving",
+        "inMenstrualPhase": "You are currently in menstrual phase",
+        "inFollicularPhase": "You are currently in follicular phase",
+        "inOvulatoryPhase": "You are currently in ovulatory phase",
+        "inLutealPhase": "You are currently in luteal phase",
+        "lowEfficiency": "Your work efficiency is low ({efficiency}%)",
+        "moderateEfficiency": "Your work efficiency is moderate ({efficiency}%)",
+        "irregularCycle": "Detected irregular cycle",
+        "regularCycle": "Your cycle is regular",
+        "multipleReasons": ", ",
+        "suffix": ", therefore this content is recommended.",
+        "default": "Recommended based on your data patterns."
+      },
+      "empty": {
+        "title": "No Recommendations Yet",
+        "description": "Complete more data tracking to receive personalized recommendations",
+        "action": "Record Data",
+        "noData": "Insufficient data to generate recommendations",
+        "insufficientData": "Please record at least 3 cycles of data for more accurate recommendations"
+      },
+      "dataQuality": {
+        "title": "Data Quality Notice",
+        "low": "Insufficient data, recommendations may not be accurate. Please record at least 3 cycles.",
+        "medium": "Good data quality. Continue recording for more accurate recommendations.",
+        "high": "Excellent data quality. Recommendations are highly personalized.",
+        "excellent": "Outstanding data quality. Recommendations are very precise!",
+        "completeness": "Data Completeness: {percentage}%",
+        "recordCount": "Recorded {count} cycles",
+        "suggestion": "Continue recording data to improve recommendation accuracy"
+      },
+      "feedback": {
+        "title": "Was this recommendation helpful?",
+        "helpful": "Helpful",
+        "notHelpful": "Not Helpful",
+        "thankYou": "Thank you for your feedback!",
+        "ratePrompt": "Please rate this recommendation",
+        "submitRating": "Submit Rating",
+        "dismissReason": "Why dismiss this recommendation?",
+        "dismissReasons": {
+          "notRelevant": "Not Relevant",
+          "alreadyKnow": "Already Know",
+          "notInterested": "Not Interested",
+          "other": "Other Reason"
+        }
+      },
+      "filters": {
+        "title": "Filter Recommendations",
+        "showAll": "Show All",
+        "byCategory": "By Category",
+        "byPriority": "By Priority",
+        "byType": "By Type",
+        "sortBy": "Sort By",
+        "sortByRelevance": "By Relevance",
+        "sortByPriority": "By Priority",
+        "sortByTime": "By Time"
+      },
+      "summary": {
+        "totalRecommendations": "{count} Recommendations",
+        "highPriorityCount": "{count} High Priority Recommendations",
+        "categoriesCount": "{count} Categories",
+        "newRecommendations": "{count} New Recommendations"
+      },
+      "content": {
+        "articles": {
+          "dysmenorrheaGuide": {
+            "title": "Comprehensive Medical Guide to Dysmenorrhea",
+            "description": "Complete medical knowledge and management strategies",
+            "reason": "Learn about medical causes and systematic management"
+          },
+          "naturalTherapies": {
+            "title": "Natural Therapies Guide",
+            "description": "Traditional Chinese Medicine and natural relief methods",
+            "reason": "Explore natural, non-pharmaceutical relief options"
+          },
+          "medicalCareGuide": {
+            "title": "Medical Care Guide",
+            "description": "When to seek medical care and how to prepare",
+            "reason": "For severe or worsening pain"
+          },
+          "immediateRelief": {
+            "title": "Immediate Relief Methods",
+            "description": "Quick and practical pain relief techniques",
+            "reason": "For immediate pain relief"
+          },
+          "medicationGuide": {
+            "title": "Medication Guide",
+            "description": "Safe and effective pain medication knowledge",
+            "reason": "Learn proper medication usage"
+          },
+          "teenHealth": {
+            "title": "Teen Health Guide",
+            "description": "Period health knowledge for teenagers",
+            "reason": "For teens learning period management"
+          },
+          "understandingPain": {
+            "title": "Understanding Period Pain",
+            "description": "Causes and types of dysmenorrhea",
+            "reason": "Deep dive into pain mechanisms"
+          }
+        },
+        "tools": {
+          "painTracker": {
+            "title": "Pain Tracker",
+            "description": "Record and analyze pain patterns",
+            "reason": "Systematically track pain changes"
+          },
+          "symptomAssessment": {
+            "title": "Symptom Assessment Tool",
+            "description": "Comprehensive symptom assessment and health advice",
+            "reason": "Get complete health evaluation"
+          },
+          "cycleTracker": {
+            "title": "Cycle Tracker",
+            "description": "Smart period tracking and prediction",
+            "reason": "Predict cycles and manage planning"
+          },
+          "constitutionTest": {
+            "title": "TCM Constitution Test",
+            "description": "Traditional Chinese Medicine constitution assessment",
+            "reason": "Explore TCM-based therapies"
+          },
+          "nutritionGenerator": {
+            "title": "Nutrition Recommendation Generator",
+            "description": "Personalized nutrition plan recommendations",
+            "reason": "Get dietary adjustment advice"
+          },
+          "impactCalculator": {
+            "title": "Period Pain Impact Calculator",
+            "description": "Assess impact on work and life",
+            "reason": "Quantify period pain impact"
+          },
+          "stressManagement": {
+            "title": "Stress Management Tool",
+            "description": "Stress assessment and relief strategies",
+            "reason": "Manage stress or mood swings"
+          },
+          "workplaceWellness": {
+            "title": "Workplace Wellness",
+            "description": "Period health management at work",
+            "reason": "Manage period health in workplace"
+          }
+        },
+        "scenarios": {
+          "office": {
+            "title": "Office Scenario Solution",
+            "description": "Period management strategies for office environment",
+            "reason": "For office workers"
+          },
+          "commute": {
+            "title": "Commute Scenario Solution",
+            "description": "Period management during commute",
+            "reason": "For long commuters"
+          },
+          "exercise": {
+            "title": "Exercise Scenario Solution",
+            "description": "Period management during exercise",
+            "reason": "For those exercising during period"
+          },
+          "social": {
+            "title": "Social Scenario Solution",
+            "description": "Period management in social situations",
+            "reason": "For scheduled social activities"
+          },
+          "sleep": {
+            "title": "Sleep Scenario Solution",
+            "description": "Improve sleep quality during period",
+            "reason": "For poor sleep quality during period"
+          },
+          "emergencyKit": {
+            "title": "Emergency Kit Guide",
+            "description": "Prepare period emergency supplies",
+            "reason": "For outings or travel"
+          },
+          "partnerCommunication": {
+            "title": "Partner Communication Guide",
+            "description": "How to communicate period needs with partner",
+            "reason": "For partner understanding and support"
+          },
+          "lifeStages": {
+            "title": "Life Stages Guide",
+            "description": "Period management across life stages",
+            "reason": "Understand period changes at different stages"
+          }
+        },
+        "tips": {
+          "heatTherapy": {
+            "title": "Heat Therapy",
+            "description": "Use heat to relieve period pain",
+            "reason": "For quick pain relief"
+          },
+          "breathing": {
+            "title": "Breathing Relaxation",
+            "description": "Relieve pain and stress through breathing",
+            "reason": "For relaxation and tension relief"
+          },
+          "posture": {
+            "title": "Pain-Relieving Postures",
+            "description": "Body postures that help relieve period pain",
+            "reason": "For immediate discomfort relief"
+          },
+          "hydration": {
+            "title": "Proper Hydration",
+            "description": "Importance and methods of period hydration",
+            "reason": "For overall condition improvement"
+          },
+          "dietTips": {
+            "title": "Diet Tips",
+            "description": "Dietary adjustments for period pain relief",
+            "reason": "Improve symptoms through diet"
+          }
+        },
+        "actions": {
+          "medicalConsultation": {
+            "title": "Medical Consultation Recommended",
+            "description": "Your symptoms may need professional medical evaluation",
+            "reason": "Abnormal data or severe symptoms detected"
+          },
+          "recordData": {
+            "title": "Record Today's Data",
+            "description": "Continue recording for more accurate recommendations",
+            "reason": "Data recording helps trend analysis"
+          },
+          "updatePreferences": {
+            "title": "Update Health Preferences",
+            "description": "Complete your health preference settings",
+            "reason": "Better preferences improve recommendation quality"
+          },
+          "exportData": {
+            "title": "Export Health Data",
+            "description": "Backup or share your health data",
+            "reason": "Regular data backup recommended"
+          }
+        }
+      }
     },
     "common": {
       "loading": "Loading...",
@@ -3073,7 +3785,28 @@
       "textScaling": "Text Scaling",
       "defaultFormat": "Default Format",
       "autoSave": "Auto Save",
-      "includeCharts": "Include Charts"
+      "includeCharts": "Include Charts",
+      "dataRetention": "Data Retention",
+      "dataRetentionDescription": "To ensure optimal performance, we automatically retain recent data, and old data will be cleaned up",
+      "retentionPolicy": "Data Retention Policy",
+      "retentionPolicyDescription": "To ensure optimal performance, we retain data from the last 6 months. Data older than 6 months will be automatically cleaned up. You can export your data at any time to keep a complete history.",
+      "expiringDataWarning": "Data Expiring Soon",
+      "expiringDataDescription": "You have {count} records that will be automatically cleaned up in 30 days. We recommend exporting a backup to keep a complete history.",
+      "exportNow": "Export Backup Now",
+      "currentDataStatus": "Current Data Status",
+      "totalRecords": "Total Records",
+      "validRecords": "Valid Records",
+      "oldestRecord": "Oldest Record",
+      "storageSize": "Storage Size",
+      "records": "records",
+      "exportAllData": "Export All Data",
+      "exportAllDataDescription": "Export all data to keep a complete history. Supports JSON, CSV, PDF and other formats",
+      "export": "Export",
+      "retentionDetails": "Data Retention Details",
+      "retentionPeriod": "Retention Period",
+      "retentionPeriodDescription": "Data from the last 6 months will be retained. Data older than this period will be automatically cleaned up.",
+      "exportRecommendation": "Export Recommendation",
+      "exportRecommendationDescription": "We recommend regularly exporting your data to keep a complete history. Exported data can be imported or viewed at any time."
     },
     "notificationTypes": {
       "reminder": "Reminder Notifications",
@@ -3086,6 +3819,44 @@
       "email": "Email Notifications",
       "sms": "SMS Notifications",
       "push": "Push Notifications"
+    },
+    "relatedContent": {
+      "title": "Related Content",
+      "tools": "Related Tools",
+      "articles": "Related Articles",
+      "scenarios": "Scenario Solutions"
+    },
+    "history": {
+      "title": "History Records",
+      "addRecord": "Add Record",
+      "export": "Export",
+      "searchPlaceholder": "Search records...",
+      "filters": "Filters",
+      "dateRange": "Date Range",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "type": "Type",
+      "allTypes": "All Types",
+      "painLevel": "Pain Level",
+      "allLevels": "All Levels",
+      "lowPain": "Low Pain",
+      "mediumPain": "Medium Pain",
+      "highPain": "High Pain",
+      "flow": "Flow",
+      "allFlows": "All Flows",
+      "date": "Date",
+      "notes": "Notes",
+      "actions": "Actions",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "clearFilters": "Clear Filters",
+      "resultsCount": "{count} results",
+      "noData": "No data",
+      "confirmDelete": "Are you sure you want to delete this record?",
+      "editRecord": "Edit Record",
+      "recordDetails": "Record Details",
+      "close": "Close"
     },
     "themeConfig": {
       "light": {
@@ -3760,6 +4531,41 @@
         "callout": {
           "title": "Next Step Recommendations",
           "text": "If assessment results suggest seeing a doctor, don't delay. Prepare your symptom records, choose an appropriate appointment time, and proactively communicate your concerns with your doctor."
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -3845,6 +4651,41 @@
           "advice": "Pain completely unbearable, this is a medical emergency requiring immediate medical attention.",
           "rec1": "Seek immediate medical care or call emergency services",
           "rec2": "Don't go to hospital alone, seek assistance"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -4082,6 +4923,41 @@
         "s10": {
           "text": "Pain accompanied by headache, dizziness, fatigue, or other systemic symptoms",
           "description": "May indicate anemia, infection, or other systemic diseases"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -4802,6 +5678,9 @@
     "title": "Interactive Health Tools",
     "description": "8 professional period health tools: symptom assessment, pain tracking, cycle prediction & nutrition generator. AI-powered personalized health advice. Start now!",
     "keywords": "menstrual health management,symptom assessment,pain tracking,period pain management,health tools,personalized recommendations,data analytics",
+    "structuredData": {
+      "description": "Comprehensive collection of 8 interactive period health management tools including symptom assessment, pain tracking, workplace impact calculator, cycle prediction, and personalized nutrition generator. Evidence-based tools designed to help you better understand and manage your menstrual health."
+    },
     "assessmentIllustrationAlt": "Woman using digital health assessment tool on tablet in comfortable home setting",
     "workplaceWellness": {
       "title": "Workplace Wellness Column",
@@ -4841,9 +5720,137 @@
     },
     "toolsIntroduction": "Our interactive tools are based on evidence-based medicine to help you better understand and manage menstrual health.",
     "periodPainAssessment": {
-      "title": "Period Pain Assessment Tool",
+      "title": "Period Pain Assessment Hub",
       "description": "Professional period pain symptom assessment to help you understand pain types and severity",
-      "cta": "Start Assessment"
+      "cta": "Start Assessment",
+      "meta": {
+        "title": "Period Pain Assessment Hub - Find Your Right Tool | PeriodHub",
+        "description": "Not sure which tool to use? Get personalized recommendations for period pain assessment, work impact analysis, and relief strategies based on your specific needs.",
+        "keywords": "period pain assessment hub,menstrual pain tool guide,dysmenorrhea resource center,period pain navigation,find period pain tool,menstrual health assessment center"
+      },
+      "hero": {
+        "title": "Find the Right Tool for Your Period Pain",
+        "subtitle": "Get personalized recommendations based on your specific needs",
+        "description": "Choose from our specialized tools designed to help you understand, manage, and find relief from period pain. Each tool serves a unique purpose in your menstrual health journey.",
+        "intelligentMatching": "Intelligent Matching",
+        "intelligentMatchingDesc": "Our system guides you to the most suitable tool based on your symptoms and needs",
+        "professionalTools": "Professional Tools",
+        "professionalToolsDesc": "Evidence-based assessments designed by medical professionals",
+        "personalizedGuidance": "Personalized Guidance",
+        "personalizedGuidanceDesc": "Tailored recommendations and resources specific to your situation",
+        "readyToStart": "Ready to Find Your Solution?",
+        "readyToStartDesc": "Take the first step towards better period pain management",
+        "primaryCTA": "Start Quick Assessment"
+      },
+      "navigation": {
+        "title": "Choose Your Path",
+        "subtitle": "Select the tool that best matches your current needs and get professional guidance",
+        "calculator": {
+          "title": "Assess Work & Life Impact",
+          "description": "For those who know they have period pain and want to understand how it affects their daily activities and work productivity.",
+          "features": [
+            "Quantified work impact analysis",
+            "Daily life assessment",
+            "Medical decision support",
+            "Personalized severity rating"
+          ],
+          "primaryCTA": "Start Impact Assessment",
+          "secondaryCTA": "Learn More About This Tool"
+        },
+        "assessment": {
+          "title": "Comprehensive Symptom Check",
+          "description": "For those experiencing various menstrual symptoms and need help identifying what type of menstrual issues they might have.",
+          "features": [
+            "Full symptom screening",
+            "Pattern identification",
+            "Severity classification",
+            "Next steps recommendations"
+          ],
+          "primaryCTA": "Start Symptom Assessment",
+          "secondaryCTA": "View Assessment Details"
+        },
+        "relief": {
+          "title": "Immediate Relief Strategies",
+          "description": "For those seeking quick relief methods and lifestyle tips to manage period pain effectively.",
+          "features": [
+            "Evidence-based relief methods",
+            "Lifestyle recommendations",
+            "Natural remedies guide",
+            "When to seek medical help"
+          ],
+          "primaryCTA": "Get Relief Tips",
+          "secondaryCTA": "Browse Relief Resources"
+        }
+      },
+      "quickNavigation": {
+        "title": "More Resources",
+        "description": "Explore our comprehensive collection of articles, tools, and solutions for menstrual health",
+        "articles": "Popular Articles",
+        "articlesList": {
+          "guide": "Comprehensive Medical Guide to Dysmenorrhea",
+          "relief": "Immediate Relief for Period Pain",
+          "workplace": "Workplace Impact Assessment"
+        },
+        "tools": "Helpful Tools",
+        "toolsList": {
+          "tracker": "Pain Tracker",
+          "cycle": "Cycle Tracker",
+          "constitution": "TCM Constitution Test"
+        },
+        "scenarios": "Life Scenarios",
+        "scenariosList": {
+          "workplace": "Workplace Health Management",
+          "social": "Social Situations",
+          "commuting": "Commuting Solutions"
+        }
+      },
+      "trust": {
+        "statistics": {
+          "title": "Trusted by Millions Worldwide",
+          "usersHelped": "2.5M+",
+          "usersHelpedDesc": "Women helped find relief",
+          "toolsAvailable": "6",
+          "toolsAvailableDesc": "Specialized assessment tools",
+          "expertContent": "43",
+          "expertContentDesc": "Evidence-based articles",
+          "userRating": "4.8/5",
+          "userRatingDesc": "Average user satisfaction"
+        },
+        "professionalAssurance": {
+          "title": "Professional & Evidence-Based",
+          "medicalDisclaimer": "Medical Disclaimer",
+          "medicalDisclaimerDesc": "Clear guidance on when to seek professional medical help",
+          "expertReview": "Expert Reviewed",
+          "expertReviewDesc": "All content reviewed by medical professionals",
+          "regularlyUpdated": "Regularly Updated",
+          "regularlyUpdatedDesc": "Based on latest medical research"
+        },
+        "testimonials": {
+          "title": "What Users Say",
+          "item1": {
+            "quote": "The work impact calculator helped me explain my situation to my employer and get the accommodations I needed.",
+            "user": "Sarah K., 32"
+          },
+          "item2": {
+            "quote": "Finally found a tool that understands how different symptoms connect and provides real solutions.",
+            "user": "Maria L., 28"
+          },
+          "item3": {
+            "quote": "The relief strategies made a huge difference in my daily life during my period.",
+            "user": "Emma T., 35"
+          }
+        },
+        "disclaimer": {
+          "title": "Medical Disclaimer",
+          "content": "This assessment hub provides educational information and tool recommendations. It cannot replace professional medical advice, diagnosis, or treatment. Always consult with qualified healthcare providers for medical concerns."
+        }
+      },
+      "features": {
+        "intelligentNavigation": "Intelligent tool navigation",
+        "personalizedRecommendations": "Personalized recommendations",
+        "quickAssessment": "Quick assessment options",
+        "verifiedResources": "Medically verified resources"
+      }
     },
     "symptomAssessment": {
       "title": "Symptom Self-Assessment Tool",
@@ -4862,6 +5869,14 @@
         "disclaimer": "这些建议基于您的回答，仅供参考。它们不能替代专业医疗建议。",
         "tryAgain": "重新评估",
         "saveResults": "保存结果"
+      },
+      "messages": {
+        "assessmentComplete": "Assessment Complete",
+        "assessmentCompleteDesc": "Your symptom assessment is complete, please review the results and recommendations.",
+        "assessmentFailed": "Assessment Failed",
+        "assessmentFailedDesc": "An error occurred during assessment, please try again.",
+        "resultsSaved": "Results Saved",
+        "resultsSavedDesc": "Your assessment results have been saved to local storage."
       }
     },
     "painTracker": {
@@ -5109,6 +6124,41 @@
               "3": "学习放松技巧"
             }
           }
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -5263,8 +6313,8 @@
   },
   "stressManagement": {
     "title": "Stress Management",
-    "description": "Scientific management of menstrual stress to improve quality of life",
-    "pageTitle": "Stress Management - PeriodHub",
+    "description": "Scientific stress management tool: assessment, techniques, breathing exercises, progress tracking. Professional solutions to manage period stress and improve life quality.",
+    "pageTitle": "Period Stress Management Tool - Scientific Relief Solutions | PeriodHub",
     "keywords": "stress management,period stress,menstrual health,stress relief,relaxation techniques,workplace stress,women health",
     "subtitle": "Help you effectively manage period-related stress and anxiety",
     "startAssessment": "Start Assessment",
@@ -5278,6 +6328,36 @@
     "cancel": "Cancel",
     "continue": "Continue",
     "skip": "Skip",
+    "alerts": {
+      "paymentComingSoon": "Payment features coming soon, stay tuned!"
+    },
+    "common": {
+      "loading": "Loading...",
+      "error": "An error occurred",
+      "retry": "Retry",
+      "success": "Success",
+      "failed": "Failed",
+      "saved": "Saved",
+      "deleted": "Deleted",
+      "updated": "Updated",
+      "created": "Created",
+      "noData": "No data available",
+      "tryAgain": "Please try again",
+      "contactSupport": "Contact Support",
+      "importantNote": "Important Note",
+      "medicalDisclaimer": "This website content is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional for any health concerns.",
+      "showDetails": "Show Details",
+      "hideDetails": "Hide Details",
+      "learnMore": "Learn More",
+      "tip": "Tip",
+      "freeQuestions": "First",
+      "questionsAvailable": "questions are free, you can choose to unlock the complete assessment after completion",
+      "advancedAssessment": "You are taking an advanced assessment and will receive more detailed analysis reports",
+      "breadcrumb": {
+        "home": "Home",
+        "interactiveTools": "Interactive Tools"
+      }
+    },
     "stressLevels": {
       "low": "Low",
       "moderate": "Moderate",
@@ -5335,26 +6415,282 @@
         "selfCare": "Self-Care"
       }
     },
-    "common": {
-      "loading": "Loading...",
-      "error": "An error occurred",
-      "retry": "Retry",
-      "success": "Success",
-      "failed": "Failed",
-      "saved": "Saved",
-      "deleted": "Deleted",
-      "updated": "Updated",
-      "created": "Created",
-      "noData": "No data available",
-      "tryAgain": "Please try again",
-      "contactSupport": "Contact Support",
-      "importantNote": "Important Note",
-      "medicalDisclaimer": "This website content is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional for any health concerns.",
-      "showDetails": "Show Details",
-      "hideDetails": "Hide Details",
-      "learnMore": "Learn More",
-      "breadcrumb": {
-        "home": "Home"
+    "assessment": {
+      "title": "Stress Assessment",
+      "subtitle": "Understand your stress condition through scientific assessment",
+      "instructions": "Assessment Instructions",
+      "instructionsDetail": "Please answer the following questions honestly based on your actual situation. This will help us provide you with personalized stress management recommendations.",
+      "questionsPreview": {
+        "title": "Assessment Questions Preview"
+      },
+      "q1": {
+        "question": "How often have you felt stressed or tense recently?",
+        "option1": "Never",
+        "option2": "Sometimes",
+        "option3": "Often",
+        "option4": "Always"
+      },
+      "q2": {
+        "question": "Do you find it difficult to relax or feel anxious?",
+        "option1": "Never",
+        "option2": "Sometimes",
+        "option3": "Often",
+        "option4": "Always"
+      },
+      "q3": {
+        "question": "Has stress affected your sleep quality?",
+        "option1": "Never",
+        "option2": "Sometimes",
+        "option3": "Often",
+        "option4": "Always"
+      },
+      "q4": {
+        "question": "How would you rate your overall stress level?",
+        "option1": "Very Low",
+        "option2": "Low",
+        "option3": "Moderate",
+        "option4": "High"
+      },
+      "q5": {
+        "question": "Do you experience physical symptoms due to stress?",
+        "option1": "Never",
+        "option2": "Sometimes",
+        "option3": "Often",
+        "option4": "Always"
+      },
+      "selectOption": "Please select the option that best describes your situation",
+      "results": {
+        "resultLabel": "Assessment Results",
+        "title": "Your Stress Assessment Results",
+        "subtitle": "Based on your responses, we've generated a personalized stress analysis report for you",
+        "scoreLabel": "Stress Score",
+        "stressLevels": {
+          "low": "Low Stress",
+          "moderate": "Moderate Stress",
+          "high": "High Stress",
+          "severe": "Severe Stress"
+        },
+        "basicRecommendations": "Basic Recommendations",
+        "detailedAnalysis": "Detailed Analysis",
+        "stressSources": "Stress Source Analysis",
+        "stressSourcesDescription": "Analyze major stress sources based on your responses",
+        "improvementFocus": "Improvement Focus",
+        "improvementFocusDescription": "Areas that need attention and improvement"
+      },
+      "alerts": {
+        "paymentComingSoon": "Payment features coming soon, stay tuned!"
+      },
+      "questions": {
+        "q1": {
+          "question": "Have you frequently felt anxious or tense recently?",
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
+        },
+        "q2": {
+          "question": "How is your sleep quality?",
+          "options": [
+            "Very Good",
+            "Good",
+            "Poor",
+            "Very Poor"
+          ]
+        },
+        "q3": {
+          "question": "Do you often feel tired or lack energy?",
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
+        },
+        "q4": {
+          "question": "Do you easily feel irritable or angry?",
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
+        },
+        "q5": {
+          "question": "Do you often worry about period-related issues?",
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
+        }
+      },
+      "benefits": {
+        "title": "Benefits of Assessment",
+        "personalized": {
+          "title": "Personalized Recommendations",
+          "description": "Provide customized stress management strategies based on your answers"
+        },
+        "tracking": {
+          "title": "Progress Tracking",
+          "description": "Record your stress management progress and improvements"
+        },
+        "insights": {
+          "title": "Deep Insights",
+          "description": "Understand how stress affects your menstruation and overall health"
+        }
+      },
+      "keywords": "stress assessment,menstrual stress,stress management,period stress,mental health assessment",
+      "privacy": {
+        "badge": "Your data is 100% encrypted and never sold",
+        "notice": {
+          "title": "Your Privacy is Protected",
+          "description": "Anonymous assessment, data stored only on your device, can be deleted anytime",
+          "details": {
+            "title": "Our Privacy Commitment:",
+            "noRegistration": "No registration required to use assessment features",
+            "encryption": "Data encrypted with AES-256 and stored locally",
+            "exportDelete": "You can export or permanently delete your data anytime",
+            "noSharing": "Never sold or shared with third parties",
+            "compliance": "Compliant with GDPR and CCPA privacy standards"
+          },
+          "policyLink": "View full privacy policy"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
+        }
+      }
+    },
+    "progress": {
+      "title": "Progress Tracking",
+      "subtitle": "Track stress management progress with records, visualization, insights. Understand patterns and discover methods to improve stress outcomes.",
+      "keywords": "stress management progress, stress tracking, mood tracking, stress relief techniques, stress monitoring, mental health tracking",
+      "today": "Today",
+      "week": "This Week",
+      "month": "This Month",
+      "addEntry": {
+        "title": "Add Entry",
+        "subtitle": "Record your stress condition and techniques used today"
+      },
+      "features": {
+        "stressLevel": {
+          "title": "Stress Level",
+          "description": "1-10 scale assessment"
+        },
+        "techniquesUsed": {
+          "title": "Techniques Used",
+          "description": "Record practiced methods"
+        },
+        "moodRating": {
+          "title": "Mood Rating",
+          "description": "Overall emotional state"
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "Record special feelings"
+        }
+      },
+      "viewHistory": {
+        "title": "View History",
+        "today": {
+          "description": "View today's records"
+        },
+        "week": {
+          "description": "View this week's trends"
+        },
+        "month": {
+          "description": "View monthly statistics"
+        }
+      },
+      "sampleData": {
+        "title": "Data Preview",
+        "averageStress": "Average Stress Level",
+        "techniquesUsed": "Technique Usage Rate",
+        "averageMood": "Average Mood Rating"
+      },
+      "benefits": {
+        "title": "Benefits of Tracking",
+        "insights": {
+          "title": "Deep Insights",
+          "description": "Understand your stress patterns and triggers"
+        },
+        "trends": {
+          "title": "Trend Analysis",
+          "description": "Discover areas for improvement and attention"
+        },
+        "motivation": {
+          "title": "Continuous Motivation",
+          "description": "See progress to enhance persistence"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
+        }
       }
     },
     "neuroendocrine": {
@@ -5423,84 +6759,48 @@
         "action2": {
           "title": "Chronic Stress Intervention",
           "description": "Requires long-term strategies and possibly professional help"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
-    "assessment": {
-      "title": "Stress Assessment",
-      "subtitle": "Understand your stress condition through scientific assessment",
-      "instructions": "Assessment Instructions",
-      "instructionsDetail": "Please answer the following questions honestly based on your actual situation. This will help us provide you with personalized stress management recommendations.",
-      "questionsPreview": {
-        "title": "Assessment Questions Preview"
-      },
-      "questions": {
-        "q1": {
-          "question": "Have you frequently felt anxious or tense recently?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
-        },
-        "q2": {
-          "question": "How is your sleep quality?",
-          "options": [
-            "Very Good",
-            "Good",
-            "Poor",
-            "Very Poor"
-          ]
-        },
-        "q3": {
-          "question": "Do you often feel tired or lack energy?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
-        },
-        "q4": {
-          "question": "Do you easily feel irritable or angry?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
-        },
-        "q5": {
-          "question": "Do you often worry about period-related issues?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
-        }
-      },
-      "benefits": {
-        "title": "Benefits of Assessment",
-        "personalized": {
-          "title": "Personalized Recommendations",
-          "description": "Provide customized stress management strategies based on your answers"
-        },
-        "tracking": {
-          "title": "Progress Tracking",
-          "description": "Record your stress management progress and improvements"
-        },
-        "insights": {
-          "title": "Deep Insights",
-          "description": "Understand how stress affects your menstruation and overall health"
-        }
-      },
-      "keywords": "stress assessment,menstrual stress,stress management,period stress,mental health assessment"
-    },
     "techniques": {
       "title": "Relaxation Techniques",
-      "subtitle": "Scientific relaxation methods to help you relieve stress",
+      "subtitle": "4 scientifically validated stress relief techniques: breathing, meditation, exercise, music therapy. Detailed guidance for effective stress management.",
+      "keywords": "relaxation techniques,stress relief,breathing exercises,meditation,light exercise,music therapy",
       "benefits": {
         "title": "Benefits"
       },
@@ -5567,69 +6867,41 @@
           "tip2": "Wear loose and comfortable clothing",
           "tip3": "Avoid practicing immediately after meals",
           "tip4": "Stop immediately if you feel unwell"
-        }
-      }
-    },
-    "progress": {
-      "title": "Progress Tracking",
-      "subtitle": "Record your stress management progress",
-      "keywords": "stress management progress, stress tracking, mood tracking, stress relief techniques, stress monitoring, mental health tracking",
-      "today": "Today",
-      "week": "This Week",
-      "month": "This Month",
-      "addEntry": {
-        "title": "Add Entry",
-        "subtitle": "Record your stress condition and techniques used today"
-      },
-      "features": {
-        "stressLevel": {
-          "title": "Stress Level",
-          "description": "1-10 scale assessment"
         },
-        "techniquesUsed": {
-          "title": "Techniques Used",
-          "description": "Record practiced methods"
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
         },
-        "moodRating": {
-          "title": "Mood Rating",
-          "description": "Overall emotional state"
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
         },
-        "notes": {
-          "title": "Notes",
-          "description": "Record special feelings"
-        }
-      },
-      "viewHistory": {
-        "title": "View History",
-        "today": {
-          "description": "View today's records"
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
         },
-        "week": {
-          "description": "View this week's trends"
-        },
-        "month": {
-          "description": "View monthly statistics"
-        }
-      },
-      "sampleData": {
-        "title": "Data Preview",
-        "averageStress": "Average Stress Level",
-        "techniquesUsed": "Technique Usage Rate",
-        "averageMood": "Average Mood Rating"
-      },
-      "benefits": {
-        "title": "Benefits of Tracking",
-        "insights": {
-          "title": "Deep Insights",
-          "description": "Understand your stress patterns and triggers"
-        },
-        "trends": {
-          "title": "Trend Analysis",
-          "description": "Discover areas for improvement and attention"
-        },
-        "motivation": {
-          "title": "Continuous Motivation",
-          "description": "See progress to enhance persistence"
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -6455,6 +7727,41 @@
         "evidenceLevel": {
           "title": "Evidence Levels",
           "description": "Understanding research quality and reliability"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -6740,6 +8047,41 @@
           "email": "Data Protection Inquiry Email",
           "subject": "Subject: Privacy Policy Question",
           "responseTime": "We aim to respond within 48 hours"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -7126,6 +8468,8 @@
       }
     },
     "breadcrumb": {
+      "home": "Home",
+      "tools": "Interactive Tools",
       "interactiveTools": "Interactive Tools"
     },
     "relatedTools": "Related Tools",
@@ -7339,6 +8683,41 @@
           "item3": "Pain medication",
           "item4": "Comfortable clothing",
           "item5": "Emergency contact numbers"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -7482,6 +8861,41 @@
           "feature": "Side Effects",
           "ibuprofen": "Stomach upset, dizziness",
           "naproxen": "Stomach upset, headache"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -7686,6 +9100,41 @@
           "difficulty": "Easy",
           "buttonText": "Start Personalized Guidance",
           "unlockCondition": "Must complete Stage 3 first"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "Assessment Results",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "Basic Recommendations",
+          "detailedAnalysis": "Detailed Analysis",
+          "stressSources": "Stress Sources",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "Improvement Focus",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 Assessment",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "Back to Home",
+          "viewFreeResults": "View Free Results",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -8108,6 +9557,81 @@
       }
     }
   },
+  "phq9": {
+    "title": "PHQ-9 Depression Assessment",
+    "subtitle": "Clinical-standard PHQ-9 questionnaire for depression screening",
+    "question": "Question",
+    "timeframe": "Over the last two weeks, how often have you been bothered by the following problems:",
+    "previous": "Previous",
+    "next": "Next",
+    "exit": "Exit",
+    "help": "Help",
+    "helpText": "Please choose the answer that best reflects how you have been feeling over the past two weeks",
+    "completing": "Completing assessment...",
+    "calculatingResults": "Calculating your assessment results",
+    "disclaimer": "Important Notice",
+    "sensitiveQuestion": "This is an important question about your emotional health. Your response will help us provide more accurate guidance.",
+    "resultsTitle": "Assessment Results",
+    "resultsSubtitle": "Your PHQ-9 assessment is complete",
+    "totalScore": "Total Score",
+    "riskAssessment": "Risk Assessment",
+    "riskLevel": "Risk Level",
+    "requiresHelp": "Requires Professional Help",
+    "yes": "Yes",
+    "no": "No",
+    "attentionRequired": "Attention Required",
+    "selfHarmWarning": "You reported thoughts of self-harm. If these thoughts persist or worsen, please seek professional help immediately.",
+    "crisisResources": "Crisis intervention resources:",
+    "crisisHotline": "Crisis hotline: 988 (Suicide & Crisis Lifeline)",
+    "recommendations": "Recommendations",
+    "seekProfessionalHelp": "Seek Professional Help",
+    "professionalHelpDesc": "Based on your assessment results, we recommend consulting with a mental health professional for further evaluation and support.",
+    "findProfessional": "Find Professional Help",
+    "retakeAssessment": "Retake Assessment",
+    "continue": "Continue",
+    "medicalDisclaimer": "This assessment tool is for reference only and cannot replace professional medical diagnosis. If you are experiencing mental health concerns, please seek professional medical help.",
+    "risk": {
+      "low": "Low Risk",
+      "moderate": "Moderate Risk",
+      "high": "High Risk",
+      "severe": "Severe Risk"
+    },
+    "levels": {
+      "none": "No Depression",
+      "mild": "Mild Depression",
+      "moderate": "Moderate Depression",
+      "moderate-severe": "Moderately Severe Depression",
+      "severe": "Severe Depression"
+    }
+  },
+  "abTestAnalyzer": {
+    "recommendations": {
+      "completionHigh": "✅ Strong recommendation: Enhanced version significantly improves user completion rate (+{improvement}%)",
+      "rollout": "🎯 Recommended to roll out enhanced version immediately",
+      "completionModerate": "✅ Moderate improvement: Enhanced version has positive impact on completion rate",
+      "conversionHigh": "💰 Conversion rate significantly improved (+{improvement}%), significant business value",
+      "conversionModerate": "💡 Moderate conversion improvement",
+      "engagementTime": "⏱️ Engagement time increased",
+      "bounceRateLow": "📉 Bounce rate significantly reduced",
+      "bounceRateHigh": "⚠️ Bounce rate increased, need to investigate",
+      "statisticalInsignificant": "📊 Results not statistically significant",
+      "sampleSizeSmall": "📈 Sample size too small, need more data"
+    },
+    "riskAssessment": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    }
+  },
+  "userFeedback": {
+    "stats": {
+      "titleWithFeature": "{feature} Feedback Statistics",
+      "title": "Feedback Statistics",
+      "totalFeedback": "Total Feedback",
+      "averageRating": "Average Rating",
+      "recentFeedback": "Recent Feedback"
+    }
+  },
   "manifest": {
     "name": "PeriodHub - Professional Women's Health Platform",
     "shortName": "PeriodHub",
@@ -8127,6 +9651,375 @@
         "name": "Interactive Tools",
         "shortName": "Tools",
         "description": "Symptom assessment and pain tracking tools"
+      }
+    }
+  },
+  "feedback": {
+    "title": "Share Your Experience",
+    "ratingLabel": "Your overall experience with {{feature}}",
+    "ratingTexts": {
+      "1": "Very Dissatisfied",
+      "2": "Dissatisfied",
+      "3": "Neutral",
+      "4": "Satisfied",
+      "5": "Very Satisfied"
+    },
+    "commentLabel": "Detailed Feedback (Optional)",
+    "commentPlaceholder": "Please share your specific suggestions or comments about the feature...",
+    "submitButton": "Submit Feedback",
+    "submitting": "Submitting...",
+    "successTitle": "Thank You for Your Feedback!",
+    "successMessage": "Your opinion is very important to us"
+  },
+  "abtest": {
+    "debugger": {
+      "title": "A/B Test Debug",
+      "status": "Status",
+      "variant": "Variant",
+      "test": "Test",
+      "user": "User",
+      "loaded": "✅ Loaded",
+      "loading": "⏳ Loading"
+    }
+  },
+  "teen": {
+    "title": "Teen Health Zone",
+    "subtitle": "Menstrual health guidance designed specifically for teenage girls, making the journey of growth less confusing",
+    "welcome": {
+      "title": "Welcome to Teen Health Zone",
+      "message": "This is a safe space specially prepared for teenage girls. We understand your confusion and concerns, and are willing to accompany you through this special stage of growth."
+    },
+    "basics": {
+      "title": "Menstrual Basics",
+      "description": "Learn the basic knowledge about menstruation, eliminate fear and misunderstanding"
+    },
+    "firstPeriod": {
+      "title": "First Period Guidance",
+      "description": "Preparation and coping methods for your first menstruation"
+    },
+    "products": {
+      "title": "Hygiene Product Selection",
+      "description": "Learn about the usage and selection tips for various hygiene products"
+    },
+    "support": {
+      "title": "Psychological Support",
+      "description": "Cope with emotional changes and psychological stress brought by menstruation"
+    },
+    "learnMore": "Learn More",
+    "cta": {
+      "title": "Still Have Questions?",
+      "subtitle": "Our professional team is always here to answer your questions",
+      "button": "Consult Expert"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Committed to providing professional and caring menstrual health management services for every woman",
+    "mission": {
+      "title": "Our Mission",
+      "description": "We believe every woman deserves a healthy and confident menstrual experience."
+    },
+    "contact": {
+      "title": "Want to Learn More?",
+      "description": "If you have any questions or suggestions, feel free to contact us anytime",
+      "button": "Contact Us"
+    }
+  },
+  "ui": {
+    "questionProgress": "Question {current} of {total}",
+    "advancedQuestion": "Advanced Question",
+    "personalizedRecommendations": "Personalized Recommendations",
+    "recommendationItem": "Recommendation {index}",
+    "recommendationCustom": "Custom Recommendation",
+    "thanksMessage": "Thank you for completing the assessment!"
+  },
+  "paywall": {
+    "description": {
+      "title": "Unlock Your Complete Stress Assessment",
+      "subtitle": "Get personalized recommendations and detailed insights with the full version",
+      "features": [
+        "Detailed stress analysis report",
+        "Personalized management plan",
+        "Progress tracking tools",
+        "Expert recommendations"
+      ]
+    },
+    "comparison": {
+      "free": {
+        "title": "Free Version",
+        "limitations": [
+          "Basic assessment (5 questions)",
+          "Simple results",
+          "Limited recommendations"
+        ]
+      },
+      "premium": {
+        "title": "Premium Version",
+        "benefits": [
+          "Comprehensive assessment (20+ questions)",
+          "Detailed analysis report",
+          "Personalized management plan",
+          "Progress tracking tools",
+          "Expert recommendations",
+          "Priority support"
+        ]
+      }
+    }
+  },
+  "buttons": {
+    "upgradeToPremium": "Upgrade to Premium",
+    "startAssessment": "Start Assessment",
+    "continue": "Continue",
+    "viewResults": "View Results",
+    "backToHome": "Back to Home",
+    "learnMore": "Learn More"
+  },
+  "periodPainImpactCalculator": {
+    "metaTitle": "Period Pain Impact Calculator - Scientific Assessment & Analysis | PeriodHub",
+    "pageTitle": "Period Pain Impact Calculator - Scientific Symptom Assessment",
+    "subtitle": "Professional evaluation of menstrual pain severity and its impact on daily life, with personalized recommendations",
+    "meta": {
+      "keywords": "work impact calculator,period pain work impact,menstrual pain workplace analysis,period pain productivity,work efficiency assessment,menstrual pain daily life impact,period pain functional impact"
+    },
+    "features": {
+      "scientificAssessment": "Scientific pain severity assessment",
+      "workImpactAnalysis": "Quantified work impact analysis",
+      "lifeQualityEvaluation": "Quality of life impact evaluation",
+      "medicalRecommendations": "Personalized medical recommendations",
+      "symptomTracking": "Symptom tracking and recording",
+      "reliefSolutions": "Professional relief solutions"
+    },
+    "breadcrumbHome": "Home",
+    "breadcrumbTools": "Interactive Tools",
+    "breadcrumbCurrent": "Period Pain Impact Calculator",
+    "assessmentTitle": "Comprehensive Pain Assessment",
+    "assessmentDescription": "This assessment includes 15 questions covering pain characteristics, lifestyle factors, and medical history. Your answers will help us provide personalized recommendations for managing your menstrual pain.",
+    "startButton": "Start Assessment",
+    "progressTitle": "Assessment Progress",
+    "previousButton": "Previous",
+    "nextButton": "Next",
+    "completeButton": "Complete Assessment",
+    "loadingButton": "Processing...",
+    "backButton": "Back",
+    "retakeButton": "Retake Assessment",
+    "disclaimer": "This tool is not a medical diagnosis. Consult a doctor for any health concerns.",
+    "relatedContent": {
+      "title": "Related Health Resources",
+      "description": "Based on your assessment results, we recommend the following professional resources to help you better manage and relieve menstrual discomfort.",
+      "articles": "Related Health Articles",
+      "tools": "Related Tools",
+      "scenarios": "Scenario Solutions",
+      "needPersonalizedAdvice": "Need Personalized Advice?",
+      "needPersonalizedAdviceDesc": "Our professional team is ready to provide you with personalized health guidance and support.",
+      "viewArticles": "View Articles",
+      "scenarioSolutions": "Scenario Solutions",
+      "exploreMoreTools": "Explore More Tools"
+    },
+    "recommendations": {
+      "articles": {
+        "menstrualStressManagement": {
+          "title": "Menstrual Stress Management Complete Guide",
+          "description": "Stress management strategies and menstrual health maintenance in workplace environment",
+          "category": "stress-management",
+          "readTime": "12 min read"
+        },
+        "menstrualSleepQuality": {
+          "title": "Menstrual Sleep Quality Improvement Guide",
+          "description": "Improve sleep quality to reduce menstrual discomfort and enhance work efficiency",
+          "category": "sleep-management",
+          "readTime": "10 min read"
+        },
+        "antiInflammatoryDiet": {
+          "title": "Anti-Inflammatory Diet for Period Pain Relief",
+          "description": "Anti-inflammatory diet plan and nutrition conditioning for working women",
+          "category": "nutrition-conditioning",
+          "readTime": "8 min read"
+        }
+      },
+      "tools": {
+        "symptomAssessment": {
+          "title": "Symptom Assessment Tool",
+          "description": "Professional assessment of menstrual pain symptom severity and types",
+          "category": "symptom-assessment",
+          "difficulty": "Easy",
+          "estimatedTime": "3-5 min"
+        },
+        "painTracker": {
+          "title": "Pain Tracker",
+          "description": "Track pain patterns and analyze symptom trends",
+          "category": "pain-tracking",
+          "difficulty": "Easy",
+          "estimatedTime": "2-3 min daily"
+        }
+      },
+      "scenarios": {
+        "emergencyKit": {
+          "title": "Emergency Kit Guide",
+          "description": "Quick relief methods and emergency treatment when pain occurs"
+        },
+        "office": {
+          "title": "Office Environment Health Management",
+          "description": "Menstrual health management strategies in office environment"
+        }
+      }
+    },
+    "questions": {
+      "age_range": {
+        "title": "What is your age range?",
+        "description": "This helps us provide more accurate recommendations",
+        "options": {
+          "12-17": "12-17 years",
+          "18-25": "18-25 years",
+          "26-35": "26-35 years",
+          "36-45": "36-45 years",
+          "46+": "46+ years"
+        }
+      },
+      "cycle_regularity": {
+        "title": "How predictable is your menstrual cycle?",
+        "description": "This affects how easily you can plan work, study and life around your period (a typical cycle is 21-35 days)",
+        "options": {
+          "very_regular": "Very regular (±2 days)",
+          "mostly_regular": "Mostly regular (±5 days)",
+          "irregular": "Somewhat irregular (>5 days)",
+          "very_irregular": "Very irregular"
+        }
+      },
+      "medical_conditions": {
+        "title": "Do you have any medical conditions that may worsen period pain and limit functionality?",
+        "description": "Please select honestly, this helps assess if more active medical intervention is needed",
+        "options": {
+          "endometriosis": "Endometriosis",
+          "fibroids": "Uterine fibroids",
+          "pcos": "PCOS (Polycystic Ovary Syndrome)",
+          "thyroid": "Thyroid conditions",
+          "diabetes": "Diabetes",
+          "heart_disease": "Heart conditions",
+          "mental_health": "Mental health conditions",
+          "none": "None of the above"
+        }
+      },
+      "pain_severity": {
+        "title": "What is average intensity of your menstrual pain?",
+        "description": "1 means almost no pain, 10 means severe pain"
+      },
+      "pain_duration": {
+        "title": "How long does the pain typically last?",
+        "options": {
+          "few_hours": "A few hours",
+          "half_day": "Half a day",
+          "one_day": "1 day",
+          "two_days": "2 days",
+          "three_plus_days": "3 days or longer"
+        }
+      },
+      "pain_location": {
+        "title": "Where do you mainly experience pain?",
+        "description": "You can select multiple areas",
+        "options": {
+          "lower_abdomen": "Lower abdomen",
+          "lower_back": "Lower back",
+          "upper_back": "Upper back",
+          "thighs": "Inner thighs",
+          "head": "Head",
+          "chest": "Chest/breasts"
+        }
+      },
+      "pain_impact": {
+        "title": "How much does pain affect your daily activities?",
+        "options": {
+          "no_impact": "Almost no impact",
+          "mild_impact": "Mild impact, but can function normally",
+          "moderate_impact": "Moderate impact, need to adjust activities",
+          "severe_impact": "Severe impact, difficult to do daily activities",
+          "unable_function": "Unable to function normally, need bed rest"
+        }
+      },
+      "accompanying_symptoms": {
+        "title": "What other symptoms do you experience during your period?",
+        "description": "Select all that apply",
+        "options": {
+          "nausea": "Nausea/vomiting",
+          "headache": "Headache",
+          "diarrhea": "Diarrhea",
+          "constipation": "Constipation",
+          "bloating": "Bloating",
+          "breast_tenderness": "Breast tenderness",
+          "mood_changes": "Mood changes",
+          "fatigue": "Fatigue",
+          "dizziness": "Dizziness",
+          "depression": "Low mood"
+        }
+      },
+      "activity_disruption": {
+        "title": "How often does period pain disrupt your planned activities (work/study/social life)?",
+        "options": {
+          "never": "Almost never disrupts plans",
+          "occasionally": "Occasionally requires small adjustments",
+          "often": "Often forces you to cancel or postpone plans",
+          "almost_every_cycle": "Almost every cycle seriously disrupts plans"
+        }
+      },
+      "work_study_impact": {
+        "title": "During your menstrual period, how much does menstrual pain affect your work or study performance?",
+        "options": {
+          "no_impact": "No impact, able to work/study normally",
+          "mild_impact": "Mild impact, efficiency decreases but can persist",
+          "moderate_impact": "Moderate impact, need to reduce workload or adjust schedule",
+          "severe_impact": "Severe impact, often need to take leave or leave early",
+          "unable_to_work": "Almost unable to work/study, must rest"
+        }
+      },
+      "stress_level": {
+        "title": "How much extra stress does your period pain add to your work and daily life?",
+        "description": "1 means almost no additional stress, 10 means extremely stressful"
+      },
+      "sleep_quality": {
+        "title": "During painful period days, how is your sleep quality?",
+        "options": {
+          "excellent": "Excellent, sufficient sleep",
+          "good": "Good",
+          "fair": "Fair",
+          "poor": "Poor, often have insomnia",
+          "very_poor": "Very poor, severe insomnia"
+        }
+      },
+      "diet_habits": {
+        "title": "Which of the following describes your diet habits?",
+        "description": "Select all that apply",
+        "options": {
+          "balanced": "Balanced diet with fruits and vegetables",
+          "high_sugar": "Often eat sweets and desserts",
+          "high_caffeine": "Drink a lot of coffee/tea",
+          "irregular_meals": "Irregular meal times",
+          "processed_foods": "Often eat processed foods",
+          "adequate_water": "Drink enough water daily"
+        }
+      },
+      "menstrual_exercise": {
+        "title": "What is your exercise habit during menstruation?",
+        "description": "Regular moderate exercise during menstruation may help relieve pain",
+        "options": {
+          "complete_rest": "Complete rest, stop all exercise",
+          "light_stretch": "Only light stretching or walking",
+          "moderate_reduced": "Continue moderate exercise, but reduce intensity",
+          "maintain_intensity": "Maintain normal exercise intensity",
+          "increase_exercise": "Increase exercise (believe it helps relieve pain)"
+        }
+      },
+      "current_treatments": {
+        "title": "What methods are you currently using to manage period pain and stay functional in work and life?",
+        "description": "Select all that apply so we can understand your current self-management strategies",
+        "options": {
+          "pain_medication": "Pain medication (ibuprofen, etc.)",
+          "heat_therapy": "Heat therapy (heating pad, hot water bottle)",
+          "exercise": "Light exercise",
+          "rest": "Rest and sleep",
+          "massage": "Massage",
+          "herbal_remedies": "Herbal remedies",
+          "birth_control": "Birth control pills",
+          "none": "No specific treatment"
+        }
       }
     }
   }

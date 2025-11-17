@@ -10,10 +10,15 @@ import {
   Download,
   Save,
   RotateCcw,
+  Database,
+  Info,
+  AlertTriangle,
+  Calendar,
 } from "lucide-react";
 import {
   useUserPreferences,
   useUserPreferencesActions,
+  useCalendar,
 } from "../hooks/useWorkplaceWellnessStore";
 import { useTranslations } from "next-intl";
 import {
@@ -24,9 +29,246 @@ import {
   SettingsValidationResult,
 } from "../types";
 import { THEME_CONFIG, FONT_SIZE_CONFIG } from "../types/defaults";
+import { PeriodRecord } from "../types";
+
+// 数据保留设置组件
+function DataRetentionSection({
+  periodData,
+  t,
+  onNavigateToExport,
+}: {
+  periodData: PeriodRecord[];
+  t: (key: string) => string;
+  onNavigateToExport: () => void;
+}) {
+  const RETENTION_PERIOD_MONTHS = 6; // 6个月保留期限
+  const WARNING_DAYS = 30; // 提前30天提醒
+
+  // 计算数据统计
+  const calculateStats = () => {
+    const now = new Date();
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - RETENTION_PERIOD_MONTHS);
+    const warningDate = new Date();
+    warningDate.setMonth(warningDate.getMonth() - (RETENTION_PERIOD_MONTHS * 30 - WARNING_DAYS) / 30);
+
+    const allRecords = periodData || [];
+    const validRecords = allRecords.filter((r) => {
+      try {
+        const recordDate = new Date(r.date);
+        return recordDate >= sixMonthsAgo;
+      } catch {
+        return false;
+      }
+    });
+
+    const expiringRecords = allRecords.filter((r) => {
+      try {
+        const recordDate = new Date(r.date);
+        return recordDate < warningDate && recordDate >= sixMonthsAgo;
+      } catch {
+        return false;
+      }
+    });
+
+    const oldestRecord = validRecords.length > 0
+      ? validRecords.reduce((oldest, current) => {
+          const currentDate = new Date(current.date);
+          const oldestDate = new Date(oldest.date);
+          return currentDate < oldestDate ? current : oldest;
+        })
+      : null;
+
+    // 估算存储大小（粗略估算）
+    const estimatedSize = JSON.stringify(allRecords).length / 1024; // KB
+
+    return {
+      totalRecords: allRecords.length,
+      validRecords: validRecords.length,
+      expiringRecords: expiringRecords.length,
+      oldestRecord,
+      estimatedSize: estimatedSize.toFixed(2),
+    };
+  };
+
+  const stats = calculateStats();
+
+  // 格式化日期
+  const formatDate = (date: Date | null) => {
+    if (!date) return "-";
+    return new Date(date).toLocaleDateString("zh-CN", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  // 计算距离过期天数
+  const getDaysUntilExpiry = (recordDate: Date) => {
+    const sixMonthsAgo = new Date();
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - RETENTION_PERIOD_MONTHS);
+    const diffTime = recordDate.getTime() - sixMonthsAgo.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  };
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-semibold text-neutral-800 mb-2">
+          {t("userPreferences.dataRetention") || "数据保留设置"}
+        </h3>
+        <p className="text-sm text-neutral-600 mb-4">
+          {t("userPreferences.dataRetentionDescription") ||
+            "为保证最佳性能，我们自动保留最近的数据，旧数据将被清理"}
+        </p>
+      </div>
+
+      {/* 数据保留期限说明 */}
+      <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg">
+        <div className="flex items-start">
+          <Info className="h-5 w-5 text-blue-400 mt-0.5 mr-3 flex-shrink-0" />
+          <div className="flex-1">
+            <p className="text-sm text-blue-700 font-medium mb-1">
+              {t("userPreferences.retentionPolicy") ||
+                "数据保留期限"}
+            </p>
+            <p className="text-sm text-blue-600">
+              {t("userPreferences.retentionPolicyDescription") ||
+                `为保证最佳性能，我们保留最近 ${RETENTION_PERIOD_MONTHS} 个月的数据。超过 ${RETENTION_PERIOD_MONTHS} 个月的旧数据将被自动清理。您可以随时导出数据以保留完整历史记录。`}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* 数据即将过期提醒 */}
+      {stats.expiringRecords > 0 && (
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
+          <div className="flex items-start">
+            <AlertTriangle className="h-5 w-5 text-yellow-400 mt-0.5 mr-3 flex-shrink-0" />
+            <div className="flex-1">
+              <p className="text-sm text-yellow-700 font-medium mb-1">
+                {t("userPreferences.expiringDataWarning") ||
+                  "数据即将过期提醒"}
+              </p>
+              <p className="text-sm text-yellow-600 mb-3">
+                {(t("userPreferences.expiringDataDescription") ||
+                  `您有 {count} 条记录将在 30 天后自动清理。建议导出备份以保留完整历史记录。`).replace('{count}', stats.expiringRecords.toString())}
+              </p>
+              <button
+                onClick={onNavigateToExport}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-600 text-white text-sm font-medium rounded-lg hover:bg-yellow-700 transition-colors"
+              >
+                <Download size={16} />
+                {t("userPreferences.exportNow") || "立即导出备份"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 当前数据状态 */}
+      <div className="bg-gray-50 p-4 rounded-lg">
+        <h4 className="text-sm font-medium text-neutral-700 mb-4">
+          {t("userPreferences.currentDataStatus") || "当前数据状态"}
+        </h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-neutral-600">
+              {t("userPreferences.totalRecords") || "总记录数"}
+            </span>
+            <span className="text-sm font-medium text-neutral-800">
+              {stats.totalRecords} {t("userPreferences.records") || "条"}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-neutral-600">
+              {t("userPreferences.validRecords") || "有效记录数"}
+            </span>
+            <span className="text-sm font-medium text-neutral-800">
+              {stats.validRecords} {t("userPreferences.records") || "条"}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-neutral-600">
+              {t("userPreferences.oldestRecord") || "最早记录"}
+            </span>
+            <span className="text-sm font-medium text-neutral-800">
+              {stats.oldestRecord
+                ? formatDate(new Date(stats.oldestRecord.date))
+                : "-"}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-sm text-neutral-600">
+              {t("userPreferences.storageSize") || "存储大小"}
+            </span>
+            <span className="text-sm font-medium text-neutral-800">
+              {stats.estimatedSize} KB
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* 导出数据按钮 */}
+      <div className="flex items-center justify-between p-4 bg-primary-50 rounded-lg">
+        <div>
+          <p className="text-sm font-medium text-primary-900 mb-1">
+            {t("userPreferences.exportAllData") || "导出所有数据"}
+          </p>
+          <p className="text-xs text-primary-700">
+            {t("userPreferences.exportAllDataDescription") ||
+              "导出所有数据以保留完整历史记录，支持 JSON、CSV、PDF 等格式"}
+          </p>
+        </div>
+        <button
+          onClick={onNavigateToExport}
+          className="flex items-center gap-2 px-4 py-2 bg-primary-600 text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors"
+        >
+          <Download size={16} />
+          {t("userPreferences.export") || "导出"}
+        </button>
+      </div>
+
+      {/* 数据保留期限说明 */}
+      <div className="border-t pt-4">
+        <h4 className="text-sm font-medium text-neutral-700 mb-3">
+          {t("userPreferences.retentionDetails") || "数据保留详情"}
+        </h4>
+        <div className="space-y-2 text-sm text-neutral-600">
+          <div className="flex items-start gap-2">
+            <Calendar className="w-4 h-4 mt-0.5 text-neutral-400" />
+            <div>
+              <p className="font-medium text-neutral-700">
+                {t("userPreferences.retentionPeriod") || "保留期限"}
+              </p>
+              <p>
+                {t("userPreferences.retentionPeriodDescription") ||
+                  `最近 ${RETENTION_PERIOD_MONTHS} 个月的数据将被保留，超过此期限的数据将被自动清理。`}
+              </p>
+            </div>
+          </div>
+          <div className="flex items-start gap-2">
+            <Info className="w-4 h-4 mt-0.5 text-neutral-400" />
+            <div>
+              <p className="font-medium text-neutral-700">
+                {t("userPreferences.exportRecommendation") || "导出建议"}
+              </p>
+              <p>
+                {t("userPreferences.exportRecommendationDescription") ||
+                  "建议定期导出数据以保留完整历史记录。导出的数据可以随时导入或查看。"}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function UserPreferencesSettings() {
   const preferences = useUserPreferences();
+  const calendar = useCalendar();
   const {
     updateUserPreferences,
     setTheme,
@@ -42,7 +284,7 @@ export default function UserPreferencesSettings() {
 
   const t = useTranslations("workplaceWellness");
   const [activeTab, setActiveTab] = useState<
-    "ui" | "notifications" | "privacy" | "accessibility" | "export"
+    "ui" | "notifications" | "privacy" | "accessibility" | "export" | "dataRetention"
   >("ui");
   const [validationResult, setValidationResult] =
     useState<SettingsValidationResult | null>(null);
@@ -114,6 +356,11 @@ export default function UserPreferencesSettings() {
       name: t("userPreferences.exportPreferences"),
       icon: Download,
     },
+    {
+      id: "dataRetention",
+      name: t("userPreferences.dataRetention") || "数据保留",
+      icon: Database,
+    },
   ] as const;
 
   return (
@@ -154,6 +401,7 @@ export default function UserPreferencesSettings() {
           return (
             <button
               key={tab.id}
+              data-tab={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`
                 flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-colors
@@ -764,6 +1012,18 @@ export default function UserPreferencesSettings() {
               </div>
             </div>
           </div>
+        )}
+
+        {/* 数据保留设置 */}
+        {activeTab === "dataRetention" && (
+          <DataRetentionSection
+            periodData={calendar.periodData || []}
+            t={t}
+            onNavigateToExport={() => {
+              setActiveTab("export");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          />
         )}
       </div>
 

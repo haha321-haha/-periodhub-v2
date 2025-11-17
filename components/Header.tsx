@@ -94,7 +94,10 @@ export default function Header() {
                 <span className="text-base" suppressHydrationWarning={true}>
                   🇨🇳
                 </span>
-                <span className="hidden sm:inline text-xs lg:text-sm">
+                <span
+                  className="hidden sm:inline text-xs lg:text-sm"
+                  suppressHydrationWarning={true}
+                >
                   {t("language")}
                 </span>
               </div>

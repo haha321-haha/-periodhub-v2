@@ -17,8 +17,8 @@ import {
   Heart,
 } from "lucide-react";
 import { useLocale } from "next-intl";
-import { getPeriodData } from "../data";
 import { useTranslations } from "next-intl";
+import { useCalendar } from "../hooks/useWorkplaceWellnessStore";
 import { PeriodRecord } from "../types";
 
 interface SymptomData {
@@ -41,13 +41,15 @@ interface SymptomPattern {
 export default function SymptomStatistics() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
+  const calendar = useCalendar();
   const [activeTab, setActiveTab] = useState<
     "overview" | "patterns" | "trends" | "recommendations"
   >("overview");
   const [symptomData, setSymptomData] = useState<SymptomData[]>([]);
   const [patterns, setPatterns] = useState<SymptomPattern[]>([]);
 
-  const periodData = getPeriodData();
+  // 从 store 读取 periodData
+  const periodData = calendar.periodData || [];
 
   useEffect(() => {
     analyzeSymptoms();

@@ -1,6 +1,11 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import {
+  getCachedRecommendations,
+  setCachedRecommendations,
+} from './recommendationCache';
+import { trackRecommendationDisplay } from './recommendationAnalytics';
 
 export interface Article {
   slug: string;
@@ -263,48 +268,208 @@ export function getFeaturedArticles(
   return articles.slice(0, limit);
 }
 
-export function getRelatedArticles(
+// ===== 配置部分 =====
+interface RecommendationConfig {
+  weights: {
+    category: number;
+    tag: number;
+    freshness: number;
+    readingTime: number;
+    random: number;
+  };
+  diversification: {
+    sameCategoryRatio: number;
+    differentCategoryRatio: number;
+  };
+  freshness: {
+    recent: number;      // 30天内
+    moderate: number;    // 60天内
+    older: number;       // 90天内
+  };
+}
+
+const DEFAULT_CONFIG: RecommendationConfig = {
+  weights: {
+    category: 5,
+    tag: 2,
+    freshness: 3,
+    readingTime: 1,
+    random: 2,
+  },
+  diversification: {
+    sameCategoryRatio: 0.67,
+    differentCategoryRatio: 0.33,
+  },
+  freshness: {
+    recent: 3,
+    moderate: 2,
+    older: 1,
+  },
+};
+
+// ===== 智能推荐函数 =====
+export function getRelatedArticlesSmart(
   currentSlug: string,
   locale: string = "en",
   limit: number = 3,
+  userHistory?: string[],
+  config: RecommendationConfig = DEFAULT_CONFIG,
 ): Article[] {
   const currentArticle = getArticleBySlug(currentSlug, locale);
   if (!currentArticle) return [];
 
   const allArticles = getAllArticles(locale);
-  const otherArticles = allArticles.filter(
+  let otherArticles = allArticles.filter(
     (article) => article.slug !== currentSlug,
   );
 
-  // Score articles based on shared tags and category
+  // 过滤掉用户已读文章
+  if (userHistory && userHistory.length > 0) {
+    otherArticles = otherArticles.filter(
+      (article) => !userHistory.includes(article.slug)
+    );
+  }
+
+  // 阶段1：增强评分算法
   const scoredArticles = otherArticles.map((article) => {
     let score = 0;
 
-    // Same category gets higher score
+    // 1. 分类匹配
     const currentCategory =
       locale === "zh" ? currentArticle.category_zh : currentArticle.category;
     const articleCategory =
       locale === "zh" ? article.category_zh : article.category;
-    if (currentCategory === articleCategory) {
-      score += 3;
+    const isSameCategory = currentCategory === articleCategory;
+    if (isSameCategory) {
+      score += config.weights.category;
     }
 
-    // Shared tags get points
+    // 2. 标签匹配
     const currentTags =
       locale === "zh" ? currentArticle.tags_zh : currentArticle.tags;
     const articleTags = locale === "zh" ? article.tags_zh : article.tags;
     const sharedTags =
       currentTags?.filter((tag) => articleTags?.includes(tag)) || [];
-    score += sharedTags.length;
+    score += sharedTags.length * config.weights.tag;
 
-    return { article, score };
+    // 3. 文章新鲜度
+    const articleDate = new Date(article.date);
+    const daysSincePublished = Math.floor(
+      (Date.now() - articleDate.getTime()) / (1000 * 60 * 60 * 24)
+    );
+    if (daysSincePublished <= 30) {
+      score += config.freshness.recent;
+    } else if (daysSincePublished <= 60) {
+      score += config.freshness.moderate;
+    } else if (daysSincePublished <= 90) {
+      score += config.freshness.older;
+    }
+
+    // 4. 阅读时间相似度
+    const currentReadingTime = parseInt(currentArticle.reading_time) || 0;
+    const articleReadingTime = parseInt(article.reading_time) || 0;
+    const readingTimeDiff = Math.abs(currentReadingTime - articleReadingTime);
+    if (readingTimeDiff <= 5) {
+      score += config.weights.readingTime;
+    }
+
+    // 5. 随机因素
+    const randomBoost = Math.random() * config.weights.random;
+    score += randomBoost;
+
+    return { article, score, isSameCategory };
   });
 
-  // Sort by score and return top articles
-  return scoredArticles
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
-    .map((item) => item.article);
+  // 阶段2：应用多样化规则
+  const sameCategory = scoredArticles.filter((item) => item.isSameCategory);
+  const differentCategory = scoredArticles.filter((item) => !item.isSameCategory);
+
+  // 排序
+  const sortByScore = (a: typeof scoredArticles[0], b: typeof scoredArticles[0]) => {
+    if (Math.abs(b.score - a.score) < 0.5) {
+      return new Date(b.article.date).getTime() - new Date(a.article.date).getTime();
+    }
+    return b.score - a.score;
+  };
+
+  sameCategory.sort(sortByScore);
+  differentCategory.sort(sortByScore);
+
+  // 计算推荐比例
+  const sameCategoryCount = Math.ceil(limit * config.diversification.sameCategoryRatio);
+  const differentCategoryCount = limit - sameCategoryCount;
+
+  // 混合推荐
+  const result: Article[] = [];
+  result.push(...sameCategory.slice(0, sameCategoryCount).map((item) => item.article));
+  result.push(...differentCategory.slice(0, differentCategoryCount).map((item) => item.article));
+
+  // 如果不够，用另一组补充
+  if (result.length < limit) {
+    const remaining = limit - result.length;
+    if (sameCategory.length > sameCategoryCount) {
+      result.push(
+        ...sameCategory
+          .slice(sameCategoryCount, sameCategoryCount + remaining)
+          .map((item) => item.article)
+      );
+    } else if (differentCategory.length > differentCategoryCount) {
+      result.push(
+        ...differentCategory
+          .slice(differentCategoryCount, differentCategoryCount + remaining)
+          .map((item) => item.article)
+      );
+    }
+  }
+
+  return result.slice(0, limit);
+}
+
+// ===== 带缓存的推荐函数 =====
+export function getRelatedArticlesWithCache(
+  currentSlug: string,
+  locale: string = "en",
+  limit: number = 3,
+  userHistory?: string[],
+): Article[] {
+  // 尝试从缓存获取
+  const cached = getCachedRecommendations(currentSlug, locale, limit, userHistory);
+  if (cached && cached.length >= limit) {
+    console.log(`[Articles] Cache hit for ${currentSlug}`);
+    return cached;
+  }
+
+  // 计算推荐
+  const recommendations = getRelatedArticlesSmart(
+    currentSlug,
+    locale,
+    limit,
+    userHistory
+  );
+
+  // 缓存结果
+  if (recommendations.length > 0) {
+    setCachedRecommendations(currentSlug, locale, limit, recommendations);
+  }
+
+  // 追踪推荐展示
+  trackRecommendationDisplay(
+    currentSlug,
+    recommendations.map((a) => a.slug),
+    locale
+  );
+
+  return recommendations;
+}
+
+// ===== 向后兼容的包装函数 =====
+export function getRelatedArticles(
+  currentSlug: string,
+  locale: string = "en",
+  limit: number = 3,
+): Article[] {
+  // 默认使用带缓存的版本
+  return getRelatedArticlesWithCache(currentSlug, locale, limit);
 }
 
 export function getAllCategories(locale: string = "en"): string[] {

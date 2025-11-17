@@ -62,36 +62,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh/terms-of-service",
     "/en/terms-of-service",
     "/zh/medical-disclaimer",
-    "/en/medical-disclaimer",
-  ];
+    "/en/medical-disclaimer"];
 
   // 下载页面子页面
   const downloadsPages = [
     "/zh/downloads/medication-guide",
-    "/en/downloads/medication-guide",
-  ];
+    "/en/downloads/medication-guide"];
 
-  // 互动工具子页面
+  // 互动工具子页面 - 只包含实际存在的页面
   const interactiveTools = [
     "/zh/interactive-tools/symptom-assessment",
     "/en/interactive-tools/symptom-assessment",
     "/zh/interactive-tools/pain-tracker",
     "/en/interactive-tools/pain-tracker",
-    "/zh/interactive-tools/constitution-test",
-    "/en/interactive-tools/constitution-test",
-    "/zh/interactive-tools/cycle-tracker",
-    "/en/interactive-tools/cycle-tracker",
-    "/zh/interactive-tools/symptom-tracker",
-    "/en/interactive-tools/symptom-tracker",
-    "/zh/interactive-tools/period-pain-assessment",
-    "/en/interactive-tools/period-pain-assessment",
     "/zh/interactive-tools/period-pain-impact-calculator",
     "/en/interactive-tools/period-pain-impact-calculator",
     "/zh/interactive-tools/nutrition-recommendation-generator",
     "/en/interactive-tools/nutrition-recommendation-generator",
     "/zh/interactive-tools/workplace-wellness",
     "/en/interactive-tools/workplace-wellness",
-  ];
+    "/zh/interactive-tools/stress-management",
+    "/en/interactive-tools/stress-management"];
 
   // 健康指南子页面
   const healthGuidePages = [
@@ -106,8 +97,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh/health-guide/relief-methods",
     "/en/health-guide/relief-methods",
     "/zh/health-guide/understanding-pain",
-    "/en/health-guide/understanding-pain",
-  ];
+    "/en/health-guide/understanding-pain"];
 
   // 青少年健康子页面
   const teenHealthPages = [
@@ -118,10 +108,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh/teen-health/development-pain",
     "/en/teen-health/development-pain",
     "/zh/teen-health/emotional-support",
-    "/en/teen-health/emotional-support",
-  ];
+    "/en/teen-health/emotional-support"];
 
-  // 场景解决方案子页面
+  // 场景解决方案子页面 - 只包含实际存在的页面
   const scenarioPages = [
     "/zh/scenario-solutions/office",
     "/en/scenario-solutions/office",
@@ -135,11 +124,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/en/scenario-solutions/social",
     "/zh/scenario-solutions/lifeStages",
     "/en/scenario-solutions/lifeStages",
-    "/zh/scenario-solutions/partnerCommunication",
-    "/en/scenario-solutions/partnerCommunication",
     "/zh/scenario-solutions/emergency-kit",
-    "/en/scenario-solutions/emergency-kit",
-  ];
+    "/en/scenario-solutions/emergency-kit"];
 
   // 所有静态页面
   const staticPages = [
@@ -148,8 +134,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...interactiveTools,
     ...healthGuidePages,
     ...teenHealthPages,
-    ...scenarioPages,
-  ];
+    ...scenarioPages];
 
   // 文章页面
   const articleSlugs = [
@@ -190,8 +175,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "ginger-menstrual-pain-relief-guide",
     "comprehensive-report-non-medical-factors-menstrual-pain",
     "period-pain-simulator-accuracy-analysis",
-    "medication-vs-natural-remedies-menstrual-pain",
-  ];
+    "medication-vs-natural-remedies-menstrual-pain"];
 
   // 生成文章页面
   const articlePages = [];
@@ -278,8 +262,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/downloads/magnesium-gut-health-menstrual-pain-guide-en.html",
     "/downloads/pain-tracking-form-en.html",
     "/downloads/teacher-health-manual-en.html",
-    "/downloads/constitution-guide-en.html",
-  ];
+    "/downloads/constitution-guide-en.html"];
 
   // 生成HTML文件的sitemap条目 - 高优先级
   const htmlEntries: MetadataRoute.Sitemap = htmlFiles.map((html) => ({
@@ -316,8 +299,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: currentDate,
         changeFrequency: "weekly" as const,
         priority: 1.0,
-      },
-    ];
+      }];
   }
 
   console.log(

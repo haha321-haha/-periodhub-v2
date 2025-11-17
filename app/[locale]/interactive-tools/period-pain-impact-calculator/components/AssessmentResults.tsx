@@ -74,16 +74,16 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
   return (
     <>
       <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        {/* 面包屑导航 */}
-        <Breadcrumb
-          items={[
-            { label: breadcrumbT("home"), href: `/${locale}` },
-            { label: breadcrumbT("interactiveTools"), href: `/${locale}/interactive-tools` },
-            { label: t('breadcrumbCurrent') }
-          ]}
-        />
+        <div className="w-full max-w-4xl mx-auto">
+          {/* 面包屑导航 */}
+          <Breadcrumb
+            items={[
+              { label: breadcrumbT("interactiveTools"), href: `/${locale}/interactive-tools` },
+              { label: t('breadcrumbCurrent') }
+            ]}
+          />
         
-        <div className="w-full max-w-4xl mx-auto px-4 py-8 space-y-8">
+          <div className="px-4 py-8 space-y-8">
       {/* 结果摘要 */}
       <div className="bg-white rounded-lg shadow-md p-8">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-900">
@@ -214,6 +214,7 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
           {t('results.retakeAssessment')}
         </button>
       </div>
+          </div>
         </div>
       </main>
       

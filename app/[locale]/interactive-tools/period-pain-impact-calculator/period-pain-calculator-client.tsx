@@ -111,16 +111,16 @@ export default function PeriodPainCalculatorClient({ params }: PeriodPainCalcula
   // 显示评估问题
   return (
     <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <div className="max-w-5xl mx-auto">
         {/* 面包屑导航 */}
         <Breadcrumb
           items={[
-            { label: breadcrumbT("home"), href: `/${currentLocale}` },
             { label: breadcrumbT("interactiveTools"), href: `/${currentLocale}/interactive-tools` },
             { label: t('breadcrumbCurrent') }
           ]}
         />
 
-      <div className="bg-white rounded-lg shadow-xl p-8 md:p-12 lg:p-16 max-w-5xl mx-auto">
+        <div className="bg-white rounded-lg shadow-xl p-8 md:p-12 lg:p-16">
         {/* 进度条 */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-2">
@@ -200,6 +200,7 @@ export default function PeriodPainCalculatorClient({ params }: PeriodPainCalcula
           >
             ← {t('backButton')}
           </button>
+        </div>
         </div>
       </div>
       

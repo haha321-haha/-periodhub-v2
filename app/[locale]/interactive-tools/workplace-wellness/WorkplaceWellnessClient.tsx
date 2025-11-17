@@ -195,14 +195,14 @@ export default function WorkplaceWellnessClient() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* 面包屑导航 */}
-      <Breadcrumb
-        items={[
-          { label: breadcrumbT("home"), href: `/${locale}` },
-          { label: breadcrumbT("tools"), href: `/${locale}/interactive-tools` },
-          { label: t("title"), href: `/${locale}/interactive-tools/workplace-wellness` },
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* 面包屑导航 */}
+        <Breadcrumb
+          items={[
+            { label: breadcrumbT("interactiveTools"), href: `/${locale}/interactive-tools` },
+            { label: breadcrumbT("workplaceWellness") }
           ]}
-      />
+        />
 
         {/* 头部组件 */}
         <WorkplaceWellnessHeader />
@@ -242,6 +242,7 @@ export default function WorkplaceWellnessClient() {
 
         {/* 页脚 */}
         <Footer />
+      </div>
       </div>
   );
 }

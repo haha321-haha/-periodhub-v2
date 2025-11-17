@@ -139,7 +139,7 @@ interface WorkplaceWellnessStore extends WorkplaceWellnessState {
 
 // 初始状态 - 基于HVsLYEp的appState
 const initialState: WorkplaceWellnessState = {
-  activeTab: "assessment",
+  activeTab: "calendar",
   calendar: {
     currentDate: new Date(),
     selectedDate: null,
@@ -1015,7 +1015,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
                   localStorage.removeItem(saveName);
                   const minimalData = {
                     state: {
-                      activeTab: "assessment",
+                      activeTab: "calendar",
                       calendar: {
                         currentDate: new Date().toISOString(),
                         selectedDate: null,

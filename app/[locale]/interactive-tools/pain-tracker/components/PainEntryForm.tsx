@@ -276,16 +276,20 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
           {t("form.painLevel")} ({formData.painLevel}/10)
         </label>
         <div className="space-y-4 pain-scale-container">
-          <input
-            type="range"
-            min="1"
-            max="10"
-            value={formData.painLevel}
-            onChange={(e) =>
-              handleInputChange("painLevel", parseInt(e.target.value))
-            }
-            className="w-full pain-scale cursor-pointer"
-          />
+          <div className="relative mb-2">
+            {/* 渐变背景轨道 - 从浅绿到深红 */}
+            <div className="absolute inset-0 h-3 bg-gradient-to-r from-green-400 via-yellow-400 via-orange-400 to-red-500 rounded-lg"></div>
+            <input
+              type="range"
+              min="1"
+              max="10"
+              value={formData.painLevel}
+              onChange={(e) =>
+                handleInputChange("painLevel", parseInt(e.target.value))
+              }
+              className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider"
+            />
+          </div>
           <div className="flex justify-between text-sm text-neutral-600 mt-2">
             <span className="text-xs sm:text-sm">1</span>
             <span className="text-xs sm:text-sm">3</span>
@@ -293,6 +297,50 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
             <span className="text-xs sm:text-sm">7</span>
             <span className="text-xs sm:text-sm">10</span>
           </div>
+          {/* 自定义滑块样式 */}
+          <style jsx>{`
+            .pain-slider::-webkit-slider-thumb {
+              -webkit-appearance: none;
+              appearance: none;
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background: #ffffff;
+              border: 2px solid #6b7280;
+              cursor: pointer;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+              transition: all 0.2s ease;
+            }
+
+            .pain-slider::-webkit-slider-thumb:hover {
+              border-color: #9333ea;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+              transform: scale(1.1);
+            }
+
+            .pain-slider::-moz-range-thumb {
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background: #ffffff;
+              border: 2px solid #6b7280;
+              cursor: pointer;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+              transition: all 0.2s ease;
+              -moz-appearance: none;
+            }
+
+            .pain-slider::-moz-range-thumb:hover {
+              border-color: #9333ea;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+              transform: scale(1.1);
+            }
+
+            .pain-slider::-moz-range-track {
+              background: transparent;
+              height: 12px;
+            }
+          `}</style>
           {currentPainLevel && (
             <div className="text-center">
               <div className="inline-flex items-center bg-gradient-to-r from-pink-100 via-pink-50 to-purple-100 px-6 py-3 rounded-xl shadow-lg border border-pink-200">

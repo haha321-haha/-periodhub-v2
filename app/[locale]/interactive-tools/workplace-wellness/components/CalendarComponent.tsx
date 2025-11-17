@@ -124,8 +124,36 @@ export default function CalendarComponent() {
     setShowAddForm(true);
   };
 
+  // 格式化日期为 YYYY-MM-DD
+  const formatDateShort = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  // 获取今天的日期字符串
+  const getTodayDateString = (): string => {
+    return formatDateShort(new Date());
+  };
+
   // 保存记录
   const handleSaveRecord = () => {
+    // 验证日期不能是未来日期
+    const selectedDate = new Date(formData.date);
+    const today = new Date();
+    today.setHours(23, 59, 59, 999); // 设置今天的时间为23:59:59，允许选择今天
+    
+    if (selectedDate > today) {
+      // 如果选择了未来日期，显示错误提示（可以通过 toast 或其他方式）
+      alert(
+        locale === "zh"
+          ? "不能选择未来的日期，请选择今天或之前的日期。"
+          : "Cannot select future dates. Please select today or a past date."
+      );
+      return;
+    }
+
     const record: PeriodRecord = {
       date: formData.date,
       type: formData.type,
@@ -254,6 +282,7 @@ export default function CalendarComponent() {
               <input
                 type="date"
                 value={formData.date}
+                max={getTodayDateString()}
                 onChange={(e) =>
                   setFormData({ ...formData, date: e.target.value })
                 }
@@ -283,19 +312,71 @@ export default function CalendarComponent() {
               <label className="block text-sm font-medium text-neutral-800 mb-2">
                 {t("calendar.painLevel")} ({formData.painLevel})
               </label>
-              <input
-                type="range"
-                min="0"
-                max="10"
-                value={formData.painLevel}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    painLevel: parseInt(e.target.value, 10),
-                  })
+              <div className="relative mb-2">
+                {/* 渐变背景轨道 */}
+                <div className="absolute inset-0 h-3 bg-gradient-to-r from-green-400 via-yellow-400 via-orange-400 to-red-500 rounded-lg"></div>
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value={formData.painLevel}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      painLevel: parseInt(e.target.value, 10),
+                    })
+                  }
+                  className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider"
+                />
+              </div>
+              <div className="flex justify-between text-xs text-neutral-500 mt-1">
+                <span>{locale === "zh" ? "无痛" : "No pain"}</span>
+                <span>{locale === "zh" ? "极痛" : "Extreme"}</span>
+              </div>
+              {/* 自定义滑块样式 */}
+              <style jsx>{`
+                .pain-slider::-webkit-slider-thumb {
+                  -webkit-appearance: none;
+                  appearance: none;
+                  height: 20px;
+                  width: 20px;
+                  border-radius: 50%;
+                  background: #ffffff;
+                  border: 2px solid #6b7280;
+                  cursor: pointer;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                  transition: all 0.2s ease;
                 }
-                className="w-full"
-              />
+
+                .pain-slider::-webkit-slider-thumb:hover {
+                  border-color: #9333ea;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                  transform: scale(1.1);
+                }
+
+                .pain-slider::-moz-range-thumb {
+                  height: 20px;
+                  width: 20px;
+                  border-radius: 50%;
+                  background: #ffffff;
+                  border: 2px solid #6b7280;
+                  cursor: pointer;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                  transition: all 0.2s ease;
+                  -moz-appearance: none;
+                }
+
+                .pain-slider::-moz-range-thumb:hover {
+                  border-color: #9333ea;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                  transform: scale(1.1);
+                }
+
+                .pain-slider::-moz-range-track {
+                  background: transparent;
+                  height: 12px;
+                }
+              `}</style>
             </div>
             <div className="flex gap-3">
               <button

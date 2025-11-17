@@ -138,35 +138,81 @@ export default function CalendarComponent() {
   };
 
   // 保存记录
-  const handleSaveRecord = () => {
-    // 验证日期不能是未来日期
-    const selectedDate = new Date(formData.date);
-    const today = new Date();
-    today.setHours(23, 59, 59, 999); // 设置今天的时间为23:59:59，允许选择今天
-    
-    if (selectedDate > today) {
-      // 如果选择了未来日期，显示错误提示（可以通过 toast 或其他方式）
-      alert(
-        locale === "zh"
-          ? "不能选择未来的日期，请选择今天或之前的日期。"
-          : "Cannot select future dates. Please select today or a past date."
-      );
-      return;
+  const handleSaveRecord = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    // 阻止默认行为和事件冒泡
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
     }
 
-    const record: PeriodRecord = {
-      date: formData.date,
-      type: formData.type,
-      painLevel: formData.painLevel > 0 ? (formData.painLevel as PainLevel) : null,
-      flow: null, // 可以根据需要添加流量选择
-    };
-    addPeriodRecord(record);
-    setShowAddForm(false);
+    try {
+      // 验证日期不能是未来日期
+      const selectedDate = new Date(formData.date);
+      const today = new Date();
+      today.setHours(23, 59, 59, 999); // 设置今天的时间为23:59:59，允许选择今天
+      
+      if (selectedDate > today) {
+        // 如果选择了未来日期，显示错误提示（可以通过 toast 或其他方式）
+        alert(
+          locale === "zh"
+            ? "不能选择未来的日期，请选择今天或之前的日期。"
+            : "Cannot select future dates. Please select today or a past date."
+        );
+        return;
+      }
+
+      // 验证日期格式
+      if (!formData.date || formData.date.trim() === "") {
+        alert(
+          locale === "zh"
+            ? "请选择日期。"
+            : "Please select a date."
+        );
+        return;
+      }
+
+      const record: PeriodRecord = {
+        date: formData.date,
+        type: formData.type,
+        painLevel: formData.painLevel > 0 ? (formData.painLevel as PainLevel) : null,
+        flow: null, // 可以根据需要添加流量选择
+      };
+      
+      // 调用 store 的 addPeriodRecord 方法
+      addPeriodRecord(record);
+      
+      // 关闭表单并重置表单数据
+      setShowAddForm(false);
+      setFormData({
+        date: new Date().toISOString().split("T")[0],
+        type: "period",
+        painLevel: 0,
+      });
+    } catch (error) {
+      // 错误处理
+      console.error("保存记录时出错:", error);
+      alert(
+        locale === "zh"
+          ? "保存记录时出错，请重试。"
+          : "An error occurred while saving the record. Please try again."
+      );
+    }
   };
 
   // 取消添加
-  const handleCancel = () => {
+  const handleCancel = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    // 阻止默认行为和事件冒泡
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setShowAddForm(false);
+    // 重置表单数据
+    setFormData({
+      date: new Date().toISOString().split("T")[0],
+      type: "period",
+      painLevel: 0,
+    });
   };
 
   return (
@@ -380,12 +426,14 @@ export default function CalendarComponent() {
             </div>
             <div className="flex gap-3">
               <button
+                type="button"
                 onClick={handleSaveRecord}
                 className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200"
               >
                 {t("common.save")}
               </button>
               <button
+                type="button"
                 onClick={handleCancel}
                 className="px-4 py-2 bg-neutral-200 text-neutral-800 rounded-lg hover:bg-neutral-300 transition-colors duration-200"
               >

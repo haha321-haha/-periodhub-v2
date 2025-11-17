@@ -46,16 +46,31 @@ export default function NutritionComponent() {
   };
 
   // 生成膳食计划
-  const generateMealPlan = () => {
-    // 基于HVsLYEp的膳食计划生成逻辑
-    const meals = ["breakfast", "lunch", "dinner", "snack"];
-    const suggestions = meals.map((meal) => ({
-      meal,
-      suggestion: t(`nutrition.mealSuggestions.${meal}`),
-    }));
+  const generateMealPlan = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    // 阻止默认行为和事件冒泡
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
-    console.log("Generated meal plan:", suggestions);
-    alert(t("nutrition.planGenerated"));
+    try {
+      // 基于HVsLYEp的膳食计划生成逻辑
+      const meals = ["breakfast", "lunch", "dinner", "snack"];
+      const suggestions = meals.map((meal) => ({
+        meal,
+        suggestion: t(`nutrition.mealSuggestions.${meal}`),
+      }));
+
+      console.log("Generated meal plan:", suggestions);
+      alert(t("nutrition.planGenerated"));
+    } catch (error) {
+      console.error("生成膳食计划时出错:", error);
+      alert(
+        locale === "zh"
+          ? "生成膳食计划时出错，请重试。"
+          : "An error occurred while generating the meal plan. Please try again."
+      );
+    }
   };
 
   return (
@@ -76,6 +91,7 @@ export default function NutritionComponent() {
               (phase) => (
                 <button
                   key={phase}
+                  type="button"
                   onClick={() => updateNutrition({ selectedPhase: phase })}
                   className={`p-3 rounded-lg border-2 transition-colors duration-200 text-center ${
                     nutrition.selectedPhase === phase
@@ -198,6 +214,7 @@ export default function NutritionComponent() {
                   </div>
 
                   <button
+                    type="button"
                     onClick={() => addToMealPlan(food)}
                     className="w-full rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-3 py-1.5 text-sm border border-primary-500 text-primary-600 hover:bg-primary-500/10"
                   >
@@ -250,6 +267,7 @@ export default function NutritionComponent() {
                 >
                   <span className="text-sm text-neutral-800">{food.name}</span>
                   <button
+                    type="button"
                     onClick={() => removeFromMealPlan(index)}
                     className="text-red-600 hover:text-red-800 text-sm"
                   >
@@ -262,6 +280,7 @@ export default function NutritionComponent() {
         )}
 
         <button
+          type="button"
           onClick={generateMealPlan}
           className="w-full rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
         >

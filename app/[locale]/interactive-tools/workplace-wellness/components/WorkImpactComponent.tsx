@@ -85,9 +85,38 @@ export default function WorkImpactComponent() {
   };
 
   // 保存工作影响记录
-  const handleSaveRecord = () => {
-    // 这里可以添加保存逻辑
-    console.log("Work impact record saved:", workImpact);
+  const handleSaveRecord = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    // 阻止默认行为和事件冒泡
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    try {
+      // 获取今天的日期
+      const today = new Date().toISOString().split("T")[0];
+      
+      // 这里可以将工作影响数据保存到当前日期的记录中
+      // 注意：工作影响数据已经通过 updateWorkImpact 更新到 store 中
+      // 如果需要将工作影响数据关联到具体的日期记录，可以在这里添加逻辑
+      
+      console.log("Work impact record saved:", workImpact);
+      
+      // 显示成功提示
+      alert(
+        locale === "zh"
+          ? "工作影响记录已保存。"
+          : "Work impact record saved successfully."
+      );
+    } catch (error) {
+      // 错误处理
+      console.error("保存工作影响记录时出错:", error);
+      alert(
+        locale === "zh"
+          ? "保存工作影响记录时出错，请重试。"
+          : "An error occurred while saving the work impact record. Please try again."
+      );
+    }
   };
 
   return (
@@ -169,6 +198,7 @@ export default function WorkImpactComponent() {
               ].map((optionKey: string, index: number) => (
                 <button
                   key={index}
+                  type="button"
                   className="rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-3 py-1.5 text-sm border border-neutral-300 hover:bg-neutral-50 text-neutral-800"
                 >
                   {t(`workImpact.adjustOptions.${optionKey}`)}
@@ -180,6 +210,7 @@ export default function WorkImpactComponent() {
 
         {/* 保存按钮 */}
         <button
+          type="button"
           onClick={handleSaveRecord}
           className="w-full mt-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
         >
@@ -246,6 +277,7 @@ export default function WorkImpactComponent() {
               </div>
             </div>
             <button
+              type="button"
               onClick={() => handleCopyTemplate(selectedTemplate)}
               className="mt-3 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-3 py-1.5 text-sm bg-primary-500 hover:bg-primary-600 text-white"
             >

@@ -412,6 +412,7 @@ export default function AdvancedCycleAnalysis() {
           ].map((tab) => (
             <button
               key={tab.id}
+              type="button"
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex-1 flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === tab.id

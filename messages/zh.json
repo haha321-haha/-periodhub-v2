@@ -10097,7 +10097,10 @@
       "ginger_tea": "生姜茶缓解经期疼痛",
       "natural_therapy": "自然物理疗法指南",
       "tcm_exercise": "中医功法指南",
-      "diet": "抗炎饮食指南"
+      "diet": "抗炎饮食指南",
+      "stress_guide": "压力管理指南",
+      "sleep_guide": "睡眠质量指南",
+      "breathing_guide": "呼吸练习指南"
     },
     "solutions": {
       "exercise_balance_new": "运动与经期",

@@ -1862,7 +1862,10 @@
       "ginger_tea": "Ginger Tea for Menstrual Pain Relief",
       "natural_therapy": "Natural Physical Therapy Guide",
       "tcm_exercise": "TCM Exercise Guide",
-      "diet": "Anti-Inflammatory Diet Guide"
+      "diet": "Anti-Inflammatory Diet Guide",
+      "stress_guide": "Stress Management Guide",
+      "sleep_guide": "Sleep Quality Guide",
+      "breathing_guide": "Breathing Exercises Guide"
     }
   },
   "healthStatistics": {

@@ -32,8 +32,10 @@ jobs:
         run: chmod +x scripts/verify-seo-fix.sh
       
       - name: Run SEO verification
-        run: npm run verify:seo:production
+        run: CI=true npm run verify:seo:production
         continue-on-error: true
+        env:
+          CI: true
       
       - name: Upload verification results
         if: always()
@@ -46,12 +48,25 @@ jobs:
           retention-days: 30
       
       - name: Comment PR with results
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && always()
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
-            const output = fs.readFileSync('seo-verification.log', 'utf8');
+            const path = require('path');
+            
+            const logPath = 'seo-verification.log';
+            let output = 'SEO verification completed.';
+            
+            try {
+              if (fs.existsSync(logPath)) {
+                output = fs.readFileSync(logPath, 'utf8');
+              } else {
+                output = 'Log file not found. Verification may have completed without creating a log.';
+              }
+            } catch (error) {
+              output = `Error reading log file: ${error.message}`;
+            }
             
             github.rest.issues.createComment({
               issue_number: context.issue.number,

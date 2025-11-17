@@ -12,18 +12,30 @@ import {
   useWorkplaceWellnessActions,
 } from "../hooks/useWorkplaceWellnessStore";
 import { useLocale } from "next-intl";
-import { getPeriodData } from "../data";
 import { useTranslations } from "next-intl";
-import { PeriodRecord } from "../types";
+import { PeriodRecord, PeriodType, PainLevel } from "../types";
 
 export default function CalendarComponent() {
   const calendar = useCalendar();
   const locale = useLocale();
-  const { updateCalendar, setCurrentDate } = useWorkplaceWellnessActions();
+  const { updateCalendar, setCurrentDate, addPeriodRecord } =
+    useWorkplaceWellnessActions();
   const t = useTranslations("workplaceWellness");
 
-  const periodData = getPeriodData();
+  // 从 store 读取 periodData
+  const periodData = calendar.periodData || [];
   const [showAddForm, setShowAddForm] = useState(false);
+
+  // 表单状态
+  const [formData, setFormData] = useState<{
+    date: string;
+    type: PeriodType;
+    painLevel: number;
+  }>({
+    date: new Date().toISOString().split("T")[0],
+    type: "period",
+    painLevel: 0,
+  });
 
   // 基于HVsLYEp的日历逻辑
   const { currentDate } = calendar;
@@ -104,7 +116,57 @@ export default function CalendarComponent() {
 
   // 添加经期记录
   const handleAddRecord = () => {
+    setFormData({
+      date: new Date().toISOString().split("T")[0],
+      type: "period",
+      painLevel: 0,
+    });
     setShowAddForm(true);
+  };
+
+  // 格式化日期为 YYYY-MM-DD
+  const formatDateShort = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  // 获取今天的日期字符串
+  const getTodayDateString = (): string => {
+    return formatDateShort(new Date());
+  };
+
+  // 保存记录
+  const handleSaveRecord = () => {
+    // 验证日期不能是未来日期
+    const selectedDate = new Date(formData.date);
+    const today = new Date();
+    today.setHours(23, 59, 59, 999); // 设置今天的时间为23:59:59，允许选择今天
+    
+    if (selectedDate > today) {
+      // 如果选择了未来日期，显示错误提示（可以通过 toast 或其他方式）
+      alert(
+        locale === "zh"
+          ? "不能选择未来的日期，请选择今天或之前的日期。"
+          : "Cannot select future dates. Please select today or a past date."
+      );
+      return;
+    }
+
+    const record: PeriodRecord = {
+      date: formData.date,
+      type: formData.type,
+      painLevel: formData.painLevel > 0 ? (formData.painLevel as PainLevel) : null,
+      flow: null, // 可以根据需要添加流量选择
+    };
+    addPeriodRecord(record);
+    setShowAddForm(false);
+  };
+
+  // 取消添加
+  const handleCancel = () => {
+    setShowAddForm(false);
   };
 
   return (
@@ -219,15 +281,28 @@ export default function CalendarComponent() {
               </label>
               <input
                 type="date"
+                value={formData.date}
+                max={getTodayDateString()}
+                onChange={(e) =>
+                  setFormData({ ...formData, date: e.target.value })
+                }
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                defaultValue={new Date().toISOString().split("T")[0]}
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-neutral-800 mb-2">
                 {t("calendar.type")}
               </label>
-              <select className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+              <select
+                value={formData.type}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    type: e.target.value as PeriodType,
+                  })
+                }
+                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
                 <option value="period">{t("calendar.typePeriod")}</option>
                 <option value="predicted">{t("calendar.typePredicted")}</option>
                 <option value="ovulation">{t("calendar.typeOvulation")}</option>
@@ -235,25 +310,83 @@ export default function CalendarComponent() {
             </div>
             <div>
               <label className="block text-sm font-medium text-neutral-800 mb-2">
-                {t("calendar.painLevel")}
+                {t("calendar.painLevel")} ({formData.painLevel})
               </label>
-              <input
-                type="range"
-                min="0"
-                max="10"
-                defaultValue="0"
-                className="w-full"
-              />
+              <div className="relative mb-2">
+                {/* 渐变背景轨道 */}
+                <div className="absolute inset-0 h-3 bg-gradient-to-r from-green-400 via-yellow-400 via-orange-400 to-red-500 rounded-lg"></div>
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value={formData.painLevel}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      painLevel: parseInt(e.target.value, 10),
+                    })
+                  }
+                  className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider"
+                />
+              </div>
+              <div className="flex justify-between text-xs text-neutral-500 mt-1">
+                <span>{locale === "zh" ? "无痛" : "No pain"}</span>
+                <span>{locale === "zh" ? "极痛" : "Extreme"}</span>
+              </div>
+              {/* 自定义滑块样式 */}
+              <style jsx>{`
+                .pain-slider::-webkit-slider-thumb {
+                  -webkit-appearance: none;
+                  appearance: none;
+                  height: 20px;
+                  width: 20px;
+                  border-radius: 50%;
+                  background: #ffffff;
+                  border: 2px solid #6b7280;
+                  cursor: pointer;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                  transition: all 0.2s ease;
+                }
+
+                .pain-slider::-webkit-slider-thumb:hover {
+                  border-color: #9333ea;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                  transform: scale(1.1);
+                }
+
+                .pain-slider::-moz-range-thumb {
+                  height: 20px;
+                  width: 20px;
+                  border-radius: 50%;
+                  background: #ffffff;
+                  border: 2px solid #6b7280;
+                  cursor: pointer;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                  transition: all 0.2s ease;
+                  -moz-appearance: none;
+                }
+
+                .pain-slider::-moz-range-thumb:hover {
+                  border-color: #9333ea;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                  transform: scale(1.1);
+                }
+
+                .pain-slider::-moz-range-track {
+                  background: transparent;
+                  height: 12px;
+                }
+              `}</style>
             </div>
             <div className="flex gap-3">
               <button
-                onClick={() => setShowAddForm(false)}
+                onClick={handleSaveRecord}
                 className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200"
               >
                 {t("common.save")}
               </button>
               <button
-                onClick={() => setShowAddForm(false)}
+                onClick={handleCancel}
                 className="px-4 py-2 bg-neutral-200 text-neutral-800 rounded-lg hover:bg-neutral-300 transition-colors duration-200"
               >
                 {t("common.cancel")}

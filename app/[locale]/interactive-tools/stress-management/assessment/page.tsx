@@ -77,7 +77,7 @@ export default async function StressAssessmentPage({
             </Link>
             <span>/</span>
             <Link
-              href={`/${locale}/stress-management`}
+              href={`/${locale}/interactive-tools/stress-management`}
               className="hover:text-blue-600"
             >
               {t("title")}

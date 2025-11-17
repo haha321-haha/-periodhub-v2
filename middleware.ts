@@ -234,8 +234,7 @@ export function middleware(request: NextRequest) {
       '症状追踪器': 'symptom-tracker',
       '营养推荐生成器': 'nutrition-recommendation-generator',
       '职场健康': 'workplace-wellness',
-      '职场影响评估': 'workplace-impact-assessment',
-      '压力管理': 'stress-management'
+      '职场影响评估': 'workplace-impact-assessment'
     };
 
     // 处理 /zh/工具名称 的路径（支持 URL 编码）

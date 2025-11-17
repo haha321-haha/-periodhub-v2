@@ -10,7 +10,17 @@ import dynamic from "next/dynamic";
 // 动态导入A/B测试组件（避免SSR问题）
 const HeroABTest = dynamic(() => import("./HeroABTest"), {
   ssr: false,
-  loading: () => null
+  loading: () => (
+    // 提供一致的占位内容，确保服务器端和客户端结构一致
+    <div className="w-full">
+      <Button
+        size="lg"
+        className="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 min-w-[200px] group opacity-75"
+      >
+        加载中...
+      </Button>
+    </div>
+  )
 });
 
 export default function Hero() {

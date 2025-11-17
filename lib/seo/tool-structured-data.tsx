@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
 interface ToolStructuredDataProps {
-  locale: string;
+  locale: "en" | "zh" | string;
   toolSlug: string;
   toolName: string;
   description: string;
@@ -27,11 +27,13 @@ export async function generateToolStructuredData({
   rating = { value: 4.8, count: 1250 },
   breadcrumbs = [],
 }: ToolStructuredDataProps) {
-  const t = await getTranslations({ locale, namespace: "" });
+  // 确保 locale 类型正确
+  const validLocale = (locale === "en" || locale === "zh") ? locale : "en";
+  const t = await getTranslations({ locale: validLocale, namespace: "" });
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
-  const toolUrl = `${baseUrl}/${locale}/interactive-tools/${toolSlug}`;
+  const toolUrl = `${baseUrl}/${validLocale}/interactive-tools/${toolSlug}`;
 
   // 构建面包屑结构化数据
   const breadcrumbList =
@@ -58,7 +60,7 @@ export async function generateToolStructuredData({
         url: toolUrl,
         applicationCategory: category,
         operatingSystem: "Web",
-        inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+        inLanguage: validLocale === "zh" ? "zh-CN" : "en-US",
         isAccessibleForFree: true,
         offers: {
           "@type": "Offer",
@@ -70,9 +72,9 @@ export async function generateToolStructuredData({
           features.length > 0
             ? features
             : [
-                locale === "zh" ? "症状评估" : "Symptom Assessment",
-                locale === "zh" ? "个性化建议" : "Personalized Recommendations",
-                locale === "zh" ? "健康报告" : "Health Reports",
+                validLocale === "zh" ? "症状评估" : "Symptom Assessment",
+                validLocale === "zh" ? "个性化建议" : "Personalized Recommendations",
+                validLocale === "zh" ? "健康报告" : "Health Reports",
               ],
         aggregateRating: {
           "@type": "AggregateRating",
@@ -105,9 +107,9 @@ export async function generateToolStructuredData({
         },
         about: {
           "@type": "MedicalCondition",
-          name: locale === "zh" ? "痛经" : "Dysmenorrhea",
+          name: validLocale === "zh" ? "痛经" : "Dysmenorrhea",
           alternateName:
-            locale === "zh"
+            validLocale === "zh"
               ? ["月经疼痛", "经期疼痛", "Dysmenorrhea"]
               : ["Menstrual Pain", "Period Pain", "痛经"],
         },
@@ -125,7 +127,7 @@ export async function generateToolStructuredData({
         url: toolUrl,
         applicationCategory: category,
         operatingSystem: "Web",
-        inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+        inLanguage: validLocale === "zh" ? "zh-CN" : "en-US",
         browserRequirements: "Requires JavaScript. Requires HTML5.",
         softwareVersion: "1.0",
         offers: {

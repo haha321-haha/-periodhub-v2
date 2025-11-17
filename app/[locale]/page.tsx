@@ -9,8 +9,9 @@ import UserSuccessStories from "@/components/UserSuccessStories";
 import NavigationTabs from "@/components/NavigationTabs";
 import OptimizedSVG from "@/components/ui/OptimizedSVG";
 import { SITE_CONFIG } from "@/config/site.config";
+import { generatePageSEO, StructuredDataType } from "@/lib/seo/page-seo";
 
-// 页面级别的metadata
+// 页面级别的metadata和结构化数据
 export async function generateMetadata({
   params,
 }: {
@@ -18,24 +19,43 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "homePage" });
-
-  return {
+  
+  // 使用统一的SEO配置函数
+  const { metadata } = generatePageSEO({
+    locale: locale as "en" | "zh",
+    path: "/",
     title: t("metadata.title"),
     description: t("metadata.description"),
     keywords: t("metadata.keywords").split(","),
+    structuredDataType: "WebPage" as StructuredDataType,
+    additionalStructuredData: {
+      applicationCategory: "HealthApplication",
+      operatingSystem: "Web",
+      featureList: [
+        t("metadata.home.structuredData.featureList.painTracking"),
+        t("metadata.home.structuredData.featureList.cyclePrediction"),
+        t("metadata.home.structuredData.featureList.constitutionAssessment"),
+        t("metadata.home.structuredData.featureList.healthGuides"),
+        t("metadata.home.structuredData.featureList.scenarioSolutions"),
+      ],
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.8",
+        ratingCount: "1250",
+        bestRating: "5",
+      },
+    },
+  });
+  
+  return {
+    ...metadata,
     other: {
+      ...metadata.other,
       "fb:app_id":
         process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
     },
     openGraph: {
-      title: t("metadata.ogTitle"),
-      description: t("metadata.ogDescription"),
-      url: `${
-        process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-      }/${locale}`,
-      siteName: "PeriodHub",
-      locale: locale === "zh" ? "zh_CN" : "en_US",
-      type: "website",
+      ...metadata.openGraph,
       images: [
         {
           url: "/images/hero-bg.jpg",
@@ -46,26 +66,8 @@ export async function generateMetadata({
       ],
     },
     twitter: {
-      card: "summary_large_image",
-      title: t("metadata.twitterTitle"),
-      description: t("metadata.twitterDescription"),
+      ...metadata.twitter,
       images: ["/images/hero-bg.jpg"],
-    },
-    alternates: {
-      canonical: `${
-        process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-      }/${locale}`,
-      languages: {
-        "zh-CN": `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh`,
-        "en-US": `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en`,
-        "x-default": `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en`, // ✅ 修复：默认英文版本（北美市场优先）
-      },
     },
     robots: {
       index: true,
@@ -81,136 +83,95 @@ export async function generateMetadata({
   };
 }
 
-// 增强的结构化数据 - 针对健康平台优化
+// 生成首页的复合结构化数据
 const getStructuredData = async (locale: string) => {
   const t = await getTranslations({ locale, namespace: "" });
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
-  return {
+  // 使用统一的SEO配置函数生成Organization结构化数据
+  const organizationData = generatePageSEO({
+    locale: locale as "en" | "zh",
+    path: "/",
+    title: "PeriodHub",
+    description: t("metadata.home.structuredData.description"),
+    keywords: [],
+    structuredDataType: "WebPage" as StructuredDataType,
+    additionalStructuredData: {
+      applicationCategory: "HealthApplication",
+      operatingSystem: "Web",
+      featureList: [
+        t("metadata.home.structuredData.featureList.painTracking"),
+        t("metadata.home.structuredData.featureList.cyclePrediction"),
+        t("metadata.home.structuredData.featureList.constitutionAssessment"),
+        t("metadata.home.structuredData.featureList.healthGuides"),
+        t("metadata.home.structuredData.featureList.scenarioSolutions"),
+      ],
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.8",
+        ratingCount: "1250",
+        bestRating: "5",
+      },
+    },
+  }).structuredData;
+
+  // 生成WebSite结构化数据
+  const webSiteData = {
     "@context": "https://schema.org",
-    "@graph": [
+    "@type": "WebSite",
+    "@id": `${baseUrl}/${locale}#website`,
+    url: baseUrl,
+    name: "PeriodHub",
+    description: t("organization.description"),
+    inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+    publisher: {
+      "@id": `${baseUrl}/${locale}#organization`,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${baseUrl}/${locale}/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  // 生成FAQPage结构化数据
+  const faqData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${baseUrl}/${locale}#faq`,
+    mainEntity: [
       {
-        "@type": "SoftwareApplication",
-        "@id": `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}#application`,
-        name: "PeriodHub",
-        applicationCategory: "HealthApplication",
-        operatingSystem: "Web",
-        inLanguage: locale === "zh" ? "zh-CN" : "en-US",
-        description: t("metadata.home.structuredData.description"),
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}`,
-        offers: {
-          "@type": "Offer",
-          price: "0",
-          priceCurrency: "USD",
-        },
-        featureList: [
-          t("metadata.home.structuredData.featureList.painTracking"),
-          t("metadata.home.structuredData.featureList.cyclePrediction"),
-          t("metadata.home.structuredData.featureList.constitutionAssessment"),
-          t("metadata.home.structuredData.featureList.healthGuides"),
-          t("metadata.home.structuredData.featureList.scenarioSolutions"),
-        ],
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: "4.8",
-          ratingCount: "1250",
-          bestRating: "5",
-        },
-        publisher: {
-          "@id": `${
-            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-          }/${locale}#organization`,
+        "@type": "Question",
+        name: t("faq.q1.question"),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: t("faq.q1.answer"),
         },
       },
       {
-        "@type": "Organization",
-        "@id": `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}#organization`,
-        name: "PeriodHub",
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }`,
-        logo: {
-          "@type": "ImageObject",
-          url: `${
-            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-          }/icon-512.png`,
-          width: 512,
-          height: 512,
-        },
-        sameAs: [
-          `${
-            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-          }/zh`,
-          `${
-            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-          }/en`,
-        ],
-      },
-      {
-        "@type": "WebSite",
-        "@id": `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}#website`,
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }`,
-        name: "PeriodHub",
-        description: t("organization.description"),
-        publisher: {
-          "@id": `${
-            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-          }/${locale}#organization`,
-        },
-        potentialAction: {
-          "@type": "SearchAction",
-          target: {
-            "@type": "EntryPoint",
-            urlTemplate: `${
-              process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-            }/${locale}/search?q={search_term_string}`,
-          },
-          "query-input": "required name=search_term_string",
+        "@type": "Question",
+        name: t("faq.q2.question"),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: t("faq.q2.answer"),
         },
       },
       {
-        "@type": "FAQPage",
-        "@id": `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}#faq`,
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: t("faq.q1.question"),
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: t("faq.q1.answer"),
-            },
-          },
-          {
-            "@type": "Question",
-            name: t("faq.q2.question"),
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: t("faq.q2.answer"),
-            },
-          },
-          {
-            "@type": "Question",
-            name: t("faq.q3.question"),
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: t("faq.q3.answer"),
-            },
-          },
-        ],
+        "@type": "Question",
+        name: t("faq.q3.question"),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: t("faq.q3.answer"),
+        },
       },
     ],
   };
+
+  // 返回复合结构化数据
+  return [organizationData, webSiteData, faqData];
 };
 
 export default async function HomePage({
@@ -226,13 +187,16 @@ export default async function HomePage({
 
   return (
     <>
-      {/* 增强的结构化数据 */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData),
-        }}
-      />
+      {/* 增强的结构化数据 - 支持多个结构化数据对象 */}
+      {structuredData.map((data, index) => (
+        <script
+          key={index}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(data),
+          }}
+        />
+      ))}
 
       <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50">
         {/* 高级Hero - 主要内容区域 */}

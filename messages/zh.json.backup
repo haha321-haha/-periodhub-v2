@@ -4,17 +4,17 @@
   "site": {
     "name": "Period Hub",
     "title": "Period Hub - 经期健康管理平台",
-    "description": "Period Hub - 专业经期健康管理平台，提供科学痛经缓解方案、互动工具和个性化健康指导。从即时缓解到长期管理，全方位支持女性经期健康，已帮助千万女性科学管理生理期。基于循证医学的专业内容，涵盖42篇专业文章、24个PDF资源、6大互动工具，为各年龄段女性提供科学指导。"
+    "description": "Period Hub - 专业经期健康管理平台，提供科学痛经缓解方案、互动工具和个性化健康指导。从即时缓解到长期管理，全方位支持女性经期健康，已帮助千万女性科学管理生理期。基于循证医学的专业内容，涵盖43篇专业文章、13个PDF资源、6大互动工具，为各年龄段女性提供科学指导。"
   },
   "homePage": {
     "metadata": {
-      "title": "Period Hub - 痛经缓解与经期管理 | 42篇医学指南 + 8大评估工具",
-      "description": "Period Hub - 专业痛经缓解与经期管理平台。42篇医学指南涵盖最快缓解方法和有效药物,8大症状评估工具，PDF下载。已帮助60万+女性通过个性化方案管理经期疼痛。立即开始！",
+      "title": "Period Hub - 痛经缓解与经期管理 | 43篇医学指南 + 8大评估工具",
+      "description": "浏览43篇专业健康文章和13个可下载PDF资源，包括8个评估工具，获取科学的痛经管理方案。",
       "keywords": "痛经缓解,经期疼痛管理,女性健康,经期追踪,疼痛管理,症状评估,健康工具,医学指南,PDF下载",
-      "ogTitle": "Period Hub - 痛经缓解与经期管理 | 42篇医学指南 + 8大评估工具",
-      "ogDescription": "专业痛经缓解与经期管理平台，提供科学方法和个性化方案，42篇医学指南和PDF下载。",
-      "twitterTitle": "Period Hub - 痛经缓解与经期管理 | 42篇医学指南 + 8大评估工具",
-      "twitterDescription": "专业痛经缓解与经期管理平台，提供科学方法，42篇医学指南和PDF下载。"
+      "ogTitle": "Period Hub - 痛经缓解与经期管理 | 43篇医学指南 + 8大评估工具",
+      "ogDescription": "浏览43篇专业健康文章和13个可下载PDF资源，包括8个评估工具，获取科学的痛经管理方案。",
+      "twitterTitle": "Period Hub - 痛经缓解与经期管理 | 43篇医学指南 + 8大评估工具",
+      "twitterDescription": "浏览43篇专业健康文章和13个可下载PDF资源，包括8个评估工具，获取科学的痛经管理方案。"
     }
   },
   "privacyPolicy": {
@@ -197,7 +197,7 @@
           "title": "如何行使您的权利",
           "description": "如需行使上述任何权利，请通过以下方式联系我们：",
           "methods": [
-            "邮箱：tiyibaofu@outlook.com",
+            "邮箱：联系我们获取邮箱地址",
             "在线表单：通过我们的联系页面",
             "我们将在收到请求后15个工作日内回复"
           ]
@@ -208,13 +208,13 @@
         "description": "如果您对本隐私政策或您的数据有任何问题：",
         "dpo": {
           "title": "数据保护官",
-          "email": "tiyibaofu@outlook.com",
+          "email": "数据保护官邮箱",
           "responsibility": "处理所有与隐私相关的咨询",
           "languages": "提供中英文服务"
         },
         "dataProtection": {
           "title": "数据保护咨询",
-          "email": "tiyibaofu@outlook.com",
+          "email": "数据保护咨询邮箱",
           "subject": "主题：隐私政策问题",
           "responseTime": "我们会在 48 小时内回复"
         }
@@ -233,7 +233,7 @@
       ]
     },
     "questions": "有疑问？",
-    "questionsDescription": "如果您对本隐私政策有任何疑问，请通过 tiyibaofu@outlook.com 联系我们",
+    "questionsDescription": "如果您对本隐私政策有任何疑问，请通过联系我们页面与我们联系",
     "contactUs": "联系我们"
   },
   "metadata": {
@@ -253,7 +253,7 @@
     },
     "articles": {
       "title": "健康文章 - Period Hub",
-      "description": "42篇基于循证医学的经期健康文章，涵盖痛经缓解、营养调理、生活方式改善等专业知识"
+      "description": "43篇基于循证医学的经期健康文章，涵盖痛经缓解、营养调理、生活方式改善等专业知识"
     },
     "tools": {
       "title": "互动工具 - Period Hub",
@@ -1119,7 +1119,8 @@
     "breadcrumb": {
       "home": "首页",
       "separator": "/",
-      "immediateRelief": "即时缓解"
+      "immediateRelief": "即时缓解",
+      "interactiveTools": "Interactive Tools"
     },
     "submit": "提交",
     "cancel": "取消",
@@ -1156,11 +1157,14 @@
       "privacyFirst": "隐私优先",
       "privacyFirstDesc": "本地存储，数据安全",
       "precisionPrediction": "精准预测",
-      "precisionPredictionDesc": "基于数据的周期预测"
+      "precisionPredictionDesc": "基于数据的周期预测",
+      "articles": "22 Professional Articles",
+      "tools": "4 Interactive Tools",
+      "support": "24/7 Online Support"
     },
-    "immediateRelief": "⚡ 即时缓解",
-    "toolsCount": "5个",
-    "articlesCount": "56篇",
+    "immediateRelief": "获取缓解方案",
+    "toolsCount": "8个",
+    "articlesCount": "43篇",
     "cta": {
       "primary": "开始探索",
       "secondary": "了解更多"
@@ -1177,7 +1181,9 @@
       "cycleTrackerDesc": "基于历史数据的智能预测，提前做好准备",
       "constitutionTest": "体质评估",
       "constitutionTestDesc": "中医体质辨识与调理建议，个性化健康方案"
-    }
+    },
+    "ctaSupportText": "免费 • 3分钟 • 科学依据",
+    "learnMore": "Browse Articles"
   },
   "navigation": {
     "home": "首页",
@@ -1290,6 +1296,8 @@
           "physicalTherapyDesc": "探索按摩、拉伸、运动等自然物理疗法的科学应用",
           "essentialOils": "精油芳疗经期疼痛指南",
           "essentialOilsDesc": "了解精油芳香疗法在缓解经期疼痛中的应用和注意事项",
+          "essentialOilsAromatherapyGuide": "精油芳香疗法缓解痛经：全面指南",
+          "essentialOilsAromatherapyGuideDesc": "深入了解精油芳香疗法的科学原理、使用方法和安全注意事项，包括薰衣草、生姜、玫瑰等精油的应用",
           "herbalTea": "有效草药茶经期疼痛缓解",
           "herbalTeaDesc": "探索传统草药茶在缓解经期疼痛中的应用和制作方法",
           "traditionalMethods": "全球传统经期疼痛缓解方法",
@@ -1304,12 +1312,16 @@
         "articles": {
           "comprehensiveMedical": "痛经综合医学指南",
           "comprehensiveMedicalDesc": "全面的医学视角：痛经的病因、诊断、治疗和预防",
+          "comprehensiveIudGuide": "宫内节育器(IUD)：全面指南与用户须知",
+          "comprehensiveIudGuideDesc": "详细了解宫内节育器的类型、工作原理、优缺点、副作用和使用注意事项，帮助您做出明智的避孕选择",
           "whenToSeeDoctor": "何时就医：经期疼痛警示信号",
           "whenToSeeDoctorDesc": "识别需要医疗干预的经期疼痛症状和紧急情况",
           "medicalCare": "何时寻求医疗护理综合指南",
           "medicalCareDesc": "详细指导何时需要专业医疗评估和治疗",
           "complications": "经期疼痛并发症管理",
           "complicationsDesc": "了解经期疼痛可能的并发症及其预防和管理策略",
+          "menstrualPainComplications": "痛经并发症识别与管理：严重情况的应对策略",
+          "menstrualPainComplicationsDesc": "识别和管理痛经相关并发症，包括子宫内膜异位症、子宫腺肌症、子宫肌瘤等严重情况的应对方法",
           "nsaidProfessionalGuide": "NSAIDs痛经治疗专业指南",
           "nsaidProfessionalGuideDesc": "专业NSAIDs痛经治疗指南：详解药理机制、安全用药、剂量计算与效果优化"
         }
@@ -1384,7 +1396,7 @@
       "ariaLabel": "搜索健康资源"
     },
     "title": "PDF下载中心",
-    "description": "专业的经期健康PDF资源库，为您提供实用的管理工具、科学的健康指南、有效的沟通技巧和全面的教育资源。12个独特资源，每个均提供中英文版本（共24个文件），全部免费下载。",
+    "description": "专业的经期健康PDF资源库，为您提供实用的管理工具、科学的健康指南、有效的沟通技巧和全面的教育资源。13个独特资源，每个均提供中英文版本（共26个文件），全部免费下载。",
     "success": {
       "title": "PDF下载中心已就绪！",
       "message": "我们为您精心准备了12个专业PDF资源，涵盖4大核心分类，支持中英双语下载。每个资源都经过专业团队精心制作，确保内容的科学性和实用性。",
@@ -2476,8 +2488,8 @@
     }
   },
   "downloadsPage": {
-    "title": "PDF资源下载中心",
-    "description": "下载专业制作的PDF指南、表格和工具，帮助您更好地管理经期健康。所有资源均提供中英文版本。",
+    "title": "健康文章与PDF资源 - 43篇医学指南 | PeriodHub",
+    "description": "浏览43篇专业健康文章与13个可下载PDF指南：痛经缓解、用药指导、营养和运动策略。循证医学，医学审核。",
     "keywords": "经期健康,PDF下载,痛经缓解,文章资源,Period Hub",
     "seo": {
       "title": "文章PDF下载中心 - Period Hub 经期健康专业资源",
@@ -2485,8 +2497,8 @@
       "keywords": "经期健康,PDF下载,痛经缓解,文章资源,Period Hub"
     },
     "openGraph": {
-      "title": "PDF资源下载中心 - Period Hub 经期健康专业资源",
-      "description": "下载专业制作的PDF指南、表格和工具，帮助您更好地管理经期健康。所有资源均提供中英文版本。"
+      "title": "健康文章与PDF资源 - 43篇医学指南 | PeriodHub",
+      "description": "浏览43篇专业健康文章与13个可下载PDF指南：痛经缓解、用药指导、营养和运动策略。循证医学，医学审核。"
     },
     "banner": {
       "newVersion": "🎉 全新PDF下载中心 - 38个精选资源，移动端优化体验，基于紧急程度智能分类",
@@ -2501,7 +2513,7 @@
     },
     "breadcrumb": {
       "home": "首页",
-      "downloadCenter": "下载中心"
+      "downloadCenter": "文章与资源"
     },
     "pageTitle": "📚 文章PDF下载中心",
     "stats": {
@@ -2586,8 +2598,8 @@
       }
     },
     "content": {
-      "title": "📥 PDF下载中心",
-      "description": "专业的经期健康资源库，为您提供科学、实用的PDF指南和工具",
+      "title": "专业健康文章与PDF资源库",
+      "description": "浏览43篇专业健康文章与13个可下载PDF指南：痛经缓解、用药指导、营养和运动策略。循证医学，医学审核。",
       "statistics": {
         "expertArticles": "专业文章",
         "pdfResources": "PDF资源",
@@ -2628,8 +2640,12 @@
     "notFoundDescription": "抱歉，我们找不到您要查找的疗法。"
   },
   "immediateReliefPage": {
+    "metadata": {
+      "title": "痛经剧痛急救指南：医生亲授5步缓解法",
+      "description": "5步快速缓解剧烈痛经：医生验证急救法-生姜茶+穴位按压+热敷+呼吸练习+应急用药。适用疼痛等级7-10分，含药物禁忌速查。临床验证有效，关键时刻立即见效！"
+    },
     "title": "痛经剧痛急救指南：医生亲授5步缓解法",
-    "description": "痛经剧痛急救指南：医生亲授5步缓解法。当疼痛等级≥7分时立即使用，含药物禁忌速查与急诊准备清单，关键时刻救急必备",
+    "description": "5步快速缓解剧烈痛经：医生验证急救法-生姜茶+穴位按压+热敷+呼吸练习+应急用药。适用疼痛等级7-10分，含药物禁忌速查。临床验证有效，关键时刻立即见效！",
     "introTitle": "当经期疼痛来袭时...",
     "introText": "当经期疼痛来袭时，您需要快速有效的方法来获得舒适。本节致力于提供即时缓解方案——您可以立即采用的方法，以帮助缓解急性经期痉挛和不适。",
     "introText2": "我们理解快速缓解对于度过一天是至关重要的。这里建议的方法专注于容易获得的技巧和疗法，可以提供临时但急需的舒适感。",
@@ -3519,7 +3535,7 @@
   },
   "interactiveToolsPage": {
     "title": "经期健康管理互动工具 - 症状评估与疼痛追踪",
-    "description": "专业的经期健康管理工具集合，包含症状评估、疼痛追踪、数据分析等功能。科学评估您的经期症状，获得个性化健康建议，有效管理痛经困扰。支持中英双语，移动端优化体验。",
+    "description": "经期健康智能工具中心：8大专业评估工具-症状分析+疼痛追踪+周期预测+营养建议+运动计划。科学算法，个性化报告，3分钟完成。免费使用，立即开始！",
     "symptomAssessment": {
       "title": "症状评估工具",
       "subtitle": "通过专业问卷快速识别疼痛类型，获得精准个性化建议",
@@ -4023,7 +4039,7 @@
   "interactiveTools": {
     "meta": {
       "title": "交互式健康工具 - 经期管理助手",
-      "description": "使用我们的专业工具追踪症状、评估疼痛水平，更好地管理您的月经健康",
+      "description": "经期健康智能工具中心：8大专业评估工具-症状分析+疼痛追踪+周期预测+营养建议+运动计划。科学算法，个性化报告，3分钟完成。免费使用，立即开始！",
       "keywords": "疼痛追踪工具,经期疼痛记录,痛经分析,疼痛管理工具,健康追踪,经期健康",
       "symptomAssessmentKeywords": "痛经计算器,痛经严重度评估,经期疼痛测试,痛经疼痛原理,痛经补镁,经期疼痛缓解,月经疼痛评估工具",
       "ogTitle": "交互式月经健康工具 | 症状追踪与疼痛管理",
@@ -5587,7 +5603,9 @@
     "languages": {
       "en": "English",
       "zh": "中文"
-    }
+    },
+    "menu": "Menu",
+    "close": "Close"
   },
   "languageSwitcher": {
     "chinese": "中文",
@@ -5607,11 +5625,22 @@
     "articles": "文章PDF下载中心",
     "naturalTherapies": "平时调理",
     "contactTitle": "联系我们",
-    "contactEmail": "tiyibaofu@outlook.com",
+    "contactEmail": "联系我们获取邮箱地址",
+    "socialDiscord": "加入Discord社区",
+    "contactEmailSubject": "网站咨询",
+    "contactEmailBody": "您好，我想咨询关于经期健康管理的问题。",
     "socialTwitter": "Twitter",
     "socialInstagram": "Instagram",
     "copyright": "© {currentYear, number, integer} www.periodhub.health。保留所有权利。",
-    "medicalDisclaimerFull": "医疗免责声明：本网站内容仅供信息和教育目的，不能替代专业医疗建议、诊断或治疗。我们不是医疗专业人员。如有任何医疗问题，请咨询您的医生或其他合格的医疗服务提供者。紧急情况下，请立即寻求医疗救助。使用本网站不构成医患关系。"
+    "medicalDisclaimerFull": "医疗免责声明：本网站内容仅供信息和教育目的，不能替代专业医疗建议、诊断或治疗。我们不是医疗专业人员。如有任何医疗问题，请咨询您的医生或其他合格的医疗服务提供者。紧急情况下，请立即寻求医疗救助。使用本网站不构成医患关系。",
+    "quickLinks": "Quick Links",
+    "support": "Support",
+    "contactUs": "Contact Us",
+    "helpCenter": "Help Center",
+    "email": "Email",
+    "support24": "Providing professional health guidance for you",
+    "allRights": "All rights reserved.",
+    "disclaimer": "This content is for reference only and cannot replace professional medical advice."
   },
   "navigationTabs": {
     "articles": "📚 专业文章",
@@ -5885,6 +5914,16 @@
         "moderate_late": "中度痛经在初潮较晚后开始，建议咨询医生排除继发性痛经的可能性。",
         "normal": "基于您提供的信息，您的痛经情况属于常见范围，可能是原发性痛经。建议尝试自然缓解方法，如热敷、轻度运动和健康饮食习惯等。如症状加重或出现异常，请及时咨询医生。"
       }
+    },
+    "relaxationTechniques": {
+      "title": "放松技巧",
+      "description": "科学的放松方法帮助你缓解压力",
+      "start": "开始使用",
+      "learnMore": "了解更多"
+    },
+    "symptomChecker": {
+      "title": "Symptom Checker",
+      "description": "Quickly identify menstrual-related symptoms and get professional advice"
     }
   },
   "understandingPain": {
@@ -7260,7 +7299,7 @@
       },
       "resources": {
         "title": "丰富专业资源",
-        "description": "42篇专业文章、24个PDF资源、PDF指南，全面支持您的健康需求"
+        "description": "43篇专业文章、13个PDF资源、PDF指南，全面支持您的健康需求"
       },
       "immediateRelief": {
         "title": "即时缓解方案",
@@ -7390,27 +7429,6 @@
         "cta": "开始测试"
       }
     },
-    "trusted": {
-      "title": "值得信赖的专业平台",
-      "metrics": {
-        "activeUsers": {
-          "number": "50K+",
-          "label": "活跃用户"
-        },
-        "articles": {
-          "number": "42",
-          "label": "专业文章"
-        },
-        "resources": {
-          "number": "24",
-          "label": "PDF资源"
-        },
-        "satisfaction": {
-          "number": "98%",
-          "label": "用户满意度"
-        }
-      }
-    },
     "quickNav": {
       "title": "快速导航",
       "constitutionTest": "体质评估",
@@ -7439,7 +7457,7 @@
     "searchTips": "💡 试试搜索\"5分钟缓解\"、\"热敷\"、\"前列腺素\"",
     "seo": {
       "title": "PeriodHub - 专业痛经缓解方法和月经健康管理平台 | 科学指导，贴心陪伴",
-      "description": "PeriodHub专业痛经缓解方案与经期健康管理平台。基于42篇医学指南和24个自测工具，已帮助60万+女性科学应对痛经困扰，获取个性化解决方案，改善生活质量。提供科学痛经缓解方法、互动工具和个性化健康指导。",
+      "description": "PeriodHub专业痛经缓解方案与经期健康管理平台。基于43篇医学指南和13个自测工具，已帮助60万+女性科学应对痛经困扰，获取个性化解决方案，改善生活质量。提供科学痛经缓解方法、互动工具和个性化健康指导。",
       "keywords": "痛经怎么缓解最快方法,痛经吃什么药最有效,月经推迟几天算正常,月经量少是什么原因,痛经缓解,月经疼痛,经期健康,女性健康,月经健康管理,经期疼痛怎么办,中医调理,热敷,敷热水袋,暖宝宝,按摩,揉肚子,止痛药,月经周期,经期护理,生理期,大姨妈,例假,月经不调,经期症状",
       "ogTitle": "PeriodHub - 专业痛经缓解方法和月经健康管理平台",
       "ogDescription": "专业的女性月经健康管理平台，提供科学的痛经缓解方法和个性化健康建议。"
@@ -7513,6 +7531,11 @@
       "generalTime": "24小时内",
       "support": "支持请求",
       "supportTime": "12小时内"
+    },
+    "faq": {
+      "title": "FAQ",
+      "description": "Quickly find answers to common questions",
+      "button": "View FAQ"
     }
   },
   "breathingExercise": {
@@ -7644,6 +7667,25 @@
           }
         }
       }
+    },
+    "title": "Health Articles",
+    "subtitle": "Professional guidance based on scientific research to help you better understand and manage menstrual health",
+    "categories": {
+      "pain": "Pain Management",
+      "painDesc": "Effective methods and techniques for relieving menstrual pain",
+      "nutrition": "Nutrition Guidance",
+      "nutritionDesc": "Menstrual nutrition supplements and dietary recommendations"
+    },
+    "painRelief": "Quick Menstrual Pain Relief Guide",
+    "antiInflammatory": "Anti-inflammatory Diet and Menstrual Pain",
+    "heatTherapy": "Complete Heat Therapy Guide",
+    "nutritionGuide": "Menstrual Nutrition Guide",
+    "supplements": "Menstrual Health Supplements",
+    "hydration": "Menstrual Hydration Guide",
+    "cta": {
+      "title": "Need Personalized Advice?",
+      "subtitle": "Use our interactive tools to get your exclusive health plan",
+      "button": "Start Assessment"
     }
   },
   "embeddedPainAssessment": {
@@ -8067,14 +8109,14 @@
   "sleep": "睡眠",
   "stress": "压力",
   "stressManagement": {
-    "title": "[ZH] Stress Management",
-    "description": "[ZH] Scientific management of menstrual stress to improve quality of life",
-    "pageTitle": "[ZH] Stress Management - PeriodHub",
-    "keywords": "[ZH] stress management,period stress,menstrual health,stress relief,relaxation techniques,workplace stress,women health",
-    "subtitle": "[ZH] Help you effectively manage period-related stress and anxiety",
-    "startAssessment": "[ZH] Start Assessment",
-    "learnMore": "[ZH] Learn More",
-    "backToTools": "[ZH] Back to Tools",
+    "title": "压力管理",
+    "description": "通过科学的经期压力管理提升生活质量",
+    "pageTitle": "压力管理 - PeriodHub",
+    "keywords": "压力管理,经期压力,月经健康,压力缓解,放松技巧,职场压力,女性健康",
+    "subtitle": "帮助你有效管理经期相关的压力和焦虑",
+    "startAssessment": "开始评估",
+    "learnMore": "了解更多",
+    "backToTools": "返回工具",
     "next": "下一步",
     "previous": "上一步",
     "complete": "完成",
@@ -8088,78 +8130,79 @@
       "moderate": "中等",
       "high": "高",
       "severe": "严重",
-      "lowDesc": "[ZH] Low stress level, maintaining good condition",
-      "moderateDesc": "[ZH] Moderate stress, requires attention and regulation",
-      "highDesc": "[ZH] High stress, recommend taking relief measures",
-      "severeDesc": "[ZH] Severe stress, requires professional help"
+      "lowDesc": "低压力水平，保持良好状态",
+      "moderateDesc": "中等压力，需要注意和调节",
+      "highDesc": "高压力，建议采取缓解措施",
+      "severeDesc": "严重压力，需要专业帮助"
     },
     "resources": {
-      "title": "[ZH] Resource Recommendations",
-      "subtitle": "[ZH] More resources to help you manage stress",
+      "title": "资源推荐",
+      "subtitle": "更多资源帮助你管理压力",
       "articles": {
-        "title": "[ZH] Related Articles",
-        "stressAndMenstruation": "[ZH] Relationship between Stress and Menstruation",
-        "relaxationTechniques": "[ZH] Detailed Relaxation Techniques",
-        "mindfulnessBenefits": "[ZH] Benefits of Mindfulness Practice"
+        "title": "相关文章",
+        "stressAndMenstruation": "压力与月经的关系",
+        "relaxationTechniques": "详细放松技巧",
+        "mindfulnessBenefits": "正念练习的好处"
       },
       "tools": {
-        "title": "[ZH] Related Tools",
-        "painTracker": "[ZH] Pain Tracker",
-        "cycleTracker": "[ZH] Cycle Tracker",
-        "breathingExercise": "[ZH] Breathing Exercise"
+        "title": "相关工具",
+        "painTracker": "疼痛追踪器",
+        "cycleTracker": "周期追踪器",
+        "breathingExercise": "呼吸练习"
       },
       "support": {
-        "title": "[ZH] Support Resources",
-        "community": "[ZH] Community Support",
-        "professionalHelp": "[ZH] Professional Help",
-        "emergencyContacts": "[ZH] Emergency Contacts"
+        "title": "支持资源",
+        "community": "社区支持",
+        "professionalHelp": "专业帮助",
+        "emergencyContacts": "紧急联系方式"
       }
     },
     "tips": {
-      "title": "[ZH] Practical Tips",
-      "subtitle": "[ZH] Daily life stress management techniques",
+      "title": "实用建议",
+      "subtitle": "日常生活压力管理技巧",
       "daily": {
-        "title": "[ZH] Daily Habits",
-        "regularSleep": "[ZH] Maintain Regular Sleep Schedule",
-        "healthyDiet": "[ZH] Balanced Diet",
-        "moderateExercise": "[ZH] Moderate Exercise",
-        "socialConnection": "[ZH] Maintain Social Connections"
+        "title": "日常习惯",
+        "regularSleep": "保持规律睡眠",
+        "healthyDiet": "均衡饮食",
+        "moderateExercise": "适度运动",
+        "socialConnection": "保持社交联系"
       },
       "emergency": {
-        "title": "[ZH] Emergency Relief",
-        "deepBreathing": "[ZH] Deep Breathing",
-        "progressiveRelaxation": "[ZH] Progressive Relaxation",
-        "positiveThinking": "[ZH] Positive Thinking",
-        "seekHelp": "[ZH] Seek Help"
+        "title": "紧急缓解",
+        "deepBreathing": "深呼吸",
+        "progressiveRelaxation": "渐进式放松",
+        "positiveThinking": "积极思考",
+        "seekHelp": "寻求帮助"
       },
       "prevention": {
-        "title": "[ZH] Prevention Measures",
-        "identifyTriggers": "[ZH] Identify Stress Triggers",
-        "timeManagement": "[ZH] Time Management",
-        "boundarySetting": "[ZH] Set Boundaries",
-        "selfCare": "[ZH] Self-Care"
+        "title": "预防措施",
+        "identifyTriggers": "识别压力源",
+        "timeManagement": "时间管理",
+        "boundarySetting": "设定界限",
+        "selfCare": "自我护理"
       }
     },
     "common": {
-      "loading": "[ZH] Loading...",
-      "error": "[ZH] An error occurred",
-      "retry": "[ZH] Retry",
-      "success": "[ZH] Success",
-      "failed": "[ZH] Failed",
-      "saved": "[ZH] Saved",
-      "deleted": "[ZH] Deleted",
-      "updated": "[ZH] Updated",
-      "created": "[ZH] Created",
-      "noData": "[ZH] No data available",
-      "tryAgain": "[ZH] Please try again",
-      "contactSupport": "[ZH] Contact Support",
-      "importantNote": "[ZH] Important Note",
-      "medicalDisclaimer": "[ZH] This website content is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional for any health concerns.",
-      "showDetails": "[ZH] Show Details",
-      "hideDetails": "[ZH] Hide Details",
-      "learnMore": "[ZH] Learn More",
+      "loading": "加载中...",
+      "error": "发生错误",
+      "retry": "重试",
+      "success": "成功",
+      "failed": "失败",
+      "saved": "已保存",
+      "deleted": "已删除",
+      "updated": "已更新",
+      "created": "已创建",
+      "noData": "没有可用数据",
+      "tryAgain": "请重试",
+      "contactSupport": "联系支持",
+      "importantNote": "重要提示",
+      "medicalDisclaimer": "本网站内容仅供信息和教育目的，不能替代专业医疗建议、诊断或治疗。如有任何健康问题，请咨询医疗专业人士。",
+      "showDetails": "显示详情",
+      "hideDetails": "隐藏详情",
+      "learnMore": "了解更多",
       "breadcrumb": {
-        "home": "[ZH] Home"
+        "home": "首页",
+        "interactiveTools": "互动工具"
       }
     },
     "neuroendocrine": {
@@ -8232,60 +8275,84 @@
       }
     },
     "assessment": {
-      "title": "[ZH] Stress Assessment",
-      "subtitle": "[ZH] Understand your stress condition through scientific assessment",
-      "instructions": "[ZH] Assessment Instructions",
-      "instructionsDetail": "[ZH] Please answer the following questions honestly based on your actual situation. This will help us provide you with personalized stress management recommendations.",
+      "title": "压力评估",
+      "subtitle": "通过科学评估了解你的压力状况",
+      "instructions": "评估说明",
+      "instructionsDetail": "请根据你的实际情况诚实回答以下问题。这将帮助我们为你提供个性化的压力管理建议。",
       "questionsPreview": {
-        "title": "[ZH] Assessment Questions Preview"
+        "title": "评估问题预览"
       },
-      "questions": {
-        "q1": {
-          "question": "[ZH] Have you frequently felt anxious or tense recently?",
-          "options": [
-            "[ZH] Never",
-            "[ZH] Occasionally",
-            "[ZH] Often",
-            "[ZH] Always"
-          ]
-        },
-        "q2": {
-          "question": "[ZH] How is your sleep quality?",
-          "options": [
-            "[ZH] Very Good",
-            "[ZH] Good",
-            "[ZH] Poor",
-            "[ZH] Very Poor"
-          ]
-        },
-        "q3": {
-          "question": "[ZH] Do you often feel tired or lack energy?",
-          "options": [
-            "[ZH] Never",
-            "[ZH] Occasionally",
-            "[ZH] Often",
-            "[ZH] Always"
-          ]
-        },
-        "q4": {
-          "question": "[ZH] Do you easily feel irritable or angry?",
-          "options": [
-            "[ZH] Never",
-            "[ZH] Occasionally",
-            "[ZH] Often",
-            "[ZH] Always"
-          ]
-        },
-        "q5": {
-          "question": "[ZH] Do you often worry about period-related issues?",
-          "options": [
-            "[ZH] Never",
-            "[ZH] Occasionally",
-            "[ZH] Often",
-            "[ZH] Always"
-          ]
-        }
+      "q1": {
+        "question": "你最近经常感到焦虑或紧张吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
       },
+      "q2": {
+        "question": "你的睡眠质量如何？",
+        "option1": "很好",
+        "option2": "好",
+        "option3": "一般",
+        "option4": "差"
+      },
+      "q3": {
+        "question": "你经常感到疲劳或缺乏精力吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q4": {
+        "question": "你容易感到烦躁或愤怒吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q5": {
+        "question": "你经常担心与经期相关的问题吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q6": {
+        "question": "你多久出现一次注意力难以集中的情况？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q7": {
+        "question": "你感到被日常任务压垮了吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q8": {
+        "question": "你会如何评价自己应对压力的能力？",
+        "option1": "很好",
+        "option2": "好",
+        "option3": "一般",
+        "option4": "差"
+      },
+      "q9": {
+        "question": "你出现压力的身体症状吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q10": {
+        "question": "你多久练习一次压力缓解技巧？",
+        "option1": "每天",
+        "option2": "每周",
+        "option3": "很少",
+        "option4": "从不"
+      },
+      "selectOption": "请选择一个选项",
       "benefits": {
         "title": "[ZH] Benefits of Assessment",
         "personalized": {
@@ -8301,13 +8368,121 @@
           "description": "[ZH] Understand how stress affects your menstruation and overall health"
         }
       },
-      "keywords": "压力评估,经期压力,压力管理,经期应激,心理健康评估"
+      "keywords": "压力评估,经期压力,压力管理,经期应激,心理健康评估",
+      "privacy": {
+        "notice": {
+          "title": "隐私提示",
+          "description": "您的回答完全保密，仅用于提供个性化建议。"
+        }
+      },
+      "q1": {
+        "question": "你最近经常感到焦虑或紧张吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q2": {
+        "question": "你的睡眠质量如何？",
+        "option1": "很好",
+        "option2": "好",
+        "option3": "一般",
+        "option4": "差"
+      },
+      "q3": {
+        "question": "你经常感到疲劳或缺乏精力吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q4": {
+        "question": "你容易感到烦躁或愤怒吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q5": {
+        "question": "你经常担心与经期相关的问题吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q6": {
+        "question": "你多久出现一次注意力难以集中的情况？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q7": {
+        "question": "你感到被日常任务压垮了吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q8": {
+        "question": "你会如何评价自己应对压力的能力？",
+        "option1": "很好",
+        "option2": "好",
+        "option3": "一般",
+        "option4": "差"
+      },
+      "q9": {
+        "question": "你出现压力的身体症状吗？",
+        "option1": "从不",
+        "option2": "很少",
+        "option3": "有时",
+        "option4": "经常"
+      },
+      "q10": {
+        "question": "你多久练习一次压力缓解技巧？",
+        "option1": "每天",
+        "option2": "每周",
+        "option3": "很少",
+        "option4": "从不"
+      },
+      "selectOption": "请选择一个选项",
+      "personalizedRecommendations": {
+        "low": {
+          "maintain": {
+            "title": "Maintain Your Current Habits",
+            "description": "Your stress levels are well-managed. Continue with your current healthy practices."
+          }
+        },
+        "moderate": {
+          "relax": {
+            "title": "Time to Relax",
+            "description": "Consider incorporating more relaxation techniques into your daily routine."
+          }
+        },
+        "high": {
+          "help": {
+            "title": "Seeking Help is Important",
+            "description": "Your stress levels suggest it would be beneficial to seek additional support and implement stress management strategies."
+          }
+        }
+      },
+      "radar": {
+        "title": "Stress Areas Analysis",
+        "subtitle": "Visual representation of your stress levels across different life areas",
+        "labels": [
+          "Work",
+          "Sleep",
+          "Emotion",
+          "Physical",
+          "Social"
+        ]
+      }
     },
     "techniques": {
-      "title": "[ZH] Relaxation Techniques",
-      "subtitle": "[ZH] Scientific relaxation methods to help you relieve stress",
+      "title": "放松技巧",
+      "subtitle": "科学的放松方法帮助你缓解压力",
       "benefits": {
-        "title": "[ZH] Benefits"
+        "title": "益处"
       },
       "breathing": {
         "title": "[ZH] Breathing Exercise",
@@ -8513,6 +8688,72 @@
           "description": "[ZH] Establish a continuous stress management system"
         }
       }
+    },
+    "results": {
+      "title": "Your Stress Assessment Results",
+      "subtitle": "Based on your responses, we've generated a personalized stress analysis report for you",
+      "score": "Stress Score",
+      "basicRecommendations": "Basic Recommendations",
+      "stressLevels": {
+        "low": "Low Stress",
+        "moderate": "Moderate Stress",
+        "high": "High Stress",
+        "severe": "Severe Stress"
+      },
+      "personalizedActionPlan": {
+        "title": "Your Personalized Action Plan",
+        "step": "Step {index}",
+        "recommendation": "Based on your responses, focus on {specificArea} to reduce your stress levels effectively"
+      },
+      "unlockCompleteReport": {
+        "title": "Unlock Complete Assessment Report",
+        "description": "Get detailed stress analysis, personalized recommendations and long-term management plan",
+        "button": "Unlock Now $4.99"
+      },
+      "detailedAnalysis": {
+        "title": "Detailed Analysis",
+        "stressAnalysis": {
+          "title": "Your Primary Stress Sources",
+          "description": "Based on your responses, work demands, sleep quality, and emotional regulation appear to be your main stress factors"
+        },
+        "improvementFocus": {
+          "title": "Key Areas for Improvement",
+          "description": "Focus on sleep hygiene, stress management techniques, and work-life balance to reduce overall stress levels"
+        }
+      }
+    },
+    "paywall": {
+      "title": "Unlock Premium Assessment",
+      "subtitle": "Get personalized recommendations and detailed insights with the full version",
+      "thanksMessage": "💌 Thank you for your attention and support | 🎉 More features coming soon",
+      "comparison": {
+        "free": {
+          "title": "Free Version",
+          "features": {
+            "questions": "Basic assessment (5 questions)",
+            "score": "Simple stress score",
+            "radar": "Basic radar chart",
+            "analysis": "Limited analysis"
+          }
+        },
+        "premium": {
+          "title": "Premium Version",
+          "badge": "Recommended",
+          "features": {
+            "report": "Detailed stress analysis report",
+            "phq9": "Professional PHQ-9 assessment",
+            "management": "Personalized management plan"
+          }
+        }
+      }
+    },
+    "alerts": {
+      "paymentComingSoon": "Payment features coming soon, stay tuned!"
+    },
+    "buttons": {
+      "viewFreeResults": "View Free Results",
+      "comingSoon": "Coming Soon",
+      "restartAssessment": "Restart Assessment"
     }
   },
   "medical": "医疗",
@@ -9030,7 +9271,10 @@
       "cycle_nutrition": "经期友好食谱",
       "cycle_management": "何时寻求医疗护理",
       "anti_inflammatory": "抗炎饮食指南",
-      "ginger_tea": "生姜茶缓解经期疼痛"
+      "ginger_tea": "生姜茶缓解经期疼痛",
+      "natural_therapy": "自然物理疗法指南",
+      "tcm_exercise": "中医功法指南",
+      "diet": "抗炎饮食指南"
     },
     "solutions": {
       "exercise_balance_new": "运动与经期",
@@ -9069,7 +9313,7 @@
     "contact": {
       "title": "联系信息",
       "description": "如果您对服务条款有任何疑问，请通过以下方式联系我们。",
-      "email": "邮箱：tiyibaofu@outlook.com",
+      "email": "邮箱：联系我们获取邮箱地址",
       "mailingAddress": "邮寄地址：[您的公司地址]",
       "onlineFeedback": "在线反馈：使用我们网站上的联系表单",
       "responseTime": "响应时间：我们将在24-48小时内回复"
@@ -9620,6 +9864,91 @@
         "name": "互动工具",
         "shortName": "工具",
         "description": "症状评估和疼痛追踪工具"
+      }
+    }
+  },
+  "teen": {
+    "title": "Teen Health Zone",
+    "subtitle": "Menstrual health guidance designed specifically for teenage girls, making the journey of growth less confusing",
+    "welcome": {
+      "title": "Welcome to Teen Health Zone",
+      "message": "This is a safe space specially prepared for teenage girls. We understand your confusion and concerns, and are willing to accompany you through this special stage of growth."
+    },
+    "basics": {
+      "title": "Menstrual Basics",
+      "description": "Learn the basic knowledge about menstruation, eliminate fear and misunderstanding"
+    },
+    "firstPeriod": {
+      "title": "First Period Guidance",
+      "description": "Preparation and coping methods for your first menstruation"
+    },
+    "products": {
+      "title": "Hygiene Product Selection",
+      "description": "Learn about the usage and selection tips for various hygiene products"
+    },
+    "support": {
+      "title": "Psychological Support",
+      "description": "Cope with emotional changes and psychological stress brought by menstruation"
+    },
+    "learnMore": "Learn More",
+    "cta": {
+      "title": "Still Have Questions?",
+      "subtitle": "Our professional team is always here to answer your questions",
+      "button": "Consult Expert"
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Committed to providing professional and caring menstrual health management services for every woman",
+    "mission": {
+      "title": "Our Mission",
+      "description": "We believe every woman deserves a healthy and confident menstrual experience."
+    },
+    "contact": {
+      "title": "Want to Learn More?",
+      "description": "If you have any questions or suggestions, feel free to contact us anytime",
+      "button": "Contact Us"
+    }
+  },
+  "ui": {
+    "questionProgress": "问题 {current} / {total}",
+    "advancedQuestion": "高级问题",
+    "premiumQuestion": "🔓 高级问题",
+    "personalizedRecommendations": "Personalized Recommendations",
+    "recommendationItem": "Recommendation {index}",
+    "recommendationCustom": "Custom Recommendation",
+    "thanksMessage": "Thank you for completing the assessment!"
+  },
+  "paywall": {
+    "description": {
+      "title": "Unlock Your Complete Stress Assessment",
+      "subtitle": "Get personalized recommendations and detailed insights with the full version",
+      "features": [
+        "Detailed stress analysis report",
+        "Personalized management plan",
+        "Progress tracking tools",
+        "Expert recommendations"
+      ]
+    },
+    "comparison": {
+      "free": {
+        "title": "Free Version",
+        "limitations": [
+          "Basic assessment (5 questions)",
+          "Simple results",
+          "Limited recommendations"
+        ]
+      },
+      "premium": {
+        "title": "Premium Version",
+        "benefits": [
+          "Comprehensive assessment (20+ questions)",
+          "Detailed analysis report",
+          "Personalized management plan",
+          "Progress tracking tools",
+          "Expert recommendations",
+          "Priority support"
+        ]
       }
     }
   }

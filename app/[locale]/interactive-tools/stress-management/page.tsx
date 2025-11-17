@@ -2,7 +2,12 @@ import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
 import Link from "next/link";
 import { Locale, locales } from "@/i18n";
-import StructuredData from "@/components/StructuredData";
+import StressAssessmentWidget from "@/components/StressAssessmentWidget";
+import {
+  generateToolStructuredData,
+  ToolStructuredDataScript,
+} from "@/lib/seo/tool-structured-data";
+import StressManagementRecommendations from "./components/StressManagementRecommendations";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -48,32 +53,59 @@ export default async function StressManagementPage({
   unstable_setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "stressManagement" });
+  const isZh = locale === "zh";
+
+  // 生成工具结构化数据
+  const toolStructuredData = await generateToolStructuredData({
+    locale,
+    toolSlug: "stress-management",
+    toolName: t("pageTitle"),
+    description: t("description"),
+    features: [
+      isZh ? "压力水平科学评估" : "Scientific stress level assessment",
+      isZh ? "个性化减压技巧" : "Personalized stress relief techniques",
+      isZh ? "进度追踪与分析" : "Progress tracking and analysis",
+      isZh ? "呼吸练习指导" : "Breathing exercise guidance",
+      isZh ? "冥想和放松训练" : "Meditation and relaxation training",
+      isZh ? "压力管理计划" : "Stress management plan",
+    ],
+    category: "HealthApplication",
+    rating: {
+      value: 4.7,
+      count: 850,
+    },
+    breadcrumbs: [
+      {
+        name: isZh ? "交互工具" : "Interactive Tools",
+        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools`,
+      },
+      {
+        name: isZh ? "压力管理" : "Stress Management",
+        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/stress-management`,
+      },
+    ],
+  });
 
   return (
     <>
-      <StructuredData
-        type="WebPage"
-        title={t("pageTitle")}
-        description={t("description")}
-        url={`${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/stress-management`}
-      />
+      <ToolStructuredDataScript data={toolStructuredData} />
 
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         <div className="container mx-auto px-4 py-8 max-w-7xl">
           {/* Breadcrumb Navigation */}
-          <nav className="flex items-center gap-2 text-sm text-gray-600 mb-8">
-            <Link href={`/${locale}`} className="hover:text-blue-600">
+          <nav className="text-sm text-neutral-600 mb-8">
+            <Link href={`/${locale}`} className="hover:text-primary-600">
               {t("common.breadcrumb.home")}
             </Link>
-            <span>/</span>
+            <span className="mx-2">›</span>
             <Link
               href={`/${locale}/interactive-tools`}
-              className="hover:text-blue-600"
+              className="hover:text-primary-600"
             >
               {t("common.breadcrumb.interactiveTools")}
             </Link>
-            <span>/</span>
-            <span className="text-gray-800">{t("title")}</span>
+            <span className="mx-2">›</span>
+            <span className="text-neutral-800">{t("title")}</span>
           </nav>
           {/* Header Section */}
           <header className="text-center mb-12">
@@ -88,52 +120,11 @@ export default async function StressManagementPage({
             </p>
           </header>
 
-          {/* Quick Start Section */}
-          <section className="bg-white rounded-2xl shadow-lg p-8 mb-12">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                {t("assessment.title")}
-              </h2>
-              <p className="text-lg text-gray-600">
-                {t("assessment.subtitle")}
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href={`/${locale}/interactive-tools/interactive-tools/stress-management/assessment`}
-                className="btn-primary text-lg px-8 py-4"
-              >
-                {t("startAssessment")}
-              </Link>
-              <Link
-                href={`/${locale}/interactive-tools`}
-                className="btn-secondary text-lg px-8 py-4"
-              >
-                {t("backToTools")}
-              </Link>
-            </div>
-          </section>
+          {/* Assessment Widget - Direct Access */}
+          <StressAssessmentWidget />
 
           {/* Feature Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {/* Assessment Card */}
-            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                <span className="text-2xl">📊</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">
-                {t("assessment.title")}
-              </h3>
-              <p className="text-gray-600 mb-4">{t("assessment.subtitle")}</p>
-              <Link
-                href={`/${locale}/interactive-tools/interactive-tools/stress-management/assessment`}
-                className="text-blue-600 font-semibold hover:text-blue-700"
-              >
-                {t("learnMore")} →
-              </Link>
-            </div>
-
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
             {/* Techniques Card */}
             <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
@@ -144,7 +135,7 @@ export default async function StressManagementPage({
               </h3>
               <p className="text-gray-600 mb-4">{t("techniques.subtitle")}</p>
               <Link
-                href={`/${locale}/interactive-tools/interactive-tools/stress-management/techniques`}
+                href={`/${locale}/interactive-tools/stress-management/techniques`}
                 className="text-green-600 font-semibold hover:text-green-700"
               >
                 {t("learnMore")} →
@@ -161,7 +152,7 @@ export default async function StressManagementPage({
               </h3>
               <p className="text-gray-600 mb-4">{t("progress.subtitle")}</p>
               <Link
-                href={`/${locale}/interactive-tools/interactive-tools/stress-management/progress`}
+                href={`/${locale}/interactive-tools/stress-management/progress`}
                 className="text-purple-600 font-semibold hover:text-purple-700"
               >
                 {t("learnMore")} →
@@ -202,6 +193,9 @@ export default async function StressManagementPage({
               </div>
             </div>
           </section>
+
+          {/* Related Recommendations */}
+          <StressManagementRecommendations locale={locale} />
 
           {/* Medical Disclaimer */}
           <div

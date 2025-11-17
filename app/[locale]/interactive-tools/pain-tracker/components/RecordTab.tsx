@@ -24,9 +24,6 @@ export default function RecordTab({ locale }: RecordTabProps) {
     recommendations: Array<{ id: string; title: string; description: string; timeframe: string; priority: 'high' | 'medium' | 'low'; actionSteps: string[] }>
   }>(null);
   const resultRef = useRef<HTMLDivElement | null>(null);
-  const percent = ((painLevel - 1) / 9) * 100;
-  const gradientFill = 'linear-gradient(90deg, #22c55e, #f59e0b, #ef4444)';
-  const trackBase = 'linear-gradient(90deg, #e5e7eb 0 0)';
 
   const handleRecordPain = async () => {
     if (!painLocation || !painType) {
@@ -139,19 +136,18 @@ export default function RecordTab({ locale }: RecordTabProps) {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 {t('painTracker.painLevel')}
               </label>
-              <input
-                type="range"
-                min="1"
-                max="10"
-                value={painLevel}
-                onChange={(e) => setPainLevel(parseInt(e.target.value))}
-                className="w-full pain-scale cursor-pointer outline-none rounded-lg"
-                style={{
-                  backgroundImage: `${gradientFill}, ${trackBase}`,
-                  backgroundSize: `${percent}% 100%, 100% 100%`,
-                  backgroundRepeat: 'no-repeat'
-                }}
-              />
+              <div className="relative mb-2">
+                {/* 渐变背景轨道 - 从浅绿到深红 */}
+                <div className="absolute inset-0 h-3 bg-gradient-to-r from-green-400 via-yellow-400 via-orange-400 to-red-500 rounded-lg"></div>
+                <input
+                  type="range"
+                  min="1"
+                  max="10"
+                  value={painLevel}
+                  onChange={(e) => setPainLevel(parseInt(e.target.value))}
+                  className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider outline-none"
+                />
+              </div>
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>1</span>
                 <span>5</span>
@@ -160,6 +156,50 @@ export default function RecordTab({ locale }: RecordTabProps) {
               <div className="text-center mt-2">
                 <span className="text-lg font-semibold text-primary-600">{painLevel}</span>
               </div>
+              {/* 自定义滑块样式 */}
+              <style jsx>{`
+                .pain-slider::-webkit-slider-thumb {
+                  -webkit-appearance: none;
+                  appearance: none;
+                  height: 20px;
+                  width: 20px;
+                  border-radius: 50%;
+                  background: #ffffff;
+                  border: 2px solid #6b7280;
+                  cursor: pointer;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                  transition: all 0.2s ease;
+                }
+
+                .pain-slider::-webkit-slider-thumb:hover {
+                  border-color: #9333ea;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                  transform: scale(1.1);
+                }
+
+                .pain-slider::-moz-range-thumb {
+                  height: 20px;
+                  width: 20px;
+                  border-radius: 50%;
+                  background: #ffffff;
+                  border: 2px solid #6b7280;
+                  cursor: pointer;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                  transition: all 0.2s ease;
+                  -moz-appearance: none;
+                }
+
+                .pain-slider::-moz-range-thumb:hover {
+                  border-color: #9333ea;
+                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                  transform: scale(1.1);
+                }
+
+                .pain-slider::-moz-range-track {
+                  background: transparent;
+                  height: 12px;
+                }
+              `}</style>
             </div>
 
             <div className="text-left">

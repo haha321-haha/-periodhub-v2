@@ -540,18 +540,87 @@ export default async function OfficeScenarioPage({ params }: Props) {
           },
         ];
 
+  // 生成结构化数据
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: t("scenarios.office.title"),
+    description: t("scenarios.office.description"),
+    url: `${
+      process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+    }/${locale}/scenario-solutions/office`,
+    inLanguage: isZh ? "zh-CN" : "en-US",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "PeriodHub",
+      url: process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health",
+    },
+    about: {
+      "@type": "MedicalCondition",
+      name: isZh ? "痛经" : "Dysmenorrhea",
+    },
+    mainEntity: {
+      "@type": "HowTo",
+      name: isZh
+        ? "办公环境下的经期健康管理"
+        : "Menstrual Health Management in Office Environment",
+      description: t("scenarios.office.description"),
+      step: [
+        {
+          "@type": "HowToStep",
+          name: isZh ? "准备应急包" : "Prepare Emergency Kit",
+          text: isZh
+            ? "准备包含暖宝宝、止痛药、应急能量补充等物品的办公室应急包"
+            : "Prepare office emergency kit with heat patches, pain relievers, and energy supplements",
+        },
+        {
+          "@type": "HowToStep",
+          name: isZh ? "办公室拉伸运动" : "Office Stretching Exercises",
+          text: isZh
+            ? "进行座椅骨盆运动、足底按摩等隐蔽的缓解运动"
+            : "Perform discreet relief exercises like chair pelvic movements and foot massage",
+        },
+        {
+          "@type": "HowToStep",
+          name: isZh ? "营养管理" : "Nutrition Management",
+          text: isZh
+            ? "遵循办公室友好的营养计划，避免冷饮和高盐食物"
+            : "Follow office-friendly nutrition plan, avoid cold drinks and high-salt foods",
+        },
+        {
+          "@type": "HowToStep",
+          name: isZh ? "职场沟通" : "Workplace Communication",
+          text: isZh
+            ? "使用专业的沟通模板与同事和上级进行有效沟通"
+            : "Use professional communication templates to effectively communicate with colleagues and supervisors",
+        },
+      ],
+    },
+    author: {
+      "@type": "Organization",
+      name: "PeriodHub Health",
+      url: process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health",
+    },
+  };
+
   return (
-    <div
-      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
-      data-page="scenario-office"
-    >
-      {/* Breadcrumb */}
-      <Breadcrumb
-        items={[
-          { label: t("title"), href: `/${locale}/scenario-solutions` },
-          { label: t("scenarios.office.title") },
-        ]}
+    <>
+      {/* 结构化数据 */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+      <div
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
+        data-page="scenario-office"
+      >
+        {/* Breadcrumb */}
+        <Breadcrumb
+          items={[
+            { label: t("title"), href: `/${locale}/scenario-solutions` },
+            { label: t("scenarios.office.title") },
+          ]}
+        />
 
       {/* Page Header */}
       <header className="text-center">
@@ -1061,6 +1130,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

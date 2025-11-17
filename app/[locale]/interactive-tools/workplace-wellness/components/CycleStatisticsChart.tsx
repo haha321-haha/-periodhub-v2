@@ -14,8 +14,8 @@ import {
   PieChart,
 } from "lucide-react";
 import { useLocale } from "next-intl";
-import { getPeriodData } from "../data";
 import { useTranslations } from "next-intl";
+import { useCalendar } from "../hooks/useWorkplaceWellnessStore";
 import {
   CyclePredictor,
   CycleAnalysis,
@@ -37,13 +37,15 @@ interface ChartData {
 export default function CycleStatisticsChart() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
+  const calendar = useCalendar();
   const [activeTab, setActiveTab] = useState<
     "overview" | "cycle-length" | "pain-level" | "flow-type"
   >("overview");
   const [analysis, setAnalysis] = useState<CycleAnalysis | null>(null);
   const [statistics, setStatistics] = useState<CycleStatistics | null>(null);
 
-  const periodData = getPeriodData();
+  // 从 store 读取 periodData
+  const periodData = calendar.periodData || [];
 
   useEffect(() => {
     const predictor = new CyclePredictor(locale);

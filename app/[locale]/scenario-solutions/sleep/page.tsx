@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import {
+  generateHowToStructuredData,
+  HowToStructuredDataScript,
+} from "@/lib/seo/howto-structured-data";
+import {
   Moon,
   Volume2,
   Bed,
@@ -61,6 +65,53 @@ export default async function SleepScenarioPage({ params }: Props) {
   // 预加载面包屑所需的翻译
   const breadcrumbTitle = t("title");
   const breadcrumbSleepTitle = t("scenarios.sleep.title");
+
+  const isZh = locale === "zh";
+
+  // 生成 HowTo 结构化数据
+  const howToData = await generateHowToStructuredData({
+    locale,
+    scenarioSlug: "sleep",
+    name: isZh ? "经期睡眠质量改善指南" : "Menstrual Sleep Quality Improvement Guide",
+    description: isZh 
+      ? "改善经期睡眠质量的方法，包含睡眠环境优化和睡前准备"
+      : "Methods to improve menstrual sleep quality, including sleep environment optimization and bedtime preparation",
+    steps: [
+      { 
+        name: isZh ? "创造舒适睡眠环境" : "Create Comfortable Sleep Environment",
+        text: isZh ? "保持室温适宜，使用舒适的床品" : "Maintain comfortable room temperature, use comfortable bedding"
+      },
+      { 
+        name: isZh ? "调整睡眠姿势" : "Adjust Sleep Position",
+        text: isZh ? "采用侧卧或胎儿式睡姿，减轻腹部压力" : "Use side-lying or fetal position to reduce abdominal pressure"
+      },
+      { 
+        name: isZh ? "使用热敷辅助" : "Use Heat Therapy",
+        text: isZh ? "睡前使用热敷垫或热水袋缓解疼痛" : "Use heating pad or hot water bottle before sleep to relieve pain"
+      },
+      { 
+        name: isZh ? "睡前放松练习" : "Bedtime Relaxation Exercises",
+        text: isZh ? "进行轻度拉伸或冥想，帮助身心放松" : "Do light stretching or meditation to help body and mind relax"
+      },
+      { 
+        name: isZh ? "准备床边应急物品" : "Prepare Bedside Emergency Items",
+        text: isZh ? "在床边放置止痛药、水和卫生用品" : "Place pain medication, water and hygiene products bedside"
+      },
+      { 
+        name: isZh ? "建立睡眠规律" : "Establish Sleep Routine",
+        text: isZh ? "保持规律的作息时间，提高睡眠质量" : "Maintain regular sleep schedule to improve sleep quality"
+      },
+    ],
+    tools: [
+      { name: isZh ? "热敷垫" : "Heating Pad" },
+      { name: isZh ? "舒适枕头" : "Comfortable Pillow" },
+    ],
+    supplies: [
+      isZh ? "舒适睡衣" : "Comfortable Pajamas",
+      isZh ? "热水袋" : "Hot Water Bottle",
+    ],
+    totalTime: "PT20M",
+  });
 
   const audioSystems = [
     {
@@ -296,12 +347,14 @@ export default async function SleepScenarioPage({ params }: Props) {
   ];
 
   return (
-    <div
-      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
-      data-page="scenario-sleep"
-    >
-      {/* Breadcrumb */}
-      <Breadcrumb
+    <>
+      <HowToStructuredDataScript data={howToData} />
+      <div
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
+        data-page="scenario-sleep"
+      >
+        {/* Breadcrumb */}
+        <Breadcrumb
         items={[
           { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
           { label: breadcrumbSleepTitle },
@@ -609,6 +662,7 @@ export default async function SleepScenarioPage({ params }: Props) {
           {t("scenarios.sleep.backToOverview")}
         </Link>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

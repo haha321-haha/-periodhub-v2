@@ -17,9 +17,9 @@ import {
   Plus,
 } from "lucide-react";
 import { useLocale } from "next-intl";
-import { getPeriodData } from "../data";
 import { useTranslations } from "next-intl";
-import { PeriodRecord, FlowType, PainLevel } from "../types";
+import { useCalendar, useWorkplaceWellnessActions } from "../hooks/useWorkplaceWellnessStore";
+import { PeriodRecord, FlowType, PainLevel, PeriodType } from "../types";
 
 interface FilterOptions {
   dateRange: {
@@ -34,12 +34,28 @@ interface FilterOptions {
 export default function HistoryDataViewer() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
+  const calendar = useCalendar();
+  const { addPeriodRecord, updatePeriodRecord, deletePeriodRecord } = useWorkplaceWellnessActions();
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<PeriodRecord | null>(
     null,
   );
   const [showAddForm, setShowAddForm] = useState(false);
+  const [editingRecord, setEditingRecord] = useState<PeriodRecord | null>(null);
+  const [formData, setFormData] = useState<{
+    date: string;
+    type: PeriodType;
+    painLevel: number;
+    flow: FlowType | null;
+    notes?: string;
+  }>({
+    date: new Date().toISOString().split("T")[0],
+    type: "period",
+    painLevel: 0,
+    flow: null,
+    notes: "",
+  });
 
   const [filters, setFilters] = useState<FilterOptions>({
     dateRange: {
@@ -51,7 +67,8 @@ export default function HistoryDataViewer() {
     flow: "all",
   });
 
-  const periodData = getPeriodData();
+  // 从 store 读取 periodData
+  const periodData = calendar.periodData || [];
 
   // 过滤和搜索数据
   const filteredData = useMemo(() => {
@@ -193,6 +210,73 @@ export default function HistoryDataViewer() {
     setSearchTerm("");
   };
 
+  // 处理编辑
+  const handleEdit = (record: PeriodRecord) => {
+    setEditingRecord(record);
+    setFormData({
+      date: record.date,
+      type: record.type,
+      painLevel: record.painLevel || 0,
+      flow: record.flow || null,
+      notes: record.notes || "",
+    });
+    setShowAddForm(true);
+  };
+
+  // 处理删除
+  const handleDelete = (date: string) => {
+    if (confirm(t("history.confirmDelete"))) {
+      deletePeriodRecord(date);
+    }
+  };
+
+  // 保存记录（添加或更新）
+  const handleSave = () => {
+    const record: PeriodRecord = {
+      date: formData.date,
+      type: formData.type,
+      painLevel: formData.painLevel > 0 ? (formData.painLevel as PainLevel) : null,
+      flow: formData.flow,
+      notes: formData.notes || undefined,
+    };
+
+    if (editingRecord) {
+      // 如果日期改变，需要先删除旧记录，再添加新记录
+      if (editingRecord.date !== formData.date) {
+        deletePeriodRecord(editingRecord.date);
+        addPeriodRecord(record);
+      } else {
+        updatePeriodRecord(formData.date, record);
+      }
+    } else {
+      addPeriodRecord(record);
+    }
+
+    // 重置表单
+    setShowAddForm(false);
+    setEditingRecord(null);
+    setFormData({
+      date: new Date().toISOString().split("T")[0],
+      type: "period",
+      painLevel: 0,
+      flow: null,
+      notes: "",
+    });
+  };
+
+  // 取消编辑
+  const handleCancel = () => {
+    setShowAddForm(false);
+    setEditingRecord(null);
+    setFormData({
+      date: new Date().toISOString().split("T")[0],
+      type: "period",
+      painLevel: 0,
+      flow: null,
+      notes: "",
+    });
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
       <div className="flex items-center justify-between mb-6">
@@ -203,7 +287,17 @@ export default function HistoryDataViewer() {
 
         <div className="flex items-center space-x-2">
           <button
-            onClick={() => setShowAddForm(true)}
+            onClick={() => {
+              setEditingRecord(null);
+              setFormData({
+                date: new Date().toISOString().split("T")[0],
+                type: "period",
+                painLevel: 0,
+                flow: null,
+                notes: "",
+              });
+              setShowAddForm(true);
+            }}
             className="flex items-center px-3 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
           >
             <Plus className="w-4 h-4 mr-1" />
@@ -451,12 +545,14 @@ export default function HistoryDataViewer() {
                         <Eye className="w-4 h-4" />
                       </button>
                       <button
+                        onClick={() => handleEdit(record)}
                         className="p-1 text-gray-400 hover:text-green-600 transition-colors"
                         title={t("history.edit")}
                       >
                         <Edit className="w-4 h-4" />
                       </button>
                       <button
+                        onClick={() => handleDelete(record.date)}
                         className="p-1 text-gray-400 hover:text-red-600 transition-colors"
                         title={t("history.delete")}
                       >
@@ -546,6 +642,126 @@ export default function HistoryDataViewer() {
                 className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
               >
                 {t("history.close")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 添加/编辑记录表单 */}
+      {showAddForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-semibold mb-4">
+              {editingRecord ? t("history.editRecord") : t("history.addRecord")}
+            </h3>
+
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("history.date")}
+                </label>
+                <input
+                  type="date"
+                  value={formData.date}
+                  onChange={(e) =>
+                    setFormData({ ...formData, date: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("history.type")}
+                </label>
+                <select
+                  value={formData.type}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      type: e.target.value as PeriodType,
+                    })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                >
+                  <option value="period">{t("export.periodTypes.period")}</option>
+                  <option value="predicted">
+                    {t("export.periodTypes.predicted")}
+                  </option>
+                  <option value="ovulation">
+                    {t("export.periodTypes.ovulation")}
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("history.painLevel")} ({formData.painLevel})
+                </label>
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value={formData.painLevel}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      painLevel: parseInt(e.target.value, 10),
+                    })
+                  }
+                  className="w-full"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("history.flow")}
+                </label>
+                <select
+                  value={formData.flow || ""}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      flow: e.target.value ? (e.target.value as FlowType) : null,
+                    })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                >
+                  <option value="">-</option>
+                  <option value="light">{t("export.flowTypes.light")}</option>
+                  <option value="medium">{t("export.flowTypes.medium")}</option>
+                  <option value="heavy">{t("export.flowTypes.heavy")}</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  {t("history.notes")}
+                </label>
+                <textarea
+                  value={formData.notes || ""}
+                  onChange={(e) =>
+                    setFormData({ ...formData, notes: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                  rows={3}
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                onClick={handleCancel}
+                className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+              >
+                {t("common.cancel")}
+              </button>
+              <button
+                onClick={handleSave}
+                className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+              >
+                {t("common.save")}
               </button>
             </div>
           </div>

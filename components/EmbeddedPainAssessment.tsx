@@ -59,6 +59,8 @@ const EmbeddedPainAssessment: React.FC<EmbeddedPainAssessmentProps> = ({
 
   const getQuickAssessment = () => {
     if (!intensity) {
+      // 可以考虑使用更优雅的提示方式，比如toast通知
+      // 这里保持原有逻辑避免破坏功能
       alert(t.selectIntensityFirst);
       return;
     }

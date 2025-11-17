@@ -3,6 +3,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Locale, locales } from "@/i18n";
 import StructuredData from "@/components/StructuredData";
+import ProgressTabs from "@/components/ProgressTabs";
+import StressManagementRecommendations from "../components/StressManagementRecommendations";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -20,17 +22,17 @@ export async function generateMetadata({
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-      }/${locale}/interactive-tools/interactive-tools/stress-management/progress`,
+      }/${locale}/interactive-tools/stress-management/progress`,
       languages: {
         "zh-CN": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/interactive-tools/interactive-tools/stress-management/progress`,
+        }/zh/interactive-tools/stress-management/progress`,
         "en-US": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en/interactive-tools/interactive-tools/stress-management/progress`,
+        }/en/interactive-tools/stress-management/progress`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/interactive-tools/interactive-tools/stress-management/progress`,
+        }/zh/interactive-tools/stress-management/progress`,
       },
     },
     openGraph: {
@@ -117,32 +119,32 @@ export default async function ProgressTrackingPage({
         description={t("progress.subtitle")}
         url={`${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}/interactive-tools/interactive-tools/stress-management/progress`}
+        }/${locale}/interactive-tools/stress-management/progress`}
       />
 
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
         <div className="container mx-auto px-4 py-8 max-w-6xl">
           {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-sm text-gray-600 mb-8">
-            <Link href={`/${locale}`} className="hover:text-blue-600">
+          <nav className="text-sm text-neutral-600 mb-8">
+            <Link href={`/${locale}`} className="hover:text-primary-600">
               {t("common.breadcrumb.home")}
             </Link>
-            <span>/</span>
+            <span className="mx-2">›</span>
             <Link
               href={`/${locale}/interactive-tools`}
-              className="hover:text-blue-600"
+              className="hover:text-primary-600"
             >
               {t("common.breadcrumb.interactiveTools")}
             </Link>
-            <span>/</span>
+            <span className="mx-2">›</span>
             <Link
               href={`/${locale}/interactive-tools/stress-management`}
-              className="hover:text-blue-600"
+              className="hover:text-primary-600"
             >
               {t("title")}
             </Link>
-            <span>/</span>
-            <span className="text-gray-800">{t("progress.title")}</span>
+            <span className="mx-2">›</span>
+            <span className="text-neutral-800">{t("progress.title")}</span>
           </nav>
 
           {/* Header */}
@@ -184,7 +186,7 @@ export default async function ProgressTrackingPage({
 
             <div className="text-center">
               <Link
-                href={`/${locale}/interactive-tools/interactive-tools/stress-management/progress/add`}
+                href={`/${locale}/interactive-tools/stress-management/progress/add`}
                 className="btn-primary text-lg px-8 py-4 inline-flex items-center gap-2"
               >
                 <span>{t("progress.addEntry.title")}</span>
@@ -205,66 +207,12 @@ export default async function ProgressTrackingPage({
             </div>
           </div>
 
-          {/* Time Period Tabs */}
+          {/* Progress Tabs - All data in one place */}
           <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
             <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
               {t("progress.viewHistory.title")}
             </h2>
-
-            <div className="grid md:grid-cols-3 gap-4 mb-8">
-              {timePeriods.map((period) => (
-                <Link
-                  key={period.key}
-                  href={`/${locale}/interactive-tools/interactive-tools/stress-management/progress/${period.key}`}
-                  className={`bg-gradient-to-r ${period.color} text-white rounded-lg p-6 text-center hover:shadow-lg transition-shadow`}
-                >
-                  <div className="text-3xl mb-3">{period.icon}</div>
-                  <h3 className="font-bold text-lg">{period.title}</h3>
-                  <p className="text-sm opacity-90 mt-2">
-                    {t(`progress.viewHistory.${period.key}.description`)}
-                  </p>
-                </Link>
-              ))}
-            </div>
-
-            {/* Sample Data Preview */}
-            <div className="bg-gray-50 rounded-lg p-6">
-              <h3 className="font-semibold text-gray-800 mb-4">
-                {t("progress.sampleData.title")}
-              </h3>
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="bg-white rounded-lg p-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600 mb-1">
-                      7.2
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      {t("progress.sampleData.averageStress")}
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white rounded-lg p-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600 mb-1">
-                      85%
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      {t("progress.sampleData.techniquesUsed")}
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white rounded-lg p-4">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600 mb-1">
-                      6.8
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      {t("progress.sampleData.averageMood")}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ProgressTabs locale={locale} />
           </div>
 
           {/* Benefits Section */}
@@ -325,6 +273,9 @@ export default async function ProgressTrackingPage({
               <span>{t("backToTools")}</span>
             </Link>
           </div>
+
+          {/* Related Recommendations */}
+          <StressManagementRecommendations locale={locale} />
 
           {/* Medical Disclaimer */}
           <div

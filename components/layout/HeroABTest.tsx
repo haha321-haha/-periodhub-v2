@@ -68,23 +68,26 @@ export default function HeroABTest() {
 
   // 组件挂载时记录展示事件和页面浏览
   React.useEffect(() => {
-    // 页面浏览事件
-    trackPageView({
-      pageTitle: 'Hero Section',
-      pageLocation: window.location.href
-    });
-    
-    // A/B测试展示事件
-    trackABEvent('hero_cta_impression', {
-      variant_id: variant.id,
-      variant_name: variant.name,
-      locale: locale,
-      timestamp: new Date().toISOString()
-    });
-    
-    // 开发模式显示调试信息
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`[AB Test] Hero CTA - Variant: ${variant.name} (${variant.id}), Locale: ${locale}`);
+    // 仅在客户端且组件完全加载后执行
+    if (typeof window !== 'undefined') {
+      // 页面浏览事件
+      trackPageView({
+        pageTitle: 'Hero Section',
+        pageLocation: window.location.href
+      });
+      
+      // A/B测试展示事件
+      trackABEvent('hero_cta_impression', {
+        variant_id: variant.id,
+        variant_name: variant.name,
+        locale: locale,
+        timestamp: new Date().toISOString()
+      });
+      
+      // 开发模式显示调试信息
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`[AB Test] Hero CTA - Variant: ${variant.name} (${variant.id}), Locale: ${locale}`);
+      }
     }
   }, [variant, locale, trackABEvent, trackPageView]);
 

@@ -6,6 +6,10 @@ import RelatedToolCard from "@/app/[locale]/interactive-tools/components/Related
 import RelatedArticleCard from "@/app/[locale]/interactive-tools/components/RelatedArticleCard";
 import ScenarioSolutionCard from "@/app/[locale]/interactive-tools/components/ScenarioSolutionCard";
 import {
+  generateHowToStructuredData,
+  HowToStructuredDataScript,
+} from "@/lib/seo/howto-structured-data";
+import {
   Package,
   Briefcase,
   Car,
@@ -207,6 +211,72 @@ export default async function EmergencyKitPage({ params }: Props) {
   // 获取推荐数据（侧重应急）
   const recommendations = getEmergencyKitRecommendations(locale);
   const isZh = locale === "zh";
+
+  // 生成 HowTo 结构化数据
+  const howToData = await generateHowToStructuredData({
+    locale,
+    scenarioSlug: "emergency-kit",
+    name: isZh
+      ? "痛经应急包准备指南 - 多场景应急物品清单"
+      : "Period Pain Emergency Kit Guide - Multi-Scenario Checklist",
+    description: isZh
+      ? "完整的痛经应急包准备指南，包含办公、通勤、运动、睡眠、社交等多场景应急物品清单和使用方法"
+      : "Complete period pain emergency kit preparation guide with checklists and usage methods for office, commute, exercise, sleep, social scenarios",
+    steps: [
+      {
+        name: isZh ? "准备基础应急物品" : "Prepare Basic Emergency Items",
+        text: isZh
+          ? "准备热敷贴、暖宝宝、止痛药等基础应急物品。选择便携、易用的产品。"
+          : "Prepare basic emergency items like heat patches, hand warmers, pain medication. Choose portable, easy-to-use products.",
+      },
+      {
+        name: isZh ? "准备卫生用品" : "Prepare Hygiene Products",
+        text: isZh
+          ? "准备卫生巾、护垫、湿巾等卫生用品。根据流量选择合适的型号。"
+          : "Prepare sanitary pads, panty liners, wet wipes. Choose appropriate sizes based on flow.",
+      },
+      {
+        name: isZh ? "准备舒适用品" : "Prepare Comfort Items",
+        text: isZh
+          ? "准备舒适的衣物、小毯子、靠垫等。帮助在不同场景下保持舒适。"
+          : "Prepare comfortable clothing, small blankets, cushions. Help maintain comfort in different scenarios.",
+      },
+      {
+        name: isZh ? "准备营养补充" : "Prepare Nutritional Supplements",
+        text: isZh
+          ? "准备巧克力、红糖、姜茶等营养补充品。快速补充能量和缓解不适。"
+          : "Prepare chocolate, brown sugar, ginger tea for nutritional supplements. Quickly replenish energy and relieve discomfort.",
+      },
+      {
+        name: isZh ? "分场景打包" : "Pack by Scenario",
+        text: isZh
+          ? "根据办公、通勤、运动等不同场景，分别打包应急包。确保随时可用。"
+          : "Pack emergency kits separately for office, commute, exercise scenarios. Ensure always available.",
+      },
+      {
+        name: isZh ? "定期检查更新" : "Regular Check and Update",
+        text: isZh
+          ? "定期检查应急包物品，及时补充和更换过期物品。保持应急包的有效性。"
+          : "Regularly check emergency kit items, replenish and replace expired items. Maintain kit effectiveness.",
+      },
+    ],
+    tools: [
+      { name: isZh ? "热敷贴" : "Heat Patches" },
+      { name: isZh ? "暖宝宝" : "Hand Warmers" },
+      { name: isZh ? "止痛药" : "Pain Medication" },
+    ],
+    supplies: [
+      isZh ? "卫生巾" : "Sanitary Pads",
+      isZh ? "湿巾" : "Wet Wipes",
+      isZh ? "巧克力" : "Chocolate",
+      isZh ? "红糖" : "Brown Sugar",
+    ],
+    totalTime: "PT15M",
+    estimatedCost: {
+      currency: "USD",
+      value: "20-50",
+    },
+  });
 
   const emergencyKitScenarios = [
     {
@@ -555,10 +625,12 @@ export default async function EmergencyKitPage({ params }: Props) {
   ];
 
   return (
-    <div
-      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-12"
-      data-page="scenario-emergency-kit"
-    >
+    <>
+      <HowToStructuredDataScript data={howToData} />
+      <div
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-12"
+        data-page="scenario-emergency-kit"
+      >
       {/* Breadcrumb */}
       <Breadcrumb
         items={[
@@ -879,5 +951,6 @@ export default async function EmergencyKitPage({ params }: Props) {
         </p>
       </section>
     </div>
+    </>
   );
 }

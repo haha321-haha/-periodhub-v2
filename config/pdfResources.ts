@@ -487,6 +487,161 @@ export const pdfResources: PDFResource[] = [
       },
     },
   },
+  // === P2阶段新增：精油/芳香疗法相关PDF ===
+  {
+    id: "essential-oils-aromatherapy-menstrual-pain-guide",
+    title: "精油芳香疗法缓解痛经：全面指南",
+    titleKey: "essentialOilsAromatherapyGuide.title",
+    description: "深入了解精油芳香疗法的科学原理、使用方法和安全注意事项",
+    descriptionKey: "essentialOilsAromatherapyGuide.description",
+    filename: "essential-oils-aromatherapy-menstrual-pain-guide.pdf",
+    category: "health-management",
+    size: "2.4MB",
+    downloadUrl: "/downloads/essential-oils-aromatherapy-menstrual-pain-guide.pdf",
+    icon: "🌸",
+    featured: true,
+    fileSize: 2400,
+    createdAt: "2024-02-15",
+    updatedAt: "2024-02-15",
+    versions: {
+      zh: {
+        title: "精油芳香疗法缓解痛经：全面指南",
+        description: "深入了解精油芳香疗法的科学原理、使用方法和安全注意事项，包括薰衣草、生姜、玫瑰等精油的应用",
+      },
+      en: {
+        title: "Essential Oils Aromatherapy for Menstrual Pain Relief: Complete Guide",
+        description: "In-depth understanding of the scientific principles, usage methods, and safety precautions of essential oils aromatherapy",
+      },
+      zhEn: {
+        title: "Essential Oils Aromatherapy for Menstrual Pain Relief / 精油芳香疗法缓解痛经",
+        description: "In-depth understanding of essential oils aromatherapy / 深入了解精油芳香疗法的科学原理和使用方法",
+      },
+    },
+  },
+  // === P2阶段新增：IUD/避孕相关PDF ===
+  {
+    id: "comprehensive-iud-guide",
+    title: "宫内节育器(IUD)：全面指南与用户须知",
+    titleKey: "comprehensiveIudGuide.title",
+    description: "详细了解宫内节育器的类型、工作原理、优缺点、副作用和使用注意事项",
+    descriptionKey: "comprehensiveIudGuide.description",
+    filename: "comprehensive-iud-guide.pdf",
+    category: "health-management",
+    size: "3.1MB",
+    downloadUrl: "/downloads/comprehensive-iud-guide.pdf",
+    icon: "🔬",
+    featured: true,
+    fileSize: 3100,
+    createdAt: "2024-02-20",
+    updatedAt: "2024-02-20",
+    versions: {
+      zh: {
+        title: "宫内节育器(IUD)：全面指南与用户须知",
+        description: "详细了解宫内节育器的类型、工作原理、优缺点、副作用和使用注意事项，帮助您做出明智的避孕选择",
+      },
+      en: {
+        title: "Intrauterine Device (IUD): Comprehensive Guide and User Manual",
+        description: "Detailed understanding of IUD types, working principles, pros and cons, side effects, and usage precautions",
+      },
+      zhEn: {
+        title: "Intrauterine Device (IUD) / 宫内节育器：全面指南",
+        description: "Comprehensive guide to IUD types and usage / 宫内节育器类型和使用的全面指南",
+      },
+    },
+  },
+  // === P2阶段新增：NSAIDs/药物治疗相关PDF ===
+  {
+    id: "nsaid-menstrual-pain-professional-guide",
+    title: "NSAID药物治疗痛经：专业指南与安全用药",
+    titleKey: "nsaidProfessionalGuide.title",
+    description: "使用NSAID缓解痛经的专业指南，包含安全注意事项和剂量建议",
+    descriptionKey: "nsaidProfessionalGuide.description",
+    filename: "nsaid-menstrual-pain-professional-guide.pdf",
+    category: "health-management",
+    size: "2.8MB",
+    downloadUrl: "/downloads/nsaid-menstrual-pain-professional-guide.pdf",
+    icon: "💊",
+    featured: true,
+    fileSize: 2800,
+    createdAt: "2024-02-25",
+    updatedAt: "2024-02-25",
+    versions: {
+      zh: {
+        title: "NSAID药物治疗痛经：专业指南与安全用药",
+        description: "使用NSAID缓解痛经的专业指南，包含布洛芬、萘普生等药物的安全注意事项和剂量建议",
+      },
+      en: {
+        title: "NSAID Medication for Menstrual Pain: Professional Guide and Safe Use",
+        description: "Professional guide to using NSAIDs for menstrual pain relief, with safety considerations and dosage recommendations",
+      },
+      zhEn: {
+        title: "NSAID Medication for Menstrual Pain / NSAID药物治疗痛经",
+        description: "Professional guide to NSAIDs for pain relief / NSAID缓解痛经的专业指南",
+      },
+    },
+  },
+  // === P2阶段新增：营养补充剂相关PDF（待创建内容后启用）===
+  // TODO: 创建dietary-supplements-menstrual-pain-guide.md内容后启用
+  // {
+  //   id: "dietary-supplements-menstrual-pain-guide",
+  //   title: "膳食补充剂与痛经：镁、欧米茄3等营养素指南",
+  //   titleKey: "dietarySupplementsGuide.title",
+  //   description: "科学了解膳食补充剂对痛经的作用，包括镁、欧米茄3、维生素等营养素的使用指南",
+  //   descriptionKey: "dietarySupplementsGuide.description",
+  //   filename: "dietary-supplements-menstrual-pain-guide.pdf",
+  //   category: "health-management",
+  //   size: "2.6MB",
+  //   downloadUrl: "/downloads/dietary-supplements-menstrual-pain-guide.pdf",
+  //   icon: "🥗",
+  //   fileSize: 2600,
+  //   createdAt: "2024-03-01",
+  //   updatedAt: "2024-03-01",
+  //   versions: {
+  //     zh: {
+  //       title: "膳食补充剂与痛经：镁、欧米茄3等营养素指南",
+  //       description: "科学了解膳食补充剂对痛经的作用，包括镁、欧米茄3、维生素等营养素的使用指南",
+  //     },
+  //     en: {
+  //       title: "Dietary Supplements and Menstrual Pain: Guide to Magnesium, Omega 3 and Other Nutrients",
+  //       description: "Scientific understanding of dietary supplements for menstrual pain, including usage guide for magnesium, omega 3, vitamins",
+  //     },
+  //     zhEn: {
+  //       title: "Dietary Supplements and Menstrual Pain / 膳食补充剂与痛经",
+  //       description: "Guide to supplements for menstrual pain / 膳食补充剂对痛经的作用指南",
+  //     },
+  //   },
+  // },
+  // === P2阶段新增：草药疗法相关PDF（待创建内容后启用）===
+  // TODO: 创建herbal-remedies-menstrual-pain-guide.md内容后启用
+  // {
+  //   id: "herbal-remedies-menstrual-pain-guide",
+  //   title: "草药疗法缓解痛经：传统智慧与现代验证",
+  //   titleKey: "herbalRemedies.title",
+  //   description: "探索传统草药疗法在缓解痛经中的应用，包括姜茶、姜黄、甘菊茶等草药的科学验证",
+  //   descriptionKey: "herbalRemedies.description",
+  //   filename: "herbal-remedies-menstrual-pain-guide.pdf",
+  //   category: "health-management",
+  //   size: "2.5MB",
+  //   downloadUrl: "/downloads/herbal-remedies-menstrual-pain-guide.pdf",
+  //   icon: "🌿",
+  //   fileSize: 2500,
+  //   createdAt: "2024-03-05",
+  //   updatedAt: "2024-03-05",
+  //   versions: {
+  //     zh: {
+  //       title: "草药疗法缓解痛经：传统智慧与现代验证",
+  //       description: "探索传统草药疗法在缓解痛经中的应用，包括姜茶、姜黄、甘菊茶等草药的科学验证",
+  //     },
+  //     en: {
+  //       title: "Herbal Remedies for Menstrual Pain: Traditional Wisdom and Modern Validation",
+  //       description: "Explore traditional herbal remedies for menstrual pain, including scientific validation of ginger tea, turmeric, chamomile tea",
+  //     },
+  //     zhEn: {
+  //       title: "Herbal Remedies for Menstrual Pain / 草药疗法缓解痛经",
+  //       description: "Traditional herbal remedies with modern validation / 传统草药疗法的现代验证",
+  //     },
+  //   },
+  // },
 ];
 
 // 导出兼容名称

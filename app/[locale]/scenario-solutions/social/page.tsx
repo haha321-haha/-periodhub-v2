@@ -6,6 +6,10 @@ import RelatedToolCard from "@/app/[locale]/interactive-tools/components/Related
 import RelatedArticleCard from "@/app/[locale]/interactive-tools/components/RelatedArticleCard";
 import ScenarioSolutionCard from "@/app/[locale]/interactive-tools/components/ScenarioSolutionCard";
 import {
+  generateHowToStructuredData,
+  HowToStructuredDataScript,
+} from "@/lib/seo/howto-structured-data";
+import {
   Users,
   Heart,
   Wine,
@@ -190,6 +194,52 @@ export default async function SocialScenarioPage({ params }: Props) {
   // 获取推荐数据
   const recommendations = getSocialRecommendations(locale);
   const isZh = locale === "zh";
+
+  // 生成 HowTo 结构化数据
+  const howToData = await generateHowToStructuredData({
+    locale,
+    scenarioSlug: "social",
+    name: isZh ? "社交场合痛经管理指南" : "Social Setting Period Pain Management Guide",
+    description: isZh 
+      ? "社交场合的痛经管理方法，包含便携准备和应急应对"
+      : "Period pain management in social settings, including portable preparation and emergency response",
+    steps: [
+      { 
+        name: isZh ? "准备便携应急包" : "Prepare Portable Emergency Kit",
+        text: isZh ? "准备小巧精致的应急包，方便随身携带" : "Prepare compact elegant emergency kit for easy carrying"
+      },
+      { 
+        name: isZh ? "选择合适的着装" : "Choose Appropriate Attire",
+        text: isZh ? "选择舒适且不紧身的服装" : "Choose comfortable and non-restrictive clothing"
+      },
+      { 
+        name: isZh ? "提前规划行程" : "Plan Schedule in Advance",
+        text: isZh ? "了解活动时长和场地设施" : "Know activity duration and venue facilities"
+      },
+      { 
+        name: isZh ? "了解场地设施" : "Know Venue Facilities",
+        text: isZh ? "提前了解洗手间和休息区位置" : "Know restroom and rest area locations in advance"
+      },
+      { 
+        name: isZh ? "准备应急说辞" : "Prepare Emergency Excuses",
+        text: isZh ? "准备得体的理由，必要时可以提前离开" : "Prepare appropriate reasons to leave early if necessary"
+      },
+      { 
+        name: isZh ? "保持轻松心态" : "Maintain Relaxed Mindset",
+        text: isZh ? "不要过度紧张，适当休息和调整" : "Don't be overly nervous, rest and adjust appropriately"
+      },
+    ],
+    tools: [
+      { name: isZh ? "便携包" : "Portable Bag" },
+      { name: isZh ? "手机" : "Mobile Phone" },
+    ],
+    supplies: [
+      isZh ? "卫生用品" : "Hygiene Products",
+      isZh ? "止痛药" : "Pain Medication",
+      isZh ? "湿巾" : "Wet Wipes",
+    ],
+    totalTime: "PT15M",
+  });
 
   const dateStrategies = [
     {
@@ -452,11 +502,13 @@ export default async function SocialScenarioPage({ params }: Props) {
   ];
 
   return (
-    <div
-      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
-      data-page="scenario-social"
-    >
-      {/* Breadcrumb */}
+    <>
+      <HowToStructuredDataScript data={howToData} />
+      <div
+        className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
+        data-page="scenario-social"
+      >
+        {/* Breadcrumb */}
       <Breadcrumb
         items={[
           { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
@@ -787,6 +839,7 @@ export default async function SocialScenarioPage({ params }: Props) {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

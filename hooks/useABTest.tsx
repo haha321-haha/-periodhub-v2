@@ -27,29 +27,47 @@ export function useABTest(testConfig: ABTestConfig): ABTestResult {
   const { testId, variants, expiryDays = 30 } = testConfig;
   
   const [currentVariant, setCurrentVariant] = useState<ABTestVariant>(() => {
+    // 服务器端直接返回第一个变体作为默认值，确保与客户端一致
+    if (typeof window === 'undefined') {
+      return variants[0];
+    }
+    
+    // 客户端首次渲染也返回第一个变体，确保与服务器端一致
+    // 后续在useEffect中进行真正的变体分配
+    return variants[0];
+  });
+  
+  const [hasInitialized, setHasInitialized] = useState(false);
+
+  // 仅在客户端完全挂载后初始化变体选择
+  useEffect(() => {
+    if (hasInitialized) return;
+    
     // 优先从localStorage获取已分配的变体（保持用户一致性）
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem(`ab_test_${testId}`);
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          const variant = variants.find(v => v.id === parsed.variantId);
-          if (variant && new Date(parsed.expiry) > new Date()) {
-            return variant;
-          }
-        } catch (error) {
-          console.warn('Failed to parse stored AB test variant:', error);
+    const stored = localStorage.getItem(`ab_test_${testId}`);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        const variant = variants.find(v => v.id === parsed.variantId);
+        if (variant && new Date(parsed.expiry) > new Date()) {
+          setCurrentVariant(variant);
+          setHasInitialized(true);
+          return;
         }
+      } catch (error) {
+        console.warn('Failed to parse stored AB test variant:', error);
       }
     }
     
     // 根据权重分配变体
-    return assignVariant(variants);
-  });
+    const assignedVariant = assignVariant(variants);
+    setCurrentVariant(assignedVariant);
+    setHasInitialized(true);
+  }, [testId, variants, hasInitialized]);
 
   useEffect(() => {
-    // 保存变体分配（带过期时间）
-    if (typeof window !== 'undefined') {
+    // 仅在客户端且已经初始化后才保存变体分配
+    if (typeof window !== 'undefined' && hasInitialized) {
       const expiryDate = new Date();
       expiryDate.setDate(expiryDate.getDate() + expiryDays);
       
@@ -59,7 +77,7 @@ export function useABTest(testConfig: ABTestConfig): ABTestResult {
         assignedAt: new Date().toISOString()
       }));
     }
-  }, [testId, currentVariant.id, expiryDays]);
+  }, [testId, currentVariant.id, expiryDays, hasInitialized]);
 
   useEffect(() => {
     // 发送变体分配事件到GA4

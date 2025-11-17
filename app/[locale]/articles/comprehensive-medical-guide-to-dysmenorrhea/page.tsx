@@ -126,17 +126,60 @@ export default async function DysmenorrheaGuidePage({
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
   const pageUrl = `${baseUrl}/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`;
 
+  // 生成 Article 结构化数据
+  const articleStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "@id": pageUrl,
+    url: pageUrl,
+    name: t("seo.title"),
+    headline: t("hero.title"),
+    description: t("seo.description"),
+    inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+    isAccessibleForFree: true,
+    datePublished: "2024-12-19T00:00:00+00:00",
+    dateModified: "2024-12-19T00:00:00+00:00",
+    author: {
+      "@type": "Organization",
+      name: "PeriodHub Health Team",
+      url: baseUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "PeriodHub",
+      url: baseUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${baseUrl}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+    about: {
+      "@type": "MedicalCondition",
+      name: "Dysmenorrhea",
+      alternateName: locale === "zh" ? "痛经" : "Period Pain",
+      associatedAnatomy: {
+        "@type": "AnatomicalStructure",
+        name: locale === "zh" ? "子宫" : "Uterus",
+      },
+    },
+    medicalAudience: {
+      "@type": "MedicalAudience",
+      audienceType: "Patient",
+    },
+  };
+
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* SEO结构化数据 */}
-      <StructuredData
-        type="medicalWebPage"
-        title={t("seo.title")}
-        description={t("seo.description")}
-        url={pageUrl}
-        author="PeriodHub Health Team"
-        datePublished="2024-12-19"
-        dateModified="2024-12-19"
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleStructuredData),
+        }}
       />
 
       <div className="container-custom py-8 md:py-12">

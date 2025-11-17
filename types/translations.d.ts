@@ -3,7 +3,7 @@
  * 自动生成的翻译键类型定义
  * 请勿手动编辑此文件
  * 
- * 生成时间: 2025-10-08T10:00:12.775Z
+ * 生成时间: 2025-11-14T20:50:29.768Z
  * 生成命令: npm run types:generate
  */
 
@@ -14,6 +14,166 @@ export interface TranslationKeys {
     "name": string;
     "title": string;
     "description": string;
+  };
+  "homePage": {
+    "metadata": {
+      "title": string;
+      "description": string;
+      "keywords": string;
+      "ogTitle": string;
+      "ogDescription": string;
+      "twitterTitle": string;
+      "twitterDescription": string;
+    };
+  };
+  "privacyPolicy": {
+    "title": string;
+    "description": string;
+    "openGraph": {
+      "description": string;
+    };
+    "dataTable": {
+      "type": string;
+      "purpose": string;
+      "duration": string;
+      "required": string;
+    };
+    "lastUpdated": string;
+    "intro": string;
+    "importantNotice": string;
+    "importantNoticeText": string;
+    "tableOfContents": string;
+    "mvpNotice": {
+      "title": string;
+      "text": string;
+    };
+    "sections": {
+      "informationCollection": {
+        "title": string;
+        "subtitle": string;
+        "importantNote": {
+          "title": string;
+          "text": string;
+        };
+        "userProvided": {
+          "title": string;
+          "description": string;
+          "items": string;
+        };
+        "symptomData": {
+          "title": string;
+          "description": string;
+          "items": string;
+        };
+        "technicalInfo": {
+          "title": string;
+          "description": string;
+          "items": string;
+        };
+      };
+      "informationUse": {
+        "title": string;
+        "mainPurposes": {
+          "title": string;
+          "items": string;
+        };
+        "neverUsedFor": {
+          "title": string;
+          "items": string;
+        };
+      };
+      "informationSharing": {
+        "title": string;
+        "content": string;
+        "exceptions": string;
+      };
+      "dataSecurity": {
+        "title": string;
+        "disclaimer": string;
+        "encryption": {
+          "title": string;
+          "description": string;
+        };
+        "accessControl": {
+          "title": string;
+          "description": string;
+        };
+        "regularAudit": {
+          "title": string;
+          "description": string;
+        };
+      };
+      "cookieUsage": {
+        "title": string;
+        "cookieTypes": {
+          "title": string;
+          "necessary": {
+            "type": string;
+            "description": string;
+            "purpose": string;
+            "duration": string;
+            "required": string;
+          };
+          "functional": {
+            "type": string;
+            "purpose": string;
+            "duration": string;
+            "required": string;
+          };
+          "analytical": {
+            "type": string;
+            "purpose": string;
+            "duration": string;
+            "required": string;
+          };
+        };
+        "management": {
+          "title": string;
+          "text": string;
+        };
+        "dataTable": {
+          "type": string;
+          "purpose": string;
+          "duration": string;
+          "required": string;
+        };
+      };
+      "userRights": {
+        "title": string;
+        "subtitle": string;
+        "rights": string;
+        "howToExercise": {
+          "title": string;
+          "description": string;
+          "methods": string;
+        };
+      };
+      "contactUs": {
+        "title": string;
+        "description": string;
+        "dpo": {
+          "title": string;
+          "email": string;
+          "responsibility": string;
+          "languages": string;
+        };
+        "dataProtection": {
+          "title": string;
+          "email": string;
+          "subject": string;
+          "responseTime": string;
+        };
+      };
+    };
+    "policyUpdates": {
+      "title": string;
+      "content": string;
+      "recommendation": string;
+      "procedures": string;
+    };
+    "questions": string;
+    "questionsDescription": string;
+    "contactUs": string;
   };
   "metadata": {
     "home": {
@@ -35,6 +195,20 @@ export interface TranslationKeys {
       "description": string;
     };
     "tools": {
+      "title": string;
+      "description": string;
+      "notFound": {
+        "title": string;
+        "description": string;
+      };
+    };
+    "health-guide": {
+      "relief-methods": {
+        "title": string;
+        "description": string;
+      };
+    };
+    "pdf-center-test": {
       "title": string;
       "description": string;
     };
@@ -490,6 +664,48 @@ export interface TranslationKeys {
         "title": string;
         "text": string;
       };
+      "symptoms": {
+        "s1": {
+          "text": string;
+          "description": string;
+        };
+        "s2": {
+          "text": string;
+          "description": string;
+        };
+        "s3": {
+          "text": string;
+          "description": string;
+        };
+        "s4": {
+          "text": string;
+          "description": string;
+        };
+        "s5": {
+          "text": string;
+          "description": string;
+        };
+        "s6": {
+          "text": string;
+          "description": string;
+        };
+        "s7": {
+          "text": string;
+          "description": string;
+        };
+        "s8": {
+          "text": string;
+          "description": string;
+        };
+        "s9": {
+          "text": string;
+          "description": string;
+        };
+        "s10": {
+          "text": string;
+          "description": string;
+        };
+      };
     };
     "comparisonTable": {
       "title": string;
@@ -694,7 +910,9 @@ export interface TranslationKeys {
     "naturalTherapies": string;
     "breadcrumb": {
       "home": string;
+      "separator": string;
       "immediateRelief": string;
+      "interactiveTools": string;
     };
     "submit": string;
     "cancel": string;
@@ -714,6 +932,7 @@ export interface TranslationKeys {
     "medicalDisclaimer": string;
     "navigation": {
       "backToArticles": string;
+      "backToDownloads": string;
     };
   };
   "hero": {
@@ -731,6 +950,9 @@ export interface TranslationKeys {
       "privacyFirstDesc": string;
       "precisionPrediction": string;
       "precisionPredictionDesc": string;
+      "articles": string;
+      "tools": string;
+      "support": string;
     };
     "immediateRelief": string;
     "toolsCount": string;
@@ -752,6 +974,8 @@ export interface TranslationKeys {
       "constitutionTest": string;
       "constitutionTestDesc": string;
     };
+    "ctaSupportText": string;
+    "learnMore": string;
   };
   "navigation": {
     "home": string;
@@ -864,6 +1088,8 @@ export interface TranslationKeys {
           "physicalTherapyDesc": string;
           "essentialOils": string;
           "essentialOilsDesc": string;
+          "essentialOilsAromatherapyGuide": string;
+          "essentialOilsAromatherapyGuideDesc": string;
           "herbalTea": string;
           "herbalTeaDesc": string;
           "traditionalMethods": string;
@@ -878,12 +1104,16 @@ export interface TranslationKeys {
         "articles": {
           "comprehensiveMedical": string;
           "comprehensiveMedicalDesc": string;
+          "comprehensiveIudGuide": string;
+          "comprehensiveIudGuideDesc": string;
           "whenToSeeDoctor": string;
           "whenToSeeDoctorDesc": string;
           "medicalCare": string;
           "medicalCareDesc": string;
           "complications": string;
           "complicationsDesc": string;
+          "menstrualPainComplications": string;
+          "menstrualPainComplicationsDesc": string;
           "nsaidProfessionalGuide": string;
           "nsaidProfessionalGuideDesc": string;
         };
@@ -1428,6 +1658,7 @@ export interface TranslationKeys {
       "immediate": string;
       "emergency": string;
       "urgent": string;
+      "important": string;
       "severe": string;
       "now": string;
       "immediately": string;
@@ -2032,6 +2263,15 @@ export interface TranslationKeys {
       "rating": string;
     };
   };
+  "resourcesPage": {
+    "meta": {
+      "title": string;
+      "description": string;
+      "keywords": string;
+      "ogTitle": string;
+      "ogDescription": string;
+    };
+  };
   "downloadsPage": {
     "title": string;
     "description": string;
@@ -2185,6 +2425,10 @@ export interface TranslationKeys {
     "notFoundDescription": string;
   };
   "immediateReliefPage": {
+    "metadata": {
+      "title": string;
+      "description": string;
+    };
     "title": string;
     "description": string;
     "introTitle": string;
@@ -2218,6 +2462,7 @@ export interface TranslationKeys {
     "emergencyResponse": {
       "title": string;
       "subtitle": string;
+      "immediateActionsTitle": string;
       "immediateActions": {
         "0": string;
         "1": string;
@@ -2322,10 +2567,18 @@ export interface TranslationKeys {
       "cycles": string;
       "dosage": string;
       "contraindications": string;
+      "method": string;
+      "location": string;
     };
     "actions": {
       "startPractice": string;
       "learnMore": string;
+      "viewChecklist": string;
+      "startAssessment": string;
+      "viewGuide": string;
+      "viewSolutions": string;
+      "viewMethods": string;
+      "viewDietPlan": string;
     };
     "structuredData": {
       "howTo": {
@@ -2355,6 +2608,15 @@ export interface TranslationKeys {
         };
       };
     };
+    "scenarioSolutionsTitle": string;
+    "scenarioSolutionsDescription": string;
+    "heatTherapyGuideTitle": string;
+    "heatTherapyGuideDescription": string;
+    "dietaryPlanTitle": string;
+    "dietaryPlanDescription": string;
+    "nsaidGuideTitle": string;
+    "nsaidGuideDescription": string;
+    "seoKeywords": string;
   };
   "naturalTherapiesPage": {
     "title": string;
@@ -2511,21 +2773,11 @@ export interface TranslationKeys {
           "title": string;
           "recommended": {
             "title": string;
-            "list": {
-              "0": string;
-              "1": string;
-              "2": string;
-              "3": string;
-            };
+            "list": string;
           };
           "avoid": {
             "title": string;
-            "list": {
-              "0": string;
-              "1": string;
-              "2": string;
-              "3": string;
-            };
+            "list": string;
           };
         };
       };
@@ -2591,7 +2843,9 @@ export interface TranslationKeys {
           "romanChamomile": {
             "title": string;
             "effects": string;
+            "effectsValue": string;
             "mechanism": string;
+            "mechanismValue": string;
           };
         };
         "usage": {
@@ -2599,12 +2853,16 @@ export interface TranslationKeys {
           "massageOil": {
             "title": string;
             "recipe": string;
+            "recipeValue": string;
             "instructions": string;
+            "instructionsValue": string;
           };
           "diffusion": {
             "title": string;
             "recipe": string;
+            "recipeValue": string;
             "instructions": string;
+            "instructionsValue": string;
           };
         };
         "safety": {
@@ -2615,6 +2873,17 @@ export interface TranslationKeys {
             "2": string;
           };
         };
+        "science": {
+          "title": string;
+          "mechanism": string;
+          "mechanismValue": string;
+          "effects": string;
+          "effectsValue": string;
+          "duration": string;
+          "durationValue": string;
+          "bioavailability": string;
+          "bioavailabilityValue": string;
+        };
       };
       "acupuncture": {
         "title": string;
@@ -2624,10 +2893,18 @@ export interface TranslationKeys {
           "title": string;
           "sanyinjiao": {
             "title": string;
+            "location": string;
+            "locationValue": string;
+            "effects": string;
+            "effectsValue": string;
             "description": string;
           };
           "guanyuan": {
             "title": string;
+            "location": string;
+            "locationValue": string;
+            "effects": string;
+            "effectsValue": string;
             "description": string;
           };
           "shenque": {
@@ -2637,6 +2914,18 @@ export interface TranslationKeys {
         };
         "mechanisms": {
           "title": string;
+          "gateControl": {
+            "title": string;
+            "description": string;
+          };
+          "endorphin": {
+            "title": string;
+            "description": string;
+          };
+          "circulation": {
+            "title": string;
+            "description": string;
+          };
           "neuralRegulation": string;
           "neuralRegulationValue": string;
           "endocrineRegulation": string;
@@ -2646,6 +2935,18 @@ export interface TranslationKeys {
         };
         "selfMassage": {
           "title": string;
+          "techniques": {
+            "1": string;
+            "2": string;
+            "3": string;
+            "title": string;
+          };
+          "precautions": {
+            "1": string;
+            "2": string;
+            "3": string;
+            "title": string;
+          };
           "sanyinjiao": {
             "title": string;
             "instructions": string;
@@ -2655,6 +2956,7 @@ export interface TranslationKeys {
             "instructions": string;
           };
           "note": string;
+          "noteValue": string;
         };
       };
       "psychological": {
@@ -2684,6 +2986,11 @@ export interface TranslationKeys {
           "step1": string;
           "step2": string;
           "step3": string;
+          "step1Value": string;
+          "step2Value": string;
+          "step3Value": string;
+          "effect": string;
+          "effectValue": string;
         };
       };
       "comprehensive": {
@@ -2712,6 +3019,14 @@ export interface TranslationKeys {
         };
         "synergistic": {
           "title": string;
+          "description": string;
+          "benefits": {
+            "1": string;
+            "2": string;
+            "3": string;
+            "4": string;
+            "title": string;
+          };
           "enhancing": {
             "title": string;
             "combination1": string;
@@ -2733,26 +3048,42 @@ export interface TranslationKeys {
         "heatTherapy": {
           "title": string;
           "source": string;
+          "sourceValue": string;
+          "efficacy": string;
+          "efficacyValue": string;
         };
         "tens": {
           "title": string;
           "source": string;
+          "sourceValue": string;
+          "efficacy": string;
+          "efficacyValue": string;
         };
         "acupuncture": {
           "title": string;
           "source": string;
+          "sourceValue": string;
+          "efficacy": string;
+          "efficacyValue": string;
         };
         "aromatherapy": {
           "title": string;
           "source": string;
+          "sourceValue": string;
+          "efficacy": string;
+          "efficacyValue": string;
         };
       };
       "highLevelEvidence": {
         "title": string;
         "cochrane": string;
+        "cochraneValue": string;
         "rct": string;
+        "rctValue": string;
         "who": string;
+        "whoValue": string;
         "nih": string;
+        "nihValue": string;
       };
       "longTermStudies": {
         "title": string;
@@ -2769,6 +3100,13 @@ export interface TranslationKeys {
     "medicalDisclaimer": {
       "title": string;
       "content": string;
+      "warnings": {
+        "1": string;
+        "2": string;
+        "3": string;
+        "4": string;
+        "title": string;
+      };
     };
     "faq": {
       "dysmenorrhea": string;
@@ -2776,6 +3114,16 @@ export interface TranslationKeys {
       "effectiveTherapiesAnswer": string;
       "timeToEffect": string;
       "timeToEffectAnswer": string;
+      "safety": string;
+      "safetyAnswer": string;
+      "combination": string;
+      "combinationAnswer": string;
+      "whenToSeekHelp": string;
+      "whenToSeekHelpAnswer": string;
+      "pregnancy": string;
+      "pregnancyAnswer": string;
+      "medication": string;
+      "medicationAnswer": string;
     };
     "sections": {
       "relatedTools": string;
@@ -2787,14 +3135,20 @@ export interface TranslationKeys {
         "nutritionGenerator": {
           "title": string;
           "description": string;
+          "benefits": string;
+          "benefitsValue": string;
         };
         "constitutionTest": {
           "title": string;
           "description": string;
+          "benefits": string;
+          "benefitsValue": string;
         };
         "painTracker": {
           "title": string;
           "description": string;
+          "benefits": string;
+          "benefitsValue": string;
         };
       };
       "relatedArticles": {
@@ -2803,32 +3157,44 @@ export interface TranslationKeys {
           "readTime": string;
           "title": string;
           "description": string;
+          "benefits": string;
+          "benefitsValue": string;
         };
         "heatTherapy": {
           "category": string;
           "readTime": string;
           "title": string;
           "description": string;
+          "benefits": string;
+          "benefitsValue": string;
         };
         "herbalTea": {
           "category": string;
           "readTime": string;
           "title": string;
           "description": string;
+          "benefits": string;
+          "benefitsValue": string;
         };
       };
       "scenarioSolutions": {
         "exercise": {
           "title": string;
           "description": string;
+          "benefits": string;
+          "benefitsValue": string;
         };
         "office": {
           "title": string;
           "description": string;
+          "benefits": string;
+          "benefitsValue": string;
         };
         "emergencyKit": {
           "title": string;
           "description": string;
+          "benefits": string;
+          "benefitsValue": string;
         };
       };
     };
@@ -2897,6 +3263,12 @@ export interface TranslationKeys {
         "title": string;
         "description": string;
         "noData": string;
+        "painPatterns": string;
+        "recommendations": string;
+        "trends": string;
+        "alerts": string;
+        "noInsights": string;
+        "noInsightsDescription": string;
       };
       "assessment": {
         "title": string;
@@ -3067,6 +3439,53 @@ export interface TranslationKeys {
           "ariaDescription": string;
         };
       };
+      "export": {
+        "title": string;
+        "description": string;
+        "format": string;
+        "json": string;
+        "csv": string;
+        "pdf": string;
+        "dateRange": string;
+        "allData": string;
+        "lastMonth": string;
+        "lastThreeMonths": string;
+        "lastSixMonths": string;
+        "customRange": string;
+        "startDate": string;
+        "endDate": string;
+        "includeCharts": string;
+        "includeStatistics": string;
+        "export": string;
+        "exporting": string;
+        "exportSuccess": string;
+        "exportError": string;
+        "inDevelopment": string;
+      };
+      "statistics": {
+        "title": string;
+        "overview": string;
+        "trends": string;
+        "patterns": string;
+        "remedies": string;
+        "totalEntries": string;
+        "averagePain": string;
+        "maxPain": string;
+        "minPain": string;
+        "trendDirection": string;
+        "improving": string;
+        "worsening": string;
+        "stable": string;
+        "mostCommonSymptoms": string;
+        "mostEffectiveRemedies": string;
+        "painFrequency": string;
+        "noData": string;
+        "noDataDescription": string;
+        "painLevelChart": string;
+        "cyclePatterns": string;
+        "remedyEffectiveness": string;
+        "inDevelopment": string;
+      };
     };
     "embeddedPainAssessment": {
       "title": string;
@@ -3122,7 +3541,12 @@ export interface TranslationKeys {
         "hold": string;
         "exhale": string;
       };
-      "instructions": string;
+      "instructions": {
+        "title": string;
+        "inhale": string;
+        "hold": string;
+        "exhale": string;
+      };
       "startButton": string;
       "stopButton": string;
       "practiceAgain": string;
@@ -3136,6 +3560,12 @@ export interface TranslationKeys {
       };
       "tip": string;
       "timeUnit": string;
+      "buttons": {
+        "startPractice": string;
+        "stopPractice": string;
+        "practiceAgain": string;
+        "oneCycleCompleted": string;
+      };
     };
     "painDifferentialDiagnosis": {
       "title": string;
@@ -3150,6 +3580,41 @@ export interface TranslationKeys {
       "title": string;
       "description": string;
       "cta": string;
+      "subtitle": string;
+      "features": {
+        "quick": {
+          "title": string;
+          "description": string;
+        };
+        "professional": {
+          "title": string;
+          "description": string;
+        };
+        "personalized": {
+          "title": string;
+          "description": string;
+        };
+        "practical": {
+          "title": string;
+          "description": string;
+        };
+      };
+      "instructions": {
+        "title": string;
+        "item1": string;
+        "item2": string;
+        "item3": string;
+        "item4": string;
+      };
+      "navigation": {
+        "startTest": string;
+        "nextQuestion": string;
+        "previousQuestion": string;
+        "completeTest": string;
+        "retakeTest": string;
+        "previous": string;
+        "next": string;
+      };
     };
     "periodPainAssessment": {
       "title": string;
@@ -3158,6 +3623,11 @@ export interface TranslationKeys {
     };
     "toolsIntroduction": string;
     "developmentNote": string;
+    "stressManagement": {
+      "title": string;
+      "description": string;
+      "cta": string;
+    };
     "cycleTracker": {
       "title": string;
       "description": string;
@@ -3270,6 +3740,11 @@ export interface TranslationKeys {
       "emergencyKit": string;
       "painTracker": string;
       "symptomAssessment": string;
+      "emotionalSupport": string;
+      "communicationGuide": string;
+      "medicalCare": string;
+      "globalPerspectives": string;
+      "nutritionGenerator": string;
     };
     "common": {
       "loading": string;
@@ -4358,6 +4833,15 @@ export interface TranslationKeys {
         "highestPainLevel": string;
         "noRecords": string;
       };
+      "statsSummary": {
+        "title": string;
+        "totalRecords": string;
+        "recordsInRange": string;
+        "averagePain": string;
+        "averagePainLevel": string;
+        "highestPainLevel": string;
+        "noRecords": string;
+      };
       "painLevels": {
         "mild": string;
         "moderate": string;
@@ -4553,7 +5037,7 @@ export interface TranslationKeys {
         };
         "backToOverview": string;
       };
-      "lifeStages": {
+      "life_stages": {
         "title": string;
         "description": string;
         "features": string;
@@ -4562,11 +5046,6 @@ export interface TranslationKeys {
           "content": string;
         };
         "backToOverview": string;
-      };
-      "life_stages": {
-        "title": string;
-        "description": string;
-        "features": string;
       };
     };
     "teenHealth": {
@@ -4627,6 +5106,8 @@ export interface TranslationKeys {
       "en": string;
       "zh": string;
     };
+    "menu": string;
+    "close": string;
   };
   "languageSwitcher": {
     "chinese": string;
@@ -4637,21 +5118,37 @@ export interface TranslationKeys {
     };
   };
   "footer": {
+    "companyName": string;
     "description": string;
-    "copyright": string;
+    "linksTitle": string;
     "privacy": string;
     "terms": string;
-    "contact_email": string;
-    "disclaimer": string;
-    "linksTitle": string;
-    "contactTitle": string;
     "medicalDisclaimer": string;
     "articles": string;
     "naturalTherapies": string;
+    "contactTitle": string;
+    "contactEmail": string;
+    "socialDiscord": string;
+    "contactEmailSubject": string;
+    "contactEmailBody": string;
+    "socialTwitter": string;
+    "socialInstagram": string;
+    "copyright": string;
     "medicalDisclaimerFull": string;
+    "quickLinks": string;
+    "support": string;
+    "contactUs": string;
+    "helpCenter": string;
+    "email": string;
+    "support24": string;
+    "allRights": string;
+    "disclaimer": string;
   };
   "navigationTabs": {
     "articles": string;
+    "tools": string;
+    "downloads": string;
+    "guide": string;
     "professionalArticles": string;
     "pdfDownloads": string;
   };
@@ -4919,6 +5416,16 @@ export interface TranslationKeys {
         "moderate_late": string;
         "normal": string;
       };
+    };
+    "relaxationTechniques": {
+      "title": string;
+      "description": string;
+      "start": string;
+      "learnMore": string;
+    };
+    "symptomChecker": {
+      "title": string;
+      "description": string;
     };
   };
   "understandingPain": {
@@ -5514,6 +6021,115 @@ export interface TranslationKeys {
       "description": string;
       "button": string;
     };
+    "healthGuidePage": {
+      "title": string;
+      "description": string;
+      "keywords": string;
+      "hero": {
+        "title": string;
+        "description": string;
+      };
+      "whyGuide": {
+        "title": string;
+        "description": string;
+      };
+      "sections": {
+        "title": string;
+        "understandingPain": {
+          "title": string;
+          "description": string;
+          "cta": string;
+        };
+        "reliefMethods": {
+          "title": string;
+          "description": string;
+          "cta": string;
+        };
+        "whenSeekHelp": {
+          "title": string;
+          "description": string;
+          "cta": string;
+        };
+        "lifestyleManagement": {
+          "title": string;
+          "description": string;
+          "cta": string;
+        };
+        "mythsFacts": {
+          "title": string;
+          "description": string;
+          "cta": string;
+        };
+        "globalPerspective": {
+          "title": string;
+          "description": string;
+          "cta": string;
+        };
+      };
+      "tools": {
+        "title": string;
+        "painTracker": {
+          "title": string;
+          "description": string;
+        };
+        "painAssessment": {
+          "title": string;
+          "description": string;
+        };
+      };
+      "quickAccess": {
+        "title": string;
+        "medicalDisclaimer": string;
+        "medicalDisclaimerText": string;
+        "emergencyRelief": string;
+        "emergencyReliefDescription": string;
+        "personalizedAssessment": string;
+        "personalizedAssessmentDescription": string;
+        "startAssessment": string;
+        "methodsTechniques": string;
+      };
+    };
+    "campusGuide": {
+      "title": string;
+      "subtitle": string;
+      "description": string;
+      "sections": {
+        "classroom": {
+          "title": string;
+          "description": string;
+          "tips": string;
+        };
+        "dormitory": {
+          "title": string;
+          "description": string;
+          "tips": string;
+        };
+        "peClass": {
+          "title": string;
+          "description": string;
+          "tips": string;
+        };
+        "emergencyKit": {
+          "title": string;
+          "description": string;
+          "items": string;
+        };
+      };
+      "emergencyContacts": {
+        "title": string;
+        "schoolNurse": string;
+        "counselor": string;
+        "trustedAdult": string;
+        "parent": string;
+      };
+      "communication": {
+        "title": string;
+        "withTeachers": string;
+        "withPeers": string;
+        "withParents": string;
+        "sampleScripts": string;
+      };
+    };
   };
   "toolPage": {
     "backToTools": string;
@@ -5922,19 +6538,11 @@ export interface TranslationKeys {
       "title": string;
       "ibuprofen": {
         "title": string;
-        "points": {
-          "0": string;
-          "1": string;
-          "2": string;
-        };
+        "points": string;
       };
       "naproxen": {
         "title": string;
-        "points": {
-          "0": string;
-          "1": string;
-          "2": string;
-        };
+        "points": string;
       };
     };
     "safetyTitle": string;
@@ -5991,7 +6599,20 @@ export interface TranslationKeys {
         "description": string;
         "feature": string;
       };
+      "emergencyMedication": {
+        "title": string;
+        "description": string;
+        "feature": string;
+      };
+      "medicationVsNatural": {
+        "title": string;
+        "description": string;
+        "feature": string;
+      };
     };
+    "breadcrumbTitle": string;
+    "medicalReview": string;
+    "medicalReviewText": string;
   };
   "home": {
     "hero": {
@@ -6145,32 +6766,27 @@ export interface TranslationKeys {
         "cta": string;
       };
     };
-    "trusted": {
-      "title": string;
-      "metrics": {
-        "activeUsers": {
-          "number": string;
-          "label": string;
-        };
-        "articles": {
-          "number": string;
-          "label": string;
-        };
-        "resources": {
-          "number": string;
-          "label": string;
-        };
-        "satisfaction": {
-          "number": string;
-          "label": string;
-        };
-      };
-    };
     "quickNav": {
       "title": string;
       "constitutionTest": string;
       "symptomAssessment": string;
       "painTracker": string;
+    };
+    "faq": {
+      "title": string;
+      "subtitle": string;
+      "q1": {
+        "question": string;
+        "answer": string;
+      };
+      "q2": {
+        "question": string;
+        "answer": string;
+      };
+      "q3": {
+        "question": string;
+        "answer": string;
+      };
     };
   };
   "homePageContent": {
@@ -6252,6 +6868,11 @@ export interface TranslationKeys {
       "generalTime": string;
       "support": string;
       "supportTime": string;
+    };
+    "faq": {
+      "title": string;
+      "description": string;
+      "button": string;
     };
   };
   "breathingExercise": {
@@ -6375,6 +6996,25 @@ export interface TranslationKeys {
           };
         };
       };
+    };
+    "title": string;
+    "subtitle": string;
+    "categories": {
+      "pain": string;
+      "painDesc": string;
+      "nutrition": string;
+      "nutritionDesc": string;
+    };
+    "painRelief": string;
+    "antiInflammatory": string;
+    "heatTherapy": string;
+    "nutritionGuide": string;
+    "supplements": string;
+    "hydration": string;
+    "cta": {
+      "title": string;
+      "subtitle": string;
+      "button": string;
     };
   };
   "embeddedPainAssessment": {
@@ -6687,6 +7327,14 @@ export interface TranslationKeys {
       "interactiveTools": {
         "title": string;
         "description": string;
+        "breadcrumb": {
+          "emotionalSupport": string;
+          "communicationGuide": string;
+          "teenHealth": string;
+          "medicalCare": string;
+          "globalPerspectives": string;
+          "healthGuide": string;
+        };
       };
       "healthGuide": {
         "title": string;
@@ -6703,12 +7351,22 @@ export interface TranslationKeys {
   };
   "periodPainImpactCalculator": {
     "metaTitle": string;
-    "title": string;
-    "description": string;
-    "breadcrumbTitle": string;
+    "pageTitle": string;
+    "subtitle": string;
+    "breadcrumbHome": string;
+    "breadcrumbTools": string;
+    "breadcrumbCurrent": string;
+    "modeTitle": string;
+    "simplifiedMode": string;
+    "simplifiedDesc": string;
+    "detailedMode": string;
+    "detailedDesc": string;
+    "medicalMode": string;
+    "medicalDesc": string;
     "startButton": string;
     "impactButton": string;
-    "cta": string;
+    "backButton": string;
+    "disclaimer": string;
   };
   "0-2": string;
   "3-4": string;
@@ -6757,7 +7415,577 @@ export interface TranslationKeys {
   "lifestyleRecommendations": string;
   "sleep": string;
   "stress": string;
-  "stressManagement": string;
+  "stressManagement": {
+    "title": string;
+    "description": string;
+    "pageTitle": string;
+    "keywords": string;
+    "subtitle": string;
+    "startAssessment": string;
+    "learnMore": string;
+    "backToTools": string;
+    "next": string;
+    "previous": string;
+    "complete": string;
+    "restart": string;
+    "save": string;
+    "cancel": string;
+    "continue": string;
+    "skip": string;
+    "stressLevels": {
+      "low": string;
+      "moderate": string;
+      "high": string;
+      "severe": string;
+      "lowDesc": string;
+      "moderateDesc": string;
+      "highDesc": string;
+      "severeDesc": string;
+    };
+    "resources": {
+      "title": string;
+      "subtitle": string;
+      "articles": {
+        "title": string;
+        "stressAndMenstruation": string;
+        "relaxationTechniques": string;
+        "mindfulnessBenefits": string;
+      };
+      "tools": {
+        "title": string;
+        "painTracker": string;
+        "cycleTracker": string;
+        "breathingExercise": string;
+      };
+      "support": {
+        "title": string;
+        "community": string;
+        "professionalHelp": string;
+        "emergencyContacts": string;
+      };
+    };
+    "tips": {
+      "title": string;
+      "subtitle": string;
+      "daily": {
+        "title": string;
+        "regularSleep": string;
+        "healthyDiet": string;
+        "moderateExercise": string;
+        "socialConnection": string;
+      };
+      "emergency": {
+        "title": string;
+        "deepBreathing": string;
+        "progressiveRelaxation": string;
+        "positiveThinking": string;
+        "seekHelp": string;
+      };
+      "prevention": {
+        "title": string;
+        "identifyTriggers": string;
+        "timeManagement": string;
+        "boundarySetting": string;
+        "selfCare": string;
+      };
+    };
+    "common": {
+      "loading": string;
+      "error": string;
+      "retry": string;
+      "success": string;
+      "failed": string;
+      "saved": string;
+      "deleted": string;
+      "updated": string;
+      "created": string;
+      "noData": string;
+      "tryAgain": string;
+      "contactSupport": string;
+      "importantNote": string;
+      "medicalDisclaimer": string;
+      "showDetails": string;
+      "hideDetails": string;
+      "learnMore": string;
+      "breadcrumb": {
+        "home": string;
+        "interactiveTools": string;
+      };
+    };
+    "neuroendocrine": {
+      "title": string;
+      "subtitle": string;
+      "detailedExplanation": string;
+      "acute": {
+        "title": string;
+        "description": string;
+      };
+      "chronic": {
+        "title": string;
+        "description": string;
+      };
+      "keyInsight": string;
+      "keyInsightDescription": string;
+    };
+    "evolutionary": {
+      "title": string;
+      "subtitle": string;
+      "mainTitle": string;
+      "mainDescription": string;
+      "storyTitle": string;
+      "storyContent": string;
+      "modernTitle": string;
+      "modernContent": string;
+      "realizationTitle": string;
+      "realization1": string;
+      "realization2": string;
+      "realization3": string;
+      "practicalTitle": string;
+      "practicalDescription": string;
+      "selfTalk": string;
+      "action1": {
+        "title": string;
+        "description": string;
+      };
+      "action2": {
+        "title": string;
+        "description": string;
+      };
+      "detailsTitle": string;
+      "detail1": {
+        "title": string;
+        "content": string;
+      };
+      "detail2": {
+        "title": string;
+        "content": string;
+      };
+      "detail3": {
+        "title": string;
+        "content": string;
+      };
+    };
+    "stressTypes": {
+      "comparison": {
+        "title": string;
+        "subtitle": string;
+        "keyTakeaway": string;
+        "keyTakeawayContent": string;
+        "action1": {
+          "title": string;
+          "description": string;
+        };
+        "action2": {
+          "title": string;
+          "description": string;
+        };
+      };
+    };
+    "assessment": {
+      "title": string;
+      "subtitle": string;
+      "instructions": string;
+      "instructionsDetail": string;
+      "questionsPreview": {
+        "title": string;
+      };
+      "q1": {
+        "question": string;
+        "option1": string;
+        "option2": string;
+        "option3": string;
+        "option4": string;
+      };
+      "q2": {
+        "question": string;
+        "option1": string;
+        "option2": string;
+        "option3": string;
+        "option4": string;
+      };
+      "q3": {
+        "question": string;
+        "option1": string;
+        "option2": string;
+        "option3": string;
+        "option4": string;
+      };
+      "q4": {
+        "question": string;
+        "option1": string;
+        "option2": string;
+        "option3": string;
+        "option4": string;
+      };
+      "q5": {
+        "question": string;
+        "option1": string;
+        "option2": string;
+        "option3": string;
+        "option4": string;
+      };
+      "q6": {
+        "question": string;
+        "option1": string;
+        "option2": string;
+        "option3": string;
+        "option4": string;
+      };
+      "q7": {
+        "question": string;
+        "option1": string;
+        "option2": string;
+        "option3": string;
+        "option4": string;
+      };
+      "q8": {
+        "question": string;
+        "option1": string;
+        "option2": string;
+        "option3": string;
+        "option4": string;
+      };
+      "q9": {
+        "question": string;
+        "option1": string;
+        "option2": string;
+        "option3": string;
+        "option4": string;
+      };
+      "q10": {
+        "question": string;
+        "option1": string;
+        "option2": string;
+        "option3": string;
+        "option4": string;
+      };
+      "selectOption": string;
+      "benefits": {
+        "title": string;
+        "personalized": {
+          "title": string;
+          "description": string;
+        };
+        "tracking": {
+          "title": string;
+          "description": string;
+        };
+        "insights": {
+          "title": string;
+          "description": string;
+        };
+      };
+      "keywords": string;
+      "privacy": {
+        "notice": {
+          "title": string;
+          "description": string;
+        };
+      };
+      "personalizedRecommendations": {
+        "low": {
+          "maintain": {
+            "title": string;
+            "description": string;
+          };
+        };
+        "moderate": {
+          "relax": {
+            "title": string;
+            "description": string;
+          };
+        };
+        "high": {
+          "help": {
+            "title": string;
+            "description": string;
+          };
+        };
+      };
+      "radar": {
+        "title": string;
+        "subtitle": string;
+        "labels": string;
+      };
+    };
+    "techniques": {
+      "title": string;
+      "subtitle": string;
+      "benefits": {
+        "title": string;
+      };
+      "breathing": {
+        "title": string;
+        "description": string;
+        "start": string;
+        "instructions": string;
+        "instructionsDetail": string;
+        "benefits": {
+          "benefit1": string;
+          "benefit2": string;
+          "benefit3": string;
+        };
+      };
+      "meditation": {
+        "title": string;
+        "description": string;
+        "start": string;
+        "instructions": string;
+        "instructionsDetail": string;
+        "benefits": {
+          "benefit1": string;
+          "benefit2": string;
+          "benefit3": string;
+        };
+      };
+      "exercise": {
+        "title": string;
+        "description": string;
+        "start": string;
+        "instructions": string;
+        "instructionsDetail": string;
+        "benefits": {
+          "benefit1": string;
+          "benefit2": string;
+          "benefit3": string;
+        };
+      };
+      "music": {
+        "title": string;
+        "description": string;
+        "start": string;
+        "instructions": string;
+        "instructionsDetail": string;
+        "benefits": {
+          "benefit1": string;
+          "benefit2": string;
+          "benefit3": string;
+        };
+      };
+      "quickTips": {
+        "title": string;
+        "timing": {
+          "title": string;
+          "tip1": string;
+          "tip2": string;
+          "tip3": string;
+          "tip4": string;
+        };
+        "precautions": {
+          "title": string;
+          "tip1": string;
+          "tip2": string;
+          "tip3": string;
+          "tip4": string;
+        };
+      };
+    };
+    "progress": {
+      "title": string;
+      "subtitle": string;
+      "keywords": string;
+      "today": string;
+      "week": string;
+      "month": string;
+      "addEntry": {
+        "title": string;
+        "subtitle": string;
+      };
+      "features": {
+        "stressLevel": {
+          "title": string;
+          "description": string;
+        };
+        "techniquesUsed": {
+          "title": string;
+          "description": string;
+        };
+        "moodRating": {
+          "title": string;
+          "description": string;
+        };
+        "notes": {
+          "title": string;
+          "description": string;
+        };
+      };
+      "viewHistory": {
+        "title": string;
+        "today": {
+          "description": string;
+        };
+        "week": {
+          "description": string;
+        };
+        "month": {
+          "description": string;
+        };
+      };
+      "sampleData": {
+        "title": string;
+        "averageStress": string;
+        "techniquesUsed": string;
+        "averageMood": string;
+      };
+      "benefits": {
+        "title": string;
+        "insights": {
+          "title": string;
+          "description": string;
+        };
+        "trends": {
+          "title": string;
+          "description": string;
+        };
+        "motivation": {
+          "title": string;
+          "description": string;
+        };
+      };
+    };
+    "quantifiedImpact": {
+      "title": string;
+      "subtitle": string;
+      "metrics": {
+        "anxiety": {
+          "title": string;
+        };
+        "depression": {
+          "title": string;
+        };
+        "irritability": {
+          "title": string;
+        };
+      };
+      "emotionalImpact": {
+        "title": string;
+        "subtitle": string;
+        "lowStress": string;
+        "highStress": string;
+        "details": {
+          "title": string;
+          "anxiety": string;
+          "depression": string;
+          "irritability": string;
+        };
+      };
+      "menstrualImpact": {
+        "title": string;
+        "cycleLength": {
+          "title": string;
+          "lowStress": string;
+          "highStress": string;
+        };
+        "painIntensity": {
+          "title": string;
+          "lowStress": string;
+          "highStress": string;
+        };
+        "flowChanges": {
+          "title": string;
+          "lowStress": string;
+          "highStress": string;
+        };
+        "lowStress": string;
+        "highStress": string;
+      };
+      "keyInsights": {
+        "title": string;
+        "insight1": {
+          "title": string;
+          "description": string;
+        };
+        "insight2": {
+          "title": string;
+          "description": string;
+        };
+        "insight3": {
+          "title": string;
+          "description": string;
+        };
+        "insight4": {
+          "title": string;
+          "description": string;
+        };
+      };
+      "actionItems": {
+        "immediate": {
+          "title": string;
+          "description": string;
+        };
+        "longterm": {
+          "title": string;
+          "description": string;
+        };
+      };
+    };
+    "results": {
+      "title": string;
+      "subtitle": string;
+      "score": string;
+      "basicRecommendations": string;
+      "stressLevels": {
+        "low": string;
+        "moderate": string;
+        "high": string;
+        "severe": string;
+      };
+      "personalizedActionPlan": {
+        "title": string;
+        "step": string;
+        "recommendation": string;
+      };
+      "unlockCompleteReport": {
+        "title": string;
+        "description": string;
+        "button": string;
+      };
+      "detailedAnalysis": {
+        "title": string;
+        "stressAnalysis": {
+          "title": string;
+          "description": string;
+        };
+        "improvementFocus": {
+          "title": string;
+          "description": string;
+        };
+      };
+    };
+    "paywall": {
+      "title": string;
+      "subtitle": string;
+      "thanksMessage": string;
+      "comparison": {
+        "free": {
+          "title": string;
+          "features": {
+            "questions": string;
+            "score": string;
+            "radar": string;
+            "analysis": string;
+          };
+        };
+        "premium": {
+          "title": string;
+          "badge": string;
+          "features": {
+            "report": string;
+            "phq9": string;
+            "management": string;
+          };
+        };
+      };
+    };
+    "alerts": {
+      "paymentComingSoon": string;
+    };
+    "buttons": {
+      "viewFreeResults": string;
+      "comingSoon": string;
+      "restartAssessment": string;
+    };
+  };
   "medical": string;
   "medicalAdvice": string;
   "doctor": string;
@@ -6822,11 +8050,6 @@ export interface TranslationKeys {
   "api": string;
   "reference": string;
   "workplaceWellness": {
-    "meta": {
-      "title": string;
-      "description": string;
-      "keywords": string;
-    };
     "header": {
       "title": string;
       "subtitle": string;
@@ -6843,6 +8066,13 @@ export interface TranslationKeys {
       "title": string;
       "subtitle": string;
       "recordButton": string;
+      "addRecord": string;
+      "date": string;
+      "type": string;
+      "typePeriod": string;
+      "typePredicted": string;
+      "typeOvulation": string;
+      "painLevel": string;
       "days": {
         "sun": string;
         "mon": string;
@@ -6857,152 +8087,49 @@ export interface TranslationKeys {
       "statCycle": string;
       "statLength": string;
       "statNext": string;
+    };
+    "history": {
+      "title": string;
       "addRecord": string;
+      "export": string;
+      "searchPlaceholder": string;
+      "filters": string;
+      "painLevel": string;
+      "flow": string;
       "date": string;
       "type": string;
-      "typePeriod": string;
-      "typePredicted": string;
-      "typeOvulation": string;
-      "painLevel": string;
+      "pain": string;
+      "notes": string;
+      "actions": string;
+      "view": string;
+      "edit": string;
+      "delete": string;
     };
-    "workImpact": {
-      "title": string;
-      "painLevel": string;
-      "efficiency": string;
-      "adjustment": string;
-      "adjustOptions": {
-        "takeLeave": string;
-        "workFromHome": string;
-        "postponeMeeting": string;
-        "reduceTasks": string;
-      };
-      "saveButton": string;
-      "templatesTitle": string;
-      "severity": {
-        "mild": string;
-        "moderate": string;
-        "severe": string;
-      };
-      "preview": string;
-      "subject": string;
-      "content": string;
-      "copyButton": string;
-    };
-    "nutrition": {
-      "title": string;
-      "phaseLabel": string;
-      "phases": {
-        "menstrual": string;
-        "follicular": string;
-        "ovulation": string;
-        "luteal": string;
-      };
-      "phaseIcons": {
-        "menstrual": string;
-        "follicular": string;
-        "ovulation": string;
-        "luteal": string;
-      };
-      "constitutionLabel": string;
-      "constitutions": {
-        "qi_deficiency": string;
-        "yang_deficiency": string;
-        "yin_deficiency": string;
-        "blood_deficiency": string;
-        "balanced": string;
-      };
-      "foodTitle": string;
-      "searchPlaceholder": string;
-      "tcmNature": {
-        "warm": string;
-        "cool": string;
-        "neutral": string;
-      };
-      "benefitsLabel": string;
-      "nutrientsLabel": string;
-      "addButton": string;
-      "noResults": string;
-      "planTitle": string;
-      "meals": {
-        "breakfast": string;
-        "lunch": string;
-        "dinner": string;
-        "snack": string;
-      };
-      "generateButton": string;
-      "selectedFoods": string;
-      "planGenerated": string;
-      "mealSuggestions": {
-        "breakfast": string;
-        "lunch": string;
-        "dinner": string;
-        "snack": string;
-      };
-    };
-    "export": {
-      "title": string;
-      "subtitle": string;
-      "contentLabel": string;
-      "types": {
-        "period": string;
-        "period_desc": string;
-        "nutrition": string;
-        "nutrition_desc": string;
-        "all": string;
-        "all_desc": string;
-      };
-      "formatLabel": string;
-      "formats": {
-        "json": string;
-        "json_desc": string;
-        "csv": string;
-        "csv_desc": string;
-        "pdf": string;
-        "pdf_desc": string;
-      };
-      "exportButton": string;
-      "exportingButton": string;
-      "downloadButton": string;
-      "successMessage": string;
-      "errorMessage": string;
-      "privacyTitle": string;
-      "privacyContent": string;
-      "periodTypes": {
-        "period": string;
-        "predicted": string;
-        "ovulation": string;
-      };
-      "flowTypes": {
-        "light": string;
-        "medium": string;
-        "heavy": string;
-      };
-      "showSettings": string;
-      "securityWarnings": string;
+    "sections": {
+      "workplaceArticles": string;
+      "relatedTools": string;
+      "scenarioSolutions": string;
     };
     "charts": {
       "title": string;
+      "selectChart": string;
+      "days": string;
       "totalCycles": string;
       "averageCycleLength": string;
       "averagePainLevel": string;
       "cycleRegularity": string;
-      "days": string;
       "regularity": {
         "regular": string;
         "irregular": string;
-        "very-irregular": string;
       };
       "predictions": string;
       "nextPeriod": string;
       "nextOvulation": string;
       "currentPhase": string;
       "confidence": string;
-      "tabs": {
-        "overview": string;
-        "cycleLength": string;
-        "painLevel": string;
-        "flowType": string;
-      };
+      "cycleLengthDistribution": string;
+      "painLevelDistribution": string;
+      "flowTypeDistribution": string;
       "cycleLength": string;
       "painLevel": string;
       "flowType": string;
@@ -7011,89 +8138,71 @@ export interface TranslationKeys {
         "medium": string;
         "heavy": string;
       };
-      "cycleLengthDistribution": string;
-      "painLevelDistribution": string;
-      "flowTypeDistribution": string;
-      "selectChart": string;
+      "tabs": {
+        "overview": string;
+        "cycleLength": string;
+        "painLevel": string;
+        "flowType": string;
+      };
     };
-    "history": {
-      "title": string;
-      "addRecord": string;
-      "export": string;
+    "nutrition": {
+      "phaseLabel": string;
+      "phaseIcons": {
+        "menstrual": string;
+        "follicular": string;
+        "ovulation": string;
+        "luteal": string;
+      };
+      "phases": {
+        "menstrual": string;
+        "follicular": string;
+        "ovulation": string;
+        "luteal": string;
+      };
+      "constitutionLabel": string;
+      "constitutions": {
+        "balanced": string;
+        "qiDeficient": string;
+        "bloodDeficient": string;
+        "yangDeficient": string;
+        "yinDeficient": string;
+        "dampHeat": string;
+        "cold": string;
+        "qi_deficiency": string;
+        "yang_deficiency": string;
+        "yin_deficiency": string;
+        "blood_deficiency": string;
+      };
+      "foodTitle": string;
       "searchPlaceholder": string;
-      "filters": string;
-      "dateRange": string;
-      "startDate": string;
-      "endDate": string;
-      "type": string;
-      "allTypes": string;
-      "painLevel": string;
-      "allLevels": string;
-      "lowPain": string;
-      "mediumPain": string;
-      "highPain": string;
-      "flow": string;
-      "allFlows": string;
-      "clearFilters": string;
-      "resultsCount": string;
-      "date": string;
-      "notes": string;
-      "actions": string;
-      "noData": string;
-      "view": string;
-      "edit": string;
-      "delete": string;
-      "recordDetails": string;
-      "close": string;
-    };
-    "analysis": {
-      "advancedTitle": string;
-      "tabs": {
-        "overview": string;
-        "trends": string;
-        "comparison": string;
-        "insights": string;
+      "tcmNature": {
+        "cold": string;
+        "cool": string;
+        "neutral": string;
+        "warm": string;
+        "hot": string;
       };
-      "avgCycleLength": string;
-      "avgPeriodLength": string;
-      "avgPainLevel": string;
-      "confidence": string;
-      "cycleLength": string;
-      "avgPain": string;
-      "commonFlow": string;
-      "noTrendData": string;
-      "noComparisonData": string;
-      "comparisonTitle": string;
-      "currentPeriod": string;
-      "previousPeriod": string;
-      "averageCycle": string;
-      "trendUp": string;
-      "trendDown": string;
-      "trendStable": string;
-    };
-    "symptoms": {
+      "benefitsLabel": string;
+      "nutrientsLabel": string;
+      "addButton": string;
+      "planTitle": string;
+      "meals": {
+        "breakfast": string;
+        "lunch": string;
+        "dinner": string;
+        "snack": string;
+      };
+      "mealSuggestions": {
+        "breakfast": string;
+        "lunch": string;
+        "dinner": string;
+        "snack": string;
+      };
+      "generateButton": string;
       "title": string;
-      "tabs": {
-        "overview": string;
-        "patterns": string;
-        "trends": string;
-        "recommendations": string;
-      };
-      "noData": string;
-      "frequency": string;
-      "lastOccurrence": string;
-      "severity": string;
-      "cramps": string;
-      "bloating": string;
-      "headache": string;
-      "fatigue": string;
-      "mood_swings": string;
-      "breast_tenderness": string;
-      "back_pain": string;
-      "nausea": string;
-      "insomnia": string;
-      "anxiety": string;
-      "trendsComingSoon": string;
+      "noResults": string;
+      "selectedFoods": string;
+      "planGenerated": string;
     };
     "patterns": {
       "crampsBloating": string;
@@ -7115,6 +8224,26 @@ export interface TranslationKeys {
       "sleepHygiene": string;
       "generalCare": string;
     };
+    "workImpact": {
+      "title": string;
+      "painLevel": string;
+      "efficiency": string;
+      "adjustment": string;
+      "adjustOptions": {
+        "takeLeave": string;
+        "workFromHome": string;
+        "postponeMeeting": string;
+        "reduceTasks": string;
+      };
+      "saveButton": string;
+      "templatesTitle": string;
+      "subject": string;
+      "severity": {
+        "mild": string;
+        "moderate": string;
+        "severe": string;
+      };
+    };
     "workAnalysis": {
       "title": string;
       "tabs": {
@@ -7124,9 +8253,9 @@ export interface TranslationKeys {
         "insights": string;
       };
       "noData": string;
-      "avgEfficiency": string;
       "avgPain": string;
       "avgProductivity": string;
+      "avgEfficiency": string;
       "adjustmentRate": string;
       "recentTrends": string;
       "efficiency": string;
@@ -7137,36 +8266,91 @@ export interface TranslationKeys {
       "productivityTrend": string;
       "recommendation": string;
     };
-    "workInsights": {
-      "highEfficiency": string;
-      "highEfficiencyDesc": string;
-      "maintainRoutine": string;
-      "lowEfficiency": string;
-      "lowEfficiencyDesc": string;
-      "improveWorkflow": string;
-      "highPainImpact": string;
-      "highPainImpactDesc": string;
-      "painManagement": string;
-      "frequentAdjustments": string;
-      "frequentAdjustmentsDesc": string;
-      "planAhead": string;
+    "analysis": {
+      "advancedTitle": string;
+      "tabs": {
+        "overview": string;
+        "trends": string;
+        "comparison": string;
+        "insights": string;
+      };
+      "avgCycleLength": string;
+      "avgPeriodLength": string;
+      "avgPainLevel": string;
+      "avgPain": string;
+      "confidence": string;
+      "cycleLength": string;
+      "noComparisonData": string;
     };
     "insights": {
-      "regularCycle": string;
-      "regularCycleDesc": string;
       "irregularCycle": string;
       "irregularCycleDesc": string;
-      "highPain": string;
-      "highPainDesc": string;
-      "lowPain": string;
-      "lowPainDesc": string;
-      "highAccuracy": string;
-      "highAccuracyDesc": string;
+    };
+    "common": {
+      "loading": string;
+      "error": string;
+      "success": string;
+      "save": string;
+      "cancel": string;
+      "delete": string;
+      "edit": string;
+      "add": string;
+      "search": string;
+      "confirm": string;
+      "reset": string;
+    };
+    "symptoms": {
+      "title": string;
+      "tabs": {
+        "overview": string;
+        "patterns": string;
+        "trends": string;
+        "recommendations": string;
+      };
+      "noData": string;
+    };
+    "export": {
+      "title": string;
+      "securityWarnings": string;
+      "contentLabel": string;
+      "types": {
+        "period": string;
+        "period_desc": string;
+        "nutrition": string;
+        "nutrition_desc": string;
+        "all": string;
+        "all_desc": string;
+      };
+      "formatLabel": string;
+      "formats": {
+        "json": string;
+        "json_desc": string;
+        "csv": string;
+        "csv_desc": string;
+        "pdf": string;
+        "pdf_desc": string;
+      };
+      "exportButton": string;
+      "privacyTitle": string;
+      "privacyContent": string;
+      "showSettings": string;
+      "periodTypes": {
+        "period": string;
+        "predicted": string;
+        "ovulation": string;
+      };
+      "flowTypes": {
+        "light": string;
+        "medium": string;
+        "heavy": string;
+      };
     };
     "userPreferences": {
       "title": string;
       "reset": string;
       "save": string;
+      "saving": string;
+      "resetConfirm": string;
       "uiPreferences": string;
       "notificationSettings": string;
       "privacySettings": string;
@@ -7178,15 +8362,20 @@ export interface TranslationKeys {
       "compactMode": string;
       "dateFormat": string;
       "timeFormat": string;
-      "notifications": {
-        "title": string;
-        "enableAll": string;
-        "browser": string;
-        "email": string;
-        "sms": string;
-        "push": string;
-        "reminderTime": string;
-      };
+      "notifications": string;
+      "browser": string;
+      "email": string;
+      "sms": string;
+      "push": string;
+      "reminderTime": string;
+      "dataCollection": string;
+      "analytics": string;
+      "personalization": string;
+      "shareProgress": string;
+      "anonymousMode": string;
+      "exportPassword": string;
+      "dataRetention": string;
+      "autoDelete": string;
       "highContrast": string;
       "reducedMotion": string;
       "screenReader": string;
@@ -7196,14 +8385,6 @@ export interface TranslationKeys {
       "defaultFormat": string;
       "autoSave": string;
       "includeCharts": string;
-      "dataCollection": string;
-      "analytics": string;
-      "personalization": string;
-      "shareProgress": string;
-      "anonymousMode": string;
-      "exportPassword": string;
-      "dataRetention": string;
-      "autoDelete": string;
     };
     "notificationTypes": {
       "reminder": string;
@@ -7211,19 +8392,65 @@ export interface TranslationKeys {
       "update": string;
       "alert": string;
     };
-    "common": {
-      "save": string;
-      "cancel": string;
-      "confirm": string;
-      "delete": string;
-      "edit": string;
-      "add": string;
-      "search": string;
-      "loading": string;
-      "error": string;
-      "success": string;
-      "warning": string;
-      "info": string;
+    "notificationChannels": {
+      "browser": string;
+      "email": string;
+      "sms": string;
+      "push": string;
+    };
+    "themeConfig": {
+      "light": {
+        "name": string;
+        "description": string;
+      };
+      "dark": {
+        "name": string;
+        "description": string;
+      };
+      "auto": {
+        "name": string;
+        "description": string;
+      };
+      "system": {
+        "name": string;
+        "description": string;
+      };
+    };
+    "fontSizeConfig": {
+      "small": {
+        "name": string;
+        "description": string;
+      };
+      "medium": {
+        "name": string;
+        "description": string;
+      };
+      "large": {
+        "name": string;
+        "description": string;
+      };
+    };
+    "timeFormatConfig": {
+      "24h": string;
+      "12h": string;
+    };
+    "frequencyConfig": {
+      "immediate": string;
+      "daily": string;
+      "weekly": string;
+    };
+    "exportFormatConfig": {
+      "pdf": string;
+      "json": string;
+      "csv": string;
+      "xlsx": string;
+    };
+    "descriptions": {
+      "animations": string;
+      "compactMode": string;
+      "notifications": string;
+      "autoSave": string;
+      "includeCharts": string;
     };
   };
   "anchorTexts": {
@@ -7270,6 +8497,14 @@ export interface TranslationKeys {
       "tcm_nutrition": string;
       "natural": string;
       "comprehensive": string;
+      "cycle_knowledge": string;
+      "cycle_nutrition": string;
+      "cycle_management": string;
+      "anti_inflammatory": string;
+      "ginger_tea": string;
+      "natural_therapy": string;
+      "tcm_exercise": string;
+      "diet": string;
     };
     "solutions": {
       "exercise_balance_new": string;
@@ -7282,6 +8517,9 @@ export interface TranslationKeys {
       "natural_therapies": string;
       "scenarios": string;
       "teen_main": string;
+      "teen_health": string;
+      "partner_communication": string;
+      "life_stages": string;
       "commute": string;
       "campus_emergency": string;
       "social": string;
@@ -7481,6 +8719,341 @@ export interface TranslationKeys {
         "entireAgreement": string;
         "contactTitle": string;
         "contact": string;
+      };
+    };
+  };
+  "articlePage": {
+    "breadcrumb": {
+      "home": string;
+      "articles": string;
+    };
+    "content": {
+      "articleSummary": string;
+      "healthExpert": string;
+      "quickActions": string;
+      "moreArticles": string;
+      "medicalDisclaimer": {
+        "title": string;
+        "content": string;
+      };
+      "relatedArticles": {
+        "title": string;
+        "subtitle": string;
+        "readMore": string;
+      };
+    };
+    "tags": {
+      "health": string;
+      "nutrition": string;
+      "exercise": string;
+      "medical": string;
+      "lifestyle": string;
+      "wellness": string;
+      "therapy": string;
+      "management": string;
+      "natural-therapies": string;
+      "natural-therapy": string;
+      "traditional-therapies": string;
+      "traditional-therapy": string;
+      "immediate-relief": string;
+      "understanding-education": string;
+      "health-management": string;
+      "medical-education": string;
+      "medical-knowledge": string;
+      "medical-guide": string;
+      "nutrition-health": string;
+      "nutrition--health": string;
+      "understanding--education": string;
+      "preparation-planning": string;
+      "symptom-management": string;
+      "comprehensive-guides": string;
+      "contraception-guide": string;
+      "education": string;
+      "health-education": string;
+      "理解与教育": string;
+      "即时缓解方案": string;
+      "自然疗法与平时调理": string;
+      "快速缓解": string;
+      "即时缓解": string;
+      "痛经": string;
+      "痉挛": string;
+      "紧急技巧": string;
+      "立即缓解": string;
+      "抗炎饮食": string;
+      "营养": string;
+      "经期饮食": string;
+      "自然疗法": string;
+      "月经健康": string;
+      "经期食物": string;
+      "避孕": string;
+      "IUD": string;
+      "宫内节育器": string;
+      "女性健康": string;
+      "生殖健康": string;
+      "医学诊断": string;
+      "药物治疗": string;
+      "妇科疾病": string;
+      "前列腺素": string;
+      "继发性痛经": string;
+      "NSAIDs": string;
+      "激素治疗": string;
+      "睡眠质量": string;
+      "21天计划": string;
+      "睡眠卫生": string;
+      "激素睡眠": string;
+      "睡眠监测": string;
+      "痛经管理": string;
+      "职业压力": string;
+      "生活方式": string;
+      "环境因素": string;
+      "健康管理": string;
+      "草药茶": string;
+      "痛经缓解": string;
+      "传统医学": string;
+      "植物疗法": string;
+      "精油疗法": string;
+      "芳香疗法": string;
+      "生姜疗法": string;
+      "草药治疗": string;
+      "科学方法": string;
+      "阿育吠陀": string;
+      "中医": string;
+      "热敷疗法": string;
+      "物理疗法": string;
+      "温度控制": string;
+      "预防调理": string;
+      "科学配方": string;
+      "心理健康": string;
+      "压力缓解": string;
+      "心理疏导": string;
+      "认知行为疗法": string;
+      "正念疗法": string;
+      "自主神经检测": string;
+      "快速缓解技巧": string;
+      "家庭护理": string;
+      "穴位按压": string;
+      "营养调理": string;
+      "居家治疗": string;
+      "长期健康": string;
+      "经期管理": string;
+      "预防保健": string;
+      "可持续发展": string;
+      "健康习惯": string;
+      "镁补充": string;
+      "肠道健康": string;
+      "雌激素代谢": string;
+      "益生菌": string;
+      "饮食指导": string;
+      "就医指南": string;
+      "治疗选择": string;
+      "个性化医疗": string;
+      "腰部护理": string;
+      "经期腰痛": string;
+      "疼痛管理": string;
+      "医学指导": string;
+      "经期恶心": string;
+      "痛经呕吐": string;
+      "应急处理": string;
+      "痛经伴随症状": string;
+      "经期腹胀": string;
+      "经期呕吐": string;
+      "经期发烧": string;
+      "症状矩阵": string;
+      "危险信号": string;
+      "背痛": string;
+      "疼痛机制": string;
+      "神经传导": string;
+      "症状管理": string;
+      "牵涉痛": string;
+      "自然缓解": string;
+      "应急药物": string;
+      "药物携带": string;
+      "用药安全": string;
+      "紧急处理": string;
+      "痛经FAQ": string;
+      "专家解答": string;
+      "痛经机制": string;
+      "疼痛评估": string;
+      "医学科普": string;
+      "循证医学": string;
+      "研究进展": string;
+      "新药开发": string;
+      "病理机制": string;
+      "临床试验": string;
+      "痛经鉴别": string;
+      "腹痛诊断": string;
+      "预防性护理": string;
+      "全周期管理": string;
+      "个体化方案": string;
+      "症状监测": string;
+      "经期睡眠": string;
+      "睡眠改善": string;
+      "激素影响": string;
+      "睡眠环境": string;
+      "压力管理": string;
+      "职场健康": string;
+      "心理调节": string;
+      "HPA轴": string;
+      "皮质醇管理": string;
+      "热疗": string;
+      "冷疗": string;
+      "按摩疗法": string;
+      "瑜伽": string;
+      "针灸": string;
+      "艾灸": string;
+      "草药疗法": string;
+      "营养补充": string;
+      "呼吸法": string;
+      "冥想": string;
+      "安全用药": string;
+      "剂量计算": string;
+      "医学专业": string;
+      "营养饮食": string;
+      "经期护理": string;
+      "食疗养生": string;
+      "健康食谱": string;
+      "经痛模拟器": string;
+      "疼痛科学": string;
+      "医学设备": string;
+      "疼痛教育": string;
+      "性别理解": string;
+      "经期追踪": string;
+      "健康档案": string;
+      "症状记录": string;
+      "个性化管理": string;
+      "数据分析": string;
+      "阅读推荐": string;
+      "经期教育": string;
+      "激素原理": string;
+      "子宫内膜异位症": string;
+      "IUD痛经": string;
+      "更年期痛经": string;
+      "疼痛识别": string;
+      "个性化治疗": string;
+      "月经周期": string;
+      "激素": string;
+      "科普教育": string;
+      "医疗保险": string;
+      "ACA政策": string;
+      "Medicare改革": string;
+      "保险理赔": string;
+      "医疗费用": string;
+      "痛经急诊": string;
+      "何时就医": string;
+      "医疗急诊": string;
+      "经期警示": string;
+      "紧急症状": string;
+      "就医指导": string;
+      "经期健康": string;
+      "警示信号": string;
+      "生命周期": string;
+      "年龄特点": string;
+      "科学管理": string;
+      "全程指导": string;
+      "北美指南": string;
+      "站桩": string;
+      "八段锦": string;
+      "太极拳": string;
+      "传统功法": string;
+      "科学研究": string;
+      "中医养生": string;
+      "气血调理": string;
+      "避孕指导": string;
+      "医学知识与教育": string;
+      "营养与健康": string;
+      "计划准备": string;
+      "健康管理与自我护理": string;
+      "传统疗法与现代应用": string;
+    };
+  };
+  "manifest": {
+    "name": string;
+    "shortName": string;
+    "description": string;
+    "shortcuts": {
+      "immediateRelief": {
+        "name": string;
+        "shortName": string;
+        "description": string;
+      };
+      "articles": {
+        "name": string;
+        "shortName": string;
+        "description": string;
+      };
+      "tools": {
+        "name": string;
+        "shortName": string;
+        "description": string;
+      };
+    };
+  };
+  "teen": {
+    "title": string;
+    "subtitle": string;
+    "welcome": {
+      "title": string;
+      "message": string;
+    };
+    "basics": {
+      "title": string;
+      "description": string;
+    };
+    "firstPeriod": {
+      "title": string;
+      "description": string;
+    };
+    "products": {
+      "title": string;
+      "description": string;
+    };
+    "support": {
+      "title": string;
+      "description": string;
+    };
+    "learnMore": string;
+    "cta": {
+      "title": string;
+      "subtitle": string;
+      "button": string;
+    };
+  };
+  "about": {
+    "title": string;
+    "subtitle": string;
+    "mission": {
+      "title": string;
+      "description": string;
+    };
+    "contact": {
+      "title": string;
+      "description": string;
+      "button": string;
+    };
+  };
+  "ui": {
+    "questionProgress": string;
+    "advancedQuestion": string;
+    "premiumQuestion": string;
+    "personalizedRecommendations": string;
+    "recommendationItem": string;
+    "recommendationCustom": string;
+    "thanksMessage": string;
+  };
+  "paywall": {
+    "description": {
+      "title": string;
+      "subtitle": string;
+      "features": string;
+    };
+    "comparison": {
+      "free": {
+        "title": string;
+        "limitations": string;
+      };
+      "premium": {
+        "title": string;
+        "benefits": string;
       };
     };
   };

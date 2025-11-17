@@ -7816,6 +7816,7 @@
   "breathingExercise": {
     "title": "4-7-8呼吸练习",
     "description": "基于科学验证的4-7-8呼吸法，通过调节神经系统快速缓解疼痛。无需下载，立即开始练习。",
+    "iconLabel": "呼吸练习图标",
     "usageTips": {
       "title": "使用建议：",
       "bestTiming": {
@@ -8629,6 +8630,18 @@
     "pageTitle": "经期压力管理工具 - 科学减压方案 | PeriodHub",
     "keywords": "压力管理,经期压力,月经健康,压力缓解,放松技巧,职场压力,女性健康",
     "subtitle": "帮助你有效管理经期相关的压力和焦虑",
+    "headerLinks": {
+      "intro": "了解科学的压力管理方法，请阅读我们的",
+      "guideLink": "经期压力管理完全指南，了解22种科学减压方法",
+      "or": "，或尝试",
+      "breathingLink": "4-7-8呼吸练习",
+      "quickRelief": "快速缓解压力。"
+    },
+    "sections": {
+      "breathingExercise": {
+        "title": "立即开始：呼吸练习"
+      }
+    },
     "startAssessment": "开始评估",
     "learnMore": "了解更多",
     "backToTools": "返回工具",
@@ -8640,6 +8653,14 @@
     "cancel": "取消",
     "continue": "继续",
     "skip": "跳过",
+    "features": {
+      "assessment": "压力水平科学评估",
+      "personalizedRecommendations": "个性化减压技巧",
+      "tracking": "进度追踪与分析",
+      "breathingExercise": "呼吸练习指导",
+      "meditation": "冥想和放松训练",
+      "plan": "压力管理计划"
+    },
     "stressLevels": {
       "low": "低",
       "moderate": "中等",
@@ -8718,6 +8739,14 @@
       "breadcrumb": {
         "home": "首页",
         "interactiveTools": "互动工具"
+      },
+      "icons": {
+        "meditation": "压力管理冥想图标",
+        "techniques": "放松技巧图标",
+        "progress": "进度追踪图标",
+        "dailyHabits": "日常习惯图标",
+        "breathing": "呼吸练习图标",
+        "prevention": "预防措施图标"
       }
     },
     "neuroendocrine": {
@@ -8891,34 +8920,58 @@
         }
       },
       "personalizedRecommendations": {
-        "low": {
-          "maintain": {
-            "title": "Maintain Your Current Habits",
-            "description": "Your stress levels are well-managed. Continue with your current healthy practices."
-          }
+        "title": "您的个性化建议",
+        "stressScore": "压力评分",
+        "immediateAction": "立即行动",
+        "startNow": "立即开始",
+        "recommendedForYou": "为您推荐",
+        "urgent": "紧急",
+        "levelDescriptions": {
+          "high": "建议立即进行压力缓解",
+          "moderate": "建议积极进行压力管理",
+          "low": "保持现有习惯，预防性练习"
         },
-        "moderate": {
-          "relax": {
-            "title": "Time to Relax",
-            "description": "Consider incorporating more relaxation techniques into your daily routine."
-          }
-        },
-        "high": {
-          "help": {
-            "title": "Seeking Help is Important",
-            "description": "Your stress levels suggest it would be beneficial to seek additional support and implement stress management strategies."
+        "recommendations": {
+          "breathingExercise": {
+            "title": "呼吸练习",
+            "high": "立即尝试4-7-8呼吸法，快速缓解压力",
+            "moderate": "每天练习呼吸技巧，有效管理压力",
+            "low": "定期练习以保持身心健康"
+          },
+          "stressGuide": {
+            "title": "经期压力管理完全指南",
+            "high": "学习22种科学减压方法，全面管理经期压力",
+            "moderate": "学习科学压力管理方法，防止压力升级"
+          },
+          "sleepGuide": {
+            "title": "经期睡眠质量改善指南",
+            "high": "改善睡眠质量，通过良好休息缓解压力",
+            "low": "保持良好的睡眠习惯，预防压力"
+          },
+          "officeScenario": {
+            "title": "办公环境",
+            "high": "职场压力管理策略，保持工作效率",
+            "moderate": "职场压力管理策略"
+          },
+          "breathingGuide": {
+            "title": "呼吸练习完全指南",
+            "moderate": "详细的呼吸练习技巧和科学原理"
+          },
+          "exerciseScenario": {
+            "title": "运动场景",
+            "low": "通过适度运动保持健康"
           }
         }
       },
       "radar": {
-        "title": "Stress Areas Analysis",
-        "subtitle": "Visual representation of your stress levels across different life areas",
+        "title": "压力领域分析",
+        "subtitle": "不同生活领域压力水平的可视化呈现",
         "labels": [
-          "Work",
-          "Sleep",
-          "Emotion",
-          "Physical",
-          "Social"
+          "工作",
+          "睡眠",
+          "情绪",
+          "身体",
+          "社交"
         ]
       }
     },
@@ -8931,6 +8984,7 @@
       "breathing": {
         "title": "[ZH] Breathing Exercise",
         "description": "[ZH] Relax body and mind through breathing regulation",
+        "iconLabel": "呼吸练习图标",
         "start": "[ZH] Start Exercise",
         "instructions": "[ZH] Exercise Instructions",
         "instructionsDetail": "[ZH] Follow audio guidance for deep breathing exercises, practice for 5-10 minutes each time.",
@@ -8943,6 +8997,7 @@
       "meditation": {
         "title": "[ZH] Meditation Practice",
         "description": "[ZH] Achieve inner peace through meditation",
+        "iconLabel": "冥想练习图标",
         "start": "[ZH] Start Meditation",
         "instructions": "[ZH] Meditation Instructions",
         "instructionsDetail": "[ZH] Follow guided audio for meditation practice, start with 5 minutes and gradually extend.",
@@ -8954,6 +9009,7 @@
       },
       "exercise": {
         "title": "[ZH] Light Exercise",
+        "iconLabel": "温和运动图标",
         "description": "[ZH] Gentle exercises suitable for menstrual periods",
         "start": "[ZH] Start Exercise",
         "instructions": "[ZH] Exercise Instructions",
@@ -8967,6 +9023,7 @@
       "music": {
         "title": "[ZH] Music Therapy",
         "description": "[ZH] Relax your mood through music",
+        "iconLabel": "音乐疗法图标",
         "start": "[ZH] Start Listening",
         "instructions": "[ZH] Music Instructions",
         "instructionsDetail": "[ZH] Choose soothing music, close your eyes and listen for 10-15 minutes.",
@@ -9167,37 +9224,68 @@
       }
     },
     "paywall": {
-      "title": "Unlock Premium Assessment",
-      "subtitle": "Get personalized recommendations and detailed insights with the full version",
-      "thanksMessage": "💌 Thank you for your attention and support | 🎉 More features coming soon",
+      "title": "解锁高级评估",
+      "subtitle": "获取个性化建议和详细洞察，体验完整版本",
+      "thanksMessage": "💌 感谢您的关注和支持 | 🎉 更多功能即将推出",
       "comparison": {
         "free": {
-          "title": "Free Version",
+          "title": "免费版本",
           "features": {
-            "questions": "Basic assessment (5 questions)",
-            "score": "Simple stress score",
-            "radar": "Basic radar chart",
-            "analysis": "Limited analysis"
+            "questions": "基础评估（5个问题）",
+            "score": "简单压力评分",
+            "radar": "基础雷达图",
+            "analysis": "有限分析"
           }
         },
         "premium": {
-          "title": "Premium Version",
-          "badge": "Recommended",
+          "title": "高级版本",
+          "badge": "推荐",
           "features": {
-            "report": "Detailed stress analysis report",
-            "phq9": "Professional PHQ-9 assessment",
-            "management": "Personalized management plan"
+            "report": "详细压力分析报告",
+            "phq9": "专业PHQ-9评估",
+            "management": "个性化管理计划"
           }
         }
       }
     },
     "alerts": {
-      "paymentComingSoon": "Payment features coming soon, stay tuned!"
+      "paymentComingSoon": "支付功能即将推出，敬请期待！"
     },
     "buttons": {
-      "viewFreeResults": "View Free Results",
-      "comingSoon": "Coming Soon",
-      "restartAssessment": "Restart Assessment"
+      "viewFreeResults": "查看免费结果",
+      "comingSoon": "即将推出",
+      "restartAssessment": "重新评估"
+    },
+    "results": {
+      "title": "您的压力评估结果",
+      "subtitle": "根据您的回答，我们为您生成了个性化的压力分析报告",
+      "score": "压力评分",
+      "stressLevels": {
+        "low": "低压力",
+        "moderate": "中等压力",
+        "high": "高压力",
+        "severe": "严重压力"
+      },
+      "basicRecommendations": "基础建议",
+      "detailedAnalysis": {
+        "title": "详细分析",
+        "stressAnalysis": {
+          "title": "压力来源分析",
+          "description": "根据您的回答分析主要压力来源"
+        },
+        "improvementFocus": {
+          "title": "改进重点",
+          "description": "需要关注和改进的领域"
+        }
+      },
+      "personalizedActionPlan": {
+        "title": "个性化行动计划"
+      },
+      "unlockCompleteReport": {
+        "title": "解锁完整报告",
+        "description": "获取详细分析、个性化行动计划和专业建议，体验高级功能",
+        "button": "解锁高级版"
+      }
     }
   },
   "medical": "医疗",

@@ -8,6 +8,9 @@ import {
   ToolStructuredDataScript,
 } from "@/lib/seo/tool-structured-data";
 import StressManagementRecommendations from "./components/StressManagementRecommendations";
+import PersonalizedRecommendations from "./components/PersonalizedRecommendations";
+import StressTechniquesAccordion from "./components/StressTechniquesAccordion";
+import BreathingExerciseEmbedded from "./components/BreathingExerciseEmbedded";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -53,7 +56,6 @@ export default async function StressManagementPage({
   unstable_setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "stressManagement" });
-  const isZh = locale === "zh";
 
   // 生成工具结构化数据
   const toolStructuredData = await generateToolStructuredData({
@@ -62,12 +64,12 @@ export default async function StressManagementPage({
     toolName: t("pageTitle"),
     description: t("description"),
     features: [
-      isZh ? "压力水平科学评估" : "Scientific stress level assessment",
-      isZh ? "个性化减压技巧" : "Personalized stress relief techniques",
-      isZh ? "进度追踪与分析" : "Progress tracking and analysis",
-      isZh ? "呼吸练习指导" : "Breathing exercise guidance",
-      isZh ? "冥想和放松训练" : "Meditation and relaxation training",
-      isZh ? "压力管理计划" : "Stress management plan",
+      t("features.assessment"),
+      t("features.personalizedRecommendations"),
+      t("features.tracking"),
+      t("features.breathingExercise"),
+      t("features.meditation"),
+      t("features.plan"),
     ],
     category: "HealthApplication",
     rating: {
@@ -76,11 +78,11 @@ export default async function StressManagementPage({
     },
     breadcrumbs: [
       {
-        name: isZh ? "交互工具" : "Interactive Tools",
+        name: t("common.breadcrumb.interactiveTools"),
         url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools`,
       },
       {
-        name: isZh ? "压力管理" : "Stress Management",
+        name: t("title"),
         url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/stress-management`,
       },
     ],
@@ -110,7 +112,9 @@ export default async function StressManagementPage({
           {/* Header Section */}
           <header className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-6">
-              <span className="text-3xl">🧘</span>
+              <span className="text-3xl" role="img" aria-label={t("common.icons.meditation")}>
+                🧘
+              </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
               {t("title")}
@@ -118,47 +122,71 @@ export default async function StressManagementPage({
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               {t("subtitle")}
             </p>
+            {/* 第一层：语义化链接（SEO权重最高） */}
+            <div className="mt-6 text-center">
+              <p className="text-gray-600 text-base max-w-3xl mx-auto leading-relaxed">
+                {t("headerLinks.intro")}{" "}
+                <Link
+                  href={`/${locale}/articles/menstrual-stress-management-complete-guide`}
+                  className="text-blue-600 hover:text-blue-800 underline font-medium"
+                >
+                  {t("headerLinks.guideLink")}
+                </Link>
+                {t("headerLinks.or")}{" "}
+                <Link
+                  href={`/${locale}/interactive-tools/stress-management/breathing-exercise`}
+                  className="text-blue-600 hover:text-blue-800 underline font-medium"
+                >
+                  {t("headerLinks.breathingLink")}
+                </Link>{" "}
+                {t("headerLinks.quickRelief")}
+              </p>
+            </div>
           </header>
 
           {/* Assessment Widget - Direct Access */}
           <StressAssessmentWidget />
 
-          {/* Feature Cards */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* Techniques Card */}
-            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                <span className="text-2xl">🌿</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">
-                {t("techniques.title")}
-              </h3>
-              <p className="text-gray-600 mb-4">{t("techniques.subtitle")}</p>
-              <Link
-                href={`/${locale}/interactive-tools/stress-management/techniques`}
-                className="text-green-600 font-semibold hover:text-green-700"
-              >
-                {t("learnMore")} →
-              </Link>
-            </div>
+          {/* 个性化建议（第三层：动态推荐） */}
+          <PersonalizedRecommendations locale={locale} />
 
-            {/* Progress Card */}
-            <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                <span className="text-2xl">📈</span>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">
-                {t("progress.title")}
-              </h3>
-              <p className="text-gray-600 mb-4">{t("progress.subtitle")}</p>
-              <Link
-                href={`/${locale}/interactive-tools/stress-management/progress`}
-                className="text-purple-600 font-semibold hover:text-purple-700"
-              >
-                {t("learnMore")} →
-              </Link>
+          {/* 呼吸练习器（嵌入式） */}
+          <section className="mb-12">
+            <div className="max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 text-center">
+                {t("sections.breathingExercise.title")}
+              </h2>
+              <BreathingExerciseEmbedded locale={locale} />
             </div>
-          </div>
+          </section>
+
+          {/* 4种技巧手风琴组件 */}
+          <StressTechniquesAccordion locale={locale} />
+
+          {/* Progress Card - 保留进度追踪入口 */}
+          <section className="mb-12">
+            <div className="max-w-md mx-auto">
+              <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
+                  <span className="text-2xl" role="img" aria-label={t("common.icons.progress")}>
+                    📈
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+                  {t("progress.title")}
+                </h3>
+                <p className="text-gray-600 mb-4 text-center">{t("progress.subtitle")}</p>
+                <div className="text-center">
+                  <Link
+                    href={`/${locale}/interactive-tools/stress-management/progress`}
+                    className="text-purple-600 font-semibold hover:text-purple-700 inline-block"
+                  >
+                    {t("learnMore")} →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
 
           {/* Quick Tips Section */}
           <section className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl p-8 text-white">
@@ -167,14 +195,18 @@ export default async function StressManagementPage({
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
-                <div className="text-4xl mb-3">😌</div>
+                <div className="text-4xl mb-3" role="img" aria-label={t("common.icons.dailyHabits")}>
+                  😌
+                </div>
                 <h3 className="text-xl font-semibold mb-2">
                   {t("tips.daily.title")}
                 </h3>
                 <p className="text-blue-100">{t("tips.daily.regularSleep")}</p>
               </div>
               <div className="text-center">
-                <div className="text-4xl mb-3">💨</div>
+                <div className="text-4xl mb-3" role="img" aria-label={t("common.icons.breathing")}>
+                  💨
+                </div>
                 <h3 className="text-xl font-semibold mb-2">
                   {t("tips.emergency.title")}
                 </h3>
@@ -183,7 +215,9 @@ export default async function StressManagementPage({
                 </p>
               </div>
               <div className="text-center">
-                <div className="text-4xl mb-3">🛡️</div>
+                <div className="text-4xl mb-3" role="img" aria-label={t("common.icons.prevention")}>
+                  🛡️
+                </div>
                 <h3 className="text-xl font-semibold mb-2">
                   {t("tips.prevention.title")}
                 </h3>

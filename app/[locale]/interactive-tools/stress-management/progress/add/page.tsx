@@ -52,10 +52,17 @@ export default function AddEntryPage() {
       };
 
       // Save using the storage utility
-      saveEntry(entry);
+      const result = saveEntry(entry);
 
-      // Show success message
-      alert("Entry saved successfully!");
+      // Show success message with cleanup info if applicable
+      if (result.cleaned && result.deletedCount) {
+        alert(
+          `✅ Entry saved successfully!\n\n` +
+          `⚠️ Note: We automatically deleted ${result.deletedCount} old entries to free up storage space.`
+        );
+      } else {
+        alert("Entry saved successfully!");
+      }
 
       // Redirect back to progress page
       router.push(`/${locale}/interactive-tools/stress-management/progress`);
@@ -65,12 +72,25 @@ export default function AddEntryPage() {
       // Show user-friendly error message
       if (error instanceof Error) {
         if (error.message.includes("Storage is full")) {
-          alert(
-            "❌ Storage is full!\n\n" +
-            "Your browser's storage limit has been reached. " +
-            "Please go to the Progress page and delete some old entries to make space.\n\n" +
-            "Tip: Click the 'Debug Data' button on the Progress page to manage your data."
-          );
+          // Check if automatic cleanup was attempted
+          if (error.message.includes("automatically deleted")) {
+            alert(
+              "⚠️ Storage was full, but we've automatically cleaned up old entries!\n\n" +
+              "Your entry has been saved successfully. " +
+              "We deleted some old entries to make space.\n\n" +
+              "If this happens frequently, consider manually deleting old entries from the Progress page."
+            );
+            // Still redirect since the save might have succeeded after cleanup
+            router.push(`/${locale}/interactive-tools/stress-management/progress`);
+            return;
+          } else {
+            alert(
+              "❌ Storage is full!\n\n" +
+              "We tried to automatically free up space, but there's still not enough room. " +
+              "Please go to the Progress page and manually delete some old entries.\n\n" +
+              "Tip: Click the 'Debug Data' button on the Progress page to manage your data."
+            );
+          }
         } else {
           alert("Failed to save entry: " + error.message);
         }

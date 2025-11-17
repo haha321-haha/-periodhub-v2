@@ -155,9 +155,14 @@ export default function StressAssessmentWidget() {
       isPremium: false
     });
     
+    // 先隐藏 paywall，然后显示结果
+    setShowPaywall(false);
     setStressScore(score);
     setStressLevel(level);
     setShowResults(true);
+    
+    // 追踪评估完成
+    trackAssessmentComplete(userId, score, currentAnswers);
     
     console.log('Results view should now be visible');
   };
@@ -173,8 +178,15 @@ export default function StressAssessmentWidget() {
     setCurrentQuestion(0);
     setAnswers([]);
     setShowResults(false);
+    setShowPaywall(false);
     setStressScore(0);
     setStressLevel('');
+  };
+
+  const handleUnlockFromResults = () => {
+    // 从结果页面打开付费墙
+    setShowResults(false);
+    setShowPaywall(true);
   };
 
   const calculateScore = (answersArray: number[]) => {
@@ -290,7 +302,8 @@ export default function StressAssessmentWidget() {
   };
 
   const progress = ((currentQuestion + 1) / questions.length) * 100;
-  const isPremiumUser = answers.length >= FREE_QUESTIONS;
+  // 只有回答了超过免费问题数量（即6个或更多）才被认为是付费用户
+  const isPremiumUser = answers.length > FREE_QUESTIONS;
 
   // Paywall view
   if (showPaywall) {
@@ -470,7 +483,7 @@ export default function StressAssessmentWidget() {
                   {t("results.unlockCompleteReport.description")}
                 </p>
                 <button
-                  onClick={() => alert("Payment features coming soon, stay tuned!")}
+                  onClick={handleUnlockFromResults}
                   className="bg-white text-purple-600 px-6 py-2 rounded-lg font-semibold hover:bg-purple-50 transition-colors"
                 >
                   {t("results.unlockCompleteReport.button")}
@@ -533,8 +546,16 @@ export default function StressAssessmentWidget() {
           </div>
         )}
 
-        {/* Action Button */}
-        <div className="text-center">
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {!isPremiumUser && (
+            <button
+              onClick={handleUnlockFromResults}
+              className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-shadow"
+            >
+              {t("results.unlockCompleteReport.button")}
+            </button>
+          )}
           <button
             onClick={handleRestart}
             className="btn-secondary px-8 py-3"

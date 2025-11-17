@@ -6320,6 +6320,18 @@
     "pageTitle": "Period Stress Management Tool - Scientific Relief Solutions | PeriodHub",
     "keywords": "stress management,period stress,menstrual health,stress relief,relaxation techniques,workplace stress,women health",
     "subtitle": "Help you effectively manage period-related stress and anxiety",
+    "headerLinks": {
+      "intro": "Learn scientific stress management methods in our",
+      "guideLink": "Complete Menstrual Stress Management Guide with 22 scientific relief methods",
+      "or": "or try",
+      "breathingLink": "4-7-8 breathing exercise",
+      "quickRelief": "for quick stress relief."
+    },
+    "sections": {
+      "breathingExercise": {
+        "title": "Get Started: Breathing Exercise"
+      }
+    },
     "startAssessment": "Start Assessment",
     "learnMore": "Learn More",
     "backToTools": "Back to Tools",
@@ -6333,6 +6345,14 @@
     "skip": "Skip",
     "alerts": {
       "paymentComingSoon": "Payment features coming soon, stay tuned!"
+    },
+    "features": {
+      "assessment": "Scientific stress level assessment",
+      "personalizedRecommendations": "Personalized stress relief techniques",
+      "tracking": "Progress tracking and analysis",
+      "breathingExercise": "Breathing exercise guidance",
+      "meditation": "Meditation and relaxation training",
+      "plan": "Stress management plan"
     },
     "common": {
       "loading": "Loading...",
@@ -6359,6 +6379,14 @@
       "breadcrumb": {
         "home": "Home",
         "interactiveTools": "Interactive Tools"
+      },
+      "icons": {
+        "meditation": "Meditation icon for stress management",
+        "techniques": "Relaxation techniques icon",
+        "progress": "Progress tracking icon",
+        "dailyHabits": "Daily habits icon",
+        "breathing": "Breathing exercise icon",
+        "prevention": "Prevention icon"
       }
     },
     "stressLevels": {
@@ -6455,11 +6483,46 @@
         "option4": "High"
       },
       "q5": {
-        "question": "Do you experience physical symptoms due to stress?",
+        "question": "Do you often worry about period-related issues?",
         "option1": "Never",
         "option2": "Sometimes",
         "option3": "Often",
         "option4": "Always"
+      },
+      "q6": {
+        "question": "How often do you have difficulty concentrating?",
+        "option1": "Never",
+        "option2": "Rarely",
+        "option3": "Sometimes",
+        "option4": "Often"
+      },
+      "q7": {
+        "question": "Do you feel overwhelmed by daily tasks?",
+        "option1": "Never",
+        "option2": "Rarely",
+        "option3": "Sometimes",
+        "option4": "Often"
+      },
+      "q8": {
+        "question": "How would you rate your ability to cope with stress?",
+        "option1": "Very Good",
+        "option2": "Good",
+        "option3": "Fair",
+        "option4": "Poor"
+      },
+      "q9": {
+        "question": "Do you experience physical symptoms due to stress?",
+        "option1": "Never",
+        "option2": "Rarely",
+        "option3": "Sometimes",
+        "option4": "Often"
+      },
+      "q10": {
+        "question": "How often do you practice stress relief techniques?",
+        "option1": "Daily",
+        "option2": "Weekly",
+        "option3": "Rarely",
+        "option4": "Never"
       },
       "selectOption": "Please select the option that best describes your situation",
       "results": {
@@ -6482,6 +6545,50 @@
       },
       "alerts": {
         "paymentComingSoon": "Payment features coming soon, stay tuned!"
+      },
+      "personalizedRecommendations": {
+        "title": "Your Personalized Recommendations",
+        "stressScore": "Stress Score",
+        "immediateAction": "Immediate Action",
+        "startNow": "Start Now",
+        "recommendedForYou": "Recommended for You",
+        "urgent": "Urgent",
+        "levelDescriptions": {
+          "high": "Immediate stress relief recommended",
+          "moderate": "Active stress management recommended",
+          "low": "Maintain current habits, preventive practice"
+        },
+        "recommendations": {
+          "breathingExercise": {
+            "title": "Breathing Exercise",
+            "high": "Try 4-7-8 breathing technique immediately for quick stress relief",
+            "moderate": "Practice breathing techniques daily for effective stress management",
+            "low": "Practice regularly to maintain physical and mental health"
+          },
+          "stressGuide": {
+            "title": "Complete Menstrual Stress Management Guide",
+            "high": "Learn 22 scientific stress relief methods for comprehensive period stress management",
+            "moderate": "Learn scientific stress management methods to prevent escalation"
+          },
+          "sleepGuide": {
+            "title": "Menstrual Sleep Quality Improvement Guide",
+            "high": "Improve sleep quality to relieve stress through good rest",
+            "low": "Maintain good sleep habits to prevent stress"
+          },
+          "officeScenario": {
+            "title": "Office Environment",
+            "high": "Workplace stress management strategies to maintain productivity",
+            "moderate": "Workplace stress management strategies"
+          },
+          "breathingGuide": {
+            "title": "Complete Breathing Exercises Guide",
+            "moderate": "Detailed breathing exercise techniques and scientific principles"
+          },
+          "exerciseScenario": {
+            "title": "Exercise Scenario",
+            "low": "Maintain health through moderate exercise"
+          }
+        }
       },
       "questions": {
         "q1": {
@@ -6546,6 +6653,17 @@
         }
       },
       "keywords": "stress assessment,menstrual stress,stress management,period stress,mental health assessment",
+      "radar": {
+        "title": "Stress Areas Analysis",
+        "subtitle": "Visual representation of your stress levels across different life areas",
+        "labels": [
+          "Work",
+          "Sleep",
+          "Emotion",
+          "Physical",
+          "Social"
+        ]
+      },
       "privacy": {
         "badge": "Your data is 100% encrypted and never sold",
         "notice": {
@@ -6596,6 +6714,67 @@
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
+      }
+    },
+    "paywall": {
+      "title": "Unlock Premium Assessment",
+      "subtitle": "Get personalized recommendations and detailed insights with the full version",
+      "thanksMessage": "💌 Thank you for your attention and support | 🎉 More features coming soon",
+      "comparison": {
+        "free": {
+          "title": "Free Version",
+          "features": {
+            "questions": "Basic assessment (5 questions)",
+            "score": "Simple stress score",
+            "radar": "Basic radar chart",
+            "analysis": "Limited analysis"
+          }
+        },
+        "premium": {
+          "title": "Premium Version",
+          "badge": "Recommended",
+          "features": {
+            "report": "Detailed stress analysis report",
+            "phq9": "Professional PHQ-9 assessment",
+            "management": "Personalized management plan"
+          }
+        }
+      }
+    },
+    "buttons": {
+      "viewFreeResults": "View Free Results",
+      "comingSoon": "Coming Soon",
+      "restartAssessment": "Restart Assessment"
+    },
+    "results": {
+      "title": "Your Stress Assessment Results",
+      "subtitle": "Based on your responses, we've generated a personalized stress analysis report for you",
+      "score": "Stress Score",
+      "stressLevels": {
+        "low": "Low Stress",
+        "moderate": "Moderate Stress",
+        "high": "High Stress",
+        "severe": "Severe Stress"
+      },
+      "basicRecommendations": "Basic Recommendations",
+      "detailedAnalysis": {
+        "title": "Detailed Analysis",
+        "stressAnalysis": {
+          "title": "Stress Source Analysis",
+          "description": "Analyze major stress sources based on your responses"
+        },
+        "improvementFocus": {
+          "title": "Improvement Focus",
+          "description": "Areas that need attention and improvement"
+        }
+      },
+      "personalizedActionPlan": {
+        "title": "Personalized Action Plan"
+      },
+      "unlockCompleteReport": {
+        "title": "Unlock Complete Report",
+        "description": "Get detailed analysis, personalized action plan, and professional recommendations with premium access",
+        "button": "Unlock Premium"
       }
     },
     "progress": {
@@ -6810,6 +6989,7 @@
       "breathing": {
         "title": "Breathing Exercise",
         "description": "Relax body and mind through breathing regulation",
+        "iconLabel": "Breathing exercise icon",
         "start": "Start Exercise",
         "instructions": "Exercise Instructions",
         "instructionsDetail": "Follow audio guidance for deep breathing exercises, practice for 5-10 minutes each time.",
@@ -6822,6 +7002,7 @@
       "meditation": {
         "title": "Meditation Practice",
         "description": "Achieve inner peace through meditation",
+        "iconLabel": "Meditation practice icon",
         "start": "Start Meditation",
         "instructions": "Meditation Instructions",
         "instructionsDetail": "Follow guided audio for meditation practice, start with 5 minutes and gradually extend.",
@@ -6834,6 +7015,7 @@
       "exercise": {
         "title": "Light Exercise",
         "description": "Gentle exercises suitable for menstrual periods",
+        "iconLabel": "Light exercise icon",
         "start": "Start Exercise",
         "instructions": "Exercise Instructions",
         "instructionsDetail": "Choose gentle exercises suitable for menstrual periods, such as yoga, walking or stretching.",
@@ -6846,6 +7028,7 @@
       "music": {
         "title": "Music Therapy",
         "description": "Relax your mood through music",
+        "iconLabel": "Music therapy icon",
         "start": "Start Listening",
         "instructions": "Music Instructions",
         "instructionsDetail": "Choose soothing music, close your eyes and listen for 10-15 minutes.",
@@ -8371,6 +8554,7 @@
   "breathingExercise": {
     "title": "4-7-8 Breathing Exercise",
     "description": "Based on scientifically validated 4-7-8 breathing method, quickly relieves pain by regulating the nervous system. No download required, start practicing immediately.",
+    "iconLabel": "Breathing exercise icon",
     "usageTips": {
       "title": "Usage suggestions:",
       "bestTiming": {
@@ -9731,6 +9915,7 @@
   "ui": {
     "questionProgress": "Question {current} of {total}",
     "advancedQuestion": "Advanced Question",
+    "premiumQuestion": "🔓 Premium Question",
     "personalizedRecommendations": "Personalized Recommendations",
     "recommendationItem": "Recommendation {index}",
     "recommendationCustom": "Custom Recommendation",

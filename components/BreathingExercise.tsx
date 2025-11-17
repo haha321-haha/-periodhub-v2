@@ -88,7 +88,9 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
       {/* Header */}
       <div className="text-center mb-6">
         <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <span className="text-2xl">🫁</span>
+          <span className="text-2xl" role="img" aria-label={t('iconLabel') || 'Breathing exercise icon'}>
+            🫁
+          </span>
         </div>
         <h3 className="text-2xl font-bold text-blue-800 mb-2">
           {t('title')}
@@ -149,7 +151,9 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
           </div>
         ) : (
           <div className="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
-            <span className="text-4xl text-gray-400">🫁</span>
+            <span className="text-4xl text-gray-400" role="img" aria-label={t('iconLabel') || 'Breathing exercise icon'}>
+              🫁
+            </span>
           </div>
         )}
       </div>

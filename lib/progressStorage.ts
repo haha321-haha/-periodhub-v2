@@ -31,9 +31,10 @@ export function getAllEntries(): ProgressEntry[] {
 
 /**
  * 保存记录
+ * @returns 返回保存结果信息，包含是否进行了自动清理
  */
-export function saveEntry(entry: Omit<ProgressEntry, "id">): void {
-  if (typeof window === "undefined") return;
+export function saveEntry(entry: Omit<ProgressEntry, "id">): { cleaned: boolean; deletedCount?: number } {
+  if (typeof window === "undefined") return { cleaned: false };
   
   try {
     const entries = getAllEntries();
@@ -52,10 +53,68 @@ export function saveEntry(entry: Omit<ProgressEntry, "id">): void {
     }
     
     localStorage.setItem(STORAGE_KEY, dataString);
+    return { cleaned: false };
   } catch (error) {
     if (error instanceof Error && error.name === "QuotaExceededError") {
-      console.error("Storage quota exceeded. Please delete old entries.");
-      throw new Error("Storage is full. Please delete some old entries to make space.");
+      console.warn("Storage quota exceeded. Attempting to clean up old entries...");
+      
+      // 尝试自动清理旧条目
+      try {
+        const entries = getAllEntries();
+        const totalEntries = entries.length;
+        
+        // 如果有很多条目，删除最旧的50%
+        if (totalEntries > 10) {
+          const toDelete = Math.floor(totalEntries / 2);
+          const deletedCount = deleteOldestEntries(toDelete);
+          console.log(`Deleted ${deletedCount} old entries to free up space.`);
+          
+          // 重新尝试保存
+          try {
+            const remainingEntries = getAllEntries();
+            const newEntry: ProgressEntry = {
+              ...entry,
+              id: `entry_${Date.now()}`,
+            };
+            remainingEntries.push(newEntry);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(remainingEntries));
+            console.log("Entry saved successfully after cleanup.");
+            return { cleaned: true, deletedCount: toDelete }; // 成功保存，返回清理信息
+          } catch (retryError) {
+            // 如果还是失败，尝试更激进的清理
+            console.warn("Still not enough space, attempting more aggressive cleanup...");
+            const remainingEntries = getAllEntries();
+            if (remainingEntries.length > 5) {
+              // 只保留最新的5条
+              const additionalDeleted = deleteOldestEntries(remainingEntries.length - 5);
+              console.log(`Deleted ${additionalDeleted} more entries, keeping only the 5 most recent.`);
+              
+              // 再次尝试保存
+              const finalEntries = getAllEntries();
+              const newEntry: ProgressEntry = {
+                ...entry,
+                id: `entry_${Date.now()}`,
+              };
+              finalEntries.push(newEntry);
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(finalEntries));
+              console.log("Entry saved successfully after aggressive cleanup.");
+              return { cleaned: true, deletedCount: toDelete + additionalDeleted }; // 成功保存，返回清理信息
+            }
+          }
+        }
+        
+        // 如果清理后还是失败，抛出用户友好的错误
+        throw new Error(
+          "Storage is full. We've automatically deleted old entries, but there's still not enough space. " +
+          "Please manually delete some entries from the progress page."
+        );
+      } catch (cleanupError) {
+        console.error("Failed to clean up old entries:", cleanupError);
+        throw new Error(
+          "Storage is full and we couldn't automatically free up space. " +
+          "Please delete some old entries manually from the progress page."
+        );
+      }
     }
     console.error("Failed to save entry:", error);
     throw error;

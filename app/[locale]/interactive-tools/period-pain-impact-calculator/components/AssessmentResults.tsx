@@ -13,7 +13,6 @@ interface AssessmentResultsProps {
 }
 
 export default function AssessmentResults({ result, locale, onReset }: AssessmentResultsProps) {
-  const isZh = locale === 'zh';
   const t = useTranslations('periodPainImpactCalculator');
   const breadcrumbT = useTranslations('interactiveTools.breadcrumb');
 
@@ -30,22 +29,12 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
 
   // 获取严重程度文本
   const getSeverityText = (severity: string) => {
-    if (isZh) {
-      switch (severity) {
-        case 'mild': return '轻微';
-        case 'moderate': return '中等';
-        case 'severe': return '严重';
-        case 'emergency': return '紧急';
-        default: return '未知';
-      }
-    } else {
-      switch (severity) {
-        case 'mild': return 'Mild';
-        case 'moderate': return 'Moderate';
-        case 'severe': return 'Severe';
-        case 'emergency': return 'Emergency';
-        default: return 'Unknown';
-      }
+    switch (severity) {
+      case 'mild': return t('results.severity.mild');
+      case 'moderate': return t('results.severity.moderate');
+      case 'severe': return t('results.severity.severe');
+      case 'emergency': return t('results.severity.emergency');
+      default: return t('results.severity.unknown');
     }
   };
 
@@ -61,45 +50,24 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
 
   // 获取优先级文本
   const getPriorityText = (priority: string) => {
-    if (isZh) {
-      switch (priority) {
-        case 'high': return '高优先级';
-        case 'medium': return '中优先级';
-        case 'low': return '低优先级';
-        default: return '普通';
-      }
-    } else {
-      switch (priority) {
-        case 'high': return 'High Priority';
-        case 'medium': return 'Medium Priority';
-        case 'low': return 'Low Priority';
-        default: return 'Normal';
-      }
+    switch (priority) {
+      case 'high': return t('results.priority.high');
+      case 'medium': return t('results.priority.medium');
+      case 'low': return t('results.priority.low');
+      default: return t('results.priority.normal');
     }
   };
 
   // 获取类别文本
   const getCategoryText = (category: string) => {
-    if (isZh) {
-      switch (category) {
-        case 'immediate': return '立即行动';
-        case 'lifestyle': return '生活方式';
-        case 'medical': return '医疗建议';
-        case 'dietary': return '饮食建议';
-        case 'exercise': return '运动建议';
-        case 'selfcare': return '自我护理';
-        default: return '一般建议';
-      }
-    } else {
-      switch (category) {
-        case 'immediate': return 'Immediate Action';
-        case 'lifestyle': return 'Lifestyle';
-        case 'medical': return 'Medical';
-        case 'dietary': return 'Dietary';
-        case 'exercise': return 'Exercise';
-        case 'selfcare': return 'Self-Care';
-        default: return 'General';
-      }
+    switch (category) {
+      case 'immediate': return t('results.category.immediate');
+      case 'lifestyle': return t('results.category.lifestyle');
+      case 'medical': return t('results.category.medical');
+      case 'dietary': return t('results.category.dietary');
+      case 'exercise': return t('results.category.exercise');
+      case 'selfcare': return t('results.category.selfcare');
+      default: return t('results.category.general');
     }
   };
 
@@ -119,13 +87,13 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
       {/* 结果摘要 */}
       <div className="bg-white rounded-lg shadow-md p-8">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-900">
-          {isZh ? '评估结果' : 'Assessment Results'}
+          {t('results.title')}
         </h2>
         
         {/* 严重程度指标 */}
         <div className={`text-center p-6 rounded-lg ${getSeverityColor(result.severity)}`}>
           <div className="text-lg font-medium mb-2">
-            {isZh ? '疼痛严重程度' : 'Pain Severity'}
+            {t('results.painSeverity')}
           </div>
           <div className="text-3xl font-bold mb-2">
             {getSeverityText(result.severity)}
@@ -139,7 +107,7 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center p-4 bg-gray-50 rounded-lg">
             <div className="text-sm text-gray-600 mb-1">
-              {isZh ? '您的得分' : 'Your Score'}
+              {t('results.yourScore')}
             </div>
             <div className="text-2xl font-bold text-gray-900">
               {result.score}
@@ -147,7 +115,7 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
           </div>
           <div className="text-center p-4 bg-gray-50 rounded-lg">
             <div className="text-sm text-gray-600 mb-1">
-              {isZh ? '最高分' : 'Max Score'}
+              {t('results.maxScore')}
             </div>
             <div className="text-2xl font-bold text-gray-900">
               {result.maxScore}
@@ -155,7 +123,7 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
           </div>
           <div className="text-center p-4 bg-gray-50 rounded-lg">
             <div className="text-sm text-gray-600 mb-1">
-              {isZh ? '百分比' : 'Percentage'}
+              {t('results.percentage')}
             </div>
             <div className="text-2xl font-bold text-gray-900">
               {result.percentage}%
@@ -175,7 +143,7 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
       {result.recommendations && result.recommendations.length > 0 && (
         <div className="bg-white rounded-lg shadow-md p-8">
           <h3 className="text-xl font-bold mb-6 text-gray-900">
-            {isZh ? '个性化建议' : 'Personalized Recommendations'}
+            {t('results.personalizedRecommendations')}
           </h3>
           
           <div className="space-y-6">
@@ -202,7 +170,7 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
                 {recommendation.actionSteps && recommendation.actionSteps.length > 0 && (
                   <div className="mb-4">
                     <h5 className="font-medium text-gray-900 mb-2">
-                      {isZh ? '行动步骤' : 'Action Steps'}:
+                      {t('results.actionSteps')}:
                     </h5>
                     <ol className="list-decimal list-inside space-y-1">
                       {recommendation.actionSteps.map((step, index) => (
@@ -216,7 +184,7 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
                 
                 <div className="flex justify-between items-center">
                   <div className="text-sm text-gray-600">
-                    {isZh ? '实施时间' : 'Implementation timeframe'}: {recommendation.timeframe}
+                    {t('results.implementationTimeframe')}: {recommendation.timeframe}
                   </div>
                 </div>
               </div>
@@ -229,16 +197,10 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
       {result.emergency && (
         <div className="bg-red-50 border-2 border-red-300 rounded-lg p-6 text-center">
           <div className="text-red-800 font-bold text-lg mb-4">
-            {isZh 
-              ? '⚠️ 您的评估结果显示可能需要立即医疗关注。请咨询医疗专业人士。'
-              : '⚠️ Your assessment results indicate potential need for immediate medical attention. Please consult a healthcare professional.'
-            }
+            {t('results.emergency.title')}
           </div>
           <div className="text-red-700">
-            {isZh 
-              ? '如果出现严重症状，如剧烈疼痛、大量出血、高烧或晕厥，请立即就医。'
-              : 'If you experience severe symptoms such as intense pain, heavy bleeding, high fever, or fainting, please seek immediate medical attention.'
-            }
+            {t('results.emergency.description')}
           </div>
         </div>
       )}
@@ -249,7 +211,7 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
           onClick={onReset}
           className="px-8 py-3 bg-orange-500 text-white font-semibold rounded-lg shadow-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition duration-300"
         >
-          {isZh ? '重新评估' : 'Retake Assessment'}
+          {t('results.retakeAssessment')}
         </button>
       </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import { useTranslations } from 'next-intl';
 import { Question, AssessmentAnswer } from '../types';
 
 interface QuestionRendererProps {
@@ -11,6 +12,7 @@ interface QuestionRendererProps {
 }
 
 export default function QuestionRenderer({ question, answer, onAnswer, locale }: QuestionRendererProps) {
+  const t = useTranslations('periodPainImpactCalculator');
   const handleChange = (value: string | number | string[] | boolean) => {
     onAnswer({
       questionId: question.id,
@@ -154,9 +156,9 @@ export default function QuestionRenderer({ question, answer, onAnswer, locale }:
             ))}
           </div>
           <div className="flex justify-between text-xs text-gray-500 mt-2">
-            <span>{locale === 'zh' ? '轻微' : 'Mild'}</span>
-            <span>{locale === 'zh' ? '中等' : 'Moderate'}</span>
-            <span>{locale === 'zh' ? '严重' : 'Severe'}</span>
+            <span>{t('question.scale.mild')}</span>
+            <span>{t('question.scale.moderate')}</span>
+            <span>{t('question.scale.severe')}</span>
           </div>
         </div>
       </div>
@@ -239,7 +241,7 @@ export default function QuestionRenderer({ question, answer, onAnswer, locale }:
                 : 'bg-white text-gray-800 border-gray-300 hover:border-purple-300'
             }`}
           >
-            {locale === 'zh' ? '是' : 'Yes'}
+            {t('question.boolean.yes')}
           </button>
           <button
             type="button"
@@ -250,7 +252,7 @@ export default function QuestionRenderer({ question, answer, onAnswer, locale }:
                 : 'bg-white text-gray-800 border-gray-300 hover:border-purple-300'
             }`}
           >
-            {locale === 'zh' ? '否' : 'No'}
+            {t('question.boolean.no')}
           </button>
         </div>
       </div>
@@ -260,7 +262,7 @@ export default function QuestionRenderer({ question, answer, onAnswer, locale }:
   // 默认渲染
   return (
     <div className="text-red-600">
-      {locale === 'zh' ? '不支持的题型' : 'Unsupported question type'}
+      {t('question.unsupported')}
     </div>
   );
 }

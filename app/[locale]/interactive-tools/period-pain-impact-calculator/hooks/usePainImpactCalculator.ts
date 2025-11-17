@@ -448,6 +448,22 @@ const recommendationTexts: {
   }
 };
 
+// 辅助函数：获取时间框架翻译
+const getTimeframeTranslation = (key: string, locale: string): string => {
+  // 由于这是工具函数，不能使用 hook，我们直接使用翻译键映射
+  const timeframeMap: Record<string, { en: string; zh: string }> = {
+    immediate: { en: 'Immediate', zh: '立即' },
+    oneWeek: { en: '1 week', zh: '1周' },
+    oneToTwoWeeks: { en: '1-2 weeks', zh: '1-2周' },
+    twoToFourWeeks: { en: '2-4 weeks', zh: '2-4周' },
+    fourToSixWeeks: { en: '4-6 weeks', zh: '4-6周' },
+  };
+  
+  const translations = timeframeMap[key];
+  if (!translations) return key;
+  return locale === 'zh' ? translations.zh : translations.en;
+};
+
 // 工具函数：生成建议（支持国际化）
 const generateRecommendations = (
   severity: 'mild' | 'moderate' | 'severe' | 'emergency',
@@ -455,7 +471,6 @@ const generateRecommendations = (
   questions: Question[],
   locale: string = 'en'
 ): Recommendation[] => {
-  const isZh = locale === 'zh';
   const texts = recommendationTexts[locale as 'en' | 'zh'] || recommendationTexts.en;
   const recommendations: Recommendation[] = [];
 
@@ -468,7 +483,7 @@ const generateRecommendations = (
         title: texts.lifestyle_changes.title,
         description: texts.lifestyle_changes.description,
         priority: 'medium',
-        timeframe: isZh ? '2-4周' : '2-4 weeks',
+        timeframe: getTimeframeTranslation('twoToFourWeeks', locale),
         actionSteps: texts.lifestyle_changes.actionSteps
       },
       {
@@ -477,7 +492,7 @@ const generateRecommendations = (
         title: texts.self_care.title,
         description: texts.self_care.description,
         priority: 'low',
-        timeframe: isZh ? '立即' : 'Immediate',
+        timeframe: getTimeframeTranslation('immediate', locale),
         actionSteps: texts.self_care.actionSteps
       }
     );
@@ -489,7 +504,7 @@ const generateRecommendations = (
         title: texts.medical_consultation.title,
         description: texts.medical_consultation.description,
         priority: 'high',
-        timeframe: isZh ? '1-2周' : '1-2 weeks',
+        timeframe: getTimeframeTranslation('oneToTwoWeeks', locale),
         actionSteps: texts.medical_consultation.actionSteps
       },
       {
@@ -498,7 +513,7 @@ const generateRecommendations = (
         title: texts.pain_management.title,
         description: texts.pain_management.description,
         priority: 'high',
-        timeframe: isZh ? '立即' : 'Immediate',
+        timeframe: getTimeframeTranslation('immediate', locale),
         actionSteps: texts.pain_management.actionSteps
       }
     );
@@ -513,7 +528,9 @@ const generateRecommendations = (
         title: medicalText.title,
         description: medicalText.description,
         priority: 'high',
-        timeframe: severity === 'emergency' ? (isZh ? '立即' : 'Immediate') : (isZh ? '1周' : '1 week'),
+        timeframe: severity === 'emergency' 
+          ? getTimeframeTranslation('immediate', locale)
+          : getTimeframeTranslation('oneWeek', locale),
         actionSteps: medicalText.actionSteps
       }
     );
@@ -542,7 +559,7 @@ const generateRecommendations = (
       title: exerciseText.title,
       description: exerciseText.description,
       priority: 'medium',
-      timeframe: isZh ? '4-6周' : '4-6 weeks',
+      timeframe: getTimeframeTranslation('fourToSixWeeks', locale),
       actionSteps: exerciseText.actionSteps
     });
   }

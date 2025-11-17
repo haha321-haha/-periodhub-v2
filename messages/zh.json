@@ -8575,6 +8575,62 @@
           "none": "没有特定的治疗方法"
         }
       }
+    },
+    "results": {
+      "title": "评估结果",
+      "painSeverity": "疼痛严重程度",
+      "yourScore": "您的得分",
+      "maxScore": "最高分",
+      "percentage": "百分比",
+      "personalizedRecommendations": "个性化建议",
+      "actionSteps": "行动步骤",
+      "implementationTimeframe": "实施时间",
+      "retakeAssessment": "重新评估",
+      "severity": {
+        "mild": "轻微",
+        "moderate": "中等",
+        "severe": "严重",
+        "emergency": "紧急",
+        "unknown": "未知"
+      },
+      "priority": {
+        "high": "高优先级",
+        "medium": "中优先级",
+        "low": "低优先级",
+        "normal": "普通"
+      },
+      "category": {
+        "immediate": "立即行动",
+        "lifestyle": "生活方式",
+        "medical": "医疗建议",
+        "dietary": "饮食建议",
+        "exercise": "运动建议",
+        "selfcare": "自我护理",
+        "general": "一般建议"
+      },
+      "emergency": {
+        "title": "⚠️ 您的评估结果显示可能需要立即医疗关注。请咨询医疗专业人士。",
+        "description": "如果出现严重症状，如剧烈疼痛、大量出血、高烧或晕厥，请立即就医。"
+      }
+    },
+    "question": {
+      "scale": {
+        "mild": "轻微",
+        "moderate": "中等",
+        "severe": "严重"
+      },
+      "boolean": {
+        "yes": "是",
+        "no": "否"
+      },
+      "unsupported": "不支持的题型"
+    },
+    "timeframe": {
+      "immediate": "立即",
+      "oneWeek": "1周",
+      "oneToTwoWeeks": "1-2周",
+      "twoToFourWeeks": "2-4周",
+      "fourToSixWeeks": "4-6周"
     }
   },
   "0-2": "0-2",

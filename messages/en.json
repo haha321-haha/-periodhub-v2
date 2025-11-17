@@ -10209,6 +10209,62 @@
           "none": "No specific treatment"
         }
       }
+    },
+    "results": {
+      "title": "Assessment Results",
+      "painSeverity": "Pain Severity",
+      "yourScore": "Your Score",
+      "maxScore": "Max Score",
+      "percentage": "Percentage",
+      "personalizedRecommendations": "Personalized Recommendations",
+      "actionSteps": "Action Steps",
+      "implementationTimeframe": "Implementation timeframe",
+      "retakeAssessment": "Retake Assessment",
+      "severity": {
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe",
+        "emergency": "Emergency",
+        "unknown": "Unknown"
+      },
+      "priority": {
+        "high": "High Priority",
+        "medium": "Medium Priority",
+        "low": "Low Priority",
+        "normal": "Normal"
+      },
+      "category": {
+        "immediate": "Immediate Action",
+        "lifestyle": "Lifestyle",
+        "medical": "Medical",
+        "dietary": "Dietary",
+        "exercise": "Exercise",
+        "selfcare": "Self-Care",
+        "general": "General"
+      },
+      "emergency": {
+        "title": "⚠️ Your assessment results indicate potential need for immediate medical attention. Please consult a healthcare professional.",
+        "description": "If you experience severe symptoms such as intense pain, heavy bleeding, high fever, or fainting, please seek immediate medical attention."
+      }
+    },
+    "question": {
+      "scale": {
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe"
+      },
+      "boolean": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "unsupported": "Unsupported question type"
+    },
+    "timeframe": {
+      "immediate": "Immediate",
+      "oneWeek": "1 week",
+      "oneToTwoWeeks": "1-2 weeks",
+      "twoToFourWeeks": "2-4 weeks",
+      "fourToSixWeeks": "4-6 weeks"
     }
   }
 }

@@ -1,0 +1,130 @@
+{
+  "constitutionTest": {
+    "title": "TCM Constitution Test",
+    "subtitle": "Scientific assessment of your constitution type for personalized health recommendations",
+    "features": {
+      "quick": {
+        "title": "Quick Test",
+        "description": "Complete professional constitution assessment in 5-10 minutes"
+      },
+      "professional": {
+        "title": "Professional & Authoritative",
+        "description": "Scientific assessment system based on TCM theory"
+      },
+      "personalized": {
+        "title": "Personalized Recommendations",
+        "description": "Targeted health conditioning solutions"
+      },
+      "practical": {
+        "title": "Practical Guidance",
+        "description": "Acupoint massage, dietary therapy, lifestyle recommendations"
+      }
+    },
+    "instructions": {
+      "title": "Test Instructions",
+      "item1": "Please select the answer that best matches your true feelings",
+      "item2": "Only one answer can be selected for each question",
+      "item3": "The test takes approximately 5-10 minutes to complete",
+      "item4": "Results are for reference only and do not replace professional medical advice"
+    },
+    "navigation": {
+      "startTest": "Start Test",
+      "previous": "Previous",
+      "next": "Next",
+      "completeTest": "Complete Test",
+      "retakeTest": "Retake Test"
+    },
+    "painScale": {
+      "title": "Pain Level",
+      "reference": "Pain Level Reference",
+      "levels": {
+        "none": "No Pain",
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe",
+        "extreme": "Extreme"
+      },
+      "descriptions": {
+        "0-2": "Mild discomfort, does not affect daily life",
+        "3-4": "Mild pain, tolerable",
+        "5-7": "Moderate pain, affects work and study",
+        "8-10": "Severe pain, requires rest or medication"
+      }
+    },
+    "result": {
+      "title": "Test Complete",
+      "subtitle": "Your constitution type analysis results",
+      "match": "Match Rate",
+      "constitutionFeatures": "Constitution Features",
+      "commonSymptoms": "Common Symptoms",
+      "menstrualFeatures": "Menstrual Characteristics"
+    },
+    "recommendations": {
+      "acupoints": {
+        "title": "Acupoint Massage Recommendations",
+        "primaryAcupoints": "Primary Acupoints",
+        "location": "Location: ",
+        "function": "Function: ",
+        "method": "Method: ",
+        "guidelines": "Massage Guidelines",
+        "technique": "Technique: ",
+        "frequency": "Frequency: ",
+        "duration": "Duration: "
+      },
+      "dietary": {
+        "title": "Dietary Therapy Recommendations",
+        "beneficialFoods": "Recommended Foods",
+        "foodsToAvoid": "Foods to Avoid",
+        "dietaryPrinciples": "Dietary Principles"
+      },
+      "lifestyle": {
+        "title": "Lifestyle Recommendations",
+        "description": "Based on your constitution type, the following lifestyle adjustments can help improve your health",
+        "reminder": "Friendly Reminder: ",
+        "reminderText": "The above recommendations are for reference only. Please seek medical attention if you have serious symptoms"
+      },
+      "menstrualPain": {
+        "title": "Menstrual Pain Relief Recommendations",
+        "acupointTherapy": "Acupoint Therapy",
+        "lifestyleAdjustments": "Lifestyle Adjustments"
+      }
+    },
+    "emergencyKit": {
+      "title": "Personalized Emergency Kit Recommendations",
+      "description": "Based on your constitution and menstrual pain condition, the following emergency supplies are recommended",
+      "priority": {
+        "high": "High Priority",
+        "medium": "Medium Priority",
+        "low": "Low Priority"
+      },
+      "packingTips": "Packing Tips: ",
+      "packingAdvice": "It is recommended to choose portable packaging for easy carrying"
+    },
+    "articles": {
+      "title": "Related Article Recommendations",
+      "readMore": "Read More"
+    },
+    "communication": {
+      "title": "Communication Templates",
+      "description": "Help you better communicate menstrual discomfort with family, friends or colleagues",
+      "styles": {
+        "intimate": "Intimate Relationship",
+        "casual": "Casual Friends",
+        "formal": "Workplace Colleagues"
+      },
+      "copyText": "Copy Text",
+      "usageTips": "Usage Tips: ",
+      "usageAdvice": "Adjust content according to actual situation and choose appropriate tone and expression"
+    },
+    "messages": {
+      "testComplete": "Test Complete",
+      "testCompleteDesc": "Your constitution analysis is complete",
+      "testFailed": "Test Failed",
+      "testFailedDesc": "Please check your network connection and try again"
+    }
+  }
+}
+
+
+
+

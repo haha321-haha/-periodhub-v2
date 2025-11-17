@@ -37,7 +37,7 @@ function getPreferredLocale(request: NextRequest): string {
     }
   }
   
-  // 默认返回中文
+  // ✅ 修复：默认返回英文（北美市场优先）
   return defaultLocale;
 }
 

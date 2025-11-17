@@ -1,0 +1,226 @@
+/**
+ * HVsLYEp职场健康助手 - 工作影响追踪组件
+ * 基于HVsLYEp的WorkImpactTracker函数设计
+ */
+
+'use client';
+
+import { useState } from 'react';
+import { Activity, Copy, Mail, CheckCircle } from 'lucide-react';
+import { useWorkImpact, useWorkplaceWellnessActions } from '../hooks/useWorkplaceWellnessStore';
+import { useLocale } from 'next-intl';
+import { getLeaveTemplates } from '../data';
+import { useTranslations } from 'next-intl';
+import { LeaveTemplate } from '../types';
+
+export default function WorkImpactComponent() {
+  const workImpact = useWorkImpact();
+  const locale = useLocale();
+  const { updateWorkImpact, selectTemplate } = useWorkplaceWellnessActions();
+  const t = useTranslations('workplaceWellness');
+
+  const templates = getLeaveTemplates(locale);
+  const [selectedTemplate, setSelectedTemplate] = useState<LeaveTemplate | null>(null);
+
+  // 基于HVsLYEp的getBadgeVariant函数
+  const getBadgeVariant = (level: number, type: 'pain' | 'efficiency') => {
+    if (type === 'pain') return level > 7 ? 'danger' : level > 4 ? 'warning' : 'success';
+    if (type === 'efficiency') return level > 80 ? 'success' : level > 60 ? 'warning' : 'danger';
+    return 'default';
+  };
+
+  // 获取徽章样式类
+  const getBadgeClasses = (level: number, type: 'pain' | 'efficiency') => {
+    const variant = getBadgeVariant(level, type);
+    const baseClasses = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium';
+    
+    switch (variant) {
+      case 'success':
+        return `${baseClasses} bg-green-100 text-green-800`;
+      case 'warning':
+        return `${baseClasses} bg-yellow-100 text-yellow-800`;
+      case 'danger':
+        return `${baseClasses} bg-red-100 text-red-800`;
+      default:
+        return `${baseClasses} bg-gray-100 text-gray-800`;
+    }
+  };
+
+  // 更新疼痛等级
+  const handlePainLevelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const level = parseInt(event.target.value);
+    updateWorkImpact({ painLevel: level as any });
+  };
+
+  // 更新工作效率
+  const handleEfficiencyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const efficiency = parseInt(event.target.value);
+    updateWorkImpact({ efficiency });
+  };
+
+  // 选择模板
+  const handleTemplateSelect = (template: LeaveTemplate) => {
+    setSelectedTemplate(template);
+    selectTemplate(template.id);
+  };
+
+  // 复制模板内容
+  const handleCopyTemplate = (template: LeaveTemplate) => {
+    const content = `${template.subject}\n\n${template.content}`;
+    navigator.clipboard.writeText(content).then(() => {
+      // 可以添加成功提示
+      console.log('Template copied to clipboard');
+    });
+  };
+
+  // 保存工作影响记录
+  const handleSaveRecord = () => {
+    // 这里可以添加保存逻辑
+    console.log('Work impact record saved:', workImpact);
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* 工作影响追踪 - 基于HVsLYEp的WorkImpactTracker设计 */}
+      <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+        <h4 className="text-lg font-semibold text-neutral-900 mb-4">
+          {t('workImpact.title')}
+        </h4>
+        <div className="space-y-4">
+          {/* 疼痛等级 */}
+          <div>
+            <label className="block text-sm font-medium text-neutral-800 mb-2">
+              {t('workImpact.painLevel')}
+            </label>
+            <div className="flex items-center gap-2">
+              <input 
+                type="range" 
+                min="1" 
+                max="10" 
+                value={workImpact.painLevel} 
+                onChange={handlePainLevelChange}
+                className="flex-1"
+              />
+              <div className="w-12 text-center">
+                <span className={getBadgeClasses(workImpact.painLevel, 'pain')}>
+                  {workImpact.painLevel}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* 工作效率 */}
+          <div>
+            <label className="block text-sm font-medium text-neutral-800 mb-2">
+              {t('workImpact.efficiency')}
+            </label>
+            <div className="flex items-center gap-2">
+              <input 
+                type="range" 
+                min="0" 
+                max="100" 
+                value={workImpact.efficiency} 
+                onChange={handleEfficiencyChange}
+                className="flex-1"
+              />
+              <div className="w-16 text-center">
+                <span className={getBadgeClasses(workImpact.efficiency, 'efficiency')}>
+                  {workImpact.efficiency}%
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* 工作调整选项 */}
+          <div>
+            <label className="block text-sm font-medium text-neutral-800 mb-2">
+              {t('workImpact.adjustment')}
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              {['takeLeave', 'workFromHome', 'postponeMeeting', 'reduceTasks'].map((optionKey: string, index: number) => (
+                <button 
+                  key={index}
+                  className="rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-3 py-1.5 text-sm border border-neutral-300 hover:bg-neutral-50 text-neutral-800"
+                >
+                  {t(`workImpact.adjustOptions.${optionKey}`)}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 保存按钮 */}
+        <button 
+          onClick={handleSaveRecord}
+          className="w-full mt-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
+        >
+          <CheckCircle className="w-4 h-4" />
+          {t('workImpact.saveButton')}
+        </button>
+      </div>
+
+      {/* 请假模板 - 基于HVsLYEp的模板设计 */}
+      <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+        <h4 className="text-lg font-semibold text-neutral-900 mb-4">
+          {t('workImpact.templatesTitle')}
+        </h4>
+        <div className="space-y-3">
+          {templates.map((template) => (
+            <div 
+              key={template.id}
+              onClick={() => handleTemplateSelect(template)}
+              className={`p-4 rounded-lg border-2 cursor-pointer transition-colors duration-200 ${
+                workImpact.selectedTemplateId === template.id 
+                  ? 'border-primary-500 bg-primary-500/10' 
+                  : 'border-neutral-200 hover:border-neutral-300'
+              }`}
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <h5 className="font-medium text-neutral-900">{template.title}</h5>
+                  <p className="text-sm text-neutral-600 mt-1">
+                    {t('workImpact.subject')} {template.subject}
+                  </p>
+                </div>
+                <span className={`ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                  template.severity === 'mild' 
+                    ? 'bg-green-100 text-green-800' 
+                    : 'bg-yellow-100 text-yellow-800'
+                }`}>
+                  {t(`workImpact.severity.${template.severity}`)}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 模板预览 - 基于HVsLYEp的预览设计 */}
+        {selectedTemplate && (
+          <div className="mt-4 p-4 bg-neutral-50 rounded-lg">
+            <h6 className="font-medium text-neutral-900 mb-2">
+              {t('workImpact.preview')}
+            </h6>
+            <div className="text-sm space-y-2">
+              <div>
+                <strong>{t('workImpact.subject')}</strong> {selectedTemplate.subject}
+              </div>
+              <div>
+                <strong>{t('workImpact.content')}</strong>
+              </div>
+              <div className="text-neutral-800 leading-relaxed">
+                {selectedTemplate.content}
+              </div>
+            </div>
+            <button 
+              onClick={() => handleCopyTemplate(selectedTemplate)}
+              className="mt-3 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-3 py-1.5 text-sm bg-primary-500 hover:bg-primary-600 text-white"
+            >
+              <Copy className="w-4 h-4" />
+              {t('workImpact.copyButton')}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

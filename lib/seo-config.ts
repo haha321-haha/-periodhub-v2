@@ -17,6 +17,6 @@ export const getHreflangUrls = (path: string) => {
   return {
     "zh-CN": `${baseUrl}/zh${cleanPath}`,
     "en-US": `${baseUrl}/en${cleanPath}`,
-    "x-default": `${baseUrl}/zh${cleanPath}`,
+    "x-default": `${baseUrl}/en${cleanPath}`, // ✅ 修复：默认英文版本（北美市场优先）
   };
 };

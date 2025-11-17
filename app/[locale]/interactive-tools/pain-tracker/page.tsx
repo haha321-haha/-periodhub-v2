@@ -46,6 +46,9 @@ export async function generateMetadata({
         "en-US": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
         }/en/interactive-tools/pain-tracker`,
+        "x-default": `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/en/interactive-tools/pain-tracker`, // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
 

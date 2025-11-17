@@ -1,0 +1,31 @@
+# 忽略旧代码目录
+hub-latest-main/
+lib/
+scripts/
+types/
+utils/
+*.md
+
+# 忽略有问题的文章页面
+app/[locale]/articles-pdf-center/
+app/[locale]/articles/comprehensive-medical-guide-to-dysmenorrhea/
+app/[locale]/articles/pain-management/
+app/[locale]/articles/when-to-seek-medical-care-comprehensive-guide/
+
+# 忽略其他有问题的页面
+app/[locale]/cultural-charms/
+app/[locale]/downloads/
+app/[locale]/framework-demo/
+app/[locale]/health-guide/
+app/[locale]/home-clean/
+app/[locale]/immediate-relief/
+app/[locale]/medical-disclaimer/
+app/[locale]/natural-therapies/
+app/[locale]/privacy-policy/
+app/[locale]/resources/
+app/[locale]/scenario-solutions/
+app/[locale]/teen-health/
+app/[locale]/test-*/
+app/[locale]/terms-of-service/
+
+# 保留核心交互工具检查

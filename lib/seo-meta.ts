@@ -74,6 +74,7 @@ export function generateAdvancedMeta({
       languages: {
         "zh-CN": canonical,
         "en-US": canonical?.replace("/zh/", "/en/"),
+        "x-default": canonical?.replace("/zh/", "/en/") || canonical, // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
 

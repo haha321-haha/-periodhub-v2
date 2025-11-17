@@ -248,6 +248,18 @@ export async function generateMetadata({
     description: seoDescription,
     keywords: locale === "zh" ? article.tags_zh : article.tags,
     authors: [{ name: article.author }],
+    // 🔧 修复：添加明确的robots配置，确保文章页面被正确索引
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     other: {
       "fb:app_id":
         process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",

@@ -1,0 +1,44 @@
+
+> periodhub-health@0.1.0 dev
+> npm run build:index && next dev -p 3001 -p 3008
+
+
+> periodhub-health@0.1.0 build:index
+> node scripts/build-articles-index-wrapper.js
+
+✅ Indexed 43 articles for en
+✅ Indexed 43 articles for zh
+✅ Articles index generated: /Users/duting/Downloads/money旺财/--main/public/articles-index.json
+📊 Total size: 54.46 KB
+   ▲ Next.js 15.5.6
+   - Local:        http://localhost:3008
+   - Network:      http://192.168.8.18:3008
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ✓ optimizeCss
+     · webVitalsAttribution
+     · optimizePackageImports
+
+ ✓ Starting...
+ ✓ Ready in 3.1s
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 774ms (250 modules)
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+ ○ Compiling /[locale]/interactive-tools/period-pain-impact-calculator ...
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled /[locale]/interactive-tools/period-pain-impact-calculator in 5.3s (952 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled in 152ms (616 modules)
+ ✓ Compiled in 168ms (326 modules)
+ HEAD /en/interactive-tools/period-pain-impact-calculator 200 in 6934ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+ GET /en/interactive-tools/period-pain-impact-calculator 200 in 215ms
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+ GET /en/interactive-tools/period-pain-impact-calculator 200 in 223ms
+[?25h

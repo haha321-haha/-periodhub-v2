@@ -70,11 +70,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/en/downloads/medication-guide"];
 
   // 互动工具子页面 - 只包含实际存在的页面
+  // 🔧 修复：添加constitution-test到sitemap，确保该页面能被搜索引擎发现
   const interactiveTools = [
     "/zh/interactive-tools/symptom-assessment",
     "/en/interactive-tools/symptom-assessment",
     "/zh/interactive-tools/pain-tracker",
     "/en/interactive-tools/pain-tracker",
+    "/zh/interactive-tools/constitution-test",
+    "/en/interactive-tools/constitution-test",
     "/zh/interactive-tools/period-pain-impact-calculator",
     "/en/interactive-tools/period-pain-impact-calculator",
     "/zh/interactive-tools/nutrition-recommendation-generator",

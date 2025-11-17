@@ -1,0 +1,177 @@
+
+> periodhub-health@0.1.0 dev
+> npm run build:index && next dev -p 3001 -p 3008
+
+
+> periodhub-health@0.1.0 build:index
+> node scripts/build-articles-index-wrapper.js
+
+✅ Indexed 43 articles for en
+✅ Indexed 43 articles for zh
+✅ Articles index generated: /Users/duting/Downloads/money旺财/--main/public/articles-index.json
+📊 Total size: 54.46 KB
+   ▲ Next.js 15.5.6
+   - Local:        http://localhost:3008
+   - Network:      http://192.168.8.18:3008
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ✓ optimizeCss
+     · webVitalsAttribution
+     · optimizePackageImports
+
+ ✓ Starting...
+ ✓ Ready in 2.4s
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 548ms (250 modules)
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+ ○ Compiling /[locale]/interactive-tools/period-pain-impact-calculator ...
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled /[locale]/interactive-tools/period-pain-impact-calculator in 4.2s (952 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled in 109ms (616 modules)
+ ✓ Compiled in 126ms (326 modules)
+ GET /en/interactive-tools/period-pain-impact-calculator 200 in 5360ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+ GET /en/interactive-tools/period-pain-impact-calculator 200 in 196ms
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+ GET /en/interactive-tools/period-pain-impact-calculator 200 in 142ms
+ ⨯ ./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx:10:42
+Module not found: Can't resolve '@/components/RelatedArticleCard'
+   8 |
+   9 | // 动态导入相关组件 - 代码分割优化
+> 10 | const RelatedArticleCard = dynamic(() => import('@/components/RelatedArticleCard'), {
+     |                                          ^
+  11 |   loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />
+  12 | });
+  13 |
+
+https://nextjs.org/docs/messages/module-not-found
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled in 384ms (315 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled in 984ms (315 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled in 1098ms (326 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ⨯ ./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+Module parse failed: Identifier 'getPainCalculatorRecommendations' has already been declared (178:6)
+| };
+| // 痛经影响计算器专用推荐数据配置
+> const getPainCalculatorRecommendations = (locale)=>{
+|     const isZh = locale === 'zh';
+|     // 推荐文章推荐
+
+Import trace for requested module:
+./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ⨯ ./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+Module parse failed: Identifier 'getPainCalculatorRecommendations' has already been declared (178:6)
+| };
+| // 痛经影响计算器专用推荐数据配置
+> const getPainCalculatorRecommendations = (locale)=>{
+|     const isZh = locale === 'zh';
+|     // 推荐文章推荐
+
+Import trace for requested module:
+./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+ ⨯ ./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+Module parse failed: Identifier 'getPainCalculatorRecommendations' has already been declared (174:6)
+| };
+| // 痛经影响计算器专用推荐数据配置
+> const getPainCalculatorRecommendations = (locale)=>{
+|     const isZh = locale === 'zh';
+|     // 推荐文章推荐
+
+Import trace for requested module:
+./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+ ⨯ ./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+Module parse failed: Identifier 'getPainCalculatorRecommendations' has already been declared (174:6)
+| };
+| // 痛经影响计算器专用推荐数据配置
+> const getPainCalculatorRecommendations = (locale)=>{
+|     const isZh = locale === 'zh';
+|     // 推荐文章推荐
+
+Import trace for requested module:
+./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+ ○ Compiling /[locale]/interactive-tools/[tool] ...
+ ⨯ ./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+Module parse failed: Identifier 'getPainCalculatorRecommendations' has already been declared (178:6)
+| };
+| // 痛经影响计算器专用推荐数据配置
+> const getPainCalculatorRecommendations = (locale)=>{
+|     const isZh = locale === 'zh';
+|     // 推荐文章推荐
+
+Import trace for requested module:
+./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+ ⨯ ./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+Module parse failed: Identifier 'getPainCalculatorRecommendations' has already been declared (174:6)
+| };
+| // 痛经影响计算器专用推荐数据配置
+> const getPainCalculatorRecommendations = (locale)=>{
+|     const isZh = locale === 'zh';
+|     // 推荐文章推荐
+
+Import trace for requested module:
+./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+ ⨯ ./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+Module parse failed: Identifier 'getPainCalculatorRecommendations' has already been declared (174:6)
+| };
+| // 痛经影响计算器专用推荐数据配置
+> const getPainCalculatorRecommendations = (locale)=>{
+|     const isZh = locale === 'zh';
+|     // 推荐文章推荐
+
+Import trace for requested module:
+./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+ ⨯ ./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+Module parse failed: Identifier 'getPainCalculatorRecommendations' has already been declared (178:6)
+| };
+| // 痛经影响计算器专用推荐数据配置
+> const getPainCalculatorRecommendations = (locale)=>{
+|     const isZh = locale === 'zh';
+|     // 推荐文章推荐
+
+Import trace for requested module:
+./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ⨯ ./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+Module parse failed: Identifier 'getPainCalculatorRecommendations' has already been declared (178:6)
+| };
+| // 痛经影响计算器专用推荐数据配置
+> const getPainCalculatorRecommendations = (locale)=>{
+|     const isZh = locale === 'zh';
+|     // 推荐文章推荐
+
+Import trace for requested module:
+./app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx
+Time 9.06
+ GET /en/interactive-tools/period-pain-impact-calculator 500 in 5383ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+ ✓ Compiled /_error in 6.7s (662 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+ ✓ Compiled /[locale]/interactive-tools/period-pain-impact-calculator in 492ms (713 modules)
+ GET /en/interactive-tools/period-pain-impact-calculator 200 in 1250ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: Unable to snapshot resolve dependencies
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+ GET /en/interactive-tools/period-pain-impact-calculator 200 in 277ms
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+[Middleware] Processing: /en/interactive-tools/period-pain-impact-calculator
+ GET /en/interactive-tools/period-pain-impact-calculator 200 in 167ms
+[?25h

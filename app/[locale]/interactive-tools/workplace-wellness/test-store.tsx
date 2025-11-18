@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useWorkplaceWellnessStore, useWorkplaceWellnessActions, useWorkplaceWellnessStore as storeModule } from "./hooks/useWorkplaceWellnessStore";
 
 export default function TestStore() {
-  const store = useWorkplaceWellnessStore();
+  const store = (useWorkplaceWellnessStore as any)((state: any) => state);
   const { setActiveTab, updateWorkImpact, addPeriodRecord } = useWorkplaceWellnessActions();
   const [testMessage, setTestMessage] = useState("");
   const [isClient, setIsClient] = useState(false);

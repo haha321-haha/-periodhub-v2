@@ -92,7 +92,10 @@ export default async function Layout({
   });
 
   // 生成其他结构化数据
-  const additionalStructuredData = generateAllStructuredData(locale as Locale);
+  const additionalStructuredData = generateAllStructuredData(
+    locale as Locale,
+    t,
+  );
 
   return (
     <>

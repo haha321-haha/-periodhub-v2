@@ -4,6 +4,7 @@
  */
 
 import { PeriodRecord, NutritionRecommendation, ExportType } from "../types";
+import type { TFunction } from "next-intl";
 
 export interface PDFReportData {
   exportDate: string;
@@ -19,26 +20,24 @@ export interface PDFReportData {
 
 export class PDFGenerator {
   private locale: string;
+  private t: TFunction;
 
-  constructor(locale: string) {
+  constructor(locale: string, t: TFunction) {
     this.locale = locale;
+    this.t = t;
   }
 
   /**
    * 生成HTML格式的PDF报告
    */
   generateHTMLReport(data: PDFReportData): string {
-    const isZh = this.locale === "zh";
-
     return `
 <!DOCTYPE html>
 <html lang="${this.locale}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${
-      isZh ? "工作场所健康数据报告" : "Workplace Health Data Report"
-    }</title>
+    <title>${this.t("pdf.reportTitle")}</title>
     <style>
         * {
             margin: 0;
@@ -227,23 +226,15 @@ export class PDFGenerator {
 </head>
 <body>
     <div class="header">
-        <h1>${
-          isZh ? "工作场所健康数据报告" : "Workplace Health Data Report"
-        }</h1>
-        <div class="subtitle">${
-          isZh
-            ? "Period Hub 职场健康助手"
-            : "Period Hub Workplace Wellness Assistant"
-        }</div>
+        <h1>${this.t("pdf.reportTitle")}</h1>
+        <div class="subtitle">${this.t("pdf.reportSubtitle")}</div>
     </div>
 
     <div class="report-info">
-        <h2>${isZh ? "报告信息" : "Report Information"}</h2>
+        <h2>${this.t("pdf.reportInfo")}</h2>
         <div class="info-grid">
             <div class="info-item">
-                <div class="info-label">${
-                  isZh ? "导出时间" : "Export Time"
-                }</div>
+                <div class="info-label">${this.t("pdf.exportTime")}</div>
                 <div class="info-value">${new Date(
                   data.exportDate,
                 ).toLocaleString(
@@ -251,21 +242,17 @@ export class PDFGenerator {
                 )}</div>
             </div>
             <div class="info-item">
-                <div class="info-label">${
-                  isZh ? "导出类型" : "Export Type"
-                }</div>
+                <div class="info-label">${this.t("pdf.exportType")}</div>
                 <div class="info-value">${this.getExportTypeLabel(
                   data.exportType,
                 )}</div>
             </div>
             <div class="info-item">
-                <div class="info-label">${isZh ? "语言版本" : "Language"}</div>
-                <div class="info-value">${isZh ? "中文" : "English"}</div>
+                <div class="info-label">${this.t("pdf.language")}</div>
+                <div class="info-value">${this.t("pdf.languageValue")}</div>
             </div>
             <div class="info-item">
-                <div class="info-label">${
-                  isZh ? "数据条数" : "Data Records"
-                }</div>
+                <div class="info-label">${this.t("pdf.dataRecords")}</div>
                 <div class="info-value">${this.getDataCount(data)}</div>
             </div>
         </div>
@@ -275,19 +262,13 @@ export class PDFGenerator {
 
     <div class="footer">
         <div class="privacy-notice">
-            <h4>${isZh ? "隐私保护声明" : "Privacy Protection Notice"}</h4>
-            <p>${
-              isZh
-                ? "本报告包含个人健康数据，请妥善保管，避免泄露。所有数据均存储在您的本地设备中，我们不会收集或存储您的个人信息。"
-                : "This report contains personal health data. Please keep it secure and avoid disclosure. All data is stored locally on your device. We do not collect or store your personal information."
-            }</p>
+            <h4>${this.t("pdf.privacyNotice")}</h4>
+            <p>${this.t("pdf.privacyText")}</p>
         </div>
         <p style="margin-top: 15px;">
-            ${
-              isZh
-                ? "报告生成时间: " + new Date().toLocaleString("zh-CN")
-                : "Report generated at: " + new Date().toLocaleString("en-US")
-            }
+            ${this.t("pdf.generatedAt")}${new Date().toLocaleString(
+              this.locale === "zh" ? "zh-CN" : "en-US",
+            )}
         </p>
     </div>
 </body>
@@ -298,39 +279,24 @@ export class PDFGenerator {
    * 获取导出类型标签
    */
   private getExportTypeLabel(type: ExportType): string {
-    const labels = {
-      zh: {
-        period: "经期数据",
-        nutrition: "营养数据",
-        all: "全部数据",
-      },
-      en: {
-        period: "Period Data",
-        nutrition: "Nutrition Data",
-        all: "All Data",
-      },
-    };
-
-    return labels[this.locale][type];
+    return this.t(`pdf.exportTypes.${type}`);
   }
 
   /**
    * 获取数据条数
    */
   private getDataCount(data: PDFReportData): string {
-    const isZh = this.locale === "zh";
+    const recordsLabel = this.t("pdf.records");
 
     switch (data.exportType) {
       case "period":
-        return `${data.periodData?.length || 0} ${isZh ? "条记录" : "records"}`;
+        return `${data.periodData?.length || 0} ${recordsLabel}`;
       case "nutrition":
-        return `${data.nutritionData?.length || 0} ${
-          isZh ? "条记录" : "records"
-        }`;
+        return `${data.nutritionData?.length || 0} ${recordsLabel}`;
       case "all":
         const periodCount = data.allData?.period.length || 0;
         const nutritionCount = data.allData?.nutrition.length || 0;
-        return `${periodCount + nutritionCount} ${isZh ? "条记录" : "records"}`;
+        return `${periodCount + nutritionCount} ${recordsLabel}`;
       default:
         return "0";
     }
@@ -340,7 +306,6 @@ export class PDFGenerator {
    * 生成数据部分
    */
   private generateDataSections(data: PDFReportData): string {
-    const isZh = this.locale === "zh";
     let sections = "";
 
     if (data.exportType === "period" || data.exportType === "all") {
@@ -362,30 +327,26 @@ export class PDFGenerator {
    * 生成经期数据部分
    */
   private generatePeriodSection(periodData: PeriodRecord[]): string {
-    const isZh = this.locale === "zh";
-
     if (periodData.length === 0) {
       return `
         <div class="data-section">
-          <h3>${isZh ? "经期数据" : "Period Data"}</h3>
-          <p style="color: #666; font-style: italic;">${
-            isZh ? "暂无经期数据记录" : "No period data records"
-          }</p>
+          <h3>${this.t("pdf.periodData")}</h3>
+          <p style="color: #666; font-style: italic;">${this.t("pdf.noPeriodData")}</p>
         </div>
       `;
     }
 
     return `
       <div class="data-section">
-        <h3>${isZh ? "经期数据" : "Period Data"}</h3>
+        <h3>${this.t("pdf.periodData")}</h3>
         <table class="data-table">
           <thead>
             <tr>
-              <th>${isZh ? "日期" : "Date"}</th>
-              <th>${isZh ? "类型" : "Type"}</th>
-              <th>${isZh ? "疼痛等级" : "Pain Level"}</th>
-              <th>${isZh ? "流量" : "Flow"}</th>
-              <th>${isZh ? "备注" : "Notes"}</th>
+              <th>${this.t("pdf.tableHeaders.date")}</th>
+              <th>${this.t("pdf.tableHeaders.type")}</th>
+              <th>${this.t("pdf.tableHeaders.painLevel")}</th>
+              <th>${this.t("pdf.tableHeaders.flow")}</th>
+              <th>${this.t("pdf.tableHeaders.notes")}</th>
             </tr>
           </thead>
           <tbody>
@@ -402,15 +363,7 @@ export class PDFGenerator {
                       ? "badge-period"
                       : "badge-predicted"
                   }">
-                    ${
-                      isZh
-                        ? record.type === "period"
-                          ? "经期"
-                          : "预测"
-                        : record.type === "period"
-                          ? "Period"
-                          : "Predicted"
-                    }
+                    ${this.t(`pdf.recordTypes.${record.type}`)}
                   </span>
                 </td>
                 <td>${record.painLevel || "-"}</td>
@@ -432,30 +385,26 @@ export class PDFGenerator {
   private generateNutritionSection(
     nutritionData: NutritionRecommendation[],
   ): string {
-    const isZh = this.locale === "zh";
-
     if (nutritionData.length === 0) {
       return `
         <div class="data-section">
-          <h3>${isZh ? "营养数据" : "Nutrition Data"}</h3>
-          <p style="color: #666; font-style: italic;">${
-            isZh ? "暂无营养数据记录" : "No nutrition data records"
-          }</p>
+          <h3>${this.t("pdf.nutritionData")}</h3>
+          <p style="color: #666; font-style: italic;">${this.t("pdf.noNutritionData")}</p>
         </div>
       `;
     }
 
     return `
       <div class="data-section">
-        <h3>${isZh ? "营养数据" : "Nutrition Data"}</h3>
+        <h3>${this.t("pdf.nutritionData")}</h3>
         <table class="data-table">
           <thead>
             <tr>
-              <th>${isZh ? "食物名称" : "Food Name"}</th>
-              <th>${isZh ? "经期阶段" : "Menstrual Phase"}</th>
-              <th>${isZh ? "中医性质" : "TCM Nature"}</th>
-              <th>${isZh ? "主要功效" : "Main Benefits"}</th>
-              <th>${isZh ? "关键营养素" : "Key Nutrients"}</th>
+              <th>${this.t("pdf.tableHeaders.foodName")}</th>
+              <th>${this.t("pdf.tableHeaders.menstrualPhase")}</th>
+              <th>${this.t("pdf.tableHeaders.tcmNature")}</th>
+              <th>${this.t("pdf.tableHeaders.mainBenefits")}</th>
+              <th>${this.t("pdf.tableHeaders.keyNutrients")}</th>
             </tr>
           </thead>
           <tbody>
@@ -486,42 +435,22 @@ export class PDFGenerator {
    * 获取经期阶段标签
    */
   private getPhaseLabel(phase: string): string {
-    const labels = {
-      zh: {
-        menstrual: "经期",
-        follicular: "卵泡期",
-        ovulation: "排卵期",
-        luteal: "黄体期",
-      },
-      en: {
-        menstrual: "Menstrual",
-        follicular: "Follicular",
-        ovulation: "Ovulation",
-        luteal: "Luteal",
-      },
-    };
-
-    return labels[this.locale][phase as keyof typeof labels.zh] || phase;
+    try {
+      return this.t(`pdf.phases.${phase}`);
+    } catch {
+      return phase;
+    }
   }
 
   /**
    * 获取中医性质标签
    */
   private getTCMNatureLabel(nature: string): string {
-    const labels = {
-      zh: {
-        warm: "温性",
-        cool: "凉性",
-        neutral: "平性",
-      },
-      en: {
-        warm: "Warm",
-        cool: "Cool",
-        neutral: "Neutral",
-      },
-    };
-
-    return labels[this.locale][nature as keyof typeof labels.zh] || nature;
+    try {
+      return this.t(`pdf.tcmNature.${nature}`);
+    } catch {
+      return nature;
+    }
   }
 
   /**

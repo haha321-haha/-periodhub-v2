@@ -9,10 +9,10 @@ import { useState, useEffect, useMemo } from "react";
 import { AlertTriangle, Download, X } from "lucide-react";
 import { useCalendar } from "../hooks/useWorkplaceWellnessStore";
 import { useTranslations } from "next-intl";
-import { PeriodRecord } from "../types";
+import { PeriodRecord, CalendarState } from "../types";
 
 export default function DataRetentionWarning() {
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const t = useTranslations("workplaceWellness");
   const [dismissed, setDismissed] = useState(false);
 

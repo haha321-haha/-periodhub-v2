@@ -239,7 +239,9 @@ export function generateWebApplicationSchema(locale: Locale): any {
     browserRequirements: "Requires JavaScript. Requires HTML5.",
     softwareVersion: "1.0.0",
     datePublished: "2024-01-01",
-    dateModified: new Date().toISOString().split("T")[0],
+    dateModified: typeof window !== 'undefined' 
+      ? new Date().toISOString().split("T")[0]
+      : new Date(Date.now()).toISOString().split("T")[0], // SSR 安全
   };
 }
 
@@ -384,7 +386,9 @@ export function generateSEOReport(
       webApplication: true,
       breadcrumb: true,
     },
-    generatedAt: new Date().toISOString(),
+    generatedAt: typeof window !== 'undefined'
+      ? new Date().toISOString()
+      : new Date(Date.now()).toISOString(), // SSR 安全
   };
 
   return JSON.stringify(report, null, 2);

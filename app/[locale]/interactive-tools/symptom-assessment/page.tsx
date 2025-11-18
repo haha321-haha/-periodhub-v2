@@ -117,8 +117,13 @@ export default async function SymptomAssessmentPage({
   });
 
   // 生成FAQ和HowTo结构化数据
+  const symptomAssessmentT = await getTranslations({
+    locale,
+    namespace: "interactiveToolsPage.symptomAssessment",
+  });
   const additionalStructuredData = generateAllStructuredData(
     locale as Locale,
+    symptomAssessmentT,
   );
 
   return (

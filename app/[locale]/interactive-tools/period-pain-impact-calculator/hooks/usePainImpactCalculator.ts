@@ -599,10 +599,9 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
   const questions = getAssessmentQuestions(t);
   const currentQuestion = questions[currentQuestionIndex] || null;
   const isComplete = currentQuestionIndex >= questions.length;
-  // 进度计算：当前题目索引+1（因为索引从0开始），除以总题目数
-  // 当在最后一题时（currentQuestionIndex === questions.length - 1），进度应该是100%
+  // 进度计算：基于已回答问题数量，而不是当前问题索引
   const progress = questions.length > 0 
-    ? Math.min(((currentQuestionIndex + 1) / questions.length) * 100, 100) 
+    ? Math.min((currentSession?.answers.length || 0) / questions.length * 100, 100)
     : 0;
 
   const startAssessment = useCallback((locale: string) => {
@@ -637,6 +636,8 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
         answers: updatedAnswers
       };
     });
+    
+    // 移除自动跳转逻辑，让用户手动点击"下一题"
   }, [currentSession]);
 
   const goToQuestion = useCallback((index: number) => {

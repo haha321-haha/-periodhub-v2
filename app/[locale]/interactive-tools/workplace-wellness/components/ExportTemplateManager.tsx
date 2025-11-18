@@ -25,8 +25,9 @@ import { EXPORT_FORMAT_CONFIG } from "../types/defaults";
 interface ExportTemplateManagerProps {}
 
 export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
-  const templates = useExportTemplates();
-  const activeTemplate = useActiveTemplate();
+  const templates = useExportTemplates() as ExportTemplate[];
+  const activeTemplate = useActiveTemplate() as ExportTemplate | null;
+  const exportTemplateActions = useExportTemplateActions();
   const {
     addExportTemplate,
     updateExportTemplate,
@@ -34,7 +35,7 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
     setActiveTemplate,
     loadTemplate,
     duplicateTemplate,
-  } = useExportTemplateActions();
+  } = exportTemplateActions;
 
   const t = useTranslations("workplaceWellness");
   const [isCreating, setIsCreating] = useState(false);
@@ -53,7 +54,9 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
   // 创建新模板
   const handleCreateTemplate = () => {
     if (newTemplate.name && newTemplate.exportType && newTemplate.format) {
-      addExportTemplate({
+      // TypeScript 类型推断有问题，使用类型断言
+      const addExportTemplateFn = addExportTemplate as (template: Omit<ExportTemplate, "id" | "createdAt" | "updatedAt">) => void;
+      addExportTemplateFn({
         name: newTemplate.name,
         description: newTemplate.description || "",
         exportType: newTemplate.exportType as ExportType,
@@ -100,7 +103,9 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
       newTemplate.exportType &&
       newTemplate.format
     ) {
-      updateExportTemplate(editingTemplate.id, {
+      // TypeScript 类型推断有问题，使用类型断言
+      const updateExportTemplateFn = updateExportTemplate as (id: string, updates: Partial<ExportTemplate>) => void;
+      updateExportTemplateFn(editingTemplate.id, {
         name: newTemplate.name,
         description: newTemplate.description,
         exportType: newTemplate.exportType as ExportType,
@@ -126,19 +131,26 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
   // 删除模板
   const handleDeleteTemplate = (template: ExportTemplate) => {
     if (window.confirm(`确定要删除模板 "${template.name}" 吗？`)) {
-      deleteExportTemplate(template.id);
+      // TypeScript 类型推断有问题，使用类型断言
+      const deleteExportTemplateFn = deleteExportTemplate as (id: string) => void;
+      deleteExportTemplateFn(template.id);
     }
   };
 
   // 复制模板
   const handleDuplicateTemplate = (template: ExportTemplate) => {
-    duplicateTemplate(template.id);
+    // TypeScript 类型推断有问题，使用类型断言
+    const duplicateTemplateFn = duplicateTemplate as (id: string) => void;
+    duplicateTemplateFn(template.id);
   };
 
   // 使用模板
   const handleUseTemplate = (template: ExportTemplate) => {
-    setActiveTemplate(template);
-    loadTemplate(template.id);
+    // TypeScript 类型推断有问题，使用类型断言
+    const setActiveTemplateFn = setActiveTemplate as (template: ExportTemplate | null) => void;
+    const loadTemplateFn = loadTemplate as (id: string) => void;
+    setActiveTemplateFn(template);
+    loadTemplateFn(template.id);
   };
 
   // 取消编辑

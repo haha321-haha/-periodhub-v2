@@ -21,7 +21,7 @@ import {
   CycleAnalysis,
   CycleStatistics,
 } from "../utils/cyclePrediction";
-import { PeriodRecord } from "../types";
+import { PeriodRecord, CalendarState } from "../types";
 
 interface ChartData {
   labels: string[];
@@ -37,7 +37,7 @@ interface ChartData {
 export default function CycleStatisticsChart() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const [activeTab, setActiveTab] = useState<
     "overview" | "cycle-length" | "pain-level" | "flow-type"
   >("overview");

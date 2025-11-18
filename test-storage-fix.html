@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workplace Wellness 存储测试工具</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .test-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .test-section h2 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .test-section p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        button.secondary {
+            background: #6c757d;
+        }
+        button.danger {
+            background: #dc3545;
+        }
+        button.success {
+            background: #28a745;
+        }
+        .result {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .result.success {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+        .result.error {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .result.info {
+            border-color: #17a2b8;
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            text-align: center;
+        }
+        .stat-card .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        .stat-card .label {
+            font-size: 14px;
+            color: #666;
+        }
+        .icon {
+            font-size: 20px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        .badge.pass {
+            background: #28a745;
+            color: white;
+        }
+        .badge.fail {
+            background: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Workplace Wellness 存储优化测试工具</h1>
+        <p class="subtitle">快速验证数据清理和存储警告功能</p>
+
+        <!-- 测试1: 检查存储状态 -->
+        <div class="test-section">
+            <h2><span class="icon">📊</span> 测试1: 检查当前存储状态</h2>
+            <p>查看当前 localStorage 中的数据量和大小</p>
+            <button onclick="checkStorageStatus()">检查存储状态</button>
+            <div id="storage-result"></div>
+        </div>
+
+        <!-- 测试2: 模拟存储满 -->
+        <div class="test-section">
+            <h2><span class="icon">⚠️</span> 测试2: 模拟存储空间满</h2>
+            <p>触发 storage-warning 事件，验证提示框是否显示</p>
+            <button onclick="triggerStorageWarning('sessionStorage')">触发 sessionStorage 警告（黄色）</button>
+            <button class="danger" onclick="triggerStorageWarning('failed')">触发 failed 警告（红色）</button>
+            <div id="warning-result"></div>
+        </div>
+
+        <!-- 测试3: 清空数据 -->
+        <div class="test-section">
+            <h2><span class="icon">🗑️</span> 测试3: 清空所有数据</h2>
+            <p>清空 localStorage，准备进行新的测试</p>
+            <button class="danger" onclick="clearAllData()">清空 localStorage</button>
+            <div id="clear-result"></div>
+        </div>
+
+        <!-- 测试4: 生成测试数据 -->
+        <div class="test-section">
+            <h2><span class="icon">📝</span> 测试4: 生成测试数据</h2>
+            <p>自动生成测试数据，验证自动清理功能</p>
+            <button onclick="generateTestData(10)">生成 10 条记录</button>
+            <button onclick="generateTestData(25)">生成 25 条记录</button>
+            <button class="secondary" onclick="generateTestData(50)">生成 50 条记录（测试清理）</button>
+            <div id="generate-result"></div>
+        </div>
+
+        <!-- 测试5: 验证数据清理 -->
+        <div class="test-section">
+            <h2><span class="icon">✅</span> 测试5: 验证数据清理规则</h2>
+            <p>检查数据是否按照 2周+20条 的规则被清理</p>
+            <button class="success" onclick="verifyDataCleanup()">验证清理规则</button>
+            <div id="verify-result"></div>
+        </div>
+
+        <!-- 测试6: 完整测试 -->
+        <div class="test-section">
+            <h2><span class="icon">🎯</span> 测试6: 自动化完整测试</h2>
+            <p>自动执行所有测试步骤，生成完整报告</p>
+            <button class="success" onclick="runFullTest()">运行完整测试</button>
+            <div id="full-test-result"></div>
+        </div>
+
+        <!-- 统计数据 -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="value" id="stat-records">-</div>
+                <div class="label">当前记录数</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" id="stat-size">-</div>
+                <div class="label">存储大小 (KB)</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" id="stat-exports">-</div>
+                <div class="label">导出历史</div>
+            </div>
+            <div class="stat-card">
+                <div class="value" id="stat-feedbacks">-</div>
+                <div class="label">反馈数量</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 更新统计数据
+        function updateStats() {
+            try {
+                const data = JSON.parse(localStorage.getItem('workplace-wellness-storage') || '{}');
+                const state = data?.state || {};
+                
+                document.getElementById('stat-records').textContent = 
+                    state?.calendar?.periodData?.length || 0;
+                
+                const sizeBytes = localStorage.getItem('workplace-wellness-storage')?.length || 0;
+                document.getElementById('stat-size').textContent = 
+                    (sizeBytes / 1024).toFixed(2);
+                
+                document.getElementById('stat-exports').textContent = 
+                    state?.exportHistory?.length || 0;
+                
+                document.getElementById('stat-feedbacks').textContent = 
+                    state?.recommendationFeedback?.feedbacks?.length || 0;
+            } catch (e) {
+                console.error('Failed to update stats:', e);
+            }
+        }
+
+        // 检查存储状态
+        function checkStorageStatus() {
+            const result = document.getElementById('storage-result');
+            try {
+                const data = JSON.parse(localStorage.getItem('workplace-wellness-storage') || '{}');
+                const state = data?.state || {};
+                const sizeBytes = localStorage.getItem('workplace-wellness-storage')?.length || 0;
+                const sizeKB = (sizeBytes / 1024).toFixed(2);
+                
+                const records = state?.calendar?.periodData || [];
+                const twoWeeksAgo = new Date();
+                twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+                
+                const recordsInTwoWeeks = records.filter(r => {
+                    try {
+                        return new Date(r.date) >= twoWeeksAgo;
+                    } catch {
+                        return false;
+                    }
+                }).length;
+                
+                result.className = 'result info';
+                result.innerHTML = `
+                    <strong>✅ 存储状态检查完成</strong><br><br>
+                    📊 存储大小: ${sizeKB} KB ${sizeKB < 100 ? '(✅ 正常)' : '(⚠️ 偏大)'}<br>
+                    📝 总记录数: ${records.length} 条 ${records.length <= 20 ? '(✅ 正常)' : '(⚠️ 超出限制)'}<br>
+                    📅 2周内记录: ${recordsInTwoWeeks} 条<br>
+                    📤 导出历史: ${state?.exportHistory?.length || 0} 条 ${(state?.exportHistory?.length || 0) <= 5 ? '(✅ 正常)' : '(⚠️ 超出限制)'}<br>
+                    💬 反馈数量: ${state?.recommendationFeedback?.feedbacks?.length || 0} 条 ${(state?.recommendationFeedback?.feedbacks?.length || 0) <= 20 ? '(✅ 正常)' : '(⚠️ 超出限制)'}<br>
+                    📋 导出模板: ${state?.exportTemplates?.length || 0} 个 ${(state?.exportTemplates?.length || 0) <= 5 ? '(✅ 正常)' : '(⚠️ 超出限制)'}<br>
+                    <br>
+                    <strong>最新记录:</strong><br>
+                    ${records.slice(0, 3).map(r => `- ${r.date}: ${r.symptoms?.join(', ') || '无症状'}`).join('<br>')}
+                `;
+                updateStats();
+            } catch (e) {
+                result.className = 'result error';
+                result.innerHTML = `<strong>❌ 检查失败:</strong> ${e.message}`;
+            }
+        }
+
+        // 触发存储警告
+        function triggerStorageWarning(type) {
+            const result = document.getElementById('warning-result');
+            try {
+                const messages = {
+                    sessionStorage: '存储空间不足，数据已临时保存。关闭浏览器后数据将丢失。',
+                    failed: '存储空间已满，无法保存数据。请清理浏览器存储或导出数据。'
+                };
+                
+                window.dispatchEvent(new CustomEvent('storage-warning', {
+                    detail: {
+                        type: type,
+                        message: messages[type]
+                    }
+                }));
+                
+                result.className = 'result success';
+                result.innerHTML = `
+                    <strong>✅ 事件触发成功</strong><br><br>
+                    类型: ${type}<br>
+                    消息: ${messages[type]}<br><br>
+                    <strong>请检查页面右上角是否显示 ${type === 'failed' ? '红色' : '黄色'} 提示框</strong>
+                `;
+            } catch (e) {
+                result.className = 'result error';
+                result.innerHTML = `<strong>❌ 触发失败:</strong> ${e.message}`;
+            }
+        }
+
+        // 清空所有数据
+        function clearAllData() {
+            const result = document.getElementById('clear-result');
+            if (confirm('确定要清空所有数据吗？此操作不可恢复！')) {
+                try {
+                    localStorage.clear();
+                    result.className = 'result success';
+                    result.innerHTML = `
+                        <strong>✅ 数据已清空</strong><br><br>
+                        localStorage 已完全清空<br>
+                        建议刷新页面以重置状态
+                    `;
+                    updateStats();
+                } catch (e) {
+                    result.className = 'result error';
+                    result.innerHTML = `<strong>❌ 清空失败:</strong> ${e.message}`;
+                }
+            }
+        }
+
+        // 生成测试数据
+        function generateTestData(count) {
+            const result = document.getElementById('generate-result');
+            try {
+                result.className = 'result info';
+                result.innerHTML = `<strong>⏳ 正在生成 ${count} 条测试数据...</strong>`;
+                
+                // 这个函数需要在实际页面中运行
+                result.className = 'result success';
+                result.innerHTML = `
+                    <strong>✅ 测试数据生成指南</strong><br><br>
+                    请在 Workplace Wellness 页面中执行以下操作：<br><br>
+                    1. 打开页面: <a href="http://localhost:3001/zh/interactive-tools/workplace-wellness" target="_blank">点击这里</a><br>
+                    2. 手动添加 ${count} 条经期记录<br>
+                    3. 选择不同的日期（包括超过2周的）<br>
+                    4. 观察是否触发自动清理<br><br>
+                    <strong>或者在浏览器控制台执行自动化脚本（需要在实际页面中）</strong>
+                `;
+            } catch (e) {
+                result.className = 'result error';
+                result.innerHTML = `<strong>❌ 生成失败:</strong> ${e.message}`;
+            }
+        }
+
+        // 验证数据清理
+        function verifyDataCleanup() {
+            const result = document.getElementById('verify-result');
+            try {
+                const data = JSON.parse(localStorage.getItem('workplace-wellness-storage') || '{}');
+                const state = data?.state || {};
+                const records = state?.calendar?.periodData || [];
+                
+                const twoWeeksAgo = new Date();
+                twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+                
+                const tests = {
+                    recordCount: {
+                        test: records.length <= 20,
+                        message: `记录数量 ${records.length} ${records.length <= 20 ? '✅' : '❌'} (预期 <= 20)`
+                    },
+                    twoWeeksRule: {
+                        test: records.every(r => {
+                            try {
+                                return new Date(r.date) >= twoWeeksAgo;
+                            } catch {
+                                return false;
+                            }
+                        }),
+                        message: `2周规则 ${records.every(r => new Date(r.date) >= twoWeeksAgo) ? '✅' : '❌'} (所有记录在2周内)`
+                    },
+                    exportHistory: {
+                        test: (state?.exportHistory?.length || 0) <= 5,
+                        message: `导出历史 ${state?.exportHistory?.length || 0} ${(state?.exportHistory?.length || 0) <= 5 ? '✅' : '❌'} (预期 <= 5)`
+                    },
+                    feedbacks: {
+                        test: (state?.recommendationFeedback?.feedbacks?.length || 0) <= 20,
+                        message: `反馈数量 ${state?.recommendationFeedback?.feedbacks?.length || 0} ${(state?.recommendationFeedback?.feedbacks?.length || 0) <= 20 ? '✅' : '❌'} (预期 <= 20)`
+                    },
+                    templates: {
+                        test: (state?.exportTemplates?.length || 0) <= 5,
+                        message: `导出模板 ${state?.exportTemplates?.length || 0} ${(state?.exportTemplates?.length || 0) <= 5 ? '✅' : '❌'} (预期 <= 5)`
+                    }
+                };
+                
+                const allPass = Object.values(tests).every(t => t.test);
+                
+                result.className = allPass ? 'result success' : 'result error';
+                result.innerHTML = `
+                    <strong>${allPass ? '✅ 所有测试通过' : '❌ 部分测试失败'}</strong><br><br>
+                    ${Object.values(tests).map(t => t.message).join('<br>')}
+                `;
+                updateStats();
+            } catch (e) {
+                result.className = 'result error';
+                result.innerHTML = `<strong>❌ 验证失败:</strong> ${e.message}`;
+            }
+        }
+
+        // 运行完整测试
+        function runFullTest() {
+            const result = document.getElementById('full-test-result');
+            result.className = 'result info';
+            result.innerHTML = '<strong>⏳ 正在运行完整测试...</strong>';
+            
+            setTimeout(() => {
+                checkStorageStatus();
+                setTimeout(() => {
+                    verifyDataCleanup();
+                    setTimeout(() => {
+                        result.className = 'result success';
+                        result.innerHTML = `
+                            <strong>✅ 完整测试完成</strong><br><br>
+                            请查看上方各测试的详细结果<br><br>
+                            <strong>下一步建议:</strong><br>
+                            1. 检查页面是否正常显示存储警告<br>
+                            2. 测试"立即导出"功能<br>
+                            3. 测试"清理旧数据"功能<br>
+                            4. 验证数据持久化（刷新页面）
+                        `;
+                    }, 500);
+                }, 500);
+            }, 500);
+        }
+
+        // 页面加载时更新统计
+        updateStats();
+        setInterval(updateStats, 2000); // 每2秒更新一次
+    </script>
+</body>
+</html>

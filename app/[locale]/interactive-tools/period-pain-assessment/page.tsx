@@ -86,8 +86,13 @@ export default async function PeriodPainAssessmentPage({
   });
 
   // 生成FAQ和CollectionPage结构化数据
+  const structuredDataT = await getTranslations({
+    locale,
+    namespace: "interactiveToolsPage.periodPainAssessment",
+  });
   const additionalStructuredData = generateAllStructuredData(
     locale as Locale,
+    structuredDataT,
   );
 
   return (

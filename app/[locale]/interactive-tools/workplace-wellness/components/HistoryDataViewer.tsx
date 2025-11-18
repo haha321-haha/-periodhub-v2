@@ -19,7 +19,7 @@ import {
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import { useCalendar, useWorkplaceWellnessActions } from "../hooks/useWorkplaceWellnessStore";
-import { PeriodRecord, FlowType, PainLevel, PeriodType } from "../types";
+import { PeriodRecord, FlowType, PainLevel, PeriodType, CalendarState } from "../types";
 
 interface FilterOptions {
   dateRange: {
@@ -34,7 +34,7 @@ interface FilterOptions {
 export default function HistoryDataViewer() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const { addPeriodRecord, updatePeriodRecord, deletePeriodRecord } = useWorkplaceWellnessActions();
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);

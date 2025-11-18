@@ -33,14 +33,14 @@ import {
   Info,
   TestTube,
 } from "lucide-react";
-import { PeriodRecord } from "../types";
+import { PeriodRecord, CalendarState } from "../types";
 import { RecommendationErrorBoundary } from "./RecommendationErrorBoundary";
 import RecommendationSystemTest from "./RecommendationSystemTest";
 
 export default function PersonalizedRecommendations() {
   const t = useTranslations("workplaceWellness.recommendations");
   const locale = useLocale();
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const workImpact = useWorkImpact();
   const nutrition = useNutrition();
   const { getFeedbackHistory } = useRecommendationFeedbackActions();

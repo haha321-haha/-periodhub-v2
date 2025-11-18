@@ -19,7 +19,7 @@ import {
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import { useCalendar } from "../hooks/useWorkplaceWellnessStore";
-import { PeriodRecord } from "../types";
+import { PeriodRecord, CalendarState } from "../types";
 
 interface SymptomData {
   name: string;
@@ -41,7 +41,7 @@ interface SymptomPattern {
 export default function SymptomStatistics() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const [activeTab, setActiveTab] = useState<
     "overview" | "patterns" | "trends" | "recommendations"
   >("overview");

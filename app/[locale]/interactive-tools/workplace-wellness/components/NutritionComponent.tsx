@@ -46,14 +46,21 @@ export default function NutritionComponent() {
   };
 
   // 生成膳食计划
-  const generateMealPlan = (e?: React.MouseEvent<HTMLButtonElement>) => {
+  const generateMealPlan = async (e: React.FormEvent) => {
     // 阻止默认行为和事件冒泡
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+    e.preventDefault();
+    e.stopPropagation();
 
     try {
+      // 保存当前的体质类型和阶段到store
+      updateNutrition({
+        selectedPhase: nutrition.selectedPhase,
+        constitutionType: nutrition.constitutionType,
+      });
+      
+      // 等待一小段时间让持久化完成
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
       // 基于HVsLYEp的膳食计划生成逻辑
       const meals = ["breakfast", "lunch", "dinner", "snack"];
       const suggestions = meals.map((meal) => ({

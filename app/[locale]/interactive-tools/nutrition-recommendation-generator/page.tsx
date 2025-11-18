@@ -25,19 +25,17 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations("nutritionRecommendationGenerator.meta");
+  const structuredDataT = await getTranslations("nutritionRecommendationGenerator.structuredData");
 
-  // 基于ziV1d3d的硬编码元数据，避免翻译问题
   const isZh = locale === "zh";
-  const title = isZh ? "营养推荐生成器" : "Nutrition Recommendation Generator";
-  const description = isZh
-    ? "基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导，结合现代营养学与中医理论，为女性提供精准的营养建议和生活方式指导，帮助优化生理期健康管理"
-    : "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.";
+  const title = t("title");
+  const description = t("description");
 
   return {
     title,
     description,
-    keywords:
-      "nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management",
+    keywords: t("keywords"),
     other: {
       "http-equiv": "content-language",
       content: isZh ? "zh-CN" : "en-US",
@@ -45,11 +43,11 @@ export async function generateMetadata({
         process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
     },
     openGraph: {
-      title,
-      description,
+      title: t("ogTitle"),
+      description: t("ogDescription"),
       type: "website",
       locale: isZh ? "zh_CN" : "en_US",
-      siteName: "Period Hub",
+      siteName: structuredDataT("providerName"),
       images: [
         {
           url: "/images/nutrition-generator-og.jpg",
@@ -61,8 +59,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: t("twitterTitle"),
+      description: t("twitterDescription"),
       images: ["/images/nutrition-generator-twitter.jpg"],
     },
     alternates: {
@@ -72,6 +70,29 @@ export async function generateMetadata({
         en: "https://www.periodhub.health/en/interactive-tools/nutrition-recommendation-generator",
       },
     },
+    // 添加结构化数据
+    ...JSON.parse(`
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "${title}",
+        "description": "${description}",
+        "url": "https://www.periodhub.health/${locale}/interactive-tools/nutrition-recommendation-generator",
+        "applicationCategory": "${structuredDataT("applicationCategory")}",
+        "operatingSystem": "${structuredDataT("operatingSystem")}",
+        "browserRequirements": "${structuredDataT("browserRequirements")}",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "provider": {
+          "@type": "Organization",
+          "name": "${structuredDataT("providerName")}",
+          "url": "https://www.periodhub.health"
+        }
+      }
+    `),
   };
 }
 
@@ -82,9 +103,12 @@ export default async function NutritionRecommendationGeneratorPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const isZh = locale === "zh";
   const anchorT = await getTranslations("anchorTexts");
   const breadcrumbT = await getTranslations("interactiveTools.breadcrumb");
+  const pageT = await getTranslations("nutritionRecommendationGenerator");
+  const relatedToolsT = await getTranslations("nutritionRecommendationGenerator.relatedTools");
+  const relatedArticlesT = await getTranslations("nutritionRecommendationGenerator.relatedArticles");
+  const footerT = await getTranslations("nutritionRecommendationGenerator.footer");
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
@@ -96,7 +120,7 @@ export default async function NutritionRecommendationGeneratorPage({
               label: breadcrumbT("interactiveTools"),
               href: `/${locale}/interactive-tools`,
             },
-            { label: breadcrumbT("nutritionGenerator") },
+            { label: breadcrumbT("nutritionGenerator") || pageT("title") },
           ]}
         />
       </div>
@@ -135,16 +159,12 @@ export default async function NutritionRecommendationGeneratorPage({
 
           {/* 主标题 */}
           <h2 className="text-xl font-semibold text-gray-800 mb-3">
-            {isZh
-              ? "✨ 开始您的个性化营养之旅"
-              : "✨ Start Your Personalized Nutrition Journey"}
+            {pageT("journeyTitle")}
           </h2>
 
           {/* 描述文字 */}
           <p className="text-gray-600 mb-4 leading-relaxed max-w-2xl mx-auto">
-            {isZh
-              ? "请选择您的月经阶段、健康目标和中医体质，我们将为您生成专属的营养建议"
-              : "Please select your menstrual phase, health goals, and TCM constitution to generate personalized nutrition recommendations"}
+            {pageT("description")}
           </p>
 
           {/* 步骤提示 */}
@@ -153,28 +173,26 @@ export default async function NutritionRecommendationGeneratorPage({
               <div className="w-6 h-6 bg-purple-200 rounded-full flex items-center justify-center mr-2">
                 <span className="text-purple-600 font-semibold text-xs">1</span>
               </div>
-              {isZh ? "选择阶段" : "Select Phase"}
+              {pageT("steps.step1")}
             </div>
             <div className="flex items-center">
               <div className="w-6 h-6 bg-purple-200 rounded-full flex items-center justify-center mr-2">
                 <span className="text-purple-600 font-semibold text-xs">2</span>
               </div>
-              {isZh ? "设定目标" : "Set Goals"}
+              {pageT("steps.step2")}
             </div>
             <div className="flex items-center">
               <div className="w-6 h-6 bg-purple-200 rounded-full flex items-center justify-center mr-2">
                 <span className="text-purple-600 font-semibold text-xs">3</span>
               </div>
-              {isZh ? "生成建议" : "Generate"}
+              {pageT("steps.step3")}
             </div>
           </div>
 
           {/* 底部装饰 */}
           <div className="pt-3 border-t border-purple-100">
             <p className="text-xs text-gray-400">
-              {isZh
-                ? "💡 提示：所有建议都基于科学研究和中医理论"
-                : "💡 Tip: All recommendations are based on scientific research and TCM theory"}
+              {pageT("tip")}
             </p>
           </div>
         </div>
@@ -192,7 +210,7 @@ export default async function NutritionRecommendationGeneratorPage({
             {/* 相关工具区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关工具" : "Related Tools"}
+                {relatedToolsT("title")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* 智能周期追踪器 */}
@@ -217,12 +235,10 @@ export default async function NutritionRecommendationGeneratorPage({
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        {isZh ? "智能周期追踪器" : "Smart Cycle Tracker"}
+                        {relatedToolsT("cycleTracker.title")}
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">
-                        {isZh
-                          ? "智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律"
-                          : "Intelligently track your menstrual cycle, predict next period, record symptom changes, helping you better understand your body patterns"}
+                        {relatedToolsT("cycleTracker.description")}
                       </p>
                       <a
                         href={`/${locale}/interactive-tools/cycle-tracker`}
@@ -269,12 +285,10 @@ export default async function NutritionRecommendationGeneratorPage({
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        {isZh ? "中医体质测试" : "TCM Constitution Test"}
+                        {relatedToolsT("constitutionTest.title")}
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">
-                        {isZh
-                          ? "通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议"
-                          : "Understand your TCM constitution type through 11 questions and get personalized acupuncture points, diet and lifestyle recommendations"}
+                        {relatedToolsT("constitutionTest.description")}
                       </p>
                       <a
                         href={`/${locale}/interactive-tools/constitution-test`}
@@ -304,7 +318,7 @@ export default async function NutritionRecommendationGeneratorPage({
             {/* 相关文章区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关营养文章" : "Related Nutrition Articles"}
+                {relatedArticlesT("title")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* 抗炎饮食指南 */}
@@ -329,12 +343,10 @@ export default async function NutritionRecommendationGeneratorPage({
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        {isZh ? "抗炎饮食指南" : "Anti-Inflammatory Diet Guide"}
+                        {relatedArticlesT("antiInflammatory.title")}
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">
-                        {isZh
-                          ? "通过食物缓解经期疼痛的科学饮食方法，了解哪些食物有助于减少炎症和疼痛"
-                          : "Scientific dietary methods to relieve menstrual pain through food, understanding which foods help reduce inflammation and pain"}
+                        {relatedArticlesT("antiInflammatory.description")}
                       </p>
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-gray-500 flex items-center">
@@ -351,7 +363,7 @@ export default async function NutritionRecommendationGeneratorPage({
                               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                           </svg>
-                          {isZh ? "8分钟阅读" : "8 min read"}
+                          {relatedArticlesT("antiInflammatory.readTime")}
                         </span>
                         <a
                           href={`/${locale}/articles/anti-inflammatory-diet-period-pain`}
@@ -399,14 +411,10 @@ export default async function NutritionRecommendationGeneratorPage({
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        {isZh
-                          ? "姜茶缓解痛经指南"
-                          : "Ginger Tea for Menstrual Pain Relief"}
+                        {relatedArticlesT("gingerTea.title")}
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">
-                        {isZh
-                          ? "5种科学验证的姜茶制作方法，有效缓解痛经，学习正确的制作技巧和饮用时机"
-                          : "5 scientifically proven ginger tea recipes for effective menstrual pain relief, learn proper preparation techniques and timing"}
+                        {relatedArticlesT("gingerTea.description")}
                       </p>
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-gray-500 flex items-center">
@@ -423,7 +431,7 @@ export default async function NutritionRecommendationGeneratorPage({
                               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                           </svg>
-                          {isZh ? "6分钟阅读" : "6 min read"}
+                          {relatedArticlesT("gingerTea.readTime")}
                         </span>
                         <a
                           href={`/${locale}/articles/ginger-menstrual-pain-relief-guide`}
@@ -471,14 +479,10 @@ export default async function NutritionRecommendationGeneratorPage({
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        {isZh
-                          ? "有效草药茶配方"
-                          : "Effective Herbal Tea Recipes"}
+                        {relatedArticlesT("herbalTea.title")}
                       </h3>
                       <p className="text-gray-600 text-sm mb-3">
-                        {isZh
-                          ? "5种科学验证的草药茶配方，天然缓解经期不适，包含肉桂茶、茴香籽茶等经典配方"
-                          : "5 scientifically proven herbal tea recipes for natural menstrual relief, including cinnamon tea, fennel seed tea and other classic formulas"}
+                        {relatedArticlesT("herbalTea.description")}
                       </p>
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-gray-500 flex items-center">
@@ -495,7 +499,7 @@ export default async function NutritionRecommendationGeneratorPage({
                               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                           </svg>
-                          {isZh ? "7分钟阅读" : "7 min read"}
+                          {relatedArticlesT("herbalTea.readTime")}
                         </span>
                         <a
                           href={`/${locale}/articles/herbal-tea-menstrual-pain-relief`}
@@ -531,14 +535,10 @@ export default async function NutritionRecommendationGeneratorPage({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-500">
             <p className="text-sm">
-              {isZh
-                ? "个性化健康，触手可及。"
-                : "Personalized wellness at your fingertips."}
+              {footerT("text")}
             </p>
             <p className="text-xs mt-2">
-              {isZh
-                ? "本工具提供一般性营养指导，不能替代专业医疗建议。"
-                : "This tool provides general nutrition guidance and should not replace professional medical advice."}
+              {footerT("disclaimer")}
             </p>
           </div>
         </div>

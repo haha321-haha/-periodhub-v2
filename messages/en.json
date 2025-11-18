@@ -401,6 +401,14 @@
     "painTracker": {
       "title": "Pain Tracker",
       "description": "Record and track your menstrual pain, understand pain patterns, and find the most effective relief methods",
+      "features": {
+        "dailyRecording": "Daily pain recording and tracking",
+        "patternVisualization": "Pain pattern visualization",
+        "trendCharts": "Symptom trend charts",
+        "cyclicalIdentification": "Cyclical pain identification",
+        "triggerAnalysis": "Trigger factor analysis",
+        "dataExport": "Data export and sharing"
+      },
       "toolTitle": "疼痛记录",
       "toolDescription": "记录您今天的疼痛情况，帮助我们更好地了解您的疼痛模式。",
       "painLevel": "疼痛程度（1-10）",
@@ -435,12 +443,12 @@
       "office": "Office Scenario",
       "developmentPain": "Development Pain",
       "painTracker": "Pain Tracker",
+      "nutritionGenerator": "Nutrition Recommendation Generator",
       "symptomAssessment": "Symptom Assessment",
       "emotionalSupport": "Emotional & Mental Support",
       "communicationGuide": "Communication Guide",
       "medicalCare": "When to Seek Medical Help",
       "globalPerspectives": "Global Perspectives",
-      "nutritionGenerator": "Nutrition Recommendation Generator",
       "emergencyKit": "应急包"
     },
     "p2": {
@@ -1828,7 +1836,7 @@
       "social": "Social Scenarios",
       "view_guide": "View Guide →",
       "view_zone": "View Zone →",
-      "view_solution": "Learn More →"
+      "view_solution": "View Office Solutions →"
     },
     "teen": {
       "main": "Learn More",
@@ -3139,6 +3147,69 @@
   },
   "workplaceWellness": {
     "title": "Workplace Wellness",
+    "meta": {
+      "title": "Workplace Wellness - Period Health Assistant",
+      "description": "Professional workplace health management tool to help you scientifically track period data, optimize work performance, and receive personalized health recommendations. Features data export, cycle analysis, symptom tracking, and more.",
+      "keywords": "workplace health,period management,health tracking,work optimization,cycle analysis,symptom recording,data export,personalized recommendations,office wellness,period assistant",
+      "features": {
+        "workplaceOptimization": "Workplace Environment Optimization",
+        "healthTracking": "Smart Health Data Tracking",
+        "personalizedRecommendations": "Personalized Health Solutions"
+      }
+    },
+    "pdf": {
+      "reportTitle": "Workplace Health Data Report",
+      "reportSubtitle": "Period Hub Workplace Wellness Assistant",
+      "reportInfo": "Report Information",
+      "exportTime": "Export Time",
+      "exportType": "Export Type",
+      "language": "Language",
+      "languageValue": "English",
+      "dataRecords": "Data Records",
+      "privacyNotice": "Privacy Protection Notice",
+      "privacyText": "This report contains personal health data. Please keep it secure and avoid disclosure. All data is stored locally on your device. We do not collect or store your personal information.",
+      "generatedAt": "Report generated at: ",
+      "exportTypes": {
+        "period": "Period Data",
+        "nutrition": "Nutrition Data",
+        "all": "All Data"
+      },
+      "records": "records",
+      "periodData": "Period Data",
+      "noPeriodData": "No period data records",
+      "nutritionData": "Nutrition Data",
+      "noNutritionData": "No nutrition data records",
+      "tableHeaders": {
+        "date": "Date",
+        "type": "Type",
+        "painLevel": "Pain Level",
+        "flow": "Flow",
+        "notes": "Notes",
+        "foodName": "Food Name",
+        "menstrualPhase": "Menstrual Phase",
+        "tcmNature": "TCM Nature",
+        "mainBenefits": "Main Benefits",
+        "keyNutrients": "Key Nutrients"
+      },
+      "recordTypes": {
+        "period": "Period",
+        "predicted": "Predicted"
+      },
+      "phases": {
+        "menstrual": "Menstrual",
+        "follicular": "Follicular",
+        "ovulation": "Ovulation",
+        "luteal": "Luteal"
+      },
+      "tcmNature": {
+        "warm": "Warm",
+        "cool": "Cool",
+        "neutral": "Neutral"
+      }
+    },
+    "privacy": {
+      "reportTitle": "Privacy Protection Report"
+    },
     "header": {
       "title": "Workplace Wellness Assistant",
       "subtitle": "Scientific period management for optimal work performance"
@@ -3189,16 +3260,31 @@
       "export": "Export",
       "searchPlaceholder": "Search records...",
       "filters": "Filters",
-      "painLevel": "Pain Level",
-      "flow": "Flow",
-      "date": "Date",
+      "dateRange": "Date Range",
+      "startDate": "Start Date",
+      "endDate": "End Date",
       "type": "Type",
-      "pain": "Pain",
+      "allTypes": "All Types",
+      "painLevel": "Pain Level",
+      "allLevels": "All Levels",
+      "lowPain": "Low Pain",
+      "mediumPain": "Medium Pain",
+      "highPain": "High Pain",
+      "flow": "Flow",
+      "allFlows": "All Flows",
+      "date": "Date",
       "notes": "Notes",
       "actions": "Actions",
       "view": "View",
       "edit": "Edit",
-      "delete": "Delete"
+      "delete": "Delete",
+      "clearFilters": "Clear Filters",
+      "resultsCount": "{count} results",
+      "noData": "No data",
+      "confirmDelete": "Are you sure you want to delete this record?",
+      "editRecord": "Edit Record",
+      "recordDetails": "Record Details",
+      "close": "Close"
     },
     "sections": {
       "workplaceArticles": "Workplace Articles",
@@ -3306,83 +3392,6 @@
       "occurrences": "Occurrences",
       "frequency": "Frequency",
       "severity": "Severity"
-    },
-    "recommendations": {
-      "warmCompress": "Warm Compress",
-      "gentleExercise": "Gentle Exercise",
-      "hydration": "Stay Hydrated",
-      "rest": "Get Rest",
-      "caffeineReduction": "Reduce Caffeine",
-      "stressManagement": "Stress Management",
-      "mindfulness": "Mindfulness Practice",
-      "socialSupport": "Social Support",
-      "sleepHygiene": "Sleep Hygiene",
-      "generalCare": "General Care"
-    },
-    "workImpact": {
-      "title": "Work Impact Record",
-      "painLevel": "Pain Level",
-      "efficiency": "Work Efficiency",
-      "adjustment": "Today's Work Adjustment",
-      "adjustOptions": {
-        "takeLeave": "Take Leave",
-        "workFromHome": "Work From Home",
-        "postponeMeeting": "Postpone Meeting",
-        "reduceTasks": "Reduce Tasks"
-      },
-      "saveButton": "Save",
-      "templatesTitle": "Templates",
-      "subject": "Subject",
-      "preview": "Preview",
-      "content": "Content",
-      "copyButton": "Copy",
-      "severity": {
-        "mild": "Mild",
-        "moderate": "Moderate",
-        "severe": "Severe"
-      }
-    },
-    "workAnalysis": {
-      "title": "Work Impact Analysis",
-      "tabs": {
-        "overview": "Overview",
-        "patterns": "Patterns",
-        "productivity": "Productivity",
-        "insights": "Insights"
-      },
-      "noData": "No work impact data available",
-      "avgPain": "Average Pain",
-      "avgProductivity": "Average Productivity",
-      "avgEfficiency": "Average Work Efficiency",
-      "adjustmentRate": "Adjustment Rate",
-      "recentTrends": "Recent Trends",
-      "efficiency": "Work Efficiency",
-      "painLevel": "Pain Level",
-      "commonAdjustments": "Common Adjustments",
-      "productivityTitle": "Productivity Analysis",
-      "efficiencyVsPain": "Efficiency vs Pain",
-      "productivityTrend": "Productivity Trend",
-      "recommendation": "Recommendation"
-    },
-    "analysis": {
-      "advancedTitle": "Advanced Analysis",
-      "tabs": {
-        "overview": "Overview",
-        "trends": "Trends",
-        "comparison": "Comparison",
-        "insights": "Insights"
-      },
-      "avgCycleLength": "Average Cycle Length",
-      "avgPeriodLength": "Average Period Length",
-      "avgPainLevel": "Average Pain Level",
-      "avgPain": "Average Pain",
-      "confidence": "Confidence",
-      "cycleLength": "Cycle Length",
-      "noComparisonData": "No comparison data available"
-    },
-    "insights": {
-      "irregularCycle": "Irregular Cycle",
-      "irregularCycleDesc": "Irregular cycle pattern detected, consider consulting a healthcare provider"
     },
     "recommendations": {
       "title": "Personalized Recommendations",
@@ -3690,6 +3699,79 @@
         }
       }
     },
+    "workImpact": {
+      "title": "Work Impact Record",
+      "painLevel": "Pain Level",
+      "efficiency": "Work Efficiency",
+      "adjustment": "Today's Work Adjustment",
+      "adjustOptions": {
+        "takeLeave": "Take Leave",
+        "workFromHome": "Work From Home",
+        "postponeMeeting": "Postpone Meeting",
+        "reduceTasks": "Reduce Tasks"
+      },
+      "saveButton": "Save",
+      "templatesTitle": "Templates",
+      "subject": "Subject",
+      "preview": "Preview",
+      "content": "Content",
+      "copyButton": "Copy",
+      "severity": {
+        "mild": "Mild",
+        "moderate": "Moderate",
+        "severe": "Severe"
+      }
+    },
+    "workAnalysis": {
+      "title": "Work Impact Analysis",
+      "tabs": {
+        "overview": "Overview",
+        "patterns": "Patterns",
+        "productivity": "Productivity",
+        "insights": "Insights"
+      },
+      "noData": "No work impact data available",
+      "avgPain": "Average Pain",
+      "avgProductivity": "Average Productivity",
+      "avgEfficiency": "Average Work Efficiency",
+      "adjustmentRate": "Adjustment Rate",
+      "recentTrends": "Recent Trends",
+      "efficiency": "Work Efficiency",
+      "painLevel": "Pain Level",
+      "commonAdjustments": "Common Adjustments",
+      "productivityTitle": "Productivity Analysis",
+      "efficiencyVsPain": "Efficiency vs Pain",
+      "productivityTrend": "Productivity Trend",
+      "recommendation": "Recommendation"
+    },
+    "analysis": {
+      "advancedTitle": "Advanced Analysis",
+      "tabs": {
+        "overview": "Overview",
+        "trends": "Trends",
+        "comparison": "Comparison",
+        "insights": "Insights"
+      },
+      "avgCycleLength": "Average Cycle Length",
+      "avgPeriodLength": "Average Period Length",
+      "avgPainLevel": "Average Pain Level",
+      "avgPain": "Average Pain",
+      "confidence": "Confidence",
+      "cycleLength": "Cycle Length",
+      "noComparisonData": "No comparison data available"
+    },
+    "insights": {
+      "irregularCycle": "Irregular Cycle",
+      "irregularCycleDesc": "Irregular cycle pattern detected, consider consulting a healthcare provider",
+      "regularCycle": "Regular Cycle",
+      "regularCycleDesc": "Your cycle pattern is regular, which is a good sign of reproductive health",
+      "highPain": "High Pain Level",
+      "highPainDesc": "Your average pain level is high. Consider consulting a healthcare provider for pain management strategies",
+      "lowPain": "Low Pain Level",
+      "lowPainDesc": "Your pain level is low, which is great! Continue maintaining your current routine",
+      "highAccuracy": "High Prediction Accuracy",
+      "highAccuracyDesc": "Cycle predictions are highly accurate based on your historical data"
+    },
     "common": {
       "loading": "Loading...",
       "error": "Error",
@@ -3789,7 +3871,6 @@
       "defaultFormat": "Default Format",
       "autoSave": "Auto Save",
       "includeCharts": "Include Charts",
-      "dataRetention": "Data Retention",
       "dataRetentionDescription": "To ensure optimal performance, we automatically retain recent data, and old data will be cleaned up",
       "retentionPolicy": "Data Retention Policy",
       "retentionPolicyDescription": "To ensure optimal performance, we retain data from the last 6 months. Data older than 6 months will be automatically cleaned up. You can export your data at any time to keep a complete history.",
@@ -3828,38 +3909,6 @@
       "tools": "Related Tools",
       "articles": "Related Articles",
       "scenarios": "Scenario Solutions"
-    },
-    "history": {
-      "title": "History Records",
-      "addRecord": "Add Record",
-      "export": "Export",
-      "searchPlaceholder": "Search records...",
-      "filters": "Filters",
-      "dateRange": "Date Range",
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "type": "Type",
-      "allTypes": "All Types",
-      "painLevel": "Pain Level",
-      "allLevels": "All Levels",
-      "lowPain": "Low Pain",
-      "mediumPain": "Medium Pain",
-      "highPain": "High Pain",
-      "flow": "Flow",
-      "allFlows": "All Flows",
-      "date": "Date",
-      "notes": "Notes",
-      "actions": "Actions",
-      "view": "View",
-      "edit": "Edit",
-      "delete": "Delete",
-      "clearFilters": "Clear Filters",
-      "resultsCount": "{count} results",
-      "noData": "No data",
-      "confirmDelete": "Are you sure you want to delete this record?",
-      "editRecord": "Edit Record",
-      "recordDetails": "Record Details",
-      "close": "Close"
     },
     "themeConfig": {
       "light": {
@@ -5717,6 +5766,65 @@
       "description": "Get personalized nutrition recommendations based on your menstrual cycle, health goals, and TCM constitution. Complete cycle tracking and constitution test first.",
       "cta": "Start Nutrition Analysis"
     },
+    "nutritionRecommendationGenerator": {
+      "title": "Nutrition Recommendation Generator",
+      "description": "Please select your menstrual phase, health goals, and TCM constitution to generate personalized nutrition recommendations",
+      "journeyTitle": "✨ Start Your Personalized Nutrition Journey",
+      "steps": {
+        "step1": "Select Phase",
+        "step2": "Set Goals",
+        "step3": "Generate"
+      },
+      "tip": "💡 Tip: All recommendations are based on scientific research and TCM theory",
+      "meta": {
+        "title": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
+        "description": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
+        "keywords": "nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management",
+        "ogTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
+        "ogDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
+        "twitterTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
+        "twitterDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine."
+      },
+      "structuredData": {
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "HTML5, CSS3, JavaScript",
+        "providerName": "Period Hub"
+      },
+      "relatedTools": {
+        "title": "Related Tools",
+        "cycleTracker": {
+          "title": "Smart Cycle Tracker",
+          "description": "Intelligently track your menstrual cycle, predict next period, record symptom changes, helping you better understand your body patterns"
+        },
+        "constitutionTest": {
+          "title": "TCM Constitution Test",
+          "description": "Understand your TCM constitution type through 11 questions and get personalized acupuncture points, diet and lifestyle recommendations"
+        }
+      },
+      "relatedArticles": {
+        "title": "Related Nutrition Articles",
+        "antiInflammatory": {
+          "title": "Anti-Inflammatory Diet Guide",
+          "description": "Scientific dietary methods to relieve menstrual pain through food, understanding which foods help reduce inflammation and pain",
+          "readTime": "8 min read"
+        },
+        "gingerTea": {
+          "title": "Ginger Tea for Menstrual Pain Relief",
+          "description": "5 scientifically proven ginger tea recipes for effective menstrual pain relief, learn proper preparation techniques and timing",
+          "readTime": "6 min read"
+        },
+        "herbalTea": {
+          "title": "Effective Herbal Tea Recipes",
+          "description": "5 scientifically proven herbal tea recipes for natural menstrual relief, including cinnamon tea, fennel seed tea and other classic formulas",
+          "readTime": "7 min read"
+        }
+      },
+      "footer": {
+        "text": "Personalized wellness at your fingertips.",
+        "disclaimer": "This tool provides general nutrition guidance and should not replace professional medical advice."
+      }
+    },
     "otherTools": {
       "title": "Other Practical Tools",
       "description": "More professional menstrual health management tools to help you comprehensively understand and manage period health"
@@ -5853,6 +5961,39 @@
         "personalizedRecommendations": "Personalized recommendations",
         "quickAssessment": "Quick assessment options",
         "verifiedResources": "Medically verified resources"
+      },
+      "faq": {
+        "q1": {
+          "question": "What is the Period Pain Assessment Hub?",
+          "answer": "The Period Pain Assessment Hub is a navigation and resource integration page that helps you quickly find the most suitable period pain assessment tools and resources. We provide work impact calculator, symptom assessment tool, and related health articles and scenario solutions."
+        },
+        "q2": {
+          "question": "Which assessment tool should I use?",
+          "answer": "If you're not sure about your symptom type, we recommend starting with the Symptom Assessment Tool for comprehensive screening; if you've already identified period pain and want to understand its impact on work and life, you can use the Period Pain Impact Calculator for quantitative analysis."
+        },
+        "q3": {
+          "question": "Are the assessment tools free?",
+          "answer": "Yes, all assessment tools are completely free. You can use these tools anytime to understand your health status and receive personalized recommendations."
+        },
+        "q4": {
+          "question": "Will my assessment results be kept confidential?",
+          "answer": "Yes, your assessment results are only stored locally in your browser. We do not upload your personal health data to servers, completely protecting your privacy."
+        },
+        "q5": {
+          "question": "Can assessment results replace medical diagnosis?",
+          "answer": "No. Our assessment tools provide professional reference and recommendations, but cannot replace professional medical diagnosis. If you have severe symptoms or health concerns, please consult a professional doctor promptly."
+        }
+      },
+      "structuredData": {
+        "collectionPage": {
+          "name": "Period Pain Assessment Hub",
+          "description": "Professional period pain assessment tools and resource navigation hub, providing work impact calculator, symptom assessment tool, and related health articles and scenario solutions.",
+          "items": {
+            "calculator": "Period Pain Impact Calculator",
+            "assessment": "Symptom Assessment Tool",
+            "relief": "Natural Relief Methods"
+          }
+        }
       }
     },
     "symptomAssessment": {
@@ -5880,6 +6021,55 @@
         "assessmentFailedDesc": "An error occurred during assessment, please try again.",
         "resultsSaved": "Results Saved",
         "resultsSavedDesc": "Your assessment results have been saved to local storage."
+      },
+      "faq": {
+        "q1": {
+          "question": "What is the Symptom Assessment Tool?",
+          "answer": "The Symptom Assessment Tool is a professional menstrual health assessment system that comprehensively evaluates your menstrual symptom types and severity through 3-21 questions (depending on the selected mode), helping you understand your health status and receive personalized recommendations."
+        },
+        "q2": {
+          "question": "Are the assessment results accurate?",
+          "answer": "Our assessment tool is designed based on medical research and clinical practice to provide professional reference. However, assessment results cannot replace professional medical diagnosis. If you have severe symptoms, please seek medical attention promptly."
+        },
+        "q3": {
+          "question": "What's the difference between the three assessment modes?",
+          "answer": "The simplified mode includes 3 core questions, suitable for quick understanding; the detailed mode includes 13 extended questions, providing more comprehensive assessment; the medical professional mode includes 21 questions covering symptoms and workplace impact, suitable for users who need in-depth analysis."
+        },
+        "q4": {
+          "question": "How long does the assessment take?",
+          "answer": "Simplified mode takes about 3-5 minutes, detailed mode takes about 8-10 minutes, and medical professional mode takes about 12-15 minutes. You can save your progress at any time and continue later."
+        },
+        "q5": {
+          "question": "How should I act based on assessment results?",
+          "answer": "Based on your assessment results, we provide personalized recommendations and resource links. If high work impact is detected, we recommend using the Period Pain Impact Calculator; if symptoms are severe, we recommend seeking medical attention and provide links to relevant medical articles."
+        }
+      },
+      "howTo": {
+        "name": "How to Use the Menstrual Symptom Assessment Tool",
+        "description": "Understand your menstrual health and get personalized advice through our symptom assessment tool.",
+        "totalTime": "PT10M",
+        "steps": {
+          "step1": {
+            "name": "Choose Assessment Mode",
+            "text": "Select simplified mode (3 questions), detailed mode (13 questions), or medical professional mode (21 questions) based on your needs."
+          },
+          "step2": {
+            "name": "Start Assessment",
+            "text": "Click the 'Start Assessment' button to begin the symptom evaluation process."
+          },
+          "step3": {
+            "name": "Answer Questions",
+            "text": "Answer a series of questions about your symptoms honestly based on your actual situation. You can go back to modify previous answers at any time."
+          },
+          "step4": {
+            "name": "View Results",
+            "text": "After completing all questions, the system will generate personalized assessment results, including symptom severity, risk level, and personalized recommendations."
+          },
+          "step5": {
+            "name": "Take Action",
+            "text": "Based on the smart recommendations in the assessment results, you can go to the Period Pain Impact Calculator for in-depth analysis, or read relevant medical articles to learn about medical consultation advice."
+          }
+        }
       }
     },
     "painTracker": {
@@ -9989,6 +10179,45 @@
     "completeButton": "Complete Assessment",
     "loadingButton": "Processing...",
     "backButton": "Back",
+    "faq": {
+      "q1": {
+        "question": "What is Period Pain Impact Calculator?",
+        "answer": "The Period Pain Impact Calculator is a professional assessment tool that comprehensively evaluates impact of menstrual pain on work and daily life through 12 scientifically designed questions, providing personalized relief suggestions and medical guidance."
+      },
+      "q2": {
+        "question": "Are assessment results accurate?",
+        "answer": "Our assessment tool is designed based on medical research and clinical practice to provide professional reference. However, assessment results cannot replace professional medical diagnosis. If you have severe symptoms, please seek medical attention promptly."
+      },
+      "q3": {
+        "question": "How long does assessment take?",
+        "answer": "The entire assessment process usually takes 5-10 minutes and includes 12 questions. You can save your progress at any time and continue later."
+      },
+      "q4": {
+        "question": "Will my results be saved?",
+        "answer": "Your assessment results are securely stored locally in your browser and only used to track your symptom changes. We do not upload your personal health data to servers, protecting your privacy."
+      },
+      "q5": {
+        "question": "How should I act based on assessment results?",
+        "answer": "Based on your assessment results, we provide personalized recommendations and resource links. For mild symptoms, you can try self-care; for moderate to severe symptoms, we recommend seeking professional medical help."
+      }
+    },
+    "structuredData": {
+      "webApplication": {
+        "name": "Period Pain Impact Calculator",
+        "description": "Professional menstrual pain assessment tool that scientifically evaluates pain severity and its impact on work and daily life, providing personalized medical advice and relief solutions.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Web Browser",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "softwareVersion": "2.0",
+        "datePublished": "2024-01-15",
+        "providerName": "PeriodHub"
+      },
+      "breadcrumb": {
+        "home": "Home",
+        "interactiveTools": "Interactive Tools",
+        "current": "Period Pain Impact Calculator"
+      }
+    },
     "retakeButton": "Retake Assessment",
     "disclaimer": "This tool is not a medical diagnosis. Consult a doctor for any health concerns.",
     "relatedContent": {

@@ -128,7 +128,7 @@ export default function PeriodPainCalculatorClient({ params }: PeriodPainCalcula
               {t('progressTitle')}
             </h2>
             <span className="text-sm text-gray-600">
-              {currentQuestionIndex + 1} / {totalQuestions}
+              {currentSession?.answers.length || 0} / {totalQuestions}
             </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">

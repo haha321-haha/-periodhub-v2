@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import {
   Settings,
   Palette,
@@ -27,9 +27,17 @@ import {
   DateFormat,
   TimeFormat,
   SettingsValidationResult,
+  ExtendedExportFormat,
 } from "../types";
-import { THEME_CONFIG, FONT_SIZE_CONFIG } from "../types/defaults";
-import { PeriodRecord } from "../types";
+import {
+  THEME_CONFIG,
+  FONT_SIZE_CONFIG,
+  DEFAULT_UI_PREFERENCES,
+  DEFAULT_NOTIFICATION_SETTINGS,
+  DEFAULT_PRIVACY_SETTINGS,
+  DEFAULT_ACCESSIBILITY_SETTINGS,
+} from "../types/defaults";
+import { PeriodRecord, CalendarState } from "../types";
 
 // 数据保留设置组件
 function DataRetentionSection({
@@ -268,7 +276,7 @@ function DataRetentionSection({
 
 export default function UserPreferencesSettings() {
   const preferences = useUserPreferences();
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const {
     updateUserPreferences,
     setTheme,
@@ -282,6 +290,110 @@ export default function UserPreferencesSettings() {
     resetPreferences,
   } = useUserPreferencesActions();
 
+  // 安全检查：确保 preferences 和所有嵌套属性都存在，如果不存在则使用默认值
+  // 使用 useMemo 确保在 preferences 变化时重新计算，同时避免不必要的重新计算
+  const safePreferences = useMemo(() => {
+    // 如果 preferences 不存在或不是对象，直接返回默认值
+    if (!preferences || typeof preferences !== 'object' || preferences === null) {
+      return {
+        ui: { ...DEFAULT_UI_PREFERENCES },
+        notifications: { ...DEFAULT_NOTIFICATION_SETTINGS },
+        privacy: { ...DEFAULT_PRIVACY_SETTINGS },
+        accessibility: { ...DEFAULT_ACCESSIBILITY_SETTINGS },
+        export: {
+          defaultFormat: "pdf" as ExtendedExportFormat,
+          defaultTemplate: undefined,
+          autoSave: true,
+          includeCharts: true,
+          compression: false,
+        },
+        version: "1.0.0",
+        lastUpdated: new Date().toISOString(),
+      };
+    }
+
+    // 安全地访问嵌套属性，使用可选链和默认值
+    const preferencesUI = preferences?.ui;
+    const preferencesNotifications = preferences?.notifications;
+    const preferencesPrivacy = preferences?.privacy;
+    const preferencesAccessibility = preferences?.accessibility;
+    const preferencesExport = preferences?.export;
+
+    // 确保所有嵌套属性都存在且是对象，使用深度合并确保所有属性都存在
+    const safeUI = (preferencesUI && typeof preferencesUI === 'object' && preferencesUI !== null)
+      ? { ...DEFAULT_UI_PREFERENCES, ...preferencesUI }
+      : { ...DEFAULT_UI_PREFERENCES };
+    
+    // 确保 theme 属性存在
+    if (!safeUI.theme) {
+      safeUI.theme = DEFAULT_UI_PREFERENCES.theme;
+    }
+    
+    const safeNotifications = (preferencesNotifications && typeof preferencesNotifications === 'object' && preferencesNotifications !== null)
+      ? { ...DEFAULT_NOTIFICATION_SETTINGS, ...preferencesNotifications }
+      : { ...DEFAULT_NOTIFICATION_SETTINGS };
+    
+    const safePrivacy = (preferencesPrivacy && typeof preferencesPrivacy === 'object' && preferencesPrivacy !== null)
+      ? { ...DEFAULT_PRIVACY_SETTINGS, ...preferencesPrivacy }
+      : { ...DEFAULT_PRIVACY_SETTINGS };
+    
+    const safeAccessibility = (preferencesAccessibility && typeof preferencesAccessibility === 'object' && preferencesAccessibility !== null)
+      ? { ...DEFAULT_ACCESSIBILITY_SETTINGS, ...preferencesAccessibility }
+      : { ...DEFAULT_ACCESSIBILITY_SETTINGS };
+    
+    const safeExport = (preferencesExport && typeof preferencesExport === 'object' && preferencesExport !== null)
+      ? {
+          defaultFormat: "pdf" as ExtendedExportFormat,
+          defaultTemplate: undefined,
+          autoSave: true,
+          includeCharts: true,
+          compression: false,
+          ...preferencesExport,
+        }
+      : {
+          defaultFormat: "pdf" as ExtendedExportFormat,
+          defaultTemplate: undefined,
+          autoSave: true,
+          includeCharts: true,
+          compression: false,
+        };
+
+    return {
+      ui: safeUI,
+      notifications: safeNotifications,
+      privacy: safePrivacy,
+      accessibility: safeAccessibility,
+      export: safeExport,
+      version: preferences?.version || "1.0.0",
+      lastUpdated: preferences?.lastUpdated || new Date().toISOString(),
+    };
+  }, [preferences]);
+
+  // 确保 safePreferences 已初始化，如果还没有准备好，显示加载状态
+  // 双重检查：确保 safePreferences 和所有必需的嵌套属性都存在
+  // 这个检查必须在所有其他代码之前，包括 useTranslations 和 useState
+  if (
+    !safePreferences || 
+    !safePreferences.ui || 
+    typeof safePreferences.ui !== 'object' ||
+    safePreferences.ui === null ||
+    !safePreferences.ui.theme ||
+    !safePreferences.notifications ||
+    typeof safePreferences.notifications !== 'object' ||
+    !safePreferences.privacy ||
+    typeof safePreferences.privacy !== 'object' ||
+    !safePreferences.accessibility ||
+    typeof safePreferences.accessibility !== 'object' ||
+    !safePreferences.export ||
+    typeof safePreferences.export !== 'object'
+  ) {
+    return (
+      <div className="p-6">
+        <div className="text-center text-neutral-500">加载设置中...</div>
+      </div>
+    );
+  }
+
   const t = useTranslations("workplaceWellness");
   const [activeTab, setActiveTab] = useState<
     "ui" | "notifications" | "privacy" | "accessibility" | "export" | "dataRetention"
@@ -292,9 +404,21 @@ export default function UserPreferencesSettings() {
 
   // 验证设置
   const handleValidateSettings = () => {
-    const result = validateSettings();
-    setValidationResult(result);
-    return result.isValid;
+    // 确保 safePreferences 已准备好再验证
+    if (!safePreferences || !safePreferences.ui || !safePreferences.ui.theme) {
+      return false;
+    }
+    try {
+      const result = validateSettings();
+      if (result && typeof result === 'object' && 'isValid' in result) {
+        setValidationResult(result);
+        return result.isValid;
+      }
+      return false;
+    } catch (error) {
+      console.error("Validation error:", error);
+      return false;
+    }
   };
 
   // 保存设置
@@ -435,7 +559,7 @@ export default function UserPreferencesSettings() {
                   {t("userPreferences.theme")}
                 </label>
                 <select
-                  value={preferences.ui.theme}
+                  value={safePreferences?.ui?.theme || DEFAULT_UI_PREFERENCES.theme}
                   onChange={(e) => setTheme(e.target.value as Theme)}
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 >
@@ -446,7 +570,7 @@ export default function UserPreferencesSettings() {
                   ))}
                 </select>
                 <p className="text-xs text-neutral-500 mt-1">
-                  {t(`themeConfig.${preferences.ui.theme}.description`)}
+                  {t(`themeConfig.${safePreferences?.ui?.theme || DEFAULT_UI_PREFERENCES.theme}.description`)}
                 </p>
               </div>
 
@@ -455,7 +579,7 @@ export default function UserPreferencesSettings() {
                   {t("userPreferences.fontSize")}
                 </label>
                 <select
-                  value={preferences.ui.fontSize}
+                  value={safePreferences.ui.fontSize}
                   onChange={(e) => setFontSize(e.target.value as FontSize)}
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 >
@@ -466,7 +590,7 @@ export default function UserPreferencesSettings() {
                   ))}
                 </select>
                 <p className="text-xs text-neutral-500 mt-1">
-                  {t(`fontSizeConfig.${preferences.ui.fontSize}.description`)}
+                  {t(`fontSizeConfig.${safePreferences.ui.fontSize}.description`)}
                 </p>
               </div>
             </div>
@@ -488,7 +612,7 @@ export default function UserPreferencesSettings() {
                     className={`
                       relative inline-flex h-6 w-11 items-center rounded-full transition-colors
                       ${
-                        preferences.ui.animations
+                        safePreferences.ui.animations
                           ? "bg-primary-600"
                           : "bg-neutral-300"
                       }
@@ -498,7 +622,7 @@ export default function UserPreferencesSettings() {
                       className={`
                         inline-block h-4 w-4 transform rounded-full bg-white transition-transform
                         ${
-                          preferences.ui.animations
+                          safePreferences.ui.animations
                             ? "translate-x-6"
                             : "translate-x-1"
                         }
@@ -521,7 +645,7 @@ export default function UserPreferencesSettings() {
                     className={`
                       relative inline-flex h-6 w-11 items-center rounded-full transition-colors
                       ${
-                        preferences.ui.compactMode
+                        safePreferences.ui.compactMode
                           ? "bg-primary-600"
                           : "bg-neutral-300"
                       }
@@ -531,7 +655,7 @@ export default function UserPreferencesSettings() {
                       className={`
                         inline-block h-4 w-4 transform rounded-full bg-white transition-transform
                         ${
-                          preferences.ui.compactMode
+                          safePreferences.ui.compactMode
                             ? "translate-x-6"
                             : "translate-x-1"
                         }
@@ -547,11 +671,11 @@ export default function UserPreferencesSettings() {
                     {t("userPreferences.dateFormat")}
                   </label>
                   <select
-                    value={preferences.ui.dateFormat}
+                    value={safePreferences.ui.dateFormat}
                     onChange={(e) =>
                       updateUserPreferences({
                         ui: {
-                          ...preferences.ui,
+                          ...safePreferences.ui,
                           dateFormat: e.target.value as DateFormat,
                         },
                       })
@@ -569,11 +693,11 @@ export default function UserPreferencesSettings() {
                     {t("userPreferences.timeFormat")}
                   </label>
                   <select
-                    value={preferences.ui.timeFormat}
+                    value={safePreferences.ui.timeFormat}
                     onChange={(e) =>
                       updateUserPreferences({
                         ui: {
-                          ...preferences.ui,
+                          ...safePreferences.ui,
                           timeFormat: e.target.value as TimeFormat,
                         },
                       })
@@ -609,13 +733,13 @@ export default function UserPreferencesSettings() {
               <button
                 onClick={() =>
                   updateNotificationSettings({
-                    enabled: !preferences.notifications.enabled,
+                    enabled: !safePreferences.notifications.enabled,
                   })
                 }
                 className={`
                   relative inline-flex h-6 w-11 items-center rounded-full transition-colors
                   ${
-                    preferences.notifications.enabled
+                    safePreferences.notifications.enabled
                       ? "bg-primary-600"
                       : "bg-neutral-300"
                   }
@@ -625,7 +749,7 @@ export default function UserPreferencesSettings() {
                   className={`
                     inline-block h-4 w-4 transform rounded-full bg-white transition-transform
                     ${
-                      preferences.notifications.enabled
+                      safePreferences.notifications.enabled
                         ? "translate-x-6"
                         : "translate-x-1"
                     }
@@ -634,7 +758,7 @@ export default function UserPreferencesSettings() {
               </button>
             </div>
 
-            {preferences.notifications.enabled && (
+            {safePreferences.notifications.enabled && (
               <div className="space-y-6">
                 {/* 通知类型 */}
                 <div>
@@ -642,7 +766,7 @@ export default function UserPreferencesSettings() {
                     通知类型
                   </label>
                   <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(preferences.notifications.types).map(
+                    {Object.entries(safePreferences.notifications.types).map(
                       ([type, enabled]) => (
                         <div
                           key={type}
@@ -655,7 +779,7 @@ export default function UserPreferencesSettings() {
                             onClick={() =>
                               updateNotificationSettings({
                                 types: {
-                                  ...preferences.notifications.types,
+                                  ...safePreferences.notifications.types,
                                   [type]: !enabled,
                                 },
                               })
@@ -684,7 +808,7 @@ export default function UserPreferencesSettings() {
                     通知渠道
                   </label>
                   <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(preferences.notifications.channels).map(
+                    {Object.entries(safePreferences.notifications.channels).map(
                       ([channel, enabled]) => (
                         <div
                           key={channel}
@@ -697,7 +821,7 @@ export default function UserPreferencesSettings() {
                             onClick={() =>
                               updateNotificationSettings({
                                 channels: {
-                                  ...preferences.notifications.channels,
+                                  ...safePreferences.notifications.channels,
                                   [channel]: !enabled,
                                 },
                               })
@@ -728,7 +852,7 @@ export default function UserPreferencesSettings() {
                     </label>
                     <input
                       type="time"
-                      value={preferences.notifications.reminderTime}
+                      value={safePreferences.notifications.reminderTime}
                       onChange={(e) =>
                         updateNotificationSettings({
                           reminderTime: e.target.value,
@@ -743,7 +867,7 @@ export default function UserPreferencesSettings() {
                       提醒频率
                     </label>
                     <select
-                      value={preferences.notifications.frequency}
+                      value={safePreferences.notifications.frequency}
                       onChange={(e) =>
                         updateNotificationSettings({
                           frequency: e.target.value as
@@ -779,7 +903,7 @@ export default function UserPreferencesSettings() {
             </h3>
 
             <div className="space-y-4">
-              {Object.entries(preferences.privacy).map(([key, value]) => (
+              {Object.entries(safePreferences.privacy).map(([key, value]) => (
                 <div
                   key={key}
                   className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg"
@@ -840,7 +964,7 @@ export default function UserPreferencesSettings() {
             </h3>
 
             <div className="space-y-4">
-              {Object.entries(preferences.accessibility).map(([key, value]) => (
+              {Object.entries(safePreferences.accessibility).map(([key, value]) => (
                 <div
                   key={key}
                   className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg"
@@ -907,11 +1031,11 @@ export default function UserPreferencesSettings() {
                   {t("userPreferences.defaultFormat")}
                 </label>
                 <select
-                  value={preferences.export.defaultFormat}
+                  value={safePreferences.export.defaultFormat}
                   onChange={(e) =>
                     updateUserPreferences({
                       export: {
-                        ...preferences.export,
+                        ...safePreferences.export,
                         defaultFormat: e.target.value as
                           | "pdf"
                           | "json"
@@ -943,15 +1067,15 @@ export default function UserPreferencesSettings() {
                     onClick={() =>
                       updateUserPreferences({
                         export: {
-                          ...preferences.export,
-                          autoSave: !preferences.export.autoSave,
+                          ...safePreferences.export,
+                          autoSave: !safePreferences.export.autoSave,
                         },
                       })
                     }
                     className={`
                       relative inline-flex h-6 w-11 items-center rounded-full transition-colors
                       ${
-                        preferences.export.autoSave
+                        safePreferences.export.autoSave
                           ? "bg-primary-600"
                           : "bg-neutral-300"
                       }
@@ -961,7 +1085,7 @@ export default function UserPreferencesSettings() {
                       className={`
                         inline-block h-4 w-4 transform rounded-full bg-white transition-transform
                         ${
-                          preferences.export.autoSave
+                          safePreferences.export.autoSave
                             ? "translate-x-6"
                             : "translate-x-1"
                         }
@@ -983,15 +1107,15 @@ export default function UserPreferencesSettings() {
                     onClick={() =>
                       updateUserPreferences({
                         export: {
-                          ...preferences.export,
-                          includeCharts: !preferences.export.includeCharts,
+                          ...safePreferences.export,
+                          includeCharts: !safePreferences.export.includeCharts,
                         },
                       })
                     }
                     className={`
                       relative inline-flex h-6 w-11 items-center rounded-full transition-colors
                       ${
-                        preferences.export.includeCharts
+                        safePreferences.export.includeCharts
                           ? "bg-primary-600"
                           : "bg-neutral-300"
                       }
@@ -1001,7 +1125,7 @@ export default function UserPreferencesSettings() {
                       className={`
                         inline-block h-4 w-4 transform rounded-full bg-white transition-transform
                         ${
-                          preferences.export.includeCharts
+                          safePreferences.export.includeCharts
                             ? "translate-x-6"
                             : "translate-x-1"
                         }

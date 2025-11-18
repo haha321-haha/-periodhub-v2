@@ -3,6 +3,8 @@
  * 基于HVsLYEp的appState结构设计
  */
 
+"use client";
+
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import {
@@ -16,6 +18,7 @@ import {
   TCMConstitution,
   ExportType,
   ExportFormat,
+  ExtendedExportFormat,
   // Day 11: 新增类型导入
   UserPreferences,
   ExportTemplate,
@@ -37,6 +40,9 @@ import {
   DEFAULT_USER_PREFERENCES,
   DEFAULT_EXPORT_TEMPLATES,
   DEFAULT_SYSTEM_SETTINGS,
+  DEFAULT_NOTIFICATION_SETTINGS,
+  DEFAULT_PRIVACY_SETTINGS,
+  DEFAULT_ACCESSIBILITY_SETTINGS,
 } from "../types/defaults";
 import { mockPeriodData } from "../data";
 
@@ -138,10 +144,11 @@ interface WorkplaceWellnessStore extends WorkplaceWellnessState {
 }
 
 // 初始状态 - 基于HVsLYEp的appState
-const initialState: WorkplaceWellnessState = {
+// 使用函数来延迟 Date 对象的创建，避免 SSR 问题
+const getInitialState = (): WorkplaceWellnessState => ({
   activeTab: "calendar",
   calendar: {
-    currentDate: new Date(),
+    currentDate: typeof window !== 'undefined' ? new Date() : new Date(0), // SSR 安全
     selectedDate: null,
     showAddForm: false,
     periodData: mockPeriodData,
@@ -177,14 +184,25 @@ const initialState: WorkplaceWellnessState = {
     savedItems: [],
     itemRatings: {},
   },
-};
+});
 
 // 创建Zustand Store - 使用persist进行本地存储持久化
-export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
+// 使用延迟创建，确保在 SSR 时不会执行
+let storeInstance: any | null = null;
+
+const createStore = () => {
+  // 双重检查：确保只在客户端执行
+  if (typeof window === 'undefined') {
+    throw new Error('Store can only be created on the client side');
+  }
+  
+  if (storeInstance) return storeInstance;
+  
+  storeInstance = create<WorkplaceWellnessStore>()(
   persist(
     (set, get) => ({
-      // 初始状态
-      ...initialState,
+        // 初始状态 - 使用函数获取，确保每次都是新的 Date 对象
+        ...getInitialState(),
 
       // 语言相关Actions
 
@@ -228,28 +246,56 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
                 )
               : [...state.calendar.periodData, record];
 
-          // 数据清理：只保留最近 6 个月的记录（更激进）
-          const sixMonthsAgo = new Date();
-          sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+          // 数据清理：只保留最近 2 周的记录（更激进，减少存储空间）
+          // 工具类应用主要需要最近数据，历史数据可通过导出功能保存
+          const twoWeeksAgo = new Date();
+          twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
           
           updatedPeriodData = updatedPeriodData.filter((r) => {
             try {
               const recordDate = new Date(r.date);
-              return recordDate >= sixMonthsAgo;
+              return recordDate >= twoWeeksAgo;
             } catch {
               return false; // 无效日期，删除
             }
           });
+          
+          // 如果数据仍然太多，只保留最近 20 条记录
+          if (updatedPeriodData.length > 20) {
+            updatedPeriodData = updatedPeriodData.slice(0, 20);
+            console.warn("⚠️ 数据过多，已自动清理，只保留最近 20 条记录");
+          }
 
           // 按日期排序（最新的在前）
           updatedPeriodData.sort((a, b) => 
             new Date(b.date).getTime() - new Date(a.date).getTime()
           );
 
+          // 全面数据清理：清理其他累积数据
+          const cleanedExportHistory = state.exportHistory.length > 5 
+            ? state.exportHistory.slice(-5) 
+            : state.exportHistory;
+          
+          const cleanedFeedbacks = state.recommendationFeedback.feedbacks.length > 20
+            ? state.recommendationFeedback.feedbacks.slice(-20)
+            : state.recommendationFeedback.feedbacks;
+          
+          const cleanedExportTemplates = state.exportTemplates.length > 5
+            ? state.exportTemplates.slice(-5)
+            : state.exportTemplates;
+
           return {
             calendar: {
               ...state.calendar,
               periodData: updatedPeriodData,
+            },
+            // 清理其他累积数据
+            exportHistory: cleanedExportHistory,
+            exportTemplates: cleanedExportTemplates,
+            batchExportQueue: null, // 清空临时数据
+            recommendationFeedback: {
+              ...state.recommendationFeedback,
+              feedbacks: cleanedFeedbacks,
             },
           };
         }),
@@ -433,10 +479,30 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
         const errors: SettingsValidationResult["errors"] = [];
         const warnings: SettingsValidationResult["warnings"] = [];
 
+        // 安全检查：确保 userPreferences 和嵌套属性存在
+        if (!state.userPreferences || typeof state.userPreferences !== 'object') {
+          return {
+            isValid: false,
+            errors: [{
+              category: "ui" as keyof UserPreferences,
+              key: "preferences",
+              message: "Preferences not initialized",
+            }],
+            warnings: [],
+          };
+        }
+
+        const preferences = state.userPreferences;
+        const notifications = preferences.notifications;
+        const ui = preferences.ui;
+
         // 验证时间格式
         if (
+          notifications &&
+          typeof notifications === 'object' &&
+          notifications.reminderTime &&
           !/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(
-            state.userPreferences.notifications.reminderTime,
+            notifications.reminderTime,
           )
         ) {
           errors.push({
@@ -448,7 +514,11 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
 
         // 验证提醒天数
         if (
-          !state.userPreferences.notifications.reminderDays.every(
+          notifications &&
+          typeof notifications === 'object' &&
+          notifications.reminderDays &&
+          Array.isArray(notifications.reminderDays) &&
+          !notifications.reminderDays.every(
             (day) => day >= 0 && day <= 6,
           )
         ) {
@@ -460,9 +530,12 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
         }
 
         // 验证文本缩放
+        const accessibility = preferences.accessibility;
         if (
-          state.userPreferences.accessibility.textScaling < 0.8 ||
-          state.userPreferences.accessibility.textScaling > 2.0
+          accessibility &&
+          typeof accessibility === 'object' &&
+          typeof accessibility.textScaling === 'number' &&
+          (accessibility.textScaling < 0.8 || accessibility.textScaling > 2.0)
         ) {
           errors.push({
             category: "accessibility",
@@ -766,7 +839,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       },
 
       // 工具方法
-      resetState: () => set(initialState),
+      resetState: () => set(getInitialState()),
 
       getStateSnapshot: () => {
         const state = get();
@@ -788,445 +861,574 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
     }),
     {
       name: "workplace-wellness-storage",
-      // 添加SSR安全配置
-      skipHydration: false,
-      // 自定义存储适配器，添加错误处理、降级、智能清理和防抖保存
-      storage: createJSONStorage(() => {
-        // 错误标志键（使用 sessionStorage 避免循环）
-        const ERROR_FLAG_KEY = 'workplace-wellness-storage-error';
-        const FAILURE_COUNT_KEY = 'workplace-wellness-storage-failures';
-        const MAX_FAILURES = 3;
-
-        // 防抖保存：减少保存频率
-        let saveTimer: NodeJS.Timeout | null = null;
-        let pendingValue: string | null = null;
-        const DEBOUNCE_DELAY = 500; // 500ms 防抖延迟
-
-        // 关键数据键（需要立即保存）
-        const CRITICAL_KEYS = ['userPreferences', 'systemSettings'];
-        
-        // 判断是否为关键数据
-        const isCriticalData = (data: string): boolean => {
-          try {
-            const parsed = JSON.parse(data);
-            const state = parsed?.state || {};
-            // 检查是否包含关键数据的变化
-            return CRITICAL_KEYS.some(key => state.hasOwnProperty(key));
-          } catch {
-            return false;
-          }
-        };
-
-        // 检查错误标志
-        const checkErrorFlag = (): boolean => {
-          try {
-            return sessionStorage.getItem(ERROR_FLAG_KEY) === 'disabled';
-          } catch {
-            return false;
-          }
-        };
-
-        // 增加失败计数
-        const incrementFailureCount = (): number => {
-          try {
-            const count = parseInt(sessionStorage.getItem(FAILURE_COUNT_KEY) || '0', 10) + 1;
-            sessionStorage.setItem(FAILURE_COUNT_KEY, count.toString());
-            if (count >= MAX_FAILURES) {
-              sessionStorage.setItem(ERROR_FLAG_KEY, 'disabled');
+      storage: typeof window !== "undefined" 
+        ? createJSONStorage(() => {
+            // 双重检查：确保在客户端
+            if (typeof window === 'undefined') {
+              throw new Error('Storage can only be created on the client side');
             }
-            return count;
-          } catch {
-            return MAX_FAILURES;
-          }
-        };
-
-        // 重置失败计数
-        const resetFailureCount = (): void => {
-          try {
-            sessionStorage.removeItem(FAILURE_COUNT_KEY);
-            sessionStorage.removeItem(ERROR_FLAG_KEY);
-          } catch {
-            // 忽略错误
-          }
-        };
-
-        // 智能清理：清理所有相关键和临时数据
-        const aggressiveCleanup = (targetKey: string): boolean => {
-          try {
-            // 1. 清理所有以 'workplace-wellness-' 开头的键
-            const keysToRemove: string[] = [];
-            for (let i = localStorage.length - 1; i >= 0; i--) {
-              const key = localStorage.key(i);
-              if (key && key.startsWith('workplace-wellness-')) {
-                keysToRemove.push(key);
-              }
-            }
-            keysToRemove.forEach(key => {
-              try {
-                localStorage.removeItem(key);
-              } catch {
-                // 忽略错误
-              }
-            });
-
-            // 2. 清理临时数据（_temp, _cache 后缀）
-            const tempKeys: string[] = [];
-            for (let i = localStorage.length - 1; i >= 0; i--) {
-              const key = localStorage.key(i);
-              if (key && (key.includes('_temp') || key.includes('_cache'))) {
-                tempKeys.push(key);
-              }
-            }
-            tempKeys.forEach(key => {
-              try {
-                localStorage.removeItem(key);
-              } catch {
-                // 忽略错误
-              }
-            });
-
-            return true;
-          } catch {
-            return false;
-          }
-        };
-
-        // 清理并优化数据
-        const cleanAndOptimizeData = (data: any): any => {
-          if (!data?.state) return data;
-
-          // 清理 periodData：只保留最近 3 个月
-          if (data.state.calendar?.periodData) {
-            const threeMonthsAgo = new Date();
-            threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
-            
-            data.state.calendar.periodData = data.state.calendar.periodData
-              .filter((r: any) => {
+            // 自定义 storage 适配器，处理 QuotaExceededError
+            const safeStorage: Storage = {
+              getItem: (key: string) => {
                 try {
-                  const recordDate = new Date(r.date);
-                  return recordDate >= threeMonthsAgo;
-                } catch {
-                  return false;
-                }
-              })
-              .sort((a: any, b: any) => 
-                new Date(b.date).getTime() - new Date(a.date).getTime()
-              );
-          }
-
-          // 清理 exportHistory：只保留最近 20 条
-          if (data.state.exportHistory) {
-            data.state.exportHistory = data.state.exportHistory
-              .slice(-20)
-              .sort((a: any, b: any) => 
-                new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-              );
-          }
-
-          return data;
-        };
-
-        // 创建自定义存储对象
-        const customStorage: Storage = {
-          ...localStorage,
-          getItem: (key: string): string | null => {
-            try {
-              return localStorage.getItem(key);
-            } catch {
+                  if (typeof window === 'undefined') return null;
+                  // 先尝试从 localStorage 读取
+                  let data = localStorage.getItem(key);
+                  if (data) {
+                    // 验证并修复数据完整性
+                    try {
+                      const parsed = JSON.parse(data);
+                      // 检查 userPreferences 是否完整
+                      if (parsed?.state?.userPreferences) {
+                        const prefs = parsed.state.userPreferences;
+                        // 如果 userPreferences 不完整，自动修复
+                        if (!prefs.ui || typeof prefs.ui !== 'object' || !prefs.ui.theme) {
+                          console.warn('🔧 检测到 userPreferences 数据不完整，自动修复...');
+                          parsed.state.userPreferences = {
+                            ...DEFAULT_USER_PREFERENCES,
+                            ...prefs,
+                            ui: {
+                              ...DEFAULT_USER_PREFERENCES.ui,
+                              ...(prefs.ui || {}),
+                              theme: prefs.ui?.theme || DEFAULT_USER_PREFERENCES.ui.theme,
+                            },
+                            notifications: prefs.notifications && typeof prefs.notifications === 'object'
+                              ? { ...DEFAULT_USER_PREFERENCES.notifications, ...prefs.notifications }
+                              : DEFAULT_USER_PREFERENCES.notifications,
+                            privacy: prefs.privacy && typeof prefs.privacy === 'object'
+                              ? { ...DEFAULT_USER_PREFERENCES.privacy, ...prefs.privacy }
+                              : DEFAULT_USER_PREFERENCES.privacy,
+                            accessibility: prefs.accessibility && typeof prefs.accessibility === 'object'
+                              ? { ...DEFAULT_USER_PREFERENCES.accessibility, ...prefs.accessibility }
+                              : DEFAULT_USER_PREFERENCES.accessibility,
+                            export: prefs.export && typeof prefs.export === 'object'
+                              ? { ...DEFAULT_USER_PREFERENCES.export, ...prefs.export }
+                              : DEFAULT_USER_PREFERENCES.export,
+                          };
+                          // 保存修复后的数据
+                          const fixedData = JSON.stringify(parsed);
+                          try {
+                            localStorage.setItem(key, fixedData);
+                            console.log('✅ userPreferences 数据已自动修复');
+                          } catch (e) {
+                            console.warn('⚠️ 修复后的数据保存失败，使用修复后的内存数据');
+                          }
+                          return fixedData;
+                        }
+                      }
+                      return data;
+                    } catch (parseError) {
+                      console.warn('⚠️ 数据解析失败，使用默认值:', parseError);
+                      // 数据损坏，返回 null 让 Zustand 使用默认值
+                      return null;
+                    }
+                  }
+                  // 如果 localStorage 没有，尝试从 sessionStorage 读取
+                  return sessionStorage.getItem(key);
+              } catch {
+                  // 如果都失败，返回 null
               return null;
             }
           },
-          setItem: (name: string, value: string): void => {
-            // 检查错误标志
-            if (checkErrorFlag()) {
-              // 已禁用，尝试降级到 sessionStorage
-              try {
-                sessionStorage.setItem(name, value);
-                return;
-              } catch {
-                // sessionStorage 也失败，放弃保存
-                return;
-              }
-            }
-
-            // 判断是否为关键数据
-            const critical = isCriticalData(value);
-            
-            // 处理保存错误
-            const handleSaveError = (saveName: string, saveValue: string, saveError: unknown): void => {
+              setItem: (key: string, value: string) => {
+                try {
+                  if (typeof window === 'undefined') return;
+                  localStorage.setItem(key, value);
+                  console.log("✅ 数据已保存到 localStorage:", key, "大小:", value.length, "bytes");
+                } catch (error) {
               // 处理配额超出错误
               if (
-                saveError instanceof DOMException &&
-                (saveError.code === 22 || saveError.name === "QuotaExceededError")
-              ) {
-                const failureCount = incrementFailureCount();
-                
-                // 如果失败次数过多，禁用持久化
-                if (failureCount >= MAX_FAILURES) {
-                  console.warn("Storage disabled after multiple failures, using sessionStorage");
-                  try {
-                    sessionStorage.setItem(saveName, saveValue);
-                    return;
-                  } catch {
-                    return;
-                  }
-                }
-
-                // 尝试智能清理
-                aggressiveCleanup(saveName);
-
-                // 尝试清理并优化现有数据
-                try {
-                  const existingData = localStorage.getItem(saveName);
-                  if (existingData) {
-                    let parsed: any;
+                    error instanceof DOMException &&
+                    (error.code === 22 || error.name === "QuotaExceededError")
+                  ) {
+                    console.warn("Storage quota exceeded, attempting cleanup...");
+                    
+                    // 先尝试清理所有 workplace-wellness 相关的旧数据
                     try {
-                      parsed = JSON.parse(existingData);
+                      if (typeof window !== 'undefined') {
+                        const keysToRemove: string[] = [];
+                        for (let i = localStorage.length - 1; i >= 0; i--) {
+                          const k = localStorage.key(i);
+                          if (k && (
+                            k.startsWith('workplace-wellness-') ||
+                            k === 'workplace-wellness-storage' ||
+                            k.includes('workplace-wellness')
+                          )) {
+                            keysToRemove.push(k);
+                          }
+                        }
+                        keysToRemove.forEach(k => {
+                          try {
+                            localStorage.removeItem(k);
                     } catch {
-                      // 数据损坏，删除
-                      localStorage.removeItem(saveName);
-                      // 尝试降级到 sessionStorage
-                      try {
-                        sessionStorage.setItem(saveName, saveValue);
-                        return;
-                      } catch {
-                        return;
+                            // 忽略单个删除错误
+                          }
+                        });
                       }
-                    }
-
-                    // 清理并优化数据
-                    const cleaned = cleanAndOptimizeData(parsed);
-                    const cleanedData = JSON.stringify(cleaned);
-
-                    try {
-                      localStorage.setItem(saveName, cleanedData);
-                      resetFailureCount();
-                      return;
-                    } catch {
-                      // 继续尝试其他方案
-                    }
-                  }
-                } catch {
-                  // 继续尝试其他方案
+                    } catch (cleanupError) {
+                      console.warn("Failed to cleanup, localStorage may be completely full");
                 }
 
                 // 尝试保存最小数据集
                 try {
-                  localStorage.removeItem(saveName);
                   const minimalData = {
                     state: {
-                      activeTab: "calendar",
+                          activeTab: (() => {
+                            try {
+                              const parsed = JSON.parse(value);
+                              return parsed?.state?.activeTab || "calendar";
+                            } catch {
+                              return "calendar";
+                            }
+                          })(),
                       calendar: {
                         currentDate: new Date().toISOString(),
                         selectedDate: null,
                         showAddForm: false,
-                        periodData: [],
+                            periodData: [], // 清空历史数据
+                          },
+                          workImpact: {
+                            painLevel: null,
+                            efficiency: 100,
+                            selectedTemplateId: null,
+                          },
+                          nutrition: {
+                            selectedPhase: "menstrual",
+                            constitutionType: "balanced",
+                            searchTerm: "",
+                          },
+                          export: {
+                            exportType: "single",
+                            format: "json",
+                            isExporting: false,
+                          },
+                          userPreferences: DEFAULT_USER_PREFERENCES,
+                          exportTemplates: [],
+                          activeTemplate: null,
+                          batchExportQueue: null,
+                          exportHistory: [],
+                          systemSettings: {},
+                          recommendationFeedback: {
+                            feedbacks: [],
+                            ignoredItems: [],
+                            savedItems: [],
+                            itemRatings: {},
                       },
                     },
                   };
-                  localStorage.setItem(saveName, JSON.stringify(minimalData));
-                  resetFailureCount();
+                      
+                      const minimalDataString = JSON.stringify(minimalData);
+                      
+                      // 尝试保存最小数据集到 localStorage
+                      try {
+                        if (typeof window !== 'undefined') {
+                          localStorage.setItem(key, minimalDataString);
+                          console.log("Storage cleaned and minimal data saved to localStorage");
+                          return; // 成功保存，退出
+                        }
+                      } catch (minimalSaveError) {
+                        // 即使最小数据集也保存失败，说明 localStorage 完全满了
+                        console.warn("localStorage completely full after cleanup, using sessionStorage");
+                        // 直接使用 sessionStorage，不再尝试 localStorage
+                        try {
+                          if (typeof window !== 'undefined') {
+                            sessionStorage.setItem(key, minimalDataString);
+                            console.log("Data saved to sessionStorage instead");
+                            // 触发存储警告事件，通知界面显示提示
+                            window.dispatchEvent(new CustomEvent('storage-warning', {
+                              detail: {
+                                type: 'sessionStorage',
+                                message: '存储空间不足，数据已临时保存。关闭浏览器后数据将丢失。',
+                              },
+                            }));
+                            return; // 成功保存到 sessionStorage，退出
+                          }
+                        } catch (sessionError) {
+                          // sessionStorage 也失败，放弃保存
+                          console.error("Both localStorage and sessionStorage failed:", sessionError);
+                          // 触发严重警告事件
+                          if (typeof window !== 'undefined') {
+                            window.dispatchEvent(new CustomEvent('storage-warning', {
+                              detail: {
+                                type: 'failed',
+                                message: '存储空间已满，无法保存数据。请清理浏览器存储或导出数据。',
+                              },
+                            }));
+                          }
+                          // 不抛出错误，静默失败
                   return;
-                } catch {
-                  // 最后尝试：降级到 sessionStorage
-                  try {
-                    sessionStorage.setItem(saveName, saveValue);
+                        }
+                      }
+                    } catch (dataError) {
+                      console.error("Failed to create minimal data:", dataError);
+                      // 如果创建最小数据集也失败，直接使用 sessionStorage 保存原始值
+                      try {
+                        if (typeof window !== 'undefined') {
+                          sessionStorage.setItem(key, value);
+                          console.log("Original data saved to sessionStorage");
+                          // 触发存储警告事件
+                          window.dispatchEvent(new CustomEvent('storage-warning', {
+                            detail: {
+                              type: 'sessionStorage',
+                              message: '存储空间不足，数据已临时保存。关闭浏览器后数据将丢失。',
+                            },
+                          }));
                     return;
+                        }
                   } catch {
                     // 完全失败，放弃保存
+                        console.error("All storage options failed");
+                        // 触发严重警告事件
+                        if (typeof window !== 'undefined') {
+                          window.dispatchEvent(new CustomEvent('storage-warning', {
+                            detail: {
+                              type: 'failed',
+                              message: '存储空间已满，无法保存数据。请清理浏览器存储或导出数据。',
+                            },
+                          }));
+                        }
                     return;
                   }
                 }
               } else {
-                console.error("Failed to set item in localStorage:", saveError);
-              }
-            };
-
-            // 关键数据立即保存，非关键数据防抖保存
-            const performSave = () => {
-              const valueToSave = pendingValue || value;
-              try {
-                localStorage.setItem(name, valueToSave);
-                // 成功保存，重置失败计数
-                resetFailureCount();
-                pendingValue = null;
-              } catch (error) {
-                // 处理保存错误
-                handleSaveError(name, valueToSave, error);
-              }
-            };
-
-            // 如果是关键数据，立即保存
-            if (critical) {
-              // 清除待保存的数据
-              if (saveTimer) {
-                clearTimeout(saveTimer);
-                saveTimer = null;
-              }
-              pendingValue = null;
-              performSave();
-              return;
-            }
-
-            // 非关键数据：防抖保存
-            pendingValue = value;
-            if (saveTimer) {
-              clearTimeout(saveTimer);
-            }
-            saveTimer = setTimeout(() => {
-              performSave();
-              saveTimer = null;
-            }, DEBOUNCE_DELAY);
-          },
-          removeItem: (key: string): void => {
-            try {
+                    // 非配额错误，记录但不抛出
+                    console.error("Storage setItem error:", error);
+                    // 不抛出错误，静默失败
+                  }
+                }
+              },
+              removeItem: (key: string) => {
+                try {
+                  if (typeof window === 'undefined') return;
               localStorage.removeItem(key);
             } catch {
               // 忽略错误
             }
           },
-          clear: (): void => {
+              clear: () => {
             try {
+                  if (typeof window === 'undefined') return;
               localStorage.clear();
             } catch {
               // 忽略错误
             }
           },
-          get length(): number {
+              get length() {
             try {
+                  if (typeof window === 'undefined') return 0;
               return localStorage.length;
             } catch {
               return 0;
             }
           },
-          key: (index: number): string | null => {
+              key: (index: number) => {
             try {
+                  if (typeof window === 'undefined') return null;
               return localStorage.key(index);
             } catch {
               return null;
             }
           },
-        } as Storage;
-        return customStorage;
-      }),
-      // 部分持久化：只持久化关键数据，减少存储大小
-      // 分层存储：关键数据用 localStorage，会话数据用 sessionStorage
-      partialize: (state) => {
-        // 清理 periodData：只保留最近 6 个月的记录（更激进）
-        const sixMonthsAgo = new Date();
-        sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-        
-        const cleanedPeriodData = state.calendar.periodData
-          .filter((r) => {
-            try {
-              const recordDate = new Date(r.date);
-              return recordDate >= sixMonthsAgo;
-            } catch {
-              return false; // 无效日期，删除
-            }
+            };
+            return safeStorage;
           })
-          .sort((a, b) => 
-            new Date(b.date).getTime() - new Date(a.date).getTime()
-          );
-
-        // 限制 exportHistory 数量（只保留最近 20 条）
-        const limitedExportHistory = state.exportHistory
-          .slice(-20)
-          .sort((a, b) => 
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
-
-        // 关键数据：持久化到 localStorage
-        // 非关键数据：不持久化或使用 sessionStorage
-        return {
-          // 关键数据（必须持久化）
-          activeTab: state.activeTab,
-          userPreferences: state.userPreferences,
-          systemSettings: state.systemSettings,
-          exportTemplates: state.exportTemplates,
-          activeTemplate: state.activeTemplate,
-          
-          // 重要数据（持久化但限制大小）
-          calendar: {
-            ...state.calendar,
-            periodData: cleanedPeriodData,
-          },
-          workImpact: state.workImpact,
-          nutrition: state.nutrition,
-          export: {
-            ...state.export,
-            // 不持久化 isExporting（临时状态）
-            isExporting: false,
-          },
-          exportHistory: limitedExportHistory,
-          
-          // 不持久化 batchExportQueue（临时数据，只在内存中）
-        };
-      },
-      // 数据迁移：清理旧数据
-      onRehydrateStorage: () => (state) => {
-        if (state) {
-          // 清理 periodData：只保留最近 6 个月
-          const sixMonthsAgo = new Date();
-          sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-          
-          const cleanedPeriodData = state.calendar.periodData
-            .filter((r) => {
-              try {
-                const recordDate = new Date(r.date);
-                return recordDate >= sixMonthsAgo;
-              } catch {
-                return false; // 无效日期，删除
+        : undefined,
+      // 添加SSR安全配置 - 跳过服务器端hydration
+      // 注意：skipHydration: true 需要手动调用 rehydrate()
+      skipHydration: true,
+      // 只在客户端运行
+      onRehydrateStorage: () => (state, error) => {
+        if (error) {
+          console.error("Zustand store rehydration error:", error);
+        } else {
+          // 确保 userPreferences 结构完整
+          if (state) {
+            // 如果 userPreferences 不存在或不完整，完全重建
+            if (!state.userPreferences || 
+                !state.userPreferences.ui || 
+                typeof state.userPreferences.ui !== 'object' ||
+                !state.userPreferences.ui.theme) {
+              console.warn('🔧 数据恢复后检测到 userPreferences 不完整，自动修复...');
+              state.userPreferences = {
+                ...DEFAULT_USER_PREFERENCES,
+                ...(state.userPreferences || {}),
+                ui: {
+                  ...DEFAULT_USER_PREFERENCES.ui,
+                  ...(state.userPreferences?.ui || {}),
+                  theme: state.userPreferences?.ui?.theme || DEFAULT_USER_PREFERENCES.ui.theme,
+                },
+                notifications: state.userPreferences?.notifications && typeof state.userPreferences.notifications === 'object'
+                  ? { ...DEFAULT_NOTIFICATION_SETTINGS, ...state.userPreferences.notifications }
+                  : DEFAULT_NOTIFICATION_SETTINGS,
+                privacy: state.userPreferences?.privacy && typeof state.userPreferences.privacy === 'object'
+                  ? { ...DEFAULT_PRIVACY_SETTINGS, ...state.userPreferences.privacy }
+                  : DEFAULT_PRIVACY_SETTINGS,
+                accessibility: state.userPreferences?.accessibility && typeof state.userPreferences.accessibility === 'object'
+                  ? { ...DEFAULT_ACCESSIBILITY_SETTINGS, ...state.userPreferences.accessibility }
+                  : DEFAULT_ACCESSIBILITY_SETTINGS,
+                export: state.userPreferences?.export && typeof state.userPreferences.export === 'object'
+                  ? {
+                      defaultFormat: "pdf" as ExtendedExportFormat,
+                      defaultTemplate: undefined,
+                      autoSave: true,
+                      includeCharts: true,
+                      compression: false,
+                      ...state.userPreferences.export,
+                    }
+                  : {
+                      defaultFormat: "pdf" as ExtendedExportFormat,
+                      defaultTemplate: undefined,
+                      autoSave: true,
+                      includeCharts: true,
+                      compression: false,
+                    },
+              };
+              console.log('✅ userPreferences 已自动修复');
+            } else {
+              // 即使存在，也确保所有嵌套属性完整
+              if (!state.userPreferences.ui.theme) {
+                state.userPreferences.ui.theme = DEFAULT_USER_PREFERENCES.ui.theme;
               }
-            })
-            .sort((a, b) => 
-              new Date(b.date).getTime() - new Date(a.date).getTime()
-            );
-
-          // 限制 exportHistory：只保留最近 20 条
-          const limitedExportHistory = state.exportHistory
-            .slice(-20)
-            .sort((a, b) => 
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-            );
-
-          // 更新状态
-          state.calendar.periodData = cleanedPeriodData;
-          state.exportHistory = limitedExportHistory;
+              if (!state.userPreferences.notifications || typeof state.userPreferences.notifications !== 'object') {
+                state.userPreferences.notifications = { ...DEFAULT_NOTIFICATION_SETTINGS, ...(state.userPreferences.notifications || {}) };
+              }
+              if (!state.userPreferences.privacy || typeof state.userPreferences.privacy !== 'object') {
+                state.userPreferences.privacy = { ...DEFAULT_PRIVACY_SETTINGS, ...(state.userPreferences.privacy || {}) };
+              }
+              if (!state.userPreferences.accessibility || typeof state.userPreferences.accessibility !== 'object') {
+                state.userPreferences.accessibility = { ...DEFAULT_ACCESSIBILITY_SETTINGS, ...(state.userPreferences.accessibility || {}) };
+              }
+              if (!state.userPreferences.export || typeof state.userPreferences.export !== 'object') {
+                state.userPreferences.export = {
+                  defaultFormat: "pdf" as ExtendedExportFormat,
+                  defaultTemplate: undefined,
+                  autoSave: true,
+                  includeCharts: true,
+                  compression: false,
+                  ...(state.userPreferences.export || {}),
+                };
+              }
+            }
+          } else if (state) {
+            // 如果 userPreferences 完全缺失，使用默认值
+            state.userPreferences = DEFAULT_USER_PREFERENCES;
+          }
+          console.log("Zustand store rehydrated successfully:", state);
         }
       },
     },
   ),
-);
+  );
+  
+  return storeInstance;
+};
 
+// 导出 store hook - 延迟创建，确保 SSR 安全
+export const useWorkplaceWellnessStore = ((selector?: any, equalityFn?: any) => {
+  if (typeof window === 'undefined') {
+    // SSR 时返回初始状态，避免错误
+    if (selector) {
+      return selector(getInitialState());
+    }
+    return getInitialState();
+  }
+  const store = createStore();
+  return store(selector, equalityFn);
+}) as ReturnType<typeof create<WorkplaceWellnessStore>>;
+
+// 添加 store 的静态方法 - 延迟初始化
+Object.defineProperty(useWorkplaceWellnessStore, 'getState', {
+  get: () => {
+    if (typeof window === 'undefined') return () => getInitialState();
+    const store = createStore();
+    return () => store.getState();
+  },
+  configurable: true,
+});
+
+Object.defineProperty(useWorkplaceWellnessStore, 'setState', {
+  get: () => {
+    if (typeof window === 'undefined') return () => {};
+    const store = createStore();
+    return (state: any) => store.setState(state);
+  },
+  configurable: true,
+});
+
+Object.defineProperty(useWorkplaceWellnessStore, 'subscribe', {
+  get: () => {
+    if (typeof window === 'undefined') return () => () => {};
+    const store = createStore();
+    return (listener: any) => store.subscribe(listener);
+  },
+  configurable: true,
+});
+
+Object.defineProperty(useWorkplaceWellnessStore, 'persist', {
+  get: () => {
+    if (typeof window === 'undefined') return undefined;
+    const store = createStore();
+    return (store as any).persist;
+  },
+  configurable: true,
+});
+
+// ===== 类型定义 =====
+// Action Hooks 返回类型
+type WorkplaceWellnessActions = {
+  setActiveTab: WorkplaceWellnessStore['setActiveTab'];
+  updateCalendar: WorkplaceWellnessStore['updateCalendar'];
+  setCurrentDate: WorkplaceWellnessStore['setCurrentDate'];
+  addPeriodRecord: WorkplaceWellnessStore['addPeriodRecord'];
+  updatePeriodRecord: WorkplaceWellnessStore['updatePeriodRecord'];
+  deletePeriodRecord: WorkplaceWellnessStore['deletePeriodRecord'];
+  updateWorkImpact: WorkplaceWellnessStore['updateWorkImpact'];
+  selectTemplate: WorkplaceWellnessStore['selectTemplate'];
+  updateNutrition: WorkplaceWellnessStore['updateNutrition'];
+  updateExport: WorkplaceWellnessStore['updateExport'];
+  setExporting: WorkplaceWellnessStore['setExporting'];
+  resetState: WorkplaceWellnessStore['resetState'];
+};
+
+type UserPreferencesActions = {
+  updateUserPreferences: WorkplaceWellnessStore['updateUserPreferences'];
+  setTheme: WorkplaceWellnessStore['setTheme'];
+  setFontSize: WorkplaceWellnessStore['setFontSize'];
+  toggleAnimations: WorkplaceWellnessStore['toggleAnimations'];
+  toggleCompactMode: WorkplaceWellnessStore['toggleCompactMode'];
+  updateNotificationSettings: WorkplaceWellnessStore['updateNotificationSettings'];
+  updatePrivacySettings: WorkplaceWellnessStore['updatePrivacySettings'];
+  updateAccessibilitySettings: WorkplaceWellnessStore['updateAccessibilitySettings'];
+  validateSettings: WorkplaceWellnessStore['validateSettings'];
+  resetPreferences: WorkplaceWellnessStore['resetPreferences'];
+};
+
+type ExportTemplateActions = {
+  addExportTemplate: WorkplaceWellnessStore['addExportTemplate'];
+  updateExportTemplate: WorkplaceWellnessStore['updateExportTemplate'];
+  deleteExportTemplate: WorkplaceWellnessStore['deleteExportTemplate'];
+  setActiveTemplate: WorkplaceWellnessStore['setActiveTemplate'];
+  loadTemplate: WorkplaceWellnessStore['loadTemplate'];
+  duplicateTemplate: WorkplaceWellnessStore['duplicateTemplate'];
+};
+
+type BatchExportActions = {
+  createBatchExport: WorkplaceWellnessStore['createBatchExport'];
+  updateBatchItemStatus: WorkplaceWellnessStore['updateBatchItemStatus'];
+  cancelBatchExport: WorkplaceWellnessStore['cancelBatchExport'];
+  retryFailedItems: WorkplaceWellnessStore['retryFailedItems'];
+  clearBatchExport: WorkplaceWellnessStore['clearBatchExport'];
+};
+
+type ExportHistoryActions = {
+  addExportHistory: WorkplaceWellnessStore['addExportHistory'];
+  clearExportHistory: WorkplaceWellnessStore['clearExportHistory'];
+  deleteExportHistory: WorkplaceWellnessStore['deleteExportHistory'];
+};
+
+type SystemSettingsActions = {
+  updateSystemSettings: WorkplaceWellnessStore['updateSystemSettings'];
+  resetSystemSettings: WorkplaceWellnessStore['resetSystemSettings'];
+};
+
+type RecommendationFeedbackActions = {
+  addRecommendationFeedback: WorkplaceWellnessStore['addRecommendationFeedback'];
+  clearIgnoredItem: WorkplaceWellnessStore['clearIgnoredItem'];
+  clearAllIgnored: WorkplaceWellnessStore['clearAllIgnored'];
+  getFeedbackHistory: WorkplaceWellnessStore['getFeedbackHistory'];
+};
+
+// ===== 选择器Hooks =====
 // 选择器Hooks - 基于HVsLYEp的状态结构
-export const useActiveTab = () =>
-  useWorkplaceWellnessStore((state) => state.activeTab);
-export const useCalendar = () =>
-  useWorkplaceWellnessStore((state) => state.calendar);
-export const useWorkImpact = () =>
-  useWorkplaceWellnessStore((state) => state.workImpact);
-export const useNutrition = () =>
-  useWorkplaceWellnessStore((state) => state.nutrition);
-export const useExport = () =>
-  useWorkplaceWellnessStore((state) => state.export);
+// 这些 hooks 在 SSR 时也会被调用，需要确保安全
+export const useActiveTab = (): WorkplaceWellnessState["activeTab"] => {
+  if (typeof window === 'undefined') return "calendar";
+  return useWorkplaceWellnessStore((state) => state.activeTab) as unknown as WorkplaceWellnessState["activeTab"];
+};
+export const useCalendar = (): CalendarState => {
+  if (typeof window === 'undefined') return getInitialState().calendar;
+  return useWorkplaceWellnessStore((state) => state.calendar) as CalendarState;
+};
+export const useWorkImpact = (): WorkImpactData => {
+  if (typeof window === 'undefined') return getInitialState().workImpact;
+  return useWorkplaceWellnessStore((state) => state.workImpact) as WorkImpactData;
+};
+export const useNutrition = (): NutritionData => {
+  if (typeof window === 'undefined') return getInitialState().nutrition;
+  return useWorkplaceWellnessStore((state) => state.nutrition) as NutritionData;
+};
+export const useExport = (): ExportConfig => {
+  if (typeof window === 'undefined') return getInitialState().export;
+  return useWorkplaceWellnessStore((state) => state.export) as ExportConfig;
+};
 
 // Day 11: 新增选择器Hooks
-export const useUserPreferences = () =>
-  useWorkplaceWellnessStore((state) => state.userPreferences);
-export const useExportTemplates = () =>
-  useWorkplaceWellnessStore((state) => state.exportTemplates);
-export const useActiveTemplate = () =>
-  useWorkplaceWellnessStore((state) => state.activeTemplate);
-export const useBatchExportQueue = () =>
-  useWorkplaceWellnessStore((state) => state.batchExportQueue);
-export const useExportHistory = () =>
-  useWorkplaceWellnessStore((state) => state.exportHistory);
-export const useSystemSettings = () =>
-  useWorkplaceWellnessStore((state) => state.systemSettings);
+export const useUserPreferences = (): UserPreferences => {
+  if (typeof window === 'undefined') return getInitialState().userPreferences;
+  const preferences = useWorkplaceWellnessStore((state) => state.userPreferences);
+  // 深度检查，确保返回的值结构完整
+  if (
+    !preferences || 
+    typeof preferences !== 'object' ||
+    !preferences.ui ||
+    typeof preferences.ui !== 'object' ||
+    preferences.ui === null ||
+    !preferences.ui.theme ||
+    typeof preferences.ui.theme !== 'string' ||
+    !preferences.notifications ||
+    typeof preferences.notifications !== 'object' ||
+    !preferences.privacy ||
+    typeof preferences.privacy !== 'object' ||
+    !preferences.accessibility ||
+    typeof preferences.accessibility !== 'object' ||
+    !preferences.export ||
+    typeof preferences.export !== 'object'
+  ) {
+    return DEFAULT_USER_PREFERENCES;
+  }
+  return preferences as UserPreferences;
+};
+export const useExportTemplates = (): ExportTemplate[] => {
+  if (typeof window === 'undefined') return getInitialState().exportTemplates;
+  return useWorkplaceWellnessStore((state) => state.exportTemplates) as ExportTemplate[];
+};
+export const useActiveTemplate = (): ExportTemplate | null => {
+  if (typeof window === 'undefined') return getInitialState().activeTemplate;
+  return useWorkplaceWellnessStore((state) => state.activeTemplate) as ExportTemplate | null;
+};
+export const useBatchExportQueue = (): BatchExportQueue | null => {
+  if (typeof window === 'undefined') return getInitialState().batchExportQueue;
+  return useWorkplaceWellnessStore((state) => state.batchExportQueue) as BatchExportQueue | null;
+};
+export const useExportHistory = (): ExportHistory[] => {
+  if (typeof window === 'undefined') return getInitialState().exportHistory;
+  return useWorkplaceWellnessStore((state) => state.exportHistory) as ExportHistory[];
+};
+export const useSystemSettings = (): SystemSettings => {
+  if (typeof window === 'undefined') return getInitialState().systemSettings;
+  return useWorkplaceWellnessStore((state) => state.systemSettings) as SystemSettings;
+};
 
 // Actions Hooks - 使用独立的store调用避免无限循环
-export const useWorkplaceWellnessActions = () => {
+export const useWorkplaceWellnessActions = (): WorkplaceWellnessActions => {
+  // SSR 安全检查
+  if (typeof window === 'undefined') {
+    return {
+      setActiveTab: () => {},
+      updateCalendar: () => {},
+      setCurrentDate: () => {},
+      addPeriodRecord: () => {},
+      updatePeriodRecord: () => {},
+      deletePeriodRecord: () => {},
+      updateWorkImpact: () => {},
+      selectTemplate: () => {},
+      updateNutrition: () => {},
+      updateExport: () => {},
+      setExporting: () => {},
+      resetState: () => {},
+    };
+  }
+  
   const setActiveTab = useWorkplaceWellnessStore((state) => state.setActiveTab);
   const updateCalendar = useWorkplaceWellnessStore(
     (state) => state.updateCalendar,
@@ -1273,7 +1475,7 @@ export const useWorkplaceWellnessActions = () => {
 };
 
 // Day 11: 用户偏好设置Actions Hook
-export const useUserPreferencesActions = () => {
+export const useUserPreferencesActions = (): UserPreferencesActions => {
   const updateUserPreferences = useWorkplaceWellnessStore(
     (state) => state.updateUserPreferences,
   );
@@ -1316,7 +1518,7 @@ export const useUserPreferencesActions = () => {
 };
 
 // Day 11: 导出模板Actions Hook
-export const useExportTemplateActions = () => {
+export const useExportTemplateActions = (): ExportTemplateActions => {
   const addExportTemplate = useWorkplaceWellnessStore(
     (state) => state.addExportTemplate,
   );
@@ -1345,7 +1547,7 @@ export const useExportTemplateActions = () => {
 };
 
 // Day 11: 批量导出Actions Hook
-export const useBatchExportActions = () => {
+export const useBatchExportActions = (): BatchExportActions => {
   const createBatchExport = useWorkplaceWellnessStore(
     (state) => state.createBatchExport,
   );
@@ -1372,7 +1574,7 @@ export const useBatchExportActions = () => {
 };
 
 // Day 11: 导出历史Actions Hook
-export const useExportHistoryActions = () => {
+export const useExportHistoryActions = (): ExportHistoryActions => {
   const addExportHistory = useWorkplaceWellnessStore(
     (state) => state.addExportHistory,
   );
@@ -1391,7 +1593,7 @@ export const useExportHistoryActions = () => {
 };
 
 // Day 11: 系统设置Actions Hook
-export const useSystemSettingsActions = () => {
+export const useSystemSettingsActions = (): SystemSettingsActions => {
   const updateSystemSettings = useWorkplaceWellnessStore(
     (state) => state.updateSystemSettings,
   );
@@ -1406,7 +1608,7 @@ export const useSystemSettingsActions = () => {
 };
 
 // 推荐反馈 Actions Hook
-export const useRecommendationFeedbackActions = () => {
+export const useRecommendationFeedbackActions = (): RecommendationFeedbackActions => {
   const addRecommendationFeedback = useWorkplaceWellnessStore(
     (state) => state.addRecommendationFeedback,
   );

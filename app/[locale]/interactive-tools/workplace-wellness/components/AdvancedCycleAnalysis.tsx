@@ -26,7 +26,7 @@ import {
   CycleAnalysis,
   CycleStatistics,
 } from "../utils/cyclePrediction";
-import { PeriodRecord, MenstrualPhase } from "../types";
+import { PeriodRecord, MenstrualPhase, CalendarState } from "../types";
 
 interface TrendData {
   month: string;
@@ -45,7 +45,7 @@ interface ComparisonData {
 export default function AdvancedCycleAnalysis() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const [activeTab, setActiveTab] = useState<
     "overview" | "trends" | "comparison" | "insights"
   >("overview");
@@ -56,8 +56,10 @@ export default function AdvancedCycleAnalysis() {
     null,
   );
 
-  // 从 store 读取 periodData
-  const periodData = calendar.periodData || [];
+  // 从 store 读取 periodData - 确保类型安全
+  const periodData = (calendar && 'periodData' in calendar) 
+    ? (calendar.periodData || [])
+    : [];
 
   useEffect(() => {
     const predictor = new CyclePredictor(locale);

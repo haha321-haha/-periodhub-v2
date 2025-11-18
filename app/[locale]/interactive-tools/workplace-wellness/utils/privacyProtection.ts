@@ -4,6 +4,7 @@
  */
 
 import { PeriodRecord, NutritionRecommendation, ExportType } from "../types";
+import type { TFunction } from "next-intl";
 
 export interface PrivacySettings {
   enableDataMasking: boolean;
@@ -26,9 +27,11 @@ export class PrivacyProtectionManager {
   private locale: string;
   private settings: PrivacySettings;
   private auditLog: AuditLogEntry[] = [];
+  private t?: TFunction;
 
-  constructor(locale: string, settings?: Partial<PrivacySettings>) {
+  constructor(locale: string, settings?: Partial<PrivacySettings>, t?: TFunction) {
     this.locale = locale;
+    this.t = t;
     this.settings = {
       enableDataMasking: true,
       requirePassword: false,
@@ -353,9 +356,8 @@ export class PrivacyProtectionManager {
    * 生成隐私保护报告
    */
   generatePrivacyReport(): string {
-    const isZh = this.locale === "zh";
     const report = {
-      title: isZh ? "隐私保护报告" : "Privacy Protection Report",
+      title: this.t ? this.t("privacy.reportTitle") : (this.locale === "zh" ? "隐私保护报告" : "Privacy Protection Report"),
       settings: this.settings,
       auditLogCount: this.auditLog.length,
       lastActivity:

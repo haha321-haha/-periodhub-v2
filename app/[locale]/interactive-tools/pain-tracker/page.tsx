@@ -73,7 +73,14 @@ export default async function PainTrackerPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "interactiveTools" });
-  const isZh = locale === "zh";
+  const painTrackerT = await getTranslations({
+    locale,
+    namespace: "interactiveTools.painTracker",
+  });
+  const breadcrumbT = await getTranslations({
+    locale,
+    namespace: "interactiveTools.breadcrumb",
+  });
 
   // 生成工具结构化数据
   const toolStructuredData = await generateToolStructuredData({
@@ -82,12 +89,12 @@ export default async function PainTrackerPage({
     toolName: t("meta.title"),
     description: t("meta.description"),
     features: [
-      isZh ? "每日疼痛记录与追踪" : "Daily pain recording and tracking",
-      isZh ? "疼痛模式可视化分析" : "Pain pattern visualization",
-      isZh ? "症状趋势图表展示" : "Symptom trend charts",
-      isZh ? "周期性疼痛识别" : "Cyclical pain identification",
-      isZh ? "触发因素分析" : "Trigger factor analysis",
-      isZh ? "数据导出与分享" : "Data export and sharing",
+      painTrackerT("features.dailyRecording"),
+      painTrackerT("features.patternVisualization"),
+      painTrackerT("features.trendCharts"),
+      painTrackerT("features.cyclicalIdentification"),
+      painTrackerT("features.triggerAnalysis"),
+      painTrackerT("features.dataExport"),
     ],
     category: "HealthApplication",
     rating: {
@@ -96,11 +103,11 @@ export default async function PainTrackerPage({
     },
     breadcrumbs: [
       {
-        name: isZh ? "交互工具" : "Interactive Tools",
+        name: breadcrumbT("interactiveTools"),
         url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools`,
       },
       {
-        name: isZh ? "痛经追踪器" : "Pain Tracker",
+        name: breadcrumbT("painTracker"),
         url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/pain-tracker`,
       },
     ],

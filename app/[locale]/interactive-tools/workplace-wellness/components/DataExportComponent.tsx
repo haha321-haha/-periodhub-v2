@@ -24,7 +24,7 @@ import {
 import { useLocale } from "next-intl";
 import { getNutritionData } from "../data";
 import { useTranslations } from "next-intl";
-import { ExportFormat, ExportType } from "../types";
+import { ExportFormat, ExportType, CalendarState, ExportConfig } from "../types";
 import { PDFGenerator, PDFReportData } from "../utils/pdfGenerator";
 import {
   PrivacyProtectionManager,
@@ -32,9 +32,9 @@ import {
 } from "../utils/privacyProtection";
 
 export default function DataExportComponent() {
-  const exportConfig = useExport();
+  const exportConfig = useExport() as ExportConfig;
   const locale = useLocale();
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const { updateExport, setExporting } = useWorkplaceWellnessActions();
   const t = useTranslations("workplaceWellness");
 
@@ -44,7 +44,7 @@ export default function DataExportComponent() {
   >("idle");
   const [showPrivacySettings, setShowPrivacySettings] = useState(false);
   const [password, setPassword] = useState("");
-  const [privacyManager] = useState(() => new PrivacyProtectionManager(locale));
+  const [privacyManager] = useState(() => new PrivacyProtectionManager(locale, undefined, t));
 
   // 从 store 读取 periodData
   const periodData = calendar.periodData || [];
@@ -147,7 +147,7 @@ export default function DataExportComponent() {
   // 导出为PDF（使用HTML格式）
   const exportAsPDF = async (data: any) => {
     try {
-      const pdfGenerator = new PDFGenerator(locale);
+      const pdfGenerator = new PDFGenerator(locale, t);
       const pdfData: PDFReportData = {
         exportDate: new Date().toISOString(),
         locale: locale,

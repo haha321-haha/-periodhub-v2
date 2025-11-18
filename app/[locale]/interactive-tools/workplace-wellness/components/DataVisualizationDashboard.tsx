@@ -28,7 +28,7 @@ import {
   CycleAnalysis,
   CycleStatistics,
 } from "../utils/cyclePrediction";
-import { PeriodRecord } from "../types";
+import { PeriodRecord, CalendarState } from "../types";
 
 interface DashboardData {
   cycleAnalysis: CycleAnalysis | null;
@@ -50,7 +50,7 @@ interface DashboardData {
 export default function DataVisualizationDashboard() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const [activeView, setActiveView] = useState<
     "overview" | "detailed" | "comparison"
   >("overview");

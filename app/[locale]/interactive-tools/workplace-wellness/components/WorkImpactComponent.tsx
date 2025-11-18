@@ -85,20 +85,37 @@ export default function WorkImpactComponent() {
   };
 
   // 保存工作影响记录
-  const handleSaveRecord = (e?: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSaveRecord = async (e: React.FormEvent) => {
     // 阻止默认行为和事件冒泡
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+    e.preventDefault();
+    e.stopPropagation();
 
     try {
       // 获取今天的日期
       const today = new Date().toISOString().split("T")[0];
       
-      // 这里可以将工作影响数据保存到当前日期的记录中
-      // 注意：工作影响数据已经通过 updateWorkImpact 更新到 store 中
-      // 如果需要将工作影响数据关联到具体的日期记录，可以在这里添加逻辑
+      // 工作影响数据已经通过 updateWorkImpact 更新到 store 中
+      // 这里我们只需要确认数据已更新
+      
+      // 验证数据有效性
+      const painLevel = workImpact.painLevel ?? 0;
+      if (painLevel < 0 || painLevel > 10) {
+        alert(
+          locale === "zh"
+            ? "疼痛等级必须在0-10之间。"
+            : "Pain level must be between 0 and 10."
+        );
+        return;
+      }
+      
+      if (workImpact.efficiency < 0 || workImpact.efficiency > 100) {
+        alert(
+          locale === "zh"
+            ? "工作效率必须在0-100%之间。"
+            : "Work efficiency must be between 0-100%."
+        );
+        return;
+      }
       
       console.log("Work impact record saved:", workImpact);
       
@@ -140,14 +157,14 @@ export default function WorkImpactComponent() {
                   type="range"
                   min="1"
                   max="10"
-                  value={workImpact.painLevel}
+                  value={workImpact.painLevel ?? 1}
                   onChange={handlePainLevelChange}
                   className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider"
                 />
               </div>
               <div className="w-12 text-center">
-                <span className={getBadgeClasses(workImpact.painLevel, "pain")}>
-                  {workImpact.painLevel}
+                <span className={getBadgeClasses(workImpact.painLevel ?? 0, "pain")}>
+                  {workImpact.painLevel ?? 0}
                 </span>
               </div>
             </div>

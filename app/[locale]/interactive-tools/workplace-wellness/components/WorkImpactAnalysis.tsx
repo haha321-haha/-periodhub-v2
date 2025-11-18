@@ -23,7 +23,7 @@ import {
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import { useCalendar } from "../hooks/useWorkplaceWellnessStore";
-import { PeriodRecord, WorkAdjustment } from "../types";
+import { PeriodRecord, WorkAdjustment, CalendarState } from "../types";
 
 interface WorkImpactData {
   date: string;
@@ -54,7 +54,7 @@ interface ProductivityInsight {
 export default function WorkImpactAnalysis() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const [activeTab, setActiveTab] = useState<
     "overview" | "patterns" | "productivity" | "insights"
   >("overview");

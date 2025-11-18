@@ -13,17 +13,17 @@ import {
 } from "../hooks/useWorkplaceWellnessStore";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
-import { PeriodRecord, PeriodType, PainLevel } from "../types";
+import { PeriodRecord, PeriodType, PainLevel, CalendarState } from "../types";
 
 export default function CalendarComponent() {
-  const calendar = useCalendar();
+  const calendar = useCalendar() as CalendarState;
   const locale = useLocale();
   const { updateCalendar, setCurrentDate, addPeriodRecord } =
     useWorkplaceWellnessActions();
   const t = useTranslations("workplaceWellness");
 
   // 从 store 读取 periodData
-  const periodData = calendar.periodData || [];
+  const periodData = calendar?.periodData || [];
   const [showAddForm, setShowAddForm] = useState(false);
 
   // 表单状态
@@ -138,12 +138,10 @@ export default function CalendarComponent() {
   };
 
   // 保存记录
-  const handleSaveRecord = (e?: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSaveRecord = async (e: React.FormEvent) => {
     // 阻止默认行为和事件冒泡
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+    e.preventDefault();
+    e.stopPropagation();
 
     try {
       // 验证日期不能是未来日期
@@ -152,7 +150,7 @@ export default function CalendarComponent() {
       today.setHours(23, 59, 59, 999); // 设置今天的时间为23:59:59，允许选择今天
       
       if (selectedDate > today) {
-        // 如果选择了未来日期，显示错误提示（可以通过 toast 或其他方式）
+        // 如果选择了未来日期，显示错误提示
         alert(
           locale === "zh"
             ? "不能选择未来的日期，请选择今天或之前的日期。"
@@ -188,6 +186,13 @@ export default function CalendarComponent() {
         type: "period",
         painLevel: 0,
       });
+      
+      // 显示成功提示
+      alert(
+        locale === "zh"
+          ? "经期记录已保存。"
+          : "Period record saved successfully."
+      );
     } catch (error) {
       // 错误处理
       console.error("保存记录时出错:", error);
@@ -316,7 +321,7 @@ export default function CalendarComponent() {
 
       {/* 添加经期记录表单 */}
       {showAddForm && (
-        <div className="mt-6 p-4 bg-neutral-50 rounded-lg border border-neutral-200">
+        <form onSubmit={handleSaveRecord} className="mt-6 p-4 bg-neutral-50 rounded-lg border border-neutral-200">
           <h4 className="text-lg font-medium text-neutral-900 mb-4">
             {t("calendar.addRecord")}
           </h4>
@@ -333,6 +338,7 @@ export default function CalendarComponent() {
                   setFormData({ ...formData, date: e.target.value })
                 }
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                required
               />
             </div>
             <div>
@@ -426,8 +432,7 @@ export default function CalendarComponent() {
             </div>
             <div className="flex gap-3">
               <button
-                type="button"
-                onClick={handleSaveRecord}
+                type="submit"
                 className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200"
               >
                 {t("common.save")}
@@ -441,7 +446,7 @@ export default function CalendarComponent() {
               </button>
             </div>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );

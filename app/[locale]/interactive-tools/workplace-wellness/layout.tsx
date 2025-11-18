@@ -5,6 +5,7 @@
 
 import type { Metadata } from "next";
 import { Locale } from "@/i18n";
+import { getTranslations } from "next-intl/server";
 import {
   generatePageMetadata,
   getWorkplaceWellnessSEOData,
@@ -52,8 +53,14 @@ export default async function WorkplaceWellnessLayout({
 }) {
   const { locale } = await params;
 
+  // 获取翻译函数
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveToolsPage.workplaceWellness",
+  });
+
   // 生成结构化数据
-  const structuredData = generateAllStructuredData(locale);
+  const structuredData = generateAllStructuredData(locale, t);
 
   return (
     <>

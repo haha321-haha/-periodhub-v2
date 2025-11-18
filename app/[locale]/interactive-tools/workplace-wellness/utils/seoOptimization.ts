@@ -5,6 +5,9 @@
 
 import type { Metadata } from "next";
 import { Locale } from "@/i18n";
+import { getTranslations } from "next-intl/server";
+
+type TFunction = Awaited<ReturnType<typeof getTranslations>>;
 
 export interface SEOConfig {
   title: string;
@@ -112,75 +115,24 @@ export function getWorkplaceWellnessSEOData(): PageSEOData {
 /**
  * 生成FAQ结构化数据
  */
-export function generateFAQStructuredData(locale: Locale): any {
-  const faqData = {
-    zh: [
-      {
-        question: "职场健康助手是什么？",
-        answer:
-          "职场健康助手是专为职场女性设计的健康管理工具，提供经期跟踪、疼痛管理、营养建议和工作调整方案，帮助女性在职场中更好地管理健康。",
-      },
-      {
-        question: "如何使用经期日历功能？",
-        answer:
-          "在经期日历中，您可以记录经期开始和结束日期、疼痛等级、流量情况等信息。系统会自动计算周期长度，并提供预测功能。",
-      },
-      {
-        question: "营养建议如何个性化？",
-        answer:
-          "营养建议基于您当前的经期阶段和中医体质类型，提供个性化的食物推荐和膳食计划，帮助缓解经期不适。",
-      },
-      {
-        question: "数据导出是否安全？",
-        answer:
-          "我们提供完整的数据脱敏和隐私保护机制，包括密码保护、数据脱敏、审计日志等功能，确保您的健康数据安全。",
-      },
-      {
-        question: "支持哪些导出格式？",
-        answer:
-          "支持JSON、CSV、PDF三种格式导出，满足不同需求。PDF格式特别适合医疗报告，CSV适合数据分析，JSON适合数据备份。",
-      },
-    ],
-    en: [
-      {
-        question: "What is the Workplace Wellness Assistant?",
-        answer:
-          "The Workplace Wellness Assistant is a health management tool designed specifically for working women, providing period tracking, pain management, nutrition advice, and work adjustment solutions to help women better manage their health in the workplace.",
-      },
-      {
-        question: "How to use the period calendar feature?",
-        answer:
-          "In the period calendar, you can record period start and end dates, pain levels, flow conditions, and other information. The system automatically calculates cycle length and provides prediction functionality.",
-      },
-      {
-        question: "How is nutrition advice personalized?",
-        answer:
-          "Nutrition advice is based on your current menstrual phase and TCM constitution type, providing personalized food recommendations and meal plans to help alleviate menstrual discomfort.",
-      },
-      {
-        question: "Is data export secure?",
-        answer:
-          "We provide complete data masking and privacy protection mechanisms, including password protection, data masking, audit logs, and other features to ensure your health data security.",
-      },
-      {
-        question: "What export formats are supported?",
-        answer:
-          "Supports JSON, CSV, and PDF export formats to meet different needs. PDF format is particularly suitable for medical reports, CSV for data analysis, and JSON for data backup.",
-      },
-    ],
-  };
-
-  const faqs = faqData[locale];
+export function generateFAQStructuredData(t: TFunction): any {
+  const faqs = [
+    { key: "q1" },
+    { key: "q2" },
+    { key: "q3" },
+    { key: "q4" },
+    { key: "q5" },
+  ];
 
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      name: faq.question,
+      name: t(`faq.${faq.key}.question`),
       acceptedAnswer: {
         "@type": "Answer",
-        text: faq.answer,
+        text: t(`faq.${faq.key}.answer`),
       },
     })),
   };
@@ -248,51 +200,27 @@ export function generateWebApplicationSchema(locale: Locale): any {
 /**
  * 生成面包屑导航结构化数据
  */
-export function generateBreadcrumbSchema(locale: Locale): any {
-  const breadcrumbData = {
-    zh: [
-      {
-        name: "首页",
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh`,
-      },
-      {
-        name: "互动工具",
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/interactive-tools`,
-      },
-      {
-        name: "职场健康助手",
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/zh/interactive-tools/workplace-wellness`,
-      },
-    ],
-    en: [
-      {
-        name: "Home",
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en`,
-      },
-      {
-        name: "Interactive Tools",
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en/interactive-tools`,
-      },
-      {
-        name: "Workplace Wellness Assistant",
-        url: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en/interactive-tools/workplace-wellness`,
-      },
-    ],
-  };
+export function generateBreadcrumbSchema(
+  locale: Locale,
+  t: TFunction,
+): any {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
-  const breadcrumbs = breadcrumbData[locale];
+  const breadcrumbs = [
+    {
+      name: t("structuredData.breadcrumb.home"),
+      url: `${baseUrl}/${locale}`,
+    },
+    {
+      name: t("structuredData.breadcrumb.interactiveTools"),
+      url: `${baseUrl}/${locale}/interactive-tools`,
+    },
+    {
+      name: t("structuredData.breadcrumb.workplaceWellness"),
+      url: `${baseUrl}/${locale}/interactive-tools/workplace-wellness`,
+    },
+  ];
 
   return {
     "@context": "https://schema.org",
@@ -309,11 +237,14 @@ export function generateBreadcrumbSchema(locale: Locale): any {
 /**
  * 生成完整的结构化数据
  */
-export function generateAllStructuredData(locale: Locale): any[] {
+export function generateAllStructuredData(
+  locale: Locale,
+  t: TFunction,
+): any[] {
   return [
-    generateFAQStructuredData(locale),
+    generateFAQStructuredData(t),
     generateWebApplicationSchema(locale),
-    generateBreadcrumbSchema(locale),
+    generateBreadcrumbSchema(locale, t),
   ];
 }
 

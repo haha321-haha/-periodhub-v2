@@ -4,6 +4,7 @@
  */
 
 import { Locale } from "@/i18n";
+import { getTranslations } from "next-intl/server";
 import {
   generateSEOValidationReport,
   performSEOValidation,
@@ -48,10 +49,16 @@ export default async function SEOTestPage({
 }) {
   const { locale } = await params;
 
+  // 获取翻译函数
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveToolsPage.workplaceWellness",
+  });
+
   // 执行SEO验证
   const validation = performSEOValidation(locale);
   const validationReport = generateSEOValidationReport(locale);
-  const structuredData = generateAllStructuredData(locale);
+  const structuredData = generateAllStructuredData(locale, t);
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">

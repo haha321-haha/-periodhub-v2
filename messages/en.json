@@ -3210,6 +3210,35 @@
     "privacy": {
       "reportTitle": "Privacy Protection Report"
     },
+    "faq": {
+      "q1": {
+        "question": "What is the Workplace Wellness Assistant?",
+        "answer": "The Workplace Wellness Assistant is a health management tool designed specifically for working women, providing period tracking, pain management, nutrition advice, and work adjustment solutions to help women better manage their health in the workplace."
+      },
+      "q2": {
+        "question": "How to use the period calendar feature?",
+        "answer": "In the period calendar, you can record period start and end dates, pain levels, flow conditions, and other information. The system automatically calculates cycle length and provides prediction functionality."
+      },
+      "q3": {
+        "question": "How is nutrition advice personalized?",
+        "answer": "Nutrition advice is based on your current menstrual phase and TCM constitution type, providing personalized food recommendations and meal plans to help alleviate menstrual discomfort."
+      },
+      "q4": {
+        "question": "Is data export secure?",
+        "answer": "We provide complete data masking and privacy protection mechanisms, including password protection, data masking, audit logs, and other features to ensure your health data security."
+      },
+      "q5": {
+        "question": "What export formats are supported?",
+        "answer": "Supports JSON, CSV, and PDF export formats to meet different needs. PDF format is particularly suitable for medical reports, CSV for data analysis, and JSON for data backup."
+      }
+    },
+    "structuredData": {
+      "breadcrumb": {
+        "home": "Home",
+        "interactiveTools": "Interactive Tools",
+        "workplaceWellness": "Workplace Wellness Assistant"
+      }
+    },
     "header": {
       "title": "Workplace Wellness Assistant",
       "subtitle": "Scientific period management for optimal work performance"
@@ -5753,6 +5782,35 @@
         "workplaceArticles": "Workplace Health Articles",
         "relatedTools": "Related Tools",
         "scenarioSolutions": "Scenario Solutions"
+      },
+      "faq": {
+        "q1": {
+          "question": "What is the Workplace Wellness Assistant?",
+          "answer": "The Workplace Wellness Assistant is a health management tool designed specifically for working women, providing period tracking, pain management, nutrition advice, and work adjustment solutions to help women better manage their health in the workplace."
+        },
+        "q2": {
+          "question": "How to use the period calendar feature?",
+          "answer": "In the period calendar, you can record period start and end dates, pain levels, flow conditions, and other information. The system automatically calculates cycle length and provides prediction functionality."
+        },
+        "q3": {
+          "question": "How is nutrition advice personalized?",
+          "answer": "Nutrition advice is based on your current menstrual phase and TCM constitution type, providing personalized food recommendations and meal plans to help alleviate menstrual discomfort."
+        },
+        "q4": {
+          "question": "Is data export secure?",
+          "answer": "We provide complete data masking and privacy protection mechanisms, including password protection, data masking, audit logs, and other features to ensure your health data security."
+        },
+        "q5": {
+          "question": "What export formats are supported?",
+          "answer": "Supports JSON, CSV, and PDF export formats to meet different needs. PDF format is particularly suitable for medical reports, CSV for data analysis, and JSON for data backup."
+        }
+      },
+      "structuredData": {
+        "breadcrumb": {
+          "home": "Home",
+          "interactiveTools": "Interactive Tools",
+          "workplaceWellness": "Workplace Wellness Assistant"
+        }
       }
     },
     "prerequisites": {

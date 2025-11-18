@@ -1343,29 +1343,35 @@ type RecommendationFeedbackActions = {
 // 这些 hooks 在 SSR 时也会被调用，需要确保安全
 export const useActiveTab = (): WorkplaceWellnessState["activeTab"] => {
   if (typeof window === 'undefined') return "calendar";
-  return useWorkplaceWellnessStore((state) => state.activeTab) as unknown as WorkplaceWellnessState["activeTab"];
+  const store = useWorkplaceWellnessStore as any;
+  return store((state: WorkplaceWellnessStore) => state.activeTab) as WorkplaceWellnessState["activeTab"];
 };
 export const useCalendar = (): CalendarState => {
   if (typeof window === 'undefined') return getInitialState().calendar;
-  return useWorkplaceWellnessStore((state) => state.calendar) as CalendarState;
+  const store = useWorkplaceWellnessStore as any;
+  return store((state: WorkplaceWellnessStore) => state.calendar) as CalendarState;
 };
 export const useWorkImpact = (): WorkImpactData => {
   if (typeof window === 'undefined') return getInitialState().workImpact;
-  return useWorkplaceWellnessStore((state) => state.workImpact) as WorkImpactData;
+  const store = useWorkplaceWellnessStore as any;
+  return store((state: WorkplaceWellnessStore) => state.workImpact) as WorkImpactData;
 };
 export const useNutrition = (): NutritionData => {
   if (typeof window === 'undefined') return getInitialState().nutrition;
-  return useWorkplaceWellnessStore((state) => state.nutrition) as NutritionData;
+  const store = useWorkplaceWellnessStore as any;
+  return store((state: WorkplaceWellnessStore) => state.nutrition) as NutritionData;
 };
 export const useExport = (): ExportConfig => {
   if (typeof window === 'undefined') return getInitialState().export;
-  return useWorkplaceWellnessStore((state) => state.export) as ExportConfig;
+  const store = useWorkplaceWellnessStore as any;
+  return store((state: WorkplaceWellnessStore) => state.export) as ExportConfig;
 };
 
 // Day 11: 新增选择器Hooks
 export const useUserPreferences = (): UserPreferences => {
   if (typeof window === 'undefined') return getInitialState().userPreferences;
-  const preferences = useWorkplaceWellnessStore((state) => state.userPreferences);
+  const store = useWorkplaceWellnessStore as any;
+  const preferences = store((state: WorkplaceWellnessStore) => state.userPreferences);
   // 深度检查，确保返回的值结构完整
   if (
     !preferences || 
@@ -1390,23 +1396,28 @@ export const useUserPreferences = (): UserPreferences => {
 };
 export const useExportTemplates = (): ExportTemplate[] => {
   if (typeof window === 'undefined') return getInitialState().exportTemplates;
-  return useWorkplaceWellnessStore((state) => state.exportTemplates) as ExportTemplate[];
+  const store = useWorkplaceWellnessStore as any;
+  return store((state: WorkplaceWellnessStore) => state.exportTemplates) as ExportTemplate[];
 };
 export const useActiveTemplate = (): ExportTemplate | null => {
   if (typeof window === 'undefined') return getInitialState().activeTemplate;
-  return useWorkplaceWellnessStore((state) => state.activeTemplate) as ExportTemplate | null;
+  const store = useWorkplaceWellnessStore as any;
+  return store((state: WorkplaceWellnessStore) => state.activeTemplate) as ExportTemplate | null;
 };
 export const useBatchExportQueue = (): BatchExportQueue | null => {
   if (typeof window === 'undefined') return getInitialState().batchExportQueue;
-  return useWorkplaceWellnessStore((state) => state.batchExportQueue) as BatchExportQueue | null;
+  const store = useWorkplaceWellnessStore as any;
+  return store((state: WorkplaceWellnessStore) => state.batchExportQueue) as BatchExportQueue | null;
 };
 export const useExportHistory = (): ExportHistory[] => {
   if (typeof window === 'undefined') return getInitialState().exportHistory;
-  return useWorkplaceWellnessStore((state) => state.exportHistory) as ExportHistory[];
+  const store = useWorkplaceWellnessStore as any;
+  return store((state: WorkplaceWellnessStore) => state.exportHistory) as ExportHistory[];
 };
 export const useSystemSettings = (): SystemSettings => {
   if (typeof window === 'undefined') return getInitialState().systemSettings;
-  return useWorkplaceWellnessStore((state) => state.systemSettings) as SystemSettings;
+  const store = useWorkplaceWellnessStore as any;
+  return store((state: WorkplaceWellnessStore) => state.systemSettings) as SystemSettings;
 };
 
 // Actions Hooks - 使用独立的store调用避免无限循环
@@ -1429,34 +1440,35 @@ export const useWorkplaceWellnessActions = (): WorkplaceWellnessActions => {
     };
   }
   
-  const setActiveTab = useWorkplaceWellnessStore((state) => state.setActiveTab);
-  const updateCalendar = useWorkplaceWellnessStore(
-    (state) => state.updateCalendar,
+  const store = useWorkplaceWellnessStore as any;
+  const setActiveTab = store((state: WorkplaceWellnessStore) => state.setActiveTab);
+  const updateCalendar = store(
+    (state: WorkplaceWellnessStore) => state.updateCalendar,
   );
-  const setCurrentDate = useWorkplaceWellnessStore(
-    (state) => state.setCurrentDate,
+  const setCurrentDate = store(
+    (state: WorkplaceWellnessStore) => state.setCurrentDate,
   );
-  const addPeriodRecord = useWorkplaceWellnessStore(
-    (state) => state.addPeriodRecord,
+  const addPeriodRecord = store(
+    (state: WorkplaceWellnessStore) => state.addPeriodRecord,
   );
-  const updatePeriodRecord = useWorkplaceWellnessStore(
-    (state) => state.updatePeriodRecord,
+  const updatePeriodRecord = store(
+    (state: WorkplaceWellnessStore) => state.updatePeriodRecord,
   );
-  const deletePeriodRecord = useWorkplaceWellnessStore(
-    (state) => state.deletePeriodRecord,
+  const deletePeriodRecord = store(
+    (state: WorkplaceWellnessStore) => state.deletePeriodRecord,
   );
-  const updateWorkImpact = useWorkplaceWellnessStore(
-    (state) => state.updateWorkImpact,
+  const updateWorkImpact = store(
+    (state: WorkplaceWellnessStore) => state.updateWorkImpact,
   );
-  const selectTemplate = useWorkplaceWellnessStore(
-    (state) => state.selectTemplate,
+  const selectTemplate = store(
+    (state: WorkplaceWellnessStore) => state.selectTemplate,
   );
-  const updateNutrition = useWorkplaceWellnessStore(
-    (state) => state.updateNutrition,
+  const updateNutrition = store(
+    (state: WorkplaceWellnessStore) => state.updateNutrition,
   );
-  const updateExport = useWorkplaceWellnessStore((state) => state.updateExport);
-  const setExporting = useWorkplaceWellnessStore((state) => state.setExporting);
-  const resetState = useWorkplaceWellnessStore((state) => state.resetState);
+  const updateExport = store((state: WorkplaceWellnessStore) => state.updateExport);
+  const setExporting = store((state: WorkplaceWellnessStore) => state.setExporting);
+  const resetState = store((state: WorkplaceWellnessStore) => state.resetState);
 
   return {
     setActiveTab,
@@ -1476,31 +1488,32 @@ export const useWorkplaceWellnessActions = (): WorkplaceWellnessActions => {
 
 // Day 11: 用户偏好设置Actions Hook
 export const useUserPreferencesActions = (): UserPreferencesActions => {
-  const updateUserPreferences = useWorkplaceWellnessStore(
-    (state) => state.updateUserPreferences,
+  const store = useWorkplaceWellnessStore as any;
+  const updateUserPreferences = store(
+    (state: WorkplaceWellnessStore) => state.updateUserPreferences,
   );
-  const setTheme = useWorkplaceWellnessStore((state) => state.setTheme);
-  const setFontSize = useWorkplaceWellnessStore((state) => state.setFontSize);
-  const toggleAnimations = useWorkplaceWellnessStore(
-    (state) => state.toggleAnimations,
+  const setTheme = store((state: WorkplaceWellnessStore) => state.setTheme);
+  const setFontSize = store((state: WorkplaceWellnessStore) => state.setFontSize);
+  const toggleAnimations = store(
+    (state: WorkplaceWellnessStore) => state.toggleAnimations,
   );
-  const toggleCompactMode = useWorkplaceWellnessStore(
-    (state) => state.toggleCompactMode,
+  const toggleCompactMode = store(
+    (state: WorkplaceWellnessStore) => state.toggleCompactMode,
   );
-  const updateNotificationSettings = useWorkplaceWellnessStore(
-    (state) => state.updateNotificationSettings,
+  const updateNotificationSettings = store(
+    (state: WorkplaceWellnessStore) => state.updateNotificationSettings,
   );
-  const updatePrivacySettings = useWorkplaceWellnessStore(
-    (state) => state.updatePrivacySettings,
+  const updatePrivacySettings = store(
+    (state: WorkplaceWellnessStore) => state.updatePrivacySettings,
   );
-  const updateAccessibilitySettings = useWorkplaceWellnessStore(
-    (state) => state.updateAccessibilitySettings,
+  const updateAccessibilitySettings = store(
+    (state: WorkplaceWellnessStore) => state.updateAccessibilitySettings,
   );
-  const validateSettings = useWorkplaceWellnessStore(
-    (state) => state.validateSettings,
+  const validateSettings = store(
+    (state: WorkplaceWellnessStore) => state.validateSettings,
   );
-  const resetPreferences = useWorkplaceWellnessStore(
-    (state) => state.resetPreferences,
+  const resetPreferences = store(
+    (state: WorkplaceWellnessStore) => state.resetPreferences,
   );
 
   return {
@@ -1519,21 +1532,22 @@ export const useUserPreferencesActions = (): UserPreferencesActions => {
 
 // Day 11: 导出模板Actions Hook
 export const useExportTemplateActions = (): ExportTemplateActions => {
-  const addExportTemplate = useWorkplaceWellnessStore(
-    (state) => state.addExportTemplate,
+  const store = useWorkplaceWellnessStore as any;
+  const addExportTemplate = store(
+    (state: WorkplaceWellnessStore) => state.addExportTemplate,
   );
-  const updateExportTemplate = useWorkplaceWellnessStore(
-    (state) => state.updateExportTemplate,
+  const updateExportTemplate = store(
+    (state: WorkplaceWellnessStore) => state.updateExportTemplate,
   );
-  const deleteExportTemplate = useWorkplaceWellnessStore(
-    (state) => state.deleteExportTemplate,
+  const deleteExportTemplate = store(
+    (state: WorkplaceWellnessStore) => state.deleteExportTemplate,
   );
-  const setActiveTemplate = useWorkplaceWellnessStore(
-    (state) => state.setActiveTemplate,
+  const setActiveTemplate = store(
+    (state: WorkplaceWellnessStore) => state.setActiveTemplate,
   );
-  const loadTemplate = useWorkplaceWellnessStore((state) => state.loadTemplate);
-  const duplicateTemplate = useWorkplaceWellnessStore(
-    (state) => state.duplicateTemplate,
+  const loadTemplate = store((state: WorkplaceWellnessStore) => state.loadTemplate);
+  const duplicateTemplate = store(
+    (state: WorkplaceWellnessStore) => state.duplicateTemplate,
   );
 
   return {
@@ -1548,20 +1562,21 @@ export const useExportTemplateActions = (): ExportTemplateActions => {
 
 // Day 11: 批量导出Actions Hook
 export const useBatchExportActions = (): BatchExportActions => {
-  const createBatchExport = useWorkplaceWellnessStore(
-    (state) => state.createBatchExport,
+  const store = useWorkplaceWellnessStore as any;
+  const createBatchExport = store(
+    (state: WorkplaceWellnessStore) => state.createBatchExport,
   );
-  const updateBatchItemStatus = useWorkplaceWellnessStore(
-    (state) => state.updateBatchItemStatus,
+  const updateBatchItemStatus = store(
+    (state: WorkplaceWellnessStore) => state.updateBatchItemStatus,
   );
-  const cancelBatchExport = useWorkplaceWellnessStore(
-    (state) => state.cancelBatchExport,
+  const cancelBatchExport = store(
+    (state: WorkplaceWellnessStore) => state.cancelBatchExport,
   );
-  const retryFailedItems = useWorkplaceWellnessStore(
-    (state) => state.retryFailedItems,
+  const retryFailedItems = store(
+    (state: WorkplaceWellnessStore) => state.retryFailedItems,
   );
-  const clearBatchExport = useWorkplaceWellnessStore(
-    (state) => state.clearBatchExport,
+  const clearBatchExport = store(
+    (state: WorkplaceWellnessStore) => state.clearBatchExport,
   );
 
   return {
@@ -1575,14 +1590,15 @@ export const useBatchExportActions = (): BatchExportActions => {
 
 // Day 11: 导出历史Actions Hook
 export const useExportHistoryActions = (): ExportHistoryActions => {
-  const addExportHistory = useWorkplaceWellnessStore(
-    (state) => state.addExportHistory,
+  const store = useWorkplaceWellnessStore as any;
+  const addExportHistory = store(
+    (state: WorkplaceWellnessStore) => state.addExportHistory,
   );
-  const clearExportHistory = useWorkplaceWellnessStore(
-    (state) => state.clearExportHistory,
+  const clearExportHistory = store(
+    (state: WorkplaceWellnessStore) => state.clearExportHistory,
   );
-  const deleteExportHistory = useWorkplaceWellnessStore(
-    (state) => state.deleteExportHistory,
+  const deleteExportHistory = store(
+    (state: WorkplaceWellnessStore) => state.deleteExportHistory,
   );
 
   return {
@@ -1594,11 +1610,12 @@ export const useExportHistoryActions = (): ExportHistoryActions => {
 
 // Day 11: 系统设置Actions Hook
 export const useSystemSettingsActions = (): SystemSettingsActions => {
-  const updateSystemSettings = useWorkplaceWellnessStore(
-    (state) => state.updateSystemSettings,
+  const store = useWorkplaceWellnessStore as any;
+  const updateSystemSettings = store(
+    (state: WorkplaceWellnessStore) => state.updateSystemSettings,
   );
-  const resetSystemSettings = useWorkplaceWellnessStore(
-    (state) => state.resetSystemSettings,
+  const resetSystemSettings = store(
+    (state: WorkplaceWellnessStore) => state.resetSystemSettings,
   );
 
   return {
@@ -1609,17 +1626,18 @@ export const useSystemSettingsActions = (): SystemSettingsActions => {
 
 // 推荐反馈 Actions Hook
 export const useRecommendationFeedbackActions = (): RecommendationFeedbackActions => {
-  const addRecommendationFeedback = useWorkplaceWellnessStore(
-    (state) => state.addRecommendationFeedback,
+  const store = useWorkplaceWellnessStore as any;
+  const addRecommendationFeedback = store(
+    (state: WorkplaceWellnessStore) => state.addRecommendationFeedback,
   );
-  const clearIgnoredItem = useWorkplaceWellnessStore(
-    (state) => state.clearIgnoredItem,
+  const clearIgnoredItem = store(
+    (state: WorkplaceWellnessStore) => state.clearIgnoredItem,
   );
-  const clearAllIgnored = useWorkplaceWellnessStore(
-    (state) => state.clearAllIgnored,
+  const clearAllIgnored = store(
+    (state: WorkplaceWellnessStore) => state.clearAllIgnored,
   );
-  const getFeedbackHistory = useWorkplaceWellnessStore(
-    (state) => state.getFeedbackHistory,
+  const getFeedbackHistory = store(
+    (state: WorkplaceWellnessStore) => state.getFeedbackHistory,
   );
 
   return {

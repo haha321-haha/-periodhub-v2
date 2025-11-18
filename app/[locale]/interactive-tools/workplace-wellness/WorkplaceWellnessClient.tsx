@@ -229,9 +229,10 @@ function WorkplaceWellnessContent() {
       // 恢复store状态 - 使用正确的 API
       // 注意：由于使用了 skipHydration: true，需要手动调用 rehydrate
       try {
-        if (useWorkplaceWellnessStore.persist && useWorkplaceWellnessStore.persist.rehydrate) {
+        const storeWithPersist = useWorkplaceWellnessStore as any;
+        if (storeWithPersist.persist && storeWithPersist.persist.rehydrate) {
           // 手动触发 rehydrate 来恢复 localStorage 中的数据
-          useWorkplaceWellnessStore.persist.rehydrate();
+          storeWithPersist.persist.rehydrate();
           
           // 等待 rehydrate 完成后再获取状态
           setTimeout(() => {

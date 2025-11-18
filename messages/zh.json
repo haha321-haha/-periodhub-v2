@@ -4312,6 +4312,14 @@
           "home": "首页",
           "interactiveTools": "互动工具",
           "workplaceWellness": "职场健康助手"
+        },
+        "webApplication": {
+          "name": "职场健康助手",
+          "description": "专业的职场女性健康管理工具，提供经期跟踪、疼痛管理、营养建议和工作优化方案。",
+          "applicationCategory": "HealthApplication",
+          "operatingSystem": "Web Browser",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "softwareVersion": "1.0.0"
         }
       },
       "tools": {

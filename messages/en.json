@@ -5810,6 +5810,14 @@
           "home": "Home",
           "interactiveTools": "Interactive Tools",
           "workplaceWellness": "Workplace Wellness Assistant"
+        },
+        "webApplication": {
+          "name": "Workplace Wellness Assistant",
+          "description": "Professional health management tool for working women, providing period tracking, pain management, nutrition advice, and work optimization solutions.",
+          "applicationCategory": "HealthApplication",
+          "operatingSystem": "Web Browser",
+          "browserRequirements": "Requires JavaScript. Requires HTML5.",
+          "softwareVersion": "1.0.0"
         }
       }
     },

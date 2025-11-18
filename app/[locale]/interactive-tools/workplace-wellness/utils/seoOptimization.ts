@@ -141,59 +141,39 @@ export function generateFAQStructuredData(t: TFunction): any {
 /**
  * 生成工具应用Schema
  */
-export function generateWebApplicationSchema(locale: Locale): any {
-  const appData = {
-    zh: {
-      name: "职场健康助手",
-      description:
-        "专业的职场女性健康管理工具，提供经期跟踪、疼痛管理、营养建议和工作优化方案。",
-      applicationCategory: "HealthApplication",
-      operatingSystem: "Web Browser",
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-      },
-    },
-    en: {
-      name: "Workplace Wellness Assistant",
-      description:
-        "Professional health management tool for working women, providing period tracking, pain management, nutrition advice, and work optimization solutions.",
-      applicationCategory: "HealthApplication",
-      operatingSystem: "Web Browser",
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "USD",
-      },
-    },
-  };
-
-  const config = appData[locale];
+export function generateWebApplicationSchema(
+  locale: Locale,
+  t: TFunction,
+): any {
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
   return {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    name: config.name,
-    description: config.description,
-    applicationCategory: config.applicationCategory,
-    operatingSystem: config.operatingSystem,
-    offers: config.offers,
-    url: `${
-      process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-    }/${locale}/workplace-wellness`,
+    name: t("structuredData.webApplication.name"),
+    description: t("structuredData.webApplication.description"),
+    applicationCategory: t("structuredData.webApplication.applicationCategory"),
+    operatingSystem: t("structuredData.webApplication.operatingSystem"),
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    url: `${baseUrl}/${locale}/interactive-tools/workplace-wellness`,
     author: {
       "@type": "Organization",
       name: "Period Hub",
-      url: process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health",
+      url: baseUrl,
     },
-    inLanguage: locale,
-    browserRequirements: "Requires JavaScript. Requires HTML5.",
-    softwareVersion: "1.0.0",
+    inLanguage: locale === "zh" ? "zh-CN" : "en-US",
+    browserRequirements: t("structuredData.webApplication.browserRequirements"),
+    softwareVersion: t("structuredData.webApplication.softwareVersion"),
     datePublished: "2024-01-01",
-    dateModified: typeof window !== 'undefined' 
-      ? new Date().toISOString().split("T")[0]
-      : new Date(Date.now()).toISOString().split("T")[0], // SSR 安全
+    dateModified:
+      typeof window !== "undefined"
+        ? new Date().toISOString().split("T")[0]
+        : new Date(Date.now()).toISOString().split("T")[0], // SSR 安全
   };
 }
 
@@ -243,7 +223,7 @@ export function generateAllStructuredData(
 ): any[] {
   return [
     generateFAQStructuredData(t),
-    generateWebApplicationSchema(locale),
+    generateWebApplicationSchema(locale, t),
     generateBreadcrumbSchema(locale, t),
   ];
 }

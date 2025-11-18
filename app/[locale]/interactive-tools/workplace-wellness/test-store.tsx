@@ -18,8 +18,9 @@ export default function TestStore() {
     setIsClient(true);
     // 强制重新hydration - 使用正确的 API
     try {
-      if (storeModule.persist && storeModule.persist.rehydrate) {
-        storeModule.persist.rehydrate();
+      const store = storeModule as any;
+      if (store.persist && store.persist.rehydrate) {
+        store.persist.rehydrate();
       }
     } catch (error) {
       console.warn("无法重新hydration:", error);
@@ -73,7 +74,8 @@ export default function TestStore() {
   const testPersist = () => {
     try {
       // Zustand persist 中间件会自动持久化，这里只是检查当前状态
-      const currentState = storeModule.getState();
+      const store = storeModule as any;
+      const currentState = store.getState();
       // 通过更新 activeTab 来触发状态更新，从而触发自动持久化
       setActiveTab(currentState.activeTab);
       setTestMessage("状态已更新，持久化将自动完成。当前状态: " + JSON.stringify({
@@ -88,8 +90,9 @@ export default function TestStore() {
   const testForceHydration = () => {
     try {
       // 使用正确的 API 访问 persist
-      if (storeModule.persist && storeModule.persist.rehydrate) {
-        storeModule.persist.rehydrate();
+      const store = storeModule as any;
+      if (store.persist && store.persist.rehydrate) {
+        store.persist.rehydrate();
         setTestMessage("强制hydration完成");
       } else {
         setTestMessage("无法获取rehydrate方法");
@@ -122,7 +125,8 @@ export default function TestStore() {
   const testStoreDirectWrite = () => {
     try {
       // 直接写入localStorage测试数据
-      const state = storeModule.getState();
+      const store = storeModule as any;
+      const state = store.getState();
       const testState = {
         ...state,
         calendar: {

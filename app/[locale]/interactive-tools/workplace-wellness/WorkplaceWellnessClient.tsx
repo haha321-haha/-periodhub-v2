@@ -228,22 +228,23 @@ function WorkplaceWellnessContent() {
       
       // 恢复store状态 - 使用正确的 API
       // 注意：由于使用了 skipHydration: true，需要手动调用 rehydrate
+      // 使用类型断言访问动态添加的静态方法
+      const store = useWorkplaceWellnessStore as any;
       try {
-        const storeWithPersist = useWorkplaceWellnessStore as any;
-        if (storeWithPersist.persist && storeWithPersist.persist.rehydrate) {
+        if (store.persist && store.persist.rehydrate) {
           // 手动触发 rehydrate 来恢复 localStorage 中的数据
-          storeWithPersist.persist.rehydrate();
+          store.persist.rehydrate();
           
           // 等待 rehydrate 完成后再获取状态
           setTimeout(() => {
-            const storeInstance = useWorkplaceWellnessStore.getState();
+            const storeInstance = store.getState();
             setPreviousTab(storeInstance.activeTab);
             setActiveTab(storeInstance.activeTab);
             setIsHydrated(true);
           }, 100);
         } else {
           // 如果没有 persist，直接获取状态
-          const storeInstance = useWorkplaceWellnessStore.getState();
+          const storeInstance = store.getState();
           setPreviousTab(storeInstance.activeTab);
           setActiveTab(storeInstance.activeTab);
           setIsHydrated(true);
@@ -251,15 +252,15 @@ function WorkplaceWellnessContent() {
       } catch (error) {
         console.warn("无法重新hydration:", error);
         // 即使失败也继续
-        const storeInstance = useWorkplaceWellnessStore.getState();
+        const storeInstance = store.getState();
         setPreviousTab(storeInstance.activeTab);
         setActiveTab(storeInstance.activeTab);
         setIsHydrated(true);
       }
       
       // 订阅 store 变化 - Zustand subscribe 只接受一个回调函数
-      const unsubscribe = useWorkplaceWellnessStore.subscribe(
-        (state) => {
+      const unsubscribe = store.subscribe(
+        (state: any) => {
           setActiveTab(state.activeTab);
         }
       );

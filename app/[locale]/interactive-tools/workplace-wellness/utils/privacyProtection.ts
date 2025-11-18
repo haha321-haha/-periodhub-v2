@@ -4,7 +4,9 @@
  */
 
 import { PeriodRecord, NutritionRecommendation, ExportType } from "../types";
-import type { TFunction } from "next-intl";
+import { getTranslations } from "next-intl/server";
+
+type TFunction = Awaited<ReturnType<typeof getTranslations>>;
 
 export interface PrivacySettings {
   enableDataMasking: boolean;

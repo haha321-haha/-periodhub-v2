@@ -4,7 +4,9 @@
  */
 
 import { Locale } from "@/i18n";
-import type { TFunction } from "next-intl";
+import { getTranslations } from "next-intl/server";
+
+type TFunction = Awaited<ReturnType<typeof getTranslations>>;
 
 /**
  * 生成FAQ结构化数据

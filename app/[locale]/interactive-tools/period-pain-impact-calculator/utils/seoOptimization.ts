@@ -5,7 +5,9 @@
 
 import type { Metadata } from "next";
 import { Locale } from "@/i18n";
-import type { TFunction } from "next-intl";
+import { getTranslations } from "next-intl/server";
+
+type TFunction = Awaited<ReturnType<typeof getTranslations>>;
 
 export interface SEOConfig {
   title: string;

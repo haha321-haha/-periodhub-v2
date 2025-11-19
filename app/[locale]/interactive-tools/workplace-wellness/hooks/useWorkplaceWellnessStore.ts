@@ -250,15 +250,15 @@ const createStore = () => {
 
           // 数据清理：只保留最近 3 个月的记录，适当放宽限制
           // 这样图表可以显示更完整的数据，同时避免存储过多
-          const threeMonthsAgo = new Date();
-          threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+          const sixMonthsAgo = new Date();
+          sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
           
           // 只在数据量超过50条时才进行清理，避免频繁清理
           if (updatedPeriodData.length > 50) {
             updatedPeriodData = updatedPeriodData.filter((r) => {
               try {
                 const recordDate = new Date(r.date);
-                return recordDate >= threeMonthsAgo;
+                return recordDate >= sixMonthsAgo;
               } catch {
                 return false; // 无效日期，删除
               }

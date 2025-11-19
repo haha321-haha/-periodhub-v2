@@ -5782,6 +5782,8 @@
       "description": "Tailored menstrual health management solutions for working women to better manage period health in the workplace",
       "tools": {
         "calendar": {
+        "painLevelMin": "No pain",
+        "painLevelMax": "Extreme",
           "title": "Workplace Wellness Calendar",
           "description": "Professional workplace wellness management tool to track menstrual impact on work and provide personalized work adjustment recommendations.",
           "cta": "Start Wellness Management"

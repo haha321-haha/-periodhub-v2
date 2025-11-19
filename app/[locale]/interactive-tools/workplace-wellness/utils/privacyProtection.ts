@@ -39,7 +39,7 @@ export class PrivacyProtectionManager {
       requirePassword: false,
       allowPersonalData: true,
       enableAuditLog: true,
-      dataRetentionDays: 30,
+      dataRetentionDays: 180,
       ...settings,
     };
   }

@@ -196,8 +196,11 @@ export default function CalendarComponent() {
       const record: PeriodRecord = {
         date: formData.date,
         type: formData.type,
-        painLevel: formData.painLevel > 0 ? (formData.painLevel as PainLevel) : null,
-        flow: null, // 可以根据需要添加流量选择
+        // 确保只有 period 类型才保存疼痛等级
+        painLevel: formData.type === "period" && formData.painLevel > 0 
+          ? (formData.painLevel as PainLevel) 
+          : null,
+        flow: formData.type === "period" ? formData.flow : null,
       };
       
       // 调用 store 的 addPeriodRecord 方法
@@ -399,76 +402,79 @@ export default function CalendarComponent() {
                 <option value="ovulation">{t("calendar.typeOvulation")}</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-neutral-800 mb-2">
-                {t("calendar.painLevel")} ({formData.painLevel})
-              </label>
-              <div className="relative mb-2">
-                {/* 渐变背景轨道 */}
-                <div className="absolute inset-0 h-3 bg-gradient-to-r from-green-400 via-yellow-400 via-orange-400 to-red-500 rounded-lg"></div>
-                <input
-                  type="range"
-                  min="0"
-                  max="10"
-                  value={formData.painLevel}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      painLevel: parseInt(e.target.value, 10),
-                    })
-                  }
-                  className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider"
-                />
-              </div>
-              <div className="flex justify-between text-xs text-neutral-500 mt-1">
-                <span>{locale === "zh" ? "无痛" : "No pain"}</span>
-                <span>{locale === "zh" ? "极痛" : "Extreme"}</span>
-              </div>
-              {/* 自定义滑块样式 */}
-              <style jsx>{`
-                .pain-slider::-webkit-slider-thumb {
-                  -webkit-appearance: none;
-                  appearance: none;
-                  height: 20px;
-                  width: 20px;
-                  border-radius: 50%;
-                  background: #ffffff;
-                  border: 2px solid #6b7280;
-                  cursor: pointer;
-                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                  transition: all 0.2s ease;
-                }
+            {/* 只在 period 类型时显示疼痛等级 */}
+            {formData.type === "period" && (
+              <div>
+                <label className="block text-sm font-medium text-neutral-800 mb-2">
+                  {t("calendar.painLevel")} ({formData.painLevel})
+                </label>
+                <div className="relative mb-2">
+                  {/* 渐变背景轨道 */}
+                  <div className="absolute inset-0 h-3 bg-gradient-to-r from-green-400 via-yellow-400 via-orange-400 to-red-500 rounded-lg"></div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="10"
+                    value={formData.painLevel}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        painLevel: parseInt(e.target.value, 10),
+                      })
+                    }
+                    className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider"
+                  />
+                </div>
+                  <div className="flex justify-between text-xs text-neutral-500 mt-1">
+                    <span>{t("calendar.painLevelMin")}</span>
+                    <span>{t("calendar.painLevelMax")}</span>
+                  </div>
+                  {/* 自定义滑块样式 */}
+                  <style jsx>{`
+                    .pain-slider::-webkit-slider-thumb {
+                      -webkit-appearance: none;
+                      appearance: none;
+                      height: 20px;
+                      width: 20px;
+                      border-radius: 50%;
+                      background: #ffffff;
+                      border: 2px solid #6b7280;
+                      cursor: pointer;
+                      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                      transition: all 0.2s ease;
+                    }
 
-                .pain-slider::-webkit-slider-thumb:hover {
-                  border-color: #9333ea;
-                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                  transform: scale(1.1);
-                }
+                    .pain-slider::-webkit-slider-thumb:hover {
+                      border-color: #9333ea;
+                      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                      transform: scale(1.1);
+                    }
 
-                .pain-slider::-moz-range-thumb {
-                  height: 20px;
-                  width: 20px;
-                  border-radius: 50%;
-                  background: #ffffff;
-                  border: 2px solid #6b7280;
-                  cursor: pointer;
-                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                  transition: all 0.2s ease;
-                  -moz-appearance: none;
-                }
+                    .pain-slider::-moz-range-thumb {
+                      height: 20px;
+                      width: 20px;
+                      border-radius: 50%;
+                      background: #ffffff;
+                      border: 2px solid #6b7280;
+                      cursor: pointer;
+                      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                      transition: all 0.2s ease;
+                      -moz-appearance: none;
+                    }
 
-                .pain-slider::-moz-range-thumb:hover {
-                  border-color: #9333ea;
-                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                  transform: scale(1.1);
-                }
+                    .pain-slider::-moz-range-thumb:hover {
+                      border-color: #9333ea;
+                      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                      transform: scale(1.1);
+                    }
 
-                .pain-slider::-moz-range-track {
-                  background: transparent;
-                  height: 12px;
-                }
-              `}</style>
-            </div>
+                    .pain-slider::-moz-range-track {
+                      background: transparent;
+                      height: 12px;
+                    }
+                  `}</style>
+                </div>
+            )}
             <div className="flex gap-3">
               <button
                 type="submit"

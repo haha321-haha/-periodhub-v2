@@ -3660,6 +3660,8 @@
       "entryForm": {
         "date": "日期",
         "painLevel": "疼痛等级",
+      "painLevelMin": "无痛",
+      "painLevelMax": "极痛",
         "location": "疼痛位置",
         "symptoms": "相关症状",
         "remedies": "使用的缓解方法",
@@ -4258,6 +4260,8 @@
           "date": "日期",
           "type": "类型",
           "painLevel": "疼痛等级",
+      "painLevelMin": "无痛",
+      "painLevelMax": "极痛",
           "flow": "流量",
           "notes": "备注",
           "foodName": "食物名称",
@@ -9710,6 +9714,8 @@
       "typePredicted": "预测",
       "typeOvulation": "排卵",
       "painLevel": "疼痛等级",
+      "painLevelMin": "无痛",
+      "painLevelMax": "极痛",
       "days": {
         "sun": "日",
         "mon": "一",
@@ -9784,6 +9790,8 @@
       "flowTypeDistribution": "流量类型分布",
       "cycleLength": "周期长度",
       "painLevel": "疼痛等级",
+      "painLevelMin": "无痛",
+      "painLevelMax": "极痛",
       "flowType": "流量类型",
       "flowTypes": {
         "light": "少量",
@@ -9794,6 +9802,8 @@
         "overview": "概览",
         "cycleLength": "周期长度",
         "painLevel": "疼痛等级",
+      "painLevelMin": "无痛",
+      "painLevelMax": "极痛",
         "flowType": "流量类型"
       }
     },
@@ -10178,6 +10188,8 @@
     "workImpact": {
       "title": "工作影响记录",
       "painLevel": "疼痛等级",
+      "painLevelMin": "无痛",
+      "painLevelMax": "极痛",
       "efficiency": "工作效率",
       "adjustment": "今日工作调整",
       "adjustOptions": {
@@ -10214,6 +10226,8 @@
       "recentTrends": "近期趋势",
       "efficiency": "工作效率",
       "painLevel": "疼痛等级",
+      "painLevelMin": "无痛",
+      "painLevelMax": "极痛",
       "commonAdjustments": "常见调整",
       "productivityTitle": "生产力分析",
       "efficiencyVsPain": "效率vs疼痛",

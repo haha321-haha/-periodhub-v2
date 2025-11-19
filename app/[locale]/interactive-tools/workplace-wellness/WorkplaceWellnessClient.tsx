@@ -86,6 +86,16 @@ const CycleStatisticsChart = dynamic(
   },
 );
 
+const HistoryDataViewer = dynamic(
+  () => import("./components/HistoryDataViewer"),
+  {
+    ssr: false, // 禁用 SSR，避免 store 在服务器端执行
+    loading: () => (
+      <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+    ),
+  },
+);
+
 const DataExportComponent = dynamic(
   () => import("./components/DataExportComponent"),
   {
@@ -350,6 +360,7 @@ function WorkplaceWellnessContent() {
           <div className="space-y-6">
             <CalendarComponent />
             <CycleStatisticsChart />
+            <HistoryDataViewer />
           </div>
         );
       case "nutrition":

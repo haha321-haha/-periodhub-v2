@@ -384,13 +384,6 @@ export default function CalendarComponent() {
             )}
           </button>
         </div>
-        
-        {/* 提交错误提示 */}
-        {formErrors.submit && (
-          <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-sm text-red-600 text-center">{formErrors.submit}</p>
-          </div>
-        )}
       </div>
 
       {/* 添加经期记录表单 - 按钮下方，带平滑展开动画 */}
@@ -547,6 +540,13 @@ export default function CalendarComponent() {
                 {t("common.cancel")}
               </button>
             </div>
+            
+            {/* 提交错误提示 */}
+            {formErrors.submit && (
+              <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-sm text-red-600 text-center">{formErrors.submit}</p>
+              </div>
+            )}
           </div>
         </form>
       )}

@@ -5,7 +5,7 @@
 
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Search, Plus, ListChecks, Save, Trash2, BookOpen } from "lucide-react";
 import {
   useNutrition,
@@ -38,6 +38,30 @@ export default function NutritionComponent() {
     createdAt: Date;
   }>>([]);
   const [showSavedPlans, setShowSavedPlans] = useState(false);
+
+  // 初始化默认建议
+  useEffect(() => {
+    // 如果没有生成的建议，则生成默认建议
+    if (Object.keys(generatedSuggestions).length === 0) {
+      const defaultSuggestions = (["breakfast", "lunch", "dinner", "snack"] as const).reduce((acc, mealId) => {
+        const phase = nutrition.selectedPhase || "menstrual"; // 默认为月经期
+        const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${mealId}`;
+        const genericKey = `nutrition.mealSuggestions.${mealId}`;
+        
+        try {
+          const phaseSuggestion = t(phaseSpecificKey);
+          acc[mealId] = phaseSuggestion === phaseSpecificKey 
+            ? t(genericKey) 
+            : phaseSuggestion;
+        } catch {
+          acc[mealId] = t(genericKey);
+        }
+        return acc;
+      }, {} as Record<string, string>);
+      
+      setGeneratedSuggestions(defaultSuggestions);
+    }
+  }, [nutrition.selectedPhase, t]);
 
   // 过滤营养数据 - 基于HVsLYEp的过滤逻辑
   const filteredFoods = useMemo(() => {
@@ -351,7 +375,7 @@ export default function NutritionComponent() {
                 ? generatedSuggestions[mealId] 
                 : (() => {
                     // 如果未生成，尝试显示当前阶段的建议，否则显示通用建议
-                    const phase = nutrition.selectedPhase;
+                    const phase = nutrition.selectedPhase || "menstrual"; // 默认为月经期
                     const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${mealId}`;
                     const genericKey = `nutrition.mealSuggestions.${mealId}`;
                     

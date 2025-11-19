@@ -5629,15 +5629,23 @@
               "salutation": "Good morning.",
               "body": "Due to severe menstrual discomfort (dysmenorrhea) that began this morning, I am having difficulty concentrating and performing my duties effectively. My physical condition also does not allow me to commute. To ensure work quality and recovery, I would like to request to rest at home/work remotely for the day.\n\nI have already [briefly explain arrangements, e.g., \"completed and sent the X report to [Colleague's Name]\"] and will remain available by phone and email for any urgent matters.\n\nI apologize for any inconvenience this may cause and appreciate your understanding and support.",
               "closing": "Best regards,",
-              "signature": "[Your Name]\n[Your Title]\n[Date]"
+              "signature": "[Your Name]
+[Your Title]
+[Date]"
             },
             "english": {
               "subject": "Sick Leave Request - [Your Name] - [Date]",
               "greeting": "Dear [Manager's Name],",
               "salutation": "Good morning.",
-              "body": "I am writing to request a sick leave for today, [Date], due to severe menstrual pain (dysmenorrhea) that began this morning. The discomfort is making it difficult for me to concentrate and perform my duties effectively, and I do not feel well enough to commute.\n\nTo ensure my work responsibilities are covered, I would like to request to rest at home / work remotely for the day. I have already [briefly explain arrangements, e.g., \"completed and sent the X report to [Colleague's Name]\"] and will remain available by phone and email for any urgent matters.\n\nI apologize for any inconvenience this may cause and appreciate your understanding and support.",
+              "body": "I am writing to request a sick leave for today, [Date], due to severe menstrual pain (dysmenorrhea) that began this morning. The discomfort is making it difficult for me to concentrate and perform my duties effectively, and I do not feel well enough to commute.
+
+To ensure my work responsibilities are covered, I would like to request to rest at home / work remotely for the day. I have already [briefly explain arrangements, e.g., "completed and sent the X report to [Colleague's Name]"] and will remain available by phone and email for any urgent matters.
+
+I apologize for any inconvenience this may cause and appreciate your understanding and support.",
               "closing": "Best regards,",
-              "signature": "[Your Name]\n[Your Title]\n[Date]"
+              "signature": "[Your Name]
+[Your Title]
+[Date]"
             }
           },
           "templates": [
@@ -5648,13 +5656,13 @@
                 {
                   "situation": "Notification",
                   "tone": "Intimate",
-                  "template": "\"Honey, I'm not feeling well today and might need more rest. If I seem uncomfortable, please don't worry.\"",
+                  "template": ""Honey, I'm not feeling well today and might need more rest. If I seem uncomfortable, please don't worry."",
                   "copyText": "Copy Text"
                 },
                 {
                   "situation": "Seeking Understanding",
                   "tone": "Intimate",
-                  "template": "\"I'm experiencing some pain and my emotions might fluctuate. Can you understand and give me some time and space? I'll recover soon.\"",
+                  "template": ""I'm experiencing some pain and my emotions might fluctuate. Can you understand and give me some time and space? I'll recover soon."",
                   "copyText": "Copy Text"
                 }
               ]
@@ -5666,13 +5674,13 @@
                 {
                   "situation": "Rescheduling Plans",
                   "tone": "Casual",
-                  "template": "\"Sorry, I'm not feeling well today and might not be at my best. Can we reschedule for another time? I'll make it up to you!\"",
+                  "template": ""Sorry, I'm not feeling well today and might not be at my best. Can we reschedule for another time? I'll make it up to you!"",
                   "copyText": "Copy Text"
                 },
                 {
                   "situation": "Party Participation",
                   "tone": "Casual",
-                  "template": "\"I might come to the party, but may need to leave early. If I seem tired, please understand.\"",
+                  "template": ""I might come to the party, but may need to leave early. If I seem tired, please understand."",
                   "copyText": "Copy Text"
                 }
               ]
@@ -5684,13 +5692,13 @@
                 {
                   "situation": "Leave Request",
                   "tone": "Formal",
-                  "template": "\"Hello, I'm not feeling well today and may need to take half a day off to handle health issues. I'll finish other tasks as soon as possible.\"",
+                  "template": ""Hello, I'm not feeling well today and may need to take half a day off to handle health issues. I'll finish other tasks as soon as possible."",
                   "copyText": "Copy Text"
                 },
                 {
                   "situation": "Work Adjustment",
                   "tone": "Formal",
-                  "template": "\"Sorry, I'm not feeling well today and my work efficiency might be affected. Please prioritize urgent matters, and I'll complete other tasks as soon as possible.\"",
+                  "template": ""Sorry, I'm not feeling well today and my work efficiency might be affected. Please prioritize urgent matters, and I'll complete other tasks as soon as possible."",
                   "copyText": "Copy Text"
                 }
               ]
@@ -5775,7 +5783,7 @@
     "teenHealth": {
       "title": "🌸 Teen Menstrual Health Zone 🌸",
       "subtitle": "A caring space designed for girls aged 12-18",
-      "description": "Adolescence brings many worries, and \"those days\" each month can be especially concerning. Pain, mood swings, body changes... Don't worry, you're not fighting alone. We've prepared campus emergency guides, developmental pain management, emotional support, and communication skills to help you confidently navigate every period.",
+      "description": "Adolescence brings many worries, and "those days" each month can be especially concerning. Pain, mood swings, body changes... Don't worry, you're not fighting alone. We've prepared campus emergency guides, developmental pain management, emotional support, and communication skills to help you confidently navigate every period.",
       "enterZone": "Enter Zone",
       "campusGuide": "Campus Emergency Guide",
       "helpTitle": "How Can We Help?",

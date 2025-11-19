@@ -3410,7 +3410,31 @@
         "breakfast": "Breakfast Suggestions",
         "lunch": "Lunch Suggestions",
         "dinner": "Dinner Suggestions",
-        "snack": "Snack Suggestions"
+        "snack": "Snack Suggestions",
+        "menstrual": {
+          "breakfast": "Menstrual Phase Breakfast: Choose warm foods like red date porridge and longan soup to replenish iron and energy, relieving fatigue.",
+          "lunch": "Menstrual Phase Lunch: Choose easily digestible foods like lean meat and leafy greens to supplement protein and vitamins, maintaining nutritional balance.",
+          "dinner": "Menstrual Phase Dinner: Choose warming foods like chicken soup and black bean soup to replenish nutrients and promote recovery.",
+          "snack": "Menstrual Phase Snacks: Choose warm snacks like red dates, longan, and black sesame to replenish energy and relieve discomfort."
+        },
+        "follicular": {
+          "breakfast": "Follicular Phase Breakfast: Choose protein-rich foods like eggs and soy milk to replenish nutrients and promote follicle development.",
+          "lunch": "Follicular Phase Lunch: Choose fresh vegetables and quality protein to maintain nutritional balance and support recovery.",
+          "dinner": "Follicular Phase Dinner: Choose light and easily digestible foods, avoiding excessive greasiness to keep the body light.",
+          "snack": "Follicular Phase Snacks: Choose healthy snacks like nuts and fruits to supplement vitamins and minerals."
+        },
+        "ovulation": {
+          "breakfast": "Ovulation Phase Breakfast: Choose nutritious foods like whole wheat bread and eggs to provide sufficient energy and support ovulation.",
+          "lunch": "Ovulation Phase Lunch: Choose fresh fruits and vegetables with quality protein to maintain nutritional balance and support optimal body condition.",
+          "dinner": "Ovulation Phase Dinner: Choose light and nutritious foods, avoiding overeating to keep the body comfortable.",
+          "snack": "Ovulation Phase Snacks: Choose healthy snacks like fresh fruits and nuts to replenish nutrients and maintain vitality."
+        },
+        "luteal": {
+          "breakfast": "Luteal Phase Breakfast: Choose foods rich in complex carbohydrates like oats and whole wheat bread to stabilize blood sugar and relieve mood swings.",
+          "lunch": "Luteal Phase Lunch: Choose nutritionally balanced meals to supplement protein and vitamins, supporting luteal function.",
+          "dinner": "Luteal Phase Dinner: Choose warming foods to replenish nutrients and prepare for the next cycle.",
+          "snack": "Luteal Phase Snacks: Choose foods rich in magnesium like dark chocolate and nuts to relieve premenstrual discomfort."
+        }
       },
       "generateButton": "Generate Plan",
       "title": "Nutrition Recommendations",
@@ -3830,7 +3854,8 @@
       "add": "Add",
       "search": "Search",
       "confirm": "Confirm",
-      "reset": "Reset"
+      "reset": "Reset",
+      "remove": "Remove"
     },
     "symptoms": {
       "title": "Symptoms & Work Impact Record",

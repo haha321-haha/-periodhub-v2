@@ -25,6 +25,7 @@ export default function NutritionComponent() {
   const nutritionData = getNutritionData(locale);
   const [searchTerm, setSearchTerm] = useState("");
   const [mealPlan, setMealPlan] = useState<NutritionRecommendation[]>([]);
+  const [generatedSuggestions, setGeneratedSuggestions] = useState<Record<string, string>>({});
 
   // 过滤营养数据 - 基于HVsLYEp的过滤逻辑
   const filteredFoods = useMemo(() => {
@@ -61,14 +62,38 @@ export default function NutritionComponent() {
       // 等待一小段时间让持久化完成
       await new Promise(resolve => setTimeout(resolve, 100));
       
-      // 基于HVsLYEp的膳食计划生成逻辑
-      const meals = ["breakfast", "lunch", "dinner", "snack"];
-      const suggestions = meals.map((meal) => ({
-        meal,
-        suggestion: t(`nutrition.mealSuggestions.${meal}`),
-      }));
+      // 基于当前选择的阶段生成个性化膳食建议
+      const meals = ["breakfast", "lunch", "dinner", "snack"] as const;
+      const phase = nutrition.selectedPhase;
+      
+      // 生成针对当前阶段的个性化建议
+      const suggestions: Record<string, string> = {};
+      meals.forEach((meal) => {
+        // 尝试获取阶段特定的建议，如果不存在则使用通用建议
+        const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${meal}`;
+        const genericKey = `nutrition.mealSuggestions.${meal}`;
+        
+        try {
+          // 先尝试获取阶段特定的建议
+          const phaseSuggestion = t(phaseSpecificKey);
+          // 如果返回的键名和输入相同，说明翻译不存在，使用通用建议
+          if (phaseSuggestion === phaseSpecificKey) {
+            suggestions[meal] = t(genericKey);
+          } else {
+            suggestions[meal] = phaseSuggestion;
+          }
+        } catch {
+          // 如果出错，使用通用建议
+          suggestions[meal] = t(genericKey);
+        }
+      });
 
-      console.log("Generated meal plan:", suggestions);
+      // 保存生成的建议到状态
+      setGeneratedSuggestions(suggestions);
+      
+      console.log("Generated meal plan for phase:", phase, suggestions);
+      
+      // 显示成功提示
       alert(t("nutrition.planGenerated"));
     } catch (error) {
       console.error("生成膳食计划时出错:", error);
@@ -247,16 +272,39 @@ export default function NutritionComponent() {
         {/* 膳食建议 */}
         <div className="space-y-4 mb-6">
           {(["breakfast", "lunch", "dinner", "snack"] as const).map(
-            (mealId) => (
-              <div key={mealId} className="p-4 bg-neutral-50 rounded-lg">
-                <h5 className="font-medium text-neutral-900 mb-2">
-                  {t(`nutrition.meals.${mealId}`)}
-                </h5>
-                <p className="text-sm text-neutral-600">
-                  {t(`nutrition.mealSuggestions.${mealId}`)}
-                </p>
-              </div>
-            ),
+            (mealId) => {
+              // 根据是否已生成建议来决定显示内容
+              const hasGeneratedSuggestions = Object.keys(generatedSuggestions).length > 0;
+              const suggestionText = hasGeneratedSuggestions 
+                ? generatedSuggestions[mealId] 
+                : (() => {
+                    // 如果未生成，尝试显示当前阶段的建议，否则显示通用建议
+                    const phase = nutrition.selectedPhase;
+                    const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${mealId}`;
+                    const genericKey = `nutrition.mealSuggestions.${mealId}`;
+                    
+                    try {
+                      const phaseSuggestion = t(phaseSpecificKey);
+                      // 如果返回的键名和输入相同，说明翻译不存在，使用通用建议
+                      return phaseSuggestion === phaseSpecificKey 
+                        ? t(genericKey) 
+                        : phaseSuggestion;
+                    } catch {
+                      return t(genericKey);
+                    }
+                  })();
+              
+              return (
+                <div key={mealId} className="p-4 bg-neutral-50 rounded-lg">
+                  <h5 className="font-medium text-neutral-900 mb-2">
+                    {t(`nutrition.meals.${mealId}`)}
+                  </h5>
+                  <p className="text-sm text-neutral-600 whitespace-pre-line">
+                    {suggestionText}
+                  </p>
+                </div>
+              );
+            },
           )}
         </div>
 

@@ -310,6 +310,38 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl, 301);
     }
 
+    // 🎯 修复爬虫错误拼接的 OG 图片路径（通用规则）
+    // 处理所有类似 /[locale]/og-default.jpg/xxx 的错误路径
+    // 爬虫错误地将 OG 图片路径和页面路径拼接在一起
+    if (pathname.match(/^\/(zh|en)\/og-default\.jpg\//)) {
+      // 带语言前缀的情况: /zh/og-default.jpg/xxx → /zh/xxx
+      const match = pathname.match(/^\/(zh|en)\/og-default\.jpg\/(.+)$/);
+      if (match) {
+        const [, locale, restPath] = match;
+        const correctPath = `/${locale}/${restPath}`;
+        if (process.env.NODE_ENV === "development") {
+          console.log(`[Middleware] Redirecting OG image path error: ${pathname} to ${correctPath}`);
+        }
+        const redirectUrl = new URL(correctPath, request.url);
+        return NextResponse.redirect(redirectUrl, 301);
+      }
+    }
+    // 处理不带语言前缀的情况: /og-default.jpg/xxx → /[locale]/xxx
+    if (pathname.match(/^\/og-default\.jpg\//)) {
+      const match = pathname.match(/^\/og-default\.jpg\/(.+)$/);
+      if (match) {
+        const [, restPath] = match;
+        const acceptLanguage = request.headers.get('accept-language') || '';
+        const isChinese = acceptLanguage.includes('zh');
+        const correctPath = isChinese ? `/zh/${restPath}` : `/en/${restPath}`;
+        if (process.env.NODE_ENV === "development") {
+          console.log(`[Middleware] Redirecting OG image path error: ${pathname} to ${correctPath}`);
+        }
+        const redirectUrl = new URL(correctPath, request.url);
+        return NextResponse.redirect(redirectUrl, 301);
+      }
+    }
+
     // 🎯 修复错误的 /downloads/articles/ 路径 - 重定向到 /articles/
     if (pathname.match(/^\/(zh|en)\/downloads\/articles\/.+/)) {
       // 带语言前缀的情况: /zh/downloads/articles/* → /zh/articles/*

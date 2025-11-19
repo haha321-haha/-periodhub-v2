@@ -270,7 +270,7 @@ const RecommendationCard = memo(function RecommendationCard({
           <div className="flex items-center justify-between">
             {item.href ? (
               <Link
-                href={item.href}
+                href={`/${locale}${item.href}`}
                 onClick={handleClick}
                 className={`inline-flex items-center ${typeColors.text} hover:${typeColors.text.replace("600", "800")} font-medium text-sm transition-colors`}
                 suppressHydrationWarning={true}

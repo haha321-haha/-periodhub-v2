@@ -56,7 +56,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
     relevance: 0,
     score: 0,
     reason: '',
-    href: '/articles/immediate-relief-methods',
+    href: '/immediate-relief',
     icon: 'Zap',
     metadata: {
       readTime: 8,
@@ -103,7 +103,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
     relevance: 0,
     score: 0,
     reason: '',
-    href: '/articles/natural-therapies-for-menstrual-pain',
+    href: '/natural-therapies',
     icon: 'Leaf',
     metadata: {
       readTime: 10,
@@ -549,7 +549,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
     relevance: 0,
     score: 0,
     reason: '',
-    href: '/articles/immediate-relief-methods#heat-therapy',
+    href: '/articles/heat-therapy-complete-guide',
     icon: 'Flame',
     metadata: {
       difficulty: 'easy',
@@ -593,7 +593,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
     relevance: 0,
     score: 0,
     reason: '',
-    href: '/articles/immediate-relief-methods#posture',
+    href: '/immediate-relief#posture',
     icon: 'Activity',
     metadata: {
       difficulty: 'easy',
@@ -615,7 +615,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
     relevance: 0,
     score: 0,
     reason: '',
-    href: '/articles/natural-therapies-for-menstrual-pain#hydration',
+    href: '/natural-therapies#hydration',
     icon: 'Droplet',
     metadata: {
       difficulty: 'easy',

@@ -3787,7 +3787,16 @@
       "avgPain": "Average Pain",
       "confidence": "Confidence",
       "cycleLength": "Cycle Length",
-      "noComparisonData": "No comparison data available"
+      "noComparisonData": "No comparison data available",
+      "noTrendData": "No trend data available",
+      "comparisonTitle": "Cycle Comparison Analysis",
+      "currentPeriod": "Current Period",
+      "previousPeriod": "Previous Period",
+      "averageCycle": "Average Cycle",
+      "commonFlow": "Common Flow",
+      "trendUp": "Up",
+      "trendDown": "Down",
+      "trendStable": "Stable"
     },
     "insights": {
       "irregularCycle": "Irregular Cycle",

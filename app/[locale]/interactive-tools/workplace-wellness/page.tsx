@@ -49,7 +49,10 @@ export default async function WorkplaceWellnessPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  // 确保 params 被正确解析
-  await params;
-  return <WorkplaceWellnessWrapper />;
+  // 解析 params 参数
+  const resolvedParams = await params;
+  const locale = resolvedParams.locale;
+  
+  // 将 locale 作为 prop 传递给客户端组件
+  return <WorkplaceWellnessWrapper locale={locale} />;
 }

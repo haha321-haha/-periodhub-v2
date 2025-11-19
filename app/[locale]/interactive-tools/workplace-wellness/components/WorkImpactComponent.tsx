@@ -108,7 +108,7 @@ export default function WorkImpactComponent() {
         return;
       }
       
-      if (workImpact.efficiency < 0 || workImpact.efficiency > 100) {
+      if ((workImpact.efficiency ?? 100) < 0 || (workImpact.efficiency ?? 100) > 100) {
         alert(
           locale === "zh"
             ? "工作效率必须在0-100%之间。"
@@ -183,7 +183,7 @@ export default function WorkImpactComponent() {
                   type="range"
                   min="0"
                   max="100"
-                  value={workImpact.efficiency}
+                  value={workImpact.efficiency ?? 100}
                   onChange={handleEfficiencyChange}
                   className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 efficiency-slider"
                 />
@@ -191,11 +191,11 @@ export default function WorkImpactComponent() {
               <div className="w-16 text-center">
                 <span
                   className={getBadgeClasses(
-                    workImpact.efficiency,
+                    workImpact.efficiency ?? 100,
                     "efficiency",
                   )}
                 >
-                  {workImpact.efficiency}%
+                  {workImpact.efficiency ?? 100}%
                 </span>
               </div>
             </div>

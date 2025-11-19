@@ -13,12 +13,26 @@ import {
   TCMNature,
 } from "../types";
 
-// 模拟经期数据 - 基于HVsLYEp的mockPeriodData
+// 模拟经期数据 - 基于HVsLYEp的mockPeriodData，包含更多近期数据
 export const mockPeriodData: PeriodRecord[] = [
-  { date: "2025-09-15", type: "period", painLevel: 7, flow: "heavy" },
-  { date: "2025-09-16", type: "period", painLevel: 6, flow: "heavy" },
-  { date: "2025-09-17", type: "period", painLevel: 4, flow: "medium" },
+  // 最近的经期记录
+  { date: "2025-11-18", type: "predicted", painLevel: null, flow: null },
+  { date: "2025-11-08", type: "period", painLevel: 3, flow: "light" },
+  { date: "2025-11-07", type: "period", painLevel: 6, flow: "heavy" },
+  { date: "2025-11-06", type: "period", painLevel: 5, flow: "medium" },
+  { date: "2025-11-05", type: "period", painLevel: 4, flow: "medium" },
+  
+  // 上一个月周期
+  { date: "2025-10-16", type: "period", painLevel: 2, flow: "light" },
+  { date: "2025-10-15", type: "period", painLevel: 3, flow: "light" },
+  { date: "2025-10-14", type: "period", painLevel: 6, flow: "medium" },
+  { date: "2025-10-13", type: "period", painLevel: 5, flow: "medium" },
   { date: "2025-10-12", type: "predicted", painLevel: null, flow: null },
+  
+  // 两个月前的周期
+  { date: "2025-09-17", type: "period", painLevel: 4, flow: "medium" },
+  { date: "2025-09-16", type: "period", painLevel: 6, flow: "heavy" },
+  { date: "2025-09-15", type: "period", painLevel: 7, flow: "heavy" },
 ];
 
 // 营养数据 - 基于HVsLYEp的mockNutritionData结构，支持多语言

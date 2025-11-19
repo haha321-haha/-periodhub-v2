@@ -48,12 +48,42 @@ export default function CycleStatisticsChart() {
   const periodData = calendar.periodData || [];
 
   useEffect(() => {
-    const predictor = new CyclePredictor(locale);
-    const cycleAnalysis = predictor.analyzeCycle(periodData);
-    const cycleStats = predictor.generateStatistics(periodData);
-
-    setAnalysis(cycleAnalysis);
-    setStatistics(cycleStats);
+    console.log("CycleStatisticsChart - periodData length:", periodData?.length || 0);
+    
+    if (!periodData || periodData.length === 0) {
+      console.warn("CycleStatisticsChart - periodData is empty");
+      setAnalysis(null);
+      setStatistics(null);
+      return;
+    }
+    
+    // 验证数据格式
+    const validRecords = periodData.filter(record => 
+      record && typeof record === 'object' && record.date
+    );
+    
+    if (validRecords.length === 0) {
+      console.warn("CycleStatisticsChart - no valid records found");
+      setAnalysis(null);
+      setStatistics(null);
+      return;
+    }
+    
+    console.log("CycleStatisticsChart - valid records:", validRecords.length);
+    
+    try {
+      const predictor = new CyclePredictor(locale);
+      const cycleAnalysis = predictor.analyzeCycle(validRecords);
+      const cycleStats = predictor.generateStatistics(validRecords);
+      
+      console.log("CycleStatisticsChart - analysis completed");
+      setAnalysis(cycleAnalysis);
+      setStatistics(cycleStats);
+    } catch (error) {
+      console.error("CycleStatisticsChart - analysis failed:", error);
+      setAnalysis(null);
+      setStatistics(null);
+    }
   }, [periodData, locale]);
 
   // 生成周期长度图表数据

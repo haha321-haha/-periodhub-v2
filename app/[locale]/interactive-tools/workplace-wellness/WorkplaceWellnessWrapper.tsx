@@ -15,9 +15,14 @@ const WorkplaceWellnessClient = dynamic(
   }
 );
 
-export default function WorkplaceWellnessWrapper() {
-  return <WorkplaceWellnessClient />;
+interface WorkplaceWellnessWrapperProps {
+  locale: string;
 }
+
+export default function WorkplaceWellnessWrapper({ locale }: WorkplaceWellnessWrapperProps) {
+  return <WorkplaceWellnessClient locale={locale} />;
+}
+
 
 
 

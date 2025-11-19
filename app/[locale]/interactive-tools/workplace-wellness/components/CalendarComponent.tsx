@@ -5,8 +5,8 @@
 
 "use client";
 
-import { useState } from "react";
-import { Calendar, Plus, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Calendar, Plus, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
 import {
   useCalendar,
   useWorkplaceWellnessActions,
@@ -25,6 +25,9 @@ export default function CalendarComponent() {
   // 从 store 读取 periodData
   const periodData = calendar?.periodData || [];
   const [showAddForm, setShowAddForm] = useState(false);
+  
+  // 用于自动聚焦到日期输入框
+  const dateInputRef = useRef<HTMLInputElement>(null);
 
   // 表单状态
   const [formData, setFormData] = useState<{
@@ -114,15 +117,36 @@ export default function CalendarComponent() {
     setCurrentDate(newDate);
   };
 
-  // 添加经期记录
+  // 添加经期记录 - 切换表单显示/隐藏
   const handleAddRecord = () => {
-    setFormData({
-      date: new Date().toISOString().split("T")[0],
-      type: "period",
-      painLevel: 0,
-    });
-    setShowAddForm(true);
+    if (showAddForm) {
+      // 如果表单已展开，则关闭并重置
+      setShowAddForm(false);
+      setFormData({
+        date: new Date().toISOString().split("T")[0],
+        type: "period",
+        painLevel: 0,
+      });
+    } else {
+      // 如果表单未展开，则打开并初始化
+      setFormData({
+        date: new Date().toISOString().split("T")[0],
+        type: "period",
+        painLevel: 0,
+      });
+      setShowAddForm(true);
+    }
   };
+
+  // 表单展开后自动聚焦到日期输入框
+  useEffect(() => {
+    if (showAddForm && dateInputRef.current) {
+      // 使用 setTimeout 确保 DOM 已更新
+      setTimeout(() => {
+        dateInputRef.current?.focus();
+      }, 100);
+    }
+  }, [showAddForm]);
 
   // 格式化日期为 YYYY-MM-DD
   const formatDateShort = (date: Date): string => {
@@ -177,6 +201,7 @@ export default function CalendarComponent() {
       };
       
       // 调用 store 的 addPeriodRecord 方法
+      console.log("CalendarComponent - saving record:", record);
       addPeriodRecord(record);
       
       // 关闭表单并重置表单数据
@@ -223,22 +248,13 @@ export default function CalendarComponent() {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
       {/* 头部 - 基于HVsLYEp的头部设计 */}
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="text-xl font-semibold text-neutral-900">
-            {t("calendar.title")}
-          </h3>
-          <p className="text-sm text-neutral-600 mt-1">
-            {t("calendar.subtitle")}
-          </p>
-        </div>
-        <button
-          onClick={handleAddRecord}
-          className="rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
-        >
-          <Plus className="w-4 h-4" />
-          {t("calendar.recordButton")}
-        </button>
+      <div className="mb-6">
+        <h3 className="text-xl font-semibold text-neutral-900">
+          {t("calendar.title")}
+        </h3>
+        <p className="text-sm text-neutral-600 mt-1">
+          {t("calendar.subtitle")}
+        </p>
       </div>
 
       {/* 月份导航 - 基于HVsLYEp的导航设计 */}
@@ -319,9 +335,31 @@ export default function CalendarComponent() {
         </div>
       </div>
 
-      {/* 添加经期记录表单 */}
+      {/* 按钮区域 - 统计信息下方，居中显示 */}
+      <div className="mt-6 pt-6 border-t border-neutral-100">
+        <div className="flex justify-center">
+          <button
+            onClick={handleAddRecord}
+            className="rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
+            aria-expanded={showAddForm}
+          >
+            <Plus className="w-4 h-4" />
+            {t("calendar.recordButton")}
+            {showAddForm ? (
+              <ChevronUp className="w-4 h-4 transition-transform duration-200" />
+            ) : (
+              <ChevronDown className="w-4 h-4 transition-transform duration-200" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* 添加经期记录表单 - 按钮下方，带平滑展开动画 */}
       {showAddForm && (
-        <form onSubmit={handleSaveRecord} className="mt-6 p-4 bg-neutral-50 rounded-lg border border-neutral-200">
+        <form 
+          onSubmit={handleSaveRecord} 
+          className="mt-4 p-4 bg-neutral-50 rounded-lg border border-neutral-200 animate-slide-up"
+        >
           <h4 className="text-lg font-medium text-neutral-900 mb-4">
             {t("calendar.addRecord")}
           </h4>
@@ -331,6 +369,7 @@ export default function CalendarComponent() {
                 {t("calendar.date")}
               </label>
               <input
+                ref={dateInputRef}
                 type="date"
                 value={formData.date}
                 max={getTodayDateString()}

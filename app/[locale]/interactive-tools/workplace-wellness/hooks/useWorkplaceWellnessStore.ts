@@ -151,7 +151,7 @@ const getInitialState = (): WorkplaceWellnessState => ({
     currentDate: typeof window !== 'undefined' ? new Date() : new Date(0), // SSR 安全
     selectedDate: null,
     showAddForm: false,
-    periodData: mockPeriodData,
+    periodData: [], // 空数组，让persist中间件从localStorage恢复数据
   },
   workImpact: {
     painLevel: 0 as PainLevel,
@@ -245,31 +245,38 @@ const createStore = () => {
                   index === existingIndex ? record : r,
                 )
               : [...state.calendar.periodData, record];
+          
+          console.log("addPeriodRecord - before cleanup:", updatedPeriodData);
 
-          // 数据清理：只保留最近 2 周的记录（更激进，减少存储空间）
-          // 工具类应用主要需要最近数据，历史数据可通过导出功能保存
-          const twoWeeksAgo = new Date();
-          twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+          // 数据清理：只保留最近 3 个月的记录，适当放宽限制
+          // 这样图表可以显示更完整的数据，同时避免存储过多
+          const threeMonthsAgo = new Date();
+          threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
           
-          updatedPeriodData = updatedPeriodData.filter((r) => {
-            try {
-              const recordDate = new Date(r.date);
-              return recordDate >= twoWeeksAgo;
-            } catch {
-              return false; // 无效日期，删除
-            }
-          });
-          
-          // 如果数据仍然太多，只保留最近 20 条记录
-          if (updatedPeriodData.length > 20) {
-            updatedPeriodData = updatedPeriodData.slice(0, 20);
-            console.warn("⚠️ 数据过多，已自动清理，只保留最近 20 条记录");
+          // 只在数据量超过50条时才进行清理，避免频繁清理
+          if (updatedPeriodData.length > 50) {
+            updatedPeriodData = updatedPeriodData.filter((r) => {
+              try {
+                const recordDate = new Date(r.date);
+                return recordDate >= threeMonthsAgo;
+              } catch {
+                return false; // 无效日期，删除
+              }
+            });
+            
+            // 按日期排序（最新的在前）
+            updatedPeriodData.sort((a, b) => 
+              new Date(b.date).getTime() - new Date(a.date).getTime()
+            );
+            
+            // 如果仍然超过40条，只保留最近40条
+            if (updatedPeriodData.length > 40) {
+              updatedPeriodData = updatedPeriodData.slice(0, 40);
+            console.warn("⚠️ 数据过多，已自动清理，只保留最近 40 条记录");
           }
-
-          // 按日期排序（最新的在前）
-          updatedPeriodData.sort((a, b) => 
-            new Date(b.date).getTime() - new Date(a.date).getTime()
-          );
+          
+          console.log("addPeriodRecord - after cleanup:", updatedPeriodData);
+          }
 
           // 全面数据清理：清理其他累积数据
           const cleanedExportHistory = state.exportHistory.length > 5 
@@ -1139,10 +1146,49 @@ const createStore = () => {
       // 只在客户端运行
       onRehydrateStorage: () => (state, error) => {
         if (error) {
-          console.error("Zustand store rehydration error:", error);
-        } else {
+          console.error("❌ Zustand store rehydration error:", error);
+          // 触发全局错误事件
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('store-rehydrate-error', { detail: error }));
+          }
+        } else if (state) {
+          console.log("✅ Zustand store rehydrated successfully");
+          
+          // 确保基础结构存在
+          if (!state.calendar) {
+            state.calendar = { 
+              currentDate: new Date(), 
+              selectedDate: null, 
+              showAddForm: false, 
+              periodData: [] 
+            };
+          }
+          
+          // 处理 periodData
+          if (!state.calendar.periodData || state.calendar.periodData.length === 0) {
+            console.log("📊 未找到已保存的经期数据，使用示例数据");
+            state.calendar.periodData = mockPeriodData;
+          } else {
+            console.log(`✅ 成功恢复 ${state.calendar.periodData.length} 条经期记录`);
+            
+            // 验证数据结构
+            state.calendar.periodData = state.calendar.periodData.filter(record => 
+              record && typeof record === 'object' && record.date
+            );
+            
+            if (state.calendar.periodData.length > 0) {
+              console.log(`✅ 验证后保留 ${state.calendar.periodData.length} 条有效记录`);
+            } else {
+              console.log("⚠️ 所有记录都无效，使用示例数据");
+              state.calendar.periodData = mockPeriodData;
+            }
+          }
+          
           // 确保 userPreferences 结构完整
-          if (state) {
+          if (!state.userPreferences || 
+              !state.userPreferences.ui || 
+              typeof state.userPreferences.ui !== 'object' ||
+              !state.userPreferences.ui.theme) {
             // 如果 userPreferences 不存在或不完整，完全重建
             if (!state.userPreferences || 
                 !state.userPreferences.ui || 
@@ -1213,6 +1259,17 @@ const createStore = () => {
             // 如果 userPreferences 完全缺失，使用默认值
             state.userPreferences = DEFAULT_USER_PREFERENCES;
           }
+          
+          // 触发恢复完成事件
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new CustomEvent('store-rehydrate-complete', { 
+              detail: { 
+                recordCount: state.calendar.periodData.length,
+                hasValidData: state.calendar.periodData.length > 0
+              }
+            }));
+          }
+          
           console.log("Zustand store rehydrated successfully:", state);
         }
       },

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import dynamic from "next/dynamic";
 import StorageWarningToast from "./components/StorageWarningToast";
+import DebugPanel from "./components/DebugPanel";
 
 // 动态导入组件以优化性能
 const WorkplaceWellnessHeader = dynamic(
@@ -170,15 +171,24 @@ const SimpleZustandTest = dynamic(
   },
 );
 
-export default function WorkplaceWellnessClient() {
+interface WorkplaceWellnessClientProps {
+  locale?: string;
+}
+
+export default function WorkplaceWellnessClient({ locale: propLocale }: WorkplaceWellnessClientProps = {}) {
   const t = useTranslations("workplaceWellness");
   const breadcrumbT = useTranslations("interactiveTools.breadcrumb");
-  const locale = useLocale();
+  const hookLocale = useLocale();
+  // 使用传入的 locale 或从 useLocale 获取
+  const locale = propLocale || hookLocale;
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* 存储警告提示 */}
       <StorageWarningToast />
+      
+      {/* 调试面板 - 仅开发环境 */}
+      <DebugPanel />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 面包屑导航 */}
@@ -226,37 +236,47 @@ function WorkplaceWellnessContent() {
       const { useWorkplaceWellnessStore } = module;
       setStoreModule(module);
       
-      // 恢复store状态 - 使用正确的 API
-      // 注意：由于使用了 skipHydration: true，需要手动调用 rehydrate
-      // 使用类型断言访问动态添加的静态方法
-      const store = useWorkplaceWellnessStore as any;
-      try {
-        if (store.persist && store.persist.rehydrate) {
-          // 手动触发 rehydrate 来恢复 localStorage 中的数据
-          store.persist.rehydrate();
+      // 使用 Promise 封装 rehydrate，确保完成后再继续
+      const waitForRehydrate = async () => {
+        return new Promise<void>((resolve, reject) => {
+          const store = useWorkplaceWellnessStore as any;
           
-          // 等待 rehydrate 完成后再获取状态
+          // 监听完成事件
+          const handleComplete = (event: CustomEvent) => {
+            window.removeEventListener('store-rehydrate-complete', handleComplete as any);
+            window.removeEventListener('store-rehydrate-error', handleError as any);
+            resolve();
+          };
+          
+          // 监听错误事件
+          const handleError = (event: CustomEvent) => {
+            window.removeEventListener('store-rehydrate-complete', handleComplete as any);
+            window.removeEventListener('store-rehydrate-error', handleError as any);
+            reject(event.detail);
+          };
+          
+          window.addEventListener('store-rehydrate-complete', handleComplete as any);
+          window.addEventListener('store-rehydrate-error', handleError as any);
+          
+          // 触发 rehydrate
+          if (store.persist && store.persist.rehydrate) {
+            store.persist.rehydrate();
+          } else {
+            resolve(); // 没有 persist，直接完成
+          }
+          
+          // 设置超时
           setTimeout(() => {
-            const storeInstance = store.getState();
-            setPreviousTab(storeInstance.activeTab);
-            setActiveTab(storeInstance.activeTab);
-            setIsHydrated(true);
-          }, 100);
-        } else {
-          // 如果没有 persist，直接获取状态
-          const storeInstance = store.getState();
-          setPreviousTab(storeInstance.activeTab);
-          setActiveTab(storeInstance.activeTab);
-          setIsHydrated(true);
-        }
-      } catch (error) {
-        console.warn("无法重新hydration:", error);
-        // 即使失败也继续
-        const storeInstance = store.getState();
-        setPreviousTab(storeInstance.activeTab);
-        setActiveTab(storeInstance.activeTab);
-        setIsHydrated(true);
-      }
+            window.removeEventListener('store-rehydrate-complete', handleComplete as any);
+            window.removeEventListener('store-rehydrate-error', handleError as any);
+            resolve(); // 超时也继续，但记录警告
+            console.warn('Rehydrate 等待超时，继续执行');
+          }, 2000); // 2秒超时
+        });
+      };
+      
+      // 获取 store 实例用于订阅
+      const store = useWorkplaceWellnessStore as any;
       
       // 订阅 store 变化 - Zustand subscribe 只接受一个回调函数
       const unsubscribe = store.subscribe(
@@ -264,6 +284,23 @@ function WorkplaceWellnessContent() {
           setActiveTab(state.activeTab);
         }
       );
+      
+      // 执行 rehydrate 流程
+      waitForRehydrate()
+        .then(() => {
+          const storeInstance = store.getState();
+          setPreviousTab(storeInstance.activeTab);
+          setActiveTab(storeInstance.activeTab);
+          setIsHydrated(true);
+        })
+        .catch((error) => {
+          console.error('Rehydrate 失败:', error);
+          // 即使失败也继续
+          const storeInstance = store.getState();
+          setPreviousTab(storeInstance.activeTab);
+          setActiveTab(storeInstance.activeTab);
+          setIsHydrated(true);
+        });
       
       const timer = setTimeout(() => {
         setIsLoading(false);

@@ -286,6 +286,30 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl, 301);
     }
 
+    // 🎯 修复：/articles/immediate-relief-methods → /immediate-relief
+    // 爬虫错误地将即时缓解页面当作文章访问，重定向到正确的页面
+    if (pathname.match(/^\/(zh|en)\/articles\/immediate-relief-methods/)) {
+      // 带语言前缀的情况: /zh/articles/immediate-relief-methods → /zh/immediate-relief
+      const locale = pathname.match(/^\/(zh|en)\//)?.[1] || 'en';
+      const correctPath = `/${locale}/immediate-relief`;
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[Middleware] Redirecting ${pathname} to ${correctPath} (crawler error fix)`);
+      }
+      const redirectUrl = new URL(correctPath, request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+    if (pathname.match(/^\/articles\/immediate-relief-methods/)) {
+      // 不带语言前缀的情况: /articles/immediate-relief-methods → 根据语言检测
+      const acceptLanguage = request.headers.get('accept-language') || '';
+      const isChinese = acceptLanguage.includes('zh');
+      const redirectPath = isChinese ? '/zh/immediate-relief' : '/en/immediate-relief';
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[Middleware] Redirecting ${pathname} to ${redirectPath} (Accept-Language: ${acceptLanguage}, crawler error fix)`);
+      }
+      const redirectUrl = new URL(redirectPath, request.url);
+      return NextResponse.redirect(redirectUrl, 301);
+    }
+
     // 🎯 修复错误的 /downloads/articles/ 路径 - 重定向到 /articles/
     if (pathname.match(/^\/(zh|en)\/downloads\/articles\/.+/)) {
       // 带语言前缀的情况: /zh/downloads/articles/* → /zh/articles/*

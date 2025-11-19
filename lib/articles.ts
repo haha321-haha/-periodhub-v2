@@ -153,8 +153,8 @@ const slugMapping: Record<string, string> = {
   "menstrual-nutrition-tcm-guide": "anti-inflammatory-diet-period-pain", // 营养主题映射到抗炎饮食
   // 新增：体质相关旧链接映射到综合自然与物理疗法指南（主题最相关，避免404）
   "tcm-constitution-complete-guide": "natural-physical-therapy-comprehensive-guide",
-  // 修复：immediate-relief-methods 映射到5分钟快速缓解文章（最相关的即时缓解主题）
-  "immediate-relief-methods": "5-minute-period-pain-relief",
+  // 注意：immediate-relief-methods 已在 middleware.ts 中重定向到 /immediate-relief 页面
+  // 不再需要在此处映射，因为它是页面而非文章
 };
 
 export function getArticleBySlug(

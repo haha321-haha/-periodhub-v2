@@ -153,6 +153,8 @@ const slugMapping: Record<string, string> = {
   "menstrual-nutrition-tcm-guide": "anti-inflammatory-diet-period-pain", // 营养主题映射到抗炎饮食
   // 新增：体质相关旧链接映射到综合自然与物理疗法指南（主题最相关，避免404）
   "tcm-constitution-complete-guide": "natural-physical-therapy-comprehensive-guide",
+  // 修复：immediate-relief-methods 映射到5分钟快速缓解文章（最相关的即时缓解主题）
+  "immediate-relief-methods": "5-minute-period-pain-relief",
 };
 
 export function getArticleBySlug(
@@ -197,7 +199,17 @@ export function getArticleBySlug(
     }
 
     if (!fs.existsSync(fullPath)) {
-      console.warn(`[ARTICLES] Article not found: ${slug} for locale: ${locale}`);
+      // 检查是否有映射建议
+      const mappedSlug = slugMapping[slug];
+      if (mappedSlug) {
+        console.warn(
+          `[ARTICLES] Article not found: ${slug} for locale: ${locale}. Attempted mapping to: ${mappedSlug}, but file still not found.`,
+        );
+      } else {
+        console.warn(
+          `[ARTICLES] Article not found: ${slug} for locale: ${locale}. No mapping available.`,
+        );
+      }
       return null;
     }
 

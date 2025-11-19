@@ -3523,6 +3523,11 @@
         "recordCount": "Recorded {count} cycles",
         "suggestion": "Continue recording data to improve recommendation accuracy"
       },
+      "difficulty": {
+        "easy": "Easy",
+        "medium": "Medium",
+        "hard": "Hard"
+      },
       "feedback": {
         "title": "Was this recommendation helpful?",
         "helpful": "Helpful",

@@ -255,7 +255,7 @@ const RecommendationCard = memo(function RecommendationCard({
             )}
             {item.metadata?.difficulty && (
               <span className="capitalize">
-                {t(`dataQuality.${item.metadata.difficulty}`) || item.metadata.difficulty}
+                {t(`difficulty.${item.metadata.difficulty}`) || item.metadata.difficulty}
               </span>
             )}
             {item.score > 0 && (

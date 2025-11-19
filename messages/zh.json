@@ -9965,6 +9965,11 @@
         "recordCount": "已记录 {count} 个周期",
         "suggestion": "建议继续记录数据以提升推荐准确度"
       },
+      "difficulty": {
+        "easy": "简单",
+        "medium": "中等",
+        "hard": "困难"
+      },
       "feedback": {
         "title": "这个推荐有帮助吗？",
         "helpful": "有帮助",

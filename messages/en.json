@@ -85,6 +85,7 @@
     "loading": "Loading...",
     "error": "Error occurred",
     "tryAgain": "Try Again",
+    "remove": "Remove",
     "healthGuide": "Health Guide",
     "naturalTherapies": "Natural Therapies",
     "minutes": "minutes",
@@ -3281,7 +3282,8 @@
       "legendPredicted": "Predicted",
       "statCycle": "Cycle Days",
       "statLength": "Period Length",
-      "statNext": "Next Period"
+      "statNext": "Next Period",
+      "saveError": "An error occurred while saving the record. Please try again."
     },
     "history": {
       "title": "History Records",
@@ -3337,6 +3339,8 @@
       "nextOvulation": "Next Ovulation",
       "currentPhase": "Current Phase",
       "confidence": "Confidence",
+      "noDataTitle": "No Data Available",
+      "noDataMessage": "You haven't added any period records yet. Click the button below to start tracking your first cycle.",
       "cycleLengthDistribution": "Cycle Length Distribution",
       "painLevelDistribution": "Pain Level Distribution",
       "flowTypeDistribution": "Flow Type Distribution",

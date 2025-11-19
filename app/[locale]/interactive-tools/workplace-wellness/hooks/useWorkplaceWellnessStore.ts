@@ -248,7 +248,7 @@ const createStore = () => {
           
           console.log("addPeriodRecord - before cleanup:", updatedPeriodData);
 
-          // 数据清理：只保留最近 3 个月的记录，适当放宽限制
+          // 数据清理：只保留最近 6 个月的记录，适当放宽限制
           // 这样图表可以显示更完整的数据，同时避免存储过多
           const sixMonthsAgo = new Date();
           sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);

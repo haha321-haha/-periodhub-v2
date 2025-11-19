@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
-import { useCalendar } from "../hooks/useWorkplaceWellnessStore";
+import { useCalendar, useWorkplaceWellnessActions } from "../hooks/useWorkplaceWellnessStore";
 import {
   CyclePredictor,
   CycleAnalysis,
@@ -38,6 +38,7 @@ export default function CycleStatisticsChart() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
   const calendar = useCalendar() as CalendarState;
+  const { setActiveTab: setMainActiveTab } = useWorkplaceWellnessActions();
   const [activeTab, setActiveTab] = useState<
     "overview" | "cycle-length" | "pain-level" | "flow-type"
   >("overview");
@@ -46,6 +47,29 @@ export default function CycleStatisticsChart() {
 
   // 从 store 读取 periodData
   const periodData = calendar.periodData || [];
+
+  // 空数据检查
+  if (periodData.length === 0) {
+    return (
+      <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
+        <h4 className="text-lg font-semibold text-neutral-900 mb-4 flex items-center">
+          <BarChart3 className="w-5 h-5 mr-2 text-primary-500" />
+          {t("charts.title")}
+        </h4>
+        <div className="text-center py-12">
+          <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+          <p className="text-gray-600 text-lg mb-2">{t("charts.noDataTitle")}</p>
+          <p className="text-gray-500 text-sm mb-6">{t("charts.noDataMessage")}</p>
+          <button 
+            onClick={() => setMainActiveTab("calendar")}
+            className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+          >
+            {t("calendar.addRecord")}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     console.log("CycleStatisticsChart - periodData length:", periodData?.length || 0);

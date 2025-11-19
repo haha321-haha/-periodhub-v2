@@ -39,6 +39,14 @@ export default function CalendarComponent() {
     type: "period",
     painLevel: 0,
   });
+  
+  // 表单验证错误状态
+  const [formErrors, setFormErrors] = useState<{
+    date?: string;
+    type?: string;
+    painLevel?: string;
+    submit?: string;
+  }>({});
 
   // 基于HVsLYEp的日历逻辑
   const { currentDate } = calendar;
@@ -161,38 +169,58 @@ export default function CalendarComponent() {
     return formatDateShort(new Date());
   };
 
+  // 表单验证函数
+  const validateForm = () => {
+    const errors: typeof formErrors = {};
+    
+    // 验证日期不能是未来日期
+    const selectedDate = new Date(formData.date);
+    const today = new Date();
+    today.setHours(23, 59, 59, 999); // 设置今天的时间为23:59:59，允许选择今天
+    
+    if (selectedDate > today) {
+      errors.date = locale === "zh" 
+        ? "不能选择未来的日期" 
+        : "Cannot select future dates";
+    }
+
+    // 验证日期格式
+    if (!formData.date || formData.date.trim() === "") {
+      errors.date = errors.date || (locale === "zh" 
+        ? "请选择日期" 
+        : "Please select a date");
+    }
+
+    // 验证类型
+    if (!formData.type) {
+      errors.type = locale === "zh" 
+        ? "请选择记录类型" 
+        : "Please select a record type";
+    }
+
+    // 验证疼痛等级（仅月经期）
+    if (formData.type === "period" && formData.painLevel < 0) {
+      errors.painLevel = locale === "zh" 
+        ? "请选择疼痛等级" 
+        : "Please select pain level";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   // 保存记录
   const handleSaveRecord = async (e: React.FormEvent) => {
     // 阻止默认行为和事件冒泡
     e.preventDefault();
     e.stopPropagation();
 
+    // 验证表单
+    if (!validateForm()) {
+      return;
+    }
+
     try {
-      // 验证日期不能是未来日期
-      const selectedDate = new Date(formData.date);
-      const today = new Date();
-      today.setHours(23, 59, 59, 999); // 设置今天的时间为23:59:59，允许选择今天
-      
-      if (selectedDate > today) {
-        // 如果选择了未来日期，显示错误提示
-        alert(
-          locale === "zh"
-            ? "不能选择未来的日期，请选择今天或之前的日期。"
-            : "Cannot select future dates. Please select today or a past date."
-        );
-        return;
-      }
-
-      // 验证日期格式
-      if (!formData.date || formData.date.trim() === "") {
-        alert(
-          locale === "zh"
-            ? "请选择日期。"
-            : "Please select a date."
-        );
-        return;
-      }
-
       const record: PeriodRecord = {
         date: formData.date,
         type: formData.type,
@@ -200,7 +228,7 @@ export default function CalendarComponent() {
         painLevel: formData.type === "period" && formData.painLevel > 0 
           ? (formData.painLevel as PainLevel) 
           : null,
-        flow: formData.type === "period" ? formData.flow : null,
+        flow: null, // 可以根据需要添加流量选择
       };
       
       // 调用 store 的 addPeriodRecord 方法
@@ -215,20 +243,21 @@ export default function CalendarComponent() {
         painLevel: 0,
       });
       
-      // 显示成功提示
-      alert(
-        locale === "zh"
-          ? "经期记录已保存。"
-          : "Period record saved successfully."
-      );
+      // 清除错误状态
+      setFormErrors({});
+      
+      // 显示成功提示（可以考虑使用toast或其他非阻塞提示）
     } catch (error) {
       // 错误处理
       console.error("保存记录时出错:", error);
-      alert(
-        locale === "zh"
-          ? "保存记录时出错，请重试。"
-          : "An error occurred while saving the record. Please try again."
-      );
+      setFormErrors({
+        ...formErrors,
+        submit: t("calendar.saveError") || 
+          (locale === "zh" ? "保存记录时出错，请重试。" : "An error occurred while saving the record. Please try again.")
+      });
+      setTimeout(() => {
+        setFormErrors(prev => ({ ...prev, submit: undefined }));
+      }, 3000);
     }
   };
 
@@ -355,6 +384,13 @@ export default function CalendarComponent() {
             )}
           </button>
         </div>
+        
+        {/* 提交错误提示 */}
+        {formErrors.submit && (
+          <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-sm text-red-600 text-center">{formErrors.submit}</p>
+          </div>
+        )}
       </div>
 
       {/* 添加经期记录表单 - 按钮下方，带平滑展开动画 */}
@@ -379,9 +415,16 @@ export default function CalendarComponent() {
                 onChange={(e) =>
                   setFormData({ ...formData, date: e.target.value })
                 }
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-primary-500 ${
+                  formErrors.date 
+                    ? "border-red-500 focus:ring-red-500" 
+                    : "border-neutral-300 focus:ring-primary-500"
+                }`}
                 required
               />
+              {formErrors.date && (
+                <p className="text-red-500 text-sm mt-1">{formErrors.date}</p>
+              )}
             </div>
             <div>
               <label className="block text-sm font-medium text-neutral-800 mb-2">
@@ -395,12 +438,19 @@ export default function CalendarComponent() {
                     type: e.target.value as PeriodType,
                   })
                 }
-                className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-primary-500 ${
+                  formErrors.type 
+                    ? "border-red-500 focus:ring-red-500" 
+                    : "border-neutral-300 focus:ring-primary-500"
+                }`}
               >
                 <option value="period">{t("calendar.typePeriod")}</option>
                 <option value="predicted">{t("calendar.typePredicted")}</option>
                 <option value="ovulation">{t("calendar.typeOvulation")}</option>
               </select>
+              {formErrors.type && (
+                <p className="text-red-500 text-sm mt-1">{formErrors.type}</p>
+              )}
             </div>
             {/* 只在 period 类型时显示疼痛等级 */}
             {formData.type === "period" && (
@@ -422,9 +472,16 @@ export default function CalendarComponent() {
                         painLevel: parseInt(e.target.value, 10),
                       })
                     }
-                    className="relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider"
+                    className={`relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider ${
+                      formErrors.painLevel 
+                        ? "border-2 border-red-500" 
+                        : ""
+                    }`}
                   />
                 </div>
+                  {formErrors.painLevel && (
+                    <p className="text-red-500 text-sm mt-1">{formErrors.painLevel}</p>
+                  )}
                   <div className="flex justify-between text-xs text-neutral-500 mt-1">
                     <span>{t("calendar.painLevelMin")}</span>
                     <span>{t("calendar.painLevelMax")}</span>

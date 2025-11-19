@@ -5654,7 +5654,7 @@
                 {
                   "situation": "Seeking Understanding",
                   "tone": "Intimate",
-                  "template": ""I'm experiencing some pain and my emotions might fluctuate. Can you understand and give me some time and space? I'll recover soon."",
+                  "template": "\"I'm experiencing some pain and my emotions might fluctuate. Can you understand and give me some time and space? I'll recover soon.\"",
                   "copyText": "Copy Text"
                 }
               ]

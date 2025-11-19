@@ -5629,9 +5629,7 @@
               "salutation": "Good morning.",
               "body": "Due to severe menstrual discomfort (dysmenorrhea) that began this morning, I am having difficulty concentrating and performing my duties effectively. My physical condition also does not allow me to commute. To ensure work quality and recovery, I would like to request to rest at home/work remotely for the day.\n\nI have already [briefly explain arrangements, e.g., \"completed and sent the X report to [Colleague's Name]\"] and will remain available by phone and email for any urgent matters.\n\nI apologize for any inconvenience this may cause and appreciate your understanding and support.",
               "closing": "Best regards,",
-              "signature": "[Your Name]
-[Your Title]
-[Date]"
+              "signature": "[Your Name]\n[Your Title]\n[Date]"
             },
             "english": {
               "subject": "Sick Leave Request - [Your Name] - [Date]",
@@ -5643,9 +5641,7 @@ To ensure my work responsibilities are covered, I would like to request to rest 
 
 I apologize for any inconvenience this may cause and appreciate your understanding and support.",
               "closing": "Best regards,",
-              "signature": "[Your Name]
-[Your Title]
-[Date]"
+              "signature": "[Your Name]\n[Your Title]\n[Date]"
             }
           },
           "templates": [

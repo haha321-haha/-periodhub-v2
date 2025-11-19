@@ -5635,11 +5635,7 @@
               "subject": "Sick Leave Request - [Your Name] - [Date]",
               "greeting": "Dear [Manager's Name],",
               "salutation": "Good morning.",
-              "body": "I am writing to request a sick leave for today, [Date], due to severe menstrual pain (dysmenorrhea) that began this morning. The discomfort is making it difficult for me to concentrate and perform my duties effectively, and I do not feel well enough to commute.
-
-To ensure my work responsibilities are covered, I would like to request to rest at home / work remotely for the day. I have already [briefly explain arrangements, e.g., "completed and sent the X report to [Colleague's Name]"] and will remain available by phone and email for any urgent matters.
-
-I apologize for any inconvenience this may cause and appreciate your understanding and support.",
+              "body": "I am writing to request a sick leave for today, [Date], due to severe menstrual pain (dysmenorrhea) that began this morning. The discomfort is making it difficult for me to concentrate and perform my duties effectively, and I do not feel well enough to commute.\n\nTo ensure my work responsibilities are covered, I would like to request to rest at home / work remotely for the day. I have already [briefly explain arrangements, e.g., \"completed and sent the X report to [Colleague's Name]\"] and will remain available by phone and email for any urgent matters.\n\nI apologize for any inconvenience this may cause and appreciate your understanding and support.",
               "closing": "Best regards,",
               "signature": "[Your Name]\n[Your Title]\n[Date]"
             }

@@ -3440,7 +3440,23 @@
       "title": "Nutrition Recommendations",
       "noResults": "No food found",
       "selectedFoods": "Selected Foods",
-      "planGenerated": "Meal plan generated"
+      "planGenerated": "Meal plan generated",
+      "noFoodsSelected": "Please select some foods from recommendations first, then generate meal plan.",
+      "generateError": "An error occurred while generating the meal plan. Please try again.",
+      "savePlan": "Save",
+      "planSaved": "Meal plan saved",
+      "savedPlans": "Saved Meal Plans",
+      "planDeleted": "Meal plan deleted",
+      "planLoaded": "Meal plan loaded",
+      "loadPlan": "Load this plan",
+      "foodNature": "Nature",
+      "recommendedFoods": "Recommended Foods",
+      "mainBenefits": "Main Benefits",
+      "compatibility": {
+        "conflictDetected": "Cold-heat nature conflict detected: {warmCount} warm foods and {coolCount} cool foods",
+        "suggestion": "Suggestion: Separate warm and cool foods, or add neutral foods as a buffer",
+        "balanced": "Neutral foods dominate, good balance"
+      }
     },
     "patterns": {
       "crampsBloating": "Cramps & Bloating",

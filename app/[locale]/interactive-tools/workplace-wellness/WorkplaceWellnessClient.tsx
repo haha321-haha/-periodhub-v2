@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import dynamic from "next/dynamic";
 import StorageWarningToast from "./components/StorageWarningToast";
 import DebugPanel from "./components/DebugPanel";
+import { SimpleToastProvider } from "./components/SimpleToast";
 
 // 动态导入组件以优化性能
 const WorkplaceWellnessHeader = dynamic(
@@ -193,14 +194,15 @@ export default function WorkplaceWellnessClient({ locale: propLocale }: Workplac
   const locale = propLocale || hookLocale;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* 存储警告提示 */}
-      <StorageWarningToast />
-      
-      {/* 调试面板 - 仅开发环境 */}
-      <DebugPanel />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <SimpleToastProvider>
+      <div className="min-h-screen bg-gray-50">
+        {/* 存储警告提示 */}
+        <StorageWarningToast />
+        
+        {/* 调试面板 - 仅开发环境 */}
+        <DebugPanel />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 面包屑导航 */}
         <Breadcrumb
           items={[
@@ -220,8 +222,9 @@ export default function WorkplaceWellnessClient({ locale: propLocale }: Workplac
 
         {/* 页脚 */}
         <Footer />
+        </div>
       </div>
-    </div>
+    </SimpleToastProvider>
   );
 }
 

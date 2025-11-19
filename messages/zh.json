@@ -9896,7 +9896,23 @@
       "title": "营养建议",
       "noResults": "没有找到相关食物",
       "selectedFoods": "已选食物",
-      "planGenerated": "膳食计划已生成"
+      "planGenerated": "膳食计划已生成",
+      "noFoodsSelected": "请先从推荐食物中选择一些食物，然后再生成膳食计划。",
+      "generateError": "生成膳食计划时出错，请重试。",
+      "savePlan": "保存",
+      "planSaved": "食谱已保存",
+      "savedPlans": "已保存的食谱",
+      "planDeleted": "食谱已删除",
+      "planLoaded": "食谱已加载",
+      "loadPlan": "加载此食谱",
+      "foodNature": "食物性质",
+      "recommendedFoods": "推荐食物",
+      "mainBenefits": "主要功效",
+      "compatibility": {
+        "conflictDetected": "检测到寒热性质冲突：{warmCount}种温性食物与{coolCount}种凉性食物同时存在",
+        "suggestion": "建议：将温性和凉性食物分开搭配，或添加中性食物作为缓冲",
+        "balanced": "中性食物较多，搭配较为平衡"
+      }
     },
     "patterns": {
       "crampsBloating": "痉挛腹胀",

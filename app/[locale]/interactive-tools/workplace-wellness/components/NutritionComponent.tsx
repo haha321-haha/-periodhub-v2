@@ -6,7 +6,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, Plus, ListChecks } from "lucide-react";
+import { Search, Plus, ListChecks, Save, Trash2, BookOpen } from "lucide-react";
 import {
   useNutrition,
   useWorkplaceWellnessActions,
@@ -15,17 +15,29 @@ import { useLocale } from "next-intl";
 import { getNutritionData } from "../data";
 import { useTranslations } from "next-intl";
 import { NutritionRecommendation } from "../types";
+import { useSimpleToast } from "./SimpleToast";
+import { checkFoodCompatibility, optimizeFoodDistribution } from "../utils/foodCompatibility";
 
 export default function NutritionComponent() {
   const nutrition = useNutrition();
   const locale = useLocale();
   const { updateNutrition } = useWorkplaceWellnessActions();
   const t = useTranslations("workplaceWellness");
+  const toast = useSimpleToast();
 
   const nutritionData = getNutritionData(locale);
   const [searchTerm, setSearchTerm] = useState("");
   const [mealPlan, setMealPlan] = useState<NutritionRecommendation[]>([]);
   const [generatedSuggestions, setGeneratedSuggestions] = useState<Record<string, string>>({});
+  const [savedMealPlans, setSavedMealPlans] = useState<Array<{
+    id: string;
+    name: string;
+    phase: string;
+    foods: NutritionRecommendation[];
+    suggestions: Record<string, string>;
+    createdAt: Date;
+  }>>([]);
+  const [showSavedPlans, setShowSavedPlans] = useState(false);
 
   // 过滤营养数据 - 基于HVsLYEp的过滤逻辑
   const filteredFoods = useMemo(() => {
@@ -53,6 +65,12 @@ export default function NutritionComponent() {
     e.stopPropagation();
 
     try {
+      // 检查是否有已选择的食物
+      if (mealPlan.length === 0) {
+        toast.addToast("warning", t("nutrition.noFoodsSelected"));
+        return;
+      }
+
       // 保存当前的体质类型和阶段到store
       updateNutrition({
         selectedPhase: nutrition.selectedPhase,
@@ -62,29 +80,87 @@ export default function NutritionComponent() {
       // 等待一小段时间让持久化完成
       await new Promise(resolve => setTimeout(resolve, 100));
       
-      // 基于当前选择的阶段生成个性化膳食建议
+      // 检查食物兼容性
+      const compatibility = checkFoodCompatibility(mealPlan, locale);
+      
+      // 如果有兼容性问题，显示警告
+      if (!compatibility.compatible && compatibility.warnings.length > 0) {
+        compatibility.warnings.forEach((warning) => {
+          // 处理模板字符串格式的翻译键
+          if (warning.includes("|")) {
+            const [key, ...params] = warning.split("|");
+            const paramObj: Record<string, string> = {};
+            params.forEach((param) => {
+              const [k, v] = param.split(":");
+              paramObj[k] = v;
+            });
+            const translated = t(key, paramObj);
+            toast.addToast("warning", translated);
+          } else {
+            toast.addToast("warning", t(warning));
+          }
+        });
+        if (compatibility.suggestions.length > 0) {
+          compatibility.suggestions.forEach((suggestion) => {
+            toast.addToast("info", t(suggestion));
+          });
+        }
+      }
+      
+      // 基于已选择的食物生成具体的膳食计划
       const meals = ["breakfast", "lunch", "dinner", "snack"] as const;
       const phase = nutrition.selectedPhase;
       
-      // 生成针对当前阶段的个性化建议
+      // 使用优化的食物分配算法，避免寒热冲突
+      const optimizedDistribution = optimizeFoodDistribution(mealPlan, meals);
+      
+      // 将已选择的食物分配到不同的餐次
       const suggestions: Record<string, string> = {};
+      
       meals.forEach((meal) => {
-        // 尝试获取阶段特定的建议，如果不存在则使用通用建议
-        const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${meal}`;
-        const genericKey = `nutrition.mealSuggestions.${meal}`;
+        // 使用优化后的分配结果
+        const mealFoods = optimizedDistribution[meal] || [];
         
-        try {
-          // 先尝试获取阶段特定的建议
-          const phaseSuggestion = t(phaseSpecificKey);
-          // 如果返回的键名和输入相同，说明翻译不存在，使用通用建议
-          if (phaseSuggestion === phaseSpecificKey) {
-            suggestions[meal] = t(genericKey);
-          } else {
-            suggestions[meal] = phaseSuggestion;
+        if (mealFoods.length > 0) {
+          // 生成该餐次的具体食谱
+          const foodNames = mealFoods.map(f => f.name).join("、");
+          const benefits = [...new Set(mealFoods.flatMap(f => f.benefits))].slice(0, 3).join("、");
+          
+          // 检查该餐次的食物性质
+          const natures = [...new Set(mealFoods.map(f => f.tcmNature))];
+          const natureText = natures.map(n => t(`nutrition.tcmNature.${n}`)).join("、");
+          
+          // 获取阶段相关的建议作为补充说明
+          const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${meal}`;
+          let phaseTip = "";
+          try {
+            const tip = t(phaseSpecificKey);
+            if (tip !== phaseSpecificKey) {
+              phaseTip = `\n\n💡 ${tip}`;
+            }
+          } catch {
+            // 忽略错误
           }
-        } catch {
-          // 如果出错，使用通用建议
-          suggestions[meal] = t(genericKey);
+          
+          // 添加性质信息
+          const natureInfo = `\n\n🌿 ${t("nutrition.foodNature")}：${natureText}`;
+          
+          suggestions[meal] = `🍽️ ${t("nutrition.recommendedFoods")}：${foodNames}\n\n✨ ${t("nutrition.mainBenefits")}：${benefits}${natureInfo}${phaseTip}`;
+        } else {
+          // 如果该餐次没有食物，显示通用建议
+          const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${meal}`;
+          const genericKey = `nutrition.mealSuggestions.${meal}`;
+          
+          try {
+            const phaseSuggestion = t(phaseSpecificKey);
+            if (phaseSuggestion === phaseSpecificKey) {
+              suggestions[meal] = t(genericKey);
+            } else {
+              suggestions[meal] = phaseSuggestion;
+            }
+          } catch {
+            suggestions[meal] = t(genericKey);
+          }
         }
       });
 
@@ -94,14 +170,10 @@ export default function NutritionComponent() {
       console.log("Generated meal plan for phase:", phase, suggestions);
       
       // 显示成功提示
-      alert(t("nutrition.planGenerated"));
+      toast.addToast("success", t("nutrition.planGenerated"));
     } catch (error) {
       console.error("生成膳食计划时出错:", error);
-      alert(
-        locale === "zh"
-          ? "生成膳食计划时出错，请重试。"
-          : "An error occurred while generating the meal plan. Please try again."
-      );
+      toast.addToast("error", t("nutrition.generateError"));
     }
   };
 
@@ -334,13 +406,113 @@ export default function NutritionComponent() {
           </div>
         )}
 
-        <button
-          type="button"
-          onClick={generateMealPlan}
-          className="w-full rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
-        >
-          <ListChecks className="w-4 h-4" /> {t("nutrition.generateButton")}
-        </button>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={generateMealPlan}
+            className="flex-1 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
+          >
+            <ListChecks className="w-4 h-4" /> {t("nutrition.generateButton")}
+          </button>
+          
+          {Object.keys(generatedSuggestions).length > 0 && (
+            <button
+              type="button"
+              onClick={() => {
+                const planName = locale === "zh"
+                  ? `${t(`nutrition.phases.${nutrition.selectedPhase}`)} - ${new Date().toLocaleDateString()}`
+                  : `${t(`nutrition.phases.${nutrition.selectedPhase}`)} - ${new Date().toLocaleDateString()}`;
+                
+                const newPlan = {
+                  id: `plan-${Date.now()}`,
+                  name: planName,
+                  phase: nutrition.selectedPhase,
+                  foods: [...mealPlan],
+                  suggestions: { ...generatedSuggestions },
+                  createdAt: new Date(),
+                };
+                
+                setSavedMealPlans((prev) => [newPlan, ...prev]);
+                toast.addToast("success", t("nutrition.planSaved"));
+              }}
+              className="px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white"
+            >
+              <Save className="w-4 h-4" />
+              {t("nutrition.savePlan")}
+            </button>
+          )}
+          
+          {savedMealPlans.length > 0 && (
+            <button
+              type="button"
+              onClick={() => setShowSavedPlans(!showSavedPlans)}
+              className="px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 border border-neutral-300 hover:bg-neutral-50 text-neutral-700"
+            >
+              <BookOpen className="w-4 h-4" />
+              {savedMealPlans.length}
+            </button>
+          )}
+        </div>
+        
+        {/* 已保存的食谱列表 */}
+        {showSavedPlans && savedMealPlans.length > 0 && (
+          <div className="mt-6 space-y-3">
+            <h5 className="font-medium text-neutral-900 mb-3">
+              {t("nutrition.savedPlans")}
+            </h5>
+            {savedMealPlans.map((plan) => (
+              <div
+                key={plan.id}
+                className="p-4 bg-neutral-50 rounded-lg border border-neutral-200"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h6 className="font-medium text-neutral-900">{plan.name}</h6>
+                    <p className="text-xs text-neutral-500 mt-1">
+                      {plan.createdAt.toLocaleDateString()} - {t(`nutrition.phases.${plan.phase}`)}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSavedMealPlans((prev) => prev.filter((p) => p.id !== plan.id));
+                      toast.addToast("success", t("nutrition.planDeleted"));
+                    }}
+                    className="text-red-600 hover:text-red-800 p-1"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+                
+                <div className="space-y-2 mb-3">
+                  {Object.entries(plan.suggestions).map(([meal, suggestion]) => (
+                    <div key={meal} className="text-sm">
+                      <span className="font-medium text-neutral-700">
+                        {t(`nutrition.meals.${meal}`)}:
+                      </span>
+                      <p className="text-neutral-600 mt-1 whitespace-pre-line text-xs">
+                        {suggestion}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMealPlan([...plan.foods]);
+                    setGeneratedSuggestions({ ...plan.suggestions });
+                    setShowSavedPlans(false);
+                    toast.addToast("info", t("nutrition.planLoaded"));
+                  }}
+                  className="text-sm text-primary-600 hover:text-primary-800 font-medium"
+                >
+                  {t("nutrition.loadPlan")}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

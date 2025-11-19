@@ -5666,13 +5666,13 @@
                 {
                   "situation": "Rescheduling Plans",
                   "tone": "Casual",
-                  "template": ""Sorry, I'm not feeling well today and might not be at my best. Can we reschedule for another time? I'll make it up to you!"",
+                  "template": "\"Sorry, I'm not feeling well today and might not be at my best. Can we reschedule for another time? I'll make it up to you!\"",
                   "copyText": "Copy Text"
                 },
                 {
                   "situation": "Party Participation",
                   "tone": "Casual",
-                  "template": ""I might come to the party, but may need to leave early. If I seem tired, please understand."",
+                  "template": "\"I might come to the party, but may need to leave early. If I seem tired, please understand.\"",
                   "copyText": "Copy Text"
                 }
               ]
@@ -5684,13 +5684,13 @@
                 {
                   "situation": "Leave Request",
                   "tone": "Formal",
-                  "template": ""Hello, I'm not feeling well today and may need to take half a day off to handle health issues. I'll finish other tasks as soon as possible."",
+                  "template": "\"Hello, I'm not feeling well today and may need to take half a day off to handle health issues. I'll finish other tasks as soon as possible.\"",
                   "copyText": "Copy Text"
                 },
                 {
                   "situation": "Work Adjustment",
                   "tone": "Formal",
-                  "template": ""Sorry, I'm not feeling well today and my work efficiency might be affected. Please prioritize urgent matters, and I'll complete other tasks as soon as possible."",
+                  "template": "\"Sorry, I'm not feeling well today and my work efficiency might be affected. Please prioritize urgent matters, and I'll complete other tasks as soon as possible.\"",
                   "copyText": "Copy Text"
                 }
               ]

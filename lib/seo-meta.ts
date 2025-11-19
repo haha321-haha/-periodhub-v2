@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { SEO_DEFAULTS } from "./seo-constants";
 
 interface SEOMetaProps {
   title: string;
@@ -15,7 +16,7 @@ export function generateAdvancedMeta({
   description,
   keywords = [],
   canonical,
-  ogImage = "/og-default.jpg",
+  ogImage = SEO_DEFAULTS.OG_IMAGE,
   noindex = false,
   structuredData,
 }: SEOMetaProps): Metadata {
@@ -46,7 +47,7 @@ export function generateAdvancedMeta({
       title: fullTitle,
       description,
       url: canonical,
-      siteName: "PeriodHub",
+      siteName: SEO_DEFAULTS.SITE_NAME,
       images: [
         {
           url: ogImage,
@@ -65,7 +66,7 @@ export function generateAdvancedMeta({
       title: fullTitle,
       description,
       images: [ogImage],
-      creator: "@periodhub",
+      creator: SEO_DEFAULTS.TWITTER_CREATOR,
     },
 
     // 高级元数据
@@ -80,8 +81,8 @@ export function generateAdvancedMeta({
 
     // 其他重要元数据
     other: {
-      "theme-color": "#ff6b9d",
-      "msapplication-TileColor": "#ff6b9d",
+      "theme-color": SEO_DEFAULTS.THEME_COLOR,
+      "msapplication-TileColor": SEO_DEFAULTS.THEME_COLOR,
       "apple-mobile-web-app-capable": "yes",
       "apple-mobile-web-app-status-bar-style": "default",
       "format-detection": "telephone=no",

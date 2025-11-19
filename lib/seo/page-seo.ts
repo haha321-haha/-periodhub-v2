@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getCanonicalUrl } from "@/lib/canonical-config";
 import { generateAdvancedMeta } from "@/lib/seo-meta";
+import { SEO_DEFAULTS } from "@/lib/seo-constants";
 
 // 结构化数据类型
 export type StructuredDataType = 
@@ -39,7 +40,7 @@ export function generatePageSEO({
   structuredDataType = "WebPage",
   additionalStructuredData = {},
   noindex = false,
-  ogImage = "/og-default.jpg",
+  ogImage = SEO_DEFAULTS.OG_IMAGE,
 }: GeneratePageSEOParams): GeneratePageSEOResult {
   const canonicalUrl = getCanonicalUrl(locale, path);
   

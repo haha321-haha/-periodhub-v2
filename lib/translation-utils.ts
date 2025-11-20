@@ -14,7 +14,7 @@ export function useSafeTranslations(namespace?: string) {
 
   const safeT = (
     key: string,
-    params?: Record<string, any>,
+    params?: Record<string, unknown>,
     fallback?: string,
   ): string => {
     try {
@@ -55,8 +55,6 @@ export function validateTranslationKey(
   key: string,
   namespace?: string,
 ): boolean {
-  const fullKey = namespace ? `${namespace}.${key}` : key;
-
   // 这里可以添加更复杂的验证逻辑
   // 比如检查键是否存在于翻译文件中
 

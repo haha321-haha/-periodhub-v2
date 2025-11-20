@@ -68,7 +68,7 @@ export function ErrorHandlingWrapper({
     setHealthStatus('checking');
     try {
       const report = await dataIntegrityService.checkDataIntegrity();
-      
+
       if (report.isValid) {
         setHealthStatus('healthy');
       } else if (report.corruptionLevel === 'minor') {
@@ -76,7 +76,7 @@ export function ErrorHandlingWrapper({
       } else {
         setHealthStatus('error');
       }
-      
+
       setLastHealthCheck(new Date());
     } catch (error) {
       console.error('Health check failed:', error);
@@ -96,7 +96,7 @@ export function ErrorHandlingWrapper({
       const lastBackup = localStorage.getItem('enhanced_pain_tracker_last_backup');
       const lastBackupDate = lastBackup ? new Date(lastBackup) : null;
       const now = new Date();
-      
+
       // Auto backup every 7 days
       if (!lastBackupDate || (now.getTime() - lastBackupDate.getTime()) > 7 * 24 * 60 * 60 * 1000) {
         const backupData = {
@@ -119,13 +119,13 @@ export function ErrorHandlingWrapper({
   useEffect(() => {
     // Initial health check
     performHealthCheck();
-    
+
     // Initial auto backup
     performAutoBackup();
 
     // Set up periodic health checks (every 10 minutes)
     const healthCheckInterval = setInterval(performHealthCheck, 10 * 60 * 1000);
-    
+
     // Set up periodic auto backup (every hour)
     const backupInterval = setInterval(performAutoBackup, 60 * 60 * 1000);
 
@@ -144,11 +144,11 @@ export function ErrorHandlingWrapper({
       const records = JSON.parse(localStorage.getItem('enhanced_pain_tracker_records') || '[]');
       const cutoffDate = new Date();
       cutoffDate.setFullYear(cutoffDate.getFullYear() - 1); // Keep only last year
-      
-      const filteredRecords = records.filter((record: any) => 
+
+      const filteredRecords = records.filter((record: any) =>
         new Date(record.date) > cutoffDate
       );
-      
+
       localStorage.setItem('enhanced_pain_tracker_records', JSON.stringify(filteredRecords));
       performHealthCheck();
     };
@@ -210,7 +210,7 @@ export function ErrorHandlingWrapper({
                 {showConnectionStatus && (
                   <ConnectionStatus showDetails={true} />
                 )}
-                
+
                 {enableHealthChecks && (
                   <div className="flex items-center">
                     {getHealthStatusIcon()}
@@ -223,7 +223,7 @@ export function ErrorHandlingWrapper({
                   </div>
                 )}
               </div>
-              
+
               <div className="flex items-center space-x-2">
                 <button
                   onClick={performHealthCheck}
@@ -232,7 +232,7 @@ export function ErrorHandlingWrapper({
                 >
                   Check Health
                 </button>
-                
+
                 <button
                   onClick={() => setShowBackupSystem(true)}
                   className="text-xs text-gray-600 hover:text-gray-800 transition-colors"
@@ -279,7 +279,7 @@ export function ErrorHandlingWrapper({
                     </svg>
                   </button>
                 </div>
-                
+
                 <BackupRestoreSystem
                   onBackupComplete={(success) => {
                     if (success) {

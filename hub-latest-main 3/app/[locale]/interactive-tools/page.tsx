@@ -17,11 +17,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'interactiveToolsPage' });
-  
+
   return {
     title: t('title'),
     description: t('description'),
-    keywords: locale === 'zh' 
+    keywords: locale === 'zh'
       ? '经期健康管理,症状评估,疼痛追踪,痛经管理,健康工具,个性化建议,数据分析'
       : 'menstrual health management,symptom assessment,pain tracking,period pain management,health tools,personalized recommendations,data analytics',
     alternates: {
@@ -62,7 +62,7 @@ export default async function InteractiveToolsPage({
   const workplaceTools = [
     {
       title: locale === 'zh' ? '职场健康日历' : 'Workplace Wellness Calendar',
-      description: locale === 'zh' 
+      description: locale === 'zh'
         ? '专业的职场健康管理工具，帮助您追踪经期对工作的影响，提供个性化的工作调整建议和健康管理方案。'
         : 'Professional workplace wellness management tool to track menstrual impact on work and provide personalized work adjustment recommendations.',
       href: `/${locale}/interactive-tools/workplace-wellness`,
@@ -73,7 +73,7 @@ export default async function InteractiveToolsPage({
     },
     {
       title: locale === 'zh' ? '工作影响计算器' : 'Work Impact Calculator',
-      description: locale === 'zh' 
+      description: locale === 'zh'
         ? '专业的痛经影响评估工具，分析症状对工作和生活的影响程度，提供个性化的管理建议和职场适应策略。'
         : 'Professional period pain impact assessment tool that analyzes how symptoms affect work and daily life, providing personalized management recommendations and workplace adaptation strategies.',
       href: `/${locale}/interactive-tools/period-pain-impact-calculator`,
@@ -128,7 +128,7 @@ export default async function InteractiveToolsPage({
     },
     {
       title: locale === 'zh' ? '营养推荐生成器' : 'Nutrition Recommendation Generator',
-      description: locale === 'zh' 
+      description: locale === 'zh'
         ? '基于您的月经周期、健康目标和中医体质，提供科学的个性化营养建议。使用前请先完成周期追踪和体质测试。'
         : 'Get personalized nutrition recommendations based on your menstrual cycle, health goals, and TCM constitution. Complete cycle tracking and constitution test first.',
       href: `/${locale}/interactive-tools/nutrition-recommendation-generator`,
@@ -177,14 +177,14 @@ export default async function InteractiveToolsPage({
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-8 sm:space-y-12 mobile-safe-area">
           {/* Breadcrumb Navigation - Temporarily disabled */}
-          {/* <Breadcrumb 
+          {/* <Breadcrumb
             items={[
-              { 
+              {
                 label: locale === 'zh' ? '互动工具' : 'Interactive Tools'
               }
-            ]} 
+            ]}
           /> */}
-          
+
           {/* Page Header - 移动端优化 */}
           <header className="text-center px-4 sm:px-0">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary-700 mb-3 sm:mb-4 leading-tight">
@@ -232,7 +232,7 @@ export default async function InteractiveToolsPage({
                   {locale === 'zh' ? '职场健康管理专栏' : 'Workplace Wellness Column'}
                 </h2>
                 <p className="text-base sm:text-lg text-blue-700 max-w-3xl mx-auto leading-relaxed">
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '为职场女性量身定制的经期健康管理解决方案，帮助您在工作环境中更好地管理经期健康'
                     : 'Tailored menstrual health management solutions for working women to better manage period health in the workplace'
                   }
@@ -246,15 +246,15 @@ export default async function InteractiveToolsPage({
                     <div className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-full mb-6 ${tool.isPrimary ? 'bg-blue-200' : 'bg-purple-100'}`}>
                       {renderIcon(tool.iconType, tool.iconColor)}
                     </div>
-                    
+
                     <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 leading-tight">
                       {tool.title}
                     </h3>
-                    
+
                     <p className="text-sm sm:text-base text-gray-600 mb-6 flex-grow leading-relaxed">
                       {tool.description}
                     </p>
-                    
+
                     <Link href={tool.href} className={`w-full mobile-touch-target text-sm sm:text-base px-6 py-4 text-center font-semibold rounded-lg transition-all duration-300 ${tool.isPrimary ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg' : 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 hover:shadow-lg'}`}>
                       {tool.cta}
                     </Link>
@@ -271,7 +271,7 @@ export default async function InteractiveToolsPage({
                 {t('otherTools.title')}
               </h2>
               <p className="text-base text-gray-600 max-w-2xl mx-auto">
-                {locale === 'zh' 
+                {locale === 'zh'
                   ? '更多专业的经期健康管理工具，帮助您全面了解和管理经期健康'
                   : 'More professional menstrual health management tools to help you comprehensively understand and manage period health'
                 }
@@ -287,19 +287,19 @@ export default async function InteractiveToolsPage({
                       {locale === 'zh' ? '需要前置条件' : 'Prerequisites'}
                     </div>
                   )}
-                  
+
                   <div className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-full mb-4 sm:mb-6 ${tool.requiresPrerequisites ? 'bg-orange-100' : 'bg-neutral-100'}`}>
                     {renderIcon(tool.iconType, tool.iconColor)}
                   </div>
-                  
+
                   <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-neutral-800 mb-2 sm:mb-3 leading-tight">
                     {tool.title}
                   </h2>
-                  
+
                   <p className="text-sm sm:text-base text-neutral-600 mb-4 sm:mb-6 flex-grow leading-relaxed">
                     {tool.description}
                   </p>
-                  
+
                   {/* 前置条件说明 */}
                   {tool.requiresPrerequisites && (
                     <div className="mb-4 p-3 bg-orange-100 rounded-lg border border-orange-200">
@@ -316,7 +316,7 @@ export default async function InteractiveToolsPage({
                       </div>
                     </div>
                   )}
-                  
+
                   {tool.href === "#" ? (
                     <span className="btn-disabled w-full mobile-touch-target text-sm sm:text-base px-4 py-3">{tool.cta}</span>
                   ) : (

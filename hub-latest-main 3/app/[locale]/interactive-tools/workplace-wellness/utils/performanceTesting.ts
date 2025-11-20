@@ -44,13 +44,13 @@ export class PerformanceTestSuite {
 
     try {
       PerformanceMonitor.startMeasure(testName);
-      
+
       if (testFunction instanceof Promise) {
         await testFunction();
       } else {
         testFunction();
       }
-      
+
       PerformanceMonitor.endMeasure(testName);
     } catch (err) {
       success = false;

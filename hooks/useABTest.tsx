@@ -19,30 +19,30 @@ export interface ABTestResult {
 
 /**
  * A/B测试Hook - 支持多变量测试
- * 
+ *
  * @param testConfig 测试配置
  * @returns 当前变体和事件追踪函数
  */
 export function useABTest(testConfig: ABTestConfig): ABTestResult {
   const { testId, variants, expiryDays = 30 } = testConfig;
-  
+
   const [currentVariant, setCurrentVariant] = useState<ABTestVariant>(() => {
     // 服务器端直接返回第一个变体作为默认值，确保与客户端一致
     if (typeof window === 'undefined') {
       return variants[0];
     }
-    
+
     // 客户端首次渲染也返回第一个变体，确保与服务器端一致
     // 后续在useEffect中进行真正的变体分配
     return variants[0];
   });
-  
+
   const [hasInitialized, setHasInitialized] = useState(false);
 
   // 仅在客户端完全挂载后初始化变体选择
   useEffect(() => {
     if (hasInitialized) return;
-    
+
     // 优先从localStorage获取已分配的变体（保持用户一致性）
     const stored = localStorage.getItem(`ab_test_${testId}`);
     if (stored) {
@@ -58,7 +58,7 @@ export function useABTest(testConfig: ABTestConfig): ABTestResult {
         console.warn('Failed to parse stored AB test variant:', error);
       }
     }
-    
+
     // 根据权重分配变体
     const assignedVariant = assignVariant(variants);
     setCurrentVariant(assignedVariant);
@@ -70,7 +70,7 @@ export function useABTest(testConfig: ABTestConfig): ABTestResult {
     if (typeof window !== 'undefined' && hasInitialized) {
       const expiryDate = new Date();
       expiryDate.setDate(expiryDate.getDate() + expiryDays);
-      
+
       localStorage.setItem(`ab_test_${testId}`, JSON.stringify({
         variantId: currentVariant.id,
         expiry: expiryDate.toISOString(),
@@ -101,7 +101,7 @@ export function useABTest(testConfig: ABTestConfig): ABTestResult {
         timestamp: new Date().toISOString()
       });
     }
-    
+
     // 同时发送到控制台（开发调试）
     if (process.env.NODE_ENV === 'development') {
       console.log(`[AB Test] ${eventName}:`, {
@@ -124,7 +124,7 @@ export function useABTest(testConfig: ABTestConfig): ABTestResult {
 function assignVariant(variants: ABTestVariant[]): ABTestVariant {
   const totalWeight = variants.reduce((sum, v) => sum + v.weight, 0);
   const random = Math.random() * totalWeight;
-  
+
   let cumulative = 0;
   for (const variant of variants) {
     cumulative += variant.weight;
@@ -132,7 +132,7 @@ function assignVariant(variants: ABTestVariant[]): ABTestVariant {
       return variant;
     }
   }
-  
+
   // 兜底：返回第一个变体
   return variants[0];
 }
@@ -142,9 +142,9 @@ function assignVariant(variants: ABTestVariant[]): ABTestVariant {
  */
 export function getUserABTestVariants(): Record<string, string> {
   if (typeof window === 'undefined') return {};
-  
+
   const variants: Record<string, string> = {};
-  
+
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     if (key?.startsWith('ab_test_')) {
@@ -159,7 +159,7 @@ export function getUserABTestVariants(): Record<string, string> {
       }
     }
   }
-  
+
   return variants;
 }
 
@@ -168,10 +168,10 @@ export function getUserABTestVariants(): Record<string, string> {
  */
 export function cleanupExpiredABTests(): void {
   if (typeof window === 'undefined') return;
-  
+
   const now = new Date();
   const keysToRemove: string[] = [];
-  
+
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     if (key?.startsWith('ab_test_')) {
@@ -186,9 +186,9 @@ export function cleanupExpiredABTests(): void {
       }
     }
   }
-  
+
   keysToRemove.forEach(key => localStorage.removeItem(key));
-  
+
   if (keysToRemove.length > 0 && process.env.NODE_ENV === 'development') {
     console.log(`Cleaned up ${keysToRemove.length} expired AB test(s)`);
   }

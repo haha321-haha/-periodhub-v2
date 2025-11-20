@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
 
     // 数据清洗和验证
     const cleanedSessionData = cleanSessionData(sessionData);
-    
+
     // 存储会话数据
     const existingIndex = sessionStore.findIndex(s => s.sessionId === sessionData.sessionId);
     if (existingIndex >= 0) {
@@ -134,7 +134,7 @@ export async function DELETE(request: NextRequest) {
     if (userId) {
       // 删除特定用户的数据（GDPR合规）
       sessionStore = sessionStore.filter(s => s.userId !== userId);
-      
+
       return NextResponse.json<ApiResponse>({
         success: true,
         message: `用户 ${userId} 的数据已删除`,
@@ -145,7 +145,7 @@ export async function DELETE(request: NextRequest) {
     } else {
       // 清空所有数据（仅开发环境使用）
       sessionStore = [];
-      
+
       return NextResponse.json<ApiResponse>({
         success: true,
         message: '所有会话数据已清空',
@@ -181,10 +181,10 @@ function cleanSessionData(sessionData: RealUserSession): RealUserSession {
   if (!cleaned.device) cleaned.device = { type: 'desktop' as const, browser: 'unknown', os: 'unknown', screenResolution: 'unknown' };
   if (!cleaned.navigation) cleaned.navigation = { entryPage: '/', pagesVisited: [], timeOnEachPage: {}, scrollDepth: {} };
   if (!cleaned.interactions) cleaned.interactions = { clicks: 0, hovers: 0, formSubmissions: 0, timeSpent: 0 };
-  if (!cleaned.conversion) cleaned.conversion = { 
-    assessmentStarted: false, 
-    assessmentCompleted: false, 
-    paywallReached: false, 
+  if (!cleaned.conversion) cleaned.conversion = {
+    assessmentStarted: false,
+    assessmentCompleted: false,
+    paywallReached: false,
     feedbackSubmitted: false,
     phq9Started: false,
     phq9Completed: false

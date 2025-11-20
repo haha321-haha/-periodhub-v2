@@ -15,7 +15,7 @@ export default async function TechniquesPage({
   params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
-  
+
   // 重定向到主页面（Techniques内容已整合到主页面）
   redirect(`/${locale}/interactive-tools/stress-management`);
 }

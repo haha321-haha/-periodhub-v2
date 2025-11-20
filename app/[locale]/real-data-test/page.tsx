@@ -61,11 +61,11 @@ export default function RealDataSystemTest() {
       realDataCollector.recordPageView('/test-page');
       realDataCollector.recordInteraction('click');
       realDataCollector.recordConversion('assessmentStarted');
-      
+
       // 模拟完成评估
       await new Promise(resolve => setTimeout(resolve, 1000));
       realDataCollector.recordConversion('assessmentCompleted');
-      
+
       // 测试反馈收集
       const feedbackResult = await realDataCollector.collectFeedback({
         feature: 'stress_assessment',
@@ -101,10 +101,10 @@ export default function RealDataSystemTest() {
     try {
       const testUserId = 'test_user_' + Date.now();
       const variant = realDataABTestBridge.getDataCollectionReadiness();
-      
+
       // 测试数据就绪检查
       const readiness = realDataABTestBridge.getDataCollectionReadiness();
-      
+
       return {
         success: true,
         message: 'A/B测试分配功能正常',
@@ -126,13 +126,13 @@ export default function RealDataSystemTest() {
     try {
       // 测试数据质量检查
       const dataQuality = realDataAnalyzer.getDataQualityReport();
-      
+
       // 测试A/B测试分析
       const abTestAnalysis = realDataAnalyzer.analyzeRealABTest();
-      
+
       // 测试反馈分析
       const feedbackAnalysis = realDataAnalyzer.analyzeRealFeedback();
-      
+
       return {
         success: true,
         message: '数据分析功能正常',
@@ -222,23 +222,23 @@ export default function RealDataSystemTest() {
   // 生成建议
   const generateRecommendations = () => {
     const recommendations = [];
-    
+
     if (!testResults.dataCollection?.success) {
       recommendations.push('检查数据收集配置和用户同意设置');
     }
-    
+
     if (!testResults.apiEndpoints?.success) {
       recommendations.push('检查API端点配置和网络连接');
     }
-    
+
     if (testResults.dataAnalysis?.dataQuality?.totalSessions < 10) {
       recommendations.push('收集更多真实用户数据以进行有效分析');
     }
-    
+
     if (recommendations.length === 0) {
       recommendations.push('系统运行正常，可以开始收集真实用户数据');
     }
-    
+
     return recommendations;
   };
 
@@ -246,25 +246,25 @@ export default function RealDataSystemTest() {
     <div className="max-w-4xl mx-auto p-6">
       <div className="bg-white rounded-lg shadow-lg p-6">
         <h1 className="text-2xl font-bold mb-4">🧪 真实数据收集系统测试</h1>
-        
+
         <div className="mb-6">
           <p className="text-gray-600 mb-4">
             本页面用于测试Day 5升级后的真实数据收集和分析系统功能。
             测试包括：数据收集、A/B测试、数据分析、API端点等核心功能。
           </p>
-          
+
           <button
             onClick={runFullSystemTest}
             disabled={isRunning}
             className={`px-6 py-3 rounded-lg font-medium ${
-              isRunning 
-                ? 'bg-gray-400 cursor-not-allowed' 
+              isRunning
+                ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-blue-500 hover:bg-blue-600 text-white'
             }`}
           >
             {isRunning ? '测试中...' : '开始系统测试'}
           </button>
-          
+
           {currentStep && (
             <div className="mt-4 p-3 bg-blue-50 border-l-4 border-blue-400">
               <p className="text-blue-700">{currentStep}</p>
@@ -366,7 +366,7 @@ export default function RealDataSystemTest() {
                     <p className="text-xl font-semibold text-red-600">{testResults.finalReport.failedTests}</p>
                   </div>
                 </div>
-                
+
                 <div className="mb-4">
                   <h4 className="font-semibold mb-2">组件状态:</h4>
                   <div className="space-y-1">

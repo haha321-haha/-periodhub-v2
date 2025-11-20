@@ -55,7 +55,7 @@ export default function PainMechanismsGuide({ locale }: PainMechanismsGuideProps
           {isZh ? '🧠 痛经疼痛的医学原理' : '🧠 Medical Mechanisms of Period Pain'}
         </h2>
         <p className="text-gray-600">
-          {isZh 
+          {isZh
             ? '痛经的科学原理主要涉及三个生理过程：'
             : 'Period pain mechanisms involve three key physiological processes:'
           }
@@ -66,7 +66,7 @@ export default function PainMechanismsGuide({ locale }: PainMechanismsGuideProps
         {mechanisms.map((mechanism, index) => {
           const Icon = mechanism.icon;
           const isExpanded = expandedSection === mechanism.id;
-          
+
           return (
             <div key={mechanism.id} className="bg-white rounded-lg shadow-sm border border-gray-200">
               <button
@@ -94,7 +94,7 @@ export default function PainMechanismsGuide({ locale }: PainMechanismsGuideProps
                   )}
                 </div>
               </button>
-              
+
               {isExpanded && (
                 <div className="px-4 pb-4">
                   <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-purple-400">
@@ -127,8 +127,8 @@ export default function PainMechanismsGuide({ locale }: PainMechanismsGuideProps
             <li className="flex items-start">
               <span className="text-green-600 mr-2">•</span>
               <span className="text-gray-700">
-                {isZh 
-                  ? '阻断钙离子流入子宫平滑肌细胞，' 
+                {isZh
+                  ? '阻断钙离子流入子宫平滑肌细胞，'
                   : 'Block calcium influx into uterine smooth muscle cells, '
                 }
                 <span className="text-red-600 font-medium">
@@ -139,8 +139,8 @@ export default function PainMechanismsGuide({ locale }: PainMechanismsGuideProps
             <li className="flex items-start">
               <span className="text-green-600 mr-2">•</span>
               <span className="text-gray-700">
-                {isZh 
-                  ? '激活副交感神经系统，促进肌肉放松' 
+                {isZh
+                  ? '激活副交感神经系统，促进肌肉放松'
                   : 'Activate parasympathetic nervous system, promoting muscle relaxation'
                 }
               </span>
@@ -160,7 +160,7 @@ export default function PainMechanismsGuide({ locale }: PainMechanismsGuideProps
               <strong>
                 {isZh ? '临床研究显示：' : 'Clinical studies show: '}
               </strong>
-              {isZh 
+              {isZh
                 ? '每日200-400mg镁剂可将痛经强度降低40-60%'
                 : '200-400mg daily magnesium reduces period pain intensity by 40-60%'
               }

@@ -419,7 +419,7 @@ export function DocumentationFramework() {
                   <h3 className="font-semibold text-gray-800">{category.name}</h3>
                 </div>
                 <p className="text-sm text-gray-600 mb-3">{category.description}</p>
-                
+
                 <div className="space-y-2">
                   {category.items.map((item) => (
                     <div
@@ -499,7 +499,7 @@ export function DocumentationFramework() {
               </div>
             </div>
           </div>
-          
+
               {/* 文档内容 */}
               <div className="flex-1 p-6 overflow-y-auto">
                 {isEditing ? (

@@ -45,7 +45,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
       {
         type: 'pattern',
         title: locale === 'zh' ? '疼痛模式识别' : 'Pain Pattern Recognition',
-        description: locale === 'zh' 
+        description: locale === 'zh'
           ? '您的疼痛通常在经期前2-3天开始加重，建议提前准备缓解措施。'
           : 'Your pain typically intensifies 2-3 days before menstruation. Consider preparing relief measures in advance.',
         severity: 'medium'
@@ -170,17 +170,17 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
         <h3 className="text-lg font-medium text-gray-900 mb-4">
           {locale === 'zh' ? '疼痛程度分布' : 'Pain Level Distribution'}
         </h3>
-        
+
         <div className="space-y-4">
           {Object.entries(mockAnalytics.painDistribution).map(([level, count]) => {
             const percentage = (count / mockAnalytics.totalRecords) * 100;
-            const levelLabel = level === 'mild' 
+            const levelLabel = level === 'mild'
               ? (locale === 'zh' ? '轻度' : 'Mild')
               : level === 'moderate'
               ? (locale === 'zh' ? '中度' : 'Moderate')
               : (locale === 'zh' ? '重度' : 'Severe');
-            
-            const levelColor = level === 'mild' 
+
+            const levelColor = level === 'mild'
               ? 'bg-green-500'
               : level === 'moderate'
               ? 'bg-yellow-500'
@@ -192,7 +192,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
                   {levelLabel}
                 </div>
                 <div className="flex-1 bg-gray-200 rounded-full h-3">
-                  <div 
+                  <div
                     className={`h-3 rounded-full ${levelColor}`}
                     style={{ width: `${percentage}%` }}
                   />
@@ -213,7 +213,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
           <h3 className="text-lg font-medium text-gray-900 mb-4">
             {locale === 'zh' ? '常见疼痛位置' : 'Common Pain Locations'}
           </h3>
-          
+
           <div className="space-y-3">
             {mockAnalytics.commonLocations.map((item, index) => (
               <div key={index} className="flex items-center justify-between">
@@ -236,7 +236,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
           <h3 className="text-lg font-medium text-gray-900 mb-4">
             {locale === 'zh' ? '常见疼痛类型' : 'Common Pain Types'}
           </h3>
-          
+
           <div className="space-y-3">
             {mockAnalytics.commonTypes.map((item, index) => (
               <div key={index} className="flex items-center justify-between">
@@ -260,7 +260,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
         <h3 className="text-lg font-medium text-gray-900 mb-4">
           {locale === 'zh' ? '智能洞察' : 'Smart Insights'}
         </h3>
-        
+
         <div className="space-y-4">
           {mockAnalytics.insights.map((insight, index) => (
             <div key={index} className="p-4 border border-gray-200 rounded-lg">
@@ -277,27 +277,27 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
       </div>
 
       {/* Chart Section */}
-      <section 
+      <section
         className="bg-white rounded-lg shadow-sm p-4 sm:p-6"
         aria-labelledby="chart-heading"
       >
-        <h2 
+        <h2
           id="chart-heading"
           className="text-base sm:text-lg font-medium text-gray-900 mb-4"
         >
           {locale === 'zh' ? '疼痛趋势图' : 'Pain Trend Chart'}
         </h2>
-        
-        <div 
+
+        <div
           className="h-64 sm:h-80 bg-gray-50 rounded-lg flex items-center justify-center"
           role="img"
           aria-labelledby="chart-description"
         >
           <div className="text-center max-w-sm mx-auto p-4">
-            <svg 
-              className="w-12 h-12 text-gray-400 mx-auto mb-3" 
-              fill="none" 
-              stroke="currentColor" 
+            <svg
+              className="w-12 h-12 text-gray-400 mx-auto mb-3"
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
@@ -306,21 +306,21 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
             <h3 className="text-sm sm:text-base font-medium text-gray-700 mb-2">
               {locale === 'zh' ? '图表将在此处显示' : 'Chart will be displayed here'}
             </h3>
-            <p 
+            <p
               id="chart-description"
               className="text-xs sm:text-sm text-gray-500"
             >
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? '当您有足够的疼痛记录数据时，这里将显示您的疼痛趋势图表，帮助您了解疼痛模式的变化。'
                 : 'When you have sufficient pain record data, this area will display your pain trend charts to help you understand changes in your pain patterns.'
               }
             </p>
           </div>
         </div>
-        
+
         {/* Alternative text description for screen readers */}
         <div className="sr-only">
-          {locale === 'zh' 
+          {locale === 'zh'
             ? '疼痛趋势图表占位符。当有足够数据时，将显示您的疼痛水平随时间变化的图表。'
             : 'Pain trend chart placeholder. When sufficient data is available, this will show a chart of your pain levels over time.'
           }

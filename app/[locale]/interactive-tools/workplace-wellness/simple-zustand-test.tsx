@@ -38,7 +38,7 @@ const useSimpleTestStore = create<SimpleTestState>()(
 export default function SimpleZustandTest() {
   const [isClient, setIsClient] = useState(false);
   const [message, setMessage] = useState("");
-  
+
   // 先获取store，但不在渲染时使用
   const store = useSimpleTestStore();
   const { counter, text, increment, decrement, setText, reset } = store;
@@ -93,7 +93,7 @@ export default function SimpleZustandTest() {
   return (
     <div className="p-8 bg-white rounded-lg shadow-md max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">简单 Zustand Store 测试</h1>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* 计数器测试 */}
         <div className="border rounded-lg p-4">

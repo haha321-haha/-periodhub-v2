@@ -124,7 +124,7 @@ export interface WorkplaceWellnessState {
   workImpact: WorkImpactData;
   nutrition: NutritionData;
   export: ExportConfig;
-  
+
   // Day 11: 扩展状态
   userPreferences: UserPreferences;
   exportTemplates: ExportTemplate[];
@@ -191,7 +191,7 @@ export interface HeaderProps {
 }
 
 // 错误类型
-export type WorkplaceWellnessError = 
+export type WorkplaceWellnessError =
   | 'DATA_LOAD_ERROR'
   | 'EXPORT_ERROR'
   | 'VALIDATION_ERROR'
@@ -338,16 +338,16 @@ export interface AccessibilitySettings {
 export interface UserPreferences {
   // 界面偏好
   ui: UIPreferences;
-  
+
   // 通知设置
   notifications: NotificationSettings;
-  
+
   // 隐私设置
   privacy: PrivacySettings;
-  
+
   // 无障碍设置
   accessibility: AccessibilitySettings;
-  
+
   // 导出偏好
   export: {
     defaultFormat: ExtendedExportFormat;
@@ -356,9 +356,9 @@ export interface UserPreferences {
     includeCharts: boolean;
     compression: boolean;
   };
-  
+
   // 语言偏好
-  
+
   // 元数据
   version: string;
   lastUpdated: string;
@@ -412,7 +412,7 @@ export interface SystemSettings {
     enableCaching: boolean;
     maxCacheSize: number; // MB
   };
-  
+
   // 存储设置
   storage: {
     enableLocalStorage: boolean;
@@ -421,7 +421,7 @@ export interface SystemSettings {
     autoCleanup: boolean;
     cleanupInterval: number; // 小时
   };
-  
+
   // 同步设置
   sync: {
     enableAutoSync: boolean;

@@ -37,7 +37,7 @@ class StorageManager {
       }
 
       const parsed = JSON.parse(item);
-      
+
       // 检查版本兼容性
       if (parsed.version && parsed.version !== this.version) {
         console.warn(`Version mismatch for ${key}. Expected ${this.version}, got ${parsed.version}`);
@@ -77,7 +77,7 @@ class StorageManager {
     try {
       const keys = Object.keys(localStorage);
       const namespaceKeys = keys.filter(key => key.startsWith(`${this.namespace}:`));
-      
+
       // 按时间戳排序，删除最老的数据
       const keyData = namespaceKeys.map(key => {
         try {
@@ -111,7 +111,7 @@ class StorageManager {
     try {
       const keys = Object.keys(localStorage);
       const namespaceKeys = keys.filter(key => key.startsWith(`${this.namespace}:`));
-      
+
       let totalSize = 0;
       namespaceKeys.forEach(key => {
         const item = localStorage.getItem(key);
@@ -122,7 +122,7 @@ class StorageManager {
 
       // 估算可用空间（localStorage通常限制为5-10MB）
       const estimatedLimit = 5 * 1024 * 1024; // 5MB
-      
+
       return {
         used: totalSize,
         available: estimatedLimit - totalSize,
@@ -146,10 +146,10 @@ class MedicalCareGuideStorageManager extends StorageManager {
     try {
       const history = this.getAssessmentHistory();
       const updatedHistory = [result, ...history.slice(0, 9)]; // 保留最近10次
-      
+
       this.setItem('assessmentHistory', updatedHistory);
       this.setItem('lastAssessment', result);
-      
+
       // 更新统计信息
       this.updateStatistics(result);
     } catch (error) {
@@ -220,14 +220,14 @@ class MedicalCareGuideStorageManager extends StorageManager {
       if (stats) {
         stats.totalAssessments += 1;
         stats.riskLevelCounts[result.riskLevel] += 1;
-      
+
         // 计算平均疼痛等级
         const history = this.getAssessmentHistory();
         const totalPainLevel = history.reduce((sum, assessment) => sum + assessment.painLevel, 0);
         stats.averagePainLevel = totalPainLevel / history.length;
-        
+
         stats.lastUpdated = new Date().toISOString();
-      
+
         this.setItem('statistics', stats);
       }
     } catch (error) {
@@ -261,7 +261,7 @@ class MedicalCareGuideStorageManager extends StorageManager {
   importData(jsonData: string): boolean {
     try {
       const data: MedicalCareGuideStorage = JSON.parse(jsonData);
-      
+
       // 验证数据结构
       if (!this.validateImportData(data)) {
         throw new Error('Invalid data structure');
@@ -271,11 +271,11 @@ class MedicalCareGuideStorageManager extends StorageManager {
       if (data.assessmentHistory) {
         this.setItem('assessmentHistory', data.assessmentHistory);
       }
-      
+
       if (data.lastAssessment) {
         this.setItem('lastAssessment', data.lastAssessment);
       }
-      
+
       if (data.userPreferences) {
         this.setItem('userPreferences', data.userPreferences);
       }
@@ -313,7 +313,7 @@ class MedicalCareGuideStorageManager extends StorageManager {
   migrateData(fromVersion: number, toVersion: number): boolean {
     try {
       console.log(`Migrating data from version ${fromVersion} to ${toVersion}`);
-      
+
       // 这里可以实现具体的迁移逻辑
       switch (fromVersion) {
         case 1:
@@ -343,7 +343,7 @@ class MedicalCareGuideStorageManager extends StorageManager {
     try {
       // 检查存储可用性
       const storageInfo = this.getStorageInfo();
-      
+
       if (storageInfo.used > storageInfo.available * 0.8) {
         issues.push('Storage usage is high');
         recommendations.push('Consider clearing old assessment history');
@@ -352,7 +352,7 @@ class MedicalCareGuideStorageManager extends StorageManager {
       // 检查数据完整性
       const history = this.getAssessmentHistory();
       const lastAssessment = this.getLastAssessment();
-      
+
       if (history.length > 0 && !lastAssessment) {
         issues.push('Last assessment is missing');
         recommendations.push('Recalculate last assessment from history');

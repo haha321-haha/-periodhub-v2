@@ -15,12 +15,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  
+
   // 基于ziV1d3d的硬编码元数据，避免翻译问题
   const isZh = locale === 'zh';
   const title = isZh ? '营养推荐生成器' : 'Nutrition Recommendation Generator';
-  const description = isZh 
-    ? '基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导，结合现代营养学与中医理论，为女性提供精准的营养建议和生活方式指导，帮助优化生理期健康管理' 
+  const description = isZh
+    ? '基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导，结合现代营养学与中医理论，为女性提供精准的营养建议和生活方式指导，帮助优化生理期健康管理'
     : 'Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.';
 
   return {
@@ -76,7 +76,7 @@ export default async function NutritionRecommendationGeneratorPage({
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
       {/* 面包屑导航 */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-        <Breadcrumb 
+        <Breadcrumb
           items={[
             { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
             { label: locale === 'zh' ? '营养推荐生成器' : 'Nutrition Recommendation Generator' }
@@ -90,17 +90,17 @@ export default async function NutritionRecommendationGeneratorPage({
           {/* 动画图标 */}
           <div className="relative mb-6">
             <div className="w-16 h-16 mx-auto bg-gradient-to-br from-purple-100 to-pink-100 rounded-full flex items-center justify-center shadow-inner">
-              <svg 
-                className="w-8 h-8 text-purple-500 animate-pulse" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="w-8 h-8 text-purple-500 animate-pulse"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" 
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                 />
               </svg>
             </div>
@@ -119,7 +119,7 @@ export default async function NutritionRecommendationGeneratorPage({
 
           {/* 描述文字 */}
           <p className="text-gray-600 mb-4 leading-relaxed max-w-2xl mx-auto">
-            {isZh 
+            {isZh
               ? '请选择您的月经阶段、健康目标和中医体质，我们将为您生成专属的营养建议'
               : 'Please select your menstrual phase, health goals, and TCM constitution to generate personalized nutrition recommendations'
             }
@@ -155,7 +155,7 @@ export default async function NutritionRecommendationGeneratorPage({
           </div>
         </div>
       </div>
-      
+
       {/* 主要内容区域 */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <NutritionGenerator />
@@ -165,7 +165,7 @@ export default async function NutritionRecommendationGeneratorPage({
       <div className="bg-white mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="space-y-12">
-            
+
             {/* 相关工具区域 */}
             <section>
               <h2 className="text-xl font-semibold text-gray-900 mb-6">
@@ -187,12 +187,12 @@ export default async function NutritionRecommendationGeneratorPage({
                     {isZh ? '智能周期追踪器' : 'Smart Cycle Tracker'}
                   </h3>
                   <p className="text-gray-600 text-sm mb-3">
-                    {isZh 
+                    {isZh
                       ? '智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律'
                       : 'Intelligently track your menstrual cycle, predict next period, record symptom changes, helping you better understand your body patterns'
                     }
                   </p>
-                  <a 
+                  <a
                     href={`/${locale}/interactive-tools/cycle-tracker`}
                     className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
                   >
@@ -220,12 +220,12 @@ export default async function NutritionRecommendationGeneratorPage({
                     {isZh ? '中医体质测试' : 'TCM Constitution Test'}
                   </h3>
                   <p className="text-gray-600 text-sm mb-3">
-                    {isZh 
+                    {isZh
                       ? '通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议'
                       : 'Understand your TCM constitution type through 11 questions and get personalized acupuncture points, diet and lifestyle recommendations'
                     }
                   </p>
-                  <a 
+                  <a
                     href={`/${locale}/interactive-tools/constitution-test`}
                     className="inline-flex items-center text-green-600 hover:text-green-800 font-medium text-sm"
                   >
@@ -261,7 +261,7 @@ export default async function NutritionRecommendationGeneratorPage({
                     {isZh ? '抗炎饮食指南' : 'Anti-Inflammatory Diet Guide'}
                   </h3>
                   <p className="text-gray-600 text-sm mb-3">
-                    {isZh 
+                    {isZh
                       ? '通过食物缓解经期疼痛的科学饮食方法，了解哪些食物有助于减少炎症和疼痛'
                       : 'Scientific dietary methods to relieve menstrual pain through food, understanding which foods help reduce inflammation and pain'
                     }
@@ -273,7 +273,7 @@ export default async function NutritionRecommendationGeneratorPage({
                       </svg>
                       {isZh ? '8分钟阅读' : '8 min read'}
                     </span>
-                    <a 
+                    <a
                       href={`/${locale}/articles/anti-inflammatory-diet-period-pain`}
                       className="inline-flex items-center text-green-600 hover:text-green-800 font-medium text-sm"
                     >
@@ -302,7 +302,7 @@ export default async function NutritionRecommendationGeneratorPage({
                     {isZh ? '姜茶缓解痛经指南' : 'Ginger Tea for Menstrual Pain Relief'}
                   </h3>
                   <p className="text-gray-600 text-sm mb-3">
-                    {isZh 
+                    {isZh
                       ? '5种科学验证的姜茶制作方法，有效缓解痛经，学习正确的制作技巧和饮用时机'
                       : '5 scientifically proven ginger tea recipes for effective menstrual pain relief, learn proper preparation techniques and timing'
                     }
@@ -314,7 +314,7 @@ export default async function NutritionRecommendationGeneratorPage({
                       </svg>
                       {isZh ? '6分钟阅读' : '6 min read'}
                     </span>
-                    <a 
+                    <a
                       href={`/${locale}/articles/ginger-menstrual-pain-relief-guide`}
                       className="inline-flex items-center text-orange-600 hover:text-orange-800 font-medium text-sm"
                     >
@@ -343,7 +343,7 @@ export default async function NutritionRecommendationGeneratorPage({
                     {isZh ? '有效草药茶配方' : 'Effective Herbal Tea Recipes'}
                   </h3>
                   <p className="text-gray-600 text-sm mb-3">
-                    {isZh 
+                    {isZh
                       ? '5种科学验证的草药茶配方，天然缓解经期不适，包含肉桂茶、茴香籽茶等经典配方'
                       : '5 scientifically proven herbal tea recipes for natural menstrual relief, including cinnamon tea, fennel seed tea and other classic formulas'
                     }
@@ -355,7 +355,7 @@ export default async function NutritionRecommendationGeneratorPage({
                       </svg>
                       {isZh ? '7分钟阅读' : '7 min read'}
                     </span>
-                    <a 
+                    <a
                       href={`/${locale}/articles/herbal-tea-menstrual-pain-relief`}
                       className="inline-flex items-center text-purple-600 hover:text-purple-800 font-medium text-sm"
                     >
@@ -382,7 +382,7 @@ export default async function NutritionRecommendationGeneratorPage({
               {isZh ? '个性化健康，触手可及。' : 'Personalized wellness at your fingertips.'}
             </p>
             <p className="text-xs mt-2">
-              {isZh 
+              {isZh
                 ? '本工具提供一般性营养指导，不能替代专业医疗建议。'
                 : 'This tool provides general nutrition guidance and should not replace professional medical advice.'
               }

@@ -7,7 +7,7 @@ export default function SimpleStorageTest() {
   const [savedData, setSavedData] = useState<string>("");
   const [message, setMessage] = useState<string>("");
   const [isClient, setIsClient] = useState(false);
-  
+
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -49,11 +49,11 @@ export default function SimpleStorageTest() {
   if (!isClient) {
     return <div className="p-8 bg-white rounded-lg shadow-md max-w-2xl mx-auto">加载中...</div>;
   }
-  
+
   return (
     <div className="p-8 bg-white rounded-lg shadow-md max-w-2xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">简单存储测试</h1>
-      
+
       <div className="space-y-4 mb-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -67,7 +67,7 @@ export default function SimpleStorageTest() {
             placeholder="输入一些测试数据..."
           />
         </div>
-        
+
         <div className="flex gap-2">
           <button
             onClick={saveData}
@@ -88,13 +88,13 @@ export default function SimpleStorageTest() {
             清除数据
           </button>
         </div>
-        
+
         {message && (
           <div className="p-3 bg-blue-50 border border-blue-200 rounded-md">
             {message}
           </div>
         )}
-        
+
         {savedData && (
           <div>
             <h3 className="text-lg font-medium mb-2">从localStorage读取的数据:</h3>
@@ -104,17 +104,17 @@ export default function SimpleStorageTest() {
           </div>
         )}
       </div>
-      
+
       <div className="border-t pt-6">
         <h2 className="text-xl font-semibold mb-4">localStorage状态检查</h2>
         <div className="bg-gray-50 p-4 rounded-md">
           <pre className="text-sm">
-            {typeof window !== 'undefined' ? 
+            {typeof window !== 'undefined' ?
               `localStorage可用\n` +
               `totalSpace: ${JSON.stringify(localStorage)}\n` +
               `localStorage中的键数量: ${localStorage.length}\n` +
               `所有键: ${Array.from({length: localStorage.length}, (_, i) => localStorage.key(i)).join(', ')}`
-              : 
+              :
               'localStorage不可用(可能是服务器端渲染)'
             }
           </pre>

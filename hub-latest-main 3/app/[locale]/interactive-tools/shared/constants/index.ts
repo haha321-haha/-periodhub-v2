@@ -309,7 +309,7 @@ export const VALIDATION_RULES = {
   duration: { min: 0, max: 1440 }, // 24 hours in minutes
   effectiveness: { min: 1, max: 5 },
   notes: { maxLength: 500 },
-  date: { 
+  date: {
     minDate: '2020-01-01',
     maxDate: new Date().toISOString().split('T')[0]
   }

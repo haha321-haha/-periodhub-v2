@@ -26,10 +26,10 @@ export default function SEODashboardClient() {
     const loadSEOData = async () => {
       try {
         setLoading(true);
-        
+
         // 使用真实的SEO分析器
         const analysis = PeriodHubSEOAnalyzer.analyzePeriodHealthKeywords();
-        
+
         setSeoStats({
           totalKeywords: analysis.length,
           avgSearchVolume: analysis.reduce((sum, kw) => sum + kw.searchVolume, 0) / analysis.length,

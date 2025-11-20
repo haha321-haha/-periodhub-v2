@@ -34,7 +34,7 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
     announcementRegion.setAttribute('aria-atomic', 'true');
     announcementRegion.className = 'sr-only';
     announcementRegion.id = 'accessibility-announcements';
-    
+
     document.body.appendChild(announcementRegion);
     announcementRef.current = announcementRegion;
 
@@ -50,11 +50,11 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
     if (!announcementRef.current) return;
 
     const { message, priority = 'polite', delay = 100 } = announcement;
-    
+
     // Clear previous announcement
     announcementRef.current.textContent = '';
     announcementRef.current.setAttribute('aria-live', priority);
-    
+
     // Add new announcement with slight delay to ensure it's read
     setTimeout(() => {
       if (announcementRef.current) {
@@ -68,7 +68,7 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
     if (!manageFocus) return;
 
     let element: HTMLElement | null = null;
-    
+
     if (typeof selector === 'string') {
       element = document.querySelector(selector);
     } else {
@@ -78,13 +78,13 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
     if (element) {
       // Store previous focus for restoration
       previousFocusRef.current = document.activeElement as HTMLElement;
-      
+
       // Focus the element
       element.focus();
-      
+
       // Scroll into view if needed
-      element.scrollIntoView({ 
-        behavior: 'smooth', 
+      element.scrollIntoView({
+        behavior: 'smooth',
         block: 'nearest',
         inline: 'nearest'
       });
@@ -111,7 +111,7 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
     const focusableElements = element.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
-    
+
     const firstFocusable = focusableElements[0] as HTMLElement;
     const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement;
 
@@ -134,7 +134,7 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
     };
 
     element.addEventListener('keydown', handleTabKey);
-    
+
     // Focus first element
     if (firstFocusable) {
       firstFocusable.focus();
@@ -337,7 +337,7 @@ export function useLiveRegion() {
 
     regionRef.current.setAttribute('aria-live', priority);
     regionRef.current.textContent = '';
-    
+
     setTimeout(() => {
       if (regionRef.current) {
         regionRef.current.textContent = message;

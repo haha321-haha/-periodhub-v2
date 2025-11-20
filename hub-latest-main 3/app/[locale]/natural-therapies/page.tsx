@@ -9,7 +9,7 @@ import { URL_CONFIG } from '@/lib/url-config';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'naturalTherapiesPage' });
-  
+
   return {
     title: t('meta.title'),
     description: t('meta.description'),
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 // 增强的结构化数据 - 医疗网页Schema
 const getStructuredData = async (locale: string) => {
   const t = await getTranslations({ locale, namespace: 'naturalTherapiesPage' });
-  
+
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -106,7 +106,7 @@ export default async function NaturalTherapiesPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'naturalTherapiesPage' });
   const structuredData = await getStructuredData(locale);
-  
+
   return (
     <>
       {/* 增强的结构化数据 */}
@@ -116,7 +116,7 @@ export default async function NaturalTherapiesPage({
           __html: JSON.stringify(structuredData)
         }}
       />
-      
+
       {/* Natural Therapies Content */}
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
         <div className="container mx-auto px-4 py-8">
@@ -185,7 +185,7 @@ export default async function NaturalTherapiesPage({
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-gray-800 mb-6 sm:mb-8">
                 {t('therapies.title')}
               </h2>
-              
+
               <div className="grid grid-cols-1 gap-6 sm:gap-8">
                 {/* 1. Heat Therapy - Detailed Card */}
                 <div className="bg-white rounded-xl shadow-lg border-l-4 border-red-500 overflow-hidden">
@@ -203,11 +203,11 @@ export default async function NaturalTherapiesPage({
                         </p>
                       </div>
                     </div>
-                    
+
                     <p className="text-gray-700 mb-4 sm:mb-6 text-sm sm:text-base">
                       {t('therapies.heatTherapy.description')}
                     </p>
-                    
+
                     {/* Scientific Parameters */}
                     <div className="bg-red-50 p-3 sm:p-4 rounded-lg mb-4 sm:mb-6">
                       <h4 className="font-semibold text-red-800 mb-2 sm:mb-3 text-sm sm:text-base">
@@ -224,7 +224,7 @@ export default async function NaturalTherapiesPage({
                         {t('therapies.heatTherapy.parameters.mechanismValue')}
                       </p>
                     </div>
-                    
+
                     {/* Scientific Mechanism */}
                     <div className="bg-gray-50 p-4 rounded-lg mb-4">
                       <h4 className="font-semibold text-gray-800 mb-3">
@@ -249,7 +249,7 @@ export default async function NaturalTherapiesPage({
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Safety Guidelines */}
                     <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
                       <h4 className="font-semibold text-yellow-800 mb-2">
@@ -280,11 +280,11 @@ export default async function NaturalTherapiesPage({
                       </p>
                     </div>
                   </div>
-                    
+
                     <p className="text-gray-700 mb-6">
                       {t('therapies.herbalTherapy.description')}
                     </p>
-                    
+
                     {/* Key Herbs Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                       <div className="bg-green-50 p-4 rounded-lg">
@@ -297,7 +297,7 @@ export default async function NaturalTherapiesPage({
                           <p><strong>{t('therapies.herbalTherapy.herbs.ginger.clinicalEvidence')}</strong>{t('therapies.herbalTherapy.herbs.ginger.clinicalEvidenceValue')}</p>
                         </div>
                       </div>
-                      
+
                       <div className="bg-blue-50 p-4 rounded-lg">
                         <h4 className="font-semibold text-blue-800 mb-3">
                           {t('therapies.herbalTherapy.herbs.angelica.title')}
@@ -309,7 +309,7 @@ export default async function NaturalTherapiesPage({
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Usage Guidelines */}
                     <div className="bg-gray-50 p-4 rounded-lg mb-4">
                       <h4 className="font-semibold text-gray-800 mb-3">
@@ -330,7 +330,7 @@ export default async function NaturalTherapiesPage({
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Safety Reminder */}
                     <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
                       <h4 className="font-semibold text-red-800 mb-2">
@@ -361,11 +361,11 @@ export default async function NaturalTherapiesPage({
                       </p>
                     </div>
                   </div>
-                    
+
                     <p className="text-gray-700 mb-6">
                       {t('therapies.dietaryAdjustment.description')}
                     </p>
-                    
+
                     {/* Key Nutrients Section */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
                       <div className="bg-blue-50 p-4 rounded-lg">
@@ -379,7 +379,7 @@ export default async function NaturalTherapiesPage({
                           {t('therapies.dietaryAdjustment.nutrients.omega3.mechanismValue')}
                         </p>
                       </div>
-                      
+
                       <div className="bg-green-50 p-4 rounded-lg">
                         <h4 className="font-semibold text-green-800 mb-2">
                           {t('therapies.dietaryAdjustment.nutrients.magnesium.title')}
@@ -391,7 +391,7 @@ export default async function NaturalTherapiesPage({
                           {t('therapies.dietaryAdjustment.nutrients.magnesium.mechanismValue')}
                         </p>
                       </div>
-                      
+
                       <div className="bg-purple-50 p-4 rounded-lg">
                         <h4 className="font-semibold text-purple-800 mb-2">
                           {t('therapies.dietaryAdjustment.nutrients.vitaminB6.title')}
@@ -404,7 +404,7 @@ export default async function NaturalTherapiesPage({
                         </p>
                       </div>
                     </div>
-                    
+
                     {/* Anti-inflammatory Foods */}
                     <div className="bg-gray-50 p-4 rounded-lg mb-4">
                       <h4 className="font-semibold text-gray-800 mb-3">
@@ -450,11 +450,11 @@ export default async function NaturalTherapiesPage({
                         </p>
                     </div>
                   </div>
-                    
+
                     <p className="text-gray-700 mb-6">
                       {t('therapies.yogaExercise.description')}
                     </p>
-                    
+
                     {/* Key Poses Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                       <div className="bg-purple-50 p-4 rounded-lg">
@@ -476,7 +476,7 @@ export default async function NaturalTherapiesPage({
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="bg-blue-50 p-4 rounded-lg">
                         <h4 className="font-semibold text-blue-800 mb-3">
                           {t('therapies.yogaExercise.science.title')}
@@ -488,7 +488,7 @@ export default async function NaturalTherapiesPage({
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Practice Guidelines */}
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-gray-800 mb-3">
@@ -532,11 +532,11 @@ export default async function NaturalTherapiesPage({
                         </p>
                     </div>
                   </div>
-                    
+
                     <p className="text-gray-700 mb-6">
                       {t('therapies.aromatherapy.description')}
                     </p>
-                    
+
                     {/* Key Oils Section */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
                       <div className="bg-purple-50 p-4 rounded-lg">
@@ -550,7 +550,7 @@ export default async function NaturalTherapiesPage({
                           {t('therapies.aromatherapy.oils.lavender.mechanism')}
                         </p>
                       </div>
-                      
+
                       <div className="bg-green-50 p-4 rounded-lg">
                         <h4 className="font-semibold text-green-800 mb-2">
                           {t('therapies.aromatherapy.oils.clarySage.title')}
@@ -562,7 +562,7 @@ export default async function NaturalTherapiesPage({
                           {t('therapies.aromatherapy.oils.clarySage.mechanism')}
                         </p>
                       </div>
-                      
+
                       <div className="bg-blue-50 p-4 rounded-lg">
                         <h4 className="font-semibold text-blue-800 mb-2">
                           {t('therapies.aromatherapy.oils.romanChamomile.title')}
@@ -575,7 +575,7 @@ export default async function NaturalTherapiesPage({
                         </p>
                       </div>
                     </div>
-                    
+
                     {/* Usage Methods */}
                     <div className="bg-gray-50 p-4 rounded-lg mb-4">
                       <h4 className="font-semibold text-gray-800 mb-3">
@@ -602,7 +602,7 @@ export default async function NaturalTherapiesPage({
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Safety Guidelines */}
                     <div className="bg-red-50 border border-red-200 p-4 rounded-lg">
                       <h4 className="font-semibold text-red-800 mb-2">
@@ -633,11 +633,11 @@ export default async function NaturalTherapiesPage({
                         </p>
                       </div>
                     </div>
-                    
+
                     <p className="text-gray-700 mb-6">
                       {t('therapies.acupuncture.description')}
                     </p>
-                    
+
                     {/* Key Acupoints */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                       <div className="bg-orange-50 p-4 rounded-lg">
@@ -659,7 +659,7 @@ export default async function NaturalTherapiesPage({
                           </div>
                         </div>
                       </div>
-                      
+
                       <div className="bg-blue-50 p-4 rounded-lg">
                         <h4 className="font-semibold text-blue-800 mb-3">
                           {t('therapies.acupuncture.mechanisms.title')}
@@ -671,7 +671,7 @@ export default async function NaturalTherapiesPage({
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Self-Massage Guide */}
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-gray-800 mb-3">
@@ -704,11 +704,11 @@ export default async function NaturalTherapiesPage({
                         </p>
                     </div>
                   </div>
-                    
+
                     <p className="text-gray-700 mb-6">
                       {t('therapies.psychological.description')}
                     </p>
-                    
+
                     {/* Techniques Section */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                       <div className="bg-indigo-50 p-4 rounded-lg">
@@ -721,7 +721,7 @@ export default async function NaturalTherapiesPage({
                           <p><strong>{t('therapies.psychological.breathing.effect')}</strong>{t('therapies.psychological.breathing.effectValue')}</p>
                         </div>
                       </div>
-                      
+
                       <div className="bg-purple-50 p-4 rounded-lg">
                         <h4 className="font-semibold text-purple-800 mb-3">
                           {t('therapies.psychological.mindfulness.title')}
@@ -733,7 +733,7 @@ export default async function NaturalTherapiesPage({
                         </div>
                       </div>
                     </div>
-                    
+
                     {/* Progressive Muscle Relaxation */}
                     <div className="bg-gray-50 p-4 rounded-lg mb-4">
                       <h4 className="font-semibold text-gray-800 mb-3">
@@ -764,11 +764,11 @@ export default async function NaturalTherapiesPage({
                       </p>
                     </div>
                   </div>
-                    
+
                     <p className="text-gray-700 mb-6">
                       {t('therapies.comprehensive.description')}
                     </p>
-                    
+
                     {/* Pain Level Plans */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-4 sm:mb-6">
                       <div className="bg-red-50 p-4 rounded-lg">
@@ -781,7 +781,7 @@ export default async function NaturalTherapiesPage({
                           <li>• {t('therapies.comprehensive.painLevels.mild.plan3')}</li>
                         </ul>
                       </div>
-                      
+
                       <div className="bg-orange-50 p-4 rounded-lg">
                         <h4 className="font-semibold text-orange-800 mb-3">
                           {t('therapies.comprehensive.painLevels.moderate.title')}
@@ -792,7 +792,7 @@ export default async function NaturalTherapiesPage({
                           <li>• {t('therapies.comprehensive.painLevels.moderate.plan3')}</li>
                         </ul>
                       </div>
-                      
+
                       <div className="bg-purple-50 p-4 rounded-lg">
                         <h4 className="font-semibold text-purple-800 mb-3">
                           {t('therapies.comprehensive.painLevels.severe.title')}
@@ -804,7 +804,7 @@ export default async function NaturalTherapiesPage({
                         </ul>
                       </div>
                     </div>
-                    
+
                     {/* Synergistic Effects */}
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <h4 className="font-semibold text-gray-800 mb-3">
@@ -839,7 +839,7 @@ export default async function NaturalTherapiesPage({
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-6 sm:mb-8 text-gray-800">
                 {t('evidenceBased.title')}
               </h2>
-              
+
               {/* Core Efficacy Data */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
                 <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 text-center">
@@ -851,7 +851,7 @@ export default async function NaturalTherapiesPage({
                     {t('evidenceBased.coreEfficacy.heatTherapy.source')}
                   </p>
                 </div>
-                
+
                 <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 text-center">
                   <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">76%</div>
                   <h3 className="font-semibold text-gray-800 mb-2 text-sm sm:text-base">
@@ -861,7 +861,7 @@ export default async function NaturalTherapiesPage({
                     {t('evidenceBased.coreEfficacy.tens.source')}
                   </p>
                 </div>
-                
+
                 <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 text-center">
                   <div className="text-3xl sm:text-4xl font-bold text-green-600 mb-2">85%</div>
                   <h3 className="font-semibold text-gray-800 mb-2 text-sm sm:text-base">
@@ -871,7 +871,7 @@ export default async function NaturalTherapiesPage({
                     {t('evidenceBased.coreEfficacy.acupuncture.source')}
                   </p>
                 </div>
-                
+
                 <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 text-center">
                   <div className="text-3xl sm:text-4xl font-bold text-purple-600 mb-2">68%</div>
                   <h3 className="font-semibold text-gray-800 mb-2 text-sm sm:text-base">

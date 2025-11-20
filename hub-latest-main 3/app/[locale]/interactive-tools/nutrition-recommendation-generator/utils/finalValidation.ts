@@ -73,7 +73,7 @@ export class FinalValidator {
     try {
       // 检查组件是否存在
       const componentExists = typeof window !== 'undefined' && document.querySelector('[data-testid="nutrition-generator"]');
-      
+
       if (!componentExists) {
         return {
           category: 'NutritionGenerator',
@@ -102,7 +102,7 @@ export class FinalValidator {
     try {
       // 检查选择按钮是否存在
       const selectionButtons = document.querySelectorAll('.selection-button');
-      
+
       if (selectionButtons.length === 0) {
         return {
           category: 'NutritionApp',
@@ -131,7 +131,7 @@ export class FinalValidator {
     try {
       // 检查结果容器是否存在
       const resultsContainer = document.getElementById('results-container');
-      
+
       if (!resultsContainer) {
         return {
           category: 'ResultsDisplay',
@@ -160,7 +160,7 @@ export class FinalValidator {
     try {
       // 检查加载状态是否存在
       const loadingElement = document.querySelector('.animate-spin');
-      
+
       if (!loadingElement) {
         return {
           category: 'LoadingState',
@@ -189,7 +189,7 @@ export class FinalValidator {
     try {
       // 检查无选择状态是否存在
       const noSelectionElement = document.querySelector('[data-testid="no-selection-state"]');
-      
+
       if (!noSelectionElement) {
         return {
           category: 'NoSelectionState',
@@ -247,7 +247,7 @@ export class FinalValidator {
     try {
       // 检查营养数据是否存在
       const nutritionData = await import('../data/nutritionRecommendations');
-      
+
       if (!nutritionData.menstrualPhaseData || !nutritionData.healthGoalData || !nutritionData.tcmConstitutionData) {
         return {
           category: 'Nutrition Data',
@@ -289,7 +289,7 @@ export class FinalValidator {
     try {
       // 检查UI内容是否存在
       const uiContent = await import('./uiContent');
-      
+
       if (!uiContent.uiContent || !uiContent.getUIContent) {
         return {
           category: 'UI Content',
@@ -301,7 +301,7 @@ export class FinalValidator {
       // 检查关键UI内容
       const mainTitle = uiContent.getUIContent('mainTitle', 'en');
       const generateBtn = uiContent.getUIContent('generateBtn', 'en');
-      
+
       if (!mainTitle || !generateBtn) {
         return {
           category: 'UI Content',
@@ -330,7 +330,7 @@ export class FinalValidator {
     try {
       // 检查类型定义是否存在（类型在编译时存在，运行时不需要检查）
       const hasTypes = true;
-      
+
       if (!hasTypes) {
         return {
           category: 'Type Definitions',
@@ -388,7 +388,7 @@ export class FinalValidator {
     try {
       const monitor = WebVitalsMonitor.getInstance();
       const metrics = monitor.getAllMetrics();
-      
+
       if (Object.keys(metrics).length === 0) {
         return {
           category: 'Web Vitals',
@@ -417,7 +417,7 @@ export class FinalValidator {
     try {
       const monitor = ErrorMonitor.getInstance();
       const stats = monitor.getErrorStats();
-      
+
       return {
         category: 'Error Monitoring',
         status: 'pass',
@@ -438,7 +438,7 @@ export class FinalValidator {
     try {
       const monitor = UserBehaviorMonitor.getInstance();
       const stats = monitor.getUserStats();
-      
+
       return {
         category: 'User Behavior Monitoring',
         status: 'pass',
@@ -483,7 +483,7 @@ export class FinalValidator {
   private async validateSEOMetadata(): Promise<ValidationResult> {
     try {
       const metadata = generateSEOMetadata('en');
-      
+
       if (!metadata.title || !metadata.description) {
         return {
           category: 'SEO Metadata',
@@ -511,7 +511,7 @@ export class FinalValidator {
   private async validateStructuredData(): Promise<ValidationResult> {
     try {
       const structuredData = await import('./seo');
-      
+
       if (!structuredData.structuredData || !structuredData.structuredData['@type']) {
         return {
           category: 'Structured Data',

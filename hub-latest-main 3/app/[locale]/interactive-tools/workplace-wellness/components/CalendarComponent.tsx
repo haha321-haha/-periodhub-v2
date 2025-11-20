@@ -18,23 +18,23 @@ export default function CalendarComponent() {
   const locale = useLocale();
   const { updateCalendar, setCurrentDate } = useWorkplaceWellnessActions();
   const t = useTranslations('workplaceWellness');
-  
+
   const periodData = getPeriodData();
   const [showAddForm, setShowAddForm] = useState(false);
 
   // 基于HVsLYEp的日历逻辑
   const { currentDate } = calendar;
-  
+
   // 确保 currentDate 是有效的 Date 对象
   const validCurrentDate = currentDate instanceof Date ? currentDate : new Date(currentDate);
-  
+
   const year = validCurrentDate.getFullYear();
   const month = validCurrentDate.getMonth();
   const monthName = validCurrentDate.toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
     month: 'long',
     year: 'numeric'
   });
-  
+
   const firstDay = new Date(year, month, 1);
   const lastDay = new Date(year, month + 1, 0);
   const daysInMonth = lastDay.getDate();
@@ -65,10 +65,10 @@ export default function CalendarComponent() {
     }
     return styles;
   };
-  
+
   // 获取预测日期 - 基于HVsLYEp的逻辑
   const predictedDateEntry = periodData.find(d => d.type === 'predicted');
-  const formattedPredictedDate = predictedDateEntry 
+  const formattedPredictedDate = predictedDateEntry
     ? new Date(predictedDateEntry.date).toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
         month: 'short',
         day: 'numeric'
@@ -103,7 +103,7 @@ export default function CalendarComponent() {
             {t('calendar.subtitle')}
           </p>
         </div>
-        <button 
+        <button
           onClick={handleAddRecord}
           className="rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
         >
@@ -114,14 +114,14 @@ export default function CalendarComponent() {
 
       {/* 月份导航 - 基于HVsLYEp的导航设计 */}
       <div className="flex items-center justify-between mb-4">
-        <button 
+        <button
           onClick={() => navigateMonth('prev')}
           className="hover:bg-neutral-100 text-neutral-800 rounded-lg p-2"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
         <h4 className="text-lg font-medium text-neutral-900">{monthName}</h4>
-        <button 
+        <button
           onClick={() => navigateMonth('next')}
           className="hover:bg-neutral-100 text-neutral-800 rounded-lg p-2"
         >
@@ -141,15 +141,15 @@ export default function CalendarComponent() {
       {/* 日历网格 - 基于HVsLYEp的日历网格 */}
       <div className="grid grid-cols-7 gap-1 mb-6">
         {days.map((day, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className={getDayStyles(day, getDayStatus(day))}
           >
             {day || ''}
           </div>
         ))}
       </div>
-      
+
       {/* 图例 - 基于HVsLYEp的图例设计 */}
       <div className="flex items-center gap-4 text-sm">
         <div className="flex items-center gap-2">
@@ -189,8 +189,8 @@ export default function CalendarComponent() {
               <label className="block text-sm font-medium text-neutral-800 mb-2">
                 {t('calendar.date')}
               </label>
-              <input 
-                type="date" 
+              <input
+                type="date"
                 className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 defaultValue={new Date().toISOString().split('T')[0]}
               />
@@ -209,22 +209,22 @@ export default function CalendarComponent() {
               <label className="block text-sm font-medium text-neutral-800 mb-2">
                 {t('calendar.painLevel')}
               </label>
-              <input 
-                type="range" 
-                min="0" 
-                max="10" 
+              <input
+                type="range"
+                min="0"
+                max="10"
                 defaultValue="0"
                 className="w-full"
               />
             </div>
             <div className="flex gap-3">
-              <button 
+              <button
                 onClick={() => setShowAddForm(false)}
                 className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200"
               >
                 {t('common.save')}
               </button>
-              <button 
+              <button
                 onClick={() => setShowAddForm(false)}
                 className="px-4 py-2 bg-neutral-200 text-neutral-800 rounded-lg hover:bg-neutral-300 transition-colors duration-200"
               >

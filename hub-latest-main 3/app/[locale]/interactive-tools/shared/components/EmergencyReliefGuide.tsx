@@ -20,14 +20,14 @@ export default function EmergencyReliefGuide({ locale }: EmergencyReliefGuidePro
     },
     {
       icon: Pill,
-      titleKey: 'steps.magnesium.title', 
+      titleKey: 'steps.magnesium.title',
       descKey: 'steps.magnesium.description',
       urgency: 'immediate'
     },
     {
       icon: MapPin,
       titleKey: 'steps.acupressure.title',
-      descKey: 'steps.acupressure.description', 
+      descKey: 'steps.acupressure.description',
       urgency: 'moderate'
     }
   ];
@@ -88,7 +88,7 @@ export default function EmergencyReliefGuide({ locale }: EmergencyReliefGuidePro
                 </div>
               </li>
             </ol>
-            
+
             <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mt-4">
               <div className="flex items-start">
                 <Phone className="w-4 h-4 text-orange-600 mr-2 mt-0.5" />
@@ -101,7 +101,7 @@ export default function EmergencyReliefGuide({ locale }: EmergencyReliefGuidePro
               </div>
             </div>
           </div>
-          
+
           {/* 英文版 */}
           <div className="space-y-4">
             <h3 className="text-lg font-medium text-gray-800 flex items-center">
@@ -139,7 +139,7 @@ export default function EmergencyReliefGuide({ locale }: EmergencyReliefGuidePro
                 </div>
               </li>
             </ol>
-            
+
             <div className="bg-orange-50 border border-orange-200 rounded-lg p-3 mt-4">
               <div className="flex items-start">
                 <Phone className="w-4 h-4 text-orange-600 mr-2 mt-0.5" />

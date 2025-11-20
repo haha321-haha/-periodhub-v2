@@ -93,10 +93,10 @@ export default function WorkImpactComponent() {
     try {
       // 获取今天的日期
       const today = new Date().toISOString().split("T")[0];
-      
+
       // 工作影响数据已经通过 updateWorkImpact 更新到 store 中
       // 这里我们只需要确认数据已更新
-      
+
       // 验证数据有效性
       const painLevel = workImpact.painLevel ?? 0;
       if (painLevel < 0 || painLevel > 10) {
@@ -107,7 +107,7 @@ export default function WorkImpactComponent() {
         );
         return;
       }
-      
+
       if ((workImpact.efficiency ?? 100) < 0 || (workImpact.efficiency ?? 100) > 100) {
         alert(
           locale === "zh"
@@ -116,9 +116,9 @@ export default function WorkImpactComponent() {
         );
         return;
       }
-      
+
       console.log("Work impact record saved:", workImpact);
-      
+
       // 显示成功提示
       alert(
         locale === "zh"
@@ -304,7 +304,7 @@ export default function WorkImpactComponent() {
           </div>
         )}
       </div>
-      
+
       {/* 自定义滑块样式 */}
       <style jsx>{`
         .pain-slider::-webkit-slider-thumb {

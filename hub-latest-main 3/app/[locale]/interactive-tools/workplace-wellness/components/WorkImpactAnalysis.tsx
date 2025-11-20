@@ -6,11 +6,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  Briefcase, 
-  TrendingUp, 
+import {
+  Briefcase,
+  TrendingUp,
   TrendingDown,
-  AlertTriangle, 
+  AlertTriangle,
   CheckCircle,
   BarChart3,
   PieChart,
@@ -58,7 +58,7 @@ export default function WorkImpactAnalysis() {
   const [workData, setWorkData] = useState<WorkImpactData[]>([]);
   const [patterns, setPatterns] = useState<WorkPattern[]>([]);
   const [insights, setInsights] = useState<ProductivityInsight[]>([]);
-  
+
   const periodData = getPeriodData();
 
   useEffect(() => {
@@ -70,7 +70,7 @@ export default function WorkImpactAnalysis() {
   // 分析工作影响数据
   const analyzeWorkImpact = () => {
     const workImpacts: WorkImpactData[] = [];
-    
+
     periodData.forEach(record => {
       if (record.painLevel !== null) {
         // 模拟工作影响数据（实际应用中应该从用户输入中获取）
@@ -78,7 +78,7 @@ export default function WorkImpactAnalysis() {
         const productivity = calculateProductivity(record.painLevel, workEfficiency);
         const stressLevel = calculateStressLevel(record.painLevel);
         const mood = calculateMood(record.painLevel);
-        
+
         workImpacts.push({
           date: record.date,
           painLevel: record.painLevel,
@@ -90,29 +90,29 @@ export default function WorkImpactAnalysis() {
         });
       }
     });
-    
+
     setWorkData(workImpacts.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
   };
 
   // 生成工作模式
   const generateWorkPatterns = () => {
     const patterns: WorkPattern[] = [];
-    
+
     // 分析不同阶段的工作影响
     const phases = ['menstrual', 'follicular', 'ovulation', 'luteal'];
-    
+
     phases.forEach(phase => {
       const phaseData = workData.filter(data => {
         const record = periodData.find(r => r.date === data.date);
         return record && getMenstrualPhase(record) === phase;
       });
-      
+
       if (phaseData.length > 0) {
         const avgEfficiency = phaseData.reduce((sum, d) => sum + d.workEfficiency, 0) / phaseData.length;
         const avgPain = phaseData.reduce((sum, d) => sum + d.painLevel, 0) / phaseData.length;
         const commonAdjustments = getCommonAdjustments(phaseData);
         const productivityTrend = calculateProductivityTrend(phaseData);
-        
+
         patterns.push({
           phase,
           avgEfficiency,
@@ -122,17 +122,17 @@ export default function WorkImpactAnalysis() {
         });
       }
     });
-    
+
     setPatterns(patterns);
   };
 
   // 生成洞察
   const generateInsights = () => {
     const insights: ProductivityInsight[] = [];
-    
+
     const avgEfficiency = workData.reduce((sum, d) => sum + d.workEfficiency, 0) / workData.length;
     const avgPain = workData.reduce((sum, d) => sum + d.painLevel, 0) / workData.length;
-    
+
     // 效率洞察
     if (avgEfficiency > 80) {
       insights.push({
@@ -151,7 +151,7 @@ export default function WorkImpactAnalysis() {
         icon: AlertTriangle
       });
     }
-    
+
     // 疼痛影响洞察
     if (avgPain > 7) {
       insights.push({
@@ -162,7 +162,7 @@ export default function WorkImpactAnalysis() {
         icon: AlertTriangle
       });
     }
-    
+
     // 调整建议洞察
     const adjustmentFrequency = workData.filter(d => d.adjustment !== null).length / workData.length;
     if (adjustmentFrequency > 0.3) {
@@ -174,7 +174,7 @@ export default function WorkImpactAnalysis() {
         icon: Target
       });
     }
-    
+
     setInsights(insights);
   };
 
@@ -220,7 +220,7 @@ export default function WorkImpactAnalysis() {
       acc[adj] = (acc[adj] || 0) + 1;
       return acc;
     }, {} as { [key: string]: number });
-    
+
     return Object.entries(counts)
       .sort(([,a], [,b]) => b - a)
       .slice(0, 3)
@@ -229,15 +229,15 @@ export default function WorkImpactAnalysis() {
 
   const calculateProductivityTrend = (data: WorkImpactData[]): 'up' | 'down' | 'stable' => {
     if (data.length < 3) return 'stable';
-    
+
     const recent = data.slice(-3);
     const previous = data.slice(-6, -3);
-    
+
     if (recent.length < 3 || previous.length < 3) return 'stable';
-    
+
     const recentAvg = recent.reduce((sum, d) => sum + d.productivity, 0) / recent.length;
     const previousAvg = previous.reduce((sum, d) => sum + d.productivity, 0) / previous.length;
-    
+
     if (recentAvg > previousAvg + 5) return 'up';
     if (recentAvg < previousAvg - 5) return 'down';
     return 'stable';
@@ -271,7 +271,7 @@ export default function WorkImpactAnalysis() {
               <Briefcase className="w-6 h-6 text-blue-600" />
             </div>
           </div>
-          
+
           <div className="bg-red-50 rounded-lg p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -281,7 +281,7 @@ export default function WorkImpactAnalysis() {
               <Activity className="w-6 h-6 text-red-600" />
             </div>
           </div>
-          
+
           <div className="bg-green-50 rounded-lg p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -291,7 +291,7 @@ export default function WorkImpactAnalysis() {
               <Target className="w-6 h-6 text-green-600" />
             </div>
           </div>
-          
+
           <div className="bg-purple-50 rounded-lg p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -302,7 +302,7 @@ export default function WorkImpactAnalysis() {
             </div>
           </div>
         </div>
-        
+
         <div className="bg-gray-50 rounded-lg p-4">
           <h5 className="font-medium text-gray-800 mb-3">{t('workAnalysis.recentTrends')}</h5>
           <div className="space-y-2">
@@ -336,7 +336,7 @@ export default function WorkImpactAnalysis() {
                 {pattern.productivityTrend === 'stable' && <Activity className="w-4 h-4 text-blue-500" />}
               </div>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <h5 className="text-sm font-medium text-gray-700 mb-2">{t('workAnalysis.efficiency')}</h5>
@@ -350,7 +350,7 @@ export default function WorkImpactAnalysis() {
                   <span className="text-sm text-gray-600">{pattern.avgEfficiency.toFixed(0)}%</span>
                 </div>
               </div>
-              
+
               <div>
                 <h5 className="text-sm font-medium text-gray-700 mb-2">{t('workAnalysis.painLevel')}</h5>
                 <div className="flex items-center space-x-2">
@@ -363,7 +363,7 @@ export default function WorkImpactAnalysis() {
                   <span className="text-sm text-gray-600">{pattern.avgPain.toFixed(1)}</span>
                 </div>
               </div>
-              
+
               <div>
                 <h5 className="text-sm font-medium text-gray-700 mb-2">{t('workAnalysis.commonAdjustments')}</h5>
                 <div className="flex flex-wrap gap-1">
@@ -390,7 +390,7 @@ export default function WorkImpactAnalysis() {
             <Target className="w-5 h-5 mr-2 text-green-600" />
             {t('workAnalysis.productivityTitle')}
           </h4>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h5 className="font-medium text-gray-700 mb-3">{t('workAnalysis.efficiencyVsPain')}</h5>
@@ -422,7 +422,7 @@ export default function WorkImpactAnalysis() {
                 ))}
               </div>
             </div>
-            
+
             <div>
               <h5 className="font-medium text-gray-700 mb-3">{t('workAnalysis.productivityTrend')}</h5>
               <div className="space-y-2">

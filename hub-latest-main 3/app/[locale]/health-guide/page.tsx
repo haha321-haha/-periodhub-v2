@@ -113,7 +113,7 @@ export default async function HealthGuidePage({
         description={t('description')}
         url={`${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/health-guide`}
       />
-      
+
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-12">
           {/* Breadcrumb */}
@@ -149,7 +149,7 @@ export default async function HealthGuidePage({
           <p className="text-neutral-700 leading-relaxed mb-6">
             {t('hero.description')}
           </p>
-          
+
           {/* 快速访问相关工具 */}
           <div className="bg-white rounded-lg p-4 border border-primary-200">
             <h3 className="text-lg font-semibold text-neutral-800 mb-3">
@@ -171,7 +171,7 @@ export default async function HealthGuidePage({
                   </div>
                 </div>
               </Link>
-              
+
               <Link href={`/${locale}/interactive-tools/pain-tracker`} className="flex items-center p-3 bg-green-50 rounded-lg hover:bg-green-100 transition-colors group">
                 <div className="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center mr-3">
                   <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -211,20 +211,20 @@ export default async function HealthGuidePage({
                   <source media="(min-width: 768px)" srcSet="/images/medical/female_reproductive_system_anatomy_800x800.png" type="image/png" />
                   <source media="(max-width: 767px)" srcSet="/images/medical/female_reproductive_system_anatomy_400x400.webp" type="image/webp" />
                   <source media="(max-width: 767px)" srcSet="/images/medical/female_reproductive_system_anatomy_400x400.png" type="image/png" />
-                  <img 
-                    src="/images/medical/female_reproductive_system_anatomy_800x800.png" 
+                  <img
+                    src="/images/medical/female_reproductive_system_anatomy_800x800.png"
                     alt={t('medicalPrinciples.anatomy.imageAlt')}
                     className="w-full h-auto rounded-lg shadow-md"
                     loading="lazy"
                   />
                 </picture>
               </div>
-              
+
               <div>
                 <h3 className="text-xl font-bold mb-4 text-indigo-700">
                   {t('medicalPrinciples.anatomy.title')}
                 </h3>
-                
+
                 <div className="space-y-3">
                   <div className="bg-red-50 border border-red-200 rounded-lg p-3">
                     <h4 className="font-semibold text-red-700 mb-1">
@@ -234,7 +234,7 @@ export default async function HealthGuidePage({
                       {t('medicalPrinciples.anatomy.uterus.description')}
                     </p>
                   </div>
-                  
+
                   <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
                     <h4 className="font-semibold text-purple-700 mb-1">
                       {t('medicalPrinciples.anatomy.endometrium.title')}
@@ -243,7 +243,7 @@ export default async function HealthGuidePage({
                       {t('medicalPrinciples.anatomy.endometrium.description')}
                     </p>
                   </div>
-                  
+
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
                     <h4 className="font-semibold text-blue-700 mb-1">
                       {t('medicalPrinciples.anatomy.ovaries.title')}
@@ -264,7 +264,7 @@ export default async function HealthGuidePage({
               <h3 className="text-lg font-bold mb-4 text-red-700">
                 {t('medicalPrinciples.prostaglandinMechanism.title')}
               </h3>
-              
+
               <div className="space-y-3 text-sm">
                 <div className="flex items-start">
                   <span className="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs mr-3 mt-0.5 flex-shrink-0">1</span>
@@ -288,14 +288,14 @@ export default async function HealthGuidePage({
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-4 space-y-3">
                 <div className="p-3 bg-red-50 rounded">
                   <p className="text-xs text-red-600">
                     <strong>{t('medicalPrinciples.prostaglandinMechanism.physiologicalEffects.title')}</strong>
                   </p>
                 </div>
-                
+
                 <div className="space-y-2">
                   <div className="bg-red-50 border border-red-200 rounded p-3">
                     <strong className="text-red-700 text-xs">{t('medicalPrinciples.prostaglandinMechanism.physiologicalEffects.uterineContraction.title')}</strong>
@@ -303,21 +303,21 @@ export default async function HealthGuidePage({
                       {t('medicalPrinciples.prostaglandinMechanism.physiologicalEffects.uterineContraction.description')}
                     </p>
                   </div>
-                  
+
                   <div className="bg-orange-50 border border-orange-200 rounded p-3">
                     <strong className="text-orange-700 text-xs">{t('medicalPrinciples.prostaglandinMechanism.physiologicalEffects.vasoconstriction.title')}</strong>
                     <p className="text-xs text-orange-600 mt-1">
                       {t('medicalPrinciples.prostaglandinMechanism.physiologicalEffects.vasoconstriction.description')}
                     </p>
                   </div>
-                  
+
                   <div className="bg-yellow-50 border border-yellow-200 rounded p-3">
                     <strong className="text-yellow-700 text-xs">{t('medicalPrinciples.prostaglandinMechanism.physiologicalEffects.neuralSensitization.title')}</strong>
                     <p className="text-xs text-yellow-600 mt-1">
                       {t('medicalPrinciples.prostaglandinMechanism.physiologicalEffects.neuralSensitization.description')}
                     </p>
                   </div>
-                  
+
                   <div className="bg-green-50 border border-green-200 rounded p-3">
                     <strong className="text-green-700 text-xs">{t('medicalPrinciples.prostaglandinMechanism.physiologicalEffects.inflammatoryResponse.title')}</strong>
                     <p className="text-xs text-green-600 mt-1">
@@ -333,7 +333,7 @@ export default async function HealthGuidePage({
               <h3 className="text-lg font-bold mb-4 text-purple-700">
                 {t('medicalPrinciples.hormonalControl.title')}
               </h3>
-              
+
               <div className="space-y-4">
                 <div className="bg-purple-50 border border-purple-200 rounded-lg p-3">
                   <h4 className="font-semibold text-purple-700 mb-2 text-sm">
@@ -345,7 +345,7 @@ export default async function HealthGuidePage({
                     <li>• {t('medicalPrinciples.hormonalControl.estrogen.peaksBeforeOvulation')}</li>
                   </ul>
                 </div>
-                
+
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
                   <h4 className="font-semibold text-blue-700 mb-2 text-sm">
                     {t('medicalPrinciples.hormonalControl.progesterone.title')}
@@ -356,7 +356,7 @@ export default async function HealthGuidePage({
                     <li>• {t('medicalPrinciples.hormonalControl.progesterone.declinesBeforeMenstruation')}</li>
                   </ul>
                 </div>
-                
+
                 <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                   <h4 className="font-semibold text-green-700 mb-2 text-sm">
                     {t('medicalPrinciples.hormonalControl.feedbackRegulation.title')}
@@ -382,7 +382,7 @@ export default async function HealthGuidePage({
             <h3 className="text-xl font-bold mb-6 text-center text-blue-700">
               {t('medicalPrinciples.neuralConduction.title')}
             </h3>
-            
+
             <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <h4 className="text-lg font-semibold mb-4 text-blue-700">
@@ -427,7 +427,7 @@ export default async function HealthGuidePage({
                   </div>
                 </div>
               </div>
-              
+
               <div>
                 <h4 className="text-lg font-semibold mb-4 text-blue-700">
                   {t('medicalPrinciples.neuralConduction.painControl.title')}
@@ -467,7 +467,7 @@ export default async function HealthGuidePage({
             <h3 className="text-xl font-bold mb-6 text-center text-indigo-700">
               {t('medicalPrinciples.treatmentMechanisms.title')}
             </h3>
-            
+
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* NSAIDs */}
               <div className="bg-red-50 border border-red-200 rounded-lg p-4">
@@ -479,7 +479,7 @@ export default async function HealthGuidePage({
                   </div>
                   <h4 className="font-bold text-red-700 text-sm">NSAIDs</h4>
                 </div>
-                
+
                 <div className="text-xs space-y-1">
                   <p><strong>{t('medicalPrinciples.treatmentMechanisms.nsaids.mechanism')}</strong> {t('medicalPrinciples.treatmentMechanisms.nsaids.mechanismDescription')}</p>
                   <p><strong>{t('medicalPrinciples.treatmentMechanisms.nsaids.effect')}</strong> {t('medicalPrinciples.treatmentMechanisms.nsaids.effectDescription')}</p>
@@ -501,7 +501,7 @@ export default async function HealthGuidePage({
                     {t('medicalPrinciples.treatmentMechanisms.heatTherapy.title')}
                   </h4>
                 </div>
-                
+
                 <div className="text-xs space-y-1">
                   <p><strong>{t('medicalPrinciples.treatmentMechanisms.heatTherapy.mechanism')}</strong> {t('medicalPrinciples.treatmentMechanisms.heatTherapy.mechanismDescription')}</p>
                   <p><strong>{t('medicalPrinciples.treatmentMechanisms.heatTherapy.effect')}</strong> {t('medicalPrinciples.treatmentMechanisms.heatTherapy.effectDescription')}</p>
@@ -523,7 +523,7 @@ export default async function HealthGuidePage({
                     {t('medicalPrinciples.treatmentMechanisms.hormonalTherapy.title')}
                   </h4>
                 </div>
-                
+
                 <div className="text-xs space-y-1">
                   <p><strong>{t('medicalPrinciples.treatmentMechanisms.hormonalTherapy.mechanism')}</strong> {t('medicalPrinciples.treatmentMechanisms.hormonalTherapy.mechanismDescription')}</p>
                   <p><strong>{t('medicalPrinciples.treatmentMechanisms.hormonalTherapy.effect')}</strong> {t('medicalPrinciples.treatmentMechanisms.hormonalTherapy.effectDescription')}</p>
@@ -545,7 +545,7 @@ export default async function HealthGuidePage({
                     {t('medicalPrinciples.treatmentMechanisms.exerciseTherapy.title')}
                   </h4>
                 </div>
-                
+
                 <div className="text-xs space-y-1">
                   <p><strong>{t('medicalPrinciples.treatmentMechanisms.exerciseTherapy.mechanism')}</strong> {t('medicalPrinciples.treatmentMechanisms.exerciseTherapy.mechanismDescription')}</p>
                   <p><strong>{t('medicalPrinciples.treatmentMechanisms.exerciseTherapy.effect')}</strong> {t('medicalPrinciples.treatmentMechanisms.exerciseTherapy.effectDescription')}</p>
@@ -562,7 +562,7 @@ export default async function HealthGuidePage({
             <h3 className="text-xl font-bold mb-6 text-center text-indigo-700">
               {t('medicalPrinciples.researchProgress.title')}
             </h3>
-            
+
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <h4 className="font-semibold mb-3 text-blue-700">
@@ -572,7 +572,7 @@ export default async function HealthGuidePage({
                   {t('medicalPrinciples.researchProgress.molecularTargets.description')}
                 </p>
               </div>
-              
+
               <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                 <h4 className="font-semibold mb-3 text-green-700">
                   {t('medicalPrinciples.researchProgress.aiApplications.title')}
@@ -582,13 +582,13 @@ export default async function HealthGuidePage({
                 </p>
               </div>
             </div>
-            
+
             {/* Gene Therapy Research */}
             <div className="mt-6">
               <h3 className="text-lg font-bold mb-4 text-center text-purple-700">
                 {t('medicalPrinciples.geneTherapy.title')}
               </h3>
-              
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
                   <h4 className="font-semibold mb-3 text-purple-700">
@@ -598,7 +598,7 @@ export default async function HealthGuidePage({
                     {t('medicalPrinciples.geneTherapy.genePolymorphism.description')}
                   </p>
                 </div>
-                
+
                 <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
                   <h4 className="font-semibold mb-3 text-indigo-700">
                     {t('medicalPrinciples.geneTherapy.epigeneticMechanisms.title')}
@@ -616,12 +616,12 @@ export default async function HealthGuidePage({
             <h3 className="text-xl font-bold mb-6 text-center text-blue-700">
               {t('medicalPrinciples.clinicalEvidence.title')}
             </h3>
-            
+
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
               <h4 className="text-lg font-bold mb-4 text-blue-700">
                 {t('medicalPrinciples.clinicalEvidence.importantStudies.title')}
               </h4>
-              
+
               <div className="space-y-6">
                 <div className="bg-white rounded p-4">
                   <h5 className="font-semibold mb-2 text-gray-800">
@@ -642,7 +642,7 @@ export default async function HealthGuidePage({
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="bg-white rounded p-4">
                   <h5 className="font-semibold mb-2 text-gray-800">
                     {t('medicalPrinciples.clinicalEvidence.importantStudies.bmj2019.title')}
@@ -662,7 +662,7 @@ export default async function HealthGuidePage({
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="bg-white rounded p-4">
                   <h5 className="font-semibold mb-2 text-gray-800">
                     {t('medicalPrinciples.clinicalEvidence.importantStudies.jcm2021.title')}
@@ -683,7 +683,7 @@ export default async function HealthGuidePage({
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-6 p-4 bg-yellow-100 border border-yellow-300 rounded">
                 <p className="text-sm text-yellow-700">
                   <strong>{t('medicalPrinciples.clinicalEvidence.evidenceLevel.title')}</strong>
@@ -700,10 +700,10 @@ export default async function HealthGuidePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-8 text-center">
           {t('sections.title')}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {guideChapters.map((chapter) => (
-            <Link 
+            <Link
               key={chapter.id}
               href={chapter.href}
               className="card group hover:shadow-lg transition-all duration-300 block"
@@ -748,7 +748,7 @@ export default async function HealthGuidePage({
               {t('quickAccess.methodsTechniques')} →
             </Link>
           </div>
-          
+
           <div className="bg-white p-4 rounded-lg">
             <h3 className="font-semibold text-neutral-800 mb-2">
               {t('quickAccess.personalizedAssessment')}
@@ -756,7 +756,7 @@ export default async function HealthGuidePage({
             <p className="text-neutral-600 text-sm mb-3">
               {t('quickAccess.personalizedAssessmentDescription')}
             </p>
-            <Link 
+            <Link
               href={`/${locale}/interactive-tools`}
               className="text-primary-600 hover:text-primary-700 font-medium text-sm"
             >

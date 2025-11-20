@@ -3,10 +3,10 @@
 import React from 'react';
 import { useHealthDataStore } from '../stores/healthDataStore';
 import { useInteractiveToolTranslations } from '../hooks/useAppTranslations';
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Calendar, 
+import {
+  BarChart3,
+  TrendingUp,
+  Calendar,
   Activity,
   Download,
   Upload,
@@ -20,7 +20,7 @@ interface HealthDataDashboardProps {
 
 export default function HealthDataDashboard({ locale }: HealthDataDashboardProps) {
   const { t } = useInteractiveToolTranslations();
-  
+
   const {
     painEntries,
     constitutionResults,
@@ -69,10 +69,10 @@ export default function HealthDataDashboard({ locale }: HealthDataDashboardProps
   };
 
   const handleClearData = () => {
-    const confirmMessage = locale === 'zh' 
-      ? '确定要清除所有数据吗？此操作不可撤销。' 
+    const confirmMessage = locale === 'zh'
+      ? '确定要清除所有数据吗？此操作不可撤销。'
       : 'Are you sure you want to clear all data? This action cannot be undone.';
-    
+
     if (confirm(confirmMessage)) {
       clearAllData();
       alert(locale === 'zh' ? '数据已清除。' : 'Data cleared.');
@@ -143,7 +143,7 @@ export default function HealthDataDashboard({ locale }: HealthDataDashboardProps
           </h3>
           <div className="flex flex-wrap gap-2">
             {mostCommonSymptoms.map((symptom, index) => (
-              <span 
+              <span
                 key={index}
                 className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium"
               >
@@ -169,8 +169,8 @@ export default function HealthDataDashboard({ locale }: HealthDataDashboardProps
                   <span className="text-sm text-gray-600">{date}</span>
                   <div className="flex items-center">
                     <div className="w-32 bg-gray-200 rounded-full h-2 mr-2">
-                      <div 
-                        className="bg-blue-500 h-2 rounded-full" 
+                      <div
+                        className="bg-blue-500 h-2 rounded-full"
                         style={{ width: `${(avgLevel / 10) * 100}%` }}
                       ></div>
                     </div>
@@ -243,8 +243,8 @@ export default function HealthDataDashboard({ locale }: HealthDataDashboardProps
               {locale === 'zh' ? '疼痛提醒：' : 'Pain Reminders: '}
             </span>
             <span className="text-gray-600">
-              {preferences.notifications.painReminders ? 
-                (locale === 'zh' ? '开启' : 'On') : 
+              {preferences.notifications.painReminders ?
+                (locale === 'zh' ? '开启' : 'On') :
                 (locale === 'zh' ? '关闭' : 'Off')
               }
             </span>
@@ -254,8 +254,8 @@ export default function HealthDataDashboard({ locale }: HealthDataDashboardProps
               {locale === 'zh' ? '数据分析：' : 'Analytics: '}
             </span>
             <span className="text-gray-600">
-              {preferences.privacy.analytics ? 
-                (locale === 'zh' ? '开启' : 'On') : 
+              {preferences.privacy.analytics ?
+                (locale === 'zh' ? '开启' : 'On') :
                 (locale === 'zh' ? '关闭' : 'Off')
               }
             </span>

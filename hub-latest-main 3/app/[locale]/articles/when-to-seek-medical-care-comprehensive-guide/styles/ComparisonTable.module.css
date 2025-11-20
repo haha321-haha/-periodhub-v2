@@ -193,46 +193,46 @@
   .container {
     @apply p-4 mx-2;
   }
-  
+
   .title {
     @apply text-xl;
   }
-  
+
   .tableWrapper {
     @apply -mx-4;
     border-radius: 0;
   }
-  
+
   .table {
     @apply min-w-[600px]; /* 确保表格有最小宽度 */
   }
-  
+
   .tableHeader {
     @apply px-3 py-3 text-xs;
     min-width: 120px; /* 确保列有最小宽度 */
   }
-  
+
   .tableCell {
     @apply px-3 py-3;
     min-width: 120px; /* 确保列有最小宽度 */
   }
-  
+
   .cellContent {
     @apply flex-col;
   }
-  
+
   .cellIcon {
     @apply mr-0 mb-2;
   }
-  
+
   .tableNotes {
     @apply flex-col gap-3;
   }
-  
+
   .importantReminder {
     @apply p-4;
   }
-  
+
   /* 添加滚动提示 */
   .tableWrapper::after {
     content: "← 滑动查看更多 →";
@@ -245,31 +245,31 @@
   .tableWrapper {
     @apply hidden;
   }
-  
+
   .cardLayout {
     @apply block space-y-4;
   }
-  
+
   .card {
     @apply bg-white border border-gray-200 rounded-lg p-4 shadow-sm;
   }
-  
+
   .cardHeader {
     @apply font-semibold text-gray-900 mb-3 pb-3 border-b border-gray-200;
   }
-  
+
   .cardContent {
     @apply space-y-3;
   }
-  
+
   .cardRow {
     @apply flex flex-col;
   }
-  
+
   .cardLabel {
     @apply text-xs font-medium text-gray-500 uppercase tracking-wider mb-1;
   }
-  
+
   .cardValue {
     @apply text-sm text-gray-900;
   }
@@ -293,11 +293,11 @@
   .container {
     @apply border-2 border-gray-800;
   }
-  
+
   .table {
     @apply border-2 border-gray-800;
   }
-  
+
   .tableRow.highlighted {
     @apply border-l-8;
   }
@@ -316,15 +316,15 @@
   .container {
     @apply shadow-none border border-gray-400;
   }
-  
+
   .expandButton {
     @apply hidden;
   }
-  
+
   .tableRow {
     @apply bg-white;
   }
-  
+
   .mobileHint {
     @apply hidden;
   }

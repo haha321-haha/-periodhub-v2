@@ -29,14 +29,14 @@ export const translationKeys = {
     subtitle: 'header.subtitle',
     settings: 'header.settings'
   },
-  
+
   // 导航相关
   navigation: {
     calendar: 'nav.calendar',
     nutrition: 'nav.nutrition',
     export: 'nav.export'
   },
-  
+
   // 日历相关
   calendar: {
     title: 'calendar.title',
@@ -45,7 +45,7 @@ export const translationKeys = {
     addRecord: 'calendar.addRecord',
     recordButton: 'calendar.recordButton'
   },
-  
+
   // 工作影响相关
   workImpact: {
     title: 'workImpact.title',
@@ -61,7 +61,7 @@ export const translationKeys = {
     content: 'workImpact.content',
     copyButton: 'workImpact.copyButton'
   },
-  
+
   // 营养相关
   nutrition: {
     title: 'nutrition.title',
@@ -82,7 +82,7 @@ export const translationKeys = {
     mealSuggestions: 'nutrition.mealSuggestions',
     generateButton: 'nutrition.generateButton'
   },
-  
+
   // 导出相关
   export: {
     title: 'export.title',
@@ -96,7 +96,7 @@ export const translationKeys = {
     successMessage: 'export.successMessage',
     errorMessage: 'export.errorMessage'
   },
-  
+
   // 通用
   common: {
     save: 'common.save',
@@ -119,7 +119,7 @@ export function createTranslationFunction(translations: any) {
   return (key: string): string => {
     const keys = key.split('.');
     let result: any = translations;
-    
+
     for (const k of keys) {
       result = result[k];
       if (result === undefined) {
@@ -127,15 +127,15 @@ export function createTranslationFunction(translations: any) {
         return key;
       }
     }
-    
+
     return result;
   };
 }
 
 // 语言切换工具函数
 export function getLanguageFromLocale(locale: string): SupportedLanguage {
-  return supportedLanguages.includes(locale as SupportedLanguage) 
-    ? (locale as SupportedLanguage) 
+  return supportedLanguages.includes(locale as SupportedLanguage)
+    ? (locale as SupportedLanguage)
     : languageConfig.defaultLanguage;
 }
 
@@ -154,7 +154,7 @@ export function getBrowserLanguage(): SupportedLanguage {
   if (typeof window === 'undefined') {
     return languageConfig.defaultLanguage;
   }
-  
+
   const browserLang = navigator.language.split('-')[0];
   return isLanguageSupported(browserLang) ? browserLang : languageConfig.defaultLanguage;
 }
@@ -171,7 +171,7 @@ export function getLanguagePreference(): SupportedLanguage {
   if (typeof window === 'undefined') {
     return languageConfig.defaultLanguage;
   }
-  
+
   const saved = localStorage.getItem(languageConfig.storageKey);
   return isLanguageSupported(saved || '') ? (saved as SupportedLanguage) : languageConfig.defaultLanguage;
 }
@@ -180,7 +180,7 @@ export function getLanguagePreference(): SupportedLanguage {
 export function initializeLanguage(): SupportedLanguage {
   const saved = getLanguagePreference();
   const browser = getBrowserLanguage();
-  
+
   // 优先使用保存的偏好，否则使用浏览器语言
   return saved || browser;
 }

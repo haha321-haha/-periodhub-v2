@@ -393,7 +393,7 @@ export default function ProfessionalAdvice({
                 {locale === 'zh' ? '建议升级到详细版评估' : 'Upgrade to Detailed Assessment'}
               </p>
               <p className="text-sm text-blue-800 mb-3">
-                {locale === 'zh' 
+                {locale === 'zh'
                   ? '您的评估结果显示影响程度较高，建议进行更详细的评估以获得更全面的建议。'
                   : 'Your assessment results show a higher impact level. We recommend a more detailed assessment for comprehensive advice.'}
               </p>
@@ -422,7 +422,7 @@ export default function ProfessionalAdvice({
                 {locale === 'zh' ? '建议升级到医疗专业版评估' : 'Upgrade to Medical Professional Assessment'}
               </p>
               <p className="text-sm text-purple-800 mb-3">
-                {locale === 'zh' 
+                {locale === 'zh'
                   ? '您的评估结果显示影响程度严重，建议进行专业评估以获得医疗指导。'
                   : 'Your assessment results show severe impact. We recommend professional assessment for medical guidance.'}
               </p>

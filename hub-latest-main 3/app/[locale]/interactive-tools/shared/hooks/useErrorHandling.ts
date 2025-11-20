@@ -51,20 +51,20 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
   });
 
   const { addErrorNotification, addWarningNotification, addSuccessNotification } = useNotifications();
-  const { 
-    notifyDataCorruption, 
-    notifyStorageQuotaExceeded, 
-    notifyRecoverySuccess, 
-    notifyRecoveryFailed 
+  const {
+    notifyDataCorruption,
+    notifyStorageQuotaExceeded,
+    notifyRecoverySuccess,
+    notifyRecoveryFailed
   } = useRecoveryNotifications();
-  
+
   const { isOffline } = useOfflineDetection();
   const dataIntegrityService = new DataIntegrityService();
 
   // Handle different types of errors
   const handleError = useCallback(async (error: Error | PainTrackerError, context?: string) => {
     const now = new Date();
-    
+
     setErrorState(prev => ({
       ...prev,
       hasError: true,
@@ -215,7 +215,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
   const handleDataCorruption = useCallback(async (error: PainTrackerError, context?: string) => {
     try {
       const integrityReport = await dataIntegrityService.checkDataIntegrity();
-      
+
       if (integrityReport.recoveryOptions.length > 0) {
         notifyDataCorruption(integrityReport.corruptionLevel, integrityReport.recoveryOptions);
       } else {
@@ -382,11 +382,11 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
 
       // Clear error state
       clearError();
-      
+
       // Trigger recovery success
       onRecovery?.(true);
       addSuccessNotification('Recovery Successful', 'Operation completed successfully after retry.');
-      
+
       return true;
     } catch (retryError) {
       console.error('Retry failed:', retryError);
@@ -425,7 +425,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         context,
         userAgent: navigator.userAgent,
         url: window.location.href,
-        localStorage: Object.keys(localStorage).filter(key => 
+        localStorage: Object.keys(localStorage).filter(key =>
           key.startsWith('enhanced_pain_tracker_')
         ).length
       };
@@ -434,14 +434,14 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         localStorage.getItem('pain_tracker_error_reports') || '[]'
       );
       existingReports.push(errorReport);
-      
+
       // Keep only last 10 reports
       if (existingReports.length > 10) {
         existingReports.splice(0, existingReports.length - 10);
       }
-      
+
       localStorage.setItem('pain_tracker_error_reports', JSON.stringify(existingReports));
-      
+
       addSuccessNotification('Error Reported', 'Error details have been saved for debugging.');
     } catch (reportingError) {
       console.error('Failed to report error:', reportingError);
@@ -469,12 +469,12 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
   useEffect(() => {
     if (enableAutoRecovery && errorState.hasError && !errorState.isRecovering) {
       const autoRecoverableErrors: PainTrackerErrorCode[] = ['CHART_ERROR', 'VALIDATION_ERROR'];
-      
+
       if (errorState.errorCode && autoRecoverableErrors.includes(errorState.errorCode)) {
         const timer = setTimeout(() => {
           retryLastOperation();
         }, retryDelay);
-        
+
         return () => clearTimeout(timer);
       }
     }

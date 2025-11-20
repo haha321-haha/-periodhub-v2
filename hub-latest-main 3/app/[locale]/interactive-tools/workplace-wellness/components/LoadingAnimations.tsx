@@ -9,10 +9,10 @@
 import { ReactNode } from 'react';
 
 // 基础加载动画
-export function LoadingSpinner({ 
-  size = 'md', 
-  className = '' 
-}: { 
+export function LoadingSpinner({
+  size = 'md',
+  className = ''
+}: {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }) {
@@ -42,9 +42,9 @@ export function LoadingSpinner({
 }
 
 // 脉冲加载器
-export function PulseLoader({ 
-  className = '' 
-}: { 
+export function PulseLoader({
+  className = ''
+}: {
   className?: string;
 }) {
   return (
@@ -56,9 +56,9 @@ export function PulseLoader({
 }
 
 // 骨架卡片
-export function SkeletonCard({ 
-  className = '' 
-}: { 
+export function SkeletonCard({
+  className = ''
+}: {
   className?: string;
 }) {
   return (
@@ -73,16 +73,16 @@ export function SkeletonCard({
 }
 
 // 进度加载器
-export function ProgressLoader({ 
+export function ProgressLoader({
   progress = 0,
   className = ''
-}: { 
+}: {
   progress?: number;
   className?: string;
 }) {
   return (
     <div className={`w-full bg-neutral-200 rounded-full h-2 ${className}`}>
-      <div 
+      <div
         className="bg-primary-600 h-2 rounded-full transition-all duration-300 ease-out"
         style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
       />
@@ -91,9 +91,9 @@ export function ProgressLoader({
 }
 
 // 波浪加载器
-export function WaveLoader({ 
-  className = '' 
-}: { 
+export function WaveLoader({
+  className = ''
+}: {
   className?: string;
 }) {
   return (

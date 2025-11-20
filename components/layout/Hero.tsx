@@ -137,7 +137,7 @@ export default function Hero() {
               <div className="flex flex-col items-center lg:items-start gap-2">
                 {/* A/B测试版本的主CTA */}
                 <HeroABTest />
-                
+
                 {/* 备用版本（A/B测试加载失败时显示） */}
                 <div className="hidden">
                   <Link href={`/${locale}/immediate-relief`}>

@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 // 增强的结构化数据 - 针对健康平台优化
 const getStructuredData = async (locale: string) => {
   const t = await getTranslations({ locale, namespace: '' });
-  
+
   return {
   "@context": "https://schema.org",
   "@graph": [

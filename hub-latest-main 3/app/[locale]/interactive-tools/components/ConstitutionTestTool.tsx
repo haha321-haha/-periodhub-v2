@@ -46,7 +46,7 @@ interface ConstitutionTestToolProps {
 export default function ConstitutionTestTool({ locale }: ConstitutionTestToolProps) {
   const { t } = useInteractiveToolTranslations('constitutionTest');
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string | string[]>>({});
-  
+
   // 生成安全的时间戳，避免水合错误
   const generateSafeTimestamp = () => {
     if (typeof window === 'undefined') {
@@ -222,11 +222,11 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
     return (
       <HydrationBoundary>
         <div className="max-w-4xl mx-auto">
-        <NotificationContainer 
+        <NotificationContainer
           notifications={notifications}
           onRemove={removeNotification}
         />
-        
+
         {/* 介绍页面 - 紫色主题 */}
         <div className="text-center mb-8 animate-fade-in">
           <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center shadow-lg">
@@ -332,15 +332,15 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
   // 如果测试完成，显示结果
   if (result) {
     const typeInfo = constitutionTypeInfo[locale]?.[result.primaryType] || constitutionTypeInfo.zh[result.primaryType];
-    
+
     return (
       <HydrationBoundary>
         <div className="max-w-6xl mx-auto">
-        <NotificationContainer 
+        <NotificationContainer
           notifications={notifications}
           onRemove={removeNotification}
         />
-        
+
         {/* 结果标题 */}
         <div className="text-center mb-8">
           <div className="w-20 h-20 mx-auto mb-6 bg-green-100 rounded-full flex items-center justify-center">
@@ -479,7 +479,7 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
                   ))}
                 </div>
               </div>
-              
+
               <div>
                 <h4 className="font-medium text-red-700 mb-2">
                   {t('recommendations.dietary.foodsToAvoid')}
@@ -767,13 +767,13 @@ export default function ConstitutionTestTool({ locale }: ConstitutionTestToolPro
   return (
     <HydrationBoundary>
       <div className="max-w-4xl mx-auto">
-      <NotificationContainer 
+      <NotificationContainer
         notifications={notifications}
         onRemove={removeNotification}
       />
-      
+
       {isLoading && <LoadingSpinner />}
-      
+
       {/* 进度条 - 紫色主题 */}
       <div className="mb-8 bg-white p-6 rounded-xl shadow-lg border border-purple-100">
         <div className="flex justify-between items-center mb-4">

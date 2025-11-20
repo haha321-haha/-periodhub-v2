@@ -57,7 +57,7 @@ export default function AdvancedCycleAnalysis() {
   );
 
   // 从 store 读取 periodData - 确保类型安全
-  const periodData = (calendar && 'periodData' in calendar) 
+  const periodData = (calendar && 'periodData' in calendar)
     ? (calendar.periodData || [])
     : [];
 

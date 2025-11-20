@@ -7,11 +7,11 @@ import { Suspense } from 'react';
 import { Home } from 'lucide-react';
 import LoadingSystem from '../../../interactive-tools/shared/components/LoadingSystem';
 import { ErrorBoundary } from '../../../interactive-tools/shared/components/ErrorBoundary';
-import { 
-  PainAssessmentToolClient, 
-  SymptomChecklistClient, 
-  DecisionTreeClient, 
-  ComparisonTableClient 
+import {
+  PainAssessmentToolClient,
+  SymptomChecklistClient,
+  DecisionTreeClient,
+  ComparisonTableClient
 } from './MedicalCareGuideClient';
 
 // Client Component面包屑组件
@@ -56,7 +56,7 @@ export default function MedicalCareGuideContent() {
     <div className="container-custom py-8 md:py-12">
       {/* Breadcrumb */}
       <div className="mb-8">
-        <ClientBreadcrumb 
+        <ClientBreadcrumb
           items={[
             { label: locale === 'zh' ? '首页' : 'Home', href: `/${locale}` },
             { label: locale === 'zh' ? '文章中心' : 'Articles', href: `/${locale}/downloads` },
@@ -66,12 +66,12 @@ export default function MedicalCareGuideContent() {
       </div>
 
       <main className="max-w-4xl mx-auto space-y-8 md:space-y-12" role="main" aria-label="医疗护理指南主要内容">
-        <article 
-          role="article" 
+        <article
+          role="article"
           aria-labelledby="main-title"
           className="max-w-none"
         >
-        
+
         {/* 结构化数据注入 */}
         <script
           type="application/ld+json"
@@ -120,7 +120,7 @@ export default function MedicalCareGuideContent() {
           </ul>
           <p className="text-sm text-gray-700">{t('article.section1.p4')}</p>
         </section>
-        
+
         <div className="my-8 md:my-12 h-px bg-gray-200"></div>
 
         {/* 疼痛量化部分 */}
@@ -146,7 +146,7 @@ export default function MedicalCareGuideContent() {
             </li>
           </ul>
           <p className="text-sm text-gray-700 mb-4">{t('article.section2.p3')}</p>
-          
+
           {/* 疼痛评估工具 */}
           <ErrorBoundary>
             <Suspense fallback={<LoadingSystem.LoadingSpinner size="lg" />}>
@@ -154,7 +154,7 @@ export default function MedicalCareGuideContent() {
             </Suspense>
           </ErrorBoundary>
         </section>
-        
+
         <div className="my-8 md:my-12 h-px bg-gray-200"></div>
 
         {/* 危险信号部分 */}
@@ -166,14 +166,14 @@ export default function MedicalCareGuideContent() {
             <span>{t('article.section3.title')}</span>
           </h2>
           <p className="text-sm text-gray-700 mb-4">{t('article.section3.p1')}</p>
-          
+
           {/* 症状检查清单 */}
           <ErrorBoundary>
             <Suspense fallback={<LoadingSystem.LoadingSpinner size="lg" />}>
               <SymptomChecklistClient />
             </Suspense>
           </ErrorBoundary>
-          
+
           {/* 7个危险信号网格布局 */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
             <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg hover:bg-rose-100 hover:border-rose-300 transition-all duration-300 hover:scale-105">
@@ -185,7 +185,7 @@ export default function MedicalCareGuideContent() {
                 })}
               </p>
             </div>
-            
+
             <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg hover:bg-rose-100 hover:border-rose-300 transition-all duration-300 hover:scale-105">
               <div className="flex items-center justify-center w-8 h-8 bg-rose-100 text-rose-600 font-bold text-sm rounded-full mx-auto mb-3">2</div>
               <h3 className="font-bold text-sm text-rose-700 mb-2">{t('article.section3.h3_2')}</h3>
@@ -195,7 +195,7 @@ export default function MedicalCareGuideContent() {
                 })}
               </p>
             </div>
-            
+
             <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg hover:bg-rose-100 hover:border-rose-300 transition-all duration-300 hover:scale-105">
               <div className="flex items-center justify-center w-8 h-8 bg-rose-100 text-rose-600 font-bold text-sm rounded-full mx-auto mb-3">3</div>
               <h3 className="font-bold text-sm text-rose-700 mb-2">{t('article.section3.h3_3')}</h3>
@@ -205,7 +205,7 @@ export default function MedicalCareGuideContent() {
                 })}
               </p>
             </div>
-            
+
             <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg hover:bg-rose-100 hover:border-rose-300 transition-all duration-300 hover:scale-105">
               <div className="flex items-center justify-center w-8 h-8 bg-rose-100 text-rose-600 font-bold text-sm rounded-full mx-auto mb-3">4</div>
               <h3 className="font-bold text-sm text-rose-700 mb-2">{t('article.section3.h3_4')}</h3>
@@ -215,7 +215,7 @@ export default function MedicalCareGuideContent() {
                 })}
               </p>
             </div>
-            
+
             <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg hover:bg-rose-100 hover:border-rose-300 transition-all duration-300 hover:scale-105">
               <div className="flex items-center justify-center w-8 h-8 bg-rose-100 text-rose-600 font-bold text-sm rounded-full mx-auto mb-3">5</div>
               <h3 className="font-bold text-sm text-rose-700 mb-2">{t('article.section3.h3_5')}</h3>
@@ -225,7 +225,7 @@ export default function MedicalCareGuideContent() {
                 })}
               </p>
             </div>
-            
+
             <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg hover:bg-rose-100 hover:border-rose-300 transition-all duration-300 hover:scale-105">
               <div className="flex items-center justify-center w-8 h-8 bg-rose-100 text-rose-600 font-bold text-sm rounded-full mx-auto mb-3">6</div>
               <h3 className="font-bold text-sm text-rose-700 mb-2">{t('article.section3.h3_6')}</h3>
@@ -235,21 +235,21 @@ export default function MedicalCareGuideContent() {
                 })}
               </p>
             </div>
-            
+
             <div className="p-3 bg-rose-50 border border-rose-200 rounded-lg md:col-span-2 lg:col-span-1 hover:bg-rose-100 hover:border-rose-300 transition-all duration-300 hover:scale-105">
               <div className="flex items-center justify-center w-8 h-8 bg-rose-100 text-rose-600 font-bold text-sm rounded-full mx-auto mb-3">7</div>
               <h3 className="font-bold text-sm text-rose-700 mb-2">{t('article.section3.h3_7')}</h3>
               <p className="text-xs text-neutral-600">{t('article.section3.p8')}</p>
             </div>
           </div>
-          
+
           {/* 对比表格 */}
           <ErrorBoundary>
             <Suspense fallback={<LoadingSystem.LoadingSpinner size="lg" />}>
               <ComparisonTableClient />
             </Suspense>
           </ErrorBoundary>
-          
+
           <blockquote className="border-l-4 border-red-500 bg-red-50 p-4 my-6">
             <p className="text-red-800 font-medium">
               {t.rich('article.section3.quote', {
@@ -270,7 +270,7 @@ export default function MedicalCareGuideContent() {
             <span>{t('article.section4.title')}</span>
           </h2>
           <p className="text-sm text-gray-700 mb-4">{t('article.section4.p1')}</p>
-          
+
           {/* 决策树工具 */}
           <ErrorBoundary>
             <Suspense fallback={<LoadingSystem.LoadingSpinner size="lg" />}>
@@ -292,7 +292,7 @@ export default function MedicalCareGuideContent() {
           <p className="text-sm text-gray-700 mb-3">{t('article.section5.p1')}</p>
           <p className="text-sm text-gray-700 mb-3">{t('article.section5.p2')}</p>
           <p className="text-sm text-gray-700 mb-4">{t('article.section5.p3')}</p>
-          
+
           <div className="bg-rose-50 border border-rose-200 rounded-lg p-4 my-4">
             <h3 className="text-sm font-semibold text-rose-800 mb-2">
               {t('article.section5.callout.title')}
@@ -314,7 +314,7 @@ export default function MedicalCareGuideContent() {
             </p>
           </div>
         </section>
-        
+
         </article>
       </main>
     </div>

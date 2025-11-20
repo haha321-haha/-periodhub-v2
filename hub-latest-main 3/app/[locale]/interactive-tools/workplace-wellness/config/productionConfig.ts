@@ -104,14 +104,14 @@ export const performanceConfig = {
       },
     },
   },
-  
+
   // 懒加载配置
   lazyLoading: {
     defaultDelay: 100,
     preloadThreshold: 0.1,
     maxConcurrent: 3,
   },
-  
+
   // 缓存配置
   caching: {
     staticAssets: {
@@ -127,7 +127,7 @@ export const performanceConfig = {
       staleWhileRevalidate: 3600, // 1小时
     },
   },
-  
+
   // 压缩配置
   compression: {
     gzip: true,
@@ -148,14 +148,14 @@ export const monitoringConfig = {
     CLS: 0.1,  // Cumulative Layout Shift
     TTFB: 800, // Time to First Byte
   },
-  
+
   // 性能监控配置
   performance: {
     sampleRate: 0.1, // 10%采样率
     bufferSize: 50,
     flushInterval: 5000, // 5秒
   },
-  
+
   // 错误追踪配置
   errorTracking: {
     enableSourceMap: false,
@@ -180,7 +180,7 @@ export const securityConfig = {
     'frame-src': ["'none'"],
     'object-src': ["'none'"],
   },
-  
+
   // 安全头配置
   headers: {
     'X-Frame-Options': 'DENY',
@@ -206,19 +206,19 @@ export const deploymentConfig = {
       removeConsole: process.env.NODE_ENV === 'production',
     },
   },
-  
+
   // 静态生成配置
   staticGeneration: {
     revalidate: 3600, // 1小时重新验证
     fallback: 'blocking',
   },
-  
+
   // ISR配置
   isr: {
     revalidate: 1800, // 30分钟重新验证
     maxAge: 3600, // 1小时缓存
   },
-  
+
   // CDN配置
   cdn: {
     domains: ['cdn.example.com'],
@@ -243,7 +243,7 @@ export const environmentConfig = {
       enableSourceMap: true,
     },
   },
-  
+
   production: {
     ...defaultProductionConfig,
     monitoring: {
@@ -251,7 +251,7 @@ export const environmentConfig = {
       logLevel: 'error' as const,
     },
   },
-  
+
   staging: {
     ...defaultProductionConfig,
     monitoring: {
@@ -285,27 +285,27 @@ export function validateProductionConfig(config: ProductionConfig): {
 } {
   const errors: string[] = [];
   const warnings: string[] = [];
-  
+
   // 验证性能配置
   if (!config.performance.enableCodeSplitting && config.performance.enableLazyLoading) {
     warnings.push('启用懒加载但未启用代码分割可能影响性能');
   }
-  
+
   // 验证监控配置
   if (config.monitoring.enablePerformanceMonitoring && !config.monitoring.enableWebVitals) {
     warnings.push('启用性能监控但未启用Web Vitals');
   }
-  
+
   // 验证安全配置
   if (config.security.enableCSP && !config.security.enableXSSProtection) {
     warnings.push('启用CSP但未启用XSS保护');
   }
-  
+
   // 验证优化配置
   if (config.optimization.enableSourceMap && config.optimization.enableMinification) {
     warnings.push('生产环境启用source map可能影响安全性');
   }
-  
+
   return {
     isValid: errors.length === 0,
     errors,
@@ -318,27 +318,27 @@ export function validateProductionConfig(config: ProductionConfig): {
  */
 export function getOptimizationSuggestions(config: ProductionConfig): string[] {
   const suggestions: string[] = [];
-  
+
   if (!config.performance.enableCodeSplitting) {
     suggestions.push('建议启用代码分割以提升首屏加载性能');
   }
-  
+
   if (!config.performance.enableLazyLoading) {
     suggestions.push('建议启用懒加载以减少初始包大小');
   }
-  
+
   if (!config.performance.enablePreloading) {
     suggestions.push('建议启用组件预加载以提升用户体验');
   }
-  
+
   if (!config.monitoring.enableWebVitals) {
     suggestions.push('建议启用Web Vitals监控以追踪核心性能指标');
   }
-  
+
   if (!config.security.enableCSP) {
     suggestions.push('建议启用CSP以增强安全性');
   }
-  
+
   return suggestions;
 }
 

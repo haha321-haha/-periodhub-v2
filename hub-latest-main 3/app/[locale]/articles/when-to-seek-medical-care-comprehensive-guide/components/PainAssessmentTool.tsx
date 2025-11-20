@@ -10,18 +10,18 @@ import { PainAssessmentLogic } from '../utils/assessmentLogic';
 import styles from '../styles/PainAssessmentTool.module.css';
 import type { PainAssessmentToolProps, AssessmentResult } from '../types/medical-care-guide';
 
-export default function PainAssessmentTool({ 
-  onAssessmentComplete, 
+export default function PainAssessmentTool({
+  onAssessmentComplete,
   className = '',
-  initialLevel = 0 
+  initialLevel = 0
 }: PainAssessmentToolProps) {
   const t = useTranslations('medicalCareGuide');
-  const { 
-    painLevel, 
-    currentAdvice, 
+  const {
+    painLevel,
+    currentAdvice,
     assessmentHistory,
-    updatePainLevel, 
-    saveAssessment 
+    updatePainLevel,
+    saveAssessment
   } = usePainAssessment();
 
   const [isInteracted, setIsInteracted] = useState(false);
@@ -70,14 +70,14 @@ export default function PainAssessmentTool({
           {t('painTool.description')}
         </p>
       </div>
-      
+
       {/* 疼痛等级滑块 */}
       <div className={styles.sliderContainer}>
         <div className={styles.sliderLabels}>
           <span className={styles.sliderLabelMin}>{t('painTool.sliderMin')}</span>
           <span className={styles.sliderLabelMax}>{t('painTool.sliderMax')}</span>
         </div>
-        
+
         <input
           type="range"
           min="0"
@@ -92,7 +92,7 @@ export default function PainAssessmentTool({
           aria-valuemax={10}
           aria-valuenow={painLevel}
         />
-        
+
         <div className={styles.sliderTicks}>
           {Array.from({ length: 11 }, (_, i) => (
             <div key={i} className={styles.tick}>
@@ -101,7 +101,7 @@ export default function PainAssessmentTool({
           ))}
         </div>
       </div>
-      
+
       {/* 当前疼痛等级显示 */}
       <div className={styles.currentLevel}>
         <span className={`${styles.levelNumber} ${currentPainInfo?.colorClass || ''}`}>
@@ -111,7 +111,7 @@ export default function PainAssessmentTool({
           {t('painTool.currentLevel')}
         </span>
       </div>
-      
+
       {/* 疼痛建议和推荐 */}
       {isInteracted && currentPainInfo && (
         <div className={styles.adviceContainer}>
@@ -120,12 +120,12 @@ export default function PainAssessmentTool({
               {t(currentPainInfo.title)}
             </h4>
           </div>
-          
+
           <div className={styles.adviceContent}>
             <p className={styles.adviceText}>
               {t(currentPainInfo.advice)}
             </p>
-            
+
             {currentPainInfo.recommendations.length > 0 && (
               <div className={styles.recommendations}>
                 <h5 className={styles.recommendationsTitle}>
@@ -141,7 +141,7 @@ export default function PainAssessmentTool({
               </div>
             )}
           </div>
-          
+
           {/* 紧急情况警告 */}
           {painLevel >= 8 && (
             <div className={styles.emergencyWarning}>
@@ -154,7 +154,7 @@ export default function PainAssessmentTool({
           )}
         </div>
       )}
-      
+
       {/* 历史记录提示 */}
       {assessmentHistory.length > 0 && (
         <div className={styles.historyHint}>
@@ -163,7 +163,7 @@ export default function PainAssessmentTool({
           </p>
         </div>
       )}
-      
+
       {/* 隐藏的描述文本，用于屏幕阅读器 */}
       <div id="pain-description" className="sr-only">
         {t('painTool.sliderDescription')}

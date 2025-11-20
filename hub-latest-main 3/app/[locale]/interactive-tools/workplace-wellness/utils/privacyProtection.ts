@@ -203,7 +203,7 @@ export class PrivacyProtectionManager {
 
     // 基础安全提示
     warnings.push(
-      isZh 
+      isZh
         ? '🔒 数据已脱敏处理，保护您的隐私信息'
         : '🔒 Data has been masked to protect your privacy'
     );
@@ -295,8 +295,8 @@ export class PrivacyProtectionManager {
   private cleanupAuditLog(): void {
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - this.settings.dataRetentionDays);
-    
-    this.auditLog = this.auditLog.filter(entry => 
+
+    this.auditLog = this.auditLog.filter(entry =>
       new Date(entry.timestamp) > cutoffDate
     );
   }

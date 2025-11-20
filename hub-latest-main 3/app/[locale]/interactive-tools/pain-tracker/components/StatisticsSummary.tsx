@@ -5,10 +5,10 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { 
-  Activity, 
-  TrendingUp, 
-  TrendingDown, 
+import {
+  Activity,
+  TrendingUp,
+  TrendingDown,
   Minus,
   Calendar,
   Target,
@@ -34,10 +34,10 @@ interface StatCard {
   trendValue?: string;
 }
 
-export default function StatisticsSummary({ 
-  analytics, 
-  locale, 
-  className = '' 
+export default function StatisticsSummary({
+  analytics,
+  locale,
+  className = ''
 }: StatisticsSummaryProps) {
   const t = useTranslations('painTracker.statistics');
 
@@ -56,7 +56,7 @@ export default function StatisticsSummary({
     });
 
     // Average Pain Level
-    const avgPainColor = 
+    const avgPainColor =
       analytics.averagePainLevel >= 7 ? 'red' :
       analytics.averagePainLevel >= 5 ? 'yellow' :
       analytics.averagePainLevel >= 3 ? 'blue' : 'green';
@@ -100,10 +100,10 @@ export default function StatisticsSummary({
 
     // Cycle Pattern Insight
     if (analytics.cyclePatterns.length > 0) {
-      const highestPainPhase = analytics.cyclePatterns.reduce((prev, current) => 
+      const highestPainPhase = analytics.cyclePatterns.reduce((prev, current) =>
         prev.averagePainLevel > current.averagePainLevel ? prev : current
       );
-      
+
       cards.push({
         id: 'cycle-pattern',
         title: t('highestPainPhase'),
@@ -139,17 +139,17 @@ export default function StatisticsSummary({
 
   function getPainTrend(trendData: any[]): 'up' | 'down' | 'stable' {
     if (trendData.length < 5) return 'stable';
-    
+
     const recent = trendData.slice(-5);
     const older = trendData.slice(-10, -5);
-    
+
     if (older.length === 0) return 'stable';
-    
+
     const recentAvg = recent.reduce((sum, point) => sum + point.painLevel, 0) / recent.length;
     const olderAvg = older.reduce((sum, point) => sum + point.painLevel, 0) / older.length;
-    
+
     const difference = recentAvg - olderAvg;
-    
+
     if (difference > 0.5) return 'up';
     if (difference < -0.5) return 'down';
     return 'stable';
@@ -157,17 +157,17 @@ export default function StatisticsSummary({
 
   function getTrendValue(trendData: any[]): string {
     if (trendData.length < 5) return '';
-    
+
     const recent = trendData.slice(-5);
     const older = trendData.slice(-10, -5);
-    
+
     if (older.length === 0) return '';
-    
+
     const recentAvg = recent.reduce((sum, point) => sum + point.painLevel, 0) / recent.length;
     const olderAvg = older.reduce((sum, point) => sum + point.painLevel, 0) / older.length;
-    
+
     const difference = Math.abs(recentAvg - olderAvg);
-    
+
     return difference > 0.1 ? `${difference.toFixed(1)}` : '';
   }
 
@@ -300,7 +300,7 @@ export default function StatisticsSummary({
         {statCards.map((card) => {
           const Icon = card.icon;
           const colors = colorClasses[card.color];
-          
+
           return (
             <div
               key={card.id}
@@ -363,7 +363,7 @@ export default function StatisticsSummary({
           <span>{t('trackingPeriod')}:</span>
           <span>
             {Math.ceil(
-              (analytics.dateRange.end.getTime() - analytics.dateRange.start.getTime()) / 
+              (analytics.dateRange.end.getTime() - analytics.dateRange.start.getTime()) /
               (1000 * 60 * 60 * 24)
             )} {t('days')}
           </span>

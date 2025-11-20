@@ -33,7 +33,7 @@ export default function WorkImpactComponent() {
   const getBadgeClasses = (level: number, type: 'pain' | 'efficiency') => {
     const variant = getBadgeVariant(level, type);
     const baseClasses = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium';
-    
+
     switch (variant) {
       case 'success':
         return `${baseClasses} bg-green-100 text-green-800`;
@@ -93,11 +93,11 @@ export default function WorkImpactComponent() {
               {t('workImpact.painLevel')}
             </label>
             <div className="flex items-center gap-2">
-              <input 
-                type="range" 
-                min="1" 
-                max="10" 
-                value={workImpact.painLevel} 
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value={workImpact.painLevel}
                 onChange={handlePainLevelChange}
                 className="flex-1"
               />
@@ -115,11 +115,11 @@ export default function WorkImpactComponent() {
               {t('workImpact.efficiency')}
             </label>
             <div className="flex items-center gap-2">
-              <input 
-                type="range" 
-                min="0" 
-                max="100" 
-                value={workImpact.efficiency} 
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={workImpact.efficiency}
                 onChange={handleEfficiencyChange}
                 className="flex-1"
               />
@@ -138,7 +138,7 @@ export default function WorkImpactComponent() {
             </label>
             <div className="grid grid-cols-2 gap-2">
               {['takeLeave', 'workFromHome', 'postponeMeeting', 'reduceTasks'].map((optionKey: string, index: number) => (
-                <button 
+                <button
                   key={index}
                   className="rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-3 py-1.5 text-sm border border-neutral-300 hover:bg-neutral-50 text-neutral-800"
                 >
@@ -150,7 +150,7 @@ export default function WorkImpactComponent() {
         </div>
 
         {/* 保存按钮 */}
-        <button 
+        <button
           onClick={handleSaveRecord}
           className="w-full mt-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base bg-primary-500 hover:bg-primary-600 text-white"
         >
@@ -166,12 +166,12 @@ export default function WorkImpactComponent() {
         </h4>
         <div className="space-y-3">
           {templates.map((template) => (
-            <div 
+            <div
               key={template.id}
               onClick={() => handleTemplateSelect(template)}
               className={`p-4 rounded-lg border-2 cursor-pointer transition-colors duration-200 ${
-                workImpact.selectedTemplateId === template.id 
-                  ? 'border-primary-500 bg-primary-500/10' 
+                workImpact.selectedTemplateId === template.id
+                  ? 'border-primary-500 bg-primary-500/10'
                   : 'border-neutral-200 hover:border-neutral-300'
               }`}
             >
@@ -183,8 +183,8 @@ export default function WorkImpactComponent() {
                   </p>
                 </div>
                 <span className={`ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                  template.severity === 'mild' 
-                    ? 'bg-green-100 text-green-800' 
+                  template.severity === 'mild'
+                    ? 'bg-green-100 text-green-800'
                     : 'bg-yellow-100 text-yellow-800'
                 }`}>
                   {t(`workImpact.severity.${template.severity}`)}
@@ -211,7 +211,7 @@ export default function WorkImpactComponent() {
                 {selectedTemplate.content}
               </div>
             </div>
-            <button 
+            <button
               onClick={() => handleCopyTemplate(selectedTemplate)}
               className="mt-3 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-3 py-1.5 text-sm bg-primary-500 hover:bg-primary-600 text-white"
             >

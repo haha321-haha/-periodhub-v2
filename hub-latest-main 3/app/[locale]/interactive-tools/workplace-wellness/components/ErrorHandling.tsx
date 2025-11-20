@@ -36,7 +36,7 @@ class InternalErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryS
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.setState({ error, errorInfo });
     this.props.onError?.(error, errorInfo);
-    
+
     // 开发环境下打印错误信息
     if (process.env.NODE_ENV === 'development') {
       console.error('ErrorBoundary caught an error:', error, errorInfo);
@@ -57,10 +57,10 @@ class InternalErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryS
 }
 
 // 错误回退组件
-export function ErrorFallback({ 
+export function ErrorFallback({
   error,
   onRetry
-}: { 
+}: {
   error?: Error;
   onRetry?: () => void;
 }) {
@@ -76,7 +76,7 @@ export function ErrorFallback({
             抱歉，页面遇到了问题。请尝试刷新页面或联系技术支持。
           </p>
         </div>
-        
+
         <div className="space-y-3">
           <button
             onClick={() => window.location.reload()}
@@ -85,7 +85,7 @@ export function ErrorFallback({
             <RefreshCw className="w-4 h-4 inline mr-2" />
             重试
           </button>
-          
+
           <button
             onClick={() => window.location.href = '/'}
             className="w-full bg-neutral-100 text-neutral-700 px-4 py-2 rounded-lg hover:bg-neutral-200 transition-colors"
@@ -120,9 +120,9 @@ export function ErrorFallback({
 }
 
 // 网络错误组件
-export function NetworkError({ 
-  onRetry 
-}: { 
+export function NetworkError({
+  onRetry
+}: {
   onRetry?: () => void;
 }) {
   return (
@@ -136,7 +136,7 @@ export function NetworkError({
           无法连接到服务器，请检查网络连接后重试。
         </p>
       </div>
-      
+
       <button
         onClick={onRetry}
         className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
@@ -149,9 +149,9 @@ export function NetworkError({
 }
 
 // 数据加载错误组件
-export function DataLoadError({ 
-  onRetry 
-}: { 
+export function DataLoadError({
+  onRetry
+}: {
   onRetry?: () => void;
 }) {
   return (
@@ -165,7 +165,7 @@ export function DataLoadError({
           无法加载数据，请稍后重试。
         </p>
       </div>
-      
+
       <button
         onClick={onRetry}
         className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
@@ -200,7 +200,7 @@ export function EmptyState({
           {description}
         </p>
       </div>
-      
+
       {action && (
         <div className="flex justify-center">
           {action}
@@ -211,9 +211,9 @@ export function EmptyState({
 }
 
 // 表单错误组件
-export function FormError({ 
-  message 
-}: { 
+export function FormError({
+  message
+}: {
   message: string;
 }) {
   return (
@@ -224,9 +224,9 @@ export function FormError({
 }
 
 // 成功消息组件
-export function SuccessMessage({ 
-  message 
-}: { 
+export function SuccessMessage({
+  message
+}: {
   message: string;
 }) {
   return (
@@ -237,9 +237,9 @@ export function SuccessMessage({
 }
 
 // 警告消息组件
-export function WarningMessage({ 
-  message 
-}: { 
+export function WarningMessage({
+  message
+}: {
   message: string;
 }) {
   return (
@@ -255,9 +255,9 @@ export function ErrorBoundary(props: ErrorBoundaryProps) {
 }
 
 // 信息消息组件
-export function InfoMessage({ 
-  message 
-}: { 
+export function InfoMessage({
+  message
+}: {
   message: string;
 }) {
   return (

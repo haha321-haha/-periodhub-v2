@@ -9,8 +9,8 @@ import { DecisionTreeLogic } from '../utils/assessmentLogic';
 import styles from '../styles/DecisionTree.module.css';
 import type { DecisionTreeProps, DecisionTreeNode, AssessmentResult } from '../types/medical-care-guide';
 
-export default function DecisionTree({ 
-  onDecisionComplete, 
+export default function DecisionTree({
+  onDecisionComplete,
   className = '',
   startFromNode = 'start'
 }: DecisionTreeProps) {
@@ -29,20 +29,20 @@ export default function DecisionTree({
   // 处理决策选择
   const handleDecision = useCallback(async (choice: 'yes' | 'no') => {
     setIsAnimating(true);
-    
+
     // 添加动画延迟
     await new Promise(resolve => setTimeout(resolve, 300));
-    
+
     const result = makeDecision(choice);
     setIsAnimating(false);
-    
+
     // 如果到达最终结果，触发回调
     if (result) {
       const assessmentResult: AssessmentResult = {
         painLevel: 0, // 将由其他工具提供
         symptoms: [],
-        riskLevel: result.urgency === 'emergency' ? 'emergency' : 
-                  result.urgency === 'urgent' ? 'high' : 
+        riskLevel: result.urgency === 'emergency' ? 'emergency' :
+                  result.urgency === 'urgent' ? 'high' :
                   result.urgency === 'routine' ? 'medium' : 'low',
         recommendations: result.actions,
         shouldSeeDoctor: result.urgency !== 'observe',
@@ -50,7 +50,7 @@ export default function DecisionTree({
                 result.urgency === 'urgent' ? 'within_week' : 'routine',
         timestamp: new Date().toISOString()
       };
-      
+
       onDecisionComplete?.(assessmentResult);
     }
   }, [makeDecision, onDecisionComplete]);
@@ -108,12 +108,12 @@ export default function DecisionTree({
                 {t('decisionTree.questionTitle', { step: decisionPath.length + 1 })}
               </h4>
             </div>
-            
+
             <div className={styles.questionContent}>
               <p className={styles.questionText}>
                 {t(currentNode.question!)}
               </p>
-              
+
               <div className={styles.questionOptions}>
                 <button
                   onClick={() => handleDecision('yes')}
@@ -123,7 +123,7 @@ export default function DecisionTree({
                   <CheckCircle size={20} className={styles.optionIcon} />
                   {t(currentNode.options!.yes)}
                 </button>
-                
+
                 <button
                   onClick={() => handleDecision('no')}
                   disabled={isAnimating}
@@ -151,12 +151,12 @@ export default function DecisionTree({
                 </p>
               </div>
             </div>
-            
+
             <div className={styles.resultContent}>
               <p className={styles.resultText}>
                 {t(finalResult.text)}
               </p>
-              
+
               <div className={styles.resultActions}>
                 <h5 className={styles.actionsTitle}>
                   {t('decisionTree.recommendedActions')}
@@ -173,7 +173,7 @@ export default function DecisionTree({
                 </ul>
               </div>
             </div>
-            
+
             {/* 紧急情况特殊提示 */}
             {finalResult.urgency === 'emergency' && (
               <div className={styles.emergencyAlert}>
@@ -214,19 +214,19 @@ export default function DecisionTree({
       {/* 进度指示器 */}
       <div className={styles.progress}>
         <div className={styles.progressBar}>
-          <div 
+          <div
             className={styles.progressFill}
-            style={{ 
-              width: finalResult ? '100%' : `${(decisionPath.length / 3) * 100}%` 
+            style={{
+              width: finalResult ? '100%' : `${(decisionPath.length / 3) * 100}%`
             }}
           />
         </div>
         <p className={styles.progressText}>
-          {finalResult 
+          {finalResult
             ? t('decisionTree.completed')
-            : t('decisionTree.progress', { 
-                current: decisionPath.length, 
-                total: 3 
+            : t('decisionTree.progress', {
+                current: decisionPath.length,
+                total: 3
               })
           }
         </p>

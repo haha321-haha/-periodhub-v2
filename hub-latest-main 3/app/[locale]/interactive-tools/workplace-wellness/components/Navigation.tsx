@@ -42,15 +42,15 @@ export default function Navigation() {
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
-              
+
               return (
                 <TouchFeedback key={tab.id}>
                   <TouchFriendlyButton
                     onClick={() => handleTabClick(tab.id)}
                     className={`
                       flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200
-                      ${isActive 
-                        ? 'text-primary-600 border-b-2 border-primary-500 bg-primary-50' 
+                      ${isActive
+                        ? 'text-primary-600 border-b-2 border-primary-500 bg-primary-50'
                         : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
                       }
                     `}

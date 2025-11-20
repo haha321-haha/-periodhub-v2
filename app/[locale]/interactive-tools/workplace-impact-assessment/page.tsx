@@ -13,8 +13,8 @@ export async function generateMetadata({
   const { metadata } = generatePageSEO({
     locale: locale as "zh" | "en",
     path: "/interactive-tools/workplace-impact-assessment",
-    title: locale === "zh" 
-      ? "工作影响评估 - 经期工作能力分析" 
+    title: locale === "zh"
+      ? "工作影响评估 - 经期工作能力分析"
       : "Workplace Impact Assessment - Menstrual Work Capacity Analysis",
     description: locale === "zh"
       ? "专业的工作影响评估工具，分析经期对工作能力的影响，提供个性化的工作调整建议。"
@@ -26,7 +26,7 @@ export async function generateMetadata({
       operatingSystem: "Web",
       featureList: [
         locale === "zh" ? "专业工具" : "Professional Tool",
-        locale === "zh" ? "个性化建议" : "Personalized Recommendations", 
+        locale === "zh" ? "个性化建议" : "Personalized Recommendations",
         locale === "zh" ? "科学指导" : "Scientific Guidance",
       ],
     },

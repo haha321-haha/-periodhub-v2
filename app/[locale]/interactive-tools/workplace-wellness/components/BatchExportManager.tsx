@@ -36,12 +36,12 @@ interface BatchExportManagerProps {
 export default function BatchExportManager({}: BatchExportManagerProps) {
   const batchQueue = useBatchExportQueue();
   const templates = useExportTemplates() as ExportTemplate[];
-  
+
   // 类型保护：确保 batchQueue 是正确的类型
   const isBatchQueue = (queue: any): queue is BatchExportQueue => {
     return queue && typeof queue === 'object' && 'status' in queue && 'items' in queue;
   };
-  
+
   const safeBatchQueue = isBatchQueue(batchQueue) ? batchQueue : null;
   const {
     createBatchExport,
@@ -50,11 +50,11 @@ export default function BatchExportManager({}: BatchExportManagerProps) {
     retryFailedItems,
     clearBatchExport
   } = useBatchExportActions();
-  
+
   // 类型断言：确保 updateBatchItemStatus 有正确的类型
   const updateStatus = updateBatchItemStatus as (itemId: string, status: string, progress?: number, error?: string) => void;
   const { addExportHistory } = useExportHistoryActions();
-  
+
   // 类型断言：确保 addExportHistory 有正确的类型
   const addHistory = addExportHistory as (history: any) => void;
 

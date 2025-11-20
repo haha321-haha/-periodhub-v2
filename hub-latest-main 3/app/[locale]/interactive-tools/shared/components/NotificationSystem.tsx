@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, createContext, useContext } from 'react';
-import { 
-  CheckCircle, 
-  AlertTriangle, 
-  AlertCircle, 
-  Info, 
-  X, 
+import {
+  CheckCircle,
+  AlertTriangle,
+  AlertCircle,
+  Info,
+  X,
   Wifi,
   WifiOff,
   Shield,
@@ -64,10 +64,10 @@ interface NotificationProviderProps {
   defaultDuration?: number;
 }
 
-export function NotificationProvider({ 
-  children, 
+export function NotificationProvider({
+  children,
   maxNotifications = 5,
-  defaultDuration = 5000 
+  defaultDuration = 5000
 }: NotificationProviderProps) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
@@ -313,7 +313,7 @@ function NotificationItem({ notification, onRemove }: NotificationItemProps) {
       <div className={`${styles.bg} ${styles.border} border rounded-lg shadow-lg p-4 mb-3 max-w-sm`}>
         <div className="flex items-start">
           <Icon className={`h-5 w-5 ${styles.iconColor} mt-0.5 mr-3 flex-shrink-0`} />
-          
+
           <div className="flex-1 min-w-0">
             <h4 className={`text-sm font-medium ${styles.titleColor}`}>
               {notification.title}
@@ -321,7 +321,7 @@ function NotificationItem({ notification, onRemove }: NotificationItemProps) {
             <p className={`text-sm ${styles.messageColor} mt-1`}>
               {notification.message}
             </p>
-            
+
             {notification.actions && notification.actions.length > 0 && (
               <div className="mt-3 flex space-x-2">
                 {notification.actions.map((action, index) => (
@@ -341,12 +341,12 @@ function NotificationItem({ notification, onRemove }: NotificationItemProps) {
                 ))}
               </div>
             )}
-            
+
             <div className="mt-2 text-xs text-gray-500">
               {notification.timestamp.toLocaleTimeString()}
             </div>
           </div>
-          
+
           <button
             onClick={handleRemove}
             className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
@@ -365,9 +365,9 @@ interface NotificationContainerProps {
   className?: string;
 }
 
-export function NotificationContainer({ 
-  position = 'top-right', 
-  className = '' 
+export function NotificationContainer({
+  position = 'top-right',
+  className = ''
 }: NotificationContainerProps) {
   const { notifications, removeNotification } = useNotifications();
 
@@ -407,11 +407,11 @@ export function NotificationContainer({
 
 // Toast Hook for quick notifications
 export function useToast() {
-  const { 
-    addSuccessNotification, 
-    addErrorNotification, 
-    addWarningNotification, 
-    addInfoNotification 
+  const {
+    addSuccessNotification,
+    addErrorNotification,
+    addWarningNotification,
+    addInfoNotification
   } = useNotifications();
 
   const toast = {

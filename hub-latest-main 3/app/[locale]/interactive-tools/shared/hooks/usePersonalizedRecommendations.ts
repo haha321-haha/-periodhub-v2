@@ -33,10 +33,10 @@ export const usePersonalizedRecommendations = () => {
   // Generate personalized recommendations based on context
   const generateRecommendations = useCallback(async (context: RecommendationContext) => {
     setIsGenerating(true);
-    
+
     try {
       const personalizedRecs: PersonalizedRecommendation[] = [];
-      
+
       // Base recommendations from assessment result
       if (context.currentAssessment) {
         const baseRecs = generateBaseRecommendations(context.currentAssessment, context.locale);
@@ -65,11 +65,11 @@ export const usePersonalizedRecommendations = () => {
         const priorityOrder = { high: 3, medium: 2, low: 1 };
         const aPriority = priorityOrder[a.priority];
         const bPriority = priorityOrder[b.priority];
-        
+
         if (aPriority !== bPriority) {
           return bPriority - aPriority;
         }
-        
+
         return b.confidence - a.confidence;
       });
 

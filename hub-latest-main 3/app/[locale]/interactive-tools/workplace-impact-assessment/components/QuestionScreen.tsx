@@ -23,7 +23,7 @@ export default function QuestionScreen({
   isFirstQuestion,
   isLastQuestion
 }: QuestionScreenProps) {
-  
+
   const handleOptionSelect = (optionValue: string) => {
     if (question.type === 'multi') {
       const currentAnswers = Array.isArray(answer) ? answer : [];

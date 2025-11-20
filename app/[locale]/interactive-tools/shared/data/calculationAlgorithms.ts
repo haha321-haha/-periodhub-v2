@@ -2,12 +2,12 @@
 
 // 共享的建议生成函数
 function generateSymptomRecommendations(
-  answers: { 
-    painLevel: string; 
-    painDuration: string; 
-    reliefPreference: string; 
-    accompanyingSymptoms: string[]; 
-    painLocation: string[] 
+  answers: {
+    painLevel: string;
+    painDuration: string;
+    reliefPreference: string;
+    accompanyingSymptoms: string[];
+    painLocation: string[]
   },
   locale: string,
   isSevere: boolean,
@@ -16,7 +16,7 @@ function generateSymptomRecommendations(
 ) {
   const { painLevel, painDuration, reliefPreference, accompanyingSymptoms, painLocation } = answers;
   const recommendations = { immediate: [], longTerm: [] };
-  
+
   // 生成摘要标签
   const painLevelLabels = {
     zh: {
@@ -208,7 +208,7 @@ function generateSymptomRecommendations(
   // 基于疼痛程度生成基础建议
   const painLevelKey = painLevel as 'mild' | 'moderate' | 'severe' | 'verySevere';
   const localeKey = locale as 'zh' | 'en';
-  
+
   if (recommendationTexts[localeKey][painLevelKey]) {
     (recommendations.immediate as any[]).push(
       ...(recommendationTexts[localeKey][painLevelKey].immediate as any),
@@ -270,7 +270,7 @@ function generateSymptomRecommendations(
       ...(recommendationTexts[localeKey].medical.longTerm as any),
     );
   }
-  
+
   // 去重建议（避免重复）
   recommendations.immediate = Array.from(new Set(recommendations.immediate as any[])) as any;
   recommendations.longTerm = Array.from(new Set(recommendations.longTerm as any[])) as any;
@@ -288,11 +288,11 @@ export function calculateDetailedImpact(
   answers: Record<string, any>,
   locale: string = "zh",
 ) {
-  const { 
-    painLevel, 
-    painDuration, 
-    reliefPreference, 
-    accompanyingSymptoms = [], 
+  const {
+    painLevel,
+    painDuration,
+    reliefPreference,
+    accompanyingSymptoms = [],
     painLocation = [],
     cyclePattern,
     painPattern,
@@ -303,13 +303,13 @@ export function calculateDetailedImpact(
     functionalImpact,
     painRelief
   } = answers;
-  
+
   const isSevere = painLevel === "severe" || painLevel === "verySevere";
   const summary: string[] = [];
-  
+
   // ✅ 详细版评分系统（0-100分）
   let score = 0;
-  
+
   // 1. 疼痛程度评分（40分）- 核心因素
   const painLevelScores = {
     mild: 10,
@@ -318,7 +318,7 @@ export function calculateDetailedImpact(
     verySevere: 40
   };
   score += painLevelScores[painLevel as keyof typeof painLevelScores] || 0;
-  
+
   // 2. 持续时间评分（15分）
   const durationScores = {
     short: 5,
@@ -327,7 +327,7 @@ export function calculateDetailedImpact(
     variable: 12
   };
   score += durationScores[painDuration as keyof typeof durationScores] || 0;
-  
+
   // 3. 功能影响评分（20分）- 重要新增因素
   const functionalScores = {
     minimal: 5,
@@ -336,7 +336,7 @@ export function calculateDetailedImpact(
     severe: 20
   };
   score += functionalScores[functionalImpact as keyof typeof functionalScores] || 0;
-  
+
   // 4. 周期模式评分（5分）
   const cycleScores = {
     regular: 1,
@@ -345,7 +345,7 @@ export function calculateDetailedImpact(
     light: 2
   };
   score += cycleScores[cyclePattern as keyof typeof cycleScores] || 0;
-  
+
   // 5. 疼痛模式评分（5分）
   const patternScores = {
     cramping: 2,
@@ -354,7 +354,7 @@ export function calculateDetailedImpact(
     throbbing: 3
   };
   score += patternScores[painPattern as keyof typeof patternScores] || 0;
-  
+
   // 6. 疼痛时机评分（3分）
   const timingScores = {
     beforePeriod: 2,
@@ -363,10 +363,10 @@ export function calculateDetailedImpact(
     afterPeriod: 1
   };
   score += timingScores[painTiming as keyof typeof timingScores] || 0;
-  
+
   // 7. 医疗史加分（最多+5分）
   if (Array.isArray(medicalHistory)) {
-    const hasSeriousCondition = medicalHistory.some(condition => 
+    const hasSeriousCondition = medicalHistory.some(condition =>
       ['endometriosis', 'fibroids', 'adenomyosis', 'pelvicInflammatory'].includes(condition)
     );
     if (hasSeriousCondition) {
@@ -375,22 +375,22 @@ export function calculateDetailedImpact(
       score += 2;
     }
   }
-  
+
   // 8. 伴随症状加分（最多+3分）
   if (Array.isArray(accompanyingSymptoms)) {
     score += Math.min(accompanyingSymptoms.length * 0.5, 3);
   }
-  
+
   // 9. 疼痛位置加分（最多+2分）
   if (Array.isArray(painLocation)) {
     score += Math.min(painLocation.length * 0.5, 2);
   }
-  
+
   // 10. 生活方式因素加分（最多+2分）
   if (Array.isArray(lifestyleFactors) && !lifestyleFactors.includes('none')) {
     score += Math.min(lifestyleFactors.length * 0.4, 2);
   }
-  
+
   // 确保分数在0-100范围内
   score = Math.max(0, Math.min(100, Math.round(score)));
 
@@ -412,14 +412,14 @@ export function calculateMedicalImpact(
   // 先计算症状部分的评分（占70%）
   const symptomResult = calculateDetailedImpact(answers, locale);
   const symptomScore = (symptomResult.score || 0) * 0.7;
-  
+
   // 再计算职场部分的评分（占30%）
   const workplaceResult = calculateWorkplaceImpact(answers, locale);
   const workplaceScore = (workplaceResult.score || 0) * 0.3;
-  
+
   // 综合评分
   const totalScore = Math.round(symptomScore + workplaceScore);
-  
+
   // 合并建议
   const combinedRecommendations = {
     immediate: [
@@ -430,11 +430,11 @@ export function calculateMedicalImpact(
       ...(workplaceResult.suggestions || []),
     ],
   };
-  
+
   // 去重
   combinedRecommendations.immediate = Array.from(new Set(combinedRecommendations.immediate as any[])) as any;
   combinedRecommendations.longTerm = Array.from(new Set(combinedRecommendations.longTerm as any[])) as any;
-  
+
   return {
     isSevere: symptomResult.isSevere,
     summary: [
@@ -458,10 +458,10 @@ export function calculateSymptomImpact(
   const { painLevel, painDuration, reliefPreference, accompanyingSymptoms = [], painLocation = [] } = answers;
   const isSevere = painLevel === "severe" || painLevel === "verySevere";
   const summary: string[] = [];
-  
+
   // ✅ 添加评分计算逻辑
   let score = 0;
-  
+
   // 1. 疼痛程度评分（60分）- 最重要的因素
   const painLevelScores = {
     mild: 15,
@@ -470,7 +470,7 @@ export function calculateSymptomImpact(
     verySevere: 60
   };
   score += painLevelScores[painLevel as keyof typeof painLevelScores] || 0;
-  
+
   // 2. 持续时间评分（30分）
   const durationScores = {
     short: 10,
@@ -479,7 +479,7 @@ export function calculateSymptomImpact(
     variable: 25
   };
   score += durationScores[painDuration as keyof typeof durationScores] || 0;
-  
+
   // 3. 缓解偏好评分（10分）- 反映严重程度
   const preferenceScores = {
     instant: 5,
@@ -488,17 +488,17 @@ export function calculateSymptomImpact(
     medical: 10
   };
   score += preferenceScores[reliefPreference as keyof typeof preferenceScores] || 0;
-  
+
   // 4. 伴随症状加分（最多+10分）
   if (Array.isArray(accompanyingSymptoms)) {
     score += Math.min(accompanyingSymptoms.length * 2, 10);
   }
-  
+
   // 5. 疼痛位置加分（最多+5分）
   if (Array.isArray(painLocation)) {
     score += Math.min(painLocation.length * 1, 5);
   }
-  
+
   // 确保分数在0-100范围内
   score = Math.max(0, Math.min(100, Math.round(score)));
 

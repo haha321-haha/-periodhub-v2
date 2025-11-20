@@ -21,7 +21,7 @@ export default function ProgressBar({ current, total }: ProgressBarProps) {
           {Math.round(percentage)}%
         </span>
       </div>
-      
+
       {/* 进度条 */}
       <div className="w-full bg-gray-200 rounded-full h-2">
         <div

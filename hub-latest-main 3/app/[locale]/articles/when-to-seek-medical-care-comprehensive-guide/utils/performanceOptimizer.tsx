@@ -67,7 +67,7 @@ export class MedicalCareGuidePerformanceMonitor {
   recordComponentLoad(componentName: string, startTime: number) {
     const loadTime = performance.now() - startTime;
     this.metrics.set(`${componentName}_load_time`, loadTime);
-    
+
     // 发送到分析服务（如果配置了）
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'component_load', {
@@ -82,7 +82,7 @@ export class MedicalCareGuidePerformanceMonitor {
   recordUserInteraction(interaction: string, componentName: string) {
     const timestamp = Date.now();
     this.metrics.set(`${componentName}_${interaction}_time`, timestamp);
-    
+
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'user_interaction', {
         interaction_type: interaction,
@@ -95,7 +95,7 @@ export class MedicalCareGuidePerformanceMonitor {
   // 记录评估完成
   recordAssessmentCompletion(assessmentType: string, duration: number) {
     this.metrics.set(`${assessmentType}_completion_time`, duration);
-    
+
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'assessment_completed', {
         assessment_type: assessmentType,
@@ -155,7 +155,7 @@ export function withErrorBoundary<P extends object>(
         const FallbackComponent = fallback;
         return <FallbackComponent error={error!} retry={retry} />;
       }
-      
+
       return (
         <div className="bg-red-50 border border-red-200 rounded-lg p-6 my-8">
           <h3 className="text-lg font-semibold text-red-800 mb-2">
@@ -179,11 +179,11 @@ export function withErrorBoundary<P extends object>(
 }
 
 // 图片懒加载
-export function LazyImage({ 
-  src, 
-  alt, 
-  className = '', 
-  placeholder = '/images/placeholder.svg' 
+export function LazyImage({
+  src,
+  alt,
+  className = '',
+  placeholder = '/images/placeholder.svg'
 }: {
   src: string;
   alt: string;

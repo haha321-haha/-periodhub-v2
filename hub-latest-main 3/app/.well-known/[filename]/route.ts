@@ -8,7 +8,7 @@ export async function GET(
 ) {
   try {
     const filename = params.filename;
-    
+
     // 只允许访问IndexNow密钥文件
     if (!filename.match(/^[a-f0-9]{32}\.txt$/)) {
       return new NextResponse('Not Found', { status: 404 });

@@ -17,10 +17,10 @@ export class DeploymentManager {
   // 预部署验证
   async preDeploymentValidation(): Promise<boolean> {
     console.log('🔍 开始预部署验证...');
-    
+
     try {
       const report = await this.validator.runFullValidation();
-      
+
       console.log('📊 验证报告:');
       console.log(`   总体状态: ${report.overall}`);
       console.log(`   总计: ${report.summary.total}`);
@@ -48,7 +48,7 @@ export class DeploymentManager {
   // 构建项目
   async buildProject(): Promise<boolean> {
     console.log('🔨 开始构建项目...');
-    
+
     try {
       // 这里应该调用实际的构建命令
       // 例如: await exec('npm run build');
@@ -63,7 +63,7 @@ export class DeploymentManager {
   // 部署到Vercel
   async deployToVercel(): Promise<boolean> {
     console.log('🚀 开始部署到Vercel...');
-    
+
     try {
       // 这里应该调用Vercel部署命令
       // 例如: await exec('vercel --prod');
@@ -78,11 +78,11 @@ export class DeploymentManager {
   // 部署后验证
   async postDeploymentValidation(): Promise<boolean> {
     console.log('🔍 开始部署后验证...');
-    
+
     try {
       // 检查部署状态
       const isDeployed = await this.checkDeploymentStatus();
-      
+
       if (!isDeployed) {
         console.error('❌ 部署状态检查失败');
         return false;
@@ -90,7 +90,7 @@ export class DeploymentManager {
 
       // 检查页面可访问性
       const isAccessible = await this.checkPageAccessibility();
-      
+
       if (!isAccessible) {
         console.error('❌ 页面可访问性检查失败');
         return false;
@@ -133,7 +133,7 @@ export class DeploymentManager {
   // 完整部署流程
   async deploy(): Promise<boolean> {
     console.log('🚀 开始完整部署流程...');
-    
+
     try {
       // 1. 预部署验证
       const preValidation = await this.preDeploymentValidation();
@@ -171,7 +171,7 @@ export class DeploymentManager {
 // 基于ziV1d3d的部署配置检查
 export function checkDeploymentConfig(): boolean {
   console.log('🔍 检查部署配置...');
-  
+
   try {
     // 检查环境变量
     const requiredEnvVars = [

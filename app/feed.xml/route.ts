@@ -55,7 +55,7 @@ export async function GET() {
   </author>
   <rights>Copyright © ${new Date().getFullYear()} PeriodHub. All rights reserved.</rights>
   <generator>PeriodHub Feed Generator v1.0</generator>
-  
+
   ${entries}
 </feed>`;
 
@@ -80,7 +80,7 @@ export async function GET() {
   <author>
     <name>PeriodHub Health Team</name>
   </author>
-  
+
   <entry>
     <title>欢迎访问 PeriodHub</title>
     <link href="${baseUrl}"/>

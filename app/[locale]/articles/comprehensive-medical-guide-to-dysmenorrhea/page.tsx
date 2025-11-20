@@ -11,6 +11,7 @@ import StructuredData from "@/components/StructuredData";
 import ClientOnly from "@/components/ClientOnly";
 import PeriodPainAssessmentTool from "@/app/[locale]/interactive-tools/components/PeriodPainAssessmentTool";
 import PainTrackerTool from "@/app/[locale]/interactive-tools/components/PainTrackerTool";
+import { medicalEntities } from "@/lib/seo/medical-entities";
 
 // Server Component面包屑组件
 interface BreadcrumbItem {
@@ -113,6 +114,27 @@ export async function generateMetadata({
   };
 }
 
+const articleCitations = [
+  {
+    name: "Dysmenorrhea: Painful Periods",
+    url: "https://www.acog.org/womens-health/faqs/dysmenorrhea-painful-periods",
+    author: "ACOG",
+    organization: "ACOG",
+  },
+  {
+    name: "Dysmenorrhea",
+    url: "https://www.mayoclinic.org/diseases-conditions/menstrual-cramps/symptoms-causes/syc-20374938",
+    author: "Mayo Clinic",
+    organization: "Mayo Clinic",
+  },
+  {
+    name: "Menstrual Cramps",
+    url: "https://www.womenshealth.gov/menstrual-cycle/menstrual-pain",
+    author: "HHS Office on Women's Health",
+    organization: "U.S. Department of Health & Human Services",
+  },
+];
+
 export default async function DysmenorrheaGuidePage({
   params,
 }: {
@@ -126,6 +148,7 @@ export default async function DysmenorrheaGuidePage({
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
   const pageUrl = `${baseUrl}/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`;
 
+  const condition = medicalEntities.dysmenorrhea;
   // 生成 Article 结构化数据
   const articleStructuredData = {
     "@context": "https://schema.org",
@@ -153,19 +176,30 @@ export default async function DysmenorrheaGuidePage({
         url: `${baseUrl}/logo.png`,
       },
     },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": pageUrl,
-    },
     about: {
       "@type": "MedicalCondition",
-      name: "Dysmenorrhea",
+      name: condition.name,
       alternateName: locale === "zh" ? "痛经" : "Period Pain",
       associatedAnatomy: {
         "@type": "AnatomicalStructure",
         name: locale === "zh" ? "子宫" : "Uterus",
       },
+      code: {
+        "@type": "MedicalCode",
+        code: condition.icd10,
+        codingSystem: "ICD-10",
+      },
+      sameAs: condition.snomed ? `http://snomed.info/id/${condition.snomed}` : undefined,
     },
+    isBasedOn: articleCitations.map((citation) => ({
+      "@type": "MedicalScholarlyArticle",
+      name: citation.name,
+      url: citation.url,
+      author: {
+        "@type": "Organization",
+        name: citation.author,
+      },
+    })),
     medicalAudience: {
       "@type": "MedicalAudience",
       audienceType: "Patient",

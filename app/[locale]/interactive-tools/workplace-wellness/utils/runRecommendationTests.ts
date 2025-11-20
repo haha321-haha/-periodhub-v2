@@ -15,10 +15,10 @@ export function runFullTestSuite() {
   console.log('='.repeat(80));
   console.log('🧪 推荐系统测试套件');
   console.log('='.repeat(80));
-  
+
   // 基础功能测试
   const basicTests = runRecommendationTests();
-  
+
   console.log('\n【基础功能测试】');
   console.log('-'.repeat(80));
   basicTests.results.forEach((result, index) => {
@@ -29,22 +29,22 @@ export function runFullTestSuite() {
     }
   });
   console.log(`\n通过: ${basicTests.passed} | 失败: ${basicTests.failed}`);
-  
+
   // 推荐质量验证
   console.log('\n【推荐质量验证】');
   console.log('-'.repeat(80));
   validateRecommendationQuality();
-  
+
   // 性能测试
   console.log('\n【性能测试】');
   console.log('-'.repeat(80));
   performanceTest();
-  
+
   // 边界条件测试
   console.log('\n【边界条件测试】');
   console.log('-'.repeat(80));
   edgeCaseTests();
-  
+
   console.log('\n' + '='.repeat(80));
   console.log('✅ 测试完成');
   console.log('='.repeat(80));
@@ -63,7 +63,7 @@ function validateRecommendationQuality() {
     savedItems: [],
     itemRatings: {},
   };
-  
+
   // 测试1: 高疼痛等级应该推荐疼痛缓解内容
   workImpact.painLevel = 8;
   const highPainResult = generateRecommendations(
@@ -72,18 +72,18 @@ function validateRecommendationQuality() {
     nutrition,
     feedbackHistory
   );
-  
+
   const painReliefCount = highPainResult.recommendations.filter(
     r => r.category === 'pain-relief' || r.category === 'medical'
   ).length;
-  
+
   console.log(`✅ 高疼痛等级推荐: ${painReliefCount} 个疼痛缓解/医疗相关推荐`);
   if (painReliefCount > 0) {
     console.log('   ✓ 推荐质量: 良好');
   } else {
     console.log('   ⚠️  推荐质量: 需要改进（应该推荐疼痛缓解内容）');
   }
-  
+
   // 测试2: 低效率应该推荐工作调整内容
   workImpact.painLevel = 5;
   workImpact.efficiency = 50;
@@ -93,18 +93,18 @@ function validateRecommendationQuality() {
     nutrition,
     feedbackHistory
   );
-  
+
   const workAdjustmentCount = lowEfficiencyResult.recommendations.filter(
     r => r.category === 'work-adjustment'
   ).length;
-  
+
   console.log(`✅ 低效率推荐: ${workAdjustmentCount} 个工作调整相关推荐`);
   if (workAdjustmentCount > 0) {
     console.log('   ✓ 推荐质量: 良好');
   } else {
     console.log('   ⚠️  推荐质量: 需要改进（应该推荐工作调整内容）');
   }
-  
+
   // 测试3: 推荐多样性
   const categories = new Set(highPainResult.recommendations.map(r => r.category));
   console.log(`✅ 推荐多样性: ${categories.size} 个不同分类`);
@@ -113,9 +113,9 @@ function validateRecommendationQuality() {
   } else {
     console.log('   ⚠️  推荐多样性: 需要改进（推荐过于单一）');
   }
-  
+
   // 测试4: 推荐分数合理性
-  const avgScore = highPainResult.recommendations.reduce((sum, r) => sum + r.score, 0) / 
+  const avgScore = highPainResult.recommendations.reduce((sum, r) => sum + r.score, 0) /
                    highPainResult.recommendations.length;
   console.log(`✅ 平均推荐分数: ${avgScore.toFixed(1)}`);
   if (avgScore >= 50) {
@@ -138,27 +138,27 @@ function performanceTest() {
     savedItems: [],
     itemRatings: {},
   };
-  
+
   // 测试推荐生成时间
   const iterations = 10;
   const times: number[] = [];
-  
+
   for (let i = 0; i < iterations; i++) {
     const start = performance.now();
     generateRecommendations(periodData, workImpact, nutrition, feedbackHistory);
     const end = performance.now();
     times.push(end - start);
   }
-  
+
   const avgTime = times.reduce((a, b) => a + b, 0) / times.length;
   const minTime = Math.min(...times);
   const maxTime = Math.max(...times);
-  
+
   console.log(`✅ 推荐生成时间 (${iterations}次平均):`);
   console.log(`   平均: ${avgTime.toFixed(2)}ms`);
   console.log(`   最快: ${minTime.toFixed(2)}ms`);
   console.log(`   最慢: ${maxTime.toFixed(2)}ms`);
-  
+
   if (avgTime < 200) {
     console.log('   ✓ 性能: 优秀 (<200ms)');
   } else if (avgTime < 500) {
@@ -166,12 +166,12 @@ function performanceTest() {
   } else {
     console.log('   ❌ 性能: 需要优化 (>500ms)');
   }
-  
+
   // 测试缓存效果
   const firstTime = times[0];
   const cachedTime = times[1];
   const cacheImprovement = ((firstTime - cachedTime) / firstTime) * 100;
-  
+
   console.log(`✅ 缓存效果: ${cacheImprovement.toFixed(1)}% 提升`);
   if (cacheImprovement > 50) {
     console.log('   ✓ 缓存: 有效');
@@ -190,7 +190,7 @@ function edgeCaseTests() {
     savedItems: [],
     itemRatings: {},
   };
-  
+
   // 测试1: 空数据
   try {
     const emptyResult = generateRecommendations(
@@ -208,24 +208,24 @@ function edgeCaseTests() {
   } catch (error: any) {
     console.log(`❌ 空数据测试: 错误 - ${error.message}`);
   }
-  
+
   // 测试2: 极端疼痛等级
   try {
     const extremeWorkImpact = createTestWorkImpactData();
     extremeWorkImpact.painLevel = 10;
     extremeWorkImpact.efficiency = 20;
-    
+
     const extremeResult = generateRecommendations(
       createTestPeriodData(5),
       extremeWorkImpact,
       createTestNutritionData(),
       feedbackHistory
     );
-    
+
     const urgentCount = extremeResult.recommendations.filter(
       r => r.priority >= 90
     ).length;
-    
+
     console.log(`✅ 极端数据测试: ${urgentCount} 个高优先级推荐`);
     if (urgentCount > 0) {
       console.log('   ✓ 极端情况处理: 正常');
@@ -235,7 +235,7 @@ function edgeCaseTests() {
   } catch (error: any) {
     console.log(`❌ 极端数据测试: 错误 - ${error.message}`);
   }
-  
+
   // 测试3: 大量数据
   try {
     const largeDataResult = generateRecommendations(
@@ -244,7 +244,7 @@ function edgeCaseTests() {
       createTestNutritionData(),
       feedbackHistory
     );
-    
+
     console.log(`✅ 大量数据测试: ${largeDataResult.recommendations.length} 个推荐`);
     if (largeDataResult.recommendations.length <= 10) {
       console.log('   ✓ 数据量处理: 正常（限制在10个以内）');
@@ -254,7 +254,7 @@ function edgeCaseTests() {
   } catch (error: any) {
     console.log(`❌ 大量数据测试: 错误 - ${error.message}`);
   }
-  
+
   // 测试4: 冷启动推荐
   try {
     const coldStartItems = generateColdStartRecommendations(feedbackHistory);
@@ -276,7 +276,7 @@ export function analyzeAndOptimize() {
   console.log('\n' + '='.repeat(80));
   console.log('📊 推荐系统分析报告');
   console.log('='.repeat(80));
-  
+
   const periodData = createTestPeriodData(10);
   const workImpact = createTestWorkImpactData();
   const nutrition = createTestNutritionData();
@@ -286,71 +286,71 @@ export function analyzeAndOptimize() {
     savedItems: [],
     itemRatings: {},
   };
-  
+
   const result = generateRecommendations(
     periodData,
     workImpact,
     nutrition,
     feedbackHistory
   );
-  
+
   // 分析推荐分布
   console.log('\n【推荐分布分析】');
   console.log('-'.repeat(80));
-  
+
   const typeDistribution: Record<string, number> = {};
   const categoryDistribution: Record<string, number> = {};
-  
+
   result.recommendations.forEach(item => {
     typeDistribution[item.type] = (typeDistribution[item.type] || 0) + 1;
     categoryDistribution[item.category] = (categoryDistribution[item.category] || 0) + 1;
   });
-  
+
   console.log('类型分布:');
   Object.entries(typeDistribution).forEach(([type, count]) => {
     console.log(`  ${type}: ${count} 个`);
   });
-  
+
   console.log('\n分类分布:');
   Object.entries(categoryDistribution).forEach(([category, count]) => {
     console.log(`  ${category}: ${count} 个`);
   });
-  
+
   // 分析推荐分数
   console.log('\n【推荐分数分析】');
   console.log('-'.repeat(80));
-  
+
   const scores = result.recommendations.map(r => r.score).sort((a, b) => b - a);
   const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length;
   const medianScore = scores[Math.floor(scores.length / 2)];
-  
+
   console.log(`平均分数: ${avgScore.toFixed(1)}`);
   console.log(`中位数分数: ${medianScore.toFixed(1)}`);
   console.log(`最高分数: ${scores[0].toFixed(1)}`);
   console.log(`最低分数: ${scores[scores.length - 1].toFixed(1)}`);
-  
+
   // 优化建议
   console.log('\n【优化建议】');
   console.log('-'.repeat(80));
-  
+
   const suggestions: string[] = [];
-  
+
   // 检查推荐多样性
   if (Object.keys(categoryDistribution).length < 3) {
     suggestions.push('⚠️  推荐多样性不足，建议增加多样性控制权重');
   }
-  
+
   // 检查分数分布
   if (scores[0] - scores[scores.length - 1] < 20) {
     suggestions.push('⚠️  推荐分数差异较小，建议调整评分算法以增加区分度');
   }
-  
+
   // 检查高优先级推荐
   const highPriorityCount = result.recommendations.filter(r => r.priority >= 80).length;
   if (highPriorityCount === 0) {
     suggestions.push('⚠️  缺少高优先级推荐，建议检查推荐内容库的优先级设置');
   }
-  
+
   if (suggestions.length === 0) {
     console.log('✅ 推荐系统运行良好，暂无优化建议');
   } else {
@@ -366,6 +366,8 @@ if (typeof window === 'undefined' && typeof process !== 'undefined') {
   runFullTestSuite();
   analyzeAndOptimize();
 }
+
+
 
 
 

@@ -38,7 +38,7 @@ export default function PersonalizedRecommendations({
       setStressScore(latestAssessment.score);
       setStressLevel(latestAssessment.stressLevel);
       setHasAssessment(true);
-      
+
       // 生成个性化推荐
       const recs = generateSimpleRecommendations(
         latestAssessment.score,

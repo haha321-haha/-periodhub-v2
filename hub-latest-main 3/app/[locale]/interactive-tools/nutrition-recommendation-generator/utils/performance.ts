@@ -35,13 +35,13 @@ export class PerformanceMonitor {
     if (typeof window !== 'undefined' && 'performance' in window) {
       const endTime = performance.now();
       const duration = endTime - startTime;
-      
+
       this.metrics.set(name, duration);
       this.metrics.delete(`${name}_start`);
-      
+
       return duration;
     }
-    
+
     this.metrics.delete(`${name}_start`);
     return 0;
   }
@@ -69,7 +69,7 @@ export function debounce<T extends (...args: any[]) => any>(
   wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
-  
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
@@ -82,7 +82,7 @@ export function throttle<T extends (...args: any[]) => any>(
   limit: number
 ): (...args: Parameters<T>) => void {
   let inThrottle: boolean;
-  
+
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args);
@@ -98,7 +98,7 @@ export function lazyLoad<T>(
   fallback?: T
 ): () => Promise<T> {
   let promise: Promise<T> | null = null;
-  
+
   return () => {
     if (!promise) {
       promise = importFn().catch(error => {

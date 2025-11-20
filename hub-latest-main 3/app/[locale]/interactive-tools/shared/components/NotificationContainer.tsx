@@ -127,8 +127,8 @@ const NotificationItem: React.FC<NotificationItemProps> = ({
                   onClick={action.action}
                   className={`
                     text-xs font-medium px-3 py-1 rounded-md
-                    ${action.style === 'primary' 
-                      ? 'bg-pink-600 text-white hover:bg-pink-700' 
+                    ${action.style === 'primary'
+                      ? 'bg-pink-600 text-white hover:bg-pink-700'
                       : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
                     }
                     transition-colors duration-${ANIMATION_DURATION.fast}

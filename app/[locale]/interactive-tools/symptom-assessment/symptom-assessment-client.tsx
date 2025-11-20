@@ -174,7 +174,7 @@ function SymptomAssessmentContent({ locale }: { locale: string }) {
   const recT = useTranslations("interactiveTools.symptomAssessment");
   const searchParams = useSearchParams();
   const [mode, setMode] = useState<string>("simplified");
-  
+
   // 使用 useEffect 确保客户端和服务器端一致
   useEffect(() => {
     const modeParam = searchParams.get("mode");

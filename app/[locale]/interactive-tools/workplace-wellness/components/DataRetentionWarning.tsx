@@ -104,7 +104,7 @@ export default function DataRetentionWarning() {
                   "数据即将过期提醒"}
               </p>
               <p className="text-sm text-yellow-600 mb-3">
-                {(t("userPreferences.expiringDataDescription") || 
+                {(t("userPreferences.expiringDataDescription") ||
                   `您有 {count} 条记录将在 30 天后自动清理。建议导出备份以保留完整历史记录。`).replace('{count}', expiringData.count.toString())}
               </p>
               <div className="flex items-center gap-2">

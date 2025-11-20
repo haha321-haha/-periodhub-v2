@@ -52,7 +52,7 @@ export default async function WorkplaceWellnessPage({
   // 解析 params 参数
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
-  
+
   // 将 locale 作为 prop 传递给客户端组件
   return <WorkplaceWellnessWrapper locale={locale} />;
 }

@@ -15,7 +15,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
   const t = useTranslations('interactiveTools.history');
   const [filterDateRange, setFilterDateRange] = useState<'all' | 'week' | 'month' | 'quarter'>('all');
   const [filterPainLevel, setFilterPainLevel] = useState<'all' | 'low' | 'medium' | 'high'>('all');
-  
+
   // Performance optimization states
   const [records, setRecords] = useState<PainRecord[]>([]);
   const [loading, setLoading] = useState(false);
@@ -27,23 +27,23 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
     hasNextPage: false,
     hasPreviousPage: false
   });
-  
+
   // Performance manager instance
   const performanceManager = useMemo(() => new PerformanceManager(), []);
-  
+
   // Load records with lazy loading and performance optimization
   const loadRecords = useCallback(async (page: number = 1, resetData: boolean = false) => {
     setLoading(true);
-    
+
     try {
       // Build filters based on current filter state
       const filters: Record<string, any> = {};
-      
+
       // Date range filter
       if (filterDateRange !== 'all') {
         const now = new Date();
         const startDate = new Date(now);
-        
+
         switch (filterDateRange) {
           case 'week':
             startDate.setDate(now.getDate() - 7);
@@ -55,11 +55,11 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
             startDate.setDate(now.getDate() - 90);
             break;
         }
-        
+
         filters.startDate = startDate.toISOString();
         filters.endDate = now.toISOString();
       }
-      
+
       // Pain level filter
       if (filterPainLevel !== 'all') {
         switch (filterPainLevel) {
@@ -77,7 +77,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
             break;
         }
       }
-      
+
       const paginationOptions: PaginationOptions = {
         page,
         pageSize: pagination.pageSize,
@@ -86,16 +86,16 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
         filters,
         preload: true
       };
-      
+
       const result: LazyLoadResult<PainRecord> = await performanceManager.loadRecordsPaginated(paginationOptions);
-      
+
       if (resetData || page === 1) {
         setRecords(result.data);
       } else {
         // Append for infinite scroll
         setRecords(prev => [...prev, ...result.data]);
       }
-      
+
       setPagination(result.pagination);
     } catch (error) {
       console.error('Failed to load records:', error);
@@ -105,12 +105,12 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
       setLoading(false);
     }
   }, [filterDateRange, filterPainLevel, pagination.pageSize, performanceManager]);
-  
+
   // Load initial data
   useEffect(() => {
     loadRecords(1, true);
   }, [filterDateRange, filterPainLevel]);
-  
+
   // Mock data fallback for demo
   const getMockRecords = (): PainRecord[] => [
     {
@@ -162,7 +162,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
       updatedAt: new Date('2024-01-13')
     }
   ];
-  
+
   // Handle load more for pagination
   const handleLoadMore = useCallback(() => {
     if (pagination.hasNextPage && !loading) {
@@ -181,7 +181,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
     if (level <= 6) return locale === 'zh' ? '中度' : 'Moderate';
     return locale === 'zh' ? '重度' : 'Severe';
   };
-  
+
   const getLocationNameZh = (location: string) => {
     const locationMap: Record<string, string> = {
       'lower_abdomen': '下腹部',
@@ -193,7 +193,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
     };
     return locationMap[location] || location;
   };
-  
+
   const getLocationNameEn = (location: string) => {
     const locationMap: Record<string, string> = {
       'lower_abdomen': 'Lower Abdomen',
@@ -205,7 +205,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
     };
     return locationMap[location] || location;
   };
-  
+
   const getPainTypeNameZh = (type: string) => {
     const typeMap: Record<string, string> = {
       'cramping': '痉挛性疼痛',
@@ -217,7 +217,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
     };
     return typeMap[type] || type;
   };
-  
+
   const getPainTypeNameEn = (type: string) => {
     const typeMap: Record<string, string> = {
       'cramping': 'Cramping',
@@ -243,21 +243,21 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
       </header>
 
       {/* Filters */}
-      <section 
+      <section
         className="bg-white rounded-lg shadow-sm p-4 sm:p-6 mb-6"
         aria-labelledby="filters-heading"
       >
-        <h2 
+        <h2
           id="filters-heading"
           className="text-base sm:text-lg font-medium text-gray-900 mb-4"
         >
           {locale === 'zh' ? '筛选条件' : 'Filters'}
         </h2>
-        
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {/* Date Range Filter */}
           <div>
-            <label 
+            <label
               htmlFor="date-range-filter"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
@@ -282,7 +282,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
 
           {/* Pain Level Filter */}
           <div>
-            <label 
+            <label
               htmlFor="pain-level-filter"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
@@ -308,7 +308,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
       </section>
 
       {/* Records List */}
-      <section 
+      <section
         className="bg-white rounded-lg shadow-sm"
         aria-labelledby="records-heading"
         aria-live="polite"
@@ -317,14 +317,14 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
         <h2 id="records-heading" className="sr-only">
           {locale === 'zh' ? '疼痛记录列表' : 'Pain Records List'}
         </h2>
-        
+
         {records.length === 0 && !loading ? (
           <div className="p-6 sm:p-8 text-center">
             <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg 
-                className="w-8 h-8 text-gray-400" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="w-8 h-8 text-gray-400"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
@@ -335,7 +335,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
               {locale === 'zh' ? '暂无记录' : 'No Records Found'}
             </h3>
             <p className="text-sm sm:text-base text-gray-500 max-w-md mx-auto">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? '没有找到符合筛选条件的疼痛记录。请尝试调整筛选条件或添加新的记录。'
                 : 'No pain records found matching your filters. Try adjusting your filters or add new records.'
               }
@@ -344,21 +344,21 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
         ) : (
           <div className="divide-y divide-gray-200">
             <div className="sr-only" aria-live="polite">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? `找到 ${pagination.totalItems} 条记录`
                 : `Found ${pagination.totalItems} records`
               }
             </div>
             {records.map((record, index) => (
-              <article 
-                key={record.id} 
+              <article
+                key={record.id}
                 className="p-4 sm:p-6 hover:bg-gray-50 focus-within:bg-gray-50 transition-colors"
                 aria-labelledby={`record-${record.id}-title`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between space-y-3 sm:space-y-0">
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mb-3">
-                      <h3 
+                      <h3
                         id={`record-${record.id}-title`}
                         className="text-sm sm:text-base font-medium text-gray-900"
                       >
@@ -375,14 +375,14 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                         {getPainLevelLabel(record.painLevel)} ({record.painLevel}/10)
                       </div>
                     </div>
-                    
+
                     <dl className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 text-sm text-gray-600">
                       <div>
                         <dt className="font-medium inline">
                           {locale === 'zh' ? '位置：' : 'Location: '}
                         </dt>
                         <dd className="inline">
-                          {record.locations.map(loc => 
+                          {record.locations.map(loc =>
                             locale === 'zh' ? getLocationNameZh(loc) : getLocationNameEn(loc)
                           ).join(', ')}
                         </dd>
@@ -392,13 +392,13 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                           {locale === 'zh' ? '类型：' : 'Type: '}
                         </dt>
                         <dd className="inline">
-                          {record.painTypes.map(type => 
+                          {record.painTypes.map(type =>
                             locale === 'zh' ? getPainTypeNameZh(type) : getPainTypeNameEn(type)
                           ).join(', ')}
                         </dd>
                       </div>
                     </dl>
-                    
+
                     {record.notes && (
                       <div className="mt-3 text-sm text-gray-600">
                         <dt className="font-medium inline">
@@ -408,9 +408,9 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                       </div>
                     )}
                   </div>
-                  
+
                   <div className="flex items-center space-x-2 sm:ml-4 flex-shrink-0">
-                    <button 
+                    <button
                       className="p-2 text-gray-400 hover:text-gray-600 focus:text-gray-600 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
                       aria-label={`${locale === 'zh' ? '编辑记录' : 'Edit record'} ${new Date(record.date).toLocaleDateString()}`}
                     >
@@ -418,7 +418,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                       </svg>
                     </button>
-                    <button 
+                    <button
                       className="p-2 text-gray-400 hover:text-red-600 focus:text-red-600 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                       aria-label={`${locale === 'zh' ? '删除记录' : 'Delete record'} ${new Date(record.date).toLocaleDateString()}`}
                     >
@@ -430,7 +430,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                 </div>
               </article>
             ))}
-            
+
             {/* Loading indicator */}
             {loading && (
               <div className="p-6 text-center">
@@ -442,7 +442,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                 </div>
               </div>
             )}
-            
+
             {/* Load more button */}
             {pagination.hasNextPage && !loading && (
               <div className="p-6 text-center">
@@ -464,7 +464,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
           <h3 className="text-lg font-medium text-gray-900 mb-4">
             {locale === 'zh' ? '统计摘要' : 'Summary Statistics'}
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="text-2xl font-bold text-primary-600">
@@ -474,7 +474,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                 {locale === 'zh' ? '总记录数' : 'Total Records'}
               </div>
             </div>
-            
+
             <div className="text-center">
               <div className="text-2xl font-bold text-primary-600">
                 {records.length > 0 ? (records.reduce((sum, record) => sum + record.painLevel, 0) / records.length).toFixed(1) : '0'}
@@ -483,7 +483,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                 {locale === 'zh' ? '平均疼痛程度' : 'Average Pain Level'}
               </div>
             </div>
-            
+
             <div className="text-center">
               <div className="text-2xl font-bold text-primary-600">
                 {records.length > 0 ? Math.max(...records.map(r => r.painLevel)) : '0'}

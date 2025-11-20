@@ -5,10 +5,10 @@
 
 import type { Metadata } from 'next';
 import { Locale } from '@/i18n';
-import { 
-  generatePageMetadata, 
+import {
+  generatePageMetadata,
   getWorkplaceWellnessSEOData,
-  generateAllStructuredData 
+  generateAllStructuredData
 } from './utils/seoOptimization';
 
 // 生成静态参数
@@ -24,7 +24,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const seoData = getWorkplaceWellnessSEOData();
-  
+
   return generatePageMetadata(locale, seoData, {
     robots: {
       index: true,
@@ -51,10 +51,10 @@ export default async function WorkplaceWellnessLayout({
   params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
-  
+
   // 生成结构化数据
   const structuredData = generateAllStructuredData(locale);
-  
+
   return (
     <>
       {/* 结构化数据 */}
@@ -65,7 +65,7 @@ export default async function WorkplaceWellnessLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
         />
       ))}
-      
+
       {/* 页面内容 */}
       {children}
     </>

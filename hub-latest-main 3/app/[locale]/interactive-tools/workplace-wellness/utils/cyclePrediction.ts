@@ -38,22 +38,22 @@ export class CyclePredictor {
    */
   public analyzeCycle(periodData: PeriodRecord[]): CycleAnalysis {
     const periods = this.extractPeriods(periodData);
-    
+
     if (periods.length === 0) {
       return this.getEmptyAnalysis();
     }
 
     const cycleLengths = this.calculateCycleLengths(periods);
     const periodLengths = this.calculatePeriodLengths(periods);
-    
+
     const averageCycleLength = this.calculateAverage(cycleLengths);
     const averagePeriodLength = this.calculateAverage(periodLengths);
     const cycleRegularity = this.assessRegularity(cycleLengths);
-    
+
     const lastPeriod = periods[periods.length - 1];
     const nextPredictedPeriod = this.predictNextPeriod(lastPeriod, averageCycleLength);
     const nextPredictedOvulation = this.predictNextOvulation(nextPredictedPeriod, averageCycleLength);
-    
+
     const currentPhase = this.determineCurrentPhase(lastPeriod, averageCycleLength);
     const phaseProgress = this.calculatePhaseProgress(lastPeriod, averageCycleLength);
     const confidence = this.calculateConfidence(cycleLengths, cycleRegularity);
@@ -76,7 +76,7 @@ export class CyclePredictor {
    */
   public generateStatistics(periodData: PeriodRecord[]): CycleStatistics {
     const periods = this.extractPeriods(periodData);
-    
+
     if (periods.length === 0) {
       return {
         totalCycles: 0,
@@ -90,15 +90,15 @@ export class CyclePredictor {
 
     const cycleLengths = this.calculateCycleLengths(periods);
     const periodLengths = this.calculatePeriodLengths(periods);
-    
+
     const painLevels = periodData
       .filter(d => d.painLevel !== null)
       .map(d => d.painLevel!);
-    
+
     const flows = periodData
       .filter(d => d.flow !== null)
       .map(d => d.flow!);
-    
+
     const symptoms = periodData
       .filter(d => d.notes && d.notes.trim())
       .map(d => d.notes!)
@@ -124,11 +124,11 @@ export class CyclePredictor {
   }[] {
     const analysis = this.analyzeCycle(periodData);
     const predictions: { date: string; type: 'period' | 'ovulation'; confidence: number }[] = [];
-    
+
     if (!analysis.nextPredictedPeriod) return predictions;
 
     const currentDate = new Date(analysis.nextPredictedPeriod);
-    
+
     for (let month = 0; month < months; month++) {
       // 预测经期
       predictions.push({
@@ -136,7 +136,7 @@ export class CyclePredictor {
         type: 'period',
         confidence: analysis.confidence
       });
-      
+
       // 预测排卵期
       const ovulationDate = new Date(currentDate);
       ovulationDate.setDate(ovulationDate.getDate() - 14); // 假设排卵期在经期前14天
@@ -145,11 +145,11 @@ export class CyclePredictor {
         type: 'ovulation',
         confidence: analysis.confidence * 0.8 // 排卵期预测置信度较低
       });
-      
+
       // 移动到下一个周期
       currentDate.setDate(currentDate.getDate() + analysis.averageCycleLength);
     }
-    
+
     return predictions.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }
 
@@ -162,7 +162,7 @@ export class CyclePredictor {
     records: PeriodRecord[];
   }> {
     const periods: Array<{ startDate: string; endDate: string; records: PeriodRecord[] }> = [];
-    const periodRecords = periodData.filter(d => d.type === 'period').sort((a, b) => 
+    const periodRecords = periodData.filter(d => d.type === 'period').sort((a, b) =>
       new Date(a.date).getTime() - new Date(b.date).getTime()
     );
 
@@ -172,14 +172,14 @@ export class CyclePredictor {
     for (let i = 0; i < periodRecords.length; i++) {
       const record = periodRecords[i];
       const recordDate = new Date(record.date);
-      
+
       if (!periodStart) {
         periodStart = record.date;
         currentPeriod = [record];
       } else {
         const lastRecordDate = new Date(currentPeriod[currentPeriod.length - 1].date);
         const daysDiff = (recordDate.getTime() - lastRecordDate.getTime()) / (1000 * 60 * 60 * 24);
-        
+
         if (daysDiff <= 1) {
           // 连续日期，属于同一经期
           currentPeriod.push(record);
@@ -190,7 +190,7 @@ export class CyclePredictor {
             endDate: currentPeriod[currentPeriod.length - 1].date,
             records: currentPeriod
           });
-          
+
           // 开始新经期
           periodStart = record.date;
           currentPeriod = [record];
@@ -215,14 +215,14 @@ export class CyclePredictor {
    */
   private calculateCycleLengths(periods: Array<{ startDate: string; endDate: string; records: PeriodRecord[] }>): number[] {
     const lengths: number[] = [];
-    
+
     for (let i = 1; i < periods.length; i++) {
       const prevStart = new Date(periods[i - 1].startDate);
       const currentStart = new Date(periods[i].startDate);
       const length = (currentStart.getTime() - prevStart.getTime()) / (1000 * 60 * 60 * 24);
       lengths.push(length);
     }
-    
+
     return lengths;
   }
 
@@ -250,11 +250,11 @@ export class CyclePredictor {
    */
   private assessRegularity(cycleLengths: number[]): 'regular' | 'irregular' | 'very-irregular' {
     if (cycleLengths.length < 3) return 'irregular';
-    
+
     const average = this.calculateAverage(cycleLengths);
     const variance = cycleLengths.reduce((sum, length) => sum + Math.pow(length - average, 2), 0) / cycleLengths.length;
     const standardDeviation = Math.sqrt(variance);
-    
+
     if (standardDeviation <= 2) return 'regular';
     if (standardDeviation <= 7) return 'irregular';
     return 'very-irregular';
@@ -265,11 +265,11 @@ export class CyclePredictor {
    */
   private predictNextPeriod(lastPeriod: { startDate: string; endDate: string; records: PeriodRecord[] }, averageCycleLength: number): string | null {
     if (!lastPeriod) return null;
-    
+
     const lastStart = new Date(lastPeriod.startDate);
     const nextStart = new Date(lastStart);
     nextStart.setDate(nextStart.getDate() + averageCycleLength);
-    
+
     return nextStart.toISOString().split('T')[0];
   }
 
@@ -278,11 +278,11 @@ export class CyclePredictor {
    */
   private predictNextOvulation(nextPeriod: string | null, averageCycleLength: number): string | null {
     if (!nextPeriod) return null;
-    
+
     const periodDate = new Date(nextPeriod);
     const ovulationDate = new Date(periodDate);
     ovulationDate.setDate(ovulationDate.getDate() - 14);
-    
+
     return ovulationDate.toISOString().split('T')[0];
   }
 
@@ -291,15 +291,15 @@ export class CyclePredictor {
    */
   private determineCurrentPhase(lastPeriod: { startDate: string; endDate: string; records: PeriodRecord[] }, averageCycleLength: number): MenstrualPhase | null {
     if (!lastPeriod) return null;
-    
+
     const lastStart = new Date(lastPeriod.startDate);
     const today = new Date();
     const daysSinceLastPeriod = (today.getTime() - lastStart.getTime()) / (1000 * 60 * 60 * 24);
-    
+
     if (daysSinceLastPeriod < 0) return null;
-    
+
     const cycleProgress = (daysSinceLastPeriod % averageCycleLength) / averageCycleLength;
-    
+
     if (cycleProgress < 0.25) return 'menstrual';
     if (cycleProgress < 0.5) return 'follicular';
     if (cycleProgress < 0.75) return 'ovulation';
@@ -311,13 +311,13 @@ export class CyclePredictor {
    */
   private calculatePhaseProgress(lastPeriod: { startDate: string; endDate: string; records: PeriodRecord[] }, averageCycleLength: number): number {
     if (!lastPeriod) return 0;
-    
+
     const lastStart = new Date(lastPeriod.startDate);
     const today = new Date();
     const daysSinceLastPeriod = (today.getTime() - lastStart.getTime()) / (1000 * 60 * 60 * 24);
-    
+
     if (daysSinceLastPeriod < 0) return 0;
-    
+
     const cycleProgress = (daysSinceLastPeriod % averageCycleLength) / averageCycleLength;
     return Math.round(cycleProgress * 100);
   }
@@ -328,9 +328,9 @@ export class CyclePredictor {
   private calculateConfidence(cycleLengths: number[], regularity: 'regular' | 'irregular' | 'very-irregular'): number {
     if (cycleLengths.length === 0) return 0;
     if (cycleLengths.length < 3) return 30;
-    
+
     const baseConfidence = Math.min(90, 50 + cycleLengths.length * 5);
-    
+
     switch (regularity) {
       case 'regular':
         return baseConfidence;
@@ -348,12 +348,12 @@ export class CyclePredictor {
    */
   private getMostCommon<T>(array: T[]): T | null {
     if (array.length === 0) return null;
-    
+
     const counts = array.reduce((acc, item) => {
       acc[item as string] = (acc[item as string] || 0) + 1;
       return acc;
     }, {} as Record<string, number>);
-    
+
     return Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b) as T;
   }
 

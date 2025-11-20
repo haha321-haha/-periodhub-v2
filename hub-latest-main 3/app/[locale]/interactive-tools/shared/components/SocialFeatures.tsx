@@ -61,11 +61,11 @@ interface SocialFeaturesProps {
   onGroupJoin?: (groupId: string) => void;
 }
 
-export default function SocialFeatures({ 
-  locale, 
+export default function SocialFeatures({
+  locale,
   userId,
   onPostCreate,
-  onGroupJoin 
+  onGroupJoin
 }: SocialFeaturesProps) {
   const t = useTranslations('interactiveTools.social');
   const [activeTab, setActiveTab] = useState<'feed' | 'groups' | 'create'>('feed');
@@ -190,20 +190,20 @@ export default function SocialFeatures({
   }, []);
 
   const handleLike = (postId: string) => {
-    setPosts(posts.map(post => 
-      post.id === postId 
-        ? { 
-            ...post, 
-            isLiked: !post.isLiked, 
-            likes: post.isLiked ? post.likes - 1 : post.likes + 1 
+    setPosts(posts.map(post =>
+      post.id === postId
+        ? {
+            ...post,
+            isLiked: !post.isLiked,
+            likes: post.isLiked ? post.likes - 1 : post.likes + 1
           }
         : post
     ));
   };
 
   const handleBookmark = (postId: string) => {
-    setPosts(posts.map(post => 
-      post.id === postId 
+    setPosts(posts.map(post =>
+      post.id === postId
         ? { ...post, isBookmarked: !post.isBookmarked }
         : post
     ));
@@ -214,23 +214,23 @@ export default function SocialFeatures({
     if (post) {
       // 这里可以实现实际的分享功能
       console.log('Sharing post:', post);
-      setPosts(posts.map(p => 
+      setPosts(posts.map(p =>
         p.id === postId ? { ...p, shares: p.shares + 1 } : p
       ));
     }
   };
 
   const handleJoinGroup = (groupId: string) => {
-    setGroups(groups.map(group => 
-      group.id === groupId 
-        ? { 
-            ...group, 
+    setGroups(groups.map(group =>
+      group.id === groupId
+        ? {
+            ...group,
             isJoined: !group.isJoined,
             memberCount: group.isJoined ? group.memberCount - 1 : group.memberCount + 1
           }
         : group
     ));
-    
+
     if (onGroupJoin) {
       onGroupJoin(groupId);
     }
@@ -319,7 +319,7 @@ export default function SocialFeatures({
             {locale === 'zh' ? '与社区成员分享经验，获得支持和帮助' : 'Share experiences with community members and get support'}
           </p>
         </div>
-        
+
         <div className="flex space-x-2 mt-4 sm:mt-0">
           {(['feed', 'groups', 'create'] as const).map(tab => (
             <button
@@ -406,12 +406,12 @@ export default function SocialFeatures({
                     <ThumbsUp className="w-4 h-4" />
                     <span className="text-sm">{post.likes}</span>
                   </button>
-                  
+
                   <button className="flex items-center space-x-1 px-3 py-1 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors">
                     <MessageCircle className="w-4 h-4" />
                     <span className="text-sm">{post.comments}</span>
                   </button>
-                  
+
                   <button
                     onClick={() => handleShare(post.id)}
                     className="flex items-center space-x-1 px-3 py-1 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
@@ -420,7 +420,7 @@ export default function SocialFeatures({
                     <span className="text-sm">{post.shares}</span>
                   </button>
                 </div>
-                
+
                 <button
                   onClick={() => handleBookmark(post.id)}
                   className={`p-2 rounded-lg transition-colors ${
@@ -451,7 +451,7 @@ export default function SocialFeatures({
                   {group.privacy === 'public' ? (locale === 'zh' ? '公开' : 'Public') : (locale === 'zh' ? '私密' : 'Private')}
                 </span>
               </div>
-              
+
               <div className="flex flex-wrap gap-2 mb-4">
                 {group.tags.map(tag => (
                   <span key={tag} className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">
@@ -459,7 +459,7 @@ export default function SocialFeatures({
                   </span>
                 ))}
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <div className="flex items-center text-sm text-gray-600">
                   <Users className="w-4 h-4 mr-1" />
@@ -487,7 +487,7 @@ export default function SocialFeatures({
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
             {locale === 'zh' ? '分享您的经验' : 'Share Your Experience'}
           </h3>
-          
+
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -500,7 +500,7 @@ export default function SocialFeatures({
                 className="w-full h-32 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            
+
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -517,7 +517,7 @@ export default function SocialFeatures({
                   <option value="support">{locale === 'zh' ? '支持' : 'Support'}</option>
                 </select>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   {locale === 'zh' ? '隐私设置' : 'Privacy'}
@@ -533,7 +533,7 @@ export default function SocialFeatures({
                 </select>
               </div>
             </div>
-            
+
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 {newPost.privacy === 'public' && <Eye className="w-4 h-4 text-green-500" />}
@@ -545,7 +545,7 @@ export default function SocialFeatures({
                   {newPost.privacy === 'private' && (locale === 'zh' ? '仅自己可见' : 'Visible to you only')}
                 </span>
               </div>
-              
+
               <button
                 onClick={handleCreatePost}
                 disabled={!newPost.content.trim()}

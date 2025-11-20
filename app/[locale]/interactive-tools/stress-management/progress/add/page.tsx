@@ -68,7 +68,7 @@ export default function AddEntryPage() {
       router.push(`/${locale}/interactive-tools/stress-management/progress`);
     } catch (error) {
       console.error("Failed to save entry:", error);
-      
+
       // Show user-friendly error message
       if (error instanceof Error) {
         if (error.message.includes("Storage is full")) {
@@ -97,7 +97,7 @@ export default function AddEntryPage() {
       } else {
         alert("Failed to save entry. Please try again.");
       }
-      
+
       setIsSaving(false);
     }
   };

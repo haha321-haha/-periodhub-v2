@@ -4,7 +4,7 @@ import { MetadataRoute } from "next";
 // 🔧 修复版本：解决 manifest.json 和 constitution-test 被误屏蔽的问题
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
-  
+
   return {
     rules: [
       {

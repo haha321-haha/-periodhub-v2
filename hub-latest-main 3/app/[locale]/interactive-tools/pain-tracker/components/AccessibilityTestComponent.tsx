@@ -15,9 +15,9 @@ interface AccessibilityTestComponentProps {
   showResults?: boolean;
 }
 
-export default function AccessibilityTestComponent({ 
+export default function AccessibilityTestComponent({
   enabled = process.env.NODE_ENV === 'development',
-  showResults = false 
+  showResults = false
 }: AccessibilityTestComponentProps) {
   const [issues, setIssues] = useState<AccessibilityIssue[]>([]);
   const [isRunning, setIsRunning] = useState(false);
@@ -25,7 +25,7 @@ export default function AccessibilityTestComponent({
 
   const runAccessibilityTests = () => {
     if (!enabled) return;
-    
+
     setIsRunning(true);
     const foundIssues: AccessibilityIssue[] = [];
 
@@ -64,7 +64,7 @@ export default function AccessibilityTestComponent({
       const hasText = button.textContent?.trim();
       const hasAriaLabel = button.getAttribute('aria-label');
       const hasAriaLabelledBy = button.getAttribute('aria-labelledby');
-      
+
       if (!hasText && !hasAriaLabel && !hasAriaLabelledBy) {
         foundIssues.push({
           type: 'error',
@@ -82,7 +82,7 @@ export default function AccessibilityTestComponent({
       const hasLabel = id && document.querySelector(`label[for="${id}"]`);
       const hasAriaLabel = input.getAttribute('aria-label');
       const hasAriaLabelledBy = input.getAttribute('aria-labelledby');
-      
+
       if (!hasLabel && !hasAriaLabel && !hasAriaLabelledBy) {
         foundIssues.push({
           type: 'error',
@@ -113,7 +113,7 @@ export default function AccessibilityTestComponent({
       const styles = window.getComputedStyle(element);
       const color = styles.color;
       const backgroundColor = styles.backgroundColor;
-      
+
       // Simple check for very light text on light backgrounds
       if (color.includes('rgb(255') && backgroundColor.includes('rgb(255')) {
         foundIssues.push({
@@ -145,7 +145,7 @@ export default function AccessibilityTestComponent({
       const styles = window.getComputedStyle(element, ':focus');
       const outline = styles.outline;
       const boxShadow = styles.boxShadow;
-      
+
       if (outline === 'none' && boxShadow === 'none') {
         foundIssues.push({
           type: 'warning',
@@ -232,7 +232,7 @@ export default function AccessibilityTestComponent({
             {isRunning ? 'Running...' : 'Re-run'}
           </button>
         </div>
-        
+
         <div className="space-y-2 text-xs">
           <div className="flex items-center justify-between">
             <span className="flex items-center">
@@ -241,7 +241,7 @@ export default function AccessibilityTestComponent({
             </span>
             <span className="font-medium">{errorCount}</span>
           </div>
-          
+
           <div className="flex items-center justify-between">
             <span className="flex items-center">
               <span className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
@@ -249,7 +249,7 @@ export default function AccessibilityTestComponent({
             </span>
             <span className="font-medium">{warningCount}</span>
           </div>
-          
+
           <div className="flex items-center justify-between">
             <span className="flex items-center">
               <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
@@ -269,7 +269,7 @@ export default function AccessibilityTestComponent({
                 <div key={index} className="text-xs p-2 bg-gray-50 rounded">
                   <div className="flex items-start">
                     <span className={`w-1 h-1 rounded-full mt-1.5 mr-2 flex-shrink-0 ${
-                      issue.type === 'error' ? 'bg-red-500' : 
+                      issue.type === 'error' ? 'bg-red-500' :
                       issue.type === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'
                     }`}></span>
                     <div>

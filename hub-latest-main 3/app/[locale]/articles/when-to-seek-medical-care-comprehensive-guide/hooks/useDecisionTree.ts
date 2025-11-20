@@ -32,7 +32,7 @@ export function useDecisionTree(treeData: DecisionTreeNode, startNodeId: string 
     const node = findNodeById(treeData, nodeId);
     if (node) {
       setCurrentNode(node);
-      
+
       // 如果是结果节点，设置最终结果
       if (node.result) {
         setFinalResult(node.result);

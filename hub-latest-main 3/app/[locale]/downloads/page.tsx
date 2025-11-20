@@ -17,8 +17,8 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return {
-    title: locale === 'zh' 
-      ? 'PDF资源下载中心 - Period Hub' 
+    title: locale === 'zh'
+      ? 'PDF资源下载中心 - Period Hub'
       : 'PDF Resources Download Center - Period Hub',
     description: locale === 'zh'
       ? `Period Hub文章PDF下载中心，${SITE_CONFIG.statistics.articles + SITE_CONFIG.statistics.pdfResources}个精选经期健康资源，包括${SITE_CONFIG.statistics.articles}篇专业文章和${SITE_CONFIG.statistics.pdfResources}个PDF资源，支持中英双语，移动端优化体验。`
@@ -30,8 +30,8 @@ export async function generateMetadata({
       canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/downloads`,
     },
     openGraph: {
-      title: locale === 'zh' 
-        ? 'PDF资源下载中心 - Period Hub' 
+      title: locale === 'zh'
+        ? 'PDF资源下载中心 - Period Hub'
         : 'PDF Resources Download Center - Period Hub',
       description: locale === 'zh'
         ? `Period Hub文章PDF下载中心，${SITE_CONFIG.statistics.articles + SITE_CONFIG.statistics.pdfResources}个精选经期健康资源，包括${SITE_CONFIG.statistics.articles}篇专业文章和${SITE_CONFIG.statistics.pdfResources}个PDF资源，支持中英双语，移动端优化体验。`
@@ -64,7 +64,7 @@ export default async function DownloadsPage({
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": locale === 'zh' ? "PDF资源下载中心" : "PDF Resources Download Center",
-    "description": locale === 'zh' 
+    "description": locale === 'zh'
       ? `Period Hub文章PDF下载中心，${totalResources}个精选经期健康资源`
       : `Period Hub Articles PDF Download Center, ${totalResources} curated menstrual health resources`,
     "url": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/downloads`,
@@ -133,7 +133,7 @@ export default async function DownloadsPage({
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl mb-6 shadow-lg">
             <Download className="w-8 h-8 text-white" />
           </div>
-          
+
           <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             {locale === 'zh' ? '📚 文章PDF下载中心' : '📚 Articles PDF Download Center'}
           </h1>
@@ -144,7 +144,7 @@ export default async function DownloadsPage({
               : `${totalResources} curated resources, intelligently categorized by urgency to help you find the right solution when you need it`
             }
           </p>
-          
+
           {/* 快速统计 */}
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
             <div className="text-center">

@@ -32,7 +32,7 @@ export default function PeriodPainAssessmentTool({ locale }: PeriodPainAssessmen
     if (symptoms.length > 0) {
       severity = 'high';
       needConsult = true;
-      advice = locale === 'zh' 
+      advice = locale === 'zh'
         ? '您的症状较为严重，建议尽快咨询妇科医生进行详细检查。'
         : 'Your symptoms are quite severe. We recommend consulting a gynecologist for detailed examination as soon as possible.';
     } else if (intensity === 'severe') {

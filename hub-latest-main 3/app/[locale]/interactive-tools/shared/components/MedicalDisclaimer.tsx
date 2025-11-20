@@ -18,7 +18,7 @@ export default function MedicalDisclaimer({ locale }: MedicalDisclaimerProps) {
           {isZh ? '⚕️ 医疗声明' : '⚕️ Medical Disclaimer'}
         </h3>
       </div>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
         <div>
           <p className="font-medium text-gray-800 mb-3">
@@ -37,8 +37,8 @@ export default function MedicalDisclaimer({ locale }: MedicalDisclaimerProps) {
             <li className="flex items-start">
               <AlertCircle className="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" />
               <span>
-                {isZh 
-                  ? '剧痛伴呕吐可能提示子宫内膜异位症' 
+                {isZh
+                  ? '剧痛伴呕吐可能提示子宫内膜异位症'
                   : 'Severe pain with vomiting may indicate endometriosis'
                 }
               </span>
@@ -46,8 +46,8 @@ export default function MedicalDisclaimer({ locale }: MedicalDisclaimerProps) {
             <li className="flex items-start">
               <AlertCircle className="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" />
               <span>
-                {isZh 
-                  ? '青少年(<18岁)请在医生指导下使用' 
+                {isZh
+                  ? '青少年(<18岁)请在医生指导下使用'
                   : 'Teens (<18yr) require medical supervision'
                 }
               </span>
@@ -55,15 +55,15 @@ export default function MedicalDisclaimer({ locale }: MedicalDisclaimerProps) {
             <li className="flex items-start">
               <AlertCircle className="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" />
               <span>
-                {isZh 
-                  ? '肾功能障碍者禁用高剂量镁剂' 
+                {isZh
+                  ? '肾功能障碍者禁用高剂量镁剂'
                   : 'Kidney disease patients avoid high-dose Mg'
                 }
               </span>
             </li>
           </ul>
         </div>
-        
+
         <div>
           <div className="mb-4">
             <p className="font-medium text-gray-800 mb-2 flex items-center">
@@ -77,7 +77,7 @@ export default function MedicalDisclaimer({ locale }: MedicalDisclaimerProps) {
               *{isZh ? '审核员资质认证中，如有疑问请咨询你的医生' : 'Credential verification pending'}
             </p>
           </div>
-          
+
           <div className="bg-blue-50 border border-blue-200 rounded p-3">
             <p className="text-xs text-blue-800 font-medium mb-1">
               {isZh ? '参考文献：' : 'References:'}
@@ -91,10 +91,10 @@ export default function MedicalDisclaimer({ locale }: MedicalDisclaimerProps) {
           </div>
         </div>
       </div>
-      
+
       <div className="border-t border-gray-300 pt-4 mt-6 text-center">
         <p className="text-xs text-gray-600">
-          {isZh 
+          {isZh
             ? '本内容仅供教育用途，不替代专业医疗建议。如有疑问请咨询医生。'
             : 'Content for educational purposes only. Consult healthcare provider for medical advice.'
           }

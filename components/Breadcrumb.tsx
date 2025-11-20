@@ -50,10 +50,10 @@ export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   useEffect(() => {
     // 生成唯一的 ID 来标识这个面包屑的脚本
     const scriptId = `breadcrumb-script-${locale}-${items.map(i => i.label).join('-')}`;
-    
+
     // 检查是否已经存在相同的脚本
     const existingScript = document.getElementById(scriptId);
-    
+
     if (!existingScript) {
       const script = document.createElement("script");
       script.id = scriptId;

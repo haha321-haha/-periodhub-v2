@@ -91,13 +91,13 @@ export default function StorageWarningToast() {
       ...calendar,
       periodData: cleanedPeriodData,
     });
-    
+
     // 注意：其他数据的清理需要通过相应的 actions 完成
     // 这里只清理 calendar 数据，其他数据清理需要额外的 actions
 
     // 关闭提示
     setIsVisible(false);
-    
+
     // 提示用户
     alert('已清理旧数据，请刷新页面以确保数据保存。');
   };
@@ -112,13 +112,13 @@ export default function StorageWarningToast() {
     <div className="fixed top-4 right-4 z-50 max-w-md animate-in slide-in-from-top-5">
       <div className={`
         rounded-lg shadow-lg p-4 border-2
-        ${warningType === 'failed' 
-          ? 'bg-red-50 border-red-200' 
+        ${warningType === 'failed'
+          ? 'bg-red-50 border-red-200'
           : 'bg-yellow-50 border-yellow-200'
         }
       `}>
         <div className="flex items-start gap-3">
-          <AlertTriangle 
+          <AlertTriangle
             className={`
               flex-shrink-0 mt-0.5
               ${warningType === 'failed' ? 'text-red-600' : 'text-yellow-600'}

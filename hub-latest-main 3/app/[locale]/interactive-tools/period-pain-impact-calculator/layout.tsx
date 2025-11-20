@@ -9,7 +9,7 @@ export async function generateMetadata({
   const { locale } = await params;
   const isZh = locale === 'zh';
 
-  const title = isZh 
+  const title = isZh
     ? '工作影响计算器 - 痛经症状评估与职场影响分析工具 | PeriodHub'
     : 'Work Impact Calculator - Menstrual Pain Assessment & Workplace Analysis | PeriodHub';
 

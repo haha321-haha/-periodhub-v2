@@ -344,7 +344,7 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
 
                 <div className="text-center">
                   <p className="text-sm text-indigo-700">
-                    {locale === 'zh' 
+                    {locale === 'zh'
                       ? `最近评估：${new Date(trends?.lastAssessmentDate || '').toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US')}`
                       : `Last assessment: ${new Date(trends?.lastAssessmentDate || '').toLocaleDateString('en-US')}`
                     }
@@ -359,7 +359,7 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
           notifications={notifications}
           onRemove={removeNotification}
         />
-        
+
         {/* <SettingsModal
           isOpen={showSettings}
           onClose={() => setShowSettings(false)}
@@ -566,7 +566,7 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
           notifications={notifications}
           onRemove={removeNotification}
         />
-        
+
         {/* <SettingsModal
           isOpen={showSettings}
           onClose={() => setShowSettings(false)}
@@ -849,7 +849,7 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
         notifications={notifications}
         onRemove={removeNotification}
       />
-      
+
       {/* <SettingsModal
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}

@@ -13,10 +13,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const title = locale === 'zh' ? '误区与事实 - 痛经健康指南' : 'Myths vs Facts - Health Guide';
-  const description = locale === 'zh' 
+  const description = locale === 'zh'
     ? '澄清关于经期健康的常见误解，用科学事实替代错误观念。'
     : 'Clarify common misconceptions about menstrual health, replace false beliefs with scientific facts.';
-  
+
   return {
     title,
     description,
@@ -43,7 +43,7 @@ export default async function MythsFactsPage({
 
   const mythsFacts = [
     {
-      myth: locale === 'zh' 
+      myth: locale === 'zh'
         ? '痛经是正常的，女性必须忍受'
         : 'Period pain is normal and women must endure it',
       fact: locale === 'zh'
@@ -103,7 +103,7 @@ export default async function MythsFactsPage({
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-12">
           {/* Breadcrumb */}
-          <Breadcrumb 
+          <Breadcrumb
             items={[
               { label: breadcrumbHealthGuideTitle, href: `/${locale}/health-guide` },
               { label: breadcrumbMythsFactsTitle }
@@ -163,7 +163,7 @@ export default async function MythsFactsPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-8 text-center">
           {locale === 'zh' ? '常见误区澄清' : 'Common Myth Clarifications'}
         </h2>
-        
+
         <div className="space-y-6">
           {mythsFacts.map((item, index) => (
             <div key={index} className="card">
@@ -172,7 +172,7 @@ export default async function MythsFactsPage({
                   {item.category}
                 </span>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-400">
                   <div className="flex items-center mb-2">
@@ -212,7 +212,7 @@ export default async function MythsFactsPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '文化相关的误区' : 'Culture-Related Myths'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-purple-600 mb-4">
@@ -228,7 +228,7 @@ export default async function MythsFactsPage({
                   {locale === 'zh' ? '事实：保持清洁有助于健康和舒适' : 'Fact: Maintaining cleanliness helps health and comfort'}
                 </p>
               </div>
-              
+
               <div className="border-l-4 border-red-300 pl-4">
                 <p className="text-sm text-neutral-600 mb-1">
                   <strong>{locale === 'zh' ? '误区：' : 'Myth:'}</strong>
@@ -255,7 +255,7 @@ export default async function MythsFactsPage({
                   {locale === 'zh' ? '事实：按医嘱使用非处方止痛药是安全的' : 'Fact: Using OTC pain medications as directed is safe'}
                 </p>
               </div>
-              
+
               <div className="border-l-4 border-red-300 pl-4">
                 <p className="text-sm text-neutral-600 mb-1">
                   <strong>{locale === 'zh' ? '误区：' : 'Myth:'}</strong>
@@ -275,7 +275,7 @@ export default async function MythsFactsPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '如何识别可靠信息' : 'How to Identify Reliable Information'}
         </h2>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
           <div className="card">
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
@@ -335,7 +335,7 @@ export default async function MythsFactsPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '行动建议' : 'Action Steps'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-accent-600 mb-4">
@@ -389,7 +389,7 @@ export default async function MythsFactsPage({
 
       {/* Navigation */}
       <section className="flex justify-between items-center pt-8 border-t border-neutral-200">
-        <Link 
+        <Link
           href={`/${locale}/health-guide/medical-care`}
           className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
         >
@@ -398,7 +398,7 @@ export default async function MythsFactsPage({
           </svg>
           {locale === 'zh' ? '上一章：何时寻求帮助' : 'Previous: When to Seek Help'}
         </Link>
-        
+
           <Link
             href={`/${locale}/health-guide/global-perspectives`}
             className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"

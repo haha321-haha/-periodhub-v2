@@ -63,7 +63,7 @@ export default function PersonalizedRecommendations() {
 
     try {
       const periodData = calendar.periodData || [];
-      
+
       // 检查数据是否足够
       if (periodData.length < 3) {
         // 冷启动：数据不足，使用通用推荐

@@ -19,7 +19,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "homePage" });
-  
+
   // 使用统一的SEO配置函数
   const { metadata } = generatePageSEO({
     locale: locale as "en" | "zh",
@@ -46,7 +46,7 @@ export async function generateMetadata({
       },
     },
   });
-  
+
   return {
     ...metadata,
     other: {

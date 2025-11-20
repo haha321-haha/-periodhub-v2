@@ -8,7 +8,7 @@ import { MenstrualPhase } from './index';
 export type RecommendationType = 'article' | 'tool' | 'scenario' | 'tip' | 'action';
 
 // 推荐类别
-export type RecommendationCategory = 
+export type RecommendationCategory =
   | 'pain-relief'
   | 'tracking'
   | 'medical'

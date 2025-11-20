@@ -142,7 +142,7 @@ const RecommendationCard = memo(function RecommendationCard({
     e.stopPropagation();
     const newSavedState = !isSaved;
     setIsSaved(newSavedState);
-    
+
     addRecommendationFeedback({
       recommendationId: item.id,
       action: newSavedState ? "saved" : "dismissed",
@@ -154,7 +154,7 @@ const RecommendationCard = memo(function RecommendationCard({
   const handleDismiss = useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     setIsDismissed(true);
-    
+
     addRecommendationFeedback({
       recommendationId: item.id,
       action: "dismissed",
@@ -281,7 +281,7 @@ const RecommendationCard = memo(function RecommendationCard({
             ) : (
               <span className="text-sm text-gray-400">{t("actions.click")}</span>
             )}
-            
+
             {/* 评分按钮 */}
             <button
               onClick={() => setShowRating(!showRating)}

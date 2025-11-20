@@ -75,10 +75,10 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
           <h3 class="text-lg font-semibold text-blue-800 mb-2">开始评估前</h3>
           <p class="text-blue-700">请确保您在一个安静、私密的环境中，可以专心回答问题。这个评估将帮助您更好地了解自己的症状模式。</p>
         </div>
-        
+
         <h2>症状评估问卷</h2>
         <p>请根据您最近3个月的经期体验回答以下问题：</p>
-        
+
         <div class="space-y-6 mt-6">
           <div class="bg-white p-6 rounded-lg shadow-sm border">
             <h3 class="font-semibold mb-4">1. 疼痛强度</h3>
@@ -91,7 +91,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
               <button class="p-3 border rounded hover:bg-primary-50 transition-colors">9-10分<br><span class="text-xs text-gray-500">极重</span></button>
             </div>
           </div>
-          
+
           <div class="bg-white p-6 rounded-lg shadow-sm border">
             <h3 class="font-semibold mb-4">2. 疼痛类型</h3>
             <p class="text-gray-600 mb-3">您的疼痛主要表现为：</p>
@@ -113,7 +113,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
               </label>
             </div>
           </div>
-          
+
           <div class="bg-white p-6 rounded-lg shadow-sm border">
             <h3 class="font-semibold mb-4">3. 伴随症状</h3>
             <p class="text-gray-600 mb-3">除了腹痛，您还有以下症状吗？</p>
@@ -144,7 +144,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
               </label>
             </div>
           </div>
-          
+
           <div class="bg-white p-6 rounded-lg shadow-sm border">
             <h3 class="font-semibold mb-4">4. 疼痛时间</h3>
             <p class="text-gray-600 mb-3">疼痛通常在什么时候开始？</p>
@@ -163,14 +163,14 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
               </label>
             </div>
           </div>
-          
+
           <div class="text-center">
             <button class="btn-primary px-8 py-3">
               提交评估
             </button>
           </div>
         </div>
-        
+
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mt-8">
           <h3 class="text-lg font-semibold text-yellow-800 mb-2">重要提醒</h3>
           <p class="text-yellow-700">此评估仅供参考，不能替代专业医疗诊断。如果您的症状严重或持续恶化，请及时就医。</p>
@@ -180,10 +180,10 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
           <h3 class="text-lg font-semibold text-blue-800 mb-2">Before Starting</h3>
           <p class="text-blue-700">Please ensure you're in a quiet, private environment where you can focus on answering the questions. This assessment will help you better understand your symptom patterns.</p>
         </div>
-        
+
         <h2>Symptom Assessment Questionnaire</h2>
         <p>Please answer the following questions based on your menstrual experience over the past 3 months:</p>
-        
+
         <div class="space-y-6 mt-6">
           <div class="bg-white p-6 rounded-lg shadow-sm border">
             <h3 class="font-semibold mb-4">1. Pain Intensity</h3>
@@ -196,7 +196,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
               <button class="p-3 border rounded hover:bg-primary-50 transition-colors">9-10<br><span class="text-xs text-gray-500">Extreme</span></button>
             </div>
           </div>
-          
+
           <div class="bg-white p-6 rounded-lg shadow-sm border">
             <h3 class="font-semibold mb-4">2. Pain Type</h3>
             <p class="text-gray-600 mb-3">Your pain is mainly characterized as:</p>
@@ -218,14 +218,14 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
               </label>
             </div>
           </div>
-          
+
           <div class="text-center">
             <button class="btn-primary px-8 py-3">
               Submit Assessment
             </button>
           </div>
         </div>
-        
+
         <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 mt-8">
           <h3 class="text-lg font-semibold text-yellow-800 mb-2">Important Notice</h3>
           <p class="text-yellow-700">This assessment is for reference only and cannot replace professional medical diagnosis. If your symptoms are severe or worsening, please seek medical attention promptly.</p>
@@ -237,7 +237,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
       slug: 'pain-tracker',
       frontmatter: {
         title: locale === 'zh' ? '痛经计算器 | 智能疼痛追踪分析' : 'Period Pain Calculator | Smart Pain Tracking & Analysis',
-        description: locale === 'zh' 
+        description: locale === 'zh'
           ? '痛经严重度计算器：智能分析疼痛模式，计算疼痛等级，预测周期趋势，为您提供个性化缓解建议和治疗优化方案。'
           : 'Period pain severity calculator: Intelligently analyze pain patterns, calculate pain levels, predict cycle trends, and provide personalized relief recommendations.',
         category: locale === 'zh' ? '计算器工具' : 'Calculator Tool',
@@ -247,12 +247,12 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
       content: locale === 'zh' ? `
         <h2>痛经计算器 | 智能疼痛分析系统</h2>
         <p>通过每日记录自动计算疼痛等级，智能分析疼痛模式和周期趋势，为您提供科学的疼痛评估和个性化缓解建议。</p>
-        
+
         <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-8">
           <h3 class="text-lg font-semibold text-green-800 mb-2">使用建议</h3>
           <p class="text-green-700">建议每天在固定时间记录，持续至少3个月经周期，以获得更准确的模式分析。</p>
         </div>
-        
+
         <div class="grid md:grid-cols-2 gap-8">
           <div class="bg-white p-6 rounded-lg shadow-sm border">
             <h3 class="font-semibold mb-4">今日记录</h3>
@@ -265,7 +265,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
                   <span>极痛</span>
                 </div>
               </div>
-              
+
               <div>
                 <label class="block text-sm font-medium mb-2">月经状态</label>
                 <select class="w-full p-2 border rounded">
@@ -277,7 +277,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
                   <option>其他时期</option>
                 </select>
               </div>
-              
+
               <div>
                 <label class="block text-sm font-medium mb-2">使用的缓解方法</label>
                 <div class="space-y-1">
@@ -295,11 +295,11 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
                   </label>
                 </div>
               </div>
-              
+
               <button class="w-full btn-primary">保存今日记录</button>
             </div>
           </div>
-          
+
           <div class="bg-white p-6 rounded-lg shadow-sm border">
             <h3 class="font-semibold mb-4">趋势分析</h3>
             <div class="space-y-4">
@@ -308,13 +308,13 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
                 <div class="text-2xl font-bold text-primary-600">6.2/10</div>
                 <p class="text-sm text-gray-600">比上月下降 0.8 分</p>
               </div>
-              
+
               <div class="bg-gray-100 p-4 rounded">
                 <h4 class="font-medium mb-2">疼痛天数</h4>
                 <div class="text-2xl font-bold text-secondary-600">4天</div>
                 <p class="text-sm text-gray-600">本周期疼痛持续时间</p>
               </div>
-              
+
               <div class="bg-gray-100 p-4 rounded">
                 <h4 class="font-medium mb-2">最有效缓解方法</h4>
                 <div class="text-lg font-semibold text-accent-600">热敷 + 休息</div>
@@ -323,7 +323,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
             </div>
           </div>
         </div>
-        
+
         <div class="mt-8 bg-purple-50 border-l-4 border-purple-500 p-6">
           <h3 class="text-lg font-semibold text-purple-800 mb-2">数据导出</h3>
           <p class="text-purple-700 mb-4">您可以导出疼痛记录，在就医时提供给医生参考。</p>
@@ -332,12 +332,12 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
       ` : `
         <h2>Period Pain Calculator | Smart Pain Analysis System</h2>
         <p>Automatically calculate pain levels through daily records, intelligently analyze pain patterns and cycle trends, providing scientific pain assessment and personalized relief recommendations.</p>
-        
+
         <div class="bg-green-50 border-l-4 border-green-500 p-6 mb-8">
           <h3 class="text-lg font-semibold text-green-800 mb-2">Usage Tips</h3>
           <p class="text-green-700">We recommend recording at the same time each day for at least 3 menstrual cycles to get more accurate pattern analysis.</p>
         </div>
-        
+
         <div class="grid md:grid-cols-2 gap-8">
           <div class="bg-white p-6 rounded-lg shadow-sm border">
             <h3 class="font-semibold mb-4">Today's Record</h3>
@@ -350,7 +350,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
                   <span>Extreme</span>
                 </div>
               </div>
-              
+
               <div>
                 <label class="block text-sm font-medium mb-2">Menstrual Status</label>
                 <select class="w-full p-2 border rounded">
@@ -362,11 +362,11 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
                   <option>Other</option>
                 </select>
               </div>
-              
+
               <button class="w-full btn-primary">Save Today's Record</button>
             </div>
           </div>
-          
+
           <div class="bg-white p-6 rounded-lg shadow-sm border">
             <h3 class="font-semibold mb-4">Trend Analysis</h3>
             <div class="space-y-4">
@@ -375,7 +375,7 @@ const getToolBySlug = async (slug: string, locale: Locale): Promise<Tool | null>
                 <div class="text-2xl font-bold text-primary-600">6.2/10</div>
                 <p class="text-sm text-gray-600">Decreased by 0.8 from last month</p>
               </div>
-              
+
               <div class="bg-gray-100 p-4 rounded">
                 <h4 class="font-medium mb-2">Pain Days</h4>
                 <div class="text-2xl font-bold text-secondary-600">4 days</div>
@@ -518,7 +518,7 @@ export default async function ToolPage({
     <div className="space-y-8">
       {/* 面包屑导航 */}
       <div className="container-custom">
-        <Breadcrumb 
+        <Breadcrumb
           items={[
             { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
             { label: toolData.frontmatter.title }

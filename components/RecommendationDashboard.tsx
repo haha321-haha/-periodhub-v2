@@ -89,7 +89,7 @@ export default function RecommendationDashboard() {
   const params = useParams();
   const locale = (params?.locale as string) || 'zh';
   const t = TEXTS[locale as keyof typeof TEXTS] || TEXTS.zh;
-  
+
   const [stats, setStats] = useState<RecommendationStats | null>(null);
   const [cacheStats, setCacheStats] = useState<CacheStats | null>(null);
   const [loading, setLoading] = useState(true);

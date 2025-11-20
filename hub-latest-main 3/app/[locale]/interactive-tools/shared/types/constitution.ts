@@ -22,7 +22,7 @@ export interface ConstitutionOption {
   constitutionType: ConstitutionType;
 }
 
-export type ConstitutionType = 
+export type ConstitutionType =
   | 'qi_deficiency'      // 气虚质
   | 'yang_deficiency'    // 阳虚质
   | 'yin_deficiency'     // 阴虚质

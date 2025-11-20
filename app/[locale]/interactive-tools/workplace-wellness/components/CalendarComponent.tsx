@@ -25,7 +25,7 @@ export default function CalendarComponent() {
   // 从 store 读取 periodData
   const periodData = calendar?.periodData || [];
   const [showAddForm, setShowAddForm] = useState(false);
-  
+
   // 用于自动聚焦到日期输入框
   const dateInputRef = useRef<HTMLInputElement>(null);
 
@@ -39,7 +39,7 @@ export default function CalendarComponent() {
     type: "period",
     painLevel: 0,
   });
-  
+
   // 表单验证错误状态
   const [formErrors, setFormErrors] = useState<{
     date?: string;
@@ -172,36 +172,36 @@ export default function CalendarComponent() {
   // 表单验证函数
   const validateForm = () => {
     const errors: typeof formErrors = {};
-    
+
     // 验证日期不能是未来日期
     const selectedDate = new Date(formData.date);
     const today = new Date();
     today.setHours(23, 59, 59, 999); // 设置今天的时间为23:59:59，允许选择今天
-    
+
     if (selectedDate > today) {
-      errors.date = locale === "zh" 
-        ? "不能选择未来的日期" 
+      errors.date = locale === "zh"
+        ? "不能选择未来的日期"
         : "Cannot select future dates";
     }
 
     // 验证日期格式
     if (!formData.date || formData.date.trim() === "") {
-      errors.date = errors.date || (locale === "zh" 
-        ? "请选择日期" 
+      errors.date = errors.date || (locale === "zh"
+        ? "请选择日期"
         : "Please select a date");
     }
 
     // 验证类型
     if (!formData.type) {
-      errors.type = locale === "zh" 
-        ? "请选择记录类型" 
+      errors.type = locale === "zh"
+        ? "请选择记录类型"
         : "Please select a record type";
     }
 
     // 验证疼痛等级（仅月经期）
     if (formData.type === "period" && formData.painLevel < 0) {
-      errors.painLevel = locale === "zh" 
-        ? "请选择疼痛等级" 
+      errors.painLevel = locale === "zh"
+        ? "请选择疼痛等级"
         : "Please select pain level";
     }
 
@@ -225,16 +225,16 @@ export default function CalendarComponent() {
         date: formData.date,
         type: formData.type,
         // 确保只有 period 类型才保存疼痛等级
-        painLevel: formData.type === "period" && formData.painLevel > 0 
-          ? (formData.painLevel as PainLevel) 
+        painLevel: formData.type === "period" && formData.painLevel > 0
+          ? (formData.painLevel as PainLevel)
           : null,
         flow: null, // 可以根据需要添加流量选择
       };
-      
+
       // 调用 store 的 addPeriodRecord 方法
       console.log("CalendarComponent - saving record:", record);
       addPeriodRecord(record);
-      
+
       // 关闭表单并重置表单数据
       setShowAddForm(false);
       setFormData({
@@ -242,17 +242,17 @@ export default function CalendarComponent() {
         type: "period",
         painLevel: 0,
       });
-      
+
       // 清除错误状态
       setFormErrors({});
-      
+
       // 显示成功提示（可以考虑使用toast或其他非阻塞提示）
     } catch (error) {
       // 错误处理
       console.error("保存记录时出错:", error);
       setFormErrors({
         ...formErrors,
-        submit: t("calendar.saveError") || 
+        submit: t("calendar.saveError") ||
           (locale === "zh" ? "保存记录时出错，请重试。" : "An error occurred while saving the record. Please try again.")
       });
       setTimeout(() => {
@@ -388,8 +388,8 @@ export default function CalendarComponent() {
 
       {/* 添加经期记录表单 - 按钮下方，带平滑展开动画 */}
       {showAddForm && (
-        <form 
-          onSubmit={handleSaveRecord} 
+        <form
+          onSubmit={handleSaveRecord}
           className="mt-4 p-4 bg-neutral-50 rounded-lg border border-neutral-200 animate-slide-up"
         >
           <h4 className="text-lg font-medium text-neutral-900 mb-4">
@@ -409,8 +409,8 @@ export default function CalendarComponent() {
                   setFormData({ ...formData, date: e.target.value })
                 }
                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-primary-500 ${
-                  formErrors.date 
-                    ? "border-red-500 focus:ring-red-500" 
+                  formErrors.date
+                    ? "border-red-500 focus:ring-red-500"
                     : "border-neutral-300 focus:ring-primary-500"
                 }`}
                 required
@@ -432,8 +432,8 @@ export default function CalendarComponent() {
                   })
                 }
                 className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-primary-500 ${
-                  formErrors.type 
-                    ? "border-red-500 focus:ring-red-500" 
+                  formErrors.type
+                    ? "border-red-500 focus:ring-red-500"
                     : "border-neutral-300 focus:ring-primary-500"
                 }`}
               >
@@ -466,8 +466,8 @@ export default function CalendarComponent() {
                       })
                     }
                     className={`relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider ${
-                      formErrors.painLevel 
-                        ? "border-2 border-red-500" 
+                      formErrors.painLevel
+                        ? "border-2 border-red-500"
                         : ""
                     }`}
                   />
@@ -540,7 +540,7 @@ export default function CalendarComponent() {
                 {t("common.cancel")}
               </button>
             </div>
-            
+
             {/* 提交错误提示 */}
             {formErrors.submit && (
               <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">

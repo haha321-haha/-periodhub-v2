@@ -17,11 +17,11 @@ import { PeriodRecord } from '../types';
 export function createTestPeriodData(count: number = 10): PeriodRecord[] {
   const records: PeriodRecord[] = [];
   const now = new Date();
-  
+
   for (let i = 0; i < count; i++) {
     const date = new Date(now);
     date.setDate(date.getDate() - i * 28); // 每28天一个周期
-    
+
     records.push({
       date: date.toISOString().split('T')[0],
       type: 'period',
@@ -30,7 +30,7 @@ export function createTestPeriodData(count: number = 10): PeriodRecord[] {
       notes: `Test record ${i + 1}`,
     });
   }
-  
+
   return records;
 }
 
@@ -64,16 +64,16 @@ export function validateRecommendationResult(result: RecommendationResult): {
   errors: string[];
 } {
   const errors: string[] = [];
-  
+
   // 验证推荐项数量
   if (result.recommendations.length === 0) {
     errors.push('推荐结果为空');
   }
-  
+
   if (result.recommendations.length > 10) {
     errors.push(`推荐数量过多: ${result.recommendations.length} (最大10)`);
   }
-  
+
   // 验证每个推荐项
   result.recommendations.forEach((item, index) => {
     if (!item.id) {
@@ -92,7 +92,7 @@ export function validateRecommendationResult(result: RecommendationResult): {
       errors.push(`推荐项 ${index} 优先级超出范围: ${item.priority}`);
     }
   });
-  
+
   // 验证洞察
   if (!result.insights) {
     errors.push('缺少数据洞察');
@@ -102,7 +102,7 @@ export function validateRecommendationResult(result: RecommendationResult): {
       errors.push(`无效的疼痛模式: ${result.insights.painPattern}`);
     }
   }
-  
+
   // 验证摘要
   if (!result.summary) {
     errors.push('缺少统计摘要');
@@ -111,7 +111,7 @@ export function validateRecommendationResult(result: RecommendationResult): {
       errors.push('摘要中的推荐数量与实际不符');
     }
   }
-  
+
   return {
     valid: errors.length === 0,
     errors,
@@ -127,7 +127,7 @@ export function runRecommendationTests(): {
   results: Array<{ test: string; passed: boolean; error?: string }>;
 } {
   const results: Array<{ test: string; passed: boolean; error?: string }> = [];
-  
+
   // 测试1: 正常数据推荐生成
   try {
     const periodData = createTestPeriodData(10);
@@ -139,14 +139,14 @@ export function runRecommendationTests(): {
       savedItems: [],
       itemRatings: {},
     };
-    
+
     const result = generateRecommendations(
       periodData,
       workImpact,
       nutrition,
       feedbackHistory
     );
-    
+
     const validation = validateRecommendationResult(result);
     results.push({
       test: '正常数据推荐生成',
@@ -160,7 +160,7 @@ export function runRecommendationTests(): {
       error: error.message,
     });
   }
-  
+
   // 测试2: 冷启动（数据不足）
   try {
     const periodData = createTestPeriodData(2); // 少于3个
@@ -172,14 +172,14 @@ export function runRecommendationTests(): {
       savedItems: [],
       itemRatings: {},
     };
-    
+
     const result = generateRecommendations(
       periodData,
       workImpact,
       nutrition,
       feedbackHistory
     );
-    
+
     const validation = validateRecommendationResult(result);
     results.push({
       test: '冷启动推荐生成',
@@ -193,7 +193,7 @@ export function runRecommendationTests(): {
       error: error.message,
     });
   }
-  
+
   // 测试3: 空数据
   try {
     const periodData: PeriodRecord[] = [];
@@ -205,14 +205,14 @@ export function runRecommendationTests(): {
       savedItems: [],
       itemRatings: {},
     };
-    
+
     const result = generateRecommendations(
       periodData,
       workImpact,
       nutrition,
       feedbackHistory
     );
-    
+
     const validation = validateRecommendationResult(result);
     results.push({
       test: '空数据推荐生成',
@@ -226,12 +226,14 @@ export function runRecommendationTests(): {
       error: error.message,
     });
   }
-  
+
   const passed = results.filter(r => r.passed).length;
   const failed = results.filter(r => !r.passed).length;
-  
+
   return { passed, failed, results };
 }
+
+
 
 
 

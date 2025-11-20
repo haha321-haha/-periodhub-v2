@@ -200,31 +200,31 @@ export default async function SocialScenarioPage({ params }: Props) {
     locale,
     scenarioSlug: "social",
     name: isZh ? "社交场合痛经管理指南" : "Social Setting Period Pain Management Guide",
-    description: isZh 
+    description: isZh
       ? "社交场合的痛经管理方法，包含便携准备和应急应对"
       : "Period pain management in social settings, including portable preparation and emergency response",
     steps: [
-      { 
+      {
         name: isZh ? "准备便携应急包" : "Prepare Portable Emergency Kit",
         text: isZh ? "准备小巧精致的应急包，方便随身携带" : "Prepare compact elegant emergency kit for easy carrying"
       },
-      { 
+      {
         name: isZh ? "选择合适的着装" : "Choose Appropriate Attire",
         text: isZh ? "选择舒适且不紧身的服装" : "Choose comfortable and non-restrictive clothing"
       },
-      { 
+      {
         name: isZh ? "提前规划行程" : "Plan Schedule in Advance",
         text: isZh ? "了解活动时长和场地设施" : "Know activity duration and venue facilities"
       },
-      { 
+      {
         name: isZh ? "了解场地设施" : "Know Venue Facilities",
         text: isZh ? "提前了解洗手间和休息区位置" : "Know restroom and rest area locations in advance"
       },
-      { 
+      {
         name: isZh ? "准备应急说辞" : "Prepare Emergency Excuses",
         text: isZh ? "准备得体的理由，必要时可以提前离开" : "Prepare appropriate reasons to leave early if necessary"
       },
-      { 
+      {
         name: isZh ? "保持轻松心态" : "Maintain Relaxed Mindset",
         text: isZh ? "不要过度紧张，适当休息和调整" : "Don't be overly nervous, rest and adjust appropriately"
       },

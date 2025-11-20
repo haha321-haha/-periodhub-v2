@@ -59,7 +59,7 @@ export const uiContent = {
 export function getUIContent(key: string, language: 'en' | 'zh'): string {
   const keys = key.split('.');
   let content: any = uiContent;
-  
+
   for (const k of keys) {
     content = content[k];
     if (!content) {
@@ -67,7 +67,7 @@ export function getUIContent(key: string, language: 'en' | 'zh'): string {
       return key;
     }
   }
-  
+
   return content[language] || content.en || key;
 }
 
@@ -75,7 +75,7 @@ export function getUIContent(key: string, language: 'en' | 'zh'): string {
 export function getUIContentObject(key: string): { en: string; zh: string } {
   const keys = key.split('.');
   let content: any = uiContent;
-  
+
   for (const k of keys) {
     content = content[k];
     if (!content) {
@@ -83,6 +83,6 @@ export function getUIContentObject(key: string): { en: string; zh: string } {
       return { en: key, zh: key };
     }
   }
-  
+
   return content;
 }

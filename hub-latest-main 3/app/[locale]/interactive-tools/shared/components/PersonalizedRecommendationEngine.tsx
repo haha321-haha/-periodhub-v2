@@ -74,16 +74,16 @@ class RecommendationEngine {
   private calculatePainPattern(): { pattern: string; severity: number; triggers: string[] } {
     const recentAssessments = this.assessmentHistory.slice(-6); // 最近6次评估
     const avgPain = recentAssessments.reduce((sum, assessment) => sum + assessment.painLevel, 0) / recentAssessments.length;
-    
+
     let pattern = 'moderate';
     if (avgPain >= 8) pattern = 'severe';
     else if (avgPain <= 4) pattern = 'mild';
-    
+
     const triggers = [];
     if (this.userProfile.lifestyle.stress === 'high') triggers.push('stress');
     if (this.userProfile.lifestyle.exercise === 'low') triggers.push('sedentary');
     if (this.userProfile.lifestyle.diet === 'poor') triggers.push('diet');
-    
+
     return { pattern, severity: avgPain, triggers };
   }
 
@@ -248,25 +248,25 @@ class RecommendationEngine {
   // 计算推荐匹配度
   calculateMatchScore(recommendation: Recommendation): number {
     let score = 0;
-    
+
     // 基于用户偏好的匹配
     if (recommendation.type === 'lifestyle' && this.userProfile.preferences.lifestyleChanges) score += 0.3;
     if (recommendation.type === 'treatment' && this.userProfile.preferences.naturalRemedies) score += 0.2;
-    
+
     // 基于疼痛模式的匹配
     const painPattern = this.calculatePainPattern();
     if (painPattern.severity >= 7 && recommendation.priority === 'high') score += 0.3;
     if (painPattern.triggers.includes('stress') && recommendation.id === 'stress-management') score += 0.2;
-    
+
     return Math.min(score, 1.0);
   }
 }
 
-export default function PersonalizedRecommendationEngine({ 
-  locale, 
-  userProfile, 
+export default function PersonalizedRecommendationEngine({
+  locale,
+  userProfile,
   assessmentHistory,
-  onRecommendationUpdate 
+  onRecommendationUpdate
 }: PersonalizedRecommendationEngineProps) {
   const t = useTranslations('interactiveTools.recommendations');
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
@@ -276,7 +276,7 @@ export default function PersonalizedRecommendationEngine({
   useEffect(() => {
     const engine = new RecommendationEngine(userProfile, assessmentHistory);
     const generatedRecommendations = engine.generateRecommendations();
-    
+
     // 计算匹配度
     const recommendationsWithMatch = generatedRecommendations.map(rec => ({
       ...rec,
@@ -285,7 +285,7 @@ export default function PersonalizedRecommendationEngine({
 
     setRecommendations(recommendationsWithMatch);
     setLoading(false);
-    
+
     if (onRecommendationUpdate) {
       onRecommendationUpdate(recommendationsWithMatch);
     }
@@ -335,7 +335,7 @@ export default function PersonalizedRecommendationEngine({
             {locale === 'zh' ? '基于您的个人数据和科学研究的智能推荐' : 'Smart recommendations based on your personal data and scientific research'}
           </p>
         </div>
-        
+
         <div className="mt-4 sm:mt-0">
           <div className="text-sm text-gray-500 mb-2">
             {locale === 'zh' ? '总推荐数' : 'Total Recommendations'}: {categoryStats.all}

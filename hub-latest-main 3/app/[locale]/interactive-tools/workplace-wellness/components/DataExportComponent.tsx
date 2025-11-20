@@ -92,7 +92,7 @@ export default function DataExportComponent() {
   // 导出为CSV
   const exportAsCSV = (data: any) => {
     let csvContent = '';
-    
+
     if (exportConfig.exportType === 'period') {
       csvContent = 'Date,Type,Pain Level,Flow\n';
       data.data.forEach((record: any) => {
@@ -128,7 +128,7 @@ export default function DataExportComponent() {
         nutritionData: exportConfig.exportType === 'nutrition' ? data.data : undefined,
         allData: exportConfig.exportType === 'all' ? data.data : undefined
       };
-      
+
       // 使用新的PDF生成器
       await pdfGenerator.generateAndDownloadPDF(pdfData);
     } catch (error) {
@@ -151,13 +151,13 @@ export default function DataExportComponent() {
       }
 
       const data = generateExportData();
-      
+
       // 应用隐私保护
       const protectedData = privacyManager.maskSensitiveData(data, exportConfig.exportType);
-      
+
       // 模拟导出延迟
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       switch (exportConfig.format) {
         case 'json':
           exportAsJSON(protectedData);
@@ -171,7 +171,7 @@ export default function DataExportComponent() {
         default:
           throw new Error('Unsupported export format');
       }
-      
+
       setExportStatus('success');
       alert(t('export.successMessage'));
     } catch (error) {
@@ -201,25 +201,25 @@ export default function DataExportComponent() {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
       <h4 className="text-lg font-semibold text-neutral-900 mb-4">{t('export.title')}</h4>
-      
+
       <div className="space-y-4">
         {/* 导出内容选择 */}
         <div>
           <label className="block text-sm font-medium text-neutral-800 mb-2">{t('export.contentLabel')}</label>
           <div className="space-y-2">
             {(['period', 'nutrition', 'all'] as ExportType[]).map(typeId => (
-              <label 
+              <label
                 key={typeId}
                 className={`flex items-start gap-3 p-3 border rounded-lg cursor-pointer transition-colors duration-200 ${
-                  exportConfig.exportType === typeId 
-                    ? 'border-primary-500 bg-primary-500/10' 
+                  exportConfig.exportType === typeId
+                    ? 'border-primary-500 bg-primary-500/10'
                     : 'border-neutral-200 hover:border-neutral-300'
                 }`}
               >
-                <input 
-                  type="radio" 
-                  name="exportType" 
-                  value={typeId} 
+                <input
+                  type="radio"
+                  name="exportType"
+                  value={typeId}
                   checked={exportConfig.exportType === typeId}
                   onChange={() => handleExportTypeChange(typeId)}
                   className="mt-1 text-primary-500 focus:ring-primary-500"
@@ -242,8 +242,8 @@ export default function DataExportComponent() {
                 key={formatId}
                 onClick={() => handleExportFormatChange(formatId)}
                 className={`p-3 text-center rounded-lg border-2 transition-colors duration-200 ${
-                  exportConfig.format === formatId 
-                    ? 'border-primary-500 bg-primary-500/10' 
+                  exportConfig.format === formatId
+                    ? 'border-primary-500 bg-primary-500/10'
                     : 'border-neutral-200 hover:border-neutral-300'
                 }`}
               >
@@ -258,12 +258,12 @@ export default function DataExportComponent() {
         </div>
 
         {/* 导出按钮 */}
-        <button 
+        <button
           onClick={handleExport}
           disabled={isExporting}
           className={`w-full rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2 px-4 py-2 text-base ${
-            isExporting 
-              ? 'bg-primary-500/50 cursor-not-allowed' 
+            isExporting
+              ? 'bg-primary-500/50 cursor-not-allowed'
               : 'bg-primary-500 hover:bg-primary-600'
           } text-white`}
         >
@@ -374,7 +374,7 @@ export default function DataExportComponent() {
             </div>
           </div>
         )}
-        
+
         {exportStatus === 'error' && (
           <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
             <div className="text-sm text-red-800">

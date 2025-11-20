@@ -5,23 +5,23 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
-import { 
-  Brain, 
-  TrendingUp, 
-  Calendar, 
-  Pill, 
-  AlertTriangle, 
-  CheckCircle, 
+import {
+  Brain,
+  TrendingUp,
+  Calendar,
+  Pill,
+  AlertTriangle,
+  CheckCircle,
   Info,
   ChevronDown,
   ChevronUp,
   Lightbulb
 } from 'lucide-react';
-import { 
-  PainRecord, 
-  PainAnalytics, 
-  Pattern, 
-  PainTrackerError 
+import {
+  PainRecord,
+  PainAnalytics,
+  Pattern,
+  PainTrackerError
 } from '../../../../../types/pain-tracker';
 import { AnalyticsEngine } from '../../../../../lib/pain-tracker/analytics/AnalyticsEngine';
 
@@ -43,11 +43,11 @@ interface InsightCard {
   isExpanded?: boolean;
 }
 
-export default function PatternInsights({ 
-  analytics, 
-  records, 
+export default function PatternInsights({
+  analytics,
+  records,
   locale,
-  onError 
+  onError
 }: PatternInsightsProps) {
   const t = useTranslations('painTracker.insights');
   const [patterns, setPatterns] = useState<Pattern[]>([]);
@@ -120,10 +120,10 @@ export default function PatternInsights({
 
         setInsights(insightCards);
       } catch (error) {
-        const errorMessage = error instanceof PainTrackerError 
-          ? error.message 
+        const errorMessage = error instanceof PainTrackerError
+          ? error.message
           : 'Failed to generate insights';
-        
+
         onError?.(error instanceof Error ? error : new Error(errorMessage));
       } finally {
         setIsLoading(false);
@@ -205,7 +205,7 @@ export default function PatternInsights({
 
   function getGeneralRecommendations(insight: string): string[] {
     const recommendations: string[] = [];
-    
+
     if (insight.includes('high')) {
       recommendations.push(t('recommendations.consultDoctor'));
       recommendations.push(t('recommendations.trackTriggers'));
@@ -218,7 +218,7 @@ export default function PatternInsights({
       recommendations.push(t('recommendations.monitorTrend'));
       recommendations.push(t('recommendations.shareWithDoctor'));
     }
-    
+
     return recommendations.length > 0 ? recommendations : [t('recommendations.keepTracking')];
   }
 
@@ -277,13 +277,13 @@ export default function PatternInsights({
   function calculateAverageGapBetweenRecords(records: PainRecord[]): number {
     if (records.length < 2) return 0;
 
-    const sortedRecords = records.sort((a, b) => 
+    const sortedRecords = records.sort((a, b) =>
       new Date(a.date).getTime() - new Date(b.date).getTime()
     );
 
     let totalGap = 0;
     for (let i = 1; i < sortedRecords.length; i++) {
-      const gap = new Date(sortedRecords[i].date).getTime() - 
+      const gap = new Date(sortedRecords[i].date).getTime() -
                    new Date(sortedRecords[i - 1].date).getTime();
       totalGap += gap;
     }
@@ -342,7 +342,7 @@ export default function PatternInsights({
         {insights.map((insight) => {
           const isExpanded = expandedCards.has(insight.id);
           const Icon = insight.icon;
-          
+
           const cardColors = {
             success: 'bg-green-50 border-green-200 text-green-800',
             warning: 'bg-yellow-50 border-yellow-200 text-yellow-800',
@@ -393,7 +393,7 @@ export default function PatternInsights({
                     )}
                   </div>
                 </div>
-                
+
                 <button
                   onClick={() => toggleCard(insight.id)}
                   className="text-gray-400 hover:text-gray-600 transition-colors"

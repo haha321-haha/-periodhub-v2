@@ -63,7 +63,7 @@ export default function QuestionRenderer({ question, answer, onAnswer, locale }:
     const selectedValues = Array.isArray(answer?.value) ? answer.value : [];
     const hasNoneSelected = selectedValues.includes('none');
     const hasOtherSelected = selectedValues.some(v => v !== 'none');
-    
+
     return (
       <div className="space-y-3">
         <h3 className="text-lg font-medium text-gray-900 mb-2">
@@ -78,10 +78,10 @@ export default function QuestionRenderer({ question, answer, onAnswer, locale }:
           {question.options?.map((option) => {
             const isNone = option.value === 'none';
             const isSelected = selectedValues.includes(option.value.toString());
-            const isDisabled = isNone 
+            const isDisabled = isNone
               ? hasOtherSelected  // 如果选择了其他选项，禁用"以上都没有"
               : hasNoneSelected;  // 如果选择了"以上都没有"，禁用其他选项
-            
+
             return (
               <label
                 key={option.value.toString()}
@@ -98,7 +98,7 @@ export default function QuestionRenderer({ question, answer, onAnswer, locale }:
                   disabled={isDisabled}
                   onChange={(e) => {
                     if (isDisabled) return;
-                    
+
                     if (isNone) {
                       // 选择"以上都没有"时，清除所有其他选项
                       handleChange(['none']);
@@ -127,7 +127,7 @@ export default function QuestionRenderer({ question, answer, onAnswer, locale }:
   // 渲染评分问题
   if (question.type === 'scale') {
     const currentValue = typeof answer?.value === 'number' ? answer.value : 1;
-    
+
     return (
       <div className="space-y-3">
         <h3 className="text-lg font-medium text-gray-900 mb-2">
@@ -189,9 +189,9 @@ export default function QuestionRenderer({ question, answer, onAnswer, locale }:
 
   // 渲染范围选择问题（预留）
   if (question.type === 'range') {
-    const currentValue = typeof answer?.value === 'number' ? answer.value : 
+    const currentValue = typeof answer?.value === 'number' ? answer.value :
       (question.validation?.min || 0);
-    
+
     return (
       <div className="space-y-3">
         <h3 className="text-lg font-medium text-gray-900 mb-2">
@@ -220,7 +220,7 @@ export default function QuestionRenderer({ question, answer, onAnswer, locale }:
   // 渲染布尔选择问题（预留）
   if (question.type === 'boolean') {
     const currentValue = typeof answer?.value === 'boolean' ? answer.value : false;
-    
+
     return (
       <div className="space-y-3">
         <h3 className="text-lg font-medium text-gray-900 mb-2">

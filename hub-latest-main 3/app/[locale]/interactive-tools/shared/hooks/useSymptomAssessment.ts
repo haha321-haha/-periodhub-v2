@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
-import { 
-  Question, 
-  AssessmentAnswer, 
-  AssessmentSession, 
+import {
+  Question,
+  AssessmentAnswer,
+  AssessmentSession,
   AssessmentResult,
-  Recommendation 
+  Recommendation
 } from '../types';
 import { getQuestionsByMode } from '../data/assessmentQuestions';
 import { calculateSymptomImpact, calculateWorkplaceImpact } from '../data/calculationAlgorithms';
@@ -79,7 +79,7 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
       locale,
       mode
     };
-    
+
     setCurrentSession(newSession);
     setCurrentQuestionIndex(0);
     setResult(null);
@@ -91,13 +91,13 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
 
     setCurrentSession(prev => {
       if (!prev) return prev;
-      
+
       // Remove any existing answer for this question
       const filteredAnswers = prev.answers.filter(a => a.questionId !== answer.questionId);
-      
+
       // Add the new answer
       const updatedAnswers = [...filteredAnswers, answer];
-      
+
       return {
         ...prev,
         answers: updatedAnswers
@@ -359,7 +359,7 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
     try {
       // 使用基于参考代码的计算算法
       const effectiveLocale = currentLocale || currentSession.locale;
-      
+
       // 将答案转换为参考代码格式
       const answersForCalculation: Record<string, any> = {};
       currentSession.answers.forEach(answer => {
@@ -402,7 +402,7 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
       // 将建议转换为Recommendation格式
       if (calculationResult.recommendations) {
         const { immediate = [], longTerm = [] } = calculationResult.recommendations;
-        
+
         immediate.forEach((rec: string, index: number) => {
           assessmentResult.recommendations.push({
             id: `immediate_${index}`,
@@ -447,7 +447,7 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
 
       setResult(assessmentResult);
       setCurrentSession(prev => prev ? { ...prev, result: assessmentResult, completedAt: new Date().toISOString() } : null);
-      
+
       return assessmentResult;
     } catch (err) {
       console.error('Failed to complete assessment:', err);
@@ -475,11 +475,11 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
     currentQuestionIndex,
     currentQuestion,
     isComplete,
-    
+
     // Progress
     progress,
     totalQuestions: questions.length,
-    
+
     // Actions
     startAssessment,
     answerQuestion,
@@ -488,10 +488,10 @@ export const useSymptomAssessment = (userId?: string): UseSymptomAssessmentRetur
     goToNextQuestion,
     completeAssessment,
     resetAssessment,
-    
+
     // Results
     result,
-    
+
     // State
     isLoading,
     error

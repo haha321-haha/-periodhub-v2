@@ -70,10 +70,10 @@ interface AnalyticsDashboardProps {
 
 const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#00ff00'];
 
-export default function AnalyticsDashboard({ 
-  locale, 
-  userId, 
-  timeRange = 'month' 
+export default function AnalyticsDashboard({
+  locale,
+  userId,
+  timeRange = 'month'
 }: AnalyticsDashboardProps) {
   const t = useTranslations('interactiveTools.analytics');
   const [data, setData] = useState<AnalyticsData | null>(null);
@@ -148,9 +148,9 @@ export default function AnalyticsDashboard({
   const chartData = useMemo(() => {
     if (!data) return [];
     return data.painLevels.map(item => ({
-      date: new Date(item.date).toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', { 
-        month: 'short', 
-        day: 'numeric' 
+      date: new Date(item.date).toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
+        month: 'short',
+        day: 'numeric'
       }),
       pain: item.pain,
       mood: item.mood,
@@ -209,7 +209,7 @@ export default function AnalyticsDashboard({
             {locale === 'zh' ? '深入了解您的经期健康模式和趋势' : 'Deep insights into your menstrual health patterns and trends'}
           </p>
         </div>
-        
+
         <div className="flex space-x-2 mt-4 sm:mt-0">
           {(['pain', 'mood', 'activity'] as const).map(metric => (
             <button
@@ -243,7 +243,7 @@ export default function AnalyticsDashboard({
             stable: 'text-blue-600',
             worsening: 'text-red-600'
           };
-          
+
           return (
             <div key={key} className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-lg p-6 border border-gray-200">
               <div className="flex items-center justify-between mb-4">

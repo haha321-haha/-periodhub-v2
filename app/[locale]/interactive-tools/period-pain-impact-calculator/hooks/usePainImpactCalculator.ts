@@ -2,10 +2,10 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { 
-  Question, 
-  AssessmentAnswer, 
-  AssessmentSession, 
+import {
+  Question,
+  AssessmentAnswer,
+  AssessmentSession,
   AssessmentResult,
   Recommendation,
   PainImpactCalculatorHookReturn
@@ -26,7 +26,7 @@ const cleanupOldStorage = (currentKey: string): void => {
       const completedMaxAge = 6 * 60 * 60 * 1000; // 已完成的数据6小时后清理
       let cleanedCount = 0;
       const maxCleanCount = 10; // 最多清理10个键
-      
+
       // 清理所有相关的旧键
       for (let i = localStorage.length - 1; i >= 0 && cleanedCount < maxCleanCount; i--) {
         const key = localStorage.key(i);
@@ -47,7 +47,7 @@ const cleanupOldStorage = (currentKey: string): void => {
                     const dataTime = new Date(timestamp).getTime();
                     const age = now - dataTime;
                     const isCompleted = !!parsed.completedAt;
-                    
+
                     // 删除超过12小时的数据，或已完成超过6小时的数据
                     if (age > maxAge || (isCompleted && age > completedMaxAge)) {
                       localStorage.removeItem(key);
@@ -81,16 +81,16 @@ const saveToStorage = <T>(key: string, data: T): void => {
   if (typeof window !== 'undefined') {
     try {
       const dataString = JSON.stringify(data);
-      
+
       // 检查数据大小（粗略估算）
       const estimatedSize = new Blob([dataString]).size;
       const maxSize = 50 * 1024; // 降低到 50KB，更保守的阈值
-      
+
       if (estimatedSize > maxSize) {
         console.warn(`Data size (${estimatedSize} bytes) exceeds limit (${maxSize} bytes), attempting cleanup...`);
         cleanupOldStorage(key);
       }
-      
+
       localStorage.setItem(key, dataString);
     } catch (error: any) {
       // 如果是配额错误，尝试清理
@@ -99,7 +99,7 @@ const saveToStorage = <T>(key: string, data: T): void => {
         try {
           // 第一步：清理旧数据
           cleanupOldStorage(key);
-          
+
           // 第二步：如果还是失败，尝试只保存核心数据
           const minimalData = {
             id: (data as any)?.id,
@@ -110,7 +110,7 @@ const saveToStorage = <T>(key: string, data: T): void => {
             // 不保存 result，result 可以重新计算
           };
           const minimalDataString = JSON.stringify(minimalData);
-          
+
           try {
             localStorage.setItem(key, minimalDataString);
             console.log('Saved minimal data to localStorage successfully');
@@ -149,13 +149,13 @@ const loadFromStorage = <T>(key: string): T | null => {
       if (data) {
         return JSON.parse(data);
       }
-      
+
       // 如果 localStorage 中没有，尝试从 sessionStorage 加载
       const sessionData = sessionStorage.getItem(key);
       if (sessionData) {
         return JSON.parse(sessionData);
       }
-      
+
       return null;
     } catch (error) {
       console.error('Failed to load from storage:', error);
@@ -176,7 +176,7 @@ const calculateResult = (answers: AssessmentAnswer[], questions: Question[], loc
   // 先计算最大可能分数（基于所有问题的最高可能得分）
   questions.forEach(question => {
     const questionWeight = question.weight || 1;
-    
+
     if (question.type === 'scale') {
       // 评分类型：最大分数是最高选项的权重 * 问题权重
       // scale 类型的 options 是 [1,2,3,...,10]，最高权重是 10
@@ -458,7 +458,7 @@ const getTimeframeTranslation = (key: string, locale: string): string => {
     twoToFourWeeks: { en: '2-4 weeks', zh: '2-4周' },
     fourToSixWeeks: { en: '4-6 weeks', zh: '4-6周' },
   };
-  
+
   const translations = timeframeMap[key];
   if (!translations) return key;
   return locale === 'zh' ? translations.zh : translations.en;
@@ -518,8 +518,8 @@ const generateRecommendations = (
       }
     );
   } else if (severity === 'severe' || severity === 'emergency') {
-    const medicalText = severity === 'emergency' 
-      ? texts.immediate_medical_attention 
+    const medicalText = severity === 'emergency'
+      ? texts.immediate_medical_attention
       : texts.medical_evaluation;
     recommendations.push(
       {
@@ -528,7 +528,7 @@ const generateRecommendations = (
         title: medicalText.title,
         description: medicalText.description,
         priority: 'high',
-        timeframe: severity === 'emergency' 
+        timeframe: severity === 'emergency'
           ? getTimeframeTranslation('immediate', locale)
           : getTimeframeTranslation('oneWeek', locale),
         actionSteps: medicalText.actionSteps
@@ -600,7 +600,7 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
   const currentQuestion = questions[currentQuestionIndex] || null;
   const isComplete = currentQuestionIndex >= questions.length;
   // 进度计算：基于已回答问题数量，而不是当前问题索引
-  const progress = questions.length > 0 
+  const progress = questions.length > 0
     ? Math.min((currentSession?.answers.length || 0) / questions.length * 100, 100)
     : 0;
 
@@ -612,7 +612,7 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
       startedAt: new Date().toISOString(),
       locale
     };
-    
+
     setCurrentSession(newSession);
     setCurrentQuestionIndex(0);
     setResult(null);
@@ -624,19 +624,19 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
 
     setCurrentSession(prev => {
       if (!prev) return prev;
-      
+
       // Remove any existing answer for this question
       const filteredAnswers = prev.answers.filter(a => a.questionId !== answer.questionId);
-      
+
       // Add new answer
       const updatedAnswers = [...filteredAnswers, answer];
-      
+
       return {
         ...prev,
         answers: updatedAnswers
       };
     });
-    
+
     // 移除自动跳转逻辑，让用户手动点击"下一题"
   }, [currentSession]);
 
@@ -669,10 +669,10 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
 
     try {
       const assessmentResult = calculateResult(currentSession.answers, questions, currentSession.locale || 'en');
-      
+
       if (assessmentResult) {
         assessmentResult.sessionId = currentSession.id;
-        
+
         // Update session with result and mark as complete
         setCurrentSession(prev => {
           if (!prev) return prev;
@@ -682,15 +682,15 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
             completedAt: new Date().toISOString()
           };
         });
-        
+
         // 设置结果并标记为完成
         setResult(assessmentResult);
         // 确保 currentQuestionIndex 设置为最后一个问题之后，以便 isComplete 为 true
         setCurrentQuestionIndex(questions.length);
-        
+
         return assessmentResult;
       }
-      
+
       setError('Unable to calculate assessment result');
       return null;
     } catch (err) {
@@ -706,7 +706,7 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
     setCurrentQuestionIndex(0);
     setResult(null);
     setError(null);
-    
+
     // Clear saved session
     if (typeof window !== 'undefined') {
       localStorage.removeItem(storageKey);
@@ -719,11 +719,11 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
     currentQuestionIndex,
     currentQuestion,
     isComplete,
-    
+
     // Progress
     progress,
     totalQuestions: questions.length,
-    
+
     // Actions
     startAssessment,
     answerQuestion,
@@ -732,10 +732,10 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
     goToNextQuestion,
     completeAssessment,
     resetAssessment,
-    
+
     // Results
     result,
-    
+
     // State
     isLoading,
     error

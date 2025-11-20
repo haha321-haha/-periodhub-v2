@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { PainEntry, PainEntryFormData, PainStatistics, ValidationError } from '../types';
-import { 
-  validatePainEntry, 
-  calculateStatistics, 
-  saveToStorage, 
-  loadFromStorage, 
+import {
+  validatePainEntry,
+  calculateStatistics,
+  saveToStorage,
+  loadFromStorage,
   clearStorage,
-  createStorageKey 
+  createStorageKey
 } from '../utils';
 import { STORAGE_KEYS } from '../constants';
 
@@ -18,18 +18,18 @@ interface UsePainTrackerReturn {
   statistics: PainStatistics;
   isLoading: boolean;
   error: string | null;
-  
+
   // Actions
   addEntry: (data: PainEntryFormData) => Promise<{ success: boolean; errors?: ValidationError[] }>;
   updateEntry: (id: string, data: Partial<PainEntryFormData>) => Promise<{ success: boolean; errors?: ValidationError[] }>;
   deleteEntry: (id: string) => Promise<boolean>;
   clearAllEntries: () => Promise<boolean>;
-  
+
   // Utilities
   getEntry: (id: string) => PainEntry | undefined;
   getEntriesInRange: (startDate: string, endDate: string) => PainEntry[];
   exportData: (format: 'json' | 'csv') => void;
-  
+
   // State management
   refreshData: () => void;
   setError: (error: string | null) => void;
@@ -58,7 +58,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
       try {
         setIsLoading(true);
         setError(null);
-        
+
         const savedEntries = loadFromStorage<PainEntry[]>(storageKey);
         if (savedEntries && Array.isArray(savedEntries)) {
           setEntries(savedEntries);
@@ -93,7 +93,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
   const addEntry = useCallback(async (data: PainEntryFormData): Promise<{ success: boolean; errors?: ValidationError[] }> => {
     try {
       setError(null);
-      
+
       // Validate the entry
       const validationErrors = validatePainEntry(data);
       if (validationErrors.length > 0) {
@@ -132,7 +132,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
 
       // Add to entries
       setEntries(prev => [...prev, newEntry].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
-      
+
       return { success: true };
     } catch (err) {
       console.error('Failed to add entry:', err);
@@ -144,18 +144,18 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
   const updateEntry = useCallback(async (id: string, data: Partial<PainEntryFormData>): Promise<{ success: boolean; errors?: ValidationError[] }> => {
     try {
       setError(null);
-      
+
       const existingEntry = entries.find(entry => entry.id === id);
       if (!existingEntry) {
-        return { 
-          success: false, 
-          errors: [{ field: 'id', message: 'Entry not found', code: 'NOT_FOUND' }] 
+        return {
+          success: false,
+          errors: [{ field: 'id', message: 'Entry not found', code: 'NOT_FOUND' }]
         };
       }
 
       // Merge with existing data
       const updatedData = { ...existingEntry, ...data };
-      
+
       // Validate the updated entry
       const validationErrors = validatePainEntry(updatedData);
       if (validationErrors.length > 0) {
@@ -166,13 +166,13 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
       if (data.date && data.date !== existingEntry.date) {
         const duplicateEntry = entries.find(entry => entry.id !== id && entry.date === data.date);
         if (duplicateEntry) {
-          return { 
-            success: false, 
-            errors: [{ 
-              field: 'date', 
-              message: 'An entry for this date already exists', 
-              code: 'DUPLICATE_DATE' 
-            }] 
+          return {
+            success: false,
+            errors: [{
+              field: 'date',
+              message: 'An entry for this date already exists',
+              code: 'DUPLICATE_DATE'
+            }]
           };
         }
       }
@@ -184,11 +184,11 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
         updatedAt: new Date().toISOString()
       };
 
-      setEntries(prev => 
+      setEntries(prev =>
         prev.map(entry => entry.id === id ? updatedEntry : entry)
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       );
-      
+
       return { success: true };
     } catch (err) {
       console.error('Failed to update entry:', err);
@@ -200,7 +200,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
   const deleteEntry = useCallback(async (id: string): Promise<boolean> => {
     try {
       setError(null);
-      
+
       const entryExists = entries.some(entry => entry.id === id);
       if (!entryExists) {
         setError('Entry not found');
@@ -283,18 +283,18 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
     statistics,
     isLoading,
     error,
-    
+
     // Actions
     addEntry,
     updateEntry,
     deleteEntry,
     clearAllEntries,
-    
+
     // Utilities
     getEntry,
     getEntriesInRange,
     exportData,
-    
+
     // State management
     refreshData,
     setError

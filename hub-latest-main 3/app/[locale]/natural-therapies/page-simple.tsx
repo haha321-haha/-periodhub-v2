@@ -24,8 +24,8 @@ export default function NaturalTherapiesPage({
           </p>
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
             <p className="text-green-800">
-              {locale === 'zh' 
-                ? '✅ 页面加载成功！基本功能正常运行。' 
+              {locale === 'zh'
+                ? '✅ 页面加载成功！基本功能正常运行。'
                 : '✅ Page loaded successfully! Basic functionality is working.'
               }
             </p>

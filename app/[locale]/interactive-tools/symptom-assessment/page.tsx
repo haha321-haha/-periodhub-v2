@@ -114,6 +114,27 @@ export default async function SymptomAssessmentPage({
         url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/symptom-assessment`,
       },
     ],
+    primaryConditionKey: "dysmenorrhea",
+    citations: [
+      {
+        name: "Dysmenorrhea: Painful Periods",
+        url: "https://www.acog.org/womens-health/faqs/dysmenorrhea-painful-periods",
+        author: "ACOG",
+      },
+      {
+        name: "Premenstrual Syndrome (PMS)",
+        url: "https://www.acog.org/womens-health/faqs/premenstrual-syndrome",
+        author: "ACOG",
+      },
+    ],
+    inputs: [
+      isZh ? "月经期疼痛评分" : "Daily period pain score",
+      isZh ? "症状列表" : "Symptom checklist",
+    ],
+    outputs: [
+      isZh ? "疼痛等级评估" : "Pain severity assessment",
+      isZh ? "就医建议与预防指南" : "Consultation advice & prevention tips",
+    ],
   });
 
   // 生成FAQ和HowTo结构化数据

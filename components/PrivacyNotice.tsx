@@ -10,13 +10,13 @@ export function PrivacyNotice() {
 
   return (
     <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-      <button 
+      <button
         onClick={() => setShowDetails(!showDetails)}
         className="w-full text-left"
       >
         <div className="flex items-start gap-3">
           <Lock className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
-          
+
           <div className="flex-1">
             <p className="text-sm text-gray-800 font-medium">
               {t('title')}
@@ -25,7 +25,7 @@ export function PrivacyNotice() {
               {t('description')}
             </p>
           </div>
-          
+
           {showDetails ? (
             <ChevronUp className="w-5 h-5 text-gray-400 flex-shrink-0" />
           ) : (
@@ -61,9 +61,9 @@ export function PrivacyNotice() {
               <span>{t('details.compliance')}</span>
             </li>
           </ul>
-          
-          <a 
-            href="/privacy-policy" 
+
+          <a
+            href="/privacy-policy"
             className="text-xs text-blue-600 hover:underline mt-3 inline-block"
           >
             {t('policyLink')} →

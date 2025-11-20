@@ -157,7 +157,7 @@ export default function StressTechniquesAccordion({
                         {[1, 2, 3].map((benefitIndex) => {
                           const benefitKey = `techniques.${technique.key}.benefits.benefit${benefitIndex}`;
                           const benefitText = t(`${technique.key}.benefits.benefit${benefitIndex}`);
-                          
+
                           return (
                             <li
                               key={benefitIndex}

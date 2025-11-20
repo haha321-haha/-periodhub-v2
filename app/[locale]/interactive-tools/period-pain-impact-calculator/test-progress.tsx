@@ -6,13 +6,13 @@ import { useTranslations } from "next-intl";
 export default function TestProgressPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const t = useTranslations('periodPainImpactCalculator');
-  
+
   // 模拟15个问题
   const totalQuestions = 15;
-  
+
   // 进度计算：当前题目索引+1（因为索引从0开始），除以总题目数
-  const progress = totalQuestions > 0 
-    ? Math.min(((currentQuestionIndex + 1) / totalQuestions) * 100, 100) 
+  const progress = totalQuestions > 0
+    ? Math.min(((currentQuestionIndex + 1) / totalQuestions) * 100, 100)
     : 0;
 
   const nextQuestion = () => {
@@ -30,7 +30,7 @@ export default function TestProgressPage() {
   return (
     <div className="p-8 bg-white rounded-lg shadow-md max-w-4xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">进度测试页面</h1>
-      
+
       {/* 进度条 */}
       <div className="mb-8">
         <div className="flex justify-between items-center mb-2">
@@ -42,8 +42,8 @@ export default function TestProgressPage() {
           </span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
-          <div 
-            className="bg-purple-900 h-2 rounded-full transition-all duration-300" 
+          <div
+            className="bg-purple-900 h-2 rounded-full transition-all duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>

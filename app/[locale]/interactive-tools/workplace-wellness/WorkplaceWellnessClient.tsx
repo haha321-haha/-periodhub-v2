@@ -198,10 +198,10 @@ export default function WorkplaceWellnessClient({ locale: propLocale }: Workplac
       <div className="min-h-screen bg-gray-50">
         {/* 存储警告提示 */}
         <StorageWarningToast />
-        
+
         {/* 调试面板 - 仅开发环境 */}
         <DebugPanel />
-        
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* 面包屑导航 */}
         <Breadcrumb
@@ -248,36 +248,36 @@ function WorkplaceWellnessContent() {
     import("./hooks/useWorkplaceWellnessStore").then((module) => {
       const { useWorkplaceWellnessStore } = module;
       setStoreModule(module);
-      
+
       // 使用 Promise 封装 rehydrate，确保完成后再继续
       const waitForRehydrate = async () => {
         return new Promise<void>((resolve, reject) => {
           const store = useWorkplaceWellnessStore as any;
-          
+
           // 监听完成事件
           const handleComplete = (event: CustomEvent) => {
             window.removeEventListener('store-rehydrate-complete', handleComplete as any);
             window.removeEventListener('store-rehydrate-error', handleError as any);
             resolve();
           };
-          
+
           // 监听错误事件
           const handleError = (event: CustomEvent) => {
             window.removeEventListener('store-rehydrate-complete', handleComplete as any);
             window.removeEventListener('store-rehydrate-error', handleError as any);
             reject(event.detail);
           };
-          
+
           window.addEventListener('store-rehydrate-complete', handleComplete as any);
           window.addEventListener('store-rehydrate-error', handleError as any);
-          
+
           // 触发 rehydrate
           if (store.persist && store.persist.rehydrate) {
             store.persist.rehydrate();
           } else {
             resolve(); // 没有 persist，直接完成
           }
-          
+
           // 设置超时
           setTimeout(() => {
             window.removeEventListener('store-rehydrate-complete', handleComplete as any);
@@ -287,17 +287,17 @@ function WorkplaceWellnessContent() {
           }, 2000); // 2秒超时
         });
       };
-      
+
       // 获取 store 实例用于订阅
       const store = useWorkplaceWellnessStore as any;
-      
+
       // 订阅 store 变化 - Zustand subscribe 只接受一个回调函数
       const unsubscribe = store.subscribe(
         (state: any) => {
           setActiveTab(state.activeTab);
         }
       );
-      
+
       // 执行 rehydrate 流程
       waitForRehydrate()
         .then(() => {
@@ -314,7 +314,7 @@ function WorkplaceWellnessContent() {
           setActiveTab(storeInstance.activeTab);
           setIsHydrated(true);
         });
-      
+
       const timer = setTimeout(() => {
         setIsLoading(false);
       }, 500);
@@ -329,7 +329,7 @@ function WorkplaceWellnessContent() {
   // 标签页切换动画
   useEffect(() => {
     if (!isHydrated) return;
-    
+
     if (previousTab !== activeTab) {
       const timer = setTimeout(() => {
         setPreviousTab(activeTab);
@@ -348,7 +348,7 @@ function WorkplaceWellnessContent() {
         </div>
       );
     }
-    
+
     if (!storeModule) {
       return (
         <div className="flex items-center justify-center h-64">
@@ -356,7 +356,7 @@ function WorkplaceWellnessContent() {
         </div>
       );
     }
-    
+
     switch (activeTab) {
       case "calendar":
         return (

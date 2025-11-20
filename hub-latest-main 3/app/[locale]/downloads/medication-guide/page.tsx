@@ -11,7 +11,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'medicationGuide' });
-  
+
   return {
     title: t('title'),
     description: t('description'),
@@ -37,7 +37,7 @@ export default async function MedicationGuidePage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'medicationGuide' });
   const commonT = await getTranslations({ locale, namespace: 'common' });
-  
+
   // 结构化数据
   const structuredData = {
     "@context": "https://schema.org",
@@ -65,7 +65,7 @@ export default async function MedicationGuidePage({
       "jobTitle": "Medical Professional"
     }
   };
-  
+
   return (
     <>
       <script
@@ -74,13 +74,13 @@ export default async function MedicationGuidePage({
       />
       <div className="container space-y-10">
         {/* Breadcrumb */}
-        <Breadcrumb 
+        <Breadcrumb
           items={[
             { label: '下载中心', href: `/${locale}/downloads` },
             { label: '用药指南' }
           ]}
         />
-        
+
       {/* Page Header */}
       <header className="text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
@@ -100,7 +100,7 @@ export default async function MedicationGuidePage({
           <p className="text-neutral-700 leading-relaxed mb-4">
             {t('introText')}
           </p>
-          
+
           {/* 权威背书 */}
           <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
             <div className="flex items-start space-x-3">
@@ -126,7 +126,7 @@ export default async function MedicationGuidePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {t('nsaidTitle')}
         </h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Ibuprofen */}
           <div className="card">
@@ -203,7 +203,7 @@ export default async function MedicationGuidePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {t('comparisonTitle')}
         </h2>
-        
+
         <div className="card mb-8">
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
@@ -311,7 +311,7 @@ export default async function MedicationGuidePage({
               ))}
             </ul>
           </div>
-          
+
           <div className="card">
             <h3 className="text-lg font-semibold text-green-600 mb-3">
               {t('selectionGuide.naproxen.title')}
@@ -337,7 +337,7 @@ export default async function MedicationGuidePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {t('usageTipsTitle')}
         </h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="card">
             <h3 className="text-lg font-semibold text-green-600 mb-3">
@@ -405,7 +405,7 @@ export default async function MedicationGuidePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {t('relatedToolsTitle')}
         </h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link href={`/${locale}/articles/nsaid-menstrual-pain-professional-guide`}>
             <div className="card group hover:shadow-lg transition-shadow duration-300">

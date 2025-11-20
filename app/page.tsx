@@ -22,7 +22,7 @@ export default function RootPage() {
           Redirecting to English Version...
         </h1>
         <p className="text-gray-600">
-          If you are not redirected automatically, 
+          If you are not redirected automatically,
           <a href="/en" className="text-blue-600 hover:text-blue-800 ml-1">
             click here
           </a>

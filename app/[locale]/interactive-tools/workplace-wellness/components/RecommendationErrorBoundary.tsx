@@ -30,7 +30,7 @@ export class RecommendationErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("Recommendation system error:", error, errorInfo);
-    
+
     // 可以在这里添加错误上报逻辑
     if (process.env.NODE_ENV === "development") {
       console.error("Error details:", errorInfo);
@@ -82,6 +82,8 @@ function RecommendationErrorFallback({
     </div>
   );
 }
+
+
 
 
 

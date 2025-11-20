@@ -13,10 +13,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const title = locale === 'zh' ? '生活方式管理 - 痛经健康指南' : 'Lifestyle Management - Health Guide';
-  const description = locale === 'zh' 
+  const description = locale === 'zh'
     ? '通过饮食、运动和日常习惯改善经期健康，建立长期有效的痛经管理策略。'
     : 'Improve menstrual health through diet, exercise, and daily habits, establishing long-term effective menstrual pain management strategies.';
-  
+
   return {
     title,
     description,
@@ -46,7 +46,7 @@ export default async function LifestylePage({
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-12">
           {/* Breadcrumb */}
-          <Breadcrumb 
+          <Breadcrumb
             items={[
               { label: breadcrumbHealthGuideTitle, href: `/${locale}/health-guide` },
               { label: breadcrumbLifestyleTitle }
@@ -71,7 +71,7 @@ export default async function LifestylePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '营养与饮食' : 'Nutrition and Diet'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-green-600 mb-4">
@@ -144,7 +144,7 @@ export default async function LifestylePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '运动与锻炼' : 'Exercise and Physical Activity'}
         </h2>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
           <div className="card">
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
@@ -222,7 +222,7 @@ export default async function LifestylePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '睡眠与压力管理' : 'Sleep and Stress Management'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-white p-6 rounded-lg">
             <h3 className="text-lg font-semibold text-blue-600 mb-4">
@@ -279,7 +279,7 @@ export default async function LifestylePage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '日常习惯建议' : 'Daily Habit Recommendations'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="card text-center">
             <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -385,7 +385,7 @@ export default async function LifestylePage({
 
       {/* Navigation */}
       <section className="flex justify-between items-center pt-8 border-t border-neutral-200">
-        <Link 
+        <Link
           href={`/${locale}/health-guide/relief-methods`}
           className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
         >
@@ -394,7 +394,7 @@ export default async function LifestylePage({
           </svg>
           {locale === 'zh' ? '上一章：A-Z缓解方法' : 'Previous: A-Z Relief Methods'}
         </Link>
-        
+
           <Link
             href={`/${locale}/health-guide/medical-care`}
             className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"

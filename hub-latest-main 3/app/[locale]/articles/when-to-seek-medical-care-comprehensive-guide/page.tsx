@@ -5,7 +5,7 @@ import MedicalCareGuideContent from './components/MedicalCareGuideContent';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isZh = locale === 'zh';
-  
+
   // 结构化数据 - 基于souW1e2的Schema设计
   const structuredData = {
     '@context': 'https://schema.org',
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         'name': isZh ? '疼痛评估工具' : 'Pain Assessment Tool'
       },
       {
-        '@type': 'WebPageElement', 
+        '@type': 'WebPageElement',
         'name': isZh ? '症状检查清单' : 'Symptom Checklist'
       },
       {
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   return {
-    title: isZh 
+    title: isZh
       ? '痛经别再忍！医生详述7大妇科危险信号，教你何时就医 | PeriodHub'
       : 'Period Pain or Health Alert? A Doctor\'s Guide to 7 Red Flags | PeriodHub',
     description: isZh
@@ -98,6 +98,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function WhenToSeekMedicalCarePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  
+
   return <MedicalCareGuideContent />;
 }

@@ -1,6 +1,6 @@
 /**
  * A/B测试配置
- * 
+ *
  * 定义所有A/B测试的变体和参数
  */
 
@@ -22,7 +22,7 @@ export interface ABTestConfig {
 
 /**
  * Hero区域CTA A/B测试配置
- * 
+ *
  * 测试目标：优化Hero区域主CTA的点击率和转化率
  * 测试变量：CTA文案和微文案
  */
@@ -138,7 +138,7 @@ function simpleHash(str: string): number {
 function assignVariantByWeight(variants: ABTestVariant[]): ABTestVariant {
   const totalWeight = variants.reduce((sum, v) => sum + v.weight, 0);
   const random = Math.random() * totalWeight;
-  
+
   let cumulative = 0;
   for (const variant of variants) {
     cumulative += variant.weight;
@@ -146,7 +146,7 @@ function assignVariantByWeight(variants: ABTestVariant[]): ABTestVariant {
       return variant;
     }
   }
-  
+
   return variants[0];
 }
 
@@ -173,16 +173,16 @@ export function getRecommendedSampleSize(
   // 使用标准的A/B测试样本量计算公式
   const zAlpha = getZScore(1 - (1 - confidenceLevel) / 2);
   const zBeta = getZScore(power);
-  
+
   const p1 = baselineRate;
   const p2 = baselineRate * (1 + minimumDetectableEffect);
   const pPool = (p1 + p2) / 2;
-  
+
   const numerator = Math.sqrt(p1 * (1 - p1)) + Math.sqrt(p2 * (1 - p2));
   const denominator = Math.abs(p1 - p2);
-  
+
   const sampleSize = Math.pow((zAlpha + zBeta) * numerator / denominator, 2);
-  
+
   return Math.ceil(sampleSize);
 }
 
@@ -195,11 +195,11 @@ function getZScore(probability: number): number {
     [0.99, 2.326],
     [0.995, 2.576]
   ];
-  
+
   for (const [p, z] of zScores) {
     if (probability <= p) return z;
   }
-  
+
   return 1.96; // 默认返回95%置信度的Z值
 }
 
@@ -222,21 +222,21 @@ export function analyzeABTest(
   const controlRate = controlConversions / controlVisitors;
   const variantRate = variantConversions / variantVisitors;
   const relativeImprovement = (variantRate - controlRate) / controlRate;
-  
+
   // 简化的统计显著性计算
   const pooledRate = (controlConversions + variantConversions) / (controlVisitors + variantVisitors);
   const standardError = Math.sqrt(pooledRate * (1 - pooledRate) * (1 / controlVisitors + 1 / variantVisitors));
   const zScore = (variantRate - controlRate) / standardError;
-  
+
   const zCritical = getZScore(1 - (1 - confidenceLevel) / 2);
   const statisticalSignificance = Math.abs(zScore) > zCritical;
-  
+
   const marginOfError = zCritical * standardError;
   const confidenceInterval: [number, number] = [
     relativeImprovement - marginOfError / controlRate,
     relativeImprovement + marginOfError / controlRate
   ];
-  
+
   return {
     controlRate,
     variantRate,

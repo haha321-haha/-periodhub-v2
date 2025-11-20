@@ -77,12 +77,12 @@ export class ErrorBoundary extends Component<Props, State> {
         localStorage.getItem('pain_tracker_error_reports') || '[]'
       );
       existingReports.push(errorReport);
-      
+
       // Keep only last 10 error reports
       if (existingReports.length > 10) {
         existingReports.splice(0, existingReports.length - 10);
       }
-      
+
       localStorage.setItem('pain_tracker_error_reports', JSON.stringify(existingReports));
     } catch (reportingError) {
       console.error('Failed to report error:', reportingError);
@@ -243,11 +243,11 @@ export class ErrorBoundary extends Component<Props, State> {
             <div className="flex justify-center mb-4">
               <AlertTriangle className="h-12 w-12 text-red-500" />
             </div>
-            
+
             <h2 className="text-xl font-semibold text-red-800 mb-2">
               {title}
             </h2>
-            
+
             <p className="text-red-700 mb-4">
               {description}
             </p>
@@ -274,7 +274,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   Retry ({this.maxRetries - this.retryCount} left)
                 </button>
               )}
-              
+
               <button
                 onClick={this.handleReset}
                 className="flex items-center justify-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
@@ -282,7 +282,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 <Home className="h-4 w-4 mr-2" />
                 Reset
               </button>
-              
+
               {this.props.showDetails && (
                 <button
                   onClick={this.downloadErrorReport}

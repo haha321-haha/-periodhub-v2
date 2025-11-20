@@ -1,6 +1,6 @@
 /**
  * 推荐引擎
- * 
+ *
  * 核心推荐生成逻辑，整合数据分析、评分和过滤
  */
 
@@ -42,18 +42,18 @@ export function generateRecommendations(
   feedbackHistory: RecommendationFeedbackHistory
 ): RecommendationResult {
   const startTime = performance.now();
-  
+
   // 检查缓存
   const cacheKey = generateCacheKey(periodData, workImpactData);
   const cached = recommendationCache.get(cacheKey);
-  if (cached && 
+  if (cached &&
       Date.now() - cached.timestamp < RECOMMENDATION_CONFIG.CACHE_DURATION) {
     return cached.result;
   }
-  
+
   // 创建用户数据快照
   const userData = createUserDataSnapshot(periodData, workImpactData, nutritionData);
-  
+
   // 检测异常
   const anomaly = detectAnomalies(
     userData.workImpact.currentPainLevel,
@@ -61,59 +61,59 @@ export function generateRecommendations(
       .filter(r => r.painLevel !== null && r.painLevel !== undefined)
       .map(r => r.painLevel as number)
   );
-  
+
   // 生成数据洞察
   const insights = generateInsights(userData, anomaly);
-  
+
   // 过滤推荐项（基于条件匹配）
   let candidateItems = filterRecommendationsByConditions(
     RECOMMENDATION_CONTENT,
     userData
   );
-  
+
   // 过滤掉用户忽略的推荐
   candidateItems = candidateItems.filter(
     item => !feedbackHistory.ignoredItems.includes(item.id)
   );
-  
+
   // 为推荐项评分
   candidateItems = scoreRecommendations(candidateItems, userData, feedbackHistory);
-  
+
   // 过滤低分推荐
   candidateItems = candidateItems.filter(
     item => item.score >= RECOMMENDATION_CONFIG.MIN_SCORE
   );
-  
+
   // 应用多样性控制
   const selectedItems = applyDiversityControl(candidateItems);
-  
+
   // 排序（按分数降序）
   selectedItems.sort((a, b) => b.score - a.score);
-  
+
   // 限制数量
   const finalRecommendations = selectedItems.slice(0, RECOMMENDATION_CONFIG.MAX_RECOMMENDATIONS);
-  
+
   // 生成推荐理由
   finalRecommendations.forEach(item => {
     item.reason = generateRecommendationReason(item, userData);
   });
-  
+
   // 生成统计摘要
   const summary = generateSummary(finalRecommendations);
-  
+
   // 构建结果
   const result: RecommendationResult = {
     recommendations: finalRecommendations,
     insights,
     summary,
   };
-  
+
   // 更新缓存
   recommendationCache.set(cacheKey, {
     result,
     timestamp: Date.now(),
   });
-  
+
   // 清理过期缓存（保留最近10个）
   if (recommendationCache.size > 10) {
     const now = Date.now();
@@ -131,14 +131,14 @@ export function generateRecommendations(
       });
     }
   }
-  
+
   // 性能监控
   const endTime = performance.now();
   const duration = endTime - startTime;
   if (duration > 200) {
     console.warn(`Recommendation generation took ${duration.toFixed(2)}ms (target: <200ms)`);
   }
-  
+
   return result;
 }
 
@@ -160,29 +160,29 @@ function filterRecommendationsByConditions(
 ): RecommendationItem[] {
   return items.filter(item => {
     const conditions = item.conditions;
-    
+
     // 疼痛等级检查
     if (conditions.minPainLevel !== undefined || conditions.maxPainLevel !== undefined) {
       const currentPain = userData.workImpact.currentPainLevel;
       const minPain = conditions.minPainLevel || 0;
       const maxPain = conditions.maxPainLevel || 10;
-      
+
       if (currentPain < minPain || currentPain > maxPain) {
         return false;
       }
     }
-    
+
     // 工作效率检查
     if (conditions.minEfficiency !== undefined || conditions.maxEfficiency !== undefined) {
       const currentEfficiency = userData.workImpact.currentEfficiency;
       const minEff = conditions.minEfficiency || 0;
       const maxEff = conditions.maxEfficiency || 100;
-      
+
       if (currentEfficiency < minEff || currentEfficiency > maxEff) {
         return false;
       }
     }
-    
+
     // 周期阶段检查
     if (conditions.requiredPhases && conditions.requiredPhases.length > 0) {
       if (!userData.periodData.currentPhase ||
@@ -190,10 +190,10 @@ function filterRecommendationsByConditions(
         return false;
       }
     }
-    
+
     // 症状检查（简化处理）
     // 实际应该从用户数据中提取症状信息
-    
+
     return true;
   });
 }
@@ -207,15 +207,15 @@ function applyDiversityControl(
   const selected: RecommendationItem[] = [];
   const typeCounts: Record<string, number> = {};
   const categoryCounts: Record<string, number> = {};
-  
+
   for (const item of items) {
     // 计算多样性分数
     const diversityScore = calculateDiversityScore(item, selected);
-    
+
     // 检查类型和分类数量
     const typeCount = typeCounts[item.type] || 0;
     const categoryCount = categoryCounts[item.category] || 0;
-    
+
     // 如果多样性足够，或者类型/分类数量未超限，则添加
     if (diversityScore >= RECOMMENDATION_CONFIG.DIVERSITY_THRESHOLD ||
         typeCount < 3 || categoryCount < 2) {
@@ -224,7 +224,7 @@ function applyDiversityControl(
       categoryCounts[item.category] = (categoryCounts[item.category] || 0) + 1;
     }
   }
-  
+
   return selected;
 }
 
@@ -238,8 +238,8 @@ function generateInsights(
   return {
     painPattern: userData.periodData.painTrend,
     efficiencyPattern: userData.workImpact.efficiencyTrend,
-    cycleHealth: userData.periodData.cycleRegularity === 'regular' 
-      ? 'healthy' 
+    cycleHealth: userData.periodData.cycleRegularity === 'regular'
+      ? 'healthy'
       : userData.metadata.dataQuality === 'poor'
       ? 'needs_attention'
       : 'irregular',
@@ -254,7 +254,7 @@ function generateRecommendationReason(
   userData: UserDataSnapshot
 ): string {
   const reasons: string[] = [];
-  
+
   // 疼痛相关
   const currentPain = userData.workImpact.currentPainLevel;
   if (currentPain >= 7) {
@@ -264,14 +264,14 @@ function generateRecommendationReason(
   } else if (currentPain > 0) {
     reasons.push(`您的疼痛等级较低(${currentPain}/10)`);
   }
-  
+
   // 趋势相关
   if (userData.periodData.painTrend === 'increasing') {
     reasons.push('检测到疼痛呈上升趋势');
   } else if (userData.periodData.painTrend === 'decreasing') {
     reasons.push('疼痛正在改善');
   }
-  
+
   // 周期相关
   if (userData.periodData.currentPhase) {
     const phaseNames: Record<string, string> = {
@@ -282,7 +282,7 @@ function generateRecommendationReason(
     };
     reasons.push(`您正处于${phaseNames[userData.periodData.currentPhase]}`);
   }
-  
+
   // 效率相关
   const currentEfficiency = userData.workImpact.currentEfficiency;
   if (currentEfficiency < 60) {
@@ -290,19 +290,19 @@ function generateRecommendationReason(
   } else if (currentEfficiency < 80) {
     reasons.push(`您的工作效率为中等(${currentEfficiency}%)`);
   }
-  
+
   // 周期健康相关
   if (userData.periodData.cycleRegularity === 'irregular') {
     reasons.push('检测到周期不规律');
   } else {
     reasons.push('您的周期规律');
   }
-  
+
   // 如果没有理由，使用默认理由
   if (reasons.length === 0) {
     return '基于您的数据模式，推荐此内容。';
   }
-  
+
   return reasons.join('，') + '，因此推荐此内容。';
 }
 
@@ -314,7 +314,7 @@ function generateSummary(
 ): RecommendationResult['summary'] {
   const highPriorityCount = recommendations.filter(r => r.priority >= 80).length;
   const categories = [...new Set(recommendations.map(r => r.category))];
-  
+
   return {
     totalRecommendations: recommendations.length,
     highPriorityCount,
@@ -341,17 +341,17 @@ export function generateColdStartRecommendations(
 ): RecommendationItem[] {
   // 返回通用推荐（高优先级、无特定条件）
   const generalRecommendations = RECOMMENDATION_CONTENT.filter(
-    item => 
+    item =>
       item.priority >= 70 &&
       !item.conditions.minPainLevel &&
       !item.conditions.maxPainLevel &&
       !item.conditions.requiredPhases &&
       !feedbackHistory.ignoredItems.includes(item.id)
   );
-  
+
   // 按优先级排序
   generalRecommendations.sort((a, b) => b.priority - a.priority);
-  
+
   // 返回前5个
   return generalRecommendations.slice(0, 5);
 }

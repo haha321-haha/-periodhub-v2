@@ -12,7 +12,7 @@ interface OfflineNotificationProps {
   className?: string;
 }
 
-export function OfflineNotification({ 
+export function OfflineNotification({
   storageKey = 'pain_tracker',
   showConnectionQuality = true,
   autoHide = true,
@@ -23,13 +23,13 @@ export function OfflineNotification({
   const [showReconnected, setShowReconnected] = useState(false);
   const [reconnectDuration, setReconnectDuration] = useState(0);
 
-  const { 
-    isOnline, 
-    isOffline, 
-    wasOffline, 
-    checkConnectivity, 
+  const {
+    isOnline,
+    isOffline,
+    wasOffline,
+    checkConnectivity,
     getConnectionQuality,
-    connectionInfo 
+    connectionInfo
   } = useOfflineDetection({
     onOffline: () => {
       setIsVisible(true);
@@ -39,7 +39,7 @@ export function OfflineNotification({
       setReconnectDuration(duration);
       setShowReconnected(true);
       setIsVisible(true);
-      
+
       if (autoHide) {
         setTimeout(() => {
           setIsVisible(false);
@@ -111,13 +111,13 @@ export function OfflineNotification({
               <p className="text-sm text-red-700 mt-1">
                 Your data will be saved locally and synced when you reconnect.
               </p>
-              
+
               {getOfflineDataCount() > 0 && (
                 <p className="text-xs text-red-600 mt-2">
                   {getOfflineDataCount()} items stored offline
                 </p>
               )}
-              
+
               <div className="mt-3 flex items-center space-x-2">
                 <button
                   onClick={checkConnectivity}
@@ -126,7 +126,7 @@ export function OfflineNotification({
                   <RefreshCw className="h-3 w-3 mr-1" />
                   Check connection
                 </button>
-                
+
                 <button
                   onClick={() => setIsVisible(false)}
                   className="text-xs text-red-600 hover:text-red-800 transition-colors"
@@ -150,13 +150,13 @@ export function OfflineNotification({
               <p className="text-sm text-green-700 mt-1">
                 Connection restored after {formatDuration(reconnectDuration)}.
               </p>
-              
+
               {getOfflineDataCount() > 0 && (
                 <p className="text-xs text-green-600 mt-2">
                   {getOfflineDataCount()} offline items ready to sync
                 </p>
               )}
-              
+
               {showConnectionQuality && connectionInfo && (
                 <div className="mt-2 flex items-center text-xs">
                   <span className="text-green-700 mr-2">Connection:</span>
@@ -169,7 +169,7 @@ export function OfflineNotification({
                   </div>
                 </div>
               )}
-              
+
               <button
                 onClick={() => {
                   setIsVisible(false);
@@ -219,7 +219,7 @@ export function ConnectionStatus({ showDetails = false, className = '' }: Connec
           {isOnline ? 'Online' : 'Offline'}
         </span>
       </div>
-      
+
       {showDetails && isOnline && connectionInfo && (
         <div className={`ml-3 text-xs ${getConnectionQualityColor(quality)}`}>
           <span className="capitalize">{quality}</span>
@@ -279,7 +279,7 @@ export function OfflineDataSync({ storageKey, onSync, className = '' }: OfflineD
             {getOfflineDataCount()} items pending sync
           </span>
         </div>
-        
+
         {isOnline && (
           <button
             onClick={handleSync}
@@ -291,11 +291,11 @@ export function OfflineDataSync({ storageKey, onSync, className = '' }: OfflineD
           </button>
         )}
       </div>
-      
+
       {syncError && (
         <p className="text-xs text-red-600 mt-2">{syncError}</p>
       )}
-      
+
       {lastSyncTime && (
         <p className="text-xs text-blue-600 mt-1">
           Last synced: {lastSyncTime.toLocaleTimeString()}

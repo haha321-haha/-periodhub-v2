@@ -30,14 +30,14 @@ export default function CycleStatisticsChart() {
   const [activeTab, setActiveTab] = useState<'overview' | 'cycle-length' | 'pain-level' | 'flow-type'>('overview');
   const [analysis, setAnalysis] = useState<CycleAnalysis | null>(null);
   const [statistics, setStatistics] = useState<CycleStatistics | null>(null);
-  
+
   const periodData = getPeriodData();
 
   useEffect(() => {
     const predictor = new CyclePredictor(locale);
     const cycleAnalysis = predictor.analyzeCycle(periodData);
     const cycleStats = predictor.generateStatistics(periodData);
-    
+
     setAnalysis(cycleAnalysis);
     setStatistics(cycleStats);
   }, [periodData, locale]);
@@ -66,7 +66,7 @@ export default function CycleStatisticsChart() {
       { min: 41, max: 45, label: '41-45' }
     ];
 
-    const counts = ranges.map(range => 
+    const counts = ranges.map(range =>
       cycleLengths.filter(length => length >= range.min && length <= range.max).length
     );
 
@@ -101,7 +101,7 @@ export default function CycleStatisticsChart() {
       .filter(d => d.painLevel !== null)
       .map(d => d.painLevel!);
 
-    const counts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(level => 
+    const counts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(level =>
       painLevels.filter(pain => pain === level).length
     );
 
@@ -143,7 +143,7 @@ export default function CycleStatisticsChart() {
       .map(d => d.flow!);
 
     const flowTypes = ['light', 'medium', 'heavy'] as const;
-    const counts = flowTypes.map(type => 
+    const counts = flowTypes.map(type =>
       flows.filter(flow => flow === type).length
     );
 
@@ -162,13 +162,13 @@ export default function CycleStatisticsChart() {
   // 渲染简单的条形图
   const renderBarChart = (data: ChartData) => {
     const maxValue = Math.max(...data.datasets[0].data, 1);
-    
+
     return (
       <div className="space-y-3">
         {data.labels.map((label, index) => {
           const value = data.datasets[0].data[index];
           const percentage = (value / maxValue) * 100;
-          
+
           return (
             <div key={index} className="flex items-center space-x-3">
               <div className="w-20 text-sm text-gray-600">{label}</div>
@@ -253,7 +253,7 @@ export default function CycleStatisticsChart() {
           <PieChart className="w-5 h-5 mr-2 text-purple-600" />
           {t('charts.predictions')}
         </h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {analysis.nextPredictedPeriod && (
             <div className="bg-white rounded-lg p-3">
@@ -265,7 +265,7 @@ export default function CycleStatisticsChart() {
               </p>
             </div>
           )}
-          
+
           {analysis.nextPredictedOvulation && (
             <div className="bg-white rounded-lg p-3">
               <p className="text-sm text-gray-600 mb-1">{t('charts.nextOvulation')}</p>
@@ -276,7 +276,7 @@ export default function CycleStatisticsChart() {
               </p>
             </div>
           )}
-          
+
           {analysis.currentPhase && (
             <div className="bg-white rounded-lg p-3">
               <p className="text-sm text-gray-600 mb-1">{t('charts.currentPhase')}</p>
@@ -293,7 +293,7 @@ export default function CycleStatisticsChart() {
             </div>
           )}
         </div>
-        
+
         <div className="mt-3 text-sm text-gray-600">
           {t('charts.confidence')}: {analysis.confidence.toFixed(0)}%
         </div>
@@ -347,21 +347,21 @@ export default function CycleStatisticsChart() {
             <p className="text-gray-600">{t('charts.selectChart')}</p>
           </div>
         )}
-        
+
         {activeTab === 'cycle-length' && (
           <div>
             <h5 className="text-md font-medium text-gray-800 mb-4">{t('charts.cycleLengthDistribution')}</h5>
             {renderBarChart(generateCycleLengthChart())}
           </div>
         )}
-        
+
         {activeTab === 'pain-level' && (
           <div>
             <h5 className="text-md font-medium text-gray-800 mb-4">{t('charts.painLevelDistribution')}</h5>
             {renderBarChart(generatePainLevelChart())}
           </div>
         )}
-        
+
         {activeTab === 'flow-type' && (
           <div>
             <h5 className="text-md font-medium text-gray-800 mb-4">{t('charts.flowTypeDistribution')}</h5>

@@ -3,10 +3,10 @@
  * 基于HVsLYEp的数据结构进行验证
  */
 
-import { 
-  PeriodRecord, 
-  NutritionRecommendation, 
-  LeaveTemplate, 
+import {
+  PeriodRecord,
+  NutritionRecommendation,
+  LeaveTemplate,
   MenstrualPhase,
   TCMConstitution,
   SeverityLevel,
@@ -222,9 +222,9 @@ export function validateDataMigration(): ValidationResult {
   try {
     // 这里可以添加更多的迁移验证逻辑
     // 比如检查数据完整性、格式一致性等
-    
+
     warnings.push('Data migration validation completed');
-    
+
     return {
       isValid: true,
       errors,

@@ -38,17 +38,17 @@ export const usePerformanceOptimization = () => {
     networkRequests: 0,
     cacheHitRate: 0,
   });
-  
+
   const [config, setConfig] = useState<PerformanceConfig>(DEFAULT_CONFIG);
   const [isMonitoring, setIsMonitoring] = useState(false);
 
   // Performance monitoring
   const startMonitoring = useCallback(() => {
     setIsMonitoring(true);
-    
+
     // Monitor load time
     const loadStart = performance.now();
-    
+
     // Monitor memory usage
     const updateMemoryUsage = () => {
       if ('memory' in performance) {
@@ -63,7 +63,7 @@ export const usePerformanceOptimization = () => {
     // Monitor network requests
     const originalFetch = window.fetch;
     let requestCount = 0;
-    
+
     window.fetch = (...args) => {
       requestCount++;
       setMetrics(prev => ({
@@ -76,7 +76,7 @@ export const usePerformanceOptimization = () => {
     // Update metrics periodically
     const interval = setInterval(() => {
       updateMemoryUsage();
-      
+
       const loadTime = performance.now() - loadStart;
       setMetrics(prev => ({
         ...prev,
@@ -97,7 +97,7 @@ export const usePerformanceOptimization = () => {
     delay: number = config.debounceDelay
   ): T => {
     let timeoutId: NodeJS.Timeout;
-    
+
     return ((...args: Parameters<T>) => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => func(...args), delay);
@@ -110,7 +110,7 @@ export const usePerformanceOptimization = () => {
     delay: number = config.debounceDelay
   ): T => {
     let lastCall = 0;
-    
+
     return ((...args: Parameters<T>) => {
       const now = Date.now();
       if (now - lastCall >= delay) {
@@ -130,12 +130,12 @@ export const usePerformanceOptimization = () => {
     if (!config.enableLazyLoading) {
       return importFn();
     }
-    
+
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
         reject(new Error('Lazy loading timeout'));
       }, 10000); // 10 second timeout
-      
+
       importFn()
         .then((module) => {
           clearTimeout(timeout);
@@ -150,11 +150,11 @@ export const usePerformanceOptimization = () => {
 
   // Cache management
   const cache = useMemo(() => new Map<string, any>(), []);
-  
+
   const getCachedValue = useCallback((key: string) => {
     return cache.get(key);
   }, [cache]);
-  
+
   const setCachedValue = useCallback((key: string, value: any) => {
     // Check cache size limit
     if (cache.size >= config.maxCacheSize) {
@@ -163,7 +163,7 @@ export const usePerformanceOptimization = () => {
     }
     cache.set(key, value);
   }, [cache, config.maxCacheSize]);
-  
+
   const clearCache = useCallback(() => {
     cache.clear();
   }, [cache]);
@@ -178,15 +178,15 @@ export const usePerformanceOptimization = () => {
     if (!config.enableImageOptimization) {
       return src;
     }
-    
+
     const { width, height, quality = 80, format = 'webp' } = options;
     const params = new URLSearchParams();
-    
+
     if (width) params.set('w', width.toString());
     if (height) params.set('h', height.toString());
     params.set('q', quality.toString());
     params.set('f', format);
-    
+
     return `${src}?${params.toString()}`;
   }, [config.enableImageOptimization]);
 
@@ -195,7 +195,7 @@ export const usePerformanceOptimization = () => {
     if (!config.enableBundleAnalysis || process.env.NODE_ENV !== 'development') {
       return null;
     }
-    
+
     // This would integrate with webpack-bundle-analyzer or similar tools
     console.log('Bundle analysis would be performed here');
     return {
@@ -208,23 +208,23 @@ export const usePerformanceOptimization = () => {
   // Performance recommendations
   const getPerformanceRecommendations = useCallback(() => {
     const recommendations: string[] = [];
-    
+
     if (metrics.loadTime > 3000) {
       recommendations.push('Consider implementing code splitting to reduce initial bundle size');
     }
-    
+
     if (metrics.memoryUsage > 100) {
       recommendations.push('High memory usage detected. Consider optimizing component rendering');
     }
-    
+
     if (metrics.networkRequests > 20) {
       recommendations.push('High number of network requests. Consider implementing request batching');
     }
-    
+
     if (metrics.cacheHitRate < 0.5) {
       recommendations.push('Low cache hit rate. Consider improving caching strategy');
     }
-    
+
     return recommendations;
   }, [metrics]);
 

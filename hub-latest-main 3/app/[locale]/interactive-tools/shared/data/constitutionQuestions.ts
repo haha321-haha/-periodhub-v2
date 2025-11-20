@@ -11,27 +11,27 @@ export const constitutionQuestions: Record<string, ConstitutionQuestion[]> = {
       description: '选择最符合您日常状态的选项',
       validation: { required: true },
       options: [
-        { 
-          value: 'energetic', 
-          label: '精力充沛，很少感到疲劳', 
+        {
+          value: 'energetic',
+          label: '精力充沛，很少感到疲劳',
           weight: 3,
           constitutionType: 'balanced'
         },
-        { 
-          value: 'moderate', 
-          label: '精力一般，偶尔感到疲劳', 
+        {
+          value: 'moderate',
+          label: '精力一般，偶尔感到疲劳',
           weight: 2,
           constitutionType: 'qi_deficiency'
         },
-        { 
-          value: 'tired', 
-          label: '经常感到疲劳，精力不足', 
+        {
+          value: 'tired',
+          label: '经常感到疲劳，精力不足',
           weight: 3,
           constitutionType: 'qi_deficiency'
         },
-        { 
-          value: 'exhausted', 
-          label: '总是感到疲惫不堪', 
+        {
+          value: 'exhausted',
+          label: '总是感到疲惫不堪',
           weight: 4,
           constitutionType: 'yang_deficiency'
         }
@@ -46,27 +46,27 @@ export const constitutionQuestions: Record<string, ConstitutionQuestion[]> = {
       description: '比较您与同龄人的耐寒能力',
       validation: { required: true },
       options: [
-        { 
-          value: 'very_tolerant', 
-          label: '很耐寒，手脚总是温暖', 
+        {
+          value: 'very_tolerant',
+          label: '很耐寒，手脚总是温暖',
           weight: 3,
           constitutionType: 'balanced'
         },
-        { 
-          value: 'normal', 
-          label: '一般，与大多数人差不多', 
+        {
+          value: 'normal',
+          label: '一般，与大多数人差不多',
           weight: 2,
           constitutionType: 'balanced'
         },
-        { 
-          value: 'sensitive', 
-          label: '比较怕冷，手脚容易凉', 
+        {
+          value: 'sensitive',
+          label: '比较怕冷，手脚容易凉',
           weight: 3,
           constitutionType: 'yang_deficiency'
         },
-        { 
-          value: 'very_sensitive', 
-          label: '非常怕冷，即使夏天也手脚冰凉', 
+        {
+          value: 'very_sensitive',
+          label: '非常怕冷，即使夏天也手脚冰凉',
           weight: 4,
           constitutionType: 'yang_deficiency'
         }
@@ -81,27 +81,27 @@ export const constitutionQuestions: Record<string, ConstitutionQuestion[]> = {
       description: '选择最符合您消化状况的描述',
       validation: { required: true },
       options: [
-        { 
-          value: 'excellent', 
-          label: '消化很好，食欲正常，很少腹胀', 
+        {
+          value: 'excellent',
+          label: '消化很好，食欲正常，很少腹胀',
           weight: 3,
           constitutionType: 'balanced'
         },
-        { 
-          value: 'good', 
-          label: '消化一般，偶尔腹胀或消化不良', 
+        {
+          value: 'good',
+          label: '消化一般，偶尔腹胀或消化不良',
           weight: 2,
           constitutionType: 'qi_deficiency'
         },
-        { 
-          value: 'poor', 
-          label: '经常腹胀、消化不良，食欲不振', 
+        {
+          value: 'poor',
+          label: '经常腹胀、消化不良，食欲不振',
           weight: 3,
           constitutionType: 'phlegm_dampness'
         },
-        { 
-          value: 'very_poor', 
-          label: '消化很差，经常腹泻或便秘', 
+        {
+          value: 'very_poor',
+          label: '消化很差，经常腹泻或便秘',
           weight: 4,
           constitutionType: 'phlegm_dampness'
         }
@@ -116,27 +116,27 @@ export const constitutionQuestions: Record<string, ConstitutionQuestion[]> = {
       description: '评估您的整体睡眠状况',
       validation: { required: true },
       options: [
-        { 
-          value: 'excellent', 
-          label: '睡眠很好，容易入睡，睡得深沉', 
+        {
+          value: 'excellent',
+          label: '睡眠很好，容易入睡，睡得深沉',
           weight: 3,
           constitutionType: 'balanced'
         },
-        { 
-          value: 'light_sleep', 
-          label: '睡眠较浅，容易醒，多梦', 
+        {
+          value: 'light_sleep',
+          label: '睡眠较浅，容易醒，多梦',
           weight: 3,
           constitutionType: 'yin_deficiency'
         },
-        { 
-          value: 'insomnia', 
-          label: '经常失眠，难以入睡', 
+        {
+          value: 'insomnia',
+          label: '经常失眠，难以入睡',
           weight: 4,
           constitutionType: 'qi_stagnation'
         },
-        { 
-          value: 'drowsy', 
-          label: '总是感到困倦，睡不够', 
+        {
+          value: 'drowsy',
+          label: '总是感到困倦，睡不够',
           weight: 3,
           constitutionType: 'phlegm_dampness'
         }
@@ -151,27 +151,27 @@ export const constitutionQuestions: Record<string, ConstitutionQuestion[]> = {
       description: '选择最符合您情绪特点的描述',
       validation: { required: true },
       options: [
-        { 
-          value: 'stable', 
-          label: '情绪稳定，心情愉快', 
+        {
+          value: 'stable',
+          label: '情绪稳定，心情愉快',
           weight: 3,
           constitutionType: 'balanced'
         },
-        { 
-          value: 'anxious', 
-          label: '容易焦虑，心情烦躁', 
+        {
+          value: 'anxious',
+          label: '容易焦虑，心情烦躁',
           weight: 3,
           constitutionType: 'qi_stagnation'
         },
-        { 
-          value: 'depressed', 
-          label: '经常感到抑郁，情绪低落', 
+        {
+          value: 'depressed',
+          label: '经常感到抑郁，情绪低落',
           weight: 4,
           constitutionType: 'qi_stagnation'
         },
-        { 
-          value: 'irritable', 
-          label: '容易发脾气，情绪波动大', 
+        {
+          value: 'irritable',
+          label: '容易发脾气，情绪波动大',
           weight: 3,
           constitutionType: 'damp_heat'
         }
@@ -186,33 +186,33 @@ export const constitutionQuestions: Record<string, ConstitutionQuestion[]> = {
       description: '选择最符合您月经情况的描述',
       validation: { required: true },
       options: [
-        { 
-          value: 'regular_normal', 
-          label: '周期规律，量适中，颜色正常', 
+        {
+          value: 'regular_normal',
+          label: '周期规律，量适中，颜色正常',
           weight: 3,
           constitutionType: 'balanced'
         },
-        { 
-          value: 'light_delayed', 
-          label: '量少，周期延后，颜色淡', 
+        {
+          value: 'light_delayed',
+          label: '量少，周期延后，颜色淡',
           weight: 3,
           constitutionType: 'qi_deficiency'
         },
-        { 
-          value: 'heavy_early', 
-          label: '量多，周期提前，颜色深红', 
+        {
+          value: 'heavy_early',
+          label: '量多，周期提前，颜色深红',
           weight: 3,
           constitutionType: 'damp_heat'
         },
-        { 
-          value: 'clots_dark', 
-          label: '有血块，颜色暗红或紫黑', 
+        {
+          value: 'clots_dark',
+          label: '有血块，颜色暗红或紫黑',
           weight: 4,
           constitutionType: 'blood_stasis'
         },
-        { 
-          value: 'irregular', 
-          label: '周期不规律，时多时少', 
+        {
+          value: 'irregular',
+          label: '周期不规律，时多时少',
           weight: 3,
           constitutionType: 'qi_stagnation'
         }
@@ -227,27 +227,27 @@ export const constitutionQuestions: Record<string, ConstitutionQuestion[]> = {
       description: '选择最符合您体型的描述',
       validation: { required: true },
       options: [
-        { 
-          value: 'normal', 
-          label: '体型匀称，不胖不瘦', 
+        {
+          value: 'normal',
+          label: '体型匀称，不胖不瘦',
           weight: 3,
           constitutionType: 'balanced'
         },
-        { 
-          value: 'thin', 
-          label: '偏瘦，不容易长胖', 
+        {
+          value: 'thin',
+          label: '偏瘦，不容易长胖',
           weight: 3,
           constitutionType: 'yin_deficiency'
         },
-        { 
-          value: 'overweight', 
-          label: '偏胖，容易水肿', 
+        {
+          value: 'overweight',
+          label: '偏胖，容易水肿',
           weight: 3,
           constitutionType: 'phlegm_dampness'
         },
-        { 
-          value: 'muscular', 
-          label: '体格健壮，肌肉结实', 
+        {
+          value: 'muscular',
+          label: '体格健壮，肌肉结实',
           weight: 2,
           constitutionType: 'balanced'
         }

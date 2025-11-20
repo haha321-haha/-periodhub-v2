@@ -28,7 +28,7 @@ export default function Header() {
               </p>
             </div>
           </div>
-          
+
           {/* 右侧操作区域 */}
           <div className="flex items-center gap-3">
             {/* 用户头像 */}

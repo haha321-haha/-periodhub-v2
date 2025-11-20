@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
 
     // 数据清洗和验证
     const cleanedFeedback = cleanFeedbackData(feedback);
-    
+
     // 存储反馈数据
     const existingIndex = feedbackStore.findIndex(f => f.id === feedback.id);
     if (existingIndex >= 0) {
@@ -119,8 +119,8 @@ export async function GET(request: NextRequest) {
         neutral: filteredFeedback.filter(f => f.sentiment === 'neutral').length,
         negative: filteredFeedback.filter(f => f.sentiment === 'negative').length,
       },
-      averageRating: filteredFeedback.length > 0 
-        ? filteredFeedback.reduce((sum, f) => sum + f.rating, 0) / filteredFeedback.length 
+      averageRating: filteredFeedback.length > 0
+        ? filteredFeedback.reduce((sum, f) => sum + f.rating, 0) / filteredFeedback.length
         : 0,
       featureDistribution: getFeatureDistribution(filteredFeedback)
     };
@@ -154,7 +154,7 @@ export async function DELETE(request: NextRequest) {
     if (userId) {
       // 删除特定用户的反馈（GDPR合规）
       feedbackStore = feedbackStore.filter(f => f.userId !== userId);
-      
+
       return NextResponse.json<ApiResponse>({
         success: true,
         message: `用户 ${userId} 的反馈数据已删除`,
@@ -165,7 +165,7 @@ export async function DELETE(request: NextRequest) {
     } else {
       // 清空所有数据（仅开发环境使用）
       feedbackStore = [];
-      
+
       return NextResponse.json<ApiResponse>({
         success: true,
         message: '所有反馈数据已清空',
@@ -221,10 +221,10 @@ function cleanFeedbackData(feedback: RealFeedbackData): RealFeedbackData {
 
 function getFeatureDistribution(feedback: RealFeedbackData[]): Record<string, number> {
   const distribution: Record<string, number> = {};
-  
+
   feedback.forEach(f => {
     distribution[f.feature] = (distribution[f.feature] || 0) + 1;
   });
-  
+
   return distribution;
 }

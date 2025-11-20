@@ -9,7 +9,7 @@ import { HERO_CTA_AB_TEST } from "@/config/ab-tests.config";
 
 /**
  * Hero区域CTA组件 - 集成A/B测试和事件追踪
- * 
+ *
  * 功能：
  * 1. 50/50流量A/B测试
  * 2. GA4事件追踪
@@ -19,13 +19,13 @@ import { HERO_CTA_AB_TEST } from "@/config/ab-tests.config";
  */
 export default function HeroABTest() {
   const locale = useLocale();
-  
+
   // 获取A/B测试变体和追踪函数
   const { variant, trackEvent: trackABEvent } = useABTest(HERO_CTA_AB_TEST);
-  
+
   // 获取CTA事件追踪函数
   const { trackCTAClick, trackPageView } = useCTATracking();
-  
+
   // 根据变体获取对应的文案
   const getCTAText = () => {
     if (variant.id === 'optimized') {
@@ -34,7 +34,7 @@ export default function HeroABTest() {
     // control组使用原始翻译
     return locale === 'zh' ? '立即缓解' : 'Immediate Relief';
   };
-  
+
   const getMicrocopy = () => {
     if (variant.id === 'optimized') {
       return locale === 'zh' ? '免费 • 3分钟 • 科学依据' : 'Free • 3 minutes • Science-based';
@@ -46,7 +46,7 @@ export default function HeroABTest() {
   // CTA点击事件处理
   const handleCTAClick = () => {
     const buttonText = getCTAText();
-    
+
     // A/B测试事件追踪
     trackABEvent('hero_cta_click', {
       button_text: buttonText,
@@ -54,7 +54,7 @@ export default function HeroABTest() {
       destination: '/immediate-relief',
       timestamp: new Date().toISOString()
     });
-    
+
     // CTA专用事件追踪
     trackCTAClick({
       buttonText: buttonText,
@@ -75,7 +75,7 @@ export default function HeroABTest() {
         pageTitle: 'Hero Section',
         pageLocation: window.location.href
       });
-      
+
       // A/B测试展示事件
       trackABEvent('hero_cta_impression', {
         variant_id: variant.id,
@@ -83,7 +83,7 @@ export default function HeroABTest() {
         locale: locale,
         timestamp: new Date().toISOString()
       });
-      
+
       // 开发模式显示调试信息
       if (process.env.NODE_ENV === 'development') {
         console.log(`[AB Test] Hero CTA - Variant: ${variant.name} (${variant.id}), Locale: ${locale}`);
@@ -109,7 +109,7 @@ export default function HeroABTest() {
       <p className="text-xs text-white/80 mt-1 text-center lg:text-left">
         {getMicrocopy()}
       </p>
-      
+
       {/* 开发模式显示变体标识和会话统计 */}
       {process.env.NODE_ENV === 'development' && (
         <div className="text-xs text-white/60 mt-1 space-y-1">

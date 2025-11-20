@@ -183,31 +183,31 @@ export default async function ExerciseScenarioPage({ params }: Props) {
     locale,
     scenarioSlug: "exercise",
     name: isZh ? "运动期间痛经管理指南" : "Exercise Period Pain Management Guide",
-    description: isZh 
+    description: isZh
       ? "科学的运动期间痛经管理方法，包含运动强度选择、应急准备和身体监测"
       : "Scientific period pain management during exercise, including intensity selection, emergency preparation and body monitoring",
     steps: [
-      { 
+      {
         name: isZh ? "选择合适的运动强度" : "Choose Appropriate Exercise Intensity",
         text: isZh ? "根据经期阶段和疼痛程度，选择低到中等强度的运动" : "Choose low to moderate intensity exercise based on menstrual phase and pain level"
       },
-      { 
+      {
         name: isZh ? "准备运动应急包" : "Prepare Exercise Emergency Kit",
         text: isZh ? "携带热敷贴、止痛药、水和能量补充品" : "Carry heat patches, pain medication, water and energy supplements"
       },
-      { 
+      {
         name: isZh ? "运动前充分热身" : "Warm Up Thoroughly Before Exercise",
         text: isZh ? "进行10-15分钟的轻度热身，促进血液循环" : "Do 10-15 minutes of light warm-up to promote blood circulation"
       },
-      { 
+      {
         name: isZh ? "运动中监测身体状况" : "Monitor Body Condition During Exercise",
         text: isZh ? "注意疼痛变化，及时调整强度或休息" : "Pay attention to pain changes, adjust intensity or rest promptly"
       },
-      { 
+      {
         name: isZh ? "运动后适当放松" : "Relax Properly After Exercise",
         text: isZh ? "进行拉伸和放松练习，帮助肌肉恢复" : "Do stretching and relaxation exercises to help muscle recovery"
       },
-      { 
+      {
         name: isZh ? "记录运动效果" : "Record Exercise Effects",
         text: isZh ? "记录运动类型、强度和疼痛变化，找到最适合的运动方式" : "Record exercise type, intensity and pain changes to find the most suitable exercise method"
       },

@@ -61,8 +61,8 @@ export default function NaturalTherapiesClient({ locale }: NaturalTherapiesClien
                 ? '自然疗法是通过非药物手段缓解痛经症状的方法，包括物理疗法、草药疗法、饮食调整和运动等。'
                 : 'Natural therapies are non-pharmacological methods to relieve menstrual pain symptoms, including physical therapy, herbal remedies, dietary adjustments, and exercise.'
               }
-            </p>         
-   
+            </p>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
               {/* 1. Physical Therapy */}
               <div className="bg-red-50 border border-red-200 rounded-xl p-6">

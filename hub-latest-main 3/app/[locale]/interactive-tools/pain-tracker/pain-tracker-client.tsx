@@ -27,7 +27,7 @@ export default function PainTrackerClient({ params: { locale } }: Props) {
           </div>
 
           {/* 面包屑导航 */}
-          <Breadcrumb 
+          <Breadcrumb
             items={[
               { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
               { label: locale === 'zh' ? '疼痛追踪工具' : 'Pain Tracking Tool' }

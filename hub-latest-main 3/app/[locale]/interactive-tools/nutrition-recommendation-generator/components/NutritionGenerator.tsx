@@ -62,9 +62,9 @@ export default function NutritionGenerator() {
   const handleGenerate = async () => {
     // 基于ziV1d3d的性能监控
     performanceMonitor.startMeasure('generate-recommendations');
-    
+
     // 检查是否有选择
-    const hasSelection = 
+    const hasSelection =
       selections.menstrualPhase !== null ||
       selections.healthGoals.size > 0 ||
       selections.tcmConstitution.size > 0;
@@ -81,7 +81,7 @@ export default function NutritionGenerator() {
              // 使用ziV1d3d的推荐引擎逻辑
              const recommendationResults = generateRecommendations(selections, locale);
       setResults(recommendationResults);
-      
+
       // 基于ziV1d3d的滚动到结果功能
       if (recommendationResults) {
         setTimeout(() => {
@@ -127,7 +127,7 @@ export default function NutritionGenerator() {
                        {getUIContent('mainTitle', locale)}
                      </h1>
                      <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-                       {locale === 'zh' 
+                       {locale === 'zh'
                          ? '基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导，结合现代营养学与中医理论，为女性提供精准的营养建议和生活方式指导，帮助优化生理期健康管理'
                          : 'Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.'
                        }
@@ -148,7 +148,7 @@ export default function NutritionGenerator() {
 
         {/* 生成按钮 - 基于ziV1d3d的generate-btn */}
         <div className="mt-10 text-center">
-          <button 
+          <button
             id="generate-btn"
             onClick={handleGenerate}
             disabled={isLoading}
@@ -158,7 +158,7 @@ export default function NutritionGenerator() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
             </svg>
                        <span id="generate-btn-text">
-                         {isLoading 
+                         {isLoading
                            ? (locale === 'zh' ? '正在生成...' : 'Generating...')
                            : getUIContent('generateBtn', locale)
                          }

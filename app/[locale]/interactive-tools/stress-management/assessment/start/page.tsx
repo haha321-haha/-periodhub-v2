@@ -24,9 +24,9 @@ const StressRadarChart = dynamic(() => import('@/components/StressRadarChart').t
 });
 import { LocalStorageManager } from "@/lib/localStorage";
 import { PHQ9Utils } from "@/lib/phq9-types";
-import { 
-  useABTestTracking, 
-  trackAssessmentStart, 
+import {
+  useABTestTracking,
+  trackAssessmentStart,
   trackAssessmentComplete,
   trackPHQ9Start,
   trackPHQ9Complete,
@@ -54,7 +54,7 @@ export default function StressAssessmentStartPage() {
   // Day 4 增强：A/B测试数据收集
   const [userId] = useState(() => generateAnonymousUserId());
   const { isLoaded, userVariant } = useABTestTracking(userId);
-  
+
   // 评估状态
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -115,17 +115,17 @@ export default function StressAssessmentStartPage() {
     // 免费用户：只显示基础结果
     const score = calculateScore();
     const { level } = getStressLevel(score);
-    
+
     // Day 4: 追踪付费墙交互
     trackPaywallClick(userId, 'skip');
-    
+
     LocalStorageManager.saveAssessment({
       answers,
       score,
       stressLevel: level,
       isPremium: false
     });
-    
+
     setStressScore(score);
     setStressLevel(level);
     setShowResults(true);
@@ -164,7 +164,7 @@ export default function StressAssessmentStartPage() {
   const handleStartPHQ9 = () => {
     // Day 4: 追踪PHQ-9评估开始
     trackPHQ9Start(userId);
-    
+
     setShowResults(false);
     setShowPHQ9(true);
   };
@@ -172,11 +172,11 @@ export default function StressAssessmentStartPage() {
   const handlePHQ9Complete = (result: any) => {
     // Day 4: 追踪PHQ-9评估完成
     trackPHQ9Complete(userId, result.score, result.level);
-    
+
     setPhq9Result(result);
-    
+
     // Note: PHQ-9 results are handled by the PHQ9Assessment component
-    
+
     setShowPHQ9(false);
     setShowPHQ9Results(true);
   };
@@ -234,7 +234,7 @@ export default function StressAssessmentStartPage() {
   const getPersonalizedRecommendations = (answers: number[], level: string) => {
     const recommendations = [];
     const avgScore = answers.reduce((sum, answer) => sum + answer, 0) / answers.length;
-    
+
     // Recommendations based on overall stress level
     if (avgScore <= 1) {
       recommendations.push(
@@ -291,7 +291,7 @@ export default function StressAssessmentStartPage() {
         }
       );
     }
-    
+
     return recommendations;
   };
 
@@ -433,7 +433,7 @@ export default function StressAssessmentStartPage() {
             {/* Day 3增强：雷达图可视化 */}
             <div className="mb-6">
               <Suspense fallback={<div className="flex justify-center items-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>}>
-                <StressRadarChart 
+                <StressRadarChart
                   scores={convertAnswersToRadarData(answers)}
                   className="border-2 border-blue-200"
                   onInteraction={(type, data) => {
@@ -451,8 +451,8 @@ export default function StressAssessmentStartPage() {
               </h3>
               <div className="space-y-3">
                 {getPersonalizedRecommendations(answers, level).map((recommendation, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg cursor-pointer hover:bg-blue-100 transition-colors"
                     onClick={() => {
                       // Day 4: 追踪建议点击

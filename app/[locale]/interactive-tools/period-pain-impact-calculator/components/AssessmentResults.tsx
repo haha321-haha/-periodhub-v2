@@ -82,14 +82,14 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
               { label: t('breadcrumbCurrent') }
             ]}
           />
-        
+
           <div className="px-4 py-8 space-y-8">
       {/* 结果摘要 */}
       <div className="bg-white rounded-lg shadow-md p-8">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-900">
           {t('results.title')}
         </h2>
-        
+
         {/* 严重程度指标 */}
         <div className={`text-center p-6 rounded-lg ${getSeverityColor(result.severity)}`}>
           <div className="text-lg font-medium mb-2">
@@ -145,7 +145,7 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
           <h3 className="text-xl font-bold mb-6 text-gray-900">
             {t('results.personalizedRecommendations')}
           </h3>
-          
+
           <div className="space-y-6">
             {result.recommendations.map((recommendation: Recommendation) => (
               <div key={recommendation.id} className="border rounded-lg p-6">
@@ -162,11 +162,11 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
                     </span>
                   </div>
                 </div>
-                
+
                 <p className="text-gray-700 mb-4">
                   {recommendation.description}
                 </p>
-                
+
                 {recommendation.actionSteps && recommendation.actionSteps.length > 0 && (
                   <div className="mb-4">
                     <h5 className="font-medium text-gray-900 mb-2">
@@ -181,7 +181,7 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
                     </ol>
                   </div>
                 )}
-                
+
                 <div className="flex justify-between items-center">
                   <div className="text-sm text-gray-600">
                     {t('results.implementationTimeframe')}: {recommendation.timeframe}
@@ -217,11 +217,11 @@ export default function AssessmentResults({ result, locale, onReset }: Assessmen
           </div>
         </div>
       </main>
-      
+
       {/* 推荐内容区域 */}
-      <RecommendedContent 
-        locale={locale} 
-        severity={result.severity} 
+      <RecommendedContent
+        locale={locale}
+        severity={result.severity}
       />
     </>
   );

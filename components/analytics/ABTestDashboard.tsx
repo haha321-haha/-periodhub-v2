@@ -28,7 +28,7 @@ interface TestResult {
 
 /**
  * A/B测试仪表板组件
- * 
+ *
  * 功能：
  * 1. 实时显示A/B测试数据
  * 2. 统计显著性分析
@@ -46,7 +46,7 @@ export default function ABTestDashboard() {
 
   useEffect(() => {
     loadMetrics();
-    
+
     // 每30秒自动刷新数据
     const interval = setInterval(() => {
       loadMetrics();
@@ -58,11 +58,11 @@ export default function ABTestDashboard() {
 
   const loadMetrics = () => {
     setIsLoading(true);
-    
+
     try {
       // 获取CTA追踪数据
       const trackingData = getAllCTATrackingData();
-      
+
       if (!trackingData || trackingData.events.length === 0) {
         setIsLoading(false);
         return;
@@ -89,7 +89,7 @@ export default function ABTestDashboard() {
     events.forEach(event => {
       if (event.eventName === 'hero_cta_impression') {
         const key = `${event.ab_test_id || 'unknown'}-${event.ab_test_variant || 'unknown'}`;
-        
+
         if (!metricsMap.has(key)) {
           metricsMap.set(key, {
             testId: event.ab_test_id || 'unknown',
@@ -99,13 +99,13 @@ export default function ABTestDashboard() {
             ctr: 0
           });
         }
-        
+
         metricsMap.get(key)!.impressions++;
       }
-      
+
       if (event.eventName === 'hero_cta_click') {
         const key = `${event.ab_test_id || 'unknown'}-${event.ab_test_variant || 'unknown'}`;
-        
+
         if (!metricsMap.has(key)) {
           metricsMap.set(key, {
             testId: event.ab_test_id || 'unknown',
@@ -115,7 +115,7 @@ export default function ABTestDashboard() {
             ctr: 0
           });
         }
-        
+
         metricsMap.get(key)!.clicks++;
       }
     });
@@ -350,14 +350,14 @@ export default function ABTestDashboard() {
               {testResults.map((result, index) => {
                 const isWinner = result.variant === 'Optimized' && result.statisticalSignificance;
                 const isLoser = result.variant === 'Control' && result.statisticalSignificance;
-                
+
                 return (
                   <div key={index} className="flex items-start gap-3">
                     <div className={`mt-1 w-2 h-2 rounded-full ${isWinner ? 'bg-green-500' : isLoser ? 'bg-red-500' : 'bg-gray-400'}`} />
                     <div>
                       <p className="font-medium">{result.variant} Variant</p>
                       <p className="text-sm text-gray-600">
-                        {isWinner 
+                        {isWinner
                           ? 'This variant is performing significantly better. Consider making it the default.'
                           : isLoser
                           ? 'This variant is underperforming. Review and optimize further.'
@@ -386,12 +386,12 @@ export function ABTestSummary({ testId }: { testId: string }) {
     if (data) {
       const testEvents = data.events.filter(e => e.abTestId === testId);
       const variants = [...new Set(testEvents.map(e => e.abTestVariant))];
-      
+
       const summaryData = variants.map(variantId => {
         const variantEvents = testEvents.filter(e => e.abTestVariant === variantId);
         const impressions = variantEvents.filter(e => e.eventName === 'hero_cta_impression').length;
         const clicks = variantEvents.filter(e => e.eventName === 'hero_cta_click').length;
-        
+
         return {
           variantId,
           impressions,
@@ -399,7 +399,7 @@ export function ABTestSummary({ testId }: { testId: string }) {
           ctr: impressions > 0 ? (clicks / impressions) * 100 : 0
         };
       });
-      
+
       setSummary(summaryData);
     }
   }, [testId]);
@@ -425,4 +425,4 @@ export function ABTestSummary({ testId }: { testId: string }) {
       ))}
     </div>
   );
-}  
+}

@@ -41,9 +41,9 @@ export function StressRadarChart({ scores, className = "", onInteraction }: Stre
   useEffect(() => {
     // Day 4: 追踪雷达图查看
     if (onInteraction) {
-      onInteraction('view', { 
+      onInteraction('view', {
         scores,
-        timestamp: new Date().toISOString() 
+        timestamp: new Date().toISOString()
       });
     }
   }, [scores, onInteraction]);
@@ -111,7 +111,7 @@ export function StressRadarChart({ scores, className = "", onInteraction }: Stre
       // 绘制标签
       const labelX = centerX + Math.cos(radian) * (radius + 30);
       const labelY = centerY + Math.sin(radian) * (radius + 30);
-      
+
       ctx.fillStyle = "#374151";
       ctx.font = "14px sans-serif";
       ctx.textAlign = "center";
@@ -175,13 +175,13 @@ export function StressRadarChart({ scores, className = "", onInteraction }: Stre
     ctx.font = "12px sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    
+
     normalizedScores.forEach((score, index) => {
       const angle = (angles[index] * Math.PI) / 180;
       const distance = (score / 100) * radius;
       const x = centerX + Math.cos(angle) * (distance + 15);
       const y = centerY + Math.sin(angle) * (distance + 15);
-      
+
       const value = Math.round((score / 100) * 3 * 10) / 10; // 转换回0-3范围
       ctx.fillText(value.toString(), x, y);
     });
@@ -194,7 +194,7 @@ export function StressRadarChart({ scores, className = "", onInteraction }: Stre
         {t("radar.title")}
       </h3>
       <div className="flex justify-center">
-        <canvas 
+        <canvas
           ref={canvasRef}
           className="max-w-full h-auto"
           style={{ maxWidth: "300px", height: "300px" }}
@@ -221,7 +221,7 @@ export function convertAnswersToRadarData(answers: number[]): {
   // 这里需要根据实际的问题内容来调整映射
   return {
     work: answers[0] || 0, // 第1题：工作压力
-    sleep: answers[1] || 0, // 第2题：睡眠质量  
+    sleep: answers[1] || 0, // 第2题：睡眠质量
     emotion: answers[2] || 0, // 第3题：情绪状态
     physical: answers[3] || 0, // 第4题：身体状况
     social: answers[4] || 0, // 第5题：社交压力

@@ -4,11 +4,11 @@
  */
 
 import { nutritionData } from '../data/nutritionRecommendations';
-import { 
-  aggregateRecommendations, 
-  formatResultsForDisplay, 
-  hasValidSelections, 
-  getNoSelectionMessage 
+import {
+  aggregateRecommendations,
+  formatResultsForDisplay,
+  hasValidSelections,
+  getNoSelectionMessage
 } from './dataAggregator';
 
 // 基于ziV1d3d的推荐结果结构
@@ -71,13 +71,13 @@ export function getRecommendationStats(selections: {
   tcmConstitution: Set<string>;
 }) {
   const aggregated = aggregateRecommendations(selections, nutritionData);
-  
+
   return {
     totalRecommendedFoods: aggregated.recommendedFoods.size,
     totalFoodsToAvoid: aggregated.foodsToAvoid.size,
     totalLifestyleTips: aggregated.lifestyleTips.size,
-    hasRecommendations: aggregated.recommendedFoods.size > 0 || 
-                       aggregated.foodsToAvoid.size > 0 || 
+    hasRecommendations: aggregated.recommendedFoods.size > 0 ||
+                       aggregated.foodsToAvoid.size > 0 ||
                        aggregated.lifestyleTips.size > 0
   };
 }

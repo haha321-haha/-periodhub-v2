@@ -23,13 +23,13 @@ const DefaultFallback = ({ height = "200px" }: { height?: string }) => (
 );
 
 // 延迟加载包装器
-const DelayedSuspense = ({ 
-  children, 
-  fallback, 
-  delay = 0 
-}: { 
-  children: React.ReactNode; 
-  fallback?: React.ReactNode; 
+const DelayedSuspense = ({
+  children,
+  fallback,
+  delay = 0
+}: {
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
   delay?: number;
 }) => {
   if (delay > 0) {
@@ -54,10 +54,10 @@ export function createLazyComponent<T extends ComponentType<any>>(
   delay: number = 0
 ) {
   const LazyComponent = lazy(importFunc);
-  
+
   return function LazyWrapper(props: React.ComponentProps<T> & LazyLoaderProps) {
     return (
-      <DelayedSuspense 
+      <DelayedSuspense
         fallback={fallback || <DefaultFallback height={props.height} />}
         delay={delay}
       >
@@ -73,12 +73,12 @@ export function createLazyComponent<T extends ComponentType<any>>(
  */
 export class ComponentPreloader {
   private static preloadedComponents = new Set<string>();
-  
+
   static async preload(importFunc: () => Promise<any>, componentName: string) {
     if (this.preloadedComponents.has(componentName)) {
       return;
     }
-    
+
     try {
       await importFunc();
       this.preloadedComponents.add(componentName);
@@ -87,11 +87,11 @@ export class ComponentPreloader {
       console.warn(`⚠️ 预加载组件失败: ${componentName}`, error);
     }
   }
-  
+
   static isPreloaded(componentName: string): boolean {
     return this.preloadedComponents.has(componentName);
   }
-  
+
   static clearCache() {
     this.preloadedComponents.clear();
   }
@@ -165,7 +165,7 @@ export async function preloadCriticalComponents() {
       importFunc: () => import('./Footer'),
     },
   ];
-  
+
   // 使用 requestIdleCallback 在浏览器空闲时预加载
   if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
     window.requestIdleCallback(async () => {
@@ -196,10 +196,10 @@ export function useLazyComponent<T extends ComponentType<any>>(
   const [Component, setComponent] = React.useState<T | null>(null);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<Error | null>(null);
-  
+
   React.useEffect(() => {
     if (Component || loading) return;
-    
+
     setLoading(true);
     importFunc()
       .then((module) => {
@@ -214,7 +214,7 @@ export function useLazyComponent<T extends ComponentType<any>>(
         setLoading(false);
       });
   }, [importFunc, componentName, Component, loading]);
-  
+
   return { Component, loading, error };
 }
 

@@ -35,7 +35,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  
+
   // 使用安全的 locale 验证和处理
   const validLocale = getValidLocale(locale);
   unstable_setRequestLocale(validLocale);

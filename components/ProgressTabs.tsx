@@ -101,14 +101,14 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
                 {storageInfo.isFull ? "存储空间已满" : "存储空间即将满"}
               </h3>
               <p className="text-sm text-gray-700 mb-3">
-                {storageInfo.isFull 
+                {storageInfo.isFull
                   ? `当前使用 ${storageInfo.sizeInMB}MB / ${storageInfo.maxSizeInMB}MB (${storageInfo.usagePercent}%)。无法添加新记录，请删除一些旧记录。`
                   : `当前使用 ${storageInfo.sizeInMB}MB / ${storageInfo.maxSizeInMB}MB (${storageInfo.usagePercent}%)。建议删除一些旧记录以避免存储问题。`}
               </p>
               <button
                 onClick={() => setShowManageModal(true)}
                 className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
-                  storageInfo.isFull 
+                  storageInfo.isFull
                     ? "bg-red-600 hover:bg-red-700 text-white"
                     : "bg-yellow-600 hover:bg-yellow-700 text-white"
                 }`}
@@ -125,7 +125,7 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-md w-full p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">数据管理</h2>
-            
+
             {storageInfo && (
               <div className="mb-6">
                 <div className="flex justify-between text-sm mb-2">
@@ -152,7 +152,7 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
               <p className="text-sm text-gray-600">
                 当前共有 <span className="font-bold text-purple-600">{getAllEntries().length}</span> 条记录
               </p>
-              
+
               <button
                 onClick={() => handleDeleteOldEntries(10)}
                 className="w-full px-4 py-3 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-left"

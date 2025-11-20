@@ -172,7 +172,7 @@ export interface WorkplaceWellnessState {
   batchExportQueue: BatchExportQueue | null;
   exportHistory: ExportHistory[];
   systemSettings: SystemSettings;
-  
+
   // 推荐反馈
   recommendationFeedback: RecommendationFeedbackHistory;
 }

@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
     title: locale === 'zh' ? '深度解析：痛经的生理机制与类型 - 痛经管理专题' : 'In-depth Analysis: Physiological Mechanisms and Types of Dysmenorrhea - Dysmenorrhea Management Topics',
-    description: locale === 'zh' 
+    description: locale === 'zh'
       ? '从医学角度深入解析痛经的生理机制，了解原发性和继发性痛经的区别，为科学缓解疼痛提供理论基础。'
       : 'In-depth analysis of the physiological mechanisms of dysmenorrhea from a medical perspective, understanding the difference between primary and secondary dysmenorrhea, providing theoretical basis for scientific pain relief.',
   };
@@ -51,13 +51,13 @@ export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
             {locale === 'zh' ? '8分钟阅读' : '8 min read'}
           </div>
         </div>
-        
+
         <h1 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
           {locale === 'zh' ? '深度解析：痛经的生理机制与类型' : 'In-depth Analysis: Physiological Mechanisms and Types of Dysmenorrhea'}
         </h1>
-        
+
         <p className="text-lg text-neutral-600 leading-relaxed">
-          {locale === 'zh' 
+          {locale === 'zh'
             ? '从医学角度深入解析痛经的生理机制，帮助您科学理解疼痛产生的原因，为选择合适的缓解方法提供理论基础。'
             : 'In-depth analysis of the physiological mechanisms of dysmenorrhea from a medical perspective, helping you scientifically understand the causes of pain and providing a theoretical basis for choosing appropriate relief methods.'
           }
@@ -97,7 +97,7 @@ export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
           </div>
 
           <p className="text-neutral-700 leading-relaxed mb-4">
-            {locale === 'zh' 
+            {locale === 'zh'
               ? '痛经（Dysmenorrhea）是最常见的妇科症状之一，几乎每位女性在生命中的某个阶段都会经历。然而，许多人对痛经的生理机制缺乏深入了解，这往往导致治疗方法的选择不当或延误。本文将从医学角度详细解析痛经的发生机制、分类标准以及不同类型的特征，为您提供科学的理论基础。'
               : 'Dysmenorrhea is one of the most common gynecological symptoms, with almost every woman experiencing it at some stage of life. However, many people lack in-depth understanding of the physiological mechanisms of dysmenorrhea, which often leads to inappropriate treatment choices or delays. This article will provide a detailed analysis of the mechanisms, classification standards, and characteristics of different types of dysmenorrhea from a medical perspective, providing you with a scientific theoretical foundation.'
             }
@@ -159,7 +159,7 @@ export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
               <div className="flex items-start">
                 <span className="bg-primary-100 text-primary-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5 flex-shrink-0">1</span>
                 <p>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '月经期间，子宫内膜细胞释放大量前列腺素F2α（PGF2α）和前列腺素E2（PGE2）。'
                     : 'During menstruation, endometrial cells release large amounts of prostaglandin F2α (PGF2α) and prostaglandin E2 (PGE2).'
                   }
@@ -168,7 +168,7 @@ export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
               <div className="flex items-start">
                 <span className="bg-primary-100 text-primary-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5 flex-shrink-0">2</span>
                 <p>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? 'PGF2α导致子宫肌肉强烈收缩，压迫血管，造成子宫缺血缺氧。'
                     : 'PGF2α causes strong uterine muscle contractions, compressing blood vessels and causing uterine ischemia and hypoxia.'
                   }
@@ -177,7 +177,7 @@ export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
               <div className="flex items-start">
                 <span className="bg-primary-100 text-primary-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5 flex-shrink-0">3</span>
                 <p>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '缺血缺氧激活疼痛感受器，产生痉挛性疼痛。'
                     : 'Ischemia and hypoxia activate pain receptors, producing spasmodic pain.'
                   }
@@ -186,7 +186,7 @@ export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
               <div className="flex items-start">
                 <span className="bg-primary-100 text-primary-800 rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5 flex-shrink-0">4</span>
                 <p>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '前列腺素还会增加疼痛感受器的敏感性，放大疼痛信号。'
                     : 'Prostaglandins also increase the sensitivity of pain receptors, amplifying pain signals.'
                   }
@@ -200,7 +200,7 @@ export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
               {locale === 'zh' ? '为什么有些女性痛经更严重？' : 'Why do some women experience more severe dysmenorrhea?'}
             </h4>
             <p className="text-yellow-800 text-sm">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? '研究表明，痛经严重的女性月经血中前列腺素浓度比无痛经女性高2-7倍。此外，个体对前列腺素的敏感性、子宫收缩力、疼痛阈值等因素都会影响痛经的严重程度。'
                 : 'Studies show that women with severe dysmenorrhea have 2-7 times higher prostaglandin concentrations in menstrual blood than women without dysmenorrhea. Additionally, individual sensitivity to prostaglandins, uterine contractility, and pain threshold all affect the severity of dysmenorrhea.'
               }
@@ -311,7 +311,7 @@ export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
             {locale === 'zh' ? '总结' : 'Conclusion'}
           </h2>
           <p className="text-neutral-700 leading-relaxed">
-            {locale === 'zh' 
+            {locale === 'zh'
               ? '理解痛经的生理机制是科学管理疼痛的第一步。通过区分原发性和继发性痛经，我们可以选择更有针对性的治疗方法。对于原发性痛经，重点在于抑制前列腺素的产生和作用；对于继发性痛经，则需要治疗潜在的疾病。记住，严重的痛经不是正常现象，及时就医可以获得更好的治疗效果。'
               : 'Understanding the physiological mechanisms of dysmenorrhea is the first step in scientific pain management. By distinguishing between primary and secondary dysmenorrhea, we can choose more targeted treatment methods. For primary dysmenorrhea, the focus is on inhibiting prostaglandin production and action; for secondary dysmenorrhea, underlying diseases need to be treated. Remember, severe dysmenorrhea is not normal, and timely medical consultation can achieve better treatment outcomes.'
             }
@@ -336,7 +336,7 @@ export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
               {locale === 'zh' ? '基于前列腺素机制的快速缓解方法' : 'Quick relief methods based on prostaglandin mechanisms'}
             </p>
           </Link>
-          
+
           <Link
             href={`/${locale}/natural-therapies`}
             className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow"
@@ -353,14 +353,14 @@ export default async function UnderstandingDysmenorrheaPage({ params }: Props) {
 
       {/* Navigation */}
       <div className="flex justify-between items-center pt-8 border-t border-gray-200">
-        <Link 
+        <Link
           href={`/${locale}/articles`}
           className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           {locale === 'zh' ? '返回痛经管理专题' : 'Back to Dysmenorrhea Management Topics'}
         </Link>
-        
+
         <div className="text-sm text-neutral-500">
           {locale === 'zh' ? '1 / 6 篇文章' : '1 of 6 articles'}
         </div>

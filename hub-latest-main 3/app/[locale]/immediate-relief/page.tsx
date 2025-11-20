@@ -12,7 +12,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'immediateReliefPage' });
-  
+
   return {
     title: t('title'),
     description: t('description'),
@@ -47,11 +47,11 @@ export default async function ImmediateReliefPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  
+
   // Get translations for the immediate relief page
   const t = await getTranslations({ locale, namespace: 'immediateReliefPage' });
   const commonT = await getTranslations({ locale, namespace: 'common' });
-  
+
   // 结构化数据
   const structuredData = {
     "@context": "https://schema.org",
@@ -74,7 +74,7 @@ export default async function ImmediateReliefPage({
           "text": t('structuredData.steps.heatTherapy.text')
         },
         {
-          "@type": "HowToStep", 
+          "@type": "HowToStep",
           "name": t('structuredData.steps.breathing.name'),
           "text": t('structuredData.steps.breathing.text')
         },
@@ -96,7 +96,7 @@ export default async function ImmediateReliefPage({
       ]
     }
   };
-  
+
   return (
     <>
       {/* 结构化数据 */}
@@ -108,12 +108,12 @@ export default async function ImmediateReliefPage({
       />
       <div className="container space-y-10">
         {/* Breadcrumb */}
-        <Breadcrumb 
+        <Breadcrumb
           items={[
             { label: commonT('breadcrumb.immediateRelief'), href: `/${locale}/immediate-relief` }
           ]}
         />
-        
+
         {/* Page Header */}
       <header className="text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
@@ -144,7 +144,7 @@ export default async function ImmediateReliefPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {t('typesTitle')}
         </h2>
-        
+
         <div className="grid grid-cols-1 gap-6">
           {/* Heat Therapy */}
           <div className="card border-l-4 border-red-500 bg-gradient-to-r from-red-50 to-white min-h-[200px]">
@@ -163,7 +163,7 @@ export default async function ImmediateReliefPage({
             <p className="text-neutral-600 mb-4">
               {t('heatTherapyDescription')}
             </p>
-            
+
             {/* 科学参数显示 */}
             <div className="bg-primary-50 p-4 rounded-lg mb-4">
               <h4 className="font-semibold text-primary-800 mb-2">
@@ -205,7 +205,7 @@ export default async function ImmediateReliefPage({
             <p className="text-neutral-600 mb-4">
               {t('gentleMovementDescription')}
             </p>
-            
+
             {/* 瑜伽体式详情 */}
             <div className="bg-secondary-50 p-4 rounded-lg mb-4">
               <h4 className="font-semibold text-secondary-800 mb-3">{t('gentleMovementDetails.yogaPoses.title')}</h4>
@@ -270,7 +270,7 @@ export default async function ImmediateReliefPage({
             <p className="text-neutral-600 mb-4">
               {t('breathingExerciseDescription')}
             </p>
-            
+
             {/* 呼吸练习科学参数 */}
             <div className="bg-blue-50 p-4 rounded-lg mb-4">
               <h4 className="font-semibold text-blue-800 mb-2">
@@ -312,7 +312,7 @@ export default async function ImmediateReliefPage({
             <p className="text-neutral-600 mb-4">
               {t('acupressureDescription')}
             </p>
-            
+
             {/* 穴位详情 */}
             <div className="bg-accent-50 p-4 rounded-lg mb-4">
               <h4 className="font-semibold text-accent-800 mb-3">{t('acupressureDetails.title')}</h4>
@@ -365,7 +365,7 @@ export default async function ImmediateReliefPage({
             <p className="text-neutral-600 mb-4">
               {t('otcOptionsDescription')}
             </p>
-            
+
             {/* NSAID科学参数 */}
             <div className="bg-neutral-50 p-4 rounded-lg mb-4">
               <h4 className="font-semibold text-neutral-800 mb-2">
@@ -402,7 +402,7 @@ export default async function ImmediateReliefPage({
         <p className="text-neutral-700 mb-6">
           {t('combinationTherapy.subtitle')}
         </p>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {t.raw('combinationTherapy.combinations').map((combination: any, index: number) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow-sm border border-purple-100">
@@ -433,7 +433,7 @@ export default async function ImmediateReliefPage({
         <p className="text-red-700 mb-6">
           {t('emergencyResponse.subtitle')}
         </p>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Immediate Actions */}
           <div className="bg-white p-6 rounded-lg">
@@ -494,7 +494,7 @@ export default async function ImmediateReliefPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {t('contentSectionTitle')}
         </h2>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="card group block">
             <Link href={`/${locale}/scenario-solutions/emergency-kit`}>

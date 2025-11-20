@@ -12,10 +12,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const title = locale === 'zh' ? '理解痛经 - 痛经健康指南' : 'Understanding Menstrual Pain - Health Guide';
-  const description = locale === 'zh' 
+  const description = locale === 'zh'
     ? '深入了解痛经的原因、类型和生理机制，掌握科学的痛经知识基础。'
     : 'Deep dive into the causes, types, and physiological mechanisms of menstrual pain, master the scientific foundation of menstrual pain knowledge.';
-  
+
   return {
     title,
     description,
@@ -43,7 +43,7 @@ export default async function UnderstandingPainPage({
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-12">
           {/* Breadcrumb */}
-          <Breadcrumb 
+          <Breadcrumb
             items={[
               { label: locale === 'zh' ? '痛经健康指南' : 'Health Guide', href: `/${locale}/health-guide` },
               { label: locale === 'zh' ? '理解痛经' : 'Understanding Pain' }
@@ -87,7 +87,7 @@ export default async function UnderstandingPainPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '痛经的类型' : 'Types of Menstrual Pain'}
         </h2>
-        
+
         <div className="grid md:grid-cols-2 gap-6">
           <div className="card">
             <h3 className="text-xl font-semibold text-primary-600 mb-3">
@@ -342,7 +342,7 @@ export default async function UnderstandingPainPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '风险因素' : 'Risk Factors'}
         </h2>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
           <div className="card">
             <h3 className="font-semibold text-neutral-800 mb-3">
@@ -544,7 +544,7 @@ export default async function UnderstandingPainPage({
 
       {/* Navigation */}
       <section className="flex justify-between items-center pt-8 border-t border-neutral-200">
-        <Link 
+        <Link
           href={`/${locale}/health-guide`}
           className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
         >
@@ -553,7 +553,7 @@ export default async function UnderstandingPainPage({
           </svg>
           {locale === 'zh' ? '返回指南首页' : 'Back to Guide Home'}
         </Link>
-        
+
           <Link
             href={`/${locale}/health-guide/relief-methods`}
             className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"

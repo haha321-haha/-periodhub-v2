@@ -35,7 +35,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
   const t = useTranslations('painTracker.export');
   const exportManager = useRef(new ExportManager());
   const analyticsEngine = useRef(new AnalyticsEngine());
-  
+
   // State management
   const [activeStep, setActiveStep] = useState<'range' | 'format' | 'options' | 'preview' | 'export'>('range');
   const [dateRange, setDateRange] = useState<DateRange>({
@@ -56,7 +56,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
   const [previewContent, setPreviewContent] = useState<string>('');
   const [filteredRecords, setFilteredRecords] = useState<PainRecord[]>([]);
   const [recordsInRange, setRecordsInRange] = useState(0);
-  
+
   const previewRef = useRef<HTMLDivElement>(null);
 
   // Update filtered records when date range changes
@@ -128,7 +128,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
   const generatePreview = async () => {
     setExportStatus('preparing');
     setExportProgress(20);
-    
+
     try {
       if (filteredRecords.length === 0) {
         setPreviewContent(`
@@ -141,7 +141,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
                 ${locale === 'zh' ? '没有数据' : 'No Data Available'}
               </h3>
               <p class="text-gray-600">
-                ${locale === 'zh' 
+                ${locale === 'zh'
                   ? '所选日期范围内没有疼痛记录。请调整日期范围或添加更多记录。'
                   : 'No pain records found in the selected date range. Please adjust the date range or add more records.'
                 }
@@ -155,12 +155,12 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
       }
 
       setExportProgress(50);
-      
+
       // Generate analytics for preview
       const analytics = analyticsEngine.current.calculateAnalytics(filteredRecords);
-      
+
       setExportProgress(80);
-      
+
       // Generate preview content
       const previewHtml = `
         <div class="medical-report-preview p-6 bg-white rounded-lg border">
@@ -215,8 +215,8 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
                     ${locale === 'zh' ? '最常见疼痛类型' : 'Most Common Pain Type'}
                   </div>
                   <div class="text-sm font-medium text-purple-600">
-                    ${analytics.commonPainTypes.length > 0 ? 
-                      analytics.commonPainTypes[0].type.replace('_', ' ') : 
+                    ${analytics.commonPainTypes.length > 0 ?
+                      analytics.commonPainTypes[0].type.replace('_', ' ') :
                       (locale === 'zh' ? '无数据' : 'No data')
                     }
                   </div>
@@ -244,7 +244,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
               </h3>
               <div class="bg-green-50 p-4 rounded">
                 <p class="text-green-800 text-sm">
-                  ${locale === 'zh' 
+                  ${locale === 'zh'
                     ? '基于您的疼痛数据，系统将生成个性化的治疗建议和模式分析。'
                     : 'Based on your pain data, the system will generate personalized treatment recommendations and pattern analysis.'
                   }
@@ -279,7 +279,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
 
           <div class="border-t pt-4">
             <p class="text-xs text-gray-500">
-              ${locale === 'zh' 
+              ${locale === 'zh'
                 ? '此预览仅显示报告的部分内容。完整报告将包含所有选定的数据和分析。'
                 : 'This preview shows only a portion of the report content. The complete report will include all selected data and analysis.'
               }
@@ -287,11 +287,11 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
           </div>
         </div>
       `;
-      
+
       setPreviewContent(previewHtml);
       setExportProgress(100);
       setExportStatus('idle');
-      
+
     } catch (error) {
       setExportStatus('error');
       setErrorMessage(error instanceof Error ? error.message : 'Preview generation failed');
@@ -304,7 +304,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
       setErrorMessage(locale === 'zh' ? '没有数据可导出' : 'No data to export');
       return;
     }
-    
+
     setIsExporting(true);
     setExportStatus('generating');
     setExportProgress(0);
@@ -314,7 +314,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
       // Generate analytics
       setExportProgress(20);
       const analytics = analyticsEngine.current.calculateAnalytics(filteredRecords);
-      
+
       // Prepare export options
       setExportProgress(40);
       const exportOptionsWithDateRange = {
@@ -330,7 +330,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
       };
 
       setExportProgress(60);
-      
+
       if (exportFormat === 'html') {
         // Generate HTML export
         const htmlContent = await exportManager.current.exportToHTML(
@@ -338,9 +338,9 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
           analytics,
           exportOptionsWithDateRange
         );
-        
+
         setExportProgress(80);
-        
+
         // Create and download HTML file
         const blob = new Blob([htmlContent], { type: 'text/html' });
         const url = URL.createObjectURL(blob);
@@ -351,7 +351,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-        
+
       } else {
         // Generate PDF export
         const pdfBlob = await exportManager.current.exportToPDF(
@@ -359,9 +359,9 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
           analytics,
           exportOptionsWithDateRange
         );
-        
+
         setExportProgress(80);
-        
+
         // Create and download PDF file
         const url = URL.createObjectURL(pdfBlob);
         const link = document.createElement('a');
@@ -375,7 +375,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
 
       setExportProgress(100);
       setExportStatus('success');
-      
+
       // Call the onExport callback if provided
       if (onExport) {
         await onExport({
@@ -384,7 +384,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
           exportOptions
         });
       }
-      
+
       setTimeout(() => {
         setIsExporting(false);
         setExportStatus('idle');
@@ -411,8 +411,8 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
         ].map((step, index) => (
           <div key={step.key} className="flex items-center">
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-              activeStep === step.key 
-                ? 'bg-primary-600 text-white' 
+              activeStep === step.key
+                ? 'bg-primary-600 text-white'
                 : ['range', 'format', 'options', 'preview', 'export'].indexOf(activeStep) > index
                 ? 'bg-green-500 text-white'
                 : 'bg-gray-200 text-gray-600'
@@ -502,7 +502,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
           <div className="flex items-center space-x-2">
             <FileText className="w-4 h-4 text-blue-500" />
             <p className="text-sm text-blue-600">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? `找到 ${recordsInRange} 条记录在所选日期范围内`
                 : `Found ${recordsInRange} records in the selected date range`
               }
@@ -510,7 +510,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
           </div>
           {recordsInRange === 0 && (
             <p className="text-xs text-blue-500 mt-1">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? '请调整日期范围以包含更多记录，或先添加一些疼痛记录。'
                 : 'Please adjust the date range to include more records, or add some pain records first.'
               }
@@ -553,7 +553,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
             <h4 className="text-lg font-semibold text-gray-900">PDF</h4>
           </div>
           <p className="text-gray-600 mb-4">
-            {locale === 'zh' 
+            {locale === 'zh'
               ? '生成专业的PDF医疗报告，适合打印和分享给医生'
               : 'Generate professional PDF medical reports, suitable for printing and sharing with doctors'
             }
@@ -585,7 +585,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
             <h4 className="text-lg font-semibold text-gray-900">HTML</h4>
           </div>
           <p className="text-gray-600 mb-4">
-            {locale === 'zh' 
+            {locale === 'zh'
               ? '生成交互式HTML报告，可以在浏览器中查看和分享'
               : 'Generate interactive HTML reports that can be viewed and shared in browsers'
             }
@@ -676,32 +676,32 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
             </h4>
             <div className="text-sm text-yellow-700 mt-2 space-y-2">
               <p>
-                {locale === 'zh' 
+                {locale === 'zh'
                   ? '您的疼痛数据包含敏感医疗信息。请注意以下事项：'
                   : 'Your pain data contains sensitive medical information. Please note the following:'
                 }
               </p>
               <ul className="list-disc list-inside space-y-1 text-xs">
                 <li>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '导出的报告包含个人健康数据，请妥善保管'
                     : 'Exported reports contain personal health data, please store securely'
                   }
                 </li>
                 <li>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '与医生分享时，建议使用安全的传输方式'
                     : 'When sharing with doctors, use secure transmission methods'
                   }
                 </li>
                 <li>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '不建议通过电子邮件或社交媒体分享报告'
                     : 'Avoid sharing reports via email or social media'
                   }
                 </li>
                 <li>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '所有数据处理均在本地进行，不会上传到服务器'
                     : 'All data processing is done locally, no data is uploaded to servers'
                   }
@@ -721,7 +721,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
               {locale === 'zh' ? '医疗报告用途' : 'Medical Report Usage'}
             </h4>
             <p className="text-sm text-blue-700 mt-1">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? '此报告专为医疗咨询设计，包含专业的数据分析和建议。建议在就医时携带此报告，以便医生更好地了解您的疼痛模式。'
                 : 'This report is designed for medical consultations and includes professional data analysis and recommendations. We recommend bringing this report to medical appointments to help doctors better understand your pain patterns.'
               }
@@ -801,7 +801,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
             {locale === 'zh' ? '内容预览' : 'Content Preview'}
           </h4>
         </div>
-        <div 
+        <div
           ref={previewRef}
           className="p-4 bg-white min-h-[300px]"
           dangerouslySetInnerHTML={{ __html: previewContent }}
@@ -823,7 +823,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
 
       {/* Progress bar */}
       <div className="w-full bg-gray-200 rounded-full h-3">
-        <div 
+        <div
           className="bg-primary-600 h-3 rounded-full transition-all duration-300"
           style={{ width: `${exportProgress}%` }}
         />
@@ -880,26 +880,26 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
                 {locale === 'zh' ? '导出成功！' : 'Export Successful!'}
               </h4>
               <p className="text-sm text-green-600 mt-1">
-                {locale === 'zh' 
+                {locale === 'zh'
                   ? `您的${exportFormat.toUpperCase()}报告已成功生成并下载。文件名：pain-report-${dateRange.startDate}-to-${dateRange.endDate}.${exportFormat}`
                   : `Your ${exportFormat.toUpperCase()} report has been successfully generated and downloaded. Filename: pain-report-${dateRange.startDate}-to-${dateRange.endDate}.${exportFormat}`
                 }
               </p>
               <div className="mt-2 text-xs text-green-600">
                 <p>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '• 请检查您的下载文件夹'
                     : '• Please check your downloads folder'
                   }
                 </p>
                 <p>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '• 报告包含您选择的所有数据和分析'
                     : '• Report includes all selected data and analysis'
                   }
                 </p>
                 <p>
-                  {locale === 'zh' 
+                  {locale === 'zh'
                     ? '• 可以安全地与医疗专业人员分享'
                     : '• Safe to share with healthcare professionals'
                   }
@@ -984,7 +984,7 @@ export default function ExportTab({ locale, records, onExport }: ExportTabProps)
             {locale === 'zh' ? '没有可导出的数据' : 'No Data to Export'}
           </h3>
           <p className="text-gray-600 mb-6 max-w-md mx-auto">
-            {locale === 'zh' 
+            {locale === 'zh'
               ? '您还没有任何疼痛记录。请先添加一些疼痛记录，然后再返回此处导出报告。'
               : 'You don\'t have any pain records yet. Please add some pain records first, then return here to export reports.'
             }

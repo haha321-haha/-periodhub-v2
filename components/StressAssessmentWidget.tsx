@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { PrivacyNotice } from "@/components/PrivacyNotice";
 import { LocalStorageManager } from "@/lib/localStorage";
-import { 
-  trackAssessmentStart, 
+import {
+  trackAssessmentStart,
   trackAssessmentComplete,
   generateAnonymousUserId
 } from "@/lib/ab-test-tracking";
@@ -19,7 +19,7 @@ const StressRadarChart = dynamic(() => import('@/components/StressRadarChart').t
 export default function StressAssessmentWidget() {
   const t = useTranslations("stressManagement");
   const ui = useTranslations("ui");
-  
+
   const [userId] = useState(() => generateAnonymousUserId());
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -108,14 +108,14 @@ export default function StressAssessmentWidget() {
       setTimeout(() => {
         const score = calculateScore(newAnswers);
         const { level } = getStressLevel(score);
-        
+
         LocalStorageManager.saveAssessment({
           answers: newAnswers,
           score,
           stressLevel: level,
           isPremium: newAnswers.length > FREE_QUESTIONS
         });
-        
+
         setStressScore(score);
         setStressLevel(level);
         setShowResults(true);
@@ -136,34 +136,34 @@ export default function StressAssessmentWidget() {
     // 获取当前所有的答案，包括最新的
     const currentAnswers = [...answers];
     console.log('Skip paywall clicked, current answers:', currentAnswers);
-    
+
     // 确保answers数组有效，至少有5个答案
     if (!currentAnswers || currentAnswers.length < FREE_QUESTIONS) {
       console.error('Not enough answers available for calculation');
       return;
     }
-    
+
     const score = calculateScore(currentAnswers);
     const { level } = getStressLevel(score);
-    
+
     console.log('Calculated score:', score, 'Level:', level);
-    
+
     LocalStorageManager.saveAssessment({
       answers: currentAnswers,
       score,
       stressLevel: level,
       isPremium: false
     });
-    
+
     // 先隐藏 paywall，然后显示结果
     setShowPaywall(false);
     setStressScore(score);
     setStressLevel(level);
     setShowResults(true);
-    
+
     // 追踪评估完成
     trackAssessmentComplete(userId, score, currentAnswers);
-    
+
     console.log('Results view should now be visible');
   };
 
@@ -220,7 +220,7 @@ export default function StressAssessmentWidget() {
         description: "Go to bed and wake up at consistent times. Create a relaxing bedtime routine to improve sleep quality."
       },
       {
-        title: "Practice Stress Relief Techniques", 
+        title: "Practice Stress Relief Techniques",
         description: "Try deep breathing exercises, meditation, or gentle yoga for 10-15 minutes daily to manage stress."
       },
       {
@@ -237,7 +237,7 @@ export default function StressAssessmentWidget() {
     if (answers[1] >= 2) { // 睡眠问题
       steps[0].description = "Focus on improving sleep hygiene - avoid screens 1 hour before bed, keep bedroom cool and dark.";
     }
-    
+
     if (answers[0] >= 2) { // 工作压力问题
       steps[2].description = "Break large tasks into smaller ones, delegate when possible, and practice saying no to additional responsibilities.";
     }
@@ -256,7 +256,7 @@ export default function StressAssessmentWidget() {
   const getPersonalizedRecommendations = (answers: number[], level: string) => {
     const recommendations = [];
     const avgScore = answers.reduce((sum, answer) => sum + answer, 0) / answers.length;
-    
+
     if (avgScore <= 1) {
       recommendations.push(
         {
@@ -297,7 +297,7 @@ export default function StressAssessmentWidget() {
         }
       );
     }
-    
+
     return recommendations;
   };
 
@@ -438,7 +438,7 @@ export default function StressAssessmentWidget() {
         {/* Radar Chart */}
         <div className="mb-6">
           <Suspense fallback={<div className="flex justify-center items-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>}>
-            <StressRadarChart 
+            <StressRadarChart
               scores={convertAnswersToRadarData(answers)}
               className="border-2 border-blue-200"
             />
@@ -452,8 +452,8 @@ export default function StressAssessmentWidget() {
           </h3>
           <div className="space-y-3">
             {getPersonalizedRecommendations(answers, stressLevel).map((recommendation, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg"
               >
                 <span className="text-2xl">{recommendation.emoji}</span>

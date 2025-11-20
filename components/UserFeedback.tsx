@@ -62,20 +62,20 @@ export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackPr
     try {
     // Save to local storage
     saveFeedbackToLocal(feedback);
-    
+
     // Send to analytics service (simulated)
     await sendFeedbackToAnalytics(feedback);
-      
+
       setIsSubmitted(true);
       onSubmit?.(feedback);
-      
+
       // 3秒后重置
       setTimeout(() => {
         setIsSubmitted(false);
         setRating(0);
         setComment('');
       }, 3000);
-      
+
       } catch (error) {
       console.error('Feedback submission failed:', error);
     } finally {
@@ -110,7 +110,7 @@ export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackPr
         <span className="text-xl">💬</span>
         <h3 className="text-lg font-semibold text-gray-800">{t('title')}</h3>
       </div>
-      
+
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* 评分 */}
         <div>
@@ -124,8 +124,8 @@ export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackPr
                 type="button"
                 onClick={() => setRating(star)}
                 className={`text-2xl transition-colors ${
-                  star <= rating 
-                    ? 'text-yellow-400' 
+                  star <= rating
+                    ? 'text-yellow-400'
                     : 'text-gray-300 hover:text-yellow-300'
                 }`}
               >
@@ -182,12 +182,12 @@ export class FeedbackManager {
   static saveFeedback(feedback: FeedbackData): void {
     const existing = this.getAllFeedback();
     existing.push(feedback);
-    
+
     // 只保留最近100条反馈
     if (existing.length > 100) {
       existing.splice(0, existing.length - 100);
     }
-    
+
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(existing));
   }
 
@@ -210,12 +210,12 @@ export class FeedbackManager {
   }
 
   static getAverageRating(feature?: string): number {
-    const feedback = feature 
+    const feedback = feature
       ? this.getFeedbackByFeature(feature)
       : this.getAllFeedback();
-    
+
     if (feedback.length === 0) return 0;
-    
+
     const sum = feedback.reduce((acc, f) => acc + f.rating, 0);
     return Math.round((sum / feedback.length) * 10) / 10;
   }
@@ -239,7 +239,7 @@ function saveFeedbackToLocal(feedback: FeedbackData): void {
 async function sendFeedbackToAnalytics(feedback: FeedbackData): Promise<void> {
   // 实际项目中这里应该发送到您的分析服务
   console.log('Sending feedback to analytics service:', feedback);
-  
+
   // Simulate API call
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -304,10 +304,10 @@ export function FeedbackStats({ feature }: { feature?: string }) {
 
   // 实际项目中这里应该从API获取数据
   const refreshStats = () => {
-    const feedback = feature 
+    const feedback = feature
       ? FeedbackManager.getFeedbackByFeature(feature)
       : FeedbackManager.getAllFeedback();
-    
+
     setStats({
       total: feedback.length,
       average: FeedbackManager.getAverageRating(feature),
@@ -328,7 +328,7 @@ export function FeedbackStats({ feature }: { feature?: string }) {
           {t('common.refresh')}
         </button>
       </div>
-      
+
       <div className="grid grid-cols-2 gap-4 text-sm">
         <div>
           <div className="text-2xl font-bold text-blue-600">{stats.total}</div>
@@ -339,7 +339,7 @@ export function FeedbackStats({ feature }: { feature?: string }) {
           <div className="text-gray-600">{t('userFeedback.stats.averageRating')}</div>
         </div>
       </div>
-      
+
       {stats.recent.length > 0 && (
         <div className="mt-3 pt-3 border-t border-gray-200">
           <div className="text-xs text-gray-500 mb-2">{t('userFeedback.stats.recentFeedback')}</div>

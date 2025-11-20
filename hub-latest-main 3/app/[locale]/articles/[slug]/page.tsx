@@ -180,14 +180,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   const article = await getArticleBySlug(slug, locale);
-  
+
   if (!article) {
     return {
       title: 'Article Not Found',
       description: 'The requested article could not be found.'
     };
   }
-  
+
   const title = locale === 'zh' ? (article.title_zh || article.title) : article.title;
   const description = locale === 'zh' ? (article.summary_zh || article.summary) : article.summary;
   const seoTitle = locale === 'zh' ? (article.seo_title_zh || title) : (article.seo_title || title);
@@ -250,10 +250,10 @@ export default async function ArticlePage({
 
   // 🔍 生产性能监控开始
   const requestStart = Date.now();
-  
+
   try {
     console.log(`[PROD-MONITOR] Request start: ${locale}/${slug} at ${new Date().toISOString()}`);
-    
+
     // 检测冷启动
     const coldStartCheck = Date.now();
     if (!(global as any).isWarm) {
@@ -262,16 +262,16 @@ export default async function ArticlePage({
     } else {
       console.log(`[PROD-MONITOR] Warm start - check: ${Date.now() - coldStartCheck}ms`);
     }
-    
+
     // 文章获取计时
     const articleFetchStart = Date.now();
     console.log('ArticlePage - Processing:', { locale, slug });
-    
+
     const article = await getArticleBySlug(slug, locale);
     const articleFetchTime = Date.now() - articleFetchStart;
     console.log(`[PROD-MONITOR] Article fetch: ${articleFetchTime}ms`);
     console.log('ArticlePage - Article found:', !!article, article?.title);
-    
+
     if (!article) {
       console.error(`Article not found: ${slug} for locale: ${locale}`);
       notFound();
@@ -326,7 +326,7 @@ export default async function ArticlePage({
       <div className="space-y-6 sm:space-y-8">
         {/* Breadcrumb */}
         <div className="container-custom">
-          <ServerBreadcrumb 
+          <ServerBreadcrumb
             locale={locale}
             items={[
               { label: locale === 'zh' ? '首页' : 'Home', href: `/${locale}` },

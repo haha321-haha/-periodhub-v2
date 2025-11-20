@@ -135,7 +135,7 @@ interface WorkplaceWellnessStore extends WorkplaceWellnessState {
   addPreferenceChange: (change: PreferenceChange) => void;
   getPreferenceHistory: () => PreferenceChange[];
   clearPreferenceHistory: () => void;
-  
+
   // 推荐反馈 Actions
   addRecommendationFeedback: (feedback: Omit<RecommendationFeedback, 'timestamp'>) => void;
   clearIgnoredItem: (id: string) => void;
@@ -176,7 +176,7 @@ const getInitialState = (): WorkplaceWellnessState => ({
   batchExportQueue: null,
   exportHistory: [],
   systemSettings: DEFAULT_SYSTEM_SETTINGS,
-  
+
   // 推荐反馈
   recommendationFeedback: {
     feedbacks: [],
@@ -195,9 +195,9 @@ const createStore = () => {
   if (typeof window === 'undefined') {
     throw new Error('Store can only be created on the client side');
   }
-  
+
   if (storeInstance) return storeInstance;
-  
+
   storeInstance = create<WorkplaceWellnessStore>()(
   persist(
     (set, get) => ({
@@ -245,14 +245,14 @@ const createStore = () => {
                   index === existingIndex ? record : r,
                 )
               : [...state.calendar.periodData, record];
-          
+
           console.log("addPeriodRecord - before cleanup:", updatedPeriodData);
 
           // 数据清理：只保留最近 6 个月的记录，适当放宽限制
           // 这样图表可以显示更完整的数据，同时避免存储过多
           const sixMonthsAgo = new Date();
           sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-          
+
           // 只在数据量超过50条时才进行清理，避免频繁清理
           if (updatedPeriodData.length > 50) {
             updatedPeriodData = updatedPeriodData.filter((r) => {
@@ -263,30 +263,30 @@ const createStore = () => {
                 return false; // 无效日期，删除
               }
             });
-            
+
             // 按日期排序（最新的在前）
-            updatedPeriodData.sort((a, b) => 
+            updatedPeriodData.sort((a, b) =>
               new Date(b.date).getTime() - new Date(a.date).getTime()
             );
-            
+
             // 如果仍然超过40条，只保留最近40条
             if (updatedPeriodData.length > 40) {
               updatedPeriodData = updatedPeriodData.slice(0, 40);
             console.warn("⚠️ 数据过多，已自动清理，只保留最近 40 条记录");
           }
-          
+
           console.log("addPeriodRecord - after cleanup:", updatedPeriodData);
           }
 
           // 全面数据清理：清理其他累积数据
-          const cleanedExportHistory = state.exportHistory.length > 5 
-            ? state.exportHistory.slice(-5) 
+          const cleanedExportHistory = state.exportHistory.length > 5
+            ? state.exportHistory.slice(-5)
             : state.exportHistory;
-          
+
           const cleanedFeedbacks = state.recommendationFeedback.feedbacks.length > 20
             ? state.recommendationFeedback.feedbacks.slice(-20)
             : state.recommendationFeedback.feedbacks;
-          
+
           const cleanedExportTemplates = state.exportTemplates.length > 5
             ? state.exportTemplates.slice(-5)
             : state.exportTemplates;
@@ -778,20 +778,20 @@ const createStore = () => {
       clearPreferenceHistory: () => {
         // 清除偏好设置变更历史
       },
-      
+
       // 推荐反馈 Actions
       addRecommendationFeedback: (feedback) => {
         const newFeedback: RecommendationFeedback = {
           ...feedback,
           timestamp: new Date().toISOString(),
         };
-        
+
         set((state) => {
           const newState = {
             ...state.recommendationFeedback,
             feedbacks: [...state.recommendationFeedback.feedbacks, newFeedback],
           };
-          
+
           // 更新忽略列表
           if (feedback.action === 'dismissed') {
             newState.ignoredItems = [
@@ -799,7 +799,7 @@ const createStore = () => {
               feedback.recommendationId,
             ];
           }
-          
+
           // 更新收藏列表
           if (feedback.action === 'saved') {
             newState.savedItems = [
@@ -807,22 +807,22 @@ const createStore = () => {
               feedback.recommendationId,
             ];
           }
-          
+
           // 更新评分
           if (feedback.rating) {
             const existingRating = state.recommendationFeedback.itemRatings[feedback.recommendationId];
             newState.itemRatings = {
               ...state.recommendationFeedback.itemRatings,
-              [feedback.recommendationId]: existingRating 
-                ? (existingRating + feedback.rating) / 2 
+              [feedback.recommendationId]: existingRating
+                ? (existingRating + feedback.rating) / 2
                 : feedback.rating,
             };
           }
-          
+
           return { recommendationFeedback: newState };
         });
       },
-      
+
       clearIgnoredItem: (id) => {
         set((state) => ({
           recommendationFeedback: {
@@ -831,7 +831,7 @@ const createStore = () => {
           },
         }));
       },
-      
+
       clearAllIgnored: () => {
         set((state) => ({
           recommendationFeedback: {
@@ -840,7 +840,7 @@ const createStore = () => {
           },
         }));
       },
-      
+
       getFeedbackHistory: () => {
         return get().recommendationFeedback;
       },
@@ -868,7 +868,7 @@ const createStore = () => {
     }),
     {
       name: "workplace-wellness-storage",
-      storage: typeof window !== "undefined" 
+      storage: typeof window !== "undefined"
         ? createJSONStorage(() => {
             // 双重检查：确保在客户端
             if (typeof window === 'undefined') {
@@ -949,7 +949,7 @@ const createStore = () => {
                     (error.code === 22 || error.name === "QuotaExceededError")
                   ) {
                     console.warn("Storage quota exceeded, attempting cleanup...");
-                    
+
                     // 先尝试清理所有 workplace-wellness 相关的旧数据
                     try {
                       if (typeof window !== 'undefined') {
@@ -1023,9 +1023,9 @@ const createStore = () => {
                       },
                     },
                   };
-                      
+
                       const minimalDataString = JSON.stringify(minimalData);
-                      
+
                       // 尝试保存最小数据集到 localStorage
                       try {
                         if (typeof window !== 'undefined') {
@@ -1153,29 +1153,29 @@ const createStore = () => {
           }
         } else if (state) {
           console.log("✅ Zustand store rehydrated successfully");
-          
+
           // 确保基础结构存在
           if (!state.calendar) {
-            state.calendar = { 
-              currentDate: new Date(), 
-              selectedDate: null, 
-              showAddForm: false, 
-              periodData: [] 
+            state.calendar = {
+              currentDate: new Date(),
+              selectedDate: null,
+              showAddForm: false,
+              periodData: []
             };
           }
-          
+
           // 处理 periodData
           if (!state.calendar.periodData || state.calendar.periodData.length === 0) {
             console.log("📊 未找到已保存的经期数据，使用示例数据");
             state.calendar.periodData = mockPeriodData;
           } else {
             console.log(`✅ 成功恢复 ${state.calendar.periodData.length} 条经期记录`);
-            
+
             // 验证数据结构
-            state.calendar.periodData = state.calendar.periodData.filter(record => 
+            state.calendar.periodData = state.calendar.periodData.filter(record =>
               record && typeof record === 'object' && record.date
             );
-            
+
             if (state.calendar.periodData.length > 0) {
               console.log(`✅ 验证后保留 ${state.calendar.periodData.length} 条有效记录`);
             } else {
@@ -1183,15 +1183,15 @@ const createStore = () => {
               state.calendar.periodData = mockPeriodData;
             }
           }
-          
+
           // 确保 userPreferences 结构完整
-          if (!state.userPreferences || 
-              !state.userPreferences.ui || 
+          if (!state.userPreferences ||
+              !state.userPreferences.ui ||
               typeof state.userPreferences.ui !== 'object' ||
               !state.userPreferences.ui.theme) {
             // 如果 userPreferences 不存在或不完整，完全重建
-            if (!state.userPreferences || 
-                !state.userPreferences.ui || 
+            if (!state.userPreferences ||
+                !state.userPreferences.ui ||
                 typeof state.userPreferences.ui !== 'object' ||
                 !state.userPreferences.ui.theme) {
               console.warn('🔧 数据恢复后检测到 userPreferences 不完整，自动修复...');
@@ -1259,24 +1259,24 @@ const createStore = () => {
             // 如果 userPreferences 完全缺失，使用默认值
             state.userPreferences = DEFAULT_USER_PREFERENCES;
           }
-          
+
           // 触发恢复完成事件
           if (typeof window !== 'undefined') {
-            window.dispatchEvent(new CustomEvent('store-rehydrate-complete', { 
-              detail: { 
+            window.dispatchEvent(new CustomEvent('store-rehydrate-complete', {
+              detail: {
                 recordCount: state.calendar.periodData.length,
                 hasValidData: state.calendar.periodData.length > 0
               }
             }));
           }
-          
+
           console.log("Zustand store rehydrated successfully:", state);
         }
       },
     },
   ),
   );
-  
+
   return storeInstance;
 };
 
@@ -1431,7 +1431,7 @@ export const useUserPreferences = (): UserPreferences => {
   const preferences = store((state: WorkplaceWellnessStore) => state.userPreferences);
   // 深度检查，确保返回的值结构完整
   if (
-    !preferences || 
+    !preferences ||
     typeof preferences !== 'object' ||
     !preferences.ui ||
     typeof preferences.ui !== 'object' ||
@@ -1496,7 +1496,7 @@ export const useWorkplaceWellnessActions = (): WorkplaceWellnessActions => {
       resetState: () => {},
     };
   }
-  
+
   const store = useWorkplaceWellnessStore as any;
   const setActiveTab = store((state: WorkplaceWellnessStore) => state.setActiveTab);
   const updateCalendar = store(

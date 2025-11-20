@@ -177,7 +177,7 @@ export function calculatePHQ9Score(answers: { questionId: string; value: number 
   const phq9Answers = answers.filter(a => a.questionId.startsWith('phq9_'));
   const score = phq9Answers.reduce((sum, answer) => sum + answer.value, 0);
   const range = getPHQ9ScoreLevel(score);
-  
+
   return {
     score,
     level: range.level,

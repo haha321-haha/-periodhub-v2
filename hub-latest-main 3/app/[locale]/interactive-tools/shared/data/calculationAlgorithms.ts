@@ -156,7 +156,7 @@ export function calculateWorkplaceImpact(answers: Record<string, any>, locale: s
       case 'na': score += 15; break;
     }
   }
-  
+
   score = Math.round(score);
 
   // 职场档案分类和建议

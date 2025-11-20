@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 // 生成结构化数据
 export function generateStructuredData(locale: string, translations: any) {
   const isZh = locale === 'zh';
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'MedicalWebPage',
@@ -64,7 +64,7 @@ export function generateStructuredData(locale: string, translations: any) {
           'name': isZh ? '子宫内膜异位症' : 'Endometriosis'
         },
         {
-          '@type': 'MedicalCondition', 
+          '@type': 'MedicalCondition',
           'name': isZh ? '子宫肌瘤' : 'Uterine Fibroids'
         }
       ]
@@ -75,7 +75,7 @@ export function generateStructuredData(locale: string, translations: any) {
 // 生成FAQ结构化数据
 export function generateFAQStructuredData(locale: string) {
   const isZh = locale === 'zh';
-  
+
   const faqs = isZh ? [
     {
       question: '什么程度的痛经需要就医？',
@@ -95,7 +95,7 @@ export function generateFAQStructuredData(locale: string) {
       answer: '7 main warning signs include: sudden severe pain, abnormally heavy bleeding, fever and systemic symptoms, sudden change in pain pattern, non-menstrual pain, progressively worsening pain, and medication ineffectiveness.'
     }
   ];
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -113,7 +113,7 @@ export function generateFAQStructuredData(locale: string) {
 // 生成HowTo结构化数据
 export function generateHowToStructuredData(locale: string) {
   const isZh = locale === 'zh';
-  
+
   return {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
@@ -133,12 +133,12 @@ export function generateEnhancedMetadata(locale: string, translations: any): Met
   const isZh = locale === 'zh';
   const baseUrl = 'https://www.periodhub.health';
   const currentUrl = `${baseUrl}/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`;
-  
+
   return {
     title: translations.meta.title,
     description: translations.meta.description,
     keywords: translations.meta.keywords,
-    
+
     // Open Graph
     openGraph: {
       title: translations.meta.title,
@@ -158,7 +158,7 @@ export function generateEnhancedMetadata(locale: string, translations: any): Met
         }
       ]
     },
-    
+
     // Twitter Card
     twitter: {
       card: 'summary_large_image',
@@ -168,7 +168,7 @@ export function generateEnhancedMetadata(locale: string, translations: any): Met
       creator: '@PeriodHubHealth',
       site: '@PeriodHubHealth'
     },
-    
+
     // 规范链接和多语言
     alternates: {
       canonical: currentUrl,
@@ -177,7 +177,7 @@ export function generateEnhancedMetadata(locale: string, translations: any): Met
         'en': `${baseUrl}/en/articles/when-to-seek-medical-care-comprehensive-guide`
       }
     },
-    
+
     // 机器人指令
     robots: {
       index: true,
@@ -197,14 +197,14 @@ export function generateEnhancedMetadata(locale: string, translations: any): Met
 export function generateBreadcrumbs(locale: string) {
   const isZh = locale === 'zh';
   const baseUrl = 'https://www.periodhub.health';
-  
+
   return [
     {
       name: isZh ? '首页' : 'Home',
       url: `${baseUrl}/${locale}`
     },
     {
-      name: isZh ? '文章' : 'Articles', 
+      name: isZh ? '文章' : 'Articles',
       url: `${baseUrl}/${locale}/articles`
     },
     {

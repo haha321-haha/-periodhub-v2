@@ -13,7 +13,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const title = locale === 'zh' ? '隐私政策' : 'Privacy Policy';
-  const description = locale === 'zh' 
+  const description = locale === 'zh'
     ? '了解我们如何收集、使用和保护您的个人信息。'
     : 'Learn how we collect, use, and protect your personal information.';
 
@@ -259,7 +259,7 @@ export default async function PrivacyPolicyPage({
                 <h2 className="text-xl font-semibold text-neutral-800 mb-4">
                   {section.title}
                 </h2>
-                <div 
+                <div
                   className="prose prose-neutral max-w-none"
                   dangerouslySetInnerHTML={{ __html: section.content }}
                 />
@@ -277,7 +277,7 @@ export default async function PrivacyPolicyPage({
               {locale === 'zh' ? '有疑问？' : 'Questions?'}
             </h2>
             <p className="text-neutral-600 mb-6">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? '如果您对我们的隐私政策有任何疑问，请随时联系我们。'
                 : 'If you have any questions about our Privacy Policy, please feel free to contact us.'
               }

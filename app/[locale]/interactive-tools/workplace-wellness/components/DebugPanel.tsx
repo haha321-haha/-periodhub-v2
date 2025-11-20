@@ -7,11 +7,11 @@ export default function DebugPanel() {
   const calendar = useCalendar();
   const { addPeriodRecord } = useWorkplaceWellnessActions();
   const [isVisible, setIsVisible] = useState(false);
-  
+
   const checkData = () => {
     const storeData = localStorage.getItem('workplace-wellness-storage');
     console.log('Raw localStorage data:', storeData);
-    
+
     if (storeData) {
       try {
         const parsed = JSON.parse(storeData);
@@ -22,7 +22,7 @@ export default function DebugPanel() {
       }
     }
   };
-  
+
   const addTestRecord = () => {
     const today = new Date().toISOString().split('T')[0];
     addPeriodRecord({
@@ -32,16 +32,16 @@ export default function DebugPanel() {
       flow: 'medium'
     });
   };
-  
+
   // 只在开发环境显示
   if (typeof process !== 'undefined' && process.env?.NODE_ENV !== 'development') return null;
-  
+
   // 额外检查：确保不会在生产环境意外显示
   if (typeof window !== 'undefined' && window.location?.hostname !== 'localhost') return null;
-  
+
   if (!isVisible) {
     return (
-      <button 
+      <button
         onClick={() => setIsVisible(true)}
         style={{
           position: 'fixed',
@@ -59,9 +59,9 @@ export default function DebugPanel() {
       </button>
     );
   }
-  
+
   return (
-    <div 
+    <div
       style={{
         position: 'fixed',
         bottom: 10,
@@ -77,20 +77,20 @@ export default function DebugPanel() {
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
         <h3 style={{ margin: 0 }}>Debug Panel</h3>
-        <button 
+        <button
           onClick={() => setIsVisible(false)}
           style={{ background: 'none', border: 'none', cursor: 'pointer' }}
         >
           ✕
         </button>
       </div>
-      
+
       <div style={{ marginBottom: '12px' }}>
         <strong>当前记录数:</strong> {calendar.periodData?.length || 0}
       </div>
-      
+
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <button 
+        <button
           onClick={checkData}
           style={{
             background: '#10b981',
@@ -103,8 +103,8 @@ export default function DebugPanel() {
         >
           检查数据
         </button>
-        
-        <button 
+
+        <button
           onClick={addTestRecord}
           style={{
             background: '#f59e0b',
@@ -117,11 +117,11 @@ export default function DebugPanel() {
         >
           添加测试记录
         </button>
-        
-        <button 
+
+        <button
           onClick={() => {
-            const event = new CustomEvent('store-rehydrate-complete', { 
-              detail: { 
+            const event = new CustomEvent('store-rehydrate-complete', {
+              detail: {
                 recordCount: calendar.periodData?.length || 0,
                 hasValidData: (calendar.periodData?.length || 0) > 0
               }
@@ -140,7 +140,7 @@ export default function DebugPanel() {
           触发恢复事件
         </button>
       </div>
-      
+
       <div style={{ marginTop: '12px', fontSize: '12px', color: '#6b7280' }}>
         只在开发环境显示
       </div>

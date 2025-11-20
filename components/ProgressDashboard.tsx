@@ -29,7 +29,7 @@ export default function ProgressDashboard({ locale }: ProgressDashboardProps) {
 
   // 计算统计数据
   const stats = calculateStats(entries);
-  
+
   // 获取最近的5条记录
   const recentEntries = [...entries].reverse().slice(0, 5);
 

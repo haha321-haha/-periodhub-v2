@@ -5,11 +5,11 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { 
-  WorkplaceWellnessState, 
-  CalendarState, 
-  WorkImpactData, 
-  NutritionData, 
+import {
+  WorkplaceWellnessState,
+  CalendarState,
+  WorkImpactData,
+  NutritionData,
   ExportConfig,
   PeriodRecord,
   LeaveTemplate,
@@ -38,7 +38,7 @@ import {
 } from '../types';
 
 // Day 11: 导入默认值
-import { 
+import {
   DEFAULT_USER_PREFERENCES,
   DEFAULT_EXPORT_TEMPLATES,
   DEFAULT_SYSTEM_SETTINGS
@@ -46,38 +46,38 @@ import {
 
 // 扩展状态接口，添加Actions
 interface WorkplaceWellnessStore extends WorkplaceWellnessState {
-  
+
   // 标签页相关Actions
   setActiveTab: (tab: 'calendar' | 'nutrition' | 'export' | 'settings') => void;
-  
+
   // 日历相关Actions
   updateCalendar: (updates: Partial<CalendarState>) => void;
   setCurrentDate: (date: Date) => void;
   setSelectedDate: (date: Date | null) => void;
   toggleAddForm: () => void;
-  
+
   // 工作影响相关Actions
   updateWorkImpact: (updates: Partial<WorkImpactData>) => void;
   setPainLevel: (level: number) => void;
   setEfficiency: (efficiency: number) => void;
   selectTemplate: (templateId: number | null) => void;
-  
+
   // 营养相关Actions
   updateNutrition: (updates: Partial<NutritionData>) => void;
   setSelectedPhase: (phase: string) => void;
   setConstitutionType: (type: string) => void;
   setSearchTerm: (term: string) => void;
-  
+
   // 导出相关Actions
   updateExport: (updates: Partial<ExportConfig>) => void;
   setExportType: (type: string) => void;
   setExportFormat: (format: string) => void;
   setExporting: (exporting: boolean) => void;
-  
+
   // 工具方法
   resetState: () => void;
   getStateSnapshot: () => Partial<WorkplaceWellnessState>;
-  
+
   // Day 11: 用户偏好设置相关Actions
   updateUserPreferences: (updates: Partial<UserPreferences>) => void;
   setTheme: (theme: Theme) => void;
@@ -89,7 +89,7 @@ interface WorkplaceWellnessStore extends WorkplaceWellnessState {
   updateAccessibilitySettings: (updates: Partial<UserPreferences['accessibility']>) => void;
   validateSettings: () => SettingsValidationResult;
   resetPreferences: () => void;
-  
+
   // Day 11: 导出模板相关Actions
   addExportTemplate: (template: Omit<ExportTemplate, 'id' | 'createdAt' | 'updatedAt'>) => void;
   updateExportTemplate: (id: string, updates: Partial<ExportTemplate>) => void;
@@ -97,23 +97,23 @@ interface WorkplaceWellnessStore extends WorkplaceWellnessState {
   setActiveTemplate: (template: ExportTemplate | null) => void;
   loadTemplate: (id: string) => void;
   duplicateTemplate: (id: string) => void;
-  
+
   // Day 11: 批量导出相关Actions
   createBatchExport: (items: Omit<BatchExportItem, 'id' | 'createdAt' | 'status' | 'progress'>[]) => void;
   updateBatchItemStatus: (itemId: string, status: BatchExportItem['status'], progress?: number, error?: string) => void;
   cancelBatchExport: () => void;
   retryFailedItems: () => void;
   clearBatchExport: () => void;
-  
+
   // Day 11: 导出历史相关Actions
   addExportHistory: (history: Omit<ExportHistory, 'id' | 'createdAt'>) => void;
   clearExportHistory: () => void;
   deleteExportHistory: (id: string) => void;
-  
+
   // Day 11: 系统设置相关Actions
   updateSystemSettings: (updates: Partial<SystemSettings>) => void;
   resetSystemSettings: () => void;
-  
+
   // Day 11: 偏好设置变更追踪
   addPreferenceChange: (change: PreferenceChange) => void;
   getPreferenceHistory: () => PreferenceChange[];
@@ -143,7 +143,7 @@ const initialState: WorkplaceWellnessState = {
     format: 'json' as ExportFormat,
     isExporting: false
   },
-  
+
   // Day 11: 扩展状态
   userPreferences: DEFAULT_USER_PREFERENCES,
   exportTemplates: DEFAULT_EXPORT_TEMPLATES,
@@ -169,19 +169,19 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       updateCalendar: (updates) => set((state) => ({
         calendar: { ...state.calendar, ...updates }
       })),
-      
+
       setCurrentDate: (date) => set((state) => ({
         calendar: { ...state.calendar, currentDate: date }
       })),
-      
+
       setSelectedDate: (date) => set((state) => ({
         calendar: { ...state.calendar, selectedDate: date }
       })),
-      
+
       toggleAddForm: () => set((state) => ({
-        calendar: { 
-          ...state.calendar, 
-          showAddForm: !state.calendar.showAddForm 
+        calendar: {
+          ...state.calendar,
+          showAddForm: !state.calendar.showAddForm
         }
       })),
 
@@ -189,18 +189,18 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       updateWorkImpact: (updates) => set((state) => ({
         workImpact: { ...state.workImpact, ...updates }
       })),
-      
+
       setPainLevel: (level) => set((state) => ({
-        workImpact: { 
-          ...state.workImpact, 
+        workImpact: {
+          ...state.workImpact,
           painLevel: level as any // 临时类型断言
         }
       })),
-      
+
       setEfficiency: (efficiency) => set((state) => ({
         workImpact: { ...state.workImpact, efficiency }
       })),
-      
+
       selectTemplate: (templateId) => set((state) => ({
         workImpact: { ...state.workImpact, selectedTemplateId: templateId }
       })),
@@ -209,15 +209,15 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       updateNutrition: (updates) => set((state) => ({
         nutrition: { ...state.nutrition, ...updates }
       })),
-      
+
       setSelectedPhase: (phase) => set((state) => ({
         nutrition: { ...state.nutrition, selectedPhase: phase as MenstrualPhase }
       })),
-      
+
       setConstitutionType: (type) => set((state) => ({
         nutrition: { ...state.nutrition, constitutionType: type as TCMConstitution }
       })),
-      
+
       setSearchTerm: (term) => set((state) => ({
         nutrition: { ...state.nutrition, searchTerm: term }
       })),
@@ -226,15 +226,15 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       updateExport: (updates) => set((state) => ({
         export: { ...state.export, ...updates }
       })),
-      
+
       setExportType: (type) => set((state) => ({
         export: { ...state.export, exportType: type as ExportType }
       })),
-      
+
       setExportFormat: (format) => set((state) => ({
         export: { ...state.export, format: format as ExportFormat }
       })),
-      
+
       setExporting: (exporting) => set((state) => ({
         export: { ...state.export, isExporting: exporting }
       })),
@@ -243,61 +243,61 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       updateUserPreferences: (updates) => set((state) => ({
         userPreferences: { ...state.userPreferences, ...updates }
       })),
-      
+
       setTheme: (theme) => set((state) => ({
         userPreferences: {
           ...state.userPreferences,
           ui: { ...state.userPreferences.ui, theme }
         }
       })),
-      
+
       setFontSize: (fontSize) => set((state) => ({
         userPreferences: {
           ...state.userPreferences,
           ui: { ...state.userPreferences.ui, fontSize }
         }
       })),
-      
+
       toggleAnimations: () => set((state) => ({
         userPreferences: {
           ...state.userPreferences,
           ui: { ...state.userPreferences.ui, animations: !state.userPreferences.ui.animations }
         }
       })),
-      
+
       toggleCompactMode: () => set((state) => ({
         userPreferences: {
           ...state.userPreferences,
           ui: { ...state.userPreferences.ui, compactMode: !state.userPreferences.ui.compactMode }
         }
       })),
-      
+
       updateNotificationSettings: (updates) => set((state) => ({
         userPreferences: {
           ...state.userPreferences,
           notifications: { ...state.userPreferences.notifications, ...updates }
         }
       })),
-      
+
       updatePrivacySettings: (updates) => set((state) => ({
         userPreferences: {
           ...state.userPreferences,
           privacy: { ...state.userPreferences.privacy, ...updates }
         }
       })),
-      
+
       updateAccessibilitySettings: (updates) => set((state) => ({
         userPreferences: {
           ...state.userPreferences,
           accessibility: { ...state.userPreferences.accessibility, ...updates }
         }
       })),
-      
+
       validateSettings: () => {
         const state = get();
         const errors: SettingsValidationResult['errors'] = [];
         const warnings: SettingsValidationResult['warnings'] = [];
-        
+
         // 验证时间格式
         if (!/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(state.userPreferences.notifications.reminderTime)) {
           errors.push({
@@ -306,7 +306,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
             message: 'Invalid time format'
           });
         }
-        
+
         // 验证提醒天数
         if (!state.userPreferences.notifications.reminderDays.every(day => day >= 0 && day <= 6)) {
           errors.push({
@@ -315,7 +315,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
             message: 'Invalid reminder days'
           });
         }
-        
+
         // 验证文本缩放
         if (state.userPreferences.accessibility.textScaling < 0.8 || state.userPreferences.accessibility.textScaling > 2.0) {
           errors.push({
@@ -324,14 +324,14 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
             message: 'Invalid text scaling'
           });
         }
-        
+
         return {
           isValid: errors.length === 0,
           errors,
           warnings
         };
       },
-      
+
       resetPreferences: () => set((state) => ({
         userPreferences: DEFAULT_USER_PREFERENCES
       })),
@@ -344,12 +344,12 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         };
-        
+
         set((state) => ({
           exportTemplates: [...state.exportTemplates, newTemplate]
         }));
       },
-      
+
       updateExportTemplate: (id, updates) => set((state) => ({
         exportTemplates: state.exportTemplates.map(template =>
           template.id === id
@@ -357,14 +357,14 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
             : template
         )
       })),
-      
+
       deleteExportTemplate: (id) => set((state) => ({
         exportTemplates: state.exportTemplates.filter(template => template.id !== id),
         activeTemplate: state.activeTemplate?.id === id ? null : state.activeTemplate
       })),
-      
+
       setActiveTemplate: (template) => set({ activeTemplate: template }),
-      
+
       loadTemplate: (id) => {
         const state = get();
         const template = state.exportTemplates.find(t => t.id === id);
@@ -372,7 +372,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           set({ activeTemplate: template });
         }
       },
-      
+
       duplicateTemplate: (id) => {
         const state = get();
         const template = state.exportTemplates.find(t => t.id === id);
@@ -400,7 +400,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           progress: 0,
           createdAt: new Date().toISOString()
         }));
-        
+
         const batchQueue: BatchExportQueue = {
           id: `batch_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
           name: `Batch Export ${new Date().toLocaleDateString()}`,
@@ -411,23 +411,23 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           failedItems: 0,
           createdAt: new Date().toISOString()
         };
-        
+
         set({ batchExportQueue: batchQueue });
       },
-      
+
       updateBatchItemStatus: (itemId, status, progress = 0, error) => {
         set((state) => {
           if (!state.batchExportQueue) return state;
-          
+
           const updatedItems = state.batchExportQueue.items.map(item =>
             item.id === itemId
               ? { ...item, status, progress, error, completedAt: status === 'completed' ? new Date().toISOString() : undefined }
               : item
           );
-          
+
           const completedItems = updatedItems.filter(item => item.status === 'completed').length;
           const failedItems = updatedItems.filter(item => item.status === 'failed').length;
-          
+
           return {
             batchExportQueue: {
               ...state.batchExportQueue,
@@ -439,23 +439,23 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           };
         });
       },
-      
+
       cancelBatchExport: () => set((state) => ({
         batchExportQueue: state.batchExportQueue ? {
           ...state.batchExportQueue,
           status: 'cancelled'
         } : null
       })),
-      
+
       retryFailedItems: () => set((state) => {
         if (!state.batchExportQueue) return state;
-        
+
         const updatedItems = state.batchExportQueue.items.map(item =>
           item.status === 'failed'
             ? { ...item, status: 'pending' as const, progress: 0, error: undefined }
             : item
         );
-        
+
         return {
           batchExportQueue: {
             ...state.batchExportQueue,
@@ -465,7 +465,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           }
         };
       }),
-      
+
       clearBatchExport: () => set({ batchExportQueue: null }),
 
       // Day 11: 导出历史相关Actions
@@ -475,14 +475,14 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
           id: `export_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
           createdAt: new Date().toISOString()
         };
-        
+
         set((state) => ({
           exportHistory: [newHistory, ...state.exportHistory].slice(0, 100) // 保留最近100条记录
         }));
       },
-      
+
       clearExportHistory: () => set({ exportHistory: [] }),
-      
+
       deleteExportHistory: (id) => set((state) => ({
         exportHistory: state.exportHistory.filter(history => history.id !== id)
       })),
@@ -491,7 +491,7 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
       updateSystemSettings: (updates) => set((state) => ({
         systemSettings: { ...state.systemSettings, ...updates }
       })),
-      
+
       resetSystemSettings: () => set({ systemSettings: DEFAULT_SYSTEM_SETTINGS }),
 
       // Day 11: 偏好设置变更追踪
@@ -499,19 +499,19 @@ export const useWorkplaceWellnessStore = create<WorkplaceWellnessStore>()(
         // 这里可以扩展为存储到历史记录中
         console.log('Preference change:', change);
       },
-      
+
       getPreferenceHistory: () => {
         // 这里可以返回偏好设置变更历史
         return [];
       },
-      
+
       clearPreferenceHistory: () => {
         // 清除偏好设置变更历史
       },
 
       // 工具方法
       resetState: () => set(initialState),
-      
+
       getStateSnapshot: () => {
         const state = get();
         return {

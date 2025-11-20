@@ -15,9 +15,9 @@ export function usePainAssessment() {
       try {
         const history = medicalCareGuideStorage.getAssessmentHistory();
         const lastAssessment = medicalCareGuideStorage.getLastAssessment();
-        
+
         setAssessmentHistory(history);
-        
+
         // 如果有最近的评估，恢复疼痛等级
         if (lastAssessment && isRecentAssessment(lastAssessment.timestamp)) {
           setPainLevel(lastAssessment.painLevel);
@@ -40,7 +40,7 @@ export function usePainAssessment() {
     }
 
     setPainLevel(level);
-    
+
     // 获取对应的建议（这里简化处理，实际应该从翻译数据中获取）
     const advice = getPainAdvice(level);
     setCurrentAdvice(advice);
@@ -50,7 +50,7 @@ export function usePainAssessment() {
   const saveAssessment = useCallback((result: AssessmentResult) => {
     try {
       medicalCareGuideStorage.saveAssessmentResult(result);
-      
+
       // 更新本地状态
       setAssessmentHistory(prev => {
         const newHistory = [result, ...prev.slice(0, 9)]; // 保留最近10次
@@ -81,7 +81,7 @@ export function usePainAssessment() {
     const averagePain = painLevels.reduce((sum, level) => sum + level, 0) / painLevels.length;
     const maxPain = Math.max(...painLevels);
     const minPain = Math.min(...painLevels);
-    
+
     const highPainCount = painLevels.filter(level => level >= 7).length;
     const moderatePainCount = painLevels.filter(level => level >= 4 && level < 7).length;
     const lowPainCount = painLevels.filter(level => level < 4).length;
@@ -146,7 +146,7 @@ function isRecentAssessment(timestamp: string): boolean {
   const assessmentTime = new Date(timestamp);
   const now = new Date();
   const hoursDiff = (now.getTime() - assessmentTime.getTime()) / (1000 * 60 * 60);
-  
+
   return hoursDiff < 24;
 }
 

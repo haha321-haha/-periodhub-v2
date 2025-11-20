@@ -58,4 +58,3 @@ echo ""
 
 echo "✅ 所有 pre-commit 检查通过！可以安全提交。"
 exit 0
-

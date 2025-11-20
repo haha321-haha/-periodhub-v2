@@ -7,9 +7,9 @@ import { COMPARISON_TABLE_DATA } from '../utils/medicalCareData';
 import styles from '../styles/ComparisonTable.module.css';
 import type { ComparisonTableProps, ComparisonTableData } from '../types/medical-care-guide';
 
-export default function ComparisonTable({ 
+export default function ComparisonTable({
   className = '',
-  highlightRow 
+  highlightRow
 }: ComparisonTableProps) {
   const t = useTranslations('medicalCareGuide');
   const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
@@ -29,7 +29,7 @@ export default function ComparisonTable({
   // 键盘导航处理
   const handleKeyDown = useCallback((e: React.KeyboardEvent, rowIndex: number) => {
     const totalRows = COMPARISON_TABLE_DATA.rows.length;
-    
+
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
@@ -39,7 +39,7 @@ export default function ComparisonTable({
         const nextRowElement = e.currentTarget.parentElement?.children[nextRow + 1] as HTMLElement;
         nextRowElement?.focus();
         break;
-        
+
       case 'ArrowUp':
         e.preventDefault();
         const prevRow = rowIndex > 0 ? rowIndex - 1 : totalRows - 1;
@@ -48,20 +48,20 @@ export default function ComparisonTable({
         const prevRowElement = e.currentTarget.parentElement?.children[prevRow + 1] as HTMLElement;
         prevRowElement?.focus();
         break;
-        
+
       case 'Enter':
       case ' ':
         e.preventDefault();
         toggleRowExpansion(rowIndex);
         break;
-        
+
       case 'Home':
         e.preventDefault();
         setFocusedRowIndex(0);
         const firstRowElement = e.currentTarget.parentElement?.children[1] as HTMLElement;
         firstRowElement?.focus();
         break;
-        
+
       case 'End':
         e.preventDefault();
         setFocusedRowIndex(totalRows - 1);
@@ -91,7 +91,7 @@ export default function ComparisonTable({
         <p className={styles.description}>
           {t('comparisonTable.description')}
         </p>
-        
+
         {/* 键盘导航说明 */}
         <div className="sr-only" role="region" aria-label="键盘导航说明">
           <p>使用箭头键在行间导航，按回车键或空格键展开/收起行详情，Home键跳到第一行，End键跳到最后一行</p>
@@ -113,8 +113,8 @@ export default function ComparisonTable({
             </thead>
             <tbody className={styles.tableBody}>
               {COMPARISON_TABLE_DATA.rows.map((row, rowIndex) => (
-                <tr 
-                  key={rowIndex} 
+                <tr
+                  key={rowIndex}
                   className={`${styles.tableRow} ${
                     highlightRow === rowIndex ? styles.highlighted : ''
                   } ${expandedRows.has(rowIndex) ? styles.expanded : ''} ${
@@ -135,7 +135,7 @@ export default function ComparisonTable({
                       <span className={styles.conditionText}>
                         {t(row.condition)}
                       </span>
-                      <button 
+                      <button
                         className={styles.expandButton}
                         aria-label={expandedRows.has(rowIndex) ? t('comparisonTable.collapse') : t('comparisonTable.expand')}
                       >

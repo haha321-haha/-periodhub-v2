@@ -1,11 +1,11 @@
 // 评估逻辑工具 - 基于souW1e2的医学算法
 // 提供疼痛评估、症状分析、决策支持的核心逻辑
 
-import type { 
-  AssessmentResult, 
-  PainScaleItem, 
+import type {
+  AssessmentResult,
+  PainScaleItem,
   SymptomItem,
-  DecisionTreeNode 
+  DecisionTreeNode
 } from '../types/medical-care-guide';
 
 // 疼痛等级评估逻辑
@@ -98,7 +98,7 @@ export class SymptomAnalysisLogic {
   // 计算风险评分
   static calculateRiskScore(selectedSymptomIds: string[], allSymptoms: SymptomItem[]): number {
     const selectedSymptoms = allSymptoms.filter(s => selectedSymptomIds.includes(s.id));
-    
+
     let score = 0;
     selectedSymptoms.forEach(symptom => {
       switch (symptom.risk) {
@@ -115,7 +115,7 @@ export class SymptomAnalysisLogic {
           score += 1;
       }
     });
-    
+
     return score;
   }
 
@@ -129,7 +129,7 @@ export class SymptomAnalysisLogic {
 
   // 生成个性化建议
   static generatePersonalizedRecommendations(
-    selectedSymptomIds: string[], 
+    selectedSymptomIds: string[],
     allSymptoms: SymptomItem[]
   ): string[] {
     const selectedSymptoms = allSymptoms.filter(s => selectedSymptomIds.includes(s.id));
@@ -301,7 +301,7 @@ export class ComprehensiveAssessmentLogic {
     const riskScore = SymptomAnalysisLogic.calculateRiskScore(selectedSymptomIds, allSymptoms);
     const symptomRiskLevel = SymptomAnalysisLogic.determineRiskLevel(riskScore);
     const symptomRecommendations = SymptomAnalysisLogic.generatePersonalizedRecommendations(
-      selectedSymptomIds, 
+      selectedSymptomIds,
       allSymptoms
     );
 
@@ -315,7 +315,7 @@ export class ComprehensiveAssessmentLogic {
     const painRiskIndex = painLevel >= 8 ? 3 : painLevel >= 6 ? 2 : painLevel >= 4 ? 1 : 0;
     const symptomRiskIndex = riskLevels.indexOf(symptomRiskLevel);
     const maxRiskIndex = Math.max(painRiskIndex, symptomRiskIndex);
-    
+
     finalRiskLevel = riskLevels[maxRiskIndex] as AssessmentResult['riskLevel'];
 
     // 确定紧急程度
@@ -368,21 +368,21 @@ export class ComprehensiveAssessmentLogic {
         actionRequired = true;
         priority = 'critical';
         break;
-      
+
       case 'high':
         title = 'High Risk - Schedule Urgent Appointment';
         description = `Pain level ${painLevel}/10 with ${symptoms.length} symptoms suggests need for prompt medical evaluation.`;
         actionRequired = true;
         priority = 'high';
         break;
-      
+
       case 'medium':
         title = 'Moderate Concern - Consider Medical Consultation';
         description = `Pain level ${painLevel}/10 with ${symptoms.length} symptoms may benefit from medical evaluation.`;
         actionRequired = true;
         priority = 'medium';
         break;
-      
+
       default:
         title = 'Low Risk - Continue Monitoring';
         description = `Pain level ${painLevel}/10 with ${symptoms.length} symptoms can be managed with self-care.`;

@@ -5,6 +5,7 @@
 
 import { Locale } from "@/i18n";
 import { getTranslations } from "next-intl/server";
+import { medicalEntities } from "@/lib/seo/medical-entities";
 
 type TFunction = Awaited<ReturnType<typeof getTranslations>>;
 
@@ -20,6 +21,19 @@ export function generateFAQStructuredData(t: TFunction): any {
     { key: "q5" },
   ];
 
+  const condition = medicalEntities.dysmenorrhea;
+  const citation = {
+    "@type": "MedicalGuideline",
+    name: "ACOG Practice Bulletin No. 76",
+    url: "https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2019/03/premenstrual-syndrome-and-premenstrual-dysphoric-disorder",
+  };
+
+  const drugMention = {
+    "@type": "Drug",
+    name: "Ibuprofen (布洛芬)",
+    mechanismOfAction: "Inhibits prostaglandin synthesis",
+  };
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -29,6 +43,24 @@ export function generateFAQStructuredData(t: TFunction): any {
       acceptedAnswer: {
         "@type": "Answer",
         text: t(`faq.${faq.key}.answer`),
+        mention: [drugMention],
+        citation,
+      },
+      about: {
+        "@type": "MedicalCondition",
+        name: condition.name,
+        code: {
+          "@type": "MedicalCode",
+          code: condition.icd10,
+          codingSystem: "ICD-10",
+        },
+        sameAs: condition.snomed
+          ? `http://snomed.info/id/${condition.snomed}`
+          : undefined,
+      },
+      medicalAudience: {
+        "@type": "MedicalAudience",
+        audienceType: "Patient",
       },
     })),
   };

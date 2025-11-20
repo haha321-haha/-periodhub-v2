@@ -45,11 +45,11 @@ interface DataSyncProps {
   onSyncError?: (error: string) => void;
 }
 
-export default function DataSync({ 
-  locale, 
+export default function DataSync({
+  locale,
   userId,
   onSyncComplete,
-  onSyncError 
+  onSyncError
 }: DataSyncProps) {
   const t = useTranslations('interactiveTools.sync');
   const [syncStatus, setSyncStatus] = useState<SyncStatus>({
@@ -128,9 +128,9 @@ export default function DataSync({
   // 执行同步
   const performSync = useCallback(async () => {
     if (!syncStatus.isOnline) {
-      setSyncStatus(prev => ({ 
-        ...prev, 
-        syncError: locale === 'zh' ? '网络连接不可用' : 'Network connection unavailable' 
+      setSyncStatus(prev => ({
+        ...prev,
+        syncError: locale === 'zh' ? '网络连接不可用' : 'Network connection unavailable'
       }));
       return;
     }
@@ -140,10 +140,10 @@ export default function DataSync({
     try {
       // 模拟同步过程
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       // 模拟随机成功/失败
       const success = Math.random() > 0.1; // 90% 成功率
-      
+
       if (success) {
         setSyncStatus(prev => ({
           ...prev,
@@ -153,7 +153,7 @@ export default function DataSync({
           conflictCount: 0,
           syncError: null
         }));
-        
+
         if (onSyncComplete) {
           onSyncComplete({ timestamp: new Date(), changes: 0 });
         }
@@ -167,7 +167,7 @@ export default function DataSync({
         syncInProgress: false,
         syncError: errorMessage
       }));
-      
+
       if (onSyncError) {
         onSyncError(errorMessage);
       }
@@ -193,7 +193,7 @@ export default function DataSync({
       devices,
       timestamp: new Date()
     };
-    
+
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -237,7 +237,7 @@ export default function DataSync({
             {locale === 'zh' ? '跨设备同步您的健康数据，确保数据安全' : 'Sync your health data across devices securely'}
           </p>
         </div>
-        
+
         <div className="flex items-center space-x-2 mt-4 sm:mt-0">
           {syncStatus.isOnline ? (
             <div className="flex items-center text-green-600">
@@ -273,7 +273,7 @@ export default function DataSync({
             {locale === 'zh' ? '网络状态' : 'Network Status'}
           </h3>
           <p className="text-sm text-gray-600">
-            {syncStatus.isOnline 
+            {syncStatus.isOnline
               ? (locale === 'zh' ? '云端连接正常' : 'Cloud connection active')
               : (locale === 'zh' ? '无法连接到云端' : 'Cannot connect to cloud')
             }
@@ -294,7 +294,7 @@ export default function DataSync({
             {locale === 'zh' ? '最后同步' : 'Last Sync'}
           </h3>
           <p className="text-sm text-gray-600">
-            {syncStatus.lastSync 
+            {syncStatus.lastSync
               ? syncStatus.lastSync.toLocaleString(locale === 'zh' ? 'zh-CN' : 'en-US')
               : (locale === 'zh' ? '从未同步' : 'Never synced')
             }
@@ -315,7 +315,7 @@ export default function DataSync({
             {locale === 'zh' ? '待同步更改' : 'Pending Changes'}
           </h3>
           <p className="text-sm text-gray-600">
-            {syncStatus.pendingChanges === 0 
+            {syncStatus.pendingChanges === 0
               ? (locale === 'zh' ? '所有数据已同步' : 'All data synced')
               : `${syncStatus.pendingChanges} ${locale === 'zh' ? '项更改待同步' : 'changes pending'}`
             }
@@ -336,7 +336,7 @@ export default function DataSync({
             {locale === 'zh' ? '数据冲突' : 'Data Conflicts'}
           </h3>
           <p className="text-sm text-gray-600">
-            {syncStatus.conflictCount === 0 
+            {syncStatus.conflictCount === 0
               ? (locale === 'zh' ? '无冲突' : 'No conflicts')
               : `${syncStatus.conflictCount} ${locale === 'zh' ? '个冲突需解决' : 'conflicts to resolve'}`
             }
@@ -350,7 +350,7 @@ export default function DataSync({
           <Sync className="w-5 h-5 mr-2" />
           {locale === 'zh' ? '同步控制' : 'Sync Control'}
         </h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -370,7 +370,7 @@ export default function DataSync({
                 />
               </button>
             </div>
-            
+
             {autoSync && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -389,7 +389,7 @@ export default function DataSync({
               </div>
             )}
           </div>
-          
+
           <div className="space-y-4">
             <button
               onClick={handleManualSync}
@@ -408,7 +408,7 @@ export default function DataSync({
                 </>
               )}
             </button>
-            
+
             {syncStatus.conflictCount > 0 && (
               <button
                 onClick={handleResolveConflicts}
@@ -428,7 +428,7 @@ export default function DataSync({
           <Server className="w-5 h-5 mr-2" />
           {locale === 'zh' ? '设备管理' : 'Device Management'}
         </h3>
-        
+
         <div className="space-y-4">
           {devices.map(device => (
             <div key={device.id} className="bg-gray-50 rounded-lg p-4 border border-gray-200">
@@ -466,7 +466,7 @@ export default function DataSync({
           <Database className="w-5 h-5 mr-2" />
           {locale === 'zh' ? '数据管理' : 'Data Management'}
         </h3>
-        
+
         <div className="flex flex-col sm:flex-row gap-4">
           <button
             onClick={handleExportData}
@@ -475,7 +475,7 @@ export default function DataSync({
             <Download className="w-4 h-4 mr-2" />
             {locale === 'zh' ? '导出数据' : 'Export Data'}
           </button>
-          
+
           <button
             onClick={() => setShowAdvanced(!showAdvanced)}
             className="flex items-center justify-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
@@ -484,7 +484,7 @@ export default function DataSync({
             {locale === 'zh' ? '高级设置' : 'Advanced Settings'}
           </button>
         </div>
-        
+
         {showAdvanced && (
           <div className="mt-6 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -499,7 +499,7 @@ export default function DataSync({
                   <option value="forever">{locale === 'zh' ? '永久' : 'Forever'}</option>
                 </select>
               </div>
-              
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   {locale === 'zh' ? '加密级别' : 'Encryption Level'}

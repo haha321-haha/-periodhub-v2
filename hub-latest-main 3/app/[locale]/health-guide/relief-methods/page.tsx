@@ -11,10 +11,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const title = locale === 'zh' ? 'A-Z缓解方法 - 痛经健康指南' : 'A-Z Relief Methods - Health Guide';
-  const description = locale === 'zh' 
+  const description = locale === 'zh'
     ? '从A到Z的全面缓解方法，包括即时和长期策略，帮助您找到最适合的痛经管理方案。'
     : 'Comprehensive relief methods from A to Z, including immediate and long-term strategies to help you find the most suitable menstrual pain management plan.';
-  
+
   return {
     title,
     description,
@@ -379,7 +379,7 @@ export default async function ReliefMethodsPage({
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="space-y-12">
           {/* Breadcrumb */}
-          <Breadcrumb 
+          <Breadcrumb
             items={[
               { label: locale === 'zh' ? '痛经健康指南' : 'Health Guide', href: `/${locale}/health-guide` },
               { label: locale === 'zh' ? 'A-Z缓解方法' : 'A-Z Relief Methods' }
@@ -428,7 +428,7 @@ export default async function ReliefMethodsPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-8 text-center">
           {locale === 'zh' ? '缓解方法大全' : 'Complete Relief Methods'}
         </h2>
-        
+
         <div className="space-y-8">
           {reliefMethods.map((section) => (
             <div key={section.letter} className="card">
@@ -440,7 +440,7 @@ export default async function ReliefMethodsPage({
                   {locale === 'zh' ? `${section.letter} 开头的方法` : `Methods Starting with ${section.letter}`}
                 </h3>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-4">
                 {section.methods.map((method, index) => (
                   <div key={index} className="bg-neutral-50 p-4 rounded-lg">
@@ -463,7 +463,7 @@ export default async function ReliefMethodsPage({
         <h2 className="text-2xl font-semibold text-neutral-800 mb-6">
           {locale === 'zh' ? '快速参考' : 'Quick Reference'}
         </h2>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
           <div className="bg-white p-4 rounded-lg">
             <h3 className="font-semibold text-green-600 mb-2">
@@ -476,7 +476,7 @@ export default async function ReliefMethodsPage({
               <li>• {locale === 'zh' ? '温水浴' : 'Warm bath'}</li>
             </ul>
           </div>
-          
+
           <div className="bg-white p-4 rounded-lg">
             <h3 className="font-semibold text-blue-600 mb-2">
               {locale === 'zh' ? '中期管理' : 'Medium-term Management'}
@@ -488,7 +488,7 @@ export default async function ReliefMethodsPage({
               <li>• {locale === 'zh' ? '压力管理' : 'Stress management'}</li>
             </ul>
           </div>
-          
+
           <div className="bg-white p-4 rounded-lg">
             <h3 className="font-semibold text-purple-600 mb-2">
               {locale === 'zh' ? '长期预防' : 'Long-term Prevention'}
@@ -517,7 +517,7 @@ export default async function ReliefMethodsPage({
               {locale === 'zh' ? '针对特定情况的专业解决方案' : 'Professional solutions for specific situations'}
             </p>
           </Link>
-          
+
           <Link href={`/${locale}/interactive-tools`} className="bg-white p-4 rounded-lg hover:shadow-md transition-shadow">
             <h3 className="font-semibold text-primary-600 mb-2">
               {locale === 'zh' ? '互动工具' : 'Interactive Tools'}
@@ -531,7 +531,7 @@ export default async function ReliefMethodsPage({
 
       {/* Navigation */}
       <section className="flex justify-between items-center pt-8 border-t border-neutral-200">
-        <Link 
+        <Link
           href={`/${locale}/health-guide/understanding-pain`}
           className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
         >
@@ -540,7 +540,7 @@ export default async function ReliefMethodsPage({
           </svg>
           {locale === 'zh' ? '上一章：理解痛经' : 'Previous: Understanding Pain'}
         </Link>
-        
+
           <Link
             href={`/${locale}/health-guide/lifestyle`}
             className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"

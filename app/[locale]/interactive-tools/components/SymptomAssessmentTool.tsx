@@ -96,14 +96,14 @@ export default function SymptomAssessmentTool({
       // 保存到localStorage（仅用于本地分析，不上传服务器）
       const existingData = JSON.parse(localStorage.getItem('assessmentAnalytics') || '[]');
       existingData.push(data);
-      
+
       // 只保留最近100次记录，避免localStorage过大
       if (existingData.length > 100) {
         existingData.splice(0, existingData.length - 100);
       }
-      
+
       localStorage.setItem('assessmentAnalytics', JSON.stringify(existingData));
-      
+
       console.log('症状评估数据已记录（匿名）:', data);
     } catch (error) {
       console.warn('记录评估数据失败:', error);

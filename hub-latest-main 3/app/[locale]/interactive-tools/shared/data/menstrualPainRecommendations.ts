@@ -320,7 +320,7 @@ export const getRecommendedArticles = (
   };
 
   const articles = [...(baseArticles[locale] || baseArticles.zh)];
-  
+
   // 添加体质特定的文章
   const constitutionArticles = constitutionSpecificArticles[locale]?.[constitutionType];
   if (constitutionArticles) {

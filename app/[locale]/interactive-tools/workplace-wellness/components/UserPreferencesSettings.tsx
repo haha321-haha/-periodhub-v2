@@ -323,24 +323,24 @@ export default function UserPreferencesSettings() {
     const safeUI = (preferencesUI && typeof preferencesUI === 'object' && preferencesUI !== null)
       ? { ...DEFAULT_UI_PREFERENCES, ...preferencesUI }
       : { ...DEFAULT_UI_PREFERENCES };
-    
+
     // 确保 theme 属性存在
     if (!safeUI.theme) {
       safeUI.theme = DEFAULT_UI_PREFERENCES.theme;
     }
-    
+
     const safeNotifications = (preferencesNotifications && typeof preferencesNotifications === 'object' && preferencesNotifications !== null)
       ? { ...DEFAULT_NOTIFICATION_SETTINGS, ...preferencesNotifications }
       : { ...DEFAULT_NOTIFICATION_SETTINGS };
-    
+
     const safePrivacy = (preferencesPrivacy && typeof preferencesPrivacy === 'object' && preferencesPrivacy !== null)
       ? { ...DEFAULT_PRIVACY_SETTINGS, ...preferencesPrivacy }
       : { ...DEFAULT_PRIVACY_SETTINGS };
-    
+
     const safeAccessibility = (preferencesAccessibility && typeof preferencesAccessibility === 'object' && preferencesAccessibility !== null)
       ? { ...DEFAULT_ACCESSIBILITY_SETTINGS, ...preferencesAccessibility }
       : { ...DEFAULT_ACCESSIBILITY_SETTINGS };
-    
+
     const safeExport = (preferencesExport && typeof preferencesExport === 'object' && preferencesExport !== null)
       ? {
           defaultFormat: "pdf" as ExtendedExportFormat,
@@ -373,8 +373,8 @@ export default function UserPreferencesSettings() {
   // 双重检查：确保 safePreferences 和所有必需的嵌套属性都存在
   // 这个检查必须在所有其他代码之前，包括 useTranslations 和 useState
   if (
-    !safePreferences || 
-    !safePreferences.ui || 
+    !safePreferences ||
+    !safePreferences.ui ||
     typeof safePreferences.ui !== 'object' ||
     safePreferences.ui === null ||
     !safePreferences.ui.theme ||

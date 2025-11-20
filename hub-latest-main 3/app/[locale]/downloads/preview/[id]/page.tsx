@@ -8,7 +8,7 @@ import { mapPDFId, hasPDFMapping, getAllMappedIds } from '@/components/pdf-id-ma
 import PDFPreviewPage from './PDFPreviewPage';
 
 interface PreviewPageProps {
-  params: Promise<{ 
+  params: Promise<{
     locale: Locale;
     id: string;
   }>;
@@ -95,10 +95,10 @@ export async function generateMetadata({
   const realId = mapPDFId(id);
   const resource = getPDFResourceById(realId);
   const previewContent = getPreviewContentById(realId);
-  
+
   // 如果找不到配置，使用新PDF信息
   const pdfInfo = NEW_PDF_INFO[realId];
-  
+
   if (!resource && !previewContent && !pdfInfo) {
     return {
       title: 'Resource Not Found - Period Hub',
@@ -106,22 +106,22 @@ export async function generateMetadata({
     };
   }
 
-  const title = pdfInfo 
+  const title = pdfInfo
     ? (locale === 'zh' ? pdfInfo.title.zh : pdfInfo.title.en)
-    : previewContent 
+    : previewContent
     ? (locale === 'zh' ? previewContent.title.zh : previewContent.title.en)
     : (locale === 'zh' ? `${realId} PDF资源` : `${realId} PDF Resource`);
-    
+
   const description = pdfInfo
     ? (locale === 'zh' ? pdfInfo.description.zh : pdfInfo.description.en)
-    : locale === 'zh' 
+    : locale === 'zh'
     ? `预览 ${title} - Period Hub 经期健康专业资源`
     : `Preview ${title} - Period Hub Professional Health Resources`;
 
   return {
     title: `${title} 预览 - Period Hub`,
     description,
-    keywords: locale === 'zh' 
+    keywords: locale === 'zh'
       ? `${title},PDF预览,经期健康,Period Hub`
       : `${title},PDF preview,menstrual health,Period Hub`,
   };
@@ -144,7 +144,7 @@ export async function generateStaticParams() {
     'magnesium-gut-health-guide',
     'zhan-zhuang-baduanjin-illustrated-guide'
   ];
-  
+
   // 添加SimplePDFCenter中使用的映射ID和新增PDF的ID
   const mappedIds = getAllMappedIds();
   const newPdfIds = Object.keys(NEW_PDF_INFO);
@@ -168,12 +168,12 @@ export default async function PreviewPage({
 
   // 🚀 快速修复：映射SimplePDFCenter的ID到真实资源ID
   const realId = mapPDFId(id);
-  
+
   // Validate resource exists using the real ID
   const resource = getPDFResourceById(realId);
   const previewContent = getPreviewContentById(realId);
   const pdfInfo = NEW_PDF_INFO[realId];
-  
+
   // 如果既不在原有配置中，也不在新PDF信息中，返回404
   if (!resource && !previewContent && !pdfInfo) {
     notFound();

@@ -103,7 +103,7 @@ export function formatMedicalDate(
   const dateObj = typeof date === 'string' ? new Date(date) : date;
   const dateFnsLocale = DATE_FNS_LOCALES[locale];
 
-  const formatString = includeTime 
+  const formatString = includeTime
     ? (locale === 'zh' ? 'yyyy年M月d日 HH:mm' : 'MMMM d, yyyy h:mm a')
     : (locale === 'zh' ? 'yyyy年M月d日' : 'MMMM d, yyyy');
 
@@ -133,7 +133,7 @@ export function formatDuration(
     return locale === 'zh' ? `${hours}小时` : `${hours} hour${hours !== 1 ? 's' : ''}`;
   }
 
-  return locale === 'zh' 
+  return locale === 'zh'
     ? `${hours}小时${remainingMinutes}分钟`
     : `${hours} hour${hours !== 1 ? 's' : ''} ${remainingMinutes} minute${remainingMinutes !== 1 ? 's' : ''}`;
 }
@@ -156,7 +156,7 @@ export function getMonthNames(locale: 'en' | 'zh' = 'en'): string[] {
 export function getDayNames(locale: 'en' | 'zh' = 'en'): string[] {
   const days = [];
   const dateFnsLocale = DATE_FNS_LOCALES[locale];
-  
+
   for (let i = 0; i < 7; i++) {
     const date = new Date(2024, 0, i + 1); // Start from Sunday
     days.push(format(date, 'EEEE', { locale: dateFnsLocale }));
@@ -202,7 +202,7 @@ export function validateDate(
   allowFuture: boolean = false
 ): { isValid: boolean; error?: string } {
   const date = parseDate(dateString, locale);
-  
+
   if (!date) {
     return {
       isValid: false,
@@ -220,7 +220,7 @@ export function validateDate(
   // Check if date is too far in the past (more than 10 years)
   const tenYearsAgo = new Date();
   tenYearsAgo.setFullYear(tenYearsAgo.getFullYear() - 10);
-  
+
   if (date < tenYearsAgo) {
     return {
       isValid: false,

@@ -25,7 +25,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
   const [activeTab, setActiveTab] = useState<ActiveTab>('overview');
   const [isFormLoading, setIsFormLoading] = useState(false);
   const [editingEntry, setEditingEntry] = useState<EditingEntry | null>(null);
-  
+
   const {
     entries,
     statistics,
@@ -147,7 +147,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
           {locale === 'zh' ? '💊 痛经智能分析器 | 疼痛追踪计算器' : '💊 Period Pain Calculator & Intelligent Tracker'}
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          {locale === 'zh' 
+          {locale === 'zh'
             ? 'AI驱动的经期疼痛计算器，分析您的周期模式，预测疼痛强度，提供个性化镁剂和自然缓解建议'
             : 'AI-powered period pain calculator that analyzes your cycle patterns, predicts pain intensity, and provides personalized magnesium and natural relief recommendations'
           }
@@ -187,7 +187,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
               <h2 className="text-2xl font-semibold text-gray-800 mb-6">
                 {t('statistics.overview')}
               </h2>
-              
+
               {entries.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="text-gray-400 mb-4">
@@ -216,7 +216,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
                       {statistics.totalEntries}
                     </p>
                   </div>
-                  
+
                   <div className="bg-gradient-to-r from-blue-100 to-indigo-100 p-6 rounded-lg">
                     <h3 className="text-sm font-medium text-gray-600 mb-2">
                       {t('statistics.averagePain')}
@@ -225,7 +225,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
                       {statistics.averagePain}/10
                     </p>
                   </div>
-                  
+
                   <div className="bg-gradient-to-r from-green-100 to-teal-100 p-6 rounded-lg">
                     <h3 className="text-sm font-medium text-gray-600 mb-2">
                       {t('statistics.trendDirection')}
@@ -259,7 +259,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
               <h2 className="text-2xl font-semibold text-gray-800 mb-6">
                 {t('entries.title')}
               </h2>
-              
+
               {entries.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="text-gray-400 mb-4">

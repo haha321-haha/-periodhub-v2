@@ -1,0 +1,16 @@
+{
+  "name": "periodhub-simple",
+  "version": "1.0.0",
+  "description": "PeriodHub - Simple Version",
+  "type": "module",
+  "scripts": {
+    "dev": "python3 -m http.server 3000",
+    "build": "echo 'Build completed'"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "lucide-react": "0.344.0",
+    "d3": "7.9.0"
+  }
+}

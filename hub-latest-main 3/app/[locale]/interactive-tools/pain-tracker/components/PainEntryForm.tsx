@@ -4,14 +4,14 @@ import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { Calendar, Clock, MapPin, Activity, Heart, Star, FileText } from 'lucide-react';
 import { PainEntryFormData, ValidationError } from '../../shared/types';
-import { 
-  PAIN_LOCATIONS, 
-  SYMPTOMS, 
-  REMEDIES, 
-  MENSTRUAL_STATUS, 
+import {
+  PAIN_LOCATIONS,
+  SYMPTOMS,
+  REMEDIES,
+  MENSTRUAL_STATUS,
   PAIN_LEVELS,
   EFFECTIVENESS_LEVELS,
-  ERROR_MESSAGES 
+  ERROR_MESSAGES
 } from '../../shared/constants';
 import { formatDateShort, getPainLevelColor } from '../../shared/utils';
 import LoadingSpinner from '../../shared/components/LoadingSpinner';
@@ -32,7 +32,7 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
   locale
 }) => {
   const t = useTranslations('painTracker');
-  
+
   const [formData, setFormData] = useState<PainEntryFormData>({
     date: initialData?.date || formatDateShort(new Date()),
     painLevel: initialData?.painLevel || 1,
@@ -61,7 +61,7 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
   const handleInputChange = (field: keyof PainEntryFormData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     setTouched(prev => ({ ...prev, [field]: true }));
-    
+
     // Clear error when user starts typing
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: '' }));
@@ -73,7 +73,7 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
     const newValues = currentValues.includes(value)
       ? currentValues.filter(v => v !== value)
       : [...currentValues, value];
-    
+
     handleInputChange(field, newValues);
   };
 

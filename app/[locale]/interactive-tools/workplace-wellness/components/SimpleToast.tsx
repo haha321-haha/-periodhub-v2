@@ -48,16 +48,16 @@ export function SimpleToastProvider({ children }: { children: React.ReactNode })
   const addToast = useCallback((type: ToastType, message: string, duration = 3000) => {
     const id = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     const newToast: Toast = { id, type, message, duration };
-    
+
     setToasts((prev) => [...prev, newToast]);
-    
+
     // 自动移除
     if (duration > 0) {
       setTimeout(() => {
         setToasts((prev) => prev.filter((t) => t.id !== id));
       }, duration);
     }
-    
+
     return id;
   }, []);
 

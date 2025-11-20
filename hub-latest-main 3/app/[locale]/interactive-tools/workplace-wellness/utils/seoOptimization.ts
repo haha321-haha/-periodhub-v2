@@ -29,7 +29,7 @@ export function generatePageMetadata(
   additionalMeta?: Partial<Metadata>
 ): Metadata {
   const config = pageData[locale];
-  
+
   return {
     title: config.title,
     description: config.description,
@@ -267,7 +267,7 @@ export function validateMetaLength(title: string, description: string, locale: L
   issues: string[];
 } {
   const issues: string[] = [];
-  
+
   // 标题长度验证
   if (locale === 'zh') {
     if (title.length < 20) issues.push('中文标题过短，建议20-30字符');
@@ -276,7 +276,7 @@ export function validateMetaLength(title: string, description: string, locale: L
     if (title.length < 30) issues.push('英文标题过短，建议30-60字符');
     if (title.length > 60) issues.push('英文标题过长，建议不超过60字符');
   }
-  
+
   // 描述长度验证
   if (locale === 'zh') {
     if (description.length < 80) issues.push('中文描述过短，建议80-120字符');
@@ -285,7 +285,7 @@ export function validateMetaLength(title: string, description: string, locale: L
     if (description.length < 120) issues.push('英文描述过短，建议120-160字符');
     if (description.length > 160) issues.push('英文描述过长，建议不超过160字符');
   }
-  
+
   return {
     isValid: issues.length === 0,
     issues
@@ -298,7 +298,7 @@ export function validateMetaLength(title: string, description: string, locale: L
 export function generateSEOReport(locale: Locale, pageData: PageSEOData): string {
   const config = pageData[locale];
   const validation = validateMetaLength(config.title, config.description, locale);
-  
+
   const report = {
     page: 'workplace-wellness',
     locale,
@@ -317,7 +317,7 @@ export function generateSEOReport(locale: Locale, pageData: PageSEOData): string
     },
     generatedAt: new Date().toISOString()
   };
-  
+
   return JSON.stringify(report, null, 2);
 }
 

@@ -6,11 +6,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Calendar, 
-  Activity, 
+import {
+  BarChart3,
+  TrendingUp,
+  Calendar,
+  Activity,
   PieChart,
   Clock,
   Target,
@@ -46,20 +46,20 @@ export default function AdvancedCycleAnalysis() {
   const [statistics, setStatistics] = useState<CycleStatistics | null>(null);
   const [trendData, setTrendData] = useState<TrendData[]>([]);
   const [comparisonData, setComparisonData] = useState<ComparisonData | null>(null);
-  
+
   const periodData = getPeriodData();
 
   useEffect(() => {
     const predictor = new CyclePredictor(locale);
     const cycleAnalysis = predictor.analyzeCycle(periodData);
     const cycleStats = predictor.generateStatistics(periodData);
-    
+
     setAnalysis(cycleAnalysis);
     setStatistics(cycleStats);
-    
+
     // 生成趋势数据
     generateTrendData(periodData);
-    
+
     // 生成对比数据
     generateComparisonData(periodData, cycleAnalysis);
   }, [periodData, locale]);
@@ -68,7 +68,7 @@ export default function AdvancedCycleAnalysis() {
   const generateTrendData = (data: PeriodRecord[]) => {
     const trends: TrendData[] = [];
     const monthlyData = new Map<string, PeriodRecord[]>();
-    
+
     // 按月份分组数据
     data.forEach(record => {
       const month = new Date(record.date).toISOString().slice(0, 7); // YYYY-MM
@@ -77,14 +77,14 @@ export default function AdvancedCycleAnalysis() {
       }
       monthlyData.get(month)!.push(record);
     });
-    
+
     // 计算每月趋势
     monthlyData.forEach((records, month) => {
       const periodRecords = records.filter(r => r.type === 'period');
       if (periodRecords.length > 0) {
         const avgPain = periodRecords.reduce((sum, r) => sum + (r.painLevel || 0), 0) / periodRecords.length;
         const mostCommonFlow = getMostCommonFlow(periodRecords);
-        
+
         trends.push({
           month,
           cycleLength: calculateCycleLength(periodRecords),
@@ -93,7 +93,7 @@ export default function AdvancedCycleAnalysis() {
         });
       }
     });
-    
+
     setTrendData(trends.sort((a, b) => a.month.localeCompare(b.month)));
   };
 
@@ -101,15 +101,15 @@ export default function AdvancedCycleAnalysis() {
   const generateComparisonData = (data: PeriodRecord[], analysis: CycleAnalysis) => {
     const recentCycles = data.filter(r => r.type === 'period').slice(-6);
     const previousCycles = data.filter(r => r.type === 'period').slice(-12, -6);
-    
+
     if (recentCycles.length >= 3 && previousCycles.length >= 3) {
       const currentAvg = recentCycles.reduce((sum, r) => sum + (r.painLevel || 0), 0) / recentCycles.length;
       const previousAvg = previousCycles.reduce((sum, r) => sum + (r.painLevel || 0), 0) / previousCycles.length;
-      
+
       let trend: 'up' | 'down' | 'stable' = 'stable';
       if (currentAvg > previousAvg + 0.5) trend = 'up';
       else if (currentAvg < previousAvg - 0.5) trend = 'down';
-      
+
       setComparisonData({
         current: currentAvg,
         previous: previousAvg,
@@ -159,7 +159,7 @@ export default function AdvancedCycleAnalysis() {
               </h4>
               <span className="text-sm text-gray-600">{trend.cycleLength} {t('charts.days')}</span>
             </div>
-            
+
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center">
                 <div className="text-lg font-semibold text-blue-600">{trend.cycleLength}</div>
@@ -216,7 +216,7 @@ export default function AdvancedCycleAnalysis() {
             <Target className="w-5 h-5 mr-2 text-blue-600" />
             {t('analysis.comparisonTitle')}
           </h4>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-white rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
@@ -226,12 +226,12 @@ export default function AdvancedCycleAnalysis() {
               <div className="text-2xl font-bold text-blue-600">{comparisonData.current.toFixed(1)}</div>
               <div className="text-xs text-gray-500">{getTrendText()}</div>
             </div>
-            
+
             <div className="bg-white rounded-lg p-4">
               <div className="text-sm text-gray-600 mb-2">{t('analysis.previousPeriod')}</div>
               <div className="text-2xl font-bold text-gray-600">{comparisonData.previous.toFixed(1)}</div>
             </div>
-            
+
             <div className="bg-white rounded-lg p-4">
               <div className="text-sm text-gray-600 mb-2">{t('analysis.averageCycle')}</div>
               <div className="text-2xl font-bold text-green-600">{comparisonData.average.toFixed(1)}</div>
@@ -247,7 +247,7 @@ export default function AdvancedCycleAnalysis() {
     if (!analysis || !statistics) return null;
 
     const insights = [];
-    
+
     // 周期规律性洞察
     if (analysis.cycleRegularity === 'regular') {
       insights.push({
@@ -365,7 +365,7 @@ export default function AdvancedCycleAnalysis() {
                   <Calendar className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
-              
+
               <div className="bg-green-50 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -375,7 +375,7 @@ export default function AdvancedCycleAnalysis() {
                   <Clock className="w-6 h-6 text-green-600" />
                 </div>
               </div>
-              
+
               <div className="bg-red-50 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -385,7 +385,7 @@ export default function AdvancedCycleAnalysis() {
                   <Activity className="w-6 h-6 text-red-600" />
                 </div>
               </div>
-              
+
               <div className="bg-purple-50 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <div>
@@ -396,11 +396,11 @@ export default function AdvancedCycleAnalysis() {
                 </div>
               </div>
             </div>
-            
+
             {renderInsights()}
           </div>
         )}
-        
+
         {activeTab === 'trends' && renderTrendChart()}
         {activeTab === 'comparison' && renderComparisonAnalysis()}
         {activeTab === 'insights' && renderInsights()}

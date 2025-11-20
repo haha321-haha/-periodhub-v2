@@ -152,8 +152,8 @@ const RecommendationCard = withMemoization<{
   index: number;
   locale: string;
 }>(({ recommendation, index, locale }) => (
-  <div 
-    className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200 p-6 hover:shadow-md transition-all duration-300 transform hover:scale-105 animate-slide-up" 
+  <div
+    className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200 p-6 hover:shadow-md transition-all duration-300 transform hover:scale-105 animate-slide-up"
     style={{ animationDelay: `${1000 + index * 100}ms` }}
   >
     <div className="flex items-start justify-between mb-3">
@@ -222,14 +222,14 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
   const { preferences } = useUserPreferences();
   const { history, trends, saveAssessmentResult, getRecentAssessments } = useAssessmentHistory();
   const { recommendations, generateRecommendations } = usePersonalizedRecommendations();
-  
+
   // Performance optimization
-  const { 
-    debounce, 
-    memoize, 
-    getCachedValue, 
+  const {
+    debounce,
+    memoize,
+    getCachedValue,
     setCachedValue,
-    startMonitoring 
+    startMonitoring
   } = usePerformanceOptimization();
 
   // Memoized handlers for better performance
@@ -524,7 +524,7 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
 
                   <div className="text-center">
                     <p className="text-sm text-indigo-700">
-                      {locale === 'zh' 
+                      {locale === 'zh'
                         ? `最近评估：${new Date(trends?.lastAssessmentDate || '').toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US')}`
                         : `Last assessment: ${new Date(trends?.lastAssessmentDate || '').toLocaleDateString('en-US')}`
                       }
@@ -539,7 +539,7 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
             notifications={notifications}
             onRemove={removeNotification}
           />
-          
+
           {/* <SettingsModal
             isOpen={showSettings}
             onClose={() => setShowSettings(false)}
@@ -715,7 +715,7 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
             notifications={notifications}
             onRemove={removeNotification}
           />
-          
+
           {/* <SettingsModal
             isOpen={showSettings}
             onClose={() => setShowSettings(false)}
@@ -941,7 +941,7 @@ export default function SymptomAssessmentTool({ locale, mode = 'simplified' }: S
           notifications={notifications}
           onRemove={removeNotification}
         />
-        
+
         {/* <SettingsModal
           isOpen={showSettings}
           onClose={() => setShowSettings(false)}

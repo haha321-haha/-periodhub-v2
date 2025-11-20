@@ -122,14 +122,14 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
     console.log('resource:', resource);
     console.log('previewContent:', previewContent);
     console.log('newPdfInfo:', newPdfInfo);
-    
+
     // 检查是否有预览内容配置
     if (previewContent) {
       console.log('✅ 使用预览内容配置');
       setLoading(false);
       return;
     }
-    
+
     // 如果没有预览内容配置，检查是否有HTML文件
     if (!resource && !newPdfInfo) {
       console.log('❌ 资源未找到');
@@ -142,12 +142,12 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
     const filename = getFileName();
     let htmlFilename = filename.replace('.pdf', '.html');
     console.log('初始 htmlFilename:', htmlFilename);
-    
+
     if (locale === 'en' && !htmlFilename.includes('-en')) {
       htmlFilename = htmlFilename.replace('.html', '-en.html');
       console.log('英文版 htmlFilename:', htmlFilename);
     }
-    
+
     console.log('最终 htmlFilename:', htmlFilename);
     const fetchUrl = `/pdf-files/${htmlFilename}`;
     console.log('fetch URL:', fetchUrl);
@@ -160,7 +160,7 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
         console.log('response.ok:', response.ok);
         console.log('response.status:', response.status);
         console.log('response.statusText:', response.statusText);
-        
+
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText} - File not found: ${htmlFilename}`);
         }
@@ -170,7 +170,7 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
         console.log('✅ HTML 内容加载成功');
         console.log('HTML 长度:', html.length);
         console.log('HTML 开头:', html.substring(0, 100));
-        
+
         // setHtmlContent(html); // 不再需要，使用预览内容配置
         setLoading(false);
         console.log('✅ 状态更新完成，loading = false');
@@ -196,12 +196,12 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
     // 获取文件名并转换为HTML格式
     const filename = getFileName();
     let htmlFilename = filename.replace('.pdf', '.html');
-    
+
     // 根据语言添加语言后缀
     if (locale === 'en' && !htmlFilename.includes('-en')) {
       htmlFilename = htmlFilename.replace('.html', '-en.html');
     }
-    
+
     // 构建HTML文件下载URL
     const downloadUrl = `/downloads/${htmlFilename}`;
 
@@ -451,7 +451,7 @@ export default function PDFPreviewPage({ locale, resourceId }: PDFPreviewPagePro
             {/* 下载提示 */}
             <div className="text-center py-8 border-t border-gray-200">
               <p className="text-gray-600 mb-4">
-                {locale === 'zh' 
+                {locale === 'zh'
                   ? '这是预览内容，完整版本包含更多详细信息。点击上方按钮下载完整PDF文件。'
                   : 'This is preview content. The full version contains more detailed information. Click the button above to download the complete PDF file.'
                 }

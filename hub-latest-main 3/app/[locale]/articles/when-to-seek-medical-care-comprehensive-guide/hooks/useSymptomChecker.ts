@@ -11,14 +11,14 @@ export function useSymptomChecker(symptoms: SymptomItem[]) {
   const toggleSymptom = useCallback((symptomId: string) => {
     setCheckedSymptoms(prev => {
       const isCurrentlyChecked = prev.includes(symptomId);
-      
+
       if (isCurrentlyChecked) {
         return prev.filter(id => id !== symptomId);
       } else {
         return [...prev, symptomId];
       }
     });
-    
+
     // 清除之前的分析结果
     setAssessmentResult(null);
   }, []);
@@ -33,10 +33,10 @@ export function useSymptomChecker(symptoms: SymptomItem[]) {
 
     try {
       const checkedSymptomItems = symptoms.filter(s => checkedSymptoms.includes(s.id));
-      
+
       // 基于souW1e2的风险评估算法
       const riskAnalysis = analyzeRiskLevel(checkedSymptomItems);
-      
+
       const result: AssessmentResult = {
         painLevel: 0, // 将由疼痛评估工具提供
         symptoms: checkedSymptoms,
@@ -64,7 +64,7 @@ export function useSymptomChecker(symptoms: SymptomItem[]) {
   // 获取症状统计信息
   const getSymptomStatistics = useCallback(() => {
     const checkedSymptomItems = symptoms.filter(s => checkedSymptoms.includes(s.id));
-    
+
     const emergencyCount = checkedSymptomItems.filter(s => s.risk === 'emergency').length;
     const highRiskCount = checkedSymptomItems.filter(s => s.risk === 'high').length;
     const mediumRiskCount = checkedSymptomItems.filter(s => s.risk === 'medium').length;
@@ -98,7 +98,7 @@ export function useSymptomChecker(symptoms: SymptomItem[]) {
           'symptomChecker.results.actions.emergency.3'
         );
         break;
-      
+
       case 'high':
         recommendations.push(
           'symptomChecker.results.actions.high.0',
@@ -107,7 +107,7 @@ export function useSymptomChecker(symptoms: SymptomItem[]) {
           'symptomChecker.results.actions.high.3'
         );
         break;
-      
+
       case 'medium':
         recommendations.push(
           'symptomChecker.results.actions.medium.0',
@@ -116,7 +116,7 @@ export function useSymptomChecker(symptoms: SymptomItem[]) {
           'symptomChecker.results.actions.medium.3'
         );
         break;
-      
+
       case 'low':
         recommendations.push(
           'symptomChecker.results.actions.low.0',
@@ -209,7 +209,7 @@ function analyzeRiskLevel(symptoms: SymptomItem[]) {
 
 // 生成个性化建议
 export function generatePersonalizedRecommendations(
-  symptoms: SymptomItem[], 
+  symptoms: SymptomItem[],
   checkedSymptomIds: string[]
 ): string[] {
   const checkedSymptoms = symptoms.filter(s => checkedSymptomIds.includes(s.id));

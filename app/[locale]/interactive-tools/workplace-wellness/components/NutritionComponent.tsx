@@ -47,18 +47,18 @@ export default function NutritionComponent() {
         const phase = nutrition.selectedPhase || "menstrual"; // 默认为月经期
         const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${mealId}`;
         const genericKey = `nutrition.mealSuggestions.${mealId}`;
-        
+
         try {
           const phaseSuggestion = t(phaseSpecificKey);
-          acc[mealId] = phaseSuggestion === phaseSpecificKey 
-            ? t(genericKey) 
+          acc[mealId] = phaseSuggestion === phaseSpecificKey
+            ? t(genericKey)
             : phaseSuggestion;
         } catch {
           acc[mealId] = t(genericKey);
         }
         return acc;
       }, {} as Record<string, string>);
-      
+
       setGeneratedSuggestions(defaultSuggestions);
     }
   }, [nutrition.selectedPhase, t]);
@@ -100,13 +100,13 @@ export default function NutritionComponent() {
         selectedPhase: nutrition.selectedPhase,
         constitutionType: nutrition.constitutionType,
       });
-      
+
       // 等待一小段时间让持久化完成
       await new Promise(resolve => setTimeout(resolve, 100));
-      
+
       // 检查食物兼容性
       const compatibility = checkFoodCompatibility(mealPlan, locale);
-      
+
       // 如果有兼容性问题，显示警告
       if (!compatibility.compatible && compatibility.warnings.length > 0) {
         compatibility.warnings.forEach((warning) => {
@@ -130,30 +130,30 @@ export default function NutritionComponent() {
           });
         }
       }
-      
+
       // 基于已选择的食物生成具体的膳食计划
       const meals = ["breakfast", "lunch", "dinner", "snack"] as const;
       const phase = nutrition.selectedPhase;
-      
+
       // 使用优化的食物分配算法，避免寒热冲突
       const optimizedDistribution = optimizeFoodDistribution(mealPlan, meals);
-      
+
       // 将已选择的食物分配到不同的餐次
       const suggestions: Record<string, string> = {};
-      
+
       meals.forEach((meal) => {
         // 使用优化后的分配结果
         const mealFoods = optimizedDistribution[meal] || [];
-        
+
         if (mealFoods.length > 0) {
           // 生成该餐次的具体食谱
           const foodNames = mealFoods.map(f => f.name).join("、");
           const benefits = [...new Set(mealFoods.flatMap(f => f.benefits))].slice(0, 3).join("、");
-          
+
           // 检查该餐次的食物性质
           const natures = [...new Set(mealFoods.map(f => f.tcmNature))];
           const natureText = natures.map(n => t(`nutrition.tcmNature.${n}`)).join("、");
-          
+
           // 获取阶段相关的建议作为补充说明
           const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${meal}`;
           let phaseTip = "";
@@ -165,16 +165,16 @@ export default function NutritionComponent() {
           } catch {
             // 忽略错误
           }
-          
+
           // 添加性质信息
           const natureInfo = `\n\n🌿 ${t("nutrition.foodNature")}：${natureText}`;
-          
+
           suggestions[meal] = `🍽️ ${t("nutrition.recommendedFoods")}：${foodNames}\n\n✨ ${t("nutrition.mainBenefits")}：${benefits}${natureInfo}${phaseTip}`;
         } else {
           // 如果该餐次没有食物，显示通用建议
           const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${meal}`;
           const genericKey = `nutrition.mealSuggestions.${meal}`;
-          
+
           try {
             const phaseSuggestion = t(phaseSpecificKey);
             if (phaseSuggestion === phaseSpecificKey) {
@@ -190,9 +190,9 @@ export default function NutritionComponent() {
 
       // 保存生成的建议到状态
       setGeneratedSuggestions(suggestions);
-      
+
       console.log("Generated meal plan for phase:", phase, suggestions);
-      
+
       // 显示成功提示
       toast.addToast("success", t("nutrition.planGenerated"));
     } catch (error) {
@@ -371,25 +371,25 @@ export default function NutritionComponent() {
             (mealId) => {
               // 根据是否已生成建议来决定显示内容
               const hasGeneratedSuggestions = Object.keys(generatedSuggestions).length > 0;
-              const suggestionText = hasGeneratedSuggestions 
-                ? generatedSuggestions[mealId] 
+              const suggestionText = hasGeneratedSuggestions
+                ? generatedSuggestions[mealId]
                 : (() => {
                     // 如果未生成，尝试显示当前阶段的建议，否则显示通用建议
                     const phase = nutrition.selectedPhase || "menstrual"; // 默认为月经期
                     const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${mealId}`;
                     const genericKey = `nutrition.mealSuggestions.${mealId}`;
-                    
+
                     try {
                       const phaseSuggestion = t(phaseSpecificKey);
                       // 如果返回的键名和输入相同，说明翻译不存在，使用通用建议
-                      return phaseSuggestion === phaseSpecificKey 
-                        ? t(genericKey) 
+                      return phaseSuggestion === phaseSpecificKey
+                        ? t(genericKey)
                         : phaseSuggestion;
                     } catch {
                       return t(genericKey);
                     }
                   })();
-              
+
               return (
                 <div key={mealId} className="p-4 bg-neutral-50 rounded-lg">
                   <h5 className="font-medium text-neutral-900 mb-2">
@@ -438,7 +438,7 @@ export default function NutritionComponent() {
           >
             <ListChecks className="w-4 h-4" /> {t("nutrition.generateButton")}
           </button>
-          
+
           {Object.keys(generatedSuggestions).length > 0 && (
             <button
               type="button"
@@ -446,7 +446,7 @@ export default function NutritionComponent() {
                 const planName = locale === "zh"
                   ? `${t(`nutrition.phases.${nutrition.selectedPhase}`)} - ${new Date().toLocaleDateString()}`
                   : `${t(`nutrition.phases.${nutrition.selectedPhase}`)} - ${new Date().toLocaleDateString()}`;
-                
+
                 const newPlan = {
                   id: `plan-${Date.now()}`,
                   name: planName,
@@ -455,7 +455,7 @@ export default function NutritionComponent() {
                   suggestions: { ...generatedSuggestions },
                   createdAt: new Date(),
                 };
-                
+
                 setSavedMealPlans((prev) => [newPlan, ...prev]);
                 toast.addToast("success", t("nutrition.planSaved"));
               }}
@@ -465,7 +465,7 @@ export default function NutritionComponent() {
               {t("nutrition.savePlan")}
             </button>
           )}
-          
+
           {savedMealPlans.length > 0 && (
             <button
               type="button"
@@ -477,7 +477,7 @@ export default function NutritionComponent() {
             </button>
           )}
         </div>
-        
+
         {/* 已保存的食谱列表 */}
         {showSavedPlans && savedMealPlans.length > 0 && (
           <div className="mt-6 space-y-3">
@@ -507,7 +507,7 @@ export default function NutritionComponent() {
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
-                
+
                 <div className="space-y-2 mb-3">
                   {Object.entries(plan.suggestions).map(([meal, suggestion]) => (
                     <div key={meal} className="text-sm">
@@ -520,7 +520,7 @@ export default function NutritionComponent() {
                     </div>
                   ))}
                 </div>
-                
+
                 <button
                   type="button"
                   onClick={() => {

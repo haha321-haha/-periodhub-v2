@@ -150,7 +150,7 @@ export interface UseLocalStorageReturn<T> {
 }
 
 // 错误类型
-export type NutritionError = 
+export type NutritionError =
   | 'NO_SELECTION'
   | 'DATA_LOAD_ERROR'
   | 'GENERATION_ERROR'

@@ -132,7 +132,7 @@ export default function P2AdvancedFeatures({ locale, userId }: P2AdvancedFeature
             {locale === 'zh' ? 'P2阶段：高级功能' : 'P2 Phase: Advanced Features'}
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-slide-up">
-            {locale === 'zh' 
+            {locale === 'zh'
               ? '体验下一代经期健康管理工具，包含AI智能分析、社交功能、实时同步和高级报告生成'
               : 'Experience next-generation menstrual health management tools with AI analytics, social features, real-time sync, and advanced reporting'
             }
@@ -145,14 +145,14 @@ export default function P2AdvancedFeatures({ locale, userId }: P2AdvancedFeature
             {features.map((feature) => {
               const Icon = feature.icon;
               const isActive = activeFeature === feature.id;
-              
+
               return (
                 <button
                   key={feature.id}
                   onClick={() => setActiveFeature(feature.id as any)}
                   className={`group relative overflow-hidden rounded-xl p-6 transition-all duration-300 transform hover:scale-105 ${
-                    isActive 
-                      ? `bg-gradient-to-r ${getColorClasses(feature.color)} text-white shadow-lg` 
+                    isActive
+                      ? `bg-gradient-to-r ${getColorClasses(feature.color)} text-white shadow-lg`
                       : `bg-gradient-to-r ${getBgColorClasses(feature.color)} text-gray-700 hover:shadow-md`
                   }`}
                 >
@@ -167,7 +167,7 @@ export default function P2AdvancedFeatures({ locale, userId }: P2AdvancedFeature
                       <p className="text-xs opacity-80">{feature.description}</p>
                     </div>
                   </div>
-                  
+
                   {isActive && (
                     <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
                   )}
@@ -182,12 +182,12 @@ export default function P2AdvancedFeatures({ locale, userId }: P2AdvancedFeature
           {features.map((feature) => {
             const Icon = feature.icon;
             const isActive = activeFeature === feature.id;
-            
+
             return (
               <div
                 key={feature.id}
                 className={`rounded-lg p-4 transition-all duration-300 ${
-                  isActive 
+                  isActive
                     ? `bg-gradient-to-r ${getColorClasses(feature.color)} text-white shadow-lg transform scale-105`
                     : `bg-white border border-gray-200 hover:shadow-md`
                 }`}
@@ -214,36 +214,36 @@ export default function P2AdvancedFeatures({ locale, userId }: P2AdvancedFeature
         {/* 功能内容区域 */}
         <div className="animate-fade-in">
           {activeFeature === 'analytics' && (
-            <AnalyticsDashboard 
-              locale={locale} 
+            <AnalyticsDashboard
+              locale={locale}
               userId={userId}
             />
           )}
-          
+
           {activeFeature === 'ai' && (
-            <PersonalizedRecommendationEngine 
+            <PersonalizedRecommendationEngine
               locale={locale}
               userProfile={userProfile}
               assessmentHistory={[]}
             />
           )}
-          
+
           {activeFeature === 'social' && (
-            <SocialFeatures 
+            <SocialFeatures
               locale={locale}
               userId={userId}
             />
           )}
-          
+
           {activeFeature === 'sync' && (
-            <DataSync 
+            <DataSync
               locale={locale}
               userId={userId}
             />
           )}
-          
+
           {activeFeature === 'reports' && (
-            <ReportGenerator 
+            <ReportGenerator
               locale={locale}
               userId={userId}
             />
@@ -257,7 +257,7 @@ export default function P2AdvancedFeatures({ locale, userId }: P2AdvancedFeature
               {locale === 'zh' ? '准备体验完整功能？' : 'Ready to experience the full features?'}
             </h2>
             <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? '立即开始使用P2阶段的所有高级功能，获得更智能、更个性化的经期健康管理体验'
                 : 'Start using all P2 advanced features now for a smarter, more personalized menstrual health management experience'
               }
@@ -288,7 +288,7 @@ export default function P2AdvancedFeatures({ locale, userId }: P2AdvancedFeature
               {locale === 'zh' ? '端到端加密，符合GDPR和HIPAA标准' : 'End-to-end encryption, GDPR and HIPAA compliant'}
             </p>
           </div>
-          
+
           <div className="text-center">
             <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
               <Activity className="w-8 h-8 text-white" />
@@ -300,7 +300,7 @@ export default function P2AdvancedFeatures({ locale, userId }: P2AdvancedFeature
               {locale === 'zh' ? '毫秒级响应，99.9%可用性保证' : 'Millisecond response time, 99.9% uptime guarantee'}
             </p>
           </div>
-          
+
           <div className="text-center">
             <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
               <Award className="w-8 h-8 text-white" />

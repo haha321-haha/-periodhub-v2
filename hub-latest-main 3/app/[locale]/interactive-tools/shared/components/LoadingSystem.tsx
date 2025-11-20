@@ -24,7 +24,7 @@ export function LoadingSpinner({ size = 'md', color = 'primary', className = '' 
   };
 
   return (
-    <Loader2 
+    <Loader2
       className={`animate-spin ${sizeClasses[size]} ${colorClasses[color]} ${className}`}
       aria-label="Loading"
     />
@@ -40,12 +40,12 @@ interface LoadingOverlayProps {
   className?: string;
 }
 
-export function LoadingOverlay({ 
-  isVisible, 
-  message = 'Loading...', 
+export function LoadingOverlay({
+  isVisible,
+  message = 'Loading...',
   progress,
   onCancel,
-  className = '' 
+  className = ''
 }: LoadingOverlayProps) {
   if (!isVisible) return null;
 
@@ -55,7 +55,7 @@ export function LoadingOverlay({
         <div className="flex flex-col items-center">
           <LoadingSpinner size="lg" />
           <p className="mt-4 text-gray-700 text-center">{message}</p>
-          
+
           {progress !== undefined && (
             <div className="w-full mt-4">
               <div className="flex justify-between text-sm text-gray-600 mb-1">
@@ -63,14 +63,14 @@ export function LoadingOverlay({
                 <span>{Math.round(progress)}%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
-                <div 
+                <div
                   className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
             </div>
           )}
-          
+
           {onCancel && (
             <button
               onClick={onCancel}
@@ -93,11 +93,11 @@ interface InlineLoadingProps {
   className?: string;
 }
 
-export function InlineLoading({ 
-  isLoading, 
-  children, 
-  loadingText = 'Loading...', 
-  className = '' 
+export function InlineLoading({
+  isLoading,
+  children,
+  loadingText = 'Loading...',
+  className = ''
 }: InlineLoadingProps) {
   if (isLoading) {
     return (
@@ -121,13 +121,13 @@ interface ProgressBarProps {
   className?: string;
 }
 
-export function ProgressBar({ 
-  progress, 
-  label, 
-  showPercentage = true, 
+export function ProgressBar({
+  progress,
+  label,
+  showPercentage = true,
   color = 'blue',
   size = 'md',
-  className = '' 
+  className = ''
 }: ProgressBarProps) {
   const colorClasses = {
     blue: 'bg-blue-600',
@@ -153,7 +153,7 @@ export function ProgressBar({
         </div>
       )}
       <div className={`w-full bg-gray-200 rounded-full ${sizeClasses[size]}`}>
-        <div 
+        <div
           className={`${colorClasses[color]} ${sizeClasses[size]} rounded-full transition-all duration-300`}
           style={{ width: `${clampedProgress}%` }}
         />
@@ -215,14 +215,14 @@ interface SkeletonProps {
   variant?: 'text' | 'rectangular' | 'circular';
 }
 
-export function Skeleton({ 
-  width = '100%', 
-  height = '1rem', 
-  className = '', 
-  variant = 'rectangular' 
+export function Skeleton({
+  width = '100%',
+  height = '1rem',
+  className = '',
+  variant = 'rectangular'
 }: SkeletonProps) {
   const baseClasses = 'animate-pulse bg-gray-200';
-  
+
   const variantClasses = {
     text: 'rounded',
     rectangular: 'rounded',
@@ -235,7 +235,7 @@ export function Skeleton({
   };
 
   return (
-    <div 
+    <div
       className={`${baseClasses} ${variantClasses[variant]} ${className}`}
       style={style}
     />
@@ -311,12 +311,12 @@ interface AsyncOperationProps {
   }) => React.ReactNode;
 }
 
-export function AsyncOperation({ 
-  operation, 
-  onSuccess, 
-  onError, 
-  loadingMessage = 'Processing...', 
-  children 
+export function AsyncOperation({
+  operation,
+  onSuccess,
+  onError,
+  loadingMessage = 'Processing...',
+  children
 }: AsyncOperationProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -347,8 +347,8 @@ export function AsyncOperation({
   return (
     <>
       {children({ execute, isLoading, error, result })}
-      <LoadingOverlay 
-        isVisible={isLoading} 
+      <LoadingOverlay
+        isVisible={isLoading}
         message={loadingMessage}
       />
     </>

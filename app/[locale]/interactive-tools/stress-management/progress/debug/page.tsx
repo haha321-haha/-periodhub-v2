@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { 
-  getAllEntries, 
+import {
+  getAllEntries,
   getStorageInfo,
   deleteOldestEntries,
-  type ProgressEntry 
+  type ProgressEntry
 } from "@/lib/progressStorage";
 
 export default function DebugPage() {
@@ -74,7 +74,7 @@ export default function DebugPage() {
   const deleteOldEntries = () => {
     const count = prompt("How many oldest entries do you want to delete?", "10");
     if (!count) return;
-    
+
     const numCount = parseInt(count, 10);
     if (isNaN(numCount) || numCount <= 0) {
       alert("Please enter a valid number");
@@ -212,7 +212,7 @@ export default function DebugPage() {
                   {storageInfo.isFull ? "⚠️ Storage is full!" : "⚠️ Storage is almost full!"}
                 </p>
                 <p className="text-sm mt-1 text-gray-700">
-                  {storageInfo.isFull 
+                  {storageInfo.isFull
                     ? "You cannot add new entries. Please delete some old entries to free up space."
                     : "Consider deleting old entries to prevent storage issues."}
                 </p>

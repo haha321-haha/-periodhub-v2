@@ -42,7 +42,7 @@ export function getAssessmentQuestions(t: TranslationFunction): Question[] {
         { value: 'very_irregular', label: t('cycle_regularity.options.very_irregular'), weight: 3 }
       ]
     },
-    
+
     // Medical history
     {
       id: 'medical_conditions',
@@ -62,7 +62,7 @@ export function getAssessmentQuestions(t: TranslationFunction): Question[] {
         { value: 'none', label: t('medical_conditions.options.none'), weight: 0 }
       ]
     },
-    
+
     // 疼痛相关
     {
       id: 'pain_severity',

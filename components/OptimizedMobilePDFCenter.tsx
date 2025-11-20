@@ -1425,7 +1425,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         t("tags.heatTherapyMethod"),
         t("tags.heatTherapyTreatment"),
       ],
-      
+
       // === 新增：精油/芳香疗法同义词映射 ===
       "精油": [
         "芳疗",
@@ -1462,7 +1462,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         "芳疗",
         "芳香疗法",
       ],
-      
+
       // === 新增：IUD/避孕同义词映射 ===
       "宫内节育器": [
         "节育环",
@@ -1495,7 +1495,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         "宫内节育器",
         "节育环",
       ],
-      
+
       // === 新增：NSAIDs/药物品牌同义词映射 ===
       "NSAID": [
         "非甾体抗炎药",
@@ -1534,7 +1534,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         "萘普生",
         "安乃威",
       ],
-      
+
       // === 新增：并发症同义词映射 ===
       "并发症": [
         "严重疼痛",
@@ -1563,7 +1563,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         "子宫内膜异位症",
         "并发症",
       ],
-      
+
       // === 新增：营养补充剂同义词映射 ===
       "补充剂": [
         "维生素",

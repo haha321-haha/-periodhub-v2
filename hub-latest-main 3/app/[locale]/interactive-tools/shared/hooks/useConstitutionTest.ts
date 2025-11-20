@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { 
-  ConstitutionQuestion, 
-  ConstitutionAnswer, 
-  ConstitutionSession, 
+import {
+  ConstitutionQuestion,
+  ConstitutionAnswer,
+  ConstitutionSession,
   ConstitutionResult,
-  ConstitutionType 
+  ConstitutionType
 } from '../types/constitution';
 import { constitutionQuestions } from '../data/constitutionQuestions';
 import { constitutionRecommendations } from '../data/constitutionRecommendations';
@@ -18,11 +18,11 @@ interface UseConstitutionTestReturn {
   currentQuestionIndex: number;
   currentQuestion: ConstitutionQuestion | null;
   isComplete: boolean;
-  
+
   // Progress
   progress: number;
   totalQuestions: number;
-  
+
   // Actions
   startTest: (locale: string) => void;
   answerQuestion: (answer: ConstitutionAnswer) => void;
@@ -31,10 +31,10 @@ interface UseConstitutionTestReturn {
   goToNextQuestion: () => void;
   completeTest: () => ConstitutionResult | null;
   resetTest: () => void;
-  
+
   // Results
   result: ConstitutionResult | null;
-  
+
   // State
   isLoading: boolean;
   error: string | null;
@@ -60,7 +60,7 @@ export function useConstitutionTest(): UseConstitutionTestReturn {
       startedAt: new Date().toISOString(),
       locale
     };
-    
+
     setCurrentSession(newSession);
     setCurrentQuestionIndex(0);
     setResult(null);
@@ -72,16 +72,16 @@ export function useConstitutionTest(): UseConstitutionTestReturn {
 
     setCurrentSession(prev => {
       if (!prev) return prev;
-      
+
       const existingAnswerIndex = prev.answers.findIndex(a => a.questionId === answer.questionId);
       const updatedAnswers = [...prev.answers];
-      
+
       if (existingAnswerIndex >= 0) {
         updatedAnswers[existingAnswerIndex] = answer;
       } else {
         updatedAnswers.push(answer);
       }
-      
+
       return {
         ...prev,
         answers: updatedAnswers
@@ -143,19 +143,19 @@ export function useConstitutionTest(): UseConstitutionTestReturn {
     }
 
     setIsLoading(true);
-    
+
     try {
       const scores = calculateConstitutionScores(currentSession.answers);
-      
+
       // 找出得分最高的体质类型
       const sortedScores = Object.entries(scores).sort(([,a], [,b]) => b - a);
       const primaryType = sortedScores[0][0] as ConstitutionType;
       const secondaryType = sortedScores[1][1] > 0 ? sortedScores[1][0] as ConstitutionType : undefined;
-      
+
       // 计算置信度
       const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
       const confidence = totalScore > 0 ? Math.round((scores[primaryType] / totalScore) * 100) : 0;
-      
+
       const testResult: ConstitutionResult = {
         primaryType,
         secondaryType,
@@ -174,7 +174,7 @@ export function useConstitutionTest(): UseConstitutionTestReturn {
 
       setResult(testResult);
       setError(null);
-      
+
       return testResult;
     } catch (err) {
       const isEnglish = currentSession?.locale === 'en';

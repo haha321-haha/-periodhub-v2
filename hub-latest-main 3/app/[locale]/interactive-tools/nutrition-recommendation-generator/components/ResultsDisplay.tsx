@@ -31,7 +31,7 @@ export default function ResultsDisplay({ results, language }: ResultsDisplayProp
         <h2 className="text-xl font-bold text-gray-900 mb-4">
           {results.category}
         </h2>
-        
+
         {/* 基于ziV1d3d的结果展示 */}
         {results.items.map((data, index) => (
           <div key={index} className="result-card mb-6" style={{ animationDelay: data.delay }}>
@@ -82,7 +82,7 @@ export default function ResultsDisplay({ results, language }: ResultsDisplayProp
               {language === 'zh' ? '暂无推荐内容' : 'No Recommendations Available'}
             </h3>
             <p className="text-gray-500">
-              {language === 'zh' 
+              {language === 'zh'
                 ? '请选择更多选项以获得更丰富的营养建议'
                 : 'Please select more options to get richer nutrition recommendations'
               }

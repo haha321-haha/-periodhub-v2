@@ -15,16 +15,16 @@ interface PerformanceMetrics {
   largestContentfulPaint: number;
   firstInputDelay: number;
   cumulativeLayoutShift: number;
-  
+
   // 运行时性能
   memoryUsage: number;
   renderTime: number;
   componentCount: number;
-  
+
   // 网络性能
   networkRequests: number;
   totalTransferSize: number;
-  
+
   // 用户体验
   interactionTime: number;
   errorRate: number;
@@ -69,28 +69,28 @@ export function usePerformanceMonitoring() {
       const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
       const paintEntries = performance.getEntriesByType('paint');
       const measureEntries = performance.getEntriesByType('measure');
-      
+
       // 页面加载时间
       metrics.loadTime = navigation.loadEventEnd - navigation.loadEventStart;
-      
+
       // 首次内容绘制
       const fcpEntry = paintEntries.find(entry => entry.name === 'first-contentful-paint');
       if (fcpEntry) {
         metrics.firstContentfulPaint = fcpEntry.startTime;
       }
-      
+
       // 最大内容绘制
       const lcpEntry = paintEntries.find(entry => entry.name === 'largest-contentful-paint');
       if (lcpEntry) {
         metrics.largestContentfulPaint = lcpEntry.startTime;
       }
-      
+
       // 内存使用情况
       if ('memory' in performance) {
         const memory = (performance as any).memory;
         metrics.memoryUsage = memory.usedJSHeapSize / memory.jsHeapSizeLimit;
       }
-      
+
       // 网络请求统计
       const resourceEntries = performance.getEntriesByType('resource');
       metrics.networkRequests = resourceEntries.length;
@@ -111,7 +111,7 @@ export function usePerformanceMonitoring() {
             }
           }
         });
-        
+
         observer.observe({ entryTypes: ['largest-contentful-paint'] });
       } catch (error) {
         console.warn('Web Vitals monitoring not available:', error);
@@ -196,14 +196,14 @@ export function usePerformanceMonitoring() {
   // 开始监控
   const startMonitoring = useCallback(async () => {
     setIsMonitoring(true);
-    
+
     try {
       const collectedMetrics = await collectMetrics();
       const optimizationSuggestions = generateSuggestions(collectedMetrics);
-      
+
       setMetrics(collectedMetrics);
       setSuggestions(optimizationSuggestions);
-      
+
       console.log('📊 性能指标收集完成:', collectedMetrics);
       console.log('💡 优化建议:', optimizationSuggestions);
     } catch (error) {

@@ -92,7 +92,7 @@ export const structuredData = {
 // 生成SEO元数据
 export function generateSEOMetadata(locale: 'en' | 'zh'): Metadata {
   const config = locale === 'zh' ? seoConfig.zh : seoConfig.en;
-  
+
   return {
     title: config.title,
     description: config.description,

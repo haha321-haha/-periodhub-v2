@@ -1,6 +1,6 @@
 /**
  * 推荐内容库配置
- * 
+ *
  * 这个文件包含所有推荐内容的配置
  * 每个推荐项都包含:
  * - id: 唯一标识符
@@ -21,7 +21,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
   // ========================================
   // 文章推荐 (Articles)
   // ========================================
-  
+
   // 高疼痛相关文章
   {
     id: 'article-dysmenorrhea-guide',
@@ -45,7 +45,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxPainLevel: 10,
     },
   },
-  
+
   {
     id: 'article-immediate-relief',
     type: 'article',
@@ -68,7 +68,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxPainLevel: 10,
     },
   },
-  
+
   {
     id: 'article-medical-care-guide',
     type: 'article',
@@ -91,7 +91,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxPainLevel: 10,
     },
   },
-  
+
   // 中低疼痛相关文章
   {
     id: 'article-natural-therapies',
@@ -115,7 +115,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxPainLevel: 8,
     },
   },
-  
+
   {
     id: 'article-understanding-pain',
     type: 'article',
@@ -138,7 +138,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxPainLevel: 10,
     },
   },
-  
+
   {
     id: 'article-medication-guide',
     type: 'article',
@@ -161,7 +161,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxPainLevel: 10,
     },
   },
-  
+
   {
     id: 'article-teen-health',
     type: 'article',
@@ -184,11 +184,11 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxPainLevel: 10,
     },
   },
-  
+
   // ========================================
   // 工具推荐 (Tools)
   // ========================================
-  
+
   {
     id: 'tool-pain-tracker',
     type: 'tool',
@@ -209,7 +209,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 3,
     },
   },
-  
+
   {
     id: 'tool-symptom-assessment',
     type: 'tool',
@@ -230,7 +230,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 4,
     },
   },
-  
+
   {
     id: 'tool-cycle-tracker',
     type: 'tool',
@@ -251,7 +251,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 1,
     },
   },
-  
+
   {
     id: 'tool-constitution-test',
     type: 'tool',
@@ -272,7 +272,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 1,
     },
   },
-  
+
   {
     id: 'tool-nutrition-generator',
     type: 'tool',
@@ -293,7 +293,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 1,
     },
   },
-  
+
   {
     id: 'tool-impact-calculator',
     type: 'tool',
@@ -315,7 +315,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxEfficiency: 70,
     },
   },
-  
+
   {
     id: 'tool-stress-management',
     type: 'tool',
@@ -337,7 +337,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       requiredSymptoms: ['anxiety', 'mood-swings', 'stress'],
     },
   },
-  
+
   {
     id: 'tool-workplace-wellness',
     type: 'tool',
@@ -359,11 +359,11 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxEfficiency: 80,
     },
   },
-  
+
   // ========================================
   // 场景解决方案 (Scenario Solutions)
   // ========================================
-  
+
   {
     id: 'scenario-office',
     type: 'scenario',
@@ -385,7 +385,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxEfficiency: 75,
     },
   },
-  
+
   {
     id: 'scenario-commute',
     type: 'scenario',
@@ -406,7 +406,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 4,
     },
   },
-  
+
   {
     id: 'scenario-exercise',
     type: 'scenario',
@@ -428,7 +428,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxPainLevel: 6,
     },
   },
-  
+
   {
     id: 'scenario-social',
     type: 'scenario',
@@ -449,7 +449,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 3,
     },
   },
-  
+
   {
     id: 'scenario-sleep',
     type: 'scenario',
@@ -471,7 +471,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       requiredSymptoms: ['fatigue', 'insomnia'],
     },
   },
-  
+
   {
     id: 'scenario-emergency-kit',
     type: 'scenario',
@@ -492,7 +492,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 1,
     },
   },
-  
+
   {
     id: 'scenario-partner-communication',
     type: 'scenario',
@@ -513,7 +513,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 1,
     },
   },
-  
+
   {
     id: 'scenario-life-stages',
     type: 'scenario',
@@ -534,11 +534,11 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 1,
     },
   },
-  
+
   // ========================================
   // 实用建议 (Tips)
   // ========================================
-  
+
   {
     id: 'tip-heat-therapy',
     type: 'tip',
@@ -560,7 +560,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxPainLevel: 10,
     },
   },
-  
+
   {
     id: 'tip-breathing',
     type: 'tip',
@@ -582,7 +582,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       requiredSymptoms: ['anxiety', 'stress'],
     },
   },
-  
+
   {
     id: 'tip-posture',
     type: 'tip',
@@ -604,7 +604,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       maxPainLevel: 8,
     },
   },
-  
+
   {
     id: 'tip-hydration',
     type: 'tip',
@@ -625,7 +625,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 1,
     },
   },
-  
+
   {
     id: 'tip-diet',
     type: 'tip',
@@ -646,11 +646,11 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 3,
     },
   },
-  
+
   // ========================================
   // 行动建议 (Actions)
   // ========================================
-  
+
   {
     id: 'action-medical-consultation',
     type: 'action',
@@ -671,7 +671,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 9,
     },
   },
-  
+
   {
     id: 'action-record-data',
     type: 'action',
@@ -692,7 +692,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 1,
     },
   },
-  
+
   {
     id: 'action-update-preferences',
     type: 'action',
@@ -713,7 +713,7 @@ export const RECOMMENDATION_CONTENT: RecommendationItem[] = [
       minPainLevel: 1,
     },
   },
-  
+
   {
     id: 'action-export-data',
     type: 'action',

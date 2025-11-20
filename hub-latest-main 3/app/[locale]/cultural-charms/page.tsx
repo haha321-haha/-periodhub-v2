@@ -11,7 +11,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'culturalCharmsPage' });
-  
+
   return {
     title: t('title'),
     description: t('description'),
@@ -33,10 +33,10 @@ export default async function CulturalCharmsPage({
 }) {
   const { locale } = await params;
   unstable_setRequestLocale(locale);
-  
+
   // Get translations for the cultural charms page
   const t = await getTranslations({ locale, namespace: 'culturalCharmsPage' });
-  
+
   return (
     <div className="space-y-10">
       {/* Page Header */}
@@ -72,12 +72,12 @@ export default async function CulturalCharmsPage({
         <p className="text-neutral-600 mb-6">
           {t('contentSection1Description')}
         </p>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Placeholder Images/Media */}
           {[1, 2, 3].map((item) => (
-            <div 
-              key={item} 
+            <div
+              key={item}
               className="card aspect-video flex items-center justify-center bg-neutral-100 border-2 border-dashed border-neutral-300"
             >
               <p className="text-neutral-500">{t('imagePlaceholder')} {item}</p>
@@ -85,7 +85,7 @@ export default async function CulturalCharmsPage({
           ))}
         </div>
       </section>
-      
+
       {/* AI Image Prompts Section - For internal reference, can be removed or hidden in production */}
       <section className="bg-neutral-100 p-6 rounded-lg shadow-inner">
         <h3 className="text-lg font-semibold text-neutral-700 mb-2">AI Image Prompt Ideas (for internal use):</h3>

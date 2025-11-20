@@ -29,24 +29,24 @@ interface WorkplaceResults {
   suggestions: string[];
 }
 
-export default function WorkplaceImpactAssessmentPage({ 
-  params 
-}: { 
-  params: Promise<{ locale: string }> 
+export default function WorkplaceImpactAssessmentPage({
+  params
+}: {
+  params: Promise<{ locale: string }>
 }) {
   const router = useRouter();
   const t = useTranslations('interactiveTools.workplaceAssessment');
   const commonT = useTranslations('common');
-  
+
   // 页面状态管理
   const [currentState, setCurrentState] = useState<PageState>('welcome');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<WorkplaceAnswers>({});
   const [results, setResults] = useState<WorkplaceResults | null>(null);
-  
+
   // 获取题库数据
   const questions = getWorkplaceQuestions('zh'); // 使用固定语言，因为题库数据已经在组件中处理国际化
-  
+
   // 设置页面标题
   useEffect(() => {
     const metaTitle = t('metaTitle') || '职场影响评估 - 专业痛经对工作影响分析工具 | Period Hub';
@@ -104,12 +104,12 @@ export default function WorkplaceImpactAssessmentPage({
     switch (currentState) {
       case 'welcome':
         return <WelcomeScreen onStart={handleStartAssessment} onBack={handleBack} />;
-      
+
       case 'questions':
         return (
           <div className="space-y-6">
-            <ProgressBar 
-              current={currentQuestionIndex + 1} 
+            <ProgressBar
+              current={currentQuestionIndex + 1}
               total={questions.length}
             />
             <QuestionScreen
@@ -123,7 +123,7 @@ export default function WorkplaceImpactAssessmentPage({
             />
           </div>
         );
-      
+
       case 'results':
         return (
           <ResultsScreen
@@ -132,7 +132,7 @@ export default function WorkplaceImpactAssessmentPage({
             onBack={handleBack}
           />
         );
-      
+
       default:
         return <WelcomeScreen onStart={handleStartAssessment} onBack={handleBack} />;
     }

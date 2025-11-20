@@ -24,8 +24,8 @@ const RISK_COLORS = {
   low: 'text-green-600 bg-green-50 border-green-200'
 };
 
-export default function SymptomChecklist({ 
-  onAnalysisComplete, 
+export default function SymptomChecklist({
+  onAnalysisComplete,
   className = '',
   preSelectedSymptoms = []
 }: SymptomChecklistProps) {
@@ -59,13 +59,13 @@ export default function SymptomChecklist({
     if (checkedSymptoms.length === 0) return;
 
     setIsAnalyzing(true);
-    
+
     // 模拟分析延迟，增强用户体验
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     const result = analyzeSymptoms();
     setIsAnalyzing(false);
-    
+
     onAnalysisComplete?.(result);
   }, [checkedSymptoms, analyzeSymptoms, onAnalysisComplete]);
 
@@ -100,7 +100,7 @@ export default function SymptomChecklist({
           if (symptoms.length === 0) return null;
 
           const RiskIcon = RISK_ICONS[riskLevel];
-          
+
           return (
             <div key={riskLevel} className={styles.symptomGroup}>
               <div className={styles.groupHeader}>
@@ -112,7 +112,7 @@ export default function SymptomChecklist({
                   {t(`symptomChecker.riskLevels.${riskLevel}.badge`)}
                 </span>
               </div>
-              
+
               <div className={styles.symptomList}>
                 {symptoms.map(symptom => (
                   <div
@@ -129,7 +129,7 @@ export default function SymptomChecklist({
                         className={styles.checkbox}
                         aria-describedby={`${symptom.id}-description`}
                       />
-                      
+
                       <div className={styles.symptomContent}>
                         <div className={styles.symptomHeader}>
                           <span className={styles.symptomIcon}>{symptom.icon}</span>
@@ -137,9 +137,9 @@ export default function SymptomChecklist({
                             {t(symptom.text)}
                           </span>
                         </div>
-                        
+
                         {symptom.description && (
-                          <div 
+                          <div
                             id={`${symptom.id}-description`}
                             className={styles.symptomDescription}
                           >
@@ -174,7 +174,7 @@ export default function SymptomChecklist({
             t('symptomChecker.analyzeButton')
           )}
         </button>
-        
+
         {(checkedSymptoms.length > 0 || assessmentResult) && (
           <button
             onClick={handleReset}
@@ -193,7 +193,7 @@ export default function SymptomChecklist({
               {t('symptomChecker.results.title')}
             </h4>
           </div>
-          
+
           <div className={`${styles.resultCard} ${RISK_COLORS[assessmentResult.riskLevel]}`}>
             <div className={styles.resultHeader}>
               <div className={styles.resultIcon}>
@@ -211,12 +211,12 @@ export default function SymptomChecklist({
                 </p>
               </div>
             </div>
-            
+
             <div className={styles.resultContent}>
               <p className={styles.resultDescription}>
                 {t(`symptomChecker.results.riskLevels.${assessmentResult.riskLevel}.description`)}
               </p>
-              
+
               {assessmentResult.recommendations.length > 0 && (
                 <div className={styles.recommendations}>
                   <h6 className={styles.recommendationsTitle}>
@@ -232,7 +232,7 @@ export default function SymptomChecklist({
                 </div>
               )}
             </div>
-            
+
             {/* 紧急情况特殊提示 */}
             {assessmentResult.riskLevel === 'emergency' && (
               <div className={styles.emergencyAlert}>
@@ -251,9 +251,9 @@ export default function SymptomChecklist({
       {checkedSymptoms.length > 0 && (
         <div className={styles.summary}>
           <p className={styles.summaryText}>
-            {t('symptomChecker.summary', { 
+            {t('symptomChecker.summary', {
               count: checkedSymptoms.length,
-              total: SYMPTOM_DATA.length 
+              total: SYMPTOM_DATA.length
             })}
           </p>
         </div>

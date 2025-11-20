@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { 
-  PAIN_LOCATIONS, 
-  SYMPTOMS, 
-  REMEDIES, 
-  MENSTRUAL_STATUS, 
-  PAIN_LEVELS, 
+import {
+  PAIN_LOCATIONS,
+  SYMPTOMS,
+  REMEDIES,
+  MENSTRUAL_STATUS,
+  PAIN_LEVELS,
   PAIN_TYPES,
   MEDICAL_TERMS,
   CULTURAL_DESCRIPTIONS
@@ -45,7 +45,7 @@ export default function TranslationTestComponent({ locale }: TranslationTestComp
     <div className="space-y-4">
       <h3 className="text-lg font-semibold">{t('title')}</h3>
       <p className="text-gray-600">{t('description')}</p>
-      
+
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-blue-50 p-4 rounded-lg">
           <h4 className="font-medium">{t('navigation.record')}</h4>
@@ -167,7 +167,7 @@ export default function TranslationTestComponent({ locale }: TranslationTestComp
           <div key={level.value} className="border rounded-lg p-3 hover:bg-gray-50">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div 
+                <div
                   className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm"
                   style={{ backgroundColor: level?.color }}
                 >
@@ -224,7 +224,7 @@ export default function TranslationTestComponent({ locale }: TranslationTestComp
   const renderCultural = () => (
     <div className="space-y-4">
       <h3 className="text-lg font-semibold">{locale === 'zh' ? '文化适应性描述' : 'Cultural Descriptions'}</h3>
-      
+
       <div className="space-y-4">
         <div className="border rounded-lg p-4">
           <h4 className="font-medium mb-2">{locale === 'zh' ? '疼痛比喻' : 'Pain Metaphors'}</h4>
@@ -275,7 +275,7 @@ export default function TranslationTestComponent({ locale }: TranslationTestComp
           {locale === 'zh' ? '疼痛追踪器翻译测试' : 'Pain Tracker Translation Test'}
         </h1>
         <p className="text-gray-600">
-          {locale === 'zh' 
+          {locale === 'zh'
             ? '当前语言：中文 (zh) - 此页面展示所有翻译内容以验证语言切换功能'
             : 'Current Language: English (en) - This page demonstrates all translated content to verify language switching'
           }
@@ -308,7 +308,7 @@ export default function TranslationTestComponent({ locale }: TranslationTestComp
 
       {/* Footer */}
       <div className="mt-6 text-center text-sm text-gray-500">
-        {locale === 'zh' 
+        {locale === 'zh'
           ? '✅ 所有翻译内容已成功加载并显示'
           : '✅ All translation content successfully loaded and displayed'
         }

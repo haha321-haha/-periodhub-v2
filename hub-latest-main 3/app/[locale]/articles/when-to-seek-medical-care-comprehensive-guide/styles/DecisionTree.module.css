@@ -232,40 +232,40 @@
   .container {
     @apply p-4 mx-2;
   }
-  
+
   .title {
     @apply text-xl;
   }
-  
+
   .questionCard {
     @apply p-4;
   }
-  
+
   .questionText {
     @apply text-lg;
   }
-  
+
   .questionOptions {
     @apply flex-col;
   }
-  
+
   .optionButton {
     @apply text-base py-3;
     min-height: 48px; /* 增加移动端触摸区域 */
   }
-  
+
   .resultCard {
     @apply p-4;
   }
-  
+
   .resultTitle {
     @apply text-xl;
   }
-  
+
   .pathSteps {
     @apply flex-col items-start gap-2;
   }
-  
+
   .stepArrow {
     @apply rotate-90 my-1 mx-0;
   }
@@ -286,11 +286,11 @@
   .container {
     @apply border-2 border-gray-800;
   }
-  
+
   .questionCard {
     @apply border-2 border-blue-600;
   }
-  
+
   .resultCard {
     @apply border-4;
   }

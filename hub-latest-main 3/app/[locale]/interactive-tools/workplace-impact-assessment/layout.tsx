@@ -6,11 +6,11 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  
+
   const isZh = locale === 'zh';
-  
+
   return {
-    title: isZh 
+    title: isZh
       ? '职场影响评估 - 专业痛经对工作影响分析工具 | Period Hub'
       : 'Workplace Impact Assessment - Professional Period Pain Work Impact Analysis Tool | Period Hub',
     description: isZh
@@ -20,7 +20,7 @@ export async function generateMetadata({
       ? '职场影响评估,痛经工作影响,工作效率分析,职场适应策略,女性健康管理'
       : 'workplace impact assessment,period pain work impact,work efficiency analysis,workplace adaptation strategies,women health management',
     openGraph: {
-      title: isZh 
+      title: isZh
         ? '职场影响评估 - 专业痛经对工作影响分析工具'
         : 'Workplace Impact Assessment - Professional Period Pain Work Impact Analysis Tool',
       description: isZh
@@ -32,7 +32,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: isZh 
+      title: isZh
         ? '职场影响评估 - 专业痛经对工作影响分析工具'
         : 'Workplace Impact Assessment - Professional Period Pain Work Impact Analysis Tool',
       description: isZh

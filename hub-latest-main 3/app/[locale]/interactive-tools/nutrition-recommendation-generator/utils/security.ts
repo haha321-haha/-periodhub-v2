@@ -63,7 +63,7 @@ export class InputValidator {
 
     // 基于ziV1d3d的HTML清理
     const sanitized = this.sanitizeHtml(input);
-    
+
     return { isValid: true, sanitized };
   }
 
@@ -76,7 +76,7 @@ export class InputValidator {
     // 移除危险标签
     const dangerousTags = /<script[^>]*>.*?<\/script>/gi;
     const dangerousAttributes = /on\w+\s*=/gi;
-    
+
     const sanitized = input
       .replace(dangerousTags, '')
       .replace(dangerousAttributes, '')
@@ -146,7 +146,7 @@ export class RateLimiter {
     const max = securityConfig.rateLimit.max;
 
     const requestData = this.requests.get(ip);
-    
+
     if (!requestData || now > requestData.resetTime) {
       // 新的时间窗口
       this.requests.set(ip, { count: 1, resetTime: now + windowMs });
@@ -196,7 +196,7 @@ export function securityMiddleware(req: any, res: any, next: any): void {
   // 速率限制检查
   const ip = req.ip || req.connection.remoteAddress;
   const rateLimit = RateLimiter.checkRateLimit(ip);
-  
+
   if (!rateLimit.allowed) {
     res.status(429).json({ error: securityConfig.rateLimit.message });
     return;

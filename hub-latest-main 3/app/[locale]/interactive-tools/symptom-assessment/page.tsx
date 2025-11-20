@@ -4,14 +4,14 @@ import SymptomAssessmentClient from './symptom-assessment-client';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'interactiveTools' });
-  
+
   return {
-    title: t('meta.title', { 
-      default: locale === 'zh' 
+    title: t('meta.title', {
+      default: locale === 'zh'
         ? '痛经严重度计算器 - PeriodHub | 经期疼痛智能评估工具'
         : 'Period Pain Calculator - PeriodHub | Menstrual Pain Assessment Tool'
     }),
-    description: t('meta.description', { 
+    description: t('meta.description', {
       default: locale === 'zh'
         ? '免费痛经严重度计算器：3分钟科学评估经期疼痛程度，获得个性化缓解建议。包含疼痛机制解析、补镁指导、热敷方案等专业医疗建议。'
         : 'Free Period Pain Calculator: 3-minute scientific assessment of menstrual pain severity with personalized relief recommendations. Includes pain mechanism analysis, magnesium guidance, and heat therapy protocols.'
@@ -21,13 +21,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     ] : [
       'period pain calculator', 'menstrual pain assessment', 'dysmenorrhea severity test', 'period pain mechanisms', 'magnesium for cramps', 'menstrual pain relief', 'period pain evaluation tool'
     ],
-    
+
     openGraph: {
-      title: t('meta.ogTitle', { 
+      title: t('meta.ogTitle', {
         default: locale === 'zh' ? '症状评估工具 - PeriodHub' : 'Symptom Assessment Tool - PeriodHub'
       }),
-      description: t('meta.ogDescription', { 
-        default: locale === 'zh' 
+      description: t('meta.ogDescription', {
+        default: locale === 'zh'
           ? '智能经期症状分析工具'
           : 'Smart menstrual symptom analysis tool'
       }),
@@ -36,14 +36,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'PeriodHub',
       url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/symptom-assessment`,
     },
-    
+
     twitter: {
       card: 'summary_large_image',
-      title: t('meta.twitterTitle', { 
+      title: t('meta.twitterTitle', {
         default: locale === 'zh' ? '症状评估工具 - PeriodHub' : 'Symptom Assessment Tool - PeriodHub'
       }),
-      description: t('meta.twitterDescription', { 
-        default: locale === 'zh' 
+      description: t('meta.twitterDescription', {
+        default: locale === 'zh'
           ? '专业的经期健康评估工具'
           : 'Professional menstrual health assessment tool'
       }),

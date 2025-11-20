@@ -83,10 +83,10 @@ export default function WorkplaceWellnessPage() {
   useEffect(() => {
     // 启动性能监控
     PerformanceMonitor.observeWebVitals();
-    
+
     // 预加载关键组件
     preloadCriticalComponents();
-    
+
     // 监控内存使用
     const memoryCheckInterval = setInterval(() => {
       if (MemoryMonitor.checkMemoryLeak()) {
@@ -104,12 +104,12 @@ export default function WorkplaceWellnessPage() {
   // 模拟加载状态
   useEffect(() => {
     PerformanceMonitor.startMeasure('page-load');
-    
+
     const timer = setTimeout(() => {
       setIsLoading(false);
       PerformanceMonitor.endMeasure('page-load');
     }, 1000);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -190,27 +190,27 @@ export default function WorkplaceWellnessPage() {
       <div className="min-h-screen bg-neutral-50 text-neutral-800 font-sans">
         {/* 头部组件 */}
         <Header />
-        
+
         {/* 导航组件 */}
         <Navigation />
-        
+
         {/* 面包屑导航 */}
         <div className="max-w-6xl mx-auto px-4">
-          <Breadcrumb 
+          <Breadcrumb
             items={[
               { label: locale === 'zh' ? '互动工具' : 'Interactive Tools', href: `/${locale}/interactive-tools` },
               { label: locale === 'zh' ? '职场健康助手' : 'Workplace Wellness Assistant' }
             ]}
           />
         </div>
-        
+
         {/* 主要内容区域 */}
         <ResponsiveContainer>
           <main className="max-w-6xl mx-auto px-4 py-8 w-full">
             {renderContent()}
           </main>
         </ResponsiveContainer>
-        
+
         {/* 页脚组件 */}
         <Footer />
       </div>

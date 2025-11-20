@@ -1,6 +1,6 @@
 /**
  * CTA事件追踪Hook
- * 
+ *
  * 功能：
  * 1. 追踪CTA点击事件
  * 2. 追踪用户行为路径
@@ -56,13 +56,13 @@ function getUserSession(): UserSession {
   }
 
   let session = localStorage.getItem('cta_tracking_session');
-  
+
   if (session) {
     try {
       const parsed = JSON.parse(session) as UserSession;
       const now = new Date();
       const lastActivity = new Date(parsed.lastActivity);
-      
+
       // 如果超过30分钟没有活动，创建新会话
       if (now.getTime() - lastActivity.getTime() > 30 * 60 * 1000) {
         const newSession: UserSession = {
@@ -75,7 +75,7 @@ function getUserSession(): UserSession {
         localStorage.setItem('cta_tracking_session', JSON.stringify(newSession));
         return newSession;
       }
-      
+
       // 更新最后活动时间
       parsed.lastActivity = now.toISOString();
       localStorage.setItem('cta_tracking_session', JSON.stringify(parsed));
@@ -84,7 +84,7 @@ function getUserSession(): UserSession {
       console.warn('Failed to parse session data:', error);
     }
   }
-  
+
   // 创建新会话
   const newSession: UserSession = {
     id: generateSessionId(),
@@ -93,7 +93,7 @@ function getUserSession(): UserSession {
     ctaClicks: 0,
     lastActivity: new Date().toISOString()
   };
-  
+
   localStorage.setItem('cta_tracking_session', JSON.stringify(newSession));
   return newSession;
 }
@@ -103,15 +103,15 @@ function getUserSession(): UserSession {
  */
 function updateSessionActivity(eventType: 'page_view' | 'cta_click'): void {
   if (typeof window === 'undefined') return;
-  
+
   const session = getUserSession();
-  
+
   if (eventType === 'page_view') {
     session.pageViews += 1;
   } else if (eventType === 'cta_click') {
     session.ctaClicks += 1;
   }
-  
+
   session.lastActivity = new Date().toISOString();
   localStorage.setItem('cta_tracking_session', JSON.stringify(session));
 }
@@ -133,10 +133,10 @@ function getDeviceInfo(): {
       deviceType: 'desktop'
     };
   }
-  
+
   const width = window.innerWidth;
   const deviceType = width < 768 ? 'mobile' : width < 1024 ? 'tablet' : 'desktop';
-  
+
   return {
     userAgent: navigator.userAgent,
     screenWidth: window.innerWidth,
@@ -157,7 +157,7 @@ export function useCTATracking() {
     ctaClicks: 0,
     lastActivity: new Date().toISOString()
   }));
-  
+
   const [deviceInfo, setDeviceInfo] = useState<{
     userAgent: string;
     screenWidth: number;
@@ -169,13 +169,13 @@ export function useCTATracking() {
     screenHeight: 0,
     deviceType: 'desktop'
   }));
-  
+
   // 仅在客户端初始化会话和设备信息
   useEffect(() => {
     setSession(getUserSession());
     setDeviceInfo(getDeviceInfo());
   }, []);
-  
+
   /**
    * 追踪CTA点击事件
    */
@@ -194,10 +194,10 @@ export function useCTATracking() {
       referrer: typeof window !== 'undefined' ? document.referrer : '',
       ...eventData
     };
-    
+
     // 更新会话数据
     updateSessionActivity('cta_click');
-    
+
     // 发送到GA4
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'cta_click', {
@@ -217,16 +217,16 @@ export function useCTATracking() {
         }
       });
     }
-    
+
     // 开发模式控制台输出
     if (process.env.NODE_ENV === 'development') {
       console.log('[CTA Tracking] Click event:', fullEventData);
     }
-    
+
     // 保存到本地存储（用于离线分析和调试）
     saveEventToLocal(fullEventData);
   };
-  
+
   /**
    * 追踪页面浏览
    */
@@ -235,7 +235,7 @@ export function useCTATracking() {
     pageLocation?: string;
   }) => {
     updateSessionActivity('page_view');
-    
+
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'page_view', {
         page_title: pageData?.pageTitle || document.title,
@@ -245,7 +245,7 @@ export function useCTATracking() {
       });
     }
   };
-  
+
   /**
    * 获取会话统计
    */
@@ -258,16 +258,16 @@ export function useCTATracking() {
       conversionRate: session.pageViews > 0 ? (session.ctaClicks / session.pageViews) * 100 : 0
     };
   };
-  
+
   /**
    * 保存事件到本地存储
    */
   const saveEventToLocal = (event: CTAEventData) => {
     if (typeof window === 'undefined') return;
-    
+
     const events = localStorage.getItem('cta_tracking_events');
     let eventList: CTAEventData[] = [];
-    
+
     if (events) {
       try {
         eventList = JSON.parse(events);
@@ -275,26 +275,26 @@ export function useCTATracking() {
         console.warn('Failed to parse local events:', error);
       }
     }
-    
+
     eventList.push(event);
-    
+
     // 限制本地存储的事件数量（避免存储过多）
     if (eventList.length > 1000) {
       eventList = eventList.slice(-1000);
     }
-    
+
     localStorage.setItem('cta_tracking_events', JSON.stringify(eventList));
   };
-  
+
   /**
    * 获取本地存储的事件（用于调试和分析）
    */
   const getLocalEvents = (): CTAEventData[] => {
     if (typeof window === 'undefined') return [];
-    
+
     const events = localStorage.getItem('cta_tracking_events');
     if (!events) return [];
-    
+
     try {
       return JSON.parse(events);
     } catch (error) {
@@ -302,7 +302,7 @@ export function useCTATracking() {
       return [];
     }
   };
-  
+
   /**
    * 清理本地事件数据
    */
@@ -311,7 +311,7 @@ export function useCTATracking() {
       localStorage.removeItem('cta_tracking_events');
     }
   };
-  
+
   return {
     trackCTAClick,
     trackPageView,
@@ -327,7 +327,7 @@ export function useCTATracking() {
  */
 export function getAllCTATrackingData() {
   if (typeof window === 'undefined') return null;
-  
+
   const session = getUserSession();
   const events = (() => {
     const stored = localStorage.getItem('cta_tracking_events');
@@ -338,7 +338,7 @@ export function getAllCTATrackingData() {
       return [];
     }
   })();
-  
+
   return {
     session,
     events,
@@ -365,7 +365,7 @@ export function getAllCTATrackingData() {
 export function exportCTADataToCSV(): string {
   const data = getAllCTATrackingData();
   if (!data || data.events.length === 0) return '';
-  
+
   const headers = [
     'Timestamp',
     'Button Text',
@@ -379,7 +379,7 @@ export function exportCTADataToCSV(): string {
     'Page URL',
     'Referrer'
   ];
-  
+
   const rows = data.events.map(event => [
     event.timestamp,
     event.buttonText,
@@ -393,6 +393,6 @@ export function exportCTADataToCSV(): string {
     event.pageUrl || '',
     event.referrer || ''
   ]);
-  
+
   return [headers, ...rows].map(row => row.join(',')).join('\n');
 }

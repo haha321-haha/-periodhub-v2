@@ -133,11 +133,11 @@ export default async function MedicalDisclaimerPage({
           <div class="bg-red-50 border-l-4 border-red-500 p-6 my-6">
             <p class="text-red-800 font-semibold mb-2">Important Statement</p>
             <p class="text-red-700">
-              The information contained on the Website is not intended as, and shall not be understood or 
-              construed as, professional medical advice. We are not healthcare professionals, and the 
-              information on this Website is not a substitute for professional medical advice, diagnosis, 
-              or treatment. Always seek the advice of your physician or other qualified health provider 
-              with any questions you may have regarding a medical condition or treatment and before 
+              The information contained on the Website is not intended as, and shall not be understood or
+              construed as, professional medical advice. We are not healthcare professionals, and the
+              information on this Website is not a substitute for professional medical advice, diagnosis,
+              or treatment. Always seek the advice of your physician or other qualified health provider
+              with any questions you may have regarding a medical condition or treatment and before
               undertaking a new health care regimen.
             </p>
           </div>
@@ -153,8 +153,8 @@ export default async function MedicalDisclaimerPage({
         title: 'ACCURACY AND COMPLETENESS',
         content: `
           <p>
-            While we strive to provide accurate and up-to-date information, we cannot guarantee that all 
-            information is completely accurate, reliable, current, or complete. Any reliance you place on 
+            While we strive to provide accurate and up-to-date information, we cannot guarantee that all
+            information is completely accurate, reliable, current, or complete. Any reliance you place on
             the information found on periodhub.health is strictly at your own risk.
           </p>
         `
@@ -163,8 +163,8 @@ export default async function MedicalDisclaimerPage({
         title: 'NO ENDORSEMENT',
         content: `
           <p>
-            Reference to any specific products, processes, or services by trade name, trademark, manufacturer, 
-            or otherwise, does not constitute or imply endorsement, recommendation, or favoring by periodhub.health, 
+            Reference to any specific products, processes, or services by trade name, trademark, manufacturer,
+            or otherwise, does not constitute or imply endorsement, recommendation, or favoring by periodhub.health,
             unless explicitly stated.
           </p>
         `
@@ -175,8 +175,8 @@ export default async function MedicalDisclaimerPage({
           <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 my-6">
             <p class="text-yellow-800 font-semibold mb-2">Medical Emergency</p>
             <p class="text-yellow-700">
-              If you are experiencing a medical emergency, please seek immediate medical attention or call 
-              emergency services (e.g., 911 in the US). Do not disregard professional medical advice or 
+              If you are experiencing a medical emergency, please seek immediate medical attention or call
+              emergency services (e.g., 911 in the US). Do not disregard professional medical advice or
               delay seeking medical treatment because of something you have read on this Website.
             </p>
           </div>
@@ -186,9 +186,9 @@ export default async function MedicalDisclaimerPage({
         title: 'LIABILITY LIMITATION',
         content: `
           <p>
-            In no event shall periodhub.health or its operator be liable for any loss or damage incurred 
-            as a result of the use of or reliance on the information provided on the Website. This includes, 
-            without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever 
+            In no event shall periodhub.health or its operator be liable for any loss or damage incurred
+            as a result of the use of or reliance on the information provided on the Website. This includes,
+            without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever
             arising from loss of data or profits arising out of, or in connection with, the use of this Website.
           </p>
         `
@@ -199,9 +199,9 @@ export default async function MedicalDisclaimerPage({
           <div class="bg-blue-50 border-l-4 border-blue-500 p-6 my-6">
             <p class="text-blue-800 font-semibold mb-2">Minimum Viable Product (MVP) Phase</p>
             <p class="text-blue-700">
-              Please be aware that periodhub.health is currently in its Minimum Viable Product (MVP) phase. 
-              It is run with limited resources and by an individual, not a large medical organization. While 
-              we endeavor to provide helpful information, the content may not be as comprehensive or frequently 
+              Please be aware that periodhub.health is currently in its Minimum Viable Product (MVP) phase.
+              It is run with limited resources and by an individual, not a large medical organization. While
+              we endeavor to provide helpful information, the content may not be as comprehensive or frequently
               updated as that of larger, more established healthcare resources.
             </p>
           </div>
@@ -246,7 +246,7 @@ export default async function MedicalDisclaimerPage({
                 <h2 className="text-xl font-semibold text-neutral-800 mb-4">
                   {section.title}
                 </h2>
-                <div 
+                <div
                   className="prose prose-neutral max-w-none"
                   dangerouslySetInnerHTML={{ __html: section.content }}
                 />

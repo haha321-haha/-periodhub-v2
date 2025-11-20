@@ -33,9 +33,9 @@ interface PerformanceOptimizerProps {
   onOptimizationComplete?: (metrics: PerformanceMetrics) => void;
 }
 
-export default function PerformanceOptimizer({ 
-  locale, 
-  onOptimizationComplete 
+export default function PerformanceOptimizer({
+  locale,
+  onOptimizationComplete
 }: PerformanceOptimizerProps) {
   const t = useTranslations('interactiveTools.performance');
   const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null);
@@ -49,7 +49,7 @@ export default function PerformanceOptimizer({
     const collectMetrics = async () => {
       try {
         await new Promise(resolve => setTimeout(resolve, 1500));
-        
+
         const mockMetrics: PerformanceMetrics = {
           bundleSize: 2.4, // MB
           loadTime: 1.8, // seconds
@@ -91,7 +91,7 @@ export default function PerformanceOptimizer({
       for (let i = 0; i < steps.length; i++) {
         const step = steps[i];
         setOptimizationSteps(prev => [...prev, step.name]);
-        
+
         await new Promise(resolve => setTimeout(resolve, step.duration));
         setOptimizationProgress(Math.round(((i + 1) / steps.length) * 100));
       }
@@ -109,7 +109,7 @@ export default function PerformanceOptimizer({
         };
 
         setMetrics(optimizedMetrics);
-        
+
         if (onOptimizationComplete) {
           onOptimizationComplete(optimizedMetrics);
         }
@@ -137,12 +137,12 @@ export default function PerformanceOptimizer({
   }, []);
 
   // 性能指标卡片
-  const MetricCard = useMemo(() => ({ 
-    icon, 
-    title, 
-    value, 
-    unit, 
-    improvement 
+  const MetricCard = useMemo(() => ({
+    icon,
+    title,
+    value,
+    unit,
+    improvement
   }: {
     icon: React.ComponentType<{ className?: string }>;
     title: string;
@@ -197,7 +197,7 @@ export default function PerformanceOptimizer({
             {locale === 'zh' ? '提升应用性能，优化用户体验' : 'Improve application performance and user experience'}
           </p>
         </div>
-        
+
         {metrics && (
           <div className={`px-4 py-2 rounded-full text-lg font-bold ${getScoreColor(metrics.score)}`}>
             {metrics.score}/100
@@ -246,14 +246,14 @@ export default function PerformanceOptimizer({
             <Zap className="w-5 h-5 mr-2 animate-pulse" />
             {locale === 'zh' ? '正在优化性能...' : 'Optimizing performance...'}
           </h3>
-          
+
           <div className="w-full bg-blue-200 rounded-full h-3 mb-4">
-            <div 
+            <div
               className="bg-blue-600 h-3 rounded-full transition-all duration-500"
               style={{ width: `${optimizationProgress}%` }}
             />
           </div>
-          
+
           <div className="space-y-2">
             {optimizationSteps.map((step, index) => (
               <div key={index} className="flex items-center text-sm text-blue-700">
@@ -362,7 +362,7 @@ export default function PerformanceOptimizer({
           <TrendingUp className="w-5 h-5 mr-2" />
           {locale === 'zh' ? '性能优化建议' : 'Performance Optimization Recommendations'}
         </h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div className="flex items-start space-x-3">
@@ -376,7 +376,7 @@ export default function PerformanceOptimizer({
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start space-x-3">
               <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5" />
               <div>
@@ -389,7 +389,7 @@ export default function PerformanceOptimizer({
               </div>
             </div>
           </div>
-          
+
           <div className="space-y-4">
             <div className="flex items-start space-x-3">
               <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5" />
@@ -402,7 +402,7 @@ export default function PerformanceOptimizer({
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start space-x-3">
               <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5" />
               <div>
@@ -437,7 +437,7 @@ export default function PerformanceOptimizer({
             </>
           )}
         </button>
-        
+
         <button
           onClick={resetOptimization}
           disabled={optimizing}

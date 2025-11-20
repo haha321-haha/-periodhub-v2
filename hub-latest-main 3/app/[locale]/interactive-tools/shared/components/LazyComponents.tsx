@@ -17,7 +17,7 @@ interface LazyComponentProps {
 
 // 默认加载状态组件
 const DefaultFallback = ({ height = "200px" }: { height?: string }) => (
-  <div 
+  <div
     className="flex items-center justify-center p-8 bg-gray-50 rounded-lg"
     style={{ height }}
   >
@@ -32,18 +32,18 @@ const DelayedSuspense: React.FC<{
   delay?: number;
 }> = ({ children, fallback, delay = 0 }) => {
   const [showContent, setShowContent] = React.useState(delay === 0);
-  
+
   React.useEffect(() => {
     if (delay > 0) {
       const timer = setTimeout(() => setShowContent(true), delay);
       return () => clearTimeout(timer);
     }
   }, [delay]);
-  
+
   if (!showContent) {
     return <>{fallback}</>;
   }
-  
+
   return <Suspense fallback={fallback}>{children}</Suspense>;
 };
 
@@ -59,10 +59,10 @@ export function createLazyComponent<T extends ComponentType<any>>(
   delay: number = 0
 ) {
   const LazyComponent = lazy(importFunc);
-  
+
   return function LazyWrapper(props: React.ComponentProps<T> & LazyComponentProps) {
     return (
-      <DelayedSuspense 
+      <DelayedSuspense
         fallback={fallback || <DefaultFallback height={props.height} />}
         delay={delay}
       >
@@ -185,10 +185,10 @@ export function useLazyComponent<T extends ComponentType<any>>(
   const [Component, setComponent] = React.useState<T | null>(null);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<Error | null>(null);
-  
+
   React.useEffect(() => {
     if (Component || loading) return;
-    
+
     setLoading(true);
     importFunc()
       .then((module) => {
@@ -203,7 +203,7 @@ export function useLazyComponent<T extends ComponentType<any>>(
         setLoading(false);
       });
   }, [importFunc, componentName, Component, loading]);
-  
+
   return { Component, loading, error };
 }
 
@@ -214,13 +214,13 @@ export function useLazyComponent<T extends ComponentType<any>>(
 export function useConditionalLoading() {
   const [isVisible, setIsVisible] = React.useState(false);
   const [hasIntersected, setHasIntersected] = React.useState(false);
-  
+
   const observerRef = React.useRef<IntersectionObserver | null>(null);
   const elementRef = React.useRef<HTMLDivElement>(null);
-  
+
   React.useEffect(() => {
     if (!elementRef.current) return;
-    
+
     observerRef.current = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !hasIntersected) {
@@ -234,14 +234,14 @@ export function useConditionalLoading() {
         rootMargin: '50px'
       }
     );
-    
+
     observerRef.current.observe(elementRef.current);
-    
+
     return () => {
       observerRef.current?.disconnect();
     };
   }, [hasIntersected]);
-  
+
   return { isVisible, elementRef };
 }
 

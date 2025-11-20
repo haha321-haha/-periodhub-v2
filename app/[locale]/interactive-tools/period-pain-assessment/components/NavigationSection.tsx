@@ -3,10 +3,10 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { 
-  Calculator, 
-  Stethoscope, 
-  Heart, 
+import {
+  Calculator,
+  Stethoscope,
+  Heart,
   ArrowRight,
   Clock,
   Users,
@@ -78,7 +78,7 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
         {/* 导航卡片网格 */}
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {navigationCards.map((card) => (
-            <div 
+            <div
               key={card.id}
               className={`relative bg-white rounded-xl shadow-lg border-2 ${card.borderColor} p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group`}
             >
@@ -86,16 +86,16 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
               <div className={`flex items-center justify-center w-16 h-16 ${card.bgColor} rounded-full mb-6 group-hover:scale-110 transition-transform`}>
                 <card.icon className={`w-8 h-8 ${card.color}`} />
               </div>
-              
+
               {/* 卡片内容 */}
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
                 {card.title}
               </h3>
-              
+
               <p className="text-gray-600 mb-6 leading-relaxed">
                 {card.description}
               </p>
-              
+
               {/* 功能列表 */}
               <ul className="space-y-3 mb-8">
                 {card.features.map((feature: string, index: number) => (
@@ -107,7 +107,7 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
                   </li>
                 ))}
               </ul>
-              
+
               {/* CTA按钮 */}
               <div className="flex flex-col space-y-3">
                 <Link
@@ -117,7 +117,7 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
                   {card.primaryCTA}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
-                
+
                 <Link
                   href={card.href}
                   className={`inline-flex items-center justify-center ${card.color} font-medium py-2 px-4 rounded-lg border border-current hover:bg-current hover:bg-opacity-10 transition-all`}
@@ -141,7 +141,7 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
                 {t("trust.usersHelpedDesc")}
               </p>
             </div>
-            
+
             <div className="flex flex-col items-center">
               <Clock className="w-12 h-12 text-blue-600 mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -151,7 +151,7 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
                 {t("trust.averageTimeDesc")}
               </p>
             </div>
-            
+
             <div className="flex flex-col items-center">
               <Award className="w-12 h-12 text-blue-600 mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">

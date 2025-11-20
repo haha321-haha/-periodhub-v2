@@ -48,7 +48,7 @@ export function TouchGestureDetector({
   const handleTouchStart = (e: TouchEvent) => {
     const touch = e.touches[0];
     const now = Date.now();
-    
+
     setTouchStart({
       x: touch.clientX,
       y: touch.clientY,
@@ -189,7 +189,7 @@ export function DraggableContainer({
     const touch = e.touches[0];
     const deltaX = touch.clientX - startPos.x;
     const deltaY = touch.clientY - startPos.y;
-    
+
     onDrag?.(deltaX, deltaY);
   };
 
@@ -199,7 +199,7 @@ export function DraggableContainer({
     const touch = e.changedTouches[0];
     const deltaX = touch.clientX - startPos.x;
     const deltaY = touch.clientY - startPos.y;
-    
+
     onDragEnd?.(deltaX, deltaY);
     setIsDragging(false);
     setStartPos(null);

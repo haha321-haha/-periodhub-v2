@@ -6,9 +6,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { 
-  BarChart3, 
-  TrendingUp, 
+import {
+  BarChart3,
+  TrendingUp,
   PieChart,
   Activity,
   Calendar,
@@ -49,7 +49,7 @@ export default function DataVisualizationDashboard() {
   const [activeView, setActiveView] = useState<'overview' | 'detailed' | 'comparison'>('overview');
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
-  
+
   const periodData = getPeriodData();
 
   useEffect(() => {
@@ -58,18 +58,18 @@ export default function DataVisualizationDashboard() {
 
   const generateDashboardData = async () => {
     setLoading(true);
-    
+
     try {
       const predictor = new CyclePredictor(locale);
       const cycleAnalysis = predictor.analyzeCycle(periodData);
       const statistics = predictor.generateStatistics(periodData);
-      
+
       // 生成趋势数据
       const trends = generateTrendData(periodData);
-      
+
       // 生成洞察
       const insights = generateInsights(cycleAnalysis, statistics);
-      
+
       setDashboardData({
         cycleAnalysis,
         statistics,
@@ -86,7 +86,7 @@ export default function DataVisualizationDashboard() {
   const generateTrendData = (data: PeriodRecord[]) => {
     const trends: { month: string; cycleLength: number; painLevel: number; efficiency: number }[] = [];
     const monthlyData = new Map<string, PeriodRecord[]>();
-    
+
     // 按月份分组数据
     data.forEach(record => {
       const month = new Date(record.date).toISOString().slice(0, 7);
@@ -95,14 +95,14 @@ export default function DataVisualizationDashboard() {
       }
       monthlyData.get(month)!.push(record);
     });
-    
+
     // 计算每月趋势
     monthlyData.forEach((records, month) => {
       const periodRecords = records.filter(r => r.type === 'period');
       if (periodRecords.length > 0) {
         const avgPain = periodRecords.reduce((sum, r) => sum + (r.painLevel || 0), 0) / periodRecords.length;
         const efficiency = Math.max(20, 100 - (avgPain * 8));
-        
+
         trends.push({
           month,
           cycleLength: calculateCycleLength(periodRecords),
@@ -111,15 +111,15 @@ export default function DataVisualizationDashboard() {
         });
       }
     });
-    
+
     return trends.sort((a, b) => a.month.localeCompare(b.month));
   };
 
   const generateInsights = (analysis: CycleAnalysis | null, statistics: CycleStatistics | null) => {
     const insights: { type: 'positive' | 'negative' | 'neutral'; title: string; description: string; icon: any }[] = [];
-    
+
     if (!analysis || !statistics) return insights;
-    
+
     // 周期规律性洞察
     if (analysis.cycleRegularity === 'regular') {
       insights.push({
@@ -136,7 +136,7 @@ export default function DataVisualizationDashboard() {
         icon: AlertTriangle
       });
     }
-    
+
     // 疼痛水平洞察
     if (statistics.averagePainLevel > 7) {
       insights.push({
@@ -153,7 +153,7 @@ export default function DataVisualizationDashboard() {
         icon: CheckCircle
       });
     }
-    
+
     // 预测准确性洞察
     if (analysis.confidence > 80) {
       insights.push({
@@ -163,7 +163,7 @@ export default function DataVisualizationDashboard() {
         icon: CheckCircle
       });
     }
-    
+
     return insights;
   };
 
@@ -196,7 +196,7 @@ export default function DataVisualizationDashboard() {
               <Calendar className="w-8 h-8 text-blue-600" />
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-lg p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -208,13 +208,13 @@ export default function DataVisualizationDashboard() {
               <Activity className="w-8 h-8 text-red-600" />
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">{t('workAnalysis.avgEfficiency')}</p>
                 <p className="text-xl font-bold text-green-600">
-                  {dashboardData.trends.length > 0 
+                  {dashboardData.trends.length > 0
                     ? Math.round(dashboardData.trends.reduce((sum, t) => sum + t.efficiency, 0) / dashboardData.trends.length)
                     : 0}%
                 </p>
@@ -222,7 +222,7 @@ export default function DataVisualizationDashboard() {
               <Target className="w-8 h-8 text-green-600" />
             </div>
           </div>
-          
+
           <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4">
             <div className="flex items-center justify-between">
               <div>
@@ -286,7 +286,7 @@ export default function DataVisualizationDashboard() {
             <TrendingUp className="w-5 h-5 mr-2 text-blue-600" />
             {t('analysis.tabs.trends')}
           </h3>
-          
+
           <div className="space-y-4">
             {dashboardData.trends.map((trend, index) => (
               <div key={index} className="bg-gray-50 rounded-lg p-4">
@@ -299,7 +299,7 @@ export default function DataVisualizationDashboard() {
                   </h4>
                   <span className="text-sm text-gray-600">{trend.cycleLength} {t('charts.days')}</span>
                 </div>
-                
+
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
                     <div className="text-lg font-semibold text-blue-600">{trend.cycleLength}</div>
@@ -335,7 +335,7 @@ export default function DataVisualizationDashboard() {
 
     const recent = dashboardData.trends.slice(-3);
     const previous = dashboardData.trends.slice(-6, -3);
-    
+
     if (recent.length < 3 || previous.length < 3) {
       return (
         <div className="text-center py-8">
@@ -357,7 +357,7 @@ export default function DataVisualizationDashboard() {
             <BarChart3 className="w-5 h-5 mr-2 text-blue-600" />
             {t('analysis.comparisonTitle')}
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white rounded-lg p-4">
               <h4 className="font-medium text-gray-700 mb-3">{t('analysis.avgPainLevel')}</h4>
@@ -378,7 +378,7 @@ export default function DataVisualizationDashboard() {
                 </div>
               </div>
             </div>
-            
+
             <div className="bg-white rounded-lg p-4">
               <h4 className="font-medium text-gray-700 mb-3">{t('workAnalysis.efficiency')}</h4>
               <div className="space-y-3">

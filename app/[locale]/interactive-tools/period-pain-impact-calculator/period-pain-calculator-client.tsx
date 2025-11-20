@@ -25,7 +25,7 @@ export default function PeriodPainCalculatorClient({ params }: PeriodPainCalcula
   const currentLocale = params.locale as 'en' | 'zh';
   const t = useTranslations('periodPainImpactCalculator');
   const breadcrumbT = useTranslations('interactiveTools.breadcrumb');
-  
+
   const {
     currentSession,
     currentQuestionIndex,
@@ -97,12 +97,12 @@ export default function PeriodPainCalculatorClient({ params }: PeriodPainCalcula
       </main>
     );
   }
-  
+
   if (isAssessmentComplete && result) {
     return (
-      <AssessmentResults 
-        result={result} 
-        locale={currentLocale} 
+      <AssessmentResults
+        result={result}
+        locale={currentLocale}
         onReset={handleReset}
       />
     );
@@ -132,8 +132,8 @@ export default function PeriodPainCalculatorClient({ params }: PeriodPainCalcula
             </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div 
-              className="bg-purple-900 h-2 rounded-full transition-all duration-300" 
+            <div
+              className="bg-purple-900 h-2 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -203,11 +203,11 @@ export default function PeriodPainCalculatorClient({ params }: PeriodPainCalcula
         </div>
         </div>
       </div>
-      
+
       {/* 评估进行中的推荐内容 - 提升SEO和用户体验 */}
-      <RecommendedContent 
-        locale={currentLocale} 
-        severity={undefined} 
+      <RecommendedContent
+        locale={currentLocale}
+        severity={undefined}
       />
     </main>
   );

@@ -183,26 +183,26 @@ export default {
   LazyCycleTrackerTool,
   LazySymptomTrackerTool,
   LazyPeriodPainAssessmentTool,
-  
+
   // P2阶段组件
   LazyAnalyticsDashboard,
   LazyPersonalizedRecommendationEngine,
   LazySocialFeatures,
   LazyDataSync,
   LazyReportGenerator,
-  
+
   // P3阶段组件
   LazyI18nOptimizer,
   LazyPerformanceOptimizer,
   LazyTestingFramework,
   LazyDocumentationFramework,
-  
+
   // 其他组件
   LazyHealthDataDashboard,
   LazyEmergencyReliefGuide,
   LazyPainMechanismsGuide,
   LazyBackupRestoreSystem,
-  
+
   // 预加载函数
   preloadCriticalTools,
   preloadAdvancedFeatures,

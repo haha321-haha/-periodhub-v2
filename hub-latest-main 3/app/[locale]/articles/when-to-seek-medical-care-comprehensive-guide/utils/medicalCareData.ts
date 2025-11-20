@@ -1,12 +1,12 @@
 // 医疗护理指南数据处理工具
 // 基于souW1e2的数据结构，适配项目标准
 
-import type { 
-  PainScaleItem, 
-  SymptomItem, 
-  DecisionTreeNode, 
+import type {
+  PainScaleItem,
+  SymptomItem,
+  DecisionTreeNode,
   ComparisonTableData,
-  AssessmentResult 
+  AssessmentResult
 } from '../types/medical-care-guide';
 
 // 疼痛等级数据 - 基于souW1e2的完整数据结构
@@ -381,7 +381,7 @@ export function analyzeSymptomRisk(selectedSymptomIds: string[]): {
   recommendations: string[];
 } {
   const selectedSymptoms = SYMPTOM_DATA.filter(s => selectedSymptomIds.includes(s.id));
-  
+
   const emergencyCount = selectedSymptoms.filter(s => s.risk === 'emergency').length;
   const highRiskCount = selectedSymptoms.filter(s => s.risk === 'high').length;
   const mediumRiskCount = selectedSymptoms.filter(s => s.risk === 'medium').length;
@@ -451,7 +451,7 @@ export function generateAssessmentResult(
   selectedSymptomIds: string[]
 ): AssessmentResult {
   const symptomAnalysis = analyzeSymptomRisk(selectedSymptomIds);
-  
+
   // 综合疼痛等级和症状分析
   let finalRiskLevel = symptomAnalysis.riskLevel;
   let finalUrgency = symptomAnalysis.urgency;

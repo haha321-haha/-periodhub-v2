@@ -34,7 +34,7 @@ export default async function ArticlesPDFCenterPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  
+
   const t = await getTranslations('common');
 
 
@@ -42,7 +42,7 @@ export default async function ArticlesPDFCenterPage({
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100">
       {/* 返回导航 */}
       <div className="container mx-auto px-4 pt-8">
-        <Link 
+        <Link
           href={`/${locale}/articles`}
           className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium transition-colors group mb-6"
         >
@@ -57,15 +57,15 @@ export default async function ArticlesPDFCenterPage({
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl mb-6 shadow-lg">
             <Download className="w-8 h-8 text-white" />
           </div>
-          
+
           <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
             📚 文章PDF下载中心
           </h1>
-          
+
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed mb-6">
             {SITE_CONFIG.statistics.articles + SITE_CONFIG.statistics.pdfResources}个精选资源，基于紧急程度智能分类。从立即缓解到长期管理，为您的经期健康提供全方位支持。
           </p>
-          
+
           {/* 快速统计 */}
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto mb-8">
             <div className="text-center">

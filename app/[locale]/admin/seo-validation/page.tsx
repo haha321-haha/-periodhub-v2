@@ -18,7 +18,7 @@ export default async function SEOValidationPage() {
   // 生成验证报告
   // const validationResult =
   //   await structuredDataValidator.generateValidationReport();
-  
+
   // 临时使用假数据
   const validationResult: any = {
     success: true,
@@ -31,7 +31,7 @@ export default async function SEOValidationPage() {
 
   // 生成监控报告
   // const monitoringReport = await seoMonitor.generateMonitoringReport();
-  
+
   // 临时使用假数据
   const monitoringReport = {
     metrics: {
@@ -47,7 +47,7 @@ export default async function SEOValidationPage() {
 
   // 生成Google Search Console操作指南
   // const gscGuide = seoMonitor.generateGSCActionGuide();
-  
+
   // 临时使用假数据
   const gscGuide = {
     sitemapSubmission: {
@@ -74,7 +74,7 @@ export default async function SEOValidationPage() {
       ]
     }
   };
-  
+
   // 添加testUrls到validationResult
   validationResult.testUrls = {
     toolPage: `https://search.google.com/test/rich-results?url=${encodeURIComponent("https://www.periodhub.health/en/interactive-tools/symptom-assessment")}`,

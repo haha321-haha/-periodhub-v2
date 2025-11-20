@@ -92,7 +92,7 @@ const DataDashboardClient = () => {
           <div className="h-64 flex items-end space-x-4">
             {trends.map((trend, index) => (
               <div key={index} className="flex-1 flex flex-col items-center">
-                <div 
+                <div
                   className="bg-blue-500 rounded-t w-full mb-2"
                   style={{ height: `${(trend.users / 1300) * 200}px` }}
                 ></div>

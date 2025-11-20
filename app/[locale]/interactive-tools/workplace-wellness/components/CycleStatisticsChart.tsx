@@ -60,7 +60,7 @@ export default function CycleStatisticsChart() {
           <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
           <p className="text-gray-600 text-lg mb-2">{t("charts.noDataTitle")}</p>
           <p className="text-gray-500 text-sm mb-6">{t("charts.noDataMessage")}</p>
-          <button 
+          <button
             onClick={() => setMainActiveTab("calendar")}
             className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
           >
@@ -73,33 +73,33 @@ export default function CycleStatisticsChart() {
 
   useEffect(() => {
     console.log("CycleStatisticsChart - periodData length:", periodData?.length || 0);
-    
+
     if (!periodData || periodData.length === 0) {
       console.warn("CycleStatisticsChart - periodData is empty");
       setAnalysis(null);
       setStatistics(null);
       return;
     }
-    
+
     // 验证数据格式
-    const validRecords = periodData.filter(record => 
+    const validRecords = periodData.filter(record =>
       record && typeof record === 'object' && record.date
     );
-    
+
     if (validRecords.length === 0) {
       console.warn("CycleStatisticsChart - no valid records found");
       setAnalysis(null);
       setStatistics(null);
       return;
     }
-    
+
     console.log("CycleStatisticsChart - valid records:", validRecords.length);
-    
+
     try {
       const predictor = new CyclePredictor(locale);
       const cycleAnalysis = predictor.analyzeCycle(validRecords);
       const cycleStats = predictor.generateStatistics(validRecords);
-      
+
       console.log("CycleStatisticsChart - analysis completed");
       setAnalysis(cycleAnalysis);
       setStatistics(cycleStats);

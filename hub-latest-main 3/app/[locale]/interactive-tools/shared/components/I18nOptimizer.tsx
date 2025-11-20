@@ -27,9 +27,9 @@ interface I18nOptimizerProps {
   onTranslationUpdate?: (status: TranslationStatus) => void;
 }
 
-export default function I18nOptimizer({ 
-  locale, 
-  onTranslationUpdate 
+export default function I18nOptimizer({
+  locale,
+  onTranslationUpdate
 }: I18nOptimizerProps) {
   const t = useTranslations('interactiveTools.i18n');
   const [translationStatus, setTranslationStatus] = useState<TranslationStatus | null>(null);
@@ -43,7 +43,7 @@ export default function I18nOptimizer({
       try {
         // 模拟翻译检查
         await new Promise(resolve => setTimeout(resolve, 1000));
-        
+
         const mockStatus: TranslationStatus = {
           totalKeys: 3710,
           missingKeys: [
@@ -107,7 +107,7 @@ export default function I18nOptimizer({
           qualityScore: 98
         };
         setTranslationStatus(updatedStatus);
-        
+
         if (onTranslationUpdate) {
           onTranslationUpdate(updatedStatus);
         }
@@ -171,7 +171,7 @@ export default function I18nOptimizer({
             {locale === 'zh' ? '完善翻译质量，优化多语言支持' : 'Improve translation quality and optimize multilingual support'}
           </p>
         </div>
-        
+
         <div className="flex items-center space-x-2 mt-4 sm:mt-0">
           <div className={`px-3 py-1 rounded-full text-sm font-medium ${
             translationStatus?.qualityScore && translationStatus.qualityScore >= 90
@@ -249,14 +249,14 @@ export default function I18nOptimizer({
             <RefreshCw className="w-5 h-5 mr-2 animate-spin" />
             {locale === 'zh' ? '正在优化翻译...' : 'Optimizing translations...'}
           </h3>
-          
+
           <div className="w-full bg-blue-200 rounded-full h-3 mb-4">
-            <div 
+            <div
               className="bg-blue-600 h-3 rounded-full transition-all duration-500"
               style={{ width: `${optimizationProgress}%` }}
             />
           </div>
-          
+
           <p className="text-sm text-blue-700">
             {optimizationProgress}% {locale === 'zh' ? '完成' : 'Complete'}
           </p>
@@ -270,7 +270,7 @@ export default function I18nOptimizer({
             <AlertTriangle className="w-5 h-5 mr-2" />
             {locale === 'zh' ? '缺失翻译键' : 'Missing Translation Keys'}
           </h3>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             {translationStatus.missingKeys.slice(0, 10).map((key, index) => (
               <div key={index} className="bg-white rounded-lg p-3 border border-red-100">
@@ -278,10 +278,10 @@ export default function I18nOptimizer({
               </div>
             ))}
           </div>
-          
+
           {translationStatus.missingKeys.length > 10 && (
             <p className="text-sm text-red-600">
-              {locale === 'zh' 
+              {locale === 'zh'
                 ? `还有 ${translationStatus.missingKeys.length - 10} 个缺失的翻译键...`
                 : `And ${translationStatus.missingKeys.length - 10} more missing keys...`
               }
@@ -297,7 +297,7 @@ export default function I18nOptimizer({
             <RefreshCw className="w-5 h-5 mr-2" />
             {locale === 'zh' ? '不一致翻译键' : 'Inconsistent Translation Keys'}
           </h3>
-          
+
           <div className="space-y-3">
             {translationStatus.inconsistentKeys.map((key, index) => (
               <div key={index} className="bg-white rounded-lg p-3 border border-yellow-100">
@@ -317,7 +317,7 @@ export default function I18nOptimizer({
           <BarChart3 className="w-5 h-5 mr-2" />
           {locale === 'zh' ? '优化建议' : 'Optimization Recommendations'}
         </h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-3">
             <div className="flex items-start space-x-3">
@@ -331,7 +331,7 @@ export default function I18nOptimizer({
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start space-x-3">
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
               <div>
@@ -344,7 +344,7 @@ export default function I18nOptimizer({
               </div>
             </div>
           </div>
-          
+
           <div className="space-y-3">
             <div className="flex items-start space-x-3">
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
@@ -357,7 +357,7 @@ export default function I18nOptimizer({
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start space-x-3">
               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
               <div>
@@ -392,7 +392,7 @@ export default function I18nOptimizer({
             </>
           )}
         </button>
-        
+
         <button
           onClick={exportTranslationReport}
           className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center"

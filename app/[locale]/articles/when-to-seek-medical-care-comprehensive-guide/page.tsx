@@ -210,7 +210,7 @@ export default async function WhenToSeekMedicalCarePage({
     <>
       {/* 文章结构化数据 */}
       <ArticleStructuredDataScript data={articleStructuredData} />
-      
+
       {/* 医疗专用结构化数据 */}
       <script
         type="application/ld+json"

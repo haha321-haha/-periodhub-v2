@@ -27,7 +27,7 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
 
     const newAnswers = [...answers];
     const existingIndex = newAnswers.findIndex(a => a.questionId === question.id);
-    
+
     if (existingIndex >= 0) {
       newAnswers[existingIndex] = newAnswer;
     } else {
@@ -106,11 +106,11 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
             {currentQuestion + 1}
           </span>
         </div>
-        
+
         <h2 className="text-2xl font-bold text-gray-800 mb-4 leading-relaxed">
           {currentQ.text}
         </h2>
-        
+
         <p className="text-gray-600 mb-6">
           {t("timeframe")}
         </p>
@@ -159,7 +159,7 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
                   </svg>
                 )}
               </div>
-              
+
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-1">
                   <span className="text-2xl">{option.emoji}</span>

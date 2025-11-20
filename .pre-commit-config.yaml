@@ -56,5 +56,5 @@ repos:
         exclude: '^scripts/|^eslint-rules/'
 
 # 全局配置
-default_stages: [commit]
+default_stages: [pre-commit]
 fail_fast: false

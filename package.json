@@ -7,10 +7,9 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "build:index": "node scripts/build-articles-index-wrapper.js",
-    "dev": "npm run build:index && next dev -p 3001",
+    "dev": "next dev -p 3001",
     "dev:safe": "npm run verify:translations && npm run dev",
-    "build": "npm run build:index && next build",
+    "build": "next build",
     "build:safe": "npm run verify:translations && npm run build",
     "verify:translations": "node scripts/verify-translation-sync.js",
     "setup:hooks": "bash scripts/setup-git-hooks.sh",
@@ -29,8 +28,6 @@
     "detect-hardcode": "node scripts/detect-hardcode.js",
     "detect-stress-hardcode": "node scripts/detect-stress-management-hardcode.js",
     "detect-seo-critical-hardcode": "node scripts/detect-seo-critical-hardcode.js",
-    "verify:seo": "./scripts/verify-seo-fix.sh",
-    "verify:seo:production": "VERCEL_URL=https://www.periodhub.health ./scripts/verify-seo-fix.sh",
     "lint:hardcode": "npm run detect-hardcode && npm run lint",
     "lint:stress": "npm run detect-stress-hardcode && npm run lint",
     "lint:seo": "npm run detect-seo-critical-hardcode && npm run lint",
@@ -77,6 +74,10 @@
     "test:translations:e2e": "jest tests/e2e/translation-e2e.test.js",
     "quality:translations": "node scripts/translation-quality-check.js",
     "check:translations": "npm run fix:translations && npm run test:translations && npm run quality:translations",
+    "validate:schema": "node scripts/log-schema-validation.js",
+    "log:validation": "node scripts/log-schema-validation.js",
+    "aeo:sync": "node scripts/sync-to-aeo-monitoring.js",
+    "aeo:validate": "npm run validate:schema && npm run log:validation && npm run aeo:sync",
     "optimize:core-web-vitals": "node scripts/core-web-vitals-optimizer.js",
     "optimize:images": "node scripts/optimize-images.js",
     "check:mobile": "node scripts/mobile-responsive-checker.js",
@@ -199,5 +200,10 @@
     "sharp": "^0.34.3",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.9.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build"
+    }
   }
 }

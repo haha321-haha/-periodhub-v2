@@ -1,53 +1,24 @@
-# 忽略旧代码目录
-hub-latest-main/
-lib/
-scripts/
-types/
-utils/
-*.md
+# 构建输出
+.next/
+out/
+build/
+dist/
 
-# ========================================
-# 渐进式启用ESLint检查策略
-# ========================================
+# 依赖
+node_modules/
 
-# ✅ 已启用检查的目录（核心功能）
-# app/[locale]/interactive-tools/  # 互动工具页面 - 已修复
-# app/[locale]/page.tsx           # 首页 - 已修复
+# 恢复目录
+hub-latest-main*/
+recovered/
 
-# 🟡 Phase 1: 新功能开发（立即启用）
-# 这些目录将使用新的ESLint规则，确保没有硬编码
-app/[locale]/stress-management/   # 压力管理项目 - 新开发
+# 日志文件
+*.log
+logs/
 
-# 🟠 Phase 2: 逐步修复（1-2周内）
-# 这些目录需要逐步清理硬编码，然后启用检查
-app/[locale]/health-guide/        # 健康指南 - 153处硬编码待修复
-app/[locale]/scenario-solutions/  # 场景解决方案 - 大量硬编码
-app/[locale]/teen-health/         # 青少年健康 - 大量硬编码
-app/[locale]/natural-therapies/   # 自然疗法 - 大量硬编码
+# 测试覆盖率
+coverage/
 
-# 🔴 Phase 3: 长期清理（1个月内）
-# 这些目录有大量硬编码，需要长期清理
-app/[locale]/articles-pdf-center/
-app/[locale]/articles/comprehensive-medical-guide-to-dysmenorrhea/
-app/[locale]/articles/pain-management/
-app/[locale]/articles/when-to-seek-medical-care-comprehensive-guide/
-app/[locale]/cultural-charms/
-app/[locale]/downloads/
-app/[locale]/framework-demo/
-app/[locale]/home-clean/
-app/[locale]/immediate-relief/
-app/[locale]/medical-disclaimer/
-app/[locale]/privacy-policy/
-app/[locale]/resources/
-app/[locale]/terms-of-service/
-
-# 🧪 测试和临时文件
-app/[locale]/test-*/
-
-# ========================================
-# 说明：
-# 1. 新功能开发必须启用ESLint检查
-# 2. 修复硬编码后，从ignore列表中移除对应目录
-# 3. 使用 npm run detect-hardcode 检测硬编码
-# 4. 使用 npm run lint 检查代码质量
-# ========================================
+# 其他
+.cache/
+.turbo/
+.DS_Store

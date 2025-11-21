@@ -5,7 +5,7 @@
 
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import {
   Activity,
   TrendingUp,
@@ -49,7 +49,7 @@ export default function SymptomStatistics() {
   const [patterns, setPatterns] = useState<SymptomPattern[]>([]);
 
   // 从 store 读取 periodData
-  const periodData = calendar.periodData || [];
+  const periodData = useMemo(() => calendar.periodData || [], [calendar.periodData]);
 
   // 分析症状数据 - moved before useEffect
   const analyzeSymptoms = useCallback(() => {
@@ -97,7 +97,7 @@ export default function SymptomStatistics() {
     setSymptomData(
       Object.values(symptoms).sort((a, b) => b.frequency - a.frequency),
     );
-  }, [periodData, t]);
+  }, [periodData]);
 
   // 生成症状模式
   const generatePatterns = useCallback(() => {
@@ -117,7 +117,7 @@ export default function SymptomStatistics() {
     });
 
     setPatterns(patterns);
-  }, [t]);
+  }, [analyzeSymptomCombinations, generateRecommendations]);
 
   useEffect(() => {
     analyzeSymptoms();
@@ -125,7 +125,7 @@ export default function SymptomStatistics() {
   }, [periodData, locale, analyzeSymptoms, generatePatterns]);
 
   // 分析症状组合
-  const analyzeSymptomCombinations = () => {
+  const analyzeSymptomCombinations = useCallback(() => {
     // 模拟症状组合分析
     return [
       {
@@ -147,10 +147,10 @@ export default function SymptomStatistics() {
         severity: 4.8,
       },
     ];
-  };
+  }, [t]);
 
   // 生成建议
-  const generateRecommendations = (symptom: string): string[] => {
+  const generateRecommendations = useCallback((symptom: string): string[] => {
     const recommendations: { [key: string]: string[] } = {
       cramps_bloating: [
         t("recommendations.warmCompress"),
@@ -170,7 +170,7 @@ export default function SymptomStatistics() {
     };
 
     return recommendations[symptom] || [t("recommendations.generalCare")];
-  };
+  }, [t]);
 
   // 计算趋势
   const calculateTrend = (

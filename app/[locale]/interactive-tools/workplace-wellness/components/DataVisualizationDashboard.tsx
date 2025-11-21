@@ -5,7 +5,7 @@
 
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   BarChart3,
@@ -66,7 +66,7 @@ export default function DataVisualizationDashboard() {
   const [loading, setLoading] = useState(true);
 
   // 从 store 读取 periodData
-  const periodData = calendar.periodData || [];
+  const periodData = useMemo(() => calendar.periodData || [], [calendar.periodData]);
 
   const generateDashboardData = useCallback(async () => {
     setLoading(true);
@@ -98,13 +98,13 @@ export default function DataVisualizationDashboard() {
     } finally {
       setLoading(false);
     }
-  }, [locale, periodData]);
+  }, [locale, periodData, generateTrendData, generateInsights]);
 
   useEffect(() => {
     generateDashboardData();
   }, [generateDashboardData]);
 
-  const generateTrendData = (data: PeriodRecord[]): TrendRecord[] => {
+  const generateTrendData = useCallback((data: PeriodRecord[]): TrendRecord[] => {
     const trends: TrendRecord[] = [];
     const monthlyData = new Map<string, PeriodRecord[]>();
 
@@ -136,9 +136,9 @@ export default function DataVisualizationDashboard() {
     });
 
     return trends.sort((a, b) => a.month.localeCompare(b.month));
-  };
+  }, []);
 
-  const generateInsights = (
+  const generateInsights = useCallback((
     analysis: CycleAnalysis,
     statistics: CycleStatistics,
   ): InsightCard[] => {
@@ -189,7 +189,7 @@ export default function DataVisualizationDashboard() {
     }
 
     return insights;
-  };
+  }, [t]);
 
   const calculateCycleLength = (records: PeriodRecord[]): number => {
     if (records.length < 2) return 0;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { LocalStorageManager, AssessmentData } from "@/lib/localStorage";
@@ -30,27 +30,9 @@ export default function PersonalizedRecommendations({
   const [stressScore, setStressScore] = useState<number>(0);
   const [hasAssessment, setHasAssessment] = useState(false);
 
-  useEffect(() => {
-    // 从localStorage获取最新的评估结果
-    const assessments = LocalStorageManager.getAssessments();
-    if (assessments.length > 0) {
-      const latestAssessment = assessments[assessments.length - 1];
-      setStressScore(latestAssessment.score);
-      setStressLevel(latestAssessment.stressLevel);
-      setHasAssessment(true);
-
-      // 生成个性化推荐
-      const recs = generateSimpleRecommendations(
-        latestAssessment.score,
-        latestAssessment.stressLevel,
-        locale
-      );
-      setRecommendations(recs);
-    }
-  }, [locale]);
-
   // 简化版推荐算法：基于分数的if/else
-  const generateSimpleRecommendations = (
+  // Move before useEffect to avoid dependency issues
+  const generateSimpleRecommendations = useCallback((
     score: number,
     level: string,
     locale: string
@@ -174,7 +156,26 @@ export default function PersonalizedRecommendations({
     }
 
     return recs;
-  };
+  }, [tRec, locale]);
+
+  useEffect(() => {
+    // 从localStorage获取最新的评估结果
+    const assessments = LocalStorageManager.getAssessments();
+    if (assessments.length > 0) {
+      const latestAssessment = assessments[assessments.length - 1];
+      setStressScore(latestAssessment.score);
+      setStressLevel(latestAssessment.stressLevel);
+      setHasAssessment(true);
+
+      // 生成个性化推荐
+      const recs = generateSimpleRecommendations(
+        latestAssessment.score,
+        latestAssessment.stressLevel,
+        locale
+      );
+      setRecommendations(recs);
+    }
+  }, [locale, generateSimpleRecommendations]);
 
   // 获取压力等级显示文本
   const getStressLevelText = (level: string, score: number) => {

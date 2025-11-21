@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import {
@@ -94,48 +94,55 @@ export default function SymptomAssessmentTool({
   };
 
   // 记录评估数据（匿名）
-  const recordAssessmentData = (completed: boolean = false) => {
-    try {
-      const startTime = sessionData.startTime || new Date().toISOString();
-      const calculationBase =
-        completed && sessionData.startTime
-          ? Date.now() - new Date(sessionData.startTime).getTime()
-          : 0;
+  // Wrap in useCallback to prevent unnecessary recreations
+  const recordAssessmentData = useCallback(
+    (completed: boolean = false) => {
+      try {
+        const startTime = sessionData.startTime || new Date().toISOString();
+        const calculationBase =
+          completed && sessionData.startTime
+            ? Date.now() - new Date(sessionData.startTime).getTime()
+            : 0;
 
-      const data: AssessmentAnalyticsRecord = {
-        sessionId: sessionData.sessionId || generateSessionId(),
-        type: "symptom",
-        startTime,
-        endTime: completed ? new Date().toISOString() : "",
-        duration: calculationBase,
-        completionTime: completed
-          ? sessionData.completionTime + calculationBase
-          : sessionData.completionTime,
-        answers: selectedAnswers,
-        score: result?.score || 0,
-        profile: result?.severity || "",
-        completed,
-        upgraded: sessionData.upgraded,
-        locale,
-        timestamp: Date.now(),
-      };
+        const data: AssessmentAnalyticsRecord = {
+          sessionId: sessionData.sessionId || generateSessionId(),
+          type: "symptom",
+          startTime,
+          endTime: completed ? new Date().toISOString() : "",
+          duration: calculationBase,
+          completionTime: completed
+            ? sessionData.completionTime + calculationBase
+            : sessionData.completionTime,
+          answers: selectedAnswers,
+          score: result?.score || 0,
+          profile: result?.severity || "",
+          completed,
+          upgraded: sessionData.upgraded,
+          locale,
+          timestamp: Date.now(),
+        };
 
-      // 保存到localStorage（仅用于本地分析，不上传服务器）
-      const existingData = JSON.parse(
-        localStorage.getItem("assessmentAnalytics") || "[]",
-      );
-      existingData.push(data);
+        // 保存到localStorage（仅用于本地分析，不上传服务器）
+        const existingData = JSON.parse(
+          localStorage.getItem("assessmentAnalytics") || "[]",
+        );
+        existingData.push(data);
 
-      // 只保留最近100次记录，避免localStorage过大
-      if (existingData.length > 100) {
-        existingData.splice(0, existingData.length - 100);
+        // 只保留最近100次记录，避免localStorage过大
+        if (existingData.length > 100) {
+          existingData.splice(0, existingData.length - 100);
+        }
+
+        localStorage.setItem(
+          "assessmentAnalytics",
+          JSON.stringify(existingData),
+        );
+      } catch {
+        // ignore
       }
-
-      localStorage.setItem("assessmentAnalytics", JSON.stringify(existingData));
-    } catch {
-      // ignore
-    }
-  };
+    },
+    [sessionData, selectedAnswers, result, locale],
+  );
 
   // 组件加载时初始化会话数据
   useEffect(() => {
@@ -190,7 +197,8 @@ export default function SymptomAssessmentTool({
   };
 
   // 从localStorage恢复进度
-  const loadProgress = () => {
+  // Wrap in useCallback to prevent unnecessary recreations
+  const loadProgress = useCallback(() => {
     try {
       const saved = localStorage.getItem("symptomAssessmentProgress");
       if (saved) {
@@ -218,7 +226,7 @@ export default function SymptomAssessmentTool({
       // ignore
     }
     return {};
-  };
+  }, [locale, mode]);
 
   // 初始化时恢复进度
   useEffect(() => {

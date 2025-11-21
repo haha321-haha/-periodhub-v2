@@ -3,7 +3,7 @@
 // PatternInsights - Component for displaying automated pattern analysis and recommendations
 // Shows AI-generated insights based on pain tracking data patterns
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import {
   Brain,
@@ -135,7 +135,16 @@ export default function PatternInsights({
     };
 
     generateInsights();
-  }, [analytics, records, analyticsEngine, onError]);
+  }, [
+    analytics,
+    records,
+    analyticsEngine,
+    onError,
+    generateDataRecommendations,
+    getGeneralRecommendations,
+    getInsightTitle,
+    getPatternTitle,
+  ]);
 
   // Toggle card expansion
   const toggleCard = (cardId: string) => {
@@ -184,15 +193,19 @@ export default function PatternInsights({
     return Info;
   }
 
-  function getInsightTitle(insight: string): string {
-    if (insight.includes("average pain level")) return t("titles.painLevel");
-    if (insight.includes("most common pain type")) return t("titles.painType");
-    if (insight.includes("effectiveness")) return t("titles.treatment");
-    if (insight.includes("trend")) return t("titles.trend");
-    if (insight.includes("cycle") || insight.includes("phase"))
-      return t("titles.cycle");
-    return t("titles.general");
-  }
+  const getInsightTitle = useCallback(
+    (insight: string): string => {
+      if (insight.includes("average pain level")) return t("titles.painLevel");
+      if (insight.includes("most common pain type"))
+        return t("titles.painType");
+      if (insight.includes("effectiveness")) return t("titles.treatment");
+      if (insight.includes("trend")) return t("titles.trend");
+      if (insight.includes("cycle") || insight.includes("phase"))
+        return t("titles.cycle");
+      return t("titles.general");
+    },
+    [t],
+  );
 
   function getPatternType(
     pattern: Pattern,
@@ -218,100 +231,106 @@ export default function PatternInsights({
     }
   }
 
-  function getPatternTitle(patternType: string): string {
-    switch (patternType) {
-      case "menstrual_cycle":
-        return t("patterns.menstrual");
-      case "treatment_response":
-        return t("patterns.treatment");
-      case "seasonal_pattern":
-        return t("patterns.seasonal");
-      case "trigger_identification":
-        return t("patterns.triggers");
-      default:
-        return t("patterns.general");
-    }
-  }
+  const getPatternTitle = useCallback(
+    (patternType: string): string => {
+      switch (patternType) {
+        case "menstrual_cycle":
+          return t("patterns.menstrual");
+        case "treatment_response":
+          return t("patterns.treatment");
+        case "seasonal_pattern":
+          return t("patterns.seasonal");
+        case "trigger_identification":
+          return t("patterns.triggers");
+        default:
+          return t("patterns.general");
+      }
+    },
+    [t],
+  );
 
-  function getGeneralRecommendations(insight: string): string[] {
-    const recommendations: string[] = [];
+  const getGeneralRecommendations = useCallback(
+    (insight: string): string[] => {
+      const recommendations: string[] = [];
 
-    if (insight.includes("high")) {
-      recommendations.push(t("recommendations.consultDoctor"));
-      recommendations.push(t("recommendations.trackTriggers"));
-    }
-    if (insight.includes("effective")) {
-      recommendations.push(t("recommendations.continueApproach"));
-      recommendations.push(t("recommendations.noteEffective"));
-    }
-    if (insight.includes("trend")) {
-      recommendations.push(t("recommendations.monitorTrend"));
-      recommendations.push(t("recommendations.shareWithDoctor"));
-    }
+      if (insight.includes("high")) {
+        recommendations.push(t("recommendations.consultDoctor"));
+        recommendations.push(t("recommendations.trackTriggers"));
+      }
+      if (insight.includes("effective")) {
+        recommendations.push(t("recommendations.continueApproach"));
+        recommendations.push(t("recommendations.noteEffective"));
+      }
+      if (insight.includes("trend")) {
+        recommendations.push(t("recommendations.monitorTrend"));
+        recommendations.push(t("recommendations.shareWithDoctor"));
+      }
 
-    return recommendations.length > 0
-      ? recommendations
-      : [t("recommendations.keepTracking")];
-  }
+      return recommendations.length > 0
+        ? recommendations
+        : [t("recommendations.keepTracking")];
+    },
+    [t],
+  );
 
-  function generateDataRecommendations(
-    analytics: PainAnalytics,
-    records: PainRecord[],
-  ) {
-    const recommendations: Array<{
-      title: string;
-      description: string;
-      actions: string[];
-    }> = [];
+  const generateDataRecommendations = useCallback(
+    (analytics: PainAnalytics, records: PainRecord[]) => {
+      const recommendations: Array<{
+        title: string;
+        description: string;
+        actions: string[];
+      }> = [];
 
-    // Tracking consistency recommendation
-    const daysBetweenRecords = calculateAverageGapBetweenRecords(records);
-    if (daysBetweenRecords > 7) {
-      recommendations.push({
-        title: t("dataRecommendations.consistency.title"),
-        description: t("dataRecommendations.consistency.description", {
-          days: Math.round(daysBetweenRecords),
-        }),
-        actions: [
-          t("dataRecommendations.consistency.actions.setReminders"),
-          t("dataRecommendations.consistency.actions.trackDaily"),
-          t("dataRecommendations.consistency.actions.useApp"),
-        ],
-      });
-    }
+      // Tracking consistency recommendation
+      const daysBetweenRecords = calculateAverageGapBetweenRecords(records);
+      if (daysBetweenRecords > 7) {
+        recommendations.push({
+          title: t("dataRecommendations.consistency.title"),
+          description: t("dataRecommendations.consistency.description", {
+            days: Math.round(daysBetweenRecords),
+          }),
+          actions: [
+            t("dataRecommendations.consistency.actions.setReminders"),
+            t("dataRecommendations.consistency.actions.trackDaily"),
+            t("dataRecommendations.consistency.actions.useApp"),
+          ],
+        });
+      }
 
-    // Treatment tracking recommendation
-    const recordsWithTreatments = records.filter(
-      (r) => r.medications.length > 0,
-    );
-    if (recordsWithTreatments.length < records.length * 0.5) {
-      recommendations.push({
-        title: t("dataRecommendations.treatments.title"),
-        description: t("dataRecommendations.treatments.description"),
-        actions: [
-          t("dataRecommendations.treatments.actions.recordAll"),
-          t("dataRecommendations.treatments.actions.trackEffectiveness"),
-          t("dataRecommendations.treatments.actions.noteTimings"),
-        ],
-      });
-    }
+      // Treatment tracking recommendation
+      const recordsWithTreatments = records.filter(
+        (r) => r.medications.length > 0,
+      );
+      if (recordsWithTreatments.length < records.length * 0.5) {
+        recommendations.push({
+          title: t("dataRecommendations.treatments.title"),
+          description: t("dataRecommendations.treatments.description"),
+          actions: [
+            t("dataRecommendations.treatments.actions.recordAll"),
+            t("dataRecommendations.treatments.actions.trackEffectiveness"),
+            t("dataRecommendations.treatments.actions.noteTimings"),
+          ],
+        });
+      }
 
-    // Symptom tracking recommendation
-    const recordsWithSymptoms = records.filter((r) => r.symptoms.length > 0);
-    if (recordsWithSymptoms.length < records.length * 0.7) {
-      recommendations.push({
-        title: t("dataRecommendations.symptoms.title"),
-        description: t("dataRecommendations.symptoms.description"),
-        actions: [
-          t("dataRecommendations.symptoms.actions.trackAll"),
-          t("dataRecommendations.symptoms.actions.notePatterns"),
-          t("dataRecommendations.symptoms.actions.correlateWithPain"),
-        ],
-      });
-    }
+      // Symptom tracking recommendation
+      const recordsWithSymptoms = records.filter((r) => r.symptoms.length > 0);
+      if (recordsWithSymptoms.length < records.length * 0.7) {
+        recommendations.push({
+          title: t("dataRecommendations.symptoms.title"),
+          description: t("dataRecommendations.symptoms.description"),
+          actions: [
+            t("dataRecommendations.symptoms.actions.trackAll"),
+            t("dataRecommendations.symptoms.actions.notePatterns"),
+            t("dataRecommendations.symptoms.actions.correlateWithPain"),
+          ],
+        });
+      }
 
-    return recommendations;
-  }
+      return recommendations;
+    },
+    [t],
+  );
 
   function calculateAverageGapBetweenRecords(records: PainRecord[]): number {
     if (records.length < 2) return 0;

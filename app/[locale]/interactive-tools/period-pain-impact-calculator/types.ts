@@ -94,7 +94,7 @@ export interface PainImpactCalculatorHookReturn {
   goToQuestion: (index: number) => void;
   goToPreviousQuestion: () => void;
   goToNextQuestion: () => void;
-  completeAssessment: (t?: any) => AssessmentResult | null;
+  completeAssessment: (t?: (key: string, params?: Record<string, unknown>) => string) => AssessmentResult | null;
   resetAssessment: () => void;
 
   // Results

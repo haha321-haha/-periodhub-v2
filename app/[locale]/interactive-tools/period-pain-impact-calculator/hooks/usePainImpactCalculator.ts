@@ -92,23 +92,32 @@ const saveToStorage = <T>(key: string, data: T): void => {
       }
 
       localStorage.setItem(key, dataString);
-    } catch (error: any) {
+    } catch (error: unknown) {
       // 如果是配额错误，尝试清理
-      if (error.name === 'QuotaExceededError' || error.code === 22) {
+      const isQuotaError = error instanceof Error && 
+        (error.name === 'QuotaExceededError' || (error as Error & { code?: number }).code === 22);
+      
+      if (isQuotaError) {
         console.warn('localStorage quota exceeded, attempting aggressive cleanup...');
         try {
           // 第一步：清理旧数据
           cleanupOldStorage(key);
 
           // 第二步：如果还是失败，尝试只保存核心数据
-          const minimalData = {
-            id: (data as any)?.id,
-            answers: (data as any)?.answers || [],
-            startedAt: (data as any)?.startedAt,
-            locale: (data as any)?.locale,
-            completedAt: (data as any)?.completedAt,
-            // 不保存 result，result 可以重新计算
+          // Type guard to check if data has AssessmentSession structure
+          const isAssessmentSession = (obj: unknown): obj is Partial<AssessmentSession> => {
+            return typeof obj === 'object' && obj !== null;
           };
+
+          const minimalData = isAssessmentSession(data) ? {
+            id: data.id,
+            answers: data.answers || [],
+            startedAt: data.startedAt,
+            locale: data.locale,
+            completedAt: data.completedAt,
+            // 不保存 result，result 可以重新计算
+          } : data;
+          
           const minimalDataString = JSON.stringify(minimalData);
 
           try {
@@ -124,10 +133,10 @@ const saveToStorage = <T>(key: string, data: T): void => {
           console.error('Failed to save even after cleanup:', cleanupError);
           // 最后的后备方案：只在 sessionStorage 中保存非常小的数据
           try {
-            const tinyData = {
-              id: (data as any)?.id,
-              locale: (data as any)?.locale,
-            };
+            const tinyData = isAssessmentSession(data) ? {
+              id: data.id,
+              locale: data.locale,
+            } : { id: 'unknown', locale: 'en' };
             sessionStorage.setItem(key + '_backup', JSON.stringify(tinyData));
           } catch (e) {
             console.error('All storage methods failed:', e);
@@ -654,7 +663,7 @@ export const usePainImpactCalculator = (userId?: string): PainImpactCalculatorHo
     goToQuestion(Math.min(questions.length - 1, currentQuestionIndex + 1));
   }, [currentQuestionIndex, goToQuestion, questions]);
 
-  const completeAssessment = useCallback((t?: any): AssessmentResult | null => {
+  const completeAssessment = useCallback((t?: (key: string, params?: Record<string, unknown>) => string): AssessmentResult | null => {
     if (!currentSession) return null;
 
     // 防止重复调用：如果已经完成，直接返回已有结果

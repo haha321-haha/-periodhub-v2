@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { URL_CONFIG } from "@/lib/url-config";
 
@@ -20,30 +20,33 @@ export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   const locale = useLocale();
   const t = useTranslations("common.breadcrumb");
 
-  const breadcrumbData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: t("home"),
-        item: `${
-          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/${locale}`,
-      },
-      ...items.map((item, index) => ({
-        "@type": "ListItem",
-        position: index + 2,
-        name: item.label,
-        ...(item.href && {
+  const breadcrumbData = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: t("home"),
           item: `${
             process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-          }${item.href}`,
-        }),
-      })),
-    ],
-  };
+          }/${locale}`,
+        },
+        ...items.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 2,
+          name: item.label,
+          ...(item.href && {
+            item: `${
+              process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+            }${item.href}`,
+          }),
+        })),
+      ],
+    }),
+    [t, locale, items],
+  );
 
   // 使用 useEffect 在客户端动态插入结构化数据脚本到 document.head
   // 这样可以避免服务器端和客户端渲染不一致导致的 hydration 错误

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import {
   ConstitutionQuestion,
   ConstitutionAnswer,
@@ -48,9 +48,14 @@ export function useConstitutionTest(): UseConstitutionTestReturn {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const questions = currentSession
-    ? constitutionQuestions[currentSession.locale] || constitutionQuestions.zh
-    : [];
+  const questions = useMemo(
+    () =>
+      currentSession
+        ? constitutionQuestions[currentSession.locale] ||
+          constitutionQuestions.zh
+        : [],
+    [currentSession],
+  );
   const currentQuestion = questions[currentQuestionIndex] || null;
   const isComplete = currentQuestionIndex >= questions.length;
   const progress =

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import {
   Download,
   Play,
@@ -69,23 +69,13 @@ export default function BatchExportManager() {
   const [selectedItems, setSelectedItems] = useState<BatchExportItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // 模拟批量导出处理
-  useEffect(() => {
-    if (
-      batchQueue &&
-      "status" in batchQueue &&
-      batchQueue.status === "running" &&
-      !isProcessing
-    ) {
-      setIsProcessing(true);
-      processBatchExport();
-    }
-  }, [
-    batchQueue && "status" in batchQueue ? batchQueue.status : null,
-    isProcessing,
-  ]);
+  // Extract complex expression to avoid dependency issues
+  const batchQueueStatus = useMemo(() => {
+    return batchQueue && "status" in batchQueue ? batchQueue.status : null;
+  }, [batchQueue]);
 
-  const processBatchExport = async () => {
+  // Wrap processBatchExport in useCallback
+  const processBatchExport = useCallback(async () => {
     if (!batchQueue || !("items" in batchQueue)) return;
 
     const pendingItems = batchQueue.items.filter(
@@ -126,7 +116,20 @@ export default function BatchExportManager() {
     }
 
     setIsProcessing(false);
-  };
+  }, [batchQueue, updateStatus, addHistory]);
+
+  // 模拟批量导出处理
+  useEffect(() => {
+    if (
+      batchQueue &&
+      "status" in batchQueue &&
+      batchQueue.status === "running" &&
+      !isProcessing
+    ) {
+      setIsProcessing(true);
+      processBatchExport();
+    }
+  }, [batchQueueStatus, isProcessing, batchQueue, processBatchExport]);
 
   // 创建批量导出
   const handleCreateBatchExport = () => {

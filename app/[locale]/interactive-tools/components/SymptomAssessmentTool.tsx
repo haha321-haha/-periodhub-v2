@@ -9,7 +9,7 @@ import {
   ArrowRight,
   CheckCircle,
   AlertTriangle,
-  FileText,
+  // FileText, // unused
   Heart,
   Brain,
   Activity,
@@ -23,7 +23,7 @@ import { useUserPreferences } from "../shared/hooks/useUserPreferences";
 import { useAssessmentHistory } from "../shared/hooks/useAssessmentHistory";
 import { usePersonalizedRecommendations } from "../shared/hooks/usePersonalizedRecommendations";
 import NotificationContainer from "../shared/components/NotificationContainer";
-import LoadingSpinner from "../shared/components/LoadingSpinner";
+// import LoadingSpinner from "../shared/components/LoadingSpinner"; // unused
 // import SettingsModal from '../shared/components/SettingsModal';
 import {
   AssessmentAnswer,
@@ -59,7 +59,7 @@ export default function SymptomAssessmentTool({
   const [selectedAnswers, setSelectedAnswers] = useState<SelectedAnswersState>(
     {},
   );
-  const [showSettings, setShowSettings] = useState(false);
+  // const [showSettings, setShowSettings] = useState(false); // unused
   const [sessionData, setSessionData] = useState<SessionMeta>({
     sessionId: "",
     startTime: "",
@@ -74,10 +74,10 @@ export default function SymptomAssessmentTool({
     currentQuestionIndex,
     totalQuestions,
     progress,
-    isComplete,
+    // isComplete, // unused
     result,
-    isLoading,
-    error,
+    // isLoading, // unused
+    // error, // unused
     startAssessment,
     answerQuestion,
     goToPreviousQuestion,
@@ -132,7 +132,7 @@ export default function SymptomAssessmentTool({
       }
 
       localStorage.setItem("assessmentAnalytics", JSON.stringify(existingData));
-    } catch (error) {
+    } catch {
       // ignore
     }
   };
@@ -169,7 +169,7 @@ export default function SymptomAssessmentTool({
       // 评估进行中，记录部分数据
       recordAssessmentData(false);
     }
-  }, [result, currentSession, selectedAnswers]);
+  }, [result, currentSession, selectedAnswers, recordAssessmentData]);
 
   // 保存进度到localStorage
   const saveProgress = (answers: SelectedAnswersState) => {
@@ -228,7 +228,7 @@ export default function SymptomAssessmentTool({
         setSelectedAnswers(savedAnswers);
       }
     }
-  }, [currentSession]);
+  }, [currentSession, loadProgress]);
 
   // 生成个性化建议
   useEffect(() => {

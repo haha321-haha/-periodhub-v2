@@ -29,6 +29,12 @@ interface Prediction {
   };
 }
 
+// Move STORAGE_KEYS outside component to avoid recreating on every render
+const STORAGE_KEYS = {
+  CURRENT_DATA: "cycle-tracker-current",
+  HISTORY: "cycle-tracker-history",
+} as const;
+
 export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
   const [lastPeriodDate, setLastPeriodDate] = useState("");
   const [cycleLength, setCycleLength] = useState(28);
@@ -43,11 +49,6 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
 
   // 使用翻译键
   const t = useTranslations();
-
-  // 本地存储键名
-  const STORAGE_KEYS = {
-    CURRENT_DATA: "cycle-tracker-current",
-    HISTORY: "cycle-tracker-history",
   };
 
   // 确保客户端和服务端渲染一致

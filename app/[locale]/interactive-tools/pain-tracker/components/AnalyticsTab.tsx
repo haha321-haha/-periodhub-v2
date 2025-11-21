@@ -136,7 +136,7 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
             ].map((period) => (
               <button
                 key={period.key}
-                onClick={() => setSelectedPeriod(period.key as any)}
+                onClick={() => setSelectedPeriod(period.key as "week" | "month" | "quarter" | "year")}
                 className={`px-3 py-1 text-sm rounded-md transition-colors ${
                   selectedPeriod === period.key
                     ? "bg-primary-600 text-white"

@@ -115,7 +115,12 @@ export interface StageUnlockEvent {
   stage: QuizStage;
   unlockedAt: Date;
   reason: "score_threshold" | "completion" | "time_based" | "manual";
-  triggerData: any;
+  triggerData: {
+    score?: number;
+    completionRate?: number;
+    timestamp?: Date;
+    metadata?: Record<string, unknown>;
+  };
 }
 
 // 阶段状态变化类型

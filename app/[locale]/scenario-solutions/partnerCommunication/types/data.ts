@@ -5,6 +5,26 @@
 import { QuizStage, QuizResult, StageProgress } from "./quiz";
 import { UserPreferences } from "./preferences";
 
+// 测试统计类型
+export interface QuizStatistics {
+  totalAttempts: number;
+  averageScore: number;
+  completionRate: number;
+  lastAttemptDate: Date | null;
+  bestScore: number;
+  improvementRate: number;
+}
+
+// 训练会话类型
+export interface TrainingSession {
+  id: string;
+  date: Date;
+  duration: number; // minutes
+  completed: boolean;
+  score?: number;
+  notes?: string;
+}
+
 // 数据存储类型
 export interface DataStorage {
   // 用户数据
@@ -19,9 +39,9 @@ export interface DataStorage {
   // 测试数据
   quizData: {
     stageProgress: Record<QuizStage, StageProgress>;
-    overallResult: any;
+    overallResult: QuizResult | null;
     history: QuizResult[];
-    statistics: any;
+    statistics: QuizStatistics;
   };
 
   // 训练数据
@@ -29,7 +49,7 @@ export interface DataStorage {
     progress: Record<string, boolean>;
     completedDays: string[];
     currentDay: number;
-    sessions: any[];
+    sessions: TrainingSession[];
   };
 
   // 元数据
@@ -85,8 +105,8 @@ export interface DataSync {
 // 数据冲突类型
 export interface DataConflict {
   field: string;
-  localValue: any;
-  remoteValue: any;
+  localValue: unknown;
+  remoteValue: unknown;
   conflictType: "value" | "structure" | "version";
   resolution: "local" | "remote" | "merge" | "manual";
 }
@@ -220,7 +240,7 @@ export interface DataError {
   field: string;
   timestamp: Date;
   severity: "low" | "medium" | "high" | "critical";
-  context: any;
+  context: Record<string, unknown>;
   stackTrace?: string;
 }
 

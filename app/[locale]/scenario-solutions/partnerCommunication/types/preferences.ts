@@ -56,8 +56,8 @@ export interface UserPreferences {
 export interface PreferenceChange {
   category: keyof UserPreferences;
   key: string;
-  oldValue: any;
-  newValue: any;
+  oldValue: unknown;
+  newValue: unknown;
   changedAt: Date;
 }
 
@@ -95,8 +95,8 @@ export interface PreferenceTemplate {
 export interface PreferenceSuggestion {
   category: keyof UserPreferences;
   key: string;
-  currentValue: any;
-  suggestedValue: any;
+  currentValue: unknown;
+  suggestedValue: unknown;
   reason: string;
   impact: "low" | "medium" | "high";
   confidence: number; // 0-1
@@ -131,8 +131,8 @@ export interface PreferenceSync {
 // 偏好设置冲突类型
 export interface PreferenceConflict {
   key: string;
-  localValue: any;
-  remoteValue: any;
+  localValue: unknown;
+  remoteValue: unknown;
   conflictType: "value" | "structure" | "version";
   resolution: "local" | "remote" | "merge" | "manual";
 }

@@ -16,15 +16,26 @@ export interface PainEntry {
   timestamp: string;
 }
 
+export interface ConstitutionAnswer {
+  questionId: string;
+  value: string | number | string[];
+}
+
+export interface ConstitutionRecommendation {
+  title: string;
+  description: string;
+  items: string[];
+}
+
 export interface ConstitutionResult {
   id: string;
   primaryType: string;
   confidence: number;
-  answers: any[];
+  answers: ConstitutionAnswer[];
   recommendations: {
-    acupoints: any;
-    diet: any;
-    lifestyle: any;
+    acupoints: ConstitutionRecommendation;
+    diet: ConstitutionRecommendation;
+    lifestyle: ConstitutionRecommendation;
   };
   timestamp: string;
 }
@@ -69,7 +80,7 @@ export interface HealthDataState {
   updatePreferences: (preferences: Partial<UserPreferences>) => void;
 
   // 数据分析方法
-  getPainTrends: () => any;
+  getPainTrends: () => Record<string, number[]>;
   getAveragePainLevel: () => number;
   getMostCommonSymptoms: () => string[];
 

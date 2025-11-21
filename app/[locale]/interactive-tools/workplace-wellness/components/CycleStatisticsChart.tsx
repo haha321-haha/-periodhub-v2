@@ -55,6 +55,37 @@ export default function CycleStatisticsChart() {
     [calendar.periodData],
   );
 
+  // Move useEffect before any early returns to comply with rules-of-hooks
+  useEffect(() => {
+    if (!periodData || periodData.length === 0) {
+      setAnalysis(null);
+      setStatistics(null);
+      return;
+    }
+
+    const validRecords = periodData.filter(
+      (record) => record && typeof record === "object" && record.date,
+    );
+
+    if (validRecords.length === 0) {
+      setAnalysis(null);
+      setStatistics(null);
+      return;
+    }
+
+    try {
+      const cycleAnalysis = CyclePredictor.analyzeCycles(validRecords);
+      const cycleStats = CyclePredictor.calculateStatistics(validRecords);
+
+      setAnalysis(cycleAnalysis);
+      setStatistics(cycleStats);
+    } catch (error) {
+      logError("Error analyzing cycle data", error);
+      setAnalysis(null);
+      setStatistics(null);
+    }
+  }, [periodData]);
+
   // 空数据检查
   if (periodData.length === 0) {
     return (

@@ -205,6 +205,13 @@ export default function StressAssessmentStartPage() {
     }
   }, [showResults, stressScore, answers, userId]);
 
+  // Day 4: 追踪付费墙查看
+  useEffect(() => {
+    if (showPaywall) {
+      trackPaywallView(userId);
+    }
+  }, [showPaywall, userId]);
+
   const calculateScore = () => {
     const validAnswers = answers.filter((a) => a !== undefined);
     if (validAnswers.length === 0) return 0;
@@ -601,13 +608,6 @@ export default function StressAssessmentStartPage() {
       </div>
     );
   }
-
-  // Day 4: 追踪付费墙查看
-  useEffect(() => {
-    if (showPaywall) {
-      trackPaywallView(userId);
-    }
-  }, [showPaywall, userId]);
 
   // 付费墙
   if (showPaywall) {

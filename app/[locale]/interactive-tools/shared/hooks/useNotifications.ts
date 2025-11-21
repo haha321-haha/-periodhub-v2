@@ -33,6 +33,13 @@ interface UseNotificationsReturn {
 export const useNotifications = (): UseNotificationsReturn => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
+  // Define removeNotification first so it can be used in addNotification
+  const removeNotification = useCallback((id: string) => {
+    setNotifications((prev) =>
+      prev.filter((notification) => notification.id !== id),
+    );
+  }, []);
+
   const addNotification = useCallback(
     (notification: Omit<Notification, "id">): string => {
       const id = `notification_${Date.now()}_${Math.random()
@@ -55,14 +62,8 @@ export const useNotifications = (): UseNotificationsReturn => {
 
       return id;
     },
-    [],
+    [removeNotification],
   );
-
-  const removeNotification = useCallback((id: string) => {
-    setNotifications((prev) =>
-      prev.filter((notification) => notification.id !== id),
-    );
-  }, []);
 
   const clearAllNotifications = useCallback(() => {
     setNotifications([]);

@@ -60,7 +60,7 @@ export default function NutritionGenerator() {
     return () => {
       performanceMonitor.endMeasure("nutrition-generator-init");
     };
-  }, []);
+  }, [performanceMonitor]);
 
   // 语言切换已移除，现在使用URL路由进行语言切换
 

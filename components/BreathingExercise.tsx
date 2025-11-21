@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 
 interface BreathingExerciseProps {
@@ -21,26 +21,29 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
   const [timeLeft, setTimeLeft] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
 
-  const phases: Phase[] = [
-    {
-      name: t('phases.inhale'),
-      nameEn: 'Inhale',
-      duration: 4,
-      color: 'bg-blue-600'
-    },
-    {
-      name: t('phases.hold'),
-      nameEn: 'Hold',
-      duration: 7,
-      color: 'bg-purple-600'
-    },
-    {
-      name: t('phases.exhale'),
-      nameEn: 'Exhale',
-      duration: 8,
-      color: 'bg-pink-600'
-    }
-  ];
+  const phases: Phase[] = useMemo(
+    () => [
+      {
+        name: t('phases.inhale'),
+        nameEn: 'Inhale',
+        duration: 4,
+        color: 'bg-blue-600',
+      },
+      {
+        name: t('phases.hold'),
+        nameEn: 'Hold',
+        duration: 7,
+        color: 'bg-purple-600',
+      },
+      {
+        name: t('phases.exhale'),
+        nameEn: 'Exhale',
+        duration: 8,
+        color: 'bg-pink-600',
+      },
+    ],
+    [t],
+  );
 
   useEffect(() => {
     let interval: NodeJS.Timeout;

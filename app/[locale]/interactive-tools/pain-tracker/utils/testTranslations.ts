@@ -397,6 +397,7 @@ export function generateTranslationReport(): string {
  * Run all translation tests and log results
  */
 export function runTranslationTests(): boolean {
+  // eslint-disable-next-line no-console
   console.log("🧪 Running Pain Tracker Translation Tests...\n");
 
   const enResults = testTranslations("en");
@@ -405,39 +406,51 @@ export function runTranslationTests(): boolean {
 
   let allPassed = true;
 
+  // eslint-disable-next-line no-console
   console.log("📝 English Translation Results:");
   enResults.forEach((result) => {
     const status = result.passed ? "✅" : "❌";
+    // eslint-disable-next-line no-console
     console.log(`  ${status} ${result.category}: ${result.itemCount} items`);
     if (!result.passed) {
       allPassed = false;
+      // eslint-disable-next-line no-console
       result.errors.forEach((error) => console.log(`    - ${error}`));
     }
   });
 
+  // eslint-disable-next-line no-console
   console.log("\n📝 Chinese Translation Results:");
   zhResults.forEach((result) => {
     const status = result.passed ? "✅" : "❌";
+    // eslint-disable-next-line no-console
     console.log(`  ${status} ${result.category}: ${result.itemCount} items`);
     if (!result.passed) {
       allPassed = false;
+      // eslint-disable-next-line no-console
       result.errors.forEach((error) => console.log(`    - ${error}`));
     }
   });
 
+  // eslint-disable-next-line no-console
   console.log("\n🔄 Translation Consistency:");
   const consistencyStatus = consistencyResults.passed ? "✅" : "❌";
+  // eslint-disable-next-line no-console
   console.log(`  ${consistencyStatus} Consistency Check`);
   if (!consistencyResults.passed) {
     allPassed = false;
+    // eslint-disable-next-line no-console
     consistencyResults.errors.forEach((error) => console.log(`    - ${error}`));
   }
 
+  // eslint-disable-next-line no-console
   console.log("\n📊 Summary:");
   consistencyResults.summary.forEach((item) => {
+    // eslint-disable-next-line no-console
     console.log(`  - ${item.category}: EN=${item.enCount}, ZH=${item.zhCount}`);
   });
 
+  // eslint-disable-next-line no-console
   console.log(
     `\n🎯 Overall Result: ${
       allPassed ? "✅ ALL TESTS PASSED" : "❌ SOME TESTS FAILED"

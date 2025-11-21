@@ -6,7 +6,6 @@ import {
   Brain,
   Target,
   TrendingUp,
-  Users,
   Calendar,
   Activity,
   Heart,
@@ -53,19 +52,30 @@ interface Recommendation {
   };
 }
 
+interface RecommendationWithMatch extends Recommendation {
+  matchScore: number;
+}
+
+interface AssessmentRecord {
+  id: string;
+  painLevel: number;
+  timestamp?: string;
+  notes?: string;
+  symptoms?: string[];
+}
+
 interface PersonalizedRecommendationEngineProps {
-  locale: string;
   userProfile: UserProfile;
-  assessmentHistory: any[];
-  onRecommendationUpdate?: (recommendations: Recommendation[]) => void;
+  assessmentHistory: AssessmentRecord[];
+  onRecommendationUpdate?: (recommendations: RecommendationWithMatch[]) => void;
 }
 
 // AI推荐算法核心
 class RecommendationEngine {
   private userProfile: UserProfile;
-  private assessmentHistory: any[];
+  private assessmentHistory: AssessmentRecord[];
 
-  constructor(userProfile: UserProfile, assessmentHistory: any[]) {
+  constructor(userProfile: UserProfile, assessmentHistory: AssessmentRecord[]) {
     this.userProfile = userProfile;
     this.assessmentHistory = assessmentHistory;
   }
@@ -81,7 +91,7 @@ class RecommendationEngine {
       recentAssessments.reduce(
         (sum, assessment) => sum + assessment.painLevel,
         0,
-      ) / recentAssessments.length;
+      ) / Math.max(1, recentAssessments.length);
 
     let pattern = "moderate";
     if (avgPain >= 8) pattern = "severe";
@@ -285,13 +295,14 @@ class RecommendationEngine {
 }
 
 export default function PersonalizedRecommendationEngine({
-  locale,
   userProfile,
   assessmentHistory,
   onRecommendationUpdate,
 }: PersonalizedRecommendationEngineProps) {
   const t = useTranslations("interactiveTools.recommendations");
-  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+  const [recommendations, setRecommendations] = useState<
+    RecommendationWithMatch[]
+  >([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<
     "all" | "treatment" | "lifestyle" | "prevention" | "emergency"
@@ -302,10 +313,11 @@ export default function PersonalizedRecommendationEngine({
     const generatedRecommendations = engine.generateRecommendations();
 
     // 计算匹配度
-    const recommendationsWithMatch = generatedRecommendations.map((rec) => ({
-      ...rec,
-      matchScore: engine.calculateMatchScore(rec),
-    }));
+    const recommendationsWithMatch: RecommendationWithMatch[] =
+      generatedRecommendations.map((rec) => ({
+        ...rec,
+        matchScore: engine.calculateMatchScore(rec),
+      }));
 
     setRecommendations(recommendationsWithMatch);
     setLoading(false);
@@ -434,7 +446,7 @@ export default function PersonalizedRecommendationEngine({
                 </span>
                 <div className="flex items-center text-xs text-purple-600">
                   <Star className="w-3 h-3 mr-1" />
-                  {Math.round((recommendation as any).matchScore * 100)}%
+                  {Math.round(recommendation.matchScore * 100)}%
                 </div>
               </div>
             </div>
@@ -560,9 +572,7 @@ export default function PersonalizedRecommendationEngine({
               )}
               %
             </div>
-            <div className="text-sm text-purple-700">
-              {t("averageSafety")}
-            </div>
+            <div className="text-sm text-purple-700">{t("averageSafety")}</div>
           </div>
         </div>
       </div>

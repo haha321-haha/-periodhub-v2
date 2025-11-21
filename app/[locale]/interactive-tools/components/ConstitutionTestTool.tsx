@@ -40,6 +40,11 @@ import {
   scenarioBasedAdvice,
   emergencyKitRecommendations,
 } from "../shared/data/menstrualPainRecommendations";
+import {
+  SelectedAnswerValue,
+  SelectedAnswersState,
+  MenstrualPainAcupoint,
+} from "../shared/types";
 
 interface ConstitutionTestToolProps {
   locale: string;
@@ -49,9 +54,9 @@ export default function ConstitutionTestTool({
   locale,
 }: ConstitutionTestToolProps) {
   const { t } = useInteractiveToolTranslations("constitutionTest");
-  const [selectedAnswers, setSelectedAnswers] = useState<
-    Record<string, string | string[]>
-  >({});
+  const [selectedAnswers, setSelectedAnswers] = useState<SelectedAnswersState>(
+    {},
+  );
 
   // 生成安全的时间戳，避免水合错误
   const generateSafeTimestamp = () => {
@@ -92,12 +97,19 @@ export default function ConstitutionTestTool({
   };
 
   // 处理单选答案
-  const handleAnswerSelect = (questionId: string, value: string | number) => {
-    const stringValue = String(value);
+  const updateSelectedAnswer = (
+    questionId: string,
+    value: SelectedAnswerValue,
+  ) => {
     setSelectedAnswers((prev) => ({
       ...prev,
-      [questionId]: stringValue,
+      [questionId]: value,
     }));
+  };
+
+  const handleAnswerSelect = (questionId: string, value: string | number) => {
+    const stringValue = String(value);
+    updateSelectedAnswer(questionId, stringValue);
 
     const answer: ConstitutionAnswer = {
       questionId,
@@ -109,34 +121,28 @@ export default function ConstitutionTestTool({
   };
 
   // 处理多选答案
+  const normalizeAnswerValues = (input?: SelectedAnswerValue): string[] => {
+    if (!input) return [];
+    return Array.isArray(input) ? input : [input];
+  };
+
   const handleMultipleAnswerSelect = (questionId: string, value: string) => {
-    const currentValues = Array.isArray(selectedAnswers[questionId])
-      ? (selectedAnswers[questionId] as string[])
-      : selectedAnswers[questionId]
-        ? [selectedAnswers[questionId] as string]
-        : [];
+    const currentValues = normalizeAnswerValues(selectedAnswers[questionId]);
 
-    let newValues: string[];
-
-    // 处理"以上都没有"选项的逻辑
     const isNoneOption = value === "none";
     const hasNoneSelected = currentValues.includes("none");
 
+    let newValues: string[];
     if (isNoneOption) {
-      // 如果选择"以上都没有"，清除其他所有选择
-      newValues = currentValues.includes("none") ? [] : ["none"];
+      newValues = hasNoneSelected ? [] : ["none"];
     } else {
-      // 如果选择其他选项，先移除"以上都没有"选项
       const filteredValues = currentValues.filter((v) => v !== "none");
       newValues = filteredValues.includes(value)
         ? filteredValues.filter((v) => v !== value)
         : [...filteredValues, value];
     }
 
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [questionId]: newValues,
-    }));
+    updateSelectedAnswer(questionId, newValues);
 
     const answer: ConstitutionAnswer = {
       questionId,
@@ -217,9 +223,9 @@ export default function ConstitutionTestTool({
   const getMenstrualPainAcupoints = (
     constitutionType: ConstitutionType,
     locale: string,
-  ): any[] => {
+  ): MenstrualPainAcupoint[] => {
     const localeData =
-      (menstrualPainAcupoints as any)[locale] || menstrualPainAcupoints.zh;
+      menstrualPainAcupoints[locale] || menstrualPainAcupoints.zh;
     return localeData[constitutionType] || [];
   };
 
@@ -227,10 +233,9 @@ export default function ConstitutionTestTool({
   const getMenstrualPainLifestyleTips = (
     constitutionType: ConstitutionType,
     locale: string,
-  ): any[] => {
+  ): string[] => {
     const localeData =
-      (menstrualPainLifestyleTips as any)[locale] ||
-      menstrualPainLifestyleTips.zh;
+      menstrualPainLifestyleTips[locale] || menstrualPainLifestyleTips.zh;
     return localeData[constitutionType] || [];
   };
 
@@ -609,7 +614,7 @@ export default function ConstitutionTestTool({
                   {t("recommendations.menstrualPain.acupointTherapy")}
                 </h4>
                 {getMenstrualPainAcupoints(result.primaryType, locale).map(
-                  (point: any, index: number) => (
+                  (point: MenstrualPainAcupoint, index: number) => (
                     <div
                       key={index}
                       className="mb-3 p-3 bg-purple-50 rounded-lg"
@@ -635,7 +640,7 @@ export default function ConstitutionTestTool({
                   {getMenstrualPainLifestyleTips(
                     result.primaryType,
                     locale,
-                  ).map((tip: any, index: number) => (
+                  ).map((tip, index: number) => (
                     <li
                       key={index}
                       className="text-sm text-purple-700 flex items-start"

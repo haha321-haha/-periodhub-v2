@@ -2,6 +2,7 @@
 
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import { AlertTriangle, RefreshCw, Download, Home } from "lucide-react";
+import { logError } from "../../../../../lib/debug-logger";
 import { PainTrackerError } from "../../../../../types/pain-tracker";
 
 interface Props {
@@ -47,7 +48,7 @@ export class ErrorBoundary extends Component<Props, State> {
     });
 
     // Log error details
-    console.error("ErrorBoundary caught an error:", error, errorInfo);
+    logError("ErrorBoundary caught an error:", error, errorInfo);
 
     // Call custom error handler if provided
     if (this.props.onError) {
@@ -88,7 +89,7 @@ export class ErrorBoundary extends Component<Props, State> {
         JSON.stringify(existingReports),
       );
     } catch (reportingError) {
-      console.error("Failed to report error:", reportingError);
+      logError("Failed to report error:", reportingError);
     }
   };
 
@@ -139,7 +140,7 @@ export class ErrorBoundary extends Component<Props, State> {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (downloadError) {
-      console.error("Failed to download error report:", downloadError);
+      logError("Failed to download error report:", downloadError);
     }
   };
 

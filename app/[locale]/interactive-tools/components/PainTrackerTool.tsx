@@ -17,7 +17,17 @@ type ActiveTab = "overview" | "add" | "entries" | "statistics" | "export";
 
 interface EditingEntry {
   id: string;
-  data: any;
+  data: {
+    date: string;
+    painLevel: number;
+    duration?: number;
+    location: string[];
+    symptoms: string[];
+    remedies: string[];
+    menstrualStatus: "period" | "pre" | "post" | "ovulation" | "other";
+    notes?: string;
+    effectiveness?: number;
+  };
 }
 
 export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
@@ -44,7 +54,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
     addErrorNotification,
   } = useNotifications();
 
-  const handleAddEntry = async (data: any) => {
+  const handleAddEntry = async (data: Parameters<typeof addEntry>[0]) => {
     setIsFormLoading(true);
     try {
       const result = await addEntry(data);
@@ -66,7 +76,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
     }
   };
 
-  const handleEditEntry = async (data: any) => {
+  const handleEditEntry = async (data: Parameters<typeof updateEntry>[1]) => {
     if (!editingEntry) return { success: false };
 
     setIsFormLoading(true);
@@ -115,7 +125,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
     }
   };
 
-  const startEditEntry = (entry: any) => {
+  const startEditEntry = (entry: (typeof entries)[number]) => {
     setEditingEntry({ id: entry.id, data: entry });
     setActiveTab("add");
   };

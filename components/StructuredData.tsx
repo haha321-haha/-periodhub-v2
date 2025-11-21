@@ -7,7 +7,7 @@ interface StructuredDataData {
   datePublished?: string;
   dateModified?: string;
   // 允许扩展字段（如 locale、keywords 等），避免构建时的“多余属性”报错
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 type StructuredDataType =
@@ -115,7 +115,11 @@ export function generateStructuredData(
   }
 }
 
-export function StructuredDataScript({ data }: { data: any }) {
+export function StructuredDataScript({
+  data,
+}: {
+  data: Record<string, unknown>;
+}) {
   return (
     <script
       type="application/ld+json"

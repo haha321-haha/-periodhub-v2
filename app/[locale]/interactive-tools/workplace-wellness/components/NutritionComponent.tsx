@@ -15,8 +15,13 @@ import { useLocale } from "next-intl";
 import { getNutritionData } from "../data";
 import { useTranslations } from "next-intl";
 import { NutritionRecommendation } from "../types";
+import { logInfo } from "../../../../lib/debug-logger";
 import { useSimpleToast } from "./SimpleToast";
-import { checkFoodCompatibility, optimizeFoodDistribution } from "../utils/foodCompatibility";
+import {
+  checkFoodCompatibility,
+  optimizeFoodDistribution,
+} from "../utils/foodCompatibility";
+import { logError } from "../../../../lib/debug-logger";
 
 export default function NutritionComponent() {
   const nutrition = useNutrition();
@@ -28,40 +33,50 @@ export default function NutritionComponent() {
   const nutritionData = getNutritionData(locale);
   const [searchTerm, setSearchTerm] = useState("");
   const [mealPlan, setMealPlan] = useState<NutritionRecommendation[]>([]);
-  const [generatedSuggestions, setGeneratedSuggestions] = useState<Record<string, string>>({});
-  const [savedMealPlans, setSavedMealPlans] = useState<Array<{
-    id: string;
-    name: string;
-    phase: string;
-    foods: NutritionRecommendation[];
-    suggestions: Record<string, string>;
-    createdAt: Date;
-  }>>([]);
+  const [generatedSuggestions, setGeneratedSuggestions] = useState<
+    Record<string, string>
+  >({});
+  const [savedMealPlans, setSavedMealPlans] = useState<
+    Array<{
+      id: string;
+      name: string;
+      phase: string;
+      foods: NutritionRecommendation[];
+      suggestions: Record<string, string>;
+      createdAt: Date;
+    }>
+  >([]);
   const [showSavedPlans, setShowSavedPlans] = useState(false);
 
   // 初始化默认建议
   useEffect(() => {
     // 如果没有生成的建议，则生成默认建议
     if (Object.keys(generatedSuggestions).length === 0) {
-      const defaultSuggestions = (["breakfast", "lunch", "dinner", "snack"] as const).reduce((acc, mealId) => {
-        const phase = nutrition.selectedPhase || "menstrual"; // 默认为月经期
-        const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${mealId}`;
-        const genericKey = `nutrition.mealSuggestions.${mealId}`;
+      const defaultSuggestions = (
+        ["breakfast", "lunch", "dinner", "snack"] as const
+      ).reduce(
+        (acc, mealId) => {
+          const phase = nutrition.selectedPhase || "menstrual"; // 默认为月经期
+          const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${mealId}`;
+          const genericKey = `nutrition.mealSuggestions.${mealId}`;
 
-        try {
-          const phaseSuggestion = t(phaseSpecificKey);
-          acc[mealId] = phaseSuggestion === phaseSpecificKey
-            ? t(genericKey)
-            : phaseSuggestion;
-        } catch {
-          acc[mealId] = t(genericKey);
-        }
-        return acc;
-      }, {} as Record<string, string>);
+          try {
+            const phaseSuggestion = t(phaseSpecificKey);
+            acc[mealId] =
+              phaseSuggestion === phaseSpecificKey
+                ? t(genericKey)
+                : phaseSuggestion;
+          } catch {
+            acc[mealId] = t(genericKey);
+          }
+          return acc;
+        },
+        {} as Record<string, string>,
+      );
 
       setGeneratedSuggestions(defaultSuggestions);
     }
-  }, [nutrition.selectedPhase, t]);
+  }, [nutrition.selectedPhase, t, generatedSuggestions]);
 
   // 过滤营养数据 - 基于HVsLYEp的过滤逻辑
   const filteredFoods = useMemo(() => {
@@ -102,7 +117,7 @@ export default function NutritionComponent() {
       });
 
       // 等待一小段时间让持久化完成
-      await new Promise(resolve => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // 检查食物兼容性
       const compatibility = checkFoodCompatibility(mealPlan, locale);
@@ -147,12 +162,16 @@ export default function NutritionComponent() {
 
         if (mealFoods.length > 0) {
           // 生成该餐次的具体食谱
-          const foodNames = mealFoods.map(f => f.name).join("、");
-          const benefits = [...new Set(mealFoods.flatMap(f => f.benefits))].slice(0, 3).join("、");
+          const foodNames = mealFoods.map((f) => f.name).join("、");
+          const benefits = [...new Set(mealFoods.flatMap((f) => f.benefits))]
+            .slice(0, 3)
+            .join("、");
 
           // 检查该餐次的食物性质
-          const natures = [...new Set(mealFoods.map(f => f.tcmNature))];
-          const natureText = natures.map(n => t(`nutrition.tcmNature.${n}`)).join("、");
+          const natures = [...new Set(mealFoods.map((f) => f.tcmNature))];
+          const natureText = natures
+            .map((n) => t(`nutrition.tcmNature.${n}`))
+            .join("、");
 
           // 获取阶段相关的建议作为补充说明
           const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${meal}`;
@@ -167,9 +186,15 @@ export default function NutritionComponent() {
           }
 
           // 添加性质信息
-          const natureInfo = `\n\n🌿 ${t("nutrition.foodNature")}：${natureText}`;
+          const natureInfo = `\n\n🌿 ${t(
+            "nutrition.foodNature",
+          )}：${natureText}`;
 
-          suggestions[meal] = `🍽️ ${t("nutrition.recommendedFoods")}：${foodNames}\n\n✨ ${t("nutrition.mainBenefits")}：${benefits}${natureInfo}${phaseTip}`;
+          suggestions[meal] = `🍽️ ${t(
+            "nutrition.recommendedFoods",
+          )}：${foodNames}\n\n✨ ${t(
+            "nutrition.mainBenefits",
+          )}：${benefits}${natureInfo}${phaseTip}`;
         } else {
           // 如果该餐次没有食物，显示通用建议
           const phaseSpecificKey = `nutrition.mealSuggestions.${phase}.${meal}`;
@@ -191,12 +216,16 @@ export default function NutritionComponent() {
       // 保存生成的建议到状态
       setGeneratedSuggestions(suggestions);
 
-      console.log("Generated meal plan for phase:", phase, suggestions);
+      logInfo(
+        "Generated meal plan for phase:",
+        { phase, suggestions },
+        "NutritionComponent",
+      );
 
       // 显示成功提示
       toast.addToast("success", t("nutrition.planGenerated"));
     } catch (error) {
-      console.error("生成膳食计划时出错:", error);
+      logError("生成膳食计划时出错:", error, "NutritionComponent");
       toast.addToast("error", t("nutrition.generateError"));
     }
   };
@@ -247,7 +276,14 @@ export default function NutritionComponent() {
           <select
             value={nutrition.constitutionType}
             onChange={(e) =>
-              updateNutrition({ constitutionType: e.target.value as any })
+              updateNutrition({
+                constitutionType: e.target.value as
+                  | "qi_deficiency"
+                  | "yang_deficiency"
+                  | "yin_deficiency"
+                  | "blood_deficiency"
+                  | "balanced",
+              })
             }
             className="w-full px-3 py-2 border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
           >
@@ -370,7 +406,8 @@ export default function NutritionComponent() {
           {(["breakfast", "lunch", "dinner", "snack"] as const).map(
             (mealId) => {
               // 根据是否已生成建议来决定显示内容
-              const hasGeneratedSuggestions = Object.keys(generatedSuggestions).length > 0;
+              const hasGeneratedSuggestions =
+                Object.keys(generatedSuggestions).length > 0;
               const suggestionText = hasGeneratedSuggestions
                 ? generatedSuggestions[mealId]
                 : (() => {
@@ -443,9 +480,14 @@ export default function NutritionComponent() {
             <button
               type="button"
               onClick={() => {
-                const planName = locale === "zh"
-                  ? `${t(`nutrition.phases.${nutrition.selectedPhase}`)} - ${new Date().toLocaleDateString()}`
-                  : `${t(`nutrition.phases.${nutrition.selectedPhase}`)} - ${new Date().toLocaleDateString()}`;
+                const planName =
+                  locale === "zh"
+                    ? `${t(
+                        `nutrition.phases.${nutrition.selectedPhase}`,
+                      )} - ${new Date().toLocaleDateString()}`
+                    : `${t(
+                        `nutrition.phases.${nutrition.selectedPhase}`,
+                      )} - ${new Date().toLocaleDateString()}`;
 
                 const newPlan = {
                   id: `plan-${Date.now()}`,
@@ -491,15 +533,20 @@ export default function NutritionComponent() {
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>
-                    <h6 className="font-medium text-neutral-900">{plan.name}</h6>
+                    <h6 className="font-medium text-neutral-900">
+                      {plan.name}
+                    </h6>
                     <p className="text-xs text-neutral-500 mt-1">
-                      {plan.createdAt.toLocaleDateString()} - {t(`nutrition.phases.${plan.phase}`)}
+                      {plan.createdAt.toLocaleDateString()} -{" "}
+                      {t(`nutrition.phases.${plan.phase}`)}
                     </p>
                   </div>
                   <button
                     type="button"
                     onClick={() => {
-                      setSavedMealPlans((prev) => prev.filter((p) => p.id !== plan.id));
+                      setSavedMealPlans((prev) =>
+                        prev.filter((p) => p.id !== plan.id),
+                      );
                       toast.addToast("success", t("nutrition.planDeleted"));
                     }}
                     className="text-red-600 hover:text-red-800 p-1"
@@ -509,16 +556,18 @@ export default function NutritionComponent() {
                 </div>
 
                 <div className="space-y-2 mb-3">
-                  {Object.entries(plan.suggestions).map(([meal, suggestion]) => (
-                    <div key={meal} className="text-sm">
-                      <span className="font-medium text-neutral-700">
-                        {t(`nutrition.meals.${meal}`)}:
-                      </span>
-                      <p className="text-neutral-600 mt-1 whitespace-pre-line text-xs">
-                        {suggestion}
-                      </p>
-                    </div>
-                  ))}
+                  {Object.entries(plan.suggestions).map(
+                    ([meal, suggestion]) => (
+                      <div key={meal} className="text-sm">
+                        <span className="font-medium text-neutral-700">
+                          {t(`nutrition.meals.${meal}`)}:
+                        </span>
+                        <p className="text-neutral-600 mt-1 whitespace-pre-line text-xs">
+                          {suggestion}
+                        </p>
+                      </div>
+                    ),
+                  )}
                 </div>
 
                 <button

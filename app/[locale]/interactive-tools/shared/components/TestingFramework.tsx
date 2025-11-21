@@ -14,7 +14,7 @@ interface TestResult {
   status: "pass" | "fail" | "skip" | "running";
   duration?: number;
   error?: string;
-  details?: any;
+  details?: Record<string, unknown>;
 }
 
 // 测试套件接口
@@ -34,6 +34,8 @@ interface TestConfig {
   parallel: boolean;
   environment: "development" | "production" | "test";
 }
+
+type TestEnvironment = TestConfig["environment"];
 
 // 测试框架钩子
 export function useTestFramework() {
@@ -116,7 +118,7 @@ export function useTestFramework() {
         duration,
         error: success ? undefined : "模拟测试失败",
       };
-    } catch (error) {
+    } catch {
       return {
         ...test,
         status: "fail",
@@ -185,7 +187,7 @@ export function useTestFramework() {
             : s,
         ),
       );
-    } catch (error) {
+    } catch {
       setTestSuites((prev) =>
         prev.map((s) =>
           s.id === suiteId
@@ -281,6 +283,16 @@ export function TestingFramework() {
   } = useTestFramework();
 
   const stats = getTestStats();
+
+  const handleEnvironmentChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const value = event.target.value as TestEnvironment;
+    setConfig((prev) => ({
+      ...prev,
+      environment: value,
+    }));
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6">
@@ -380,12 +392,7 @@ export function TestingFramework() {
             </label>
             <select
               value={config.environment}
-              onChange={(e) =>
-                setConfig((prev) => ({
-                  ...prev,
-                  environment: e.target.value as any,
-                }))
-              }
+              onChange={handleEnvironmentChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             >
               <option value="development">开发环境</option>
@@ -502,7 +509,9 @@ export function TestingFramework() {
   );
 }
 
-export default {
+const TestingFrameworkModule = {
   useTestFramework,
   TestingFramework,
 };
+
+export default TestingFrameworkModule;

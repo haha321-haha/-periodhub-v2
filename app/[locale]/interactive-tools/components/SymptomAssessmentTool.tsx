@@ -25,7 +25,14 @@ import { usePersonalizedRecommendations } from "../shared/hooks/usePersonalizedR
 import NotificationContainer from "../shared/components/NotificationContainer";
 import LoadingSpinner from "../shared/components/LoadingSpinner";
 // import SettingsModal from '../shared/components/SettingsModal';
-import { AssessmentAnswer } from "../shared/types";
+import {
+  AssessmentAnswer,
+  AssessmentResult,
+  SelectedAnswerValue,
+  SelectedAnswersState,
+  SessionMeta,
+  AssessmentAnalyticsRecord,
+} from "../shared/types";
 import { useSafeTranslations } from "@/hooks/useSafeTranslations";
 
 interface SymptomAssessmentToolProps {
@@ -33,22 +40,32 @@ interface SymptomAssessmentToolProps {
   mode?: string;
 }
 
+type ReferenceData = NonNullable<AssessmentResult["referenceData"]>;
+
+const normalizeAnswerValues = (value?: SelectedAnswerValue): string[] => {
+  if (!value) return [];
+  if (Array.isArray(value)) return value.map((item) => String(item));
+  return [String(value)];
+};
+
+const optionValueToString = (value: string | number): string => String(value);
+
 export default function SymptomAssessmentTool({
   locale,
   mode = "simplified",
 }: SymptomAssessmentToolProps) {
   const { t } = useSafeTranslations("interactiveTools.symptomAssessment");
   const tTool = useTranslations("interactiveTools.symptomAssessmentTool");
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, any>>(
+  const [selectedAnswers, setSelectedAnswers] = useState<SelectedAnswersState>(
     {},
   );
   const [showSettings, setShowSettings] = useState(false);
-  const [sessionData, setSessionData] = useState({
-    sessionId: '',
-    startTime: '',
-    endTime: '',
+  const [sessionData, setSessionData] = useState<SessionMeta>({
+    sessionId: "",
+    startTime: "",
+    endTime: "",
     completionTime: 0,
-    upgraded: false
+    upgraded: false,
   });
 
   const {
@@ -71,30 +88,42 @@ export default function SymptomAssessmentTool({
 
   // 生成会话ID
   const generateSessionId = () => {
-    return `symptom_assessment_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `symptom_assessment_${Date.now()}_${Math.random()
+      .toString(36)
+      .substr(2, 9)}`;
   };
 
   // 记录评估数据（匿名）
   const recordAssessmentData = (completed: boolean = false) => {
     try {
-      const data = {
+      const startTime = sessionData.startTime || new Date().toISOString();
+      const calculationBase =
+        completed && sessionData.startTime
+          ? Date.now() - new Date(sessionData.startTime).getTime()
+          : 0;
+
+      const data: AssessmentAnalyticsRecord = {
         sessionId: sessionData.sessionId || generateSessionId(),
         type: "symptom",
-        startTime: sessionData.startTime || new Date().toISOString(),
-        endTime: completed ? new Date().toISOString() : '',
-        duration: completed ? Date.now() - new Date(sessionData.startTime).getTime() : 0,
-        completionTime: completed ? sessionData.completionTime + Date.now() - new Date(sessionData.startTime).getTime() : 0,
+        startTime,
+        endTime: completed ? new Date().toISOString() : "",
+        duration: calculationBase,
+        completionTime: completed
+          ? sessionData.completionTime + calculationBase
+          : sessionData.completionTime,
         answers: selectedAnswers,
         score: result?.score || 0,
-        profile: result?.severity || '',
-        completed: completed,
+        profile: result?.severity || "",
+        completed,
         upgraded: sessionData.upgraded,
-        locale: locale,
-        timestamp: Date.now()
+        locale,
+        timestamp: Date.now(),
       };
 
       // 保存到localStorage（仅用于本地分析，不上传服务器）
-      const existingData = JSON.parse(localStorage.getItem('assessmentAnalytics') || '[]');
+      const existingData = JSON.parse(
+        localStorage.getItem("assessmentAnalytics") || "[]",
+      );
       existingData.push(data);
 
       // 只保留最近100次记录，避免localStorage过大
@@ -102,20 +131,18 @@ export default function SymptomAssessmentTool({
         existingData.splice(0, existingData.length - 100);
       }
 
-      localStorage.setItem('assessmentAnalytics', JSON.stringify(existingData));
-
-      console.log('症状评估数据已记录（匿名）:', data);
+      localStorage.setItem("assessmentAnalytics", JSON.stringify(existingData));
     } catch (error) {
-      console.warn('记录评估数据失败:', error);
+      // ignore
     }
   };
 
   // 组件加载时初始化会话数据
   useEffect(() => {
-    setSessionData(prev => ({
+    setSessionData((prev) => ({
       ...prev,
       sessionId: generateSessionId(),
-      startTime: new Date().toISOString()
+      startTime: new Date().toISOString(),
     }));
   }, []);
 
@@ -128,7 +155,6 @@ export default function SymptomAssessmentTool({
 
   // 监听result变化并保存到历史记录
   useEffect(() => {
-    console.log("Result changed:", result);
     if (result && preferences.trackAssessmentHistory) {
       saveAssessmentResult(result);
     }
@@ -146,37 +172,50 @@ export default function SymptomAssessmentTool({
   }, [result, currentSession, selectedAnswers]);
 
   // 保存进度到localStorage
-  const saveProgress = (answers: Record<string, any>) => {
+  const saveProgress = (answers: SelectedAnswersState) => {
     const progressData = {
       answers: answers,
       timestamp: Date.now(),
       locale: locale,
-      mode: mode
+      mode: mode,
     };
     try {
-      localStorage.setItem('symptomAssessmentProgress', JSON.stringify(progressData));
+      localStorage.setItem(
+        "symptomAssessmentProgress",
+        JSON.stringify(progressData),
+      );
     } catch (error) {
-      console.warn('保存进度失败:', error);
+      // ignore
     }
   };
 
   // 从localStorage恢复进度
   const loadProgress = () => {
     try {
-      const saved = localStorage.getItem('symptomAssessmentProgress');
+      const saved = localStorage.getItem("symptomAssessmentProgress");
       if (saved) {
-        const progressData = JSON.parse(saved);
+        const progressData = JSON.parse(saved) as {
+          answers: SelectedAnswersState;
+          timestamp: number;
+          locale: string;
+          mode: string;
+        };
         // 检查数据是否过期（24小时）
-        const isExpired = Date.now() - progressData.timestamp > 24 * 60 * 60 * 1000;
-        if (!isExpired && progressData.locale === locale && progressData.mode === mode) {
+        const isExpired =
+          Date.now() - progressData.timestamp > 24 * 60 * 60 * 1000;
+        if (
+          !isExpired &&
+          progressData.locale === locale &&
+          progressData.mode === mode
+        ) {
           return progressData.answers || {};
         } else {
           // 清除过期数据
-          localStorage.removeItem('symptomAssessmentProgress');
+          localStorage.removeItem("symptomAssessmentProgress");
         }
       }
     } catch (error) {
-      console.warn('恢复进度失败:', error);
+      // ignore
     }
     return {};
   };
@@ -228,46 +267,11 @@ export default function SymptomAssessmentTool({
     generateRecommendations,
   ]);
 
-  // 调试当前session和问题
-  useEffect(() => {
-    console.log("Debug info:", {
-      locale,
-      currentSession: currentSession
-        ? {
-            id: currentSession.id,
-            locale: currentSession.locale,
-            answersCount: currentSession.answers.length,
-          }
-        : null,
-      currentQuestion: currentQuestion
-        ? {
-            id: currentQuestion.id,
-            title: currentQuestion.title,
-            type: currentQuestion.type,
-          }
-        : null,
-      currentQuestionIndex,
-      totalQuestions,
-    });
-  }, [
-    locale,
-    currentSession,
-    currentQuestion,
-    currentQuestionIndex,
-    totalQuestions,
-  ]);
-
   // 确保locale变化时重置assessment，避免使用错误locale的旧session
   useEffect(() => {
     if (currentSession) {
       const sessionMode = currentSession.mode || "simplified";
       if (currentSession.locale !== locale || sessionMode !== mode) {
-        console.log("Locale or mode mismatch detected, resetting assessment:", {
-          sessionLocale: currentSession.locale,
-          currentLocale: locale,
-          sessionMode: sessionMode,
-          currentMode: mode,
-        });
         resetAssessment();
       }
     }
@@ -281,14 +285,13 @@ export default function SymptomAssessmentTool({
   } = useNotifications();
 
   const handleStartAssessment = () => {
-    console.log("Starting assessment with locale:", locale, "mode:", mode);
     // Clear any existing session first to ensure fresh start with correct locale
     resetAssessment();
     // 清除保存的进度
     try {
-      localStorage.removeItem('symptomAssessmentProgress');
+      localStorage.removeItem("symptomAssessmentProgress");
     } catch (error) {
-      console.warn('清除进度失败:', error);
+      // ignore
     }
     startAssessment(locale, mode);
   };
@@ -298,23 +301,23 @@ export default function SymptomAssessmentTool({
     resetAssessment();
     // 清除保存的进度和会话数据
     try {
-      localStorage.removeItem('symptomAssessmentProgress');
-      localStorage.removeItem('assessmentAnalytics');
+      localStorage.removeItem("symptomAssessmentProgress");
+      localStorage.removeItem("assessmentAnalytics");
     } catch (error) {
-      console.warn('清除数据失败:', error);
+      // ignore
     }
     // 重置状态
     setSelectedAnswers({});
     setSessionData({
-      sessionId: '',
-      startTime: '',
-      endTime: '',
+      sessionId: "",
+      startTime: "",
+      endTime: "",
       completionTime: 0,
-      upgraded: false
+      upgraded: false,
     });
   };
 
-  const handleAnswerChange = (value: any) => {
+  const handleAnswerChange = (value: SelectedAnswerValue) => {
     if (!currentQuestion) return;
 
     const newAnswers = {
@@ -337,17 +340,9 @@ export default function SymptomAssessmentTool({
   };
 
   const handleNext = () => {
-    console.log("handleNext called:", {
-      currentQuestionIndex,
-      totalQuestions,
-      isLastQuestion: currentQuestionIndex >= totalQuestions - 1,
-    });
-
     if (currentQuestionIndex >= totalQuestions - 1) {
       // 已经是最后一题，完成评估
-      console.log("Completing assessment...");
       const assessmentResult = completeAssessment(t);
-      console.log("Assessment result:", assessmentResult);
 
       if (assessmentResult) {
         addSuccessNotification(
@@ -356,10 +351,9 @@ export default function SymptomAssessmentTool({
         );
         // 强制重新渲染以显示结果
         setTimeout(() => {
-          console.log("Result should be visible now:", result);
+          // The result will render automatically
         }, 100);
       } else {
-        console.error("Assessment result is null");
         addErrorNotification(
           t("messages.assessmentFailed"),
           t("messages.assessmentFailedDesc"),
@@ -448,7 +442,6 @@ export default function SymptomAssessmentTool({
                     );
                   });
                 } catch (error) {
-                  console.error("Error rendering features:", error);
                   return null;
                 }
               })()}
@@ -541,9 +534,9 @@ export default function SymptomAssessmentTool({
                 <div className="text-center">
                   <p className="text-sm text-indigo-700">
                     {tTool("trends.lastAssessment")}
-                    {new Date(trends?.lastAssessmentDate || "").toLocaleDateString(
-                      locale === "zh" ? "zh-CN" : "en-US",
-                    )}
+                    {new Date(
+                      trends?.lastAssessmentDate || "",
+                    ).toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US")}
                   </p>
                 </div>
               </div>
@@ -568,11 +561,10 @@ export default function SymptomAssessmentTool({
   // Results screen
   if (result) {
     const isZh = locale === "zh";
-    const referenceData: any = result.referenceData || {};
+    const referenceData = (result.referenceData || {}) as ReferenceData;
     const isSevere = result.severity === "severe" || result.emergency;
     const highScore = (result.percentage || 0) >= 70;
-    const hasWorkplaceScore =
-      typeof referenceData.workplaceScore === "number";
+    const hasWorkplaceScore = typeof referenceData.workplaceScore === "number";
     const highWorkImpact =
       (result.mode === "medical" && hasWorkplaceScore) ||
       result.type === "workplace";
@@ -669,7 +661,9 @@ export default function SymptomAssessmentTool({
                     {t("result.nextStepsRecommendations.workImpact.title")}
                   </h4>
                   <p className="text-sm text-gray-700 mb-4">
-                    {t("result.nextStepsRecommendations.workImpact.description")}
+                    {t(
+                      "result.nextStepsRecommendations.workImpact.description",
+                    )}
                   </p>
                   <Link
                     href={`/${locale}/interactive-tools/period-pain-impact-calculator`}
@@ -683,23 +677,31 @@ export default function SymptomAssessmentTool({
               {(isSevere || highScore) && (
                 <div className="bg-gradient-to-r from-red-50 to-orange-50 p-5 rounded-lg border border-red-200">
                   <h4 className="text-lg font-semibold text-red-900 mb-2">
-                    {t("result.nextStepsRecommendations.medicalConsultation.title")}
+                    {t(
+                      "result.nextStepsRecommendations.medicalConsultation.title",
+                    )}
                   </h4>
                   <p className="text-sm text-gray-700 mb-4">
-                    {t("result.nextStepsRecommendations.medicalConsultation.description")}
+                    {t(
+                      "result.nextStepsRecommendations.medicalConsultation.description",
+                    )}
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <Link
                       href={`/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`}
                       className="inline-flex items-center justify-center px-4 py-2 rounded-md border border-red-300 text-red-800 text-sm font-medium hover:bg-red-50 transition-colors"
                     >
-                      {t("result.nextStepsRecommendations.medicalConsultation.medicalGuideCTA")}
+                      {t(
+                        "result.nextStepsRecommendations.medicalConsultation.medicalGuideCTA",
+                      )}
                     </Link>
                     <Link
                       href={`/${locale}/scenario-solutions/emergency-kit`}
                       className="inline-flex items-center justify-center px-4 py-2 rounded-md border border-red-300 text-red-800 text-sm font-medium hover:bg-red-50 transition-colors"
                     >
-                      {t("result.nextStepsRecommendations.medicalConsultation.emergencyKitCTA")}
+                      {t(
+                        "result.nextStepsRecommendations.medicalConsultation.emergencyKitCTA",
+                      )}
                     </Link>
                   </div>
                 </div>
@@ -894,13 +896,6 @@ export default function SymptomAssessmentTool({
   }
 
   // Question screen
-  console.log("Rendering question screen:", {
-    currentQuestionIndex,
-    totalQuestions,
-    progress,
-    currentQuestion: currentQuestion?.id,
-  });
-
   return (
     <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-xl p-4 sm:p-6 lg:p-8 mobile-safe-area animate-fade-in">
       <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 lg:p-8 max-w-3xl mx-auto transform hover:scale-105 transition-all duration-300">
@@ -992,11 +987,12 @@ export default function SymptomAssessmentTool({
               {currentQuestion.type === "multi" && currentQuestion.options && (
                 <div className="space-y-2 sm:space-y-3">
                   {currentQuestion.options.map((option) => {
-                    const isSelected =
-                      Array.isArray(selectedAnswers[currentQuestion.id]) &&
-                      selectedAnswers[currentQuestion.id].includes(
-                        option.value,
-                      );
+                    const currentValues = normalizeAnswerValues(
+                      selectedAnswers[currentQuestion.id],
+                    );
+                    const isSelected = currentValues.includes(
+                      optionValueToString(option.value),
+                    );
 
                     return (
                       <label
@@ -1011,33 +1007,28 @@ export default function SymptomAssessmentTool({
                           type="checkbox"
                           checked={isSelected}
                           onChange={(e) => {
-                            const currentValues =
-                              selectedAnswers[currentQuestion.id] || [];
                             let newValues: string[];
 
-                            // Handle "none" options logic
                             const isNoneOption =
                               option.value === "none" ||
                               option.value === "no_treatment";
-                            const hasNoneSelected =
-                              currentValues.includes("none") ||
-                              currentValues.includes("no_treatment");
+                            const filteredValues = currentValues.filter(
+                              (v) => v !== "none" && v !== "no_treatment",
+                            );
 
                             if (isNoneOption) {
-                              // If selecting a "none" option, clear all other selections
                               newValues = e.target.checked
-                                ? [String(option.value)]
+                                ? [optionValueToString(option.value)]
                                 : [];
                             } else {
-                              // If selecting a regular option, remove any "none" options first
-                              const filteredValues = currentValues.filter(
-                                (v: string) =>
-                                  v !== "none" && v !== "no_treatment",
-                              );
                               newValues = e.target.checked
-                                ? [...filteredValues, option.value]
+                                ? [
+                                    ...filteredValues,
+                                    optionValueToString(option.value),
+                                  ]
                                 : filteredValues.filter(
-                                    (v: any) => v !== option.value,
+                                    (v) =>
+                                      v !== optionValueToString(option.value),
                                   );
                             }
 

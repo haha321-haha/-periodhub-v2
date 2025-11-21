@@ -2,24 +2,34 @@
 
 import { useState, useEffect } from "react";
 
-interface PerformanceData {
-  data: any[];
-  averages: any;
-  total: number;
-  summary: {
-    totalRecords: number;
-    filteredRecords: number;
-    returnedRecords: number;
-  };
+type MetricName = "LCP" | "FID" | "CLS" | "FCP" | "TTFB";
+
+interface PerformanceAverage {
+  average: number;
+  min: number;
+  max: number;
+  count: number;
 }
 
-interface MetricAverages {
-  [key: string]: {
-    average: number;
-    min: number;
-    max: number;
-    count: number;
-  };
+type AverageRecord = Record<string, PerformanceAverage>;
+
+interface PerformanceRecord {
+  timestamp: number;
+  url: string;
+  metrics: Record<MetricName, number | null>;
+}
+
+interface PerformanceSummary {
+  totalRecords: number;
+  filteredRecords: number;
+  returnedRecords: number;
+}
+
+interface PerformanceData {
+  data: PerformanceRecord[];
+  averages: AverageRecord;
+  total: number;
+  summary: PerformanceSummary;
 }
 
 export default function PerformanceDashboard() {
@@ -184,7 +194,6 @@ export default function PerformanceDashboard() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Object.entries(data.averages).map(([metric, stats]) => {
-              const typedStats = stats as MetricAverages[string];
               return (
                 <div
                   key={metric}

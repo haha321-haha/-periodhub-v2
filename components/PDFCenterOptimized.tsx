@@ -30,8 +30,18 @@ interface PDFResource {
   downloadUrl: string;
 }
 
+interface PDFCategoryInfo {
+  id: PDFCategory;
+  name: string;
+  nameEn: string;
+  icon: React.ReactNode;
+  bgColor: string;
+  color: string;
+  borderColor: string;
+}
+
 // 临时空数据，避免构建错误
-const PDF_CATEGORIES: any[] = [];
+const PDF_CATEGORIES: PDFCategoryInfo[] = [];
 const PDF_RESOURCES: PDFResource[] = [];
 
 interface PDFCenterOptimizedProps {
@@ -117,9 +127,6 @@ export default function PDFCenterOptimized({
 
   // 处理下载
   const handleDownload = (resource: PDFResource) => {
-    // 这里可以添加下载统计逻辑
-    console.log(`Downloading: ${resource.title}`);
-    // 实际下载逻辑
     window.open(resource.downloadUrl, "_blank");
   };
 

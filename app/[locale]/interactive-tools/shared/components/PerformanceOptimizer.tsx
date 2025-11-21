@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { useTranslations } from "next-intl";
 import {
   Zap,
   Clock,
@@ -17,6 +16,7 @@ import {
   Pause,
   RotateCcw,
 } from "lucide-react";
+import { logError } from "@/lib/debug-logger";
 
 interface PerformanceMetrics {
   bundleSize: number;
@@ -37,7 +37,6 @@ export default function PerformanceOptimizer({
   locale,
   onOptimizationComplete,
 }: PerformanceOptimizerProps) {
-  const t = useTranslations("interactiveTools.performance");
   const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null);
   const [loading, setLoading] = useState(true);
   const [optimizing, setOptimizing] = useState(false);
@@ -63,7 +62,11 @@ export default function PerformanceOptimizer({
         setMetrics(mockMetrics);
         setLoading(false);
       } catch (error) {
-        console.error("Performance metrics collection failed:", error);
+        logError(
+          "Performance metrics collection failed",
+          error,
+          "PerformanceOptimizer",
+        );
         setLoading(false);
       }
     };
@@ -152,7 +155,11 @@ export default function PerformanceOptimizer({
 
       setOptimizing(false);
     } catch (error) {
-      console.error("Performance optimization failed:", error);
+      logError(
+        "Performance optimization failed",
+        error,
+        "PerformanceOptimizer",
+      );
       setOptimizing(false);
     }
   }, [metrics, locale, onOptimizationComplete]);
@@ -172,46 +179,49 @@ export default function PerformanceOptimizer({
   }, []);
 
   // 性能指标卡片
-  const MetricCard = useMemo(
-    () =>
-      ({
-        icon,
-        title,
-        value,
-        unit,
-        improvement,
-      }: {
-        icon: React.ComponentType<{ className?: string }>;
-        title: string;
-        value: string | number;
-        unit: string;
-        improvement?: number;
-      }) => (
-        <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow">
-          <div className="flex items-center justify-between mb-4">
-            {React.createElement(icon, { className: "w-8 h-8 text-blue-600" })}
-            {improvement && (
-              <span
-                className={`px-2 py-1 rounded-full text-xs font-medium ${
-                  improvement > 0
-                    ? "bg-green-100 text-green-700"
-                    : "bg-red-100 text-red-700"
-                }`}
-              >
-                {improvement > 0 ? "+" : ""}
-                {improvement}%
-              </span>
-            )}
-          </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
-          <div className="flex items-baseline">
-            <span className="text-2xl font-bold text-gray-900">{value}</span>
-            <span className="text-sm text-gray-500 ml-1">{unit}</span>
-          </div>
+  const MetricCard = useMemo(() => {
+    type MetricCardProps = {
+      icon: React.ComponentType<{ className?: string }>;
+      title: string;
+      value: string | number;
+      unit: string;
+      improvement?: number;
+    };
+
+    const CardComponent: React.FC<MetricCardProps> = ({
+      icon,
+      title,
+      value,
+      unit,
+      improvement,
+    }) => (
+      <div className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow">
+        <div className="flex items-center justify-between mb-4">
+          {React.createElement(icon, { className: "w-8 h-8 text-blue-600" })}
+          {improvement && (
+            <span
+              className={`px-2 py-1 rounded-full text-xs font-medium ${
+                improvement > 0
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              {improvement > 0 ? "+" : ""}
+              {improvement}%
+            </span>
+          )}
         </div>
-      ),
-    [],
-  );
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
+        <div className="flex items-baseline">
+          <span className="text-2xl font-bold text-gray-900">{value}</span>
+          <span className="text-sm text-gray-500 ml-1">{unit}</span>
+        </div>
+      </div>
+    );
+
+    CardComponent.displayName = "MetricCard";
+    return CardComponent;
+  }, []);
 
   if (loading) {
     return (

@@ -8,8 +8,7 @@
 import React, { useState, useCallback, memo } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { RecommendationItem } from "../types/recommendation";
-import { RecommendationFeedbackHistory } from "../types";
+import type { LucideIcon } from "lucide-react";
 import {
   BookOpen,
   Wrench,
@@ -34,17 +33,24 @@ import {
   Droplet,
   Flame,
 } from "lucide-react";
+import {
+  RecommendationItem,
+  RecommendationFeedbackAction,
+} from "../types/recommendation";
+import { RecommendationFeedbackHistory } from "../types";
 import { useRecommendationFeedbackActions } from "../hooks/useWorkplaceWellnessStore";
+
+type RatingValue = 1 | 2 | 3 | 4 | 5;
 
 interface RecommendationCardProps {
   item: RecommendationItem;
   feedbackHistory: RecommendationFeedbackHistory;
   locale: string;
-  onFeedback?: (itemId: string, action: string) => void;
+  onFeedback?: (itemId: string, action: RecommendationFeedbackAction) => void;
 }
 
 // 图标映射
-const iconMap: Record<string, React.ComponentType<any>> = {
+const iconMap: Record<string, LucideIcon> = {
   BookOpen,
   Wrench,
   MapPin,
@@ -79,11 +85,30 @@ const typeIconMap: Record<string, string> = {
 };
 
 // 类型颜色映射
-const typeColorMap: Record<string, { bg: string; text: string; border: string }> = {
-  article: { bg: "bg-blue-100", text: "text-blue-600", border: "border-blue-200" },
-  tool: { bg: "bg-purple-100", text: "text-purple-600", border: "border-purple-200" },
-  scenario: { bg: "bg-green-100", text: "text-green-600", border: "border-green-200" },
-  tip: { bg: "bg-yellow-100", text: "text-yellow-600", border: "border-yellow-200" },
+const typeColorMap: Record<
+  string,
+  { bg: string; text: string; border: string }
+> = {
+  article: {
+    bg: "bg-blue-100",
+    text: "text-blue-600",
+    border: "border-blue-200",
+  },
+  tool: {
+    bg: "bg-purple-100",
+    text: "text-purple-600",
+    border: "border-purple-200",
+  },
+  scenario: {
+    bg: "bg-green-100",
+    text: "text-green-600",
+    border: "border-green-200",
+  },
+  tip: {
+    bg: "bg-yellow-100",
+    text: "text-yellow-600",
+    border: "border-yellow-200",
+  },
   action: { bg: "bg-red-100", text: "text-red-600", border: "border-red-200" },
 };
 
@@ -103,14 +128,15 @@ const RecommendationCard = memo(function RecommendationCard({
 }: RecommendationCardProps) {
   const t = useTranslations("workplaceWellness.recommendations");
   const { addRecommendationFeedback } = useRecommendationFeedbackActions();
-  const [isSaved, setIsSaved] = useState(feedbackHistory.savedItems.includes(item.id));
+  const [isSaved, setIsSaved] = useState(
+    feedbackHistory.savedItems.includes(item.id),
+  );
   const [isDismissed, setIsDismissed] = useState(false);
   const [showRating, setShowRating] = useState(false);
 
   // 获取图标组件
-  const IconComponent = item.icon
-    ? (iconMap[item.icon] || iconMap[typeIconMap[item.type] || "BookOpen"])
-    : iconMap[typeIconMap[item.type] || "BookOpen"];
+  const IconComponent =
+    iconMap[item.icon || ""] || iconMap[typeIconMap[item.type]] || BookOpen;
 
   // 获取类型颜色
   const typeColors = typeColorMap[item.type] || typeColorMap.article;
@@ -135,43 +161,52 @@ const RecommendationCard = memo(function RecommendationCard({
       });
       onFeedback?.(item.id, "clicked");
     }
-  }, [item.id, item.href, addRecommendationFeedback, onFeedback]);
+  }, [item.href, item.id, addRecommendationFeedback, onFeedback]);
 
   // 处理收藏 - 使用 useCallback 优化
-  const handleSave = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    const newSavedState = !isSaved;
-    setIsSaved(newSavedState);
+  const handleSave = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      const newSavedState = !isSaved;
+      setIsSaved(newSavedState);
 
-    addRecommendationFeedback({
-      recommendationId: item.id,
-      action: newSavedState ? "saved" : "dismissed",
-    });
-    onFeedback?.(item.id, newSavedState ? "saved" : "dismissed");
-  }, [item.id, isSaved, addRecommendationFeedback, onFeedback]);
+      addRecommendationFeedback({
+        recommendationId: item.id,
+        action: newSavedState ? "saved" : "dismissed",
+      });
+      onFeedback?.(item.id, newSavedState ? "saved" : "dismissed");
+    },
+    [item.id, isSaved, addRecommendationFeedback, onFeedback],
+  );
 
   // 处理忽略 - 使用 useCallback 优化
-  const handleDismiss = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsDismissed(true);
+  const handleDismiss = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setIsDismissed(true);
 
-    addRecommendationFeedback({
-      recommendationId: item.id,
-      action: "dismissed",
-    });
-    onFeedback?.(item.id, "dismissed");
-  }, [item.id, addRecommendationFeedback, onFeedback]);
+      addRecommendationFeedback({
+        recommendationId: item.id,
+        action: "dismissed",
+      });
+      onFeedback?.(item.id, "dismissed");
+    },
+    [item.id, addRecommendationFeedback, onFeedback],
+  );
 
   // 处理评分 - 使用 useCallback 优化
-  const handleRating = useCallback((rating: number) => {
-    addRecommendationFeedback({
-      recommendationId: item.id,
-      action: "rated",
-      rating: rating as 1 | 2 | 3 | 4 | 5,
-    });
-    setShowRating(false);
-    onFeedback?.(item.id, "rated");
-  }, [item.id, addRecommendationFeedback, onFeedback]);
+  const handleRating = useCallback(
+    (rating: RatingValue) => {
+      addRecommendationFeedback({
+        recommendationId: item.id,
+        action: "rated",
+        rating,
+      });
+      setShowRating(false);
+      onFeedback?.(item.id, "rated");
+    },
+    [item.id, addRecommendationFeedback, onFeedback],
+  );
 
   if (isDismissed) return null;
 
@@ -192,11 +227,15 @@ const RecommendationCard = memo(function RecommendationCard({
           {/* 头部：类型和优先级 */}
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <span className={`${typeColors.bg} ${typeColors.text} text-xs font-medium px-2 py-1 rounded-full`}>
+              <span
+                className={`${typeColors.bg} ${typeColors.text} text-xs font-medium px-2 py-1 rounded-full`}
+              >
                 {t(`types.${item.type}`)}
               </span>
               {item.priority >= 70 && (
-                <span className={`${priorityColors.bg} ${priorityColors.text} text-xs font-medium px-2 py-1 rounded-full`}>
+                <span
+                  className={`${priorityColors.bg} ${priorityColors.text} text-xs font-medium px-2 py-1 rounded-full`}
+                >
                   {t(`priority.${priorityLabel}`)}
                 </span>
               )}
@@ -250,12 +289,14 @@ const RecommendationCard = memo(function RecommendationCard({
             {item.metadata?.readTime && (
               <span className="flex items-center">
                 <Clock className="w-3 h-3 mr-1" />
-                {item.metadata.readTime} {t("dataQuality.suggestion").includes("分钟") ? "分钟" : "min"}
+                {item.metadata.readTime}{" "}
+                {t("dataQuality.suggestion").includes("分钟") ? "分钟" : "min"}
               </span>
             )}
             {item.metadata?.difficulty && (
               <span className="capitalize">
-                {t(`difficulty.${item.metadata.difficulty}`) || item.metadata.difficulty}
+                {t(`difficulty.${item.metadata.difficulty}`) ||
+                  item.metadata.difficulty}
               </span>
             )}
             {item.score > 0 && (
@@ -272,14 +313,21 @@ const RecommendationCard = memo(function RecommendationCard({
               <Link
                 href={`/${locale}${item.href}`}
                 onClick={handleClick}
-                className={`inline-flex items-center ${typeColors.text} hover:${typeColors.text.replace("600", "800")} font-medium text-sm transition-colors`}
+                className={`inline-flex items-center ${
+                  typeColors.text
+                } hover:${typeColors.text.replace(
+                  "600",
+                  "800",
+                )} font-medium text-sm transition-colors`}
                 suppressHydrationWarning={true}
               >
                 {t("actions.click")}
                 <ExternalLink className="w-3 h-3 ml-1" />
               </Link>
             ) : (
-              <span className="text-sm text-gray-400">{t("actions.click")}</span>
+              <span className="text-sm text-gray-400">
+                {t("actions.click")}
+              </span>
             )}
 
             {/* 评分按钮 */}
@@ -295,7 +343,9 @@ const RecommendationCard = memo(function RecommendationCard({
           {/* 评分面板 */}
           {showRating && (
             <div className="mt-3 p-3 bg-gray-50 rounded-md">
-              <p className="text-xs text-gray-600 mb-2">{t("feedback.ratePrompt")}</p>
+              <p className="text-xs text-gray-600 mb-2">
+                {t("feedback.ratePrompt")}
+              </p>
               <div className="flex items-center gap-1">
                 {[1, 2, 3, 4, 5].map((rating) => (
                   <button
@@ -322,4 +372,3 @@ const RecommendationCard = memo(function RecommendationCard({
 });
 
 export default RecommendationCard;
-

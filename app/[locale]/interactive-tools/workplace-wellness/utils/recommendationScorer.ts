@@ -8,8 +8,8 @@ import {
   RecommendationItem,
   RecommendationConditions,
   UserDataSnapshot,
-} from '../types/recommendation';
-import { RecommendationFeedbackHistory } from '../types';
+} from "../types/recommendation";
+import { RecommendationFeedbackHistory } from "../types";
 
 // 评分权重配置
 const SCORING_WEIGHTS = {
@@ -25,13 +25,16 @@ const SCORING_WEIGHTS = {
  */
 export function calculateRelevanceScore(
   item: RecommendationItem,
-  userData: UserDataSnapshot
+  userData: UserDataSnapshot,
 ): number {
   let score = 0;
   let weightSum = 0;
 
   // 1. 条件匹配分数 (40%)
-  const conditionScore = calculateConditionMatchScore(item.conditions, userData);
+  const conditionScore = calculateConditionMatchScore(
+    item.conditions,
+    userData,
+  );
   score += conditionScore * SCORING_WEIGHTS.conditionMatch;
   weightSum += SCORING_WEIGHTS.conditionMatch;
 
@@ -59,13 +62,16 @@ export function calculateRelevanceScore(
  */
 function calculateConditionMatchScore(
   conditions: RecommendationConditions,
-  userData: UserDataSnapshot
+  userData: UserDataSnapshot,
 ): number {
   let matchScore = 0;
   let conditionCount = 0;
 
   // 疼痛等级匹配
-  if (conditions.minPainLevel !== undefined || conditions.maxPainLevel !== undefined) {
+  if (
+    conditions.minPainLevel !== undefined ||
+    conditions.maxPainLevel !== undefined
+  ) {
     conditionCount++;
     const currentPain = userData.workImpact.currentPainLevel;
     const minPain = conditions.minPainLevel || 0;
@@ -77,14 +83,17 @@ function calculateConditionMatchScore(
       // 部分匹配：接近范围
       const distance = Math.min(
         Math.abs(currentPain - minPain),
-        Math.abs(currentPain - maxPain)
+        Math.abs(currentPain - maxPain),
       );
       matchScore += Math.max(0, 1 - distance / 5); // 距离越近分数越高
     }
   }
 
   // 工作效率匹配
-  if (conditions.minEfficiency !== undefined || conditions.maxEfficiency !== undefined) {
+  if (
+    conditions.minEfficiency !== undefined ||
+    conditions.maxEfficiency !== undefined
+  ) {
     conditionCount++;
     const currentEfficiency = userData.workImpact.currentEfficiency;
     const minEff = conditions.minEfficiency || 0;
@@ -95,7 +104,7 @@ function calculateConditionMatchScore(
     } else {
       const distance = Math.min(
         Math.abs(currentEfficiency - minEff),
-        Math.abs(currentEfficiency - maxEff)
+        Math.abs(currentEfficiency - maxEff),
       );
       matchScore += Math.max(0, 1 - distance / 20); // 距离越近分数越高
     }
@@ -104,8 +113,10 @@ function calculateConditionMatchScore(
   // 周期阶段匹配
   if (conditions.requiredPhases && conditions.requiredPhases.length > 0) {
     conditionCount++;
-    if (userData.periodData.currentPhase &&
-        conditions.requiredPhases.includes(userData.periodData.currentPhase)) {
+    if (
+      userData.periodData.currentPhase &&
+      conditions.requiredPhases.includes(userData.periodData.currentPhase)
+    ) {
       matchScore += 1.0;
     } else {
       matchScore += 0.3; // 部分匹配
@@ -134,7 +145,7 @@ function calculateConditionMatchScore(
 function calculateRecencyScore(userData: UserDataSnapshot): number {
   const lastUpdate = userData.metadata.lastUpdate;
   const daysSinceUpdate = Math.floor(
-    (Date.now() - lastUpdate.getTime()) / (1000 * 60 * 60 * 24)
+    (Date.now() - lastUpdate.getTime()) / (1000 * 60 * 60 * 24),
   );
 
   // 数据越新鲜，分数越高
@@ -150,7 +161,7 @@ function calculateRecencyScore(userData: UserDataSnapshot): number {
  */
 export function calculateUserPreferenceScore(
   item: RecommendationItem,
-  feedbackHistory: RecommendationFeedbackHistory
+  feedbackHistory: RecommendationFeedbackHistory,
 ): number {
   let score = 50; // 基础分数
 
@@ -172,7 +183,8 @@ export function calculateUserPreferenceScore(
 
   // 如果用户点击过同类型推荐，小幅增加
   const similarClicked = feedbackHistory.feedbacks.filter(
-    f => f.action === 'clicked' && f.recommendationId.startsWith(item.category)
+    (f) =>
+      f.action === "clicked" && f.recommendationId.startsWith(item.category),
   ).length;
   score += Math.min(similarClicked * 5, 20); // 最多+20
 
@@ -185,7 +197,7 @@ export function calculateUserPreferenceScore(
 export function calculateFinalScore(
   item: RecommendationItem,
   userData: UserDataSnapshot,
-  feedbackHistory: RecommendationFeedbackHistory
+  feedbackHistory: RecommendationFeedbackHistory,
 ): number {
   // 相关性分数
   const relevanceScore = calculateRelevanceScore(item, userData);
@@ -205,7 +217,7 @@ export function calculateFinalScore(
  */
 export function applyTimeDecay(
   item: RecommendationItem,
-  daysSinceCreation: number
+  daysSinceCreation: number,
 ): number {
   // 使用指数衰减：e^(-λt)
   const decayRate = 0.1; // 衰减率
@@ -220,23 +232,25 @@ export function applyTimeDecay(
  */
 export function calculateDiversityScore(
   item: RecommendationItem,
-  existingRecommendations: RecommendationItem[]
+  existingRecommendations: RecommendationItem[],
 ): number {
   if (existingRecommendations.length === 0) return 1.0;
 
   // 检查是否已有相同类型
   const sameTypeCount = existingRecommendations.filter(
-    r => r.type === item.type
+    (r) => r.type === item.type,
   ).length;
 
   // 检查是否已有相同分类
   const sameCategoryCount = existingRecommendations.filter(
-    r => r.category === item.category
+    (r) => r.category === item.category,
   ).length;
 
   // 多样性分数：类型和分类越少，分数越高
-  const typeDiversity = 1 - (sameTypeCount / existingRecommendations.length) * 0.5;
-  const categoryDiversity = 1 - (sameCategoryCount / existingRecommendations.length) * 0.5;
+  const typeDiversity =
+    1 - (sameTypeCount / existingRecommendations.length) * 0.5;
+  const categoryDiversity =
+    1 - (sameCategoryCount / existingRecommendations.length) * 0.5;
 
   return (typeDiversity + categoryDiversity) / 2;
 }
@@ -247,9 +261,9 @@ export function calculateDiversityScore(
 export function scoreRecommendations(
   items: RecommendationItem[],
   userData: UserDataSnapshot,
-  feedbackHistory: RecommendationFeedbackHistory
+  feedbackHistory: RecommendationFeedbackHistory,
 ): RecommendationItem[] {
-  return items.map(item => {
+  return items.map((item) => {
     // 计算相关性
     const relevance = calculateRelevanceScore(item, userData);
 
@@ -263,10 +277,3 @@ export function scoreRecommendations(
     };
   });
 }
-
-
-
-
-
-
-

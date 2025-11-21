@@ -395,6 +395,8 @@ lib/                        # 工具库
   };
 }
 
+import { logInfo } from "../../../../../lib/debug-logger";
+
 // 文档框架组件
 export function DocumentationFramework() {
   const {
@@ -550,9 +552,9 @@ export function DocumentationFramework() {
                 {isEditing ? (
                   <textarea
                     value={selectedItem.content}
-                    onChange={(e) => {
+                    onChange={() => {
                       // 这里应该调用updateDocumentation
-                      console.log("更新文档内容");
+                      logInfo("文档内容更新（未实现）");
                     }}
                     className="w-full h-full p-4 border border-gray-300 rounded-lg font-mono text-sm"
                     placeholder="输入文档内容..."
@@ -581,7 +583,9 @@ export function DocumentationFramework() {
   );
 }
 
-export default {
+const DocumentationFrameworkModule = {
   useDocumentationFramework,
   DocumentationFramework,
 };
+
+export default DocumentationFrameworkModule;

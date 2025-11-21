@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   Calendar,
@@ -21,8 +21,9 @@ import {
   EFFECTIVENESS_LEVELS,
   ERROR_MESSAGES,
 } from "../../shared/constants";
-import { formatDateShort, getPainLevelColor } from "../../shared/utils";
+import { formatDateShort } from "../../shared/utils";
 import LoadingSpinner from "../../shared/components/LoadingSpinner";
+import { logError } from "../../../../../lib/debug-logger";
 
 interface PainEntryFormProps {
   initialData?: Partial<PainEntryFormData>;
@@ -46,19 +47,17 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
   const [formData, setFormData] = useState<PainEntryFormData>({
     date: initialData?.date || formatDateShort(new Date()),
     painLevel: initialData?.painLevel || 1,
-    duration: initialData?.duration || (undefined as any),
+    duration: initialData?.duration,
     location: initialData?.location || [],
     menstrualStatus: initialData?.menstrualStatus || "other",
     symptoms: initialData?.symptoms || [],
     remedies: initialData?.remedies || [],
-    effectiveness: initialData?.effectiveness || (undefined as any),
+    effectiveness: initialData?.effectiveness,
     notes: initialData?.notes || "",
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [showOverwriteConfirm, setShowOverwriteConfirm] = useState(false);
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
-
   // Get localized options
   const painLocations =
     PAIN_LOCATIONS[locale as keyof typeof PAIN_LOCATIONS] || PAIN_LOCATIONS.en;
@@ -75,7 +74,10 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
   const errorMessages =
     ERROR_MESSAGES[locale as keyof typeof ERROR_MESSAGES] || ERROR_MESSAGES.en;
 
-  const handleInputChange = (field: keyof PainEntryFormData, value: any) => {
+  const handleInputChange = (
+    field: keyof PainEntryFormData,
+    value: PainEntryFormData[keyof PainEntryFormData],
+  ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     setTouched((prev) => ({ ...prev, [field]: true }));
 
@@ -184,7 +186,7 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
         }
       }
     } catch (error) {
-      console.error("Form submission error:", error);
+      logError("Form submission error:", error);
       setErrors({ general: errorMessages.storageError });
     }
   };

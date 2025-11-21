@@ -2,26 +2,31 @@
  * 推荐系统相关类型定义
  */
 
-import { MenstrualPhase } from './index';
+import { MenstrualPhase } from "./index";
 
 // 推荐类型
-export type RecommendationType = 'article' | 'tool' | 'scenario' | 'tip' | 'action';
+export type RecommendationType =
+  | "article"
+  | "tool"
+  | "scenario"
+  | "tip"
+  | "action";
 
 // 推荐类别
 export type RecommendationCategory =
-  | 'pain-relief'
-  | 'tracking'
-  | 'medical'
-  | 'work-adjustment'
-  | 'nutrition'
-  | 'natural-therapy'
-  | 'assessment'
-  | 'scenario'
-  | 'mental-health'
-  | 'emergency';
+  | "pain-relief"
+  | "tracking"
+  | "medical"
+  | "work-adjustment"
+  | "nutrition"
+  | "natural-therapy"
+  | "assessment"
+  | "scenario"
+  | "mental-health"
+  | "emergency";
 
 // 难度等级
-export type DifficultyLevel = 'easy' | 'medium' | 'hard';
+export type DifficultyLevel = "easy" | "medium" | "hard";
 
 // 推荐项接口
 export interface RecommendationItem {
@@ -59,9 +64,9 @@ export interface RecommendationConditions {
 export interface RecommendationResult {
   recommendations: RecommendationItem[];
   insights: {
-    painPattern: 'increasing' | 'decreasing' | 'stable' | 'irregular';
-    efficiencyPattern: 'improving' | 'declining' | 'stable';
-    cycleHealth: 'healthy' | 'irregular' | 'needs_attention';
+    painPattern: "increasing" | "decreasing" | "stable" | "irregular";
+    efficiencyPattern: "improving" | "declining" | "stable";
+    cycleHealth: "healthy" | "irregular" | "needs_attention";
   };
   summary: {
     totalRecommendations: number;
@@ -70,6 +75,12 @@ export interface RecommendationResult {
   };
 }
 
+export type RecommendationFeedbackAction =
+  | "clicked"
+  | "saved"
+  | "dismissed"
+  | "rated";
+
 // 用户数据快照接口
 export interface UserDataSnapshot {
   periodData: {
@@ -77,8 +88,8 @@ export interface UserDataSnapshot {
     averageCycleLength: number;
     averagePeriodLength: number;
     averagePainLevel: number;
-    painTrend: 'increasing' | 'decreasing' | 'stable' | 'irregular';
-    cycleRegularity: 'regular' | 'irregular';
+    painTrend: "increasing" | "decreasing" | "stable" | "irregular";
+    cycleRegularity: "regular" | "irregular";
     currentPhase: MenstrualPhase | null;
   };
   workImpact: {
@@ -86,15 +97,15 @@ export interface UserDataSnapshot {
     currentEfficiency: number;
     averagePainLevel: number;
     averageEfficiency: number;
-    painTrend: 'increasing' | 'decreasing' | 'stable' | 'irregular';
-    efficiencyTrend: 'improving' | 'declining' | 'stable';
+    painTrend: "increasing" | "decreasing" | "stable" | "irregular";
+    efficiencyTrend: "improving" | "declining" | "stable";
   };
   nutrition: {
     selectedPhase: MenstrualPhase;
     constitutionType: string;
   };
   metadata: {
-    dataQuality: 'excellent' | 'good' | 'fair' | 'poor';
+    dataQuality: "excellent" | "good" | "fair" | "poor";
     dataCompleteness: number; // 0-100
     lastUpdate: Date;
   };
@@ -113,14 +124,14 @@ export interface DataQualityMetrics {
     accuracyScore: number;
     minRecordsForAnalysis: number;
   };
-  overallQuality: 'excellent' | 'good' | 'fair' | 'poor';
+  overallQuality: "excellent" | "good" | "fair" | "poor";
   dataCompleteness: number; // 0-100
 }
 
 // 异常检测结果
 export interface AnomalyDetection {
   isAnomaly: boolean;
-  type: 'pain_spike' | 'efficiency_drop' | 'cycle_irregularity';
-  severity: 'mild' | 'moderate' | 'severe';
+  type: "pain_spike" | "efficiency_drop" | "cycle_irregularity";
+  severity: "mild" | "moderate" | "severe";
   suggestion: string;
 }

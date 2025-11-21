@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { ErrorBoundary } from "./ErrorBoundary";
 import {
   NotificationProvider,
@@ -13,6 +13,7 @@ import { useErrorHandling } from "../hooks/useErrorHandling";
 import { useOfflineDetection } from "../hooks/useOfflineDetection";
 import DataIntegrityService from "../../../../../lib/pain-tracker/storage/DataIntegrityService";
 import { Shield, AlertTriangle, CheckCircle, Settings } from "lucide-react";
+import { logError } from "../../../../../lib/debug-logger";
 
 interface ErrorHandlingWrapperProps {
   children: React.ReactNode;
@@ -22,6 +23,8 @@ interface ErrorHandlingWrapperProps {
   enableHealthChecks?: boolean;
   className?: string;
 }
+
+type StoredRecord = { date?: string } & Record<string, unknown>;
 
 export function ErrorHandlingWrapper({
   children,
@@ -37,11 +40,11 @@ export function ErrorHandlingWrapper({
   >("healthy");
   const [lastHealthCheck, setLastHealthCheck] = useState<Date | null>(null);
 
-  const { errorState, handleError, clearError } = useErrorHandling({
+  const { errorState, handleError } = useErrorHandling({
     enableAutoRecovery: true,
     enableOfflineMode: true,
     onError: (error) => {
-      console.error("Error handled by wrapper:", error);
+      logError("Error handled by wrapper:", error);
     },
     onRecovery: (success) => {
       if (success) {
@@ -50,24 +53,10 @@ export function ErrorHandlingWrapper({
     },
   });
 
-  const { isOnline, isOffline } = useOfflineDetection({
-    onOffline: () => {
-      if (showOfflineNotifications) {
-        // Offline notification will be handled by OfflineNotification component
-      }
-    },
-    onOnline: () => {
-      // Trigger health check when coming back online
-      if (enableHealthChecks) {
-        performHealthCheck();
-      }
-    },
-  });
-
-  const dataIntegrityService = new DataIntegrityService();
+  const dataIntegrityService = useMemo(() => new DataIntegrityService(), []);
 
   // Perform health check
-  const performHealthCheck = async () => {
+  const performHealthCheck = useCallback(async () => {
     if (!enableHealthChecks) return;
 
     setHealthStatus("checking");
@@ -84,20 +73,20 @@ export function ErrorHandlingWrapper({
 
       setLastHealthCheck(new Date());
     } catch (error) {
-      console.error("Health check failed:", error);
+      logError("Health check failed:", error);
       setHealthStatus("error");
       handleError(error as Error, "health check");
     }
-  };
+  }, [dataIntegrityService, enableHealthChecks, handleError]);
 
   // Auto backup functionality
-  const performAutoBackup = async () => {
+  const performAutoBackup = useCallback(async () => {
     if (!enableAutoBackup) return;
 
     try {
       const records = JSON.parse(
         localStorage.getItem("enhanced_pain_tracker_records") || "[]",
-      );
+      ) as StoredRecord[];
       if (records.length === 0) return;
 
       const lastBackup = localStorage.getItem(
@@ -133,9 +122,9 @@ export function ErrorHandlingWrapper({
         );
       }
     } catch (error) {
-      console.error("Auto backup failed:", error);
+      logError("Auto backup failed:", error);
     }
-  };
+  }, [enableAutoBackup]);
 
   // Initialize health checks and auto backup
   useEffect(() => {
@@ -155,31 +144,47 @@ export function ErrorHandlingWrapper({
       clearInterval(healthCheckInterval);
       clearInterval(backupInterval);
     };
-  }, []);
+  }, [performAutoBackup, performHealthCheck]);
+
+  const handleExportRequest = useCallback(() => setShowBackupSystem(true), []);
+  const handleBackupRequest = useCallback(() => setShowBackupSystem(true), []);
+  const handleCleanupRequest = useCallback(() => {
+    const records = JSON.parse(
+      localStorage.getItem("enhanced_pain_tracker_records") || "[]",
+    ) as StoredRecord[];
+    const cutoffDate = new Date();
+    cutoffDate.setFullYear(cutoffDate.getFullYear() - 1); // Keep only last year
+
+    const filteredRecords = records.filter((record) => {
+      if (!record?.date) return false;
+      const parsedDate = Date.parse(record.date);
+      if (Number.isNaN(parsedDate)) return false;
+      return new Date(parsedDate) > cutoffDate;
+    });
+
+    localStorage.setItem(
+      "enhanced_pain_tracker_records",
+      JSON.stringify(filteredRecords),
+    );
+    performHealthCheck();
+  }, [performHealthCheck]);
+
+  useOfflineDetection({
+    onOffline: () => {
+      if (showOfflineNotifications) {
+        // Offline notification will be handled by OfflineNotification component
+      }
+    },
+    onOnline: () => {
+      // Trigger health check when coming back online
+      if (enableHealthChecks) {
+        performHealthCheck();
+      }
+    },
+  });
 
   // Listen for custom events
   useEffect(() => {
-    const handleExportRequest = () => setShowBackupSystem(true);
-    const handleBackupRequest = () => setShowBackupSystem(true);
-    const handleCleanupRequest = () => {
-      // Implement cleanup logic
-      const records = JSON.parse(
-        localStorage.getItem("enhanced_pain_tracker_records") || "[]",
-      );
-      const cutoffDate = new Date();
-      cutoffDate.setFullYear(cutoffDate.getFullYear() - 1); // Keep only last year
-
-      const filteredRecords = records.filter(
-        (record: any) => new Date(record.date) > cutoffDate,
-      );
-
-      localStorage.setItem(
-        "enhanced_pain_tracker_records",
-        JSON.stringify(filteredRecords),
-      );
-      performHealthCheck();
-    };
-
     window.addEventListener("pain-tracker-export-request", handleExportRequest);
     window.addEventListener("pain-tracker-backup-request", handleBackupRequest);
     window.addEventListener(
@@ -201,7 +206,7 @@ export function ErrorHandlingWrapper({
         handleCleanupRequest,
       );
     };
-  }, []);
+  }, [handleBackupRequest, handleCleanupRequest, handleExportRequest]);
 
   const getHealthStatusIcon = () => {
     switch (healthStatus) {
@@ -237,6 +242,7 @@ export function ErrorHandlingWrapper({
     <NotificationProvider>
       <ErrorBoundary
         onError={(error, errorInfo) => {
+          logError("ErrorBoundary triggered in wrapper:", error, errorInfo);
           handleError(error, "component error");
         }}
         showDetails={process.env.NODE_ENV === "development"}

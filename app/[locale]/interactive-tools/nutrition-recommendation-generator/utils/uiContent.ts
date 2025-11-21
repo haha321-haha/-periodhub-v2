@@ -3,8 +3,17 @@
  * 保持原始翻译结构和内容
  */
 
+import { logWarn } from "../../../../../lib/debug-logger";
+
+type LocalizedString = {
+  en: string;
+  zh: string;
+};
+
+type UIContentNode = LocalizedString | Record<string, UIContentNode>;
+
 // 基于ziV1d3d的uiContent结构
-export const uiContent = {
+export const uiContent: Record<string, UIContentNode> = {
   mainTitle: {
     en: "Nutrition Suggestion Generator",
     zh: "营养建议生成器",
@@ -55,33 +64,58 @@ export const uiContent = {
   },
 };
 
+const isLocalizedString = (value: UIContentNode): value is LocalizedString =>
+  typeof value === "object" && value !== null && "en" in value && "zh" in value;
+
 // 基于ziV1d3d的翻译获取函数
 export function getUIContent(key: string, language: "en" | "zh"): string {
   const keys = key.split(".");
-  let content: any = uiContent;
+  let content: UIContentNode | undefined = uiContent[keys.shift() ?? ""];
+
+  if (!content) {
+    logWarn(`UI content key not found: ${key}`);
+    return key;
+  }
 
   for (const k of keys) {
-    content = content[k];
-    if (!content) {
-      console.warn(`UI content key not found: ${key}`);
+    if (typeof content === "object" && content !== null && k in content) {
+      content = (content as Record<string, UIContentNode>)[k];
+    } else {
+      logWarn(`UI content key not found: ${key}`);
       return key;
     }
   }
 
-  return content[language] || content.en || key;
+  if (!isLocalizedString(content)) {
+    logWarn(`UI content override is missing localized strings: ${key}`);
+    return key;
+  }
+
+  return content[language] || content.en;
 }
 
 // 基于ziV1d3d的翻译对象获取函数
-export function getUIContentObject(key: string): { en: string; zh: string } {
+export function getUIContentObject(key: string): LocalizedString {
   const keys = key.split(".");
-  let content: any = uiContent;
+  let content: UIContentNode | undefined = uiContent[keys.shift() ?? ""];
+
+  if (!content) {
+    logWarn(`UI content key not found: ${key}`);
+    return { en: key, zh: key };
+  }
 
   for (const k of keys) {
-    content = content[k];
-    if (!content) {
-      console.warn(`UI content key not found: ${key}`);
+    if (typeof content === "object" && content !== null && k in content) {
+      content = (content as Record<string, UIContentNode>)[k];
+    } else {
+      logWarn(`UI content key not found: ${key}`);
       return { en: key, zh: key };
     }
+  }
+
+  if (!isLocalizedString(content)) {
+    logWarn(`UI content key ${key} is not localized`);
+    return { en: key, zh: key };
   }
 
   return content;

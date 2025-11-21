@@ -16,8 +16,6 @@ import {
   Wifi,
   WifiOff,
   Shield,
-  Database,
-  RefreshCw,
 } from "lucide-react";
 
 export type NotificationType =
@@ -45,6 +43,12 @@ export interface NotificationAction {
   label: string;
   action: () => void;
   style?: "primary" | "secondary" | "danger";
+}
+
+interface RecoveryOption {
+  type?: string;
+  action: () => void;
+  riskLevel?: "low" | "medium" | "high";
 }
 
 interface NotificationContextType {
@@ -110,6 +114,16 @@ export function NotificationProvider({
 }: NotificationProviderProps) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
 
+  const removeNotification = useCallback((id: string) => {
+    setNotifications((prev) =>
+      prev.filter((notification) => notification.id !== id),
+    );
+  }, []);
+
+  const clearAllNotifications = useCallback(() => {
+    setNotifications([]);
+  }, []);
+
   const addNotification = useCallback(
     (notification: Omit<Notification, "id" | "timestamp">) => {
       const id = `notification_${Date.now()}_${Math.random()
@@ -144,18 +158,8 @@ export function NotificationProvider({
 
       return id;
     },
-    [defaultDuration, maxNotifications],
+    [defaultDuration, maxNotifications, removeNotification],
   );
-
-  const removeNotification = useCallback((id: string) => {
-    setNotifications((prev) =>
-      prev.filter((notification) => notification.id !== id),
-    );
-  }, []);
-
-  const clearAllNotifications = useCallback(() => {
-    setNotifications([]);
-  }, []);
 
   const addSuccessNotification = useCallback(
     (title: string, message: string, actions?: NotificationAction[]) => {
@@ -519,7 +523,7 @@ export function useRecoveryNotifications() {
 
   const notifyDataCorruption = (
     corruptionLevel: string,
-    recoveryOptions: any[],
+    recoveryOptions: RecoveryOption[],
   ) => {
     const actions = recoveryOptions.slice(0, 2).map((option) => ({
       label:

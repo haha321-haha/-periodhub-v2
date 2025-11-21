@@ -6,15 +6,25 @@ import { useTranslations, useLocale } from "next-intl";
  * 安全的翻译Hook
  * 提供fallback机制，避免显示翻译键
  */
+type TranslationParams = Record<string, unknown>;
+
+type SafeTranslationFn = (
+  key: string,
+  params?: TranslationParams,
+  fallback?: string,
+) => string;
+
+type SafeTranslationRawFn = (
+  key: string,
+  params?: TranslationParams,
+  fallback?: string | null,
+) => string | null;
+
 export function useSafeTranslations(namespace?: string) {
   const t = useTranslations(namespace);
   const locale = useLocale();
 
-  const safeT = (
-    key: string,
-    params?: Record<string, any>,
-    fallback?: string,
-  ): string => {
+  const safeT: SafeTranslationFn = (key, params, fallback) => {
     try {
       const result = t(key, params);
 
@@ -48,11 +58,7 @@ export function useSafeTranslations(namespace?: string) {
     }
   };
 
-  const safeTRaw = (
-    key: string,
-    params?: Record<string, any>,
-    fallback?: any,
-  ): any => {
+  const safeTRaw: SafeTranslationRawFn = (key, params, fallback) => {
     try {
       // 检查 t.raw 方法是否存在
       if (typeof t.raw === "function") {
@@ -76,7 +82,7 @@ export function useSafeTranslations(namespace?: string) {
         );
       }
 
-      return fallback || null;
+      return typeof fallback === "string" ? fallback : null;
     }
   };
 
@@ -214,7 +220,7 @@ export function useInteractiveToolTranslations(toolName?: string) {
  * 翻译数组的工具函数
  */
 export function translateArray(
-  t: (key: string, params?: any, fallback?: string) => string,
+  t: SafeTranslationFn,
   keys: string[],
   fallbacks?: string[],
 ): string[] {
@@ -228,7 +234,7 @@ export function translateArray(
  * 翻译对象的工具函数
  */
 export function translateObject<T extends Record<string, string>>(
-  t: (key: string, params?: any, fallback?: string) => string,
+  t: SafeTranslationFn,
   keyMap: T,
   fallbacks?: Partial<T>,
 ): Record<keyof T, string> {

@@ -3,11 +3,8 @@
  * 基于HVsLYEp的性能需求，实现全面的性能测试和监控
  */
 
-import {
-  PerformanceMonitor,
-  MemoryMonitor,
-  ComponentCache,
-} from "./performanceOptimizer";
+import { PerformanceMonitor, MemoryMonitor } from "./performanceOptimizer";
+import { logError, logInfo } from "@/lib/debug-logger";
 
 /**
  * 性能测试结果接口
@@ -23,7 +20,7 @@ export interface PerformanceTestResult {
   success: boolean;
   error?: string;
   timestamp: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 /**
@@ -38,8 +35,8 @@ export class PerformanceTestSuite {
    */
   async runTest(
     testName: string,
-    testFunction: () => Promise<void> | void,
-    metadata?: Record<string, any>,
+    testFunction: () => Promise<unknown> | void,
+    metadata?: Record<string, unknown>,
   ): Promise<PerformanceTestResult> {
     const startTime = Date.now();
     const memoryBefore = MemoryMonitor.getMemoryInfo();
@@ -49,17 +46,16 @@ export class PerformanceTestSuite {
     try {
       PerformanceMonitor.startMeasure(testName);
 
-      if (testFunction instanceof Promise) {
-        await testFunction();
-      } else {
-        testFunction();
+      const execution = testFunction();
+      if (execution instanceof Promise) {
+        await execution;
       }
 
       PerformanceMonitor.endMeasure(testName);
     } catch (err) {
       success = false;
       error = err instanceof Error ? err.message : String(err);
-      console.error(`性能测试失败: ${testName}`, err);
+      logError(`性能测试失败: ${testName}`, err, "performanceTesting");
     }
 
     const endTime = Date.now();
@@ -92,22 +88,26 @@ export class PerformanceTestSuite {
   async runTestSuite(
     tests: Array<{
       name: string;
-      test: () => Promise<void> | void;
-      metadata?: Record<string, any>;
+      test: () => Promise<unknown> | void;
+      metadata?: Record<string, unknown>;
     }>,
   ): Promise<PerformanceTestResult[]> {
     this.isRunning = true;
     this.results = [];
 
-    console.log("🧪 开始运行性能测试套件...");
+    logInfo("🧪 开始运行性能测试套件...", {}, "performanceTesting");
 
     for (const test of tests) {
-      console.log(`🔍 运行测试: ${test.name}`);
+      logInfo(
+        `🔍 运行测试: ${test.name}`,
+        { testName: test.name },
+        "performanceTesting",
+      );
       await this.runTest(test.name, test.test, test.metadata);
     }
 
     this.isRunning = false;
-    console.log("✅ 性能测试套件完成");
+    logInfo("✅ 性能测试套件完成", {}, "performanceTesting");
     return this.results;
   }
 
@@ -126,11 +126,14 @@ export class PerformanceTestSuite {
     const passedTests = this.results.filter((r) => r.success).length;
     const failedTests = totalTests - passedTests;
     const averageDuration =
-      this.results.reduce((sum, r) => sum + r.duration, 0) / totalTests;
+      totalTests > 0
+        ? this.results.reduce((sum, r) => sum + r.duration, 0) / totalTests
+        : 0;
     const totalMemoryDelta = this.results.reduce(
       (sum, r) => sum + r.memoryUsage.delta,
       0,
     );
+    const successRate = totalTests > 0 ? (passedTests / totalTests) * 100 : 0;
 
     const report = `
 📊 性能测试报告
@@ -138,7 +141,7 @@ export class PerformanceTestSuite {
 总测试数: ${totalTests}
 通过测试: ${passedTests}
 失败测试: ${failedTests}
-成功率: ${((passedTests / totalTests) * 100).toFixed(2)}%
+成功率: ${successRate.toFixed(2)}%
 平均执行时间: ${averageDuration.toFixed(2)}ms
 总内存变化: ${totalMemoryDelta} bytes
 
@@ -348,7 +351,7 @@ export class NetworkPerformanceTest {
    * 测试API响应时间
    */
   static async testApiResponseTime(
-    apiCall: () => Promise<any>,
+    apiCall: () => Promise<unknown>,
     testName: string = "api-response",
   ): Promise<PerformanceTestResult> {
     return this.testSuite.runTest(
@@ -364,7 +367,7 @@ export class NetworkPerformanceTest {
    * 测试并发请求性能
    */
   static async testConcurrentRequests(
-    apiCalls: (() => Promise<any>)[],
+    apiCalls: (() => Promise<unknown>)[],
     testName: string = "concurrent-requests",
   ): Promise<PerformanceTestResult> {
     return this.testSuite.runTest(
@@ -402,7 +405,7 @@ export class PerformanceTestRunner {
    * 运行所有性能测试
    */
   async runAllTests(): Promise<PerformanceTestResult[]> {
-    console.log("🚀 开始运行综合性能测试...");
+    logInfo("🚀 开始运行综合性能测试...", {}, "performanceTesting");
 
     // 清理之前的结果
     this.allResults = [];
@@ -410,29 +413,29 @@ export class PerformanceTestRunner {
 
     try {
       // 运行组件渲染测试
-      console.log("📱 运行组件渲染测试...");
+      logInfo("📱 运行组件渲染测试...", {}, "performanceTesting");
       const renderResults = ComponentRenderTest.getResults();
       this.allResults.push(...renderResults);
 
       // 运行状态管理测试
-      console.log("🏪 运行状态管理测试...");
+      logInfo("🏪 运行状态管理测试...", {}, "performanceTesting");
       const stateResults = StateManagementTest.getResults();
       this.allResults.push(...stateResults);
 
       // 运行内存性能测试
-      console.log("💾 运行内存性能测试...");
+      logInfo("💾 运行内存性能测试...", {}, "performanceTesting");
       const memoryResults = MemoryPerformanceTest.getResults();
       this.allResults.push(...memoryResults);
 
       // 运行网络性能测试
-      console.log("🌐 运行网络性能测试...");
+      logInfo("🌐 运行网络性能测试...", {}, "performanceTesting");
       const networkResults = NetworkPerformanceTest.getResults();
       this.allResults.push(...networkResults);
 
-      console.log("✅ 所有性能测试完成");
+      logInfo("✅ 所有性能测试完成", {}, "performanceTesting");
       return this.allResults;
-    } catch (error) {
-      console.error("❌ 性能测试执行失败:", error);
+    } catch (error: unknown) {
+      logError("❌ 性能测试执行失败", error, "performanceTesting");
       throw error;
     }
   }
@@ -444,6 +447,19 @@ export class PerformanceTestRunner {
     const totalTests = this.allResults.length;
     const passedTests = this.allResults.filter((r) => r.success).length;
     const failedTests = totalTests - passedTests;
+    const successRate = totalTests > 0 ? (passedTests / totalTests) * 100 : 0;
+    const averageDuration =
+      totalTests > 0
+        ? this.allResults.reduce((sum, r) => sum + r.duration, 0) / totalTests
+        : 0;
+    const totalMemoryDelta = this.allResults.reduce(
+      (sum, r) => sum + r.memoryUsage.delta,
+      0,
+    );
+    const maxMemoryUsage =
+      totalTests > 0
+        ? Math.max(...this.allResults.map((r) => r.memoryUsage.after))
+        : 0;
 
     const report = `
 🎯 综合性能测试报告
@@ -452,19 +468,12 @@ export class PerformanceTestRunner {
 总测试数: ${totalTests}
 通过测试: ${passedTests}
 失败测试: ${failedTests}
-成功率: ${((passedTests / totalTests) * 100).toFixed(2)}%
+成功率: ${successRate.toFixed(2)}%
 
 性能指标:
-- 平均执行时间: ${(
-      this.allResults.reduce((sum, r) => sum + r.duration, 0) / totalTests
-    ).toFixed(2)}ms
-- 总内存变化: ${this.allResults.reduce(
-      (sum, r) => sum + r.memoryUsage.delta,
-      0,
-    )} bytes
-- 最大内存使用: ${Math.max(
-      ...this.allResults.map((r) => r.memoryUsage.after),
-    )} bytes
+ - 平均执行时间: ${averageDuration.toFixed(2)}ms
+ - 总内存变化: ${totalMemoryDelta} bytes
+ - 最大内存使用: ${maxMemoryUsage} bytes
 
 详细结果:
 ${this.allResults
@@ -501,7 +510,7 @@ ${r.success ? "✅" : "❌"} ${r.testName}
 }
 
 // 导出所有测试工具
-export default {
+const performanceTestingTools = {
   PerformanceTestSuite,
   ComponentRenderTest,
   StateManagementTest,
@@ -509,3 +518,5 @@ export default {
   NetworkPerformanceTest,
   PerformanceTestRunner,
 };
+
+export default performanceTestingTools;

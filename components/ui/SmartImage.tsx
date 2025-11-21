@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { imageOptimization } from "@/lib/image-optimization";
+import { logError } from "@/lib/debug-logger";
 
 interface SmartImageProps {
   src: string;
@@ -13,7 +14,7 @@ interface SmartImageProps {
   type?: "hero" | "content" | "thumbnail" | "decorative";
   sizes?: string;
   priority?: boolean;
-  onError?: (e: any) => void;
+  onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
   onLoad?: () => void;
 }
 
@@ -94,7 +95,7 @@ export default function SmartImage({
           objectFit: "cover",
         }}
         onError={(e) => {
-          console.error(`图片加载失败: ${src}`);
+          logError(`图片加载失败: ${src}`, { src }, "SmartImage");
           setImageError(true);
           const error = new Error(`图片加载失败: ${src}`);
           imageOptimization.utilities.handleImageError(error, src);

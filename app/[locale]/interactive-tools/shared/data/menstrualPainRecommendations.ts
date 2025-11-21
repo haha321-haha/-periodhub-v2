@@ -1,10 +1,5 @@
+import type { MenstrualPainAcupoint } from "../types";
 import { ConstitutionType, ConstitutionAnswer } from "../types/constitution";
-
-// 痛经专项穴位建议
-export interface MenstrualPainAcupoint {
-  name: string;
-  description: string;
-}
 
 // 文章推荐接口
 export interface RecommendedArticle {

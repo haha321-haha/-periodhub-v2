@@ -3,17 +3,24 @@
  * 用于验证推荐系统的功能
  */
 
+import { RecommendationResult } from "../types/recommendation";
 import {
-  RecommendationItem,
-  RecommendationResult,
-  UserDataSnapshot,
-} from '../types/recommendation';
-import { generateRecommendations } from './recommendationEngine';
-import { PeriodRecord } from '../types';
+  FlowType,
+  NutritionData,
+  PainLevel,
+  PeriodRecord,
+  RecommendationFeedbackHistory,
+  WorkImpactData,
+} from "../types";
+import { generateRecommendations } from "./recommendationEngine";
+import { logError } from "@/lib/debug-logger";
 
 /**
  * 创建测试数据
  */
+const PAIN_LEVELS: PainLevel[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const FLOW_TYPES: FlowType[] = ["light", "medium", "heavy"];
+
 export function createTestPeriodData(count: number = 10): PeriodRecord[] {
   const records: PeriodRecord[] = [];
   const now = new Date();
@@ -23,10 +30,14 @@ export function createTestPeriodData(count: number = 10): PeriodRecord[] {
     date.setDate(date.getDate() - i * 28); // 每28天一个周期
 
     records.push({
-      date: date.toISOString().split('T')[0],
-      type: 'period',
-      painLevel: Math.floor(Math.random() * 10) + 1 as any,
-      flow: ['light', 'medium', 'heavy'][Math.floor(Math.random() * 3)] as any,
+      date: date.toISOString().split("T")[0],
+      type: "period",
+      painLevel: PAIN_LEVELS[
+        Math.floor(Math.random() * PAIN_LEVELS.length)
+      ] as PainLevel,
+      flow: FLOW_TYPES[
+        Math.floor(Math.random() * FLOW_TYPES.length)
+      ] as FlowType,
       notes: `Test record ${i + 1}`,
     });
   }
@@ -37,7 +48,7 @@ export function createTestPeriodData(count: number = 10): PeriodRecord[] {
 /**
  * 创建测试工作影响数据
  */
-export function createTestWorkImpactData() {
+export function createTestWorkImpactData(): WorkImpactData {
   return {
     painLevel: 5,
     efficiency: 75,
@@ -48,11 +59,11 @@ export function createTestWorkImpactData() {
 /**
  * 创建测试营养数据
  */
-export function createTestNutritionData() {
+export function createTestNutritionData(): NutritionData {
   return {
-    selectedPhase: 'menstrual' as const,
-    constitutionType: 'balanced' as const,
-    searchTerm: '',
+    selectedPhase: "menstrual",
+    constitutionType: "balanced",
+    searchTerm: "",
   };
 }
 
@@ -67,7 +78,7 @@ export function validateRecommendationResult(result: RecommendationResult): {
 
   // 验证推荐项数量
   if (result.recommendations.length === 0) {
-    errors.push('推荐结果为空');
+    errors.push("推荐结果为空");
   }
 
   if (result.recommendations.length > 10) {
@@ -95,9 +106,14 @@ export function validateRecommendationResult(result: RecommendationResult): {
 
   // 验证洞察
   if (!result.insights) {
-    errors.push('缺少数据洞察');
+    errors.push("缺少数据洞察");
   } else {
-    const validPainPatterns = ['increasing', 'decreasing', 'stable', 'irregular'];
+    const validPainPatterns = [
+      "increasing",
+      "decreasing",
+      "stable",
+      "irregular",
+    ];
     if (!validPainPatterns.includes(result.insights.painPattern)) {
       errors.push(`无效的疼痛模式: ${result.insights.painPattern}`);
     }
@@ -105,10 +121,10 @@ export function validateRecommendationResult(result: RecommendationResult): {
 
   // 验证摘要
   if (!result.summary) {
-    errors.push('缺少统计摘要');
+    errors.push("缺少统计摘要");
   } else {
     if (result.summary.totalRecommendations !== result.recommendations.length) {
-      errors.push('摘要中的推荐数量与实际不符');
+      errors.push("摘要中的推荐数量与实际不符");
     }
   }
 
@@ -121,6 +137,10 @@ export function validateRecommendationResult(result: RecommendationResult): {
 /**
  * 运行推荐系统测试
  */
+function formatRecommendationTestError(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
 export function runRecommendationTests(): {
   passed: number;
   failed: number;
@@ -133,7 +153,7 @@ export function runRecommendationTests(): {
     const periodData = createTestPeriodData(10);
     const workImpact = createTestWorkImpactData();
     const nutrition = createTestNutritionData();
-    const feedbackHistory = {
+    const feedbackHistory: RecommendationFeedbackHistory = {
       feedbacks: [],
       ignoredItems: [],
       savedItems: [],
@@ -144,21 +164,22 @@ export function runRecommendationTests(): {
       periodData,
       workImpact,
       nutrition,
-      feedbackHistory
+      feedbackHistory,
     );
 
     const validation = validateRecommendationResult(result);
     results.push({
-      test: '正常数据推荐生成',
+      test: "正常数据推荐生成",
       passed: validation.valid,
-      error: validation.errors.join(', '),
+      error: validation.errors.join(", "),
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     results.push({
-      test: '正常数据推荐生成',
+      test: "正常数据推荐生成",
       passed: false,
-      error: error.message,
+      error: formatRecommendationTestError(error),
     });
+    logError("正常数据推荐生成失败", error, "recommendationTestUtils");
   }
 
   // 测试2: 冷启动（数据不足）
@@ -166,7 +187,7 @@ export function runRecommendationTests(): {
     const periodData = createTestPeriodData(2); // 少于3个
     const workImpact = createTestWorkImpactData();
     const nutrition = createTestNutritionData();
-    const feedbackHistory = {
+    const feedbackHistory: RecommendationFeedbackHistory = {
       feedbacks: [],
       ignoredItems: [],
       savedItems: [],
@@ -177,21 +198,22 @@ export function runRecommendationTests(): {
       periodData,
       workImpact,
       nutrition,
-      feedbackHistory
+      feedbackHistory,
     );
 
     const validation = validateRecommendationResult(result);
     results.push({
-      test: '冷启动推荐生成',
+      test: "冷启动推荐生成",
       passed: validation.valid,
-      error: validation.errors.join(', '),
+      error: validation.errors.join(", "),
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     results.push({
-      test: '冷启动推荐生成',
+      test: "冷启动推荐生成",
       passed: false,
-      error: error.message,
+      error: formatRecommendationTestError(error),
     });
+    logError("冷启动推荐生成失败", error, "recommendationTestUtils");
   }
 
   // 测试3: 空数据
@@ -199,7 +221,7 @@ export function runRecommendationTests(): {
     const periodData: PeriodRecord[] = [];
     const workImpact = createTestWorkImpactData();
     const nutrition = createTestNutritionData();
-    const feedbackHistory = {
+    const feedbackHistory: RecommendationFeedbackHistory = {
       feedbacks: [],
       ignoredItems: [],
       savedItems: [],
@@ -210,32 +232,26 @@ export function runRecommendationTests(): {
       periodData,
       workImpact,
       nutrition,
-      feedbackHistory
+      feedbackHistory,
     );
 
     const validation = validateRecommendationResult(result);
     results.push({
-      test: '空数据推荐生成',
+      test: "空数据推荐生成",
       passed: validation.valid,
-      error: validation.errors.join(', '),
+      error: validation.errors.join(", "),
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     results.push({
-      test: '空数据推荐生成',
+      test: "空数据推荐生成",
       passed: false,
-      error: error.message,
+      error: formatRecommendationTestError(error),
     });
+    logError("空数据推荐生成失败", error, "recommendationTestUtils");
   }
 
-  const passed = results.filter(r => r.passed).length;
-  const failed = results.filter(r => !r.passed).length;
+  const passed = results.filter((r) => r.passed).length;
+  const failed = results.filter((r) => !r.passed).length;
 
   return { passed, failed, results };
 }
-
-
-
-
-
-
-

@@ -3,7 +3,10 @@
  * 提供性能监控和优化功能
  */
 
-import React from "react";
+import { ComponentType, memo, MemoExoticComponent } from "react";
+import { logWarn } from "../../../../../lib/debug-logger";
+
+type TimeoutHandle = ReturnType<typeof setTimeout>;
 
 // 基于ziV1d3d的性能监控
 export class PerformanceMonitor {
@@ -28,7 +31,7 @@ export class PerformanceMonitor {
   endMeasure(name: string): number {
     const startTime = this.metrics.get(`${name}_start`);
     if (!startTime) {
-      console.warn(`Performance measure "${name}" was not started`);
+      logWarn(`Performance measure "${name}" was not started`);
       return 0;
     }
 
@@ -64,30 +67,34 @@ export class PerformanceMonitor {
 }
 
 // 基于ziV1d3d的防抖函数
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number,
 ): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout;
+  let timeout: TimeoutHandle | null = null;
 
   return (...args: Parameters<T>) => {
-    clearTimeout(timeout);
+    if (timeout) {
+      clearTimeout(timeout);
+    }
     timeout = setTimeout(() => func(...args), wait);
   };
 }
 
 // 基于ziV1d3d的节流函数
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number,
 ): (...args: Parameters<T>) => void {
-  let inThrottle: boolean;
+  let inThrottle = false;
 
   return (...args: Parameters<T>) => {
     if (!inThrottle) {
       func(...args);
       inThrottle = true;
-      setTimeout(() => (inThrottle = false), limit);
+      setTimeout(() => {
+        inThrottle = false;
+      }, limit);
     }
   };
 }
@@ -115,11 +122,11 @@ export function lazyLoad<T>(
 
 // 基于ziV1d3d的内存优化
 export class MemoryOptimizer {
-  private static cache = new Map<string, any>();
+  private static cache = new Map<string, unknown>();
   private static maxCacheSize = 100;
 
   // 缓存数据 - 基于ziV1d3d的缓存逻辑
-  static setCache(key: string, value: any): void {
+  static setCache(key: string, value: unknown): void {
     if (this.cache.size >= this.maxCacheSize) {
       const firstKey = this.cache.keys().next().value;
       if (firstKey) {
@@ -130,8 +137,8 @@ export class MemoryOptimizer {
   }
 
   // 获取缓存数据 - 基于ziV1d3d的缓存获取
-  static getCache(key: string): any {
-    return this.cache.get(key) || null;
+  static getCache(key: string): unknown {
+    return this.cache.get(key) ?? null;
   }
 
   // 清除缓存 - 基于ziV1d3d的缓存清理
@@ -146,13 +153,34 @@ export class MemoryOptimizer {
 }
 
 // 基于ziV1d3d的渲染优化
-export function optimizeRender<T extends Record<string, any>>(
-  component: React.ComponentType<T>,
-): React.MemoExoticComponent<React.ComponentType<T>> {
-  return React.memo(component, (prevProps, nextProps) => {
-    // 基于ziV1d3d的浅比较逻辑
-    return JSON.stringify(prevProps) === JSON.stringify(nextProps);
-  });
+export function optimizeRender<T extends Record<string, unknown>>(
+  component: ComponentType<T>,
+): MemoExoticComponent<ComponentType<T>> {
+  return memo(component, (prevProps, nextProps) =>
+    shallowEqual(prevProps, nextProps),
+  );
+}
+
+function shallowEqual<T extends Record<string, unknown>>(
+  objA: T,
+  objB: T,
+): boolean {
+  if (Object.is(objA, objB)) {
+    return true;
+  }
+
+  const keysA = Object.keys(objA);
+  const keysB = Object.keys(objB);
+
+  if (keysA.length !== keysB.length) {
+    return false;
+  }
+
+  return keysA.every(
+    (key) =>
+      Object.prototype.hasOwnProperty.call(objB, key) &&
+      Object.is(objA[key], objB[key]),
+  );
 }
 
 // 基于ziV1d3d的批量更新

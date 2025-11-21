@@ -11,17 +11,20 @@ import {
 import { InputValidator } from "./security";
 import { generateSEOMetadata } from "./seo";
 
+type ValidationStatus = "pass" | "fail" | "warning";
+type ValidationDetails = string | Error | Record<string, unknown>;
+
 // 基于ziV1d3d的验证结果接口
 interface ValidationResult {
   category: string;
-  status: "pass" | "fail" | "warning";
+  status: ValidationStatus;
   message: string;
-  details?: any;
+  details?: ValidationDetails;
 }
 
 interface ValidationReport {
   timestamp: string;
-  overall: "pass" | "fail" | "warning";
+  overall: ValidationStatus;
   results: ValidationResult[];
   summary: {
     total: number;
@@ -30,6 +33,13 @@ interface ValidationReport {
     warnings: number;
   };
 }
+
+const formatValidationDetails = (error: unknown): ValidationDetails =>
+  typeof error === "string"
+    ? error
+    : error instanceof Error
+      ? error
+      : { value: error };
 
 // 基于ziV1d3d的最终验证器
 export class FinalValidator {
@@ -64,7 +74,7 @@ export class FinalValidator {
         category: "Components",
         status: "fail",
         message: "Component validation failed",
-        details: error,
+        details: formatValidationDetails(error),
       });
     }
 
@@ -97,7 +107,7 @@ export class FinalValidator {
         category: "NutritionGenerator",
         status: "fail",
         message: "NutritionGenerator validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -126,7 +136,7 @@ export class FinalValidator {
         category: "NutritionApp",
         status: "fail",
         message: "NutritionApp validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -156,7 +166,7 @@ export class FinalValidator {
         category: "ResultsDisplay",
         status: "fail",
         message: "ResultsDisplay validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -185,7 +195,7 @@ export class FinalValidator {
         category: "LoadingState",
         status: "fail",
         message: "LoadingState validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -217,7 +227,7 @@ export class FinalValidator {
         category: "NoSelectionState",
         status: "fail",
         message: "NoSelectionState validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -235,6 +245,10 @@ export class FinalValidator {
       const uiContentValid = await this.validateUIContent();
       dataResults.push(uiContentValid);
 
+      // 验证输入验证器
+      const inputValidation = await this.validateInputValidation();
+      dataResults.push(inputValidation);
+
       // 验证类型定义
       const typeDefinitionsValid = await this.validateTypeDefinitions();
       dataResults.push(typeDefinitionsValid);
@@ -243,7 +257,7 @@ export class FinalValidator {
         category: "Data Integrity",
         status: "fail",
         message: "Data integrity validation failed",
-        details: error,
+        details: formatValidationDetails(error),
       });
     }
 
@@ -295,7 +309,7 @@ export class FinalValidator {
         category: "Nutrition Data",
         status: "fail",
         message: "Nutrition data validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -336,7 +350,60 @@ export class FinalValidator {
         category: "UI Content",
         status: "fail",
         message: "UI content validation error",
-        details: error,
+        details:
+          typeof error === "string"
+            ? error
+            : error instanceof Error
+              ? error
+              : { error },
+      };
+    }
+  }
+
+  private async validateInputValidation(): Promise<ValidationResult> {
+    try {
+      const baseInput = "<script>alert('x')</script>balanced";
+      const inputValidation = InputValidator.validateInput(baseInput);
+      const selectionValidation = InputValidator.validateSelections({
+        menstrualPhase: "menstrual",
+        healthGoals: new Set(["balance"]),
+        tcmConstitution: new Set(["qi"]),
+      });
+
+      if (!inputValidation.isValid || !selectionValidation.isValid) {
+        return {
+          category: "Input Validation",
+          status: "fail",
+          message: "Core input validation failed",
+          details:
+            inputValidation.error ||
+            selectionValidation.error ||
+            "Unknown input validation issue",
+        };
+      }
+
+      if (inputValidation.sanitized === baseInput) {
+        return {
+          category: "Input Validation",
+          status: "warning",
+          message: "Input sanitization did not modify the sample string",
+        };
+      }
+
+      return {
+        category: "Input Validation",
+        status: "pass",
+        message: "Input validation utilities functioning",
+      };
+    } catch (validationError) {
+      return {
+        category: "Input Validation",
+        status: "fail",
+        message: "Input validation utilities error",
+        details:
+          validationError instanceof Error
+            ? validationError
+            : { error: validationError },
       };
     }
   }
@@ -365,7 +432,7 @@ export class FinalValidator {
         category: "Type Definitions",
         status: "fail",
         message: "Type definitions validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -391,7 +458,7 @@ export class FinalValidator {
         category: "Performance",
         status: "fail",
         message: "Performance validation failed",
-        details: error,
+        details: formatValidationDetails(error),
       });
     }
 
@@ -424,7 +491,7 @@ export class FinalValidator {
         category: "Web Vitals",
         status: "fail",
         message: "Web Vitals validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -445,7 +512,7 @@ export class FinalValidator {
         category: "Error Monitoring",
         status: "fail",
         message: "Error monitoring validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -466,7 +533,7 @@ export class FinalValidator {
         category: "User Behavior Monitoring",
         status: "fail",
         message: "User behavior monitoring validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -488,7 +555,7 @@ export class FinalValidator {
         category: "SEO",
         status: "fail",
         message: "SEO validation failed",
-        details: error,
+        details: formatValidationDetails(error),
       });
     }
 
@@ -518,7 +585,7 @@ export class FinalValidator {
         category: "SEO Metadata",
         status: "fail",
         message: "SEO metadata validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -549,7 +616,7 @@ export class FinalValidator {
         category: "Structured Data",
         status: "fail",
         message: "Structured data validation error",
-        details: error,
+        details: formatValidationDetails(error),
       };
     }
   }
@@ -579,7 +646,7 @@ export class FinalValidator {
         category: "Full Validation",
         status: "fail",
         message: "Full validation failed",
-        details: error,
+        details: formatValidationDetails(error),
       });
     }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Loader2, CheckCircle, AlertCircle, Clock } from "lucide-react";
 
 // Loading Spinner Component
@@ -183,7 +183,7 @@ interface StepProgressProps {
 export function StepProgress({ steps, className = "" }: StepProgressProps) {
   return (
     <div className={`space-y-2 ${className}`}>
-      {steps.map((step, index) => (
+      {steps.map((step) => (
         <div key={step.id} className="flex items-center">
           <div className="flex items-center justify-center w-6 h-6 rounded-full mr-3 flex-shrink-0">
             {step.status === "completed" && (
@@ -307,29 +307,31 @@ export function useLoadingState(initialState = false) {
 }
 
 // Async Operation Wrapper Component
-interface AsyncOperationProps {
-  operation: () => Promise<any>;
-  onSuccess?: (result: any) => void;
-  onError?: (error: Error) => void;
-  loadingMessage?: string;
-  children: (state: {
-    execute: () => void;
-    isLoading: boolean;
-    error: string | null;
-    result: any;
-  }) => React.ReactNode;
+interface AsyncOperationState<TResult> {
+  execute: () => void;
+  isLoading: boolean;
+  error: string | null;
+  result: TResult | null;
 }
 
-export function AsyncOperation({
+interface AsyncOperationProps<TResult> {
+  operation: () => Promise<TResult>;
+  onSuccess?: (result: TResult) => void;
+  onError?: (error: Error) => void;
+  loadingMessage?: string;
+  children: (state: AsyncOperationState<TResult>) => React.ReactNode;
+}
+
+export function AsyncOperation<TResult>({
   operation,
   onSuccess,
   onError,
   loadingMessage = "Processing...",
   children,
-}: AsyncOperationProps) {
+}: AsyncOperationProps<TResult>) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<TResult | null>(null);
 
   const execute = async () => {
     setIsLoading(true);
@@ -362,7 +364,7 @@ export function AsyncOperation({
   );
 }
 
-export default {
+const LoadingSystem = {
   LoadingSpinner,
   LoadingOverlay,
   InlineLoading,
@@ -372,3 +374,5 @@ export default {
   useLoadingState,
   AsyncOperation,
 };
+
+export default LoadingSystem;

@@ -3,13 +3,27 @@
 import { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 
-// 简单的防抖函数
-function debounce<T extends (...args: any[]) => any>(func: T, wait: number): T {
-  let timeout: NodeJS.Timeout;
-  return ((...args: any[]) => {
+type InteractionType = "view" | "hover" | "click";
+
+type InteractionData = {
+  scores: StressRadarChartProps["scores"];
+  timestamp: string;
+  detail?: string;
+};
+
+type ScoreMetrics = StressRadarChartProps["scores"];
+
+function debounce<T extends (...args: unknown[]) => unknown>(
+  func: T,
+  wait: number,
+) {
+  let timeout: ReturnType<typeof setTimeout>;
+  return (...args: Parameters<T>) => {
     clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(null, args), wait);
-  }) as T;
+    timeout = setTimeout(() => {
+      func(...args);
+    }, wait);
+  };
 }
 
 interface StressRadarChartProps {
@@ -21,29 +35,35 @@ interface StressRadarChartProps {
     social: number; // 社交压力
   };
   className?: string;
-  onInteraction?: (type: 'view' | 'hover' | 'click', data?: any) => void;
+  onInteraction?: (type: InteractionType, data?: InteractionData) => void;
 }
 
-export function StressRadarChart({ scores, className = "", onInteraction }: StressRadarChartProps) {
+export function StressRadarChart({
+  scores,
+  className = "",
+  onInteraction,
+}: StressRadarChartProps) {
   const t = useTranslations("stressManagement.assessment");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [canvasSize, setCanvasSize] = useState(300);
 
   // Day 4: 缓存计算结果，优化性能
-  const normalizedScores = useMemo(() => [
-    (scores.work / 3) * 100,
-    (scores.sleep / 3) * 100,
-    (scores.emotion / 3) * 100,
-    (scores.physical / 3) * 100,
-    (scores.social / 3) * 100,
-  ], [scores]);
+  const normalizedScores = useMemo(
+    () => [
+      (scores.work / 3) * 100,
+      (scores.sleep / 3) * 100,
+      (scores.emotion / 3) * 100,
+      (scores.physical / 3) * 100,
+      (scores.social / 3) * 100,
+    ],
+    [scores],
+  );
 
   useEffect(() => {
-    // Day 4: 追踪雷达图查看
     if (onInteraction) {
-      onInteraction('view', {
+      onInteraction("view", {
         scores,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
   }, [scores, onInteraction]);
@@ -59,8 +79,9 @@ export function StressRadarChart({ scores, className = "", onInteraction }: Stre
     };
 
     updateSize();
-    window.addEventListener('resize', debounce(updateSize, 250));
-    return () => window.removeEventListener('resize', updateSize);
+    const handleResize = debounce(updateSize, 250);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -94,7 +115,7 @@ export function StressRadarChart({ scores, className = "", onInteraction }: Stre
     }
 
     // 绘制轴线
-    const labels = t.raw("radar.labels");
+    const labels = (t.raw("radar.labels") as string[]) || [];
     const angles = [0, 72, 144, 216, 288]; // 每72度一个点
 
     angles.forEach((angle, index) => {
@@ -185,7 +206,6 @@ export function StressRadarChart({ scores, className = "", onInteraction }: Stre
       const value = Math.round((score / 100) * 3 * 10) / 10; // 转换回0-3范围
       ctx.fillText(value.toString(), x, y);
     });
-
   }, [scores]);
 
   return (
@@ -201,9 +221,7 @@ export function StressRadarChart({ scores, className = "", onInteraction }: Stre
         />
       </div>
       <div className="mt-4 text-center">
-        <p className="text-sm text-gray-600">
-          {t("radar.subtitle")}
-        </p>
+        <p className="text-sm text-gray-600">{t("radar.subtitle")}</p>
       </div>
     </div>
   );

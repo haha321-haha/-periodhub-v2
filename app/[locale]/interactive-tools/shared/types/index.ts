@@ -268,3 +268,11 @@ export interface UserPreferences {
     timeFormat: "24h" | "12h";
   };
 }
+
+export * from "./assessment";
+export * from "./recommendation";
+
+export interface MenstrualPainAcupoint {
+  name: string;
+  description: string;
+}

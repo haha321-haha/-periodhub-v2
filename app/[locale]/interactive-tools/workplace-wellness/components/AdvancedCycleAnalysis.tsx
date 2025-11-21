@@ -5,13 +5,12 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import {
   BarChart3,
   TrendingUp,
   Calendar,
   Activity,
-  PieChart,
   Clock,
   Target,
   AlertTriangle,
@@ -26,7 +25,8 @@ import {
   CycleAnalysis,
   CycleStatistics,
 } from "../utils/cyclePrediction";
-import { PeriodRecord, MenstrualPhase, CalendarState } from "../types";
+import { PeriodRecord, CalendarState } from "../types";
+import { logError } from "../../../../lib/debug-logger";
 
 interface TrendData {
   month: string;
@@ -57,27 +57,37 @@ export default function AdvancedCycleAnalysis() {
   );
 
   // 从 store 读取 periodData - 确保类型安全
-  const periodData = (calendar && 'periodData' in calendar)
-    ? (calendar.periodData || [])
-    : [];
+  const periodData = useMemo(
+    () =>
+      calendar && "periodData" in calendar ? calendar.periodData || [] : [],
+    [calendar],
+  );
 
   useEffect(() => {
-    const predictor = new CyclePredictor(locale);
-    const cycleAnalysis = predictor.analyzeCycle(periodData);
-    const cycleStats = predictor.generateStatistics(periodData);
+    try {
+      const predictor = new CyclePredictor(locale);
+      const cycleAnalysis = predictor.analyzeCycle(periodData);
+      const cycleStats = predictor.generateStatistics(periodData);
 
-    setAnalysis(cycleAnalysis);
-    setStatistics(cycleStats);
+      setAnalysis(cycleAnalysis);
+      setStatistics(cycleStats);
 
-    // 生成趋势数据
-    generateTrendData(periodData);
+      // 生成趋势数据
+      generateTrendData(periodData);
 
-    // 生成对比数据
-    generateComparisonData(periodData, cycleAnalysis);
-  }, [periodData, locale]);
+      // 生成对比数据
+      generateComparisonData(periodData, cycleAnalysis);
+    } catch (error) {
+      logError(
+        "Failed to generate advanced cycle analysis",
+        error,
+        "AdvancedCycleAnalysis",
+      );
+    }
+  }, [periodData, locale, generateTrendData, generateComparisonData]);
 
   // 生成趋势数据
-  const generateTrendData = (data: PeriodRecord[]) => {
+  const generateTrendData = useCallback((data: PeriodRecord[]) => {
     const trends: TrendData[] = [];
     const monthlyData = new Map<string, PeriodRecord[]>();
 
@@ -109,38 +119,38 @@ export default function AdvancedCycleAnalysis() {
     });
 
     setTrendData(trends.sort((a, b) => a.month.localeCompare(b.month)));
-  };
+  }, []);
 
   // 生成对比数据
-  const generateComparisonData = (
-    data: PeriodRecord[],
-    analysis: CycleAnalysis,
-  ) => {
-    const recentCycles = data.filter((r) => r.type === "period").slice(-6);
-    const previousCycles = data
-      .filter((r) => r.type === "period")
-      .slice(-12, -6);
+  const generateComparisonData = useCallback(
+    (data: PeriodRecord[], analysis: CycleAnalysis) => {
+      const recentCycles = data.filter((r) => r.type === "period").slice(-6);
+      const previousCycles = data
+        .filter((r) => r.type === "period")
+        .slice(-12, -6);
 
-    if (recentCycles.length >= 3 && previousCycles.length >= 3) {
-      const currentAvg =
-        recentCycles.reduce((sum, r) => sum + (r.painLevel || 0), 0) /
-        recentCycles.length;
-      const previousAvg =
-        previousCycles.reduce((sum, r) => sum + (r.painLevel || 0), 0) /
-        previousCycles.length;
+      if (recentCycles.length >= 3 && previousCycles.length >= 3) {
+        const currentAvg =
+          recentCycles.reduce((sum, r) => sum + (r.painLevel || 0), 0) /
+          recentCycles.length;
+        const previousAvg =
+          previousCycles.reduce((sum, r) => sum + (r.painLevel || 0), 0) /
+          previousCycles.length;
 
-      let trend: "up" | "down" | "stable" = "stable";
-      if (currentAvg > previousAvg + 0.5) trend = "up";
-      else if (currentAvg < previousAvg - 0.5) trend = "down";
+        let trend: "up" | "down" | "stable" = "stable";
+        if (currentAvg > previousAvg + 0.5) trend = "up";
+        else if (currentAvg < previousAvg - 0.5) trend = "down";
 
-      setComparisonData({
-        current: currentAvg,
-        previous: previousAvg,
-        average: analysis.averageCycleLength,
-        trend,
-      });
-    }
-  };
+        setComparisonData({
+          current: currentAvg,
+          previous: previousAvg,
+          average: analysis.averageCycleLength,
+          trend,
+        });
+      }
+    },
+    [],
+  );
 
   // 辅助函数
   const getMostCommonFlow = (

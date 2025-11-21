@@ -1,64 +1,32 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
+import { logError } from "@/lib/debug-logger";
 import {
-  FileText,
-  Download,
-  Calendar,
-  TrendingUp,
-  Heart,
-  Settings,
-  BarChart3,
-  PieChart,
-  Clock,
-  User,
-  Activity,
-  Target,
-  CheckCircle,
-  AlertCircle,
-  Info,
-  Star,
-  Share2,
-  Mail,
-  Printer,
-  Eye,
-  Filter,
-  Search,
-  Edit,
-  Save,
-  X,
-  Plus,
-  Minus,
-  ChevronDown,
-  ChevronUp,
-  ChevronLeft,
-  ChevronRight,
-  RefreshCw,
-  Zap,
-  Shield,
-  Globe,
-  Smartphone,
-  Monitor,
-  Tablet,
-  Laptop,
-  Database,
-  Cloud,
-  Wifi,
-  Battery,
-  Cpu,
-  HardDrive,
-  MemoryStick,
-  Network,
-  Router,
-  Server,
-  Terminal,
-  Code,
-  Award,
   AlertTriangle,
+  Award,
+  BarChart3,
   Brain,
+  CheckCircle,
+  Clock,
+  Download,
+  Eye,
+  FileText,
+  Info,
   LineChart,
+  PieChart,
+  Settings,
+  Shield,
+  Star,
+  Target,
+  TrendingUp,
+  User,
 } from "lucide-react";
+
+type ReportType = "summary" | "detailed" | "medical";
+type TimeRangeOption = "month" | "quarter" | "year";
+type PrivacyLevel = "standard" | "enhanced" | "maximum";
 
 interface ReportData {
   userProfile: {
@@ -98,28 +66,42 @@ interface ReportData {
 
 interface ReportGeneratorProps {
   locale: string;
-  userId?: string;
-  timeRange?: "month" | "quarter" | "year";
+  timeRange?: TimeRangeOption;
   onReportGenerated?: (report: ReportData) => void;
 }
 
 export default function ReportGenerator({
   locale,
-  userId,
   timeRange = "quarter",
   onReportGenerated,
 }: ReportGeneratorProps) {
   const t = useTranslations("interactiveTools.reports");
   const [reportData, setReportData] = useState<ReportData | null>(null);
   const [loading, setLoading] = useState(false);
-  const [reportType, setReportType] = useState<
-    "summary" | "detailed" | "medical"
-  >("summary");
+  const [reportType, setReportType] = useState<ReportType>("summary");
+  const [selectedTimeRange, setSelectedTimeRange] =
+    useState<TimeRangeOption>(timeRange);
   const [includeCharts, setIncludeCharts] = useState(true);
   const [includeRecommendations, setIncludeRecommendations] = useState(true);
-  const [privacyLevel, setPrivacyLevel] = useState<
-    "standard" | "enhanced" | "maximum"
-  >("standard");
+  const [privacyLevel, setPrivacyLevel] = useState<PrivacyLevel>("standard");
+
+  const handleReportTypeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setReportType(event.target.value as ReportType);
+  };
+
+  const handleTimeRangeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSelectedTimeRange(event.target.value as TimeRangeOption);
+  };
+
+  const handlePrivacyLevelChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setPrivacyLevel(event.target.value as PrivacyLevel);
+  };
 
   // 生成报告数据
   const generateReport = async () => {
@@ -227,7 +209,7 @@ export default function ReportGenerator({
         onReportGenerated(mockReportData);
       }
     } catch (error) {
-      console.error("Report generation failed:", error);
+      logError("Report generation failed", error, "ReportGenerator");
     } finally {
       setLoading(false);
     }
@@ -418,7 +400,7 @@ export default function ReportGenerator({
             </label>
             <select
               value={reportType}
-              onChange={(e) => setReportType(e.target.value as any)}
+              onChange={handleReportTypeChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="summary">{t("types.summary")}</option>
@@ -432,10 +414,8 @@ export default function ReportGenerator({
               {t("configuration.timeRange")}
             </label>
             <select
-              value={timeRange}
-              onChange={(e) => {
-                /* handle time range change */
-              }}
+              value={selectedTimeRange}
+              onChange={handleTimeRangeChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="month">{t("timeRanges.month")}</option>
@@ -450,7 +430,7 @@ export default function ReportGenerator({
             </label>
             <select
               value={privacyLevel}
-              onChange={(e) => setPrivacyLevel(e.target.value as any)}
+              onChange={handlePrivacyLevelChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="standard">{t("privacyLevels.standard")}</option>

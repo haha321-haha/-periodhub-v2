@@ -8,13 +8,23 @@ import { LocalStorageManager } from "@/lib/localStorage";
 import {
   trackAssessmentStart,
   trackAssessmentComplete,
-  generateAnonymousUserId
+  generateAnonymousUserId,
 } from "@/lib/ab-test-tracking";
 
-const StressRadarChart = dynamic(() => import('@/components/StressRadarChart').then(mod => ({ default: mod.StressRadarChart })), {
-  loading: () => <div className="flex justify-center items-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>,
-  ssr: false
-});
+const StressRadarChart = dynamic(
+  () =>
+    import("@/components/StressRadarChart").then((mod) => ({
+      default: mod.StressRadarChart,
+    })),
+  {
+    loading: () => (
+      <div className="flex justify-center items-center p-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    ),
+    ssr: false,
+  },
+);
 
 export default function StressAssessmentWidget() {
   const t = useTranslations("stressManagement");
@@ -26,7 +36,7 @@ export default function StressAssessmentWidget() {
   const [showResults, setShowResults] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
   const [stressScore, setStressScore] = useState(0);
-  const [stressLevel, setStressLevel] = useState('');
+  const [stressLevel, setStressLevel] = useState("");
 
   const FREE_QUESTIONS = 5; // 免费问题数量
 
@@ -39,53 +49,103 @@ export default function StressAssessmentWidget() {
     {
       id: "q1",
       questionKey: "assessment.q1.question",
-      optionKeys: ["assessment.q1.option1", "assessment.q1.option2", "assessment.q1.option3", "assessment.q1.option4"],
+      optionKeys: [
+        "assessment.q1.option1",
+        "assessment.q1.option2",
+        "assessment.q1.option3",
+        "assessment.q1.option4",
+      ],
     },
     {
       id: "q2",
       questionKey: "assessment.q2.question",
-      optionKeys: ["assessment.q2.option1", "assessment.q2.option2", "assessment.q2.option3", "assessment.q2.option4"],
+      optionKeys: [
+        "assessment.q2.option1",
+        "assessment.q2.option2",
+        "assessment.q2.option3",
+        "assessment.q2.option4",
+      ],
     },
     {
       id: "q3",
       questionKey: "assessment.q3.question",
-      optionKeys: ["assessment.q3.option1", "assessment.q3.option2", "assessment.q3.option3", "assessment.q3.option4"],
+      optionKeys: [
+        "assessment.q3.option1",
+        "assessment.q3.option2",
+        "assessment.q3.option3",
+        "assessment.q3.option4",
+      ],
     },
     {
       id: "q4",
       questionKey: "assessment.q4.question",
-      optionKeys: ["assessment.q4.option1", "assessment.q4.option2", "assessment.q4.option3", "assessment.q4.option4"],
+      optionKeys: [
+        "assessment.q4.option1",
+        "assessment.q4.option2",
+        "assessment.q4.option3",
+        "assessment.q4.option4",
+      ],
     },
     {
       id: "q5",
       questionKey: "assessment.q5.question",
-      optionKeys: ["assessment.q5.option1", "assessment.q5.option2", "assessment.q5.option3", "assessment.q5.option4"],
+      optionKeys: [
+        "assessment.q5.option1",
+        "assessment.q5.option2",
+        "assessment.q5.option3",
+        "assessment.q5.option4",
+      ],
     },
     // 付费问题 (6-10)
     {
       id: "q6",
       questionKey: "assessment.q6.question",
-      optionKeys: ["assessment.q6.option1", "assessment.q6.option2", "assessment.q6.option3", "assessment.q6.option4"],
+      optionKeys: [
+        "assessment.q6.option1",
+        "assessment.q6.option2",
+        "assessment.q6.option3",
+        "assessment.q6.option4",
+      ],
     },
     {
       id: "q7",
       questionKey: "assessment.q7.question",
-      optionKeys: ["assessment.q7.option1", "assessment.q7.option2", "assessment.q7.option3", "assessment.q7.option4"],
+      optionKeys: [
+        "assessment.q7.option1",
+        "assessment.q7.option2",
+        "assessment.q7.option3",
+        "assessment.q7.option4",
+      ],
     },
     {
       id: "q8",
       questionKey: "assessment.q8.question",
-      optionKeys: ["assessment.q8.option1", "assessment.q8.option2", "assessment.q8.option3", "assessment.q8.option4"],
+      optionKeys: [
+        "assessment.q8.option1",
+        "assessment.q8.option2",
+        "assessment.q8.option3",
+        "assessment.q8.option4",
+      ],
     },
     {
       id: "q9",
       questionKey: "assessment.q9.question",
-      optionKeys: ["assessment.q9.option1", "assessment.q9.option2", "assessment.q9.option3", "assessment.q9.option4"],
+      optionKeys: [
+        "assessment.q9.option1",
+        "assessment.q9.option2",
+        "assessment.q9.option3",
+        "assessment.q9.option4",
+      ],
     },
     {
       id: "q10",
       questionKey: "assessment.q10.question",
-      optionKeys: ["assessment.q10.option1", "assessment.q10.option2", "assessment.q10.option3", "assessment.q10.option4"],
+      optionKeys: [
+        "assessment.q10.option1",
+        "assessment.q10.option2",
+        "assessment.q10.option3",
+        "assessment.q10.option4",
+      ],
     },
   ];
 
@@ -113,7 +173,7 @@ export default function StressAssessmentWidget() {
           answers: newAnswers,
           score,
           stressLevel: level,
-          isPremium: newAnswers.length > FREE_QUESTIONS
+          isPremium: newAnswers.length > FREE_QUESTIONS,
         });
 
         setStressScore(score);
@@ -135,24 +195,19 @@ export default function StressAssessmentWidget() {
   const handleSkipPaywall = () => {
     // 获取当前所有的答案，包括最新的
     const currentAnswers = [...answers];
-    console.log('Skip paywall clicked, current answers:', currentAnswers);
-
     // 确保answers数组有效，至少有5个答案
     if (!currentAnswers || currentAnswers.length < FREE_QUESTIONS) {
-      console.error('Not enough answers available for calculation');
       return;
     }
 
     const score = calculateScore(currentAnswers);
     const { level } = getStressLevel(score);
 
-    console.log('Calculated score:', score, 'Level:', level);
-
     LocalStorageManager.saveAssessment({
       answers: currentAnswers,
       score,
       stressLevel: level,
-      isPremium: false
+      isPremium: false,
     });
 
     // 先隐藏 paywall，然后显示结果
@@ -163,8 +218,6 @@ export default function StressAssessmentWidget() {
 
     // 追踪评估完成
     trackAssessmentComplete(userId, score, currentAnswers);
-
-    console.log('Results view should now be visible');
   };
 
   const handlePrevious = () => {
@@ -180,7 +233,7 @@ export default function StressAssessmentWidget() {
     setShowResults(false);
     setShowPaywall(false);
     setStressScore(0);
-    setStressLevel('');
+    setStressLevel("");
   };
 
   const handleUnlockFromResults = () => {
@@ -209,7 +262,7 @@ export default function StressAssessmentWidget() {
       sleep: answers[2] || 0,
       emotion: answers[3] || 0,
       physical: answers[4] || 0,
-      social: answers[1] || 0
+      social: answers[1] || 0,
     };
   };
 
@@ -217,37 +270,49 @@ export default function StressAssessmentWidget() {
     const steps = [
       {
         title: "Establish Sleep Routine",
-        description: "Go to bed and wake up at consistent times. Create a relaxing bedtime routine to improve sleep quality."
+        description:
+          "Go to bed and wake up at consistent times. Create a relaxing bedtime routine to improve sleep quality.",
       },
       {
         title: "Practice Stress Relief Techniques",
-        description: "Try deep breathing exercises, meditation, or gentle yoga for 10-15 minutes daily to manage stress."
+        description:
+          "Try deep breathing exercises, meditation, or gentle yoga for 10-15 minutes daily to manage stress.",
       },
       {
         title: "Improve Work-Life Balance",
-        description: "Set clear boundaries between work and personal time. Take regular breaks during work hours."
+        description:
+          "Set clear boundaries between work and personal time. Take regular breaks during work hours.",
       },
       {
         title: "Build Emotional Support Network",
-        description: "Connect with friends, family, or support groups. Consider talking to a mental health professional if needed."
-      }
+        description:
+          "Connect with friends, family, or support groups. Consider talking to a mental health professional if needed.",
+      },
     ];
 
     // 根据用户的具体问题调整建议
-    if (answers[1] >= 2) { // 睡眠问题
-      steps[0].description = "Focus on improving sleep hygiene - avoid screens 1 hour before bed, keep bedroom cool and dark.";
+    if (answers[1] >= 2) {
+      // 睡眠问题
+      steps[0].description =
+        "Focus on improving sleep hygiene - avoid screens 1 hour before bed, keep bedroom cool and dark.";
     }
 
-    if (answers[0] >= 2) { // 工作压力问题
-      steps[2].description = "Break large tasks into smaller ones, delegate when possible, and practice saying no to additional responsibilities.";
+    if (answers[0] >= 2) {
+      // 工作压力问题
+      steps[2].description =
+        "Break large tasks into smaller ones, delegate when possible, and practice saying no to additional responsibilities.";
     }
 
-    if (answers[3] >= 2) { // 情绪问题
-      steps[1].description = "Practice mindfulness and emotional regulation techniques. Consider journaling your feelings.";
+    if (answers[3] >= 2) {
+      // 情绪问题
+      steps[1].description =
+        "Practice mindfulness and emotional regulation techniques. Consider journaling your feelings.";
     }
 
-    if (answers[4] >= 2) { // 社交压力
-      steps[3].description = "Join support groups or community activities that align with your interests and values.";
+    if (answers[4] >= 2) {
+      // 社交压力
+      steps[3].description =
+        "Join support groups or community activities that align with your interests and values.";
     }
 
     return steps;
@@ -255,46 +320,53 @@ export default function StressAssessmentWidget() {
 
   const getPersonalizedRecommendations = (answers: number[], level: string) => {
     const recommendations = [];
-    const avgScore = answers.reduce((sum, answer) => sum + answer, 0) / answers.length;
+    const avgScore =
+      answers.reduce((sum, answer) => sum + answer, 0) / answers.length;
 
     if (avgScore <= 1) {
       recommendations.push(
         {
           emoji: "🌟",
           title: "Maintain Good Habits",
-          description: "Your stress level is low. Keep up your healthy lifestyle habits."
+          description:
+            "Your stress level is low. Keep up your healthy lifestyle habits.",
         },
         {
           emoji: "📊",
           title: "Regular Self-Assessment",
-          description: "Conduct weekly stress self-assessments to monitor your mental state."
-        }
+          description:
+            "Conduct weekly stress self-assessments to monitor your mental state.",
+        },
       );
     } else if (avgScore <= 2) {
       recommendations.push(
         {
           emoji: "🧘",
           title: "Practice Relaxation Techniques",
-          description: "Try 10-15 minutes of deep breathing or meditation daily to manage moderate stress."
+          description:
+            "Try 10-15 minutes of deep breathing or meditation daily to manage moderate stress.",
         },
         {
           emoji: "😴",
           title: "Optimize Sleep Quality",
-          description: "Aim for 7-8 hours of sleep per night and avoid electronic devices before bed."
-        }
+          description:
+            "Aim for 7-8 hours of sleep per night and avoid electronic devices before bed.",
+        },
       );
     } else {
       recommendations.push(
         {
           emoji: "🆘",
           title: "Seek Professional Help",
-          description: "Your stress level is high. Consider consulting a mental health professional."
+          description:
+            "Your stress level is high. Consider consulting a mental health professional.",
         },
         {
           emoji: "👥",
           title: "Strengthen Social Support",
-          description: "Share your feelings with trusted friends and family for emotional support."
-        }
+          description:
+            "Share your feelings with trusted friends and family for emotional support.",
+        },
       );
     }
 
@@ -316,9 +388,7 @@ export default function StressAssessmentWidget() {
           <h2 className="text-3xl font-bold text-gray-800 mb-4">
             {t("paywall.title")}
           </h2>
-          <p className="text-lg text-gray-600 mb-6">
-            {t("paywall.subtitle")}
-          </p>
+          <p className="text-lg text-gray-600 mb-6">{t("paywall.subtitle")}</p>
         </div>
 
         {/* 付费功能对比 */}
@@ -374,7 +444,9 @@ export default function StressAssessmentWidget() {
               <div className="text-2xl font-bold text-orange-600 mb-2">
                 $4.99
               </div>
-              <p className="text-sm text-gray-600">One-time payment for lifetime access</p>
+              <p className="text-sm text-gray-600">
+                One-time payment for lifetime access
+              </p>
             </div>
           </div>
         </div>
@@ -415,9 +487,7 @@ export default function StressAssessmentWidget() {
           <h2 className="text-3xl font-bold text-gray-800 mb-2">
             {t("results.title")}
           </h2>
-          <p className="text-gray-600">
-            {t("results.subtitle")}
-          </p>
+          <p className="text-gray-600">{t("results.subtitle")}</p>
         </div>
 
         {/* Score Display */}
@@ -426,7 +496,9 @@ export default function StressAssessmentWidget() {
             <div className="text-6xl font-bold text-blue-600 mb-2">
               {stressScore}
             </div>
-            <div className="text-lg text-gray-700 mb-4">{t("results.score")}</div>
+            <div className="text-lg text-gray-700 mb-4">
+              {t("results.score")}
+            </div>
             <div
               className={`inline-block px-6 py-2 rounded-full text-white font-semibold bg-${color}-500`}
             >
@@ -437,7 +509,13 @@ export default function StressAssessmentWidget() {
 
         {/* Radar Chart */}
         <div className="mb-6">
-          <Suspense fallback={<div className="flex justify-center items-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>}>
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center p-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+              </div>
+            }
+          >
             <StressRadarChart
               scores={convertAnswersToRadarData(answers)}
               className="border-2 border-blue-200"
@@ -451,22 +529,24 @@ export default function StressAssessmentWidget() {
             {t("results.basicRecommendations")}
           </h3>
           <div className="space-y-3">
-            {getPersonalizedRecommendations(answers, stressLevel).map((recommendation, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg"
-              >
-                <span className="text-2xl">{recommendation.emoji}</span>
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-1">
-                    {recommendation.title}
-                  </h4>
-                  <p className="text-sm text-gray-600">
-                    {recommendation.description}
-                  </p>
+            {getPersonalizedRecommendations(answers, stressLevel).map(
+              (recommendation, index) => (
+                <div
+                  key={index}
+                  className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg"
+                >
+                  <span className="text-2xl">{recommendation.emoji}</span>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-1">
+                      {recommendation.title}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {recommendation.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ),
+            )}
           </div>
         </div>
 
@@ -525,22 +605,24 @@ export default function StressAssessmentWidget() {
                 {t("results.personalizedActionPlan.title")}
               </h3>
               <div className="space-y-3">
-                {getPersonalizedActionSteps(answers, stressLevel).map((step, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg"
-                  >
-                    <span className="text-xl">✓</span>
-                    <div>
-                      <h4 className="font-semibold text-gray-800 mb-1">
-                        {step.title}
-                      </h4>
-                      <p className="text-sm text-gray-600">
-                        {step.description}
-                      </p>
+                {getPersonalizedActionSteps(answers, stressLevel).map(
+                  (step, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg"
+                    >
+                      <span className="text-xl">✓</span>
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-1">
+                          {step.title}
+                        </h4>
+                        <p className="text-sm text-gray-600">
+                          {step.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ),
+                )}
               </div>
             </div>
           </div>
@@ -556,10 +638,7 @@ export default function StressAssessmentWidget() {
               {t("results.unlockCompleteReport.button")}
             </button>
           )}
-          <button
-            onClick={handleRestart}
-            className="btn-secondary px-8 py-3"
-          >
+          <button onClick={handleRestart} className="btn-secondary px-8 py-3">
             {t("buttons.restartAssessment")}
           </button>
         </div>
@@ -581,7 +660,10 @@ export default function StressAssessmentWidget() {
       <div className="mb-8">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-semibold text-gray-700">
-            {ui("questionProgress", { current: currentQuestion + 1, total: questions.length })}
+            {ui("questionProgress", {
+              current: currentQuestion + 1,
+              total: questions.length,
+            })}
           </span>
           <span className="text-sm text-gray-600">{Math.round(progress)}%</span>
         </div>

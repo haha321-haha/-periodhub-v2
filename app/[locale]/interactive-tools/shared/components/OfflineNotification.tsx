@@ -59,7 +59,7 @@ export function OfflineNotification({
     },
   });
 
-  const { offlineData, getOfflineDataCount } = useOfflineStorage(storageKey);
+  const { getOfflineDataCount } = useOfflineStorage(storageKey);
 
   // Hide notification when coming back online (after showing reconnected message)
   useEffect(() => {
@@ -126,7 +126,7 @@ export function OfflineNotification({
             <WifiOff className="h-5 w-5 text-red-500 mt-0.5 mr-3 flex-shrink-0" />
             <div className="flex-1">
               <h3 className="text-sm font-medium text-red-800">
-                You're offline
+                You&apos;re offline
               </h3>
               <p className="text-sm text-red-700 mt-1">
                 Your data will be saved locally and synced when you reconnect.
@@ -274,7 +274,7 @@ export function ConnectionStatus({
 // Offline Data Sync Component
 interface OfflineDataSyncProps {
   storageKey: string;
-  onSync?: (data: any[]) => Promise<boolean>;
+  onSync?: (data: unknown[]) => Promise<boolean>;
   className?: string;
 }
 

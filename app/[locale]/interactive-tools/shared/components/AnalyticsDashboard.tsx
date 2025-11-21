@@ -3,15 +3,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import {
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  LineChart,
-  Line,
   PieChart,
   Pie,
   Cell,
@@ -22,7 +18,6 @@ import {
   TrendingUp,
   TrendingDown,
   Activity,
-  Calendar,
   Target,
   Award,
   Clock,
@@ -333,9 +328,13 @@ export default function AnalyticsDashboard({
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={(props: any) =>
-                  `${props.name} ${(props.percent * 100).toFixed(0)}%`
-                }
+                label={({
+                  name,
+                  percent,
+                }: {
+                  name?: string;
+                  percent?: number;
+                }) => `${name ?? "项"} ${((percent ?? 0) * 100).toFixed(0)}%`}
                 outerRadius={80}
                 fill="#8884d8"
                 dataKey="value"
@@ -365,7 +364,8 @@ export default function AnalyticsDashboard({
               <div className="flex items-start justify-between mb-3">
                 <h4 className="font-semibold text-gray-900">{insight.title}</h4>
                 <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                  {Math.round(insight.confidence * 100)}% {t("insights.confidence")}
+                  {Math.round(insight.confidence * 100)}%{" "}
+                  {t("insights.confidence")}
                 </span>
               </div>
               <p className="text-sm text-gray-700 mb-3">

@@ -5,7 +5,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   BarChart3,
   TrendingUp,
@@ -15,13 +15,17 @@ import {
 } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
-import { useCalendar, useWorkplaceWellnessActions } from "../hooks/useWorkplaceWellnessStore";
+import {
+  useCalendar,
+  useWorkplaceWellnessActions,
+} from "../hooks/useWorkplaceWellnessStore";
 import {
   CyclePredictor,
   CycleAnalysis,
   CycleStatistics,
 } from "../utils/cyclePrediction";
-import { PeriodRecord, CalendarState } from "../types";
+import { CalendarState } from "../types";
+import { logError } from "../../../../lib/debug-logger";
 
 interface ChartData {
   labels: string[];
@@ -46,7 +50,10 @@ export default function CycleStatisticsChart() {
   const [statistics, setStatistics] = useState<CycleStatistics | null>(null);
 
   // 从 store 读取 periodData
-  const periodData = calendar.periodData || [];
+  const periodData = useMemo(
+    () => calendar.periodData || [],
+    [calendar.periodData],
+  );
 
   // 空数据检查
   if (periodData.length === 0) {
@@ -58,8 +65,12 @@ export default function CycleStatisticsChart() {
         </h4>
         <div className="text-center py-12">
           <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <p className="text-gray-600 text-lg mb-2">{t("charts.noDataTitle")}</p>
-          <p className="text-gray-500 text-sm mb-6">{t("charts.noDataMessage")}</p>
+          <p className="text-gray-600 text-lg mb-2">
+            {t("charts.noDataTitle")}
+          </p>
+          <p className="text-gray-500 text-sm mb-6">
+            {t("charts.noDataMessage")}
+          </p>
           <button
             onClick={() => setMainActiveTab("calendar")}
             className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
@@ -72,39 +83,31 @@ export default function CycleStatisticsChart() {
   }
 
   useEffect(() => {
-    console.log("CycleStatisticsChart - periodData length:", periodData?.length || 0);
-
     if (!periodData || periodData.length === 0) {
-      console.warn("CycleStatisticsChart - periodData is empty");
       setAnalysis(null);
       setStatistics(null);
       return;
     }
 
-    // 验证数据格式
-    const validRecords = periodData.filter(record =>
-      record && typeof record === 'object' && record.date
+    const validRecords = periodData.filter(
+      (record) => record && typeof record === "object" && record.date,
     );
 
     if (validRecords.length === 0) {
-      console.warn("CycleStatisticsChart - no valid records found");
       setAnalysis(null);
       setStatistics(null);
       return;
     }
-
-    console.log("CycleStatisticsChart - valid records:", validRecords.length);
 
     try {
       const predictor = new CyclePredictor(locale);
       const cycleAnalysis = predictor.analyzeCycle(validRecords);
       const cycleStats = predictor.generateStatistics(validRecords);
 
-      console.log("CycleStatisticsChart - analysis completed");
       setAnalysis(cycleAnalysis);
       setStatistics(cycleStats);
     } catch (error) {
-      console.error("CycleStatisticsChart - analysis failed:", error);
+      logError("Failed to analyze cycle data", error, "CycleStatisticsChart");
       setAnalysis(null);
       setStatistics(null);
     }

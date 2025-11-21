@@ -7,8 +7,10 @@
 
 import React, { memo } from "react";
 import { useTranslations } from "next-intl";
-import { RecommendationItem } from "../types/recommendation";
-import { RecommendationFeedbackHistory } from "../types";
+import {
+  RecommendationFeedbackAction,
+  RecommendationItem,
+} from "../types/recommendation";
 import RecommendationCard from "./RecommendationCard";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
@@ -19,7 +21,7 @@ interface RecommendationSectionProps {
   locale: string;
   defaultExpanded?: boolean;
   maxItems?: number;
-  onFeedback?: (itemId: string, action: string) => void;
+  onFeedback?: (itemId: string, action: RecommendationFeedbackAction) => void;
 }
 
 const RecommendationSection = memo(function RecommendationSection({

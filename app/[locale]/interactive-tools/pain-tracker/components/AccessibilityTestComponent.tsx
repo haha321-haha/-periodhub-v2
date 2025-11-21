@@ -203,7 +203,9 @@ export default function AccessibilityTestComponent({
 
     // Log results to console in development
     if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
       console.group("🔍 Accessibility Test Results");
+      // eslint-disable-next-line no-console
       console.log(`Found ${foundIssues.length} issues:`);
       foundIssues.forEach((issue) => {
         const emoji =
@@ -212,11 +214,14 @@ export default function AccessibilityTestComponent({
             : issue.type === "warning"
               ? "⚠️"
               : "ℹ️";
+        // eslint-disable-next-line no-console
         console.log(`${emoji} ${issue.element}: ${issue.message}`);
         if (issue.suggestion) {
+          // eslint-disable-next-line no-console
           console.log(`   💡 ${issue.suggestion}`);
         }
       });
+      // eslint-disable-next-line no-console
       console.groupEnd();
     }
   };
@@ -227,6 +232,7 @@ export default function AccessibilityTestComponent({
       const timer = setTimeout(runAccessibilityTests, 1000);
       return () => clearTimeout(timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enabled]);
 
   if (!enabled || !showResults) {

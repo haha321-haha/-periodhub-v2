@@ -24,12 +24,17 @@ import {
 import { useLocale } from "next-intl";
 import { getNutritionData } from "../data";
 import { useTranslations } from "next-intl";
-import { ExportFormat, ExportType, CalendarState, ExportConfig } from "../types";
-import { PDFGenerator, PDFReportData } from "../utils/pdfGenerator";
 import {
-  PrivacyProtectionManager,
-  PrivacySettings,
-} from "../utils/privacyProtection";
+  ExportFormat,
+  ExportType,
+  CalendarState,
+  ExportConfig,
+  PeriodRecord,
+  NutritionRecommendation,
+} from "../types";
+import { PDFGenerator, PDFReportData } from "../utils/pdfGenerator";
+import { PrivacyProtectionManager } from "../utils/privacyProtection";
+import { logError } from "../../../../lib/debug-logger";
 
 export default function DataExportComponent() {
   const exportConfig = useExport() as ExportConfig;
@@ -44,7 +49,9 @@ export default function DataExportComponent() {
   >("idle");
   const [showPrivacySettings, setShowPrivacySettings] = useState(false);
   const [password, setPassword] = useState("");
-  const [privacyManager] = useState(() => new PrivacyProtectionManager(locale, undefined, t));
+  const [privacyManager] = useState(
+    () => new PrivacyProtectionManager(locale, undefined, t),
+  );
 
   // 从 store 读取 periodData
   const periodData = calendar.periodData || [];
@@ -61,7 +68,24 @@ export default function DataExportComponent() {
   };
 
   // 生成导出数据
-  const generateExportData = () => {
+  type ExportPayload =
+    | {
+        type: "period";
+        data: PeriodRecord[];
+      }
+    | {
+        type: "nutrition";
+        data: NutritionRecommendation[];
+      }
+    | {
+        type: "all";
+        data: {
+          period: PeriodRecord[];
+          nutrition: NutritionRecommendation[];
+        };
+      };
+
+  const generateExportData = (): ExportPayload => {
     const baseData = {
       exportDate: new Date().toISOString(),
       locale: locale,
@@ -96,7 +120,7 @@ export default function DataExportComponent() {
   };
 
   // 导出为JSON
-  const exportAsJSON = (data: any) => {
+  const exportAsJSON = (data: ExportPayload) => {
     const jsonString = JSON.stringify(data, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -112,19 +136,22 @@ export default function DataExportComponent() {
   };
 
   // 导出为CSV
-  const exportAsCSV = (data: any) => {
+  const exportAsCSV = (data: {
+    type: string;
+    data: PeriodRecord[] | NutritionRecommendation[];
+  }) => {
     let csvContent = "";
 
-    if (exportConfig.exportType === "period") {
+    if (data.type === "period") {
       csvContent = "Date,Type,Pain Level,Flow\n";
-      data.data.forEach((record: any) => {
+      data.data.forEach((record) => {
         csvContent += `${record.date},${record.type},${
-          record.painLevel || ""
-        },${record.flow || ""}\n`;
+          record.painLevel ?? ""
+        },${record.flow ?? ""}\n`;
       });
-    } else if (exportConfig.exportType === "nutrition") {
+    } else if (data.type === "nutrition") {
       csvContent = "Name,Phase,TCM Nature,Benefits,Nutrients\n";
-      data.data.forEach((item: any) => {
+      data.data.forEach((item) => {
         csvContent += `"${item.name}","${item.phase}","${
           item.tcmNature
         }","${item.benefits.join("; ")}","${item.nutrients.join("; ")}"\n`;
@@ -145,7 +172,7 @@ export default function DataExportComponent() {
   };
 
   // 导出为PDF（使用HTML格式）
-  const exportAsPDF = async (data: any) => {
+  const exportAsPDF = async (data: ExportPayload) => {
     try {
       const pdfGenerator = new PDFGenerator(locale, t);
       const pdfData: PDFReportData = {
@@ -153,16 +180,23 @@ export default function DataExportComponent() {
         locale: locale,
         exportType: exportConfig.exportType,
         periodData:
-          exportConfig.exportType === "period" ? data.data : undefined,
+          data.type === "period"
+            ? data.data
+            : data.type === "all"
+              ? data.data.period
+              : undefined,
         nutritionData:
-          exportConfig.exportType === "nutrition" ? data.data : undefined,
-        allData: exportConfig.exportType === "all" ? data.data : undefined,
+          data.type === "nutrition"
+            ? data.data
+            : data.type === "all"
+              ? data.data.nutrition
+              : undefined,
+        allData: data.type === "all" ? data.data : undefined,
       };
 
       // 使用新的PDF生成器
       await pdfGenerator.generateAndDownloadPDF(pdfData);
     } catch (error) {
-      console.error("PDF generation error:", error);
       alert(t("export.errorMessage"));
     }
   };
@@ -211,7 +245,6 @@ export default function DataExportComponent() {
       setExportStatus("success");
       alert(t("export.successMessage"));
     } catch (error) {
-      console.error("Export error:", error);
       setExportStatus("error");
       alert(error instanceof Error ? error.message : t("export.errorMessage"));
     } finally {

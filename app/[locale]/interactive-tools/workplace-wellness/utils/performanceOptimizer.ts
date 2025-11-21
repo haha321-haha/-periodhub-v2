@@ -4,6 +4,7 @@
  */
 
 import { useCallback, useMemo, useRef, useEffect } from "react";
+import { logInfo, logWarn } from "@/lib/debug-logger";
 
 /**
  * 性能监控器
@@ -86,40 +87,59 @@ export class PerformanceMonitor {
     if (typeof window === "undefined") return;
 
     try {
+      const observerOptions = { buffered: true };
+
       // 监控LCP (Largest Contentful Paint)
       const lcpObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
-        console.log("LCP:", lastEntry.startTime);
+        logInfo(
+          "LCP measurement",
+          { startTime: lastEntry?.startTime ?? 0 },
+          "performanceOptimizer",
+        );
       });
-      lcpObserver.observe({ entryTypes: ["largest-contentful-paint"] });
+      lcpObserver.observe({
+        entryTypes: ["largest-contentful-paint"],
+        ...observerOptions,
+      });
       this.observers.set("lcp", lcpObserver);
 
       // 监控FID (First Input Delay)
       const fidObserver = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        entries.forEach((entry: any) => {
-          console.log("FID:", entry.processingStart - entry.startTime);
+        const entries = list.getEntries() as PerformanceEventTiming[];
+        entries.forEach((entry) => {
+          if (
+            "processingStart" in entry &&
+            entry.processingStart &&
+            entry.startTime
+          ) {
+            logInfo(
+              "FID measurement",
+              { delay: entry.processingStart - entry.startTime },
+              "performanceOptimizer",
+            );
+          }
         });
       });
-      fidObserver.observe({ entryTypes: ["first-input"] });
+      fidObserver.observe({ entryTypes: ["first-input"], ...observerOptions });
       this.observers.set("fid", fidObserver);
 
       // 监控CLS (Cumulative Layout Shift)
       const clsObserver = new PerformanceObserver((list) => {
         let clsValue = 0;
-        const entries = list.getEntries();
-        entries.forEach((entry: any) => {
+        const entries = list.getEntries() as LayoutShift[];
+        entries.forEach((entry) => {
           if (!entry.hadRecentInput) {
             clsValue += entry.value;
           }
         });
-        console.log("CLS:", clsValue);
+        logInfo("CLS measurement", { value: clsValue }, "performanceOptimizer");
       });
-      clsObserver.observe({ entryTypes: ["layout-shift"] });
+      clsObserver.observe({ entryTypes: ["layout-shift"], ...observerOptions });
       this.observers.set("cls", clsObserver);
     } catch (error) {
-      console.warn("Web Vitals监控初始化失败:", error);
+      logWarn("Web Vitals监控初始化失败", error, "performanceOptimizer");
     }
   }
 
@@ -132,6 +152,12 @@ export class PerformanceMonitor {
   }
 }
 
+type PerformanceMemorySnapshot = {
+  usedJSHeapSize: number;
+  totalJSHeapSize: number;
+  jsHeapSizeLimit: number;
+};
+
 /**
  * 内存使用监控器
  */
@@ -139,12 +165,22 @@ export class MemoryMonitor {
   /**
    * 获取内存使用情况
    */
-  static getMemoryInfo(): any {
+  static getMemoryInfo(): PerformanceMemorySnapshot | null {
     if (typeof window !== "undefined" && "memory" in performance) {
+      const memory = (
+        performance as Performance & {
+          memory?: PerformanceMemorySnapshot;
+        }
+      ).memory;
+
+      if (!memory) {
+        return null;
+      }
+
       return {
-        usedJSHeapSize: (performance as any).memory.usedJSHeapSize,
-        totalJSHeapSize: (performance as any).memory.totalJSHeapSize,
-        jsHeapSizeLimit: (performance as any).memory.jsHeapSizeLimit,
+        usedJSHeapSize: memory.usedJSHeapSize,
+        totalJSHeapSize: memory.totalJSHeapSize,
+        jsHeapSizeLimit: memory.jsHeapSizeLimit,
       };
     }
     return null;
@@ -170,8 +206,9 @@ export class MemoryMonitor {
       process.env.NODE_ENV === "development" &&
       typeof window !== "undefined"
     ) {
-      if ("gc" in window) {
-        (window as any).gc();
+      const globalWindow = window as Window & { gc?: () => void };
+      if (typeof globalWindow.gc === "function") {
+        globalWindow.gc();
       }
     }
   }
@@ -225,7 +262,11 @@ export function useRenderOptimization() {
 
     if (frequency > 60) {
       // 超过60fps
-      console.warn("高频渲染检测:", frequency.toFixed(2), "fps");
+      logWarn(
+        "高频渲染检测",
+        { frequency: frequency.toFixed(2) },
+        "performanceOptimizer",
+      );
     }
 
     return {
@@ -251,7 +292,13 @@ export function useOptimizedSelector<T, R>(
   selector: (state: T) => R,
   equalityFn?: (a: R, b: R) => boolean,
 ): (state: T) => R {
-  const memoizedSelector = useMemo(() => selector, [selector]);
+  const memoizedSelector = useMemo(() => {
+    if (equalityFn) {
+      return (state: T) => selector(state);
+    }
+
+    return selector;
+  }, [selector, equalityFn]);
 
   return memoizedSelector;
 }
@@ -260,14 +307,14 @@ export function useOptimizedSelector<T, R>(
  * 组件缓存管理器
  */
 export class ComponentCache {
-  private static cache = new Map<string, any>();
+  private static cache = new Map<string, unknown>();
   private static maxSize = 100;
   private static accessCount = new Map<string, number>();
 
   /**
    * 设置缓存
    */
-  static set(key: string, value: any): void {
+  static set(key: string, value: unknown): void {
     if (this.cache.size >= this.maxSize) {
       this.evictLeastUsed();
     }
@@ -279,7 +326,7 @@ export class ComponentCache {
   /**
    * 获取缓存
    */
-  static get(key: string): any {
+  static get(key: string): unknown {
     const value = this.cache.get(key);
     if (value) {
       const count = this.accessCount.get(key) || 0;
@@ -426,7 +473,7 @@ export class BatchUpdateOptimizer {
         try {
           update();
         } catch (error) {
-          console.error("批量更新执行失败:", error);
+          logError("批量更新执行失败", error, "performanceOptimizer");
         }
       });
 
@@ -449,7 +496,7 @@ export class BatchUpdateOptimizer {
 }
 
 // 导出所有性能优化工具
-export default {
+const performanceOptimizerTools = {
   PerformanceMonitor,
   MemoryMonitor,
   useRenderOptimization,
@@ -458,3 +505,5 @@ export default {
   VirtualScrollOptimizer,
   BatchUpdateOptimizer,
 };
+
+export default performanceOptimizerTools;

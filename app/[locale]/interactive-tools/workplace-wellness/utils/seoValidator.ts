@@ -8,6 +8,8 @@ import {
   getWorkplaceWellnessSEOData,
 } from "./seoOptimization";
 import type { Locale } from "@/i18n";
+import type { Metadata } from "next";
+import type { StructuredDataBlock } from "./seoOptimization";
 
 export interface SEOValidationResult {
   isValid: boolean;
@@ -18,10 +20,26 @@ export interface SEOValidationResult {
   metaValid: boolean;
 }
 
+type StructuredFAQEntry = {
+  "@type"?: string;
+  name?: string;
+  acceptedAnswer?: {
+    "@type"?: string;
+    text?: string;
+  };
+};
+
+type StructuredBreadcrumbItem = {
+  "@type"?: string;
+  position?: number;
+  name?: string;
+  item?: string;
+};
+
 /**
  * 验证结构化数据格式
  */
-export function validateStructuredData(data: any): {
+export function validateStructuredData(data: StructuredDataBlock): {
   isValid: boolean;
   issues: string[];
 } {
@@ -41,7 +59,7 @@ export function validateStructuredData(data: any): {
     if (!data.mainEntity || !Array.isArray(data.mainEntity)) {
       issues.push("FAQ结构化数据缺少mainEntity数组");
     } else {
-      data.mainEntity.forEach((item: any, index: number) => {
+      data.mainEntity.forEach((item: StructuredFAQEntry, index: number) => {
         if (!item["@type"] || item["@type"] !== "Question") {
           issues.push(`FAQ项目${index + 1}缺少正确的@type`);
         }
@@ -75,14 +93,16 @@ export function validateStructuredData(data: any): {
     if (!data.itemListElement || !Array.isArray(data.itemListElement)) {
       issues.push("BreadcrumbList缺少itemListElement数组");
     } else {
-      data.itemListElement.forEach((item: any, index: number) => {
-        if (!item["@type"] || item["@type"] !== "ListItem") {
-          issues.push(`面包屑项目${index + 1}缺少正确的@type`);
-        }
-        if (!item.position || !item.name || !item.item) {
-          issues.push(`面包屑项目${index + 1}缺少必需字段`);
-        }
-      });
+      data.itemListElement.forEach(
+        (item: StructuredBreadcrumbItem, index: number) => {
+          if (!item["@type"] || item["@type"] !== "ListItem") {
+            issues.push(`面包屑项目${index + 1}缺少正确的@type`);
+          }
+          if (!item.position || !item.name || !item.item) {
+            issues.push(`面包屑项目${index + 1}缺少必需字段`);
+          }
+        },
+      );
     }
   }
 
@@ -95,7 +115,7 @@ export function validateStructuredData(data: any): {
 /**
  * 验证Meta信息完整性
  */
-export function validateMetaCompleteness(meta: any): {
+export function validateMetaCompleteness(meta: Metadata): {
   isValid: boolean;
   issues: string[];
 } {

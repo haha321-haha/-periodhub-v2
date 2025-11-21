@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
+import { logInfo, logWarn, logError } from "@/lib/debug-logger";
 
 /**
  * P3阶段：性能监控和优化系统
@@ -70,7 +71,6 @@ export function usePerformanceMonitoring() {
         "navigation",
       )[0] as PerformanceNavigationTiming;
       const paintEntries = performance.getEntriesByType("paint");
-      const measureEntries = performance.getEntriesByType("measure");
 
       // 页面加载时间
       metrics.loadTime = navigation.loadEventEnd - navigation.loadEventStart;
@@ -93,8 +93,16 @@ export function usePerformanceMonitoring() {
 
       // 内存使用情况
       if ("memory" in performance) {
-        const memory = (performance as any).memory;
-        metrics.memoryUsage = memory.usedJSHeapSize / memory.jsHeapSizeLimit;
+        const memMetrics = performance as Performance & {
+          memory?: { usedJSHeapSize: number; jsHeapSizeLimit: number };
+        };
+        const memory = memMetrics.memory;
+        if (memory?.jsHeapSizeLimit) {
+          metrics.memoryUsage =
+            memory.jsHeapSizeLimit > 0
+              ? memory.usedJSHeapSize / memory.jsHeapSizeLimit
+              : metrics.memoryUsage;
+        }
       }
 
       // 网络请求统计
@@ -120,7 +128,11 @@ export function usePerformanceMonitoring() {
 
         observer.observe({ entryTypes: ["largest-contentful-paint"] });
       } catch (error) {
-        console.warn("Web Vitals monitoring not available:", error);
+        logWarn(
+          "Web Vitals monitoring not available",
+          error,
+          "PerformanceMonitor",
+        );
       }
     }
 
@@ -224,10 +236,10 @@ export function usePerformanceMonitoring() {
       setMetrics(collectedMetrics);
       setSuggestions(optimizationSuggestions);
 
-      console.log("📊 性能指标收集完成:", collectedMetrics);
-      console.log("💡 优化建议:", optimizationSuggestions);
+      logInfo("📊 性能指标收集完成", collectedMetrics, "PerformanceMonitor");
+      logInfo("💡 优化建议", optimizationSuggestions, "PerformanceMonitor");
     } catch (error) {
-      console.error("性能监控失败:", error);
+      logError("性能监控失败", error, "PerformanceMonitor");
     } finally {
       setIsMonitoring(false);
     }
@@ -387,14 +399,9 @@ export function PerformanceOptimizationPanel() {
 
       {!metrics && !isMonitoring && (
         <div className="text-center py-8 text-gray-500">
-          点击"开始监控"按钮来收集性能指标
+          点击&quot;开始监控&quot;按钮来收集性能指标
         </div>
       )}
     </div>
   );
 }
-
-export default {
-  usePerformanceMonitoring,
-  PerformanceOptimizationPanel,
-};

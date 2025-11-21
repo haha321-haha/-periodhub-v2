@@ -8,8 +8,13 @@ import {
   UserDataSnapshot,
   DataQualityMetrics,
   AnomalyDetection,
-} from '../types/recommendation';
-import { PeriodRecord, MenstrualPhase } from '../types';
+} from "../types/recommendation";
+import {
+  PeriodRecord,
+  MenstrualPhase,
+  WorkImpactData,
+  NutritionData,
+} from "../types";
 
 // 数据质量阈值配置
 const DATA_QUALITY_THRESHOLDS = {
@@ -35,7 +40,7 @@ const DATA_QUALITY_THRESHOLDS = {
  */
 export function assessDataQuality(
   periodData: PeriodRecord[],
-  workImpactRecords: any[] = []
+  workImpactRecords: WorkImpactData[] = [],
 ): DataQualityMetrics {
   // 评估经期数据质量
   const periodQuality = assessPeriodDataQuality(periodData);
@@ -44,17 +49,18 @@ export function assessDataQuality(
   const workImpactQuality = assessWorkImpactQuality(workImpactRecords);
 
   // 计算整体质量
-  const overallCompleteness = (periodQuality.completeness + workImpactQuality.accuracyScore) / 2;
+  const overallCompleteness =
+    (periodQuality.completeness + workImpactQuality.accuracyScore) / 2;
 
-  let overallQuality: 'excellent' | 'good' | 'fair' | 'poor';
+  let overallQuality: "excellent" | "good" | "fair" | "poor";
   if (overallCompleteness >= 80) {
-    overallQuality = 'excellent';
+    overallQuality = "excellent";
   } else if (overallCompleteness >= 60) {
-    overallQuality = 'good';
+    overallQuality = "good";
   } else if (overallCompleteness >= 30) {
-    overallQuality = 'fair';
+    overallQuality = "fair";
   } else {
-    overallQuality = 'poor';
+    overallQuality = "poor";
   }
 
   return {
@@ -68,7 +74,9 @@ export function assessDataQuality(
 /**
  * 评估经期数据质量
  */
-function assessPeriodDataQuality(records: PeriodRecord[]): DataQualityMetrics['periodDataQuality'] {
+function assessPeriodDataQuality(
+  records: PeriodRecord[],
+): DataQualityMetrics["periodDataQuality"] {
   const recordCount = records.length;
 
   // 计算一致性（周期规律性）
@@ -88,7 +96,9 @@ function assessPeriodDataQuality(records: PeriodRecord[]): DataQualityMetrics['p
 /**
  * 评估工作影响数据质量
  */
-function assessWorkImpactQuality(records: any[]): DataQualityMetrics['workImpactQuality'] {
+function assessWorkImpactQuality(
+  records: WorkImpactData[],
+): DataQualityMetrics["workImpactQuality"] {
   const recordFrequency = records.length;
 
   // 计算准确度（基于记录频率和完整性）
@@ -111,15 +121,17 @@ function calculateCycleConsistency(records: PeriodRecord[]): number {
   const cycleLengths: number[] = [];
   let lastPeriodDate: Date | null = null;
 
-  for (const record of records.sort((a, b) =>
-    new Date(a.date).getTime() - new Date(b.date).getTime()
+  for (const record of records.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   )) {
-    if (record.type === 'period') {
+    if (record.type === "period") {
       if (lastPeriodDate) {
         const daysDiff = Math.floor(
-          (new Date(record.date).getTime() - lastPeriodDate.getTime()) / (1000 * 60 * 60 * 24)
+          (new Date(record.date).getTime() - lastPeriodDate.getTime()) /
+            (1000 * 60 * 60 * 24),
         );
-        if (daysDiff > 0 && daysDiff < 60) { // 合理的周期范围
+        if (daysDiff > 0 && daysDiff < 60) {
+          // 合理的周期范围
           cycleLengths.push(daysDiff);
         }
       }
@@ -131,7 +143,9 @@ function calculateCycleConsistency(records: PeriodRecord[]): number {
 
   // 计算标准差
   const mean = cycleLengths.reduce((a, b) => a + b, 0) / cycleLengths.length;
-  const variance = cycleLengths.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / cycleLengths.length;
+  const variance =
+    cycleLengths.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) /
+    cycleLengths.length;
   const stdDev = Math.sqrt(variance);
 
   // 标准差越小，一致性越高
@@ -153,7 +167,8 @@ function calculateCompleteness(records: PeriodRecord[]): number {
     totalFields += 3; // date, type, painLevel, flow, notes (至少3个必填)
     if (record.date) filledFields++;
     if (record.type) filledFields++;
-    if (record.painLevel !== null && record.painLevel !== undefined) filledFields++;
+    if (record.painLevel !== null && record.painLevel !== undefined)
+      filledFields++;
     if (record.flow) filledFields++;
     if (record.notes) filledFields++;
   }
@@ -166,7 +181,7 @@ function calculateCompleteness(records: PeriodRecord[]): number {
  */
 export function detectAnomalies(
   currentValue: number,
-  historicalData: number[]
+  historicalData: number[],
 ): AnomalyDetection | null {
   if (historicalData.length < 3) return null; // 数据不足，无法检测
 
@@ -180,9 +195,9 @@ export function detectAnomalies(
   if (deviation > 3 * stdDev) {
     return {
       isAnomaly: true,
-      type: 'pain_spike',
-      severity: deviation > 4 * stdDev ? 'severe' : 'moderate',
-      suggestion: '数据异常，建议医疗咨询',
+      type: "pain_spike",
+      severity: deviation > 4 * stdDev ? "severe" : "moderate",
+      suggestion: "数据异常，建议医疗咨询",
     };
   }
 
@@ -203,7 +218,9 @@ function calculateMean(values: number[]): number {
 function calculateStdDev(values: number[]): number {
   if (values.length === 0) return 0;
   const mean = calculateMean(values);
-  const variance = values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / values.length;
+  const variance =
+    values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) /
+    values.length;
   return Math.sqrt(variance);
 }
 
@@ -211,16 +228,16 @@ function calculateStdDev(values: number[]): number {
  * 分析疼痛趋势
  */
 export function analyzePainTrend(
-  records: PeriodRecord[]
-): 'increasing' | 'decreasing' | 'stable' | 'irregular' {
-  if (records.length < 3) return 'stable';
+  records: PeriodRecord[],
+): "increasing" | "decreasing" | "stable" | "irregular" {
+  if (records.length < 3) return "stable";
 
   const painLevels = records
-    .filter(r => r.painLevel !== null && r.painLevel !== undefined)
-    .map(r => r.painLevel as number)
+    .filter((r) => r.painLevel !== null && r.painLevel !== undefined)
+    .map((r) => r.painLevel as number)
     .sort((a, b) => a - b);
 
-  if (painLevels.length < 3) return 'stable';
+  if (painLevels.length < 3) return "stable";
 
   // 将数据分为三部分
   const third = Math.floor(painLevels.length / 3);
@@ -234,16 +251,16 @@ export function analyzePainTrend(
   const threshold = 1.5; // 疼痛等级变化阈值
 
   if (diff > threshold) {
-    return 'increasing';
+    return "increasing";
   } else if (diff < -threshold) {
-    return 'decreasing';
+    return "decreasing";
   } else {
     // 检查是否不规律（波动大）
     const stdDev = calculateStdDev(painLevels);
     if (stdDev > 2) {
-      return 'irregular';
+      return "irregular";
     }
-    return 'stable';
+    return "stable";
   }
 }
 
@@ -251,9 +268,9 @@ export function analyzePainTrend(
  * 分析效率趋势
  */
 export function analyzeEfficiencyTrend(
-  efficiencyValues: number[]
-): 'improving' | 'declining' | 'stable' {
-  if (efficiencyValues.length < 3) return 'stable';
+  efficiencyValues: number[],
+): "improving" | "declining" | "stable" {
+  if (efficiencyValues.length < 3) return "stable";
 
   const third = Math.floor(efficiencyValues.length / 3);
   const firstThird = efficiencyValues.slice(0, third);
@@ -266,11 +283,11 @@ export function analyzeEfficiencyTrend(
   const threshold = 5; // 效率变化阈值（5%）
 
   if (diff > threshold) {
-    return 'improving';
+    return "improving";
   } else if (diff < -threshold) {
-    return 'declining';
+    return "declining";
   } else {
-    return 'stable';
+    return "stable";
   }
 }
 
@@ -278,10 +295,10 @@ export function analyzeEfficiencyTrend(
  * 分析周期规律性
  */
 export function analyzeCycleRegularity(
-  records: PeriodRecord[]
-): 'regular' | 'irregular' {
+  records: PeriodRecord[],
+): "regular" | "irregular" {
   const consistency = calculateCycleConsistency(records);
-  return consistency >= 70 ? 'regular' : 'irregular';
+  return consistency >= 70 ? "regular" : "irregular";
 }
 
 /**
@@ -293,13 +310,14 @@ export function calculateAverageCycleLength(records: PeriodRecord[]): number {
   const cycleLengths: number[] = [];
   let lastPeriodDate: Date | null = null;
 
-  for (const record of records.sort((a, b) =>
-    new Date(a.date).getTime() - new Date(b.date).getTime()
+  for (const record of records.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   )) {
-    if (record.type === 'period') {
+    if (record.type === "period") {
       if (lastPeriodDate) {
         const daysDiff = Math.floor(
-          (new Date(record.date).getTime() - lastPeriodDate.getTime()) / (1000 * 60 * 60 * 24)
+          (new Date(record.date).getTime() - lastPeriodDate.getTime()) /
+            (1000 * 60 * 60 * 24),
         );
         if (daysDiff > 0 && daysDiff < 60) {
           cycleLengths.push(daysDiff);
@@ -324,18 +342,19 @@ export function calculateAveragePeriodLength(records: PeriodRecord[]): number {
   let periodStart: Date | null = null;
   let periodEnd: Date | null = null;
 
-  for (const record of records.sort((a, b) =>
-    new Date(a.date).getTime() - new Date(b.date).getTime()
+  for (const record of records.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   )) {
-    if (record.type === 'period') {
+    if (record.type === "period") {
       if (!periodStart) {
         periodStart = new Date(record.date);
       }
       periodEnd = new Date(record.date);
     } else if (periodStart && periodEnd) {
-      const daysDiff = Math.floor(
-        (periodEnd.getTime() - periodStart.getTime()) / (1000 * 60 * 60 * 24)
-      ) + 1;
+      const daysDiff =
+        Math.floor(
+          (periodEnd.getTime() - periodStart.getTime()) / (1000 * 60 * 60 * 24),
+        ) + 1;
       if (daysDiff > 0 && daysDiff < 15) {
         periodLengths.push(daysDiff);
       }
@@ -354,8 +373,8 @@ export function calculateAveragePeriodLength(records: PeriodRecord[]): number {
  */
 export function calculateAveragePainLevel(records: PeriodRecord[]): number {
   const painLevels = records
-    .filter(r => r.painLevel !== null && r.painLevel !== undefined)
-    .map(r => r.painLevel as number);
+    .filter((r) => r.painLevel !== null && r.painLevel !== undefined)
+    .map((r) => r.painLevel as number);
 
   if (painLevels.length === 0) return 0;
 
@@ -367,33 +386,33 @@ export function calculateAveragePainLevel(records: PeriodRecord[]): number {
  */
 export function determineCurrentPhase(
   records: PeriodRecord[],
-  averageCycleLength: number
+  averageCycleLength: number,
 ): MenstrualPhase | null {
   if (records.length === 0) return null;
 
   // 找到最近的经期开始日期
-  const sortedRecords = [...records].sort((a, b) =>
-    new Date(b.date).getTime() - new Date(a.date).getTime()
+  const sortedRecords = [...records].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
   );
 
-  const lastPeriod = sortedRecords.find(r => r.type === 'period');
+  const lastPeriod = sortedRecords.find((r) => r.type === "period");
   if (!lastPeriod) return null;
 
   const daysSinceLastPeriod = Math.floor(
-    (Date.now() - new Date(lastPeriod.date).getTime()) / (1000 * 60 * 60 * 24)
+    (Date.now() - new Date(lastPeriod.date).getTime()) / (1000 * 60 * 60 * 24),
   );
 
   // 根据周期长度和天数判断阶段
   const cycleDay = daysSinceLastPeriod % averageCycleLength;
 
   if (cycleDay <= 5) {
-    return 'menstrual';
+    return "menstrual";
   } else if (cycleDay <= 13) {
-    return 'follicular';
+    return "follicular";
   } else if (cycleDay <= 16) {
-    return 'ovulation';
+    return "ovulation";
   } else {
-    return 'luteal';
+    return "luteal";
   }
 }
 
@@ -402,8 +421,8 @@ export function determineCurrentPhase(
  */
 export function createUserDataSnapshot(
   periodData: PeriodRecord[],
-  workImpactData: any,
-  nutritionData: any
+  workImpactData: WorkImpactData,
+  nutritionData: NutritionData | null = null,
 ): UserDataSnapshot {
   // 计算统计数据
   const averageCycleLength = calculateAverageCycleLength(periodData);
@@ -414,15 +433,16 @@ export function createUserDataSnapshot(
   const currentPhase = determineCurrentPhase(periodData, averageCycleLength);
 
   // 评估数据质量
-  const qualityMetrics = assessDataQuality(periodData, []);
+  const qualityMetrics = assessDataQuality(periodData, [workImpactData]);
 
   // 提取工作影响数据
   const currentPainLevel = workImpactData?.painLevel || 0;
   const currentEfficiency = workImpactData?.efficiency || 100;
   const efficiencyValues: number[] = []; // 这里需要从历史记录中提取
-  const efficiencyTrend = efficiencyValues.length >= 3
-    ? analyzeEfficiencyTrend(efficiencyValues)
-    : 'stable';
+  const efficiencyTrend =
+    efficiencyValues.length >= 3
+      ? analyzeEfficiencyTrend(efficiencyValues)
+      : "stable";
 
   return {
     periodData: {
@@ -443,8 +463,8 @@ export function createUserDataSnapshot(
       efficiencyTrend,
     },
     nutrition: {
-      selectedPhase: nutritionData?.selectedPhase || 'menstrual',
-      constitutionType: nutritionData?.constitutionType || 'balanced',
+      selectedPhase: nutritionData?.selectedPhase || "menstrual",
+      constitutionType: nutritionData?.constitutionType || "balanced",
     },
     metadata: {
       dataQuality: qualityMetrics.overallQuality,
@@ -453,4 +473,3 @@ export function createUserDataSnapshot(
     },
   };
 }
-

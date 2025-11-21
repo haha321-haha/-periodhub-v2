@@ -8,6 +8,7 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { AlertTriangle, RefreshCw } from "lucide-react";
+import { logError } from "@/lib/debug-logger";
 
 interface Props {
   children: ReactNode;
@@ -29,12 +30,18 @@ export class RecommendationErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("Recommendation system error:", error, errorInfo);
+    logError(
+      "Recommendation system error",
+      error,
+      "RecommendationErrorBoundary",
+    );
+    logError(
+      "Recommendation error details",
+      errorInfo,
+      "RecommendationErrorBoundary",
+    );
 
     // 可以在这里添加错误上报逻辑
-    if (process.env.NODE_ENV === "development") {
-      console.error("Error details:", errorInfo);
-    }
   }
 
   handleReset = () => {
@@ -43,7 +50,12 @@ export class RecommendationErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
-      return <RecommendationErrorFallback error={this.state.error} onReset={this.handleReset} />;
+      return (
+        <RecommendationErrorFallback
+          error={this.state.error}
+          onReset={this.handleReset}
+        />
+      );
     }
 
     return this.props.children;
@@ -82,10 +94,3 @@ function RecommendationErrorFallback({
     </div>
   );
 }
-
-
-
-
-
-
-

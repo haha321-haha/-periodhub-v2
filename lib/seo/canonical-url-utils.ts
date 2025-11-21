@@ -58,3 +58,10 @@ export function normalizePath(path: string): string {
     .replace(/\/$/, "") // 移除结尾斜杠
     .replace(/^\//, ""); // 移除开头斜杠
 }
+
+/**
+ * 生成多语言配置（别名函数）
+ */
+export function generateAlternatesConfig(path: string) {
+  return generateAlternateUrls(path);
+}

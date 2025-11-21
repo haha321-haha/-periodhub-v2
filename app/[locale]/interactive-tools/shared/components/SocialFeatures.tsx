@@ -2,23 +2,19 @@
 
 import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { logInfo } from "@/lib/debug-logger";
 import {
-  Users,
-  MessageCircle,
-  Heart,
-  Share2,
-  ThumbsUp,
-  Bookmark,
-  Calendar,
-  MapPin,
-  Clock,
-  User,
-  Star,
-  TrendingUp,
   Award,
-  Shield,
+  Bookmark,
+  Clock,
   Eye,
   EyeOff,
+  Heart,
+  MapPin,
+  MessageCircle,
+  Share2,
+  ThumbsUp,
+  Users,
 } from "lucide-react";
 
 interface CommunityPost {
@@ -222,7 +218,7 @@ export default function SocialFeatures({
     const post = posts.find((p) => p.id === postId);
     if (post) {
       // 这里可以实现实际的分享功能
-      console.log("Sharing post:", post);
+      logInfo("Sharing post", post, "SocialFeatures");
       setPosts(
         posts.map((p) =>
           p.id === postId ? { ...p, shares: p.shares + 1 } : p,
@@ -313,6 +309,24 @@ export default function SocialFeatures({
       default:
         return <MessageCircle className="w-4 h-4 text-gray-500" />;
     }
+  };
+
+  const handleNewPostTypeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setNewPost((prev) => ({
+      ...prev,
+      type: event.target.value as CommunityPost["type"],
+    }));
+  };
+
+  const handleNewPostPrivacyChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setNewPost((prev) => ({
+      ...prev,
+      privacy: event.target.value as CommunityPost["privacy"],
+    }));
   };
 
   if (loading) {
@@ -563,12 +577,12 @@ export default function SocialFeatures({
                 </label>
                 <select
                   value={newPost.type}
-                  onChange={(e) =>
-                    setNewPost({ ...newPost, type: e.target.value as any })
-                  }
+                  onChange={handleNewPostTypeChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="experience">{t("postTypes.experience")}</option>
+                  <option value="experience">
+                    {t("postTypes.experience")}
+                  </option>
                   <option value="tip">{t("postTypes.tip")}</option>
                   <option value="question">{t("postTypes.question")}</option>
                   <option value="support">{t("postTypes.support")}</option>
@@ -581,9 +595,7 @@ export default function SocialFeatures({
                 </label>
                 <select
                   value={newPost.privacy}
-                  onChange={(e) =>
-                    setNewPost({ ...newPost, privacy: e.target.value as any })
-                  }
+                  onChange={handleNewPostPrivacyChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="public">{t("privacy.public")}</option>

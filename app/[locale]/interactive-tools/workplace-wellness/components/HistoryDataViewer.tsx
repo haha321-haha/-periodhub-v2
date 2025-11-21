@@ -18,8 +18,18 @@ import {
 } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
-import { useCalendar, useWorkplaceWellnessActions } from "../hooks/useWorkplaceWellnessStore";
-import { PeriodRecord, FlowType, PainLevel, PeriodType, CalendarState } from "../types";
+import {
+  useCalendar,
+  useWorkplaceWellnessActions,
+} from "../hooks/useWorkplaceWellnessStore";
+import {
+  PeriodRecord,
+  FlowType,
+  PainLevel,
+  PeriodType,
+  CalendarState,
+} from "../types";
+import { logError } from "../../../../lib/debug-logger";
 
 interface FilterOptions {
   dateRange: {
@@ -35,7 +45,8 @@ export default function HistoryDataViewer() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
   const calendar = useCalendar() as CalendarState;
-  const { addPeriodRecord, updatePeriodRecord, deletePeriodRecord } = useWorkplaceWellnessActions();
+  const { addPeriodRecord, updatePeriodRecord, deletePeriodRecord } =
+    useWorkplaceWellnessActions();
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [selectedRecord, setSelectedRecord] = useState<PeriodRecord | null>(
@@ -68,7 +79,10 @@ export default function HistoryDataViewer() {
   });
 
   // 从 store 读取 periodData
-  const periodData = calendar.periodData || [];
+  const periodData = useMemo(
+    () => calendar.periodData || [],
+    [calendar.periodData],
+  );
 
   // 过滤和搜索数据
   const filteredData = useMemo(() => {
@@ -235,7 +249,8 @@ export default function HistoryDataViewer() {
     const record: PeriodRecord = {
       date: formData.date,
       type: formData.type,
-      painLevel: formData.painLevel > 0 ? (formData.painLevel as PainLevel) : null,
+      painLevel:
+        formData.painLevel > 0 ? (formData.painLevel as PainLevel) : null,
       flow: formData.flow,
       notes: formData.notes || undefined,
     };
@@ -386,7 +401,11 @@ export default function HistoryDataViewer() {
                   onChange={(e) =>
                     setFilters((prev) => ({
                       ...prev,
-                      type: e.target.value as any,
+                      type: e.target.value as
+                        | "all"
+                        | "period"
+                        | "predicted"
+                        | "ovulation",
                     }))
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
@@ -685,7 +704,9 @@ export default function HistoryDataViewer() {
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
                 >
-                  <option value="period">{t("export.periodTypes.period")}</option>
+                  <option value="period">
+                    {t("export.periodTypes.period")}
+                  </option>
                   <option value="predicted">
                     {t("export.periodTypes.predicted")}
                   </option>
@@ -723,7 +744,9 @@ export default function HistoryDataViewer() {
                   onChange={(e) =>
                     setFormData({
                       ...formData,
-                      flow: e.target.value ? (e.target.value as FlowType) : null,
+                      flow: e.target.value
+                        ? (e.target.value as FlowType)
+                        : null,
                     })
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"

@@ -25,8 +25,9 @@ export interface CompatibilityResult {
  */
 export function checkFoodCompatibility(
   foods: NutritionRecommendation[],
-  locale: string = "zh"
+  locale: string = "zh",
 ): CompatibilityResult {
+  void locale;
   const warnings: string[] = [];
   const suggestions: string[] = [];
   const conflicts: CompatibilityResult["conflicts"] = [];
@@ -71,7 +72,7 @@ export function checkFoodCompatibility(
     // 注意：这里返回模板字符串，由调用方使用翻译键替换
     // 格式：{key}，调用方需要传入翻译函数
     warnings.push(
-      `nutrition.compatibility.conflictDetected|warmCount:${natureCount.warm}|coolCount:${natureCount.cool}`
+      `nutrition.compatibility.conflictDetected|warmCount:${natureCount.warm}|coolCount:${natureCount.cool}`,
     );
 
     suggestions.push("nutrition.compatibility.suggestion");
@@ -95,7 +96,12 @@ export function checkFoodCompatibility(
  */
 export function optimizeFoodDistribution(
   foods: NutritionRecommendation[],
-  meals: readonly string[] | string[] = ["breakfast", "lunch", "dinner", "snack"]
+  meals: readonly string[] | string[] = [
+    "breakfast",
+    "lunch",
+    "dinner",
+    "snack",
+  ],
 ): Record<string, NutritionRecommendation[]> {
   if (foods.length === 0) {
     return {};
@@ -109,7 +115,7 @@ export function optimizeFoodDistribution(
   const result: Record<string, NutritionRecommendation[]> = {};
 
   // 优先将相同性质的食物分配到同一餐次
-  meals.forEach((meal, index) => {
+  meals.forEach((meal) => {
     result[meal] = [];
   });
 
@@ -126,7 +132,9 @@ export function optimizeFoodDistribution(
     // 每餐次优先添加1-2个中性食物作为基础
     if (neutralIndex < neutralFoods.length) {
       const neutralCount = Math.min(2, neutralFoods.length - neutralIndex);
-      result[meal].push(...neutralFoods.slice(neutralIndex, neutralIndex + neutralCount));
+      result[meal].push(
+        ...neutralFoods.slice(neutralIndex, neutralIndex + neutralCount),
+      );
       neutralIndex += neutralCount;
     }
 
@@ -141,15 +149,25 @@ export function optimizeFoodDistribution(
   });
 
   // 如果还有剩余食物，继续分配
-  while (warmIndex < warmFoods.length || coolIndex < coolFoods.length || neutralIndex < neutralFoods.length) {
+  while (
+    warmIndex < warmFoods.length ||
+    coolIndex < coolFoods.length ||
+    neutralIndex < neutralFoods.length
+  ) {
     meals.forEach((meal) => {
       if (neutralIndex < neutralFoods.length) {
         result[meal].push(neutralFoods[neutralIndex]);
         neutralIndex++;
-      } else if (warmIndex < warmFoods.length && result[meal].every((f) => f.tcmNature !== "cool")) {
+      } else if (
+        warmIndex < warmFoods.length &&
+        result[meal].every((f) => f.tcmNature !== "cool")
+      ) {
         result[meal].push(warmFoods[warmIndex]);
         warmIndex++;
-      } else if (coolIndex < coolFoods.length && result[meal].every((f) => f.tcmNature !== "warm")) {
+      } else if (
+        coolIndex < coolFoods.length &&
+        result[meal].every((f) => f.tcmNature !== "warm")
+      ) {
         result[meal].push(coolFoods[coolIndex]);
         coolIndex++;
       }

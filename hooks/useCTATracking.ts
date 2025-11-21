@@ -8,9 +8,9 @@
  * 4. 支持A/B测试
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-interface CTAEventData {
+export interface CTAEventData {
   eventName?: string; // 'hero_cta_impression' | 'hero_cta_click'
   buttonText: string;
   buttonLocation: string;
@@ -45,17 +45,17 @@ function generateSessionId(): string {
  * 获取或创建用户会话
  */
 function getUserSession(): UserSession {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return {
-      id: 'server-side',
+      id: "server-side",
       startTime: new Date().toISOString(),
       pageViews: 0,
       ctaClicks: 0,
-      lastActivity: new Date().toISOString()
+      lastActivity: new Date().toISOString(),
     };
   }
 
-  let session = localStorage.getItem('cta_tracking_session');
+  let session = localStorage.getItem("cta_tracking_session");
 
   if (session) {
     try {
@@ -70,18 +70,21 @@ function getUserSession(): UserSession {
           startTime: now.toISOString(),
           pageViews: 1,
           ctaClicks: 0,
-          lastActivity: now.toISOString()
+          lastActivity: now.toISOString(),
         };
-        localStorage.setItem('cta_tracking_session', JSON.stringify(newSession));
+        localStorage.setItem(
+          "cta_tracking_session",
+          JSON.stringify(newSession),
+        );
         return newSession;
       }
 
       // 更新最后活动时间
       parsed.lastActivity = now.toISOString();
-      localStorage.setItem('cta_tracking_session', JSON.stringify(parsed));
+      localStorage.setItem("cta_tracking_session", JSON.stringify(parsed));
       return parsed;
     } catch (error) {
-      console.warn('Failed to parse session data:', error);
+      console.warn("Failed to parse session data:", error);
     }
   }
 
@@ -91,29 +94,29 @@ function getUserSession(): UserSession {
     startTime: new Date().toISOString(),
     pageViews: 1,
     ctaClicks: 0,
-    lastActivity: new Date().toISOString()
+    lastActivity: new Date().toISOString(),
   };
 
-  localStorage.setItem('cta_tracking_session', JSON.stringify(newSession));
+  localStorage.setItem("cta_tracking_session", JSON.stringify(newSession));
   return newSession;
 }
 
 /**
  * 更新会话活动
  */
-function updateSessionActivity(eventType: 'page_view' | 'cta_click'): void {
-  if (typeof window === 'undefined') return;
+function updateSessionActivity(eventType: "page_view" | "cta_click"): void {
+  if (typeof window === "undefined") return;
 
   const session = getUserSession();
 
-  if (eventType === 'page_view') {
+  if (eventType === "page_view") {
     session.pageViews += 1;
-  } else if (eventType === 'cta_click') {
+  } else if (eventType === "cta_click") {
     session.ctaClicks += 1;
   }
 
   session.lastActivity = new Date().toISOString();
-  localStorage.setItem('cta_tracking_session', JSON.stringify(session));
+  localStorage.setItem("cta_tracking_session", JSON.stringify(session));
 }
 
 /**
@@ -123,25 +126,26 @@ function getDeviceInfo(): {
   userAgent: string;
   screenWidth: number;
   screenHeight: number;
-  deviceType: 'desktop' | 'tablet' | 'mobile';
+  deviceType: "desktop" | "tablet" | "mobile";
 } {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return {
-      userAgent: 'server-side',
+      userAgent: "server-side",
       screenWidth: 0,
       screenHeight: 0,
-      deviceType: 'desktop'
+      deviceType: "desktop",
     };
   }
 
   const width = window.innerWidth;
-  const deviceType = width < 768 ? 'mobile' : width < 1024 ? 'tablet' : 'desktop';
+  const deviceType =
+    width < 768 ? "mobile" : width < 1024 ? "tablet" : "desktop";
 
   return {
     userAgent: navigator.userAgent,
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight,
-    deviceType
+    deviceType,
   };
 }
 
@@ -151,23 +155,23 @@ function getDeviceInfo(): {
 export function useCTATracking() {
   // 使用useState延迟初始化会话，防止服务器/客户端不一致
   const [session, setSession] = useState<UserSession>(() => ({
-    id: 'client-initializing',
+    id: "client-initializing",
     startTime: new Date().toISOString(),
     pageViews: 0,
     ctaClicks: 0,
-    lastActivity: new Date().toISOString()
+    lastActivity: new Date().toISOString(),
   }));
 
   const [deviceInfo, setDeviceInfo] = useState<{
     userAgent: string;
     screenWidth: number;
     screenHeight: number;
-    deviceType: 'desktop' | 'tablet' | 'mobile';
+    deviceType: "desktop" | "tablet" | "mobile";
   }>(() => ({
-    userAgent: 'client-initializing',
+    userAgent: "client-initializing",
     screenWidth: 0,
     screenHeight: 0,
-    deviceType: 'desktop'
+    deviceType: "desktop",
   }));
 
   // 仅在客户端初始化会话和设备信息
@@ -181,27 +185,27 @@ export function useCTATracking() {
    */
   const trackCTAClick = (eventData: Partial<CTAEventData>) => {
     const fullEventData: CTAEventData = {
-      buttonText: eventData.buttonText || '',
-      buttonLocation: eventData.buttonLocation || 'unknown',
-      destination: eventData.destination || '',
-      locale: eventData.locale || 'en',
+      buttonText: eventData.buttonText || "",
+      buttonLocation: eventData.buttonLocation || "unknown",
+      destination: eventData.destination || "",
+      locale: eventData.locale || "en",
       abTestVariant: eventData.abTestVariant,
       abTestId: eventData.abTestId,
       userAgent: deviceInfo.userAgent,
       timestamp: new Date().toISOString(),
       sessionId: session.id,
-      pageUrl: typeof window !== 'undefined' ? window.location.href : '',
-      referrer: typeof window !== 'undefined' ? document.referrer : '',
-      ...eventData
+      pageUrl: typeof window !== "undefined" ? window.location.href : "",
+      referrer: typeof window !== "undefined" ? document.referrer : "",
+      ...eventData,
     };
 
     // 更新会话数据
-    updateSessionActivity('cta_click');
+    updateSessionActivity("cta_click");
 
     // 发送到GA4
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'cta_click', {
-        event_category: 'engagement',
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "cta_click", {
+        event_category: "engagement",
         event_label: fullEventData.buttonText,
         custom_parameters: {
           button_location: fullEventData.buttonLocation,
@@ -213,14 +217,14 @@ export function useCTATracking() {
           device_type: deviceInfo.deviceType,
           screen_width: deviceInfo.screenWidth,
           screen_height: deviceInfo.screenHeight,
-          timestamp: fullEventData.timestamp
-        }
+          timestamp: fullEventData.timestamp,
+        },
       });
     }
 
     // 开发模式控制台输出
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[CTA Tracking] Click event:', fullEventData);
+    if (process.env.NODE_ENV === "development") {
+      console.log("[CTA Tracking] Click event:", fullEventData);
     }
 
     // 保存到本地存储（用于离线分析和调试）
@@ -234,14 +238,14 @@ export function useCTATracking() {
     pageTitle?: string;
     pageLocation?: string;
   }) => {
-    updateSessionActivity('page_view');
+    updateSessionActivity("page_view");
 
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'page_view', {
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "page_view", {
         page_title: pageData?.pageTitle || document.title,
         page_location: pageData?.pageLocation || window.location.href,
         session_id: session.id,
-        device_type: deviceInfo.deviceType
+        device_type: deviceInfo.deviceType,
       });
     }
   };
@@ -252,10 +256,15 @@ export function useCTATracking() {
   const getSessionStats = () => {
     return {
       sessionId: session.id,
-      duration: Math.floor((new Date().getTime() - new Date(session.startTime).getTime()) / 1000),
+      duration: Math.floor(
+        (new Date().getTime() - new Date(session.startTime).getTime()) / 1000,
+      ),
       pageViews: session.pageViews,
       ctaClicks: session.ctaClicks,
-      conversionRate: session.pageViews > 0 ? (session.ctaClicks / session.pageViews) * 100 : 0
+      conversionRate:
+        session.pageViews > 0
+          ? (session.ctaClicks / session.pageViews) * 100
+          : 0,
     };
   };
 
@@ -263,16 +272,16 @@ export function useCTATracking() {
    * 保存事件到本地存储
    */
   const saveEventToLocal = (event: CTAEventData) => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
-    const events = localStorage.getItem('cta_tracking_events');
+    const events = localStorage.getItem("cta_tracking_events");
     let eventList: CTAEventData[] = [];
 
     if (events) {
       try {
         eventList = JSON.parse(events);
       } catch (error) {
-        console.warn('Failed to parse local events:', error);
+        console.warn("Failed to parse local events:", error);
       }
     }
 
@@ -283,22 +292,22 @@ export function useCTATracking() {
       eventList = eventList.slice(-1000);
     }
 
-    localStorage.setItem('cta_tracking_events', JSON.stringify(eventList));
+    localStorage.setItem("cta_tracking_events", JSON.stringify(eventList));
   };
 
   /**
    * 获取本地存储的事件（用于调试和分析）
    */
   const getLocalEvents = (): CTAEventData[] => {
-    if (typeof window === 'undefined') return [];
+    if (typeof window === "undefined") return [];
 
-    const events = localStorage.getItem('cta_tracking_events');
+    const events = localStorage.getItem("cta_tracking_events");
     if (!events) return [];
 
     try {
       return JSON.parse(events);
     } catch (error) {
-      console.warn('Failed to parse local events:', error);
+      console.warn("Failed to parse local events:", error);
       return [];
     }
   };
@@ -307,8 +316,8 @@ export function useCTATracking() {
    * 清理本地事件数据
    */
   const clearLocalEvents = (): void => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('cta_tracking_events');
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("cta_tracking_events");
     }
   };
 
@@ -318,7 +327,7 @@ export function useCTATracking() {
     getSessionStats,
     getLocalEvents,
     clearLocalEvents,
-    sessionId: session.id
+    sessionId: session.id,
   };
 }
 
@@ -326,11 +335,11 @@ export function useCTATracking() {
  * 获取所有CTA追踪数据（用于报告和分析）
  */
 export function getAllCTATrackingData() {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
 
   const session = getUserSession();
   const events = (() => {
-    const stored = localStorage.getItem('cta_tracking_events');
+    const stored = localStorage.getItem("cta_tracking_events");
     if (!stored) return [];
     try {
       return JSON.parse(stored) as CTAEventData[];
@@ -344,18 +353,24 @@ export function getAllCTATrackingData() {
     events,
     summary: {
       totalEvents: events.length,
-      uniqueButtons: [...new Set(events.map(e => e.buttonText))],
-      eventsByLocation: events.reduce((acc, e) => {
-        acc[e.buttonLocation] = (acc[e.buttonLocation] || 0) + 1;
-        return acc;
-      }, {} as Record<string, number>),
-      eventsByVariant: events.reduce((acc, e) => {
-        if (e.abTestVariant) {
-          acc[e.abTestVariant] = (acc[e.abTestVariant] || 0) + 1;
-        }
-        return acc;
-      }, {} as Record<string, number>)
-    }
+      uniqueButtons: [...new Set(events.map((e) => e.buttonText))],
+      eventsByLocation: events.reduce(
+        (acc, e) => {
+          acc[e.buttonLocation] = (acc[e.buttonLocation] || 0) + 1;
+          return acc;
+        },
+        {} as Record<string, number>,
+      ),
+      eventsByVariant: events.reduce(
+        (acc, e) => {
+          if (e.abTestVariant) {
+            acc[e.abTestVariant] = (acc[e.abTestVariant] || 0) + 1;
+          }
+          return acc;
+        },
+        {} as Record<string, number>,
+      ),
+    },
   };
 }
 
@@ -364,35 +379,35 @@ export function getAllCTATrackingData() {
  */
 export function exportCTADataToCSV(): string {
   const data = getAllCTATrackingData();
-  if (!data || data.events.length === 0) return '';
+  if (!data || data.events.length === 0) return "";
 
   const headers = [
-    'Timestamp',
-    'Button Text',
-    'Button Location',
-    'Destination',
-    'Locale',
-    'AB Test Variant',
-    'AB Test ID',
-    'Session ID',
-    'Device Type',
-    'Page URL',
-    'Referrer'
+    "Timestamp",
+    "Button Text",
+    "Button Location",
+    "Destination",
+    "Locale",
+    "AB Test Variant",
+    "AB Test ID",
+    "Session ID",
+    "Device Type",
+    "Page URL",
+    "Referrer",
   ];
 
-  const rows = data.events.map(event => [
+  const rows = data.events.map((event) => [
     event.timestamp,
     event.buttonText,
     event.buttonLocation,
     event.destination,
     event.locale,
-    event.abTestVariant || '',
-    event.abTestId || '',
-    event.sessionId || '',
-    'unknown', // 可以扩展获取设备类型
-    event.pageUrl || '',
-    event.referrer || ''
+    event.abTestVariant || "",
+    event.abTestId || "",
+    event.sessionId || "",
+    "unknown", // 可以扩展获取设备类型
+    event.pageUrl || "",
+    event.referrer || "",
   ]);
 
-  return [headers, ...rows].map(row => row.join(',')).join('\n');
+  return [headers, ...rows].map((row) => row.join(",")).join("\n");
 }

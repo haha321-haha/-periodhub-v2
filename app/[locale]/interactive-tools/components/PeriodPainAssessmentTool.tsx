@@ -7,13 +7,19 @@ interface PeriodPainAssessmentToolProps {
   locale: string;
 }
 
+interface PeriodPainResult {
+  severity: "low" | "medium" | "high";
+  advice: string;
+  needConsult: boolean;
+}
+
 export default function PeriodPainAssessmentTool({
   locale,
 }: PeriodPainAssessmentToolProps) {
   const [intensity, setIntensity] = useState("");
   const [onset, setOnset] = useState("");
   const [symptoms, setSymptoms] = useState<string[]>([]);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<PeriodPainResult | null>(null);
 
   const t = useTranslations("periodPainAssessmentPage.tool");
 

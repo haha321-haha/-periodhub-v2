@@ -5,7 +5,8 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   Briefcase,
   TrendingUp,
@@ -14,11 +15,9 @@ import {
   CheckCircle,
   BarChart3,
   PieChart,
-  Calendar,
   Clock,
   Target,
   Users,
-  Activity,
 } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
@@ -48,16 +47,22 @@ interface ProductivityInsight {
   description: string;
   impact: "positive" | "negative" | "neutral";
   recommendation: string;
-  icon: any;
+  icon: LucideIcon;
+}
+
+type WorkTabId = "overview" | "patterns" | "productivity" | "insights";
+
+interface WorkTab {
+  id: WorkTabId;
+  label: string;
+  icon: LucideIcon;
 }
 
 export default function WorkImpactAnalysis() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
   const calendar = useCalendar() as CalendarState;
-  const [activeTab, setActiveTab] = useState<
-    "overview" | "patterns" | "productivity" | "insights"
-  >("overview");
+  const [activeTab, setActiveTab] = useState<WorkTabId>("overview");
   const [workData, setWorkData] = useState<WorkImpactData[]>([]);
   const [patterns, setPatterns] = useState<WorkPattern[]>([]);
   const [insights, setInsights] = useState<ProductivityInsight[]>([]);
@@ -65,14 +70,43 @@ export default function WorkImpactAnalysis() {
   // 从 store 读取 periodData
   const periodData = calendar.periodData || [];
 
+  const tabs: WorkTab[] = [
+    {
+      id: "overview",
+      label: t("workAnalysis.tabs.overview"),
+      icon: BarChart3,
+    },
+    {
+      id: "patterns",
+      label: t("workAnalysis.tabs.patterns"),
+      icon: PieChart,
+    },
+    {
+      id: "productivity",
+      label: t("workAnalysis.tabs.productivity"),
+      icon: Target,
+    },
+    {
+      id: "insights",
+      label: t("workAnalysis.tabs.insights"),
+      icon: Users,
+    },
+  ];
+
   useEffect(() => {
     analyzeWorkImpact();
     generateWorkPatterns();
     generateInsights();
-  }, [periodData, locale]);
+  }, [
+    periodData,
+    locale,
+    analyzeWorkImpact,
+    generateWorkPatterns,
+    generateInsights,
+  ]);
 
   // 分析工作影响数据
-  const analyzeWorkImpact = () => {
+  const analyzeWorkImpact = useCallback(() => {
     const workImpacts: WorkImpactData[] = [];
 
     periodData.forEach((record) => {
@@ -103,10 +137,10 @@ export default function WorkImpactAnalysis() {
         (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
       ),
     );
-  };
+  }, [periodData]);
 
   // 生成工作模式
-  const generateWorkPatterns = () => {
+  const generateWorkPatterns = useCallback(() => {
     const patterns: WorkPattern[] = [];
 
     // 分析不同阶段的工作影响
@@ -138,10 +172,10 @@ export default function WorkImpactAnalysis() {
     });
 
     setPatterns(patterns);
-  };
+  }, [periodData, workData, t]);
 
   // 生成洞察
-  const generateInsights = () => {
+  const generateInsights = useCallback(() => {
     const insights: ProductivityInsight[] = [];
 
     const avgEfficiency =
@@ -193,7 +227,7 @@ export default function WorkImpactAnalysis() {
     }
 
     setInsights(insights);
-  };
+  }, [workData, t]);
 
   // 辅助函数
   const calculateWorkEfficiency = (painLevel: number): number => {
@@ -617,31 +651,10 @@ export default function WorkImpactAnalysis() {
       {/* 标签页导航 */}
       <div className="mb-6">
         <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
-          {[
-            {
-              id: "overview",
-              label: t("workAnalysis.tabs.overview"),
-              icon: BarChart3,
-            },
-            {
-              id: "patterns",
-              label: t("workAnalysis.tabs.patterns"),
-              icon: PieChart,
-            },
-            {
-              id: "productivity",
-              label: t("workAnalysis.tabs.productivity"),
-              icon: Target,
-            },
-            {
-              id: "insights",
-              label: t("workAnalysis.tabs.insights"),
-              icon: Users,
-            },
-          ].map((tab) => (
+          {tabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
+              onClick={() => setActiveTab(tab.id)}
               className={`flex-1 flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === tab.id
                   ? "bg-white text-primary-600 shadow-sm"

@@ -3,7 +3,12 @@
  * 实现数据脱敏、权限控制和安全提示
  */
 
-import { PeriodRecord, NutritionRecommendation, ExportType } from "../types";
+import {
+  PeriodRecord,
+  NutritionRecommendation,
+  ExportType,
+  FlowType,
+} from "../types";
 import { getTranslations } from "next-intl/server";
 
 type TFunction = Awaited<ReturnType<typeof getTranslations>>;
@@ -25,13 +30,28 @@ export interface AuditLogEntry {
   userAgent?: string;
 }
 
+type PeriodMaskPayload = { data?: PeriodRecord[] };
+type NutritionMaskPayload = { data?: NutritionRecommendation[] };
+type CombinedMaskPayload = {
+  period?: PeriodRecord[];
+  nutrition?: NutritionRecommendation[];
+};
+type MaskablePayload =
+  | PeriodMaskPayload
+  | NutritionMaskPayload
+  | CombinedMaskPayload;
+
 export class PrivacyProtectionManager {
   private locale: string;
   private settings: PrivacySettings;
   private auditLog: AuditLogEntry[] = [];
   private t?: TFunction;
 
-  constructor(locale: string, settings?: Partial<PrivacySettings>, t?: TFunction) {
+  constructor(
+    locale: string,
+    settings?: Partial<PrivacySettings>,
+    t?: TFunction,
+  ) {
     this.locale = locale;
     this.t = t;
     this.settings = {
@@ -47,7 +67,10 @@ export class PrivacyProtectionManager {
   /**
    * 数据脱敏处理
    */
-  maskSensitiveData(data: any, dataType: ExportType): any {
+  maskSensitiveData<T extends MaskablePayload>(
+    data: T,
+    dataType: ExportType,
+  ): T {
     if (!this.settings.enableDataMasking) {
       return data;
     }
@@ -56,11 +79,11 @@ export class PrivacyProtectionManager {
 
     switch (dataType) {
       case "period":
-        return this.maskPeriodData(maskedData);
+        return this.maskPeriodData(maskedData as PeriodMaskPayload) as T;
       case "nutrition":
-        return this.maskNutritionData(maskedData);
+        return this.maskNutritionData(maskedData as NutritionMaskPayload) as T;
       case "all":
-        return this.maskAllData(maskedData);
+        return this.maskAllData(maskedData as CombinedMaskPayload) as T;
       default:
         return maskedData;
     }
@@ -69,7 +92,7 @@ export class PrivacyProtectionManager {
   /**
    * 经期数据脱敏
    */
-  private maskPeriodData(data: any): any {
+  private maskPeriodData<T extends PeriodMaskPayload>(data: T): T {
     if (Array.isArray(data.data)) {
       data.data = data.data.map((record: PeriodRecord) => ({
         ...record,
@@ -80,7 +103,7 @@ export class PrivacyProtectionManager {
           ? this.maskPainLevel(record.painLevel)
           : null,
         // 保留流量类型但脱敏具体描述
-        flow: record.flow ? this.maskFlowType(record.flow) : null,
+        flow: record.flow ? this.maskFlowType() : null,
         // 脱敏备注信息
         notes: record.notes ? this.maskNotes(record.notes) : undefined,
       }));
@@ -91,7 +114,7 @@ export class PrivacyProtectionManager {
   /**
    * 营养数据脱敏
    */
-  private maskNutritionData(data: any): any {
+  private maskNutritionData<T extends NutritionMaskPayload>(data: T): T {
     if (Array.isArray(data.data)) {
       data.data = data.data.map((item: NutritionRecommendation) => ({
         ...item,
@@ -111,7 +134,7 @@ export class PrivacyProtectionManager {
   /**
    * 全部数据脱敏
    */
-  private maskAllData(data: any): any {
+  private maskAllData(data: CombinedMaskPayload): CombinedMaskPayload {
     if (data.period) {
       data.period = this.maskPeriodData({ data: data.period }).data;
     }
@@ -143,7 +166,7 @@ export class PrivacyProtectionManager {
   /**
    * 流量类型脱敏 - 保留类型，脱敏具体描述
    */
-  private maskFlowType(flow: string): string {
+  private maskFlowType(): FlowType {
     const flowTypes = ["light", "medium", "heavy"];
     return flowTypes[Math.floor(Math.random() * flowTypes.length)];
   }
@@ -359,7 +382,11 @@ export class PrivacyProtectionManager {
    */
   generatePrivacyReport(): string {
     const report = {
-      title: this.t ? this.t("privacy.reportTitle") : (this.locale === "zh" ? "隐私保护报告" : "Privacy Protection Report"),
+      title: this.t
+        ? this.t("privacy.reportTitle")
+        : this.locale === "zh"
+          ? "隐私保护报告"
+          : "Privacy Protection Report",
       settings: this.settings,
       auditLogCount: this.auditLog.length,
       lastActivity:

@@ -54,11 +54,13 @@ function DataRetentionSection({
 
   // 计算数据统计
   const calculateStats = () => {
-    const now = new Date();
     const sixMonthsAgo = new Date();
     sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - RETENTION_PERIOD_MONTHS);
     const warningDate = new Date();
-    warningDate.setMonth(warningDate.getMonth() - (RETENTION_PERIOD_MONTHS * 30 - WARNING_DAYS) / 30);
+    warningDate.setMonth(
+      warningDate.getMonth() -
+        (RETENTION_PERIOD_MONTHS * 30 - WARNING_DAYS) / 30,
+    );
 
     const allRecords = periodData || [];
     const validRecords = allRecords.filter((r) => {
@@ -79,13 +81,14 @@ function DataRetentionSection({
       }
     });
 
-    const oldestRecord = validRecords.length > 0
-      ? validRecords.reduce((oldest, current) => {
-          const currentDate = new Date(current.date);
-          const oldestDate = new Date(oldest.date);
-          return currentDate < oldestDate ? current : oldest;
-        })
-      : null;
+    const oldestRecord =
+      validRecords.length > 0
+        ? validRecords.reduce((oldest, current) => {
+            const currentDate = new Date(current.date);
+            const oldestDate = new Date(oldest.date);
+            return currentDate < oldestDate ? current : oldest;
+          })
+        : null;
 
     // 估算存储大小（粗略估算）
     const estimatedSize = JSON.stringify(allRecords).length / 1024; // KB
@@ -111,15 +114,6 @@ function DataRetentionSection({
     });
   };
 
-  // 计算距离过期天数
-  const getDaysUntilExpiry = (recordDate: Date) => {
-    const sixMonthsAgo = new Date();
-    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - RETENTION_PERIOD_MONTHS);
-    const diffTime = recordDate.getTime() - sixMonthsAgo.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays;
-  };
-
   return (
     <div className="space-y-6">
       <div>
@@ -138,8 +132,7 @@ function DataRetentionSection({
           <Info className="h-5 w-5 text-blue-400 mt-0.5 mr-3 flex-shrink-0" />
           <div className="flex-1">
             <p className="text-sm text-blue-700 font-medium mb-1">
-              {t("userPreferences.retentionPolicy") ||
-                "数据保留期限"}
+              {t("userPreferences.retentionPolicy") || "数据保留期限"}
             </p>
             <p className="text-sm text-blue-600">
               {t("userPreferences.retentionPolicyDescription") ||
@@ -156,12 +149,13 @@ function DataRetentionSection({
             <AlertTriangle className="h-5 w-5 text-yellow-400 mt-0.5 mr-3 flex-shrink-0" />
             <div className="flex-1">
               <p className="text-sm text-yellow-700 font-medium mb-1">
-                {t("userPreferences.expiringDataWarning") ||
-                  "数据即将过期提醒"}
+                {t("userPreferences.expiringDataWarning") || "数据即将过期提醒"}
               </p>
               <p className="text-sm text-yellow-600 mb-3">
-                {(t("userPreferences.expiringDataDescription") ||
-                  `您有 {count} 条记录将在 30 天后自动清理。建议导出备份以保留完整历史记录。`).replace('{count}', stats.expiringRecords.toString())}
+                {(
+                  t("userPreferences.expiringDataDescription") ||
+                  `您有 {count} 条记录将在 30 天后自动清理。建议导出备份以保留完整历史记录。`
+                ).replace("{count}", stats.expiringRecords.toString())}
               </p>
               <button
                 onClick={onNavigateToExport}
@@ -275,6 +269,7 @@ function DataRetentionSection({
 }
 
 export default function UserPreferencesSettings() {
+  const t = useTranslations("workplaceWellness");
   const preferences = useUserPreferences();
   const calendar = useCalendar() as CalendarState;
   const {
@@ -294,7 +289,11 @@ export default function UserPreferencesSettings() {
   // 使用 useMemo 确保在 preferences 变化时重新计算，同时避免不必要的重新计算
   const safePreferences = useMemo(() => {
     // 如果 preferences 不存在或不是对象，直接返回默认值
-    if (!preferences || typeof preferences !== 'object' || preferences === null) {
+    if (
+      !preferences ||
+      typeof preferences !== "object" ||
+      preferences === null
+    ) {
       return {
         ui: { ...DEFAULT_UI_PREFERENCES },
         notifications: { ...DEFAULT_NOTIFICATION_SETTINGS },
@@ -320,43 +319,58 @@ export default function UserPreferencesSettings() {
     const preferencesExport = preferences?.export;
 
     // 确保所有嵌套属性都存在且是对象，使用深度合并确保所有属性都存在
-    const safeUI = (preferencesUI && typeof preferencesUI === 'object' && preferencesUI !== null)
-      ? { ...DEFAULT_UI_PREFERENCES, ...preferencesUI }
-      : { ...DEFAULT_UI_PREFERENCES };
+    const safeUI =
+      preferencesUI &&
+      typeof preferencesUI === "object" &&
+      preferencesUI !== null
+        ? { ...DEFAULT_UI_PREFERENCES, ...preferencesUI }
+        : { ...DEFAULT_UI_PREFERENCES };
 
     // 确保 theme 属性存在
     if (!safeUI.theme) {
       safeUI.theme = DEFAULT_UI_PREFERENCES.theme;
     }
 
-    const safeNotifications = (preferencesNotifications && typeof preferencesNotifications === 'object' && preferencesNotifications !== null)
-      ? { ...DEFAULT_NOTIFICATION_SETTINGS, ...preferencesNotifications }
-      : { ...DEFAULT_NOTIFICATION_SETTINGS };
+    const safeNotifications =
+      preferencesNotifications &&
+      typeof preferencesNotifications === "object" &&
+      preferencesNotifications !== null
+        ? { ...DEFAULT_NOTIFICATION_SETTINGS, ...preferencesNotifications }
+        : { ...DEFAULT_NOTIFICATION_SETTINGS };
 
-    const safePrivacy = (preferencesPrivacy && typeof preferencesPrivacy === 'object' && preferencesPrivacy !== null)
-      ? { ...DEFAULT_PRIVACY_SETTINGS, ...preferencesPrivacy }
-      : { ...DEFAULT_PRIVACY_SETTINGS };
+    const safePrivacy =
+      preferencesPrivacy &&
+      typeof preferencesPrivacy === "object" &&
+      preferencesPrivacy !== null
+        ? { ...DEFAULT_PRIVACY_SETTINGS, ...preferencesPrivacy }
+        : { ...DEFAULT_PRIVACY_SETTINGS };
 
-    const safeAccessibility = (preferencesAccessibility && typeof preferencesAccessibility === 'object' && preferencesAccessibility !== null)
-      ? { ...DEFAULT_ACCESSIBILITY_SETTINGS, ...preferencesAccessibility }
-      : { ...DEFAULT_ACCESSIBILITY_SETTINGS };
+    const safeAccessibility =
+      preferencesAccessibility &&
+      typeof preferencesAccessibility === "object" &&
+      preferencesAccessibility !== null
+        ? { ...DEFAULT_ACCESSIBILITY_SETTINGS, ...preferencesAccessibility }
+        : { ...DEFAULT_ACCESSIBILITY_SETTINGS };
 
-    const safeExport = (preferencesExport && typeof preferencesExport === 'object' && preferencesExport !== null)
-      ? {
-          defaultFormat: "pdf" as ExtendedExportFormat,
-          defaultTemplate: undefined,
-          autoSave: true,
-          includeCharts: true,
-          compression: false,
-          ...preferencesExport,
-        }
-      : {
-          defaultFormat: "pdf" as ExtendedExportFormat,
-          defaultTemplate: undefined,
-          autoSave: true,
-          includeCharts: true,
-          compression: false,
-        };
+    const safeExport =
+      preferencesExport &&
+      typeof preferencesExport === "object" &&
+      preferencesExport !== null
+        ? {
+            defaultFormat: "pdf" as ExtendedExportFormat,
+            defaultTemplate: undefined,
+            autoSave: true,
+            includeCharts: true,
+            compression: false,
+            ...preferencesExport,
+          }
+        : {
+            defaultFormat: "pdf" as ExtendedExportFormat,
+            defaultTemplate: undefined,
+            autoSave: true,
+            includeCharts: true,
+            compression: false,
+          };
 
     return {
       ui: safeUI,
@@ -375,17 +389,17 @@ export default function UserPreferencesSettings() {
   if (
     !safePreferences ||
     !safePreferences.ui ||
-    typeof safePreferences.ui !== 'object' ||
+    typeof safePreferences.ui !== "object" ||
     safePreferences.ui === null ||
     !safePreferences.ui.theme ||
     !safePreferences.notifications ||
-    typeof safePreferences.notifications !== 'object' ||
+    typeof safePreferences.notifications !== "object" ||
     !safePreferences.privacy ||
-    typeof safePreferences.privacy !== 'object' ||
+    typeof safePreferences.privacy !== "object" ||
     !safePreferences.accessibility ||
-    typeof safePreferences.accessibility !== 'object' ||
+    typeof safePreferences.accessibility !== "object" ||
     !safePreferences.export ||
-    typeof safePreferences.export !== 'object'
+    typeof safePreferences.export !== "object"
   ) {
     return (
       <div className="p-6">
@@ -394,9 +408,13 @@ export default function UserPreferencesSettings() {
     );
   }
 
-  const t = useTranslations("workplaceWellness");
   const [activeTab, setActiveTab] = useState<
-    "ui" | "notifications" | "privacy" | "accessibility" | "export" | "dataRetention"
+    | "ui"
+    | "notifications"
+    | "privacy"
+    | "accessibility"
+    | "export"
+    | "dataRetention"
   >("ui");
   const [validationResult, setValidationResult] =
     useState<SettingsValidationResult | null>(null);
@@ -410,7 +428,7 @@ export default function UserPreferencesSettings() {
     }
     try {
       const result = validateSettings();
-      if (result && typeof result === 'object' && 'isValid' in result) {
+      if (result && typeof result === "object" && "isValid" in result) {
         setValidationResult(result);
         return result.isValid;
       }
@@ -559,7 +577,9 @@ export default function UserPreferencesSettings() {
                   {t("userPreferences.theme")}
                 </label>
                 <select
-                  value={safePreferences?.ui?.theme || DEFAULT_UI_PREFERENCES.theme}
+                  value={
+                    safePreferences?.ui?.theme || DEFAULT_UI_PREFERENCES.theme
+                  }
                   onChange={(e) => setTheme(e.target.value as Theme)}
                   className="w-full px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                 >
@@ -570,7 +590,11 @@ export default function UserPreferencesSettings() {
                   ))}
                 </select>
                 <p className="text-xs text-neutral-500 mt-1">
-                  {t(`themeConfig.${safePreferences?.ui?.theme || DEFAULT_UI_PREFERENCES.theme}.description`)}
+                  {t(
+                    `themeConfig.${
+                      safePreferences?.ui?.theme || DEFAULT_UI_PREFERENCES.theme
+                    }.description`,
+                  )}
                 </p>
               </div>
 
@@ -590,7 +614,9 @@ export default function UserPreferencesSettings() {
                   ))}
                 </select>
                 <p className="text-xs text-neutral-500 mt-1">
-                  {t(`fontSizeConfig.${safePreferences.ui.fontSize}.description`)}
+                  {t(
+                    `fontSizeConfig.${safePreferences.ui.fontSize}.description`,
+                  )}
                 </p>
               </div>
             </div>
@@ -964,56 +990,57 @@ export default function UserPreferencesSettings() {
             </h3>
 
             <div className="space-y-4">
-              {Object.entries(safePreferences.accessibility).map(([key, value]) => (
-                <div
-                  key={key}
-                  className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg"
-                >
-                  <div>
-                    <label className="text-sm font-medium text-neutral-700">
-                      {t(`userPreferences.${key}`) || key}
-                    </label>
-                    <p className="text-xs text-neutral-500">
-                      {key === "textScaling" ? `${value}x` : ""}
-                    </p>
-                  </div>
-                  {typeof value === "boolean" ? (
-                    <button
-                      onClick={() =>
-                        updateAccessibilitySettings({ [key]: !value } as Record<
-                          string,
-                          boolean
-                        >)
-                      }
-                      className={`
+              {Object.entries(safePreferences.accessibility).map(
+                ([key, value]) => (
+                  <div
+                    key={key}
+                    className="flex items-center justify-between p-4 bg-neutral-50 rounded-lg"
+                  >
+                    <div>
+                      <label className="text-sm font-medium text-neutral-700">
+                        {t(`userPreferences.${key}`) || key}
+                      </label>
+                      <p className="text-xs text-neutral-500">
+                        {key === "textScaling" ? `${value}x` : ""}
+                      </p>
+                    </div>
+                    {typeof value === "boolean" ? (
+                      <button
+                        onClick={() =>
+                          updateAccessibilitySettings({
+                            [key]: !value,
+                          } as Record<string, boolean>)
+                        }
+                        className={`
                         relative inline-flex h-6 w-11 items-center rounded-full transition-colors
                         ${value ? "bg-primary-600" : "bg-neutral-300"}
                       `}
-                    >
-                      <span
-                        className={`
+                      >
+                        <span
+                          className={`
                           inline-block h-4 w-4 transform rounded-full bg-white transition-transform
                           ${value ? "translate-x-6" : "translate-x-1"}
                         `}
+                        />
+                      </button>
+                    ) : (
+                      <input
+                        type="range"
+                        min="0.8"
+                        max="2.0"
+                        step="0.1"
+                        value={value}
+                        onChange={(e) =>
+                          updateAccessibilitySettings({
+                            [key]: parseFloat(e.target.value),
+                          } as Record<string, number>)
+                        }
+                        className="w-24"
                       />
-                    </button>
-                  ) : (
-                    <input
-                      type="range"
-                      min="0.8"
-                      max="2.0"
-                      step="0.1"
-                      value={value}
-                      onChange={(e) =>
-                        updateAccessibilitySettings({
-                          [key]: parseFloat(e.target.value),
-                        } as Record<string, number>)
-                      }
-                      className="w-24"
-                    />
-                  )}
-                </div>
-              ))}
+                    )}
+                  </div>
+                ),
+              )}
             </div>
           </div>
         )}

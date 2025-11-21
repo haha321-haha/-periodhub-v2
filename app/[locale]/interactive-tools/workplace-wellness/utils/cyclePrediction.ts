@@ -55,10 +55,8 @@ export class CyclePredictor {
       lastPeriod,
       averageCycleLength,
     );
-    const nextPredictedOvulation = this.predictNextOvulation(
-      nextPredictedPeriod,
-      averageCycleLength,
-    );
+    const nextPredictedOvulation =
+      this.predictNextOvulation(nextPredictedPeriod);
 
     const currentPhase = this.determineCurrentPhase(
       lastPeriod,
@@ -325,10 +323,7 @@ export class CyclePredictor {
   /**
    * 预测下次排卵期
    */
-  private predictNextOvulation(
-    nextPeriod: string | null,
-    averageCycleLength: number,
-  ): string | null {
+  private predictNextOvulation(nextPeriod: string | null): string | null {
     if (!nextPeriod) return null;
 
     const periodDate = new Date(nextPeriod);

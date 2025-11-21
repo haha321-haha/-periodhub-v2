@@ -18,16 +18,24 @@ import {
   validateRecommendationResult,
 } from "../utils/recommendationTestUtils";
 import { RecommendationFeedbackHistory } from "../types";
-import { CheckCircle, X, AlertTriangle, Clock, TrendingUp, BarChart3 } from "lucide-react";
+import {
+  CheckCircle,
+  X,
+  AlertTriangle,
+  Clock,
+  TrendingUp,
+  BarChart3,
+} from "lucide-react";
 import {
   analyzeRecommendationQuality,
   validateRecommendationReasonableness,
 } from "../utils/recommendationQualityAnalyzer";
 import { analyzeFeedback } from "../utils/feedbackAnalyzer";
-import {
-  generateOptimizationReport,
-} from "../utils/recommendationOptimizer";
+import { generateOptimizationReport } from "../utils/recommendationOptimizer";
 import { createUserDataSnapshot } from "../utils/dataAnalyzer";
+
+const formatErrorMessage = (error: unknown): string =>
+  error instanceof Error ? error.message : String(error ?? "Unknown error");
 
 interface TestResult {
   name: string;
@@ -46,8 +54,13 @@ export default function RecommendationSystemTest() {
     passed: number;
     failed: number;
   } | null>(null);
-  const [optimizationReport, setOptimizationReport] = useState<string | null>(null);
+  const [optimizationReport, setOptimizationReport] = useState<string | null>(
+    null,
+  );
   const [showOptimization, setShowOptimization] = useState(false);
+
+  const formatErrorMessage = (error: unknown): string =>
+    error instanceof Error ? error.message : String(error || "Unknown error");
 
   const runTests = async () => {
     setIsRunning(true);
@@ -72,7 +85,7 @@ export default function RecommendationSystemTest() {
         periodData,
         workImpact,
         nutrition,
-        feedbackHistory
+        feedbackHistory,
       );
 
       const duration = performance.now() - start;
@@ -87,12 +100,12 @@ export default function RecommendationSystemTest() {
         details: validation.errors.join(", ") || undefined,
         duration,
       });
-    } catch (error: any) {
+    } catch (error) {
       results.push({
         name: "正常数据推荐生成",
         passed: false,
         message: "测试失败",
-        details: error.message,
+        details: formatErrorMessage(error),
       });
     }
 
@@ -107,7 +120,7 @@ export default function RecommendationSystemTest() {
         periodData,
         workImpact,
         nutrition,
-        feedbackHistory
+        feedbackHistory,
       );
 
       const duration = performance.now() - start;
@@ -120,12 +133,12 @@ export default function RecommendationSystemTest() {
         details: validation.errors.join(", ") || undefined,
         duration,
       });
-    } catch (error: any) {
+    } catch (error) {
       results.push({
         name: "冷启动推荐生成",
         passed: false,
         message: "测试失败",
-        details: error.message,
+        details: formatErrorMessage(error),
       });
     }
 
@@ -141,12 +154,12 @@ export default function RecommendationSystemTest() {
         periodData,
         workImpact,
         nutrition,
-        feedbackHistory
+        feedbackHistory,
       );
 
       const duration = performance.now() - start;
       const painReliefCount = result.recommendations.filter(
-        (r) => r.category === "pain-relief" || r.category === "medical"
+        (r) => r.category === "pain-relief" || r.category === "medical",
       ).length;
 
       results.push({
@@ -156,12 +169,12 @@ export default function RecommendationSystemTest() {
         details: painReliefCount === 0 ? "应该推荐疼痛缓解内容" : undefined,
         duration,
       });
-    } catch (error: any) {
+    } catch (error) {
       results.push({
         name: "高疼痛等级推荐",
         passed: false,
         message: "测试失败",
-        details: error.message,
+        details: formatErrorMessage(error),
       });
     }
 
@@ -177,28 +190,27 @@ export default function RecommendationSystemTest() {
         periodData,
         workImpact,
         nutrition,
-        feedbackHistory
+        feedbackHistory,
       );
 
       const duration = performance.now() - start;
       const workAdjustmentCount = result.recommendations.filter(
-        (r) => r.category === "work-adjustment"
+        (r) => r.category === "work-adjustment",
       ).length;
 
       results.push({
         name: "低效率推荐",
         passed: workAdjustmentCount > 0,
         message: `推荐了 ${workAdjustmentCount} 个工作调整相关推荐`,
-        details:
-          workAdjustmentCount === 0 ? "应该推荐工作调整内容" : undefined,
+        details: workAdjustmentCount === 0 ? "应该推荐工作调整内容" : undefined,
         duration,
       });
-    } catch (error: any) {
+    } catch (error) {
       results.push({
         name: "低效率推荐",
         passed: false,
         message: "测试失败",
-        details: error.message,
+        details: formatErrorMessage(error),
       });
     }
 
@@ -213,7 +225,7 @@ export default function RecommendationSystemTest() {
           createTestPeriodData(10),
           createTestWorkImpactData(),
           createTestNutritionData(),
-          feedbackHistory
+          feedbackHistory,
         );
         times.push(performance.now() - start);
       }
@@ -228,15 +240,17 @@ export default function RecommendationSystemTest() {
         details:
           avgTime >= 500
             ? "性能需要优化（目标: <500ms）"
-            : `最快: ${Math.min(...times).toFixed(2)}ms, 最慢: ${maxTime.toFixed(2)}ms`,
+            : `最快: ${Math.min(...times).toFixed(
+                2,
+              )}ms, 最慢: ${maxTime.toFixed(2)}ms`,
         duration: avgTime,
       });
-    } catch (error: any) {
+    } catch (error) {
       results.push({
         name: "性能测试",
         passed: false,
         message: "测试失败",
-        details: error.message,
+        details: formatErrorMessage(error),
       });
     }
 
@@ -251,7 +265,7 @@ export default function RecommendationSystemTest() {
         periodData,
         workImpact,
         nutrition,
-        feedbackHistory
+        feedbackHistory,
       );
 
       const duration = performance.now() - start;
@@ -268,12 +282,12 @@ export default function RecommendationSystemTest() {
             : "推荐具有良好的多样性",
         duration,
       });
-    } catch (error: any) {
+    } catch (error) {
       results.push({
         name: "推荐多样性",
         passed: false,
         message: "测试失败",
-        details: error.message,
+        details: formatErrorMessage(error),
       });
     }
 
@@ -284,7 +298,7 @@ export default function RecommendationSystemTest() {
         [],
         createTestWorkImpactData(),
         createTestNutritionData(),
-        feedbackHistory
+        feedbackHistory,
       );
 
       const duration = performance.now() - start;
@@ -299,12 +313,12 @@ export default function RecommendationSystemTest() {
             : "冷启动处理正常",
         duration,
       });
-    } catch (error: any) {
+    } catch (error) {
       results.push({
         name: "空数据测试",
         passed: false,
         message: "测试失败",
-        details: error.message,
+        details: formatErrorMessage(error),
       });
     }
 
@@ -321,12 +335,12 @@ export default function RecommendationSystemTest() {
         details: items.length === 0 ? "应该返回通用推荐" : undefined,
         duration,
       });
-    } catch (error: any) {
+    } catch (error) {
       results.push({
         name: "冷启动推荐",
         passed: false,
         message: "测试失败",
-        details: error.message,
+        details: formatErrorMessage(error),
       });
     }
 
@@ -341,12 +355,19 @@ export default function RecommendationSystemTest() {
         periodData,
         workImpact,
         nutrition,
-        feedbackHistory
+        feedbackHistory,
       );
 
-      const userData = createUserDataSnapshot(periodData, workImpact, nutrition);
+      const userData = createUserDataSnapshot(
+        periodData,
+        workImpact,
+        nutrition,
+      );
       const qualityAnalysis = analyzeRecommendationQuality(result, userData);
-      const reasonableness = validateRecommendationReasonableness(result, userData);
+      const reasonableness = validateRecommendationReasonableness(
+        result,
+        userData,
+      );
 
       const duration = performance.now() - start;
 
@@ -354,17 +375,18 @@ export default function RecommendationSystemTest() {
         name: "推荐质量分析",
         passed: qualityAnalysis.metrics.overall >= 60 && reasonableness.valid,
         message: `综合质量: ${qualityAnalysis.metrics.overall}/100`,
-        details: reasonableness.issues.length > 0
-          ? reasonableness.issues.join(", ")
-          : `相关性: ${qualityAnalysis.metrics.relevance}, 多样性: ${qualityAnalysis.metrics.diversity}`,
+        details:
+          reasonableness.issues.length > 0
+            ? reasonableness.issues.join(", ")
+            : `相关性: ${qualityAnalysis.metrics.relevance}, 多样性: ${qualityAnalysis.metrics.diversity}`,
         duration,
       });
-    } catch (error: any) {
+    } catch (error) {
       results.push({
         name: "推荐质量分析",
         passed: false,
         message: "测试失败",
-        details: error.message,
+        details: formatErrorMessage(error),
       });
     }
 
@@ -384,12 +406,12 @@ export default function RecommendationSystemTest() {
             : "暂无反馈数据",
         duration,
       });
-    } catch (error: any) {
+    } catch (error) {
       results.push({
         name: "用户反馈分析",
         passed: false,
         message: "测试失败",
-        details: error.message,
+        details: formatErrorMessage(error),
       });
     }
 
@@ -409,13 +431,21 @@ export default function RecommendationSystemTest() {
         periodData,
         workImpact,
         nutrition,
-        feedbackHistory
+        feedbackHistory,
       );
-      const userData = createUserDataSnapshot(periodData, workImpact, nutrition);
-      const report = generateOptimizationReport(result, userData, feedbackHistory);
+      const userData = createUserDataSnapshot(
+        periodData,
+        workImpact,
+        nutrition,
+      );
+      const report = generateOptimizationReport(
+        result,
+        userData,
+        feedbackHistory,
+      );
       setOptimizationReport(report);
     } catch (error) {
-      console.error("Error generating optimization report:", error);
+      setOptimizationReport(formatErrorMessage(error));
     }
 
     setIsRunning(false);
@@ -425,12 +455,8 @@ export default function RecommendationSystemTest() {
     <div className="bg-white rounded-xl shadow-sm border border-neutral-100 p-6">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-xl font-bold text-gray-900 mb-1">
-            推荐系统测试
-          </h2>
-          <p className="text-sm text-gray-600">
-            测试推荐系统的各项功能和性能
-          </p>
+          <h2 className="text-xl font-bold text-gray-900 mb-1">推荐系统测试</h2>
+          <p className="text-sm text-gray-600">测试推荐系统的各项功能和性能</p>
         </div>
         <div className="flex items-center gap-2">
           {optimizationReport && (
@@ -562,4 +588,3 @@ export default function RecommendationSystemTest() {
     </div>
   );
 }
-

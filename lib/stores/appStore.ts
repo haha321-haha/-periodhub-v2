@@ -311,30 +311,26 @@ export const useAppStore = create<AppState & AppActions>()(
         // 错误记录
         recordError: (error) => {
           set((state) => {
-            // 增加错误计数
             state.performance.errorCount += 1;
-
-            // 记录错误到UI状态
             state.ui.error = error.message;
-
-            // 可以在这里添加更详细的错误日志记录
-            console.error("App Error Recorded:", error);
           });
         },
 
         // 模态框操作记录
-        recordModalAction: (action) => {
+        recordModalAction: (_action) => {
           set((state) => {
-            // 记录模态框操作到性能监控
-            console.log("Modal Action Recorded:", action);
+            const key = "modalActions";
+            state.performance.apiResponseTimes[key] =
+              (state.performance.apiResponseTimes[key] || 0) + 1;
           });
         },
 
         // Toast操作记录
-        recordToastAction: (action) => {
+        recordToastAction: (_action) => {
           set((state) => {
-            // 记录Toast操作到性能监控
-            console.log("Toast Action Recorded:", action);
+            const key = "toastActions";
+            state.performance.apiResponseTimes[key] =
+              (state.performance.apiResponseTimes[key] || 0) + 1;
           });
         },
       })),

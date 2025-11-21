@@ -1,7 +1,15 @@
 "use client";
 
-import React, { Suspense, lazy, ComponentType } from "react";
+import React, {
+  Suspense,
+  lazy,
+  ComponentType,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import LoadingSpinner from "./LoadingSpinner";
+import { logError, logInfo, logWarn } from "../../../../../lib/debug-logger";
 
 /**
  * P3阶段：懒加载实现
@@ -31,9 +39,9 @@ const DelayedSuspense: React.FC<{
   fallback?: React.ReactNode;
   delay?: number;
 }> = ({ children, fallback, delay = 0 }) => {
-  const [showContent, setShowContent] = React.useState(delay === 0);
+  const [showContent, setShowContent] = useState(delay === 0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (delay > 0) {
       const timer = setTimeout(() => setShowContent(true), delay);
       return () => clearTimeout(timer);
@@ -53,7 +61,7 @@ const DelayedSuspense: React.FC<{
  * @param fallback 加载状态组件
  * @param delay 延迟加载时间(ms)
  */
-export function createLazyComponent<T extends ComponentType<any>>(
+export function createLazyComponent<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
   fallback?: React.ReactNode,
   delay: number = 0,
@@ -63,12 +71,15 @@ export function createLazyComponent<T extends ComponentType<any>>(
   return function LazyWrapper(
     props: React.ComponentProps<T> & LazyComponentProps,
   ) {
+    const { height, delay: overrideDelay, ...componentProps } = props;
+    const suspenseDelay = overrideDelay ?? delay;
+
     return (
       <DelayedSuspense
-        fallback={fallback || <DefaultFallback height={props.height} />}
-        delay={delay}
+        fallback={fallback || <DefaultFallback height={height} />}
+        delay={suspenseDelay}
       >
-        <LazyComponent {...(props as any)} />
+        <LazyComponent {...(componentProps as React.ComponentProps<T>)} />
       </DelayedSuspense>
     );
   };
@@ -78,16 +89,16 @@ export function createLazyComponent<T extends ComponentType<any>>(
  * 预加载组件
  * 在空闲时间预加载组件，提升用户体验
  */
-export function preloadComponent(importFunc: () => Promise<any>) {
+export function preloadComponent(importFunc: () => Promise<unknown>) {
+  const load = () => {
+    importFunc().catch((error) => logError("懒加载时预加载组件失败", error));
+  };
+
   if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-    requestIdleCallback(() => {
-      importFunc().catch(console.error);
-    });
+    requestIdleCallback(load);
   } else {
     // 降级到setTimeout
-    setTimeout(() => {
-      importFunc().catch(console.error);
-    }, 100);
+    setTimeout(load, 100);
   }
 }
 
@@ -95,10 +106,11 @@ export function preloadComponent(importFunc: () => Promise<any>) {
  * 页面级组件的懒加载
  * 用于大型页面的代码分割
  */
-export function createLazyPage<T extends ComponentType<any>>(
+export function createLazyPage<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
-  pageName: string,
+  _pageName: string,
 ) {
+  void _pageName;
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="400px" />,
@@ -110,10 +122,11 @@ export function createLazyPage<T extends ComponentType<any>>(
  * 模块级组件的懒加载
  * 用于功能模块的代码分割
  */
-export function createLazyModule<T extends ComponentType<any>>(
+export function createLazyModule<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
-  moduleName: string,
+  _moduleName: string,
 ) {
+  void _moduleName;
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="300px" />,
@@ -125,10 +138,11 @@ export function createLazyModule<T extends ComponentType<any>>(
  * 工具组件级别的懒加载
  * 用于小型工具组件的代码分割
  */
-export function createLazyTool<T extends ComponentType<any>>(
+export function createLazyTool<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
-  toolName: string,
+  _toolName: string,
 ) {
+  void _toolName;
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="150px" />,
@@ -165,9 +179,9 @@ export async function preloadCriticalComponents() {
     criticalComponents.map(async ({ name, importFunc }) => {
       try {
         await importFunc();
-        console.log(`✅ 预加载组件成功: ${name}`);
+        logInfo(`✅ 预加载组件成功: ${name}`);
       } catch (error) {
-        console.warn(`⚠️ 预加载组件失败: ${name}`, error);
+        logWarn(`⚠️ 预加载组件失败: ${name}`, error);
       }
     }),
   );
@@ -175,24 +189,22 @@ export async function preloadCriticalComponents() {
   const successCount = results.filter(
     (result) => result.status === "fulfilled",
   ).length;
-  console.log(
-    `📊 预加载完成: ${successCount}/${criticalComponents.length} 个组件`,
-  );
+  logInfo(`📊 预加载完成: ${successCount}/${criticalComponents.length} 个组件`);
 }
 
 /**
  * 懒加载钩子
  * 用于在组件中动态加载其他组件
  */
-export function useLazyComponent<T extends ComponentType<any>>(
+export function useLazyComponent<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
   componentName: string,
 ) {
-  const [Component, setComponent] = React.useState<T | null>(null);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<Error | null>(null);
+  const [Component, setComponent] = useState<T | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (Component || loading) return;
 
     setLoading(true);
@@ -203,12 +215,12 @@ export function useLazyComponent<T extends ComponentType<any>>(
       })
       .catch((err) => {
         setError(err);
-        console.error(`懒加载组件失败: ${componentName}`, err);
+        logError(`懒加载组件失败: ${componentName}`, err);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, [importFunc, componentName, Component, loading]);
+  }, [Component, importFunc, loading, componentName]);
 
   return { Component, loading, error };
 }
@@ -218,13 +230,13 @@ export function useLazyComponent<T extends ComponentType<any>>(
  * 根据条件决定是否加载组件
  */
 export function useConditionalLoading() {
-  const [isVisible, setIsVisible] = React.useState(false);
-  const [hasIntersected, setHasIntersected] = React.useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasIntersected, setHasIntersected] = useState(false);
 
-  const observerRef = React.useRef<IntersectionObserver | null>(null);
-  const elementRef = React.useRef<HTMLDivElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const elementRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!elementRef.current) return;
 
     observerRef.current = new IntersectionObserver(
@@ -252,7 +264,7 @@ export function useConditionalLoading() {
 }
 
 // 导出所有懒加载工具
-export default {
+const LazyComponentsModule = {
   createLazyComponent,
   createLazyPage,
   createLazyModule,
@@ -262,3 +274,5 @@ export default {
   useLazyComponent,
   useConditionalLoading,
 };
+
+export default LazyComponentsModule;

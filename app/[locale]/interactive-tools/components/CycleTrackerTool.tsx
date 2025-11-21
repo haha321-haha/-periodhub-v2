@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import type { Prediction } from "../shared/types";
 
 interface CycleTrackerToolProps {
   locale: string;
@@ -19,14 +20,19 @@ interface HistoryRecord {
   };
 }
 
+interface Prediction {
+  nextPeriod: string;
+  ovulation: string;
+  fertilityWindow: {
+    start: string;
+    end: string;
+  };
+}
+
 export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
   const [lastPeriodDate, setLastPeriodDate] = useState("");
   const [cycleLength, setCycleLength] = useState(28);
-  const [prediction, setPrediction] = useState<{
-    nextPeriod: string;
-    ovulation: string;
-    fertilityWindow: { start: string; end: string };
-  } | null>(null);
+  const [prediction, setPrediction] = useState<Prediction | null>(null);
   const [historyRecords, setHistoryRecords] = useState<HistoryRecord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">(
@@ -81,7 +87,7 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
           }
         }
       } catch (error) {
-        console.error("Error loading saved data:", error);
+        // Error loading saved data - handled silently
         // 数据损坏时清除
         if (typeof window !== "undefined") {
           localStorage.removeItem(STORAGE_KEYS.CURRENT_DATA);
@@ -99,7 +105,7 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
   const saveCurrentData = (data: {
     lastPeriodDate: string;
     cycleLength: number;
-    prediction?: any;
+    prediction?: Prediction;
   }) => {
     if (typeof window === "undefined") return;
 
@@ -109,7 +115,7 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
       setSaveStatus("saved");
       setTimeout(() => setSaveStatus("idle"), 2000);
     } catch (error) {
-      console.error("Error saving data:", error);
+      // Error saving data - handled silently
       setSaveStatus("idle");
     }
   };
@@ -126,7 +132,7 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
         JSON.stringify(updatedHistory),
       );
     } catch (error) {
-      console.error("Error saving history:", error);
+      // Error saving history - handled silently
     }
   };
 

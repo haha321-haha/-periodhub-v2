@@ -5,7 +5,8 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   BarChart3,
   TrendingUp,
@@ -29,22 +30,27 @@ import {
   CycleStatistics,
 } from "../utils/cyclePrediction";
 import { PeriodRecord, CalendarState } from "../types";
+import { logError } from "../../../../lib/debug-logger";
+
+interface TrendRecord {
+  month: string;
+  cycleLength: number;
+  painLevel: number;
+  efficiency: number;
+}
+
+interface InsightCard {
+  type: "positive" | "negative" | "neutral";
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}
 
 interface DashboardData {
-  cycleAnalysis: CycleAnalysis | null;
-  statistics: CycleStatistics | null;
-  trends: {
-    month: string;
-    cycleLength: number;
-    painLevel: number;
-    efficiency: number;
-  }[];
-  insights: {
-    type: "positive" | "negative" | "neutral";
-    title: string;
-    description: string;
-    icon: any;
-  }[];
+  cycleAnalysis: CycleAnalysis;
+  statistics: CycleStatistics;
+  trends: TrendRecord[];
+  insights: InsightCard[];
 }
 
 export default function DataVisualizationDashboard() {
@@ -62,11 +68,7 @@ export default function DataVisualizationDashboard() {
   // 从 store 读取 periodData
   const periodData = calendar.periodData || [];
 
-  useEffect(() => {
-    generateDashboardData();
-  }, [periodData, locale]);
-
-  const generateDashboardData = async () => {
+  const generateDashboardData = useCallback(async () => {
     setLoading(true);
 
     try {
@@ -87,19 +89,23 @@ export default function DataVisualizationDashboard() {
         insights,
       });
     } catch (error) {
-      console.error("Error generating dashboard data:", error);
+      logError(
+        "Failed to generate dashboard data",
+        error,
+        "DataVisualizationDashboard",
+      );
+      setDashboardData(null);
     } finally {
       setLoading(false);
     }
-  };
+  }, [locale, periodData]);
 
-  const generateTrendData = (data: PeriodRecord[]) => {
-    const trends: {
-      month: string;
-      cycleLength: number;
-      painLevel: number;
-      efficiency: number;
-    }[] = [];
+  useEffect(() => {
+    generateDashboardData();
+  }, [generateDashboardData]);
+
+  const generateTrendData = (data: PeriodRecord[]): TrendRecord[] => {
+    const trends: TrendRecord[] = [];
     const monthlyData = new Map<string, PeriodRecord[]>();
 
     // 按月份分组数据
@@ -133,17 +139,10 @@ export default function DataVisualizationDashboard() {
   };
 
   const generateInsights = (
-    analysis: CycleAnalysis | null,
-    statistics: CycleStatistics | null,
-  ) => {
-    const insights: {
-      type: "positive" | "negative" | "neutral";
-      title: string;
-      description: string;
-      icon: any;
-    }[] = [];
-
-    if (!analysis || !statistics) return insights;
+    analysis: CycleAnalysis,
+    statistics: CycleStatistics,
+  ): InsightCard[] => {
+    const insights: InsightCard[] = [];
 
     // 周期规律性洞察
     if (analysis.cycleRegularity === "regular") {
@@ -194,7 +193,7 @@ export default function DataVisualizationDashboard() {
 
   const calculateCycleLength = (records: PeriodRecord[]): number => {
     if (records.length < 2) return 0;
-    const sorted = records.sort(
+    const sorted = [...records].sort(
       (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
     );
     const first = new Date(sorted[0].date);
@@ -557,7 +556,9 @@ export default function DataVisualizationDashboard() {
           ].map((view) => (
             <button
               key={view.id}
-              onClick={() => setActiveView(view.id as any)}
+              onClick={() =>
+                setActiveView(view.id as "overview" | "detailed" | "comparison")
+              }
               className={`flex-1 flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 activeView === view.id
                   ? "bg-white text-primary-600 shadow-sm"

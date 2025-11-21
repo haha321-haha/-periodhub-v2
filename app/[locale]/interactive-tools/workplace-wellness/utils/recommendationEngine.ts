@@ -8,15 +8,24 @@ import {
   RecommendationItem,
   RecommendationResult,
   UserDataSnapshot,
-} from '../types/recommendation';
-import { RecommendationFeedbackHistory } from '../types';
-import { RECOMMENDATION_CONTENT } from './recommendationContent';
-import { createUserDataSnapshot, detectAnomalies } from './dataAnalyzer';
+} from "../types/recommendation";
+import {
+  RecommendationFeedbackHistory,
+  WorkImpactData,
+  NutritionData,
+} from "../types";
+import { RECOMMENDATION_CONTENT } from "./recommendationContent";
+import {
+  createUserDataSnapshot,
+  detectAnomalies,
+  type AnomalyDetection,
+} from "./dataAnalyzer";
 import {
   scoreRecommendations,
   calculateDiversityScore,
-} from './recommendationScorer';
-import { PeriodRecord } from '../types';
+} from "./recommendationScorer";
+import { PeriodRecord } from "../types";
+import { logWarn } from "@/lib/debug-logger";
 
 // 推荐配置
 const RECOMMENDATION_CONFIG = {
@@ -27,39 +36,48 @@ const RECOMMENDATION_CONFIG = {
 };
 
 // 简单缓存 - 使用 Map 支持多个用户
-const recommendationCache = new Map<string, {
-  result: RecommendationResult;
-  timestamp: number;
-}>();
+const recommendationCache = new Map<
+  string,
+  {
+    result: RecommendationResult;
+    timestamp: number;
+  }
+>();
 
 /**
  * 生成推荐
  */
 export function generateRecommendations(
   periodData: PeriodRecord[],
-  workImpactData: any,
-  nutritionData: any,
-  feedbackHistory: RecommendationFeedbackHistory
+  workImpactData: WorkImpactData,
+  nutritionData: NutritionData,
+  feedbackHistory: RecommendationFeedbackHistory,
 ): RecommendationResult {
   const startTime = performance.now();
 
   // 检查缓存
   const cacheKey = generateCacheKey(periodData, workImpactData);
   const cached = recommendationCache.get(cacheKey);
-  if (cached &&
-      Date.now() - cached.timestamp < RECOMMENDATION_CONFIG.CACHE_DURATION) {
+  if (
+    cached &&
+    Date.now() - cached.timestamp < RECOMMENDATION_CONFIG.CACHE_DURATION
+  ) {
     return cached.result;
   }
 
   // 创建用户数据快照
-  const userData = createUserDataSnapshot(periodData, workImpactData, nutritionData);
+  const userData = createUserDataSnapshot(
+    periodData,
+    workImpactData,
+    nutritionData,
+  );
 
   // 检测异常
   const anomaly = detectAnomalies(
     userData.workImpact.currentPainLevel,
     periodData
-      .filter(r => r.painLevel !== null && r.painLevel !== undefined)
-      .map(r => r.painLevel as number)
+      .filter((r) => r.painLevel !== null && r.painLevel !== undefined)
+      .map((r) => r.painLevel as number),
   );
 
   // 生成数据洞察
@@ -68,20 +86,24 @@ export function generateRecommendations(
   // 过滤推荐项（基于条件匹配）
   let candidateItems = filterRecommendationsByConditions(
     RECOMMENDATION_CONTENT,
-    userData
+    userData,
   );
 
   // 过滤掉用户忽略的推荐
   candidateItems = candidateItems.filter(
-    item => !feedbackHistory.ignoredItems.includes(item.id)
+    (item) => !feedbackHistory.ignoredItems.includes(item.id),
   );
 
   // 为推荐项评分
-  candidateItems = scoreRecommendations(candidateItems, userData, feedbackHistory);
+  candidateItems = scoreRecommendations(
+    candidateItems,
+    userData,
+    feedbackHistory,
+  );
 
   // 过滤低分推荐
   candidateItems = candidateItems.filter(
-    item => item.score >= RECOMMENDATION_CONFIG.MIN_SCORE
+    (item) => item.score >= RECOMMENDATION_CONFIG.MIN_SCORE,
   );
 
   // 应用多样性控制
@@ -91,10 +113,13 @@ export function generateRecommendations(
   selectedItems.sort((a, b) => b.score - a.score);
 
   // 限制数量
-  const finalRecommendations = selectedItems.slice(0, RECOMMENDATION_CONFIG.MAX_RECOMMENDATIONS);
+  const finalRecommendations = selectedItems.slice(
+    0,
+    RECOMMENDATION_CONFIG.MAX_RECOMMENDATIONS,
+  );
 
   // 生成推荐理由
-  finalRecommendations.forEach(item => {
+  finalRecommendations.forEach((item) => {
     item.reason = generateRecommendationReason(item, userData);
   });
 
@@ -136,7 +161,11 @@ export function generateRecommendations(
   const endTime = performance.now();
   const duration = endTime - startTime;
   if (duration > 200) {
-    console.warn(`Recommendation generation took ${duration.toFixed(2)}ms (target: <200ms)`);
+    logWarn(
+      "Recommendation generation slow",
+      { duration },
+      "recommendationEngine",
+    );
   }
 
   return result;
@@ -145,9 +174,12 @@ export function generateRecommendations(
 /**
  * 生成缓存键
  */
-function generateCacheKey(periodData: PeriodRecord[], workImpactData: any): string {
+function generateCacheKey(
+  periodData: PeriodRecord[],
+  workImpactData: WorkImpactData,
+): string {
   const periodHash = periodData.length.toString();
-  const workHash = workImpactData?.painLevel?.toString() || '0';
+  const workHash = workImpactData?.painLevel?.toString() || "0";
   return `${periodHash}-${workHash}`;
 }
 
@@ -156,13 +188,16 @@ function generateCacheKey(periodData: PeriodRecord[], workImpactData: any): stri
  */
 function filterRecommendationsByConditions(
   items: RecommendationItem[],
-  userData: UserDataSnapshot
+  userData: UserDataSnapshot,
 ): RecommendationItem[] {
-  return items.filter(item => {
+  return items.filter((item) => {
     const conditions = item.conditions;
 
     // 疼痛等级检查
-    if (conditions.minPainLevel !== undefined || conditions.maxPainLevel !== undefined) {
+    if (
+      conditions.minPainLevel !== undefined ||
+      conditions.maxPainLevel !== undefined
+    ) {
       const currentPain = userData.workImpact.currentPainLevel;
       const minPain = conditions.minPainLevel || 0;
       const maxPain = conditions.maxPainLevel || 10;
@@ -173,7 +208,10 @@ function filterRecommendationsByConditions(
     }
 
     // 工作效率检查
-    if (conditions.minEfficiency !== undefined || conditions.maxEfficiency !== undefined) {
+    if (
+      conditions.minEfficiency !== undefined ||
+      conditions.maxEfficiency !== undefined
+    ) {
       const currentEfficiency = userData.workImpact.currentEfficiency;
       const minEff = conditions.minEfficiency || 0;
       const maxEff = conditions.maxEfficiency || 100;
@@ -185,8 +223,10 @@ function filterRecommendationsByConditions(
 
     // 周期阶段检查
     if (conditions.requiredPhases && conditions.requiredPhases.length > 0) {
-      if (!userData.periodData.currentPhase ||
-          !conditions.requiredPhases.includes(userData.periodData.currentPhase)) {
+      if (
+        !userData.periodData.currentPhase ||
+        !conditions.requiredPhases.includes(userData.periodData.currentPhase)
+      ) {
         return false;
       }
     }
@@ -202,7 +242,7 @@ function filterRecommendationsByConditions(
  * 应用多样性控制
  */
 function applyDiversityControl(
-  items: RecommendationItem[]
+  items: RecommendationItem[],
 ): RecommendationItem[] {
   const selected: RecommendationItem[] = [];
   const typeCounts: Record<string, number> = {};
@@ -217,8 +257,11 @@ function applyDiversityControl(
     const categoryCount = categoryCounts[item.category] || 0;
 
     // 如果多样性足够，或者类型/分类数量未超限，则添加
-    if (diversityScore >= RECOMMENDATION_CONFIG.DIVERSITY_THRESHOLD ||
-        typeCount < 3 || categoryCount < 2) {
+    if (
+      diversityScore >= RECOMMENDATION_CONFIG.DIVERSITY_THRESHOLD ||
+      typeCount < 3 ||
+      categoryCount < 2
+    ) {
       selected.push(item);
       typeCounts[item.type] = (typeCounts[item.type] || 0) + 1;
       categoryCounts[item.category] = (categoryCounts[item.category] || 0) + 1;
@@ -233,16 +276,21 @@ function applyDiversityControl(
  */
 function generateInsights(
   userData: UserDataSnapshot,
-  anomaly: any
-): RecommendationResult['insights'] {
+  anomaly: AnomalyDetection | null,
+): RecommendationResult["insights"] {
+  const hasCycleAnomaly = anomaly?.type === "cycle_irregularity";
+  const cycleHealth = hasCycleAnomaly
+    ? "needs_attention"
+    : userData.periodData.cycleRegularity === "regular"
+      ? "healthy"
+      : userData.metadata.dataQuality === "poor"
+        ? "needs_attention"
+        : "irregular";
+
   return {
     painPattern: userData.periodData.painTrend,
     efficiencyPattern: userData.workImpact.efficiencyTrend,
-    cycleHealth: userData.periodData.cycleRegularity === 'regular'
-      ? 'healthy'
-      : userData.metadata.dataQuality === 'poor'
-      ? 'needs_attention'
-      : 'irregular',
+    cycleHealth,
   };
 }
 
@@ -251,7 +299,7 @@ function generateInsights(
  */
 function generateRecommendationReason(
   item: RecommendationItem,
-  userData: UserDataSnapshot
+  userData: UserDataSnapshot,
 ): string {
   const reasons: string[] = [];
 
@@ -266,19 +314,19 @@ function generateRecommendationReason(
   }
 
   // 趋势相关
-  if (userData.periodData.painTrend === 'increasing') {
-    reasons.push('检测到疼痛呈上升趋势');
-  } else if (userData.periodData.painTrend === 'decreasing') {
-    reasons.push('疼痛正在改善');
+  if (userData.periodData.painTrend === "increasing") {
+    reasons.push("检测到疼痛呈上升趋势");
+  } else if (userData.periodData.painTrend === "decreasing") {
+    reasons.push("疼痛正在改善");
   }
 
   // 周期相关
   if (userData.periodData.currentPhase) {
     const phaseNames: Record<string, string> = {
-      menstrual: '月经期',
-      follicular: '卵泡期',
-      ovulation: '排卵期',
-      luteal: '黄体期',
+      menstrual: "月经期",
+      follicular: "卵泡期",
+      ovulation: "排卵期",
+      luteal: "黄体期",
     };
     reasons.push(`您正处于${phaseNames[userData.periodData.currentPhase]}`);
   }
@@ -292,28 +340,30 @@ function generateRecommendationReason(
   }
 
   // 周期健康相关
-  if (userData.periodData.cycleRegularity === 'irregular') {
-    reasons.push('检测到周期不规律');
+  if (userData.periodData.cycleRegularity === "irregular") {
+    reasons.push("检测到周期不规律");
   } else {
-    reasons.push('您的周期规律');
+    reasons.push("您的周期规律");
   }
 
   // 如果没有理由，使用默认理由
   if (reasons.length === 0) {
-    return '基于您的数据模式，推荐此内容。';
+    return "基于您的数据模式，推荐此内容。";
   }
 
-  return reasons.join('，') + '，因此推荐此内容。';
+  return reasons.join("，") + "，因此推荐此内容。";
 }
 
 /**
  * 生成统计摘要
  */
 function generateSummary(
-  recommendations: RecommendationItem[]
-): RecommendationResult['summary'] {
-  const highPriorityCount = recommendations.filter(r => r.priority >= 80).length;
-  const categories = [...new Set(recommendations.map(r => r.category))];
+  recommendations: RecommendationItem[],
+): RecommendationResult["summary"] {
+  const highPriorityCount = recommendations.filter(
+    (r) => r.priority >= 80,
+  ).length;
+  const categories = [...new Set(recommendations.map((r) => r.category))];
 
   return {
     totalRecommendations: recommendations.length,
@@ -337,16 +387,16 @@ export function clearRecommendationCache(key?: string): void {
  * 处理冷启动问题（数据不足时的推荐）
  */
 export function generateColdStartRecommendations(
-  feedbackHistory: RecommendationFeedbackHistory
+  feedbackHistory: RecommendationFeedbackHistory,
 ): RecommendationItem[] {
   // 返回通用推荐（高优先级、无特定条件）
   const generalRecommendations = RECOMMENDATION_CONTENT.filter(
-    item =>
+    (item) =>
       item.priority >= 70 &&
       !item.conditions.minPainLevel &&
       !item.conditions.maxPainLevel &&
       !item.conditions.requiredPhases &&
-      !feedbackHistory.ignoredItems.includes(item.id)
+      !feedbackHistory.ignoredItems.includes(item.id),
   );
 
   // 按优先级排序
@@ -355,4 +405,3 @@ export function generateColdStartRecommendations(
   // 返回前5个
   return generalRecommendations.slice(0, 5);
 }
-

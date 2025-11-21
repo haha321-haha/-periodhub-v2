@@ -8,13 +8,11 @@ import {
   Wifi,
   WifiOff,
   RefreshCw as Sync,
-  CheckCircle,
   AlertCircle,
   Clock,
   Database,
   Shield,
   Download,
-  Upload,
   RefreshCw,
   Server,
   Smartphone,
@@ -41,9 +39,14 @@ interface DeviceInfo {
 interface DataSyncProps {
   locale: string;
   userId?: string;
-  onSyncComplete?: (data: any) => void;
+  onSyncComplete?: (data: SyncCompletionPayload) => void;
   onSyncError?: (error: string) => void;
 }
+
+type SyncCompletionPayload = {
+  timestamp: Date;
+  changes: number;
+};
 
 export default function DataSync({
   locale,
@@ -126,7 +129,13 @@ export default function DataSync({
     );
 
     return () => clearInterval(interval);
-  }, [autoSync, syncInterval, syncStatus.isOnline, syncStatus.syncInProgress]);
+  }, [
+    autoSync,
+    syncInterval,
+    syncStatus.isOnline,
+    syncStatus.syncInProgress,
+    performSync,
+  ]);
 
   // 执行同步
   const performSync = useCallback(async () => {
@@ -152,18 +161,21 @@ export default function DataSync({
       const success = Math.random() > 0.1; // 90% 成功率
 
       if (success) {
+        const completionPayload: SyncCompletionPayload = {
+          timestamp: new Date(),
+          changes: 0,
+        };
+
         setSyncStatus((prev) => ({
           ...prev,
-          lastSync: new Date(),
+          lastSync: completionPayload.timestamp,
           syncInProgress: false,
           pendingChanges: 0,
           conflictCount: 0,
           syncError: null,
         }));
 
-        if (onSyncComplete) {
-          onSyncComplete({ timestamp: new Date(), changes: 0 });
-        }
+        onSyncComplete?.(completionPayload);
       } else {
         throw new Error(t("errors.syncFailed"));
       }
@@ -352,7 +364,9 @@ export default function DataSync({
           <p className="text-sm text-gray-600">
             {syncStatus.pendingChanges === 0
               ? t("pendingChanges.allSynced")
-              : `${syncStatus.pendingChanges} ${t("pendingChanges.changesPending")}`}
+              : `${syncStatus.pendingChanges} ${t(
+                  "pendingChanges.changesPending",
+                )}`}
           </p>
         </div>
 
@@ -372,7 +386,9 @@ export default function DataSync({
           <p className="text-sm text-gray-600">
             {syncStatus.conflictCount === 0
               ? t("conflicts.noConflicts")
-              : `${syncStatus.conflictCount} ${t("conflicts.conflictsToResolve")}`}
+              : `${syncStatus.conflictCount} ${t(
+                  "conflicts.conflictsToResolve",
+                )}`}
           </p>
         </div>
       </div>

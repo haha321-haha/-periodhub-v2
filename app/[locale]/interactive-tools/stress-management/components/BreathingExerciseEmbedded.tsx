@@ -45,9 +45,3 @@ export default function BreathingExerciseEmbedded({
     </div>
   );
 }
-
-
-
-
-
-

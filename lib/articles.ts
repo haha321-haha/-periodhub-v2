@@ -15,6 +15,11 @@ export interface Article {
   updatedAt: string;
   readingTime: number;
   featured: boolean;
+  // 兼容性属性
+  title_zh?: string;
+  seo_title_zh?: string;
+  summary?: string;
+  summary_zh?: string;
 }
 
 // 文章数据（示例）
@@ -23,9 +28,12 @@ const ARTICLES: Article[] = [
     slug: "comprehensive-medical-guide-to-dysmenorrhea",
     title: "Comprehensive Medical Guide to Dysmenorrhea",
     titleZh: "痛经全面医学指南",
+    title_zh: "痛经全面医学指南",
     description:
       "Evidence-based guide to understanding and managing period pain",
     descriptionZh: "基于循证医学的痛经理解和管理指南",
+    summary: "Evidence-based guide to understanding and managing period pain",
+    summary_zh: "基于循证医学的痛经理解和管理指南",
     category: "medical-guide",
     tags: ["dysmenorrhea", "period-pain", "pain-management"],
     publishedAt: "2024-12-19",
@@ -37,8 +45,11 @@ const ARTICLES: Article[] = [
     slug: "when-to-seek-medical-care-comprehensive-guide",
     title: "When to Seek Medical Care: Comprehensive Guide",
     titleZh: "何时就医：综合指南",
+    title_zh: "何时就医：综合指南",
     description: "Learn when period pain requires medical attention",
     descriptionZh: "了解何时痛经需要就医",
+    summary: "Learn when period pain requires medical attention",
+    summary_zh: "了解何时痛经需要就医",
     category: "medical-guide",
     tags: ["medical-care", "symptoms", "health"],
     publishedAt: "2024-12-19",
@@ -115,4 +126,23 @@ export function searchArticles(
       article.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
     );
   });
+}
+
+/**
+ * 获取相关文章
+ */
+export function getRelatedArticles(
+  currentSlug: string,
+  locale: string,
+  count: number = 3,
+): Article[] {
+  const currentArticle = getArticleBySlug(currentSlug);
+  if (!currentArticle) return [];
+
+  // 简单的相关文章逻辑：同类别的其他文章
+  return ARTICLES.filter(
+    (article) =>
+      article.slug !== currentSlug &&
+      article.category === currentArticle.category,
+  ).slice(0, count);
 }

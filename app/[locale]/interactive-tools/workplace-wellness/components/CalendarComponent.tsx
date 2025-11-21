@@ -6,7 +6,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Calendar, Plus, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from "lucide-react";
+import {
+  Plus,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
 import {
   useCalendar,
   useWorkplaceWellnessActions,
@@ -14,12 +20,12 @@ import {
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import { PeriodRecord, PeriodType, PainLevel, CalendarState } from "../types";
+import { logInfo } from "../../../../lib/debug-logger";
 
 export default function CalendarComponent() {
   const calendar = useCalendar() as CalendarState;
   const locale = useLocale();
-  const { updateCalendar, setCurrentDate, addPeriodRecord } =
-    useWorkplaceWellnessActions();
+  const { setCurrentDate, addPeriodRecord } = useWorkplaceWellnessActions();
   const t = useTranslations("workplaceWellness");
 
   // 从 store 读取 periodData
@@ -179,30 +185,27 @@ export default function CalendarComponent() {
     today.setHours(23, 59, 59, 999); // 设置今天的时间为23:59:59，允许选择今天
 
     if (selectedDate > today) {
-      errors.date = locale === "zh"
-        ? "不能选择未来的日期"
-        : "Cannot select future dates";
+      errors.date =
+        locale === "zh" ? "不能选择未来的日期" : "Cannot select future dates";
     }
 
     // 验证日期格式
     if (!formData.date || formData.date.trim() === "") {
-      errors.date = errors.date || (locale === "zh"
-        ? "请选择日期"
-        : "Please select a date");
+      errors.date =
+        errors.date ||
+        (locale === "zh" ? "请选择日期" : "Please select a date");
     }
 
     // 验证类型
     if (!formData.type) {
-      errors.type = locale === "zh"
-        ? "请选择记录类型"
-        : "Please select a record type";
+      errors.type =
+        locale === "zh" ? "请选择记录类型" : "Please select a record type";
     }
 
     // 验证疼痛等级（仅月经期）
     if (formData.type === "period" && formData.painLevel < 0) {
-      errors.painLevel = locale === "zh"
-        ? "请选择疼痛等级"
-        : "Please select pain level";
+      errors.painLevel =
+        locale === "zh" ? "请选择疼痛等级" : "Please select pain level";
     }
 
     setFormErrors(errors);
@@ -225,14 +228,19 @@ export default function CalendarComponent() {
         date: formData.date,
         type: formData.type,
         // 确保只有 period 类型才保存疼痛等级
-        painLevel: formData.type === "period" && formData.painLevel > 0
-          ? (formData.painLevel as PainLevel)
-          : null,
+        painLevel:
+          formData.type === "period" && formData.painLevel > 0
+            ? (formData.painLevel as PainLevel)
+            : null,
         flow: null, // 可以根据需要添加流量选择
       };
 
       // 调用 store 的 addPeriodRecord 方法
-      console.log("CalendarComponent - saving record:", record);
+      logInfo(
+        "CalendarComponent - saving record:",
+        record,
+        "CalendarComponent",
+      );
       addPeriodRecord(record);
 
       // 关闭表单并重置表单数据
@@ -252,11 +260,14 @@ export default function CalendarComponent() {
       console.error("保存记录时出错:", error);
       setFormErrors({
         ...formErrors,
-        submit: t("calendar.saveError") ||
-          (locale === "zh" ? "保存记录时出错，请重试。" : "An error occurred while saving the record. Please try again.")
+        submit:
+          t("calendar.saveError") ||
+          (locale === "zh"
+            ? "保存记录时出错，请重试。"
+            : "An error occurred while saving the record. Please try again."),
       });
       setTimeout(() => {
-        setFormErrors(prev => ({ ...prev, submit: undefined }));
+        setFormErrors((prev) => ({ ...prev, submit: undefined }));
       }, 3000);
     }
   };
@@ -466,64 +477,64 @@ export default function CalendarComponent() {
                       })
                     }
                     className={`relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider ${
-                      formErrors.painLevel
-                        ? "border-2 border-red-500"
-                        : ""
+                      formErrors.painLevel ? "border-2 border-red-500" : ""
                     }`}
                   />
                 </div>
-                  {formErrors.painLevel && (
-                    <p className="text-red-500 text-sm mt-1">{formErrors.painLevel}</p>
-                  )}
-                  <div className="flex justify-between text-xs text-neutral-500 mt-1">
-                    <span>{t("calendar.painLevelMin")}</span>
-                    <span>{t("calendar.painLevelMax")}</span>
-                  </div>
-                  {/* 自定义滑块样式 */}
-                  <style jsx>{`
-                    .pain-slider::-webkit-slider-thumb {
-                      -webkit-appearance: none;
-                      appearance: none;
-                      height: 20px;
-                      width: 20px;
-                      border-radius: 50%;
-                      background: #ffffff;
-                      border: 2px solid #6b7280;
-                      cursor: pointer;
-                      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                      transition: all 0.2s ease;
-                    }
-
-                    .pain-slider::-webkit-slider-thumb:hover {
-                      border-color: #9333ea;
-                      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                      transform: scale(1.1);
-                    }
-
-                    .pain-slider::-moz-range-thumb {
-                      height: 20px;
-                      width: 20px;
-                      border-radius: 50%;
-                      background: #ffffff;
-                      border: 2px solid #6b7280;
-                      cursor: pointer;
-                      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                      transition: all 0.2s ease;
-                      -moz-appearance: none;
-                    }
-
-                    .pain-slider::-moz-range-thumb:hover {
-                      border-color: #9333ea;
-                      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                      transform: scale(1.1);
-                    }
-
-                    .pain-slider::-moz-range-track {
-                      background: transparent;
-                      height: 12px;
-                    }
-                  `}</style>
+                {formErrors.painLevel && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {formErrors.painLevel}
+                  </p>
+                )}
+                <div className="flex justify-between text-xs text-neutral-500 mt-1">
+                  <span>{t("calendar.painLevelMin")}</span>
+                  <span>{t("calendar.painLevelMax")}</span>
                 </div>
+                {/* 自定义滑块样式 */}
+                <style jsx>{`
+                  .pain-slider::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    appearance: none;
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 50%;
+                    background: #ffffff;
+                    border: 2px solid #6b7280;
+                    cursor: pointer;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                    transition: all 0.2s ease;
+                  }
+
+                  .pain-slider::-webkit-slider-thumb:hover {
+                    border-color: #9333ea;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                    transform: scale(1.1);
+                  }
+
+                  .pain-slider::-moz-range-thumb {
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 50%;
+                    background: #ffffff;
+                    border: 2px solid #6b7280;
+                    cursor: pointer;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                    transition: all 0.2s ease;
+                    -moz-appearance: none;
+                  }
+
+                  .pain-slider::-moz-range-thumb:hover {
+                    border-color: #9333ea;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                    transform: scale(1.1);
+                  }
+
+                  .pain-slider::-moz-range-track {
+                    background: transparent;
+                    height: 12px;
+                  }
+                `}</style>
+              </div>
             )}
             <div className="flex gap-3">
               <button
@@ -544,7 +555,9 @@ export default function CalendarComponent() {
             {/* 提交错误提示 */}
             {formErrors.submit && (
               <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-                <p className="text-sm text-red-600 text-center">{formErrors.submit}</p>
+                <p className="text-sm text-red-600 text-center">
+                  {formErrors.submit}
+                </p>
               </div>
             )}
           </div>

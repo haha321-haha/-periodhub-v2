@@ -2,47 +2,18 @@
 
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { AlertTriangle, Thermometer, Pill, MapPin, Phone } from "lucide-react";
+import { AlertTriangle, Phone } from "lucide-react";
 
-interface EmergencyReliefGuideProps {
-  locale: string;
-}
-
-export default function EmergencyReliefGuide({
-  locale,
-}: EmergencyReliefGuideProps) {
+export default function EmergencyReliefGuide() {
   const t = useTranslations("interactiveTools.emergencyRelief");
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const emergencySteps = [
-    {
-      icon: Thermometer,
-      titleKey: "steps.heat.title",
-      descKey: "steps.heat.description",
-      urgency: "immediate",
-    },
-    {
-      icon: Pill,
-      titleKey: "steps.magnesium.title",
-      descKey: "steps.magnesium.description",
-      urgency: "immediate",
-    },
-    {
-      icon: MapPin,
-      titleKey: "steps.acupressure.title",
-      descKey: "steps.acupressure.description",
-      urgency: "moderate",
-    },
-  ];
 
   return (
     <div className="bg-gradient-to-r from-red-50 via-pink-50 to-purple-50 border-l-4 border-red-500 rounded-lg p-6 mb-8">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
           <AlertTriangle className="w-6 h-6 text-red-600 mr-3" />
-          <h2 className="text-xl font-semibold text-red-800">
-            {t("title")}
-          </h2>
+          <h2 className="text-xl font-semibold text-red-800">{t("title")}</h2>
         </div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}

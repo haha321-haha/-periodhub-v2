@@ -6,7 +6,7 @@
 "use client";
 
 import { useState } from "react";
-import { Activity, Copy, Mail, CheckCircle } from "lucide-react";
+import { Copy, CheckCircle } from "lucide-react";
 import {
   useWorkImpact,
   useWorkplaceWellnessActions,
@@ -14,7 +14,7 @@ import {
 import { useLocale } from "next-intl";
 import { getLeaveTemplates } from "../data";
 import { useTranslations } from "next-intl";
-import { LeaveTemplate } from "../types";
+import { LeaveTemplate, WorkImpactData } from "../types";
 
 export default function WorkImpactComponent() {
   const workImpact = useWorkImpact();
@@ -57,8 +57,13 @@ export default function WorkImpactComponent() {
   const handlePainLevelChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const level = parseInt(event.target.value);
-    updateWorkImpact({ painLevel: level as any });
+    const level = Number(event.target.value);
+    if (Number.isNaN(level)) return;
+    const safeLevel = Math.min(
+      Math.max(level, 0),
+      10,
+    ) as WorkImpactData["painLevel"];
+    updateWorkImpact({ painLevel: safeLevel });
   };
 
   // 更新工作效率
@@ -78,9 +83,8 @@ export default function WorkImpactComponent() {
   // 复制模板内容
   const handleCopyTemplate = (template: LeaveTemplate) => {
     const content = `${template.subject}\n\n${template.content}`;
-    navigator.clipboard.writeText(content).then(() => {
-      // 可以添加成功提示
-      console.log("Template copied to clipboard");
+    navigator.clipboard.writeText(content).catch(() => {
+      // Silently ignore clipboard errors
     });
   };
 
@@ -103,27 +107,28 @@ export default function WorkImpactComponent() {
         alert(
           locale === "zh"
             ? "疼痛等级必须在0-10之间。"
-            : "Pain level must be between 0 and 10."
+            : "Pain level must be between 0 and 10.",
         );
         return;
       }
 
-      if ((workImpact.efficiency ?? 100) < 0 || (workImpact.efficiency ?? 100) > 100) {
+      if (
+        (workImpact.efficiency ?? 100) < 0 ||
+        (workImpact.efficiency ?? 100) > 100
+      ) {
         alert(
           locale === "zh"
             ? "工作效率必须在0-100%之间。"
-            : "Work efficiency must be between 0-100%."
+            : "Work efficiency must be between 0-100%.",
         );
         return;
       }
-
-      console.log("Work impact record saved:", workImpact);
 
       // 显示成功提示
       alert(
         locale === "zh"
           ? "工作影响记录已保存。"
-          : "Work impact record saved successfully."
+          : "Work impact record saved successfully.",
       );
     } catch (error) {
       // 错误处理
@@ -131,7 +136,7 @@ export default function WorkImpactComponent() {
       alert(
         locale === "zh"
           ? "保存工作影响记录时出错，请重试。"
-          : "An error occurred while saving the work impact record. Please try again."
+          : "An error occurred while saving the work impact record. Please try again.",
       );
     }
   };
@@ -163,7 +168,9 @@ export default function WorkImpactComponent() {
                 />
               </div>
               <div className="w-12 text-center">
-                <span className={getBadgeClasses(workImpact.painLevel ?? 0, "pain")}>
+                <span
+                  className={getBadgeClasses(workImpact.painLevel ?? 0, "pain")}
+                >
                   {workImpact.painLevel ?? 0}
                 </span>
               </div>

@@ -3,6 +3,28 @@
  * 提供生产环境的安全保护功能
  */
 
+export type SelectionPayload = {
+  menstrualPhase?: string;
+  healthGoals?: Set<string>;
+  tcmConstitution?: Set<string>;
+  [key: string]: unknown;
+};
+
+type SecurityRequest = {
+  ip?: string;
+  connection?: { remoteAddress?: string };
+};
+
+type SecurityResponse = {
+  setHeader: (key: string, value: string | number) => void;
+  status: (code: number) => { json: (body: unknown) => void };
+};
+
+type RateLimitEntry = {
+  count: number;
+  resetTime: number;
+};
+
 // 基于ziV1d3d的安全配置
 export const securityConfig = {
   // Content Security Policy
@@ -97,7 +119,7 @@ export class InputValidator {
   }
 
   // 验证选择数据
-  static validateSelections(selections: any): {
+  static validateSelections(selections: SelectionPayload): {
     isValid: boolean;
     error?: string;
   } {
@@ -157,10 +179,7 @@ export class CSRFProtection {
 
 // 基于ziV1d3d的速率限制
 export class RateLimiter {
-  private static requests = new Map<
-    string,
-    { count: number; resetTime: number }
-  >();
+  private static requests = new Map<string, RateLimitEntry>();
 
   // 检查速率限制
   static checkRateLimit(ip: string): {
@@ -217,7 +236,11 @@ export function generateSecurityHeaders(): Record<string, string> {
 }
 
 // 基于ziV1d3d的安全中间件
-export function securityMiddleware(req: any, res: any, next: any): void {
+export function securityMiddleware(
+  req: SecurityRequest & Record<string, unknown>,
+  res: SecurityResponse,
+  next: () => void,
+): void {
   // 添加安全头
   const headers = generateSecurityHeaders();
   Object.entries(headers).forEach(([key, value]) => {
@@ -225,7 +248,7 @@ export function securityMiddleware(req: any, res: any, next: any): void {
   });
 
   // 速率限制检查
-  const ip = req.ip || req.connection.remoteAddress;
+  const ip = req.ip ?? req.connection?.remoteAddress ?? "0.0.0.0";
   const rateLimit = RateLimiter.checkRateLimit(ip);
 
   if (!rateLimit.allowed) {

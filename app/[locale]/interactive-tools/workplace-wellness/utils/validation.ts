@@ -3,18 +3,7 @@
  * 基于HVsLYEp的数据结构进行验证
  */
 
-import {
-  PeriodRecord,
-  NutritionRecommendation,
-  LeaveTemplate,
-  MenstrualPhase,
-  TCMConstitution,
-  SeverityLevel,
-  TCMNature,
-  FlowType,
-  PeriodType,
-  PainLevel,
-} from "../types";
+import { PeriodRecord, NutritionRecommendation, LeaveTemplate } from "../types";
 
 // 验证结果接口
 export interface ValidationResult {
@@ -24,7 +13,9 @@ export interface ValidationResult {
 }
 
 // 经期记录验证
-export function validatePeriodRecord(record: any): ValidationResult {
+export function validatePeriodRecord(
+  record: Partial<PeriodRecord>,
+): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
 
@@ -71,7 +62,7 @@ export function validatePeriodRecord(record: any): ValidationResult {
 
 // 营养推荐验证
 export function validateNutritionRecommendation(
-  nutrition: any,
+  nutrition: Partial<NutritionRecommendation>,
 ): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
@@ -115,7 +106,9 @@ export function validateNutritionRecommendation(
 }
 
 // 请假模板验证
-export function validateLeaveTemplate(template: any): ValidationResult {
+export function validateLeaveTemplate(
+  template: LeaveTemplate,
+): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
 
@@ -150,7 +143,7 @@ export function validateLeaveTemplate(template: any): ValidationResult {
 }
 
 // 批量验证经期数据
-export function validatePeriodData(data: any[]): ValidationResult {
+export function validatePeriodData(data: PeriodRecord[]): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
 
@@ -175,7 +168,9 @@ export function validatePeriodData(data: any[]): ValidationResult {
 }
 
 // 批量验证营养数据
-export function validateNutritionData(data: any[]): ValidationResult {
+export function validateNutritionData(
+  data: NutritionRecommendation[],
+): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
 
@@ -201,7 +196,9 @@ export function validateNutritionData(data: any[]): ValidationResult {
 }
 
 // 批量验证请假模板
-export function validateLeaveTemplates(data: any[]): ValidationResult {
+export function validateLeaveTemplates(
+  data: LeaveTemplate[],
+): ValidationResult {
   const errors: string[] = [];
   const warnings: string[] = [];
 

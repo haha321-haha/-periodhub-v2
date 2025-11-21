@@ -1,13 +1,27 @@
-'use client';
+"use client";
 
 // PainTrendChart - Line chart component for displaying pain level trends over time
 // Shows pain levels with menstrual phase context and responsive design
 
-import React, { useMemo, useEffect, useState, useRef, useCallback } from 'react';
-import { Line } from 'react-chartjs-2';
-import { TrendPoint, PainTrackerError } from '../../../../../types/pain-tracker';
-import ChartUtils from '../../../../../lib/pain-tracker/analytics/ChartUtils';
-import { ChartPerformanceOptimizer, MemoryManager } from '../../../../../lib/pain-tracker/performance';
+import React, {
+  useMemo,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from "react";
+import { Line } from "react-chartjs-2";
+import type { Chart, ChartDataset, ChartData, TooltipItem } from "chart.js";
+import {
+  TrendPoint,
+  PainTrackerError,
+} from "../../../../../types/pain-tracker";
+import ChartUtils from "../../../../../lib/pain-tracker/analytics/ChartUtils";
+import {
+  ChartPerformanceOptimizer,
+  MemoryManager,
+} from "../../../../../lib/pain-tracker/performance";
+import { logWarn } from "../../../../../lib/debug-logger";
 
 interface PainTrendChartProps {
   trendData: TrendPoint[];
@@ -20,11 +34,11 @@ interface PainTrendChartProps {
 
 export default function PainTrendChart({
   trendData,
-  className = '',
+  className = "",
   height,
   showTitle = true,
   showMenstrualPhases = true,
-  onError
+  onError,
 }: PainTrendChartProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,7 +48,7 @@ export default function PainTrendChart({
   // Performance optimization services
   const chartOptimizer = useMemo(() => new ChartPerformanceOptimizer(), []);
   const memoryManager = useMemo(() => new MemoryManager(), []);
-  const chartInstanceRef = useRef<any>(null);
+  const chartInstanceRef = useRef<Chart<"line"> | null>(null);
   const chartId = useMemo(() => `pain-trend-chart-${Date.now()}`, []);
 
   // Optimize data for chart performance
@@ -49,17 +63,21 @@ export default function PainTrendChart({
         // Use chart performance optimizer for large datasets
         const optimized = await chartOptimizer.optimizeDataForChart(
           trendData,
-          'line',
+          "line",
           {
             maxPoints: isMobile ? 100 : 200,
-            samplingMethod: 'adaptive',
-            preserveImportantPoints: true
-          }
+            samplingMethod: "adaptive",
+            preserveImportantPoints: true,
+          },
         );
 
         setOptimizedData(optimized);
       } catch (err) {
-        console.warn('Failed to optimize chart data, using original:', err);
+        logWarn(
+          "Failed to optimize chart data, using original:",
+          err,
+          "PainTrendChart",
+        );
         setOptimizedData(trendData);
       }
     };
@@ -74,13 +92,13 @@ export default function PainTrendChart({
     };
 
     checkMobile();
-    window.addEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
 
     // Simulate loading delay for smooth rendering
     const timer = setTimeout(() => setIsLoading(false), 100);
 
     return () => {
-      window.removeEventListener('resize', checkMobile);
+      window.removeEventListener("resize", checkMobile);
       clearTimeout(timer);
 
       // Cleanup chart instance for memory management
@@ -91,22 +109,22 @@ export default function PainTrendChart({
   }, [chartId, memoryManager]);
 
   // Memoized chart data with performance optimization
-  const chartData = useMemo(() => {
+  const chartData = useMemo<ChartData<"line">>(() => {
     try {
       if (!optimizedData || optimizedData.length === 0) {
-        return ChartUtils.getEmptyChartData('line');
+        return ChartUtils.getEmptyChartData("line");
       }
 
       return ChartUtils.formatPainTrendData(optimizedData, isMobile);
     } catch (err) {
       const error = new PainTrackerError(
-        'Failed to format trend chart data',
-        'CHART_ERROR',
-        err
+        "Failed to format trend chart data",
+        "CHART_ERROR",
+        err,
       );
       setError(error.message);
       onError?.(error);
-      return ChartUtils.getEmptyChartData('line');
+      return ChartUtils.getEmptyChartData("line");
     }
   }, [optimizedData, isMobile, onError]);
 
@@ -116,7 +134,10 @@ export default function PainTrendChart({
       let options = ChartUtils.getPainTrendOptions(isMobile);
 
       // Apply performance optimizations based on data size
-      options = chartOptimizer.optimizeChartOptions(options, optimizedData.length);
+      options = chartOptimizer.optimizeChartOptions(
+        options,
+        optimizedData.length,
+      );
 
       // Override title display if showTitle is false
       if (!showTitle && options.plugins?.title) {
@@ -126,20 +147,20 @@ export default function PainTrendChart({
       // Enhanced tooltip for better context
       if (options.plugins?.tooltip) {
         options.plugins.tooltip.callbacks = {
-          title: function(context: any) {
+          title: function (context: TooltipItem<"line">[]) {
             const dataIndex = context[0].dataIndex;
             const dataPoint = optimizedData[dataIndex];
-            if (!dataPoint) return '';
+            if (!dataPoint) return "";
 
             const date = new Date(dataPoint.date);
-            return date.toLocaleDateString('en-US', {
-              weekday: 'short',
-              month: 'short',
-              day: 'numeric',
-              year: 'numeric'
+            return date.toLocaleDateString("en-US", {
+              weekday: "short",
+              month: "short",
+              day: "numeric",
+              year: "numeric",
             });
           },
-          label: function(context: any) {
+          label: function (context: TooltipItem<"line">) {
             const painLevel = context.parsed.y;
             const dataPoint = optimizedData[context.dataIndex];
 
@@ -147,19 +168,21 @@ export default function PainTrendChart({
 
             if (showMenstrualPhases && dataPoint?.menstrualPhase) {
               const phaseMap: Record<string, string> = {
-                'before_period': 'Before Period',
-                'day_1': 'Day 1',
-                'day_2_3': 'Days 2-3',
-                'day_4_plus': 'Day 4+',
-                'after_period': 'After Period',
-                'mid_cycle': 'Mid-Cycle',
-                'irregular': 'Irregular'
+                before_period: "Before Period",
+                day_1: "Day 1",
+                day_2_3: "Days 2-3",
+                day_4_plus: "Day 4+",
+                after_period: "After Period",
+                mid_cycle: "Mid-Cycle",
+                irregular: "Irregular",
               };
-              label += `\nPhase: ${phaseMap[dataPoint.menstrualPhase] || dataPoint.menstrualPhase}`;
+              label += `\nPhase: ${
+                phaseMap[dataPoint.menstrualPhase] || dataPoint.menstrualPhase
+              }`;
             }
 
             return label;
-          }
+          },
         };
       }
 
@@ -167,16 +190,16 @@ export default function PainTrendChart({
       if (optimizedData.length >= 5 && chartData.datasets.length > 0) {
         const trendLine = calculateTrendLine(optimizedData);
         if (trendLine && trendLine.length > 0) {
-          (chartData.datasets as any[]).push({
-            label: 'Trend',
+          (chartData.datasets as ChartDataset<"line">[]).push({
+            label: "Trend",
             data: trendLine,
-            borderColor: 'rgba(156, 163, 175, 0.8)',
-            backgroundColor: 'transparent',
+            borderColor: "rgba(156, 163, 175, 0.8)",
+            backgroundColor: "transparent",
             borderDash: [5, 5],
             pointRadius: 0,
             pointHoverRadius: 0,
             fill: false,
-            tension: 0
+            tension: 0,
           });
         }
       }
@@ -184,15 +207,23 @@ export default function PainTrendChart({
       return options;
     } catch (err) {
       const error = new PainTrackerError(
-        'Failed to configure trend chart options',
-        'CHART_ERROR',
-        err
+        "Failed to configure trend chart options",
+        "CHART_ERROR",
+        err,
       );
       setError(error.message);
       onError?.(error);
       return ChartUtils.getResponsiveOptions(isMobile);
     }
-  }, [isMobile, showTitle, showMenstrualPhases, optimizedData, chartData, onError, chartOptimizer]);
+  }, [
+    isMobile,
+    showTitle,
+    showMenstrualPhases,
+    optimizedData,
+    chartData,
+    onError,
+    chartOptimizer,
+  ]);
 
   // Calculate container height
   const containerHeight = useMemo(() => {
@@ -204,21 +235,24 @@ export default function PainTrendChart({
   const trendStats = useMemo(() => {
     if (!optimizedData || optimizedData.length === 0) return null;
 
-    const painLevels = optimizedData.map(point => point.painLevel);
-    const average = painLevels.reduce((sum, level) => sum + level, 0) / painLevels.length;
+    const painLevels = optimizedData.map((point) => point.painLevel);
+    const average =
+      painLevels.reduce((sum, level) => sum + level, 0) / painLevels.length;
     const highest = Math.max(...painLevels);
     const lowest = Math.min(...painLevels);
 
     // Calculate trend direction
     const firstHalf = painLevels.slice(0, Math.floor(painLevels.length / 2));
     const secondHalf = painLevels.slice(Math.floor(painLevels.length / 2));
-    const firstAvg = firstHalf.reduce((sum, level) => sum + level, 0) / firstHalf.length;
-    const secondAvg = secondHalf.reduce((sum, level) => sum + level, 0) / secondHalf.length;
+    const firstAvg =
+      firstHalf.reduce((sum, level) => sum + level, 0) / firstHalf.length;
+    const secondAvg =
+      secondHalf.reduce((sum, level) => sum + level, 0) / secondHalf.length;
 
-    let trendDirection: 'improving' | 'worsening' | 'stable' = 'stable';
+    let trendDirection: "improving" | "worsening" | "stable" = "stable";
     const difference = secondAvg - firstAvg;
-    if (difference < -0.5) trendDirection = 'improving';
-    else if (difference > 0.5) trendDirection = 'worsening';
+    if (difference < -0.5) trendDirection = "improving";
+    else if (difference > 0.5) trendDirection = "worsening";
 
     return {
       average: Math.round(average * 10) / 10,
@@ -226,7 +260,7 @@ export default function PainTrendChart({
       lowest,
       trendDirection,
       dataPoints: optimizedData.length,
-      originalDataPoints: trendData?.length || 0
+      originalDataPoints: trendData?.length || 0,
     };
   }, [optimizedData, trendData]);
 
@@ -235,7 +269,10 @@ export default function PainTrendChart({
     if (data.length < 2) return [];
 
     const n = data.length;
-    let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+    let sumX = 0,
+      sumY = 0,
+      sumXY = 0,
+      sumXX = 0;
 
     data.forEach((point, index) => {
       const x = index;
@@ -251,6 +288,17 @@ export default function PainTrendChart({
 
     return data.map((_, index) => slope * index + intercept);
   }
+
+  // Handle chart instance for memory management
+  const handleChartRef = useCallback(
+    (chartInstance: Chart<"line"> | null) => {
+      if (chartInstance) {
+        chartInstanceRef.current = chartInstance;
+        memoryManager.registerChartInstance(chartId, chartInstance);
+      }
+    },
+    [chartId, memoryManager],
+  );
 
   // Loading state
   if (isLoading) {
@@ -276,8 +324,18 @@ export default function PainTrendChart({
       >
         <div className="text-center p-4">
           <div className="text-red-600 mb-2">
-            <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <svg
+              className="w-8 h-8 mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
           </div>
           <p className="text-sm text-red-700 font-medium">Chart Error</p>
@@ -296,8 +354,18 @@ export default function PainTrendChart({
       >
         <div className="text-center p-4">
           <div className="text-gray-400 mb-2">
-            <svg className="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+            <svg
+              className="w-12 h-12 mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+              />
             </svg>
           </div>
           <p className="text-sm text-gray-600 font-medium">No Trend Data</p>
@@ -308,14 +376,6 @@ export default function PainTrendChart({
       </div>
     );
   }
-
-  // Handle chart instance for memory management
-  const handleChartRef = useCallback((chartInstance: any) => {
-    if (chartInstance) {
-      chartInstanceRef.current = chartInstance;
-      memoryManager.registerChartInstance(chartId, chartInstance);
-    }
-  }, [chartId, memoryManager]);
 
   // Render chart
   return (
@@ -333,15 +393,17 @@ export default function PainTrendChart({
       {/* Chart summary for screen readers */}
       <div className="sr-only">
         <p>
-          Pain trend chart showing {trendStats?.dataPoints || 0} data points over time
-          {trendStats?.originalDataPoints && trendStats.originalDataPoints !== trendStats.dataPoints &&
-            ` (optimized from ${trendStats.originalDataPoints} original points)`
-          }.
+          Pain trend chart showing {trendStats?.dataPoints || 0} data points
+          over time
+          {trendStats?.originalDataPoints &&
+            trendStats.originalDataPoints !== trendStats.dataPoints &&
+            ` (optimized from ${trendStats.originalDataPoints} original points)`}
+          .
           {trendStats && (
             <>
-              Average pain level: {trendStats.average}/10.
-              Highest: {trendStats.highest}/10, Lowest: {trendStats.lowest}/10.
-              Trend direction: {trendStats.trendDirection}.
+              Average pain level: {trendStats.average}/10. Highest:{" "}
+              {trendStats.highest}/10, Lowest: {trendStats.lowest}/10. Trend
+              direction: {trendStats.trendDirection}.
             </>
           )}
         </p>
@@ -352,24 +414,33 @@ export default function PainTrendChart({
         <div className="mt-4 text-xs text-gray-600 bg-gray-50 p-3 rounded-lg">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
-              <span className="font-medium">Average:</span> {trendStats.average}/10
+              <span className="font-medium">Average:</span> {trendStats.average}
+              /10
             </div>
             <div>
-              <span className="font-medium">Highest:</span> {trendStats.highest}/10
+              <span className="font-medium">Highest:</span> {trendStats.highest}
+              /10
             </div>
             <div>
-              <span className="font-medium">Lowest:</span> {trendStats.lowest}/10
+              <span className="font-medium">Lowest:</span> {trendStats.lowest}
+              /10
             </div>
             <div>
               <span className="font-medium">Trend:</span>
-              <span className={`ml-1 ${
-                trendStats.trendDirection === 'improving' ? 'text-green-600' :
-                trendStats.trendDirection === 'worsening' ? 'text-red-600' :
-                'text-gray-600'
-              }`}>
-                {trendStats.trendDirection === 'improving' ? '↓ Improving' :
-                 trendStats.trendDirection === 'worsening' ? '↑ Worsening' :
-                 '→ Stable'}
+              <span
+                className={`ml-1 ${
+                  trendStats.trendDirection === "improving"
+                    ? "text-green-600"
+                    : trendStats.trendDirection === "worsening"
+                      ? "text-red-600"
+                      : "text-gray-600"
+                }`}
+              >
+                {trendStats.trendDirection === "improving"
+                  ? "↓ Improving"
+                  : trendStats.trendDirection === "worsening"
+                    ? "↑ Worsening"
+                    : "→ Stable"}
               </span>
             </div>
           </div>
@@ -379,13 +450,20 @@ export default function PainTrendChart({
       {/* Mobile-friendly trend indicator */}
       {isMobile && trendStats && (
         <div className="mt-3 flex justify-center">
-          <div className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-            trendStats.trendDirection === 'improving' ? 'bg-green-100 text-green-800' :
-            trendStats.trendDirection === 'worsening' ? 'bg-red-100 text-red-800' :
-            'bg-gray-100 text-gray-800'
-          }`}>
-            {trendStats.trendDirection === 'improving' ? '↓' :
-             trendStats.trendDirection === 'worsening' ? '↑' : '→'}
+          <div
+            className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+              trendStats.trendDirection === "improving"
+                ? "bg-green-100 text-green-800"
+                : trendStats.trendDirection === "worsening"
+                  ? "bg-red-100 text-red-800"
+                  : "bg-gray-100 text-gray-800"
+            }`}
+          >
+            {trendStats.trendDirection === "improving"
+              ? "↓"
+              : trendStats.trendDirection === "worsening"
+                ? "↑"
+                : "→"}
             <span className="ml-1 capitalize">{trendStats.trendDirection}</span>
           </div>
         </div>

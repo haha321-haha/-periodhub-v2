@@ -3,6 +3,9 @@
  * 基于HVsLYEp现有结构设计，不重复造轮子
  */
 
+import type { AssessmentAnalyticsRecord } from "../shared/types";
+import type { RecommendationFeedbackAction } from "./recommendation";
+
 // 基础类型定义
 
 // 月经阶段类型
@@ -135,7 +138,7 @@ export interface CalendarState {
 // 推荐反馈接口
 export interface RecommendationFeedback {
   recommendationId: string;
-  action: 'clicked' | 'dismissed' | 'saved' | 'rated';
+  action: "clicked" | "dismissed" | "saved" | "rated";
   rating?: 1 | 2 | 3 | 4 | 5;
   timestamp: string;
 }
@@ -175,6 +178,8 @@ export interface WorkplaceWellnessState {
 
   // 推荐反馈
   recommendationFeedback: RecommendationFeedbackHistory;
+  telemetryLog: AssessmentAnalyticsRecord[];
+  navigationActions: RecommendationFeedbackAction[];
 }
 
 // 翻译函数类型

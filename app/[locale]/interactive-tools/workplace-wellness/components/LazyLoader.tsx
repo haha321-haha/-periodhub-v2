@@ -1,6 +1,7 @@
 "use client";
 
-import React, { Suspense, lazy, ComponentType } from "react";
+import React, { Suspense, lazy } from "react";
+import type { ComponentType } from "react";
 import { LoadingWrapper, SkeletonCard } from "./LoadingAnimations";
 
 /**
@@ -47,7 +48,7 @@ const DelayedSuspense = ({
  * @param fallback 加载状态组件
  * @param delay 延迟加载时间(ms)
  */
-export function createLazyComponent<T extends ComponentType<any>>(
+export function createLazyComponent<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
   fallback?: React.ReactNode,
   delay: number = 0,
@@ -62,7 +63,7 @@ export function createLazyComponent<T extends ComponentType<any>>(
         fallback={fallback || <DefaultFallback height={props.height} />}
         delay={delay}
       >
-        <LazyComponent {...(props as any)} />
+        <LazyComponent {...(props as React.ComponentProps<T>)} />
       </DelayedSuspense>
     );
   };
@@ -75,7 +76,10 @@ export function createLazyComponent<T extends ComponentType<any>>(
 export class ComponentPreloader {
   private static preloadedComponents = new Set<string>();
 
-  static async preload(importFunc: () => Promise<any>, componentName: string) {
+  static async preload(
+    importFunc: () => Promise<unknown>,
+    componentName: string,
+  ) {
     if (this.preloadedComponents.has(componentName)) {
       return;
     }
@@ -83,10 +87,7 @@ export class ComponentPreloader {
     try {
       await importFunc();
       this.preloadedComponents.add(componentName);
-      console.log(`✅ 预加载组件: ${componentName}`);
-    } catch (error) {
-      console.warn(`⚠️ 预加载组件失败: ${componentName}`, error);
-    }
+    } catch (error) {}
   }
 
   static isPreloaded(componentName: string): boolean {
@@ -102,7 +103,7 @@ export class ComponentPreloader {
  * 路由级别的懒加载组件
  * 用于页面级别的代码分割
  */
-export function createLazyPage<T extends ComponentType<any>>(
+export function createLazyPage<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
   pageName: string,
 ) {
@@ -117,7 +118,7 @@ export function createLazyPage<T extends ComponentType<any>>(
  * 功能模块级别的懒加载组件
  * 用于功能模块的代码分割
  */
-export function createLazyModule<T extends ComponentType<any>>(
+export function createLazyModule<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
   moduleName: string,
 ) {
@@ -132,7 +133,7 @@ export function createLazyModule<T extends ComponentType<any>>(
  * 工具组件级别的懒加载
  * 用于小型工具组件的代码分割
  */
-export function createLazyTool<T extends ComponentType<any>>(
+export function createLazyTool<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
   toolName: string,
 ) {
@@ -190,7 +191,7 @@ export async function preloadCriticalComponents() {
  * 懒加载钩子
  * 用于在组件中动态加载其他组件
  */
-export function useLazyComponent<T extends ComponentType<any>>(
+export function useLazyComponent<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
   componentName: string,
 ) {
@@ -209,7 +210,6 @@ export function useLazyComponent<T extends ComponentType<any>>(
       })
       .catch((err) => {
         setError(err);
-        console.error(`懒加载组件失败: ${componentName}`, err);
       })
       .finally(() => {
         setLoading(false);

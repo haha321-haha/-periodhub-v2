@@ -16,6 +16,7 @@ import {
 import { useTranslations } from "next-intl";
 import { Locale } from "@/i18n";
 import { PDF_RESOURCES, getPDFResourceById } from "@/config/pdfResources";
+import type { PDFResource as ConfigPDFResource } from "@/config/pdfResources";
 import { SITE_CONFIG } from "@/config/site.config";
 
 interface OptimizedMobilePDFCenterProps {
@@ -185,15 +186,15 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
   };
 
   // 从统一配置获取PDF资源并转换为组件格式
-  const convertPDFToResource = (pdfResource: any): Resource => {
+  const convertPDFToResource = (pdfResource: ConfigPDFResource): Resource => {
     // 根据语言获取正确的标题
-    const getTitle = (pdfResource: any) => {
-      if (pdfResource.versions && pdfResource.versions[locale]) {
-        return pdfResource.versions[locale].title;
+    const getTitle = (resource: ConfigPDFResource) => {
+      if (resource.versions && resource.versions[locale]) {
+        return resource.versions[locale].title;
       }
       return (
-        pdfResource.title ||
-        pdfResource.titleKey ||
+        resource.title ||
+        resource.titleKey ||
         (locale === "zh" ? "PDF资源" : "PDF Resource")
       );
     };
@@ -1427,7 +1428,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
       ],
 
       // === 新增：精油/芳香疗法同义词映射 ===
-      "精油": [
+      精油: [
         "芳疗",
         "芳香疗法",
         "薰衣草精油",
@@ -1439,13 +1440,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         "aromatherapy",
         "lavender oil",
       ],
-      "芳疗": [
-        "精油",
-        "芳香疗法",
-        "精油按摩",
-        "aromatherapy",
-        "essential oils",
-      ],
+      芳疗: ["精油", "芳香疗法", "精油按摩", "aromatherapy", "essential oils"],
       "essential oils": [
         "aromatherapy",
         "lavender oil",
@@ -1455,7 +1450,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         "精油",
         "芳疗",
       ],
-      "aromatherapy": [
+      aromatherapy: [
         "essential oils",
         "lavender oil",
         "aromatherapy relief",
@@ -1464,7 +1459,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
       ],
 
       // === 新增：IUD/避孕同义词映射 ===
-      "宫内节育器": [
+      宫内节育器: [
         "节育环",
         "IUD",
         "避孕环",
@@ -1474,14 +1469,8 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         "intrauterine device",
         "coil",
       ],
-      "节育环": [
-        "宫内节育器",
-        "IUD",
-        "避孕环",
-        "IUD",
-        "coil",
-      ],
-      "IUD": [
+      节育环: ["宫内节育器", "IUD", "避孕环", "IUD", "coil"],
+      IUD: [
         "宫内节育器",
         "节育环",
         "intrauterine device",
@@ -1497,7 +1486,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
       ],
 
       // === 新增：NSAIDs/药物品牌同义词映射 ===
-      "NSAID": [
+      NSAID: [
         "非甾体抗炎药",
         "布洛芬",
         "萘普生",
@@ -1508,35 +1497,13 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         "advil",
         "aleve",
       ],
-      "布洛芬": [
-        "NSAID",
-        "非甾体抗炎药",
-        "艾德维尔",
-        "ibuprofen",
-        "advil",
-      ],
-      "萘普生": [
-        "NSAID",
-        "非甾体抗炎药",
-        "安乃威",
-        "naproxen",
-        "aleve",
-      ],
-      "ibuprofen": [
-        "NSAID",
-        "advil",
-        "布洛芬",
-        "艾德维尔",
-      ],
-      "naproxen": [
-        "NSAID",
-        "aleve",
-        "萘普生",
-        "安乃威",
-      ],
+      布洛芬: ["NSAID", "非甾体抗炎药", "艾德维尔", "ibuprofen", "advil"],
+      萘普生: ["NSAID", "非甾体抗炎药", "安乃威", "naproxen", "aleve"],
+      ibuprofen: ["NSAID", "advil", "布洛芬", "艾德维尔"],
+      naproxen: ["NSAID", "aleve", "萘普生", "安乃威"],
 
       // === 新增：并发症同义词映射 ===
-      "并发症": [
+      并发症: [
         "严重疼痛",
         "子宫内膜异位症",
         "子宫腺肌症",
@@ -1545,19 +1512,9 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         "severe pain",
         "endometriosis",
       ],
-      "子宫内膜异位症": [
-        "并发症",
-        "严重疼痛",
-        "endometriosis",
-        "complications",
-      ],
-      "子宫腺肌症": [
-        "并发症",
-        "严重疼痛",
-        "adenomyosis",
-        "complications",
-      ],
-      "endometriosis": [
+      子宫内膜异位症: ["并发症", "严重疼痛", "endometriosis", "complications"],
+      子宫腺肌症: ["并发症", "严重疼痛", "adenomyosis", "complications"],
+      endometriosis: [
         "complications",
         "severe pain",
         "子宫内膜异位症",
@@ -1565,7 +1522,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
       ],
 
       // === 新增：营养补充剂同义词映射 ===
-      "补充剂": [
+      补充剂: [
         "维生素",
         "镁",
         "欧米茄3",
@@ -1575,13 +1532,8 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         "vitamins",
         "magnesium",
       ],
-      "维生素": [
-        "补充剂",
-        "营养素",
-        "vitamins",
-        "supplements",
-      ],
-      "supplements": [
+      维生素: ["补充剂", "营养素", "vitamins", "supplements"],
+      supplements: [
         "vitamins",
         "magnesium",
         "omega 3",
@@ -1610,7 +1562,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     const synonyms = getSynonyms(term);
 
     // 计算资源相关性评分 - 修复评分算法
-    const calculateRelevanceScore = (resource: any): number => {
+    const calculateRelevanceScore = (resource: Resource): number => {
       const searchableText = [
         resource.title,
         resource.tags.join(" "),
@@ -1676,19 +1628,22 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
       .sort((a, b) => b.relevanceScore - a.relevanceScore);
 
     // 去重：基于资源ID去重，保留评分最高的
-    const uniqueResources = scoredResources.reduce((acc, current) => {
-      const existingIndex = acc.findIndex((item) => item.id === current.id);
-      if (existingIndex === -1) {
-        // 如果不存在，添加
-        acc.push(current);
-      } else {
-        // 如果存在，保留评分更高的
-        if (current.relevanceScore > acc[existingIndex].relevanceScore) {
-          acc[existingIndex] = current;
+    const uniqueResources = scoredResources.reduce(
+      (acc, current) => {
+        const existingIndex = acc.findIndex((item) => item.id === current.id);
+        if (existingIndex === -1) {
+          // 如果不存在，添加
+          acc.push(current);
+        } else {
+          // 如果存在，保留评分更高的
+          if (current.relevanceScore > acc[existingIndex].relevanceScore) {
+            acc[existingIndex] = current;
+          }
         }
-      }
-      return acc;
-    }, [] as typeof scoredResources);
+        return acc;
+      },
+      [] as typeof scoredResources,
+    );
 
     return uniqueResources;
   }, [searchTerm, optimizedCategories]);

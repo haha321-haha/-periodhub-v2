@@ -164,7 +164,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
         setPagination(result.pagination);
       } catch (error) {
         // eslint-disable-next-line no-console
-        console.error("Failed to load records:", error);
+        // Failed to load records - handled silently
         // Fallback to mock data for demo
         setRecords(getMockRecords());
       } finally {
@@ -178,8 +178,7 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
   // Load initial data
   useEffect(() => {
     loadRecords(1, true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterDateRange, filterPainLevel]);
+  }, [filterDateRange, filterPainLevel, loadRecords]);
 
   // Handle load more for pagination
   const handleLoadMore = useCallback(() => {
@@ -415,9 +414,9 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                   <div className="flex items-center space-x-2 sm:ml-4 flex-shrink-0">
                     <button
                       className="p-2 text-gray-400 hover:text-gray-600 focus:text-gray-600 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2"
-                      aria-label={`${t(
-                        "recordCard.editRecord",
-                      )} ${new Date(record.date).toLocaleDateString()}`}
+                      aria-label={`${t("recordCard.editRecord")} ${new Date(
+                        record.date,
+                      ).toLocaleDateString()}`}
                     >
                       <svg
                         className="w-4 h-4"
@@ -436,9 +435,9 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
                     </button>
                     <button
                       className="p-2 text-gray-400 hover:text-red-600 focus:text-red-600 transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                      aria-label={`${t(
-                        "recordCard.deleteRecord",
-                      )} ${new Date(record.date).toLocaleDateString()}`}
+                      aria-label={`${t("recordCard.deleteRecord")} ${new Date(
+                        record.date,
+                      ).toLocaleDateString()}`}
                     >
                       <svg
                         className="w-4 h-4"

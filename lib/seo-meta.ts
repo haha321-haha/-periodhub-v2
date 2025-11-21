@@ -8,7 +8,7 @@ interface SEOMetaProps {
   canonical?: string;
   ogImage?: string;
   noindex?: boolean;
-  structuredData?: any;
+  structuredData?: Record<string, unknown> | string;
 }
 
 export function generateAdvancedMeta({
@@ -24,12 +24,30 @@ export function generateAdvancedMeta({
     ? title
     : `${title} | PeriodHub`;
 
+  const structuredDataString =
+    typeof structuredData === "string"
+      ? structuredData
+      : structuredData
+        ? JSON.stringify(structuredData)
+        : undefined;
+
+  const structuredDataEntry = structuredDataString
+    ? { "application/ld+json": structuredDataString }
+    : {};
+
+  const otherMetadata: Record<string, string | boolean> = {
+    "theme-color": SEO_DEFAULTS.THEME_COLOR,
+    "msapplication-TileColor": SEO_DEFAULTS.THEME_COLOR,
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "format-detection": "telephone=no",
+    ...structuredDataEntry,
+  };
+
   return {
     title: fullTitle,
     description,
     keywords: keywords.join(", "),
-
-    // 基础元数据
     robots: {
       index: !noindex,
       follow: !noindex,
@@ -41,8 +59,6 @@ export function generateAdvancedMeta({
         "max-snippet": -1,
       },
     },
-
-    // Open Graph
     openGraph: {
       title: fullTitle,
       description,
@@ -59,8 +75,6 @@ export function generateAdvancedMeta({
       locale: "zh_CN",
       type: "website",
     },
-
-    // Twitter Card
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
@@ -68,25 +82,15 @@ export function generateAdvancedMeta({
       images: [ogImage],
       creator: SEO_DEFAULTS.TWITTER_CREATOR,
     },
-
-    // 高级元数据
     alternates: {
       canonical,
       languages: {
         "zh-CN": canonical,
         "en-US": canonical?.replace("/zh/", "/en/"),
-        "x-default": canonical?.replace("/zh/", "/en/") || canonical, // ✅ 修复：默认英文版本（北美市场优先）
+        "x-default": canonical?.replace("/zh/", "/en/") || canonical,
       },
     },
-
-    // 其他重要元数据
-    other: {
-      "theme-color": SEO_DEFAULTS.THEME_COLOR,
-      "msapplication-TileColor": SEO_DEFAULTS.THEME_COLOR,
-      "apple-mobile-web-app-capable": "yes",
-      "apple-mobile-web-app-status-bar-style": "default",
-      "format-detection": "telephone=no",
-    },
+    other: otherMetadata,
   };
 }
 

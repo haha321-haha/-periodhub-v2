@@ -20,22 +20,12 @@ export function useSafeTranslations(namespace?: string) {
     try {
       const result = t(key, params);
 
-      // 检查是否返回了翻译键本身（表示翻译失败）
       if (result === key || result.includes(key)) {
-        console.warn(
-          `Translation missing for key: ${
-            namespace ? `${namespace}.` : ""
-          }${key}`,
-        );
         return fallback || key;
       }
 
       return result;
-    } catch (error) {
-      console.error(
-        `Translation error for key: ${namespace ? `${namespace}.` : ""}${key}`,
-        error,
-      );
+    } catch {
       return fallback || key;
     }
   };
@@ -55,10 +45,8 @@ export function validateTranslationKey(
   key: string,
   namespace?: string,
 ): boolean {
-  // 这里可以添加更复杂的验证逻辑
-  // 比如检查键是否存在于翻译文件中
-
-  return typeof key === "string" && key.length > 0;
+  const fullKey = namespace ? `${namespace}.${key}` : key;
+  return typeof fullKey === "string" && fullKey.length > 0;
 }
 
 /**
@@ -140,17 +128,6 @@ export function translateObject<T extends Record<string, string>>(
 /**
  * 开发环境翻译调试函数
  */
-export function debugTranslation(
-  key: string,
-  value: string,
-  namespace?: string,
-) {
-  if (process.env.NODE_ENV === "development") {
-    const fullKey = namespace ? `${namespace}.${key}` : key;
-    console.log(`🌐 Translation: ${fullKey} = "${value}"`);
-  }
-}
-
 /**
  * 翻译缓存管理
  */

@@ -1,6 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
+import { logError } from "@/lib/debug-logger";
+
+type NavigatorConnection = {
+  effectiveType?: string | null;
+  downlink?: number | null;
+  rtt?: number | null;
+  saveData?: boolean | null;
+};
+
+type ExtendedNavigator = Navigator & {
+  connection?: NavigatorConnection;
+};
 
 interface OfflineState {
   isOnline: boolean;
@@ -23,33 +35,34 @@ interface OfflineDetectionOptions {
 export function useOfflineDetection(options: OfflineDetectionOptions = {}) {
   const {
     checkInterval = 30000, // 30 seconds
-    pingUrl = '/favicon.ico',
+    pingUrl = "/favicon.ico",
     timeout = 5000,
     onOnline,
     onOffline,
-    onReconnect
+    onReconnect,
   } = options;
 
   const [state, setState] = useState<OfflineState>({
-    isOnline: typeof navigator !== 'undefined' ? navigator.onLine : true,
-    isOffline: typeof navigator !== 'undefined' ? !navigator.onLine : false,
+    isOnline: typeof navigator !== "undefined" ? navigator.onLine : true,
+    isOffline: typeof navigator !== "undefined" ? !navigator.onLine : false,
     wasOffline: false,
     offlineDuration: 0,
     lastOnlineTime: null,
-    connectionType: null
+    connectionType: null,
   });
 
   const [offlineStartTime, setOfflineStartTime] = useState<Date | null>(null);
 
   // Get connection information
   const getConnectionInfo = useCallback(() => {
-    if (typeof navigator !== 'undefined' && 'connection' in navigator) {
-      const connection = (navigator as any).connection;
+    if (typeof navigator !== "undefined") {
+      const connection = (navigator as ExtendedNavigator).connection;
+      if (!connection) return null;
       return {
-        effectiveType: connection?.effectiveType || null,
-        downlink: connection?.downlink || null,
-        rtt: connection?.rtt || null,
-        saveData: connection?.saveData || false
+        effectiveType: connection.effectiveType ?? null,
+        downlink: connection.downlink ?? null,
+        rtt: connection.rtt ?? null,
+        saveData: connection.saveData ?? false,
       };
     }
     return null;
@@ -62,68 +75,83 @@ export function useOfflineDetection(options: OfflineDetectionOptions = {}) {
       const timeoutId = setTimeout(() => controller.abort(), timeout);
 
       const response = await fetch(pingUrl, {
-        method: 'HEAD',
-        cache: 'no-cache',
-        signal: controller.signal
+        method: "HEAD",
+        cache: "no-cache",
+        signal: controller.signal,
       });
 
       clearTimeout(timeoutId);
       return response.ok;
-    } catch (error) {
+    } catch {
       return false;
     }
   }, [pingUrl, timeout]);
 
   // Update online status
-  const updateOnlineStatus = useCallback(async (isOnline: boolean, skipPing = false) => {
-    // If browser says we're online, verify with server ping
-    const actuallyOnline = isOnline && !skipPing ? await pingServer() : isOnline;
+  const updateOnlineStatus = useCallback(
+    async (isOnline: boolean, skipPing = false) => {
+      // If browser says we're online, verify with server ping
+      const actuallyOnline =
+        isOnline && !skipPing ? await pingServer() : isOnline;
 
-    setState(prevState => {
-      const now = new Date();
-      let offlineDuration = 0;
+      setState((prevState) => {
+        const now = new Date();
+        let offlineDuration = 0;
 
-      // Calculate offline duration if coming back online
-      if (actuallyOnline && prevState.isOffline && offlineStartTime) {
-        offlineDuration = now.getTime() - offlineStartTime.getTime();
+        // Calculate offline duration if coming back online
+        if (actuallyOnline && prevState.isOffline && offlineStartTime) {
+          offlineDuration = now.getTime() - offlineStartTime.getTime();
+        }
+
+        return {
+          ...prevState,
+          isOnline: actuallyOnline,
+          isOffline: !actuallyOnline,
+          wasOffline: prevState.isOffline,
+          offlineDuration,
+          lastOnlineTime: actuallyOnline ? now : prevState.lastOnlineTime,
+          connectionType: getConnectionInfo()?.effectiveType || null,
+        };
+      });
+
+      // Handle state transitions
+      if (actuallyOnline && state.isOffline) {
+        // Coming back online
+        const duration = offlineStartTime
+          ? Date.now() - offlineStartTime.getTime()
+          : 0;
+        setOfflineStartTime(null);
+        onReconnect?.(duration);
+        onOnline?.();
+      } else if (!actuallyOnline && state.isOnline) {
+        // Going offline
+        setOfflineStartTime(new Date());
+        onOffline?.();
       }
-
-      return {
-        ...prevState,
-        isOnline: actuallyOnline,
-        isOffline: !actuallyOnline,
-        wasOffline: prevState.isOffline,
-        offlineDuration,
-        lastOnlineTime: actuallyOnline ? now : prevState.lastOnlineTime,
-        connectionType: getConnectionInfo()?.effectiveType || null
-      };
-    });
-
-    // Handle state transitions
-    if (actuallyOnline && state.isOffline) {
-      // Coming back online
-      const duration = offlineStartTime ? Date.now() - offlineStartTime.getTime() : 0;
-      setOfflineStartTime(null);
-      onReconnect?.(duration);
-      onOnline?.();
-    } else if (!actuallyOnline && state.isOnline) {
-      // Going offline
-      setOfflineStartTime(new Date());
-      onOffline?.();
-    }
-  }, [state.isOnline, state.isOffline, offlineStartTime, pingServer, getConnectionInfo, onOnline, onOffline, onReconnect]);
+    },
+    [
+      state.isOnline,
+      state.isOffline,
+      offlineStartTime,
+      pingServer,
+      getConnectionInfo,
+      onOnline,
+      onOffline,
+      onReconnect,
+    ],
+  );
 
   // Handle browser online/offline events
   useEffect(() => {
     const handleOnline = () => updateOnlineStatus(true);
     const handleOffline = () => updateOnlineStatus(false, true);
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
 
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
     };
   }, [updateOnlineStatus]);
 
@@ -138,9 +166,9 @@ export function useOfflineDetection(options: OfflineDetectionOptions = {}) {
 
   // Initialize connection info
   useEffect(() => {
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
-      connectionType: getConnectionInfo()?.effectiveType || null
+      connectionType: getConnectionInfo()?.effectiveType || null,
     }));
   }, [getConnectionInfo]);
 
@@ -152,27 +180,28 @@ export function useOfflineDetection(options: OfflineDetectionOptions = {}) {
   // Get connection quality assessment
   const getConnectionQuality = useCallback(() => {
     const connectionInfo = getConnectionInfo();
-    if (!connectionInfo) return 'unknown';
+    if (!connectionInfo) return "unknown";
 
     const { effectiveType, rtt, downlink } = connectionInfo;
 
-    if (effectiveType === '4g' && rtt < 100 && downlink > 10) return 'excellent';
-    if (effectiveType === '4g' && rtt < 200 && downlink > 5) return 'good';
-    if (effectiveType === '3g' || (rtt < 500 && downlink > 1)) return 'fair';
-    return 'poor';
+    if (effectiveType === "4g" && rtt < 100 && downlink > 10)
+      return "excellent";
+    if (effectiveType === "4g" && rtt < 200 && downlink > 5) return "good";
+    if (effectiveType === "3g" || (rtt < 500 && downlink > 1)) return "fair";
+    return "poor";
   }, [getConnectionInfo]);
 
   return {
     ...state,
     checkConnectivity,
     getConnectionQuality,
-    connectionInfo: getConnectionInfo()
+    connectionInfo: getConnectionInfo(),
   };
 }
 
 // Offline Storage Hook
 export function useOfflineStorage(key: string) {
-  const [offlineData, setOfflineData] = useState<any[]>([]);
+  const [offlineData, setOfflineData] = useState<unknown[]>([]);
 
   // Load offline data on mount
   useEffect(() => {
@@ -181,29 +210,37 @@ export function useOfflineStorage(key: string) {
       if (stored) {
         setOfflineData(JSON.parse(stored));
       }
-    } catch (error) {
-      console.error('Failed to load offline data:', error);
+    } catch (err) {
+      logError("Failed to load offline data", err, "useOfflineStorage");
     }
   }, [key]);
 
   // Store data for offline use
-  const storeOfflineData = useCallback((data: any) => {
-    try {
-      const newOfflineData = [...offlineData, {
-        ...data,
-        timestamp: new Date().toISOString(),
-        id: `offline_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
-      }];
+  const storeOfflineData = useCallback(
+    (data: unknown) => {
+      try {
+        const newOfflineData = [
+          ...offlineData,
+          {
+            ...data,
+            timestamp: new Date().toISOString(),
+            id: `offline_${Date.now()}_${Math.random()
+              .toString(36)
+              .substr(2, 9)}`,
+          },
+        ];
 
-      setOfflineData(newOfflineData);
-      localStorage.setItem(`offline_${key}`, JSON.stringify(newOfflineData));
+        setOfflineData(newOfflineData);
+        localStorage.setItem(`offline_${key}`, JSON.stringify(newOfflineData));
 
-      return true;
-    } catch (error) {
-      console.error('Failed to store offline data:', error);
-      return false;
-    }
-  }, [key, offlineData]);
+        return true;
+      } catch (err) {
+        logError("Failed to store offline data", err, "useOfflineStorage");
+        return false;
+      }
+    },
+    [key, offlineData],
+  );
 
   // Clear offline data
   const clearOfflineData = useCallback(() => {
@@ -220,7 +257,7 @@ export function useOfflineStorage(key: string) {
     offlineData,
     storeOfflineData,
     clearOfflineData,
-    getOfflineDataCount
+    getOfflineDataCount,
   };
 }
 

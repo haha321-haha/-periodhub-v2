@@ -7,6 +7,8 @@ import type { Metadata } from "next";
 import { Locale } from "@/i18n";
 import { getTranslations } from "next-intl/server";
 
+export type StructuredDataBlock = Record<string, unknown>;
+
 type TFunction = Awaited<ReturnType<typeof getTranslations>>;
 
 export interface SEOConfig {
@@ -15,7 +17,7 @@ export interface SEOConfig {
   keywords: string[];
   canonical: string;
   ogImage?: string;
-  structuredData?: any;
+  structuredData?: StructuredDataBlock[];
 }
 
 export interface PageSEOData {
@@ -115,7 +117,7 @@ export function getWorkplaceWellnessSEOData(): PageSEOData {
 /**
  * 生成FAQ结构化数据
  */
-export function generateFAQStructuredData(t: TFunction): any {
+export function generateFAQStructuredData(t: TFunction): StructuredDataBlock {
   const faqs = [
     { key: "q1" },
     { key: "q2" },
@@ -144,7 +146,7 @@ export function generateFAQStructuredData(t: TFunction): any {
 export function generateWebApplicationSchema(
   locale: Locale,
   t: TFunction,
-): any {
+): StructuredDataBlock {
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
@@ -183,7 +185,7 @@ export function generateWebApplicationSchema(
 export function generateBreadcrumbSchema(
   locale: Locale,
   t: TFunction,
-): any {
+): StructuredDataBlock {
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
@@ -220,7 +222,7 @@ export function generateBreadcrumbSchema(
 export function generateAllStructuredData(
   locale: Locale,
   t: TFunction,
-): any[] {
+): StructuredDataBlock[] {
   return [
     generateFAQStructuredData(t),
     generateWebApplicationSchema(locale, t),
@@ -297,9 +299,10 @@ export function generateSEOReport(
       webApplication: true,
       breadcrumb: true,
     },
-    generatedAt: typeof window !== 'undefined'
-      ? new Date().toISOString()
-      : new Date(Date.now()).toISOString(), // SSR 安全
+    generatedAt:
+      typeof window !== "undefined"
+        ? new Date().toISOString()
+        : new Date(Date.now()).toISOString(), // SSR 安全
   };
 
   return JSON.stringify(report, null, 2);

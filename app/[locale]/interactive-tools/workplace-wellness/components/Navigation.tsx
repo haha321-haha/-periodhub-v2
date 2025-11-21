@@ -13,10 +13,7 @@ import {
   Briefcase,
   BarChart3,
   Settings,
-  Menu,
-  X,
 } from "lucide-react";
-import { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   useActiveTab,
@@ -31,8 +28,6 @@ export default function Navigation() {
   const activeTab = useActiveTab();
   const { setActiveTab } = useWorkplaceWellnessActions();
   const t = useTranslations("workplaceWellness");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   // 导航标签配置 - 基于HVsLYEp的tabs结构，增强Day 11功能
   const tabs = [
     { id: "calendar", name: t("nav.calendar"), icon: Calendar },
@@ -44,8 +39,19 @@ export default function Navigation() {
   ];
 
   const handleTabClick = (tabId: string) => {
-    setActiveTab(tabId as any);
-    setIsMobileMenuOpen(false);
+    setActiveTab(
+      tabId as
+        | "calendar"
+        | "nutrition"
+        | "export"
+        | "settings"
+        | "work-impact"
+        | "analysis"
+        | "assessment"
+        | "recommendations"
+        | "tracking"
+        | "analytics",
+    );
   };
 
   return (

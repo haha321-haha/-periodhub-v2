@@ -10,17 +10,16 @@ import {
   Clock,
   FileText,
   Database,
-  RefreshCw,
 } from "lucide-react";
 import { LoadingSpinner, ProgressBar } from "./LoadingSystem";
 import { useLoadingState } from "./LoadingSystem";
 import DataIntegrityService, {
   DataIntegrityReport,
 } from "../../../../../lib/pain-tracker/storage/DataIntegrityService";
-import {
-  PainTrackerError,
-  StoredData,
-} from "../../../../../types/pain-tracker";
+import { StoredData } from "../../../../../types/pain-tracker";
+import { logError } from "../../../../../lib/debug-logger";
+
+type BackupTabId = "backup" | "restore" | "integrity";
 
 interface BackupRestoreSystemProps {
   onBackupComplete?: (success: boolean) => void;
@@ -35,9 +34,7 @@ export function BackupRestoreSystem({
   onIntegrityCheck,
   className = "",
 }: BackupRestoreSystemProps) {
-  const [activeTab, setActiveTab] = useState<
-    "backup" | "restore" | "integrity"
-  >("backup");
+  const [activeTab, setActiveTab] = useState<BackupTabId>("backup");
   const [backupData, setBackupData] = useState<string | null>(null);
   const [restoreFile, setRestoreFile] = useState<File | null>(null);
   const [integrityReport, setIntegrityReport] =
@@ -47,6 +44,16 @@ export function BackupRestoreSystem({
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dataIntegrityService = new DataIntegrityService();
+
+  const tabItems: Array<{
+    id: BackupTabId;
+    label: string;
+    icon: typeof Download;
+  }> = [
+    { id: "backup", label: "Backup", icon: Download },
+    { id: "restore", label: "Restore", icon: Upload },
+    { id: "integrity", label: "Data Health", icon: Shield },
+  ];
 
   const {
     isLoading: backupLoading,
@@ -87,13 +94,13 @@ export function BackupRestoreSystem({
       // Get all pain tracker data
       const records = JSON.parse(
         localStorage.getItem("enhanced_pain_tracker_records") || "[]",
-      );
+      ) as StoredData["records"];
       const preferences = JSON.parse(
         localStorage.getItem("enhanced_pain_tracker_preferences") || "{}",
-      );
+      ) as StoredData["preferences"];
       const metadata = JSON.parse(
         localStorage.getItem("enhanced_pain_tracker_metadata") || "{}",
-      );
+      ) as StoredData["metadata"];
 
       updateBackupProgress(50, "Preparing backup data...");
 
@@ -147,7 +154,8 @@ export function BackupRestoreSystem({
       URL.revokeObjectURL(url);
 
       setSuccess("Backup file downloaded successfully!");
-    } catch (error) {
+    } catch (downloadError) {
+      logError("Failed to download backup file", downloadError);
       setError("Failed to download backup file");
     }
   };
@@ -342,14 +350,10 @@ export function BackupRestoreSystem({
       {/* Tab Navigation */}
       <div className="border-b border-gray-200">
         <nav className="flex space-x-8 px-6">
-          {[
-            { id: "backup", label: "Backup", icon: Download },
-            { id: "restore", label: "Restore", icon: Upload },
-            { id: "integrity", label: "Data Health", icon: Shield },
-          ].map(({ id, label, icon: Icon }) => (
+          {tabItems.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
-              onClick={() => setActiveTab(id as any)}
+              onClick={() => setActiveTab(id)}
               className={`flex items-center py-4 px-1 border-b-2 font-medium text-sm ${
                 activeTab === id
                   ? "border-blue-500 text-blue-600"
@@ -431,8 +435,8 @@ export function BackupRestoreSystem({
               <div className="mt-4 p-3 bg-gray-50 rounded-md">
                 <p className="text-sm text-gray-600">
                   Backup created successfully! The backup contains{" "}
-                  {JSON.parse(backupData).records?.length || 0} records. Click
-                  "Download Backup" to save the file to your device.
+                  {JSON.parse(backupData).records?.length || 0} records. Click{" "}
+                  &quot;Download Backup&quot; to save the file to your device.
                 </p>
               </div>
             )}

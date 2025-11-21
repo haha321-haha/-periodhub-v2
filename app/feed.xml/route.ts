@@ -66,6 +66,7 @@ export async function GET() {
       },
     });
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Error generating Atom feed:", error);
 
     // 返回错误状态下的基本 Feed

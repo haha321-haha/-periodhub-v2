@@ -274,8 +274,8 @@ export const calculateCombinedLevel = (
 
 // 生成个性化建议的工具函数
 export const generateRecommendations = (
-  stage1Result: any,
-  stage2Result?: any,
+  stage1Result: { recommendations: string[] } | null,
+  stage2Result?: { recommendations: string[] } | null,
 ): string[] => {
   const recommendations: string[] = [];
 
@@ -295,7 +295,7 @@ export const generateRecommendations = (
 
 // 获取下一可用阶段的工具函数
 export const getNextAvailableStage = (
-  stageProgress: Record<QuizStage, any>,
+  stageProgress: Record<QuizStage, { status: string }>,
 ): QuizStage | null => {
   // 检查第一阶段
   if (

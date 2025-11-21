@@ -14,7 +14,10 @@ import {
 } from "@/lib/seo/multilingual-seo";
 
 // 推荐数据配置函数（健康指南主题）
-function getHealthGuideRecommendations(locale: string, t: any) {
+function getHealthGuideRecommendations(
+  locale: string,
+  t: (key: string) => string,
+) {
   return {
     relatedTools: [
       {

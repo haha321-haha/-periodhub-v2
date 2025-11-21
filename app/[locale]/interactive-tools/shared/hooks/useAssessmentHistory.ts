@@ -45,6 +45,65 @@ export const useAssessmentHistory = () => {
   const [trends, setTrends] = useState<AssessmentTrends | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Calculate trends from history - defined before useEffect to avoid dependency issues
+  const calculateTrends = useCallback(
+    (historyData: AssessmentHistoryEntry[]) => {
+      if (historyData.length === 0) {
+        setTrends(null);
+        return;
+      }
+
+      const totalAssessments = historyData.length;
+      const averageScore =
+        historyData.reduce((sum, entry) => sum + entry.percentage, 0) /
+        totalAssessments;
+
+      // Calculate score trend (last 5 vs previous 5)
+      const recentScores = historyData.slice(-5);
+      const previousScores = historyData.slice(-10, -5);
+
+      let scoreTrend: "improving" | "declining" | "stable" = "stable";
+      if (previousScores.length > 0) {
+        const recentAvg =
+          recentScores.reduce((sum, entry) => sum + entry.percentage, 0) /
+          recentScores.length;
+        const previousAvg =
+          previousScores.reduce((sum, entry) => sum + entry.percentage, 0) /
+          previousScores.length;
+
+        if (recentAvg > previousAvg + 5) scoreTrend = "improving";
+        else if (recentAvg < previousAvg - 5) scoreTrend = "declining";
+      }
+
+      // Calculate assessment frequency
+      let assessmentFrequency: "daily" | "weekly" | "monthly" | "irregular" =
+        "irregular";
+      if (historyData.length >= 2) {
+        const dates = historyData.map((entry) => new Date(entry.timestamp));
+        const intervals = [];
+        for (let i = 1; i < dates.length; i++) {
+          intervals.push(dates[i].getTime() - dates[i - 1].getTime());
+        }
+        const avgInterval =
+          intervals.reduce((sum, interval) => sum + interval, 0) /
+          intervals.length;
+        const avgDays = avgInterval / (1000 * 60 * 60 * 24);
+
+        if (avgDays <= 2) assessmentFrequency = "daily";
+        else if (avgDays <= 10) assessmentFrequency = "weekly";
+        else if (avgDays <= 35) assessmentFrequency = "monthly";
+      }
+
+      setTrends({
+        totalAssessments,
+        averageScore,
+        scoreTrend,
+        assessmentFrequency,
+      });
+    },
+    [],
+  );
+
   // Load history from localStorage on mount
   useEffect(() => {
     try {
@@ -59,78 +118,7 @@ export const useAssessmentHistory = () => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
-
-  // Calculate trends from history
-  const calculateTrends = useCallback(
-    (historyData: AssessmentHistoryEntry[]) => {
-      if (historyData.length === 0) {
-        setTrends(null);
-        return;
-      }
-
-      const totalAssessments = historyData.length;
-      const averageScore =
-        historyData.reduce((sum, entry) => sum + entry.percentage, 0) /
-        totalAssessments;
-
-      // Calculate score trend (comparing last 3 vs previous 3)
-      let scoreTrend: "improving" | "stable" | "declining" = "stable";
-      if (totalAssessments >= 6) {
-        const recent =
-          historyData
-            .slice(-3)
-            .reduce((sum, entry) => sum + entry.percentage, 0) / 3;
-        const previous =
-          historyData
-            .slice(-6, -3)
-            .reduce((sum, entry) => sum + entry.percentage, 0) / 3;
-        const difference = recent - previous;
-
-        if (difference > 5) scoreTrend = "improving";
-        else if (difference < -5) scoreTrend = "declining";
-      }
-
-      // Find most common severity
-      const severityCounts = historyData.reduce(
-        (counts, entry) => {
-          counts[entry.severity] = (counts[entry.severity] || 0) + 1;
-          return counts;
-        },
-        {} as Record<string, number>,
-      );
-
-      const mostCommonSeverity =
-        (Object.entries(severityCounts).sort(
-          ([, a], [, b]) => b - a,
-        )[0]?.[0] as "mild" | "moderate" | "severe" | "emergency") || "mild";
-
-      // Calculate assessment frequency
-      const lastAssessmentDate =
-        historyData[historyData.length - 1]?.completedAt || "";
-      const now = new Date();
-      const lastDate = new Date(lastAssessmentDate);
-      const daysSinceLast = Math.floor(
-        (now.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24),
-      );
-
-      let assessmentFrequency: "daily" | "weekly" | "monthly" | "irregular" =
-        "irregular";
-      if (daysSinceLast <= 1) assessmentFrequency = "daily";
-      else if (daysSinceLast <= 7) assessmentFrequency = "weekly";
-      else if (daysSinceLast <= 30) assessmentFrequency = "monthly";
-
-      setTrends({
-        totalAssessments,
-        averageScore: Math.round(averageScore),
-        scoreTrend,
-        mostCommonSeverity,
-        lastAssessmentDate,
-        assessmentFrequency,
-      });
-    },
-    [],
-  );
+  }, [calculateTrends]);
 
   // Save assessment result to history
   const saveAssessmentResult = useCallback((result: AssessmentResult) => {

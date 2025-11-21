@@ -5,7 +5,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Activity,
   TrendingUp,
@@ -51,13 +51,8 @@ export default function SymptomStatistics() {
   // 从 store 读取 periodData
   const periodData = calendar.periodData || [];
 
-  useEffect(() => {
-    analyzeSymptoms();
-    generatePatterns();
-  }, [periodData, locale]);
-
-  // 分析症状数据
-  const analyzeSymptoms = () => {
+  // 分析症状数据 - moved before useEffect
+  const analyzeSymptoms = useCallback(() => {
     const symptoms: { [key: string]: SymptomData } = {};
 
     // 模拟症状数据（实际应用中应该从用户输入中获取）
@@ -102,10 +97,10 @@ export default function SymptomStatistics() {
     setSymptomData(
       Object.values(symptoms).sort((a, b) => b.frequency - a.frequency),
     );
-  };
+  }, [periodData, t]);
 
   // 生成症状模式
-  const generatePatterns = () => {
+  const generatePatterns = useCallback(() => {
     const patterns: SymptomPattern[] = [];
 
     // 分析症状组合模式
@@ -122,7 +117,12 @@ export default function SymptomStatistics() {
     });
 
     setPatterns(patterns);
-  };
+  }, [t]);
+
+  useEffect(() => {
+    analyzeSymptoms();
+    generatePatterns();
+  }, [periodData, locale, analyzeSymptoms, generatePatterns]);
 
   // 分析症状组合
   const analyzeSymptomCombinations = () => {

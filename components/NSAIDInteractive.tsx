@@ -14,11 +14,7 @@ export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
   const ENABLE_NSAID_INTERACTIVE =
     process.env.NEXT_PUBLIC_ENABLE_NSAID_INTERACTIVE === "true";
 
-  // If feature is disabled, render nothing (progressive enhancement)
-  if (!ENABLE_NSAID_INTERACTIVE) {
-    return null;
-  }
-
+  // Hooks must be called before any early returns
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -26,6 +22,11 @@ export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
     setIsClient(true);
     // ✅ CSS已通过静态导入加载，无需动态加载
   }, []);
+
+  // If feature is disabled, render nothing (progressive enhancement)
+  if (!ENABLE_NSAID_INTERACTIVE) {
+    return null;
+  }
 
   // Only render scripts on client side to avoid preloading
   if (!isClient) {

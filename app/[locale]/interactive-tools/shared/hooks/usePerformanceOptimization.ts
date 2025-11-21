@@ -127,8 +127,11 @@ export const usePerformanceOptimization = () => {
   );
 
   // Memoized value wrapper
-  const memoize = useCallback(<T>(value: T, deps: React.DependencyList): T => {
-    return useMemo(() => value, deps);
+  // Note: This function cannot use useMemo inside a callback
+  // Users should call useMemo directly instead
+  const memoize = useCallback(<T>(value: T, _deps: React.DependencyList): T => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return value; // Return value directly, cannot use useMemo in callback
   }, []);
 
   // Lazy loading helper

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import {
   PainTrackerError,
   PainTrackerErrorCode,
@@ -69,7 +69,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
   } = useRecoveryNotifications();
 
   const { isOffline } = useOfflineDetection();
-  const dataIntegrityService = new DataIntegrityService();
+  const dataIntegrityService = useMemo(() => new DataIntegrityService(), []);
 
   // Handle different types of errors
   const handleError = useCallback(
@@ -100,7 +100,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         await handleGenericError(error, context);
       }
     },
-    [onError],
+    [onError, handlePainTrackerError, handleGenericError],
   );
 
   // Handle PainTrackerError instances
@@ -132,7 +132,16 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
           await handleGenericError(error, context);
       }
     },
-    [],
+    [
+      handleStorageError,
+      handleValidationError,
+      handleExportError,
+      handleChartError,
+      handleDataCorruption,
+      handleQuotaExceeded,
+      handleMigrationError,
+      handleGenericError,
+    ],
   );
 
   // Handle storage errors
@@ -163,7 +172,14 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         );
       }
     },
-    [isOffline, enableOfflineMode],
+    [
+      isOffline,
+      enableOfflineMode,
+      addWarningNotification,
+      addErrorNotification,
+      retryLastOperation,
+      getStorageRecoveryActions,
+    ],
   );
 
   // Handle validation errors
@@ -184,7 +200,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         ],
       );
     },
-    [],
+    [addErrorNotification, clearError],
   );
 
   // Handle export errors
@@ -213,7 +229,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         ],
       );
     },
-    [],
+    [addErrorNotification, clearError],
   );
 
   // Handle chart errors
@@ -239,7 +255,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         ],
       );
     },
-    [],
+    [addWarningNotification, clearError, retryLastOperation],
   );
 
   // Handle data corruption
@@ -298,7 +314,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         );
       }
     },
-    [dataIntegrityService, notifyDataCorruption],
+    [dataIntegrityService, notifyDataCorruption, addErrorNotification, downloadCorruptedData],
   );
 
   // Handle quota exceeded
@@ -342,7 +358,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         ],
       );
     },
-    [],
+    [addErrorNotification, retryLastOperation],
   );
 
   // Handle generic errors
@@ -367,7 +383,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         ],
       );
     },
-    [],
+    [addErrorNotification, retryLastOperation, reportError],
   );
 
   // Get storage recovery actions
@@ -466,7 +482,15 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
         isRecovering: false,
       }));
     }
-  }, [errorState.recoveryAttempts, maxRetries, retryDelay, onRecovery]);
+  }, [
+    errorState.recoveryAttempts,
+    maxRetries,
+    retryDelay,
+    onRecovery,
+    addWarningNotification,
+    clearError,
+    addSuccessNotification,
+  ]);
 
   // Clear error state
   const clearError = useCallback(() => {
@@ -520,7 +544,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
     } catch (reportingError) {
       console.error("Failed to report error:", reportingError);
     }
-  }, []);
+  }, [addSuccessNotification]);
 
   // Download corrupted data for analysis
   const downloadCorruptedData = useCallback((data: string) => {

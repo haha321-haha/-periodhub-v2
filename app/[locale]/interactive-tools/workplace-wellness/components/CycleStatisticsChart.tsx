@@ -113,37 +113,6 @@ export default function CycleStatisticsChart() {
     );
   }
 
-  useEffect(() => {
-    if (!periodData || periodData.length === 0) {
-      setAnalysis(null);
-      setStatistics(null);
-      return;
-    }
-
-    const validRecords = periodData.filter(
-      (record) => record && typeof record === "object" && record.date,
-    );
-
-    if (validRecords.length === 0) {
-      setAnalysis(null);
-      setStatistics(null);
-      return;
-    }
-
-    try {
-      const predictor = new CyclePredictor(locale);
-      const cycleAnalysis = predictor.analyzeCycle(validRecords);
-      const cycleStats = predictor.generateStatistics(validRecords);
-
-      setAnalysis(cycleAnalysis);
-      setStatistics(cycleStats);
-    } catch (error) {
-      logError("Failed to analyze cycle data", error, "CycleStatisticsChart");
-      setAnalysis(null);
-      setStatistics(null);
-    }
-  }, [periodData, locale]);
-
   // 生成周期长度图表数据
   const generateCycleLengthChart = (): ChartData => {
     if (!statistics || statistics.cycleLengths.length === 0) {

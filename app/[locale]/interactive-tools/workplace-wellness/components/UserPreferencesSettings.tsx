@@ -285,6 +285,19 @@ export default function UserPreferencesSettings() {
     resetPreferences,
   } = useUserPreferencesActions();
 
+  // All useState hooks must be called before any early returns
+  const [activeTab, setActiveTab] = useState<
+    | "ui"
+    | "notifications"
+    | "privacy"
+    | "accessibility"
+    | "export"
+    | "dataRetention"
+  >("ui");
+  const [validationResult, setValidationResult] =
+    useState<SettingsValidationResult | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+
   // 安全检查：确保 preferences 和所有嵌套属性都存在，如果不存在则使用默认值
   // 使用 useMemo 确保在 preferences 变化时重新计算，同时避免不必要的重新计算
   const safePreferences = useMemo(() => {
@@ -407,18 +420,6 @@ export default function UserPreferencesSettings() {
       </div>
     );
   }
-
-  const [activeTab, setActiveTab] = useState<
-    | "ui"
-    | "notifications"
-    | "privacy"
-    | "accessibility"
-    | "export"
-    | "dataRetention"
-  >("ui");
-  const [validationResult, setValidationResult] =
-    useState<SettingsValidationResult | null>(null);
-  const [isSaving, setIsSaving] = useState(false);
 
   // 验证设置
   const handleValidateSettings = () => {

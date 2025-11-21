@@ -5,7 +5,7 @@
 
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   Briefcase,
@@ -68,7 +68,10 @@ export default function WorkImpactAnalysis() {
   const [insights, setInsights] = useState<ProductivityInsight[]>([]);
 
   // 从 store 读取 periodData
-  const periodData = calendar.periodData || [];
+  const periodData = useMemo(
+    () => calendar.periodData || [],
+    [calendar.periodData],
+  );
 
   const tabs: WorkTab[] = [
     {
@@ -172,7 +175,7 @@ export default function WorkImpactAnalysis() {
     });
 
     setPatterns(patterns);
-  }, [periodData, workData, t]);
+  }, [periodData, workData]);
 
   // 生成洞察
   const generateInsights = useCallback(() => {

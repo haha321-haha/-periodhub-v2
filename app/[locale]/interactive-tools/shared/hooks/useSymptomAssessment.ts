@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import {
   Question,
   AssessmentAnswer,
@@ -76,12 +76,16 @@ export const useSymptomAssessment = (
     }
   }, [currentSession, storageKey]);
 
-  const questions = currentSession
-    ? getQuestionsByMode(
-        currentSession.locale,
-        currentSession.mode || "simplified",
-      )
-    : [];
+  const questions = useMemo(
+    () =>
+      currentSession
+        ? getQuestionsByMode(
+            currentSession.locale,
+            currentSession.mode || "simplified",
+          )
+        : [],
+    [currentSession],
+  );
   const currentQuestion = questions[currentQuestionIndex] || null;
   const isComplete = currentQuestionIndex >= questions.length;
   const progress =

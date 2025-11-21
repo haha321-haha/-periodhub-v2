@@ -104,7 +104,13 @@ export const usePersonalizedRecommendations = () => {
         setIsGenerating(false);
       }
     },
-    [],
+    [
+      generateBaseRecommendations,
+      generateHistoryBasedRecommendations,
+      generatePreferenceBasedRecommendations,
+      generateTrendBasedRecommendations,
+      removeDuplicateRecommendations,
+    ],
   );
 
   // Generate base recommendations from current assessment

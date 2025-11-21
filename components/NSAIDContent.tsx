@@ -922,7 +922,7 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
       clearTimeout(timer);
       // styleInterval会在组件卸载时自动清理
     };
-  }, []);
+  }, [t]);
 
   return (
     <>

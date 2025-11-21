@@ -32,10 +32,15 @@ interface PatternInsightsProps {
   onError?: (error: Error) => void;
 }
 
+interface IconProps {
+  className?: string;
+  size?: number | string;
+}
+
 interface InsightCard {
   id: string;
   type: "success" | "warning" | "info" | "danger";
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<IconProps>;
   title: string;
   description: string;
   recommendations: string[];

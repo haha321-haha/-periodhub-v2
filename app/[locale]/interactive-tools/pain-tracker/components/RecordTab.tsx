@@ -78,7 +78,7 @@ export default function RecordTab({ locale }: RecordTabProps) {
           : [
               { id: 'lifestyle', title: locale === 'zh' ? '生活方式调整' : 'Lifestyle adjustments', description: locale === 'zh' ? '规律作息、均衡饮食、适度运动，有助于减少疼痛频率。' : 'Regular sleep, balanced diet, moderate exercise to reduce pain frequency.', timeframe: locale === 'zh' ? '持续进行' : 'Ongoing', priority: 'low' as const, actionSteps: (locale === 'zh' ? ['保证7-8小时睡眠', '减少高糖高脂摄入', '保持每周3次轻运动'] : ['Sleep 7-8h', 'Reduce sugar/fat', '3x/week light exercise']) as string[] },
             ]
-      ) as any[];
+      );
 
       setResult({
         score: painLevel,

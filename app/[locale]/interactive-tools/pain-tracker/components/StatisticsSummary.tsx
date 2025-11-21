@@ -15,7 +15,7 @@ import {
   Award,
   AlertCircle,
 } from "lucide-react";
-import { PainAnalytics } from "../../../../../types/pain-tracker";
+import { PainAnalytics, PainRecord } from "../../../../../types/pain-tracker";
 
 interface StatisticsSummaryProps {
   analytics: PainAnalytics;
@@ -23,12 +23,17 @@ interface StatisticsSummaryProps {
   className?: string;
 }
 
+interface IconProps {
+  className?: string;
+  size?: number | string;
+}
+
 interface StatCard {
   id: string;
   title: string;
   value: string | number;
   subtitle?: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<IconProps>;
   color: "blue" | "green" | "yellow" | "red" | "purple" | "indigo";
   trend?: "up" | "down" | "stable";
   trendValue?: string;
@@ -151,7 +156,7 @@ export default function StatisticsSummary({
     return t("painLevels.minimal");
   }
 
-  function getPainTrend(trendData: any[]): "up" | "down" | "stable" {
+  function getPainTrend(trendData: PainRecord[]): "up" | "down" | "stable" {
     if (trendData.length < 5) return "stable";
 
     const recent = trendData.slice(-5);
@@ -171,7 +176,7 @@ export default function StatisticsSummary({
     return "stable";
   }
 
-  function getTrendValue(trendData: any[]): string {
+  function getTrendValue(trendData: PainRecord[]): string {
     if (trendData.length < 5) return "";
 
     const recent = trendData.slice(-5);

@@ -9,6 +9,7 @@ import {
   MedicalSummary,
   TreatmentEffectiveness,
   CyclePattern,
+  TrendPoint,
 } from "../../../types/pain-tracker";
 import { AnalyticsEngine } from "../analytics/AnalyticsEngine";
 import { ReportTemplate } from "./ReportTemplate";
@@ -272,7 +273,9 @@ export class ExportManager implements ExportManagerInterface {
     `;
   }
 
-  private generatePainCharacteristics(analytics: PainAnalytics): any {
+  private generatePainCharacteristics(
+    analytics: PainAnalytics,
+  ): MedicalSummary["painCharacteristics"] {
     return {
       averageLevel: analytics.averagePainLevel,
       levelDescription: this.getPainLevelDescription(
@@ -285,7 +288,9 @@ export class ExportManager implements ExportManagerInterface {
     };
   }
 
-  private generateTreatmentHistory(treatments: TreatmentEffectiveness[]): any {
+  private generateTreatmentHistory(
+    treatments: TreatmentEffectiveness[],
+  ): MedicalSummary["treatmentHistory"] {
     return {
       totalTreatments: treatments.length,
       mostEffective: treatments.slice(0, 3),
@@ -297,7 +302,9 @@ export class ExportManager implements ExportManagerInterface {
     };
   }
 
-  private generateMenstrualPatterns(patterns: CyclePattern[]): any {
+  private generateMenstrualPatterns(
+    patterns: CyclePattern[],
+  ): MedicalSummary["menstrualPatterns"] {
     return {
       identifiedPatterns: patterns.length,
       highestPainPhase:
@@ -318,7 +325,7 @@ export class ExportManager implements ExportManagerInterface {
   private generateClinicalRecommendations(
     records: PainRecord[],
     analytics: PainAnalytics,
-  ): any[] {
+  ): MedicalSummary["recommendations"] {
     const recommendations = [];
 
     // High pain level recommendation
@@ -416,7 +423,7 @@ export class ExportManager implements ExportManagerInterface {
   }
 
   private calculatePainFrequencyDistribution(
-    trendData: any[],
+    trendData: TrendPoint[],
   ): Record<string, number> {
     const distribution: Record<string, number> = {};
 

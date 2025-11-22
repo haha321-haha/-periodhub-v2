@@ -4,6 +4,16 @@
  * 统一的图片优化配置和工具函数
  */
 
+import { logError } from "@/lib/debug-logger";
+
+interface WindowWithGtag extends Window {
+  gtag?: (
+    command: string,
+    eventName: string,
+    params?: Record<string, unknown>,
+  ) => void;
+}
+
 export interface ImageOptimizationConfig {
   quality: number;
   formats: string[];
@@ -152,13 +162,16 @@ export function generateBlurDataURL(width: number, height: number): string {
 
 // 图片加载性能监控
 export function trackImageLoadPerformance(imageSrc: string, loadTime: number) {
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag("event", "image_load_performance", {
-      image_src: imageSrc,
-      load_time: loadTime,
-      performance_rating:
-        loadTime < 1000 ? "fast" : loadTime < 3000 ? "medium" : "slow",
-    });
+  if (typeof window !== "undefined") {
+    const windowWithGtag = window as WindowWithGtag;
+    if (windowWithGtag.gtag) {
+      windowWithGtag.gtag("event", "image_load_performance", {
+        image_src: imageSrc,
+        load_time: loadTime,
+        performance_rating:
+          loadTime < 1000 ? "fast" : loadTime < 3000 ? "medium" : "slow",
+      });
+    }
   }
 }
 
@@ -177,14 +190,21 @@ export function preloadCriticalImages(imageUrls: string[]) {
 
 // 图片错误处理
 export function handleImageError(error: Error, imageSrc: string) {
-  console.error(`图片加载失败: ${imageSrc}`, error);
+  logError(
+    `图片加载失败: ${imageSrc}`,
+    error,
+    "image-optimization/handleImageError",
+  );
 
   // 发送错误报告
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag("event", "image_load_error", {
-      image_src: imageSrc,
-      error_message: error.message,
-    });
+  if (typeof window !== "undefined") {
+    const windowWithGtag = window as WindowWithGtag;
+    if (windowWithGtag.gtag) {
+      windowWithGtag.gtag("event", "image_load_error", {
+        image_src: imageSrc,
+        error_message: error.message,
+      });
+    }
   }
 }
 

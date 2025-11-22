@@ -5,6 +5,7 @@
 
 import React, { useMemo, useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
+import type { TooltipItem } from "chart.js";
 import { PainRecord, PainTrackerError } from "../../../../types/pain-tracker";
 import ChartUtils from "../ChartUtils";
 
@@ -78,10 +79,10 @@ export const PainDistributionChart: React.FC<PainDistributionChartProps> = ({
       // Add custom tooltip for better context
       if (options.plugins?.tooltip) {
         options.plugins.tooltip.callbacks = {
-          title: function (context: any) {
+          title: function (context: TooltipItem<"bar">[]) {
             return `Pain Level ${context[0].label}`;
           },
-          label: function (context: any) {
+          label: function (context: TooltipItem<"bar">) {
             const count = context.parsed.y;
             const total = records.length;
             const percentage =

@@ -5,6 +5,7 @@
 
 import React, { useMemo, useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
+import type { TooltipItem } from "chart.js";
 import {
   PainTypeFrequency,
   PainTrackerError,
@@ -82,13 +83,13 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
 
       // Override legend display if showLegend is false
       if (!showLegend && options.plugins?.legend) {
-        (options.plugins.legend as any).display = false;
+        options.plugins.legend.display = false;
       }
 
       // Enhanced tooltip for better context
       if (options.plugins?.tooltip) {
         options.plugins.tooltip.callbacks = {
-          label: function (context: any) {
+          label: function (context: TooltipItem<"doughnut">) {
             const percentage = context.parsed;
             const count = painTypes[context.dataIndex]?.count || 0;
             return `${percentage}% (${count} occurrences)`;

@@ -5,7 +5,6 @@ import {
   Search,
   Filter,
   Download,
-  Star,
   Clock,
   Tag,
   ChevronRight,

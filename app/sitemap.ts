@@ -13,25 +13,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       new URL(url); // 验证URL格式
       return url;
     } catch (error) {
-      console.error("Invalid base URL, using fallback:", error);
+      // Invalid base URL, using fallback
       return fallbackUrl;
     }
   };
 
   const baseUrl = getBaseUrl();
 
-  // Debug: Log environment variable (will be visible in build logs)
-  console.log("Sitemap baseUrl:", baseUrl);
-  console.log(
-    "NEXT_PUBLIC_BASE_URL env var:",
-    process.env.NEXT_PUBLIC_BASE_URL,
-  );
-  console.log("Environment check - NODE_ENV:", process.env.NODE_ENV);
-
+  // Debug: Environment variables logged in build
   // 🚀 移动端优化状态记录
-  console.log(
-    "Mobile optimization: Service Worker, touch optimization, performance monitoring enabled",
-  );
+  // Mobile optimization: Service Worker, touch optimization, performance monitoring enabled
 
   const currentDate = new Date();
 
@@ -62,12 +53,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh/terms-of-service",
     "/en/terms-of-service",
     "/zh/medical-disclaimer",
-    "/en/medical-disclaimer"];
+    "/en/medical-disclaimer",
+  ];
 
   // 下载页面子页面
   const downloadsPages = [
     "/zh/downloads/medication-guide",
-    "/en/downloads/medication-guide"];
+    "/en/downloads/medication-guide",
+  ];
 
   // 互动工具子页面 - 只包含实际存在的页面
   // 🔧 修复：添加constitution-test到sitemap，确保该页面能被搜索引擎发现
@@ -85,7 +78,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh/interactive-tools/workplace-wellness",
     "/en/interactive-tools/workplace-wellness",
     "/zh/interactive-tools/stress-management",
-    "/en/interactive-tools/stress-management"];
+    "/en/interactive-tools/stress-management",
+  ];
 
   // 健康指南子页面
   const healthGuidePages = [
@@ -100,7 +94,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh/health-guide/relief-methods",
     "/en/health-guide/relief-methods",
     "/zh/health-guide/understanding-pain",
-    "/en/health-guide/understanding-pain"];
+    "/en/health-guide/understanding-pain",
+  ];
 
   // 青少年健康子页面
   const teenHealthPages = [
@@ -111,7 +106,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh/teen-health/development-pain",
     "/en/teen-health/development-pain",
     "/zh/teen-health/emotional-support",
-    "/en/teen-health/emotional-support"];
+    "/en/teen-health/emotional-support",
+  ];
 
   // 场景解决方案子页面 - 只包含实际存在的页面
   const scenarioPages = [
@@ -128,7 +124,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/zh/scenario-solutions/lifeStages",
     "/en/scenario-solutions/lifeStages",
     "/zh/scenario-solutions/emergency-kit",
-    "/en/scenario-solutions/emergency-kit"];
+    "/en/scenario-solutions/emergency-kit",
+  ];
 
   // 所有静态页面
   const staticPages = [
@@ -137,7 +134,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...interactiveTools,
     ...healthGuidePages,
     ...teenHealthPages,
-    ...scenarioPages];
+    ...scenarioPages,
+  ];
 
   // 文章页面
   const articleSlugs = [
@@ -178,7 +176,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "ginger-menstrual-pain-relief-guide",
     "comprehensive-report-non-medical-factors-menstrual-pain",
     "period-pain-simulator-accuracy-analysis",
-    "medication-vs-natural-remedies-menstrual-pain"];
+    "medication-vs-natural-remedies-menstrual-pain",
+  ];
 
   // 生成文章页面
   const articlePages = [];
@@ -265,7 +264,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/downloads/magnesium-gut-health-menstrual-pain-guide-en.html",
     "/downloads/pain-tracking-form-en.html",
     "/downloads/teacher-health-manual-en.html",
-    "/downloads/constitution-guide-en.html"];
+    "/downloads/constitution-guide-en.html",
+  ];
 
   // 生成HTML文件的sitemap条目 - 高优先级
   const htmlEntries: MetadataRoute.Sitemap = htmlFiles.map((html) => ({
@@ -302,7 +302,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: currentDate,
         changeFrequency: "weekly" as const,
         priority: 1.0,
-      }];
+      },
+    ];
   }
 
   console.log(

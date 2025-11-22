@@ -38,7 +38,7 @@ export default function PDFCard({
 
     try {
       // 记录下载事件
-      const downloadEvent = createDownloadEvent(resource.id, locale);
+      createDownloadEvent(resource.id, locale);
       // Download event logged
 
       // 触发下载
@@ -46,8 +46,6 @@ export default function PDFCard({
 
       // 调用回调
       onDownload?.(resource);
-    } catch (error) {
-      // Download failed
     } finally {
       setTimeout(() => setIsDownloading(false), 1000);
     }

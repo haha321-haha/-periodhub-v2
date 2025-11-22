@@ -80,7 +80,7 @@ export const useAssessmentHistory = () => {
       let assessmentFrequency: "daily" | "weekly" | "monthly" | "irregular" =
         "irregular";
       if (historyData.length >= 2) {
-        const dates = historyData.map((entry) => new Date(entry.timestamp));
+        const dates = historyData.map((entry) => new Date(entry.completedAt));
         const intervals = [];
         for (let i = 1; i < dates.length; i++) {
           intervals.push(dates[i].getTime() - dates[i - 1].getTime());
@@ -95,10 +95,31 @@ export const useAssessmentHistory = () => {
         else if (avgDays <= 35) assessmentFrequency = "monthly";
       }
 
+      // Calculate most common severity
+      const severityCounts = historyData.reduce(
+        (acc, entry) => {
+          acc[entry.severity] = (acc[entry.severity] || 0) + 1;
+          return acc;
+        },
+        {} as Record<string, number>,
+      );
+      const mostCommonSeverity = Object.entries(severityCounts).reduce(
+        (a, b) => (severityCounts[a[0]] > severityCounts[b[0]] ? a : b),
+        ["mild", 0] as [string, number],
+      )[0] as "mild" | "moderate" | "severe" | "emergency";
+
+      // Get last assessment date
+      const lastAssessmentDate =
+        historyData.length > 0
+          ? historyData[historyData.length - 1].completedAt
+          : new Date().toISOString();
+
       setTrends({
         totalAssessments,
         averageScore,
         scoreTrend,
+        mostCommonSeverity,
+        lastAssessmentDate,
         assessmentFrequency,
       });
     },

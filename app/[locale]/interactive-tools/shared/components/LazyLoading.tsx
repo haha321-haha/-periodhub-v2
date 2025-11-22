@@ -27,7 +27,8 @@ export function withLazyLoading<P extends object>(
 
     return (
       <Suspense fallback={resolvedFallback}>
-        <LazyComponent {...(componentProps as P)} />
+        {/* @ts-expect-error - Complex generic type inference for lazy components */}
+        <LazyComponent {...componentProps} />
       </Suspense>
     );
   };

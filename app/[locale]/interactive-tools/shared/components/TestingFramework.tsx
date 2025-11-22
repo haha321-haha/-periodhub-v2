@@ -118,12 +118,12 @@ export function useTestFramework() {
         duration,
         error: success ? undefined : "模拟测试失败",
       };
-    } catch {
+    } catch (err) {
       return {
         ...test,
         status: "fail",
         duration: Date.now() - startTime,
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: err instanceof Error ? err.message : "Unknown error",
       };
     }
   };

@@ -61,7 +61,7 @@ const DelayedSuspense: React.FC<{
  * @param fallback 加载状态组件
  * @param delay 延迟加载时间(ms)
  */
-export function createLazyComponent<T extends ComponentType<any>>(
+export function createLazyComponent<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
   fallback?: React.ReactNode,
   delay: number = 0,
@@ -79,7 +79,8 @@ export function createLazyComponent<T extends ComponentType<any>>(
         fallback={fallback || <DefaultFallback height={height} />}
         delay={suspenseDelay}
       >
-        <LazyComponent {...(componentProps as React.ComponentProps<T>)} />
+        {/* @ts-expect-error - Complex generic type inference for lazy components */}
+        <LazyComponent {...componentProps} />
       </DelayedSuspense>
     );
   };

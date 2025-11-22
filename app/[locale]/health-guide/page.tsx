@@ -7,7 +7,6 @@ import { Locale, locales } from "@/i18n";
 import RelatedToolCard from "@/app/[locale]/interactive-tools/components/RelatedToolCard";
 import RelatedArticleCard from "@/app/[locale]/interactive-tools/components/RelatedArticleCard";
 import ScenarioSolutionCard from "@/app/[locale]/interactive-tools/components/ScenarioSolutionCard";
-import { URL_CONFIG } from "@/lib/url-config";
 import {
   generateHreflangConfig,
   HreflangScript,

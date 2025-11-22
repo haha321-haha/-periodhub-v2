@@ -1,6 +1,5 @@
 import { unstable_setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
-import { URL_CONFIG } from "@/lib/url-config";
 
 export async function generateMetadata({
   params,

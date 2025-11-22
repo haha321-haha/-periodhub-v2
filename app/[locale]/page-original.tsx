@@ -6,7 +6,6 @@ import Hero from "@/components/layout/Hero";
 import UserSuccessStories from "@/components/UserSuccessStories";
 import NavigationTabs from "@/components/NavigationTabs";
 import OptimizedSVG from "@/components/ui/OptimizedSVG";
-import { URL_CONFIG } from "@/lib/url-config";
 
 // 页面级别的metadata
 export async function generateMetadata({

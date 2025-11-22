@@ -1,6 +1,5 @@
 import React from "react";
 import { Metadata } from "next";
-import { URL_CONFIG } from "@/lib/url-config";
 import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({

@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import EmbeddedPainAssessment from "@/components/EmbeddedPainAssessment";
-import { URL_CONFIG } from "@/lib/url-config";
 
 type Locale = "en" | "zh";
 

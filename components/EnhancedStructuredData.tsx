@@ -1,4 +1,3 @@
-import { URL_CONFIG } from "@/lib/url-config";
 interface EnhancedStructuredDataProps {
   type: "website" | "article" | "faq" | "howto" | "medicalwebpage";
   title: string;

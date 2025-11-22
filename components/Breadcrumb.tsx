@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { URL_CONFIG } from "@/lib/url-config";
 
 interface BreadcrumbItem {
   label: string;
@@ -52,7 +51,9 @@ export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   // 这样可以避免服务器端和客户端渲染不一致导致的 hydration 错误
   useEffect(() => {
     // 生成唯一的 ID 来标识这个面包屑的脚本
-    const scriptId = `breadcrumb-script-${locale}-${items.map(i => i.label).join('-')}`;
+    const scriptId = `breadcrumb-script-${locale}-${items
+      .map((i) => i.label)
+      .join("-")}`;
 
     // 检查是否已经存在相同的脚本
     const existingScript = document.getElementById(scriptId);

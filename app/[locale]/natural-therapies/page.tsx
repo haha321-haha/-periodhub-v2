@@ -5,7 +5,6 @@ import { Metadata } from "next";
 import RelatedToolCard from "@/app/[locale]/interactive-tools/components/RelatedToolCard";
 import RelatedArticleCard from "@/app/[locale]/interactive-tools/components/RelatedArticleCard";
 import ScenarioSolutionCard from "@/app/[locale]/interactive-tools/components/ScenarioSolutionCard";
-import { URL_CONFIG } from "@/lib/url-config";
 
 // 推荐数据配置函数（自然疗法主题）
 async function getNaturalTherapiesRecommendations(locale: string) {

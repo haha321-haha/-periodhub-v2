@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
-import { URL_CONFIG } from "@/lib/url-config";
 
 // Generate metadata for the page
 export async function generateMetadata({

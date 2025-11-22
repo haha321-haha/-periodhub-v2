@@ -4,7 +4,6 @@
 import {
   StoredData,
   PainRecord,
-  UserPreferences,
   StorageMetadata,
   LocalStorageAdapterInterface,
   PainTrackerError,
@@ -12,6 +11,14 @@ import {
   CURRENT_SCHEMA_VERSION,
   DEFAULT_USER_PREFERENCES,
 } from "../../../types/pain-tracker";
+import { logWarn, logInfo } from "@/lib/debug-logger";
+
+interface Migration {
+  migrateRecords: (records: unknown[]) => unknown[];
+  migratePreferences: (
+    preferences: Record<string, unknown>,
+  ) => Record<string, unknown>;
+}
 
 export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   private compressionEnabled: boolean = true;
@@ -62,7 +69,7 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   /**
    * Save data to localStorage with compression and error handling
    */
-  async save(key: string, data: any): Promise<void> {
+  async save(key: string, data: unknown): Promise<void> {
     try {
       const serializedData = JSON.stringify(data);
       const processedData = this.compressionEnabled
@@ -114,7 +121,7 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   /**
    * Load data from localStorage with decompression and error handling
    */
-  async load(key: string): Promise<any> {
+  async load(key: string): Promise<unknown> {
     try {
       const rawData = localStorage.getItem(key);
 
@@ -129,13 +136,21 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
       return JSON.parse(processedData);
     } catch (error) {
       // If data is corrupted, try to recover or return null
-      console.warn(`Failed to load data for key: ${key}`, error);
+      logWarn(
+        `Failed to load data for key: ${key}`,
+        error,
+        "LocalStorageAdapter/load",
+      );
 
       if (key === STORAGE_KEYS.PAIN_RECORDS) {
         // Try to recover from backup
         const backupData = await this.loadBackup();
         if (backupData) {
-          console.log("Recovered data from backup");
+          logInfo(
+            "Recovered data from backup",
+            undefined,
+            "LocalStorageAdapter/load",
+          );
           return backupData.records;
         }
       }
@@ -317,7 +332,11 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
     toVersion: number,
   ): Promise<void> {
     try {
-      console.log(`Migrating data from version ${fromVersion} to ${toVersion}`);
+      logInfo(
+        `Migrating data from version ${fromVersion} to ${toVersion}`,
+        undefined,
+        "LocalStorageAdapter/migrateData",
+      );
 
       // Load existing data
       const records = (await this.load(STORAGE_KEYS.PAIN_RECORDS)) || [];
@@ -342,7 +361,11 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
       await this.save(STORAGE_KEYS.USER_PREFERENCES, migratedPreferences);
       await this.save(STORAGE_KEYS.SCHEMA_VERSION, toVersion);
 
-      console.log("Data migration completed successfully");
+      logInfo(
+        "Data migration completed successfully",
+        undefined,
+        "LocalStorageAdapter/migrateData",
+      );
     } catch (error) {
       throw new PainTrackerError(
         `Failed to migrate data from version ${fromVersion} to ${toVersion}`,
@@ -355,7 +378,11 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   /**
    * Get migration function for specific version transition
    */
-  private getMigration(fromVersion: number, toVersion: number): any {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private getMigration(
+    _fromVersion: number,
+    _toVersion: number,
+  ): Migration | null {
     // Future migrations will be added here
     // For now, return null as we're at version 1
     return null;
@@ -373,7 +400,7 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
   /**
    * Validate backup data structure
    */
-  private validateBackupData(data: any): data is StoredData {
+  private validateBackupData(data: unknown): data is StoredData {
     return (
       data &&
       typeof data === "object" &&
@@ -398,7 +425,11 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
 
       return null;
     } catch (error) {
-      console.warn("Failed to load backup data", error);
+      logWarn(
+        "Failed to load backup data",
+        error,
+        "LocalStorageAdapter/loadBackup",
+      );
       return null;
     }
   }
@@ -420,7 +451,11 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
 
       await this.save(STORAGE_KEYS.METADATA, updatedMetadata);
     } catch (error) {
-      console.warn("Failed to update metadata", error);
+      logWarn(
+        "Failed to update metadata",
+        error,
+        "LocalStorageAdapter/updateMetadata",
+      );
       // Don't throw error for metadata update failure
     }
   }
@@ -454,7 +489,11 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
       const backupKey = `${STORAGE_KEYS.PAIN_RECORDS}_backup`;
       localStorage.setItem(backupKey, backupData);
     } catch (error) {
-      console.warn("Failed to create automatic backup", error);
+      logWarn(
+        "Failed to create automatic backup",
+        error,
+        "LocalStorageAdapter/createAutoBackup",
+      );
       // Don't throw error for backup failure
     }
   }
@@ -478,7 +517,11 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
         }
       }
     } catch (error) {
-      console.warn("Failed to cleanup old backups", error);
+      logWarn(
+        "Failed to cleanup old backups",
+        error,
+        "LocalStorageAdapter/cleanupOldBackups",
+      );
     }
   }
 }

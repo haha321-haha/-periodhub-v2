@@ -2,6 +2,29 @@ import { KeywordTracker } from "./keyword-tracker";
 import { PeriodHubSEOAnalyzer } from "./keyword-analyzer";
 import { webVitalsTracker } from "@/lib/analytics/web-vitals";
 
+interface WebVitalsData {
+  summary?: {
+    score?: number;
+    averageMetrics?: {
+      LCP?: number;
+      CLS?: number;
+      FID?: number;
+    };
+  };
+}
+
+interface KeywordRankings {
+  topRanked: string[];
+  opportunities: Array<{ keyword: string; currentPosition: number }>;
+  averagePosition: number;
+}
+
+interface Competitor {
+  name: string;
+  domain: string;
+  [key: string]: unknown;
+}
+
 export interface SEOReport {
   summary: {
     overallScore: number;
@@ -22,13 +45,13 @@ export interface SEOReport {
     opportunities: string[];
   };
   performance: {
-    webVitals: any;
+    webVitals: WebVitalsData["summary"]["averageMetrics"];
     score: number;
     issues: string[];
     improvements: string[];
   };
   competitorAnalysis: {
-    topCompetitors: any[];
+    topCompetitors: Competitor[];
     keywordGaps: string[];
     opportunities: string[];
   };
@@ -61,9 +84,9 @@ export class SEOReportGenerator {
   }
 
   private async generateSummary(
-    keywordRankings: any,
-    webVitals: any,
-    competitorData: any[],
+    keywordRankings: KeywordRankings,
+    webVitals: WebVitalsData,
+    competitorData: Competitor[],
   ): Promise<SEOReport["summary"]> {
     const scores = {
       keyword: this.calculateKeywordScore(keywordRankings),
@@ -105,7 +128,7 @@ export class SEOReportGenerator {
     };
   }
 
-  private calculateKeywordScore(keywordRankings: any): number {
+  private calculateKeywordScore(keywordRankings: KeywordRankings): number {
     const { topRanked, opportunities, averagePosition } = keywordRankings;
 
     let score = 70; // 基础分数
@@ -125,8 +148,8 @@ export class SEOReportGenerator {
   }
 
   private identifyPriorityIssues(
-    keywordRankings: any,
-    webVitals: any,
+    keywordRankings: KeywordRankings,
+    webVitals: WebVitalsData,
   ): string[] {
     const issues: string[] = [];
 
@@ -155,8 +178,8 @@ export class SEOReportGenerator {
   }
 
   private generateRecommendations(
-    keywordRankings: any,
-    competitorData: any[],
+    keywordRankings: KeywordRankings,
+    competitorData: Competitor[],
   ): string[] {
     const recommendations: string[] = [];
 
@@ -201,7 +224,7 @@ export class SEOReportGenerator {
   }
 
   private async analyzeContentSEO(
-    keywordRankings: any,
+    keywordRankings: KeywordRankings,
   ): Promise<SEOReport["contentSEO"]> {
     const keywordOpportunities = keywordRankings.opportunities;
 
@@ -219,7 +242,7 @@ export class SEOReportGenerator {
     ];
 
     const opportunitiesList = keywordOpportunities.map(
-      (kw: any) =>
+      (kw: { keyword: string; currentPosition: number }) =>
         `优化 "${kw.keyword}" 关键词，当前排名 ${kw.currentPosition}`,
     );
 
@@ -231,7 +254,9 @@ export class SEOReportGenerator {
     };
   }
 
-  private analyzePerformance(webVitals: any): SEOReport["performance"] {
+  private analyzePerformance(
+    webVitals: WebVitalsData,
+  ): SEOReport["performance"] {
     const avgMetrics = webVitals.summary?.averageMetrics || {};
     const issues: string[] = [];
     const improvements: string[] = [];
@@ -248,7 +273,7 @@ export class SEOReportGenerator {
     }
 
     return {
-      webVitals: avgMetrics,
+      webVitals: avgMetrics as WebVitalsData["summary"]["averageMetrics"],
       score: Math.min(100, Math.round(webVitals.summary?.score || 80)),
       issues,
       improvements,
@@ -256,7 +281,7 @@ export class SEOReportGenerator {
   }
 
   private async analyzeCompetitors(
-    competitorData: any[],
+    competitorData: Competitor[],
   ): Promise<SEOReport["competitorAnalysis"]> {
     const topCompetitors = competitorData.slice(0, 3);
 

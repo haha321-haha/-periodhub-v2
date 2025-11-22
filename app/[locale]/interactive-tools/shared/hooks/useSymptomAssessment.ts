@@ -14,6 +14,8 @@ import {
   calculateDetailedImpact,
   calculateMedicalImpact,
 } from "../data/calculationAlgorithms";
+
+type Locale = "zh" | "en";
 import { saveToStorage, loadFromStorage, createStorageKey } from "../utils";
 import { logError, logInfo } from "@/lib/debug-logger";
 
@@ -195,7 +197,10 @@ export const useSymptomAssessment = (
 
       try {
         // 使用基于参考代码的计算算法
-        const effectiveLocale = currentLocale || currentSession.locale;
+        const effectiveLocale: Locale =
+          (currentLocale as Locale) ||
+          (currentSession.locale as Locale) ||
+          "zh";
 
         // 将答案转换为参考代码格式
         const answersForCalculation: AnswerMap = {};
@@ -216,19 +221,22 @@ export const useSymptomAssessment = (
           // Type assertion needed because AnswerMap is compatible with MedicalAssessmentInputs
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           calculationResult = calculateMedicalImpact(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             answersForCalculation as any,
             effectiveLocale,
           );
         } else if (currentSession.mode === "detailed") {
           // 详细版：使用详细症状评估
           calculationResult = calculateDetailedImpact(
-            answersForCalculation,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            answersForCalculation as any,
             effectiveLocale,
           );
         } else {
           // 简化版：使用基础症状评估
           calculationResult = calculateSymptomImpact(
-            answersForCalculation,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            answersForCalculation as any,
             effectiveLocale,
           );
         }

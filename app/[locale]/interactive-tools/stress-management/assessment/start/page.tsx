@@ -53,7 +53,7 @@ const StressRadarChart = dynamic(
     ssr: false,
   },
 );
-import { LocalStorageManager } from "@/lib/localStorage";
+// LocalStorageManager removed - using localStorage directly
 import {
   useABTestTracking,
   trackAssessmentStart,
@@ -153,12 +153,22 @@ export default function StressAssessmentStartPage() {
     // Day 4: 追踪付费墙交互
     trackPaywallClick(userId, "skip");
 
-    LocalStorageManager.saveAssessment({
-      answers,
-      score,
-      stressLevel: level,
-      isPremium: false,
-    });
+    // Save assessment to localStorage
+    try {
+      const assessmentData = {
+        answers,
+        score,
+        stressLevel: level,
+        isPremium: false,
+        timestamp: Date.now(),
+      };
+      const existing = localStorage.getItem("stress_assessments");
+      const assessments = existing ? JSON.parse(existing) : [];
+      assessments.push(assessmentData);
+      localStorage.setItem("stress_assessments", JSON.stringify(assessments));
+    } catch (error) {
+      // Failed to save assessment to localStorage
+    }
 
     setStressScore(score);
     setShowResults(true);

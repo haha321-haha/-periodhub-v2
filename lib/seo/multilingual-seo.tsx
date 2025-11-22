@@ -5,7 +5,7 @@ interface HreflangConfigProps {
 }
 
 export async function generateHreflangConfig({
-  locale,
+  locale: _locale,
   path,
   includeXDefault = true,
 }: HreflangConfigProps) {
@@ -17,6 +17,9 @@ export async function generateHreflangConfig({
     "zh-CN": `${baseUrl}/zh${cleanPath}`,
     "en-US": `${baseUrl}/en${cleanPath}`,
   };
+
+  // locale 参数保留用于将来扩展
+  void _locale;
 
   if (includeXDefault) {
     hreflangUrls["x-default"] = `${baseUrl}/en${cleanPath}`; // ✅ 修复：默认英文版本（北美市场优先）

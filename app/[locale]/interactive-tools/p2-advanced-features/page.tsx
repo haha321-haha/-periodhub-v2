@@ -300,7 +300,6 @@ export default function P2AdvancedFeatures({
 
           {activeFeature === "ai" && (
             <PersonalizedRecommendationEngine
-              locale={locale}
               userProfile={userProfile}
               assessmentHistory={[]}
             />

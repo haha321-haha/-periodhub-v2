@@ -313,9 +313,7 @@ export default function P2AdvancedFeatures({
             <DataSync locale={locale} userId={userId} />
           )}
 
-          {activeFeature === "reports" && (
-            <ReportGenerator locale={locale} userId={userId} />
-          )}
+          {activeFeature === "reports" && <ReportGenerator locale={locale} />}
         </div>
 
         {/* 底部行动号召 */}

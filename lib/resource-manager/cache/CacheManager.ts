@@ -6,8 +6,10 @@
 import { ResourceManagerConfig } from "../types";
 
 export class CacheManager {
-  private cache: Map<string, { data: any; timestamp: number; ttl: number }> =
-    new Map();
+  private cache: Map<
+    string,
+    { data: unknown; timestamp: number; ttl: number }
+  > = new Map();
   private config: ResourceManagerConfig;
 
   constructor(config: ResourceManagerConfig) {
@@ -52,7 +54,7 @@ export class CacheManager {
   /**
    * 设置缓存数据
    */
-  async set(key: string, data: any, ttl: number): Promise<void> {
+  async set(key: string, data: unknown, ttl: number): Promise<void> {
     if (!this.config.cacheEnabled) {
       return;
     }

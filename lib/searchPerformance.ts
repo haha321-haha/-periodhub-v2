@@ -124,7 +124,7 @@ export class PerformanceMonitor {
   }
 
   getAllStats() {
-    const stats: Record<string, any> = {};
+    const stats: Record<string, ReturnType<typeof this.getStats>> = {};
     this.metrics.forEach((_, label) => {
       stats[label] = this.getStats(label);
     });
@@ -137,5 +137,5 @@ export class PerformanceMonitor {
 }
 
 // 全局实例
-export const searchCache = new LRUCache<any>(50, 300000);
+export const searchCache = new LRUCache<unknown>(50, 300000);
 export const performanceMonitor = new PerformanceMonitor();

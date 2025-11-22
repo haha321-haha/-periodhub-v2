@@ -8,6 +8,23 @@ export interface KeywordAnalysis {
   opportunities: string[];
 }
 
+interface CompetitorAnalysis {
+  name: string;
+  score: number;
+  keywords: number;
+  domain: string;
+  traffic: number;
+  topKeywords: string[];
+}
+
+interface ContentSEOAnalysis {
+  url: string;
+  title: string;
+  score: number;
+  issues: string[];
+  recommendations: string[];
+}
+
 export class KeywordAnalyzer {
   private keywords: Map<string, KeywordAnalysis> = new Map();
 
@@ -82,7 +99,7 @@ export class KeywordAnalyzer {
     ];
   }
 
-  analyzeCompetitors(): any[] {
+  analyzeCompetitors(): CompetitorAnalysis[] {
     return [
       {
         name: "Healthline",
@@ -111,7 +128,7 @@ export class KeywordAnalyzer {
     ];
   }
 
-  analyzeContentSEO(url: string): any {
+  analyzeContentSEO(url: string): ContentSEOAnalysis {
     return {
       url,
       title: `SEO分析 - ${url}`,

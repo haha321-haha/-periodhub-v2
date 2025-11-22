@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 import {
   clearRecommendationCache,
   getCacheStats,
-} from '@/lib/recommendationCache';
+} from "@/lib/recommendationCache";
 
 /**
  * GET /api/recommendation-cache
@@ -17,13 +17,13 @@ export async function GET() {
       stats,
     });
   } catch (error) {
-    console.error('Error fetching cache stats:', error);
+    // Error fetching cache stats
     return NextResponse.json(
       {
         success: false,
-        error: 'Failed to fetch cache stats',
+        error: "Failed to fetch cache stats",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -38,16 +38,16 @@ export async function DELETE() {
 
     return NextResponse.json({
       success: true,
-      message: 'Cache cleared successfully',
+      message: "Cache cleared successfully",
     });
   } catch (error) {
-    console.error('Error clearing cache:', error);
+    // Error clearing cache
     return NextResponse.json(
       {
         success: false,
-        error: 'Failed to clear cache',
+        error: "Failed to clear cache",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

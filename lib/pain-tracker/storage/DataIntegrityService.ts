@@ -7,9 +7,9 @@ import {
   ValidationResult,
   PainTrackerError,
   STORAGE_KEYS,
-  CURRENT_SCHEMA_VERSION,
 } from "../../../types/pain-tracker";
 import { ValidationService } from "../validation/ValidationService";
+import { logError } from "@/lib/debug-logger";
 
 export interface DataIntegrityReport {
   isValid: boolean;
@@ -79,7 +79,7 @@ export class DataIntegrityService {
         if (!Array.isArray(records)) {
           throw new Error("Data is not an array");
         }
-      } catch (parseError) {
+      } catch {
         report.isValid = false;
         report.corruptionLevel = "severe";
         report.invalidData.push("Unable to parse stored data");
@@ -150,7 +150,7 @@ export class DataIntegrityService {
   /**
    * Validate individual record structure and data
    */
-  private async validateRecord(record: any): Promise<ValidationResult> {
+  private async validateRecord(record: unknown): Promise<ValidationResult> {
     try {
       // Check if record has basic structure
       if (!record || typeof record !== "object") {
@@ -186,15 +186,15 @@ export class DataIntegrityService {
       }
 
       // Use validation service for detailed validation
-      return this.validationService.validateRecord(record);
-    } catch (error) {
+      return this.validationService.validateRecord(record as PainRecord);
+    } catch {
       return {
         isValid: false,
         errors: [
           {
             field: "record",
             message: "Failed to validate record",
-            code: "VALIDATION_ERROR" as any,
+            code: "VALIDATION_ERROR",
           },
         ],
         warnings: [],
@@ -295,7 +295,11 @@ export class DataIntegrityService {
 
       return true;
     } catch (error) {
-      console.error("Failed to repair corrupted records:", error);
+      logError(
+        "Failed to repair corrupted records:",
+        error,
+        "DataIntegrityService/repairCorruptedRecords",
+      );
       return false;
     }
   }
@@ -303,9 +307,12 @@ export class DataIntegrityService {
   /**
    * Repair individual record
    */
-  private async repairRecord(record: any): Promise<PainRecord | null> {
+  private async repairRecord(record: unknown): Promise<PainRecord | null> {
     try {
-      const repaired = { ...record };
+      if (!record || typeof record !== "object") return null;
+      const repaired = {
+        ...(record as Record<string, unknown>),
+      } as Partial<PainRecord>;
 
       // Generate missing ID
       if (!repaired.id) {
@@ -362,14 +369,20 @@ export class DataIntegrityService {
       }
 
       // Validate repaired record
-      const validation = this.validationService.validateRecord(repaired);
+      const validation = this.validationService.validateRecord(
+        repaired as PainRecord,
+      );
       if (validation.isValid) {
         return repaired as PainRecord;
       }
 
       return null;
     } catch (error) {
-      console.error("Failed to repair record:", error);
+      logError(
+        "Failed to repair record:",
+        error,
+        "DataIntegrityService/repairRecord",
+      );
       return null;
     }
   }
@@ -410,7 +423,11 @@ export class DataIntegrityService {
 
       return true;
     } catch (error) {
-      console.error("Failed to restore from backup:", error);
+      logError(
+        "Failed to restore from backup:",
+        error,
+        "DataIntegrityService/restoreFromBackup",
+      );
       return false;
     }
   }
@@ -444,7 +461,11 @@ export class DataIntegrityService {
 
       return true;
     } catch (error) {
-      console.error("Failed to perform partial recovery:", error);
+      logError(
+        "Failed to perform partial recovery:",
+        error,
+        "DataIntegrityService/performPartialRecovery",
+      );
       return false;
     }
   }
@@ -465,7 +486,11 @@ export class DataIntegrityService {
 
       return true;
     } catch (error) {
-      console.error("Failed to perform fresh start:", error);
+      logError(
+        "Failed to perform fresh start:",
+        error,
+        "DataIntegrityService/performFreshStart",
+      );
       return false;
     }
   }
@@ -478,7 +503,7 @@ export class DataIntegrityService {
       const backupKey = `${STORAGE_KEYS.PAIN_RECORDS}_backup`;
       const backupData = localStorage.getItem(backupKey);
       return backupData !== null;
-    } catch (error) {
+    } catch {
       return false;
     }
   }
@@ -497,7 +522,7 @@ export class DataIntegrityService {
       }
 
       return undefined;
-    } catch (error) {
+    } catch {
       return undefined;
     }
   }
@@ -531,7 +556,7 @@ export class DataIntegrityService {
       }
 
       return hash.toString(36);
-    } catch (error) {
+    } catch {
       return "";
     }
   }
@@ -576,7 +601,11 @@ export class DataIntegrityService {
         this.checksums = new Map(checksumData);
       }
     } catch (error) {
-      console.error("Failed to load checksums:", error);
+      logError(
+        "Failed to load checksums:",
+        error,
+        "DataIntegrityService/loadChecksums",
+      );
       this.checksums.clear();
     }
   }
@@ -592,7 +621,11 @@ export class DataIntegrityService {
         JSON.stringify(checksumData),
       );
     } catch (error) {
-      console.error("Failed to save checksums:", error);
+      logError(
+        "Failed to save checksums:",
+        error,
+        "DataIntegrityService/saveChecksums",
+      );
     }
   }
 
@@ -647,13 +680,13 @@ export class DataIntegrityService {
   /**
    * Get storage quota information
    */
-  private async getStorageQuota(): Promise<any> {
+  private async getStorageQuota(): Promise<StorageEstimate | null> {
     try {
       if ("storage" in navigator && "estimate" in navigator.storage) {
         return await navigator.storage.estimate();
       }
       return null;
-    } catch (error) {
+    } catch {
       return null;
     }
   }

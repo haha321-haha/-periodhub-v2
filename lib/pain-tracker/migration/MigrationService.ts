@@ -2,13 +2,24 @@
 // Handles schema versioning and data migration between different versions
 
 import {
-  PainRecord,
   StoredData,
   Migration,
   MigrationPlan,
   PainTrackerError,
   CURRENT_SCHEMA_VERSION,
 } from "../../../types/pain-tracker";
+import { logInfo, logError } from "@/lib/debug-logger";
+
+interface Medication {
+  name: string;
+  dosage: string;
+  timing: string;
+}
+
+interface LifestyleFactor {
+  factor: string;
+  value: number;
+}
 
 export class MigrationService {
   private migrations: Map<string, Migration> = new Map();
@@ -77,40 +88,58 @@ export class MigrationService {
   /**
    * Execute migration plan
    */
-  async executeMigrationPlan(data: any, plan: MigrationPlan): Promise<any> {
+  async executeMigrationPlan(
+    data: unknown,
+    plan: MigrationPlan,
+  ): Promise<StoredData> {
     let migratedData = data;
 
     try {
       for (const migration of plan.migrations) {
-        console.log(`Executing migration: ${migration.description}`);
+        logInfo(
+          `Executing migration: ${migration.description}`,
+          undefined,
+          "MigrationService/executeMigrationPlan",
+        );
 
         // Create backup before migration
         const backup = JSON.parse(JSON.stringify(migratedData));
 
         try {
           // Execute migration
-          migratedData = migration.up(migratedData);
+          migratedData = migration.up(migratedData) as StoredData;
 
           // Validate migrated data
           if (!migration.validate(migratedData)) {
             throw new Error("Migration validation failed");
           }
 
-          console.log(
+          logInfo(
             `Migration to version ${migration.version} completed successfully`,
+            undefined,
+            "MigrationService/executeMigrationPlan",
           );
         } catch (error) {
-          console.error(
+          logError(
             `Migration to version ${migration.version} failed:`,
             error,
+            "MigrationService/executeMigrationPlan",
           );
 
           // Attempt rollback
           try {
-            migratedData = migration.down(backup);
-            console.log(`Rollback to previous version successful`);
+            migratedData = migration.down(backup) as StoredData;
+            logInfo(
+              `Rollback to previous version successful`,
+              undefined,
+              "MigrationService/executeMigrationPlan",
+            );
           } catch (rollbackError) {
-            console.error("Rollback failed:", rollbackError);
+            logError(
+              "Rollback failed:",
+              rollbackError,
+              "MigrationService/executeMigrationPlan",
+            );
           }
 
           throw new PainTrackerError(
@@ -152,10 +181,10 @@ export class MigrationService {
   /**
    * Migrate from legacy pain tracker (version 0) to enhanced version 1
    */
-  private migrateLegacyToV1(legacyData: any): StoredData {
+  private migrateLegacyToV1(legacyData: unknown): StoredData {
     try {
       // Handle different legacy data formats
-      let legacyRecords: any[] = [];
+      let legacyRecords: Record<string, unknown>[] = [];
 
       if (Array.isArray(legacyData)) {
         // Direct array of records
@@ -207,7 +236,7 @@ export class MigrationService {
 
       // Create new data structure
       const migratedData: StoredData = {
-        records: migratedRecords as any,
+        records: migratedRecords,
         preferences: {
           defaultMedications: [],
           reminderSettings: {
@@ -258,7 +287,7 @@ export class MigrationService {
   /**
    * Migrate from enhanced version 1 back to legacy format (rollback)
    */
-  private migrateV1ToLegacy(v1Data: StoredData): any {
+  private migrateV1ToLegacy(v1Data: StoredData): Record<string, unknown>[] {
     try {
       const legacyRecords = v1Data.records.map((record) => ({
         id: record.id,
@@ -286,17 +315,19 @@ export class MigrationService {
   /**
    * Validate version 1 data structure
    */
-  private validateV1Data(data: any): boolean {
+  private validateV1Data(data: unknown): boolean {
     try {
+      if (!data || typeof data !== "object") return false;
+      const dataObj = data as Record<string, unknown>;
       return (
-        data &&
-        typeof data === "object" &&
-        Array.isArray(data.records) &&
-        typeof data.preferences === "object" &&
-        data.schemaVersion === 1 &&
-        data.records.every((record: any) => this.validateV1Record(record))
+        Array.isArray(dataObj.records) &&
+        typeof dataObj.preferences === "object" &&
+        dataObj.schemaVersion === 1 &&
+        (dataObj.records as unknown[]).every((record: unknown) =>
+          this.validateV1Record(record),
+        )
       );
-    } catch (error) {
+    } catch {
       return false;
     }
   }
@@ -304,25 +335,28 @@ export class MigrationService {
   /**
    * Validate individual version 1 record
    */
-  private validateV1Record(record: any): boolean {
+  private validateV1Record(record: unknown): boolean {
+    if (!record || typeof record !== "object") return false;
+    const recordObj = record as Record<string, unknown>;
     return (
-      record &&
-      typeof record.id === "string" &&
-      typeof record.date === "string" &&
-      typeof record.time === "string" &&
-      typeof record.painLevel === "number" &&
-      Array.isArray(record.painTypes) &&
-      Array.isArray(record.locations) &&
-      Array.isArray(record.symptoms) &&
-      Array.isArray(record.medications) &&
-      Array.isArray(record.lifestyleFactors)
+      typeof recordObj.id === "string" &&
+      typeof recordObj.date === "string" &&
+      typeof recordObj.time === "string" &&
+      typeof recordObj.painLevel === "number" &&
+      Array.isArray(recordObj.painTypes) &&
+      Array.isArray(recordObj.locations) &&
+      Array.isArray(recordObj.symptoms) &&
+      Array.isArray(recordObj.medications) &&
+      Array.isArray(recordObj.lifestyleFactors)
     );
   }
 
   /**
    * Extract time from legacy record (may not have separate time field)
    */
-  private extractTimeFromLegacyRecord(legacyRecord: any): string {
+  private extractTimeFromLegacyRecord(
+    legacyRecord: Record<string, unknown>,
+  ): string {
     if (legacyRecord.time) {
       return legacyRecord.time;
     }
@@ -341,7 +375,7 @@ export class MigrationService {
   /**
    * Normalize pain level to 0-10 scale
    */
-  private normalizePainLevel(level: any): number {
+  private normalizePainLevel(level: unknown): number {
     const numLevel = Number(level);
     if (isNaN(numLevel)) return 0;
     return Math.max(0, Math.min(10, Math.round(numLevel)));
@@ -350,7 +384,7 @@ export class MigrationService {
   /**
    * Normalize effectiveness to 0-10 scale
    */
-  private normalizeEffectiveness(effectiveness: any): number {
+  private normalizeEffectiveness(effectiveness: unknown): number {
     const numEffectiveness = Number(effectiveness);
     if (isNaN(numEffectiveness)) return 0;
     return Math.max(0, Math.min(10, Math.round(numEffectiveness)));
@@ -359,7 +393,7 @@ export class MigrationService {
   /**
    * Migrate pain types from legacy format
    */
-  private migratePainTypes(legacyRecord: any): string[] {
+  private migratePainTypes(legacyRecord: Record<string, unknown>): string[] {
     const painTypes: string[] = [];
 
     // Check various legacy fields that might contain pain type info
@@ -400,7 +434,7 @@ export class MigrationService {
   /**
    * Migrate locations from legacy format
    */
-  private migrateLocations(legacyRecord: any): string[] {
+  private migrateLocations(legacyRecord: Record<string, unknown>): string[] {
     const locations: string[] = [];
 
     if (legacyRecord.location) {
@@ -434,12 +468,14 @@ export class MigrationService {
   /**
    * Migrate symptoms from legacy format
    */
-  private migrateSymptoms(legacySymptoms: any[]): string[] {
+  private migrateSymptoms(legacySymptoms: unknown[]): string[] {
     if (!Array.isArray(legacySymptoms)) {
       return [];
     }
 
-    return legacySymptoms.map((symptom) => this.mapLegacySymptom(symptom));
+    return legacySymptoms.map((symptom) =>
+      this.mapLegacySymptom(String(symptom)),
+    );
   }
 
   /**
@@ -502,7 +538,7 @@ export class MigrationService {
   /**
    * Migrate medications from legacy treatments
    */
-  private migrateMedications(legacyTreatments: any[]): any[] {
+  private migrateMedications(legacyTreatments: unknown[]): Medication[] {
     if (!Array.isArray(legacyTreatments)) {
       return [];
     }
@@ -514,11 +550,20 @@ export class MigrationService {
           dosage: "",
           timing: "during pain",
         };
-      } else if (typeof treatment === "object" && treatment.name) {
+      } else if (
+        typeof treatment === "object" &&
+        treatment !== null &&
+        "name" in treatment
+      ) {
+        const treatmentObj = treatment as {
+          name: string;
+          dosage?: string;
+          timing?: string;
+        };
         return {
-          name: treatment.name,
-          dosage: treatment.dosage || "",
-          timing: treatment.timing || "during pain",
+          name: treatmentObj.name,
+          dosage: treatmentObj.dosage || "",
+          timing: treatmentObj.timing || "during pain",
         };
       }
 
@@ -533,8 +578,10 @@ export class MigrationService {
   /**
    * Migrate lifestyle factors (new in v1, so create defaults)
    */
-  private migrateLifestyleFactors(legacyRecord: any): any[] {
-    const factors: any[] = [];
+  private migrateLifestyleFactors(
+    legacyRecord: Record<string, unknown>,
+  ): LifestyleFactor[] {
+    const factors: LifestyleFactor[] = [];
 
     // Try to extract any lifestyle information from notes or other fields
     if (legacyRecord.notes) {

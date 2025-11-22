@@ -6,8 +6,9 @@ import {
   StorageQuotaThresholds,
   StorageOptimizationResult,
   PainTrackerError,
-  STORAGE_KEYS
-} from '../../../types/pain-tracker';
+  STORAGE_KEYS,
+} from "../../../types/pain-tracker";
+import { logError, logWarn } from "@/lib/debug-logger";
 
 export interface StorageQuotaManagerInterface {
   getQuotaInfo(): Promise<StorageQuotaInfo>;
@@ -24,7 +25,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
     warning: 0.8, // 80% of quota
     critical: 0.9, // 90% of quota
     emergency: 0.95, // 95% of quota
-    minFreeSpace: 5 * 1024 * 1024 // 5MB minimum free space
+    minFreeSpace: 5 * 1024 * 1024, // 5MB minimum free space
   };
 
   private monitoringTimer: NodeJS.Timeout | null = null;
@@ -38,17 +39,20 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
     try {
       let quotaInfo: StorageQuotaInfo;
 
-      if ('storage' in navigator && 'estimate' in navigator.storage) {
+      if ("storage" in navigator && "estimate" in navigator.storage) {
         // Use modern Storage API
         const estimate = await navigator.storage.estimate();
         quotaInfo = {
           used: estimate.usage || 0,
           quota: estimate.quota || this.getFallbackQuota(),
-          available: (estimate.quota || this.getFallbackQuota()) - (estimate.usage || 0),
-          usagePercentage: estimate.quota ? (estimate.usage || 0) / estimate.quota : 0,
+          available:
+            (estimate.quota || this.getFallbackQuota()) - (estimate.usage || 0),
+          usagePercentage: estimate.quota
+            ? (estimate.usage || 0) / estimate.quota
+            : 0,
           painTrackerUsage: await this.calculatePainTrackerUsage(),
           timestamp: new Date(),
-          isEstimated: false
+          isEstimated: false,
         };
       } else {
         // Fallback for browsers without Storage API
@@ -62,16 +66,16 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
           usagePercentage: painTrackerUsage / fallbackQuota,
           painTrackerUsage,
           timestamp: new Date(),
-          isEstimated: true
+          isEstimated: true,
         };
       }
 
       return quotaInfo;
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to get storage quota information',
-        'STORAGE_ERROR',
-        error
+        "Failed to get storage quota information",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -90,14 +94,32 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
     // Check thresholds and take action
     if (quotaInfo.usagePercentage >= this.quotaThresholds.emergency) {
-      console.error('Emergency: Storage quota nearly exceeded!', quotaInfo);
+      logError(
+        "Emergency: Storage quota nearly exceeded!",
+        quotaInfo,
+        "StorageQuotaManager/monitorQuotaUsage",
+      );
       await this.handleQuotaExceeded();
     } else if (quotaInfo.usagePercentage >= this.quotaThresholds.critical) {
-      console.warn('Critical: Storage quota usage is very high', quotaInfo);
+      logWarn(
+        "Critical: Storage quota usage is very high",
+        quotaInfo,
+        "StorageQuotaManager/monitorQuotaUsage",
+      );
       // Trigger automatic optimization
-      this.optimizeStorageUsage().catch(console.error);
+      this.optimizeStorageUsage().catch((error) =>
+        logError(
+          "Optimization error:",
+          error,
+          "StorageQuotaManager/monitorQuotaUsage",
+        ),
+      );
     } else if (quotaInfo.usagePercentage >= this.quotaThresholds.warning) {
-      console.warn('Warning: Storage quota usage is high', quotaInfo);
+      logWarn(
+        "Warning: Storage quota usage is high",
+        quotaInfo,
+        "StorageQuotaManager/monitorQuotaUsage",
+      );
     }
 
     return quotaInfo;
@@ -141,13 +163,13 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
         endUsage: endQuota.used,
         startPercentage: startQuota.usagePercentage,
         endPercentage: endQuota.usagePercentage,
-        optimizationTime: 0
+        optimizationTime: 0,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to optimize storage usage',
-        'STORAGE_ERROR',
-        error
+        "Failed to optimize storage usage",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -161,20 +183,26 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
     // Check current usage
     if (quotaInfo.usagePercentage >= this.quotaThresholds.critical) {
-      recommendations.push('Critical: Storage is nearly full. Immediate action required.');
-      recommendations.push('Delete old pain records or export data to free up space.');
-      recommendations.push('Consider archiving records older than 6 months.');
+      recommendations.push(
+        "Critical: Storage is nearly full. Immediate action required.",
+      );
+      recommendations.push(
+        "Delete old pain records or export data to free up space.",
+      );
+      recommendations.push("Consider archiving records older than 6 months.");
     } else if (quotaInfo.usagePercentage >= this.quotaThresholds.warning) {
-      recommendations.push('Warning: Storage usage is high. Consider cleanup.');
-      recommendations.push('Archive old records to free up space.');
-      recommendations.push('Remove duplicate entries if any exist.');
+      recommendations.push("Warning: Storage usage is high. Consider cleanup.");
+      recommendations.push("Archive old records to free up space.");
+      recommendations.push("Remove duplicate entries if any exist.");
     }
 
     // Check pain tracker specific usage
     const painTrackerPercentage = quotaInfo.painTrackerUsage / quotaInfo.quota;
     if (painTrackerPercentage > 0.5) {
-      recommendations.push('Pain tracker is using significant storage space.');
-      recommendations.push('Consider exporting old data and removing it from local storage.');
+      recommendations.push("Pain tracker is using significant storage space.");
+      recommendations.push(
+        "Consider exporting old data and removing it from local storage.",
+      );
     }
 
     // Check for growth trend
@@ -183,22 +211,26 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       const isGrowingFast = this.isStorageGrowingFast(recentHistory);
 
       if (isGrowingFast) {
-        recommendations.push('Storage usage is growing rapidly. Monitor data accumulation.');
+        recommendations.push(
+          "Storage usage is growing rapidly. Monitor data accumulation.",
+        );
       }
     }
 
     // Browser-specific recommendations
     if (quotaInfo.isEstimated) {
-      recommendations.push('Storage monitoring is limited in this browser. Consider using Chrome for better insights.');
+      recommendations.push(
+        "Storage monitoring is limited in this browser. Consider using Chrome for better insights.",
+      );
     }
 
     // Provide specific actions
     if (recommendations.length > 0) {
-      recommendations.push('');
-      recommendations.push('Recommended actions:');
-      recommendations.push('• Export data regularly to prevent data loss');
-      recommendations.push('• Enable automatic cleanup in settings');
-      recommendations.push('• Review and delete unnecessary records');
+      recommendations.push("");
+      recommendations.push("Recommended actions:");
+      recommendations.push("• Export data regularly to prevent data loss");
+      recommendations.push("• Enable automatic cleanup in settings");
+      recommendations.push("• Review and delete unnecessary records");
     }
 
     return recommendations;
@@ -211,7 +243,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
     this.cancelQuotaMonitoring();
 
     // Don't start timers in test environment
-    if (typeof process !== 'undefined' && process.env.NODE_ENV === 'test') {
+    if (typeof process !== "undefined" && process.env.NODE_ENV === "test") {
       return;
     }
 
@@ -219,7 +251,11 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       try {
         await this.monitorQuotaUsage();
       } catch (error) {
-        console.error('Quota monitoring failed:', error);
+        logError(
+          "Quota monitoring failed:",
+          error,
+          "StorageQuotaManager/scheduleQuotaMonitoring",
+        );
       }
     }, intervalMs);
   }
@@ -264,7 +300,9 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
       // If still critical, provide user guidance
       if (endQuota.usagePercentage >= this.quotaThresholds.critical) {
-        operations.push('Manual intervention required: Export and delete old records');
+        operations.push(
+          "Manual intervention required: Export and delete old records",
+        );
       }
 
       return {
@@ -274,13 +312,13 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
         endUsage: endQuota.used,
         startPercentage: startQuota.usagePercentage,
         endPercentage: endQuota.usagePercentage,
-        optimizationTime: 0
+        optimizationTime: 0,
       };
     } catch (error) {
       throw new PainTrackerError(
-        'Failed to handle quota exceeded situation',
-        'STORAGE_ERROR',
-        error
+        "Failed to handle quota exceeded situation",
+        "STORAGE_ERROR",
+        error,
       );
     }
   }
@@ -300,7 +338,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       preferences: 0,
       metadata: 0,
       backups: 0,
-      other: 0
+      other: 0,
     };
 
     try {
@@ -310,7 +348,9 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
         breakdown.records = new Blob([recordsData]).size;
       }
 
-      const preferencesData = localStorage.getItem(STORAGE_KEYS.USER_PREFERENCES);
+      const preferencesData = localStorage.getItem(
+        STORAGE_KEYS.USER_PREFERENCES,
+      );
       if (preferencesData) {
         breakdown.preferences = new Blob([preferencesData]).size;
       }
@@ -323,7 +363,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       // Calculate backup sizes
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && (key.includes('_backup') || key.includes('_archive'))) {
+        if (key && (key.includes("_backup") || key.includes("_archive"))) {
           const data = localStorage.getItem(key);
           if (data) {
             breakdown.backups += new Blob([data]).size;
@@ -334,9 +374,15 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       // Calculate other pain tracker related data
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && key.startsWith('pain_tracker_') &&
-            !Object.values(STORAGE_KEYS).includes(key as any) &&
-            !key.includes('_backup') && !key.includes('_archive')) {
+        if (
+          key &&
+          key.startsWith("pain_tracker_") &&
+          !Object.values(STORAGE_KEYS).includes(
+            key as (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS],
+          ) &&
+          !key.includes("_backup") &&
+          !key.includes("_archive")
+        ) {
           const data = localStorage.getItem(key);
           if (data) {
             breakdown.other += new Blob([data]).size;
@@ -344,7 +390,11 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
         }
       }
     } catch (error) {
-      console.warn('Failed to calculate storage breakdown:', error);
+      logWarn(
+        "Failed to calculate storage breakdown:",
+        error,
+        "StorageQuotaManager/getStorageBreakdown",
+      );
     }
 
     return breakdown;
@@ -365,7 +415,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       // Calculate size of all pain tracker related data
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && key.startsWith('pain_tracker_')) {
+        if (key && key.startsWith("pain_tracker_")) {
           const data = localStorage.getItem(key);
           if (data) {
             totalSize += new Blob([data]).size;
@@ -373,7 +423,11 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
         }
       }
     } catch (error) {
-      console.warn('Failed to calculate pain tracker usage:', error);
+      logWarn(
+        "Failed to calculate pain tracker usage:",
+        error,
+        "StorageQuotaManager/calculatePainTrackerUsage",
+      );
     }
 
     return totalSize;
@@ -403,7 +457,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       // Find all backup keys
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && (key.includes('_backup') || key.includes('_archive'))) {
+        if (key && (key.includes("_backup") || key.includes("_archive"))) {
           backupKeys.push(key);
         }
       }
@@ -412,7 +466,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       const sortedBackups = backupKeys.sort().reverse();
       const backupsToRemove = sortedBackups.slice(3);
 
-      backupsToRemove.forEach(key => {
+      backupsToRemove.forEach((key) => {
         const data = localStorage.getItem(key);
         if (data) {
           spaceSaved += new Blob([data]).size;
@@ -422,10 +476,18 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       });
 
       if (removedCount > 0) {
-        operations.push(`Removed ${removedCount} old backup files (${this.formatBytes(spaceSaved)} saved)`);
+        operations.push(
+          `Removed ${removedCount} old backup files (${this.formatBytes(
+            spaceSaved,
+          )} saved)`,
+        );
       }
     } catch (error) {
-      console.warn('Failed to cleanup old backups:', error);
+      logWarn(
+        "Failed to cleanup old backups:",
+        error,
+        "StorageQuotaManager/cleanupOldBackups",
+      );
     }
 
     return { operations };
@@ -439,7 +501,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       // For now, just optimize JSON formatting
       let totalSaved = 0;
 
-      Object.values(STORAGE_KEYS).forEach(key => {
+      Object.values(STORAGE_KEYS).forEach((key) => {
         const data = localStorage.getItem(key);
         if (data) {
           try {
@@ -451,16 +513,26 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
               totalSaved += data.length - compressed.length;
             }
           } catch (error) {
-            console.warn(`Failed to compress data for key ${key}:`, error);
+            logWarn(
+              `Failed to compress data for key ${key}:`,
+              error,
+              "StorageQuotaManager/compressStoredData",
+            );
           }
         }
       });
 
       if (totalSaved > 0) {
-        operations.push(`Compressed stored data (${this.formatBytes(totalSaved)} saved)`);
+        operations.push(
+          `Compressed stored data (${this.formatBytes(totalSaved)} saved)`,
+        );
       }
     } catch (error) {
-      console.warn('Failed to compress stored data:', error);
+      logWarn(
+        "Failed to compress stored data:",
+        error,
+        "StorageQuotaManager/compressStoredData",
+      );
     }
 
     return { operations };
@@ -472,9 +544,13 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
     try {
       // This would integrate with the DataCleanupService
       // For now, just report that deduplication would be performed
-      operations.push('Duplicate data removal would be performed here');
+      operations.push("Duplicate data removal would be performed here");
     } catch (error) {
-      console.warn('Failed to remove duplicate data:', error);
+      logWarn(
+        "Failed to remove duplicate data:",
+        error,
+        "StorageQuotaManager/removeDuplicateData",
+      );
     }
 
     return { operations };
@@ -486,9 +562,13 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
     try {
       // This would integrate with the DataCleanupService
       // For now, just report that archiving would be performed
-      operations.push('Old data archiving would be performed here');
+      operations.push("Old data archiving would be performed here");
     } catch (error) {
-      console.warn('Failed to archive old data:', error);
+      logWarn(
+        "Failed to archive old data:",
+        error,
+        "StorageQuotaManager/archiveOldData",
+      );
     }
 
     return { operations };
@@ -505,12 +585,12 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       // Find temporary keys
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && (key.includes('_temp') || key.includes('_cache'))) {
+        if (key && (key.includes("_temp") || key.includes("_cache"))) {
           tempKeys.push(key);
         }
       }
 
-      tempKeys.forEach(key => {
+      tempKeys.forEach((key) => {
         const data = localStorage.getItem(key);
         if (data) {
           spaceSaved += new Blob([data]).size;
@@ -520,10 +600,18 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       });
 
       if (removedCount > 0) {
-        operations.push(`Removed ${removedCount} temporary files (${this.formatBytes(spaceSaved)} saved)`);
+        operations.push(
+          `Removed ${removedCount} temporary files (${this.formatBytes(
+            spaceSaved,
+          )} saved)`,
+        );
       }
     } catch (error) {
-      console.warn('Failed to cleanup temporary data:', error);
+      logWarn(
+        "Failed to cleanup temporary data:",
+        error,
+        "StorageQuotaManager/cleanupTemporaryData",
+      );
     }
 
     return { operations };
@@ -539,7 +627,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && (key.includes('_backup') || key.includes('_archive'))) {
+        if (key && (key.includes("_backup") || key.includes("_archive"))) {
           backupKeys.push(key);
         }
       }
@@ -548,7 +636,7 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       const sortedBackups = backupKeys.sort().reverse();
       const backupsToRemove = sortedBackups.slice(1);
 
-      backupsToRemove.forEach(key => {
+      backupsToRemove.forEach((key) => {
         const data = localStorage.getItem(key);
         if (data) {
           spaceSaved += new Blob([data]).size;
@@ -558,23 +646,39 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       });
 
       if (removedCount > 0) {
-        operations.push(`Emergency: Removed ${removedCount} backup files (${this.formatBytes(spaceSaved)} saved)`);
+        operations.push(
+          `Emergency: Removed ${removedCount} backup files (${this.formatBytes(
+            spaceSaved,
+          )} saved)`,
+        );
       }
     } catch (error) {
-      console.warn('Failed to perform emergency backup cleanup:', error);
+      logWarn(
+        "Failed to perform emergency backup cleanup:",
+        error,
+        "StorageQuotaManager/emergencyBackupCleanup",
+      );
     }
 
     return { operations };
   }
 
-  private async emergencyArchive(maxAgeMonths: number): Promise<{ operations: string[] }> {
+  private async emergencyArchive(
+    maxAgeMonths: number,
+  ): Promise<{ operations: string[] }> {
     const operations: string[] = [];
 
     try {
       // This would integrate with DataCleanupService for emergency archiving
-      operations.push(`Emergency: Archive records older than ${maxAgeMonths} months`);
+      operations.push(
+        `Emergency: Archive records older than ${maxAgeMonths} months`,
+      );
     } catch (error) {
-      console.warn('Failed to perform emergency archive:', error);
+      logWarn(
+        "Failed to perform emergency archive:",
+        error,
+        "StorageQuotaManager/emergencyArchive",
+      );
     }
 
     return { operations };
@@ -590,12 +694,12 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && key.includes('_cache')) {
+        if (key && key.includes("_cache")) {
           cacheKeys.push(key);
         }
       }
 
-      cacheKeys.forEach(key => {
+      cacheKeys.forEach((key) => {
         const data = localStorage.getItem(key);
         if (data) {
           spaceSaved += new Blob([data]).size;
@@ -605,10 +709,18 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
       });
 
       if (removedCount > 0) {
-        operations.push(`Cleared ${removedCount} cache files (${this.formatBytes(spaceSaved)} saved)`);
+        operations.push(
+          `Cleared ${removedCount} cache files (${this.formatBytes(
+            spaceSaved,
+          )} saved)`,
+        );
       }
     } catch (error) {
-      console.warn('Failed to clear caches:', error);
+      logWarn(
+        "Failed to clear caches:",
+        error,
+        "StorageQuotaManager/clearAllCaches",
+      );
     }
 
     return { operations };
@@ -619,22 +731,26 @@ export class StorageQuotaManager implements StorageQuotaManagerInterface {
 
     try {
       // This would use advanced compression techniques
-      operations.push('Aggressive compression would be applied here');
+      operations.push("Aggressive compression would be applied here");
     } catch (error) {
-      console.warn('Failed to perform aggressive compression:', error);
+      logWarn(
+        "Failed to perform aggressive compression:",
+        error,
+        "StorageQuotaManager/aggressiveCompression",
+      );
     }
 
     return { operations };
   }
 
   private formatBytes(bytes: number): string {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) return "0 Bytes";
 
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
 
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   }
 }
 

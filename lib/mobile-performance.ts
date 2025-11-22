@@ -2,6 +2,8 @@
  * 移动端性能优化工具
  */
 
+import { logInfo, logError } from "@/lib/debug-logger";
+
 // 1. 触摸优化工具
 export class TouchOptimizer {
   private static instance: TouchOptimizer;
@@ -51,7 +53,11 @@ export class TouchOptimizer {
 
     // 优化移动端滚动性能
     if (this.isMobile()) {
-      (document.body.style as any).webkitOverflowScrolling = "touch";
+      (
+        document.body.style as CSSStyleDeclaration & {
+          webkitOverflowScrolling?: string;
+        }
+      ).webkitOverflowScrolling = "touch";
     }
   }
 
@@ -95,10 +101,15 @@ export class TouchOptimizer {
   }
 }
 
+interface CacheItem {
+  value: unknown;
+  expiry: number;
+}
+
 // 2. 网络优化工具
 export class NetworkOptimizer {
   private static instance: NetworkOptimizer;
-  private cache: Map<string, any> = new Map();
+  private cache: Map<string, CacheItem> = new Map();
 
   static getInstance(): NetworkOptimizer {
     if (!NetworkOptimizer.instance) {
@@ -154,23 +165,31 @@ export class NetworkOptimizer {
       navigator.serviceWorker
         .register("/sw.js")
         .then((registration) => {
-          console.log("Service Worker registered:", registration);
+          logInfo(
+            "Service Worker registered",
+            registration,
+            "NetworkOptimizer/setupServiceWorker",
+          );
         })
         .catch((error) => {
-          console.log("Service Worker registration failed:", error);
+          logError(
+            "Service Worker registration failed:",
+            error,
+            "NetworkOptimizer/setupServiceWorker",
+          );
         });
     }
   }
 
   // 缓存管理
-  setCache(key: string, value: any, ttl: number = 300000): void {
+  setCache(key: string, value: unknown, ttl: number = 300000): void {
     this.cache.set(key, {
       value,
       expiry: Date.now() + ttl,
     });
   }
 
-  getCache(key: string): any {
+  getCache(key: string): unknown {
     const item = this.cache.get(key);
     if (!item) return null;
 
@@ -286,13 +305,20 @@ export class RenderOptimizer {
       .then((module) => {
         // 渲染组件
         if (module.default) {
-          const Component = module.default;
           // 这里需要根据实际的组件渲染方式来实现
-          console.log(`Loaded component: ${componentName}`);
+          logInfo(
+            `Loaded component: ${componentName}`,
+            undefined,
+            "RenderOptimizer/loadComponent",
+          );
         }
       })
       .catch((error) => {
-        console.error(`Failed to load component ${componentName}:`, error);
+        logError(
+          `Failed to load component ${componentName}:`,
+          error,
+          "RenderOptimizer/loadComponent",
+        );
       });
   }
 
@@ -344,15 +370,24 @@ export class PerformanceMonitor {
       const entries = entryList.getEntries();
       const lastEntry = entries[entries.length - 1];
       this.metrics.lcp = lastEntry.startTime;
-      console.log("LCP:", lastEntry.startTime);
+      logInfo(
+        "LCP",
+        lastEntry.startTime,
+        "PerformanceMonitor/measureCoreWebVitals",
+      );
     }).observe({ entryTypes: ["largest-contentful-paint"] });
 
     // 测量FID (First Input Delay)
     new PerformanceObserver((entryList) => {
       const entries = entryList.getEntries();
       entries.forEach((entry) => {
-        this.metrics.fid = (entry as any).processingStart - entry.startTime;
-        console.log("FID:", this.metrics.fid);
+        const fidEntry = entry as PerformanceEventTiming;
+        this.metrics.fid = fidEntry.processingStart - entry.startTime;
+        logInfo(
+          "FID",
+          this.metrics.fid,
+          "PerformanceMonitor/measureCoreWebVitals",
+        );
       });
     }).observe({ entryTypes: ["first-input"] });
 
@@ -361,12 +396,13 @@ export class PerformanceMonitor {
     new PerformanceObserver((entryList) => {
       const entries = entryList.getEntries();
       entries.forEach((entry) => {
-        if (!(entry as any).hadRecentInput) {
-          clsValue += (entry as any).value;
+        const layoutShiftEntry = entry as LayoutShift;
+        if (!layoutShiftEntry.hadRecentInput) {
+          clsValue += layoutShiftEntry.value;
         }
       });
       this.metrics.cls = clsValue;
-      console.log("CLS:", clsValue);
+      logInfo("CLS", clsValue, "PerformanceMonitor/measureCoreWebVitals");
     }).observe({ entryTypes: ["layout-shift"] });
   }
 
@@ -412,11 +448,34 @@ export class PerformanceMonitor {
   // 报告性能数据
   reportPerformance(): void {
     const metrics = this.getMetrics();
-    console.log("Performance Metrics:", metrics);
+    logInfo(
+      "Performance Metrics",
+      metrics,
+      "PerformanceMonitor/reportPerformance",
+    );
 
     // 这里可以发送数据到分析服务
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "performance_metrics", {
+    if (
+      typeof window !== "undefined" &&
+      (
+        window as Window & {
+          gtag?: (
+            command: string,
+            eventName: string,
+            params: Record<string, unknown>,
+          ) => void;
+        }
+      ).gtag
+    ) {
+      (
+        window as Window & {
+          gtag?: (
+            command: string,
+            eventName: string,
+            params: Record<string, unknown>,
+          ) => void;
+        }
+      ).gtag?.("event", "performance_metrics", {
         custom_map: metrics,
       });
     }
@@ -431,7 +490,11 @@ export function initMobileOptimization(): void {
   RenderOptimizer.getInstance().initRenderOptimization();
   PerformanceMonitor.getInstance().initPerformanceMonitoring();
 
-  console.log("Mobile optimization initialized");
+  logInfo(
+    "Mobile optimization initialized",
+    undefined,
+    "initMobileOptimization",
+  );
 }
 
 // 6. 移动端检测工具

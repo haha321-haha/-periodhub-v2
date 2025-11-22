@@ -61,12 +61,12 @@ const DelayedSuspense: React.FC<{
  * @param fallback 加载状态组件
  * @param delay 延迟加载时间(ms)
  */
-export function createLazyComponent<T extends ComponentType<unknown>>(
+export function createLazyComponent<T extends ComponentType<any>>(
   importFunc: () => Promise<{ default: T }>,
   fallback?: React.ReactNode,
   delay: number = 0,
 ) {
-  const LazyComponent = lazy(importFunc);
+  const LazyComponent = lazy(importFunc) as React.LazyExoticComponent<T>;
 
   return function LazyWrapper(
     props: React.ComponentProps<T> & LazyComponentProps,
@@ -79,7 +79,7 @@ export function createLazyComponent<T extends ComponentType<unknown>>(
         fallback={fallback || <DefaultFallback height={height} />}
         delay={suspenseDelay}
       >
-        <LazyComponent {...(componentProps as any)} />
+        <LazyComponent {...(componentProps as React.ComponentProps<T>)} />
       </DelayedSuspense>
     );
   };

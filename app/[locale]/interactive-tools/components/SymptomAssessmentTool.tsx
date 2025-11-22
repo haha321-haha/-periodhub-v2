@@ -597,7 +597,9 @@ export default function SymptomAssessmentTool({
     const referenceData = (result.referenceData || {}) as ReferenceData;
     const isSevere = result.severity === "severe" || result.emergency;
     const highScore = (result.percentage || 0) >= 70;
-    const hasWorkplaceScore = typeof referenceData.workplaceScore === "number";
+    const hasWorkplaceScore =
+      typeof (referenceData as { workplaceScore?: number }).workplaceScore ===
+      "number";
     const highWorkImpact =
       (result.mode === "medical" && hasWorkplaceScore) ||
       result.type === "workplace";

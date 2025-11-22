@@ -6,8 +6,10 @@ import {
   TrendPoint,
   PainTypeFrequency,
   CyclePattern,
+  PainRecord,
 } from "../../../types/pain-tracker";
 import ChartUtils from "../analytics/ChartUtils";
+import { logError } from "@/lib/debug-logger";
 
 export interface ChartImageData {
   trendChart?: string;
@@ -59,7 +61,11 @@ export class ChartRenderer {
 
       return chartImages;
     } catch (error) {
-      console.error("Error rendering charts for export:", error);
+      logError(
+        "Error rendering charts for export:",
+        error,
+        "ChartRenderer/renderChartsForExport",
+      );
       return {};
     }
   }
@@ -108,7 +114,7 @@ export class ChartRenderer {
             const chart = new Chart(ctx, {
               type: "line",
               data: chartData,
-              options: chartOptions as any,
+              options: chartOptions as unknown as Record<string, unknown>,
             });
 
             // Wait for chart to render, then convert to base64
@@ -163,7 +169,7 @@ export class ChartRenderer {
             const chart = new Chart(ctx, {
               type: "bar",
               data: chartData,
-              options: chartOptions as any,
+              options: chartOptions as unknown as Record<string, unknown>,
             });
 
             setTimeout(() => {
@@ -213,7 +219,7 @@ export class ChartRenderer {
             const chart = new Chart(ctx, {
               type: "doughnut",
               data: chartData,
-              options: chartOptions as any,
+              options: chartOptions as unknown as Record<string, unknown>,
             });
 
             setTimeout(() => {
@@ -263,7 +269,7 @@ export class ChartRenderer {
             const chart = new Chart(ctx, {
               type: "bar",
               data: chartData,
-              options: chartOptions as any,
+              options: chartOptions as unknown as Record<string, unknown>,
             });
 
             setTimeout(() => {
@@ -415,7 +421,7 @@ export class ChartRenderer {
    */
   private static createMockRecordsFromAnalytics(
     analytics: PainAnalytics,
-  ): any[] {
+  ): Array<Pick<PainRecord, "painLevel" | "date">> {
     const mockRecords = [];
 
     // Generate distribution based on trend data

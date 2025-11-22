@@ -8,7 +8,7 @@ import {
   ArrowLeft,
   ArrowRight,
   CheckCircle,
-  AlertTriangle,
+  // AlertTriangle, // temporarily unused
   // FileText, // unused
   Heart,
   Brain,

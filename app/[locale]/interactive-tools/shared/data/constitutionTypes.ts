@@ -1,8 +1,4 @@
-import {
-  ConstitutionTypeInfo,
-  ConstitutionRecommendations,
-  ConstitutionType,
-} from "../types/constitution";
+import { ConstitutionTypeInfo, ConstitutionType } from "../types/constitution";
 
 export const constitutionTypeInfo: Record<
   string,

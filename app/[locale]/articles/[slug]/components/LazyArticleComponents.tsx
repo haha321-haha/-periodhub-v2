@@ -4,7 +4,7 @@
  */
 
 import dynamic from "next/dynamic";
-import { ComponentType, useState } from "react";
+import { useState } from "react";
 
 // 加载组件
 const LoadingSpinner = () => (

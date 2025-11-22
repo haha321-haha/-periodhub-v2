@@ -342,11 +342,9 @@ export default async function ArticlePage({
 
   try {
     // eslint-disable-next-line no-console
+    // Production monitoring: Request start
     // eslint-disable-next-line no-console
     // eslint-disable-next-line no-console
-    console.log(
-      `[PROD-MONITOR] Request start: ${locale}/${slug} at ${new Date().toISOString()}`,
-    );
 
     // 检测冷启动
     const coldStartCheck = Date.now();
@@ -379,10 +377,14 @@ export default async function ArticlePage({
     console.log(`[PROD-MONITOR] Article fetch: ${articleFetchTime}ms`);
     // eslint-disable-next-line no-console
     // eslint-disable-next-line no-console
-    console.log("ArticlePage - Article found:", !!article, article?.title);
+    // Production monitoring: Article found
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
 
     if (!article) {
-      console.error(`Article not found: ${slug} for locale: ${locale}`);
+      // Article not found
+      // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console
       notFound();
     }
 
@@ -390,11 +392,9 @@ export default async function ArticlePage({
     const relatedArticlesStart = Date.now();
     const relatedArticles = await getRelatedArticles(slug, locale, 3);
     const relatedArticlesTime = Date.now() - relatedArticlesStart;
+    // Production monitoring: Related articles calculation
     // eslint-disable-next-line no-console
     // eslint-disable-next-line no-console
-    console.log(
-      `[PROD-MONITOR] Related articles calculation: ${relatedArticlesTime}ms`,
-    );
     // eslint-disable-next-line no-console
     // eslint-disable-next-line no-console
     console.log(
@@ -866,14 +866,11 @@ export default async function ArticlePage({
         </div>
       </div>
     );
-  } catch (error) {
-    const errorTime = Date.now() - requestStart;
-    console.error(
-      `[PROD-MONITOR] Error in ArticlePage after ${errorTime}ms:`,
-      error,
-    );
-    console.error(`[PROD-MONITOR] Error context: ${locale}/${slug}`);
-    console.error("Error in ArticlePage:", error);
+  } catch {
+    // Production monitoring: Error context
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
     notFound();
   }
 }

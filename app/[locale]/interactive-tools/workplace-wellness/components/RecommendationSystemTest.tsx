@@ -5,8 +5,7 @@
 
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import React, { useState } from "react";
 import {
   generateRecommendations,
   generateColdStartRecommendations,
@@ -18,14 +17,7 @@ import {
   validateRecommendationResult,
 } from "../utils/recommendationTestUtils";
 import { RecommendationFeedbackHistory } from "../types";
-import {
-  CheckCircle,
-  X,
-  AlertTriangle,
-  Clock,
-  TrendingUp,
-  BarChart3,
-} from "lucide-react";
+import { CheckCircle, X, AlertTriangle, Clock, BarChart3 } from "lucide-react";
 import {
   analyzeRecommendationQuality,
   validateRecommendationReasonableness,
@@ -33,9 +25,6 @@ import {
 import { analyzeFeedback } from "../utils/feedbackAnalyzer";
 import { generateOptimizationReport } from "../utils/recommendationOptimizer";
 import { createUserDataSnapshot } from "../utils/dataAnalyzer";
-
-const formatErrorMessage = (error: unknown): string =>
-  error instanceof Error ? error.message : String(error ?? "Unknown error");
 
 interface TestResult {
   name: string;
@@ -46,7 +35,6 @@ interface TestResult {
 }
 
 export default function RecommendationSystemTest() {
-  const t = useTranslations("workplaceWellness.recommendations");
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [isRunning, setIsRunning] = useState(false);
   const [summary, setSummary] = useState<{
@@ -58,9 +46,6 @@ export default function RecommendationSystemTest() {
     null,
   );
   const [showOptimization, setShowOptimization] = useState(false);
-
-  const formatErrorMessage = (error: unknown): string =>
-    error instanceof Error ? error.message : String(error || "Unknown error");
 
   const runTests = async () => {
     setIsRunning(true);
@@ -561,7 +546,7 @@ export default function RecommendationSystemTest() {
       {!isRunning && testResults.length === 0 && (
         <div className="text-center py-8 text-gray-500">
           <AlertTriangle className="w-12 h-12 mx-auto mb-2 text-gray-400" />
-          <p>点击"运行测试"按钮开始测试</p>
+          <p>点击&quot;运行测试&quot;按钮开始测试</p>
         </div>
       )}
 

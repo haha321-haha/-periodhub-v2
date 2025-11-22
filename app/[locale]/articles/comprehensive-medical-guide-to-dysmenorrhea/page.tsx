@@ -1,13 +1,10 @@
 import React from "react";
-import { notFound } from "next/navigation";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Suspense } from "react";
 import { Home } from "lucide-react";
 import { Locale, locales } from "@/i18n";
-import StructuredData from "@/components/StructuredData";
 import ClientOnly from "@/components/ClientOnly";
 import PeriodPainAssessmentTool from "@/app/[locale]/interactive-tools/components/PeriodPainAssessmentTool";
 import PainTrackerTool from "@/app/[locale]/interactive-tools/components/PainTrackerTool";
@@ -19,13 +16,19 @@ interface BreadcrumbItem {
   href?: string;
 }
 
-function ServerBreadcrumb({
-  items,
-  locale,
-}: {
-  items: BreadcrumbItem[];
-  locale: string;
-}) {
+interface StoryCase {
+  name: string;
+  problemTitle: string;
+  problemDescription: string;
+  solutionTitle: string;
+  solutionDescription: string;
+}
+
+interface FooterSource {
+  name: string;
+}
+
+function ServerBreadcrumb({ items }: { items: BreadcrumbItem[] }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
       <ol className="flex items-center space-x-2 text-sm text-gray-600">
@@ -189,7 +192,9 @@ export default async function DysmenorrheaGuidePage({
         code: condition.icd10,
         codingSystem: "ICD-10",
       },
-      sameAs: condition.snomed ? `http://snomed.info/id/${condition.snomed}` : undefined,
+      sameAs: condition.snomed
+        ? `http://snomed.info/id/${condition.snomed}`
+        : undefined,
     },
     isBasedOn: articleCitations.map((citation) => ({
       "@type": "MedicalScholarlyArticle",
@@ -449,9 +454,15 @@ export default async function DysmenorrheaGuidePage({
                 </h3>
 
                 <div className="space-y-6">
-                  {t
-                    .raw("toolkit.medication.options")
-                    .map((med: any, index: number) => (
+                  {t.raw("toolkit.medication.options").map(
+                    (
+                      med: {
+                        name: string;
+                        dosage: string;
+                        frequency: string;
+                      },
+                      index: number,
+                    ) => (
                       <div key={index}>
                         <h4 className="font-bold text-lg flex items-center gap-2 mb-2">
                           <svg
@@ -474,7 +485,8 @@ export default async function DysmenorrheaGuidePage({
                           {med.bestFor}
                         </p>
                       </div>
-                    ))}
+                    ),
+                  )}
                 </div>
               </div>
             </div>
@@ -548,7 +560,7 @@ export default async function DysmenorrheaGuidePage({
             </h2>
 
             <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {t.raw("stories.cases").map((story: any, index: number) => (
+              {t.raw("stories.cases").map((story: StoryCase, index: number) => (
                 <div
                   key={index}
                   className="bg-white p-6 rounded-xl shadow-lg text-left"
@@ -611,9 +623,11 @@ export default async function DysmenorrheaGuidePage({
               <div>
                 <p className="font-semibold">{t("footer.sourcesTitle")}</p>
                 <div className="flex justify-center flex-wrap gap-x-4 gap-y-1 mt-2">
-                  {t.raw("footer.sources").map((source: any, index: number) => (
-                    <span key={index}>{source.name}</span>
-                  ))}
+                  {t
+                    .raw("footer.sources")
+                    .map((source: FooterSource, index: number) => (
+                      <span key={index}>{source.name}</span>
+                    ))}
                 </div>
               </div>
             </div>

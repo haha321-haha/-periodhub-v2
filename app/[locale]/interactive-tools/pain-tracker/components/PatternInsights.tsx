@@ -28,7 +28,6 @@ import { AnalyticsEngine } from "../../../../../lib/pain-tracker/analytics/Analy
 interface PatternInsightsProps {
   analytics: PainAnalytics;
   records: PainRecord[];
-  locale: string;
   onError?: (error: Error) => void;
 }
 
@@ -51,7 +50,6 @@ interface InsightCard {
 export default function PatternInsights({
   analytics,
   records,
-  locale,
   onError,
 }: PatternInsightsProps) {
   const t = useTranslations("painTracker.insights");

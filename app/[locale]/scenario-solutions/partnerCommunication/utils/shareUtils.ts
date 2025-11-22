@@ -1,3 +1,5 @@
+import { logError } from "@/lib/debug-logger";
+
 // 分享工具函数
 export interface ShareData {
   title: string;
@@ -26,7 +28,7 @@ export const nativeShare = async (data: ShareData): Promise<boolean> => {
       return false;
     }
     // 其他错误才记录
-    console.error("Native share failed:", error);
+    logError("Native share failed", error, "shareUtils/nativeShare");
     return false;
   }
 };
@@ -52,7 +54,7 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
       return result;
     }
   } catch (error) {
-    console.error("Copy to clipboard failed:", error);
+    logError("Copy to clipboard failed", error, "shareUtils/copyToClipboard");
     return false;
   }
 };
@@ -172,7 +174,7 @@ export const handleShare = async (
         };
     }
   } catch (error) {
-    console.error("Share error:", error);
+    logError("Share error", error, "shareUtils/handleShare");
     return {
       success: false,
       message:

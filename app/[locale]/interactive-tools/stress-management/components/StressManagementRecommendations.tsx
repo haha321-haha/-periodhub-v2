@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { useTranslations } from "next-intl";
 import RelatedToolCard from "@/app/[locale]/interactive-tools/components/RelatedToolCard";
 import RelatedArticleCard from "@/app/[locale]/interactive-tools/components/RelatedArticleCard";
 import ScenarioSolutionCard from "@/app/[locale]/interactive-tools/components/ScenarioSolutionCard";
@@ -8,8 +6,9 @@ interface StressManagementRecommendationsProps {
   locale: string;
 }
 
-export default function StressManagementRecommendations({ locale }: StressManagementRecommendationsProps) {
-  const t = useTranslations("stressManagement");
+export default function StressManagementRecommendations({
+  locale,
+}: StressManagementRecommendationsProps) {
   const isZh = locale === "zh";
 
   const relatedTools = [
@@ -144,11 +143,7 @@ export default function StressManagementRecommendations({ locale }: StressManage
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {relatedTools.map((tool) => (
-              <RelatedToolCard
-                key={tool.id}
-                tool={tool}
-                locale={locale}
-              />
+              <RelatedToolCard key={tool.id} tool={tool} locale={locale} />
             ))}
           </div>
         </div>

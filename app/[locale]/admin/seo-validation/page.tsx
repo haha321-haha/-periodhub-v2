@@ -20,13 +20,20 @@ export default async function SEOValidationPage() {
   //   await structuredDataValidator.generateValidationReport();
 
   // 临时使用假数据
-  const validationResult: any = {
+  const validationResult: {
+    success: boolean;
+    data: {
+      pages: unknown[];
+      errors: string[];
+      warnings: string[];
+    };
+  } = {
     success: true,
     data: {
       pages: [],
       errors: [],
-      warnings: []
-    }
+      warnings: [],
+    },
   };
 
   // 生成监控报告
@@ -42,7 +49,7 @@ export default async function SEOValidationPage() {
       organicTraffic: { change: 12.5 },
       searchRankings: { change: 5 },
     },
-    recommendations: []
+    recommendations: [],
   };
 
   // 生成Google Search Console操作指南
@@ -56,30 +63,36 @@ export default async function SEOValidationPage() {
         "登录Google Search Console",
         "选择网站属性",
         "在左侧导航中选择'Sitemaps'",
-        "输入'sitemap.xml'并点击提交"
-      ]
+        "输入'sitemap.xml'并点击提交",
+      ],
     },
     indexRequest: {
       pages: [
         "https://www.periodhub.health/en/interactive-tools/symptom-assessment",
         "https://www.periodhub.health/zh/interactive-tools/symptom-assessment",
         "https://www.periodhub.health/en/articles/comprehensive-medical-guide-to-dysmenorrhea",
-        "https://www.periodhub.health/zh/articles/comprehensive-medical-guide-to-dysmenorrhea"
+        "https://www.periodhub.health/zh/articles/comprehensive-medical-guide-to-dysmenorrhea",
       ],
       steps: [
         "在Google Search Console中选择'URL检查'",
         "输入完整URL",
         "点击'请求编入索引'",
-        "等待处理完成"
-      ]
-    }
+        "等待处理完成",
+      ],
+    },
   };
 
   // 添加testUrls到validationResult
   validationResult.testUrls = {
-    toolPage: `https://search.google.com/test/rich-results?url=${encodeURIComponent("https://www.periodhub.health/en/interactive-tools/symptom-assessment")}`,
-    articlePage: `https://search.google.com/test/rich-results?url=${encodeURIComponent("https://www.periodhub.health/en/articles/comprehensive-medical-guide-to-dysmenorrhea")}`,
-    healthGuide: `https://search.google.com/test/rich-results?url=${encodeURIComponent("https://www.periodhub.health/en/health-guide")}`
+    toolPage: `https://search.google.com/test/rich-results?url=${encodeURIComponent(
+      "https://www.periodhub.health/en/interactive-tools/symptom-assessment",
+    )}`,
+    articlePage: `https://search.google.com/test/rich-results?url=${encodeURIComponent(
+      "https://www.periodhub.health/en/articles/comprehensive-medical-guide-to-dysmenorrhea",
+    )}`,
+    healthGuide: `https://search.google.com/test/rich-results?url=${encodeURIComponent(
+      "https://www.periodhub.health/en/health-guide",
+    )}`,
   };
 
   return (

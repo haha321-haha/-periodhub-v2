@@ -38,7 +38,6 @@ const ErrorThrowingComponent = ({ shouldThrow }: { shouldThrow: boolean }) => {
 // Test component that uses error handling hook
 const ErrorHandlingTestComponent = () => {
   const { handleError, errorState, clearError } = useErrorHandling();
-  const { addErrorNotification } = useNotifications();
 
   const triggerStorageError = () => {
     handleError(

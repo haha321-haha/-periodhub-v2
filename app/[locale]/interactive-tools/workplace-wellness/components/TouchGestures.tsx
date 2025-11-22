@@ -6,35 +6,15 @@
 
 "use client";
 
-import {
-  ReactNode,
-  useRef,
-  useEffect,
-  useState,
-  TouchEvent,
-  MouseEvent,
-} from "react";
-
-// 触控手势类型
-type GestureType = "swipe" | "pinch" | "tap" | "longPress" | "doubleTap";
+import { ReactNode, useRef, useState, TouchEvent } from "react";
 
 // 手势方向
 type SwipeDirection = "up" | "down" | "left" | "right";
-
-// 手势回调
-interface GestureCallbacks {
-  onSwipe?: (direction: SwipeDirection, distance: number) => void;
-  onPinch?: (scale: number, center: { x: number; y: number }) => void;
-  onTap?: (position: { x: number; y: number }) => void;
-  onLongPress?: (position: { x: number; y: number }) => void;
-  onDoubleTap?: (position: { x: number; y: number }) => void;
-}
 
 // 触控手势检测器
 export function TouchGestureDetector({
   children,
   onSwipe,
-  onPinch,
   onTap,
   onLongPress,
   onDoubleTap,

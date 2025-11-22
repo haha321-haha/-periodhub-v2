@@ -8,10 +8,46 @@ import { getTranslations } from "next-intl/server";
 
 type TFunction = Awaited<ReturnType<typeof getTranslations>>;
 
+type FAQStructuredData = {
+  "@context": "https://schema.org";
+  "@type": "FAQPage";
+  mainEntity: Array<{
+    "@type": "Question";
+    name: string;
+    acceptedAnswer: {
+      "@type": "Answer";
+      text: string;
+    };
+  }>;
+};
+
+type CollectionPageStructuredData = {
+  "@context": "https://schema.org";
+  "@type": "CollectionPage";
+  name: string;
+  description: string;
+  url: string;
+  inLanguage: string;
+  isPartOf: {
+    "@type": "WebSite";
+    name: string;
+    url: string;
+  };
+  mainEntity: {
+    "@type": "ItemList";
+    itemListElement: Array<{
+      "@type": "ListItem";
+      position: number;
+      name: string;
+      url: string;
+    }>;
+  };
+};
+
 /**
  * 生成FAQ结构化数据
  */
-export function generateFAQStructuredData(t: TFunction): any {
+export function generateFAQStructuredData(t: TFunction): FAQStructuredData {
   const faqs = [
     { key: "q1" },
     { key: "q2" },
@@ -40,7 +76,7 @@ export function generateFAQStructuredData(t: TFunction): any {
 export function generateCollectionPageSchema(
   locale: Locale,
   t: TFunction,
-): any {
+): CollectionPageStructuredData {
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
@@ -88,14 +124,9 @@ export function generateCollectionPageSchema(
 export function generateAllStructuredData(
   locale: Locale,
   t: TFunction,
-): any[] {
+): Array<FAQStructuredData | CollectionPageStructuredData> {
   return [
     generateFAQStructuredData(t),
     generateCollectionPageSchema(locale, t),
   ];
 }
-
-
-
-
-

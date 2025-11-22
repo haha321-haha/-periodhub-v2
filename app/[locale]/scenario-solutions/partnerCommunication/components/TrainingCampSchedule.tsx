@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSafeTranslations } from "@/hooks/useSafeTranslations";
 import { useTrainingState } from "../stores/partnerHandbookStore";
-import { TrainingWeek, TrainingDay, TrainingTask } from "../types/training";
+import { TrainingWeek, TrainingDay } from "../types/training";
 import { Locale } from "../types/common";
 
 interface TrainingCampScheduleProps {
@@ -19,7 +19,7 @@ export default function TrainingCampSchedule({
 }: TrainingCampScheduleProps) {
   const { t } = useSafeTranslations("partnerHandbook.trainingCamp");
   const { t: tCommon } = useSafeTranslations("partnerHandbook");
-  const { progress, completedDays, currentDay } = useTrainingState();
+  const { completedDays } = useTrainingState();
   const [selectedWeek, setSelectedWeek] = useState(0);
   const [selectedDay, setSelectedDay] = useState<TrainingDay | null>(null);
   const [showTaskDetail, setShowTaskDetail] = useState(false);

@@ -9,7 +9,6 @@ import {
   CyclePattern,
   TrendPoint,
   Pattern,
-  PatternType,
   CorrelationResult,
   AnalyticsEngineInterface,
   MenstrualStatus,
@@ -17,6 +16,7 @@ import {
   Symptom,
   PainTrackerError,
 } from "../../../types/pain-tracker";
+import { logError } from "@/lib/debug-logger";
 
 export class AnalyticsEngine implements AnalyticsEngineInterface {
   /**
@@ -192,7 +192,11 @@ export class AnalyticsEngine implements AnalyticsEngineInterface {
 
       return insights;
     } catch (error) {
-      console.error("Error generating insights:", error);
+      logError(
+        "Error generating insights:",
+        error,
+        "AnalyticsEngine/generateInsights",
+      );
       return [
         "Unable to generate insights at this time. Please try again later.",
       ];
@@ -237,7 +241,11 @@ export class AnalyticsEngine implements AnalyticsEngineInterface {
 
       return predictions;
     } catch (error) {
-      console.error("Error predicting trends:", error);
+      logError(
+        "Error predicting trends:",
+        error,
+        "AnalyticsEngine/predictTrends",
+      );
       return [];
     }
   }
@@ -276,7 +284,11 @@ export class AnalyticsEngine implements AnalyticsEngineInterface {
 
       return correlations.sort((a, b) => b.significance - a.significance);
     } catch (error) {
-      console.error("Error calculating correlations:", error);
+      logError(
+        "Error calculating correlations:",
+        error,
+        "AnalyticsEngine/calculateCorrelations",
+      );
       return [];
     }
   }
@@ -365,7 +377,7 @@ export class AnalyticsEngine implements AnalyticsEngineInterface {
     });
 
     return Array.from(treatmentStats.entries())
-      .filter(([_, stats]) => stats.total >= 2) // Minimum usage for meaningful statistics
+      .filter(([, stats]) => stats.total >= 2) // Minimum usage for meaningful statistics
       .map(([treatment, stats]) => ({
         treatment: this.capitalizeFirstLetter(treatment),
         averageEffectiveness:
@@ -496,7 +508,8 @@ export class AnalyticsEngine implements AnalyticsEngineInterface {
     return patterns;
   }
 
-  private identifyLifestylePatterns(records: PainRecord[]): Pattern[] {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private identifyLifestylePatterns(_records: PainRecord[]): Pattern[] {
     const patterns: Pattern[] = [];
 
     // This would require more complex analysis of lifestyle factors
@@ -681,7 +694,8 @@ export class AnalyticsEngine implements AnalyticsEngineInterface {
   }
 
   private calculateLifestyleCorrelations(
-    records: PainRecord[],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _records: PainRecord[],
   ): CorrelationResult[] {
     // This would require more detailed lifestyle factor analysis
     // For now, return empty array as lifestyle factors need more complex implementation

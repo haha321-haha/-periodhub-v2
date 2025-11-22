@@ -1107,7 +1107,6 @@ export const getQuestionsByMode = (
   mode: string,
 ): Question[] => {
   const basicSymptomQuestions = getSymptomQuestions(locale);
-  const basicWorkplaceQuestions = getWorkplaceQuestions(locale);
   const extendedSymptomQuestions = getExtendedSymptomQuestions(locale);
   const extendedWorkplaceQuestions = getExtendedWorkplaceQuestions(locale);
 

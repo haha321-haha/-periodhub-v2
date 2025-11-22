@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
   AssessmentHistoryEntry,
   AssessmentTrends,
 } from "./useAssessmentHistory";
 import { UserPreferences } from "./useUserPreferences";
+import { logError } from "@/lib/debug-logger";
 
 export interface PersonalizedRecommendation {
   id: string;
@@ -99,7 +100,11 @@ export const usePersonalizedRecommendations = () => {
 
         setRecommendations(sortedRecs.slice(0, 10)); // Limit to top 10 recommendations
       } catch (error) {
-        console.error("Error generating personalized recommendations:", error);
+        logError(
+          "Error generating personalized recommendations",
+          error,
+          "usePersonalizedRecommendations",
+        );
       } finally {
         setIsGenerating(false);
       }

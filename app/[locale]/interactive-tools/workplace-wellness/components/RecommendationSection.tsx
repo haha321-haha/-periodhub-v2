@@ -6,7 +6,6 @@
 "use client";
 
 import React, { memo } from "react";
-import { useTranslations } from "next-intl";
 import {
   RecommendationFeedbackAction,
   RecommendationItem,

@@ -7,6 +7,7 @@
 
 import React, { ComponentType, useState } from "react";
 import dynamic from "next/dynamic";
+import { logError, logInfo } from "@/lib/debug-logger";
 
 // 加载组件
 export const LoadingSpinner = () => (
@@ -27,10 +28,10 @@ export const defaultLazyOptions = {
 };
 
 // 创建懒加载页面组件
-export function createLazyPage<T extends ComponentType<any>>(
+export function createLazyPage<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
   pageName: string,
-): ComponentType<any> {
+): ComponentType<unknown> {
   return dynamic(importFunc, {
     ...defaultLazyOptions,
     loading: () => (
@@ -43,10 +44,9 @@ export function createLazyPage<T extends ComponentType<any>>(
 }
 
 // 创建懒加载模块组件
-export function createLazyModule<T extends ComponentType<any>>(
+export function createLazyModule<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
-  moduleName: string,
-): ComponentType<any> {
+): ComponentType<unknown> {
   return dynamic(importFunc, {
     ...defaultLazyOptions,
     loading: () => (
@@ -63,10 +63,14 @@ export const dynamicImport = async function <T>(
   fallback?: ComponentType<T>,
 ): Promise<ComponentType<T>> {
   try {
-    const module = await importFn();
-    return module.default;
+    const importedModule = await importFn();
+    return importedModule.default;
   } catch (error) {
-    console.error("Dynamic import failed:", error);
+    logError(
+      "Dynamic import failed:",
+      error,
+      "code-splitting-utils/dynamicImport",
+    );
     if (fallback) {
       return fallback;
     }
@@ -85,9 +89,16 @@ export async function preloadCriticalComponents() {
 
   try {
     await Promise.all(preloadPromises);
-    console.log("✅ Critical components preloaded");
+    logInfo(
+      "Critical components preloaded",
+      "code-splitting-utils/preloadCriticalComponents",
+    );
   } catch (error) {
-    console.error("❌ Failed to preload critical components:", error);
+    logError(
+      "Failed to preload critical components:",
+      error,
+      "code-splitting-utils/preloadCriticalComponents",
+    );
   }
 }
 
@@ -121,15 +132,12 @@ export function useConditionalLoading(showComponents: boolean) {
   return {
     ArticleInteractions: createLazyModule(
       () => import("@/components/ArticleInteractions"),
-      "ArticleInteractions",
     ),
     TableOfContents: createLazyModule(
       () => import("@/components/TableOfContents"),
-      "TableOfContents",
     ),
     MarkdownWithMermaid: createLazyModule(
       () => import("@/components/MarkdownWithMermaid"),
-      "MarkdownWithMermaid",
     ),
   };
 }

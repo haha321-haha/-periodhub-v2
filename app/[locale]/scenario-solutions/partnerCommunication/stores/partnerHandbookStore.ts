@@ -6,7 +6,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import { devtools } from "zustand/middleware";
 import { Locale } from "../types/common";
 import { QuizAnswer, QuizResult } from "../types/quiz";
-import { TrainingProgress, TrainingSession } from "../types/training";
+import { TrainingSession } from "../types/training";
+import { logError, logInfo, logWarn } from "@/lib/debug-logger";
 
 // 测试阶段类型定义
 export type QuizStage = "stage1" | "stage2" | "stage3" | "stage4";
@@ -131,12 +132,22 @@ const createDefaultStageProgress = (): StageProgress => ({
 });
 
 // 数据迁移函数
-const migrateData = (state: any): PartnerHandbookState => {
+const migrateData = (
+  state: Partial<PartnerHandbookState> & {
+    stageProgress?: PartnerHandbookState["stageProgress"];
+    dataVersion?: string;
+    currentLanguage?: Locale;
+  },
+): PartnerHandbookState => {
   const currentVersion = "2.0.1"; // 当前数据版本
 
   // 如果没有版本信息，说明是旧数据，需要重置
   if (!state.dataVersion) {
-    console.log("🔄 Migrating old data to new version...");
+    logInfo(
+      "🔄 Migrating old data to new version...",
+      undefined,
+      "partnerHandbookStore/migrateData",
+    );
     return {
       ...defaultState,
       dataVersion: currentVersion,
@@ -146,11 +157,10 @@ const migrateData = (state: any): PartnerHandbookState => {
 
   // 如果版本不匹配，也需要重置
   if (state.dataVersion !== currentVersion) {
-    console.log(
+    logInfo(
       "🔄 Migrating data from version",
-      state.dataVersion,
-      "to",
-      currentVersion,
+      { from: state.dataVersion, to: currentVersion },
+      "partnerHandbookStore/migrateData",
     );
     return {
       ...defaultState,
@@ -161,7 +171,11 @@ const migrateData = (state: any): PartnerHandbookState => {
 
   // 额外检查：如果stage1的测试结果数据异常，强制重置
   if (state.stageProgress?.stage1?.result?.totalScore > 5) {
-    console.log("🔄 Detected invalid stage1 result data, resetting...");
+    logInfo(
+      "🔄 Detected invalid stage1 result data, resetting...",
+      undefined,
+      "partnerHandbookStore/migrateData",
+    );
     return {
       ...defaultState,
       dataVersion: currentVersion,
@@ -236,7 +250,11 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
                 }
                 newStageProgress[stage] = defaultProgress;
                 hasChanges = true;
-                console.log(`✅ Initialized missing stage: ${stage}`);
+                logInfo(
+                  `✅ Initialized missing stage: ${stage}`,
+                  undefined,
+                  "partnerHandbookStore/initializeMissingStages",
+                );
               }
             });
 
@@ -266,13 +284,17 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             const newAnswers = [...currentAnswers];
 
             // 调试信息：打印保存过程
-            console.log("🔍 Debug - setStageAnswer:", {
-              stage,
-              index,
-              answerId: answer.questionId,
-              currentAnswersLength: currentAnswers.length,
-              newAnswersLength: newAnswers.length,
-            });
+            logInfo(
+              "🔍 Debug - setStageAnswer",
+              {
+                stage,
+                index,
+                answerId: answer.questionId,
+                currentAnswersLength: currentAnswers.length,
+                newAnswersLength: newAnswers.length,
+              },
+              "partnerHandbookStore/setStageAnswer",
+            );
 
             // 根据阶段确定题目数量，确保数组有正确的长度
             const questionCount = stage === "stage1" ? 5 : 10;
@@ -284,14 +306,22 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             newAnswers[index] = answer;
 
             // 调试信息：打印保存后的数组
-            console.log("🔍 Debug - After saving:", {
-              newAnswersLength: newAnswers.length,
-              savedAnswers: newAnswers.map((ans, idx) =>
-                ans
-                  ? { index: idx, questionId: ans.questionId, score: ans.score }
-                  : { index: idx, questionId: null },
-              ),
-            });
+            logInfo(
+              "🔍 Debug - After saving",
+              {
+                newAnswersLength: newAnswers.length,
+                savedAnswers: newAnswers.map((ans, idx) =>
+                  ans
+                    ? {
+                        index: idx,
+                        questionId: ans.questionId,
+                        score: ans.score,
+                      }
+                    : { index: idx, questionId: null },
+                ),
+              },
+              "partnerHandbookStore/setStageAnswer",
+            );
 
             return {
               stageProgress: {
@@ -309,8 +339,10 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           set((state) => {
             const currentStageProgress = state.stageProgress[stage];
             if (!currentStageProgress) {
-              console.warn(
+              logWarn(
                 `Cannot move to next question: stage ${stage} not found`,
+                undefined,
+                "partnerHandbookStore/nextStageQuestion",
               );
               return state;
             }
@@ -332,7 +364,11 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           set((state) => {
             const currentStageProgress = state.stageProgress[stage];
             if (!currentStageProgress) {
-              console.warn(`Cannot complete stage: stage ${stage} not found`);
+              logWarn(
+                `Cannot complete stage: stage ${stage} not found`,
+                undefined,
+                "partnerHandbookStore/completeStage",
+              );
               return state;
             }
 
@@ -369,7 +405,7 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
         },
 
         resetAllStages: () => {
-          set((state) => ({
+          set(() => ({
             stageProgress: {
               stage1: createDefaultStageProgress(),
               stage2: { ...createDefaultStageProgress(), status: "locked" },
@@ -385,9 +421,17 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           // 清除localStorage中的测试数据
           try {
             localStorage.removeItem("partner-handbook-storage");
-            console.log("🧹 已清除所有测试数据");
+            logInfo(
+              "🧹 已清除所有测试数据",
+              undefined,
+              "partnerHandbookStore/clearAllTestData",
+            );
           } catch (error) {
-            console.error("清除测试数据失败:", error);
+            logError(
+              "清除测试数据失败",
+              error,
+              "partnerHandbookStore/clearAllTestData",
+            );
           }
 
           // 重置状态到初始值
@@ -421,7 +465,11 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
           set((state) => {
             const currentStageProgress = state.stageProgress[stage];
             if (!currentStageProgress) {
-              console.warn(`Cannot unlock stage ${stage}: stage not found`);
+              logWarn(
+                `Cannot unlock stage ${stage}: stage not found`,
+                undefined,
+                "partnerHandbookStore/unlockStage",
+              );
               return state;
             }
 
@@ -446,7 +494,11 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
 
           // 如果阶段不存在，返回false（锁定状态），不在这里初始化
           if (!stageProgress) {
-            console.warn(`Stage ${stage} not found in stageProgress`);
+            logWarn(
+              `Stage ${stage} not found in stageProgress`,
+              undefined,
+              "partnerHandbookStore/isStageUnlocked",
+            );
             return false;
           }
 
@@ -565,7 +617,7 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             completedTasks: [],
           };
 
-          set((state) => ({
+          set(() => ({
             trainingSessions: [...state.trainingSessions, session],
           }));
         },
@@ -724,7 +776,11 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
               },
             }));
           } catch (error) {
-            console.error("Failed to import data:", error);
+            logError(
+              "Failed to import data",
+              error,
+              "partnerHandbookStore/importData",
+            );
           }
         },
       }),
@@ -768,8 +824,10 @@ export const useStageState = (stage: QuizStage) => {
   // 使用useEffect来处理初始化，避免在渲染期间调用setState
   React.useEffect(() => {
     if (!stageProgress) {
-      console.warn(
+      logWarn(
         `Stage ${stage} not found in stageProgress, initializing...`,
+        undefined,
+        "partnerHandbookStore/useStageState",
       );
       initializeMissingStages();
     }

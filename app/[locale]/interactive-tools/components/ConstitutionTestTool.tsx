@@ -72,7 +72,6 @@ export default function ConstitutionTestTool({
     currentQuestionIndex,
     totalQuestions,
     progress,
-    isComplete,
     result,
     isLoading,
     error,

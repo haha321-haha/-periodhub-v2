@@ -20,7 +20,7 @@ import {
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import { PeriodRecord, PeriodType, PainLevel, CalendarState } from "../types";
-import { logInfo } from "../../../../lib/debug-logger";
+import { logError, logInfo } from "@/lib/debug-logger";
 
 export default function CalendarComponent() {
   const calendar = useCalendar() as CalendarState;
@@ -257,7 +257,7 @@ export default function CalendarComponent() {
       // 显示成功提示（可以考虑使用toast或其他非阻塞提示）
     } catch (error) {
       // 错误处理
-      console.error("保存记录时出错:", error);
+      logError("保存记录时出错", error, "CalendarComponent");
       setFormErrors({
         ...formErrors,
         submit:

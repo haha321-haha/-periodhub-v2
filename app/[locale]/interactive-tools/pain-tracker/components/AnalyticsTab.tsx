@@ -3,13 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-type Locale = "en" | "zh";
-
-interface AnalyticsTabProps {
-  locale: Locale;
-}
-
-export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
+export default function AnalyticsTab() {
   const t = useTranslations("interactiveToolsPage.painTracker.analytics");
   const [selectedPeriod, setSelectedPeriod] = useState<
     "week" | "month" | "quarter" | "year"
@@ -136,7 +130,11 @@ export default function AnalyticsTab({ locale }: AnalyticsTabProps) {
             ].map((period) => (
               <button
                 key={period.key}
-                onClick={() => setSelectedPeriod(period.key as "week" | "month" | "quarter" | "year")}
+                onClick={() =>
+                  setSelectedPeriod(
+                    period.key as "week" | "month" | "quarter" | "year",
+                  )
+                }
                 className={`px-3 py-1 text-sm rounded-md transition-colors ${
                   selectedPeriod === period.key
                     ? "bg-primary-600 text-white"

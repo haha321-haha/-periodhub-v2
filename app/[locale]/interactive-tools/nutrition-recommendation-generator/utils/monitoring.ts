@@ -3,7 +3,7 @@
  * 提供生产环境的监控和分析功能
  */
 
-import { logWarn } from "../../../../../lib/debug-logger";
+import { logWarn } from "@/lib/debug-logger";
 
 type GtagConfig = {
   event_category?: string;

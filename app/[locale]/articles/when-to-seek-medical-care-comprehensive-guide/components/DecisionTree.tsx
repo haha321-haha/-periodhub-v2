@@ -5,11 +5,9 @@ import { useTranslations } from "next-intl";
 import { GitBranch, ArrowRight, RotateCcw, CheckCircle } from "lucide-react";
 import { useDecisionTree } from "../hooks/useDecisionTree";
 import { DECISION_TREE_DATA } from "../utils/medicalCareData";
-import { DecisionTreeLogic } from "../utils/assessmentLogic";
 import styles from "../styles/DecisionTree.module.css";
 import type {
   DecisionTreeProps,
-  DecisionTreeNode,
   AssessmentResult,
 } from "../types/medical-care-guide";
 
@@ -19,14 +17,8 @@ export default function DecisionTree({
   startFromNode = "start",
 }: DecisionTreeProps) {
   const t = useTranslations("medicalCareGuide");
-  const {
-    currentNode,
-    decisionPath,
-    finalResult,
-    navigateToNode,
-    makeDecision,
-    resetTree,
-  } = useDecisionTree(DECISION_TREE_DATA, startFromNode);
+  const { currentNode, decisionPath, finalResult, makeDecision, resetTree } =
+    useDecisionTree(DECISION_TREE_DATA, startFromNode);
 
   const [isAnimating, setIsAnimating] = useState(false);
 

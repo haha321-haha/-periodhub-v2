@@ -5,7 +5,6 @@ import LoadingSpinner from "./LoadingSpinner";
 
 interface LazyComponentProps {
   fallback?: React.ReactNode;
-  delay?: number;
 }
 
 // Lazy loading wrapper with error boundary
@@ -16,36 +15,33 @@ export function withLazyLoading<P extends object>(
   const LazyComponent = lazy(importFn);
 
   return function LazyWrapper(props: P & LazyComponentProps) {
-    const { fallback: customFallback, delay = 200, ...componentProps } = props;
+    const { fallback: customFallback, ...componentProps } = props;
+    const resolvedFallback =
+      customFallback ??
+      fallback ??
+      ((
+        <div className="flex items-center justify-center p-8">
+          <LoadingSpinner size="lg" />
+        </div>
+      ) as React.ReactNode);
 
     return (
-      <Suspense
-        fallback={
-          customFallback || (
-            <div className="flex items-center justify-center p-8">
-              <LoadingSpinner size="lg" />
-            </div>
-          )
-        }
-      >
-        <LazyComponent {...(componentProps as any)} />
+      <Suspense fallback={resolvedFallback}>
+        <LazyComponent {...(componentProps as P)} />
       </Suspense>
     );
   };
 }
 
 // Preload component for better UX
-export function preloadComponent(importFn: () => Promise<any>) {
+export function preloadComponent<T>(importFn: () => Promise<T>) {
   return () => {
     importFn();
   };
 }
 
 // Lazy loading hook for dynamic imports
-export function useLazyComponent<T = any>(
-  importFn: () => Promise<T>,
-  deps: React.DependencyList = [],
-) {
+export function useLazyComponent<T>(importFn: () => Promise<T>) {
   const [Component, setComponent] = React.useState<T | null>(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState<Error | null>(null);
@@ -79,7 +75,7 @@ export function useLazyComponent<T = any>(
     return () => {
       isMounted = false;
     };
-  }, deps);
+  }, [importFn]);
 
   return { Component, isLoading, error };
 }
@@ -179,7 +175,7 @@ export function PerformanceMonitor({
       const end = performance.now();
       setRenderTime(end - start);
     };
-  });
+  }, []);
 
   if (process.env.NODE_ENV === "development") {
     return (

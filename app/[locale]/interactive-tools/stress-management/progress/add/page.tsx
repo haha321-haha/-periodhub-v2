@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { saveEntry } from "@/lib/progressStorage";
+import { logError } from "@/lib/debug-logger";
 
 export default function AddEntryPage() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function AddEntryPage() {
     setTechniques((prev) =>
       prev.includes(techniqueId)
         ? prev.filter((t) => t !== techniqueId)
-        : [...prev, techniqueId]
+        : [...prev, techniqueId],
     );
   };
 
@@ -58,7 +59,7 @@ export default function AddEntryPage() {
       if (result.cleaned && result.deletedCount) {
         alert(
           `✅ Entry saved successfully!\n\n` +
-          `⚠️ Note: We automatically deleted ${result.deletedCount} old entries to free up storage space.`
+            `⚠️ Note: We automatically deleted ${result.deletedCount} old entries to free up storage space.`,
         );
       } else {
         alert("Entry saved successfully!");
@@ -67,7 +68,7 @@ export default function AddEntryPage() {
       // Redirect back to progress page
       router.push(`/${locale}/interactive-tools/stress-management/progress`);
     } catch (error) {
-      console.error("Failed to save entry:", error);
+      logError("Failed to save entry", error, "stressManagement/progress/add");
 
       // Show user-friendly error message
       if (error instanceof Error) {
@@ -76,19 +77,21 @@ export default function AddEntryPage() {
           if (error.message.includes("automatically deleted")) {
             alert(
               "⚠️ Storage was full, but we've automatically cleaned up old entries!\n\n" +
-              "Your entry has been saved successfully. " +
-              "We deleted some old entries to make space.\n\n" +
-              "If this happens frequently, consider manually deleting old entries from the Progress page."
+                "Your entry has been saved successfully. " +
+                "We deleted some old entries to make space.\n\n" +
+                "If this happens frequently, consider manually deleting old entries from the Progress page.",
             );
             // Still redirect since the save might have succeeded after cleanup
-            router.push(`/${locale}/interactive-tools/stress-management/progress`);
+            router.push(
+              `/${locale}/interactive-tools/stress-management/progress`,
+            );
             return;
           } else {
             alert(
               "❌ Storage is full!\n\n" +
-              "We tried to automatically free up space, but there's still not enough room. " +
-              "Please go to the Progress page and manually delete some old entries.\n\n" +
-              "Tip: Click the 'Debug Data' button on the Progress page to manage your data."
+                "We tried to automatically free up space, but there's still not enough room. " +
+                "Please go to the Progress page and manually delete some old entries.\n\n" +
+                "Tip: Click the 'Debug Data' button on the Progress page to manage your data.",
             );
           }
         } else {
@@ -149,7 +152,10 @@ export default function AddEntryPage() {
         </header>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-2xl shadow-lg p-8"
+        >
           {/* Stress Level */}
           <div className="mb-8">
             <label className="block text-lg font-semibold text-gray-800 mb-4">
@@ -352,7 +358,7 @@ export default function AddEntryPage() {
               type="button"
               onClick={() =>
                 router.push(
-                  `/${locale}/interactive-tools/stress-management/progress`
+                  `/${locale}/interactive-tools/stress-management/progress`,
                 )
               }
               className="flex-1 px-6 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
@@ -374,7 +380,8 @@ export default function AddEntryPage() {
         <div className="bg-blue-50 border-l-4 border-blue-500 text-blue-700 p-4 mt-8 rounded-r-lg">
           <p className="font-bold">🔒 Your Privacy is Protected</p>
           <p className="text-sm mt-1">
-            All data is stored locally on your device and never sent to any server.
+            All data is stored locally on your device and never sent to any
+            server.
           </p>
         </div>
       </div>

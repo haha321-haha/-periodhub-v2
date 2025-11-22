@@ -7,6 +7,7 @@ import {
   CoreMetrics,
   MetricsResult,
 } from "../types/analytics.types";
+import { logInfo, logError, logWarn } from "@/lib/debug-logger";
 
 /**
  * 数据处理管道
@@ -43,7 +44,7 @@ export class DataPipeline {
       throw new Error("数据处理管道已经在运行中");
     }
 
-    console.log("🚀 启动 Period Hub 数据分析管道");
+    logInfo("启动 Period Hub 数据分析管道", "DataPipeline/start");
 
     // 立即执行一次处理
     await this.processPipeline();
@@ -56,7 +57,7 @@ export class DataPipeline {
       24 * 60 * 60 * 1000,
     );
 
-    console.log("✅ 数据处理管道启动成功");
+    logInfo("数据处理管道启动成功", "DataPipeline/start");
   }
 
   /**
@@ -69,7 +70,7 @@ export class DataPipeline {
     }
 
     if (this.isProcessing) {
-      console.log("⏳ 等待当前处理完成...");
+      logInfo("等待当前处理完成...", "DataPipeline/stop");
       // 等待当前处理完成
       while (this.isProcessing) {
         await new Promise((resolve) => setTimeout(resolve, 100));
@@ -77,7 +78,7 @@ export class DataPipeline {
     }
 
     this.pipelineStatus.status = "idle";
-    console.log("🛑 数据处理管道已停止");
+    logInfo("数据处理管道已停止", "DataPipeline/stop");
   }
 
   /**
@@ -85,7 +86,7 @@ export class DataPipeline {
    */
   async processPipeline(): Promise<void> {
     if (this.isProcessing) {
-      console.log("⚠️ 管道正在处理中，跳过此次执行");
+      logWarn("管道正在处理中，跳过此次执行", "DataPipeline/processPipeline");
       return;
     }
 
@@ -93,7 +94,7 @@ export class DataPipeline {
     const startTime = Date.now();
 
     try {
-      console.log("📊 开始数据处理...");
+      logInfo("开始数据处理...", "DataPipeline/processPipeline");
       this.pipelineStatus.status = "processing";
       this.pipelineStatus.lastRun = new Date();
 
@@ -115,8 +116,9 @@ export class DataPipeline {
       this.pipelineStatus.nextRun = new Date(Date.now() + 24 * 60 * 60 * 1000);
       this.pipelineStatus.error = undefined;
 
-      console.log(
-        `✅ 数据处理完成，耗时: ${this.pipelineStatus.processingDuration}ms`,
+      logInfo(
+        `数据处理完成，耗时: ${this.pipelineStatus.processingDuration}ms`,
+        "DataPipeline/processPipeline",
       );
     } catch (error) {
       this.pipelineStatus.status = "failed";
@@ -124,7 +126,7 @@ export class DataPipeline {
         error instanceof Error ? error.message : "未知错误";
       this.pipelineStatus.processingDuration = Date.now() - startTime;
 
-      console.error("❌ 数据处理失败:", error);
+      logError("数据处理失败:", error, "DataPipeline/processPipeline");
       throw error;
     } finally {
       this.isProcessing = false;
@@ -136,21 +138,24 @@ export class DataPipeline {
    */
   private async collectAndProcessEvents(): Promise<void> {
     try {
-      console.log("📥 收集事件数据...");
+      logInfo("收集事件数据...", "DataPipeline/collectAndProcessEvents");
 
       // 获取待处理的事件
       const events = await this.eventCollector.getCollectedEvents();
 
       if (events.length === 0) {
-        console.log("ℹ️ 没有新的事件需要处理");
+        logInfo("没有新的事件需要处理", "DataPipeline/collectAndProcessEvents");
         return;
       }
 
-      console.log(`📋 收集到 ${events.length} 个事件`);
+      logInfo(
+        `收集到 ${events.length} 个事件`,
+        "DataPipeline/collectAndProcessEvents",
+      );
 
       // 处理每个事件
       const processedEvents: EnhancedUserEvent[] = [];
-      const failedEvents: any[] = [];
+      const failedEvents: Array<{ event: unknown; error: unknown }> = [];
 
       for (const event of events) {
         try {
@@ -160,10 +165,11 @@ export class DataPipeline {
           // 添加到指标引擎
           this.metricsEngine.addEvent(enhancedEvent);
         } catch (error) {
-          console.error(
-            "处理事件失败:",
-            (event as any).id || "unknown_event",
+          const eventId = (event as { id?: string }).id || "unknown_event";
+          logError(
+            `处理事件失败: ${eventId}`,
             error,
+            "DataPipeline/collectAndProcessEvents",
           );
           failedEvents.push({ event, error });
         }
@@ -173,11 +179,12 @@ export class DataPipeline {
       this.pipelineStatus.processedRecords += processedEvents.length;
       this.pipelineStatus.failedRecords += failedEvents.length;
 
-      console.log(
-        `✅ 成功处理 ${processedEvents.length} 个事件，失败 ${failedEvents.length} 个`,
+      logInfo(
+        `成功处理 ${processedEvents.length} 个事件，失败 ${failedEvents.length} 个`,
+        "DataPipeline/collectAndProcessEvents",
       );
     } catch (error) {
-      console.error("❌ 事件收集失败:", error);
+      logError("事件收集失败:", error, "DataPipeline/collectAndProcessEvents");
       throw error;
     }
   }
@@ -185,7 +192,9 @@ export class DataPipeline {
   /**
    * 增强事件数据
    */
-  private async enhanceEvent(event: any): Promise<EnhancedUserEvent> {
+  private async enhanceEvent(
+    event: Partial<EnhancedUserEvent>,
+  ): Promise<EnhancedUserEvent> {
     // 基础事件转换
     const enhancedEvent: EnhancedUserEvent = {
       id: event.id || this.generateEventId(),
@@ -205,7 +214,7 @@ export class DataPipeline {
 
     // 地理位置增强（基于IP地址）
     if (!enhancedEvent.location && event.ip) {
-      enhancedEvent.location = await this.getLocationFromIP(event.ip);
+      enhancedEvent.location = await this.getLocationFromIP();
     }
 
     // 设备信息增强
@@ -224,24 +233,24 @@ export class DataPipeline {
    */
   private async calculateMetrics(): Promise<void> {
     try {
-      console.log("📈 计算核心指标...");
+      logInfo("计算核心指标...", "DataPipeline/calculateMetrics");
 
       const metrics = await this.metricsEngine.calculateAllMetrics();
 
-      console.log("📊 核心指标计算完成:");
-      console.log(`  - 日活跃用户数: ${metrics.dailyActiveUsers}`);
-      console.log(`  - 用户留存率: ${metrics.userRetentionRate.toFixed(2)}%`);
-      console.log(
-        `  - 平台使用深度: ${metrics.platformEngagementDepth.toFixed(2)} 分钟`,
-      );
-      console.log(
-        `  - 新用户获取成本: ¥${metrics.newUserAcquisitionCost.toFixed(2)}`,
-      );
-      console.log(
-        `  - 用户生命周期价值: ¥${metrics.userLifetimeValue.toFixed(2)}`,
+      logInfo(
+        `核心指标计算完成: 日活跃用户数=${
+          metrics.dailyActiveUsers
+        }, 用户留存率=${metrics.userRetentionRate.toFixed(
+          2,
+        )}%, 平台使用深度=${metrics.platformEngagementDepth.toFixed(
+          2,
+        )}分钟, 新用户获取成本=¥${metrics.newUserAcquisitionCost.toFixed(
+          2,
+        )}, 用户生命周期价值=¥${metrics.userLifetimeValue.toFixed(2)}`,
+        "DataPipeline/calculateMetrics",
       );
     } catch (error) {
-      console.error("❌ 指标计算失败:", error);
+      logError("指标计算失败:", error, "DataPipeline/calculateMetrics");
       throw error;
     }
   }
@@ -251,20 +260,21 @@ export class DataPipeline {
    */
   private async generateDashboardData(): Promise<void> {
     try {
-      console.log("📊 生成仪表板数据...");
+      logInfo("生成仪表板数据...", "DataPipeline/generateDashboardData");
 
       const dashboardData = await this.metricsEngine.getDashboardData();
 
       // 在实际应用中，这里会将数据保存到数据库或缓存
-      console.log("✅ 仪表板数据生成完成");
-      console.log(`  - 总用户数: ${dashboardData.userActivity.totalUsers}`);
-      console.log(`  - 活跃用户: ${dashboardData.userActivity.activeUsers}`);
-      console.log(
-        `  - 总下载量: ${dashboardData.resourceUsage.totalDownloads}`,
+      logInfo(
+        `仪表板数据生成完成: 总用户数=${dashboardData.userActivity.totalUsers}, 活跃用户=${dashboardData.userActivity.activeUsers}, 总下载量=${dashboardData.resourceUsage.totalDownloads}, 总浏览量=${dashboardData.resourceUsage.totalViews}`,
+        "DataPipeline/generateDashboardData",
       );
-      console.log(`  - 总浏览量: ${dashboardData.resourceUsage.totalViews}`);
     } catch (error) {
-      console.error("❌ 仪表板数据生成失败:", error);
+      logError(
+        "仪表板数据生成失败:",
+        error,
+        "DataPipeline/generateDashboardData",
+      );
       throw error;
     }
   }
@@ -274,7 +284,7 @@ export class DataPipeline {
    */
   private async performDataQualityChecks(): Promise<void> {
     try {
-      console.log("🔍 执行数据质量检查...");
+      logInfo("执行数据质量检查...", "DataPipeline/performDataQualityChecks");
 
       const eventHistory = this.metricsEngine.getEventHistory();
       const checks = [];
@@ -313,7 +323,7 @@ export class DataPipeline {
         ) / userEventCounts.size;
 
       const anomalousUsers = Array.from(userEventCounts.entries()).filter(
-        ([_, count]) => count > avgEventsPerUser * 10,
+        ([, count]) => count > avgEventsPerUser * 10,
       );
 
       if (anomalousUsers.length > 0) {
@@ -321,13 +331,19 @@ export class DataPipeline {
       }
 
       if (checks.length === 0) {
-        console.log("✅ 数据质量检查通过");
+        logInfo("数据质量检查通过", "DataPipeline/performDataQualityChecks");
       } else {
-        console.log("⚠️ 数据质量检查发现问题:");
-        checks.forEach((check) => console.log(`  - ${check}`));
+        logWarn(
+          `数据质量检查发现问题: ${checks.join("; ")}`,
+          "DataPipeline/performDataQualityChecks",
+        );
       }
     } catch (error) {
-      console.error("❌ 数据质量检查失败:", error);
+      logError(
+        "数据质量检查失败:",
+        error,
+        "DataPipeline/performDataQualityChecks",
+      );
       // 质量检查失败不应该阻止管道继续运行
     }
   }
@@ -370,9 +386,9 @@ export class DataPipeline {
     try {
       const enhancedEvent = await this.enhanceEvent(event);
       this.metricsEngine.addEvent(enhancedEvent);
-      console.log(`✅ 事件添加成功: ${enhancedEvent.id}`);
+      logInfo(`事件添加成功: ${enhancedEvent.id}`, "DataPipeline/addEvent");
     } catch (error) {
-      console.error("❌ 事件添加失败:", error);
+      logError("事件添加失败:", error, "DataPipeline/addEvent");
       throw error;
     }
   }
@@ -386,7 +402,11 @@ export class DataPipeline {
     return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
-  private async getLocationFromIP(ip: string): Promise<any> {
+  private async getLocationFromIP(): Promise<{
+    country: string;
+    city: string;
+    timezone: string;
+  }> {
     // 简化的地理位置解析
     // 实际应用中可以使用 GeoIP 数据库或 API
     return {
@@ -396,7 +416,11 @@ export class DataPipeline {
     };
   }
 
-  private parseDeviceInfo(userAgent: string): any {
+  private parseDeviceInfo(userAgent: string): {
+    type: string;
+    os: string;
+    browser: string;
+  } {
     // 简化的设备信息解析
     const isMobile = /Mobile|Android|iPhone|iPad/i.test(userAgent);
     const isTablet = /iPad|Tablet/i.test(userAgent);

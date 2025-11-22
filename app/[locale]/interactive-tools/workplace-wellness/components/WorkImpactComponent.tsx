@@ -15,6 +15,7 @@ import { useLocale } from "next-intl";
 import { getLeaveTemplates } from "../data";
 import { useTranslations } from "next-intl";
 import { LeaveTemplate, WorkImpactData } from "../types";
+import { logError } from "@/lib/debug-logger";
 
 export default function WorkImpactComponent() {
   const workImpact = useWorkImpact();
@@ -95,9 +96,6 @@ export default function WorkImpactComponent() {
     e.stopPropagation();
 
     try {
-      // 获取今天的日期
-      const today = new Date().toISOString().split("T")[0];
-
       // 工作影响数据已经通过 updateWorkImpact 更新到 store 中
       // 这里我们只需要确认数据已更新
 
@@ -132,7 +130,7 @@ export default function WorkImpactComponent() {
       );
     } catch (error) {
       // 错误处理
-      console.error("保存工作影响记录时出错:", error);
+      logError("保存工作影响记录时出错", error, "WorkImpactComponent");
       alert(
         locale === "zh"
           ? "保存工作影响记录时出错，请重试。"

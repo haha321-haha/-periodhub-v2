@@ -13,11 +13,9 @@ import {
   Activity,
   Zap,
   CheckCircle,
-  ArrowRight,
-  Settings,
-  Download,
   Share2,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 // 动态导入P2组件 - 代码分割优化
 import dynamic from "next/dynamic";
@@ -62,6 +60,8 @@ const ReportGenerator = dynamic(
   },
 );
 
+type P2FeatureId = "analytics" | "ai" | "social" | "sync" | "reports";
+
 interface P2AdvancedFeaturesProps {
   locale: string;
   userId?: string;
@@ -72,9 +72,7 @@ export default function P2AdvancedFeatures({
   userId,
 }: P2AdvancedFeaturesProps) {
   const t = useTranslations("interactiveTools");
-  const [activeFeature, setActiveFeature] = useState<
-    "analytics" | "ai" | "social" | "sync" | "reports"
-  >("analytics");
+  const [activeFeature, setActiveFeature] = useState<P2FeatureId>("analytics");
   const [userProfile] = useState({
     id: userId || "demo-user",
     age: 28,
@@ -95,7 +93,33 @@ export default function P2AdvancedFeatures({
     },
   });
 
-  const features = [
+  interface FeatureStats {
+    charts?: number;
+    insights?: number;
+    accuracy?: string;
+    algorithms?: number;
+    studies?: number;
+    members?: string;
+    posts?: string;
+    groups?: number;
+    devices?: number;
+    uptime?: string;
+    security?: string;
+    formats?: number;
+    templates?: number;
+    exports?: string;
+  }
+
+  interface FeatureConfig {
+    id: P2FeatureId;
+    title: string;
+    description: string;
+    icon: LucideIcon;
+    color: "blue" | "purple" | "green" | "indigo" | "emerald";
+    stats: FeatureStats;
+  }
+
+  const features: FeatureConfig[] = [
     {
       id: "analytics",
       title: t("p2.features.analytics.title"),
@@ -183,7 +207,7 @@ export default function P2AdvancedFeatures({
               return (
                 <button
                   key={feature.id}
-                  onClick={() => setActiveFeature(feature.id as any)}
+                  onClick={() => setActiveFeature(feature.id)}
                   className={`group relative overflow-hidden rounded-xl p-6 transition-all duration-300 transform hover:scale-105 ${
                     isActive
                       ? `bg-gradient-to-r ${getColorClasses(

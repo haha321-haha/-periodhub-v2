@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, type DependencyList } from "react";
+import { logInfo } from "@/lib/debug-logger";
 
 export interface PerformanceMetrics {
   loadTime: number;
@@ -19,6 +20,16 @@ export interface PerformanceConfig {
   maxCacheSize: number;
   debounceDelay: number;
 }
+
+interface PerformanceMemoryInfo {
+  usedJSHeapSize: number;
+  totalJSHeapSize?: number;
+  jsHeapSizeLimit?: number;
+}
+
+type PerformanceWithMemory = Performance & {
+  memory?: PerformanceMemoryInfo;
+};
 
 const DEFAULT_CONFIG: PerformanceConfig = {
   enableLazyLoading: true,
@@ -51,8 +62,9 @@ export const usePerformanceOptimization = () => {
 
     // Monitor memory usage
     const updateMemoryUsage = () => {
-      if ("memory" in performance) {
-        const memory = (performance as any).memory;
+      const memory = (performance as PerformanceWithMemory).memory;
+
+      if (memory) {
         setMetrics((prev) => ({
           ...prev,
           memoryUsage: Math.round(memory.usedJSHeapSize / 1024 / 1024), // MB
@@ -62,15 +74,16 @@ export const usePerformanceOptimization = () => {
 
     // Monitor network requests
     const originalFetch = window.fetch;
+    const boundOriginalFetch = originalFetch.bind(window);
     let requestCount = 0;
 
-    window.fetch = (...args) => {
+    window.fetch = (...args: Parameters<typeof window.fetch>) => {
       requestCount++;
       setMetrics((prev) => ({
         ...prev,
         networkRequests: requestCount,
       }));
-      return originalFetch(...args);
+      return boundOriginalFetch(...args);
     };
 
     // Update metrics periodically
@@ -93,14 +106,16 @@ export const usePerformanceOptimization = () => {
 
   // Debounced function wrapper
   const debounce = useCallback(
-    <T extends (...args: any[]) => any>(
+    <T extends (...args: unknown[]) => unknown>(
       func: T,
       delay: number = config.debounceDelay,
     ): T => {
-      let timeoutId: NodeJS.Timeout;
+      let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
       return ((...args: Parameters<T>) => {
-        clearTimeout(timeoutId);
+        if (timeoutId !== null) {
+          clearTimeout(timeoutId);
+        }
         timeoutId = setTimeout(() => func(...args), delay);
       }) as T;
     },
@@ -109,7 +124,7 @@ export const usePerformanceOptimization = () => {
 
   // Throttled function wrapper
   const throttle = useCallback(
-    <T extends (...args: any[]) => any>(
+    <T extends (...args: unknown[]) => unknown>(
       func: T,
       delay: number = config.debounceDelay,
     ): T => {
@@ -129,19 +144,19 @@ export const usePerformanceOptimization = () => {
   // Memoized value wrapper
   // Note: This function cannot use useMemo inside a callback
   // Users should call useMemo directly instead
-  const memoize = useCallback(<T>(value: T, _deps: React.DependencyList): T => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    return value; // Return value directly, cannot use useMemo in callback
+  const memoize = useCallback(<T>(value: T, _deps: DependencyList): T => {
+    void _deps;
+    return value;
   }, []);
 
   // Lazy loading helper
   const lazyLoad = useCallback(
-    (importFn: () => Promise<any>) => {
+    <T>(importFn: () => Promise<T>): Promise<T> => {
       if (!config.enableLazyLoading) {
         return importFn();
       }
 
-      return new Promise((resolve, reject) => {
+      return new Promise<T>((resolve, reject) => {
         const timeout = setTimeout(() => {
           reject(new Error("Lazy loading timeout"));
         }, 10000); // 10 second timeout
@@ -161,7 +176,7 @@ export const usePerformanceOptimization = () => {
   );
 
   // Cache management
-  const cache = useMemo(() => new Map<string, any>(), []);
+  const cache = useMemo(() => new Map<string, unknown>(), []);
 
   const getCachedValue = useCallback(
     (key: string) => {
@@ -171,7 +186,7 @@ export const usePerformanceOptimization = () => {
   );
 
   const setCachedValue = useCallback(
-    (key: string, value: any) => {
+    (key: string, value: unknown) => {
       // Check cache size limit
       if (cache.size >= config.maxCacheSize) {
         const firstKey = cache.keys().next().value;
@@ -224,7 +239,11 @@ export const usePerformanceOptimization = () => {
     }
 
     // This would integrate with webpack-bundle-analyzer or similar tools
-    console.log("Bundle analysis would be performed here");
+    logInfo(
+      "Bundle analysis would be performed here",
+      undefined,
+      "usePerformanceOptimization",
+    );
     return {
       totalSize: 0,
       chunkSizes: {},

@@ -1,12 +1,18 @@
-'use client';
+"use client";
 
-import React, { Suspense, lazy } from 'react';
-import SafeSmartImage from '@/components/ui/SafeSmartImage';
+import React, { Suspense, lazy } from "react";
+import SafeSmartImage from "@/components/ui/SafeSmartImage";
+
+type PerformanceWithMemory = Performance & {
+  memory?: {
+    usedJSHeapSize: number;
+  };
+};
 
 // 加载骨架屏组件
 export const LoadingSkeleton = ({
-  className = '',
-  height = 'h-64'
+  className = "",
+  height = "h-64",
 }: {
   className?: string;
   height?: string;
@@ -18,36 +24,36 @@ export const LoadingSkeleton = ({
 
 // 测试组件懒加载包装器
 export const LazyQuizComponent = lazy(() =>
-  import('../components/PartnerUnderstandingQuiz').then(module => ({
-    default: module.default
-  }))
+  import("../components/PartnerUnderstandingQuiz").then((module) => ({
+    default: module.default,
+  })),
 );
 
 // 结果展示组件懒加载包装器
 export const LazyResultsComponent = lazy(() =>
-  import('../components/ResultsDisplay').then(module => ({
-    default: module.default
-  }))
+  import("../components/ResultsDisplay").then((module) => ({
+    default: module.default,
+  })),
 );
 
 // 训练计划组件懒加载包装器
 export const LazyTrainingComponent = lazy(() =>
-  import('../components/TrainingCampSchedule').then(module => ({
-    default: module.default
-  }))
+  import("../components/TrainingCampSchedule").then((module) => ({
+    default: module.default,
+  })),
 );
 
 // 相关链接组件懒加载包装器
 export const LazyRelatedLinksComponent = lazy(() =>
-  import('../components/RelatedLinks').then(module => ({
-    default: module.default
-  }))
+  import("../components/RelatedLinks").then((module) => ({
+    default: module.default,
+  })),
 );
 
 // 带加载状态的组件包装器
 export const withLoadingState = <P extends object>(
   Component: React.ComponentType<P>,
-  loadingComponent?: React.ReactNode
+  loadingComponent?: React.ReactNode,
 ) => {
   return function WrappedComponent(props: P) {
     return (
@@ -63,7 +69,7 @@ export const usePerformanceMonitor = () => {
   const [metrics, setMetrics] = React.useState({
     renderTime: 0,
     memoryUsage: 0,
-    componentCount: 0
+    componentCount: 0,
   });
 
   React.useEffect(() => {
@@ -71,11 +77,11 @@ export const usePerformanceMonitor = () => {
 
     // 监控内存使用
     const checkMemory = () => {
-      if ('memory' in performance) {
-        const memory = (performance as any).memory;
-        setMetrics(prev => ({
+      if ("memory" in performance) {
+        const memory = (performance as PerformanceWithMemory).memory;
+        setMetrics((prev) => ({
           ...prev,
-          memoryUsage: memory.usedJSHeapSize / 1024 / 1024 // MB
+          memoryUsage: memory.usedJSHeapSize / 1024 / 1024, // MB
         }));
       }
     };
@@ -83,9 +89,9 @@ export const usePerformanceMonitor = () => {
     const timer = setInterval(checkMemory, 1000);
 
     const endTime = performance.now();
-    setMetrics(prev => ({
+    setMetrics((prev) => ({
       ...prev,
-      renderTime: endTime - startTime
+      renderTime: endTime - startTime,
     }));
 
     return () => {
@@ -100,13 +106,11 @@ export const usePerformanceMonitor = () => {
 export const LazyImage = ({
   src,
   alt,
-  className = '',
-  placeholder = '/images/placeholder.svg'
+  className = "",
 }: {
   src: string;
   alt: string;
   className?: string;
-  placeholder?: string;
 }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [isInView, setIsInView] = React.useState(false);
@@ -120,7 +124,7 @@ export const LazyImage = ({
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (imgRef.current) {
@@ -143,7 +147,7 @@ export const LazyImage = ({
           height={300}
           onLoad={() => setIsLoaded(true)}
           className={`transition-opacity duration-300 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
+            isLoaded ? "opacity-100" : "opacity-0"
           }`}
           priority={false}
           type="content"
@@ -154,17 +158,22 @@ export const LazyImage = ({
 };
 
 // 虚拟滚动Hook（用于长列表）
-export const useVirtualScroll = <T>(
+export function useVirtualScroll<T>(
   items: T[],
   itemHeight: number,
-  containerHeight: number
-) => {
+  containerHeight: number,
+): {
+  visibleItems: T[];
+  totalHeight: number;
+  offsetY: number;
+  setScrollTop: React.Dispatch<React.SetStateAction<number>>;
+} {
   const [scrollTop, setScrollTop] = React.useState(0);
 
   const visibleStart = Math.floor(scrollTop / itemHeight);
   const visibleEnd = Math.min(
     visibleStart + Math.ceil(containerHeight / itemHeight) + 1,
-    items.length
+    items.length,
   );
 
   const visibleItems = items.slice(visibleStart, visibleEnd);
@@ -175,12 +184,12 @@ export const useVirtualScroll = <T>(
     visibleItems,
     totalHeight,
     offsetY,
-    setScrollTop
+    setScrollTop,
   };
-};
+}
 
 // 防抖Hook
-export const useDebounce = <T>(value: T, delay: number): T => {
+export function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = React.useState<T>(value);
 
   React.useEffect(() => {
@@ -194,20 +203,23 @@ export const useDebounce = <T>(value: T, delay: number): T => {
   }, [value, delay]);
 
   return debouncedValue;
-};
+}
 
 // 节流Hook
-export const useThrottle = <T>(value: T, limit: number): T => {
+export function useThrottle<T>(value: T, limit: number): T {
   const [throttledValue, setThrottledValue] = React.useState<T>(value);
   const lastRan = React.useRef<number>(Date.now());
 
   React.useEffect(() => {
-    const handler = setTimeout(() => {
-      if (Date.now() - lastRan.current >= limit) {
-        setThrottledValue(value);
-        lastRan.current = Date.now();
-      }
-    }, limit - (Date.now() - lastRan.current));
+    const handler = setTimeout(
+      () => {
+        if (Date.now() - lastRan.current >= limit) {
+          setThrottledValue(value);
+          lastRan.current = Date.now();
+        }
+      },
+      limit - (Date.now() - lastRan.current),
+    );
 
     return () => {
       clearTimeout(handler);
@@ -215,4 +227,4 @@ export const useThrottle = <T>(value: T, limit: number): T => {
   }, [value, limit]);
 
   return throttledValue;
-};
+}

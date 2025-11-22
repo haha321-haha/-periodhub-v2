@@ -1,5 +1,6 @@
-import { QuizQuestion } from "../types/quiz";
+import { QuizAnswer, QuizQuestion } from "../types/quiz";
 import { QuizStage } from "../stores/partnerHandbookStore";
+import { logWarn } from "@/lib/debug-logger";
 
 // 第一阶段题目配置（5道简化题）
 export const stage1Questions: QuizQuestion[] = [
@@ -238,7 +239,11 @@ export const questionsConfig: Record<QuizStage, QuizQuestion[]> = {
 export const getStageQuestions = (stage: QuizStage): QuizQuestion[] => {
   const questions = questionsConfig[stage];
   if (!questions) {
-    console.warn(`No questions found for stage: ${stage}`);
+    logWarn(
+      `No questions found for stage: ${stage}`,
+      undefined,
+      "questionsConfig/getStageQuestions",
+    );
     return [];
   }
   return questions;
@@ -256,7 +261,7 @@ export const getQuestion = (
 // 计算阶段总分的工具函数
 export const calculateStageScore = (
   stage: QuizStage,
-  answers: any[],
+  answers: QuizAnswer[],
 ): number => {
   const questions = getStageQuestions(stage);
   return answers.reduce((total, answer) => {

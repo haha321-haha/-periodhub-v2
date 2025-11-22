@@ -8,6 +8,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
+  Activity,
   Briefcase,
   TrendingUp,
   TrendingDown,

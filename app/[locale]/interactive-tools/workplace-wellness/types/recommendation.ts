@@ -2,7 +2,7 @@
  * 推荐系统相关类型定义
  */
 
-import { MenstrualPhase } from "./index";
+import { MenstrualPhase, PeriodRecord } from "./index";
 
 // 推荐类型
 export type RecommendationType =
@@ -84,7 +84,7 @@ export type RecommendationFeedbackAction =
 // 用户数据快照接口
 export interface UserDataSnapshot {
   periodData: {
-    records: any[]; // PeriodRecord[]
+    records: PeriodRecord[];
     averageCycleLength: number;
     averagePeriodLength: number;
     averagePainLevel: number;

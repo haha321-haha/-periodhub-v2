@@ -14,8 +14,6 @@ import {
   Activity,
   Calendar,
   Target,
-  Users,
-  Clock,
   Heart,
   AlertTriangle,
   CheckCircle,
@@ -30,7 +28,7 @@ import {
   CycleStatistics,
 } from "../utils/cyclePrediction";
 import { PeriodRecord, CalendarState } from "../types";
-import { logError } from "../../../../lib/debug-logger";
+import { logError } from "@/lib/debug-logger";
 
 interface TrendRecord {
   month: string;
@@ -66,7 +64,10 @@ export default function DataVisualizationDashboard() {
   const [loading, setLoading] = useState(true);
 
   // 从 store 读取 periodData
-  const periodData = useMemo(() => calendar.periodData || [], [calendar.periodData]);
+  const periodData = useMemo(
+    () => calendar.periodData || [],
+    [calendar.periodData],
+  );
 
   const generateDashboardData = useCallback(async () => {
     setLoading(true);
@@ -104,92 +105,95 @@ export default function DataVisualizationDashboard() {
     generateDashboardData();
   }, [generateDashboardData]);
 
-  const generateTrendData = useCallback((data: PeriodRecord[]): TrendRecord[] => {
-    const trends: TrendRecord[] = [];
-    const monthlyData = new Map<string, PeriodRecord[]>();
+  const generateTrendData = useCallback(
+    (data: PeriodRecord[]): TrendRecord[] => {
+      const trends: TrendRecord[] = [];
+      const monthlyData = new Map<string, PeriodRecord[]>();
 
-    // 按月份分组数据
-    data.forEach((record) => {
-      const month = new Date(record.date).toISOString().slice(0, 7);
-      if (!monthlyData.has(month)) {
-        monthlyData.set(month, []);
-      }
-      monthlyData.get(month)!.push(record);
-    });
+      // 按月份分组数据
+      data.forEach((record) => {
+        const month = new Date(record.date).toISOString().slice(0, 7);
+        if (!monthlyData.has(month)) {
+          monthlyData.set(month, []);
+        }
+        monthlyData.get(month)!.push(record);
+      });
 
-    // 计算每月趋势
-    monthlyData.forEach((records, month) => {
-      const periodRecords = records.filter((r) => r.type === "period");
-      if (periodRecords.length > 0) {
-        const avgPain =
-          periodRecords.reduce((sum, r) => sum + (r.painLevel || 0), 0) /
-          periodRecords.length;
-        const efficiency = Math.max(20, 100 - avgPain * 8);
+      // 计算每月趋势
+      monthlyData.forEach((records, month) => {
+        const periodRecords = records.filter((r) => r.type === "period");
+        if (periodRecords.length > 0) {
+          const avgPain =
+            periodRecords.reduce((sum, r) => sum + (r.painLevel || 0), 0) /
+            periodRecords.length;
+          const efficiency = Math.max(20, 100 - avgPain * 8);
 
-        trends.push({
-          month,
-          cycleLength: calculateCycleLength(periodRecords),
-          painLevel: avgPain,
-          efficiency,
+          trends.push({
+            month,
+            cycleLength: calculateCycleLength(periodRecords),
+            painLevel: avgPain,
+            efficiency,
+          });
+        }
+      });
+
+      return trends.sort((a, b) => a.month.localeCompare(b.month));
+    },
+    [],
+  );
+
+  const generateInsights = useCallback(
+    (analysis: CycleAnalysis, statistics: CycleStatistics): InsightCard[] => {
+      const insights: InsightCard[] = [];
+
+      // 周期规律性洞察
+      if (analysis.cycleRegularity === "regular") {
+        insights.push({
+          type: "positive",
+          title: t("insights.regularCycle"),
+          description: t("insights.regularCycleDesc"),
+          icon: CheckCircle,
+        });
+      } else if (analysis.cycleRegularity === "irregular") {
+        insights.push({
+          type: "negative",
+          title: t("insights.irregularCycle"),
+          description: t("insights.irregularCycleDesc"),
+          icon: AlertTriangle,
         });
       }
-    });
 
-    return trends.sort((a, b) => a.month.localeCompare(b.month));
-  }, []);
+      // 疼痛水平洞察
+      if (statistics.averagePainLevel > 7) {
+        insights.push({
+          type: "negative",
+          title: t("insights.highPain"),
+          description: t("insights.highPainDesc"),
+          icon: AlertTriangle,
+        });
+      } else if (statistics.averagePainLevel < 3) {
+        insights.push({
+          type: "positive",
+          title: t("insights.lowPain"),
+          description: t("insights.lowPainDesc"),
+          icon: CheckCircle,
+        });
+      }
 
-  const generateInsights = useCallback((
-    analysis: CycleAnalysis,
-    statistics: CycleStatistics,
-  ): InsightCard[] => {
-    const insights: InsightCard[] = [];
+      // 预测准确性洞察
+      if (analysis.confidence > 80) {
+        insights.push({
+          type: "positive",
+          title: t("insights.highAccuracy"),
+          description: t("insights.highAccuracyDesc"),
+          icon: CheckCircle,
+        });
+      }
 
-    // 周期规律性洞察
-    if (analysis.cycleRegularity === "regular") {
-      insights.push({
-        type: "positive",
-        title: t("insights.regularCycle"),
-        description: t("insights.regularCycleDesc"),
-        icon: CheckCircle,
-      });
-    } else if (analysis.cycleRegularity === "irregular") {
-      insights.push({
-        type: "negative",
-        title: t("insights.irregularCycle"),
-        description: t("insights.irregularCycleDesc"),
-        icon: AlertTriangle,
-      });
-    }
-
-    // 疼痛水平洞察
-    if (statistics.averagePainLevel > 7) {
-      insights.push({
-        type: "negative",
-        title: t("insights.highPain"),
-        description: t("insights.highPainDesc"),
-        icon: AlertTriangle,
-      });
-    } else if (statistics.averagePainLevel < 3) {
-      insights.push({
-        type: "positive",
-        title: t("insights.lowPain"),
-        description: t("insights.lowPainDesc"),
-        icon: CheckCircle,
-      });
-    }
-
-    // 预测准确性洞察
-    if (analysis.confidence > 80) {
-      insights.push({
-        type: "positive",
-        title: t("insights.highAccuracy"),
-        description: t("insights.highAccuracyDesc"),
-        icon: CheckCircle,
-      });
-    }
-
-    return insights;
-  }, [t]);
+      return insights;
+    },
+    [t],
+  );
 
   const calculateCycleLength = (records: PeriodRecord[]): number => {
     if (records.length < 2) return 0;

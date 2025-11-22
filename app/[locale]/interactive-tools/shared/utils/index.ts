@@ -4,6 +4,7 @@ import {
   ValidationError,
   StorageData,
 } from "../types";
+import { logError } from "@/lib/debug-logger";
 
 // SSR-safe runtime flags
 const isServer = typeof window === "undefined";
@@ -243,7 +244,7 @@ export const saveToStorage = <T>(key: string, data: T): boolean => {
     window.localStorage?.setItem(key, JSON.stringify(storageData));
     return true;
   } catch (error) {
-    console.error("Failed to save to localStorage:", error);
+    logError("Failed to save to localStorage", error, "shared/utils");
     return false;
   }
 };
@@ -256,7 +257,7 @@ export const loadFromStorage = <T>(key: string): T | null => {
     const storageData: StorageData<T> = JSON.parse(item);
     return storageData.data;
   } catch (error) {
-    console.error("Failed to load from localStorage:", error);
+    logError("Failed to load from localStorage", error, "shared/utils");
     return null;
   }
 };
@@ -267,7 +268,7 @@ export const clearStorage = (key: string): boolean => {
     window.localStorage?.removeItem(key);
     return true;
   } catch (error) {
-    console.error("Failed to clear localStorage:", error);
+    logError("Failed to clear localStorage", error, "shared/utils");
     return false;
   }
 };
@@ -324,7 +325,7 @@ export const downloadFile = (
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   } catch (error) {
-    console.error("Failed to trigger download:", error);
+    logError("Failed to trigger download", error, "shared/utils");
   }
 };
 
@@ -347,7 +348,7 @@ export const getStatusColor = (status: string): string => {
 };
 
 // 防抖函数
-export const debounce = <T extends (...args: any[]) => any>(
+export const debounce = <T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number,
 ): ((...args: Parameters<T>) => void) => {

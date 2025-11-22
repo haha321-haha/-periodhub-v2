@@ -2,12 +2,13 @@
 
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Plus, List, BarChart3, Download, Settings } from "lucide-react";
+import { Plus, List, BarChart3, Download } from "lucide-react";
 import { usePainTracker } from "../shared/hooks/usePainTracker";
 import { useNotifications } from "../shared/hooks/useNotifications";
 import PainEntryForm from "../pain-tracker/components/PainEntryForm";
 import NotificationContainer from "../shared/components/NotificationContainer";
 import { LoadingOverlay } from "../shared/components/LoadingSpinner";
+import { logError } from "@/lib/debug-logger";
 
 interface PainTrackerToolProps {
   locale: string;
@@ -66,6 +67,7 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
         return result;
       }
     } catch (error) {
+      logError("PainTrackerTool failed to add entry", error, "PainTrackerTool");
       addErrorNotification(
         t("messages.saveError"),
         t("messages.validationError"),
@@ -91,6 +93,11 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
         return result;
       }
     } catch (error) {
+      logError(
+        "PainTrackerTool failed to update entry",
+        error,
+        "PainTrackerTool",
+      );
       addErrorNotification(
         t("messages.updateError"),
         t("messages.validationError"),
@@ -117,6 +124,11 @@ export default function PainTrackerTool({ locale }: PainTrackerToolProps) {
           );
         }
       } catch (error) {
+        logError(
+          "PainTrackerTool failed to delete entry",
+          error,
+          "PainTrackerTool",
+        );
         addErrorNotification(
           t("messages.deleteError"),
           t("messages.validationError"),

@@ -126,5 +126,8 @@ export function LazyLoadWrapper({
   children: ReactNode;
   fallback?: ReactNode;
 }) {
+  if (!children) {
+    return <>{fallback}</>;
+  }
   return <>{children}</>;
 }

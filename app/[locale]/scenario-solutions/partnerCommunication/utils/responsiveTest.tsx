@@ -46,15 +46,20 @@ export const useResponsive = () => {
 };
 
 // 触控检测Hook
+type NavigatorWithMsTouch = Navigator & {
+  msMaxTouchPoints?: number;
+};
+
 export const useTouchDevice = () => {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
     const checkTouchDevice = () => {
+      const nav = navigator as NavigatorWithMsTouch;
       setIsTouchDevice(
         "ontouchstart" in window ||
-          navigator.maxTouchPoints > 0 ||
-          (navigator as any).msMaxTouchPoints > 0,
+          (nav.maxTouchPoints ?? 0) > 0 ||
+          (nav.msMaxTouchPoints ?? 0) > 0,
       );
     };
 
@@ -142,7 +147,7 @@ export const ResponsiveTestPanel = () => {
 
 // 移动端优化检测
 export const useMobileOptimization = () => {
-  const { screenSize, dimensions } = useResponsive();
+  const { screenSize } = useResponsive();
   const isTouchDevice = useTouchDevice();
 
   const isMobile = screenSize === "mobile";
@@ -191,8 +196,6 @@ export const ResponsiveImage = ({
   sizes?: string;
   priority?: boolean;
 }) => {
-  const { screenSize } = useResponsive();
-
   return (
     <SafeSmartImage
       src={src}
@@ -289,6 +292,12 @@ export const ResponsiveText = ({
 };
 
 // 性能测试工具
+type PerformanceWithMemory = Performance & {
+  memory?: {
+    usedJSHeapSize: number;
+  };
+};
+
 export const PerformanceTest = () => {
   const [metrics, setMetrics] = useState({
     renderTime: 0,
@@ -311,7 +320,7 @@ export const PerformanceTest = () => {
     // 测量内存使用
     const measureMemory = () => {
       if ("memory" in performance) {
-        const memory = (performance as any).memory;
+        const memory = (performance as PerformanceWithMemory).memory;
         setMetrics((prev) => ({
           ...prev,
           memoryUsage: memory.usedJSHeapSize / 1024 / 1024,

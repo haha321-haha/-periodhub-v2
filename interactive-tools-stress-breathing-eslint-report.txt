@@ -1,0 +1,4 @@
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/components/BreathingExerciseEmbedded.tsx:3:10: 'useState' is defined but never used. [Error/@typescript-eslint/no-unused-vars]
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/components/BreathingExerciseEmbedded.tsx:15:9: 't' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
+
+2 problems

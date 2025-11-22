@@ -26,13 +26,15 @@ import {
   CycleStatistics,
 } from "../utils/cyclePrediction";
 import { PeriodRecord, CalendarState } from "../types";
-import { logError } from "../../../../lib/debug-logger";
+import { logError } from "@/lib/debug-logger";
+
+type FlowType = "light" | "medium" | "heavy";
 
 interface TrendData {
   month: string;
   cycleLength: number;
   painLevel: number;
-  flowType: "light" | "medium" | "heavy";
+  flowType: FlowType;
 }
 
 interface ComparisonData {
@@ -42,13 +44,13 @@ interface ComparisonData {
   trend: "up" | "down" | "stable";
 }
 
+type AdvancedTab = "overview" | "trends" | "comparison" | "insights";
+
 export default function AdvancedCycleAnalysis() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
   const calendar = useCalendar() as CalendarState;
-  const [activeTab, setActiveTab] = useState<
-    "overview" | "trends" | "comparison" | "insights"
-  >("overview");
+  const [activeTab, setActiveTab] = useState<AdvancedTab>("overview");
   const [analysis, setAnalysis] = useState<CycleAnalysis | null>(null);
   const [statistics, setStatistics] = useState<CycleStatistics | null>(null);
   const [trendData, setTrendData] = useState<TrendData[]>([]);
@@ -72,10 +74,7 @@ export default function AdvancedCycleAnalysis() {
       setAnalysis(cycleAnalysis);
       setStatistics(cycleStats);
 
-      // 生成趋势数据
       generateTrendData(periodData);
-
-      // 生成对比数据
       generateComparisonData(periodData, cycleAnalysis);
     } catch (error) {
       logError(
@@ -420,12 +419,16 @@ export default function AdvancedCycleAnalysis() {
               label: t("analysis.tabs.comparison"),
               icon: Target,
             },
-            { id: "insights", label: t("analysis.tabs.insights"), icon: Info },
+            {
+              id: "insights",
+              label: t("analysis.tabs.insights"),
+              icon: Info,
+            },
           ].map((tab) => (
             <button
               key={tab.id}
               type="button"
-              onClick={() => setActiveTab(tab.id as any)}
+              onClick={() => setActiveTab(tab.id)}
               className={`flex-1 flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === tab.id
                   ? "bg-white text-primary-600 shadow-sm"

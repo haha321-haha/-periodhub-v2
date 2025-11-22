@@ -20,6 +20,7 @@ import {
   useUserPreferencesActions,
   useCalendar,
 } from "../hooks/useWorkplaceWellnessStore";
+import { logError, logInfo } from "@/lib/debug-logger";
 import { useTranslations } from "next-intl";
 import {
   Theme,
@@ -435,7 +436,7 @@ export default function UserPreferencesSettings() {
       }
       return false;
     } catch (error) {
-      console.error("Validation error:", error);
+      logError("Validation error", error, "UserPreferencesSettings");
       return false;
     }
   };
@@ -459,11 +460,13 @@ export default function UserPreferencesSettings() {
         lastUpdated: new Date().toISOString(),
       });
 
-      // eslint-disable-next-line no-console
-      console.log("Settings saved successfully");
+      logInfo(
+        "Settings saved successfully",
+        undefined,
+        "UserPreferencesSettings",
+      );
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error("Failed to save settings:", error);
+      logError("Failed to save settings", error, "UserPreferencesSettings");
     } finally {
       setIsSaving(false);
     }

@@ -21,7 +21,7 @@ import {
   ChartPerformanceOptimizer,
   MemoryManager,
 } from "../../../../../lib/pain-tracker/performance";
-import { logWarn } from "../../../../../lib/debug-logger";
+import { logWarn } from "@/lib/debug-logger";
 
 interface PainTrendChartProps {
   trendData: TrendPoint[];

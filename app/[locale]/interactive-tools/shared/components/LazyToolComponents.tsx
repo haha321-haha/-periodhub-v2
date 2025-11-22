@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import {
   createLazyComponent,
   createLazyTool,
@@ -185,7 +184,7 @@ export const preloadSystemOptimization = () => {
 };
 
 // 导出所有懒加载组件
-export default {
+const lazyToolCollection = {
   // 核心工具
   LazySymptomAssessmentTool,
   LazyPainTrackerTool,
@@ -218,3 +217,5 @@ export default {
   preloadAdvancedFeatures,
   preloadSystemOptimization,
 };
+
+export default lazyToolCollection;

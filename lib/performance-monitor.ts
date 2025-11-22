@@ -1,4 +1,6 @@
 // 性能监控工具
+import { logWarn, logInfo } from "@/lib/debug-logger";
+
 export class PerformanceMonitor {
   private static instance: PerformanceMonitor;
   private metrics: Map<string, number> = new Map();
@@ -46,7 +48,11 @@ export class PerformanceMonitor {
       observer.observe({ entryTypes: ["largest-contentful-paint"] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn("LCP observer not supported:", error);
+      logWarn(
+        "LCP observer not supported:",
+        error,
+        "PerformanceMonitor/observeLCP",
+      );
     }
   }
 
@@ -64,7 +70,11 @@ export class PerformanceMonitor {
       observer.observe({ entryTypes: ["event"] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn("INP observer not supported:", error);
+      logWarn(
+        "INP observer not supported:",
+        error,
+        "PerformanceMonitor/observeINP",
+      );
     }
   }
 
@@ -73,9 +83,16 @@ export class PerformanceMonitor {
       let clsValue = 0;
       const observer = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        entries.forEach((entry: any) => {
-          if (!entry.hadRecentInput) {
-            clsValue += entry.value;
+        entries.forEach((entry) => {
+          const layoutShiftEntry = entry as PerformanceEntry & {
+            hadRecentInput?: boolean;
+            value?: number;
+          };
+          if (
+            !layoutShiftEntry.hadRecentInput &&
+            layoutShiftEntry.value !== undefined
+          ) {
+            clsValue += layoutShiftEntry.value;
             this.metrics.set("CLS", clsValue);
             this.logMetric("CLS", clsValue);
           }
@@ -84,7 +101,11 @@ export class PerformanceMonitor {
       observer.observe({ entryTypes: ["layout-shift"] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn("CLS observer not supported:", error);
+      logWarn(
+        "CLS observer not supported:",
+        error,
+        "PerformanceMonitor/observeCLS",
+      );
     }
   }
 
@@ -100,7 +121,11 @@ export class PerformanceMonitor {
       observer.observe({ entryTypes: ["paint"] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn("FCP observer not supported:", error);
+      logWarn(
+        "FCP observer not supported:",
+        error,
+        "PerformanceMonitor/observeFCP",
+      );
     }
   }
 
@@ -120,12 +145,20 @@ export class PerformanceMonitor {
       observer.observe({ entryTypes: ["navigation"] });
       this.observers.push(observer);
     } catch (error) {
-      console.warn("TTFB observer not supported:", error);
+      logWarn(
+        "TTFB observer not supported:",
+        error,
+        "PerformanceMonitor/observeTTFB",
+      );
     }
   }
 
   private logMetric(name: string, value: number) {
-    console.log(`📊 Performance Metric - ${name}: ${value.toFixed(2)}ms`);
+    logInfo(
+      `Performance Metric - ${name}: ${value.toFixed(2)}ms`,
+      undefined,
+      "PerformanceMonitor/logMetric",
+    );
 
     // 发送到分析服务（可选）
     this.sendToAnalytics(name, value);
@@ -134,7 +167,11 @@ export class PerformanceMonitor {
   private sendToAnalytics(metric: string, value: number) {
     // 这里可以集成Google Analytics、Mixpanel等分析服务
     if (typeof window !== "undefined" && "gtag" in window) {
-      (window as any).gtag("event", "web_vitals", {
+      (
+        window as Window & {
+          gtag?: (command: string, params: Record<string, unknown>) => void;
+        }
+      ).gtag?.("event", "web_vitals", {
         name: metric,
         value: Math.round(value),
         event_category: "Performance",
@@ -193,18 +230,14 @@ export class PerformanceMonitor {
 
       // 生成建议
       if (grade === "poor" || grade === "needs-improvement") {
-        report.recommendations.push(this.getRecommendation(name, value, grade));
+        report.recommendations.push(this.getRecommendation(name));
       }
     });
 
     return report;
   }
 
-  private getRecommendation(
-    metric: string,
-    value: number,
-    grade: string,
-  ): string {
+  private getRecommendation(metric: string): string {
     const recommendations = {
       LCP: "优化最大内容绘制时间：压缩图片、使用CDN、优化关键渲染路径",
       INP: "优化交互到下次绘制时间：减少JavaScript执行时间、使用代码分割、优化事件处理",
@@ -236,7 +269,11 @@ export function trackPageLoad() {
   window.addEventListener("load", () => {
     setTimeout(() => {
       const report = monitor.generateReport();
-      console.log("📈 Performance Report:", report);
+      logInfo(
+        "Performance Report generated",
+        report,
+        "performance-monitor/trackPageLoad",
+      );
 
       // 可以发送到服务器进行分析
       sendPerformanceReport(report);
@@ -245,7 +282,13 @@ export function trackPageLoad() {
 }
 
 // 发送性能报告到服务器
-async function sendPerformanceReport(report: any) {
+async function sendPerformanceReport(report: {
+  timestamp: string;
+  url: string;
+  metrics: Record<string, number>;
+  grades: Record<string, string>;
+  recommendations: string[];
+}) {
   try {
     await fetch("/api/performance", {
       method: "POST",
@@ -255,7 +298,11 @@ async function sendPerformanceReport(report: any) {
       body: JSON.stringify(report),
     });
   } catch (error) {
-    console.warn("Failed to send performance report:", error);
+    logWarn(
+      "Failed to send performance report:",
+      error,
+      "performance-monitor/sendPerformanceReport",
+    );
   }
 }
 
@@ -274,7 +321,11 @@ export function trackRouteChange() {
   window.addEventListener("load", () => {
     if (routeChangeStart > 0) {
       const routeChangeTime = performance.now() - routeChangeStart;
-      console.log(`🔄 Route Change Time: ${routeChangeTime.toFixed(2)}ms`);
+      logInfo(
+        `Route Change Time: ${routeChangeTime.toFixed(2)}ms`,
+        undefined,
+        "performance-monitor/trackRouteChange",
+      );
     }
   });
 }

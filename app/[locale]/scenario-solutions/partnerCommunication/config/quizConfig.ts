@@ -1,4 +1,3 @@
-import { QuizQuestion } from "../types/quiz";
 import { QuizStage } from "../stores/partnerHandbookStore";
 
 // 测试配置接口
@@ -137,7 +136,10 @@ export const getStageConfig = (stage: QuizStage): QuizStageConfig => {
 // 检查阶段是否解锁的工具函数
 export const isStageUnlocked = (
   stage: QuizStage,
-  stageProgress: Record<QuizStage, { status: string; result?: { percentage: number } }>,
+  stageProgress: Record<
+    QuizStage,
+    { status: string; result?: { percentage: number } }
+  >,
 ): boolean => {
   const config = getStageConfig(stage);
 

@@ -2,8 +2,12 @@
 
 import React, { ReactNode, useEffect, useState } from "react";
 
+type ResponsiveChildren =
+  | ReactNode
+  | ((breakpoint: BreakpointInfo) => ReactNode);
+
 interface ResponsiveContainerProps {
-  children: ReactNode;
+  children: ResponsiveChildren;
   className?: string;
   maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
   padding?: "none" | "sm" | "md" | "lg" | "xl";
@@ -128,7 +132,7 @@ export function ResponsiveContainer({
       }
     >
       {typeof children === "function"
-        ? (children as any)(breakpoint)
+        ? (children as (info: BreakpointInfo) => ReactNode)(breakpoint)
         : children}
     </div>
   );

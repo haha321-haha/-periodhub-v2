@@ -9,7 +9,7 @@ import React, {
   useState,
 } from "react";
 import LoadingSpinner from "./LoadingSpinner";
-import { logError, logInfo, logWarn } from "../../../../../lib/debug-logger";
+import { logError, logInfo, logWarn } from "@/lib/debug-logger";
 
 /**
  * P3阶段：懒加载实现

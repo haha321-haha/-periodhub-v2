@@ -3,11 +3,81 @@
  * 实现Meta信息优化和结构化数据生成
  */
 
-import type { Metadata } from "next";
 import { Locale } from "@/i18n";
 import { getTranslations } from "next-intl/server";
 
 type TFunction = Awaited<ReturnType<typeof getTranslations>>;
+
+type FAQStructuredData = {
+  "@context": "https://schema.org";
+  "@type": "FAQPage";
+  mainEntity: Array<{
+    "@type": "Question";
+    name: string;
+    acceptedAnswer: {
+      "@type": "Answer";
+      text: string;
+    };
+  }>;
+};
+
+type WebApplicationStructuredData = {
+  "@context": "https://schema.org";
+  "@type": "WebApplication";
+  name: string;
+  description: string;
+  applicationCategory: string;
+  operatingSystem: string;
+  offers: {
+    "@type": "Offer";
+    price: string;
+    priceCurrency: string;
+  };
+  url: string;
+  author: {
+    "@type": "Organization";
+    name: string;
+    url: string;
+  };
+  creator: {
+    "@type": "Organization";
+    name: string;
+    url: string;
+  };
+  aggregateRating: {
+    "@type": "AggregateRating";
+    ratingValue: string;
+    ratingCount: string;
+    bestRating: string;
+    worstRating: string;
+  };
+  inLanguage: string;
+  browserRequirements: string;
+  softwareVersion: string;
+  datePublished: string;
+  dateModified: string;
+  isPartOf: {
+    "@type": "WebSite";
+    name: string;
+    url: string;
+  };
+};
+
+type BreadcrumbStructuredData = {
+  "@context": "https://schema.org";
+  "@type": "BreadcrumbList";
+  itemListElement: Array<{
+    "@type": "ListItem";
+    position: number;
+    name: string;
+    item: string;
+  }>;
+};
+
+type StructuredDataEntry =
+  | FAQStructuredData
+  | WebApplicationStructuredData
+  | BreadcrumbStructuredData;
 
 export interface SEOConfig {
   title: string;
@@ -15,7 +85,7 @@ export interface SEOConfig {
   keywords: string[];
   canonical: string;
   ogImage?: string;
-  structuredData?: any;
+  structuredData?: StructuredDataEntry;
 }
 
 export interface PageSEOData {
@@ -26,7 +96,7 @@ export interface PageSEOData {
 /**
  * 生成FAQ结构化数据
  */
-export function generateFAQStructuredData(t: TFunction): any {
+export function generateFAQStructuredData(t: TFunction): FAQStructuredData {
   const faqs = [
     { key: "q1" },
     { key: "q2" },
@@ -55,7 +125,7 @@ export function generateFAQStructuredData(t: TFunction): any {
 export function generateWebApplicationSchema(
   locale: Locale,
   t: TFunction,
-): any {
+): WebApplicationStructuredData {
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
   const providerName = t("structuredData.webApplication.providerName");
@@ -109,7 +179,7 @@ export function generateWebApplicationSchema(
 export function generateBreadcrumbSchema(
   locale: Locale,
   t: TFunction,
-): any {
+): BreadcrumbStructuredData {
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
@@ -146,7 +216,7 @@ export function generateBreadcrumbSchema(
 export function generateAllStructuredData(
   locale: Locale,
   t: TFunction,
-): any[] {
+): Array<StructuredDataEntry> {
   return [
     generateFAQStructuredData(t),
     generateWebApplicationSchema(locale, t),

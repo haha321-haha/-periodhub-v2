@@ -2,14 +2,9 @@
 
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 
 // 动态导入Lucide图标 - 按需加载
-const Settings = dynamic(
-  () => import("lucide-react").then((mod) => ({ default: mod.Settings })),
-  { ssr: false },
-);
 const Zap = dynamic(
   () => import("lucide-react").then((mod) => ({ default: mod.Zap })),
   { ssr: false },
@@ -40,18 +35,6 @@ const BarChart3 = dynamic(
 );
 const Globe = dynamic(
   () => import("lucide-react").then((mod) => ({ default: mod.Globe })),
-  { ssr: false },
-);
-const Shield = dynamic(
-  () => import("lucide-react").then((mod) => ({ default: mod.Shield })),
-  { ssr: false },
-);
-const Code = dynamic(
-  () => import("lucide-react").then((mod) => ({ default: mod.Code })),
-  { ssr: false },
-);
-const Users = dynamic(
-  () => import("lucide-react").then((mod) => ({ default: mod.Users })),
   { ssr: false },
 );
 
@@ -117,9 +100,7 @@ interface P3PhaseProps {
 export default function P3Phase({ locale }: P3PhaseProps) {
   const t = useTranslations("interactiveTools.p3");
   const [activeTab, setActiveTab] = useState<string>("i18n");
-  const [completedTasks, setCompletedTasks] = useState<Set<string>>(
-    new Set(["i18n"]),
-  ); // 国际化已完成
+  const [completedTasks] = useState<Set<string>>(() => new Set(["i18n"])); // 国际化已完成
 
   // 组件初始化
   React.useEffect(() => {
@@ -240,7 +221,9 @@ export default function P3Phase({ locale }: P3PhaseProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 页面标题 */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t("title")}</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            {t("title")}
+          </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             {t("description")}
           </p>

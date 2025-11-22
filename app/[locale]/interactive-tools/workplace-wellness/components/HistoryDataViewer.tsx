@@ -29,7 +29,6 @@ import {
   PeriodType,
   CalendarState,
 } from "../types";
-import { logError } from "../../../../lib/debug-logger";
 
 interface FilterOptions {
   dateRange: {
@@ -432,7 +431,7 @@ export default function HistoryDataViewer() {
                   onChange={(e) =>
                     setFilters((prev) => ({
                       ...prev,
-                      painLevel: e.target.value as any,
+                      painLevel: e.target.value as FilterOptions["painLevel"],
                     }))
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
@@ -453,7 +452,7 @@ export default function HistoryDataViewer() {
                   onChange={(e) =>
                     setFilters((prev) => ({
                       ...prev,
-                      flow: e.target.value as any,
+                      flow: e.target.value as FilterOptions["flow"],
                     }))
                   }
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"

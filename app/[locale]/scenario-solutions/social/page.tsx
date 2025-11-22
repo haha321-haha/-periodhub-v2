@@ -185,7 +185,6 @@ export default async function SocialScenarioPage({ params }: Props) {
   unstable_setRequestLocale(locale);
 
   const t = await getTranslations("scenarioSolutionsPage");
-  const commonT = await getTranslations("common");
 
   // 预加载面包屑所需的翻译
   const breadcrumbTitle = t("title");
@@ -199,34 +198,48 @@ export default async function SocialScenarioPage({ params }: Props) {
   const howToData = await generateHowToStructuredData({
     locale,
     scenarioSlug: "social",
-    name: isZh ? "社交场合痛经管理指南" : "Social Setting Period Pain Management Guide",
+    name: isZh
+      ? "社交场合痛经管理指南"
+      : "Social Setting Period Pain Management Guide",
     description: isZh
       ? "社交场合的痛经管理方法，包含便携准备和应急应对"
       : "Period pain management in social settings, including portable preparation and emergency response",
     steps: [
       {
         name: isZh ? "准备便携应急包" : "Prepare Portable Emergency Kit",
-        text: isZh ? "准备小巧精致的应急包，方便随身携带" : "Prepare compact elegant emergency kit for easy carrying"
+        text: isZh
+          ? "准备小巧精致的应急包，方便随身携带"
+          : "Prepare compact elegant emergency kit for easy carrying",
       },
       {
         name: isZh ? "选择合适的着装" : "Choose Appropriate Attire",
-        text: isZh ? "选择舒适且不紧身的服装" : "Choose comfortable and non-restrictive clothing"
+        text: isZh
+          ? "选择舒适且不紧身的服装"
+          : "Choose comfortable and non-restrictive clothing",
       },
       {
         name: isZh ? "提前规划行程" : "Plan Schedule in Advance",
-        text: isZh ? "了解活动时长和场地设施" : "Know activity duration and venue facilities"
+        text: isZh
+          ? "了解活动时长和场地设施"
+          : "Know activity duration and venue facilities",
       },
       {
         name: isZh ? "了解场地设施" : "Know Venue Facilities",
-        text: isZh ? "提前了解洗手间和休息区位置" : "Know restroom and rest area locations in advance"
+        text: isZh
+          ? "提前了解洗手间和休息区位置"
+          : "Know restroom and rest area locations in advance",
       },
       {
         name: isZh ? "准备应急说辞" : "Prepare Emergency Excuses",
-        text: isZh ? "准备得体的理由，必要时可以提前离开" : "Prepare appropriate reasons to leave early if necessary"
+        text: isZh
+          ? "准备得体的理由，必要时可以提前离开"
+          : "Prepare appropriate reasons to leave early if necessary",
       },
       {
         name: isZh ? "保持轻松心态" : "Maintain Relaxed Mindset",
-        text: isZh ? "不要过度紧张，适当休息和调整" : "Don't be overly nervous, rest and adjust appropriately"
+        text: isZh
+          ? "不要过度紧张，适当休息和调整"
+          : "Don't be overly nervous, rest and adjust appropriately",
       },
     ],
     tools: [
@@ -509,336 +522,344 @@ export default async function SocialScenarioPage({ params }: Props) {
         data-page="scenario-social"
       >
         {/* Breadcrumb */}
-      <Breadcrumb
-        items={[
-          { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
-          { label: breadcrumbSocialTitle },
-        ]}
-      />
+        <Breadcrumb
+          items={[
+            { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
+            { label: breadcrumbSocialTitle },
+          ]}
+        />
 
-      {/* Page Header */}
-      <header className="text-center">
-        <div className="w-16 h-16 bg-pink-50 text-pink-600 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Users className="w-8 h-8" />
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
-          {t("scenarios.social.title")}
-        </h1>
-        <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-          {t("scenarios.social.description")}
-        </p>
-      </header>
+        {/* Page Header */}
+        <header className="text-center">
+          <div className="w-16 h-16 bg-pink-50 text-pink-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Users className="w-8 h-8" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
+            {t("scenarios.social.title")}
+          </h1>
+          <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+            {t("scenarios.social.description")}
+          </p>
+        </header>
 
-      {/* Date Strategies Section */}
-      <section className="bg-gradient-to-br from-pink-50 to-neutral-50 p-6 md:p-8 rounded-xl">
-        <div className="flex items-center mb-6">
-          <Heart className="w-6 h-6 text-pink-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh" ? "约会应急策略" : "Date Emergency Strategies"}
-          </h2>
-        </div>
+        {/* Date Strategies Section */}
+        <section className="bg-gradient-to-br from-pink-50 to-neutral-50 p-6 md:p-8 rounded-xl">
+          <div className="flex items-center mb-6">
+            <Heart className="w-6 h-6 text-pink-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh" ? "约会应急策略" : "Date Emergency Strategies"}
+            </h2>
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {dateStrategies.map((phase, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mr-3">
-                  {phase.icon}
+          <div className="grid md:grid-cols-3 gap-6">
+            {dateStrategies.map((phase, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mr-3">
+                    {phase.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold text-neutral-800">
+                    {phase.phase}
+                  </h3>
                 </div>
-                <h3 className="text-lg font-semibold text-neutral-800">
-                  {phase.phase}
-                </h3>
-              </div>
 
-              <ul className="space-y-3">
-                {phase.strategies.map((strategy, strategyIndex) => (
-                  <li key={strategyIndex} className="flex items-start">
-                    <CheckCircle className="w-4 h-4 text-pink-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-neutral-700">{strategy}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Party Food Guide Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Wine className="w-6 h-6 text-pink-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh" ? "聚会饮食智能选择" : "Smart Party Food Choices"}
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-green-800 mb-4">
-              {locale === "zh" ? "推荐选择" : "Recommended Choices"}
-            </h3>
-            {partyFoodGuide.recommended.map((category, index) => (
-              <div key={index} className="bg-green-50 p-6 rounded-lg">
-                <h4 className="font-medium text-green-800 mb-3">
-                  {category.category}
-                </h4>
-                <ul className="space-y-2">
-                  {category.items.map((item, itemIndex) => (
-                    <li
-                      key={itemIndex}
-                      className="flex items-start text-sm text-green-700"
-                    >
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                      {item}
+                <ul className="space-y-3">
+                  {phase.strategies.map((strategy, strategyIndex) => (
+                    <li key={strategyIndex} className="flex items-start">
+                      <CheckCircle className="w-4 h-4 text-pink-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-neutral-700">
+                        {strategy}
+                      </span>
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
           </div>
+        </section>
 
-          <div className="space-y-6">
-            <h3 className="text-lg font-semibold text-red-800 mb-4">
-              {locale === "zh" ? "避免选择" : "Avoid These Choices"}
-            </h3>
-            {partyFoodGuide.avoid.map((category, index) => (
-              <div key={index} className="bg-red-50 p-6 rounded-lg">
-                <h4 className="font-medium text-red-800 mb-3">
-                  {category.category}
-                </h4>
-                <ul className="space-y-2">
-                  {category.items.map((item, itemIndex) => (
-                    <li
-                      key={itemIndex}
-                      className="flex items-start text-sm text-red-700"
-                    >
-                      <AlertTriangle className="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+        {/* Party Food Guide Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Wine className="w-6 h-6 text-pink-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "聚会饮食智能选择"
+                : "Smart Party Food Choices"}
+            </h2>
           </div>
-        </div>
-      </section>
 
-      {/* Alcohol Management Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Shield className="w-6 h-6 text-pink-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh" ? "酒精应对手册" : "Alcohol Management Handbook"}
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {alcoholStrategies.map((strategy, index) => (
-            <div key={index} className="card">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg font-semibold text-neutral-800">
-                  {strategy.strategy}
-                </h3>
-                <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
-                  {locale === "zh" ? "成功率" : "Success Rate"}{" "}
-                  {strategy.effectiveness}
-                </span>
-              </div>
-
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <p className="text-blue-800 font-medium mb-2">
-                  {locale === "zh" ? "话术示例：" : "Script Example:"}
-                </p>
-                <p className="text-blue-700 italic">
-                  &ldquo;{strategy.excuse}&rdquo;
-                </p>
-              </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <h3 className="text-lg font-semibold text-green-800 mb-4">
+                {locale === "zh" ? "推荐选择" : "Recommended Choices"}
+              </h3>
+              {partyFoodGuide.recommended.map((category, index) => (
+                <div key={index} className="bg-green-50 p-6 rounded-lg">
+                  <h4 className="font-medium text-green-800 mb-3">
+                    {category.category}
+                  </h4>
+                  <ul className="space-y-2">
+                    {category.items.map((item, itemIndex) => (
+                      <li
+                        key={itemIndex}
+                        className="flex items-start text-sm text-green-700"
+                      >
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Social Communication Templates Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <MessageCircle className="w-6 h-6 text-pink-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "社交沟通助手"
-              : "Social Communication Assistant"}
-          </h2>
-        </div>
-        <p className="text-neutral-600 mb-8">
-          {locale === "zh"
-            ? "经期不适时，如何与不同的人进行有效沟通，获得理解和支持。"
-            : "How to communicate effectively with different people during menstrual discomfort to gain understanding and support."}
-        </p>
+            <div className="space-y-6">
+              <h3 className="text-lg font-semibold text-red-800 mb-4">
+                {locale === "zh" ? "避免选择" : "Avoid These Choices"}
+              </h3>
+              {partyFoodGuide.avoid.map((category, index) => (
+                <div key={index} className="bg-red-50 p-6 rounded-lg">
+                  <h4 className="font-medium text-red-800 mb-3">
+                    {category.category}
+                  </h4>
+                  <ul className="space-y-2">
+                    {category.items.map((item, itemIndex) => (
+                      <li
+                        key={itemIndex}
+                        className="flex items-start text-sm text-red-700"
+                      >
+                        <AlertTriangle className="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <div className="space-y-8">
-          {socialCommunicationTemplates.map((category, index) => (
-            <div
-              key={index}
-              className="bg-gradient-to-br from-pink-50 to-neutral-50 p-6 rounded-xl"
-            >
-              <div className="flex items-center mb-4">
-                <span className="text-2xl mr-3">{category.icon}</span>
-                <h3 className="text-xl font-semibold text-neutral-800">
-                  {category.scenario}
-                </h3>
-              </div>
+        {/* Alcohol Management Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Shield className="w-6 h-6 text-pink-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh" ? "酒精应对手册" : "Alcohol Management Handbook"}
+            </h2>
+          </div>
 
-              {/* User Quote */}
-              <div className="bg-white p-4 rounded-lg mb-6 border-l-4 border-pink-300">
-                <div className="flex items-start">
-                  <Quote className="w-5 h-5 text-pink-500 mr-2 mt-0.5 flex-shrink-0" />
-                  <p className="text-neutral-700 italic text-sm leading-relaxed">
-                    {category.userQuote}
+          <div className="grid md:grid-cols-2 gap-6">
+            {alcoholStrategies.map((strategy, index) => (
+              <div key={index} className="card">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-lg font-semibold text-neutral-800">
+                    {strategy.strategy}
+                  </h3>
+                  <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                    {locale === "zh" ? "成功率" : "Success Rate"}{" "}
+                    {strategy.effectiveness}
+                  </span>
+                </div>
+
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <p className="text-blue-800 font-medium mb-2">
+                    {locale === "zh" ? "话术示例：" : "Script Example:"}
+                  </p>
+                  <p className="text-blue-700 italic">
+                    &ldquo;{strategy.excuse}&rdquo;
                   </p>
                 </div>
-                <p className="text-xs text-neutral-500 mt-2">
-                  {locale === "zh"
-                    ? "—— 来自用户语录"
-                    : "—— From user testimonials"}
-                </p>
               </div>
+            ))}
+          </div>
+        </section>
 
-              <div className="grid md:grid-cols-1 gap-4">
-                {category.templates.map((template, templateIndex) => (
-                  <div
-                    key={templateIndex}
-                    className="bg-white p-6 rounded-lg shadow-sm"
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-medium text-neutral-800">
-                        {template.situation}
-                      </h4>
-                      <span className="bg-pink-100 text-pink-800 text-xs font-medium px-2 py-1 rounded-full">
-                        {template.tone}
-                      </span>
-                    </div>
+        {/* Social Communication Templates Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <MessageCircle className="w-6 h-6 text-pink-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "社交沟通助手"
+                : "Social Communication Assistant"}
+            </h2>
+          </div>
+          <p className="text-neutral-600 mb-8">
+            {locale === "zh"
+              ? "经期不适时，如何与不同的人进行有效沟通，获得理解和支持。"
+              : "How to communicate effectively with different people during menstrual discomfort to gain understanding and support."}
+          </p>
 
-                    <div className="bg-pink-50 p-4 rounded-lg mb-4">
-                      <p className="text-pink-800 leading-relaxed">
-                        {template.template}
-                      </p>
-                    </div>
+          <div className="space-y-8">
+            {socialCommunicationTemplates.map((category, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-pink-50 to-neutral-50 p-6 rounded-xl"
+              >
+                <div className="flex items-center mb-4">
+                  <span className="text-2xl mr-3">{category.icon}</span>
+                  <h3 className="text-xl font-semibold text-neutral-800">
+                    {category.scenario}
+                  </h3>
+                </div>
 
-                    <div className="inline-flex items-center text-pink-600 text-sm font-medium">
-                      <Copy className="w-4 h-4 mr-1" />
-                      <span className="text-xs text-neutral-500">
-                        {locale === "zh" ? "可复制使用" : "Copy to use"}
-                      </span>
-                    </div>
+                {/* User Quote */}
+                <div className="bg-white p-4 rounded-lg mb-6 border-l-4 border-pink-300">
+                  <div className="flex items-start">
+                    <Quote className="w-5 h-5 text-pink-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <p className="text-neutral-700 italic text-sm leading-relaxed">
+                      {category.userQuote}
+                    </p>
                   </div>
-                ))}
+                  <p className="text-xs text-neutral-500 mt-2">
+                    {locale === "zh"
+                      ? "—— 来自用户语录"
+                      : "—— From user testimonials"}
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-1 gap-4">
+                  {category.templates.map((template, templateIndex) => (
+                    <div
+                      key={templateIndex}
+                      className="bg-white p-6 rounded-lg shadow-sm"
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="font-medium text-neutral-800">
+                          {template.situation}
+                        </h4>
+                        <span className="bg-pink-100 text-pink-800 text-xs font-medium px-2 py-1 rounded-full">
+                          {template.tone}
+                        </span>
+                      </div>
+
+                      <div className="bg-pink-50 p-4 rounded-lg mb-4">
+                        <p className="text-pink-800 leading-relaxed">
+                          {template.template}
+                        </p>
+                      </div>
+
+                      <div className="inline-flex items-center text-pink-600 text-sm font-medium">
+                        <Copy className="w-4 h-4 mr-1" />
+                        <span className="text-xs text-neutral-500">
+                          {locale === "zh" ? "可复制使用" : "Copy to use"}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
+            ))}
+          </div>
+
+          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+            <h4 className="font-semibold text-blue-800 mb-2">
+              {locale === "zh" ? "使用提示" : "Usage Tips"}
+            </h4>
+            <ul className="text-blue-700 text-sm space-y-1">
+              <li>
+                •{" "}
+                {locale === "zh"
+                  ? "根据关系亲密度选择合适的沟通方式"
+                  : "Choose appropriate communication style based on relationship intimacy"}
+              </li>
+              <li>
+                •{" "}
+                {locale === "zh"
+                  ? "诚实表达需求，但无需过度解释"
+                  : "Express needs honestly without over-explaining"}
+              </li>
+              <li>
+                •{" "}
+                {locale === "zh"
+                  ? "提前准备话术，避免临时紧张"
+                  : "Prepare scripts in advance to avoid last-minute nervousness"}
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* 相关推荐区域 */}
+        <section className="bg-gradient-to-br from-pink-50 to-blue-50 mt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="space-y-12">
+              {/* 相关工具区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "相关工具" : "Related Tools"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.relatedTools.map((tool) => (
+                    <RelatedToolCard
+                      key={tool.id}
+                      tool={tool}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 相关文章区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "相关文章" : "Related Articles"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.relatedArticles.map((article) => (
+                    <RelatedArticleCard
+                      key={article.id}
+                      article={article}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 场景解决方案区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "场景解决方案" : "Scenario Solutions"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.scenarioSolutions.map((solution) => (
+                    <ScenarioSolutionCard
+                      key={solution.id}
+                      solution={solution}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
             </div>
-          ))}
-        </div>
-
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-          <h4 className="font-semibold text-blue-800 mb-2">
-            {locale === "zh" ? "使用提示" : "Usage Tips"}
-          </h4>
-          <ul className="text-blue-700 text-sm space-y-1">
-            <li>
-              •{" "}
-              {locale === "zh"
-                ? "根据关系亲密度选择合适的沟通方式"
-                : "Choose appropriate communication style based on relationship intimacy"}
-            </li>
-            <li>
-              •{" "}
-              {locale === "zh"
-                ? "诚实表达需求，但无需过度解释"
-                : "Express needs honestly without over-explaining"}
-            </li>
-            <li>
-              •{" "}
-              {locale === "zh"
-                ? "提前准备话术，避免临时紧张"
-                : "Prepare scripts in advance to avoid last-minute nervousness"}
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      {/* 相关推荐区域 */}
-      <section className="bg-gradient-to-br from-pink-50 to-blue-50 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="space-y-12">
-            {/* 相关工具区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关工具" : "Related Tools"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.relatedTools.map((tool) => (
-                  <RelatedToolCard key={tool.id} tool={tool} locale={locale} />
-                ))}
-              </div>
-            </section>
-
-            {/* 相关文章区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关文章" : "Related Articles"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.relatedArticles.map((article) => (
-                  <RelatedArticleCard
-                    key={article.id}
-                    article={article}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </section>
-
-            {/* 场景解决方案区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "场景解决方案" : "Scenario Solutions"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.scenarioSolutions.map((solution) => (
-                  <ScenarioSolutionCard
-                    key={solution.id}
-                    solution={solution}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </section>
           </div>
+        </section>
+
+        {/* Back to Overview */}
+        <div className="text-center">
+          <Link
+            href={`/${locale}/scenario-solutions`}
+            className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t("scenarios.social.backToOverview")}
+          </Link>
         </div>
-      </section>
 
-      {/* Back to Overview */}
-      <div className="text-center">
-        <Link
-          href={`/${locale}/scenario-solutions`}
-          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          {t("scenarios.social.backToOverview")}
-        </Link>
-      </div>
-
-      {/* Medical Disclaimer */}
-      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
-        <div className="flex items-start">
-          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
-          <div>
-            <h3 className="font-semibold text-orange-800 mb-2">
-              {t("scenarios.social.disclaimer.title")}
-            </h3>
-            <p className="text-orange-700 text-sm leading-relaxed">
-              {t("scenarios.social.disclaimer.content")}
-            </p>
+        {/* Medical Disclaimer */}
+        <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
+          <div className="flex items-start">
+            <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
+            <div>
+              <h3 className="font-semibold text-orange-800 mb-2">
+                {t("scenarios.social.disclaimer.title")}
+              </h3>
+              <p className="text-orange-700 text-sm leading-relaxed">
+                {t("scenarios.social.disclaimer.content")}
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       </div>
     </>
   );

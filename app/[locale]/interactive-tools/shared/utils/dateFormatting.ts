@@ -1,6 +1,5 @@
 import {
   format,
-  formatDistanceToNow,
   isToday,
   isYesterday,
   differenceInDays,
@@ -8,6 +7,7 @@ import {
   differenceInMonths,
 } from "date-fns";
 import { enUS, zhCN } from "date-fns/locale";
+import { logError } from "@/lib/debug-logger";
 
 // 日期时间格式常量（修复缺失的DATE_TIME_FORMATS）
 const DATE_TIME_FORMATS = {
@@ -65,7 +65,7 @@ export function formatDate(
   try {
     return format(dateObj, formatString, { locale: dateFnsLocale });
   } catch (error) {
-    console.error("Date formatting error:", error);
+    logError("Date formatting error", error, "dateFormatting");
     return dateObj.toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US");
   }
 }
@@ -123,7 +123,7 @@ export function formatMedicalDate(
   try {
     return format(dateObj, formatString, { locale: dateFnsLocale });
   } catch (error) {
-    console.error("Medical date formatting error:", error);
+    logError("Medical date formatting error", error, "dateFormatting");
     return dateObj.toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US");
   }
 }
@@ -210,7 +210,7 @@ export function parseDate(
     const parsed = new Date(dateString);
     return isNaN(parsed.getTime()) ? null : parsed;
   } catch (error) {
-    console.error("Date parsing error:", error);
+    logError("Date parsing error", error, "dateFormatting");
     return null;
   }
 }

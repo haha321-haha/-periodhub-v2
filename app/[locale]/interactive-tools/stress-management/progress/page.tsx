@@ -90,27 +90,6 @@ export default async function ProgressTrackingPage({
     },
   ];
 
-  const timePeriods = [
-    {
-      key: "today",
-      title: t("progress.today"),
-      icon: "📅",
-      color: "from-blue-500 to-blue-600",
-    },
-    {
-      key: "week",
-      title: t("progress.week"),
-      icon: "📈",
-      color: "from-green-500 to-green-600",
-    },
-    {
-      key: "month",
-      title: t("progress.month"),
-      icon: "📊",
-      color: "from-purple-500 to-purple-600",
-    },
-  ];
-
   return (
     <>
       <StructuredData

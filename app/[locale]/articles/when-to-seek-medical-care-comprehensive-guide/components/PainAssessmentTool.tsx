@@ -4,8 +4,7 @@ import { useState, useCallback, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { Activity } from "lucide-react";
 import { usePainAssessment } from "../hooks/usePainAssessment";
-import { medicalCareGuideStorage } from "../utils/storageManager";
-import { PAIN_SCALE_DATA, getPainAdvice } from "../utils/medicalCareData";
+import { getPainAdvice } from "../utils/medicalCareData";
 import { PainAssessmentLogic } from "../utils/assessmentLogic";
 import styles from "../styles/PainAssessmentTool.module.css";
 import type {
@@ -19,13 +18,8 @@ export default function PainAssessmentTool({
   initialLevel = 0,
 }: PainAssessmentToolProps) {
   const t = useTranslations("medicalCareGuide");
-  const {
-    painLevel,
-    currentAdvice,
-    assessmentHistory,
-    updatePainLevel,
-    saveAssessment,
-  } = usePainAssessment();
+  const { painLevel, assessmentHistory, updatePainLevel, saveAssessment } =
+    usePainAssessment();
 
   const [isInteracted, setIsInteracted] = useState(false);
 

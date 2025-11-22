@@ -23,7 +23,7 @@ import {
 } from "../../shared/constants";
 import { formatDateShort } from "../../shared/utils";
 import LoadingSpinner from "../../shared/components/LoadingSpinner";
-import { logError } from "../../../../../lib/debug-logger";
+import { logError } from "@/lib/debug-logger";
 
 interface PainEntryFormProps {
   initialData?: Partial<PainEntryFormData>;

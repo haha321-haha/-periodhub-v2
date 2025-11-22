@@ -3,13 +3,25 @@
  * 支持断点续测、自动保存、数据恢复等功能
  */
 
-import {
-  QuizStage,
-  StageProgress,
-  QuizAnswer,
-  QuizResult,
-} from "../types/quiz";
-import { DataStorage, DataValidation } from "../types/data";
+import { QuizStage, StageProgress, QuizResult } from "../types/quiz";
+import { logError, logInfo, logWarn } from "@/lib/debug-logger";
+
+interface ProgressData {
+  stageProgress: Record<QuizStage, StageProgress>;
+  overallResult?: QuizResult | null;
+  userPreferences?: Record<string, unknown>;
+  lastSaved?: string | null;
+  version?: string;
+}
+
+interface ProgressStats {
+  totalStages: number;
+  completedStages: number;
+  totalQuestions: number;
+  answeredQuestions: number;
+  completionRate: number;
+  lastSaved: string | null;
+}
 
 // 进度管理器类
 export class ProgressManager {
@@ -54,15 +66,15 @@ export class ProgressManager {
       const currentProgress = this.getCurrentProgress();
       if (currentProgress && this.hasUnsavedChanges(currentProgress)) {
         this.saveProgress(currentProgress);
-        console.log("🔄 自动保存进度成功");
+        logInfo("🔄 自动保存进度成功", undefined, "ProgressManager/autoSave");
       }
     } catch (error) {
-      console.error("❌ 自动保存失败:", error);
+      logError("❌ 自动保存失败", error, "ProgressManager/autoSave");
     }
   }
 
   // 检查是否有未保存的更改
-  private hasUnsavedChanges(progress: any): boolean {
+  private hasUnsavedChanges(progress: ProgressData): boolean {
     const savedProgress = this.loadProgress();
     if (!savedProgress) return true;
 
@@ -74,25 +86,25 @@ export class ProgressManager {
   }
 
   // 保存进度
-  public saveProgress(progress: any): boolean {
+  public saveProgress(progress: ProgressData): boolean {
     try {
       const dataToSave = {
         ...progress,
-        lastSaved: new Date(),
+        lastSaved: new Date().toISOString(),
         version: "1.0.0",
       };
 
       localStorage.setItem(this.storageKey, JSON.stringify(dataToSave));
-      console.log("💾 进度保存成功");
+      logInfo("💾 进度保存成功", undefined, "ProgressManager/saveProgress");
       return true;
     } catch (error) {
-      console.error("❌ 进度保存失败:", error);
+      logError("❌ 进度保存失败", error, "ProgressManager/saveProgress");
       return false;
     }
   }
 
   // 加载进度
-  public loadProgress(): any | null {
+  public loadProgress(): ProgressData | null {
     try {
       const savedData = localStorage.getItem(this.storageKey);
       if (!savedData) return null;
@@ -101,23 +113,32 @@ export class ProgressManager {
 
       // 验证数据完整性
       if (this.validateProgressData(parsedData)) {
-        console.log("📂 进度加载成功");
+        logInfo("📂 进度加载成功", undefined, "ProgressManager/loadProgress");
         return parsedData;
       } else {
-        console.warn("⚠️ 进度数据验证失败，使用默认值");
+        logWarn(
+          "⚠️ 进度数据验证失败，使用默认值",
+          parsedData,
+          "ProgressManager/loadProgress",
+        );
         return null;
       }
     } catch (error) {
-      console.error("❌ 进度加载失败:", error);
+      logError("❌ 进度加载失败", error, "ProgressManager/loadProgress");
       return null;
     }
   }
 
   // 验证进度数据
-  private validateProgressData(data: any): boolean {
+  private validateProgressData(data: unknown): data is ProgressData {
     try {
       // 检查必要字段
-      if (!data.stageProgress || typeof data.stageProgress !== "object") {
+      if (
+        !data ||
+        typeof data !== "object" ||
+        !("stageProgress" in data) ||
+        typeof (data as Record<string, unknown>).stageProgress !== "object"
+      ) {
         return false;
       }
 
@@ -139,20 +160,24 @@ export class ProgressManager {
 
       return true;
     } catch (error) {
-      console.error("❌ 数据验证失败:", error);
+      logError(
+        "❌ 数据验证失败",
+        error,
+        "ProgressManager/validateProgressData",
+      );
       return false;
     }
   }
 
   // 获取当前进度
-  public getCurrentProgress(): any {
+  public getCurrentProgress(): ProgressData | null {
     // 这个方法需要从store中获取当前状态
     // 由于我们不能直接访问store，这里返回一个占位符
     return null;
   }
 
   // 恢复进度到store
-  public restoreProgress(store: any): boolean {
+  public restoreProgress(store: unknown): boolean {
     try {
       const savedProgress = this.loadProgress();
       if (!savedProgress) return false;
@@ -160,13 +185,17 @@ export class ProgressManager {
       // 恢复阶段进度
       if (savedProgress.stageProgress) {
         // 注意：这里需要调用具体的store action方法，而不是直接使用setState
-        console.warn("Progress restoration not implemented for Zustand store");
+        logWarn(
+          "Progress restoration not implemented for Zustand store",
+          { store },
+          "ProgressManager/restoreProgress",
+        );
       }
 
-      console.log("🔄 进度恢复成功");
+      logInfo("🔄 进度恢复成功", undefined, "ProgressManager/restoreProgress");
       return true;
     } catch (error) {
-      console.error("❌ 进度恢复失败:", error);
+      logError("❌ 进度恢复失败", error, "ProgressManager/restoreProgress");
       return false;
     }
   }
@@ -175,10 +204,10 @@ export class ProgressManager {
   public clearProgress(): boolean {
     try {
       localStorage.removeItem(this.storageKey);
-      console.log("🗑️ 进度清除成功");
+      logInfo("🗑️ 进度清除成功", undefined, "ProgressManager/clearProgress");
       return true;
     } catch (error) {
-      console.error("❌ 进度清除失败:", error);
+      logError("❌ 进度清除失败", error, "ProgressManager/clearProgress");
       return false;
     }
   }
@@ -198,7 +227,7 @@ export class ProgressManager {
 
       return JSON.stringify(exportData, null, 2);
     } catch (error) {
-      console.error("❌ 进度导出失败:", error);
+      logError("❌ 进度导出失败", error, "ProgressManager/exportProgress");
       return null;
     }
   }
@@ -215,16 +244,16 @@ export class ProgressManager {
 
       // 保存导入的数据
       this.saveProgress(importedData);
-      console.log("📥 进度导入成功");
+      logInfo("📥 进度导入成功", undefined, "ProgressManager/importProgress");
       return true;
     } catch (error) {
-      console.error("❌ 进度导入失败:", error);
+      logError("❌ 进度导入失败", error, "ProgressManager/importProgress");
       return false;
     }
   }
 
   // 获取进度统计
-  public getProgressStats(): any {
+  public getProgressStats(): ProgressStats | null {
     try {
       const progress = this.loadProgress();
       if (!progress) return null;
@@ -258,7 +287,11 @@ export class ProgressManager {
 
       return stats;
     } catch (error) {
-      console.error("❌ 获取进度统计失败:", error);
+      logError(
+        "❌ 获取进度统计失败",
+        error,
+        "ProgressManager/getProgressStats",
+      );
       return null;
     }
   }
@@ -285,7 +318,11 @@ export class ProgressManager {
 
       return null;
     } catch (error) {
-      console.error("❌ 检查断点续测失败:", error);
+      logError(
+        "❌ 检查断点续测失败",
+        error,
+        "ProgressManager/checkResumePoint",
+      );
       return null;
     }
   }
@@ -304,7 +341,7 @@ export class ProgressManager {
 
       return JSON.stringify(snapshot, null, 2);
     } catch (error) {
-      console.error("❌ 创建进度快照失败:", error);
+      logError("❌ 创建进度快照失败", error, "ProgressManager/createSnapshot");
       return null;
     }
   }
@@ -321,10 +358,14 @@ export class ProgressManager {
 
       // 恢复快照
       this.saveProgress(snapshot);
-      console.log("🔄 进度快照恢复成功");
+      logInfo(
+        "🔄 进度快照恢复成功",
+        undefined,
+        "ProgressManager/restoreSnapshot",
+      );
       return true;
     } catch (error) {
-      console.error("❌ 进度快照恢复失败:", error);
+      logError("❌ 进度快照恢复失败", error, "ProgressManager/restoreSnapshot");
       return false;
     }
   }

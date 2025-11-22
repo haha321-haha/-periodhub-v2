@@ -2,26 +2,30 @@
 // Provides data sampling, virtualization, and rendering optimizations
 
 import {
-  PainRecord,
   TrendPoint,
   ChartOptimizationOptions,
   ChartPerformanceMetrics,
   PainTrackerError,
 } from "../../../types/pain-tracker";
 
+type ChartDataPoint = Record<string, unknown> & { painLevel?: number };
+
 export interface ChartPerformanceOptimizerInterface {
   optimizeDataForChart(
-    data: any[],
+    data: ChartDataPoint[],
     chartType: string,
     options?: ChartOptimizationOptions,
-  ): Promise<any[]>;
+  ): Promise<ChartDataPoint[]>;
   sampleLargeDataset(
-    data: any[],
+    data: ChartDataPoint[],
     maxPoints: number,
     method?: "uniform" | "adaptive" | "importance",
-  ): any[];
+  ): ChartDataPoint[];
   createDataBuckets(data: TrendPoint[], bucketSize: number): TrendPoint[];
-  optimizeChartOptions(baseOptions: any, dataSize: number): any;
+  optimizeChartOptions(
+    baseOptions: Record<string, unknown>,
+    dataSize: number,
+  ): Record<string, unknown>;
   measureChartPerformance(renderFunction: () => void): ChartPerformanceMetrics;
   shouldUseVirtualization(dataSize: number, chartType: string): boolean;
 }
@@ -49,10 +53,10 @@ export class ChartPerformanceOptimizer
    * Optimize data for chart rendering based on size and chart type
    */
   async optimizeDataForChart(
-    data: any[],
+    data: ChartDataPoint[],
     chartType: string,
     options?: ChartOptimizationOptions,
-  ): Promise<any[]> {
+  ): Promise<ChartDataPoint[]> {
     try {
       const dataSize = data.length;
       const opts = {
@@ -69,7 +73,7 @@ export class ChartPerformanceOptimizer
 
       // Apply appropriate optimization strategy
       if (dataSize <= this.performanceThresholds.medium) {
-        return this.lightOptimization(data, chartType);
+        return this.lightOptimization(data);
       } else if (dataSize <= this.performanceThresholds.large) {
         return this.mediumOptimization(data, chartType, opts);
       } else {
@@ -88,10 +92,10 @@ export class ChartPerformanceOptimizer
    * Sample large datasets using different methods
    */
   sampleLargeDataset(
-    data: any[],
+    data: ChartDataPoint[],
     maxPoints: number,
     method: "uniform" | "adaptive" | "importance" = "adaptive",
-  ): any[] {
+  ): ChartDataPoint[] {
     if (data.length <= maxPoints) {
       return data;
     }
@@ -133,7 +137,10 @@ export class ChartPerformanceOptimizer
   /**
    * Optimize chart options based on data size
    */
-  optimizeChartOptions(baseOptions: any, dataSize: number): any {
+  optimizeChartOptions(
+    baseOptions: Record<string, unknown>,
+    dataSize: number,
+  ): Record<string, unknown> {
     const optimizedOptions = { ...baseOptions };
 
     // Disable animations for large datasets
@@ -191,15 +198,18 @@ export class ChartPerformanceOptimizer
 
     // Disable point rendering for very large line charts
     if (dataSize > this.performanceThresholds.large) {
-      if (optimizedOptions.datasets) {
-        optimizedOptions.datasets = optimizedOptions.datasets.map(
-          (dataset: any) => ({
-            ...dataset,
-            pointRadius: 0,
-            pointHoverRadius: 3,
-            pointHitRadius: 5,
-          }),
-        );
+      if (
+        optimizedOptions.datasets &&
+        Array.isArray(optimizedOptions.datasets)
+      ) {
+        optimizedOptions.datasets = (
+          optimizedOptions.datasets as Record<string, unknown>[]
+        ).map((dataset: Record<string, unknown>) => ({
+          ...dataset,
+          pointRadius: 0,
+          pointHoverRadius: 3,
+          pointHitRadius: 5,
+        }));
       }
     }
 
@@ -211,12 +221,16 @@ export class ChartPerformanceOptimizer
    */
   measureChartPerformance(renderFunction: () => void): ChartPerformanceMetrics {
     const startTime = performance.now();
-    const startMemory = (performance as any).memory?.usedJSHeapSize || 0;
+    const startMemory =
+      (performance as Performance & { memory?: { usedJSHeapSize?: number } })
+        .memory?.usedJSHeapSize || 0;
 
     renderFunction();
 
     const endTime = performance.now();
-    const endMemory = (performance as any).memory?.usedJSHeapSize || 0;
+    const endMemory =
+      (performance as Performance & { memory?: { usedJSHeapSize?: number } })
+        .memory?.usedJSHeapSize || 0;
 
     return {
       renderTime: endTime - startTime,
@@ -280,16 +294,16 @@ export class ChartPerformanceOptimizer
     );
   }
 
-  private lightOptimization(data: any[], chartType: string): any[] {
+  private lightOptimization(data: ChartDataPoint[]): ChartDataPoint[] {
     // For medium datasets, just remove unnecessary properties
     return data.map((point) => this.cleanDataPoint(point));
   }
 
   private mediumOptimization(
-    data: any[],
+    data: ChartDataPoint[],
     chartType: string,
     options: ChartOptimizationOptions,
-  ): any[] {
+  ): ChartDataPoint[] {
     // Apply sampling if needed
     const maxPoints =
       options.maxPoints || this.getMaxPointsForChartType(chartType);
@@ -307,10 +321,10 @@ export class ChartPerformanceOptimizer
   }
 
   private heavyOptimization(
-    data: any[],
+    data: ChartDataPoint[],
     chartType: string,
     options: ChartOptimizationOptions,
-  ): any[] {
+  ): ChartDataPoint[] {
     const maxPoints =
       options.maxPoints || this.getMaxPointsForChartType(chartType);
 
@@ -336,9 +350,12 @@ export class ChartPerformanceOptimizer
     return optimizedData;
   }
 
-  private uniformSampling(data: any[], maxPoints: number): any[] {
+  private uniformSampling(
+    data: ChartDataPoint[],
+    maxPoints: number,
+  ): ChartDataPoint[] {
     const step = Math.ceil(data.length / maxPoints);
-    const sampled: any[] = [];
+    const sampled: ChartDataPoint[] = [];
 
     for (let i = 0; i < data.length; i += step) {
       sampled.push(data[i]);
@@ -352,10 +369,13 @@ export class ChartPerformanceOptimizer
     return sampled;
   }
 
-  private adaptiveSampling(data: any[], maxPoints: number): any[] {
+  private adaptiveSampling(
+    data: ChartDataPoint[],
+    maxPoints: number,
+  ): ChartDataPoint[] {
     if (data.length <= maxPoints) return data;
 
-    const sampled: any[] = [];
+    const sampled: ChartDataPoint[] = [];
     const step = data.length / maxPoints;
 
     // Always include first point
@@ -381,7 +401,10 @@ export class ChartPerformanceOptimizer
     return sampled;
   }
 
-  private importanceSampling(data: any[], maxPoints: number): any[] {
+  private importanceSampling(
+    data: ChartDataPoint[],
+    maxPoints: number,
+  ): ChartDataPoint[] {
     if (data.length <= maxPoints) return data;
 
     // Calculate importance scores for each point
@@ -401,7 +424,7 @@ export class ChartPerformanceOptimizer
     return importantPoints.map((item) => item.point);
   }
 
-  private shouldIncludePoint(data: any[], index: number): boolean {
+  private shouldIncludePoint(data: ChartDataPoint[], index: number): boolean {
     if (index === 0 || index === data.length - 1) return true;
 
     const current = data[index];
@@ -409,7 +432,11 @@ export class ChartPerformanceOptimizer
     const next = data[index + 1];
 
     // Include points with significant pain level changes
-    if (current.painLevel && prev.painLevel && next.painLevel) {
+    if (
+      typeof current.painLevel === "number" &&
+      typeof prev.painLevel === "number" &&
+      typeof next.painLevel === "number"
+    ) {
       const prevDiff = Math.abs(current.painLevel - prev.painLevel);
       const nextDiff = Math.abs(next.painLevel - current.painLevel);
       return prevDiff > 1 || nextDiff > 1;
@@ -418,13 +445,16 @@ export class ChartPerformanceOptimizer
     return false;
   }
 
-  private calculateImportanceScore(data: any[], index: number): number {
+  private calculateImportanceScore(
+    data: ChartDataPoint[],
+    index: number,
+  ): number {
     let score = 0;
 
     const point = data[index];
 
     // Higher score for extreme pain levels
-    if (point.painLevel) {
+    if (typeof point.painLevel === "number") {
       if (point.painLevel >= 8 || point.painLevel <= 2) {
         score += 3;
       } else if (point.painLevel >= 6 || point.painLevel <= 4) {
@@ -437,7 +467,11 @@ export class ChartPerformanceOptimizer
       const prev = data[index - 1];
       const next = data[index + 1];
 
-      if (point.painLevel && prev.painLevel && next.painLevel) {
+      if (
+        typeof point.painLevel === "number" &&
+        typeof prev.painLevel === "number" &&
+        typeof next.painLevel === "number"
+      ) {
         const change =
           Math.abs(point.painLevel - prev.painLevel) +
           Math.abs(next.painLevel - point.painLevel);
@@ -470,9 +504,9 @@ export class ChartPerformanceOptimizer
     } as TrendPoint & { _aggregated: boolean; _originalCount: number };
   }
 
-  private cleanDataPoint(point: any): any {
+  private cleanDataPoint(point: ChartDataPoint): ChartDataPoint {
     // Remove unnecessary properties to reduce memory usage
-    const cleaned = { ...point };
+    const cleaned: ChartDataPoint = { ...point };
 
     // Remove internal properties
     delete cleaned._id;
@@ -480,14 +514,22 @@ export class ChartPerformanceOptimizer
     delete cleaned.metadata;
 
     // Round numeric values to reduce precision
-    if (cleaned.painLevel) {
+    if (typeof cleaned.painLevel === "number") {
       cleaned.painLevel = Math.round(cleaned.painLevel * 10) / 10;
     }
 
     return cleaned;
   }
 
-  private createOptimizedTooltip(context: any): void {
+  private createOptimizedTooltip(context: {
+    tooltip: {
+      opacity: number;
+      dataPoints: Array<{ parsed: { y: number } }>;
+      caretX: number;
+      caretY: number;
+    };
+    chart: { canvas: { offsetLeft: number; offsetTop: number } };
+  }): void {
     // Lightweight tooltip implementation for large datasets
     const tooltipEl = document.getElementById("chartjs-tooltip");
     if (!tooltipEl) return;

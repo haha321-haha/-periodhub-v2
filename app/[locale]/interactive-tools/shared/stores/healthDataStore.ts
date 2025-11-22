@@ -2,6 +2,7 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { logError } from "@/lib/debug-logger";
 
 // 数据类型定义
 export interface PainEntry {
@@ -238,7 +239,7 @@ export const useHealthDataStore = create<HealthDataState>()(
           });
           return true;
         } catch (error) {
-          console.error("Failed to import data:", error);
+          logError("Failed to import data", error, "healthDataStore");
           return false;
         }
       },

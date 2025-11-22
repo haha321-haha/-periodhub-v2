@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import BreathingExercise from "@/components/BreathingExercise";
-import { useTranslations } from "next-intl";
 
 interface BreathingExerciseEmbeddedProps {
   locale: string;
@@ -12,7 +10,6 @@ interface BreathingExerciseEmbeddedProps {
 export default function BreathingExerciseEmbedded({
   locale,
 }: BreathingExerciseEmbeddedProps) {
-  const t = useTranslations("stressManagement");
   const isZh = locale === "zh";
 
   return (

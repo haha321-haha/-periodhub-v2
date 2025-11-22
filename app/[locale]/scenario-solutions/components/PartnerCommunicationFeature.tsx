@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useLocale } from "next-intl";
 
 interface PartnerCommunicationFeatureProps {
   locale: string;

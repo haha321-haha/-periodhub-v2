@@ -162,10 +162,8 @@ export default function HistoryTab({ locale }: HistoryTabProps) {
         }
 
         setPagination(result.pagination);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        // Failed to load records - handled silently
-        // Fallback to mock data for demo
+      } catch {
+        // Failed to load records - handled silently, fallback to mock data
         setRecords(getMockRecords());
       } finally {
         setLoading(false);

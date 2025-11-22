@@ -1,10 +1,12 @@
+import { logInfo } from "@/lib/debug-logger";
+
 /**
  * 性能优化工具类
  * 提供状态更新优化、防抖、节流等功能
  */
 
 // 防抖函数
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number,
   immediate = false,
@@ -27,7 +29,7 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 // 节流函数
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   limit: number,
 ): (...args: Parameters<T>) => void {
@@ -45,7 +47,7 @@ export function throttle<T extends (...args: any[]) => any>(
 // 状态更新优化器
 export class StateUpdateOptimizer {
   private static instance: StateUpdateOptimizer;
-  private updateQueue: Map<string, any> = new Map();
+  private updateQueue: Map<string, unknown> = new Map();
   private batchUpdateTimer: NodeJS.Timeout | null = null;
   private readonly batchDelay = 16; // 16ms，约60fps
 
@@ -61,8 +63,8 @@ export class StateUpdateOptimizer {
   // 批量更新状态
   public batchUpdate(
     key: string,
-    value: any,
-    updateFn: (updates: Record<string, any>) => void,
+    value: unknown,
+    updateFn: (updates: Record<string, unknown>) => void,
   ): void {
     this.updateQueue.set(key, value);
 
@@ -71,7 +73,10 @@ export class StateUpdateOptimizer {
     }
 
     this.batchUpdateTimer = setTimeout(() => {
-      const updates = Object.fromEntries(this.updateQueue);
+      const updates = Object.fromEntries(this.updateQueue) as Record<
+        string,
+        unknown
+      >;
       updateFn(updates);
       this.updateQueue.clear();
       this.batchUpdateTimer = null;
@@ -79,7 +84,7 @@ export class StateUpdateOptimizer {
   }
 
   // 防抖更新
-  public debouncedUpdate<T extends (...args: any[]) => any>(
+  public debouncedUpdate<T extends (...args: unknown[]) => unknown>(
     func: T,
     wait: number = 300,
   ): (...args: Parameters<T>) => void {
@@ -87,7 +92,7 @@ export class StateUpdateOptimizer {
   }
 
   // 节流更新
-  public throttledUpdate<T extends (...args: any[]) => any>(
+  public throttledUpdate<T extends (...args: unknown[]) => unknown>(
     func: T,
     limit: number = 100,
   ): (...args: Parameters<T>) => void {
@@ -98,7 +103,7 @@ export class StateUpdateOptimizer {
 // 选择器优化器
 export class SelectorOptimizer {
   private static instance: SelectorOptimizer;
-  private selectorCache: Map<string, any> = new Map();
+  private selectorCache: Map<string, unknown> = new Map();
   private readonly maxCacheSize = 100;
 
   private constructor() {}
@@ -112,10 +117,10 @@ export class SelectorOptimizer {
 
   // 创建优化的选择器
   public createOptimizedSelector<T>(
-    selector: (state: any) => T,
+    selector: (state: unknown) => T,
     key: string,
-  ): (state: any) => T {
-    return (state: any) => {
+  ): (state: unknown) => T {
+    return (state: unknown) => {
       const cacheKey = `${key}_${JSON.stringify(state)}`;
 
       if (this.selectorCache.has(cacheKey)) {
@@ -177,7 +182,8 @@ export class RenderOptimizer {
     }
 
     this.renderTimer = setTimeout(() => {
-      for (const id of this.renderQueue) {
+      for (const componentId of this.renderQueue) {
+        void componentId;
         renderFn();
       }
       this.renderQueue.clear();
@@ -248,7 +254,11 @@ export class MemoryOptimizer {
       this.memoryUsage.delete(sortedEntries[i][0]);
     }
 
-    console.log("🧹 内存清理完成");
+    logInfo(
+      "🧹 内存清理完成",
+      undefined,
+      "performanceOptimizer/MemoryOptimizer/cleanupMemory",
+    );
   }
 
   // 获取内存使用统计

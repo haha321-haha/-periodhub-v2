@@ -1,4 +1,3 @@
-import { URL_CONFIG } from "@/lib/url-config";
 /**
  * 统一Canonical URL配置
  * 解决Google Search Console重复网页问题

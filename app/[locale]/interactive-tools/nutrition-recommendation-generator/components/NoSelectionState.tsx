@@ -7,7 +7,6 @@
 
 import { useState, useEffect } from "react";
 import type { Language } from "../types";
-import { getUIContent } from "../utils/uiContent";
 
 interface NoSelectionStateProps {
   language: Language;

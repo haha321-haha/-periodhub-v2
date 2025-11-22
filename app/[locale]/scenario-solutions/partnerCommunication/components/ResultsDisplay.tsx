@@ -11,6 +11,7 @@ import {
   isNativeShareSupported,
   ShareData,
 } from "../utils/shareUtils";
+import { logError } from "@/lib/debug-logger";
 
 interface ResultsDisplayProps {
   result: QuizResult;
@@ -154,7 +155,7 @@ export default function ResultsDisplay({
         }, 3000);
       }
     } catch (error) {
-      console.error("Share error:", error);
+      logError("Share error", error, "ResultsDisplay");
       setShareMessage(
         locale === "zh" ? "分享失败，请重试" : "Share failed, please try again",
       );

@@ -2,7 +2,7 @@
 
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import { AlertTriangle, RefreshCw, Download, Home } from "lucide-react";
-import { logError } from "../../../../../lib/debug-logger";
+import { logError } from "@/lib/debug-logger";
 import { PainTrackerError } from "../../../../../types/pain-tracker";
 
 interface Props {

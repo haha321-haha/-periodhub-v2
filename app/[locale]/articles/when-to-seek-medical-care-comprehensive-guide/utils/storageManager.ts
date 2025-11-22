@@ -3,6 +3,7 @@ import type {
   MedicalCareGuideStorage,
   AssessmentResult,
 } from "../types/medical-care-guide";
+import { logError, logWarn, logInfo } from "@/lib/debug-logger";
 
 // 基础存储管理器类
 class StorageManager {
@@ -17,7 +18,7 @@ class StorageManager {
     return `${this.namespace}:${key}`;
   }
 
-  protected setItem(key: string, value: any): void {
+  protected setItem(key: string, value: unknown): void {
     try {
       const serializedValue = JSON.stringify({
         data: value,
@@ -26,7 +27,7 @@ class StorageManager {
       });
       localStorage.setItem(this.getKey(key), serializedValue);
     } catch (error) {
-      console.error(`Storage error (set ${key}):`, error);
+      logError(`Storage error (set ${key}):`, error, "storageManager/setItem");
       // 如果存储失败，尝试清理旧数据
       this.cleanup();
     }
@@ -43,15 +44,16 @@ class StorageManager {
 
       // 检查版本兼容性
       if (parsed.version && parsed.version !== this.version) {
-        console.warn(
+        logWarn(
           `Version mismatch for ${key}. Expected ${this.version}, got ${parsed.version}`,
+          "storageManager/getItem",
         );
         // 可以在这里实现数据迁移逻辑
       }
 
       return parsed.data;
     } catch (error) {
-      console.error(`Storage error (get ${key}):`, error);
+      logError(`Storage error (get ${key}):`, error, "storageManager/getItem");
       return defaultValue || null;
     }
   }
@@ -60,7 +62,11 @@ class StorageManager {
     try {
       localStorage.removeItem(this.getKey(key));
     } catch (error) {
-      console.error(`Storage error (remove ${key}):`, error);
+      logError(
+        `Storage error (remove ${key}):`,
+        error,
+        "storageManager/removeItem",
+      );
     }
   }
 
@@ -73,7 +79,7 @@ class StorageManager {
         }
       });
     } catch (error) {
-      console.error("Storage error (clear):", error);
+      logError("Storage error (clear):", error, "storageManager/clear");
     }
   }
 
@@ -109,7 +115,7 @@ class StorageManager {
         localStorage.removeItem(keyData[i].key);
       }
     } catch (error) {
-      console.error("Storage cleanup error:", error);
+      logError("Storage cleanup error:", error, "storageManager/cleanup");
     }
   }
 
@@ -142,7 +148,7 @@ class StorageManager {
         itemCount: namespaceKeys.length,
       };
     } catch (error) {
-      console.error("Storage info error:", error);
+      logError("Storage info error:", error, "storageManager/getStorageInfo");
       return { used: 0, available: 0, itemCount: 0 };
     }
   }
@@ -166,7 +172,11 @@ class MedicalCareGuideStorageManager extends StorageManager {
       // 更新统计信息
       this.updateStatistics(result);
     } catch (error) {
-      console.error("Failed to save assessment result:", error);
+      logError(
+        "Failed to save assessment result:",
+        error,
+        "storageManager/saveAssessmentResult",
+      );
     }
   }
 
@@ -251,7 +261,11 @@ class MedicalCareGuideStorageManager extends StorageManager {
         this.setItem("statistics", stats);
       }
     } catch (error) {
-      console.error("Failed to update statistics:", error);
+      logError(
+        "Failed to update statistics:",
+        error,
+        "storageManager/updateStatistics",
+      );
     }
   }
 
@@ -263,16 +277,17 @@ class MedicalCareGuideStorageManager extends StorageManager {
   // 导出所有数据
   exportAllData(): string {
     try {
+      const lastAssessment = this.getLastAssessment();
       const data: MedicalCareGuideStorage = {
         assessmentHistory: this.getAssessmentHistory(),
-        lastAssessment: this.getLastAssessment() || (undefined as any),
+        ...(lastAssessment ? { lastAssessment } : {}),
         userPreferences: this.getUserPreferences(),
         version: 1,
       };
 
       return JSON.stringify(data, null, 2);
     } catch (error) {
-      console.error("Failed to export data:", error);
+      logError("Failed to export data:", error, "storageManager/exportAllData");
       return "";
     }
   }
@@ -302,13 +317,13 @@ class MedicalCareGuideStorageManager extends StorageManager {
 
       return true;
     } catch (error) {
-      console.error("Failed to import data:", error);
+      logError("Failed to import data:", error, "storageManager/importData");
       return false;
     }
   }
 
   // 验证导入数据
-  private validateImportData(data: any): data is MedicalCareGuideStorage {
+  private validateImportData(data: unknown): data is MedicalCareGuideStorage {
     if (!data || typeof data !== "object") {
       return false;
     }
@@ -332,7 +347,10 @@ class MedicalCareGuideStorageManager extends StorageManager {
   // 数据迁移（用于版本升级）
   migrateData(fromVersion: number, toVersion: number): boolean {
     try {
-      console.log(`Migrating data from version ${fromVersion} to ${toVersion}`);
+      logInfo(
+        `Migrating data from version ${fromVersion} to ${toVersion}`,
+        "storageManager/migrateData",
+      );
 
       // 这里可以实现具体的迁移逻辑
       switch (fromVersion) {
@@ -340,13 +358,16 @@ class MedicalCareGuideStorageManager extends StorageManager {
           // 从版本1迁移的逻辑
           break;
         default:
-          console.warn(`No migration path from version ${fromVersion}`);
+          logWarn(
+            `No migration path from version ${fromVersion}`,
+            "storageManager/migrateData",
+          );
           return false;
       }
 
       return true;
     } catch (error) {
-      console.error("Data migration failed:", error);
+      logError("Data migration failed:", error, "storageManager/migrateData");
       return false;
     }
   }
@@ -392,7 +413,7 @@ class MedicalCareGuideStorageManager extends StorageManager {
         issues,
         recommendations,
       };
-    } catch (error) {
+    } catch {
       return {
         isHealthy: false,
         issues: ["Storage health check failed"],

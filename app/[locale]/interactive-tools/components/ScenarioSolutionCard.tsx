@@ -47,7 +47,10 @@ export default function ScenarioSolutionCard({
   const iconColors = getIconColors(solution.iconColor);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+    <div
+      className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+      data-locale={locale}
+    >
       <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
           <div

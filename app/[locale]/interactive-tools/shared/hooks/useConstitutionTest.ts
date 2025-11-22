@@ -10,7 +10,7 @@ import {
 } from "../types/constitution";
 import { constitutionQuestions } from "../data/constitutionQuestions";
 import { constitutionRecommendations } from "../data/constitutionRecommendations";
-import { constitutionTypeInfo } from "../data/constitutionTypes";
+import { logError } from "@/lib/debug-logger";
 
 interface UseConstitutionTestReturn {
   // Current session
@@ -220,6 +220,11 @@ export function useConstitutionTest(): UseConstitutionTestReturn {
 
       return testResult;
     } catch (err) {
+      logError(
+        "Failed to calculate constitution result",
+        err,
+        "useConstitutionTest",
+      );
       const isEnglish = currentSession?.locale === "en";
       setError(
         isEnglish

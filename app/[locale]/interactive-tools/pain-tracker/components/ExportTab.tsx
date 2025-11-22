@@ -3,10 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import {
-  Calendar,
   FileText,
   Download,
-  Eye,
   AlertTriangle,
   CheckCircle,
   XCircle,
@@ -15,6 +13,7 @@ import {
 import { PainRecord } from "../../../../../types/pain-tracker";
 import { ExportManager } from "../../../../../lib/pain-tracker/export/ExportManager";
 import { AnalyticsEngine } from "../../../../../lib/pain-tracker/analytics/AnalyticsEngine";
+import { logError } from "@/lib/debug-logger";
 
 type Locale = "en" | "zh";
 
@@ -474,7 +473,7 @@ export default function ExportTab({
       setExportStatus("error");
       setErrorMessage(error instanceof Error ? error.message : "Export failed");
       setIsExporting(false);
-      console.error("Export error:", error);
+      logError("Export error", error, "painTracker/ExportTab");
     }
   };
 

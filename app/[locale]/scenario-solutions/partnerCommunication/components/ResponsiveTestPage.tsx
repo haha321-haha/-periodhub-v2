@@ -77,6 +77,28 @@ export default function ResponsiveTestPage({
               </h3>
               <p className="text-purple-700">{isTouchDevice ? "是" : "否"}</p>
             </div>
+            <div className="bg-yellow-50 p-4 rounded-lg">
+              <h3 className="font-medium text-yellow-800 mb-2">
+                {locale === "zh" ? "设备模式" : "Device Mode"}
+              </h3>
+              <p className="text-yellow-700">
+                {isMobile
+                  ? locale === "zh"
+                    ? "移动"
+                    : "Mobile"
+                  : isTablet
+                    ? locale === "zh"
+                      ? "平板"
+                      : "Tablet"
+                    : isDesktop
+                      ? locale === "zh"
+                        ? "桌面"
+                        : "Desktop"
+                      : locale === "zh"
+                        ? "未知"
+                        : "Unknown"}
+              </p>
+            </div>
           </ResponsiveGrid>
         </div>
 

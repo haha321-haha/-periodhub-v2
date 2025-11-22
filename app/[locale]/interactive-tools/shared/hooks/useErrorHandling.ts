@@ -11,6 +11,7 @@ import {
 } from "../components/NotificationSystem";
 import { useOfflineDetection } from "./useOfflineDetection";
 import DataIntegrityService from "../../../../../lib/pain-tracker/storage/DataIntegrityService";
+import { logError, logWarn } from "@/lib/debug-logger";
 
 interface ErrorState {
   hasError: boolean;
@@ -61,49 +62,427 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
     addWarningNotification,
     addSuccessNotification,
   } = useNotifications();
-  const {
-    notifyDataCorruption,
-    notifyStorageQuotaExceeded,
-    notifyRecoverySuccess,
-    notifyRecoveryFailed,
-  } = useRecoveryNotifications();
+  const { notifyDataCorruption, notifyStorageQuotaExceeded } =
+    useRecoveryNotifications();
 
   const { isOffline } = useOfflineDetection();
   const dataIntegrityService = useMemo(() => new DataIntegrityService(), []);
 
-  // Handle different types of errors
-  const handleError = useCallback(
-    async (error: Error | PainTrackerError, context?: string) => {
-      const now = new Date();
+  // Clear error state
+  const clearError = useCallback(() => {
+    setErrorState({
+      hasError: false,
+      error: null,
+      errorCode: null,
+      isRecovering: false,
+      recoveryAttempts: 0,
+      lastErrorTime: null,
+    });
+  }, []);
 
-      setErrorState((prev) => ({
-        ...prev,
-        hasError: true,
-        error,
-        errorCode: error instanceof PainTrackerError ? error.code : null,
-        lastErrorTime: now,
-      }));
+  // Retry last operation
+  const retryLastOperation = useCallback(async () => {
+    if (errorState.recoveryAttempts >= maxRetries) {
+      addWarningNotification(
+        "Max Retries Reached",
+        "Unable to recover after multiple attempts. Please try a different approach.",
+        [],
+      );
+      return false;
+    }
 
-      // Call custom error handler
-      onError?.(error);
+    setErrorState((prev) => ({
+      ...prev,
+      isRecovering: true,
+      recoveryAttempts: prev.recoveryAttempts + 1,
+    }));
 
-      // Log error for debugging
-      console.error(
-        `Pain Tracker Error${context ? ` (${context})` : ""}:`,
-        error,
+    try {
+      // Wait before retrying
+      await new Promise((resolve) =>
+        setTimeout(resolve, retryDelay * errorState.recoveryAttempts),
       );
 
-      // Handle specific error types
-      if (error instanceof PainTrackerError) {
-        await handlePainTrackerError(error, context);
-      } else {
-        await handleGenericError(error, context);
+      // Clear error state
+      clearError();
+
+      // Trigger recovery success
+      onRecovery?.(true);
+      addSuccessNotification(
+        "Recovery Successful",
+        "Operation completed successfully after retry.",
+      );
+
+      return true;
+    } catch (retryError) {
+      logError("Retry failed", retryError, "useErrorHandling");
+      onRecovery?.(false);
+      return false;
+    } finally {
+      setErrorState((prev) => ({
+        ...prev,
+        isRecovering: false,
+      }));
+    }
+  }, [
+    errorState.recoveryAttempts,
+    maxRetries,
+    retryDelay,
+    onRecovery,
+    addWarningNotification,
+    clearError,
+    addSuccessNotification,
+  ]);
+
+  // Report error to local storage for debugging
+  const reportError = useCallback(
+    (error: Error, context?: string) => {
+      try {
+        const errorReport = {
+          timestamp: new Date().toISOString(),
+          error: {
+            name: error.name,
+            message: error.message,
+            stack: error.stack,
+          },
+          context,
+          userAgent: navigator.userAgent,
+          url: window.location.href,
+          localStorage: Object.keys(localStorage).filter((key) =>
+            key.startsWith("enhanced_pain_tracker_"),
+          ).length,
+        };
+
+        const existingReports = JSON.parse(
+          localStorage.getItem("pain_tracker_error_reports") || "[]",
+        );
+        existingReports.push(errorReport);
+
+        // Keep only last 10 reports
+        if (existingReports.length > 10) {
+          existingReports.splice(0, existingReports.length - 10);
+        }
+
+        localStorage.setItem(
+          "pain_tracker_error_reports",
+          JSON.stringify(existingReports),
+        );
+
+        addSuccessNotification(
+          "Error Reported",
+          "Error details have been saved for debugging.",
+        );
+      } catch (reportingError) {
+        logError("Failed to report error", reportingError, "useErrorHandling");
       }
     },
-    [onError, handlePainTrackerError, handleGenericError],
+    [addSuccessNotification],
   );
 
-  // Handle PainTrackerError instances
+  // Download corrupted data for analysis
+  const downloadCorruptedData = useCallback((data: string) => {
+    try {
+      const blob = new Blob([data], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `pain-tracker-corrupted-data-${Date.now()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (downloadError) {
+      logError(
+        "Failed to download corrupted data",
+        downloadError,
+        "useErrorHandling",
+      );
+    }
+  }, []);
+
+  // Get storage recovery actions
+  const getStorageRecoveryActions = useCallback(async (): Promise<
+    RecoveryAction[]
+  > => {
+    const actions: RecoveryAction[] = [];
+
+    // Check if backup is available
+    const backupAvailable = localStorage.getItem(
+      "enhanced_pain_tracker_records_backup",
+    );
+    if (backupAvailable) {
+      actions.push({
+        label: "Restore Backup",
+        action: async () => {
+          try {
+            const backup = JSON.parse(backupAvailable);
+            localStorage.setItem(
+              "enhanced_pain_tracker_records",
+              JSON.stringify(backup.records),
+            );
+            return true;
+          } catch {
+            return false;
+          }
+        },
+        riskLevel: "medium",
+        description: "Restore from automatic backup",
+      });
+    }
+
+    // Clear storage and start fresh
+    actions.push({
+      label: "Clear Storage",
+      action: async () => {
+        try {
+          Object.keys(localStorage).forEach((key) => {
+            if (key.startsWith("enhanced_pain_tracker_")) {
+              localStorage.removeItem(key);
+            }
+          });
+          return true;
+        } catch {
+          return false;
+        }
+      },
+      riskLevel: "high",
+      description: "Clear all data and start fresh",
+    });
+
+    return actions;
+  }, []);
+
+  // Handle storage errors
+  const handleStorageError = useCallback(async () => {
+    if (enableOfflineMode && isOffline) {
+      addWarningNotification(
+        "Offline Storage Issue",
+        "Unable to save to local storage. Data will be kept in memory until connection is restored.",
+        [
+          {
+            label: "Retry",
+            action: () => retryLastOperation(),
+            style: "primary",
+          },
+        ],
+      );
+    } else {
+      const recoveryActions = await getStorageRecoveryActions();
+      addErrorNotification(
+        "Storage Error",
+        "Unable to save your pain tracking data. Your browser storage may be full or corrupted.",
+        recoveryActions.slice(0, 2).map((action) => ({
+          label: action.label,
+          action: action.action,
+          style: action.riskLevel === "low" ? "primary" : "secondary",
+        })),
+      );
+    }
+  }, [
+    isOffline,
+    enableOfflineMode,
+    addWarningNotification,
+    addErrorNotification,
+    retryLastOperation,
+    getStorageRecoveryActions,
+  ]);
+
+  // Handle validation errors
+  const handleValidationError = useCallback(async () => {
+    addErrorNotification(
+      "Data Validation Error",
+      "The pain tracking data contains invalid information. Please check your entries and try again.",
+      [
+        {
+          label: "Review Data",
+          action: () => {
+            // This would trigger a review of the current form or data
+            clearError();
+          },
+          style: "primary",
+        },
+      ],
+    );
+  }, [addErrorNotification, clearError]);
+
+  // Handle export errors
+  const handleExportError = useCallback(async () => {
+    addErrorNotification(
+      "Export Error",
+      "Unable to export your pain tracking data. This may be due to browser limitations or data size.",
+      [
+        {
+          label: "Try Different Format",
+          action: () => {
+            // This would suggest trying HTML instead of PDF, etc.
+            clearError();
+          },
+          style: "primary",
+        },
+        {
+          label: "Export Smaller Range",
+          action: () => {
+            // This would suggest exporting a smaller date range
+            clearError();
+          },
+          style: "secondary",
+        },
+      ],
+    );
+  }, [addErrorNotification, clearError]);
+
+  // Handle chart errors
+  const handleChartError = useCallback(async () => {
+    addWarningNotification(
+      "Chart Display Error",
+      "Unable to display charts. You can still view your data in table format.",
+      [
+        {
+          label: "View Table",
+          action: () => {
+            // This would switch to table view
+            clearError();
+          },
+          style: "primary",
+        },
+        {
+          label: "Retry Charts",
+          action: () => retryLastOperation(),
+          style: "secondary",
+        },
+      ],
+    );
+  }, [addWarningNotification, clearError, retryLastOperation]);
+
+  // Handle data corruption
+  const handleDataCorruption = useCallback(async () => {
+    try {
+      const integrityReport = await dataIntegrityService.checkDataIntegrity();
+
+      if (integrityReport.recoveryOptions.length > 0) {
+        notifyDataCorruption(
+          integrityReport.corruptionLevel,
+          integrityReport.recoveryOptions,
+        );
+      } else {
+        addErrorNotification(
+          "Data Corruption Detected",
+          "Your pain tracking data appears to be corrupted and cannot be automatically recovered.",
+          [
+            {
+              label: "Export Raw Data",
+              action: async () => {
+                try {
+                  const corruptedData =
+                    await dataIntegrityService.exportCorruptedData();
+                  downloadCorruptedData(corruptedData);
+                } catch (exportError) {
+                  logError(
+                    "Failed to export corrupted data",
+                    exportError,
+                    "useErrorHandling",
+                  );
+                }
+              },
+              style: "secondary",
+            },
+            {
+              label: "Start Fresh",
+              action: () => {
+                if (
+                  confirm("This will delete all current data. Are you sure?")
+                ) {
+                  localStorage.clear();
+                  window.location.reload();
+                }
+              },
+              style: "danger",
+            },
+          ],
+        );
+      }
+    } catch (checkError) {
+      logError(
+        "Failed to check data integrity",
+        checkError,
+        "useErrorHandling",
+      );
+      addErrorNotification(
+        "Critical Data Error",
+        "Unable to assess data corruption. Manual intervention required.",
+        [],
+      );
+    }
+  }, [
+    dataIntegrityService,
+    notifyDataCorruption,
+    addErrorNotification,
+    downloadCorruptedData,
+  ]);
+
+  // Handle quota exceeded
+  const handleQuotaExceeded = useCallback(async () => {
+    notifyStorageQuotaExceeded(
+      () => {
+        // Export data action
+        window.dispatchEvent(new CustomEvent("pain-tracker-export-request"));
+      },
+      () => {
+        // Cleanup action
+        window.dispatchEvent(new CustomEvent("pain-tracker-cleanup-request"));
+      },
+    );
+  }, [notifyStorageQuotaExceeded]);
+
+  // Handle migration errors
+  const handleMigrationError = useCallback(async () => {
+    addErrorNotification(
+      "Data Migration Error",
+      "Unable to update your data to the latest format. Your data is safe but some features may not work.",
+      [
+        {
+          label: "Retry Migration",
+          action: () => retryLastOperation(),
+          style: "primary",
+        },
+        {
+          label: "Export Backup",
+          action: () => {
+            window.dispatchEvent(
+              new CustomEvent("pain-tracker-backup-request"),
+            );
+          },
+          style: "secondary",
+        },
+      ],
+    );
+  }, [addErrorNotification, retryLastOperation]);
+
+  // Handle generic errors
+  const handleGenericError = useCallback(
+    async (error: Error, context?: string) => {
+      addErrorNotification(
+        "Unexpected Error",
+        `An unexpected error occurred${
+          context ? ` while ${context}` : ""
+        }. Please try again.`,
+        [
+          {
+            label: "Retry",
+            action: () => retryLastOperation(),
+            style: "primary",
+          },
+          {
+            label: "Report Issue",
+            action: () => reportError(error, context),
+            style: "secondary",
+          },
+        ],
+      );
+    },
+    [addErrorNotification, retryLastOperation, reportError],
+  );
+
   const handlePainTrackerError = useCallback(
     async (error: PainTrackerError, context?: string) => {
       switch (error.code) {
@@ -144,424 +523,34 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
     ],
   );
 
-  // Handle storage errors
-  const handleStorageError = useCallback(
-    async (error: PainTrackerError, context?: string) => {
-      if (enableOfflineMode && isOffline) {
-        addWarningNotification(
-          "Offline Storage Issue",
-          "Unable to save to local storage. Data will be kept in memory until connection is restored.",
-          [
-            {
-              label: "Retry",
-              action: () => retryLastOperation(),
-              style: "primary",
-            },
-          ],
-        );
-      } else {
-        const recoveryActions = await getStorageRecoveryActions();
-        addErrorNotification(
-          "Storage Error",
-          "Unable to save your pain tracking data. Your browser storage may be full or corrupted.",
-          recoveryActions.slice(0, 2).map((action) => ({
-            label: action.label,
-            action: action.action,
-            style: action.riskLevel === "low" ? "primary" : "secondary",
-          })),
-        );
-      }
-    },
-    [
-      isOffline,
-      enableOfflineMode,
-      addWarningNotification,
-      addErrorNotification,
-      retryLastOperation,
-      getStorageRecoveryActions,
-    ],
-  );
+  const handleError = useCallback(
+    async (error: Error | PainTrackerError, context?: string) => {
+      const now = new Date();
 
-  // Handle validation errors
-  const handleValidationError = useCallback(
-    async (error: PainTrackerError, context?: string) => {
-      addErrorNotification(
-        "Data Validation Error",
-        "The pain tracking data contains invalid information. Please check your entries and try again.",
-        [
-          {
-            label: "Review Data",
-            action: () => {
-              // This would trigger a review of the current form or data
-              clearError();
-            },
-            style: "primary",
-          },
-        ],
-      );
-    },
-    [addErrorNotification, clearError],
-  );
-
-  // Handle export errors
-  const handleExportError = useCallback(
-    async (error: PainTrackerError, context?: string) => {
-      addErrorNotification(
-        "Export Error",
-        "Unable to export your pain tracking data. This may be due to browser limitations or data size.",
-        [
-          {
-            label: "Try Different Format",
-            action: () => {
-              // This would suggest trying HTML instead of PDF, etc.
-              clearError();
-            },
-            style: "primary",
-          },
-          {
-            label: "Export Smaller Range",
-            action: () => {
-              // This would suggest exporting a smaller date range
-              clearError();
-            },
-            style: "secondary",
-          },
-        ],
-      );
-    },
-    [addErrorNotification, clearError],
-  );
-
-  // Handle chart errors
-  const handleChartError = useCallback(
-    async (error: PainTrackerError, context?: string) => {
-      addWarningNotification(
-        "Chart Display Error",
-        "Unable to display charts. You can still view your data in table format.",
-        [
-          {
-            label: "View Table",
-            action: () => {
-              // This would switch to table view
-              clearError();
-            },
-            style: "primary",
-          },
-          {
-            label: "Retry Charts",
-            action: () => retryLastOperation(),
-            style: "secondary",
-          },
-        ],
-      );
-    },
-    [addWarningNotification, clearError, retryLastOperation],
-  );
-
-  // Handle data corruption
-  const handleDataCorruption = useCallback(
-    async (error: PainTrackerError, context?: string) => {
-      try {
-        const integrityReport = await dataIntegrityService.checkDataIntegrity();
-
-        if (integrityReport.recoveryOptions.length > 0) {
-          notifyDataCorruption(
-            integrityReport.corruptionLevel,
-            integrityReport.recoveryOptions,
-          );
-        } else {
-          addErrorNotification(
-            "Data Corruption Detected",
-            "Your pain tracking data appears to be corrupted and cannot be automatically recovered.",
-            [
-              {
-                label: "Export Raw Data",
-                action: async () => {
-                  try {
-                    const corruptedData =
-                      await dataIntegrityService.exportCorruptedData();
-                    downloadCorruptedData(corruptedData);
-                  } catch (exportError) {
-                    console.error(
-                      "Failed to export corrupted data:",
-                      exportError,
-                    );
-                  }
-                },
-                style: "secondary",
-              },
-              {
-                label: "Start Fresh",
-                action: () => {
-                  if (
-                    confirm("This will delete all current data. Are you sure?")
-                  ) {
-                    localStorage.clear();
-                    window.location.reload();
-                  }
-                },
-                style: "danger",
-              },
-            ],
-          );
-        }
-      } catch (checkError) {
-        console.error("Failed to check data integrity:", checkError);
-        addErrorNotification(
-          "Critical Data Error",
-          "Unable to assess data corruption. Manual intervention required.",
-          [],
-        );
-      }
-    },
-    [dataIntegrityService, notifyDataCorruption, addErrorNotification, downloadCorruptedData],
-  );
-
-  // Handle quota exceeded
-  const handleQuotaExceeded = useCallback(
-    async (error: PainTrackerError, context?: string) => {
-      notifyStorageQuotaExceeded(
-        () => {
-          // Export data action
-          window.dispatchEvent(new CustomEvent("pain-tracker-export-request"));
-        },
-        () => {
-          // Cleanup action
-          window.dispatchEvent(new CustomEvent("pain-tracker-cleanup-request"));
-        },
-      );
-    },
-    [notifyStorageQuotaExceeded],
-  );
-
-  // Handle migration errors
-  const handleMigrationError = useCallback(
-    async (error: PainTrackerError, context?: string) => {
-      addErrorNotification(
-        "Data Migration Error",
-        "Unable to update your data to the latest format. Your data is safe but some features may not work.",
-        [
-          {
-            label: "Retry Migration",
-            action: () => retryLastOperation(),
-            style: "primary",
-          },
-          {
-            label: "Export Backup",
-            action: () => {
-              window.dispatchEvent(
-                new CustomEvent("pain-tracker-backup-request"),
-              );
-            },
-            style: "secondary",
-          },
-        ],
-      );
-    },
-    [addErrorNotification, retryLastOperation],
-  );
-
-  // Handle generic errors
-  const handleGenericError = useCallback(
-    async (error: Error, context?: string) => {
-      addErrorNotification(
-        "Unexpected Error",
-        `An unexpected error occurred${
-          context ? ` while ${context}` : ""
-        }. Please try again.`,
-        [
-          {
-            label: "Retry",
-            action: () => retryLastOperation(),
-            style: "primary",
-          },
-          {
-            label: "Report Issue",
-            action: () => reportError(error, context),
-            style: "secondary",
-          },
-        ],
-      );
-    },
-    [addErrorNotification, retryLastOperation, reportError],
-  );
-
-  // Get storage recovery actions
-  const getStorageRecoveryActions = useCallback(async (): Promise<
-    RecoveryAction[]
-  > => {
-    const actions: RecoveryAction[] = [];
-
-    // Check if backup is available
-    const backupAvailable = localStorage.getItem(
-      "enhanced_pain_tracker_records_backup",
-    );
-    if (backupAvailable) {
-      actions.push({
-        label: "Restore Backup",
-        action: async () => {
-          try {
-            const backup = JSON.parse(backupAvailable);
-            localStorage.setItem(
-              "enhanced_pain_tracker_records",
-              JSON.stringify(backup.records),
-            );
-            return true;
-          } catch (error) {
-            return false;
-          }
-        },
-        riskLevel: "medium",
-        description: "Restore from automatic backup",
-      });
-    }
-
-    // Clear storage and start fresh
-    actions.push({
-      label: "Clear Storage",
-      action: async () => {
-        try {
-          Object.keys(localStorage).forEach((key) => {
-            if (key.startsWith("enhanced_pain_tracker_")) {
-              localStorage.removeItem(key);
-            }
-          });
-          return true;
-        } catch (error) {
-          return false;
-        }
-      },
-      riskLevel: "high",
-      description: "Clear all data and start fresh",
-    });
-
-    return actions;
-  }, []);
-
-  // Retry last operation
-  const retryLastOperation = useCallback(async () => {
-    if (errorState.recoveryAttempts >= maxRetries) {
-      addWarningNotification(
-        "Max Retries Reached",
-        "Unable to recover after multiple attempts. Please try a different approach.",
-        [],
-      );
-      return false;
-    }
-
-    setErrorState((prev) => ({
-      ...prev,
-      isRecovering: true,
-      recoveryAttempts: prev.recoveryAttempts + 1,
-    }));
-
-    try {
-      // Wait before retrying
-      await new Promise((resolve) =>
-        setTimeout(resolve, retryDelay * errorState.recoveryAttempts),
-      );
-
-      // Clear error state
-      clearError();
-
-      // Trigger recovery success
-      onRecovery?.(true);
-      addSuccessNotification(
-        "Recovery Successful",
-        "Operation completed successfully after retry.",
-      );
-
-      return true;
-    } catch (retryError) {
-      console.error("Retry failed:", retryError);
-      onRecovery?.(false);
-      return false;
-    } finally {
       setErrorState((prev) => ({
         ...prev,
-        isRecovering: false,
+        hasError: true,
+        error,
+        errorCode: error instanceof PainTrackerError ? error.code : null,
+        lastErrorTime: now,
       }));
-    }
-  }, [
-    errorState.recoveryAttempts,
-    maxRetries,
-    retryDelay,
-    onRecovery,
-    addWarningNotification,
-    clearError,
-    addSuccessNotification,
-  ]);
 
-  // Clear error state
-  const clearError = useCallback(() => {
-    setErrorState({
-      hasError: false,
-      error: null,
-      errorCode: null,
-      isRecovering: false,
-      recoveryAttempts: 0,
-      lastErrorTime: null,
-    });
-  }, []);
+      onError?.(error);
 
-  // Report error to local storage for debugging
-  const reportError = useCallback((error: Error, context?: string) => {
-    try {
-      const errorReport = {
-        timestamp: new Date().toISOString(),
-        error: {
-          name: error.name,
-          message: error.message,
-          stack: error.stack,
-        },
-        context,
-        userAgent: navigator.userAgent,
-        url: window.location.href,
-        localStorage: Object.keys(localStorage).filter((key) =>
-          key.startsWith("enhanced_pain_tracker_"),
-        ).length,
-      };
-
-      const existingReports = JSON.parse(
-        localStorage.getItem("pain_tracker_error_reports") || "[]",
+      logError(
+        `Pain Tracker Error${context ? ` (${context})` : ""}:`,
+        error,
+        "useErrorHandling",
       );
-      existingReports.push(errorReport);
 
-      // Keep only last 10 reports
-      if (existingReports.length > 10) {
-        existingReports.splice(0, existingReports.length - 10);
+      if (error instanceof PainTrackerError) {
+        await handlePainTrackerError(error, context);
+      } else {
+        await handleGenericError(error, context);
       }
-
-      localStorage.setItem(
-        "pain_tracker_error_reports",
-        JSON.stringify(existingReports),
-      );
-
-      addSuccessNotification(
-        "Error Reported",
-        "Error details have been saved for debugging.",
-      );
-    } catch (reportingError) {
-      console.error("Failed to report error:", reportingError);
-    }
-  }, [addSuccessNotification]);
-
-  // Download corrupted data for analysis
-  const downloadCorruptedData = useCallback((data: string) => {
-    try {
-      const blob = new Blob([data], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `pain-tracker-corrupted-data-${Date.now()}.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    } catch (downloadError) {
-      console.error("Failed to download corrupted data:", downloadError);
-    }
-  }, []);
+    },
+    [handlePainTrackerError, handleGenericError, onError],
+  );
 
   // Auto-recovery for certain error types
   useEffect(() => {
@@ -601,7 +590,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
           }
         } catch (error) {
           // Silently fail health checks to avoid spam
-          console.warn("Health check failed:", error);
+          logWarn("Health check failed", error, "useErrorHandling");
         }
       },
       5 * 60 * 1000,

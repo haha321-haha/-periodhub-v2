@@ -33,6 +33,7 @@ import {
   SessionMeta,
   AssessmentAnalyticsRecord,
 } from "../shared/types";
+import { logWarn } from "@/lib/debug-logger";
 import { useSafeTranslations } from "@/hooks/useSafeTranslations";
 
 interface SymptomAssessmentToolProps {
@@ -137,8 +138,12 @@ export default function SymptomAssessmentTool({
           "assessmentAnalytics",
           JSON.stringify(existingData),
         );
-      } catch {
-        // ignore
+      } catch (error) {
+        logWarn(
+          "Failed to persist assessment analytics",
+          error,
+          "SymptomAssessmentTool",
+        );
       }
     },
     [sessionData, selectedAnswers, result, locale],
@@ -155,8 +160,7 @@ export default function SymptomAssessmentTool({
 
   //  Personalized features
   const { preferences } = useUserPreferences();
-  const { history, trends, saveAssessmentResult, getRecentAssessments } =
-    useAssessmentHistory();
+  const { history, trends, saveAssessmentResult } = useAssessmentHistory();
   const { recommendations, generateRecommendations } =
     usePersonalizedRecommendations();
 
@@ -192,7 +196,11 @@ export default function SymptomAssessmentTool({
         JSON.stringify(progressData),
       );
     } catch (error) {
-      // ignore
+      logWarn(
+        "Failed to save symptom assessment progress",
+        error,
+        "SymptomAssessmentTool",
+      );
     }
   };
 
@@ -223,7 +231,11 @@ export default function SymptomAssessmentTool({
         }
       }
     } catch (error) {
-      // ignore
+      logWarn(
+        "Failed to load saved symptom assessment progress",
+        error,
+        "SymptomAssessmentTool",
+      );
     }
     return {};
   }, [locale, mode]);
@@ -299,7 +311,11 @@ export default function SymptomAssessmentTool({
     try {
       localStorage.removeItem("symptomAssessmentProgress");
     } catch (error) {
-      // ignore
+      logWarn(
+        "Failed to clear symptom assessment progress before starting",
+        error,
+        "SymptomAssessmentTool",
+      );
     }
     startAssessment(locale, mode);
   };
@@ -312,7 +328,11 @@ export default function SymptomAssessmentTool({
       localStorage.removeItem("symptomAssessmentProgress");
       localStorage.removeItem("assessmentAnalytics");
     } catch (error) {
-      // ignore
+      logWarn(
+        "Failed to clear storage during symptom assessment restart",
+        error,
+        "SymptomAssessmentTool",
+      );
     }
     // 重置状态
     setSelectedAnswers({});
@@ -450,6 +470,11 @@ export default function SymptomAssessmentTool({
                     );
                   });
                 } catch (error) {
+                  logWarn(
+                    "Failed to render feature highlights",
+                    error,
+                    "SymptomAssessmentTool",
+                  );
                   return null;
                 }
               })()}
@@ -568,7 +593,6 @@ export default function SymptomAssessmentTool({
 
   // Results screen
   if (result) {
-    const isZh = locale === "zh";
     const referenceData = (result.referenceData || {}) as ReferenceData;
     const isSevere = result.severity === "severe" || result.emergency;
     const highScore = (result.percentage || 0) >= 70;

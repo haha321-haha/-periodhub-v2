@@ -4,6 +4,7 @@
  */
 
 import { LocalStorageManager } from "./localStorage";
+import { logError } from "@/lib/debug-logger";
 
 export interface ProgressEntry {
   id: string;
@@ -211,7 +212,107 @@ export function importData(jsonString: string): boolean {
 
     return saveProgress(data);
   } catch (error) {
-    console.error("Error importing data:", error);
+    logError("Error importing data", error, "progressStorage/importData");
     return false;
   }
+}
+
+const getEntriesWithDate = (filter: (entryDate: number) => boolean) => {
+  const today = new Date();
+  return getProgress().entries.filter((entry) => {
+    const entryTime = new Date(entry.date).getTime();
+    return filter(entryTime);
+  });
+};
+
+export function getAllEntries(): ProgressEntry[] {
+  return getProgress().entries;
+}
+
+export function getTodayEntries(): ProgressEntry[] {
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0);
+  const endOfDay = new Date(startOfDay);
+  endOfDay.setHours(23, 59, 59, 999);
+  return getEntriesWithDate(
+    (time) => time >= startOfDay.getTime() && time <= endOfDay.getTime(),
+  );
+}
+
+export function getWeekEntries(): ProgressEntry[] {
+  const now = new Date();
+  const startOfWeek = new Date(now);
+  startOfWeek.setDate(now.getDate() - now.getDay());
+  startOfWeek.setHours(0, 0, 0, 0);
+  return getEntriesWithDate((time) => time >= startOfWeek.getTime());
+}
+
+export function getMonthEntries(): ProgressEntry[] {
+  const now = new Date();
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  startOfMonth.setHours(0, 0, 0, 0);
+  return getEntriesWithDate((time) => time >= startOfMonth.getTime());
+}
+
+export function getStorageInfo() {
+  const data = getProgress();
+  return {
+    totalEntries: data.entries.length,
+    lastUpdated: data.lastUpdated,
+    capacity: MAX_ENTRIES,
+  };
+}
+
+export function deleteOldestEntries(count: number): boolean {
+  const data = getProgress();
+  data.entries = data.entries.slice(count);
+  return saveProgress(data);
+}
+
+export function calculateStats() {
+  return getStatistics();
+}
+
+export function getStressColor(level: number) {
+  if (level >= 8) return "#dc2626";
+  if (level >= 5) return "#f97316";
+  return "#059669";
+}
+
+export function getMoodColor(moodRating: number) {
+  if (moodRating >= 8) return "#22c55e";
+  if (moodRating >= 5) return "#facc15";
+  return "#ef4444";
+}
+
+export function formatTime(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
+export function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
+
+const techniqueLabels: Record<string, string> = {
+  breathing: "Breathing",
+  meditation: "Meditation",
+  exercise: "Exercise",
+  yoga: "Yoga",
+  music: "Music",
+  nature: "Nature",
+  journaling: "Journaling",
+  social: "Social Support",
+};
+
+export function getTechniqueLabel(key: string) {
+  return techniqueLabels[key] || key;
 }

@@ -1,3 +1,5 @@
+import { logWarn } from "@/lib/debug-logger";
+
 /**
  * HVsLYEp职场健康助手 - 国际化配置
  * 基于HVsLYEp的翻译结构设计
@@ -114,21 +116,34 @@ export const translationKeys = {
   },
 };
 
+import { logWarn } from "@/lib/debug-logger";
+
 // 翻译函数工厂 - 基于HVsLYEp的t函数设计
-export function createTranslationFunction(translations: any) {
+export type TranslationDictionary = Record<
+  string,
+  string | TranslationDictionary
+>;
+
+export function createTranslationFunction(translations: TranslationDictionary) {
   return (key: string): string => {
     const keys = key.split(".");
-    let result: any = translations;
+    let result: unknown = translations;
 
     for (const k of keys) {
-      result = result[k];
-      if (result === undefined) {
-        console.warn(`Translation not found for key: ${key}`);
+      if (typeof result !== "object" || result === null) {
+        logWarn(`Translation not found for key: ${key}`);
         return key;
       }
+
+      if (!(k in result)) {
+        logWarn(`Translation not found for key: ${key}`);
+        return key;
+      }
+
+      result = (result as TranslationDictionary)[k];
     }
 
-    return result;
+    return typeof result === "string" ? result : key;
   };
 }
 

@@ -1,3 +1,5 @@
+import { logWarn } from "@/lib/debug-logger";
+
 export interface TrainingDay {
   day: number;
   name: string;
@@ -12,6 +14,7 @@ export interface TrainingWeek {
   days: TrainingDay[];
   expanded?: boolean;
 }
+import { logWarn } from "@/lib/debug-logger";
 
 export const trainingCampConfig: TrainingWeek[] = [
   {
@@ -234,7 +237,11 @@ export const getTrainingProgress = (): Set<number> => {
     const stored = localStorage.getItem(TRAINING_PROGRESS_KEY);
     return stored ? new Set(JSON.parse(stored)) : new Set();
   } catch (error) {
-    console.warn("Failed to load training progress:", error);
+    logWarn(
+      "Failed to load training progress",
+      error,
+      "trainingCampConfig/getTrainingProgress",
+    );
     return new Set();
   }
 };
@@ -248,7 +255,11 @@ export const saveTrainingProgress = (completedDays: Set<number>): void => {
       JSON.stringify([...completedDays]),
     );
   } catch (error) {
-    console.warn("Failed to save training progress:", error);
+    logWarn(
+      "Failed to save training progress",
+      error,
+      "trainingCampConfig/saveTrainingProgress",
+    );
   }
 };
 

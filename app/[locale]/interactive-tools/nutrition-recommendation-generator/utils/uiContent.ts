@@ -3,7 +3,7 @@
  * 保持原始翻译结构和内容
  */
 
-import { logWarn } from "../../../../../lib/debug-logger";
+import { logWarn } from "@/lib/debug-logger";
 
 type LocalizedString = {
   en: string;

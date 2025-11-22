@@ -3,7 +3,15 @@
 import { Metadata } from "next";
 
 // 生成结构化数据
-export function generateStructuredData(locale: string, translations: any) {
+export function generateStructuredData(
+  locale: string,
+  translations: {
+    meta: {
+      title: string;
+      description: string;
+    };
+  },
+) {
   const isZh = locale === "zh";
 
   return {
@@ -141,9 +149,15 @@ export function generateHowToStructuredData(locale: string) {
 // 生成完整的元数据
 export function generateEnhancedMetadata(
   locale: string,
-  translations: any,
+  translations: {
+    meta: {
+      title: string;
+      description: string;
+      keywords?: string | string[];
+    };
+    [key: string]: unknown;
+  },
 ): Metadata {
-  const isZh = locale === "zh";
   const baseUrl = "https://www.periodhub.health";
   const currentUrl = `${baseUrl}/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`;
 

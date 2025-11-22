@@ -13,7 +13,7 @@ import { useErrorHandling } from "../hooks/useErrorHandling";
 import { useOfflineDetection } from "../hooks/useOfflineDetection";
 import DataIntegrityService from "../../../../../lib/pain-tracker/storage/DataIntegrityService";
 import { Shield, AlertTriangle, CheckCircle, Settings } from "lucide-react";
-import { logError } from "../../../../../lib/debug-logger";
+import { logError } from "@/lib/debug-logger";
 
 interface ErrorHandlingWrapperProps {
   children: React.ReactNode;

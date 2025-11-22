@@ -19,7 +19,6 @@ import {
   useBatchExportActions,
   useExportHistoryActions,
 } from "../hooks/useWorkplaceWellnessStore";
-import { useTranslations } from "next-intl";
 import {
   BatchExportItem,
   BatchExportQueue,
@@ -27,7 +26,6 @@ import {
   ExportType,
   ExtendedExportFormat,
 } from "../types";
-import { logError } from "../../../../lib/debug-logger";
 
 export default function BatchExportManager() {
   const batchQueue = useBatchExportQueue();
@@ -62,9 +60,8 @@ export default function BatchExportManager() {
   const { addExportHistory } = useExportHistoryActions();
 
   // 类型断言：确保 addExportHistory 有正确的类型
-  const addHistory = addExportHistory as (history: any) => void;
+  const addHistory = addExportHistory;
 
-  const t = useTranslations("workplaceWellness");
   const [isCreating, setIsCreating] = useState(false);
   const [selectedItems, setSelectedItems] = useState<BatchExportItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -160,15 +157,6 @@ export default function BatchExportManager() {
   // 开始批量导出
   const handleStartBatchExport = () => {
     if (safeBatchQueue && safeBatchQueue.status === "idle") {
-      // 更新队列状态为运行中
-      const updateBatchItemStatusFn = updateBatchItemStatus as (
-        itemId: string,
-        status: BatchExportItem["status"],
-        progress?: number,
-        error?: string,
-      ) => void;
-      // 这里需要更新所有项目的状态，暂时跳过
-      // updateBatchItemStatusFn('', 'running');
       processBatchExport();
     }
   };

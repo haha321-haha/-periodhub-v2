@@ -53,15 +53,13 @@ export function useDecisionTree(
   const makeDecision = useCallback(
     (choice: "yes" | "no") => {
       if (!currentNode.children || !currentNode.question) {
-        console.warn(
-          "Cannot make decision on a result node or node without children",
-        );
+        // Cannot make decision on a result node or node without children
         return null;
       }
 
       const nextNode = currentNode.children[choice];
       if (!nextNode) {
-        console.warn(`No ${choice} path found for current node`);
+        // No ${choice} path found for current node
         return null;
       }
 

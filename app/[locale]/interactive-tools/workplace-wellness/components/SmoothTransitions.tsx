@@ -136,11 +136,9 @@ export function ScaleTransition({
 // 页面过渡
 export function PageTransition({
   children,
-  isActive = true,
   className = "",
 }: {
   children: ReactNode;
-  isActive?: boolean;
   className?: string;
 }) {
   return (
@@ -151,11 +149,9 @@ export function PageTransition({
 // 标签页过渡
 export function TabTransition({
   children,
-  isActive = true,
   className = "",
 }: {
   children: ReactNode;
-  isActive?: boolean;
   className?: string;
 }) {
   return (

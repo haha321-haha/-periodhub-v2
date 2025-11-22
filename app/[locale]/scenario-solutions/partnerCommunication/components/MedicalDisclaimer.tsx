@@ -2,16 +2,13 @@
 
 import React from "react";
 import { useSafeTranslations } from "@/hooks/useSafeTranslations";
-import { Locale } from "../types/common";
 
 interface MedicalDisclaimerProps {
-  locale: Locale;
   className?: string;
   variant?: "default" | "compact" | "inline";
 }
 
 export default function MedicalDisclaimer({
-  locale,
   className = "",
   variant = "default",
 }: MedicalDisclaimerProps) {

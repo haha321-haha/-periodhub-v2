@@ -17,7 +17,7 @@ import DataIntegrityService, {
   DataIntegrityReport,
 } from "../../../../../lib/pain-tracker/storage/DataIntegrityService";
 import { StoredData } from "../../../../../types/pain-tracker";
-import { logError } from "../../../../../lib/debug-logger";
+import { logError } from "@/lib/debug-logger";
 
 type BackupTabId = "backup" | "restore" | "integrity";
 

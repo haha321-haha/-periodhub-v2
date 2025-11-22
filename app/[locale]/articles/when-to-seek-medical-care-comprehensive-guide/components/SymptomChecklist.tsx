@@ -7,11 +7,7 @@ import { useSymptomChecker } from "../hooks/useSymptomChecker";
 import { SYMPTOM_DATA } from "../utils/medicalCareData";
 import { SymptomAnalysisLogic } from "../utils/assessmentLogic";
 import styles from "../styles/SymptomChecklist.module.css";
-import type {
-  SymptomChecklistProps,
-  SymptomItem,
-  AssessmentResult,
-} from "../types/medical-care-guide";
+import type { SymptomChecklistProps } from "../types/medical-care-guide";
 
 // 风险等级图标映射
 const RISK_ICONS = {

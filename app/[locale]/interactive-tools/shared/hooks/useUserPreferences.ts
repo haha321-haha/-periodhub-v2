@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { logError } from "@/lib/debug-logger";
 
 export interface UserPreferences {
   // Assessment preferences
@@ -57,7 +58,7 @@ export const useUserPreferences = () => {
         setPreferences({ ...DEFAULT_PREFERENCES, ...parsedPreferences });
       }
     } catch (error) {
-      console.error("Error loading user preferences:", error);
+      logError("Error loading user preferences", error, "useUserPreferences");
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +70,7 @@ export const useUserPreferences = () => {
       try {
         localStorage.setItem("userPreferences", JSON.stringify(preferences));
       } catch (error) {
-        console.error("Error saving user preferences:", error);
+        logError("Error saving user preferences", error, "useUserPreferences");
       }
     }
   }, [preferences, isLoading]);

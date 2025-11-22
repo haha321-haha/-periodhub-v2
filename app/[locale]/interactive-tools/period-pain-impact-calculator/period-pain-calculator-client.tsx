@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
@@ -8,7 +8,7 @@ import { usePainImpactCalculator } from "./hooks/usePainImpactCalculator";
 import QuestionRenderer from "./components/QuestionRenderer";
 import AssessmentResults from "./components/AssessmentResults";
 import RecommendedContent from "./components/RecommendedContent";
-import { AssessmentAnswer, AssessmentResult } from "./types";
+import { AssessmentAnswer } from "./types";
 
 // 动态导入 Breadcrumb 组件以避免 vendor chunks 问题
 const Breadcrumb = dynamic(() => import("@/components/Breadcrumb"), {
@@ -32,12 +32,10 @@ export default function PeriodPainCalculatorClient({
     currentSession,
     currentQuestionIndex,
     currentQuestion,
-    isComplete,
     progress,
     totalQuestions,
     startAssessment,
     answerQuestion,
-    goToQuestion,
     goToPreviousQuestion,
     goToNextQuestion,
     completeAssessment,
@@ -46,11 +44,6 @@ export default function PeriodPainCalculatorClient({
     isLoading,
     error,
   } = usePainImpactCalculator();
-
-  // 开始评估
-  const handleStartAssessment = () => {
-    startAssessment(currentLocale);
-  };
 
   // 处理问题回答
   const handleAnswer = (answer: AssessmentAnswer) => {
@@ -153,7 +146,6 @@ export default function PeriodPainCalculatorClient({
                   (a) => a.questionId === currentQuestion.id,
                 )}
                 onAnswer={handleAnswer}
-                locale={currentLocale}
               />
             )}
           </div>

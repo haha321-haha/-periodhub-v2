@@ -34,7 +34,7 @@ import {
 } from "../types";
 import { PDFGenerator, PDFReportData } from "../utils/pdfGenerator";
 import { PrivacyProtectionManager } from "../utils/privacyProtection";
-import { logError } from "../../../../lib/debug-logger";
+import { logError } from "@/lib/debug-logger";
 
 export default function DataExportComponent() {
   const exportConfig = useExport() as ExportConfig;
@@ -197,6 +197,7 @@ export default function DataExportComponent() {
       // 使用新的PDF生成器
       await pdfGenerator.generateAndDownloadPDF(pdfData);
     } catch (error) {
+      logError("Failed to generate PDF", error, "DataExportComponent");
       alert(t("export.errorMessage"));
     }
   };
@@ -245,6 +246,7 @@ export default function DataExportComponent() {
       setExportStatus("success");
       alert(t("export.successMessage"));
     } catch (error) {
+      logError("Data export failed", error, "DataExportComponent");
       setExportStatus("error");
       alert(error instanceof Error ? error.message : t("export.errorMessage"));
     } finally {

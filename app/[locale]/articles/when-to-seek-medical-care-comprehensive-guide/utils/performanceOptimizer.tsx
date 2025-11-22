@@ -3,10 +3,27 @@
 import { lazy } from "react";
 import React from "react";
 import SafeSmartImage from "@/components/ui/SafeSmartImage";
+import { logError } from "@/lib/debug-logger";
+
+// 类型定义
+interface MemoryInfo {
+  totalJSHeapSize: number;
+  usedJSHeapSize: number;
+  jsHeapSizeLimit: number;
+}
+
+interface IdleRequestCallback {
+  (deadline: IdleDeadline): void;
+}
+
+interface IdleDeadline {
+  didTimeout: boolean;
+  timeRemaining(): number;
+}
 
 // 懒加载组件工厂
-export function createLazyComponent(
-  importFn: () => Promise<any>,
+export function createLazyComponent<T extends React.ComponentType<unknown>>(
+  importFn: () => Promise<{ default: T }>,
   fallback?: React.ComponentType,
 ) {
   return lazy(async () => {
@@ -18,7 +35,11 @@ export function createLazyComponent(
       ]);
       return component;
     } catch (error) {
-      console.error("Component lazy loading failed:", error);
+      logError(
+        "Component lazy loading failed:",
+        error,
+        "performanceOptimizer/createLazyComponent",
+      );
       // 返回错误组件
       return {
         default:
@@ -47,14 +68,32 @@ export function createLazyComponent(
 export function preloadComponents() {
   if (typeof window !== "undefined") {
     // 在空闲时间预加载组件
-    const preloadComponent = (importFn: () => Promise<any>) => {
+    const preloadComponent = <T extends React.ComponentType<unknown>>(
+      importFn: () => Promise<{ default: T }>,
+    ) => {
       if ("requestIdleCallback" in window) {
-        (window as any).requestIdleCallback(() => {
-          importFn().catch(console.error);
+        (
+          window as Window & {
+            requestIdleCallback(cb: IdleRequestCallback): void;
+          }
+        ).requestIdleCallback(() => {
+          importFn().catch((error) =>
+            logError(
+              "Component preload failed:",
+              error,
+              "performanceOptimizer/preloadComponent",
+            ),
+          );
         });
       } else {
         setTimeout(() => {
-          importFn().catch(console.error);
+          importFn().catch((error) =>
+            logError(
+              "Component preload failed:",
+              error,
+              "performanceOptimizer/preloadComponent",
+            ),
+          );
         }, 1000);
       }
     };
@@ -85,8 +124,19 @@ export class MedicalCareGuidePerformanceMonitor {
     this.metrics.set(`${componentName}_load_time`, loadTime);
 
     // 发送到分析服务（如果配置了）
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "component_load", {
+    if (
+      typeof window !== "undefined" &&
+      (
+        window as Window & {
+          gtag?: (command: string, params: Record<string, unknown>) => void;
+        }
+      ).gtag
+    ) {
+      (
+        window as Window & {
+          gtag?: (command: string, params: Record<string, unknown>) => void;
+        }
+      ).gtag("event", "component_load", {
         component_name: componentName,
         load_time: Math.round(loadTime),
         page: "medical-care-guide",
@@ -99,8 +149,19 @@ export class MedicalCareGuidePerformanceMonitor {
     const timestamp = Date.now();
     this.metrics.set(`${componentName}_${interaction}_time`, timestamp);
 
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "user_interaction", {
+    if (
+      typeof window !== "undefined" &&
+      (
+        window as Window & {
+          gtag?: (command: string, params: Record<string, unknown>) => void;
+        }
+      ).gtag
+    ) {
+      (
+        window as Window & {
+          gtag?: (command: string, params: Record<string, unknown>) => void;
+        }
+      ).gtag("event", "user_interaction", {
         interaction_type: interaction,
         component_name: componentName,
         page: "medical-care-guide",
@@ -112,8 +173,19 @@ export class MedicalCareGuidePerformanceMonitor {
   recordAssessmentCompletion(assessmentType: string, duration: number) {
     this.metrics.set(`${assessmentType}_completion_time`, duration);
 
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "assessment_completed", {
+    if (
+      typeof window !== "undefined" &&
+      (
+        window as Window & {
+          gtag?: (command: string, params: Record<string, unknown>) => void;
+        }
+      ).gtag
+    ) {
+      (
+        window as Window & {
+          gtag?: (command: string, params: Record<string, unknown>) => void;
+        }
+      ).gtag("event", "assessment_completed", {
         assessment_type: assessmentType,
         duration: Math.round(duration),
         page: "medical-care-guide",
@@ -288,12 +360,18 @@ export function useThrottle<T>(value: T, limit: number): T {
 
 // 内存使用监控
 export function useMemoryMonitor() {
-  const [memoryInfo, setMemoryInfo] = React.useState<any>(null);
+  const [memoryInfo, setMemoryInfo] = React.useState<{
+    totalJSHeapSize: number;
+    usedJSHeapSize: number;
+    jsHeapSizeLimit: number;
+  } | null>(null);
 
   React.useEffect(() => {
     const updateMemoryInfo = () => {
       if ("memory" in performance) {
-        setMemoryInfo((performance as any).memory);
+        setMemoryInfo(
+          (performance as Performance & { memory?: MemoryInfo }).memory || null,
+        );
       }
     };
 

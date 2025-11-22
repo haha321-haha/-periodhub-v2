@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { titleManager } from "@/utils/unifiedTitleManager";
 import { getWorkplaceQuestions } from "../shared/data/assessmentQuestions";
 import { calculateWorkplaceImpact } from "../shared/data/calculationAlgorithms";
+import { logWarn } from "@/lib/debug-logger";
 
 const WelcomeScreen = dynamic(() => import("./components/WelcomeScreen"), {
   loading: () => <div className="animate-pulse bg-gray-200 h-32 rounded-lg" />,
@@ -51,68 +52,67 @@ export default function WorkplaceImpactClient() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<WorkplaceAnswers>({});
   const [results, setResults] = useState<WorkplaceResults | null>(null);
-  const [sessionData, setSessionData] = useState({
-    sessionId: '',
-    startTime: '',
-    endTime: '',
-    completionTime: 0,
-    upgraded: false
-  });
 
   // 获取题库数据
   const questions = getWorkplaceQuestions("zh");
 
   // 保存进度到localStorage
-  const saveProgress = (state: PageState, index: number, assessmentAnswers: WorkplaceAnswers) => {
+  const saveProgress = (
+    state: PageState,
+    index: number,
+    assessmentAnswers: WorkplaceAnswers,
+  ) => {
     const progressData = {
       state,
       currentQuestionIndex: index,
       answers: assessmentAnswers,
       timestamp: Date.now(),
-      locale: "zh"
+      locale: "zh",
     };
     try {
-      localStorage.setItem('workplaceAssessmentProgress', JSON.stringify(progressData));
+      localStorage.setItem(
+        "workplaceAssessmentProgress",
+        JSON.stringify(progressData),
+      );
     } catch (error) {
-      console.warn('保存进度失败:', error);
+      logWarn(
+        "Failed to save progress",
+        error,
+        "workplaceImpact/WorkplaceImpactClient",
+      );
     }
   };
 
   // 从localStorage恢复进度
   const loadProgress = () => {
     try {
-      const saved = localStorage.getItem('workplaceAssessmentProgress');
+      const saved = localStorage.getItem("workplaceAssessmentProgress");
       if (saved) {
         const progressData = JSON.parse(saved);
-        const isExpired = Date.now() - progressData.timestamp > 24 * 60 * 60 * 1000;
+        const isExpired =
+          Date.now() - progressData.timestamp > 24 * 60 * 60 * 1000;
         if (!isExpired) {
           setCurrentState(progressData.state || "welcome");
           setCurrentQuestionIndex(progressData.currentQuestionIndex || 0);
           setAnswers(progressData.answers || {});
           return true;
         } else {
-          localStorage.removeItem('workplaceAssessmentProgress');
+          localStorage.removeItem("workplaceAssessmentProgress");
         }
       }
     } catch (error) {
-      console.warn('恢复进度失败:', error);
+      logWarn(
+        "Failed to load progress",
+        error,
+        "workplaceImpact/WorkplaceImpactClient",
+      );
     }
     return false;
-  };
-
-  // 生成会话ID
-  const generateSessionId = () => {
-    return `workplace_assessment_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   };
 
   // 组件加载时恢复进度和初始化会话
   useEffect(() => {
     loadProgress();
-    setSessionData(prev => ({
-      ...prev,
-      sessionId: generateSessionId(),
-      startTime: new Date().toISOString()
-    }));
   }, []);
 
   // 状态变化时自动保存进度
@@ -169,9 +169,13 @@ export default function WorkplaceImpactClient() {
     setAnswers({});
     setResults(null);
     try {
-      localStorage.removeItem('workplaceAssessmentProgress');
+      localStorage.removeItem("workplaceAssessmentProgress");
     } catch (error) {
-      console.warn('清除进度失败:', error);
+      logWarn(
+        "Failed to clear saved progress",
+        error,
+        "workplaceImpact/WorkplaceImpactClient",
+      );
     }
   };
 

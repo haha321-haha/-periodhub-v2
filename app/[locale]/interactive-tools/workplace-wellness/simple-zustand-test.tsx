@@ -3,6 +3,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { useState, useEffect } from "react";
+import { logInfo } from "@/lib/debug-logger";
 
 // 创建一个简单的独立store
 interface SimpleTestState {
@@ -29,10 +30,10 @@ const useSimpleTestStore = create<SimpleTestState>()(
       storage: createJSONStorage(() => localStorage),
       skipHydration: true,
       onRehydrateStorage: () => (state) => {
-        console.log("SimpleTestStore rehydrated:", state);
+        logInfo("SimpleTestStore rehydrated", state, "simple-zustand-test");
       },
-    }
-  )
+    },
+  ),
 );
 
 export default function SimpleZustandTest() {
@@ -46,10 +47,7 @@ export default function SimpleZustandTest() {
   // 确保只在客户端运行
   useEffect(() => {
     setIsClient(true);
-    // 强制重新hydration
-    if (useSimpleTestStore.persist) {
-      useSimpleTestStore.persist.rehydrate();
-    }
+    useSimpleTestStore.persist?.rehydrate?.();
   }, []);
 
   if (!isClient) {
@@ -72,8 +70,13 @@ export default function SimpleZustandTest() {
 
   const forceRehydrate = () => {
     try {
-      useSimpleTestStore.persist.rehydrate();
-      setMessage("强制重新水合完成");
+      const rehydrate = useSimpleTestStore.persist?.rehydrate;
+      if (rehydrate) {
+        rehydrate();
+        setMessage("强制重新水合完成");
+      } else {
+        setMessage("rehydrate 方法不可用");
+      }
     } catch (error) {
       setMessage("强制重新水合失败: " + String(error));
     }
@@ -105,9 +108,7 @@ export default function SimpleZustandTest() {
             >
               -1
             </button>
-            <div className="text-2xl font-bold w-16 text-center">
-              {counter}
-            </div>
+            <div className="text-2xl font-bold w-16 text-center">{counter}</div>
             <button
               onClick={increment}
               className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
@@ -133,9 +134,7 @@ export default function SimpleZustandTest() {
             rows={4}
             placeholder="输入一些文本..."
           />
-          <div className="text-sm text-gray-600">
-            字符数: {text.length}
-          </div>
+          <div className="text-sm text-gray-600">字符数: {text.length}</div>
         </div>
       </div>
 
@@ -194,9 +193,9 @@ export default function SimpleZustandTest() {
           <li>使用计数器按钮测试数值变化和持久化</li>
           <li>在文本框中输入内容测试文本持久化</li>
           <li>刷新页面后检查数据是否保存</li>
-          <li>使用"检查存储"查看localStorage中的数据</li>
-          <li>使用"强制水合"手动触发数据恢复</li>
-          <li>使用"立即持久化"手动保存当前状态</li>
+          <li>使用“检查存储”查看localStorage中的数据</li>
+          <li>使用“强制水合”手动触发数据恢复</li>
+          <li>使用“立即持久化”手动保存当前状态</li>
         </ol>
       </div>
     </div>

@@ -1,36 +1,31 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useWorkplaceWellnessStore, useWorkplaceWellnessActions, useWorkplaceWellnessStore as storeModule } from "./hooks/useWorkplaceWellnessStore";
+import {
+  useWorkplaceWellnessStore,
+  useWorkplaceWellnessActions,
+} from "./hooks/useWorkplaceWellnessStore";
+import { logWarn } from "@/lib/debug-logger";
 
 export default function TestStore() {
-  const store = (useWorkplaceWellnessStore as any)((state: any) => state);
-  const { setActiveTab, updateWorkImpact, addPeriodRecord } = useWorkplaceWellnessActions();
+  const { setActiveTab, updateWorkImpact, addPeriodRecord } =
+    useWorkplaceWellnessActions();
   const [testMessage, setTestMessage] = useState("");
   const [isClient, setIsClient] = useState(false);
-  const [activeTab, setActiveTabState] = useState("");
-  const [calendar, setCalendar] = useState<any>({});
-  const [workImpact, setWorkImpact] = useState<any>({});
-  const [nutrition, setNutrition] = useState<any>({});
+  const activeTab = useWorkplaceWellnessStore((state) => state.activeTab);
+  const calendar = useWorkplaceWellnessStore((state) => state.calendar);
+  const workImpact = useWorkplaceWellnessStore((state) => state.workImpact);
+  const nutrition = useWorkplaceWellnessStore((state) => state.nutrition);
 
   // 确保只在客户端运行
   useEffect(() => {
     setIsClient(true);
-    // 强制重新hydration - 使用正确的 API
     try {
-      const store = storeModule as any;
-      if (store.persist && store.persist.rehydrate) {
-        store.persist.rehydrate();
-      }
+      useWorkplaceWellnessStore.persist?.rehydrate?.();
     } catch (error) {
-      console.warn("无法重新hydration:", error);
+      logWarn("无法重新hydration", error, "test-store");
     }
-    // 获取当前状态
-    setActiveTabState(store.activeTab);
-    setCalendar(store.calendar);
-    setWorkImpact(store.workImpact);
-    setNutrition(store.nutrition);
-  }, [store]);
+  }, []);
 
   const testAddRecord = () => {
     try {
@@ -62,7 +57,9 @@ export default function TestStore() {
       const storageData = localStorage.getItem("workplace-wellness-storage");
       if (storageData) {
         const parsed = JSON.parse(storageData);
-        setTestMessage("存储数据存在: " + JSON.stringify(parsed.state, null, 2));
+        setTestMessage(
+          "存储数据存在: " + JSON.stringify(parsed.state, null, 2),
+        );
       } else {
         setTestMessage("存储数据不存在");
       }
@@ -74,14 +71,16 @@ export default function TestStore() {
   const testPersist = () => {
     try {
       // Zustand persist 中间件会自动持久化，这里只是检查当前状态
-      const store = storeModule as any;
-      const currentState = store.getState();
+      const currentState = useWorkplaceWellnessStore.getState();
       // 通过更新 activeTab 来触发状态更新，从而触发自动持久化
       setActiveTab(currentState.activeTab);
-      setTestMessage("状态已更新，持久化将自动完成。当前状态: " + JSON.stringify({
-        activeTab: currentState.activeTab,
-        calendarRecords: currentState.calendar.periodData.length
-      }));
+      setTestMessage(
+        "状态已更新，持久化将自动完成。当前状态: " +
+          JSON.stringify({
+            activeTab: currentState.activeTab,
+            calendarRecords: currentState.calendar.periodData.length,
+          }),
+      );
     } catch (error) {
       setTestMessage("持久化测试失败: " + String(error));
     }
@@ -90,9 +89,9 @@ export default function TestStore() {
   const testForceHydration = () => {
     try {
       // 使用正确的 API 访问 persist
-      const store = storeModule as any;
-      if (store.persist && store.persist.rehydrate) {
-        store.persist.rehydrate();
+      const rehydrate = useWorkplaceWellnessStore.persist?.rehydrate;
+      if (rehydrate) {
+        rehydrate();
         setTestMessage("强制hydration完成");
       } else {
         setTestMessage("无法获取rehydrate方法");
@@ -108,15 +107,19 @@ export default function TestStore() {
       const testData = {
         testValue: "This is a test",
         timestamp: new Date().toISOString(),
-        testNumber: Math.floor(Math.random() * 100)
+        testNumber: Math.floor(Math.random() * 100),
       };
 
       localStorage.setItem("test-storage-key", JSON.stringify(testData));
 
       // 立即读取
-      const retrieved = JSON.parse(localStorage.getItem("test-storage-key") || "{}");
+      const retrieved = JSON.parse(
+        localStorage.getItem("test-storage-key") || "{}",
+      );
 
-      setTestMessage("直接localStorage测试成功: " + JSON.stringify(retrieved, null, 2));
+      setTestMessage(
+        "直接localStorage测试成功: " + JSON.stringify(retrieved, null, 2),
+      );
     } catch (error) {
       setTestMessage("直接localStorage测试失败: " + String(error));
     }
@@ -125,8 +128,7 @@ export default function TestStore() {
   const testStoreDirectWrite = () => {
     try {
       // 直接写入localStorage测试数据
-      const store = storeModule as any;
-      const state = store.getState();
+      const state = useWorkplaceWellnessStore.getState();
       const testState = {
         ...state,
         calendar: {
@@ -136,16 +138,19 @@ export default function TestStore() {
               date: new Date().toISOString().split("T")[0],
               type: "period",
               painLevel: 8,
-              flow: null
-            }
-          ]
-        }
+              flow: null,
+            },
+          ],
+        },
       };
 
-      localStorage.setItem("workplace-wellness-storage", JSON.stringify({
-        state: testState,
-        version: 0
-      }));
+      localStorage.setItem(
+        "workplace-wellness-storage",
+        JSON.stringify({
+          state: testState,
+          version: 0,
+        }),
+      );
 
       setTestMessage("直接写入store数据到localStorage成功");
     } catch (error) {
@@ -163,7 +168,10 @@ export default function TestStore() {
       }
 
       const parsed = JSON.parse(raw);
-      setTestMessage("直接从localStorage读取数据成功: " + JSON.stringify(parsed.state.calendar.periodData, null, 2));
+      setTestMessage(
+        "直接从localStorage读取数据成功: " +
+          JSON.stringify(parsed.state.calendar.periodData, null, 2),
+      );
     } catch (error) {
       setTestMessage("直接从localStorage读取失败: " + String(error));
     }

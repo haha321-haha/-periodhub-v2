@@ -5,8 +5,9 @@
 
 "use client";
 
-import React, { useState, useEffect, useCallback, createContext, useContext } from "react";
+import React, { useState, useCallback, createContext, useContext } from "react";
 import { CheckCircle, AlertCircle, AlertTriangle, Info, X } from "lucide-react";
+import { logWarn } from "@/lib/debug-logger";
 
 export type ToastType = "success" | "error" | "warning" | "info";
 
@@ -32,7 +33,11 @@ export function useSimpleToast() {
     const fallbackToast = {
       toasts: [],
       addToast: (type: ToastType, message: string) => {
-        console.log(`[${type.toUpperCase()}] ${message}`);
+        logWarn(
+          `Fallback toast: [${type.toUpperCase()}] ${message}`,
+          undefined,
+          "SimpleToast",
+        );
         return "";
       },
       removeToast: () => {},
@@ -42,24 +47,33 @@ export function useSimpleToast() {
   return context;
 }
 
-export function SimpleToastProvider({ children }: { children: React.ReactNode }) {
+export function SimpleToastProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  const addToast = useCallback((type: ToastType, message: string, duration = 3000) => {
-    const id = `toast-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    const newToast: Toast = { id, type, message, duration };
+  const addToast = useCallback(
+    (type: ToastType, message: string, duration = 3000) => {
+      const id = `toast-${Date.now()}-${Math.random()
+        .toString(36)
+        .substr(2, 9)}`;
+      const newToast: Toast = { id, type, message, duration };
 
-    setToasts((prev) => [...prev, newToast]);
+      setToasts((prev) => [...prev, newToast]);
 
-    // 自动移除
-    if (duration > 0) {
-      setTimeout(() => {
-        setToasts((prev) => prev.filter((t) => t.id !== id));
-      }, duration);
-    }
+      // 自动移除
+      if (duration > 0) {
+        setTimeout(() => {
+          setToasts((prev) => prev.filter((t) => t.id !== id));
+        }, duration);
+      }
 
-    return id;
-  }, []);
+      return id;
+    },
+    [],
+  );
 
   const removeToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
@@ -87,7 +101,13 @@ function SimpleToastContainer() {
   );
 }
 
-function SimpleToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: string) => void }) {
+function SimpleToastItem({
+  toast,
+  onRemove,
+}: {
+  toast: Toast;
+  onRemove: (id: string) => void;
+}) {
   const iconMap = {
     success: CheckCircle,
     error: AlertCircle,
@@ -106,7 +126,9 @@ function SimpleToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: str
 
   return (
     <div
-      className={`flex items-start gap-3 p-4 rounded-lg border shadow-lg ${colorMap[toast.type]} animate-slide-in-right`}
+      className={`flex items-start gap-3 p-4 rounded-lg border shadow-lg ${
+        colorMap[toast.type]
+      } animate-slide-in-right`}
     >
       <Icon className="w-5 h-5 flex-shrink-0 mt-0.5" />
       <div className="flex-1 text-sm">{toast.message}</div>
@@ -119,4 +141,3 @@ function SimpleToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: str
     </div>
   );
 }
-

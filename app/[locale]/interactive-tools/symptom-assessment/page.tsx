@@ -4,7 +4,6 @@ import {
   generateToolStructuredData,
   ToolStructuredDataScript,
 } from "@/lib/seo/tool-structured-data";
-import { getRelatedArticlesWithCache } from "@/lib/articles";
 import { generateAllStructuredData } from "./utils/seoOptimization";
 import { Locale } from "@/i18n";
 
@@ -78,13 +77,6 @@ export default async function SymptomAssessmentPage({
   const t = await getTranslations({ locale, namespace: "interactiveTools" });
   const isZh = locale === "zh";
 
-  // 获取智能推荐数据（在服务器端处理）
-  const recommendedArticles = getRelatedArticlesWithCache(
-    "comprehensive-medical-guide-to-dysmenorrhea", // 使用实际存在的文章slug
-    locale,
-    3
-  );
-
   // 生成工具结构化数据
   const toolStructuredData = await generateToolStructuredData({
     locale,
@@ -107,11 +99,15 @@ export default async function SymptomAssessmentPage({
     breadcrumbs: [
       {
         name: isZh ? "交互工具" : "Interactive Tools",
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools`,
+        url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/${locale}/interactive-tools`,
       },
       {
         name: isZh ? "症状评估" : "Symptom Assessment",
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/symptom-assessment`,
+        url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/${locale}/interactive-tools/symptom-assessment`,
       },
     ],
     primaryConditionKey: "dysmenorrhea",

@@ -1,0 +1,3 @@
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/progress/page.tsx:93:9: 'timePeriods' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
+
+1 problem

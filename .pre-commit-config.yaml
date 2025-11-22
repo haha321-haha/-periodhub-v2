@@ -29,23 +29,23 @@ repos:
           - '@typescript-eslint/eslint-plugin@^6.0.0'
           - '@typescript-eslint/parser@^6.0.0'
 
-  # 自定义硬编码检测
-  - repo: local
-    hooks:
-      - id: detect-hardcode
-        name: 'Detect Hardcoded Strings'
-        entry: bash -c 'npm run detect-hardcode || (echo "❌ 硬编码检测失败！请修复后再提交。" && exit 1)'
-        language: system
-        files: \.(js|jsx|ts|tsx)$
-        exclude: '^scripts/|^eslint-rules/'
-        pass_filenames: false
+  # 自定义硬编码检测（暂时禁用，脚本不存在）
+  # - repo: local
+  #   hooks:
+  #     - id: detect-hardcode
+  #       name: 'Detect Hardcoded Strings'
+  #       entry: bash -c 'npm run detect-hardcode || (echo "❌ 硬编码检测失败！请修复后再提交。" && exit 1)'
+  #       language: system
+  #       files: \.(js|jsx|ts|tsx)$
+  #       exclude: '^scripts/|^eslint-rules/'
+  #       pass_filenames: false
 
-      - id: detect-stress-hardcode
-        name: 'Detect Stress Management Hardcode'
-        entry: bash -c 'npm run detect-stress-hardcode || (echo "❌ 压力管理项目硬编码检测失败！请修复后再提交。" && exit 1)'
-        language: system
-        files: '^app/\[locale\]/stress-management/|^components/stress-management/'
-        pass_filenames: false
+  #     - id: detect-stress-hardcode
+  #       name: 'Detect Stress Management Hardcode'
+  #       entry: bash -c 'npm run detect-stress-hardcode || (echo "❌ 压力管理项目硬编码检测失败！请修复后再提交。" && exit 1)'
+  #       language: system
+  #       files: '^app/\[locale\]/stress-management/|^components/stress-management/'
+  #       pass_filenames: false
 
   # TypeScript类型检查
   - repo: https://github.com/pre-commit/mirrors-prettier

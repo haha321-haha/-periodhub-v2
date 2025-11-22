@@ -6,6 +6,7 @@
 import { useEffect, useCallback, useRef } from "react";
 import { usePartnerHandbookStore } from "../stores/partnerHandbookStore";
 import { progressManager } from "../utils/progressManager";
+import { logError, logInfo } from "@/lib/debug-logger";
 
 export const useProgressSave = () => {
   const store = usePartnerHandbookStore();
@@ -31,10 +32,10 @@ export const useProgressSave = () => {
 
       if (success) {
         lastSaveTime.current = new Date();
-        console.log("💾 进度保存成功");
+        logInfo("💾 进度保存成功", undefined, "useProgressSave/saveProgress");
       }
     } catch (error) {
-      console.error("❌ 进度保存失败:", error);
+      logError("❌ 进度保存失败", error, "useProgressSave/saveProgress");
     } finally {
       isSaving.current = false;
     }
@@ -45,11 +46,11 @@ export const useProgressSave = () => {
     try {
       const success = progressManager.restoreProgress(store);
       if (success) {
-        console.log("📂 进度加载成功");
+        logInfo("📂 进度加载成功", undefined, "useProgressSave/loadProgress");
         return true;
       }
     } catch (error) {
-      console.error("❌ 进度加载失败:", error);
+      logError("❌ 进度加载失败", error, "useProgressSave/loadProgress");
     }
     return false;
   }, [store]);
@@ -61,11 +62,11 @@ export const useProgressSave = () => {
       if (success) {
         // 重置store状态
         store.resetAllStages();
-        console.log("🗑️ 进度清除成功");
+        logInfo("🗑️ 进度清除成功", undefined, "useProgressSave/clearProgress");
       }
       return success;
     } catch (error) {
-      console.error("❌ 进度清除失败:", error);
+      logError("❌ 进度清除失败", error, "useProgressSave/clearProgress");
       return false;
     }
   }, [store]);
@@ -75,11 +76,19 @@ export const useProgressSave = () => {
     try {
       const resumePoint = progressManager.checkResumePoint();
       if (resumePoint) {
-        console.log("🔄 发现断点续测点:", resumePoint);
+        logInfo(
+          "🔄 发现断点续测点",
+          { resumePoint },
+          "useProgressSave/checkResumePoint",
+        );
         return resumePoint;
       }
     } catch (error) {
-      console.error("❌ 检查断点续测失败:", error);
+      logError(
+        "❌ 检查断点续测失败",
+        error,
+        "useProgressSave/checkResumePoint",
+      );
     }
     return null;
   }, []);
@@ -102,11 +111,11 @@ export const useProgressSave = () => {
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
 
-        console.log("📤 进度导出成功");
+        logInfo("📤 进度导出成功", undefined, "useProgressSave/exportProgress");
         return true;
       }
     } catch (error) {
-      console.error("❌ 进度导出失败:", error);
+      logError("❌ 进度导出失败", error, "useProgressSave/exportProgress");
     }
     return false;
   }, []);
@@ -124,21 +133,33 @@ export const useProgressSave = () => {
               if (success) {
                 // 重新加载进度到store
                 loadProgress();
-                console.log("📥 进度导入成功");
+                logInfo(
+                  "📥 进度导入成功",
+                  undefined,
+                  "useProgressSave/importProgress",
+                );
               }
               resolve(success);
             } catch (error) {
-              console.error("❌ 进度导入失败:", error);
+              logError(
+                "❌ 进度导入失败",
+                error,
+                "useProgressSave/importProgress",
+              );
               resolve(false);
             }
           };
           reader.onerror = () => {
-            console.error("❌ 文件读取失败");
+            logError(
+              "❌ 文件读取失败",
+              undefined,
+              "useProgressSave/importProgress",
+            );
             resolve(false);
           };
           reader.readAsText(file);
         } catch (error) {
-          console.error("❌ 进度导入失败:", error);
+          logError("❌ 进度导入失败", error, "useProgressSave/importProgress");
           resolve(false);
         }
       });
@@ -151,7 +172,11 @@ export const useProgressSave = () => {
     try {
       return progressManager.getProgressStats();
     } catch (error) {
-      console.error("❌ 获取进度统计失败:", error);
+      logError(
+        "❌ 获取进度统计失败",
+        error,
+        "useProgressSave/getProgressStats",
+      );
       return null;
     }
   }, []);
@@ -161,7 +186,7 @@ export const useProgressSave = () => {
     try {
       return progressManager.createSnapshot();
     } catch (error) {
-      console.error("❌ 创建进度快照失败:", error);
+      logError("❌ 创建进度快照失败", error, "useProgressSave/createSnapshot");
       return null;
     }
   }, []);
@@ -173,11 +198,19 @@ export const useProgressSave = () => {
         const success = progressManager.restoreSnapshot(snapshotData);
         if (success) {
           loadProgress();
-          console.log("🔄 进度快照恢复成功");
+          logInfo(
+            "🔄 进度快照恢复成功",
+            undefined,
+            "useProgressSave/restoreSnapshot",
+          );
         }
         return success;
       } catch (error) {
-        console.error("❌ 进度快照恢复失败:", error);
+        logError(
+          "❌ 进度快照恢复失败",
+          error,
+          "useProgressSave/restoreSnapshot",
+        );
         return false;
       }
     },

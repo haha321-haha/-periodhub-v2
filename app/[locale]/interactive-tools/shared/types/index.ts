@@ -179,7 +179,7 @@ export interface ValidationError {
 export interface ApiError {
   message: string;
   code: string;
-  details?: Record<string, any>;
+  details?: Record<string, unknown>;
 }
 
 // 本地存储相关类型

@@ -4,7 +4,7 @@
  */
 
 import { ComponentType, memo, MemoExoticComponent } from "react";
-import { logWarn } from "../../../../../lib/debug-logger";
+import { logWarn } from "@/lib/debug-logger";
 
 type TimeoutHandle = ReturnType<typeof setTimeout>;
 

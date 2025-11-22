@@ -49,9 +49,9 @@ export default function SEODashboardClient() {
             ] as "volume" | "difficulty" | "cpc",
           })),
         });
-      } catch (err) {
+      } catch {
         setError("Failed to load SEO data");
-        console.error("SEO data loading error:", err);
+        // SEO data loading error handled by error state
       } finally {
         setLoading(false);
       }

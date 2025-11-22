@@ -14,7 +14,7 @@ import {
   createTestNutritionData,
 } from "./recommendationTestUtils";
 import { RecommendationFeedbackHistory } from "../types";
-import { logError, logInfo } from "../../../../lib/debug-logger";
+import { logError, logInfo } from "@/lib/debug-logger";
 
 const formatErrorMessage = (error: unknown) =>
   typeof error === "string"

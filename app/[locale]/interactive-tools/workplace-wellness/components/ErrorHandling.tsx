@@ -8,6 +8,7 @@
 
 import { ReactNode, Component, ErrorInfo } from "react";
 import { AlertTriangle, RefreshCw, Home, Bug } from "lucide-react";
+import { logError } from "@/lib/debug-logger";
 
 // 错误边界组件
 interface ErrorBoundaryState {
@@ -42,7 +43,7 @@ class InternalErrorBoundary extends Component<
 
     // 开发环境下打印错误信息
     if (process.env.NODE_ENV === "development") {
-      console.error("ErrorBoundary caught an error:", error, errorInfo);
+      logError("ErrorBoundary caught an error", error, "InternalErrorBoundary");
     }
   }
 
@@ -67,6 +68,13 @@ export function ErrorFallback({
   error?: Error;
   onRetry?: () => void;
 }) {
+  const handleRetry = () => {
+    if (onRetry) {
+      onRetry();
+    } else {
+      window.location.reload();
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="max-w-md w-full text-center">
@@ -80,7 +88,7 @@ export function ErrorFallback({
 
         <div className="space-y-3">
           <button
-            onClick={() => window.location.reload()}
+            onClick={handleRetry}
             className="w-full bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors"
           >
             <RefreshCw className="w-4 h-4 inline mr-2" />

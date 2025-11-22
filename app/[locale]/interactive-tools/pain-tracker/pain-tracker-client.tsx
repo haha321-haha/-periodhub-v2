@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import dynamic from "next/dynamic";
 import Breadcrumb from "@/components/Breadcrumb";
 

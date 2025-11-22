@@ -6,6 +6,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 import { ComponentType } from "react";
+import { logWarn, logError } from "@/lib/debug-logger";
 
 // 加载组件
 const LoadingComponent = () => (
@@ -109,12 +110,20 @@ export const useComponentPreloader = () => {
           await import("../components/RelatedLinks");
           break;
         default:
-          console.warn(`Unknown component: ${componentName}`);
+          logWarn(
+            `Unknown component: ${componentName}`,
+            { componentName },
+            "codeSplitting/preloadComponent",
+          );
       }
 
       setPreloadedComponents((prev) => new Set([...prev, componentName]));
     } catch (error) {
-      console.error(`Failed to preload component ${componentName}:`, error);
+      logError(
+        `Failed to preload component ${componentName}`,
+        error,
+        "codeSplitting/preloadComponent",
+      );
     }
   };
 
@@ -127,10 +136,10 @@ export const dynamicImport = async function <T>(
   fallback?: ComponentType<T>,
 ): Promise<ComponentType<T>> {
   try {
-    const module = await importFn();
-    return module.default;
+    const loaded = await importFn();
+    return loaded.default;
   } catch (error) {
-    console.error("Dynamic import failed:", error);
+    logError("Dynamic import failed", error, "codeSplitting/dynamicImport");
     if (fallback) {
       return fallback;
     }
@@ -157,6 +166,12 @@ export const useComponentLoadingState = () => {
   return { setLoading, isLoading };
 };
 
+type PerformanceWithMemory = Performance & {
+  memory?: {
+    usedJSHeapSize: number;
+  };
+};
+
 // 性能监控
 export const usePerformanceMetrics = () => {
   const [metrics, setMetrics] = React.useState({
@@ -177,7 +192,7 @@ export const usePerformanceMetrics = () => {
     // 监控内存使用
     const checkMemory = () => {
       if ("memory" in performance) {
-        const memory = (performance as any).memory;
+        const memory = (performance as PerformanceWithMemory).memory;
         setMetrics((prev) => ({
           ...prev,
           memoryUsage: memory.usedJSHeapSize / 1024 / 1024,

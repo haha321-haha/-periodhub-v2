@@ -2,15 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
+import { logError } from "@/lib/debug-logger";
 import {
   Globe,
   CheckCircle,
   AlertTriangle,
   RefreshCw,
   Download,
-  Upload,
   Settings,
-  Languages,
   FileText,
   BarChart3,
 } from "lucide-react";
@@ -70,7 +69,7 @@ export default function I18nOptimizer({
         setTranslationStatus(mockStatus);
         setLoading(false);
       } catch (error) {
-        console.error("Translation check failed:", error);
+        logError("Translation check failed", error, "I18nOptimizer");
         setLoading(false);
       }
     };
@@ -116,7 +115,7 @@ export default function I18nOptimizer({
 
       setIsOptimizing(false);
     } catch (error) {
-      console.error("Translation optimization failed:", error);
+      logError("Translation optimization failed", error, "I18nOptimizer");
       setIsOptimizing(false);
     }
   };
@@ -205,9 +204,7 @@ export default function I18nOptimizer({
             <h3 className="text-lg font-semibold text-blue-900 mb-2">
               {t("status.totalKeys")}
             </h3>
-            <p className="text-sm text-blue-700">
-              {t("status.totalKeysDesc")}
-            </p>
+            <p className="text-sm text-blue-700">{t("status.totalKeysDesc")}</p>
           </div>
 
           <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-lg p-6 border border-red-200">

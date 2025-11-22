@@ -22,3 +22,4 @@ coverage/
 .cache/
 .turbo/
 .DS_Store
+app/\[locale\]/interactive-tools/components/ConstitutionTestTool.backup*.tsx

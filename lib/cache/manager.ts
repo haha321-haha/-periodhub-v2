@@ -1,5 +1,7 @@
 "use client";
 
+import { logWarn } from "@/lib/debug-logger";
+
 // 缓存项接口
 interface CacheItem<T> {
   data: T;
@@ -32,7 +34,7 @@ interface CacheStats {
 
 // 高级缓存管理器
 export class AdvancedCacheManager {
-  private cache = new Map<string, CacheItem<any>>();
+  private cache = new Map<string, CacheItem<unknown>>();
   private stats = {
     hits: 0,
     misses: 0,
@@ -64,11 +66,7 @@ export class AdvancedCacheManager {
       priority?: "low" | "normal" | "high";
     } = {},
   ): void {
-    const {
-      ttl = this.config.defaultTTL,
-      tags = [],
-      priority = "normal",
-    } = options;
+    const { ttl = this.config.defaultTTL, tags = [] } = options;
 
     const now = Date.now();
     const item: CacheItem<T> = {
@@ -196,7 +194,7 @@ export class AdvancedCacheManager {
   }
 
   // 获取缓存项信息（不更新访问统计）
-  inspect(key: string): CacheItem<any> | null {
+  inspect(key: string): CacheItem<unknown> | null {
     return this.cache.get(key) || null;
   }
 
@@ -285,7 +283,7 @@ export class AdvancedCacheManager {
   }
 
   // 估算缓存项大小
-  private estimateSize(item: CacheItem<any>): number {
+  private estimateSize(item: CacheItem<unknown>): number {
     try {
       return JSON.stringify(item).length * 2; // 粗略估算（UTF-16）
     } catch {
@@ -325,7 +323,11 @@ export class AdvancedCacheManager {
       });
       localStorage.setItem("advanced-cache", serialized);
     } catch (error) {
-      console.warn("Failed to save cache to localStorage:", error);
+      logWarn(
+        "Failed to save cache to localStorage:",
+        error,
+        "cache/manager/saveToPersistence",
+      );
     }
   }
 
@@ -358,7 +360,11 @@ export class AdvancedCacheManager {
       // 恢复统计
       this.stats = data.stats || { hits: 0, misses: 0 };
     } catch (error) {
-      console.warn("Failed to load cache from localStorage:", error);
+      logWarn(
+        "Failed to load cache from localStorage:",
+        error,
+        "cache/manager/loadFromPersistence",
+      );
       localStorage.removeItem("advanced-cache");
     }
   }

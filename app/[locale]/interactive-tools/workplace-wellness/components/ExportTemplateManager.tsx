@@ -1,32 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import {
-  FileText,
-  Plus,
-  Edit,
-  Trash2,
-  Copy,
-  Download,
-  Calendar,
-  Filter,
-  Save,
-  X,
-} from "lucide-react";
+import { FileText, Plus, Edit, Trash2, Copy, Save, X } from "lucide-react";
 import {
   useExportTemplates,
   useActiveTemplate,
   useExportTemplateActions,
 } from "../hooks/useWorkplaceWellnessStore";
 import { useTranslations } from "next-intl";
-import { ExportTemplate, ExportType, ExtendedExportFormat } from "../types";
+import type {
+  ExportTemplate,
+  ExportType,
+  ExtendedExportFormat,
+} from "../types";
 import { EXPORT_FORMAT_CONFIG } from "../types/defaults";
 
-interface ExportTemplateManagerProps {}
+const defaultTemplateState: Partial<ExportTemplate> = {
+  name: "",
+  description: "",
+  exportType: "period",
+  format: "pdf",
+  fields: ["date", "type", "painLevel"],
+  isDefault: false,
+};
 
-export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
-  const templates = useExportTemplates() as ExportTemplate[];
-  const activeTemplate = useActiveTemplate() as ExportTemplate | null;
+export default function ExportTemplateManager() {
+  const templates = useExportTemplates();
+  const activeTemplate = useActiveTemplate();
   const exportTemplateActions = useExportTemplateActions();
   const {
     addExportTemplate,
@@ -42,22 +42,17 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
   const [editingTemplate, setEditingTemplate] = useState<ExportTemplate | null>(
     null,
   );
-  const [newTemplate, setNewTemplate] = useState<Partial<ExportTemplate>>({
-    name: "",
-    description: "",
-    exportType: "period",
-    format: "pdf",
-    fields: ["date", "type", "painLevel"],
-    isDefault: false,
-  });
+  const [newTemplate, setNewTemplate] =
+    useState<Partial<ExportTemplate>>(defaultTemplateState);
+  const resetForm = () => {
+    setNewTemplate({ ...defaultTemplateState });
+  };
 
   // 创建新模板
   const handleCreateTemplate = () => {
     if (newTemplate.name && newTemplate.exportType && newTemplate.format) {
-      // TypeScript 类型推断有问题，使用类型断言
-      const addExportTemplateFn = addExportTemplate as (template: Omit<ExportTemplate, "id" | "createdAt" | "updatedAt">) => void;
-      addExportTemplateFn({
-        name: newTemplate.name,
+      addExportTemplate({
+        name: newTemplate.name!,
         description: newTemplate.description || "",
         exportType: newTemplate.exportType as ExportType,
         format: newTemplate.format as ExtendedExportFormat,
@@ -68,14 +63,7 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
       });
 
       // 重置表单
-      setNewTemplate({
-        name: "",
-        description: "",
-        exportType: "period",
-        format: "pdf",
-        fields: ["date", "type", "painLevel"],
-        isDefault: false,
-      });
+      resetForm();
       setIsCreating(false);
     }
   };
@@ -103,9 +91,7 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
       newTemplate.exportType &&
       newTemplate.format
     ) {
-      // TypeScript 类型推断有问题，使用类型断言
-      const updateExportTemplateFn = updateExportTemplate as (id: string, updates: Partial<ExportTemplate>) => void;
-      updateExportTemplateFn(editingTemplate.id, {
+      updateExportTemplate(editingTemplate.id, {
         name: newTemplate.name,
         description: newTemplate.description,
         exportType: newTemplate.exportType as ExportType,
@@ -117,53 +103,32 @@ export default function ExportTemplateManager({}: ExportTemplateManagerProps) {
       });
 
       setEditingTemplate(null);
-      setNewTemplate({
-        name: "",
-        description: "",
-        exportType: "period",
-        format: "pdf",
-        fields: ["date", "type", "painLevel"],
-        isDefault: false,
-      });
+      resetForm();
     }
   };
 
   // 删除模板
   const handleDeleteTemplate = (template: ExportTemplate) => {
     if (window.confirm(`确定要删除模板 "${template.name}" 吗？`)) {
-      // TypeScript 类型推断有问题，使用类型断言
-      const deleteExportTemplateFn = deleteExportTemplate as (id: string) => void;
-      deleteExportTemplateFn(template.id);
+      deleteExportTemplate(template.id);
     }
   };
 
   // 复制模板
   const handleDuplicateTemplate = (template: ExportTemplate) => {
-    // TypeScript 类型推断有问题，使用类型断言
-    const duplicateTemplateFn = duplicateTemplate as (id: string) => void;
-    duplicateTemplateFn(template.id);
+    duplicateTemplate(template.id);
   };
 
   // 使用模板
   const handleUseTemplate = (template: ExportTemplate) => {
-    // TypeScript 类型推断有问题，使用类型断言
-    const setActiveTemplateFn = setActiveTemplate as (template: ExportTemplate | null) => void;
-    const loadTemplateFn = loadTemplate as (id: string) => void;
-    setActiveTemplateFn(template);
-    loadTemplateFn(template.id);
+    setActiveTemplate(template);
+    loadTemplate(template.id);
   };
 
   // 取消编辑
   const handleCancelEdit = () => {
     setEditingTemplate(null);
-    setNewTemplate({
-      name: "",
-      description: "",
-      exportType: "period",
-      format: "pdf",
-      fields: ["date", "type", "painLevel"],
-      isDefault: false,
-    });
+    resetForm();
     setIsCreating(false);
   };
 

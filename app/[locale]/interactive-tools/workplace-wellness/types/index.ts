@@ -279,7 +279,7 @@ export interface ExportTemplate {
     start: string;
     end: string;
   };
-  filters?: Record<string, any>; // 自定义过滤条件
+  filters?: Record<string, unknown>; // 自定义过滤条件
   createdAt: string;
   updatedAt: string;
   isDefault?: boolean;
@@ -322,7 +322,7 @@ export interface CustomExportConfig {
     start: string;
     end: string;
   };
-  filters?: Record<string, any>;
+  filters?: Record<string, unknown>;
   includeMetadata: boolean;
   includeCharts: boolean;
   password?: string;
@@ -418,7 +418,7 @@ export interface UserPreferences {
 export interface PreferenceChange {
   category: keyof UserPreferences;
   key: string;
-  value: any;
+  value: unknown;
   timestamp: string;
 }
 

@@ -15,7 +15,7 @@ import {
   clearStorage,
   createStorageKey,
 } from "../utils";
-import { STORAGE_KEYS } from "../constants";
+import { logError } from "@/lib/debug-logger";
 
 interface UsePainTrackerReturn {
   // Data
@@ -26,7 +26,7 @@ interface UsePainTrackerReturn {
 
   // Actions
   addEntry: (
-    data: PainEntryFormData,
+    data: PainEntryFormPayload,
   ) => Promise<{ success: boolean; errors?: ValidationError[] }>;
   updateEntry: (
     id: string,
@@ -44,6 +44,10 @@ interface UsePainTrackerReturn {
   refreshData: () => void;
   setError: (error: string | null) => void;
 }
+
+type PainEntryFormPayload = PainEntryFormData & {
+  overwrite?: boolean;
+};
 
 export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
   const [entries, setEntries] = useState<PainEntry[]>([]);
@@ -75,7 +79,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
           setStatistics(calculateStatistics(savedEntries));
         }
       } catch (err) {
-        console.error("Failed to load pain tracker data:", err);
+        logError("Failed to load pain tracker data", err, "usePainTracker");
         setError("Failed to load data. Please refresh the page.");
       } finally {
         setIsLoading(false);
@@ -102,7 +106,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
 
   const addEntry = useCallback(
     async (
-      data: PainEntryFormData,
+      data: PainEntryFormPayload,
     ): Promise<{ success: boolean; errors?: ValidationError[] }> => {
       try {
         setError(null);
@@ -117,7 +121,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
         const existingEntry = entries.find((entry) => entry.date === data.date);
         if (existingEntry) {
           // 如果用户明确表示要覆盖，则删除旧记录
-          if ((data as any).overwrite === true) {
+          if (data.overwrite === true) {
             setEntries((prev) =>
               prev.filter((entry) => entry.date !== data.date),
             );
@@ -157,7 +161,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
 
         return { success: true };
       } catch (err) {
-        console.error("Failed to add entry:", err);
+        logError("Failed to add entry", err, "usePainTracker");
         setError("Failed to add entry. Please try again.");
         return {
           success: false,
@@ -237,7 +241,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
 
         return { success: true };
       } catch (err) {
-        console.error("Failed to update entry:", err);
+        logError("Failed to update entry", err, "usePainTracker");
         setError("Failed to update entry. Please try again.");
         return {
           success: false,
@@ -268,7 +272,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
         setEntries((prev) => prev.filter((entry) => entry.id !== id));
         return true;
       } catch (err) {
-        console.error("Failed to delete entry:", err);
+        logError("Failed to delete entry", err, "usePainTracker");
         setError("Failed to delete entry. Please try again.");
         return false;
       }
@@ -287,7 +291,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
       }
       return true;
     } catch (err) {
-      console.error("Failed to clear entries:", err);
+      logError("Failed to clear entries", err, "usePainTracker");
       setError("Failed to clear data. Please try again.");
       return false;
     }
@@ -334,7 +338,7 @@ export const usePainTracker = (userId?: string): UsePainTrackerReturn => {
           exportData("json");
         }
       } catch (err) {
-        console.error("Failed to export data:", err);
+        logError("Failed to export data", err, "usePainTracker");
         setError("Failed to export data. Please try again.");
       }
     },

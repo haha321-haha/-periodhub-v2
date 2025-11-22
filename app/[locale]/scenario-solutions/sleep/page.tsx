@@ -60,7 +60,6 @@ export default async function SleepScenarioPage({ params }: Props) {
   unstable_setRequestLocale(locale);
 
   const t = await getTranslations("scenarioSolutionsPage");
-  const commonT = await getTranslations("common");
 
   // 预加载面包屑所需的翻译
   const breadcrumbTitle = t("title");
@@ -72,34 +71,50 @@ export default async function SleepScenarioPage({ params }: Props) {
   const howToData = await generateHowToStructuredData({
     locale,
     scenarioSlug: "sleep",
-    name: isZh ? "经期睡眠质量改善指南" : "Menstrual Sleep Quality Improvement Guide",
+    name: isZh
+      ? "经期睡眠质量改善指南"
+      : "Menstrual Sleep Quality Improvement Guide",
     description: isZh
       ? "改善经期睡眠质量的方法，包含睡眠环境优化和睡前准备"
       : "Methods to improve menstrual sleep quality, including sleep environment optimization and bedtime preparation",
     steps: [
       {
-        name: isZh ? "创造舒适睡眠环境" : "Create Comfortable Sleep Environment",
-        text: isZh ? "保持室温适宜，使用舒适的床品" : "Maintain comfortable room temperature, use comfortable bedding"
+        name: isZh
+          ? "创造舒适睡眠环境"
+          : "Create Comfortable Sleep Environment",
+        text: isZh
+          ? "保持室温适宜，使用舒适的床品"
+          : "Maintain comfortable room temperature, use comfortable bedding",
       },
       {
         name: isZh ? "调整睡眠姿势" : "Adjust Sleep Position",
-        text: isZh ? "采用侧卧或胎儿式睡姿，减轻腹部压力" : "Use side-lying or fetal position to reduce abdominal pressure"
+        text: isZh
+          ? "采用侧卧或胎儿式睡姿，减轻腹部压力"
+          : "Use side-lying or fetal position to reduce abdominal pressure",
       },
       {
         name: isZh ? "使用热敷辅助" : "Use Heat Therapy",
-        text: isZh ? "睡前使用热敷垫或热水袋缓解疼痛" : "Use heating pad or hot water bottle before sleep to relieve pain"
+        text: isZh
+          ? "睡前使用热敷垫或热水袋缓解疼痛"
+          : "Use heating pad or hot water bottle before sleep to relieve pain",
       },
       {
         name: isZh ? "睡前放松练习" : "Bedtime Relaxation Exercises",
-        text: isZh ? "进行轻度拉伸或冥想，帮助身心放松" : "Do light stretching or meditation to help body and mind relax"
+        text: isZh
+          ? "进行轻度拉伸或冥想，帮助身心放松"
+          : "Do light stretching or meditation to help body and mind relax",
       },
       {
         name: isZh ? "准备床边应急物品" : "Prepare Bedside Emergency Items",
-        text: isZh ? "在床边放置止痛药、水和卫生用品" : "Place pain medication, water and hygiene products bedside"
+        text: isZh
+          ? "在床边放置止痛药、水和卫生用品"
+          : "Place pain medication, water and hygiene products bedside",
       },
       {
         name: isZh ? "建立睡眠规律" : "Establish Sleep Routine",
-        text: isZh ? "保持规律的作息时间，提高睡眠质量" : "Maintain regular sleep schedule to improve sleep quality"
+        text: isZh
+          ? "保持规律的作息时间，提高睡眠质量"
+          : "Maintain regular sleep schedule to improve sleep quality",
       },
     ],
     tools: [
@@ -355,313 +370,315 @@ export default async function SleepScenarioPage({ params }: Props) {
       >
         {/* Breadcrumb */}
         <Breadcrumb
-        items={[
-          { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
-          { label: breadcrumbSleepTitle },
-        ]}
-      />
+          items={[
+            { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
+            { label: breadcrumbSleepTitle },
+          ]}
+        />
 
-      {/* Page Header */}
-      <header className="text-center">
-        <div className="w-16 h-16 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Moon className="w-8 h-8" />
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
-          {t("scenarios.sleep.title")}
-        </h1>
-        <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-          {t("scenarios.sleep.description")}
-        </p>
-      </header>
+        {/* Page Header */}
+        <header className="text-center">
+          <div className="w-16 h-16 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Moon className="w-8 h-8" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
+            {t("scenarios.sleep.title")}
+          </h1>
+          <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+            {t("scenarios.sleep.description")}
+          </p>
+        </header>
 
-      {/* Audio Systems Section */}
-      <section className="bg-gradient-to-br from-purple-50 to-neutral-50 p-6 md:p-8 rounded-xl">
-        <div className="flex items-center mb-6">
-          <Volume2 className="w-6 h-6 text-purple-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "三维助眠音频系统"
-              : "Three-Dimensional Sleep Audio System"}
-          </h2>
-        </div>
+        {/* Audio Systems Section */}
+        <section className="bg-gradient-to-br from-purple-50 to-neutral-50 p-6 md:p-8 rounded-xl">
+          <div className="flex items-center mb-6">
+            <Volume2 className="w-6 h-6 text-purple-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "三维助眠音频系统"
+                : "Three-Dimensional Sleep Audio System"}
+            </h2>
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {audioSystems.map((audio, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-              <div
-                className={`w-12 h-12 rounded-full flex items-center justify-center ${audio.color} mb-4`}
-              >
-                {audio.icon}
-              </div>
-              <h3 className="text-lg font-semibold text-neutral-800 mb-3">
-                {audio.type}
-              </h3>
-              <p className="text-neutral-600 mb-4 text-sm">
-                {audio.description}
-              </p>
-              <ul className="space-y-2">
-                {audio.benefits.map((benefit, benefitIndex) => (
-                  <li
-                    key={benefitIndex}
-                    className="flex items-start text-sm text-neutral-700"
-                  >
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Sleep Positions Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Bed className="w-6 h-6 text-purple-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "科学睡姿矩阵"
-              : "Scientific Sleep Position Matrix"}
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
-          {sleepPositions.map((position, index) => (
-            <div key={index} className="card">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-neutral-800">
-                  {position.position}
+          <div className="grid md:grid-cols-3 gap-6">
+            {audioSystems.map((audio, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center ${audio.color} mb-4`}
+                >
+                  {audio.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-neutral-800 mb-3">
+                  {audio.type}
                 </h3>
-                <span className="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">
-                  {locale === "zh" ? "缓解率" : "Relief Rate"}{" "}
-                  {position.effectiveness}
-                </span>
-              </div>
-
-              <p className="text-neutral-600 mb-4 text-sm">
-                <strong>
-                  {locale === "zh" ? "实施要点：" : "Key Points: "}
-                </strong>
-                {position.description}
-              </p>
-
-              <div className="mb-4">
-                <h4 className="font-medium text-neutral-800 mb-2">
-                  {locale === "zh" ? "功效：" : "Benefits:"}
-                </h4>
-                <ul className="space-y-1">
-                  {position.benefits.map((benefit, benefitIndex) => (
+                <p className="text-neutral-600 mb-4 text-sm">
+                  {audio.description}
+                </p>
+                <ul className="space-y-2">
+                  {audio.benefits.map((benefit, benefitIndex) => (
                     <li
                       key={benefitIndex}
                       className="flex items-start text-sm text-neutral-700"
                     >
-                      <span className="w-2 h-2 bg-purple-400 rounded-full mr-2 mt-2"></span>
+                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
                       {benefit}
                     </li>
                   ))}
                 </ul>
               </div>
+            ))}
+          </div>
+        </section>
 
-              <div>
-                <h4 className="font-medium text-neutral-800 mb-2">
-                  {locale === "zh" ? "辅助工具：" : "Support Tools:"}
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {position.tools.map((tool, toolIndex) => (
-                    <span
-                      key={toolIndex}
-                      className="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Bedtime Nutrition Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Coffee className="w-6 h-6 text-purple-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "睡前饮食建议"
-              : "Bedtime Nutrition Recommendations"}
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-green-50 p-6 rounded-lg">
-            <h3 className="text-lg font-semibold text-green-800 mb-4">
-              {locale === "zh" ? "推荐食物" : "Recommended Foods"}
-            </h3>
-            <div className="space-y-4">
-              {bedtimeFoods.recommended.map((food, index) => (
-                <div key={index} className="border-l-4 border-green-400 pl-4">
-                  <h4 className="font-medium text-green-800">{food.food}</h4>
-                  <p className="text-sm text-green-600 mb-1">
-                    <strong>
-                      {locale === "zh" ? "主要成分：" : "Key Components: "}
-                    </strong>
-                    {food.component}
-                  </p>
-                  <p className="text-sm text-green-700">{food.benefit}</p>
-                </div>
-              ))}
-            </div>
+        {/* Sleep Positions Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Bed className="w-6 h-6 text-purple-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "科学睡姿矩阵"
+                : "Scientific Sleep Position Matrix"}
+            </h2>
           </div>
 
-          <div className="bg-red-50 p-6 rounded-lg">
-            <h3 className="text-lg font-semibold text-red-800 mb-4">
-              {locale === "zh" ? "避免食物" : "Foods to Avoid"}
-            </h3>
-            <div className="space-y-4">
-              {bedtimeFoods.avoid.map((item, index) => (
-                <div key={index} className="border-l-4 border-red-400 pl-4">
-                  <h4 className="font-medium text-red-800">{item.item}</h4>
-                  <p className="text-sm text-red-700">{item.reason}</p>
+          <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+            {sleepPositions.map((position, index) => (
+              <div key={index} className="card">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-neutral-800">
+                    {position.position}
+                  </h3>
+                  <span className="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">
+                    {locale === "zh" ? "缓解率" : "Relief Rate"}{" "}
+                    {position.effectiveness}
+                  </span>
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Sleep Environment Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Moon className="w-6 h-6 text-purple-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "睡眠环境优化"
-              : "Sleep Environment Optimization"}
-          </h2>
-        </div>
+                <p className="text-neutral-600 mb-4 text-sm">
+                  <strong>
+                    {locale === "zh" ? "实施要点：" : "Key Points: "}
+                  </strong>
+                  {position.description}
+                </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {sleepEnvironment.map((env, index) => (
-            <div key={index} className="card text-center">
-              <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                {env.icon}
+                <div className="mb-4">
+                  <h4 className="font-medium text-neutral-800 mb-2">
+                    {locale === "zh" ? "功效：" : "Benefits:"}
+                  </h4>
+                  <ul className="space-y-1">
+                    {position.benefits.map((benefit, benefitIndex) => (
+                      <li
+                        key={benefitIndex}
+                        className="flex items-start text-sm text-neutral-700"
+                      >
+                        <span className="w-2 h-2 bg-purple-400 rounded-full mr-2 mt-2"></span>
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="font-medium text-neutral-800 mb-2">
+                    {locale === "zh" ? "辅助工具：" : "Support Tools:"}
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {position.tools.map((tool, toolIndex) => (
+                      <span
+                        key={toolIndex}
+                        className="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded"
+                      >
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <h3 className="text-lg font-semibold text-neutral-800 mb-2">
-                {env.aspect}
+            ))}
+          </div>
+        </section>
+
+        {/* Bedtime Nutrition Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Coffee className="w-6 h-6 text-purple-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "睡前饮食建议"
+                : "Bedtime Nutrition Recommendations"}
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-green-50 p-6 rounded-lg">
+              <h3 className="text-lg font-semibold text-green-800 mb-4">
+                {locale === "zh" ? "推荐食物" : "Recommended Foods"}
               </h3>
-              <p className="text-sm text-neutral-600">{env.details}</p>
+              <div className="space-y-4">
+                {bedtimeFoods.recommended.map((food, index) => (
+                  <div key={index} className="border-l-4 border-green-400 pl-4">
+                    <h4 className="font-medium text-green-800">{food.food}</h4>
+                    <p className="text-sm text-green-600 mb-1">
+                      <strong>
+                        {locale === "zh" ? "主要成分：" : "Key Components: "}
+                      </strong>
+                      {food.component}
+                    </p>
+                    <p className="text-sm text-green-700">{food.benefit}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Sleep Tips */}
-      <section className="bg-yellow-50 p-6 md:p-8 rounded-xl">
-        <h3 className="text-lg font-semibold text-yellow-800 mb-4 flex items-center">
-          <Clock className="w-5 h-5 mr-2" />
-          {locale === "zh" ? "睡眠时间管理" : "Sleep Time Management"}
-        </h3>
-        <div className="grid md:grid-cols-3 gap-6 text-sm text-yellow-700">
-          <div>
-            <h4 className="font-medium mb-2">
-              {locale === "zh" ? "睡前2小时" : "2 Hours Before Bed"}
-            </h4>
-            <ul className="space-y-1">
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "停止进食，避免消化负担"
-                  : "Stop eating, avoid digestive burden"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "开始播放助眠音频"
-                  : "Start playing sleep audio"}
-              </li>
-              <li>
-                • {locale === "zh" ? "调暗室内灯光" : "Dim room lighting"}
-              </li>
-            </ul>
+            <div className="bg-red-50 p-6 rounded-lg">
+              <h3 className="text-lg font-semibold text-red-800 mb-4">
+                {locale === "zh" ? "避免食物" : "Foods to Avoid"}
+              </h3>
+              <div className="space-y-4">
+                {bedtimeFoods.avoid.map((item, index) => (
+                  <div key={index} className="border-l-4 border-red-400 pl-4">
+                    <h4 className="font-medium text-red-800">{item.item}</h4>
+                    <p className="text-sm text-red-700">{item.reason}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div>
-            <h4 className="font-medium mb-2">
-              {locale === "zh" ? "睡前1小时" : "1 Hour Before Bed"}
-            </h4>
-            <ul className="space-y-1">
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "温水洗澡，放松身心"
-                  : "Warm bath, relax body and mind"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "进行轻柔拉伸运动"
-                  : "Gentle stretching exercises"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "避免使用电子设备"
-                  : "Avoid electronic devices"}
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-medium mb-2">
-              {locale === "zh" ? "睡前30分钟" : "30 Minutes Before Bed"}
-            </h4>
-            <ul className="space-y-1">
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "调整到最佳睡姿"
-                  : "Adjust to optimal sleep position"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "使用暖宫贴或热水袋"
-                  : "Use warming patches or hot water bottle"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh" ? "进行深呼吸练习" : "Practice deep breathing"}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Medical Disclaimer */}
-      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg">
-        <div className="flex items-start">
-          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
-          <div>
-            <h3 className="font-semibold text-orange-800 mb-2">
-              {t("scenarios.sleep.disclaimer.title")}
-            </h3>
-            <p className="text-orange-700 text-sm leading-relaxed">
-              {t("scenarios.sleep.disclaimer.content")}
-            </p>
+        {/* Sleep Environment Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Moon className="w-6 h-6 text-purple-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "睡眠环境优化"
+                : "Sleep Environment Optimization"}
+            </h2>
           </div>
-        </div>
-      </section>
 
-      {/* Back to Overview */}
-      <div className="text-center">
-        <Link
-          href={`/${locale}/scenario-solutions`}
-          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          {t("scenarios.sleep.backToOverview")}
-        </Link>
-      </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {sleepEnvironment.map((env, index) => (
+              <div key={index} className="card text-center">
+                <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  {env.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-neutral-800 mb-2">
+                  {env.aspect}
+                </h3>
+                <p className="text-sm text-neutral-600">{env.details}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Sleep Tips */}
+        <section className="bg-yellow-50 p-6 md:p-8 rounded-xl">
+          <h3 className="text-lg font-semibold text-yellow-800 mb-4 flex items-center">
+            <Clock className="w-5 h-5 mr-2" />
+            {locale === "zh" ? "睡眠时间管理" : "Sleep Time Management"}
+          </h3>
+          <div className="grid md:grid-cols-3 gap-6 text-sm text-yellow-700">
+            <div>
+              <h4 className="font-medium mb-2">
+                {locale === "zh" ? "睡前2小时" : "2 Hours Before Bed"}
+              </h4>
+              <ul className="space-y-1">
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "停止进食，避免消化负担"
+                    : "Stop eating, avoid digestive burden"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "开始播放助眠音频"
+                    : "Start playing sleep audio"}
+                </li>
+                <li>
+                  • {locale === "zh" ? "调暗室内灯光" : "Dim room lighting"}
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium mb-2">
+                {locale === "zh" ? "睡前1小时" : "1 Hour Before Bed"}
+              </h4>
+              <ul className="space-y-1">
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "温水洗澡，放松身心"
+                    : "Warm bath, relax body and mind"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "进行轻柔拉伸运动"
+                    : "Gentle stretching exercises"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "避免使用电子设备"
+                    : "Avoid electronic devices"}
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium mb-2">
+                {locale === "zh" ? "睡前30分钟" : "30 Minutes Before Bed"}
+              </h4>
+              <ul className="space-y-1">
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "调整到最佳睡姿"
+                    : "Adjust to optimal sleep position"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "使用暖宫贴或热水袋"
+                    : "Use warming patches or hot water bottle"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "进行深呼吸练习"
+                    : "Practice deep breathing"}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Medical Disclaimer */}
+        <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg">
+          <div className="flex items-start">
+            <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
+            <div>
+              <h3 className="font-semibold text-orange-800 mb-2">
+                {t("scenarios.sleep.disclaimer.title")}
+              </h3>
+              <p className="text-orange-700 text-sm leading-relaxed">
+                {t("scenarios.sleep.disclaimer.content")}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Back to Overview */}
+        <div className="text-center">
+          <Link
+            href={`/${locale}/scenario-solutions`}
+            className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t("scenarios.sleep.backToOverview")}
+          </Link>
+        </div>
       </div>
     </>
   );

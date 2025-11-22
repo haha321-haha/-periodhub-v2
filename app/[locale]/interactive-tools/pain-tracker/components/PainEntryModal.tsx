@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import {
   X,
@@ -37,7 +37,6 @@ const PainEntryModal: React.FC<PainEntryModalProps> = ({
   locale,
 }) => {
   const t = useTranslations("painTracker");
-  const [isEditing, setIsEditing] = useState(false);
 
   // Get localized options
   const painLocations =

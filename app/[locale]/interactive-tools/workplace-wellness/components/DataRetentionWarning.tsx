@@ -9,7 +9,7 @@ import { useState, useEffect, useMemo } from "react";
 import { AlertTriangle, Download, X } from "lucide-react";
 import { useCalendar } from "../hooks/useWorkplaceWellnessStore";
 import { useTranslations } from "next-intl";
-import { PeriodRecord, CalendarState } from "../types";
+import { CalendarState } from "../types";
 
 export default function DataRetentionWarning() {
   const calendar = useCalendar() as CalendarState;
@@ -27,7 +27,10 @@ export default function DataRetentionWarning() {
     const sixMonthsAgo = new Date();
     sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - RETENTION_PERIOD_MONTHS);
     const warningDate = new Date();
-    warningDate.setMonth(warningDate.getMonth() - (RETENTION_PERIOD_MONTHS * 30 - WARNING_DAYS) / 30);
+    warningDate.setMonth(
+      warningDate.getMonth() -
+        (RETENTION_PERIOD_MONTHS * 30 - WARNING_DAYS) / 30,
+    );
 
     const expiringRecords = periodData.filter((r) => {
       try {
@@ -53,8 +56,10 @@ export default function DataRetentionWarning() {
   // 从 sessionStorage 读取已关闭状态
   useEffect(() => {
     try {
-      const dismissedKey = sessionStorage.getItem('data-retention-warning-dismissed');
-      if (dismissedKey === 'true') {
+      const dismissedKey = sessionStorage.getItem(
+        "data-retention-warning-dismissed",
+      );
+      if (dismissedKey === "true") {
         setDismissed(true);
       }
     } catch {
@@ -66,7 +71,7 @@ export default function DataRetentionWarning() {
   const handleDismiss = () => {
     setDismissed(true);
     try {
-      sessionStorage.setItem('data-retention-warning-dismissed', 'true');
+      sessionStorage.setItem("data-retention-warning-dismissed", "true");
     } catch {
       // 忽略错误
     }
@@ -75,14 +80,18 @@ export default function DataRetentionWarning() {
   // 跳转到导出页面
   const handleExport = () => {
     // 触发设置页面的导出标签页
-    const event = new CustomEvent('navigate-to-export');
+    const event = new CustomEvent("navigate-to-export");
     window.dispatchEvent(event);
     // 也可以直接跳转到设置页面的导出标签
-    const settingsButton = document.querySelector('[data-settings-button]') as HTMLElement;
+    const settingsButton = document.querySelector(
+      "[data-settings-button]",
+    ) as HTMLElement;
     if (settingsButton) {
       settingsButton.click();
       setTimeout(() => {
-        const exportTab = document.querySelector('[data-tab="export"]') as HTMLElement;
+        const exportTab = document.querySelector(
+          '[data-tab="export"]',
+        ) as HTMLElement;
         if (exportTab) {
           exportTab.click();
         }
@@ -100,12 +109,13 @@ export default function DataRetentionWarning() {
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <p className="text-sm text-yellow-700 font-medium mb-1">
-                {t("userPreferences.expiringDataWarning") ||
-                  "数据即将过期提醒"}
+                {t("userPreferences.expiringDataWarning") || "数据即将过期提醒"}
               </p>
               <p className="text-sm text-yellow-600 mb-3">
-                {(t("userPreferences.expiringDataDescription") ||
-                  `您有 {count} 条记录将在 30 天后自动清理。建议导出备份以保留完整历史记录。`).replace('{count}', expiringData.count.toString())}
+                {(
+                  t("userPreferences.expiringDataDescription") ||
+                  `您有 {count} 条记录将在 30 天后自动清理。建议导出备份以保留完整历史记录。`
+                ).replace("{count}", expiringData.count.toString())}
               </p>
               <div className="flex items-center gap-2">
                 <button
@@ -136,4 +146,3 @@ export default function DataRetentionWarning() {
     </div>
   );
 }
-

@@ -11,6 +11,7 @@ import {
 import { Locale } from "../types/common";
 import { QuizResult, QuizStage } from "../types/quiz";
 import Breadcrumb from "@/components/Breadcrumb";
+import { logInfo } from "@/lib/debug-logger";
 
 // 动态导入相关组件 - 代码分割优化
 const RelatedToolCard = dynamic(
@@ -92,20 +93,6 @@ const TrainingCampSchedule = dynamic(() => import("./TrainingCampSchedule"), {
   ssr: false,
 });
 
-const RelatedLinks = dynamic(() => import("./RelatedLinks"), {
-  loading: () => (
-    <div className="related-links-section">
-      <div className="loading-skeleton h-64 rounded-lg"></div>
-    </div>
-  ),
-  ssr: false,
-});
-
-// 静态导入的组件
-import LanguageSwitcher from "./LanguageSwitcher";
-import MedicalDisclaimer from "./MedicalDisclaimer";
-import ViewMoreArticlesButton from "./ViewMoreArticlesButton";
-
 interface PartnerHandbookClientProps {
   locale: Locale;
 }
@@ -115,7 +102,7 @@ type AppState = "intro" | "quiz" | "results" | "training";
 export default function PartnerHandbookClient({
   locale,
 }: PartnerHandbookClientProps) {
-  const { t, tRaw } = useSafeTranslations("partnerHandbook");
+  const { t } = useSafeTranslations("partnerHandbook");
   const {
     currentLanguage,
     currentStage,
@@ -293,7 +280,6 @@ export default function PartnerHandbookClient({
   // 检查各阶段测试是否完成
   const isStage1Completed = stageProgress.stage1?.status === "completed";
   const isStage2Completed = stageProgress.stage2?.status === "completed";
-  const isStage3Completed = stageProgress.stage3?.status === "completed";
 
   // 初始化缺失的阶段
   React.useEffect(() => {
@@ -308,7 +294,11 @@ export default function PartnerHandbookClient({
       });
 
       if (needsInitialization) {
-        console.log("🔧 Initializing missing stages...");
+        logInfo(
+          "🔧 Initializing missing stages...",
+          undefined,
+          "PartnerHandbookClient",
+        );
         stageActions.initializeMissingStages();
       }
     };
@@ -639,7 +629,11 @@ export default function PartnerHandbookClient({
                   onClick={() => {
                     if (isStageUnlockedSafe("stage4")) {
                       // TODO: 实现个性化指导页面
-                      console.log("进入个性化指导");
+                      logInfo(
+                        "进入个性化指导",
+                        undefined,
+                        "PartnerHandbookClient",
+                      );
                     }
                   }}
                   className={`rounded-xl p-4 sm:p-6 shadow-md transition-all duration-300 border group cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-500 ${

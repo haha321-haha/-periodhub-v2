@@ -1,0 +1,11 @@
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/assessment/start/page.tsx:26:10: 'PHQ9Utils' is defined but never used. [Error/@typescript-eslint/no-unused-vars]
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/assessment/start/page.tsx:44:7: 'QuickFeedback' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/assessment/start/page.tsx:50:9: 'assessmentT' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/assessment/start/page.tsx:56:21: 'userVariant' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/assessment/start/page.tsx:65:48: Unexpected any. Specify a different type. [Error/@typescript-eslint/no-explicit-any]
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/assessment/start/page.tsx:67:10: 'stressLevel' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/assessment/start/page.tsx:172:39: Unexpected any. Specify a different type. [Error/@typescript-eslint/no-explicit-any]
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/assessment/start/page.tsx:241:62: 'level' is defined but never used. [Error/@typescript-eslint/no-unused-vars]
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/assessment/start/page.tsx:306:9: 'isPremiumUser' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
+
+9 problems

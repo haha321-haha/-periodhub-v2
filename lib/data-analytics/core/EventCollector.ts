@@ -3,6 +3,8 @@
  * 专门追踪Period Hub的5个核心指标
  */
 
+import { logInfo } from "@/lib/debug-logger";
+
 export interface UserEvent {
   userId: string;
   sessionId: string;
@@ -72,7 +74,7 @@ export interface EventData {
   engagementScore?: number;
 
   // 扩展数据
-  customData?: Record<string, any>;
+  customData?: Record<string, unknown>;
 }
 
 export interface EventMetadata {
@@ -151,7 +153,7 @@ export interface LTVMetrics {
 
 export class EventCollector {
   private events: UserEvent[] = [];
-  private dailyMetrics: Map<string, any> = new Map();
+  private dailyMetrics: Map<string, unknown> = new Map();
   private sessionStore: Map<string, SessionData> = new Map();
 
   constructor() {
@@ -197,7 +199,7 @@ export class EventCollector {
     });
 
     // 更新会话信息
-    this.updateSession(userId, sessionId, metadata);
+    this.updateSession(userId, sessionId);
   }
 
   /**
@@ -602,7 +604,10 @@ export class EventCollector {
   // ========== 私有方法 ==========
 
   private initializeCollector(): void {
-    console.log("📊 EventCollector initialized for core metrics tracking");
+    logInfo(
+      "EventCollector initialized for core metrics tracking",
+      "EventCollector/initializeCollector",
+    );
   }
 
   private processEventForMetrics(event: UserEvent): void {
@@ -621,11 +626,7 @@ export class EventCollector {
     }
   }
 
-  private updateSession(
-    userId: string,
-    sessionId: string,
-    metadata: EventMetadata,
-  ): void {
+  private updateSession(userId: string, sessionId: string): void {
     const session = this.sessionStore.get(sessionId) || {
       userId,
       sessionId,
@@ -735,12 +736,12 @@ export class EventCollector {
     this.dailyMetrics.set(key, existing);
   }
 
-  private storeMetrics(type: string, date: string, metrics: any): void {
+  private storeMetrics(type: string, date: string, metrics: unknown): void {
     const key = `${type}_${date}`;
     this.dailyMetrics.set(key, metrics);
   }
 
-  private getStoredMetrics(type: string, date: string): any {
+  private getStoredMetrics(type: string, date: string): unknown {
     const key = `${type}_${date}`;
     return this.dailyMetrics.get(key);
   }
@@ -768,5 +769,5 @@ interface SessionData {
   startTime: number;
   lastActivity: number;
   pageViews: number;
-  events: any[];
+  events: UserEvent[];
 }

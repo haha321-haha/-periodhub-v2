@@ -3,6 +3,9 @@
  * 调试日志工具 - 在生产环境中自动禁用
  */
 
+/* eslint-disable no-console */
+// 此文件是日志工具，console 语句是其核心功能，需要保留
+
 const isDevelopment = process.env.NODE_ENV === "development";
 
 type LogLevel = "info" | "warn" | "error" | "debug";

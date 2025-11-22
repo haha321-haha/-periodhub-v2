@@ -327,7 +327,6 @@ export class ComprehensiveAssessmentLogic {
     allSymptoms: SymptomItem[],
   ): AssessmentResult {
     // 疼痛评估
-    const painSeverity = PainAssessmentLogic.getSeverityLevel(painLevel);
     const painRecommendations =
       PainAssessmentLogic.generateRecommendations(painLevel);
     const painShouldSeeDoctor = PainAssessmentLogic.shouldSeeDoctor(painLevel);
@@ -397,7 +396,7 @@ export class ComprehensiveAssessmentLogic {
     actionRequired: boolean;
     priority: "low" | "medium" | "high" | "critical";
   } {
-    const { riskLevel, painLevel, symptoms, urgency } = result;
+    const { riskLevel, painLevel, symptoms } = result;
 
     let title = "";
     let description = "";

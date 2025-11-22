@@ -6,11 +6,10 @@
 "use client";
 
 import { Heart } from "lucide-react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
   const t = useTranslations("workplaceWellness");
-  const locale = useLocale();
 
   return (
     <header className="bg-white shadow-sm border-b border-neutral-100">

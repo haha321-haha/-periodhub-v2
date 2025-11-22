@@ -1,0 +1,4 @@
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/components/PersonalizedRecommendations.tsx:6:31: 'AssessmentData' is defined but never used. [Error/@typescript-eslint/no-unused-vars]
+/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/stress-management/components/PersonalizedRecommendations.tsx:159:6: React Hook useCallback has an unnecessary dependency: 'locale'. Either exclude it or remove the dependency array. [Warning/react-hooks/exhaustive-deps]
+
+2 problems

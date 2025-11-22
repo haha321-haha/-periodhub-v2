@@ -21,7 +21,6 @@ export default function StressTechniquesAccordion({
   locale,
 }: StressTechniquesAccordionProps) {
   const t = useTranslations("stressManagement.techniques");
-  const isZh = locale === "zh";
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0); // 默认展开第一个
 
   const techniques: Technique[] = [
@@ -97,7 +96,9 @@ export default function StressTechniquesAccordion({
             return (
               <div
                 key={technique.key}
-                className={`${technique.bgColor} ${technique.borderColor} border-2 rounded-xl overflow-hidden transition-all duration-300 ${
+                className={`${technique.bgColor} ${
+                  technique.borderColor
+                } border-2 rounded-xl overflow-hidden transition-all duration-300 ${
                   isExpanded ? "shadow-lg" : "shadow-sm"
                 }`}
               >
@@ -112,7 +113,13 @@ export default function StressTechniquesAccordion({
                     <div
                       className={`w-16 h-16 bg-gradient-to-r ${technique.gradientColor} rounded-full flex items-center justify-center flex-shrink-0`}
                     >
-                      <span className="text-3xl" role="img" aria-label={t(`${technique.key}.iconLabel`) || `${title} icon`}>
+                      <span
+                        className="text-3xl"
+                        role="img"
+                        aria-label={
+                          t(`${technique.key}.iconLabel`) || `${title} icon`
+                        }
+                      >
                         {technique.icon}
                       </span>
                     </div>
@@ -124,7 +131,9 @@ export default function StressTechniquesAccordion({
                     </div>
                   </div>
                   <svg
-                    className={`w-6 h-6 ${technique.color} transition-transform duration-300 flex-shrink-0 ${
+                    className={`w-6 h-6 ${
+                      technique.color
+                    } transition-transform duration-300 flex-shrink-0 ${
                       isExpanded ? "rotate-180" : ""
                     }`}
                     fill="none"
@@ -144,7 +153,9 @@ export default function StressTechniquesAccordion({
                 <div
                   id={`technique-${technique.key}-content`}
                   className={`overflow-hidden transition-all duration-300 ${
-                    isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+                    isExpanded
+                      ? "max-h-[1000px] opacity-100"
+                      : "max-h-0 opacity-0"
                   }`}
                 >
                   <div className="px-6 pb-6 space-y-6">
@@ -155,8 +166,9 @@ export default function StressTechniquesAccordion({
                       </h4>
                       <ul className="space-y-2">
                         {[1, 2, 3].map((benefitIndex) => {
-                          const benefitKey = `techniques.${technique.key}.benefits.benefit${benefitIndex}`;
-                          const benefitText = t(`${technique.key}.benefits.benefit${benefitIndex}`);
+                          const benefitText = t(
+                            `${technique.key}.benefits.benefit${benefitIndex}`,
+                          );
 
                           return (
                             <li
@@ -217,4 +229,3 @@ export default function StressTechniquesAccordion({
     </section>
   );
 }
-

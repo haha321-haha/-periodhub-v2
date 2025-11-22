@@ -9,10 +9,67 @@ import { medicalEntities } from "@/lib/seo/medical-entities";
 
 type TFunction = Awaited<ReturnType<typeof getTranslations>>;
 
+type FAQStructuredData = {
+  "@context": "https://schema.org";
+  "@type": "FAQPage";
+  mainEntity: Array<{
+    "@type": "Question";
+    name: string;
+    acceptedAnswer: {
+      "@type": "Answer";
+      text: string;
+      mention: Array<{
+        "@type": string;
+        name: string;
+        mechanismOfAction?: string;
+      }>;
+      citation: {
+        "@type": string;
+        name: string;
+        url: string;
+      };
+    };
+    about: {
+      "@type": string;
+      name: string;
+      code: {
+        "@type": string;
+        code: string;
+        codingSystem: string;
+      };
+      sameAs?: string;
+    };
+    medicalAudience: {
+      "@type": string;
+      audienceType: string;
+    };
+  }>;
+};
+
+type HowToStructuredData = {
+  "@context": "https://schema.org";
+  "@type": "HowTo";
+  name: string;
+  description: string;
+  image: string[];
+  totalTime: string;
+  supply: unknown[];
+  tool: unknown[];
+  step: Array<{
+    "@type": "HowToStep";
+    position: number;
+    name: string;
+    text: string;
+    image: string;
+  }>;
+};
+
+type StructuredDataEntry = FAQStructuredData | HowToStructuredData;
+
 /**
  * 生成FAQ结构化数据
  */
-export function generateFAQStructuredData(t: TFunction): any {
+export function generateFAQStructuredData(t: TFunction): FAQStructuredData {
   const faqs = [
     { key: "q1" },
     { key: "q2" },
@@ -72,7 +129,7 @@ export function generateFAQStructuredData(t: TFunction): any {
 export function generateHowToStructuredData(
   locale: Locale,
   t: TFunction,
-): any {
+): HowToStructuredData {
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
@@ -112,12 +169,6 @@ export function generateHowToStructuredData(
 export function generateAllStructuredData(
   locale: Locale,
   t: TFunction,
-): any[] {
-  return [
-    generateFAQStructuredData(t),
-    generateHowToStructuredData(locale, t),
-  ];
+): Array<StructuredDataEntry> {
+  return [generateFAQStructuredData(t), generateHowToStructuredData(locale, t)];
 }
-
-
-

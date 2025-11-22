@@ -3,29 +3,20 @@
 import { useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import dynamic from "next/dynamic";
+import { logError, logWarn } from "@/lib/debug-logger";
 import StorageWarningToast from "./components/StorageWarningToast";
 import DebugPanel from "./components/DebugPanel";
 import { SimpleToastProvider } from "./components/SimpleToast";
 
 // 动态导入组件以优化性能
-const WorkplaceWellnessHeader = dynamic(
-  () => import("./components/Header"),
-  {
-    loading: () => (
-      <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
-    ),
-  },
-);
+const WorkplaceWellnessHeader = dynamic(() => import("./components/Header"), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />,
+});
 
-const Navigation = dynamic(
-  () => import("./components/Navigation"),
-  {
-    ssr: false, // 禁用 SSR，避免 store 在服务器端执行
-    loading: () => (
-      <div className="animate-pulse bg-gray-200 h-16 rounded-lg" />
-    ),
-  },
-);
+const Navigation = dynamic(() => import("./components/Navigation"), {
+  ssr: false, // 禁用 SSR，避免 store 在服务器端执行
+  loading: () => <div className="animate-pulse bg-gray-200 h-16 rounded-lg" />,
+});
 
 const CalendarComponent = dynamic(
   () => import("./components/CalendarComponent"),
@@ -153,44 +144,34 @@ const PersonalizedRecommendations = dynamic(
 );
 
 // 测试组件 - 用于调试存储问题
-const TestStore = dynamic(
-  () => import("./test-store"),
-  {
-    loading: () => (
-      <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
-    ),
-  },
-);
+const TestStore = dynamic(() => import("./test-store"), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />,
+});
 
 // 简单存储测试组件
-const SimpleStorageTest = dynamic(
-  () => import("./simple-storage-test"),
-  {
-    loading: () => (
-      <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
-    ),
-  },
-);
+const SimpleStorageTest = dynamic(() => import("./simple-storage-test"), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />,
+});
 
 // 简单Zustand测试组件
-const SimpleZustandTest = dynamic(
-  () => import("./simple-zustand-test"),
-  {
-    loading: () => (
-      <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
-    ),
-  },
-);
+const SimpleZustandTest = dynamic(() => import("./simple-zustand-test"), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />,
+});
 
 interface WorkplaceWellnessClientProps {
   locale?: string;
 }
 
-export default function WorkplaceWellnessClient({ locale: propLocale }: WorkplaceWellnessClientProps = {}) {
-  const t = useTranslations("workplaceWellness");
+type WorkplaceStoreModule = typeof import("./hooks/useWorkplaceWellnessStore");
+type WorkplaceStoreState = ReturnType<
+  WorkplaceStoreModule["useWorkplaceWellnessStore"]
+>;
+
+export default function WorkplaceWellnessClient({
+  locale: propLocale,
+}: WorkplaceWellnessClientProps = {}) {
   const breadcrumbT = useTranslations("interactiveTools.breadcrumb");
   const hookLocale = useLocale();
-  // 使用传入的 locale 或从 useLocale 获取
   const locale = propLocale || hookLocale;
 
   return (
@@ -203,25 +184,28 @@ export default function WorkplaceWellnessClient({ locale: propLocale }: Workplac
         <DebugPanel />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* 面包屑导航 */}
-        <Breadcrumb
-          items={[
-            { label: breadcrumbT("interactiveTools"), href: `/${locale}/interactive-tools` },
-            { label: breadcrumbT("workplaceWellness") }
-          ]}
-        />
+          {/* 面包屑导航 */}
+          <Breadcrumb
+            items={[
+              {
+                label: breadcrumbT("interactiveTools"),
+                href: `/${locale}/interactive-tools`,
+              },
+              { label: breadcrumbT("workplaceWellness") },
+            ]}
+          />
 
-        {/* 头部组件 */}
-        <WorkplaceWellnessHeader />
+          {/* 头部组件 */}
+          <WorkplaceWellnessHeader />
 
-        {/* 导航组件 - 使用 dynamic ssr: false 已足够，无需 NoSSR */}
-        <Navigation />
+          {/* 导航组件 - 使用 dynamic ssr: false 已足够，无需 NoSSR */}
+          <Navigation />
 
-        {/* 主要内容 - 使用 dynamic ssr: false 已足够，无需 NoSSR */}
-        <WorkplaceWellnessContent />
+          {/* 主要内容 - 使用 dynamic ssr: false 已足够，无需 NoSSR */}
+          <WorkplaceWellnessContent />
 
-        {/* 页脚 */}
-        <Footer />
+          {/* 页脚 */}
+          <Footer />
         </div>
       </div>
     </SimpleToastProvider>
@@ -233,72 +217,97 @@ export default function WorkplaceWellnessClient({ locale: propLocale }: Workplac
  * 这个组件只在客户端渲染，避免了SSR和客户端状态不一致的问题
  */
 function WorkplaceWellnessContent() {
-  // 确保只在客户端执行
-  const [isMounted, setIsMounted] = useState(false);
-  const [storeModule, setStoreModule] = useState<any>(null);
+  const [storeModule, setStoreModule] = useState<WorkplaceStoreModule | null>(
+    null,
+  );
   const [isLoading, setIsLoading] = useState(true);
   const [previousTab, setPreviousTab] = useState<string>("calendar");
   const [isHydrated, setIsHydrated] = useState(false);
   const [activeTab, setActiveTab] = useState<string>("calendar");
 
-  // 延迟导入 store，确保只在客户端执行
   useEffect(() => {
-    setIsMounted(true);
-    // 动态导入 store，避免 SSR 时执行
+    let isActive = true;
+
     import("./hooks/useWorkplaceWellnessStore").then((module) => {
+      if (!isActive) return;
       const { useWorkplaceWellnessStore } = module;
       setStoreModule(module);
 
-      // 使用 Promise 封装 rehydrate，确保完成后再继续
-      const waitForRehydrate = async () => {
-        return new Promise<void>((resolve, reject) => {
-          const store = useWorkplaceWellnessStore as any;
+      type ZustandStore = typeof useWorkplaceWellnessStore & {
+        subscribe: (
+          listener: (state: WorkplaceStoreState) => void,
+        ) => () => void;
+        getState: () => WorkplaceStoreState;
+        persist?: { rehydrate?: () => void };
+      };
 
-          // 监听完成事件
-          const handleComplete = (event: CustomEvent) => {
-            window.removeEventListener('store-rehydrate-complete', handleComplete as any);
-            window.removeEventListener('store-rehydrate-error', handleError as any);
+      const store = useWorkplaceWellnessStore as unknown as ZustandStore;
+
+      const waitForRehydrate = () =>
+        new Promise<void>((resolve, reject) => {
+          type RehydrateEvent = CustomEvent<{ message?: string }>;
+
+          const handleComplete = () => {
+            window.removeEventListener(
+              "store-rehydrate-complete",
+              handleComplete as EventListener,
+            );
+            window.removeEventListener(
+              "store-rehydrate-error",
+              handleError as EventListener,
+            );
             resolve();
           };
 
-          // 监听错误事件
-          const handleError = (event: CustomEvent) => {
-            window.removeEventListener('store-rehydrate-complete', handleComplete as any);
-            window.removeEventListener('store-rehydrate-error', handleError as any);
+          const handleError = (event: RehydrateEvent) => {
+            window.removeEventListener(
+              "store-rehydrate-complete",
+              handleComplete as EventListener,
+            );
+            window.removeEventListener(
+              "store-rehydrate-error",
+              handleError as EventListener,
+            );
             reject(event.detail);
           };
 
-          window.addEventListener('store-rehydrate-complete', handleComplete as any);
-          window.addEventListener('store-rehydrate-error', handleError as any);
+          window.addEventListener(
+            "store-rehydrate-complete",
+            handleComplete as EventListener,
+          );
+          window.addEventListener(
+            "store-rehydrate-error",
+            handleError as EventListener,
+          );
 
-          // 触发 rehydrate
           if (store.persist && store.persist.rehydrate) {
             store.persist.rehydrate();
           } else {
-            resolve(); // 没有 persist，直接完成
+            resolve();
           }
 
-          // 设置超时
           setTimeout(() => {
-            window.removeEventListener('store-rehydrate-complete', handleComplete as any);
-            window.removeEventListener('store-rehydrate-error', handleError as any);
-            resolve(); // 超时也继续，但记录警告
-            console.warn('Rehydrate 等待超时，继续执行');
-          }, 2000); // 2秒超时
+            window.removeEventListener(
+              "store-rehydrate-complete",
+              handleComplete as EventListener,
+            );
+            window.removeEventListener(
+              "store-rehydrate-error",
+              handleError as EventListener,
+            );
+            resolve();
+            logWarn(
+              "Rehydrate 等待超时，继续执行",
+              undefined,
+              "WorkplaceWellnessClient",
+            );
+          }, 2000);
         });
-      };
 
-      // 获取 store 实例用于订阅
-      const store = useWorkplaceWellnessStore as any;
+      const unsubscribe = store.subscribe((state: WorkplaceStoreState) => {
+        setActiveTab(state.activeTab);
+      });
 
-      // 订阅 store 变化 - Zustand subscribe 只接受一个回调函数
-      const unsubscribe = store.subscribe(
-        (state: any) => {
-          setActiveTab(state.activeTab);
-        }
-      );
-
-      // 执行 rehydrate 流程
       waitForRehydrate()
         .then(() => {
           const storeInstance = store.getState();
@@ -307,8 +316,11 @@ function WorkplaceWellnessContent() {
           setIsHydrated(true);
         })
         .catch((error) => {
-          console.error('Rehydrate 失败:', error);
-          // 即使失败也继续
+          logError(
+            "Rehydrate 失败",
+            (error as Error) ?? undefined,
+            "WorkplaceWellnessClient",
+          );
           const storeInstance = store.getState();
           setPreviousTab(storeInstance.activeTab);
           setActiveTab(storeInstance.activeTab);
@@ -324,6 +336,10 @@ function WorkplaceWellnessContent() {
         clearTimeout(timer);
       };
     });
+
+    return () => {
+      isActive = false;
+    };
   }, []);
 
   // 标签页切换动画

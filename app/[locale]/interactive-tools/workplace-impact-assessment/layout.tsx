@@ -54,10 +54,6 @@ export default async function WorkplaceImpactAssessmentLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const t = await getTranslations({
-    locale,
-    namespace: "interactiveTools.workplaceImpactAssessment.meta",
-  });
   const isZh = locale === "zh";
 
   // 生成工具结构化数据
@@ -75,7 +71,9 @@ export default async function WorkplaceImpactAssessmentLayout({
       isZh ? "工作效率损失量化分析" : "Work productivity loss quantification",
       isZh ? "沟通能力影响评估" : "Communication ability impact assessment",
       isZh ? "职场支持需求分析" : "Workplace support needs analysis",
-      isZh ? "个性化职场调整建议" : "Personalized workplace adjustment recommendations",
+      isZh
+        ? "个性化职场调整建议"
+        : "Personalized workplace adjustment recommendations",
       isZh ? "长期影响趋势预测" : "Long-term impact trend prediction",
     ],
     category: "HealthApplication",
@@ -86,11 +84,15 @@ export default async function WorkplaceImpactAssessmentLayout({
     breadcrumbs: [
       {
         name: isZh ? "交互工具" : "Interactive Tools",
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools`,
+        url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/${locale}/interactive-tools`,
       },
       {
         name: isZh ? "职场影响评估" : "Workplace Impact Assessment",
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/workplace-impact-assessment`,
+        url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/${locale}/interactive-tools/workplace-impact-assessment`,
       },
     ],
   });

@@ -11,10 +11,13 @@ import {
   renderOptimizer,
   performanceMonitor,
 } from "../utils/performanceOptimizer";
+import type { PartnerHandbookState } from "../stores/partnerHandbookStore";
+import type { QuizAnswer, QuizResult } from "../types/quiz";
+import { logWarn } from "@/lib/debug-logger";
 
 // 优化的状态选择器Hook
 export const useOptimizedSelector = <T>(
-  selector: (state: any) => T,
+  selector: (state: PartnerHandbookState) => T,
   key: string,
 ): T => {
   // 创建优化的选择器
@@ -50,12 +53,16 @@ export const useThrottledState = <T>(initialValue: T, limit: number = 100) => {
 export const useBatchUpdate = () => {
   // 注意：Zustand store不支持直接的setState调用
   // 这里返回一个简化的实现，实际使用时需要调用具体的action方法
-  const batchUpdate = useCallback((updates: Record<string, any>) => {
-    console.warn("Batch update not implemented for Zustand store");
+  const batchUpdate = useCallback((updates: Record<string, unknown>) => {
+    logWarn(
+      "Batch update not implemented for Zustand store",
+      { updates },
+      "useOptimizedState/useBatchUpdate",
+    );
   }, []);
 
   const addToBatch = useCallback(
-    (key: string, value: any) => {
+    (key: string, value: unknown) => {
       stateOptimizer.batchUpdate(key, value, batchUpdate);
     },
     [batchUpdate],
@@ -102,8 +109,6 @@ export const usePerformanceMonitor = (componentName: string) => {
 
 // 优化的阶段状态Hook
 export const useOptimizedStageState = (stage: "stage1" | "stage2") => {
-  const store = usePartnerHandbookStore();
-
   // 使用优化的选择器
   const stageProgress = useOptimizedSelector(
     (state) => state.stageProgress[stage],
@@ -122,11 +127,15 @@ export const useOptimizedStageState = (stage: "stage1" | "stage2") => {
 
   // 优化的状态更新函数
   const updateStageProgress = useCallback(
-    (updates: Partial<any>) => {
+    (updates: Partial<PartnerHandbookState>) => {
       // 注意：这里需要调用具体的store action方法，而不是直接使用setState
-      console.warn("updateStageProgress not implemented for Zustand store");
+      logWarn(
+        "updateStageProgress not implemented for Zustand store",
+        { updates },
+        "useOptimizedState/useOptimizedStageState",
+      );
     },
-    [stage],
+    [],
   );
 
   return {
@@ -173,7 +182,7 @@ export const useOptimizedQuizState = () => {
   );
 
   const completeStage = useCallback(
-    (stage: "stage1" | "stage2", result: any) => {
+    (stage: "stage1" | "stage2", result: QuizResult) => {
       const startTime = performance.now();
 
       store.completeStage(stage, result);
@@ -188,7 +197,7 @@ export const useOptimizedQuizState = () => {
   );
 
   const setStageAnswer = useCallback(
-    (stage: "stage1" | "stage2", index: number, answer: any) => {
+    (stage: "stage1" | "stage2", index: number, answer: QuizAnswer) => {
       const startTime = performance.now();
 
       store.setStageAnswer(stage, index, answer);
@@ -224,7 +233,7 @@ export const useOptimizedUserPreferences = () => {
 
   // 优化的偏好更新函数
   const updatePreferences = useCallback(
-    (updates: Partial<any>) => {
+    (updates: Partial<PartnerHandbookState["userPreferences"]>) => {
       // 注意：这里需要调用具体的store action方法，而不是直接使用setState
       store.updatePreferences(updates);
     },

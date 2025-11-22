@@ -4,11 +4,11 @@ import React, { useState, useEffect } from "react";
 import {
   getTrainingCampConfig,
   calculateTrainingProgress,
-  TrainingWeek,
   TrainingDay,
 } from "../config/trainingCampConfigI18n";
 import { Locale } from "../types/common";
 import { useSafeTranslations } from "@/hooks/useSafeTranslations";
+import { logError } from "@/lib/debug-logger";
 
 interface TrainingCampDisplayProps {
   locale: Locale;
@@ -32,7 +32,11 @@ const TrainingCampDisplay: React.FC<TrainingCampDisplayProps> = ({
         const progress = JSON.parse(savedProgress);
         setCompletedDays(new Set(progress));
       } catch (error) {
-        console.error("Failed to load training progress:", error);
+        logError(
+          "Failed to load training progress",
+          error,
+          "TrainingCampDisplay",
+        );
       }
     }
   }, []);
@@ -175,7 +179,6 @@ const TrainingCampDisplay: React.FC<TrainingCampDisplayProps> = ({
                         day={day}
                         isCompleted={completedDays.has(day.day)}
                         onToggle={() => handleDayToggle(day.day)}
-                        locale={locale}
                       />
                     ))}
                   </div>
@@ -194,15 +197,9 @@ interface DayTaskProps {
   day: TrainingDay;
   isCompleted: boolean;
   onToggle: () => void;
-  locale: Locale;
 }
 
-const DayTask: React.FC<DayTaskProps> = ({
-  day,
-  isCompleted,
-  onToggle,
-  locale,
-}) => {
+const DayTask: React.FC<DayTaskProps> = ({ day, isCompleted, onToggle }) => {
   const { t } = useSafeTranslations("partnerHandbook");
 
   return (

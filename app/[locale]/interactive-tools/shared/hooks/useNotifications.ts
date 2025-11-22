@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
-import { Notification, NotificationAction } from "../types";
+import { useState, useCallback } from "react";
+import { Notification } from "../types";
 
 interface UseNotificationsReturn {
   notifications: Notification[];

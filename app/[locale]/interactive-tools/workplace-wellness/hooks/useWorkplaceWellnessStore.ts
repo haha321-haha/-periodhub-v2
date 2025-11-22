@@ -36,6 +36,7 @@ import {
 } from "../types";
 import type { AssessmentAnalyticsRecord } from "../shared/types";
 import type { RecommendationFeedbackAction } from "../types/recommendation";
+import { logError, logInfo, logWarn } from "@/lib/debug-logger";
 
 // Day 11: 导入默认值
 import {
@@ -161,6 +162,10 @@ interface WorkplaceWellnessStore extends WorkplaceWellnessState {
   recordNavigation: (action: RecommendationFeedbackAction) => void;
 }
 
+type StoreSelector<T> = (state: WorkplaceWellnessStore) => T;
+type StoreEqualityFn<T> = (a: T, b: T) => boolean;
+type StoreApi = ReturnType<typeof create<WorkplaceWellnessStore>>;
+
 // 初始状态 - 基于HVsLYEp的appState
 // 使用函数来延迟 Date 对象的创建，避免 SSR 问题
 const getInitialState = (): WorkplaceWellnessState => ({
@@ -208,7 +213,7 @@ const getInitialState = (): WorkplaceWellnessState => ({
 
 // 创建Zustand Store - 使用persist进行本地存储持久化
 // 使用延迟创建，确保在 SSR 时不会执行
-let storeInstance: any | null = null;
+let storeInstance: StoreApi | null = null;
 
 const createStore = () => {
   // 双重检查：确保只在客户端执行
@@ -266,7 +271,11 @@ const createStore = () => {
                   )
                 : [...state.calendar.periodData, record];
 
-            console.log("addPeriodRecord - before cleanup:", updatedPeriodData);
+            logInfo(
+              "addPeriodRecord - before cleanup",
+              updatedPeriodData,
+              "useWorkplaceWellnessStore",
+            );
 
             // 数据清理：只保留最近 6 个月的记录，适当放宽限制
             // 这样图表可以显示更完整的数据，同时避免存储过多
@@ -293,12 +302,17 @@ const createStore = () => {
               // 如果仍然超过40条，只保留最近40条
               if (updatedPeriodData.length > 40) {
                 updatedPeriodData = updatedPeriodData.slice(0, 40);
-                console.warn("⚠️ 数据过多，已自动清理，只保留最近 40 条记录");
+                logWarn(
+                  "数据过多，已自动清理，只保留最近 40 条记录",
+                  undefined,
+                  "useWorkplaceWellnessStore",
+                );
               }
 
-              console.log(
-                "addPeriodRecord - after cleanup:",
+              logInfo(
+                "addPeriodRecord - after cleanup",
                 updatedPeriodData,
+                "useWorkplaceWellnessStore",
               );
             }
 
@@ -533,7 +547,6 @@ const createStore = () => {
 
           const preferences = state.userPreferences;
           const notifications = preferences.notifications;
-          const ui = preferences.ui;
 
           // 验证时间格式
           if (
@@ -804,8 +817,11 @@ const createStore = () => {
         // Day 11: 偏好设置变更追踪
         addPreferenceChange: (change) => {
           // 这里可以扩展为存储到历史记录中
-          // eslint-disable-next-line no-console
-          console.log("Preference change:", change);
+          logInfo(
+            "Preference change tracked",
+            change,
+            "useWorkplaceWellnessStore",
+          );
         },
 
         getPreferenceHistory: () => {
@@ -954,8 +970,10 @@ const createStore = () => {
                               typeof prefs.ui !== "object" ||
                               !prefs.ui.theme
                             ) {
-                              console.warn(
-                                "🔧 检测到 userPreferences 数据不完整，自动修复...",
+                              logWarn(
+                                "检测到 userPreferences 数据不完整，自动修复...",
+                                undefined,
+                                "useWorkplaceWellnessStore",
                               );
                               parsed.state.userPreferences = {
                                 ...DEFAULT_USER_PREFERENCES,
@@ -1004,12 +1022,16 @@ const createStore = () => {
                               const fixedData = JSON.stringify(parsed);
                               try {
                                 localStorage.setItem(key, fixedData);
-                                console.log(
-                                  "✅ userPreferences 数据已自动修复",
+                                logInfo(
+                                  "userPreferences 数据已自动修复",
+                                  undefined,
+                                  "useWorkplaceWellnessStore",
                                 );
-                              } catch (e) {
-                                console.warn(
-                                  "⚠️ 修复后的数据保存失败，使用修复后的内存数据",
+                              } catch {
+                                logWarn(
+                                  "修复后的数据保存失败，使用修复后的内存数据",
+                                  undefined,
+                                  "useWorkplaceWellnessStore",
                                 );
                               }
                               return fixedData;
@@ -1017,9 +1039,10 @@ const createStore = () => {
                           }
                           return data;
                         } catch (parseError) {
-                          console.warn(
-                            "⚠️ 数据解析失败，使用默认值:",
+                          logWarn(
+                            "数据解析失败，使用默认值",
                             parseError,
+                            "useWorkplaceWellnessStore",
                           );
                           // 数据损坏，返回 null 让 Zustand 使用默认值
                           return null;
@@ -1036,12 +1059,10 @@ const createStore = () => {
                     try {
                       if (typeof window === "undefined") return;
                       localStorage.setItem(key, value);
-                      console.log(
-                        "✅ 数据已保存到 localStorage:",
-                        key,
-                        "大小:",
-                        value.length,
-                        "bytes",
+                      logInfo(
+                        "数据已保存到 localStorage",
+                        { key, size: value.length },
+                        "useWorkplaceWellnessStore",
                       );
                     } catch (error) {
                       // 处理配额超出错误
@@ -1050,8 +1071,10 @@ const createStore = () => {
                         (error.code === 22 ||
                           error.name === "QuotaExceededError")
                       ) {
-                        console.warn(
+                        logWarn(
                           "Storage quota exceeded, attempting cleanup...",
+                          error,
+                          "useWorkplaceWellnessStore",
                         );
 
                         // 先尝试清理所有 workplace-wellness 相关的旧数据
@@ -1078,8 +1101,10 @@ const createStore = () => {
                             });
                           }
                         } catch (cleanupError) {
-                          console.warn(
+                          logWarn(
                             "Failed to cleanup, localStorage may be completely full",
+                            cleanupError,
+                            "useWorkplaceWellnessStore",
                           );
                         }
 
@@ -1137,22 +1162,27 @@ const createStore = () => {
                           try {
                             if (typeof window !== "undefined") {
                               localStorage.setItem(key, minimalDataString);
-                              console.log(
+                              logInfo(
                                 "Storage cleaned and minimal data saved to localStorage",
+                                undefined,
+                                "useWorkplaceWellnessStore",
                               );
-                              return; // 成功保存，退出
+                              return;
                             }
                           } catch (minimalSaveError) {
-                            // 即使最小数据集也保存失败，说明 localStorage 完全满了
-                            console.warn(
+                            logWarn(
                               "localStorage completely full after cleanup, using sessionStorage",
+                              minimalSaveError,
+                              "useWorkplaceWellnessStore",
                             );
                             // 直接使用 sessionStorage，不再尝试 localStorage
                             try {
                               if (typeof window !== "undefined") {
                                 sessionStorage.setItem(key, minimalDataString);
-                                console.log(
+                                logInfo(
                                   "Data saved to sessionStorage instead",
+                                  undefined,
+                                  "useWorkplaceWellnessStore",
                                 );
                                 // 触发存储警告事件，通知界面显示提示
                                 window.dispatchEvent(
@@ -1164,13 +1194,13 @@ const createStore = () => {
                                     },
                                   }),
                                 );
-                                return; // 成功保存到 sessionStorage，退出
+                                return;
                               }
                             } catch (sessionError) {
-                              // sessionStorage 也失败，放弃保存
-                              console.error(
-                                "Both localStorage and sessionStorage failed:",
+                              logError(
+                                "Both localStorage and sessionStorage failed",
                                 sessionError,
+                                "useWorkplaceWellnessStore",
                               );
                               // 触发严重警告事件
                               if (typeof window !== "undefined") {
@@ -1184,21 +1214,23 @@ const createStore = () => {
                                   }),
                                 );
                               }
-                              // 不抛出错误，静默失败
                               return;
                             }
                           }
                         } catch (dataError) {
-                          console.error(
-                            "Failed to create minimal data:",
+                          logError(
+                            "Failed to create minimal data",
                             dataError,
+                            "useWorkplaceWellnessStore",
                           );
                           // 如果创建最小数据集也失败，直接使用 sessionStorage 保存原始值
                           try {
                             if (typeof window !== "undefined") {
                               sessionStorage.setItem(key, value);
-                              console.log(
+                              logInfo(
                                 "Original data saved to sessionStorage",
+                                undefined,
+                                "useWorkplaceWellnessStore",
                               );
                               // 触发存储警告事件
                               window.dispatchEvent(
@@ -1213,8 +1245,11 @@ const createStore = () => {
                               return;
                             }
                           } catch {
-                            // 完全失败，放弃保存
-                            console.error("All storage options failed");
+                            logError(
+                              "All storage options failed",
+                              undefined,
+                              "useWorkplaceWellnessStore",
+                            );
                             // 触发严重警告事件
                             if (typeof window !== "undefined") {
                               window.dispatchEvent(
@@ -1232,7 +1267,11 @@ const createStore = () => {
                         }
                       } else {
                         // 非配额错误，记录但不抛出
-                        console.error("Storage setItem error:", error);
+                        logError(
+                          "Storage setItem error",
+                          error,
+                          "useWorkplaceWellnessStore",
+                        );
                         // 不抛出错误，静默失败
                       }
                     }
@@ -1279,7 +1318,11 @@ const createStore = () => {
         // 只在客户端运行
         onRehydrateStorage: () => (state, error) => {
           if (error) {
-            console.error("❌ Zustand store rehydration error:", error);
+            logError(
+              "Zustand store rehydration error",
+              error,
+              "useWorkplaceWellnessStore",
+            );
             // 触发全局错误事件
             if (typeof window !== "undefined") {
               window.dispatchEvent(
@@ -1287,7 +1330,11 @@ const createStore = () => {
               );
             }
           } else if (state) {
-            console.log("✅ Zustand store rehydrated successfully");
+            logInfo(
+              "Zustand store rehydrated successfully",
+              undefined,
+              "useWorkplaceWellnessStore",
+            );
 
             // 确保基础结构存在
             if (!state.calendar) {
@@ -1304,24 +1351,37 @@ const createStore = () => {
               !state.calendar.periodData ||
               state.calendar.periodData.length === 0
             ) {
-              console.log("📊 未找到已保存的经期数据，使用示例数据");
+              logInfo(
+                "未找到已保存的经期数据，使用示例数据",
+                undefined,
+                "useWorkplaceWellnessStore",
+              );
               state.calendar.periodData = mockPeriodData;
             } else {
-              console.log(
-                `✅ 成功恢复 ${state.calendar.periodData.length} 条经期记录`,
+              logInfo(
+                "成功恢复经期记录",
+                {
+                  count: state.calendar.periodData.length,
+                },
+                "useWorkplaceWellnessStore",
               );
-
               // 验证数据结构
               state.calendar.periodData = state.calendar.periodData.filter(
                 (record) => record && typeof record === "object" && record.date,
               );
 
               if (state.calendar.periodData.length > 0) {
-                console.log(
-                  `✅ 验证后保留 ${state.calendar.periodData.length} 条有效记录`,
+                logInfo(
+                  "验证后保留有效记录",
+                  { count: state.calendar.periodData.length },
+                  "useWorkplaceWellnessStore",
                 );
               } else {
-                console.log("⚠️ 所有记录都无效，使用示例数据");
+                logWarn(
+                  "所有记录都无效，使用示例数据",
+                  undefined,
+                  "useWorkplaceWellnessStore",
+                );
                 state.calendar.periodData = mockPeriodData;
               }
             }
@@ -1340,8 +1400,10 @@ const createStore = () => {
                 typeof state.userPreferences.ui !== "object" ||
                 !state.userPreferences.ui.theme
               ) {
-                console.warn(
-                  "🔧 数据恢复后检测到 userPreferences 不完整，自动修复...",
+                logWarn(
+                  "数据恢复后检测到 userPreferences 不完整，自动修复...",
+                  undefined,
+                  "useWorkplaceWellnessStore",
                 );
                 state.userPreferences = {
                   ...DEFAULT_USER_PREFERENCES,
@@ -1396,7 +1458,11 @@ const createStore = () => {
                           compression: false,
                         },
                 };
-                console.log("✅ userPreferences 已自动修复");
+                logInfo(
+                  "userPreferences 已自动修复",
+                  undefined,
+                  "useWorkplaceWellnessStore",
+                );
               } else {
                 // 即使存在，也确保所有嵌套属性完整
                 if (!state.userPreferences.ui.theme) {
@@ -1461,7 +1527,11 @@ const createStore = () => {
               );
             }
 
-            console.log("Zustand store rehydrated successfully:", state);
+            logInfo(
+              "Zustand store rehydrated successfully",
+              state,
+              "useWorkplaceWellnessStore",
+            );
           }
         },
       },
@@ -1473,8 +1543,8 @@ const createStore = () => {
 
 // 导出 store hook - 延迟创建，确保 SSR 安全
 export const useWorkplaceWellnessStore = ((
-  selector?: any,
-  equalityFn?: any,
+  selector?: StoreSelector<unknown>,
+  equalityFn?: StoreEqualityFn<unknown>,
 ) => {
   if (typeof window === "undefined") {
     // SSR 时返回初始状态，避免错误
@@ -1484,8 +1554,8 @@ export const useWorkplaceWellnessStore = ((
     return getInitialState();
   }
   const store = createStore();
-  return store(selector, equalityFn);
-}) as ReturnType<typeof create<WorkplaceWellnessStore>>;
+  return selector ? store(selector, equalityFn) : store;
+}) as StoreApi;
 
 // 添加 store 的静态方法 - 延迟初始化
 Object.defineProperty(useWorkplaceWellnessStore, "getState", {
@@ -1501,7 +1571,8 @@ Object.defineProperty(useWorkplaceWellnessStore, "setState", {
   get: () => {
     if (typeof window === "undefined") return () => {};
     const store = createStore();
-    return (state: any) => store.setState(state);
+    type SetStateParam = Parameters<StoreApi["setState"]>[0];
+    return (state: SetStateParam) => store.setState(state);
   },
   configurable: true,
 });
@@ -1510,7 +1581,8 @@ Object.defineProperty(useWorkplaceWellnessStore, "subscribe", {
   get: () => {
     if (typeof window === "undefined") return () => () => {};
     const store = createStore();
-    return (listener: any) => store.subscribe(listener);
+    type ListenerParam = Parameters<StoreApi["subscribe"]>[0];
+    return (listener: ListenerParam) => store.subscribe(listener);
   },
   configurable: true,
 });
@@ -1519,7 +1591,7 @@ Object.defineProperty(useWorkplaceWellnessStore, "persist", {
   get: () => {
     if (typeof window === "undefined") return undefined;
     const store = createStore();
-    return (store as any).persist;
+    return store.persist;
   },
   configurable: true,
 });
@@ -1599,42 +1671,42 @@ type TelemetryActions = {
 // 这些 hooks 在 SSR 时也会被调用，需要确保安全
 export const useActiveTab = (): WorkplaceWellnessState["activeTab"] => {
   if (typeof window === "undefined") return "calendar";
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   return store(
     (state: WorkplaceWellnessStore) => state.activeTab,
   ) as WorkplaceWellnessState["activeTab"];
 };
 export const useCalendar = (): CalendarState => {
   if (typeof window === "undefined") return getInitialState().calendar;
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   return store(
     (state: WorkplaceWellnessStore) => state.calendar,
   ) as CalendarState;
 };
 export const useWorkImpact = (): WorkImpactData => {
   if (typeof window === "undefined") return getInitialState().workImpact;
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   return store(
     (state: WorkplaceWellnessStore) => state.workImpact,
   ) as WorkImpactData;
 };
 export const useNutrition = (): NutritionData => {
   if (typeof window === "undefined") return getInitialState().nutrition;
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   return store(
     (state: WorkplaceWellnessStore) => state.nutrition,
   ) as NutritionData;
 };
 export const useExport = (): ExportConfig => {
   if (typeof window === "undefined") return getInitialState().export;
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   return store((state: WorkplaceWellnessStore) => state.export) as ExportConfig;
 };
 
 // Day 11: 新增选择器Hooks
 export const useUserPreferences = (): UserPreferences => {
   if (typeof window === "undefined") return getInitialState().userPreferences;
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   const preferences = store(
     (state: WorkplaceWellnessStore) => state.userPreferences,
   );
@@ -1662,35 +1734,35 @@ export const useUserPreferences = (): UserPreferences => {
 };
 export const useExportTemplates = (): ExportTemplate[] => {
   if (typeof window === "undefined") return getInitialState().exportTemplates;
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   return store(
     (state: WorkplaceWellnessStore) => state.exportTemplates,
   ) as ExportTemplate[];
 };
 export const useActiveTemplate = (): ExportTemplate | null => {
   if (typeof window === "undefined") return getInitialState().activeTemplate;
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   return store(
     (state: WorkplaceWellnessStore) => state.activeTemplate,
   ) as ExportTemplate | null;
 };
 export const useBatchExportQueue = (): BatchExportQueue | null => {
   if (typeof window === "undefined") return getInitialState().batchExportQueue;
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   return store(
     (state: WorkplaceWellnessStore) => state.batchExportQueue,
   ) as BatchExportQueue | null;
 };
 export const useExportHistory = (): ExportHistory[] => {
   if (typeof window === "undefined") return getInitialState().exportHistory;
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   return store(
     (state: WorkplaceWellnessStore) => state.exportHistory,
   ) as ExportHistory[];
 };
 export const useSystemSettings = (): SystemSettings => {
   if (typeof window === "undefined") return getInitialState().systemSettings;
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   return store(
     (state: WorkplaceWellnessStore) => state.systemSettings,
   ) as SystemSettings;
@@ -1716,7 +1788,7 @@ export const useWorkplaceWellnessActions = (): WorkplaceWellnessActions => {
     };
   }
 
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   const setActiveTab = store(
     (state: WorkplaceWellnessStore) => state.setActiveTab,
   );
@@ -1770,7 +1842,7 @@ export const useWorkplaceWellnessActions = (): WorkplaceWellnessActions => {
 
 // Day 11: 用户偏好设置Actions Hook
 export const useUserPreferencesActions = (): UserPreferencesActions => {
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   const updateUserPreferences = store(
     (state: WorkplaceWellnessStore) => state.updateUserPreferences,
   );
@@ -1816,7 +1888,7 @@ export const useUserPreferencesActions = (): UserPreferencesActions => {
 
 // Day 11: 导出模板Actions Hook
 export const useExportTemplateActions = (): ExportTemplateActions => {
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   const addExportTemplate = store(
     (state: WorkplaceWellnessStore) => state.addExportTemplate,
   );
@@ -1848,7 +1920,7 @@ export const useExportTemplateActions = (): ExportTemplateActions => {
 
 // Day 11: 批量导出Actions Hook
 export const useBatchExportActions = (): BatchExportActions => {
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   const createBatchExport = store(
     (state: WorkplaceWellnessStore) => state.createBatchExport,
   );
@@ -1876,7 +1948,7 @@ export const useBatchExportActions = (): BatchExportActions => {
 
 // Day 11: 导出历史Actions Hook
 export const useExportHistoryActions = (): ExportHistoryActions => {
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   const addExportHistory = store(
     (state: WorkplaceWellnessStore) => state.addExportHistory,
   );
@@ -1896,7 +1968,7 @@ export const useExportHistoryActions = (): ExportHistoryActions => {
 
 // Day 11: 系统设置Actions Hook
 export const useSystemSettingsActions = (): SystemSettingsActions => {
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   const updateSystemSettings = store(
     (state: WorkplaceWellnessStore) => state.updateSystemSettings,
   );
@@ -1913,7 +1985,7 @@ export const useSystemSettingsActions = (): SystemSettingsActions => {
 // 推荐反馈 Actions Hook
 export const useRecommendationFeedbackActions =
   (): RecommendationFeedbackActions => {
-    const store = useWorkplaceWellnessStore as any;
+    const store = useWorkplaceWellnessStore;
     const addRecommendationFeedback = store(
       (state: WorkplaceWellnessStore) => state.addRecommendationFeedback,
     );
@@ -1943,7 +2015,7 @@ export const useTelemetryActions = (): TelemetryActions => {
     };
   }
 
-  const store = useWorkplaceWellnessStore as any;
+  const store = useWorkplaceWellnessStore;
   const recordTelemetry = store(
     (state: WorkplaceWellnessStore) => state.recordTelemetry,
   );

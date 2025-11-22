@@ -1,13 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import {
-  QuizQuestion,
-  QuizAnswer,
-  QuizResult,
-  QuizProgress,
-  QuizStage,
-} from "../types/quiz";
+import React, { useState } from "react";
+import { QuizAnswer, QuizResult, QuizProgress, QuizStage } from "../types/quiz";
 import { Locale } from "../types/common";
 import {
   getStage1Questions,
@@ -17,6 +11,7 @@ import { getStageConfig } from "../config/quizConfigI18n";
 import { calculateLevel } from "../config/resultsConfig";
 import { useStageState, useStageActions } from "../stores/partnerHandbookStore";
 import { useSafeTranslations } from "@/hooks/useSafeTranslations";
+import { logDebug, logError } from "@/lib/debug-logger";
 
 interface PartnerUnderstandingQuizProps {
   locale: Locale;
@@ -26,62 +21,13 @@ interface PartnerUnderstandingQuizProps {
 }
 
 // Fallback recommendations function - 支持国际化
-const getFallbackRecommendations = (
-  level: "beginner" | "intermediate" | "advanced" | "expert",
-  locale: "zh" | "en",
-): string[] => {
-  const fallbacks = {
-    zh: {
-      beginner: [
-        "多了解痛经的基本知识",
-        "学习基本的支持方法",
-        "关注女朋友的感受",
-      ],
-      intermediate: [
-        "学习更深入的支持技巧",
-        "了解痛经的生理机制",
-        "提升沟通能力",
-      ],
-      advanced: [
-        "学习专业的支持方法",
-        "提升情感支持技巧",
-        "成为女朋友的坚强后盾",
-      ],
-      expert: ["分享你的经验", "帮助其他男性朋友", "成为女朋友的完美支持者"],
-    },
-    en: {
-      beginner: [
-        "Learn more about basic dysmenorrhea knowledge",
-        "Learn basic support methods",
-        "Pay attention to your girlfriend's feelings",
-      ],
-      intermediate: [
-        "Learn deeper support techniques",
-        "Understand the physiological mechanisms of dysmenorrhea",
-        "Improve communication skills",
-      ],
-      advanced: [
-        "Learn professional support methods",
-        "Improve emotional support skills",
-        "Become your girlfriend's strong support",
-      ],
-      expert: [
-        "Share your experience",
-        "Help other male friends",
-        "Become your girlfriend's perfect supporter",
-      ],
-    },
-  };
-  return fallbacks[locale][level];
-};
-
 export default function PartnerUnderstandingQuiz({
   locale,
   stage,
   onQuizComplete,
   className = "",
 }: PartnerUnderstandingQuizProps) {
-  const { t, tRaw } = useSafeTranslations("partnerHandbook.quiz");
+  const { t } = useSafeTranslations("partnerHandbook.quiz");
 
   // 使用新的状态管理
   const stageState = useStageState(stage);
@@ -162,14 +108,19 @@ export default function PartnerUnderstandingQuiz({
       if (currentSelected.includes(optionId)) {
         // 取消选择
         newSelected = currentSelected.filter((id) => id !== optionId);
-        console.log(
+        logDebug(
           `🔍 Debug - 取消选择选项 ${optionId}, 当前选择:`,
-          newSelected,
+          { newSelected },
+          "PartnerUnderstandingQuiz",
         );
       } else {
         // 添加选择
         newSelected = [...currentSelected, optionId];
-        console.log(`🔍 Debug - 选择选项 ${optionId}, 当前选择:`, newSelected);
+        logDebug(
+          `🔍 Debug - 选择选项 ${optionId}, 当前选择:`,
+          { newSelected },
+          "PartnerUnderstandingQuiz",
+        );
       }
 
       setSelectedOption(newSelected);
@@ -185,7 +136,7 @@ export default function PartnerUnderstandingQuiz({
         correctAnswers.includes(selectedId),
       );
 
-      console.log(`🔍 Debug - 第${currentQuestionIndex + 1}题选择状态:`, {
+      logDebug(`🔍 Debug - 第${currentQuestionIndex + 1}题选择状态:`, {
         questionId: currentQuestion.id,
         selected: newSelected,
         correct: correctAnswers,
@@ -230,7 +181,7 @@ export default function PartnerUnderstandingQuiz({
         // 简单计分：答对得1分，答错得0分
         score = isCorrect ? 1 : 0;
 
-        console.log(`🔍 Debug - 第${currentQuestionIndex + 1}题评分:`, {
+        logDebug(`🔍 Debug - 第${currentQuestionIndex + 1}题评分:`, {
           questionId: currentQuestion.id,
           selected: selectedArray,
           correct: correctArray,
@@ -243,7 +194,7 @@ export default function PartnerUnderstandingQuiz({
         isCorrect = selectedOption === currentQuestion.correctAnswer;
         score = isCorrect ? 1 : 0;
 
-        console.log(`🔍 Debug - 第${currentQuestionIndex + 1}题评分:`, {
+        logDebug(`🔍 Debug - 第${currentQuestionIndex + 1}题评分:`, {
           questionId: currentQuestion.id,
           selected: selectedOption,
           correct: currentQuestion.correctAnswer,
@@ -262,7 +213,7 @@ export default function PartnerUnderstandingQuiz({
       };
 
       // 调试信息：打印当前答案
-      console.log("🔍 Debug - Saving answer:", {
+      logDebug("🔍 Debug - Saving answer:", {
         questionIndex: currentQuestionIndex,
         questionId: currentQuestion.id,
         selectedOption,
@@ -275,16 +226,21 @@ export default function PartnerUnderstandingQuiz({
 
       if (currentQuestionIndex < questions.length - 1) {
         // 下一题
-        console.log(
+        logDebug(
           "🔍 Debug - Moving to next question:",
           currentQuestionIndex + 1,
+          "PartnerUnderstandingQuiz",
         );
         stageActions.nextStageQuestion(stage);
         setSelectedOption(null);
         setShowExplanation(false);
       } else {
         // 测试完成 - 确保最后一题的答案被保存后再计算结果
-        console.log("🔍 Debug - Test completed, calculating result...");
+        logDebug(
+          "🔍 Debug - Test completed, calculating result...",
+          null,
+          "PartnerUnderstandingQuiz",
+        );
 
         // 创建一个包含当前答案的临时answers数组用于计算
         const tempAnswers = [...answers];
@@ -308,7 +264,11 @@ export default function PartnerUnderstandingQuiz({
   ): QuizResult => {
     // 安全检查：确保answers存在
     if (!answersToUse || !Array.isArray(answersToUse)) {
-      console.error("🔍 Debug - answersToUse is not an array:", answersToUse);
+      logError(
+        "🔍 Debug - answersToUse is not an array:",
+        { answersToUse },
+        "PartnerUnderstandingQuiz",
+      );
       return {
         totalScore: 0,
         maxScore: stage === "stage1" ? 5 : 10,
@@ -328,11 +288,16 @@ export default function PartnerUnderstandingQuiz({
     );
 
     // 调试信息：打印answers数组
-    console.log("🔍 Debug - answersToUse array:", answersToUse);
-    console.log("🔍 Debug - valid answers:", validAnswers);
-    console.log(
+    logDebug("🔍 Debug - answersToUse array:", {
+      answersToUse,
+    });
+    logDebug("🔍 Debug - valid answers:", {
+      validAnswers,
+    });
+    logDebug(
       "🔍 Debug - answers scores:",
       validAnswers.map((a) => ({ questionId: a.questionId, score: a.score })),
+      "PartnerUnderstandingQuiz",
     );
 
     // 简单计分：答对得1分，答错得0分
@@ -344,15 +309,23 @@ export default function PartnerUnderstandingQuiz({
     const maxScore = stage === "stage1" ? 5 : 10;
 
     // 调试信息：打印分数计算
-    console.log("🔍 Debug - totalScore (correct answers):", totalScore);
-    console.log("🔍 Debug - maxScore:", maxScore);
-    console.log("🔍 Debug - questions count:", questions.length);
-    console.log("🔍 Debug - validAnswers count:", validAnswers.length);
+    logDebug("🔍 Debug - totalScore (correct answers):", {
+      totalScore,
+    });
+    logDebug("🔍 Debug - maxScore:", {
+      maxScore,
+    });
+    logDebug("🔍 Debug - questions count:", {
+      questions: questions.length,
+    });
+    logDebug("🔍 Debug - validAnswers count:", {
+      validAnswers: validAnswers.length,
+    });
 
     const percentage = Math.round((totalScore / maxScore) * 100);
 
     // 使用配置化系统计算等级
-    const level = calculateLevel(percentage, stage);
+    const level = calculateLevel(percentage);
 
     // 返回基础结果，翻译将在组件渲染时处理
     return {
@@ -367,10 +340,6 @@ export default function PartnerUnderstandingQuiz({
       timeSpent: 0, // TODO: 计算实际用时
       stage, // 添加stage信息
     };
-  };
-
-  const calculateResult = (): QuizResult => {
-    return calculateResultWithAnswers(answers);
   };
 
   if (isCompleted) {

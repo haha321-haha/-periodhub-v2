@@ -9,9 +9,20 @@ import { useState, useEffect } from "react";
 import { useLocale } from "next-intl";
 import dynamic from "next/dynamic";
 import type { Language } from "../types";
-import { generateRecommendations } from "../utils/recommendationEngine";
-import { getUIContent, getUIContentObject } from "../utils/uiContent";
+import {
+  generateRecommendations,
+  type ZIV1D3DRecommendationResult,
+} from "../utils/recommendationEngine";
+import { getUIContent } from "../utils/uiContent";
 import { PerformanceMonitor, debounce } from "../utils/performance";
+
+type SelectionState = {
+  menstrualPhase: string | null;
+  healthGoals: Set<string>;
+  tcmConstitution: Set<string>;
+};
+
+type SelectionUpdate = Partial<SelectionState>;
 
 // 动态导入组件 - 代码分割优化
 const NutritionApp = dynamic(() => import("./NutritionApp"), {
@@ -43,12 +54,14 @@ import "../styles/nutrition-generator.css";
 export default function NutritionGenerator() {
   const performanceMonitor = PerformanceMonitor.getInstance();
   const locale = useLocale() as Language; // 从URL获取当前语言
-  const [selections, setSelections] = useState({
+  const [selections, setSelections] = useState<SelectionState>({
     menstrualPhase: null as string | null,
     healthGoals: new Set<string>(),
     tcmConstitution: new Set<string>(),
   });
-  const [results, setResults] = useState<any>(null);
+  const [results, setResults] = useState<ZIV1D3DRecommendationResult | null>(
+    null,
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isClient, setIsClient] = useState(false);
@@ -65,17 +78,20 @@ export default function NutritionGenerator() {
   // 语言切换已移除，现在使用URL路由进行语言切换
 
   // 基于ziV1d3d的防抖选择更新
-  const debouncedSelectionsChange = debounce((newSelections: any) => {
-    setSelections((prev) => ({
-      ...prev,
-      ...newSelections,
-    }));
-    // 清除之前的结果
-    setResults(null);
-    setError(null);
-  }, 100);
+  const debouncedSelectionsChange = debounce(
+    (newSelections: SelectionUpdate) => {
+      setSelections((prev) => ({
+        ...prev,
+        ...newSelections,
+      }));
+      // 清除之前的结果
+      setResults(null);
+      setError(null);
+    },
+    100,
+  );
 
-  const handleSelectionsChange = (newSelections: any) => {
+  const handleSelectionsChange = (newSelections: SelectionUpdate) => {
     debouncedSelectionsChange(newSelections);
   };
 

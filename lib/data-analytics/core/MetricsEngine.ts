@@ -5,7 +5,6 @@ import {
   MetricsEngineConfig,
   DashboardData,
   DEFAULT_METRICS_WEIGHTS,
-  CORE_METRICS_LABELS,
 } from "../types/analytics.types";
 
 /**
@@ -14,7 +13,7 @@ import {
  */
 export class MetricsEngine {
   private config: MetricsEngineConfig;
-  private cache: Map<string, { data: any; timestamp: Date }> = new Map();
+  private cache: Map<string, { data: unknown; timestamp: Date }> = new Map();
   private eventHistory: EnhancedUserEvent[] = [];
   private isCalculating: boolean = false;
 
@@ -148,12 +147,12 @@ export class MetricsEngine {
     // 计算7天留存率
     const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const newUsersSevenDaysAgo = Array.from(userFirstVisit.entries()).filter(
-      ([_, firstVisit]) => firstVisit >= sevenDaysAgo,
+      ([, firstVisit]) => firstVisit >= sevenDaysAgo,
     );
 
     if (newUsersSevenDaysAgo.length === 0) return 0;
 
-    const retainedUsers = newUsersSevenDaysAgo.filter(([userId, _]) => {
+    const retainedUsers = newUsersSevenDaysAgo.filter(([userId]) => {
       const lastVisit = userLastVisit.get(userId);
       return lastVisit && lastVisit > sevenDaysAgo;
     });
@@ -445,7 +444,7 @@ export class MetricsEngine {
     };
   }
 
-  private getFromCache(key: string): any {
+  private getFromCache(key: string): unknown {
     const cached = this.cache.get(key);
     if (
       cached &&
@@ -456,7 +455,7 @@ export class MetricsEngine {
     return null;
   }
 
-  private setCache(key: string, data: any): void {
+  private setCache(key: string, data: unknown): void {
     this.cache.set(key, { data, timestamp: new Date() });
   }
 
@@ -502,7 +501,12 @@ export class MetricsEngine {
       .length;
   }
 
-  private getPopularResources(): any[] {
+  private getPopularResources(): Array<{
+    resourceId: string;
+    title: string;
+    downloads: number;
+    views: number;
+  }> {
     const resourceStats = new Map<
       string,
       { downloads: number; views: number }

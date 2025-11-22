@@ -395,7 +395,7 @@ lib/                        # 工具库
   };
 }
 
-import { logInfo } from "../../../../../lib/debug-logger";
+import { logInfo } from "@/lib/debug-logger";
 
 // 文档框架组件
 export function DocumentationFramework() {

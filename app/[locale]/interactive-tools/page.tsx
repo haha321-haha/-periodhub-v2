@@ -14,7 +14,6 @@ import {
   Apple,
 } from "lucide-react"; // Icons for cards
 import { Locale, locales } from "@/i18n";
-import StructuredData from "@/components/StructuredData";
 import {
   generateHreflangConfig,
   HreflangScript,
@@ -166,10 +165,6 @@ export default async function InteractiveToolsPage({
         return <ClipboardCheck {...iconProps} />;
     }
   };
-
-  const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
-  const pageUrl = `${baseUrl}/${locale}/interactive-tools`;
 
   // 生成hreflang配置
   const hreflangUrls = await generateHreflangConfig({

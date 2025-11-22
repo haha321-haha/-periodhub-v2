@@ -4,7 +4,7 @@ import { performanceMonitor } from "../performance/monitor";
 import { useAppStore } from "../stores/appStore";
 
 // API响应类型
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   data: T;
   success: boolean;
   message?: string;
@@ -18,7 +18,7 @@ export class ApiError extends Error {
   constructor(
     public status: number,
     public statusText: string,
-    public data?: any,
+    public data?: unknown,
     public requestId?: string,
   ) {
     super(`API Error ${status}: ${statusText}`);
@@ -30,7 +30,7 @@ export class ApiError extends Error {
 export interface RequestConfig {
   method?: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
   headers?: Record<string, string>;
-  body?: any;
+  body?: unknown;
   timeout?: number;
   retries?: number;
   retryDelay?: number;
@@ -55,10 +55,12 @@ interface CacheItem<T> {
 class ApiClient {
   private baseUrl: string;
   private defaultHeaders: Record<string, string>;
-  private cache: Map<string, CacheItem<any>> = new Map();
+  private cache: Map<string, CacheItem<unknown>> = new Map();
   private requestInterceptors: Array<(config: RequestConfig) => RequestConfig> =
     [];
-  private responseInterceptors: Array<(response: any) => any> = [];
+  private responseInterceptors: Array<
+    (response: ApiResponse<unknown>) => ApiResponse<unknown>
+  > = [];
 
   constructor(baseUrl: string = "") {
     this.baseUrl = baseUrl;
@@ -76,7 +78,9 @@ class ApiClient {
   }
 
   // 添加响应拦截器
-  public addResponseInterceptor(interceptor: (response: any) => any) {
+  public addResponseInterceptor(
+    interceptor: (response: ApiResponse<unknown>) => ApiResponse<unknown>,
+  ) {
     this.responseInterceptors.push(interceptor);
   }
 
@@ -146,7 +150,7 @@ class ApiClient {
   }
 
   // 判断是否应该重试
-  private shouldRetry(error: any): boolean {
+  private shouldRetry(error: unknown): boolean {
     if (error instanceof ApiError) {
       // 5xx错误或网络错误重试
       return error.status >= 500 || error.status === 0;
@@ -160,7 +164,7 @@ class ApiClient {
   }
 
   // 主要请求方法
-  public async request<T = any>(
+  public async request<T = unknown>(
     url: string,
     config: RequestConfig = {},
     cacheConfig?: CacheConfig,
@@ -290,7 +294,7 @@ class ApiClient {
   }
 
   // 便捷方法
-  public async get<T = any>(
+  public async get<T = unknown>(
     url: string,
     config?: Omit<RequestConfig, "method">,
     cacheConfig?: CacheConfig,
@@ -298,32 +302,32 @@ class ApiClient {
     return this.request<T>(url, { ...config, method: "GET" }, cacheConfig);
   }
 
-  public async post<T = any>(
+  public async post<T = unknown>(
     url: string,
-    data?: any,
+    data?: unknown,
     config?: Omit<RequestConfig, "method" | "body">,
   ): Promise<ApiResponse<T>> {
     return this.request<T>(url, { ...config, method: "POST", body: data });
   }
 
-  public async put<T = any>(
+  public async put<T = unknown>(
     url: string,
-    data?: any,
+    data?: unknown,
     config?: Omit<RequestConfig, "method" | "body">,
   ): Promise<ApiResponse<T>> {
     return this.request<T>(url, { ...config, method: "PUT", body: data });
   }
 
-  public async delete<T = any>(
+  public async delete<T = unknown>(
     url: string,
     config?: Omit<RequestConfig, "method">,
   ): Promise<ApiResponse<T>> {
     return this.request<T>(url, { ...config, method: "DELETE" });
   }
 
-  public async patch<T = any>(
+  public async patch<T = unknown>(
     url: string,
-    data?: any,
+    data?: unknown,
     config?: Omit<RequestConfig, "method" | "body">,
   ): Promise<ApiResponse<T>> {
     return this.request<T>(url, { ...config, method: "PATCH", body: data });
@@ -360,7 +364,7 @@ apiClient.addRequestInterceptor((config) => {
   return config;
 });
 
-apiClient.addResponseInterceptor((response) => {
+apiClient.addResponseInterceptor((response: ApiResponse<unknown>) => {
   // 可以在这里处理全局响应逻辑
   return response;
 });

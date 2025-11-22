@@ -3,6 +3,7 @@
 import React, { Suspense, lazy } from "react";
 import type { ComponentType } from "react";
 import { LoadingWrapper, SkeletonCard } from "./LoadingAnimations";
+import { logWarn } from "@/lib/debug-logger";
 
 /**
  * Day 12: 懒加载组件包装器
@@ -87,7 +88,9 @@ export class ComponentPreloader {
     try {
       await importFunc();
       this.preloadedComponents.add(componentName);
-    } catch (error) {}
+    } catch (error) {
+      logWarn("Failed to preload component", error, "LazyLoader");
+    }
   }
 
   static isPreloaded(componentName: string): boolean {
@@ -105,8 +108,9 @@ export class ComponentPreloader {
  */
 export function createLazyPage<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
-  pageName: string,
+  _pageName: string,
 ) {
+  void _pageName;
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="400px" />,
@@ -120,8 +124,9 @@ export function createLazyPage<T extends ComponentType<unknown>>(
  */
 export function createLazyModule<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
-  moduleName: string,
+  _moduleName: string,
 ) {
+  void _moduleName;
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="300px" />,
@@ -135,8 +140,9 @@ export function createLazyModule<T extends ComponentType<unknown>>(
  */
 export function createLazyTool<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
-  toolName: string,
+  _toolName: string,
 ) {
+  void _toolName;
   return createLazyComponent(
     importFunc,
     <DefaultFallback height="150px" />,
@@ -220,7 +226,7 @@ export function useLazyComponent<T extends ComponentType<unknown>>(
 }
 
 // 导出默认的懒加载组件
-export default {
+const LazyLoaderUtils = {
   createLazyComponent,
   createLazyPage,
   createLazyModule,
@@ -229,3 +235,5 @@ export default {
   preloadCriticalComponents,
   useLazyComponent,
 };
+
+export default LazyLoaderUtils;

@@ -1,26 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
 
 export default function TestProgressPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const t = useTranslations('periodPainImpactCalculator');
 
   // 模拟15个问题
   const totalQuestions = 15;
 
   // 进度计算：当前题目索引+1（因为索引从0开始），除以总题目数
-  const progress = totalQuestions > 0
-    ? Math.min(((currentQuestionIndex + 1) / totalQuestions) * 100, 100)
-    : 0;
+  const progress =
+    totalQuestions > 0
+      ? Math.min(((currentQuestionIndex + 1) / totalQuestions) * 100, 100)
+      : 0;
 
   const nextQuestion = () => {
-    setCurrentQuestionIndex(prev => Math.min(prev + 1, totalQuestions - 1));
+    setCurrentQuestionIndex((prev) => Math.min(prev + 1, totalQuestions - 1));
   };
 
   const prevQuestion = () => {
-    setCurrentQuestionIndex(prev => Math.max(prev - 1, 0));
+    setCurrentQuestionIndex((prev) => Math.max(prev - 1, 0));
   };
 
   const resetProgress = () => {
@@ -34,9 +33,7 @@ export default function TestProgressPage() {
       {/* 进度条 */}
       <div className="mb-8">
         <div className="flex justify-between items-center mb-2">
-          <h2 className="text-lg font-medium text-gray-900">
-            进度测试
-          </h2>
+          <h2 className="text-lg font-medium text-gray-900">进度测试</h2>
           <span className="text-sm text-gray-600">
             {currentQuestionIndex + 1} / {totalQuestions}
           </span>
@@ -59,8 +56,8 @@ export default function TestProgressPage() {
           disabled={currentQuestionIndex === 0}
           className={`px-6 py-3 font-semibold rounded-lg shadow-md transition duration-300 ${
             currentQuestionIndex === 0
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
           }`}
         >
           上一题
@@ -71,8 +68,8 @@ export default function TestProgressPage() {
           disabled={currentQuestionIndex >= totalQuestions - 1}
           className={`px-6 py-3 font-semibold rounded-lg shadow-md transition duration-300 ${
             currentQuestionIndex >= totalQuestions - 1
-              ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              : 'bg-purple-900 text-white hover:bg-purple-800'
+              ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+              : "bg-purple-900 text-white hover:bg-purple-800"
           }`}
         >
           下一题
@@ -113,9 +110,9 @@ export default function TestProgressPage() {
       <div className="mt-8 p-4 bg-blue-50 rounded-lg">
         <h3 className="text-lg font-semibold mb-2">测试说明</h3>
         <ol className="list-decimal list-inside space-y-2 text-sm">
-          <li>点击"下一题"按钮，观察进度是否正确增加</li>
+          <li>点击“下一题”按钮，观察进度是否正确增加</li>
           <li>当到达最后一题时，进度应该是100%</li>
-          <li>点击"重置"按钮，进度应该重置为0%</li>
+          <li>点击“重置”按钮，进度应该重置为0%</li>
           <li>这个测试页面的逻辑与实际计算器的进度逻辑相同</li>
         </ol>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { logError } from "@/lib/debug-logger";
 import { AssessmentResult } from "../types";
 
 export interface AssessmentHistoryEntry {
@@ -114,7 +115,11 @@ export const useAssessmentHistory = () => {
         calculateTrends(parsedHistory);
       }
     } catch (error) {
-      console.error("Error loading assessment history:", error);
+      logError(
+        "Error loading assessment history",
+        error,
+        "useAssessmentHistory",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -218,7 +223,11 @@ export const useAssessmentHistory = () => {
       try {
         localStorage.setItem("assessmentHistory", JSON.stringify(newHistory));
       } catch (error) {
-        console.error("Error saving assessment history:", error);
+        logError(
+          "Error saving assessment history",
+          error,
+          "useAssessmentHistory",
+        );
       }
 
       return newHistory;
@@ -256,7 +265,11 @@ export const useAssessmentHistory = () => {
     try {
       localStorage.removeItem("assessmentHistory");
     } catch (error) {
-      console.error("Error clearing assessment history:", error);
+      logError(
+        "Error clearing assessment history",
+        error,
+        "useAssessmentHistory",
+      );
     }
   }, []);
 

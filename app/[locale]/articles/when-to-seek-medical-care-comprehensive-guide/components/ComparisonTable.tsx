@@ -5,10 +5,7 @@ import { useTranslations } from "next-intl";
 import { Table, CheckCircle, AlertTriangle } from "lucide-react";
 import { COMPARISON_TABLE_DATA } from "../utils/medicalCareData";
 import styles from "../styles/ComparisonTable.module.css";
-import type {
-  ComparisonTableProps,
-  ComparisonTableData,
-} from "../types/medical-care-guide";
+import type { ComparisonTableProps } from "../types/medical-care-guide";
 
 export default function ComparisonTable({
   className = "",

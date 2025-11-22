@@ -6,24 +6,54 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import { PrivacyNotice } from "@/components/PrivacyNotice";
+import { PHQ9Result } from "@/lib/phq9-types";
 
 // 动态导入重型组件以优化性能
-const PHQ9Assessment = dynamic(() => import('@/components/PHQ9Assessment').then(mod => ({ default: mod.PHQ9Assessment })), {
-  loading: () => <div className="flex justify-center items-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>,
-  ssr: false
-});
+const PHQ9Assessment = dynamic(
+  () =>
+    import("@/components/PHQ9Assessment").then((mod) => ({
+      default: mod.PHQ9Assessment,
+    })),
+  {
+    loading: () => (
+      <div className="flex justify-center items-center p-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    ),
+    ssr: false,
+  },
+);
 
-const PHQ9Results = dynamic(() => import('@/components/PHQ9Assessment').then(mod => ({ default: mod.PHQ9Results })), {
-  loading: () => <div className="flex justify-center items-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>,
-  ssr: false
-});
+const PHQ9Results = dynamic(
+  () =>
+    import("@/components/PHQ9Assessment").then((mod) => ({
+      default: mod.PHQ9Results,
+    })),
+  {
+    loading: () => (
+      <div className="flex justify-center items-center p-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    ),
+    ssr: false,
+  },
+);
 
-const StressRadarChart = dynamic(() => import('@/components/StressRadarChart').then(mod => ({ default: mod.StressRadarChart })), {
-  loading: () => <div className="flex justify-center items-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>,
-  ssr: false
-});
+const StressRadarChart = dynamic(
+  () =>
+    import("@/components/StressRadarChart").then((mod) => ({
+      default: mod.StressRadarChart,
+    })),
+  {
+    loading: () => (
+      <div className="flex justify-center items-center p-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    ),
+    ssr: false,
+  },
+);
 import { LocalStorageManager } from "@/lib/localStorage";
-import { PHQ9Utils } from "@/lib/phq9-types";
 import {
   useABTestTracking,
   trackAssessmentStart,
@@ -34,26 +64,31 @@ import {
   trackPaywallClick,
   trackRadarChartInteraction,
   trackRecommendationClick,
-  generateAnonymousUserId
+  generateAnonymousUserId,
 } from "@/lib/ab-test-tracking";
 // Dynamically import feedback components
-const UserFeedback = dynamic(() => import('@/components/UserFeedback').then(mod => ({ default: mod.UserFeedback })), {
-  loading: () => <div className="flex justify-center items-center p-4"><div className="animate-pulse bg-gray-200 h-4 w-32 rounded"></div></div>
-});
-
-const QuickFeedback = dynamic(() => import('@/components/UserFeedback').then(mod => ({ default: mod.QuickFeedback })), {
-  loading: () => <div className="flex justify-center items-center p-2"><div className="animate-pulse bg-gray-200 h-3 w-16 rounded"></div></div>
-});
+const UserFeedback = dynamic(
+  () =>
+    import("@/components/UserFeedback").then((mod) => ({
+      default: mod.UserFeedback,
+    })),
+  {
+    loading: () => (
+      <div className="flex justify-center items-center p-4">
+        <div className="animate-pulse bg-gray-200 h-4 w-32 rounded"></div>
+      </div>
+    ),
+  },
+);
 
 export default function StressAssessmentStartPage() {
   const t = useTranslations("stressManagement");
-  const assessmentT = useTranslations("stressManagement.assessment");
   const params = useParams();
   const locale = params.locale as string;
 
   // Day 4 增强：A/B测试数据收集
   const [userId] = useState(() => generateAnonymousUserId());
-  const { isLoaded, userVariant } = useABTestTracking(userId);
+  const { isLoaded } = useABTestTracking(userId);
 
   // 评估状态
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -62,9 +97,8 @@ export default function StressAssessmentStartPage() {
   const [showPaywall, setShowPaywall] = useState(false);
   const [showPHQ9, setShowPHQ9] = useState(false);
   const [showPHQ9Results, setShowPHQ9Results] = useState(false);
-  const [phq9Result, setPhq9Result] = useState<any>(null);
+  const [phq9Result, setPhq9Result] = useState<PHQ9Result | null>(null);
   const [stressScore, setStressScore] = useState(0);
-  const [stressLevel, setStressLevel] = useState('');
 
   // Day 4: 追踪评估开始
   useEffect(() => {
@@ -117,17 +151,16 @@ export default function StressAssessmentStartPage() {
     const { level } = getStressLevel(score);
 
     // Day 4: 追踪付费墙交互
-    trackPaywallClick(userId, 'skip');
+    trackPaywallClick(userId, "skip");
 
     LocalStorageManager.saveAssessment({
       answers,
       score,
       stressLevel: level,
-      isPremium: false
+      isPremium: false,
     });
 
     setStressScore(score);
-    setStressLevel(level);
     setShowResults(true);
   };
 
@@ -136,27 +169,52 @@ export default function StressAssessmentStartPage() {
     {
       id: "q1",
       questionKey: "assessment.q1.question",
-      optionKeys: ["assessment.q1.option1", "assessment.q1.option2", "assessment.q1.option3", "assessment.q1.option4"],
+      optionKeys: [
+        "assessment.q1.option1",
+        "assessment.q1.option2",
+        "assessment.q1.option3",
+        "assessment.q1.option4",
+      ],
     },
     {
       id: "q2",
       questionKey: "assessment.q2.question",
-      optionKeys: ["assessment.q2.option1", "assessment.q2.option2", "assessment.q2.option3", "assessment.q2.option4"],
+      optionKeys: [
+        "assessment.q2.option1",
+        "assessment.q2.option2",
+        "assessment.q2.option3",
+        "assessment.q2.option4",
+      ],
     },
     {
       id: "q3",
       questionKey: "assessment.q3.question",
-      optionKeys: ["assessment.q3.option1", "assessment.q3.option2", "assessment.q3.option3", "assessment.q3.option4"],
+      optionKeys: [
+        "assessment.q3.option1",
+        "assessment.q3.option2",
+        "assessment.q3.option3",
+        "assessment.q3.option4",
+      ],
     },
     {
       id: "q4",
       questionKey: "assessment.q4.question",
-      optionKeys: ["assessment.q4.option1", "assessment.q4.option2", "assessment.q4.option3", "assessment.q4.option4"],
+      optionKeys: [
+        "assessment.q4.option1",
+        "assessment.q4.option2",
+        "assessment.q4.option3",
+        "assessment.q4.option4",
+      ],
     },
     {
       id: "q5",
       questionKey: "assessment.q5.question",
-      optionKeys: ["assessment.q5.option1", "assessment.q5.option2", "assessment.q5.option3", "assessment.q5.option4"],
+      optionKeys: [
+        "assessment.q5.option1",
+        "assessment.q5.option2",
+        "assessment.q5.option3",
+        "assessment.q5.option4",
+      ],
     },
   ];
 
@@ -169,7 +227,7 @@ export default function StressAssessmentStartPage() {
     setShowPHQ9(true);
   };
 
-  const handlePHQ9Complete = (result: any) => {
+  const handlePHQ9Complete = (result: PHQ9Result) => {
     // Day 4: 追踪PHQ-9评估完成
     trackPHQ9Complete(userId, result.score, result.level);
 
@@ -195,7 +253,7 @@ export default function StressAssessmentStartPage() {
     setShowPHQ9Results(false);
     setPhq9Result(null);
     setStressScore(0);
-    setStressLevel('');
+    setStressLevel("");
   };
 
   // Day 4: 追踪评估完成
@@ -233,14 +291,15 @@ export default function StressAssessmentStartPage() {
       sleep: answers[2] || 0,
       emotion: answers[3] || 0,
       physical: answers[4] || 0,
-      social: answers[1] || 0
+      social: answers[1] || 0,
     };
   };
 
   // Day 3增强：个性化建议生成
-  const getPersonalizedRecommendations = (answers: number[], level: string) => {
+  const getPersonalizedRecommendations = (answers: number[]) => {
     const recommendations = [];
-    const avgScore = answers.reduce((sum, answer) => sum + answer, 0) / answers.length;
+    const avgScore =
+      answers.reduce((sum, answer) => sum + answer, 0) / answers.length;
 
     // Recommendations based on overall stress level
     if (avgScore <= 1) {
@@ -248,54 +307,78 @@ export default function StressAssessmentStartPage() {
         {
           emoji: "🌟",
           title: t("assessment.personalizedRecommendations.low.maintain.title"),
-          description: t("assessment.personalizedRecommendations.low.maintain.description")
+          description: t(
+            "assessment.personalizedRecommendations.low.maintain.description",
+          ),
         },
         {
           emoji: "📊",
           title: t("assessment.personalizedRecommendations.low.monitor.title"),
-          description: t("assessment.personalizedRecommendations.low.monitor.description")
+          description: t(
+            "assessment.personalizedRecommendations.low.monitor.description",
+          ),
         },
         {
           emoji: "💪",
           title: t("assessment.personalizedRecommendations.low.enhance.title"),
-          description: t("assessment.personalizedRecommendations.low.enhance.description")
-        }
+          description: t(
+            "assessment.personalizedRecommendations.low.enhance.description",
+          ),
+        },
       );
     } else if (avgScore <= 2) {
       recommendations.push(
         {
           emoji: "🧘",
-          title: t("assessment.personalizedRecommendations.moderate.relax.title"),
-          description: t("assessment.personalizedRecommendations.moderate.relax.description")
+          title: t(
+            "assessment.personalizedRecommendations.moderate.relax.title",
+          ),
+          description: t(
+            "assessment.personalizedRecommendations.moderate.relax.description",
+          ),
         },
         {
           emoji: "😴",
-          title: t("assessment.personalizedRecommendations.moderate.sleep.title"),
-          description: t("assessment.personalizedRecommendations.moderate.sleep.description")
+          title: t(
+            "assessment.personalizedRecommendations.moderate.sleep.title",
+          ),
+          description: t(
+            "assessment.personalizedRecommendations.moderate.sleep.description",
+          ),
         },
         {
           emoji: "🏃",
-          title: t("assessment.personalizedRecommendations.moderate.exercise.title"),
-          description: t("assessment.personalizedRecommendations.moderate.exercise.description")
-        }
+          title: t(
+            "assessment.personalizedRecommendations.moderate.exercise.title",
+          ),
+          description: t(
+            "assessment.personalizedRecommendations.moderate.exercise.description",
+          ),
+        },
       );
     } else {
       recommendations.push(
         {
           emoji: "🆘",
           title: t("assessment.personalizedRecommendations.high.help.title"),
-          description: t("assessment.personalizedRecommendations.high.help.description")
+          description: t(
+            "assessment.personalizedRecommendations.high.help.description",
+          ),
         },
         {
           emoji: "👥",
           title: t("assessment.personalizedRecommendations.high.support.title"),
-          description: t("assessment.personalizedRecommendations.high.support.description")
+          description: t(
+            "assessment.personalizedRecommendations.high.support.description",
+          ),
         },
         {
           emoji: "🏥",
           title: t("assessment.personalizedRecommendations.high.health.title"),
-          description: t("assessment.personalizedRecommendations.high.health.description")
-        }
+          description: t(
+            "assessment.personalizedRecommendations.high.health.description",
+          ),
+        },
       );
     }
 
@@ -303,8 +386,6 @@ export default function StressAssessmentStartPage() {
   };
 
   const progress = ((currentQuestion + 1) / questions.length) * 100;
-  const isPremiumUser = answers.length > FREE_QUESTIONS;
-
   // PHQ-9 评估页面
   if (showPHQ9) {
     return (
@@ -339,7 +420,13 @@ export default function StressAssessmentStartPage() {
             <span className="text-neutral-800">{t("results.resultLabel")}</span>
           </nav>
 
-          <Suspense fallback={<div className="flex justify-center items-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>}>
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center p-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+              </div>
+            }
+          >
             <PHQ9Assessment
               onComplete={handlePHQ9Complete}
               onPrevious={handlePHQ9Previous}
@@ -355,7 +442,13 @@ export default function StressAssessmentStartPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-8">
         <div className="container mx-auto px-4 max-w-4xl">
-          <Suspense fallback={<div className="flex justify-center items-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>}>
+          <Suspense
+            fallback={
+              <div className="flex justify-center items-center p-8">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+              </div>
+            }
+          >
             <PHQ9Results
               result={phq9Result}
               onRestart={handleRestartAll}
@@ -414,12 +507,10 @@ export default function StressAssessmentStartPage() {
               <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-4">
                 <span className="text-3xl">📊</span>
               </div>
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">
-              {t("results.title")}
-            </h1>
-            <p className="text-gray-600">
-              {t("results.subtitle")}
-            </p>
+              <h1 className="text-3xl font-bold text-gray-800 mb-2">
+                {t("results.title")}
+              </h1>
+              <p className="text-gray-600">{t("results.subtitle")}</p>
             </div>
 
             {/* 压力评分 */}
@@ -428,7 +519,9 @@ export default function StressAssessmentStartPage() {
                 <div className="text-6xl font-bold text-blue-600 mb-2">
                   {score}
                 </div>
-                <div className="text-lg text-gray-700 mb-4">{t("results.scoreLabel")}</div>
+                <div className="text-lg text-gray-700 mb-4">
+                  {t("results.scoreLabel")}
+                </div>
                 <div
                   className={`inline-block px-6 py-2 rounded-full text-white font-semibold bg-${color}-500`}
                 >
@@ -439,7 +532,13 @@ export default function StressAssessmentStartPage() {
 
             {/* Day 3增强：雷达图可视化 */}
             <div className="mb-6">
-              <Suspense fallback={<div className="flex justify-center items-center p-8"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>}>
+              <Suspense
+                fallback={
+                  <div className="flex justify-center items-center p-8">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+                  </div>
+                }
+              >
                 <StressRadarChart
                   scores={convertAnswersToRadarData(answers)}
                   className="border-2 border-blue-200"
@@ -457,26 +556,32 @@ export default function StressAssessmentStartPage() {
                 {t("results.basicRecommendations")}
               </h3>
               <div className="space-y-3">
-                {getPersonalizedRecommendations(answers, level).map((recommendation, index) => (
-                  <div
-                    key={index}
-                    className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg cursor-pointer hover:bg-blue-100 transition-colors"
-                    onClick={() => {
-                      // Day 4: 追踪建议点击
-                      trackRecommendationClick(userId, index, recommendation.title);
-                    }}
-                  >
-                    <span className="text-2xl">{recommendation.emoji}</span>
-                    <div>
-                      <h4 className="font-semibold text-gray-800 mb-1">
-                        {recommendation.title}
-                      </h4>
-                      <p className="text-sm text-gray-600">
-                        {recommendation.description}
-                      </p>
+                {getPersonalizedRecommendations(answers).map(
+                  (recommendation, index) => (
+                    <div
+                      key={index}
+                      className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg cursor-pointer hover:bg-blue-100 transition-colors"
+                      onClick={() => {
+                        // Day 4: 追踪建议点击
+                        trackRecommendationClick(
+                          userId,
+                          index,
+                          recommendation.title,
+                        );
+                      }}
+                    >
+                      <span className="text-2xl">{recommendation.emoji}</span>
+                      <div>
+                        <h4 className="font-semibold text-gray-800 mb-1">
+                          {recommendation.title}
+                        </h4>
+                        <p className="text-sm text-gray-600">
+                          {recommendation.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ),
+                )}
               </div>
             </div>
 
@@ -543,7 +648,10 @@ export default function StressAssessmentStartPage() {
                         <span className="text-xl">✓</span>
                         <div>
                           <h4 className="font-semibold text-gray-800 mb-1">
-                            {t("ui.recommendationItem").replace('{index}', i.toString())}
+                            {t("ui.recommendationItem").replace(
+                              "{index}",
+                              i.toString(),
+                            )}
                           </h4>
                           <p className="text-sm text-gray-600">
                             {t("ui.recommendationCustom")}
@@ -579,10 +687,16 @@ export default function StressAssessmentStartPage() {
 
             {/* Day 4: 用户反馈收集 */}
             <div className="mt-6">
-              <Suspense fallback={<div className="flex justify-center items-center p-4"><div className="animate-pulse bg-gray-200 h-8 w-full rounded"></div></div>}>
+              <Suspense
+                fallback={
+                  <div className="flex justify-center items-center p-4">
+                    <div className="animate-pulse bg-gray-200 h-8 w-full rounded"></div>
+                  </div>
+                }
+              >
                 <UserFeedback
                   userId={userId}
-                  feature={t('assessment.title')}
+                  feature={t("assessment.title")}
                   page="stress_assessment_results"
                 />
               </Suspense>
@@ -692,7 +806,9 @@ export default function StressAssessmentStartPage() {
                   <div className="text-2xl font-bold text-orange-600 mb-2">
                     {t("paywall.comparison.premium.badge")}
                   </div>
-                  <p className="text-sm text-gray-600">{t("paywall.description")}</p>
+                  <p className="text-sm text-gray-600">
+                    {t("paywall.description")}
+                  </p>
                 </div>
               </div>
             </div>
@@ -756,9 +872,13 @@ export default function StressAssessmentStartPage() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold text-gray-700">
-              {t("ui.questionProgress").replace('{current}', (currentQuestion + 1).toString()).replace('{total}', questions.length.toString())}
+              {t("ui.questionProgress")
+                .replace("{current}", (currentQuestion + 1).toString())
+                .replace("{total}", questions.length.toString())}
             </span>
-            <span className="text-sm text-gray-600">{Math.round(progress)}%</span>
+            <span className="text-sm text-gray-600">
+              {Math.round(progress)}%
+            </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-3">
             <div
@@ -821,7 +941,9 @@ export default function StressAssessmentStartPage() {
                       </svg>
                     )}
                   </div>
-                  <span className="text-gray-800 font-medium">{t(optionKey)}</span>
+                  <span className="text-gray-800 font-medium">
+                    {t(optionKey)}
+                  </span>
                 </div>
               </button>
             ))}
@@ -850,7 +972,9 @@ export default function StressAssessmentStartPage() {
           <p className="text-sm text-blue-800">
             💡 <strong>{t("common.tip")}:</strong>
             {currentQuestion < FREE_QUESTIONS
-              ? `${t("common.freeQuestions")} ${FREE_QUESTIONS} ${t("common.questionsAvailable")}`
+              ? `${t("common.freeQuestions")} ${FREE_QUESTIONS} ${t(
+                  "common.questionsAvailable",
+                )}`
               : t("common.advancedAssessment")}
           </p>
         </div>

@@ -14,13 +14,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-interface HealthDataDashboardProps {
-  locale: string;
-}
-
-export default function HealthDataDashboard({
-  locale,
-}: HealthDataDashboardProps) {
+export default function HealthDataDashboard() {
   const { t } = useInteractiveToolTranslations("healthDashboard");
 
   const {

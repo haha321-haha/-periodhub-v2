@@ -13,6 +13,7 @@ import {
   Activity,
   PieChart,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
 import {
@@ -25,7 +26,7 @@ import {
   CycleStatistics,
 } from "../utils/cyclePrediction";
 import { CalendarState } from "../types";
-import { logError } from "../../../../lib/debug-logger";
+import { logError } from "@/lib/debug-logger";
 
 interface ChartData {
   labels: string[];
@@ -38,16 +39,36 @@ interface ChartData {
   }[];
 }
 
+type ActiveTab = "overview" | "cycle-length" | "pain-level" | "flow-type";
+
+interface TabConfig {
+  id: ActiveTab;
+  label: string;
+  icon: LucideIcon;
+}
+
 export default function CycleStatisticsChart() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
   const calendar = useCalendar() as CalendarState;
   const { setActiveTab: setMainActiveTab } = useWorkplaceWellnessActions();
-  const [activeTab, setActiveTab] = useState<
-    "overview" | "cycle-length" | "pain-level" | "flow-type"
-  >("overview");
+  const [activeTab, setActiveTab] = useState<ActiveTab>("overview");
   const [analysis, setAnalysis] = useState<CycleAnalysis | null>(null);
   const [statistics, setStatistics] = useState<CycleStatistics | null>(null);
+
+  const tabs: TabConfig[] = useMemo(
+    () => [
+      { id: "overview", label: t("analysis.tabs.overview"), icon: BarChart3 },
+      {
+        id: "cycle-length",
+        label: t("analysis.tabs.cycleLength"),
+        icon: TrendingUp,
+      },
+      { id: "pain-level", label: t("analysis.tabs.painLevel"), icon: Activity },
+      { id: "flow-type", label: t("analysis.tabs.flowType"), icon: PieChart },
+    ],
+    [t],
+  );
 
   // 从 store 读取 periodData
   const periodData = useMemo(
@@ -433,31 +454,10 @@ export default function CycleStatisticsChart() {
       {/* 图表标签页 */}
       <div className="mb-4">
         <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
-          {[
-            {
-              id: "overview",
-              label: t("charts.tabs.overview"),
-              icon: BarChart3,
-            },
-            {
-              id: "cycle-length",
-              label: t("charts.tabs.cycleLength"),
-              icon: TrendingUp,
-            },
-            {
-              id: "pain-level",
-              label: t("charts.tabs.painLevel"),
-              icon: Activity,
-            },
-            {
-              id: "flow-type",
-              label: t("charts.tabs.flowType"),
-              icon: PieChart,
-            },
-          ].map((tab) => (
+          {tabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
+              onClick={() => setActiveTab(tab.id)}
               className={`flex-1 flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === tab.id
                   ? "bg-white text-primary-600 shadow-sm"

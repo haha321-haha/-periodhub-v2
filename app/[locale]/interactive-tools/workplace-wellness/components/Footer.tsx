@@ -3,15 +3,13 @@
  * 基于HVsLYEp的Footer函数设计
  */
 
-'use client';
+"use client";
 
-import { Heart } from 'lucide-react';
-import { useLocale } from 'next-intl';
-import { useTranslations } from 'next-intl';
+import { Heart } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
-  const locale = useLocale();
-  const t = useTranslations('workplaceWellness');
+  const t = useTranslations("workplaceWellness");
 
   return (
     <footer className="bg-white border-t border-neutral-100 mt-12">
@@ -19,7 +17,7 @@ export default function Footer() {
         <div className="flex items-center justify-center gap-2 text-neutral-600">
           <Heart className="text-primary-500" size={16} />
           <span className="text-sm">
-            {t('header.title')} - {t('header.subtitle')}
+            {t("header.title")} - {t("header.subtitle")}
           </span>
         </div>
         <div className="text-center text-xs text-neutral-500 mt-2">

@@ -6,14 +6,13 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   Activity,
   TrendingUp,
-  AlertTriangle,
   CheckCircle,
   BarChart3,
   PieChart,
-  Calendar,
   Heart,
 } from "lucide-react";
 import { useLocale } from "next-intl";
@@ -38,22 +37,36 @@ interface SymptomPattern {
   recommendations: string[];
 }
 
+type PeriodRecordWithSymptoms = PeriodRecord & {
+  symptoms?: string[];
+};
+
+type SymptomTab = "overview" | "patterns" | "trends" | "recommendations";
+
+interface TabConfig {
+  id: SymptomTab;
+  label: string;
+  icon: LucideIcon;
+}
+
 export default function SymptomStatistics() {
   const locale = useLocale();
   const t = useTranslations("workplaceWellness");
   const calendar = useCalendar() as CalendarState;
-  const [activeTab, setActiveTab] = useState<
-    "overview" | "patterns" | "trends" | "recommendations"
-  >("overview");
+  const [activeTab, setActiveTab] = useState<SymptomTab>("overview");
   const [symptomData, setSymptomData] = useState<SymptomData[]>([]);
   const [patterns, setPatterns] = useState<SymptomPattern[]>([]);
 
   // 从 store 读取 periodData
-  const periodData = useMemo(() => calendar.periodData || [], [calendar.periodData]);
+  const periodData = useMemo(
+    () => calendar.periodData || [],
+    [calendar.periodData],
+  );
 
   // 分析症状数据 - moved before useEffect
   const analyzeSymptoms = useCallback(() => {
-    const symptoms: { [key: string]: SymptomData } = {};
+    const symptoms: Record<string, SymptomData> = {};
+    const symptomRecords = periodData as PeriodRecordWithSymptoms[];
 
     // 模拟症状数据（实际应用中应该从用户输入中获取）
     const commonSymptoms = [
@@ -70,10 +83,8 @@ export default function SymptomStatistics() {
     ];
 
     commonSymptoms.forEach((symptom) => {
-      const occurrences = periodData.filter(
-        (record) =>
-          (record as any).symptoms &&
-          (record as any).symptoms.includes(symptom),
+      const occurrences = symptomRecords.filter(
+        (record) => record.symptoms?.includes(symptom),
       );
 
       if (occurrences.length > 0) {
@@ -150,27 +161,30 @@ export default function SymptomStatistics() {
   }, [t]);
 
   // 生成建议
-  const generateRecommendations = useCallback((symptom: string): string[] => {
-    const recommendations: { [key: string]: string[] } = {
-      cramps_bloating: [
-        t("recommendations.warmCompress"),
-        t("recommendations.gentleExercise"),
-        t("recommendations.hydration"),
-      ],
-      headache_fatigue: [
-        t("recommendations.rest"),
-        t("recommendations.caffeineReduction"),
-        t("recommendations.stressManagement"),
-      ],
-      mood_swings_anxiety: [
-        t("recommendations.mindfulness"),
-        t("recommendations.socialSupport"),
-        t("recommendations.sleepHygiene"),
-      ],
-    };
+  const generateRecommendations = useCallback(
+    (symptom: string): string[] => {
+      const recommendations: { [key: string]: string[] } = {
+        cramps_bloating: [
+          t("recommendations.warmCompress"),
+          t("recommendations.gentleExercise"),
+          t("recommendations.hydration"),
+        ],
+        headache_fatigue: [
+          t("recommendations.rest"),
+          t("recommendations.caffeineReduction"),
+          t("recommendations.stressManagement"),
+        ],
+        mood_swings_anxiety: [
+          t("recommendations.mindfulness"),
+          t("recommendations.socialSupport"),
+          t("recommendations.sleepHygiene"),
+        ],
+      };
 
-    return recommendations[symptom] || [t("recommendations.generalCare")];
-  }, [t]);
+      return recommendations[symptom] || [t("recommendations.generalCare")];
+    },
+    [t],
+  );
 
   // 计算趋势
   const calculateTrend = (
@@ -372,31 +386,33 @@ export default function SymptomStatistics() {
       {/* 标签页导航 */}
       <div className="mb-6">
         <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
-          {[
-            {
-              id: "overview",
-              label: t("symptoms.tabs.overview"),
-              icon: BarChart3,
-            },
-            {
-              id: "patterns",
-              label: t("symptoms.tabs.patterns"),
-              icon: PieChart,
-            },
-            {
-              id: "trends",
-              label: t("symptoms.tabs.trends"),
-              icon: TrendingUp,
-            },
-            {
-              id: "recommendations",
-              label: t("symptoms.tabs.recommendations"),
-              icon: Heart,
-            },
-          ].map((tab) => (
+          {(
+            [
+              {
+                id: "overview",
+                label: t("symptoms.tabs.overview"),
+                icon: BarChart3,
+              },
+              {
+                id: "patterns",
+                label: t("symptoms.tabs.patterns"),
+                icon: PieChart,
+              },
+              {
+                id: "trends",
+                label: t("symptoms.tabs.trends"),
+                icon: TrendingUp,
+              },
+              {
+                id: "recommendations",
+                label: t("symptoms.tabs.recommendations"),
+                icon: Heart,
+              },
+            ] as TabConfig[]
+          ).map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
+              onClick={() => setActiveTab(tab.id)}
               className={`flex-1 flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === tab.id
                   ? "bg-white text-primary-600 shadow-sm"

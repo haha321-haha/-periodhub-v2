@@ -8,7 +8,6 @@ import {
   NutritionRecommendation,
   LeaveTemplate,
   MenstrualPhase,
-  TCMConstitution,
   SeverityLevel,
   TCMNature,
 } from "../types";
@@ -206,13 +205,13 @@ export function getLeaveTemplates(locale: string = "en"): LeaveTemplate[] {
 }
 
 // 数据验证函数 - 基于HVsLYEp的数据结构
-export function validateAllData() {
-  const {
-    validatePeriodData,
-    validateNutritionData,
-    validateLeaveTemplates,
-  } = require("../utils/validation");
+import {
+  validatePeriodData,
+  validateNutritionData,
+  validateLeaveTemplates,
+} from "../utils/validation";
 
+export function validateAllData() {
   const results = {
     periodData: validatePeriodData(mockPeriodData),
     nutritionData: validateNutritionData(mockNutritionData),

@@ -1,6 +1,7 @@
 // PerformanceManager - Main performance optimization service
 // Integrates all performance optimization services and provides unified interface
 
+import { logWarn, logError, logInfo } from "@/lib/debug-logger";
 import LazyLoadingService from "./LazyLoadingService";
 import DataCompressionService from "./DataCompressionService";
 import DataCleanupService from "./DataCleanupService";
@@ -31,8 +32,8 @@ export interface PerformanceManagerInterface {
   ): Promise<PainRecord[]>;
 
   // Data Compression
-  compressData(data: any): Promise<string>;
-  decompressData(compressedData: string): Promise<any>;
+  compressData(data: unknown): Promise<string>;
+  decompressData(compressedData: string): Promise<unknown>;
 
   // Data Cleanup
   performDataCleanup(options?: CleanupOptions): Promise<CleanupResult>;
@@ -40,16 +41,19 @@ export interface PerformanceManagerInterface {
 
   // Chart Performance
   optimizeChartData(
-    data: any[],
+    data: unknown[],
     chartType: string,
     options?: ChartOptimizationOptions,
-  ): Promise<any[]>;
-  optimizeChartOptions(baseOptions: any, dataSize: number): any;
+  ): Promise<unknown[]>;
+  optimizeChartOptions(
+    baseOptions: Record<string, unknown>,
+    dataSize: number,
+  ): Record<string, unknown>;
 
   // Memory Management
   monitorMemoryUsage(): MemoryUsageInfo;
   cleanupMemory(): Promise<void>;
-  registerChartInstance(id: string, instance: any): void;
+  registerChartInstance(id: string, instance: unknown): void;
 
   // Storage Quota
   monitorStorageQuota(): Promise<StorageQuotaInfo>;
@@ -70,8 +74,8 @@ export interface PerformanceReport {
 }
 
 export interface OverallOptimizationResult {
-  memoryOptimization: any;
-  storageOptimization: any;
+  memoryOptimization: { freedMemory: number; chartInstancesRemoved: number };
+  storageOptimization: { freedSpace: number; recordsRemoved: number };
   dataCleanup: CleanupResult;
   totalTimeSaved: number;
   performanceImprovement: number;
@@ -122,12 +126,12 @@ export class PerformanceManager implements PerformanceManagerInterface {
   }
 
   // Data Compression Methods
-  async compressData(data: any): Promise<string> {
+  async compressData(data: unknown): Promise<string> {
     const result = await this.compressionService.compressData(data);
     return result.compressedData;
   }
 
-  async decompressData(compressedData: string): Promise<any> {
+  async decompressData(compressedData: string): Promise<unknown> {
     return this.compressionService.decompressData(compressedData);
   }
 
@@ -142,14 +146,17 @@ export class PerformanceManager implements PerformanceManagerInterface {
 
   // Chart Performance Methods
   async optimizeChartData(
-    data: any[],
+    data: unknown[],
     chartType: string,
     options?: ChartOptimizationOptions,
-  ): Promise<any[]> {
+  ): Promise<unknown[]> {
     return this.chartOptimizer.optimizeDataForChart(data, chartType, options);
   }
 
-  optimizeChartOptions(baseOptions: any, dataSize: number): any {
+  optimizeChartOptions(
+    baseOptions: Record<string, unknown>,
+    dataSize: number,
+  ): Record<string, unknown> {
     return this.chartOptimizer.optimizeChartOptions(baseOptions, dataSize);
   }
 
@@ -163,7 +170,7 @@ export class PerformanceManager implements PerformanceManagerInterface {
     await this.memoryManager.optimizeDataStructures();
   }
 
-  registerChartInstance(id: string, instance: any): void {
+  registerChartInstance(id: string, instance: unknown): void {
     this.memoryManager.registerChartInstance(id, instance);
   }
 
@@ -337,7 +344,11 @@ export class PerformanceManager implements PerformanceManagerInterface {
    */
   async emergencyOptimization(): Promise<void> {
     try {
-      console.warn("Performing emergency performance optimization");
+      logWarn(
+        "Performing emergency performance optimization",
+        undefined,
+        "PerformanceManager/emergencyOptimization",
+      );
 
       // Immediate memory cleanup
       await this.memoryManager.cleanupChartInstances();
@@ -361,9 +372,17 @@ export class PerformanceManager implements PerformanceManagerInterface {
 
       await this.cleanupService.performCleanup(emergencyCleanupOptions);
 
-      console.log("Emergency optimization completed");
+      logInfo(
+        "Emergency optimization completed",
+        undefined,
+        "PerformanceManager/emergencyOptimization",
+      );
     } catch (error) {
-      console.error("Emergency optimization failed:", error);
+      logError(
+        "Emergency optimization failed:",
+        error,
+        "PerformanceManager/emergencyOptimization",
+      );
     }
   }
 
@@ -381,11 +400,19 @@ export class PerformanceManager implements PerformanceManagerInterface {
 
           // Trigger optimizations if performance is poor
           if (report.performanceScore < 50) {
-            console.warn("Poor performance detected, triggering optimization");
+            logWarn(
+              "Poor performance detected, triggering optimization",
+              undefined,
+              "PerformanceManager/initializePerformanceMonitoring",
+            );
             await this.optimizeOverallPerformance();
           }
         } catch (error) {
-          console.error("Performance monitoring failed:", error);
+          logError(
+            "Performance monitoring failed:",
+            error,
+            "PerformanceManager/initializePerformanceMonitoring",
+          );
         }
       },
       5 * 60 * 1000,
@@ -395,7 +422,13 @@ export class PerformanceManager implements PerformanceManagerInterface {
     this.emergencyMonitoringTimer = setInterval(() => {
       const memory = this.monitorMemoryUsage();
       if (memory.usedJSHeapSize > memory.jsHeapSizeLimit * 0.9) {
-        this.emergencyOptimization().catch(console.error);
+        this.emergencyOptimization().catch((error) =>
+          logError(
+            "Emergency optimization error:",
+            error,
+            "PerformanceManager/initializePerformanceMonitoring",
+          ),
+        );
       }
     }, 30 * 1000);
   }

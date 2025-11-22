@@ -1,21 +1,25 @@
 "use client";
 
 import { useState, useCallback, useEffect, useMemo } from "react";
+import type { TFunction } from "next-intl";
 import {
   Question,
   AssessmentAnswer,
   AssessmentSession,
   AssessmentResult,
-  Recommendation,
 } from "../types";
 import { getQuestionsByMode } from "../data/assessmentQuestions";
 import {
   calculateSymptomImpact,
-  calculateWorkplaceImpact,
   calculateDetailedImpact,
   calculateMedicalImpact,
 } from "../data/calculationAlgorithms";
 import { saveToStorage, loadFromStorage, createStorageKey } from "../utils";
+import { logError, logInfo } from "@/lib/debug-logger";
+
+type AnswerValue = AssessmentAnswer["value"];
+type AnswerMap = Record<string, AnswerValue>;
+type TranslationFunction = TFunction;
 
 interface UseSymptomAssessmentReturn {
   // Current session
@@ -34,7 +38,10 @@ interface UseSymptomAssessmentReturn {
   goToQuestion: (index: number) => void;
   goToPreviousQuestion: () => void;
   goToNextQuestion: () => void;
-  completeAssessment: (t?: any) => AssessmentResult | null;
+  completeAssessment: (
+    t?: TranslationFunction,
+    locale?: string,
+  ) => AssessmentResult | null;
   resetAssessment: () => void;
 
   // Results
@@ -159,393 +166,28 @@ export const useSymptomAssessment = (
     }
   }, [currentQuestionIndex, questions.length]);
 
-  const calculateScore = useCallback(
-    (answers: AssessmentAnswer[], questions: Question[]): number => {
-      let totalScore = 0;
-      let maxPossibleScore = 0;
-
-      questions.forEach((question) => {
-        const answer = answers.find((a) => a.questionId === question.id);
-        if (!answer) return;
-
-        maxPossibleScore += question.weight * 10; // Assuming max weight per question is 10
-
-        if (question.type === "scale") {
-          totalScore += (answer.value as number) * question.weight;
-        } else if (question.type === "single") {
-          const option = question.options?.find(
-            (opt) => opt.value === answer.value,
-          );
-          if (option && option.weight !== undefined) {
-            totalScore += option.weight * question.weight;
-          }
-        } else if (question.type === "multi") {
-          const selectedValues = answer.value as string[];
-          selectedValues.forEach((value) => {
-            const option = question.options?.find((opt) => opt.value === value);
-            if (option && option.weight !== undefined) {
-              totalScore += option.weight * question.weight;
-            }
-          });
-        }
-      });
-
-      return Math.min(totalScore, maxPossibleScore);
-    },
-    [],
-  );
-
-  const generateRecommendations = useCallback(
-    (
-      score: number,
-      percentage: number,
-      answers: AssessmentAnswer[],
-      t?: any,
-      locale?: string,
-    ): Recommendation[] => {
-      const recommendations: Recommendation[] = [];
-      const isEnglish = locale === "en";
-
-      // Emergency recommendations
-      if (percentage >= 80) {
-        const titleRaw = t
-          ? t("recommendations.emergencyMedical.title")
-          : isEnglish
-            ? "Seek Immediate Medical Care"
-            : "建议立即就医";
-        const descriptionRaw = t
-          ? t("recommendations.emergencyMedical.description")
-          : isEnglish
-            ? "Your symptoms may require professional medical evaluation and treatment"
-            : "您的症状可能需要专业医疗评估和治疗";
-        const timeframeRaw = t
-          ? t("recommendations.emergencyMedical.timeframe")
-          : isEnglish
-            ? "Immediately"
-            : "立即";
-        const actionStepsRaw = t
-          ? t("recommendations.emergencyMedical.actionSteps")
-          : isEnglish
-            ? [
-                "Contact your gynecologist",
-                "If pain is severe, consider emergency care",
-                "Keep a detailed symptom diary",
-              ]
-            : [
-                "联系您的妇科医生",
-                "如果疼痛剧烈，考虑急诊就医",
-                "记录详细的症状日志",
-              ];
-
-        // Use fallback if translation returns the key itself (indicating translation failed)
-        const title =
-          titleRaw && !titleRaw.includes("recommendations.")
-            ? titleRaw
-            : isEnglish
-              ? "Seek Immediate Medical Care"
-              : "建议立即就医";
-        const description =
-          descriptionRaw && !descriptionRaw.includes("recommendations.")
-            ? descriptionRaw
-            : isEnglish
-              ? "Your symptoms may require professional medical evaluation and treatment"
-              : "您的症状可能需要专业医疗评估和治疗";
-        const timeframe =
-          timeframeRaw && !timeframeRaw.includes("recommendations.")
-            ? timeframeRaw
-            : isEnglish
-              ? "Immediately"
-              : "立即";
-        const actionSteps =
-          Array.isArray(actionStepsRaw) &&
-          actionStepsRaw.length > 0 &&
-          !actionStepsRaw[0]?.includes?.("recommendations.")
-            ? actionStepsRaw
-            : isEnglish
-              ? [
-                  "Contact your gynecologist",
-                  "If pain is severe, consider emergency care",
-                  "Keep a detailed symptom diary",
-                ]
-              : [
-                  "联系您的妇科医生",
-                  "如果疼痛剧烈，考虑急诊就医",
-                  "记录详细的症状日志",
-                ];
-
-        recommendations.push({
-          id: "emergency_medical",
-          category: "medical",
-          title: title,
-          description: description,
-          priority: "high",
-          timeframe: timeframe,
-          actionSteps: Array.isArray(actionSteps) ? actionSteps : [actionSteps],
-        });
-      }
-
-      // Pain management recommendations
-      if (percentage >= 40) {
-        const titleRaw = t
-          ? t("recommendations.painManagement.title")
-          : isEnglish
-            ? "Pain Management Strategies"
-            : "疼痛管理策略";
-        const descriptionRaw = t
-          ? t("recommendations.painManagement.description")
-          : isEnglish
-            ? "Multiple methods can help relieve menstrual pain"
-            : "多种方法可以帮助缓解经期疼痛";
-        const timeframeRaw = t
-          ? t("recommendations.painManagement.timeframe")
-          : isEnglish
-            ? "Immediately available"
-            : "立即可用";
-        const actionStepsRaw = t
-          ? t("recommendations.painManagement.actionSteps")
-          : isEnglish
-            ? [
-                "Use heating pads or hot water bottles",
-                "Try light exercise like walking",
-                "Consider over-the-counter pain relievers (follow instructions)",
-              ]
-            : [
-                "使用热敷垫或热水袋",
-                "尝试轻度运动如散步",
-                "考虑非处方止痛药（按说明使用）",
-              ];
-
-        // Use fallback if translation returns the key itself
-        const title =
-          titleRaw && !titleRaw.includes("recommendations.")
-            ? titleRaw
-            : isEnglish
-              ? "Pain Management Strategies"
-              : "疼痛管理策略";
-        const description =
-          descriptionRaw && !descriptionRaw.includes("recommendations.")
-            ? descriptionRaw
-            : isEnglish
-              ? "Multiple methods can help relieve menstrual pain"
-              : "多种方法可以帮助缓解经期疼痛";
-        const timeframe =
-          timeframeRaw && !timeframeRaw.includes("recommendations.")
-            ? timeframeRaw
-            : isEnglish
-              ? "Immediately available"
-              : "立即可用";
-        const actionSteps =
-          Array.isArray(actionStepsRaw) &&
-          actionStepsRaw.length > 0 &&
-          !actionStepsRaw[0]?.includes?.("recommendations.")
-            ? actionStepsRaw
-            : isEnglish
-              ? [
-                  "Use heating pads or hot water bottles",
-                  "Try light exercise like walking",
-                  "Consider over-the-counter pain relievers (follow instructions)",
-                ]
-              : [
-                  "使用热敷垫或热水袋",
-                  "尝试轻度运动如散步",
-                  "考虑非处方止痛药（按说明使用）",
-                ];
-
-        recommendations.push({
-          id: "pain_management",
-          category: "immediate",
-          title: title,
-          description: description,
-          priority: "high",
-          timeframe: timeframe,
-          actionSteps: Array.isArray(actionSteps) ? actionSteps : [actionSteps],
-        });
-      }
-
-      // Lifestyle recommendations
-      const lifestyleTitleRaw = t
-        ? t("recommendations.lifestyleChanges.title")
-        : isEnglish
-          ? "Lifestyle Adjustments"
-          : "生活方式调整";
-      const lifestyleDescriptionRaw = t
-        ? t("recommendations.lifestyleChanges.description")
-        : isEnglish
-          ? "Long-term lifestyle changes can significantly improve symptoms"
-          : "长期的生活方式改变可以显著改善症状";
-      const lifestyleTimeframeRaw = t
-        ? t("recommendations.lifestyleChanges.timeframe")
-        : isEnglish
-          ? "2-3 months to see effects"
-          : "2-3个月见效";
-      const lifestyleActionStepsRaw = t
-        ? t("recommendations.lifestyleChanges.actionSteps")
-        : isEnglish
-          ? [
-              "Maintain regular exercise habits",
-              "Ensure adequate sleep",
-              "Learn stress management techniques",
-              "Maintain a balanced diet",
-            ]
-          : [
-              "保持规律的运动习惯",
-              "确保充足的睡眠",
-              "学习压力管理技巧",
-              "保持均衡饮食",
-            ];
-
-      // Use fallback if translation returns the key itself
-      const lifestyleTitle =
-        lifestyleTitleRaw && !lifestyleTitleRaw.includes("recommendations.")
-          ? lifestyleTitleRaw
-          : isEnglish
-            ? "Lifestyle Adjustments"
-            : "生活方式调整";
-      const lifestyleDescription =
-        lifestyleDescriptionRaw &&
-        !lifestyleDescriptionRaw.includes("recommendations.")
-          ? lifestyleDescriptionRaw
-          : isEnglish
-            ? "Long-term lifestyle changes can significantly improve symptoms"
-            : "长期的生活方式改变可以显著改善症状";
-      const lifestyleTimeframe =
-        lifestyleTimeframeRaw &&
-        !lifestyleTimeframeRaw.includes("recommendations.")
-          ? lifestyleTimeframeRaw
-          : isEnglish
-            ? "2-3 months to see effects"
-            : "2-3个月见效";
-      const lifestyleActionSteps =
-        Array.isArray(lifestyleActionStepsRaw) &&
-        lifestyleActionStepsRaw.length > 0 &&
-        !lifestyleActionStepsRaw[0]?.includes?.("recommendations.")
-          ? lifestyleActionStepsRaw
-          : isEnglish
-            ? [
-                "Maintain regular exercise habits",
-                "Ensure adequate sleep",
-                "Learn stress management techniques",
-                "Maintain a balanced diet",
-              ]
-            : [
-                "保持规律的运动习惯",
-                "确保充足的睡眠",
-                "学习压力管理技巧",
-                "保持均衡饮食",
-              ];
-
-      recommendations.push({
-        id: "lifestyle_changes",
-        category: "lifestyle",
-        title: lifestyleTitle,
-        description: lifestyleDescription,
-        priority: "medium",
-        timeframe: lifestyleTimeframe,
-        actionSteps: Array.isArray(lifestyleActionSteps)
-          ? lifestyleActionSteps
-          : [lifestyleActionSteps],
-      });
-
-      // Self-care recommendations
-      const selfcareTitleRaw = t
-        ? t("recommendations.selfcarePractices.title")
-        : isEnglish
-          ? "Self-Care Practices"
-          : "自我护理实践";
-      const selfcareDescriptionRaw = t
-        ? t("recommendations.selfcarePractices.description")
-        : isEnglish
-          ? "Daily self-care can help you better manage symptoms"
-          : "日常的自我护理可以帮助您更好地管理症状";
-      const selfcareTimeframeRaw = t
-        ? t("recommendations.selfcarePractices.timeframe")
-        : isEnglish
-          ? "Ongoing"
-          : "持续进行";
-      const selfcareActionStepsRaw = t
-        ? t("recommendations.selfcarePractices.actionSteps")
-        : isEnglish
-          ? [
-              "Practice deep breathing and meditation",
-              "Use pain tracker to record symptoms",
-              "Build a support network",
-              "Learn relaxation techniques",
-            ]
-          : [
-              "练习深呼吸和冥想",
-              "使用疼痛追踪器记录症状",
-              "建立支持网络",
-              "学习放松技巧",
-            ];
-
-      // Use fallback if translation returns the key itself
-      const selfcareTitle =
-        selfcareTitleRaw && !selfcareTitleRaw.includes("recommendations.")
-          ? selfcareTitleRaw
-          : isEnglish
-            ? "Self-Care Practices"
-            : "自我护理实践";
-      const selfcareDescription =
-        selfcareDescriptionRaw &&
-        !selfcareDescriptionRaw.includes("recommendations.")
-          ? selfcareDescriptionRaw
-          : isEnglish
-            ? "Daily self-care can help you better manage symptoms"
-            : "日常的自我护理可以帮助您更好地管理症状";
-      const selfcareTimeframe =
-        selfcareTimeframeRaw &&
-        !selfcareTimeframeRaw.includes("recommendations.")
-          ? selfcareTimeframeRaw
-          : isEnglish
-            ? "Ongoing"
-            : "持续进行";
-      const selfcareActionSteps =
-        Array.isArray(selfcareActionStepsRaw) &&
-        selfcareActionStepsRaw.length > 0 &&
-        !selfcareActionStepsRaw[0]?.includes?.("recommendations.")
-          ? selfcareActionStepsRaw
-          : isEnglish
-            ? [
-                "Practice deep breathing and meditation",
-                "Use pain tracker to record symptoms",
-                "Build a support network",
-                "Learn relaxation techniques",
-              ]
-            : [
-                "练习深呼吸和冥想",
-                "使用疼痛追踪器记录症状",
-                "建立支持网络",
-                "学习放松技巧",
-              ];
-
-      recommendations.push({
-        id: "selfcare_practices",
-        category: "selfcare",
-        title: selfcareTitle,
-        description: selfcareDescription,
-        priority: "medium",
-        timeframe: selfcareTimeframe,
-        actionSteps: Array.isArray(selfcareActionSteps)
-          ? selfcareActionSteps
-          : [selfcareActionSteps],
-      });
-
-      return recommendations;
-    },
-    [],
-  );
-
   const completeAssessment = useCallback(
-    (t?: any, currentLocale?: string): AssessmentResult | null => {
-      console.log("completeAssessment called:", {
-        currentSession: !!currentSession,
-        answersCount: currentSession?.answers.length,
-        questionsCount: questions.length,
-        currentLocale,
-      });
+    (
+      t?: TranslationFunction,
+      currentLocale?: string,
+    ): AssessmentResult | null => {
+      logInfo(
+        "completeAssessment called",
+        {
+          currentSession: !!currentSession,
+          answersCount: currentSession?.answers.length,
+          questionsCount: questions.length,
+          currentLocale,
+        },
+        "useSymptomAssessment",
+      );
 
       if (!currentSession) {
-        console.error("No current session");
+        logError(
+          "No current session to complete assessment",
+          undefined,
+          "useSymptomAssessment",
+        );
         return null;
       }
 
@@ -556,12 +198,16 @@ export const useSymptomAssessment = (
         const effectiveLocale = currentLocale || currentSession.locale;
 
         // 将答案转换为参考代码格式
-        const answersForCalculation: Record<string, any> = {};
+        const answersForCalculation: AnswerMap = {};
         currentSession.answers.forEach((answer) => {
           answersForCalculation[answer.questionId] = answer.value;
         });
 
-        console.log("Answers for calculation:", answersForCalculation);
+        logInfo(
+          "Answers for calculation",
+          answersForCalculation,
+          "useSymptomAssessment",
+        );
 
         // 根据评估模式选择计算函数
         let calculationResult;
@@ -585,7 +231,11 @@ export const useSymptomAssessment = (
           );
         }
 
-        console.log("Calculation result:", calculationResult);
+        logInfo(
+          "Calculation result",
+          calculationResult,
+          "useSymptomAssessment",
+        );
 
         // 构建结果对象
         const assessmentResult: AssessmentResult = {
@@ -667,7 +317,11 @@ export const useSymptomAssessment = (
           );
         }
 
-        console.log("Final assessment result:", assessmentResult);
+        logInfo(
+          "Final assessment result",
+          assessmentResult,
+          "useSymptomAssessment",
+        );
 
         setResult(assessmentResult);
         setCurrentSession((prev) =>
@@ -682,7 +336,7 @@ export const useSymptomAssessment = (
 
         return assessmentResult;
       } catch (err) {
-        console.error("Failed to complete assessment:", err);
+        logError("Failed to complete assessment", err, "useSymptomAssessment");
         const effectiveLocale = currentLocale || currentSession?.locale;
         const isEnglish = effectiveLocale === "en";
         setError(

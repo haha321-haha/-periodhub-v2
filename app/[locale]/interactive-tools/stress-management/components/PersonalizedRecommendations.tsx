@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { LocalStorageManager, AssessmentData } from "@/lib/localStorage";
+import { LocalStorageManager } from "@/lib/localStorage";
 
 interface PersonalizedRecommendationsProps {
   locale: string;
@@ -22,8 +22,12 @@ interface Recommendation {
 export default function PersonalizedRecommendations({
   locale,
 }: PersonalizedRecommendationsProps) {
-  const t = useTranslations("stressManagement.assessment.personalizedRecommendations");
-  const tRec = useTranslations("stressManagement.assessment.personalizedRecommendations.recommendations");
+  const t = useTranslations(
+    "stressManagement.assessment.personalizedRecommendations",
+  );
+  const tRec = useTranslations(
+    "stressManagement.assessment.personalizedRecommendations.recommendations",
+  );
   const tCommon = useTranslations("stressManagement");
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [stressLevel, setStressLevel] = useState<string>("");
@@ -32,131 +36,130 @@ export default function PersonalizedRecommendations({
 
   // 简化版推荐算法：基于分数的if/else
   // Move before useEffect to avoid dependency issues
-  const generateSimpleRecommendations = useCallback((
-    score: number,
-    level: string,
-    locale: string
-  ): Recommendation[] => {
-    const recs: Recommendation[] = [];
+  const generateSimpleRecommendations = useCallback(
+    (score: number, level: string, locale: string): Recommendation[] => {
+      const recs: Recommendation[] = [];
 
-    // 根据文档：>=24高压力，>=16中度，<16低压力
-    if (score >= 24 || level === "severe" || level === "high") {
-      // 高压力：紧急干预
-      recs.push({
-        id: "breathing_exercise",
-        type: "tool",
-        title: tRec("breathingExercise.title"),
-        description: tRec("breathingExercise.high"),
-        href: `/${locale}/interactive-tools/stress-management/breathing-exercise`,
-        priority: "urgent",
-        icon: "💨",
-      });
+      // 根据文档：>=24高压力，>=16中度，<16低压力
+      if (score >= 24 || level === "severe" || level === "high") {
+        // 高压力：紧急干预
+        recs.push({
+          id: "breathing_exercise",
+          type: "tool",
+          title: tRec("breathingExercise.title"),
+          description: tRec("breathingExercise.high"),
+          href: `/${locale}/interactive-tools/stress-management/breathing-exercise`,
+          priority: "urgent",
+          icon: "💨",
+        });
 
-      recs.push({
-        id: "stress_guide",
-        type: "article",
-        title: tRec("stressGuide.title"),
-        description: tRec("stressGuide.high"),
-        href: `/${locale}/articles/menstrual-stress-management-complete-guide`,
-        priority: "high",
-        icon: "📋",
-      });
+        recs.push({
+          id: "stress_guide",
+          type: "article",
+          title: tRec("stressGuide.title"),
+          description: tRec("stressGuide.high"),
+          href: `/${locale}/articles/menstrual-stress-management-complete-guide`,
+          priority: "high",
+          icon: "📋",
+        });
 
-      recs.push({
-        id: "sleep_guide",
-        type: "article",
-        title: tRec("sleepGuide.title"),
-        description: tRec("sleepGuide.high"),
-        href: `/${locale}/articles/menstrual-sleep-quality-improvement-guide`,
-        priority: "high",
-        icon: "😴",
-      });
+        recs.push({
+          id: "sleep_guide",
+          type: "article",
+          title: tRec("sleepGuide.title"),
+          description: tRec("sleepGuide.high"),
+          href: `/${locale}/articles/menstrual-sleep-quality-improvement-guide`,
+          priority: "high",
+          icon: "😴",
+        });
 
-      recs.push({
-        id: "office_scenario",
-        type: "technique",
-        title: tRec("officeScenario.title"),
-        description: tRec("officeScenario.high"),
-        href: `/${locale}/scenario-solutions/office`,
-        priority: "high",
-        icon: "💼",
-      });
-    } else if (score >= 16 || level === "moderate") {
-      // 中度压力：积极管理
-      recs.push({
-        id: "breathing_exercise",
-        type: "tool",
-        title: tRec("breathingExercise.title"),
-        description: tRec("breathingExercise.moderate"),
-        href: `/${locale}/interactive-tools/stress-management/breathing-exercise`,
-        priority: "high",
-        icon: "💨",
-      });
+        recs.push({
+          id: "office_scenario",
+          type: "technique",
+          title: tRec("officeScenario.title"),
+          description: tRec("officeScenario.high"),
+          href: `/${locale}/scenario-solutions/office`,
+          priority: "high",
+          icon: "💼",
+        });
+      } else if (score >= 16 || level === "moderate") {
+        // 中度压力：积极管理
+        recs.push({
+          id: "breathing_exercise",
+          type: "tool",
+          title: tRec("breathingExercise.title"),
+          description: tRec("breathingExercise.moderate"),
+          href: `/${locale}/interactive-tools/stress-management/breathing-exercise`,
+          priority: "high",
+          icon: "💨",
+        });
 
-      recs.push({
-        id: "stress_guide",
-        type: "article",
-        title: tRec("stressGuide.title"),
-        description: tRec("stressGuide.moderate"),
-        href: `/${locale}/articles/menstrual-stress-management-complete-guide`,
-        priority: "high",
-        icon: "📋",
-      });
+        recs.push({
+          id: "stress_guide",
+          type: "article",
+          title: tRec("stressGuide.title"),
+          description: tRec("stressGuide.moderate"),
+          href: `/${locale}/articles/menstrual-stress-management-complete-guide`,
+          priority: "high",
+          icon: "📋",
+        });
 
-      recs.push({
-        id: "breathing_guide",
-        type: "article",
-        title: tRec("breathingGuide.title"),
-        description: tRec("breathingGuide.moderate"),
-        href: `/${locale}/articles/breathing-exercises-guide`,
-        priority: "medium",
-        icon: "💨",
-      });
+        recs.push({
+          id: "breathing_guide",
+          type: "article",
+          title: tRec("breathingGuide.title"),
+          description: tRec("breathingGuide.moderate"),
+          href: `/${locale}/articles/breathing-exercises-guide`,
+          priority: "medium",
+          icon: "💨",
+        });
 
-      recs.push({
-        id: "office_scenario",
-        type: "technique",
-        title: tRec("officeScenario.title"),
-        description: tRec("officeScenario.moderate"),
-        href: `/${locale}/scenario-solutions/office`,
-        priority: "medium",
-        icon: "💼",
-      });
-    } else {
-      // 低压力：预防维护
-      recs.push({
-        id: "sleep_guide",
-        type: "article",
-        title: tRec("sleepGuide.title"),
-        description: tRec("sleepGuide.low"),
-        href: `/${locale}/articles/menstrual-sleep-quality-improvement-guide`,
-        priority: "medium",
-        icon: "😴",
-      });
+        recs.push({
+          id: "office_scenario",
+          type: "technique",
+          title: tRec("officeScenario.title"),
+          description: tRec("officeScenario.moderate"),
+          href: `/${locale}/scenario-solutions/office`,
+          priority: "medium",
+          icon: "💼",
+        });
+      } else {
+        // 低压力：预防维护
+        recs.push({
+          id: "sleep_guide",
+          type: "article",
+          title: tRec("sleepGuide.title"),
+          description: tRec("sleepGuide.low"),
+          href: `/${locale}/articles/menstrual-sleep-quality-improvement-guide`,
+          priority: "medium",
+          icon: "😴",
+        });
 
-      recs.push({
-        id: "breathing_exercise",
-        type: "tool",
-        title: tRec("breathingExercise.title"),
-        description: tRec("breathingExercise.low"),
-        href: `/${locale}/interactive-tools/stress-management/breathing-exercise`,
-        priority: "low",
-        icon: "💨",
-      });
+        recs.push({
+          id: "breathing_exercise",
+          type: "tool",
+          title: tRec("breathingExercise.title"),
+          description: tRec("breathingExercise.low"),
+          href: `/${locale}/interactive-tools/stress-management/breathing-exercise`,
+          priority: "low",
+          icon: "💨",
+        });
 
-      recs.push({
-        id: "exercise_scenario",
-        type: "technique",
-        title: tRec("exerciseScenario.title"),
-        description: tRec("exerciseScenario.low"),
-        href: `/${locale}/scenario-solutions/exercise`,
-        priority: "low",
-        icon: "🏃",
-      });
-    }
+        recs.push({
+          id: "exercise_scenario",
+          type: "technique",
+          title: tRec("exerciseScenario.title"),
+          description: tRec("exerciseScenario.low"),
+          href: `/${locale}/scenario-solutions/exercise`,
+          priority: "low",
+          icon: "🏃",
+        });
+      }
 
-    return recs;
-  }, [tRec, locale]);
+      return recs;
+    },
+    [tRec],
+  );
 
   useEffect(() => {
     // 从localStorage获取最新的评估结果
@@ -171,7 +174,7 @@ export default function PersonalizedRecommendations({
       const recs = generateSimpleRecommendations(
         latestAssessment.score,
         latestAssessment.stressLevel,
-        locale
+        locale,
       );
       setRecommendations(recs);
     }
@@ -212,7 +215,7 @@ export default function PersonalizedRecommendations({
   const levelInfo = getStressLevelText(stressLevel, stressScore);
   const priorityOrder = { urgent: 4, high: 3, medium: 2, low: 1 };
   const sortedRecs = [...recommendations].sort(
-    (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]
+    (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority],
   );
 
   return (
@@ -268,7 +271,9 @@ export default function PersonalizedRecommendations({
                   <span className="text-2xl">{rec.icon}</span>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-semibold text-gray-900">{rec.title}</h4>
+                      <h4 className="font-semibold text-gray-900">
+                        {rec.title}
+                      </h4>
                       {rec.priority === "urgent" && (
                         <span className="px-2 py-0.5 bg-red-100 text-red-700 text-xs rounded-full">
                           {t("urgent")}
@@ -286,4 +291,3 @@ export default function PersonalizedRecommendations({
     </section>
   );
 }
-

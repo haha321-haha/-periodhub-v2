@@ -13,7 +13,7 @@ interface AccessibilityWrapperProps {
   ariaLabel?: string;
   ariaDescribedBy?: string;
   tabIndex?: number;
-  onKeyDown?: (event: React.KeyboardEvent) => void;
+  onKeyDown?: (event: KeyboardEvent) => void;
 }
 
 export default function AccessibilityWrapper({
@@ -30,7 +30,7 @@ export default function AccessibilityWrapper({
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (onKeyDown) {
-        onKeyDown(event as any);
+        onKeyDown(event);
       }
 
       // 基于ziV1d3d的键盘快捷键

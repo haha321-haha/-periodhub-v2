@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
+import { logWarn } from "@/lib/debug-logger";
 
 interface UseAccessibilityOptions {
   announcePageChanges?: boolean;
@@ -22,7 +23,6 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
   } = options;
 
   const announcementRef = useRef<HTMLDivElement | null>(null);
-  const focusTrapRef = useRef<HTMLDivElement | null>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   // Create announcement region for screen readers
@@ -102,7 +102,7 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
       previousFocusRef.current.focus();
       previousFocusRef.current = null;
     } catch (error) {
-      // Element might no longer exist, focus body as fallback
+      logWarn("restoreFocus failed", error, "useAccessibility");
       document.body.focus();
     }
   }, [manageFocus]);
@@ -329,7 +329,11 @@ export function useAccessibility(options: UseAccessibilityOptions = {}) {
     }
 
     if (warnings.length > 0 && process.env.NODE_ENV === "development") {
-      console.warn("Accessibility warnings for element:", element, warnings);
+      logWarn(
+        "Accessibility warnings collected",
+        { warnings },
+        "useAccessibility",
+      );
     }
 
     return warnings;
@@ -430,7 +434,7 @@ export function useFocusManagement() {
       try {
         previousFocusRef.current.focus();
       } catch (error) {
-        // Element might no longer exist
+        logWarn("Focus restoration failed", error, "useAccessibility");
         document.body.focus();
       }
       previousFocusRef.current = null;

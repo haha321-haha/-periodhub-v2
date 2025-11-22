@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import type { Prediction } from "../shared/types";
+import { logWarn } from "@/lib/debug-logger";
 
 interface CycleTrackerToolProps {
   locale: string;
@@ -49,7 +50,6 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
 
   // 使用翻译键
   const t = useTranslations();
-  };
 
   // 确保客户端和服务端渲染一致
   useEffect(() => {
@@ -88,7 +88,11 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
           }
         }
       } catch (error) {
-        // Error loading saved data - handled silently
+        logWarn(
+          "CycleTrackerTool failed to load saved data",
+          error,
+          "CycleTrackerTool",
+        );
         // 数据损坏时清除
         if (typeof window !== "undefined") {
           localStorage.removeItem(STORAGE_KEYS.CURRENT_DATA);
@@ -116,7 +120,11 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
       setSaveStatus("saved");
       setTimeout(() => setSaveStatus("idle"), 2000);
     } catch (error) {
-      // Error saving data - handled silently
+      logWarn(
+        "CycleTrackerTool failed to save current data",
+        error,
+        "CycleTrackerTool",
+      );
       setSaveStatus("idle");
     }
   };
@@ -133,7 +141,11 @@ export default function CycleTrackerTool({ locale }: CycleTrackerToolProps) {
         JSON.stringify(updatedHistory),
       );
     } catch (error) {
-      // Error saving history - handled silently
+      logWarn(
+        "CycleTrackerTool failed to save history",
+        error,
+        "CycleTrackerTool",
+      );
     }
   };
 

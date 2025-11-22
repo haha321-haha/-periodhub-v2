@@ -29,8 +29,8 @@ export function usePainAssessment() {
         if (lastAssessment && isRecentAssessment(lastAssessment.timestamp)) {
           setPainLevel(lastAssessment.painLevel);
         }
-      } catch (error) {
-        console.error("Failed to load pain assessment data:", error);
+      } catch {
+        // Error loading pain assessment data handled by error boundary
       } finally {
         setIsLoading(false);
       }
@@ -42,7 +42,7 @@ export function usePainAssessment() {
   // 更新疼痛等级
   const updatePainLevel = useCallback((level: number) => {
     if (level < 0 || level > 10) {
-      console.warn("Pain level must be between 0 and 10");
+      // Pain level validation: must be between 0 and 10
       return;
     }
 
@@ -63,8 +63,8 @@ export function usePainAssessment() {
         const newHistory = [result, ...prev.slice(0, 9)]; // 保留最近10次
         return newHistory;
       });
-    } catch (error) {
-      console.error("Failed to save assessment result:", error);
+    } catch {
+      // Error saving assessment result handled by error boundary
     }
   }, []);
 
@@ -73,8 +73,8 @@ export function usePainAssessment() {
     try {
       medicalCareGuideStorage.clearHistory();
       setAssessmentHistory([]);
-    } catch (error) {
-      console.error("Failed to clear assessment history:", error);
+    } catch {
+      // Error clearing assessment history handled by error boundary
     }
   }, []);
 

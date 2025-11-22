@@ -15,13 +15,13 @@ import { useLocale } from "next-intl";
 import { getNutritionData } from "../data";
 import { useTranslations } from "next-intl";
 import { NutritionRecommendation } from "../types";
-import { logInfo } from "../../../../lib/debug-logger";
+import { logInfo } from "@/lib/debug-logger";
 import { useSimpleToast } from "./SimpleToast";
 import {
   checkFoodCompatibility,
   optimizeFoodDistribution,
 } from "../utils/foodCompatibility";
-import { logError } from "../../../../lib/debug-logger";
+import { logError } from "@/lib/debug-logger";
 
 export default function NutritionComponent() {
   const nutrition = useNutrition();

@@ -79,7 +79,6 @@ const PainEntryForm: React.FC<PainEntryFormProps> = ({
     value: PainEntryFormData[keyof PainEntryFormData],
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-    setTouched((prev) => ({ ...prev, [field]: true }));
 
     // Clear error when user starts typing
     if (errors[field]) {

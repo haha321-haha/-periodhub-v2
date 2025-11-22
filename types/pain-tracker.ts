@@ -250,11 +250,12 @@ export interface DisplaySettings {
 }
 
 export interface StorageMetadata {
-  createdAt: Date;
-  lastModified: Date;
+  createdAt: Date | string;
+  lastModified: Date | string;
   version: string;
   recordCount: number;
   dataSize: number; // in bytes
+  backupCreated?: Date | string; // Optional: timestamp when backup was created
 }
 
 // Validation Models

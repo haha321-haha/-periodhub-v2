@@ -61,106 +61,26 @@ export default function PatternInsights({
   // Initialize analytics engine
   const analyticsEngine = useMemo(() => new AnalyticsEngine(), []);
 
-  // Generate patterns and insights
-  useEffect(() => {
-    const generateInsights = async () => {
-      if (!records || records.length < 3) {
-        setInsights([]);
-        setPatterns([]);
-        return;
-      }
+  // Helper function to calculate average gap between records
+  function calculateAverageGapBetweenRecords(records: PainRecord[]): number {
+    if (records.length < 2) return 0;
 
-      setIsLoading(true);
+    const sortedRecords = records.sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    );
 
-      try {
-        // Identify patterns
-        const identifiedPatterns = analyticsEngine.identifyPatterns(records);
-        setPatterns(identifiedPatterns);
-
-        // Convert analytics insights and patterns to insight cards
-        const insightCards: InsightCard[] = [];
-
-        // Add general insights from analytics
-        analytics.insights.forEach((insight, index) => {
-          insightCards.push({
-            id: `general-${index}`,
-            type: getInsightType(insight),
-            icon: getInsightIcon(insight),
-            title: getInsightTitle(insight),
-            description: insight,
-            recommendations: getGeneralRecommendations(insight),
-            isExpanded: false,
-          });
-        });
-
-        // Add pattern-based insights
-        identifiedPatterns.forEach((pattern, index) => {
-          insightCards.push({
-            id: `pattern-${index}`,
-            type: getPatternType(pattern),
-            icon: getPatternIcon(pattern.type),
-            title: getPatternTitle(pattern.type),
-            description: pattern.description,
-            recommendations: pattern.recommendations,
-            confidence: pattern.confidence,
-            isExpanded: false,
-          });
-        });
-
-        // Add data-driven recommendations
-        const dataRecommendations = generateDataRecommendations(
-          analytics,
-          records,
-        );
-        dataRecommendations.forEach((rec, index) => {
-          insightCards.push({
-            id: `recommendation-${index}`,
-            type: "info",
-            icon: Lightbulb,
-            title: rec.title,
-            description: rec.description,
-            recommendations: rec.actions,
-            isExpanded: false,
-          });
-        });
-
-        setInsights(insightCards);
-      } catch (error) {
-        const errorMessage =
-          error instanceof PainTrackerError
-            ? error.message
-            : "Failed to generate insights";
-
-        onError?.(error instanceof Error ? error : new Error(errorMessage));
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    generateInsights();
-  }, [
-    analytics,
-    records,
-    analyticsEngine,
-    onError,
-    generateDataRecommendations,
-    getGeneralRecommendations,
-    getInsightTitle,
-    getPatternTitle,
-  ]);
-
-  // Toggle card expansion
-  const toggleCard = (cardId: string) => {
-    const newExpanded = new Set(expandedCards);
-    if (newExpanded.has(cardId)) {
-      newExpanded.delete(cardId);
-    } else {
-      newExpanded.add(cardId);
+    let totalGap = 0;
+    for (let i = 1; i < sortedRecords.length; i++) {
+      const gap =
+        new Date(sortedRecords[i].date).getTime() -
+        new Date(sortedRecords[i - 1].date).getTime();
+      totalGap += gap;
     }
-    setExpandedCards(newExpanded);
-  };
 
-  // Helper functions
+    return totalGap / (sortedRecords.length - 1) / (1000 * 60 * 60 * 24); // Convert to days
+  }
+
+  // Helper functions (must be defined before useEffect)
   function getInsightType(
     insight: string,
   ): "success" | "warning" | "info" | "danger" {
@@ -196,20 +116,6 @@ export default function PatternInsights({
     return Info;
   }
 
-  const getInsightTitle = useCallback(
-    (insight: string): string => {
-      if (insight.includes("average pain level")) return t("titles.painLevel");
-      if (insight.includes("most common pain type"))
-        return t("titles.painType");
-      if (insight.includes("effectiveness")) return t("titles.treatment");
-      if (insight.includes("trend")) return t("titles.trend");
-      if (insight.includes("cycle") || insight.includes("phase"))
-        return t("titles.cycle");
-      return t("titles.general");
-    },
-    [t],
-  );
-
   function getPatternType(
     pattern: Pattern,
   ): "success" | "warning" | "info" | "danger" {
@@ -233,6 +139,20 @@ export default function PatternInsights({
         return Brain;
     }
   }
+
+  const getInsightTitle = useCallback(
+    (insight: string): string => {
+      if (insight.includes("average pain level")) return t("titles.painLevel");
+      if (insight.includes("most common pain type"))
+        return t("titles.painType");
+      if (insight.includes("effectiveness")) return t("titles.treatment");
+      if (insight.includes("trend")) return t("titles.trend");
+      if (insight.includes("cycle") || insight.includes("phase"))
+        return t("titles.cycle");
+      return t("titles.general");
+    },
+    [t],
+  );
 
   const getPatternTitle = useCallback(
     (patternType: string): string => {
@@ -335,23 +255,104 @@ export default function PatternInsights({
     [t],
   );
 
-  function calculateAverageGapBetweenRecords(records: PainRecord[]): number {
-    if (records.length < 2) return 0;
+  // Generate patterns and insights
+  useEffect(() => {
+    const generateInsights = async () => {
+      if (!records || records.length < 3) {
+        setInsights([]);
+        setPatterns([]);
+        return;
+      }
 
-    const sortedRecords = records.sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-    );
+      setIsLoading(true);
 
-    let totalGap = 0;
-    for (let i = 1; i < sortedRecords.length; i++) {
-      const gap =
-        new Date(sortedRecords[i].date).getTime() -
-        new Date(sortedRecords[i - 1].date).getTime();
-      totalGap += gap;
+      try {
+        // Identify patterns
+        const identifiedPatterns = analyticsEngine.identifyPatterns(records);
+        setPatterns(identifiedPatterns);
+
+        // Convert analytics insights and patterns to insight cards
+        const insightCards: InsightCard[] = [];
+
+        // Add general insights from analytics
+        analytics.insights.forEach((insight, index) => {
+          insightCards.push({
+            id: `general-${index}`,
+            type: getInsightType(insight),
+            icon: getInsightIcon(insight),
+            title: getInsightTitle(insight),
+            description: insight,
+            recommendations: getGeneralRecommendations(insight),
+            isExpanded: false,
+          });
+        });
+
+        // Add pattern-based insights
+        identifiedPatterns.forEach((pattern, index) => {
+          insightCards.push({
+            id: `pattern-${index}`,
+            type: getPatternType(pattern),
+            icon: getPatternIcon(pattern.type),
+            title: getPatternTitle(pattern.type),
+            description: pattern.description,
+            recommendations: pattern.recommendations,
+            confidence: pattern.confidence,
+            isExpanded: false,
+          });
+        });
+
+        // Add data-driven recommendations
+        const dataRecommendations = generateDataRecommendations(
+          analytics,
+          records,
+        );
+        dataRecommendations.forEach((rec, index) => {
+          insightCards.push({
+            id: `recommendation-${index}`,
+            type: "info",
+            icon: Lightbulb,
+            title: rec.title,
+            description: rec.description,
+            recommendations: rec.actions,
+            isExpanded: false,
+          });
+        });
+
+        setInsights(insightCards);
+      } catch (error) {
+        const errorMessage =
+          error instanceof PainTrackerError
+            ? error.message
+            : "Failed to generate insights";
+
+        onError?.(error instanceof Error ? error : new Error(errorMessage));
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    generateInsights();
+  }, [
+    analytics,
+    records,
+    analyticsEngine,
+    onError,
+    generateDataRecommendations,
+    getGeneralRecommendations,
+    getInsightTitle,
+    getPatternTitle,
+  ]);
+
+  // Toggle card expansion
+  const toggleCard = (cardId: string) => {
+    const newExpanded = new Set(expandedCards);
+    if (newExpanded.has(cardId)) {
+      newExpanded.delete(cardId);
+    } else {
+      newExpanded.add(cardId);
     }
-
-    return totalGap / (sortedRecords.length - 1) / (1000 * 60 * 60 * 24); // Convert to days
-  }
+    setExpandedCards(newExpanded);
+  };
 
   // Loading state
   if (isLoading) {

@@ -62,7 +62,7 @@ export default function PainTrendChart({
       try {
         // Use chart performance optimizer for large datasets
         const optimized = await chartOptimizer.optimizeDataForChart(
-          trendData,
+          trendData as unknown as Record<string, unknown>[],
           "line",
           {
             maxPoints: isMobile ? 100 : 200,
@@ -71,7 +71,7 @@ export default function PainTrendChart({
           },
         );
 
-        setOptimizedData(optimized);
+        setOptimizedData(optimized as unknown as TrendPoint[]);
       } catch (err) {
         logWarn(
           "Failed to optimize chart data, using original:",
@@ -137,7 +137,7 @@ export default function PainTrendChart({
       options = chartOptimizer.optimizeChartOptions(
         options,
         optimizedData.length,
-      );
+      ) as typeof options;
 
       // Override title display if showTitle is false
       if (!showTitle && options.plugins?.title) {

@@ -8,6 +8,7 @@ import {
   MenstrualStatus,
   PainTrackerError,
   STORAGE_KEYS,
+  StorageMetadata,
 } from "../../../types/pain-tracker";
 
 import LocalStorageAdapter from "../storage/LocalStorageAdapter";
@@ -379,7 +380,10 @@ export class PainDataManager implements PainDataManagerInterface {
       const preferences = await this.storage.load(
         STORAGE_KEYS.USER_PREFERENCES,
       );
-      const metadata = await this.storage.load(STORAGE_KEYS.METADATA);
+      const metadata = (await this.storage.load(STORAGE_KEYS.METADATA)) as
+        | StorageMetadata
+        | null
+        | undefined;
       const schemaVersion = await this.storage.load(
         STORAGE_KEYS.SCHEMA_VERSION,
       );
@@ -389,7 +393,15 @@ export class PainDataManager implements PainDataManagerInterface {
         preferences,
         schemaVersion,
         lastBackup: new Date(),
-        metadata,
+        metadata:
+          metadata ||
+          ({
+            createdAt: new Date(),
+            lastModified: new Date(),
+            version: "1.0.0",
+            recordCount: 0,
+            dataSize: 0,
+          } as StorageMetadata),
       };
     } catch (error) {
       throw new PainTrackerError(

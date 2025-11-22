@@ -263,14 +263,25 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
       const preferences =
         (await this.load(STORAGE_KEYS.USER_PREFERENCES)) ||
         DEFAULT_USER_PREFERENCES;
-      const metadata = await this.load(STORAGE_KEYS.METADATA);
+      const metadata = (await this.load(STORAGE_KEYS.METADATA)) as
+        | StorageMetadata
+        | null
+        | undefined;
 
       const backupData: StoredData = {
         records,
         preferences,
         schemaVersion: CURRENT_SCHEMA_VERSION,
         lastBackup: new Date(),
-        metadata,
+        metadata:
+          metadata ||
+          ({
+            createdAt: new Date(),
+            lastModified: new Date(),
+            version: "1.0.0",
+            recordCount: 0,
+            dataSize: 0,
+          } as StorageMetadata),
       };
 
       return JSON.stringify(backupData, null, 2);
@@ -441,14 +452,21 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
    */
   private async updateMetadata(records: PainRecord[]): Promise<void> {
     try {
-      const currentMetadata = (await this.load(STORAGE_KEYS.METADATA)) || {};
+      const currentMetadata = (await this.load(STORAGE_KEYS.METADATA)) as
+        | Partial<StorageMetadata>
+        | null
+        | undefined;
       const dataSize = await this.getSize();
 
       const updatedMetadata: StorageMetadata = {
-        ...currentMetadata,
+        createdAt: currentMetadata?.createdAt || new Date(),
         lastModified: new Date(),
+        version: currentMetadata?.version || "1.0.0",
         recordCount: records.length,
         dataSize,
+        ...(currentMetadata?.backupCreated && {
+          backupCreated: currentMetadata.backupCreated,
+        }),
       };
 
       await this.save(STORAGE_KEYS.METADATA, updatedMetadata);

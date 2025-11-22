@@ -68,13 +68,33 @@ export function generatePageSEO(props: PageSEOProps) {
         index: true,
         follow: true,
         "max-video-preview": -1,
-        "max-image-preview": "large",
+        "max-image-preview": "large" as const,
         "max-snippet": -1,
       },
     },
   };
 
-  return { metadata };
+  // 生成结构化数据
+  let structuredData: Record<string, unknown> | undefined;
+  if (props.structuredDataType) {
+    const type =
+      typeof props.structuredDataType === "string"
+        ? props.structuredDataType
+        : (props.structuredDataType as Record<string, unknown>)["@type"] ||
+          "WebPage";
+
+    structuredData = {
+      "@context": "https://schema.org",
+      "@type": type,
+      name: props.title,
+      description: props.description,
+      url: canonicalUrl,
+      ...(props.ogImage && { image: props.ogImage }),
+      ...(props.additionalStructuredData || {}),
+    };
+  }
+
+  return { metadata, structuredData };
 }
 
 /**

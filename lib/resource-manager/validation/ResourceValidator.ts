@@ -377,7 +377,7 @@ export class ResourceValidator {
    * 验证文件
    */
   private validateFiles(
-    files: Record<string, any>,
+    files: Record<string, unknown>,
     errors: ResourceValidationError[],
   ): void {
     if (!files || typeof files !== "object") {

@@ -8,7 +8,7 @@ import { LocalStorageManager } from "./localStorage";
 export interface DataPoint {
   id: string;
   type: string;
-  data: any;
+  data: unknown;
   timestamp: number;
   sessionId: string;
 }
@@ -36,7 +36,7 @@ function getSessionId(): string {
 /**
  * 收集数据点
  */
-export function collectDataPoint(type: string, data: any): boolean {
+export function collectDataPoint(type: string, data: unknown): boolean {
   const dataPoints = LocalStorageManager.getItem<DataPoint[]>(STORAGE_KEY, []);
   if (!dataPoints) return false;
 

@@ -35,7 +35,7 @@ export function generateBreadcrumbStructuredData({
   };
 }
 
-export function BreadcrumbStructuredDataScript({ data }: { data: any }) {
+export function BreadcrumbStructuredDataScript({ data }: { data: unknown }) {
   return (
     <script
       type="application/ld+json"

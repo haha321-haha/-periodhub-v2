@@ -380,7 +380,9 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private getMigration(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _fromVersion: number,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _toVersion: number,
   ): Migration | null {
     // Future migrations will be added here

@@ -113,7 +113,7 @@ export async function generateCollectionStructuredData({
 /**
  * CollectionPage 结构化数据脚本组件
  */
-export function CollectionStructuredDataScript({ data }: { data: any }) {
+export function CollectionStructuredDataScript({ data }: { data: unknown }) {
   return (
     <script
       type="application/ld+json"

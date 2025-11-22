@@ -32,8 +32,20 @@ export interface HowToConfig {
 
 // 生成HowTo结构化数据
 export async function generateHowToStructuredData(config: HowToConfig) {
-  const { locale, scenarioSlug, name, description, steps, tools = [], supplies = [], totalTime, estimatedCost, image } = config;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
+  const {
+    locale,
+    scenarioSlug,
+    name,
+    description,
+    steps,
+    tools = [],
+    supplies = [],
+    totalTime,
+    estimatedCost,
+    image,
+  } = config;
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
   const isZh = locale === "zh";
 
   // 生成步骤数据
@@ -42,15 +54,25 @@ export async function generateHowToStructuredData(config: HowToConfig) {
     position: index + 1,
     name: step.name,
     text: step.text,
-    image: step.image || `${baseUrl}/images/scenario-solutions/${scenarioSlug}/step-${index + 1}.webp`,
-    url: `${baseUrl}/${locale}/scenario-solutions/${scenarioSlug}#step-${index + 1}`,
+    image:
+      step.image ||
+      `${baseUrl}/images/scenario-solutions/${scenarioSlug}/step-${
+        index + 1
+      }.webp`,
+    url: `${baseUrl}/${locale}/scenario-solutions/${scenarioSlug}#step-${
+      index + 1
+    }`,
   }));
 
   // 生成工具数据
   const howToTools = tools.map((tool) => ({
     "@type": "HowToTool",
     name: tool.name,
-    image: tool.image || `${baseUrl}/images/tools/${tool.name.toLowerCase().replace(/\s+/g, '-')}.webp`,
+    image:
+      tool.image ||
+      `${baseUrl}/images/tools/${tool.name
+        .toLowerCase()
+        .replace(/\s+/g, "-")}.webp`,
   }));
 
   // 生成用品数据
@@ -65,7 +87,8 @@ export async function generateHowToStructuredData(config: HowToConfig) {
     "@type": "HowTo",
     name,
     description,
-    image: image || `${baseUrl}/images/scenario-solutions/${scenarioSlug}/hero.webp`,
+    image:
+      image || `${baseUrl}/images/scenario-solutions/${scenarioSlug}/hero.webp`,
     totalTime,
     estimatedCost: estimatedCost || {
       "@type": "MonetaryAmount",
@@ -84,10 +107,12 @@ export async function generateHowToStructuredData(config: HowToConfig) {
 
 // HowTo结构化数据脚本组件
 interface HowToStructuredDataScriptProps {
-  data: any;
+  data: unknown;
 }
 
-export function HowToStructuredDataScript({ data }: HowToStructuredDataScriptProps) {
+export function HowToStructuredDataScript({
+  data,
+}: HowToStructuredDataScriptProps) {
   return (
     <script
       type="application/ld+json"

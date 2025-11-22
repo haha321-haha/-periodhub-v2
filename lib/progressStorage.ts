@@ -218,7 +218,6 @@ export function importData(jsonString: string): boolean {
 }
 
 const getEntriesWithDate = (filter: (entryDate: number) => boolean) => {
-  const today = new Date();
   return getProgress().entries.filter((entry) => {
     const entryTime = new Date(entry.date).getTime();
     return filter(entryTime);

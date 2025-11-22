@@ -15,11 +15,14 @@ export class WebVitalsAnalyzer {
     this.vitals.push(vitals);
   }
 
-  getAverageMetrics(): any {
+  getAverageMetrics(): WebVitalsReport {
     return this.getAverageVitals();
   }
 
-  getPerformanceRating(metrics: any): { score: number; grade: string } {
+  getPerformanceRating(metrics: WebVitalsReport): {
+    score: number;
+    grade: string;
+  } {
     const score = Math.round(metrics.score || 85);
     let grade = "良好";
     if (score >= 90) grade = "优秀";

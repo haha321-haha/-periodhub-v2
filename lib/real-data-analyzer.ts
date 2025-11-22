@@ -3,7 +3,7 @@
  * 分析收集的用户数据
  */
 
-import { DataPoint, getAllDataPoints } from "./real-data-collector";
+import { getAllDataPoints } from "./real-data-collector";
 
 export interface AnalysisResult {
   totalDataPoints: number;
@@ -62,7 +62,14 @@ export function analyzeAllData(): AnalysisResult {
 /**
  * 分析特定类型的数据
  */
-export function analyzeDataByType(type: string): any {
+export interface TypeAnalysisResult {
+  count: number;
+  firstOccurrence: number;
+  lastOccurrence: number;
+  data: unknown[];
+}
+
+export function analyzeDataByType(type: string): TypeAnalysisResult | null {
   const dataPoints = getAllDataPoints().filter((p) => p.type === type);
 
   if (dataPoints.length === 0) return null;

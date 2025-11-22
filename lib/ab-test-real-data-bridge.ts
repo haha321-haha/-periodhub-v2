@@ -12,7 +12,7 @@ import { collectDataPoint } from "./real-data-collector";
 export function collectWithABTest(
   testName: string,
   dataType: string,
-  data: any,
+  data: unknown,
 ): boolean {
   const variant = getABTestVariant(testName);
 
@@ -32,7 +32,12 @@ export function collectWithABTest(
 /**
  * 分析 A/B 测试的真实数据
  */
-export function analyzeABTestData(testName: string): any {
+export interface ABTestAnalysisResult {
+  testName: string;
+  message: string;
+}
+
+export function analyzeABTestData(testName: string): ABTestAnalysisResult {
   // 这里可以实现更复杂的分析逻辑
   return {
     testName,

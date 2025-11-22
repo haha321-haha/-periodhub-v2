@@ -43,7 +43,8 @@ export class InternalLinkOptimizer {
 
   static getRelatedPages(
     currentPath: string,
-    tags: string[] = [],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _tags: string[] = [],
   ): Array<{ title: string; path: string; description: string }> {
     const relatedPages = [];
 

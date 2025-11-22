@@ -64,7 +64,7 @@ export function createEmailClickHandler(
   subject?: string,
   body?: string,
 ) {
-  return (e: any) => {
+  return (e: MouseEvent) => {
     e.preventDefault();
     const mailto = createProtectedMailtoLink(email, subject, body);
     if (typeof window !== "undefined") {

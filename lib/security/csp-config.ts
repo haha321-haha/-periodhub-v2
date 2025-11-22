@@ -217,11 +217,10 @@ export interface CSPViolationReport {
  * 处理CSP违规报告
  */
 export function processCSPViolation(report: CSPViolationReport) {
-  const violation = report["csp-report"];
-
   // 记录违规信息
   // CSP violation processed
   // Note: In production, send to monitoring service
+  // const violation = report["csp-report"]; // Reserved for future use
 
   // 在生产环境中，可以发送到监控服务
   if (process.env.NODE_ENV === "production") {

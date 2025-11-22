@@ -1,5 +1,3 @@
-import { Metadata } from "next";
-
 // SEO监控配置
 export interface SEOMonitoringConfig {
   // Google Search Console配置

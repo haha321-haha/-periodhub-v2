@@ -1,4 +1,3 @@
-import { getTranslations } from "next-intl/server";
 import { medicalEntities } from "./medical-entities";
 
 interface ToolStructuredDataProps {

@@ -10,7 +10,12 @@ type LocalizedString = {
   zh: string;
 };
 
-type UIContentNode = LocalizedString | Record<string, UIContentNode>;
+// Use interface to avoid circular reference
+interface UIContentNodeMap {
+  [key: string]: LocalizedString | UIContentNodeMap;
+}
+
+type UIContentNode = LocalizedString | UIContentNodeMap;
 
 // 基于ziV1d3d的uiContent结构
 export const uiContent: Record<string, UIContentNode> = {

@@ -338,7 +338,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     let title: string;
     try {
       title = articlesT(`${categoryKey}.articles.${articleKey}`);
-    } catch (error) {
+    } catch (_error) {
       // 如果翻译键不存在，使用slug作为标题
       title = slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
     }

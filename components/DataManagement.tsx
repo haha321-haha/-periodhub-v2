@@ -1,18 +1,21 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Download, Trash2, AlertTriangle, CheckCircle } from 'lucide-react';
-import { LocalStorageManager } from '@/lib/localStorage';
+import { useState, useEffect } from "react";
+import { Download, Trash2, AlertTriangle, CheckCircle } from "lucide-react";
+import { LocalStorageManager } from "@/lib/localStorage";
 
 interface DataManagementProps {
   className?: string;
 }
 
-export function DataManagement({ className = '' }: DataManagementProps) {
+export function DataManagement({ className = "" }: DataManagementProps) {
   const [assessments, setAssessments] = useState([]);
-  const [storageInfo, setStorageInfo] = useState({ count: 0, lastAssessment: null as number | null });
+  const [storageInfo, setStorageInfo] = useState({
+    count: 0,
+    lastAssessment: null as number | null,
+  });
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   // Load data
   useEffect(() => {
@@ -25,8 +28,8 @@ export function DataManagement({ className = '' }: DataManagementProps) {
       setAssessments(data);
       const info = LocalStorageManager.getStorageInfo();
       setStorageInfo(info);
-    } catch (error) {
-      setMessage('Failed to load data');
+    } catch (_error) {
+      setMessage("Failed to load data");
     }
   };
 
@@ -34,18 +37,20 @@ export function DataManagement({ className = '' }: DataManagementProps) {
   const handleExport = () => {
     try {
       const data = LocalStorageManager.exportData();
-      const blob = new Blob([data], { type: 'application/json' });
+      const blob = new Blob([data], { type: "application/json" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `stress-assessment-data-${new Date().toISOString().split('T')[0]}.json`;
+      a.download = `stress-assessment-data-${
+        new Date().toISOString().split("T")[0]
+      }.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      setMessage('Data exported successfully!');
-    } catch (error) {
-      setMessage('Export failed, please try again');
+      setMessage("Data exported successfully!");
+    } catch (_error) {
+      setMessage("Export failed, please try again");
     }
   };
 
@@ -61,18 +66,19 @@ export function DataManagement({ className = '' }: DataManagementProps) {
       setAssessments([]);
       setStorageInfo({ count: 0, lastAssessment: null });
       setShowConfirmDelete(false);
-      setMessage('All data deleted');
-    } catch (error) {
-      setMessage('Delete failed, please try again');
+      setMessage("All data deleted");
+    } catch (_error) {
+      setMessage("Delete failed, please try again");
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) return "0 Bytes";
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB'];
+    const sizes = ["Bytes", "KB", "MB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
   return (
@@ -84,12 +90,16 @@ export function DataManagement({ className = '' }: DataManagementProps) {
       {/* Data statistics */}
       <div className="grid grid-cols-2 gap-4 mb-6">
         <div className="bg-blue-50 p-4 rounded-lg">
-          <div className="text-2xl font-bold text-blue-600">{storageInfo.count}</div>
+          <div className="text-2xl font-bold text-blue-600">
+            {storageInfo.count}
+          </div>
           <div className="text-sm text-blue-800">Assessment Records</div>
         </div>
         <div className="bg-green-50 p-4 rounded-lg">
           <div className="text-2xl font-bold text-green-600">
-            {storageInfo.lastAssessment ? new Date(storageInfo.lastAssessment).toLocaleDateString() : 'N/A'}
+            {storageInfo.lastAssessment
+              ? new Date(storageInfo.lastAssessment).toLocaleDateString()
+              : "N/A"}
           </div>
           <div className="text-sm text-green-800">Last Assessment</div>
         </div>
@@ -122,10 +132,13 @@ export function DataManagement({ className = '' }: DataManagementProps) {
           <div className="bg-white rounded-lg p-6 max-w-md w-full">
             <div className="flex items-center gap-3 mb-4">
               <AlertTriangle className="w-6 h-6 text-red-600" />
-              <h3 className="text-lg font-semibold text-red-800">Confirm Delete</h3>
+              <h3 className="text-lg font-semibold text-red-800">
+                Confirm Delete
+              </h3>
             </div>
             <p className="text-gray-700 mb-6">
-              This action will permanently delete all assessment data, including:
+              This action will permanently delete all assessment data,
+              including:
             </p>
             <ul className="text-sm text-gray-600 mb-6 space-y-1">
               <li>• {assessments.length} assessment records</li>
@@ -164,7 +177,9 @@ export function DataManagement({ className = '' }: DataManagementProps) {
       {/* Info text */}
       <div className="mt-4 text-xs text-gray-500 space-y-1">
         <p>• Data is stored locally on your device only</p>
-        <p>• Exported file is in JSON format, can be imported on other devices</p>
+        <p>
+          • Exported file is in JSON format, can be imported on other devices
+        </p>
         <p>• Data cannot be recovered after deletion</p>
       </div>
     </div>

@@ -43,7 +43,7 @@ export interface AppState {
     modal: {
       isOpen: boolean;
       type: string | null;
-      data: any;
+      data: unknown;
     };
     toast: {
       id: string;
@@ -81,7 +81,7 @@ export interface AppActions {
   setError: (error: string | null) => void;
 
   // 模态框控制
-  openModal: (type: string, data?: any) => void;
+  openModal: (type: string, data?: unknown) => void;
   closeModal: () => void;
 
   // Toast通知
@@ -317,6 +317,7 @@ export const useAppStore = create<AppState & AppActions>()(
         },
 
         // 模态框操作记录
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         recordModalAction: (_action) => {
           set((state) => {
             const key = "modalActions";
@@ -326,6 +327,7 @@ export const useAppStore = create<AppState & AppActions>()(
         },
 
         // Toast操作记录
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         recordToastAction: (_action) => {
           set((state) => {
             const key = "toastActions";

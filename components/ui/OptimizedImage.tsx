@@ -14,7 +14,7 @@ interface OptimizedImageProps {
   quality?: number;
   placeholder?: "blur" | "empty";
   style?: React.CSSProperties;
-  onError?: (e: any) => void;
+  onError?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
   onLoad?: () => void;
 }
 
@@ -40,8 +40,8 @@ export default function OptimizedImage({
   const [isLoading, setIsLoading] = useState(true);
 
   // 错误处理
-  const handleError = (e: any) => {
-    console.error(`OptimizedImage加载失败: ${src}`);
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    // Error: OptimizedImage failed to load
     setImageError(true);
     onError?.(e);
   };

@@ -17,7 +17,7 @@ interface SafeSmartImageProps {
   quality?: number;
   placeholder?: "blur" | "empty";
   style?: React.CSSProperties;
-  onError?: (e: any) => void;
+  onError?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
   onLoad?: () => void;
   // 安全机制配置
   enableFallback?: boolean;
@@ -64,11 +64,8 @@ export default function SafeSmartImage({
   const isDevelopment = process.env.NODE_ENV === "development";
 
   // 错误处理
-  const handleError = (e: any) => {
-    if (debugMode) {
-      console.warn(`SafeSmartImage错误 (尝试 ${errorCount + 1}):`, e);
-    }
-
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    // Note: SafeSmartImage error handling
     setErrorCount((prev) => prev + 1);
 
     if (enableErrorBoundary && errorCount >= 1) {
@@ -80,9 +77,6 @@ export default function SafeSmartImage({
 
   // 加载成功处理
   const handleLoad = () => {
-    if (debugMode) {
-      console.log("SafeSmartImage加载成功:", src);
-    }
     onLoad?.();
   };
 
@@ -97,16 +91,7 @@ export default function SafeSmartImage({
   const shouldUseFallback =
     !shouldUseSmartImage || (enableFallback && hasError);
 
-  if (debugMode) {
-    console.log("SafeSmartImage决策:", {
-      useSmartImage,
-      hasError,
-      isClient,
-      shouldUseSmartImage,
-      shouldUseFallback,
-      errorCount,
-    });
-  }
+  // Debug logging removed for production
 
   // 回退到原生img标签
   if (shouldUseFallback && fallbackComponent === "img") {
@@ -182,9 +167,7 @@ export default function SafeSmartImage({
       />
     );
   } catch (error) {
-    if (debugMode) {
-      console.error("SmartImage渲染错误:", error);
-    }
+    // SmartImage rendering error
 
     // 捕获渲染错误，回退到EnhancedImage
     if (enableFallback) {
@@ -219,8 +202,7 @@ export const SafeSmartImageConfig = {
 
   // 重置全局错误状态
   resetGlobalError: () => {
-    // 这里可以实现全局错误状态重置
-    console.log("重置全局SmartImage错误状态");
+    // Global error state reset
   },
 
   // 获取当前配置

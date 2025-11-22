@@ -4,6 +4,7 @@
  */
 
 import { locales, defaultLocale, type Locale } from "@/i18n/request";
+import { logWarn, logError } from "@/lib/debug-logger";
 
 /**
  * 验证 locale 是否有效
@@ -22,8 +23,10 @@ export function getValidLocale(locale: unknown): Locale {
 
   // 记录警告（仅在客户端）
   if (typeof window !== "undefined") {
-    console.warn(
+    logWarn(
       `[LocaleUtils] Invalid locale '${locale}', falling back to '${defaultLocale}'`,
+      undefined,
+      "locale-utils/getValidLocale",
     );
   }
 
@@ -42,14 +45,19 @@ export function safeSetRequestLocale(
   try {
     setRequestLocale(validLocale);
   } catch (error) {
-    console.error("[LocaleUtils] Failed to set request locale:", error);
+    logError(
+      "[LocaleUtils] Failed to set request locale:",
+      error,
+      "locale-utils/safeSetRequestLocale",
+    );
     // 尝试设置默认 locale
     try {
       setRequestLocale(defaultLocale);
     } catch (fallbackError) {
-      console.error(
+      logError(
         "[LocaleUtils] Failed to set default locale:",
         fallbackError,
+        "locale-utils/safeSetRequestLocale",
       );
     }
   }
@@ -86,7 +94,8 @@ export function getLocaleDisplayName(locale: Locale): string {
 /**
  * 检查是否为 RTL 语言
  */
-export function isRTL(locale: Locale): boolean {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function isRTL(_locale: Locale): boolean {
   // 目前支持的语言都不是 RTL，但为将来扩展做准备
   return false;
 }

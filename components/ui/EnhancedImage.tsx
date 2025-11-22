@@ -14,7 +14,7 @@ interface EnhancedImageProps {
   quality?: number;
   placeholder?: "blur" | "empty";
   style?: React.CSSProperties;
-  onError?: (e: any) => void;
+  onError?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
   onLoad?: () => void;
   // 懒加载配置
   lazyThreshold?: number;
@@ -75,8 +75,8 @@ export default function EnhancedImage({
   }, [priority, isInView, lazyThreshold]);
 
   // 错误处理
-  const handleError = (e: any) => {
-    console.error(`EnhancedImage加载失败: ${src}`);
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    // Error: EnhancedImage failed to load
     setImageError(true);
     onError?.(e);
   };

@@ -3,6 +3,8 @@
  * 用于管理用户的搜索历史记录
  */
 
+import { logError } from "@/lib/debug-logger";
+
 export interface SearchHistoryItem {
   term: string;
   timestamp: number;
@@ -34,7 +36,11 @@ export function getSearchHistory(): SearchHistoryItem[] {
         typeof item.resultCount === "number",
     );
   } catch (error) {
-    console.error("Failed to get search history:", error);
+    logError(
+      "Failed to get search history:",
+      error,
+      "searchHistory/getSearchHistory",
+    );
     return [];
   }
 }
@@ -72,7 +78,11 @@ export function addSearchHistory(
     localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(updatedHistory));
     return updatedHistory;
   } catch (error) {
-    console.error("Failed to add search history:", error);
+    logError(
+      "Failed to add search history:",
+      error,
+      "searchHistory/addSearchHistory",
+    );
     return getSearchHistory();
   }
 }
@@ -92,7 +102,11 @@ export function removeSearchHistoryItem(term: string): SearchHistoryItem[] {
     localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(updatedHistory));
     return updatedHistory;
   } catch (error) {
-    console.error("Failed to remove search history item:", error);
+    logError(
+      "Failed to remove search history item:",
+      error,
+      "searchHistory/removeSearchHistoryItem",
+    );
     return getSearchHistory();
   }
 }
@@ -106,7 +120,11 @@ export function clearSearchHistory(): void {
   try {
     localStorage.removeItem(SEARCH_HISTORY_KEY);
   } catch (error) {
-    console.error("Failed to clear search history:", error);
+    logError(
+      "Failed to clear search history:",
+      error,
+      "searchHistory/clearSearchHistory",
+    );
   }
 }
 

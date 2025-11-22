@@ -10,7 +10,7 @@ interface OptimizedSVGProps {
   height?: number;
   priority?: boolean;
   style?: React.CSSProperties;
-  onError?: (e: any) => void;
+  onError?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
   onLoad?: () => void;
 }
 
@@ -59,8 +59,8 @@ export default function OptimizedSVG({
   }, [priority, isInView]);
 
   // 错误处理
-  const handleError = (e: any) => {
-    console.error(`OptimizedSVG加载失败: ${src}`);
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    // Error: OptimizedSVG failed to load
     setHasError(true);
     onError?.(e);
   };

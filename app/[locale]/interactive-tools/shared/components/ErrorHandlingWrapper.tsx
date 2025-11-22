@@ -242,7 +242,11 @@ export function ErrorHandlingWrapper({
     <NotificationProvider>
       <ErrorBoundary
         onError={(error, errorInfo) => {
-          logError("ErrorBoundary triggered in wrapper:", error, errorInfo);
+          logError(
+            "ErrorBoundary triggered in wrapper:",
+            error,
+            errorInfo.componentStack || "ErrorHandlingWrapper",
+          );
           handleError(error, "component error");
         }}
         showDetails={process.env.NODE_ENV === "development"}

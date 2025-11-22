@@ -27,7 +27,7 @@ export async function generateMetadata({
     title: t("metadata.title"),
     description: t("metadata.description"),
     keywords: t("metadata.keywords").split(","),
-    structuredDataType: "WebPage" as StructuredDataType,
+    structuredDataType: "WebPage" as unknown as StructuredDataType,
     additionalStructuredData: {
       applicationCategory: "HealthApplication",
       operatingSystem: "Web",
@@ -86,7 +86,8 @@ export async function generateMetadata({
 // 生成首页的复合结构化数据
 const getStructuredData = async (locale: string) => {
   const t = await getTranslations({ locale, namespace: "" });
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
   // 使用统一的SEO配置函数生成Organization结构化数据
   const organizationData = generatePageSEO({
@@ -95,7 +96,7 @@ const getStructuredData = async (locale: string) => {
     title: "PeriodHub",
     description: t("metadata.home.structuredData.description"),
     keywords: [],
-    structuredDataType: "WebPage" as StructuredDataType,
+    structuredDataType: "WebPage" as unknown as StructuredDataType,
     additionalStructuredData: {
       applicationCategory: "HealthApplication",
       operatingSystem: "Web",

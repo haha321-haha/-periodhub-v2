@@ -5,10 +5,10 @@
  */
 
 import { Metadata } from "next";
-import { generatePageSEO, StructuredDataType } from '@/lib/seo/page-seo';
+import { generatePageSEO, StructuredDataType } from "@/lib/seo/page-seo";
 import { getTranslations } from "next-intl/server";
 // 使用客户端包装组件，完全禁用 SSR
-import WorkplaceWellnessWrapper from './WorkplaceWellnessWrapper';
+import WorkplaceWellnessWrapper from "./WorkplaceWellnessWrapper";
 
 // 生成页面元数据（包含Canonical配置）
 export async function generateMetadata({
@@ -28,7 +28,7 @@ export async function generateMetadata({
     title: t("title"),
     description: t("description"),
     keywords: t("keywords").split(","),
-    structuredDataType: "SoftwareApplication" as StructuredDataType,
+    structuredDataType: "SoftwareApplication" as unknown as StructuredDataType,
     additionalStructuredData: {
       applicationCategory: "HealthApplication",
       operatingSystem: "Web",

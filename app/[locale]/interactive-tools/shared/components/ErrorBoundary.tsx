@@ -48,7 +48,11 @@ export class ErrorBoundary extends Component<Props, State> {
     });
 
     // Log error details
-    logError("ErrorBoundary caught an error:", error, errorInfo);
+    logError(
+      "ErrorBoundary caught an error:",
+      error,
+      errorInfo.componentStack || "ErrorBoundary",
+    );
 
     // Call custom error handler if provided
     if (this.props.onError) {

@@ -15,11 +15,7 @@ import {
   Award,
   AlertCircle,
 } from "lucide-react";
-import {
-  PainAnalytics,
-  PainRecord,
-  TrendPoint,
-} from "../../../../../types/pain-tracker";
+import { PainAnalytics, TrendPoint } from "../../../../../types/pain-tracker";
 
 interface StatisticsSummaryProps {
   analytics: PainAnalytics;

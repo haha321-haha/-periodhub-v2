@@ -118,17 +118,18 @@ const saveToStorage = <T>(key: string, data: T): void => {
           undefined,
           "periodPainImpact/usePainImpactCalculator",
         );
+        // Type guard to check if data has AssessmentSession structure
+        const isAssessmentSession = (
+          obj: unknown,
+        ): obj is Partial<AssessmentSession> => {
+          return typeof obj === "object" && obj !== null;
+        };
+
         try {
           // 第一步：清理旧数据
           cleanupOldStorage(key);
 
           // 第二步：如果还是失败，尝试只保存核心数据
-          // Type guard to check if data has AssessmentSession structure
-          const isAssessmentSession = (
-            obj: unknown,
-          ): obj is Partial<AssessmentSession> => {
-            return typeof obj === "object" && obj !== null;
-          };
 
           const minimalData = isAssessmentSession(data)
             ? {

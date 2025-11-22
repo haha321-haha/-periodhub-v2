@@ -30,7 +30,7 @@ export async function generateMetadata({
     title,
     description,
     keywords,
-    structuredDataType: "SoftwareApplication" as StructuredDataType,
+    structuredDataType: "SoftwareApplication" as unknown as StructuredDataType,
     additionalStructuredData: {
       applicationCategory: "HealthApplication",
     },

@@ -115,28 +115,6 @@ export default function DataSync({
     setDevices(mockDevices);
   }, []);
 
-  // 自动同步
-  useEffect(() => {
-    if (!autoSync || !syncStatus.isOnline) return;
-
-    const interval = setInterval(
-      () => {
-        if (!syncStatus.syncInProgress) {
-          performSync();
-        }
-      },
-      syncInterval * 60 * 1000,
-    );
-
-    return () => clearInterval(interval);
-  }, [
-    autoSync,
-    syncInterval,
-    syncStatus.isOnline,
-    syncStatus.syncInProgress,
-    performSync,
-  ]);
-
   // 执行同步
   const performSync = useCallback(async () => {
     if (!syncStatus.isOnline) {

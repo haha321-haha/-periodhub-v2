@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { generatePageSEO, StructuredDataType } from '@/lib/seo/page-seo';
-import WorkplaceImpactClient from './WorkplaceImpactClient';
+import { generatePageSEO, StructuredDataType } from "@/lib/seo/page-seo";
+import WorkplaceImpactClient from "./WorkplaceImpactClient";
 
 // 生成页面元数据（包含Canonical配置）
 export async function generateMetadata({
@@ -13,14 +13,21 @@ export async function generateMetadata({
   const { metadata } = generatePageSEO({
     locale: locale as "zh" | "en",
     path: "/interactive-tools/workplace-impact-assessment",
-    title: locale === "zh"
-      ? "工作影响评估 - 经期工作能力分析"
-      : "Workplace Impact Assessment - Menstrual Work Capacity Analysis",
-    description: locale === "zh"
-      ? "专业的工作影响评估工具，分析经期对工作能力的影响，提供个性化的工作调整建议。"
-      : "Professional workplace impact assessment tool analyzing menstrual effects on work capacity.",
-    keywords: ["workplace impact", "menstrual health", "work capacity", "assessment tool"],
-    structuredDataType: "SoftwareApplication" as StructuredDataType,
+    title:
+      locale === "zh"
+        ? "工作影响评估 - 经期工作能力分析"
+        : "Workplace Impact Assessment - Menstrual Work Capacity Analysis",
+    description:
+      locale === "zh"
+        ? "专业的工作影响评估工具，分析经期对工作能力的影响，提供个性化的工作调整建议。"
+        : "Professional workplace impact assessment tool analyzing menstrual effects on work capacity.",
+    keywords: [
+      "workplace impact",
+      "menstrual health",
+      "work capacity",
+      "assessment tool",
+    ],
+    structuredDataType: "SoftwareApplication" as unknown as StructuredDataType,
     additionalStructuredData: {
       applicationCategory: "HealthApplication",
       operatingSystem: "Web",

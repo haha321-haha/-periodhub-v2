@@ -33,15 +33,13 @@ export async function generateMetadata({
     title,
     description,
     keywords,
-    structuredDataType: "CollectionPage" as StructuredDataType,
+    structuredDataType: "CollectionPage" as unknown as StructuredDataType,
   });
 
   return metadata;
 }
 
-export default async function PeriodPainAssessmentPage({
-  params,
-}: PageParams) {
+export default async function PeriodPainAssessmentPage({ params }: PageParams) {
   const { locale } = await params;
   const t = await getTranslations({
     locale,
@@ -109,54 +107,54 @@ export default async function PeriodPainAssessmentPage({
       <main className="flex-grow bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           <div className="max-w-6xl mx-auto">
-          {/* 面包屑导航 */}
-          <Breadcrumb
-            items={[
-              {
-                label: breadcrumbT("interactiveTools"),
-                href: `/${locale}/interactive-tools`,
-              },
-              { label: t("periodPainAssessment.title") },
-            ]}
-          />
+            {/* 面包屑导航 */}
+            <Breadcrumb
+              items={[
+                {
+                  label: breadcrumbT("interactiveTools"),
+                  href: `/${locale}/interactive-tools`,
+                },
+                { label: t("periodPainAssessment.title") },
+              ]}
+            />
 
-          {/* 顶部 Hero 区域 */}
-          <HeroSection locale={locale} />
+            {/* 顶部 Hero 区域 */}
+            <HeroSection locale={locale} />
 
-          {/* 导航卡片区域 */}
-          <section
-            aria-labelledby="period-pain-assessment-navigation"
-            className="mt-10 md:mt-12"
-          >
-            <div className="text-center mb-6 md:mb-8">
-              <h2
-                id="period-pain-assessment-navigation"
-                className="text-2xl md:text-3xl font-semibold text-neutral-900 mb-3"
-              >
-                {t(`${navigationBaseKey}.title`)}
-              </h2>
-              <p className="text-neutral-600 max-w-3xl mx-auto">
-                {t(`${navigationBaseKey}.subtitle`)}
-              </p>
-            </div>
+            {/* 导航卡片区域 */}
+            <section
+              aria-labelledby="period-pain-assessment-navigation"
+              className="mt-10 md:mt-12"
+            >
+              <div className="text-center mb-6 md:mb-8">
+                <h2
+                  id="period-pain-assessment-navigation"
+                  className="text-2xl md:text-3xl font-semibold text-neutral-900 mb-3"
+                >
+                  {t(`${navigationBaseKey}.title`)}
+                </h2>
+                <p className="text-neutral-600 max-w-3xl mx-auto">
+                  {t(`${navigationBaseKey}.subtitle`)}
+                </p>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {navigationCards.map((card) => (
-                <NavigationCard key={card.href} {...card} />
-              ))}
-            </div>
-          </section>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {navigationCards.map((card) => (
+                  <NavigationCard key={card.href} {...card} />
+                ))}
+              </div>
+            </section>
 
-          {/* 快速导航区域 */}
-          <QuickNavigationSection locale={locale} />
+            {/* 快速导航区域 */}
+            <QuickNavigationSection locale={locale} />
 
-          {/* 信任与专业背书区域 */}
-          <section className="mt-12 md:mt-16">
-            <TrustSection locale={locale} />
-          </section>
+            {/* 信任与专业背书区域 */}
+            <section className="mt-12 md:mt-16">
+              <TrustSection locale={locale} />
+            </section>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
     </>
   );
 }

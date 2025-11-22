@@ -13,7 +13,7 @@ import {
   Heart,
   Brain,
   Activity,
-  Settings,
+  // Settings, // temporarily unused
   BarChart3,
   TrendingUp,
 } from "lucide-react";

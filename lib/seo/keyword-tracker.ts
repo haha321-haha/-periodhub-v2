@@ -1,5 +1,5 @@
 import { SEO_CONFIG, getDataForSEOConfig } from "./dataforseo-config";
-import { URL_CONFIG } from "@/lib/url-config";
+import { logError } from "@/lib/debug-logger";
 
 export interface KeywordRanking {
   keyword: string;
@@ -71,7 +71,7 @@ export class KeywordTracker {
 
         // 查找PeriodHub的排名
         const periodhubResult = items.find(
-          (item: any) =>
+          (item: { domain?: string; url?: string }) =>
             item.domain?.includes("periodhub") ||
             item.url?.includes("periodhub"),
         );
@@ -96,7 +96,11 @@ export class KeywordTracker {
       this.saveRankings(rankings);
       return rankings;
     } catch (error) {
-      console.error("关键词排名追踪失败:", error);
+      logError(
+        "关键词排名追踪失败:",
+        error,
+        "KeywordTracker/trackKeywordRankings",
+      );
       return this.getFallbackRankings();
     }
   }
@@ -134,12 +138,19 @@ export class KeywordTracker {
 
         if (result) {
           const keywords: CompetitorKeyword[] =
-            result.top_keywords?.map((kw: any) => ({
-              keyword: kw.keyword,
-              position: kw.position || 0,
-              url: kw.url || "",
-              searchVolume: kw.search_volume || 0,
-            })) || [];
+            result.top_keywords?.map(
+              (kw: {
+                keyword: string;
+                position?: number;
+                url?: string;
+                search_volume?: number;
+              }) => ({
+                keyword: kw.keyword,
+                position: kw.position || 0,
+                url: kw.url || "",
+                searchVolume: kw.search_volume || 0,
+              }),
+            ) || [];
 
           trackingData.push({
             domain,
@@ -150,7 +161,11 @@ export class KeywordTracker {
           });
         }
       } catch (error) {
-        console.error(`监控竞争对手 ${domain} 失败:`, error);
+        logError(
+          `监控竞争对手 ${domain} 失败:`,
+          error,
+          "KeywordTracker/trackCompetitors",
+        );
       }
     }
 
@@ -160,7 +175,7 @@ export class KeywordTracker {
   /**
    * 获取关键词趋势数据
    */
-  async getKeywordTrends(keyword: string): Promise<any> {
+  async getKeywordTrends(keyword: string): Promise<KeywordTrendData | null> {
     try {
       const response = await fetch(
         `${this.config.baseUrl}/keywords_data/google/search_volume/live`,
@@ -183,7 +198,7 @@ export class KeywordTracker {
       const data = await response.json();
       return data.tasks?.[0]?.result?.[0] || null;
     } catch (error) {
-      console.error("获取关键词趋势失败:", error);
+      logError("获取关键词趋势失败:", error, "KeywordTracker/getKeywordTrends");
       return null;
     }
   }
@@ -203,7 +218,7 @@ export class KeywordTracker {
   /**
    * 获取本地存储的排名数据
    */
-  private getStoredData(): any {
+  private getStoredData(): StoredData {
     if (typeof window === "undefined")
       return { rankings: [], lastUpdate: null };
 

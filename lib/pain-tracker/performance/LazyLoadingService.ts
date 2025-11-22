@@ -7,6 +7,16 @@ import {
   LazyLoadResult,
   PainTrackerError,
 } from "../../../types/pain-tracker";
+import { logWarn } from "@/lib/debug-logger";
+
+interface RecordFilters {
+  startDate?: string;
+  endDate?: string;
+  minPainLevel?: number;
+  maxPainLevel?: number;
+  menstrualStatus?: string;
+  searchText?: string;
+}
 
 export interface LazyLoadingServiceInterface {
   loadRecordsPaginated(
@@ -92,7 +102,13 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
 
       // Preload next batch if needed
       if (options.preload !== false) {
-        this.preloadNextBatch(page, pageSize).catch(console.warn);
+        this.preloadNextBatch(page, pageSize).catch((error) => {
+          logWarn(
+            "Failed to preload next batch:",
+            error,
+            "LazyLoadingService/loadRecordsPaginated",
+          );
+        });
       }
 
       return {
@@ -170,7 +186,11 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
       }
     } catch (error) {
       // Preloading failures should not affect main functionality
-      console.warn("Failed to preload next batch:", error);
+      logWarn(
+        "Failed to preload next batch:",
+        error,
+        "LazyLoadingService/preloadNextBatch",
+      );
     }
   }
 
@@ -242,13 +262,18 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
     return Promise.resolve([]);
   }
 
-  private async getTotalRecordCount(filters: any = {}): Promise<number> {
+  private async getTotalRecordCount(
+    filters: RecordFilters = {},
+  ): Promise<number> {
     const allRecords = await this.loadAllRecords();
     const filteredRecords = this.applyFilters(allRecords, filters);
     return filteredRecords.length;
   }
 
-  private applyFilters(records: PainRecord[], filters: any): PainRecord[] {
+  private applyFilters(
+    records: PainRecord[],
+    filters: RecordFilters,
+  ): PainRecord[] {
     let filteredRecords = [...records];
 
     // Date range filter
@@ -356,8 +381,10 @@ export class LazyLoadingService implements LazyLoadingServiceInterface {
   }
 
   private async loadRecordsBatchFromStorage(
-    offset: number,
-    batchSize: number,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _offset: number,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _batchSize: number,
   ): Promise<PainRecord[]> {
     // This would load a specific batch from storage
     // Implementation depends on the storage adapter

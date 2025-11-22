@@ -1152,10 +1152,16 @@ export default function SymptomAssessmentTool({
                         <span className="text-base font-medium text-blue-700 ml-2">
                           (
                           {(() => {
+                            const answerValue =
+                              selectedAnswers[currentQuestion.id];
                             const value =
-                              selectedAnswers[currentQuestion.id] ||
-                              currentQuestion.validation?.min ||
-                              1;
+                              typeof answerValue === "number"
+                                ? answerValue
+                                : typeof answerValue === "string"
+                                  ? Number(answerValue) ||
+                                    currentQuestion.validation?.min ||
+                                    1
+                                  : currentQuestion.validation?.min || 1;
                             if (value <= 2) return t("painScale.levels.none");
                             if (value <= 4) return t("painScale.levels.mild");
                             if (value <= 6)

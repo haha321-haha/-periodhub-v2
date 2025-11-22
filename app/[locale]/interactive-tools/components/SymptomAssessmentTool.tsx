@@ -60,7 +60,7 @@ export default function SymptomAssessmentTool({
   const [selectedAnswers, setSelectedAnswers] = useState<SelectedAnswersState>(
     {},
   );
-  const [showSettings, setShowSettings] = useState(false);
+  // const [showSettings, setShowSettings] = useState(false); // Temporarily disabled
   const [sessionData, setSessionData] = useState<SessionMeta>({
     sessionId: "",
     startTime: "",
@@ -504,12 +504,13 @@ export default function SymptomAssessmentTool({
                     <BarChart3 className="w-5 h-5 mr-2" />
                     {tTool("trends.title")}
                   </h3>
-                  <button
+                  {/* Settings button temporarily disabled */}
+                  {/* <button
                     onClick={() => setShowSettings(true)}
                     className="text-indigo-600 hover:text-indigo-800 transition-colors"
                   >
                     <Settings className="w-5 h-5" />
-                  </button>
+                  </button> */}
                 </div>
 
                 {trends && (

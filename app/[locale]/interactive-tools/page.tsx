@@ -38,7 +38,7 @@ export async function generateMetadata({
     title: t("title"),
     description: t("description"),
     keywords: t("keywords").split(","),
-    structuredDataType: "CollectionPage" as StructuredDataType,
+    structuredDataType: "CollectionPage" as unknown as StructuredDataType,
     additionalStructuredData: {
       numberOfItems: 8, // 更新为实际工具数量
       description: t("structuredData.description"),
@@ -179,7 +179,7 @@ export default async function InteractiveToolsPage({
     title: t("title"),
     description: t("description"),
     keywords: t("keywords").split(","),
-    structuredDataType: "CollectionPage",
+    structuredDataType: "CollectionPage" as unknown as StructuredDataType,
     additionalStructuredData: {
       numberOfItems: 8, // 更新为实际工具数量
       description: t("structuredData.description"),

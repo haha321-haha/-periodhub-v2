@@ -288,7 +288,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 添加错误处理和验证
   if (allEntries.length === 0) {
-    console.error("Sitemap generation failed: No entries generated");
+    // Sitemap generation failed: No entries generated
     // 返回最基本的条目确保sitemap不为空
     return [
       {
@@ -306,8 +306,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ];
   }
 
-  console.log(
-    `Sitemap generated successfully with ${allEntries.length} entries`,
-  );
+  // Sitemap generated successfully with ${allEntries.length} entries
   return allEntries;
 }

@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       const url = envUrl || fallbackUrl;
       new URL(url); // 验证URL格式
       return url;
-    } catch (error) {
+    } catch (_error) {
       // Invalid base URL, using fallback
       return fallbackUrl;
     }

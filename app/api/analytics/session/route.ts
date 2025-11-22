@@ -33,7 +33,7 @@ let sessionStore: RealUserSession[] = [];
 export async function POST(request: NextRequest) {
   try {
     const body: SessionDataRequest = await request.json();
-    const { sessionData, metadata } = body;
+    const { sessionData } = body;
 
     // 数据验证
     if (!sessionData || !sessionData.sessionId || !sessionData.userId) {
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
         storedSessions: sessionStore.length,
       },
     });
-  } catch (error) {
+  } catch (_error) {
     // Session data processing error
     return NextResponse.json<ApiResponse>(
       {

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function POST(_request: NextRequest) {
   try {
-    const metric = await request.json();
+    // const metric = await request.json(); // Reserved for future use
 
     // 这里可以发送到你的分析服务
     // Web Vitals Metric processed
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     // await saveMetricToDatabase(metric);
 
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (_error) {
     // Error processing web vitals
     return NextResponse.json(
       { error: "Failed to process metric" },

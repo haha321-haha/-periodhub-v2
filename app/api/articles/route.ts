@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
       success: true,
       ...result,
     });
-  } catch (error) {
+  } catch (_error) {
     // Error fetching articles
     return NextResponse.json(
       {

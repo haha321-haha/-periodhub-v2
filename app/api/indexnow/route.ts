@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
       results,
       totalUrls: urls.length,
     });
-  } catch (error) {
+  } catch (_error) {
     // IndexNow API error
     return NextResponse.json(
       { error: "Internal server error" },

@@ -79,7 +79,7 @@ export function createLazyComponent<T extends ComponentType<unknown>>(
         fallback={fallback || <DefaultFallback height={height} />}
         delay={suspenseDelay}
       >
-        <LazyComponent {...(componentProps as React.ComponentProps<T>)} />
+        <LazyComponent {...(componentProps as any)} />
       </DelayedSuspense>
     );
   };

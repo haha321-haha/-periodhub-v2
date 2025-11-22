@@ -48,7 +48,6 @@ export async function generateToolStructuredData({
 }: ToolStructuredDataProps) {
   // 确保 locale 类型正确
   const validLocale = locale === "en" || locale === "zh" ? locale : "en";
-  const t = await getTranslations({ locale: validLocale, namespace: "" });
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
@@ -202,7 +201,11 @@ export async function generateToolStructuredData({
   };
 }
 
-export function ToolStructuredDataScript({ data }: { data: any }) {
+export function ToolStructuredDataScript({
+  data,
+}: {
+  data: Record<string, unknown>;
+}) {
   return (
     <script
       type="application/ld+json"

@@ -1,25 +1,5 @@
 // lib/data-analytics/types/analytics.types.ts
 
-// 基础类型定义
-type SupportedLanguage = "zh" | "en" | "es" | "fr";
-type ResourceCategory =
-  | "immediate-relief"
-  | "preparation"
-  | "learning"
-  | "management"
-  | "assessment"
-  | "template";
-
-interface AnalyticsData {
-  downloadCount: number;
-  viewCount: number;
-  shareCount?: number;
-  rating: number;
-  reviewCount?: number;
-  lastAccessedAt?: Date;
-  popularityScore?: number;
-}
-
 interface SystemEvent {
   id: string;
   type:
@@ -32,7 +12,7 @@ interface SystemEvent {
     | "user_action"
     | "system_maintenance";
   timestamp: Date;
-  data: Record<string, any>;
+  data: Record<string, unknown>;
   severity: "low" | "medium" | "high" | "critical";
   source: string;
   correlationId?: string;

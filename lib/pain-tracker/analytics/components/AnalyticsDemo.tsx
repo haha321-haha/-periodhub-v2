@@ -4,6 +4,7 @@
 // Provides a simple interface to test analytics engine and chart components
 
 import React, { useState, useEffect } from "react";
+import { logError } from "@/lib/debug-logger";
 import { AnalyticsEngine } from "../AnalyticsEngine";
 import { PainTrendChart } from "./PainTrendChart";
 import { PainDistributionChart } from "./PainDistributionChart";
@@ -196,7 +197,13 @@ export const AnalyticsDemo: React.FC = () => {
             <PainTrendChart
               trendData={analytics.trendData}
               height={300}
-              onError={(err) => console.error("Trend chart error:", err)}
+              onError={(err) =>
+                logError(
+                  "Trend chart error:",
+                  err,
+                  "AnalyticsDemo/PainTrendChart",
+                )
+              }
             />
           </div>
 
@@ -208,7 +215,13 @@ export const AnalyticsDemo: React.FC = () => {
             <PainDistributionChart
               records={sampleRecords}
               height={300}
-              onError={(err) => console.error("Distribution chart error:", err)}
+              onError={(err) =>
+                logError(
+                  "Distribution chart error:",
+                  err,
+                  "AnalyticsDemo/PainDistributionChart",
+                )
+              }
             />
           </div>
 
@@ -218,7 +231,13 @@ export const AnalyticsDemo: React.FC = () => {
             <PainTypeChart
               painTypes={analytics.commonPainTypes}
               height={300}
-              onError={(err) => console.error("Pain type chart error:", err)}
+              onError={(err) =>
+                logError(
+                  "Pain type chart error:",
+                  err,
+                  "AnalyticsDemo/PainTypeChart",
+                )
+              }
             />
           </div>
 
@@ -231,7 +250,11 @@ export const AnalyticsDemo: React.FC = () => {
               cyclePatterns={analytics.cyclePatterns}
               height={300}
               onError={(err) =>
-                console.error("Cycle pattern chart error:", err)
+                logError(
+                  "Cycle pattern chart error:",
+                  err,
+                  "AnalyticsDemo/CyclePatternChart",
+                )
               }
             />
           </div>

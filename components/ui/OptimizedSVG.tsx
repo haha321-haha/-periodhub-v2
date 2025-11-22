@@ -124,6 +124,7 @@ export default function OptimizedSVG({
 
       {/* 实际SVG */}
       {isInView && (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={src}
           alt={alt}

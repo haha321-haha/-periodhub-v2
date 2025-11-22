@@ -69,7 +69,7 @@ export default async function WhenToSeekMedicalCarePage({
   const isZh = locale === "zh";
 
   // 生成文章结构化数据
-  const articleStructuredData = await generateArticleStructuredData({
+  await generateArticleStructuredData({
     locale,
     articleSlug: "when-to-seek-medical-care-comprehensive-guide",
     title: isZh

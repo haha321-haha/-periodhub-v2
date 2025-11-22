@@ -23,7 +23,6 @@ interface SafeSmartImageProps {
   enableFallback?: boolean;
   enableErrorBoundary?: boolean;
   fallbackComponent?: "EnhancedImage" | "OptimizedImage" | "img";
-  debugMode?: boolean;
 }
 
 /**
@@ -47,7 +46,6 @@ export default function SafeSmartImage({
   enableFallback = true,
   enableErrorBoundary = true,
   fallbackComponent = "EnhancedImage",
-  debugMode = false,
 }: SafeSmartImageProps) {
   const [hasError, setHasError] = useState(false);
   const [errorCount, setErrorCount] = useState(0);
@@ -60,8 +58,6 @@ export default function SafeSmartImage({
 
   // 环境变量控制
   const useSmartImage = process.env.NEXT_PUBLIC_USE_SMART_IMAGE !== "false";
-  const isProduction = process.env.NODE_ENV === "production";
-  const isDevelopment = process.env.NODE_ENV === "development";
 
   // 错误处理
   const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -90,6 +86,7 @@ export default function SafeSmartImage({
   // 回退到原生img标签
   if (shouldUseFallback && fallbackComponent === "img") {
     return (
+      // eslint-disable-next-line @next/next/no-img-element
       <img
         src={src}
         alt={alt}

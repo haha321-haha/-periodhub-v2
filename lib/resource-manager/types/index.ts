@@ -86,7 +86,7 @@ export interface ResourceSEO {
   ogTitle?: Record<Locale, string>;
   ogDescription?: Record<Locale, string>;
   canonicalUrl?: string;
-  structuredData?: Record<string, any>;
+  structuredData?: Record<string, unknown>;
 }
 
 // 资源访问控制
@@ -156,7 +156,7 @@ export interface EnterpriseResource {
   access: ResourceAccess;
 
   // 自定义字段
-  customFields: Record<string, any>;
+  customFields: Record<string, unknown>;
 
   // 版本控制
   changeLog: {
@@ -213,7 +213,7 @@ export interface ResourceManagerConfig {
 }
 
 // 资源操作结果
-export interface ResourceOperationResult<T = any> {
+export interface ResourceOperationResult<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;

@@ -42,82 +42,7 @@ export const usePersonalizedRecommendations = () => {
   >([]);
   const [isGenerating, setIsGenerating] = useState(false);
 
-  // Generate personalized recommendations based on context
-  const generateRecommendations = useCallback(
-    async (context: RecommendationContext) => {
-      setIsGenerating(true);
-
-      try {
-        const personalizedRecs: PersonalizedRecommendation[] = [];
-
-        // Base recommendations from assessment result
-        if (context.currentAssessment) {
-          const baseRecs = generateBaseRecommendations(
-            context.currentAssessment,
-            context.locale,
-          );
-          personalizedRecs.push(...baseRecs);
-        }
-
-        // Trend-based recommendations
-        if (context.trends) {
-          const trendRecs = generateTrendBasedRecommendations(
-            context.trends,
-            context.locale,
-          );
-          personalizedRecs.push(...trendRecs);
-        }
-
-        // History-based recommendations
-        if (context.history.length > 0) {
-          const historyRecs = generateHistoryBasedRecommendations(
-            context.history,
-            context.locale,
-          );
-          personalizedRecs.push(...historyRecs);
-        }
-
-        // Preference-based recommendations
-        const preferenceRecs = generatePreferenceBasedRecommendations(
-          context.preferences,
-          context.locale,
-        );
-        personalizedRecs.push(...preferenceRecs);
-
-        // Remove duplicates and sort by priority and confidence
-        const uniqueRecs = removeDuplicateRecommendations(personalizedRecs);
-        const sortedRecs = uniqueRecs.sort((a, b) => {
-          const priorityOrder = { high: 3, medium: 2, low: 1 };
-          const aPriority = priorityOrder[a.priority];
-          const bPriority = priorityOrder[b.priority];
-
-          if (aPriority !== bPriority) {
-            return bPriority - aPriority;
-          }
-
-          return b.confidence - a.confidence;
-        });
-
-        setRecommendations(sortedRecs.slice(0, 10)); // Limit to top 10 recommendations
-      } catch (error) {
-        logError(
-          "Error generating personalized recommendations",
-          error,
-          "usePersonalizedRecommendations",
-        );
-      } finally {
-        setIsGenerating(false);
-      }
-    },
-    [
-      generateBaseRecommendations,
-      generateHistoryBasedRecommendations,
-      generatePreferenceBasedRecommendations,
-      generateTrendBasedRecommendations,
-      removeDuplicateRecommendations,
-    ],
-  );
-
+  // Helper functions (must be defined before generateRecommendations)
   // Generate base recommendations from current assessment
   const generateBaseRecommendations = useCallback(
     (
@@ -385,6 +310,82 @@ export const usePersonalizedRecommendations = () => {
       });
     },
     [],
+  );
+
+  // Generate personalized recommendations based on context
+  const generateRecommendations = useCallback(
+    async (context: RecommendationContext) => {
+      setIsGenerating(true);
+
+      try {
+        const personalizedRecs: PersonalizedRecommendation[] = [];
+
+        // Base recommendations from assessment result
+        if (context.currentAssessment) {
+          const baseRecs = generateBaseRecommendations(
+            context.currentAssessment,
+            context.locale,
+          );
+          personalizedRecs.push(...baseRecs);
+        }
+
+        // Trend-based recommendations
+        if (context.trends) {
+          const trendRecs = generateTrendBasedRecommendations(
+            context.trends,
+            context.locale,
+          );
+          personalizedRecs.push(...trendRecs);
+        }
+
+        // History-based recommendations
+        if (context.history.length > 0) {
+          const historyRecs = generateHistoryBasedRecommendations(
+            context.history,
+            context.locale,
+          );
+          personalizedRecs.push(...historyRecs);
+        }
+
+        // Preference-based recommendations
+        const preferenceRecs = generatePreferenceBasedRecommendations(
+          context.preferences,
+          context.locale,
+        );
+        personalizedRecs.push(...preferenceRecs);
+
+        // Remove duplicates and sort by priority and confidence
+        const uniqueRecs = removeDuplicateRecommendations(personalizedRecs);
+        const sortedRecs = uniqueRecs.sort((a, b) => {
+          const priorityOrder = { high: 3, medium: 2, low: 1 };
+          const aPriority = priorityOrder[a.priority];
+          const bPriority = priorityOrder[b.priority];
+
+          if (aPriority !== bPriority) {
+            return bPriority - aPriority;
+          }
+
+          return b.confidence - a.confidence;
+        });
+
+        setRecommendations(sortedRecs.slice(0, 10)); // Limit to top 10 recommendations
+      } catch (error) {
+        logError(
+          "Error generating personalized recommendations",
+          error,
+          "usePersonalizedRecommendations",
+        );
+      } finally {
+        setIsGenerating(false);
+      }
+    },
+    [
+      generateBaseRecommendations,
+      generateHistoryBasedRecommendations,
+      generatePreferenceBasedRecommendations,
+      generateTrendBasedRecommendations,
+      removeDuplicateRecommendations,
+    ],
   );
 
   // Get recommendations by type

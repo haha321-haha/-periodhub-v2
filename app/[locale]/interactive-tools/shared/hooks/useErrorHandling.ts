@@ -254,6 +254,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
 
   // Handle storage errors
   const handleStorageError = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async (_error?: PainTrackerError, _context?: string) => {
       if (enableOfflineMode && isOffline) {
         addWarningNotification(
@@ -292,6 +293,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
 
   // Handle validation errors
   const handleValidationError = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async (_error?: PainTrackerError, _context?: string) => {
       addErrorNotification(
         "Data Validation Error",
@@ -313,6 +315,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
 
   // Handle export errors
   const handleExportError = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async (_error?: PainTrackerError, _context?: string) => {
       addErrorNotification(
         "Export Error",
@@ -342,6 +345,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
 
   // Handle chart errors
   const handleChartError = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async (_error?: PainTrackerError, _context?: string) => {
       addWarningNotification(
         "Chart Display Error",
@@ -368,6 +372,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
 
   // Handle data corruption
   const handleDataCorruption = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async (_error?: PainTrackerError, _context?: string) => {
       try {
         const integrityReport = await dataIntegrityService.checkDataIntegrity();
@@ -437,6 +442,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
 
   // Handle quota exceeded
   const handleQuotaExceeded = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async (_error?: PainTrackerError, _context?: string) => {
       notifyStorageQuotaExceeded(
         () => {
@@ -454,6 +460,7 @@ export function useErrorHandling(options: ErrorHandlingOptions = {}) {
 
   // Handle migration errors
   const handleMigrationError = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async (_error?: PainTrackerError, _context?: string) => {
       addErrorNotification(
         "Data Migration Error",

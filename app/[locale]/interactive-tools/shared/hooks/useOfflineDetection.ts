@@ -219,10 +219,14 @@ export function useOfflineStorage(key: string) {
   const storeOfflineData = useCallback(
     (data: unknown) => {
       try {
+        const dataObj =
+          data && typeof data === "object"
+            ? (data as Record<string, unknown>)
+            : {};
         const newOfflineData = [
           ...offlineData,
           {
-            ...data,
+            ...dataObj,
             timestamp: new Date().toISOString(),
             id: `offline_${Date.now()}_${Math.random()
               .toString(36)

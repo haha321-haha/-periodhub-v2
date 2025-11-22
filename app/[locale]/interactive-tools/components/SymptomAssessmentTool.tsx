@@ -370,7 +370,9 @@ export default function SymptomAssessmentTool({
   const handleNext = () => {
     if (currentQuestionIndex >= totalQuestions - 1) {
       // 已经是最后一题，完成评估
-      const assessmentResult = completeAssessment(t);
+      // Type assertion needed because SafeTranslationFn is compatible with TranslationFunction
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const assessmentResult = completeAssessment(t as any);
 
       if (assessmentResult) {
         addSuccessNotification(

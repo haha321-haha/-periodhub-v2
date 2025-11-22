@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect, useMemo } from "react";
-import type { TFunction } from "next-intl";
+import { useTranslations } from "next-intl";
 import {
   Question,
   AssessmentAnswer,
@@ -19,7 +19,7 @@ import { logError, logInfo } from "@/lib/debug-logger";
 
 type AnswerValue = AssessmentAnswer["value"];
 type AnswerMap = Record<string, AnswerValue>;
-type TranslationFunction = TFunction;
+type TranslationFunction = ReturnType<typeof useTranslations>;
 
 interface UseSymptomAssessmentReturn {
   // Current session
@@ -213,8 +213,10 @@ export const useSymptomAssessment = (
         let calculationResult;
         if (currentSession.mode === "medical") {
           // 医疗专业版：使用综合评估（症状+职场）
+          // Type assertion needed because AnswerMap is compatible with MedicalAssessmentInputs
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           calculationResult = calculateMedicalImpact(
-            answersForCalculation,
+            answersForCalculation as any,
             effectiveLocale,
           );
         } else if (currentSession.mode === "detailed") {

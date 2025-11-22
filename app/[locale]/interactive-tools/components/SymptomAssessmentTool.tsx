@@ -1104,11 +1104,17 @@ export default function SymptomAssessmentTool({
                       type="range"
                       min={currentQuestion.validation?.min || 1}
                       max={currentQuestion.validation?.max || 10}
-                      value={
-                        selectedAnswers[currentQuestion.id] ||
-                        currentQuestion.validation?.min ||
-                        1
-                      }
+                      value={(() => {
+                        const answer = selectedAnswers[currentQuestion.id];
+                        if (typeof answer === "number") return answer;
+                        if (typeof answer === "string") {
+                          const num = Number(answer);
+                          return isNaN(num)
+                            ? currentQuestion.validation?.min || 1
+                            : num;
+                        }
+                        return currentQuestion.validation?.min || 1;
+                      })()}
                       onChange={(e) =>
                         handleAnswerChange(parseInt(e.target.value))
                       }

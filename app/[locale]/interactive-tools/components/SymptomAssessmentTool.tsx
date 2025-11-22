@@ -834,13 +834,14 @@ export default function SymptomAssessmentTool({
             >
               {t("result.saveResults")}
             </button>
-            <button
+            {/* Settings button temporarily disabled */}
+            {/* <button
               onClick={() => setShowSettings(true)}
               className="px-6 py-3 border-2 border-gray-300 text-gray-600 rounded-lg font-medium hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 active:scale-95"
             >
               <Settings className="w-4 h-4 inline mr-2" />
               {tTool("settings")}
-            </button>
+            </button> */}
           </div>
 
           {/* Personalized Recommendations */}

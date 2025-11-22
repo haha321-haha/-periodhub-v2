@@ -8,7 +8,8 @@ interface BreathingExerciseToolProps {
 }
 
 export default function BreathingExerciseTool({
-  locale = "zh",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  locale: _locale = "zh",
 }: BreathingExerciseToolProps) {
   const [isActive, setIsActive] = useState(false);
   const [phase, setPhase] = useState<"inhale" | "hold" | "exhale" | "pause">(

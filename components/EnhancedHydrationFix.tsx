@@ -1,7 +1,7 @@
-/* eslint-disable no-console */
 "use client";
 
 import { useEffect, useState } from "react";
+import { logInfo } from "@/lib/debug-logger";
 
 /**
  * 增强版 Hydration 修复组件
@@ -15,7 +15,11 @@ export default function EnhancedHydrationFix() {
 
     // 🔧 立即修复所有 hydration 相关问题
     const fixHydrationIssues = () => {
-      console.log("[EnhancedHydrationFix] 开始修复 hydration 问题...");
+      logInfo(
+        "[EnhancedHydrationFix] 开始修复 hydration 问题...",
+        undefined,
+        "EnhancedHydrationFix/fixHydrationIssues",
+      );
 
       // 1. 移除所有翻译扩展属性
       const removeTranslationAttributes = () => {
@@ -43,8 +47,10 @@ export default function EnhancedHydrationFix() {
         });
 
         if (removedCount > 0) {
-          console.log(
+          logInfo(
             `[EnhancedHydrationFix] 移除了 ${removedCount} 个翻译扩展属性`,
+            { removedCount },
+            "EnhancedHydrationFix/removeTranslationAttributes",
           );
         }
       };
@@ -72,16 +78,20 @@ export default function EnhancedHydrationFix() {
             if (newText !== originalText) {
               node.textContent = newText;
               fixedCount++;
-              console.log(
+              logInfo(
                 `[EnhancedHydrationFix] 修复重复文本: "${originalText}" -> "${newText}"`,
+                { originalText, newText },
+                "EnhancedHydrationFix/fixDuplicateText",
               );
             }
           }
         }
 
         if (fixedCount > 0) {
-          console.log(
+          logInfo(
             `[EnhancedHydrationFix] 修复了 ${fixedCount} 个重复文本问题`,
+            { fixedCount },
+            "EnhancedHydrationFix/fixDuplicateText",
           );
         }
       };
@@ -109,14 +119,20 @@ export default function EnhancedHydrationFix() {
             if (element.classList.contains(className)) {
               element.classList.remove(className);
               removedClassCount++;
-              console.log(`[EnhancedHydrationFix] 移除了类名: ${className}`);
+              logInfo(
+                `[EnhancedHydrationFix] 移除了类名: ${className}`,
+                { className },
+                "EnhancedHydrationFix/removeTranslationClasses",
+              );
             }
           });
         });
 
         if (removedClassCount > 0) {
-          console.log(
+          logInfo(
             `[EnhancedHydrationFix] 移除了 ${removedClassCount} 个扩展类名`,
+            { removedClassCount },
+            "EnhancedHydrationFix/removeTranslationClasses",
           );
         }
       };
@@ -132,7 +148,11 @@ export default function EnhancedHydrationFix() {
         htmlElement.classList.add("hydrated");
       }
 
-      console.log("[EnhancedHydrationFix] hydration 修复完成");
+      logInfo(
+        "[EnhancedHydrationFix] hydration 修复完成",
+        undefined,
+        "EnhancedHydrationFix/fixHydrationIssues",
+      );
     };
 
     // 立即执行修复
@@ -224,7 +244,11 @@ export default function EnhancedHydrationFix() {
       });
 
       if (needsFix) {
-        console.log("[EnhancedHydrationFix] 动态修复了 hydration 问题");
+        logInfo(
+          "[EnhancedHydrationFix] 动态修复了 hydration 问题",
+          undefined,
+          "EnhancedHydrationFix/MutationObserver",
+        );
       }
     });
 

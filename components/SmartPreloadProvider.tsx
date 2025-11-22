@@ -2,6 +2,7 @@
 
 import { useSmartPreload } from "@/hooks/useSmartPreload";
 import { ReactNode } from "react";
+import { logInfo } from "@/lib/debug-logger";
 
 interface SmartPreloadProviderProps {
   children: ReactNode;
@@ -17,9 +18,10 @@ export function SmartPreloadProvider({ children }: SmartPreloadProviderProps) {
 
   // 在开发环境显示预加载状态（可选）
   if (process.env.NODE_ENV === "development") {
-    console.log(
+    logInfo(
       "🔍 SmartPreloadProvider: webpack preloaded =",
-      isWebpackPreloaded,
+      { isWebpackPreloaded },
+      "SmartPreloadProvider",
     );
   }
 

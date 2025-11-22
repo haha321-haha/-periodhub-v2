@@ -305,7 +305,9 @@ const getConstitutionTestRecommendations = (locale: Locale) => {
     },
     {
       id: "zhan-zhuang-baduanjin-for-menstrual-pain-relief",
-      title: isZh ? "站桩八段锦缓解痛经" : "Zhan Zhuang & Baduanjin for Pain Relief",
+      title: isZh
+        ? "站桩八段锦缓解痛经"
+        : "Zhan Zhuang & Baduanjin for Pain Relief",
       description: isZh
         ? "传统中医功法，调理体质改善痛经"
         : "Traditional Chinese exercises to improve constitution and relieve pain",
@@ -319,7 +321,9 @@ const getConstitutionTestRecommendations = (locale: Locale) => {
     },
     {
       id: "anti-inflammatory-diet-period-pain",
-      title: isZh ? "抗炎饮食缓解痛经" : "Anti-Inflammatory Diet for Period Pain",
+      title: isZh
+        ? "抗炎饮食缓解痛经"
+        : "Anti-Inflammatory Diet for Period Pain",
       description: isZh
         ? "通过饮食调理体质，从根本上改善痛经"
         : "Improve constitution through diet to fundamentally relieve period pain",
@@ -997,10 +1001,13 @@ export async function generateMetadata({
     const toolData = await getToolBySlug(tool, locale);
 
     // 生成canonical和hreflang配置
-    const alternates = generateAlternatesConfig(
-      locale,
+    const alternatesData = generateAlternatesConfig(
       `interactive-tools/${tool}`,
     );
+    const alternates = {
+      canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+      languages: alternatesData,
+    };
 
     if (!toolData) {
       return {
@@ -1194,7 +1201,7 @@ export default async function ToolPage({
           tool === "pain-tracker") && (
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="max-w-4xl mx-auto">
-              <EmergencyReliefGuide locale={locale} />
+              <EmergencyReliefGuide />
             </div>
           </section>
         )}

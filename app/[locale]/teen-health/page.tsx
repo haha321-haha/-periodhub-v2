@@ -63,7 +63,7 @@ export default async function TeenHealthPage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
   const t = await getTranslations("teenHealth");
-  const commonT = await getTranslations("common");
+  // const commonT = await getTranslations("common"); // Unused
   const anchorT = await getTranslations("anchorTexts");
   const breadcrumbT = await getTranslations("interactiveTools.breadcrumb");
 

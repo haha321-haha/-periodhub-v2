@@ -31,6 +31,7 @@ export const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
   highlightedIndex,
   onHighlightChange,
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const t = useTranslations("simplePdfCenter");
   const suggestionRefs = useRef<(HTMLDivElement | null)[]>([]);
 

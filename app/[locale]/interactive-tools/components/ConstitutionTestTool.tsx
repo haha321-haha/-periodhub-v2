@@ -122,7 +122,8 @@ export default function ConstitutionTestTool({
   // 处理多选答案
   const normalizeAnswerValues = (input?: SelectedAnswerValue): string[] => {
     if (!input) return [];
-    return Array.isArray(input) ? input : [input];
+    if (Array.isArray(input)) return input.map((item) => String(item));
+    return [String(input)];
   };
 
   const handleMultipleAnswerSelect = (questionId: string, value: string) => {
@@ -920,7 +921,15 @@ export default function ConstitutionTestTool({
                     type="range"
                     min={currentQuestion.validation?.min || 0}
                     max={currentQuestion.validation?.max || 10}
-                    value={selectedAnswers[currentQuestion.id] || 0}
+                    value={(() => {
+                      const answer = selectedAnswers[currentQuestion.id];
+                      if (typeof answer === "number") return answer;
+                      if (typeof answer === "string") {
+                        const num = Number(answer);
+                        return isNaN(num) ? 0 : num;
+                      }
+                      return 0;
+                    })()}
                     onChange={(e) =>
                       handleAnswerSelect(currentQuestion.id, e.target.value)
                     }

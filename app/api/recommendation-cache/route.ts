@@ -16,7 +16,7 @@ export async function GET() {
       success: true,
       stats,
     });
-  } catch (_error) {
+  } catch {
     // Error fetching cache stats
     return NextResponse.json(
       {
@@ -40,7 +40,7 @@ export async function DELETE() {
       success: true,
       message: "Cache cleared successfully",
     });
-  } catch (_error) {
+  } catch {
     // Error clearing cache
     return NextResponse.json(
       {

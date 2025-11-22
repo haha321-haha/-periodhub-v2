@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
+import { logWarn } from "@/lib/debug-logger";
 
 interface ReadingProgressProps {
   locale: "zh" | "en" | string; // 允许更宽泛的字符串类型，但在运行时验证
@@ -51,8 +52,10 @@ export default function ReadingProgress({ locale }: ReadingProgressProps) {
 
   // 如果 locale 无效，记录警告（仅在客户端）
   if (typeof window !== "undefined" && locale !== validLocale) {
-    console.warn(
+    logWarn(
       `[ReadingProgress] Invalid locale '${locale}', falling back to '${validLocale}'`,
+      { locale, validLocale },
+      "ReadingProgress",
     );
   }
 

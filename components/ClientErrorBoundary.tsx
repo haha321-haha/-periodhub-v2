@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { logError } from "@/lib/debug-logger";
 
 type ClientErrorBoundaryProps = {
   fallback: React.ReactNode;
@@ -25,8 +26,11 @@ export default class ClientErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: unknown) {
-    // eslint-disable-next-line no-console
-    console.error("ClientErrorBoundary caught error:", error);
+    logError(
+      "ClientErrorBoundary caught error:",
+      error,
+      "ClientErrorBoundary/componentDidCatch",
+    );
   }
 
   render() {

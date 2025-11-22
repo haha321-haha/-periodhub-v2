@@ -1,6 +1,7 @@
 "use client";
 
 export default function LocaleError({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   error: _error,
   reset,
 }: {

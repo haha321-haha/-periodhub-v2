@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { logWarn } from "@/lib/debug-logger";
 
 export function PageRefreshTool() {
   useEffect(() => {
@@ -11,7 +12,11 @@ export function PageRefreshTool() {
       const now = Date.now();
       if (now - lastActivity > 30000) {
         // 30秒无活动
-        console.warn("页面可能卡死，尝试恢复...");
+        logWarn(
+          "页面可能卡死，尝试恢复...",
+          undefined,
+          "PageRefreshTool/checkActivity",
+        );
         // 清理状态
         if (typeof window !== "undefined") {
           // 清理可能导致问题的状态
@@ -20,7 +25,7 @@ export function PageRefreshTool() {
             try {
               localStorage.removeItem(key);
             } catch (e) {
-              console.warn("清理状态失败:", e);
+              logWarn("清理状态失败:", e, "PageRefreshTool/checkActivity");
             }
           });
         }

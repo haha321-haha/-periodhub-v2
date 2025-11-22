@@ -69,42 +69,26 @@ export default async function WhenToSeekMedicalCarePage({
   const isZh = locale === "zh";
 
   // 生成文章结构化数据
-  await generateArticleStructuredData({
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
+  const articleUrl = `${baseUrl}/${locale}/articles/when-to-seek-medical-care-comprehensive-guide`;
+  const articleTitle = isZh
+    ? "痛经别再忍！医生详述7大妇科危险信号，教你何时就医"
+    : "Period Pain or Health Alert? A Doctor's Guide to 7 Red Flags";
+  const articleDescription = isZh
+    ? "你的痛经正常吗？本文教你进行症状自查，识别7个必须就医的危险信号。包含互动疼痛评估工具、症状检查清单、智能决策树，科学管理你的健康。"
+    : "Is your period pain normal? Learn to self-check symptoms, identify 7 critical red flags requiring medical attention. Interactive pain assessment, symptom checker, decision tree, and professional medical guidance.";
+  const articleStructuredData = generateArticleStructuredData({
+    url: articleUrl,
+    title: articleTitle,
+    headline: articleTitle,
+    description: articleDescription,
     locale,
-    articleSlug: "when-to-seek-medical-care-comprehensive-guide",
-    title: isZh
-      ? "痛经别再忍！医生详述7大妇科危险信号，教你何时就医"
-      : "Period Pain or Health Alert? A Doctor's Guide to 7 Red Flags",
-    description: isZh
-      ? "你的痛经正常吗？本文教你进行症状自查，识别7个必须就医的危险信号。包含互动疼痛评估工具、症状检查清单、智能决策树，科学管理你的健康。"
-      : "Is your period pain normal? Learn to self-check symptoms, identify 7 critical red flags requiring medical attention. Interactive pain assessment, symptom checker, decision tree, and professional medical guidance.",
-    image: `${
+    publishedAt: "2025-09-20",
+    updatedAt: "2025-09-20",
+    imageUrl: `${
       process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
     }/images/medical-care-guide-og.jpg`,
-    articleSection: isZh ? "医疗指南" : "Medical Guide",
-    keywords: isZh
-      ? [
-          "痛经",
-          "何时就医",
-          "妇科疾病",
-          "症状自查",
-          "医疗指南",
-          "月经疼痛",
-          "健康评估",
-          "疼痛等级",
-          "危险信号",
-        ]
-      : [
-          "period pain",
-          "when to see doctor",
-          "gynecological conditions",
-          "symptom checker",
-          "medical guide",
-          "menstrual pain",
-          "health assessment",
-          "pain scale",
-          "warning signs",
-        ],
   });
 
   // 医疗专用结构化数据

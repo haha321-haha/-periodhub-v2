@@ -42,6 +42,7 @@ export default function SearchBox({
   placeholder,
   className = "",
 }: SearchBoxProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const t = useTranslations("searchBox");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);

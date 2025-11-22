@@ -18,7 +18,8 @@ interface SearchAndFilterProps {
 }
 
 export default function SearchAndFilter({
-  locale,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  locale: _locale,
   categories,
   searchQuery,
   selectedCategory,
@@ -207,8 +208,9 @@ export default function SearchAndFilter({
         <div>
           {searchQuery ? (
             <span>
-              {t("pdfCenter.search.resultsFor")} "<strong>{searchQuery}</strong>
-              ": {totalResults} {t("pdfCenter.search.results")}
+              {t("pdfCenter.search.resultsFor")} &quot;
+              <strong>{searchQuery}</strong>
+              &quot;: {totalResults} {t("pdfCenter.search.results")}
             </span>
           ) : (
             <span>

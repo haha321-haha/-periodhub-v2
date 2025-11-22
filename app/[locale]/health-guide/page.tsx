@@ -182,10 +182,10 @@ export default async function HealthGuidePage({
   unstable_setRequestLocale(locale);
 
   // Define locale helper
-  const isZh = locale === "zh";
+  // const isZh = locale === "zh"; // Unused
 
   const t = await getTranslations({ locale, namespace: "healthGuidePage" });
-  const commonT = await getTranslations({ locale, namespace: "common" });
+  // const commonT = await getTranslations({ locale, namespace: "common" }); // Unused
 
   // 获取推荐数据（健康指南主题）
   const recommendations = getHealthGuideRecommendations(locale, t);

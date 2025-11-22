@@ -23,10 +23,13 @@ export async function generateMetadata({
       : "Deep dive into the causes, types, and physiological mechanisms of menstrual pain, master the scientific foundation of menstrual pain knowledge.";
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
+  const alternatesData = generateAlternatesConfig(
     "health-guide/understanding-pain",
   );
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title,

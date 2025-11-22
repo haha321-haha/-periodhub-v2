@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { logInfo } from "@/lib/debug-logger";
 
 /**
  * DoubaoExtensionHandler - 豆包浏览器扩展处理器
@@ -18,14 +19,22 @@ export default function DoubaoExtensionHandler() {
       );
 
       if (doubaoElements.length > 0) {
-        console.log("🐳 检测到豆包扩展，正在处理水合问题...");
+        logInfo(
+          "🐳 检测到豆包扩展，正在处理水合问题...",
+          undefined,
+          "DoubaoExtensionHandler/handleDoubaoExtension",
+        );
 
         // 移除豆包扩展添加的属性，避免水合错误
         doubaoElements.forEach((element) => {
           element.removeAttribute("data-doubao-translate-traverse-mark");
         });
 
-        console.log("✅ 豆包扩展属性已清理");
+        logInfo(
+          "✅ 豆包扩展属性已清理",
+          undefined,
+          "DoubaoExtensionHandler/handleDoubaoExtension",
+        );
       }
     };
 

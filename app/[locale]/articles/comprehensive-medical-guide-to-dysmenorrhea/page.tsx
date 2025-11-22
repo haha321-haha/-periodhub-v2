@@ -225,7 +225,6 @@ export default async function DysmenorrheaGuidePage({
         {/* Breadcrumb */}
         <div className="mb-8">
           <ServerBreadcrumb
-            locale={locale}
             items={[
               { label: locale === "zh" ? "首页" : "Home", href: `/${locale}` },
               {
@@ -460,6 +459,7 @@ export default async function DysmenorrheaGuidePage({
                         name: string;
                         dosage: string;
                         frequency: string;
+                        bestFor?: string;
                       },
                       index: number,
                     ) => (
@@ -481,9 +481,11 @@ export default async function DysmenorrheaGuidePage({
                           <span>{med.name}</span>
                         </h4>
                         <p className="text-neutral-600 mb-2">{med.dosage}</p>
-                        <p className="text-sm text-neutral-500">
-                          {med.bestFor}
-                        </p>
+                        {med.bestFor && (
+                          <p className="text-sm text-neutral-500">
+                            {med.bestFor}
+                          </p>
+                        )}
                       </div>
                     ),
                   )}

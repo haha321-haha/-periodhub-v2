@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -6,7 +5,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Period Hub - Redirecting...",
     description: "Redirecting to English version",
     robots: {
-      index: false,  // ✅ 禁止索引重定向页面
+      index: false, // ✅ 禁止索引重定向页面
       follow: true,
     },
     // ❌ 不设置 alternates 配置，因为这不是内容页面

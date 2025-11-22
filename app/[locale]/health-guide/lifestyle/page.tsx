@@ -22,7 +22,11 @@ export async function generateMetadata({
       : "Improve menstrual health through diet, exercise, and daily habits, establishing long-term effective menstrual pain management strategies.";
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(locale, "health-guide/lifestyle");
+  const alternatesData = generateAlternatesConfig("health-guide/lifestyle");
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title,

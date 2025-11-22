@@ -303,12 +303,16 @@ class MedicalCareGuideStorageManager extends StorageManager {
       }
 
       // 导入数据
-      if (data.assessmentHistory) {
-        this.setItem("assessmentHistory", data.assessmentHistory);
+      const dataWithHistory = data as {
+        assessmentHistory?: unknown;
+        lastAssessment?: unknown;
+      };
+      if (dataWithHistory.assessmentHistory) {
+        this.setItem("assessmentHistory", dataWithHistory.assessmentHistory);
       }
 
-      if (data.lastAssessment) {
-        this.setItem("lastAssessment", data.lastAssessment);
+      if (dataWithHistory.lastAssessment) {
+        this.setItem("lastAssessment", dataWithHistory.lastAssessment);
       }
 
       if (data.userPreferences) {
@@ -329,15 +333,29 @@ class MedicalCareGuideStorageManager extends StorageManager {
     }
 
     // 检查必要字段
-    if (data.assessmentHistory && !Array.isArray(data.assessmentHistory)) {
+    const dataWithHistory = data as { assessmentHistory?: unknown };
+    if (
+      dataWithHistory.assessmentHistory &&
+      !Array.isArray(dataWithHistory.assessmentHistory)
+    ) {
       return false;
     }
 
-    if (data.lastAssessment && typeof data.lastAssessment !== "object") {
+    const dataWithAll = dataWithHistory as {
+      lastAssessment?: unknown;
+      userPreferences?: unknown;
+    };
+    if (
+      dataWithAll.lastAssessment &&
+      typeof dataWithAll.lastAssessment !== "object"
+    ) {
       return false;
     }
 
-    if (data.userPreferences && typeof data.userPreferences !== "object") {
+    if (
+      dataWithAll.userPreferences &&
+      typeof dataWithAll.userPreferences !== "object"
+    ) {
       return false;
     }
 

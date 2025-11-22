@@ -8,8 +8,9 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
-import { useAppStore, useToasts } from "@/lib/stores/appStore";
+import { useAppStore } from "@/lib/stores/appStore";
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle } from "lucide-react";
+import { logInfo, logError, logWarn } from "@/lib/debug-logger";
 
 // Toast类型
 export interface Toast {
@@ -202,15 +203,15 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onRemove }) => {
 export const showToast = {
   success: (message: string, title?: string) => {
     // 这里需要访问Toast上下文，实际使用时应该通过useToast hook
-    console.log("Success toast:", { message, title });
+    logInfo("Success toast:", { message, title }, "ToastSystem/showToast");
   },
   error: (message: string, title?: string) => {
-    console.log("Error toast:", { message, title });
+    logError("Error toast:", { message, title }, "ToastSystem/showToast");
   },
   warning: (message: string, title?: string) => {
-    console.log("Warning toast:", { message, title });
+    logWarn("Warning toast:", { message, title }, "ToastSystem/showToast");
   },
   info: (message: string, title?: string) => {
-    console.log("Info toast:", { message, title });
+    logInfo("Info toast:", { message, title }, "ToastSystem/showToast");
   },
 };

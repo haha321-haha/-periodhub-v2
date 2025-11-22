@@ -27,6 +27,11 @@ export default async function SEOValidationPage() {
       errors: string[];
       warnings: string[];
     };
+    testUrls?: {
+      toolPage: string;
+      articlePage: string;
+      healthGuide: string;
+    };
   } = {
     success: true,
     data: {

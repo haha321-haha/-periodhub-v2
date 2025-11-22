@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useMemo } from "react";
-import dynamic from "next/dynamic";
+import { logError } from "@/lib/debug-logger";
 
 interface MermaidChartProps {
   chart: string;
@@ -28,6 +28,7 @@ export default function MermaidChart({
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [mermaidLoaded, setMermaidLoaded] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState<string | null>(null);
 
   // 使用稳定的ID生成策略，避免水合错误
@@ -117,8 +118,12 @@ export default function MermaidChart({
             throw new Error("No SVG generated");
           }
         } catch (error) {
-          console.error("Mermaid rendering error:", error);
-          console.error("Chart content:", chart);
+          logError(
+            "Mermaid rendering error:",
+            error,
+            "MermaidChart/renderChart",
+          );
+          logError("Chart content:", chart, "MermaidChart/renderChart");
           const errorMessage =
             error instanceof Error ? error.message : String(error);
           setError(errorMessage);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { logWarn, logInfo } from "@/lib/debug-logger";
 
 interface Metric {
   name: string;
@@ -25,7 +26,11 @@ export function WebVitalsReporter() {
         webVitals.onINP(sendToAnalytics);
       })
       .catch((error) => {
-        console.warn("Failed to load web-vitals:", error);
+        logWarn(
+          "Failed to load web-vitals:",
+          error,
+          "WebVitalsReporter/useEffect",
+        );
       });
   }, []);
 
@@ -34,8 +39,28 @@ export function WebVitalsReporter() {
     if (metric.name === "FID") return;
 
     // 发送到分析服务
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", metric.name, {
+    if (
+      typeof window !== "undefined" &&
+      "gtag" in window &&
+      typeof (
+        window as {
+          gtag?: (
+            command: string,
+            eventName: string,
+            params?: Record<string, unknown>,
+          ) => void;
+        }
+      ).gtag === "function"
+    ) {
+      (
+        window as {
+          gtag: (
+            command: string,
+            eventName: string,
+            params?: Record<string, unknown>,
+          ) => void;
+        }
+      ).gtag("event", metric.name, {
         event_category: "Web Vitals",
         event_label: metric.id,
         value: Math.round(
@@ -47,7 +72,11 @@ export function WebVitalsReporter() {
 
     // 控制台输出（开发环境）
     if (process.env.NODE_ENV === "development") {
-      console.log(`📊 ${metric.name}: ${metric.value} (${metric.rating})`);
+      logInfo(
+        `📊 ${metric.name}: ${metric.value} (${metric.rating})`,
+        metric,
+        "WebVitalsReporter/sendToAnalytics",
+      );
     }
 
     // 发送到自定义分析端点（仅在开发环境且API可用时）
@@ -59,11 +88,19 @@ export function WebVitalsReporter() {
           body: JSON.stringify(metric),
         }).catch((error) => {
           // 静默处理fetch错误，避免影响页面功能
-          console.warn("Web Vitals API不可用:", error.message);
+          logWarn(
+            "Web Vitals API不可用:",
+            error,
+            "WebVitalsReporter/sendToAnalytics",
+          );
         });
       } catch (error) {
         // 捕获同步错误
-        console.warn("Web Vitals发送失败:", error);
+        logWarn(
+          "Web Vitals发送失败:",
+          error,
+          "WebVitalsReporter/sendToAnalytics",
+        );
       }
     }
   }

@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
+import { logInfo, logError } from "@/lib/debug-logger";
 
 /**
  * 优化的第三方脚本加载组件
@@ -61,8 +62,12 @@ export default function OptimizedScripts() {
             id="gtag-config"
             strategy="afterInteractive"
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-            onLoad={() => console.log("✅ GA4 script loaded")}
-            onError={(e) => console.error("❌ GA4 script failed:", e)}
+            onLoad={() =>
+              logInfo("✅ GA4 script loaded", undefined, "OptimizedScripts/GA4")
+            }
+            onError={(e) =>
+              logError("❌ GA4 script failed:", e, "OptimizedScripts/GA4")
+            }
           />
 
           <Script
@@ -98,8 +103,10 @@ export default function OptimizedScripts() {
             __html: `
               // 开发环境模拟GA函数，避免错误
               window.gtag = function() {
+                // eslint-disable-next-line no-console
                 console.log('🔧 Dev Mode: GA call mocked:', arguments);
               };
+              // eslint-disable-next-line no-console
               console.log('🔧 开发环境：GA脚本已模拟，不会发送真实数据');
             `,
           }}
@@ -120,8 +127,16 @@ export default function OptimizedScripts() {
               })(window, document, "clarity", "script", "ssdsoc827u");
             `,
           }}
-          onLoad={() => console.log("✅ Clarity script loaded")}
-          onError={(e) => console.error("❌ Clarity script failed:", e)}
+          onLoad={() =>
+            logInfo(
+              "✅ Clarity script loaded",
+              undefined,
+              "OptimizedScripts/Clarity",
+            )
+          }
+          onError={(e) =>
+            logError("❌ Clarity script failed:", e, "OptimizedScripts/Clarity")
+          }
         />
       )}
 
@@ -132,8 +147,16 @@ export default function OptimizedScripts() {
           strategy="lazyOnload"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5773162579508714"
           crossOrigin="anonymous"
-          onLoad={() => console.log("✅ AdSense script loaded")}
-          onError={(e) => console.error("❌ AdSense script failed:", e)}
+          onLoad={() =>
+            logInfo(
+              "✅ AdSense script loaded",
+              undefined,
+              "OptimizedScripts/AdSense",
+            )
+          }
+          onError={(e) =>
+            logError("❌ AdSense script failed:", e, "OptimizedScripts/AdSense")
+          }
         />
       )}
     </>
@@ -171,8 +194,12 @@ export function OptimizedChartJS() {
       id="chartjs"
       strategy="lazyOnload"
       src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
-      onLoad={() => console.log("✅ Chart.js loaded")}
-      onError={(e) => console.error("❌ Chart.js failed:", e)}
+      onLoad={() =>
+        logInfo("✅ Chart.js loaded", undefined, "OptimizedScripts/ChartJS")
+      }
+      onError={(e) =>
+        logError("❌ Chart.js failed:", e, "OptimizedScripts/ChartJS")
+      }
     />
   );
 }
@@ -208,8 +235,12 @@ export function OptimizedLucide() {
       id="lucide"
       strategy="lazyOnload"
       src="https://unpkg.com/lucide@latest"
-      onLoad={() => console.log("✅ Lucide icons loaded")}
-      onError={(e) => console.error("❌ Lucide icons failed:", e)}
+      onLoad={() =>
+        logInfo("✅ Lucide icons loaded", undefined, "OptimizedScripts/Lucide")
+      }
+      onError={(e) =>
+        logError("❌ Lucide icons failed:", e, "OptimizedScripts/Lucide")
+      }
     />
   );
 }

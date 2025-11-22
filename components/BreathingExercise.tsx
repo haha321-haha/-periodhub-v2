@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { useTranslations } from 'next-intl';
+import React, { useState, useEffect, useMemo } from "react";
+import { useTranslations } from "next-intl";
 
 interface BreathingExerciseProps {
   locale: string;
@@ -14,8 +14,11 @@ interface Phase {
   color: string;
 }
 
-export default function BreathingExercise({ locale }: BreathingExerciseProps) {
-  const t = useTranslations('breathingExercise');
+export default function BreathingExercise({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  locale: _locale,
+}: BreathingExerciseProps) {
+  const t = useTranslations("breathingExercise");
   const [isActive, setIsActive] = useState(false);
   const [currentPhase, setCurrentPhase] = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
@@ -24,22 +27,22 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
   const phases: Phase[] = useMemo(
     () => [
       {
-        name: t('phases.inhale'),
-        nameEn: 'Inhale',
+        name: t("phases.inhale"),
+        nameEn: "Inhale",
         duration: 4,
-        color: 'bg-blue-600',
+        color: "bg-blue-600",
       },
       {
-        name: t('phases.hold'),
-        nameEn: 'Hold',
+        name: t("phases.hold"),
+        nameEn: "Hold",
         duration: 7,
-        color: 'bg-purple-600',
+        color: "bg-purple-600",
       },
       {
-        name: t('phases.exhale'),
-        nameEn: 'Exhale',
+        name: t("phases.exhale"),
+        nameEn: "Exhale",
         duration: 8,
-        color: 'bg-pink-600',
+        color: "bg-pink-600",
       },
     ],
     [t],
@@ -91,47 +94,41 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
       {/* Header */}
       <div className="text-center mb-6">
         <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <span className="text-2xl" role="img" aria-label={t('iconLabel') || 'Breathing exercise icon'}>
+          <span
+            className="text-2xl"
+            role="img"
+            aria-label={t("iconLabel") || "Breathing exercise icon"}
+          >
             🫁
           </span>
         </div>
-        <h3 className="text-2xl font-bold text-blue-800 mb-2">
-          {t('title')}
-        </h3>
-        <p className="text-blue-600 text-sm">
-          {t('subtitle')}
-        </p>
+        <h3 className="text-2xl font-bold text-blue-800 mb-2">{t("title")}</h3>
+        <p className="text-blue-600 text-sm">{t("subtitle")}</p>
       </div>
 
       {/* Instructions */}
       <div className="bg-blue-50 rounded-lg p-4 mb-6">
         <h4 className="font-semibold text-blue-800 mb-2">
-          {t('instructions.title')}
+          {t("instructions.title")}
         </h4>
         <div className="grid grid-cols-3 gap-3 text-center text-sm">
           <div>
             <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-lg font-bold text-blue-600">4</span>
             </div>
-            <p className="text-blue-700">
-              {t('instructions.inhale')}
-            </p>
+            <p className="text-blue-700">{t("instructions.inhale")}</p>
           </div>
           <div>
             <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-lg font-bold text-purple-600">7</span>
             </div>
-            <p className="text-purple-700">
-              {t('instructions.hold')}
-            </p>
+            <p className="text-purple-700">{t("instructions.hold")}</p>
           </div>
           <div>
             <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-2">
               <span className="text-lg font-bold text-pink-600">8</span>
             </div>
-            <p className="text-pink-700">
-              {t('instructions.exhale')}
-            </p>
+            <p className="text-pink-700">{t("instructions.exhale")}</p>
           </div>
         </div>
       </div>
@@ -140,21 +137,27 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
       <div className="text-center mb-6">
         {isActive ? (
           <div className="space-y-4">
-            <div className={`w-32 h-32 rounded-full flex items-center justify-center mx-auto transition-all duration-1000 ${getCurrentPhase().color}`}>
+            <div
+              className={`w-32 h-32 rounded-full flex items-center justify-center mx-auto transition-all duration-1000 ${
+                getCurrentPhase().color
+              }`}
+            >
               <div className="text-white text-center">
                 <div className="text-3xl font-bold">{timeLeft}</div>
-                <div className="text-sm">
-                  {getCurrentPhase().name}
-                </div>
+                <div className="text-sm">{getCurrentPhase().name}</div>
               </div>
             </div>
             <p className="text-gray-600">
-              {t('currentPhase')} {getCurrentPhase().name}
+              {t("currentPhase")} {getCurrentPhase().name}
             </p>
           </div>
         ) : (
           <div className="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
-            <span className="text-4xl text-gray-400" role="img" aria-label={t('iconLabel') || 'Breathing exercise icon'}>
+            <span
+              className="text-4xl text-gray-400"
+              role="img"
+              aria-label={t("iconLabel") || "Breathing exercise icon"}
+            >
               🫁
             </span>
           </div>
@@ -168,7 +171,7 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
             onClick={startExercise}
             className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors w-full"
           >
-{t('buttons.startPractice')}
+            {t("buttons.startPractice")}
           </button>
         )}
 
@@ -176,14 +179,14 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
           <div className="space-y-3">
             <div className="bg-green-50 border border-green-200 rounded-lg p-3">
               <p className="text-green-700 font-medium">
-                {t('buttons.oneCycleCompleted')}
+                {t("buttons.oneCycleCompleted")}
               </p>
             </div>
             <button
               onClick={startExercise}
               className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors w-full"
             >
-{t('buttons.practiceAgain')}
+              {t("buttons.practiceAgain")}
             </button>
           </div>
         )}
@@ -193,7 +196,7 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
             onClick={resetExercise}
             className="bg-gray-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-gray-600 transition-colors"
           >
-{t('buttons.stopPractice')}
+            {t("buttons.stopPractice")}
           </button>
         )}
       </div>
@@ -201,35 +204,27 @@ export default function BreathingExercise({ locale }: BreathingExerciseProps) {
       {/* Benefits */}
       <div className="mt-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
         <h5 className="font-semibold text-gray-800 mb-2">
-          {t('benefits.title')}
+          {t("benefits.title")}
         </h5>
         <div className="grid grid-cols-3 gap-3 text-center text-xs">
           <div>
             <div className="text-lg font-bold text-blue-600">-40%</div>
-            <div className="text-gray-600">
-              {t('benefits.painPerception')}
-            </div>
+            <div className="text-gray-600">{t("benefits.painPerception")}</div>
           </div>
           <div>
             <div className="text-lg font-bold text-purple-600">-35%</div>
-            <div className="text-gray-600">
-              {t('benefits.muscleTension')}
-            </div>
+            <div className="text-gray-600">{t("benefits.muscleTension")}</div>
           </div>
           <div>
             <div className="text-lg font-bold text-pink-600">+60%</div>
-            <div className="text-gray-600">
-              {t('benefits.relaxation')}
-            </div>
+            <div className="text-gray-600">{t("benefits.relaxation")}</div>
           </div>
         </div>
       </div>
 
       {/* Tips */}
       <div className="mt-4 text-xs text-gray-600">
-        <p>
-          {t('tip')}
-        </p>
+        <p>{t("tip")}</p>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback, useMemo, useState } from "react";
+import { useEffect, useRef, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 
 type InteractionType = "view" | "hover" | "click";
@@ -11,7 +11,7 @@ type InteractionData = {
   detail?: string;
 };
 
-type ScoreMetrics = StressRadarChartProps["scores"];
+// type ScoreMetrics = StressRadarChartProps["scores"]; // Unused
 
 function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
@@ -48,6 +48,7 @@ export function StressRadarChart({
   const [canvasSize, setCanvasSize] = useState(300);
 
   // Day 4: 缓存计算结果，优化性能
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const normalizedScores = useMemo(
     () => [
       (scores.work / 3) * 100,

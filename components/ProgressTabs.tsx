@@ -29,7 +29,8 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
   const [activeTab, setActiveTab] = useState<TabType>("all");
   const [entries, setEntries] = useState<ProgressEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [storageInfo, setStorageInfo] = useState<ReturnType<typeof getStorageInfo>>(null);
+  const [storageInfo, setStorageInfo] =
+    useState<ReturnType<typeof getStorageInfo>>(null);
   const [showManageModal, setShowManageModal] = useState(false);
 
   useEffect(() => {
@@ -76,7 +77,9 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
   };
 
   const stats = calculateStats(entries);
-  const recentEntries = [...entries].reverse().slice(0, activeTab === "all" ? 5 : entries.length);
+  const recentEntries = [...entries]
+    .reverse()
+    .slice(0, activeTab === "all" ? 5 : entries.length);
 
   const tabs = [
     { id: "all" as TabType, label: "All", icon: "📊" },
@@ -89,15 +92,21 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
     <div>
       {/* Storage Warning */}
       {storageInfo && (storageInfo.isFull || storageInfo.isNearFull) && (
-        <div className={`rounded-lg p-4 mb-6 ${
-          storageInfo.isFull ? "bg-red-50 border-2 border-red-300" : "bg-yellow-50 border-2 border-yellow-300"
-        }`}>
+        <div
+          className={`rounded-lg p-4 mb-6 ${
+            storageInfo.isFull
+              ? "bg-red-50 border-2 border-red-300"
+              : "bg-yellow-50 border-2 border-yellow-300"
+          }`}
+        >
           <div className="flex items-start gap-3">
             <div className="text-2xl">{storageInfo.isFull ? "⚠️" : "⚡"}</div>
             <div className="flex-1">
-              <h3 className={`font-bold mb-1 ${
-                storageInfo.isFull ? "text-red-700" : "text-yellow-700"
-              }`}>
+              <h3
+                className={`font-bold mb-1 ${
+                  storageInfo.isFull ? "text-red-700" : "text-yellow-700"
+                }`}
+              >
                 {storageInfo.isFull ? "存储空间已满" : "存储空间即将满"}
               </h3>
               <p className="text-sm text-gray-700 mb-3">
@@ -135,11 +144,15 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
                 <div className="w-full bg-gray-200 rounded-full h-3">
                   <div
                     className={`h-3 rounded-full transition-all ${
-                      storageInfo.isFull ? "bg-red-600" :
-                      storageInfo.isNearFull ? "bg-yellow-500" :
-                      "bg-green-500"
+                      storageInfo.isFull
+                        ? "bg-red-600"
+                        : storageInfo.isNearFull
+                          ? "bg-yellow-500"
+                          : "bg-green-500"
                     }`}
-                    style={{ width: `${Math.min(storageInfo.usagePercent, 100)}%` }}
+                    style={{
+                      width: `${Math.min(storageInfo.usagePercent, 100)}%`,
+                    }}
                   ></div>
                 </div>
                 <p className="text-xs text-gray-600 mt-1">
@@ -150,7 +163,11 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
 
             <div className="space-y-3 mb-6">
               <p className="text-sm text-gray-600">
-                当前共有 <span className="font-bold text-purple-600">{getAllEntries().length}</span> 条记录
+                当前共有{" "}
+                <span className="font-bold text-purple-600">
+                  {getAllEntries().length}
+                </span>{" "}
+                条记录
               </p>
 
               <button
@@ -243,7 +260,11 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
                 </div>
                 <div className="bg-white rounded-lg p-4">
                   <div className="text-center">
-                    <div className={`text-2xl font-bold mb-1 ${getStressColor(stats.averageStress)}`}>
+                    <div
+                      className={`text-2xl font-bold mb-1 ${getStressColor(
+                        stats.averageStress,
+                      )}`}
+                    >
                       {stats.averageStress}
                     </div>
                     <div className="text-sm text-gray-600">Avg Stress</div>
@@ -259,7 +280,11 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
                 </div>
                 <div className="bg-white rounded-lg p-4">
                   <div className="text-center">
-                    <div className={`text-2xl font-bold mb-1 ${getMoodColor(stats.averageMood)}`}>
+                    <div
+                      className={`text-2xl font-bold mb-1 ${getMoodColor(
+                        stats.averageMood,
+                      )}`}
+                    >
                       {stats.averageMood}
                     </div>
                     <div className="text-sm text-gray-600">Avg Mood</div>
@@ -274,10 +299,14 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
             <div className="bg-white rounded-lg p-6 mb-8">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="font-semibold text-gray-800">
-                  {activeTab === "all" && `Recent Entries (${recentEntries.length})`}
-                  {activeTab === "today" && `Today's Entries (${entries.length})`}
-                  {activeTab === "week" && `This Week's Entries (${entries.length})`}
-                  {activeTab === "month" && `This Month's Entries (${entries.length})`}
+                  {activeTab === "all" &&
+                    `Recent Entries (${recentEntries.length})`}
+                  {activeTab === "today" &&
+                    `Today's Entries (${entries.length})`}
+                  {activeTab === "week" &&
+                    `This Week's Entries (${entries.length})`}
+                  {activeTab === "month" &&
+                    `This Month's Entries (${entries.length})`}
                 </h3>
                 {activeTab === "all" && entries.length > 5 && (
                   <span className="text-sm text-gray-500">
@@ -300,13 +329,23 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
                     </button>
                     <div className="flex justify-between items-start mb-2 pr-20">
                       <div className="text-sm text-gray-600">
-                        {activeTab === "today" ? formatTime(entry.date) : formatDate(entry.date)}
+                        {activeTab === "today"
+                          ? formatTime(entry.date)
+                          : formatDate(entry.date)}
                       </div>
                       <div className="flex gap-4">
-                        <span className={`font-semibold ${getStressColor(entry.stressLevel)}`}>
+                        <span
+                          className={`font-semibold ${getStressColor(
+                            entry.stressLevel,
+                          )}`}
+                        >
                           Stress: {entry.stressLevel}/10
                         </span>
-                        <span className={`font-semibold ${getMoodColor(entry.moodRating)}`}>
+                        <span
+                          className={`font-semibold ${getMoodColor(
+                            entry.moodRating,
+                          )}`}
+                        >
                           Mood: {entry.moodRating}/10
                         </span>
                       </div>
@@ -324,7 +363,9 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
                       </div>
                     )}
                     {entry.notes && (
-                      <p className="text-sm text-gray-700 italic mt-2">"{entry.notes}"</p>
+                      <p className="text-sm text-gray-700 italic mt-2">
+                        &quot;{entry.notes}&quot;
+                      </p>
                     )}
                   </div>
                 ))}

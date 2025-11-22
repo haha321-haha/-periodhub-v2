@@ -81,3 +81,11 @@ export function analyzeDataByType(type: string): TypeAnalysisResult | null {
     data: dataPoints.map((p) => p.data),
   };
 }
+
+/**
+ * 导出 realDataAnalyzer 对象（兼容性）
+ */
+export const realDataAnalyzer = {
+  analyzeAllData,
+  analyzeDataByType,
+};

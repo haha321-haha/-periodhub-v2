@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { unstable_setRequestLocale as setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 import { Metadata } from "next";

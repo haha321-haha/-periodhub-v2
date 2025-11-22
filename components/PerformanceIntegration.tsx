@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import PerformanceMonitorComponent from "./PerformanceMonitor";
+import { logInfo, logWarn } from "@/lib/debug-logger";
 
 // 性能监控集成组件
 export default function PerformanceIntegration() {
@@ -14,7 +15,11 @@ export default function PerformanceIntegration() {
     if (!isEnabled) return;
 
     // 添加性能监控到页面
-    console.log("🚀 Performance monitoring enabled");
+    logInfo(
+      "🚀 Performance monitoring enabled",
+      undefined,
+      "PerformanceIntegration/useEffect",
+    );
   }, []);
 
   return (
@@ -40,13 +45,17 @@ export function usePerformanceMonitoring() {
       )[0] as PerformanceNavigationTiming;
 
       if (navigation) {
-        console.log("📊 Page Load Performance:", {
-          domContentLoaded:
-            navigation.domContentLoadedEventEnd -
-            navigation.domContentLoadedEventStart,
-          loadComplete: navigation.loadEventEnd - navigation.loadEventStart,
-          totalTime: navigation.loadEventEnd - navigation.fetchStart,
-        });
+        logInfo(
+          "📊 Page Load Performance:",
+          {
+            domContentLoaded:
+              navigation.domContentLoadedEventEnd -
+              navigation.domContentLoadedEventStart,
+            loadComplete: navigation.loadEventEnd - navigation.loadEventStart,
+            totalTime: navigation.loadEventEnd - navigation.fetchStart,
+          },
+          "PerformanceIntegration/usePerformanceMonitoring",
+        );
       }
     };
 
@@ -58,12 +67,13 @@ export function usePerformanceMonitoring() {
       );
 
       if (slowResources.length > 0) {
-        console.warn(
+        logWarn(
           "⚠️ Slow resources detected:",
           slowResources.map((r) => ({
             name: r.name,
             duration: r.duration,
           })),
+          "PerformanceIntegration/usePerformanceMonitoring",
         );
       }
     };

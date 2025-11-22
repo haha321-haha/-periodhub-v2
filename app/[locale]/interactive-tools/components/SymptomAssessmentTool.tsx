@@ -60,7 +60,7 @@ export default function SymptomAssessmentTool({
   const [selectedAnswers, setSelectedAnswers] = useState<SelectedAnswersState>(
     {},
   );
-  // const [showSettings, setShowSettings] = useState(false); // unused
+  const [showSettings, setShowSettings] = useState(false);
   const [sessionData, setSessionData] = useState<SessionMeta>({
     sessionId: "",
     startTime: "",

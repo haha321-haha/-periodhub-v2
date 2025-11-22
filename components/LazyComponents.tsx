@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Suspense, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // 📱 移动端优化：动态导入重型组件
 // 这些组件只在需要时才加载，减少初始包大小

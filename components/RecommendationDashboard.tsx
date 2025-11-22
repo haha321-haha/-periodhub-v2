@@ -1,7 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { logError } from "@/lib/debug-logger";
 
 interface RecommendationStats {
   totalDisplays: number;
@@ -20,65 +21,65 @@ interface CacheStats {
 // 国际化文本
 const TEXTS = {
   zh: {
-    title: '推荐系统仪表板',
-    subtitle: '监控文章推荐效果和系统性能',
+    title: "推荐系统仪表板",
+    subtitle: "监控文章推荐效果和系统性能",
     timeRange: {
-      '24h': '24小时',
-      '7d': '7天',
-      '30d': '30天',
-      'all': '全部'
+      "24h": "24小时",
+      "7d": "7天",
+      "30d": "30天",
+      all: "全部",
     },
     metrics: {
-      displays: '推荐展示次数',
-      clicks: '推荐点击次数',
-      ctr: '点击率 (CTR)'
+      displays: "推荐展示次数",
+      clicks: "推荐点击次数",
+      ctr: "点击率 (CTR)",
     },
     cache: {
-      title: '缓存统计',
-      clearButton: '清空缓存',
-      entries: '缓存条目',
-      usage: '缓存使用率',
-      ttl: '缓存TTL',
-      minutes: '分钟'
+      title: "缓存统计",
+      clearButton: "清空缓存",
+      entries: "缓存条目",
+      usage: "缓存使用率",
+      ttl: "缓存TTL",
+      minutes: "分钟",
     },
-    topRecommended: '最常被推荐的文章',
-    topClicked: '最常被点击的推荐文章',
-    times: '次',
+    topRecommended: "最常被推荐的文章",
+    topClicked: "最常被点击的推荐文章",
+    times: "次",
     alerts: {
-      cacheCleared: '缓存已清空',
-      cacheClearFailed: '清空缓存失败'
-    }
+      cacheCleared: "缓存已清空",
+      cacheClearFailed: "清空缓存失败",
+    },
   },
   en: {
-    title: 'Recommendation System Dashboard',
-    subtitle: 'Monitor article recommendation performance and system metrics',
+    title: "Recommendation System Dashboard",
+    subtitle: "Monitor article recommendation performance and system metrics",
     timeRange: {
-      '24h': '24 Hours',
-      '7d': '7 Days',
-      '30d': '30 Days',
-      'all': 'All Time'
+      "24h": "24 Hours",
+      "7d": "7 Days",
+      "30d": "30 Days",
+      all: "All Time",
     },
     metrics: {
-      displays: 'Recommendation Displays',
-      clicks: 'Recommendation Clicks',
-      ctr: 'Click-Through Rate (CTR)'
+      displays: "Recommendation Displays",
+      clicks: "Recommendation Clicks",
+      ctr: "Click-Through Rate (CTR)",
     },
     cache: {
-      title: 'Cache Statistics',
-      clearButton: 'Clear Cache',
-      entries: 'Cache Entries',
-      usage: 'Cache Usage',
-      ttl: 'Cache TTL',
-      minutes: 'minutes'
+      title: "Cache Statistics",
+      clearButton: "Clear Cache",
+      entries: "Cache Entries",
+      usage: "Cache Usage",
+      ttl: "Cache TTL",
+      minutes: "minutes",
     },
-    topRecommended: 'Most Recommended Articles',
-    topClicked: 'Most Clicked Recommended Articles',
-    times: 'times',
+    topRecommended: "Most Recommended Articles",
+    topClicked: "Most Clicked Recommended Articles",
+    times: "times",
     alerts: {
-      cacheCleared: 'Cache cleared successfully',
-      cacheClearFailed: 'Failed to clear cache'
-    }
-  }
+      cacheCleared: "Cache cleared successfully",
+      cacheClearFailed: "Failed to clear cache",
+    },
+  },
 };
 
 /**
@@ -87,13 +88,15 @@ const TEXTS = {
  */
 export default function RecommendationDashboard() {
   const params = useParams();
-  const locale = (params?.locale as string) || 'zh';
+  const locale = (params?.locale as string) || "zh";
   const t = TEXTS[locale as keyof typeof TEXTS] || TEXTS.zh;
 
   const [stats, setStats] = useState<RecommendationStats | null>(null);
   const [cacheStats, setCacheStats] = useState<CacheStats | null>(null);
   const [loading, setLoading] = useState(true);
-  const [timeRange, setTimeRange] = useState<'24h' | '7d' | '30d' | 'all'>('24h');
+  const [timeRange, setTimeRange] = useState<"24h" | "7d" | "30d" | "all">(
+    "24h",
+  );
 
   useEffect(() => {
     fetchStats();
@@ -102,12 +105,18 @@ export default function RecommendationDashboard() {
   const fetchStats = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/recommendation-stats?range=${timeRange}`);
+      const response = await fetch(
+        `/api/recommendation-stats?range=${timeRange}`,
+      );
       const data = await response.json();
       setStats(data.stats);
       setCacheStats(data.cacheStats);
     } catch (error) {
-      console.error('Failed to fetch recommendation stats:', error);
+      logError(
+        "Failed to fetch recommendation stats:",
+        error,
+        "RecommendationDashboard/fetchStats",
+      );
     } finally {
       setLoading(false);
     }
@@ -115,11 +124,15 @@ export default function RecommendationDashboard() {
 
   const clearCache = async () => {
     try {
-      await fetch('/api/recommendation-cache', { method: 'DELETE' });
+      await fetch("/api/recommendation-cache", { method: "DELETE" });
       alert(t.alerts.cacheCleared);
       fetchStats();
     } catch (error) {
-      console.error('Failed to clear cache:', error);
+      logError(
+        "Failed to clear cache:",
+        error,
+        "RecommendationDashboard/clearCache",
+      );
       alert(t.alerts.cacheClearFailed);
     }
   };
@@ -145,14 +158,14 @@ export default function RecommendationDashboard() {
 
       {/* 时间范围选择 */}
       <div className="mb-6 flex gap-2">
-        {(['24h', '7d', '30d', 'all'] as const).map((range) => (
+        {(["24h", "7d", "30d", "all"] as const).map((range) => (
           <button
             key={range}
             onClick={() => setTimeRange(range)}
             className={`px-4 py-2 rounded ${
               timeRange === range
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 text-gray-700'
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 text-gray-700"
             }`}
           >
             {t.timeRange[range]}
@@ -164,19 +177,25 @@ export default function RecommendationDashboard() {
       {stats && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">{t.metrics.displays}</h3>
+            <h3 className="text-gray-500 text-sm font-medium mb-2">
+              {t.metrics.displays}
+            </h3>
             <p className="text-3xl font-bold text-blue-600">
               {stats.totalDisplays.toLocaleString()}
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">{t.metrics.clicks}</h3>
+            <h3 className="text-gray-500 text-sm font-medium mb-2">
+              {t.metrics.clicks}
+            </h3>
             <p className="text-3xl font-bold text-green-600">
               {stats.totalClicks.toLocaleString()}
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-gray-500 text-sm font-medium mb-2">{t.metrics.ctr}</h3>
+            <h3 className="text-gray-500 text-sm font-medium mb-2">
+              {t.metrics.ctr}
+            </h3>
             <p className="text-3xl font-bold text-purple-600">
               {stats.clickThroughRate.toFixed(2)}%
             </p>

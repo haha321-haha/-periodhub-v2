@@ -266,7 +266,10 @@ export default function StressAssessmentWidget() {
     };
   };
 
-  const getPersonalizedActionSteps = (answers: number[], level: string) => {
+  const getPersonalizedActionSteps = (
+    answers: number[], // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _level: string,
+  ) => {
     const steps = [
       {
         title: "Establish Sleep Routine",
@@ -318,7 +321,10 @@ export default function StressAssessmentWidget() {
     return steps;
   };
 
-  const getPersonalizedRecommendations = (answers: number[], level: string) => {
+  const getPersonalizedRecommendations = (
+    answers: number[], // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _level: string,
+  ) => {
     const recommendations = [];
     const avgScore =
       answers.reduce((sum, answer) => sum + answer, 0) / answers.length;

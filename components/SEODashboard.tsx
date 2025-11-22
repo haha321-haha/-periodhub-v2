@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { logError } from "@/lib/debug-logger";
 
 interface SEOMetrics {
   score: number;
@@ -27,7 +28,7 @@ export function SEODashboard() {
       const data = await response.json();
       setMetrics(data);
     } catch (error) {
-      console.error("获取SEO指标失败:", error);
+      logError("获取SEO指标失败:", error, "SEODashboard/useEffect");
     } finally {
       setLoading(false);
     }

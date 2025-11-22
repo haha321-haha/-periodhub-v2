@@ -28,7 +28,7 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "teenHealth" });
+  // const t = await getTranslations({ locale, namespace: "teenHealth" }); // Unused
 
   return {
     title:
@@ -66,7 +66,7 @@ export default async function DevelopmentPainPage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
 
-  const t = await getTranslations("scenarioSolutionsPage");
+  // const t = await getTranslations("scenarioSolutionsPage"); // Unused
   const breadcrumbT = await getTranslations("interactiveTools.breadcrumb");
 
   const painCharacteristics = [

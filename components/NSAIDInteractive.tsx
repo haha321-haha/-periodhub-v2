@@ -4,12 +4,16 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 // ✅ 静态导入CSS文件（修复动态加载问题）
 import "@/app/styles/nsaid-interactive.css";
+import { logInfo, logError } from "@/lib/debug-logger";
 
 interface NSAIDInteractiveProps {
   locale: "en" | "zh";
 }
 
-export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
+export default function NSAIDInteractive({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  locale: _locale,
+}: NSAIDInteractiveProps) {
   // Feature flag: enable via NEXT_PUBLIC_ENABLE_NSAID_INTERACTIVE=true
   const ENABLE_NSAID_INTERACTIVE =
     process.env.NEXT_PUBLIC_ENABLE_NSAID_INTERACTIVE === "true";
@@ -18,7 +22,11 @@ export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    console.log("🔧 NSAIDInteractive component mounted");
+    logInfo(
+      "🔧 NSAIDInteractive component mounted",
+      undefined,
+      "NSAIDInteractive/useEffect",
+    );
     setIsClient(true);
     // ✅ CSS已通过静态导入加载，无需动态加载
   }, []);
@@ -40,8 +48,20 @@ export default function NSAIDInteractive({ locale }: NSAIDInteractiveProps) {
           typeof window !== "undefined" ? window.location.origin : ""
         }/scripts/nsaid-interactive.js`}
         strategy="lazyOnload"
-        onLoad={() => console.log("✅ NSAID interactive script loaded")}
-        onError={(e) => console.error("❌ NSAID interactive script failed:", e)}
+        onLoad={() =>
+          logInfo(
+            "✅ NSAID interactive script loaded",
+            undefined,
+            "NSAIDInteractive/Script",
+          )
+        }
+        onError={(e) =>
+          logError(
+            "❌ NSAID interactive script failed:",
+            e,
+            "NSAIDInteractive/Script",
+          )
+        }
       />
     </>
   );

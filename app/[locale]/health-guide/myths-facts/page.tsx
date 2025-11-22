@@ -22,10 +22,11 @@ export async function generateMetadata({
       : "Clarify common misconceptions about menstrual health, replace false beliefs with scientific facts.";
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
-    "health-guide/myths-facts",
-  );
+  const alternatesData = generateAlternatesConfig("health-guide/myths-facts");
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title,

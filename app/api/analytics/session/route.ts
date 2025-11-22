@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
         storedSessions: sessionStore.length,
       },
     });
-  } catch (_error) {
+  } catch {
     // Session data processing error
     return NextResponse.json<ApiResponse>(
       {
@@ -137,7 +137,7 @@ export async function GET(request: NextRequest) {
         returnedCount: limitedSessions.length,
       },
     });
-  } catch (_error) {
+  } catch {
     // Session data retrieval error
     return NextResponse.json<ApiResponse>(
       {
@@ -178,7 +178,7 @@ export async function DELETE(request: NextRequest) {
         },
       });
     }
-  } catch (_error) {
+  } catch {
     // Session data deletion error
     return NextResponse.json<ApiResponse>(
       {
@@ -192,7 +192,8 @@ export async function DELETE(request: NextRequest) {
 }
 
 // 辅助函数
-function hasValidConsent(userId: string): boolean {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function hasValidConsent(_userId: string): boolean {
   // 检查用户的同意状态
   // 在生产环境中，这里应该查询数据库
   return true; // 临时返回true，实际应该检查数据库中的同意记录

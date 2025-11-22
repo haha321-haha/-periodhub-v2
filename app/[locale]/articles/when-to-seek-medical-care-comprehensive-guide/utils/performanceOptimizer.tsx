@@ -127,20 +127,20 @@ export class MedicalCareGuidePerformanceMonitor {
     if (
       typeof window !== "undefined" &&
       (
-        window as Window & {
+        window as unknown as Window & {
           gtag?: (command: string, params: Record<string, unknown>) => void;
         }
       ).gtag
     ) {
       (
-        window as Window & {
+        window as unknown as Window & {
           gtag?: (command: string, params: Record<string, unknown>) => void;
         }
       ).gtag("event", "component_load", {
         component_name: componentName,
         load_time: Math.round(loadTime),
         page: "medical-care-guide",
-      });
+      } as Record<string, unknown>);
     }
   }
 
@@ -152,20 +152,20 @@ export class MedicalCareGuidePerformanceMonitor {
     if (
       typeof window !== "undefined" &&
       (
-        window as Window & {
+        window as unknown as Window & {
           gtag?: (command: string, params: Record<string, unknown>) => void;
         }
       ).gtag
     ) {
       (
-        window as Window & {
+        window as unknown as Window & {
           gtag?: (command: string, params: Record<string, unknown>) => void;
         }
       ).gtag("event", "user_interaction", {
         interaction_type: interaction,
         component_name: componentName,
         page: "medical-care-guide",
-      });
+      } as Record<string, unknown>);
     }
   }
 
@@ -176,20 +176,20 @@ export class MedicalCareGuidePerformanceMonitor {
     if (
       typeof window !== "undefined" &&
       (
-        window as Window & {
+        window as unknown as Window & {
           gtag?: (command: string, params: Record<string, unknown>) => void;
         }
       ).gtag
     ) {
       (
-        window as Window & {
+        window as unknown as Window & {
           gtag?: (command: string, params: Record<string, unknown>) => void;
         }
       ).gtag("event", "assessment_completed", {
         assessment_type: assessmentType,
         duration: Math.round(duration),
         page: "medical-care-guide",
-      });
+      } as Record<string, unknown>);
     }
   }
 

@@ -15,6 +15,7 @@ export interface Article {
   updatedAt: string;
   readingTime: number;
   featured: boolean;
+  content?: string; // 文章内容（可选）
   // 兼容性属性
   title_zh?: string;
   seo_title_zh?: string;
@@ -145,4 +146,11 @@ export function getRelatedArticles(
       article.slug !== currentSlug &&
       article.category === currentArticle.category,
   ).slice(0, count);
+}
+
+/**
+ * 获取文章列表（别名，兼容性）
+ */
+export function getArticlesList(): Article[] {
+  return getAllArticles();
 }

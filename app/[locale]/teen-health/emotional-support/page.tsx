@@ -5,11 +5,9 @@ import {
   Brain,
   Heart,
   Moon,
-  Music,
   PenTool,
   Users,
   AlertTriangle,
-  CheckCircle,
   ArrowLeft,
   ArrowRight,
   MessageCircle,
@@ -29,7 +27,7 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "teenHealth" });
+  // const t = await getTranslations({ locale, namespace: "teenHealth" }); // Unused
 
   const title =
     locale === "zh"
@@ -77,7 +75,7 @@ export default async function EmotionalSupportPage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
 
-  const t = await getTranslations("scenarioSolutionsPage");
+  // const t = await getTranslations("scenarioSolutionsPage"); // Unused
   const breadcrumbT = await getTranslations("interactiveTools.breadcrumb");
 
   const emotionalSymptoms = [

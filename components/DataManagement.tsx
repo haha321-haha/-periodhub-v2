@@ -28,7 +28,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
       setAssessments(data);
       const info = LocalStorageManager.getStorageInfo();
       setStorageInfo(info);
-    } catch (_error) {
+    } catch {
       setMessage("Failed to load data");
     }
   };
@@ -49,7 +49,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
       setMessage("Data exported successfully!");
-    } catch (_error) {
+    } catch {
       setMessage("Export failed, please try again");
     }
   };
@@ -67,7 +67,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
       setStorageInfo({ count: 0, lastAssessment: null });
       setShowConfirmDelete(false);
       setMessage("All data deleted");
-    } catch (_error) {
+    } catch {
       setMessage("Delete failed, please try again");
     }
   };

@@ -1,15 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import {
-  Search,
-  X,
-  Filter,
-  SortAsc,
-  SortDesc,
-  Clock,
-  Bookmark,
-} from "lucide-react";
+import { Search, X, Clock } from "lucide-react";
+import { logError } from "@/lib/debug-logger";
 
 // 搜索结果类型
 export interface SearchResult {
@@ -89,7 +82,7 @@ export const useSearch = (
         }
       } catch (err) {
         setError("搜索失败，请重试");
-        console.error("Search error:", err);
+        logError("Search error:", err, "SearchSystem/handleSearch");
       } finally {
         setIsLoading(false);
       }
@@ -159,7 +152,7 @@ export const useSearch = (
 };
 
 // 防抖函数
-function debounce<T extends (...args: any[]) => any>(
+function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number,
 ): (...args: Parameters<T>) => void {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { logInfo } from "@/lib/debug-logger";
 
 /**
  * Hydration修复组件
@@ -28,7 +29,11 @@ export default function HydrationFix() {
     extensionClasses.forEach((className) => {
       if (htmlElement.classList.contains(className)) {
         htmlElement.classList.remove(className);
-        console.log(`[HydrationFix] 移除了浏览器扩展添加的类名: ${className}`);
+        logInfo(
+          `[HydrationFix] 移除了浏览器扩展添加的类名: ${className}`,
+          { className },
+          "HydrationFix",
+        );
       }
     });
 
@@ -75,7 +80,11 @@ export default function HydrationFix() {
           node.textContent = text
             .replace(/语言语言/g, "语言")
             .replace(/Language Language/g, "Language");
-          console.log("[HydrationFix] 修复了重复文本:", text);
+          logInfo(
+            "[HydrationFix] 修复了重复文本:",
+            { text },
+            "HydrationFix/fixDuplicateText",
+          );
         }
       }
     };
@@ -104,7 +113,11 @@ export default function HydrationFix() {
           attributesToRemove.forEach((attr) => {
             if (target.hasAttribute(attr)) {
               target.removeAttribute(attr);
-              console.log(`[HydrationFix] 动态移除了翻译扩展属性: ${attr}`);
+              logInfo(
+                `[HydrationFix] 动态移除了翻译扩展属性: ${attr}`,
+                { attr },
+                "HydrationFix/MutationObserver",
+              );
             }
           });
         }
@@ -123,8 +136,10 @@ export default function HydrationFix() {
               attributesToRemove.forEach((attr) => {
                 if (element.hasAttribute(attr)) {
                   element.removeAttribute(attr);
-                  console.log(
+                  logInfo(
                     `[HydrationFix] 移除了新添加元素的翻译扩展属性: ${attr}`,
+                    { attr },
+                    "HydrationFix/MutationObserver",
                   );
                 }
               });
@@ -140,7 +155,11 @@ export default function HydrationFix() {
                 node.textContent = text
                   .replace(/语言语言/g, "语言")
                   .replace(/Language Language/g, "Language");
-                console.log("[HydrationFix] 修复了新添加节点的重复文本:", text);
+                logInfo(
+                  "[HydrationFix] 修复了新添加节点的重复文本:",
+                  { text },
+                  "HydrationFix/MutationObserver",
+                );
               }
             }
           });

@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { useABTest } from "@/hooks/useABTest";
 import { useCTATracking } from "@/hooks/useCTATracking";
 import { HERO_CTA_AB_TEST } from "@/config/ab-tests.config";
+import { logInfo } from "@/lib/debug-logger";
 
 /**
  * Hero区域CTA组件 - 集成A/B测试和事件追踪
@@ -28,19 +29,21 @@ export default function HeroABTest() {
 
   // 根据变体获取对应的文案
   const getCTAText = () => {
-    if (variant.id === 'optimized') {
-      return locale === 'zh' ? '获取缓解方案' : 'Get My Relief Plan';
+    if (variant.id === "optimized") {
+      return locale === "zh" ? "获取缓解方案" : "Get My Relief Plan";
     }
     // control组使用原始翻译
-    return locale === 'zh' ? '立即缓解' : 'Immediate Relief';
+    return locale === "zh" ? "立即缓解" : "Immediate Relief";
   };
 
   const getMicrocopy = () => {
-    if (variant.id === 'optimized') {
-      return locale === 'zh' ? '免费 • 3分钟 • 科学依据' : 'Free • 3 minutes • Science-based';
+    if (variant.id === "optimized") {
+      return locale === "zh"
+        ? "免费 • 3分钟 • 科学依据"
+        : "Free • 3 minutes • Science-based";
     }
     // control组使用简化版本
-    return locale === 'zh' ? '快速缓解方法' : 'Fast relief methods';
+    return locale === "zh" ? "快速缓解方法" : "Fast relief methods";
   };
 
   // CTA点击事件处理
@@ -48,45 +51,49 @@ export default function HeroABTest() {
     const buttonText = getCTAText();
 
     // A/B测试事件追踪
-    trackABEvent('hero_cta_click', {
+    trackABEvent("hero_cta_click", {
       button_text: buttonText,
       locale: locale,
-      destination: '/immediate-relief',
-      timestamp: new Date().toISOString()
+      destination: "/immediate-relief",
+      timestamp: new Date().toISOString(),
     });
 
     // CTA专用事件追踪
     trackCTAClick({
       buttonText: buttonText,
-      buttonLocation: 'hero_main',
-      destination: '/immediate-relief',
+      buttonLocation: "hero_main",
+      destination: "/immediate-relief",
       locale: locale,
       abTestVariant: variant.id,
-      abTestId: HERO_CTA_AB_TEST.testId
+      abTestId: HERO_CTA_AB_TEST.testId,
     });
   };
 
   // 组件挂载时记录展示事件和页面浏览
   React.useEffect(() => {
     // 仅在客户端且组件完全加载后执行
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // 页面浏览事件
       trackPageView({
-        pageTitle: 'Hero Section',
-        pageLocation: window.location.href
+        pageTitle: "Hero Section",
+        pageLocation: window.location.href,
       });
 
       // A/B测试展示事件
-      trackABEvent('hero_cta_impression', {
+      trackABEvent("hero_cta_impression", {
         variant_id: variant.id,
         variant_name: variant.name,
         locale: locale,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
 
       // 开发模式显示调试信息
-      if (process.env.NODE_ENV === 'development') {
-        console.log(`[AB Test] Hero CTA - Variant: ${variant.name} (${variant.id}), Locale: ${locale}`);
+      if (process.env.NODE_ENV === "development") {
+        logInfo(
+          `[AB Test] Hero CTA - Variant: ${variant.name} (${variant.id}), Locale: ${locale}`,
+          { variant, locale },
+          "HeroABTest/useEffect",
+        );
       }
     }
   }, [variant, locale, trackABEvent, trackPageView]);
@@ -111,11 +118,14 @@ export default function HeroABTest() {
       </p>
 
       {/* 开发模式显示变体标识和会话统计 */}
-      {process.env.NODE_ENV === 'development' && (
+      {process.env.NODE_ENV === "development" && (
         <div className="text-xs text-white/60 mt-1 space-y-1">
           <div>AB Test: {variant.name}</div>
           <div>Session: {sessionStats.sessionId.slice(0, 8)}...</div>
-          <div>Page Views: {sessionStats.pageViews} | CTA Clicks: {sessionStats.ctaClicks}</div>
+          <div>
+            Page Views: {sessionStats.pageViews} | CTA Clicks:{" "}
+            {sessionStats.ctaClicks}
+          </div>
         </div>
       )}
     </div>

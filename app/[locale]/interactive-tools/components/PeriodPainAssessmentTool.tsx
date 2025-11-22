@@ -32,7 +32,7 @@ export default function PeriodPainAssessmentTool({
   };
 
   const evaluateAssessment = () => {
-    let severity = "low";
+    let severity: "low" | "medium" | "high" = "low";
     let advice = "";
     let needConsult = false;
 

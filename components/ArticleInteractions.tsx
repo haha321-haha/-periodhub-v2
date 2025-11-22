@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Heart, Bookmark, Share2, Copy, Check, Eye } from "lucide-react";
+import { logError, logWarn } from "@/lib/debug-logger";
 
 interface ArticleInteractionsProps {
   articleId: string;
@@ -96,7 +97,11 @@ export default function ArticleInteractions({
       setCopySuccess(true);
       setTimeout(() => setCopySuccess(false), 2000);
     } catch (err) {
-      console.error("Failed to copy link:", err);
+      logError(
+        "Failed to copy link:",
+        err,
+        "ArticleInteractions/handleCopyLink",
+      );
     }
   };
 
@@ -163,8 +168,10 @@ export default function ArticleInteractions({
 
   // 如果 locale 无效，记录警告（仅在客户端）
   if (typeof window !== "undefined" && locale !== validLocale) {
-    console.warn(
+    logWarn(
       `[ArticleInteractions] Invalid locale '${locale}', falling back to '${validLocale}'`,
+      undefined,
+      "ArticleInteractions",
     );
   }
 

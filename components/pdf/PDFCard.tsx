@@ -7,11 +7,7 @@
 
 import React from "react";
 import { LocalizedPDFResource, Locale } from "@/types/pdf";
-import {
-  getAlternateLanguageLabel,
-  trackPDFDownload,
-  formatFileSize,
-} from "@/utils/pdfHelpers";
+import { formatFileSize } from "@/utils/pdfHelpers";
 import DownloadButton from "@/components/DownloadButton";
 import { useTranslations } from "next-intl";
 
@@ -24,17 +20,14 @@ interface PDFCardProps {
 
 export default function PDFCard({
   resource,
-  locale,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  locale: _locale,
   showDetails = true,
   className = "",
 }: PDFCardProps) {
   const t = useTranslations("pdfCardPdf");
 
-  const handleDownload = () => {
-    trackPDFDownload(resource.id, locale);
-  };
-
-  const alternateLanguageLabel = getAlternateLanguageLabel(locale);
+  // Removed unused functions: handleDownload, alternateLanguageLabel
 
   return (
     <div

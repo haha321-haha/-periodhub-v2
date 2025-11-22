@@ -14,10 +14,11 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "medicationGuide" });
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
-    "downloads/medication-guide",
-  );
+  const alternatesData = generateAlternatesConfig("downloads/medication-guide");
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title: t("title"),

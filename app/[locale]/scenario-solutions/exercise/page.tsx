@@ -148,10 +148,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
+  const alternatesData = generateAlternatesConfig(
     "scenario-solutions/exercise",
   );
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title: `${t("scenarios.exercise.title")} - ${t("title")}`,
@@ -182,34 +185,52 @@ export default async function ExerciseScenarioPage({ params }: Props) {
   const howToData = await generateHowToStructuredData({
     locale,
     scenarioSlug: "exercise",
-    name: isZh ? "运动期间痛经管理指南" : "Exercise Period Pain Management Guide",
+    name: isZh
+      ? "运动期间痛经管理指南"
+      : "Exercise Period Pain Management Guide",
     description: isZh
       ? "科学的运动期间痛经管理方法，包含运动强度选择、应急准备和身体监测"
       : "Scientific period pain management during exercise, including intensity selection, emergency preparation and body monitoring",
     steps: [
       {
-        name: isZh ? "选择合适的运动强度" : "Choose Appropriate Exercise Intensity",
-        text: isZh ? "根据经期阶段和疼痛程度，选择低到中等强度的运动" : "Choose low to moderate intensity exercise based on menstrual phase and pain level"
+        name: isZh
+          ? "选择合适的运动强度"
+          : "Choose Appropriate Exercise Intensity",
+        text: isZh
+          ? "根据经期阶段和疼痛程度，选择低到中等强度的运动"
+          : "Choose low to moderate intensity exercise based on menstrual phase and pain level",
       },
       {
         name: isZh ? "准备运动应急包" : "Prepare Exercise Emergency Kit",
-        text: isZh ? "携带热敷贴、止痛药、水和能量补充品" : "Carry heat patches, pain medication, water and energy supplements"
+        text: isZh
+          ? "携带热敷贴、止痛药、水和能量补充品"
+          : "Carry heat patches, pain medication, water and energy supplements",
       },
       {
         name: isZh ? "运动前充分热身" : "Warm Up Thoroughly Before Exercise",
-        text: isZh ? "进行10-15分钟的轻度热身，促进血液循环" : "Do 10-15 minutes of light warm-up to promote blood circulation"
+        text: isZh
+          ? "进行10-15分钟的轻度热身，促进血液循环"
+          : "Do 10-15 minutes of light warm-up to promote blood circulation",
       },
       {
-        name: isZh ? "运动中监测身体状况" : "Monitor Body Condition During Exercise",
-        text: isZh ? "注意疼痛变化，及时调整强度或休息" : "Pay attention to pain changes, adjust intensity or rest promptly"
+        name: isZh
+          ? "运动中监测身体状况"
+          : "Monitor Body Condition During Exercise",
+        text: isZh
+          ? "注意疼痛变化，及时调整强度或休息"
+          : "Pay attention to pain changes, adjust intensity or rest promptly",
       },
       {
         name: isZh ? "运动后适当放松" : "Relax Properly After Exercise",
-        text: isZh ? "进行拉伸和放松练习，帮助肌肉恢复" : "Do stretching and relaxation exercises to help muscle recovery"
+        text: isZh
+          ? "进行拉伸和放松练习，帮助肌肉恢复"
+          : "Do stretching and relaxation exercises to help muscle recovery",
       },
       {
         name: isZh ? "记录运动效果" : "Record Exercise Effects",
-        text: isZh ? "记录运动类型、强度和疼痛变化，找到最适合的运动方式" : "Record exercise type, intensity and pain changes to find the most suitable exercise method"
+        text: isZh
+          ? "记录运动类型、强度和疼痛变化，找到最适合的运动方式"
+          : "Record exercise type, intensity and pain changes to find the most suitable exercise method",
       },
     ],
     tools: [
@@ -428,352 +449,358 @@ export default async function ExerciseScenarioPage({ params }: Props) {
         data-page="scenario-exercise"
       >
         {/* Breadcrumb */}
-      <Breadcrumb
-        items={[
-          { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
-          { label: breadcrumbExerciseTitle },
-        ]}
-      />
+        <Breadcrumb
+          items={[
+            { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
+            { label: breadcrumbExerciseTitle },
+          ]}
+        />
 
-      {/* Page Header */}
-      <header className="text-center">
-        <div className="w-16 h-16 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Dumbbell className="w-8 h-8" />
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
-          {t("scenarios.exercise.title")}
-        </h1>
-        <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-          {t("scenarios.exercise.description")}
-        </p>
-      </header>
+        {/* Page Header */}
+        <header className="text-center">
+          <div className="w-16 h-16 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Dumbbell className="w-8 h-8" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
+            {t("scenarios.exercise.title")}
+          </h1>
+          <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+            {t("scenarios.exercise.description")}
+          </p>
+        </header>
 
-      {/* Hiking Guide Section */}
-      <section className="bg-gradient-to-br from-orange-50 to-neutral-50 p-6 md:p-8 rounded-xl">
-        <div className="flex items-center mb-6">
-          <Mountain className="w-6 h-6 text-orange-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "经期徒步三层防护体系"
-              : "Period Hiking Three-Layer Protection System"}
-          </h2>
-        </div>
+        {/* Hiking Guide Section */}
+        <section className="bg-gradient-to-br from-orange-50 to-neutral-50 p-6 md:p-8 rounded-xl">
+          <div className="flex items-center mb-6">
+            <Mountain className="w-6 h-6 text-orange-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "经期徒步三层防护体系"
+                : "Period Hiking Three-Layer Protection System"}
+            </h2>
+          </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-8">
-          {hikingGuide.preparation.map((prep, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold text-neutral-800 mb-4">
-                {prep.category}
-              </h3>
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            {hikingGuide.preparation.map((prep, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="text-lg font-semibold text-neutral-800 mb-4">
+                  {prep.category}
+                </h3>
+                <ul className="space-y-3">
+                  {prep.items.map((item, itemIndex) => (
+                    <li key={itemIndex} className="flex items-start">
+                      <CheckCircle className="w-4 h-4 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-neutral-700">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="bg-orange-100 p-4 rounded-lg">
+            <h4 className="font-semibold text-orange-800 mb-3">
+              {locale === "zh"
+                ? "徒步过程中注意事项"
+                : "Precautions During Hiking"}
+            </h4>
+            <ul className="space-y-2">
+              {hikingGuide.duringHike.map((note, index) => (
+                <li
+                  key={index}
+                  className="flex items-start text-sm text-orange-700"
+                >
+                  <span className="w-5 h-5 bg-orange-200 text-orange-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
+                    {index + 1}
+                  </span>
+                  {note}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Pool Safety Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Waves className="w-6 h-6 text-orange-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "泳池卫生风险防控"
+                : "Pool Hygiene Risk Prevention"}
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {poolSafety.requirements.map((req, index) => (
+              <div key={index} className="card text-center">
+                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  {req.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-neutral-800 mb-2">
+                  {req.indicator}
+                </h3>
+                <p className="text-sm text-neutral-600">{req.standard}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-blue-50 p-6 rounded-lg">
+              <h4 className="font-semibold text-blue-800 mb-4">
+                {locale === "zh" ? "推荐产品" : "Recommended Products"}
+              </h4>
               <ul className="space-y-3">
-                {prep.items.map((item, itemIndex) => (
-                  <li key={itemIndex} className="flex items-start">
-                    <CheckCircle className="w-4 h-4 text-orange-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-neutral-700">{item}</span>
+                {poolSafety.products.map((product, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start text-sm text-blue-700"
+                  >
+                    <CheckCircle className="w-4 h-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
+                    {product}
                   </li>
                 ))}
               </ul>
             </div>
-          ))}
-        </div>
 
-        <div className="bg-orange-100 p-4 rounded-lg">
-          <h4 className="font-semibold text-orange-800 mb-3">
-            {locale === "zh"
-              ? "徒步过程中注意事项"
-              : "Precautions During Hiking"}
-          </h4>
-          <ul className="space-y-2">
-            {hikingGuide.duringHike.map((note, index) => (
-              <li
-                key={index}
-                className="flex items-start text-sm text-orange-700"
-              >
-                <span className="w-5 h-5 bg-orange-200 text-orange-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
-                  {index + 1}
-                </span>
-                {note}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Pool Safety Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Waves className="w-6 h-6 text-orange-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "泳池卫生风险防控"
-              : "Pool Hygiene Risk Prevention"}
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          {poolSafety.requirements.map((req, index) => (
-            <div key={index} className="card text-center">
-              <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                {req.icon}
-              </div>
-              <h3 className="text-lg font-semibold text-neutral-800 mb-2">
-                {req.indicator}
-              </h3>
-              <p className="text-sm text-neutral-600">{req.standard}</p>
+            <div className="bg-green-50 p-6 rounded-lg">
+              <h4 className="font-semibold text-green-800 mb-4">
+                {locale === "zh" ? "卫生协议" : "Hygiene Protocol"}
+              </h4>
+              <ul className="space-y-3">
+                {poolSafety.protocol.map((step, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start text-sm text-green-700"
+                  >
+                    <span className="w-5 h-5 bg-green-200 text-green-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
+                      {index + 1}
+                    </span>
+                    {step}
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
-        </div>
+          </div>
+        </section>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-blue-50 p-6 rounded-lg">
-            <h4 className="font-semibold text-blue-800 mb-4">
-              {locale === "zh" ? "推荐产品" : "Recommended Products"}
-            </h4>
-            <ul className="space-y-3">
-              {poolSafety.products.map((product, index) => (
-                <li
-                  key={index}
-                  className="flex items-start text-sm text-blue-700"
-                >
-                  <CheckCircle className="w-4 h-4 text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
-                  {product}
-                </li>
-              ))}
-            </ul>
+        {/* Yoga Poses Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Heart className="w-6 h-6 text-orange-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh" ? "经期瑜伽体式库" : "Period Yoga Pose Library"}
+            </h2>
           </div>
 
-          <div className="bg-green-50 p-6 rounded-lg">
-            <h4 className="font-semibold text-green-800 mb-4">
-              {locale === "zh" ? "卫生协议" : "Hygiene Protocol"}
-            </h4>
-            <ul className="space-y-3">
-              {poolSafety.protocol.map((step, index) => (
-                <li
-                  key={index}
-                  className="flex items-start text-sm text-green-700"
-                >
-                  <span className="w-5 h-5 bg-green-200 text-green-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
-                    {index + 1}
+          <div className="grid md:grid-cols-2 gap-6 mb-8">
+            {yogaPoses.map((pose, index) => (
+              <div key={index} className="card">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-lg font-semibold text-neutral-800">
+                    {pose.name}
+                  </h3>
+                  <span className="text-xs text-neutral-500 italic">
+                    {pose.sanskrit}
                   </span>
-                  {step}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+                </div>
 
-      {/* Yoga Poses Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Heart className="w-6 h-6 text-orange-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh" ? "经期瑜伽体式库" : "Period Yoga Pose Library"}
-          </h2>
-        </div>
+                <div className="mb-4">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                    <Clock className="w-3 h-3 mr-1" />
+                    {pose.duration}
+                  </span>
+                </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          {yogaPoses.map((pose, index) => (
-            <div key={index} className="card">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-neutral-800">
-                  {pose.name}
-                </h3>
-                <span className="text-xs text-neutral-500 italic">
-                  {pose.sanskrit}
-                </span>
-              </div>
+                <p className="text-neutral-600 mb-4 text-sm">
+                  <strong>{locale === "zh" ? "功效：" : "Benefits: "}</strong>
+                  {pose.benefits}
+                </p>
 
-              <div className="mb-4">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
-                  <Clock className="w-3 h-3 mr-1" />
-                  {pose.duration}
-                </span>
-              </div>
-
-              <p className="text-neutral-600 mb-4 text-sm">
-                <strong>{locale === "zh" ? "功效：" : "Benefits: "}</strong>
-                {pose.benefits}
-              </p>
-
-              <div>
-                <h4 className="font-medium text-neutral-800 mb-2">
-                  {locale === "zh" ? "动作要点：" : "Key Points:"}
-                </h4>
-                <ol className="space-y-2">
-                  {pose.steps.map((step, stepIndex) => (
-                    <li
-                      key={stepIndex}
-                      className="flex items-start text-sm text-neutral-700"
-                    >
-                      <span className="w-5 h-5 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
-                        {stepIndex + 1}
-                      </span>
-                      {step}
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="bg-red-50 p-6 rounded-lg">
-          <h4 className="font-semibold text-red-800 mb-4 flex items-center">
-            <AlertTriangle className="w-5 h-5 mr-2" />
-            {locale === "zh"
-              ? "经期应避免的体式"
-              : "Poses to Avoid During Period"}
-          </h4>
-          <div className="grid md:grid-cols-2 gap-4">
-            {avoidPoses.map((pose, index) => (
-              <div
-                key={index}
-                className="flex items-center text-sm text-red-700"
-              >
-                <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
-                {pose}
+                <div>
+                  <h4 className="font-medium text-neutral-800 mb-2">
+                    {locale === "zh" ? "动作要点：" : "Key Points:"}
+                  </h4>
+                  <ol className="space-y-2">
+                    {pose.steps.map((step, stepIndex) => (
+                      <li
+                        key={stepIndex}
+                        className="flex items-start text-sm text-neutral-700"
+                      >
+                        <span className="w-5 h-5 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
+                          {stepIndex + 1}
+                        </span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Safety Guidelines */}
-      <section className="bg-yellow-50 p-6 md:p-8 rounded-xl">
-        <h3 className="text-lg font-semibold text-yellow-800 mb-4">
-          {locale === "zh" ? "运动安全指南" : "Exercise Safety Guidelines"}
-        </h3>
-        <div className="grid md:grid-cols-2 gap-6 text-sm text-yellow-700">
-          <div>
-            <h4 className="font-medium mb-2">
-              {locale === "zh" ? "运动强度控制" : "Exercise Intensity Control"}
+          <div className="bg-red-50 p-6 rounded-lg">
+            <h4 className="font-semibold text-red-800 mb-4 flex items-center">
+              <AlertTriangle className="w-5 h-5 mr-2" />
+              {locale === "zh"
+                ? "经期应避免的体式"
+                : "Poses to Avoid During Period"}
             </h4>
-            <ul className="space-y-1">
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "避免剧烈运动，选择中低强度活动"
-                  : "Avoid intense exercise, choose low-medium intensity activities"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "根据身体状况随时调整运动计划"
-                  : "Adjust exercise plan according to body condition"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "出现严重不适立即停止运动"
-                  : "Stop immediately if severe discomfort occurs"}
-              </li>
-            </ul>
+            <div className="grid md:grid-cols-2 gap-4">
+              {avoidPoses.map((pose, index) => (
+                <div
+                  key={index}
+                  className="flex items-center text-sm text-red-700"
+                >
+                  <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
+                  {pose}
+                </div>
+              ))}
+            </div>
           </div>
-          <div>
-            <h4 className="font-medium mb-2">
-              {locale === "zh" ? "补水与营养" : "Hydration & Nutrition"}
-            </h4>
-            <ul className="space-y-1">
-              <li>
-                •{" "}
+        </section>
+
+        {/* Safety Guidelines */}
+        <section className="bg-yellow-50 p-6 md:p-8 rounded-xl">
+          <h3 className="text-lg font-semibold text-yellow-800 mb-4">
+            {locale === "zh" ? "运动安全指南" : "Exercise Safety Guidelines"}
+          </h3>
+          <div className="grid md:grid-cols-2 gap-6 text-sm text-yellow-700">
+            <div>
+              <h4 className="font-medium mb-2">
                 {locale === "zh"
-                  ? "运动前后充分补水，选择温热饮品"
-                  : "Hydrate well before/after exercise, choose warm drinks"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "携带能量食物，如坚果、香蕉等"
-                  : "Carry energy foods like nuts, bananas"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "避免空腹运动，防止低血糖"
-                  : "Avoid exercising on empty stomach, prevent hypoglycemia"}
-              </li>
-            </ul>
+                  ? "运动强度控制"
+                  : "Exercise Intensity Control"}
+              </h4>
+              <ul className="space-y-1">
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "避免剧烈运动，选择中低强度活动"
+                    : "Avoid intense exercise, choose low-medium intensity activities"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "根据身体状况随时调整运动计划"
+                    : "Adjust exercise plan according to body condition"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "出现严重不适立即停止运动"
+                    : "Stop immediately if severe discomfort occurs"}
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium mb-2">
+                {locale === "zh" ? "补水与营养" : "Hydration & Nutrition"}
+              </h4>
+              <ul className="space-y-1">
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "运动前后充分补水，选择温热饮品"
+                    : "Hydrate well before/after exercise, choose warm drinks"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "携带能量食物，如坚果、香蕉等"
+                    : "Carry energy foods like nuts, bananas"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "避免空腹运动，防止低血糖"
+                    : "Avoid exercising on empty stomach, prevent hypoglycemia"}
+                </li>
+              </ul>
+            </div>
           </div>
+        </section>
+
+        {/* 相关推荐区域 */}
+        <section className="bg-gradient-to-br from-orange-50 to-blue-50 mt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="space-y-12">
+              {/* 相关工具区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "相关工具" : "Related Tools"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.relatedTools.map((tool) => (
+                    <RelatedToolCard
+                      key={tool.id}
+                      tool={tool}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 相关文章区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "相关文章" : "Related Articles"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.relatedArticles.map((article) => (
+                    <RelatedArticleCard
+                      key={article.id}
+                      article={article}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 场景解决方案区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "场景解决方案" : "Scenario Solutions"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {recommendations.scenarioSolutions.map((solution) => (
+                    <ScenarioSolutionCard
+                      key={solution.id}
+                      solution={solution}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        {/* Back to Overview */}
+        <div className="text-center">
+          <Link
+            href={`/${locale}/scenario-solutions`}
+            className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t("scenarios.exercise.backToOverview")}
+          </Link>
         </div>
-      </section>
 
-      {/* 相关推荐区域 */}
-      <section className="bg-gradient-to-br from-orange-50 to-blue-50 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="space-y-12">
-            {/* 相关工具区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关工具" : "Related Tools"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.relatedTools.map((tool) => (
-                  <RelatedToolCard key={tool.id} tool={tool} locale={locale} />
-                ))}
-              </div>
-            </section>
-
-            {/* 相关文章区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关文章" : "Related Articles"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.relatedArticles.map((article) => (
-                  <RelatedArticleCard
-                    key={article.id}
-                    article={article}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </section>
-
-            {/* 场景解决方案区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "场景解决方案" : "Scenario Solutions"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {recommendations.scenarioSolutions.map((solution) => (
-                  <ScenarioSolutionCard
-                    key={solution.id}
-                    solution={solution}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </section>
+        {/* Medical Disclaimer */}
+        <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
+          <div className="flex items-start">
+            <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
+            <div>
+              <h3 className="font-semibold text-orange-800 mb-2">
+                {t("scenarios.exercise.disclaimer.title")}
+              </h3>
+              <p className="text-orange-700 text-sm leading-relaxed">
+                {t("scenarios.exercise.disclaimer.content")}
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Back to Overview */}
-      <div className="text-center">
-        <Link
-          href={`/${locale}/scenario-solutions`}
-          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          {t("scenarios.exercise.backToOverview")}
-        </Link>
-      </div>
-
-      {/* Medical Disclaimer */}
-      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
-        <div className="flex items-start">
-          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
-          <div>
-            <h3 className="font-semibold text-orange-800 mb-2">
-              {t("scenarios.exercise.disclaimer.title")}
-            </h3>
-            <p className="text-orange-700 text-sm leading-relaxed">
-              {t("scenarios.exercise.disclaimer.content")}
-            </p>
-          </div>
-        </div>
-      </section>
+        </section>
       </div>
     </>
   );

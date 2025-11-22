@@ -9,8 +9,6 @@ import {
   TrendingUp,
   Download,
   ExternalLink,
-  Star,
-  Zap,
   Eye,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -18,6 +16,7 @@ import { Locale } from "@/i18n";
 import { PDF_RESOURCES, getPDFResourceById } from "@/config/pdfResources";
 import type { PDFResource as ConfigPDFResource } from "@/config/pdfResources";
 import { SITE_CONFIG } from "@/config/site.config";
+import { logInfo, logError } from "@/lib/debug-logger";
 
 interface OptimizedMobilePDFCenterProps {
   locale: Locale;
@@ -54,7 +53,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
   const [activeCategory, setActiveCategory] = useState("immediate");
   const [searchTerm, setSearchTerm] = useState("");
   const [loadedCategories, setLoadedCategories] = useState(["immediate"]); // 渐进式加载
-  const [isEmergencyMode, setIsEmergencyMode] = useState(false);
+  // const [isEmergencyMode, setIsEmergencyMode] = useState(false); // Unused
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
@@ -338,7 +337,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     let title: string;
     try {
       title = articlesT(`${categoryKey}.articles.${articleKey}`);
-    } catch (_error) {
+    } catch {
       // 如果翻译键不存在，使用slug作为标题
       title = slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
     }
@@ -975,6 +974,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
   );
 
   // 智能搜索算法
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const semanticSearch = useMemo(() => {
     const urgentKeywords =
       locale === "zh"
@@ -1700,6 +1700,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     }
   }, [searchTerm, activeCategory, locale]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "highest":
@@ -1759,6 +1760,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
   }, [locale]);
 
   // PDF文件名获取 - 从统一配置获取
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getPDFFilename = (resourceId: string): string => {
     // 直接使用resourceId，因为PDF资源已经使用了配置文件中的正确ID
     const resource = getPDFResourceById(resourceId);
@@ -1771,7 +1773,11 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     const htmlFilename = `${resourceId}${locale === "en" ? "-en" : ""}.html`;
     const downloadUrl = `/downloads/${htmlFilename}`;
 
-    console.log(`下载HTML文档: ${resourceId} -> ${downloadUrl}`);
+    logInfo(
+      `下载HTML文档: ${resourceId} -> ${downloadUrl}`,
+      { resourceId, downloadUrl },
+      "OptimizedMobilePDFCenter/handleDownloadHTML",
+    );
 
     // 创建临时链接进行下载
     const link = document.createElement("a");
@@ -1809,13 +1815,17 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         alert("链接已复制到剪贴板！");
       }
     } catch (error) {
-      console.error("分享失败:", error);
+      logError("分享失败:", error, "OptimizedMobilePDFCenter/handleShare");
       // 降级到复制链接
       try {
         await navigator.clipboard.writeText(window.location.href);
         alert("链接已复制到剪贴板！");
       } catch (clipboardError) {
-        console.error("复制失败:", clipboardError);
+        logError(
+          "复制失败:",
+          clipboardError,
+          "OptimizedMobilePDFCenter/handleShare",
+        );
       }
     }
   };
@@ -1826,14 +1836,19 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     const htmlFilename = `${resourceId}${locale === "en" ? "-en" : ""}.html`;
     const directUrl = `/downloads/${htmlFilename}`;
 
-    console.log(`查看文档: ${resourceId} -> ${directUrl}`);
+    logInfo(
+      `查看文档: ${resourceId} -> ${directUrl}`,
+      { resourceId, directUrl },
+      "OptimizedMobilePDFCenter/handleViewDocument",
+    );
     window.open(directUrl, "_blank");
   };
 
   // 资源卡片组件
   const ResourceCard = ({
     resource,
-    categoryColor,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    categoryColor: _categoryColor,
   }: {
     resource: Resource;
     categoryColor: string;

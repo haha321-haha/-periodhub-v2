@@ -6,6 +6,7 @@ import {
   trackPageLoad,
   trackRouteChange,
 } from "@/lib/performance-monitor";
+import { logInfo } from "@/lib/debug-logger";
 
 interface PerformanceMonitorProps {
   enabled?: boolean;
@@ -29,7 +30,11 @@ export default function PerformanceMonitorComponent({
       const metrics = monitor.getMetrics();
 
       if (showConsole && Object.keys(metrics).length > 0) {
-        console.log("📊 Current Performance Metrics:", metrics);
+        logInfo(
+          "📊 Current Performance Metrics:",
+          metrics,
+          "PerformanceMonitor/useEffect",
+        );
       }
     }, 5000);
 
@@ -45,7 +50,7 @@ export default function PerformanceMonitorComponent({
 
 // 性能指标显示组件
 export function PerformanceMetricsDisplay() {
-  const [metrics, setMetrics] = useState<any>({});
+  const [metrics, setMetrics] = useState<Record<string, unknown>>({});
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {

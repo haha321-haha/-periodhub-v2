@@ -10,10 +10,13 @@ export async function generateMetadata({
   const isZh = locale === "zh";
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
+  const alternatesData = generateAlternatesConfig(
     "interactive-tools/p3-system-optimization",
   );
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title: isZh

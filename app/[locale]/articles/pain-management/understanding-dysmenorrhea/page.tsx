@@ -21,8 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
+  const alternatesData = generateAlternatesConfig(
     "articles/pain-management/understanding-dysmenorrhea",
   );
 
@@ -35,7 +34,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale === "zh"
         ? "从医学角度深入解析痛经的生理机制，了解原发性和继发性痛经的区别，为科学缓解疼痛提供理论基础。"
         : "In-depth analysis of the physiological mechanisms of dysmenorrhea from a medical perspective, understanding the difference between primary and secondary dysmenorrhea, providing theoretical basis for scientific pain relief.",
-    alternates,
+    alternates: {
+      canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+      languages: alternatesData,
+    },
     robots: {
       index: true,
       follow: true,

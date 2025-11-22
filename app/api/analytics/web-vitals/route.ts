@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function POST(_request: NextRequest) {
   try {
     // const metric = await request.json(); // Reserved for future use
@@ -12,7 +13,7 @@ export async function POST(_request: NextRequest) {
     // await saveMetricToDatabase(metric);
 
     return NextResponse.json({ success: true });
-  } catch (_error) {
+  } catch {
     // Error processing web vitals
     return NextResponse.json(
       { error: "Failed to process metric" },

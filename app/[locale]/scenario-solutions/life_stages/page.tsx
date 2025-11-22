@@ -160,10 +160,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
+  const alternatesData = generateAlternatesConfig(
     "scenario-solutions/life_stages",
   );
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title: `${t("scenarios.life_stages.title")} - ${t("title")}`,
@@ -202,37 +205,49 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
       : "Comprehensive period pain management strategies and health guidance from adolescence to perimenopause",
     steps: [
       {
-        name: isZh ? "青春期痛经管理（12-18岁）" : "Adolescent Period Pain Management (12-18 years)",
+        name: isZh
+          ? "青春期痛经管理（12-18岁）"
+          : "Adolescent Period Pain Management (12-18 years)",
         text: isZh
           ? "建立正确的健康观念，学习基础痛经知识，调整生活方式，获得校园应急支持"
           : "Establish correct health concepts, learn basic period pain knowledge, adjust lifestyle, get campus emergency support",
       },
       {
-        name: isZh ? "育龄期健康管理（18-35岁）" : "Reproductive Age Health Management (18-35 years)",
+        name: isZh
+          ? "育龄期健康管理（18-35岁）"
+          : "Reproductive Age Health Management (18-35 years)",
         text: isZh
           ? "平衡工作与健康，采用自然疗法和医疗干预相结合的方式管理痛经"
           : "Balance work and health, manage period pain with combination of natural therapy and medical intervention",
       },
       {
-        name: isZh ? "备孕期优化方案（25-35岁）" : "Pre-pregnancy Optimization (25-35 years)",
+        name: isZh
+          ? "备孕期优化方案（25-35岁）"
+          : "Pre-pregnancy Optimization (25-35 years)",
         text: isZh
           ? "进行孕前检查，排除继发性痛经，优化生育健康，调整生活方式"
           : "Conduct pre-pregnancy examination, rule out secondary dysmenorrhea, optimize reproductive health, adjust lifestyle",
       },
       {
-        name: isZh ? "围绝经期过渡管理（45-55岁）" : "Perimenopause Transition Management (45-55 years)",
+        name: isZh
+          ? "围绝经期过渡管理（45-55岁）"
+          : "Perimenopause Transition Management (45-55 years)",
         text: isZh
           ? "在医生指导下考虑荷尔蒙疗法，调整生活方式，获得心理支持"
           : "Consider hormone therapy under doctor's guidance, adjust lifestyle, get psychological support",
       },
       {
-        name: isZh ? "建立专业支持网络" : "Establish Professional Support Network",
+        name: isZh
+          ? "建立专业支持网络"
+          : "Establish Professional Support Network",
         text: isZh
           ? "联系妇产科医生、内分泌科医生、营养师和心理咨询师，建立长期健康管理关系"
           : "Contact gynecologists, endocrinologists, nutritionists and psychologists, establish long-term health management relationships",
       },
       {
-        name: isZh ? "持续健康监测与调整" : "Continuous Health Monitoring and Adjustment",
+        name: isZh
+          ? "持续健康监测与调整"
+          : "Continuous Health Monitoring and Adjustment",
         text: isZh
           ? "定期进行身体检查，追踪症状变化，根据不同生命阶段调整管理策略"
           : "Regular physical examinations, track symptom changes, adjust management strategies according to different life stages",
@@ -536,376 +551,382 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
         className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
         data-page="scenario-lifestages"
       >
-      {/* Breadcrumb */}
-      <Breadcrumb
-        items={[
-          { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
-          { label: breadcrumbLifeStagesTitle },
-        ]}
-      />
+        {/* Breadcrumb */}
+        <Breadcrumb
+          items={[
+            { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
+            { label: breadcrumbLifeStagesTitle },
+          ]}
+        />
 
-      {/* Page Header */}
-      <header className="text-center">
-        <div className="w-16 h-16 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Heart className="w-8 h-8" />
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
-          {t("scenarios.life_stages.title")}
-        </h1>
-        <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-          {t("scenarios.life_stages.description")}
-        </p>
-      </header>
+        {/* Page Header */}
+        <header className="text-center">
+          <div className="w-16 h-16 bg-red-50 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Heart className="w-8 h-8" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
+            {t("scenarios.life_stages.title")}
+          </h1>
+          <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+            {t("scenarios.life_stages.description")}
+          </p>
+        </header>
 
-      {/* Life Stages Section */}
-      <section className="space-y-12">
-        {lifeStages.map((stage, index) => (
-          <div
-            key={index}
-            className={`border-2 rounded-xl p-6 md:p-8 ${stage.borderColor}`}
-          >
-            <div className="flex items-center mb-6">
-              <div
-                className={`w-16 h-16 rounded-full flex items-center justify-center ${stage.color} mr-4`}
-              >
-                {stage.icon}
-              </div>
-              <div>
-                <h2 className="text-2xl font-semibold text-neutral-800 mb-2">
-                  {stage.stage}
-                </h2>
-                <div className="flex items-center space-x-4">
-                  <span className="bg-neutral-100 text-neutral-700 px-3 py-1 rounded-full text-sm font-medium">
-                    {stage.ageRange}
-                  </span>
-                  <p className="text-neutral-600">{stage.description}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-              {stage.keyFeatures.map((feature, featureIndex) => (
-                <div
-                  key={featureIndex}
-                  className="bg-white p-6 rounded-lg shadow-sm"
-                >
-                  <h3 className="text-lg font-semibold text-neutral-800 mb-4">
-                    {feature.title}
-                  </h3>
-                  <ul className="space-y-3">
-                    {feature.details.map((detail, detailIndex) => (
-                      <li key={detailIndex} className="flex items-start">
-                        <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-neutral-700">
-                          {detail}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
+        {/* Life Stages Section */}
+        <section className="space-y-12">
+          {lifeStages.map((stage, index) => (
             <div
-              className={`${stage.color
-                .replace("text-", "bg-")
-                .replace("-600", "-100")} p-4 rounded-lg`}
+              key={index}
+              className={`border-2 rounded-xl p-6 md:p-8 ${stage.borderColor}`}
             >
-              <h4
-                className={`font-semibold mb-3 ${stage.color
-                  .replace("bg-", "text-")
-                  .replace("-50", "-800")}`}
-              >
-                {locale === "zh" ? "专项工具包：" : "Specialized Toolkit:"}
-              </h4>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
-                {stage.emergencyKit.map((item, itemIndex) => (
+              <div className="flex items-center mb-6">
+                <div
+                  className={`w-16 h-16 rounded-full flex items-center justify-center ${stage.color} mr-4`}
+                >
+                  {stage.icon}
+                </div>
+                <div>
+                  <h2 className="text-2xl font-semibold text-neutral-800 mb-2">
+                    {stage.stage}
+                  </h2>
+                  <div className="flex items-center space-x-4">
+                    <span className="bg-neutral-100 text-neutral-700 px-3 py-1 rounded-full text-sm font-medium">
+                      {stage.ageRange}
+                    </span>
+                    <p className="text-neutral-600">{stage.description}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                {stage.keyFeatures.map((feature, featureIndex) => (
                   <div
-                    key={itemIndex}
-                    className="bg-white p-3 rounded text-center"
+                    key={featureIndex}
+                    className="bg-white p-6 rounded-lg shadow-sm"
                   >
-                    <span className="text-sm text-neutral-700">{item}</span>
+                    <h3 className="text-lg font-semibold text-neutral-800 mb-4">
+                      {feature.title}
+                    </h3>
+                    <ul className="space-y-3">
+                      {feature.details.map((detail, detailIndex) => (
+                        <li key={detailIndex} className="flex items-start">
+                          <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                          <span className="text-sm text-neutral-700">
+                            {detail}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* PDF Resources for Adolescence Program */}
-            {index === 0 && (
-              <div className="mt-6 bg-blue-50 p-6 rounded-lg border border-blue-200">
-                <h4 className="font-semibold mb-4 text-blue-800 flex items-center">
-                  <Download className="w-5 h-5 mr-2" />
-                  {locale === "zh"
-                    ? "相关PDF资源下载"
-                    : "Related PDF Resources"}
+              <div
+                className={`${stage.color
+                  .replace("text-", "bg-")
+                  .replace("-600", "-100")} p-4 rounded-lg`}
+              >
+                <h4
+                  className={`font-semibold mb-3 ${stage.color
+                    .replace("bg-", "text-")
+                    .replace("-50", "-800")}`}
+                >
+                  {locale === "zh" ? "专项工具包：" : "Specialized Toolkit:"}
                 </h4>
-                <div className="grid md:grid-cols-2 gap-4">
-                  <a
-                    href={`/downloads/campus-emergency-checklist${
-                      locale === "en" ? "-en" : ""
-                    }.html`}
-                    className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
-                    <div>
-                      <div className="font-medium text-blue-800 text-sm">
-                        {locale === "zh"
-                          ? "校园应急清单"
-                          : "Campus Emergency Checklist"}
-                      </div>
-                      <div className="text-xs text-blue-600">
-                        {locale === "zh"
-                          ? "校园经期应急处理指南"
-                          : "Campus menstrual emergency guide"}
-                      </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {stage.emergencyKit.map((item, itemIndex) => (
+                    <div
+                      key={itemIndex}
+                      className="bg-white p-3 rounded text-center"
+                    >
+                      <span className="text-sm text-neutral-700">{item}</span>
                     </div>
-                  </a>
-
-                  <a
-                    href={`/downloads/parent-communication-guide${
-                      locale === "en" ? "-en" : ""
-                    }.html`}
-                    className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
-                    <div>
-                      <div className="font-medium text-blue-800 text-sm">
-                        {locale === "zh"
-                          ? "家长沟通指导手册"
-                          : "Parent Communication Guide"}
-                      </div>
-                      <div className="text-xs text-blue-600">
-                        {locale === "zh"
-                          ? "帮助家长与青春期女儿沟通"
-                          : "Help parents communicate with teenage daughters"}
-                      </div>
-                    </div>
-                  </a>
-
-                  <a
-                    href={`/downloads/teacher-health-manual${
-                      locale === "en" ? "-en" : ""
-                    }.html`}
-                    className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
-                    <div>
-                      <div className="font-medium text-blue-800 text-sm">
-                        {locale === "zh"
-                          ? "教师健康管理手册"
-                          : "Teacher Health Manual"}
-                      </div>
-                      <div className="text-xs text-blue-600">
-                        {locale === "zh"
-                          ? "教师和学校卫生人员指南"
-                          : "Guide for teachers and school health personnel"}
-                      </div>
-                    </div>
-                  </a>
-
-                  <a
-                    href={`/downloads/teacher-collaboration-handbook${
-                      locale === "en" ? "-en" : ""
-                    }.html`}
-                    className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
-                    <div>
-                      <div className="font-medium text-blue-800 text-sm">
-                        {locale === "zh"
-                          ? "教师协作手册"
-                          : "Teacher Collaboration Handbook"}
-                      </div>
-                      <div className="text-xs text-blue-600">
-                        {locale === "zh"
-                          ? "理解与支持经期不适的青少年学生"
-                          : "Understanding and supporting adolescent students with menstrual discomfort"}
-                      </div>
-                    </div>
-                  </a>
+                  ))}
                 </div>
               </div>
-            )}
-          </div>
-        ))}
-      </section>
 
-      {/* Common Challenges Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Shield className="w-6 h-6 text-red-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "跨阶段共同挑战"
-              : "Cross-Stage Common Challenges"}
-          </h2>
-        </div>
+              {/* PDF Resources for Adolescence Program */}
+              {index === 0 && (
+                <div className="mt-6 bg-blue-50 p-6 rounded-lg border border-blue-200">
+                  <h4 className="font-semibold mb-4 text-blue-800 flex items-center">
+                    <Download className="w-5 h-5 mr-2" />
+                    {locale === "zh"
+                      ? "相关PDF资源下载"
+                      : "Related PDF Resources"}
+                  </h4>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <a
+                      href={`/downloads/campus-emergency-checklist${
+                        locale === "en" ? "-en" : ""
+                      }.html`}
+                      className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
+                      <div>
+                        <div className="font-medium text-blue-800 text-sm">
+                          {locale === "zh"
+                            ? "校园应急清单"
+                            : "Campus Emergency Checklist"}
+                        </div>
+                        <div className="text-xs text-blue-600">
+                          {locale === "zh"
+                            ? "校园经期应急处理指南"
+                            : "Campus menstrual emergency guide"}
+                        </div>
+                      </div>
+                    </a>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {commonChallenges.map((item, index) => (
-            <div key={index} className="card">
-              <h3 className="text-lg font-semibold text-neutral-800 mb-4">
-                {item.challenge}
-              </h3>
-              <ul className="space-y-3">
-                {item.solutions.map((solution, solutionIndex) => (
-                  <li key={solutionIndex} className="flex items-start">
-                    <span className="w-5 h-5 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
-                      {solutionIndex + 1}
-                    </span>
-                    <span className="text-sm text-neutral-700">{solution}</span>
-                  </li>
-                ))}
-              </ul>
+                    <a
+                      href={`/downloads/parent-communication-guide${
+                        locale === "en" ? "-en" : ""
+                      }.html`}
+                      className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
+                      <div>
+                        <div className="font-medium text-blue-800 text-sm">
+                          {locale === "zh"
+                            ? "家长沟通指导手册"
+                            : "Parent Communication Guide"}
+                        </div>
+                        <div className="text-xs text-blue-600">
+                          {locale === "zh"
+                            ? "帮助家长与青春期女儿沟通"
+                            : "Help parents communicate with teenage daughters"}
+                        </div>
+                      </div>
+                    </a>
+
+                    <a
+                      href={`/downloads/teacher-health-manual${
+                        locale === "en" ? "-en" : ""
+                      }.html`}
+                      className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
+                      <div>
+                        <div className="font-medium text-blue-800 text-sm">
+                          {locale === "zh"
+                            ? "教师健康管理手册"
+                            : "Teacher Health Manual"}
+                        </div>
+                        <div className="text-xs text-blue-600">
+                          {locale === "zh"
+                            ? "教师和学校卫生人员指南"
+                            : "Guide for teachers and school health personnel"}
+                        </div>
+                      </div>
+                    </a>
+
+                    <a
+                      href={`/downloads/teacher-collaboration-handbook${
+                        locale === "en" ? "-en" : ""
+                      }.html`}
+                      className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink className="w-4 h-4 text-blue-600 mr-3 flex-shrink-0" />
+                      <div>
+                        <div className="font-medium text-blue-800 text-sm">
+                          {locale === "zh"
+                            ? "教师协作手册"
+                            : "Teacher Collaboration Handbook"}
+                        </div>
+                        <div className="text-xs text-blue-600">
+                          {locale === "zh"
+                            ? "理解与支持经期不适的青少年学生"
+                            : "Understanding and supporting adolescent students with menstrual discomfort"}
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
-        </div>
-      </section>
+        </section>
 
-      {/* Professional Support */}
-      <section className="bg-yellow-50 p-6 md:p-8 rounded-xl">
-        <h3 className="text-lg font-semibold text-yellow-800 mb-4 flex items-center">
-          <Users className="w-5 h-5 mr-2" />
-          {locale === "zh" ? "专业支持网络" : "Professional Support Network"}
-        </h3>
-        <div className="grid md:grid-cols-2 gap-6 text-sm text-yellow-700">
-          <div>
-            <h4 className="font-medium mb-2">
-              {locale === "zh" ? "医疗专业人士" : "Medical Professionals"}
-            </h4>
-            <ul className="space-y-1">
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "妇产科医生：专业诊断和治疗建议"
-                  : "Gynecologists: Professional diagnosis and treatment advice"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "内分泌科医生：激素水平调节"
-                  : "Endocrinologists: Hormone level regulation"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "营养师：个性化饮食指导"
-                  : "Nutritionists: Personalized dietary guidance"}
-              </li>
-            </ul>
+        {/* Common Challenges Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Shield className="w-6 h-6 text-red-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "跨阶段共同挑战"
+                : "Cross-Stage Common Challenges"}
+            </h2>
           </div>
-          <div>
-            <h4 className="font-medium mb-2">
-              {locale === "zh" ? "心理健康支持" : "Mental Health Support"}
-            </h4>
-            <ul className="space-y-1">
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "心理咨询师：情绪管理和压力缓解"
-                  : "Psychologists: Emotional management and stress relief"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "同龄人支持小组：经验分享和互助"
-                  : "Peer support groups: Experience sharing and mutual aid"}
-              </li>
-              <li>
-                •{" "}
-                {locale === "zh"
-                  ? "家庭支持系统：理解和关爱"
-                  : "Family support system: Understanding and care"}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
 
-      {/* 相关推荐区域 */}
-      <section className="bg-gradient-to-br from-red-50 to-blue-50 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="space-y-12">
-            {/* 相关工具区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关工具" : "Related Tools"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.relatedTools.map((tool) => (
-                  <RelatedToolCard key={tool.id} tool={tool} locale={locale} />
-                ))}
+          <div className="grid md:grid-cols-3 gap-6">
+            {commonChallenges.map((item, index) => (
+              <div key={index} className="card">
+                <h3 className="text-lg font-semibold text-neutral-800 mb-4">
+                  {item.challenge}
+                </h3>
+                <ul className="space-y-3">
+                  {item.solutions.map((solution, solutionIndex) => (
+                    <li key={solutionIndex} className="flex items-start">
+                      <span className="w-5 h-5 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
+                        {solutionIndex + 1}
+                      </span>
+                      <span className="text-sm text-neutral-700">
+                        {solution}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </section>
-
-            {/* 相关文章区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关文章" : "Related Articles"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.relatedArticles.map((article) => (
-                  <RelatedArticleCard
-                    key={article.id}
-                    article={article}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </section>
-
-            {/* 场景解决方案区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "场景解决方案" : "Scenario Solutions"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.scenarioSolutions.map((solution) => (
-                  <ScenarioSolutionCard
-                    key={solution.id}
-                    solution={solution}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </section>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Back to Overview */}
-      <div className="text-center">
-        <Link
-          href={`/${locale}/scenario-solutions`}
-          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          {t("scenarios.life_stages.backToOverview")}
-        </Link>
-      </div>
-
-      {/* Medical Disclaimer */}
-      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
-        <div className="flex items-start">
-          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
-          <div>
-            <h3 className="font-semibold text-orange-800 mb-2">
-              {t("scenarios.life_stages.disclaimer.title")}
-            </h3>
-            <p className="text-orange-700 text-sm leading-relaxed">
-              {t("scenarios.life_stages.disclaimer.content")}
-            </p>
+        {/* Professional Support */}
+        <section className="bg-yellow-50 p-6 md:p-8 rounded-xl">
+          <h3 className="text-lg font-semibold text-yellow-800 mb-4 flex items-center">
+            <Users className="w-5 h-5 mr-2" />
+            {locale === "zh" ? "专业支持网络" : "Professional Support Network"}
+          </h3>
+          <div className="grid md:grid-cols-2 gap-6 text-sm text-yellow-700">
+            <div>
+              <h4 className="font-medium mb-2">
+                {locale === "zh" ? "医疗专业人士" : "Medical Professionals"}
+              </h4>
+              <ul className="space-y-1">
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "妇产科医生：专业诊断和治疗建议"
+                    : "Gynecologists: Professional diagnosis and treatment advice"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "内分泌科医生：激素水平调节"
+                    : "Endocrinologists: Hormone level regulation"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "营养师：个性化饮食指导"
+                    : "Nutritionists: Personalized dietary guidance"}
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium mb-2">
+                {locale === "zh" ? "心理健康支持" : "Mental Health Support"}
+              </h4>
+              <ul className="space-y-1">
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "心理咨询师：情绪管理和压力缓解"
+                    : "Psychologists: Emotional management and stress relief"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "同龄人支持小组：经验分享和互助"
+                    : "Peer support groups: Experience sharing and mutual aid"}
+                </li>
+                <li>
+                  •{" "}
+                  {locale === "zh"
+                    ? "家庭支持系统：理解和关爱"
+                    : "Family support system: Understanding and care"}
+                </li>
+              </ul>
+            </div>
           </div>
+        </section>
+
+        {/* 相关推荐区域 */}
+        <section className="bg-gradient-to-br from-red-50 to-blue-50 mt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="space-y-12">
+              {/* 相关工具区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "相关工具" : "Related Tools"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.relatedTools.map((tool) => (
+                    <RelatedToolCard
+                      key={tool.id}
+                      tool={tool}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 相关文章区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "相关文章" : "Related Articles"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.relatedArticles.map((article) => (
+                    <RelatedArticleCard
+                      key={article.id}
+                      article={article}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 场景解决方案区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "场景解决方案" : "Scenario Solutions"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.scenarioSolutions.map((solution) => (
+                    <ScenarioSolutionCard
+                      key={solution.id}
+                      solution={solution}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        {/* Back to Overview */}
+        <div className="text-center">
+          <Link
+            href={`/${locale}/scenario-solutions`}
+            className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t("scenarios.life_stages.backToOverview")}
+          </Link>
         </div>
-      </section>
+
+        {/* Medical Disclaimer */}
+        <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
+          <div className="flex items-start">
+            <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
+            <div>
+              <h3 className="font-semibold text-orange-800 mb-2">
+                {t("scenarios.life_stages.disclaimer.title")}
+              </h3>
+              <p className="text-orange-700 text-sm leading-relaxed">
+                {t("scenarios.life_stages.disclaimer.content")}
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

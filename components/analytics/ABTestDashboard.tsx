@@ -6,6 +6,7 @@ import {
 } from "@/hooks/useCTATracking";
 import type { CTAEventData } from "@/hooks/useCTATracking";
 import { analyzeABTest } from "@/config/ab-tests.config";
+import { logError } from "@/lib/debug-logger";
 import {
   Card,
   CardContent,
@@ -15,7 +16,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Download, TrendingUp, Users, MousePointer } from "lucide-react";
+import { Download, TrendingUp } from "lucide-react";
 
 interface ABTestMetrics {
   testId: string;
@@ -94,7 +95,7 @@ export default function ABTestDashboard() {
       const results = calculateTestResults(metrics);
       setTestResults(results);
     } catch (error) {
-      console.error("Failed to load metrics:", error);
+      logError("Failed to load metrics:", error, "ABTestDashboard/loadMetrics");
     } finally {
       setIsLoading(false);
     }
@@ -198,6 +199,7 @@ export default function ABTestDashboard() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const getSignificanceColor = (significant: boolean) => {
     return significant ? "text-green-600" : "text-yellow-600";
   };

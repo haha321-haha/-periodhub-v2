@@ -34,7 +34,15 @@ export default function MarkdownWithMermaid({
         rehypePlugins={[rehypeRaw]}
         components={{
           // Handle Mermaid code blocks
-          code: ({ className, children, ...props }: any) => {
+          code: ({
+            className,
+            children,
+            ...props
+          }: {
+            className?: string;
+            children?: React.ReactNode;
+            [key: string]: unknown;
+          }) => {
             const match = /language-(\w+)/.exec(className || "");
             const language = match ? match[1] : "";
             const inline = props.inline;

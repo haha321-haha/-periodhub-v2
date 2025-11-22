@@ -14,7 +14,8 @@ interface Question {
 }
 
 export default function ConstitutionTestTool({
-  locale = "zh",
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  locale: _locale = "zh",
 }: ConstitutionTestToolProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});

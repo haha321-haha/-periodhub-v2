@@ -1,6 +1,5 @@
-import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { unstable_setRequestLocale, getTranslations } from "next-intl/server";
+import { unstable_setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
 import Hero from "@/components/layout/Hero";
 import UserSuccessStories from "@/components/UserSuccessStories";

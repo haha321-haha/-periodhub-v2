@@ -1,5 +1,6 @@
 "use client";
 import { useEffect } from "react";
+import { logWarn, logInfo } from "@/lib/debug-logger";
 
 interface TitleProtectorProps {
   title: string;
@@ -28,8 +29,10 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({
 
       if (currentTitle !== title && !isTemplateModified) {
         protectionCount++;
-        console.warn(
+        logWarn(
           `🛡️ Title changed from "${title}" to "${currentTitle}", restoring... (Protection #${protectionCount})`,
+          { title, currentTitle, protectionCount },
+          "TitleProtector/protectTitle",
         );
 
         // 强制设置标题
@@ -43,8 +46,10 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({
 
         // 如果检测到数字前缀，特别处理
         if (hasLeadingNumbers) {
-          console.warn(
+          logWarn(
             `🚨 Detected leading numbers in title: "${currentTitle}", forcing correction`,
+            { currentTitle, title },
+            "TitleProtector/protectTitle",
           );
           // 多次强制设置，确保生效
           setTimeout(() => {
@@ -63,8 +68,10 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({
         }
       } else if (isTemplateModified) {
         // 如果标题被Next.js模板修改了，我们需要保持原始标题
-        console.log(
+        logInfo(
           `📝 Title was modified by Next.js template, keeping original: "${title}"`,
+          { title },
+          "TitleProtector/protectTitle",
         );
         document.title = title;
 
@@ -84,16 +91,20 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({
     // 特别针对中文版本的额外保护
     let chineseProtectionInterval: NodeJS.Timeout | undefined;
     if (locale === "zh") {
-      console.log(
+      logInfo(
         "🛡️ TitleProtector: Applying extra protection for Chinese version",
+        undefined,
+        "TitleProtector/useEffect",
       );
       chineseProtectionInterval = setInterval(() => {
         const currentTitle = document.title;
         const hasLeadingNumbers = /^\d+/.test(currentTitle);
 
         if (currentTitle !== title && !currentTitle.includes(title)) {
-          console.warn(
+          logWarn(
             `🛡️ TitleProtector Chinese protection: "${currentTitle}" -> "${title}"`,
+            { currentTitle, title },
+            "TitleProtector/chineseProtection",
           );
           document.title = title;
 
@@ -105,8 +116,10 @@ export const TitleProtector: React.FC<TitleProtectorProps> = ({
 
         // 特别处理数字前缀
         if (hasLeadingNumbers) {
-          console.warn(
+          logWarn(
             `🚨 TitleProtector: Detected leading numbers in Chinese title: "${currentTitle}"`,
+            { currentTitle, title },
+            "TitleProtector/chineseProtection",
           );
           document.title = title;
           const titleElement = document.querySelector("head > title");

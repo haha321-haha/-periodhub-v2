@@ -22,10 +22,13 @@ export async function generateMetadata({
       : "Explore traditional therapies and cultural perspectives from around the world, understand how different cultures approach menstrual health.";
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
+  const alternatesData = generateAlternatesConfig(
     "health-guide/global-perspectives",
   );
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title,

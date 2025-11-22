@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { List, ChevronDown, ChevronUp } from "lucide-react";
+import { logWarn } from "@/lib/debug-logger";
 
 interface TableOfContentsProps {
   locale: "zh" | "en" | string; // 允许更宽泛的字符串类型，但在运行时验证
@@ -103,8 +104,10 @@ export default function TableOfContents({
 
   // 如果 locale 无效，记录警告（仅在客户端）
   if (typeof window !== "undefined" && locale !== validLocale) {
-    console.warn(
+    logWarn(
       `[TableOfContents] Invalid locale '${locale}', falling back to '${validLocale}'`,
+      { locale, validLocale },
+      "TableOfContents",
     );
   }
 

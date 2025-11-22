@@ -1,13 +1,13 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+// import { useTranslations } from "next-intl"; // Unused
 
 export default function NaturalTherapiesPage({
   params: { locale },
 }: {
   params: { locale: string };
 }) {
-  const t = useTranslations("naturalTherapiesPage");
+  // const t = useTranslations("naturalTherapiesPage"); // Unused
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">

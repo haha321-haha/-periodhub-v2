@@ -34,7 +34,7 @@ export default function TestSymptomAssessmentClient() {
   };
 
   const handleComplete = () => {
-    const results = completeAssessment();
+    completeAssessment();
     setShowResults(true);
   };
 

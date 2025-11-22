@@ -82,9 +82,7 @@ const RecommendationCard = ({
   titleKey,
   descriptionKey,
   actionTextKey,
-  icon,
   link,
-  color,
 }: RecommendationItem) => {
   const t = useTranslations("bottomRecommendations");
 

@@ -156,10 +156,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
+  const alternatesData = generateAlternatesConfig(
     "scenario-solutions/lifeStages",
   );
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title: `${t("scenarios.life_stages.title")} - ${t("title")}`,

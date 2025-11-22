@@ -1,14 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import {
-  Search,
-  Filter,
-  Download,
-  Clock,
-  Tag,
-  ChevronRight,
-} from "lucide-react";
+import { Search, Filter, Download, Clock } from "lucide-react";
 import { useTranslations } from "next-intl";
 // import { PDFResource, PDFCategory } from '../types/pdf';
 // import { PDF_CATEGORIES, PDF_RESOURCES } from '../config/pdfResources';
@@ -69,7 +62,7 @@ export default function PDFCenterOptimized({
     initialCategory || "all",
   );
   const [searchQuery, setSearchQuery] = useState("");
-  const [filters, setFilters] = useState<PDFFilterOptions>({});
+  const [filters] = useState<PDFFilterOptions>({});
   const [showFilterPanel, setShowFilterPanel] = useState(false);
 
   // 筛选和搜索逻辑

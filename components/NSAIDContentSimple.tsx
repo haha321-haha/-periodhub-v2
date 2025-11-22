@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { logInfo, logError } from "@/lib/debug-logger";
 
 interface NSAIDContentProps {
   content: string;
@@ -116,7 +117,11 @@ function processNSAIDContent(content: string): string {
 
 export default function NSAIDContent({ content }: NSAIDContentProps) {
   useEffect(() => {
-    console.log("🔧 NSAIDContent component initialized");
+    logInfo(
+      "🔧 NSAIDContent component initialized",
+      undefined,
+      "NSAIDContentSimple/useEffect",
+    );
 
     const timer = setTimeout(() => {
       // NSAID Calculator functionality
@@ -127,7 +132,11 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
         btn.style.setProperty("color", "#ffffff", "important");
         btn.style.setProperty("border", "2px solid #1d4ed8", "important");
         btn.style.setProperty("cursor", "pointer", "important");
-        console.log("✅ Calculate button styled");
+        logInfo(
+          "✅ Calculate button styled",
+          undefined,
+          "NSAIDContentSimple/useEffect",
+        );
       }
 
       // Video player initialization
@@ -140,14 +149,18 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
       const sceneTitle = document.getElementById("nsaidSceneTitle");
       const narrationText = document.getElementById("nsaidNarrationText");
 
-      console.log("🎬 Animation controls found:", {
-        videoPlayer: !!videoPlayer,
-        prevButton: !!prevButton,
-        nextButton: !!nextButton,
-        sceneIndicator: !!sceneIndicator,
-        sceneTitle: !!sceneTitle,
-        narrationText: !!narrationText,
-      });
+      logInfo(
+        "🎬 Animation controls found:",
+        {
+          videoPlayer: !!videoPlayer,
+          prevButton: !!prevButton,
+          nextButton: !!nextButton,
+          sceneIndicator: !!sceneIndicator,
+          sceneTitle: !!sceneTitle,
+          narrationText: !!narrationText,
+        },
+        "NSAIDContentSimple/useEffect",
+      );
 
       if (videoPlayer) {
         // Scene data
@@ -237,7 +250,7 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
         if (videoPlayer) {
           videoPlayer.addEventListener("ended", playNextScene);
           videoPlayer.addEventListener("error", (e) => {
-            console.error("Video error:", e);
+            logError("Video error:", e, "NSAIDContentSimple/useEffect");
             if (narrationText)
               narrationText.textContent =
                 "抱歉，视频加载失败。请检查您的网络连接或稍后再试。";
@@ -255,7 +268,11 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
         videoPlayer.style.background = "#000";
         videoPlayer.style.display = "block";
 
-        console.log("✅ Video player initialized successfully");
+        logInfo(
+          "✅ Video player initialized successfully",
+          undefined,
+          "NSAIDContentSimple/useEffect",
+        );
       }
     }, 100);
 

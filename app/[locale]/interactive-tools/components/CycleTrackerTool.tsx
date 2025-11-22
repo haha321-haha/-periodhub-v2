@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import type { Prediction } from "../shared/types";
 import { logWarn } from "@/lib/debug-logger";
 
 interface CycleTrackerToolProps {

@@ -107,3 +107,10 @@ export function getRecommendationCacheStats() {
     averageSize: cacheKeys.length > 0 ? totalSize / cacheKeys.length : 0,
   };
 }
+
+/**
+ * 获取缓存统计（别名，兼容性）
+ */
+export function getCacheStats() {
+  return getRecommendationCacheStats();
+}

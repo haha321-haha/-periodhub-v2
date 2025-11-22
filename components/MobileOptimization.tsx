@@ -6,6 +6,7 @@ import {
   optimizeTouchEvents,
   isMobile,
 } from "@/lib/mobile-performance";
+import { logInfo, logWarn } from "@/lib/debug-logger";
 
 /**
  * 移动端优化组件
@@ -150,25 +151,49 @@ function setupPerformanceMonitoring() {
           total: navigation.loadEventEnd - navigation.fetchStart,
         };
 
-        console.log("Page Load Metrics:", metrics);
+        logInfo("Page Load Metrics:", metrics, "MobileOptimization");
 
         // 发送性能数据到分析服务
-        if (typeof window !== "undefined" && (window as any).gtag) {
-          (window as any).gtag("event", "page_load_performance", {
+        if (
+          typeof window !== "undefined" &&
+          "gtag" in window &&
+          typeof (
+            window as {
+              gtag?: (
+                command: string,
+                eventName: string,
+                params?: Record<string, unknown>,
+              ) => void;
+            }
+          ).gtag === "function"
+        ) {
+          (
+            window as {
+              gtag: (
+                command: string,
+                eventName: string,
+                params?: Record<string, unknown>,
+              ) => void;
+            }
+          ).gtag("event", "page_load_performance", {
             custom_map: metrics,
           });
         }
 
         // 如果性能较差，记录警告
         if (metrics.total > 3000) {
-          console.warn("Slow page load detected:", metrics.total + "ms");
+          logWarn(
+            "Slow page load detected:",
+            metrics.total + "ms",
+            "MobileOptimization",
+          );
         }
       }
     }, 0);
   });
 
   // 监控用户交互性能
-  let interactionStart = 0;
+  // let interactionStart = 0; // Unused
 
   ["click", "touchstart", "keydown"].forEach((eventType) => {
     document.addEventListener(
@@ -185,11 +210,35 @@ function setupPerformanceMonitoring() {
     const observer = new PerformanceObserver((list) => {
       list.getEntries().forEach((entry) => {
         if (entry.duration > 50) {
-          console.warn("Long task detected:", entry.duration + "ms");
+          logWarn(
+            "Long task detected:",
+            entry.duration + "ms",
+            "MobileOptimization",
+          );
 
           // 发送长任务数据
-          if (typeof window !== "undefined" && (window as any).gtag) {
-            (window as any).gtag("event", "long_task", {
+          if (
+            typeof window !== "undefined" &&
+            "gtag" in window &&
+            typeof (
+              window as {
+                gtag?: (
+                  command: string,
+                  eventName: string,
+                  params?: Record<string, unknown>,
+                ) => void;
+              }
+            ).gtag === "function"
+          ) {
+            (
+              window as {
+                gtag: (
+                  command: string,
+                  eventName: string,
+                  params?: Record<string, unknown>,
+                ) => void;
+              }
+            ).gtag("event", "long_task", {
               duration: entry.duration,
               start_time: entry.startTime,
             });

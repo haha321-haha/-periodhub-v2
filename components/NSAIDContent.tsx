@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useAppTranslations } from "@/hooks/useAppTranslations";
+import { logInfo, logWarn, logError } from "@/lib/debug-logger";
 
 interface NSAIDContentProps {
   content: string;
@@ -112,9 +113,17 @@ function processNSAIDContent(content: string): string {
 
   // Debug: Log the processed content to see if video element is present
   if (processedContent.includes("nsaidAnimationPlayer")) {
-    console.log("🎬 Video element found in processed content");
+    logInfo(
+      "🎬 Video element found in processed content",
+      undefined,
+      "NSAIDContent/processNSAIDContent",
+    );
   } else {
-    console.warn("❌ Video element NOT found in processed content");
+    logWarn(
+      "❌ Video element NOT found in processed content",
+      undefined,
+      "NSAIDContent/processNSAIDContent",
+    );
   }
 
   // Remove test message and ensure clean video container
@@ -634,8 +643,10 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
 
   useEffect(() => {
     // Add a small delay to ensure DOM elements are rendered
-    console.log(
+    logInfo(
       "🔧 NSAIDContent component initialized, external script will handle events",
+      undefined,
+      "NSAIDContent/useEffect",
     );
 
     const timer = setTimeout(() => {
@@ -661,8 +672,10 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
         btn.style.setProperty("display", "inline-block", "important");
         btn.style.setProperty("width", "100%", "important");
 
-        console.log(
+        logInfo(
           "✅ Calculate button found and styled, event handling delegated to external script",
+          undefined,
+          "NSAIDContent/useEffect",
         );
       }
 
@@ -676,14 +689,18 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
       const sceneTitle = document.getElementById("nsaidSceneTitle");
       const narrationText = document.getElementById("nsaidNarrationText");
 
-      console.log("🎬 Animation controls found:", {
-        videoPlayer: !!videoPlayer,
-        prevButton: !!prevButton,
-        nextButton: !!nextButton,
-        sceneIndicator: !!sceneIndicator,
-        sceneTitle: !!sceneTitle,
-        narrationText: !!narrationText,
-      });
+      logInfo(
+        "🎬 Animation controls found:",
+        {
+          videoPlayer: !!videoPlayer,
+          prevButton: !!prevButton,
+          nextButton: !!nextButton,
+          sceneIndicator: !!sceneIndicator,
+          sceneTitle: !!sceneTitle,
+          narrationText: !!narrationText,
+        },
+        "NSAIDContent/useEffect",
+      );
 
       let currentSceneIndex = 0;
 
@@ -771,7 +788,11 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
       // Simple scene loading function based on original working code
       function loadScene(index: number) {
         if (index < 0 || index >= scenes.length) {
-          console.error("Scene index out of bounds:", index);
+          logError(
+            "Scene index out of bounds:",
+            index,
+            "NSAIDContent/loadScene",
+          );
           return;
         }
 
@@ -836,7 +857,7 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
 
         // Video error handling
         videoPlayer.addEventListener("error", (e) => {
-          console.error("Video error:", e);
+          logError("Video error:", e, "NSAIDContent/useEffect");
           if (narrationText)
             narrationText.textContent = t("ui.videoErrorDescription");
           if (sceneTitle) sceneTitle.textContent = t("ui.videoError");
@@ -881,8 +902,12 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
         videoPlayer.style.background = "#000";
         videoPlayer.style.display = "block";
 
-        console.log("✅ Video player initialized successfully");
-        console.log("🎬 Video player details:", {
+        logInfo(
+          "✅ Video player initialized successfully",
+          undefined,
+          "NSAIDContent/useEffect",
+        );
+        logInfo("🎬 Video player details:", {
           element: videoPlayer,
           src: videoPlayer.src,
           currentSrc: videoPlayer.currentSrc,
@@ -903,17 +928,29 @@ export default function NSAIDContent({ content }: NSAIDContentProps) {
         videoPlayer.style.setProperty("visibility", "visible", "important");
         videoPlayer.style.setProperty("opacity", "1", "important");
       } else {
-        console.error("❌ Video player element not found!");
+        logError(
+          "❌ Video player element not found!",
+          undefined,
+          "NSAIDContent/useEffect",
+        );
         // Try to find any video elements on the page
         const allVideos = document.querySelectorAll("video");
-        console.log("🔍 All video elements found:", allVideos.length);
+        logInfo(
+          "🔍 All video elements found:",
+          allVideos.length,
+          "NSAIDContent/useEffect",
+        );
         allVideos.forEach((video, index) => {
-          console.log(`Video ${index}:`, {
-            id: video.id,
-            className: video.className,
-            src: video.src,
-            parentElement: video.parentElement,
-          });
+          logInfo(
+            `Video ${index}:`,
+            {
+              id: video.id,
+              className: video.className,
+              src: video.src,
+              parentElement: video.parentElement,
+            },
+            "NSAIDContent/useEffect",
+          );
         });
       }
     }, 100); // Small delay to ensure DOM is ready

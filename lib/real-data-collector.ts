@@ -95,3 +95,14 @@ export function exportCollectedData(): string {
     2,
   );
 }
+
+/**
+ * 导出 realDataCollector 对象（兼容性）
+ */
+export const realDataCollector = {
+  collectDataPoint,
+  getAllDataPoints,
+  getDataPointsByType,
+  clearCollectedData,
+  exportCollectedData,
+};

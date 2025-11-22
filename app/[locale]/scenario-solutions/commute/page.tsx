@@ -151,10 +151,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
-    "scenario-solutions/commute",
-  );
+  const alternatesData = generateAlternatesConfig("scenario-solutions/commute");
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title: `${t("scenarios.commute.title")} - ${t("title")}`,
@@ -185,34 +186,48 @@ export default async function CommuteScenarioPage({ params }: Props) {
   const howToData = await generateHowToStructuredData({
     locale,
     scenarioSlug: "commute",
-    name: isZh ? "通勤途中痛经应急管理指南" : "Commute Period Pain Emergency Management Guide",
+    name: isZh
+      ? "通勤途中痛经应急管理指南"
+      : "Commute Period Pain Emergency Management Guide",
     description: isZh
       ? "通勤途中的痛经应急处理方法，包含便携应急包准备和应急路线规划"
       : "Period pain emergency management during commute, including portable emergency kit preparation and emergency route planning",
     steps: [
       {
         name: isZh ? "准备便携应急包" : "Prepare Portable Emergency Kit",
-        text: isZh ? "准备小巧的应急包，包含止痛药、卫生用品和热敷贴" : "Prepare compact emergency kit with pain medication, hygiene products and heat patches"
+        text: isZh
+          ? "准备小巧的应急包，包含止痛药、卫生用品和热敷贴"
+          : "Prepare compact emergency kit with pain medication, hygiene products and heat patches",
       },
       {
         name: isZh ? "选择舒适的通勤方式" : "Choose Comfortable Commute Method",
-        text: isZh ? "根据疼痛程度选择最舒适的交通方式" : "Choose the most comfortable transportation based on pain level"
+        text: isZh
+          ? "根据疼痛程度选择最舒适的交通方式"
+          : "Choose the most comfortable transportation based on pain level",
       },
       {
         name: isZh ? "规划应急路线" : "Plan Emergency Routes",
-        text: isZh ? "了解沿途的洗手间和休息点位置" : "Know the locations of restrooms and rest points along the way"
+        text: isZh
+          ? "了解沿途的洗手间和休息点位置"
+          : "Know the locations of restrooms and rest points along the way",
       },
       {
         name: isZh ? "携带必备物品" : "Carry Essential Items",
-        text: isZh ? "确保随身携带手机、水和应急联系信息" : "Ensure you carry phone, water and emergency contact information"
+        text: isZh
+          ? "确保随身携带手机、水和应急联系信息"
+          : "Ensure you carry phone, water and emergency contact information",
       },
       {
         name: isZh ? "了解沿途设施" : "Know Facilities Along the Way",
-        text: isZh ? "提前了解沿途的药店和医疗设施" : "Know pharmacies and medical facilities along the way in advance"
+        text: isZh
+          ? "提前了解沿途的药店和医疗设施"
+          : "Know pharmacies and medical facilities along the way in advance",
       },
       {
         name: isZh ? "掌握应急处理方法" : "Master Emergency Response Methods",
-        text: isZh ? "学习简单的呼吸和放松技巧，缓解突发疼痛" : "Learn simple breathing and relaxation techniques to relieve sudden pain"
+        text: isZh
+          ? "学习简单的呼吸和放松技巧，缓解突发疼痛"
+          : "Learn simple breathing and relaxation techniques to relieve sudden pain",
       },
     ],
     tools: [
@@ -584,414 +599,434 @@ export default async function CommuteScenarioPage({ params }: Props) {
         data-page="scenario-commute"
       >
         {/* Breadcrumb */}
-      <Breadcrumb
-        items={[
-          { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
-          { label: breadcrumbCommuteTitle },
-        ]}
-      />
+        <Breadcrumb
+          items={[
+            { label: breadcrumbTitle, href: `/${locale}/scenario-solutions` },
+            { label: breadcrumbCommuteTitle },
+          ]}
+        />
 
-      {/* Page Header */}
-      <header className="text-center">
-        <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Car className="w-8 h-8" />
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
-          {t("scenarios.commute.title")}
-        </h1>
-        <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-          {t("scenarios.commute.description")}
-        </p>
-      </header>
+        {/* Page Header */}
+        <header className="text-center">
+          <div className="w-16 h-16 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Car className="w-8 h-8" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
+            {t("scenarios.commute.title")}
+          </h1>
+          <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+            {t("scenarios.commute.description")}
+          </p>
+        </header>
 
-      {/* Emergency Kit Section */}
-      <section className="bg-gradient-to-br from-green-50 to-neutral-50 p-6 md:p-8 rounded-xl">
-        <div className="flex items-center mb-6">
-          <AlertTriangle className="w-6 h-6 text-green-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh" ? "通勤应急工具包" : "Commute Emergency Kit"}
-          </h2>
-        </div>
+        {/* Emergency Kit Section */}
+        <section className="bg-gradient-to-br from-green-50 to-neutral-50 p-6 md:p-8 rounded-xl">
+          <div className="flex items-center mb-6">
+            <AlertTriangle className="w-6 h-6 text-green-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh" ? "通勤应急工具包" : "Commute Emergency Kit"}
+            </h2>
+          </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {emergencyKit.map((kit, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold text-neutral-800 mb-3">
-                {kit.item}
-              </h3>
-              <p className="text-neutral-600 mb-3">{kit.description}</p>
-              <div className="flex items-start">
-                <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-neutral-700">{kit.usage}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Transport Strategies Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <MapPin className="w-6 h-6 text-green-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "交通方式适配策略"
-              : "Transport Mode Adaptation Strategies"}
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {transportStrategies.map((transport, index) => (
-            <div key={index} className="card">
-              <div className="flex items-center mb-4">
-                <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center ${transport.color} mr-4`}
-                >
-                  {transport.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-neutral-800">
-                  {transport.type}
+          <div className="grid md:grid-cols-2 gap-6">
+            {emergencyKit.map((kit, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="text-lg font-semibold text-neutral-800 mb-3">
+                  {kit.item}
                 </h3>
-              </div>
-
-              <ul className="space-y-3">
-                {transport.strategies.map((strategy, strategyIndex) => (
-                  <li key={strategyIndex} className="flex items-start">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-neutral-700">{strategy}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Time Management Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Clock className="w-6 h-6 text-green-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "通勤时段管理指南"
-              : "Commute Time Management Guide"}
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {timeManagement.map((phase, index) => (
-            <div key={index} className="card">
-              <h3 className="text-lg font-semibold text-neutral-800 mb-4">
-                {phase.phase}
-              </h3>
-              <ul className="space-y-3">
-                {phase.actions.map((action, actionIndex) => (
-                  <li key={actionIndex} className="flex items-start">
-                    <span className="w-5 h-5 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
-                      {actionIndex + 1}
-                    </span>
-                    <span className="text-sm text-neutral-700">{action}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Emergency Plans Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Shield className="w-6 h-6 text-green-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh" ? "极端情况应急预案" : "Emergency Response Plans"}
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-1 gap-6">
-          {emergencyPlans.map((plan, index) => (
-            <div key={index} className="card">
-              <h3 className="text-lg font-semibold text-red-700 mb-4">
-                {plan.situation}
-              </h3>
-              <ul className="space-y-3">
-                {plan.solutions.map((solution, solutionIndex) => (
-                  <li key={solutionIndex} className="flex items-start">
-                    <AlertTriangle className="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-neutral-700">{solution}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Acupressure Points Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Hand className="w-6 h-6 text-green-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "地铁/公交穴位按压技巧"
-              : "Subway/Bus Acupressure Techniques"}
-          </h2>
-        </div>
-        <p className="text-neutral-600 mb-8">
-          {locale === "zh"
-            ? "在拥挤的空间里，这些简单易学、随时随地可行的穴位按压技巧，能快速缓解通勤中的疼痛。"
-            : "In crowded spaces, these simple and easy-to-learn acupressure techniques can quickly relieve pain during commuting."}
-        </p>
-
-        <div className="space-y-8">
-          {commuteAcupressure.map((point, index) => (
-            <div
-              key={index}
-              className="bg-gradient-to-br from-green-50 to-neutral-50 p-6 rounded-xl"
-            >
-              <h3 className="text-xl font-semibold text-neutral-800 mb-4">
-                {point.name}
-              </h3>
-
-              {/* User Quote */}
-              <div className="bg-white p-4 rounded-lg mb-6 border-l-4 border-green-300">
+                <p className="text-neutral-600 mb-3">{kit.description}</p>
                 <div className="flex items-start">
-                  <Quote className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                  <p className="text-neutral-700 italic text-sm leading-relaxed">
-                    {point.userQuote}
-                  </p>
-                </div>
-                <p className="text-xs text-neutral-500 mt-2">
-                  {locale === "zh"
-                    ? "—— 来自用户语录"
-                    : "—— From user testimonials"}
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium text-neutral-700 mb-2">
-                      {locale === "zh" ? "位置：" : "Location:"}
-                    </h4>
-                    <p className="text-neutral-600 text-sm">{point.location}</p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-medium text-neutral-700 mb-2">
-                      {locale === "zh" ? "功效：" : "Benefits:"}
-                    </h4>
-                    <p className="text-neutral-600 text-sm">{point.benefits}</p>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-medium text-neutral-700 mb-2">
-                      {locale === "zh" ? "按压方法：" : "Technique:"}
-                    </h4>
-                    <p className="text-neutral-600 text-sm">
-                      {point.technique}
-                    </p>
-                  </div>
-
-                  <div className="bg-green-100 p-3 rounded-lg">
-                    <h4 className="font-medium text-green-800 mb-1 text-sm">
-                      {locale === "zh" ? "通勤应用：" : "Commute Application:"}
-                    </h4>
-                    <p className="text-green-700 text-sm">{point.commuteUse}</p>
-                  </div>
+                  <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-neutral-700">{kit.usage}</span>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
 
-      {/* Driving Breathing Techniques Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Wind className="w-6 h-6 text-green-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {locale === "zh"
-              ? "驾车场景呼吸放松方法"
-              : "Driving Breathing Relaxation Methods"}
-          </h2>
-        </div>
-        <p className="text-neutral-600 mb-8">
-          {locale === "zh"
-            ? "开车需要高度专注，经期疼痛可能让你分心。学会这些简单的呼吸技巧，帮助你在驾驶时缓解不适，保障安全。"
-            : "Driving requires high concentration, and period pain can be distracting. Learn these simple breathing techniques to help relieve discomfort while driving and ensure safety."}
-        </p>
+        {/* Transport Strategies Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <MapPin className="w-6 h-6 text-green-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "交通方式适配策略"
+                : "Transport Mode Adaptation Strategies"}
+            </h2>
+          </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {drivingBreathingTechniques.map((technique, index) => (
-            <div key={index} className="card">
-              <h3 className="text-lg font-semibold text-neutral-800 mb-3">
-                {technique.name}
-              </h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            {transportStrategies.map((transport, index) => (
+              <div key={index} className="card">
+                <div className="flex items-center mb-4">
+                  <div
+                    className={`w-12 h-12 rounded-full flex items-center justify-center ${transport.color} mr-4`}
+                  >
+                    {transport.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold text-neutral-800">
+                    {transport.type}
+                  </h3>
+                </div>
 
-              <p className="text-neutral-600 mb-4 text-sm">
-                {technique.description}
-              </p>
-
-              <div className="mb-4">
-                <h4 className="font-medium text-neutral-700 mb-2 text-sm">
-                  {locale === "zh" ? "步骤：" : "Steps:"}
-                </h4>
-                <ol className="space-y-2">
-                  {technique.steps.map((step, stepIndex) => (
-                    <li
-                      key={stepIndex}
-                      className="flex items-start text-sm text-neutral-700"
-                    >
-                      <span className="w-5 h-5 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
-                        {stepIndex + 1}
+                <ul className="space-y-3">
+                  {transport.strategies.map((strategy, strategyIndex) => (
+                    <li key={strategyIndex} className="flex items-start">
+                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-neutral-700">
+                        {strategy}
                       </span>
-                      {step}
                     </li>
                   ))}
-                </ol>
+                </ul>
               </div>
-
-              <div className="mb-4">
-                <h4 className="font-medium text-neutral-700 mb-2 text-sm">
-                  {locale === "zh" ? "益处：" : "Benefits:"}
-                </h4>
-                <p className="text-neutral-600 text-sm">{technique.benefits}</p>
-              </div>
-
-              <div className="bg-red-50 p-3 rounded-lg">
-                <h4 className="font-medium text-red-800 mb-1 text-sm">
-                  {locale === "zh" ? "安全提示：" : "Safety Tip:"}
-                </h4>
-                <p className="text-red-700 text-sm">{technique.safetyTip}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-          <h4 className="font-semibold text-blue-800 mb-2">
-            {locale === "zh" ? "科学依据" : "Scientific Basis"}
-          </h4>
-          <p className="text-blue-700 text-sm">
-            {locale === "zh"
-              ? "深呼吸练习通过调节自主神经系统，降低心率和压力反应，缓解肌肉紧张。研究表明，规律的呼吸练习可以促进内啡肽释放，这是人体天然的止痛物质。"
-              : "Deep breathing exercises regulate the autonomic nervous system, reducing heart rate and stress response, relieving muscle tension. Research shows that regular breathing exercises can promote endorphin release, the body's natural painkillers."}
-          </p>
-        </div>
-      </section>
-
-      {/* Safety Tips */}
-      <section className="bg-yellow-50 p-6 md:p-8 rounded-xl">
-        <h3 className="text-lg font-semibold text-yellow-800 mb-4">
-          {locale === "zh" ? "安全提示" : "Safety Tips"}
-        </h3>
-        <ul className="space-y-2 text-sm text-yellow-700">
-          <li>
-            •{" "}
-            {locale === "zh"
-              ? "药物携带：布洛芬需原包装携带，避免散装药品引发安检疑问"
-              : "Medication carrying: Ibuprofen should be carried in original packaging to avoid security questions"}
-          </li>
-          <li>
-            •{" "}
-            {locale === "zh"
-              ? "隐私保护：使用分装盒存放卫生用品，避免外露"
-              : "Privacy protection: Use compartment boxes to store sanitary products, avoid exposure"}
-          </li>
-          <li>
-            •{" "}
-            {locale === "zh"
-              ? '数据记录：通勤疼痛发作时，用APP记录"疼痛开始时间+交通方式"'
-              : 'Data recording: When commute pain occurs, use app to record "pain start time + transport mode"'}
-          </li>
-          <li>
-            •{" "}
-            {locale === "zh"
-              ? "严重疼痛时禁止驾驶：疼痛剧烈影响驾驶安全时，必须立即靠边停车休息或寻求帮助"
-              : "No driving during severe pain: When severe pain affects driving safety, must immediately pull over to rest or seek help"}
-          </li>
-        </ul>
-      </section>
-
-      {/* 相关推荐区域 */}
-      <section className="bg-gradient-to-br from-green-50 to-blue-50 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="space-y-12">
-            {/* 相关工具区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关工具" : "Related Tools"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.relatedTools.map((tool) => (
-                  <RelatedToolCard key={tool.id} tool={tool} locale={locale} />
-                ))}
-              </div>
-            </section>
-
-            {/* 相关文章区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关文章" : "Related Articles"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.relatedArticles.map((article) => (
-                  <RelatedArticleCard
-                    key={article.id}
-                    article={article}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </section>
-
-            {/* 场景解决方案区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "场景解决方案" : "Scenario Solutions"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {recommendations.scenarioSolutions.map((solution) => (
-                  <ScenarioSolutionCard
-                    key={solution.id}
-                    solution={solution}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </section>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Back to Overview */}
-      <div className="text-center">
-        <Link
-          href={`/${locale}/scenario-solutions`}
-          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          {t("scenarios.commute.backToOverview")}
-        </Link>
-      </div>
+        {/* Time Management Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Clock className="w-6 h-6 text-green-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "通勤时段管理指南"
+                : "Commute Time Management Guide"}
+            </h2>
+          </div>
 
-      {/* Medical Disclaimer */}
-      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
-        <div className="flex items-start">
-          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
-          <div>
-            <h3 className="font-semibold text-orange-800 mb-2">
-              {t("scenarios.commute.disclaimer.title")}
-            </h3>
-            <p className="text-orange-700 text-sm leading-relaxed">
-              {t("scenarios.commute.disclaimer.content")}
+          <div className="grid md:grid-cols-3 gap-6">
+            {timeManagement.map((phase, index) => (
+              <div key={index} className="card">
+                <h3 className="text-lg font-semibold text-neutral-800 mb-4">
+                  {phase.phase}
+                </h3>
+                <ul className="space-y-3">
+                  {phase.actions.map((action, actionIndex) => (
+                    <li key={actionIndex} className="flex items-start">
+                      <span className="w-5 h-5 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
+                        {actionIndex + 1}
+                      </span>
+                      <span className="text-sm text-neutral-700">{action}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Emergency Plans Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Shield className="w-6 h-6 text-green-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "极端情况应急预案"
+                : "Emergency Response Plans"}
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-1 gap-6">
+            {emergencyPlans.map((plan, index) => (
+              <div key={index} className="card">
+                <h3 className="text-lg font-semibold text-red-700 mb-4">
+                  {plan.situation}
+                </h3>
+                <ul className="space-y-3">
+                  {plan.solutions.map((solution, solutionIndex) => (
+                    <li key={solutionIndex} className="flex items-start">
+                      <AlertTriangle className="w-4 h-4 text-red-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-neutral-700">
+                        {solution}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Acupressure Points Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Hand className="w-6 h-6 text-green-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "地铁/公交穴位按压技巧"
+                : "Subway/Bus Acupressure Techniques"}
+            </h2>
+          </div>
+          <p className="text-neutral-600 mb-8">
+            {locale === "zh"
+              ? "在拥挤的空间里，这些简单易学、随时随地可行的穴位按压技巧，能快速缓解通勤中的疼痛。"
+              : "In crowded spaces, these simple and easy-to-learn acupressure techniques can quickly relieve pain during commuting."}
+          </p>
+
+          <div className="space-y-8">
+            {commuteAcupressure.map((point, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-green-50 to-neutral-50 p-6 rounded-xl"
+              >
+                <h3 className="text-xl font-semibold text-neutral-800 mb-4">
+                  {point.name}
+                </h3>
+
+                {/* User Quote */}
+                <div className="bg-white p-4 rounded-lg mb-6 border-l-4 border-green-300">
+                  <div className="flex items-start">
+                    <Quote className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                    <p className="text-neutral-700 italic text-sm leading-relaxed">
+                      {point.userQuote}
+                    </p>
+                  </div>
+                  <p className="text-xs text-neutral-500 mt-2">
+                    {locale === "zh"
+                      ? "—— 来自用户语录"
+                      : "—— From user testimonials"}
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-medium text-neutral-700 mb-2">
+                        {locale === "zh" ? "位置：" : "Location:"}
+                      </h4>
+                      <p className="text-neutral-600 text-sm">
+                        {point.location}
+                      </p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-medium text-neutral-700 mb-2">
+                        {locale === "zh" ? "功效：" : "Benefits:"}
+                      </h4>
+                      <p className="text-neutral-600 text-sm">
+                        {point.benefits}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-medium text-neutral-700 mb-2">
+                        {locale === "zh" ? "按压方法：" : "Technique:"}
+                      </h4>
+                      <p className="text-neutral-600 text-sm">
+                        {point.technique}
+                      </p>
+                    </div>
+
+                    <div className="bg-green-100 p-3 rounded-lg">
+                      <h4 className="font-medium text-green-800 mb-1 text-sm">
+                        {locale === "zh"
+                          ? "通勤应用："
+                          : "Commute Application:"}
+                      </h4>
+                      <p className="text-green-700 text-sm">
+                        {point.commuteUse}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Driving Breathing Techniques Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Wind className="w-6 h-6 text-green-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {locale === "zh"
+                ? "驾车场景呼吸放松方法"
+                : "Driving Breathing Relaxation Methods"}
+            </h2>
+          </div>
+          <p className="text-neutral-600 mb-8">
+            {locale === "zh"
+              ? "开车需要高度专注，经期疼痛可能让你分心。学会这些简单的呼吸技巧，帮助你在驾驶时缓解不适，保障安全。"
+              : "Driving requires high concentration, and period pain can be distracting. Learn these simple breathing techniques to help relieve discomfort while driving and ensure safety."}
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {drivingBreathingTechniques.map((technique, index) => (
+              <div key={index} className="card">
+                <h3 className="text-lg font-semibold text-neutral-800 mb-3">
+                  {technique.name}
+                </h3>
+
+                <p className="text-neutral-600 mb-4 text-sm">
+                  {technique.description}
+                </p>
+
+                <div className="mb-4">
+                  <h4 className="font-medium text-neutral-700 mb-2 text-sm">
+                    {locale === "zh" ? "步骤：" : "Steps:"}
+                  </h4>
+                  <ol className="space-y-2">
+                    {technique.steps.map((step, stepIndex) => (
+                      <li
+                        key={stepIndex}
+                        className="flex items-start text-sm text-neutral-700"
+                      >
+                        <span className="w-5 h-5 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
+                          {stepIndex + 1}
+                        </span>
+                        {step}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <div className="mb-4">
+                  <h4 className="font-medium text-neutral-700 mb-2 text-sm">
+                    {locale === "zh" ? "益处：" : "Benefits:"}
+                  </h4>
+                  <p className="text-neutral-600 text-sm">
+                    {technique.benefits}
+                  </p>
+                </div>
+
+                <div className="bg-red-50 p-3 rounded-lg">
+                  <h4 className="font-medium text-red-800 mb-1 text-sm">
+                    {locale === "zh" ? "安全提示：" : "Safety Tip:"}
+                  </h4>
+                  <p className="text-red-700 text-sm">{technique.safetyTip}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+            <h4 className="font-semibold text-blue-800 mb-2">
+              {locale === "zh" ? "科学依据" : "Scientific Basis"}
+            </h4>
+            <p className="text-blue-700 text-sm">
+              {locale === "zh"
+                ? "深呼吸练习通过调节自主神经系统，降低心率和压力反应，缓解肌肉紧张。研究表明，规律的呼吸练习可以促进内啡肽释放，这是人体天然的止痛物质。"
+                : "Deep breathing exercises regulate the autonomic nervous system, reducing heart rate and stress response, relieving muscle tension. Research shows that regular breathing exercises can promote endorphin release, the body's natural painkillers."}
             </p>
           </div>
+        </section>
+
+        {/* Safety Tips */}
+        <section className="bg-yellow-50 p-6 md:p-8 rounded-xl">
+          <h3 className="text-lg font-semibold text-yellow-800 mb-4">
+            {locale === "zh" ? "安全提示" : "Safety Tips"}
+          </h3>
+          <ul className="space-y-2 text-sm text-yellow-700">
+            <li>
+              •{" "}
+              {locale === "zh"
+                ? "药物携带：布洛芬需原包装携带，避免散装药品引发安检疑问"
+                : "Medication carrying: Ibuprofen should be carried in original packaging to avoid security questions"}
+            </li>
+            <li>
+              •{" "}
+              {locale === "zh"
+                ? "隐私保护：使用分装盒存放卫生用品，避免外露"
+                : "Privacy protection: Use compartment boxes to store sanitary products, avoid exposure"}
+            </li>
+            <li>
+              •{" "}
+              {locale === "zh"
+                ? '数据记录：通勤疼痛发作时，用APP记录"疼痛开始时间+交通方式"'
+                : 'Data recording: When commute pain occurs, use app to record "pain start time + transport mode"'}
+            </li>
+            <li>
+              •{" "}
+              {locale === "zh"
+                ? "严重疼痛时禁止驾驶：疼痛剧烈影响驾驶安全时，必须立即靠边停车休息或寻求帮助"
+                : "No driving during severe pain: When severe pain affects driving safety, must immediately pull over to rest or seek help"}
+            </li>
+          </ul>
+        </section>
+
+        {/* 相关推荐区域 */}
+        <section className="bg-gradient-to-br from-green-50 to-blue-50 mt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="space-y-12">
+              {/* 相关工具区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "相关工具" : "Related Tools"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.relatedTools.map((tool) => (
+                    <RelatedToolCard
+                      key={tool.id}
+                      tool={tool}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 相关文章区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "相关文章" : "Related Articles"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.relatedArticles.map((article) => (
+                    <RelatedArticleCard
+                      key={article.id}
+                      article={article}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 场景解决方案区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "场景解决方案" : "Scenario Solutions"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {recommendations.scenarioSolutions.map((solution) => (
+                    <ScenarioSolutionCard
+                      key={solution.id}
+                      solution={solution}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        {/* Back to Overview */}
+        <div className="text-center">
+          <Link
+            href={`/${locale}/scenario-solutions`}
+            className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t("scenarios.commute.backToOverview")}
+          </Link>
         </div>
-      </section>
+
+        {/* Medical Disclaimer */}
+        <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
+          <div className="flex items-start">
+            <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
+            <div>
+              <h3 className="font-semibold text-orange-800 mb-2">
+                {t("scenarios.commute.disclaimer.title")}
+              </h3>
+              <p className="text-orange-700 text-sm leading-relaxed">
+                {t("scenarios.commute.disclaimer.content")}
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

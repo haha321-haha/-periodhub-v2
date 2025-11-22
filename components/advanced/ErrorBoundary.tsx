@@ -2,6 +2,7 @@
 
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import { useAppStore } from "@/lib/stores/appStore";
+import { logError } from "@/lib/debug-logger";
 
 interface Props {
   children: ReactNode;
@@ -43,7 +44,11 @@ export class ErrorBoundary extends Component<Props, State> {
     });
 
     // 记录到控制台
-    console.error("ErrorBoundary caught an error:", error, errorInfo);
+    logError(
+      "ErrorBoundary caught an error:",
+      { error, errorInfo },
+      "ErrorBoundary/componentDidCatch",
+    );
   }
 
   render() {

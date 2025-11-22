@@ -3,8 +3,9 @@
 // User Feedback Collection System - Day 4 Implementation
 // Collects user feedback for stress assessment, radar chart, PHQ-9 and other features
 
-import { useState, useRef } from 'react';
-import { useTranslations } from 'next-intl';
+import { useState, useRef } from "react";
+import { useTranslations } from "next-intl";
+import { logError, logInfo } from "@/lib/debug-logger";
 
 interface FeedbackData {
   id: string;
@@ -15,7 +16,7 @@ interface FeedbackData {
   comment: string;
   timestamp: Date;
   metadata: {
-    userVariant?: 'control' | 'treatment';
+    userVariant?: "control" | "treatment";
     answers?: number[];
     stressScore?: number;
     phq9Score?: number;
@@ -30,10 +31,15 @@ interface UserFeedbackProps {
   onSubmit?: (feedback: FeedbackData) => void;
 }
 
-export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackProps) {
-  const t = useTranslations('feedback');
+export function UserFeedback({
+  userId,
+  feature,
+  page,
+  onSubmit,
+}: UserFeedbackProps) {
+  const t = useTranslations("feedback");
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
@@ -53,18 +59,21 @@ export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackPr
       comment: comment.trim(),
       timestamp: new Date(),
       metadata: {
-        userVariant: (localStorage.getItem('ab_test_variant') as 'control' | 'treatment') || undefined,
+        userVariant:
+          (localStorage.getItem("ab_test_variant") as
+            | "control"
+            | "treatment") || undefined,
         deviceInfo: `${navigator.userAgent.substring(0, 100)}...`,
         // can add more related data
-      }
+      },
     };
 
     try {
-    // Save to local storage
-    saveFeedbackToLocal(feedback);
+      // Save to local storage
+      saveFeedbackToLocal(feedback);
 
-    // Send to analytics service (simulated)
-    await sendFeedbackToAnalytics(feedback);
+      // Send to analytics service (simulated)
+      await sendFeedbackToAnalytics(feedback);
 
       setIsSubmitted(true);
       onSubmit?.(feedback);
@@ -73,11 +82,14 @@ export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackPr
       setTimeout(() => {
         setIsSubmitted(false);
         setRating(0);
-        setComment('');
+        setComment("");
       }, 3000);
-
-      } catch (error) {
-      console.error('Feedback submission failed:', error);
+    } catch (error) {
+      logError(
+        "Feedback submission failed:",
+        error,
+        "UserFeedback/handleSubmit",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -85,37 +97,40 @@ export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackPr
 
   const getRatingText = (rating: number) => {
     const ratingTexts = {
-      1: t('ratingTexts.1'),
-      2: t('ratingTexts.2'),
-      3: t('ratingTexts.3'),
-      4: t('ratingTexts.4'),
-      5: t('ratingTexts.5')
+      1: t("ratingTexts.1"),
+      2: t("ratingTexts.2"),
+      3: t("ratingTexts.3"),
+      4: t("ratingTexts.4"),
+      5: t("ratingTexts.5"),
     };
-    return ratingTexts[rating as keyof typeof ratingTexts] || '';
+    return ratingTexts[rating as keyof typeof ratingTexts] || "";
   };
 
   if (isSubmitted) {
     return (
       <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
         <div className="text-green-600 text-4xl mb-2">✅</div>
-        <p className="text-green-800 font-semibold">{t('successTitle')}</p>
-        <p className="text-green-600 text-sm">{t('successMessage')}</p>
+        <p className="text-green-800 font-semibold">{t("successTitle")}</p>
+        <p className="text-green-600 text-sm">{t("successMessage")}</p>
       </div>
     );
   }
 
   return (
-    <div ref={formRef} className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+    <div
+      ref={formRef}
+      className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm"
+    >
       <div className="flex items-center gap-2 mb-4">
         <span className="text-xl">💬</span>
-        <h3 className="text-lg font-semibold text-gray-800">{t('title')}</h3>
+        <h3 className="text-lg font-semibold text-gray-800">{t("title")}</h3>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* 评分 */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            {t('ratingLabel', { feature })}
+            {t("ratingLabel", { feature })}
           </label>
           <div className="flex gap-1">
             {[1, 2, 3, 4, 5].map((star) => (
@@ -125,8 +140,8 @@ export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackPr
                 onClick={() => setRating(star)}
                 className={`text-2xl transition-colors ${
                   star <= rating
-                    ? 'text-yellow-400'
-                    : 'text-gray-300 hover:text-yellow-300'
+                    ? "text-yellow-400"
+                    : "text-gray-300 hover:text-yellow-300"
                 }`}
               >
                 ⭐
@@ -143,12 +158,12 @@ export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackPr
         {/* 文字反馈 */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            {t('commentLabel')}
+            {t("commentLabel")}
           </label>
           <textarea
             value={comment}
             onChange={(e) => setComment(e.target.value)}
-            placeholder={t('commentPlaceholder')}
+            placeholder={t("commentPlaceholder")}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
             rows={3}
             maxLength={500}
@@ -164,11 +179,11 @@ export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackPr
           disabled={rating === 0 || isSubmitting}
           className={`w-full py-2 px-4 rounded-lg font-medium transition-colors ${
             rating === 0 || isSubmitting
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-blue-500 text-white hover:bg-blue-600'
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-blue-500 text-white hover:bg-blue-600"
           }`}
         >
-          {isSubmitting ? t('submitting') : t('submitButton')}
+          {isSubmitting ? t("submitting") : t("submitButton")}
         </button>
       </form>
     </div>
@@ -177,7 +192,7 @@ export function UserFeedback({ userId, feature, page, onSubmit }: UserFeedbackPr
 
 // 反馈数据管理
 export class FeedbackManager {
-  private static readonly STORAGE_KEY = 'user_feedback_data';
+  private static readonly STORAGE_KEY = "user_feedback_data";
 
   static saveFeedback(feedback: FeedbackData): void {
     const existing = this.getAllFeedback();
@@ -196,17 +211,21 @@ export class FeedbackManager {
       const stored = localStorage.getItem(this.STORAGE_KEY);
       return stored ? JSON.parse(stored) : [];
     } catch (error) {
-      console.error('Failed to read feedback data:', error);
+      logError(
+        "Failed to read feedback data:",
+        error,
+        "UserFeedback/loadFeedbackHistory",
+      );
       return [];
     }
   }
 
   static getFeedbackByFeature(feature: string): FeedbackData[] {
-    return this.getAllFeedback().filter(f => f.feature === feature);
+    return this.getAllFeedback().filter((f) => f.feature === feature);
   }
 
   static getFeedbackByUser(userId: string): FeedbackData[] {
-    return this.getAllFeedback().filter(f => f.userId === userId);
+    return this.getAllFeedback().filter((f) => f.userId === userId);
   }
 
   static getAverageRating(feature?: string): number {
@@ -222,11 +241,15 @@ export class FeedbackManager {
 
   static exportFeedback(): string {
     const feedback = this.getAllFeedback();
-    return JSON.stringify({
-      exportDate: new Date().toISOString(),
-      totalCount: feedback.length,
-      feedback
-    }, null, 2);
+    return JSON.stringify(
+      {
+        exportDate: new Date().toISOString(),
+        totalCount: feedback.length,
+        feedback,
+      },
+      null,
+      2,
+    );
   }
 }
 
@@ -238,12 +261,20 @@ function saveFeedbackToLocal(feedback: FeedbackData): void {
 // 发送到分析服务 (模拟)
 async function sendFeedbackToAnalytics(feedback: FeedbackData): Promise<void> {
   // 实际项目中这里应该发送到您的分析服务
-  console.log('Sending feedback to analytics service:', feedback);
+  logInfo(
+    "Sending feedback to analytics service:",
+    feedback,
+    "UserFeedback/sendFeedbackToAnalytics",
+  );
 
   // Simulate API call
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log('Feedback sent to analytics service');
+      logInfo(
+        "Feedback sent to analytics service",
+        undefined,
+        "UserFeedback/sendFeedbackToAnalytics",
+      );
       resolve();
     }, 1000);
   });
@@ -257,8 +288,13 @@ interface QuickFeedbackProps {
   className?: string;
 }
 
-export function QuickFeedback({ userId, feature, page, className = "" }: QuickFeedbackProps) {
-  const t = useTranslations('feedback');
+export function QuickFeedback({
+  userId,
+  feature,
+  page,
+  className = "",
+}: QuickFeedbackProps) {
+  const t = useTranslations("feedback");
   const [showFeedback, setShowFeedback] = useState(false);
 
   if (!showFeedback) {
@@ -268,7 +304,7 @@ export function QuickFeedback({ userId, feature, page, className = "" }: QuickFe
         className={`inline-flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors ${className}`}
       >
         <span>💬</span>
-        {t('title')}
+        {t("title")}
       </button>
     );
   }
@@ -295,11 +331,11 @@ export function QuickFeedback({ userId, feature, page, className = "" }: QuickFe
 
 // 反馈统计组件
 export function FeedbackStats({ feature }: { feature?: string }) {
-  const t = useTranslations('feedback');
+  const t = useTranslations("feedback");
   const [stats, setStats] = useState({
     total: 0,
     average: 0,
-    recent: [] as FeedbackData[]
+    recent: [] as FeedbackData[],
   });
 
   // 实际项目中这里应该从API获取数据
@@ -311,7 +347,7 @@ export function FeedbackStats({ feature }: { feature?: string }) {
     setStats({
       total: feedback.length,
       average: FeedbackManager.getAverageRating(feature),
-      recent: feedback.slice(-5).reverse()
+      recent: feedback.slice(-5).reverse(),
     });
   };
 
@@ -319,30 +355,42 @@ export function FeedbackStats({ feature }: { feature?: string }) {
     <div className="bg-gray-50 rounded-lg p-4">
       <div className="flex items-center justify-between mb-3">
         <h4 className="font-semibold text-gray-800">
-          {feature ? `${feature}${t('userFeedback.stats.titleWithFeature', { feature: feature })}` : t('userFeedback.stats.title')}
+          {feature
+            ? `${feature}${t("userFeedback.stats.titleWithFeature", {
+                feature: feature,
+              })}`
+            : t("userFeedback.stats.title")}
         </h4>
         <button
           onClick={refreshStats}
           className="text-sm text-blue-600 hover:text-blue-800"
         >
-          {t('common.refresh')}
+          {t("common.refresh")}
         </button>
       </div>
 
       <div className="grid grid-cols-2 gap-4 text-sm">
         <div>
           <div className="text-2xl font-bold text-blue-600">{stats.total}</div>
-          <div className="text-gray-600">{t('userFeedback.stats.totalFeedback')}</div>
+          <div className="text-gray-600">
+            {t("userFeedback.stats.totalFeedback")}
+          </div>
         </div>
         <div>
-          <div className="text-2xl font-bold text-green-600">{stats.average}</div>
-          <div className="text-gray-600">{t('userFeedback.stats.averageRating')}</div>
+          <div className="text-2xl font-bold text-green-600">
+            {stats.average}
+          </div>
+          <div className="text-gray-600">
+            {t("userFeedback.stats.averageRating")}
+          </div>
         </div>
       </div>
 
       {stats.recent.length > 0 && (
         <div className="mt-3 pt-3 border-t border-gray-200">
-          <div className="text-xs text-gray-500 mb-2">{t('userFeedback.stats.recentFeedback')}</div>
+          <div className="text-xs text-gray-500 mb-2">
+            {t("userFeedback.stats.recentFeedback")}
+          </div>
           <div className="space-y-1">
             {stats.recent.map((f) => (
               <div key={f.id} className="text-xs text-gray-600">

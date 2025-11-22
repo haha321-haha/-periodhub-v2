@@ -76,12 +76,7 @@ interface BreadcrumbItem {
   href?: string;
 }
 
-function ServerBreadcrumb({
-  items,
-}: {
-  items: BreadcrumbItem[];
-  locale: string;
-}) {
+function ServerBreadcrumb({ items }: { items: BreadcrumbItem[] }) {
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
       <ol className="flex items-center space-x-2 text-sm text-gray-600">
@@ -217,7 +212,7 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const article = await getArticleBySlug(slug, locale);
+  const article = await getArticleBySlug(slug);
 
   if (!article) {
     return {
@@ -227,27 +222,25 @@ export async function generateMetadata({
   }
 
   const title =
-    locale === "zh" ? article.title_zh || article.title : article.title;
+    locale === "zh"
+      ? article.title_zh || article.titleZh || article.title
+      : article.title;
   const description =
-    locale === "zh" ? article.summary_zh || article.summary : article.summary;
-  const seoTitle =
     locale === "zh"
-      ? article.seo_title_zh || title
-      : article.seo_title || title;
-  const seoDescription =
-    locale === "zh"
-      ? article.seo_description_zh || description
-      : article.seo_description || description;
+      ? article.summary_zh || article.descriptionZh || article.description
+      : article.summary || article.description;
+  const seoTitle = title;
+  const seoDescription = description;
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
-  const canonicalUrl = article.canonical_url || `/${locale}/articles/${slug}`;
+  const canonicalUrl = `/${locale}/articles/${slug}`;
   const articleUrl = `${baseUrl}${canonicalUrl}`;
 
   return {
     title: seoTitle,
     description: seoDescription,
-    keywords: locale === "zh" ? article.tags_zh : article.tags,
-    authors: [{ name: article.author }],
+    keywords: article.tags,
+    authors: [{ name: "PeriodHub Team" }],
     // 🔧 修复：添加明确的robots配置，确保文章页面被正确索引
     robots: {
       index: true,
@@ -263,8 +256,8 @@ export async function generateMetadata({
     other: {
       "fb:app_id":
         process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
-      "article:published_time": article.date,
-      "article:author": article.author,
+      "article:published_time": new Date(article.publishedAt).toISOString(),
+      "article:author": "PeriodHub Team",
       "Content-Language": locale === "zh" ? "zh-CN" : "en-US",
     },
     openGraph: {
@@ -272,11 +265,11 @@ export async function generateMetadata({
       description: seoDescription,
       url: articleUrl,
       type: "article",
-      publishedTime: article.date,
-      authors: [article.author],
+      publishedTime: new Date(article.publishedAt).toISOString(),
+      authors: ["PeriodHub Team"],
       images: [
         {
-          url: article.featured_image || "/images/article-image.jpg",
+          url: "/images/article-image.jpg",
           width: 1200,
           height: 630,
           alt: title,
@@ -288,7 +281,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: seoTitle,
       description: seoDescription,
-      images: [article.featured_image || "/images/article-image.jpg"],
+      images: ["/images/article-image.jpg"],
     },
     alternates: {
       canonical: articleUrl,
@@ -370,7 +363,7 @@ export default async function ArticlePage({
     // eslint-disable-next-line no-console
     console.log("ArticlePage - Processing:", { locale, slug });
 
-    const article = await getArticleBySlug(slug, locale);
+    const article = await getArticleBySlug(slug);
     const articleFetchTime = Date.now() - articleFetchStart;
     // eslint-disable-next-line no-console
     // eslint-disable-next-line no-console
@@ -405,9 +398,13 @@ export default async function ArticlePage({
     const t = await getTranslations({ locale, namespace: "articlePage" });
 
     const title =
-      locale === "zh" ? article.title_zh || article.title : article.title;
+      locale === "zh"
+        ? article.title_zh || article.titleZh || article.title
+        : article.title;
     const summary =
-      locale === "zh" ? article.summary_zh || article.summary : article.summary;
+      locale === "zh"
+        ? article.summary_zh || article.descriptionZh || article.description
+        : article.summary || article.description;
     // 将category转换为安全的翻译键名
     const categoryKey = article.category
       .toLowerCase()
@@ -416,12 +413,9 @@ export default async function ArticlePage({
 
     const category =
       locale === "zh"
-        ? article.category_zh || t(`tags.${categoryKey}`) || article.category
+        ? t(`tags.${categoryKey}`) || article.category
         : t(`tags.${categoryKey}`) || article.category;
-    const readingTime =
-      locale === "zh"
-        ? article.reading_time_zh || article.reading_time
-        : article.reading_time;
+    const readingTime = article.readingTime;
 
     // Check if this is the NSAID article that needs interactive components
     const isNSAIDArticle = slug === "nsaid-menstrual-pain-professional-guide";
@@ -449,15 +443,15 @@ export default async function ArticlePage({
     );
 
     // 生成增强的结构化数据
-    const articleStructuredData = await generateArticleStructuredData({
-      locale,
-      articleSlug: slug,
+    const articleStructuredData = generateArticleStructuredData({
+      url: articleUrl,
       title,
+      headline: title,
       description: summary || "",
-      author: article.author,
-      datePublished: article.date,
-      dateModified: article.date,
-      image: article.featured_image,
+      locale,
+      publishedAt: new Date(article.publishedAt).toISOString(),
+      updatedAt: new Date(article.updatedAt).toISOString(),
+      imageUrl: "/images/article-image.jpg",
     });
 
     // 生成面包屑结构化数据
@@ -489,7 +483,6 @@ export default async function ArticlePage({
           {/* Breadcrumb */}
           <div className="container-custom">
             <ServerBreadcrumb
-              locale={locale}
               items={[
                 {
                   label: t("breadcrumb.home"),
@@ -514,7 +507,7 @@ export default async function ArticlePage({
                     {category}
                   </span>
                   <time
-                    dateTime={article.date}
+                    dateTime={new Date(article.publishedAt).toISOString()}
                     className="flex items-center gap-1"
                   >
                     <svg
@@ -530,7 +523,7 @@ export default async function ArticlePage({
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                       />
                     </svg>
-                    {new Date(article.date).toLocaleDateString(
+                    {new Date(article.publishedAt).toLocaleDateString(
                       locale === "zh" ? "zh-CN" : "en-US",
                     )}
                   </time>
@@ -576,12 +569,12 @@ export default async function ArticlePage({
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary-100 rounded-full flex items-center justify-center">
                       <span className="text-primary-600 font-semibold text-sm sm:text-base">
-                        {article.author?.charAt(0) || "P"}
+                        {"P"}
                       </span>
                     </div>
                     <div>
                       <p className="font-medium text-sm sm:text-base text-neutral-800">
-                        {article.author || "Period Health Team"}
+                        {"PeriodHub Team"}
                       </p>
                       <p className="text-xs sm:text-sm text-neutral-600">
                         {t("content.healthExpert")}
@@ -609,11 +602,11 @@ export default async function ArticlePage({
                     <div className="prose prose-sm sm:prose-base lg:prose-lg max-w-none prose-primary prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700">
                       {isNSAIDArticle ? (
                         // For NSAID article, use custom client component
-                        <NSAIDContentSimple content={article.content} />
+                        <NSAIDContentSimple content={article.content || ""} />
                       ) : hasMermaidCharts ? (
                         // For articles with Mermaid charts, use enhanced Markdown component
                         <MarkdownWithMermaid
-                          content={article.content}
+                          content={article.content || ""}
                           className="prose prose-sm sm:prose-base lg:prose-lg max-w-none prose-primary prose-headings:text-neutral-800 prose-p:text-neutral-700 prose-li:text-neutral-700"
                         />
                       ) : (
@@ -654,7 +647,7 @@ export default async function ArticlePage({
                             ),
                           }}
                         >
-                          {article.content}
+                          {article.content || ""}
                         </ReactMarkdown>
                       )}
                     </div>
@@ -772,12 +765,8 @@ export default async function ArticlePage({
                         .replace(/[^\w\u4e00-\u9fff-]/g, "");
 
                       const relatedCategory =
-                        locale === "zh"
-                          ? relatedArticle.category_zh ||
-                            t(`tags.${relatedCategoryKey}`) ||
-                            relatedArticle.category
-                          : t(`tags.${relatedCategoryKey}`) ||
-                            relatedArticle.category;
+                        t(`tags.${relatedCategoryKey}`) ||
+                        relatedArticle.category;
 
                       return (
                         <Link

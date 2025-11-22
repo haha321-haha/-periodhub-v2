@@ -143,7 +143,7 @@ export default function EvolutionaryPerspective({
           </p>
           <div className="bg-white rounded-lg p-3 border-l-4 border-indigo-400">
             <p className="text-gray-700 italic">
-              "{t("evolutionary.selfTalk")}"
+              &quot;{t("evolutionary.selfTalk")}&quot;
             </p>
           </div>
         </div>

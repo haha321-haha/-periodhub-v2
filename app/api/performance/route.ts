@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     // Performance data received and processed
 
     return NextResponse.json({ success: true });
-  } catch (_error) {
+  } catch {
     // Error processing performance data
     return NextResponse.json(
       { error: "Internal server error" },
@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
         returnedRecords: limitedData.length,
       },
     });
-  } catch (_error) {
+  } catch {
     // Error fetching performance data
     return NextResponse.json(
       { error: "Internal server error" },

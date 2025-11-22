@@ -244,3 +244,65 @@ export function exportABTestData(): string {
     2,
   );
 }
+
+/**
+ * 生成匿名用户ID
+ */
+export function generateAnonymousUserId(): string {
+  const STORAGE_KEY = "anonymous_user_id";
+  let userId = LocalStorageManager.getItem<string>(STORAGE_KEY);
+
+  if (!userId) {
+    userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    LocalStorageManager.setItem(STORAGE_KEY, userId);
+  }
+
+  return userId;
+}
+
+/**
+ * 跟踪付费墙点击
+ */
+export function trackPaywallClick(userId: string, action: string): boolean {
+  return trackABTestEvent("paywall", "paywall_click", { userId, action });
+}
+
+/**
+ * 跟踪付费墙查看
+ */
+export function trackPaywallView(userId: string): boolean {
+  return trackABTestEvent("paywall", "paywall_view", { userId });
+}
+
+/**
+ * 跟踪PHQ-9评估开始
+ */
+export function trackPHQ9Start(userId: string): boolean {
+  return trackABTestEvent("phq9", "phq9_start", { userId });
+}
+
+/**
+ * 跟踪PHQ-9评估完成
+ */
+export function trackPHQ9Complete(
+  userId: string,
+  score: number,
+  level: string,
+): boolean {
+  return trackABTestEvent("phq9", "phq9_complete", { userId, score, level });
+}
+
+/**
+ * 跟踪雷达图交互
+ */
+export function trackRadarChartInteraction(
+  userId: string,
+  type: string,
+  data: unknown,
+): boolean {
+  return trackABTestEvent("radar_chart", "interaction", {
+    userId,
+    type,
+    data,
+  });
+}

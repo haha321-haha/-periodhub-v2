@@ -110,7 +110,7 @@ function applyFontSize(fontSize: "small" | "medium" | "large") {
 }
 
 // 应用可访问性设置
-function applyAccessibilitySettings(settings: any) {
+function applyAccessibilitySettings(settings: Record<string, unknown>) {
   const root = document.documentElement;
 
   // 高对比度

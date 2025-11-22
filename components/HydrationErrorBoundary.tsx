@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { logWarn, logError, logInfo } from "@/lib/debug-logger";
 
 interface HydrationErrorBoundaryState {
   hasError: boolean;
@@ -34,9 +35,10 @@ class InternalHydrationErrorBoundary extends React.Component<
       error.message.includes("client properties");
 
     if (isHydrationError) {
-      console.warn(
+      logWarn(
         "[HydrationErrorBoundary] 捕获到hydration错误:",
-        error.message,
+        error,
+        "HydrationErrorBoundary/getDerivedStateFromError",
       );
       return { hasError: true, error };
     }
@@ -47,11 +49,15 @@ class InternalHydrationErrorBoundary extends React.Component<
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // 记录hydration错误
-    console.error("[HydrationErrorBoundary] Hydration错误详情:", {
-      error: error.message,
-      componentStack: errorInfo.componentStack,
-      timestamp: new Date().toISOString(),
-    });
+    logError(
+      "[HydrationErrorBoundary] Hydration错误详情:",
+      {
+        error: error.message,
+        componentStack: errorInfo.componentStack,
+        timestamp: new Date().toISOString(),
+      },
+      "HydrationErrorBoundary/componentDidCatch",
+    );
 
     // 尝试修复hydration问题
     this.fixHydrationIssues();
@@ -70,7 +76,11 @@ class InternalHydrationErrorBoundary extends React.Component<
     extensionClasses.forEach((className) => {
       if (htmlElement.classList.contains(className)) {
         htmlElement.classList.remove(className);
-        console.log(`[HydrationErrorBoundary] 移除了扩展类名: ${className}`);
+        logInfo(
+          `[HydrationErrorBoundary] 移除了扩展类名: ${className}`,
+          { className },
+          "HydrationErrorBoundary/fixHydrationIssues",
+        );
       }
     });
 

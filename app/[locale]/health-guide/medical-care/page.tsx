@@ -22,10 +22,11 @@ export async function generateMetadata({
       : "Recognize symptoms and situations that require medical attention, understand when to seek professional medical help.";
 
   // 生成canonical和hreflang配置
-  const alternates = generateAlternatesConfig(
-    locale,
-    "health-guide/medical-care",
-  );
+  const alternatesData = generateAlternatesConfig("health-guide/medical-care");
+  const alternates = {
+    canonical: alternatesData[locale === "zh" ? "zh-CN" : "en-US"],
+    languages: alternatesData,
+  };
 
   return {
     title,

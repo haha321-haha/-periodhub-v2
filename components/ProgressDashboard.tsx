@@ -51,7 +51,11 @@ export default function ProgressDashboard({ locale }: ProgressDashboardProps) {
         <div className="grid md:grid-cols-3 gap-4">
           <div className="bg-white rounded-lg p-4">
             <div className="text-center">
-              <div className={`text-2xl font-bold mb-1 ${getStressColor(stats.averageStress)}`}>
+              <div
+                className={`text-2xl font-bold mb-1 ${getStressColor(
+                  stats.averageStress,
+                )}`}
+              >
                 {stats.averageStress || "7.2"}
               </div>
               <div className="text-sm text-gray-600">Average Stress</div>
@@ -67,7 +71,11 @@ export default function ProgressDashboard({ locale }: ProgressDashboardProps) {
           </div>
           <div className="bg-white rounded-lg p-4">
             <div className="text-center">
-              <div className={`text-2xl font-bold mb-1 ${getMoodColor(stats.averageMood)}`}>
+              <div
+                className={`text-2xl font-bold mb-1 ${getMoodColor(
+                  stats.averageMood,
+                )}`}
+              >
                 {stats.averageMood || "6.8"}
               </div>
               <div className="text-sm text-gray-600">Average Mood</div>
@@ -91,10 +99,18 @@ export default function ProgressDashboard({ locale }: ProgressDashboardProps) {
                     {formatDate(entry.date)}
                   </div>
                   <div className="flex gap-4">
-                    <span className={`font-semibold ${getStressColor(entry.stressLevel)}`}>
+                    <span
+                      className={`font-semibold ${getStressColor(
+                        entry.stressLevel,
+                      )}`}
+                    >
                       Stress: {entry.stressLevel}/10
                     </span>
-                    <span className={`font-semibold ${getMoodColor(entry.moodRating)}`}>
+                    <span
+                      className={`font-semibold ${getMoodColor(
+                        entry.moodRating,
+                      )}`}
+                    >
                       Mood: {entry.moodRating}/10
                     </span>
                   </div>
@@ -112,7 +128,9 @@ export default function ProgressDashboard({ locale }: ProgressDashboardProps) {
                   </div>
                 )}
                 {entry.notes && (
-                  <p className="text-sm text-gray-700 italic">"{entry.notes}"</p>
+                  <p className="text-sm text-gray-700 italic">
+                    &quot;{entry.notes}&quot;
+                  </p>
                 )}
               </div>
             ))}
@@ -128,7 +146,8 @@ export default function ProgressDashboard({ locale }: ProgressDashboardProps) {
             No Entries Yet
           </h3>
           <p className="text-gray-600 mb-4">
-            Start tracking your stress management progress by adding your first entry.
+            Start tracking your stress management progress by adding your first
+            entry.
           </p>
           <Link
             href={`/${locale}/interactive-tools/stress-management/progress/add`}

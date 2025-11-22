@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { logInfo, logError } from "@/lib/debug-logger";
 
 export default function EmergencyFix() {
   const [isFixing, setIsFixing] = useState(false);
@@ -28,14 +29,18 @@ export default function EmergencyFix() {
           });
         }
 
-        console.log("✅ 紧急清理完成");
+        logInfo(
+          "✅ 紧急清理完成",
+          undefined,
+          "EmergencyFix/handleEmergencyFix",
+        );
 
         // 延迟刷新页面
         setTimeout(() => {
           window.location.reload();
         }, 1000);
       } catch (error) {
-        console.error("紧急修复失败:", error);
+        logError("紧急修复失败:", error, "EmergencyFix/handleEmergencyFix");
         setIsFixing(false);
       }
     }

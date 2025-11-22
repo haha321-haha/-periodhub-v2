@@ -44,3 +44,11 @@ export function analyzeABTestData(testName: string): ABTestAnalysisResult {
     message: "Analysis not implemented yet",
   };
 }
+
+/**
+ * 导出 realDataABTestBridge 对象（兼容性）
+ */
+export const realDataABTestBridge = {
+  collectWithABTest,
+  analyzeABTestData,
+};

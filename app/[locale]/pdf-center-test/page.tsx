@@ -27,7 +27,7 @@ export default async function PDFCenterTestPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations("common");
+  // const t = await getTranslations("common"); // Unused
 
   return (
     <div className="min-h-screen bg-gray-50">

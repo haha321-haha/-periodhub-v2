@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { logInfo, logWarn } from "@/lib/debug-logger";
 
 /**
  * 性能追踪组件
@@ -23,17 +24,49 @@ export default function PerformanceTracker() {
             entry.name.includes("chart")
           ) {
             const loadTime = Math.round(entry.duration);
-            const transferSize = (entry as any).transferSize || 0;
+            const transferSize =
+              (entry as PerformanceNavigationTiming & { transferSize?: number })
+                .transferSize || 0;
 
-            console.log(`📊 Script Performance: ${entry.name}`);
-            console.log(`   Load Time: ${loadTime}ms`);
-            console.log(
+            logInfo(
+              `📊 Script Performance: ${entry.name}`,
+              { loadTime, transferSize },
+              "PerformanceTracker/trackScriptPerformance",
+            );
+            logInfo(
+              `   Load Time: ${loadTime}ms`,
+              undefined,
+              "PerformanceTracker/trackScriptPerformance",
+            );
+            logInfo(
               `   Transfer Size: ${(transferSize / 1024).toFixed(2)}KB`,
+              undefined,
+              "PerformanceTracker/trackScriptPerformance",
             );
 
             // 发送性能数据到GA4
-            if ((window as any).gtag) {
-              (window as any).gtag("event", "script_performance", {
+            if (
+              typeof window !== "undefined" &&
+              "gtag" in window &&
+              typeof (
+                window as {
+                  gtag?: (
+                    command: string,
+                    eventName: string,
+                    params?: Record<string, unknown>,
+                  ) => void;
+                }
+              ).gtag === "function"
+            ) {
+              (
+                window as {
+                  gtag: (
+                    command: string,
+                    eventName: string,
+                    params?: Record<string, unknown>,
+                  ) => void;
+                }
+              ).gtag("event", "script_performance", {
                 script_name: entry.name,
                 load_time: loadTime,
                 transfer_size: transferSize,
@@ -44,8 +77,10 @@ export default function PerformanceTracker() {
 
             // 性能警告
             if (loadTime > 1000) {
-              console.warn(
+              logWarn(
                 `⚠️ Slow script detected: ${entry.name} took ${loadTime}ms`,
+                { entryName: entry.name, loadTime },
+                "PerformanceTracker/trackScriptPerformance",
               );
             }
           }
@@ -64,8 +99,28 @@ export default function PerformanceTracker() {
         const entries = list.getEntries();
         const lastEntry = entries[entries.length - 1];
 
-        if ((window as any).gtag) {
-          (window as any).gtag("event", "web_vitals", {
+        if (
+          typeof window !== "undefined" &&
+          "gtag" in window &&
+          typeof (
+            window as {
+              gtag?: (
+                command: string,
+                eventName: string,
+                params?: Record<string, unknown>,
+              ) => void;
+            }
+          ).gtag === "function"
+        ) {
+          (
+            window as {
+              gtag: (
+                command: string,
+                eventName: string,
+                params?: Record<string, unknown>,
+              ) => void;
+            }
+          ).gtag("event", "web_vitals", {
             metric_name: "LCP",
             metric_value: Math.round(lastEntry.startTime),
             event_category: "performance",
@@ -78,11 +133,32 @@ export default function PerformanceTracker() {
       // FID (First Input Delay)
       const fidObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          if ((window as any).gtag) {
-            (window as any).gtag("event", "web_vitals", {
+          if (
+            typeof window !== "undefined" &&
+            "gtag" in window &&
+            typeof (
+              window as {
+                gtag?: (
+                  command: string,
+                  eventName: string,
+                  params?: Record<string, unknown>,
+                ) => void;
+              }
+            ).gtag === "function"
+          ) {
+            (
+              window as {
+                gtag: (
+                  command: string,
+                  eventName: string,
+                  params?: Record<string, unknown>,
+                ) => void;
+              }
+            ).gtag("event", "web_vitals", {
               metric_name: "FID",
               metric_value: Math.round(
-                (entry as any).processingStart - entry.startTime,
+                (entry as PerformanceEventTiming).processingStart -
+                  entry.startTime,
               ),
               event_category: "performance",
             });
@@ -96,13 +172,34 @@ export default function PerformanceTracker() {
       let clsValue = 0;
       const clsObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          if (!(entry as any).hadRecentInput) {
-            clsValue += (entry as any).value;
+          const layoutShiftEntry = entry as PerformanceLayoutShiftEntry;
+          if (!layoutShiftEntry.hadRecentInput) {
+            clsValue += layoutShiftEntry.value;
           }
         }
 
-        if ((window as any).gtag) {
-          (window as any).gtag("event", "web_vitals", {
+        if (
+          typeof window !== "undefined" &&
+          "gtag" in window &&
+          typeof (
+            window as {
+              gtag?: (
+                command: string,
+                eventName: string,
+                params?: Record<string, unknown>,
+              ) => void;
+            }
+          ).gtag === "function"
+        ) {
+          (
+            window as {
+              gtag: (
+                command: string,
+                eventName: string,
+                params?: Record<string, unknown>,
+              ) => void;
+            }
+          ).gtag("event", "web_vitals", {
             metric_name: "CLS",
             metric_value: Math.round(clsValue * 1000),
             event_category: "performance",
@@ -139,17 +236,41 @@ export default function PerformanceTracker() {
               navigation.responseStart - navigation.requestStart,
             ),
             dom_processing: Math.round(
-              navigation.domComplete - (navigation as any).domLoading,
+              navigation.domComplete - navigation.domLoading,
             ),
             total_load_time: Math.round(
-              navigation.loadEventEnd - (navigation as any).navigationStart,
+              navigation.loadEventEnd - navigation.fetchStart,
             ),
           };
 
-          console.log("📊 Page Performance Metrics:", metrics);
+          logInfo(
+            "📊 Page Performance Metrics:",
+            metrics,
+            "PerformanceTracker/trackPagePerformance",
+          );
 
-          if ((window as any).gtag) {
-            (window as any).gtag("event", "page_performance", {
+          if (
+            typeof window !== "undefined" &&
+            "gtag" in window &&
+            typeof (
+              window as {
+                gtag?: (
+                  command: string,
+                  eventName: string,
+                  params?: Record<string, unknown>,
+                ) => void;
+              }
+            ).gtag === "function"
+          ) {
+            (
+              window as {
+                gtag: (
+                  command: string,
+                  eventName: string,
+                  params?: Record<string, unknown>,
+                ) => void;
+              }
+            ).gtag("event", "page_performance", {
               dom_content_loaded: metrics.dom_content_loaded,
               load_complete: metrics.load_complete,
               first_byte: metrics.first_byte,
@@ -192,39 +313,51 @@ export function ScriptOptimizationSuggestions() {
 
       const slowScripts = scripts.filter((script) => script.duration > 500);
       const largeScripts = scripts.filter(
-        (script) => ((script as any).transferSize || 0) > 100000,
+        (script) =>
+          ((script as PerformanceResourceTiming & { transferSize?: number })
+            .transferSize || 0) > 100000,
       );
 
       if (slowScripts.length > 0) {
-        console.log(
+        logInfo(
           "🐌 Slow scripts detected:",
           slowScripts.map((s) => ({
             name: s.name,
             duration: Math.round(s.duration) + "ms",
           })),
+          "PerformanceTracker/analyzeScripts",
         );
       }
 
       if (largeScripts.length > 0) {
-        console.log(
+        logInfo(
           "📦 Large scripts detected:",
           largeScripts.map((s) => ({
             name: s.name,
-            size: Math.round(((s as any).transferSize || 0) / 1024) + "KB",
+            size:
+              Math.round(
+                ((s as PerformanceResourceTiming & { transferSize?: number })
+                  .transferSize || 0) / 1024,
+              ) + "KB",
           })),
+          "PerformanceTracker/analyzeScripts",
         );
       }
 
       // 提供优化建议
       if (scripts.length > 5) {
-        console.log(
+        logInfo(
           "💡 Optimization suggestion: Consider reducing the number of third-party scripts",
+          { scriptCount: scripts.length },
+          "PerformanceTracker/analyzeScripts",
         );
       }
 
       if (scripts.some((s) => !s.name.includes("lazyOnload"))) {
-        console.log(
+        logInfo(
           "💡 Optimization suggestion: Consider using lazyOnload for non-critical scripts",
+          undefined,
+          "PerformanceTracker/analyzeScripts",
         );
       }
     };

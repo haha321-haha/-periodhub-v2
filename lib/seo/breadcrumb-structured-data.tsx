@@ -9,7 +9,6 @@ interface BreadcrumbStructuredDataProps {
 
 export function generateBreadcrumbStructuredData({
   locale,
-  path,
   breadcrumbs,
 }: BreadcrumbStructuredDataProps) {
   const baseUrl =

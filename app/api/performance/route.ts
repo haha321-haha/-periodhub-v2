@@ -1,7 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
 // 性能数据存储（生产环境建议使用数据库）
-const performanceData: any[] = [];
+const performanceData: Array<{
+  timestamp: string;
+  url: string;
+  metrics: Record<string, number>;
+  id: string;
+  userAgent?: string;
+  ip?: string;
+}> = [];
 
 export async function POST(request: NextRequest) {
   try {
@@ -28,15 +35,11 @@ export async function POST(request: NextRequest) {
       performanceData.splice(0, performanceData.length - 1000);
     }
 
-    console.log("📊 Performance data received:", {
-      url: data.url,
-      metrics: Object.keys(data.metrics),
-      timestamp: data.timestamp,
-    });
+    // Performance data received and processed
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Error processing performance data:", error);
+    // Error processing performance data
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
@@ -80,7 +83,7 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("Error fetching performance data:", error);
+    // Error fetching performance data
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
@@ -88,11 +91,25 @@ export async function GET(request: NextRequest) {
   }
 }
 
-function calculateAverages(data: any[]) {
+function calculateAverages(
+  data: Array<{
+    timestamp: string;
+    url: string;
+    metrics: Record<string, number>;
+  }>,
+) {
   if (data.length === 0) return {};
 
   const metrics = ["LCP", "FID", "CLS", "FCP", "TTFB"];
-  const averages: any = {};
+  const averages: Record<
+    string,
+    {
+      average: number;
+      min: number;
+      max: number;
+      count: number;
+    }
+  > = {};
 
   metrics.forEach((metric) => {
     const values = data

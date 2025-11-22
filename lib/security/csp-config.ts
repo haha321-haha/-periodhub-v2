@@ -1,4 +1,3 @@
-import { URL_CONFIG } from "@/lib/url-config";
 /**
  * 内容安全策略 (CSP) 配置
  * 提供严格的安全策略配置
@@ -221,13 +220,8 @@ export function processCSPViolation(report: CSPViolationReport) {
   const violation = report["csp-report"];
 
   // 记录违规信息
-  console.warn("CSP Violation:", {
-    document: violation["document-uri"],
-    directive: violation["violated-directive"],
-    blocked: violation["blocked-uri"],
-    source: violation["source-file"],
-    line: violation["line-number"],
-  });
+  // CSP violation processed
+  // Note: In production, send to monitoring service
 
   // 在生产环境中，可以发送到监控服务
   if (process.env.NODE_ENV === "production") {

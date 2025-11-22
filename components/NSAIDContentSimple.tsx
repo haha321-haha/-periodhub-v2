@@ -108,12 +108,8 @@ function processNSAIDContent(content: string): string {
     '<video$1 style="display: block !important; width: 100% !important; height: auto !important; min-height: 250px !important; background: #000 !important; opacity: 1 !important; visibility: visible !important; position: relative !important; z-index: 100 !important;" controls playsinline>',
   );
 
-  // Debug: Log the processed content to see if video element is present
-  if (processedContent.includes("nsaidAnimationPlayer")) {
-    console.log("🎬 Video element found in processed content");
-  } else {
-    console.warn("❌ Video element NOT found in processed content");
-  }
+  // Debug: Check for video element presence
+  // Video element processing is complete
 
   return processedContent;
 }

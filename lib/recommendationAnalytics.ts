@@ -3,6 +3,8 @@
  * 用于追踪推荐点击、展示和效果分析
  */
 
+import { logInfo } from "@/lib/debug-logger";
+
 export interface RecommendationMetrics {
   articleSlug: string;
   recommendedArticles: string[];
@@ -56,10 +58,14 @@ export function trackRecommendationDisplay(
     displayMetrics.shift();
   }
 
-  console.log('[RecommendationAnalytics] Display tracked:', {
-    article: currentArticle,
-    recommended: recommendedArticles.length,
-  });
+  logInfo(
+    "[RecommendationAnalytics] Display tracked",
+    {
+      article: currentArticle,
+      recommended: recommendedArticles.length,
+    },
+    "recommendationAnalytics/trackRecommendationDisplay",
+  );
 }
 
 /**
@@ -88,10 +94,14 @@ export function trackRecommendationClick(
     clickMetrics.shift();
   }
 
-  console.log('[RecommendationAnalytics] Click tracked:', {
-    from: currentArticle,
-    to: clickedArticle,
-  });
+  logInfo(
+    "[RecommendationAnalytics] Click tracked",
+    {
+      from: currentArticle,
+      to: clickedArticle,
+    },
+    "recommendationAnalytics/trackRecommendationClick",
+  );
 
   // 可以在这里发送到外部分析系统
   // sendToAnalytics(metrics);
@@ -100,19 +110,20 @@ export function trackRecommendationClick(
 /**
  * 获取推荐统计数据
  */
-export function getRecommendationStats(
-  timeRange?: { start: number; end: number }
-): RecommendationStats {
+export function getRecommendationStats(timeRange?: {
+  start: number;
+  end: number;
+}): RecommendationStats {
   // 过滤时间范围
   const filteredClicks = timeRange
     ? clickMetrics.filter(
-        (m) => m.timestamp >= timeRange.start && m.timestamp <= timeRange.end
+        (m) => m.timestamp >= timeRange.start && m.timestamp <= timeRange.end,
       )
     : clickMetrics;
 
   const filteredDisplays = timeRange
     ? displayMetrics.filter(
-        (m) => m.timestamp >= timeRange.start && m.timestamp <= timeRange.end
+        (m) => m.timestamp >= timeRange.start && m.timestamp <= timeRange.end,
       )
     : displayMetrics;
 
@@ -136,7 +147,7 @@ export function getRecommendationStats(
     if (click.clickedArticle) {
       clickedCount.set(
         click.clickedArticle,
-        (clickedCount.get(click.clickedArticle) || 0) + 1
+        (clickedCount.get(click.clickedArticle) || 0) + 1,
       );
     }
   });
@@ -171,12 +182,12 @@ export function getArticleRecommendationStats(articleSlug: string): {
 } {
   // 统计被推荐次数
   const timesRecommended = displayMetrics.filter((display) =>
-    display.recommendedArticles.includes(articleSlug)
+    display.recommendedArticles.includes(articleSlug),
   ).length;
 
   // 统计被点击次数
   const timesClicked = clickMetrics.filter(
-    (click) => click.clickedArticle === articleSlug
+    (click) => click.clickedArticle === articleSlug,
   ).length;
 
   // 计算点击率
@@ -209,5 +220,9 @@ export function exportMetrics(): {
 export function clearMetrics(): void {
   clickMetrics.length = 0;
   displayMetrics.length = 0;
-  console.log('[RecommendationAnalytics] All metrics cleared');
+  logInfo(
+    "[RecommendationAnalytics] All metrics cleared",
+    undefined,
+    "recommendationAnalytics/clearMetrics",
+  );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useAppStore } from "../stores/appStore";
+import { logWarn } from "@/lib/debug-logger";
 
 // 性能指标类型
 export interface PerformanceMetrics {
@@ -92,9 +93,13 @@ class PerformanceMonitor {
       try {
         interactionObserver.observe({ entryTypes: ["event"] });
         this.observers.push(interactionObserver);
-      } catch (e) {
+      } catch {
         // Event timing API not supported
-        console.warn("Event timing API not supported");
+        logWarn(
+          "Event timing API not supported",
+          undefined,
+          "performance/monitor/initializeObservers",
+        );
       }
     }
   }
@@ -161,8 +166,10 @@ class PerformanceMonitor {
 
   // 记录用户交互
   private recordInteraction(entry: PerformanceEventTiming) {
+    const interactionType =
+      entry.name as PerformanceMetrics["interaction"]["type"];
     const metric: PerformanceMetrics["interaction"] = {
-      type: entry.name as any,
+      type: interactionType || "click",
       element: (entry.target as Element)?.tagName || "unknown",
       timestamp: entry.startTime,
       duration: entry.duration,

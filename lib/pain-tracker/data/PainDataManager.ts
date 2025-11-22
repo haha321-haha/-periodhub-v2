@@ -7,7 +7,6 @@ import {
   StoredData,
   MenstrualStatus,
   PainTrackerError,
-  ValidationResult,
   STORAGE_KEYS,
 } from "../../../types/pain-tracker";
 
@@ -581,18 +580,19 @@ export class PainDataManager implements PainDataManagerInterface {
   /**
    * Deserialize a record to ensure proper Date objects
    */
-  private deserializeRecord(record: any): PainRecord {
+  private deserializeRecord(record: unknown): PainRecord {
+    const recordObj = record as Record<string, unknown>;
     return {
-      ...record,
-      createdAt: new Date(record.createdAt),
-      updatedAt: new Date(record.updatedAt),
-    };
+      ...recordObj,
+      createdAt: new Date(recordObj.createdAt as string | number | Date),
+      updatedAt: new Date(recordObj.updatedAt as string | number | Date),
+    } as PainRecord;
   }
 
   /**
    * Validate imported data structure
    */
-  private validateImportData(data: any): data is StoredData {
+  private validateImportData(data: unknown): data is StoredData {
     return (
       data &&
       typeof data === "object" &&

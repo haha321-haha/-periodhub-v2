@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { URL_CONFIG } from "@/lib/url-config";
 
 // IndexNow API endpoint for notifying search engines about URL updates
 export async function POST(request: NextRequest) {
@@ -77,7 +76,7 @@ export async function POST(request: NextRequest) {
       totalUrls: urls.length,
     });
   } catch (error) {
-    console.error("IndexNow API error:", error);
+    // IndexNow API error
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

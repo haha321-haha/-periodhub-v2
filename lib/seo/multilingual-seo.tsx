@@ -1,13 +1,12 @@
-import { getTranslations } from "next-intl/server";
-
 interface HreflangConfigProps {
   locale: string;
   path: string;
   includeXDefault?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function generateHreflangConfig({
-  locale,
+  locale: _locale,
   path,
   includeXDefault = true,
 }: HreflangConfigProps) {
@@ -94,11 +93,12 @@ export const multilingualContentConfig: MultilingualContentConfig = {
 };
 
 // 生成多语言SEO元数据
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function generateMultilingualSEOMeta({
   locale,
   path,
-  title,
-  description,
+  title: _title,
+  description: _description,
   keywords = [],
 }: {
   locale: string;

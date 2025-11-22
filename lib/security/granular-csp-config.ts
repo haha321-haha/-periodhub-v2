@@ -1,4 +1,3 @@
-import { URL_CONFIG } from "@/lib/url-config";
 /**
  * 细粒度CSP配置
  * 提供更精确的安全策略控制
@@ -348,7 +347,7 @@ export class GranularCSPManager {
       }
 
       return { allowed: true };
-    } catch (error) {
+    } catch {
       return { allowed: false, reason: "Invalid URL format" };
     }
   }
@@ -373,6 +372,16 @@ export class GranularCSPManager {
       .join("");
     return `sha256-${btoa(hashHex)}`;
   }
+}
+
+interface TestResult {
+  name: string;
+  type: keyof CSPDirectives;
+  url: string;
+  expected: boolean;
+  actual: boolean;
+  passed: boolean;
+  reason?: string;
 }
 
 /**
@@ -436,7 +445,7 @@ export class CSPPolicyTester {
   /**
    * 生成测试报告
    */
-  generateTestReport(results: any[]) {
+  generateTestReport(results: TestResult[]) {
     const passed = results.filter((r) => r.passed).length;
     const total = results.length;
 
@@ -454,7 +463,7 @@ export class CSPPolicyTester {
   /**
    * 生成优化建议
    */
-  private generateRecommendations(results: any[]) {
+  private generateRecommendations(results: TestResult[]) {
     const recommendations = [];
 
     const failedTests = results.filter((r) => !r.passed);

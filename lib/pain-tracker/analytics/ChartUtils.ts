@@ -17,11 +17,11 @@ import {
 
 import {
   PainRecord,
-  PainAnalytics,
   TrendPoint,
   PainTypeFrequency,
   CyclePattern,
   MenstrualStatus,
+  TreatmentEffectiveness,
 } from "../../../types/pain-tracker";
 
 // Register Chart.js components
@@ -284,7 +284,9 @@ export class ChartUtils {
   /**
    * Format treatment effectiveness data for horizontal bar chart
    */
-  static formatTreatmentEffectivenessData(treatments: any[]) {
+  static formatTreatmentEffectivenessData(
+    treatments: TreatmentEffectiveness[],
+  ) {
     const labels = treatments.map((treatment) => treatment.treatment);
     const data = treatments.map((treatment) => treatment.successRate);
 
@@ -414,7 +416,7 @@ export class ChartUtils {
         },
         tooltip: {
           callbacks: {
-            label: function (context: any) {
+            label: function (context: { label: string; parsed: number }) {
               return `${context.label}: ${context.parsed}%`;
             },
           },
@@ -484,7 +486,7 @@ export class ChartUtils {
         },
         tooltip: {
           callbacks: {
-            label: function (context: any) {
+            label: function (context: { parsed: { x: number } }) {
               return `Success Rate: ${context.parsed.x}%`;
             },
           },

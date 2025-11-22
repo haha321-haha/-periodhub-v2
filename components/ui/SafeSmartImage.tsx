@@ -80,12 +80,6 @@ export default function SafeSmartImage({
     onLoad?.();
   };
 
-  // 重置错误状态
-  const resetError = () => {
-    setHasError(false);
-    setErrorCount(0);
-  };
-
   // 决定使用哪个组件
   const shouldUseSmartImage = useSmartImage && !hasError && isClient;
   const shouldUseFallback =

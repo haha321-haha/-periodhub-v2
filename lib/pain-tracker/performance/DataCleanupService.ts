@@ -3,13 +3,13 @@
 
 import {
   PainRecord,
-  StoredData,
   CleanupOptions,
   CleanupResult,
   ArchiveOptions,
   PainTrackerError,
   STORAGE_KEYS,
 } from "../../../types/pain-tracker";
+import { logInfo, logError, logWarn } from "@/lib/debug-logger";
 
 export interface DataCleanupServiceInterface {
   performCleanup(options?: CleanupOptions): Promise<CleanupResult>;
@@ -285,9 +285,17 @@ export class DataCleanupService implements DataCleanupServiceInterface {
       try {
         const recommendations = await this.getCleanupRecommendations();
         await this.performCleanup(recommendations);
-        console.log("Automatic cleanup completed successfully");
+        logInfo(
+          "Automatic cleanup completed successfully",
+          undefined,
+          "DataCleanupService/scheduleAutomaticCleanup",
+        );
       } catch (error) {
-        console.error("Automatic cleanup failed:", error);
+        logError(
+          "Automatic cleanup failed:",
+          error,
+          "DataCleanupService/scheduleAutomaticCleanup",
+        );
       }
     }, intervalMs);
   }
@@ -324,9 +332,10 @@ export class DataCleanupService implements DataCleanupServiceInterface {
 
       return recommendations;
     } catch (error) {
-      console.warn(
+      logWarn(
         "Failed to get cleanup recommendations, using defaults:",
         error,
+        "DataCleanupService/getCleanupRecommendations",
       );
       return this.defaultCleanupOptions;
     }
@@ -340,7 +349,8 @@ export class DataCleanupService implements DataCleanupServiceInterface {
     return [];
   }
 
-  private async saveCleanedRecords(records: PainRecord[]): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private async saveCleanedRecords(_records: PainRecord[]): Promise<void> {
     // This would save to the actual storage adapter
     // Implementation depends on the storage system
   }
@@ -429,7 +439,11 @@ export class DataCleanupService implements DataCleanupServiceInterface {
       };
       localStorage.setItem(archiveKey, JSON.stringify(archiveData));
     } catch (error) {
-      console.warn("Failed to save archived records:", error);
+      logWarn(
+        "Failed to save archived records:",
+        error,
+        "DataCleanupService/saveArchivedRecords",
+      );
     }
   }
 
@@ -460,7 +474,11 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         }
       }
     } catch (error) {
-      console.warn("Failed to compact storage:", error);
+      logWarn(
+        "Failed to compact storage:",
+        error,
+        "DataCleanupService/compactStorage",
+      );
     }
 
     return { spaceSaved, operations };
@@ -500,7 +518,11 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         operations.push(`Removed ${backupsToRemove.length} old backup files`);
       }
     } catch (error) {
-      console.warn("Failed to cleanup old backups:", error);
+      logWarn(
+        "Failed to cleanup old backups:",
+        error,
+        "DataCleanupService/cleanupOldBackups",
+      );
     }
 
     return { spaceSaved, operations };
@@ -536,7 +558,11 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         operations.push(`Removed ${tempKeys.length} temporary data files`);
       }
     } catch (error) {
-      console.warn("Failed to cleanup temporary data:", error);
+      logWarn(
+        "Failed to cleanup temporary data:",
+        error,
+        "DataCleanupService/cleanupTemporaryData",
+      );
     }
 
     return { spaceSaved, operations };
@@ -582,7 +608,11 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         operations.push(`Removed ${invalidKeys.length} invalid storage keys`);
       }
     } catch (error) {
-      console.warn("Failed to cleanup invalid keys:", error);
+      logWarn(
+        "Failed to cleanup invalid keys:",
+        error,
+        "DataCleanupService/cleanupInvalidKeys",
+      );
     }
 
     return { spaceSaved, operations };
@@ -620,7 +650,11 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         JSON.stringify(optimizedPreferences),
       );
     } catch (error) {
-      console.warn("Failed to optimize preferences:", error);
+      logWarn(
+        "Failed to optimize preferences:",
+        error,
+        "DataCleanupService/optimizePreferences",
+      );
     }
   }
 
@@ -643,7 +677,11 @@ export class DataCleanupService implements DataCleanupServiceInterface {
         JSON.stringify(optimizedMetadata),
       );
     } catch (error) {
-      console.warn("Failed to optimize metadata:", error);
+      logWarn(
+        "Failed to optimize metadata:",
+        error,
+        "DataCleanupService/optimizeMetadata",
+      );
     }
   }
 

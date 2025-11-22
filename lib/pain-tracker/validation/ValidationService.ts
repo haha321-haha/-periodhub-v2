@@ -8,7 +8,6 @@ import {
   ValidationError,
   ValidationWarning,
   ValidationServiceInterface,
-  ValidationErrorCode,
   PainTrackerError,
   VALIDATION_RULES,
   PainType,
@@ -214,7 +213,7 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate pain level field
    */
   private validatePainLevelField(
-    painLevel: any,
+    painLevel: unknown,
     errors: ValidationError[],
   ): void {
     if (painLevel !== undefined && painLevel !== null) {
@@ -231,7 +230,7 @@ export class ValidationService implements ValidationServiceInterface {
   /**
    * Validate date field
    */
-  private validateDateField(date: any, errors: ValidationError[]): void {
+  private validateDateField(date: unknown, errors: ValidationError[]): void {
     if (date !== undefined && date !== null) {
       if (!this.validateDate(date)) {
         errors.push({
@@ -246,7 +245,7 @@ export class ValidationService implements ValidationServiceInterface {
   /**
    * Validate time field
    */
-  private validateTimeField(time: any, errors: ValidationError[]): void {
+  private validateTimeField(time: unknown, errors: ValidationError[]): void {
     if (time !== undefined && time !== null) {
       if (!this.validateTime(time)) {
         errors.push({
@@ -262,7 +261,7 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate pain types field
    */
   private validatePainTypesField(
-    painTypes: any,
+    painTypes: unknown,
     errors: ValidationError[],
     warnings: ValidationWarning[],
   ): void {
@@ -312,7 +311,7 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate locations field
    */
   private validateLocationsField(
-    locations: any,
+    locations: unknown,
     errors: ValidationError[],
     warnings: ValidationWarning[],
   ): void {
@@ -363,9 +362,10 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate symptoms field
    */
   private validateSymptomsField(
-    symptoms: any,
+    symptoms: unknown,
     errors: ValidationError[],
-    warnings: ValidationWarning[],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _warnings: ValidationWarning[],
   ): void {
     if (symptoms !== undefined && symptoms !== null) {
       if (!Array.isArray(symptoms)) {
@@ -404,7 +404,7 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate menstrual status field
    */
   private validateMenstrualStatusField(
-    menstrualStatus: any,
+    menstrualStatus: unknown,
     errors: ValidationError[],
   ): void {
     if (
@@ -436,7 +436,7 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate medications field
    */
   private validateMedicationsField(
-    medications: any,
+    medications: unknown,
     errors: ValidationError[],
     warnings: ValidationWarning[],
   ): void {
@@ -472,7 +472,7 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate effectiveness field
    */
   private validateEffectivenessField(
-    effectiveness: any,
+    effectiveness: unknown,
     errors: ValidationError[],
   ): void {
     if (effectiveness !== undefined && effectiveness !== null) {
@@ -495,9 +495,10 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate lifestyle factors field
    */
   private validateLifestyleFactorsField(
-    lifestyleFactors: any,
+    lifestyleFactors: unknown,
     errors: ValidationError[],
-    warnings: ValidationWarning[],
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _warnings: ValidationWarning[],
   ): void {
     if (lifestyleFactors !== undefined && lifestyleFactors !== null) {
       if (!Array.isArray(lifestyleFactors)) {
@@ -559,7 +560,7 @@ export class ValidationService implements ValidationServiceInterface {
    * Validate notes field
    */
   private validateNotesField(
-    notes: any,
+    notes: unknown,
     errors: ValidationError[],
     warnings: ValidationWarning[],
   ): void {

@@ -8,16 +8,9 @@ import {
   ResourceSearchFilters,
   ResourceSearchResult,
   ResourceOperationResult,
-  BulkOperationResult,
   ResourceAnalyticsReport,
-  ResourceValidationError,
   ResourceManagerConfig,
-  ResourceImportResult,
-  ResourceExportOptions,
   ResourceType,
-  ResourceStatus,
-  DifficultyLevel,
-  TargetAudience,
 } from "../types";
 import { Locale } from "@/types/pdf";
 import { CacheManager } from "../cache/CacheManager";
@@ -336,7 +329,9 @@ export class ResourceManager {
           return {
             success: false,
             error: "Resource validation failed",
-            warnings: validationResult.errors.map((e: any) => e.message),
+            warnings: validationResult.errors.map(
+              (e: { message: string }) => e.message,
+            ),
             timestamp: new Date(),
           };
         }
@@ -474,7 +469,8 @@ export class ResourceManager {
    */
   private localizeResource(
     resource: EnterpriseResource,
-    locale: Locale,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _locale: Locale,
   ): EnterpriseResource {
     // 创建本地化副本
     const localized = { ...resource };
@@ -527,7 +523,8 @@ export class ResourceManager {
    */
   private async generateSearchSuggestions(
     searchTerm: string,
-    locale?: Locale,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _locale?: Locale,
   ): Promise<string[]> {
     // 基于搜索词生成建议
     const suggestions = ["疼痛", "缓解", "营养", "运动", "医学", "沟通"];
@@ -555,7 +552,7 @@ export class ResourceManager {
   /**
    * 私有方法：计算流行度分数
    */
-  private calculatePopularityScore(stats: any): number {
+  private calculatePopularityScore(stats: EnterpriseResource["stats"]): number {
     // 综合评分算法
     const viewsWeight = 0.3;
     const downloadsWeight = 0.4;

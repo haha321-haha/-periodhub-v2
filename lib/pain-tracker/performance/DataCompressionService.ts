@@ -6,11 +6,13 @@ import {
   StoredData,
   CompressionResult,
   PainTrackerError,
+  UserPreferences,
+  StorageMetadata,
 } from "../../../types/pain-tracker";
 
 export interface DataCompressionServiceInterface {
-  compressData(data: any): Promise<CompressionResult>;
-  decompressData(compressedData: string): Promise<any>;
+  compressData(data: unknown): Promise<CompressionResult>;
+  decompressData(compressedData: string): Promise<unknown>;
   compressRecords(records: PainRecord[]): Promise<string>;
   decompressRecords(compressedRecords: string): Promise<PainRecord[]>;
   getCompressionRatio(originalSize: number, compressedSize: number): number;
@@ -28,7 +30,7 @@ export class DataCompressionService implements DataCompressionServiceInterface {
   /**
    * Compress any data object
    */
-  async compressData(data: any): Promise<CompressionResult> {
+  async compressData(data: unknown): Promise<CompressionResult> {
     try {
       const originalString = JSON.stringify(data);
       const originalSize = new Blob([originalString]).size;
@@ -94,7 +96,7 @@ export class DataCompressionService implements DataCompressionServiceInterface {
   /**
    * Decompress data
    */
-  async decompressData(compressedData: string): Promise<any> {
+  async decompressData(compressedData: string): Promise<unknown> {
     try {
       // Try to detect compression algorithm from data format
       const algorithm = this.detectCompressionAlgorithm(compressedData);
@@ -191,7 +193,7 @@ export class DataCompressionService implements DataCompressionServiceInterface {
   /**
    * Get compression statistics for monitoring
    */
-  async getCompressionStats(data: any): Promise<{
+  async getCompressionStats(data: unknown): Promise<{
     originalSize: number;
     compressedSize: number;
     compressionRatio: number;
@@ -334,7 +336,8 @@ export class DataCompressionService implements DataCompressionServiceInterface {
     }
   }
 
-  private buildCompressionDictionary(data: string): Map<string, string> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private buildCompressionDictionary(_data: string): Map<string, string> {
     const dictionary = new Map<string, string>();
     const patterns = [
       // Common JSON patterns
@@ -392,7 +395,7 @@ export class DataCompressionService implements DataCompressionServiceInterface {
     }));
   }
 
-  private optimizePreferences(preferences: any): any {
+  private optimizePreferences(preferences: UserPreferences): UserPreferences {
     if (!preferences) return preferences;
 
     return {
@@ -412,7 +415,7 @@ export class DataCompressionService implements DataCompressionServiceInterface {
     };
   }
 
-  private optimizeMetadata(metadata: any): any {
+  private optimizeMetadata(metadata: StorageMetadata): StorageMetadata {
     if (!metadata) return metadata;
 
     return {
@@ -425,22 +428,36 @@ export class DataCompressionService implements DataCompressionServiceInterface {
     };
   }
 
-  private deserializeRecords(data: any): PainRecord[] {
+  private deserializeRecords(data: unknown): PainRecord[] {
     if (!Array.isArray(data)) {
       throw new Error("Invalid records data format");
     }
 
-    return data.map((record) => ({
-      ...record,
-      createdAt: new Date(record.createdAt || record.ca),
-      updatedAt: new Date(record.updatedAt || record.ua),
-      // Ensure arrays are properly initialized
-      painTypes: record.painTypes || record.pt || [],
-      locations: record.locations || record.loc || [],
-      symptoms: record.symptoms || record.sym || [],
-      medications: record.medications || record.med || [],
-      lifestyleFactors: record.lifestyleFactors || record.lf || [],
-    }));
+    return data.map((record: unknown) => {
+      if (!record || typeof record !== "object") {
+        throw new Error("Invalid record format");
+      }
+      const recordObj = record as Record<string, unknown>;
+      return {
+        ...recordObj,
+        createdAt: new Date(
+          (recordObj.createdAt || recordObj.ca) as string | number | Date,
+        ),
+        updatedAt: new Date(
+          (recordObj.updatedAt || recordObj.ua) as string | number | Date,
+        ),
+        // Ensure arrays are properly initialized
+        painTypes: (recordObj.painTypes || recordObj.pt || []) as string[],
+        locations: (recordObj.locations || recordObj.loc || []) as string[],
+        symptoms: (recordObj.symptoms || recordObj.sym || []) as string[],
+        medications: (recordObj.medications ||
+          recordObj.med ||
+          []) as PainRecord["medications"],
+        lifestyleFactors: (recordObj.lifestyleFactors ||
+          recordObj.lf ||
+          []) as PainRecord["lifestyleFactors"],
+      } as PainRecord;
+    });
   }
 }
 

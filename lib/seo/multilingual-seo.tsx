@@ -4,9 +4,8 @@ interface HreflangConfigProps {
   includeXDefault?: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function generateHreflangConfig({
-  locale: _locale,
+  locale,
   path,
   includeXDefault = true,
 }: HreflangConfigProps) {
@@ -14,7 +13,7 @@ export async function generateHreflangConfig({
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
   const cleanPath = path.startsWith("/") ? path : `/${path}`;
 
-  const hreflangUrls = {
+  const hreflangUrls: Record<string, string> = {
     "zh-CN": `${baseUrl}/zh${cleanPath}`,
     "en-US": `${baseUrl}/en${cleanPath}`,
   };
@@ -93,12 +92,11 @@ export const multilingualContentConfig: MultilingualContentConfig = {
 };
 
 // 生成多语言SEO元数据
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function generateMultilingualSEOMeta({
   locale,
   path,
-  title: _title,
-  description: _description,
+  title,
+  description,
   keywords = [],
 }: {
   locale: string;
@@ -114,6 +112,10 @@ export async function generateMultilingualSEOMeta({
 
   // 获取hreflang配置
   const hreflangUrls = await generateHreflangConfig({ locale, path });
+
+  // title 和 description 参数保留用于将来扩展
+  void title;
+  void description;
 
   // 根据语言添加文化相关的关键词
   const culturalKeywords =

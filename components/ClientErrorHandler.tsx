@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { logInfo } from "@/lib/debug-logger";
 
 export default function ClientErrorHandler() {
   useEffect(() => {
@@ -8,7 +9,11 @@ export default function ClientErrorHandler() {
     const handleError = (e: ErrorEvent) => {
       if (e.message.includes("message channel closed")) {
         e.preventDefault();
-        console.log("已拦截异步消息通道错误，防止影响React渲染");
+        logInfo(
+          "已拦截异步消息通道错误，防止影响React渲染",
+          undefined,
+          "ClientErrorHandler/handleError",
+        );
       }
     };
 
@@ -19,7 +24,11 @@ export default function ClientErrorHandler() {
         e.reason.message.includes("message channel closed")
       ) {
         e.preventDefault();
-        console.log("已拦截Promise异步错误，防止影响React渲染");
+        logInfo(
+          "已拦截Promise异步错误，防止影响React渲染",
+          undefined,
+          "ClientErrorHandler/handleUnhandledRejection",
+        );
       }
     };
 

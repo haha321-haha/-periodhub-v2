@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { trackRecommendationClick } from '@/lib/recommendationAnalytics';
+import { NextRequest, NextResponse } from "next/server";
+import { trackRecommendationClick } from "@/lib/recommendationAnalytics";
+import { logError } from "@/lib/debug-logger";
 
 /**
  * POST /api/recommendation-click
@@ -8,26 +9,22 @@ import { trackRecommendationClick } from '@/lib/recommendationAnalytics';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const {
-      currentArticle,
-      clickedArticle,
-      recommendedArticles,
-      locale,
-    } = body;
+    const { currentArticle, clickedArticle, recommendedArticles, locale } =
+      body;
 
     // 验证必需字段
     if (!currentArticle || !clickedArticle || !recommendedArticles || !locale) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Missing required fields',
+          error: "Missing required fields",
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     // 获取用户代理
-    const userAgent = request.headers.get('user-agent') || undefined;
+    const userAgent = request.headers.get("user-agent") || undefined;
 
     // 追踪点击
     trackRecommendationClick(
@@ -35,21 +32,25 @@ export async function POST(request: NextRequest) {
       recommendedArticles,
       clickedArticle,
       locale,
-      userAgent
+      userAgent,
     );
 
     return NextResponse.json({
       success: true,
-      message: 'Click tracked successfully',
+      message: "Click tracked successfully",
     });
   } catch (error) {
-    console.error('Error tracking recommendation click:', error);
+    logError(
+      "Error tracking recommendation click:",
+      error,
+      "api/recommendation-click/POST",
+    );
     return NextResponse.json(
       {
         success: false,
-        error: 'Failed to track click',
+        error: "Failed to track click",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

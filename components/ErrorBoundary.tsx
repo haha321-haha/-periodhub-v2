@@ -28,12 +28,19 @@ class ErrorBoundary extends React.Component<
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // 记录错误但不阻止渲染
-    console.log("ErrorBoundary捕获到错误:", error);
-    console.log("错误信息:", errorInfo);
+    logInfo(
+      "ErrorBoundary捕获到错误",
+      { error: error.message, errorInfo },
+      "ErrorBoundary/componentDidCatch",
+    );
 
     // 如果是异步消息通道错误，尝试恢复
     if (error.message.includes("message channel closed")) {
-      console.log("检测到异步消息通道错误，尝试恢复组件渲染");
+      logInfo(
+        "检测到异步消息通道错误，尝试恢复组件渲染",
+        undefined,
+        "ErrorBoundary/componentDidCatch",
+      );
       setTimeout(() => {
         this.setState({ hasError: false, error: undefined });
       }, 1000);

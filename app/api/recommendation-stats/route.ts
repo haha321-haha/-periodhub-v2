@@ -1,9 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 import {
   getRecommendationStats,
   exportMetrics,
-} from '@/lib/recommendationAnalytics';
-import { getCacheStats } from '@/lib/recommendationCache';
+} from "@/lib/recommendationAnalytics";
+import { getCacheStats } from "@/lib/recommendationCache";
+import { logError } from "@/lib/debug-logger";
 
 /**
  * GET /api/recommendation-stats
@@ -12,23 +13,23 @@ import { getCacheStats } from '@/lib/recommendationCache';
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const range = searchParams.get('range') || '24h';
+    const range = searchParams.get("range") || "24h";
 
     // 计算时间范围
     let timeRange: { start: number; end: number } | undefined;
     const now = Date.now();
 
     switch (range) {
-      case '24h':
+      case "24h":
         timeRange = { start: now - 24 * 60 * 60 * 1000, end: now };
         break;
-      case '7d':
+      case "7d":
         timeRange = { start: now - 7 * 24 * 60 * 60 * 1000, end: now };
         break;
-      case '30d':
+      case "30d":
         timeRange = { start: now - 30 * 24 * 60 * 60 * 1000, end: now };
         break;
-      case 'all':
+      case "all":
         timeRange = undefined;
         break;
     }
@@ -44,13 +45,17 @@ export async function GET(request: NextRequest) {
       timeRange: range,
     });
   } catch (error) {
-    console.error('Error fetching recommendation stats:', error);
+    logError(
+      "Error fetching recommendation stats:",
+      error,
+      "api/recommendation-stats/GET",
+    );
     return NextResponse.json(
       {
         success: false,
-        error: 'Failed to fetch recommendation stats',
+        error: "Failed to fetch recommendation stats",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -69,13 +74,17 @@ export async function POST() {
       exportedAt: new Date().toISOString(),
     });
   } catch (error) {
-    console.error('Error exporting metrics:', error);
+    logError(
+      "Error exporting metrics:",
+      error,
+      "api/recommendation-stats/POST",
+    );
     return NextResponse.json(
       {
         success: false,
-        error: 'Failed to export metrics',
+        error: "Failed to export metrics",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

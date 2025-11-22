@@ -7,7 +7,8 @@ import {
   MedicalSummary,
   ExportOptions,
 } from "../../../types/pain-tracker";
-import { ChartRenderer, ChartImageData } from "./ChartRenderer";
+import { ChartRenderer } from "./ChartRenderer";
+import { logError } from "@/lib/debug-logger";
 
 export class ReportTemplate {
   /**
@@ -34,7 +35,11 @@ export class ReportTemplate {
             await ChartRenderer.renderChartsForExport(analytics);
           chartsHTML = ChartRenderer.generateChartsHTML(chartImages);
         } catch (error) {
-          console.error("Failed to render charts:", error);
+          logError(
+            "Failed to render charts:",
+            error,
+            "ReportTemplate/generateMedicalReportHTML",
+          );
           chartsHTML = ChartRenderer.getFallbackChartsHTML();
         }
       } else {
@@ -176,7 +181,9 @@ export class ReportTemplate {
   /**
    * Generate pain characteristics section
    */
-  private static generatePainCharacteristics(characteristics: any): string {
+  private static generatePainCharacteristics(
+    characteristics: MedicalSummary["painCharacteristics"],
+  ): string {
     return `
     <section class="section">
         <h2>Pain Characteristics</h2>
@@ -198,7 +205,7 @@ export class ReportTemplate {
                     ${characteristics.commonTypes
                       .slice(0, 3)
                       .map(
-                        (type: any) => `
+                        (type) => `
                         <div class="pain-type-item">
                             <span class="type-name">${type.type.replace(
                               "_",
@@ -220,7 +227,9 @@ export class ReportTemplate {
   /**
    * Generate treatment history section
    */
-  private static generateTreatmentHistory(treatmentHistory: any): string {
+  private static generateTreatmentHistory(
+    treatmentHistory: MedicalSummary["treatmentHistory"],
+  ): string {
     return `
     <section class="section">
         <h2>Treatment History</h2>
@@ -245,7 +254,7 @@ export class ReportTemplate {
         <div class="treatment-effectiveness-list">
             ${treatmentHistory.mostEffective
               .map(
-                (treatment: any) => `
+                (treatment) => `
                 <div class="treatment-item">
                     <div class="treatment-info">
                         <span class="treatment-name">${
@@ -276,7 +285,9 @@ export class ReportTemplate {
   /**
    * Generate menstrual patterns section
    */
-  private static generateMenstrualPatterns(patterns: any): string {
+  private static generateMenstrualPatterns(
+    patterns: MedicalSummary["menstrualPatterns"],
+  ): string {
     if (!patterns.highestPainPhase) {
       return `
       <section class="section">
@@ -308,7 +319,7 @@ export class ReportTemplate {
         <div class="phase-analysis-grid">
             ${patterns.phaseAnalysis
               .map(
-                (phase: any) => `
+                (phase) => `
                 <div class="phase-card">
                     <div class="phase-header">
                         <span class="phase-name">${this.formatMenstrualStatus(
@@ -377,7 +388,9 @@ export class ReportTemplate {
   /**
    * Generate recommendations section
    */
-  private static generateRecommendations(recommendations: any[]): string {
+  private static generateRecommendations(
+    recommendations: MedicalSummary["recommendations"],
+  ): string {
     return `
     <section class="section">
         <h2>Clinical Recommendations</h2>

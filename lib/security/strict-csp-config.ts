@@ -208,7 +208,7 @@ export class ThirdPartyResourceValidator {
       }
 
       return { allowed: true };
-    } catch (error) {
+    } catch {
       return { allowed: false, reason: "Invalid URL format" };
     }
   }
@@ -241,7 +241,7 @@ export class ThirdPartyResourceValidator {
       }
 
       return { allowed: true };
-    } catch (error) {
+    } catch {
       return { allowed: false, reason: "Invalid URL format" };
     }
   }
@@ -274,10 +274,17 @@ export class ThirdPartyResourceValidator {
       }
 
       return { allowed: true };
-    } catch (error) {
+    } catch {
       return { allowed: false, reason: "Invalid URL format" };
     }
   }
+}
+
+interface CSPViolation {
+  "violated-directive": string;
+  "blocked-uri": string;
+  "document-uri": string;
+  [key: string]: unknown;
 }
 
 /**
@@ -286,14 +293,14 @@ export class ThirdPartyResourceValidator {
 export class CSPViolationMonitor {
   private violations: Array<{
     timestamp: Date;
-    violation: any;
+    violation: CSPViolation;
     severity: "low" | "medium" | "high";
   }> = [];
 
   /**
    * 记录CSP违规
    */
-  recordViolation(violation: any) {
+  recordViolation(violation: CSPViolation) {
     const severity = this.assessSeverity(violation);
 
     this.violations.push({
@@ -311,9 +318,8 @@ export class CSPViolationMonitor {
   /**
    * 评估违规严重程度
    */
-  private assessSeverity(violation: any): "low" | "medium" | "high" {
-    const { "violated-directive": directive, "blocked-uri": blockedUri } =
-      violation;
+  private assessSeverity(violation: CSPViolation): "low" | "medium" | "high" {
+    const { "violated-directive": directive } = violation;
 
     // 高风险：脚本相关违规
     if (directive.includes("script-src")) {
@@ -332,7 +338,8 @@ export class CSPViolationMonitor {
   /**
    * 高风险违规告警
    */
-  private alertHighSeverityViolation(violation: any) {
+  private alertHighSeverityViolation(violation: CSPViolation) {
+    // eslint-disable-next-line no-console
     console.error("🚨 HIGH SEVERITY CSP VIOLATION:", {
       directive: violation["violated-directive"],
       blocked: violation["blocked-uri"],

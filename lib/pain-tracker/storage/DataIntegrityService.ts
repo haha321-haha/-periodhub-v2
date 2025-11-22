@@ -194,7 +194,7 @@ export class DataIntegrityService {
           {
             field: "record",
             message: "Failed to validate record",
-            code: "VALIDATION_ERROR",
+            code: "DATA_CORRUPTION",
           },
         ],
         warnings: [],

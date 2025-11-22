@@ -1,5 +1,13 @@
 // lib/analytics/ga4-config.ts
 
+interface WindowWithGtag extends Window {
+  gtag?: (
+    command: string,
+    eventName: string,
+    parameters?: Record<string, unknown>,
+  ) => void;
+}
+
 export const GA4_CONFIG = {
   // GA4 测量ID (需要替换为实际的ID)
   MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || "G-XXXXXXXXXX",
@@ -96,13 +104,15 @@ export class GA4Tracker {
     }
   }
 
-  trackEvent(eventName: string, parameters: Record<string, any> = {}): void {
-    if (
-      typeof window !== "undefined" &&
-      this.isInitialized &&
-      (window as any).gtag
-    ) {
-      (window as any).gtag("event", eventName, parameters);
+  trackEvent(
+    eventName: string,
+    parameters: Record<string, unknown> = {},
+  ): void {
+    if (typeof window !== "undefined" && this.isInitialized) {
+      const windowWithGtag = window as WindowWithGtag;
+      if (windowWithGtag.gtag) {
+        windowWithGtag.gtag("event", eventName, parameters);
+      }
     }
   }
 

@@ -3,6 +3,8 @@
  * 统一管理SmartImage、OptimizedImage等组件的配置
  */
 
+import { logError, logWarn } from "@/lib/debug-logger";
+
 export interface ImageConfig {
   useSmartImage: boolean;
   debugMode: boolean;
@@ -79,17 +81,23 @@ export class ImageErrorHandler {
   static handleError(error: Error, src: string, component: string) {
     this.errorCount++;
 
-    console.error(`图片加载错误 [${component}]:`, {
-      src,
-      error: error.message,
-      count: this.errorCount,
-      timestamp: new Date().toISOString(),
-    });
+    logError(
+      `图片加载错误 [${component}]:`,
+      error,
+      "image-config/ImageErrorHandler/handleError",
+      {
+        src,
+        count: this.errorCount,
+        timestamp: new Date().toISOString(),
+      },
+    );
 
     // 如果错误过多，建议切换到备用组件
     if (this.errorCount >= this.maxErrors) {
-      console.warn(
+      logWarn(
         `图片错误过多 (${this.errorCount})，建议检查图片配置或切换到备用组件`,
+        undefined,
+        "image-config/ImageErrorHandler/handleError",
       );
     }
   }
@@ -120,7 +128,11 @@ export class ImagePerformanceMonitor {
 
     // 记录慢加载
     if (loadTime > 3000) {
-      console.warn(`图片加载缓慢: ${src} (${loadTime}ms)`);
+      logWarn(
+        `图片加载缓慢: ${src} (${loadTime}ms)`,
+        undefined,
+        "image-config/ImagePerformanceMonitor/recordLoadTime",
+      );
     }
   }
 

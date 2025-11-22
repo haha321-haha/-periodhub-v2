@@ -15,7 +15,7 @@ export interface ABTestEvent {
   testName: string;
   variant: string;
   eventType: string;
-  eventData?: any;
+  eventData?: unknown;
   timestamp: number;
 }
 
@@ -79,7 +79,7 @@ export function autoAssignVariant(
 export function trackABTestEvent(
   testName: string,
   eventType: string,
-  eventData?: any,
+  eventData?: unknown,
 ): boolean {
   const variant = getABTestVariant(testName);
   if (!variant) return false;
@@ -172,7 +172,7 @@ export function useABTestTracking(
 ) {
   const variant = autoAssignVariant(testName, variants);
 
-  const trackEvent = (eventType: string, eventData?: any) => {
+  const trackEvent = (eventType: string, eventData?: unknown) => {
     trackABTestEvent(testName, eventType, eventData);
   };
 

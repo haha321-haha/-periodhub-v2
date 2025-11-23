@@ -11935,170 +11935,170 @@
       "retakeTest": "重新Testing",
       "questions": {
         "energy": {
-          "question": "[TRANSLATE: 您平时的精力状态如何？]",
+          "question": "How is your usual energy level?",
           "options": {
-            "high": "[TRANSLATE: 精力充沛，很少感到疲劳]",
-            "medium": "[TRANSLATE: 精力一般，偶尔感到疲劳]",
-            "low": "[TRANSLATE: 经常感到疲劳，精力不足]"
+            "high": "Full of energy, rarely feel tired",
+            "medium": "Average energy, occasionally feel tired",
+            "low": "Often feel tired, lack energy"
           }
         },
         "coldTolerance": {
-          "question": "[TRANSLATE: 您对寒冷的耐受性如何？]",
+          "question": "How is your tolerance to cold?",
           "options": {
-            "good": "[TRANSLATE: 不怕冷，手脚温暖]",
-            "normal": "[TRANSLATE: 一般，季节变化时会感到冷]",
-            "poor": "[TRANSLATE: 很怕冷，手脚经常冰凉]"
+            "good": "Not afraid of cold, warm hands and feet",
+            "normal": "Average, feel cold during seasonal changes",
+            "poor": "Very afraid of cold, often have cold hands and feet"
           }
         },
         "digestion": {
-          "question": "[TRANSLATE: 您的消化功能如何？]",
+          "question": "How is your digestive function?",
           "options": {
-            "good": "[TRANSLATE: 消化良好，很少胃肠不适]",
-            "normal": "[TRANSLATE: 消化一般，偶有不适]",
-            "poor": "[TRANSLATE: 消化不良，经常胃肠不适]"
+            "good": "Good digestion, rarely have gastrointestinal discomfort",
+            "normal": "Average digestion, occasional discomfort",
+            "poor": "Poor digestion, frequent gastrointestinal discomfort"
           }
         }
       },
       "results": {
         "yang": {
-          "type": "[TRANSLATE: 阳性体质]",
-          "description": "[TRANSLATE: 体质较好，精力充沛，抗寒能力强]"
+          "type": "Yang Constitution",
+          "description": "Good constitution, full of energy, strong cold resistance"
         },
         "balanced": {
-          "type": "[TRANSLATE: 平和体质]",
-          "description": "[TRANSLATE: 体质平衡，需要适当调理]"
+          "type": "Balanced Constitution",
+          "description": "Balanced constitution, needs appropriate conditioning"
         },
         "yin": {
-          "type": "[TRANSLATE: 阴性体质]",
-          "description": "[TRANSLATE: 体质偏弱，需要温补调理]"
+          "type": "Yin Constitution",
+          "description": "Weak constitution, needs warm tonifying conditioning"
         }
       },
-      "progress": "[TRANSLATE: 问题 {current} / {total}]"
+      "progress": "Question {current} / {total}"
     },
     "pdfCard": {
       "featured": "Recommended",
       "category": "Category",
-      "downloadPdf": "[TRANSLATE: 下载PDF]",
-      "htmlPreview": "[TRANSLATE: HTML预览]",
-      "copyLink": "[TRANSLATE: 复制链接]",
-      "openInNewTab": "[TRANSLATE: 新窗口打开]"
+      "downloadPdf": "Download PDF",
+      "htmlPreview": "HTML Preview",
+      "copyLink": "Copy Link",
+      "openInNewTab": "Open in New Window"
     },
     "pdfCardPdf": {
       "updated": "Update时间：",
       "locale": "zh-CN"
     },
     "pdfCenterOptimized": {
-      "searchPlaceholder": "[TRANSLATE: 搜索PDF资源...]",
+      "searchPlaceholder": "Search PDF resources...",
       "filter": "Filter",
-      "all": "[TRANSLATE: 全部]",
-      "noMatchingResources": "[TRANSLATE: 未找到匹配的资源]",
-      "downloadNow": "[TRANSLATE: 立即下载]",
-      "loadMore": "[TRANSLATE: 加载更多]"
+      "all": "All",
+      "noMatchingResources": "No matching resources found",
+      "downloadNow": "Download Now",
+      "loadMore": "Load More"
     },
     "articlesPdfSection": {
       "resources": "resources",
-      "categories": "[TRANSLATE: 个分类]",
-      "featured": "[TRANSLATE: 个特色]",
-      "featuredResources": "[TRANSLATE: 特色资源]",
-      "allResources": "[TRANSLATE: 全部资源]",
-      "viewAllResources": "[TRANSLATE: 查看全部资源]"
+      "categories": "categories",
+      "featured": "featured",
+      "featuredResources": "Featured Resources",
+      "allResources": "All资源",
+      "viewAllResources": "查看All资源"
     }
   },
   "articleList": {
-    "publishedOn": "[TRANSLATE: 发布于 {date, date, long}]",
+    "publishedOn": "Published on {date, date, long}",
     "readMore": "Read More",
-    "noArticles": "[TRANSLATE: 暂无文章。请稍后再回来查看！]"
+    "noArticles": "No articles available. Please check back later!"
   },
   "articleDetail": {
-    "backToList": "[TRANSLATE: 返回文章列表]",
-    "publishedOn": "[TRANSLATE: 发布于 {date, date, long}]",
-    "notFoundTitle": "[TRANSLATE: 文章未找到]",
-    "notFoundDescription": "[TRANSLATE: 抱歉，我们找不到您要查找的文章。]"
+    "backToList": "Back to Article List",
+    "publishedOn": "Published on {date, date, long}",
+    "notFoundTitle": "Article Not Found",
+    "notFoundDescription": "Sorry, we could not find the article you are looking for."
   },
   "therapiesPage": {
-    "title": "[TRANSLATE: 缓解疗法]",
-    "description": "[TRANSLATE: 探索各种疗法和方法，以管理和减轻经期疼痛。]"
+    "title": "Relief Therapies",
+    "description": "探索各种疗法和方法，以管理和减轻Menstrual Period疼痛。"
   },
   "therapyList": {
     "lastUpdated": "最后Update于 {date, date, long}",
     "learnMore": "Learn More",
-    "noTherapies": "[TRANSLATE: 暂无疗法。请稍后再回来查看！]"
+    "noTherapies": "No therapies available. Please check back later!"
   },
   "therapyDetail": {
-    "backToList": "[TRANSLATE: 返回疗法列表]",
+    "backToList": "Back to Therapy List",
     "lastUpdated": "最后Update于 {date, date, long}",
-    "notFoundTitle": "[TRANSLATE: 疗法未找到]",
-    "notFoundDescription": "[TRANSLATE: 抱歉，我们找不到您要查找的疗法。]"
+    "notFoundTitle": "Therapy Not Found",
+    "notFoundDescription": "Sorry, we could not find the therapy you are looking for."
   },
   "culturalCharmsPage": {
-    "title": "[TRANSLATE: 探索文化中的慰藉：符咒与传统疗愈符号]",
+    "title": "Exploring Comfort in Culture: Charms and Traditional Healing Symbols",
     "description": "探索符咒、符号和传统习俗在历史和文化中用于寻求舒适和精神Support的意义。",
     "introduction": "纵观历史，在不同的文化中，人们在脆弱时期，包括经期，都会求助于符号、物品和传统习俗来寻求舒适、保护和Support。这些习俗深深植根于文化信仰体系和民间传说。",
-    "introTitle": "[TRANSLATE: 文化传统的旅程]",
+    "introTitle": "Journey of Cultural Traditions",
     "introText": "纵观历史，在不同的文化中，人们在脆弱时期，包括经期，都会求助于符号、物品和传统习俗来寻求舒适、保护和Support。这些习俗深深植根于文化信仰体系和民间传说。",
-    "understandingTitle": "[TRANSLATE: 理解文化疗愈传统]",
-    "understandingText": "[TRANSLATE: 许多文化都有涉及使用特定物品或执行某些仪式的传统，这些仪式被认为可以影响健康、带来好运或驱除负能量。对一些人来说，这延伸到在经期不适等身体挑战期间寻求舒适或缓解。]",
-    "multimediaTitle": "[TRANSLATE: 文化符号与意象]",
+    "understandingTitle": "Understanding Cultural Healing Traditions",
+    "understandingText": "许多文化都有涉及使用特定物品或执行某些仪式的传统，这些仪式被认为可以影响健康、带来好运或驱除负能量。对一些人来说，这延伸到在Menstrual Period不适等身体挑战期间寻求舒适或缓解。",
+    "multimediaTitle": "Cultural Symbols and Imagery",
     "contentSection1Description": "探索各种文化中用于舒适和精神Support的传统符号和物品。",
     "disclaimerTitle": "文化Support免责声明",
     "disclaimer": "此处提供的有关文化符咒、传统习俗和相关信仰的信息仅供文化和信息目的。这些习俗植根于传统和信仰体系，不应被视为，也不应被解释为专业Medical Advice、诊断或治疗的替代品。",
     "disclaimerText": "此处提供的有关文化符咒、传统习俗和相关信仰的信息仅供文化和信息目的。这些习俗植根于传统和信仰体系，不应被视为，也不应被解释为专业Medical Advice、诊断或治疗的替代品。",
-    "mediaAreaTitle": "[TRANSLATE: 文化符号与意象]",
-    "imagePlaceholder": "[TRANSLATE: 图片/媒体占位符]",
-    "promptSuggestionPrefix": "[TRANSLATE: AI 提示: ]",
-    "backHome": "[TRANSLATE: 返回首页]"
+    "mediaAreaTitle": "Cultural Symbols and Imagery",
+    "imagePlaceholder": "Image/Media Placeholder",
+    "promptSuggestionPrefix": "AI Prompt: ",
+    "backHome": "返回Home"
   },
   "toolsCollectionButton": {
-    "buttonText": "[TRANSLATE: 访问完整工具集页面]"
+    "buttonText": "Visit Complete Toolset Page"
   },
   "scientificParameters": {
     "heatTherapy": {
-      "title": "[TRANSLATE: 热疗科学参数]",
-      "temperature": "[TRANSLATE: 40-45°C (104-113°F)]",
-      "duration": "[TRANSLATE: 15-20分钟]",
-      "frequency": "[TRANSLATE: 按需使用，每天最多3-4次]",
-      "timing": "[TRANSLATE: 疼痛开始时使用，持续2-3天]",
-      "mechanism": "[TRANSLATE: 增加血流，放松子宫肌肉]"
+      "title": "热疗Science参数",
+      "temperature": "40-45°C (104-113°F)",
+      "duration": "15-20 minutes",
+      "frequency": "Use as needed, up to 3-4 times per day",
+      "timing": "疼痛开始时使用，Continuous2-3天",
+      "mechanism": "Increase blood flow, relax uterine muscles"
     },
     "breathingExercise": {
-      "title": "[TRANSLATE: 4-7-8呼吸法参数]",
-      "technique": "[TRANSLATE: 4-7-8呼吸法]",
-      "cycles": "[TRANSLATE: 初学者3-4个循环，逐渐增加到8个循环]",
-      "frequency": "[TRANSLATE: 急性疼痛期间每2-3小时一次]",
-      "timing": "[TRANSLATE: 疼痛强度达到0-10分制的5分以上时使用]",
-      "mechanism": "[TRANSLATE: 激活副交感神经系统，降低前列腺素敏感度]"
+      "title": "4-7-8 Breathing Method Parameters",
+      "technique": "4-7-8 Breathing Method",
+      "cycles": "Beginners 3-4 cycles, gradually increase to 8 cycles",
+      "frequency": "Urgent性疼痛期间每2-3小时一次",
+      "timing": "Use when pain intensity reaches 5 or more on a 0-10 scale",
+      "mechanism": "Activate parasympathetic nervous system, reduce prostaglandin sensitivity"
     },
     "nsaid": {
-      "title": "[TRANSLATE: NSAID使用参数]",
-      "dosage": "[TRANSLATE: 布洛芬200-400mg，每6-8小时一次（每日最多1200mg）]",
-      "timing": "[TRANSLATE: 痉挛首次出现时开始使用，持续1-2天]",
-      "mechanism": "[TRANSLATE: 阻断前列腺素合成（COX-1/COX-2抑制）]",
-      "contraindications": "[TRANSLATE: 哮喘、胃溃疡、肾病患者避免使用]"
+      "title": "NSAID Usage Parameters",
+      "dosage": "Ibuprofen200-400mg，每6-8小时一次（每日最多1200mg）",
+      "timing": "痉挛首次出现时Start Using，持续1-2天",
+      "mechanism": "Block prostaglandin synthesis (COX-1/COX-2 inhibition)",
+      "contraindications": "Avoid use for asthma, stomach ulcer, kidney disease patients"
     }
   },
   "searchBox": {
-    "placeholder": "[TRANSLATE: 搜索文章...]",
-    "noResults": "[TRANSLATE: 未找到相关文章]",
+    "placeholder": "Search articles...",
+    "noResults": "No related articles found",
     "matchTypes": {
       "title": "Title",
-      "summary": "[TRANSLATE: 摘要]",
+      "summary": "Summary",
       "tag": "Tag",
-      "content": "[TRANSLATE: 内容]"
+      "content": "Content"
     }
   },
   "downloadButton": {
     "viewDocument": "查看Documentation"
   },
   "bottomRecommendations": {
-    "title": "[TRANSLATE: 相关工具]",
+    "title": "Related Tools",
     "scenarioSolutions": {
-      "title": "[TRANSLATE: 场景解决方案]",
-      "description": "[TRANSLATE: 从居家到外出，全方位经期不适解决方案]",
-      "actionText": "[TRANSLATE: 生活场景全覆盖]"
+      "title": "Scenario Solutions",
+      "description": "从居家到外出，全方位Menstrual Period不适解决方案",
+      "actionText": "Life场景全覆盖"
     },
     "symptomAssessment": {
-      "title": "[TRANSLATE: 症状评估工具]",
-      "description": "[TRANSLATE: 科学评估经期症状，获取个性化建议]",
+      "title": "Symptom Assessment工具",
+      "description": "科学评估Menstrual Period症状，获取个性化建议",
       "actionText": "个性化症状Analysis"
     }
   },
@@ -12106,112 +12106,112 @@
     "common": {
       "download": "查看Documentation",
       "document": "Documentation",
-      "pages": "[TRANSLATE: 页]"
+      "pages": "pages"
     }
   },
   "homePageContent": {
-    "searchPlaceholder": "[TRANSLATE: 🔍 快速搜索痛经解决方案...]",
-    "searchTips": "[TRANSLATE: 💡 试试搜索\"5分钟缓解\"、\"热敷\"、\"前列腺素\"]",
+    "searchPlaceholder": "🔍 Quick搜索痛经解决方案...",
+    "searchTips": "💡 试试搜索\"5分钟缓解\"、\"Hot Compress\"、\"前列腺素\"",
     "seo": {
-      "title": "[TRANSLATE: PeriodHub - 专业痛经缓解方法和月经健康管理平台 | 科学指导，贴心陪伴]",
+      "title": "PeriodHub - 专业痛经缓解方法和月经Health Management平台 | 科学指导，贴心陪伴",
       "description": "PeriodHub专业痛经缓解方案与经期健康管理平台。基于43篇医学指南和13个自测工具，已帮助60万+女性科学应对痛经困扰，获取个性化解决方案，改善生活Quality。提供科学痛经缓解方法、互动工具和个性化健康指导。",
-      "keywords": "[TRANSLATE: 痛经怎么缓解最快方法,痛经吃什么药最有效,月经推迟几天算正常,月经量少是什么原因,痛经缓解,月经疼痛,经期健康,女性健康,月经健康管理,经期疼痛怎么办,中医调理,热敷,敷热水袋,暖宝宝,按摩,揉肚子,止痛药,月经周期,经期护理,生理期,大姨妈,例假,月经不调,经期症状]",
-      "ogTitle": "[TRANSLATE: PeriodHub - 专业痛经缓解方法和月经健康管理平台]",
-      "ogDescription": "[TRANSLATE: 专业的女性月经健康管理平台，提供科学的痛经缓解方法和个性化健康建议。]"
+      "keywords": "痛经怎么缓解最快方法,痛经吃什么药最有效,月经推迟几天算正常,月经量少是什么原因,痛经缓解,月经疼痛,Menstrual Period健康,女性健康,月经健康管理,经期疼痛怎么办,中医调理,热敷,敷热水袋,暖宝宝,按摩,揉肚子,止痛药,月经周期,经期护理,生理期,大姨妈,例假,月经不调,经期症状",
+      "ogTitle": "PeriodHub - 专业痛经缓解方法和月经Health Management平台",
+      "ogDescription": "专业的女性月经健康管理平台，提供科学的痛经缓解方法和Personalized Health Advice。"
     },
     "statistics": {
       "title": "Data说话，效果可见",
       "description": "基于真实用户反馈和科学研究的Data统计",
-      "improvement": "[TRANSLATE: 用户症状改善]",
-      "users": "[TRANSLATE: 10万+]",
-      "totalUsers": "[TRANSLATE: 累计用户]",
+      "improvement": "User Symptom Improvement",
+      "users": "100K+",
+      "totalUsers": "Cumulative Users",
       "support": "在线Support",
-      "articles": "[TRANSLATE: 专业文章]"
+      "articles": "Professional Articles"
     },
     "healthGuide": {
       "title": "痛经健康Guide",
       "description": "专业痛经健康管理完整指南：涵盖经期生理机制、疼痛原因分析、科学缓解方法、生活方式调理等全方位知识体系。从基础理解到高级管理策略，提供循证医学Support的专业指导，助您科学掌握经期健康管理。"
     },
     "smartTools": {
-      "title": "[TRANSLATE: 智能健康工具]",
+      "title": "智能Health工具",
       "description": "专业的评估和追踪工具，Help您更好地了解和管理经期健康"
     },
-    "medicalDisclaimer": "[TRANSLATE: 医疗免责声明]"
+    "medicalDisclaimer": "Medical Disclaimer"
   },
   "embeddedPainAssessment": {
-    "title": "[TRANSLATE: 疼痛评估工具]",
-    "description": "[TRANSLATE: 快速评估您的疼痛程度]",
+    "title": "Pain Assessment Tool",
+    "description": "Quick评估您的疼痛程度",
     "loading": "Loading...",
-    "error": "[TRANSLATE: 加载失败，请刷新页面重试]"
+    "error": "加载失败，请刷新pages面重试"
   },
   "nsaidContent": {
     "scenes": {
       "scene1": {
-        "title": "[TRANSLATE: 场景1：开场 - 表现痛经的不适感]",
-        "narration": "[TRANSLATE: 很多女性每个月都会经历痛经，那种痉挛、疼痛的感觉让人非常不适。]"
+        "title": "Scene 1: Opening - Expressing Discomfort of Dysmenorrhea",
+        "narration": "Many women experience dysmenorrhea every month, that cramping, painful feeling is very uncomfortable."
       },
       "scene2": {
-        "title": "[TRANSLATE: 场景2：解释痛经原因 - 前列腺素]",
-        "text": "[TRANSLATE: 月经期间，子宫内膜会释放一种叫做\"前列腺素\"的物质。前列腺素会引起子宫肌肉剧烈收缩，导致疼痛。]"
+        "title": "Scene 2: Explaining the Cause of Dysmenorrhea - Prostaglandins",
+        "text": "月Menstrual Period间，子宫内膜会释放一种叫做\"前列腺素\"的物质。前列腺素会引起子宫肌肉剧烈收缩，导致疼痛。"
       },
       "scene3": {
-        "title": "[TRANSLATE: 场景3：引出NSAIDs]",
-        "text": "[TRANSLATE: 而非甾体抗炎药，简称NSAID，是缓解痛经的常用药物。它们能从源头减少前列腺素的产生。]"
+        "title": "Scene 3: Introducing NSAIDs",
+        "text": "而Non-steroidal Anti-inflammatory Drugs，简称NSAID，是缓解痛经的常用药物。它们能从源头减少前列腺素的产生。"
       },
       "scene4": {
-        "title": "[TRANSLATE: 场景4：药物服用]",
-        "text": "[TRANSLATE: 当您服下NSAID药片后，它会进入消化系统。]"
+        "title": "场景4：Medication服用",
+        "text": "When you take an NSAID tablet, it enters your digestive system."
       },
       "scene5": {
-        "title": "[TRANSLATE: 场景5：吸收进入血液]",
-        "text": "[TRANSLATE: 然后通过消化道被吸收到血液里，随着血液流向全身。]"
+        "title": "Scene 5: Absorption into Bloodstream",
+        "text": "Then it is absorbed into the bloodstream through the digestive tract and flows throughout the body with the blood."
       },
       "scene6": {
-        "title": "[TRANSLATE: 场景6：分布到作用部位]",
-        "text": "[TRANSLATE: 药物分子随着血液循环，最终抵达引起疼痛的部位——比如您的子宫周围。]"
+        "title": "Scene 6: Distribution to Site of Action",
+        "text": "Medication分子随着血液循环，最终抵达引起疼痛的部位——比如您的子宫周围。"
       },
       "scene7": {
-        "title": "[TRANSLATE: 场景7：作用机制 - 抑制COX酶]",
-        "text": "[TRANSLATE: 在这里，NSAID药物找到了产生前列腺素的关键\"工厂\"——环氧合酶，并抑制了它的活性。]"
+        "title": "Scene 7: Mechanism of Action - Inhibiting COX Enzymes",
+        "text": "在这里，NSAIDMedication找到了产生前列腺素的关键\"工厂\"——环氧合酶，并抑制了它的活性。"
       },
       "scene8": {
-        "title": "[TRANSLATE: 场景8：减少前列腺素]",
-        "text": "[TRANSLATE: 环氧合酶的工作被打断，前列腺素的合成量就大大降低了。]"
+        "title": "Scene 8: Reducing Prostaglandins",
+        "text": "When the work of cyclooxygenase is interrupted, the synthesis of prostaglandins is greatly reduced."
       },
       "scene9": {
-        "title": "[TRANSLATE: 场景9：疼痛缓解]",
-        "text": "[TRANSLATE: 随着前列腺素减少，子宫收缩变得温和，疼痛感明显减轻。]"
+        "title": "Scene 9: Pain Relief",
+        "text": "As prostaglandins decrease, uterine contractions become gentler, and pain is significantly reduced."
       },
       "scene10": {
-        "title": "[TRANSLATE: 场景10：药物代谢]",
-        "text": "[TRANSLATE: 完成任务后，NSAID药物会被肝脏代谢，最终通过肾脏排出体外。]"
+        "title": "场景10：Medication代谢",
+        "text": "完成任务后，NSAIDMedication会被肝脏代谢，最终通过肾脏排出体外。"
       },
       "scene11": {
-        "title": "[TRANSLATE: 场景11：总结]",
-        "text": "[TRANSLATE: 这就是NSAID缓解痛经的完整过程：从服用到吸收，从作用到代谢，科学而有效。]"
+        "title": "Scene 11: Summary",
+        "text": "这就是NSAID缓解痛经的完整过程：从服用到吸收，从作用到代谢，Science而有效。"
       }
     },
     "ui": {
-      "sceneIndicator": "[TRANSLATE: 场景 {current} / {total}]",
-      "noScenes": "[TRANSLATE: 没有可播放的场景]",
+      "sceneIndicator": "Scene {current} / {total}",
+      "noScenes": "No scenes available to play",
       "noScenesDescription": "请检查Data配置。",
-      "videoError": "[TRANSLATE: 视频加载错误]",
-      "videoErrorDescription": "[TRANSLATE: 抱歉，视频加载失败。请检查您的网络连接或稍后再试。]"
+      "videoError": "Video loading error",
+      "videoErrorDescription": "抱歉，视频加载失败。请Examination您的网络连接或稍后再试。"
     }
   },
   "disclaimer": {
-    "title": "[TRANSLATE: 医疗免责声明]",
+    "title": "Medical Disclaimer",
     "text": "本文内容仅供教育和信息目的，不能替代专业Medical Advice、诊断或治疗。如有健康问题，请咨询合格的医疗专业人员。任何医疗决策都应该在咨询医生后做出。"
   },
   "errors": {
-    "title": "[TRANSLATE: 出现错误]",
-    "description": "[TRANSLATE: 评估工具暂时无法使用，请稍后再试。]",
-    "reload": "[TRANSLATE: 重新加载]"
+    "title": "An Error Occurred",
+    "description": "Assessment tool is temporarily unavailable, please try again later.",
+    "reload": "Reload"
   },
-  "0-2": "[TRANSLATE: 0-2]",
-  "3-4": "[TRANSLATE: 3-4]",
-  "5-7": "[TRANSLATE: 5-7]",
-  "8-10": "[TRANSLATE: 8-10]",
+  "0-2": "0-2",
+  "3-4": "3-4",
+  "5-7": "5-7",
+  "8-10": "8-10",
   "benefitsLabel": "Benefits Label",
   "foods": "Food",
   "actionSteps": "Action Steps",

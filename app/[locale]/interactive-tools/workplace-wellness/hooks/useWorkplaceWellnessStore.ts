@@ -169,10 +169,6 @@ interface WorkplaceWellnessStore extends WorkplaceWellnessState {
 }
 
 // 类型定义 - 兼容 Zustand 5.x
-type StoreSelector<T = WorkplaceWellnessStore> = (
-  state: WorkplaceWellnessStore,
-) => T;
-type StoreEqualityFn<T = WorkplaceWellnessStore> = (a: T, b: T) => boolean;
 // StoreApi 类型：使用 Mutate 包装以支持中间件
 type StoreApi = UseBoundStore<
   Mutate<

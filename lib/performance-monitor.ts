@@ -175,7 +175,6 @@ export class PerformanceMonitor {
         event_category: "Performance",
         event_label: metric,
         value: Math.round(value),
-        non_interaction: true,
       });
     }
   }

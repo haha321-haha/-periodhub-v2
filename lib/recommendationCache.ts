@@ -23,14 +23,15 @@ export function getCachedRecommendations(
   locale: string,
 ): string[] | null {
   const cacheKey = `${CACHE_KEY_PREFIX}${articleSlug}_${locale}`;
-  const cached = LocalStorageManager.getItem<CachedRecommendation>(cacheKey);
-
-  if (!cached) return null;
+  if (typeof window === "undefined") return null;
+  const stored = localStorage.getItem(cacheKey);
+  if (!stored) return null;
+  const cached = JSON.parse(stored) as CachedRecommendation;
 
   // 检查缓存是否过期
   const now = Date.now();
   if (now - cached.timestamp > CACHE_DURATION) {
-    LocalStorageManager.removeItem(cacheKey);
+    localStorage.removeItem(cacheKey);
     return null;
   }
 
@@ -96,24 +97,28 @@ export function clearAllRecommendationCache(): void {
  * 获取缓存统计
  */
 export function getRecommendationCacheStats() {
-  const keys = LocalStorageManager.getAllKeys();
-  const cacheKeys = keys.filter((key) => key.startsWith(CACHE_KEY_PREFIX));
+  if (typeof window === "undefined") return { count: 0, totalSize: 0 };
+  const cacheKeys: string[] = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith(CACHE_KEY_PREFIX)) {
+      cacheKeys.push(key);
+    }
+  }
 
   let totalSize = 0;
   let expiredCount = 0;
   const now = Date.now();
 
-  cacheKeys.forEach((key) => {
+  for (const key of cacheKeys) {
     const stored = localStorage.getItem(key);
     if (!stored) continue;
     const cached = JSON.parse(stored) as CachedRecommendation;
-    if (cached) {
-      totalSize += JSON.stringify(cached).length;
-      if (now - cached.timestamp > CACHE_DURATION) {
-        expiredCount++;
-      }
+    totalSize += JSON.stringify(cached).length;
+    if (now - cached.timestamp > CACHE_DURATION) {
+      expiredCount++;
     }
-  });
+  }
 
   return {
     totalCached: cacheKeys.length,

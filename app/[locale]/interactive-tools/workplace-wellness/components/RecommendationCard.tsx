@@ -347,7 +347,7 @@ const RecommendationCard = memo(function RecommendationCard({
                 {t("feedback.ratePrompt")}
               </p>
               <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((rating) => (
+                {([1, 2, 3, 4, 5] as const).map((rating) => (
                   <button
                     key={rating}
                     onClick={() => handleRating(rating)}

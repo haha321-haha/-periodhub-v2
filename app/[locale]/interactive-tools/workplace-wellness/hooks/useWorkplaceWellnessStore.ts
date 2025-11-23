@@ -1937,22 +1937,22 @@ export const useExportTemplateActions = (): ExportTemplateActions => {
   const store = useWorkplaceWellnessStore;
   const addExportTemplate = store(
     (state: WorkplaceWellnessStore) => state.addExportTemplate,
-  );
+  ) as WorkplaceWellnessStore["addExportTemplate"];
   const updateExportTemplate = store(
     (state: WorkplaceWellnessStore) => state.updateExportTemplate,
-  );
+  ) as WorkplaceWellnessStore["updateExportTemplate"];
   const deleteExportTemplate = store(
     (state: WorkplaceWellnessStore) => state.deleteExportTemplate,
-  );
+  ) as WorkplaceWellnessStore["deleteExportTemplate"];
   const setActiveTemplate = store(
     (state: WorkplaceWellnessStore) => state.setActiveTemplate,
-  );
+  ) as WorkplaceWellnessStore["setActiveTemplate"];
   const loadTemplate = store(
     (state: WorkplaceWellnessStore) => state.loadTemplate,
-  );
+  ) as WorkplaceWellnessStore["loadTemplate"];
   const duplicateTemplate = store(
     (state: WorkplaceWellnessStore) => state.duplicateTemplate,
-  );
+  ) as WorkplaceWellnessStore["duplicateTemplate"];
 
   return {
     addExportTemplate,
@@ -1969,19 +1969,19 @@ export const useBatchExportActions = (): BatchExportActions => {
   const store = useWorkplaceWellnessStore;
   const createBatchExport = store(
     (state: WorkplaceWellnessStore) => state.createBatchExport,
-  );
+  ) as WorkplaceWellnessStore["createBatchExport"];
   const updateBatchItemStatus = store(
     (state: WorkplaceWellnessStore) => state.updateBatchItemStatus,
-  );
+  ) as WorkplaceWellnessStore["updateBatchItemStatus"];
   const cancelBatchExport = store(
     (state: WorkplaceWellnessStore) => state.cancelBatchExport,
-  );
+  ) as WorkplaceWellnessStore["cancelBatchExport"];
   const retryFailedItems = store(
     (state: WorkplaceWellnessStore) => state.retryFailedItems,
-  );
+  ) as WorkplaceWellnessStore["retryFailedItems"];
   const clearBatchExport = store(
     (state: WorkplaceWellnessStore) => state.clearBatchExport,
-  );
+  ) as WorkplaceWellnessStore["clearBatchExport"];
 
   return {
     createBatchExport,
@@ -1997,13 +1997,13 @@ export const useExportHistoryActions = (): ExportHistoryActions => {
   const store = useWorkplaceWellnessStore;
   const addExportHistory = store(
     (state: WorkplaceWellnessStore) => state.addExportHistory,
-  );
+  ) as WorkplaceWellnessStore["addExportHistory"];
   const clearExportHistory = store(
     (state: WorkplaceWellnessStore) => state.clearExportHistory,
-  );
+  ) as WorkplaceWellnessStore["clearExportHistory"];
   const deleteExportHistory = store(
     (state: WorkplaceWellnessStore) => state.deleteExportHistory,
-  );
+  ) as WorkplaceWellnessStore["deleteExportHistory"];
 
   return {
     addExportHistory,
@@ -2017,10 +2017,10 @@ export const useSystemSettingsActions = (): SystemSettingsActions => {
   const store = useWorkplaceWellnessStore;
   const updateSystemSettings = store(
     (state: WorkplaceWellnessStore) => state.updateSystemSettings,
-  );
+  ) as WorkplaceWellnessStore["updateSystemSettings"];
   const resetSystemSettings = store(
     (state: WorkplaceWellnessStore) => state.resetSystemSettings,
-  );
+  ) as WorkplaceWellnessStore["resetSystemSettings"];
 
   return {
     updateSystemSettings,
@@ -2034,16 +2034,16 @@ export const useRecommendationFeedbackActions =
     const store = useWorkplaceWellnessStore;
     const addRecommendationFeedback = store(
       (state: WorkplaceWellnessStore) => state.addRecommendationFeedback,
-    );
+    ) as WorkplaceWellnessStore["addRecommendationFeedback"];
     const clearIgnoredItem = store(
       (state: WorkplaceWellnessStore) => state.clearIgnoredItem,
-    );
+    ) as WorkplaceWellnessStore["clearIgnoredItem"];
     const clearAllIgnored = store(
       (state: WorkplaceWellnessStore) => state.clearAllIgnored,
-    );
+    ) as WorkplaceWellnessStore["clearAllIgnored"];
     const getFeedbackHistory = store(
       (state: WorkplaceWellnessStore) => state.getFeedbackHistory,
-    );
+    ) as WorkplaceWellnessStore["getFeedbackHistory"];
 
     return {
       addRecommendationFeedback,
@@ -2064,10 +2064,10 @@ export const useTelemetryActions = (): TelemetryActions => {
   const store = useWorkplaceWellnessStore;
   const recordTelemetry = store(
     (state: WorkplaceWellnessStore) => state.recordTelemetry,
-  );
+  ) as WorkplaceWellnessStore["recordTelemetry"];
   const recordNavigation = store(
     (state: WorkplaceWellnessStore) => state.recordNavigation,
-  );
+  ) as WorkplaceWellnessStore["recordNavigation"];
 
   return {
     recordTelemetry,

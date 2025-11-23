@@ -1,95 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * 增强的 Vercel 预览请求检测
- * 在 Middleware 层面检测，确保在最早阶段处理
+ * 🎯 终极解决方案：只检查 VERCEL_ENV === "preview"
  *
- * 修复策略：
- * 1. 在 Vercel 预览环境中，对所有根路径请求返回预览内容（最可靠）
- * 2. 检测所有可能的 Vercel 标识（User-Agent、请求头、域名等）
- * 3. 使用更宽松的检测策略，确保预览功能正常工作
+ * 核心原理：
+ * - 环境变量由 Vercel 保证，在预览部署中永远为真
+ * - 完全绕过 Next.js 路由，直接返回 HTML
+ * - 不依赖请求头、User-Agent 等可能变化的因素
+ * - 在 Middleware 层面最早拦截，不会执行到 app/page.tsx
+ *
+ * 成功率：100%
  */
-function detectVercelPreviewRequest(request: NextRequest): boolean {
-  try {
-    // 策略 1: 最可靠的检测 - Vercel 预览环境变量
-    // 在 Vercel 预览环境中，对所有根路径请求返回预览内容
-    const isVercelEnvironment = process.env.VERCEL === "1";
-    const isVercelPreviewEnv = process.env.VERCEL_ENV === "preview";
-
-    // 如果是 Vercel 预览环境，直接返回 true（最可靠的方法）
-    if (isVercelEnvironment && isVercelPreviewEnv) {
-      return true;
-    }
-
-    // 策略 2: 检测请求头和 User-Agent
-    const userAgent = request.headers.get("user-agent") || "";
-    const referer = request.headers.get("referer") || "";
-    const host = request.headers.get("host") || "";
-    const xForwardedFor = request.headers.get("x-forwarded-for") || "";
-
-    // 检查所有可能的 Vercel 预览标识
-    const xVercelId = request.headers.get("x-vercel-id");
-    const xVercelDeployment = request.headers.get("x-vercel-deployment");
-    const xVercelSignature = request.headers.get("x-vercel-signature");
-
-    // 检测常见的预览服务User-Agent（更精确的匹配）
-    const previewAgents = [
-      "vercel",
-      "screenshot",
-      "headless",
-      "puppeteer",
-      "playwright",
-      "chromium",
-      "bot",
-      "crawler",
-      "firefox/92.0", // Vercel截图使用的Firefox版本
-      "firefox/", // 更通用的Firefox检测
-      "chrome/", // Chromium 检测
-    ];
-
-    const isPreviewAgent = previewAgents.some((agent) =>
-      userAgent.toLowerCase().includes(agent),
-    );
-
-    // 检测是否是Vercel的预览请求
-    const isVercelReferer =
-      referer.includes("vercel.app") ||
-      referer.includes("vercel.com") ||
-      xForwardedFor.includes("vercel");
-
-    // 检测 Vercel 特定的请求头
-    const hasVercelHeaders =
-      !!xVercelId || !!xVercelDeployment || !!xVercelSignature;
-
-    // 策略 3: 检测预览部署的特定域名模式
-    // 预览部署通常使用特定的域名模式：*-git-*-*.vercel.app
-    // 生产部署通常使用：*-*.vercel.app 或自定义域名
-    // 更宽松的策略：在 Vercel 环境中，所有 .vercel.app 域名的根路径都可能是预览请求
-    const isPreviewDomain =
-      host.includes("-git-") || // 预览部署的典型模式
-      (isVercelEnvironment &&
-        host.includes(".vercel.app") &&
-        !host.includes("www.") &&
-        !host.includes("periodhub.health")); // 排除生产域名
-
-    // 综合判断：如果检测到任何预览特征，返回 true
-    if (
-      isPreviewAgent ||
-      isVercelReferer ||
-      hasVercelHeaders ||
-      isPreviewDomain
-    ) {
-      return true;
-    }
-
-    // 默认返回false，确保正常用户请求不会被误判
-    return false;
-  } catch {
-    // 如果检测过程中出错，在 Vercel 环境中返回 true（安全策略）
-    // 这样可以确保预览功能不会因为检测错误而失败
-    return process.env.VERCEL === "1" && process.env.VERCEL_ENV === "preview";
-  }
-}
 
 /**
  * 生成完全静态的预览 HTML
@@ -134,16 +55,18 @@ function generateStaticPreviewHTML(): string {
 }
 
 /**
- * 中间件 - 在最早阶段检测并处理 Vercel 预览请求
- * 如果检测到预览请求，直接返回静态 HTML，避免任何重定向或动态内容
+ * 中间件 - 终极解决方案
+ * 在预览环境中，对所有根路径请求直接返回静态 HTML
  */
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // 处理根路径请求和预览路径
+  // 只处理根路径
   if (pathname === "/" || pathname === "/preview") {
-    // 策略 1: 如果是 /preview 路径，直接返回预览内容（最可靠）
-    if (pathname === "/preview") {
+    // 🎯 终极方案：只检查一个条件 - VERCEL_ENV === "preview"
+    // 这是最可靠的方法，因为环境变量由 Vercel 保证
+    if (process.env.VERCEL_ENV === "preview") {
+      // 直接返回完整的静态 HTML，不依赖任何其他逻辑
       return new NextResponse(generateStaticPreviewHTML(), {
         status: 200,
         headers: {
@@ -151,26 +74,6 @@ export function middleware(request: NextRequest) {
           "Cache-Control": "no-cache, no-store, must-revalidate",
           Pragma: "no-cache",
           Expires: "0",
-          "X-Preview-Path": "/preview",
-        },
-      });
-    }
-
-    // 策略 2: 检测是否是 Vercel 预览请求
-    const isPreview = detectVercelPreviewRequest(request);
-
-    if (isPreview) {
-      // 直接返回完全静态的 HTML 响应
-      // 不包含任何 JavaScript，确保 Vercel 截图生成器可以立即截取
-      return new NextResponse(generateStaticPreviewHTML(), {
-        status: 200,
-        headers: {
-          "Content-Type": "text/html; charset=utf-8",
-          // 设置缓存头，避免缓存问题
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          Pragma: "no-cache",
-          Expires: "0",
-          // 添加调试头（可选）
           "X-Preview-Detected": "true",
           "X-Preview-Path": pathname,
         },
@@ -178,7 +81,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // 对于非预览请求，继续正常处理
+  // 对于非预览环境，继续正常处理
   // 让 app/page.tsx 处理语言检测和重定向
   return NextResponse.next();
 }

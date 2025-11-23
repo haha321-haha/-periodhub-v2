@@ -56,7 +56,7 @@ import {
 import { mockPeriodData } from "../data";
 
 // 扩展状态接口，添加Actions
-interface WorkplaceWellnessStore extends WorkplaceWellnessState {
+export interface WorkplaceWellnessStore extends WorkplaceWellnessState {
   // 标签页相关Actions
   setActiveTab: (
     tab:

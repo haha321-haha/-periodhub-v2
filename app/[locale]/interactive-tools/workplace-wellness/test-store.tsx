@@ -5,6 +5,8 @@ import {
   useWorkplaceWellnessStore,
   useWorkplaceWellnessActions,
 } from "./hooks/useWorkplaceWellnessStore";
+import type { CalendarState, WorkImpactData, NutritionData } from "./types";
+import type { WorkplaceWellnessStore } from "./hooks/useWorkplaceWellnessStore";
 import { logWarn } from "@/lib/debug-logger";
 
 export default function TestStore() {

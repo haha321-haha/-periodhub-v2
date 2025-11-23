@@ -33,7 +33,10 @@ function forceSetTitle(title: string): void {
       }
     });
   } catch (error) {
-    console.error("❌ [UnifiedTitleManager] 设置标题失败:", error);
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.error("❌ [UnifiedTitleManager] 设置标题失败:", error);
+    }
   }
 }
 
@@ -69,9 +72,12 @@ function startProtection(title: string, locale: string): void {
         ) {
           const currentTitle = document.title;
           if (currentTitle !== title && !currentTitle.includes(title)) {
-            console.warn(
-              `🛡️ [UnifiedTitleManager] 标题被修改: "${currentTitle}" -> "${title}"`,
-            );
+            if (process.env.NODE_ENV === "development") {
+              // eslint-disable-next-line no-console
+              console.warn(
+                `🛡️ [UnifiedTitleManager] 标题被修改: "${currentTitle}" -> "${title}"`,
+              );
+            }
             forceSetTitle(title);
           }
         }
@@ -91,15 +97,21 @@ function startProtection(title: string, locale: string): void {
     protectionInterval = setInterval(() => {
       const actualTitle = document.title;
       if (actualTitle !== title && !actualTitle.includes(title)) {
-        console.warn(
-          `⏰ [UnifiedTitleManager] 定期检查发现标题偏移，正在恢复...`,
-        );
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.warn(
+            `⏰ [UnifiedTitleManager] 定期检查发现标题偏移，正在恢复...`,
+          );
+        }
         forceSetTitle(title);
       }
     }, 2000);
   }
 
-  console.log(`🛡️ [UnifiedTitleManager] 标题保护已启动`);
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
+    console.log(`🛡️ [UnifiedTitleManager] 标题保护已启动`);
+  }
 }
 
 // 设置标题（统一入口）
@@ -115,7 +127,10 @@ export function setTitle(title: string, locale: string = "zh"): void {
   // 启动保护机制
   startProtection(title, locale);
 
-  console.log(`🎯 [UnifiedTitleManager] 标题已设置为: "${title}"`);
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
+    console.log(`🎯 [UnifiedTitleManager] 标题已设置为: "${title}"`);
+  }
 }
 
 // 获取当前标题

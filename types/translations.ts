@@ -139,7 +139,7 @@ export type TranslationKey =
 // 翻译函数类型
 export type TranslationFunction = (
   key: TranslationKey,
-  params?: Record<string, any>,
+  params?: Record<string, unknown>,
 ) => string;
 
 // 翻译Hook返回类型

@@ -9,7 +9,7 @@ import { heatmapManager } from '@/utils/heatmapManager';
 export interface CheckResult {
   status: 'pass' | 'fail' | 'warning';
   message: string;
-  details?: any;
+  details?: unknown;
 }
 
 export interface HealthReport {

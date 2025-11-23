@@ -35,7 +35,10 @@ export class HeatmapDataManager {
           const data = JSON.parse(stored);
           this.clickData = new Map(Object.entries(data));
         } catch (error) {
-          console.error("Failed to load heatmap data:", error);
+          if (process.env.NODE_ENV === "development") {
+            // eslint-disable-next-line no-console
+            console.error("Failed to load heatmap data:", error);
+          }
         }
       }
     }
@@ -97,7 +100,10 @@ export class HeatmapDataManager {
     });
 
     this.saveToStorage();
-    console.log("✅ 热点地图数据合并完成");
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.log("✅ 热点地图数据合并完成");
+    }
   }
 
   /**
@@ -128,7 +134,10 @@ export class HeatmapDataManager {
     });
 
     this.saveToStorage();
-    console.log("✅ 过期热点数据清理完成");
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.log("✅ 过期热点数据清理完成");
+    }
   }
 
   /**

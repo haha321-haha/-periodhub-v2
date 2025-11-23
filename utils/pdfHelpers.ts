@@ -175,10 +175,20 @@ export function validatePDFResource(resource: PDFResource): {
  * @param resourceId 资源ID
  * @param locale 语言代码
  */
+// Google Analytics gtag 类型定义
+type GtagFunction = (
+  command: string,
+  targetId: string,
+  config?: Record<string, unknown>,
+) => void;
+
 export function trackPDFDownload(resourceId: string, locale: Locale): void {
   // 这里可以集成分析工具，如Google Analytics
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag("event", "pdf_download", {
+  if (
+    typeof window !== "undefined" &&
+    (window as { gtag?: GtagFunction }).gtag
+  ) {
+    (window as { gtag: GtagFunction }).gtag("event", "pdf_download", {
       resource_id: resourceId,
       locale: locale,
       timestamp: new Date().toISOString(),
@@ -186,7 +196,10 @@ export function trackPDFDownload(resourceId: string, locale: Locale): void {
   }
 
   // 也可以发送到自定义分析端点
-  console.log(`PDF Download: ${resourceId} (${locale})`);
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
+    console.log(`PDF Download: ${resourceId} (${locale})`);
+  }
 }
 
 /**

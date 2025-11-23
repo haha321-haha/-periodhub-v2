@@ -295,9 +295,9 @@ export interface MigrationPlan {
 export interface Migration {
   version: number;
   description: string;
-  up: (data: any) => any;
-  down: (data: any) => any;
-  validate: (data: any) => boolean;
+  up: (data: unknown) => unknown;
+  down: (data: unknown) => unknown;
+  validate: (data: unknown) => boolean;
 }
 
 // Service Interface Types
@@ -374,8 +374,8 @@ export interface ValidationServiceInterface {
 }
 
 export interface LocalStorageAdapterInterface {
-  save(key: string, data: any): Promise<void>;
-  load(key: string): Promise<any>;
+  save(key: string, data: unknown): Promise<void>;
+  load(key: string): Promise<unknown>;
   remove(key: string): Promise<void>;
   clear(): Promise<void>;
   exists(key: string): Promise<boolean>;
@@ -390,7 +390,7 @@ export class PainTrackerError extends Error {
   constructor(
     message: string,
     public code: PainTrackerErrorCode,
-    public details?: any,
+    public details?: unknown,
   ) {
     super(message);
     this.name = "PainTrackerError";
@@ -551,7 +551,7 @@ export interface PaginationOptions {
   pageSize?: number;
   sortBy?: string;
   sortOrder?: "asc" | "desc";
-  filters?: Record<string, any>;
+  filters?: Record<string, unknown>;
   preload?: boolean;
 }
 

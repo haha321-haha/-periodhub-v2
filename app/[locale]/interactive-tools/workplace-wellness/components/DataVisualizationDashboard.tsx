@@ -69,6 +69,104 @@ export default function DataVisualizationDashboard() {
     [calendar.periodData],
   );
 
+  // 辅助函数 - 必须在 generateDashboardData 之前定义
+  const calculateCycleLength = (records: PeriodRecord[]): number => {
+    if (records.length < 2) return 0;
+    const sorted = [...records].sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+    );
+    const first = new Date(sorted[0].date).getTime();
+    const last = new Date(sorted[sorted.length - 1].date).getTime();
+    return Math.round((last - first) / (1000 * 60 * 60 * 24));
+  };
+
+  // 生成趋势数据 - 必须在 generateDashboardData 之前定义
+  const generateTrendData = useCallback(
+    (data: PeriodRecord[]): TrendRecord[] => {
+      const trends: TrendRecord[] = [];
+      const monthlyData = new Map<string, PeriodRecord[]>();
+
+      data.forEach((record) => {
+        const month = new Date(record.date).toISOString().slice(0, 7);
+        if (!monthlyData.has(month)) {
+          monthlyData.set(month, []);
+        }
+        monthlyData.get(month)!.push(record);
+      });
+
+      monthlyData.forEach((records, month) => {
+        const periodRecords = records.filter((r) => r.type === "period");
+        if (periodRecords.length > 0) {
+          const avgPain =
+            periodRecords.reduce((sum, r) => sum + (r.painLevel || 0), 0) /
+            periodRecords.length;
+          const efficiency = Math.max(20, 100 - avgPain * 8);
+
+          trends.push({
+            month,
+            cycleLength: calculateCycleLength(periodRecords),
+            painLevel: avgPain,
+            efficiency,
+          });
+        }
+      });
+
+      return trends.sort((a, b) => a.month.localeCompare(b.month));
+    },
+    [],
+  );
+
+  // 生成洞察 - 必须在 generateDashboardData 之前定义
+  const generateInsights = useCallback(
+    (analysis: CycleAnalysis, statistics: CycleStatistics): InsightCard[] => {
+      const insights: InsightCard[] = [];
+
+      if (analysis.cycleRegularity === "regular") {
+        insights.push({
+          type: "positive",
+          title: t("insights.regularCycle"),
+          description: t("insights.regularCycleDesc"),
+          icon: CheckCircle,
+        });
+      } else if (analysis.cycleRegularity === "irregular") {
+        insights.push({
+          type: "negative",
+          title: t("insights.irregularCycle"),
+          description: t("insights.irregularCycleDesc"),
+          icon: AlertTriangle,
+        });
+      }
+
+      if (statistics.averagePainLevel > 7) {
+        insights.push({
+          type: "negative",
+          title: t("insights.highPain"),
+          description: t("insights.highPainDesc"),
+          icon: AlertTriangle,
+        });
+      } else if (statistics.averagePainLevel < 3) {
+        insights.push({
+          type: "positive",
+          title: t("insights.lowPain"),
+          description: t("insights.lowPainDesc"),
+          icon: CheckCircle,
+        });
+      }
+
+      if (analysis.confidence > 80) {
+        insights.push({
+          type: "positive",
+          title: t("insights.highAccuracy"),
+          description: t("insights.highAccuracyDesc"),
+          icon: CheckCircle,
+        });
+      }
+
+      return insights;
+    },
+    [t],
+  );
+
   const generateDashboardData = useCallback(async () => {
     setLoading(true);
 
@@ -104,108 +202,6 @@ export default function DataVisualizationDashboard() {
   useEffect(() => {
     generateDashboardData();
   }, [generateDashboardData]);
-
-  const generateTrendData = useCallback(
-    (data: PeriodRecord[]): TrendRecord[] => {
-      const trends: TrendRecord[] = [];
-      const monthlyData = new Map<string, PeriodRecord[]>();
-
-      // 按月份分组数据
-      data.forEach((record) => {
-        const month = new Date(record.date).toISOString().slice(0, 7);
-        if (!monthlyData.has(month)) {
-          monthlyData.set(month, []);
-        }
-        monthlyData.get(month)!.push(record);
-      });
-
-      // 计算每月趋势
-      monthlyData.forEach((records, month) => {
-        const periodRecords = records.filter((r) => r.type === "period");
-        if (periodRecords.length > 0) {
-          const avgPain =
-            periodRecords.reduce((sum, r) => sum + (r.painLevel || 0), 0) /
-            periodRecords.length;
-          const efficiency = Math.max(20, 100 - avgPain * 8);
-
-          trends.push({
-            month,
-            cycleLength: calculateCycleLength(periodRecords),
-            painLevel: avgPain,
-            efficiency,
-          });
-        }
-      });
-
-      return trends.sort((a, b) => a.month.localeCompare(b.month));
-    },
-    [],
-  );
-
-  const generateInsights = useCallback(
-    (analysis: CycleAnalysis, statistics: CycleStatistics): InsightCard[] => {
-      const insights: InsightCard[] = [];
-
-      // 周期规律性洞察
-      if (analysis.cycleRegularity === "regular") {
-        insights.push({
-          type: "positive",
-          title: t("insights.regularCycle"),
-          description: t("insights.regularCycleDesc"),
-          icon: CheckCircle,
-        });
-      } else if (analysis.cycleRegularity === "irregular") {
-        insights.push({
-          type: "negative",
-          title: t("insights.irregularCycle"),
-          description: t("insights.irregularCycleDesc"),
-          icon: AlertTriangle,
-        });
-      }
-
-      // 疼痛水平洞察
-      if (statistics.averagePainLevel > 7) {
-        insights.push({
-          type: "negative",
-          title: t("insights.highPain"),
-          description: t("insights.highPainDesc"),
-          icon: AlertTriangle,
-        });
-      } else if (statistics.averagePainLevel < 3) {
-        insights.push({
-          type: "positive",
-          title: t("insights.lowPain"),
-          description: t("insights.lowPainDesc"),
-          icon: CheckCircle,
-        });
-      }
-
-      // 预测准确性洞察
-      if (analysis.confidence > 80) {
-        insights.push({
-          type: "positive",
-          title: t("insights.highAccuracy"),
-          description: t("insights.highAccuracyDesc"),
-          icon: CheckCircle,
-        });
-      }
-
-      return insights;
-    },
-    [t],
-  );
-
-  const calculateCycleLength = (records: PeriodRecord[]): number => {
-    if (records.length < 2) return 0;
-    const sorted = [...records].sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
-    );
-    const first = new Date(sorted[0].date);
-    const last = new Date(sorted[sorted.length - 1].date);
-    return Math.round(
-      (last.getTime() - first.getTime()) / (1000 * 60 * 60 * 24),
-    );
-  };
 
   // 渲染概览视图
   const renderOverview = () => {

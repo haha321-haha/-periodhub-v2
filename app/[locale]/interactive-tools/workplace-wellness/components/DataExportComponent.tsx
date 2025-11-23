@@ -243,7 +243,20 @@ export default function DataExportComponent() {
           exportAsJSON(protectedData);
           break;
         case "csv":
-          exportAsCSV(protectedData);
+          // Handle "all" type by exporting period data only for CSV
+          if (protectedData.type === "all") {
+            exportAsCSV({
+              type: "period",
+              data: protectedData.data.period,
+            });
+          } else {
+            exportAsCSV(
+              protectedData as {
+                type: string;
+                data: PeriodRecord[] | NutritionRecommendation[];
+              },
+            );
+          }
           break;
         case "pdf":
           exportAsPDF(protectedData);

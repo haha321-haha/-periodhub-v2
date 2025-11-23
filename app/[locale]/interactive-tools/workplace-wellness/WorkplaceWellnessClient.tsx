@@ -7,6 +7,7 @@ import { logError, logWarn } from "@/lib/debug-logger";
 import StorageWarningToast from "./components/StorageWarningToast";
 import DebugPanel from "./components/DebugPanel";
 import { SimpleToastProvider } from "./components/SimpleToast";
+import type { WorkplaceWellnessState } from "./types";
 
 // 动态导入组件以优化性能
 const WorkplaceWellnessHeader = dynamic(() => import("./components/Header"), {
@@ -163,9 +164,7 @@ interface WorkplaceWellnessClientProps {
 }
 
 type WorkplaceStoreModule = typeof import("./hooks/useWorkplaceWellnessStore");
-type WorkplaceStoreState = ReturnType<
-  WorkplaceStoreModule["useWorkplaceWellnessStore"]
->;
+type WorkplaceStoreState = WorkplaceWellnessState;
 
 export default function WorkplaceWellnessClient({
   locale: propLocale,

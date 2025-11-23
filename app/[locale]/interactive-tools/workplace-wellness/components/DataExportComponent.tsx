@@ -115,7 +115,14 @@ export default function DataExportComponent() {
           },
         };
       default:
-        return baseData;
+        return {
+          ...baseData,
+          type: "all" as const,
+          data: {
+            period: periodData,
+            nutrition: nutritionData,
+          },
+        };
     }
   };
 
@@ -221,10 +228,12 @@ export default function DataExportComponent() {
       const data = generateExportData();
 
       // 应用隐私保护
+      // Type assertion needed because ExportPayload has additional fields (exportDate, locale, version)
       const protectedData = privacyManager.maskSensitiveData(
-        data,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        data as any,
         exportConfig.exportType,
-      );
+      ) as typeof data;
 
       // 模拟导出延迟
       await new Promise((resolve) => setTimeout(resolve, 2000));

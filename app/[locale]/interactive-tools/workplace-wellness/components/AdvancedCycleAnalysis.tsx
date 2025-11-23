@@ -428,7 +428,7 @@ export default function AdvancedCycleAnalysis() {
             <button
               key={tab.id}
               type="button"
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => setActiveTab(tab.id as AdvancedTab)}
               className={`flex-1 flex items-center justify-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === tab.id
                   ? "bg-white text-primary-600 shadow-sm"

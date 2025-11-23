@@ -95,8 +95,9 @@ export default function CycleStatisticsChart() {
     }
 
     try {
-      const cycleAnalysis = CyclePredictor.analyzeCycles(validRecords);
-      const cycleStats = CyclePredictor.calculateStatistics(validRecords);
+      const predictor = new CyclePredictor(locale);
+      const cycleAnalysis = predictor.analyzeCycle(validRecords);
+      const cycleStats = predictor.generateStatistics(validRecords);
 
       setAnalysis(cycleAnalysis);
       setStatistics(cycleStats);
@@ -105,7 +106,7 @@ export default function CycleStatisticsChart() {
       setAnalysis(null);
       setStatistics(null);
     }
-  }, [periodData]);
+  }, [periodData, locale]);
 
   // 空数据检查
   if (periodData.length === 0) {

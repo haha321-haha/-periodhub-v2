@@ -149,7 +149,15 @@ export default function WorkplaceImpactClient() {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      const workplaceResults = calculateWorkplaceImpact(answers, "zh");
+      // Type assertion needed because WorkplaceAnswers uses string but WorkplaceAssessmentInputs needs literal types
+      const workplaceResults = calculateWorkplaceImpact(
+        answers as unknown as {
+          concentration?: "none" | "slight" | "difficult" | "impossible";
+          absenteeism?: "never" | "rarely" | "sometimes" | "frequently";
+          communication?: "comfortable" | "hesitant" | "uncomfortable" | "na";
+        },
+        "zh",
+      );
       setResults(workplaceResults);
       setCurrentState("results");
     }

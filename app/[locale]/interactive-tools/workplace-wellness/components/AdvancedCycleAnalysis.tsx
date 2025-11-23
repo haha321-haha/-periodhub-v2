@@ -65,26 +65,6 @@ export default function AdvancedCycleAnalysis() {
     [calendar],
   );
 
-  useEffect(() => {
-    try {
-      const predictor = new CyclePredictor(locale);
-      const cycleAnalysis = predictor.analyzeCycle(periodData);
-      const cycleStats = predictor.generateStatistics(periodData);
-
-      setAnalysis(cycleAnalysis);
-      setStatistics(cycleStats);
-
-      generateTrendData(periodData);
-      generateComparisonData(periodData, cycleAnalysis);
-    } catch (error) {
-      logError(
-        "Failed to generate advanced cycle analysis",
-        error,
-        "AdvancedCycleAnalysis",
-      );
-    }
-  }, [periodData, locale, generateTrendData, generateComparisonData]);
-
   // 生成趋势数据
   const generateTrendData = useCallback((data: PeriodRecord[]) => {
     const trends: TrendData[] = [];
@@ -150,6 +130,26 @@ export default function AdvancedCycleAnalysis() {
     },
     [],
   );
+
+  useEffect(() => {
+    try {
+      const predictor = new CyclePredictor(locale);
+      const cycleAnalysis = predictor.analyzeCycle(periodData);
+      const cycleStats = predictor.generateStatistics(periodData);
+
+      setAnalysis(cycleAnalysis);
+      setStatistics(cycleStats);
+
+      generateTrendData(periodData);
+      generateComparisonData(periodData, cycleAnalysis);
+    } catch (error) {
+      logError(
+        "Failed to generate advanced cycle analysis",
+        error,
+        "AdvancedCycleAnalysis",
+      );
+    }
+  }, [periodData, locale, generateTrendData, generateComparisonData]);
 
   // 辅助函数
   const getMostCommonFlow = (

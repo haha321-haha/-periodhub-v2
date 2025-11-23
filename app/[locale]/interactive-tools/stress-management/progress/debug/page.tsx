@@ -267,7 +267,7 @@ export default function DebugPage() {
             </div>
             <div className="bg-green-50 rounded-lg p-4">
               <div className="text-2xl font-bold text-green-600">
-                {storageInfo?.sizeInKB || 0} KB
+                {storageInfo?.sizeInMB || 0} MB
               </div>
               <div className="text-sm text-gray-600">Data Size</div>
             </div>

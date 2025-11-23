@@ -255,10 +255,25 @@ export function getMonthEntries(): ProgressEntry[] {
 
 export function getStorageInfo() {
   const data = getProgress();
+  const totalEntries = data.entries.length;
+  const usagePercent = Math.round((totalEntries / MAX_ENTRIES) * 100);
+  const isNearFull = usagePercent >= 80;
+  const isFull = totalEntries >= MAX_ENTRIES;
+
+  // Estimate storage size (rough calculation)
+  const avgEntrySize = 200; // bytes per entry (rough estimate)
+  const sizeInMB = (totalEntries * avgEntrySize) / (1024 * 1024);
+  const maxSizeInMB = (MAX_ENTRIES * avgEntrySize) / (1024 * 1024);
+
   return {
-    totalEntries: data.entries.length,
+    totalEntries,
     lastUpdated: data.lastUpdated,
     capacity: MAX_ENTRIES,
+    usagePercent,
+    isNearFull,
+    isFull,
+    sizeInMB: parseFloat(sizeInMB.toFixed(2)),
+    maxSizeInMB: parseFloat(maxSizeInMB.toFixed(2)),
   };
 }
 

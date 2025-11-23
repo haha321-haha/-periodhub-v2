@@ -212,10 +212,14 @@ import {
 } from "../utils/validation";
 
 export function validateAllData() {
+  // 获取当前语言的数据（默认使用中文）
+  const nutritionDataArray = getNutritionData("zh");
+  const leaveTemplatesArray = getLeaveTemplates("zh");
+
   const results = {
     periodData: validatePeriodData(mockPeriodData),
-    nutritionData: validateNutritionData(mockNutritionData),
-    leaveTemplates: validateLeaveTemplates(leaveTemplates),
+    nutritionData: validateNutritionData(nutritionDataArray),
+    leaveTemplates: validateLeaveTemplates(leaveTemplatesArray),
   };
 
   return results;

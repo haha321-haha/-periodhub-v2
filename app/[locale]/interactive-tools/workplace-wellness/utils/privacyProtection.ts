@@ -106,7 +106,7 @@ export class PrivacyProtectionManager {
         flow: record.flow ? this.maskFlowType() : null,
         // 脱敏备注信息
         notes: record.notes ? this.maskNotes(record.notes) : undefined,
-      }));
+      })) as PeriodRecord[];
     }
     return data;
   }
@@ -167,7 +167,7 @@ export class PrivacyProtectionManager {
    * 流量类型脱敏 - 保留类型，脱敏具体描述
    */
   private maskFlowType(): FlowType {
-    const flowTypes = ["light", "medium", "heavy"];
+    const flowTypes: FlowType[] = ["light", "medium", "heavy"];
     return flowTypes[Math.floor(Math.random() * flowTypes.length)];
   }
 

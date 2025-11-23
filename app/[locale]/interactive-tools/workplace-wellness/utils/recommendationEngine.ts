@@ -15,11 +15,8 @@ import {
   NutritionData,
 } from "../types";
 import { RECOMMENDATION_CONTENT } from "./recommendationContent";
-import {
-  createUserDataSnapshot,
-  detectAnomalies,
-  type AnomalyDetection,
-} from "./dataAnalyzer";
+import { createUserDataSnapshot, detectAnomalies } from "./dataAnalyzer";
+import type { AnomalyDetection } from "../types/recommendation";
 import {
   scoreRecommendations,
   calculateDiversityScore,

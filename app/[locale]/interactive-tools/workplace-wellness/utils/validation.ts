@@ -48,8 +48,12 @@ export function validatePeriodRecord(
     errors.push("Flow must be one of: light, medium, heavy");
   }
 
-  // 症状数组验证
-  if (record.symptoms && !Array.isArray(record.symptoms)) {
+  // 症状数组验证（如果存在）
+  if (
+    "symptoms" in record &&
+    record.symptoms &&
+    !Array.isArray(record.symptoms)
+  ) {
     errors.push("Symptoms must be an array");
   }
 

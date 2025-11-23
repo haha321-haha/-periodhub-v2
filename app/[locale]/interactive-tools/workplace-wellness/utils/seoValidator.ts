@@ -126,7 +126,8 @@ export function validateMetaCompleteness(meta: Metadata): {
   if (!meta.description) issues.push("缺少页面描述");
   if (!meta.keywords || !Array.isArray(meta.keywords))
     issues.push("缺少关键词数组");
-  if (!meta.canonical) issues.push("缺少canonical URL");
+  // canonical 在 Next.js Metadata 中可能不存在，使用 alternates?.canonical 代替
+  if (!meta.alternates?.canonical) issues.push("缺少canonical URL");
 
   // 检查OpenGraph
   if (!meta.openGraph) {
@@ -134,14 +135,28 @@ export function validateMetaCompleteness(meta: Metadata): {
   } else {
     if (!meta.openGraph.title) issues.push("缺少OpenGraph标题");
     if (!meta.openGraph.description) issues.push("缺少OpenGraph描述");
-    if (!meta.openGraph.type) issues.push("缺少OpenGraph类型");
+    // type 在 Next.js Metadata 的 OpenGraph 中可能不存在
+    if (
+      typeof meta.openGraph === "object" &&
+      "type" in meta.openGraph &&
+      !meta.openGraph.type
+    ) {
+      issues.push("缺少OpenGraph类型");
+    }
   }
 
   // 检查Twitter Card
   if (!meta.twitter) {
     issues.push("缺少Twitter Card信息");
   } else {
-    if (!meta.twitter.card) issues.push("缺少Twitter Card类型");
+    // card 在 Next.js Metadata 的 Twitter 中可能不存在
+    if (
+      typeof meta.twitter === "object" &&
+      "card" in meta.twitter &&
+      !meta.twitter.card
+    ) {
+      issues.push("缺少Twitter Card类型");
+    }
     if (!meta.twitter.title) issues.push("缺少Twitter标题");
     if (!meta.twitter.description) issues.push("缺少Twitter描述");
   }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { Suspense, lazy } from "react";
@@ -97,8 +98,8 @@ export function createLazyComponent<T extends ComponentType<unknown>>(
         fallback={finalFallback || <DefaultFallback height={height} />}
         delay={finalDelay}
       >
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        {/* @ts-ignore - React.lazy 的泛型类型推断限制
+        {/* 
+          @ts-ignore - React.lazy 的泛型类型推断限制
           
           这是 React.lazy 和 TypeScript 泛型结合时的已知限制。
           虽然我们已经使用了：

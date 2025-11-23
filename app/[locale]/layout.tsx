@@ -46,11 +46,32 @@ export default async function LocaleLayout({
     } else {
       messages = (await import("../../messages/en.json")).default;
     }
+    console.log(
+      `[Layout] Successfully loaded messages for locale ${validLocale}, keys: ${
+        Object.keys(messages).length
+      }`,
+    );
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error("[Layout] Failed to import messages:", error);
+    console.error(
+      `[Layout] Failed to import messages for locale ${validLocale}:`,
+      error,
+    );
     // 回退到默认语言
-    messages = (await import("../../messages/zh.json")).default;
+    try {
+      messages = (await import("../../messages/zh.json")).default;
+      console.log(
+        `[Layout] Fallback to zh messages succeeded, keys: ${
+          Object.keys(messages).length
+        }`,
+      );
+    } catch (fallbackError) {
+      console.error(
+        "[Layout] Fallback to zh messages also failed:",
+        fallbackError,
+      );
+      // 如果回退也失败，使用空对象避免崩溃
+      messages = {};
+    }
   }
 
   return (

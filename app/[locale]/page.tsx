@@ -204,6 +204,12 @@ export default async function HomePage({
     });
     structuredData = await getStructuredData(validLocale);
   } catch (error) {
+    // 记录原始错误
+    console.error(
+      `[HomePage] Failed to get translations for locale ${validLocale}:`,
+      error,
+    );
+
     // 如果获取翻译失败，使用默认语言重试
     try {
       t = await getTranslations({ locale: "zh", namespace: "" });
@@ -212,8 +218,14 @@ export default async function HomePage({
         namespace: "anchorTexts",
       });
       structuredData = await getStructuredData("zh");
-    } catch {
-      // 如果仍然失败，抛出错误让错误边界处理
+      console.log("[HomePage] Fallback to zh locale succeeded");
+    } catch (fallbackError) {
+      // 如果回退也失败，记录错误并抛出
+      console.error(
+        "[HomePage] Fallback to zh locale also failed:",
+        fallbackError,
+      );
+      // 抛出原始错误，保留完整的错误信息
       throw error;
     }
   }

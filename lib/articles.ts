@@ -3,6 +3,10 @@
  * 管理文章数据和相关功能
  */
 
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+
 export interface Article {
   slug: string;
   title: string;
@@ -23,55 +27,102 @@ export interface Article {
   summary_zh?: string;
 }
 
-// 文章数据（示例）
-const ARTICLES: Article[] = [
-  {
-    slug: "comprehensive-medical-guide-to-dysmenorrhea",
-    title: "Comprehensive Medical Guide to Dysmenorrhea",
-    titleZh: "痛经全面医学指南",
-    title_zh: "痛经全面医学指南",
-    description:
-      "Evidence-based guide to understanding and managing period pain",
-    descriptionZh: "基于循证医学的痛经理解和管理指南",
-    summary: "Evidence-based guide to understanding and managing period pain",
-    summary_zh: "基于循证医学的痛经理解和管理指南",
-    category: "medical-guide",
-    tags: ["dysmenorrhea", "period-pain", "pain-management"],
-    publishedAt: "2024-12-19",
-    updatedAt: "2024-12-19",
-    readingTime: 15,
-    featured: true,
-  },
-  {
-    slug: "when-to-seek-medical-care-comprehensive-guide",
-    title: "When to Seek Medical Care: Comprehensive Guide",
-    titleZh: "何时就医：综合指南",
-    title_zh: "何时就医：综合指南",
-    description: "Learn when period pain requires medical attention",
-    descriptionZh: "了解何时痛经需要就医",
-    summary: "Learn when period pain requires medical attention",
-    summary_zh: "了解何时痛经需要就医",
-    category: "medical-guide",
-    tags: ["medical-care", "symptoms", "health"],
-    publishedAt: "2024-12-19",
-    updatedAt: "2024-12-19",
-    readingTime: 10,
-    featured: true,
-  },
-];
+// 文章目录路径
+const articlesDirectory = path.join(process.cwd(), "content/articles");
+
+/**
+ * 从文件系统读取所有文章
+ */
+function loadArticlesFromFileSystem(): Article[] {
+  const articles: Article[] = [];
+  const locales = ["zh", "en"];
+
+  for (const locale of locales) {
+    const localeDir = path.join(articlesDirectory, locale);
+    if (!fs.existsSync(localeDir)) continue;
+
+    const files = fs.readdirSync(localeDir);
+    const mdFiles = files.filter((file) => file.endsWith(".md"));
+
+    for (const file of mdFiles) {
+      const slug = file.replace(/\.md$/, "");
+      const filePath = path.join(localeDir, file);
+      const fileContents = fs.readFileSync(filePath, "utf8");
+      const { data, content } = matter(fileContents);
+
+      // 检查是否已经存在该slug的文章（避免重复）
+      const existingIndex = articles.findIndex((a) => a.slug === slug);
+      const article: Article = existingIndex >= 0 
+        ? articles[existingIndex]
+        : {
+            slug,
+            title: data.title || "",
+            titleZh: data.title || "",
+            description: data.summary || data.description || "",
+            descriptionZh: data.summary || data.description || "",
+            category: data.category || "general",
+            tags: Array.isArray(data.tags) ? data.tags : [],
+            publishedAt: data.date || data.publishedAt || new Date().toISOString().split("T")[0],
+            updatedAt: data.updatedAt || data.date || new Date().toISOString().split("T")[0],
+            readingTime: parseInt(data.reading_time?.replace(/[^0-9]/g, "") || "10"),
+            featured: data.featured || false,
+            content: content,
+            // 兼容性属性
+            title_zh: data.title,
+            seo_title_zh: data.seo_title,
+            summary: data.summary || data.description,
+            summary_zh: data.summary || data.description,
+          };
+
+      // 根据locale更新对应的字段
+      if (locale === "zh") {
+        article.titleZh = data.title || article.titleZh;
+        article.descriptionZh = data.summary || data.description || article.descriptionZh;
+        article.title_zh = data.title || article.title_zh;
+        article.summary_zh = data.summary || data.description || article.summary_zh;
+      } else {
+        article.title = data.title || article.title;
+        article.description = data.summary || data.description || article.description;
+        article.summary = data.summary || data.description || article.summary;
+      }
+
+      if (existingIndex >= 0) {
+        articles[existingIndex] = article;
+      } else {
+        articles.push(article);
+      }
+    }
+  }
+
+  return articles;
+}
+
+// 缓存文章数据
+let cachedArticles: Article[] | null = null;
+
+/**
+ * 获取所有文章（带缓存）
+ */
+function getAllArticlesCached(): Article[] {
+  if (cachedArticles === null) {
+    cachedArticles = loadArticlesFromFileSystem();
+  }
+  return cachedArticles;
+}
 
 /**
  * 获取所有文章
  */
 export function getAllArticles(): Article[] {
-  return ARTICLES;
+  return getAllArticlesCached();
 }
 
 /**
  * 根据 slug 获取文章
  */
 export function getArticleBySlug(slug: string): Article | null {
-  return ARTICLES.find((article) => article.slug === slug) || null;
+  const articles = getAllArticlesCached();
+  return articles.find((article) => article.slug === slug) || null;
 }
 
 /**
@@ -85,8 +136,9 @@ export function getRelatedArticlesWithCache(
   const currentArticle = getArticleBySlug(currentSlug);
   if (!currentArticle) return [];
 
+  const articles = getAllArticlesCached();
   // 简单的相关文章逻辑：同类别的其他文章
-  return ARTICLES.filter(
+  return articles.filter(
     (article) =>
       article.slug !== currentSlug &&
       article.category === currentArticle.category,
@@ -97,14 +149,16 @@ export function getRelatedArticlesWithCache(
  * 获取特色文章
  */
 export function getFeaturedArticles(count: number = 5): Article[] {
-  return ARTICLES.filter((article) => article.featured).slice(0, count);
+  const articles = getAllArticlesCached();
+  return articles.filter((article) => article.featured).slice(0, count);
 }
 
 /**
  * 按类别获取文章
  */
 export function getArticlesByCategory(category: string): Article[] {
-  return ARTICLES.filter((article) => article.category === category);
+  const articles = getAllArticlesCached();
+  return articles.filter((article) => article.category === category);
 }
 
 /**
@@ -115,8 +169,9 @@ export function searchArticles(
   locale: string = "en",
 ): Article[] {
   const lowerQuery = query.toLowerCase();
+  const articles = getAllArticlesCached();
 
-  return ARTICLES.filter((article) => {
+  return articles.filter((article) => {
     const title = locale === "zh" ? article.titleZh : article.title;
     const description =
       locale === "zh" ? article.descriptionZh : article.description;
@@ -140,8 +195,9 @@ export function getRelatedArticles(
   const currentArticle = getArticleBySlug(currentSlug);
   if (!currentArticle) return [];
 
+  const articles = getAllArticlesCached();
   // 简单的相关文章逻辑：同类别的其他文章
-  return ARTICLES.filter(
+  return articles.filter(
     (article) =>
       article.slug !== currentSlug &&
       article.category === currentArticle.category,

@@ -28,7 +28,7 @@ async function isVercelPreviewRequest(): Promise<boolean> {
     // Vercel环境变量检测
     const isVercelEnvironment = process.env.VERCEL === "1";
     const isVercelPreviewEnv = process.env.VERCEL_ENV === "preview";
-    const hasVercelId = headersList.get("x-vercel-id");
+    const hasVercelId = !!headersList.get("x-vercel-id");
 
     // 检测常见的预览服务User-Agent
     const previewAgents = [

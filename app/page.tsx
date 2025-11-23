@@ -14,79 +14,47 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /**
- * 检测是否是Vercel预览请求（用于生成预览截图）
- * 增强检测逻辑，覆盖更多Vercel预览场景
+ * 检测是否是Vercel截图生成器的请求（用于生成预览截图）
  *
- * 注意：此函数作为备用检测，主要检测在 middleware.ts 中完成
- * 如果请求通过了 middleware，这里会再次检测以确保准确性
+ * 注意：此函数只检测真正的截图生成器请求，不检测普通用户访问
+ * 主要检测在 middleware.ts 中完成，这里作为备用检测
+ *
+ * 关键：不检测域名或 Referer，因为这些会导致普通用户也被识别为预览请求
  */
 async function isVercelPreviewRequest(): Promise<boolean> {
   try {
     const headersList = await headers();
     const userAgent = headersList.get("user-agent") || "";
-    const referer = headersList.get("referer") || "";
-    const host = headersList.get("host") || "";
-    const xForwardedFor = headersList.get("x-forwarded-for") || "";
 
-    // 检查所有可能的 Vercel 预览标识
+    // 检查 Vercel 特定的请求头（最可靠的标识）
     const xVercelId = headersList.get("x-vercel-id");
     const xVercelDeployment = headersList.get("x-vercel-deployment");
     const xVercelSignature = headersList.get("x-vercel-signature");
 
-    // Vercel环境变量检测（在运行时可用）
-    const isVercelEnvironment = process.env.VERCEL === "1";
-    const isVercelPreviewEnv = process.env.VERCEL_ENV === "preview";
-
-    // 检测常见的预览服务User-Agent
-    const previewAgents = [
-      "vercel",
-      "screenshot",
-      "headless",
-      "puppeteer",
-      "playwright",
-      "chromium",
-      "bot",
-      "crawler",
-      "firefox/92.0", // Vercel截图使用的Firefox版本
-      "firefox/", // 更通用的Firefox检测
-      "chrome/", // Chromium 检测
-      "safari/", // Safari 检测（某些情况下）
+    // 只检测明确的截图生成器 User-Agent（不包含通用的 "bot" 或 "crawler"）
+    const screenshotAgents = [
+      "vercelbot", // Vercel 官方爬虫
+      "vercel-screenshot", // Vercel 截图服务
+      "headless-chrome", // Headless Chrome
+      "puppeteer", // Puppeteer
+      "playwright", // Playwright
     ];
 
-    const isPreviewAgent = previewAgents.some((agent) =>
+    const isScreenshotAgent = screenshotAgents.some((agent) =>
       userAgent.toLowerCase().includes(agent),
     );
 
-    // 检测是否是Vercel的预览请求
-    const isVercelReferer =
-      referer.includes("vercel.app") ||
-      referer.includes("vercel.com") ||
-      xForwardedFor.includes("vercel");
-
-    // 检测 Vercel 特定的请求头
+    // 只检测 Vercel 特定的请求头，不检测域名或 Referer
+    // 这样可以避免普通用户访问预览部署时被误判
     const hasVercelHeaders =
       !!xVercelId || !!xVercelDeployment || !!xVercelSignature;
 
-    // 检测是否是 .vercel.app 域名
-    const isVercelDomain = host.includes(".vercel.app");
-
-    // 综合判断：优先检测预览特征
-    // 如果检测到明显的预览特征，直接返回true
-    if (
-      isPreviewAgent ||
-      isVercelReferer ||
-      hasVercelHeaders ||
-      isVercelDomain
-    ) {
+    // 只有检测到明确的截图生成器特征才返回 true
+    if (isScreenshotAgent || hasVercelHeaders) {
       return true;
     }
 
-    // 在Vercel环境中，如果是预览环境，返回true
-    if (isVercelEnvironment && isVercelPreviewEnv) {
-      return true;
-    }
-
-    // 默认返回false，确保正常用户请求不会被误判
+    // 默认返回 false，确保正常用户请求不会被误判
     return false;
   } catch {
     return false;

@@ -3,9 +3,25 @@ import { NextRequest, NextResponse } from "next/server";
 /**
  * 增强的 Vercel 预览请求检测
  * 在 Middleware 层面检测，确保在最早阶段处理
+ *
+ * 修复策略：
+ * 1. 在 Vercel 预览环境中，对所有根路径请求返回预览内容（最可靠）
+ * 2. 检测所有可能的 Vercel 标识（User-Agent、请求头、域名等）
+ * 3. 使用更宽松的检测策略，确保预览功能正常工作
  */
 function detectVercelPreviewRequest(request: NextRequest): boolean {
   try {
+    // 策略 1: 最可靠的检测 - Vercel 预览环境变量
+    // 在 Vercel 预览环境中，对所有根路径请求返回预览内容
+    const isVercelEnvironment = process.env.VERCEL === "1";
+    const isVercelPreviewEnv = process.env.VERCEL_ENV === "preview";
+
+    // 如果是 Vercel 预览环境，直接返回 true（最可靠的方法）
+    if (isVercelEnvironment && isVercelPreviewEnv) {
+      return true;
+    }
+
+    // 策略 2: 检测请求头和 User-Agent
     const userAgent = request.headers.get("user-agent") || "";
     const referer = request.headers.get("referer") || "";
     const host = request.headers.get("host") || "";
@@ -15,10 +31,6 @@ function detectVercelPreviewRequest(request: NextRequest): boolean {
     const xVercelId = request.headers.get("x-vercel-id");
     const xVercelDeployment = request.headers.get("x-vercel-deployment");
     const xVercelSignature = request.headers.get("x-vercel-signature");
-
-    // Vercel环境变量检测（在运行时可用）
-    const isVercelEnvironment = process.env.VERCEL === "1";
-    const isVercelPreviewEnv = process.env.VERCEL_ENV === "preview";
 
     // 检测常见的预览服务User-Agent
     const previewAgents = [
@@ -50,11 +62,11 @@ function detectVercelPreviewRequest(request: NextRequest): boolean {
     const hasVercelHeaders =
       !!xVercelId || !!xVercelDeployment || !!xVercelSignature;
 
-    // 检测是否是 .vercel.app 域名
+    // 策略 3: 检测 .vercel.app 域名（更宽松）
+    // 在预览环境中，所有 .vercel.app 域名的根路径请求都可能是预览请求
     const isVercelDomain = host.includes(".vercel.app");
 
-    // 综合判断：优先检测预览特征
-    // 如果检测到明显的预览特征，直接返回true
+    // 综合判断：如果检测到任何预览特征，返回 true
     if (
       isPreviewAgent ||
       isVercelReferer ||
@@ -64,15 +76,12 @@ function detectVercelPreviewRequest(request: NextRequest): boolean {
       return true;
     }
 
-    // 在Vercel环境中，如果是预览环境，返回true
-    if (isVercelEnvironment && isVercelPreviewEnv) {
-      return true;
-    }
-
     // 默认返回false，确保正常用户请求不会被误判
     return false;
   } catch {
-    return false;
+    // 如果检测过程中出错，在 Vercel 环境中返回 true（安全策略）
+    // 这样可以确保预览功能不会因为检测错误而失败
+    return process.env.VERCEL === "1" && process.env.VERCEL_ENV === "preview";
   }
 }
 

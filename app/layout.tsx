@@ -145,9 +145,16 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   // 从请求头中获取locale
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "";
-  const locale = pathname.startsWith("/en") ? "en" : "zh";
+  // 使用 try-catch 确保即使 headers() 失败也能正常工作
+  let locale = "zh"; // 默认语言
+  try {
+    const headersList = await headers();
+    const pathname = headersList.get("x-pathname") || "";
+    locale = pathname.startsWith("/en") ? "en" : "zh";
+  } catch {
+    // 如果获取 headers 失败，使用默认语言
+    locale = "zh";
+  }
 
   return (
     <html lang={locale} suppressHydrationWarning>

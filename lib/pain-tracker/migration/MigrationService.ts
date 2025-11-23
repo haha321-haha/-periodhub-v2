@@ -227,7 +227,7 @@ export class MigrationService {
             (legacyRecord.symptoms as unknown[]) || [],
           ),
           menstrualStatus: this.migrateMenstrualStatus(
-            legacyRecord.menstrualStatus,
+            legacyRecord.menstrualStatus as string,
           ),
           medications: this.migrateMedications(
             ((legacyRecord.treatments ||
@@ -249,7 +249,7 @@ export class MigrationService {
 
       // Create new data structure
       const migratedData: StoredData = {
-        records: migratedRecords,
+        records: migratedRecords as unknown as PainRecord[],
         preferences: {
           defaultMedications: [],
           reminderSettings: {
@@ -375,7 +375,7 @@ export class MigrationService {
     }
 
     if (legacyRecord.createdAt) {
-      const date = new Date(legacyRecord.createdAt);
+      const date = new Date(legacyRecord.createdAt as string | number | Date);
       return `${date.getHours().toString().padStart(2, "0")}:${date
         .getMinutes()
         .toString()
@@ -424,7 +424,9 @@ export class MigrationService {
 
     // If no pain types found, try to infer from notes or other fields
     if (painTypes.length === 0 && legacyRecord.notes) {
-      const inferredTypes = this.inferPainTypesFromNotes(legacyRecord.notes);
+      const inferredTypes = this.inferPainTypesFromNotes(
+        legacyRecord.notes as string,
+      );
       painTypes.push(...inferredTypes);
     }
 
@@ -612,7 +614,7 @@ export class MigrationService {
         });
       }
 
-      const sleepMatch = legacyRecord.notes.match(/sleep.*?(\d+)/i);
+      const sleepMatch = (legacyRecord.notes as string).match(/sleep.*?(\d+)/i);
       if (sleepMatch) {
         factors.push({
           factor: "sleep_hours",

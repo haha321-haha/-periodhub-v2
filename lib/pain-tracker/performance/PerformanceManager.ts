@@ -150,7 +150,11 @@ export class PerformanceManager implements PerformanceManagerInterface {
     chartType: string,
     options?: ChartOptimizationOptions,
   ): Promise<unknown[]> {
-    return this.chartOptimizer.optimizeDataForChart(data, chartType, options);
+    return this.chartOptimizer.optimizeDataForChart(
+      data as unknown as ChartDataPoint[],
+      chartType,
+      options,
+    );
   }
 
   optimizeChartOptions(

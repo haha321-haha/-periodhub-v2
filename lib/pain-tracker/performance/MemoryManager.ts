@@ -102,8 +102,12 @@ export class MemoryManager implements MemoryManagerInterface {
       // Destroy identified instances
       for (const id of instancesToDestroy) {
         const instance = this.chartInstances.get(id);
-        if (instance && typeof instance.destroy === "function") {
-          instance.destroy();
+        if (
+          instance &&
+          instance.instance &&
+          typeof instance.instance.destroy === "function"
+        ) {
+          instance.instance.destroy();
           this.chartInstances.delete(id);
           instancesDestroyed++;
         }
@@ -321,8 +325,12 @@ export class MemoryManager implements MemoryManagerInterface {
     // Destroy existing instance if it exists
     if (this.chartInstances.has(id)) {
       const existingInstance = this.chartInstances.get(id);
-      if (existingInstance && typeof existingInstance.destroy === "function") {
-        existingInstance.destroy();
+      if (
+        existingInstance &&
+        existingInstance.instance &&
+        typeof existingInstance.instance.destroy === "function"
+      ) {
+        existingInstance.instance.destroy();
       }
     }
 

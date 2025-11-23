@@ -10,6 +10,7 @@ import {
   STORAGE_KEYS,
   CURRENT_SCHEMA_VERSION,
   DEFAULT_USER_PREFERENCES,
+  UserPreferences,
 } from "../../../types/pain-tracker";
 import { logWarn, logInfo } from "@/lib/debug-logger";
 
@@ -53,9 +54,9 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
           dataSize: 0,
         };
         await this.save(STORAGE_KEYS.METADATA, metadata);
-      } else if (schemaVersion < CURRENT_SCHEMA_VERSION) {
+      } else if ((schemaVersion as number) < CURRENT_SCHEMA_VERSION) {
         // Migration needed
-        await this.migrateData(schemaVersion, CURRENT_SCHEMA_VERSION);
+        await this.migrateData(schemaVersion as number, CURRENT_SCHEMA_VERSION);
       }
     } catch (error) {
       throw new PainTrackerError(
@@ -95,7 +96,7 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
 
       // Update metadata if saving records
       if (key === STORAGE_KEYS.PAIN_RECORDS) {
-        await this.updateMetadata(data);
+        await this.updateMetadata(data as PainRecord[]);
       }
     } catch (error) {
       if (error instanceof PainTrackerError) {
@@ -269,8 +270,9 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
         | undefined;
 
       const backupData: StoredData = {
-        records,
-        preferences,
+        records: records as PainRecord[],
+        preferences: (preferences ||
+          DEFAULT_USER_PREFERENCES) as UserPreferences,
         schemaVersion: CURRENT_SCHEMA_VERSION,
         lastBackup: new Date(),
         metadata:
@@ -361,9 +363,12 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
       for (let version = fromVersion; version < toVersion; version++) {
         const migration = this.getMigration(version, version + 1);
         if (migration) {
-          migratedRecords = migration.migrateRecords(migratedRecords);
-          migratedPreferences =
-            migration.migratePreferences(migratedPreferences);
+          migratedRecords = migration.migrateRecords(
+            migratedRecords as unknown[],
+          );
+          migratedPreferences = migration.migratePreferences(
+            migratedPreferences as Record<string, unknown>,
+          );
         }
       }
 
@@ -417,9 +422,9 @@ export class LocalStorageAdapter implements LocalStorageAdapterInterface {
     return (
       data &&
       typeof data === "object" &&
-      Array.isArray(data.records) &&
-      typeof data.preferences === "object" &&
-      typeof data.schemaVersion === "number"
+      Array.isArray((data as { records?: unknown }).records) &&
+      typeof (data as { preferences?: unknown }).preferences === "object" &&
+      typeof (data as { schemaVersion?: unknown }).schemaVersion === "number"
     );
   }
 

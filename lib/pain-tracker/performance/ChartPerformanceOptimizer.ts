@@ -172,21 +172,56 @@ export class ChartPerformanceOptimizer
 
     // Optimize scales for large datasets
     if (dataSize > this.performanceThresholds.large) {
+      const scales =
+        optimizedOptions.scales && typeof optimizedOptions.scales === "object"
+          ? optimizedOptions.scales
+          : {};
+      const xScale =
+        (scales as { x?: unknown })?.x &&
+        typeof (scales as { x?: unknown }).x === "object"
+          ? (scales as { x?: unknown }).x
+          : {};
+      const xTicks =
+        (xScale as { ticks?: unknown })?.ticks &&
+        typeof (xScale as { ticks?: unknown }).ticks === "object"
+          ? (xScale as { ticks?: unknown }).ticks
+          : {};
       optimizedOptions.scales = {
-        ...optimizedOptions.scales,
+        ...scales,
         x: {
-          ...optimizedOptions.scales?.x,
+          ...xScale,
           ticks: {
-            ...optimizedOptions.scales?.x?.ticks,
+            ...xTicks,
             maxTicksLimit: 10, // Limit number of x-axis ticks
             autoSkip: true,
             autoSkipPadding: 10,
           },
         },
         y: {
-          ...optimizedOptions.scales?.y,
+          ...((scales as { y?: unknown })?.y &&
+          typeof (scales as { y?: unknown }).y === "object"
+            ? (scales as { y?: unknown }).y
+            : {}),
           ticks: {
-            ...optimizedOptions.scales?.y?.ticks,
+            ...((
+              ((scales as { y?: unknown })?.y &&
+              typeof (scales as { y?: unknown }).y === "object"
+                ? (scales as { y?: unknown }).y
+                : {}) as { ticks?: unknown }
+            )?.ticks &&
+            typeof (
+              ((scales as { y?: unknown })?.y &&
+              typeof (scales as { y?: unknown }).y === "object"
+                ? (scales as { y?: unknown }).y
+                : {}) as { ticks?: unknown }
+            ).ticks === "object"
+              ? (
+                  ((scales as { y?: unknown })?.y &&
+                  typeof (scales as { y?: unknown }).y === "object"
+                    ? (scales as { y?: unknown }).y
+                    : {}) as { ticks?: unknown }
+                ).ticks
+              : {}),
             maxTicksLimit: 8, // Limit number of y-axis ticks
           },
         },
@@ -195,8 +230,13 @@ export class ChartPerformanceOptimizer
 
     // Optimize interaction for large datasets
     if (dataSize > this.performanceThresholds.medium) {
+      const interaction =
+        optimizedOptions.interaction &&
+        typeof optimizedOptions.interaction === "object"
+          ? optimizedOptions.interaction
+          : {};
       optimizedOptions.interaction = {
-        ...optimizedOptions.interaction,
+        ...interaction,
         intersect: false,
         mode: "nearest",
       };

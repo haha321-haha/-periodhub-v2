@@ -7,6 +7,7 @@ import {
   MigrationPlan,
   PainTrackerError,
   CURRENT_SCHEMA_VERSION,
+  PainRecord,
 } from "../../../types/pain-tracker";
 import { logInfo, logError } from "@/lib/debug-logger";
 
@@ -188,19 +189,21 @@ export class MigrationService {
 
       if (Array.isArray(legacyData)) {
         // Direct array of records
-        legacyRecords = legacyData;
+        legacyRecords = legacyData as Record<string, unknown>[];
       } else if (
         legacyData &&
         Array.isArray((legacyData as { records?: unknown }).records)
       ) {
         // Wrapped in records property
-        legacyRecords = (legacyData as { records: unknown[] }).records;
+        legacyRecords = (legacyData as { records: unknown[] })
+          .records as Record<string, unknown>[];
       } else if (
         legacyData &&
         (legacyData as { painEntries?: unknown }).painEntries
       ) {
         // Old format with painEntries
-        legacyRecords = (legacyData as { painEntries: unknown[] }).painEntries;
+        legacyRecords = (legacyData as { painEntries: unknown[] })
+          .painEntries as Record<string, unknown>[];
       } else {
         // No legacy data found
         legacyRecords = [];
@@ -211,8 +214,9 @@ export class MigrationService {
         const now = new Date();
 
         return {
-          id: legacyRecord.id || `migrated_${Date.now()}_${index}`,
-          date: legacyRecord.date || now.toISOString().split("T")[0],
+          id: (legacyRecord.id as string) || `migrated_${Date.now()}_${index}`,
+          date:
+            (legacyRecord.date as string) || now.toISOString().split("T")[0],
           time: this.extractTimeFromLegacyRecord(legacyRecord) || "12:00",
           painLevel: this.normalizePainLevel(
             legacyRecord.intensity || legacyRecord.painLevel || 0,
@@ -235,10 +239,10 @@ export class MigrationService {
           lifestyleFactors: this.migrateLifestyleFactors(legacyRecord),
           notes: (legacyRecord.notes as string) || "",
           createdAt: legacyRecord.createdAt
-            ? new Date(legacyRecord.createdAt)
+            ? new Date(legacyRecord.createdAt as string | number | Date)
             : now,
           updatedAt: legacyRecord.updatedAt
-            ? new Date(legacyRecord.updatedAt)
+            ? new Date(legacyRecord.updatedAt as string | number | Date)
             : now,
         };
       });
@@ -411,7 +415,11 @@ export class MigrationService {
     }
 
     if (legacyRecord.painTypes && Array.isArray(legacyRecord.painTypes)) {
-      painTypes.push(...legacyRecord.painTypes.map(this.mapLegacyPainType));
+      painTypes.push(
+        ...(legacyRecord.painTypes as unknown[]).map((pt) =>
+          this.mapLegacyPainType(pt as string),
+        ),
+      );
     }
 
     // If no pain types found, try to infer from notes or other fields

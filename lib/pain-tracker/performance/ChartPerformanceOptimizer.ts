@@ -155,9 +155,15 @@ export class ChartPerformanceOptimizer
     // Optimize tooltips for very large datasets
     if (dataSize > this.optimizationSettings.tooltipOptimizeThreshold) {
       optimizedOptions.plugins = {
-        ...optimizedOptions.plugins,
+        ...(optimizedOptions.plugins &&
+        typeof optimizedOptions.plugins === "object"
+          ? optimizedOptions.plugins
+          : {}),
         tooltip: {
-          ...optimizedOptions.plugins?.tooltip,
+          ...(optimizedOptions.plugins?.tooltip &&
+          typeof optimizedOptions.plugins.tooltip === "object"
+            ? optimizedOptions.plugins.tooltip
+            : {}),
           enabled: false, // Disable tooltips for performance
           external: this.createOptimizedTooltip, // Use custom lightweight tooltip
         },

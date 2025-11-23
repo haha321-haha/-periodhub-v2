@@ -10,6 +10,7 @@ import {
   RecommendationFeedbackAction,
   RecommendationItem,
 } from "../types/recommendation";
+import { RecommendationFeedbackHistory } from "../types";
 import RecommendationCard from "./RecommendationCard";
 import { ChevronDown, ChevronUp } from "lucide-react";
 

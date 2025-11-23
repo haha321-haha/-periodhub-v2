@@ -8,7 +8,7 @@ export interface ABTestVariant {
   id: string;
   name: string;
   weight: number;
-  data: Record<string, any>;
+  data: Record<string, unknown>;
 }
 
 export interface ABTestConfig {
@@ -27,57 +27,55 @@ export interface ABTestConfig {
  * 测试变量：CTA文案和微文案
  */
 export const HERO_CTA_AB_TEST: ABTestConfig = {
-  testId: 'hero_cta_optimization_2025',
-  name: 'Hero CTA Optimization',
-  description: '测试不同的Hero区域CTA文案对点击率和转化率的影响',
+  testId: "hero_cta_optimization_2025",
+  name: "Hero CTA Optimization",
+  description: "测试不同的Hero区域CTA文案对点击率和转化率的影响",
   enabled: true,
   expiryDays: 30, // 测试持续30天
   variants: [
     {
-      id: 'control',
-      name: 'Control (Original)',
+      id: "control",
+      name: "Control (Original)",
       weight: 50, // 50%流量
       data: {
         ctaText: {
-          en: 'Immediate Relief',
-          zh: '⚡ 即时缓解'
+          en: "Immediate Relief",
+          zh: "⚡ 即时缓解",
         },
         microcopy: {
-          en: 'Fast relief methods',
-          zh: '快速缓解方法'
-        }
-      }
+          en: "Fast relief methods",
+          zh: "快速缓解方法",
+        },
+      },
     },
     {
-      id: 'optimized',
-      name: 'Optimized (New)',
+      id: "optimized",
+      name: "Optimized (New)",
       weight: 50, // 50%流量
       data: {
         ctaText: {
-          en: 'Get My Relief Plan',
-          zh: '获取缓解方案'
+          en: "Get My Relief Plan",
+          zh: "获取缓解方案",
         },
         microcopy: {
-          en: 'Free • 3 minutes • Science-based',
-          zh: '免费 • 3分钟 • 科学依据'
-        }
-      }
-    }
-  ]
+          en: "Free • 3 minutes • Science-based",
+          zh: "免费 • 3分钟 • 科学依据",
+        },
+      },
+    },
+  ],
 };
 
 /**
  * 所有启用的A/B测试配置
  */
-export const ACTIVE_AB_TESTS: ABTestConfig[] = [
-  HERO_CTA_AB_TEST
-];
+export const ACTIVE_AB_TESTS: ABTestConfig[] = [HERO_CTA_AB_TEST];
 
 /**
  * 获取特定的A/B测试配置
  */
 export function getABTestConfig(testId: string): ABTestConfig | undefined {
-  return ACTIVE_AB_TESTS.find(test => test.testId === testId);
+  return ACTIVE_AB_TESTS.find((test) => test.testId === testId);
 }
 
 /**
@@ -93,7 +91,7 @@ export function isABTestEnabled(testId: string): boolean {
  */
 export function getABTestVariantForUser(
   testId: string,
-  userId?: string
+  userId?: string,
 ): ABTestVariant | undefined {
   const config = getABTestConfig(testId);
   if (!config || !config.enabled) return undefined;
@@ -106,7 +104,7 @@ export function getABTestVariantForUser(
   // 基于userId的一致性分配
   const hash = simpleHash(userId + testId);
   const totalWeight = config.variants.reduce((sum, v) => sum + v.weight, 0);
-  const random = (hash % 1000) / 1000 * totalWeight;
+  const random = ((hash % 1000) / 1000) * totalWeight;
 
   let cumulative = 0;
   for (const variant of config.variants) {
@@ -126,7 +124,7 @@ function simpleHash(str: string): number {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     const char = str.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
+    hash = (hash << 5) - hash + char;
     hash = hash & hash; // 转换为32位整数
   }
   return Math.abs(hash);
@@ -168,7 +166,7 @@ export function getRecommendedSampleSize(
   baselineRate: number, // 基准转化率 (0-1)
   minimumDetectableEffect: number, // 最小可检测效果 (0-1)
   confidenceLevel: number = 0.95,
-  power: number = 0.8
+  power: number = 0.8,
 ): number {
   // 使用标准的A/B测试样本量计算公式
   const zAlpha = getZScore(1 - (1 - confidenceLevel) / 2);
@@ -176,12 +174,12 @@ export function getRecommendedSampleSize(
 
   const p1 = baselineRate;
   const p2 = baselineRate * (1 + minimumDetectableEffect);
-  const pPool = (p1 + p2) / 2;
+  // const pPool = (p1 + p2) / 2; // Reserved for future use
 
   const numerator = Math.sqrt(p1 * (1 - p1)) + Math.sqrt(p2 * (1 - p2));
   const denominator = Math.abs(p1 - p2);
 
-  const sampleSize = Math.pow((zAlpha + zBeta) * numerator / denominator, 2);
+  const sampleSize = Math.pow(((zAlpha + zBeta) * numerator) / denominator, 2);
 
   return Math.ceil(sampleSize);
 }
@@ -193,7 +191,7 @@ function getZScore(probability: number): number {
     [0.95, 1.645],
     [0.975, 1.96],
     [0.99, 2.326],
-    [0.995, 2.576]
+    [0.995, 2.576],
   ];
 
   for (const [p, z] of zScores) {
@@ -211,7 +209,7 @@ export function analyzeABTest(
   controlVisitors: number,
   variantConversions: number,
   variantVisitors: number,
-  confidenceLevel: number = 0.95
+  confidenceLevel: number = 0.95,
 ): {
   controlRate: number;
   variantRate: number;
@@ -224,8 +222,12 @@ export function analyzeABTest(
   const relativeImprovement = (variantRate - controlRate) / controlRate;
 
   // 简化的统计显著性计算
-  const pooledRate = (controlConversions + variantConversions) / (controlVisitors + variantVisitors);
-  const standardError = Math.sqrt(pooledRate * (1 - pooledRate) * (1 / controlVisitors + 1 / variantVisitors));
+  const pooledRate =
+    (controlConversions + variantConversions) /
+    (controlVisitors + variantVisitors);
+  const standardError = Math.sqrt(
+    pooledRate * (1 - pooledRate) * (1 / controlVisitors + 1 / variantVisitors),
+  );
   const zScore = (variantRate - controlRate) / standardError;
 
   const zCritical = getZScore(1 - (1 - confidenceLevel) / 2);
@@ -234,7 +236,7 @@ export function analyzeABTest(
   const marginOfError = zCritical * standardError;
   const confidenceInterval: [number, number] = [
     relativeImprovement - marginOfError / controlRate,
-    relativeImprovement + marginOfError / controlRate
+    relativeImprovement + marginOfError / controlRate,
   ];
 
   return {
@@ -242,6 +244,6 @@ export function analyzeABTest(
     variantRate,
     relativeImprovement,
     statisticalSignificance,
-    confidenceInterval
+    confidenceInterval,
   };
 }

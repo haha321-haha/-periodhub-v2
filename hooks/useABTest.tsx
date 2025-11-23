@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export interface ABTestVariant {
   id: string;
@@ -12,9 +12,17 @@ export interface ABTestConfig {
   expiryDays?: number;
 }
 
+// Google Analytics gtag 类型定义
+// Note: gtag type may already be defined by Next.js or other packages
+type GtagFunction = (
+  command: string,
+  targetId: string,
+  config?: Record<string, unknown>,
+) => void;
+
 export interface ABTestResult {
   variant: ABTestVariant;
-  trackEvent: (eventName: string, eventData?: Record<string, any>) => void;
+  trackEvent: (eventName: string, eventData?: Record<string, unknown>) => void;
 }
 
 /**
@@ -28,7 +36,7 @@ export function useABTest(testConfig: ABTestConfig): ABTestResult {
 
   const [currentVariant, setCurrentVariant] = useState<ABTestVariant>(() => {
     // 服务器端直接返回第一个变体作为默认值，确保与客户端一致
-    if (typeof window === 'undefined') {
+    if (typeof window === "undefined") {
       return variants[0];
     }
 
@@ -48,14 +56,18 @@ export function useABTest(testConfig: ABTestConfig): ABTestResult {
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        const variant = variants.find(v => v.id === parsed.variantId);
+        const variant = variants.find((v) => v.id === parsed.variantId);
         if (variant && new Date(parsed.expiry) > new Date()) {
           setCurrentVariant(variant);
           setHasInitialized(true);
           return;
         }
-      } catch (error) {
-        console.warn('Failed to parse stored AB test variant:', error);
+      } catch (parseError) {
+        // Silently handle parse errors - invalid stored data
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.warn("Failed to parse stored AB test variant:", parseError);
+        }
       }
     }
 
@@ -67,54 +79,71 @@ export function useABTest(testConfig: ABTestConfig): ABTestResult {
 
   useEffect(() => {
     // 仅在客户端且已经初始化后才保存变体分配
-    if (typeof window !== 'undefined' && hasInitialized) {
+    if (typeof window !== "undefined" && hasInitialized) {
       const expiryDate = new Date();
       expiryDate.setDate(expiryDate.getDate() + expiryDays);
 
-      localStorage.setItem(`ab_test_${testId}`, JSON.stringify({
-        variantId: currentVariant.id,
-        expiry: expiryDate.toISOString(),
-        assignedAt: new Date().toISOString()
-      }));
+      localStorage.setItem(
+        `ab_test_${testId}`,
+        JSON.stringify({
+          variantId: currentVariant.id,
+          expiry: expiryDate.toISOString(),
+          assignedAt: new Date().toISOString(),
+        }),
+      );
     }
   }, [testId, currentVariant.id, expiryDays, hasInitialized]);
 
   useEffect(() => {
     // 发送变体分配事件到GA4
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'ab_test_variant_assigned', {
-        test_id: testId,
-        variant_id: currentVariant.id,
-        variant_name: currentVariant.name,
-        timestamp: new Date().toISOString()
-      });
+    if (
+      typeof window !== "undefined" &&
+      (window as { gtag?: GtagFunction }).gtag
+    ) {
+      (window as { gtag: GtagFunction }).gtag(
+        "event",
+        "ab_test_variant_assigned",
+        {
+          test_id: testId,
+          variant_id: currentVariant.id,
+          variant_name: currentVariant.name,
+          timestamp: new Date().toISOString(),
+        },
+      );
     }
   }, [testId, currentVariant]);
 
-  const trackEvent = (eventName: string, eventData?: Record<string, any>) => {
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', eventName, {
+  const trackEvent = (
+    eventName: string,
+    eventData?: Record<string, unknown>,
+  ) => {
+    if (
+      typeof window !== "undefined" &&
+      (window as { gtag?: GtagFunction }).gtag
+    ) {
+      (window as { gtag: GtagFunction }).gtag("event", eventName, {
         ...eventData,
         ab_test_id: testId,
         ab_variant_id: currentVariant.id,
         ab_variant_name: currentVariant.name,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
 
     // 同时发送到控制台（开发调试）
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
       console.log(`[AB Test] ${eventName}:`, {
         testId,
         variant: currentVariant.name,
-        ...eventData
+        ...eventData,
       });
     }
   };
 
   return {
     variant: currentVariant,
-    trackEvent
+    trackEvent,
   };
 }
 
@@ -141,21 +170,24 @@ function assignVariant(variants: ABTestVariant[]): ABTestVariant {
  * 获取用户的所有A/B测试变体（用于调试和分析）
  */
 export function getUserABTestVariants(): Record<string, string> {
-  if (typeof window === 'undefined') return {};
+  if (typeof window === "undefined") return {};
 
   const variants: Record<string, string> = {};
 
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key?.startsWith('ab_test_')) {
+    if (key?.startsWith("ab_test_")) {
       try {
-        const testId = key.replace('ab_test_', '');
-        const data = JSON.parse(localStorage.getItem(key) || '{}');
+        const testId = key.replace("ab_test_", "");
+        const data = JSON.parse(localStorage.getItem(key) || "{}");
         if (data.variantId) {
           variants[testId] = data.variantId;
         }
-      } catch (error) {
-        console.warn('Failed to parse AB test data:', error);
+      } catch (parseError) {
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.warn("Failed to parse AB test data:", parseError);
+        }
       }
     }
   }
@@ -167,29 +199,30 @@ export function getUserABTestVariants(): Record<string, string> {
  * 清理过期的A/B测试数据
  */
 export function cleanupExpiredABTests(): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   const now = new Date();
   const keysToRemove: string[] = [];
 
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key?.startsWith('ab_test_')) {
+    if (key?.startsWith("ab_test_")) {
       try {
-        const data = JSON.parse(localStorage.getItem(key) || '{}');
+        const data = JSON.parse(localStorage.getItem(key) || "{}");
         if (data.expiry && new Date(data.expiry) < now) {
           keysToRemove.push(key);
         }
-      } catch (error) {
+      } catch {
         // 如果解析失败，删除该键
         keysToRemove.push(key);
       }
     }
   }
 
-  keysToRemove.forEach(key => localStorage.removeItem(key));
+  keysToRemove.forEach((key) => localStorage.removeItem(key));
 
-  if (keysToRemove.length > 0 && process.env.NODE_ENV === 'development') {
+  if (keysToRemove.length > 0 && process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
     console.log(`Cleaned up ${keysToRemove.length} expired AB test(s)`);
   }
 }

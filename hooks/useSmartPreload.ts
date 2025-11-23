@@ -34,7 +34,10 @@ export const useSmartPreload = () => {
       // 检查是否已经预加载
       const existing = document.querySelector(`link[href="${webpackUrl}"]`);
       if (existing) {
-        console.log("✅ webpack.js already preloaded");
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.log("✅ webpack.js already preloaded");
+        }
         return;
       }
 
@@ -47,23 +50,35 @@ export const useSmartPreload = () => {
 
       // 添加成功回调
       link.onload = () => {
-        console.log("✅ webpack.js preloaded successfully");
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.log("✅ webpack.js preloaded successfully");
+        }
       };
 
       // 添加错误回调
       link.onerror = () => {
-        console.warn("⚠️ Failed to preload webpack.js");
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.warn("⚠️ Failed to preload webpack.js");
+        }
       };
 
       document.head.appendChild(link);
-      console.log("🚀 Preloading webpack.js...");
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.log("🚀 Preloading webpack.js...");
+      }
     };
 
     // 执行预加载检查
     if (shouldPreloadWebpack()) {
       preloadWebpack();
     } else {
-      console.log("ℹ️ Skipping webpack.js preload in production");
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.log("ℹ️ Skipping webpack.js preload in production");
+      }
     }
 
     // 清理函数
@@ -91,7 +106,10 @@ export const preloadWebpackManually = () => {
   const existing = document.querySelector(`link[href="${webpackUrl}"]`);
 
   if (existing) {
-    console.log("✅ webpack.js already preloaded");
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.log("✅ webpack.js already preloaded");
+    }
     return;
   }
 
@@ -102,15 +120,24 @@ export const preloadWebpackManually = () => {
   link.crossOrigin = "anonymous";
 
   link.onload = () => {
-    console.log("✅ webpack.js manually preloaded");
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.log("✅ webpack.js manually preloaded");
+    }
   };
 
   link.onerror = () => {
-    console.warn("⚠️ Failed to manually preload webpack.js");
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.warn("⚠️ Failed to manually preload webpack.js");
+    }
   };
 
   document.head.appendChild(link);
-  console.log("🚀 Manually preloading webpack.js...");
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
+    console.log("🚀 Manually preloading webpack.js...");
+  }
 };
 
 /**
@@ -121,14 +148,23 @@ export const checkWebpackUsage = () => {
   if (typeof window === "undefined") return false;
 
   // 检查webpack是否在全局对象中
+  interface WindowWithWebpack extends Window {
+    webpackChunkName?: string;
+    webpackJsonp?: unknown;
+    __webpack_require__?: unknown;
+  }
+  const win = window as WindowWithWebpack;
   const hasWebpack =
-    typeof (window as any).webpackChunkName !== "undefined" ||
-    typeof (window as any).webpackJsonp !== "undefined" ||
-    typeof (window as any).__webpack_require__ !== "undefined";
+    typeof win.webpackChunkName !== "undefined" ||
+    typeof win.webpackJsonp !== "undefined" ||
+    typeof win.__webpack_require__ !== "undefined";
 
-  console.log(
-    "🔍 Webpack usage check:",
-    hasWebpack ? "✅ Used" : "❌ Not used",
-  );
+  if (process.env.NODE_ENV === "development") {
+    // eslint-disable-next-line no-console
+    console.log(
+      "🔍 Webpack usage check:",
+      hasWebpack ? "✅ Used" : "❌ Not used",
+    );
+  }
   return hasWebpack;
 };

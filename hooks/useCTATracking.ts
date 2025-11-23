@@ -10,6 +10,14 @@
 
 import { useState, useEffect } from "react";
 
+// Google Analytics gtag 类型定义
+// Note: gtag type may already be defined by Next.js or other packages
+type GtagFunction = (
+  command: string,
+  targetId: string,
+  config?: Record<string, unknown>,
+) => void;
+
 export interface CTAEventData {
   eventName?: string; // 'hero_cta_impression' | 'hero_cta_click'
   buttonText: string;
@@ -55,7 +63,7 @@ function getUserSession(): UserSession {
     };
   }
 
-  let session = localStorage.getItem("cta_tracking_session");
+  const session = localStorage.getItem("cta_tracking_session");
 
   if (session) {
     try {
@@ -83,8 +91,11 @@ function getUserSession(): UserSession {
       parsed.lastActivity = now.toISOString();
       localStorage.setItem("cta_tracking_session", JSON.stringify(parsed));
       return parsed;
-    } catch (error) {
-      console.warn("Failed to parse session data:", error);
+    } catch (parseError) {
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.warn("Failed to parse session data:", parseError);
+      }
     }
   }
 
@@ -203,8 +214,11 @@ export function useCTATracking() {
     updateSessionActivity("cta_click");
 
     // 发送到GA4
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "cta_click", {
+    if (
+      typeof window !== "undefined" &&
+      (window as { gtag?: GtagFunction }).gtag
+    ) {
+      (window as { gtag: GtagFunction }).gtag("event", "cta_click", {
         event_category: "engagement",
         event_label: fullEventData.buttonText,
         custom_parameters: {
@@ -224,6 +238,7 @@ export function useCTATracking() {
 
     // 开发模式控制台输出
     if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
       console.log("[CTA Tracking] Click event:", fullEventData);
     }
 
@@ -240,8 +255,11 @@ export function useCTATracking() {
   }) => {
     updateSessionActivity("page_view");
 
-    if (typeof window !== "undefined" && (window as any).gtag) {
-      (window as any).gtag("event", "page_view", {
+    if (
+      typeof window !== "undefined" &&
+      (window as { gtag?: GtagFunction }).gtag
+    ) {
+      (window as { gtag: GtagFunction }).gtag("event", "page_view", {
         page_title: pageData?.pageTitle || document.title,
         page_location: pageData?.pageLocation || window.location.href,
         session_id: session.id,
@@ -280,8 +298,11 @@ export function useCTATracking() {
     if (events) {
       try {
         eventList = JSON.parse(events);
-      } catch (error) {
-        console.warn("Failed to parse local events:", error);
+      } catch (parseError) {
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.warn("Failed to parse local events:", parseError);
+        }
       }
     }
 
@@ -306,8 +327,11 @@ export function useCTATracking() {
 
     try {
       return JSON.parse(events);
-    } catch (error) {
-      console.warn("Failed to parse local events:", error);
+    } catch (parseError) {
+      if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
+        console.warn("Failed to parse local events:", parseError);
+      }
       return [];
     }
   };

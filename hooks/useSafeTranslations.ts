@@ -33,6 +33,7 @@ export function useSafeTranslations(namespace?: string) {
       if (result === fullKey || result === key || result.includes(fullKey)) {
         // 在开发环境中警告
         if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
           console.warn(`🌐 Translation missing: ${fullKey}`);
         }
 
@@ -48,6 +49,7 @@ export function useSafeTranslations(namespace?: string) {
       return result;
     } catch (error) {
       if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
         console.error(
           `🌐 Translation error: ${namespace ? `${namespace}.` : ""}${key}`,
           error,
@@ -66,14 +68,18 @@ export function useSafeTranslations(namespace?: string) {
         return result;
       } else {
         // 如果 t.raw 不存在，尝试使用 t 方法
-        console.warn(
-          `t.raw method not available, falling back to t method for key: ${key}`,
-        );
+        if (process.env.NODE_ENV === "development") {
+          // eslint-disable-next-line no-console
+          console.warn(
+            `t.raw method not available, falling back to t method for key: ${key}`,
+          );
+        }
         const result = t(key, params as Parameters<typeof t>[1]);
         return result;
       }
     } catch (error) {
       if (process.env.NODE_ENV === "development") {
+        // eslint-disable-next-line no-console
         console.error(
           `🌐 Translation error (raw): ${
             namespace ? `${namespace}.` : ""

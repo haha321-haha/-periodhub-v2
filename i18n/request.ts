@@ -5,11 +5,14 @@ export default getRequestConfig(async ({ requestLocale }) => {
   let locale = (await requestLocale) ?? defaultLocale;
 
   if (!locales.includes(locale as Locale)) {
-    console.warn(
-      "[i18n] Invalid locale provided, falling back to default:",
-      locale,
-      defaultLocale,
-    );
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.warn(
+        "[i18n] Invalid locale provided, falling back to default:",
+        locale,
+        defaultLocale,
+      );
+    }
     locale = defaultLocale;
   }
 
@@ -21,10 +24,13 @@ export default getRequestConfig(async ({ requestLocale }) => {
   try {
     messages = (await import(`../messages/${validLocale}.json`)).default;
   } catch (importError) {
-    console.error(
-      `[i18n] Failed to load messages for ${validLocale}:`,
-      importError,
-    );
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.error(
+        `[i18n] Failed to load messages for ${validLocale}:`,
+        importError,
+      );
+    }
     messages = (await import(`../messages/${defaultLocale}.json`)).default;
   }
 

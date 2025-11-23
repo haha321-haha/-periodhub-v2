@@ -248,7 +248,7 @@ export function generateTranslationReport() {
 }
 
 // 导出所有映射用于验证脚本
-export default {
+const translationMappings = {
   ANCHOR_TEXT_MAPPINGS,
   BREADCRUMB_MAPPINGS,
   validateTranslationMappings,
@@ -262,3 +262,5 @@ export default {
   getBreadcrumbKey,
   generateTranslationReport,
 };
+
+export default translationMappings;

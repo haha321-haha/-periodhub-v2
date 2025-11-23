@@ -497,7 +497,8 @@ export const pdfResources: PDFResource[] = [
     filename: "essential-oils-aromatherapy-menstrual-pain-guide.pdf",
     category: "health-management",
     size: "2.4MB",
-    downloadUrl: "/downloads/essential-oils-aromatherapy-menstrual-pain-guide.pdf",
+    downloadUrl:
+      "/downloads/essential-oils-aromatherapy-menstrual-pain-guide.pdf",
     icon: "🌸",
     featured: true,
     fileSize: 2400,
@@ -506,15 +507,20 @@ export const pdfResources: PDFResource[] = [
     versions: {
       zh: {
         title: "精油芳香疗法缓解痛经：全面指南",
-        description: "深入了解精油芳香疗法的科学原理、使用方法和安全注意事项，包括薰衣草、生姜、玫瑰等精油的应用",
+        description:
+          "深入了解精油芳香疗法的科学原理、使用方法和安全注意事项，包括薰衣草、生姜、玫瑰等精油的应用",
       },
       en: {
-        title: "Essential Oils Aromatherapy for Menstrual Pain Relief: Complete Guide",
-        description: "In-depth understanding of the scientific principles, usage methods, and safety precautions of essential oils aromatherapy",
+        title:
+          "Essential Oils Aromatherapy for Menstrual Pain Relief: Complete Guide",
+        description:
+          "In-depth understanding of the scientific principles, usage methods, and safety precautions of essential oils aromatherapy",
       },
       zhEn: {
-        title: "Essential Oils Aromatherapy for Menstrual Pain Relief / 精油芳香疗法缓解痛经",
-        description: "In-depth understanding of essential oils aromatherapy / 深入了解精油芳香疗法的科学原理和使用方法",
+        title:
+          "Essential Oils Aromatherapy for Menstrual Pain Relief / 精油芳香疗法缓解痛经",
+        description:
+          "In-depth understanding of essential oils aromatherapy / 深入了解精油芳香疗法的科学原理和使用方法",
       },
     },
   },
@@ -523,7 +529,8 @@ export const pdfResources: PDFResource[] = [
     id: "comprehensive-iud-guide",
     title: "宫内节育器(IUD)：全面指南与用户须知",
     titleKey: "comprehensiveIudGuide.title",
-    description: "详细了解宫内节育器的类型、工作原理、优缺点、副作用和使用注意事项",
+    description:
+      "详细了解宫内节育器的类型、工作原理、优缺点、副作用和使用注意事项",
     descriptionKey: "comprehensiveIudGuide.description",
     filename: "comprehensive-iud-guide.pdf",
     category: "health-management",
@@ -537,15 +544,18 @@ export const pdfResources: PDFResource[] = [
     versions: {
       zh: {
         title: "宫内节育器(IUD)：全面指南与用户须知",
-        description: "详细了解宫内节育器的类型、工作原理、优缺点、副作用和使用注意事项，帮助您做出明智的避孕选择",
+        description:
+          "详细了解宫内节育器的类型、工作原理、优缺点、副作用和使用注意事项，帮助您做出明智的避孕选择",
       },
       en: {
         title: "Intrauterine Device (IUD): Comprehensive Guide and User Manual",
-        description: "Detailed understanding of IUD types, working principles, pros and cons, side effects, and usage precautions",
+        description:
+          "Detailed understanding of IUD types, working principles, pros and cons, side effects, and usage precautions",
       },
       zhEn: {
         title: "Intrauterine Device (IUD) / 宫内节育器：全面指南",
-        description: "Comprehensive guide to IUD types and usage / 宫内节育器类型和使用的全面指南",
+        description:
+          "Comprehensive guide to IUD types and usage / 宫内节育器类型和使用的全面指南",
       },
     },
   },
@@ -568,15 +578,19 @@ export const pdfResources: PDFResource[] = [
     versions: {
       zh: {
         title: "NSAID药物治疗痛经：专业指南与安全用药",
-        description: "使用NSAID缓解痛经的专业指南，包含布洛芬、萘普生等药物的安全注意事项和剂量建议",
+        description:
+          "使用NSAID缓解痛经的专业指南，包含布洛芬、萘普生等药物的安全注意事项和剂量建议",
       },
       en: {
-        title: "NSAID Medication for Menstrual Pain: Professional Guide and Safe Use",
-        description: "Professional guide to using NSAIDs for menstrual pain relief, with safety considerations and dosage recommendations",
+        title:
+          "NSAID Medication for Menstrual Pain: Professional Guide and Safe Use",
+        description:
+          "Professional guide to using NSAIDs for menstrual pain relief, with safety considerations and dosage recommendations",
       },
       zhEn: {
         title: "NSAID Medication for Menstrual Pain / NSAID药物治疗痛经",
-        description: "Professional guide to NSAIDs for pain relief / NSAID缓解痛经的专业指南",
+        description:
+          "Professional guide to NSAIDs for pain relief / NSAID缓解痛经的专业指南",
       },
     },
   },

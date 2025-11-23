@@ -17,8 +17,9 @@ export const useSmartTitle = ({
   const isChineseRef = useRef(locale === "zh");
 
   const log = useCallback(
-    (message: string, data?: any) => {
+    (message: string, data?: unknown) => {
       if (debug) {
+        // eslint-disable-next-line no-console
         console.log(`🔍 [SmartTitle-${locale}]`, message, data || "");
       }
     },

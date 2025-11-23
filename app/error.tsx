@@ -87,12 +87,8 @@ export default function GlobalError({
           >
             <button
               onClick={() => {
-                try {
-                  reset();
-                } catch {
-                  // 如果reset失败，使用页面刷新
-                  window.location.reload();
-                }
+                // 简化的重试逻辑，直接刷新页面
+                window.location.reload();
               }}
               style={{
                 background: "#111827",

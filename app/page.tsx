@@ -135,15 +135,8 @@ export default async function RootPage() {
       ? preferredLocale
       : defaultLocale;
 
-    // 完全客户端重定向方案：所有请求都返回静态HTML页面
-    // 预览请求：延迟5秒重定向（给截图工具足够时间）
-    // 普通请求：延迟10ms重定向（几乎无感，但确保客户端脚本执行）
-    // 这样做可以：
-    // 1. 避免服务端重定向导致的刷新头部问题
-    // 2. 确保预览工具能够捕获静态内容
-    // 3. 普通用户几乎无延迟体验
-    const redirectDelay = isPreview ? 5000 : 10;
-
+    // 注意：根路径请求现在由 middleware.ts 处理重定向
+    // 这个组件只作为备用，直接返回静态内容
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
@@ -186,60 +179,21 @@ export default async function RootPage() {
             content={`${baseUrl}/images/hero-bg.jpg`}
           />
 
-          {/* 智能延迟重定向：预览请求5秒，普通请求10ms */}
+          {/* 注意：根路径重定向现在由 middleware.ts 处理 */}
           <script
             dangerouslySetInnerHTML={{
               __html: `
                 (function() {
                   try {
-                    // 使用服务端计算的语言偏好（从data属性获取）
-                    const locale = document.documentElement.getAttribute('data-locale') || 'zh';
-                    const redirectDelay = ${redirectDelay};
-                    const targetUrl = '/' + locale;
-
-                    // 延迟重定向
-                    setTimeout(function() {
-                      try {
-                        // 优先使用 replace，避免浏览器历史记录问题
-                        if (window.location && window.location.replace) {
-                          window.location.replace(targetUrl);
-                        } else if (window.location && window.location.href) {
-                          window.location.href = targetUrl;
-                        } else {
-                          // 最后的备用方案
-                          window.location = targetUrl;
-                        }
-                      } catch (e) {
-                        // 如果重定向失败，尝试使用默认语言
-                        try {
-                          if (window.location && window.location.replace) {
-                            window.location.replace('/zh');
-                          } else if (window.location && window.location.href) {
-                            window.location.href = '/zh';
-                          }
-                        } catch (e2) {
-                          // 完全失败的情况（仅开发环境记录）
-                          if (process.env.NODE_ENV === 'development') {
-                            console.error('Redirect failed:', e2);
-                          }
-                        }
-                      }
-                    }, redirectDelay);
-                  } catch (e) {
-                    // 如果检测失败，直接跳转到默认语言
-                    try {
-                      setTimeout(function() {
-                        if (window.location && window.location.replace) {
-                          window.location.replace('/zh');
-                        } else if (window.location && window.location.href) {
-                          window.location.href = '/zh';
-                        }
-                      }, ${redirectDelay});
-                    } catch (e2) {
-                      if (process.env.NODE_ENV === 'development') {
-                        console.error('Default redirect failed:', e2);
+                    // 记录当前页面状态（仅开发环境）
+                    if (typeof window !== 'undefined' && window.location.pathname === '/') {
+                      // 如果意外到达根路径，记录状态
+                      if (typeof console !== 'undefined') {
+                        console.log('Root page loaded - should be handled by middleware');
                       }
                     }
+                  } catch (e) {
+                    // 静默处理
                   }
                 })();
               `,

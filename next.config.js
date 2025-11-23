@@ -1,3 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const createNextIntlPlugin = require("next-intl/plugin");
+
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // ✅ 已修复所有类型错误，启用严格类型检查
@@ -24,4 +29,4 @@ const nextConfig = {
   // },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

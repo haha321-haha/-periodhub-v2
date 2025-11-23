@@ -5,7 +5,7 @@ import {
 } from "next-intl/server";
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
-import { Locale, locales } from "@/i18n";
+import { locales } from "@/i18n";
 // import { URL_CONFIG } from "@/lib/url-config";
 
 // Generate metadata for the page

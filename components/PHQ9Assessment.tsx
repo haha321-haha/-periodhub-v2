@@ -19,14 +19,17 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
 
   const handleAnswer = (value: number) => {
     const question = PHQ9_QUESTIONS[currentQuestion];
+    // 将 question.id (string) 转换为 number，使用 order 字段
+    const questionId = question.order;
     const newAnswer: PHQ9Answer = {
-      questionId: question.id,
-      value,
-      timestamp: new Date()
+      questionId,
+      score: value, // 使用 score 而不是 value
     };
 
     const newAnswers = [...answers];
-    const existingIndex = newAnswers.findIndex(a => a.questionId === question.id);
+    const existingIndex = newAnswers.findIndex(
+      (a) => a.questionId === questionId,
+    );
 
     if (existingIndex >= 0) {
       newAnswers[existingIndex] = newAnswer;
@@ -45,7 +48,7 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
       // Complete assessment
       setIsCompleting(true);
       setTimeout(() => {
-        const result = PHQ9Utils.createResult(newAnswers);
+        const result = PHQ9Utils.generateResult(newAnswers);
         onComplete(result);
       }, 1000);
     }
@@ -61,7 +64,9 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
 
   const progress = ((currentQuestion + 1) / PHQ9_QUESTIONS.length) * 100;
   const currentQ = PHQ9_QUESTIONS[currentQuestion];
-  const currentAnswer = answers.find(a => a.questionId === currentQ.id);
+  const currentAnswer = answers.find(
+    (a) => a.questionId === currentQ.order,
+  );
 
   if (isCompleting) {
     return (
@@ -132,7 +137,7 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
             key={index}
             onClick={() => handleAnswer(option.value)}
             className={`w-full p-4 text-left rounded-xl border-2 transition-all hover:shadow-md ${
-              currentAnswer?.value === option.value
+              currentAnswer?.score === option.value
                 ? "border-blue-500 bg-blue-50 shadow-md"
                 : "border-gray-200 hover:border-blue-300 hover:bg-blue-50"
             }`}
@@ -140,12 +145,12 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
             <div className="flex items-center gap-4">
               <div
                 className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                  currentAnswer?.value === option.value
+                  currentAnswer?.score === option.value
                     ? "border-blue-500 bg-blue-500"
                     : "border-gray-300"
                 }`}
               >
-                {currentAnswer?.value === option.value && (
+                {currentAnswer?.score === option.value && (
                   <svg
                     className="w-4 h-4 text-white"
                     fill="currentColor"
@@ -256,15 +261,21 @@ export function PHQ9Results({ result, onRestart, onContinue, className = "" }: P
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 mb-6">
         <div className="text-center">
           <div className="text-6xl font-bold text-blue-600 mb-2">
-            {result.score}
+            {result.score ?? result.totalScore}
           </div>
           <div className="text-lg text-gray-700 mb-4">
             {t("totalScore")} (0-27)
           </div>
-          <div className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 ${getRiskColor(result.riskLevel)}`}>
-            <span className="text-2xl">{getLevelEmoji(result.level)}</span>
+          <div
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 ${getRiskColor(
+              result.riskLevel ?? "low",
+            )}`}
+          >
+            <span className="text-2xl">
+              {getLevelEmoji(result.level ?? result.severity)}
+            </span>
             <span className="font-semibold text-lg">
-              {result.levelLabel}
+              {result.levelLabel ?? result.severityZh}
             </span>
           </div>
         </div>
@@ -281,7 +292,9 @@ export function PHQ9Results({ result, onRestart, onContinue, className = "" }: P
               {t("riskLevel")}
             </h4>
             <p className="text-gray-600 capitalize">
-              {t(`risk.${result.riskLevel}`)}
+              {result.riskLevel
+                ? t(`risk.${result.riskLevel}`)
+                : result.severityZh}
             </p>
           </div>
           <div className="p-4 bg-gray-50 rounded-lg">
@@ -289,14 +302,14 @@ export function PHQ9Results({ result, onRestart, onContinue, className = "" }: P
               {t("requiresHelp")}
             </h4>
             <p className="text-gray-600">
-              {result.requiresProfessionalHelp ? t("yes") : t("no")}
+              {result.requiresProfessionalHelp ?? false ? t("yes") : t("no")}
             </p>
           </div>
         </div>
       </div>
 
       {/* Self-harm Warning */}
-      {result.hasThoughtsOfSelfHarm && (
+      {result.hasThoughtsOfSelfHarm === true && (
         <div className="bg-red-50 border-l-4 border-red-500 p-6 mb-6 rounded-r-lg">
           <div className="flex items-start gap-3">
             <span className="text-2xl">⚠️</span>
@@ -326,17 +339,28 @@ export function PHQ9Results({ result, onRestart, onContinue, className = "" }: P
           {t("recommendations")}
         </h3>
         <div className="space-y-3">
-          {result.recommendations.map((rec: string, index: number) => (
-            <div key={index} className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg">
-              <span className="text-blue-500 font-bold">•</span>
-              <p className="text-gray-700">{rec}</p>
+          {result.recommendations && result.recommendations.length > 0 ? (
+            result.recommendations.map((rec: string, index: number) => (
+              <div
+                key={index}
+                className="flex items-start gap-3 p-4 bg-blue-50 rounded-lg"
+              >
+                <span className="text-blue-500 font-bold">•</span>
+                <p className="text-gray-700">{rec}</p>
+              </div>
+            ))
+          ) : (
+            <div className="p-4 bg-blue-50 rounded-lg">
+              <p className="text-gray-700">
+                {PHQ9Utils.getRecommendation(result.severity, "zh")}
+              </p>
             </div>
-          ))}
+          )}
         </div>
       </div>
 
       {/* Professional Help Prompt */}
-      {result.requiresProfessionalHelp && (
+      {result.requiresProfessionalHelp === true && (
         <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-xl p-6 text-white mb-6">
           <div className="flex items-center gap-4">
             <span className="text-4xl">🏥</span>

@@ -26,6 +26,14 @@ export interface PHQ9Result {
   severityZh: string;
   answers: PHQ9Answer[];
   completedAt: number;
+  // 扩展属性（用于显示）
+  score?: number; // 别名，等同于 totalScore
+  riskLevel?: "low" | "moderate" | "high" | "severe";
+  level?: string; // 等同于 severity
+  levelLabel?: string; // 等同于 severityZh
+  requiresProfessionalHelp?: boolean;
+  hasThoughtsOfSelfHarm?: boolean;
+  recommendations?: string[];
 }
 
 export const PHQ9_QUESTIONS: PHQ9Question[] = [
@@ -156,10 +164,49 @@ export class PHQ9Utils {
     const severity = this.getSeverity(totalScore);
     const severityZh = this.getSeverityZh(severity);
 
+    // 检查是否有自我伤害的想法（第9题，questionId === 9）
+    const question9Answer = answers.find((a) => a.questionId === 9);
+    const hasThoughtsOfSelfHarm = question9Answer && question9Answer.score >= 2;
+
+    // 判断是否需要专业帮助
+    const requiresProfessionalHelp =
+      severity === "moderate" ||
+      severity === "moderately-severe" ||
+      severity === "severe";
+
+    // 确定风险等级
+    const riskLevel: "low" | "moderate" | "high" | "severe" =
+      severity === "none" || severity === "minimal"
+        ? "low"
+        : severity === "mild"
+          ? "moderate"
+          : severity === "moderate" || severity === "moderately-severe"
+            ? "high"
+            : "severe";
+
+    // 生成建议
+    const recommendations: string[] = [];
+    if (severity !== "none") {
+      recommendations.push(this.getRecommendation(severity, "zh"));
+    }
+    if (requiresProfessionalHelp) {
+      recommendations.push("建议咨询心理健康专业人士");
+    }
+    if (hasThoughtsOfSelfHarm) {
+      recommendations.push("如有自我伤害想法，请立即寻求专业帮助");
+    }
+
     return {
       totalScore,
+      score: totalScore, // 别名
       severity,
       severityZh,
+      level: severity, // 别名
+      levelLabel: severityZh, // 别名
+      riskLevel,
+      requiresProfessionalHelp,
+      hasThoughtsOfSelfHarm,
+      recommendations,
       answers,
       completedAt: Date.now(),
     };

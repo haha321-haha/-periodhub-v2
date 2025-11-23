@@ -7,7 +7,8 @@ export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const locale = searchParams.get("locale") || "en";
+    // locale 参数保留用于未来扩展，但目前未使用
+    // const locale = searchParams.get("locale") || "en";
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "10");
 

@@ -1906,62 +1906,62 @@
       }
     },
     "nutritionRecommendationGenerator": {
-      "title": "[TRANSLATE: 营养推荐生成器]",
-      "description": "[TRANSLATE: 基于您的月经周期、健康目标和中医体质，我们将为您生成专属的营养建议]",
-      "journeyTitle": "[TRANSLATE: ✨ 开始您的个性化营养之旅]",
+      "title": "Nutrition Recommendation Generator",
+      "description": "Please select your menstrual phase, health goals, and TCM constitution to generate personalized nutrition recommendations",
+      "journeyTitle": "✨ Start Your Personalized Nutrition Journey",
       "steps": {
-        "step1": "[TRANSLATE: 选择阶段]",
-        "step2": "[TRANSLATE: 设定目标]",
-        "step3": "[TRANSLATE: 生成建议]"
+        "step1": "Select Phase",
+        "step2": "Set Goals",
+        "step3": "Generate"
       },
-      "tip": "[TRANSLATE: 💡 提示：所有建议都基于科学研究和中医理论]",
+      "tip": "💡 Tip: All recommendations are based on scientific research and TCM theory",
       "meta": {
-        "title": "[TRANSLATE: 营养推荐生成器 - 个性化营养建议 | Period Hub]",
-        "description": "[TRANSLATE: 基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导，结合现代营养学与中医理论，为女性提供精准的营养建议和生活方式指导，帮助优化生理期健康管理。]",
-        "keywords": "[TRANSLATE: 营养推荐生成器,月经周期营养,中医体质饮食,个性化营养计划,女性健康营养,经期营养管理]",
-        "ogTitle": "[TRANSLATE: 营养推荐生成器 - 个性化营养建议 | Period Hub]",
-        "ogDescription": "[TRANSLATE: 基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导。]",
-        "twitterTitle": "[TRANSLATE: 营养推荐生成器 - 个性化营养建议 | Period Hub]",
-        "twitterDescription": "[TRANSLATE: 基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导。]"
+        "title": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
+        "description": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
+        "keywords": "nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management",
+        "ogTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
+        "ogDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
+        "twitterTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
+        "twitterDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine."
       },
       "structuredData": {
-        "applicationCategory": "[TRANSLATE: HealthApplication]",
-        "operatingSystem": "[TRANSLATE: Any]",
-        "browserRequirements": "[TRANSLATE: HTML5, CSS3, JavaScript]",
-        "providerName": "[TRANSLATE: Period Hub]"
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "HTML5, CSS3, JavaScript",
+        "providerName": "Period Hub"
       },
       "relatedTools": {
-        "title": "[TRANSLATE: 相关工具]",
+        "title": "Related Tools",
         "cycleTracker": {
-          "title": "[TRANSLATE: 智能周期追踪器]",
-          "description": "[TRANSLATE: 智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律]"
+          "title": "Smart Cycle Tracker",
+          "description": "Intelligently track your menstrual cycle, predict next period, record symptom changes, helping you better understand your body patterns"
         },
         "constitutionTest": {
-          "title": "[TRANSLATE: 中医体质测试]",
-          "description": "[TRANSLATE: 通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议]"
+          "title": "TCM Constitution Test",
+          "description": "Understand your TCM constitution type through 11 questions and get personalized acupuncture points, diet and lifestyle recommendations"
         }
       },
       "relatedArticles": {
-        "title": "[TRANSLATE: 相关营养文章]",
+        "title": "Related Nutrition Articles",
         "antiInflammatory": {
-          "title": "[TRANSLATE: 抗炎饮食指南]",
-          "description": "[TRANSLATE: 通过食物缓解经期疼痛的科学饮食方法，了解哪些食物有助于减少炎症和疼痛]",
-          "readTime": "[TRANSLATE: 8分钟阅读]"
+          "title": "Anti-Inflammatory Diet Guide",
+          "description": "Scientific dietary methods to relieve menstrual pain through food, understanding which foods help reduce inflammation and pain",
+          "readTime": "8 min read"
         },
         "gingerTea": {
-          "title": "[TRANSLATE: 姜茶缓解痛经指南]",
-          "description": "[TRANSLATE: 5种科学验证的姜茶制作方法，有效缓解痛经，学习正确的制作技巧和饮用时机]",
-          "readTime": "[TRANSLATE: 6分钟阅读]"
+          "title": "Ginger Tea for Menstrual Pain Relief",
+          "description": "5 scientifically proven ginger tea recipes for effective menstrual pain relief, learn proper preparation techniques and timing",
+          "readTime": "6 min read"
         },
         "herbalTea": {
-          "title": "[TRANSLATE: 有效草药茶配方]",
-          "description": "[TRANSLATE: 5种科学验证的草药茶配方，天然缓解经期不适，包含肉桂茶、茴香籽茶等经典配方]",
-          "readTime": "[TRANSLATE: 7分钟阅读]"
+          "title": "Effective Herbal Tea Recipes",
+          "description": "5 scientifically proven herbal tea recipes for natural menstrual relief, including cinnamon tea, fennel seed tea and other classic formulas",
+          "readTime": "7 min read"
         }
       },
       "footer": {
-        "text": "[TRANSLATE: 个性化健康，触手可及。]",
-        "disclaimer": "[TRANSLATE: 本工具提供一般性营养指导，不能替代专业医疗建议。]"
+        "text": "Personalized wellness at your fingertips.",
+        "disclaimer": "This tool provides general nutrition guidance and should not replace professional medical advice."
       }
     }
   },

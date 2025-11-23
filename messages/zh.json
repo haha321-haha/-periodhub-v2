@@ -4693,22 +4693,22 @@
     "keywords": "经期健康管理,症状评估,疼痛追踪,数据分析,个性化建议,痛经缓解,健康工具,经期管理,疼痛分析,健康评估",
     "nutritionRecommendationGenerator": {
       "title": "营养推荐生成器",
-      "description": "Please select your menstrual phase, health goals, and TCM constitution to generate personalized nutrition recommendations",
-      "journeyTitle": "✨ Start Your Personalized Nutrition Journey",
+      "description": "基于您的月经周期、健康目标和中医体质，我们将为您生成专属的营养建议",
+      "journeyTitle": "✨ 开始您的个性化营养之旅",
       "steps": {
-        "step1": "Select Phase",
-        "step2": "Set Goals",
-        "step3": "Generate"
+        "step1": "选择阶段",
+        "step2": "设定目标",
+        "step3": "生成建议"
       },
-      "tip": "💡 Tip: All recommendations are based on scientific research and TCM theory",
+      "tip": "💡 提示：所有建议都基于科学研究和中医理论",
       "meta": {
-        "title": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
-        "description": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
-        "keywords": "nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management",
-        "ogTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
-        "ogDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
-        "twitterTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
-        "twitterDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine."
+        "title": "营养推荐生成器 - 个性化营养建议 | Period Hub",
+        "description": "基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导，结合现代营养学与中医理论，为女性提供精准的营养建议和生活方式指导，帮助优化生理期健康管理。",
+        "keywords": "营养推荐生成器,月经周期营养,中医体质饮食,个性化营养计划,女性健康营养,经期营养管理",
+        "ogTitle": "营养推荐生成器 - 个性化营养建议 | Period Hub",
+        "ogDescription": "基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导。",
+        "twitterTitle": "营养推荐生成器 - 个性化营养建议 | Period Hub",
+        "twitterDescription": "基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导。"
       },
       "structuredData": {
         "applicationCategory": "HealthApplication",
@@ -4717,37 +4717,37 @@
         "providerName": "Period Hub"
       },
       "relatedTools": {
-        "title": "Related 工具s",
+        "title": "相关工具",
         "cycleTracker": {
-          "title": "Smart Cycle Tracker",
-          "description": "Intelligently track your menstrual cycle, predict next period, record symptom changes, helping you better understand your body patterns"
+          "title": "智能周期追踪器",
+          "description": "智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律"
         },
         "constitutionTest": {
-          "title": "TCM Constitution Test",
-          "description": "Understand your TCM constitution type through 11 questions and get personalized acupuncture points, diet and lifestyle recommendations"
+          "title": "中医体质测试",
+          "description": "通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议"
         }
       },
       "relatedArticles": {
-        "title": "Related Nutrition Articles",
+        "title": "相关营养文章",
         "antiInflammatory": {
-          "title": "Anti-Inflammatory Diet 指南",
-          "description": "Scientific dietary methods to relieve menstrual pain through food, understanding which foods help reduce inflammation and pain",
-          "readTime": "8 min read"
+          "title": "抗炎饮食指南",
+          "description": "通过食物缓解经期疼痛的科学饮食方法，了解哪些食物有助于减少炎症和疼痛",
+          "readTime": "8分钟阅读"
         },
         "gingerTea": {
-          "title": "Ginger Tea for Menstrual Pain Relief",
-          "description": "5 scientifically proven ginger tea recipes for effective menstrual pain relief, learn proper preparation techniques and timing",
-          "readTime": "6 min read"
+          "title": "姜茶缓解痛经指南",
+          "description": "5种科学验证的姜茶制作方法，有效缓解痛经，学习正确的制作技巧和饮用时机",
+          "readTime": "6分钟阅读"
         },
         "herbalTea": {
-          "title": "Effective Herbal Tea Recipes",
-          "description": "5 scientifically proven herbal tea recipes for natural menstrual relief, including cinnamon tea, fennel seed tea and other classic formulas",
-          "readTime": "7 min read"
+          "title": "有效草药茶配方",
+          "description": "5种科学验证的草药茶配方，天然缓解经期不适，包含肉桂茶、茴香籽茶等经典配方",
+          "readTime": "7分钟阅读"
         }
       },
       "footer": {
-        "text": "Personalized wellness at your fingertips.",
-        "disclaimer": "This tool provides general nutrition guidance and should not replace professional medical advice."
+        "text": "个性化健康，触手可及。",
+        "disclaimer": "本工具提供一般性营养指导，不能替代专业医疗建议。"
       }
     }
   },

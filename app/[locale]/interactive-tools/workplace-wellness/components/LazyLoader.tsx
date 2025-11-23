@@ -1,21 +1,25 @@
 "use client";
 
 import React, { Suspense, lazy } from "react";
-import type { ComponentType } from "react";
+import type { ComponentType, LazyExoticComponent } from "react";
 import { LoadingWrapper, SkeletonCard } from "./LoadingAnimations";
 import { logWarn } from "@/lib/debug-logger";
+import type {
+  ExtractComponentProps,
+  LazyWrapperProps,
+  LazyComponentCreator,
+} from "../types/lazy-component";
+import { separateWrapperProps } from "../types/lazy-component";
 
 /**
  * Day 12: 懒加载组件包装器
  * 基于HVsLYEp的组件架构，实现代码分割和按需加载
+ *
+ * 方案 B：完整重构 - 使用类型辅助函数提高类型安全性
  */
 
-// 懒加载包装器接口
-interface LazyLoaderProps {
-  fallback?: React.ReactNode;
-  height?: string;
-  delay?: number;
-}
+// 保持向后兼容的接口别名
+type LazyLoaderProps = LazyWrapperProps;
 
 // 默认加载状态
 const DefaultFallback = ({ height = "200px" }: { height?: string }) => (
@@ -44,29 +48,50 @@ const DelayedSuspense = ({
 };
 
 /**
- * 创建懒加载组件
- * @param importFunc 动态导入函数
- * @param fallback 加载状态组件
- * @param delay 延迟加载时间(ms)
+ * 创建懒加载组件（方案 B：完整重构版本）
+ *
+ * 使用类型辅助函数提供更好的类型安全性：
+ * - 使用 ExtractComponentProps 提取组件 props 类型
+ * - 使用 separateWrapperProps 分离包装器和组件 props
+ * - 使用 LazyComponentCreator 提供精确的返回类型
+ *
+ * @param importFunc 动态导入函数，返回包含 default 组件的 Promise
+ * @param fallback 默认加载状态组件
+ * @param delay 默认延迟加载时间(ms)
+ * @returns 类型安全的懒加载组件包装器
+ *
+ * @example
+ * ```tsx
+ * const LazyButton = createLazyComponent(
+ *   () => import('./Button'),
+ *   <LoadingSpinner />,
+ *   100
+ * );
+ *
+ * // 使用时，TypeScript 会自动推断 Button 组件的 props 类型
+ * <LazyButton onClick={handleClick} disabled={false} />
+ * ```
  */
 export function createLazyComponent<T extends ComponentType<unknown>>(
   importFunc: () => Promise<{ default: T }>,
   fallback?: React.ReactNode,
   delay: number = 0,
-) {
+): LazyComponentCreator<T> {
   // 使用类型断言，明确指定 LazyExoticComponent 类型
-  const LazyComponent = lazy(importFunc) as React.LazyExoticComponent<T>;
+  const LazyComponent = lazy(importFunc) as LazyExoticComponent<T>;
 
   return function LazyWrapper(
-    props: React.ComponentProps<T> & LazyLoaderProps,
+    props: ExtractComponentProps<T> & LazyWrapperProps,
   ) {
-    // 分离 LazyLoaderProps 和组件 props，避免传递不需要的属性
+    // 使用类型辅助函数分离 props
+    const { wrapperProps, componentProps } = separateWrapperProps(props);
     const {
+      fallback: overrideFallback,
       height,
       delay: overrideDelay,
-      fallback: overrideFallback,
-      ...componentProps
-    } = props;
+    } = wrapperProps;
+
+    // 确定最终使用的值（包装器 props 优先于函数参数）
     const finalDelay = overrideDelay ?? delay;
     const finalFallback = overrideFallback ?? fallback;
 
@@ -77,10 +102,16 @@ export function createLazyComponent<T extends ComponentType<unknown>>(
       >
         {/*
           @ts-expect-error - React.lazy 的泛型类型推断限制
-          虽然使用了 LazyExoticComponent<T> 类型断言，但 TypeScript 仍然无法完全推断
-          这是 React.lazy 和 TypeScript 泛型结合时的已知限制
+          这是 React.lazy 和 TypeScript 泛型结合时的已知限制。
+          虽然我们已经使用了 LazyExoticComponent<T> 类型断言和 ExtractComponentProps，
+          但 TypeScript 仍然无法完全推断 LazyExoticComponent 的 props 类型。
+
+          这个错误是安全的，因为：
+          1. componentProps 已经通过 ExtractComponentProps<T> 进行了类型提取
+          2. LazyComponent 已经通过 LazyExoticComponent<T> 进行了类型断言
+          3. 运行时行为是正确的
         */}
-        <LazyComponent {...(componentProps as React.ComponentProps<T>)} />
+        <LazyComponent {...(componentProps as ExtractComponentProps<T>)} />
       </DelayedSuspense>
     );
   };

@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { defaultLocale, locales, type Locale } from "@/i18n/constants";
 import { Metadata } from "next";
@@ -136,16 +135,14 @@ export default async function RootPage() {
       ? preferredLocale
       : defaultLocale;
 
-    // 混合方案：预览请求返回静态HTML页面，普通请求使用服务端重定向
-    // 预览请求：返回静态页面，延迟5秒重定向（给截图工具足够时间）
-    // 普通请求：立即服务端重定向（用户体验最佳）
-    if (!isPreview) {
-      // 普通请求：立即服务端重定向，用户不会看到预览页面
-      redirect(`/${validLocale}`);
-    }
-
-    // 预览请求：返回静态HTML页面，使用客户端重定向
-    const redirectDelay = 5000; // 5秒延迟给截图工具足够时间
+    // 完全客户端重定向方案：所有请求都返回静态HTML页面
+    // 预览请求：延迟5秒重定向（给截图工具足够时间）
+    // 普通请求：延迟10ms重定向（几乎无感，但确保客户端脚本执行）
+    // 这样做可以：
+    // 1. 避免服务端重定向导致的刷新头部问题
+    // 2. 确保预览工具能够捕获静态内容
+    // 3. 普通用户几乎无延迟体验
+    const redirectDelay = isPreview ? 5000 : 10;
 
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
@@ -189,7 +186,7 @@ export default async function RootPage() {
             content={`${baseUrl}/images/hero-bg.jpg`}
           />
 
-          {/* 智能延迟重定向：预览请求5秒，普通请求0.1秒 */}
+          {/* 智能延迟重定向：预览请求5秒，普通请求10ms */}
           <script
             dangerouslySetInnerHTML={{
               __html: `

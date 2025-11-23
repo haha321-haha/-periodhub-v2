@@ -1686,11 +1686,7 @@
         "title": "使用建议：",
         "bestTiming": {
           "title": "最佳时机：",
-          "items": [
-            "疼痛刚开始时",
-            "感到焦虑紧张时",
-            "睡前放松时"
-          ]
+          "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
         },
         "precautions": {
           "title": "注意事项：",
@@ -2285,6 +2281,7 @@
         "articles": {
           "physicalTherapy": "Menstrual Back Pain Comprehensive Care Guide",
           "traditionalMethods": "Ginger Menstrual Pain Relief Guide",
+          "gingerRelief": "Ginger Menstrual Pain Relief Guide",
           "zhanZhuang": "Zhan Zhuang Standing Meditation Guide",
           "herbalTea": "Herbal Tea Guide",
           "physicalTherapyDesc": "Explore scientific applications of natural physical therapies including massage, stretching, and exercise",
@@ -6621,11 +6618,7 @@
       "partnerCommunication": {
         "title": "Partner Communication Scenarios",
         "description": "专业的伴侣沟通场景解决方案，帮助伴侣更好地理解痛经，提供针对性的沟通策略和情感支持技巧。包含理解Testing、30天训练营和个性化指导，帮助您建立更好的理解和沟通。",
-        "features": [
-          "伴侣理解测试",
-          "30天训练营",
-          "个性化指导"
-        ]
+        "features": ["伴侣理解测试", "30天训练营", "个性化指导"]
       }
     },
     "introTitle": "Comprehensive Scenario-Based Solutions",
@@ -7786,48 +7779,23 @@
       "questions": {
         "q1": {
           "question": "Have you frequently felt anxious or tense recently?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q2": {
           "question": "How is your sleep quality?",
-          "options": [
-            "Very Good",
-            "Good",
-            "Poor",
-            "Very Poor"
-          ]
+          "options": ["Very Good", "Good", "Poor", "Very Poor"]
         },
         "q3": {
           "question": "Do you often feel tired or lack energy?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q4": {
           "question": "Do you easily feel irritable or angry?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q5": {
           "question": "Do you often worry about period-related issues?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         }
       },
       "benefits": {
@@ -7849,13 +7817,7 @@
       "radar": {
         "title": "Stress Areas Analysis",
         "subtitle": "Visual representation of your stress levels across different life areas",
-        "labels": [
-          "Work",
-          "Sleep",
-          "Emotion",
-          "Physical",
-          "Social"
-        ]
+        "labels": ["Work", "Sleep", "Emotion", "Physical", "Social"]
       },
       "privacy": {
         "badge": "Your data is 100% encrypted and never sold",

@@ -97,8 +97,8 @@ export function createLazyComponent<T extends ComponentType<unknown>>(
         fallback={finalFallback || <DefaultFallback height={height} />}
         delay={finalDelay}
       >
-        {/*
-          @ts-expect-error - React.lazy 的泛型类型推断限制
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {/* @ts-ignore - React.lazy 的泛型类型推断限制
           
           这是 React.lazy 和 TypeScript 泛型结合时的已知限制。
           虽然我们已经使用了：
@@ -115,12 +115,8 @@ export function createLazyComponent<T extends ComponentType<unknown>>(
           - 所有使用该函数的地方都会得到正确的类型提示
           
           参考：https://github.com/DefinitelyTyped/DefinitelyTyped/issues/37087
-          
-          使用 unknown 作为中间类型来避免类型推断问题
         */}
-        <LazyComponent
-          {...(componentProps as unknown as React.ComponentProps<T>)}
-        />
+        <LazyComponent {...(componentProps as any)} />
       </DelayedSuspense>
     );
   };

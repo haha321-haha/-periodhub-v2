@@ -55,18 +55,68 @@ function generateStaticPreviewHTML(): string {
 }
 
 /**
- * 中间件 - 终极解决方案
- * 在预览环境中，对所有根路径请求直接返回静态 HTML
+ * 检测是否是 Vercel 截图生成器的请求
+ * 通过检测特定的请求头来判断
+ */
+function isVercelScreenshotRequest(request: NextRequest): boolean {
+  const userAgent = request.headers.get("user-agent") || "";
+  const referer = request.headers.get("referer") || "";
+
+  // Vercel 截图生成器通常使用特定的 User-Agent
+  const screenshotAgents = [
+    "vercel",
+    "screenshot",
+    "headless",
+    "puppeteer",
+    "playwright",
+    "chromium",
+  ];
+
+  const isScreenshotAgent = screenshotAgents.some((agent) =>
+    userAgent.toLowerCase().includes(agent),
+  );
+
+  // 检查是否有 Vercel 特定的请求头
+  const xVercelId = request.headers.get("x-vercel-id");
+  const xVercelDeployment = request.headers.get("x-vercel-deployment");
+
+  // 如果是预览环境，并且检测到截图生成器的特征，返回 true
+  if (process.env.VERCEL_ENV === "preview") {
+    if (isScreenshotAgent || xVercelId || xVercelDeployment) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * 中间件 - 优化方案
+ * 只对 Vercel 截图生成器的请求返回静态 HTML
+ * 普通用户访问预览部署时，可以看到正常的主页
  */
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // 只处理根路径
+  // 只处理根路径和 /preview 路径
   if (pathname === "/" || pathname === "/preview") {
-    // 🎯 终极方案：只检查一个条件 - VERCEL_ENV === "preview"
-    // 这是最可靠的方法，因为环境变量由 Vercel 保证
-    if (process.env.VERCEL_ENV === "preview") {
-      // 直接返回完整的静态 HTML，不依赖任何其他逻辑
+    // 如果是 /preview 路径，直接返回静态 HTML（用于 Vercel 项目设置配置）
+    if (pathname === "/preview") {
+      return new NextResponse(generateStaticPreviewHTML(), {
+        status: 200,
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+          "X-Preview-Path": "/preview",
+        },
+      });
+    }
+
+    // 检测是否是 Vercel 截图生成器的请求
+    if (isVercelScreenshotRequest(request)) {
+      // 只对截图生成器返回静态 HTML
       return new NextResponse(generateStaticPreviewHTML(), {
         status: 200,
         headers: {
@@ -81,7 +131,7 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  // 对于非预览环境，继续正常处理
+  // 对于普通用户请求，继续正常处理
   // 让 app/page.tsx 处理语言检测和重定向
   return NextResponse.next();
 }

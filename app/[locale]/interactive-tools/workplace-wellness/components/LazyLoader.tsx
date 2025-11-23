@@ -64,7 +64,8 @@ export function createLazyComponent<T extends ComponentType<unknown>>(
         fallback={fallback || <DefaultFallback height={props.height} />}
         delay={delay}
       >
-        <LazyComponent {...(props as React.ComponentProps<T>)} />
+        {/* @ts-expect-error - Complex generic type inference for lazy components */}
+        <LazyComponent {...(props as any)} />
       </DelayedSuspense>
     );
   };

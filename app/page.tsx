@@ -16,20 +16,24 @@ export async function generateMetadata(): Promise<Metadata> {
 /**
  * 检测是否是Vercel预览请求（用于生成预览截图）
  * 增强检测逻辑，覆盖更多Vercel预览场景
+ *
+ * 注意：此函数作为备用检测，主要检测在 middleware.ts 中完成
+ * 如果请求通过了 middleware，这里会再次检测以确保准确性
  */
 async function isVercelPreviewRequest(): Promise<boolean> {
   try {
     const headersList = await headers();
     const userAgent = headersList.get("user-agent") || "";
     const referer = headersList.get("referer") || "";
+    const host = headersList.get("host") || "";
     const xForwardedFor = headersList.get("x-forwarded-for") || "";
 
     // 检查所有可能的 Vercel 预览标识
     const xVercelId = headersList.get("x-vercel-id");
     const xVercelDeployment = headersList.get("x-vercel-deployment");
-    const host = headersList.get("host") || "";
+    const xVercelSignature = headersList.get("x-vercel-signature");
 
-    // Vercel环境变量检测
+    // Vercel环境变量检测（在运行时可用）
     const isVercelEnvironment = process.env.VERCEL === "1";
     const isVercelPreviewEnv = process.env.VERCEL_ENV === "preview";
 
@@ -45,6 +49,8 @@ async function isVercelPreviewRequest(): Promise<boolean> {
       "crawler",
       "firefox/92.0", // Vercel截图使用的Firefox版本
       "firefox/", // 更通用的Firefox检测
+      "chrome/", // Chromium 检测
+      "safari/", // Safari 检测（某些情况下）
     ];
 
     const isPreviewAgent = previewAgents.some((agent) =>
@@ -57,24 +63,26 @@ async function isVercelPreviewRequest(): Promise<boolean> {
       referer.includes("vercel.com") ||
       xForwardedFor.includes("vercel");
 
+    // 检测 Vercel 特定的请求头
+    const hasVercelHeaders =
+      !!xVercelId || !!xVercelDeployment || !!xVercelSignature;
+
+    // 检测是否是 .vercel.app 域名
+    const isVercelDomain = host.includes(".vercel.app");
+
     // 综合判断：优先检测预览特征
     // 如果检测到明显的预览特征，直接返回true
     if (
       isPreviewAgent ||
       isVercelReferer ||
-      !!xVercelId ||
-      !!xVercelDeployment
+      hasVercelHeaders ||
+      isVercelDomain
     ) {
       return true;
     }
 
     // 在Vercel环境中，如果是预览环境，返回true
     if (isVercelEnvironment && isVercelPreviewEnv) {
-      return true;
-    }
-
-    // 如果是 .vercel.app 域名，也返回true
-    if (host.includes(".vercel.app")) {
       return true;
     }
 

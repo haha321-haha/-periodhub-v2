@@ -8,10 +8,19 @@ import type { ComponentType, LazyExoticComponent } from "react";
 /**
  * 提取组件 Props 类型
  * 从 ComponentType 中提取组件的 props 类型
+ *
+ * 支持多种组件类型：
+ * - FunctionComponent
+ * - ClassComponent
+ * - MemoExoticComponent
+ * - LazyExoticComponent
  */
-export type ExtractComponentProps<T> = T extends ComponentType<infer P>
-  ? P
-  : never;
+export type ExtractComponentProps<T> =
+  T extends ComponentType<infer P>
+    ? P extends object
+      ? P
+      : Record<string, never>
+    : Record<string, never>;
 
 /**
  * Lazy 组件包装器 Props
@@ -53,6 +62,9 @@ export function isLazyComponent<T extends ComponentType<unknown>>(
 /**
  * 分离包装器 Props 和组件 Props
  * 从合并的 props 中分离出包装器专用的 props
+ *
+ * @param props 合并的 props（组件 props + 包装器 props）
+ * @returns 分离后的包装器 props 和组件 props
  */
 export function separateWrapperProps<T extends ComponentType<unknown>>(
   props: ExtractComponentProps<T> & LazyWrapperProps,
@@ -63,6 +75,11 @@ export function separateWrapperProps<T extends ComponentType<unknown>>(
   const { fallback, height, delay, ...componentProps } = props;
   return {
     wrapperProps: { fallback, height, delay },
-    componentProps: componentProps as ExtractComponentProps<T>,
+    // 确保 componentProps 是对象类型，避免类型推断问题
+    // 使用类型断言，因为我们已经通过 ExtractComponentProps<T> 确保了类型安全
+    componentProps: componentProps as Record<
+      string,
+      unknown
+    > as ExtractComponentProps<T>,
   };
 }

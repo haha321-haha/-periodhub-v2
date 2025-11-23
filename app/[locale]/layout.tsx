@@ -78,13 +78,38 @@ export default async function LocaleLayout({
     }
   }
 
-  return (
-    <NextIntlClientProvider locale={validLocale} messages={messages}>
-      <Suspense fallback={<LoadingState />}>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </Suspense>
-    </NextIntlClientProvider>
-  );
+  // 添加错误边界，捕获 Header 和 Footer 的错误
+  try {
+    return (
+      <NextIntlClientProvider locale={validLocale} messages={messages}>
+        <Suspense fallback={<LoadingState />}>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </Suspense>
+      </NextIntlClientProvider>
+    );
+  } catch (error) {
+    // 如果渲染失败，记录错误并返回错误信息
+    // eslint-disable-next-line no-console
+    console.error("[Layout] Rendering error:", error);
+
+    // 返回一个简单的错误页面，而不是让整个应用崩溃
+    return (
+      <html lang={validLocale}>
+        <body>
+          <div style={{ padding: "20px", fontFamily: "system-ui" }}>
+            <h1>Layout Rendering Error</h1>
+            <p>
+              Error: {error instanceof Error ? error.message : String(error)}
+            </p>
+            <details>
+              <summary>Error Details</summary>
+              <pre>{error instanceof Error ? error.stack : String(error)}</pre>
+            </details>
+          </div>
+        </body>
+      </html>
+    );
+  }
 }

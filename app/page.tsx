@@ -54,11 +54,22 @@ async function isVercelPreviewRequest(): Promise<boolean> {
       referer.includes("vercel.com") ||
       xForwardedFor.includes("vercel");
 
-    // 综合判断：在Vercel环境中，如果是预览环境或检测到预览特征
-    return (
-      isVercelEnvironment &&
-      (isVercelPreviewEnv || hasVercelId || isPreviewAgent || isVercelReferer)
-    );
+    // 综合判断：优先检测预览特征，如果检测到预览特征，即使不在Vercel环境也返回true
+    // 这样可以确保Vercel预览服务能够正常工作
+    // 但如果是在Vercel环境且是生产环境，需要更严格的检查
+
+    // 如果检测到明显的预览特征，直接返回true
+    if (isPreviewAgent || isVercelReferer) {
+      return true;
+    }
+
+    // 在Vercel环境中，如果是预览环境或有Vercel ID，返回true
+    if (isVercelEnvironment && (isVercelPreviewEnv || hasVercelId)) {
+      return true;
+    }
+
+    // 默认返回false，确保正常用户请求不会被误判
+    return false;
   } catch {
     return false;
   }

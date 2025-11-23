@@ -8,16 +8,20 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: false,
   },
-  // ✅ 根路径重定向配置（作为 app/page.tsx 的后备）
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/zh", // 默认重定向到中文版本
-        permanent: false, // 使用 302 临时重定向，允许客户端语言检测覆盖
-      },
-    ];
-  },
+  // ⚠️ 注释掉根路径重定向，让 app/page.tsx 处理语言检测和重定向
+  // 这样可以：
+  // 1. 支持智能语言检测（根据 Accept-Language 头部）
+  // 2. 支持Vercel预览请求的特殊处理
+  // 3. 提供更好的用户体验
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/",
+  //       destination: "/zh",
+  //       permanent: false,
+  //     },
+  //   ];
+  // },
 };
 
 module.exports = nextConfig;

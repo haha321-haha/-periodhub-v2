@@ -79,7 +79,7 @@ export class SEOReportGenerator {
           averagePosition: keywordRankings.averagePosition,
         } as KeywordRankings,
         webVitals as WebVitalsData,
-        competitorData as Competitor[],
+        competitorData as unknown as Competitor[],
       ),
       technicalSEO: await this.analyzeTechnicalSEO(),
       contentSEO: await this.analyzeContentSEO({

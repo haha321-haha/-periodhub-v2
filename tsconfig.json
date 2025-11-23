@@ -60,6 +60,7 @@
     "**/__tests__/**",
     "recovery-workspace/**",
     "backup/**",
-    "backup_temp/**"
+    "backup_temp/**",
+    "hub-latest-main*/**"
   ]
 }

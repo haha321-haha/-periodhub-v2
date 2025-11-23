@@ -30,7 +30,7 @@ export default function StressAssessmentWidget() {
   const t = useTranslations("stressManagement");
   const ui = useTranslations("ui");
 
-  const [userId] = useState(() => generateAnonymousUserId());
+  // const [userId] = useState(() => generateAnonymousUserId()); // Reserved for future analytics
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [showResults, setShowResults] = useState(false);

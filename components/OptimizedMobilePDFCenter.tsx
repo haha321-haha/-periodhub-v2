@@ -53,7 +53,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
   const [activeCategory, setActiveCategory] = useState("immediate");
   const [searchTerm, setSearchTerm] = useState("");
   const [loadedCategories, setLoadedCategories] = useState(["immediate"]); // 渐进式加载
-  const [isEmergencyMode, setIsEmergencyMode] = useState(false);
+  // const [isEmergencyMode, setIsEmergencyMode] = useState(false); // Reserved for future use
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
 

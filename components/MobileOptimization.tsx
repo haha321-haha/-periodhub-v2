@@ -193,13 +193,12 @@ function setupPerformanceMonitoring() {
   });
 
   // 监控用户交互性能
-  let interactionStart = 0;
-
   ["click", "touchstart", "keydown"].forEach((eventType) => {
     document.addEventListener(
       eventType,
       () => {
-        interactionStart = performance.now();
+        // Track interaction start time for performance monitoring
+        void performance.now();
       },
       { passive: true },
     );

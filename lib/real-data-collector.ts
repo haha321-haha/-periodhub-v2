@@ -114,7 +114,7 @@ export function collectDataPoint(type: string, data: unknown): boolean {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(dataPoints));
     return true;
-  } catch (error) {
+  } catch {
     return false;
   }
 }

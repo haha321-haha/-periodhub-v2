@@ -54,18 +54,33 @@ export function createLazyComponent<T extends ComponentType<unknown>>(
   fallback?: React.ReactNode,
   delay: number = 0,
 ) {
-  const LazyComponent = lazy(importFunc);
+  // 使用类型断言，明确指定 LazyExoticComponent 类型
+  const LazyComponent = lazy(importFunc) as React.LazyExoticComponent<T>;
 
   return function LazyWrapper(
     props: React.ComponentProps<T> & LazyLoaderProps,
   ) {
+    // 分离 LazyLoaderProps 和组件 props，避免传递不需要的属性
+    const {
+      height,
+      delay: overrideDelay,
+      fallback: overrideFallback,
+      ...componentProps
+    } = props;
+    const finalDelay = overrideDelay ?? delay;
+    const finalFallback = overrideFallback ?? fallback;
+
     return (
       <DelayedSuspense
-        fallback={fallback || <DefaultFallback height={props.height} />}
-        delay={delay}
+        fallback={finalFallback || <DefaultFallback height={height} />}
+        delay={finalDelay}
       >
-        {/* @ts-expect-error - Complex generic type inference for lazy components */}
-        <LazyComponent {...(props as any)} />
+        {/*
+          @ts-expect-error - React.lazy 的泛型类型推断限制
+          虽然使用了 LazyExoticComponent<T> 类型断言，但 TypeScript 仍然无法完全推断
+          这是 React.lazy 和 TypeScript 泛型结合时的已知限制
+        */}
+        <LazyComponent {...(componentProps as React.ComponentProps<T>)} />
       </DelayedSuspense>
     );
   };

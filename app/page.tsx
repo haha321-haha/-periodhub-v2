@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { defaultLocale, locales, type Locale } from "@/i18n/constants";
 import { Metadata } from "next";
 
@@ -15,6 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 /**
  * 根据 Accept-Language 头部检测用户偏好的语言
+ * 使用更安全的错误处理，确保即使出错也能返回默认语言
  */
 async function detectLocaleFromHeaders(): Promise<Locale> {
   try {
@@ -50,119 +52,37 @@ async function detectLocaleFromHeaders(): Promise<Locale> {
       }
     }
   } catch (error) {
-    // 如果检测过程中出现错误，返回默认语言
-    if (process.env.NODE_ENV === "development") {
-      // eslint-disable-next-line no-console
-      console.warn("[RootPage] Failed to detect locale from headers:", error);
-    }
+    // 如果检测过程中出现任何错误，返回默认语言
+    // 不记录错误，避免在生产环境中产生噪音
+    // 静默失败，确保页面能正常重定向
   }
 
   // 默认返回默认语言
   return defaultLocale;
 }
 
+/**
+ * 根路径页面 - 根据用户语言偏好重定向到对应的语言版本
+ *
+ * 使用 Next.js 的 redirect() 函数进行服务器端重定向，更可靠
+ */
 export default async function RootPage() {
-  try {
-    // 移除所有预览检测逻辑，始终正常重定向
-    // 这样普通用户访问预览部署时能看到正常主页
-    
-    // 检测用户语言偏好并立即重定向
-    const preferredLocale = await detectLocaleFromHeaders();
-    const validLocale = locales.includes(preferredLocale) ? preferredLocale : defaultLocale;
-    
-    // 使用meta refresh确保快速重定向
-    return (
-      <html lang="zh">
-        <head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>Redirecting...</title>
-          <meta httpEquiv="refresh" content={`0;url=/${validLocale}`} />
-        </head>
-        <body
-          style={{
-            margin: 0,
-            padding: 0,
-            fontFamily:
-              "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            minHeight: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-          }}
-        >
-          <div style={{ textAlign: "center", padding: "2rem" }}>
-            <p style={{ fontSize: "1.2rem" }}>正在跳转到适合您的语言版本...</p>
-            <div style={{ marginTop: "1rem" }}>
-              <a
-                href={`/${validLocale}`}
-                style={{
-                  background: "rgba(255,255,255,0.2)",
-                  color: "white",
-                  padding: "10px 16px",
-                  borderRadius: "8px",
-                  textDecoration: "none",
-                  fontSize: "14px",
-                  display: "inline-block",
-                }}
-              >
-                立即跳转到 {validLocale === "zh" ? "中文版" : "English"}
-              </a>
-            </div>
-          </div>
-        </body>
-      </html>
-    );
-  } catch (error) {
-    // 如果发生错误，返回一个简单的错误页面
-    if (process.env.NODE_ENV === "development") {
-      // eslint-disable-next-line no-console
-      console.error("[RootPage] Error:", error);
-    }
+  // 检测用户语言偏好
+  let preferredLocale: Locale;
 
-    // 返回一个包含重定向的简单错误页面
-    return (
-      <html lang="zh" data-locale={defaultLocale}>
-        <head>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta httpEquiv="refresh" content={`1;url=/${defaultLocale}`} />
-          <title>Redirecting...</title>
-        </head>
-        <body
-          style={{
-            margin: 0,
-            padding: 0,
-            fontFamily:
-              "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            minHeight: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "white",
-          }}
-        >
-          <div style={{ textAlign: "center", padding: "2rem" }}>
-            <p style={{ fontSize: "1.2rem" }}>正在重定向...</p>
-          </div>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                setTimeout(function() {
-                  try {
-                    window.location.replace('/${defaultLocale}');
-                  } catch (e) {
-                    window.location.href = '/${defaultLocale}';
-                  }
-                }, 100);
-              `,
-            }}
-          />
-        </body>
-      </html>
-    );
+  try {
+    preferredLocale = await detectLocaleFromHeaders();
+  } catch {
+    // 如果检测失败，使用默认语言
+    preferredLocale = defaultLocale;
   }
+
+  // 确保 locale 是有效的
+  const validLocale = locales.includes(preferredLocale)
+    ? preferredLocale
+    : defaultLocale;
+
+  // 使用 Next.js 的 redirect() 函数进行服务器端重定向
+  // 这会返回 307 临时重定向，对 SEO 友好
+  redirect(`/${validLocale}`);
 }

@@ -17,35 +17,49 @@ if [ "$branch" = "main" ] || [ "$branch" = "develop" ]; then
   echo "🔒 检测到关键分支 ($branch)，执行严格检查..."
   echo ""
 
-  # 1. 硬编码检测（暂时禁用，因为脚本不存在）
-  echo "🔍 [跳过] 硬编码检测（脚本不存在）..."
-  # if ! npm run detect-hardcode; then
-  #   echo ""
-  #   echo "❌ 硬编码检测失败！推送被阻止。"
-  #   echo "💡 即使使用 --no-verify，关键分支也必须通过硬编码检测。"
-  #   echo "💡 请修复硬编码问题后再推送。"
-  #   exit 1
-  # fi
+  # 1. 硬编码检测
+  echo "🔍 运行硬编码检测..."
+  if [ -f "scripts/detect-hardcode.js" ]; then
+    if ! npm run detect-hardcode 2>/dev/null; then
+      echo ""
+      echo "❌ 硬编码检测失败！推送被阻止。"
+      echo "💡 请修复硬编码问题后再推送。"
+      exit 1
+    else
+      echo "✅ 硬编码检测通过"
+    fi
+  else
+    echo "⚠️  警告：硬编码检测脚本不存在，跳过此检查。"
+    echo "💡 脚本路径: scripts/detect-hardcode.js"
+  fi
   echo ""
 
-  # 2. 翻译键同步检查（暂时禁用）
-  echo "🔍 [跳过] 翻译键同步检查（脚本不存在）..."
-  # if ! node scripts/check-translation-sync.js; then
-  #   echo ""
-  #   echo "❌ 翻译键同步检查失败！推送被阻止。"
-  #   echo "💡 请确保中英文翻译键完全同步。"
-  #   exit 1
-  # fi
+  # 2. 翻译键同步检查
+  echo "🔍 运行翻译键同步检查..."
+  if [ -f "scripts/check-translation-sync.js" ] || [ -f "scripts/hardcode-fix-tools/check-translation-sync.js" ]; then
+    if ! npm run translations:check 2>/dev/null; then
+      echo ""
+      echo "❌ 翻译键同步检查失败！推送被阻止。"
+      echo "💡 请确保中英文翻译键完全同步。"
+      exit 1
+    else
+      echo "✅ 翻译键同步检查通过"
+    fi
+  else
+    echo "⚠️  警告：翻译键同步检查脚本不存在，跳过此检查。"
+    echo "💡 脚本路径: scripts/check-translation-sync.js 或 scripts/hardcode-fix-tools/check-translation-sync.js"
+  fi
   echo ""
 
-  # 3. TypeScript 类型检查（暂时禁用）
-  echo "🔍 [跳过] TypeScript 类型检查（太多错误，稍后修复）..."
-  # if ! npm run type-check; then
-  #   echo ""
-  #   echo "❌ TypeScript 类型检查失败！推送被阻止。"
-  #   echo "💡 请修复类型错误后再推送。"
-  #   exit 1
-  # fi
+  # 3. TypeScript 类型检查
+  echo "🔍 运行 TypeScript 类型检查..."
+  if ! npm run type-check; then
+    echo ""
+    echo "❌ TypeScript 类型检查失败！推送被阻止。"
+    echo "💡 请修复类型错误后再推送。"
+    exit 1
+  fi
+  echo "✅ TypeScript 类型检查通过"
   echo ""
 
   # 4. 构建检查（暂时禁用）

@@ -25,8 +25,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations("nutritionRecommendationGenerator.meta");
-  const structuredDataT = await getTranslations("nutritionRecommendationGenerator.structuredData");
+  const t = await getTranslations(
+    "interactiveTools.nutritionRecommendationGenerator.meta",
+  );
+  const structuredDataT = await getTranslations(
+    "interactiveTools.nutritionRecommendationGenerator.structuredData",
+  );
 
   const isZh = locale === "zh";
   const title = t("title");
@@ -105,10 +109,18 @@ export default async function NutritionRecommendationGeneratorPage({
   const { locale } = await params;
   const anchorT = await getTranslations("anchorTexts");
   const breadcrumbT = await getTranslations("interactiveTools.breadcrumb");
-  const pageT = await getTranslations("nutritionRecommendationGenerator");
-  const relatedToolsT = await getTranslations("nutritionRecommendationGenerator.relatedTools");
-  const relatedArticlesT = await getTranslations("nutritionRecommendationGenerator.relatedArticles");
-  const footerT = await getTranslations("nutritionRecommendationGenerator.footer");
+  const pageT = await getTranslations(
+    "interactiveTools.nutritionRecommendationGenerator",
+  );
+  const relatedToolsT = await getTranslations(
+    "interactiveTools.nutritionRecommendationGenerator.relatedTools",
+  );
+  const relatedArticlesT = await getTranslations(
+    "interactiveTools.nutritionRecommendationGenerator.relatedArticles",
+  );
+  const footerT = await getTranslations(
+    "interactiveTools.nutritionRecommendationGenerator.footer",
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
@@ -191,9 +203,7 @@ export default async function NutritionRecommendationGeneratorPage({
 
           {/* 底部装饰 */}
           <div className="pt-3 border-t border-purple-100">
-            <p className="text-xs text-gray-400">
-              {pageT("tip")}
-            </p>
+            <p className="text-xs text-gray-400">{pageT("tip")}</p>
           </div>
         </div>
       </div>
@@ -534,12 +544,8 @@ export default async function NutritionRecommendationGeneratorPage({
       <div className="bg-gray-50 border-t">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-500">
-            <p className="text-sm">
-              {footerT("text")}
-            </p>
-            <p className="text-xs mt-2">
-              {footerT("disclaimer")}
-            </p>
+            <p className="text-sm">{footerT("text")}</p>
+            <p className="text-xs mt-2">{footerT("disclaimer")}</p>
           </div>
         </div>
       </div>

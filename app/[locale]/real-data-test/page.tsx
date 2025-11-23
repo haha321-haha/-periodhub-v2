@@ -9,8 +9,25 @@ import { realDataAnalyzer } from "@/lib/real-data-analyzer";
 import { realDataABTestBridge } from "@/lib/ab-test-real-data-bridge";
 import { logError } from "@/lib/debug-logger";
 
+// 定义测试结果类型
+interface TestResult {
+  success: boolean;
+  message: string;
+  [key: string]: unknown;
+}
+
 export default function RealDataSystemTest() {
   const [testResults, setTestResults] = useState<Record<string, unknown>>({});
+
+  // 类型守卫函数
+  const isTestResult = (value: unknown): value is TestResult => {
+    return (
+      typeof value === "object" &&
+      value !== null &&
+      "success" in value &&
+      "message" in value
+    );
+  };
   const [isRunning, setIsRunning] = useState(false);
   const [currentStep, setCurrentStep] = useState("");
 
@@ -62,17 +79,23 @@ export default function RealDataSystemTest() {
   // 测试数据收集功能
   const testDataCollection = async () => {
     try {
-      // 模拟用户行为
-      realDataCollector.recordPageView("/test-page");
-      realDataCollector.recordInteraction("click");
-      realDataCollector.recordConversion("assessmentStarted");
+      // 模拟用户行为 - 使用 collectDataPoint 方法
+      realDataCollector.collectDataPoint("page_view", { path: "/test-page" });
+      realDataCollector.collectDataPoint("interaction", { type: "click" });
+      realDataCollector.collectDataPoint("conversion", {
+        event: "assessmentStarted",
+      });
 
       // 模拟完成评估
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      realDataCollector.recordConversion("assessmentCompleted");
+      realDataCollector.collectDataPoint("conversion", {
+        event: "assessmentCompleted",
+      });
 
-      // 测试反馈收集
-      const feedbackResult = await realDataCollector.collectFeedback({
+      // 测试反馈收集 - 使用 collectDataPoint
+      const feedbackId = `feedback_${Date.now()}`;
+      realDataCollector.collectDataPoint("feedback", {
+        id: feedbackId,
         feature: "stress_assessment",
         page: "/test-page",
         rating: 4,
@@ -86,16 +109,23 @@ export default function RealDataSystemTest() {
         },
       });
 
+      // 获取会话数据 - 使用 getAllDataPoints
+      const allDataPoints = realDataCollector.getAllDataPoints();
+      const sessionData = {
+        sessionId: allDataPoints[0]?.sessionId || "unknown",
+        dataPointsCount: allDataPoints.length,
+      };
+
       return {
         success: true,
         message: "数据收集功能正常",
-        feedbackId: feedbackResult.id,
-        sessionData: realDataCollector.getCurrentSession(),
+        feedbackId,
+        sessionData,
       };
     } catch (error) {
       return {
         success: false,
-        message: `数据收集测试失败: ${error.message}`,
+        message: `数据收集测试失败: ${String((error as Error).message)}`,
         error: error,
       };
     }
@@ -106,8 +136,13 @@ export default function RealDataSystemTest() {
     try {
       const testUserId = "test_user_" + Date.now();
 
-      // 测试数据就绪检查
-      const readiness = realDataABTestBridge.getDataCollectionReadiness();
+      // 测试数据就绪检查 - 使用现有方法模拟
+      const allDataPoints = realDataCollector.getAllDataPoints();
+      const readiness = {
+        isReady: allDataPoints.length > 0,
+        dataPointsCount: allDataPoints.length,
+        message: allDataPoints.length > 0 ? "数据收集已就绪" : "数据收集未就绪",
+      };
 
       return {
         success: true,
@@ -119,7 +154,7 @@ export default function RealDataSystemTest() {
     } catch (error) {
       return {
         success: false,
-        message: `A/B测试分配测试失败: ${error.message}`,
+        message: `A/B测试分配测试失败: ${String((error as Error).message)}`,
         error: error,
       };
     }
@@ -128,14 +163,29 @@ export default function RealDataSystemTest() {
   // 测试数据分析功能
   const testDataAnalysis = () => {
     try {
-      // 测试数据质量检查
-      const dataQuality = realDataAnalyzer.getDataQualityReport();
+      // 测试数据质量检查 - 使用 analyzeAllData
+      const allDataAnalysis = realDataAnalyzer.analyzeAllData();
+      const dataQuality = {
+        totalPoints: allDataAnalysis.totalDataPoints,
+        dataByType: allDataAnalysis.dataByType,
+        sessionsCount: allDataAnalysis.sessionsCount,
+        averagePointsPerSession: allDataAnalysis.averagePointsPerSession,
+        quality: allDataAnalysis.totalDataPoints > 0 ? "good" : "poor",
+      };
 
-      // 测试A/B测试分析
-      const abTestAnalysis = realDataAnalyzer.analyzeRealABTest();
+      // 测试A/B测试分析 - 使用 analyzeABTestData
+      const abTestAnalysis =
+        realDataABTestBridge.analyzeABTestData("test_ab_test");
 
-      // 测试反馈分析
-      const feedbackAnalysis = realDataAnalyzer.analyzeRealFeedback();
+      // 测试反馈分析 - 使用 analyzeDataByType
+      const feedbackData = realDataAnalyzer.analyzeDataByType("feedback");
+      const feedbackAnalysis = {
+        count: feedbackData?.count || 0,
+        hasData: feedbackData !== null,
+        message: feedbackData
+          ? `找到 ${feedbackData.count} 条反馈数据`
+          : "未找到反馈数据",
+      };
 
       return {
         success: true,
@@ -148,7 +198,7 @@ export default function RealDataSystemTest() {
     } catch (error) {
       return {
         success: false,
-        message: `数据分析测试失败: ${error.message}`,
+        message: `数据分析测试失败: ${String((error as Error).message)}`,
         error: error,
       };
     }
@@ -200,7 +250,7 @@ export default function RealDataSystemTest() {
     } catch (error) {
       return {
         success: false,
-        message: `API端点测试失败: ${error.message}`,
+        message: `API端点测试失败: ${String((error as Error).message)}`,
         error: error,
       };
     }
@@ -226,14 +276,26 @@ export default function RealDataSystemTest() {
           : "0%",
       overallStatus: failedTests.length === 0 ? "PASS" : "PARTIAL",
       summary: {
-        dataCollection: testResults.dataCollection?.success
-          ? "✅ 正常"
-          : "❌ 异常",
-        abTestAssignment: testResults.abTestAssignment?.success
-          ? "✅ 正常"
-          : "❌ 异常",
-        dataAnalysis: testResults.dataAnalysis?.success ? "✅ 正常" : "❌ 异常",
-        apiEndpoints: testResults.apiEndpoints?.success ? "✅ 正常" : "❌ 异常",
+        dataCollection:
+          isTestResult(testResults.dataCollection) &&
+          testResults.dataCollection.success
+            ? "✅ 正常"
+            : "❌ 异常",
+        abTestAssignment:
+          isTestResult(testResults.abTestAssignment) &&
+          testResults.abTestAssignment.success
+            ? "✅ 正常"
+            : "❌ 异常",
+        dataAnalysis:
+          isTestResult(testResults.dataAnalysis) &&
+          testResults.dataAnalysis.success
+            ? "✅ 正常"
+            : "❌ 异常",
+        apiEndpoints:
+          isTestResult(testResults.apiEndpoints) &&
+          testResults.apiEndpoints.success
+            ? "✅ 正常"
+            : "❌ 异常",
       },
       recommendations: generateRecommendations(),
     };
@@ -243,11 +305,17 @@ export default function RealDataSystemTest() {
   const generateRecommendations = () => {
     const recommendations = [];
 
-    if (!testResults.dataCollection?.success) {
+    if (
+      !isTestResult(testResults.dataCollection) ||
+      !testResults.dataCollection.success
+    ) {
       recommendations.push("检查数据收集配置和用户同意设置");
     }
 
-    if (!testResults.apiEndpoints?.success) {
+    if (
+      !isTestResult(testResults.apiEndpoints) ||
+      !testResults.apiEndpoints.success
+    ) {
       recommendations.push("检查API端点配置和网络连接");
     }
 
@@ -301,6 +369,7 @@ export default function RealDataSystemTest() {
                 <h3 className="text-lg font-semibold mb-2">📊 数据收集测试</h3>
                 <div
                   className={`p-3 rounded ${
+                    isTestResult(testResults.dataCollection) &&
                     testResults.dataCollection.success
                       ? "bg-green-50"
                       : "bg-red-50"
@@ -308,18 +377,24 @@ export default function RealDataSystemTest() {
                 >
                   <p
                     className={
+                      isTestResult(testResults.dataCollection) &&
                       testResults.dataCollection.success
                         ? "text-green-700"
                         : "text-red-700"
                     }
                   >
-                    {testResults.dataCollection.message}
+                    {isTestResult(testResults.dataCollection)
+                      ? testResults.dataCollection.message
+                      : "测试结果未知"}
                   </p>
-                  {testResults.feedbackId && (
-                    <p className="text-sm text-gray-600 mt-2">
-                      反馈ID: {testResults.feedbackId}
-                    </p>
-                  )}
+                  {testResults.dataCollection &&
+                    typeof testResults.dataCollection === "object" &&
+                    "feedbackId" in testResults.dataCollection &&
+                    testResults.dataCollection.feedbackId && (
+                      <p className="text-sm text-gray-600 mt-2">
+                        反馈ID: {String(testResults.dataCollection.feedbackId)}
+                      </p>
+                    )}
                 </div>
               </div>
             )}
@@ -332,6 +407,7 @@ export default function RealDataSystemTest() {
                 </h3>
                 <div
                   className={`p-3 rounded ${
+                    isTestResult(testResults.abTestAssignment) &&
                     testResults.abTestAssignment.success
                       ? "bg-green-50"
                       : "bg-red-50"
@@ -339,27 +415,43 @@ export default function RealDataSystemTest() {
                 >
                   <p
                     className={
+                      isTestResult(testResults.abTestAssignment) &&
                       testResults.abTestAssignment.success
                         ? "text-green-700"
                         : "text-red-700"
                     }
                   >
-                    {testResults.abTestAssignment.message}
+                    {isTestResult(testResults.abTestAssignment)
+                      ? testResults.abTestAssignment.message
+                      : "测试结果未知"}
                   </p>
-                  {testResults.abTestAssignment.readiness && (
-                    <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        样本数:{" "}
-                        {testResults.abTestAssignment.readiness.sampleSize}
-                      </p>
-                      <p>
-                        就绪状态:{" "}
-                        {testResults.abTestAssignment.readiness.isReady
-                          ? "是"
-                          : "否"}
-                      </p>
-                    </div>
-                  )}
+                  {testResults.abTestAssignment &&
+                    typeof testResults.abTestAssignment === "object" &&
+                    "readiness" in testResults.abTestAssignment &&
+                    testResults.abTestAssignment.readiness &&
+                    typeof testResults.abTestAssignment.readiness ===
+                      "object" && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <p>
+                          数据点数:{" "}
+                          {"dataPointsCount" in
+                          testResults.abTestAssignment.readiness
+                            ? String(
+                                testResults.abTestAssignment.readiness
+                                  .dataPointsCount,
+                              )
+                            : "N/A"}
+                        </p>
+                        <p>
+                          就绪状态:{" "}
+                          {"isReady" in testResults.abTestAssignment.readiness
+                            ? testResults.abTestAssignment.readiness.isReady
+                              ? "是"
+                              : "否"
+                            : "N/A"}
+                        </p>
+                      </div>
+                    )}
                 </div>
               </div>
             )}
@@ -370,6 +462,7 @@ export default function RealDataSystemTest() {
                 <h3 className="text-lg font-semibold mb-2">📈 数据分析测试</h3>
                 <div
                   className={`p-3 rounded ${
+                    isTestResult(testResults.dataAnalysis) &&
                     testResults.dataAnalysis.success
                       ? "bg-green-50"
                       : "bg-red-50"
@@ -377,25 +470,44 @@ export default function RealDataSystemTest() {
                 >
                   <p
                     className={
+                      isTestResult(testResults.dataAnalysis) &&
                       testResults.dataAnalysis.success
                         ? "text-green-700"
                         : "text-red-700"
                     }
                   >
-                    {testResults.dataAnalysis.message}
+                    {isTestResult(testResults.dataAnalysis)
+                      ? testResults.dataAnalysis.message
+                      : "测试结果未知"}
                   </p>
-                  {testResults.dataAnalysis.dataQuality && (
-                    <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        总会话数:{" "}
-                        {testResults.dataAnalysis.dataQuality.totalSessions}
-                      </p>
-                      <p>
-                        总反馈数:{" "}
-                        {testResults.dataAnalysis.dataQuality.totalFeedback}
-                      </p>
-                    </div>
-                  )}
+                  {testResults.dataAnalysis &&
+                    typeof testResults.dataAnalysis === "object" &&
+                    "dataQuality" in testResults.dataAnalysis &&
+                    testResults.dataAnalysis.dataQuality &&
+                    typeof testResults.dataAnalysis.dataQuality ===
+                      "object" && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <p>
+                          总数据点:{" "}
+                          {"totalPoints" in testResults.dataAnalysis.dataQuality
+                            ? String(
+                                testResults.dataAnalysis.dataQuality
+                                  .totalPoints,
+                              )
+                            : "N/A"}
+                        </p>
+                        <p>
+                          会话数:{" "}
+                          {"sessionsCount" in
+                          testResults.dataAnalysis.dataQuality
+                            ? String(
+                                testResults.dataAnalysis.dataQuality
+                                  .sessionsCount,
+                              )
+                            : "N/A"}
+                        </p>
+                      </div>
+                    )}
                 </div>
               </div>
             )}
@@ -406,6 +518,7 @@ export default function RealDataSystemTest() {
                 <h3 className="text-lg font-semibold mb-2">🔌 API端点测试</h3>
                 <div
                   className={`p-3 rounded ${
+                    isTestResult(testResults.apiEndpoints) &&
                     testResults.apiEndpoints.success
                       ? "bg-green-50"
                       : "bg-red-50"
@@ -413,29 +526,52 @@ export default function RealDataSystemTest() {
                 >
                   <p
                     className={
+                      isTestResult(testResults.apiEndpoints) &&
                       testResults.apiEndpoints.success
                         ? "text-green-700"
                         : "text-red-700"
                     }
                   >
-                    {testResults.apiEndpoints.message}
+                    {isTestResult(testResults.apiEndpoints)
+                      ? testResults.apiEndpoints.message
+                      : "测试结果未知"}
                   </p>
-                  {testResults.apiEndpoints.results && (
-                    <div className="mt-2 text-sm text-gray-600">
-                      <p>
-                        会话API:{" "}
-                        {testResults.apiEndpoints.results.sessionAPI?.success
-                          ? "✅"
-                          : "❌"}
-                      </p>
-                      <p>
-                        反馈API:{" "}
-                        {testResults.apiEndpoints.results.feedbackAPI?.success
-                          ? "✅"
-                          : "❌"}
-                      </p>
-                    </div>
-                  )}
+                  {testResults.apiEndpoints &&
+                    typeof testResults.apiEndpoints === "object" &&
+                    "results" in testResults.apiEndpoints &&
+                    testResults.apiEndpoints.results &&
+                    typeof testResults.apiEndpoints.results === "object" && (
+                      <div className="mt-2 text-sm text-gray-600">
+                        <p>
+                          会话API:{" "}
+                          {"sessionAPI" in testResults.apiEndpoints.results &&
+                          testResults.apiEndpoints.results.sessionAPI &&
+                          typeof testResults.apiEndpoints.results.sessionAPI ===
+                            "object" &&
+                          "success" in
+                            testResults.apiEndpoints.results.sessionAPI
+                            ? testResults.apiEndpoints.results.sessionAPI
+                                .success
+                              ? "✅"
+                              : "❌"
+                            : "❌"}
+                        </p>
+                        <p>
+                          反馈API:{" "}
+                          {"feedbackAPI" in testResults.apiEndpoints.results &&
+                          testResults.apiEndpoints.results.feedbackAPI &&
+                          typeof testResults.apiEndpoints.results
+                            .feedbackAPI === "object" &&
+                          "success" in
+                            testResults.apiEndpoints.results.feedbackAPI
+                            ? testResults.apiEndpoints.results.feedbackAPI
+                                .success
+                              ? "✅"
+                              : "❌"
+                            : "❌"}
+                        </p>
+                      </div>
+                    )}
                 </div>
               </div>
             )}

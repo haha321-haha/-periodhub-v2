@@ -183,11 +183,32 @@ export default async function RootPage() {
               dangerouslySetInnerHTML={{
                 __html: `
                   (function() {
-                    const acceptLanguage = navigator.language || navigator.userLanguage || 'en';
-                    const locale = acceptLanguage.toLowerCase().startsWith('zh') ? 'zh' : 'en';
-                    setTimeout(function() {
-                      window.location.replace('/' + locale);
-                    }, 3000); // 3秒后重定向，给截图工具足够时间
+                    try {
+                      // 检测语言偏好
+                      const acceptLanguage = navigator.language || navigator.userLanguage || 'zh';
+                      const locale = acceptLanguage.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+
+                      // 延迟重定向，给截图工具足够时间
+                      setTimeout(function() {
+                        try {
+                          // 使用 location.href 而不是 location.replace，避免某些浏览器问题
+                          window.location.href = '/' + locale;
+                        } catch (e) {
+                          // 如果重定向失败，尝试使用 replace
+                          try {
+                            window.location.replace('/' + locale);
+                          } catch (e2) {
+                            // 最后的备用方案：直接跳转到默认语言
+                            window.location.href = '/zh';
+                          }
+                        }
+                      }, 3000); // 3秒后重定向，给截图工具足够时间
+                    } catch (e) {
+                      // 如果检测失败，直接跳转到默认语言
+                      setTimeout(function() {
+                        window.location.href = '/zh';
+                      }, 3000);
+                    }
                   })();
                 `,
               }}

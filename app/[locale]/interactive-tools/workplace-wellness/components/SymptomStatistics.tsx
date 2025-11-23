@@ -83,8 +83,8 @@ export default function SymptomStatistics() {
     ];
 
     commonSymptoms.forEach((symptom) => {
-      const occurrences = symptomRecords.filter(
-        (record) => record.symptoms?.includes(symptom),
+      const occurrences = symptomRecords.filter((record) =>
+        record.symptoms?.includes(symptom),
       );
 
       if (occurrences.length > 0) {
@@ -109,31 +109,6 @@ export default function SymptomStatistics() {
       Object.values(symptoms).sort((a, b) => b.frequency - a.frequency),
     );
   }, [periodData]);
-
-  // 生成症状模式
-  const generatePatterns = useCallback(() => {
-    const patterns: SymptomPattern[] = [];
-
-    // 分析症状组合模式
-    const symptomCombinations = analyzeSymptomCombinations();
-
-    symptomCombinations.forEach((combination) => {
-      patterns.push({
-        symptom: combination.name,
-        pattern: combination.pattern,
-        frequency: combination.frequency,
-        severity: combination.severity,
-        recommendations: generateRecommendations(combination.name),
-      });
-    });
-
-    setPatterns(patterns);
-  }, [analyzeSymptomCombinations, generateRecommendations]);
-
-  useEffect(() => {
-    analyzeSymptoms();
-    generatePatterns();
-  }, [periodData, locale, analyzeSymptoms, generatePatterns]);
 
   // 分析症状组合
   const analyzeSymptomCombinations = useCallback(() => {
@@ -185,6 +160,31 @@ export default function SymptomStatistics() {
     },
     [t],
   );
+
+  // 生成症状模式
+  const generatePatterns = useCallback(() => {
+    const patterns: SymptomPattern[] = [];
+
+    // 分析症状组合模式
+    const symptomCombinations = analyzeSymptomCombinations();
+
+    symptomCombinations.forEach((combination) => {
+      patterns.push({
+        symptom: combination.name,
+        pattern: combination.pattern,
+        frequency: combination.frequency,
+        severity: combination.severity,
+        recommendations: generateRecommendations(combination.name),
+      });
+    });
+
+    setPatterns(patterns);
+  }, [analyzeSymptomCombinations, generateRecommendations]);
+
+  useEffect(() => {
+    analyzeSymptoms();
+    generatePatterns();
+  }, [periodData, locale, analyzeSymptoms, generatePatterns]);
 
   // 计算趋势
   const calculateTrend = (

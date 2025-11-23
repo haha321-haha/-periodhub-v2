@@ -97,18 +97,6 @@ export default function WorkImpactAnalysis() {
     },
   ];
 
-  useEffect(() => {
-    analyzeWorkImpact();
-    generateWorkPatterns();
-    generateInsights();
-  }, [
-    periodData,
-    locale,
-    analyzeWorkImpact,
-    generateWorkPatterns,
-    generateInsights,
-  ]);
-
   // 分析工作影响数据
   const analyzeWorkImpact = useCallback(() => {
     const workImpacts: WorkImpactData[] = [];
@@ -232,6 +220,18 @@ export default function WorkImpactAnalysis() {
 
     setInsights(insights);
   }, [workData, t]);
+
+  useEffect(() => {
+    analyzeWorkImpact();
+    generateWorkPatterns();
+    generateInsights();
+  }, [
+    periodData,
+    locale,
+    analyzeWorkImpact,
+    generateWorkPatterns,
+    generateInsights,
+  ]);
 
   // 辅助函数
   const calculateWorkEfficiency = (painLevel: number): number => {

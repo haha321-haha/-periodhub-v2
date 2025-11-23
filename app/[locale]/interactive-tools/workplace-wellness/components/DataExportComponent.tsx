@@ -270,10 +270,27 @@ export default function DataExportComponent() {
                     : data.data.nutrition,
               },
             }
-          : {
-              ...data,
-              data: "data" in maskedCoreData ? maskedCoreData.data : data.data,
-            };
+          : data.type === "period"
+            ? {
+                type: "period" as const,
+                data:
+                  "data" in maskedCoreData &&
+                  Array.isArray(maskedCoreData.data) &&
+                  maskedCoreData.data.length > 0 &&
+                  "date" in maskedCoreData.data[0]
+                    ? (maskedCoreData.data as PeriodRecord[])
+                    : data.data,
+              }
+            : {
+                type: "nutrition" as const,
+                data:
+                  "data" in maskedCoreData &&
+                  Array.isArray(maskedCoreData.data) &&
+                  maskedCoreData.data.length > 0 &&
+                  "name" in maskedCoreData.data[0]
+                    ? (maskedCoreData.data as NutritionRecommendation[])
+                    : data.data,
+              };
 
       // 模拟导出延迟
       await new Promise((resolve) => setTimeout(resolve, 2000));

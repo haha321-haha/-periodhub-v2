@@ -3,7 +3,7 @@
  * 基于HVsLYEp现有结构设计，不重复造轮子
  */
 
-import type { AssessmentAnalyticsRecord } from "../shared/types";
+import type { AssessmentAnalyticsRecord } from "../../shared/types";
 import type { RecommendationFeedbackAction } from "./recommendation";
 
 // 基础类型定义

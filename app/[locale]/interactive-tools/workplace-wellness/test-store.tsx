@@ -12,16 +12,35 @@ export default function TestStore() {
     useWorkplaceWellnessActions();
   const [testMessage, setTestMessage] = useState("");
   const [isClient, setIsClient] = useState(false);
-  const activeTab = useWorkplaceWellnessStore((state) => state.activeTab);
-  const calendar = useWorkplaceWellnessStore((state) => state.calendar);
-  const workImpact = useWorkplaceWellnessStore((state) => state.workImpact);
-  const nutrition = useWorkplaceWellnessStore((state) => state.nutrition);
+  const activeTab = useWorkplaceWellnessStore((state) => state.activeTab) as
+    | "calendar"
+    | "nutrition"
+    | "export"
+    | "settings"
+    | "work-impact"
+    | "analysis"
+    | "assessment"
+    | "recommendations"
+    | "tracking"
+    | "analytics";
+  const calendar = useWorkplaceWellnessStore(
+    (state) => state.calendar,
+  ) as CalendarState;
+  const workImpact = useWorkplaceWellnessStore(
+    (state) => state.workImpact,
+  ) as WorkImpactData;
+  const nutrition = useWorkplaceWellnessStore(
+    (state) => state.nutrition,
+  ) as NutritionData;
 
   // 确保只在客户端运行
   useEffect(() => {
     setIsClient(true);
     try {
-      useWorkplaceWellnessStore.persist?.rehydrate?.();
+      const store = useWorkplaceWellnessStore as unknown as {
+        persist?: { rehydrate?: () => void | Promise<void> };
+      };
+      store.persist?.rehydrate?.();
     } catch (error) {
       logWarn("无法重新hydration", error, "test-store");
     }
@@ -71,7 +90,10 @@ export default function TestStore() {
   const testPersist = () => {
     try {
       // Zustand persist 中间件会自动持久化，这里只是检查当前状态
-      const currentState = useWorkplaceWellnessStore.getState();
+      const store = useWorkplaceWellnessStore as unknown as {
+        getState: () => WorkplaceWellnessStore;
+      };
+      const currentState = store.getState();
       // 通过更新 activeTab 来触发状态更新，从而触发自动持久化
       setActiveTab(currentState.activeTab);
       setTestMessage(
@@ -89,7 +111,10 @@ export default function TestStore() {
   const testForceHydration = () => {
     try {
       // 使用正确的 API 访问 persist
-      const rehydrate = useWorkplaceWellnessStore.persist?.rehydrate;
+      const store = useWorkplaceWellnessStore as unknown as {
+        persist?: { rehydrate?: () => void | Promise<void> };
+      };
+      const rehydrate = store.persist?.rehydrate;
       if (rehydrate) {
         rehydrate();
         setTestMessage("强制hydration完成");
@@ -128,7 +153,10 @@ export default function TestStore() {
   const testStoreDirectWrite = () => {
     try {
       // 直接写入localStorage测试数据
-      const state = useWorkplaceWellnessStore.getState();
+      const store = useWorkplaceWellnessStore as unknown as {
+        getState: () => WorkplaceWellnessStore;
+      };
+      const state = store.getState();
       const testState = {
         ...state,
         calendar: {

@@ -5971,6 +5971,65 @@
         "exportReport": "导出报告"
       }
     },
+    "nutritionRecommendationGenerator": {
+      "title": "营养推荐生成器",
+      "description": "请选择您的经期阶段、健康目标和中医体质，生成个性化营养建议",
+      "journeyTitle": "✨ 开启您的个性化营养之旅",
+      "steps": {
+        "step1": "选择阶段",
+        "step2": "设定目标",
+        "step3": "生成建议"
+      },
+      "tip": "💡 提示：所有建议均基于科学研究和中医理论",
+      "meta": {
+        "title": "营养推荐生成器 - 个性化营养建议 | 经期健康中心",
+        "description": "根据您的经期阶段、健康目标和中医体质，生成个性化营养建议。结合现代医学和传统中医的科学指导。",
+        "keywords": "营养建议生成器,经期营养,中医体质饮食,个性化营养方案,女性健康营养,经期营养管理",
+        "ogTitle": "营养推荐生成器 - 个性化营养建议 | 经期健康中心",
+        "ogDescription": "根据您的经期阶段、健康目标和中医体质，生成个性化营养建议。结合现代医学和传统中医的科学指导。",
+        "twitterTitle": "营养推荐生成器 - 个性化营养建议 | 经期健康中心",
+        "twitterDescription": "根据您的经期阶段、健康目标和中医体质，生成个性化营养建议。结合现代医学和传统中医的科学指导。"
+      },
+      "structuredData": {
+        "applicationCategory": "健康应用",
+        "operatingSystem": "任意",
+        "browserRequirements": "HTML5, CSS3, JavaScript",
+        "providerName": "经期健康中心"
+      },
+      "relatedTools": {
+        "title": "相关工具",
+        "cycleTracker": {
+          "title": "智能周期追踪器",
+          "description": "智能追踪您的月经周期，预测下次经期，记录症状变化，帮助您更好地了解身体规律"
+        },
+        "constitutionTest": {
+          "title": "中医体质测试",
+          "description": "通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议"
+        }
+      },
+      "relatedArticles": {
+        "title": "相关营养文章",
+        "antiInflammatory": {
+          "title": "抗炎饮食指南",
+          "description": "通过食物缓解经期疼痛的科学饮食方法，了解哪些食物有助于减少炎症和疼痛",
+          "readTime": "8分钟阅读"
+        },
+        "gingerTea": {
+          "title": "生姜茶缓解经期疼痛",
+          "description": "5种经科学验证的生姜茶配方，有效缓解经期疼痛，学习正确的制作技巧和饮用时机",
+          "readTime": "6分钟阅读"
+        },
+        "herbalTea": {
+          "title": "有效的草本茶配方",
+          "description": "5种经科学验证的草本茶配方，自然缓解经期不适，包括肉桂茶、茴香籽茶等经典配方",
+          "readTime": "7分钟阅读"
+        }
+      },
+      "footer": {
+        "text": "个性化健康建议，触手可及。",
+        "disclaimer": "本工具提供一般性营养指导，不应替代专业医疗建议。"
+      }
+    },
     "documentation": {
       "title": "文档框架",
       "description": "完善的文档体系，提升开发效率",

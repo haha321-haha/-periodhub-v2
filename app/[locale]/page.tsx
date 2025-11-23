@@ -182,7 +182,7 @@ export default async function HomePage({
   try {
     const resolvedParams = await params;
     locale = resolvedParams.locale || "zh";
-  } catch (error) {
+  } catch {
     // 如果参数解析失败，使用默认语言
     locale = "zh";
   }

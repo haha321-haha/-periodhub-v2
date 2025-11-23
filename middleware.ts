@@ -1,20 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * 🎯 终极解决方案：只检查 VERCEL_ENV === "preview"
+ * 🎯 最简单可靠的方案：只提供 /preview 端点
  *
- * 核心原理：
- * - 环境变量由 Vercel 保证，在预览部署中永远为真
- * - 完全绕过 Next.js 路由，直接返回 HTML
- * - 不依赖请求头、User-Agent 等可能变化的因素
- * - 在 Middleware 层面最早拦截，不会执行到 app/page.tsx
+ * 核心思路：
+ * 1. 完全移除复杂的检测逻辑
+ * 2. 只提供 /preview 端点返回静态 HTML
+ * 3. 在 Vercel 项目设置中配置预览 URL 为 /preview
+ * 4. 普通用户访问根路径时，正常显示主页
  *
- * 成功率：100%
+ * 这样：
+ * - Vercel 截图生成器访问 /preview → 返回静态 HTML ✅
+ * - 普通用户访问 / → 正常显示主页 ✅
+ * - 不需要复杂的检测逻辑 ✅
  */
 
 /**
  * 生成完全静态的预览 HTML
- * 不包含任何 JavaScript，确保 Vercel 截图生成器可以立即截取
  */
 function generateStaticPreviewHTML(): string {
   const baseUrl =
@@ -55,87 +57,31 @@ function generateStaticPreviewHTML(): string {
 }
 
 /**
- * 检测是否是 Vercel 截图生成器的请求
- * 通过检测特定的请求头来判断
- */
-function isVercelScreenshotRequest(request: NextRequest): boolean {
-  const userAgent = request.headers.get("user-agent") || "";
-  const referer = request.headers.get("referer") || "";
-
-  // Vercel 截图生成器通常使用特定的 User-Agent
-  const screenshotAgents = [
-    "vercel",
-    "screenshot",
-    "headless",
-    "puppeteer",
-    "playwright",
-    "chromium",
-  ];
-
-  const isScreenshotAgent = screenshotAgents.some((agent) =>
-    userAgent.toLowerCase().includes(agent),
-  );
-
-  // 检查是否有 Vercel 特定的请求头
-  const xVercelId = request.headers.get("x-vercel-id");
-  const xVercelDeployment = request.headers.get("x-vercel-deployment");
-
-  // 如果是预览环境，并且检测到截图生成器的特征，返回 true
-  if (process.env.VERCEL_ENV === "preview") {
-    if (isScreenshotAgent || xVercelId || xVercelDeployment) {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-/**
- * 中间件 - 优化方案
- * 只对 Vercel 截图生成器的请求返回静态 HTML
- * 普通用户访问预览部署时，可以看到正常的主页
+ * 中间件 - 最简单的方案
+ * 只提供 /preview 端点，不进行任何检测
  */
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // 只处理根路径和 /preview 路径
-  if (pathname === "/" || pathname === "/preview") {
-    // 如果是 /preview 路径，直接返回静态 HTML（用于 Vercel 项目设置配置）
-    if (pathname === "/preview") {
-      return new NextResponse(generateStaticPreviewHTML(), {
-        status: 200,
-        headers: {
-          "Content-Type": "text/html; charset=utf-8",
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          Pragma: "no-cache",
-          Expires: "0",
-          "X-Preview-Path": "/preview",
-        },
-      });
-    }
-
-    // 检测是否是 Vercel 截图生成器的请求
-    if (isVercelScreenshotRequest(request)) {
-      // 只对截图生成器返回静态 HTML
-      return new NextResponse(generateStaticPreviewHTML(), {
-        status: 200,
-        headers: {
-          "Content-Type": "text/html; charset=utf-8",
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          Pragma: "no-cache",
-          Expires: "0",
-          "X-Preview-Detected": "true",
-          "X-Preview-Path": pathname,
-        },
-      });
-    }
+  // 只处理 /preview 路径
+  if (pathname === "/preview") {
+    return new NextResponse(generateStaticPreviewHTML(), {
+      status: 200,
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        Pragma: "no-cache",
+        Expires: "0",
+        "X-Preview-Path": "/preview",
+      },
+    });
   }
 
-  // 对于普通用户请求，继续正常处理
+  // 对于所有其他请求（包括根路径），继续正常处理
   // 让 app/page.tsx 处理语言检测和重定向
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/preview"],
+  matcher: ["/preview"],
 };

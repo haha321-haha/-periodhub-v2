@@ -14,54 +14,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /**
- * 检测是否是Vercel截图生成器的请求（用于生成预览截图）
- *
- * 注意：此函数只检测真正的截图生成器请求，不检测普通用户访问
- * 主要检测在 middleware.ts 中完成，这里作为备用检测
- *
- * 关键：不检测域名或 Referer，因为这些会导致普通用户也被识别为预览请求
- */
-async function isVercelPreviewRequest(): Promise<boolean> {
-  try {
-    const headersList = await headers();
-    const userAgent = headersList.get("user-agent") || "";
-
-    // 检查 Vercel 特定的请求头（最可靠的标识）
-    const xVercelId = headersList.get("x-vercel-id");
-    const xVercelDeployment = headersList.get("x-vercel-deployment");
-    const xVercelSignature = headersList.get("x-vercel-signature");
-
-    // 只检测明确的截图生成器 User-Agent（不包含通用的 "bot" 或 "crawler"）
-    const screenshotAgents = [
-      "vercelbot", // Vercel 官方爬虫
-      "vercel-screenshot", // Vercel 截图服务
-      "headless-chrome", // Headless Chrome
-      "puppeteer", // Puppeteer
-      "playwright", // Playwright
-    ];
-
-    const isScreenshotAgent = screenshotAgents.some((agent) =>
-      userAgent.toLowerCase().includes(agent),
-    );
-
-    // 只检测 Vercel 特定的请求头，不检测域名或 Referer
-    // 这样可以避免普通用户访问预览部署时被误判
-    const hasVercelHeaders =
-      !!xVercelId || !!xVercelDeployment || !!xVercelSignature;
-
-    // 只有检测到明确的截图生成器特征才返回 true
-    if (isScreenshotAgent || hasVercelHeaders) {
-      return true;
-    }
-
-    // 默认返回 false，确保正常用户请求不会被误判
-    return false;
-  } catch {
-    return false;
-  }
-}
-
-/**
  * 根据 Accept-Language 头部检测用户偏好的语言
  */
 async function detectLocaleFromHeaders(): Promise<Locale> {
@@ -111,138 +63,13 @@ async function detectLocaleFromHeaders(): Promise<Locale> {
 
 export default async function RootPage() {
   try {
-    // 检测是否是Vercel预览请求
-    const isPreview = await isVercelPreviewRequest();
-
-    // 在开发环境下记录预览状态（用于调试）
-    if (process.env.NODE_ENV === "development" && isPreview) {
-      // eslint-disable-next-line no-console
-      console.log("[RootPage] Vercel preview request detected");
-    }
-
-    // 如果是预览请求，直接返回静态预览内容，不进行任何重定向
-    if (isPreview) {
-      const baseUrl =
-        process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
-
-      return (
-        <html lang="zh">
-          <head>
-            <meta charSet="utf-8" />
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1"
-            />
-            <title>PeriodHub - 专业痛经缓解和月经健康管理平台</title>
-            <meta
-              name="description"
-              content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。"
-            />
-
-            {/* Open Graph 标签用于预览 */}
-            <meta
-              property="og:title"
-              content="PeriodHub - 专业痛经缓解和月经健康管理平台"
-            />
-            <meta
-              property="og:description"
-              content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。"
-            />
-            <meta
-              property="og:image"
-              content={`${baseUrl}/images/hero-bg.jpg`}
-            />
-            <meta property="og:type" content="website" />
-            <meta property="og:url" content={baseUrl} />
-
-            {/* Twitter Card 标签 */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta
-              name="twitter:title"
-              content="PeriodHub - 专业痛经缓解和月经健康管理平台"
-            />
-            <meta
-              name="twitter:description"
-              content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。"
-            />
-            <meta
-              name="twitter:image"
-              content={`${baseUrl}/images/hero-bg.jpg`}
-            />
-          </head>
-          <body
-            style={{
-              margin: 0,
-              padding: 0,
-              fontFamily:
-                "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              minHeight: "100vh",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
-            }}
-          >
-            <div
-              style={{
-                textAlign: "center",
-                padding: "2rem",
-                maxWidth: "600px",
-              }}
-            >
-              <h1
-                style={{
-                  fontSize: "3rem",
-                  marginBottom: "1rem",
-                  fontWeight: "bold",
-                }}
-              >
-                PeriodHub
-              </h1>
-              <h2
-                style={{
-                  fontSize: "1.5rem",
-                  marginBottom: "1rem",
-                  opacity: 0.9,
-                }}
-              >
-                专业痛经缓解和月经健康管理平台
-              </h2>
-              <p
-                style={{
-                  fontSize: "1.2rem",
-                  opacity: 0.8,
-                  lineHeight: 1.6,
-                  marginBottom: "2rem",
-                }}
-              >
-                提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。
-              </p>
-              <div
-                style={{
-                  marginTop: "2rem",
-                  padding: "1rem",
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  borderRadius: "8px",
-                }}
-              >
-                <p style={{ fontSize: "1rem", opacity: 0.7 }}>
-                  Vercel Preview Mode - 截图生成中...
-                </p>
-              </div>
-            </div>
-          </body>
-        </html>
-      );
-    }
-
-    // 对于普通用户，检测语言偏好并立即重定向
+    // 移除所有预览检测逻辑，始终正常重定向
+    // 这样普通用户访问预览部署时能看到正常主页
+    
+    // 检测用户语言偏好并立即重定向
     const preferredLocale = await detectLocaleFromHeaders();
-    const validLocale = locales.includes(preferredLocale)
-      ? preferredLocale
-      : defaultLocale;
-
+    const validLocale = locales.includes(preferredLocale) ? preferredLocale : defaultLocale;
+    
     // 使用meta refresh确保快速重定向
     return (
       <html lang="zh">

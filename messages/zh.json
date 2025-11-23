@@ -1,4 +1,6 @@
 {
+  "0": "Benefits",
+  "4": "4",
   "site": {
     "name": "Period Hub",
     "title": "Period Hub - 经期健康管理平台",
@@ -227,6 +229,41 @@
           "email": "数据保护咨询邮箱",
           "subject": "主题：隐私政策问题",
           "responseTime": "我们会在 48 小时内回复"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -561,6 +598,41 @@
         "callout": {
           "title": "下一步行动建议",
           "text": "如果评估结果建议就医，请不要拖延。准备好症状记录，选择合适的就诊时间，主动与医生沟通你的担忧。"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -646,6 +718,41 @@
           "advice": "疼痛完全无法忍受，这是医疗紧急情况，需要立即就医。",
           "rec1": "立即就医或拨打急救电话",
           "rec2": "不要独自前往医院，寻求帮助"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -883,6 +990,41 @@
         "s10": {
           "text": "呕吐或无法进食",
           "description": "严重的胃肠道症状可能提示急腹症或其他严重情况，需要医疗评估"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -1047,10 +1189,7 @@
             "追踪症状随时间的模式",
             "注意任何触发因素或模式"
           ],
-          "general": [
-            "继续定期健康监测",
-            "保持健康的生活习惯"
-          ]
+          "general": ["继续定期健康监测", "保持健康的生活习惯"]
         }
       },
       "emergency": {
@@ -2701,32 +2840,35 @@
     "combinationTherapy": {
       "title": "组合使用效果更佳",
       "subtitle": "根据疼痛程度选择最佳组合方案",
-      "combinations": [
-        {
-          "level": "轻度疼痛（1-3分）",
+      "combinations": {
+        "0": {
           "methods": {
             "0": "热敷 + 深呼吸",
-            "1": "轻度拉伸 + 穴位按摩"
+            "1": "轻度拉伸 + 穴位按摩",
+            "2": "轻度伸展运动"
           },
+          "level": "轻度疼痛（1-3分）",
           "description": "适合日常轻微不适，以自然方法为主"
         },
-        {
-          "level": "中度疼痛（4-6分）",
+        "1": {
           "methods": {
             "0": "热敷 + 穴位按摩 + 温和运动",
-            "1": "NSAID + 热敷 + 深呼吸"
+            "1": "NSAID + 热敷 + 深呼吸",
+            "2": "穴位按摩辅助"
           },
+          "level": "中度疼痛（4-6分）",
           "description": "需要多种方法结合，可考虑药物辅助"
         },
-        {
-          "level": "重度疼痛（7-10分）",
+        "2": {
           "methods": {
             "0": "NSAID + 热敷 + 穴位按摩 + 深呼吸",
-            "1": "立即就医 + 应急处理"
+            "1": "立即就医 + 应急处理",
+            "2": "紧急情况联系医疗专业人员"
           },
+          "level": "重度疼痛（7-10分）",
           "description": "建议立即就医，同时进行应急处理"
         }
-      ]
+      }
     },
     "emergencyResponse": {
       "title": "紧急疼痛应对",
@@ -2736,7 +2878,12 @@
         "0": "立即服用NSAID类药物（如布洛芬）",
         "1": "使用热敷垫或热水袋敷下腹部",
         "2": "进行4-7-8呼吸法缓解紧张",
-        "3": "按摩三阴交、合谷穴等关键穴位"
+        "3": "按摩三阴交、合谷穴等关键穴位",
+        "action1": "Apply heat or cold therapy immediately",
+        "action2": "Take prescribed pain medication",
+        "action3": "Rest in a comfortable position",
+        "action4": "Practice deep breathing exercises",
+        "action5": "Contact your healthcare provider if pain persists"
       },
       "medicalIndicators": {
         "title": "就医指征提醒",
@@ -2744,7 +2891,12 @@
           "0": "疼痛持续超过3天且无缓解",
           "1": "出现发热、恶心、呕吐等症状",
           "2": "疼痛突然加重或性质改变",
-          "3": "非经期时也有严重盆腔疼痛"
+          "3": "非经期时也有严重盆腔疼痛",
+          "indicator1": "Severe pain that doesn't respond to treatment",
+          "indicator2": "Fever accompanying the pain",
+          "indicator3": "Unusual bleeding or discharge",
+          "indicator4": "Pain that worsens rapidly",
+          "indicator5": "Symptoms of infection"
         }
       },
       "emergencyKit": {
@@ -2754,7 +2906,47 @@
           "1": "热敷垫或热水袋",
           "2": "暖宝宝贴",
           "3": "薄荷精油或清凉油",
-          "4": "医生联系方式"
+          "4": "医生联系方式",
+          "item1": "Heat pack or hot water bottle",
+          "item2": "Cold pack or ice pack",
+          "item3": "Pain medication",
+          "item4": "Comfortable clothing",
+          "item5": "Emergency contact numbers"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -2991,6 +3183,41 @@
         "costEffective": {
           "title": "经济实用",
           "description": "成本低廉，易于实施"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -3384,6 +3611,41 @@
             "hotConstitution": "热性体质：冷敷清热",
             "qiDeficiency": "气虚体质：呼吸练习补气"
           }
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -3540,6 +3802,41 @@
           "description": "经期应急物品清单和快速缓解方法",
           "benefits": "应急准备",
           "benefitsValue": "随时应对突发疼痛"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     }
@@ -3661,9 +3958,9 @@
       "entryForm": {
         "date": "日期",
         "painLevel": "疼痛等级",
-      "painLevelMin": "无痛",
-      "painLevelMax": "极痛",
-      "saveError": "保存记录时出错，请重试。",
+        "painLevelMin": "无痛",
+        "painLevelMax": "极痛",
+        "saveError": "保存记录时出错，请重试。",
         "location": "疼痛位置",
         "symptoms": "相关症状",
         "remedies": "使用的缓解方法",
@@ -3797,6 +4094,41 @@
               "3": "学习放松技巧"
             }
           }
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       },
       "analytics": {
@@ -3944,11 +4276,7 @@
         "title": "使用建议：",
         "bestTiming": {
           "title": "最佳时机：",
-          "items": [
-            "疼痛刚开始时",
-            "感到焦虑紧张时",
-            "睡前放松时"
-          ]
+          "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
         },
         "precautions": {
           "title": "注意事项：",
@@ -4262,9 +4590,9 @@
           "date": "日期",
           "type": "类型",
           "painLevel": "疼痛等级",
-      "painLevelMin": "无痛",
-      "painLevelMax": "极痛",
-      "saveError": "保存记录时出错，请重试。",
+          "painLevelMin": "无痛",
+          "painLevelMax": "极痛",
+          "saveError": "保存记录时出错，请重试。",
           "flow": "流量",
           "notes": "备注",
           "foodName": "食物名称",
@@ -4333,7 +4661,9 @@
         "calendar": {
           "title": "职场健康日历",
           "description": "智能追踪和管理您的经期健康，在工作环境中更好地规划和管理经期相关需求。",
-          "cta": "开始使用日历"
+          "cta": "开始使用日历",
+          "painLevelMin": "No pain",
+          "painLevelMax": "Extreme"
         },
         "calculator": {
           "title": "痛经影响计算器",
@@ -4358,7 +4688,66 @@
       "cycleTracker": "周期追踪器",
       "constitutionTest": "体质测试"
     },
-    "keywords": "经期健康管理,症状评估,疼痛追踪,数据分析,个性化建议,痛经缓解,健康工具,经期管理,疼痛分析,健康评估"
+    "keywords": "经期健康管理,症状评估,疼痛追踪,数据分析,个性化建议,痛经缓解,健康工具,经期管理,疼痛分析,健康评估",
+    "nutritionRecommendationGenerator": {
+      "title": "营养推荐生成器",
+      "description": "Please select your menstrual phase, health goals, and TCM constitution to generate personalized nutrition recommendations",
+      "journeyTitle": "✨ Start Your Personalized Nutrition Journey",
+      "steps": {
+        "step1": "Select Phase",
+        "step2": "Set Goals",
+        "step3": "Generate"
+      },
+      "tip": "💡 Tip: All recommendations are based on scientific research and TCM theory",
+      "meta": {
+        "title": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
+        "description": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
+        "keywords": "nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management",
+        "ogTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
+        "ogDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
+        "twitterTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
+        "twitterDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine."
+      },
+      "structuredData": {
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "HTML5, CSS3, JavaScript",
+        "providerName": "Period Hub"
+      },
+      "relatedTools": {
+        "title": "Related 工具s",
+        "cycleTracker": {
+          "title": "Smart Cycle Tracker",
+          "description": "Intelligently track your menstrual cycle, predict next period, record symptom changes, helping you better understand your body patterns"
+        },
+        "constitutionTest": {
+          "title": "TCM Constitution Test",
+          "description": "Understand your TCM constitution type through 11 questions and get personalized acupuncture points, diet and lifestyle recommendations"
+        }
+      },
+      "relatedArticles": {
+        "title": "Related Nutrition Articles",
+        "antiInflammatory": {
+          "title": "Anti-Inflammatory Diet 指南",
+          "description": "Scientific dietary methods to relieve menstrual pain through food, understanding which foods help reduce inflammation and pain",
+          "readTime": "8 min read"
+        },
+        "gingerTea": {
+          "title": "Ginger Tea for Menstrual Pain Relief",
+          "description": "5 scientifically proven ginger tea recipes for effective menstrual pain relief, learn proper preparation techniques and timing",
+          "readTime": "6 min read"
+        },
+        "herbalTea": {
+          "title": "Effective Herbal Tea Recipes",
+          "description": "5 scientifically proven herbal tea recipes for natural menstrual relief, including cinnamon tea, fennel seed tea and other classic formulas",
+          "readTime": "7 min read"
+        }
+      },
+      "footer": {
+        "text": "Personalized wellness at your fingertips.",
+        "disclaimer": "This tool provides general nutrition guidance and should not replace professional medical advice."
+      }
+    }
   },
   "periodPainAssessmentPage": {
     "tool": {
@@ -4660,6 +5049,14 @@
     "painTracker": {
       "title": "经期疼痛追踪系统",
       "description": "记录疼痛程度与位置，分析疼痛模式，获取个性化建议。",
+      "features": {
+        "dailyRecording": "每日疼痛记录与追踪",
+        "patternVisualization": "疼痛模式可视化分析",
+        "trendCharts": "症状趋势图表展示",
+        "cyclicalIdentification": "周期性疼痛识别",
+        "triggerAnalysis": "触发因素分析",
+        "dataExport": "数据导出与分享"
+      },
       "toolTitle": "疼痛记录",
       "toolDescription": "记录您今天的疼痛情况，帮助我们更好地了解您的疼痛模式。",
       "painLevel": "疼痛程度（1-10）",
@@ -4685,11 +5082,7 @@
         "title": "使用建议：",
         "bestTiming": {
           "title": "最佳时机：",
-          "items": [
-            "疼痛刚开始时",
-            "感到焦虑紧张时",
-            "睡前放松时"
-          ]
+          "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
         },
         "precautions": {
           "title": "注意事项：",
@@ -4698,6 +5091,41 @@
             "初学者3-4个循环即可",
             "如感到头晕请停止练习"
           ]
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 评估",
+          "assessmentPrompt": {
+            "title": "完成PHQ-9心理健康评估",
+            "description": "PHQ-9是一个快速评估抑郁症症状的工具，可以帮助您更好地了解自己的心理状态",
+            "button": "开始评估"
+          }
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -4710,7 +5138,70 @@
         "assessmentFailedDesc": "评估过程中发生错误。请重试。",
         "loading": "正在加载...",
         "calculating": "正在计算...",
-        "generatingRecommendations": "正在生成建议..."
+        "generatingRecommendations": "正在生成建议...",
+        "resultsSaved": "结果已保存",
+        "resultsSavedDesc": "您的评估结果已保存到本地存储。"
+      },
+      "recommendations": {
+        "workplaceSupport": {
+          "title": "职场支持建议",
+          "description": "您的症状严重影响了您的工作。寻求支持非常重要。",
+          "action1": "首先记录症状对工作的影响。将我们的完整报告作为个人工具。",
+          "action2": "研究您公司现有的病假和弹性工作政策。",
+          "action3": "与HR部门讨论合理的住宿安排。",
+          "timeframe": "建议实施"
+        },
+        "personalCare": {
+          "title": "个人护理建议",
+          "description": "关注您的个人健康和舒适度。",
+          "action1": "建立规律的作息时间。",
+          "action2": "练习放松技巧，如深呼吸或冥想。",
+          "action3": "保持健康的饮食习惯。",
+          "timeframe": "建议实施"
+        },
+        "medicalAdvice": {
+          "title": "医疗建议",
+          "description": "考虑寻求专业医疗建议。",
+          "action1": "预约妇科医生进行详细检查。",
+          "action2": "讨论疼痛管理方案。",
+          "action3": "了解可能的治疗方案。",
+          "timeframe": "建议实施"
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 评估",
+          "assessmentPrompt": {
+            "title": "完成PHQ-9心理健康评估",
+            "description": "PHQ-9是一个快速评估抑郁症症状的工具，可以帮助您更好地了解自己的心理状态",
+            "button": "开始评估"
+          }
+        },
+        "results": {
+          "title": "评估结果",
+          "subtitle": "基于您的回答，我们为您生成了个性化建议",
+          "resultLabel": "评估结果",
+          "scoreLabel": "得分",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "可能影响您的压力因素",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "您可以重点关注的改善领域",
+          "stressLevels": {
+            "low": "低压力",
+            "moderate": "中等压力",
+            "high": "高压力",
+            "severe": "严重压力"
+          }
+        },
+        "buttons": {
+          "restartAssessment": "重新开始评估",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "即将推出"
+        },
+        "alerts": {
+          "paymentComingSoon": "付费功能即将推出"
+        }
       },
       "severity": {
         "mild": "轻度",
@@ -4897,32 +5388,6 @@
           "readTime": "8分钟阅读"
         }
       },
-      "recommendations": {
-        "workplaceSupport": {
-          "title": "职场支持建议",
-          "description": "您的症状严重影响了您的工作。寻求支持非常重要。",
-          "action1": "首先记录症状对工作的影响。将我们的完整报告作为个人工具。",
-          "action2": "研究您公司现有的病假和弹性工作政策。",
-          "action3": "与HR部门讨论合理的住宿安排。",
-          "timeframe": "建议实施"
-        },
-        "personalCare": {
-          "title": "个人护理建议",
-          "description": "关注您的个人健康和舒适度。",
-          "action1": "建立规律的作息时间。",
-          "action2": "练习放松技巧，如深呼吸或冥想。",
-          "action3": "保持健康的饮食习惯。",
-          "timeframe": "建议实施"
-        },
-        "medicalAdvice": {
-          "title": "医疗建议",
-          "description": "考虑寻求专业医疗建议。",
-          "action1": "预约妇科医生进行详细检查。",
-          "action2": "讨论疼痛管理方案。",
-          "action3": "了解可能的治疗方案。",
-          "timeframe": "建议实施"
-        }
-      },
       "modes": {
         "simplified": "简化版评估",
         "detailed": "详细版评估",
@@ -4990,6 +5455,41 @@
             "leave": "有明确的经期休假政策",
             "none": "不需要特殊支持"
           }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9 评估",
+          "assessmentPrompt": {
+            "title": "完成PHQ-9心理健康评估",
+            "description": "PHQ-9是一个快速评估抑郁症症状的工具，可以帮助您更好地了解自己的心理状态",
+            "button": "开始评估"
+          }
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -5597,6 +6097,41 @@
         "validation": {
           "title": "科学验证",
           "description": "基于50+医学研究，92%准确率"
+        },
+        "results": {
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
+          "resultLabel": "评估结果",
+          "scoreLabel": "压力得分",
+          "basicRecommendations": "基本建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
+          "improvementFocus": "改善重点",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
+          "stressLevels": {
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
+        },
+        "buttons": {
+          "restartAssessment": "重新评估",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -5788,11 +6323,7 @@
       "office": {
         "title": "办公/职场场景",
         "description": "职场经期疼痛专业管理方案：办公环境隐蔽缓解技巧、会议应急包准备、职场饮食调理策略。提供适合办公室环境的痛经缓解方法，让您在工作中保持专业形象的同时有效缓解疼痛。基于循证医学的专业指导，适合各行业职场女性使用。",
-        "features": [
-          "会议应急包",
-          "办公椅拉伸",
-          "职场饮食管理"
-        ],
+        "features": ["会议应急包", "办公椅拉伸", "职场饮食管理"],
         "emergencyKit": {
           "title": "会议应急包",
           "categories": {
@@ -6015,20 +6546,12 @@
       "partnerCommunication": {
         "title": "伴侣沟通场景",
         "description": "专业的伴侣沟通场景解决方案，帮助伴侣更好地理解痛经，提供针对性的沟通策略和情感支持技巧。包含理解测试、30天训练营和个性化指导，帮助您建立更好的理解和沟通。",
-        "features": [
-          "伴侣理解测试",
-          "30天训练营",
-          "个性化指导"
-        ]
+        "features": ["伴侣理解测试", "30天训练营", "个性化指导"]
       },
       "commute": {
         "title": "通勤场景",
         "description": "通勤途中经期疼痛应急处理指南：公共交通舒适技巧、自驾调整方案、突发疼痛快速缓解方法。提供适合各种通勤方式的痛经管理策略，让您在出行路上也能有效应对经期不适。基于循证医学的专业指导，确保通勤安全舒适。",
-        "features": [
-          "公共交通应对",
-          "自驾调整",
-          "应急处理方案"
-        ],
+        "features": ["公共交通应对", "自驾调整", "应急处理方案"],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
@@ -6038,11 +6561,7 @@
       "exercise": {
         "title": "运动/户外场景",
         "description": "经期运动安全防护专业指南：适合经期的运动类型、户外活动注意事项、运动强度调节技巧。提供科学的经期运动建议，让您在保持运动习惯的同时安全度过生理期，避免运动伤害。基于循证医学的专业指导，确保运动安全有效。",
-        "features": [
-          "经期徒步指南",
-          "泳池卫生管理",
-          "瑜伽体式库"
-        ],
+        "features": ["经期徒步指南", "泳池卫生管理", "瑜伽体式库"],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
@@ -6052,11 +6571,7 @@
       "sleep": {
         "title": "睡眠场景",
         "description": "经期夜间疼痛舒缓睡眠方案：科学睡姿调整、助眠音频推荐、睡前饮食建议。提供专业的经期睡眠管理技巧，帮助您获得更好的夜间休息，缓解经期不适对睡眠质量的影响。基于循证医学的专业指导，确保睡眠质量。",
-        "features": [
-          "助眠音频",
-          "科学睡姿",
-          "睡前饮食建议"
-        ],
+        "features": ["助眠音频", "科学睡姿", "睡前饮食建议"],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
@@ -6066,11 +6581,7 @@
       "social": {
         "title": "社交场景",
         "description": "社交场合经期疼痛优雅应对策略：约会应急处理、聚会饮食选择、疼痛伪装技巧。提供适合各种社交活动的经期管理方案，让您在社交场合保持优雅形象的同时有效缓解经期不适。基于循证医学的专业指导，确保社交自信。",
-        "features": [
-          "约会应急策略",
-          "聚会饮食选择",
-          "疼痛伪装技巧"
-        ],
+        "features": ["约会应急策略", "聚会饮食选择", "疼痛伪装技巧"],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
@@ -6080,11 +6591,7 @@
       "life_stages": {
         "title": "特殊生理阶段",
         "description": "女性不同生理阶段经期管理专业指导：青春期经期教育、育龄期健康管理、围绝经期调理方案。提供针对各年龄段特点的个性化经期健康管理策略，帮助女性科学应对不同生命阶段的生理变化。基于循证医学的专业指导，确保各阶段健康。",
-        "features": [
-          "青春期经期教育",
-          "育龄期健康管理",
-          "围绝经期调理"
-        ],
+        "features": ["青春期经期教育", "育龄期健康管理", "围绝经期调理"],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
@@ -6522,6 +7029,24 @@
         "buttonText": "开始疼痛评估",
         "buttonLink": "/zh/interactive-tools/pain-tracker"
       },
+      "influencers": {
+        "environmentalFactors": {
+          "environmentalImpact": {
+            "items": {
+              "0": "温度变化和天气波动",
+              "1": "空气质量和污染暴露",
+              "2": "季节性变化及其影响"
+            }
+          },
+          "socialPsychological": {
+            "items": {
+              "0": "工作相关压力和压力",
+              "1": "人际关系和冲突",
+              "2": "社会支持系统和社区联系"
+            }
+          }
+        }
+      },
       "recordingImportance": {
         "title": "疼痛记录的重要性",
         "description": "保持详细的疼痛日记是了解个人模式最有效的方法。通过连续3-6个月的记录，您将能够清楚地看到自己的疼痛模式。",
@@ -6594,21 +7119,25 @@
           "title": "生活方式因素",
           "dietaryHabits": {
             "title": "饮食习惯",
-            "items": [
-              "高糖饮食增加炎症反应",
-              "咖啡因摄入影响血管收缩",
-              "缺乏镁和钙加重肌肉痉挛",
-              "过度节食影响激素平衡"
-            ]
+            "items": {
+              "0": "减少咖啡因摄入",
+              "1": "增加富含镁的食物",
+              "2": "避免过多盐分",
+              "3": "保持规律饮食时间",
+              "4": "保持充足水分摄入"
+            },
+            "description": "饮食对经期疼痛的影响"
           },
           "exercisePatterns": {
             "title": "运动模式",
-            "items": [
-              "久坐不动加重盆腔充血",
-              "适度有氧运动改善血液循环",
-              "瑜伽和拉伸缓解肌肉紧张",
-              "过度运动可能加重症状"
-            ]
+            "items": {
+              "0": "定期有氧运动",
+              "1": "温和的瑜伽练习",
+              "2": "避免剧烈运动",
+              "3": "经期适当休息",
+              "4": "尝试低强度瑜伽或普拉提"
+            },
+            "description": "运动如何影响经期健康"
           },
           "stressManagement": {
             "title": "压力管理",
@@ -6621,12 +7150,14 @@
           },
           "sleepAndStress": {
             "title": "睡眠与压力",
-            "items": [
-              "睡眠质量直接影响疼痛感知",
-              "压力激素增加炎症反应",
-              "规律作息有助于激素平衡",
-              "放松技巧可缓解疼痛"
-            ]
+            "items": {
+              "0": "保证充足睡眠",
+              "1": "建立规律作息",
+              "2": "学习压力管理技巧",
+              "3": "睡前放松练习",
+              "4": "定期进行冥想练习"
+            },
+            "description": "睡眠质量和压力管理的重要性"
           }
         },
         "environmentalFactors": {
@@ -7020,6 +7551,41 @@
         "evidenceLevel": {
           "title": "循证医学等级",
           "description": "以上研究均达到Ia级证据水平（系统综述和荟萃分析），为临床实践提供了强有力的科学依据"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -7143,38 +7709,42 @@
       "campusGuide": {
         "title": "校园应急指南",
         "description": "在学校突然痛起来怎么办？课堂应急、宿舍管理、体育课应对，全方位校园生存指南。",
-        "highlights": [
-          "课堂悄悄自救技巧",
-          "宿舍疼痛管理",
-          "体育课应对策略"
-        ]
+        "highlights": {
+          "0": "校园应急资源位置",
+          "1": "课堂不适应对策略",
+          "2": "与学校医护人员沟通技巧",
+          "3": "校园应急资源指南"
+        }
       },
       "developmentPain": {
         "title": "发育期疼痛管理",
         "description": "12-16岁专属疼痛管理建议，了解青春期痛经特点，掌握科学缓解方法。",
-        "highlights": [
-          "青春期痛经特点",
-          "科学缓解方法",
-          "何时需要就医"
-        ]
+        "highlights": {
+          "0": "青春期激素变化解析",
+          "1": "发育期疼痛特点",
+          "2": "家长支持指南",
+          "3": "青春期疼痛管理技巧"
+        }
       },
       "emotionalSupport": {
         "title": "情绪支持与心理健康",
         "description": "经期焦虑、情绪低落如何应对？放松技巧、同龄人经验分享，陪你度过情绪\"过山车\"。",
-        "highlights": [
-          "情绪调节技巧",
-          "焦虑缓解方法",
-          "同龄人经验分享"
-        ]
+        "highlights": {
+          "0": "情绪波动管理技巧",
+          "1": "心理压力缓解方法",
+          "2": "寻求专业帮助的时机",
+          "3": "情绪日记写作方法"
+        }
       },
       "communicationGuide": {
         "title": "沟通指导",
         "description": "如何与家长、老师、医生有效沟通？提供对话模板和沟通技巧，让你勇敢表达需求。",
-        "highlights": [
-          "家长沟通模板",
-          "老师协作指南",
-          "医生沟通技巧"
-        ]
+        "highlights": {
+          "0": "与家人沟通技巧",
+          "1": "朋友间讨论方式",
+          "2": "教师沟通策略",
+          "3": "与医疗专业人员有效沟通"
+        }
       }
     },
     "resources": {
@@ -7446,7 +8016,10 @@
       "edit": "编辑记录",
       "update": "更新记录",
       "updating": "更新中...",
-      "notesPlaceholder": "记录任何额外的信息，如触发因素、情绪状态等..."
+      "notesPlaceholder": "记录任何额外的信息，如触发因素、情绪状态等...",
+      "overwrite": "Overwrite",
+      "duplicateTitle": "Entry exists for this date",
+      "duplicateWarning": "There is already a pain entry for this date. Do you want to overwrite the existing entry?"
     },
     "entries": {
       "title": "疼痛记录",
@@ -7734,6 +8307,41 @@
           "feature": "副作用风险",
           "ibuprofen": "中等",
           "naproxen": "较低"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -8094,11 +8702,7 @@
       "title": "使用建议：",
       "bestTiming": {
         "title": "最佳时机：",
-        "items": [
-          "疼痛刚开始时",
-          "感到焦虑紧张时",
-          "睡前放松时"
-        ]
+        "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
       },
       "precautions": {
         "title": "注意事项：",
@@ -8435,6 +9039,41 @@
           "difficulty": "简单",
           "buttonText": "开始个性化指导",
           "unlockCondition": "需先完成阶段3"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -8503,11 +9142,7 @@
           "0": "分享你的经验。帮助其他男性朋友学会如何更好地理解和支持伴侣。",
           "1": "持续学习。虽然基础测试表现优秀，但专业测试会带给你更深层的医学知识。"
         },
-        "nextSteps": [
-          "完成专业深度测试",
-          "开始30天专家训练",
-          "成为社区导师"
-        ]
+        "nextSteps": ["完成专业深度测试", "开始30天专家训练", "成为社区导师"]
       }
     },
     "stage2Results": {
@@ -9104,6 +9739,10 @@
       "showDetails": "显示详情",
       "hideDetails": "隐藏详情",
       "learnMore": "了解更多",
+      "tip": "提示",
+      "freeQuestions": "前",
+      "questionsAvailable": "个问题是免费的，完成后您可以选择解锁完整评估",
+      "advancedAssessment": "您正在进行高级评估，将收到更详细的分析报告",
       "breadcrumb": {
         "home": "首页",
         "interactiveTools": "互动工具"
@@ -9170,22 +9809,6 @@
         "content": "[ZH] Maintain understanding and compassion for body's responses"
       }
     },
-    "stressTypes": {
-      "comparison": {
-        "title": "[ZH] Acute vs Chronic Stress",
-        "subtitle": "[ZH] Understanding characteristics and impacts of different stress types",
-        "keyTakeaway": "[ZH] Key Takeaway",
-        "keyTakeawayContent": "[ZH] Acute stress is usually manageable, chronic stress requires systematic intervention.",
-        "action1": {
-          "title": "[ZH] Acute Stress Management",
-          "description": "[ZH] Use immediate relief techniques like deep breathing and short breaks"
-        },
-        "action2": {
-          "title": "[ZH] Chronic Stress Intervention",
-          "description": "[ZH] Requires long-term strategies and possibly professional help"
-        }
-      }
-    },
     "assessment": {
       "title": "压力评估",
       "subtitle": "通过科学评估了解你的压力状况",
@@ -9195,11 +9818,11 @@
         "title": "评估问题预览"
       },
       "q1": {
-        "question": "你最近经常感到焦虑或紧张吗？",
+        "question": "你最近是否经常感到焦虑或紧张？",
         "option1": "从不",
-        "option2": "很少",
-        "option3": "有时",
-        "option4": "经常"
+        "option2": "偶尔",
+        "option3": "经常",
+        "option4": "总是"
       },
       "q2": {
         "question": "你的睡眠质量如何？",
@@ -9211,23 +9834,45 @@
       "q3": {
         "question": "你经常感到疲劳或缺乏精力吗？",
         "option1": "从不",
-        "option2": "很少",
-        "option3": "有时",
-        "option4": "经常"
+        "option2": "偶尔",
+        "option3": "经常",
+        "option4": "总是"
       },
       "q4": {
         "question": "你容易感到烦躁或愤怒吗？",
         "option1": "从不",
-        "option2": "很少",
-        "option3": "有时",
-        "option4": "经常"
+        "option2": "偶尔",
+        "option3": "经常",
+        "option4": "总是"
       },
       "q5": {
-        "question": "你经常担心与经期相关的问题吗？",
+        "question": "你经常担心经期相关的问题吗？",
         "option1": "从不",
-        "option2": "很少",
-        "option3": "有时",
-        "option4": "经常"
+        "option2": "偶尔",
+        "option3": "经常",
+        "option4": "总是"
+      },
+      "questions": {
+        "q1": {
+          "question": "你最近是否经常感到焦虑或紧张？",
+          "options": ["从不", "偶尔", "经常", "总是"]
+        },
+        "q2": {
+          "question": "你的睡眠质量如何？",
+          "options": ["很好", "好", "一般", "差"]
+        },
+        "q3": {
+          "question": "你经常感到疲劳或缺乏精力吗？",
+          "options": ["从不", "偶尔", "经常", "总是"]
+        },
+        "q4": {
+          "question": "你容易感到烦躁或愤怒吗？",
+          "options": ["从不", "偶尔", "经常", "总是"]
+        },
+        "q5": {
+          "question": "你经常担心经期相关的问题吗？",
+          "options": ["从不", "偶尔", "经常", "总是"]
+        }
       },
       "q6": {
         "question": "你多久出现一次注意力难以集中的情况？",
@@ -9265,6 +9910,27 @@
         "option4": "从不"
       },
       "selectOption": "请选择一个选项",
+      "results": {
+        "resultLabel": "评估结果",
+        "title": "你的压力评估结果",
+        "subtitle": "根据你的回答，我们为你生成了个性化的压力分析报告",
+        "scoreLabel": "压力得分",
+        "stressLevels": {
+          "low": "低压力",
+          "moderate": "中等压力",
+          "high": "高压力",
+          "severe": "严重压力"
+        },
+        "basicRecommendations": "基本建议",
+        "detailedAnalysis": "详细分析",
+        "stressSources": "压力来源",
+        "stressSourcesDescription": "根据你的回答分析主要压力来源",
+        "improvementFocus": "改善重点",
+        "improvementFocusDescription": "需要关注和改善的方面"
+      },
+      "alerts": {
+        "paymentComingSoon": "支付功能即将推出，敬请期待！"
+      },
       "benefits": {
         "title": "[ZH] Benefits of Assessment",
         "personalized": {
@@ -9282,10 +9948,60 @@
       },
       "keywords": "压力评估,经期压力,压力管理,经期应激,心理健康评估",
       "privacy": {
+        "badge": "您的数据100%加密，永不销售",
         "notice": {
-          "title": "隐私提示",
-          "description": "您的回答完全保密，仅用于提供个性化建议。"
+          "title": "您的隐私受到保护",
+          "description": "匿名评估，数据仅存储在您的设备上，可随时删除",
+          "details": {
+            "title": "我们的隐私承诺：",
+            "noRegistration": "使用评估功能无需注册",
+            "encryption": "数据使用AES-256加密并本地存储",
+            "exportDelete": "您可以随时导出或永久删除您的数据",
+            "noSharing": "永不销售或与第三方共享",
+            "compliance": "符合GDPR和CCPA隐私标准"
+          },
+          "policyLink": "查看完整隐私政策"
+        },
+        "results": {
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
+          "resultLabel": "评估结果",
+          "scoreLabel": "压力得分",
+          "basicRecommendations": "基本建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
+          "improvementFocus": "改善重点",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
+          "stressLevels": {
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
+        },
+        "buttons": {
+          "restartAssessment": "重新评估",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "即将推出，敬请期待"
         }
+      },
+      "buttons": {
+        "viewFreeResults": "查看免费结果",
+        "comingSoon": "即将推出",
+        "restartAssessment": "重新评估"
       },
       "personalizedRecommendations": {
         "title": "您的个性化建议",
@@ -9334,13 +10050,58 @@
       "radar": {
         "title": "压力领域分析",
         "subtitle": "不同生活领域压力水平的可视化呈现",
-        "labels": [
-          "工作",
-          "睡眠",
-          "情绪",
-          "身体",
-          "社交"
-        ]
+        "labels": ["工作", "睡眠", "情绪", "身体", "社交"]
+      }
+    },
+    "stressTypes": {
+      "comparison": {
+        "title": "[ZH] Acute vs Chronic Stress",
+        "subtitle": "[ZH] Understanding characteristics and impacts of different stress types",
+        "keyTakeaway": "[ZH] Key Takeaway",
+        "keyTakeawayContent": "[ZH] Acute stress is usually manageable, chronic stress requires systematic intervention.",
+        "action1": {
+          "title": "[ZH] Acute Stress Management",
+          "description": "[ZH] Use immediate relief techniques like deep breathing and short breaks"
+        },
+        "action2": {
+          "title": "[ZH] Chronic Stress Intervention",
+          "description": "[ZH] Requires long-term strategies and possibly professional help"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
+        }
       }
     },
     "techniques": {
@@ -9416,8 +10177,44 @@
           "tip2": "[ZH] Wear loose and comfortable clothing",
           "tip3": "[ZH] Avoid practicing immediately after meals",
           "tip4": "[ZH] Stop immediately if you feel unwell"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
-      }
+      },
+      "keywords": "relaxation techniques,stress relief,breathing exercises,meditation,light exercise,music therapy"
     },
     "progress": {
       "title": "进度跟踪",
@@ -9479,6 +10276,41 @@
         "motivation": {
           "title": "持续动力",
           "description": "看到进展以增强坚持性"
+        },
+        "results": {
+          "title": "Assessment Complete",
+          "subtitle": "Complete Stress Assessment Report",
+          "resultLabel": "评估结果",
+          "scoreLabel": "Stress Score",
+          "basicRecommendations": "基础建议",
+          "detailedAnalysis": "详细分析",
+          "stressSources": "压力来源",
+          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "improvementFocus": "改进重点",
+          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "stressLevels": {
+            "low": "Low",
+            "moderate": "Moderate",
+            "high": "High",
+            "severe": "Severe"
+          }
+        },
+        "phq9": {
+          "assessmentLabel": "PHQ-9评估",
+          "assessmentPrompt": {
+            "title": "For Deeper Mental Health Assessment",
+            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
+            "button": "Start PHQ-9 Assessment"
+          }
+        },
+        "alerts": {
+          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+        },
+        "buttons": {
+          "restartAssessment": "Re-assess",
+          "backToHome": "返回首页",
+          "viewFreeResults": "查看免费结果",
+          "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
     },
@@ -9809,9 +10641,9 @@
         "overview": "概览",
         "cycleLength": "周期长度",
         "painLevel": "疼痛等级",
-      "painLevelMin": "无痛",
-      "painLevelMax": "极痛",
-      "saveError": "保存记录时出错，请重试。",
+        "painLevelMin": "无痛",
+        "painLevelMax": "极痛",
+        "saveError": "保存记录时出错，请重试。",
         "flowType": "流量类型"
       }
     },
@@ -10523,6 +11355,88 @@
         "healthTracking": "智能健康数据追踪",
         "personalizedRecommendations": "个性化健康方案"
       }
+    },
+    "pdf": {
+      "reportTitle": "Workplace Health Data Report",
+      "reportSubtitle": "Period Hub Workplace Wellness Assistant",
+      "reportInfo": "Report Information",
+      "exportTime": "Export Time",
+      "exportType": "Export Type",
+      "language": "语言",
+      "languageValue": "English",
+      "dataRecords": "Data Records",
+      "privacyNotice": "Privacy Protection Notice",
+      "privacyText": "This report contains personal health data. Please keep it secure and avoid disclosure. All data is stored locally on your device. We do not collect or store your personal information.",
+      "generatedAt": "Report generated at: ",
+      "exportTypes": {
+        "period": "Period Data",
+        "nutrition": "Nutrition Data",
+        "all": "All Data"
+      },
+      "records": "records",
+      "periodData": "Period Data",
+      "noPeriodData": "No period data records",
+      "nutritionData": "Nutrition Data",
+      "noNutritionData": "No nutrition data records",
+      "tableHeaders": {
+        "date": "Date",
+        "type": "Type",
+        "painLevel": "Pain Level",
+        "flow": "Flow",
+        "notes": "Notes",
+        "foodName": "Food Name",
+        "menstrualPhase": "Menstrual Phase",
+        "tcmNature": "TCM Nature",
+        "mainBenefits": "Main Benefits",
+        "keyNutrients": "Key Nutrients"
+      },
+      "recordTypes": {
+        "period": "Period",
+        "predicted": "Predicted"
+      },
+      "phases": {
+        "menstrual": "Menstrual",
+        "follicular": "Follicular",
+        "ovulation": "Ovulation",
+        "luteal": "Luteal"
+      },
+      "tcmNature": {
+        "warm": "Warm",
+        "cool": "Cool",
+        "neutral": "Neutral"
+      }
+    },
+    "privacy": {
+      "reportTitle": "Privacy Protection Report"
+    },
+    "faq": {
+      "q1": {
+        "question": "What is the Workplace Wellness Assistant?",
+        "answer": "The Workplace Wellness Assistant is a health management tool designed specifically for working women, providing period tracking, pain management, nutrition advice, and work adjustment solutions to help women better manage their health in the workplace."
+      },
+      "q2": {
+        "question": "How to use the period calendar feature?",
+        "answer": "In the period calendar, you can record period start and end dates, pain levels, flow conditions, and other information. The system automatically calculates cycle length and provides prediction functionality."
+      },
+      "q3": {
+        "question": "How is nutrition advice personalized?",
+        "answer": "Nutrition advice is based on your current menstrual phase and TCM constitution type, providing personalized food recommendations and meal plans to help alleviate menstrual discomfort."
+      },
+      "q4": {
+        "question": "Is data export secure?",
+        "answer": "We provide complete data masking and privacy protection mechanisms, including password protection, data masking, audit logs, and other features to ensure your health data security."
+      },
+      "q5": {
+        "question": "What export formats are supported?",
+        "answer": "Supports JSON, CSV, and PDF export formats to meet different needs. PDF format is particularly suitable for medical reports, CSV for data analysis, and JSON for data backup."
+      }
+    },
+    "structuredData": {
+      "breadcrumb": {
+        "home": "首页",
+        "interactiveTools": "互动工具",
+        "workplaceWellness": "Workplace Wellness Assistant"
+      }
     }
   },
   "anchorTexts": {
@@ -10935,7 +11849,10 @@
       "relatedArticles": {
         "title": "相关文章推荐",
         "subtitle": "继续深入了解经期健康",
-        "readMore": "阅读更多"
+        "readMore": "阅读更多",
+        "moreComing": "More Articles Coming Soon",
+        "description": "We are preparing more high-quality health content, stay tuned.",
+        "browseAll": "Browse All Articles"
       }
     },
     "tags": {
@@ -11267,6 +12184,115 @@
           "Priority support"
         ]
       }
+    }
+  },
+  "phq9": {
+    "title": "PHQ-9 抑郁评估",
+    "subtitle": "临床标准PHQ-9问卷，用于抑郁筛查",
+    "question": "问题",
+    "timeframe": "在过去两周内，您被以下问题困扰的频率如何：",
+    "previous": "上一题",
+    "next": "下一题",
+    "exit": "退出",
+    "help": "帮助",
+    "helpText": "请选择最能反映您过去两周感受的答案",
+    "completing": "正在完成评估...",
+    "calculatingResults": "正在计算您的评估结果",
+    "disclaimer": "重要提示",
+    "sensitiveQuestion": "这是一个关于您情绪健康的重要问题。您的回答将帮助我们提供更准确的指导。",
+    "resultsTitle": "评估结果",
+    "resultsSubtitle": "您的PHQ-9评估已完成",
+    "totalScore": "总分",
+    "riskAssessment": "风险评估",
+    "riskLevel": "风险等级",
+    "requiresHelp": "需要专业帮助",
+    "yes": "是",
+    "no": "否",
+    "attentionRequired": "需要关注",
+    "selfHarmWarning": "您报告了自伤想法。如果这些想法持续或恶化，请立即寻求专业帮助。",
+    "crisisResources": "危机干预资源：",
+    "crisisHotline": "危机热线：988（自杀与危机生命线）",
+    "recommendations": "建议",
+    "seekProfessionalHelp": "寻求专业帮助",
+    "professionalHelpDesc": "根据您的评估结果，我们建议您咨询心理健康专业人士进行进一步评估和支持。",
+    "findProfessional": "寻找专业帮助",
+    "retakeAssessment": "重新评估",
+    "continue": "继续",
+    "medicalDisclaimer": "此评估工具仅供参考，不能替代专业医疗诊断。如果您正在经历心理健康问题，请寻求专业医疗帮助。",
+    "risk": {
+      "low": "低风险",
+      "moderate": "中等风险",
+      "high": "高风险",
+      "severe": "严重风险"
+    },
+    "levels": {
+      "none": "无抑郁",
+      "mild": "轻度抑郁",
+      "moderate": "中度抑郁",
+      "moderate-severe": "中重度抑郁",
+      "severe": "重度抑郁"
+    }
+  },
+  "q8": {
+    "question": "How do I know if my period pain is severe?",
+    "answer": "If your period pain significantly affects daily life, such as being unable to work or study normally, or is accompanied by other symptoms (such as fever, vomiting, abnormal bleeding, etc.), it is recommended to seek medical attention promptly. Medically, pain rating scales are usually used to assess severity."
+  },
+  "q9": {
+    "question": "Besides medication, what other methods can relieve period pain?",
+    "answer": "Non-medical methods include: heat therapy (hot water bottle, warm patch), light exercise (such as yoga, walking), dietary adjustments (increasing intake of magnesium, calcium, vitamin B1), acupressure (Sanyinjiao, Hegu points), etc. For mild to moderate period pain, these methods may provide effective relief."
+  },
+  "q10": {
+    "question": "Can period pain affect fertility?",
+    "answer": "Most primary period pain (i.e., pain without organic lesions) does not affect fertility. But if it is secondary period pain (caused by diseases such as endometriosis, uterine fibroids, etc.), the related diseases may need treatment. If you have fertility concerns, it is recommended to consult a specialist for detailed examination."
+  },
+  "frameworkDemo": {
+    "title": "Framework Demo - PeriodHub | Technical Feature Showcase",
+    "description": "PeriodHub Framework Demo: Showcase technical features, performance optimizations and user experience features of the website. Provides feature demonstrations for developers and technical teams."
+  },
+  "dataDashboard": {
+    "meta": {
+      "title": "Data Dashboard - PeriodHub | Platform Analytics Center",
+      "description": "PeriodHub Data Dashboard: View platform usage data, user activity, engagement metrics and other key indicators. Provides data insights and decision support for the development team."
+    },
+    "keywords": "data dashboard,platform analytics,user data,activity,engagement,data insights,decision support"
+  },
+  "abTestAnalyzer": {
+    "recommendations": {
+      "completionHigh": "✅ Strong recommendation: Enhanced version significantly improves user completion rate (+{improvement}%)",
+      "rollout": "🎯 Recommended to roll out enhanced version immediately",
+      "completionModerate": "✅ Moderate improvement: Enhanced version has positive impact on completion rate",
+      "conversionHigh": "💰 Conversion rate significantly improved (+{improvement}%), significant business value",
+      "conversionModerate": "💡 Moderate conversion improvement",
+      "engagementTime": "⏱️ Engagement time increased",
+      "bounceRateLow": "📉 Bounce rate significantly reduced",
+      "bounceRateHigh": "⚠️ Bounce rate increased, need to investigate",
+      "statisticalInsignificant": "📊 Results not statistically significant",
+      "sampleSizeSmall": "📈 Sample size too small, need more data"
+    },
+    "riskAssessment": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    }
+  },
+  "userFeedback": {
+    "stats": {
+      "titleWithFeature": "{feature} Feedback Statistics",
+      "title": "Feedback Statistics",
+      "totalFeedback": "Total Feedback",
+      "averageRating": "Average Rating",
+      "recentFeedback": "Recent Feedback"
+    }
+  },
+  "abtest": {
+    "debugger": {
+      "title": "A/B Test Debug",
+      "status": "状态",
+      "variant": "Variant",
+      "test": "Test",
+      "user": "User",
+      "loaded": "✅ Loaded",
+      "loading": "⏳ Loading"
     }
   }
 }

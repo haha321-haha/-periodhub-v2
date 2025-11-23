@@ -189,6 +189,16 @@ export class ChartPerformanceOptimizer
         typeof (xScale as { ticks?: unknown }).ticks === "object"
           ? (xScale as { ticks?: unknown }).ticks
           : {};
+      const yScale =
+        (scales as { y?: unknown })?.y &&
+        typeof (scales as { y?: unknown }).y === "object"
+          ? (scales as { y?: unknown }).y
+          : {};
+      const yTicks =
+        (yScale as { ticks?: unknown })?.ticks &&
+        typeof (yScale as { ticks?: unknown }).ticks === "object"
+          ? (yScale as { ticks?: unknown }).ticks
+          : {};
       optimizedOptions.scales = {
         ...(scales as Record<string, unknown>),
         x: {

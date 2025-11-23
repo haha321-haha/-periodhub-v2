@@ -4,10 +4,9 @@ import { useEffect } from "react";
 
 export default function GlobalError({
   error,
-  reset,
 }: {
   error: Error & { digest?: string };
-  reset: () => void;
+  reset?: () => void; // 标记为可选参数
 }) {
   // 在开发环境下记录错误详情
   useEffect(() => {

@@ -124,8 +124,14 @@ async function detectLocaleFromHeaders(): Promise<Locale> {
 
 export default async function RootPage() {
   try {
-    // 检测是否是Vercel预览请求
+    // 检测是否是Vercel预览请求（虽然不再直接使用，但保留检测逻辑用于调试）
     const isPreview = await isVercelPreviewRequest();
+    
+    // 在开发环境下记录预览状态（用于调试）
+    if (process.env.NODE_ENV === "development" && isPreview) {
+      // eslint-disable-next-line no-console
+      console.log("[RootPage] Vercel preview request detected");
+    }
 
     // 检测用户语言偏好（所有请求都需要）
     const preferredLocale = await detectLocaleFromHeaders();

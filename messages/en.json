@@ -2950,8 +2950,8 @@
       "ariaLabel": "Search resources",
       "helpText": "Search {totalResources} professional resources",
       "searchHints": {
-        "desktop": "试试关键词：热敷、按摩、疼痛缓解、药物、敷热水袋、暖宝宝、揉肚子、止痛药",
-        "mobile": "试试：热敷、按摩、疼痛、敷热水袋"
+        "desktop": "Try keywords: heat therapy, massage, pain relief, medication, hot water bottle, heating pad, abdominal massage, painkillers",
+        "mobile": "Try: heat therapy, massage, pain, hot water bottle"
       },
       "stats": {
         "totalResources": "Total Resources",

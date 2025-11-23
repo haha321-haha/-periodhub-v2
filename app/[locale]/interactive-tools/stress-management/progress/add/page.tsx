@@ -55,14 +55,11 @@ export default function AddEntryPage() {
       // Save using the storage utility
       const result = saveEntry(entry);
 
-      // Show success message with cleanup info if applicable
-      if (result.cleaned && result.deletedCount) {
-        alert(
-          `✅ Entry saved successfully!\n\n` +
-            `⚠️ Note: We automatically deleted ${result.deletedCount} old entries to free up storage space.`,
-        );
-      } else {
+      // Show success message
+      if (result) {
         alert("Entry saved successfully!");
+      } else {
+        alert("Failed to save entry. Please try again.");
       }
 
       // Redirect back to progress page

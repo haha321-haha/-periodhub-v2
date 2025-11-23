@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { PrivacyNotice } from "@/components/PrivacyNotice";
-import { LocalStorageManager } from "@/lib/localStorage";
+// LocalStorageManager removed - using localStorage directly
 import {
   trackAssessmentStart,
   trackAssessmentComplete,
@@ -169,12 +169,25 @@ export default function StressAssessmentWidget() {
         const score = calculateScore(newAnswers);
         const { level } = getStressLevel(score);
 
-        LocalStorageManager.saveAssessment({
-          answers: newAnswers,
-          score,
-          stressLevel: level,
-          isPremium: newAnswers.length > FREE_QUESTIONS,
-        });
+        // Save assessment to localStorage
+        try {
+          const assessmentData = {
+            answers: newAnswers,
+            score,
+            stressLevel: level,
+            isPremium: newAnswers.length > FREE_QUESTIONS,
+            timestamp: Date.now(),
+          };
+          const existing = localStorage.getItem("stress_assessments");
+          const assessments = existing ? JSON.parse(existing) : [];
+          assessments.push(assessmentData);
+          localStorage.setItem(
+            "stress_assessments",
+            JSON.stringify(assessments),
+          );
+        } catch {
+          // Failed to save
+        }
 
         setStressScore(score);
         setStressLevel(level);
@@ -203,12 +216,22 @@ export default function StressAssessmentWidget() {
     const score = calculateScore(currentAnswers);
     const { level } = getStressLevel(score);
 
-    LocalStorageManager.saveAssessment({
-      answers: currentAnswers,
-      score,
-      stressLevel: level,
-      isPremium: false,
-    });
+    // Save assessment to localStorage
+    try {
+      const assessmentData = {
+        answers: currentAnswers,
+        score,
+        stressLevel: level,
+        isPremium: false,
+        timestamp: Date.now(),
+      };
+      const existing = localStorage.getItem("stress_assessments");
+      const assessments = existing ? JSON.parse(existing) : [];
+      assessments.push(assessmentData);
+      localStorage.setItem("stress_assessments", JSON.stringify(assessments));
+    } catch {
+      // Failed to save
+    }
 
     // 先隐藏 paywall，然后显示结果
     setShowPaywall(false);

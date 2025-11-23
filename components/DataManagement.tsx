@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Download, Trash2, AlertTriangle, CheckCircle } from "lucide-react";
-import { LocalStorageManager } from "@/lib/localStorage";
+// LocalStorageManager removed - using localStorage directly
 
 interface DataManagementProps {
   className?: string;
@@ -24,10 +24,14 @@ export function DataManagement({ className = "" }: DataManagementProps) {
 
   const loadData = () => {
     try {
-      const data = LocalStorageManager.getAssessments();
+      const existing = localStorage.getItem("stress_assessments");
+      const data = existing ? JSON.parse(existing) : [];
       setAssessments(data);
-      const info = LocalStorageManager.getStorageInfo();
-      setStorageInfo(info);
+      setStorageInfo({
+        count: data.length,
+        lastAssessment:
+          data.length > 0 ? data[data.length - 1].timestamp : null,
+      });
     } catch {
       setMessage("Failed to load data");
     }
@@ -36,8 +40,11 @@ export function DataManagement({ className = "" }: DataManagementProps) {
   // Export data
   const handleExport = () => {
     try {
-      const data = LocalStorageManager.exportData();
-      const blob = new Blob([data], { type: "application/json" });
+      const existing = localStorage.getItem("stress_assessments");
+      const data = existing ? JSON.parse(existing) : [];
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json",
+      });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -62,7 +69,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
   // Execute delete
   const handleDelete = () => {
     try {
-      LocalStorageManager.clearAllData();
+      localStorage.removeItem("stress_assessments");
       setAssessments([]);
       setStorageInfo({ count: 0, lastAssessment: null });
       setShowConfirmDelete(false);

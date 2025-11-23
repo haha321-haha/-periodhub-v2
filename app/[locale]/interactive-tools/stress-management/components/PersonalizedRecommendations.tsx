@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { LocalStorageManager } from "@/lib/localStorage";
+// LocalStorageManager removed - using localStorage directly
 
 interface PersonalizedRecommendationsProps {
   locale: string;
@@ -163,7 +163,8 @@ export default function PersonalizedRecommendations({
 
   useEffect(() => {
     // 从localStorage获取最新的评估结果
-    const assessments = LocalStorageManager.getAssessments();
+    const existing = localStorage.getItem("stress_assessments");
+    const assessments = existing ? JSON.parse(existing) : [];
     if (assessments.length > 0) {
       const latestAssessment = assessments[assessments.length - 1];
       setStressScore(latestAssessment.score);

@@ -88,7 +88,7 @@ export default function StressAssessmentStartPage() {
 
   // Day 4 增强：A/B测试数据收集
   const [userId] = useState(() => generateAnonymousUserId());
-  const { isLoaded } = useABTestTracking(userId);
+  useABTestTracking(userId);
 
   // 评估状态
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -102,10 +102,8 @@ export default function StressAssessmentStartPage() {
 
   // Day 4: 追踪评估开始
   useEffect(() => {
-    if (isLoaded) {
-      trackAssessmentStart(userId);
-    }
-  }, [isLoaded, userId]);
+    trackAssessmentStart(userId, "stress_assessment");
+  }, [userId]);
 
   const FREE_QUESTIONS = 5; // 免费问题数量（Day 3增强：从3题提升到5题）
 
@@ -166,7 +164,7 @@ export default function StressAssessmentStartPage() {
       const assessments = existing ? JSON.parse(existing) : [];
       assessments.push(assessmentData);
       localStorage.setItem("stress_assessments", JSON.stringify(assessments));
-    } catch (error) {
+    } catch {
       // Failed to save assessment to localStorage
     }
 
@@ -239,7 +237,7 @@ export default function StressAssessmentStartPage() {
 
   const handlePHQ9Complete = (result: PHQ9Result) => {
     // Day 4: 追踪PHQ-9评估完成
-    trackPHQ9Complete(userId, result.score, result.level);
+    trackPHQ9Complete(userId, result.totalScore, result.severity);
 
     setPhq9Result(result);
 
@@ -263,15 +261,21 @@ export default function StressAssessmentStartPage() {
     setShowPHQ9Results(false);
     setPhq9Result(null);
     setStressScore(0);
-    setStressLevel("");
   };
 
   // Day 4: 追踪评估完成
   useEffect(() => {
     if (showResults && stressScore > 0) {
-      trackAssessmentComplete(userId, stressScore, answers);
+      // Calculate duration (simplified - in real app, track start time)
+      const duration = 0; // Duration in seconds
+      trackAssessmentComplete(
+        userId,
+        "stress_assessment",
+        stressScore,
+        duration,
+      );
     }
-  }, [showResults, stressScore, answers, userId]);
+  }, [showResults, stressScore, userId]);
 
   // Day 4: 追踪付费墙查看
   useEffect(() => {
@@ -575,7 +579,7 @@ export default function StressAssessmentStartPage() {
                         // Day 4: 追踪建议点击
                         trackRecommendationClick(
                           userId,
-                          index,
+                          String(index),
                           recommendation.title,
                         );
                       }}

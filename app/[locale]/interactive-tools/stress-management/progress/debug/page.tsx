@@ -7,7 +7,7 @@ import {
   getAllEntries,
   getStorageInfo,
   deleteOldestEntries,
-  type ProgressEntry
+  type ProgressEntry,
 } from "@/lib/progressStorage";
 
 export default function DebugPage() {
@@ -16,7 +16,8 @@ export default function DebugPage() {
   const [rawData, setRawData] = useState<string>("");
   const [parsedData, setParsedData] = useState<ProgressEntry[]>([]);
   const [error, setError] = useState<string>("");
-  const [storageInfo, setStorageInfo] = useState<ReturnType<typeof getStorageInfo>>(null);
+  const [storageInfo, setStorageInfo] =
+    useState<ReturnType<typeof getStorageInfo>>(null);
 
   useEffect(() => {
     loadData();
@@ -36,7 +37,11 @@ export default function DebugPage() {
   };
 
   const clearAllData = () => {
-    if (confirm("Are you sure you want to delete ALL progress data? This cannot be undone!")) {
+    if (
+      confirm(
+        "Are you sure you want to delete ALL progress data? This cannot be undone!",
+      )
+    ) {
       localStorage.removeItem("stress_progress_entries");
       loadData();
       alert("All data cleared!");
@@ -57,6 +62,7 @@ export default function DebugPage() {
       const newEntry = {
         ...testEntry,
         id: `entry_${Date.now()}`,
+        timestamp: Date.now(),
       };
       entries.push(newEntry);
       localStorage.setItem("stress_progress_entries", JSON.stringify(entries));
@@ -66,13 +72,19 @@ export default function DebugPage() {
       if (err instanceof Error && err.name === "QuotaExceededError") {
         alert("Storage is full! Please delete some old entries first.");
       } else {
-        alert("Failed to add test entry: " + (err instanceof Error ? err.message : "Unknown error"));
+        alert(
+          "Failed to add test entry: " +
+            (err instanceof Error ? err.message : "Unknown error"),
+        );
       }
     }
   };
 
   const deleteOldEntries = () => {
-    const count = prompt("How many oldest entries do you want to delete?", "10");
+    const count = prompt(
+      "How many oldest entries do you want to delete?",
+      "10",
+    );
     if (!count) return;
 
     const numCount = parseInt(count, 10);
@@ -168,48 +180,68 @@ export default function DebugPage() {
 
         {/* Storage Info */}
         {storageInfo && (
-          <div className={`rounded-lg p-6 mb-6 ${
-            storageInfo.isFull ? "bg-red-50 border-2 border-red-300" :
-            storageInfo.isNearFull ? "bg-yellow-50 border-2 border-yellow-300" :
-            "bg-white"
-          }`}>
+          <div
+            className={`rounded-lg p-6 mb-6 ${
+              storageInfo.isFull
+                ? "bg-red-50 border-2 border-red-300"
+                : storageInfo.isNearFull
+                  ? "bg-yellow-50 border-2 border-yellow-300"
+                  : "bg-white"
+            }`}
+          >
             <h2 className="text-xl font-bold text-gray-800 mb-4">
               💾 Storage Usage
               {storageInfo.isFull && " - ⚠️ FULL!"}
-              {storageInfo.isNearFull && !storageInfo.isFull && " - ⚠️ Near Full"}
+              {storageInfo.isNearFull &&
+                !storageInfo.isFull &&
+                " - ⚠️ Near Full"}
             </h2>
             <div className="mb-4">
               <div className="flex justify-between text-sm mb-2">
                 <span className="font-semibold">
                   {storageInfo.sizeInMB} MB / {storageInfo.maxSizeInMB} MB
                 </span>
-                <span className={`font-bold ${
-                  storageInfo.isFull ? "text-red-600" :
-                  storageInfo.isNearFull ? "text-yellow-600" :
-                  "text-green-600"
-                }`}>
+                <span
+                  className={`font-bold ${
+                    storageInfo.isFull
+                      ? "text-red-600"
+                      : storageInfo.isNearFull
+                        ? "text-yellow-600"
+                        : "text-green-600"
+                  }`}
+                >
                   {storageInfo.usagePercent}%
                 </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-4">
                 <div
                   className={`h-4 rounded-full transition-all ${
-                    storageInfo.isFull ? "bg-red-600" :
-                    storageInfo.isNearFull ? "bg-yellow-500" :
-                    "bg-green-500"
+                    storageInfo.isFull
+                      ? "bg-red-600"
+                      : storageInfo.isNearFull
+                        ? "bg-yellow-500"
+                        : "bg-green-500"
                   }`}
-                  style={{ width: `${Math.min(storageInfo.usagePercent, 100)}%` }}
+                  style={{
+                    width: `${Math.min(storageInfo.usagePercent, 100)}%`,
+                  }}
                 ></div>
               </div>
             </div>
             {(storageInfo.isFull || storageInfo.isNearFull) && (
-              <div className={`p-4 rounded-lg ${
-                storageInfo.isFull ? "bg-red-100" : "bg-yellow-100"
-              }`}>
-                <p className={`font-bold ${
-                  storageInfo.isFull ? "text-red-700" : "text-yellow-700"
-                }`}>
-                  {storageInfo.isFull ? "⚠️ Storage is full!" : "⚠️ Storage is almost full!"}
+              <div
+                className={`p-4 rounded-lg ${
+                  storageInfo.isFull ? "bg-red-100" : "bg-yellow-100"
+                }`}
+              >
+                <p
+                  className={`font-bold ${
+                    storageInfo.isFull ? "text-red-700" : "text-yellow-700"
+                  }`}
+                >
+                  {storageInfo.isFull
+                    ? "⚠️ Storage is full!"
+                    : "⚠️ Storage is almost full!"}
                 </p>
                 <p className="text-sm mt-1 text-gray-700">
                   {storageInfo.isFull
@@ -223,7 +255,9 @@ export default function DebugPage() {
 
         {/* Stats */}
         <div className="bg-white rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">📊 Statistics</h2>
+          <h2 className="text-xl font-bold text-gray-800 mb-4">
+            📊 Statistics
+          </h2>
           <div className="grid md:grid-cols-4 gap-4">
             <div className="bg-blue-50 rounded-lg p-4">
               <div className="text-2xl font-bold text-blue-600">
@@ -239,7 +273,11 @@ export default function DebugPage() {
             </div>
             <div className="bg-purple-50 rounded-lg p-4">
               <div className="text-2xl font-bold text-purple-600">
-                {parsedData.filter((e) => e.techniques && e.techniques.length > 0).length}
+                {
+                  parsedData.filter(
+                    (e) => e.techniques && e.techniques.length > 0,
+                  ).length
+                }
               </div>
               <div className="text-sm text-gray-600">With Techniques</div>
             </div>
@@ -266,17 +304,20 @@ export default function DebugPage() {
                 >
                   <div className="grid md:grid-cols-2 gap-2 text-sm">
                     <div>
-                      <span className="font-bold">ID:</span> {entry.id || "❌ MISSING"}
+                      <span className="font-bold">ID:</span>{" "}
+                      {entry.id || "❌ MISSING"}
                     </div>
                     <div>
                       <span className="font-bold">Date:</span>{" "}
                       {new Date(entry.date).toLocaleString()}
                     </div>
                     <div>
-                      <span className="font-bold">Stress:</span> {entry.stressLevel}/10
+                      <span className="font-bold">Stress:</span>{" "}
+                      {entry.stressLevel}/10
                     </div>
                     <div>
-                      <span className="font-bold">Mood:</span> {entry.moodRating}/10
+                      <span className="font-bold">Mood:</span>{" "}
+                      {entry.moodRating}/10
                     </div>
                     <div className="md:col-span-2">
                       <span className="font-bold">Techniques:</span>{" "}

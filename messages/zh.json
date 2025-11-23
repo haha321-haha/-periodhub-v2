@@ -3982,8 +3982,8 @@
         "description": "根据您的追踪历史，以下是我们注意到的一些模式：",
         "noData": "数据还不够。继续追踪以查看洞察。",
         "painPatterns": "Pain Pattern Analysis",
-        "recommendations": "Personalized Recommendations",
-        "trends": "Trend Analysis",
+        "recommendations": "个性化建议",
+        "trends": "趋势分析",
         "alerts": "Health Alerts",
         "noInsights": "No Insights Yet",
         "noInsightsDescription": "Record more data to get personalized health insights"
@@ -4193,35 +4193,35 @@
         }
       },
       "export": {
-        "title": "Export Data",
-        "description": "Export your pain records as files for backup or sharing with your doctor",
-        "format": "Export Format",
-        "json": "JSON Format",
-        "csv": "CSV Format",
-        "pdf": "PDF Report",
-        "dateRange": "Date Range",
-        "allData": "All Data",
-        "lastMonth": "Last Month",
-        "lastThreeMonths": "Last 3 Months",
-        "lastSixMonths": "Last 6 Months",
-        "customRange": "Custom Range",
-        "startDate": "Start Date",
-        "endDate": "End Date",
-        "includeCharts": "Include Charts",
-        "includeStatistics": "Include Statistics",
-        "export": "Export",
-        "exporting": "Exporting...",
-        "exportSuccess": "Export Successful",
-        "exportError": "Export failed, please try again",
-        "inDevelopment": "Export feature is under development..."
+        "title": "导出数据",
+        "description": "导出您的疼痛记录为文件，用于备份或与医生分享",
+        "format": "导出格式",
+        "json": "JSON格式",
+        "csv": "CSV格式",
+        "pdf": "PDF报告",
+        "dateRange": "日期范围",
+        "allData": "全部数据",
+        "lastMonth": "上个月",
+        "lastThreeMonths": "最近3个月",
+        "lastSixMonths": "最近6个月",
+        "customRange": "自定义范围",
+        "startDate": "开始日期",
+        "endDate": "结束日期",
+        "includeCharts": "包含图表",
+        "includeStatistics": "包含统计",
+        "export": "导出",
+        "exporting": "导出中...",
+        "exportSuccess": "导出成功",
+        "exportError": "导出失败，请重试",
+        "inDevelopment": "导出功能正在开发中..."
       },
       "statistics": {
-        "title": "Statistical Analysis",
-        "overview": "Overview",
-        "trends": "Trend Analysis",
-        "patterns": "Pain Patterns",
-        "remedies": "Remedy Effectiveness",
-        "totalEntries": "Total Entries",
+        "title": "统计分析",
+        "overview": "概览",
+        "trends": "趋势分析",
+        "patterns": "疼痛模式",
+        "remedies": "缓解方法效果",
+        "totalEntries": "总记录数",
         "averagePain": "Average Pain Intensity",
         "maxPain": "Maximum Pain Intensity",
         "minPain": "Minimum Pain Intensity",
@@ -4236,7 +4236,7 @@
         "noDataDescription": "Add more records to view statistical analysis",
         "painLevelChart": "Pain Intensity Trend",
         "cyclePatterns": "Menstrual Cycle Pain Patterns",
-        "remedyEffectiveness": "Remedy Effectiveness",
+        "remedyEffectiveness": "缓解方法效果",
         "inDevelopment": "Statistics feature is under development..."
       }
     },
@@ -4344,24 +4344,24 @@
       "subtitle": "Understand your TCM constitution type through professional questionnaire and get personalized health recommendations",
       "features": {
         "quick": {
-          "title": "Quick & Convenient",
-          "description": "Complete in 5-8 minutes"
+          "title": "快速便捷",
+          "description": "5-8分钟完成"
         },
         "professional": {
-          "title": "Professional & Reliable",
-          "description": "Based on TCM theory"
+          "title": "专业可靠",
+          "description": "基于中医理论"
         },
         "personalized": {
-          "title": "Personalized Recommendations",
-          "description": "Tailored to your constitution"
+          "title": "个性化建议",
+          "description": "根据您的体质定制"
         },
         "practical": {
-          "title": "Practical Guidance",
-          "description": "Acupoint, diet, lifestyle advice"
+          "title": "实用指导",
+          "description": "穴位、饮食、生活方式建议"
         }
       },
       "instructions": {
-        "title": "Test Instructions",
+        "title": "测试说明",
         "item1": "Answer based on your condition over the past 3 months",
         "item2": "Choose the option that best matches your situation",
         "item3": "If unsure, choose the relatively more applicable option",
@@ -6957,8 +6957,8 @@
       "learnMore": "了解更多"
     },
     "symptomChecker": {
-      "title": "Symptom Checker",
-      "description": "Quickly identify menstrual-related symptoms and get professional advice"
+      "title": "症状检查器",
+      "description": "快速识别与月经相关的症状并获得专业建议"
     }
   },
   "understandingPain": {
@@ -7810,7 +7810,7 @@
         }
       },
       "quickAccess": {
-        "title": "Quick Access",
+        "title": "快速访问",
         "medicalDisclaimer": "Medical Disclaimer",
         "medicalDisclaimerText": "This information is for educational purposes only and does not replace professional medical advice.",
         "emergencyRelief": "Emergency Relief",
@@ -7827,8 +7827,8 @@
       "description": "专为学生设计的校园经期应急和管理指南",
       "sections": {
         "classroom": {
-          "title": "Classroom Emergency Response",
-          "description": "How to handle sudden pain during class",
+          "title": "课堂应急处理",
+          "description": "如何处理课堂上的突发疼痛",
           "tips": [
             "Ask teacher for permission to use restroom",
             "Apply heat therapy with warm water bottle",
@@ -7837,8 +7837,8 @@
           ]
         },
         "dormitory": {
-          "title": "Dormitory Management",
-          "description": "Managing period pain in dormitory settings",
+          "title": "宿舍管理",
+          "description": "在宿舍环境中管理经期疼痛",
           "tips": [
             "Keep emergency supplies in dorm room",
             "Use heating pad or warm water bottle",
@@ -7848,7 +7848,7 @@
         },
         "peClass": {
           "title": "PE Class Strategies",
-          "description": "How to handle physical education during periods",
+          "description": "如何处理经期期间的体育课",
           "tips": [
             "Inform PE teacher about condition",
             "Request modified activities when needed",
@@ -7857,8 +7857,8 @@
           ]
         },
         "emergencyKit": {
-          "title": "Campus Emergency Kit",
-          "description": "Essential items to keep on campus",
+          "title": "校园应急包",
+          "description": "校园必备物品",
           "items": [
             "Pain medication (ibuprofen)",
             "Heating pad or warm water bottle",
@@ -7869,14 +7869,14 @@
         }
       },
       "emergencyContacts": {
-        "title": "Emergency Contacts",
+        "title": "紧急联系人",
         "schoolNurse": "School Nurse",
         "counselor": "School Counselor",
         "trustedAdult": "Trusted Adult",
         "parent": "Parent/Guardian"
       },
       "communication": {
-        "title": "Communication Tips",
+        "title": "沟通技巧",
         "withTeachers": "Talking to Teachers",
         "withPeers": "Talking to Peers",
         "withParents": "Talking to Parents",
@@ -8672,7 +8672,7 @@
     },
     "faq": {
       "title": "FAQ",
-      "description": "Quickly find answers to common questions",
+      "description": "快速找到常见问题的答案",
       "button": "View FAQ"
     }
   },
@@ -8807,7 +8807,7 @@
         }
       }
     },
-    "title": "Health Articles",
+    "title": "健康文章",
     "subtitle": "Professional guidance based on scientific research to help you better understand and manage menstrual health",
     "categories": {
       "pain": "Pain Management",
@@ -8822,7 +8822,7 @@
     "supplements": "Menstrual Health Supplements",
     "hydration": "Menstrual Hydration Guide",
     "cta": {
-      "title": "Need Personalized Advice?",
+      "title": "需要个性化建议？",
       "subtitle": "Use our interactive tools to get your exclusive health plan",
       "button": "Start Assessment"
     }
@@ -11392,7 +11392,7 @@
       "exportTypes": {
         "period": "Period Data",
         "nutrition": "Nutrition Data",
-        "all": "All Data"
+        "all": "全部数据"
       },
       "records": "records",
       "periodData": "Period Data",
@@ -11872,7 +11872,7 @@
         "subtitle": "继续深入了解经期健康",
         "readMore": "阅读更多",
         "moreComing": "More Articles Coming Soon",
-        "description": "We are preparing more high-quality health content, stay tuned.",
+        "description": "我们正在准备更多高质量的健康内容，敬请期待。",
         "browseAll": "Browse All Articles"
       }
     },
@@ -12123,45 +12123,45 @@
     }
   },
   "teen": {
-    "title": "Teen Health Zone",
+    "title": "青少年健康专区",
     "subtitle": "Menstrual health guidance designed specifically for teenage girls, making the journey of growth less confusing",
     "welcome": {
-      "title": "Welcome to Teen Health Zone",
+      "title": "欢迎来到青少年健康专区",
       "message": "This is a safe space specially prepared for teenage girls. We understand your confusion and concerns, and are willing to accompany you through this special stage of growth."
     },
     "basics": {
-      "title": "Menstrual Basics",
-      "description": "Learn the basic knowledge about menstruation, eliminate fear and misunderstanding"
+      "title": "月经基础知识",
+      "description": "学习月经基础知识，消除恐惧和误解"
     },
     "firstPeriod": {
-      "title": "First Period Guidance",
-      "description": "Preparation and coping methods for your first menstruation"
+      "title": "初潮指导",
+      "description": "为您的第一次月经做准备和应对方法"
     },
     "products": {
-      "title": "Hygiene Product Selection",
-      "description": "Learn about the usage and selection tips for various hygiene products"
+      "title": "卫生用品选择",
+      "description": "了解各种卫生用品的使用和选择技巧"
     },
     "support": {
-      "title": "Psychological Support",
-      "description": "Cope with emotional changes and psychological stress brought by menstruation"
+      "title": "心理支持",
+      "description": "应对月经带来的情绪变化和心理压力"
     },
     "learnMore": "Learn More",
     "cta": {
-      "title": "Still Have Questions?",
+      "title": "还有问题？",
       "subtitle": "Our professional team is always here to answer your questions",
       "button": "Consult Expert"
     }
   },
   "about": {
-    "title": "About Us",
+    "title": "关于我们",
     "subtitle": "Committed to providing professional and caring menstrual health management services for every woman",
     "mission": {
-      "title": "Our Mission",
-      "description": "We believe every woman deserves a healthy and confident menstrual experience."
+      "title": "我们的使命",
+      "description": "我们相信每位女性都应该拥有健康自信的月经体验。"
     },
     "contact": {
-      "title": "Want to Learn More?",
-      "description": "If you have any questions or suggestions, feel free to contact us anytime",
+      "title": "想了解更多？",
+      "description": "如果您有任何问题或建议，随时联系我们",
       "button": "Contact Us"
     }
   },
@@ -12169,14 +12169,14 @@
     "questionProgress": "问题 {current} / {total}",
     "advancedQuestion": "高级问题",
     "premiumQuestion": "🔓 高级问题",
-    "personalizedRecommendations": "Personalized Recommendations",
+    "personalizedRecommendations": "个性化建议",
     "recommendationItem": "Recommendation {index}",
     "recommendationCustom": "Custom Recommendation",
     "thanksMessage": "Thank you for completing the assessment!"
   },
   "paywall": {
     "description": {
-      "title": "Unlock Your Complete Stress Assessment",
+      "title": "解锁您的完整压力评估",
       "subtitle": "Get personalized recommendations and detailed insights with the full version",
       "features": [
         "Detailed stress analysis report",
@@ -12187,7 +12187,7 @@
     },
     "comparison": {
       "free": {
-        "title": "Free Version",
+        "title": "免费版本",
         "limitations": [
           "Basic assessment (5 questions)",
           "Simple results",
@@ -12195,7 +12195,7 @@
         ]
       },
       "premium": {
-        "title": "Premium Version",
+        "title": "高级版本",
         "benefits": [
           "Comprehensive assessment (20+ questions)",
           "Detailed analysis report",

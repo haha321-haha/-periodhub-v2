@@ -288,7 +288,10 @@ export default async function ImmediateReliefPage({
                   {t("gentleMovementDetails.yogaPoses.title")}
                 </h4>
                 <div className="space-y-3">
-                  {t.raw("gentleMovementDetails.yogaPoses.poses").map(
+                  {(Array.isArray(t.raw("gentleMovementDetails.yogaPoses.poses"))
+                    ? t.raw("gentleMovementDetails.yogaPoses.poses")
+                    : []
+                  ).map(
                     (
                       pose: {
                         name: string;
@@ -322,9 +325,10 @@ export default async function ImmediateReliefPage({
                   {t("gentleMovementDetails.breathingExercises.title")}
                 </h4>
                 <div className="space-y-2">
-                  {t
-                    .raw("gentleMovementDetails.breathingExercises.exercises")
-                    .map(
+                  {(Array.isArray(t.raw("gentleMovementDetails.breathingExercises.exercises"))
+                    ? t.raw("gentleMovementDetails.breathingExercises.exercises")
+                    : []
+                  ).map(
                       (
                         exercise: {
                           name: string;
@@ -482,7 +486,10 @@ export default async function ImmediateReliefPage({
                   {t("acupressureDetails.title")}
                 </h4>
                 <div className="space-y-3">
-                  {t.raw("acupressureDetails.acupoints").map(
+                  {(Array.isArray(t.raw("acupressureDetails.acupoints"))
+                    ? t.raw("acupressureDetails.acupoints")
+                    : []
+                  ).map(
                     (
                       point: {
                         name: string;
@@ -619,7 +626,11 @@ export default async function ImmediateReliefPage({
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {t.raw("combinationTherapy.combinations").map(
+            {(typeof t.raw("combinationTherapy.combinations") === "object" &&
+            t.raw("combinationTherapy.combinations") !== null
+              ? Object.values(t.raw("combinationTherapy.combinations"))
+              : []
+            ).map(
               (
                 combination: {
                   level: string;
@@ -671,7 +682,11 @@ export default async function ImmediateReliefPage({
                 {t("emergencyResponse.immediateActionsTitle")}
               </h3>
               <ul className="space-y-2">
-                {Object.values(t.raw("emergencyResponse.immediateActions")).map(
+                {(typeof t.raw("emergencyResponse.immediateActions") === "object" &&
+                t.raw("emergencyResponse.immediateActions") !== null
+                  ? Object.values(t.raw("emergencyResponse.immediateActions"))
+                  : []
+                ).map(
                   (action: string, index: number) => (
                     <li
                       key={index}
@@ -691,8 +706,10 @@ export default async function ImmediateReliefPage({
                 {t("emergencyResponse.medicalIndicators.title")}
               </h3>
               <ul className="space-y-2">
-                {Object.values(
-                  t.raw("emergencyResponse.medicalIndicators.indicators"),
+                {(typeof t.raw("emergencyResponse.medicalIndicators.indicators") === "object" &&
+                t.raw("emergencyResponse.medicalIndicators.indicators") !== null
+                  ? Object.values(t.raw("emergencyResponse.medicalIndicators.indicators"))
+                  : []
                 ).map((indicator: string, index: number) => (
                   <li
                     key={index}
@@ -712,7 +729,11 @@ export default async function ImmediateReliefPage({
               {t("emergencyResponse.emergencyKit.title")}
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {Object.values(t.raw("emergencyResponse.emergencyKit.items")).map(
+              {(typeof t.raw("emergencyResponse.emergencyKit.items") === "object" &&
+              t.raw("emergencyResponse.emergencyKit.items") !== null
+                ? Object.values(t.raw("emergencyResponse.emergencyKit.items"))
+                : []
+              ).map(
                 (item: string, index: number) => (
                   <div
                     key={index}

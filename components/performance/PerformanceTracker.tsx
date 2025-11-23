@@ -172,8 +172,12 @@ export default function PerformanceTracker() {
       let clsValue = 0;
       const clsObserver = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          const layoutShiftEntry = entry as PerformanceLayoutShiftEntry;
-          if (!layoutShiftEntry.hadRecentInput) {
+          // 使用 PerformanceEntry 类型，然后检查属性
+          const layoutShiftEntry = entry as {
+            hadRecentInput?: boolean;
+            value?: number;
+          };
+          if (!layoutShiftEntry.hadRecentInput && layoutShiftEntry.value) {
             clsValue += layoutShiftEntry.value;
           }
         }
@@ -236,7 +240,8 @@ export default function PerformanceTracker() {
               navigation.responseStart - navigation.requestStart,
             ),
             dom_processing: Math.round(
-              navigation.domComplete - navigation.domLoading,
+              navigation.domComplete -
+                (navigation.domContentLoadedEventStart || 0),
             ),
             total_load_time: Math.round(
               navigation.loadEventEnd - navigation.fetchStart,

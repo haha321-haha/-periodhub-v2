@@ -41,8 +41,8 @@ export default function StressAssessmentWidget() {
   const FREE_QUESTIONS = 5; // 免费问题数量
 
   useEffect(() => {
-    trackAssessmentStart(userId);
-  }, [userId]);
+    trackAssessmentStart("stress_assessment", "stress_assessment");
+  }, []);
 
   const questions = [
     // 免费问题 (1-5)
@@ -192,7 +192,16 @@ export default function StressAssessmentWidget() {
         setStressScore(score);
         setStressLevel(level);
         setShowResults(true);
-        trackAssessmentComplete(userId, score, newAnswers);
+        // 计算持续时间（秒），使用开始时间或默认值
+        const duration = Math.round(
+          (Date.now() - (startTime || Date.now())) / 1000,
+        );
+        trackAssessmentComplete(
+          "stress_assessment",
+          "stress_assessment",
+          score,
+          duration,
+        );
       }, 300);
     }
   };
@@ -240,7 +249,15 @@ export default function StressAssessmentWidget() {
     setShowResults(true);
 
     // 追踪评估完成
-    trackAssessmentComplete(userId, score, currentAnswers);
+    const duration = Math.round(
+      (Date.now() - (startTime || Date.now())) / 1000,
+    );
+    trackAssessmentComplete(
+      "stress_assessment",
+      "stress_assessment",
+      score,
+      duration,
+    );
   };
 
   const handlePrevious = () => {

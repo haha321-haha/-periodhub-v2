@@ -11,7 +11,11 @@ interface PHQ9AssessmentProps {
   className?: string;
 }
 
-export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9AssessmentProps) {
+export function PHQ9Assessment({
+  onComplete,
+  onPrevious,
+  className = "",
+}: PHQ9AssessmentProps) {
   const t = useTranslations("phq9");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<PHQ9Answer[]>([]);
@@ -64,9 +68,7 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
 
   const progress = ((currentQuestion + 1) / PHQ9_QUESTIONS.length) * 100;
   const currentQ = PHQ9_QUESTIONS[currentQuestion];
-  const currentAnswer = answers.find(
-    (a) => a.questionId === currentQ.order,
-  );
+  const currentAnswer = answers.find((a) => a.questionId === currentQ.order);
 
   if (isCompleting) {
     return (
@@ -78,9 +80,7 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
             {t("completing")}
           </h2>
-          <p className="text-gray-600">
-            {t("calculatingResults")}
-          </p>
+          <p className="text-gray-600">{t("calculatingResults")}</p>
         </div>
       </div>
     );
@@ -116,9 +116,7 @@ export function PHQ9Assessment({ onComplete, onPrevious, className = "" }: PHQ9A
           {currentQ.text}
         </h2>
 
-        <p className="text-gray-600 mb-6">
-          {t("timeframe")}
-        </p>
+        <p className="text-gray-600 mb-6">{t("timeframe")}</p>
 
         {/* Medical Disclaimer for sensitive questions */}
         {currentQ.id === "phq9_9" && (
@@ -218,27 +216,43 @@ interface PHQ9ResultsProps {
   className?: string;
 }
 
-export function PHQ9Results({ result, onRestart, onContinue, className = "" }: PHQ9ResultsProps) {
+export function PHQ9Results({
+  result,
+  onRestart,
+  onContinue,
+  className = "",
+}: PHQ9ResultsProps) {
   const t = useTranslations("phq9");
 
   const getRiskColor = (level: string) => {
     switch (level) {
-      case 'low': return 'text-green-600 bg-green-50 border-green-200';
-      case 'moderate': return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-      case 'high': return 'text-orange-600 bg-orange-50 border-orange-200';
-      case 'severe': return 'text-red-600 bg-red-50 border-red-200';
-      default: return 'text-gray-600 bg-gray-50 border-gray-200';
+      case "low":
+        return "text-green-600 bg-green-50 border-green-200";
+      case "moderate":
+        return "text-yellow-600 bg-yellow-50 border-yellow-200";
+      case "high":
+        return "text-orange-600 bg-orange-50 border-orange-200";
+      case "severe":
+        return "text-red-600 bg-red-50 border-red-200";
+      default:
+        return "text-gray-600 bg-gray-50 border-gray-200";
     }
   };
 
   const getLevelEmoji = (level: string) => {
     switch (level) {
-      case 'none': return '😊';
-      case 'mild': return '😐';
-      case 'moderate': return '😟';
-      case 'moderate-severe': return '😰';
-      case 'severe': return '😱';
-      default: return '🤔';
+      case "none":
+        return "😊";
+      case "mild":
+        return "😐";
+      case "moderate":
+        return "😟";
+      case "moderate-severe":
+        return "😰";
+      case "severe":
+        return "😱";
+      default:
+        return "🤔";
     }
   };
 
@@ -252,9 +266,7 @@ export function PHQ9Results({ result, onRestart, onContinue, className = "" }: P
         <h1 className="text-3xl font-bold text-gray-800 mb-2">
           {t("resultsTitle")}
         </h1>
-        <p className="text-gray-600">
-          {t("resultsSubtitle")}
-        </p>
+        <p className="text-gray-600">{t("resultsSubtitle")}</p>
       </div>
 
       {/* Score Display */}
@@ -302,7 +314,7 @@ export function PHQ9Results({ result, onRestart, onContinue, className = "" }: P
               {t("requiresHelp")}
             </h4>
             <p className="text-gray-600">
-              {result.requiresProfessionalHelp ?? false ? t("yes") : t("no")}
+              {(result.requiresProfessionalHelp ?? false) ? t("yes") : t("no")}
             </p>
           </div>
         </div>
@@ -382,18 +394,12 @@ export function PHQ9Results({ result, onRestart, onContinue, className = "" }: P
       {/* Action Buttons */}
       <div className="flex gap-4">
         {onRestart && (
-          <button
-            onClick={onRestart}
-            className="flex-1 btn-secondary py-3"
-          >
+          <button onClick={onRestart} className="flex-1 btn-secondary py-3">
             {t("retakeAssessment")}
           </button>
         )}
         {onContinue && (
-          <button
-            onClick={onContinue}
-            className="flex-1 btn-primary py-3"
-          >
+          <button onClick={onContinue} className="flex-1 btn-primary py-3">
             {t("continue")}
           </button>
         )}

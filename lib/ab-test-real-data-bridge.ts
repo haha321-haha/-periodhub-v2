@@ -17,7 +17,7 @@ export function collectWithABTest(
   const variant = getABTestVariant(testName);
 
   const enrichedData = {
-    ...data,
+    ...(typeof data === "object" && data !== null ? data : {}),
     abTest: {
       testName,
       variant,

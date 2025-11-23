@@ -193,7 +193,7 @@ function setupPerformanceMonitoring() {
   });
 
   // 监控用户交互性能
-  // let interactionStart = 0; // Unused
+  let interactionStart = 0;
 
   ["click", "touchstart", "keydown"].forEach((eventType) => {
     document.addEventListener(

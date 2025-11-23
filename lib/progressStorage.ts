@@ -137,6 +137,9 @@ export function getStatistics() {
       totalEntries: 0,
       averageStressLevel: 0,
       averageMoodRating: 0,
+      averageStress: 0, // 别名
+      averageMood: 0, // 别名
+      techniquesUsedRate: 0,
       mostUsedTechniques: [],
       improvementTrend: 0,
     };
@@ -174,10 +177,22 @@ export function getStatistics() {
   const improvementTrend =
     previousAvg > 0 ? ((previousAvg - recentAvg) / previousAvg) * 100 : 0;
 
+  const avgStress = totalStress / data.entries.length;
+  const avgMood = totalMood / data.entries.length;
+  const techniquesUsedRate =
+    data.entries.length > 0
+      ? (data.entries.filter((e) => e.techniques.length > 0).length /
+          data.entries.length) *
+        100
+      : 0;
+
   return {
     totalEntries: data.entries.length,
-    averageStressLevel: totalStress / data.entries.length,
-    averageMoodRating: totalMood / data.entries.length,
+    averageStressLevel: avgStress,
+    averageMoodRating: avgMood,
+    averageStress: avgStress, // 别名
+    averageMood: avgMood, // 别名
+    techniquesUsedRate,
     mostUsedTechniques,
     improvementTrend,
   };
@@ -283,7 +298,62 @@ export function deleteOldestEntries(count: number): boolean {
   return saveProgress(data);
 }
 
-export function calculateStats() {
+export function calculateStats(entries?: ProgressEntry[]) {
+  if (entries && entries.length > 0) {
+    // 如果提供了 entries，使用它们计算统计
+    const totalStress = entries.reduce((sum, e) => sum + e.stressLevel, 0);
+    const totalMood = entries.reduce((sum, e) => sum + e.moodRating, 0);
+
+    // 统计技巧使用频率
+    const techniqueCount: Record<string, number> = {};
+    entries.forEach((entry) => {
+      entry.techniques.forEach((tech) => {
+        techniqueCount[tech] = (techniqueCount[tech] || 0) + 1;
+      });
+    });
+
+    const mostUsedTechniques = Object.entries(techniqueCount)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 5)
+      .map(([tech, count]) => ({ technique: tech, count }));
+
+    // 计算改善趋势
+    const recent = entries.slice(-7);
+    const previous = entries.slice(-14, -7);
+
+    const recentAvg =
+      recent.length > 0
+        ? recent.reduce((sum, e) => sum + e.stressLevel, 0) / recent.length
+        : 0;
+    const previousAvg =
+      previous.length > 0
+        ? previous.reduce((sum, e) => sum + e.stressLevel, 0) / previous.length
+        : 0;
+
+    const improvementTrend =
+      previousAvg > 0 ? ((previousAvg - recentAvg) / previousAvg) * 100 : 0;
+
+    const avgStress = totalStress / entries.length;
+    const avgMood = totalMood / entries.length;
+    const techniquesUsedRate =
+      entries.length > 0
+        ? (entries.filter((e) => e.techniques.length > 0).length /
+            entries.length) *
+          100
+        : 0;
+
+    return {
+      totalEntries: entries.length,
+      averageStressLevel: avgStress,
+      averageMoodRating: avgMood,
+      averageStress: avgStress, // 别名
+      averageMood: avgMood, // 别名
+      techniquesUsedRate,
+      mostUsedTechniques,
+      improvementTrend,
+    };
+  }
+  // 否则使用默认的 getStatistics
   return getStatistics();
 }
 

@@ -27,8 +27,17 @@ type StructuredDataProps =
   | { type: StructuredDataType; data: StructuredDataData };
 
 export default function StructuredData(props: StructuredDataProps) {
-  const normalized: { type: StructuredDataType } & StructuredDataData =
-    "data" in props ? { type: props.type, ...props.data } : props;
+  let normalized: { type: StructuredDataType } & StructuredDataData;
+  if (
+    "data" in props &&
+    props.data &&
+    typeof props.data === "object" &&
+    props.data !== null
+  ) {
+    normalized = { type: props.type, ...(props.data as StructuredDataData) };
+  } else {
+    normalized = props as { type: StructuredDataType } & StructuredDataData;
+  }
 
   const data = generateStructuredData(normalized);
   return <StructuredDataScript data={data} />;

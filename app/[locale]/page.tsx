@@ -49,11 +49,8 @@ export async function generateMetadata({
 
   return {
     ...metadata,
-    other: {
-      ...metadata.other,
-      "fb:app_id":
-        process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
-    },
+    // other 属性在 Next.js Metadata 类型中不存在，使用其他方式处理
+    // fb:app_id 可以通过 openGraph 或其他方式设置
     openGraph: {
       ...metadata.openGraph,
       images: [

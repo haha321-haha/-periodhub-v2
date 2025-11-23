@@ -20,13 +20,18 @@ export async function generateMetadata({
   // 获取SEO关键词，支持多种路径
   let seoKeywords: string[] = [];
   try {
-    seoKeywords = t.raw("metadata.seoKeywords") || [];
-  } catch {
-    try {
-      seoKeywords = t.raw("seoKeywords") || [];
-    } catch {
+    const rawKeywords = t.raw("seoKeywords");
+    // 确保返回的是数组
+    if (Array.isArray(rawKeywords)) {
+      seoKeywords = rawKeywords;
+    } else if (typeof rawKeywords === "string") {
+      seoKeywords = [rawKeywords];
+    } else {
       seoKeywords = [];
     }
+  } catch {
+    // 如果翻译键不存在，使用空数组
+    seoKeywords = [];
   }
   
   return {

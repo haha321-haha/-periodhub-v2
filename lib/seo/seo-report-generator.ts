@@ -70,14 +70,33 @@ export class SEOReportGenerator {
 
     const report: SEOReport = {
       summary: await this.generateSummary(
-        keywordRankings,
-        webVitals,
-        competitorData,
+        {
+          topRanked: keywordRankings.topRanked.map((r) => r.keyword),
+          opportunities: keywordRankings.opportunities.map((r) => ({
+            keyword: r.keyword,
+            currentPosition: r.currentPosition,
+          })),
+          averagePosition: keywordRankings.averagePosition,
+        } as KeywordRankings,
+        webVitals as WebVitalsData,
+        competitorData as Competitor[],
       ),
       technicalSEO: await this.analyzeTechnicalSEO(),
-      contentSEO: await this.analyzeContentSEO(keywordRankings),
-      performance: this.analyzePerformance(webVitals),
-      competitorAnalysis: await this.analyzeCompetitors(competitorData),
+      contentSEO: await this.analyzeContentSEO({
+        topRanked: keywordRankings.topRanked.map((r) => r.keyword),
+        opportunities: keywordRankings.opportunities.map((r) => ({
+          keyword: r.keyword,
+          currentPosition: r.currentPosition,
+        })),
+        averagePosition: keywordRankings.averagePosition,
+      } as KeywordRankings),
+      performance: this.analyzePerformance(webVitals as WebVitalsData),
+      competitorAnalysis: await this.analyzeCompetitors(
+        competitorData.map((c) => ({
+          name: (c as { name?: string }).name || "",
+          domain: (c as { domain?: string }).domain || "",
+        })) as unknown as Competitor[],
+      ),
     };
 
     return report;
@@ -255,9 +274,11 @@ export class SEOReportGenerator {
   }
 
   private analyzePerformance(
-    webVitals: WebVitalsData,
+    webVitals: WebVitalsData | string,
   ): SEOReport["performance"] {
-    const avgMetrics = webVitals.summary?.averageMetrics || {};
+    const webVitalsData =
+      typeof webVitals === "string" ? { summary: {} } : webVitals;
+    const avgMetrics = webVitalsData.summary?.averageMetrics || {};
     const issues: string[] = [];
     const improvements: string[] = [];
 
@@ -274,7 +295,7 @@ export class SEOReportGenerator {
 
     return {
       webVitals: avgMetrics as WebVitalsData["summary"]["averageMetrics"],
-      score: Math.min(100, Math.round(webVitals.summary?.score || 80)),
+      score: Math.min(100, Math.round(webVitalsData.summary?.score || 80)),
       issues,
       improvements,
     };

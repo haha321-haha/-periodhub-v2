@@ -3,7 +3,7 @@
  * 用于收集用户的真实使用数据（匿名化）
  */
 
-import { LocalStorageManager } from "./localStorage";
+// Using direct localStorage API instead of LocalStorageManager
 
 export interface DataPoint {
   id: string;
@@ -72,13 +72,16 @@ const MAX_DATA_POINTS = 500;
  * 获取或创建会话 ID
  */
 function getSessionId(): string {
-  let sessionId = LocalStorageManager.getItem<string>(SESSION_KEY);
+  if (typeof window === "undefined") {
+    return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  }
+  let sessionId = localStorage.getItem(SESSION_KEY);
 
   if (!sessionId) {
     sessionId = `session_${Date.now()}_${Math.random()
       .toString(36)
       .substr(2, 9)}`;
-    LocalStorageManager.setItem(SESSION_KEY, sessionId);
+    localStorage.setItem(SESSION_KEY, sessionId);
   }
 
   return sessionId;
@@ -88,8 +91,10 @@ function getSessionId(): string {
  * 收集数据点
  */
 export function collectDataPoint(type: string, data: unknown): boolean {
-  const dataPoints = LocalStorageManager.getItem<DataPoint[]>(STORAGE_KEY, []);
-  if (!dataPoints) return false;
+  if (typeof window === "undefined") return false;
+  const stored = localStorage.getItem(STORAGE_KEY);
+  const dataPoints = stored ? (JSON.parse(stored) as DataPoint[]) : [];
+  if (!dataPoints || !Array.isArray(dataPoints)) return false;
 
   const dataPoint: DataPoint = {
     id: `dp_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -106,14 +111,21 @@ export function collectDataPoint(type: string, data: unknown): boolean {
     dataPoints.splice(0, dataPoints.length - MAX_DATA_POINTS);
   }
 
-  return LocalStorageManager.setItem(STORAGE_KEY, dataPoints);
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(dataPoints));
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
 
 /**
  * 获取所有数据点
  */
 export function getAllDataPoints(): DataPoint[] {
-  return LocalStorageManager.getItem<DataPoint[]>(STORAGE_KEY, []) || [];
+  if (typeof window === "undefined") return [];
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored ? (JSON.parse(stored) as DataPoint[]) : [];
 }
 
 /**
@@ -128,7 +140,13 @@ export function getDataPointsByType(type: string): DataPoint[] {
  * 清除数据
  */
 export function clearCollectedData(): boolean {
-  return LocalStorageManager.removeItem(STORAGE_KEY);
+  try {
+    if (typeof window === "undefined") return false;
+    localStorage.removeItem(STORAGE_KEY);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /**

@@ -175,7 +175,10 @@ export class KeywordTracker {
   /**
    * 获取关键词趋势数据
    */
-  async getKeywordTrends(keyword: string): Promise<KeywordTrendData | null> {
+  async getKeywordTrends(keyword: string): Promise<{
+    keyword: string;
+    trends: Array<{ date: string; volume: number; position: number }>;
+  } | null> {
     try {
       const response = await fetch(
         `${this.config.baseUrl}/keywords_data/google/search_volume/live`,
@@ -218,7 +221,10 @@ export class KeywordTracker {
   /**
    * 获取本地存储的排名数据
    */
-  private getStoredData(): StoredData {
+  private getStoredData(): {
+    rankings: KeywordRanking[];
+    lastUpdate: string | null;
+  } {
     if (typeof window === "undefined")
       return { rankings: [], lastUpdate: null };
 

@@ -18,7 +18,10 @@ export function useSafeTranslations(namespace?: string) {
     fallback?: string,
   ): string => {
     try {
-      const result = t(key, params);
+      const result = t(
+        key,
+        params as Record<string, string | number | boolean | null | undefined>,
+      );
 
       if (result === key || result.includes(key)) {
         return fallback || key;

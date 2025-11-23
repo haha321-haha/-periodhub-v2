@@ -3,7 +3,7 @@
  * 缓存文章推荐结果以提高性能
  */
 
-import { LocalStorageManager } from "./localStorage";
+// Using direct localStorage API instead of LocalStorageManager
 
 export interface CachedRecommendation {
   articleSlug: string;
@@ -53,7 +53,13 @@ export function setCachedRecommendations(
     locale,
   };
 
-  return LocalStorageManager.setItem(cacheKey, cached);
+  try {
+    if (typeof window === "undefined") return false;
+    localStorage.setItem(cacheKey, JSON.stringify(cached));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -64,19 +70,26 @@ export function clearRecommendationCache(
   locale: string,
 ): boolean {
   const cacheKey = `${CACHE_KEY_PREFIX}${articleSlug}_${locale}`;
-  return LocalStorageManager.removeItem(cacheKey);
+  try {
+    if (typeof window === "undefined") return false;
+    localStorage.removeItem(cacheKey);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 /**
  * 清除所有推荐缓存
  */
 export function clearAllRecommendationCache(): void {
-  const keys = LocalStorageManager.getAllKeys();
-  keys.forEach((key) => {
-    if (key.startsWith(CACHE_KEY_PREFIX)) {
-      LocalStorageManager.removeItem(key);
+  if (typeof window === "undefined") return;
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith(CACHE_KEY_PREFIX)) {
+      localStorage.removeItem(key);
     }
-  });
+  }
 }
 
 /**
@@ -91,7 +104,9 @@ export function getRecommendationCacheStats() {
   const now = Date.now();
 
   cacheKeys.forEach((key) => {
-    const cached = LocalStorageManager.getItem<CachedRecommendation>(key);
+    const stored = localStorage.getItem(key);
+    if (!stored) continue;
+    const cached = JSON.parse(stored) as CachedRecommendation;
     if (cached) {
       totalSize += JSON.stringify(cached).length;
       if (now - cached.timestamp > CACHE_DURATION) {

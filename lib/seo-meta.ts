@@ -90,7 +90,9 @@ export function generateAdvancedMeta({
         "x-default": canonical?.replace("/zh/", "/en/") || canonical,
       },
     },
-    other: otherMetadata,
+    other: otherMetadata as {
+      [name: string]: string | number | (string | number)[];
+    },
   };
 }
 

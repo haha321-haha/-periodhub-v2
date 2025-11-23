@@ -385,7 +385,12 @@ export class ResourceValidator {
     }
 
     for (const [fileKey, fileInfo] of Object.entries(files)) {
-      if (!fileInfo.url || typeof fileInfo.url !== "string") {
+      const file = fileInfo as {
+        url?: unknown;
+        mimeType?: unknown;
+        size?: unknown;
+      };
+      if (!file.url || typeof file.url !== "string") {
         errors.push({
           field: "files",
           message: `File ${fileKey} must have a valid URL`,
@@ -394,7 +399,7 @@ export class ResourceValidator {
         });
       }
 
-      if (!fileInfo.mimeType || typeof fileInfo.mimeType !== "string") {
+      if (!file.mimeType || typeof file.mimeType !== "string") {
         errors.push({
           field: "files",
           message: `File ${fileKey} must have a valid MIME type`,
@@ -403,7 +408,11 @@ export class ResourceValidator {
         });
       }
 
-      if (fileInfo.size && fileInfo.size > this.config.maxFileSize) {
+      if (
+        file.size &&
+        typeof file.size === "number" &&
+        file.size > this.config.maxFileSize
+      ) {
         errors.push({
           field: "files",
           message: `File ${fileKey} exceeds maximum size limit`,

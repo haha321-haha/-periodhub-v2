@@ -168,14 +168,13 @@ export class PerformanceMonitor {
     // 这里可以集成Google Analytics、Mixpanel等分析服务
     if (typeof window !== "undefined" && "gtag" in window) {
       (
-        window as Window & {
+        window as unknown as Window & {
           gtag?: (command: string, params: Record<string, unknown>) => void;
         }
       ).gtag?.("event", "web_vitals", {
-        name: metric,
-        value: Math.round(value),
         event_category: "Performance",
-        event_label: window.location.pathname,
+        event_label: metric,
+        value: Math.round(value),
         non_interaction: true,
       });
     }

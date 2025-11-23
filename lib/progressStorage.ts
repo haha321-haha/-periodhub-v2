@@ -3,7 +3,7 @@
  * 管理用户的压力管理记录和进度数据
  */
 
-import { LocalStorageManager } from "./localStorage";
+// Using direct localStorage API instead of LocalStorageManager
 import { logError } from "@/lib/debug-logger";
 
 export interface ProgressEntry {
@@ -28,7 +28,11 @@ const MAX_ENTRIES = 100; // 最多保存 100 条记录
  * 获取所有进度记录
  */
 export function getProgress(): ProgressData {
-  const data = LocalStorageManager.getItem<ProgressData>(STORAGE_KEY);
+  if (typeof window === "undefined") {
+    return { entries: [], lastUpdated: Date.now() };
+  }
+  const stored = localStorage.getItem(STORAGE_KEY);
+  const data = stored ? (JSON.parse(stored) as ProgressData) : null;
 
   if (!data) {
     return {
@@ -50,7 +54,14 @@ export function saveProgress(data: ProgressData): boolean {
   }
 
   data.lastUpdated = Date.now();
-  return LocalStorageManager.setItemWithTimestamp(STORAGE_KEY, data);
+  try {
+    if (typeof window === "undefined") return false;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    return true;
+  } catch (error) {
+    logError("Failed to save progress:", error, "progressStorage/saveProgress");
+    return false;
+  }
 }
 
 /**
@@ -202,7 +213,18 @@ export function getStatistics() {
  * 清空所有记录
  */
 export function clearProgress(): boolean {
-  return LocalStorageManager.removeItem(STORAGE_KEY);
+  try {
+    if (typeof window === "undefined") return false;
+    localStorage.removeItem(STORAGE_KEY);
+    return true;
+  } catch (error) {
+    logError(
+      "Failed to clear progress:",
+      error,
+      "progressStorage/clearProgress",
+    );
+    return false;
+  }
 }
 
 /**

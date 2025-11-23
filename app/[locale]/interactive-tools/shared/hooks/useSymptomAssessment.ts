@@ -215,28 +215,33 @@ export const useSymptomAssessment = (
         );
 
         // 根据评估模式选择计算函数
+        // AnswerMap (Record<string, AnswerValue>) 在运行时与 SymptomAssessmentInputs/MedicalAssessmentInputs 兼容
+        // 但 TypeScript 无法自动推断这种兼容性，所以需要使用类型断言
+        // 使用 unknown 作为中间类型，比 any 更安全
         let calculationResult;
         if (currentSession.mode === "medical") {
           // 医疗专业版：使用综合评估（症状+职场）
-          // Type assertion needed because AnswerMap is compatible with MedicalAssessmentInputs
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // Type assertion: AnswerMap is runtime-compatible with MedicalAssessmentInputs
           calculationResult = calculateMedicalImpact(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            answersForCalculation as any,
+            answersForCalculation as unknown as Parameters<
+              typeof calculateMedicalImpact
+            >[0],
             effectiveLocale,
           );
         } else if (currentSession.mode === "detailed") {
           // 详细版：使用详细症状评估
           calculationResult = calculateDetailedImpact(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            answersForCalculation as any,
+            answersForCalculation as unknown as Parameters<
+              typeof calculateDetailedImpact
+            >[0],
             effectiveLocale,
           );
         } else {
           // 简化版：使用基础症状评估
           calculationResult = calculateSymptomImpact(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            answersForCalculation as any,
+            answersForCalculation as unknown as Parameters<
+              typeof calculateSymptomImpact
+            >[0],
             effectiveLocale,
           );
         }

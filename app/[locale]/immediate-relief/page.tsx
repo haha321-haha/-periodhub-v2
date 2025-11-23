@@ -5,6 +5,7 @@ import {
 } from "next-intl/server";
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
+import { Locale, locales } from "@/i18n";
 // import { URL_CONFIG } from "@/lib/url-config";
 
 // Generate metadata for the page
@@ -55,6 +56,11 @@ export async function generateMetadata({
       publishedTime: new Date().toISOString(),
     },
   };
+}
+
+// Generate static params for all supported locales
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
 }
 
 export default async function ImmediateReliefPage({

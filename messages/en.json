@@ -54,8 +54,8 @@
       "en": "English",
       "zh": "中文"
     },
-    "menu": "[TRANSLATE: Menu]",
-    "close": "[TRANSLATE: Close]"
+    "menu": "Menu",
+    "close": "Close"
   },
   "footer": {
     "companyName": "PeriodHub",
@@ -75,14 +75,14 @@
     "contactEmailBody": "Hello, I would like to inquire about menstrual health management.",
     "copyright": "© 2,025 www.periodhub.health. All rights reserved.",
     "medicalDisclaimerFull": "Medical Disclaimer: The content on this website is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. We are not medical professionals. If you have any medical questions, please consult your doctor or other qualified healthcare provider. In case of emergency, please seek medical assistance immediately. Using this website does not constitute a doctor-patient relationship.",
-    "quickLinks": "[TRANSLATE: Quick Links]",
-    "support": "[TRANSLATE: Support]",
-    "contactUs": "[TRANSLATE: Contact Us]",
-    "helpCenter": "[TRANSLATE: Help Center]",
-    "email": "[TRANSLATE: Email]",
-    "support24": "[TRANSLATE: Providing professional health guidance for you]",
-    "allRights": "[TRANSLATE: All rights reserved.]",
-    "disclaimer": "[TRANSLATE: This content is for reference only and cannot replace professional medical advice.]"
+    "quickLinks": "Quick Links",
+    "support": "Support",
+    "contactUs": "Contact Us",
+    "helpCenter": "Help Center",
+    "email": "Email",
+    "support24": "24/7 Professional Health Support",
+    "allRights": "All rights reserved.",
+    "disclaimer": "This content is for reference only and cannot replace professional medical advice."
   },
   "languageSwitcher": {
     "chinese": "中文",
@@ -167,9 +167,9 @@
       "privacyFirstDesc": "Data security protection",
       "precisionPrediction": "Precision Prediction",
       "precisionPredictionDesc": "AI intelligent analysis",
-      "articles": "[TRANSLATE: 22 Professional Articles]",
-      "tools": "[TRANSLATE: 4 Interactive Tools]",
-      "support": "[TRANSLATE: 24/7 Online Support]"
+      "articles": "Professional Articles",
+      "tools": "Interactive Tools",
+      "support": "24/7 Online Support"
     },
     "immediateRelief": "Get My Relief Plan",
     "cta": {
@@ -192,8 +192,8 @@
       "constitutionTestDesc": "Personalized health assessment"
     },
     "ctaSupportText": "Free • 3 minutes • Science-based",
-    "description": "[TRANSLATE: 专业的经期健康管理平台，循证指导与隐私保护，陪伴每位女性科学管理生理期]",
-    "learnMore": "[TRANSLATE: Browse Articles]"
+    "description": "Professional menstrual health management platform with evidence-based guidance and privacy protection, helping every woman scientifically manage her menstrual cycle.",
+    "learnMore": "Browse Articles"
   },
   "homepage": {
     "hero": {
@@ -299,9 +299,9 @@
       "supportTime": "Within 12 hours"
     },
     "faq": {
-      "title": "[TRANSLATE: FAQ]",
-      "description": "[TRANSLATE: Quickly find answers to common questions]",
-      "button": "[TRANSLATE: View FAQ]"
+      "title": "FAQ",
+      "description": "Quickly find answers to common questions",
+      "button": "View FAQ"
     }
   },
   "cycleTracker": {
@@ -1612,22 +1612,22 @@
       },
       "relatedArticles": {
         "comprehensiveMedicalGuide": {
-          "title": "[TRANSLATE: 痛经综合医疗指南]",
-          "description": "[TRANSLATE: 专业医疗视角解析痛经，包含症状诊断和治疗方案]",
-          "category": "[TRANSLATE: 医疗指南]",
-          "readTime": "[TRANSLATE: 15分钟阅读]"
+          "title": "Comprehensive Medical Guide for Dysmenorrhea",
+          "description": "Professional medical perspective on dysmenorrhea, including symptom diagnosis and treatment plans",
+          "category": "Medical Guide",
+          "readTime": "15 min read"
         },
         "naturalReliefMethods": {
-          "title": "[TRANSLATE: 家庭自然疼痛缓解方法]",
-          "description": "[TRANSLATE: 自然、安全的居家疼痛缓解方法，无药物副作用]",
-          "category": "[TRANSLATE: 自然疗法]",
-          "readTime": "[TRANSLATE: 10分钟阅读]"
+          "title": "Natural Home Pain Relief Methods",
+          "description": "Natural and safe home pain relief methods without medication side effects",
+          "category": "Natural Therapies",
+          "readTime": "10 min read"
         },
         "menstrualPainFAQ": {
-          "title": "[TRANSLATE: 痛经常见问题专家解答]",
-          "description": "[TRANSLATE: 医学专家解答关于痛经的常见问题和疑虑]",
-          "category": "[TRANSLATE: 常见问题]",
-          "readTime": "[TRANSLATE: 8分钟阅读]"
+          "title": "Expert Answers to Common Questions About Dysmenorrhea",
+          "description": "Medical experts answer common questions and concerns about dysmenorrhea",
+          "category": "Common Questions",
+          "readTime": "8 min read"
         }
       }
     },
@@ -1686,7 +1686,11 @@
         "title": "使用建议：",
         "bestTiming": {
           "title": "最佳时机：",
-          "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
+          "items": [
+            "疼痛刚开始时",
+            "感到焦虑紧张时",
+            "睡前放松时"
+          ]
         },
         "precautions": {
           "title": "注意事项：",
@@ -2057,45 +2061,45 @@
     "subtitle": "Professional data based on global women's health surveys",
     "dataSource": "Data Source: Global Women's Health Survey",
     "infographicAlt": "Period Health Statistics Infographic",
-    "chartTitle": "[TRANSLATE: 月经健康统计数据]",
-    "chartSubtitle": "[TRANSLATE: Period Health Statistics]",
+    "chartTitle": "Menstrual Health Statistics",
+    "chartSubtitle": "Period Health Statistics",
     "stats": {
       "experiencePain": {
-        "label": "[TRANSLATE: 女性经历痛经]",
-        "sublabel": "[TRANSLATE: Experience Period Pain]",
-        "source": "[TRANSLATE: 全球统计数据]"
+        "label": "Women Experience Period Pain",
+        "sublabel": "Experience Period Pain",
+        "source": "Global Statistics"
       },
       "affectsWork": {
-        "label": "[TRANSLATE: 影响工作学习]",
-        "sublabel": "[TRANSLATE: Affects Work/Study]",
-        "source": "[TRANSLATE: 生产力影响]"
+        "label": "Affects Work/Study",
+        "sublabel": "Affects Work/Study",
+        "source": "Productivity Impact"
       },
       "seekHelp": {
-        "label": "[TRANSLATE: 寻求医疗帮助]",
-        "sublabel": "[TRANSLATE: Seek Medical Help]",
-        "source": "[TRANSLATE: 就医统计]"
+        "label": "Seek Medical Help",
+        "sublabel": "Seek Medical Help",
+        "source": "Medical Visit Statistics"
       },
       "usePainkillers": {
-        "label": "[TRANSLATE: 使用止痛药]",
-        "sublabel": "[TRANSLATE: Use Painkillers]",
-        "source": "[TRANSLATE: 缓解方式]"
+        "label": "Use Painkillers",
+        "sublabel": "Use Painkillers",
+        "source": "Relief Methods"
       },
       "avgDuration": {
-        "label": "[TRANSLATE: 平均疼痛持续时间]",
-        "sublabel": "[TRANSLATE: Average Pain Duration]",
-        "unit": "[TRANSLATE: 天 Days]",
-        "source": "[TRANSLATE: 全球统计数据]"
+        "label": "Average Pain Duration",
+        "sublabel": "Average Pain Duration",
+        "unit": "Days",
+        "source": "Global Statistics"
       },
       "avgPainLevel": {
-        "label": "[TRANSLATE: 平均疼痛程度]",
-        "sublabel": "[TRANSLATE: Average Pain Level]",
-        "source": "[TRANSLATE: 全球统计数据]"
+        "label": "Average Pain Level",
+        "sublabel": "Average Pain Level",
+        "source": "Global Statistics"
       },
       "primaryAge": {
-        "label": "[TRANSLATE: 主要影响年龄段]",
-        "sublabel": "[TRANSLATE: Primary Age Range]",
-        "unit": "[TRANSLATE: 岁 Years]",
-        "source": "[TRANSLATE: 全球统计数据]"
+        "label": "Primary Affected Age Group",
+        "sublabel": "Primary Age Range",
+        "unit": "Years",
+        "source": "Global Statistics"
       }
     }
   },
@@ -2369,7 +2373,7 @@
       "downloadHtmlPdf": "Download PDF",
       "share": "Share",
       "preview": "Preview",
-      "useInteractiveTools": "[TRANSLATE: 使用交互工具]"
+      "useInteractiveTools": "Use Interactive Tools"
     },
     "tags": {
       "heatTherapy": "Heat Therapy",
@@ -2438,521 +2442,521 @@
       "urgent": "Urgent",
       "important": "Important",
       "method": "Method",
-      "severe": "[TRANSLATE: 疼得厉害]",
-      "now": "[TRANSLATE: 现在]",
-      "immediately": "[TRANSLATE: 马上]",
-      "hurt": "[TRANSLATE: 疼]",
-      "ache": "[TRANSLATE: 痛]"
+      "severe": "Severe pain",
+      "now": "Now",
+      "immediately": "Immediately",
+      "hurt": "Pain",
+      "ache": "Ache"
     },
-    "title": "[TRANSLATE: 文章PDF下载中心]",
-    "description": "[TRANSLATE: 55个精选资源，基于紧急程度智能分类，让您在需要时快速找到合适的解决方案]",
+    "title": "Article PDF Download Center",
+    "description": "55 selected resources, intelligently categorized by urgency, helping you quickly find appropriate solutions when needed",
     "keywords": {
       "pain": "Pain",
       "relief": "Relief",
       "nutrition": "Nutrition",
       "exercise": "Exercise",
-      "medical": "[TRANSLATE: 医学]",
+      "medical": "Medical",
       "communication": "Communication"
     },
     "searchKeywords": {
       "urgent": {
-        "core": "[TRANSLATE: 热敷|敷热水袋|暖宝宝|按摩|揉肚子|止痛药]",
-        "professional": "[TRANSLATE: 热疗法|热疗|温热疗法|热敷疗法|热敷治疗]",
-        "massage": "[TRANSLATE: 穴位按压|肌肉放松|腹部按摩|经期按摩|疼痛按摩]",
-        "medication": "[TRANSLATE: NSAID|非甾体抗炎药|布洛芬|对乙酰氨基酚|止痛药物]",
-        "emergency": "[TRANSLATE: 疼|痛|现在|马上|缓解|快速|立即|紧急|急|疼得厉害]"
+        "core": "Hot compress|Hot water bottle|Warm patch|Massage|Abdominal massage|Painkillers",
+        "professional": "Heat therapy|Thermotherapy|Warm therapy|Hot compress therapy|Hot compress treatment",
+        "massage": "Acupressure|Muscle relaxation|Abdominal massage|Menstrual massage|Pain massage",
+        "medication": "NSAID|Non-steroidal anti-inflammatory drugs|Ibuprofen|Acetaminophen|Pain medication",
+        "emergency": "Pain|Hurt|Now|Immediately|Relief|Fast|Immediately|Emergency|Urgent|Severe pain"
       },
       "preparation": {
-        "core": "[TRANSLATE: 营养|饮食|运动|习惯|准备|预防|计划|提前|养生|健康|锻炼|瑜伽|八段锦]",
-        "heatTherapy": "[TRANSLATE: 热敷准备|热敷工具|热敷用品|暖宝宝准备]",
-        "massage": "[TRANSLATE: 按摩准备|按摩工具|按摩技巧|按摩学习]"
+        "core": "Nutrition|Diet|Exercise|Habits|Preparation|Prevention|Planning|Advance|Wellness|Health|Workout|Yoga|Baduanjin",
+        "heatTherapy": "Hot compress preparation|Hot compress tools|Hot compress supplies|Warm patch preparation",
+        "massage": "Massage preparation|Massage tools|Massage techniques|Massage learning"
       },
       "learning": {
-        "core": "[TRANSLATE: 医生|医学|就医|周期|了解|指南|教育|知识|学习|研究|科学|循证|诊断|检查]",
-        "heatTherapy": "[TRANSLATE: 热敷方法|热敷技巧|热敷原理|热敷学习]",
-        "massage": "[TRANSLATE: 按摩方法|按摩技巧|按摩原理|按摩学习]",
-        "medication": "[TRANSLATE: 药物知识|用药指南|药物对比|用药学习]"
+        "core": "Doctor|Medical|Medical visit|Cycle|Understand|Guide|Education|Knowledge|Learn|Research|Science|Evidence-based|Diagnosis|Check",
+        "heatTherapy": "Hot compress methods|Hot compress techniques|Hot compress principles|Hot compress learning",
+        "massage": "Massage methods|Massage techniques|Massage principles|Massage learning",
+        "medication": "Medication knowledge|Medication guide|Medication comparison|Medication learning"
       },
       "management": {
-        "core": "[TRANSLATE: 长期|管理|生活|档案|记录|持续|跟踪|监测|分析|报告|模板]",
-        "heatTherapy": "[TRANSLATE: 热敷管理|热敷记录|热敷计划|热敷跟踪]",
-        "massage": "[TRANSLATE: 按摩管理|按摩记录|按摩计划|按摩跟踪]",
-        "medication": "[TRANSLATE: 用药管理|用药记录|用药计划|用药跟踪]"
+        "core": "Long-term|Management|Life|Record|Record|Continuous|Track|Monitor|Analyze|Report|Template",
+        "heatTherapy": "Hot compress management|Hot compress record|Hot compress plan|Hot compress tracking",
+        "massage": "Massage management|Massage record|Massage plan|Massage tracking",
+        "medication": "Medication management|Medication record|Medication plan|Medication tracking"
       }
     },
     "immediate": {
       "articles": {
         "quickRelief": {
-          "title": "[TRANSLATE: 2024痛经快速缓解技巧：5分钟热敷按摩穴位按压方法]",
-          "readTime": "[TRANSLATE: 5分钟]",
-          "keywords": "[TRANSLATE: 痛经快速缓解, 5分钟见效, 经期疼痛治疗, 即时缓解方法, 紧急止痛技巧]",
-          "description": "[TRANSLATE: 专业医生指导：痛经原因分析+NSAIDs用药剂量+热敷正确方法。5分钟了解科学缓解痛经的所有方法，已帮助千万女性减轻痛苦。]"
+          "title": "2024 Dysmenorrhea Quick Relief Techniques: 5-Minute Hot Compress Massage Acupressure Methods",
+          "readTime": "5 minutes",
+          "keywords": "Dysmenorrhea quick relief, 5-minute effect, menstrual pain treatment, immediate relief methods, emergency pain relief techniques",
+          "description": "Professional doctor guidance: Dysmenorrhea cause analysis + NSAIDs dosage + correct hot compress methods. Learn all scientific methods for dysmenorrhea relief in 5 minutes, already helped tens of millions of women reduce pain."
         },
         "heatTherapy": {
-          "title": "[TRANSLATE: 经期热敷完整指南：温度控制安全注意事项科学原理]",
-          "readTime": "[TRANSLATE: 8分钟]",
-          "keywords": "[TRANSLATE: 经期热敷指南, 热敷缓解痛经, 温度控制方法, 热敷安全注意事项, 科学热疗原理]",
-          "description": "[TRANSLATE: 基于ACOG医学指南：经期热敷温度控制+安全操作步骤+科学原理解析。21天系统性改善计划，已帮助500万+女性科学缓解痛经。]"
+          "title": "Complete Guide to Menstrual Hot Compress: Temperature Control Safety Precautions Scientific Principles",
+          "readTime": "8 minutes",
+          "keywords": "Menstrual hot compress guide, hot compress dysmenorrhea relief, temperature control methods, hot compress safety precautions, scientific heat therapy principles",
+          "description": "Based on ACOG medical guidelines: Menstrual hot compress temperature control + safe operation steps + scientific principle analysis. 21-day systematic improvement plan, already helped 5+ million women scientifically relieve dysmenorrhea."
         },
         "painVsOther": {
-          "title": "[TRANSLATE: 经期疼痛与其他腹痛鉴别指南：症状识别诊断要点]",
-          "readTime": "[TRANSLATE: 25分钟]",
-          "keywords": "[TRANSLATE: 经期疼痛诊断, 腹痛鉴别指南, 症状识别方法, 医学诊断标准, 痛经vs其他腹痛]",
-          "description": "[TRANSLATE: 专业医学诊断指南：经期疼痛vs其他腹痛症状对比+鉴别诊断要点+医学检查标准。避免误诊，确保及时正确治疗，基于ACOG临床指南。]"
+          "title": "Differential Guide for Menstrual Pain vs Other Abdominal Pain: Symptom Recognition Diagnostic Points",
+          "readTime": "25 minutes",
+          "keywords": "Menstrual pain diagnosis, abdominal pain differential guide, symptom recognition methods, medical diagnostic standards, dysmenorrhea vs other abdominal pain",
+          "description": "Professional medical diagnostic guide: Menstrual pain vs other abdominal pain symptom comparison + differential diagnosis points + medical examination standards. Avoid misdiagnosis, ensure timely correct treatment, based on ACOG clinical guidelines."
         },
         "naturalTherapy": {
-          "title": "[TRANSLATE: 自然物理疗法综合指南：按摩穴位按压运动缓解痛经]",
-          "readTime": "[TRANSLATE: 12分钟]",
-          "keywords": "[TRANSLATE: 自然物理疗法, 按摩缓解痛经, 穴位按压方法, 物理治疗技巧, 非药物缓解]",
-          "description": "[TRANSLATE: 循证医学支持：自然物理疗法科学原理+按摩穴位图解+运动缓解方法。安全有效，无副作用，已帮助300万+女性自然缓解痛经。]"
+          "title": "Comprehensive Guide to Natural Physical Therapies: Massage Acupressure Exercise for Dysmenorrhea Relief",
+          "readTime": "12 minutes",
+          "keywords": "Natural physical therapies, massage dysmenorrhea relief, acupressure methods, physical therapy techniques, non-medication relief",
+          "description": "Evidence-based medicine supported: Natural physical therapy scientific principles + massage acupressure illustrations + exercise relief methods. Safe and effective, no side effects, already helped 3+ million women naturally relieve dysmenorrhea."
         },
         "gingerRelief": {
-          "title": "[TRANSLATE: 生姜经期疼痛缓解指南：天然草药科学使用方法]",
-          "readTime": "[TRANSLATE: 12分钟]",
-          "keywords": "[TRANSLATE: 生姜缓解痛经, 天然草药治疗, 经期疼痛自然疗法, 生姜使用方法, 草药止痛]",
-          "description": "[TRANSLATE: 科学验证：生姜缓解痛经的医学原理+正确使用方法+剂量控制指南。天然安全，无副作用，基于PubMed医学研究，已帮助200万+女性。]"
+          "title": "Ginger Menstrual Pain Relief Guide: Scientific Use of Natural Herbs",
+          "readTime": "12 minutes",
+          "keywords": "Ginger dysmenorrhea relief, natural herbal treatment, menstrual pain natural therapy, ginger usage methods, herbal pain relief",
+          "description": "Scientifically verified: Ginger dysmenorrhea relief medical principles + correct usage methods + dosage control guide. Natural and safe, no side effects, based on PubMed medical research, already helped 2+ million women."
         },
         "nsaidGuide": {
-          "title": "[TRANSLATE: 非甾体抗炎药专业指南：NSAIDs安全用药剂量指导]",
-          "readTime": "[TRANSLATE: 15分钟]",
-          "keywords": "[TRANSLATE: NSAIDs止痛药, 抗炎药使用指南, 痛经药物治疗, 布洛芬萘普生, 药物安全使用]",
-          "description": "[TRANSLATE: FDA批准药物指南：布洛芬vs萘普生效果对比+安全用药剂量+副作用预防。专业医学指导，确保安全有效缓解痛经，基于ACOG临床指南。]"
+          "title": "Professional Guide to Non-steroidal Anti-inflammatory Drugs: NSAIDs Safe Medication Dosage Guidance",
+          "readTime": "15 minutes",
+          "keywords": "NSAIDs painkillers, anti-inflammatory drug usage guide, dysmenorrhea drug treatment, ibuprofen naproxen, safe drug use",
+          "description": "FDA approved drug guide: Ibuprofen vs naproxen effect comparison + safe medication dosage + side effect prevention. Professional medical guidance, ensuring safe and effective dysmenorrhea relief, based on ACOG clinical guidelines."
         },
         "specificManagement": {
-          "title": "[TRANSLATE: 特定痛经管理指南：个性化治疗方案科学实施]",
-          "readTime": "[TRANSLATE: 20分钟]",
-          "keywords": "[TRANSLATE: 特定痛经管理, 个性化治疗方案, 痛经管理策略, 定制化治疗, 专业管理指南]",
-          "description": "[TRANSLATE: 个性化医疗方案：原发性vs继发性痛经管理+定制化治疗策略+专业监测评估。基于个人体质和症状特点，提供精准有效的管理方案。]"
+          "title": "Specific Dysmenorrhea Management Guide: Scientific Implementation of Personalized Treatment Plans",
+          "readTime": "20 minutes",
+          "keywords": "Specific dysmenorrhea management, personalized treatment plans, dysmenorrhea management strategies, customized treatment, professional management guide",
+          "description": "Personalized medical plan: Primary vs secondary dysmenorrhea management + customized treatment strategies + professional monitoring evaluation. Based on individual constitution and symptom characteristics, providing precise and effective management solutions."
         }
       },
       "pdfs": {
         "painTrackingForm": {
-          "title": "[TRANSLATE: 经期疼痛追踪专业表格：科学记录监测管理]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期疼痛追踪, 疼痛记录表格, 疼痛监测管理, 专业追踪工具, 疼痛数据分析]",
-          "description": "[TRANSLATE: 基于疼痛医学：经期疼痛科学记录+专业追踪表格+数据分析管理。专业追踪工具，已帮助200万+女性科学记录疼痛数据。]"
+          "title": "Professional Menstrual Pain Tracking Form: Scientific Recording Monitoring Management",
+          "readTime": "PDF",
+          "keywords": "Menstrual pain tracking, pain recording form, pain monitoring management, professional tracking tools, pain data analysis",
+          "description": "Based on pain medicine: Menstrual pain scientific recording + professional tracking form + data analysis management. Professional tracking tools, already helped 2+ million women scientifically record pain data."
         },
         "campusChecklist": {
-          "title": "[TRANSLATE: 校园经期紧急应对清单：学生危机管理指南]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 校园经期紧急, 学生危机管理, 经期紧急清单, 校园应对指南, 学生健康管理]",
-          "description": "[TRANSLATE: 基于校园健康管理：经期紧急情况应对+学生危机管理+校园健康指南。专业校园指导，已帮助50万+学生科学应对经期紧急情况。]"
+          "title": "Campus Menstrual Emergency Response Checklist: Student Crisis Management Guide",
+          "readTime": "PDF",
+          "keywords": "Campus menstrual emergency, student crisis management, menstrual emergency checklist, campus response guide, student health management",
+          "description": "Based on campus health management: Menstrual emergency response + student crisis management + campus health guide. Professional campus guidance, already helped 500,000+ students scientifically respond to menstrual emergencies."
         },
         "specificPainManagementPdf": {
-          "title": "[TRANSLATE: 特定痛经管理专业指南PDF：个性化治疗方案]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 特定痛经管理, 个性化治疗方案, 痛经管理指南, 专业管理PDF, 定制化治疗]",
-          "description": "[TRANSLATE: 基于个性化医疗：特定痛经类型管理+专业治疗方案+定制化管理策略。专业管理指南，已帮助300万+女性科学管理特定痛经。]"
+          "title": "Specific Dysmenorrhea Management Professional Guide PDF: Personalized Treatment Plans",
+          "readTime": "PDF",
+          "keywords": "Specific dysmenorrhea management, personalized treatment plans, dysmenorrhea management guide, professional management PDF, customized treatment",
+          "description": "Based on personalized medicine: Specific dysmenorrhea type management + professional treatment plans + customized management strategies. Professional management guide, already helped 3+ million women scientifically manage specific dysmenorrhea."
         },
         "emergencyPainReliefCard": {
-          "title": "[TRANSLATE: 经期疼痛急救缓解卡片：紧急情况快速指南]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期疼痛急救, 紧急缓解卡片, 疼痛快速指南, 急救缓解方法, 紧急情况应对]",
-          "description": "[TRANSLATE: 基于急救医学：经期疼痛紧急缓解+快速应对指南+急救缓解方法。专业急救工具，已帮助100万+女性紧急缓解经期疼痛。]"
+          "title": "Menstrual Pain Emergency Relief Card: Quick Guide for Emergency Situations",
+          "readTime": "PDF",
+          "keywords": "Menstrual pain emergency, emergency relief card, pain quick guide, emergency relief methods, emergency response",
+          "description": "Based on emergency medicine: Menstrual pain emergency relief + quick response guide + emergency relief methods. Professional emergency tool, already helped 1+ million women emergently relieve menstrual pain."
         },
         "fiveMinuteReliefChecklist": {
-          "title": "[TRANSLATE: 5分钟痛经快速缓解清单：即时见效步骤指南]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 5分钟痛经缓解, 快速缓解清单, 即时缓解步骤, 痛经快速指南, 紧急缓解方法]",
-          "description": "[TRANSLATE: 基于快速缓解医学：5分钟痛经缓解+即时见效步骤+快速缓解清单。专业快速指导，已帮助500万+女性5分钟内快速缓解痛经。]"
+          "title": "5-Minute Dysmenorrhea Quick Relief Checklist: Immediate Effect Step Guide",
+          "readTime": "PDF",
+          "keywords": "5-minute dysmenorrhea relief, quick relief checklist, immediate relief steps, dysmenorrhea quick guide, emergency relief methods",
+          "description": "Based on quick relief medicine: 5-minute dysmenorrhea relief + immediate effect steps + quick relief checklist. Professional quick guidance, already helped 5+ million women quickly relieve dysmenorrhea within 5 minutes."
         },
         "heatTherapyGuidePdf": {
-          "title": "[TRANSLATE: 经期热疗完整指南PDF：科学温度控制使用方法]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期热疗指南, 热敷使用方法, 温度控制指南, 热疗缓解痛经, 科学热疗PDF]",
-          "description": "[TRANSLATE: 基于热疗医学：经期热敷科学方法+温度控制指南+安全使用说明。专业热疗指导，已帮助400万+女性科学使用热疗缓解痛经。]"
+          "title": "Complete Menstrual Heat Therapy Guide PDF: Scientific Temperature Control Usage Methods",
+          "readTime": "PDF",
+          "keywords": "Menstrual heat therapy guide, hot compress usage methods, temperature control guide, heat therapy dysmenorrhea relief, scientific heat therapy PDF",
+          "description": "Based on heat therapy medicine: Menstrual hot compress scientific methods + temperature control guide + safe usage instructions. Professional heat therapy guidance, already helped 4+ million women scientifically use heat therapy to relieve dysmenorrhea."
         },
         "workplaceReliefToolkit": {
-          "title": "[TRANSLATE: 职场经期疼痛缓解工具包：办公环境应急指南]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 职场经期缓解, 办公环境工具包, 经期疼痛应急, 职场健康管理, 办公缓解技巧]",
-          "description": "[TRANSLATE: 基于职场健康管理：办公环境经期缓解+职场应急工具+专业缓解技巧。专业职场指导，已帮助300万+职场女性科学应对经期疼痛。]"
+          "title": "Workplace Menstrual Pain Relief Toolkit: Office Environment Emergency Guide",
+          "readTime": "PDF",
+          "keywords": "Workplace menstrual relief, office environment toolkit, menstrual pain emergency, workplace health management, office relief techniques",
+          "description": "Based on workplace health management: Office environment menstrual relief + workplace emergency tools + professional relief techniques. Professional workplace guidance, already helped 3+ million working women scientifically respond to menstrual pain."
         }
       }
     },
     "preparation": {
       "articles": {
         "preventiveCare": {
-          "title": "[TRANSLATE: 2024痛经预防护理完整计划：提前准备科学管理策略]",
-          "readTime": "[TRANSLATE: 22分钟]",
-          "keywords": "[TRANSLATE: 痛经预防护理, 经期预防计划, 提前准备策略, 预防性护理, 健康管理规划]",
-          "description": "[TRANSLATE: 基于ACOG循证医学：经期预防护理科学策略+提前准备方案+全周期管理计划。21天系统性预防计划，已帮助800万+女性科学预防痛经。]"
+          "title": "2024 Complete Dysmenorrhea Prevention Care Plan: Advance Preparation Scientific Management Strategy",
+          "readTime": "22 minutes",
+          "keywords": "Dysmenorrhea prevention care, menstrual prevention plan, advance preparation strategy, preventive care, health management planning",
+          "description": "Based on ACOG evidence-based medicine: Menstrual prevention care scientific strategies + advance preparation plans + full-cycle management plan. 21-day systematic prevention plan, already helped 8+ million women scientifically prevent dysmenorrhea."
         },
         "sleepQuality": {
-          "title": "[TRANSLATE: 经期睡眠质量改善指南：21天系统性提升计划]",
-          "readTime": "[TRANSLATE: 20分钟]",
-          "keywords": "[TRANSLATE: 经期睡眠改善, 睡眠质量指南, 经期休息方法, 睡眠优化技巧, 21天睡眠计划]",
-          "description": "[TRANSLATE: 基于AASM睡眠医学：经期睡眠科学改善+21天系统性计划+睡眠环境优化。专业睡眠指导，已帮助600万+女性改善经期睡眠质量。]"
+          "title": "Menstrual Sleep Quality Improvement Guide: 21-Day Systematic Enhancement Plan",
+          "readTime": "20 minutes",
+          "keywords": "Menstrual sleep improvement, sleep quality guide, menstrual rest methods, sleep optimization techniques, 21-day sleep plan",
+          "description": "Based on AASM sleep medicine: Menstrual sleep scientific improvement + 21-day systematic plan + sleep environment optimization. Professional sleep guidance, already helped 6+ million women improve menstrual sleep quality."
         },
         "stressManagement": {
-          "title": "[TRANSLATE: 经期压力管理完全指南：职场女性科学减压方法]",
-          "readTime": "[TRANSLATE: 22分钟]",
-          "keywords": "[TRANSLATE: 经期压力管理, 职场女性减压, 压力缓解方法, 心理健康管理, 压力应对策略]",
-          "description": "[TRANSLATE: 基于APA心理学研究：经期压力科学管理+职场减压技巧+心理健康维护。专业心理指导，已帮助500万+职场女性科学管理经期压力。]"
+          "title": "Complete Guide to Menstrual Stress Management: Scientific Stress Reduction Methods for Working Women",
+          "readTime": "22 minutes",
+          "keywords": "Menstrual stress management, stress reduction for working women, stress relief methods, psychological health management, stress coping strategies",
+          "description": "Based on APA psychological research: Menstrual stress scientific management + workplace stress reduction techniques + psychological health maintenance. Professional psychological guidance, already helped 5+ million working women scientifically manage menstrual stress."
         },
         "baduanjinExercise": {
-          "title": "[TRANSLATE: 站桩八段锦经期疼痛缓解：传统气功现代应用]",
-          "readTime": "[TRANSLATE: 18分钟]",
-          "keywords": "[TRANSLATE: 站桩八段锦, 气功缓解痛经, 传统运动疗法, 八段锦练习方法, 气功养生]",
-          "description": "[TRANSLATE: 传统中医气功：站桩八段锦科学原理+经期疼痛缓解+现代应用指导。千年传承，科学验证，已帮助400万+女性通过气功缓解痛经。]"
+          "title": "Zhan Zhuang Baduanjin Dysmenorrhea Relief: Traditional Qigong Modern Application",
+          "readTime": "18 minutes",
+          "keywords": "Zhan Zhuang Baduanjin, qigong dysmenorrhea relief, traditional exercise therapy, Baduanjin practice methods, qigong wellness",
+          "description": "Traditional Chinese medicine qigong: Zhan Zhuang Baduanjin scientific principles + dysmenorrhea pain relief + modern application guidance. Thousand-year heritage, scientifically verified, already helped 4+ million women relieve dysmenorrhea through qigong."
         },
         "antiInflammatoryDiet": {
-          "title": "[TRANSLATE: 经期疼痛抗炎饮食指南：营养科学缓解痛经方法]",
-          "readTime": "[TRANSLATE: 18分钟]",
-          "keywords": "[TRANSLATE: 抗炎饮食指南, 经期营养调理, 痛经饮食疗法, 抗炎食物推荐, 营养科学管理]",
-          "description": "[TRANSLATE: 基于营养科学研究：抗炎饮食科学原理+经期营养调理+痛经饮食疗法。科学营养指导，已帮助700万+女性通过饮食科学缓解痛经。]"
+          "title": "Menstrual Pain Anti-inflammatory Diet Guide: Nutritional Science Methods for Dysmenorrhea Relief",
+          "readTime": "18 minutes",
+          "keywords": "Anti-inflammatory diet guide, menstrual nutrition conditioning, dysmenorrhea diet therapy, anti-inflammatory food recommendations, nutritional science management",
+          "description": "Based on nutritional science research: Anti-inflammatory diet scientific principles + menstrual nutrition conditioning + dysmenorrhea diet therapy. Scientific nutrition guidance, already helped 7+ million women relieve dysmenorrhea through scientific diet."
         },
         "magnesiumGutHealth": {
-          "title": "[TRANSLATE: 镁与肠道健康综合指南：矿物质补充科学管理]",
-          "readTime": "[TRANSLATE: 16分钟]",
-          "keywords": "[TRANSLATE: 镁补充指南, 肠道健康管理, 矿物质补充, 镁与痛经关系, 营养元素补充]",
-          "description": "[TRANSLATE: 基于营养医学研究：镁元素科学原理+肠道健康管理+矿物质补充指导。专业营养指导，已帮助300万+女性通过镁补充改善经期健康。]"
+          "title": "Magnesium and Gut Health Comprehensive Guide: Mineral Supplementation Scientific Management",
+          "readTime": "16 minutes",
+          "keywords": "Magnesium supplement guide, gut health management, mineral supplementation, relationship between magnesium and dysmenorrhea, nutritional element supplementation",
+          "description": "Based on nutritional medicine research: Magnesium element scientific principles + gut health management + mineral supplementation guidance. Professional nutrition guidance, already helped 3+ million women improve menstrual health through magnesium supplementation."
         },
         "periodFriendlyRecipes": {
-          "title": "[TRANSLATE: 经期友好营养食谱：缓解痛经科学饮食方案]",
-          "readTime": "[TRANSLATE: 12分钟]",
-          "keywords": "[TRANSLATE: 经期友好食谱, 痛经营养食谱, 经期饮食指南, 健康食谱推荐, 营养美味搭配]",
-          "description": "[TRANSLATE: 专业营养师设计：经期友好食谱+痛经营养搭配+科学饮食方案。营养美味，科学搭配，已帮助500万+女性通过饮食改善经期健康。]"
+          "title": "Menstrual-Friendly Nutrition Recipes: Scientific Diet Plan for Dysmenorrhea Relief",
+          "readTime": "12 minutes",
+          "keywords": "Menstrual-friendly recipes, dysmenorrhea nutrition recipes, menstrual diet guide, healthy recipe recommendations, nutritious delicious combinations",
+          "description": "Designed by professional nutritionists: Menstrual-friendly recipes + dysmenorrhea nutrition matching + scientific diet plan. Nutritious and delicious, scientifically paired, already helped 5+ million women improve menstrual health through diet."
         }
       },
       "pdfs": {
         "healthyHabitsChecklist": {
-          "title": "[TRANSLATE: 经期健康习惯检查清单：科学生活方式建立指南]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期健康习惯, 健康习惯清单, 生活方式建立, 健康习惯检查, 科学习惯养成]",
-          "description": "[TRANSLATE: 基于健康行为学：经期健康习惯建立+科学生活方式+习惯检查清单。专业习惯指导，已帮助400万+女性建立健康生活方式。]"
+          "title": "Menstrual Health Habits Checklist: Guide to Establishing Scientific Lifestyle",
+          "readTime": "PDF",
+          "keywords": "Menstrual health habits, health habits checklist, lifestyle establishment, health habit checking, scientific habit formation",
+          "description": "Based on health behavioral science: Menstrual health habit establishment + scientific lifestyle + habit checklist. Professional habit guidance, already helped 4+ million women establish healthy lifestyles."
         },
         "nutritionPlan": {
-          "title": "[TRANSLATE: 月经周期营养科学计划：个性化饮食调理方案]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 月经周期营养, 个性化营养计划, 经期饮食调理, 营养科学方案, 周期营养管理]",
-          "description": "[TRANSLATE: 基于营养周期学：月经周期营养科学+个性化饮食计划+营养调理方案。专业营养指导，已帮助350万+女性科学管理经期营养。]"
+          "title": "Menstrual Cycle Nutrition Scientific Plan: Personalized Diet Conditioning Plan",
+          "readTime": "PDF",
+          "keywords": "Menstrual cycle nutrition, personalized nutrition plan, menstrual diet conditioning, nutritional science plan, cycle nutrition management",
+          "description": "Based on nutritional cyclogy: Menstrual cycle nutrition science + personalized diet plan + nutrition conditioning plan. Professional nutrition guidance, already helped 3.5+ million women scientifically manage menstrual nutrition."
         },
         "exerciseRoutine": {
-          "title": "[TRANSLATE: 经期友好运动科学计划：温和锻炼健康管理]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期友好运动, 温和运动计划, 经期锻炼指南, 运动健康管理, 经期运动科学]",
-          "description": "[TRANSLATE: 基于运动医学：经期友好运动科学+温和锻炼计划+运动健康管理。专业运动指导，已帮助250万+女性科学进行经期运动。]"
+          "title": "Menstrual-Friendly Exercise Scientific Plan: Gentle Exercise Health Management",
+          "readTime": "PDF",
+          "keywords": "Menstrual-friendly exercise, gentle exercise plan, menstrual exercise guide, exercise health management, menstrual exercise science",
+          "description": "Based on sports medicine: Menstrual-friendly exercise science + gentle exercise plan + exercise health management. Professional exercise guidance, already helped 2.5+ million women scientifically exercise during menstruation."
         },
         "stressReliefTechniques": {
-          "title": "[TRANSLATE: 经期压力缓解技巧指南：心理健康管理方法]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期压力缓解, 压力管理技巧, 心理健康指南, 压力缓解方法, 经期心理管理]",
-          "description": "[TRANSLATE: 基于心理学研究：经期压力科学管理+心理健康技巧+压力缓解方法。专业心理指导，已帮助200万+女性科学管理经期压力。]"
+          "title": "Menstrual Stress Relief Techniques Guide: Psychological Health Management Methods",
+          "readTime": "PDF",
+          "keywords": "Menstrual stress relief, stress management techniques, psychological health guide, stress relief methods, menstrual psychological management",
+          "description": "Based on psychological research: Menstrual stress scientific management + psychological health techniques + stress relief methods. Professional psychological guidance, already helped 2+ million women scientifically manage menstrual stress."
         },
         "sleepOptimization": {
-          "title": "[TRANSLATE: 经期睡眠质量优化指南：科学改善休息方法]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期睡眠优化, 睡眠质量改善, 经期休息指南, 睡眠科学方法, 经期睡眠管理]",
-          "description": "[TRANSLATE: 基于睡眠医学：经期睡眠科学优化+睡眠质量改善+科学休息方法。专业睡眠指导，已帮助300万+女性改善经期睡眠质量。]"
+          "title": "Menstrual Sleep Quality Optimization Guide: Scientific Methods to Improve Rest",
+          "readTime": "PDF",
+          "keywords": "Menstrual sleep optimization, sleep quality improvement, menstrual rest guide, scientific sleep methods, menstrual sleep management",
+          "description": "Based on sleep medicine: Menstrual sleep scientific optimization + sleep quality improvement + scientific rest methods. Professional sleep guidance, already helped 300+ million women improve menstrual sleep quality."
         },
         "preventiveCarePlan": {
-          "title": "[TRANSLATE: 经期健康预防护理计划：全面预防性管理方案]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期健康预防, 预防护理计划, 健康管理方案, 预防性护理, 经期健康管理]",
-          "description": "[TRANSLATE: 基于预防医学：经期健康预防护理+全面管理计划+预防性健康策略。专业预防指导，已帮助400万+女性科学预防经期健康问题。]"
+          "title": "Menstrual Health Prevention Care Plan: Comprehensive Preventive Management Program",
+          "readTime": "PDF",
+          "keywords": "Menstrual health prevention, preventive care plan, health management program, preventive care, menstrual health management",
+          "description": "Based on preventive medicine: Menstrual health prevention care + comprehensive management plan + preventive health strategies. Professional prevention guidance, already helped 400+ million women scientifically prevent menstrual health issues."
         },
         "lifestyleAssessment": {
-          "title": "[TRANSLATE: 经期健康生活方式评估工具：科学分析改善方法]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期生活方式评估, 健康生活方式工具, 生活方式分析, 经期健康评估, 生活方式改善]",
-          "description": "[TRANSLATE: 基于生活方式医学：经期生活方式科学评估+健康分析工具+生活方式改善方法。专业评估指导，已帮助250万+女性科学评估改善生活方式。]"
+          "title": "Menstrual Health Lifestyle Assessment Tool: Scientific Analysis Improvement Methods",
+          "readTime": "PDF",
+          "keywords": "Menstrual lifestyle assessment, healthy lifestyle tools, lifestyle analysis, menstrual health assessment, lifestyle improvement",
+          "description": "Based on lifestyle medicine: Menstrual lifestyle scientific assessment + health analysis tools + lifestyle improvement methods. Professional assessment guidance, already helped 250+ million women scientifically assess and improve their lifestyles."
         },
         "magnesiumGuide": {
-          "title": "[TRANSLATE: 镁与肠道健康综合指南：矿物质补充科学管理]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 镁补充指南, 肠道健康管理, 矿物质补充, 镁与痛经关系, 营养元素补充]",
-          "description": "[TRANSLATE: 基于营养医学：镁元素科学原理+肠道健康管理+矿物质补充指导。专业营养指导，已帮助200万+女性通过镁补充改善经期健康。]"
+          "title": "Magnesium and Gut Health Comprehensive Guide: Mineral Supplementation Scientific Management",
+          "readTime": "PDF",
+          "keywords": "Magnesium supplement guide, gut health management, mineral supplementation, relationship between magnesium and dysmenorrhea, nutritional element supplementation",
+          "description": "Based on nutritional medicine: Magnesium element scientific principles + gut health management + mineral supplementation guidance. Professional nutrition guidance, already helped 200+ million women improve menstrual health through magnesium supplementation."
         },
         "baduanjinGuide": {
-          "title": "[TRANSLATE: 站桩八段锦图解指南：传统气功现代应用]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 站桩八段锦, 气功缓解痛经, 传统运动疗法, 八段锦练习方法, 气功养生]",
-          "description": "[TRANSLATE: 传统中医气功：站桩八段锦科学原理+经期疼痛缓解+现代应用指导。千年传承，科学验证，已帮助150万+女性通过气功缓解痛经。]"
+          "title": "Illustrated Guide to Zhan Zhuang Baduanjin: Traditional Qigong Modern Applications",
+          "readTime": "PDF",
+          "keywords": "Zhan Zhuang Baduanjin, qigong dysmenorrhea relief, traditional exercise therapy, Baduanjin practice methods, qigong wellness",
+          "description": "传统中医气功：站桩八段锦科学原理+经期疼痛缓解+现代应用指导。千年传承，科学Validation，已帮助150万+女性通过气功缓解痛经。"
         },
         "monthlyPlanner": {
-          "title": "[TRANSLATE: 经期健康月度准备计划表：科学管理安排工具]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期月度计划, 健康管理计划表, 经期准备工具, 月度健康安排, 经期管理计划]",
-          "description": "[TRANSLATE: 基于健康管理：经期健康月度计划+科学管理安排+健康管理工具。专业计划指导，已帮助300万+女性科学规划经期健康管理。]"
+          "title": "Menstrual Health Monthly Preparation Schedule: Scientific Management Arrangement Tools",
+          "readTime": "PDF",
+          "keywords": "Menstrual monthly plan, health management schedule, menstrual preparation tools, monthly health arrangements, menstrual management plan",
+          "description": "Based on health management: Menstrual health monthly plan + scientific management arrangement + health management tools. Professional planning guidance, already helped 300+ million women scientifically plan menstrual health management."
         },
         "stressWorkbook": {
-          "title": "[TRANSLATE: 经期压力管理工作手册：心理健康管理指南]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期压力管理, 压力管理工作手册, 心理健康指南, 压力管理工具, 经期心理管理]",
-          "description": "[TRANSLATE: 基于心理学研究：经期压力科学管理+心理健康工作手册+压力管理工具。专业心理指导，已帮助200万+女性科学管理经期压力。]"
+          "title": "Menstrual Stress Management Handbook: Psychological Health Management Guide",
+          "readTime": "PDF",
+          "keywords": "Menstrual stress management, stress management handbook, psychological health guide, stress management tools, menstrual psychological management",
+          "description": "Based on psychological research: Menstrual stress scientific management + psychological health handbook + stress management tools. Professional psychological guidance, already helped 200+ million women scientifically manage menstrual stress."
         },
         "sleepGuide": {
-          "title": "[TRANSLATE: 经期睡眠质量改善指南：科学优化休息方法]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期睡眠改善, 睡眠质量优化, 经期休息指南, 睡眠科学方法, 经期睡眠管理]",
-          "description": "[TRANSLATE: 基于睡眠医学：经期睡眠科学优化+睡眠质量改善+科学休息方法。专业睡眠指导，已帮助250万+女性改善经期睡眠质量。]"
+          "title": "Menstrual Sleep Quality Improvement Guide: Scientific Rest Optimization Methods",
+          "readTime": "PDF",
+          "keywords": "Menstrual sleep improvement, sleep quality optimization, menstrual rest guide, scientific sleep methods, menstrual sleep management",
+          "description": "Based on sleep medicine: Menstrual sleep scientific optimization + sleep quality improvement + scientific rest methods. Professional sleep guidance, already helped 250+ million women improve menstrual sleep quality."
         }
       }
     },
     "learning": {
       "articles": {
         "lifecycleAnalysis": {
-          "title": "[TRANSLATE: 女性生命周期痛经特点全解析：各年龄段科学管理策略]",
-          "readTime": "[TRANSLATE: 32分钟]",
-          "keywords": "[TRANSLATE: 女性生命周期, 痛经特点分析, 各年龄段痛经, 生命周期管理, 女性健康周期]",
-          "description": "[TRANSLATE: 基于ACOG临床指南：女性全生命周期痛经特点+各年龄段管理策略+科学健康规划。专业医学指导，已帮助1000万+女性科学管理不同阶段痛经。]"
+          "title": "Comprehensive Analysis of Dysmenorrhea Characteristics Across Female Life Cycle: Scientific Management Strategies for Different Age Groups",
+          "readTime": "32 minutes",
+          "keywords": "Female life cycle, dysmenorrhea characteristic analysis, dysmenorrhea in different age groups, life cycle management, female health cycle",
+          "description": "Based on ACOG clinical guidelines: Female life cycle dysmenorrhea characteristics + age group management strategies + scientific health planning. Professional medical guidance, already helped 1000+ million women scientifically manage dysmenorrhea at different stages."
         },
         "painMechanism": {
-          "title": "[TRANSLATE: 经期疼痛机制深度解析：生理病理科学原理解析]",
-          "readTime": "[TRANSLATE: 25分钟]",
-          "keywords": "[TRANSLATE: 痛经机制解析, 经期疼痛原理, 生理机制分析, 医学原理解析, 科学机制研究]",
-          "description": "[TRANSLATE: 基于循证医学研究：经期疼痛生理机制+病理过程分析+医学原理解析。专业医学解析，已帮助800万+女性深入理解痛经科学原理。]"
+          "title": "In-depth Analysis of Menstrual Pain Mechanisms: Physiological and Pathological Scientific Principles",
+          "readTime": "25 minutes",
+          "keywords": "Dysmenorrhea mechanism analysis, menstrual pain principles, physiological mechanism analysis, medical principle analysis, scientific mechanism research",
+          "description": "Based on evidence-based medical research: Menstrual pain physiological mechanisms + pathological process analysis + medical principle analysis. Professional medical analysis, already helped 800+ million women deeply understand the scientific principles of dysmenorrhea."
         },
         "hormoneBalance": {
-          "title": "[TRANSLATE: 荷尔蒙平衡与经期健康：内分泌调节科学管理]",
-          "readTime": "[TRANSLATE: 28分钟]",
-          "keywords": "[TRANSLATE: 荷尔蒙平衡, 内分泌调节, 经期荷尔蒙, 激素平衡管理, 内分泌健康]",
-          "description": "[TRANSLATE: 基于内分泌医学：荷尔蒙平衡科学原理+经期内分泌调节+激素管理策略。专业内分泌指导，已帮助600万+女性科学管理荷尔蒙平衡。]"
+          "title": "Hormonal Balance and Menstrual Health: Endocrine Regulation Scientific Management",
+          "readTime": "28 minutes",
+          "keywords": "Hormonal balance, endocrine regulation, menstrual hormones, hormone balance management, endocrine health",
+          "description": "Based on endocrine medicine: Hormonal balance scientific principles + menstrual endocrine regulation + hormone management strategies. Professional endocrine guidance, already helped 600+ million women scientifically manage hormonal balance."
         },
         "nutritionScience": {
-          "title": "[TRANSLATE: 营养科学与经期健康：饮食调理科学研究应用]",
-          "readTime": "[TRANSLATE: 24分钟]",
-          "keywords": "[TRANSLATE: 营养科学研究, 经期营养学, 营养与痛经, 科学营养管理, 营养健康研究]",
-          "description": "[TRANSLATE: 基于营养科学研究：经期营养科学原理+饮食调理应用+营养健康管理。专业营养指导，已帮助700万+女性通过科学营养改善经期健康。]"
+          "title": "Nutritional Science and Menstrual Health: Scientific Research Applications of Dietary Conditioning",
+          "readTime": "24 minutes",
+          "keywords": "Nutritional science research, menstrual nutrition, nutrition and dysmenorrhea, scientific nutrition management, nutritional health research",
+          "description": "Based on nutritional science research: Menstrual nutrition scientific principles + dietary conditioning applications + nutritional health management. Professional nutrition guidance, already helped 700+ million women improve menstrual health through scientific nutrition."
         },
         "exerciseTherapy": {
-          "title": "[TRANSLATE: 运动疗法缓解经期疼痛科学原理：循证医学研究]",
-          "readTime": "[TRANSLATE: 22分钟]",
-          "keywords": "[TRANSLATE: 运动疗法原理, 科学运动方法, 运动缓解痛经, 运动科学研究, 运动治疗原理]",
-          "description": "[TRANSLATE: 基于运动医学研究：运动疗法科学原理+经期疼痛缓解+循证医学验证。专业运动指导，已帮助500万+女性通过科学运动缓解痛经。]"
+          "title": "Scientific Principles of Exercise Therapy for Menstrual Pain Relief: Evidence-Based Medical Research",
+          "readTime": "22 minutes",
+          "keywords": "Exercise therapy principles, scientific exercise methods, exercise for dysmenorrhea relief, exercise science research, exercise treatment principles",
+          "description": "Based on sports medicine research: Exercise therapy scientific principles + menstrual pain relief + evidence-based medicine verification. Professional exercise guidance, already helped 500+ million women relieve dysmenorrhea through scientific exercise."
         },
         "psychologicalFactors": {
-          "title": "[TRANSLATE: 心理因素与经期疼痛感知：情绪管理科学方法]",
-          "readTime": "[TRANSLATE: 26分钟]",
-          "keywords": "[TRANSLATE: 心理因素影响, 疼痛感知调节, 情绪与痛经, 心理疼痛管理, 情绪调节方法]",
-          "description": "[TRANSLATE: 基于心理学研究：心理因素科学分析+疼痛感知调节+情绪管理策略。专业心理指导，已帮助400万+女性通过心理调节改善痛经感知。]"
+          "title": "Psychological Factors and Menstrual Pain Perception: Scientific Methods for Emotional Management",
+          "readTime": "26 minutes",
+          "keywords": "Psychological factor effects, pain perception regulation, emotions and dysmenorrhea, psychological pain management, emotional regulation methods",
+          "description": "Based on psychological research: Psychological factor scientific analysis + pain perception regulation + emotional management strategies. Professional psychological guidance, already helped 400+ million women improve dysmenorrhea perception through psychological regulation."
         },
         "medicalResearch": {
-          "title": "[TRANSLATE: 经期疼痛医学研究最新进展：2024年临床发现]",
-          "readTime": "[TRANSLATE: 26分钟]",
-          "keywords": "[TRANSLATE: 医学研究进展, 临床研究结果, 最新医学发现, 科学研究进展, 医学前沿研究]",
-          "description": "[TRANSLATE: 基于PubMed医学数据库：2024年最新研究进展+临床发现+医学前沿突破。专业医学研究，已帮助900万+女性了解最新痛经医学进展。]"
+          "title": "Latest Advances in Dysmenorrhea Medical Research: 2024 Clinical Findings",
+          "readTime": "26 minutes",
+          "keywords": "Medical research progress, clinical study results, latest medical discoveries, scientific research advances, frontier medical research",
+          "description": "Based on PubMed medical database: 2024 latest research advances + clinical findings + medical frontier breakthroughs. Professional medical research, already helped 900+ million women understand the latest dysmenorrhea medical advances."
         },
         "traditionalMedicine": {
-          "title": "[TRANSLATE: 传统医学与现代医学结合：经期健康管理创新]",
-          "readTime": "[TRANSLATE: 28分钟]",
-          "keywords": "[TRANSLATE: 传统医学结合, 中西医结合, 现代医学融合, 传统疗法应用, 医学结合治疗]",
-          "description": "[TRANSLATE: 基于中西医结合：传统医学智慧+现代医学技术+经期健康管理创新。专业医学结合，已帮助600万+女性通过中西医结合改善经期健康。]"
+          "title": "Integration of Traditional and Modern Medicine: Innovation in Menstrual Health Management",
+          "readTime": "28 minutes",
+          "keywords": "Traditional medicine integration, Chinese and Western medicine combination, modern medicine fusion, traditional therapy application, integrated medical treatment",
+          "description": "Based on Chinese and Western medicine integration: Traditional medical wisdom + modern medical technology + menstrual health management innovation. Professional medical integration, already helped 600+ million women improve menstrual health through integrated Chinese and Western medicine."
         },
         "globalPerspectives": {
-          "title": "[TRANSLATE: 全球经期健康管理视角：文化差异科学比较]",
-          "readTime": "[TRANSLATE: 28分钟]",
-          "keywords": "[TRANSLATE: 全球文化差异, 国际视角比较, 文化差异分析, 全球健康管理, 跨文化研究]",
-          "description": "[TRANSLATE: 基于全球健康研究：不同文化背景+经期健康管理差异+国际比较分析。专业跨文化研究，已帮助500万+女性了解全球经期健康管理差异。]"
+          "title": "Global Menstrual Health Management Perspective: Scientific Comparison of Cultural Differences",
+          "readTime": "28 minutes",
+          "keywords": "Global cultural differences, international perspective comparison, cultural difference analysis, global health management, cross-cultural research",
+          "description": "Based on global health research: Different cultural backgrounds + menstrual health management differences + international comparative analysis. Professional cross-cultural research, already helped 500+ million women understand global menstrual health management differences."
         },
         "technologyInnovation": {
-          "title": "[TRANSLATE: 痛经并发症与伴随症状管理：腹胀恶心腰痛科学应对]",
-          "readTime": "[TRANSLATE: 24分钟]",
-          "keywords": "[TRANSLATE: 痛经并发症, 伴随症状管理, 腹胀恶心腰痛, 症状综合管理, 并发症处理]",
-          "description": "[TRANSLATE: 基于临床医学研究：痛经并发症科学分析+伴随症状管理+专业缓解策略。专业医学指导，已帮助800万+女性科学管理痛经并发症。]"
+          "title": "Dysmenorrhea Complications and Accompanying Symptoms Management: Scientific Response to Bloating, Nausea, and Lower Back Pain",
+          "readTime": "24 minutes",
+          "keywords": "Dysmenorrhea complications, accompanying symptom management, bloating nausea lower back pain, comprehensive symptom management, complication treatment",
+          "description": "Based on clinical medical research: Scientific analysis of dysmenorrhea complications + accompanying symptom management + professional relief strategies. Professional medical guidance, already helped 800+ million women scientifically manage dysmenorrhea complications."
         },
         "communicationSkills": {
-          "title": "[TRANSLATE: 经期疼痛医患沟通技巧：有效交流获得专业支持]",
-          "readTime": "[TRANSLATE: 18分钟]",
-          "keywords": "[TRANSLATE: 医患沟通技巧, 医生交流方法, 医疗沟通策略, 医患关系管理, 有效沟通技巧]",
-          "description": "[TRANSLATE: 基于医患沟通研究：有效沟通技巧+专业医疗支持+医患关系管理。专业沟通指导，已帮助300万+女性通过有效沟通获得更好的医疗支持。]"
+          "title": "Menstrual Pain Doctor-Patient Communication Skills: Effective Communication to Obtain Professional Support",
+          "readTime": "18 minutes",
+          "keywords": "Doctor-patient communication skills, doctor communication methods, medical communication strategies, doctor-patient relationship management, effective communication skills",
+          "description": "Based on doctor-patient communication research: Effective communication skills + professional medical support + doctor-patient relationship management. Professional communication guidance, already helped 300+ million women obtain better medical support through effective communication."
         },
         "selfCareStrategies": {
-          "title": "[TRANSLATE: 经期疼痛自我护理策略：科学方法有效管理]",
-          "readTime": "[TRANSLATE: 20分钟]",
-          "keywords": "[TRANSLATE: 自我护理方法, 个人健康管理, 自我护理策略, 个人护理技巧, 自主健康管理]",
-          "description": "[TRANSLATE: 基于自我护理研究：科学护理方法+个人健康管理+自主护理策略。专业护理指导，已帮助400万+女性通过自我护理改善经期健康。]"
+          "title": "Menstrual Pain Self-Care Strategies: Scientific Methods for Effective Management",
+          "readTime": "20 minutes",
+          "keywords": "Self-care methods, personal health management, self-care strategies, personal care techniques, autonomous health management",
+          "description": "Based on self-care research: Scientific care methods + personal health management + autonomous care strategies. Professional care guidance, already helped 400+ million women improve menstrual health through self-care."
         },
         "longTermManagement": {
-          "title": "[TRANSLATE: 经期健康长期管理策略：持续改善科学方法]",
-          "readTime": "[TRANSLATE: 30分钟]",
-          "keywords": "[TRANSLATE: 经期健康长期管理, 持续健康改善, 长期管理策略, 健康持续发展, 长期健康规划]",
-          "description": "[TRANSLATE: 基于长期健康研究：经期健康长期管理+持续改善策略+科学健康规划。专业长期指导，已帮助600万+女性建立长期健康管理习惯。]"
+          "title": "Menstrual Health Long-Term Management Strategies: Scientific Methods for Continuous Improvement",
+          "readTime": "30 minutes",
+          "keywords": "Menstrual health long-term management, continuous health improvement, long-term management strategies, sustainable health development, long-term health planning",
+          "description": "Based on long-term health research: Menstrual health long-term management + continuous improvement strategies + scientific health planning. Professional long-term guidance, already helped 600+ million women establish long-term health management habits."
         }
       },
       "pdfs": {
         "naturalTherapyAssessment": {
-          "title": "[TRANSLATE: 自然疗法适用性评估工具：科学评估专业指南]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 自然疗法评估, 疗法适用性工具, 自然疗法评估, 疗法选择指南, 自然疗法测试]",
-          "description": "[TRANSLATE: 基于自然疗法医学：自然疗法适用性科学评估+专业评估工具+疗法选择指导。专业评估工具，已帮助150万+女性科学评估自然疗法适用性。]"
+          "title": "Natural Therapy Applicability Assessment Tool: Scientific Assessment Professional Guide",
+          "readTime": "PDF",
+          "keywords": "自然疗法评估, 疗法适用性工具, 自然疗法评估, 疗法选择指南, 自然疗法Testing",
+          "description": "Based on natural therapy medicine: Scientific assessment of natural therapy applicability + professional assessment tools + therapy selection guidance. Professional assessment tools, already helped 150+ million women scientifically assess natural therapy applicability."
         },
         "hormoneTestingGuide": {
-          "title": "[TRANSLATE: 经期荷尔蒙检测完整指南：内分泌水平科学评估]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 荷尔蒙检测指南, 内分泌水平检测, 经期荷尔蒙评估, 荷尔蒙检测方法, 内分泌诊断]",
-          "description": "[TRANSLATE: 基于内分泌医学：经期荷尔蒙检测科学方法+内分泌水平评估+专业诊断指导。专业检测指南，已帮助300万+女性科学检测荷尔蒙水平。]"
+          "title": "Complete Guide to Menstrual Hormone Testing: Scientific Assessment of Endocrine Levels",
+          "readTime": "PDF",
+          "keywords": "Hormone testing guide, endocrine level testing, menstrual hormone assessment, hormone testing methods, endocrine diagnosis",
+          "description": "Based on endocrine medicine: Scientific methods for menstrual hormone testing + endocrine level assessment + professional diagnostic guidance. Professional testing guide, already helped 300+ million women scientifically test hormone levels."
         },
         "nutritionalAnalysis": {
-          "title": "[TRANSLATE: 经期营养分析报告模板：个人营养评估工具]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期营养分析, 营养分析模板, 个人营养评估, 营养报告工具, 经期营养评估]",
-          "description": "[TRANSLATE: 基于营养科学：经期营养分析科学方法+个人营养评估+专业分析模板。专业营养工具，已帮助200万+女性科学分析经期营养状况。]"
+          "title": "Menstrual Nutrition Analysis Report Template: Personal Nutrition Assessment Tool",
+          "readTime": "PDF",
+          "keywords": "Menstrual nutrition analysis, nutrition analysis template, personal nutrition assessment, nutrition report tools, menstrual nutrition assessment",
+          "description": "Based on nutritional science: Scientific methods for menstrual nutrition analysis + personal nutrition assessment + professional analysis templates. Professional nutrition tools, already helped 200+ million women scientifically analyze menstrual nutrition status."
         },
         "exerciseProgram": {
-          "title": "[TRANSLATE: 经期疼痛个性化运动计划：科学训练管理方案]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期个性化运动, 痛经运动计划, 个性化训练方案, 经期运动管理, 科学运动计划]",
-          "description": "[TRANSLATE: 基于运动医学：经期疼痛个性化运动+科学训练计划+运动管理方案。专业运动指导，已帮助180万+女性科学进行个性化运动训练。]"
+          "title": "Personalized Exercise Plan for Menstrual Pain: Scientific Training Management Program",
+          "readTime": "PDF",
+          "keywords": "Menstrual personalized exercise, dysmenorrhea exercise plan, personalized training program, menstrual exercise management, scientific exercise plan",
+          "description": "Based on sports medicine: Personalized exercise for menstrual pain + scientific training plan + exercise management program. Professional exercise guidance, already helped 180+ million women scientifically conduct personalized exercise training."
         },
         "psychologicalAssessment": {
-          "title": "[TRANSLATE: 经期心理健康评估工具包：专业心理测试集合]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期心理评估, 心理健康工具包, 心理测试集合, 经期心理测试, 心理健康评估]",
-          "description": "[TRANSLATE: 基于心理学研究：经期心理健康评估+专业心理测试+心理健康工具包。专业心理工具，已帮助120万+女性科学评估经期心理健康。]"
+          "title": "经期心理健康评估工具包：专业心理Testing集合",
+          "readTime": "PDF",
+          "keywords": "经期心理评估, 心理健康工具包, 心理Testing集合, 经期心理测试, 心理健康评估",
+          "description": "基于心理学研究：经期心理健康评估+专业心理Testing+心理健康工具包。专业心理工具，已帮助120万+女性科学评估经期心理健康。"
         },
         "researchSummary": {
-          "title": "[TRANSLATE: 2024年痛经研究最新总结：科学进展临床发现]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 2024痛经研究, 痛经研究总结, 科学进展总结, 临床研究发现, 痛经研究进展]",
-          "description": "[TRANSLATE: 基于PubMed医学数据库：2024年最新痛经研究+科学进展总结+临床研究发现。专业研究总结，已帮助100万+女性了解最新痛经研究进展。]"
+          "title": "2024 Latest Summary of Dysmenorrhea Research: Scientific Progress and Clinical Findings",
+          "readTime": "PDF",
+          "keywords": "2024 dysmenorrhea research, dysmenorrhea research summary, scientific progress summary, clinical research findings, dysmenorrhea research progress",
+          "description": "Based on PubMed medical database: 2024 latest dysmenorrhea research + scientific progress summary + clinical research findings. Professional research summary, already helped 100+ million women understand the latest dysmenorrhea research progress."
         },
         "cycleEducationGuide": {
-          "title": "[TRANSLATE: 月经周期科学教育指南：全面知识学习手册]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 月经周期教育, 周期知识指南, 月经教育手册, 周期科学学习, 月经知识教育]",
-          "description": "[TRANSLATE: 基于生殖医学：月经周期科学教育+全面知识学习+周期管理指导。专业教育指南，已帮助80万+女性科学学习月经周期知识。]"
+          "title": "月经周期科学教育指南：全面知识学习Manual",
+          "readTime": "PDF",
+          "keywords": "月经周期教育, 周期知识指南, 月经教育Manual, 周期科学学习, 月经知识教育",
+          "description": "Based on reproductive medicine: Scientific education of menstrual cycle + comprehensive knowledge learning + cycle management guidance. Professional education guide, already helped 80+ million women scientifically learn menstrual cycle knowledge."
         },
         "consultationPreparation": {
-          "title": "[TRANSLATE: 经期健康医疗咨询准备指南：专业咨询准备工具]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期医疗咨询, 医疗咨询准备, 医生咨询指南, 医疗预约准备, 经期健康咨询]",
-          "description": "[TRANSLATE: 基于医患沟通：经期健康医疗咨询+专业准备指南+咨询问题清单。专业咨询指导，已帮助60万+女性科学准备医疗咨询。]"
+          "title": "Menstrual Health Medical Consultation Preparation Guide: Professional Consultation Preparation Tools",
+          "readTime": "PDF",
+          "keywords": "Menstrual medical consultation, medical consultation preparation, doctor consultation guide, medical appointment preparation, menstrual health consultation",
+          "description": "Based on doctor-patient communication: Menstrual health medical consultation + professional preparation guide + consultation question list. Professional consultation guidance, already helped 60+ million women scientifically prepare for medical consultations."
         },
         "innovationReport": {
-          "title": "[TRANSLATE: 经期健康创新研究报告：技术发展科学突破]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期健康创新, 健康技术创新, 创新研究报告, 技术发展报告, 健康科技突破]",
-          "description": "[TRANSLATE: 基于健康科技创新：经期健康领域创新+技术发展报告+科学突破研究。专业创新报告，已帮助50万+女性了解经期健康科技创新。]"
+          "title": "Menstrual Health Innovation Research Report: Technological Development and Scientific Breakthroughs",
+          "readTime": "PDF",
+          "keywords": "Menstrual health innovation, health technology innovation, innovation research report, technology development report, health technology breakthroughs",
+          "description": "Based on health technology innovation: Innovation in menstrual health field + technology development report + scientific breakthrough research. Professional innovation report, already helped 50+ million women understand menstrual health technology innovation."
         },
         "globalHealthReport": {
-          "title": "[TRANSLATE: 全球经期健康视角报告：国际管理现状趋势分析]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 全球经期健康, 国际健康视角, 全球健康报告, 经期管理趋势, 国际健康分析]",
-          "description": "[TRANSLATE: 基于全球健康研究：全球经期健康现状+国际管理趋势+健康发展分析。专业国际报告，已帮助40万+女性了解全球经期健康趋势。]"
+          "title": "Global Menstrual Health Perspective Report: International Management Status and Trend Analysis",
+          "readTime": "PDF",
+          "keywords": "Global menstrual health, international health perspective, global health report, menstrual management trends, international health analysis",
+          "description": "Based on global health research: Current global menstrual health status + international management trends + health development analysis. Professional international report, already helped 40+ million women understand global menstrual health trends."
         },
         "technologyGuide": {
-          "title": "[TRANSLATE: 经期健康数字工具指南：科技管理使用方法]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期数字健康, 数字健康工具, 科技管理指南, 数字工具使用, 经期健康科技]",
-          "description": "[TRANSLATE: 基于数字健康技术：经期健康数字工具+科技管理方法+数字健康指南。专业科技指导，已帮助70万+女性科学使用数字健康工具。]"
+          "title": "Menstrual Health Digital Tools Guide: Technology Management Usage Methods",
+          "readTime": "PDF",
+          "keywords": "Menstrual digital health, digital health tools, technology management guide, digital tool usage, menstrual health technology",
+          "description": "Based on digital health technology: Menstrual health digital tools + technology management methods + digital health guide. Professional technology guidance, already helped 70+ million women scientifically use digital health tools."
         }
       }
     },
     "management": {
       "articles": {
         "longTermStrategy": {
-          "title": "[TRANSLATE: 经期健康长期管理策略：建立可持续科学管理方案]",
-          "readTime": "[TRANSLATE: 35分钟]",
-          "keywords": "[TRANSLATE: 经期健康长期管理, 可持续管理策略, 长期健康规划, 持续改善方法, 专业管理指导]",
-          "description": "[TRANSLATE: 基于长期健康研究：经期健康长期管理+可持续管理策略+科学健康规划。专业长期指导，已帮助1000万+女性建立长期健康管理习惯。]"
+          "title": "Menstrual Health Long-Term Management Strategy: Establishing Sustainable Scientific Management Solutions",
+          "readTime": "35 minutes",
+          "keywords": "Menstrual health long-term management, sustainable management strategies, long-term health planning, continuous improvement methods, professional management guidance",
+          "description": "Based on long-term health research: Menstrual health long-term management + sustainable management strategies + scientific health planning. Professional long-term guidance, already helped 1000+ million women establish long-term health management habits."
         },
         "lifestyleOptimization": {
-          "title": "[TRANSLATE: 经期健康生活方式优化：建立科学日常管理习惯]",
-          "readTime": "[TRANSLATE: 30分钟]",
-          "keywords": "[TRANSLATE: 生活方式优化, 健康习惯建立, 生活改善方法, 健康生活方式, 生活优化策略]",
-          "description": "[TRANSLATE: 基于生活方式医学：经期健康生活方式+科学习惯建立+日常管理优化。专业生活指导，已帮助800万+女性建立健康生活方式。]"
+          "title": "Menstrual Health Lifestyle Optimization: Establishing Scientific Daily Management Habits",
+          "readTime": "30 minutes",
+          "keywords": "Lifestyle optimization, health habit establishment, life improvement methods, healthy lifestyle, life optimization strategies",
+          "description": "Based on lifestyle medicine: Menstrual health lifestyle + scientific habit establishment + daily management optimization. Professional life guidance, already helped 800+ million women establish healthy lifestyles."
         },
         "healthMonitoring": {
-          "title": "[TRANSLATE: 经期健康监测系统：个人健康数据追踪管理]",
-          "readTime": "[TRANSLATE: 25分钟]",
-          "keywords": "[TRANSLATE: 健康监测系统, 个人健康追踪, 健康数据管理, 监测系统建立, 健康追踪方法]",
-          "description": "[TRANSLATE: 基于数字健康技术：个人健康监测+数据追踪管理+健康趋势分析。专业监测指导，已帮助600万+女性建立个人健康监测系统。]"
+          "title": "Menstrual Health Monitoring System: Personal Health Data Tracking and Management",
+          "readTime": "25 minutes",
+          "keywords": "健康监测系统, 个人健康追踪, 健康Data管理, 监测系统建立, 健康追踪方法",
+          "description": "Based on digital health technology: Personal health monitoring + data tracking management + health trend analysis. Professional monitoring guidance, already helped 600+ million women establish personal health monitoring systems."
         },
         "preventiveMeasures": {
-          "title": "[TRANSLATE: 经期健康预防措施实施：科学保护长期健康]",
-          "readTime": "[TRANSLATE: 28分钟]",
-          "keywords": "[TRANSLATE: 预防措施实施, 健康保护方法, 预防性措施, 健康保护策略, 预防实施指南]",
-          "description": "[TRANSLATE: 基于预防医学：经期健康预防措施+科学保护策略+长期健康维护。专业预防指导，已帮助700万+女性科学实施预防措施。]"
+          "title": "Menstrual Health Preventive Measures Implementation: Scientific Protection for Long-term Health",
+          "readTime": "28 minutes",
+          "keywords": "预防措施实施, 健康保护方法, 预防性措施, 健康保护策略, 预防实施Guide",
+          "description": "基于预防医学：经期健康预防措施+科学保护策略+长期健康维护。专业预防指导，已Help700万+女性科学实施预防措施。"
         },
         "sustainablePractices": {
-          "title": "[TRANSLATE: 经期健康可持续实践方法：长期发展科学策略]",
-          "readTime": "[TRANSLATE: 32分钟]",
-          "keywords": "[TRANSLATE: 可持续实践方法, 长期发展策略, 可持续健康实践, 实践方法指导, 可持续发展]",
-          "description": "[TRANSLATE: 基于可持续发展理论：经期健康可持续实践+长期发展策略+科学实践方法。专业实践指导，已帮助500万+女性建立可持续健康实践。]"
+          "title": "Menstrual Health Sustainable Practice Methods: Long-term Development Scientific Strategies",
+          "readTime": "32 minutes",
+          "keywords": "Sustainable practices, long-term development strategies, sustainable health practices, practice guidance, sustainable development",
+          "description": "基于可持续发展理论：经期健康可持续实践+长期发展策略+科学实践方法。专业实践指导，已Help500万+女性建立可持续健康实践。"
         },
         "communitySupport": {
-          "title": "[TRANSLATE: 经期健康社区支持网络：互助分享经验交流]",
-          "readTime": "[TRANSLATE: 20分钟]",
-          "keywords": "[TRANSLATE: 社区支持网络, 互助分享平台, 社区健康支持, 网络支持系统, 互助交流网络]",
-          "description": "[TRANSLATE: 基于社区健康理论：社区支持网络+互助分享平台+经验交流系统。专业社区指导，已帮助400万+女性建立社区支持网络。]"
+          "title": "经期健康Community支持网络：互助分享经验交流",
+          "readTime": "20 minutes",
+          "keywords": "Community支持网络, 互助分享平台, 社区健康支持, 网络支持系统, 互助交流网络",
+          "description": "基于Community健康理论：社区支持网络+互助分享平台+经验交流系统。专业社区指导，已帮助400万+女性建立社区支持网络。"
         },
         "professionalGuidance": {
-          "title": "[TRANSLATE: 经期健康专业指导服务：专家咨询科学支持]",
-          "readTime": "[TRANSLATE: 24分钟]",
-          "keywords": "[TRANSLATE: 专业指导服务, 专业咨询服务, 专家指导支持, 专业健康服务, 专业咨询指导]",
-          "description": "[TRANSLATE: 基于专业医学服务：专家指导服务+专业咨询支持+科学健康管理。专业服务指导，已帮助300万+女性获得专业健康指导。]"
+          "title": "经期健康专业指导服务：专家咨询科学Support",
+          "readTime": "24 minutes",
+          "keywords": "专业指导服务, 专业咨询服务, 专家指导Support, 专业健康服务, 专业咨询指导",
+          "description": "基于专业医学服务：专家指导服务+专业咨询Support+科学健康管理。专业服务指导，已帮助300万+女性获得专业健康指导。"
         },
         "technologyIntegration": {
-          "title": "[TRANSLATE: 经痛模拟器科学解析：疼痛教育医学设备分析]",
-          "readTime": "[TRANSLATE: 26分钟]",
-          "keywords": "[TRANSLATE: 经痛模拟器, 疼痛教育工具, 医学设备分析, 疼痛科学教育, 模拟器科学原理]",
-          "description": "[TRANSLATE: 基于医学设备研究：经痛模拟器科学原理+疼痛教育应用+医学设备分析。专业设备指导，已帮助200万+女性了解经痛模拟器科学原理。]"
+          "title": "经痛模拟器科学解析：疼痛教育医学设备Analysis",
+          "readTime": "26 minutes",
+          "keywords": "经痛模拟器, 疼痛教育工具, 医学设备Analysis, 疼痛科学教育, 模拟器科学原理",
+          "description": "基于医学设备研究：经痛模拟器科学原理+疼痛教育应用+医学设备分析。专业设备指导，已Help200万+女性了解经痛模拟器科学原理。"
         },
         "qualityImprovement": {
-          "title": "[TRANSLATE: 药物vs自然疗法选择指南：个性化治疗方案对比]",
-          "readTime": "[TRANSLATE: 22分钟]",
-          "keywords": "[TRANSLATE: 药物vs自然疗法, 治疗选择指南, 个性化治疗方案, 治疗方法对比, 治疗选择策略]",
-          "description": "[TRANSLATE: 基于循证医学对比：药物治疗vs自然疗法效果对比+安全性分析+个性化选择策略。专业治疗指导，已帮助500万+女性选择最适合的治疗方案。]"
+          "title": "Medication vs Natural Therapy Selection Guide: Personalized Treatment Plan Comparison",
+          "readTime": "22 minutes",
+          "keywords": "药物vs自然疗法, 治疗选择Guide, 个性化治疗方案, 治疗方法对比, 治疗选择策略",
+          "description": "基于循证医学对比：药物治疗vs自然疗法效果对比+安全性分析+个性化选择策略。专业治疗指导，已Help500万+女性选择最适合的治疗方案。"
         }
       },
       "pdfs": {
         "managementPlan": {
-          "title": "[TRANSLATE: 经期健康长期管理计划：个性化科学管理方案]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期长期管理, 健康管理计划, 长期管理策略, 个性化管理, 经期健康规划]",
-          "description": "[TRANSLATE: 基于长期健康管理：经期健康长期计划+个性化管理策略+科学健康规划。专业管理指导，已帮助300万+女性建立长期健康管理计划。]"
+          "title": "Menstrual Health Long-term Management Plan: Personalized Scientific Management Solutions",
+          "readTime": "PDF",
+          "keywords": "Long-term menstrual management, health management plan, long-term management strategies, personalized management, menstrual health planning",
+          "description": "基于长期健康管理：经期健康长期计划+个性化管理策略+科学健康规划。专业管理指导，已Help300万+女性建立长期健康管理计划。"
         },
         "lifestyleGuide": {
-          "title": "[TRANSLATE: 经期健康生活方式指南：全面优化改善方法]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期生活方式, 健康生活方式指南, 生活方式优化, 经期习惯改善, 健康生活方式]",
-          "description": "[TRANSLATE: 基于生活方式医学：经期健康生活方式+全面优化指南+科学习惯改善。专业生活指导，已帮助250万+女性建立健康生活方式。]"
+          "title": "经期健康生活方式指南：全面Optimization改善方法",
+          "readTime": "PDF",
+          "keywords": "经期生活方式, 健康生活方式指南, 生活方式Optimization, 经期习惯改善, 健康生活方式",
+          "description": "基于生活方式医学：经期健康生活方式+全面Optimization指南+科学习惯改善。专业生活指导，已帮助250万+女性建立健康生活方式。"
         },
         "monitoringTools": {
-          "title": "[TRANSLATE: 经期健康监测工具包：专业追踪分析系统]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期健康监测, 健康监测工具包, 健康追踪系统, 监测分析工具, 经期健康追踪]",
-          "description": "[TRANSLATE: 基于健康监测技术：经期健康监测工具+专业追踪系统+健康数据分析。专业监测工具，已帮助200万+女性科学监测经期健康。]"
+          "title": "经期健康监测工具包：专业追踪Analysis系统",
+          "readTime": "PDF",
+          "keywords": "经期健康监测, 健康监测工具包, 健康追踪系统, 监测Analysis工具, 经期健康追踪",
+          "description": "基于健康监测技术：经期健康监测工具+专业追踪系统+健康数据分析。专业监测工具，已Help200万+女性科学监测经期健康。"
         },
         "preventionChecklist": {
-          "title": "[TRANSLATE: 经期健康预防措施清单：全面保护实施指南]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期健康预防, 预防措施清单, 健康保护指南, 预防实施清单, 经期健康保护]",
-          "description": "[TRANSLATE: 基于预防医学：经期健康预防措施+全面保护清单+预防实施指南。专业预防工具，已帮助180万+女性科学实施预防措施。]"
+          "title": "经期健康预防措施清单：全面保护实施Guide",
+          "readTime": "PDF",
+          "keywords": "经期健康预防, 预防措施清单, 健康保护Guide, 预防实施清单, 经期健康保护",
+          "description": "基于预防医学：经期健康预防措施+全面保护清单+预防实施指南。专业预防工具，已Help180万+女性科学实施预防措施。"
         },
         "sustainabilityGuide": {
-          "title": "[TRANSLATE: 经期健康可持续实践指南：长期发展科学方法]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期健康可持续, 可持续实践指南, 长期发展方法, 可持续健康实践, 经期健康发展]",
-          "description": "[TRANSLATE: 基于可持续发展理论：经期健康可持续实践+长期发展策略+科学实践方法。专业实践指导，已帮助150万+女性建立可持续健康实践。]"
+          "title": "经期健康可持续实践Guide：长期发展科学方法",
+          "readTime": "PDF",
+          "keywords": "经期健康可持续, 可持续实践Guide, 长期发展方法, 可持续健康实践, 经期健康发展",
+          "description": "基于可持续发展理论：经期健康可持续实践+长期发展策略+科学实践方法。专业实践指导，已Help150万+女性建立可持续健康实践。"
         },
         "communityResources": {
-          "title": "[TRANSLATE: 经期健康社区资源手册：支持网络互助指南]",
-          "readTime": "[TRANSLATE: PDF]",
-          "keywords": "[TRANSLATE: 经期健康社区, 社区资源手册, 健康支持网络, 社区互助指南, 经期健康支持]",
-          "description": "[TRANSLATE: 基于社区健康理论：经期健康社区资源+支持网络手册+互助交流指南。专业社区指导，已帮助100万+女性建立社区支持网络。]"
+          "title": "经期健康社区资源Manual：支持网络互助指南",
+          "readTime": "PDF",
+          "keywords": "经期健康社区, 社区资源Manual, 健康支持网络, 社区互助指南, 经期健康支持",
+          "description": "基于社区健康理论：经期健康社区资源+支持网络Manual+互助交流指南。专业社区指导，已帮助100万+女性建立社区支持网络。"
         }
       }
     },
     "helpSection": {
-      "title": "[TRANSLATE: 我现在需要什么帮助？]",
-      "needMoreHelp": "[TRANSLATE: 需要更多帮助？]",
-      "exploreTools": "[TRANSLATE: 探索我们的互动工具获得个性化建议]"
+      "title": "我现在需要什么Help？",
+      "needMoreHelp": "需要更多Help？",
+      "exploreTools": "Explore our interactive tools for personalized recommendations"
     },
     "ui": {
-      "placeholder": "[TRANSLATE: 搜索 {totalResources} 个资源...]",
-      "ariaLabel": "[TRANSLATE: 搜索资源]",
-      "helpText": "[TRANSLATE: 搜索 {totalResources} 个专业资源]",
+      "placeholder": "Search {totalResources} resources...",
+      "ariaLabel": "Search resources",
+      "helpText": "Search {totalResources} professional resources",
       "searchHints": {
-        "desktop": "[TRANSLATE: 试试关键词：热敷、按摩、疼痛缓解、药物、敷热水袋、暖宝宝、揉肚子、止痛药]",
-        "mobile": "[TRANSLATE: 试试：热敷、按摩、疼痛、敷热水袋]"
+        "desktop": "试试关键词：热敷、按摩、疼痛缓解、药物、敷热水袋、暖宝宝、揉肚子、止痛药",
+        "mobile": "试试：热敷、按摩、疼痛、敷热水袋"
       },
       "stats": {
-        "totalResources": "[TRANSLATE: 总资源数]",
-        "categories": "[TRANSLATE: 分类数]",
-        "evidenceBased": "[TRANSLATE: 循证医学]"
+        "totalResources": "Total Resources",
+        "categories": "Categories",
+        "evidenceBased": "Evidence-based Medicine"
       },
       "buttons": {
         "read": "Read",
@@ -2961,94 +2965,94 @@
         "preview": "Preview"
       },
       "searchResults": {
-        "title": "[TRANSLATE: 搜索结果]",
-        "noResults": "[TRANSLATE: 未找到相关资源]",
-        "suggestions": "[TRANSLATE: 请尝试其他关键词]"
+        "title": "Search Results",
+        "noResults": "No related resources found",
+        "suggestions": "Please try other keywords"
       },
       "alerts": {
-        "noResults": "[TRANSLATE: 未找到相关资源]",
-        "searchError": "[TRANSLATE: 搜索出错，请重试]"
+        "noResults": "No related resources found",
+        "searchError": "Search error, please try again"
       }
     },
     "share": {
-      "title": "[TRANSLATE: 分享资源]",
-      "message": "[TRANSLATE: 来自 Period Hub 的有用资源]",
-      "success": "[TRANSLATE: 分享成功！]"
+      "title": "Share Resource",
+      "message": "Useful resource from Period Hub",
+      "success": "Share successful!"
     },
     "resources": {
       "painTrackingForm": {
-        "title": "[TRANSLATE: 疼痛追踪表]",
-        "description": "[TRANSLATE: 专业的疼痛记录和分析工具，帮助您更好地了解疼痛模式]"
+        "title": "Pain Tracking Form",
+        "description": "专业的疼痛记录和分析工具，Help您更好地了解疼痛模式"
       },
       "cycleCalendar": {
-        "title": "[TRANSLATE: 经期日历]",
-        "description": "[TRANSLATE: 个性化的经期追踪日历，预测和管理您的生理周期]"
+        "title": "Menstrual Calendar",
+        "description": "Personalized menstrual tracking calendar to predict and manage your menstrual cycle"
       },
       "symptomDiary": {
-        "title": "[TRANSLATE: 症状日记]",
-        "description": "[TRANSLATE: 详细的症状记录模板，为医生诊断提供重要参考]"
+        "title": "Symptom Diary",
+        "description": "详细的症状记录模板，为医生诊断提供重要Reference"
       },
       "naturalTherapyAssessment": {
-        "title": "[TRANSLATE: 自然疗法评估]",
-        "description": "[TRANSLATE: 个性化的自然疗法选择指南，找到最适合您的调理方案]"
+        "title": "Natural Therapy Assessment",
+        "description": "个性化的自然疗法选择Guide，找到最适合您的调理方案"
       },
       "nutritionGuide": {
-        "title": "[TRANSLATE: 营养指南]",
-        "description": "[TRANSLATE: 经期营养补充完整指南，科学饮食改善经期不适]"
+        "title": "营养Guide",
+        "description": "经期营养补充完整Guide，科学饮食改善经期不适"
       },
       "exerciseRoutine": {
-        "title": "[TRANSLATE: 运动方案]",
-        "description": "[TRANSLATE: 专为经期设计的运动计划，缓解疼痛提升健康]"
+        "title": "Exercise Plan",
+        "description": "Exercise plan designed for menstruation to relieve pain and improve health"
       },
       "doctorConsultationGuide": {
-        "title": "[TRANSLATE: 就医指导]",
-        "description": "[TRANSLATE: 与医生有效沟通的完整指南，获得更好的医疗服务]"
+        "title": "Medical Consultation Guide",
+        "description": "与医生有效沟通的完整Guide，获得更好的医疗服务"
       },
       "familyCommunicationTips": {
-        "title": "[TRANSLATE: 家庭沟通技巧]",
-        "description": "[TRANSLATE: 与家人朋友沟通经期话题的实用建议和技巧]"
+        "title": "Family Communication Tips",
+        "description": "Practical advice and tips for communicating about menstruation with family and friends"
       },
       "workplaceSupportGuide": {
-        "title": "[TRANSLATE: 职场支持指南]",
-        "description": "[TRANSLATE: 在工作场所获得理解和支持的策略和方法]"
+        "title": "职场Support指南",
+        "description": "在工作场所获得理解和Support的策略和方法"
       },
       "menstrualHealthBasics": {
-        "title": "[TRANSLATE: 经期健康基础]",
-        "description": "[TRANSLATE: 全面的经期健康知识手册，从基础到进阶的完整指南]"
+        "title": "Menstrual Health Basics",
+        "description": "全面的经期健康知识Manual，从基础到进阶的完整指南"
       },
       "teenGuide": {
-        "title": "[TRANSLATE: 青少年指南]",
-        "description": "[TRANSLATE: 专为青少年女性设计的经期健康教育资源]"
+        "title": "青少年Guide",
+        "description": "Menstrual health education resources designed for teenage girls"
       },
       "mythsFactsGuide": {
-        "title": "[TRANSLATE: 误区与事实]",
-        "description": "[TRANSLATE: 破除经期常见误区，了解科学的经期健康知识]"
+        "title": "Myths and Facts",
+        "description": "Debunk common menstrual myths and learn scientific menstrual health knowledge"
       }
     },
     "filter": {
-      "title": "[TRANSLATE: 筛选]",
-      "categories": "[TRANSLATE: 按分类筛选]",
-      "allCategories": "[TRANSLATE: 全部分类]",
-      "items": "[TRANSLATE: 项]",
+      "title": "Filter",
+      "categories": "Filter by Category",
+      "allCategories": "All Categories",
+      "items": "items",
       "category": "Category",
-      "clearAll": "[TRANSLATE: 清除筛选]",
-      "activeFilters": "[TRANSLATE: 当前筛选]"
+      "clearAll": "Clear Filters",
+      "activeFilters": "Active Filters"
     },
     "viewMode": {
-      "grid": "[TRANSLATE: 网格视图]",
-      "list": "[TRANSLATE: 列表视图]"
+      "grid": "Grid View",
+      "list": "List View"
     },
     "empty": {
-      "title": "[TRANSLATE: 未找到相关资源]",
-      "searchMessage": "[TRANSLATE: 请尝试使用其他关键词搜索]",
-      "filterMessage": "[TRANSLATE: 请调整筛选条件或浏览其他分类]",
-      "resetFilters": "[TRANSLATE: 重置筛选条件]"
+      "title": "No related resources found",
+      "searchMessage": "Please try searching with other keywords",
+      "filterMessage": "Please adjust filter conditions or browse other categories",
+      "resetFilters": "Reset Filters"
     },
     "footer": {
-      "description": "[TRANSLATE: 所有PDF资源均经过专业团队审核，确保内容的准确性和实用性。]",
-      "totalDownloads": "[TRANSLATE: 总下载量]",
-      "lastUpdated": "[TRANSLATE: 最后更新]",
-      "rating": "[TRANSLATE: 用户评分]"
+      "description": "All PDF resources have been reviewed by a professional team to ensure accuracy and practicality.",
+      "totalDownloads": "Total Downloads",
+      "lastUpdated": "最后Update",
+      "rating": "User Rating"
     }
   },
   "resourcesPage": {
@@ -4115,8 +4119,8 @@
       "statLength": "Period Length",
       "statNext": "Next Period",
       "saveError": "An error occurred while saving the record. Please try again.",
-      "painLevelMin": "[TRANSLATE: 无痛]",
-      "painLevelMax": "[TRANSLATE: 极痛]"
+      "painLevelMin": "No Pain",
+      "painLevelMax": "Severe Pain"
     },
     "history": {
       "title": "History Records",
@@ -4190,13 +4194,13 @@
         "cycleLength": "Cycle Length",
         "painLevel": "Pain Level",
         "flowType": "Flow Type",
-        "painLevelMin": "[TRANSLATE: 无痛]",
-        "painLevelMax": "[TRANSLATE: 极痛]",
-        "saveError": "[TRANSLATE: 保存记录时出错，请重试。]"
+        "painLevelMin": "No Pain",
+        "painLevelMax": "Severe Pain",
+        "saveError": "保存Record时出错，请重试。"
       },
-      "painLevelMin": "[TRANSLATE: 无痛]",
-      "painLevelMax": "[TRANSLATE: 极痛]",
-      "saveError": "[TRANSLATE: 保存记录时出错，请重试。]"
+      "painLevelMin": "No Pain",
+      "painLevelMax": "Severe Pain",
+      "saveError": "保存Record时出错，请重试。"
     },
     "nutrition": {
       "phaseLabel": "Phase Label",
@@ -4638,9 +4642,9 @@
         "moderate": "Moderate",
         "severe": "Severe"
       },
-      "painLevelMin": "[TRANSLATE: 无痛]",
-      "painLevelMax": "[TRANSLATE: 极痛]",
-      "saveError": "[TRANSLATE: 保存记录时出错，请重试。]"
+      "painLevelMin": "No Pain",
+      "painLevelMax": "Severe Pain",
+      "saveError": "保存Record时出错，请重试。"
     },
     "workAnalysis": {
       "title": "Work Impact Analysis",
@@ -4663,9 +4667,9 @@
       "efficiencyVsPain": "Efficiency vs Pain",
       "productivityTrend": "Productivity Trend",
       "recommendation": "Recommendation",
-      "painLevelMin": "[TRANSLATE: 无痛]",
-      "painLevelMax": "[TRANSLATE: 极痛]",
-      "saveError": "[TRANSLATE: 保存记录时出错，请重试。]"
+      "painLevelMin": "No Pain",
+      "painLevelMax": "Severe Pain",
+      "saveError": "保存Record时出错，请重试。"
     },
     "analysis": {
       "advancedTitle": "Advanced Analysis",
@@ -6615,9 +6619,13 @@
         "backToOverview": "Back to Scenario Solutions Overview"
       },
       "partnerCommunication": {
-        "title": "[TRANSLATE: 伴侣沟通场景]",
-        "description": "[TRANSLATE: 专业的伴侣沟通场景解决方案，帮助伴侣更好地理解痛经，提供针对性的沟通策略和情感支持技巧。包含理解测试、30天训练营和个性化指导，帮助您建立更好的理解和沟通。]",
-        "features": ["伴侣理解测试", "30天训练营", "个性化指导"]
+        "title": "Partner Communication Scenarios",
+        "description": "专业的伴侣沟通场景解决方案，帮助伴侣更好地理解痛经，提供针对性的沟通策略和情感支持技巧。包含理解Testing、30天训练营和个性化指导，帮助您建立更好的理解和沟通。",
+        "features": [
+          "伴侣理解测试",
+          "30天训练营",
+          "个性化指导"
+        ]
       }
     },
     "introTitle": "Comprehensive Scenario-Based Solutions",
@@ -6732,70 +6740,70 @@
         }
       },
       "meta": {
-        "title": "[TRANSLATE: 职场健康管理 - 经期工作环境优化工具]",
-        "description": "[TRANSLATE: 专业的职场健康管理工具，帮助女性在工作中更好地管理经期健康，提供个性化的工作环境调整建议和健康管理策略。]",
-        "keywords": "[TRANSLATE: 职场健康,经期管理,工作环境,健康管理,职场女性]",
+        "title": "职场健康管理 - 经期工作环境Optimization工具",
+        "description": "专业的职场健康管理工具，Help女性在工作中更好地管理经期健康，提供个性化的工作环境调整建议和健康管理策略。",
+        "keywords": "Workplace health, menstrual management, work environment, health management, working women",
         "features": {
-          "workplaceOptimization": "[TRANSLATE: 工作环境优化]",
-          "healthTracking": "[TRANSLATE: 经期健康跟踪]",
-          "personalizedRecommendations": "[TRANSLATE: 个性化建议]"
+          "workplaceOptimization": "工作环境Optimization",
+          "healthTracking": "Menstrual Health Tracking",
+          "personalizedRecommendations": "Personalized Recommendations"
         }
       },
       "pdf": {
-        "reportTitle": "[TRANSLATE: 工作场所健康数据报告]",
-        "reportSubtitle": "[TRANSLATE: Period Hub 职场健康助手]",
-        "reportInfo": "[TRANSLATE: 报告信息]",
-        "exportTime": "[TRANSLATE: 导出时间]",
-        "exportType": "[TRANSLATE: 导出类型]",
-        "language": "[TRANSLATE: 语言版本]",
-        "languageValue": "[TRANSLATE: 中文]",
-        "dataRecords": "[TRANSLATE: 数据条数]",
-        "privacyNotice": "[TRANSLATE: 隐私保护声明]",
-        "privacyText": "[TRANSLATE: 本报告包含个人健康数据，请妥善保管，避免泄露。所有数据均存储在您的本地设备中，我们不会收集或存储您的个人信息。]",
-        "generatedAt": "[TRANSLATE: 报告生成时间: ]",
+        "reportTitle": "工作场所健康Data报告",
+        "reportSubtitle": "Period Hub Workplace Health Assistant",
+        "reportInfo": "Report信息",
+        "exportTime": "Export时间",
+        "exportType": "Export类型",
+        "language": "语言Version",
+        "languageValue": "Chinese",
+        "dataRecords": "Data条数",
+        "privacyNotice": "Privacy Protection Statement",
+        "privacyText": "本报告包含个人健康Data，请妥善保管，避免泄露。所有数据均存储在您的本地设备中，我们不会收集或存储您的个人信息。",
+        "generatedAt": "Report生成时间: ",
         "exportTypes": {
-          "period": "[TRANSLATE: 经期数据]",
-          "nutrition": "[TRANSLATE: 营养数据]",
-          "all": "[TRANSLATE: 全部数据]"
+          "period": "经期Data",
+          "nutrition": "营养Data",
+          "all": "全部Data"
         },
-        "records": "[TRANSLATE: 条记录]",
-        "periodData": "[TRANSLATE: 经期数据]",
-        "noPeriodData": "[TRANSLATE: 暂无经期数据记录]",
-        "nutritionData": "[TRANSLATE: 营养数据]",
-        "noNutritionData": "[TRANSLATE: 暂无营养数据记录]",
+        "records": "条Record",
+        "periodData": "经期Data",
+        "noPeriodData": "暂无经期Data记录",
+        "nutritionData": "营养Data",
+        "noNutritionData": "暂无营养Data记录",
         "tableHeaders": {
-          "date": "[TRANSLATE: 日期]",
-          "type": "[TRANSLATE: 类型]",
-          "painLevel": "[TRANSLATE: 疼痛等级]",
-          "painLevelMin": "[TRANSLATE: 无痛]",
-          "painLevelMax": "[TRANSLATE: 极痛]",
-          "saveError": "[TRANSLATE: 保存记录时出错，请重试。]",
-          "flow": "[TRANSLATE: 流量]",
-          "notes": "[TRANSLATE: 备注]",
-          "foodName": "[TRANSLATE: 食物名称]",
-          "menstrualPhase": "[TRANSLATE: 经期阶段]",
-          "tcmNature": "[TRANSLATE: 中医性质]",
-          "mainBenefits": "[TRANSLATE: 主要功效]",
-          "keyNutrients": "[TRANSLATE: 关键营养素]"
+          "date": "Date",
+          "type": "Type",
+          "painLevel": "Pain Level",
+          "painLevelMin": "No Pain",
+          "painLevelMax": "Severe Pain",
+          "saveError": "保存Record时出错，请重试。",
+          "flow": "Flow",
+          "notes": "Notes",
+          "foodName": "Food Name",
+          "menstrualPhase": "Menstrual Phase",
+          "tcmNature": "TCM Nature",
+          "mainBenefits": "Main Benefits",
+          "keyNutrients": "Key Nutrients"
         },
         "recordTypes": {
-          "period": "[TRANSLATE: 经期]",
-          "predicted": "[TRANSLATE: 预测]"
+          "period": "Menstrual Period",
+          "predicted": "Predicted"
         },
         "phases": {
-          "menstrual": "[TRANSLATE: 经期]",
-          "follicular": "[TRANSLATE: 卵泡期]",
-          "ovulation": "[TRANSLATE: 排卵期]",
-          "luteal": "[TRANSLATE: 黄体期]"
+          "menstrual": "Menstrual Period",
+          "follicular": "Follicular Phase",
+          "ovulation": "Ovulation",
+          "luteal": "Luteal Phase"
         },
         "tcmNature": {
-          "warm": "[TRANSLATE: 温性]",
-          "cool": "[TRANSLATE: 凉性]",
-          "neutral": "[TRANSLATE: 平性]"
+          "warm": "Warm",
+          "cool": "Cool",
+          "neutral": "Neutral"
         }
       },
       "privacy": {
-        "reportTitle": "[TRANSLATE: 隐私保护报告]"
+        "reportTitle": "隐私保护Report"
       }
     },
     "prerequisites": {
@@ -6808,65 +6816,6 @@
       "title": "Nutrition Recommendation Generator",
       "description": "Get personalized nutrition recommendations based on your menstrual cycle, health goals, and TCM constitution. Complete cycle tracking and constitution test first.",
       "cta": "Start Nutrition Analysis"
-    },
-    "nutritionRecommendationGenerator": {
-      "title": "Nutrition Recommendation Generator",
-      "description": "Please select your menstrual phase, health goals, and TCM constitution to generate personalized nutrition recommendations",
-      "journeyTitle": "✨ Start Your Personalized Nutrition Journey",
-      "steps": {
-        "step1": "Select Phase",
-        "step2": "Set Goals",
-        "step3": "Generate"
-      },
-      "tip": "💡 Tip: All recommendations are based on scientific research and TCM theory",
-      "meta": {
-        "title": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
-        "description": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
-        "keywords": "nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management",
-        "ogTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
-        "ogDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
-        "twitterTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
-        "twitterDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine."
-      },
-      "structuredData": {
-        "applicationCategory": "HealthApplication",
-        "operatingSystem": "Any",
-        "browserRequirements": "HTML5, CSS3, JavaScript",
-        "providerName": "Period Hub"
-      },
-      "relatedTools": {
-        "title": "Related Tools",
-        "cycleTracker": {
-          "title": "Smart Cycle Tracker",
-          "description": "Intelligently track your menstrual cycle, predict next period, record symptom changes, helping you better understand your body patterns"
-        },
-        "constitutionTest": {
-          "title": "TCM Constitution Test",
-          "description": "Understand your TCM constitution type through 11 questions and get personalized acupuncture points, diet and lifestyle recommendations"
-        }
-      },
-      "relatedArticles": {
-        "title": "Related Nutrition Articles",
-        "antiInflammatory": {
-          "title": "Anti-Inflammatory Diet Guide",
-          "description": "Scientific dietary methods to relieve menstrual pain through food, understanding which foods help reduce inflammation and pain",
-          "readTime": "8 min read"
-        },
-        "gingerTea": {
-          "title": "Ginger Tea for Menstrual Pain Relief",
-          "description": "5 scientifically proven ginger tea recipes for effective menstrual pain relief, learn proper preparation techniques and timing",
-          "readTime": "6 min read"
-        },
-        "herbalTea": {
-          "title": "Effective Herbal Tea Recipes",
-          "description": "5 scientifically proven herbal tea recipes for natural menstrual relief, including cinnamon tea, fennel seed tea and other classic formulas",
-          "readTime": "7 min read"
-        }
-      },
-      "footer": {
-        "text": "Personalized wellness at your fingertips.",
-        "disclaimer": "This tool provides general nutrition guidance and should not replace professional medical advice."
-      }
     },
     "otherTools": {
       "title": "Other Practical Tools",
@@ -7248,9 +7197,9 @@
         "overwrite": "覆盖",
         "duplicateTitle": "该日期已有记录",
         "duplicateWarning": "该日期已经有疼痛记录了。您想要覆盖现有记录吗？",
-        "painLevelMin": "[TRANSLATE: 无痛]",
-        "painLevelMax": "[TRANSLATE: 极痛]",
-        "saveError": "[TRANSLATE: 保存记录时出错，请重试。]"
+        "painLevelMin": "No Pain",
+        "painLevelMax": "Severe Pain",
+        "saveError": "保存Record时出错，请重试。"
       },
       "assessment": {
         "title": "症状评估工具",
@@ -7401,12 +7350,12 @@
         }
       },
       "features": {
-        "dailyRecording": "[TRANSLATE: 每日疼痛记录与追踪]",
-        "patternVisualization": "[TRANSLATE: 疼痛模式可视化分析]",
-        "trendCharts": "[TRANSLATE: 症状趋势图表展示]",
-        "cyclicalIdentification": "[TRANSLATE: 周期性疼痛识别]",
-        "triggerAnalysis": "[TRANSLATE: 触发因素分析]",
-        "dataExport": "[TRANSLATE: 数据导出与分享]"
+        "dailyRecording": "每日疼痛Record与追踪",
+        "patternVisualization": "疼痛模式可视化Analysis",
+        "trendCharts": "Symptom Trend Chart Display",
+        "cyclicalIdentification": "Cyclical Pain Identification",
+        "triggerAnalysis": "触发因素Analysis",
+        "dataExport": "数据Export与分享"
       }
     },
     "cycleTracker": {
@@ -7837,23 +7786,48 @@
       "questions": {
         "q1": {
           "question": "Have you frequently felt anxious or tense recently?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         },
         "q2": {
           "question": "How is your sleep quality?",
-          "options": ["Very Good", "Good", "Poor", "Very Poor"]
+          "options": [
+            "Very Good",
+            "Good",
+            "Poor",
+            "Very Poor"
+          ]
         },
         "q3": {
           "question": "Do you often feel tired or lack energy?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         },
         "q4": {
           "question": "Do you easily feel irritable or angry?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         },
         "q5": {
           "question": "Do you often worry about period-related issues?",
-          "options": ["Never", "Occasionally", "Often", "Always"]
+          "options": [
+            "Never",
+            "Occasionally",
+            "Often",
+            "Always"
+          ]
         }
       },
       "benefits": {
@@ -7875,7 +7849,13 @@
       "radar": {
         "title": "Stress Areas Analysis",
         "subtitle": "Visual representation of your stress levels across different life areas",
-        "labels": ["Work", "Sleep", "Emotion", "Physical", "Social"]
+        "labels": [
+          "Work",
+          "Sleep",
+          "Emotion",
+          "Physical",
+          "Social"
+        ]
       },
       "privacy": {
         "badge": "Your data is 100% encrypted and never sold",
@@ -8533,7 +8513,7 @@
             "description": "The importance of sleep quality and stress management for menstrual health"
           },
           "stressManagement": {
-            "title": "[TRANSLATE: 压力管理]",
+            "title": "Stress管理",
             "items": [
               "慢性压力影响激素水平",
               "工作压力加重疼痛感知",
@@ -8639,7 +8619,7 @@
         "buttonText": "Start Tracking",
         "buttonLink": "/en/interactive-tools/pain-tracker"
       },
-      "description": "[TRANSLATE: 了解不同类型的痛经模式，帮助您更好地识别和管理疼痛]",
+      "description": "了解不同类型的痛经模式，Help您更好地识别和管理疼痛",
       "influencers": {
         "environmentalFactors": {
           "environmentalImpact": {
@@ -8900,7 +8880,7 @@
     "hero": {
       "title": "Your Complete Period Health Guide",
       "description": "Evidence-based information to help you understand and manage your menstrual health with confidence.",
-      "subtitle": "[TRANSLATE: 专业医学知识与科学管理策略]"
+      "subtitle": "Professional Medical Knowledge and Scientific Management Strategies"
     },
     "whyGuide": {
       "title": "Why This Guide Matters",
@@ -8938,7 +8918,7 @@
         "description": "Traditional and cultural approaches to menstrual health",
         "cta": "Explore Traditions"
       },
-      "readMore": "[TRANSLATE: 阅读更多]"
+      "readMore": "Read More"
     },
     "medicalPrinciples": {
       "title": "🧬 Medical Principles & Scientific Mechanisms",
@@ -9217,12 +9197,12 @@
         "description": "Evaluate your pain level and get personalized recommendations"
       },
       "symptomAssessment": {
-        "title": "[TRANSLATE: 症状评估]",
-        "description": "[TRANSLATE: 专业经期症状全面评估工具：科学分析疼痛程度、症状类型、持续时间等关键指标，提供个性化健康建议和治疗方案。基于循证医学的评估体系，帮助您准确了解经期健康状况。]"
+        "title": "Symptom Assessment",
+        "description": "专业经期症状全面评估工具：科学分析疼痛程度、症状类型、持续时间等关键指标，提供个性化健康建议和治疗方案。基于循证医学的评估体系，Help您准确了解经期健康状况。"
       },
       "lifestyleGuide": {
-        "title": "[TRANSLATE: 生活方式指南]",
-        "description": "[TRANSLATE: 个性化健康建议]"
+        "title": "生活方式Guide",
+        "description": "Personalized Health Advice"
       }
     },
     "quickAccess": {
@@ -10122,10 +10102,10 @@
       "subtitle": "When pain is severe",
       "immediateActionsTitle": "Immediate Actions:",
       "immediateActions": {
-        "0": "[TRANSLATE: 立即服用NSAID类药物（如布洛芬）]",
-        "1": "[TRANSLATE: 使用热敷垫或热水袋敷下腹部]",
-        "2": "[TRANSLATE: 进行4-7-8呼吸法缓解紧张]",
-        "3": "[TRANSLATE: 按摩三阴交、合谷穴等关键穴位]",
+        "0": "Take NSAID medication immediately (such as ibuprofen)",
+        "1": "Apply heat pad or hot water bottle to lower abdomen",
+        "2": "Practice 4-7-8 breathing technique to relieve tension",
+        "3": "Massage key acupoints such as Sanyinjiao and Hegu",
         "action1": "Apply heat or cold therapy immediately",
         "action2": "Take prescribed pain medication",
         "action3": "Rest in a comfortable position",
@@ -10135,10 +10115,10 @@
       "medicalIndicators": {
         "title": "Seek Medical Care If:",
         "indicators": {
-          "0": "[TRANSLATE: 疼痛持续超过3天且无缓解]",
-          "1": "[TRANSLATE: 出现发热、恶心、呕吐等症状]",
-          "2": "[TRANSLATE: 疼痛突然加重或性质改变]",
-          "3": "[TRANSLATE: 非经期时也有严重盆腔疼痛]",
+          "0": "Pain persists for more than 3 days with no relief",
+          "1": "Symptoms such as fever, nausea, and vomiting appear",
+          "2": "Pain suddenly worsens or changes in nature",
+          "3": "Severe pelvic pain even outside menstrual period",
           "indicator1": "Severe pain that doesn't respond to treatment",
           "indicator2": "Fever accompanying the pain",
           "indicator3": "Unusual bleeding or discharge",
@@ -10149,11 +10129,11 @@
       "emergencyKit": {
         "title": "Emergency Relief Kit:",
         "items": {
-          "0": "[TRANSLATE: 止痛药（布洛芬、对乙酰氨基酚）]",
-          "1": "[TRANSLATE: 热敷垫或热水袋]",
-          "2": "[TRANSLATE: 暖宝宝贴]",
-          "3": "[TRANSLATE: 薄荷精油或清凉油]",
-          "4": "[TRANSLATE: 医生联系方式]",
+          "0": "Painkillers (ibuprofen, acetaminophen)",
+          "1": "Heat pad or hot water bottle",
+          "2": "Heating pad",
+          "3": "Peppermint essential oil or cooling oil",
+          "4": "Doctor联系方式",
           "item1": "Heat pack or hot water bottle",
           "item2": "Cold pack or ice pack",
           "item3": "Pain medication",
@@ -10857,24 +10837,24 @@
         }
       }
     },
-    "title": "[TRANSLATE: Health Articles]",
-    "subtitle": "[TRANSLATE: Professional guidance based on scientific research to help you better understand and manage menstrual health]",
+    "title": "Health Articles",
+    "subtitle": "Professional guidance based on scientific research to help you better understand and manage menstrual health",
     "categories": {
-      "pain": "[TRANSLATE: Pain Management]",
-      "painDesc": "[TRANSLATE: Effective methods and techniques for relieving menstrual pain]",
-      "nutrition": "[TRANSLATE: Nutrition Guidance]",
-      "nutritionDesc": "[TRANSLATE: Menstrual nutrition supplements and dietary recommendations]"
+      "pain": "Pain Management",
+      "painDesc": "Effective methods and techniques for relieving menstrual pain",
+      "nutrition": "Nutrition Guidance",
+      "nutritionDesc": "Menstrual nutrition supplements and dietary recommendations"
     },
-    "painRelief": "[TRANSLATE: Quick Menstrual Pain Relief Guide]",
-    "antiInflammatory": "[TRANSLATE: Anti-inflammatory Diet and Menstrual Pain]",
-    "heatTherapy": "[TRANSLATE: Complete Heat Therapy Guide]",
-    "nutritionGuide": "[TRANSLATE: Menstrual Nutrition Guide]",
-    "supplements": "[TRANSLATE: Menstrual Health Supplements]",
-    "hydration": "[TRANSLATE: Menstrual Hydration Guide]",
+    "painRelief": "Quick Menstrual Pain Relief Guide",
+    "antiInflammatory": "Anti-inflammatory Diet and Menstrual Pain",
+    "heatTherapy": "Complete Heat Therapy Guide",
+    "nutritionGuide": "Menstrual Nutrition Guide",
+    "supplements": "Menstrual Health Supplements",
+    "hydration": "Menstrual Hydration Guide",
     "cta": {
-      "title": "[TRANSLATE: Need Personalized Advice?]",
-      "subtitle": "[TRANSLATE: Use our interactive tools to get your exclusive health plan]",
-      "button": "[TRANSLATE: Start Assessment]"
+      "title": "Need Personalized Advice?",
+      "subtitle": "Use our interactive tools to get your exclusive health plan",
+      "button": "Start Assessment"
     }
   },
   "tools": {
@@ -11030,14 +11010,14 @@
       }
     },
     "relaxationTechniques": {
-      "title": "[TRANSLATE: 放松技巧]",
-      "description": "[TRANSLATE: 科学的放松方法帮助你缓解压力]",
-      "start": "[TRANSLATE: 开始使用]",
-      "learnMore": "[TRANSLATE: 了解更多]"
+      "title": "Relaxation Techniques",
+      "description": "科学的放松方法Help你缓解压力",
+      "start": "Start Using",
+      "learnMore": "Learn More"
     },
     "symptomChecker": {
-      "title": "[TRANSLATE: Symptom Checker]",
-      "description": "[TRANSLATE: Quickly identify menstrual-related symptoms and get professional advice]"
+      "title": "Symptom Checker",
+      "description": "Quickly identify menstrual-related symptoms and get professional advice"
     }
   },
   "homeClean": {
@@ -11191,7 +11171,7 @@
       }
     }
   },
-  "feedback": "[TRANSLATE: 反馈]",
+  "feedback": "Feedback",
   "abtest": {
     "debugger": {
       "title": "A/B Test Debug",
@@ -11288,7 +11268,7 @@
       }
     }
   },
-  "buttons": "[TRANSLATE: 按钮]",
+  "buttons": "Button",
   "periodPainImpactCalculator": {
     "metaTitle": "Period Pain Impact Calculator | Workplace Assessment",
     "pageTitle": "Period Pain Impact Calculator - Scientific Symptom Assessment",
@@ -11635,324 +11615,324 @@
   },
   "pdfCenter": {
     "meta": {
-      "title": "[TRANSLATE: PDF下载中心 - Period Hub]",
-      "description": "[TRANSLATE: 专业的经期健康PDF资源下载中心，提供管理工具、健康指南、沟通指导和教育资源]",
-      "keywords": "[TRANSLATE: 经期健康,PDF下载,健康管理,女性健康,经期指南]"
+      "title": "PDF Download Center - Period Hub",
+      "description": "专业的经期健康PDF资源下载中心，提供管理工具、健康Guide、沟通指导和教育资源",
+      "keywords": "经期健康,PDF下载,健康管理,女性健康,经期Guide"
     },
     "searchExtended": {
-      "placeholder": "[TRANSLATE: 搜索{totalResources}个资源... 试试：疼痛、缓解、营养、运动、医学、沟通]",
-      "placeholderShort": "[TRANSLATE: 搜索资源...]",
+      "placeholder": "Search {totalResources} resources... Try: pain, relief, nutrition, exercise, medicine, communication",
+      "placeholderShort": "Search resources...",
       "keywords": {
         "pain": "Pain",
         "relief": "Relief",
         "nutrition": "Nutrition",
         "exercise": "Exercise",
-        "medical": "[TRANSLATE: 医学]",
+        "medical": "Medical",
         "communication": "Communication"
       },
-      "suggestions": "[TRANSLATE: 试试关键词：疼痛、缓解、营养、运动、医学、沟通]",
-      "helpText": "[TRANSLATE: 在{totalResources}个专业资源中搜索]",
-      "ariaLabel": "[TRANSLATE: 搜索健康资源]"
+      "suggestions": "Try keywords: pain, relief, nutrition, exercise, medicine, communication",
+      "helpText": "Search among {totalResources} professional resources",
+      "ariaLabel": "Search health resources"
     },
-    "title": "[TRANSLATE: PDF下载中心]",
-    "description": "[TRANSLATE: 专业的经期健康PDF资源库，为您提供实用的管理工具、科学的健康指南、有效的沟通技巧和全面的教育资源。13个独特资源，每个均提供中英文版本（共26个文件），全部免费下载。]",
+    "title": "PDF Download Center",
+    "description": "专业的经期健康PDF资源库，为您提供实用的管理工具、科学的健康指南、有效的沟通技巧和全面的教育资源。13个独特资源，每个均提供中英文Version（共26个文件），全部免费下载。",
     "success": {
-      "title": "[TRANSLATE: PDF下载中心已就绪！]",
-      "message": "[TRANSLATE: 我们为您精心准备了12个专业PDF资源，涵盖4大核心分类，支持中英双语下载。每个资源都经过专业团队精心制作，确保内容的科学性和实用性。]",
-      "status": "[TRANSLATE: 系统运行正常]"
+      "title": "PDF Download Center is ready!",
+      "message": "我们为您精心准备了12个专业PDF资源，涵盖4大核心分类，Support中英双语下载。每个资源都经过专业团队精心制作，确保内容的科学性和实用性。",
+      "status": "System running normally"
     },
     "statsExtended": {
-      "totalResources": "[TRANSLATE: 总资源数]",
-      "categories": "[TRANSLATE: 分类数量]",
-      "languages": "[TRANSLATE: 支持语言]",
-      "featured": "[TRANSLATE: 精选资源]",
+      "totalResources": "Total Resources",
+      "categories": "Number of Categories",
+      "languages": "Support语言",
+      "featured": "Featured Resources",
       "showing": "Showing",
-      "resources": "[TRANSLATE: 个资源]"
+      "resources": "resources"
     },
     "categoriesExtended": {
       "managementTools": {
-        "title": "[TRANSLATE: 管理工具]",
-        "description": "[TRANSLATE: 实用的经期管理和追踪工具]"
+        "title": "Management Tools",
+        "description": "Practical menstrual management and tracking tools"
       },
       "healthManagement": {
-        "title": "[TRANSLATE: 健康管理]",
-        "description": "[TRANSLATE: 科学的健康管理指导方案]"
+        "title": "Health Management",
+        "description": "Scientific health management guidance solutions"
       },
       "communicationGuidance": {
-        "title": "[TRANSLATE: 沟通指导]",
-        "description": "[TRANSLATE: 有效的沟通技巧和建议]"
+        "title": "Communication Guidance",
+        "description": "Effective communication skills and advice"
       },
       "educationalResources": {
-        "title": "[TRANSLATE: 教育资源]",
-        "description": "[TRANSLATE: 全面的经期健康教育材料]"
+        "title": "Educational Resources",
+        "description": "Comprehensive menstrual health education materials"
       }
     },
     "alerts": {
-      "resourceMappingError": "[TRANSLATE: 资源映射错误，请联系技术支持]",
-      "linkCopied": "[TRANSLATE: 链接已复制到剪贴板]",
-      "downloadFailed": "[TRANSLATE: 下载失败]"
+      "resourceMappingError": "资源映射错误，请联系技术Support",
+      "linkCopied": "Link copied to clipboard",
+      "downloadFailed": "Download failed"
     },
     "share": {
-      "source": "[TRANSLATE: 来源：Period Hub 健康资源中心]",
-      "underDevelopment": "[TRANSLATE: 此资源正在开发中，敬请期待完整内容。]",
-      "moreInfo": "[TRANSLATE: 如需更多信息，请访问：]"
+      "source": "Source: Period Hub Health Resource Center",
+      "underDevelopment": "This resource is under development, please stay tuned for the complete content.",
+      "moreInfo": "For more information, please visit:"
     },
     "categoriesSimple": {
-      "immediate": "[TRANSLATE: 即时缓解方案]",
-      "preparation": "[TRANSLATE: 计划与准备]",
-      "learning": "[TRANSLATE: 学习与理解]",
-      "management": "[TRANSLATE: 长期管理]"
+      "immediate": "Immediate Relief Solutions",
+      "preparation": "Planning and Preparation",
+      "learning": "Learning and Understanding",
+      "management": "Long-term Management"
     },
     "subtitles": {
-      "immediate": "[TRANSLATE: 快速缓解疼痛]",
-      "preparation": "[TRANSLATE: 提前准备管理]",
-      "learning": "[TRANSLATE: 深入了解知识]",
-      "management": "[TRANSLATE: 持续改善健康]"
+      "immediate": "Quick Pain Relief",
+      "preparation": "Prepare in Advance",
+      "learning": "Deep Understanding",
+      "management": "Continuous Health Improvement"
     },
     "mobileCategories": {
-      "immediate": "[TRANSLATE: 立即帮助]",
-      "preparation": "[TRANSLATE: 计划准备]",
-      "learning": "[TRANSLATE: 深入了解]",
-      "longterm": "[TRANSLATE: 长期管理]"
+      "immediate": "立即Help",
+      "preparation": "Planning and Preparation",
+      "learning": "Deep Understanding",
+      "longterm": "Long-term Management"
     },
     "mobileDescriptions": {
-      "immediate": "[TRANSLATE: 现在就疼！马上需要缓解]",
-      "preparation": "[TRANSLATE: 提前准备，从容应对]",
-      "learning": "[TRANSLATE: 了解原理，科学管理]",
-      "longterm": "[TRANSLATE: 建立习惯，持续改善]"
+      "immediate": "Pain right now! Need immediate relief",
+      "preparation": "Prepare in advance, respond calmly",
+      "learning": "Understand principles, manage scientifically",
+      "longterm": "Build habits, continuously improve"
     },
     "labels": {
-      "topPick": "[TRANSLATE: 最推荐]",
-      "recommended": "[TRANSLATE: 推荐]",
-      "important": "[TRANSLATE: 重要]",
-      "optional": "[TRANSLATE: 选读]"
+      "topPick": "Most Recommended",
+      "recommended": "Recommended",
+      "important": "Important",
+      "optional": "Optional Reading"
     },
     "actions": {
-      "readArticle": "[TRANSLATE: 阅读文章]",
+      "readArticle": "Read Article",
       "preview": "Preview",
-      "useInteractiveTools": "[TRANSLATE: 使用互动工具]"
+      "useInteractiveTools": "Use Interactive Tools"
     },
     "searchSimple": {
-      "placeholder": "[TRANSLATE: 搜索资源...]",
-      "whatHelp": "[TRANSLATE: 我现在需要什么帮助？]",
-      "needMoreHelp": "[TRANSLATE: 需要更多帮助？]",
-      "exploreTools": "[TRANSLATE: 探索我们的互动工具获得个性化建议]"
+      "placeholder": "Search resources...",
+      "whatHelp": "我现在需要什么Help？",
+      "needMoreHelp": "需要更多Help？",
+      "exploreTools": "Explore our interactive tools for personalized recommendations"
     },
     "statsSimple": {
-      "resources": "[TRANSLATE: 个资源]",
-      "totalResources": "[TRANSLATE: 总资源]",
+      "resources": "resources",
+      "totalResources": "Total Resources",
       "categories": "Category",
-      "evidenceBased": "[TRANSLATE: 循证]"
+      "evidenceBased": "Evidence-based"
     },
     "keywords": {
       "pain": "Pain",
       "relief": "Relief",
       "nutrition": "Nutrition",
       "exercise": "Exercise",
-      "medical": "[TRANSLATE: 医学]",
+      "medical": "Medical",
       "communication": "Communication"
     },
     "tags": {
-      "heatTherapy": "[TRANSLATE: 热敷]",
-      "heatTherapyMethod": "[TRANSLATE: 热疗法]",
-      "heatTherapyTreatment": "[TRANSLATE: 热敷疗法]",
-      "heatTherapyTreatment2": "[TRANSLATE: 热敷治疗]",
-      "warmWaterBottle": "[TRANSLATE: 敷热水袋]",
-      "warmPatch": "[TRANSLATE: 暖宝宝]",
-      "massage": "[TRANSLATE: 按摩]",
-      "acupressure": "[TRANSLATE: 穴位按压]",
-      "muscleRelaxation": "[TRANSLATE: 肌肉放松]",
-      "abdominalMassage": "[TRANSLATE: 腹部按摩]",
-      "menstrualMassage": "[TRANSLATE: 经期按摩]",
-      "painMassage": "[TRANSLATE: 疼痛按摩]",
-      "bellyRub": "[TRANSLATE: 揉肚子]",
-      "painkiller": "[TRANSLATE: 止痛药]",
-      "nsaid": "[TRANSLATE: NSAID]",
-      "antiInflammatoryDrug": "[TRANSLATE: 非甾体抗炎药]",
-      "ibuprofen": "[TRANSLATE: 布洛芬]",
-      "acetaminophen": "[TRANSLATE: 对乙酰氨基酚]",
-      "painMedication": "[TRANSLATE: 止痛药物]",
-      "medication": "[TRANSLATE: 药物]",
+      "heatTherapy": "热敷",
+      "heatTherapyMethod": "Heat Therapy",
+      "heatTherapyTreatment": "Heat Therapy Treatment",
+      "heatTherapyTreatment2": "Heat Therapy Treatment",
+      "warmWaterBottle": "敷热水袋",
+      "warmPatch": "暖宝宝",
+      "massage": "按摩",
+      "acupressure": "Acupressure",
+      "muscleRelaxation": "Muscle Relaxation",
+      "abdominalMassage": "Abdominal Massage",
+      "menstrualMassage": "Menstrual Massage",
+      "painMassage": "Pain Massage",
+      "bellyRub": "揉肚子",
+      "painkiller": "止痛药",
+      "nsaid": "NSAID",
+      "antiInflammatoryDrug": "Non-steroidal Anti-inflammatory Drugs",
+      "ibuprofen": "Ibuprofen",
+      "acetaminophen": "Acetaminophen",
+      "painMedication": "Pain Medication",
+      "medication": "Medication",
       "nutrition": "Nutrition",
-      "diet": "[TRANSLATE: 饮食]",
-      "health": "[TRANSLATE: 健康]",
-      "habit": "[TRANSLATE: 习惯]",
+      "diet": "Diet",
+      "health": "Health",
+      "habit": "Habit",
       "preparation": "Preparation",
-      "prevention": "[TRANSLATE: 预防]",
-      "plan": "[TRANSLATE: 计划]",
-      "advance": "[TRANSLATE: 提前]",
-      "wellness": "[TRANSLATE: 养生]",
+      "prevention": "Prevention",
+      "plan": "Plan",
+      "advance": "In Advance",
+      "wellness": "Wellness",
       "exercise": "Exercise",
-      "yoga": "[TRANSLATE: 瑜伽]",
-      "baduanjin": "[TRANSLATE: 八段锦]",
-      "doctor": "[TRANSLATE: 医生]",
-      "medical": "[TRANSLATE: 医学]",
-      "seeDoctor": "[TRANSLATE: 就医]",
-      "cycle": "[TRANSLATE: 周期]",
-      "understand": "[TRANSLATE: 了解]",
-      "guide": "[TRANSLATE: 指南]",
-      "education": "[TRANSLATE: 教育]",
-      "knowledge": "[TRANSLATE: 知识]",
+      "yoga": "Yoga",
+      "baduanjin": "Baduanjin",
+      "doctor": "Doctor",
+      "medical": "Medical",
+      "seeDoctor": "See Doctor",
+      "cycle": "Cycle",
+      "understand": "Understand",
+      "guide": "Guide",
+      "education": "Education",
+      "knowledge": "Knowledge",
       "learning": "Learning",
-      "research": "[TRANSLATE: 研究]",
-      "science": "[TRANSLATE: 科学]",
-      "evidenceBased": "[TRANSLATE: 循证]",
-      "diagnosis": "[TRANSLATE: 诊断]",
-      "examination": "[TRANSLATE: 检查]",
-      "longTerm": "[TRANSLATE: 长期]",
+      "research": "Research",
+      "science": "Science",
+      "evidenceBased": "Evidence-based",
+      "diagnosis": "Diagnosis",
+      "examination": "Examination",
+      "longTerm": "Long-term",
       "management": "Management",
-      "life": "[TRANSLATE: 生活]",
-      "archive": "[TRANSLATE: 档案]",
-      "record": "[TRANSLATE: 记录]",
-      "continuous": "[TRANSLATE: 持续]",
-      "tracking": "[TRANSLATE: 跟踪]",
-      "monitoring": "[TRANSLATE: 监测]",
-      "analysis": "[TRANSLATE: 分析]",
-      "report": "[TRANSLATE: 报告]",
-      "template": "[TRANSLATE: 模板]",
+      "life": "Life",
+      "archive": "Archive",
+      "record": "Record",
+      "continuous": "Continuous",
+      "tracking": "Tracking",
+      "monitoring": "Monitoring",
+      "analysis": "Analysis",
+      "report": "Report",
+      "template": "Template",
       "communication": "Communication",
       "pain": "Pain",
       "relief": "Relief",
-      "quick": "[TRANSLATE: 快速]",
+      "quick": "Quick",
       "immediate": "Immediate",
       "emergency": "Emergency",
-      "urgent": "[TRANSLATE: 急]",
-      "severe": "[TRANSLATE: 疼得厉害]",
-      "now": "[TRANSLATE: 现在]",
-      "immediately": "[TRANSLATE: 马上]",
-      "hurt": "[TRANSLATE: 疼]",
-      "ache": "[TRANSLATE: 痛]"
+      "urgent": "Urgent",
+      "severe": "Severe pain",
+      "now": "Now",
+      "immediately": "Immediately",
+      "hurt": "Pain",
+      "ache": "Ache"
     },
     "searchKeywords": {
       "urgent": {
-        "core": "[TRANSLATE: 热敷|敷热水袋|暖宝宝|按摩|揉肚子|止痛药]",
-        "professional": "[TRANSLATE: 热疗法|热疗|温热疗法|热敷疗法|热敷治疗]",
-        "massage": "[TRANSLATE: 穴位按压|肌肉放松|腹部按摩|经期按摩|疼痛按摩]",
-        "medication": "[TRANSLATE: NSAID|非甾体抗炎药|布洛芬|对乙酰氨基酚|止痛药物]",
-        "emergency": "[TRANSLATE: 疼|痛|现在|马上|缓解|快速|立即|紧急|急|疼得厉害]"
+        "core": "Hot compress|Hot water bottle|Warm patch|Massage|Abdominal massage|Painkillers",
+        "professional": "Heat therapy|Thermotherapy|Warm therapy|Hot compress therapy|Hot compress treatment",
+        "massage": "Acupressure|Muscle relaxation|Abdominal massage|Menstrual massage|Pain massage",
+        "medication": "NSAID|Non-steroidal anti-inflammatory drugs|Ibuprofen|Acetaminophen|Pain medication",
+        "emergency": "Pain|Hurt|Now|Immediately|Relief|Fast|Immediately|Emergency|Urgent|Severe pain"
       },
       "preparation": {
-        "core": "[TRANSLATE: 营养|饮食|运动|习惯|准备|预防|计划|提前|养生|健康|锻炼|瑜伽|八段锦]",
-        "heatTherapy": "[TRANSLATE: 热敷准备|热敷工具|热敷用品|暖宝宝准备]",
-        "massage": "[TRANSLATE: 按摩准备|按摩工具|按摩技巧|按摩学习]"
+        "core": "Nutrition|Diet|Exercise|Habits|Preparation|Prevention|Planning|Advance|Wellness|Health|Workout|Yoga|Baduanjin",
+        "heatTherapy": "Hot compress preparation|Hot compress tools|Hot compress supplies|Warm patch preparation",
+        "massage": "Massage preparation|Massage tools|Massage techniques|Massage learning"
       },
       "learning": {
-        "core": "[TRANSLATE: 医生|医学|就医|周期|了解|指南|教育|知识|学习|研究|科学|循证|诊断|检查]",
-        "heatTherapy": "[TRANSLATE: 热敷方法|热敷技巧|热敷原理|热敷学习]",
-        "massage": "[TRANSLATE: 按摩方法|按摩技巧|按摩原理|按摩学习]",
-        "medication": "[TRANSLATE: 药物知识|用药指南|药物对比|用药学习]"
+        "core": "Doctor|Medical|Medical visit|Cycle|Understand|Guide|Education|Knowledge|Learn|Research|Science|Evidence-based|Diagnosis|Check",
+        "heatTherapy": "Hot compress methods|Hot compress techniques|Hot compress principles|Hot compress learning",
+        "massage": "Massage methods|Massage techniques|Massage principles|Massage learning",
+        "medication": "Medication knowledge|Medication guide|Medication comparison|Medication learning"
       },
       "management": {
-        "core": "[TRANSLATE: 长期|管理|生活|档案|记录|持续|跟踪|监测|分析|报告|模板]",
-        "heatTherapy": "[TRANSLATE: 热敷管理|热敷记录|热敷计划|热敷跟踪]",
-        "massage": "[TRANSLATE: 按摩管理|按摩记录|按摩计划|按摩跟踪]",
-        "medication": "[TRANSLATE: 用药管理|用药记录|用药计划|用药跟踪]"
+        "core": "Long-term|Management|Life|Record|Record|Continuous|Track|Monitor|Analyze|Report|Template",
+        "heatTherapy": "Hot compress management|Hot compress record|Hot compress plan|Hot compress tracking",
+        "massage": "Massage management|Massage record|Massage plan|Massage tracking",
+        "medication": "Medication management|Medication record|Medication plan|Medication tracking"
       }
     },
     "breathingExercise": {
-      "title": "[TRANSLATE: 4-7-8 深呼吸练习]",
-      "subtitle": "[TRANSLATE: 通过调节神经系统自然缓解疼痛]",
+      "title": "4-7-8 Deep Breathing Exercise",
+      "subtitle": "Naturally relieve pain by regulating the nervous system",
       "phases": {
-        "inhale": "[TRANSLATE: 吸气]",
-        "hold": "[TRANSLATE: 屏息]",
-        "exhale": "[TRANSLATE: 呼气]"
+        "inhale": "Inhale",
+        "hold": "Hold",
+        "exhale": "Exhale"
       },
       "instructions": {
-        "title": "[TRANSLATE: 练习方法：]",
-        "inhale": "[TRANSLATE: 吸气 4秒]",
-        "hold": "[TRANSLATE: 屏息 7秒]",
-        "exhale": "[TRANSLATE: 呼气 8秒]"
+        "title": "Practice Method:",
+        "inhale": "Inhale for 4 seconds",
+        "hold": "Hold for 7 seconds",
+        "exhale": "Exhale for 8 seconds"
       },
-      "currentPhase": "[TRANSLATE: 正在进行：]",
+      "currentPhase": "In Progress:",
       "buttons": {
-        "startPractice": "[TRANSLATE: 🫁 开始引导练习]",
-        "stopPractice": "[TRANSLATE: 停止练习]",
-        "practiceAgain": "[TRANSLATE: 再次练习]",
-        "oneCycleCompleted": "[TRANSLATE: ✅ 一轮练习完成！]"
+        "startPractice": "🫁 Start Guided Practice",
+        "stopPractice": "Stop Practice",
+        "practiceAgain": "Practice Again",
+        "oneCycleCompleted": "✅ One cycle completed!"
       },
       "benefits": {
-        "title": "[TRANSLATE: 科学效果：]",
-        "painPerception": "[TRANSLATE: 疼痛感知]",
-        "muscleTension": "[TRANSLATE: 肌肉紧张]",
-        "relaxation": "[TRANSLATE: 放松感受]"
+        "title": "Scientific Effects:",
+        "painPerception": "Pain Perception",
+        "muscleTension": "Muscle Tension",
+        "relaxation": "Relaxation"
       },
-      "tip": "[TRANSLATE: 💡 建议：找一个舒适的坐位或躺位，放松全身肌肉。初学者建议进行3-4个循环。]"
+      "tip": "💡 Tip: Find a comfortable sitting or lying position, relax all muscles. Beginners are recommended to do 3-4 cycles."
     },
     "simplePdfCenter": {
-      "urgentKeywords": "[TRANSLATE: 疼|痛|现在|马上|缓解]",
+      "urgentKeywords": "Pain|Hurt|Now|Immediately|Relief",
       "userSearchKeywords": {
         "heatTherapy": {
-          "keyword": "[TRANSLATE: 热敷]",
-          "targetContent": "[TRANSLATE: 热疗法相关资源]",
-          "category": "[TRANSLATE: immediate]",
-          "priority": "[TRANSLATE: high]",
+          "keyword": "热敷",
+          "targetContent": "Heat Therapy Related Resources",
+          "category": "immediate",
+          "priority": "high",
           "autoRedirect": true
         },
         "warmWaterBottle": {
-          "keyword": "[TRANSLATE: 敷热水袋]",
-          "targetContent": "[TRANSLATE: 热疗法操作指南]",
-          "category": "[TRANSLATE: immediate]",
-          "priority": "[TRANSLATE: high]",
+          "keyword": "敷热水袋",
+          "targetContent": "热疗法操作Guide",
+          "category": "immediate",
+          "priority": "high",
           "autoRedirect": true
         },
         "warmPatch": {
-          "keyword": "[TRANSLATE: 暖宝宝]",
-          "targetContent": "[TRANSLATE: 便携式热疗工具]",
-          "category": "[TRANSLATE: immediate]",
-          "priority": "[TRANSLATE: high]",
+          "keyword": "暖宝宝",
+          "targetContent": "Portable Heat Therapy Tools",
+          "category": "immediate",
+          "priority": "high",
           "autoRedirect": true
         },
         "massage": {
-          "keyword": "[TRANSLATE: 按摩]",
-          "targetContent": "[TRANSLATE: 穴位按压/肌肉放松]",
-          "category": "[TRANSLATE: immediate]",
-          "priority": "[TRANSLATE: high]",
+          "keyword": "按摩",
+          "targetContent": "Acupressure/Muscle Relaxation",
+          "category": "immediate",
+          "priority": "high",
           "autoRedirect": true
         },
         "bellyMassage": {
-          "keyword": "[TRANSLATE: 揉肚子]",
-          "targetContent": "[TRANSLATE: 经期腹部按摩指南]",
-          "category": "[TRANSLATE: immediate]",
-          "priority": "[TRANSLATE: high]",
+          "keyword": "揉肚子",
+          "targetContent": "经期腹部按摩Guide",
+          "category": "immediate",
+          "priority": "high",
           "autoRedirect": true
         },
         "painkiller": {
-          "keyword": "[TRANSLATE: 止痛药]",
-          "targetContent": "[TRANSLATE: NSAID用药指南]",
-          "category": "[TRANSLATE: immediate]",
-          "priority": "[TRANSLATE: high]",
+          "keyword": "止痛药",
+          "targetContent": "NSAID用药Guide",
+          "category": "immediate",
+          "priority": "high",
           "autoRedirect": true
         }
       },
       "englishToChineseKeywords": {
-        "hotCompress": "[TRANSLATE: 热敷]",
-        "warmBag": "[TRANSLATE: 敷热水袋]",
-        "warmBaby": "[TRANSLATE: 暖宝宝]",
-        "massage": "[TRANSLATE: 按摩]",
-        "bellyMassage": "[TRANSLATE: 揉肚子]",
-        "painkillers": "[TRANSLATE: 止痛药]"
+        "hotCompress": "热敷",
+        "warmBag": "敷热水袋",
+        "warmBaby": "暖宝宝",
+        "massage": "按摩",
+        "bellyMassage": "揉肚子",
+        "painkillers": "止痛药"
       },
       "consoleMessages": {
-        "emergencyModeActivated": "[TRANSLATE: 🚨 紧急模式激活！]",
-        "pdfDownloadError": "[TRANSLATE: PDF下载错误:]"
+        "emergencyModeActivated": "🚨 Emergency Mode Activated!",
+        "pdfDownloadError": "PDF Download Error:"
       },
       "ariaLabels": {
-        "readArticle": "[TRANSLATE: 阅读文章]",
-        "previewPdf": "[TRANSLATE: 预览PDF]",
-        "shareResource": "[TRANSLATE: 分享资源]",
-        "downloadPdf": "[TRANSLATE: 下载PDF文件]"
+        "readArticle": "Read Article",
+        "previewPdf": "Preview PDF",
+        "shareResource": "Share Resource",
+        "downloadPdf": "Download PDF File"
       },
       "emergencyMode": {
-        "message": "[TRANSLATE: 紧急模式已激活 - 优先显示立即缓解资源]"
+        "message": "Emergency mode activated - prioritizing immediate relief resources"
       }
     },
     "breadcrumb": {
-      "home": "[TRANSLATE: 首页]",
-      "immediateRelief": "[TRANSLATE: 即时缓解]"
+      "home": "Home",
+      "immediateRelief": "Immediate Relief"
     },
     "constitutionTest": {
-      "testResult": "[TRANSLATE: 测试结果]",
-      "retakeTest": "[TRANSLATE: 重新测试]",
+      "testResult": "Testing结果",
+      "retakeTest": "重新Testing",
       "questions": {
         "energy": {
           "question": "[TRANSLATE: 您平时的精力状态如何？]",
@@ -11996,7 +11976,7 @@
       "progress": "[TRANSLATE: 问题 {current} / {total}]"
     },
     "pdfCard": {
-      "featured": "[TRANSLATE: 推荐]",
+      "featured": "Recommended",
       "category": "Category",
       "downloadPdf": "[TRANSLATE: 下载PDF]",
       "htmlPreview": "[TRANSLATE: HTML预览]",
@@ -12004,19 +11984,19 @@
       "openInNewTab": "[TRANSLATE: 新窗口打开]"
     },
     "pdfCardPdf": {
-      "updated": "[TRANSLATE: 更新时间：]",
-      "locale": "[TRANSLATE: zh-CN]"
+      "updated": "Update时间：",
+      "locale": "zh-CN"
     },
     "pdfCenterOptimized": {
       "searchPlaceholder": "[TRANSLATE: 搜索PDF资源...]",
-      "filter": "[TRANSLATE: 筛选]",
+      "filter": "Filter",
       "all": "[TRANSLATE: 全部]",
       "noMatchingResources": "[TRANSLATE: 未找到匹配的资源]",
       "downloadNow": "[TRANSLATE: 立即下载]",
       "loadMore": "[TRANSLATE: 加载更多]"
     },
     "articlesPdfSection": {
-      "resources": "[TRANSLATE: 个资源]",
+      "resources": "resources",
       "categories": "[TRANSLATE: 个分类]",
       "featured": "[TRANSLATE: 个特色]",
       "featuredResources": "[TRANSLATE: 特色资源]",
@@ -12026,7 +12006,7 @@
   },
   "articleList": {
     "publishedOn": "[TRANSLATE: 发布于 {date, date, long}]",
-    "readMore": "[TRANSLATE: 阅读更多]",
+    "readMore": "Read More",
     "noArticles": "[TRANSLATE: 暂无文章。请稍后再回来查看！]"
   },
   "articleDetail": {
@@ -12040,29 +12020,29 @@
     "description": "[TRANSLATE: 探索各种疗法和方法，以管理和减轻经期疼痛。]"
   },
   "therapyList": {
-    "lastUpdated": "[TRANSLATE: 最后更新于 {date, date, long}]",
-    "learnMore": "[TRANSLATE: 了解更多]",
+    "lastUpdated": "最后Update于 {date, date, long}",
+    "learnMore": "Learn More",
     "noTherapies": "[TRANSLATE: 暂无疗法。请稍后再回来查看！]"
   },
   "therapyDetail": {
     "backToList": "[TRANSLATE: 返回疗法列表]",
-    "lastUpdated": "[TRANSLATE: 最后更新于 {date, date, long}]",
+    "lastUpdated": "最后Update于 {date, date, long}",
     "notFoundTitle": "[TRANSLATE: 疗法未找到]",
     "notFoundDescription": "[TRANSLATE: 抱歉，我们找不到您要查找的疗法。]"
   },
   "culturalCharmsPage": {
     "title": "[TRANSLATE: 探索文化中的慰藉：符咒与传统疗愈符号]",
-    "description": "[TRANSLATE: 探索符咒、符号和传统习俗在历史和文化中用于寻求舒适和精神支持的意义。]",
-    "introduction": "[TRANSLATE: 纵观历史，在不同的文化中，人们在脆弱时期，包括经期，都会求助于符号、物品和传统习俗来寻求舒适、保护和支持。这些习俗深深植根于文化信仰体系和民间传说。]",
+    "description": "探索符咒、符号和传统习俗在历史和文化中用于寻求舒适和精神Support的意义。",
+    "introduction": "纵观历史，在不同的文化中，人们在脆弱时期，包括经期，都会求助于符号、物品和传统习俗来寻求舒适、保护和Support。这些习俗深深植根于文化信仰体系和民间传说。",
     "introTitle": "[TRANSLATE: 文化传统的旅程]",
-    "introText": "[TRANSLATE: 纵观历史，在不同的文化中，人们在脆弱时期，包括经期，都会求助于符号、物品和传统习俗来寻求舒适、保护和支持。这些习俗深深植根于文化信仰体系和民间传说。]",
+    "introText": "纵观历史，在不同的文化中，人们在脆弱时期，包括经期，都会求助于符号、物品和传统习俗来寻求舒适、保护和Support。这些习俗深深植根于文化信仰体系和民间传说。",
     "understandingTitle": "[TRANSLATE: 理解文化疗愈传统]",
     "understandingText": "[TRANSLATE: 许多文化都有涉及使用特定物品或执行某些仪式的传统，这些仪式被认为可以影响健康、带来好运或驱除负能量。对一些人来说，这延伸到在经期不适等身体挑战期间寻求舒适或缓解。]",
     "multimediaTitle": "[TRANSLATE: 文化符号与意象]",
-    "contentSection1Description": "[TRANSLATE: 探索各种文化中用于舒适和精神支持的传统符号和物品。]",
-    "disclaimerTitle": "[TRANSLATE: 文化支持免责声明]",
-    "disclaimer": "[TRANSLATE: 此处提供的有关文化符咒、传统习俗和相关信仰的信息仅供文化和信息目的。这些习俗植根于传统和信仰体系，不应被视为，也不应被解释为专业医疗建议、诊断或治疗的替代品。]",
-    "disclaimerText": "[TRANSLATE: 此处提供的有关文化符咒、传统习俗和相关信仰的信息仅供文化和信息目的。这些习俗植根于传统和信仰体系，不应被视为，也不应被解释为专业医疗建议、诊断或治疗的替代品。]",
+    "contentSection1Description": "探索各种文化中用于舒适和精神Support的传统符号和物品。",
+    "disclaimerTitle": "文化Support免责声明",
+    "disclaimer": "此处提供的有关文化符咒、传统习俗和相关信仰的信息仅供文化和信息目的。这些习俗植根于传统和信仰体系，不应被视为，也不应被解释为专业Medical Advice、诊断或治疗的替代品。",
+    "disclaimerText": "此处提供的有关文化符咒、传统习俗和相关信仰的信息仅供文化和信息目的。这些习俗植根于传统和信仰体系，不应被视为，也不应被解释为专业Medical Advice、诊断或治疗的替代品。",
     "mediaAreaTitle": "[TRANSLATE: 文化符号与意象]",
     "imagePlaceholder": "[TRANSLATE: 图片/媒体占位符]",
     "promptSuggestionPrefix": "[TRANSLATE: AI 提示: ]",
@@ -12107,7 +12087,7 @@
     }
   },
   "downloadButton": {
-    "viewDocument": "[TRANSLATE: 查看文档]"
+    "viewDocument": "查看Documentation"
   },
   "bottomRecommendations": {
     "title": "[TRANSLATE: 相关工具]",
@@ -12119,13 +12099,13 @@
     "symptomAssessment": {
       "title": "[TRANSLATE: 症状评估工具]",
       "description": "[TRANSLATE: 科学评估经期症状，获取个性化建议]",
-      "actionText": "[TRANSLATE: 个性化症状分析]"
+      "actionText": "个性化症状Analysis"
     }
   },
   "downloads": {
     "common": {
-      "download": "[TRANSLATE: 查看文档]",
-      "document": "[TRANSLATE: 文档]",
+      "download": "查看Documentation",
+      "document": "Documentation",
       "pages": "[TRANSLATE: 页]"
     }
   },
@@ -12134,34 +12114,34 @@
     "searchTips": "[TRANSLATE: 💡 试试搜索\"5分钟缓解\"、\"热敷\"、\"前列腺素\"]",
     "seo": {
       "title": "[TRANSLATE: PeriodHub - 专业痛经缓解方法和月经健康管理平台 | 科学指导，贴心陪伴]",
-      "description": "[TRANSLATE: PeriodHub专业痛经缓解方案与经期健康管理平台。基于43篇医学指南和13个自测工具，已帮助60万+女性科学应对痛经困扰，获取个性化解决方案，改善生活质量。提供科学痛经缓解方法、互动工具和个性化健康指导。]",
+      "description": "PeriodHub专业痛经缓解方案与经期健康管理平台。基于43篇医学指南和13个自测工具，已帮助60万+女性科学应对痛经困扰，获取个性化解决方案，改善生活Quality。提供科学痛经缓解方法、互动工具和个性化健康指导。",
       "keywords": "[TRANSLATE: 痛经怎么缓解最快方法,痛经吃什么药最有效,月经推迟几天算正常,月经量少是什么原因,痛经缓解,月经疼痛,经期健康,女性健康,月经健康管理,经期疼痛怎么办,中医调理,热敷,敷热水袋,暖宝宝,按摩,揉肚子,止痛药,月经周期,经期护理,生理期,大姨妈,例假,月经不调,经期症状]",
       "ogTitle": "[TRANSLATE: PeriodHub - 专业痛经缓解方法和月经健康管理平台]",
       "ogDescription": "[TRANSLATE: 专业的女性月经健康管理平台，提供科学的痛经缓解方法和个性化健康建议。]"
     },
     "statistics": {
-      "title": "[TRANSLATE: 数据说话，效果可见]",
-      "description": "[TRANSLATE: 基于真实用户反馈和科学研究的数据统计]",
+      "title": "Data说话，效果可见",
+      "description": "基于真实用户反馈和科学研究的Data统计",
       "improvement": "[TRANSLATE: 用户症状改善]",
       "users": "[TRANSLATE: 10万+]",
       "totalUsers": "[TRANSLATE: 累计用户]",
-      "support": "[TRANSLATE: 在线支持]",
+      "support": "在线Support",
       "articles": "[TRANSLATE: 专业文章]"
     },
     "healthGuide": {
-      "title": "[TRANSLATE: 痛经健康指南]",
-      "description": "[TRANSLATE: 专业痛经健康管理完整指南：涵盖经期生理机制、疼痛原因分析、科学缓解方法、生活方式调理等全方位知识体系。从基础理解到高级管理策略，提供循证医学支持的专业指导，助您科学掌握经期健康管理。]"
+      "title": "痛经健康Guide",
+      "description": "专业痛经健康管理完整指南：涵盖经期生理机制、疼痛原因分析、科学缓解方法、生活方式调理等全方位知识体系。从基础理解到高级管理策略，提供循证医学Support的专业指导，助您科学掌握经期健康管理。"
     },
     "smartTools": {
       "title": "[TRANSLATE: 智能健康工具]",
-      "description": "[TRANSLATE: 专业的评估和追踪工具，帮助您更好地了解和管理经期健康]"
+      "description": "专业的评估和追踪工具，Help您更好地了解和管理经期健康"
     },
     "medicalDisclaimer": "[TRANSLATE: 医疗免责声明]"
   },
   "embeddedPainAssessment": {
     "title": "[TRANSLATE: 疼痛评估工具]",
     "description": "[TRANSLATE: 快速评估您的疼痛程度]",
-    "loading": "[TRANSLATE: 加载中...]",
+    "loading": "Loading...",
     "error": "[TRANSLATE: 加载失败，请刷新页面重试]"
   },
   "nsaidContent": {
@@ -12214,14 +12194,14 @@
     "ui": {
       "sceneIndicator": "[TRANSLATE: 场景 {current} / {total}]",
       "noScenes": "[TRANSLATE: 没有可播放的场景]",
-      "noScenesDescription": "[TRANSLATE: 请检查数据配置。]",
+      "noScenesDescription": "请检查Data配置。",
       "videoError": "[TRANSLATE: 视频加载错误]",
       "videoErrorDescription": "[TRANSLATE: 抱歉，视频加载失败。请检查您的网络连接或稍后再试。]"
     }
   },
   "disclaimer": {
     "title": "[TRANSLATE: 医疗免责声明]",
-    "text": "[TRANSLATE: 本文内容仅供教育和信息目的，不能替代专业医疗建议、诊断或治疗。如有健康问题，请咨询合格的医疗专业人员。任何医疗决策都应该在咨询医生后做出。]"
+    "text": "本文内容仅供教育和信息目的，不能替代专业Medical Advice、诊断或治疗。如有健康问题，请咨询合格的医疗专业人员。任何医疗决策都应该在咨询医生后做出。"
   },
   "errors": {
     "title": "[TRANSLATE: 出现错误]",
@@ -12232,108 +12212,108 @@
   "3-4": "[TRANSLATE: 3-4]",
   "5-7": "[TRANSLATE: 5-7]",
   "8-10": "[TRANSLATE: 8-10]",
-  "benefitsLabel": "[TRANSLATE: 益处标签]",
-  "foods": "[TRANSLATE: 食物]",
-  "actionSteps": "[TRANSLATE: 行动步骤]",
-  "step": "[TRANSLATE: 步骤]",
-  "steps": "[TRANSLATE: 步骤]",
-  "assessmentTool": "[TRANSLATE: 评估工具]",
-  "assessmentResult": "[TRANSLATE: 评估结果]",
-  "assessmentHistory": "[TRANSLATE: 评估历史]",
-  "recommendation": "[TRANSLATE: 建议]",
-  "recommendations": "[TRANSLATE: 建议]",
-  "personalizedRecommendations": "[TRANSLATE: 个性化建议]",
-  "immediateRecommendations": "[TRANSLATE: 即时建议]",
-  "longTermRecommendations": "[TRANSLATE: 长期建议]",
-  "symptom": "[TRANSLATE: 症状]",
-  "symptoms": "[TRANSLATE: 症状]",
-  "symptomAssessment": "[TRANSLATE: 症状评估]",
-  "symptomTracker": "[TRANSLATE: 症状追踪]",
-  "symptomHistory": "[TRANSLATE: 症状历史]",
+  "benefitsLabel": "Benefits Label",
+  "foods": "Food",
+  "actionSteps": "Action Steps",
+  "step": "Step",
+  "steps": "Step",
+  "assessmentTool": "Assessment Tool",
+  "assessmentResult": "Assessment Result",
+  "assessmentHistory": "评估History",
+  "recommendation": "Recommendation",
+  "recommendations": "Recommendation",
+  "personalizedRecommendations": "Personalized Recommendations",
+  "immediateRecommendations": "Immediate Recommendations",
+  "longTermRecommendations": "Long-term Recommendations",
+  "symptom": "Symptom",
+  "symptoms": "Symptom",
+  "symptomAssessment": "Symptom Assessment",
+  "symptomTracker": "Symptom Tracker",
+  "symptomHistory": "症状History",
   "pain": "Pain",
-  "painLevel": "[TRANSLATE: 疼痛等级]",
-  "painDuration": "[TRANSLATE: 疼痛持续时间]",
-  "painLocation": "[TRANSLATE: 疼痛位置]",
-  "cycle": "[TRANSLATE: 周期]",
-  "cycleLength": "[TRANSLATE: 周期长度]",
-  "cycleHistory": "[TRANSLATE: 周期历史]",
-  "constitution": "[TRANSLATE: 体质]",
-  "constitutionTest": "[TRANSLATE: 体质测试]",
-  "constitutionType": "[TRANSLATE: 体质类型]",
-  "constitutionRecommendations": "[TRANSLATE: 体质建议]",
+  "painLevel": "Pain Level",
+  "painDuration": "疼痛持续Time",
+  "painLocation": "Pain Location",
+  "cycle": "Cycle",
+  "cycleLength": "Cycle Length",
+  "cycleHistory": "周期History",
+  "constitution": "Constitution",
+  "constitutionTest": "体质Testing",
+  "constitutionType": "Constitution Type",
+  "constitutionRecommendations": "Constitution Recommendations",
   "nutrition": "Nutrition",
-  "nutritionGuide": "[TRANSLATE: 营养指南]",
-  "nutritionRecommendations": "[TRANSLATE: 营养建议]",
-  "diet": "[TRANSLATE: 饮食]",
-  "dietGuide": "[TRANSLATE: 饮食指南]",
+  "nutritionGuide": "营养Guide",
+  "nutritionRecommendations": "Nutrition Advice",
+  "diet": "Diet",
+  "dietGuide": "饮食Guide",
   "exercise": "Exercise",
   "exercises": "Exercise",
-  "exerciseGuide": "[TRANSLATE: 运动指南]",
-  "stretching": "[TRANSLATE: 拉伸]",
-  "yoga": "[TRANSLATE: 瑜伽]",
-  "lifestyle": "[TRANSLATE: 生活方式]",
-  "lifestyleRecommendations": "[TRANSLATE: 生活方式建议]",
-  "sleep": "[TRANSLATE: 睡眠]",
-  "stress": "[TRANSLATE: 压力]",
+  "exerciseGuide": "运动Guide",
+  "stretching": "Stretching",
+  "yoga": "Yoga",
+  "lifestyle": "Lifestyle",
+  "lifestyleRecommendations": "Lifestyle建议",
+  "sleep": "Sleep",
+  "stress": "Stress",
   "medical": "Medical",
-  "medicalAdvice": "[TRANSLATE: 医疗建议]",
-  "doctor": "[TRANSLATE: 医生]",
-  "doctorVisit": "[TRANSLATE: 看医生]",
-  "emergency": "[TRANSLATE: 紧急情况]",
+  "medicalAdvice": "Medical Advice",
+  "doctor": "Doctor",
+  "doctorVisit": "看Doctor",
+  "emergency": "Emergency",
   "tool": "Tool",
-  "tracker": "[TRANSLATE: 追踪器]",
-  "calculator": "[TRANSLATE: 计算器]",
-  "guide": "[TRANSLATE: 指南]",
-  "button": "[TRANSLATE: 按钮]",
-  "menu": "[TRANSLATE: 菜单]",
-  "settings": "[TRANSLATE: 设置]",
-  "preferences": "[TRANSLATE: 偏好设置]",
-  "loading": "[TRANSLATE: 加载中]",
+  "tracker": "Tracker",
+  "calculator": "Calculator",
+  "guide": "Guide",
+  "button": "Button",
+  "menu": "Menu",
+  "settings": "Settings",
+  "preferences": "偏好Settings",
+  "loading": "Loading",
   "error": "Error",
   "success": "Success",
-  "warning": "[TRANSLATE: 警告]",
+  "warning": "Warning",
   "info": "Info",
   "message": "Message",
-  "notification": "[TRANSLATE: 通知]",
-  "date": "[TRANSLATE: 日期]",
-  "time": "[TRANSLATE: 时间]",
-  "duration": "[TRANSLATE: 持续时间]",
-  "frequency": "[TRANSLATE: 频率]",
-  "schedule": "[TRANSLATE: 时间表]",
-  "data": "[TRANSLATE: 数据]",
-  "record": "[TRANSLATE: 记录]",
-  "records": "[TRANSLATE: 记录]",
-  "history": "[TRANSLATE: 历史]",
-  "statistics": "[TRANSLATE: 统计]",
-  "analytics": "[TRANSLATE: 分析]",
-  "report": "[TRANSLATE: 报告]",
-  "export": "[TRANSLATE: 导出]",
-  "import": "[TRANSLATE: 导入]",
-  "community": "[TRANSLATE: 社区]",
-  "social": "[TRANSLATE: 社交]",
+  "notification": "Notification",
+  "date": "Date",
+  "time": "Time",
+  "duration": "持续Time",
+  "frequency": "Frequency",
+  "schedule": "Time表",
+  "data": "Data",
+  "record": "Record",
+  "records": "Record",
+  "history": "History",
+  "statistics": "Statistics",
+  "analytics": "Analysis",
+  "report": "Report",
+  "export": "Export",
+  "import": "Import",
+  "community": "Community",
+  "social": "Social",
   "share": "Share",
-  "support": "[TRANSLATE: 支持]",
-  "help": "[TRANSLATE: 帮助]",
-  "sync": "[TRANSLATE: 同步]",
-  "backup": "[TRANSLATE: 备份]",
-  "restore": "[TRANSLATE: 恢复]",
-  "update": "[TRANSLATE: 更新]",
-  "version": "[TRANSLATE: 版本]",
-  "performance": "[TRANSLATE: 性能]",
-  "optimization": "[TRANSLATE: 优化]",
-  "accessibility": "[TRANSLATE: 无障碍]",
-  "aria": "[TRANSLATE: ARIA]",
-  "screenReader": "[TRANSLATE: 屏幕阅读器]",
-  "keyboard": "[TRANSLATE: 键盘]",
-  "focus": "[TRANSLATE: 焦点]",
-  "test": "[TRANSLATE: 测试]",
-  "testing": "[TRANSLATE: 测试]",
-  "validation": "[TRANSLATE: 验证]",
-  "quality": "[TRANSLATE: 质量]",
-  "coverage": "[TRANSLATE: 覆盖率]",
-  "documentation": "[TRANSLATE: 文档]",
-  "tutorial": "[TRANSLATE: 教程]",
-  "manual": "[TRANSLATE: 手册]",
-  "api": "[TRANSLATE: API]",
-  "reference": "[TRANSLATE: 参考]"
+  "support": "Support",
+  "help": "Help",
+  "sync": "Sync",
+  "backup": "Backup",
+  "restore": "Restore",
+  "update": "Update",
+  "version": "Version",
+  "performance": "Performance",
+  "optimization": "Optimization",
+  "accessibility": "Accessibility",
+  "aria": "ARIA",
+  "screenReader": "Screen Reader",
+  "keyboard": "Keyboard",
+  "focus": "Focus",
+  "test": "Testing",
+  "testing": "Testing",
+  "validation": "Validation",
+  "quality": "Quality",
+  "coverage": "Coverage",
+  "documentation": "Documentation",
+  "tutorial": "Tutorial",
+  "manual": "Manual",
+  "api": "API",
+  "reference": "Reference"
 }

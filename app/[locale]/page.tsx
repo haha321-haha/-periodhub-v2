@@ -177,11 +177,46 @@ export default async function HomePage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const t = await getTranslations("");
-  const anchorT = await getTranslations("anchorTexts");
-  const structuredData = await getStructuredData(locale);
+  // 添加错误处理，确保 locale 参数正确解析
+  let locale: string;
+  try {
+    const resolvedParams = await params;
+    locale = resolvedParams.locale || "zh";
+  } catch (error) {
+    // 如果参数解析失败，使用默认语言
+    locale = "zh";
+  }
+
+  // 确保 locale 是有效的
+  const validLocale = locale === "en" || locale === "zh" ? locale : "zh";
+
+  // 设置请求 locale
+  setRequestLocale(validLocale);
+
+  // 获取翻译，添加错误处理
+  let t, anchorT, structuredData;
+  try {
+    // 使用正确的 getTranslations API
+    t = await getTranslations({ locale: validLocale, namespace: "" });
+    anchorT = await getTranslations({
+      locale: validLocale,
+      namespace: "anchorTexts",
+    });
+    structuredData = await getStructuredData(validLocale);
+  } catch (error) {
+    // 如果获取翻译失败，使用默认语言重试
+    try {
+      t = await getTranslations({ locale: "zh", namespace: "" });
+      anchorT = await getTranslations({
+        locale: "zh",
+        namespace: "anchorTexts",
+      });
+      structuredData = await getStructuredData("zh");
+    } catch {
+      // 如果仍然失败，抛出错误让错误边界处理
+      throw error;
+    }
+  }
 
   return (
     <>

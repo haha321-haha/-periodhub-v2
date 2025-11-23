@@ -26,7 +26,7 @@ export function useSafeTranslations(namespace?: string) {
 
   const safeT: SafeTranslationFn = (key, params, fallback) => {
     try {
-      const result = t(key, params as Record<string, unknown>);
+      const result = t(key, params as Parameters<typeof t>[1]);
 
       // 检查是否返回了翻译键本身（表示翻译失败）
       const fullKey = namespace ? `${namespace}.${key}` : key;
@@ -69,7 +69,7 @@ export function useSafeTranslations(namespace?: string) {
         console.warn(
           `t.raw method not available, falling back to t method for key: ${key}`,
         );
-        const result = t(key, params as Record<string, unknown>);
+        const result = t(key, params as Parameters<typeof t>[1]);
         return result;
       }
     } catch (error) {

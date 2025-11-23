@@ -37,6 +37,7 @@ export default function StressAssessmentWidget() {
   const [showPaywall, setShowPaywall] = useState(false);
   const [stressScore, setStressScore] = useState(0);
   const [stressLevel, setStressLevel] = useState("");
+  const [startTime] = useState<number>(Date.now());
 
   const FREE_QUESTIONS = 5; // 免费问题数量
 

@@ -3,7 +3,7 @@
  * 用于跟踪和分析不同版本的用户行为
  */
 
-import { LocalStorageManager } from "./localStorage";
+// LocalStorageManager 已移除，使用直接的 localStorage API
 
 export interface ABTestVariant {
   testName: string;
@@ -26,9 +26,13 @@ const AB_TEST_EVENTS_KEY = "ab_test_events";
  * 获取用户的 A/B 测试分配
  */
 export function getABTestVariant(testName: string): string | null {
-  const assignments = LocalStorageManager.getItem<
-    Record<string, ABTestVariant>
-  >(AB_TEST_STORAGE_KEY, {});
+  const stored =
+    typeof window !== "undefined"
+      ? localStorage.getItem(AB_TEST_STORAGE_KEY)
+      : null;
+  const assignments = stored
+    ? (JSON.parse(stored) as Record<string, ABTestVariant>)
+    : {};
 
   return assignments?.[testName]?.variant || null;
 }
@@ -40,9 +44,13 @@ export function assignABTestVariant(
   testName: string,
   variant: string,
 ): boolean {
-  const assignments = LocalStorageManager.getItem<
-    Record<string, ABTestVariant>
-  >(AB_TEST_STORAGE_KEY, {});
+  const stored =
+    typeof window !== "undefined"
+      ? localStorage.getItem(AB_TEST_STORAGE_KEY)
+      : null;
+  const assignments = stored
+    ? (JSON.parse(stored) as Record<string, ABTestVariant>)
+    : {};
 
   if (!assignments) return false;
 
@@ -52,7 +60,10 @@ export function assignABTestVariant(
     assignedAt: Date.now(),
   };
 
-  return LocalStorageManager.setItem(AB_TEST_STORAGE_KEY, assignments);
+  if (typeof window !== "undefined") {
+    localStorage.setItem(AB_TEST_STORAGE_KEY, JSON.stringify(assignments));
+  }
+  return true;
 }
 
 /**
@@ -84,10 +95,11 @@ export function trackABTestEvent(
   const variant = getABTestVariant(testName);
   if (!variant) return false;
 
-  const events = LocalStorageManager.getItem<ABTestEvent[]>(
-    AB_TEST_EVENTS_KEY,
-    [],
-  );
+  const stored =
+    typeof window !== "undefined"
+      ? localStorage.getItem(AB_TEST_EVENTS_KEY)
+      : null;
+  const events = stored ? (JSON.parse(stored) as ABTestEvent[]) : [];
   if (!events) return false;
 
   const event: ABTestEvent = {
@@ -105,17 +117,21 @@ export function trackABTestEvent(
     events.splice(0, events.length - 1000);
   }
 
-  return LocalStorageManager.setItem(AB_TEST_EVENTS_KEY, events);
+  if (typeof window !== "undefined") {
+    localStorage.setItem(AB_TEST_EVENTS_KEY, JSON.stringify(events));
+  }
+  return true;
 }
 
 /**
  * 获取 A/B 测试事件
  */
 export function getABTestEvents(testName?: string): ABTestEvent[] {
-  const events = LocalStorageManager.getItem<ABTestEvent[]>(
-    AB_TEST_EVENTS_KEY,
-    [],
-  );
+  const stored =
+    typeof window !== "undefined"
+      ? localStorage.getItem(AB_TEST_EVENTS_KEY)
+      : null;
+  const events = stored ? (JSON.parse(stored) as ABTestEvent[]) : [];
 
   if (!testName) return events || [];
 
@@ -158,8 +174,10 @@ export function getABTestStats(testName: string) {
  * 清除 A/B 测试数据
  */
 export function clearABTestData(): boolean {
-  LocalStorageManager.removeItem(AB_TEST_STORAGE_KEY);
-  LocalStorageManager.removeItem(AB_TEST_EVENTS_KEY);
+  if (typeof window !== "undefined") {
+    localStorage.removeItem(AB_TEST_STORAGE_KEY);
+    localStorage.removeItem(AB_TEST_EVENTS_KEY);
+  }
   return true;
 }
 
@@ -226,13 +244,20 @@ export function trackRecommendationClick(
  * 导出 A/B 测试数据（用于分析）
  */
 export function exportABTestData(): string {
-  const assignments = LocalStorageManager.getItem<
-    Record<string, ABTestVariant>
-  >(AB_TEST_STORAGE_KEY, {});
-  const events = LocalStorageManager.getItem<ABTestEvent[]>(
-    AB_TEST_EVENTS_KEY,
-    [],
-  );
+  const storedAssignments =
+    typeof window !== "undefined"
+      ? localStorage.getItem(AB_TEST_STORAGE_KEY)
+      : null;
+  const assignments = storedAssignments
+    ? (JSON.parse(storedAssignments) as Record<string, ABTestVariant>)
+    : {};
+  const storedEvents =
+    typeof window !== "undefined"
+      ? localStorage.getItem(AB_TEST_EVENTS_KEY)
+      : null;
+  const events = storedEvents
+    ? (JSON.parse(storedEvents) as ABTestEvent[])
+    : [];
 
   return JSON.stringify(
     {
@@ -250,11 +275,15 @@ export function exportABTestData(): string {
  */
 export function generateAnonymousUserId(): string {
   const STORAGE_KEY = "anonymous_user_id";
-  let userId = LocalStorageManager.getItem<string>(STORAGE_KEY);
+  if (typeof window === "undefined") {
+    return `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  let userId = localStorage.getItem(STORAGE_KEY);
 
   if (!userId) {
     userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    LocalStorageManager.setItem(STORAGE_KEY, userId);
+    localStorage.setItem(STORAGE_KEY, userId);
   }
 
   return userId;

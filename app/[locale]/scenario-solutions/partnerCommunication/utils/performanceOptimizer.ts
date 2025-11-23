@@ -120,11 +120,11 @@ export class SelectorOptimizer {
     selector: (state: unknown) => T,
     key: string,
   ): (state: unknown) => T {
-    return (state: unknown) => {
+    return (state: unknown): T => {
       const cacheKey = `${key}_${JSON.stringify(state)}`;
 
       if (this.selectorCache.has(cacheKey)) {
-        return this.selectorCache.get(cacheKey);
+        return this.selectorCache.get(cacheKey) as T;
       }
 
       const result = selector(state);

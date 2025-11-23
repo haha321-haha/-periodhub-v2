@@ -27,7 +27,7 @@ interface StageProgress {
   timeSpent: number; // 毫秒
 }
 
-interface PartnerHandbookState {
+export interface PartnerHandbookState {
   // 数据版本控制
   dataVersion: string;
 
@@ -183,7 +183,7 @@ const migrateData = (
     };
   }
 
-  return state;
+  return state as PartnerHandbookState;
 };
 
 const defaultState: PartnerHandbookState = {

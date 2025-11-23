@@ -21,12 +21,18 @@ export const useProgressSave = () => {
       isSaving.current = true;
 
       // 使用选择器获取当前状态
-      const currentState = {
+      const currentState: {
+        stageProgress: Record<QuizStage, StageProgress>;
+        overallResult?: QuizResult | null;
+        userPreferences?: Record<string, unknown>;
+        lastSaved?: string | null;
+        version?: string;
+      } = {
         stageProgress: store.stageProgress,
-        currentStage: store.currentStage,
-        overallResult: store.overallResult,
-        userPreferences: store.userPreferences,
-        lastVisitDate: store.lastVisitDate,
+        overallResult: store.overallResult as QuizResult | null,
+        userPreferences: store.userPreferences as Record<string, unknown>,
+        lastSaved: new Date().toISOString(),
+        version: store.dataVersion,
       };
       const success = progressManager.saveProgress(currentState);
 

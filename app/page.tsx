@@ -16,12 +16,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 /**
  * 检测是否是Vercel预览请求（用于生成预览截图）
+ * 增强检测逻辑，覆盖更多Vercel预览场景
  */
 async function isVercelPreviewRequest(): Promise<boolean> {
   try {
     const headersList = await headers();
     const userAgent = headersList.get("user-agent") || "";
     const referer = headersList.get("referer") || "";
+    const xForwardedFor = headersList.get("x-forwarded-for") || "";
+
+    // Vercel环境变量检测
+    const isVercelEnvironment = process.env.VERCEL === "1";
+    const isVercelPreviewEnv = process.env.VERCEL_ENV === "preview";
+    const hasVercelId = headersList.get("x-vercel-id");
 
     // 检测常见的预览服务User-Agent
     const previewAgents = [
@@ -33,6 +40,8 @@ async function isVercelPreviewRequest(): Promise<boolean> {
       "chromium",
       "bot",
       "crawler",
+      "firefox/92.0", // Vercel截图使用的Firefox版本
+      "firefox/", // 更通用的Firefox检测
     ];
 
     const isPreviewAgent = previewAgents.some((agent) =>
@@ -41,9 +50,15 @@ async function isVercelPreviewRequest(): Promise<boolean> {
 
     // 检测是否是Vercel的预览请求
     const isVercelReferer =
-      referer.includes("vercel.app") || referer.includes("vercel.com");
+      referer.includes("vercel.app") ||
+      referer.includes("vercel.com") ||
+      xForwardedFor.includes("vercel");
 
-    return isPreviewAgent || isVercelReferer;
+    // 综合判断：在Vercel环境中，如果是预览环境或检测到预览特征
+    return (
+      isVercelEnvironment &&
+      (isVercelPreviewEnv || hasVercelId || isPreviewAgent || isVercelReferer)
+    );
   } catch {
     return false;
   }
@@ -103,7 +118,10 @@ export default async function RootPage() {
     const isPreview = await isVercelPreviewRequest();
 
     if (isPreview) {
-      // 返回一个包含客户端重定向的静态页面
+      // 返回一个包含完整内容的静态预览页面，供Vercel生成截图
+      const baseUrl =
+        process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
+
       return (
         <html lang="zh">
           <head>
@@ -112,18 +130,53 @@ export default async function RootPage() {
               name="viewport"
               content="width=device-width, initial-scale=1"
             />
-            <title>Period Hub - Health & Wellness</title>
+            <title>PeriodHub - 专业痛经缓解和月经健康管理平台</title>
             <meta
               name="description"
-              content="Your comprehensive health and wellness platform"
+              content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。"
             />
+
+            {/* Open Graph 标签用于预览 */}
+            <meta
+              property="og:title"
+              content="PeriodHub - 专业痛经缓解和月经健康管理平台"
+            />
+            <meta
+              property="og:description"
+              content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。"
+            />
+            <meta
+              property="og:image"
+              content={`${baseUrl}/images/hero-bg.jpg`}
+            />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content={baseUrl} />
+
+            {/* Twitter Card 标签 */}
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta
+              name="twitter:title"
+              content="PeriodHub - 专业痛经缓解和月经健康管理平台"
+            />
+            <meta
+              name="twitter:description"
+              content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。"
+            />
+            <meta
+              name="twitter:image"
+              content={`${baseUrl}/images/hero-bg.jpg`}
+            />
+
+            {/* 延迟重定向，给截图工具足够时间（3-5秒） */}
             <script
               dangerouslySetInnerHTML={{
                 __html: `
                   (function() {
                     const acceptLanguage = navigator.language || navigator.userLanguage || 'en';
                     const locale = acceptLanguage.toLowerCase().startsWith('zh') ? 'zh' : 'en';
-                    window.location.replace('/' + locale);
+                    setTimeout(function() {
+                      window.location.replace('/' + locale);
+                    }, 3000); // 3秒后重定向，给截图工具足够时间
                   })();
                 `,
               }}
@@ -140,21 +193,56 @@ export default async function RootPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              color: "white",
             }}
           >
             <div
               style={{
                 textAlign: "center",
-                color: "white",
                 padding: "2rem",
+                maxWidth: "600px",
               }}
             >
-              <h1 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
-                Period Hub
+              <h1
+                style={{
+                  fontSize: "3rem",
+                  marginBottom: "1rem",
+                  fontWeight: "bold",
+                }}
+              >
+                PeriodHub
               </h1>
-              <p style={{ fontSize: "1.2rem", opacity: 0.9 }}>
-                Redirecting to your preferred language...
+              <h2
+                style={{
+                  fontSize: "1.5rem",
+                  marginBottom: "1rem",
+                  opacity: 0.9,
+                }}
+              >
+                专业痛经缓解和月经健康管理平台
+              </h2>
+              <p
+                style={{
+                  fontSize: "1.2rem",
+                  opacity: 0.8,
+                  lineHeight: 1.6,
+                  marginBottom: "2rem",
+                }}
+              >
+                提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。
               </p>
+              <div
+                style={{
+                  marginTop: "2rem",
+                  padding: "1rem",
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                  borderRadius: "8px",
+                }}
+              >
+                <p style={{ fontSize: "1rem", opacity: 0.7 }}>
+                  正在跳转到适合您的语言版本...
+                </p>
+              </div>
             </div>
           </body>
         </html>

@@ -51,7 +51,7 @@ async function detectLocaleFromHeaders(): Promise<Locale> {
         return code as Locale;
       }
     }
-  } catch (error) {
+  } catch {
     // 如果检测过程中出现任何错误，返回默认语言
     // 不记录错误，避免在生产环境中产生噪音
     // 静默失败，确保页面能正常重定向

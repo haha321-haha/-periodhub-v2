@@ -1759,7 +1759,29 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
   };
 
   // 处理HTML格式PDF下载
-  const handlePDFDownload = (resourceId: string) => {
+  const handlePDFDownload = (resourceId: string, resource?: Resource) => {
+    // 验证资源ID是否是有效的PDF资源
+    const pdfResource = getPDFResourceById(resourceId);
+    if (!pdfResource) {
+      logError(
+        `尝试下载不存在的PDF资源: ${resourceId}`,
+        { resourceId, resourceType: resource?.type },
+        "OptimizedMobilePDFCenter/handlePDFDownload",
+      );
+      // 如果是文章资源，重定向到文章页面
+      if (resource?.type === "article" && resource.slug) {
+        window.location.href = `/${locale}/articles/${resource.slug}`;
+        return;
+      }
+      // 否则显示错误
+      alert(
+        locale === "zh"
+          ? "抱歉，该资源不可下载。"
+          : "Sorry, this resource is not available for download.",
+      );
+      return;
+    }
+
     // 生成HTML文件路径
     const htmlFilename = `${resourceId}${locale === "en" ? "-en" : ""}.html`;
     const downloadUrl = `/downloads/${htmlFilename}`;
@@ -1895,7 +1917,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
                 {locale === "zh" ? "查看文档" : "View Document"}
               </button>
               <button
-                onClick={() => handlePDFDownload(resource.id!)}
+                onClick={() => handlePDFDownload(resource.id!, resource)}
                 className="px-3 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors flex items-center justify-center"
                 title={t("actions.downloadHtmlPdf")}
               >

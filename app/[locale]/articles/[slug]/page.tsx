@@ -1,5 +1,5 @@
 import React from "react";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { unstable_setRequestLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -184,14 +184,21 @@ export async function generateStaticParams() {
     "period-pain-simulator-accuracy-analysis", // management-8
     "medication-vs-natural-remedies-menstrual-pain", // management-9
 
-    // 🚨 修复IndexNow索引问题 - 添加缺失的slug映射
+    // 🔧 添加缺失的文章slug（文件存在但不在articleSlugs中）
+    "menstrual-back-pain-comprehensive-care-guide", // 文件存在
+    "effective-herbal-tea-menstrual-pain", // 文件存在
+    "menstrual-pain-back-pain-connection", // 文件存在
+    "menstrual-pain-emergency-medication-guide", // 文件存在
+    "menstrual-sleep-quality-improvement-guide", // 文件存在
+
+    // 🚨 IndexNow映射slug - 这些是别名，需要在ArticlePage中处理重定向
     "pain-complications-management", // 对应 menstrual-pain-complications-management
     "health-tracking-and-analysis", // 对应 personal-menstrual-health-profile
     "evidence-based-pain-guidance", // 对应 menstrual-pain-medical-guide
     "sustainable-health-management", // 对应 menstrual-preventive-care-complete-plan
     "personal-health-profile", // 已存在，确保包含
     "anti-inflammatory-diet-guide", // 对应 anti-inflammatory-diet-period-pain
-    "long-term-healthy-lifestyle-guide", // 需要创建对应文章
+    "long-term-healthy-lifestyle-guide", // 文件存在
     "iud-comprehensive-guide", // 对应 comprehensive-iud-guide
   ];
 
@@ -363,7 +370,24 @@ export default async function ArticlePage({
     // eslint-disable-next-line no-console
     console.log("ArticlePage - Processing:", { locale, slug });
 
-    const article = await getArticleBySlug(slug);
+    // 🚨 IndexNow映射slug处理 - 将别名重定向到实际slug
+    const slugMapping: Record<string, string> = {
+      "pain-complications-management": "menstrual-pain-complications-management",
+      "health-tracking-and-analysis": "personal-menstrual-health-profile",
+      "evidence-based-pain-guidance": "menstrual-pain-medical-guide",
+      "sustainable-health-management": "menstrual-preventive-care-complete-plan",
+      "anti-inflammatory-diet-guide": "anti-inflammatory-diet-period-pain",
+      "iud-comprehensive-guide": "comprehensive-iud-guide",
+    };
+
+    // 如果slug是映射别名，重定向到实际slug
+    const actualSlug = slugMapping[slug] || slug;
+    if (actualSlug !== slug) {
+      // 重定向到实际slug（301永久重定向）
+      redirect(`/${locale}/articles/${actualSlug}`);
+    }
+
+    const article = await getArticleBySlug(actualSlug);
     const articleFetchTime = Date.now() - articleFetchStart;
     // eslint-disable-next-line no-console
     // eslint-disable-next-line no-console

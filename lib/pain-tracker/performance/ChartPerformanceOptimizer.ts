@@ -164,9 +164,9 @@ export class ChartPerformanceOptimizer
           ? (plugins as { tooltip?: unknown }).tooltip
           : {};
       optimizedOptions.plugins = {
-        ...plugins,
+        ...(plugins as Record<string, unknown>),
         tooltip: {
-          ...tooltip,
+          ...(tooltip as Record<string, unknown>),
           enabled: false, // Disable tooltips for performance
           external: this.createOptimizedTooltip, // Use custom lightweight tooltip
         },
@@ -363,7 +363,7 @@ export class ChartPerformanceOptimizer
     ) {
       const bucketSize = Math.ceil(data.length / maxPoints);
       const bucketedData = this.createDataBuckets(
-        data as TrendPoint[],
+        data as unknown as TrendPoint[],
         bucketSize,
       );
       data = bucketedData as unknown as ChartDataPoint[];

@@ -230,16 +230,24 @@ export default function DataExportComponent() {
       // 应用隐私保护
       // ExportPayload 包含额外的元数据字段（exportDate, locale, version），
       // 但 maskSensitiveData 只需要核心数据字段，所以我们需要提取核心数据部分
-      // 使用类型断言将 ExportPayload 转换为 MaskablePayload 兼容类型
+      // 使用条件分支来明确类型，避免联合类型问题
       type MaskableData =
         | { data: PeriodRecord[] }
         | { data: NutritionRecommendation[] }
         | { period?: PeriodRecord[]; nutrition?: NutritionRecommendation[] };
 
-      const maskableData: MaskableData =
-        data.type === "all"
-          ? { period: data.data.period, nutrition: data.data.nutrition }
-          : { data: data.data };
+      let maskableData: MaskableData;
+      if (data.type === "all") {
+        maskableData = {
+          period: data.data.period,
+          nutrition: data.data.nutrition,
+        };
+      } else if (data.type === "period") {
+        maskableData = { data: data.data };
+      } else {
+        // data.type === "nutrition"
+        maskableData = { data: data.data };
+      }
 
       const maskedCoreData = privacyManager.maskSensitiveData(
         maskableData as Parameters<typeof privacyManager.maskSensitiveData>[0],

@@ -18,9 +18,6 @@ import { separateWrapperProps } from "../types/lazy-component";
  * 方案 B：完整重构 - 使用类型辅助函数提高类型安全性
  */
 
-// 保持向后兼容的接口别名
-type LazyLoaderProps = LazyWrapperProps;
-
 // 默认加载状态
 const DefaultFallback = ({ height = "200px" }: { height?: string }) => (
   <LoadingWrapper

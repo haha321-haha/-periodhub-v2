@@ -400,7 +400,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
           ),
           createArticleResource(
             "naturalTherapies",
-            "traditionalMethods",
+            "gingerRelief",
             12,
             "high",
             [t("tags.medication"), t("tags.medication"), t("tags.relief")],
@@ -718,7 +718,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
           ),
           createArticleResource(
             "naturalTherapies",
-            "traditionalMethods",
+            "gingerRelief",
             12,
             "high",
             [t("tags.medication"), t("tags.medication"), t("tags.relief")],

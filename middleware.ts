@@ -32,7 +32,7 @@ function detectVercelPreviewRequest(request: NextRequest): boolean {
     const xVercelDeployment = request.headers.get("x-vercel-deployment");
     const xVercelSignature = request.headers.get("x-vercel-signature");
 
-    // 检测常见的预览服务User-Agent
+    // 检测常见的预览服务User-Agent（更精确的匹配）
     const previewAgents = [
       "vercel",
       "screenshot",
@@ -45,7 +45,6 @@ function detectVercelPreviewRequest(request: NextRequest): boolean {
       "firefox/92.0", // Vercel截图使用的Firefox版本
       "firefox/", // 更通用的Firefox检测
       "chrome/", // Chromium 检测
-      "safari/", // Safari 检测（某些情况下）
     ];
 
     const isPreviewAgent = previewAgents.some((agent) =>
@@ -62,16 +61,23 @@ function detectVercelPreviewRequest(request: NextRequest): boolean {
     const hasVercelHeaders =
       !!xVercelId || !!xVercelDeployment || !!xVercelSignature;
 
-    // 策略 3: 检测 .vercel.app 域名（更宽松）
-    // 在预览环境中，所有 .vercel.app 域名的根路径请求都可能是预览请求
-    const isVercelDomain = host.includes(".vercel.app");
+    // 策略 3: 检测预览部署的特定域名模式
+    // 预览部署通常使用特定的域名模式：*-git-*-*.vercel.app
+    // 生产部署通常使用：*-*.vercel.app 或自定义域名
+    // 更宽松的策略：在 Vercel 环境中，所有 .vercel.app 域名的根路径都可能是预览请求
+    const isPreviewDomain =
+      host.includes("-git-") || // 预览部署的典型模式
+      (isVercelEnvironment &&
+        host.includes(".vercel.app") &&
+        !host.includes("www.") &&
+        !host.includes("periodhub.health")); // 排除生产域名
 
     // 综合判断：如果检测到任何预览特征，返回 true
     if (
       isPreviewAgent ||
       isVercelReferer ||
       hasVercelHeaders ||
-      isVercelDomain
+      isPreviewDomain
     ) {
       return true;
     }
@@ -132,9 +138,25 @@ function generateStaticPreviewHTML(): string {
  * 如果检测到预览请求，直接返回静态 HTML，避免任何重定向或动态内容
  */
 export function middleware(request: NextRequest) {
-  // 只处理根路径请求
-  if (request.nextUrl.pathname === "/") {
-    // 检测是否是 Vercel 预览请求
+  const pathname = request.nextUrl.pathname;
+
+  // 处理根路径请求和预览路径
+  if (pathname === "/" || pathname === "/preview") {
+    // 策略 1: 如果是 /preview 路径，直接返回预览内容（最可靠）
+    if (pathname === "/preview") {
+      return new NextResponse(generateStaticPreviewHTML(), {
+        status: 200,
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+          "X-Preview-Path": "/preview",
+        },
+      });
+    }
+
+    // 策略 2: 检测是否是 Vercel 预览请求
     const isPreview = detectVercelPreviewRequest(request);
 
     if (isPreview) {
@@ -150,6 +172,7 @@ export function middleware(request: NextRequest) {
           Expires: "0",
           // 添加调试头（可选）
           "X-Preview-Detected": "true",
+          "X-Preview-Path": pathname,
         },
       });
     }
@@ -161,5 +184,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/"],
+  matcher: ["/", "/preview"],
 };

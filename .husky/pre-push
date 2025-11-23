@@ -36,11 +36,22 @@ if [ "$branch" = "main" ] || [ "$branch" = "develop" ]; then
 
   # 2. 翻译键同步检查
   echo "🔍 运行翻译键同步检查..."
-  if [ -f "scripts/check-translation-sync.js" ] || [ -f "scripts/hardcode-fix-tools/check-translation-sync.js" ]; then
-    if ! npm run translations:check 2>/dev/null; then
+  if [ -f "scripts/check-translation-sync.js" ]; then
+    if ! npm run translations:check; then
       echo ""
       echo "❌ 翻译键同步检查失败！推送被阻止。"
       echo "💡 请确保中英文翻译键完全同步。"
+      echo "💡 运行 'npm run translations:check' 查看详细错误信息。"
+      exit 1
+    else
+      echo "✅ 翻译键同步检查通过"
+    fi
+  elif [ -f "scripts/hardcode-fix-tools/check-translation-sync.js" ]; then
+    if ! node scripts/hardcode-fix-tools/check-translation-sync.js; then
+      echo ""
+      echo "❌ 翻译键同步检查失败！推送被阻止。"
+      echo "💡 请确保中英文翻译键完全同步。"
+      echo "💡 运行 'node scripts/hardcode-fix-tools/check-translation-sync.js' 查看详细错误信息。"
       exit 1
     else
       echo "✅ 翻译键同步检查通过"

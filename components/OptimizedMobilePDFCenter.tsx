@@ -668,7 +668,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
           ),
           createArticleResource(
             "understandingEducation",
-            "understandingCycle",
+            "personalHealthProfile",
             20,
             "medium",
             ["档案", "记录", "管理"],
@@ -873,7 +873,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
           ),
           createArticleResource(
             "understandingEducation",
-            "understandingCycle",
+            "personalHealthProfile",
             20,
             "medium",
             ["档案", "记录", "管理"],

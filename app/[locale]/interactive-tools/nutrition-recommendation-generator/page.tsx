@@ -25,12 +25,15 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations(
-    "interactiveTools.nutritionRecommendationGenerator.meta",
-  );
-  const structuredDataT = await getTranslations(
-    "interactiveTools.nutritionRecommendationGenerator.structuredData",
-  );
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveTools.nutritionRecommendationGenerator.meta",
+  });
+  const structuredDataT = await getTranslations({
+    locale,
+    namespace:
+      "interactiveTools.nutritionRecommendationGenerator.structuredData",
+  });
 
   const isZh = locale === "zh";
   const title = t("title");
@@ -107,20 +110,28 @@ export default async function NutritionRecommendationGeneratorPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const anchorT = await getTranslations("anchorTexts");
-  const breadcrumbT = await getTranslations("interactiveTools.breadcrumb");
-  const pageT = await getTranslations(
-    "interactiveTools.nutritionRecommendationGenerator",
-  );
-  const relatedToolsT = await getTranslations(
-    "interactiveTools.nutritionRecommendationGenerator.relatedTools",
-  );
-  const relatedArticlesT = await getTranslations(
-    "interactiveTools.nutritionRecommendationGenerator.relatedArticles",
-  );
-  const footerT = await getTranslations(
-    "interactiveTools.nutritionRecommendationGenerator.footer",
-  );
+  const anchorT = await getTranslations({ locale, namespace: "anchorTexts" });
+  const breadcrumbT = await getTranslations({
+    locale,
+    namespace: "interactiveTools.breadcrumb",
+  });
+  const pageT = await getTranslations({
+    locale,
+    namespace: "interactiveTools.nutritionRecommendationGenerator",
+  });
+  const relatedToolsT = await getTranslations({
+    locale,
+    namespace: "interactiveTools.nutritionRecommendationGenerator.relatedTools",
+  });
+  const relatedArticlesT = await getTranslations({
+    locale,
+    namespace:
+      "interactiveTools.nutritionRecommendationGenerator.relatedArticles",
+  });
+  const footerT = await getTranslations({
+    locale,
+    namespace: "interactiveTools.nutritionRecommendationGenerator.footer",
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">

@@ -1,5 +1,5 @@
 {
-  "0": "Benefits",
+  "0": "益处",
   "4": "4",
   "site": {
     "name": "Period Hub",
@@ -231,39 +231,39 @@
           "responseTime": "我们会在 48 小时内回复"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -600,39 +600,39 @@
           "text": "如果评估结果建议就医，请不要拖延。准备好症状记录，选择合适的就诊时间，主动与医生沟通你的担忧。"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -720,39 +720,39 @@
           "rec2": "不要独自前往医院，寻求帮助"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -992,39 +992,39 @@
           "description": "严重的胃肠道症状可能提示急腹症或其他严重情况，需要医疗评估"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -1189,7 +1189,10 @@
             "追踪症状随时间的模式",
             "注意任何触发因素或模式"
           ],
-          "general": ["继续定期健康监测", "保持健康的生活习惯"]
+          "general": [
+            "继续定期健康监测",
+            "保持健康的生活习惯"
+          ]
         }
       },
       "emergency": {
@@ -2916,39 +2919,39 @@
           "item5": "Emergency contact numbers"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -3187,39 +3190,39 @@
           "description": "成本低廉，易于实施"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -3615,39 +3618,39 @@
           }
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -3806,39 +3809,39 @@
           "benefitsValue": "随时应对突发疼痛"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     }
@@ -4098,39 +4101,39 @@
           }
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       },
       "analytics": {
@@ -4278,7 +4281,11 @@
         "title": "使用建议：",
         "bestTiming": {
           "title": "最佳时机：",
-          "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
+          "items": [
+            "疼痛刚开始时",
+            "感到焦虑紧张时",
+            "睡前放松时"
+          ]
         },
         "precautions": {
           "title": "注意事项：",
@@ -5084,7 +5091,11 @@
         "title": "使用建议：",
         "bestTiming": {
           "title": "最佳时机：",
-          "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
+          "items": [
+            "疼痛刚开始时",
+            "感到焦虑紧张时",
+            "睡前放松时"
+          ]
         },
         "precautions": {
           "title": "注意事项：",
@@ -5103,31 +5114,31 @@
           }
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -5467,31 +5478,31 @@
           }
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -5523,65 +5534,6 @@
       "buttons": {
         "expand": "展开",
         "collapse": "收起"
-      }
-    },
-    "nutritionRecommendationGenerator": {
-      "title": "营养推荐生成器",
-      "description": "基于您的月经周期、健康目标和中医体质，我们将为您生成专属的营养建议",
-      "journeyTitle": "✨ 开始您的个性化营养之旅",
-      "steps": {
-        "step1": "选择阶段",
-        "step2": "设定目标",
-        "step3": "生成建议"
-      },
-      "tip": "💡 提示：所有建议都基于科学研究和中医理论",
-      "meta": {
-        "title": "营养推荐生成器 - 个性化营养建议 | Period Hub",
-        "description": "基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导，结合现代营养学与中医理论，为女性提供精准的营养建议和生活方式指导，帮助优化生理期健康管理。",
-        "keywords": "营养推荐生成器,月经周期营养,中医体质饮食,个性化营养计划,女性健康营养,经期营养管理",
-        "ogTitle": "营养推荐生成器 - 个性化营养建议 | Period Hub",
-        "ogDescription": "基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导。",
-        "twitterTitle": "营养推荐生成器 - 个性化营养建议 | Period Hub",
-        "twitterDescription": "基于月经周期、健康目标和中医体质的个性化营养建议生成器，提供科学专业的饮食指导。"
-      },
-      "structuredData": {
-        "applicationCategory": "HealthApplication",
-        "operatingSystem": "Any",
-        "browserRequirements": "HTML5, CSS3, JavaScript",
-        "providerName": "Period Hub"
-      },
-      "relatedTools": {
-        "title": "相关工具",
-        "cycleTracker": {
-          "title": "智能周期追踪器",
-          "description": "智能追踪月经周期，预测下次月经时间，记录症状变化，帮助您更好地了解身体规律"
-        },
-        "constitutionTest": {
-          "title": "中医体质测试",
-          "description": "通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议"
-        }
-      },
-      "relatedArticles": {
-        "title": "相关营养文章",
-        "antiInflammatory": {
-          "title": "抗炎饮食指南",
-          "description": "通过食物缓解经期疼痛的科学饮食方法，了解哪些食物有助于减少炎症和疼痛",
-          "readTime": "8分钟阅读"
-        },
-        "gingerTea": {
-          "title": "姜茶缓解痛经指南",
-          "description": "5种科学验证的姜茶制作方法，有效缓解痛经，学习正确的制作技巧和饮用时机",
-          "readTime": "6分钟阅读"
-        },
-        "herbalTea": {
-          "title": "有效草药茶配方",
-          "description": "5种科学验证的草药茶配方，天然缓解经期不适，包含肉桂茶、茴香籽茶等经典配方",
-          "readTime": "7分钟阅读"
-        }
-      },
-      "footer": {
-        "text": "个性化健康，触手可及。",
-        "disclaimer": "本工具提供一般性营养指导，不能替代专业医疗建议。"
       }
     },
     "workplaceImpactAssessment": {
@@ -6325,7 +6277,11 @@
       "office": {
         "title": "办公/职场场景",
         "description": "职场经期疼痛专业管理方案：办公环境隐蔽缓解技巧、会议应急包准备、职场饮食调理策略。提供适合办公室环境的痛经缓解方法，让您在工作中保持专业形象的同时有效缓解疼痛。基于循证医学的专业指导，适合各行业职场女性使用。",
-        "features": ["会议应急包", "办公椅拉伸", "职场饮食管理"],
+        "features": [
+          "会议应急包",
+          "办公椅拉伸",
+          "职场饮食管理"
+        ],
         "emergencyKit": {
           "title": "会议应急包",
           "categories": {
@@ -6548,12 +6504,20 @@
       "partnerCommunication": {
         "title": "伴侣沟通场景",
         "description": "专业的伴侣沟通场景解决方案，帮助伴侣更好地理解痛经，提供针对性的沟通策略和情感支持技巧。包含理解测试、30天训练营和个性化指导，帮助您建立更好的理解和沟通。",
-        "features": ["伴侣理解测试", "30天训练营", "个性化指导"]
+        "features": [
+          "伴侣理解测试",
+          "30天训练营",
+          "个性化指导"
+        ]
       },
       "commute": {
         "title": "通勤场景",
         "description": "通勤途中经期疼痛应急处理指南：公共交通舒适技巧、自驾调整方案、突发疼痛快速缓解方法。提供适合各种通勤方式的痛经管理策略，让您在出行路上也能有效应对经期不适。基于循证医学的专业指导，确保通勤安全舒适。",
-        "features": ["公共交通应对", "自驾调整", "应急处理方案"],
+        "features": [
+          "公共交通应对",
+          "自驾调整",
+          "应急处理方案"
+        ],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
@@ -6563,7 +6527,11 @@
       "exercise": {
         "title": "运动/户外场景",
         "description": "经期运动安全防护专业指南：适合经期的运动类型、户外活动注意事项、运动强度调节技巧。提供科学的经期运动建议，让您在保持运动习惯的同时安全度过生理期，避免运动伤害。基于循证医学的专业指导，确保运动安全有效。",
-        "features": ["经期徒步指南", "泳池卫生管理", "瑜伽体式库"],
+        "features": [
+          "经期徒步指南",
+          "泳池卫生管理",
+          "瑜伽体式库"
+        ],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
@@ -6573,7 +6541,11 @@
       "sleep": {
         "title": "睡眠场景",
         "description": "经期夜间疼痛舒缓睡眠方案：科学睡姿调整、助眠音频推荐、睡前饮食建议。提供专业的经期睡眠管理技巧，帮助您获得更好的夜间休息，缓解经期不适对睡眠质量的影响。基于循证医学的专业指导，确保睡眠质量。",
-        "features": ["助眠音频", "科学睡姿", "睡前饮食建议"],
+        "features": [
+          "助眠音频",
+          "科学睡姿",
+          "睡前饮食建议"
+        ],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
@@ -6583,7 +6555,11 @@
       "social": {
         "title": "社交场景",
         "description": "社交场合经期疼痛优雅应对策略：约会应急处理、聚会饮食选择、疼痛伪装技巧。提供适合各种社交活动的经期管理方案，让您在社交场合保持优雅形象的同时有效缓解经期不适。基于循证医学的专业指导，确保社交自信。",
-        "features": ["约会应急策略", "聚会饮食选择", "疼痛伪装技巧"],
+        "features": [
+          "约会应急策略",
+          "聚会饮食选择",
+          "疼痛伪装技巧"
+        ],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
@@ -6593,7 +6569,11 @@
       "life_stages": {
         "title": "特殊生理阶段",
         "description": "女性不同生理阶段经期管理专业指导：青春期经期教育、育龄期健康管理、围绝经期调理方案。提供针对各年龄段特点的个性化经期健康管理策略，帮助女性科学应对不同生命阶段的生理变化。基于循证医学的专业指导，确保各阶段健康。",
-        "features": ["青春期经期教育", "育龄期健康管理", "围绝经期调理"],
+        "features": [
+          "青春期经期教育",
+          "育龄期健康管理",
+          "围绝经期调理"
+        ],
         "disclaimer": {
           "title": "免责声明",
           "content": "本报告内容仅供信息参考和教育目的，不能替代专业的医疗诊断和治疗建议。请在采取任何健康管理措施前，特别是药物使用和对严重疼痛进行判断时，咨询执业医师。"
@@ -7555,39 +7535,39 @@
           "description": "以上研究均达到Ia级证据水平（系统综述和荟萃分析），为临床实践提供了强有力的科学依据"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -8311,39 +8291,39 @@
           "naproxen": "较低"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -8704,7 +8684,11 @@
       "title": "使用建议：",
       "bestTiming": {
         "title": "最佳时机：",
-        "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
+        "items": [
+          "疼痛刚开始时",
+          "感到焦虑紧张时",
+          "睡前放松时"
+        ]
       },
       "precautions": {
         "title": "注意事项：",
@@ -9043,39 +9027,39 @@
           "unlockCondition": "需先完成阶段3"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -9144,7 +9128,11 @@
           "0": "分享你的经验。帮助其他男性朋友学会如何更好地理解和支持伴侣。",
           "1": "持续学习。虽然基础测试表现优秀，但专业测试会带给你更深层的医学知识。"
         },
-        "nextSteps": ["完成专业深度测试", "开始30天专家训练", "成为社区导师"]
+        "nextSteps": [
+          "完成专业深度测试",
+          "开始30天专家训练",
+          "成为社区导师"
+        ]
       }
     },
     "stage2Results": {
@@ -9857,23 +9845,48 @@
       "questions": {
         "q1": {
           "question": "你最近是否经常感到焦虑或紧张？",
-          "options": ["从不", "偶尔", "经常", "总是"]
+          "options": [
+            "从不",
+            "偶尔",
+            "经常",
+            "总是"
+          ]
         },
         "q2": {
           "question": "你的睡眠质量如何？",
-          "options": ["很好", "好", "一般", "差"]
+          "options": [
+            "很好",
+            "好",
+            "一般",
+            "差"
+          ]
         },
         "q3": {
           "question": "你经常感到疲劳或缺乏精力吗？",
-          "options": ["从不", "偶尔", "经常", "总是"]
+          "options": [
+            "从不",
+            "偶尔",
+            "经常",
+            "总是"
+          ]
         },
         "q4": {
           "question": "你容易感到烦躁或愤怒吗？",
-          "options": ["从不", "偶尔", "经常", "总是"]
+          "options": [
+            "从不",
+            "偶尔",
+            "经常",
+            "总是"
+          ]
         },
         "q5": {
           "question": "你经常担心经期相关的问题吗？",
-          "options": ["从不", "偶尔", "经常", "总是"]
+          "options": [
+            "从不",
+            "偶尔",
+            "经常",
+            "总是"
+          ]
         }
       },
       "q6": {
@@ -10052,7 +10065,13 @@
       "radar": {
         "title": "压力领域分析",
         "subtitle": "不同生活领域压力水平的可视化呈现",
-        "labels": ["工作", "睡眠", "情绪", "身体", "社交"]
+        "labels": [
+          "工作",
+          "睡眠",
+          "情绪",
+          "身体",
+          "社交"
+        ]
       }
     },
     "stressTypes": {
@@ -10070,39 +10089,39 @@
           "description": "[ZH] Requires long-term strategies and possibly professional help"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -10181,39 +10200,39 @@
           "tip4": "[ZH] Stop immediately if you feel unwell"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       },
       "keywords": "relaxation techniques,stress relief,breathing exercises,meditation,light exercise,music therapy"
@@ -10280,39 +10299,39 @@
           "description": "看到进展以增强坚持性"
         },
         "results": {
-          "title": "Assessment Complete",
-          "subtitle": "Complete Stress Assessment Report",
+          "title": "评估完成",
+          "subtitle": "完整压力评估报告",
           "resultLabel": "评估结果",
-          "scoreLabel": "Stress Score",
+          "scoreLabel": "压力评分",
           "basicRecommendations": "基础建议",
           "detailedAnalysis": "详细分析",
           "stressSources": "压力来源",
-          "stressSourcesDescription": "Mainly from work pressure and sleep quality issues",
+          "stressSourcesDescription": "主要来自工作压力和睡眠质量问题",
           "improvementFocus": "改进重点",
-          "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
+          "improvementFocusDescription": "建议优先关注睡眠质量和情绪管理",
           "stressLevels": {
-            "low": "Low",
-            "moderate": "Moderate",
-            "high": "High",
-            "severe": "Severe"
+            "low": "低",
+            "moderate": "中等",
+            "high": "高",
+            "severe": "严重"
           }
         },
         "phq9": {
           "assessmentLabel": "PHQ-9评估",
           "assessmentPrompt": {
-            "title": "For Deeper Mental Health Assessment",
-            "description": "After completing the stress assessment, we recommend a professional PHQ-9 depression symptom assessment for comprehensive mental health analysis",
-            "button": "Start PHQ-9 Assessment"
+            "title": "进行更深入的心理健康评估",
+            "description": "完成压力评估后，我们建议进行专业的PHQ-9抑郁症状评估，以获得全面的心理健康分析",
+            "button": "开始PHQ-9评估"
           }
         },
         "alerts": {
-          "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+          "paymentComingSoon": "💳 支付功能即将推出！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能"
         },
         "buttons": {
-          "restartAssessment": "Re-assess",
+          "restartAssessment": "重新评估",
           "backToHome": "返回首页",
           "viewFreeResults": "查看免费结果",
-          "comingSoon": "Coming Soon, Stay Tuned"
+          "comingSoon": "即将推出，敬请期待"
         }
       }
     },
@@ -12272,9 +12291,9 @@
       "sampleSizeSmall": "📈 Sample size too small, need more data"
     },
     "riskAssessment": {
-      "low": "Low",
+      "low": "低",
       "medium": "Medium",
-      "high": "High"
+      "high": "高"
     }
   },
   "userFeedback": {

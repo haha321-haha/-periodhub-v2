@@ -319,7 +319,17 @@ export default function RealDataSystemTest() {
       recommendations.push("检查API端点配置和网络连接");
     }
 
-    if (testResults.dataAnalysis?.dataQuality?.totalSessions < 10) {
+    const dataAnalysis = testResults.dataAnalysis;
+    if (
+      dataAnalysis &&
+      typeof dataAnalysis === "object" &&
+      "dataQuality" in dataAnalysis &&
+      dataAnalysis.dataQuality &&
+      typeof dataAnalysis.dataQuality === "object" &&
+      "sessionsCount" in dataAnalysis.dataQuality &&
+      typeof dataAnalysis.dataQuality.sessionsCount === "number" &&
+      dataAnalysis.dataQuality.sessionsCount < 10
+    ) {
       recommendations.push("收集更多真实用户数据以进行有效分析");
     }
 
@@ -577,66 +587,79 @@ export default function RealDataSystemTest() {
             )}
 
             {/* 最终测试报告 */}
-            {testResults.finalReport && (
-              <div className="border-2 border-blue-500 rounded-lg p-6 bg-blue-50">
-                <h3 className="text-xl font-bold mb-4">📋 最终测试报告</h3>
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <p className="text-sm text-gray-600">总测试数</p>
-                    <p className="text-2xl font-bold">
-                      {testResults.finalReport.totalTests}
-                    </p>
+            {testResults.finalReport &&
+              typeof testResults.finalReport === "object" &&
+              testResults.finalReport !== null && (
+                <div className="border-2 border-blue-500 rounded-lg p-6 bg-blue-50">
+                  <h3 className="text-xl font-bold mb-4">📋 最终测试报告</h3>
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <p className="text-sm text-gray-600">总测试数</p>
+                      <p className="text-2xl font-bold">
+                        {"totalTests" in testResults.finalReport
+                          ? String(testResults.finalReport.totalTests)
+                          : "0"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">成功率</p>
+                      <p className="text-2xl font-bold text-green-600">
+                        {"successRate" in testResults.finalReport
+                          ? String(testResults.finalReport.successRate)
+                          : "0%"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">通过测试</p>
+                      <p className="text-xl font-semibold text-green-600">
+                        {"successfulTests" in testResults.finalReport
+                          ? String(testResults.finalReport.successfulTests)
+                          : "0"}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">失败测试</p>
+                      <p className="text-xl font-semibold text-red-600">
+                        {"failedTests" in testResults.finalReport
+                          ? String(testResults.finalReport.failedTests)
+                          : "0"}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-600">成功率</p>
-                    <p className="text-2xl font-bold text-green-600">
-                      {testResults.finalReport.successRate}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">通过测试</p>
-                    <p className="text-xl font-semibold text-green-600">
-                      {testResults.finalReport.successfulTests}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">失败测试</p>
-                    <p className="text-xl font-semibold text-red-600">
-                      {testResults.finalReport.failedTests}
-                    </p>
-                  </div>
-                </div>
 
-                <div className="mb-4">
-                  <h4 className="font-semibold mb-2">组件状态:</h4>
-                  <div className="space-y-1">
-                    {Object.entries(testResults.finalReport.summary).map(
-                      ([key, value]) => (
-                        <div key={key} className="flex justify-between">
-                          <span className="capitalize">
-                            {key.replace(/([A-Z])/g, " $1").trim()}:
-                          </span>
-                          <span>{String(value)}</span>
-                        </div>
-                      ),
-                    )}
+                  <div className="mb-4">
+                    <h4 className="font-semibold mb-2">组件状态:</h4>
+                    <div className="space-y-1">
+                      {"summary" in testResults.finalReport &&
+                        testResults.finalReport.summary &&
+                        typeof testResults.finalReport.summary === "object" &&
+                        Object.entries(testResults.finalReport.summary).map(
+                          ([key, value]) => (
+                            <div key={key} className="flex justify-between">
+                              <span className="capitalize">
+                                {key.replace(/([A-Z])/g, " $1").trim()}:
+                              </span>
+                              <span>{String(value)}</span>
+                            </div>
+                          ),
+                        )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold mb-2">建议:</h4>
+                    <ul className="list-disc list-inside space-y-1">
+                      {"recommendations" in testResults.finalReport &&
+                        Array.isArray(
+                          testResults.finalReport.recommendations,
+                        ) &&
+                        testResults.finalReport.recommendations.map(
+                          (rec, index) => <li key={index}>{String(rec)}</li>,
+                        )}
+                    </ul>
                   </div>
                 </div>
-
-                <div>
-                  <h4 className="font-semibold mb-2">建议:</h4>
-                  <ul className="list-disc list-inside space-y-1">
-                    {testResults.finalReport.recommendations.map(
-                      (rec, index) => (
-                        <li key={index} className="text-sm">
-                          {rec}
-                        </li>
-                      ),
-                    )}
-                  </ul>
-                </div>
-              </div>
-            )}
+              )}
           </div>
         )}
       </div>

@@ -7,6 +7,7 @@ import { useEffect, useCallback, useRef } from "react";
 import { usePartnerHandbookStore } from "../stores/partnerHandbookStore";
 import { progressManager } from "../utils/progressManager";
 import { logError, logInfo } from "@/lib/debug-logger";
+import type { QuizStage, StageProgress, QuizResult } from "../types/quiz";
 
 export const useProgressSave = () => {
   const store = usePartnerHandbookStore();
@@ -21,15 +22,24 @@ export const useProgressSave = () => {
       isSaving.current = true;
 
       // 使用选择器获取当前状态
-      const currentState: {
-        stageProgress: Record<QuizStage, StageProgress>;
-        overallResult?: QuizResult | null;
-        userPreferences?: Record<string, unknown>;
-        lastSaved?: string | null;
-        version?: string;
-      } = {
-        stageProgress: store.stageProgress,
-        overallResult: store.overallResult as QuizResult | null,
+      // 注意：ProgressData 接口期望的类型与 store 中的类型略有不同
+      const currentState = {
+        stageProgress: store.stageProgress as Record<QuizStage, StageProgress>,
+        overallResult: store.overallResult
+          ? ({
+              totalScore:
+                store.overallResult.stage1Score +
+                (store.overallResult.stage2Score || 0),
+              maxScore: 100, // 假设最大分数
+              percentage: 0,
+              level: store.overallResult.combinedLevel || "beginner",
+              title: "",
+              feedback: "",
+              recommendations: store.overallResult.recommendations,
+              completedAt: store.overallResult.completedAt || new Date(),
+              timeSpent: 0,
+            } as QuizResult)
+          : null,
         userPreferences: store.userPreferences as Record<string, unknown>,
         lastSaved: new Date().toISOString(),
         version: store.dataVersion,

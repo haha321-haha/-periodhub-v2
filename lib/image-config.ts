@@ -82,14 +82,14 @@ export class ImageErrorHandler {
     this.errorCount++;
 
     logError(
-      `图片加载错误 [${component}]:`,
-      error,
-      "image-config/ImageErrorHandler/handleError",
+      `图片加载错误 [${component}]: ${src}`,
       {
+        error: error.message,
         src,
         count: this.errorCount,
         timestamp: new Date().toISOString(),
       },
+      "image-config/ImageErrorHandler/handleError",
     );
 
     // 如果错误过多，建议切换到备用组件

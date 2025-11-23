@@ -3,7 +3,7 @@
  * 提供统一的 locale 验证和处理逻辑
  */
 
-import { locales, defaultLocale, type Locale } from "@/i18n/request";
+import { locales, defaultLocale, type Locale } from "@/i18n/constants";
 import { logWarn, logError } from "@/lib/debug-logger";
 
 /**

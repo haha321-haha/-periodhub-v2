@@ -111,7 +111,7 @@ class ApiClient {
       return null;
     }
 
-    return item.data;
+    return item.data as T;
   }
 
   private setCache<T>(key: string, data: T, ttl: number) {
@@ -259,9 +259,9 @@ class ApiClient {
       };
 
       // 应用响应拦截器
-      let finalResponse = apiResponse;
+      let finalResponse: ApiResponse<T> = apiResponse;
       for (const interceptor of this.responseInterceptors) {
-        finalResponse = interceptor(finalResponse);
+        finalResponse = interceptor(finalResponse) as ApiResponse<T>;
       }
 
       // 缓存响应

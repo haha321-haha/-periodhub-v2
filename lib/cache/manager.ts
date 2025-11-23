@@ -111,9 +111,9 @@ export class AdvancedCacheManager {
     this.stats.hits++;
 
     const data = this.config.enableCompression
-      ? this.decompress(item.data)
+      ? this.decompress(item.data as string)
       : item.data;
-    return data;
+    return data as T;
   }
 
   // 检查缓存项是否存在且未过期

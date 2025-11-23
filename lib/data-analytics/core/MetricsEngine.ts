@@ -301,7 +301,7 @@ export class MetricsEngine {
       const date = new Date(now.getTime() - i * 24 * 60 * 60 * 1000);
       const cacheKey = `${metricName}_${date.toISOString().split("T")[0]}`;
 
-      let result = this.getFromCache(cacheKey);
+      let result = this.getFromCache(cacheKey) as MetricsResult | null;
       if (!result) {
         // 这里应该从历史数据中计算，暂时使用模拟数据
         const currentValue = await this.calculateSingleMetric(metricName);
@@ -426,7 +426,7 @@ export class MetricsEngine {
   }
 
   private getCachedMetrics(): CoreMetrics | null {
-    const cached = this.getFromCache("all_metrics");
+    const cached = this.getFromCache("all_metrics") as CoreMetrics | null;
     return cached || null;
   }
 
@@ -514,7 +514,7 @@ export class MetricsEngine {
 
     this.eventHistory.forEach((event) => {
       if (event.data.resourceId) {
-        const resourceId = event.data.resourceId;
+        const resourceId = event.data.resourceId as string;
         const stats = resourceStats.get(resourceId) || {
           downloads: 0,
           views: 0,
@@ -526,7 +526,7 @@ export class MetricsEngine {
           stats.views++;
         }
 
-        resourceStats.set(resourceId, stats);
+        resourceStats.set(resourceId as string, stats);
       }
     });
 

@@ -9,6 +9,9 @@ import {
   PainTrackerError,
   STORAGE_KEYS,
   StorageMetadata,
+  UserPreferences,
+  CURRENT_SCHEMA_VERSION,
+  DEFAULT_USER_PREFERENCES,
 } from "../../../types/pain-tracker";
 
 import LocalStorageAdapter from "../storage/LocalStorageAdapter";
@@ -215,7 +218,7 @@ export class PainDataManager implements PainDataManagerInterface {
       }
 
       // Ensure all records have proper Date objects
-      return records.map(this.deserializeRecord);
+      return (records as unknown[]).map(this.deserializeRecord);
     } catch (error) {
       throw new PainTrackerError(
         "Failed to retrieve pain records",
@@ -389,9 +392,10 @@ export class PainDataManager implements PainDataManagerInterface {
       );
 
       return {
-        records,
-        preferences,
-        schemaVersion,
+        records: records as PainRecord[],
+        preferences: (preferences ||
+          DEFAULT_USER_PREFERENCES) as UserPreferences,
+        schemaVersion: (schemaVersion as number) || CURRENT_SCHEMA_VERSION,
         lastBackup: new Date(),
         metadata:
           metadata ||
@@ -605,12 +609,12 @@ export class PainDataManager implements PainDataManagerInterface {
    * Validate imported data structure
    */
   private validateImportData(data: unknown): data is StoredData {
+    if (!data || typeof data !== "object") return false;
+    const obj = data as Record<string, unknown>;
     return (
-      data &&
-      typeof data === "object" &&
-      Array.isArray(data.records) &&
-      typeof data.preferences === "object" &&
-      typeof data.schemaVersion === "number"
+      Array.isArray(obj.records) &&
+      typeof obj.preferences === "object" &&
+      typeof obj.schemaVersion === "number"
     );
   }
 }

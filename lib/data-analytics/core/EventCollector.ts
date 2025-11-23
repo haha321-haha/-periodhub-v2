@@ -328,8 +328,9 @@ export class EventCollector {
       weekAgo.toISOString().split("T")[0],
     );
     const weeklyGrowth = weekAgoMetrics
-      ? ((activeUsers - weekAgoMetrics.activeUsers) /
-          weekAgoMetrics.activeUsers) *
+      ? ((activeUsers -
+          (weekAgoMetrics as { activeUsers: number }).activeUsers) /
+          (weekAgoMetrics as { activeUsers: number }).activeUsers) *
         100
       : 0;
 
@@ -340,8 +341,9 @@ export class EventCollector {
       monthAgo.toISOString().split("T")[0],
     );
     const monthlyGrowth = monthAgoMetrics
-      ? ((activeUsers - monthAgoMetrics.activeUsers) /
-          monthAgoMetrics.activeUsers) *
+      ? ((activeUsers -
+          (monthAgoMetrics as { activeUsers: number }).activeUsers) /
+          (monthAgoMetrics as { activeUsers: number }).activeUsers) *
         100
       : 0;
 
@@ -720,9 +722,12 @@ export class EventCollector {
   private updateDAUMetrics(date: string, userId: string): void {
     // 实时更新DAU统计
     const key = `dau_${date}`;
-    const existing = this.dailyMetrics.get(key) || {
-      users: new Set(),
-      newUsers: new Set(),
+    const existing = (this.dailyMetrics.get(key) as {
+      users: Set<string>;
+      newUsers: Set<string>;
+    }) || {
+      users: new Set<string>(),
+      newUsers: new Set<string>(),
     };
     existing.users.add(userId);
     this.dailyMetrics.set(key, existing);
@@ -731,7 +736,9 @@ export class EventCollector {
   private updateRetentionMetrics(date: string, userId: string): void {
     // 实时更新留存统计
     const key = `retention_${date}`;
-    const existing = this.dailyMetrics.get(key) || { newUsers: new Set() };
+    const existing = (this.dailyMetrics.get(key) as {
+      newUsers: Set<string>;
+    }) || { newUsers: new Set<string>() };
     existing.newUsers.add(userId);
     this.dailyMetrics.set(key, existing);
   }

@@ -159,7 +159,9 @@ export class DataPipeline {
 
       for (const event of events) {
         try {
-          const enhancedEvent = await this.enhanceEvent(event);
+          const enhancedEvent = await this.enhanceEvent(
+            event as unknown as Partial<EnhancedUserEvent>,
+          );
           processedEvents.push(enhancedEvent);
 
           // 添加到指标引擎
@@ -213,13 +215,18 @@ export class DataPipeline {
     };
 
     // 地理位置增强（基于IP地址）
-    if (!enhancedEvent.location && event.ip) {
+    if (!enhancedEvent.location && (event as { ip?: string }).ip) {
       enhancedEvent.location = await this.getLocationFromIP();
     }
 
     // 设备信息增强
     if (!enhancedEvent.device && enhancedEvent.userAgent) {
-      enhancedEvent.device = this.parseDeviceInfo(enhancedEvent.userAgent);
+      const deviceInfo = this.parseDeviceInfo(enhancedEvent.userAgent);
+      enhancedEvent.device = {
+        type: deviceInfo.type as "mobile" | "tablet" | "desktop",
+        os: deviceInfo.os,
+        browser: deviceInfo.browser,
+      };
     }
 
     // 数据验证

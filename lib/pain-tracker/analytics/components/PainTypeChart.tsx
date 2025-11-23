@@ -83,7 +83,7 @@ export const PainTypeChart: React.FC<PainTypeChartProps> = ({
 
       // Override legend display if showLegend is false
       if (!showLegend && options.plugins?.legend) {
-        options.plugins.legend.display = false;
+        (options.plugins.legend as { display?: boolean }).display = false;
       }
 
       // Enhanced tooltip for better context

@@ -150,7 +150,7 @@ export class MigrationService {
         }
       }
 
-      return migratedData;
+      return migratedData as StoredData;
     } catch (error) {
       if (error instanceof PainTrackerError) {
         throw error;
@@ -189,12 +189,18 @@ export class MigrationService {
       if (Array.isArray(legacyData)) {
         // Direct array of records
         legacyRecords = legacyData;
-      } else if (legacyData && Array.isArray(legacyData.records)) {
+      } else if (
+        legacyData &&
+        Array.isArray((legacyData as { records?: unknown }).records)
+      ) {
         // Wrapped in records property
-        legacyRecords = legacyData.records;
-      } else if (legacyData && legacyData.painEntries) {
+        legacyRecords = (legacyData as { records: unknown[] }).records;
+      } else if (
+        legacyData &&
+        (legacyData as { painEntries?: unknown }).painEntries
+      ) {
         // Old format with painEntries
-        legacyRecords = legacyData.painEntries;
+        legacyRecords = (legacyData as { painEntries: unknown[] }).painEntries;
       } else {
         // No legacy data found
         legacyRecords = [];
@@ -213,18 +219,21 @@ export class MigrationService {
           ),
           painTypes: this.migratePainTypes(legacyRecord),
           locations: this.migrateLocations(legacyRecord),
-          symptoms: this.migrateSymptoms(legacyRecord.symptoms || []),
+          symptoms: this.migrateSymptoms(
+            (legacyRecord.symptoms as unknown[]) || [],
+          ),
           menstrualStatus: this.migrateMenstrualStatus(
             legacyRecord.menstrualStatus,
           ),
           medications: this.migrateMedications(
-            legacyRecord.treatments || legacyRecord.medications || [],
+            ((legacyRecord.treatments ||
+              legacyRecord.medications) as unknown[]) || [],
           ),
           effectiveness: this.normalizeEffectiveness(
             legacyRecord.effectiveness || 0,
           ),
           lifestyleFactors: this.migrateLifestyleFactors(legacyRecord),
-          notes: legacyRecord.notes || "",
+          notes: (legacyRecord.notes as string) || "",
           createdAt: legacyRecord.createdAt
             ? new Date(legacyRecord.createdAt)
             : now,
@@ -358,7 +367,7 @@ export class MigrationService {
     legacyRecord: Record<string, unknown>,
   ): string {
     if (legacyRecord.time) {
-      return legacyRecord.time;
+      return legacyRecord.time as string;
     }
 
     if (legacyRecord.createdAt) {
@@ -398,7 +407,7 @@ export class MigrationService {
 
     // Check various legacy fields that might contain pain type info
     if (legacyRecord.painType) {
-      painTypes.push(this.mapLegacyPainType(legacyRecord.painType));
+      painTypes.push(this.mapLegacyPainType(legacyRecord.painType as string));
     }
 
     if (legacyRecord.painTypes && Array.isArray(legacyRecord.painTypes)) {
@@ -438,7 +447,7 @@ export class MigrationService {
     const locations: string[] = [];
 
     if (legacyRecord.location) {
-      locations.push(this.mapLegacyLocation(legacyRecord.location));
+      locations.push(this.mapLegacyLocation(legacyRecord.location as string));
     }
 
     if (legacyRecord.locations && Array.isArray(legacyRecord.locations)) {
@@ -585,7 +594,9 @@ export class MigrationService {
 
     // Try to extract any lifestyle information from notes or other fields
     if (legacyRecord.notes) {
-      const stressMatch = legacyRecord.notes.match(/stress.*?(\d+)/i);
+      const stressMatch = (legacyRecord.notes as string).match(
+        /stress.*?(\d+)/i,
+      );
       if (stressMatch) {
         factors.push({
           factor: "stress_level",

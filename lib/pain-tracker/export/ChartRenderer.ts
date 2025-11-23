@@ -157,8 +157,9 @@ export class ChartRenderer {
 
         import("chart.js")
           .then(({ Chart }) => {
-            const chartData =
-              ChartUtils.formatPainDistributionData(mockRecords);
+            const chartData = ChartUtils.formatPainDistributionData(
+              mockRecords as PainRecord[],
+            );
             const chartOptions = {
               ...ChartUtils.getPainDistributionOptions(false),
               responsive: false,

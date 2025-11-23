@@ -154,16 +154,19 @@ export class ChartPerformanceOptimizer
 
     // Optimize tooltips for very large datasets
     if (dataSize > this.optimizationSettings.tooltipOptimizeThreshold) {
-      optimizedOptions.plugins = {
-        ...(optimizedOptions.plugins &&
-        typeof optimizedOptions.plugins === "object"
+      const plugins =
+        optimizedOptions.plugins && typeof optimizedOptions.plugins === "object"
           ? optimizedOptions.plugins
-          : {}),
+          : {};
+      const tooltip =
+        (plugins as { tooltip?: unknown })?.tooltip &&
+        typeof (plugins as { tooltip?: unknown }).tooltip === "object"
+          ? (plugins as { tooltip?: unknown }).tooltip
+          : {};
+      optimizedOptions.plugins = {
+        ...plugins,
         tooltip: {
-          ...(optimizedOptions.plugins?.tooltip &&
-          typeof optimizedOptions.plugins.tooltip === "object"
-            ? optimizedOptions.plugins.tooltip
-            : {}),
+          ...tooltip,
           enabled: false, // Disable tooltips for performance
           external: this.createOptimizedTooltip, // Use custom lightweight tooltip
         },
@@ -187,41 +190,20 @@ export class ChartPerformanceOptimizer
           ? (xScale as { ticks?: unknown }).ticks
           : {};
       optimizedOptions.scales = {
-        ...scales,
+        ...(scales as Record<string, unknown>),
         x: {
-          ...xScale,
+          ...(xScale as Record<string, unknown>),
           ticks: {
-            ...xTicks,
+            ...(xTicks as Record<string, unknown>),
             maxTicksLimit: 10, // Limit number of x-axis ticks
             autoSkip: true,
             autoSkipPadding: 10,
           },
         },
         y: {
-          ...((scales as { y?: unknown })?.y &&
-          typeof (scales as { y?: unknown }).y === "object"
-            ? (scales as { y?: unknown }).y
-            : {}),
+          ...(yScale as Record<string, unknown>),
           ticks: {
-            ...((
-              ((scales as { y?: unknown })?.y &&
-              typeof (scales as { y?: unknown }).y === "object"
-                ? (scales as { y?: unknown }).y
-                : {}) as { ticks?: unknown }
-            )?.ticks &&
-            typeof (
-              ((scales as { y?: unknown })?.y &&
-              typeof (scales as { y?: unknown }).y === "object"
-                ? (scales as { y?: unknown }).y
-                : {}) as { ticks?: unknown }
-            ).ticks === "object"
-              ? (
-                  ((scales as { y?: unknown })?.y &&
-                  typeof (scales as { y?: unknown }).y === "object"
-                    ? (scales as { y?: unknown }).y
-                    : {}) as { ticks?: unknown }
-                ).ticks
-              : {}),
+            ...(yTicks as Record<string, unknown>),
             maxTicksLimit: 8, // Limit number of y-axis ticks
           },
         },
@@ -236,7 +218,7 @@ export class ChartPerformanceOptimizer
           ? optimizedOptions.interaction
           : {};
       optimizedOptions.interaction = {
-        ...interaction,
+        ...(interaction as Record<string, unknown>),
         intersect: false,
         mode: "nearest",
       };
@@ -380,7 +362,11 @@ export class ChartPerformanceOptimizer
       data.length > this.performanceThresholds.xlarge
     ) {
       const bucketSize = Math.ceil(data.length / maxPoints);
-      data = this.createDataBuckets(data as TrendPoint[], bucketSize);
+      const bucketedData = this.createDataBuckets(
+        data as TrendPoint[],
+        bucketSize,
+      );
+      data = bucketedData as unknown as ChartDataPoint[];
     }
 
     // Then apply sampling

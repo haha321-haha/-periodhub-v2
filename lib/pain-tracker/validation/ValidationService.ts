@@ -217,7 +217,7 @@ export class ValidationService implements ValidationServiceInterface {
     errors: ValidationError[],
   ): void {
     if (painLevel !== undefined && painLevel !== null) {
-      if (!this.validatePainLevel(painLevel)) {
+      if (!this.validatePainLevel(painLevel as number)) {
         errors.push({
           field: "painLevel",
           message: `Pain level must be between ${VALIDATION_RULES.painLevel.min} and ${VALIDATION_RULES.painLevel.max}`,
@@ -232,7 +232,7 @@ export class ValidationService implements ValidationServiceInterface {
    */
   private validateDateField(date: unknown, errors: ValidationError[]): void {
     if (date !== undefined && date !== null) {
-      if (!this.validateDate(date)) {
+      if (!this.validateDate(date as string)) {
         errors.push({
           field: "date",
           message: "Invalid date format or date is in the future",
@@ -247,7 +247,7 @@ export class ValidationService implements ValidationServiceInterface {
    */
   private validateTimeField(time: unknown, errors: ValidationError[]): void {
     if (time !== undefined && time !== null) {
-      if (!this.validateTime(time)) {
+      if (!this.validateTime(time as string)) {
         errors.push({
           field: "time",
           message: "Invalid time format. Use HH:mm format (e.g., 14:30)",

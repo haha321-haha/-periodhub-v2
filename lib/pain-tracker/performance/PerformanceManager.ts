@@ -265,8 +265,20 @@ export class PerformanceManager implements PerformanceManagerInterface {
         );
 
       return {
-        memoryOptimization,
-        storageOptimization,
+        memoryOptimization: {
+          freedMemory:
+            (memoryOptimization as { freedMemory?: number }).freedMemory || 0,
+          chartInstancesRemoved:
+            (memoryOptimization as { chartInstancesRemoved?: number })
+              .chartInstancesRemoved || 0,
+        },
+        storageOptimization: {
+          freedSpace:
+            (storageOptimization as { freedSpace?: number }).freedSpace || 0,
+          recordsRemoved:
+            (storageOptimization as { recordsRemoved?: number })
+              .recordsRemoved || 0,
+        },
         dataCleanup,
         totalTimeSaved,
         performanceImprovement,

@@ -205,6 +205,7 @@ export default async function HomePage({
     structuredData = await getStructuredData(validLocale);
   } catch (error) {
     // 记录原始错误
+    // eslint-disable-next-line no-console
     console.error(
       `[HomePage] Failed to get translations for locale ${validLocale}:`,
       error,
@@ -218,9 +219,11 @@ export default async function HomePage({
         namespace: "anchorTexts",
       });
       structuredData = await getStructuredData("zh");
+      // eslint-disable-next-line no-console
       console.log("[HomePage] Fallback to zh locale succeeded");
     } catch (fallbackError) {
       // 如果回退也失败，记录错误并抛出
+      // eslint-disable-next-line no-console
       console.error(
         "[HomePage] Fallback to zh locale also failed:",
         fallbackError,

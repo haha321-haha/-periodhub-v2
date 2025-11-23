@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import { defaultLocale, locales, type Locale } from "@/i18n/constants";
 import { Metadata } from "next";
@@ -125,163 +124,10 @@ async function detectLocaleFromHeaders(): Promise<Locale> {
 
 export default async function RootPage() {
   try {
-    // 如果是Vercel预览请求，返回静态页面以便生成预览截图
+    // 检测是否是Vercel预览请求
     const isPreview = await isVercelPreviewRequest();
 
-    if (isPreview) {
-      // 返回一个包含完整内容的静态预览页面，供Vercel生成截图
-      const baseUrl =
-        process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
-
-      return (
-        <html lang="zh">
-          <head>
-            <meta charSet="utf-8" />
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1"
-            />
-            <title>PeriodHub - 专业痛经缓解和月经健康管理平台</title>
-            <meta
-              name="description"
-              content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。"
-            />
-
-            {/* Open Graph 标签用于预览 */}
-            <meta
-              property="og:title"
-              content="PeriodHub - 专业痛经缓解和月经健康管理平台"
-            />
-            <meta
-              property="og:description"
-              content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。"
-            />
-            <meta
-              property="og:image"
-              content={`${baseUrl}/images/hero-bg.jpg`}
-            />
-            <meta property="og:type" content="website" />
-            <meta property="og:url" content={baseUrl} />
-
-            {/* Twitter Card 标签 */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta
-              name="twitter:title"
-              content="PeriodHub - 专业痛经缓解和月经健康管理平台"
-            />
-            <meta
-              name="twitter:description"
-              content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。"
-            />
-            <meta
-              name="twitter:image"
-              content={`${baseUrl}/images/hero-bg.jpg`}
-            />
-
-            {/* 延迟重定向，给截图工具足够时间（3-5秒） */}
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  (function() {
-                    try {
-                      // 检测语言偏好
-                      const acceptLanguage = navigator.language || navigator.userLanguage || 'zh';
-                      const locale = acceptLanguage.toLowerCase().startsWith('zh') ? 'zh' : 'en';
-
-                      // 延迟重定向，给截图工具足够时间
-                      setTimeout(function() {
-                        try {
-                          // 使用 location.href 而不是 location.replace，避免某些浏览器问题
-                          window.location.href = '/' + locale;
-                        } catch (e) {
-                          // 如果重定向失败，尝试使用 replace
-                          try {
-                            window.location.replace('/' + locale);
-                          } catch (e2) {
-                            // 最后的备用方案：直接跳转到默认语言
-                            window.location.href = '/zh';
-                          }
-                        }
-                      }, 3000); // 3秒后重定向，给截图工具足够时间
-                    } catch (e) {
-                      // 如果检测失败，直接跳转到默认语言
-                      setTimeout(function() {
-                        window.location.href = '/zh';
-                      }, 3000);
-                    }
-                  })();
-                `,
-              }}
-            />
-          </head>
-          <body
-            style={{
-              margin: 0,
-              padding: 0,
-              fontFamily:
-                "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
-              background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-              minHeight: "100vh",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
-            }}
-          >
-            <div
-              style={{
-                textAlign: "center",
-                padding: "2rem",
-                maxWidth: "600px",
-              }}
-            >
-              <h1
-                style={{
-                  fontSize: "3rem",
-                  marginBottom: "1rem",
-                  fontWeight: "bold",
-                }}
-              >
-                PeriodHub
-              </h1>
-              <h2
-                style={{
-                  fontSize: "1.5rem",
-                  marginBottom: "1rem",
-                  opacity: 0.9,
-                }}
-              >
-                专业痛经缓解和月经健康管理平台
-              </h2>
-              <p
-                style={{
-                  fontSize: "1.2rem",
-                  opacity: 0.8,
-                  lineHeight: 1.6,
-                  marginBottom: "2rem",
-                }}
-              >
-                提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。
-              </p>
-              <div
-                style={{
-                  marginTop: "2rem",
-                  padding: "1rem",
-                  backgroundColor: "rgba(255,255,255,0.1)",
-                  borderRadius: "8px",
-                }}
-              >
-                <p style={{ fontSize: "1rem", opacity: 0.7 }}>
-                  正在跳转到适合您的语言版本...
-                </p>
-              </div>
-            </div>
-          </body>
-        </html>
-      );
-    }
-
-    // 正常请求：检测用户语言偏好并重定向
+    // 检测用户语言偏好（所有请求都需要）
     const preferredLocale = await detectLocaleFromHeaders();
 
     // 验证 locale 是否有效
@@ -289,12 +135,226 @@ export default async function RootPage() {
       ? preferredLocale
       : defaultLocale;
 
-    // 服务端重定向到检测到的语言版本
-    // redirect 函数会自动处理 307 临时重定向
-    redirect(`/${validLocale}`);
-  } catch {
-    // 如果重定向失败，至少重定向到默认语言
-    // 这不应该发生，但作为最后的后备方案
-    redirect(`/${defaultLocale}`);
+    // 混合方案：所有请求都返回静态HTML页面，使用客户端重定向
+    // 预览请求：延迟5秒重定向（给截图工具足够时间）
+    // 普通请求：延迟0.1秒重定向（用户体验几乎无感）
+    const redirectDelay = isPreview ? 5000 : 100;
+
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
+
+    return (
+      <html lang="zh" data-locale={validLocale}>
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <title>PeriodHub - 专业痛经缓解和月经健康管理平台</title>
+          <meta
+            name="description"
+            content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。基于医学研究的个性化建议，中西医结合的健康方案。"
+          />
+
+          {/* Open Graph 标签用于预览 */}
+          <meta
+            property="og:title"
+            content="PeriodHub - 专业痛经缓解和月经健康管理平台"
+          />
+          <meta
+            property="og:description"
+            content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。"
+          />
+          <meta property="og:image" content={`${baseUrl}/images/hero-bg.jpg`} />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={baseUrl} />
+
+          {/* Twitter Card 标签 */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            name="twitter:title"
+            content="PeriodHub - 专业痛经缓解和月经健康管理平台"
+          />
+          <meta
+            name="twitter:description"
+            content="提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。"
+          />
+          <meta
+            name="twitter:image"
+            content={`${baseUrl}/images/hero-bg.jpg`}
+          />
+
+          {/* 智能延迟重定向：预览请求5秒，普通请求0.1秒 */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function() {
+                  try {
+                    // 使用服务端计算的语言偏好（从data属性获取）
+                    const locale = document.documentElement.getAttribute('data-locale') || 'zh';
+                    const redirectDelay = ${redirectDelay};
+                    const targetUrl = '/' + locale;
+
+                    // 延迟重定向
+                    setTimeout(function() {
+                      try {
+                        // 优先使用 replace，避免浏览器历史记录问题
+                        if (window.location && window.location.replace) {
+                          window.location.replace(targetUrl);
+                        } else if (window.location && window.location.href) {
+                          window.location.href = targetUrl;
+                        } else {
+                          // 最后的备用方案
+                          window.location = targetUrl;
+                        }
+                      } catch (e) {
+                        // 如果重定向失败，尝试使用默认语言
+                        try {
+                          if (window.location && window.location.replace) {
+                            window.location.replace('/zh');
+                          } else if (window.location && window.location.href) {
+                            window.location.href = '/zh';
+                          }
+                        } catch (e2) {
+                          // 完全失败的情况（仅开发环境记录）
+                          if (process.env.NODE_ENV === 'development') {
+                            console.error('Redirect failed:', e2);
+                          }
+                        }
+                      }
+                    }, redirectDelay);
+                  } catch (e) {
+                    // 如果检测失败，直接跳转到默认语言
+                    try {
+                      setTimeout(function() {
+                        if (window.location && window.location.replace) {
+                          window.location.replace('/zh');
+                        } else if (window.location && window.location.href) {
+                          window.location.href = '/zh';
+                        }
+                      }, ${redirectDelay});
+                    } catch (e2) {
+                      if (process.env.NODE_ENV === 'development') {
+                        console.error('Default redirect failed:', e2);
+                      }
+                    }
+                  }
+                })();
+              `,
+            }}
+          />
+        </head>
+        <body
+          style={{
+            margin: 0,
+            padding: 0,
+            fontFamily:
+              "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "white",
+          }}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              padding: "2rem",
+              maxWidth: "600px",
+            }}
+          >
+            <h1
+              style={{
+                fontSize: "3rem",
+                marginBottom: "1rem",
+                fontWeight: "bold",
+              }}
+            >
+              PeriodHub
+            </h1>
+            <h2
+              style={{
+                fontSize: "1.5rem",
+                marginBottom: "1rem",
+                opacity: 0.9,
+              }}
+            >
+              专业痛经缓解和月经健康管理平台
+            </h2>
+            <p
+              style={{
+                fontSize: "1.2rem",
+                opacity: 0.8,
+                lineHeight: 1.6,
+                marginBottom: "2rem",
+              }}
+            >
+              提供42篇专业文章、8个实用工具，帮助女性科学管理月经健康，快速缓解痛经。
+            </p>
+            <div
+              style={{
+                marginTop: "2rem",
+                padding: "1rem",
+                backgroundColor: "rgba(255,255,255,0.1)",
+                borderRadius: "8px",
+              }}
+            >
+              <p style={{ fontSize: "1rem", opacity: 0.7 }}>
+                正在跳转到适合您的语言版本...
+              </p>
+            </div>
+          </div>
+        </body>
+      </html>
+    );
+  } catch (error) {
+    // 如果发生错误，返回一个简单的错误页面
+    if (process.env.NODE_ENV === "development") {
+      // eslint-disable-next-line no-console
+      console.error("[RootPage] Error:", error);
+    }
+
+    // 返回一个包含重定向的简单错误页面
+    return (
+      <html lang="zh" data-locale={defaultLocale}>
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta httpEquiv="refresh" content={`1;url=/${defaultLocale}`} />
+          <title>Redirecting...</title>
+        </head>
+        <body
+          style={{
+            margin: 0,
+            padding: 0,
+            fontFamily:
+              "system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif",
+            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "white",
+          }}
+        >
+          <div style={{ textAlign: "center", padding: "2rem" }}>
+            <p style={{ fontSize: "1.2rem" }}>正在重定向...</p>
+          </div>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                setTimeout(function() {
+                  try {
+                    window.location.replace('/${defaultLocale}');
+                  } catch (e) {
+                    window.location.href = '/${defaultLocale}';
+                  }
+                }, 100);
+              `,
+            }}
+          />
+        </body>
+      </html>
+    );
   }
 }

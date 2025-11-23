@@ -240,24 +240,6 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
           t("tags.menstrualMassage"),
           t("tags.painMassage"),
         ],
-        "hormone-testing-guide": [
-          t("tags.massage"),
-          t("tags.acupressure"),
-          t("tags.medical"),
-          t("tags.examination"),
-        ],
-        "nutritional-analysis": [
-          t("tags.massage"),
-          t("tags.acupressure"),
-          t("tags.nutrition"),
-          t("tags.health"),
-        ],
-        "exercise-program": [
-          t("tags.massage"),
-          t("tags.acupressure"),
-          t("tags.exercise"),
-          t("tags.exercise"),
-        ],
 
         // 止痛药相关
         "reading-list-pdf": [
@@ -303,7 +285,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
           t("tags.plan"),
           t("tags.preparation"),
         ],
-        "magnesium-gut-health-guide": [
+        "magnesium-gut-health-menstrual-pain-guide": [
           t("tags.nutrition"),
           t("tags.health"),
           t("tags.learning"),
@@ -493,7 +475,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
             [
               "healthy-habits-checklist",
               "menstrual-cycle-nutrition-plan",
-              "magnesium-gut-health-guide",
+              "magnesium-gut-health-menstrual-pain-guide",
               "zhan-zhuang-baduanjin-illustrated-guide",
               "parent-communication-guide",
             ].includes(pdf.id),
@@ -654,9 +636,6 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
           ...PDF_RESOURCES.filter((pdf) =>
             [
               "natural-therapy-assessment",
-              "hormone-testing-guide",
-              "nutritional-analysis",
-              "exercise-program",
               "teacher-health-manual",
               "teacher-collaboration-handbook",
             ].includes(pdf.id),

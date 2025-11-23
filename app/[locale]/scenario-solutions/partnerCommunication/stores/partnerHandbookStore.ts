@@ -617,7 +617,7 @@ export const usePartnerHandbookStore = create<PartnerHandbookStore>()(
             completedTasks: [],
           };
 
-          set(() => ({
+          set((state) => ({
             trainingSessions: [...state.trainingSessions, session],
           }));
         },

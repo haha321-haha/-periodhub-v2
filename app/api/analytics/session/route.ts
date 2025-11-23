@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
         storedSessions: sessionStore.length,
       },
     });
-  } catch {
+  } catch (error) {
     // Session data processing error
     return NextResponse.json<ApiResponse>(
       {
@@ -137,7 +137,7 @@ export async function GET(request: NextRequest) {
         returnedCount: limitedSessions.length,
       },
     });
-  } catch {
+  } catch (error) {
     // Session data retrieval error
     return NextResponse.json<ApiResponse>(
       {
@@ -178,13 +178,13 @@ export async function DELETE(request: NextRequest) {
         },
       });
     }
-  } catch {
+  } catch (error) {
     // Session data deletion error
     return NextResponse.json<ApiResponse>(
       {
         success: false,
         message: "删除数据失败",
-        error: "UNKNOWN_ERROR",
+        error: error instanceof Error ? error.message : "UNKNOWN_ERROR",
       },
       { status: 500 },
     );

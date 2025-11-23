@@ -14,7 +14,6 @@ export interface TrainingWeek {
   days: TrainingDay[];
   expanded?: boolean;
 }
-import { logWarn } from "@/lib/debug-logger";
 
 export const trainingCampConfig: TrainingWeek[] = [
   {

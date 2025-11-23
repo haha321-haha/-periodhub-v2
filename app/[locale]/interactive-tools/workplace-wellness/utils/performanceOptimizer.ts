@@ -4,7 +4,7 @@
  */
 
 import { useCallback, useMemo, useRef, useEffect } from "react";
-import { logInfo, logWarn } from "@/lib/debug-logger";
+import { logInfo, logWarn, logError } from "@/lib/debug-logger";
 
 /**
  * 性能监控器

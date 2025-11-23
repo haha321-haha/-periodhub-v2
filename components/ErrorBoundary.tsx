@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { logInfo } from "@/lib/debug-logger";
 
 interface ErrorBoundaryState {
   hasError: boolean;

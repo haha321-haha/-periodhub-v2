@@ -6,6 +6,10 @@
 "use client";
 
 import React, { useState } from "react";
+
+// 错误处理工具函数
+const formatErrorMessage = (error: unknown) =>
+  error instanceof Error ? error.message : String(error ?? "Unknown error");
 import {
   generateRecommendations,
   generateColdStartRecommendations,

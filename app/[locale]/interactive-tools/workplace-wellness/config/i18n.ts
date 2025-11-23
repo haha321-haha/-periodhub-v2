@@ -116,13 +116,10 @@ export const translationKeys = {
   },
 };
 
-import { logWarn } from "@/lib/debug-logger";
-
 // 翻译函数工厂 - 基于HVsLYEp的t函数设计
-export type TranslationDictionary = Record<
-  string,
-  string | TranslationDictionary
->;
+export interface TranslationDictionary {
+  [key: string]: string | TranslationDictionary;
+}
 
 export function createTranslationFunction(translations: TranslationDictionary) {
   return (key: string): string => {

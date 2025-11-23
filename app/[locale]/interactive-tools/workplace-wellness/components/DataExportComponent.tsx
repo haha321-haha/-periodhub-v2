@@ -228,12 +228,44 @@ export default function DataExportComponent() {
       const data = generateExportData();
 
       // 应用隐私保护
-      // Type assertion needed because ExportPayload has additional fields (exportDate, locale, version)
-      const protectedData = privacyManager.maskSensitiveData(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        data as any,
+      // ExportPayload 包含额外的元数据字段（exportDate, locale, version），
+      // 但 maskSensitiveData 只需要核心数据字段，所以我们需要提取核心数据部分
+      // 使用类型断言将 ExportPayload 转换为 MaskablePayload 兼容类型
+      type MaskableData =
+        | { data: PeriodRecord[] }
+        | { data: NutritionRecommendation[] }
+        | { period?: PeriodRecord[]; nutrition?: NutritionRecommendation[] };
+
+      const maskableData: MaskableData =
+        data.type === "all"
+          ? { period: data.data.period, nutrition: data.data.nutrition }
+          : { data: data.data };
+
+      const maskedCoreData = privacyManager.maskSensitiveData(
+        maskableData as Parameters<typeof privacyManager.maskSensitiveData>[0],
         exportConfig.exportType,
-      ) as typeof data;
+      );
+
+      // 将脱敏后的核心数据重新组合回 ExportPayload 格式
+      const protectedData: ExportPayload =
+        data.type === "all"
+          ? {
+              ...data,
+              data: {
+                period:
+                  "period" in maskedCoreData
+                    ? maskedCoreData.period || []
+                    : data.data.period,
+                nutrition:
+                  "nutrition" in maskedCoreData
+                    ? maskedCoreData.nutrition || []
+                    : data.data.nutrition,
+              },
+            }
+          : {
+              ...data,
+              data: "data" in maskedCoreData ? maskedCoreData.data : data.data,
+            };
 
       // 模拟导出延迟
       await new Promise((resolve) => setTimeout(resolve, 2000));

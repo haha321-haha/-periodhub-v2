@@ -86,8 +86,21 @@ export default function GlobalError({
             }}
           >
             <button
-              onClick={() => {
-                reset();
+              onClick={(e) => {
+                e.preventDefault();
+                try {
+                  reset();
+                } catch {
+                  // 如果reset失败，使用页面刷新
+                  window.location.reload();
+                }
+              }}
+              onMouseDown={(e) => {
+                // 添加鼠标按下时的视觉反馈
+                e.currentTarget.style.opacity = "0.8";
+              }}
+              onMouseUp={(e) => {
+                e.currentTarget.style.opacity = "1";
               }}
               style={{
                 background: "#111827",
@@ -97,6 +110,7 @@ export default function GlobalError({
                 border: "none",
                 cursor: "pointer",
                 fontSize: "14px",
+                transition: "opacity 0.2s",
               }}
               type="button"
             >
@@ -104,6 +118,10 @@ export default function GlobalError({
             </button>
             <a
               href="/zh"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = "/zh";
+              }}
               style={{
                 background: "#7c3aed",
                 color: "#fff",
@@ -112,12 +130,18 @@ export default function GlobalError({
                 textDecoration: "none",
                 fontSize: "14px",
                 display: "inline-block",
+                cursor: "pointer",
+                transition: "opacity 0.2s",
               }}
             >
               返回首页
             </a>
             <a
               href="/en"
+              onClick={(e) => {
+                e.preventDefault();
+                window.location.href = "/en";
+              }}
               style={{
                 background: "#6b7280",
                 color: "#fff",
@@ -126,6 +150,8 @@ export default function GlobalError({
                 textDecoration: "none",
                 fontSize: "14px",
                 display: "inline-block",
+                cursor: "pointer",
+                transition: "opacity 0.2s",
               }}
             >
               Go to English

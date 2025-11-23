@@ -105,13 +105,17 @@ export function createLazyComponent<T extends ComponentType<unknown>>(
           这是 React.lazy 和 TypeScript 泛型结合时的已知限制。
           虽然我们已经使用了 LazyExoticComponent<T> 类型断言和 ExtractComponentProps，
           但 TypeScript 仍然无法完全推断 LazyExoticComponent 的 props 类型。
-
+          
           这个错误是安全的，因为：
           1. componentProps 已经通过 ExtractComponentProps<T> 进行了类型提取
           2. LazyComponent 已经通过 LazyExoticComponent<T> 进行了类型断言
           3. 运行时行为是正确的
+          
+          使用 React.ComponentProps<T> 作为中间类型来避免类型推断问题
         */}
-        <LazyComponent {...(componentProps as ExtractComponentProps<T>)} />
+        <LazyComponent
+          {...(componentProps as unknown as React.ComponentProps<T>)}
+        />
       </DelayedSuspense>
     );
   };

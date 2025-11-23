@@ -16,10 +16,22 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "immediateReliefPage" });
 
+  // 获取SEO关键词，支持多种路径
+  let seoKeywords: string[] = [];
+  try {
+    seoKeywords = t.raw("metadata.seoKeywords") || [];
+  } catch {
+    try {
+      seoKeywords = t.raw("seoKeywords") || [];
+    } catch {
+      seoKeywords = [];
+    }
+  }
+  
   return {
     title: t("metadata.title"),
     description: t("metadata.description"),
-    keywords: t.raw("seoKeywords").join(", "),
+    keywords: Array.isArray(seoKeywords) ? seoKeywords.join(", ") : "",
     alternates: {
       canonical: `${
         process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"

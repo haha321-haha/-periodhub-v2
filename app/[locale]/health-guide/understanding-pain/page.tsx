@@ -3,8 +3,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Locale, locales } from "@/i18n";
 import Breadcrumb from "@/components/Breadcrumb";
-import PainPatternEducationContent from "@/components/PainPatternEducationContent";
+import dynamic from "next/dynamic";
 import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
+
+// 动态导入客户端组件
+const PainPatternEducationContent = dynamic(
+  () => import("@/components/PainPatternEducationContent"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />
+    ),
+  },
+);
 
 // Generate metadata for the page
 export async function generateMetadata({

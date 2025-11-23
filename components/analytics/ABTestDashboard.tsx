@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { getUserABTestVariants } from "@/hooks/useABTest";
 import {
   getAllCTATrackingData,
@@ -62,19 +62,7 @@ export default function ABTestDashboard() {
   // 获取当前用户的A/B测试变体
   const userVariants = getUserABTestVariants();
 
-  useEffect(() => {
-    loadMetrics();
-
-    // 每30秒自动刷新数据
-    const interval = setInterval(() => {
-      loadMetrics();
-      setLastUpdate(new Date());
-    }, 30000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const loadMetrics = () => {
+  const loadMetrics = useCallback(() => {
     setIsLoading(true);
 
     try {
@@ -99,7 +87,19 @@ export default function ABTestDashboard() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    loadMetrics();
+
+    // 每30秒自动刷新数据
+    const interval = setInterval(() => {
+      loadMetrics();
+      setLastUpdate(new Date());
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, [loadMetrics]);
 
   const analyzeEvents = (events: CTAEventData[]): ABTestMetrics[] => {
     const metricsMap = new Map<string, ABTestMetrics>();

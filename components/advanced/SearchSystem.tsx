@@ -62,6 +62,7 @@ export const useSearch = (
   const { debounceMs = 300 } = config;
 
   // 防抖搜索
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSearch = useCallback(
     debounce(async (searchQuery: string, searchFilters: SearchFilters) => {
       if (!searchQuery.trim()) {

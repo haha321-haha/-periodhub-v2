@@ -207,7 +207,7 @@ export function StressRadarChart({
       const value = Math.round((score / 100) * 3 * 10) / 10; // 转换回0-3范围
       ctx.fillText(value.toString(), x, y);
     });
-  }, [scores]);
+  }, [scores, canvasSize, t]);
 
   return (
     <div className={`bg-white rounded-xl p-6 shadow-sm border ${className}`}>

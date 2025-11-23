@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import {
   Search,
   Clock,
@@ -164,25 +164,31 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
   }, [searchTerm, searchSuggestions]);
 
   // 类别标题翻译 - 使用正确的翻译键
-  const getCategoryTitle = (key: string) => {
-    const titles = {
-      immediate: t("categories.immediate"),
-      preparation: t("categories.preparation"),
-      learning: t("categories.learning"),
-      longterm: t("categories.management"),
-    };
-    return titles[key as keyof typeof titles] || key;
-  };
+  const getCategoryTitle = useCallback(
+    (key: string) => {
+      const titles = {
+        immediate: t("categories.immediate"),
+        preparation: t("categories.preparation"),
+        learning: t("categories.learning"),
+        longterm: t("categories.management"),
+      };
+      return titles[key as keyof typeof titles] || key;
+    },
+    [t],
+  );
 
-  const getCategorySubtitle = (key: string) => {
-    const subtitles = {
-      immediate: t("subtitles.immediate"),
-      preparation: t("subtitles.preparation"),
-      learning: t("subtitles.learning"),
-      longterm: t("subtitles.management"),
-    };
-    return subtitles[key as keyof typeof subtitles] || key;
-  };
+  const getCategorySubtitle = useCallback(
+    (key: string) => {
+      const subtitles = {
+        immediate: t("subtitles.immediate"),
+        preparation: t("subtitles.preparation"),
+        learning: t("subtitles.learning"),
+        longterm: t("subtitles.management"),
+      };
+      return subtitles[key as keyof typeof subtitles] || key;
+    },
+    [t],
+  );
 
   // 从统一配置获取PDF资源并转换为组件格式
   const convertPDFToResource = (pdfResource: ConfigPDFResource): Resource => {
@@ -371,552 +377,558 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
   };
 
   // 动态生成分类资源
-  const generateCategoryResources = (categoryId: string) => {
-    const targetCount = getCategoryResourceCount(categoryId);
-    const baseResources = {
-      immediate: [
-        createArticleResource(
-          "immediateRelief",
-          "fiveMinuteRelief",
-          5,
-          "highest",
-          [t("tags.pain"), t("tags.relief"), t("tags.quick")],
-          "5-minute-period-pain-relief",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "painDifferential",
-          25,
-          "highest",
-          [t("tags.examination"), t("tags.health"), t("tags.diagnosis")],
-          "menstrual-pain-vs-other-abdominal-pain-guide",
-        ),
-        createArticleResource(
-          "immediateRelief",
-          "heatTherapy",
-          8,
-          "high",
-          [t("tags.heatTherapy"), t("tags.method"), t("tags.science")],
-          "heat-therapy-complete-guide",
-        ),
-        createArticleResource(
-          "naturalTherapies",
-          "physicalTherapy",
-          12,
-          "high",
-          [t("tags.pain"), t("tags.health"), t("tags.relief")],
-          "menstrual-back-pain-comprehensive-care-guide",
-        ),
-        createArticleResource(
-          "naturalTherapies",
-          "traditionalMethods",
-          12,
-          "high",
-          [t("tags.medication"), t("tags.medication"), t("tags.relief")],
-          "ginger-menstrual-pain-relief-guide",
-        ),
-        // === 新增：精油芳香疗法文章 ===
-        createArticleResource(
-          "naturalTherapies",
-          "essentialOilsAromatherapyGuide",
-          25,
-          "highest",
-          [
-            "精油",
-            "芳疗",
-            "芳香疗法",
-            "薰衣草",
-            "essential oils",
-            "aromatherapy",
-            "疼痛",
-            "缓解",
-            "自然疗法",
-            "治疗",
-          ],
-          "essential-oils-aromatherapy-menstrual-pain-guide",
-        ),
-        ...PDF_RESOURCES.filter((pdf) =>
-          [
-            "pain-tracking-form",
-            "campus-emergency-checklist",
-            "specific-menstrual-pain-management-guide",
-          ].includes(pdf.id),
-        ).map(convertPDFToResource),
-      ],
-      preparation: [
-        createArticleResource(
-          "nutritionHealth",
-          "preventiveCare",
-          22,
-          "highest",
-          [t("tags.prevention"), t("tags.cycle"), t("tags.evidenceBased")],
-          "menstrual-preventive-care-complete-plan",
-        ),
-        createArticleResource(
-          "nutritionHealth",
-          "sleepQuality",
-          20,
-          "highest",
-          [t("tags.health"), t("tags.plan"), t("tags.health")],
-          "comprehensive-menstrual-sleep-quality-guide",
-        ),
-        createArticleResource(
-          "nutritionHealth",
-          "stressManagement",
-          22,
-          "highest",
-          [t("tags.management"), t("tags.health"), t("tags.management")],
-          "menstrual-stress-management-complete-guide",
-        ),
-        createArticleResource(
-          "naturalTherapies",
-          "zhanZhuang",
-          18,
-          "high",
-          [t("tags.exercise"), t("tags.baduanjin"), t("tags.relief")],
-          "zhan-zhuang-baduanjin-for-menstrual-pain-relief",
-        ),
-        // 注意：膳食补充剂和草药疗法文章已移除，因为内容文件尚未创建
-        // 将在P1或P2阶段创建内容后重新添加
-        // TODO: 创建 dietary-supplements-menstrual-pain-guide.md
-        // TODO: 创建 herbal-remedies-menstrual-pain-guide.md
-        ...PDF_RESOURCES.filter((pdf) =>
-          [
-            "healthy-habits-checklist",
-            "menstrual-cycle-nutrition-plan",
-            "magnesium-gut-health-guide",
-            "zhan-zhuang-baduanjin-illustrated-guide",
-            "parent-communication-guide",
-          ].includes(pdf.id),
-        ).map(convertPDFToResource),
-      ],
-      learning: [
-        createArticleResource(
-          "understandingEducation",
-          "lifecycleAnalysis",
-          24,
-          "highest",
-          [t("tags.cycle"), t("tags.cycle"), t("tags.management")],
-          "womens-lifecycle-menstrual-pain-analysis",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "researchProgress2024",
-          18,
-          "highest",
-          [
-            t("tags.evidenceBased"),
-            t("tags.research"),
-            t("tags.medication"),
-            t("tags.painkiller"),
-            t("tags.nsaid"),
-          ],
-          "menstrual-pain-research-progress-2024",
-        ),
-        createArticleResource(
-          "medicalGuidance",
-          "nsaidProfessionalGuide",
-          25,
-          "highest",
-          [
-            t("tags.nsaid"),
-            t("tags.painkiller"),
-            t("tags.medication"),
-            t("tags.medication"),
-            t("tags.medication"),
-          ],
-          "nsaid-menstrual-pain-professional-guide",
-        ),
-        {
-          type: "article" as const,
-          title:
-            locale === "zh"
-              ? "痛经安全用药全指南：布洛芬/萘普生等NSAIDs使用规范"
-              : "Complete Safe Medication Guide for Dysmenorrhea: Ibuprofen/Naproxen and Other NSAIDs Usage Guidelines",
-          readTime: locale === "zh" ? "20分钟" : "20 min read",
-          priority: "highest" as const,
-          tags: [
-            t("tags.nsaid"),
-            t("tags.painkiller"),
-            t("tags.ibuprofen"),
-            t("tags.medication"),
-            t("tags.medication"),
-            t("tags.medication"),
-          ],
-          id: "medication-guide",
-          slug: "medication-guide",
-        },
-        createArticleResource(
-          "understandingEducation",
-          "painDifferential",
-          25,
-          "highest",
-          [t("tags.diagnosis"), t("tags.diagnosis"), t("tags.emergency")],
-          "menstrual-pain-vs-other-abdominal-pain-guide",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "understandingCycle",
-          25,
-          "high",
-          [t("tags.cycle"), t("tags.education"), t("tags.knowledge")],
-          "understanding-your-cycle",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "insuranceCoverage",
-          25,
-          "high",
-          [
-            t("tags.medical"),
-            t("tags.medical"),
-            t("tags.medical"),
-            t("tags.communication"),
-          ],
-          "us-menstrual-pain-insurance-coverage-guide",
-        ),
-        createArticleResource(
-          "medicalGuidance",
-          "whenToSeeDoctor",
-          10,
-          "highest",
-          [
-            t("tags.seeDoctor"),
-            t("tags.emergency"),
-            t("tags.health"),
-            t("tags.communication"),
-          ],
-          "when-to-see-doctor-period-pain",
-        ),
-        createArticleResource(
-          "medicalGuidance",
-          "medicalCare",
-          15,
-          "high",
-          [
-            t("tags.medical"),
-            t("tags.health"),
-            t("tags.guide"),
-            t("tags.communication"),
-          ],
-          "when-to-seek-medical-care-comprehensive-guide",
-        ),
-        // === 新增：IUD综合指南文章 ===
-        createArticleResource(
-          "medicalGuidance",
-          "comprehensiveIudGuide",
-          25,
-          "highest",
-          [
-            "IUD",
-            "宫内节育器",
-            "节育环",
-            "避孕",
-            "intrauterine device",
-            "contraception",
-            "医疗",
-            "健康",
-            "指南",
-            "预防",
-          ],
-          "comprehensive-iud-guide",
-        ),
-        // === 新增：痛经并发症管理文章 ===
-        createArticleResource(
-          "medicalGuidance",
-          "menstrualPainComplications",
-          20,
-          "high",
-          [
-            "并发症",
-            "子宫内膜异位症",
-            "子宫腺肌症",
-            "子宫肌瘤",
-            "complications",
-            "endometriosis",
-            "adenomyosis",
-            "医疗",
-            "健康",
-            "诊断",
-            "紧急",
-          ],
-          "menstrual-pain-complications-management",
-        ),
-        ...PDF_RESOURCES.filter((pdf) =>
-          [
-            "natural-therapy-assessment",
-            "hormone-testing-guide",
-            "nutritional-analysis",
-            "exercise-program",
-            "teacher-health-manual",
-            "teacher-collaboration-handbook",
-          ].includes(pdf.id),
-        ).map(convertPDFToResource),
-      ],
-      management: [
-        createArticleResource(
-          "specializedGuides",
-          "readingList",
-          35,
-          "medium",
-          ["综合", "因素", "影响"],
-          "recommended-reading-list",
-        ),
-        createArticleResource(
-          "naturalTherapies",
-          "herbalTea",
-          15,
-          "low",
-          ["草药", "茶", "配方"],
-          "herbal-tea-menstrual-pain-relief",
-        ),
-        createArticleResource(
-          "naturalTherapies",
-          "traditionalMethods",
-          25,
-          "low",
-          ["全球", "传统", "现代"],
-          "global-traditional-menstrual-pain-relief",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "understandingCycle",
-          20,
-          "medium",
-          ["档案", "记录", "管理"],
-          "personal-menstrual-health-profile",
-        ),
-      ],
-    };
+  // Note: This function uses t, locale, articlesT, createArticleResource, and convertPDFToResource
+  // These are stable references, so we use eslint-disable for the useMemo dependency warning
+  const generateCategoryResources = useCallback(
+    (categoryId: string) => {
+      const targetCount = getCategoryResourceCount(categoryId);
+      const baseResources = {
+        immediate: [
+          createArticleResource(
+            "immediateRelief",
+            "fiveMinuteRelief",
+            5,
+            "highest",
+            [t("tags.pain"), t("tags.relief"), t("tags.quick")],
+            "5-minute-period-pain-relief",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "painDifferential",
+            25,
+            "highest",
+            [t("tags.examination"), t("tags.health"), t("tags.diagnosis")],
+            "menstrual-pain-vs-other-abdominal-pain-guide",
+          ),
+          createArticleResource(
+            "immediateRelief",
+            "heatTherapy",
+            8,
+            "high",
+            [t("tags.heatTherapy"), t("tags.method"), t("tags.science")],
+            "heat-therapy-complete-guide",
+          ),
+          createArticleResource(
+            "naturalTherapies",
+            "physicalTherapy",
+            12,
+            "high",
+            [t("tags.pain"), t("tags.health"), t("tags.relief")],
+            "menstrual-back-pain-comprehensive-care-guide",
+          ),
+          createArticleResource(
+            "naturalTherapies",
+            "traditionalMethods",
+            12,
+            "high",
+            [t("tags.medication"), t("tags.medication"), t("tags.relief")],
+            "ginger-menstrual-pain-relief-guide",
+          ),
+          // === 新增：精油芳香疗法文章 ===
+          createArticleResource(
+            "naturalTherapies",
+            "essentialOilsAromatherapyGuide",
+            25,
+            "highest",
+            [
+              "精油",
+              "芳疗",
+              "芳香疗法",
+              "薰衣草",
+              "essential oils",
+              "aromatherapy",
+              "疼痛",
+              "缓解",
+              "自然疗法",
+              "治疗",
+            ],
+            "essential-oils-aromatherapy-menstrual-pain-guide",
+          ),
+          ...PDF_RESOURCES.filter((pdf) =>
+            [
+              "pain-tracking-form",
+              "campus-emergency-checklist",
+              "specific-menstrual-pain-management-guide",
+            ].includes(pdf.id),
+          ).map(convertPDFToResource),
+        ],
+        preparation: [
+          createArticleResource(
+            "nutritionHealth",
+            "preventiveCare",
+            22,
+            "highest",
+            [t("tags.prevention"), t("tags.cycle"), t("tags.evidenceBased")],
+            "menstrual-preventive-care-complete-plan",
+          ),
+          createArticleResource(
+            "nutritionHealth",
+            "sleepQuality",
+            20,
+            "highest",
+            [t("tags.health"), t("tags.plan"), t("tags.health")],
+            "comprehensive-menstrual-sleep-quality-guide",
+          ),
+          createArticleResource(
+            "nutritionHealth",
+            "stressManagement",
+            22,
+            "highest",
+            [t("tags.management"), t("tags.health"), t("tags.management")],
+            "menstrual-stress-management-complete-guide",
+          ),
+          createArticleResource(
+            "naturalTherapies",
+            "zhanZhuang",
+            18,
+            "high",
+            [t("tags.exercise"), t("tags.baduanjin"), t("tags.relief")],
+            "zhan-zhuang-baduanjin-for-menstrual-pain-relief",
+          ),
+          // 注意：膳食补充剂和草药疗法文章已移除，因为内容文件尚未创建
+          // 将在P1或P2阶段创建内容后重新添加
+          // TODO: 创建 dietary-supplements-menstrual-pain-guide.md
+          // TODO: 创建 herbal-remedies-menstrual-pain-guide.md
+          ...PDF_RESOURCES.filter((pdf) =>
+            [
+              "healthy-habits-checklist",
+              "menstrual-cycle-nutrition-plan",
+              "magnesium-gut-health-guide",
+              "zhan-zhuang-baduanjin-illustrated-guide",
+              "parent-communication-guide",
+            ].includes(pdf.id),
+          ).map(convertPDFToResource),
+        ],
+        learning: [
+          createArticleResource(
+            "understandingEducation",
+            "lifecycleAnalysis",
+            24,
+            "highest",
+            [t("tags.cycle"), t("tags.cycle"), t("tags.management")],
+            "womens-lifecycle-menstrual-pain-analysis",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "researchProgress2024",
+            18,
+            "highest",
+            [
+              t("tags.evidenceBased"),
+              t("tags.research"),
+              t("tags.medication"),
+              t("tags.painkiller"),
+              t("tags.nsaid"),
+            ],
+            "menstrual-pain-research-progress-2024",
+          ),
+          createArticleResource(
+            "medicalGuidance",
+            "nsaidProfessionalGuide",
+            25,
+            "highest",
+            [
+              t("tags.nsaid"),
+              t("tags.painkiller"),
+              t("tags.medication"),
+              t("tags.medication"),
+              t("tags.medication"),
+            ],
+            "nsaid-menstrual-pain-professional-guide",
+          ),
+          {
+            type: "article" as const,
+            title:
+              locale === "zh"
+                ? "痛经安全用药全指南：布洛芬/萘普生等NSAIDs使用规范"
+                : "Complete Safe Medication Guide for Dysmenorrhea: Ibuprofen/Naproxen and Other NSAIDs Usage Guidelines",
+            readTime: locale === "zh" ? "20分钟" : "20 min read",
+            priority: "highest" as const,
+            tags: [
+              t("tags.nsaid"),
+              t("tags.painkiller"),
+              t("tags.ibuprofen"),
+              t("tags.medication"),
+              t("tags.medication"),
+              t("tags.medication"),
+            ],
+            id: "medication-guide",
+            slug: "medication-guide",
+          },
+          createArticleResource(
+            "understandingEducation",
+            "painDifferential",
+            25,
+            "highest",
+            [t("tags.diagnosis"), t("tags.diagnosis"), t("tags.emergency")],
+            "menstrual-pain-vs-other-abdominal-pain-guide",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "understandingCycle",
+            25,
+            "high",
+            [t("tags.cycle"), t("tags.education"), t("tags.knowledge")],
+            "understanding-your-cycle",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "insuranceCoverage",
+            25,
+            "high",
+            [
+              t("tags.medical"),
+              t("tags.medical"),
+              t("tags.medical"),
+              t("tags.communication"),
+            ],
+            "us-menstrual-pain-insurance-coverage-guide",
+          ),
+          createArticleResource(
+            "medicalGuidance",
+            "whenToSeeDoctor",
+            10,
+            "highest",
+            [
+              t("tags.seeDoctor"),
+              t("tags.emergency"),
+              t("tags.health"),
+              t("tags.communication"),
+            ],
+            "when-to-see-doctor-period-pain",
+          ),
+          createArticleResource(
+            "medicalGuidance",
+            "medicalCare",
+            15,
+            "high",
+            [
+              t("tags.medical"),
+              t("tags.health"),
+              t("tags.guide"),
+              t("tags.communication"),
+            ],
+            "when-to-seek-medical-care-comprehensive-guide",
+          ),
+          // === 新增：IUD综合指南文章 ===
+          createArticleResource(
+            "medicalGuidance",
+            "comprehensiveIudGuide",
+            25,
+            "highest",
+            [
+              "IUD",
+              "宫内节育器",
+              "节育环",
+              "避孕",
+              "intrauterine device",
+              "contraception",
+              "医疗",
+              "健康",
+              "指南",
+              "预防",
+            ],
+            "comprehensive-iud-guide",
+          ),
+          // === 新增：痛经并发症管理文章 ===
+          createArticleResource(
+            "medicalGuidance",
+            "menstrualPainComplications",
+            20,
+            "high",
+            [
+              "并发症",
+              "子宫内膜异位症",
+              "子宫腺肌症",
+              "子宫肌瘤",
+              "complications",
+              "endometriosis",
+              "adenomyosis",
+              "医疗",
+              "健康",
+              "诊断",
+              "紧急",
+            ],
+            "menstrual-pain-complications-management",
+          ),
+          ...PDF_RESOURCES.filter((pdf) =>
+            [
+              "natural-therapy-assessment",
+              "hormone-testing-guide",
+              "nutritional-analysis",
+              "exercise-program",
+              "teacher-health-manual",
+              "teacher-collaboration-handbook",
+            ].includes(pdf.id),
+          ).map(convertPDFToResource),
+        ],
+        management: [
+          createArticleResource(
+            "specializedGuides",
+            "readingList",
+            35,
+            "medium",
+            ["综合", "因素", "影响"],
+            "recommended-reading-list",
+          ),
+          createArticleResource(
+            "naturalTherapies",
+            "herbalTea",
+            15,
+            "low",
+            ["草药", "茶", "配方"],
+            "herbal-tea-menstrual-pain-relief",
+          ),
+          createArticleResource(
+            "naturalTherapies",
+            "traditionalMethods",
+            25,
+            "low",
+            ["全球", "传统", "现代"],
+            "global-traditional-menstrual-pain-relief",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "understandingCycle",
+            20,
+            "medium",
+            ["档案", "记录", "管理"],
+            "personal-menstrual-health-profile",
+          ),
+        ],
+      };
 
-    const resources =
-      baseResources[categoryId as keyof typeof baseResources] || [];
-    const additionalResources: Resource[] = [];
+      const resources =
+        baseResources[categoryId as keyof typeof baseResources] || [];
+      const additionalResources: Resource[] = [];
 
-    // 如果基础资源数量不足，添加更多资源来达到目标数量
-    if (resources.length < targetCount) {
-      const allArticles = [
-        createArticleResource(
-          "immediateRelief",
-          "fiveMinuteRelief",
-          5,
-          "highest",
-          [t("tags.pain"), t("tags.relief"), t("tags.quick")],
-          "5-minute-period-pain-relief",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "painDifferential",
-          25,
-          "highest",
-          [t("tags.examination"), t("tags.health"), t("tags.diagnosis")],
-          "menstrual-pain-vs-other-abdominal-pain-guide",
-        ),
-        createArticleResource(
-          "immediateRelief",
-          "heatTherapy",
-          8,
-          "high",
-          [t("tags.heatTherapy"), t("tags.method"), t("tags.science")],
-          "heat-therapy-complete-guide",
-        ),
-        createArticleResource(
-          "naturalTherapies",
-          "physicalTherapy",
-          12,
-          "high",
-          [t("tags.pain"), t("tags.health"), t("tags.relief")],
-          "menstrual-back-pain-comprehensive-care-guide",
-        ),
-        createArticleResource(
-          "naturalTherapies",
-          "traditionalMethods",
-          12,
-          "high",
-          [t("tags.medication"), t("tags.medication"), t("tags.relief")],
-          "ginger-menstrual-pain-relief-guide",
-        ),
-        createArticleResource(
-          "nutritionHealth",
-          "preventiveCare",
-          22,
-          "highest",
-          [t("tags.prevention"), t("tags.cycle"), t("tags.evidenceBased")],
-          "menstrual-preventive-care-complete-plan",
-        ),
-        createArticleResource(
-          "nutritionHealth",
-          "sleepQuality",
-          20,
-          "highest",
-          [t("tags.health"), t("tags.plan"), t("tags.health")],
-          "comprehensive-menstrual-sleep-quality-guide",
-        ),
-        createArticleResource(
-          "nutritionHealth",
-          "stressManagement",
-          22,
-          "highest",
-          [t("tags.management"), t("tags.health"), t("tags.management")],
-          "menstrual-stress-management-complete-guide",
-        ),
-        createArticleResource(
-          "naturalTherapies",
-          "zhanZhuang",
-          18,
-          "high",
-          [t("tags.exercise"), t("tags.baduanjin"), t("tags.relief")],
-          "zhan-zhuang-baduanjin-for-menstrual-pain-relief",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "lifecycleAnalysis",
-          24,
-          "highest",
-          [t("tags.cycle"), t("tags.cycle"), t("tags.management")],
-          "womens-lifecycle-menstrual-pain-analysis",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "researchProgress2024",
-          18,
-          "highest",
-          [
-            t("tags.evidenceBased"),
-            t("tags.research"),
-            t("tags.medication"),
-            t("tags.painkiller"),
-            t("tags.nsaid"),
-          ],
-          "menstrual-pain-research-progress-2024",
-        ),
-        createArticleResource(
-          "medicalGuidance",
-          "nsaidProfessionalGuide",
-          25,
-          "highest",
-          [
-            t("tags.nsaid"),
-            t("tags.painkiller"),
-            t("tags.medication"),
-            t("tags.medication"),
-            t("tags.medication"),
-          ],
-          "nsaid-menstrual-pain-professional-guide",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "painDifferential",
-          25,
-          "highest",
-          [t("tags.diagnosis"), t("tags.diagnosis"), t("tags.emergency")],
-          "menstrual-pain-vs-other-abdominal-pain-guide",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "understandingCycle",
-          25,
-          "high",
-          [t("tags.cycle"), t("tags.education"), t("tags.knowledge")],
-          "understanding-your-cycle",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "insuranceCoverage",
-          25,
-          "high",
-          [
-            t("tags.medical"),
-            t("tags.medical"),
-            t("tags.medical"),
-            t("tags.communication"),
-          ],
-          "us-menstrual-pain-insurance-coverage-guide",
-        ),
-        createArticleResource(
-          "medicalGuidance",
-          "whenToSeeDoctor",
-          10,
-          "highest",
-          [
-            t("tags.seeDoctor"),
-            t("tags.emergency"),
-            t("tags.health"),
-            t("tags.communication"),
-          ],
-          "when-to-see-doctor-period-pain",
-        ),
-        createArticleResource(
-          "medicalGuidance",
-          "medicalCare",
-          15,
-          "high",
-          [
-            t("tags.medical"),
-            t("tags.health"),
-            t("tags.guide"),
-            t("tags.communication"),
-          ],
-          "when-to-seek-medical-care-comprehensive-guide",
-        ),
-        createArticleResource(
-          "specializedGuides",
-          "readingList",
-          35,
-          "medium",
-          ["综合", "因素", "影响"],
-          "recommended-reading-list",
-        ),
-        createArticleResource(
-          "naturalTherapies",
-          "herbalTea",
-          15,
-          "low",
-          ["草药", "茶", "配方"],
-          "herbal-tea-menstrual-pain-relief",
-        ),
-        createArticleResource(
-          "naturalTherapies",
-          "traditionalMethods",
-          25,
-          "low",
-          ["全球", "传统", "现代"],
-          "global-traditional-menstrual-pain-relief",
-        ),
-        createArticleResource(
-          "understandingEducation",
-          "understandingCycle",
-          20,
-          "medium",
-          ["档案", "记录", "管理"],
-          "personal-menstrual-health-profile",
-        ),
-      ];
+      // 如果基础资源数量不足，添加更多资源来达到目标数量
+      if (resources.length < targetCount) {
+        const allArticles = [
+          createArticleResource(
+            "immediateRelief",
+            "fiveMinuteRelief",
+            5,
+            "highest",
+            [t("tags.pain"), t("tags.relief"), t("tags.quick")],
+            "5-minute-period-pain-relief",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "painDifferential",
+            25,
+            "highest",
+            [t("tags.examination"), t("tags.health"), t("tags.diagnosis")],
+            "menstrual-pain-vs-other-abdominal-pain-guide",
+          ),
+          createArticleResource(
+            "immediateRelief",
+            "heatTherapy",
+            8,
+            "high",
+            [t("tags.heatTherapy"), t("tags.method"), t("tags.science")],
+            "heat-therapy-complete-guide",
+          ),
+          createArticleResource(
+            "naturalTherapies",
+            "physicalTherapy",
+            12,
+            "high",
+            [t("tags.pain"), t("tags.health"), t("tags.relief")],
+            "menstrual-back-pain-comprehensive-care-guide",
+          ),
+          createArticleResource(
+            "naturalTherapies",
+            "traditionalMethods",
+            12,
+            "high",
+            [t("tags.medication"), t("tags.medication"), t("tags.relief")],
+            "ginger-menstrual-pain-relief-guide",
+          ),
+          createArticleResource(
+            "nutritionHealth",
+            "preventiveCare",
+            22,
+            "highest",
+            [t("tags.prevention"), t("tags.cycle"), t("tags.evidenceBased")],
+            "menstrual-preventive-care-complete-plan",
+          ),
+          createArticleResource(
+            "nutritionHealth",
+            "sleepQuality",
+            20,
+            "highest",
+            [t("tags.health"), t("tags.plan"), t("tags.health")],
+            "comprehensive-menstrual-sleep-quality-guide",
+          ),
+          createArticleResource(
+            "nutritionHealth",
+            "stressManagement",
+            22,
+            "highest",
+            [t("tags.management"), t("tags.health"), t("tags.management")],
+            "menstrual-stress-management-complete-guide",
+          ),
+          createArticleResource(
+            "naturalTherapies",
+            "zhanZhuang",
+            18,
+            "high",
+            [t("tags.exercise"), t("tags.baduanjin"), t("tags.relief")],
+            "zhan-zhuang-baduanjin-for-menstrual-pain-relief",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "lifecycleAnalysis",
+            24,
+            "highest",
+            [t("tags.cycle"), t("tags.cycle"), t("tags.management")],
+            "womens-lifecycle-menstrual-pain-analysis",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "researchProgress2024",
+            18,
+            "highest",
+            [
+              t("tags.evidenceBased"),
+              t("tags.research"),
+              t("tags.medication"),
+              t("tags.painkiller"),
+              t("tags.nsaid"),
+            ],
+            "menstrual-pain-research-progress-2024",
+          ),
+          createArticleResource(
+            "medicalGuidance",
+            "nsaidProfessionalGuide",
+            25,
+            "highest",
+            [
+              t("tags.nsaid"),
+              t("tags.painkiller"),
+              t("tags.medication"),
+              t("tags.medication"),
+              t("tags.medication"),
+            ],
+            "nsaid-menstrual-pain-professional-guide",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "painDifferential",
+            25,
+            "highest",
+            [t("tags.diagnosis"), t("tags.diagnosis"), t("tags.emergency")],
+            "menstrual-pain-vs-other-abdominal-pain-guide",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "understandingCycle",
+            25,
+            "high",
+            [t("tags.cycle"), t("tags.education"), t("tags.knowledge")],
+            "understanding-your-cycle",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "insuranceCoverage",
+            25,
+            "high",
+            [
+              t("tags.medical"),
+              t("tags.medical"),
+              t("tags.medical"),
+              t("tags.communication"),
+            ],
+            "us-menstrual-pain-insurance-coverage-guide",
+          ),
+          createArticleResource(
+            "medicalGuidance",
+            "whenToSeeDoctor",
+            10,
+            "highest",
+            [
+              t("tags.seeDoctor"),
+              t("tags.emergency"),
+              t("tags.health"),
+              t("tags.communication"),
+            ],
+            "when-to-see-doctor-period-pain",
+          ),
+          createArticleResource(
+            "medicalGuidance",
+            "medicalCare",
+            15,
+            "high",
+            [
+              t("tags.medical"),
+              t("tags.health"),
+              t("tags.guide"),
+              t("tags.communication"),
+            ],
+            "when-to-seek-medical-care-comprehensive-guide",
+          ),
+          createArticleResource(
+            "specializedGuides",
+            "readingList",
+            35,
+            "medium",
+            ["综合", "因素", "影响"],
+            "recommended-reading-list",
+          ),
+          createArticleResource(
+            "naturalTherapies",
+            "herbalTea",
+            15,
+            "low",
+            ["草药", "茶", "配方"],
+            "herbal-tea-menstrual-pain-relief",
+          ),
+          createArticleResource(
+            "naturalTherapies",
+            "traditionalMethods",
+            25,
+            "low",
+            ["全球", "传统", "现代"],
+            "global-traditional-menstrual-pain-relief",
+          ),
+          createArticleResource(
+            "understandingEducation",
+            "understandingCycle",
+            20,
+            "medium",
+            ["档案", "记录", "管理"],
+            "personal-menstrual-health-profile",
+          ),
+        ];
 
-      // 添加PDF资源
-      const allPDFs = PDF_RESOURCES.map(convertPDFToResource);
+        // 添加PDF资源
+        const allPDFs = PDF_RESOURCES.map(convertPDFToResource);
 
-      // 合并所有资源
-      const allResources = [...allArticles, ...allPDFs];
+        // 合并所有资源
+        const allResources = [...allArticles, ...allPDFs];
 
-      // 选择额外的资源来达到目标数量 - 使用稳定的排序避免水合错误
-      const needed = targetCount - resources.length;
-      // 使用稳定的排序而不是随机排序，避免服务器端和客户端不一致
-      const sorted = allResources
-        .filter((resource) => resource.id) // 过滤掉没有id的资源
-        .sort((a, b) => a.id!.localeCompare(b.id!));
-      additionalResources.push(...sorted.slice(0, needed));
-    }
+        // 选择额外的资源来达到目标数量 - 使用稳定的排序避免水合错误
+        const needed = targetCount - resources.length;
+        // 使用稳定的排序而不是随机排序，避免服务器端和客户端不一致
+        const sorted = allResources
+          .filter((resource) => resource.id) // 过滤掉没有id的资源
+          .sort((a, b) => a.id!.localeCompare(b.id!));
+        additionalResources.push(...sorted.slice(0, needed));
+      }
 
-    // 合并资源并去重（基于id）
-    const allCombinedResources = [...resources, ...additionalResources];
-    const uniqueResources = allCombinedResources.filter(
-      (resource, index, array) =>
-        array.findIndex((r) => r.id === resource.id) === index,
-    );
+      // 合并资源并去重（基于id）
+      const allCombinedResources = [...resources, ...additionalResources];
+      const uniqueResources = allCombinedResources.filter(
+        (resource, index, array) =>
+          array.findIndex((r) => r.id === resource.id) === index,
+      );
 
-    return uniqueResources.slice(0, targetCount);
-  };
+      return uniqueResources.slice(0, targetCount);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [t, locale, articlesT], // createArticleResource and convertPDFToResource are stable
+  );
 
   // 优化后的内容分类 - 使用动态生成的资源，使用useMemo缓存避免水合错误
   const optimizedCategories: Record<string, Category> = useMemo(
@@ -970,7 +982,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
         resources: generateCategoryResources("management"),
       },
     }),
-    [locale, t],
+    [generateCategoryResources, getCategoryTitle, getCategorySubtitle],
   );
 
   // 智能搜索算法
@@ -1372,7 +1384,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     }
 
     return null;
-  }, [searchTerm]);
+  }, [searchTerm, locale]);
 
   // 内容搜索逻辑 - 搜索资源标题、标签等
   // 智能内容搜索功能 - 支持模糊匹配和语义理解
@@ -1646,7 +1658,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     );
 
     return uniqueResources;
-  }, [searchTerm, optimizedCategories]);
+  }, [searchTerm, optimizedCategories, t]);
 
   // 渐进式加载
   useEffect(() => {
@@ -1693,7 +1705,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     const isUrgent = urgentTerms.some((term) =>
       searchTerm.toLowerCase().includes(term.toLowerCase()),
     );
-    setIsEmergencyMode(isUrgent);
+    // setIsEmergencyMode(isUrgent); // Reserved for future use
 
     if (isUrgent && activeCategory !== "immediate") {
       setActiveCategory("immediate");

@@ -48,6 +48,7 @@ export default function OptimizedScripts() {
       document.removeEventListener("scroll", handleUserInteraction);
       document.removeEventListener("keydown", handleUserInteraction);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 只在生产环境且有有效GA ID时加载GA脚本

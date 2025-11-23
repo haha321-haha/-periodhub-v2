@@ -44,11 +44,12 @@ interface PDFCenterOptimizedProps {
   maxResults?: number;
 }
 
-interface PDFFilterOptions {
-  priority?: string;
-  difficulty?: string;
-  type?: string;
-}
+// Reserved for future use
+// interface PDFFilterOptions {
+//   priority?: string;
+//   difficulty?: string;
+//   type?: string;
+// }
 
 export default function PDFCenterOptimized({
   locale = "zh",
@@ -62,7 +63,7 @@ export default function PDFCenterOptimized({
     initialCategory || "all",
   );
   const [searchQuery, setSearchQuery] = useState("");
-  const [filters] = useState<PDFFilterOptions>({});
+  // const [filters] = useState<PDFFilterOptions>({}); // Reserved for future use
   const [showFilterPanel, setShowFilterPanel] = useState(false);
 
   // 筛选和搜索逻辑
@@ -99,7 +100,7 @@ export default function PDFCenterOptimized({
     });
 
     return resources.slice(0, maxResults);
-  }, [selectedCategory, searchQuery, filters, maxResults]);
+  }, [selectedCategory, searchQuery, maxResults]);
 
   // 获取分类信息
   const getCategoryInfo = (categoryId: PDFCategory) => {

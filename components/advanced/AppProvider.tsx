@@ -40,6 +40,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     return () => {
       performanceMonitor.cleanup();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 监听偏好设置变化

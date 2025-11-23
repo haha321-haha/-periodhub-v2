@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import {
   getAllEntries,
@@ -33,11 +33,7 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
     useState<ReturnType<typeof getStorageInfo>>(null);
   const [showManageModal, setShowManageModal] = useState(false);
 
-  useEffect(() => {
-    loadEntries();
-  }, [activeTab]);
-
-  const loadEntries = () => {
+  const loadEntries = useCallback(() => {
     setIsLoading(true);
     let loadedEntries: ProgressEntry[] = [];
 
@@ -58,7 +54,11 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
     setEntries(loadedEntries);
     setStorageInfo(getStorageInfo());
     setIsLoading(false);
-  };
+  }, [activeTab]);
+
+  useEffect(() => {
+    loadEntries();
+  }, [loadEntries]);
 
   const handleDeleteOldEntries = (count: number) => {
     if (confirm(`确定要删除最旧的 ${count} 条记录吗？此操作无法撤销。`)) {

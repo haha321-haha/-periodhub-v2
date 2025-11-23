@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 type MetricName = "LCP" | "FID" | "CLS" | "FCP" | "TTFB";
 
@@ -38,11 +38,7 @@ export default function PerformanceDashboard() {
   const [error, setError] = useState<string | null>(null);
   const [selectedUrl, setSelectedUrl] = useState("");
 
-  useEffect(() => {
-    fetchPerformanceData();
-  }, [selectedUrl]);
-
-  const fetchPerformanceData = async () => {
+  const fetchPerformanceData = useCallback(async () => {
     try {
       setLoading(true);
       const url = selectedUrl
@@ -61,7 +57,11 @@ export default function PerformanceDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedUrl]);
+
+  useEffect(() => {
+    fetchPerformanceData();
+  }, [fetchPerformanceData]);
 
   const getGradeColor = (metric: string, value: number) => {
     const thresholds = {

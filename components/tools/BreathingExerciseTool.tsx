@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
 
 interface BreathingExerciseToolProps {
@@ -18,12 +18,15 @@ export default function BreathingExerciseTool({
   const [timeLeft, setTimeLeft] = useState(4);
   const [cycle, setCycle] = useState(0);
 
-  const phases = {
-    inhale: { duration: 4, next: "hold" as const },
-    hold: { duration: 7, next: "exhale" as const },
-    exhale: { duration: 8, next: "pause" as const },
-    pause: { duration: 2, next: "inhale" as const },
-  };
+  const phases = useMemo(
+    () => ({
+      inhale: { duration: 4, next: "hold" as const },
+      hold: { duration: 7, next: "exhale" as const },
+      exhale: { duration: 8, next: "pause" as const },
+      pause: { duration: 2, next: "inhale" as const },
+    }),
+    [],
+  );
 
   // ✅ 使用翻译系统替代硬编码
   const t = useTranslations("breathingExercise");
@@ -51,7 +54,7 @@ export default function BreathingExerciseTool({
     }
 
     return () => clearInterval(interval);
-  }, [isActive, phase]);
+  }, [isActive, phase, phases]);
 
   const startExercise = () => {
     setIsActive(true);

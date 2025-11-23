@@ -13,6 +13,57 @@ export interface DataPoint {
   sessionId: string;
 }
 
+// 反馈数据类型
+export interface RealFeedbackData {
+  id: string;
+  userId: string;
+  feature: string;
+  page: string;
+  rating: number;
+  comment?: string;
+  sentiment: "positive" | "neutral" | "negative";
+  topics?: string[];
+  userType?: string;
+  device?: string;
+  timeSpent?: number;
+  timestamp?: Date;
+  metadata?: Record<string, unknown>;
+}
+
+// 用户会话数据类型
+export interface RealUserSession {
+  sessionId: string;
+  userId: string;
+  startTime: Date;
+  endTime?: Date;
+  device?: {
+    type: "desktop" | "mobile" | "tablet";
+    browser: string;
+    os: string;
+    screenResolution: string;
+  };
+  navigation?: {
+    entryPage: string;
+    pagesVisited: string[];
+    timeOnEachPage: Record<string, number>;
+    scrollDepth: Record<string, number>;
+  };
+  interactions?: {
+    clicks: number;
+    hovers: number;
+    formSubmissions: number;
+    timeSpent: number;
+  };
+  conversion?: {
+    assessmentStarted: boolean;
+    assessmentCompleted: boolean;
+    paywallReached: boolean;
+    feedbackSubmitted: boolean;
+    phq9Started: boolean;
+    phq9Completed: boolean;
+  };
+}
+
 const STORAGE_KEY = "real_data_collection";
 const SESSION_KEY = "session_id";
 const MAX_DATA_POINTS = 500;

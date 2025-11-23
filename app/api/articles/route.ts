@@ -12,7 +12,18 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "10");
 
     // ✅ Day 2: 使用新的分页函数（基于预生成索引）
-    const result = getArticlesList(locale, page, limit);
+    const allArticles = getArticlesList();
+    // 简单的分页实现
+    const startIndex = (page - 1) * limit;
+    const endIndex = startIndex + limit;
+    const paginatedArticles = allArticles.slice(startIndex, endIndex);
+    const result = {
+      articles: paginatedArticles,
+      total: allArticles.length,
+      page,
+      limit,
+      totalPages: Math.ceil(allArticles.length / limit),
+    };
 
     return NextResponse.json({
       success: true,

@@ -5,25 +5,24 @@ export async function GET() {
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
   try {
-    // 获取中文和英文文章列表
-    const zhArticles = getAllArticles("zh");
-    const enArticles = getAllArticles("en");
+    // 获取所有文章列表
+    const allArticlesData = getAllArticles();
 
-    // 合并文章列表并按日期排序
-    const allArticles = [...zhArticles, ...enArticles]
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    // 按日期排序
+    const allArticles = allArticlesData
+      .sort(
+        (a, b) =>
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+      )
       .slice(0, 20); // 限制为最新20篇文章
 
     // 生成文章条目
     const entries = allArticles
       .map((article) => {
-        const locale = article.title_zh ? "zh" : "en";
-        const title =
-          locale === "zh" ? article.title_zh || article.title : article.title;
+        const locale = article.titleZh ? "zh" : "en";
+        const title = locale === "zh" ? article.titleZh : article.title;
         const summary =
-          locale === "zh"
-            ? article.summary_zh || article.summary
-            : article.summary;
+          locale === "zh" ? article.descriptionZh : article.description;
         const articleUrl = `${baseUrl}/${locale}/articles/${article.slug}`;
 
         return `
@@ -31,12 +30,11 @@ export async function GET() {
     <title><![CDATA[${title}]]></title>
     <link href="${articleUrl}"/>
     <id>${articleUrl}</id>
-    <updated>${new Date(article.date).toISOString()}</updated>
+    <updated>${new Date(article.publishedAt).toISOString()}</updated>
     <summary><![CDATA[${summary}]]></summary>
     <author>
-      <name>${article.author || "PeriodHub Health Team"}</name>
+      <name>PeriodHub Health Team</name>
     </author>
-    ${article.featured_image ? `<media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="${baseUrl}${article.featured_image}"/>` : ""}
     ${article.tags && article.tags.length > 0 ? article.tags.map((tag) => `<category term="${tag}"/>`).join("") : ""}
   </entry>`;
       })

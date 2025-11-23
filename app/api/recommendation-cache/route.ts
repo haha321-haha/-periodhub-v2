@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import {
-  clearRecommendationCache,
+  clearAllRecommendationCache,
   getCacheStats,
 } from "@/lib/recommendationCache";
 
@@ -34,7 +34,7 @@ export async function GET() {
  */
 export async function DELETE() {
   try {
-    clearRecommendationCache();
+    clearAllRecommendationCache();
 
     return NextResponse.json({
       success: true,

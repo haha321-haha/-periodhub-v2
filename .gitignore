@@ -223,3 +223,17 @@ AEO_*.md
 # ESLint 报告文件
 *-eslint-report.txt
 interactive-tools-*-eslint-report.txt
+
+# robots.txt 相关文件
+robots-*.txt
+robots.txt-update.txt
+
+# 翻译检查报告文件
+translation-check-*.txt
+
+# 其他 ESLint 报告文件
+scenario-solutions-eslint-report.txt
+shared-*-eslint-report.txt
+
+# HTML 方案文件
+方案*.html

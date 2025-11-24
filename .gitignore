@@ -259,3 +259,10 @@ unfixed-placeholders.txt
 hub-latest-main*/
 hub-latest-main 2/
 hub-latest-main 3/
+
+# recovered 目录
+recovered/
+
+# SEO 文档文件
+Claude code -seo优化.docx
+Period Hub seo专项行动计划.docx

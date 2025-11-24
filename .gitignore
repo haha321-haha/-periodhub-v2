@@ -251,3 +251,6 @@ canonical-tags-template.html
 periodhub/
 periodhub (1)/
 periodhub (2)/
+
+# 占位符文件
+unfixed-placeholders.txt

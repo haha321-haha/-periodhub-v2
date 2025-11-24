@@ -254,3 +254,8 @@ periodhub (2)/
 
 # 占位符文件
 unfixed-placeholders.txt
+
+# hub-latest-main 重复目录
+hub-latest-main*/
+hub-latest-main 2/
+hub-latest-main 3/

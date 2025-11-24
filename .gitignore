@@ -237,3 +237,12 @@ shared-*-eslint-report.txt
 
 # HTML 方案文件
 方案*.html
+
+# 代码质量报告文件
+code-quality-fix-*.md
+
+# 开发日志文件
+dev-logs*.txt
+
+# HTML 模板文件
+canonical-tags-template.html

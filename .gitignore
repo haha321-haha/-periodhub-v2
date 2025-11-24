@@ -273,3 +273,17 @@ b方案v2.html
 
 # HTML 方案文件（补充 - b00.html）
 b00.html
+
+# 恢复的 JSON 文件
+*.recovered
+*.recovered_v2
+*.smart_recovered
+
+# ZIP 压缩文件
+*.zip
+hub-latest-main.zip
+
+# 大文件（Markdown 文档）
+4cursor_*.md
+cursor_*.md
+eslint-baseline.json

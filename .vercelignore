@@ -1,0 +1,26 @@
+node_modules
+.next
+.git
+.vercel
+*.log
+.DS_Store
+*.md
+翻译键缺失解决方案.md
+变现回路设计文件夹文档/
+百度文科数据分析/
+*.ini.txt
+终极解决方案*
+
+# 恢复的 JSON 文件
+*.recovered
+*.recovered_v2
+*.smart_recovered
+
+# ZIP 压缩文件
+*.zip
+hub-latest-main.zip
+
+# 大文件
+4cursor_*.md
+cursor_*.md
+eslint-baseline.json

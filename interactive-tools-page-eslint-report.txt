@@ -1,4 +1,0 @@
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/page.tsx:17:8: 'StructuredData' is defined but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/page.tsx:172:9: 'pageUrl' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
-
-2 problems

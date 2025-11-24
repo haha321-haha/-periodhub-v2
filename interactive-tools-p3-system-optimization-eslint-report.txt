@@ -1,8 +1,0 @@
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/p3-system-optimization/page.tsx:5:10: 'useParams' is defined but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/p3-system-optimization/page.tsx:9:7: 'Settings' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/p3-system-optimization/page.tsx:45:7: 'Shield' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/p3-system-optimization/page.tsx:49:7: 'Code' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/p3-system-optimization/page.tsx:53:7: 'Users' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/p3-system-optimization/page.tsx:120:26: 'setCompletedTasks' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
-
-6 problems

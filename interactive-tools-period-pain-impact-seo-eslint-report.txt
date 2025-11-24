@@ -1,8 +1,0 @@
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/utils/seoOptimization.ts:6:15: 'Metadata' is defined but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/utils/seoOptimization.ts:18:20: Unexpected any. Specify a different type. [Error/@typescript-eslint/no-explicit-any]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/utils/seoOptimization.ts:29:58: Unexpected any. Specify a different type. [Error/@typescript-eslint/no-explicit-any]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/utils/seoOptimization.ts:58:4: Unexpected any. Specify a different type. [Error/@typescript-eslint/no-explicit-any]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/utils/seoOptimization.ts:112:4: Unexpected any. Specify a different type. [Error/@typescript-eslint/no-explicit-any]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/utils/seoOptimization.ts:149:4: Unexpected any. Specify a different type. [Error/@typescript-eslint/no-explicit-any]
-
-6 problems

@@ -210,3 +210,16 @@ seo-validation-report.json
 方案a.html
 方案b.html
 方案b.css
+
+# 排除文档和临时文件
+变现回路设计文件夹文档/
+百度文科数据分析/
+变现回路设计/
+*.ini.txt
+## 🎯 终极解决方案*
+AEO_*.md
+变现回路设计*.md
+
+# ESLint 报告文件
+*-eslint-report.txt
+interactive-tools-*-eslint-report.txt

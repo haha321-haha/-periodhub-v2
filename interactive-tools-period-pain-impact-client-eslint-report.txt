@@ -1,7 +1,0 @@
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx:3:28: 'useState' is defined but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx:11:28: 'AssessmentResult' is defined but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx:35:5: 'isComplete' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx:40:5: 'goToQuestion' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/period-pain-calculator-client.tsx:51:9: 'handleStartAssessment' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
-
-5 problems

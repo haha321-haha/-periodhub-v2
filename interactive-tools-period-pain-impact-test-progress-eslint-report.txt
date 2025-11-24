@@ -1,7 +1,0 @@
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/test-progress.tsx:8:9: 't' is assigned a value but never used. [Error/@typescript-eslint/no-unused-vars]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/test-progress.tsx:116:17: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`. [Error/react/no-unescaped-entities]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/test-progress.tsx:116:21: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`. [Error/react/no-unescaped-entities]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/test-progress.tsx:118:17: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`. [Error/react/no-unescaped-entities]
-/Users/duting/Downloads/money旺财/--main/app/[locale]/interactive-tools/period-pain-impact-calculator/test-progress.tsx:118:20: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`. [Error/react/no-unescaped-entities]
-
-5 problems

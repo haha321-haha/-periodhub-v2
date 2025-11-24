@@ -1,7 +1,6 @@
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
-  "outputDirectory": ".next",
   "installCommand": "npm install",
   "env": {
     "NEXT_PUBLIC_BASE_URL": "https://www.periodhub.health",

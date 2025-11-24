@@ -246,3 +246,8 @@ dev-logs*.txt
 
 # HTML 模板文件
 canonical-tags-template.html
+
+# periodhub 重复目录
+periodhub/
+periodhub (1)/
+periodhub (2)/

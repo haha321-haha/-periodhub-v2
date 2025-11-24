@@ -287,3 +287,6 @@ hub-latest-main.zip
 4cursor_*.md
 cursor_*.md
 eslint-baseline.json
+
+# P2 代码质量执行计划文档
+p2-code-quality-execution-plan.md

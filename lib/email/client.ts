@@ -6,8 +6,19 @@ import { Resend } from "resend";
 import { logError } from "@/lib/debug-logger";
 import type { EmailTemplate, EmailSendResult } from "./types";
 
-// 初始化Resend客户端
-const resend = new Resend(process.env.RESEND_API_KEY);
+// 延迟初始化Resend客户端（避免构建时错误）
+let resend: Resend | null = null;
+
+function getResendClient(): Resend {
+  if (!resend) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error("RESEND_API_KEY is not configured");
+    }
+    resend = new Resend(apiKey);
+  }
+  return resend;
+}
 
 /**
  * 发送邮件
@@ -26,8 +37,11 @@ export async function sendEmail(
       };
     }
 
+    // 获取Resend客户端（延迟初始化）
+    const client = getResendClient();
+
     // 发送邮件
-    const response = await resend.emails.send({
+    const response = await client.emails.send({
       from: template.fromName
         ? `${template.fromName} <${template.fromEmail}>`
         : template.fromEmail,

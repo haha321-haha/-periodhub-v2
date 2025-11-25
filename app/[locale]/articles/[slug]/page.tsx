@@ -233,18 +233,29 @@ export async function generateMetadata({
 
   const title =
     locale === "zh"
-      ? article.title_zh || article.titleZh || article.title
-      : article.title;
+      ? article.title_zh || article.titleZh || article.title || ""
+      : article.title || "";
   const description =
     locale === "zh"
-      ? article.summary_zh || article.descriptionZh || article.description
-      : article.summary || article.description;
+      ? article.summary_zh || article.descriptionZh || article.description || ""
+      : article.summary || article.description || "";
   const seoTitle = title;
   const seoDescription = description;
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
   const canonicalUrl = `/${locale}/articles/${slug}`;
   const articleUrl = `${baseUrl}${canonicalUrl}`;
+
+  // 安全地处理日期，确保始终是有效的 ISO 字符串
+  const safePublishedDateForMetadata = (() => {
+    if (!article.publishedAt) {
+      return new Date().toISOString();
+    }
+    const date = new Date(article.publishedAt);
+    return isNaN(date.getTime())
+      ? new Date().toISOString()
+      : date.toISOString();
+  })();
 
   return {
     title: seoTitle,
@@ -266,7 +277,7 @@ export async function generateMetadata({
     other: {
       "fb:app_id":
         process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "1234567890123456",
-      "article:published_time": new Date(article.publishedAt).toISOString(),
+      "article:published_time": safePublishedDateForMetadata,
       "article:author": "PeriodHub Team",
       "Content-Language": locale === "zh" ? "zh-CN" : "en-US",
     },
@@ -275,7 +286,7 @@ export async function generateMetadata({
       description: seoDescription,
       url: articleUrl,
       type: "article",
-      publishedTime: new Date(article.publishedAt).toISOString(),
+      publishedTime: safePublishedDateForMetadata,
       authors: ["PeriodHub Team"],
       images: [
         {
@@ -603,7 +614,7 @@ export default async function ArticlePage({
                     {category}
                   </span>
                   <time
-                    dateTime={new Date(article.publishedAt).toISOString()}
+                    dateTime={safePublishedDate}
                     className="flex items-center gap-1"
                   >
                     <svg
@@ -619,9 +630,16 @@ export default async function ArticlePage({
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                       />
                     </svg>
-                    {new Date(article.publishedAt).toLocaleDateString(
-                      locale === "zh" ? "zh-CN" : "en-US",
-                    )}
+                    {(() => {
+                      const date = new Date(article.publishedAt);
+                      return isNaN(date.getTime())
+                        ? new Date().toLocaleDateString(
+                            locale === "zh" ? "zh-CN" : "en-US",
+                          )
+                        : date.toLocaleDateString(
+                            locale === "zh" ? "zh-CN" : "en-US",
+                          );
+                    })()}
                   </time>
                   {readingTime && (
                     <span className="flex items-center gap-1">

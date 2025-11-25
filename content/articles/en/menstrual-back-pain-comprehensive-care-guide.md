@@ -175,7 +175,7 @@ Menstrual back pain occurs through the following pathways:
 ### Symptoms Requiring Immediate Medical Attention
 
 **Red Alert Signals:**
-1. **Pain with Fever** (Temperature >38°C/100.4°F)
+1. **Pain with Fever** (Temperature above 38°C/100.4°F)
    - May indicate pelvic inflammation
    - Requires antibiotic treatment
 

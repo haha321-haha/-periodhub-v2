@@ -42,14 +42,14 @@ export function generatePageSEO(props: PageSEOProps) {
       type: "website",
       locale: locale === "zh" ? "zh_CN" : "en_US",
       siteName: "PeriodHub",
-      images: props.ogImage ? [{ url: props.ogImage }] : undefined,
+      ...(props.ogImage && { images: [{ url: props.ogImage }] }),
     },
 
     twitter: {
       card: "summary_large_image",
       title: props.title,
       description: props.description,
-      images: props.ogImage ? [props.ogImage] : undefined,
+      ...(props.ogImage && { images: [props.ogImage] }),
     },
 
     alternates: {

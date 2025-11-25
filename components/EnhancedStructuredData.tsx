@@ -83,14 +83,17 @@ export default function EnhancedStructuredData({
       structuredData = {
         ...baseData,
         "@type": "FAQPage",
-        mainEntity: faqItems?.map((item) => ({
-          "@type": "Question",
-          name: item.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: item.answer,
-          },
-        })),
+        ...(faqItems &&
+          faqItems.length > 0 && {
+            mainEntity: faqItems.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: item.answer,
+              },
+            })),
+          }),
       };
       break;
 
@@ -98,12 +101,15 @@ export default function EnhancedStructuredData({
       structuredData = {
         ...baseData,
         "@type": "HowTo",
-        step: steps?.map((step, index) => ({
-          "@type": "HowToStep",
-          position: index + 1,
-          name: step.name,
-          text: step.text,
-        })),
+        ...(steps &&
+          steps.length > 0 && {
+            step: steps.map((step, index) => ({
+              "@type": "HowToStep",
+              position: index + 1,
+              name: step.name,
+              text: step.text,
+            })),
+          }),
       };
       break;
 

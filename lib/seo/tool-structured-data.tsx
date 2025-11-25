@@ -33,6 +33,7 @@ export async function generateToolStructuredData({
   features = [],
   category = "HealthApplication",
   rating = { value: 4.8, count: 1250 },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   breadcrumbs = [],
   primaryConditionKey = "dysmenorrhea",
   citations = [
@@ -52,19 +53,7 @@ export async function generateToolStructuredData({
 
   const toolUrl = `${baseUrl}/${validLocale}/interactive-tools/${toolSlug}`;
 
-  // 构建面包屑结构化数据
-  const breadcrumbList =
-    breadcrumbs.length > 0
-      ? {
-          "@type": "BreadcrumbList",
-          itemListElement: breadcrumbs.map((crumb, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            name: crumb.name,
-            item: crumb.url,
-          })),
-        }
-      : undefined;
+  // 构建面包屑结构化数据（如果需要，可以在@graph中添加）
 
   const primaryCondition = medicalEntities[primaryConditionKey];
 
@@ -138,9 +127,9 @@ export async function generateToolStructuredData({
             code: primaryCondition.icd10,
             codingSystem: "ICD-10",
           },
-          sameAs: primaryCondition.snomed
-            ? `http://snomed.info/id/${primaryCondition.snomed}`
-            : undefined,
+          ...(primaryCondition.snomed && {
+            sameAs: `http://snomed.info/id/${primaryCondition.snomed}`,
+          }),
         },
         ...(inputs.length > 0 && { input: inputs }),
         ...(outputs.length > 0 && { output: outputs }),
@@ -157,7 +146,6 @@ export async function generateToolStructuredData({
           "@type": "MedicalAudience",
           audienceType: "Patient",
         },
-        ...(breadcrumbList && { breadcrumb: breadcrumbList }),
         potentialAction: {
           "@type": "AssessAction",
           target: {

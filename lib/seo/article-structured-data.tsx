@@ -71,11 +71,13 @@ export function generateArticleStructuredData(
     about: {
       "@type": "MedicalCondition",
       name: condition.name,
-      code: {
-        "@type": "MedicalCode",
-        code: condition.icd10,
-        codingSystem: "ICD-10",
-      },
+      ...(condition.icd10 && {
+        code: {
+          "@type": "MedicalCode",
+          code: condition.icd10,
+          codingSystem: "ICD-10",
+        },
+      }),
       ...(condition.snomed && {
         sameAs: `http://snomed.info/id/${condition.snomed}`,
       }),

@@ -3,6 +3,8 @@
  * 用于集合页面（工具中心、场景中心、下载中心等）的结构化数据生成
  */
 
+import { safeStringify } from "@/lib/utils/json-serialization";
+
 interface CollectionItem {
   title: string;
   description: string;
@@ -118,7 +120,7 @@ export function CollectionStructuredDataScript({ data }: { data: unknown }) {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data),
+        __html: safeStringify(data),
       }}
     />
   );

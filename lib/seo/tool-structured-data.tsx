@@ -1,4 +1,5 @@
 import { medicalEntities } from "./medical-entities";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 interface ToolStructuredDataProps {
   locale: "en" | "zh" | string;
@@ -122,11 +123,13 @@ export async function generateToolStructuredData({
             validLocale === "zh"
               ? ["月经疼痛", "经期疼痛", "Dysmenorrhea"]
               : ["Menstrual Pain", "Period Pain", "痛经"],
-          code: {
-            "@type": "MedicalCode",
-            code: primaryCondition.icd10,
-            codingSystem: "ICD-10",
-          },
+          ...(primaryCondition.icd10 && {
+            code: {
+              "@type": "MedicalCode",
+              code: primaryCondition.icd10,
+              codingSystem: "ICD-10",
+            },
+          }),
           ...(primaryCondition.snomed && {
             sameAs: `http://snomed.info/id/${primaryCondition.snomed}`,
           }),
@@ -197,7 +200,7 @@ export function ToolStructuredDataScript({
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data),
+        __html: safeStringify(data),
       }}
     />
   );

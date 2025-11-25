@@ -97,11 +97,13 @@ export function generatePageSEO(props: PageSEOProps) {
   return { metadata, structuredData };
 }
 
+import { safeStringify } from "@/lib/utils/json-serialization";
+
 /**
  * 生成 JSON-LD 脚本标签
  */
 export function generateJSONLD(data: unknown) {
   return {
-    __html: JSON.stringify(data),
+    __html: safeStringify(data),
   };
 }

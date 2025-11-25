@@ -124,6 +124,8 @@ export function generateStructuredData(
   }
 }
 
+import { safeStringify } from "@/lib/utils/json-serialization";
+
 export function StructuredDataScript({
   data,
 }: {
@@ -133,7 +135,7 @@ export function StructuredDataScript({
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data, null, 2),
+        __html: safeStringify(data),
       }}
     />
   );

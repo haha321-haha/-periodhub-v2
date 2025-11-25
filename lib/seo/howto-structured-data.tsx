@@ -1,4 +1,5 @@
 import { Locale } from "@/i18n";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 // HowTo步骤接口
 export interface HowToStep {
@@ -117,7 +118,7 @@ export function HowToStructuredDataScript({
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data, null, 2),
+        __html: safeStringify(data),
       }}
     />
   );

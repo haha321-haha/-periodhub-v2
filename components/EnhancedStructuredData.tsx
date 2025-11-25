@@ -1,3 +1,5 @@
+import { safeStringify } from "@/lib/utils/json-serialization";
+
 interface EnhancedStructuredDataProps {
   type: "website" | "article" | "faq" | "howto" | "medicalwebpage";
   title: string;
@@ -136,7 +138,7 @@ export default function EnhancedStructuredData({
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(structuredData),
+        __html: safeStringify(structuredData),
       }}
     />
   );

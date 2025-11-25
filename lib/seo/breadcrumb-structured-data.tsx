@@ -1,4 +1,7 @@
-import { safeStringify } from "@/lib/utils/json-serialization";
+import {
+  safeStringify,
+  cleanDataForJSON,
+} from "@/lib/utils/json-serialization";
 
 interface BreadcrumbStructuredDataProps {
   locale: string;
@@ -25,7 +28,7 @@ export function generateBreadcrumbStructuredData({
     ...breadcrumbs,
   ];
 
-  return {
+  const structuredData = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: fullBreadcrumbs
@@ -37,6 +40,9 @@ export function generateBreadcrumbStructuredData({
         item: crumb.url || "",
       })),
   };
+
+  // 🔧 关键修复：在返回前清理数据，确保所有值都是可序列化的
+  return cleanDataForJSON(structuredData) as typeof structuredData;
 }
 
 export function BreadcrumbStructuredDataScript({ data }: { data: unknown }) {

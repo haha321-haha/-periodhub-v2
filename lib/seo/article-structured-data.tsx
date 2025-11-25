@@ -4,7 +4,10 @@
  */
 
 import { medicalEntities } from "./medical-entities";
-import { safeStringify } from "@/lib/utils/json-serialization";
+import {
+  safeStringify,
+  cleanDataForJSON,
+} from "@/lib/utils/json-serialization";
 
 export interface ArticleStructuredDataScriptProps {
   data: Record<string, unknown>;
@@ -48,7 +51,7 @@ export function generateArticleStructuredData(
     props.updatedAt || props.publishedAt || new Date().toISOString();
   const safeImageUrl = props.imageUrl || `${baseUrl}/images/article-image.jpg`;
 
-  return {
+  const structuredData = {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
     "@id": props.url,
@@ -115,6 +118,10 @@ export function generateArticleStructuredData(
       audienceType: "Patient",
     },
   };
+
+  // 🔧 关键修复：在返回前清理数据，确保所有值都是可序列化的
+  // 这可以防止 Next.js 在传递 props 时尝试序列化包含不可序列化值的对象
+  return cleanDataForJSON(structuredData) as typeof structuredData;
 }
 
 /**

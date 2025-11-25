@@ -86,7 +86,7 @@ To help you better understand the differences between the two types of IUDs, we'
 | **Contraceptive Rate** | High (first-year failure rate ~0.8%) | Very high (first-year failure rate ~0.2%) |
 | **Menstrual Flow** | May increase flow, periods may be longer | Usually significantly reduces flow, some users may have light periods or amenorrhea |
 | **Dysmenorrhea** | May worsen menstrual pain | Usually effectively reduces menstrual pain, can be used to treat primary dysmenorrhea |
-| **Emergency Contraception** | **Yes** (placed within 5 days after unprotected intercourse, >99% effective) | No |
+| **Emergency Contraception** | **Yes** (placed within 5 days after unprotected intercourse, more than 99% effective) | No |
 | **Duration** | Up to 10-12 years | Usually 5-8 years (depending on product) |
 | **Additional Benefits** | None | Can treat heavy menstrual bleeding, dysmenorrhea, endometriosis-related pain, etc. |
 | **Hormonal Effects** | No systemic hormonal effects | May have small amounts of hormone absorbed systemically, potentially causing headaches, mood changes, etc. |

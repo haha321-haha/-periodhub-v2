@@ -269,7 +269,7 @@ NSAIDs work by **inhibiting cyclooxygenase (COX)** enzymes:
 
 ### Identifying Resistance
 
-**Criteria**: After 2-3 menstrual cycles of proper NSAID use, pain relief remains unsatisfactory (pain score reduction <50%)
+**Criteria**: After 2-3 menstrual cycles of proper NSAID use, pain relief remains unsatisfactory (pain score reduction below 50%)
 
 ### Alternative Treatment Strategies
 

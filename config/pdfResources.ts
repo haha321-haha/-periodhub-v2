@@ -35,6 +35,38 @@ export interface PDFResource {
 
 export const pdfResources: PDFResource[] = [
   {
+    id: "pain-guide",
+    title: "经期急救入门指南",
+    titleKey: "painGuide.title",
+    description: "基于WHO/ACOG/NHS证据的实用方案",
+    descriptionKey: "painGuide.description",
+    filename: "pain-guide.html",
+    category: "management-tools",
+    size: "1.5MB",
+    downloadUrl: "/downloads/pain-guide.html",
+    icon: "📋",
+    featured: true,
+    fileSize: 1500,
+    createdAt: "2024-01-15",
+    updatedAt: "2024-01-15",
+    versions: {
+      zh: {
+        title: "经期急救入门指南",
+        description: "基于WHO/ACOG/NHS证据的实用方案，帮助女性快速缓解经期疼痛",
+      },
+      en: {
+        title: "Period Pain Quick Start Guide",
+        description:
+          "Evidence-based methods for quick period pain relief, based on WHO/ACOG/NHS guidelines",
+      },
+      zhEn: {
+        title: "Period Pain Quick Start Guide / 经期急救入门指南",
+        description:
+          "Evidence-based methods for quick period pain relief / 基于WHO/ACOG/NHS证据的实用方案",
+      },
+    },
+  },
+  {
     id: "pain-tracking-form",
     title: "疼痛追踪表",
     titleKey: "painTrackingForm.title",

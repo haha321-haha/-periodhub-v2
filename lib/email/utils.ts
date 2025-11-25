@@ -35,7 +35,7 @@ export function generateUnsubscribeUrl(
  */
 export function getPdfDownloadUrl(locale: Locale = "zh"): string {
   const baseUrl = getBaseUrl();
-  const filename = locale === "zh" ? "pain-guide.pdf" : "pain-guide-en.pdf";
+  const filename = locale === "zh" ? "pain-guide.html" : "pain-guide-en.html";
   return `${baseUrl}/downloads/${filename}`;
 }
 

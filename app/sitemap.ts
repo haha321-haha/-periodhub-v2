@@ -243,6 +243,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // HTML资源文件 - 优先级高于PDF，更好的SEO和用户体验
   const htmlFiles = [
     // 中文HTML文件
+    "/downloads/pain-guide.html",
     "/downloads/parent-communication-guide.html",
     "/downloads/zhan-zhuang-baduanjin-illustrated-guide.html",
     "/downloads/teacher-collaboration-handbook.html",
@@ -257,6 +258,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/downloads/teacher-health-manual.html",
     "/downloads/constitution-guide.html",
     // 英文HTML文件
+    "/downloads/pain-guide-en.html",
     "/downloads/parent-communication-guide-en.html",
     "/downloads/zhan-zhuang-baduanjin-illustrated-guide-en.html",
     "/downloads/teacher-collaboration-handbook-en.html",

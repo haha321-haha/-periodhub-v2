@@ -2,6 +2,8 @@
 *.md
 *.sh
 *.py
+# 排除测试和研究相关目录
+app/[locale]/email-marketing-test/
 # 排除所有JS文件，但保留scripts目录下的构建脚本
 *.js
 !scripts/build-articles-index.js
@@ -72,7 +74,9 @@ coverage/
 # 排除特定的大型文件
 *.csv
 *.xlsx
+# 排除PDF文件，但保留 public/downloads 目录下的PDF文件
 *.pdf
+!public/downloads/*.pdf
 *.zip
 *.tar.gz
 

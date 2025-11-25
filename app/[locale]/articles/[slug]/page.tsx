@@ -221,11 +221,14 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const article = await getArticleBySlug(slug);
 
+  // 如果文章不存在，在构建时就应该失败，而不是返回默认metadata
+  // 这样可以确保只有存在的文章才会被静态生成
   if (!article) {
-    return {
-      title: "Article Not Found",
-      description: "The requested article could not be found.",
-    };
+    // 在构建时，如果generateStaticParams中包含了这个slug，但文章不存在
+    // 说明配置有问题，应该抛出错误
+    throw new Error(
+      `Article not found for slug: ${slug}. This should not happen if generateStaticParams is correct.`,
+    );
   }
 
   const title =

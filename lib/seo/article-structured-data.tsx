@@ -39,18 +39,33 @@ export function generateArticleStructuredData(
     ? medicalEntities[props.primaryConditionKey]
     : medicalEntities.dysmenorrhea;
 
+  // 确保所有必需字段都有值，避免undefined
+  const safeTitle = props.title || "";
+  const safeHeadline = props.headline || props.title || "";
+  const safeDescription = props.description || "";
+  const safePublishedAt = props.publishedAt || new Date().toISOString();
+  const safeUpdatedAt =
+    props.updatedAt || props.publishedAt || new Date().toISOString();
+  const safeImageUrl = props.imageUrl || `${baseUrl}/images/article-image.jpg`;
+
   return {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
     "@id": props.url,
     url: props.url,
-    name: props.title,
-    headline: props.headline,
-    description: props.description,
+    name: safeTitle,
+    headline: safeHeadline,
+    description: safeDescription,
     inLanguage: props.locale === "zh" ? "zh-CN" : "en-US",
     isAccessibleForFree: true,
-    datePublished: props.publishedAt,
-    dateModified: props.updatedAt,
+    datePublished: safePublishedAt,
+    dateModified: safeUpdatedAt,
+    ...(safeImageUrl && {
+      image: {
+        "@type": "ImageObject",
+        url: safeImageUrl,
+      },
+    }),
     author: {
       "@type": "Organization",
       name: "PeriodHub Health Team",
@@ -71,7 +86,7 @@ export function generateArticleStructuredData(
     },
     about: {
       "@type": "MedicalCondition",
-      name: condition.name,
+      name: condition.name || "Dysmenorrhea",
       ...(condition.icd10 && {
         code: {
           "@type": "MedicalCode",
@@ -87,11 +102,11 @@ export function generateArticleStructuredData(
       props.citations.length > 0 && {
         isBasedOn: props.citations.map((citation) => ({
           "@type": "MedicalScholarlyArticle",
-          name: citation.name,
-          url: citation.url,
+          name: citation.name || "",
+          url: citation.url || "",
           author: {
             "@type": "Organization",
-            name: citation.author,
+            name: citation.author || "PeriodHub Team",
           },
         })),
       }),

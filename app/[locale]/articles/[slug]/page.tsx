@@ -219,15 +219,29 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const article = await getArticleBySlug(slug);
+
+  // 🚨 IndexNow映射slug处理 - 将别名重定向到实际slug
+  const slugMapping: Record<string, string> = {
+    "pain-complications-management": "menstrual-pain-complications-management",
+    "health-tracking-and-analysis": "personal-menstrual-health-profile",
+    "evidence-based-pain-guidance": "menstrual-pain-medical-guide",
+    "sustainable-health-management": "menstrual-preventive-care-complete-plan",
+    "anti-inflammatory-diet-guide": "anti-inflammatory-diet-period-pain",
+    "iud-comprehensive-guide": "comprehensive-iud-guide",
+  };
+
+  // 如果slug是映射别名，使用实际slug
+  const actualSlug = slugMapping[slug] || slug;
+  const article = await getArticleBySlug(actualSlug);
 
   // 如果文章不存在，在构建时就应该失败，而不是返回默认metadata
   // 这样可以确保只有存在的文章才会被静态生成
   if (!article) {
     // 在构建时，如果generateStaticParams中包含了这个slug，但文章不存在
     // 说明配置有问题，应该抛出错误
+    // 使用 actualSlug 而不是 slug，因为可能是映射后的slug
     throw new Error(
-      `Article not found for slug: ${slug}. This should not happen if generateStaticParams is correct.`,
+      `Article not found for slug: ${actualSlug} (original: ${slug}). This should not happen if generateStaticParams is correct.`,
     );
   }
 
@@ -243,7 +257,8 @@ export async function generateMetadata({
   const seoDescription = description;
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
-  const canonicalUrl = `/${locale}/articles/${slug}`;
+  // 使用 actualSlug 而不是 slug，确保 canonical URL 使用实际的文章 slug
+  const canonicalUrl = `/${locale}/articles/${actualSlug}`;
   const articleUrl = `${baseUrl}${canonicalUrl}`;
 
   // 安全地处理日期，确保始终是有效的 ISO 字符串

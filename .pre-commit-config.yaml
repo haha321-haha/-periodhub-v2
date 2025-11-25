@@ -16,6 +16,7 @@ repos:
       - id: check-merge-conflict
       - id: check-added-large-files
         args: ['--maxkb=1000']
+        exclude: '^public/downloads/.*\.pdf$'  # 允许下载目录下的 PDF 文件超过 1000 KB
 
   # ESLint检查
   - repo: https://github.com/pre-commit/mirrors-eslint

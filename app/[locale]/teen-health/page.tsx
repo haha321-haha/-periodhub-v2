@@ -75,7 +75,9 @@ export default async function TeenHealthPage({
       icon: <School className="w-8 h-8" />,
       color: "bg-blue-50 text-blue-600",
       href: "/teen-health/campus-guide",
-      highlights: t.raw("features.campusGuide.highlights"),
+      highlights: Array.isArray(t.raw("features.campusGuide.highlights"))
+        ? t.raw("features.campusGuide.highlights")
+        : [],
     },
     {
       id: "development-pain",
@@ -84,7 +86,9 @@ export default async function TeenHealthPage({
       icon: <Heart className="w-8 h-8" />,
       color: "bg-pink-50 text-pink-600",
       href: "/teen-health/development-pain",
-      highlights: t.raw("features.developmentPain.highlights"),
+      highlights: Array.isArray(t.raw("features.developmentPain.highlights"))
+        ? t.raw("features.developmentPain.highlights")
+        : [],
     },
     {
       id: "emotional-support",
@@ -93,7 +97,9 @@ export default async function TeenHealthPage({
       icon: <Brain className="w-8 h-8" />,
       color: "bg-purple-50 text-purple-600",
       href: "/teen-health/emotional-support",
-      highlights: t.raw("features.emotionalSupport.highlights"),
+      highlights: Array.isArray(t.raw("features.emotionalSupport.highlights"))
+        ? t.raw("features.emotionalSupport.highlights")
+        : [],
     },
     {
       id: "communication-guide",
@@ -102,7 +108,9 @@ export default async function TeenHealthPage({
       icon: <MessageCircle className="w-8 h-8" />,
       color: "bg-green-50 text-green-600",
       href: "/teen-health/communication-guide",
-      highlights: t.raw("features.communicationGuide.highlights"),
+      highlights: Array.isArray(t.raw("features.communicationGuide.highlights"))
+        ? t.raw("features.communicationGuide.highlights")
+        : [],
     },
   ];
 
@@ -169,17 +177,18 @@ export default async function TeenHealthPage({
                 {t("quickHelp.immediateMethods")}
               </h3>
               <div className="space-y-2">
-                {t
-                  .raw("quickHelp.methods")
-                  .map((method: string, index: number) => (
-                    <div
-                      key={index}
-                      className="flex items-center text-sm text-gray-600"
-                    >
-                      <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                      {method}
-                    </div>
-                  ))}
+                {Array.isArray(t.raw("quickHelp.methods")) &&
+                  t
+                    .raw("quickHelp.methods")
+                    .map((method: string, index: number) => (
+                      <div
+                        key={index}
+                        className="flex items-center text-sm text-gray-600"
+                      >
+                        <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
+                        {method}
+                      </div>
+                    ))}
               </div>
             </div>
           </div>
@@ -245,15 +254,16 @@ export default async function TeenHealthPage({
               </p>
 
               <div className="space-y-2 mb-6">
-                {feature.highlights.map((highlight: string, index: number) => (
-                  <div
-                    key={index}
-                    className="flex items-center text-sm text-gray-700"
-                  >
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                    <span>{highlight}</span>
-                  </div>
-                ))}
+                {Array.isArray(feature.highlights) &&
+                  feature.highlights.map((highlight: string, index: number) => (
+                    <div
+                      key={index}
+                      className="flex items-center text-sm text-gray-700"
+                    >
+                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                      <span>{highlight}</span>
+                    </div>
+                  ))}
               </div>
 
               <Link

@@ -440,29 +440,47 @@ export default async function ArticlePage({
         : article.summary || article.description || "";
 
     // 清理相关文章数据，确保所有字段都是可序列化的
-    const cleanedRelatedArticles = relatedArticles.map((relatedArticle) => ({
-      slug: relatedArticle.slug || "",
-      title: relatedArticle.title || "",
-      title_zh: relatedArticle.title_zh || relatedArticle.titleZh || "",
-      summary: relatedArticle.summary || relatedArticle.description || "",
-      summary_zh:
-        relatedArticle.summary_zh ||
-        relatedArticle.descriptionZh ||
-        relatedArticle.description ||
-        "",
-      category: relatedArticle.category || "general",
-      tags: Array.isArray(relatedArticle.tags) ? relatedArticle.tags : [],
-      publishedAt: relatedArticle.publishedAt || new Date().toISOString(),
-      updatedAt: relatedArticle.updatedAt || new Date().toISOString(),
-      readingTime:
-        typeof relatedArticle.readingTime === "number"
-          ? relatedArticle.readingTime
-          : 10,
-      featured:
-        typeof relatedArticle.featured === "boolean"
-          ? relatedArticle.featured
-          : false,
-    }));
+    // 使用固定的后备日期，避免每次渲染时创建新的 Date 对象
+    const fallbackDate = new Date().toISOString();
+    const cleanedRelatedArticles = relatedArticles.map((relatedArticle) => {
+      // 安全地处理日期
+      const safePublishedAt = relatedArticle.publishedAt
+        ? (() => {
+            const date = new Date(relatedArticle.publishedAt);
+            return isNaN(date.getTime()) ? fallbackDate : date.toISOString();
+          })()
+        : fallbackDate;
+      const safeUpdatedAt = relatedArticle.updatedAt
+        ? (() => {
+            const date = new Date(relatedArticle.updatedAt);
+            return isNaN(date.getTime()) ? safePublishedAt : date.toISOString();
+          })()
+        : safePublishedAt;
+
+      return {
+        slug: relatedArticle.slug || "",
+        title: relatedArticle.title || "",
+        title_zh: relatedArticle.title_zh || relatedArticle.titleZh || "",
+        summary: relatedArticle.summary || relatedArticle.description || "",
+        summary_zh:
+          relatedArticle.summary_zh ||
+          relatedArticle.descriptionZh ||
+          relatedArticle.description ||
+          "",
+        category: relatedArticle.category || "general",
+        tags: Array.isArray(relatedArticle.tags) ? relatedArticle.tags : [],
+        publishedAt: safePublishedAt,
+        updatedAt: safeUpdatedAt,
+        readingTime:
+          typeof relatedArticle.readingTime === "number"
+            ? relatedArticle.readingTime
+            : 10,
+        featured:
+          typeof relatedArticle.featured === "boolean"
+            ? relatedArticle.featured
+            : false,
+      };
+    });
     // 将category转换为安全的翻译键名
     const categoryKey = article.category
       .toLowerCase()
@@ -479,7 +497,11 @@ export default async function ArticlePage({
     const isNSAIDArticle = slug === "nsaid-menstrual-pain-professional-guide";
 
     // Check if this article contains Mermaid charts
-    const hasMermaidCharts = article.content.includes("```mermaid");
+    // 安全地检查内容，避免 undefined 错误
+    const hasMermaidCharts =
+      article.content && typeof article.content === "string"
+        ? article.content.includes("```mermaid")
+        : false;
 
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";

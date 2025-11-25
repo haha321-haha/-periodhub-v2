@@ -7,6 +7,7 @@ import {
 import { generateAllStructuredData } from "./utils/seoOptimization";
 import { Locale } from "@/i18n";
 import { generatePageSEO, StructuredDataType } from "@/lib/seo/page-seo";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 // 生成页面元数据 - 使用翻译系统，避免硬编码
 export async function generateMetadata({
@@ -107,7 +108,7 @@ export default async function Layout({
         <script
           key={index}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+          dangerouslySetInnerHTML={{ __html: safeStringify(data) }}
         />
       ))}
 

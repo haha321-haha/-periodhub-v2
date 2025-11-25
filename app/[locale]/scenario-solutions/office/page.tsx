@@ -18,6 +18,7 @@ import {
   Hand,
   Copy,
 } from "lucide-react";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 // Types
 type Locale = "en" | "zh";
@@ -608,7 +609,7 @@ export default async function OfficeScenarioPage({ params }: Props) {
       {/* 结构化数据 */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: safeStringify(structuredData) }}
       />
       <div
         className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 md:space-y-12"
@@ -622,514 +623,526 @@ export default async function OfficeScenarioPage({ params }: Props) {
           ]}
         />
 
-      {/* Page Header */}
-      <header className="text-center">
-        <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Briefcase className="w-8 h-8" />
-        </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
-          {t("scenarios.office.title")}
-        </h1>
-        <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-          {t("scenarios.office.description")}
-        </p>
-      </header>
+        {/* Page Header */}
+        <header className="text-center">
+          <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Briefcase className="w-8 h-8" />
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-primary-700 mb-4">
+            {t("scenarios.office.title")}
+          </h1>
+          <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
+            {t("scenarios.office.description")}
+          </p>
+        </header>
 
-      {/* Emergency Kit Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-neutral-50 p-6 md:p-8 rounded-xl">
-        <div className="flex items-center mb-6">
-          <AlertTriangle className="w-6 h-6 text-blue-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {t("scenarios.office.emergencyKit.title")}
-          </h2>
-        </div>
+        {/* Emergency Kit Section */}
+        <section className="bg-gradient-to-br from-blue-50 to-neutral-50 p-6 md:p-8 rounded-xl">
+          <div className="flex items-center mb-6">
+            <AlertTriangle className="w-6 h-6 text-blue-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {t("scenarios.office.emergencyKit.title")}
+            </h2>
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {emergencyKitItems.map((category, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold text-neutral-800 mb-4">
-                {category.category}
-              </h3>
-              <ul className="space-y-3">
-                {category.items.map((item, itemIndex) => (
-                  <li key={itemIndex} className="flex items-start">
-                    <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-neutral-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
+          <div className="grid md:grid-cols-3 gap-6">
+            {emergencyKitItems.map((category, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="text-lg font-semibold text-neutral-800 mb-4">
+                  {category.category}
+                </h3>
+                <ul className="space-y-3">
+                  {category.items.map((item, itemIndex) => (
+                    <li key={itemIndex} className="flex items-start">
+                      <CheckCircle className="w-4 h-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-neutral-700">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 p-4 bg-blue-100 rounded-lg">
+            <h4 className="font-semibold text-blue-800 mb-2">
+              {t("scenarios.office.emergencyKit.discreteUsageGuide")}
+            </h4>
+            <ul className="text-sm text-blue-700 space-y-1">
+              <li>
+                •{" "}
+                {locale === "zh"
+                  ? '热敷贴启动借口："正在用暖宝宝缓解肩颈酸痛"'
+                  : 'Heat patch excuse: "Using heat pad for neck and shoulder pain"'}
+              </li>
+              <li>
+                •{" "}
+                {locale === "zh"
+                  ? '突发疼痛离场话术："需要紧急处理客户邮件"'
+                  : 'Emergency exit phrase: "Need to handle urgent client email"'}
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Stretching Exercises Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Dumbbell className="w-6 h-6 text-blue-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {t("scenarios.office.stretching.title")}
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+            {stretchExercises.map((exercise, index) => (
+              <div key={index} className="card">
+                <h3 className="text-lg font-semibold text-neutral-800 mb-3">
+                  {exercise.name}
+                </h3>
+                <p className="text-neutral-600 mb-4">{exercise.description}</p>
+                <div className="mb-4">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    <Clock className="w-3 h-3 mr-1" />
+                    {exercise.duration}
+                  </span>
+                </div>
+                <ol className="space-y-2">
+                  {exercise.steps.map((step, stepIndex) => (
+                    <li
+                      key={stepIndex}
+                      className="flex items-start text-sm text-neutral-700"
+                    >
+                      <span className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
+                        {stepIndex + 1}
+                      </span>
+                      {step}
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Nutrition Plan Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Utensils className="w-6 h-6 text-blue-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {t("scenarios.office.nutrition.title")}
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {nutritionPlan.map((meal, index) => (
+              <div key={index} className="card">
+                <div className="flex items-center mb-3">
+                  <Coffee className="w-5 h-5 text-blue-600 mr-2" />
+                  <h3 className="text-lg font-semibold text-neutral-800">
+                    {meal.time}
+                  </h3>
+                </div>
+                <p className="text-neutral-700 mb-2 font-medium">
+                  {meal.foods}
+                </p>
+                <p className="text-sm text-neutral-600">{meal.benefits}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 p-6 bg-red-50 rounded-lg">
+            <h4 className="font-semibold text-red-800 mb-3">
+              {t("scenarios.office.nutrition.avoidFoods.title")}
+            </h4>
+            <div className="grid md:grid-cols-3 gap-4 text-sm text-red-700">
+              <div>
+                <strong>
+                  {t(
+                    "scenarios.office.nutrition.avoidFoods.coldDrinks.category",
+                  )}
+                </strong>
+                <p>
+                  {t("scenarios.office.nutrition.avoidFoods.coldDrinks.items")}
+                </p>
+              </div>
+              <div>
+                <strong>
+                  {t(
+                    "scenarios.office.nutrition.avoidFoods.highSaltSnacks.category",
+                  )}
+                </strong>
+                <p>
+                  {t(
+                    "scenarios.office.nutrition.avoidFoods.highSaltSnacks.items",
+                  )}
+                </p>
+              </div>
+              <div>
+                <strong>
+                  {t(
+                    "scenarios.office.nutrition.avoidFoods.excessiveCaffeine.category",
+                  )}
+                </strong>
+                <p>
+                  {t(
+                    "scenarios.office.nutrition.avoidFoods.excessiveCaffeine.items",
+                  )}
+                </p>
+              </div>
             </div>
-          ))}
-        </div>
+          </div>
+        </section>
 
-        <div className="mt-6 p-4 bg-blue-100 rounded-lg">
-          <h4 className="font-semibold text-blue-800 mb-2">
-            {t("scenarios.office.emergencyKit.discreteUsageGuide")}
-          </h4>
-          <ul className="text-sm text-blue-700 space-y-1">
-            <li>
-              •{" "}
-              {locale === "zh"
-                ? '热敷贴启动借口："正在用暖宝宝缓解肩颈酸痛"'
-                : 'Heat patch excuse: "Using heat pad for neck and shoulder pain"'}
-            </li>
-            <li>
-              •{" "}
-              {locale === "zh"
-                ? '突发疼痛离场话术："需要紧急处理客户邮件"'
-                : 'Emergency exit phrase: "Need to handle urgent client email"'}
-            </li>
-          </ul>
-        </div>
-      </section>
+        {/* Communication Templates Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <MessageCircle className="w-6 h-6 text-blue-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {t("scenarios.office.communication.title")}
+            </h2>
+          </div>
+          <p className="text-neutral-600 mb-8">
+            {t("scenarios.office.communication.description")}
+          </p>
 
-      {/* Stretching Exercises Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Dumbbell className="w-6 h-6 text-blue-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {t("scenarios.office.stretching.title")}
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
-          {stretchExercises.map((exercise, index) => (
-            <div key={index} className="card">
-              <h3 className="text-lg font-semibold text-neutral-800 mb-3">
-                {exercise.name}
-              </h3>
-              <p className="text-neutral-600 mb-4">{exercise.description}</p>
-              <div className="mb-4">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                  <Clock className="w-3 h-3 mr-1" />
-                  {exercise.duration}
+          <div className="space-y-8">
+            {/* Menstrual Pain Leave Email Template - First Position */}
+            <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl">
+              <div className="flex items-center mb-6">
+                <span className="text-2xl mr-3">📧</span>
+                <h3 className="text-xl font-semibold text-neutral-800">
+                  {t("scenarios.office.communication.leaveRequest.title")}
+                </h3>
+                <span className="ml-3 bg-purple-100 text-purple-800 text-xs font-medium px-2 py-1 rounded-full">
+                  {t("scenarios.office.communication.leaveRequest.subtitle")}
                 </span>
               </div>
-              <ol className="space-y-2">
-                {exercise.steps.map((step, stepIndex) => (
-                  <li
-                    key={stepIndex}
-                    className="flex items-start text-sm text-neutral-700"
-                  >
-                    <span className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-medium mr-2 mt-0.5 flex-shrink-0">
-                      {stepIndex + 1}
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Chinese Version */}
+                <div className="bg-white p-6 rounded-lg shadow-sm">
+                  <h4 className="font-medium text-neutral-800 mb-4 flex items-center">
+                    <span className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs font-bold mr-2">
+                      中
                     </span>
-                    {step}
-                  </li>
-                ))}
-              </ol>
-            </div>
-          ))}
-        </div>
-      </section>
+                    中文版
+                  </h4>
 
-      {/* Nutrition Plan Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Utensils className="w-6 h-6 text-blue-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {t("scenarios.office.nutrition.title")}
-          </h2>
-        </div>
+                  <div className="space-y-4">
+                    <div>
+                      <strong className="text-sm text-neutral-700">
+                        主题：
+                      </strong>
+                      <div className="bg-gray-50 p-3 rounded mt-1">
+                        <p className="text-sm text-gray-800">
+                          {t(
+                            "scenarios.office.communication.leaveRequest.chinese.subject",
+                          )}
+                        </p>
+                      </div>
+                    </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {nutritionPlan.map((meal, index) => (
-            <div key={index} className="card">
-              <div className="flex items-center mb-3">
-                <Coffee className="w-5 h-5 text-blue-600 mr-2" />
-                <h3 className="text-lg font-semibold text-neutral-800">
-                  {meal.time}
-                </h3>
+                    <div>
+                      <strong className="text-sm text-neutral-700">
+                        邮件正文：
+                      </strong>
+                      <div className="bg-gray-50 p-3 rounded mt-1">
+                        <p className="text-sm text-gray-800 whitespace-pre-line">
+                          {t(
+                            "scenarios.office.communication.leaveRequest.chinese.greeting",
+                          )}
+                          <br />
+                          <br />
+                          {t(
+                            "scenarios.office.communication.leaveRequest.chinese.salutation",
+                          )}
+                          <br />
+                          <br />
+                          {t(
+                            "scenarios.office.communication.leaveRequest.chinese.body",
+                          )}
+                          <br />
+                          <br />
+                          {t(
+                            "scenarios.office.communication.leaveRequest.chinese.closing",
+                          )}
+                          <br />
+                          <br />
+                          {t(
+                            "scenarios.office.communication.leaveRequest.chinese.signature",
+                          )}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 inline-flex items-center text-blue-600 text-sm font-medium">
+                    <Copy className="w-4 h-4 mr-1" />
+                    <span className="text-xs text-neutral-500">
+                      {t("scenarios.office.communication.copyToUse")}
+                    </span>
+                  </div>
+                </div>
+
+                {/* English Version */}
+                <div className="bg-white p-6 rounded-lg shadow-sm">
+                  <h4 className="font-medium text-neutral-800 mb-4 flex items-center">
+                    <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-2">
+                      EN
+                    </span>
+                    English Version
+                  </h4>
+
+                  <div className="space-y-4">
+                    <div>
+                      <strong className="text-sm text-neutral-700">
+                        Subject:
+                      </strong>
+                      <div className="bg-gray-50 p-3 rounded mt-1">
+                        <p className="text-sm text-gray-800">
+                          {t(
+                            "scenarios.office.communication.leaveRequest.english.subject",
+                          )}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <strong className="text-sm text-neutral-700">
+                        Email Body:
+                      </strong>
+                      <div className="bg-gray-50 p-3 rounded mt-1">
+                        <p className="text-sm text-gray-800 whitespace-pre-line">
+                          {t(
+                            "scenarios.office.communication.leaveRequest.english.greeting",
+                          )}
+                          <br />
+                          <br />
+                          {t(
+                            "scenarios.office.communication.leaveRequest.english.salutation",
+                          )}
+                          <br />
+                          <br />
+                          {t(
+                            "scenarios.office.communication.leaveRequest.english.body",
+                          )}
+                          <br />
+                          <br />
+                          {t(
+                            "scenarios.office.communication.leaveRequest.english.closing",
+                          )}
+                          <br />
+                          <br />
+                          {t(
+                            "scenarios.office.communication.leaveRequest.english.signature",
+                          )}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 inline-flex items-center text-blue-600 text-sm font-medium">
+                    <Copy className="w-4 h-4 mr-1" />
+                    <span className="text-xs text-neutral-500">
+                      {t("scenarios.office.communication.copyToUse")}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <p className="text-neutral-700 mb-2 font-medium">{meal.foods}</p>
-              <p className="text-sm text-neutral-600">{meal.benefits}</p>
             </div>
-          ))}
-        </div>
 
-        <div className="mt-6 p-6 bg-red-50 rounded-lg">
-          <h4 className="font-semibold text-red-800 mb-3">
-            {t("scenarios.office.nutrition.avoidFoods.title")}
-          </h4>
-          <div className="grid md:grid-cols-3 gap-4 text-sm text-red-700">
-            <div>
-              <strong>
-                {t("scenarios.office.nutrition.avoidFoods.coldDrinks.category")}
-              </strong>
-              <p>
-                {t("scenarios.office.nutrition.avoidFoods.coldDrinks.items")}
-              </p>
-            </div>
-            <div>
-              <strong>
-                {t(
-                  "scenarios.office.nutrition.avoidFoods.highSaltSnacks.category",
-                )}
-              </strong>
-              <p>
-                {t(
-                  "scenarios.office.nutrition.avoidFoods.highSaltSnacks.items",
-                )}
-              </p>
-            </div>
-            <div>
-              <strong>
-                {t(
-                  "scenarios.office.nutrition.avoidFoods.excessiveCaffeine.category",
-                )}
-              </strong>
-              <p>
-                {t(
-                  "scenarios.office.nutrition.avoidFoods.excessiveCaffeine.items",
-                )}
-              </p>
-            </div>
+            {/* Other Communication Templates */}
+            {communicationTemplates.map((category, index) => (
+              <div
+                key={index}
+                className="bg-gradient-to-br from-blue-50 to-neutral-50 p-6 rounded-xl"
+              >
+                <div className="flex items-center mb-6">
+                  <span className="text-2xl mr-3">{category.icon}</span>
+                  <h3 className="text-xl font-semibold text-neutral-800">
+                    {category.scenario}
+                  </h3>
+                </div>
+
+                <div className="grid md:grid-cols-1 gap-4">
+                  {category.templates.map((template, templateIndex) => (
+                    <div
+                      key={templateIndex}
+                      className="bg-white p-6 rounded-lg shadow-sm"
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <h4 className="font-medium text-neutral-800">
+                          {template.situation}
+                        </h4>
+                        <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">
+                          {template.tone}
+                        </span>
+                      </div>
+
+                      <div className="bg-blue-50 p-4 rounded-lg mb-4">
+                        <p className="text-blue-800 leading-relaxed">
+                          {template.template}
+                        </p>
+                      </div>
+
+                      <div className="inline-flex items-center text-blue-600 text-sm font-medium">
+                        <Copy className="w-4 h-4 mr-1" />
+                        <span className="text-xs text-neutral-500">
+                          {t("scenarios.office.communication.copyToUse")}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Communication Templates Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <MessageCircle className="w-6 h-6 text-blue-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {t("scenarios.office.communication.title")}
-          </h2>
-        </div>
-        <p className="text-neutral-600 mb-8">
-          {t("scenarios.office.communication.description")}
-        </p>
-
-        <div className="space-y-8">
-          {/* Menstrual Pain Leave Email Template - First Position */}
-          <div className="bg-gradient-to-br from-purple-50 to-blue-50 p-6 rounded-xl">
-            <div className="flex items-center mb-6">
-              <span className="text-2xl mr-3">📧</span>
-              <h3 className="text-xl font-semibold text-neutral-800">
-                {t("scenarios.office.communication.leaveRequest.title")}
-              </h3>
-              <span className="ml-3 bg-purple-100 text-purple-800 text-xs font-medium px-2 py-1 rounded-full">
-                {t("scenarios.office.communication.leaveRequest.subtitle")}
-              </span>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Chinese Version */}
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h4 className="font-medium text-neutral-800 mb-4 flex items-center">
-                  <span className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs font-bold mr-2">
-                    中
-                  </span>
-                  中文版
-                </h4>
-
-                <div className="space-y-4">
-                  <div>
-                    <strong className="text-sm text-neutral-700">主题：</strong>
-                    <div className="bg-gray-50 p-3 rounded mt-1">
-                      <p className="text-sm text-gray-800">
-                        {t(
-                          "scenarios.office.communication.leaveRequest.chinese.subject",
-                        )}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <strong className="text-sm text-neutral-700">
-                      邮件正文：
-                    </strong>
-                    <div className="bg-gray-50 p-3 rounded mt-1">
-                      <p className="text-sm text-gray-800 whitespace-pre-line">
-                        {t(
-                          "scenarios.office.communication.leaveRequest.chinese.greeting",
-                        )}
-                        <br />
-                        <br />
-                        {t(
-                          "scenarios.office.communication.leaveRequest.chinese.salutation",
-                        )}
-                        <br />
-                        <br />
-                        {t(
-                          "scenarios.office.communication.leaveRequest.chinese.body",
-                        )}
-                        <br />
-                        <br />
-                        {t(
-                          "scenarios.office.communication.leaveRequest.chinese.closing",
-                        )}
-                        <br />
-                        <br />
-                        {t(
-                          "scenarios.office.communication.leaveRequest.chinese.signature",
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 inline-flex items-center text-blue-600 text-sm font-medium">
-                  <Copy className="w-4 h-4 mr-1" />
-                  <span className="text-xs text-neutral-500">
-                    {t("scenarios.office.communication.copyToUse")}
-                  </span>
-                </div>
-              </div>
-
-              {/* English Version */}
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h4 className="font-medium text-neutral-800 mb-4 flex items-center">
-                  <span className="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-2">
-                    EN
-                  </span>
-                  English Version
-                </h4>
-
-                <div className="space-y-4">
-                  <div>
-                    <strong className="text-sm text-neutral-700">
-                      Subject:
-                    </strong>
-                    <div className="bg-gray-50 p-3 rounded mt-1">
-                      <p className="text-sm text-gray-800">
-                        {t(
-                          "scenarios.office.communication.leaveRequest.english.subject",
-                        )}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <strong className="text-sm text-neutral-700">
-                      Email Body:
-                    </strong>
-                    <div className="bg-gray-50 p-3 rounded mt-1">
-                      <p className="text-sm text-gray-800 whitespace-pre-line">
-                        {t(
-                          "scenarios.office.communication.leaveRequest.english.greeting",
-                        )}
-                        <br />
-                        <br />
-                        {t(
-                          "scenarios.office.communication.leaveRequest.english.salutation",
-                        )}
-                        <br />
-                        <br />
-                        {t(
-                          "scenarios.office.communication.leaveRequest.english.body",
-                        )}
-                        <br />
-                        <br />
-                        {t(
-                          "scenarios.office.communication.leaveRequest.english.closing",
-                        )}
-                        <br />
-                        <br />
-                        {t(
-                          "scenarios.office.communication.leaveRequest.english.signature",
-                        )}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 inline-flex items-center text-blue-600 text-sm font-medium">
-                  <Copy className="w-4 h-4 mr-1" />
-                  <span className="text-xs text-neutral-500">
-                    {t("scenarios.office.communication.copyToUse")}
-                  </span>
-                </div>
-              </div>
-            </div>
+        {/* Acupressure Points Section */}
+        <section>
+          <div className="flex items-center mb-6">
+            <Hand className="w-6 h-6 text-blue-600 mr-3" />
+            <h2 className="text-2xl font-semibold text-neutral-800">
+              {t("scenarios.office.acupressure.title")}
+            </h2>
           </div>
-
-          {/* Other Communication Templates */}
-          {communicationTemplates.map((category, index) => (
-            <div
-              key={index}
-              className="bg-gradient-to-br from-blue-50 to-neutral-50 p-6 rounded-xl"
-            >
-              <div className="flex items-center mb-6">
-                <span className="text-2xl mr-3">{category.icon}</span>
-                <h3 className="text-xl font-semibold text-neutral-800">
-                  {category.scenario}
-                </h3>
-              </div>
-
-              <div className="grid md:grid-cols-1 gap-4">
-                {category.templates.map((template, templateIndex) => (
-                  <div
-                    key={templateIndex}
-                    className="bg-white p-6 rounded-lg shadow-sm"
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-medium text-neutral-800">
-                        {template.situation}
-                      </h4>
-                      <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">
-                        {template.tone}
-                      </span>
-                    </div>
-
-                    <div className="bg-blue-50 p-4 rounded-lg mb-4">
-                      <p className="text-blue-800 leading-relaxed">
-                        {template.template}
-                      </p>
-                    </div>
-
-                    <div className="inline-flex items-center text-blue-600 text-sm font-medium">
-                      <Copy className="w-4 h-4 mr-1" />
-                      <span className="text-xs text-neutral-500">
-                        {t("scenarios.office.communication.copyToUse")}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Acupressure Points Section */}
-      <section>
-        <div className="flex items-center mb-6">
-          <Hand className="w-6 h-6 text-blue-600 mr-3" />
-          <h2 className="text-2xl font-semibold text-neutral-800">
-            {t("scenarios.office.acupressure.title")}
-          </h2>
-        </div>
-        <p className="text-neutral-600 mb-8">
-          {t("scenarios.office.acupressure.description")}
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {acupressurePoints.map((point, index) => (
-            <div key={index} className="card">
-              <h3 className="text-lg font-semibold text-neutral-800 mb-3">
-                {point.name}
-              </h3>
-
-              <div className="space-y-4">
-                <div>
-                  <h4 className="font-medium text-neutral-700 mb-2">
-                    {t("scenarios.office.acupressure.locationLabel")}
-                  </h4>
-                  <p className="text-neutral-600 text-sm">{point.location}</p>
-                </div>
-
-                <div>
-                  <h4 className="font-medium text-neutral-700 mb-2">
-                    {t("scenarios.office.acupressure.benefitsLabel")}
-                  </h4>
-                  <p className="text-neutral-600 text-sm">{point.benefits}</p>
-                </div>
-
-                <div>
-                  <h4 className="font-medium text-neutral-700 mb-2">
-                    {t("scenarios.office.acupressure.techniqueLabel")}
-                  </h4>
-                  <p className="text-neutral-600 text-sm">{point.technique}</p>
-                </div>
-
-                <div className="bg-blue-50 p-3 rounded-lg">
-                  <h4 className="font-medium text-blue-800 mb-1 text-sm">
-                    {t("scenarios.office.acupressure.officeApplicationLabel")}
-                  </h4>
-                  <p className="text-blue-700 text-sm">{point.officeUse}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 p-4 bg-yellow-50 rounded-lg">
-          <h4 className="font-semibold text-yellow-800 mb-2">
-            {t("scenarios.office.acupressure.scientificBasis.title")}
-          </h4>
-          <p className="text-yellow-700 text-sm">
-            {t("scenarios.office.acupressure.scientificBasis.description")}
+          <p className="text-neutral-600 mb-8">
+            {t("scenarios.office.acupressure.description")}
           </p>
-        </div>
-      </section>
 
-      {/* 相关推荐区域 */}
-      <section className="bg-gradient-to-br from-blue-50 to-purple-50 mt-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="space-y-12">
-            {/* 相关工具区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关工具" : "Related Tools"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.relatedTools.map((tool) => (
-                  <RelatedToolCard key={tool.id} tool={tool} locale={locale} />
-                ))}
-              </div>
-            </section>
+          <div className="grid md:grid-cols-2 gap-6">
+            {acupressurePoints.map((point, index) => (
+              <div key={index} className="card">
+                <h3 className="text-lg font-semibold text-neutral-800 mb-3">
+                  {point.name}
+                </h3>
 
-            {/* 相关文章区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "相关文章" : "Related Articles"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {recommendations.relatedArticles.map((article) => (
-                  <RelatedArticleCard
-                    key={article.id}
-                    article={article}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            </section>
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-medium text-neutral-700 mb-2">
+                      {t("scenarios.office.acupressure.locationLabel")}
+                    </h4>
+                    <p className="text-neutral-600 text-sm">{point.location}</p>
+                  </div>
 
-            {/* 场景解决方案区域 */}
-            <section>
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                {isZh ? "场景解决方案" : "Scenario Solutions"}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {recommendations.scenarioSolutions.map((solution) => (
-                  <ScenarioSolutionCard
-                    key={solution.id}
-                    solution={solution}
-                    locale={locale}
-                  />
-                ))}
+                  <div>
+                    <h4 className="font-medium text-neutral-700 mb-2">
+                      {t("scenarios.office.acupressure.benefitsLabel")}
+                    </h4>
+                    <p className="text-neutral-600 text-sm">{point.benefits}</p>
+                  </div>
+
+                  <div>
+                    <h4 className="font-medium text-neutral-700 mb-2">
+                      {t("scenarios.office.acupressure.techniqueLabel")}
+                    </h4>
+                    <p className="text-neutral-600 text-sm">
+                      {point.technique}
+                    </p>
+                  </div>
+
+                  <div className="bg-blue-50 p-3 rounded-lg">
+                    <h4 className="font-medium text-blue-800 mb-1 text-sm">
+                      {t("scenarios.office.acupressure.officeApplicationLabel")}
+                    </h4>
+                    <p className="text-blue-700 text-sm">{point.officeUse}</p>
+                  </div>
+                </div>
               </div>
-            </section>
+            ))}
           </div>
-        </div>
-      </section>
 
-      {/* Back to Overview */}
-      <div className="text-center">
-        <Link
-          href={`/${locale}/scenario-solutions`}
-          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          {t("scenarios.office.backToOverview")}
-        </Link>
-      </div>
-
-      {/* Medical Disclaimer - 移动到返回按钮下方 */}
-      <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
-        <div className="flex items-start">
-          <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
-          <div>
-            <h3 className="font-semibold text-orange-800 mb-2">
-              {t("scenarios.office.disclaimer.title")}
-            </h3>
-            <p className="text-orange-700 text-sm leading-relaxed">
-              {t("scenarios.office.disclaimer.content")}
+          <div className="mt-6 p-4 bg-yellow-50 rounded-lg">
+            <h4 className="font-semibold text-yellow-800 mb-2">
+              {t("scenarios.office.acupressure.scientificBasis.title")}
+            </h4>
+            <p className="text-yellow-700 text-sm">
+              {t("scenarios.office.acupressure.scientificBasis.description")}
             </p>
           </div>
+        </section>
+
+        {/* 相关推荐区域 */}
+        <section className="bg-gradient-to-br from-blue-50 to-purple-50 mt-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="space-y-12">
+              {/* 相关工具区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "相关工具" : "Related Tools"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.relatedTools.map((tool) => (
+                    <RelatedToolCard
+                      key={tool.id}
+                      tool={tool}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 相关文章区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "相关文章" : "Related Articles"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {recommendations.relatedArticles.map((article) => (
+                    <RelatedArticleCard
+                      key={article.id}
+                      article={article}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              {/* 场景解决方案区域 */}
+              <section>
+                <h2 className="text-xl font-semibold text-gray-900 mb-6">
+                  {isZh ? "场景解决方案" : "Scenario Solutions"}
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {recommendations.scenarioSolutions.map((solution) => (
+                    <ScenarioSolutionCard
+                      key={solution.id}
+                      solution={solution}
+                      locale={locale}
+                    />
+                  ))}
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        {/* Back to Overview */}
+        <div className="text-center">
+          <Link
+            href={`/${locale}/scenario-solutions`}
+            className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {t("scenarios.office.backToOverview")}
+          </Link>
         </div>
-      </section>
+
+        {/* Medical Disclaimer - 移动到返回按钮下方 */}
+        <section className="bg-orange-50 border-l-4 border-orange-400 p-6 rounded-lg mt-8">
+          <div className="flex items-start">
+            <AlertTriangle className="w-6 h-6 text-orange-600 mr-3 mt-1 flex-shrink-0" />
+            <div>
+              <h3 className="font-semibold text-orange-800 mb-2">
+                {t("scenarios.office.disclaimer.title")}
+              </h3>
+              <p className="text-orange-700 text-sm leading-relaxed">
+                {t("scenarios.office.disclaimer.content")}
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

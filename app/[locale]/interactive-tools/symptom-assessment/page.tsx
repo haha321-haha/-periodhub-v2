@@ -6,6 +6,7 @@ import {
 } from "@/lib/seo/tool-structured-data";
 import { generateAllStructuredData } from "./utils/seoOptimization";
 import { Locale } from "@/i18n";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 export async function generateMetadata({
   params,
@@ -153,7 +154,7 @@ export default async function SymptomAssessmentPage({
         <script
           key={index}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+          dangerouslySetInnerHTML={{ __html: safeStringify(data) }}
         />
       ))}
 

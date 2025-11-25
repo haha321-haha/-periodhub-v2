@@ -8,6 +8,7 @@ import NavigationCard from "./components/NavigationCard";
 import QuickNavigationSection from "./components/QuickNavigationSection";
 import { generateAllStructuredData } from "./utils/seoOptimization";
 import { Locale } from "@/i18n";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 interface PageParams {
   params: Promise<{ locale: string }>;
@@ -100,7 +101,7 @@ export default async function PeriodPainAssessmentPage({ params }: PageParams) {
         <script
           key={index}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+          dangerouslySetInnerHTML={{ __html: safeStringify(data) }}
         />
       ))}
 

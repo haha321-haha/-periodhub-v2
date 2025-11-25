@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -65,7 +66,7 @@ function StructuredDataScript({
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: safeStringify(data) }}
     />
   );
 }

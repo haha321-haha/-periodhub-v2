@@ -177,7 +177,7 @@ Recommended HIPAA-compliant applications:
 
 - Pain score continuously ≥8 for over 2 hours
 - Bleeding volume >16 super-absorbent pads/24 hours
-- Accompanied by high fever (>38.5℃)
+- Accompanied by high fever (above 38.5℃)
 - Severe nausea and vomiting causing dehydration
 - Confusion or fainting
 

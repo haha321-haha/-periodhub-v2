@@ -286,7 +286,7 @@ Recommend recording the following information:
 
 The following situations require immediate medical attention:
 - Sudden severe abdominal pain with nausea and vomiting
-- Pain with fever (>38.5°C)
+- Pain with fever (above 38.5°C)
 - Heavy vaginal bleeding
 - Pain with fainting or shock symptoms
 - Suspected ectopic pregnancy (missed period + abdominal pain + vaginal bleeding)

@@ -427,7 +427,7 @@ While most menstrual accompanying symptoms can be relieved through self-manageme
 **Severe Pain**:
 - Pain intensity 10/10 (on a scale of 10)
 - Regular pain medications completely ineffective
-- Pain accompanied by fever (temperature >38.5°C)
+- Pain accompanied by fever (temperature above 38.5°C)
 - Sudden change in pain nature
 
 **Abnormal Bleeding**:

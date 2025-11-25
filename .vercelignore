@@ -4,7 +4,9 @@ node_modules
 .vercel
 *.log
 .DS_Store
+# 排除文档文件，但保留 content/articles 目录下的文章文件
 *.md
+!content/articles/**/*.md
 翻译键缺失解决方案.md
 变现回路设计文件夹文档/
 百度文科数据分析/

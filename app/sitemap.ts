@@ -178,6 +178,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "comprehensive-report-non-medical-factors-menstrual-pain",
     "period-pain-simulator-accuracy-analysis",
     "medication-vs-natural-remedies-menstrual-pain",
+    "menstrual-pain-back-pain-connection",
+    "menstrual-pain-emergency-medication-guide",
+    "menstrual-sleep-quality-improvement-guide",
+    "understanding-your-cycle",
   ];
 
   // 生成文章页面

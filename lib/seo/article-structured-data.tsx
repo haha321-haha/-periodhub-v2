@@ -76,20 +76,22 @@ export function generateArticleStructuredData(
         code: condition.icd10,
         codingSystem: "ICD-10",
       },
-      sameAs: condition.snomed
-        ? `http://snomed.info/id/${condition.snomed}`
-        : undefined,
+      ...(condition.snomed && {
+        sameAs: `http://snomed.info/id/${condition.snomed}`,
+      }),
     },
-    isBasedOn:
-      props.citations?.map((citation) => ({
-        "@type": "MedicalScholarlyArticle",
-        name: citation.name,
-        url: citation.url,
-        author: {
-          "@type": "Organization",
-          name: citation.author,
-        },
-      })) || [],
+    ...(props.citations &&
+      props.citations.length > 0 && {
+        isBasedOn: props.citations.map((citation) => ({
+          "@type": "MedicalScholarlyArticle",
+          name: citation.name,
+          url: citation.url,
+          author: {
+            "@type": "Organization",
+            name: citation.author,
+          },
+        })),
+      }),
     medicalAudience: {
       "@type": "MedicalAudience",
       audienceType: "Patient",

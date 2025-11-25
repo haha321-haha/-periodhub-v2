@@ -372,10 +372,12 @@ export default async function ArticlePage({
 
     // 🚨 IndexNow映射slug处理 - 将别名重定向到实际slug
     const slugMapping: Record<string, string> = {
-      "pain-complications-management": "menstrual-pain-complications-management",
+      "pain-complications-management":
+        "menstrual-pain-complications-management",
       "health-tracking-and-analysis": "personal-menstrual-health-profile",
       "evidence-based-pain-guidance": "menstrual-pain-medical-guide",
-      "sustainable-health-management": "menstrual-preventive-care-complete-plan",
+      "sustainable-health-management":
+        "menstrual-preventive-care-complete-plan",
       "anti-inflammatory-diet-guide": "anti-inflammatory-diet-period-pain",
       "iud-comprehensive-guide": "comprehensive-iud-guide",
     };

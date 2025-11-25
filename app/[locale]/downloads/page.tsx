@@ -108,7 +108,9 @@ export default async function DownloadsPage({
           name: resource.title,
           description: resource.description,
           fileSize: `${resource.fileSize}KB`,
-          url: `process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"${resource.downloadUrl}`,
+          url: `${
+            process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+          }${resource.downloadUrl}`,
           encodingFormat: "application/pdf",
         },
       })),

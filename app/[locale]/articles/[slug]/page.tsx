@@ -587,6 +587,14 @@ export default async function ArticlePage({
       ],
     });
 
+    // 🔧 修复 P0: 将日期格式化移到 JSX 外部，避免在 JSX 中创建 Date 对象
+    const formattedPublishedDate = (() => {
+      const date = new Date(article.publishedAt);
+      return isNaN(date.getTime())
+        ? new Date().toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US")
+        : date.toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US");
+    })();
+
     return (
       <div className="min-h-screen bg-neutral-50">
         {/* 增强的SEO结构化数据 */}
@@ -643,16 +651,7 @@ export default async function ArticlePage({
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                       />
                     </svg>
-                    {(() => {
-                      const date = new Date(article.publishedAt);
-                      return isNaN(date.getTime())
-                        ? new Date().toLocaleDateString(
-                            locale === "zh" ? "zh-CN" : "en-US",
-                          )
-                        : date.toLocaleDateString(
-                            locale === "zh" ? "zh-CN" : "en-US",
-                          );
-                    })()}
+                    {formattedPublishedDate}
                   </time>
                   {readingTime && (
                     <span className="flex items-center gap-1">

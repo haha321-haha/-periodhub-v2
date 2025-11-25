@@ -307,7 +307,7 @@ In addition to pain severity itself, if period pain is accompanied by any one or
 - Sudden onset of excessive menstrual flow (such as needing frequent pad changes, large clots) or very light flow
 
 **Prolonged Menstruation**
-- Menstrual duration significantly exceeds normal range (usually >7 days)
+- Menstrual duration significantly exceeds normal range (usually more than 7 days)
 
 **Irregular Menstrual Cycles**
 - Menstrual timing becomes irregular, cycles significantly advance or delay

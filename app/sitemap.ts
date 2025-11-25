@@ -152,6 +152,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "hidden-culprits-of-menstrual-pain",
     "home-natural-menstrual-pain-relief",
     "magnesium-gut-health-comprehensive-guide",
+    "menstrual-back-pain-comprehensive-care-guide",
     "menstrual-nausea-relief-guide",
     "menstrual-pain-accompanying-symptoms-guide",
     "menstrual-pain-complications-management",

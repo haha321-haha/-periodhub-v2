@@ -217,4 +217,23 @@
   .mobile-safe-area {
     padding-bottom: env(safe-area-inset-bottom);
   }
+
+  /* Email Modal Animations */
+  @keyframes successBounce {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .animate-success-bounce {
+    animation: successBounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
 }

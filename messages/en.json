@@ -12051,6 +12051,48 @@
   "downloadButton": {
     "viewDocument": "查看Documentation"
   },
+  "emailMarketing": {
+    "downloadModal": {
+      "title": "Get the Full Guide",
+      "description": "Enter your email and we will send the PDF to you instantly.",
+      "emailPlaceholder": "name@example.com",
+      "submitButtonText": "Send to My Email",
+      "loadingText": "Sending...",
+      "successTitle": "Sent!",
+      "successDescription": "Check your inbox (and spam folder). The guide is on its way.",
+      "closeButtonText": "Close Window",
+      "errorInvalidEmail": "Please enter a valid email address",
+      "errorNetwork": "Network connection failed, please check your network and try again",
+      "errorServer": "Service temporarily unavailable, please try again later",
+      "errorRateLimit": "Too many requests, please try again later",
+      "complianceText": "By entering your email, you agree to receive weekly tips. Unsubscribe anytime.",
+      "triggerButtonText": "📥 Get Free Guide"
+    },
+    "emailTemplate": {
+      "subject": "🎁 Your Period Rescue Kit (PDF) is inside!",
+      "greeting": "Hi! Your guide is here.",
+      "downloadPrompt": "Click below to download your PDF:",
+      "downloadButtonText": "📥 Download Guide (PDF)",
+      "additionalContentTitle": "💡 While you are here, try these scenarios:",
+      "officeScenario": "Office: Discreet Pain Relief",
+      "travelScenario": "Travel: Travel-Safe Tips",
+      "signature": "Gentle care for every month.",
+      "unsubscribe": "Unsubscribe",
+      "teamSignature": "Period Hub Team"
+    },
+    "errors": {
+      "invalidEmail": "Please enter a valid email address",
+      "networkError": "Network connection failed, please check your network and try again",
+      "serverError": "Service temporarily unavailable, please try again later",
+      "rateLimitError": "Too many requests, please try again later"
+    },
+    "common": {
+      "loading": "Loading...",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "close": "Close"
+    }
+  },
   "bottomRecommendations": {
     "title": "Related Tools",
     "scenarioSolutions": {

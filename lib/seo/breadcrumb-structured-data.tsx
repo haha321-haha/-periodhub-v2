@@ -26,12 +26,14 @@ export function generateBreadcrumbStructuredData({
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: fullBreadcrumbs.map((crumb, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: crumb.name,
-      item: crumb.url,
-    })),
+    itemListElement: fullBreadcrumbs
+      .filter((crumb) => crumb.name && crumb.url) // 过滤掉无效的面包屑
+      .map((crumb, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: crumb.name || "",
+        item: crumb.url || "",
+      })),
   };
 }
 

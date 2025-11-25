@@ -428,12 +428,15 @@ export default async function ArticlePage({
 
     const title =
       locale === "zh"
-        ? article.title_zh || article.titleZh || article.title
-        : article.title;
+        ? article.title_zh || article.titleZh || article.title || ""
+        : article.title || "";
     const summary =
       locale === "zh"
-        ? article.summary_zh || article.descriptionZh || article.description
-        : article.summary || article.description;
+        ? article.summary_zh ||
+          article.descriptionZh ||
+          article.description ||
+          ""
+        : article.summary || article.description || "";
     // 将category转换为安全的翻译键名
     const categoryKey = article.category
       .toLowerCase()
@@ -489,10 +492,10 @@ export default async function ArticlePage({
       path: `/articles/${slug}`,
       breadcrumbs: [
         {
-          name: t("breadcrumb.articles"),
+          name: t("breadcrumb.articles") || "Articles",
           url: `${baseUrl}/${locale}/downloads`,
         },
-        { name: title, url: articleUrl },
+        { name: title || "Article", url: articleUrl },
       ],
     });
 

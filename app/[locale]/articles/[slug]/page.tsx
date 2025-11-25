@@ -426,6 +426,7 @@ export default async function ArticlePage({
 
     const t = await getTranslations({ locale, namespace: "articlePage" });
 
+    // 确保所有字符串字段都有值，避免undefined
     const title =
       locale === "zh"
         ? article.title_zh || article.titleZh || article.title || ""
@@ -437,6 +438,31 @@ export default async function ArticlePage({
           article.description ||
           ""
         : article.summary || article.description || "";
+
+    // 清理相关文章数据，确保所有字段都是可序列化的
+    const cleanedRelatedArticles = relatedArticles.map((relatedArticle) => ({
+      slug: relatedArticle.slug || "",
+      title: relatedArticle.title || "",
+      title_zh: relatedArticle.title_zh || relatedArticle.titleZh || "",
+      summary: relatedArticle.summary || relatedArticle.description || "",
+      summary_zh:
+        relatedArticle.summary_zh ||
+        relatedArticle.descriptionZh ||
+        relatedArticle.description ||
+        "",
+      category: relatedArticle.category || "general",
+      tags: Array.isArray(relatedArticle.tags) ? relatedArticle.tags : [],
+      publishedAt: relatedArticle.publishedAt || new Date().toISOString(),
+      updatedAt: relatedArticle.updatedAt || new Date().toISOString(),
+      readingTime:
+        typeof relatedArticle.readingTime === "number"
+          ? relatedArticle.readingTime
+          : 10,
+      featured:
+        typeof relatedArticle.featured === "boolean"
+          ? relatedArticle.featured
+          : false,
+    }));
     // 将category转换为安全的翻译键名
     const categoryKey = article.category
       .toLowerCase()
@@ -795,9 +821,9 @@ export default async function ArticlePage({
                   </p>
                 </div>
 
-                {relatedArticles.length > 0 ? (
+                {cleanedRelatedArticles.length > 0 ? (
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {relatedArticles.map((relatedArticle) => {
+                    {cleanedRelatedArticles.map((relatedArticle) => {
                       const relatedTitle =
                         locale === "zh"
                           ? relatedArticle.title_zh || relatedArticle.title

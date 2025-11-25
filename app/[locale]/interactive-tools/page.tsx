@@ -18,6 +18,7 @@ import {
   generateHreflangConfig,
   HreflangScript,
 } from "@/lib/seo/multilingual-seo";
+import { safeStringify } from "@/lib/utils/json-serialization";
 import { generatePageSEO, StructuredDataType } from "@/lib/seo/page-seo";
 
 // Generate metadata for the page
@@ -195,7 +196,7 @@ export default async function InteractiveToolsPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData),
+          __html: safeStringify(structuredData),
         }}
       />
       <div className="container mx-auto px-4 py-8 max-w-7xl">

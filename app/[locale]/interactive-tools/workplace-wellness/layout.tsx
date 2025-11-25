@@ -11,6 +11,7 @@ import {
   getWorkplaceWellnessSEOData,
   generateAllStructuredData,
 } from "./utils/seoOptimization";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 // 生成静态参数
 export async function generateStaticParams() {
@@ -69,7 +70,7 @@ export default async function WorkplaceWellnessLayout({
         <script
           key={index}
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+          dangerouslySetInnerHTML={{ __html: safeStringify(data) }}
         />
       ))}
 

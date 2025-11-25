@@ -10,6 +10,7 @@ import {
   generateHreflangConfig,
   HreflangScript,
 } from "@/lib/seo/multilingual-seo";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -21,7 +22,10 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "downloadsPage" });
 
   // 🎯 修复 Google Search Console 重复网页问题 - 添加完整的 hreflang 配置
-  const hreflangUrls = await generateHreflangConfig({ locale, path: "downloads" });
+  const hreflangUrls = await generateHreflangConfig({
+    locale,
+    path: "downloads",
+  });
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
@@ -146,7 +150,7 @@ export default async function DownloadsPage({
       {/* 结构化数据 */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: safeStringify(structuredData) }}
       />
       <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-purple-100">
         {/* 🎉 新版本标识横幅 */}

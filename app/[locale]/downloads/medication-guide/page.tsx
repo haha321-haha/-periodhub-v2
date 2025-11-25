@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
 import { generateAlternatesConfig } from "@/lib/seo/canonical-url-utils";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 // Generate metadata for the page
 export async function generateMetadata({
@@ -98,7 +99,7 @@ export default async function MedicationGuidePage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: safeStringify(structuredData) }}
       />
       <div className="container space-y-10">
         {/* Breadcrumb */}

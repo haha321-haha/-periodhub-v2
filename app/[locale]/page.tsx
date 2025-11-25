@@ -10,6 +10,7 @@ import NavigationTabs from "@/components/NavigationTabs";
 import OptimizedSVG from "@/components/ui/OptimizedSVG";
 import { SITE_CONFIG } from "@/config/site.config";
 import { generatePageSEO, StructuredDataType } from "@/lib/seo/page-seo";
+import { safeStringify } from "@/lib/utils/json-serialization";
 
 // 页面级别的metadata和结构化数据
 export async function generateMetadata({
@@ -241,7 +242,7 @@ export default async function HomePage({
           key={index}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(data),
+            __html: safeStringify(data),
           }}
         />
       ))}

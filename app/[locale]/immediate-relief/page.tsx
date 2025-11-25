@@ -6,6 +6,7 @@ import {
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
 import { locales } from "@/i18n";
+import { safeStringify } from "@/lib/utils/json-serialization";
 // import { URL_CONFIG } from "@/lib/url-config";
 
 // Generate metadata for the page
@@ -33,7 +34,7 @@ export async function generateMetadata({
     // 如果翻译键不存在，使用空数组
     seoKeywords = [];
   }
-  
+
   return {
     title: t("metadata.title"),
     description: t("metadata.description"),
@@ -51,7 +52,7 @@ export async function generateMetadata({
         }/en/immediate-relief`,
         "x-default": `${
           process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
-        }/en/immediate-relief`,  // ✅ 修复：默认英文版本
+        }/en/immediate-relief`, // ✅ 修复：默认英文版本
       },
     },
     openGraph: {
@@ -131,7 +132,7 @@ export default async function ImmediateReliefPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(structuredData),
+          __html: safeStringify(structuredData),
         }}
       />
       <div className="container space-y-10">
@@ -288,7 +289,9 @@ export default async function ImmediateReliefPage({
                   {t("gentleMovementDetails.yogaPoses.title")}
                 </h4>
                 <div className="space-y-3">
-                  {(Array.isArray(t.raw("gentleMovementDetails.yogaPoses.poses"))
+                  {(Array.isArray(
+                    t.raw("gentleMovementDetails.yogaPoses.poses"),
+                  )
                     ? t.raw("gentleMovementDetails.yogaPoses.poses")
                     : []
                   ).map(
@@ -325,34 +328,38 @@ export default async function ImmediateReliefPage({
                   {t("gentleMovementDetails.breathingExercises.title")}
                 </h4>
                 <div className="space-y-2">
-                  {(Array.isArray(t.raw("gentleMovementDetails.breathingExercises.exercises"))
-                    ? t.raw("gentleMovementDetails.breathingExercises.exercises")
+                  {(Array.isArray(
+                    t.raw("gentleMovementDetails.breathingExercises.exercises"),
+                  )
+                    ? t.raw(
+                        "gentleMovementDetails.breathingExercises.exercises",
+                      )
                     : []
                   ).map(
-                      (
-                        exercise: {
-                          name: string;
-                          steps: string;
-                          benefits: string;
-                        },
-                        index: number,
-                      ) => (
-                        <div
-                          key={index}
-                          className="border-l-2 border-blue-300 pl-3"
-                        >
-                          <h5 className="font-medium text-blue-700">
-                            {exercise.name}
-                          </h5>
-                          <p className="text-sm text-blue-600 mb-1">
-                            {exercise.steps}
-                          </p>
-                          <p className="text-xs text-blue-500">
-                            {exercise.benefits}
-                          </p>
-                        </div>
-                      ),
-                    )}
+                    (
+                      exercise: {
+                        name: string;
+                        steps: string;
+                        benefits: string;
+                      },
+                      index: number,
+                    ) => (
+                      <div
+                        key={index}
+                        className="border-l-2 border-blue-300 pl-3"
+                      >
+                        <h5 className="font-medium text-blue-700">
+                          {exercise.name}
+                        </h5>
+                        <p className="text-sm text-blue-600 mb-1">
+                          {exercise.steps}
+                        </p>
+                        <p className="text-xs text-blue-500">
+                          {exercise.benefits}
+                        </p>
+                      </div>
+                    ),
+                  )}
                 </div>
               </div>
 
@@ -682,21 +689,20 @@ export default async function ImmediateReliefPage({
                 {t("emergencyResponse.immediateActionsTitle")}
               </h3>
               <ul className="space-y-2">
-                {(typeof t.raw("emergencyResponse.immediateActions") === "object" &&
+                {(typeof t.raw("emergencyResponse.immediateActions") ===
+                  "object" &&
                 t.raw("emergencyResponse.immediateActions") !== null
                   ? Object.values(t.raw("emergencyResponse.immediateActions"))
                   : []
-                ).map(
-                  (action: string, index: number) => (
-                    <li
-                      key={index}
-                      className="flex items-start text-sm text-red-600"
-                    >
-                      <span className="w-2 h-2 bg-red-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                      {action}
-                    </li>
-                  ),
-                )}
+                ).map((action: string, index: number) => (
+                  <li
+                    key={index}
+                    className="flex items-start text-sm text-red-600"
+                  >
+                    <span className="w-2 h-2 bg-red-400 rounded-full mr-3 mt-2 flex-shrink-0"></span>
+                    {action}
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -706,9 +712,13 @@ export default async function ImmediateReliefPage({
                 {t("emergencyResponse.medicalIndicators.title")}
               </h3>
               <ul className="space-y-2">
-                {(typeof t.raw("emergencyResponse.medicalIndicators.indicators") === "object" &&
+                {(typeof t.raw(
+                  "emergencyResponse.medicalIndicators.indicators",
+                ) === "object" &&
                 t.raw("emergencyResponse.medicalIndicators.indicators") !== null
-                  ? Object.values(t.raw("emergencyResponse.medicalIndicators.indicators"))
+                  ? Object.values(
+                      t.raw("emergencyResponse.medicalIndicators.indicators"),
+                    )
                   : []
                 ).map((indicator: string, index: number) => (
                   <li
@@ -729,21 +739,20 @@ export default async function ImmediateReliefPage({
               {t("emergencyResponse.emergencyKit.title")}
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {(typeof t.raw("emergencyResponse.emergencyKit.items") === "object" &&
+              {(typeof t.raw("emergencyResponse.emergencyKit.items") ===
+                "object" &&
               t.raw("emergencyResponse.emergencyKit.items") !== null
                 ? Object.values(t.raw("emergencyResponse.emergencyKit.items"))
                 : []
-              ).map(
-                (item: string, index: number) => (
-                  <div
-                    key={index}
-                    className="flex items-center text-sm text-red-600"
-                  >
-                    <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
-                    {item}
-                  </div>
-                ),
-              )}
+              ).map((item: string, index: number) => (
+                <div
+                  key={index}
+                  className="flex items-center text-sm text-red-600"
+                >
+                  <span className="w-2 h-2 bg-red-400 rounded-full mr-2"></span>
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
         </section>

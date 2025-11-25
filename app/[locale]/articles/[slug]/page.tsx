@@ -475,14 +475,30 @@ export default async function ArticlePage({
     );
 
     // 生成增强的结构化数据
+    // 安全地处理日期，确保始终是有效的 ISO 字符串
+    const safePublishedDate = article.publishedAt
+      ? (() => {
+          const date = new Date(article.publishedAt);
+          return isNaN(date.getTime())
+            ? new Date().toISOString()
+            : date.toISOString();
+        })()
+      : new Date().toISOString();
+    const safeUpdatedDate = article.updatedAt
+      ? (() => {
+          const date = new Date(article.updatedAt);
+          return isNaN(date.getTime()) ? safePublishedDate : date.toISOString();
+        })()
+      : safePublishedDate;
+
     const articleStructuredData = generateArticleStructuredData({
       url: articleUrl,
       title,
       headline: title,
       description: summary || "",
       locale,
-      publishedAt: new Date(article.publishedAt).toISOString(),
-      updatedAt: new Date(article.updatedAt).toISOString(),
+      publishedAt: safePublishedDate,
+      updatedAt: safeUpdatedDate,
       imageUrl: "/images/article-image.jpg",
     });
 

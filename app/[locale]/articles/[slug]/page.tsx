@@ -218,6 +218,47 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
 
+  // 🔒 添加路径验证，防止图片请求被误解析为文章请求
+  // 这必须在尝试获取文章之前检查，因为 generateMetadata 在组件之前被调用
+  if (!slug || typeof slug !== "string" || slug.trim() === "") {
+    // 返回默认 metadata，避免抛出错误
+    return {
+      title: "Article Not Found",
+      description: "The requested article could not be found.",
+    };
+  }
+
+  // 检查是否是图片请求（包含文件扩展名）
+  if (
+    slug.includes(".") &&
+    (slug.endsWith(".jpg") ||
+      slug.endsWith(".jpeg") ||
+      slug.endsWith(".png") ||
+      slug.endsWith(".webp") ||
+      slug.endsWith(".gif") ||
+      slug.endsWith(".svg") ||
+      slug.endsWith(".ico"))
+  ) {
+    // 返回默认 metadata，避免抛出错误
+    return {
+      title: "Article Not Found",
+      description: "The requested article could not be found.",
+    };
+  }
+
+  // 检查是否是静态资源请求
+  if (
+    slug.startsWith("images/") ||
+    slug.startsWith("static/") ||
+    slug.startsWith("assets/")
+  ) {
+    // 返回默认 metadata，避免抛出错误
+    return {
+      title: "Article Not Found",
+      description: "The requested article could not be found.",
+    };
+  }
+
   // 🚨 IndexNow映射slug处理 - 将别名重定向到实际slug
   const slugMapping: Record<string, string> = {
     "pain-complications-management": "menstrual-pain-complications-management",

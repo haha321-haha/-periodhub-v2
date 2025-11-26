@@ -15,6 +15,20 @@ const intlMiddleware = createMiddleware({
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  // 🔒 排除静态资源路径，避免被路由到动态页面
+  // 检查是否是静态资源请求（图片、字体、PDF等）
+  if (
+    pathname.startsWith("/images/") ||
+    pathname.startsWith("/static/") ||
+    pathname.startsWith("/assets/") ||
+    pathname.startsWith("/pdfs/") ||
+    pathname.startsWith("/fonts/") ||
+    pathname.match(/\.(jpg|jpeg|png|gif|webp|svg|ico|pdf|woff|woff2|ttf|eot)$/i)
+  ) {
+    // 直接返回，不进行任何处理，让 Next.js 处理静态文件
+    return NextResponse.next();
+  }
+
   // 处理根路径重定向
   if (pathname === "/") {
     // 检测用户语言偏好

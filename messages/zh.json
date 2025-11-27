@@ -1970,7 +1970,9 @@
       "preview": "预览",
       "useInteractiveTools": "使用交互工具",
       "downloadHtmlPdf": "下载HTML格式PDF（连续阅读，支持打印）",
-      "share": "分享"
+      "share": "分享",
+      "viewDocument": "查看文档",
+      "downloadButtonText": "获取 PDF"
     },
     "tags": {
       "heatTherapy": "热敷",
@@ -6630,6 +6632,7 @@
     "socialInstagram": "Instagram",
     "copyright": "© {currentYear, number, integer} www.periodhub.health。保留所有权利。",
     "medicalDisclaimerFull": "医疗免责声明：本网站内容仅供信息和教育目的，不能替代专业医疗建议、诊断或治疗。我们不是医疗专业人员。如有任何医疗问题，请咨询您的医生或其他合格的医疗服务提供者。紧急情况下，请立即寻求医疗救助。使用本网站不构成医患关系。",
+    "dataPrivacyFull": "数据隐私（HIPAA/CCPA）：您的健康数据属于您。我们采用本地优先架构，这意味着您的敏感周期数据经过加密并直接存储在您的设备上。我们不会向第三方广告商出售、交易或分享您的个人健康信息（PHI）。",
     "quickLinks": "Quick Links",
     "support": "Support",
     "contactUs": "Contact Us",
@@ -6778,16 +6781,21 @@
       "triggerButtonText": "📥 免费下载指南"
     },
     "emailTemplate": {
-      "subject": "🎁 你的痛经急救包 (PDF) 已送达！",
+      "subject": "🎁 你的痛经急救包已送达！+ 专属场景方案",
       "greeting": "Hi! 你的经期急救指南来了。",
+      "thankYou": "感谢下载「经期急救指南」！",
+      "valueProposition": "希望它能帮你少受一点罪～",
       "downloadPrompt": "点击下方按钮直接下载PDF：",
       "downloadButtonText": "📥 点击下载指南 (PDF)",
-      "additionalContentTitle": "💡 既然来了，送你两个针对性方案：",
-      "officeScenario": "上班族：如何在办公室隐秘止痛？",
+      "additionalContentTitle": "根据你的下载记录，我为你精选了 2 个超实用场景：",
+      "officeScenario": "上班族隐秘止痛法",
+      "commuteScenario": "通勤姨妈不崩溃指南",
       "travelScenario": "旅行党：姨妈期出行不崩溃指南",
-      "signature": "愿你每个月都温柔以待。",
+      "interactionQuestion": "试试看？用完告诉我效果如何～<br><br>顺便问一句：<br><br>你最怕痛经发生在哪个场景？（回复即可）<br><br>我会根据大家反馈，更新下一版！",
+      "signature": "祝月月平安，",
       "unsubscribe": "退订",
-      "teamSignature": "Period Hub Team"
+      "unsubscribeNote": "🌸 每周一封姨妈小贴士，随时退订",
+      "teamSignature": "Period Hub 小助手"
     },
     "errors": {
       "invalidEmail": "请输入有效的邮箱地址",
@@ -6800,6 +6808,12 @@
       "submit": "提交",
       "cancel": "取消",
       "close": "关闭"
+    },
+    "emailPromptCard": {
+      "title": "获取 PDF 到邮箱",
+      "description": "点击下载按钮，填写邮箱即可将 PDF 发送到您的邮箱",
+      "buttonText": "立即了解",
+      "closeButtonAriaLabel": "关闭"
     }
   },
   "tools": {

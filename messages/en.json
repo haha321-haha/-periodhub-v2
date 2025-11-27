@@ -75,6 +75,7 @@
     "contactEmailBody": "Hello, I would like to inquire about menstrual health management.",
     "copyright": "© 2,025 www.periodhub.health. All rights reserved.",
     "medicalDisclaimerFull": "Medical Disclaimer: The content on this website is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. We are not medical professionals. If you have any medical questions, please consult your doctor or other qualified healthcare provider. In case of emergency, please seek medical assistance immediately. Using this website does not constitute a doctor-patient relationship.",
+    "dataPrivacyFull": "Data Privacy (HIPAA/CCPA): Your health data belongs to you. We utilize Local-First Architecture, meaning your sensitive cycle data is encrypted and stored directly on your device. We do not sell, trade, or share your personal health information (PHI) with third-party advertisers.",
     "quickLinks": "Quick Links",
     "support": "Support",
     "contactUs": "Contact Us",
@@ -2370,7 +2371,9 @@
       "downloadHtmlPdf": "Download PDF",
       "share": "Share",
       "preview": "Preview",
-      "useInteractiveTools": "Use Interactive Tools"
+      "useInteractiveTools": "Use Interactive Tools",
+      "viewDocument": "View Document",
+      "downloadButtonText": "Get PDF"
     },
     "tags": {
       "heatTherapy": "Heat Therapy",
@@ -12069,15 +12072,20 @@
       "triggerButtonText": "📥 Get Free Guide"
     },
     "emailTemplate": {
-      "subject": "🎁 Your Period Rescue Kit (PDF) is inside!",
+      "subject": "🎁 Your Period Pain Relief Kit is Here!",
       "greeting": "Hi! Your guide is here.",
+      "thankYou": "Thanks for downloading!",
+      "valueProposition": "Hope it helps you feel better!",
       "downloadPrompt": "Click below to download your PDF:",
       "downloadButtonText": "📥 Download Guide (PDF)",
-      "additionalContentTitle": "💡 While you are here, try these scenarios:",
-      "officeScenario": "Office: Discreet Pain Relief",
+      "additionalContentTitle": "Here are 2 scenarios tailored for you:",
+      "officeScenario": "Office Pain Hacks",
+      "commuteScenario": "Travel-Safe Period Tips",
       "travelScenario": "Travel: Travel-Safe Tips",
-      "signature": "Gentle care for every month.",
+      "interactionQuestion": "Reply and tell me: <em>Where do you dread period pain the most?</em><br><br>I'll use your feedback to improve!",
+      "signature": "Stay comfy,",
       "unsubscribe": "Unsubscribe",
+      "unsubscribeNote": "🌸 Weekly period tips, unsubscribe anytime",
       "teamSignature": "Period Hub Team"
     },
     "errors": {
@@ -12091,6 +12099,12 @@
       "submit": "Submit",
       "cancel": "Cancel",
       "close": "Close"
+    },
+    "emailPromptCard": {
+      "title": "Get PDF via Email",
+      "description": "Click download button, enter email to receive PDF",
+      "buttonText": "Learn More",
+      "closeButtonAriaLabel": "Close"
     }
   },
   "bottomRecommendations": {

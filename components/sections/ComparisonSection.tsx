@@ -11,20 +11,24 @@ import {
 } from "lucide-react";
 
 export default function ComparisonSection() {
-  const t = useTranslations("comparison");
+  const t = useTranslations("v2Home");
   const locale = useLocale();
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">{t("title")}</h2>
-        <p className="text-xl text-purple-600 font-medium">{t("subtitle")}</p>
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          {t("sections.comparison.title")}
+        </h2>
+        <p className="text-xl text-purple-600 font-medium">
+          {t("sections.comparison.subtitle")}
+        </p>
       </div>
 
       <div className="relative flex flex-col md:flex-row gap-8 items-stretch justify-center">
         {/* VS Badge */}
         <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-xl border-4 border-gray-50 font-black text-xl text-gray-800">
-          {t("vs")}
+          {t("sections.comparison.vs")}
         </div>
 
         {/* Left Card: Pills */}
@@ -36,7 +40,7 @@ export default function ComparisonSection() {
             <div className="flex items-center gap-2 text-gray-500 mb-4">
               <Pill className="w-5 h-5" />
               <span className="font-semibold tracking-wide uppercase text-sm">
-                {t("pills.title")}
+                {t("sections.comparison.pills.title")}
               </span>
             </div>
             <div className="flex flex-wrap gap-2 mb-6">
@@ -52,11 +56,15 @@ export default function ComparisonSection() {
             <div className="space-y-4">
               <div className="flex items-center gap-3 text-gray-700">
                 <Clock className="w-5 h-5 text-gray-400" />
-                <span className="font-medium">{t("pills.duration")}</span>
+                <span className="font-medium">
+                  {t("sections.comparison.pills.duration")}
+                </span>
               </div>
               <div className="flex items-center gap-3 text-red-500">
                 <AlertCircle className="w-5 h-5" />
-                <span className="font-medium">{t("pills.cons")}</span>
+                <span className="font-medium">
+                  {t("sections.comparison.pills.cons")}
+                </span>
               </div>
             </div>
           </div>
@@ -71,7 +79,7 @@ export default function ComparisonSection() {
             <div className="flex items-center gap-2 text-purple-100 mb-4">
               <Leaf className="w-5 h-5" />
               <span className="font-semibold tracking-wide uppercase text-sm">
-                {t("natural.title")}
+                {t("sections.comparison.natural.title")}
               </span>
             </div>
             <div className="flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl mb-6">
@@ -83,14 +91,16 @@ export default function ComparisonSection() {
                   <Clock className="w-4 h-4" />
                 </div>
                 <span className="font-bold text-lg">
-                  {t("natural.duration")}
+                  {t("sections.comparison.natural.duration")}
                 </span>
               </div>
               <div className="flex items-center gap-3">
                 <div className="bg-white/20 p-1 rounded-full">
                   <CheckCircle className="w-4 h-4" />
                 </div>
-                <span className="font-bold text-lg">{t("natural.pros")}</span>
+                <span className="font-bold text-lg">
+                  {t("sections.comparison.natural.pros")}
+                </span>
               </div>
             </div>
 
@@ -98,7 +108,8 @@ export default function ComparisonSection() {
               href={`/${locale}/immediate-relief`}
               className="inline-flex items-center justify-center w-full py-3 bg-white text-purple-600 rounded-xl font-bold hover:bg-purple-50 transition-colors"
             >
-              {t("subtitle")} <ArrowRight className="ml-2 w-4 h-4" />
+              {t("sections.comparison.subtitle")}{" "}
+              <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </div>
         </div>

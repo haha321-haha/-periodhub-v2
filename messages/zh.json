@@ -12606,7 +12606,22 @@
       "enter_zone": "进入专区",
       "downloads_title": "文章与下载",
       "downloads_desc": "访问我们全面的循证指南和资源集合。",
-      "downloads_coming_soon": "即将推出..."
+      "downloads_coming_soon": "即将推出...",
+      "comparison": {
+        "title": "还在每4小时吃一次药？",
+        "subtitle": "试试真正有效的24小时天然缓解方案",
+        "vs": "VS",
+        "pills": {
+          "title": "非处方药（布洛芬）",
+          "duration": "4小时缓解",
+          "cons": "可能有副作用"
+        },
+        "natural": {
+          "title": "天然缓解",
+          "duration": "24小时缓解",
+          "pros": "100% 天然安全"
+        }
+      }
     },
     "tools": {
       "pain-tracker": {
@@ -12678,21 +12693,6 @@
         "compliance": "符合HIPAA标准的数据保护措施"
       },
       "policyLink": "查看完整的隐私政策"
-    }
-  },
-  "comparison": {
-    "title": "还在每4小时吃一次药？",
-    "subtitle": "试试真正有效的24小时天然缓解方案",
-    "vs": "VS",
-    "pills": {
-      "title": "非处方药（布洛芬）",
-      "duration": "4小时缓解",
-      "cons": "可能有副作用"
-    },
-    "natural": {
-      "title": "天然缓解",
-      "duration": "24小时缓解",
-      "pros": "100% 天然安全"
     }
   }
 }

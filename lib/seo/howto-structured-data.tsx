@@ -49,12 +49,16 @@ export async function generateHowToStructuredData(config: HowToConfig) {
     process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
   const isZh = locale === "zh";
 
-  // 生成步骤数据
-  const howToSteps = steps.map((step, index) => ({
+  // 生成步骤数据 - 过滤空步骤并清理空白字符
+  const validSteps = steps.filter(
+    (step) => step.name && step.text && step.name.trim() && step.text.trim(),
+  );
+
+  const howToSteps = validSteps.map((step, index) => ({
     "@type": "HowToStep",
     position: index + 1,
-    name: step.name,
-    text: step.text,
+    name: step.name.trim(),
+    text: step.text.trim(),
     image:
       step.image ||
       `${baseUrl}/images/scenario-solutions/${scenarioSlug}/step-${
@@ -65,29 +69,38 @@ export async function generateHowToStructuredData(config: HowToConfig) {
     }`,
   }));
 
-  // 生成工具数据
-  const howToTools = tools.map((tool) => ({
-    "@type": "HowToTool",
-    name: tool.name,
-    image:
-      tool.image ||
-      `${baseUrl}/images/tools/${tool.name
-        .toLowerCase()
-        .replace(/\s+/g, "-")}.webp`,
-  }));
+  // 生成工具数据 - 过滤空工具
+  const howToTools = tools
+    .filter((tool) => tool.name && tool.name.trim())
+    .map((tool) => ({
+      "@type": "HowToTool",
+      name: tool.name.trim(),
+      image:
+        tool.image ||
+        `${baseUrl}/images/tools/${tool.name
+          .toLowerCase()
+          .replace(/\s+/g, "-")}.webp`,
+    }));
 
-  // 生成用品数据
-  const howToSupplies = supplies.map((supply) => ({
-    "@type": "HowToSupply",
-    name: supply,
-  }));
+  // 生成用品数据 - 过滤空用品
+  const howToSupplies = supplies
+    .filter((supply) => supply && supply.trim())
+    .map((supply) => ({
+      "@type": "HowToSupply",
+      name: supply.trim(),
+    }));
 
-  // 构建HowTo结构化数据
+  // 构建HowTo结构化数据 - 只在有有效步骤时构建
+  // 如果所有步骤都被过滤掉，不应该生成无效的结构化数据
+  if (howToSteps.length === 0) {
+    return null;
+  }
+
   const howToStructuredData = {
     "@context": "https://schema.org",
     "@type": "HowTo",
-    name,
-    description,
+    name: name?.trim() || "",
+    description: description?.trim() || "",
     image:
       image || `${baseUrl}/images/scenario-solutions/${scenarioSlug}/hero.webp`,
     totalTime,
@@ -96,8 +109,8 @@ export async function generateHowToStructuredData(config: HowToConfig) {
       currency: "USD",
       value: "0", // 默认免费
     },
-    supply: howToSupplies,
-    tool: howToTools,
+    ...(howToSupplies.length > 0 && { supply: howToSupplies }),
+    ...(howToTools.length > 0 && { tool: howToTools }),
     step: howToSteps,
     url: `${baseUrl}/${locale}/scenario-solutions/${scenarioSlug}`,
     inLanguage: isZh ? "zh-CN" : "en-US",

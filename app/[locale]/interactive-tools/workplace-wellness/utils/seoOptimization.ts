@@ -126,17 +126,30 @@ export function generateFAQStructuredData(t: TFunction): StructuredDataBlock {
     { key: "q5" },
   ];
 
+  // 过滤空的 FAQ 项
+  const validFAQs = faqs
+    .map((faq) => ({
+      question: t(`faq.${faq.key}.question`),
+      answer: t(`faq.${faq.key}.answer`),
+    }))
+    .filter(
+      (faq) =>
+        faq.question && faq.answer && faq.question.trim() && faq.answer.trim(),
+    );
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: t(`faq.${faq.key}.question`),
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: t(`faq.${faq.key}.answer`),
-      },
-    })),
+    ...(validFAQs.length > 0 && {
+      mainEntity: validFAQs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question.trim(),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer.trim(),
+        },
+      })),
+    }),
   };
 }
 

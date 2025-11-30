@@ -46,13 +46,22 @@ export default function StructuredData(props: StructuredDataProps) {
 export function generateStructuredData(
   props: { type: StructuredDataType } & StructuredDataData,
 ) {
+  // 确保必需字段不为空
+  const safeTitle = props.title?.trim() || "PeriodHub";
+  const safeDescription = props.description?.trim() || "";
+  const safeUrl = props.url || "";
+
   const baseData: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": props.type,
-    name: props.title || "",
-    description: props.description || "",
-    url: props.url || "",
+    name: safeTitle,
+    url: safeUrl,
   };
+
+  // 只在 description 不为空时添加
+  if (safeDescription) {
+    baseData.description = safeDescription;
+  }
 
   // 只在 image 存在时添加
   if (props.image) {

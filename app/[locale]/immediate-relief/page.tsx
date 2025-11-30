@@ -82,48 +82,67 @@ export default async function ImmediateReliefPage({
   const commonT = await getTranslations({ locale, namespace: "common" });
 
   // 结构化数据
-  const structuredData = {
+  const title = t("title")?.trim() || "";
+  const description = t("description")?.trim() || "";
+  const howToName = t("structuredData.howTo.name")?.trim() || "";
+  const howToDescription = t("structuredData.howTo.description")?.trim() || "";
+
+  // 步骤数据
+  const steps = [
+    {
+      name: t("structuredData.steps.heatTherapy.name"),
+      text: t("structuredData.steps.heatTherapy.text"),
+    },
+    {
+      name: t("structuredData.steps.breathing.name"),
+      text: t("structuredData.steps.breathing.text"),
+    },
+    {
+      name: t("structuredData.steps.acupressure.name"),
+      text: t("structuredData.steps.acupressure.text"),
+    },
+    {
+      name: t("structuredData.steps.medication.name"),
+      text: t("structuredData.steps.medication.text"),
+    },
+    {
+      name: t("structuredData.steps.medicalCare.name"),
+      text: t("structuredData.steps.medicalCare.text"),
+    },
+  ];
+
+  // 过滤空步骤并清理空白字符
+  const validSteps = steps
+    .filter(
+      (step) => step.name && step.text && step.name.trim() && step.text.trim(),
+    )
+    .map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.name.trim(),
+      text: step.text.trim(),
+    }));
+
+  const structuredData: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "MedicalWebPage",
-    name: t("title"),
-    description: t("description"),
+    ...(title && { name: title }),
+    ...(description && { description: description }),
     medicalAudience: "Patient",
     about: {
       "@type": "MedicalCondition",
       name: "Dysmenorrhea",
     },
-    mainEntity: {
-      "@type": "HowTo",
-      name: t("structuredData.howTo.name"),
-      description: t("structuredData.howTo.description"),
-      step: [
-        {
-          "@type": "HowToStep",
-          name: t("structuredData.steps.heatTherapy.name"),
-          text: t("structuredData.steps.heatTherapy.text"),
+    ...(howToName &&
+      howToDescription &&
+      validSteps.length > 0 && {
+        mainEntity: {
+          "@type": "HowTo",
+          name: howToName,
+          description: howToDescription,
+          step: validSteps,
         },
-        {
-          "@type": "HowToStep",
-          name: t("structuredData.steps.breathing.name"),
-          text: t("structuredData.steps.breathing.text"),
-        },
-        {
-          "@type": "HowToStep",
-          name: t("structuredData.steps.acupressure.name"),
-          text: t("structuredData.steps.acupressure.text"),
-        },
-        {
-          "@type": "HowToStep",
-          name: t("structuredData.steps.medication.name"),
-          text: t("structuredData.steps.medication.text"),
-        },
-        {
-          "@type": "HowToStep",
-          name: t("structuredData.steps.medicalCare.name"),
-          text: t("structuredData.steps.medicalCare.text"),
-        },
-      ],
-    },
+      }),
   };
 
   return (

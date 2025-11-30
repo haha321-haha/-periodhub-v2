@@ -103,15 +103,23 @@ export function generateArticleStructuredData(
     },
     ...(props.citations &&
       props.citations.length > 0 && {
-        isBasedOn: props.citations.map((citation) => ({
-          "@type": "MedicalScholarlyArticle",
-          name: citation.name || "",
-          url: citation.url || "",
-          author: {
-            "@type": "Organization",
-            name: citation.author || "PeriodHub Team",
-          },
-        })),
+        isBasedOn: props.citations
+          .filter(
+            (citation) =>
+              citation.name &&
+              citation.url &&
+              citation.name.trim() &&
+              citation.url.trim(),
+          ) // 过滤空值
+          .map((citation) => ({
+            "@type": "MedicalScholarlyArticle",
+            name: citation.name.trim(),
+            url: citation.url.trim(),
+            author: {
+              "@type": "Organization",
+              name: citation.author || "PeriodHub Team",
+            },
+          })),
       }),
     medicalAudience: {
       "@type": "MedicalAudience",

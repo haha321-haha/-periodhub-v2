@@ -91,35 +91,49 @@ export function generateFAQStructuredData(t: TFunction): FAQStructuredData {
     mechanismOfAction: "Inhibits prostaglandin synthesis",
   };
 
+  // 过滤空的 FAQ 项
+  const validFAQs = faqs
+    .map((faq) => ({
+      key: faq.key,
+      question: t(`faq.${faq.key}.question`),
+      answer: t(`faq.${faq.key}.answer`),
+    }))
+    .filter(
+      (faq) =>
+        faq.question && faq.answer && faq.question.trim() && faq.answer.trim(),
+    );
+
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: t(`faq.${faq.key}.question`),
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: t(`faq.${faq.key}.answer`),
-        mention: [drugMention],
-        citation,
-      },
-      about: {
-        "@type": "MedicalCondition",
-        name: condition.name,
-        code: {
-          "@type": "MedicalCode",
-          code: condition.icd10,
-          codingSystem: "ICD-10",
+    ...(validFAQs.length > 0 && {
+      mainEntity: validFAQs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question.trim(),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer.trim(),
+          mention: [drugMention],
+          citation,
         },
-        sameAs: condition.snomed
-          ? `http://snomed.info/id/${condition.snomed}`
-          : undefined,
-      },
-      medicalAudience: {
-        "@type": "MedicalAudience",
-        audienceType: "Patient",
-      },
-    })),
+        about: {
+          "@type": "MedicalCondition",
+          name: condition.name,
+          code: {
+            "@type": "MedicalCode",
+            code: condition.icd10,
+            codingSystem: "ICD-10",
+          },
+          ...(condition.snomed && {
+            sameAs: `http://snomed.info/id/${condition.snomed}`,
+          }),
+        },
+        medicalAudience: {
+          "@type": "MedicalAudience",
+          audienceType: "Patient",
+        },
+      })),
+    }),
   };
 }
 
@@ -153,13 +167,26 @@ export function generateHowToStructuredData(
     totalTime: t("howTo.totalTime"),
     supply: [],
     tool: [],
-    step: steps.map((step, index) => ({
-      "@type": "HowToStep",
-      position: index + 1,
-      name: t(`howTo.steps.${step.key}.name`),
-      text: t(`howTo.steps.${step.key}.text`),
-      image: `${baseUrl}/images/symptom-assessment-step-${index + 1}.jpg`,
-    })),
+    step: steps
+      .map((step, index) => ({
+        key: step.key,
+        index,
+        name: t(`howTo.steps.${step.key}.name`),
+        text: t(`howTo.steps.${step.key}.text`),
+      }))
+      .filter(
+        (step) =>
+          step.name && step.text && step.name.trim() && step.text.trim(),
+      )
+      .map((step, newIndex) => ({
+        "@type": "HowToStep",
+        position: newIndex + 1,
+        name: step.name.trim(),
+        text: step.text.trim(),
+        image: `${baseUrl}/images/symptom-assessment-step-${
+          step.index + 1
+        }.jpg`,
+      })),
   };
 }
 

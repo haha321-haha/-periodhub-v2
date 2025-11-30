@@ -12717,5 +12717,20 @@
       },
       "policyLink": "View our full privacy policy"
     }
+  },
+  "comparison": {
+    "title": "Why Pop Pills Every 4 Hours?",
+    "subtitle": "Try the 24-Hour Natural Relief That Actually Works",
+    "vs": "VS",
+    "pills": {
+      "title": "OTC Pills (Ibuprofen)",
+      "duration": "4-Hour Relief",
+      "cons": "Potential Side Effects"
+    },
+    "natural": {
+      "title": "Natural Relief",
+      "duration": "24-Hour Relief",
+      "pros": "100% Natural & Safe"
+    }
   }
 }

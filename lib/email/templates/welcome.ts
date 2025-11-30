@@ -37,20 +37,22 @@ export async function generateWelcomeEmailHtml(
   const texts = {
     greeting: userName
       ? isZh
-        ? `Hi ${userName}！`
-        : `Hi ${userName}!`
-      : t("greeting"),
-    title: t("greeting"),
+        ? `Hi ${userName}，`
+        : `Hi ${userName},`
+      : isZh
+        ? "Hi，"
+        : "Hi,",
+    thankYou: t("thankYou"),
+    valueProposition: t("valueProposition"),
     downloadPrompt: t("downloadPrompt"),
     downloadButton: t("downloadButtonText"),
     additionalTitle: t("additionalContentTitle"),
-    officeLabel: isZh ? "上班族：" : "Office:",
     officeLink: t("officeScenario"),
-    travelLabel: isZh ? "旅行党：" : "Travel:",
-    travelLink: t("travelScenario"),
+    commuteLink: t("commuteScenario"),
     signature: t("signature"),
     unsubscribe: t("unsubscribe"),
     teamSignature: t("teamSignature"),
+    unsubscribeNote: t("unsubscribeNote"),
   };
 
   return `
@@ -64,8 +66,16 @@ export async function generateWelcomeEmailHtml(
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
   <div style="background-color: white; border-radius: 12px; padding: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
     <h2 style="color: #ec4899; margin-top: 0; font-size: 24px; line-height: 1.4;">
-      ${texts.greeting} ${texts.title}
+      ${texts.greeting}
     </h2>
+
+    <p style="line-height: 1.6; margin: 20px 0; font-size: 16px; color: #555;">
+      ${texts.thankYou}
+    </p>
+
+    <p style="line-height: 1.6; margin: 20px 0; font-size: 16px; color: #555;">
+      ${texts.valueProposition}
+    </p>
 
     <p style="line-height: 1.6; margin: 20px 0; font-size: 16px; color: #555;">
       ${texts.downloadPrompt}
@@ -85,26 +95,30 @@ export async function generateWelcomeEmailHtml(
     </h3>
     <ul style="line-height: 1.8; padding-left: 20px; color: #555;">
       <li style="margin-bottom: 12px;">
-        <strong>${texts.officeLabel}</strong>
-        <a href="${officeUrl}" style="color: #ec4899; text-decoration: none;">${
+        👉 <a href="${officeUrl}" style="color: #ec4899; text-decoration: none;">${
           texts.officeLink
-        }</a>
+        } →</a>
       </li>
       <li style="margin-bottom: 12px;">
-        <strong>${texts.travelLabel}</strong>
-        <a href="${travelUrl}" style="color: #ec4899; text-decoration: none;">${
-          texts.travelLink
-        }</a>
+        👉 <a href="${travelUrl}" style="color: #ec4899; text-decoration: none;">${
+          texts.commuteLink
+        } →</a>
       </li>
     </ul>
 
+    <p style="font-size: 14px; color: #333; margin-top: 30px; line-height: 1.6;">
+      ${t("interactionQuestion")}
+    </p>
+
     <p style="font-size: 12px; color: #999; margin-top: 40px; text-align: center; line-height: 1.6;">
-      ${texts.teamSignature} - ${texts.signature}<br>
+      ${texts.signature}<br>
+      ${texts.teamSignature}<br>
       ${
         unsubscribeUrl
           ? `<a href="${unsubscribeUrl}" style="color: #ccc; text-decoration: none;">${texts.unsubscribe}</a>`
           : ""
-      }
+      }<br>
+      ${texts.unsubscribeNote}
     </p>
   </div>
 </body>
@@ -122,7 +136,7 @@ export async function generateWelcomeEmail(
 ): Promise<EmailTemplate> {
   const downloadUrl = getPdfDownloadUrl(locale);
   const officeUrl = getScenarioUrl("office", locale);
-  const travelUrl = getScenarioUrl("travel", locale);
+  const commuteUrl = getScenarioUrl("commute", locale);
   const unsubscribeUrl = unsubscribeToken
     ? generateUnsubscribeUrl(unsubscribeToken, locale)
     : undefined;
@@ -131,7 +145,7 @@ export async function generateWelcomeEmail(
     locale,
     downloadUrl,
     officeUrl,
-    travelUrl,
+    travelUrl: commuteUrl, // 使用 commute 替代 travel
     unsubscribeUrl,
   };
 

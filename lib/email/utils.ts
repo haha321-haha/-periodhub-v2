@@ -31,23 +31,27 @@ export function generateUnsubscribeUrl(
 }
 
 /**
- * 生成PDF下载URL
+ * 生成PDF下载URL（落地页链接，用于邮件营销）
+ * 注意：这是落地页链接，不是直接下载链接，用于流量防火墙
+ * 用户点击后会进入下载中心页面，需要填写邮箱才能下载
  */
 export function getPdfDownloadUrl(locale: Locale = "zh"): string {
   const baseUrl = getBaseUrl();
-  const filename = locale === "zh" ? "pain-guide.html" : "pain-guide-en.html";
-  return `${baseUrl}/downloads/${filename}`;
+  // ✅ 返回落地页链接，而不是直接下载链接
+  // 添加 resource 参数，自动打开对应资源的邮箱收集弹窗
+  return `${baseUrl}/${locale}/downloads?resource=pain-guide`;
 }
 
 /**
  * 生成场景解决方案URL
  */
 export function getScenarioUrl(
-  scenario: "office" | "travel",
+  scenario: "office" | "commute",
   locale: Locale = "zh",
 ): string {
   const baseUrl = getBaseUrl();
-  return `${baseUrl}/${locale}/scenario-solutions#${scenario}`;
+  // 使用页面路径而不是锚点
+  return `${baseUrl}/${locale}/scenario-solutions/${scenario}`;
 }
 
 /**

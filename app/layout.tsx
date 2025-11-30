@@ -190,7 +190,7 @@ export default async function RootLayout({
         />
 
         {/* 🎨 主题和图标 */}
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        {/* Next.js 会自动处理 app/icon.tsx，不需要手动添加 link 标签 */}
         <link
           rel="icon"
           href="/favicon-32x32.png"

@@ -576,9 +576,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                 </h4>
                 <div className="grid md:grid-cols-2 gap-4">
                   <a
-                    href={`/downloads/campus-emergency-checklist${
-                      locale === "en" ? "-en" : ""
-                    }.html`}
+                    href={`/${locale}/downloads?resource=campus-emergency-checklist`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -599,9 +597,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                   </a>
 
                   <a
-                    href={`/downloads/parent-communication-guide${
-                      locale === "en" ? "-en" : ""
-                    }.html`}
+                    href={`/${locale}/downloads?resource=parent-communication-guide`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -622,9 +618,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                   </a>
 
                   <a
-                    href={`/downloads/teacher-health-manual${
-                      locale === "en" ? "-en" : ""
-                    }.html`}
+                    href={`/${locale}/downloads?resource=teacher-health-manual`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -645,9 +639,7 @@ export default async function LifeStagesScenarioPage({ params }: Props) {
                   </a>
 
                   <a
-                    href={`/downloads/teacher-collaboration-handbook${
-                      locale === "en" ? "-en" : ""
-                    }.html`}
+                    href={`/${locale}/downloads?resource=teacher-collaboration-handbook`}
                     className="flex items-center p-3 bg-white rounded-lg hover:bg-blue-50 transition-colors border border-blue-100 hover:border-blue-300"
                     target="_blank"
                     rel="noopener noreferrer"

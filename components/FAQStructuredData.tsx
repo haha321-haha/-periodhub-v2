@@ -16,18 +16,26 @@ export default function FAQStructuredData({
   faqs,
   title,
 }: FAQStructuredDataProps) {
-  const structuredData = {
+  // 过滤空问题和答案
+  const validFAQs = faqs.filter(
+    (faq) =>
+      faq.question && faq.answer && faq.question.trim() && faq.answer.trim(),
+  );
+
+  const structuredData: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    name: title || "常见问题",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
+    ...(title && { name: title }),
+    ...(validFAQs.length > 0 && {
+      mainEntity: validFAQs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question.trim(),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer.trim(),
+        },
+      })),
+    }),
   };
 
   return (

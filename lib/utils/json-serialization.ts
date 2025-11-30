@@ -64,8 +64,39 @@ export function cleanDataForJSON(
       }
 
       const cleanedValue = cleanDataForJSON(value, seen);
-      // 只添加非 undefined 的值（null 是有效的 JSON 值，应该保留）
+      // 只添加非 undefined 的值
       if (cleanedValue !== undefined) {
+        // 🔧 关键修复：对于关键字段（@type, @context），如果值为空字符串，跳过整个对象
+        // 这可以防止"字段' '的对象类型无效"错误
+        if (cleanedValue === "" && ["@type", "@context"].includes(key)) {
+          // 如果是关键字段为空字符串，返回 null 表示无效对象
+          return null;
+        }
+
+        // 过滤非关键字段的空字符串
+        if (cleanedValue === "" && !["@id", "url"].includes(key)) {
+          continue;
+        }
+
+        // 对于对象类型，检查是否为空对象
+        if (
+          typeof cleanedValue === "object" &&
+          cleanedValue !== null &&
+          !Array.isArray(cleanedValue) &&
+          Object.keys(cleanedValue).length === 0
+        ) {
+          continue;
+        }
+
+        // 对于数组，如果过滤后为空数组，且不是必需字段，则跳过
+        if (
+          Array.isArray(cleanedValue) &&
+          cleanedValue.length === 0 &&
+          !["mainEntity"].includes(key) // mainEntity 在某些情况下允许为空，但应该在父级处理
+        ) {
+          continue;
+        }
+
         cleaned[key] = cleanedValue;
       }
     }
@@ -94,6 +125,7 @@ export function safeStringify(data: unknown, space: number = 2): string {
     return JSON.stringify(cleaned, null, space);
   } catch (error) {
     // 如果序列化失败，返回错误信息（在生产环境中应该记录日志）
+    // eslint-disable-next-line no-console
     console.error("safeStringify error:", error);
     return JSON.stringify({ error: "Serialization failed" }, null, space);
   }

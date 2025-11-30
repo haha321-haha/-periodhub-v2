@@ -27,6 +27,289 @@
           }
         }
       }
+    },
+    "hero": {
+      "acog_badge": "ACOG 指南认证",
+      "title_line1": "别再猜测。",
+      "title_line2": "开始疗愈。",
+      "subtitle_prefix": "止痛药不管用？",
+      "subtitle_middle": "试试",
+      "subtitle_suffix": "科学评分 7.5 分的方法",
+      "description": "首个基于 ACOG 指南的 AI 症状检查器——而非搜索引擎传言。追踪模式、识别风险，几秒钟生成医生可用报告。",
+      "cta_primary": "开始免费评估",
+      "cta_secondary": "查看证据",
+      "trust": {
+        "private": "100% 隐私",
+        "storage": "本地存储",
+        "hipaa": "HIPAA 合规"
+      }
+    },
+    "evidence": {
+      "title": "临床有效性评分",
+      "nsaids": {
+        "label": "NSAIDs (布洛芬)",
+        "score": "6.2/10",
+        "note": "常见副作用：胃部不适、增加出血"
+      },
+      "exercise": {
+        "label": "运动 + 热敷疗法",
+        "score": "7.5/10",
+        "note": "无副作用，改善情绪和整体健康"
+      },
+      "combined": {
+        "label": "AI 个性化方案",
+        "score": "8.9/10",
+        "note": "根据您的具体症状和周期模式定制"
+      },
+      "acetaminophen": {
+        "label": "对乙酰氨基酚 (泰诺)",
+        "score": "5.8/10",
+        "note": "对炎症性疼痛效果较差"
+      },
+      "source": {
+        "label": "来源",
+        "text": "ACOG 实践公报第 218 号 (2020)，痛经和子宫内膜异位症"
+      }
+    },
+    "tools": {
+      "title": "科学支持的缓解工具",
+      "subtitle": "真正有效的循证解决方案",
+      "body_battery": {
+        "title": "身体电池评估",
+        "desc": "分析您当前的能量水平和恢复需求。",
+        "action": "检查电池",
+        "badge": "⚡ 能量检查"
+      },
+      "cycle_forecast": {
+        "title": "周期能量预测",
+        "desc": "根据您的周期预测能量低谷和高峰。",
+        "action": "查看预测",
+        "badge": "📈 智能预测"
+      },
+      "pain_tracker": {
+        "title": "疼痛追踪器",
+        "desc": "记录日常症状，长期追踪疼痛模式。",
+        "action": "立即追踪",
+        "badge": "💊 症状日志"
+      },
+      "remedies": {
+        "title": "自然缓解指南",
+        "desc": "瑜伽、热敷和营养建议",
+        "action": "探索方法"
+      },
+      "doctor_report": {
+        "title": "医生报告",
+        "desc": "生成专业医疗摘要",
+        "action": "生成报告"
+      },
+      "pain_diary": {
+        "title": "智能疼痛日记",
+        "desc": "追踪诱因并发现模式",
+        "action": "开始记录"
+      },
+      "emergency": {
+        "title": "何时看急诊",
+        "desc": "了解警告信号",
+        "action": "检查症状"
+      },
+      "symptom_checker": {
+        "title": "AI 症状检查器",
+        "description": "基于临床指南分析您的症状，获得个性化建议。",
+        "pain_level": {
+          "label": "当前疼痛等级 (1-10)",
+          "mild": "轻度",
+          "moderate": "中度",
+          "severe": "重度"
+        },
+        "symptoms": {
+          "label": "选择症状",
+          "cramps": "经期痉挛",
+          "back_pain": "下背部疼痛",
+          "headache": "头痛 / 偏头痛",
+          "nausea": "恶心 / 呕吐"
+        },
+        "duration": {
+          "label": "疼痛持续时间",
+          "options": {
+            "less_than_1": "少于 1 天",
+            "1_2_days": "1-2 天",
+            "3_5_days": "3-5 天",
+            "more_than_5": "超过 5 天"
+          }
+        },
+        "submit": "分析症状",
+        "close": "关闭工具"
+      },
+      "cycle_tracker": {
+        "title": "智能周期追踪器",
+        "description": "追踪周期，预测未来经期，了解身体节律。",
+        "last_period": {
+          "label": "上次经期第一天"
+        },
+        "cycle_length": {
+          "label": "平均周期长度",
+          "options": {
+            "short": "短 (21-24 天)",
+            "standard": "标准 (25-27 天)",
+            "optimal": "最佳 (28-30 天)",
+            "long": "长 (31-35 天)",
+            "irregular": "不规律"
+          }
+        },
+        "flow": {
+          "label": "典型经量强度",
+          "options": {
+            "light": "少量",
+            "medium": "中等",
+            "heavy": "大量"
+          }
+        },
+        "submit": "计算周期",
+        "close": "关闭追踪器"
+      },
+      "remedies": {
+        "title": "自然缓解方法",
+        "description": "基于证据的自然疗法，无需药物缓解经期疼痛。",
+        "items": {
+          "yoga": {
+            "title": "瑜伽和拉伸",
+            "desc": "儿童式和猫牛式等特定姿势可缓解骨盆紧张。"
+          },
+          "heat": {
+            "title": "热敷疗法",
+            "desc": "热敷可增加血流量并放松子宫肌肉。"
+          },
+          "diet": {
+            "title": "抗炎饮食",
+            "desc": "富含 Omega-3、镁和生姜的食物可减少炎症。"
+          },
+          "supplements": {
+            "title": "营养补充剂",
+            "desc": "镁、维生素 B1 和锌在研究中显示有效。"
+          }
+        },
+        "learn_more": "了解更多",
+        "close": "关闭指南"
+      },
+      "emergency": {
+        "title": "紧急指南",
+        "description": "了解何时需要立即就医。如有危险，请立即拨打急救电话。",
+        "immediate": {
+          "title": "立即就医如果：",
+          "items": {
+            "bleeding": "每小时浸透一片或多片卫生巾/棉条",
+            "clots": "排出大于 25 美分硬币大小的血块",
+            "pain": "剧烈疼痛且药物无法缓解",
+            "shock": "休克迹象（头晕、昏厥、皮肤苍白）",
+            "fever": "发热超过 38.3°C 并伴有疼痛"
+          }
+        },
+        "urgent": {
+          "title": "预约就诊如果：",
+          "items": {
+            "duration": "出血持续超过 7 天",
+            "irregular": "经期持续不规律",
+            "changes": "周期模式发生显著变化",
+            "interference": "疼痛影响日常活动"
+          }
+        },
+        "find_er": "查找最近急诊室",
+        "close": "关闭指南"
+      }
+    },
+    "guides": {
+      "title": "基于证据的医学指南",
+      "subtitle": "43 份由认证妇科医生审核的指南",
+      "read_guide": "阅读指南",
+      "categories": {
+        "natural": {
+          "title": "自然疗法",
+          "count": "12 份指南"
+        },
+        "hormone": {
+          "title": "激素平衡",
+          "count": "8 份指南"
+        },
+        "nutrition": {
+          "title": "营养与饮食",
+          "count": "15 份指南"
+        },
+        "exercise": {
+          "title": "运动与瑜伽",
+          "count": "8 份指南"
+        }
+      },
+      "featured": {
+        "popular": {
+          "tag": "最受欢迎",
+          "title": "快速缓解经期痉挛：10 分钟内的 5 种方法",
+          "desc": "当止痛药不够时，基于证据的即时缓解技术。"
+        },
+        "natural": {
+          "tag": "自然",
+          "title": "经期瑜伽：ACOG 认可的体式",
+          "desc": "15 个温和体式，临床研究证明可减少最多 60% 的痉挛。"
+        },
+        "nutrition": {
+          "tag": "营养",
+          "title": "抗炎饮食缓解经期疼痛",
+          "desc": "减少前列腺素并自然缓解经期不适的食物。"
+        }
+      }
+    },
+    "privacy": {
+      "title": "您的隐私是我们的首要任务",
+      "subtitle": "HIPAA 合规，本地优先架构",
+      "features": {
+        "local": {
+          "title": "100% 本地存储",
+          "desc": "您的健康数据永不离开您的设备。一切都已加密并本地存储。"
+        },
+        "compliance": {
+          "title": "HIPAA 和 CCPA 合规",
+          "desc": "我们超越联邦隐私标准。您的 PHI 绝不会被出售或共享。"
+        },
+        "security": {
+          "title": "最先进的安全措施",
+          "desc": "银行级AES-256加密，定期安全审计和渗透测试。"
+        },
+        "transparency": {
+          "title": "完全透明",
+          "desc": "开源隐私政策，无隐含条款，随时导出或删除您的数据。"
+        }
+      },
+      "medical_disclaimer": {
+        "title": "医疗免责声明",
+        "text": "Period Hub 提供健康教育和追踪工具，但不提供医疗诊断或治疗。如有医疗问题，请咨询合格的医疗专业人员。"
+      }
+    },
+    "cta": {
+      "title": "准备好掌控您的经期健康了吗？",
+      "description": "加入数十万使用我们的科学工具缓解经期疼痛的女性。",
+      "button": "免费开始"
+    },
+    "footer": {
+      "description": "专业的经期健康管理平台，基于循证医学提供科学的痛经缓解方案。",
+      "quickLinks": {
+        "title": "快速链接",
+        "home": "首页",
+        "articles": "健康文章",
+        "tools": "互动工具",
+        "about": "关于我们"
+      },
+      "resources": {
+        "title": "资源",
+        "healthGuide": "健康指南",
+        "pdfCenter": "PDF 资源中心",
+        "contact": "联系我们"
+      },
+      "legal": {
+        "title": "法律",
+        "privacy": "隐私政策",
+        "terms": "服务条款"
+      },
+      "copyright": "© {year} Period Hub. 保留所有权利。",
+      "medicalDisclaimer": "本网站内容仅供教育目的，不应替代专业医疗建议。"
     }
   },
   "privacyPolicy": {
@@ -323,7 +606,7 @@
     "nutritionGenerator": {
       "pageTitle": "营养推荐生成器",
       "mainTitle": "个性化营养推荐生成器",
-      "subtitle": "基于月经周期、健康目标和中医体质的科学营养指导",
+      "subtitle": "基于月经周期、健康目标和整体健康体质的科学营养指导",
       "generateBtn": "生成我的建议",
       "generating": "正在生成...",
       "noSelection": "请至少选择一个选项以生成建议",
@@ -331,7 +614,7 @@
       "categories": {
         "menstrualPhase": "月经阶段",
         "healthGoals": "健康目标",
-        "tcmConstitution": "中医体质"
+        "tcmConstitution": "整体健康体质"
       },
       "results": {
         "title": "您的个性化营养建议",
@@ -359,7 +642,7 @@
         }
       },
       "tcmConstitution": {
-        "title": "选择您的中医体质",
+        "title": "选择您的整体健康体质",
         "description": "了解您的体质类型，获得更精准的营养建议",
         "options": {
           "qiDeficiency": "气虚",
@@ -370,14 +653,14 @@
         }
       },
       "meta": {
-        "title": "营养推荐生成器 | 基于月经周期和中医体质的个性化营养指导 | Period Hub",
-        "description": "专业的营养推荐生成器，基于您的月经周期、健康目标和中医体质，提供个性化的饮食指导。科学结合现代营养学与中医理论，为女性提供精准的营养管理方案，帮助改善经期健康和生活质量。",
-        "keywords": "营养推荐生成器,月经周期营养,中医体质饮食,个性化营养方案,女性健康饮食,经期营养管理,痛经营养调理,中医食疗,月经期饮食指导,营养计算器",
+        "title": "营养推荐生成器 | 基于月经周期和整体健康体质的个性化营养指导 | Period Hub",
+        "description": "专业的营养推荐生成器，基于您的月经周期、健康目标和整体健康体质，提供个性化的饮食指导。科学结合现代营养学与整体健康理论，为女性提供精准的营养管理方案，帮助改善经期健康和生活质量。",
+        "keywords": "营养推荐生成器,月经周期营养,整体健康体质饮食,个性化营养方案,女性健康饮食,经期营养管理,痛经营养调理,整体健康食疗,月经期饮食指导,营养计算器",
         "ogTitle": "营养推荐生成器 | 个性化营养指导工具",
-        "ogDescription": "基于月经周期、健康目标和中医体质的专业营养推荐生成器，为女性提供科学的个性化饮食指导。",
+        "ogDescription": "基于月经周期、健康目标和整体健康体质的专业营养推荐生成器，为女性提供科学的个性化饮食指导。",
         "ogImageAlt": "营养推荐生成器界面截图",
         "twitterTitle": "营养推荐生成器 | 个性化营养指导",
-        "twitterDescription": "基于月经周期和中医体质的专业营养推荐生成器，为女性提供科学的个性化饮食指导。"
+        "twitterDescription": "基于月经周期和整体健康体质的专业营养推荐生成器，为女性提供科学的个性化饮食指导。"
       }
     },
     "teen": {
@@ -1348,7 +1631,7 @@
       "cycleTracker": "周期预测",
       "cycleTrackerDesc": "基于历史数据的智能预测，提前做好准备",
       "constitutionTest": "体质评估",
-      "constitutionTestDesc": "中医体质辨识与调理建议，个性化健康方案"
+      "constitutionTestDesc": "整体健康体质辨识与调理建议，个性化健康方案"
     },
     "ctaSupportText": "免费 • 3分钟 • 科学依据",
     "learnMore": "Browse Articles"
@@ -1472,7 +1755,7 @@
           "gingerRelief": "姜茶缓解痛经指南",
           "traditionalMethodsDesc": "探索世界各地传统文化中的经期疼痛缓解智慧",
           "zhanZhuang": "站桩八段锦经期疼痛缓解",
-          "zhanZhuangDesc": "学习传统中医养生功法在经期健康管理中的应用"
+          "zhanZhuangDesc": "学习传统整体健康养生功法在经期健康管理中的应用"
         }
       },
       "medicalGuidance": {
@@ -2187,7 +2470,7 @@
           "title": "站桩八段锦经期疼痛缓解：传统气功现代应用",
           "readTime": "18分钟",
           "keywords": "站桩八段锦, 气功缓解痛经, 传统运动疗法, 八段锦练习方法, 气功养生",
-          "description": "传统中医气功：站桩八段锦科学原理+经期疼痛缓解+现代应用指导。千年传承，科学验证，已帮助400万+女性通过气功缓解痛经。"
+          "description": "传统整体健康气功：站桩八段锦科学原理+经期疼痛缓解+现代应用指导。千年传承，科学验证，已帮助400万+女性通过气功缓解痛经。"
         },
         "antiInflammatoryDiet": {
           "title": "经期疼痛抗炎饮食指南：营养科学缓解痛经方法",
@@ -2261,7 +2544,7 @@
           "title": "站桩八段锦图解指南：传统气功现代应用",
           "readTime": "PDF",
           "keywords": "站桩八段锦, 气功缓解痛经, 传统运动疗法, 八段锦练习方法, 气功养生",
-          "description": "传统中医气功：站桩八段锦科学原理+经期疼痛缓解+现代应用指导。千年传承，科学验证，已帮助150万+女性通过气功缓解痛经。"
+          "description": "传统整体健康气功：站桩八段锦科学原理+经期疼痛缓解+现代应用指导。千年传承，科学验证，已帮助150万+女性通过气功缓解痛经。"
         },
         "monthlyPlanner": {
           "title": "经期健康月度准备计划表：科学管理安排工具",
@@ -2767,7 +3050,7 @@
       },
       "zhanZhuangBaduanjinIllustratedGuide": {
         "title": "站桩八段锦图解指南",
-        "description": "传统中医养生功法在经期健康管理中的应用指导"
+        "description": "传统整体健康养生功法在经期健康管理中的应用指导"
       }
     },
     "content": {
@@ -2833,7 +3116,7 @@
     },
     "acupressure": {
       "title": "穴位按摩",
-      "subtitle": "中医传统与现代医学认可的方法"
+      "subtitle": "整体健康传统与现代医学认可的方法"
     },
     "otcOptions": {
       "title": "非处方药选项",
@@ -3303,7 +3586,7 @@
         "safety": {
           "title": "安全提醒",
           "guidelines": {
-            "0": "首次使用应咨询中医师或药师",
+            "0": "首次使用应咨询整体健康医师或药师",
             "1": "孕妇或备孕期妇女禁用活血化瘀类中药",
             "2": "注意观察过敏反应，如有不适立即停用"
           }
@@ -3464,7 +3747,7 @@
       },
       "acupuncture": {
         "title": "针灸疗法",
-        "subtitle": "传统中医的现代应用",
+        "subtitle": "传统整体健康的现代应用",
         "description": "针灸通过刺激特定穴位，调节气血运行，缓解经期疼痛。现代研究证实其有效性。",
         "acupoints": {
           "title": "主要穴位",
@@ -3751,8 +4034,8 @@
           "benefitsValue": "个性化饮食计划，缓解疼痛和平衡激素"
         },
         "constitutionTest": {
-          "title": "中医体质测试",
-          "description": "通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议",
+          "title": "整体健康体质测试",
+          "description": "通过8个问题了解您的整体健康体质类型，获得个性化的穴位、饮食和生活方式建议",
           "benefits": "益处：",
           "benefitsValue": "基于您的体质的个性化疗法推荐"
         },
@@ -4334,10 +4617,10 @@
       "description": "基于您的追踪数据和评估结果，深入了解您的经期健康模式。（即将推出）"
     },
     "constitutionTest": {
-      "title": "中医体质测试",
-      "description": "通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议",
+      "title": "整体健康体质测试",
+      "description": "通过8个问题了解您的整体健康体质类型，获得个性化的穴位、饮食和生活方式建议",
       "cta": "开始测试",
-      "subtitle": "Understand your TCM constitution type through professional questionnaire and get personalized health recommendations",
+      "subtitle": "通过专业的整体健康体质问卷，了解您的体质类型，获得个性化的健康建议",
       "features": {
         "quick": {
           "title": "快速便捷",
@@ -4345,7 +4628,7 @@
         },
         "professional": {
           "title": "专业可靠",
-          "description": "基于中医理论"
+          "description": "基于整体健康理论"
         },
         "personalized": {
           "title": "个性化建议",
@@ -4602,7 +4885,7 @@
           "notes": "备注",
           "foodName": "食物名称",
           "menstrualPhase": "经期阶段",
-          "tcmNature": "中医性质",
+          "tcmNature": "整体健康性质",
           "mainBenefits": "主要功效",
           "keyNutrients": "关键营养素"
         },
@@ -4636,7 +4919,7 @@
         },
         "q3": {
           "question": "营养建议如何个性化？",
-          "answer": "营养建议基于您当前的经期阶段和中医体质类型，提供个性化的食物推荐和膳食计划，帮助缓解经期不适。"
+          "answer": "营养建议基于您当前的经期阶段和整体健康体质类型，提供个性化的食物推荐和膳食计划，帮助缓解经期不适。"
         },
         "q4": {
           "question": "数据导出是否安全？",
@@ -4861,10 +5144,10 @@
       "shortText": "⚠️ 本工具仅供参考，不能替代专业医疗诊断。如有疑虑，请咨询医生。"
     },
     "constitutionTest": {
-      "title": "中医体质测试",
-      "description": "通过8个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议",
+      "title": "整体健康体质测试",
+      "description": "通过8个问题了解您的整体健康体质类型，获得个性化的穴位、饮食和生活方式建议",
       "cta": "开始测试",
-      "subtitle": "通过专业的中医体质问卷，了解您的体质类型，获得个性化的健康建议",
+      "subtitle": "通过专业的整体健康体质问卷，了解您的体质类型，获得个性化的健康建议",
       "features": {
         "quick": {
           "title": "快速便捷",
@@ -4872,7 +5155,7 @@
         },
         "professional": {
           "title": "专业可靠",
-          "description": "基于中医理论设计"
+          "description": "基于整体健康理论设计"
         },
         "personalized": {
           "title": "个性化建议",
@@ -4922,7 +5205,7 @@
       },
       "result": {
         "title": "测试结果",
-        "subtitle": "您的中医体质类型分析",
+        "subtitle": "您的整体健康体质类型分析",
         "match": "匹配度",
         "constitutionFeatures": "体质特征",
         "commonSymptoms": "常见症状",
@@ -5916,22 +6199,22 @@
     },
     "nutritionRecommendationGenerator": {
       "title": "营养推荐生成器",
-      "description": "请选择您的经期阶段、健康目标和中医体质，生成个性化营养建议",
+      "description": "请选择您的经期阶段、健康目标和整体健康体质，生成个性化营养建议",
       "journeyTitle": "✨ 开启您的个性化营养之旅",
       "steps": {
         "step1": "选择阶段",
         "step2": "设定目标",
         "step3": "生成建议"
       },
-      "tip": "💡 提示：所有建议均基于科学研究和中医理论",
+      "tip": "💡 提示：所有建议均基于科学研究和整体健康理论",
       "meta": {
         "title": "营养推荐生成器 - 个性化营养建议 | 经期健康中心",
-        "description": "根据您的经期阶段、健康目标和中医体质，生成个性化营养建议。结合现代医学和传统中医的科学指导。",
-        "keywords": "营养建议生成器,经期营养,中医体质饮食,个性化营养方案,女性健康营养,经期营养管理",
+        "description": "根据您的经期阶段、健康目标和整体健康体质，生成个性化营养建议。结合现代医学和传统整体健康的科学指导。",
+        "keywords": "营养建议生成器,经期营养,整体健康体质饮食,个性化营养方案,女性健康营养,经期营养管理",
         "ogTitle": "营养推荐生成器 - 个性化营养建议 | 经期健康中心",
-        "ogDescription": "根据您的经期阶段、健康目标和中医体质，生成个性化营养建议。结合现代医学和传统中医的科学指导。",
+        "ogDescription": "根据您的经期阶段、健康目标和整体健康体质，生成个性化营养建议。结合现代医学和传统整体健康的科学指导。",
         "twitterTitle": "营养推荐生成器 - 个性化营养建议 | 经期健康中心",
-        "twitterDescription": "根据您的经期阶段、健康目标和中医体质，生成个性化营养建议。结合现代医学和传统中医的科学指导。"
+        "twitterDescription": "根据您的经期阶段、健康目标和整体健康体质，生成个性化营养建议。结合现代医学和传统整体健康的科学指导。"
       },
       "structuredData": {
         "applicationCategory": "健康应用",
@@ -5946,8 +6229,8 @@
           "description": "智能追踪您的月经周期，预测下次经期，记录症状变化，帮助您更好地了解身体规律"
         },
         "constitutionTest": {
-          "title": "中医体质测试",
-          "description": "通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议"
+          "title": "整体健康体质测试",
+          "description": "通过11个问题了解您的整体健康体质类型，获得个性化的穴位、饮食和生活方式建议"
         }
       },
       "relatedArticles": {
@@ -6617,6 +6900,7 @@
   "footer": {
     "companyName": "PeriodHub",
     "description": "专业经期健康信息平台",
+    "tagline": "基于ACOG指南的证据性经期护理",
     "linksTitle": "链接",
     "privacy": "隐私政策",
     "terms": "服务条款",
@@ -6633,14 +6917,31 @@
     "copyright": "© {currentYear, number, integer} www.periodhub.health。保留所有权利。",
     "medicalDisclaimerFull": "医疗免责声明：本网站内容仅供信息和教育目的，不能替代专业医疗建议、诊断或治疗。我们不是医疗专业人员。如有任何医疗问题，请咨询您的医生或其他合格的医疗服务提供者。紧急情况下，请立即寻求医疗救助。使用本网站不构成医患关系。",
     "dataPrivacyFull": "数据隐私（HIPAA/CCPA）：您的健康数据属于您。我们采用本地优先架构，这意味着您的敏感周期数据经过加密并直接存储在您的设备上。我们不会向第三方广告商出售、交易或分享您的个人健康信息（PHI）。",
-    "quickLinks": "Quick Links",
-    "support": "Support",
-    "contactUs": "Contact Us",
-    "helpCenter": "Help Center",
-    "email": "Email",
-    "support24": "Providing professional health guidance for you",
-    "allRights": "All rights reserved.",
-    "disclaimer": "This content is for reference only and cannot replace professional medical advice."
+    "columns": {
+      "tools": "工具",
+      "resources": "资源",
+      "legal": "法律"
+    },
+    "links": {
+      "tools": {
+        "symptom_checker": "AI症状检查器",
+        "cycle_tracker": "周期追踪器",
+        "pain_diary": "疼痛日记",
+        "doctor_reports": "医生报告"
+      },
+      "resources": {
+        "medical_guides": "医疗指南",
+        "natural_remedies": "自然疗法",
+        "emergency_guide": "应急指南",
+        "research_papers": "研究论文"
+      },
+      "legal": {
+        "privacy_policy": "隐私政策",
+        "hipaa_compliance": "HIPAA合规性",
+        "terms_of_service": "服务条款",
+        "medical_disclaimer": "医疗免责声明"
+      }
+    }
   },
   "navigationTabs": {
     "articles": "📚 专业文章",
@@ -7253,8 +7554,8 @@
       }
     },
     "tcmAnalysis": {
-      "title": "中医证型分析",
-      "description": "根据症状特点，中医将痛经细分为几种主要证型，每种证型都有其独特的病理机制和治疗方法："
+      "title": "整体健康证型分析",
+      "description": "根据症状特点，整体健康将痛经细分为几种主要证型，每种证型都有其独特的病理机制和治疗方法："
     }
   },
   "healthGuidePage": {
@@ -7938,8 +8239,8 @@
         "description": "痛经严重度计算器：智能分析疼痛模式，计算疼痛等级，预测周期趋势，为您提供个性化缓解建议和治疗优化方案。"
       },
       "constitutionTest": {
-        "title": "中医体质测试",
-        "description": "通过11个问题了解您的中医体质类型，获得个性化的穴位、饮食和生活方式建议。"
+        "title": "整体健康体质测试",
+        "description": "通过11个问题了解您的整体健康体质类型，获得个性化的穴位、饮食和生活方式建议。"
       },
       "periodPainAssessment": {
         "title": "痛经评估工具",
@@ -7963,7 +8264,7 @@
     "relatedArticles": {
       "default": "相关健康文章",
       "cycleTracker": "周期健康文章",
-      "constitutionTest": "中医体质调理文章"
+      "constitutionTest": "整体健康体质调理文章"
     },
     "scenarioSolutions": {
       "default": "场景解决方案",
@@ -8534,8 +8835,8 @@
       "answer": "正常的月经周期为21-35天，平均28天。月经持续时间通常为3-7天。如果周期长期不规律或有明显变化，建议咨询妇科医生。"
     },
     "q3": {
-      "question": "中医如何调理月经不调？",
-      "answer": "中医通过辨证论治调理月经：针灸调节气血、中药方剂如四物汤、食疗调养、生活方式调整。需要专业中医师诊断体质后制定个性化方案。"
+      "question": "整体健康如何调理月经不调？",
+      "answer": "整体健康通过辨证论治调理月经：针灸调节气血、天然方剂如四物汤、食疗调养、生活方式调整。需要专业整体健康医师诊断体质后制定个性化方案。"
     },
     "q4": {
       "question": "布洛芬什么时候服用最有效？",
@@ -8580,7 +8881,7 @@
       },
       "constitution": {
         "icon": "🧩",
-        "title": "中医体质测试",
+        "title": "整体健康体质测试",
         "description": "8个问题了解体质类型并获得调理建议",
         "cta": "开始测试"
       }
@@ -8614,7 +8915,7 @@
     "seo": {
       "title": "PeriodHub - 专业痛经缓解方法和月经健康管理平台 | 科学指导，贴心陪伴",
       "description": "PeriodHub专业痛经缓解方案与经期健康管理平台。基于43篇医学指南和13个自测工具，已帮助60万+女性科学应对痛经困扰，获取个性化解决方案，改善生活质量。提供科学痛经缓解方法、互动工具和个性化健康指导。",
-      "keywords": "痛经怎么缓解最快方法,痛经吃什么药最有效,月经推迟几天算正常,月经量少是什么原因,痛经缓解,月经疼痛,经期健康,女性健康,月经健康管理,经期疼痛怎么办,中医调理,热敷,敷热水袋,暖宝宝,按摩,揉肚子,止痛药,月经周期,经期护理,生理期,大姨妈,例假,月经不调,经期症状",
+      "keywords": "痛经怎么缓解最快方法,痛经吃什么药最有效,月经推迟几天算正常,月经量少是什么原因,痛经缓解,月经疼痛,经期健康,女性健康,月经健康管理,经期疼痛怎么办,整体健康调理,热敷,敷热水袋,暖宝宝,按摩,揉肚子,止痛药,月经周期,经期护理,生理期,大姨妈,例假,月经不调,经期症状",
       "ogTitle": "PeriodHub - 专业痛经缓解方法和月经健康管理平台",
       "ogDescription": "专业的女性月经健康管理平台，提供科学的痛经缓解方法和个性化健康建议。"
     },
@@ -10901,7 +11202,7 @@
           },
           "naturalTherapies": {
             "title": "自然疗法指南",
-            "description": "中医和自然缓解方法",
+            "description": "整体健康和自然缓解方法",
             "reason": "适合寻求自然、非药物缓解方案"
           },
           "medicalCareGuide": {
@@ -10947,9 +11248,9 @@
             "reason": "适合需要预测周期和管理计划"
           },
           "constitutionTest": {
-            "title": "中医体质测试",
-            "description": "传统中医体质评估和调理建议",
-            "reason": "适合寻求中医调理方案"
+            "title": "整体健康体质测试",
+            "description": "传统整体健康体质评估和调理建议",
+            "reason": "适合寻求整体健康调理方案"
           },
           "nutritionGenerator": {
             "title": "营养推荐生成器",
@@ -11482,9 +11783,9 @@
       "workplace": "压力管理",
       "nutrition": "营养调理",
       "medication": "药物治疗",
-      "tcm_guide": "中医理论指南",
+      "tcm_guide": "整体健康理论指南",
       "acupoint_massage": "穴位按摩指南",
-      "tcm_nutrition": "中医营养调理",
+      "tcm_nutrition": "整体健康营养调理",
       "natural": "自然疗法指南",
       "comprehensive": "综合治疗指南",
       "cycle_knowledge": "了解你的月经周期",
@@ -11493,7 +11794,7 @@
       "anti_inflammatory": "抗炎饮食指南",
       "ginger_tea": "生姜茶缓解经期疼痛",
       "natural_therapy": "自然物理疗法指南",
-      "tcm_exercise": "中医功法指南",
+      "tcm_exercise": "整体健康功法指南",
       "diet": "抗炎饮食指南",
       "stress_guide": "压力管理指南",
       "sleep_guide": "睡眠质量指南",
@@ -11838,7 +12139,7 @@
       "articles": "健康文章"
     },
     "content": {
-      "articleSummary": "精心挑选5-7本优秀书籍，涵盖女性健康、经期护理、情绪管理和中医调理等多个领域，帮助你更深入地了解自己的身体，温柔地关爱自己。",
+      "articleSummary": "精心挑选5-7本优秀书籍，涵盖女性健康、经期护理、情绪管理和整体健康调理等多个领域，帮助你更深入地了解自己的身体，温柔地关爱自己。",
       "healthExpert": "PeriodHub团队",
       "quickActions": "快速操作",
       "moreArticles": "更多文章",
@@ -11930,7 +12231,7 @@
       "草药治疗": "草药治疗",
       "科学方法": "科学方法",
       "阿育吠陀": "阿育吠陀",
-      "中医": "中医",
+      "中医": "整体健康",
       "热敷疗法": "热敷疗法",
       "物理疗法": "物理疗法",
       "温度控制": "温度控制",
@@ -12069,7 +12370,7 @@
       "太极拳": "太极拳",
       "传统功法": "传统功法",
       "科学研究": "科学研究",
-      "中医养生": "中医养生",
+      "中医养生": "整体健康养生",
       "气血调理": "气血调理",
       "避孕指导": "避孕指导",
       "医学知识与教育": "医学知识与教育",
@@ -12293,6 +12594,90 @@
       "user": "User",
       "loaded": "✅ Loaded",
       "loading": "⏳ Loading"
+    }
+  },
+  "v2Home": {
+    "hero": {
+      "trust": ["100% 隐私", "本地存储", "HIPAA 合规"]
+    },
+    "sections": {
+      "scenarios_title": "场景解决方案",
+      "scenarios_desc": "为每个生活阶段和情况提供定制支持。",
+      "enter_zone": "进入专区",
+      "downloads_title": "文章与下载",
+      "downloads_desc": "访问我们全面的循证指南和资源集合。",
+      "downloads_coming_soon": "即将推出..."
+    },
+    "tools": {
+      "pain-tracker": {
+        "title": "疼痛追踪器",
+        "description": "智能疼痛模式记录与分析。"
+      },
+      "cycle-tracker": {
+        "title": "周期追踪器",
+        "description": "全面的月经周期预测。"
+      },
+      "workplace": {
+        "title": "职场健康",
+        "description": "影响追踪与工作策略。"
+      }
+    },
+    "scenarios": {
+      "teen-zone": {
+        "title": "青少年月经健康专区",
+        "description": "12-18岁女孩的安全空间。校园指南与情感支持。"
+      },
+      "partner-zone": {
+        "title": "伴侣沟通专区",
+        "description": "帮助伴侣理解经期疼痛。支持策略。"
+      },
+      "office": {
+        "title": "办公室工作",
+        "description": "专业策略"
+      },
+      "commute": {
+        "title": "通勤与旅行",
+        "description": "移动解决方案"
+      },
+      "exercise": {
+        "title": "运动与体育",
+        "description": "安全活动指南"
+      },
+      "sleep": {
+        "title": "睡眠与休息",
+        "description": "优质休息建议"
+      }
+    },
+    "stats": {
+      "active_users": {
+        "value": "60万+",
+        "label": "活跃用户"
+      },
+      "user_rating": {
+        "value": "98%",
+        "label": "满意度"
+      },
+      "medical_guides": {
+        "value": "43",
+        "label": "医学指南"
+      },
+      "hipaa_compliant": {
+        "value": "100%",
+        "label": "HIPAA 合规"
+      }
+    },
+    "privacyNotice": {
+      "title": "您的隐私至关重要",
+      "description": "我们尊重您的隐私，并致力于保护您的个人健康信息。",
+      "details": {
+        "title": "我们如何保护您的隐私",
+        "noRegistration": "无需账户 - 匿名使用工具",
+        "encryption": "所有数据均经过加密和安全存储",
+        "exportDelete": "随时导出或删除您的数据",
+        "noSharing": "我们从不出售或分享您的个人数据",
+        "compliance": "符合HIPAA标准的数据保护措施"
+      },
+      "policyLink": "查看完整的隐私政策"
     }
   }
 }

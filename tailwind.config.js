@@ -9,38 +9,35 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'xs': '475px',  // 添加超小屏幕断点
+        'xs': '475px',
       },
       colors: {
-        // 🎨 您选择的紫色系 - 主色调
         primary: {
           50: '#faf5ff',
           100: '#f3e8ff',
           200: '#e9d5ff',
           300: '#d8b4fe',
           400: '#c084fc',
-          500: '#9333ea',  // 您选择的主紫色
+          500: '#9333ea',
           600: '#7c3aed',
           700: '#6d28d9',
           800: '#5b21b6',
           900: '#4c1d95',
           950: '#2e1065'
         },
-        // 🎨 您选择的粉色系 - 辅助色调
         secondary: {
           50: '#fdf2f8',
           100: '#fce7f3',
           200: '#fbcfe8',
           300: '#f9a8d4',
           400: '#f472b6',
-          500: '#ec4899',  // 您选择的主粉色
+          500: '#ec4899',
           600: '#db2777',
           700: '#be185d',
           800: '#9d174d',
           900: '#831843',
           950: '#500724'
         },
-        // Accent colors - warm accents
         accent: {
           50: '#fff8ed',
           100: '#ffefd4',
@@ -54,7 +51,6 @@ module.exports = {
           900: '#832d11',
           950: '#461406'
         },
-        // Neutral colors - warm neutrals
         neutral: {
           50: '#f9f7f5',
           100: '#f1eeea',
@@ -108,6 +104,20 @@ module.exports = {
           '2xl': '6rem',
         },
       },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        'pulse-glow': {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(236, 72, 153, 0.3)' },
+          '50%': { boxShadow: '0 0 40px rgba(236, 72, 153, 0.6)' },
+        }
+      }
     },
   },
   plugins: [

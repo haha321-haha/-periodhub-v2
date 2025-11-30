@@ -15,6 +15,270 @@
       "ogDescription": "Explore 43 professional health articles and 13 downloadable PDF resources, including 8 assessment tools, for science-backed period pain management.",
       "twitterTitle": "Period Pain Relief | Free Medical Tools & Guides",
       "twitterDescription": "Explore 43 professional health articles and 13 downloadable PDF resources, including 8 assessment tools, for science-backed period pain management.",
+      "hero": {
+        "acog_badge": "ACOG Guidelines Powered",
+        "title_line1": "Stop Guessing.",
+        "title_line2": "Start Healing.",
+        "subtitle_prefix": "Painkillers not working?",
+        "subtitle_middle": "Try the",
+        "subtitle_suffix": "method rated 7.5/10 by science",
+        "description": "The first AI-powered symptom checker built on ACOG guidelines—not search engine rumors. Track patterns, identify risks, and generate doctor-ready reports in seconds.",
+        "cta_primary": "Start Free Assessment",
+        "cta_secondary": "View Evidence",
+        "trust": {
+          "private": "100% Private",
+          "storage": "Local Storage",
+          "hipaa": "HIPAA Compliant"
+        }
+      },
+      "evidence": {
+        "title": "Clinical Effectiveness Scores",
+        "nsaids": {
+          "label": "NSAIDs (Ibuprofen)",
+          "score": "6.2/10",
+          "note": "Common side effects: Stomach upset, increased bleeding"
+        },
+        "exercise": {
+          "label": "Exercise + Heat Therapy",
+          "score": "7.5/10",
+          "note": "No side effects, improves mood & overall health"
+        },
+        "combined": {
+          "label": "AI-Personalized Protocol",
+          "score": "8.9/10",
+          "note": "Tailored to your specific symptoms & cycle patterns"
+        },
+        "acetaminophen": {
+          "label": "Acetaminophen (Tylenol)",
+          "score": "5.8/10",
+          "note": "Less effective for inflammation-based pain"
+        },
+        "source": {
+          "label": "Source",
+          "text": "ACOG Practice Bulletin No. 218 (2020), Dysmenorrhea and Endometriosis"
+        }
+      },
+      "tools": {
+        "title": "Science-Backed Relief Tools",
+        "subtitle": "Evidence-based solutions that actually work",
+        "body_battery": {
+          "title": "Body Battery Assessment",
+          "desc": "Analyze your current energy levels and recovery needs.",
+          "action": "Check Battery",
+          "badge": "⚡ Energy Check"
+        },
+        "cycle_forecast": {
+          "title": "Cycle Energy Forecast",
+          "desc": "Predict energy dips and peaks based on your cycle.",
+          "action": "View Forecast",
+          "badge": "📈 Smart Predict"
+        },
+        "pain_tracker": {
+          "title": "Pain Tracker",
+          "desc": "Log daily symptoms and track pain patterns over time.",
+          "action": "Track Now",
+          "badge": "💊 Symptom Log"
+        },
+        "remedies": {
+          "title": "Natural Relief Guide",
+          "desc": "Yoga, heat therapy & nutrition tips",
+          "action": "Explore Methods"
+        },
+        "doctor_report": {
+          "title": "Doctor Report",
+          "desc": "Generate professional medical summaries",
+          "action": "Create Report"
+        },
+        "pain_diary": {
+          "title": "Smart Pain Diary",
+          "desc": "Track triggers & find patterns",
+          "action": "Start Logging"
+        },
+        "emergency": {
+          "title": "When to See ER",
+          "desc": "Know the warning signs",
+          "action": "Check Symptoms"
+        }
+      },
+      "guides": {
+        "title": "Evidence-Based Medical Guides",
+        "subtitle": "43 guides reviewed by board-certified gynecologists",
+        "read_guide": "Read Guide",
+        "categories": {
+          "natural": {
+            "title": "Natural Remedies",
+            "count": "12 guides"
+          },
+          "hormone": {
+            "title": "Hormone Balance",
+            "count": "8 guides"
+          },
+          "nutrition": {
+            "title": "Nutrition & Diet",
+            "count": "15 guides"
+          },
+          "exercise": {
+            "title": "Exercise & Yoga",
+            "count": "8 guides"
+          }
+        },
+        "featured": {
+          "popular": {
+            "tag": "Most Popular",
+            "title": "Fast Period Cramp Relief: 5 Methods Under 10 Minutes",
+            "desc": "Evidence-based techniques for immediate relief when painkillers aren't enough."
+          },
+          "natural": {
+            "tag": "Natural",
+            "title": "Yoga for Menstruation: ACOG-Approved Poses",
+            "desc": "15 gentle poses proven to reduce cramping by up to 60% in clinical studies."
+          },
+          "nutrition": {
+            "tag": "Nutrition",
+            "title": "Anti-Inflammatory Diet for Period Pain",
+            "desc": "Foods that reduce prostaglandins and ease menstrual discomfort naturally."
+          }
+        }
+      },
+      "tools": {
+        "symptom_checker": {
+          "title": "AI Symptom Checker",
+          "description": "Analyze your symptoms and get personalized recommendations based on clinical guidelines.",
+          "pain_level": {
+            "label": "Current Pain Level (1-10)",
+            "mild": "Mild",
+            "moderate": "Moderate",
+            "severe": "Severe"
+          },
+          "symptoms": {
+            "label": "Select Symptoms",
+            "cramps": "Menstrual Cramps",
+            "back_pain": "Lower Back Pain",
+            "headache": "Headache / Migraine",
+            "nausea": "Nausea / Vomiting"
+          },
+          "duration": {
+            "label": "Duration of Pain",
+            "options": {
+              "less_than_1": "Less than 1 day",
+              "1_2_days": "1-2 days",
+              "3_5_days": "3-5 days",
+              "more_than_5": "More than 5 days"
+            }
+          },
+          "submit": "Analyze Symptoms",
+          "close": "Close Tool"
+        },
+        "cycle_tracker": {
+          "title": "Smart Cycle Tracker",
+          "description": "Track your cycle to predict future periods and understand your body's rhythm.",
+          "last_period": {
+            "label": "First Day of Last Period"
+          },
+          "cycle_length": {
+            "label": "Average Cycle Length",
+            "options": {
+              "short": "Short (21-24 days)",
+              "standard": "Standard (25-27 days)",
+              "optimal": "Optimal (28-30 days)",
+              "long": "Long (31-35 days)",
+              "irregular": "Irregular"
+            }
+          },
+          "flow": {
+            "label": "Typical Flow Intensity",
+            "options": {
+              "light": "Light",
+              "medium": "Medium",
+              "heavy": "Heavy"
+            }
+          },
+          "submit": "Calculate Cycle",
+          "close": "Close Tracker"
+        },
+        "remedies": {
+          "title": "Natural Relief Methods",
+          "description": "Evidence-based natural remedies to alleviate menstrual pain without medication.",
+          "items": {
+            "yoga": {
+              "title": "Yoga & Stretching",
+              "desc": "Specific poses like Child's Pose and Cat-Cow to relieve pelvic tension."
+            },
+            "heat": {
+              "title": "Heat Therapy",
+              "desc": "Applying heat increases blood flow and relaxes the uterus muscles."
+            },
+            "diet": {
+              "title": "Anti-Inflammatory Diet",
+              "desc": "Foods rich in Omega-3s, magnesium, and ginger to reduce inflammation."
+            },
+            "supplements": {
+              "title": "Supplements",
+              "desc": "Magnesium, Vitamin B1, and Zinc have shown effectiveness in studies."
+            }
+          },
+          "learn_more": "Learn More",
+          "close": "Close Guide"
+        },
+        "emergency": {
+          "title": "Emergency Guide",
+          "description": "Know when to seek immediate medical attention. If you are in danger, call emergency services immediately.",
+          "immediate": {
+            "title": "Seek Immediate Help If:",
+            "items": {
+              "bleeding": "Soaking through one or more pads/tampons every hour",
+              "clots": "Passing blood clots larger than a quarter",
+              "pain": "Severe pain that doesn't improve with medication",
+              "shock": "Signs of shock (dizziness, fainting, pale skin)",
+              "fever": "Fever over 101°F (38.3°C) with pain"
+            }
+          },
+          "urgent": {
+            "title": "Schedule an Appointment If:",
+            "items": {
+              "duration": "Bleeding lasts longer than 7 days",
+              "irregular": "Periods are consistently irregular",
+              "changes": "Significant changes in your cycle pattern",
+              "interference": "Pain interferes with daily activities"
+            }
+          },
+          "find_er": "Find Nearest ER",
+          "close": "Close Guide"
+        }
+      },
+      "privacy": {
+        "title": "Your Privacy Is Our Priority",
+        "subtitle": "HIPAA compliant, local-first architecture",
+        "features": {
+          "local": {
+            "title": "100% Local Storage",
+            "desc": "Your health data never leaves your device. Everything is encrypted and stored locally."
+          },
+          "compliance": {
+            "title": "HIPAA & CCPA Compliant",
+            "desc": "We exceed federal privacy standards. Your PHI is never sold or shared."
+          },
+          "encryption": {
+            "title": "End-to-End Encryption",
+            "desc": "Military-grade AES-256 encryption protects your data even on your own device."
+          }
+        },
+        "disclaimer": {
+          "title": "Medical Disclaimer",
+          "p1": "PeriodHub is a health information management tool, not a medical device. The insights provided are based on clinical guidelines (ACOG/WHO) but do not constitute medical diagnosis or treatment.",
+          "p2": "Always consult a healthcare professional for medical advice. If you experience severe pain, heavy bleeding, or other concerning symptoms, seek immediate medical attention.",
+          "data_privacy": {
+            "title": "Data Privacy (HIPAA/CCPA)",
+            "text": "Your health data belongs to you. We utilize Local-First Architecture, meaning your sensitive cycle data is encrypted and stored directly on your device. We do not sell, trade, or share your personal health information (PHI) with third-party advertisers."
+          }
+        }
+      },
+      "cta": {
+        "title": "Ready to Take Control of Your Period Pain?",
+        "subtitle": "Join 600,000+ women who've found relief with evidence-based solutions",
+        "button": "Start Your Free Assessment Now",
+        "note": "No credit card required • Local data only"
+      },
       "home": {
         "structuredData": {
           "description": "Professional women's menstrual health management platform providing period pain tracking, cycle prediction, constitution assessment and more",
@@ -60,6 +324,7 @@
   "footer": {
     "companyName": "PeriodHub",
     "description": "Professional Menstrual Health Information Platform",
+    "tagline": "Evidence-based period care powered by ACOG guidelines",
     "linksTitle": "Links",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
@@ -73,7 +338,7 @@
     "socialDiscord": "Join Discord Community",
     "contactEmailSubject": "Website Inquiry",
     "contactEmailBody": "Hello, I would like to inquire about menstrual health management.",
-    "copyright": "© 2,025 www.periodhub.health. All rights reserved.",
+    "copyright": "© {currentYear, number, integer} www.periodhub.health. All rights reserved.",
     "medicalDisclaimerFull": "Medical Disclaimer: The content on this website is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. We are not medical professionals. If you have any medical questions, please consult your doctor or other qualified healthcare provider. In case of emergency, please seek medical assistance immediately. Using this website does not constitute a doctor-patient relationship.",
     "dataPrivacyFull": "Data Privacy (HIPAA/CCPA): Your health data belongs to you. We utilize Local-First Architecture, meaning your sensitive cycle data is encrypted and stored directly on your device. We do not sell, trade, or share your personal health information (PHI) with third-party advertisers.",
     "quickLinks": "Quick Links",
@@ -83,7 +348,32 @@
     "email": "Email",
     "support24": "24/7 Professional Health Support",
     "allRights": "All rights reserved.",
-    "disclaimer": "This content is for reference only and cannot replace professional medical advice."
+    "disclaimer": "This content is for reference only and cannot replace professional medical advice.",
+    "columns": {
+      "tools": "Tools",
+      "resources": "Resources",
+      "legal": "Legal"
+    },
+    "links": {
+      "tools": {
+        "symptom_checker": "AI Symptom Checker",
+        "cycle_tracker": "Cycle Tracker",
+        "pain_diary": "Pain Diary",
+        "doctor_reports": "Doctor Reports"
+      },
+      "resources": {
+        "medical_guides": "Medical Guides",
+        "natural_remedies": "Natural Remedies",
+        "emergency_guide": "Emergency Guide",
+        "research_papers": "Research Papers"
+      },
+      "legal": {
+        "privacy_policy": "Privacy Policy",
+        "hipaa_compliance": "HIPAA Compliance",
+        "terms_of_service": "Terms of Service",
+        "medical_disclaimer": "Medical Disclaimer"
+      }
+    }
   },
   "languageSwitcher": {
     "chinese": "中文",
@@ -189,7 +479,7 @@
       "painTrackerDesc": "Smart pain pattern recording",
       "cycleTracker": "Cycle Tracker",
       "cycleTrackerDesc": "Comprehensive menstrual cycle management",
-      "constitutionTest": "TCM Constitution Test",
+      "constitutionTest": "Holistic Body Pattern Quiz",
       "constitutionTestDesc": "Personalized health assessment"
     },
     "ctaSupportText": "Free • 3 minutes • Science-based",
@@ -341,6 +631,16 @@
       "cta": {
         "primary": "Get Started",
         "secondary": "Learn More"
+      }
+    },
+    "structuredData": {
+      "description": "Professional women's menstrual health management platform providing period pain tracking, cycle prediction, constitution assessment and more",
+      "featureList": {
+        "painTracking": "Pain Tracking",
+        "cyclePrediction": "Cycle Prediction",
+        "constitutionAssessment": "Constitution Assessment",
+        "healthGuides": "Health Guides",
+        "scenarioSolutions": "Scenario Solutions"
       }
     },
     "features": {
@@ -860,10 +1160,10 @@
       }
     },
     "constitutionTest": {
-      "title": "TCM Constitution Test",
-      "description": "Understand your Traditional Chinese Medicine constitution type through 8 questions and get personalized acupoint, diet, and lifestyle recommendations",
+      "title": "Holistic Body Pattern Quiz",
+      "description": "Understand your Holistic Health constitution type through 8 questions and get personalized acupoint, diet, and lifestyle recommendations",
       "cta": "Start Test",
-      "subtitle": "Understand your TCM constitution type through professional questionnaire and get personalized health recommendations",
+      "subtitle": "Understand your Holistic Health constitution type through professional questionnaire and get personalized health recommendations",
       "features": {
         "quick": {
           "title": "Quick & Convenient",
@@ -871,7 +1171,7 @@
         },
         "professional": {
           "title": "Professional & Reliable",
-          "description": "Based on TCM theory"
+          "description": "Based on Holistic Health theory"
         },
         "personalized": {
           "title": "Personalized Advice",
@@ -1908,22 +2208,22 @@
     },
     "nutritionRecommendationGenerator": {
       "title": "Nutrition Recommendation Generator",
-      "description": "Please select your menstrual phase, health goals, and TCM constitution to generate personalized nutrition recommendations",
+      "description": "Please select your menstrual phase, health goals, and Holistic Health constitution to generate personalized nutrition recommendations",
       "journeyTitle": "✨ Start Your Personalized Nutrition Journey",
       "steps": {
         "step1": "Select Phase",
         "step2": "Set Goals",
         "step3": "Generate"
       },
-      "tip": "💡 Tip: All recommendations are based on scientific research and TCM theory",
+      "tip": "💡 Tip: All recommendations are based on scientific research and Holistic Health theory",
       "meta": {
         "title": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
-        "description": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
-        "keywords": "nutrition suggestion generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management",
+        "description": "Personalized nutrition recommendations for your menstrual cycle, health goals, Holistic Health constitution. Scientific guidance combining modern and holistic medicine.",
+        "keywords": "nutrition suggestion generator,menstrual cycle nutrition,Holistic Health constitution diet,personalized nutrition plan,women's health nutrition,period nutrition management",
         "ogTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
-        "ogDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine.",
+        "ogDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, Holistic Health constitution. Scientific guidance combining modern and holistic medicine.",
         "twitterTitle": "Nutrition Recommendation Generator - Personalized Nutrition Advice | Period Hub",
-        "twitterDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, TCM constitution. Scientific guidance combining modern and traditional medicine."
+        "twitterDescription": "Personalized nutrition recommendations for your menstrual cycle, health goals, Holistic Health constitution. Scientific guidance combining modern and holistic medicine."
       },
       "structuredData": {
         "applicationCategory": "HealthApplication",
@@ -1938,8 +2238,8 @@
           "description": "Intelligently track your menstrual cycle, predict next period, record symptom changes, helping you better understand your body patterns"
         },
         "constitutionTest": {
-          "title": "TCM Constitution Test",
-          "description": "Understand your TCM constitution type through 11 questions and get personalized acupuncture points, diet and lifestyle recommendations"
+          "title": "Holistic Body Pattern Quiz",
+          "description": "Understand your Holistic Health constitution type through 11 questions and get personalized acupuncture points, diet and lifestyle recommendations"
         }
       },
       "relatedArticles": {
@@ -1977,9 +2277,9 @@
       "nutrition_generator": "Nutrition Generator",
       "pain_tracker": "Pain Tracker",
       "symptom_assessment": "Symptom Assessment",
-      "constitution_test": "TCM Constitution Test",
+      "constitution_test": "Holistic Body Pattern Quiz",
       "cycle_tracker": "Cycle Tracker",
-      "constitution": "TCM Constitution Test",
+      "constitution": "Holistic Body Pattern Quiz",
       "tracker": "Tracker",
       "nutrition": "Nutrition",
       "assessment": "Assessment",
@@ -2034,9 +2334,9 @@
       "nutrition": "Nutrition Therapy",
       "ginger": "Ginger Therapy Guide",
       "heat": "Heat Therapy Guide",
-      "tcm_guide": "TCM Theory Guide",
+      "tcm_guide": "Holistic Health Theory Guide",
       "acupoint_massage": "Acupoint Massage Guide",
-      "tcm_nutrition": "TCM Nutrition Therapy",
+      "tcm_nutrition": "Holistic Health Nutrition Therapy",
       "natural": "Natural Therapies Guide",
       "comprehensive": "Comprehensive Treatment Guide",
       "medication": "Medication Guide",
@@ -2046,7 +2346,7 @@
       "anti_inflammatory": "Anti-Inflammatory Diet Guide",
       "ginger_tea": "Ginger Tea for Menstrual Pain Relief",
       "natural_therapy": "Natural Physical Therapy Guide",
-      "tcm_exercise": "TCM Exercise Guide",
+      "tcm_exercise": "Holistic Health Exercise Guide",
       "diet": "Anti-Inflammatory Diet Guide",
       "stress_guide": "Stress Management Guide",
       "sleep_guide": "Sleep Quality Guide",
@@ -2130,7 +2430,7 @@
     "nutritionGenerator": {
       "pageTitle": "Nutrition Recommendation Generator",
       "mainTitle": "Personalized Nutrition Recommendation Generator",
-      "subtitle": "Scientific nutrition guidance based on menstrual cycle, health goals and TCM constitution",
+      "subtitle": "Scientific nutrition guidance based on menstrual cycle, health goals and Holistic Health constitution",
       "generateBtn": "Generate My Recommendations",
       "generating": "Generating...",
       "noSelection": "Please select at least one option to generate recommendations",
@@ -2138,7 +2438,7 @@
       "categories": {
         "menstrualPhase": "Menstrual Phase",
         "healthGoals": "Health Goals",
-        "tcmConstitution": "TCM Constitution"
+        "tcmConstitution": "Holistic Health Constitution"
       },
       "results": {
         "title": "Your Personalized Nutrition Recommendations",
@@ -2166,7 +2466,7 @@
         }
       },
       "tcmConstitution": {
-        "title": "Select Your TCM Constitution",
+        "title": "Select Your Holistic Health Constitution",
         "description": "Understand your constitution type for more precise nutrition recommendations",
         "options": {
           "qiDeficiency": "Qi Deficiency",
@@ -2177,14 +2477,14 @@
         }
       },
       "meta": {
-        "title": "Nutrition Recommendation Generator | Personalized Nutrition Guidance Based on Menstrual Cycle & TCM Constitution | Period Hub",
-        "description": "Professional nutrition recommendation generator providing personalized dietary guidance based on your menstrual cycle, health goals and TCM constitution. Scientifically combines modern nutrition and TCM theory to offer precise nutrition management for women, helping improve menstrual health and quality of life.",
-        "keywords": "nutrition recommendation generator,menstrual cycle nutrition,TCM constitution diet,personalized nutrition plan,women's health diet,menstrual nutrition management,period pain nutritional therapy,TCM dietary therapy,menstrual diet guidance,nutrition calculator",
+        "title": "Nutrition Recommendation Generator | Personalized Nutrition Guidance Based on Menstrual Cycle & Holistic Health Constitution | Period Hub",
+        "description": "Professional nutrition recommendation generator providing personalized dietary guidance based on your menstrual cycle, health goals and Holistic Health constitution. Scientifically combines modern nutrition and Holistic Health theory to offer precise nutrition management for women, helping improve menstrual health and quality of life.",
+        "keywords": "nutrition recommendation generator,menstrual cycle nutrition,Holistic Health constitution diet,personalized nutrition plan,women's health diet,menstrual nutrition management,period pain nutritional therapy,Holistic Health dietary therapy,menstrual diet guidance,nutrition calculator",
         "ogTitle": "Nutrition Recommendation Generator | Personalized Nutrition Guidance Tool",
-        "ogDescription": "Professional nutrition recommendation generator based on menstrual cycle, health goals and TCM constitution, providing scientific personalized dietary guidance for women.",
+        "ogDescription": "Professional nutrition recommendation generator based on menstrual cycle, health goals and Holistic Health constitution, providing scientific personalized dietary guidance for women.",
         "ogImageAlt": "Nutrition Recommendation Generator Interface Screenshot",
         "twitterTitle": "Nutrition Recommendation Generator | Personalized Nutrition Guidance",
-        "twitterDescription": "Professional nutrition recommendation generator based on menstrual cycle and TCM constitution, providing scientific personalized dietary guidance for women."
+        "twitterDescription": "Professional nutrition recommendation generator based on menstrual cycle and Holistic Health constitution, providing scientific personalized dietary guidance for women."
       }
     },
     "teen": {
@@ -3074,7 +3374,7 @@
   "downloadsPage": {
     "title": "Health Articles & PDF Resources - 43 Medical Guides | PeriodHub",
     "description": "Browse 43 professional health articles with 13 downloadable PDF guides on period pain relief, medication advice, nutrition and exercise strategies. Evidence-based, medically reviewed.",
-    "keywords": "period health PDF,dysmenorrhea management guide,menstrual health materials,free health resources,period care handbook,TCM wellness guide",
+    "keywords": "period health PDF,dysmenorrhea management guide,menstrual health materials,free health resources,period care handbook,Holistic Health wellness guide",
     "openGraph": {
       "title": "Health Articles & PDF Resources - 43 Medical Guides | PeriodHub",
       "description": "Browse 43 professional health articles with 13 downloadable PDF guides on period pain relief, medication advice, nutrition and exercise strategies. Evidence-based, medically reviewed."
@@ -3427,7 +3727,7 @@
           "guidelines": {
             "0": "Angelica contraindicated in pregnancy",
             "1": "Use ginger cautiously with anticoagulants",
-            "2": "Consult TCM practitioner for first use"
+            "2": "Consult Holistic Health practitioner for first use"
           }
         }
       },
@@ -3873,8 +4173,8 @@
           "benefitsValue": "Customized meal plans for pain relief and hormonal balance"
         },
         "constitutionTest": {
-          "title": "TCM Constitution Test",
-          "description": "Understand your TCM constitution type",
+          "title": "Holistic Body Pattern Quiz",
+          "description": "Understand your Holistic Health constitution type",
           "benefits": "Benefits:",
           "benefitsValue": "Personalized therapy recommendations based on your constitution"
         },
@@ -4023,7 +4323,7 @@
         "notes": "Notes",
         "foodName": "Food Name",
         "menstrualPhase": "Menstrual Phase",
-        "tcmNature": "TCM Nature",
+        "tcmNature": "Holistic Health Nature",
         "mainBenefits": "Main Benefits",
         "keyNutrients": "Key Nutrients"
       },
@@ -4057,7 +4357,7 @@
       },
       "q3": {
         "question": "How is nutrition advice personalized?",
-        "answer": "Nutrition advice is based on your current menstrual phase and TCM constitution type, providing personalized food recommendations and meal plans to help alleviate menstrual discomfort."
+        "answer": "Nutrition advice is based on your current menstrual phase and Holistic Health constitution type, providing personalized food recommendations and meal plans to help alleviate menstrual discomfort."
       },
       "q4": {
         "question": "Is data export secure?",
@@ -4502,9 +4802,9 @@
             "reason": "Predict cycles and manage planning"
           },
           "constitutionTest": {
-            "title": "TCM Constitution Test",
-            "description": "Traditional Chinese Medicine constitution assessment",
-            "reason": "Explore TCM-based therapies"
+            "title": "Holistic Body Pattern Quiz",
+            "description": "Holistic Health constitution assessment",
+            "reason": "Explore Holistic Health-based therapies"
           },
           "nutritionGenerator": {
             "title": "Nutrition Recommendation Generator",
@@ -5136,7 +5436,7 @@
       "太极拳": "Tai Chi",
       "传统功法": "Traditional Exercise",
       "科学研究": "Scientific Research",
-      "中医养生": "TCM Wellness",
+      "中医养生": "Holistic Health Wellness",
       "气血调理": "Qi & Blood Regulation",
       "即时缓解方案": "Immediate Relief Solutions",
       "自然疗法与平时调理": "Natural Therapies & Daily Care",
@@ -6709,7 +7009,7 @@
         },
         "q3": {
           "question": "How is nutrition advice personalized?",
-          "answer": "Nutrition advice is based on your current menstrual phase and TCM constitution type, providing personalized food recommendations and meal plans to help alleviate menstrual discomfort."
+          "answer": "Nutrition advice is based on your current menstrual phase and Holistic Health constitution type, providing personalized food recommendations and meal plans to help alleviate menstrual discomfort."
         },
         "q4": {
           "question": "Is data export secure?",
@@ -6778,7 +7078,7 @@
           "notes": "Notes",
           "foodName": "Food Name",
           "menstrualPhase": "Menstrual Phase",
-          "tcmNature": "TCM Nature",
+          "tcmNature": "Holistic Health Nature",
           "mainBenefits": "Main Benefits",
           "keyNutrients": "Key Nutrients"
         },
@@ -6806,11 +7106,11 @@
       "label": "Prerequisites",
       "completeFirst": "Complete first:",
       "cycleTracker": "Cycle Tracker",
-      "constitutionTest": "TCM Constitution Test"
+      "constitutionTest": "Holistic Body Pattern Quiz"
     },
     "nutritionGenerator": {
       "title": "Nutrition Recommendation Generator",
-      "description": "Get personalized nutrition recommendations based on your menstrual cycle, health goals, and TCM constitution. Complete cycle tracking and constitution test first.",
+      "description": "Get personalized nutrition recommendations based on your menstrual cycle, health goals, and Holistic Health constitution. Complete cycle tracking and constitution test first.",
       "cta": "Start Nutrition Analysis"
     },
     "otherTools": {
@@ -6894,7 +7194,7 @@
         "toolsList": {
           "tracker": "Pain Tracker",
           "cycle": "Cycle Tracker",
-          "constitution": "TCM Constitution Test"
+          "constitution": "Holistic Body Pattern Quiz"
         },
         "scenarios": "Life Scenarios",
         "scenariosList": {
@@ -7360,10 +7660,10 @@
       "cta": "Start Tracking"
     },
     "constitutionTest": {
-      "title": "TCM Constitution Test",
-      "description": "Traditional Chinese Medicine constitution identification with personalized care recommendations",
+      "title": "Holistic Body Pattern Quiz",
+      "description": "Holistic Health constitution identification with personalized care recommendations",
       "cta": "Start Test",
-      "subtitle": "Understand your TCM constitution type through professional questionnaire and get personalized health recommendations",
+      "subtitle": "Understand your Holistic Health constitution type through professional questionnaire and get personalized health recommendations",
       "features": {
         "quick": {
           "title": "Quick & Convenient",
@@ -7371,7 +7671,7 @@
         },
         "professional": {
           "title": "Professional & Reliable",
-          "description": "Based on TCM theory"
+          "description": "Based on Holistic Health theory"
         },
         "personalized": {
           "title": "Personalized Recommendations",
@@ -9846,8 +10146,8 @@
         "description": "Period pain severity calculator: Intelligently analyze pain patterns, calculate pain levels, predict cycle trends, and provide personalized relief recommendations."
       },
       "constitutionTest": {
-        "title": "TCM Constitution Test",
-        "description": "Discover your TCM constitution type through 11 questions and get personalized acupoint, diet, and lifestyle recommendations."
+        "title": "Holistic Body Pattern Quiz",
+        "description": "Discover your Holistic Health constitution type through 11 questions and get personalized acupoint, diet, and lifestyle recommendations."
       },
       "periodPainAssessment": {
         "title": "Period Pain Assessment Tool",
@@ -9871,7 +10171,7 @@
     "relatedArticles": {
       "default": "Related Health Articles",
       "cycleTracker": "Cycle Health Articles",
-      "constitutionTest": "TCM Constitution Articles"
+      "constitutionTest": "Holistic Body Pattern Articles"
     },
     "scenarioSolutions": {
       "default": "Scenario Solutions",
@@ -11011,7 +11311,7 @@
       },
       "constitution": {
         "icon": "🧩",
-        "title": "TCM Constitution Test",
+        "title": "Holistic Body Pattern Quiz",
         "description": "8 questions to understand your constitution and get care recommendations",
         "cta": "Start Test"
       }
@@ -12333,5 +12633,89 @@
   "tutorial": "Tutorial",
   "manual": "Manual",
   "api": "API",
-  "reference": "Reference"
+  "reference": "Reference",
+  "v2Home": {
+    "hero": {
+      "trust": ["100% Private", "Local Storage", "HIPAA Compliant"]
+    },
+    "sections": {
+      "scenarios_title": "Scenario Solutions",
+      "scenarios_desc": "Tailored support for every stage of life and situation.",
+      "enter_zone": "Enter Zone",
+      "downloads_title": "Articles & Downloads",
+      "downloads_desc": "Access our comprehensive collection of evidence-based guides and resources.",
+      "downloads_coming_soon": "Coming soon..."
+    },
+    "tools": {
+      "pain-tracker": {
+        "title": "Pain Tracker",
+        "description": "Smart pain pattern recording & analysis."
+      },
+      "cycle-tracker": {
+        "title": "Cycle Tracker",
+        "description": "Comprehensive menstrual prediction."
+      },
+      "workplace": {
+        "title": "Workplace Wellness",
+        "description": "Impact tracking & work strategies."
+      }
+    },
+    "scenarios": {
+      "teen-zone": {
+        "title": "Teen Menstrual Health Zone",
+        "description": "Safe space for girls 12-18. Campus guides & emotional support."
+      },
+      "partner-zone": {
+        "title": "Partner Communication Zone",
+        "description": "Help partners understand period pain. Support strategies."
+      },
+      "office": {
+        "title": "Office Work",
+        "description": "Professional strategies"
+      },
+      "commute": {
+        "title": "Commute & Travel",
+        "description": "On-the-go solutions"
+      },
+      "exercise": {
+        "title": "Exercise & Sports",
+        "description": "Safe activity guides"
+      },
+      "sleep": {
+        "title": "Sleep & Rest",
+        "description": "Quality rest tips"
+      }
+    },
+    "stats": {
+      "active_users": {
+        "value": "600K+",
+        "label": "Active Users"
+      },
+      "user_rating": {
+        "value": "98%",
+        "label": "Satisfaction Rate"
+      },
+      "medical_guides": {
+        "value": "43",
+        "label": "Medical Guides"
+      },
+      "hipaa_compliant": {
+        "value": "100%",
+        "label": "HIPAA Compliant"
+      }
+    },
+    "privacyNotice": {
+      "title": "Your Privacy Matters",
+      "description": "We respect your privacy and are committed to protecting your personal health information.",
+      "details": {
+        "title": "How We Protect Your Privacy",
+        "noRegistration": "No account required - use tools anonymously",
+        "encryption": "All data is encrypted and securely stored",
+        "exportDelete": "Export or delete your data at any time",
+        "noSharing": "We never sell or share your personal data",
+        "compliance": "HIPAA compliant data protection standards"
+      },
+      "policyLink": "View our full privacy policy"
+    }
+  }
 }

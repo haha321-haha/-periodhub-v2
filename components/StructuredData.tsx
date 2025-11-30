@@ -46,24 +46,30 @@ export default function StructuredData(props: StructuredDataProps) {
 export function generateStructuredData(
   props: { type: StructuredDataType } & StructuredDataData,
 ) {
-  const baseData = {
+  const baseData: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": props.type,
-    name: props.title,
-    description: props.description,
-    url: props.url,
-    image: props.image,
+    name: props.title || "",
+    description: props.description || "",
+    url: props.url || "",
   };
+
+  // 只在 image 存在时添加
+  if (props.image) {
+    baseData.image = props.image;
+  }
 
   // 根据类型添加特定字段
   switch (props.type) {
     case "Article":
       return {
         ...baseData,
-        author: {
-          "@type": "Person",
-          name: props.author || "PeriodHub Team",
-        },
+        ...(props.author && {
+          author: {
+            "@type": "Person",
+            name: props.author || "PeriodHub Team",
+          },
+        }),
         publisher: {
           "@type": "Organization",
           name: "PeriodHub",
@@ -72,8 +78,8 @@ export function generateStructuredData(
             url: "/logo.png",
           },
         },
-        datePublished: props.datePublished,
-        dateModified: props.dateModified || props.datePublished,
+        ...(props.datePublished && { datePublished: props.datePublished }),
+        ...(props.dateModified && { dateModified: props.dateModified }),
         mainEntityOfPage: {
           "@type": "WebPage",
           "@id": props.url,

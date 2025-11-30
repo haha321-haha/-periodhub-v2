@@ -17,6 +17,7 @@ import { PDF_RESOURCES, getPDFResourceById } from "@/config/pdfResources";
 import type { PDFResource as ConfigPDFResource } from "@/config/pdfResources";
 import { SITE_CONFIG } from "@/config/site.config";
 import { logInfo, logError } from "@/lib/debug-logger";
+import DownloadModal from "@/components/DownloadModal";
 
 interface OptimizedMobilePDFCenterProps {
   locale: Locale;
@@ -56,6 +57,14 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
   // const [isEmergencyMode, setIsEmergencyMode] = useState(false); // Reserved for future use
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  // 🚀 邮箱收集弹窗状态
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [selectedResource, setSelectedResource] = useState<{
+    id: string;
+    title: string;
+    downloadUrl: string;
+  } | null>(null);
 
   // 获取翻译函数 - 使用正确的翻译键
   const t = useTranslations("simplePdfCenter");
@@ -1213,7 +1222,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
             "姜黄",
             "甘菊茶",
             "传统疗法",
-            "中医",
+            "整体健康",
             "草本",
             "天然疗法",
           ]
@@ -1285,7 +1294,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
             "turmeric",
             "chamomile tea",
             "herbal remedies",
-            "TCM",
+            "Holistic Health",
             "natural remedies",
           ];
 
@@ -1758,7 +1767,7 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     return resource?.filename || `${resourceId}.pdf`;
   };
 
-  // 处理HTML格式PDF下载
+  // 处理HTML格式PDF下载 - 🚀 集成邮箱收集功能
   const handlePDFDownload = (resourceId: string, resource?: Resource) => {
     // 验证资源ID是否是有效的PDF资源
     const pdfResource = getPDFResourceById(resourceId);
@@ -1786,20 +1795,19 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
     const htmlFilename = `${resourceId}${locale === "en" ? "-en" : ""}.html`;
     const downloadUrl = `/downloads/${htmlFilename}`;
 
-    logInfo(
-      `下载HTML文档: ${resourceId} -> ${downloadUrl}`,
-      { resourceId, downloadUrl },
-      "OptimizedMobilePDFCenter/handleDownloadHTML",
-    );
+    // 🚀 邮箱收集：拦截下载，先弹出邮箱收集弹窗
+    setSelectedResource({
+      id: resourceId,
+      title: resource?.title || pdfResource.title,
+      downloadUrl,
+    });
+    setShowEmailModal(true);
 
-    // 创建临时链接进行下载
-    const link = document.createElement("a");
-    link.href = downloadUrl;
-    link.download = htmlFilename;
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    logInfo(
+      `邮箱收集弹窗触发: ${resourceId} -> ${downloadUrl}`,
+      { resourceId, downloadUrl, title: resource?.title },
+      "OptimizedMobilePDFCenter/handlePDFDownload",
+    );
   };
 
   // 处理分享功能
@@ -1914,14 +1922,17 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
                 className="flex-1 bg-blue-600 text-white py-2 px-3 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors flex items-center justify-center"
               >
                 <Eye className="w-3 h-3 mr-1" />
-                {locale === "zh" ? "查看文档" : "View Document"}
+                {t("actions.viewDocument")}
               </button>
               <button
                 onClick={() => handlePDFDownload(resource.id!, resource)}
-                className="px-3 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors flex items-center justify-center"
+                className="px-3 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors flex items-center justify-center gap-1"
                 title={t("actions.downloadHtmlPdf")}
               >
                 <Download className="w-3 h-3" />
+                <span className="text-xs hidden sm:inline">
+                  {t("actions.downloadButtonText")}
+                </span>
               </button>
               <button
                 onClick={() => handleShare(resource)}
@@ -2279,6 +2290,24 @@ const OptimizedMobilePDFCenter: React.FC<OptimizedMobilePDFCenterProps> = ({
 
       {/* Bottom spacer for mobile navigation */}
       <div className="h-20"></div>
+
+      {/* 🚀 邮箱收集弹窗 */}
+      {selectedResource && (
+        <DownloadModal
+          isOpen={showEmailModal}
+          onClose={() => {
+            setShowEmailModal(false);
+            setSelectedResource(null);
+          }}
+          locale={locale}
+          source={`downloads-center-${selectedResource.id}`}
+          downloadUrl={selectedResource.downloadUrl}
+          resourceTitle={selectedResource.title}
+          buttonText={
+            locale === "en" ? "📥 Send PDF to Email" : "📥 发送 PDF 到邮箱"
+          }
+        />
+      )}
     </div>
   );
 };

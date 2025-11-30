@@ -1,8 +1,10 @@
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import type { Metadata } from "next";
 import { Download } from "lucide-react";
+import { Suspense } from "react";
 import { Locale, locales } from "@/i18n";
 import OptimizedMobilePDFCenter from "@/components/OptimizedMobilePDFCenter";
+import DownloadsPageClient from "@/components/DownloadsPageClient";
 import { SITE_CONFIG } from "@/config/site.config";
 import { pdfResources } from "@/config/pdfResources";
 import { SmartPreloadProvider } from "@/components/SmartPreloadProvider";
@@ -215,6 +217,11 @@ export default async function DownloadsPage({
 
           {/* 🚀 优化版移动端PDF中心组件 - 实现"我现在需要什么帮助？"界面 */}
           <OptimizedMobilePDFCenter locale={locale} />
+
+          {/* 📧 邮箱收集提示卡片和弹窗 - 客户端组件（需要 Suspense 包装，因为使用了 useSearchParams） */}
+          <Suspense fallback={null}>
+            <DownloadsPageClient locale={locale} />
+          </Suspense>
 
           {/* 💡 用户反馈组件 */}
           <div className="fixed bottom-4 right-4 z-50 max-w-xs">

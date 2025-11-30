@@ -1,4 +1,7 @@
-import { safeStringify } from "@/lib/utils/json-serialization";
+import {
+  safeStringify,
+  cleanDataForJSON,
+} from "@/lib/utils/json-serialization";
 
 interface EnhancedStructuredDataProps {
   type: "website" | "article" | "faq" | "howto" | "medicalwebpage";
@@ -87,16 +90,26 @@ export default function EnhancedStructuredData({
         "@type": "FAQPage",
         ...(faqItems &&
           faqItems.length > 0 && {
-            mainEntity: faqItems.map((item) => ({
-              "@type": "Question",
-              name: item.question,
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: item.answer,
-              },
-            })),
+            mainEntity: faqItems
+              .filter((item) => item.question && item.answer) // 过滤空问题或答案
+              .map((item) => ({
+                "@type": "Question",
+                name: item.question.trim(),
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: item.answer.trim(),
+                },
+              })),
           }),
       };
+      // 确保有有效的 mainEntity
+      if (
+        structuredData.mainEntity &&
+        Array.isArray(structuredData.mainEntity) &&
+        structuredData.mainEntity.length === 0
+      ) {
+        delete structuredData.mainEntity;
+      }
       break;
 
     case "howto":
@@ -105,14 +118,24 @@ export default function EnhancedStructuredData({
         "@type": "HowTo",
         ...(steps &&
           steps.length > 0 && {
-            step: steps.map((step, index) => ({
-              "@type": "HowToStep",
-              position: index + 1,
-              name: step.name,
-              text: step.text,
-            })),
+            step: steps
+              .filter((step) => step.name && step.text) // 过滤空步骤
+              .map((step, index) => ({
+                "@type": "HowToStep",
+                position: index + 1,
+                name: step.name.trim(),
+                text: step.text.trim(),
+              })),
           }),
       };
+      // 确保有有效的 step
+      if (
+        structuredData.step &&
+        Array.isArray(structuredData.step) &&
+        structuredData.step.length === 0
+      ) {
+        delete structuredData.step;
+      }
       break;
 
     case "medicalwebpage":
@@ -131,14 +154,61 @@ export default function EnhancedStructuredData({
       break;
 
     default:
-      structuredData = baseData;
+      // 确保 default 分支也有 @type 字段
+      structuredData = {
+        ...baseData,
+        "@type": "WebPage", // 默认类型
+      };
+  }
+
+  // 确保最终数据包含必需的字段且没有空字符串
+  const cleanedData = cleanDataForJSON(structuredData);
+
+  // 验证数据有效性
+  if (!cleanedData || typeof cleanedData !== "object") {
+    console.error("Structured data cleaning failed:", cleanedData);
+    return null; // 不渲染无效的结构化数据
+  }
+
+  const finalData = cleanedData as Record<string, unknown>;
+
+  // 验证 @type 字段存在且非空
+  if (
+    !finalData["@type"] ||
+    typeof finalData["@type"] !== "string" ||
+    finalData["@type"] === ""
+  ) {
+    console.error("Structured data missing or invalid @type field:", finalData);
+    return null; // 不渲染无效的结构化数据
+  }
+
+  // 验证 @context 字段
+  if (
+    !finalData["@context"] ||
+    typeof finalData["@context"] !== "string" ||
+    finalData["@context"] === ""
+  ) {
+    console.error(
+      "Structured data missing or invalid @context field:",
+      finalData,
+    );
+    return null; // 不渲染无效的结构化数据
+  }
+
+  // 验证必需的基本字段
+  if (
+    !finalData["name"] ||
+    typeof finalData["name"] !== "string" ||
+    finalData["name"].trim() === ""
+  ) {
+    console.warn("Structured data missing or empty name field:", finalData);
   }
 
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: safeStringify(structuredData),
+        __html: safeStringify(finalData),
       }}
     />
   );

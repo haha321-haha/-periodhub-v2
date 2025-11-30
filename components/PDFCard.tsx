@@ -13,6 +13,7 @@ import {
   copyToClipboard,
   createDownloadEvent,
 } from "@/utils/helpers";
+import DownloadModal from "@/components/DownloadModal";
 
 interface PDFCardProps {
   resource: LocalizedPDFResource;
@@ -29,9 +30,20 @@ export default function PDFCard({
 }: PDFCardProps) {
   const [isDownloading, setIsDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showEmailModal, setShowEmailModal] = useState(false);
   const t = useTranslations("pdfCard");
 
   const handleDownload = async () => {
+    if (isDownloading) return;
+
+    // 🚀 邮箱收集：拦截下载，先弹出邮箱收集弹窗
+    setShowEmailModal(true);
+  };
+
+  // 直接下载（不收集邮箱，备用选项）
+  // 注意：此函数目前未使用，保留作为备用选项
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleDirectDownload = async () => {
     if (isDownloading) return;
 
     setIsDownloading(true);
@@ -39,7 +51,6 @@ export default function PDFCard({
     try {
       // 记录下载事件
       createDownloadEvent(resource.id, locale);
-      // Download event logged
 
       // 触发下载
       downloadPDF(resource.downloadUrl, resource.localizedFilename);
@@ -52,7 +63,8 @@ export default function PDFCard({
   };
 
   const handleCopyLink = async () => {
-    const fullUrl = `${window.location.origin}${resource.downloadUrl}`;
+    // ✅ 复制落地页链接，而不是直接下载链接（流量防火墙）
+    const fullUrl = `${window.location.origin}/${locale}/downloads?resource=${resource.id}`;
     const success = await copyToClipboard(fullUrl);
 
     if (success) {
@@ -133,7 +145,7 @@ export default function PDFCard({
 
         {/* 操作按钮 */}
         <div className="flex items-center gap-2">
-          {/* 主下载按钮 */}
+          {/* 主下载按钮 - 触发邮箱收集弹窗 */}
           <button
             onClick={handleDownload}
             disabled={isDownloading}
@@ -194,6 +206,19 @@ export default function PDFCard({
 
       {/* 悬停效果 */}
       <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl" />
+
+      {/* 邮箱收集弹窗 */}
+      <DownloadModal
+        isOpen={showEmailModal}
+        onClose={() => setShowEmailModal(false)}
+        locale={locale}
+        source={`downloads-center-${resource.id}`}
+        downloadUrl={resource.downloadUrl}
+        resourceTitle={resource.title}
+        buttonText={
+          locale === "en" ? "📥 Send PDF to Email" : "📥 发送 PDF 到邮箱"
+        }
+      />
     </div>
   );
 }

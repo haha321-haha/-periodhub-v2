@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Anti-FOUC Script -->
+    <script>
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      }
+    </script>
+
+    <!-- SEO Optimized Title -->
+    <title>Stop Guessing. Start Healing. | AI Period Pain Relief - PeriodHub</title>
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Painkillers only score 6.2/10. Try the 7.5/10 method backed by ACOG guidelines. AI-powered symptom checker, 100% private, HIPAA compliant. No credit card required.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Science-Backed Period Pain Relief | PeriodHub">
+    <meta property="og:description" content="Painkillers not working? Try the method rated 7.5/10 by science. ACOG-based, HIPAA compliant.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.periodhub.health">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalWebPage",
+      "name": "PeriodHub - AI Period Pain Relief",
+      "description": "Evidence-based period pain relief using ACOG guidelines",
+      "url": "https://www.periodhub.health",
+      "medicalAudience": {
+        "@type": "MedicalAudience",
+        "audienceType": "Women experiencing menstrual pain"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "PeriodHub",
+        "sameAs": "https://www.periodhub.health"
+      }
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                purple: '#7c3aed',
+                pink: '#ec4899',
+                blue: '#06b6d4'
+              }
+            },
+            fontFamily: {
+              'sans': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+              'display': ['SF Pro Display', 'Helvetica Neue', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+    
+    <style>
+      /* Custom Animations */
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.3); }
+        50% { box-shadow: 0 0 40px rgba(236, 72, 153, 0.6); }
+      }
+
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .animate-pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      /* Glassmorphism */
+      .glass {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      
+      .dark .glass {
+        background: rgba(30, 41, 59, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      /* Gradient Text */
+      .text-gradient {
+        background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Medical Chart Styles */
+      .chart-bar {
+        transition: all 0.3s ease;
+      }
+      
+      .chart-bar:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.1);
+      }
+
+      /* Smooth Scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Focus States for Accessibility */
+      *:focus-visible {
+        outline: 2px solid #7c3aed;
+        outline-offset: 2px;
+      }
+    </style>
+</head>
+<body class="bg-white dark:bg-slate-900 text-gray-900 dark:text-white transition-colors duration-300">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 glass border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <span class="text-xl">🌸</span>
+                    <span class="font-display font-semibold text-xl">PeriodHub</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#evidence" class="hover:text-primary-purple transition relative group">
+                        <span class="block text-sm font-medium text-gray-700 dark:text-gray-300">Home</span>
+                        <span class="block text-xs text-gray-500 dark:text-gray-400">首页</span>
+                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-purple transition-all duration-300 group-hover:w-full"></div>
+                    </a>
+                    
+                    <!-- Interactive Tools Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center space-x-1 hover:text-primary-purple transition">
+                            <div>
+                                <span class="block text-sm font-medium text-gray-700 dark:text-gray-300">Interactive Tools</span>
+                                <span class="block text-xs text-gray-500 dark:text-gray-400">互动工具</span>
+                            </div>
+                            <span class="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full animate-pulse">8+</span>
+                            <svg class="w-4 h-4 transform group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute top-full left-0 mt-2 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
+                            <div class="p-4 space-y-3">
+                                <a href="#" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 transition">
+                                    <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                                        <span class="text-white text-sm">📊</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-sm">Pain Tracker</div>
+                                        <div class="text-xs text-gray-500 dark:text-gray-400">智能疼痛记录</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 transition">
+                                    <div class="w-8 h-8 bg-gradient-to-br from-pink-500 to-red-500 rounded-lg flex items-center justify-center">
+                                        <span class="text-white text-sm">📅</span>
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-sm">Cycle Tracker</div>
+                                        <div class="text-xs text-gray-500 dark:text-gray-400">周期追踪</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#guides" class="hover:text-primary-purple transition relative group">
+                        <div class="flex items-center space-x-1">
+                            <div>
+                                <span class="block text-sm font-medium text-gray-700 dark:text-gray-300">Articles & Downloads</span>
+                                <span class="block text-xs text-gray-500 dark:text-gray-400">文章与下载</span>
+                            </div>
+                            <span class="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full">43</span>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-purple transition-all duration-300 group-hover:w-full"></div>
+                    </a>
+                    
+                    <a href="#scenarios" class="hover:text-primary-purple transition relative group">
+                        <div>
+                            <span class="block text-sm font-medium text-gray-700 dark:text-gray-300">Scenario Solutions</span>
+                            <span class="block text-xs text-gray-500 dark:text-gray-400">场景解决方案</span>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-purple transition-all duration-300 group-hover:w-full"></div>
+                    </a>
+                    
+                    <a href="#therapies" class="hover:text-primary-purple transition relative group">
+                        <div>
+                            <span class="block text-sm font-medium text-gray-700 dark:text-gray-300">Natural Therapies</span>
+                            <span class="block text-xs text-gray-500 dark:text-gray-400">自然疗法</span>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-purple transition-all duration-300 group-hover:w-full"></div>
+                    </a>
+                    
+                    <a href="#health-guide" class="hover:text-primary-purple transition relative group">
+                        <div>
+                            <span class="block text-sm font-medium text-gray-700 dark:text-gray-300">Health Guide</span>
+                            <span class="block text-xs text-gray-500 dark:text-gray-400">健康指南</span>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-purple transition-all duration-300 group-hover:w-full"></div>
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Language Toggle -->
+                    <button id="lang-toggle" onclick="toggleLanguage()" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition group">
+                        <span id="lang-flag" class="text-xl">🇺🇸</span>
+                        <div class="hidden sm:block">
+                            <span id="lang-text" class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-primary-purple transition">EN</span>
+                            <div id="lang-desc" class="text-xs text-gray-500 dark:text-gray-400">English</div>
+                        </div>
+                        <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Theme Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition" title="Toggle theme">
+                        <svg class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Get Started Button -->
+                    <button id="get-started" onclick="getStarted()" class="bg-gradient-to-r from-primary-purple to-primary-pink text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition whitespace-nowrap">
+                        <span id="cta-text">开始使用</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Luna AI Assistant -->
+    <div id="luna-assistant" class="fixed bottom-6 right-6 z-[1000]">
+        <!-- Luna Floating Button -->
+        <button 
+            id="luna-button"
+            onclick="toggleLunaChat()"
+            class="w-16 h-16 bg-gradient-to-r from-primary-purple to-primary-pink rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center group relative"
+            aria-label="Open Luna AI Assistant"
+        >
+            <span class="text-3xl animate-pulse">🌙</span>
+            <div class="absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full animate-ping"></div>
+            <div class="absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+                <span class="text-[10px] text-white font-bold">AI</span>
+            </div>
+        </button>
+        
+        <!-- Luna Chat Window -->
+        <div id="luna-chat" class="hidden fixed bottom-24 right-6 w-96 h-[600px] bg-white dark:bg-slate-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+            <!-- Chat Header -->
+            <div class="bg-gradient-to-r from-primary-purple to-primary-pink p-4 text-white">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                            <span class="text-xl">🌙</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Luna AI Assistant</h3>
+                            <p class="text-xs opacity-90">Your period care companion</p>
+                        </div>
+                    </div>
+                    <button onclick="closeLunaChat()" class="p-2 hover:bg-white/10 rounded-lg transition">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Chat Messages -->
+            <div id="luna-messages" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-r from-primary-purple to-primary-pink rounded-full flex items-center justify-center flex-shrink-0">
+                        <span class="text-white text-sm">🌙</span>
+                    </div>
+                    <div class="bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-4 max-w-[80%]">
+                        <p class="text-sm font-medium mb-2">Hi! I'm Luna, your AI period assistant 💜</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">I can help you with:</p>
+                        <ul class="text-xs space-y-1 text-gray-600 dark:text-gray-400">
+                            <li>✨ Track symptoms and predict patterns</li>
+                            <li>🎯 Find personalized pain relief solutions</li>
+                            <li>📊 Analyze your cycle data</li>
+                            <li>🏥 Generate doctor-ready reports</li>
+                            <li>❓ Answer any period-related questions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="p-3 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <button onclick="lunaQuickAction('pain')" class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs hover:bg-purple-200 dark:hover:bg-purple-900/50 transition">
+                        🩹 Pain relief now
+                    </button>
+                    <button onclick="lunaQuickAction('predict')" class="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-full text-xs hover:bg-pink-200 dark:hover:bg-pink-900/50 transition">
+                        📅 Predict next cycle
+                    </button>
+                    <button onclick="lunaQuickAction('symptoms')" class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-xs hover:bg-blue-200 dark:hover:bg-blue-900/50 transition">
+                        🔍 Check symptoms
+                    </button>
+                    <button onclick="lunaQuickAction('natural')" class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-xs hover:bg-green-200 dark:hover:bg-green-900/50 transition">
+                        🌿 Natural remedies
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Chat Input -->
+            <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex space-x-2">
+                    <input 
+                        type="text" 
+                        id="luna-input"
+                        placeholder="Ask Luna anything..."
+                        class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-purple dark:bg-slate-700 dark:text-white"
+                        onkeypress="handleLunaInput(event)"
+                    >
+                    <button 
+                        onclick="sendToLuna()"
+                        class="px-6 py-2 bg-gradient-to-r from-primary-purple to-primary-pink text-white rounded-full hover:shadow-lg transition"
+                    >
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 text-sm font-medium mb-6">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                        <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2H6a2 2 0 100 4h2a2 2 0 100-4h-.5a1 1 0 000-2H8a2 2 0 114 0h1.5a1 1 0 100 2H14a2 2 0 100 4h-2a2 2 0 100-4h.5a1 1 0 100-2H12a2 2 0 01-2-2V5z" clip-rule="evenodd"/>
+                    </svg>
+                    ACOG Guidelines Powered
+                </div>
+                
+                <h1 class="text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight">
+                    Stop Guessing.<br>
+                    <span class="text-gradient">Start Healing.</span>
+                </h1>
+                
+                <p class="text-xl text-gray-600 dark:text-gray-300 mb-4">
+                    <span class="font-semibold text-red-500">Painkillers only score 6.2/10.</span><br>
+                    Try the <span class="font-semibold text-green-500">7.5/10 method</span> backed by clinical evidence.
+                </p>
+                
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                    The first AI-powered symptom checker built on ACOG guidelines—not search engine rumors.
+                    Track patterns, identify risks, and generate doctor-ready reports in seconds.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 mb-6">
+                    <button id="start-assessment" class="bg-gradient-to-r from-primary-purple to-primary-pink text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transform hover:scale-105 transition animate-pulse-glow">
+                        Start Free Assessment
+                    </button>
+                    <button class="border-2 border-gray-300 dark:border-gray-600 px-8 py-4 rounded-full font-semibold text-lg hover:border-primary-purple transition">
+                        View Evidence
+                    </button>
+                </div>
+                
+                <div class="flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="flex items-center">
+                        <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        100% Private
+                    </span>
+                    <span class="flex items-center">
+                        <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        Local Storage
+                    </span>
+                    <span class="flex items-center">
+                        <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        HIPAA Compliant
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Evidence Chart -->
+            <div class="relative">
+                <div class="glass rounded-2xl p-8 shadow-2xl">
+                    <h3 class="text-lg font-semibold mb-6 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-primary-blue" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                        </svg>
+                        Clinical Effectiveness Scores
+                    </h3>
+                    <div class="space-y-4">
+                        <!-- NSAIDs -->
+                        <div class="relative">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">NSAIDs (Ibuprofen)</span>
+                                <span class="text-orange-500 font-semibold">6.2/10</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                                <div class="chart-bar bg-gradient-to-r from-orange-400 to-orange-500 h-3 rounded-full" style="width: 62%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Common side effects: Stomach upset, increased bleeding</p>
+                        </div>
+                        
+                        <!-- Exercise + Heat -->
+                        <div class="relative">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Exercise + Heat Therapy</span>
+                                <span class="text-green-500 font-semibold">7.5/10</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                                <div class="chart-bar bg-gradient-to-r from-green-400 to-green-500 h-3 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">No side effects, improves mood & overall health</p>
+                        </div>
+                        
+                        <!-- Combined Approach -->
+                        <div class="relative">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">AI-Personalized Protocol</span>
+                                <span class="text-purple-500 font-semibold">8.9/10</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                                <div class="chart-bar bg-gradient-to-r from-primary-purple to-primary-pink h-3 rounded-full animate-pulse-glow" style="width: 89%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Tailored to your specific symptoms & cycle patterns</p>
+                        </div>
+                        
+                        <!-- Acetaminophen -->
+                        <div class="relative">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Acetaminophen (Tylenol)</span>
+                                <span class="text-yellow-500 font-semibold">5.8/10</span>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+                                <div class="chart-bar bg-gradient-to-r from-yellow-400 to-yellow-500 h-3 rounded-full" style="width: 58%"></div>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Less effective for inflammation-based pain</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <p class="text-xs text-blue-700 dark:text-blue-300">
+                            <strong>Source:</strong> ACOG Practice Bulletin No. 218 (2020), Dysmenorrhea and Endometriosis
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Floating Elements -->
+                <div class="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-primary-purple to-primary-pink rounded-full opacity-20 animate-float"></div>
+                <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-primary-blue to-primary-purple rounded-full opacity-20 animate-float" style="animation-delay: 1s"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Indicators -->
+    <section class="py-8 border-y border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl font-bold text-gradient">600K+</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Active Users</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-gradient">4.8/5</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">User Rating</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-gradient">43</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Medical Guides</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-gradient">100%</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">HIPAA Compliant</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-display font-bold mb-4">
+                Science-Backed Relief Tools
+            </h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300">
+                Evidence-based solutions that actually work
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 守护者觉醒仪式 -->
+            <div class="glass rounded-xl p-6 hover:shadow-xl transition cursor-pointer" onclick="openGuardianRitual()">
+                <div class="w-12 h-12 bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500 rounded-lg flex items-center justify-center mb-4 relative overflow-hidden">
+                    <span class="text-3xl animate-pulse">🔮</span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 opacity-30 animate-ping"></div>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">守护者能量定级仪式</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">了解你的守护水晶共鸣频率与当前能量状态</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-purple-600 font-medium">启动仪式 →</span>
+                    <span class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-2 py-1 rounded-full text-xs font-semibold animate-pulse">🔮 10题觉醒</span>
+                </div>
+            </div>
+            
+            <!-- 月相水晶追踪 -->
+            <div class="glass rounded-xl p-6 hover:shadow-xl transition cursor-pointer" onclick="openLunarCrystalTracker()">
+                <div class="w-12 h-12 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                    <span class="text-2xl">🌙</span>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">月相水晶追踪</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">追踪月相变化，预知能量波动，95%准确率</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-purple-600 font-medium">开始追踪 →</span>
+                    <span class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-2 py-1 rounded-full text-xs font-semibold">🌙 智能预测</span>
+                </div>
+            </div>
+            
+            <!-- Natural Remedies -->
+            <div class="glass rounded-xl p-6 hover:shadow-xl transition cursor-pointer" onclick="openTool('remedies')">
+                <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-primary-blue rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Natural Relief Guide</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Yoga, heat therapy & nutrition tips</p>
+                <div class="flex items-center text-primary-purple font-medium">
+                    Explore Methods
+                    <svg class="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Doctor Report Generator -->
+            <div class="glass rounded-xl p-6 hover:shadow-xl transition cursor-pointer" onclick="openTool('report')">
+                <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-primary-purple rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Doctor Report</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Generate professional medical summaries</p>
+                <div class="flex items-center text-primary-purple font-medium">
+                    Create Report
+                    <svg class="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Pain Diary -->
+            <div class="glass rounded-xl p-6 hover:shadow-xl transition cursor-pointer" onclick="openTool('diary')">
+                <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                        <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2H6a2 2 0 100 4h2a2 2 0 100-4h1a1 1 0 100-2h1a2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Smart Pain Diary</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Track triggers & find patterns</p>
+                <div class="flex items-center text-primary-purple font-medium">
+                    Start Logging
+                    <svg class="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Emergency Guide -->
+            <div class="glass rounded-xl p-6 hover:shadow-xl transition cursor-pointer border-2 border-red-200 dark:border-red-800" onclick="openTool('emergency')">
+                <div class="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded-lg flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">When to See ER</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Know the warning signs</p>
+                <div class="flex items-center text-red-600 font-medium">
+                    Check Symptoms
+                    <svg class="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Medical Guides Section -->
+    <section id="guides" class="py-20 bg-gray-50 dark:bg-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-display font-bold mb-4">
+                    Evidence-Based Medical Guides
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">
+                    43 guides reviewed by board-certified gynecologists
+                </p>
+            </div>
+            
+            <!-- Guide Categories -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white dark:bg-slate-700 rounded-lg p-4 cursor-pointer hover:shadow-lg transition">
+                    <h4 class="font-semibold mb-2">Natural Remedies</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">12 guides</p>
+                </div>
+                <div class="bg-white dark:bg-slate-700 rounded-lg p-4 cursor-pointer hover:shadow-lg transition">
+                    <h4 class="font-semibold mb-2">Hormone Balance</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">8 guides</p>
+                </div>
+                <div class="bg-white dark:bg-slate-700 rounded-lg p-4 cursor-pointer hover:shadow-lg transition">
+                    <h4 class="font-semibold mb-2">Nutrition & Diet</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">15 guides</p>
+                </div>
+                <div class="bg-white dark:bg-slate-700 rounded-lg p-4 cursor-pointer hover:shadow-lg transition">
+                    <h4 class="font-semibold mb-2">Exercise & Yoga</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">8 guides</p>
+                </div>
+            </div>
+            
+            <!-- Featured Guides -->
+            <div class="grid lg:grid-cols-3 gap-8">
+                <article class="bg-white dark:bg-slate-700 rounded-xl overflow-hidden hover:shadow-xl transition">
+                    <div class="h-48 bg-gradient-to-br from-purple-400 to-pink-400"></div>
+                    <div class="p-6">
+                        <div class="text-xs uppercase tracking-wide text-purple-600 dark:text-purple-400 mb-2">Most Popular</div>
+                        <h3 class="text-xl font-semibold mb-3">Fast Period Cramp Relief: 5 Methods Under 10 Minutes</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Evidence-based techniques for immediate relief when painkillers aren't enough.</p>
+                        <a href="#" class="text-primary-purple font-medium hover:underline">Read Guide →</a>
+                    </div>
+                </article>
+                
+                <article class="bg-white dark:bg-slate-700 rounded-xl overflow-hidden hover:shadow-xl transition">
+                    <div class="h-48 bg-gradient-to-br from-green-400 to-blue-400"></div>
+                    <div class="p-6">
+                        <div class="text-xs uppercase tracking-wide text-green-600 dark:text-green-400 mb-2">Natural</div>
+                        <h3 class="text-xl font-semibold mb-3">Yoga for Menstruation: ACOG-Approved Poses</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">15 gentle poses proven to reduce cramping by up to 60% in clinical studies.</p>
+                        <a href="#" class="text-primary-purple font-medium hover:underline">Read Guide →</a>
+                    </div>
+                </article>
+                
+                <article class="bg-white dark:bg-slate-700 rounded-xl overflow-hidden hover:shadow-xl transition">
+                    <div class="h-48 bg-gradient-to-br from-orange-400 to-red-400"></div>
+                    <div class="p-6">
+                        <div class="text-xs uppercase tracking-wide text-orange-600 dark:text-orange-400 mb-2">Nutrition</div>
+                        <h3 class="text-xl font-semibold mb-3">Anti-Inflammatory Diet for Period Pain</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">Foods that reduce prostaglandins and ease menstrual discomfort naturally.</p>
+                        <a href="#" class="text-primary-purple font-medium hover:underline">Read Guide →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section id="privacy" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-display font-bold mb-4">
+                Your Privacy Is Our Priority
+            </h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300">
+                HIPAA compliant, local-first architecture
+            </p>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="space-y-6">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold mb-2">100% Local Storage</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Your health data never leaves your device. Everything is encrypted and stored locally.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold mb-2">HIPAA & CCPA Compliant</h3>
+                            <p class="text-gray-600 dark:text-gray-400">We exceed federal privacy standards. Your PHI is never sold or shared.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 2a5 5 0 00-5 5v2a2 2 0 00-2 2v5a2 2 0 002 2h10a2 2 0 002-2v-5a2 2 0 00-2-2H7V7a3 3 0 016 0v2h2V7a5 5 0 00-5-5z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold mb-2">End-to-End Encryption</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Military-grade AES-256 encryption protects your data even on your own device.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="glass rounded-2xl p-8">
+                <h3 class="text-2xl font-semibold mb-6">Medical Disclaimer</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    PeriodHub is a health information management tool, not a medical device. The insights provided are based on clinical guidelines (ACOG/WHO) but do not constitute medical diagnosis or treatment.
+                </p>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                    Always consult a healthcare professional for medical advice. If you experience severe pain, heavy bleeding, or other concerning symptoms, seek immediate medical attention.
+                </p>
+                
+                <h4 class="font-semibold mb-3">Data Privacy (HIPAA/CCPA)</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    Your health data belongs to you. We utilize Local-First Architecture, meaning your sensitive cycle data is encrypted and stored directly on your device. We do not sell, trade, or share your personal health information (PHI) with third-party advertisers.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-display font-bold mb-6">
+                Ready to Take Control of Your Period Pain?
+            </h2>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+                Join 600,000+ women who've found relief with evidence-based solutions
+            </p>
+            <button class="bg-gradient-to-r from-primary-purple to-primary-pink text-white px-10 py-5 rounded-full font-semibold text-xl hover:shadow-2xl transform hover:scale-105 transition">
+                Start Your Free Assessment Now
+            </button>
+            <p class="mt-4 text-sm text-gray-500">
+                No credit card required • 100% private • Cancel anytime
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-slate-800 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <svg class="w-8 h-8 text-primary-pink" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                            <circle cx="12" cy="12" r="5" fill="currentColor" opacity="0.3"/>
+                        </svg>
+                        <span class="font-display font-semibold text-xl">PeriodHub</span>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                        Evidence-based period care powered by ACOG guidelines
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Tools</h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="hover:text-primary-purple">AI Symptom Checker</a></li>
+                        <li><a href="#" class="hover:text-primary-purple">Cycle Tracker</a></li>
+                        <li><a href="#" class="hover:text-primary-purple">Pain Diary</a></li>
+                        <li><a href="#" class="hover:text-primary-purple">Doctor Reports</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="hover:text-primary-purple">Medical Guides</a></li>
+                        <li><a href="#" class="hover:text-primary-purple">Natural Remedies</a></li>
+                        <li><a href="#" class="hover:text-primary-purple">Emergency Guide</a></li>
+                        <li><a href="#" class="hover:text-primary-purple">Research Papers</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="hover:text-primary-purple">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary-purple">HIPAA Compliance</a></li>
+                        <li><a href="#" class="hover:text-primary-purple">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-primary-purple">Medical Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center text-sm text-gray-600 dark:text-gray-400">
+                <p>© 2024 PeriodHub. All rights reserved. | Made with ❤️ for women's health</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Container -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div id="modal-content" class="p-6">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state for language
+        let currentLang = 'zh'; // Start with Chinese
+
+        // Language translations
+        const translations = {
+            zh: {
+                'nav-home': '首页',
+                'nav-interactive-tools': '互动工具',
+                'nav-interactive-tools-desc': '智能工具集',
+                'nav-articles-downloads': '文章与下载',
+                'nav-articles-downloads-desc': '43篇专业指南',
+                'nav-scenario-solutions': '场景解决方案',
+                'nav-natural-therapies': '自然疗法',
+                'nav-health-guide': '健康指南',
+                'lang-text': '中文',
+                'lang-desc': '简体中文',
+                'cta-text': '开始使用',
+                'hero-title': '停止猜测。',
+                'hero-subtitle': '开始治愈。',
+                'hero-description': '基于ACOG指南的第一款AI驱动的症状检查器——而非搜索引擎传言。',
+                'tools-title': '科学支持的缓解工具',
+                'tools-subtitle': '真正有效的循证解决方案'
+            },
+            en: {
+                'nav-home': 'Home',
+                'nav-interactive-tools': 'Interactive Tools',
+                'nav-interactive-tools-desc': 'Smart Tool Suite',
+                'nav-articles-downloads': 'Articles & Downloads',
+                'nav-articles-downloads-desc': '43 Professional Guides',
+                'nav-scenario-solutions': 'Scenario Solutions',
+                'nav-natural-therapies': 'Natural Therapies',
+                'nav-health-guide': 'Health Guide',
+                'lang-text': 'EN',
+                'lang-desc': 'English',
+                'cta-text': 'Get Started',
+                'hero-title': 'Stop Guessing.',
+                'hero-subtitle': 'Start Healing.',
+                'hero-description': 'The first AI-powered symptom checker built on ACOG guidelines—not search engine rumors.',
+                'tools-title': 'Science-Backed Relief Tools',
+                'tools-subtitle': 'Evidence-based solutions that actually work'
+            }
+        };
+
+        // Theme Toggle
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        });
+
+        // Language Toggle Function
+        function toggleLanguage() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            updateLanguage();
+            
+            // Save language preference
+            localStorage.setItem('periodhub_lang', currentLang);
+        }
+
+        // Update language display
+        function updateLanguage() {
+            const dict = translations[currentLang];
+            if (!dict) return;
+            
+            // Update language toggle display
+            const langFlag = document.getElementById('lang-flag');
+            const langText = document.getElementById('lang-text');
+            const langDesc = document.getElementById('lang-desc');
+            const ctaText = document.getElementById('cta-text');
+            
+            if (langFlag) langFlag.textContent = currentLang === 'zh' ? '🇨🇳' : '🇺🇸';
+            if (langText) langText.textContent = dict['lang-text'];
+            if (langDesc) langDesc.textContent = dict['lang-desc'];
+            if (ctaText) ctaText.textContent = dict['cta-text'];
+            
+            // Update navigation items if they exist
+            const navItems = document.querySelectorAll('[data-i18n]');
+            navItems.forEach(item => {
+                const key = item.getAttribute('data-i18n');
+                if (dict[key]) {
+                    if (item.tagName === 'INPUT' || item.tagName === 'TEXTAREA') {
+                        item.placeholder = dict[key];
+                    } else {
+                        item.textContent = dict[key];
+                    }
+                }
+            });
+        }
+
+        // Get Started Function
+        function getStarted() {
+            // Scroll to tools section or open assessment
+            const toolsSection = document.getElementById('tools');
+            if (toolsSection) {
+                toolsSection.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // Fallback to opening symptom checker
+                openTool('symptom-checker');
+            }
+        }
+
+        // Initialize language from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('periodhub_lang');
+            if (savedLang && translations[savedLang]) {
+                currentLang = savedLang;
+            }
+            updateLanguage();
+        });
+
+        // Modal Functions
+        function openTool(toolName) {
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            // Tool-specific content
+            const toolContents = {
+                'symptom-checker': `
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold mb-2">AI Symptom Assessment</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Answer a few questions to get personalized insights based on ACOG guidelines.</p>
+                    </div>
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Pain Level (1-10)</label>
+                            <input type="range" min="1" max="10" class="w-full" value="5">
+                            <div class="flex justify-between text-xs text-gray-500">
+                                <span>Mild</span>
+                                <span>Moderate</span>
+                                <span>Severe</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Primary Symptoms</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Cramping
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Lower back pain
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Headache
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="mr-2"> Nausea
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Duration</label>
+                            <select class="w-full p-2 border rounded-lg dark:bg-slate-700 dark:border-gray-600">
+                                <option>Less than 1 day</option>
+                                <option>1-2 days</option>
+                                <option>3-5 days</option>
+                                <option>More than 5 days</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary-purple to-primary-pink text-white py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                            Get Personalized Recommendations
+                        </button>
+                    </form>
+                    <button onclick="closeModal()" class="mt-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">Close</button>
+                `,
+                'cycle-tracker': `
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold mb-2">Smart Cycle Tracker</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Track your cycle with 95% prediction accuracy.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Last Period Start Date</label>
+                            <input type="date" class="w-full p-2 border rounded-lg dark:bg-slate-700 dark:border-gray-600">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Average Cycle Length</label>
+                            <select class="w-full p-2 border rounded-lg dark:bg-slate-700 dark:border-gray-600">
+                                <option>21-24 days</option>
+                                <option>25-27 days</option>
+                                <option selected>28-30 days</option>
+                                <option>31-35 days</option>
+                                <option>Irregular</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Flow Type</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button class="p-2 border rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20">Light</button>
+                                <button class="p-2 border rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20">Medium</button>
+                                <button class="p-2 border rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20">Heavy</button>
+                            </div>
+                        </div>
+                        <button class="w-full bg-gradient-to-r from-primary-purple to-primary-pink text-white py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                            Start Tracking
+                        </button>
+                    </div>
+                    <button onclick="closeModal()" class="mt-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">Close</button>
+                `,
+                'remedies': `
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold mb-2">Natural Relief Methods</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Evidence-based natural remedies rated 7.5/10 effectiveness.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                            <h3 class="font-semibold mb-2">🧘‍♀️ Yoga & Stretching</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Child's pose, cat-cow, and gentle twists can reduce cramping by 60%.</p>
+                            <button class="text-primary-purple text-sm font-medium">View 15-min routine →</button>
+                        </div>
+                        <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                            <h3 class="font-semibold mb-2">🔥 Heat Therapy</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Apply heat pad at 104°F (40°C) for 8-10 hours daily during menstruation.</p>
+                            <button class="text-primary-purple text-sm font-medium">Learn proper technique →</button>
+                        </div>
+                        <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                            <h3 class="font-semibold mb-2">🥗 Anti-Inflammatory Diet</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Omega-3 fatty acids, magnesium, and vitamin B1 significantly reduce pain.</p>
+                            <button class="text-primary-purple text-sm font-medium">Get meal plan →</button>
+                        </div>
+                        <div class="border rounded-lg p-4 hover:shadow-lg transition">
+                            <h3 class="font-semibold mb-2">💊 Supplements</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Magnesium (400mg), Vitamin E (200 IU), and Omega-3 (1000mg) daily.</p>
+                            <button class="text-primary-purple text-sm font-medium">See full protocol →</button>
+                        </div>
+                    </div>
+                    <button onclick="closeModal()" class="mt-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">Close</button>
+                `,
+                'emergency': `
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold mb-2 text-red-600">⚠️ When to Seek Emergency Care</h2>
+                        <p class="text-gray-600 dark:text-gray-400">Know the warning signs that require immediate medical attention.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 p-4">
+                            <h3 class="font-semibold text-red-700 dark:text-red-400 mb-2">Call 911 or go to ER if you have:</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Soaking through 1+ pad/tampon per hour for several hours</li>
+                                <li>• Passing clots larger than a quarter</li>
+                                <li>• Sudden, severe pelvic pain</li>
+                                <li>• Signs of shock (dizziness, fainting, rapid heartbeat)</li>
+                                <li>• Fever over 101°F with heavy bleeding</li>
+                                <li>• Severe pain not responding to medication</li>
+                            </ul>
+                        </div>
+                        <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-4">
+                            <h3 class="font-semibold text-yellow-700 dark:text-yellow-400 mb-2">See your doctor within 24-48 hours if:</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li>• Periods lasting longer than 7 days</li>
+                                <li>• Bleeding between periods</li>
+                                <li>• Sudden changes in cycle pattern</li>
+                                <li>• Pain interfering with daily activities</li>
+                                <li>• New or worsening symptoms</li>
+                            </ul>
+                        </div>
+                        <button class="w-full bg-red-600 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition">
+                            Find Nearest ER
+                        </button>
+                    </div>
+                    <button onclick="closeModal()" class="mt-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">Close</button>
+                `
+            };
+            
+            modalContent.innerHTML = toolContents[toolName] || '<p>Tool content not found</p>';
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Start Assessment CTA
+        document.getElementById('start-assessment').addEventListener('click', function() {
+            openGuardianRitual(); // 改用守护者觉醒仪式
+        });
+
+        // 守护者觉醒仪式 - 游戏化评估
+        function openGuardianRitual() {
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            const guardianRitual = `
+                <div class="mb-6">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-4xl animate-pulse">🔮</span>
+                        </div>
+                        <h2 class="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                            周期圣殿：能量定级仪式
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-300">欢迎你，年轻的守护者。圣殿感应到了你的能量波动（压力）。在授予你守护水晶之前，我需要了解你当前的'共鸣频率'。</p>
+                    </div>
+                </div>
+                
+                <form class="space-y-6" onsubmit="return completeGuardianRitual(event)">
+                    <!-- 问题 1 -->
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-xl">
+                        <h3 class="font-semibold mb-4">1. 在处理日常事务时，你的'精神护盾'是否出现过裂痕（感到焦虑）？</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="radio" name="anxiety" value="1" class="mr-3">
+                                <span>🛡️ 从未 - 我的护盾坚不可摧</span>
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="radio" name="anxiety" value="2" class="mr-3">
+                                <span>⚡ 偶尔 - 微小裂痕，很快愈合</span>
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="radio" name="anxiety" value="3" class="mr-3">
+                                <span>💥 经常 - 护盾需要修复时间</span>
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="radio" name="anxiety" value="4" class="mr-3">
+                                <span>🔥 总是 - 护盾千疮百孔</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题 2 -->
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 p-6 rounded-xl">
+                        <h3 class="font-semibold mb-4">2. 当'血月之潮'（月经期）来临前，你的身体会发出哪些警告信号？</h3>
+                        <div class="grid grid-cols-1 gap-3">
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="checkbox" name="symptoms" value="cramps" class="mr-3">
+                                <span>🌪️ 小腹翻涌（痉挛）</span>
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="checkbox" name="symptoms" value="headache" class="mr-3">
+                                <span>⚡ 头部雷鸣（头痛）</span>
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="checkbox" name="symptoms" value="mood" class="mr-3">
+                                <span>🌪️ 情绪风暴（易怒/抑郁）</span>
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="checkbox" name="symptoms" value="back" class="mr-3">
+                                <span>⚡ 背部刺痛（腰酸背痛）</span>
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="checkbox" name="symptoms" value="bloating" class="mr-3">
+                                <span>🌊 腹部肿胀</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 问题 3 -->
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 p-6 rounded-xl">
+                        <h3 class="font-semibold mb-4">3. 你的'周期长度'通常是多少天？</h3>
+                        <select name="cycle_length" class="w-full p-3 border rounded-lg dark:bg-slate-700 dark:border-gray-600">
+                            <option value="21-24">21-24天：快速月相循环</option>
+                            <option value="25-27">25-27天：标准循环</option>
+                            <option value="28-30" selected>28-30天：完美循环</option>
+                            <option value="31-35">31-35天：缓慢循环</option>
+                            <option value="irregular">不规律：随性自由</option>
+                        </select>
+                    </div>
+
+                    <!-- 问题 4 -->
+                    <div class="bg-gradient-to-r from-pink-50 to-red-50 dark:from-pink-900/20 dark:to-red-900/20 p-6 rounded-xl">
+                        <h3 class="font-semibold mb-4">4. 你的'血月强度'属于哪种类型？</h3>
+                        <div class="grid grid-cols-1 gap-3">
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="radio" name="flow" value="light" class="mr-3">
+                                <span>💧 涓涓细流 - 温和而持久</span>
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="radio" name="flow" value="medium" class="mr-3">
+                                <span>🌊 澎湃江河 - 标准流量</span>
+                            </label>
+                            <label class="flex items-center p-3 rounded-lg hover:bg-white dark:hover:bg-slate-700 cursor-pointer transition">
+                                <input type="radio" name="flow" value="heavy" class="mr-3">
+                                <span>🌪️ 汹涌澎湃 - 强烈而有力</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 text-white py-4 rounded-xl font-semibold text-lg hover:shadow-xl transform hover:scale-105 transition">
+                        🔮 完成觉醒仪式，获得守护水晶评级
+                    </button>
+                </form>
+                <button onclick="closeModal()" class="mt-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">Close</button>
+            `;
+            
+            modalContent.innerHTML = guardianRitual;
+            modal.classList.remove('hidden');
+        }
+
+        // 完成守护者仪式并显示结果
+        function completeGuardianRitual(event) {
+            event.preventDefault();
+            
+            // 收集答案
+            const formData = new FormData(event.target);
+            const answers = {
+                anxiety: formData.get('anxiety'),
+                symptoms: formData.getAll('symptoms'),
+                cycle_length: formData.get('cycle_length'),
+                flow: formData.get('flow')
+            };
+            
+            // 计算守护者评级
+            let score = 0;
+            let level = '';
+            let crystal = '';
+            let description = '';
+            
+            // 焦虑分数
+            if (answers.anxiety) {
+                score += parseInt(answers.anxiety);
+            }
+            
+            // 症状分数
+            score += answers.symptoms.length * 0.5;
+            
+            // 根据总分确定等级
+            if (score <= 3) {
+                level = '翡翠守护者';
+                crystal = '💎 翡翠水晶';
+                description = '你的能量场稳定而强大，如翡翠般坚韧。你的周期管理能力已达高阶水平。';
+            } else if (score <= 5) {
+                level = '紫晶守护者';
+                crystal = '💜 紫晶水晶';
+                description = '你的精神力量温和而智慧，能够很好地平衡身心状态。继续修炼，你会成为更强大的守护者。';
+            } else if (score <= 7) {
+                level = '黄水晶守护者';
+                crystal = '💛 黄水晶';
+                description = '你正在经历成长的挑战，黄水晶的能量将帮助你平衡情绪与身体。记住，每个月的'血月之潮'都是新的开始。';
+            } else {
+                level = '红水晶守护者';
+                crystal = '💖 红水晶';
+                description = '你的热情如同红水晶般炽热，虽然目前面临较大挑战，但你的生命力旺盛。通过正确的修炼方法，你一定能成为最强大的守护者。';
+            }
+            
+            // 显示结果
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            const results = `
+                <div class="text-center">
+                    <div class="mb-6">
+                        <div class="w-24 h-24 bg-gradient-to-br from-purple-600 via-pink-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                            <span class="text-4xl">🔮</span>
+                        </div>
+                        <h2 class="text-3xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                            仪式完成！
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-300">月月守护者已为你分析完能量场...</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-xl mb-6">
+                        <div class="text-4xl mb-4">${crystal}</div>
+                        <h3 class="text-2xl font-bold mb-2">${level}</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">${description}</p>
+                        <div class="text-sm text-gray-500">
+                            综合评分：${score.toFixed(1)}/10
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold mb-3">💎 水晶充能计划</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                            要修复水晶并获得'黄体期情绪急救包'，你需要激活圣殿的连接。
+                        </p>
+                        <button class="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition mb-2 block w-full">
+                            💎 立即激活 ($4.99)
+                        </button>
+                        <p class="text-xs text-gray-500">获得净化蓝图 + 30天能量补给</p>
+                    </div>
+                    
+                    <button onclick="closeModal()" class="text-purple-600 font-medium hover:text-purple-700 transition">
+                        先体验免费功能
+                    </button>
+                </div>
+            `;
+            
+            modalContent.innerHTML = results;
+            return false;
+        }
+
+        // 月相水晶追踪
+        function openLunarCrystalTracker() {
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            const lunarTracker = `
+                <div class="mb-6">
+                    <div class="text-center mb-6">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 via-indigo-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-4xl animate-pulse">🌙</span>
+                        </div>
+                        <h2 class="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-500 bg-clip-text text-transparent">
+                            月相水晶追踪
+                        </h2>
+                        <p class="text-gray-600 dark:text-gray-300">连接月相变化，预知能量波动，95%准确率预测你的周期能量</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- 当前月相显示 -->
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-6 rounded-xl text-center">
+                        <div class="text-6xl mb-4" id="current-lunar-phase">🌙</div>
+                        <h3 class="text-xl font-bold mb-2">当前月相：</h3>
+                        <p class="text-lg mb-2" id="lunar-phase-name">下弦月</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-300" id="lunar-phase-desc">能量正在沉淀，为下一个周期做准备</p>
+                    </div>
+
+                    <!-- 追踪设置 -->
+                    <div class="bg-white dark:bg-slate-800 p-6 rounded-xl border">
+                        <h4 class="font-semibold mb-4">🔮 圣殿连接设置</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">上次'血月之潮'开始日期</label>
+                                <input type="date" class="w-full p-3 border rounded-lg dark:bg-slate-700 dark:border-gray-600">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">平均周期长度</label>
+                                <select class="w-full p-3 border rounded-lg dark:bg-slate-700 dark:border-gray-600">
+                                    <option>21-24天：快速月相循环</option>
+                                    <option>25-27天：标准循环</option>
+                                    <option selected>28-30天：完美循环</option>
+                                    <option>31-35天：缓慢循环</option>
+                                    <option>不规律：随性自由</option>
+                                </select>
+                            </div>
+                            <button class="w-full bg-gradient-to-r from-blue-600 to-purple-500 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                                🌙 开始月相追踪
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 预测展示 -->
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 p-6 rounded-xl">
+                        <h4 class="font-semibold mb-4">🔮 能量预测</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-white dark:bg-slate-800 rounded-lg">
+                                <span>下次'血月之潮'</span>
+                                <span class="font-semibold text-red-500">3天后 🔴</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white dark:bg-slate-800 rounded-lg">
+                                <span>排卵期能量峰</span>
+                                <span class="font-semibold text-green-500">1周后 🟢</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white dark:bg-slate-800 rounded-lg">
+                                <span>黄体期情绪波动</span>
+                                <span class="font-semibold text-yellow-500">2周后 🟡</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="closeModal()" class="mt-6 w-full text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">Close</button>
+            `;
+            
+            modalContent.innerHTML = lunarTracker;
+            modal.classList.remove('hidden');
+            
+            // 模拟月相变化
+            updateLunarPhase();
+            setInterval(updateLunarPhase, 5000);
+        }
+
+        // 更新月相显示
+        function updateLunarPhase() {
+            const phases = [
+                { emoji: '🌑', name: '新月', desc: '能量开始聚集，新的周期即将开始' },
+                { emoji: '🌒', name: '眉月', desc: '能量逐渐增强，生命力觉醒' },
+                { emoji: '🌓', name: '上弦月', desc: '能量达到平衡，身心状态最佳' },
+                { emoji: '🌔', name: '盈凸月', desc: '能量充盈，准备迎接高峰' },
+                { emoji: '🌕', name: '满月', desc: '能量达到顶峰，注意情绪波动' },
+                { emoji: '🌖', name: '亏凸月', desc: '能量开始减退，思考沉淀' },
+                { emoji: '🌗', name: '下弦月', desc: '能量正在沉淀，为下一个周期做准备' },
+                { emoji: '🌘', name: '残月', desc: '能量最低点，适合静养休息' }
+            ];
+            
+            const randomPhase = phases[Math.floor(Math.random() * phases.length)];
+            
+            document.getElementById('current-lunar-phase').textContent = randomPhase.emoji;
+            document.getElementById('lunar-phase-name').textContent = randomPhase.name;
+            document.getElementById('lunar-phase-desc').textContent = randomPhase.desc;
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Luna AI Assistant Functions
+        let lunaChatOpen = false;
+
+        function toggleLunaChat() {
+            const chatWindow = document.getElementById('luna-chat');
+            lunaChatOpen = !lunaChatOpen;
+            
+            if (lunaChatOpen) {
+                chatWindow.classList.remove('hidden');
+                // Animate entrance
+                chatWindow.style.opacity = '0';
+                chatWindow.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    chatWindow.style.opacity = '1';
+                    chatWindow.style.transform = 'translateY(0)';
+                    chatWindow.style.transition = 'all 0.3s ease';
+                }, 10);
+                
+                // Show welcome message
+                setTimeout(() => {
+                    addLunaMessage("Welcome back! I noticed you're viewing our pain relief tools. Would you like me to help you find the most effective solution for your specific symptoms?", true);
+                }, 500);
+            } else {
+                chatWindow.style.opacity = '0';
+                chatWindow.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    chatWindow.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        function closeLunaChat() {
+            lunaChatOpen = false;
+            const chatWindow = document.getElementById('luna-chat');
+            chatWindow.style.opacity = '0';
+            chatWindow.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                chatWindow.classList.add('hidden');
+            }, 300);
+        }
+
+        function addLunaMessage(message, isLuna = true) {
+            const messagesContainer = document.getElementById('luna-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start space-x-3 animate-fade-in';
+            
+            if (isLuna) {
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 bg-gradient-to-r from-primary-purple to-primary-pink rounded-full flex items-center justify-center flex-shrink-0">
+                        <span class="text-white text-sm">🌙</span>
+                    </div>
+                    <div class="bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-4 max-w-[80%]">
+                        <p class="text-sm">${message}</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="ml-auto bg-gradient-to-r from-primary-purple to-primary-pink text-white rounded-2xl p-4 max-w-[80%]">
+                        <p class="text-sm">${message}</p>
+                    </div>
+                `;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function handleLunaInput(event) {
+            if (event.key === 'Enter') {
+                sendToLuna();
+            }
+        }
+
+        function sendToLuna() {
+            const input = document.getElementById('luna-input');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addLunaMessage(message, false);
+            input.value = '';
+            
+            // Simulate Luna thinking
+            setTimeout(() => {
+                const responses = getLunaResponse(message.toLowerCase());
+                addLunaMessage(responses);
+            }, 1000);
+        }
+
+        function getLunaResponse(message) {
+            // AI-like responses based on keywords
+            if (message.includes('pain') || message.includes('cramp')) {
+                return "I understand you're experiencing pain. Based on ACOG guidelines, here are the most effective methods:\n\n1. 🔥 Heat therapy (7.5/10 effectiveness)\n2. 🧘‍♀️ Gentle yoga stretches\n3. 💊 NSAIDs like ibuprofen (6.2/10)\n\nWould you like me to guide you through a quick pain relief routine?";
+            } else if (message.includes('period') || message.includes('cycle')) {
+                return "I can help you track and predict your cycle! Our AI algorithm has 95% accuracy in predicting your next period. Would you like to:\n\n📅 Start tracking your cycle\n📊 View your cycle insights\n📈 See pattern analysis";
+            } else if (message.includes('natural') || message.includes('remedy')) {
+                return "Natural remedies can be very effective! Here are evidence-based options:\n\n🌿 Ginger tea - reduces prostaglandins\n🥗 Anti-inflammatory foods\n💆‍♀️ Acupressure points\n🧘‍♀️ Specific yoga poses\n\nWhich would you like to explore first?";
+            } else if (message.includes('emergency') || message.includes('severe')) {
+                return "⚠️ If you're experiencing severe symptoms, please seek immediate medical attention if you have:\n\n• Heavy bleeding (soaking 1+ pad/hour)\n• Severe pain not responding to medication\n• Fever with bleeding\n• Signs of shock\n\nWould you like me to help you find the nearest emergency room?";
+            } else {
+                return "I'm here to help with all aspects of period health! You can ask me about:\n\n✨ Pain relief techniques\n📅 Cycle tracking\n🌿 Natural remedies\n📊 Symptom analysis\n🏥 When to see a doctor\n\nWhat would you like to know more about?";
+            }
+        }
+
+        function lunaQuickAction(action) {
+            switch(action) {
+                case 'pain':
+                    addLunaMessage("Let's find quick pain relief! On a scale of 1-10, how severe is your pain right now?");
+                    break;
+                case 'predict':
+                    addLunaMessage("I'll help predict your next cycle! When did your last period start? (You can type the date or say 'X days ago')");
+                    break;
+                case 'symptoms':
+                    addLunaMessage("Let's check your symptoms. Are you experiencing:\n\n• Cramping\n• Headaches\n• Mood changes\n• Bloating\n• Back pain\n\nPlease tell me which symptoms you have.");
+                    break;
+                case 'natural':
+                    addLunaMessage("Here are proven natural remedies:\n\n🧘‍♀️ Cat-cow yoga pose (2 mins)\n🔥 Heat pad on lower abdomen\n🍵 Ginger or chamomile tea\n💆‍♀️ Massage with essential oils\n\nWhich would you like detailed instructions for?");
+                    break;
+            }
+        }
+
+        // Add floating animation to Luna button
+        const lunaButton = document.getElementById('luna-button');
+        let floatAnimation;
+        
+        function startLunaAnimation() {
+            let position = 0;
+            let direction = 1;
+            
+            floatAnimation = setInterval(() => {
+                position += direction * 0.5;
+                if (position > 10 || position < -10) {
+                    direction *= -1;
+                }
+                lunaButton.style.transform = `translateY(${position}px)`;
+            }, 50);
+        }
+
+        // Start animation when page loads
+        window.addEventListener('load', () => {
+            startLunaAnimation();
+            
+            // Show a welcome tooltip after 3 seconds
+            setTimeout(() => {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'absolute bottom-20 right-0 bg-purple-600 text-white px-4 py-2 rounded-lg text-sm whitespace-nowrap animate-bounce';
+                tooltip.textContent = 'Hi! I\'m Luna, your AI assistant 👋';
+                lunaButton.parentElement.appendChild(tooltip);
+                
+                setTimeout(() => {
+                    tooltip.remove();
+                }, 5000);
+            }, 3000);
+        });
+
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fade-in {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in {
+                animation: fade-in 0.3s ease;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

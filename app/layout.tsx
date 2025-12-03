@@ -1,17 +1,20 @@
 import "./globals.css";
 import { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
+// import localFont from "next/font/local"; // 已注释：当前未使用
 import { headers } from "next/headers";
 // import { URL_CONFIG } from "@/lib/url-config";
 // import MobileOptimization from "@/components/MobileOptimization";
-import OptimizedScripts, {
-  OptimizedChartJS,
-  OptimizedLucide,
-} from "@/components/optimized/OptimizedScripts";
-import PerformanceTracker from "@/components/performance/PerformanceTracker";
+// 已注释：这些组件当前未使用，但保留以备将来需要
+// import OptimizedScripts, {
+//   OptimizedChartJS,
+//   OptimizedLucide,
+// } from "@/components/optimized/OptimizedScripts";
+// import PerformanceTracker from "@/components/performance/PerformanceTracker";
 // import ClientSafe from '@/components/ClientSafe';
 
 // 使用本地Noto Sans SC字体
+// 已注释：当前未使用，但保留以备将来需要
+/*
 const notoSansSC = localFont({
   src: [
     {
@@ -48,10 +51,12 @@ const notoSansSC = localFont({
   display: "swap",
   variable: "--font-noto-sans-sc",
 });
+*/
 import { WebVitalsReporter } from "@/components/WebVitalsReporter";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
-import HydrationFix from "@/components/HydrationFix";
-import EnhancedHydrationFix from "@/components/EnhancedHydrationFix";
+// 已注释：这些组件当前未使用，但保留以备将来需要
+// import HydrationFix from "@/components/HydrationFix";
+// import EnhancedHydrationFix from "@/components/EnhancedHydrationFix";
 import HydrationErrorBoundary from "@/components/HydrationErrorBoundary";
 
 // 🚀 Core Web Vitals 优化的根布局
@@ -146,110 +151,44 @@ export default async function RootLayout({
 }) {
   // 从请求头中获取locale
   // 使用 try-catch 确保即使 headers() 失败也能正常工作
-  let locale = "zh"; // 默认语言
+  const locale = "zh"; // 默认语言（当前未使用，但保留以备将来需要）
   try {
     const headersList = await headers();
+    // 尝试多种方法获取locale信息
     const pathname = headersList.get("x-pathname") || "";
-    locale = pathname.startsWith("/en") ? "en" : "zh";
+    const referer = headersList.get("referer") || "";
+    
+    // 从路径中检测locale
+    if (pathname.includes("/en/") || referer.includes("/en/")) {
+      // locale = "en"; // 已注释：当前未使用，但保留检测逻辑以备将来需要
+    } else if (pathname.includes("/zh/") || referer.includes("/zh/")) {
+      // locale = "zh"; // 已注释：当前未使用，但保留检测逻辑以备将来需要
+    }
+    
+    // 从cookie中检测locale（Next.js国际化可能会设置这个）
+    const cookies = headersList.get("cookie") || "";
+    if (cookies.includes("NEXT_LOCALE=en")) {
+      // locale = "en"; // 已注释：当前未使用
+    } else if (cookies.includes("NEXT_LOCALE=zh")) {
+      // locale = "zh"; // 已注释：当前未使用
+    }
   } catch {
     // 如果获取 headers 失败，使用默认语言
-    locale = "zh";
+    // locale = "zh"; // 已注释：当前未使用
   }
+  
+  // locale变量当前未使用，但保留以备将来需要
+  void locale;
 
+  // 将locale信息作为props传递给children
+  // 这个layout现在只提供全局context和imports
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <head>
-        {/* 🚀 性能优化 - DNS 预解析 */}
-        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="//pagead2.googlesyndication.com" />
-        <link rel="dns-prefetch" href="//www.clarity.ms" />
-
-        {/* 🚀 性能优化 - 预连接关键资源 */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-
-        {/* 📱 移动端优化 - 防止缩放闪烁 */}
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-
-        {/* 🔍 搜索引擎优化 */}
-        <meta
-          name="google-site-verification"
-          content="1cZ9WUBHeRB2lMoPes66cXWCTkycozosPw4_PnNMoGk"
-        />
-        <meta name="msvalidate.01" content="12D5EA89A249696AACD3F155B64C5E56" />
-        <meta
-          name="robots"
-          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
-        />
-
-        {/* 🎨 主题和图标 */}
-        {/* Next.js 会自动处理 app/icon.tsx，不需要手动添加 link 标签 */}
-        <link
-          rel="icon"
-          href="/favicon-32x32.png"
-          sizes="32x32"
-          type="image/png"
-        />
-        <link
-          rel="icon"
-          href="/favicon-16x16.png"
-          sizes="16x16"
-          type="image/png"
-        />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/manifest.webmanifest" />
-
-        {/* 🚀 优化的第三方脚本 - 智能延迟加载 */}
-        <OptimizedScripts />
-
-        {/* 📊 按需脚本优化 */}
-        <OptimizedChartJS />
-        <OptimizedLucide />
-
-        {/* 📊 性能监控 */}
-        <PerformanceTracker />
-
-        {/* 🚀 性能优化 - 关键CSS内联 */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-            /* 关键CSS - 防止布局偏移 */
-            html { scroll-behavior: smooth; }
-            body {
-              margin: 0;
-              font-family: "Noto Sans SC", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-              line-height: 1.6;
-              -webkit-font-smoothing: antialiased;
-              -moz-osx-font-smoothing: grayscale;
-              text-rendering: optimizeLegibility;
-            }
-            * { box-sizing: border-box; }
-            img, video { max-width: 100%; height: auto; }
-          `,
-          }}
-          suppressHydrationWarning
-        />
-      </head>
-      <body className={notoSansSC.className} suppressHydrationWarning>
-        {/* 🔧 Hydration修复 - 解决浏览器扩展导致的hydration不匹配 */}
-        <HydrationFix />
-        <EnhancedHydrationFix />
-
-        <HydrationErrorBoundary>{children}</HydrationErrorBoundary>
-
-        {/* 🚀 SEO优化 - Core Web Vitals监控 */}
-        <WebVitalsReporter />
-
-        {/* 🚀 SEO优化 - 性能监控 */}
-        <PerformanceMonitor />
-      </body>
-    </html>
+    <HydrationErrorBoundary>
+      {/* 🚀 SEO优化 - 全局脚本 */}
+      <WebVitalsReporter />
+      <PerformanceMonitor />
+      
+      {children}
+    </HydrationErrorBoundary>
   );
 }

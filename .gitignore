@@ -25,8 +25,9 @@ app/[locale]/email-marketing-test/
 
 # 排除备份目录
 backup/
-hub-latest-main/
-hub-latest-main 2/
+# 只排除根目录下的 hub-latest-main，不影响子目录中的（使用 / 前缀）
+/hub-latest-main/
+/hub-latest-main 2/
 
 # 排除临时文件
 *.tmp
@@ -260,9 +261,11 @@ periodhub (2)/
 unfixed-placeholders.txt
 
 # hub-latest-main 重复目录
-hub-latest-main*/
-hub-latest-main 2/
-hub-latest-main 3/
+# ⚠️ 注意：只排除根目录下的重复目录，不影响项目子目录
+# 使用 / 前缀，只匹配根目录下的路径（不包括子目录中的）
+/hub-latest-main*/
+/hub-latest-main 2/
+/hub-latest-main 3/
 
 # recovered 目录
 recovered/

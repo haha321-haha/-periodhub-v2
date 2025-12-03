@@ -5,6 +5,8 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // 设置项目根目录，解决 yarn.lock 冲突问题
+  outputFileTracingRoot: __dirname,
   // ✅ 已修复所有类型错误，启用严格类型检查
   typescript: {
     ignoreBuildErrors: false,
@@ -12,6 +14,11 @@ const nextConfig = {
   // ✅ 已修复所有 ESLint 警告，启用严格代码检查
   eslint: {
     ignoreDuringBuilds: false,
+  },
+  // 禁用 webpack 缓存以解决构建问题
+  webpack: (config, { dev, isServer }) => {
+    config.cache = false;
+    return config;
   },
   // ⚠️ 注释掉根路径重定向，让 app/page.tsx 处理语言检测和重定向
   // 这样可以：

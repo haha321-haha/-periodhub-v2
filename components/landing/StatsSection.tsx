@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { useTranslations } from "next-intl";
 
 interface Stat {
   value: string;
@@ -13,8 +12,6 @@ interface StatsSectionProps {
 }
 
 export default function StatsSection({ stats }: StatsSectionProps) {
-  const t = useTranslations("v2Home");
-
   if (!stats || stats.length === 0) {
     return null;
   }

@@ -11,6 +11,9 @@ import {
   // generateAnonymousUserId, // Reserved for future analytics
 } from "@/lib/ab-test-tracking";
 
+// 确保全局升级处理函数可用
+import "@/lib/pro-upgrade-handler";
+
 const StressRadarChart = dynamic(
   () =>
     import("@/components/StressRadarChart").then((mod) => ({
@@ -208,10 +211,21 @@ export default function StressAssessmentWidget() {
   };
 
   const handleUnlockPremium = () => {
-    alert(t("alerts.paymentComingSoon"));
-    setShowPaywall(false);
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+    console.log('🔓 解锁高级版按钮被点击');
+    
+    // 检查全局函数是否存在
+    if (typeof window !== 'undefined' && window.handleProUpgrade) {
+      const score = calculateScore(answers);
+      
+      window.handleProUpgrade({
+        plan: 'oneTime',
+        painPoint: 'stress_management_assessment',
+        assessmentScore: score,
+        answers: answers,
+      });
+    } else {
+      console.error('❌ 全局支付函数不存在');
+      alert('💳 支付功能即将上线！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能');
     }
   };
 
@@ -510,7 +524,7 @@ export default function StressAssessmentWidget() {
             onClick={handleUnlockPremium}
             className="flex-1 bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-shadow"
           >
-            {t("buttons.comingSoon")}
+            {t("buttons.unlockPremium")}
           </button>
         </div>
 

@@ -6,7 +6,7 @@ import LunaAI from "../LunaAI";
 import WelcomeOnboarding from "../WelcomeOnboarding";
 import CycleSetupModal from "../CycleSetupModal";
 import PainTrackerModal from "../PainTrackerModal";
-import { TOOLS, STATS, SCENARIOS } from "../../utils/constants";
+import { STATS, SCENARIOS } from "../../utils/constants";
 import { trackEvent } from "../../utils/analytics";
 import { useCycleTracker } from "../../hooks/useCycleTracker";
 import { V2HeroSection } from "./V2HeroSection";
@@ -20,43 +20,45 @@ interface V2HomeProps {
   locale: string;
 }
 
-const V2Home: React.FC<V2HomeProps> = ({ locale }) => {
+const V2Home: React.FC<V2HomeProps> = ({ locale: _locale }) => {
+  // locale参数当前未使用，但保留接口兼容性
+  void _locale;
   const t = useTranslations("v2Home");
 
   // Helper to safely get object translations
-  const getObjectTranslations = (key: string) => {
+  const getObjectTranslations = (key: string): Record<string, unknown> => {
     try {
-      return t.raw(key) as Record<string, any>;
-    } catch (e) {
+      return (t.raw(key) as Record<string, unknown>) || {};
+    } catch {
       return {};
     }
   };
 
   // Helper to safely get array translations
-  const getArrayTranslations = (key: string) => {
+  const getArrayTranslations = (key: string): unknown[] => {
     try {
-      return t.raw(key) as any[];
-    } catch (e) {
+      return (t.raw(key) as unknown[]) || [];
+    } catch {
       return [];
     }
   };
 
-  const toolsTranslations = getObjectTranslations("tools");
   const scenariosTranslations = getObjectTranslations("scenarios");
   const statsTranslations = getObjectTranslations("stats");
   const trustTranslations = getArrayTranslations("hero.trust");
 
   // Get translated tools, scenarios, and stats based on language
-  const translatedTools = TOOLS.map((tool) => {
-    const translated = toolsTranslations?.[tool.id];
-    return translated
-      ? {
-          ...tool,
-          title: translated.title,
-          description: translated.description,
-        }
-      : tool;
-  });
+  // translatedTools当前未使用，但保留以备将来需要
+  // const translatedTools = TOOLS.map((tool) => {
+  //   const translated = toolsTranslations?.[tool.id];
+  //   return translated
+  //     ? {
+  //         ...tool,
+  //         title: translated.title,
+  //         description: translated.description,
+  //       }
+  //     : tool;
+  // });
 
   const translatedScenarios = SCENARIOS.map((scenario) => {
     const translated = scenariosTranslations?.[scenario.id];
@@ -72,9 +74,9 @@ const V2Home: React.FC<V2HomeProps> = ({ locale }) => {
   // Convert stats object to array format
   const translatedStats =
     statsTranslations && Object.keys(statsTranslations).length > 0
-      ? Object.values(statsTranslations).map((stat: any) => ({
-          value: stat.value,
-          label: stat.label,
+      ? Object.values(statsTranslations).map((stat: { value?: string; label?: string }) => ({
+          value: stat.value || '',
+          label: stat.label || '',
         }))
       : STATS;
 

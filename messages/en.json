@@ -930,6 +930,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -1908,6 +1909,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       },
@@ -2030,6 +2032,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -2124,6 +2127,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -3644,6 +3648,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -4072,6 +4077,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -4263,6 +4269,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -5854,6 +5861,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -5974,6 +5982,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -6246,6 +6255,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -7642,6 +7652,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       },
@@ -7757,7 +7768,12 @@
     "stressManagement": {
       "title": "Stress Management",
       "description": "Scientific management of menstrual stress to improve quality of life",
-      "cta": "Start Managing"
+      "cta": "Start Managing",
+      "assessment": {
+        "title": "Stress Assessment",
+        "subtitle": "Professional stress evaluation tool to help you understand and manage stress effectively",
+        "keywords": "stress assessment,psychological evaluation,stress test,mental health screening,stress management"
+      }
     },
     "embeddedPainAssessment": {
       "title": "💡 痛经快速自测",
@@ -7809,6 +7825,11 @@
     "pageTitle": "Period Stress Management Tool - Scientific Relief Solutions | PeriodHub",
     "keywords": "stress management,period stress,menstrual health,stress relief,relaxation techniques,workplace stress,women health",
     "subtitle": "Help you effectively manage period-related stress and anxiety",
+    "assessment": {
+      "title": "Stress Assessment",
+      "subtitle": "Professional stress evaluation tool to help you understand and manage stress effectively",
+      "keywords": "stress assessment,psychological evaluation,stress test,mental health screening,stress management"
+    },
     "headerLinks": {
       "intro": "Learn scientific stress management methods in our",
       "guideLink": "Complete Menstrual Stress Management Guide with 22 scientific relief methods",
@@ -8170,6 +8191,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       },
@@ -8334,6 +8356,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -8438,6 +8461,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -8550,6 +8574,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -9447,6 +9472,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -9775,6 +9801,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -10438,6 +10465,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -10616,6 +10644,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -10751,7 +10780,7 @@
     "complete": "Complete",
     "progress": "Progress",
     "day": "Day",
-    "daySuffix": "",
+    "daySuffix": "day",
     "completed": "Completed",
     "pending": "Pending",
     "overallProgress": "Overall Progress",
@@ -10855,6 +10884,7 @@
           "restartAssessment": "Re-assess",
           "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
+          "unlockPremium": "Unlock Premium",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
       }
@@ -12731,6 +12761,234 @@
         "compliance": "HIPAA compliant data protection standards"
       },
       "policyLink": "View our full privacy policy"
+    }
+  },
+  "stressManagement": {
+    "assessment": {
+      "selectOption": "Please select an option"
+    },
+    "paywall": {
+      "title": "Unlock Complete Analysis Report",
+      "subtitle": "Get personalized stress management recommendations and professional health guidance",
+      "comparison": {
+        "free": {
+          "title": "Free Version",
+          "features": {
+            "questions": "Basic question assessment",
+            "score": "Stress score",
+            "radar": "Radar chart",
+            "analysis": "Detailed analysis"
+          }
+        },
+        "premium": {
+          "title": "Premium Version",
+          "badge": "Recommended",
+          "features": {
+            "report": "Complete report",
+            "phq9": "PHQ-9 depression assessment",
+            "management": "Management plan"
+          }
+        }
+      },
+      "thanksMessage": "Thank you for your support!"
+    },
+    "results": {
+      "title": "Assessment Results",
+      "subtitle": "Based on your answers, we've generated a personalized report for you",
+      "score": "Stress Score",
+      "stressLevels": {
+        "low": "Low",
+        "moderate": "Moderate",
+        "high": "High",
+        "severe": "Severe"
+      },
+      "basicRecommendations": "Basic Recommendations",
+      "unlockCompleteReport": {
+        "title": "Unlock Complete Report",
+        "description": "Get detailed analysis, personalized recommendations, and professional guidance",
+        "button": "Unlock Complete Report"
+      },
+      "detailedAnalysis": {
+        "title": "Detailed Analysis",
+        "stressAnalysis": {
+          "title": "Stress Analysis",
+          "description": "Based on your answers, we analyzed your stress sources and impacts"
+        },
+        "improvementFocus": {
+          "title": "Improvement Focus",
+          "description": "Recommend focusing on sleep quality and emotional management"
+        }
+      },
+      "personalizedActionPlan": {
+        "title": "Personalized Action Plan"
+      }
+    },
+    "buttons": {
+      "viewFreeResults": "View Free Results",
+      "unlockPremium": "Unlock Premium",
+      "restartAssessment": "Re-assess"
+    },
+    "alerts": {
+      "paymentComingSoon": "💳 Payment functionality coming soon!\n\nThank you for your support!\n\nYou can experience the full features of the free version first"
+    }
+  },
+  "Pro": {
+    "pricing": {
+      "hero": {
+        "title": "PeriodHub Pro",
+        "subtitle": "Unlock professional health management features, personalize your health journey",
+        "stats": {
+          "assessments": "Professional assessments",
+          "satisfaction": "User satisfaction",
+          "support": "Health support"
+        }
+      },
+      "plans": {
+        "monthly": {
+          "name": "Monthly Subscription",
+          "price": "$4.99/month",
+          "originalPrice": "$9.99",
+          "savings": "50%",
+          "features": [
+            "Unlimited health assessments",
+            "7-day cycle prediction",
+            "Complete workplace wellness tools",
+            "Data export (PDF/CSV)",
+            "Personalized 4-week stress plan",
+            "Priority email support"
+          ]
+        },
+        "yearly": {
+          "name": "Annual Subscription",
+          "price": "$47.88/year",
+          "originalPrice": "$119.88",
+          "savings": "60%",
+          "features": [
+            "Unlimited health assessments",
+            "7-day cycle prediction",
+            "Complete workplace wellness tools",
+            "Data export (PDF/CSV)",
+            "Personalized 4-week stress plan",
+            "Priority email support",
+            "Save 60%"
+          ]
+        },
+        "oneTime": {
+          "name": "One-time Purchase",
+          "price": "$4.99",
+          "features": [
+            "In-depth health analysis report",
+            "One-time payment",
+            "Permanent access to basic features",
+            "PDF report download",
+            "Personalized health advice",
+            "30-day email support"
+          ]
+        },
+        "recommended": "Recommended",
+        "save": "Save"
+      },
+      "buttons": {
+        "subscribe": "Start Subscription",
+        "buyNow": "Buy Now"
+      },
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "What payment methods are supported?",
+            "answer": "We support credit cards, PayPal, and other major payment methods."
+          },
+          {
+            "question": "Can I cancel my subscription anytime?",
+            "answer": "Yes, you can cancel your subscription at any time without additional fees."
+          },
+          {
+            "question": "Is my data secure?",
+            "answer": "We use bank-level encryption to protect your health data and ensure privacy."
+          },
+          {
+            "question": "Do you have a refund policy?",
+            "answer": "We offer a 30-day money-back guarantee, so you can purchase with confidence."
+          }
+        ]
+      },
+      "support": {
+        "title": "Need Help?",
+        "description": "Our professional team is ready to support you",
+        "cta": "Contact Support"
+      }
+    }
+  },
+  "payment": {
+    "success": {
+      "title": "Payment Successful!",
+      "description": "Thank you for your purchase - your payment has been processed successfully",
+      "message": "Thank you for choosing PeriodHub Pro! Your account has been upgraded successfully.",
+      "goToDashboard": "Go to Dashboard",
+      "backToHome": "Back to Home",
+      "orderIdLabel": "Transaction ID"
+    }
+  },
+  "dashboard": {
+    "title": "PeriodHub Dashboard",
+    "description": "Manage your period health and access premium features",
+    "welcome": "Welcome to PeriodHub Pro",
+    "subtitle": "Your personal health management dashboard",
+    "cards": {
+      "assessment": {
+        "title": "Health Assessment",
+        "description": "Take a comprehensive health assessment to understand your symptoms better",
+        "cta": "Start Assessment"
+      },
+      "tracker": {
+        "title": "Pain Tracker",
+        "description": "Track your daily symptoms and identify patterns in your menstrual cycle",
+        "cta": "Track Symptoms"
+      },
+      "reports": {
+        "title": "Health Reports",
+        "description": "Download and view your personalized health reports and insights",
+        "cta": "View Reports"
+      },
+      "settings": {
+        "title": "Settings",
+        "description": "Manage your account settings and preferences",
+        "cta": "Manage Settings"
+      }
+    },
+    "stats": {
+      "title": "Your Health Stats",
+      "assessments": "Assessments",
+      "trackedDays": "Tracked Days",
+      "reports": "Reports",
+      "streak": "Day Streak"
+    }
+  },
+  "profile": {
+    "title": "Profile Settings",
+    "description": "Manage your account settings and preferences",
+    "user": {
+      "name": "Pro User",
+      "email": "user@example.com",
+      "memberSince": {
+        "label": "Member Since",
+        "value": "January 2024"
+      },
+      "subscription": {
+        "label": "Subscription",
+        "value": "PeriodHub Pro"
+      }
+    },
+    "settings": {
+      "title": "Account Settings",
+      "managePlan": "Manage Plan",
+      "notifications": "Notifications",
+      "privacy": "Privacy & Security"
+    },
+    "actions": {
+      "backToDashboard": "Back to Dashboard",
+      "backToHome": "Back to Home"
     }
   }
 }

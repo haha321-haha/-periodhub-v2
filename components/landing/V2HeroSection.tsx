@@ -4,9 +4,10 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Shield, CheckCircle, Heart } from "lucide-react";
 import CycleViz from "../CycleViz";
+import type { CurrentCycleInfo } from "@/types/cycle";
 
 interface V2HeroSectionProps {
-  cycleInfo: any;
+  cycleInfo?: CurrentCycleInfo;
   isSetup: boolean;
   onCycleClick: () => void;
   onPrimaryCtaClick: () => void;
@@ -143,3 +144,6 @@ export function V2HeroSection({
     </section>
   );
 }
+
+
+

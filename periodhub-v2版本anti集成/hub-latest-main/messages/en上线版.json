@@ -1402,11 +1402,7 @@
         "title": "使用建议：",
         "bestTiming": {
           "title": "最佳时机：",
-          "items": [
-            "疼痛刚开始时",
-            "感到焦虑紧张时",
-            "睡前放松时"
-          ]
+          "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
         },
         "precautions": {
           "title": "注意事项：",
@@ -5437,48 +5433,23 @@
       "questions": {
         "q1": {
           "question": "Have you frequently felt anxious or tense recently?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q2": {
           "question": "How is your sleep quality?",
-          "options": [
-            "Very Good",
-            "Good",
-            "Poor",
-            "Very Poor"
-          ]
+          "options": ["Very Good", "Good", "Poor", "Very Poor"]
         },
         "q3": {
           "question": "Do you often feel tired or lack energy?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q4": {
           "question": "Do you easily feel irritable or angry?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q5": {
           "question": "Do you often worry about period-related issues?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         }
       },
       "benefits": {
@@ -7275,11 +7246,7 @@
       "combinations": [
         {
           "level": "Level 1: Mild Pain (1-3)",
-          "methods": [
-            "Heat therapy",
-            "Gentle massage",
-            "Breathing exercises"
-          ],
+          "methods": ["Heat therapy", "Gentle massage", "Breathing exercises"],
           "description": "Start with simple, non-invasive methods that can be done anywhere."
         },
         {

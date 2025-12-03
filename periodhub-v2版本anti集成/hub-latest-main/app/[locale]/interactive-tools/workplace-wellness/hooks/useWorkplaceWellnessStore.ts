@@ -932,15 +932,17 @@ const createStore = () => {
     addAssessmentResult: (record) => {
       set((state) => {
         const newRecords = [...state.assessmentHistory.records, record];
-        const sortedRecords = newRecords.sort((a, b) => b.timestamp - a.timestamp); // 最新的在前
-        
+        const sortedRecords = newRecords.sort(
+          (a, b) => b.timestamp - a.timestamp,
+        ); // 最新的在前
+
         return {
           assessmentHistory: {
             records: sortedRecords,
             lastAssessmentDate: record.date,
             totalAssessments: state.assessmentHistory.totalAssessments + 1,
-            premiumAssessments: record.isPremium 
-              ? state.assessmentHistory.premiumAssessments + 1 
+            premiumAssessments: record.isPremium
+              ? state.assessmentHistory.premiumAssessments + 1
               : state.assessmentHistory.premiumAssessments,
           },
         };
@@ -954,7 +956,11 @@ const createStore = () => {
 
     getAssessmentByDate: (date) => {
       const state = get();
-      return state.assessmentHistory.records.find(record => record.date === date) || null;
+      return (
+        state.assessmentHistory.records.find(
+          (record) => record.date === date,
+        ) || null
+      );
     },
 
     clearAssessmentHistory: () => {
@@ -969,16 +975,19 @@ const createStore = () => {
     },
 
     migrateAssessmentsFromLocalStorage: () => {
-      if (typeof window === 'undefined') return;
-      
+      if (typeof window === "undefined") return;
+
       try {
-        const existingData = localStorage.getItem('stress_assessments');
+        const existingData = localStorage.getItem("stress_assessments");
         if (!existingData) return;
 
         const assessments = JSON.parse(existingData);
         const state = get();
-        
-        if (state.assessmentHistory.records.length === 0 && assessments.length > 0) {
+
+        if (
+          state.assessmentHistory.records.length === 0 &&
+          assessments.length > 0
+        ) {
           interface LocalStorageAssessment {
             timestamp?: number;
             answers?: number[];
@@ -987,45 +996,45 @@ const createStore = () => {
             primaryPainPoint?: string;
             isPremium?: boolean;
           }
-          const migratedRecords: AssessmentRecord[] = assessments.map((assessment: LocalStorageAssessment, index: number) => ({
-            id: `migrated_${Date.now()}_${index}`,
-            date: new Date(assessment.timestamp).toISOString().split('T')[0],
-            answers: assessment.answers || [],
-            stressScore: assessment.stressScore || 0,
-            stressLevel: assessment.stressLevel || '',
-            primaryPainPoint: assessment.primaryPainPoint || 'default',
-            isPremium: assessment.isPremium || false,
-            timestamp: assessment.timestamp || Date.now(),
-            completedAt: new Date(assessment.timestamp).toISOString(),
-          }));
+          const migratedRecords: AssessmentRecord[] = assessments.map(
+            (assessment: LocalStorageAssessment, index: number) => ({
+              id: `migrated_${Date.now()}_${index}`,
+              date: new Date(assessment.timestamp).toISOString().split("T")[0],
+              answers: assessment.answers || [],
+              stressScore: assessment.stressScore || 0,
+              stressLevel: assessment.stressLevel || "",
+              primaryPainPoint: assessment.primaryPainPoint || "default",
+              isPremium: assessment.isPremium || false,
+              timestamp: assessment.timestamp || Date.now(),
+              completedAt: new Date(assessment.timestamp).toISOString(),
+            }),
+          );
 
           set(() => ({
             assessmentHistory: {
               records: migratedRecords,
-              lastAssessmentDate: migratedRecords.length > 0 ? migratedRecords[0].date : null,
+              lastAssessmentDate:
+                migratedRecords.length > 0 ? migratedRecords[0].date : null,
               totalAssessments: migratedRecords.length,
-              premiumAssessments: migratedRecords.filter(r => r.isPremium).length,
+              premiumAssessments: migratedRecords.filter((r) => r.isPremium)
+                .length,
             },
           }));
 
           // 清理旧数据
-          localStorage.removeItem('stress_assessments');
-          
+          localStorage.removeItem("stress_assessments");
+
           logInfo(
-            '评估数据迁移完成',
-            { 
+            "评估数据迁移完成",
+            {
               migratedCount: migratedRecords.length,
-              premiumCount: migratedRecords.filter(r => r.isPremium).length 
+              premiumCount: migratedRecords.filter((r) => r.isPremium).length,
             },
-            'useWorkplaceWellnessStore'
+            "useWorkplaceWellnessStore",
           );
         }
       } catch (error) {
-        logError(
-          '评估数据迁移失败',
-          error,
-          'useWorkplaceWellnessStore'
-        );
+        logError("评估数据迁移失败", error, "useWorkplaceWellnessStore");
       }
     },
 
@@ -1659,15 +1668,15 @@ export const useWorkplaceWellnessStore = <T = WorkplaceWellnessStore>(
   _equalityFn?: (a: T, b: T) => boolean,
 ): T | WorkplaceWellnessStore => {
   const store = createStore();
-  
+
   // 必须在所有条件分支之前调用 hooks，确保 React Hooks 规则
   // 使用默认 selector 如果没有提供
   const defaultSelector = (state: WorkplaceWellnessStore) => state as T;
   const actualSelector = selector || defaultSelector;
-  
+
   // 始终调用 useStore，确保 hooks 调用顺序一致
   const storeState = useStore(store, actualSelector);
-  
+
   if (typeof window === "undefined") {
     // SSR 时返回初始状态，避免错误
     const initialState = getInitialState() as unknown as WorkplaceWellnessStore;
@@ -1676,7 +1685,7 @@ export const useWorkplaceWellnessStore = <T = WorkplaceWellnessStore>(
     }
     return initialState;
   }
-  
+
   return storeState;
 };
 
@@ -1965,7 +1974,12 @@ export const useWorkplaceWellnessActions = (): WorkplaceWellnessActions => {
       setExporting: () => {},
       resetState: () => {},
       addAssessmentResult: () => {},
-      getAssessmentHistory: () => ({ records: [], lastAssessmentDate: null, totalAssessments: 0, premiumAssessments: 0 }),
+      getAssessmentHistory: () => ({
+        records: [],
+        lastAssessmentDate: null,
+        totalAssessments: 0,
+        premiumAssessments: 0,
+      }),
       getAssessmentByDate: () => null,
       clearAssessmentHistory: () => {},
       migrateAssessmentsFromLocalStorage: () => {},

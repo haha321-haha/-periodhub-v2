@@ -1,15 +1,18 @@
 /**
  * Medical Schema Generator
  * 医学 Schema 生成器
- * 
+ *
  * 生成 MedicalWebPage 和 MedicalCondition 的 Schema.org 结构化数据
- * 
+ *
  * 性能优化：
  * - Schema 对象缓存
  * - 延迟计算
  */
 
-import { MEDICAL_ENTITIES, getMedicalConditionSchema } from "./medical-entities";
+import {
+  MEDICAL_ENTITIES,
+  getMedicalConditionSchema,
+} from "./medical-entities";
 import { getCitationsSchema } from "./citations";
 
 /**
@@ -60,7 +63,7 @@ function getCacheKey(options: MedicalWebPageOptions): string {
   return JSON.stringify({
     title: options.title,
     condition: options.condition,
-    citations: options.citations.sort().join(','),
+    citations: options.citations.sort().join(","),
     locale: options.locale,
     url: options.url,
   });
@@ -79,13 +82,14 @@ function cleanSchemaCache(): void {
     }
   }
 
-  keysToDelete.forEach(key => schemaCache.delete(key));
+  keysToDelete.forEach((key) => schemaCache.delete(key));
 
   // 如果缓存仍然太大，删除最旧的条目
   if (schemaCache.size > MAX_CACHE_SIZE) {
-    const sortedEntries = Array.from(schemaCache.entries())
-      .sort((a, b) => a[1].timestamp - b[1].timestamp);
-    
+    const sortedEntries = Array.from(schemaCache.entries()).sort(
+      (a, b) => a[1].timestamp - b[1].timestamp,
+    );
+
     const toDelete = sortedEntries.slice(0, schemaCache.size - MAX_CACHE_SIZE);
     toDelete.forEach(([key]) => schemaCache.delete(key));
   }
@@ -105,13 +109,11 @@ export interface MedicalWebPageOptions {
 /**
  * 生成 MedicalWebPage Schema（带缓存优化）
  */
-export function generateMedicalWebPageSchema(
-  options: MedicalWebPageOptions
-) {
+export function generateMedicalWebPageSchema(options: MedicalWebPageOptions) {
   // 检查缓存
   const cacheKey = getCacheKey(options);
   const cached = schemaCache.get(cacheKey);
-  
+
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
     // 返回缓存的副本（避免修改缓存）
     return JSON.parse(JSON.stringify(cached.schema));
@@ -177,8 +179,7 @@ export function generateMedicalWebPageSchema(
  */
 export function generateMedicalConditionSchema(
   condition: keyof typeof MEDICAL_ENTITIES,
-  locale: "en" | "zh" = "en"
+  locale: "en" | "zh" = "en",
 ) {
   return getMedicalConditionSchema(condition, locale);
 }
-

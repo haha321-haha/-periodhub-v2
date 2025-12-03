@@ -1,9 +1,9 @@
 /**
  * AEO Tracking API Route
  * AEO 追踪 API 路由
- * 
+ *
  * POST /api/aeo/track
- * 
+ *
  * 接收 AI 引用追踪数据
  */
 
@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     if (!body.source || !body.pageUrl || !body.contentSnippet) {
       return NextResponse.json(
         { error: "Missing required fields: source, pageUrl, contentSnippet" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     logInfo(
       `[AEO Tracking] Reference tracked: ${body.source} -> ${body.pageUrl}`,
       undefined,
-      "AEO"
+      "AEO",
     );
 
     return NextResponse.json({ success: true });
@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
     logError("[AEO Tracking] Error tracking reference", error, "AEO");
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -55,4 +55,3 @@ export async function OPTIONS() {
     },
   });
 }
-

@@ -74,10 +74,12 @@ const V2Home: React.FC<V2HomeProps> = ({ locale: _locale }) => {
   // Convert stats object to array format
   const translatedStats =
     statsTranslations && Object.keys(statsTranslations).length > 0
-      ? Object.values(statsTranslations).map((stat: { value?: string; label?: string }) => ({
-          value: stat.value || '',
-          label: stat.label || '',
-        }))
+      ? Object.values(statsTranslations).map(
+          (stat: { value?: string; label?: string }) => ({
+            value: stat.value || "",
+            label: stat.label || "",
+          }),
+        )
       : STATS;
 
   // Handle anchor link clicks for smooth scrolling

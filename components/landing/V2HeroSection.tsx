@@ -144,6 +144,3 @@ export function V2HeroSection({
     </section>
   );
 }
-
-
-

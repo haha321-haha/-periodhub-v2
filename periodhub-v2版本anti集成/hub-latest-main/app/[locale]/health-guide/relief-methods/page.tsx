@@ -752,7 +752,12 @@ export default async function ReliefMethodsPage({
                   <li>
                     • {locale === "zh" ? "营养补充" : "Nutritional supplements"}
                   </li>
-                  <li>• {locale === "zh" ? "整体健康调理" : "Holistic Health conditioning"}</li>
+                  <li>
+                    •{" "}
+                    {locale === "zh"
+                      ? "整体健康调理"
+                      : "Holistic Health conditioning"}
+                  </li>
                   <li>
                     • {locale === "zh" ? "定期检查" : "Regular check-ups"}
                   </li>

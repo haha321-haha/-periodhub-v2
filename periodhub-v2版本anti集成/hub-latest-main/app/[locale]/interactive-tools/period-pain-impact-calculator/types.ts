@@ -10,7 +10,7 @@ export interface Option {
 
 export interface Question {
   id: string;
-  type: 'single' | 'multiple' | 'scale' | 'text' | 'range' | 'boolean';
+  type: "single" | "multiple" | "scale" | "text" | "range" | "boolean";
   title: string;
   description?: string;
   options?: Option[];
@@ -25,7 +25,7 @@ export interface Question {
     dependsOn: string;
     values: (string | number)[];
   };
-  category: 'basic' | 'pain' | 'symptoms' | 'lifestyle' | 'medical';
+  category: "basic" | "pain" | "symptoms" | "lifestyle" | "medical";
   weight: number; // 问题权重
 }
 
@@ -46,8 +46,8 @@ export interface AssessmentSession {
 
 export interface AssessmentResult {
   sessionId: string;
-  type: 'normal' | 'mild' | 'moderate' | 'severe' | 'emergency';
-  severity: 'mild' | 'moderate' | 'severe' | 'emergency';
+  type: "normal" | "mild" | "moderate" | "severe" | "emergency";
+  severity: "mild" | "moderate" | "severe" | "emergency";
   score: number;
   maxScore: number;
   percentage: number;
@@ -62,17 +62,23 @@ export interface AssessmentResult {
 
 export interface Recommendation {
   id: string;
-  category: 'immediate' | 'lifestyle' | 'medical' | 'dietary' | 'exercise' | 'selfcare';
+  category:
+    | "immediate"
+    | "lifestyle"
+    | "medical"
+    | "dietary"
+    | "exercise"
+    | "selfcare";
   title: string;
   description: string;
-  priority: 'high' | 'medium' | 'low';
+  priority: "high" | "medium" | "low";
   timeframe: string;
   evidence?: string;
   actionSteps?: string[];
   resources?: {
     title: string;
     url: string;
-    type: 'article' | 'tool' | 'video' | 'external';
+    type: "article" | "tool" | "video" | "external";
   }[];
 }
 
@@ -94,7 +100,9 @@ export interface PainImpactCalculatorHookReturn {
   goToQuestion: (index: number) => void;
   goToPreviousQuestion: () => void;
   goToNextQuestion: () => void;
-  completeAssessment: (t?: (key: string, params?: Record<string, unknown>) => string) => AssessmentResult | null;
+  completeAssessment: (
+    t?: (key: string, params?: Record<string, unknown>) => string,
+  ) => AssessmentResult | null;
   resetAssessment: () => void;
 
   // Results

@@ -257,7 +257,9 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
                     <div className="text-2xl font-bold text-purple-600 mb-1">
                       {stats.totalEntries}
                     </div>
-                    <div className="text-sm text-gray-600">{t("statistics.totalEntries")}</div>
+                    <div className="text-sm text-gray-600">
+                      {t("statistics.totalEntries")}
+                    </div>
                   </div>
                 </div>
                 <div className="bg-white rounded-lg p-4">
@@ -269,7 +271,9 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
                     >
                       {stats.averageStress}
                     </div>
-                    <div className="text-sm text-gray-600">{t("statistics.avgStress")}</div>
+                    <div className="text-sm text-gray-600">
+                      {t("statistics.avgStress")}
+                    </div>
                   </div>
                 </div>
                 <div className="bg-white rounded-lg p-4">
@@ -277,7 +281,9 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
                     <div className="text-2xl font-bold text-green-600 mb-1">
                       {stats.techniquesUsedRate}%
                     </div>
-                    <div className="text-sm text-gray-600">{t("statistics.techniquesUsed")}</div>
+                    <div className="text-sm text-gray-600">
+                      {t("statistics.techniquesUsed")}
+                    </div>
                   </div>
                 </div>
                 <div className="bg-white rounded-lg p-4">
@@ -289,7 +295,9 @@ export default function ProgressTabs({ locale }: ProgressTabsProps) {
                     >
                       {stats.averageMood}
                     </div>
-                    <div className="text-sm text-gray-600">{t("statistics.avgMood")}</div>
+                    <div className="text-sm text-gray-600">
+                      {t("statistics.avgMood")}
+                    </div>
                   </div>
                 </div>
               </div>

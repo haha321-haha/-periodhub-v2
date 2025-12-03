@@ -72,12 +72,12 @@ export function cleanDataForJSON(
           // 如果是关键字段为空字符串，返回 null 表示无效对象
           return null;
         }
-        
+
         // 过滤非关键字段的空字符串
         if (cleanedValue === "" && !["@id", "url"].includes(key)) {
           continue;
         }
-        
+
         // 对于对象类型，检查是否为空对象
         if (
           typeof cleanedValue === "object" &&
@@ -87,7 +87,7 @@ export function cleanDataForJSON(
         ) {
           continue;
         }
-        
+
         // 对于数组，如果过滤后为空数组，且不是必需字段，则跳过
         if (
           Array.isArray(cleanedValue) &&
@@ -96,7 +96,7 @@ export function cleanDataForJSON(
         ) {
           continue;
         }
-        
+
         cleaned[key] = cleanedValue;
       }
     }

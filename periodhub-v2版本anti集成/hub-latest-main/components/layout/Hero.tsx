@@ -20,7 +20,7 @@ const HeroABTest = dynamic(() => import("./HeroABTest"), {
         加载中...
       </Button>
     </div>
-  )
+  ),
 });
 
 export default function Hero() {

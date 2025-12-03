@@ -1,12 +1,6 @@
 {
-  "app/**/*.{ts,tsx}": [
-    "eslint --fix",
-    "prettier --write"
-  ],
-  "components/**/*.{ts,tsx}": [
-    "eslint --fix",
-    "prettier --write"
-  ],
+  "app/**/*.{ts,tsx}": ["eslint --fix", "prettier --write"],
+  "components/**/*.{ts,tsx}": ["eslint --fix", "prettier --write"],
   "messages/*.json": [
     "node -e \"JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8'))\""
   ]

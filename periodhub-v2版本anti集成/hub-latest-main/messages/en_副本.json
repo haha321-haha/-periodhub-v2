@@ -471,7 +471,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -489,7 +489,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -506,7 +506,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -524,7 +524,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -1428,7 +1428,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -1446,7 +1446,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -1463,7 +1463,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -1481,7 +1481,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -1542,11 +1542,7 @@
         "title": "使用建议：",
         "bestTiming": {
           "title": "最佳时机：",
-          "items": [
-            "疼痛刚开始时",
-            "感到焦虑紧张时",
-            "睡前放松时"
-          ]
+          "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
         },
         "precautions": {
           "title": "注意事项：",
@@ -1569,7 +1565,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -1587,7 +1583,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -1604,7 +1600,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -1622,7 +1618,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -1698,7 +1694,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -1716,7 +1712,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -1733,7 +1729,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -1751,7 +1747,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -2466,7 +2462,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -2484,7 +2480,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -2501,7 +2497,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -2519,7 +2515,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -2929,7 +2925,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -2947,7 +2943,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -2964,7 +2960,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -2982,7 +2978,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -3155,7 +3151,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -3173,7 +3169,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -3190,7 +3186,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -3208,7 +3204,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -4264,7 +4260,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -4282,7 +4278,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -4299,7 +4295,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -4317,7 +4313,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -4419,7 +4415,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -4437,7 +4433,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -4454,7 +4450,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -4472,7 +4468,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -4726,7 +4722,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -4744,7 +4740,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -4761,7 +4757,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -4779,7 +4775,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -5823,7 +5819,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -5841,7 +5837,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -5858,7 +5854,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -5876,7 +5872,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -6316,7 +6312,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -6334,7 +6330,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -6351,7 +6347,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -6369,7 +6365,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -6449,7 +6445,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -6467,7 +6463,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -6484,7 +6480,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -6502,7 +6498,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -6588,7 +6584,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -6606,7 +6602,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -6623,7 +6619,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -6641,7 +6637,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -6715,48 +6711,23 @@
       "questions": {
         "q1": {
           "question": "Have you frequently felt anxious or tense recently?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q2": {
           "question": "How is your sleep quality?",
-          "options": [
-            "Very Good",
-            "Good",
-            "Poor",
-            "Very Poor"
-          ]
+          "options": ["Very Good", "Good", "Poor", "Very Poor"]
         },
         "q3": {
           "question": "Do you often feel tired or lack energy?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q4": {
           "question": "Do you easily feel irritable or angry?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         },
         "q5": {
           "question": "Do you often worry about period-related issues?",
-          "options": [
-            "Never",
-            "Occasionally",
-            "Often",
-            "Always"
-          ]
+          "options": ["Never", "Occasionally", "Often", "Always"]
         }
       },
       "benefits": {
@@ -6803,7 +6774,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -6821,7 +6792,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -6838,7 +6809,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -6856,7 +6827,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -6946,7 +6917,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -6964,7 +6935,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -6981,7 +6952,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -6999,7 +6970,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -7079,7 +7050,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -7097,7 +7068,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -7114,7 +7085,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -7132,7 +7103,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -7974,7 +7945,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -7992,7 +7963,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -8009,7 +7980,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -8027,7 +7998,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -8329,7 +8300,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -8347,7 +8318,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -8364,7 +8335,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -8382,7 +8353,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -8920,11 +8891,7 @@
       "combinations": [
         {
           "level": "Level 1: Mild Pain (1-3)",
-          "methods": [
-            "Heat therapy",
-            "Gentle massage",
-            "Breathing exercises"
-          ],
+          "methods": ["Heat therapy", "Gentle massage", "Breathing exercises"],
           "description": "Start with simple, non-invasive methods that can be done anywhere."
         },
         {
@@ -8998,7 +8965,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -9016,7 +8983,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -9033,7 +9000,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -9051,7 +9018,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -9211,7 +9178,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -9229,7 +9196,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -9246,7 +9213,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -9264,7 +9231,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -9485,7 +9452,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -9503,7 +9470,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         },
@@ -9520,7 +9487,7 @@
           "improvementFocusDescription": "Recommend prioritizing sleep quality and emotional management",
           "stressLevels": {
             "low": "Low",
-            "moderate": "Moderate", 
+            "moderate": "Moderate",
             "high": "High",
             "severe": "Severe"
           }
@@ -9538,7 +9505,7 @@
         },
         "buttons": {
           "restartAssessment": "Re-assess",
-          "backToHome": "Back to Home", 
+          "backToHome": "Back to Home",
           "viewFreeResults": "View Free Results",
           "comingSoon": "Coming Soon, Stay Tuned"
         }
@@ -9969,7 +9936,7 @@
     "question": "Question",
     "timeframe": "Over the last two weeks, how often have you been bothered by the following problems:",
     "previous": "Previous",
-    "next": "Next", 
+    "next": "Next",
     "exit": "Exit",
     "help": "Help",
     "helpText": "Please choose the answer that best reflects how you have been feeling over the past two weeks",
@@ -9977,7 +9944,7 @@
     "calculatingResults": "Calculating your assessment results",
     "disclaimer": "Important Notice",
     "sensitiveQuestion": "This is an important question about your emotional health. Your response will help us provide more accurate guidance.",
-    "resultsTitle": "Assessment Results", 
+    "resultsTitle": "Assessment Results",
     "resultsSubtitle": "Your PHQ-9 assessment is complete",
     "totalScore": "Total Score",
     "riskAssessment": "Risk Assessment",
@@ -10000,7 +9967,7 @@
       "low": "Low Risk",
       "moderate": "Moderate Risk",
       "high": "High Risk",
-      "severe": "Severe Risk"  
+      "severe": "Severe Risk"
     },
     "levels": {
       "none": "No Depression",

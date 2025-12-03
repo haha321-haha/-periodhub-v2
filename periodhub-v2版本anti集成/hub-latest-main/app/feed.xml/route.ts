@@ -35,7 +35,11 @@ export async function GET() {
     <author>
       <name>PeriodHub Health Team</name>
     </author>
-    ${article.tags && article.tags.length > 0 ? article.tags.map((tag) => `<category term="${tag}"/>`).join("") : ""}
+    ${
+      article.tags && article.tags.length > 0
+        ? article.tags.map((tag) => `<category term="${tag}"/>`).join("")
+        : ""
+    }
   </entry>`;
       })
       .join("");

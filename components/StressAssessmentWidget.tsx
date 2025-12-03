@@ -211,21 +211,23 @@ export default function StressAssessmentWidget() {
   };
 
   const handleUnlockPremium = () => {
-    console.log('🔓 解锁高级版按钮被点击');
-    
+    console.log("🔓 解锁高级版按钮被点击");
+
     // 检查全局函数是否存在
-    if (typeof window !== 'undefined' && window.handleProUpgrade) {
+    if (typeof window !== "undefined" && window.handleProUpgrade) {
       const score = calculateScore(answers);
-      
+
       window.handleProUpgrade({
-        plan: 'oneTime',
-        painPoint: 'stress_management_assessment',
+        plan: "oneTime",
+        painPoint: "stress_management_assessment",
         assessmentScore: score,
         answers: answers,
       });
     } else {
-      console.error('❌ 全局支付函数不存在');
-      alert('💳 支付功能即将上线！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能');
+      console.error("❌ 全局支付函数不存在");
+      alert(
+        "💳 支付功能即将上线！\n\n感谢您的支持！\n\n您可以先体验免费版本的完整功能",
+      );
     }
   };
 

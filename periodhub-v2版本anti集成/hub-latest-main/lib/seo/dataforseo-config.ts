@@ -50,10 +50,10 @@ export const SEO_CONFIG = {
 
   // 目标市场 - 修复：北美市场优先，英文为主
   targetMarkets: [
-    { country: "US", language: "en" },  // ✅ 主要目标：美国英文用户
-    { country: "CA", language: "en" },  // ✅ 次要目标：加拿大英文用户
-    { country: "US", language: "zh" },  // ✅ 美国中文用户
-    { country: "CA", language: "zh" },  // ✅ 加拿大中文用户
+    { country: "US", language: "en" }, // ✅ 主要目标：美国英文用户
+    { country: "CA", language: "en" }, // ✅ 次要目标：加拿大英文用户
+    { country: "US", language: "zh" }, // ✅ 美国中文用户
+    { country: "CA", language: "zh" }, // ✅ 加拿大中文用户
   ],
 };
 

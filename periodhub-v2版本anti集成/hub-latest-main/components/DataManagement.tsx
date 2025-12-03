@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Download, Trash2, AlertTriangle, CheckCircle, Lock, Database } from "lucide-react";
+import {
+  Download,
+  Trash2,
+  AlertTriangle,
+  CheckCircle,
+  Lock,
+  Database,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface DataManagementProps {
@@ -22,32 +29,32 @@ const STORAGE_KEYS_TO_REMOVE = [
   "periodhub_cycle_data",
   "cycle-tracker-current",
   "cycle-tracker-history",
-  
+
   // Stress assessments
   "stress_assessments",
   "stress_progress_entries",
-  
+
   // Pain tracker
   "periodhub_pain_records",
   "enhanced_pain_tracker_records",
   "enhanced_pain_tracker_preferences",
   "enhanced_pain_tracker_schema_version",
   "enhanced_pain_tracker_metadata",
-  
+
   // User preferences and onboarding
   "onboarding_completed",
   "signup_date",
   "email_subscribed",
-  
+
   // Luna AI
   "luna_is_pro",
   "luna_daily_count",
   "luna_count_date",
-  
+
   // Tracking
   "cta_tracking_session",
   "cta_tracking_events",
-  
+
   // Zustand store
   "periodhub-health-data",
 ] as const;
@@ -94,7 +101,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
       const painKeys = Object.keys(localStorage).filter(
         (key) =>
           key.startsWith("periodhub_pain_records") ||
-          key.startsWith("enhanced_pain_tracker_")
+          key.startsWith("enhanced_pain_tracker_"),
       );
       const painCount = painKeys.length;
 
@@ -105,7 +112,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
 
       // Check progress data
       const progressKeys = Object.keys(localStorage).filter((key) =>
-        key.includes("progress")
+        key.includes("progress"),
       );
       const progressExists = progressKeys.length > 0;
 
@@ -139,7 +146,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
   const handleExport = () => {
     try {
       const allData: Record<string, unknown> = {};
-      
+
       // Export all relevant localStorage items
       STORAGE_KEYS_TO_REMOVE.forEach((key) => {
         const value = localStorage.getItem(key);
@@ -174,14 +181,20 @@ export function DataManagement({ className = "" }: DataManagementProps) {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `periodhub-data-export-${new Date().toISOString().split("T")[0]}.json`;
+      a.download = `periodhub-data-export-${
+        new Date().toISOString().split("T")[0]
+      }.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      setMessage(t("exportSuccess", { default: "Data exported successfully!" }));
+      setMessage(
+        t("exportSuccess", { default: "Data exported successfully!" }),
+      );
     } catch {
-      setMessage(t("exportFailed", { default: "Export failed, please try again" }));
+      setMessage(
+        t("exportFailed", { default: "Export failed, please try again" }),
+      );
     }
   };
 
@@ -216,7 +229,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
                   deleteReq.onblocked = () => resolve();
                 });
               }
-            })
+            }),
           );
         } catch (error) {
           console.error("Failed to clear IndexedDB:", error);
@@ -231,12 +244,16 @@ export function DataManagement({ className = "" }: DataManagementProps) {
         window.location.reload();
       }, 1000);
 
-      setMessage(t("clearSuccess", { default: "All data cleared successfully!" }));
+      setMessage(
+        t("clearSuccess", { default: "All data cleared successfully!" }),
+      );
     } catch (error) {
       // 错误处理中的 console.error 保留用于调试
       // eslint-disable-next-line no-console
       console.error("Failed to clear data:", error);
-      setMessage(t("clearFailed", { default: "Failed to clear data, please try again" }));
+      setMessage(
+        t("clearFailed", { default: "Failed to clear data, please try again" }),
+      );
     }
   };
 
@@ -252,7 +269,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
       setMessage(
         t("confirmRequired", {
           default: "Please type 'DELETE' to confirm",
-        })
+        }),
       );
       return;
     }
@@ -276,7 +293,9 @@ export function DataManagement({ className = "" }: DataManagementProps) {
     dataStats.progressData.exists;
 
   return (
-    <div className={`bg-white dark:bg-slate-800 rounded-lg border dark:border-slate-700 p-6 ${className}`}>
+    <div
+      className={`bg-white dark:bg-slate-800 rounded-lg border dark:border-slate-700 p-6 ${className}`}
+    >
       {/* Header */}
       <div className="mb-6">
         <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
@@ -293,7 +312,10 @@ export function DataManagement({ className = "" }: DataManagementProps) {
       {/* Privacy Notice */}
       <div className="mb-6 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
         <div className="flex items-start gap-2">
-          <Lock size={16} className="text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+          <Lock
+            size={16}
+            className="text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"
+          />
           <div className="flex-1">
             <p className="text-sm font-semibold text-green-900 dark:text-green-100 mb-1">
               {t("privacyNotice.title", {
@@ -354,9 +376,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
                   default: "Pain Records",
                 })}
               </span>
-              <span className="font-medium">
-                {dataStats.painRecords.count}
-              </span>
+              <span className="font-medium">{dataStats.painRecords.count}</span>
             </div>
           )}
           {dataStats.assessments.exists && (
@@ -364,9 +384,7 @@ export function DataManagement({ className = "" }: DataManagementProps) {
               <span className="text-gray-600 dark:text-gray-400">
                 {t("stats.assessments", { default: "Assessments" })}
               </span>
-              <span className="font-medium">
-                {dataStats.assessments.count}
-              </span>
+              <span className="font-medium">{dataStats.assessments.count}</span>
             </div>
           )}
           {dataStats.progressData.exists && (
@@ -420,17 +438,34 @@ export function DataManagement({ className = "" }: DataManagementProps) {
               })}
             </p>
             <ul className="text-sm text-gray-600 dark:text-gray-400 mb-4 space-y-2 pl-4">
-              <li>• {t("confirmDialog.items.cycle", { default: "Cycle tracking data" })}</li>
-              <li>• {t("confirmDialog.items.pain", { default: "Pain records" })}</li>
-              <li>• {t("confirmDialog.items.assessments", { default: "Assessment results" })}</li>
-              <li>• {t("confirmDialog.items.preferences", { default: "All personal settings" })}</li>
+              <li>
+                •{" "}
+                {t("confirmDialog.items.cycle", {
+                  default: "Cycle tracking data",
+                })}
+              </li>
+              <li>
+                • {t("confirmDialog.items.pain", { default: "Pain records" })}
+              </li>
+              <li>
+                •{" "}
+                {t("confirmDialog.items.assessments", {
+                  default: "Assessment results",
+                })}
+              </li>
+              <li>
+                •{" "}
+                {t("confirmDialog.items.preferences", {
+                  default: "All personal settings",
+                })}
+              </li>
             </ul>
             <p className="text-sm text-red-600 dark:text-red-400 mb-4 font-medium">
               {t("confirmDialog.cannotUndo", {
                 default: "⚠️ This action CANNOT be undone!",
               })}
             </p>
-            
+
             {/* Confirmation input */}
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -483,18 +518,21 @@ export function DataManagement({ className = "" }: DataManagementProps) {
       {/* Info text */}
       <div className="mt-6 text-xs text-gray-500 dark:text-gray-400 space-y-1 border-t dark:border-slate-700 pt-4">
         <p>
-          • {t("info.localStorage", {
+          •{" "}
+          {t("info.localStorage", {
             default: "Data is stored locally on your device only",
           })}
         </p>
         <p>
-          • {t("info.exportFormat", {
+          •{" "}
+          {t("info.exportFormat", {
             default:
               "Exported file is in JSON format, can be imported on other devices",
           })}
         </p>
         <p>
-          • {t("info.cannotRecover", {
+          •{" "}
+          {t("info.cannotRecover", {
             default: "Data cannot be recovered after deletion",
           })}
         </p>

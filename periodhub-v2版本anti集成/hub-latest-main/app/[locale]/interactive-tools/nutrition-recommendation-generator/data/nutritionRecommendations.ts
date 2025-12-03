@@ -556,4 +556,5 @@ export const nutritionData: ZIV1D3DData = {
 // 为了兼容性，保留原有的数据结构（简化版本）
 export const menstrualPhaseData = nutritionData.menstrualPhase;
 export const healthGoalData = nutritionData.healthGoals;
-export const holisticHealthConstitutionData = nutritionData.holisticHealthConstitution;
+export const holisticHealthConstitutionData =
+  nutritionData.holisticHealthConstitution;

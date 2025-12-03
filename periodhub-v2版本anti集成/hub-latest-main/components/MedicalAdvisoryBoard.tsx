@@ -1,15 +1,15 @@
 /**
  * Medical Advisory Board Component
  * 医学顾问委员会组件
- * 
+ *
  * 显示医学顾问信息，建立医学权威性
  */
 
-'use client';
+"use client";
 
-import React from 'react';
-import { useTranslations } from 'next-intl';
-import { GraduationCap, Award, Building2 } from 'lucide-react';
+import React from "react";
+import { useTranslations } from "next-intl";
+import { GraduationCap, Award, Building2 } from "lucide-react";
 
 interface MedicalAdvisor {
   name: string;
@@ -20,28 +20,28 @@ interface MedicalAdvisor {
 }
 
 export default function MedicalAdvisoryBoard() {
-  const t = useTranslations('medicalAdvisoryBoard');
+  const t = useTranslations("medicalAdvisoryBoard");
 
   // 医学顾问信息（可以从翻译文件或配置中获取）
   const advisors: MedicalAdvisor[] = [
     {
-      name: t('advisors.advisor1.name'),
-      title: t('advisors.advisor1.title'),
-      credentials: ['MD', 'OB-GYN'],
-      organization: t('advisors.advisor1.organization'),
-      specialty: t('advisors.advisor1.specialty'),
+      name: t("advisors.advisor1.name"),
+      title: t("advisors.advisor1.title"),
+      credentials: ["MD", "OB-GYN"],
+      organization: t("advisors.advisor1.organization"),
+      specialty: t("advisors.advisor1.specialty"),
     },
     {
-      name: t('advisors.advisor2.name'),
-      title: t('advisors.advisor2.title'),
-      credentials: ['MD', 'PhD'],
-      organization: t('advisors.advisor2.organization'),
-      specialty: t('advisors.advisor2.specialty'),
+      name: t("advisors.advisor2.name"),
+      title: t("advisors.advisor2.title"),
+      credentials: ["MD", "PhD"],
+      organization: t("advisors.advisor2.organization"),
+      specialty: t("advisors.advisor2.specialty"),
     },
   ];
 
   return (
-    <section 
+    <section
       className="py-12 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-slate-800 dark:to-slate-900"
       data-ai-searchable="true"
       data-entity="MEDICAL_AUTHORITY"
@@ -52,10 +52,10 @@ export default function MedicalAdvisoryBoard() {
             <Award className="w-8 h-8 text-purple-600 dark:text-purple-400" />
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            {t('title')}
+            {t("title")}
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {t('description')}
+            {t("description")}
           </p>
         </div>
 
@@ -105,16 +105,10 @@ export default function MedicalAdvisoryBoard() {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            {t('disclaimer')}
+            {t("disclaimer")}
           </p>
         </div>
       </div>
     </section>
   );
 }
-
-
-
-
-
-

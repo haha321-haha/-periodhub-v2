@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
 /**
  * AEO 监控仪表板
- * 
+ *
  * 显示 AEO 追踪数据、指标统计和趋势分析
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { 
-  BarChart3, 
-  TrendingUp, 
-  Link as LinkIcon, 
+import React, { useState, useEffect, useCallback } from "react";
+import {
+  BarChart3,
+  TrendingUp,
+  Link as LinkIcon,
   FileText,
   Activity,
   AlertCircle,
-  CheckCircle2
-} from 'lucide-react';
+  CheckCircle2,
+} from "lucide-react";
 
 interface AEOMetrics {
   totalReferences: number;
@@ -36,16 +36,16 @@ export default function AEODashboard() {
     try {
       setLoading(true);
       setError(null);
-      
+
       const response = await fetch(`/api/aeo/metrics?days=${days}`);
       if (!response.ok) {
-        throw new Error('Failed to fetch metrics');
+        throw new Error("Failed to fetch metrics");
       }
-      
+
       const data = await response.json();
       setMetrics(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
+      setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
       setLoading(false);
     }
@@ -61,7 +61,9 @@ export default function AEODashboard() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center py-20">
             <Activity className="w-12 h-12 animate-spin mx-auto text-purple-500 mb-4" />
-            <p className="text-gray-600 dark:text-gray-400">Loading metrics...</p>
+            <p className="text-gray-600 dark:text-gray-400">
+              Loading metrics...
+            </p>
           </div>
         </div>
       </div>
@@ -76,7 +78,9 @@ export default function AEODashboard() {
             <div className="flex items-center gap-3">
               <AlertCircle className="w-6 h-6 text-red-500" />
               <div>
-                <h3 className="font-semibold text-red-800 dark:text-red-200">Error</h3>
+                <h3 className="font-semibold text-red-800 dark:text-red-200">
+                  Error
+                </h3>
                 <p className="text-red-600 dark:text-red-300">{error}</p>
               </div>
             </div>
@@ -98,7 +102,7 @@ export default function AEODashboard() {
     .sort(([, a], [, b]) => b - a)
     .slice(0, 10);
 
-  const maxTrendValue = Math.max(...metrics.recentTrend.map(t => t.count), 1);
+  const maxTrendValue = Math.max(...metrics.recentTrend.map((t) => t.count), 1);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 p-4 sm:p-8">
@@ -121,8 +125,8 @@ export default function AEODashboard() {
               onClick={() => setDays(d)}
               className={`px-4 py-2 rounded-lg font-medium transition-colors ${
                 days === d
-                  ? 'bg-purple-500 text-white'
-                  : 'bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700'
+                  ? "bg-purple-500 text-white"
+                  : "bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700"
               }`}
             >
               {d} 天
@@ -196,9 +200,9 @@ export default function AEODashboard() {
               {metrics.recentTrend.slice(0, 14).map((trend) => (
                 <div key={trend.date} className="flex items-center gap-3">
                   <div className="w-20 text-sm text-gray-600 dark:text-gray-400">
-                    {new Date(trend.date).toLocaleDateString('zh-CN', {
-                      month: 'short',
-                      day: 'numeric',
+                    {new Date(trend.date).toLocaleDateString("zh-CN", {
+                      month: "short",
+                      day: "numeric",
                     })}
                   </div>
                   <div className="flex-1 bg-gray-200 dark:bg-slate-700 rounded-full h-6 relative">
@@ -308,6 +312,3 @@ export default function AEODashboard() {
     </div>
   );
 }
-
-
-

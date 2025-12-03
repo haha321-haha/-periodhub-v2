@@ -7,19 +7,30 @@
 
 import { useState, useEffect } from "react";
 import { AlertTriangle, Download, Trash2, X } from "lucide-react";
-import { useWorkplaceWellnessActions, useCalendar, useWorkImpact, useNutrition, useExport, useUserPreferences, useExportHistory, useExportTemplates } from "../hooks/useWorkplaceWellnessStore";
+import {
+  useWorkplaceWellnessActions,
+  useCalendar,
+  useWorkImpact,
+  useNutrition,
+  useExport,
+  useUserPreferences,
+  useExportHistory,
+  useExportTemplates,
+} from "../hooks/useWorkplaceWellnessStore";
 
 interface StorageWarningEvent extends CustomEvent {
   detail: {
-    type: 'sessionStorage' | 'failed';
+    type: "sessionStorage" | "failed";
     message: string;
   };
 }
 
 export default function StorageWarningToast() {
   const [isVisible, setIsVisible] = useState(false);
-  const [warningType, setWarningType] = useState<'sessionStorage' | 'failed'>('sessionStorage');
-  const [message, setMessage] = useState('');
+  const [warningType, setWarningType] = useState<"sessionStorage" | "failed">(
+    "sessionStorage",
+  );
+  const [message, setMessage] = useState("");
   const { updateCalendar } = useWorkplaceWellnessActions();
   const calendar = useCalendar();
   const workImpact = useWorkImpact();
@@ -37,9 +48,9 @@ export default function StorageWarningToast() {
       setIsVisible(true);
     };
 
-    window.addEventListener('storage-warning', handleStorageWarning);
+    window.addEventListener("storage-warning", handleStorageWarning);
     return () => {
-      window.removeEventListener('storage-warning', handleStorageWarning);
+      window.removeEventListener("storage-warning", handleStorageWarning);
     };
   }, []);
 
@@ -56,11 +67,15 @@ export default function StorageWarningToast() {
       exportTemplates,
     };
 
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(data, null, 2)], {
+      type: "application/json",
+    });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `workplace-wellness-backup-${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `workplace-wellness-backup-${
+      new Date().toISOString().split("T")[0]
+    }.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -76,7 +91,7 @@ export default function StorageWarningToast() {
     const twoWeeksAgo = new Date();
     twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
     const cleanedPeriodData = calendar.periodData
-      .filter(r => {
+      .filter((r) => {
         try {
           return new Date(r.date) >= twoWeeksAgo;
         } catch {
@@ -99,7 +114,7 @@ export default function StorageWarningToast() {
     setIsVisible(false);
 
     // 提示用户
-    alert('已清理旧数据，请刷新页面以确保数据保存。');
+    alert("已清理旧数据，请刷新页面以确保数据保存。");
   };
 
   const handleDismiss = () => {
@@ -110,32 +125,39 @@ export default function StorageWarningToast() {
 
   return (
     <div className="fixed top-4 right-4 z-50 max-w-md animate-in slide-in-from-top-5">
-      <div className={`
+      <div
+        className={`
         rounded-lg shadow-lg p-4 border-2
-        ${warningType === 'failed'
-          ? 'bg-red-50 border-red-200'
-          : 'bg-yellow-50 border-yellow-200'
+        ${
+          warningType === "failed"
+            ? "bg-red-50 border-red-200"
+            : "bg-yellow-50 border-yellow-200"
         }
-      `}>
+      `}
+      >
         <div className="flex items-start gap-3">
           <AlertTriangle
             className={`
               flex-shrink-0 mt-0.5
-              ${warningType === 'failed' ? 'text-red-600' : 'text-yellow-600'}
+              ${warningType === "failed" ? "text-red-600" : "text-yellow-600"}
             `}
             size={20}
           />
           <div className="flex-1 min-w-0">
-            <h3 className={`
+            <h3
+              className={`
               font-semibold text-sm mb-1
-              ${warningType === 'failed' ? 'text-red-800' : 'text-yellow-800'}
-            `}>
-              {warningType === 'failed' ? '⚠️ 存储空间已满' : '⚠️ 存储空间不足'}
+              ${warningType === "failed" ? "text-red-800" : "text-yellow-800"}
+            `}
+            >
+              {warningType === "failed" ? "⚠️ 存储空间已满" : "⚠️ 存储空间不足"}
             </h3>
-            <p className={`
+            <p
+              className={`
               text-sm mb-3
-              ${warningType === 'failed' ? 'text-red-700' : 'text-yellow-700'}
-            `}>
+              ${warningType === "failed" ? "text-red-700" : "text-yellow-700"}
+            `}
+            >
               {message}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -191,4 +213,3 @@ export default function StorageWarningToast() {
     </div>
   );
 }
-

@@ -1,7 +1,7 @@
 /**
  * Medical Terminology Standardization System
  * 医学术语标准化系统
- * 
+ *
  * 提供医学术语的标准化、同义词映射、多语言支持
  * 确保整个应用中术语使用的一致性
  */
@@ -41,13 +41,7 @@ export const MEDICAL_TERMINOLOGY: Record<string, MedicalTermMapping> = {
       "Period Cramps",
       "Menstrual Discomfort",
     ],
-    synonymsZh: [
-      "月经痛",
-      "经期疼痛",
-      "月经痉挛",
-      "经期不适",
-      "痛经症",
-    ],
+    synonymsZh: ["月经痛", "经期疼痛", "月经痉挛", "经期不适", "痛经症"],
     relatedTerms: ["Endometriosis", "PMS", "Menstrual Cycle"],
     entityKey: "DYSMENORRHEA",
   },
@@ -260,14 +254,14 @@ export const MEDICAL_TERMINOLOGY: Record<string, MedicalTermMapping> = {
 
 /**
  * 标准化医学术语
- * 
+ *
  * @param term 输入的术语（可以是同义词或变体）
  * @param locale 语言环境
  * @returns 标准术语
  */
 export function standardizeMedicalTerm(
   term: string,
-  locale: "en" | "zh" = "en"
+  locale: "en" | "zh" = "en",
 ): string {
   // 规范化输入：转小写、去除空格和连字符
   const normalized = term
@@ -292,7 +286,9 @@ export function standardizeMedicalTerm(
       ...value.synonymsZh,
     ];
 
-    if (allTerms.some((t) => t.includes(normalized) || normalized.includes(t))) {
+    if (
+      allTerms.some((t) => t.includes(normalized) || normalized.includes(t))
+    ) {
       return locale === "zh" ? value.standardTermZh : value.standardTerm;
     }
   }
@@ -303,14 +299,14 @@ export function standardizeMedicalTerm(
 
 /**
  * 获取术语的所有同义词
- * 
+ *
  * @param term 术语
  * @param locale 语言环境
  * @returns 同义词数组（包含标准术语）
  */
 export function getMedicalTermSynonyms(
   term: string,
-  locale: "en" | "zh" = "en"
+  locale: "en" | "zh" = "en",
 ): string[] {
   const normalized = term
     .toLowerCase()
@@ -321,7 +317,8 @@ export function getMedicalTermSynonyms(
   const mapping = MEDICAL_TERMINOLOGY[normalized] || MEDICAL_TERMINOLOGY[term];
 
   if (mapping) {
-    const standard = locale === "zh" ? mapping.standardTermZh : mapping.standardTerm;
+    const standard =
+      locale === "zh" ? mapping.standardTermZh : mapping.standardTerm;
     const synonyms = locale === "zh" ? mapping.synonymsZh : mapping.synonyms;
     return [standard, ...synonyms];
   }
@@ -331,7 +328,7 @@ export function getMedicalTermSynonyms(
 
 /**
  * 检查两个术语是否指向同一个医学概念
- * 
+ *
  * @param term1 术语1
  * @param term2 术语2
  * @returns 是否相同
@@ -344,12 +341,12 @@ export function areTermsEquivalent(term1: string, term2: string): boolean {
 
 /**
  * 获取术语的实体键（如果存在）
- * 
+ *
  * @param term 术语
  * @returns 实体键或 undefined
  */
 export function getTermEntityKey(
-  term: string
+  term: string,
 ): keyof typeof MEDICAL_ENTITIES | undefined {
   const normalized = term
     .toLowerCase()
@@ -391,7 +388,7 @@ const textCache = new Map<string, TextCacheEntry>();
  */
 function initializeRegexCache(locale: "en" | "zh"): TermCacheEntry[] {
   const cacheKey = locale;
-  
+
   if (regexCache[cacheKey]) {
     return regexCache[cacheKey];
   }
@@ -399,7 +396,8 @@ function initializeRegexCache(locale: "en" | "zh"): TermCacheEntry[] {
   const entries: TermCacheEntry[] = [];
 
   for (const [, mapping] of Object.entries(MEDICAL_TERMINOLOGY)) {
-    const standardTerm = locale === "zh" ? mapping.standardTermZh : mapping.standardTerm;
+    const standardTerm =
+      locale === "zh" ? mapping.standardTermZh : mapping.standardTerm;
     const allTerms = [
       standardTerm,
       ...(locale === "zh" ? mapping.synonymsZh : mapping.synonyms),
@@ -409,7 +407,7 @@ function initializeRegexCache(locale: "en" | "zh"): TermCacheEntry[] {
       // 转义特殊字符并创建正则表达式
       const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       const regex = new RegExp(`\\b${escapedTerm}\\b`, "gi");
-      
+
       entries.push({
         regex,
         standardTerm,
@@ -442,13 +440,14 @@ function cleanTextCache(): void {
     }
   }
 
-  keysToDelete.forEach(key => textCache.delete(key));
+  keysToDelete.forEach((key) => textCache.delete(key));
 
   // 如果缓存仍然太大，删除最旧的条目
   if (textCache.size > MAX_CACHE_SIZE) {
-    const sortedEntries = Array.from(textCache.entries())
-      .sort((a, b) => a[1].timestamp - b[1].timestamp);
-    
+    const sortedEntries = Array.from(textCache.entries()).sort(
+      (a, b) => a[1].timestamp - b[1].timestamp,
+    );
+
     const toDelete = sortedEntries.slice(0, textCache.size - MAX_CACHE_SIZE);
     toDelete.forEach(([key]) => textCache.delete(key));
   }
@@ -456,14 +455,14 @@ function cleanTextCache(): void {
 
 /**
  * 在文本中标记医学术语（优化版本，带缓存）
- * 
+ *
  * @param text 文本
  * @param locale 语言环境
  * @returns 标记后的文本（包含 data-medical-term 属性）
  */
 export function markMedicalTermsInText(
   text: string,
-  locale: "en" | "zh" = "en"
+  locale: "en" | "zh" = "en",
 ): string {
   // 空文本直接返回
   if (!text || text.trim().length === 0) {
@@ -473,7 +472,7 @@ export function markMedicalTermsInText(
   // 检查文本缓存
   const cacheKey = `${locale}:${text}`;
   const cached = textCache.get(cacheKey);
-  
+
   if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
     return cached.markedText;
   }
@@ -485,14 +484,18 @@ export function markMedicalTermsInText(
 
   // 获取或初始化正则表达式缓存
   const regexEntries = initializeRegexCache(locale);
-  
+
   let markedText = text;
   const processedRanges: Array<{ start: number; end: number }> = [];
 
   // 使用更高效的匹配策略
   for (const entry of regexEntries) {
     let match;
-    const matches: Array<{ index: number; length: number; replacement: string }> = [];
+    const matches: Array<{
+      index: number;
+      length: number;
+      replacement: string;
+    }> = [];
 
     // 收集所有匹配项
     while ((match = entry.regex.exec(text)) !== null) {
@@ -501,7 +504,7 @@ export function markMedicalTermsInText(
 
       // 检查是否与已处理的区域重叠
       const overlaps = processedRanges.some(
-        range => (start < range.end && end > range.start)
+        (range) => start < range.end && end > range.start,
       );
 
       if (!overlaps) {
@@ -516,7 +519,10 @@ export function markMedicalTermsInText(
 
     // 从后往前替换，避免索引偏移问题
     matches.reverse().forEach(({ index, length, replacement }) => {
-      markedText = markedText.slice(0, index) + replacement + markedText.slice(index + length);
+      markedText =
+        markedText.slice(0, index) +
+        replacement +
+        markedText.slice(index + length);
     });
   }
 
@@ -533,7 +539,7 @@ export function markMedicalTermsInText(
  * 清除所有缓存（用于测试或内存管理）
  */
 export function clearTerminologyCache(): void {
-  Object.keys(regexCache).forEach(key => delete regexCache[key]);
+  Object.keys(regexCache).forEach((key) => delete regexCache[key]);
   textCache.clear();
 }
 
@@ -551,4 +557,3 @@ export function getCacheStats(): {
     textCacheEntries: textCache.size,
   };
 }
-

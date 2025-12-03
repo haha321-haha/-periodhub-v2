@@ -130,5 +130,3 @@ export default async function QuickNavigationSection({
     </section>
   );
 }
-
-

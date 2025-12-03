@@ -69,15 +69,15 @@
     <div class="container">
         <h1>PeriodHub - 直接支付测试</h1>
         <p>这个页面直接测试 Lemon Squeezy 支付 API，确保没有其他东西干扰实际支付流程。</p>
-        
+
         <h2>选择支付计划</h2>
         <button class="button" onclick="testPayment('monthly')">月度订阅 - $4.99</button>
         <button class="button secondary" onclick="testPayment('yearly')">年度订阅 - $47.88</button>
         <button class="button secondary" onclick="testPayment('oneTime')">一次性购买 - $4.99</button>
-        
+
         <div id="result"></div>
     </div>
-    
+
     <div class="container warning">
         <h2>重要说明</h2>
         <ul>
@@ -94,10 +94,10 @@
             const resultDiv = document.getElementById('result');
             resultDiv.className = 'result';
             resultDiv.textContent = '正在创建支付会话...';
-            
+
             try {
                 console.log('🧪 开始测试直接支付 API，计划:', plan);
-                
+
                 const response = await fetch('/api/lemonsqueezy/create-checkout', {
                     method: 'POST',
                     headers: {
@@ -112,12 +112,12 @@
                 });
 
                 const data = await response.json();
-                
+
                 if (response.ok && data.url) {
                     console.log('✅ 支付 API 成功响应:', data);
                     resultDiv.className = 'result success';
                     resultDiv.textContent = `✅ 成功创建结账会话！\n\n结账 URL: ${data.url}\n\n正在跳转到支付页面...`;
-                    
+
                     // 3秒后重定向到支付页面
                     setTimeout(() => {
                         window.location.href = data.url;

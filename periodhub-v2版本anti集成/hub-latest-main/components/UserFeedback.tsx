@@ -134,7 +134,7 @@ export function UserFeedback({
           <label className="block text-sm font-medium text-gray-700 mb-2">
             {t("ratingLabel", { feature })}
           </label>
-          <div 
+          <div
             className="flex gap-1"
             onMouseLeave={() => setHoverRating(0)} // 鼠标离开时清除预览
           >
@@ -142,18 +142,22 @@ export function UserFeedback({
               // 确定当前应该显示的评分（优先显示 hover，否则显示实际评分）
               const displayRating = hoverRating || rating;
               const isActive = star <= displayRating;
-              
+
               return (
                 <button
                   key={star}
                   type="button"
                   onClick={() => {
                     setRating(star);
-                    logInfo(`评分设置为: ${star}`, { rating: star }, "UserFeedback/onClick");
+                    logInfo(
+                      `评分设置为: ${star}`,
+                      { rating: star },
+                      "UserFeedback/onClick",
+                    );
                   }}
                   onMouseEnter={() => setHoverRating(star)} // 鼠标悬停时设置预览
                   className="p-1 hover:scale-110 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 rounded"
-                  aria-label={`${star} star${star > 1 ? 's' : ''}`}
+                  aria-label={`${star} star${star > 1 ? "s" : ""}`}
                 >
                   <Star
                     className={`w-6 h-6 transition-all duration-200 ${

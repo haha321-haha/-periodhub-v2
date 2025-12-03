@@ -10,7 +10,7 @@ import {
   ArrowRight,
   Clock,
   Users,
-  Award
+  Award,
 } from "lucide-react";
 
 interface NavigationSectionProps {
@@ -22,11 +22,11 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
 
   const navigationCards = [
     {
-      id: 'work-impact-calculator',
+      id: "work-impact-calculator",
       icon: Calculator,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
-      borderColor: 'border-purple-200',
+      color: "text-purple-600",
+      bgColor: "bg-purple-50",
+      borderColor: "border-purple-200",
       title: t("navigation.calculator.title"),
       description: t("navigation.calculator.description"),
       features: t.raw("navigation.calculator.features") as string[],
@@ -35,11 +35,11 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
       secondaryCTA: t("navigation.calculator.secondaryCTA"),
     },
     {
-      id: 'symptom-assessment',
+      id: "symptom-assessment",
       icon: Stethoscope,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-50',
-      borderColor: 'border-blue-200',
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
+      borderColor: "border-blue-200",
       title: t("navigation.assessment.title"),
       description: t("navigation.assessment.description"),
       features: t.raw("navigation.assessment.features") as string[],
@@ -48,18 +48,18 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
       secondaryCTA: t("navigation.assessment.secondaryCTA"),
     },
     {
-      id: 'relief-resources',
+      id: "relief-resources",
       icon: Heart,
-      color: 'text-pink-600',
-      bgColor: 'bg-pink-50',
-      borderColor: 'border-pink-200',
+      color: "text-pink-600",
+      bgColor: "bg-pink-50",
+      borderColor: "border-pink-200",
       title: t("navigation.relief.title"),
       description: t("navigation.relief.description"),
       features: t.raw("navigation.relief.features") as string[],
       href: `/${locale}/articles/immediate-relief-for-period-pain`,
       primaryCTA: t("navigation.relief.primaryCTA"),
       secondaryCTA: t("navigation.relief.secondaryCTA"),
-    }
+    },
   ];
 
   return (
@@ -83,7 +83,9 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
               className={`relative bg-white rounded-xl shadow-lg border-2 ${card.borderColor} p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group`}
             >
               {/* 卡片头部 */}
-              <div className={`flex items-center justify-center w-16 h-16 ${card.bgColor} rounded-full mb-6 group-hover:scale-110 transition-transform`}>
+              <div
+                className={`flex items-center justify-center w-16 h-16 ${card.bgColor} rounded-full mb-6 group-hover:scale-110 transition-transform`}
+              >
                 <card.icon className={`w-8 h-8 ${card.color}`} />
               </div>
 
@@ -100,7 +102,9 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
               <ul className="space-y-3 mb-8">
                 {card.features.map((feature: string, index: number) => (
                   <li key={index} className="flex items-start">
-                    <div className={`w-5 h-5 ${card.color} rounded-full flex-shrink-0 mr-3 mt-0.5`}>
+                    <div
+                      className={`w-5 h-5 ${card.color} rounded-full flex-shrink-0 mr-3 mt-0.5`}
+                    >
                       <div className="w-full h-full rounded-full bg-current opacity-20"></div>
                     </div>
                     <span className="text-gray-700">{feature}</span>
@@ -112,7 +116,10 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
               <div className="flex flex-col space-y-3">
                 <Link
                   href={card.href}
-                  className={`inline-flex items-center justify-center ${card.color.replace('text', 'bg')} hover:opacity-90 text-white font-semibold py-3 px-6 rounded-lg transition-opacity`}
+                  className={`inline-flex items-center justify-center ${card.color.replace(
+                    "text",
+                    "bg",
+                  )} hover:opacity-90 text-white font-semibold py-3 px-6 rounded-lg transition-opacity`}
                 >
                   {card.primaryCTA}
                   <ArrowRight className="ml-2 w-5 h-5" />
@@ -137,9 +144,7 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 {t("trust.usersHelped")}
               </h3>
-              <p className="text-gray-600">
-                {t("trust.usersHelpedDesc")}
-              </p>
+              <p className="text-gray-600">{t("trust.usersHelpedDesc")}</p>
             </div>
 
             <div className="flex flex-col items-center">
@@ -147,9 +152,7 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 {t("trust.averageTime")}
               </h3>
-              <p className="text-gray-600">
-                {t("trust.averageTimeDesc")}
-              </p>
+              <p className="text-gray-600">{t("trust.averageTimeDesc")}</p>
             </div>
 
             <div className="flex flex-col items-center">
@@ -157,9 +160,7 @@ export default function NavigationSection({ locale }: NavigationSectionProps) {
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 {t("trust.expertContent")}
               </h3>
-              <p className="text-gray-600">
-                {t("trust.expertContentDesc")}
-              </p>
+              <p className="text-gray-600">{t("trust.expertContentDesc")}</p>
             </div>
           </div>
         </div>

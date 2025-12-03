@@ -11,7 +11,10 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "interactiveTools.stressManagement" });
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveTools.stressManagement",
+  });
 
   return {
     title: t("assessment.title") + " - PeriodHub",
@@ -55,7 +58,10 @@ export default async function StressAssessmentPage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
 
-  const t = await getTranslations({ locale, namespace: "interactiveTools.stressManagement" });
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveTools.stressManagement",
+  });
 
   return (
     <>

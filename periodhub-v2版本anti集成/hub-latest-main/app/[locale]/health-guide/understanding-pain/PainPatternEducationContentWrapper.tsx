@@ -16,4 +16,3 @@ const PainPatternEducationContent = dynamic(
 export default function PainPatternEducationContentWrapper() {
   return <PainPatternEducationContent />;
 }
-

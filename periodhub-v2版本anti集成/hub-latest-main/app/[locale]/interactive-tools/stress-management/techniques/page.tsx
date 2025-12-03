@@ -7,7 +7,7 @@ export async function generateStaticParams() {
 }
 
 // 不生成 metadata，因为这是重定向页面
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default async function TechniquesPage({
   params,

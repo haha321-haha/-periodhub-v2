@@ -314,7 +314,7 @@ export function PHQ9Results({
               {t("requiresHelp")}
             </h4>
             <p className="text-gray-600">
-              {(result.requiresProfessionalHelp ?? false) ? t("yes") : t("no")}
+              {result.requiresProfessionalHelp ?? false ? t("yes") : t("no")}
             </p>
           </div>
         </div>

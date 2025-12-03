@@ -49,9 +49,3 @@ export default function NavigationCard({
     </article>
   );
 }
-
-
-
-
-
-

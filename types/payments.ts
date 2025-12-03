@@ -1,7 +1,7 @@
 // 支付相关类型定义
 
 export interface ProUpgradeRequest {
-  plan: 'monthly' | 'yearly' | 'oneTime';
+  plan: "monthly" | "yearly" | "oneTime";
   painPoint?: string;
   assessmentScore?: number;
   source?: string;

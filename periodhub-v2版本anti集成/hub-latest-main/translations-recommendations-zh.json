@@ -5,7 +5,7 @@
     "sectionTitle": "为您推荐",
     "loading": "正在生成推荐...",
     "error": "推荐系统暂时不可用,请稍后再试",
-    
+
     "insights": {
       "title": "数据洞察",
       "subtitle": "基于您的数据分析",
@@ -29,7 +29,7 @@
         "needs_attention": "建议医疗咨询"
       }
     },
-    
+
     "categories": {
       "all": "全部",
       "pain-relief": "疼痛缓解",
@@ -43,7 +43,7 @@
       "mental-health": "心理健康",
       "emergency": "应急处理"
     },
-    
+
     "types": {
       "article": "文章",
       "tool": "工具",
@@ -51,14 +51,14 @@
       "tip": "实用建议",
       "action": "行动建议"
     },
-    
+
     "priority": {
       "high": "重要",
       "medium": "建议",
       "low": "可选",
       "urgent": "紧急"
     },
-    
+
     "actions": {
       "dismiss": "忽略",
       "save": "收藏",
@@ -69,7 +69,7 @@
       "viewAll": "查看全部",
       "undoDismiss": "撤销忽略"
     },
-    
+
     "reasons": {
       "prefix": "推荐理由:",
       "highPainLevel": "您当前疼痛等级较高({level}/10)",
@@ -89,7 +89,7 @@
       "suffix": "，因此推荐此内容。",
       "default": "基于您的数据模式，推荐此内容。"
     },
-    
+
     "empty": {
       "title": "暂无推荐",
       "description": "完善更多数据后，我们将为您提供个性化推荐",
@@ -97,7 +97,7 @@
       "noData": "数据不足，无法生成推荐",
       "insufficientData": "请至少记录3个周期的数据以获得更精准的推荐"
     },
-    
+
     "dataQuality": {
       "title": "数据质量提示",
       "low": "数据量不足，推荐可能不够准确。建议记录至少3个周期。",
@@ -108,7 +108,7 @@
       "recordCount": "已记录 {count} 个周期",
       "suggestion": "建议继续记录数据以提升推荐准确度"
     },
-    
+
     "feedback": {
       "title": "这个推荐有帮助吗？",
       "helpful": "有帮助",
@@ -124,7 +124,7 @@
         "other": "其他原因"
       }
     },
-    
+
     "filters": {
       "title": "筛选推荐",
       "showAll": "显示全部",
@@ -136,14 +136,14 @@
       "sortByPriority": "按优先级",
       "sortByTime": "按时间"
     },
-    
+
     "summary": {
       "totalRecommendations": "共 {count} 个推荐",
       "highPriorityCount": "{count} 个高优先级推荐",
       "categoriesCount": "{count} 个类别",
       "newRecommendations": "{count} 个新推荐"
     },
-    
+
     "content": {
       "articles": {
         "dysmenorrheaGuide": {
@@ -182,7 +182,7 @@
           "reason": "适合想深入了解痛经的原理"
         }
       },
-      
+
       "tools": {
         "painTracker": {
           "title": "疼痛追踪工具",
@@ -225,7 +225,7 @@
           "reason": "适合需要在工作中管理经期健康"
         }
       },
-      
+
       "scenarios": {
         "office": {
           "title": "办公室场景方案",
@@ -268,7 +268,7 @@
           "reason": "适合了解各阶段经期变化"
         }
       },
-      
+
       "tips": {
         "heatTherapy": {
           "title": "热敷缓解法",
@@ -296,7 +296,7 @@
           "reason": "适合通过饮食改善症状"
         }
       },
-      
+
       "actions": {
         "medicalConsultation": {
           "title": "建议医疗咨询",

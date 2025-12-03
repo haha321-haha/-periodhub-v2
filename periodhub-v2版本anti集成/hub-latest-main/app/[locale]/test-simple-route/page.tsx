@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Test Simple Route - PeriodHub',
-  description: 'Simple test route page',
+  title: "Test Simple Route - PeriodHub",
+  description: "Simple test route page",
   robots: {
     index: false,
     follow: false,
@@ -21,9 +21,7 @@ export default function TestSimpleRoutePage() {
             <h2 className="text-2xl font-bold text-gray-800 mb-4">
               ✅ 路由工作正常！
             </h2>
-            <p className="text-gray-600">
-              这是一个简单的测试路由页面
-            </p>
+            <p className="text-gray-600">这是一个简单的测试路由页面</p>
           </div>
         </div>
       </div>

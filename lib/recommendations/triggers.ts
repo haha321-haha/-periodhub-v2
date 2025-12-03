@@ -3,14 +3,14 @@
  * Phase 3: 个性化推荐系统
  */
 
-import { 
-  RecommendationContext, 
-  AssessmentRecord, 
+import {
+  RecommendationContext,
+  AssessmentRecord,
   RecommendationTrigger,
   // PatternDetection, // 已注释：当前未使用
   // RecommendationSettings // 已注释：当前未使用
 } from "@/types/recommendations";
-import { logInfo, logError } from '@/lib/debug-logger';
+import { logInfo, logError } from "@/lib/debug-logger";
 // useRecommendationActions是React Hook，不能在类方法中使用
 // import { useRecommendationActions } from "./store";
 
@@ -23,7 +23,7 @@ export interface TriggerConfig {
   maxTriggersPerDay: number;
   quietHours: {
     start: string; // HH:mm
-    end: string;   // HH:mm
+    end: string; // HH:mm
   };
   triggers: {
     assessmentComplete: boolean;
@@ -85,7 +85,9 @@ export class RecommendationTriggerEngine {
   /**
    * 处理评估完成触发器
    */
-  public async handleAssessmentComplete(assessment: AssessmentRecord): Promise<boolean> {
+  public async handleAssessmentComplete(
+    assessment: AssessmentRecord,
+  ): Promise<boolean> {
     if (!this.config.triggers.assessmentComplete) return false;
 
     const trigger: TriggerEvent = {
@@ -95,7 +97,7 @@ export class RecommendationTriggerEngine {
       context: {
         lastAssessment: assessment,
         recentAssessments: [assessment],
-        currentDate: new Date().toISOString().split('T')[0],
+        currentDate: new Date().toISOString().split("T")[0],
       },
       processed: false,
     };
@@ -106,11 +108,14 @@ export class RecommendationTriggerEngine {
   /**
    * 处理异常模式触发器
    */
-  public async handleAbnormalPattern(pattern: PatternDetection): Promise<boolean> {
+  public async handleAbnormalPattern(
+    pattern: PatternDetection,
+  ): Promise<boolean> {
     if (!this.config.triggers.abnormalPattern) return false;
 
     // 只对严重和中度的模式触发推荐
-    if (pattern.severity !== "severe" && pattern.severity !== "moderate") return false;
+    if (pattern.severity !== "severe" && pattern.severity !== "moderate")
+      return false;
 
     const trigger: TriggerEvent = {
       id: `trigger_${Date.now()}_pattern`,
@@ -118,7 +123,7 @@ export class RecommendationTriggerEngine {
       timestamp: new Date().toISOString(),
       context: {
         detectedPatterns: [pattern],
-        currentDate: new Date().toISOString().split('T')[0],
+        currentDate: new Date().toISOString().split("T")[0],
       },
       metadata: {
         patternType: pattern.type,
@@ -135,8 +140,8 @@ export class RecommendationTriggerEngine {
    * 处理周期阶段变化触发器
    */
   public async handleCyclePhaseChange(
-    newPhase: string, 
-    previousPhase?: string
+    newPhase: string,
+    previousPhase?: string,
   ): Promise<boolean> {
     if (!this.config.triggers.cyclePhaseChange) return false;
 
@@ -149,7 +154,7 @@ export class RecommendationTriggerEngine {
       timestamp: new Date().toISOString(),
       context: {
         currentCyclePhase: newPhase,
-        currentDate: new Date().toISOString().split('T')[0],
+        currentDate: new Date().toISOString().split("T")[0],
       },
       metadata: {
         previousPhase,
@@ -165,7 +170,7 @@ export class RecommendationTriggerEngine {
    * 处理时间触发器
    */
   public async handleTimeBasedTrigger(
-    timeType: "morning" | "afternoon" | "evening" | "weekly" | "monthly"
+    timeType: "morning" | "afternoon" | "evening" | "weekly" | "monthly",
   ): Promise<boolean> {
     if (!this.config.triggers.timeBased) return false;
 
@@ -174,9 +179,10 @@ export class RecommendationTriggerEngine {
       type: "time_based",
       timestamp: new Date().toISOString(),
       context: {
-        currentDate: new Date().toISOString().split('T')[0],
+        currentDate: new Date().toISOString().split("T")[0],
         environment: {
-          isWorkHours: new Date().getHours() >= 9 && new Date().getHours() <= 18,
+          isWorkHours:
+            new Date().getHours() >= 9 && new Date().getHours() <= 18,
           isWeekend: new Date().getDay() === 0 || new Date().getDay() === 6,
           season: this.getCurrentSeason(),
         },
@@ -195,7 +201,7 @@ export class RecommendationTriggerEngine {
    */
   public async handleEmergencyAlert(
     severity: "severe" | "emergency",
-    details: Record<string, unknown>
+    details: Record<string, unknown>,
   ): Promise<boolean> {
     if (!this.config.triggers.emergencyAlert) return false;
 
@@ -204,7 +210,7 @@ export class RecommendationTriggerEngine {
       type: "emergency_alert",
       timestamp: new Date().toISOString(),
       context: {
-        currentDate: new Date().toISOString().split('T')[0],
+        currentDate: new Date().toISOString().split("T")[0],
       },
       metadata: {
         severity,
@@ -221,7 +227,7 @@ export class RecommendationTriggerEngine {
    * 处理用户请求触发器
    */
   public async handleUserRequest(
-    requestType: "manual_refresh" | "specific_category" | "emergency_help"
+    requestType: "manual_refresh" | "specific_category" | "emergency_help",
   ): Promise<boolean> {
     if (!this.config.triggers.userRequest) return false;
 
@@ -230,7 +236,7 @@ export class RecommendationTriggerEngine {
       type: "user_request",
       timestamp: new Date().toISOString(),
       context: {
-        currentDate: new Date().toISOString().split('T')[0],
+        currentDate: new Date().toISOString().split("T")[0],
       },
       metadata: {
         requestType,
@@ -245,8 +251,8 @@ export class RecommendationTriggerEngine {
    * 处理触发器
    */
   private async processTrigger(
-    trigger: TriggerEvent, 
-    bypassLimits: boolean = false
+    trigger: TriggerEvent,
+    bypassLimits: boolean = false,
   ): Promise<boolean> {
     try {
       // 检查是否在静默时间
@@ -279,10 +285,10 @@ export class RecommendationTriggerEngine {
       // 推荐生成应该在组件层面调用，这里只负责触发事件
       // 组件可以通过useRecommendationTriggers Hook获取触发器实例
       // 然后调用useRecommendationActions来生成推荐
-      
+
       // 构建完整的上下文（当前未使用，但保留以备将来需要）
       // const fullContext = this.buildFullContext(trigger.context);
-      
+
       // 这里应该调用推荐生成，但需要AssessmentHistory参数
       // 暂时使用模拟数据
       // const mockAssessmentHistory = {
@@ -296,12 +302,19 @@ export class RecommendationTriggerEngine {
       // actions.generateRecommendations(mockAssessmentHistory).catch(console.error);
 
       // 使用logger而不是console.log（开发环境自动启用，生产环境自动禁用）
-      logInfo(`Trigger processed successfully: ${trigger.id}`, undefined, 'RecommendationTriggerEngine');
+      logInfo(
+        `Trigger processed successfully: ${trigger.id}`,
+        undefined,
+        "RecommendationTriggerEngine",
+      );
       return true;
-
     } catch (error) {
       // 使用logger而不是console.error（开发环境自动启用，生产环境自动禁用）
-      logError("Failed to process trigger", error, 'RecommendationTriggerEngine');
+      logError(
+        "Failed to process trigger",
+        error,
+        "RecommendationTriggerEngine",
+      );
       return false;
     }
   }
@@ -309,9 +322,11 @@ export class RecommendationTriggerEngine {
   /**
    * 构建完整的推荐上下文
    */
-  private buildFullContext(partialContext: Partial<RecommendationContext>): RecommendationContext {
+  private buildFullContext(
+    partialContext: Partial<RecommendationContext>,
+  ): RecommendationContext {
     return {
-      currentDate: new Date().toISOString().split('T')[0],
+      currentDate: new Date().toISOString().split("T")[0],
       lastAssessment: partialContext.lastAssessment,
       recentAssessments: partialContext.recentAssessments || [],
       currentCyclePhase: partialContext.currentCyclePhase,
@@ -336,9 +351,11 @@ export class RecommendationTriggerEngine {
   private isQuietHours(): boolean {
     const now = new Date();
     const currentTime = now.getHours() * 60 + now.getMinutes();
-    const [startHour, startMin] = this.config.quietHours.start.split(":").map(Number);
+    const [startHour, startMin] = this.config.quietHours.start
+      .split(":")
+      .map(Number);
     const [endHour, endMin] = this.config.quietHours.end.split(":").map(Number);
-    
+
     const startTime = startHour * 60 + startMin;
     const endTime = endHour * 60 + endMin;
 
@@ -359,7 +376,8 @@ export class RecommendationTriggerEngine {
 
     const lastTriggerDate = new Date(lastTime);
     const now = new Date();
-    const diffMinutes = (now.getTime() - lastTriggerDate.getTime()) / (1000 * 60);
+    const diffMinutes =
+      (now.getTime() - lastTriggerDate.getTime()) / (1000 * 60);
 
     return diffMinutes < this.config.cooldownPeriod;
   }
@@ -368,7 +386,7 @@ export class RecommendationTriggerEngine {
    * 检查是否超过每日限制
    */
   private exceedsDailyLimit(): boolean {
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toISOString().split("T")[0];
     const todayCount = this.dailyTriggerCount.get(today) || 0;
     return todayCount >= this.config.maxTriggersPerDay;
   }
@@ -384,7 +402,7 @@ export class RecommendationTriggerEngine {
    * 更新每日计数
    */
   private updateDailyCount(): void {
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toISOString().split("T")[0];
     const currentCount = this.dailyTriggerCount.get(today) || 0;
     this.dailyTriggerCount.set(today, currentCount + 1);
   }
@@ -395,10 +413,10 @@ export class RecommendationTriggerEngine {
   private cleanupEventHistory(): void {
     const now = new Date();
     const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-    
+
     // 清理24小时前的事件
     this.eventHistory = this.eventHistory.filter(
-      event => new Date(event.timestamp) > oneDayAgo
+      (event) => new Date(event.timestamp) > oneDayAgo,
     );
 
     // 清理过期的每日计数
@@ -408,8 +426,8 @@ export class RecommendationTriggerEngine {
         datesToDelete.push(date);
       }
     }
-    
-    datesToDelete.forEach(date => {
+
+    datesToDelete.forEach((date) => {
       this.dailyTriggerCount.delete(date);
     });
 
@@ -441,9 +459,9 @@ export class RecommendationTriggerEngine {
     triggersByType: Record<RecommendationTrigger, number>;
     averageTriggersPerDay: number;
   } {
-    const today = new Date().toISOString().split('T')[0];
-    const triggersToday = this.eventHistory.filter(
-      event => event.timestamp.startsWith(today)
+    const today = new Date().toISOString().split("T")[0];
+    const triggersToday = this.eventHistory.filter((event) =>
+      event.timestamp.startsWith(today),
     ).length;
 
     const triggersByType: Record<RecommendationTrigger, number> = {
@@ -455,14 +473,14 @@ export class RecommendationTriggerEngine {
       user_request: 0,
     };
 
-    this.eventHistory.forEach(event => {
+    this.eventHistory.forEach((event) => {
       triggersByType[event.type]++;
     });
 
     // 计算平均每日触发次数（基于最近7天）
     const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     const recentTriggers = this.eventHistory.filter(
-      event => new Date(event.timestamp) > sevenDaysAgo
+      (event) => new Date(event.timestamp) > sevenDaysAgo,
     ).length;
     const averageTriggersPerDay = recentTriggers / 7;
 

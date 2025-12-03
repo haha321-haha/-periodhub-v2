@@ -97,7 +97,11 @@ export const mockNutritionData = {
     },
     {
       name: "Spinach",
-      benefits: ["Boost Iron Levels", "Improve Circulation", "Support Immunity"],
+      benefits: [
+        "Boost Iron Levels",
+        "Improve Circulation",
+        "Support Immunity",
+      ],
       phase: "luteal" as MenstrualPhase,
       holisticNature: "warm" as HolisticNature,
       nutrients: ["Iron", "Vitamin C", "Folic Acid"],

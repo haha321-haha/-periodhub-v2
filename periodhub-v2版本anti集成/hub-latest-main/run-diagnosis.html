@@ -68,7 +68,7 @@
 <body>
     <div class="container">
         <h1>🔍 Onboarding 按钮诊断工具</h1>
-        
+
         <div class="step">
             <h3>使用说明：</h3>
             <ol>
@@ -78,36 +78,36 @@
                 <li>将结果复制给我</li>
             </ol>
         </div>
-        
+
         <button onclick="runDiagnosis()">🚀 执行诊断</button>
         <button onclick="copyResult()">📋 复制结果</button>
-        
+
         <div id="result" class="result" style="display:none;"></div>
     </div>
 
     <script>
         let diagnosisResult = '';
-        
+
         function runDiagnosis() {
             const resultDiv = document.getElementById('result');
             resultDiv.style.display = 'block';
             resultDiv.textContent = '正在诊断...\n';
-            
+
             // 检查是否在正确的页面
             if (!window.location.href.includes('localhost:3001')) {
                 resultDiv.textContent = '⚠️ 请先打开 http://localhost:3001/en/downloads 页面，然后刷新此页面再执行诊断。';
                 return;
             }
-            
+
             let output = '🔍 Onboarding 按钮诊断结果\n';
             output += '='.repeat(50) + '\n\n';
-            
+
             // 查找模态框
             const modal = Array.from(document.querySelectorAll('.fixed')).find(el => {
                 const zIndex = parseInt(window.getComputedStyle(el).zIndex) || 0;
                 return zIndex >= 99999 && el.querySelector('.bg-white.rounded-2xl');
             }) || document.querySelector('[class*="fixed"][class*="inset-0"]');
-            
+
             if (!modal) {
                 output += '❌ 未找到模态框！\n';
                 output += '请确保 onboarding 模态框已显示。\n';
@@ -115,12 +115,12 @@
                 diagnosisResult = output;
                 return;
             }
-            
+
             output += '✅ 找到模态框\n\n';
-            
+
             const buttons = modal.querySelectorAll('button');
             output += `找到 ${buttons.length} 个按钮\n\n`;
-            
+
             // 检查每个按钮
             buttons.forEach((btn, i) => {
                 const rect = btn.getBoundingClientRect();
@@ -128,16 +128,16 @@
                 const centerY = rect.top + rect.height / 2;
                 const elementsAtPoint = document.elementsFromPoint(centerX, centerY);
                 const styles = window.getComputedStyle(btn);
-                
+
                 const btnText = btn.textContent.trim().substring(0, 20) || btn.getAttribute('aria-label') || '无文本';
-                
+
                 output += `按钮 ${i+1}: ${btnText}\n`;
                 output += `  pointer-events: ${styles.pointerEvents}\n`;
                 output += `  cursor: ${styles.cursor}\n`;
                 output += `  z-index: ${styles.zIndex}\n`;
                 output += `  位置: (${Math.round(rect.left)}, ${Math.round(rect.top)})\n`;
                 output += `  大小: ${Math.round(rect.width)} x ${Math.round(rect.height)}\n`;
-                
+
                 // 检查覆盖层
                 if (elementsAtPoint[0] === btn) {
                     output += `  覆盖层: ✅ 未被覆盖（第一个元素是按钮本身）\n`;
@@ -147,36 +147,36 @@
                     output += `    z-index: ${window.getComputedStyle(elementsAtPoint[0]).zIndex}\n`;
                     output += `    pointer-events: ${window.getComputedStyle(elementsAtPoint[0]).pointerEvents}\n`;
                 }
-                
+
                 // 测试点击
                 let clicked = false;
                 const clickHandler = () => { clicked = true; };
                 btn.addEventListener('click', clickHandler, { once: true });
                 btn.click();
                 btn.removeEventListener('click', clickHandler);
-                
+
                 if (clicked) {
                     output += `  点击测试: ✅ 成功（事件被触发）\n`;
                 } else {
                     output += `  点击测试: ❌ 失败（事件未触发）\n`;
                 }
-                
+
                 output += '\n';
             });
-            
+
             output += '='.repeat(50) + '\n';
             output += '诊断完成！请将以上结果复制给我。\n';
-            
+
             resultDiv.textContent = output;
             diagnosisResult = output;
         }
-        
+
         function copyResult() {
             if (!diagnosisResult) {
                 alert('请先执行诊断！');
                 return;
             }
-            
+
             navigator.clipboard.writeText(diagnosisResult).then(() => {
                 alert('✅ 结果已复制到剪贴板！');
             }).catch(() => {
@@ -193,5 +193,3 @@
     </script>
 </body>
 </html>
-
-

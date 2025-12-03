@@ -45,36 +45,40 @@ export default function Footer() {
     // 延迟执行，确保所有组件都已挂载
     const timer = setTimeout(() => {
       removeAllListeners();
-      
+
       // 重新添加我们自己的点击处理
-      const allLinks = footer.querySelectorAll('a');
-      allLinks.forEach(link => {
+      const allLinks = footer.querySelectorAll("a");
+      allLinks.forEach((link) => {
         const a = link as HTMLAnchorElement;
-        const href = a.getAttribute('href');
-        
+        const href = a.getAttribute("href");
+
         if (href) {
           // 移除所有现有事件
           a.replaceWith(a.cloneNode(true));
-          
+
           // 重新获取元素并添加事件
-          const newLink = footer.querySelector(`a[href="${href}"]`) as HTMLAnchorElement;
+          const newLink = footer.querySelector(
+            `a[href="${href}"]`,
+          ) as HTMLAnchorElement;
           if (newLink) {
             newLink.onclick = (e) => {
               e.preventDefault();
               e.stopPropagation();
               e.stopImmediatePropagation();
-              console.log('Footer 强制点击:', href);
-              
+              console.log("Footer 强制点击:", href);
+
               // 强制跳转
-              window.location.href = href.startsWith('/') ? `/${locale}${href}` : href;
+              window.location.href = href.startsWith("/")
+                ? `/${locale}${href}`
+                : href;
               return false;
             };
-            
+
             // 强制样式
-            newLink.style.pointerEvents = 'auto';
-            newLink.style.cursor = 'pointer';
-            newLink.style.zIndex = '999999';
-            newLink.style.position = 'relative';
+            newLink.style.pointerEvents = "auto";
+            newLink.style.cursor = "pointer";
+            newLink.style.zIndex = "999999";
+            newLink.style.position = "relative";
           }
         }
       });
@@ -89,20 +93,25 @@ export default function Footer() {
     e.preventDefault();
     e.stopPropagation();
     // stopImmediatePropagation 在 React 事件中可能不可用，使用原生事件
-    const nativeEvent = e.nativeEvent as Event & { stopImmediatePropagation?: () => void };
-    if (nativeEvent && typeof nativeEvent.stopImmediatePropagation === 'function') {
+    const nativeEvent = e.nativeEvent as Event & {
+      stopImmediatePropagation?: () => void;
+    };
+    if (
+      nativeEvent &&
+      typeof nativeEvent.stopImmediatePropagation === "function"
+    ) {
       nativeEvent.stopImmediatePropagation();
     }
-    
+
     // 设置事件对象的 cancelled 属性（兼容旧浏览器）
-    if ('cancelBubble' in e.nativeEvent) {
+    if ("cancelBubble" in e.nativeEvent) {
       (e.nativeEvent as Event & { cancelBubble?: boolean }).cancelBubble = true;
     }
-    
-    console.log('Footer 原生点击处理:', href);
-    
+
+    console.log("Footer 原生点击处理:", href);
+
     // 直接修改 location，不使用任何可能被拦截的方法
-    const finalHref = href.startsWith('/') ? `/${locale}${href}` : href;
+    const finalHref = href.startsWith("/") ? `/${locale}${href}` : href;
     window.location.replace(finalHref);
   };
 
@@ -110,25 +119,28 @@ export default function Footer() {
     <footer
       ref={footerRef}
       className="bg-neutral-100 dark:bg-slate-800 border-t border-neutral-200 dark:border-slate-700"
-      style={{ 
-        pointerEvents: 'auto' as const, 
+      style={{
+        pointerEvents: "auto" as const,
         zIndex: 999999,
-        position: 'relative',
-        isolation: 'isolate',
-        userSelect: 'auto'
+        position: "relative",
+        isolation: "isolate",
+        userSelect: "auto",
       }}
       suppressHydrationWarning={true}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Footer 容器点击被拦截');
+        console.log("Footer 容器点击被拦截");
       }}
     >
-      <div className="container-custom py-12" style={{ 
-        pointerEvents: 'auto' as const,
-        position: 'relative',
-        isolation: 'isolate'
-      }}>
+      <div
+        className="container-custom py-12"
+        style={{
+          pointerEvents: "auto" as const,
+          position: "relative",
+          isolation: "isolate",
+        }}
+      >
         {/* Main Footer Content - 4 Column Layout */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Column 1: Brand */}
@@ -138,13 +150,13 @@ export default function Footer() {
               <a
                 href={`/${locale}`}
                 className="font-bold text-xl text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative',
-                  textDecoration: 'none',
-                  color: 'inherit'
+                  position: "relative",
+                  textDecoration: "none",
+                  color: "inherit",
                 }}
                 onClick={(e) => handleNativeClick(e, `/${locale}`)}
                 onMouseDown={(e) => {
@@ -170,11 +182,11 @@ export default function Footer() {
               <a
                 href="/interactive-tools"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/interactive-tools`)}
                 onMouseDown={(e) => {
@@ -188,11 +200,11 @@ export default function Footer() {
               <a
                 href="/interactive-tools"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/interactive-tools`)}
                 onMouseDown={(e) => {
@@ -206,11 +218,11 @@ export default function Footer() {
               <a
                 href="/interactive-tools"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/interactive-tools`)}
                 onMouseDown={(e) => {
@@ -224,11 +236,11 @@ export default function Footer() {
               <a
                 href="/interactive-tools"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/interactive-tools`)}
                 onMouseDown={(e) => {
@@ -251,11 +263,11 @@ export default function Footer() {
               <a
                 href="/downloads"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/downloads`)}
                 onMouseDown={(e) => {
@@ -269,11 +281,11 @@ export default function Footer() {
               <a
                 href="/natural-therapies"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/natural-therapies`)}
                 onMouseDown={(e) => {
@@ -287,11 +299,11 @@ export default function Footer() {
               <a
                 href="/interactive-tools"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/interactive-tools`)}
                 onMouseDown={(e) => {
@@ -305,11 +317,11 @@ export default function Footer() {
               <a
                 href="/downloads"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/downloads`)}
                 onMouseDown={(e) => {
@@ -332,11 +344,11 @@ export default function Footer() {
               <a
                 href="/privacy-policy"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/privacy-policy`)}
                 onMouseDown={(e) => {
@@ -350,11 +362,11 @@ export default function Footer() {
               <a
                 href="/privacy-policy"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/privacy-policy`)}
                 onMouseDown={(e) => {
@@ -368,29 +380,32 @@ export default function Footer() {
               <a
                 href="/settings/data-management"
                 className="text-sm text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors font-medium"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
-                onClick={(e) => handleNativeClick(e, `/settings/data-management`)}
+                onClick={(e) =>
+                  handleNativeClick(e, `/settings/data-management`)
+                }
                 onMouseDown={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   handleNativeClick(e, `/settings/data-management`);
                 }}
               >
-                🚨 {t("links.legal.clear_all_data", { default: "Clear All Data" })}
+                🚨{" "}
+                {t("links.legal.clear_all_data", { default: "Clear All Data" })}
               </a>
               <a
                 href="/terms-of-service"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/terms-of-service`)}
                 onMouseDown={(e) => {
@@ -404,11 +419,11 @@ export default function Footer() {
               <a
                 href="/medical-disclaimer"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => handleNativeClick(e, `/medical-disclaimer`)}
                 onMouseDown={(e) => {
@@ -433,16 +448,19 @@ export default function Footer() {
               <a
                 href="mailto:tiyibaofu@outlook.com"
                 className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
-                  window.location.href = generateMailtoLink(emailSubject, emailBody);
+                  window.location.href = generateMailtoLink(
+                    emailSubject,
+                    emailBody,
+                  );
                 }}
                 onContextMenu={(e) => e.preventDefault()}
               >
@@ -457,11 +475,11 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
-                style={{ 
-                  pointerEvents: 'auto' as const, 
-                  cursor: 'pointer !important',
+                style={{
+                  pointerEvents: "auto" as const,
+                  cursor: "pointer !important",
                   zIndex: 999999,
-                  position: 'relative'
+                  position: "relative",
                 }}
                 title={t("socialDiscord")}
                 onClick={(e) => e.stopPropagation()}

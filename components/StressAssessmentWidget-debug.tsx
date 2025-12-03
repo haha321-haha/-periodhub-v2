@@ -53,9 +53,15 @@ const questions = [
     questionKey: "stressManagement.questions.emotional.title",
     options: [
       { key: "stressManagement.questions.emotional.options.calm", value: 0 },
-      { key: "stressManagement.questions.emotional.options.slightly_anxious", value: 1 },
+      {
+        key: "stressManagement.questions.emotional.options.slightly_anxious",
+        value: 1,
+      },
       { key: "stressManagement.questions.emotional.options.anxious", value: 2 },
-      { key: "stressManagement.questions.emotional.options.very_anxious", value: 3 },
+      {
+        key: "stressManagement.questions.emotional.options.very_anxious",
+        value: 3,
+      },
     ],
   },
   {
@@ -88,21 +94,24 @@ export default function StressAssessmentWidgetDebug() {
 
   // 添加调试信息
   const addDebugInfo = (info: string) => {
-    setDebugInfo(prev => [...prev, `${new Date().toLocaleTimeString()}: ${info}`]);
+    setDebugInfo((prev) => [
+      ...prev,
+      `${new Date().toLocaleTimeString()}: ${info}`,
+    ]);
     console.log(`🔍 [DEBUG] ${info}`);
   };
 
   // Check for global payment function on mount
   useEffect(() => {
     addDebugInfo("组件已挂载");
-    
+
     // 检查全局函数是否存在
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       addDebugInfo("窗口对象存在");
-      
-      const hasHandleProUpgrade = 'handleProUpgrade' in window;
+
+      const hasHandleProUpgrade = "handleProUpgrade" in window;
       addDebugInfo(`handleProUpgrade 存在: ${hasHandleProUpgrade}`);
-      
+
       if (hasHandleProUpgrade) {
         const handleProUpgrade = window.handleProUpgrade;
         addDebugInfo(`handleProUpgrade 类型: ${typeof handleProUpgrade}`);
@@ -144,23 +153,31 @@ export default function StressAssessmentWidgetDebug() {
   const handleUnlockPremium = () => {
     addDebugInfo("🔓 解锁高级版按钮被点击");
     // 使用logger而不是console.log（开发环境自动启用，生产环境自动禁用）
-    logInfo('🔓 解锁高级版按钮被点击', undefined, 'StressAssessmentWidget-debug');
-    
+    logInfo(
+      "🔓 解锁高级版按钮被点击",
+      undefined,
+      "StressAssessmentWidget-debug",
+    );
+
     // 检查全局函数是否存在
-    if (typeof window !== 'undefined' && window.handleProUpgrade) {
+    if (typeof window !== "undefined" && window.handleProUpgrade) {
       const score = calculateScore(answers);
       addDebugInfo(`全局函数存在，准备调用，评分: ${score}`);
-      
+
       window.handleProUpgrade({
-        plan: 'oneTime',
-        painPoint: 'stress_management_assessment',
+        plan: "oneTime",
+        painPoint: "stress_management_assessment",
         assessmentScore: score,
         answers: answers,
       });
     } else {
       addDebugInfo("❌ 全局支付函数不存在");
-      logError('❌ 全局支付函数不存在', undefined, 'StressAssessmentWidget-debug');
-      alert('支付功能暂时不可用，请稍后重试。');
+      logError(
+        "❌ 全局支付函数不存在",
+        undefined,
+        "StressAssessmentWidget-debug",
+      );
+      alert("支付功能暂时不可用，请稍后重试。");
     }
   };
 
@@ -228,7 +245,7 @@ export default function StressAssessmentWidgetDebug() {
   const DebugPanel = () => (
     <div className="fixed bottom-4 right-4 w-80 h-64 bg-gray-900 text-white p-4 rounded-lg shadow-lg overflow-y-auto z-50">
       <h3 className="font-bold mb-2">调试信息</h3>
-      <button 
+      <button
         onClick={() => setDebugInfo([])}
         className="mb-2 px-2 py-1 bg-blue-600 rounded text-xs"
       >
@@ -242,7 +259,9 @@ export default function StressAssessmentWidgetDebug() {
         ))}
       </div>
       <div className="mt-2 pt-2 border-t border-gray-700">
-        <p>当前问题: {currentQuestion + 1}/{questions.length}</p>
+        <p>
+          当前问题: {currentQuestion + 1}/{questions.length}
+        </p>
         <p>回答数量: {answers.length}</p>
         <p>付费墙: {showPaywall ? "显示" : "隐藏"}</p>
         <p>结果页: {showResults ? "显示" : "隐藏"}</p>
@@ -255,8 +274,8 @@ export default function StressAssessmentWidgetDebug() {
     return (
       <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
         {/* Debug Panel for Development */}
-        {process.env.NODE_ENV === 'development' && <DebugPanel />}
-        
+        {process.env.NODE_ENV === "development" && <DebugPanel />}
+
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mb-4">
             <span className="text-3xl">🔒</span>
@@ -327,7 +346,7 @@ export default function StressAssessmentWidgetDebug() {
           >
             {t("buttons.viewFreeResults")}
           </button>
-          
+
           {/* Enhanced payment button with debug */}
           <button
             onClick={() => {
@@ -337,7 +356,7 @@ export default function StressAssessmentWidgetDebug() {
             onMouseDown={() => addDebugInfo("按钮 onMouseDown 事件")}
             onMouseUp={() => addDebugInfo("按钮 onMouseUp 事件")}
             className="flex-1 bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-shadow relative z-10"
-            style={{ pointerEvents: 'auto' }}
+            style={{ pointerEvents: "auto" }}
           >
             {t("buttons.unlockPremium")}
           </button>
@@ -354,13 +373,16 @@ export default function StressAssessmentWidgetDebug() {
   return (
     <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
       {/* Debug Panel for Development */}
-      {process.env.NODE_ENV === 'development' && <DebugPanel />}
-      
+      {process.env.NODE_ENV === "development" && <DebugPanel />}
+
       {/* Progress bar */}
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
           <span className="text-sm text-gray-600">
-            {ui("progress.question", { current: currentQuestion + 1, total: questions.length })}
+            {ui("progress.question", {
+              current: currentQuestion + 1,
+              total: questions.length,
+            })}
           </span>
           <span className="text-sm text-gray-600">
             {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
@@ -369,7 +391,9 @@ export default function StressAssessmentWidgetDebug() {
         <div className="w-full bg-gray-200 rounded-full h-2">
           <div
             className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-            style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+            style={{
+              width: `${((currentQuestion + 1) / questions.length) * 100}%`,
+            }}
           ></div>
         </div>
       </div>

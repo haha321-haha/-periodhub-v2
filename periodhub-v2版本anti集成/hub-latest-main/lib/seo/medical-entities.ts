@@ -1,7 +1,7 @@
 /**
  * Medical Entities Database
  * 医学实体数据库
- * 
+ *
  * 包含医学病症、药物、治疗方法的标准化编码
  * 支持 ICD-10, SNOMED CT, MeSH, RxNorm 等编码系统
  */
@@ -27,9 +27,17 @@ export const MEDICAL_ENTITIES: Record<string, MedicalEntity> = {
     snomed: "266599006",
     mesh: "D004412",
     category: "Gynecological Condition",
-    relatedConditions: ["ENDOMETRIOSIS", "PMS", "PREMENSTRUAL_DYSPHORIC_DISORDER"],
+    relatedConditions: [
+      "ENDOMETRIOSIS",
+      "PMS",
+      "PREMENSTRUAL_DYSPHORIC_DISORDER",
+    ],
     associatedAnatomy: ["Uterus", "Pelvis"],
-    possibleTreatment: ["NSAID_DRUGS", "HORMONAL_CONTRACEPTION", "HEAT_THERAPY"],
+    possibleTreatment: [
+      "NSAID_DRUGS",
+      "HORMONAL_CONTRACEPTION",
+      "HEAT_THERAPY",
+    ],
   },
   ENDOMETRIOSIS: {
     name: "Endometriosis",
@@ -136,7 +144,11 @@ export const MEDICAL_ENTITIES: Record<string, MedicalEntity> = {
     category: "Endocrine Disorder",
     relatedConditions: ["AMENORRHEA", "INFERTILITY", "DIABETES"],
     associatedAnatomy: ["Ovaries", "Endocrine System"],
-    possibleTreatment: ["METFORMIN", "HORMONAL_CONTRACEPTION", "LIFESTYLE_MODIFICATIONS"],
+    possibleTreatment: [
+      "METFORMIN",
+      "HORMONAL_CONTRACEPTION",
+      "LIFESTYLE_MODIFICATIONS",
+    ],
   },
 
   FIBROIDS: {
@@ -148,7 +160,11 @@ export const MEDICAL_ENTITIES: Record<string, MedicalEntity> = {
     category: "Gynecological Condition",
     relatedConditions: ["MENORRHAGIA", "DYSMENORRHEA"],
     associatedAnatomy: ["Uterus"],
-    possibleTreatment: ["SURGERY", "Uterine Artery Embolization", "HORMONAL_THERAPY"],
+    possibleTreatment: [
+      "SURGERY",
+      "Uterine Artery Embolization",
+      "HORMONAL_THERAPY",
+    ],
   },
 
   INFERTILITY: {
@@ -158,7 +174,11 @@ export const MEDICAL_ENTITIES: Record<string, MedicalEntity> = {
     snomed: "386661006",
     mesh: "D007246",
     category: "Reproductive Health",
-    relatedConditions: ["ENDOMETRIOSIS", "POLYCYSTIC_OVARY_SYNDROME", "AMENORRHEA"],
+    relatedConditions: [
+      "ENDOMETRIOSIS",
+      "POLYCYSTIC_OVARY_SYNDROME",
+      "AMENORRHEA",
+    ],
     associatedAnatomy: ["Uterus", "Ovaries", "Fallopian Tubes"],
     possibleTreatment: ["FERTILITY_TREATMENT", "IVF", "SURGERY"],
   },
@@ -166,7 +186,7 @@ export const MEDICAL_ENTITIES: Record<string, MedicalEntity> = {
 
 /**
  * 获取医学实体的 Schema.org MedicalCode 数组
- * 
+ *
  * @param entity 医学实体
  * @param entityKey 实体键（用于多语言编码）
  * @param locale 语言环境（用于多语言编码）
@@ -175,7 +195,7 @@ export function getMedicalCodes(
   entity: MedicalEntity,
   entityKey?: keyof typeof MEDICAL_ENTITIES,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _locale: "en" | "zh" = "en"
+  _locale: "en" | "zh" = "en",
 ): Array<{
   "@type": "MedicalCode";
   code: string;
@@ -233,16 +253,17 @@ export function getMedicalCodes(
  */
 export function getMedicalConditionSchema(
   entityKey: keyof typeof MEDICAL_ENTITIES,
-  locale: "en" | "zh" = "en"
+  locale: "en" | "zh" = "en",
 ) {
   const entity = MEDICAL_ENTITIES[entityKey];
   if (!entity) {
     throw new Error(`Medical entity not found: ${entityKey}`);
   }
 
-  const name = locale === "zh" && entity.alternateName[2] 
-    ? entity.alternateName[2] 
-    : entity.name;
+  const name =
+    locale === "zh" && entity.alternateName[2]
+      ? entity.alternateName[2]
+      : entity.name;
 
   return {
     "@type": "MedicalCondition",

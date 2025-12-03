@@ -7,11 +7,14 @@ interface DataLayerEvent {
   [key: string]: unknown;
 }
 
-export const trackEvent = (eventName: string, params?: Record<string, unknown>) => {
+export const trackEvent = (
+  eventName: string,
+  params?: Record<string, unknown>,
+) => {
   // Log to console for development
-  if (typeof window !== 'undefined') {
-    const isDev = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-    
+  if (typeof window !== "undefined") {
+    const isDev = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+
     if (isDev) {
       console.log(`[Analytics] Event: ${eventName}`, params);
     }
@@ -23,20 +26,15 @@ export const trackEvent = (eventName: string, params?: Record<string, unknown>) 
     }
     const win = window as WindowWithDataLayer;
     win.dataLayer = win.dataLayer || [];
-    win.dataLayer.push({ 
-      event: eventName, 
+    win.dataLayer.push({
+      event: eventName,
       ...params,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     // Direct GA4 fallback (if gtag is manually implemented without GTM)
     if (window.gtag) {
-      window.gtag('event', eventName, params);
+      window.gtag("event", eventName, params);
     }
   }
 };
-
-
-
-
-

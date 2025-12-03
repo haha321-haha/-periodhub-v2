@@ -12,7 +12,7 @@
     "step3Desc": "Receive health advice and care plans tailored to your individual situation",
     "step4": "Continuous Optimization",
     "step4Desc": "Continuously optimize recommendations based on your feedback for increasing accuracy",
-    
+
     "filter": "Filter",
     "sortBy": "Sort By",
     "refresh": "Refresh",
@@ -23,32 +23,32 @@
     "autoRefreshOn": "Auto Refresh On",
     "autoRefreshOff": "Auto Refresh Off",
     "close": "Close",
-    
+
     "timeRange": "Time Range",
     "thisWeek": "This Week",
     "thisMonth": "This Month",
     "allTime": "All Time",
     "lastUpdated": "Last Updated",
-    
+
     "status": "Status",
     "priority": "Priority",
     "type": "Type",
     "date": "Date",
     "score": "Score",
-    
+
     "allStatuses": "All Statuses",
     "active": "Active",
     "viewed": "Viewed",
     "saved": "Saved",
     "completed": "Completed",
-    
+
     "allPriorities": "All Priorities",
     "urgent": "Urgent",
     "high": "High",
     "medium": "Medium",
     "low": "Low",
     "normal": "Normal",
-    
+
     "allTypes": "All Types",
     "nutrition": "Nutrition",
     "exercise": "Exercise",
@@ -58,7 +58,7 @@
     "medical": "Medical",
     "lifestyle": "Lifestyle",
     "emergency": "Emergency",
-    
+
     "resetFilters": "Reset Filters",
     "noRecommendations": "No Recommendations",
     "noFilteredRecommendations": "No recommendations match the current filters",
@@ -66,7 +66,7 @@
     "checkBackLater": "Please check back later",
     "showingNOfM": "Showing {count} of {total}",
     "viewAllRecommendations": "View All Recommendations",
-    
+
     "markAsComplete": "Mark as Complete",
     "save": "Save",
     "saved": "Saved",
@@ -77,22 +77,22 @@
     "rate": "Rate",
     "rateThisRecommendation": "Rate this recommendation",
     "cancel": "Cancel",
-    
+
     "actionSteps": "Action Steps",
     "relatedResources": "Related Resources",
-    
+
     "todayHighlights": "Today's Highlights",
     "categoryInsights": "Category Insights",
     "weeklyProgress": "Weekly Progress",
     "activeStatus": "Active Status",
-    
+
     "totalRecommendations": "Total Recommendations",
     "urgentItems": "Urgent Items",
     "completionRate": "Completion Rate",
     "averageRating": "Average Rating",
     "count": "Count",
     "effectiveness": "Effectiveness",
-    
+
     "completionProgress": "Completion Progress",
     "completed": "Completed",
     "activeRecommendations": "Active Recommendations",

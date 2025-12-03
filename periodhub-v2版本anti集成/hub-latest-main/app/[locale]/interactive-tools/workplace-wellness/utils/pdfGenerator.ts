@@ -333,7 +333,9 @@ export class PDFGenerator {
       return `
         <div class="data-section">
           <h3>${this.t("pdf.periodData")}</h3>
-          <p style="color: #666; font-style: italic;">${this.t("pdf.noPeriodData")}</p>
+          <p style="color: #666; font-style: italic;">${this.t(
+            "pdf.noPeriodData",
+          )}</p>
         </div>
       `;
     }
@@ -391,7 +393,9 @@ export class PDFGenerator {
       return `
         <div class="data-section">
           <h3>${this.t("pdf.nutritionData")}</h3>
-          <p style="color: #666; font-style: italic;">${this.t("pdf.noNutritionData")}</p>
+          <p style="color: #666; font-style: italic;">${this.t(
+            "pdf.noNutritionData",
+          )}</p>
         </div>
       `;
     }

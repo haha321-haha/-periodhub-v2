@@ -1,7 +1,7 @@
 /**
  * Citations Database
  * 引用数据库
- * 
+ *
  * 包含权威医学来源的引用信息
  * 用于建立医学内容的权威性和可信度
  */
@@ -22,7 +22,8 @@ export interface Citation {
 export const CITATIONS: Record<string, Citation> = {
   ACOG_DYSMENORRHEA: {
     id: "ACOG_DYSMENORRHEA",
-    title: "ACOG Practice Bulletin: Dysmenorrhea and Endometriosis in the Adolescent",
+    title:
+      "ACOG Practice Bulletin: Dysmenorrhea and Endometriosis in the Adolescent",
     url: "https://www.acog.org/clinical/clinical-guidance/practice-bulletin/articles/2018/07/dysmenorrhea-and-endometriosis-in-the-adolescent",
     year: 2018,
     credibility: "high",
@@ -114,13 +115,7 @@ export function getCitationSchema(citationKey: keyof typeof CITATIONS) {
  * 获取多个引用的 Schema.org 数组
  */
 export function getCitationsSchema(
-  citationKeys: Array<keyof typeof CITATIONS>
+  citationKeys: Array<keyof typeof CITATIONS>,
 ) {
   return citationKeys.map((key) => getCitationSchema(key));
 }
-
-
-
-
-
-

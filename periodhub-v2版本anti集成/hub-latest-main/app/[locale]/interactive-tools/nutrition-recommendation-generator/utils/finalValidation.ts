@@ -285,7 +285,9 @@ export class FinalValidator {
       // 检查数据完整性
       const menstrualPhases = Object.keys(nutritionData.menstrualPhaseData);
       const healthGoals = Object.keys(nutritionData.healthGoalData);
-      const holisticHealthConstitutions = Object.keys(nutritionData.holisticHealthConstitutionData);
+      const holisticHealthConstitutions = Object.keys(
+        nutritionData.holisticHealthConstitutionData,
+      );
 
       if (
         menstrualPhases.length === 0 ||

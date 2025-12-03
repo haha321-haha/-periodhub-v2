@@ -1,49 +1,61 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { 
-  User, 
-  Settings, 
-  Shield, 
-  Bell, 
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  User,
+  Settings,
+  Shield,
+  Bell,
   CreditCard,
   ArrowLeft,
   Mail,
-  Calendar
-} from 'lucide-react';
-import Link from 'next/link';
-import { verifySubscriptionWithCache, type SubscriptionStatus } from '@/lib/subscription';
+  Calendar,
+} from "lucide-react";
+import Link from "next/link";
+import {
+  verifySubscriptionWithCache,
+  type SubscriptionStatus,
+} from "@/lib/subscription";
 
 export default function ProfilePage() {
-  const t = useTranslations('profile');
+  const t = useTranslations("profile");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [userEmail, setUserEmail] = useState<string>('');
-  const [subscriptionStatus, setSubscriptionStatus] = useState<SubscriptionStatus | null>(null);
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [subscriptionStatus, setSubscriptionStatus] =
+    useState<SubscriptionStatus | null>(null);
 
   useEffect(() => {
     // 获取用户邮箱
-    const email = localStorage.getItem('periodhub_email') || '';
+    const email = localStorage.getItem("periodhub_email") || "";
     setUserEmail(email);
 
     if (!email) {
       // 如果没有邮箱，重定向到首页
-      router.push('/');
+      router.push("/");
       return;
     }
 
     // 验证订阅状态
-    verifySubscriptionWithCache(email).then(status => {
-      setSubscriptionStatus(status);
-      setIsLoading(false);
-    }).catch(error => {
-      console.error('验证订阅状态失败:', error);
-      setIsLoading(false);
-    });
+    verifySubscriptionWithCache(email)
+      .then((status) => {
+        setSubscriptionStatus(status);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("验证订阅状态失败:", error);
+        setIsLoading(false);
+      });
   }, [router]);
 
   if (isLoading) {
@@ -70,7 +82,7 @@ export default function ProfilePage() {
                   返回仪表板
                 </Button>
               </Link>
-              <h1 className="text-xl font-bold text-gray-900">{t('title')}</h1>
+              <h1 className="text-xl font-bold text-gray-900">{t("title")}</h1>
             </div>
             <div className="flex items-center gap-4">
               <Link href="/">
@@ -90,9 +102,9 @@ export default function ProfilePage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <User className="w-5 h-5 text-purple-600" />
-              {t('user.name')}
+              {t("user.name")}
             </CardTitle>
-            <CardDescription>{t('description')}</CardDescription>
+            <CardDescription>{t("description")}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -103,14 +115,22 @@ export default function ProfilePage() {
               </div>
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-gray-500" />
-                <span className="text-sm text-gray-600">{t('user.memberSince.label')}:</span>
-                <span className="font-medium">{t('user.memberSince.value')}</span>
+                <span className="text-sm text-gray-600">
+                  {t("user.memberSince.label")}:
+                </span>
+                <span className="font-medium">
+                  {t("user.memberSince.value")}
+                </span>
               </div>
               <div className="flex items-center gap-2">
                 <CreditCard className="w-4 h-4 text-gray-500" />
-                <span className="text-sm text-gray-600">{t('user.subscription.label')}:</span>
+                <span className="text-sm text-gray-600">
+                  {t("user.subscription.label")}:
+                </span>
                 <span className="font-medium">
-                  {subscriptionStatus?.type === 'one_time' ? '一次性购买' : 'PeriodHub Pro'}
+                  {subscriptionStatus?.type === "one_time"
+                    ? "一次性购买"
+                    : "PeriodHub Pro"}
                 </span>
               </div>
             </div>
@@ -122,7 +142,7 @@ export default function ProfilePage() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Settings className="w-5 h-5 text-blue-600" />
-              {t('settings.title')}
+              {t("settings.title")}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -131,15 +151,17 @@ export default function ProfilePage() {
                 <div className="flex items-center gap-3">
                   <CreditCard className="w-5 h-5 text-gray-600" />
                   <div>
-                    <h3 className="font-medium">{t('settings.managePlan')}</h3>
+                    <h3 className="font-medium">{t("settings.managePlan")}</h3>
                     <p className="text-sm text-gray-500">
-                      {subscriptionStatus?.status === 'active' ? '管理您的订阅' : '升级到 Pro'}
+                      {subscriptionStatus?.status === "active"
+                        ? "管理您的订阅"
+                        : "升级到 Pro"}
                     </p>
                   </div>
                 </div>
                 <Link href="/pricing">
                   <Button variant="outline">
-                    {subscriptionStatus?.status === 'active' ? '管理' : '升级'}
+                    {subscriptionStatus?.status === "active" ? "管理" : "升级"}
                   </Button>
                 </Link>
               </div>
@@ -148,7 +170,9 @@ export default function ProfilePage() {
                 <div className="flex items-center gap-3">
                   <Bell className="w-5 h-5 text-gray-600" />
                   <div>
-                    <h3 className="font-medium">{t('settings.notifications')}</h3>
+                    <h3 className="font-medium">
+                      {t("settings.notifications")}
+                    </h3>
                     <p className="text-sm text-gray-500">管理通知偏好</p>
                   </div>
                 </div>
@@ -161,7 +185,7 @@ export default function ProfilePage() {
                 <div className="flex items-center gap-3">
                   <Shield className="w-5 h-5 text-gray-600" />
                   <div>
-                    <h3 className="font-medium">{t('settings.privacy')}</h3>
+                    <h3 className="font-medium">{t("settings.privacy")}</h3>
                     <p className="text-sm text-gray-500">隐私和安全设置</p>
                   </div>
                 </div>
@@ -177,12 +201,12 @@ export default function ProfilePage() {
         <div className="mt-8 flex flex-col sm:flex-row gap-4">
           <Link href="/dashboard" className="flex-1">
             <Button className="flex-1 w-full">
-              {t('actions.backToDashboard')}
+              {t("actions.backToDashboard")}
             </Button>
           </Link>
           <Link href="/" className="flex-1">
             <Button variant="outline" className="flex-1 w-full">
-              {t('actions.backToHome')}
+              {t("actions.backToHome")}
             </Button>
           </Link>
         </div>

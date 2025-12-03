@@ -24,7 +24,3 @@ export default function FirstWeekActivationWrapper() {
 
   return <FirstWeekActivation userTier={userTier} />;
 }
-
-
-
-

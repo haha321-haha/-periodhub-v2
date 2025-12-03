@@ -15,12 +15,11 @@ import type { ComponentType, LazyExoticComponent } from "react";
  * - MemoExoticComponent
  * - LazyExoticComponent
  */
-export type ExtractComponentProps<T> =
-  T extends ComponentType<infer P>
-    ? P extends object
-      ? P
-      : Record<string, never>
-    : Record<string, never>;
+export type ExtractComponentProps<T> = T extends ComponentType<infer P>
+  ? P extends object
+    ? P
+    : Record<string, never>
+  : Record<string, never>;
 
 /**
  * Lazy 组件包装器 Props

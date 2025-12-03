@@ -9,7 +9,9 @@ interface PageProps {
   };
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const locale = params.locale;
   const t = await getTranslations({ locale, namespace: "stressManagement" });
 
@@ -35,7 +37,8 @@ export default async function StressManagementDebugPage({ params }: PageProps) {
           </p>
           <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded-lg mb-6">
             <p className="text-sm">
-              <strong>调试版本:</strong> 此版本包含额外的调试信息，用于诊断支付按钮点击问题。
+              <strong>调试版本:</strong>{" "}
+              此版本包含额外的调试信息，用于诊断支付按钮点击问题。
             </p>
           </div>
         </header>

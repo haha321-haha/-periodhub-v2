@@ -1,12 +1,12 @@
 /**
  * GEO SEO优化器
  * Geographic SEO Optimizer
- * 
+ *
  * 根据用户地理位置优化SEO内容
  * Optimize SEO content based on user geographic location
  */
 
-import type { GeoLocation } from './geoip-service';
+import type { GeoLocation } from "./geoip-service";
 
 export interface GeoSEOConfig {
   location: GeoLocation;
@@ -21,31 +21,31 @@ export interface GeoSEOConfig {
 export function generateGeoKeywords(config: GeoSEOConfig): string[] {
   const { location } = config;
   const baseKeywords = [
-    'period health',
-    'menstrual cycle',
-    'period pain relief',
+    "period health",
+    "menstrual cycle",
+    "period pain relief",
   ];
-  
+
   // 根据地理位置添加本地化关键词
-  if (location.countryCode === 'CN') {
+  if (location.countryCode === "CN") {
     return [
       ...baseKeywords,
-      '经期健康',
-      '痛经缓解',
-      '月经周期管理',
-      '中国女性健康',
+      "经期健康",
+      "痛经缓解",
+      "月经周期管理",
+      "中国女性健康",
     ];
   }
-  
-  if (location.countryCode === 'US') {
+
+  if (location.countryCode === "US") {
     return [
       ...baseKeywords,
-      'women health',
-      'period management',
-      'menstrual health',
+      "women health",
+      "period management",
+      "menstrual health",
     ];
   }
-  
+
   return baseKeywords;
 }
 
@@ -53,21 +53,23 @@ export function generateGeoKeywords(config: GeoSEOConfig): string[] {
  * 生成地理位置相关的结构化数据
  * Generate location-based structured data
  */
-export function generateGeoStructuredData(config: GeoSEOConfig): Record<string, unknown> {
+export function generateGeoStructuredData(
+  config: GeoSEOConfig,
+): Record<string, unknown> {
   const { location, baseUrl } = config;
-  
+
   return {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'PeriodHub',
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "PeriodHub",
     address: {
-      '@type': 'PostalAddress',
+      "@type": "PostalAddress",
       addressCountry: location.countryCode,
       addressLocality: location.city,
       addressRegion: location.region,
     },
     areaServed: {
-      '@type': 'Country',
+      "@type": "Country",
       name: location.country,
     },
     url: baseUrl,
@@ -80,17 +82,15 @@ export function generateGeoStructuredData(config: GeoSEOConfig): Record<string, 
  */
 export function optimizeMetadataForGeo(
   metadata: Record<string, unknown>,
-  config: GeoSEOConfig
+  config: GeoSEOConfig,
 ): Record<string, unknown> {
   const geoKeywords = generateGeoKeywords(config);
-  
+
   return {
     ...metadata,
     keywords: [
       ...(Array.isArray(metadata.keywords) ? metadata.keywords : []),
       ...geoKeywords,
-    ].join(', '),
+    ].join(", "),
   };
 }
-
-

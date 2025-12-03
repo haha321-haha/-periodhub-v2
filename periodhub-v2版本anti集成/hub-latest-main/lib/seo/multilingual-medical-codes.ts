@@ -1,7 +1,7 @@
 /**
  * Multilingual Medical Codes System
  * 多语言医学编码系统
- * 
+ *
  * 扩展医学实体数据库，支持多语言编码映射
  * 确保不同语言环境下的编码一致性
  */
@@ -155,7 +155,7 @@ export const MULTILINGUAL_MEDICAL_CODES: Record<
 
 /**
  * 获取实体的多语言编码
- * 
+ *
  * @param entityKey 实体键
  * @param locale 语言环境
  * @param codingSystem 编码系统（可选）
@@ -164,19 +164,19 @@ export const MULTILINGUAL_MEDICAL_CODES: Record<
 export function getMultilingualCodes(
   entityKey: keyof typeof MEDICAL_ENTITIES,
   locale: "en" | "zh" = "en",
-  codingSystem?: string
+  codingSystem?: string,
 ): MultilingualCode[] {
   const codes = MULTILINGUAL_MEDICAL_CODES[entityKey] || [];
 
   // 过滤语言环境
   let filteredCodes = codes.filter(
-    (code) => code.locale === "all" || code.locale === locale
+    (code) => code.locale === "all" || code.locale === locale,
   );
 
   // 如果指定了编码系统，进一步过滤
   if (codingSystem) {
     filteredCodes = filteredCodes.filter(
-      (code) => code.codingSystem === codingSystem
+      (code) => code.codingSystem === codingSystem,
     );
   }
 
@@ -185,14 +185,14 @@ export function getMultilingualCodes(
 
 /**
  * 获取编码的描述（根据语言环境）
- * 
+ *
  * @param code 编码对象
  * @param locale 语言环境
  * @returns 描述文本
  */
 export function getCodeDescription(
   code: MultilingualCode,
-  locale: "en" | "zh" = "en"
+  locale: "en" | "zh" = "en",
 ): string {
   if (locale === "zh" && code.descriptionZh) {
     return code.descriptionZh;
@@ -202,14 +202,14 @@ export function getCodeDescription(
 
 /**
  * 生成多语言编码的 Schema.org MedicalCode 数组
- * 
+ *
  * @param entityKey 实体键
  * @param locale 语言环境
  * @returns MedicalCode 数组
  */
 export function generateMultilingualMedicalCodes(
   entityKey: keyof typeof MEDICAL_ENTITIES,
-  locale: "en" | "zh" = "en"
+  locale: "en" | "zh" = "en",
 ): Array<{
   "@type": "MedicalCode";
   code: string;
@@ -228,7 +228,7 @@ export function generateMultilingualMedicalCodes(
 
 /**
  * 合并基础编码和多语言编码
- * 
+ *
  * @param entity 医学实体
  * @param entityKey 实体键
  * @param locale 语言环境
@@ -237,7 +237,7 @@ export function generateMultilingualMedicalCodes(
 export function mergeMedicalCodes(
   entity: MedicalEntity,
   entityKey: keyof typeof MEDICAL_ENTITIES,
-  locale: "en" | "zh" = "en"
+  locale: "en" | "zh" = "en",
 ): Array<{
   "@type": "MedicalCode";
   code: string;
@@ -280,9 +280,7 @@ export function mergeMedicalCodes(
 
   // 合并并去重（基于 codingSystem 和 code）
   const merged = [...baseCodes];
-  const existing = new Set(
-    baseCodes.map((c) => `${c.codingSystem}:${c.code}`)
-  );
+  const existing = new Set(baseCodes.map((c) => `${c.codingSystem}:${c.code}`));
 
   for (const code of multilingualCodes) {
     const key = `${code.codingSystem}:${code.code}`;
@@ -294,9 +292,3 @@ export function mergeMedicalCodes(
 
   return merged;
 }
-
-
-
-
-
-

@@ -3,18 +3,18 @@
  * 检查PDF重复、SEO问题、热点地图数据完整性等
  */
 
-import { pdfResources } from '@/config/pdfResources';
-import { heatmapManager } from '@/utils/heatmapManager';
+import { pdfResources } from "@/config/pdfResources";
+import { heatmapManager } from "@/utils/heatmapManager";
 
 export interface CheckResult {
-  status: 'pass' | 'fail' | 'warning';
+  status: "pass" | "fail" | "warning";
   message: string;
   details?: unknown;
 }
 
 export interface HealthReport {
   timestamp: string;
-  status: 'healthy' | 'issues-found' | 'critical';
+  status: "healthy" | "issues-found" | "critical";
   checks: {
     pdfDuplicates: CheckResult;
     seoIssues: CheckResult;
@@ -31,27 +31,31 @@ export class SystemHealthChecker {
   public static async performComprehensiveCheck(): Promise<HealthReport> {
     const report: HealthReport = {
       timestamp: new Date().toISOString(),
-      status: 'healthy',
+      status: "healthy",
       checks: {
         pdfDuplicates: await this.checkPDFDuplicates(),
         seoIssues: await this.checkSEOIssues(),
         heatmapData: await this.checkHeatmapIntegrity(),
-        redirects: await this.validateRedirects()
+        redirects: await this.validateRedirects(),
       },
-      recommendations: []
+      recommendations: [],
     };
 
     // 生成修复建议
     report.recommendations = this.generateRecommendations(report.checks);
 
     // 确定整体状态
-    const hasFailures = Object.values(report.checks).some(check => check.status === 'fail');
-    const hasWarnings = Object.values(report.checks).some(check => check.status === 'warning');
+    const hasFailures = Object.values(report.checks).some(
+      (check) => check.status === "fail",
+    );
+    const hasWarnings = Object.values(report.checks).some(
+      (check) => check.status === "warning",
+    );
 
     if (hasFailures) {
-      report.status = 'critical';
+      report.status = "critical";
     } else if (hasWarnings) {
-      report.status = 'issues-found';
+      report.status = "issues-found";
     }
 
     return report;
@@ -63,11 +67,12 @@ export class SystemHealthChecker {
   private static async checkPDFDuplicates(): Promise<CheckResult> {
     const duplicates = await this.findDuplicatePDFs();
     return {
-      status: duplicates.length === 0 ? 'pass' : 'fail',
-      message: duplicates.length === 0
-        ? '✅ 未发现PDF重复问题'
-        : `❌ 发现${duplicates.length}个重复PDF`,
-      details: duplicates
+      status: duplicates.length === 0 ? "pass" : "fail",
+      message:
+        duplicates.length === 0
+          ? "✅ 未发现PDF重复问题"
+          : `❌ 发现${duplicates.length}个重复PDF`,
+      details: duplicates,
     };
   }
 
@@ -78,7 +83,7 @@ export class SystemHealthChecker {
     const idCounts = new Map<string, number>();
     const duplicates: string[] = [];
 
-    pdfResources.forEach(resource => {
+    pdfResources.forEach((resource) => {
       const count = idCounts.get(resource.id) || 0;
       idCounts.set(resource.id, count + 1);
     });
@@ -98,9 +103,9 @@ export class SystemHealthChecker {
   private static async checkSEOIssues(): Promise<CheckResult> {
     const issues = await this.scanSEOIssues();
     return {
-      status: issues.length === 0 ? 'pass' : 'warning',
+      status: issues.length === 0 ? "pass" : "warning",
       message: `发现${issues.length}个SEO优化机会`,
-      details: issues
+      details: issues,
     };
   }
 
@@ -111,23 +116,27 @@ export class SystemHealthChecker {
     const issues: string[] = [];
 
     // 检查PDF资源是否有重复的标题
-    const titles = pdfResources.map(r => r.title);
-    const duplicateTitles = titles.filter((title, index) =>
-      titles.indexOf(title) !== index
+    const titles = pdfResources.map((r) => r.title);
+    const duplicateTitles = titles.filter(
+      (title, index) => titles.indexOf(title) !== index,
     );
 
     if (duplicateTitles.length > 0) {
-      issues.push(`发现重复标题: ${duplicateTitles.join(', ')}`);
+      issues.push(`发现重复标题: ${duplicateTitles.join(", ")}`);
     }
 
     // 检查是否有缺失的描述
-    const missingDescriptions = pdfResources.filter(r => !r.description || r.description.trim() === '');
+    const missingDescriptions = pdfResources.filter(
+      (r) => !r.description || r.description.trim() === "",
+    );
     if (missingDescriptions.length > 0) {
       issues.push(`${missingDescriptions.length}个PDF资源缺少描述`);
     }
 
     // 检查文件大小是否合理
-    const invalidSizes = pdfResources.filter(r => r.fileSize && (r.fileSize < 100 || r.fileSize > 10000));
+    const invalidSizes = pdfResources.filter(
+      (r) => r.fileSize && (r.fileSize < 100 || r.fileSize > 10000),
+    );
     if (invalidSizes.length > 0) {
       issues.push(`${invalidSizes.length}个PDF文件大小异常`);
     }
@@ -144,23 +153,21 @@ export class SystemHealthChecker {
       heatmapManager.consolidateHeatmapData();
 
       const allData = heatmapManager.getAllHeatmapData();
-      const totalClicks = Array.from(allData.values())
-        .flat()
-        .length;
+      const totalClicks = Array.from(allData.values()).flat().length;
 
       return {
-        status: 'pass',
+        status: "pass",
         message: `✅ 热点地图数据正常，共${totalClicks}次点击记录`,
         details: {
           totalClicks,
-          pagesWithData: allData.size
-        }
+          pagesWithData: allData.size,
+        },
       };
     } catch (error) {
       return {
-        status: 'fail',
-        message: '❌ 热点地图数据检查失败',
-        details: error
+        status: "fail",
+        message: "❌ 热点地图数据检查失败",
+        details: error,
       };
     }
   }
@@ -172,45 +179,47 @@ export class SystemHealthChecker {
     // 这里可以添加重定向验证逻辑
     // 例如检查next.config.js中的重定向规则
     return {
-      status: 'pass',
-      message: '✅ 重定向配置正常',
+      status: "pass",
+      message: "✅ 重定向配置正常",
       details: {
         redirectRules: [
-          '/download-center → /downloads',
-          '/downloads-new → /downloads',
-          '/articles-pdf-center → /downloads'
-        ]
-      }
+          "/download-center → /downloads",
+          "/downloads-new → /downloads",
+          "/articles-pdf-center → /downloads",
+        ],
+      },
     };
   }
 
   /**
    * 生成修复建议
    */
-  private static generateRecommendations(checks: HealthReport['checks']): string[] {
+  private static generateRecommendations(
+    checks: HealthReport["checks"],
+  ): string[] {
     const recommendations: string[] = [];
 
-    if (checks.pdfDuplicates.status === 'fail') {
-      recommendations.push('立即删除pdfResources.ts中的重复定义');
-      recommendations.push('添加数据验证机制防止重复');
+    if (checks.pdfDuplicates.status === "fail") {
+      recommendations.push("立即删除pdfResources.ts中的重复定义");
+      recommendations.push("添加数据验证机制防止重复");
     }
 
-    if (checks.seoIssues.status === 'warning') {
-      recommendations.push('优化PDF资源描述信息');
-      recommendations.push('检查文件大小设置');
+    if (checks.seoIssues.status === "warning") {
+      recommendations.push("优化PDF资源描述信息");
+      recommendations.push("检查文件大小设置");
     }
 
-    if (checks.heatmapData.status === 'fail') {
-      recommendations.push('修复热点地图数据存储问题');
+    if (checks.heatmapData.status === "fail") {
+      recommendations.push("修复热点地图数据存储问题");
     }
 
-    if (checks.redirects.status === 'fail') {
-      recommendations.push('检查next.config.js重定向配置');
+    if (checks.redirects.status === "fail") {
+      recommendations.push("检查next.config.js重定向配置");
     }
 
     // 通用建议
-    recommendations.push('定期运行健康检查');
-    recommendations.push('建立自动化测试覆盖');
+    recommendations.push("定期运行健康检查");
+    recommendations.push("建立自动化测试覆盖");
 
     return recommendations;
   }
@@ -223,11 +232,22 @@ export class SystemHealthChecker {
 
     let summary = `# 系统健康检查报告\n\n`;
     summary += `**检查时间**: ${report.timestamp}\n`;
-    summary += `**整体状态**: ${status === 'healthy' ? '✅ 健康' : status === 'issues-found' ? '⚠️ 发现问题' : '❌ 严重问题'}\n\n`;
+    summary += `**整体状态**: ${
+      status === "healthy"
+        ? "✅ 健康"
+        : status === "issues-found"
+          ? "⚠️ 发现问题"
+          : "❌ 严重问题"
+    }\n\n`;
 
     summary += `## 检查结果\n\n`;
     Object.entries(checks).forEach(([key, result]) => {
-      const icon = result.status === 'pass' ? '✅' : result.status === 'warning' ? '⚠️' : '❌';
+      const icon =
+        result.status === "pass"
+          ? "✅"
+          : result.status === "warning"
+            ? "⚠️"
+            : "❌";
       summary += `- **${key}**: ${icon} ${result.message}\n`;
     });
 

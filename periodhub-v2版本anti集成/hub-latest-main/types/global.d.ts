@@ -17,7 +17,7 @@ interface Window {
    * Pro upgrade handler function
    */
   handleProUpgrade?: (options: {
-    plan: 'monthly' | 'yearly' | 'oneTime';
+    plan: "monthly" | "yearly" | "oneTime";
     painPoint?: string;
     assessmentScore?: number;
     source?: string;
@@ -31,7 +31,7 @@ interface Window {
   gtag?: (
     command: string,
     eventName: string,
-    params?: Record<string, unknown>
+    params?: Record<string, unknown>,
   ) => void;
 
   /**
@@ -57,4 +57,3 @@ interface SyntheticEvent {
 }
 
 export {};
-

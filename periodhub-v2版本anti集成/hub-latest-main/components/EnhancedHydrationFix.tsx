@@ -77,40 +77,50 @@ export default function EnhancedHydrationFix() {
               .replace(/Language Language/g, "Language")
               .replace(/English English/g, "English")
               .replace(/中文中文/g, "中文");
-            
+
             // ✅ 特别处理 "PeriodHub ProPeriodHub Pro" 这种重复
-            newText = newText.replace(/PeriodHub ProPeriodHub Pro/g, "PeriodHub Pro");
+            newText = newText.replace(
+              /PeriodHub ProPeriodHub Pro/g,
+              "PeriodHub Pro",
+            );
             newText = newText.replace(/(PeriodHub Pro){2,}/g, "PeriodHub Pro");
-            
+
             // ⚠️ 不要对 JavaScript 代码或 script 标签内的内容进行通用重复检测
             // 只对纯文本节点进行修复，避免破坏代码
             const parentElement = node.parentElement;
-            if (parentElement && (
-              parentElement.tagName === 'SCRIPT' || 
-              parentElement.tagName === 'STYLE' ||
-              parentElement.closest('script') ||
-              parentElement.closest('style')
-            )) {
+            if (
+              parentElement &&
+              (parentElement.tagName === "SCRIPT" ||
+                parentElement.tagName === "STYLE" ||
+                parentElement.closest("script") ||
+                parentElement.closest("style"))
+            ) {
               // 跳过 script 和 style 标签内的内容
               return;
             }
-            
+
             // ✅ 只对明显的用户可见文本重复进行修复（保守策略）
             // 匹配重复的单词或短语（至少3个字符，避免误删代码）
             if (newText.length > 10) {
               // 处理包含特殊字符的文本（如 "Professional Health Articles & PDF Resource Library"）
               // 先处理没有空格的重复（直接连接）
-              newText = newText.replace(/([A-Za-z][A-Za-z\s&,.\-]{10,}?)\1+/g, (match, group) => {
-                return group;
-              });
-              
+              newText = newText.replace(
+                /([A-Za-z][A-Za-z\s&,.\-]{10,}?)\1+/g,
+                (match, group) => {
+                  return group;
+                },
+              );
+
               // 再处理有空格分隔的重复
               if (/^[A-Za-z\s&,.\-]+$/.test(newText.trim())) {
                 // 只处理看起来像用户文本的内容（字母、空格、&、逗号、点、连字符）
-                newText = newText.replace(/(.{10,}?)(\s+|&|\s*,\s*)\1+/g, (_match, group1) => {
-                  // 如果重复超过1次，只保留一次
-                  return group1;
-                });
+                newText = newText.replace(
+                  /(.{10,}?)(\s+|&|\s*,\s*)\1+/g,
+                  (_match, group1) => {
+                    // 如果重复超过1次，只保留一次
+                    return group1;
+                  },
+                );
               }
             }
 
@@ -195,15 +205,15 @@ export default function EnhancedHydrationFix() {
     };
 
     // 立即执行修复（使用 requestAnimationFrame 确保在浏览器渲染后执行）
-    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    if (typeof window !== "undefined" && typeof document !== "undefined") {
       // 立即执行一次
       fixHydrationIssues();
-      
+
       // 使用 requestAnimationFrame 确保在下一帧执行
       requestAnimationFrame(() => {
         fixHydrationIssues();
       });
-      
+
       // 延迟执行一次，确保捕获所有扩展添加的属性
       setTimeout(() => {
         fixHydrationIssues();
@@ -260,16 +270,19 @@ export default function EnhancedHydrationFix() {
               const text = node.textContent;
               if (text) {
                 // ⚠️ 跳过 script 和 style 标签内的内容
-                const parentElement = (node as Node & { parentElement?: Element | null }).parentElement;
-                if (parentElement && (
-                  parentElement.tagName === 'SCRIPT' || 
-                  parentElement.tagName === 'STYLE' ||
-                  parentElement.closest?.('script') ||
-                  parentElement.closest?.('style')
-                )) {
+                const parentElement = (
+                  node as Node & { parentElement?: Element | null }
+                ).parentElement;
+                if (
+                  parentElement &&
+                  (parentElement.tagName === "SCRIPT" ||
+                    parentElement.tagName === "STYLE" ||
+                    parentElement.closest?.("script") ||
+                    parentElement.closest?.("style"))
+                ) {
                   return;
                 }
-                
+
                 let fixedText = text
                   .replace(/语言语言/g, "语言")
                   .replace(/Language Language/g, "Language")
@@ -277,25 +290,31 @@ export default function EnhancedHydrationFix() {
                   .replace(/中文中文/g, "中文")
                   .replace(/PeriodHub ProPeriodHub Pro/g, "PeriodHub Pro")
                   .replace(/(PeriodHub Pro){2,}/g, "PeriodHub Pro");
-                
+
                 // ✅ 只对明显的用户可见文本重复进行修复（保守策略）
                 if (fixedText.length > 10) {
                   // 处理包含特殊字符的文本（如 "Professional Health Articles & PDF Resource Library"）
                   // 先处理没有空格的重复（直接连接）
-                  fixedText = fixedText.replace(/([A-Za-z][A-Za-z\s&,.-]{10,}?)\1+/g, (match, group) => {
-                    return group;
-                  });
-                  
+                  fixedText = fixedText.replace(
+                    /([A-Za-z][A-Za-z\s&,.-]{10,}?)\1+/g,
+                    (match, group) => {
+                      return group;
+                    },
+                  );
+
                   // 再处理有空格分隔的重复
                   if (/^[A-Za-z\s&,.\-!?]+$/.test(fixedText.trim())) {
                     // 只处理看起来像用户文本的内容（字母、空格、&、逗号、点、连字符、感叹号、问号）
-                    fixedText = fixedText.replace(/(.{10,}?)(\s+|&|\s*,\s*)\1+/g, (_match, group1) => {
-                      // 如果重复超过1次，只保留一次
-                      return group1;
-                    });
+                    fixedText = fixedText.replace(
+                      /(.{10,}?)(\s+|&|\s*,\s*)\1+/g,
+                      (_match, group1) => {
+                        // 如果重复超过1次，只保留一次
+                        return group1;
+                      },
+                    );
                   }
                 }
-                
+
                 if (fixedText !== text) {
                   node.textContent = fixedText;
                   needsFix = true;
@@ -309,16 +328,19 @@ export default function EnhancedHydrationFix() {
           const text = mutation.target.textContent;
           if (text) {
             // ⚠️ 跳过 script 和 style 标签内的内容
-            const parentElement = (mutation.target as Node & { parentElement?: Element | null }).parentElement;
-            if (parentElement && (
-              parentElement.tagName === 'SCRIPT' || 
-              parentElement.tagName === 'STYLE' ||
-              parentElement.closest?.('script') ||
-              parentElement.closest?.('style')
-            )) {
+            const parentElement = (
+              mutation.target as Node & { parentElement?: Element | null }
+            ).parentElement;
+            if (
+              parentElement &&
+              (parentElement.tagName === "SCRIPT" ||
+                parentElement.tagName === "STYLE" ||
+                parentElement.closest?.("script") ||
+                parentElement.closest?.("style"))
+            ) {
               return;
             }
-            
+
             let fixedText = text
               .replace(/语言语言/g, "语言")
               .replace(/Language Language/g, "Language")
@@ -326,25 +348,31 @@ export default function EnhancedHydrationFix() {
               .replace(/中文中文/g, "中文")
               .replace(/PeriodHub ProPeriodHub Pro/g, "PeriodHub Pro")
               .replace(/(PeriodHub Pro){2,}/g, "PeriodHub Pro");
-            
+
             // ✅ 只对明显的用户可见文本重复进行修复（保守策略）
             if (fixedText.length > 10) {
               // 处理包含特殊字符的文本（如 "Professional Health Articles & PDF Resource Library"）
               // 先处理没有空格的重复（直接连接）
-              fixedText = fixedText.replace(/([A-Za-z][A-Za-z\s&,.-]{10,}?)\1+/g, (match, group) => {
-                return group;
-              });
-              
+              fixedText = fixedText.replace(
+                /([A-Za-z][A-Za-z\s&,.-]{10,}?)\1+/g,
+                (match, group) => {
+                  return group;
+                },
+              );
+
               // 再处理有空格分隔的重复
               if (/^[A-Za-z\s&,.\-!?]+$/.test(fixedText.trim())) {
                 // 只处理看起来像用户文本的内容（字母、空格、&、逗号、点、连字符、感叹号、问号）
-                fixedText = fixedText.replace(/(.{10,}?)(\s+|&|\s*,\s*)\1+/g, (_match, group1) => {
-                  // 如果重复超过1次，只保留一次
-                  return group1;
-                });
+                fixedText = fixedText.replace(
+                  /(.{10,}?)(\s+|&|\s*,\s*)\1+/g,
+                  (_match, group1) => {
+                    // 如果重复超过1次，只保留一次
+                    return group1;
+                  },
+                );
               }
             }
-            
+
             if (fixedText !== text) {
               mutation.target.textContent = fixedText;
               needsFix = true;

@@ -2,7 +2,7 @@ import {
   safeStringify,
   cleanDataForJSON,
 } from "@/lib/utils/json-serialization";
-import { logError, logWarn } from '@/lib/debug-logger';
+import { logError, logWarn } from "@/lib/debug-logger";
 
 interface EnhancedStructuredDataProps {
   type: "website" | "article" | "faq" | "howto" | "medicalwebpage";
@@ -167,7 +167,11 @@ export default function EnhancedStructuredData({
 
   // 验证数据有效性
   if (!cleanedData || typeof cleanedData !== "object") {
-    logError("Structured data cleaning failed", cleanedData, 'EnhancedStructuredData');
+    logError(
+      "Structured data cleaning failed",
+      cleanedData,
+      "EnhancedStructuredData",
+    );
     return null; // 不渲染无效的结构化数据
   }
 
@@ -179,7 +183,11 @@ export default function EnhancedStructuredData({
     typeof finalData["@type"] !== "string" ||
     finalData["@type"] === ""
   ) {
-    logError("Structured data missing or invalid @type field", finalData, 'EnhancedStructuredData');
+    logError(
+      "Structured data missing or invalid @type field",
+      finalData,
+      "EnhancedStructuredData",
+    );
     return null; // 不渲染无效的结构化数据
   }
 
@@ -189,7 +197,11 @@ export default function EnhancedStructuredData({
     typeof finalData["@context"] !== "string" ||
     finalData["@context"] === ""
   ) {
-    logError("Structured data missing or invalid @context field", finalData, 'EnhancedStructuredData');
+    logError(
+      "Structured data missing or invalid @context field",
+      finalData,
+      "EnhancedStructuredData",
+    );
     return null; // 不渲染无效的结构化数据
   }
 
@@ -199,7 +211,11 @@ export default function EnhancedStructuredData({
     typeof finalData["name"] !== "string" ||
     finalData["name"].trim() === ""
   ) {
-    logWarn("Structured data missing or empty name field", finalData, 'EnhancedStructuredData');
+    logWarn(
+      "Structured data missing or empty name field",
+      finalData,
+      "EnhancedStructuredData",
+    );
   }
 
   return (

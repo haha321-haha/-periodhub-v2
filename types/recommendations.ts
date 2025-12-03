@@ -7,7 +7,7 @@
 export type RecommendationPriority = "urgent" | "high" | "medium" | "low";
 
 // 推荐类型
-export type RecommendationType = 
+export type RecommendationType =
   | "nutrition"
   | "exercise"
   | "selfcare"
@@ -18,7 +18,7 @@ export type RecommendationType =
   | "emergency";
 
 // 推荐状态
-export type RecommendationStatus = 
+export type RecommendationStatus =
   | "active"
   | "viewed"
   | "dismissed"
@@ -26,7 +26,7 @@ export type RecommendationStatus =
   | "completed";
 
 // 推荐触发条件
-export type RecommendationTrigger = 
+export type RecommendationTrigger =
   | "assessment_complete"
   | "abnormal_pattern"
   | "cycle_phase"
@@ -132,41 +132,55 @@ export interface RecommendationHistory {
 export interface RecommendationFeedback {
   id: string;
   recommendationId: string;
-  type: "useful" | "not_useful" | "helpful" | "not_helpful" | "rating" | "comment";
+  type:
+    | "useful"
+    | "not_useful"
+    | "helpful"
+    | "not_helpful"
+    | "rating"
+    | "comment";
   rating?: 1 | 2 | 3 | 4 | 5;
   comment?: string;
   timestamp: string;
   context?: {
     viewedDuration?: number; // 查看时长（秒）
-    implementationStatus?: "implemented" | "partially_implemented" | "not_implemented";
+    implementationStatus?:
+      | "implemented"
+      | "partially_implemented"
+      | "not_implemented";
   };
 }
 
 // 推荐算法配置接口
 export interface RecommendationAlgorithmConfig {
   weights: {
-    stressLevel: number;      // 压力水平权重
-    painLevel: number;        // 疼痛水平权重
-    cyclePhase: number;       // 周期阶段权重
-    constitution: number;     // 体质权重
-    historyPattern: number;   // 历史模式权重
-    userFeedback: number;     // 用户反馈权重
+    stressLevel: number; // 压力水平权重
+    painLevel: number; // 疼痛水平权重
+    cyclePhase: number; // 周期阶段权重
+    constitution: number; // 体质权重
+    historyPattern: number; // 历史模式权重
+    userFeedback: number; // 用户反馈权重
   };
   thresholds: {
-    urgentScore: number;      // 紧急推荐阈值
-    highScore: number;        // 高优先级阈值
-    mediumScore: number;      // 中等优先级阈值
+    urgentScore: number; // 紧急推荐阈值
+    highScore: number; // 高优先级阈值
+    mediumScore: number; // 中等优先级阈值
   };
   limits: {
-    maxActiveRecommendations: number;  // 最大同时活跃推荐数
-    maxDailyRecommendations: number;   // 每日最大推荐数
-    recommendationCooldown: number;   // 推荐冷却时间（小时）
+    maxActiveRecommendations: number; // 最大同时活跃推荐数
+    maxDailyRecommendations: number; // 每日最大推荐数
+    recommendationCooldown: number; // 推荐冷却时间（小时）
   };
 }
 
 // 推荐模式检测接口
 export interface PatternDetection {
-  type: "stress_spike" | "pain_pattern" | "cycle_irregularity" | "declining_trend" | "improvement";
+  type:
+    | "stress_spike"
+    | "pain_pattern"
+    | "cycle_irregularity"
+    | "declining_trend"
+    | "improvement";
   severity: "mild" | "moderate" | "severe";
   description: string;
   confidence: number; // 置信度 0-1
@@ -244,7 +258,7 @@ export interface RecommendationTemplate {
     actionStepTemplates: string[];
     reasonTemplate: string;
   };
-  resources: Omit<RecommendationResource, 'id'>[];
+  resources: Omit<RecommendationResource, "id">[];
   tags: string[];
 }
 

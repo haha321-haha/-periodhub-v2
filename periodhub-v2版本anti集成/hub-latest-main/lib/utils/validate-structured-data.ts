@@ -1,7 +1,7 @@
 /**
  * Structured Data Validation Utilities
  * 结构化数据验证工具
- * 
+ *
  * 用于验证 Schema.org 结构化数据的有效性，防止 Google Search Console 错误
  */
 
@@ -13,7 +13,7 @@ export interface ValidationResult {
 
 /**
  * 验证结构化数据是否符合 Schema.org 规范
- * 
+ *
  * @param data - 要验证的结构化数据对象
  * @returns 验证结果
  */
@@ -31,14 +31,19 @@ export function validateStructuredData(data: unknown): ValidationResult {
   // 检查必需字段
   if (!dataObj["@context"]) {
     errors.push("Missing required field: @context");
-  } else if (typeof dataObj["@context"] !== "string" || dataObj["@context"] === "") {
+  } else if (
+    typeof dataObj["@context"] !== "string" ||
+    dataObj["@context"] === ""
+  ) {
     errors.push("Invalid @context field: must be a non-empty string");
   }
 
   if (!dataObj["@type"]) {
     errors.push("Missing required field: @type");
   } else if (typeof dataObj["@type"] !== "string" || dataObj["@type"] === "") {
-    errors.push("Invalid @type field: must be a non-empty string (this causes 'Invalid object type for field' error)");
+    errors.push(
+      "Invalid @type field: must be a non-empty string (this causes 'Invalid object type for field' error)",
+    );
   }
 
   // 验证嵌套对象的 @type 字段
@@ -82,11 +87,16 @@ function validateNestedTypes(
     // 如果值是对象
     if (value && typeof value === "object" && !Array.isArray(value)) {
       const nestedObj = value as Record<string, unknown>;
-      
+
       // 检查嵌套对象的 @type 字段
       if ("@type" in nestedObj) {
-        if (typeof nestedObj["@type"] !== "string" || nestedObj["@type"] === "") {
-          errors.push(`Invalid @type field in nested object at ${currentPath}: must be a non-empty string`);
+        if (
+          typeof nestedObj["@type"] !== "string" ||
+          nestedObj["@type"] === ""
+        ) {
+          errors.push(
+            `Invalid @type field in nested object at ${currentPath}: must be a non-empty string`,
+          );
         }
       }
 
@@ -100,11 +110,22 @@ function validateNestedTypes(
         if (item && typeof item === "object") {
           const itemObj = item as Record<string, unknown>;
           if ("@type" in itemObj) {
-            if (typeof itemObj["@type"] !== "string" || itemObj["@type"] === "") {
-              errors.push(`Invalid @type field in array item at ${currentPath}[${index}]: must be a non-empty string`);
+            if (
+              typeof itemObj["@type"] !== "string" ||
+              itemObj["@type"] === ""
+            ) {
+              errors.push(
+                `Invalid @type field in array item at ${currentPath}[${index}]: must be a non-empty string`,
+              );
             }
           }
-          validateNestedTypes(itemObj, errors, warnings, `${currentPath}[${index}]`, seen);
+          validateNestedTypes(
+            itemObj,
+            errors,
+            warnings,
+            `${currentPath}[${index}]`,
+            seen,
+          );
         }
       });
     }
@@ -138,22 +159,45 @@ function validateFAQArray(
     const faqItem = item as Record<string, unknown>;
 
     if (faqItem["@type"] !== "Question") {
-      errors.push(`FAQ item ${index + 1} has invalid @type: expected "Question"`);
+      errors.push(
+        `FAQ item ${index + 1} has invalid @type: expected "Question"`,
+      );
     }
 
-    if (!faqItem["name"] || typeof faqItem["name"] !== "string" || faqItem["name"].trim() === "") {
+    if (
+      !faqItem["name"] ||
+      typeof faqItem["name"] !== "string" ||
+      faqItem["name"].trim() === ""
+    ) {
       errors.push(`FAQ item ${index + 1} has empty or missing name field`);
     }
 
-    if (!faqItem["acceptedAnswer"] || typeof faqItem["acceptedAnswer"] !== "object") {
-      errors.push(`FAQ item ${index + 1} has missing or invalid acceptedAnswer`);
+    if (
+      !faqItem["acceptedAnswer"] ||
+      typeof faqItem["acceptedAnswer"] !== "object"
+    ) {
+      errors.push(
+        `FAQ item ${index + 1} has missing or invalid acceptedAnswer`,
+      );
     } else {
       const answer = faqItem["acceptedAnswer"] as Record<string, unknown>;
       if (answer["@type"] !== "Answer") {
-        errors.push(`FAQ item ${index + 1} acceptedAnswer has invalid @type: expected "Answer"`);
+        errors.push(
+          `FAQ item ${
+            index + 1
+          } acceptedAnswer has invalid @type: expected "Answer"`,
+        );
       }
-      if (!answer["text"] || typeof answer["text"] !== "string" || answer["text"].trim() === "") {
-        errors.push(`FAQ item ${index + 1} acceptedAnswer has empty or missing text field`);
+      if (
+        !answer["text"] ||
+        typeof answer["text"] !== "string" ||
+        answer["text"].trim() === ""
+      ) {
+        errors.push(
+          `FAQ item ${
+            index + 1
+          } acceptedAnswer has empty or missing text field`,
+        );
       }
     }
   });
@@ -181,14 +225,24 @@ function validateHowToSteps(
     const stepObj = step as Record<string, unknown>;
 
     if (stepObj["@type"] !== "HowToStep") {
-      errors.push(`HowTo step ${index + 1} has invalid @type: expected "HowToStep"`);
+      errors.push(
+        `HowTo step ${index + 1} has invalid @type: expected "HowToStep"`,
+      );
     }
 
-    if (!stepObj["name"] || typeof stepObj["name"] !== "string" || stepObj["name"].trim() === "") {
+    if (
+      !stepObj["name"] ||
+      typeof stepObj["name"] !== "string" ||
+      stepObj["name"].trim() === ""
+    ) {
       errors.push(`HowTo step ${index + 1} has empty or missing name field`);
     }
 
-    if (!stepObj["text"] || typeof stepObj["text"] !== "string" || stepObj["text"].trim() === "") {
+    if (
+      !stepObj["text"] ||
+      typeof stepObj["text"] !== "string" ||
+      stepObj["text"].trim() === ""
+    ) {
       errors.push(`HowTo step ${index + 1} has empty or missing text field`);
     }
   });
@@ -197,7 +251,7 @@ function validateHowToSteps(
 /**
  * 清理并验证结构化数据
  * 移除无效字段，确保数据符合 Schema.org 规范
- * 
+ *
  * @param data - 要清理的结构化数据
  * @returns 清理后的数据，如果无效则返回 null
  */
@@ -217,7 +271,3 @@ export function cleanAndValidateStructuredData(
 
   return data as Record<string, unknown>;
 }
-
-
-
-

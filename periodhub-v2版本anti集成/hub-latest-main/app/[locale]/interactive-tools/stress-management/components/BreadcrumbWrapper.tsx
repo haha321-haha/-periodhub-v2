@@ -36,4 +36,3 @@ export default function BreadcrumbWrapper({
 
   return <Breadcrumb items={items} className={className} />;
 }
-

@@ -7,19 +7,25 @@
 
 import React, { useState, useMemo, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { 
-  RefreshCw, 
-  Filter, 
-  SortDesc, 
+import {
+  RefreshCw,
+  Filter,
+  SortDesc,
   ChevronDown,
   CheckCircle,
   Bookmark,
   Clock,
-  AlertTriangle
+  AlertTriangle,
 } from "lucide-react";
 
-import { RecommendationType, RecommendationFeedback } from "@/types/recommendations";
-import { useRecommendationStore, useRecommendationActions } from "@/lib/recommendations/store";
+import {
+  RecommendationType,
+  RecommendationFeedback,
+} from "@/types/recommendations";
+import {
+  useRecommendationStore,
+  useRecommendationActions,
+} from "@/lib/recommendations/store";
 import RecommendationCard from "./RecommendationCard";
 import { cn } from "@/lib/utils";
 
@@ -73,17 +79,17 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
 
     // 状态过滤
     if (filters.status !== "all") {
-      filtered = filtered.filter(rec => rec.status === filters.status);
+      filtered = filtered.filter((rec) => rec.status === filters.status);
     }
 
     // 优先级过滤
     if (filters.priority !== "all") {
-      filtered = filtered.filter(rec => rec.priority === filters.priority);
+      filtered = filtered.filter((rec) => rec.priority === filters.priority);
     }
 
     // 类型过滤
     if (filters.type !== "all") {
-      filtered = filtered.filter(rec => rec.content.type === filters.type);
+      filtered = filtered.filter((rec) => rec.content.type === filters.type);
     }
 
     return filtered;
@@ -96,16 +102,24 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
     switch (sortOption) {
       case "priority":
         const priorityOrder = { urgent: 0, high: 1, medium: 2, low: 3 };
-        return sorted.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
+        return sorted.sort(
+          (a, b) => priorityOrder[a.priority] - priorityOrder[b.priority],
+        );
 
       case "date":
-        return sorted.sort((a, b) => new Date(b.generatedAt).getTime() - new Date(a.generatedAt).getTime());
+        return sorted.sort(
+          (a, b) =>
+            new Date(b.generatedAt).getTime() -
+            new Date(a.generatedAt).getTime(),
+        );
 
       case "score":
         return sorted.sort((a, b) => b.score - a.score);
 
       case "type":
-        return sorted.sort((a, b) => a.content.type.localeCompare(b.content.type));
+        return sorted.sort((a, b) =>
+          a.content.type.localeCompare(b.content.type),
+        );
 
       default:
         return sorted;
@@ -124,13 +138,16 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
   const statistics = useMemo(() => {
     const stats = {
       total: activeRecommendations.length,
-      urgent: activeRecommendations.filter(r => r.priority === "urgent").length,
-      high: activeRecommendations.filter(r => r.priority === "high").length,
-      medium: activeRecommendations.filter(r => r.priority === "medium").length,
-      low: activeRecommendations.filter(r => r.priority === "low").length,
-      viewed: activeRecommendations.filter(r => r.status === "viewed").length,
-      saved: activeRecommendations.filter(r => r.status === "saved").length,
-      completed: activeRecommendations.filter(r => r.status === "completed").length,
+      urgent: activeRecommendations.filter((r) => r.priority === "urgent")
+        .length,
+      high: activeRecommendations.filter((r) => r.priority === "high").length,
+      medium: activeRecommendations.filter((r) => r.priority === "medium")
+        .length,
+      low: activeRecommendations.filter((r) => r.priority === "low").length,
+      viewed: activeRecommendations.filter((r) => r.status === "viewed").length,
+      saved: activeRecommendations.filter((r) => r.status === "saved").length,
+      completed: activeRecommendations.filter((r) => r.status === "completed")
+        .length,
     };
 
     return stats;
@@ -142,9 +159,12 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
   }, [refreshRecommendations]);
 
   // 处理过滤器变化
-  const handleFilterChange = useCallback((key: keyof typeof filters, value: string) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
-  }, []);
+  const handleFilterChange = useCallback(
+    (key: keyof typeof filters, value: string) => {
+      setFilters((prev) => ({ ...prev, [key]: value }));
+    },
+    [],
+  );
 
   // 重置过滤器
   const handleResetFilters = useCallback(() => {
@@ -165,34 +185,34 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
           <span className="font-medium">总计:</span>
           <span>{statistics.total}</span>
         </div>
-        
+
         {statistics.urgent > 0 && (
           <div className="flex items-center space-x-1 px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm">
             <AlertTriangle className="h-3 w-3" />
             <span>紧急: {statistics.urgent}</span>
           </div>
         )}
-        
+
         {statistics.high > 0 && (
           <div className="flex items-center space-x-1 px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm">
             <span>高优先级: {statistics.high}</span>
           </div>
         )}
-        
+
         {statistics.viewed > 0 && (
           <div className="flex items-center space-x-1 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
             <Clock className="h-3 w-3" />
             <span>已查看: {statistics.viewed}</span>
           </div>
         )}
-        
+
         {statistics.saved > 0 && (
           <div className="flex items-center space-x-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
             <Bookmark className="h-3 w-3" />
             <span>已保存: {statistics.saved}</span>
           </div>
         )}
-        
+
         {statistics.completed > 0 && (
           <div className="flex items-center space-x-1 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm">
             <CheckCircle className="h-3 w-3" />
@@ -230,7 +250,9 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
                   </label>
                   <select
                     value={filters.status}
-                    onChange={(e) => handleFilterChange("status", e.target.value)}
+                    onChange={(e) =>
+                      handleFilterChange("status", e.target.value)
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="all">{t("allStatuses")}</option>
@@ -248,7 +270,9 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
                   </label>
                   <select
                     value={filters.priority}
-                    onChange={(e) => handleFilterChange("priority", e.target.value)}
+                    onChange={(e) =>
+                      handleFilterChange("priority", e.target.value)
+                    }
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="all">{t("allPriorities")}</option>
@@ -322,7 +346,8 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
                       }}
                       className={cn(
                         "w-full px-4 py-2 text-left hover:bg-gray-50 transition-colors",
-                        sortOption === option.value && "bg-blue-50 text-blue-600"
+                        sortOption === option.value &&
+                          "bg-blue-50 text-blue-600",
                       )}
                     >
                       {option.label}
@@ -341,7 +366,9 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
             disabled={isGenerating}
             className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
-            <RefreshCw className={cn("h-4 w-4", isGenerating && "animate-spin")} />
+            <RefreshCw
+              className={cn("h-4 w-4", isGenerating && "animate-spin")}
+            />
             <span>{isGenerating ? t("generating") : t("refresh")}</span>
           </button>
         )}
@@ -351,7 +378,10 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
 
   // 渲染空状态
   const renderEmptyState = () => {
-    const isFiltered = filters.status !== "all" || filters.priority !== "all" || filters.type !== "all";
+    const isFiltered =
+      filters.status !== "all" ||
+      filters.priority !== "all" ||
+      filters.type !== "all";
 
     return (
       <div className="text-center py-12">
@@ -361,7 +391,9 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
           </div>
           <div>
             <h3 className="text-lg font-medium text-gray-900">
-              {isFiltered ? t("noFilteredRecommendations") : t("noRecommendations")}
+              {isFiltered
+                ? t("noFilteredRecommendations")
+                : t("noRecommendations")}
             </h3>
             <p className="text-gray-600 mt-1">
               {isFiltered ? t("tryAdjustingFilters") : t("checkBackLater")}
@@ -390,31 +422,34 @@ export const RecommendationList: React.FC<RecommendationListProps> = ({
 
       {/* 推荐列表 */}
       <div className="space-y-4">
-        {displayRecommendations.length > 0 ? (
-          displayRecommendations.map((recommendation) => (
-            <RecommendationCard
-              key={recommendation.id}
-              recommendation={recommendation}
-              onView={onView}
-              onSave={onSave}
-              onDismiss={onDismiss}
-              onComplete={onComplete}
-              onFeedback={onFeedback}
-            />
-          ))
-        ) : (
-          renderEmptyState()
-        )}
+        {displayRecommendations.length > 0
+          ? displayRecommendations.map((recommendation) => (
+              <RecommendationCard
+                key={recommendation.id}
+                recommendation={recommendation}
+                onView={onView}
+                onSave={onSave}
+                onDismiss={onDismiss}
+                onComplete={onComplete}
+                onFeedback={onFeedback}
+              />
+            ))
+          : renderEmptyState()}
       </div>
 
       {/* 显示更多提示 */}
-      {maxItems && displayRecommendations.length === maxItems && sortedRecommendations.length > maxItems && (
-        <div className="text-center">
-          <p className="text-sm text-gray-600">
-            {t("showingNOfM", { count: displayRecommendations.length, total: sortedRecommendations.length })}
-          </p>
-        </div>
-      )}
+      {maxItems &&
+        displayRecommendations.length === maxItems &&
+        sortedRecommendations.length > maxItems && (
+          <div className="text-center">
+            <p className="text-sm text-gray-600">
+              {t("showingNOfM", {
+                count: displayRecommendations.length,
+                total: sortedRecommendations.length,
+              })}
+            </p>
+          </div>
+        )}
 
       {/* 点击外部关闭下拉菜单 */}
       {(showFilterDropdown || showSortDropdown) && (

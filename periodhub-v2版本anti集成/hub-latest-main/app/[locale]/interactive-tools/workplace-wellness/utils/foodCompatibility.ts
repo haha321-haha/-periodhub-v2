@@ -49,7 +49,8 @@ export function checkFoodCompatibility(
   };
 
   foods.forEach((food) => {
-    natureCount[food.holisticNature] = (natureCount[food.holisticNature] || 0) + 1;
+    natureCount[food.holisticNature] =
+      (natureCount[food.holisticNature] || 0) + 1;
   });
 
   // 检查寒热冲突

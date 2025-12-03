@@ -433,8 +433,9 @@ function WorkplaceWellnessContent() {
 
         {/* 淡入淡出动画 */}
         <div
-          className={`transition-opacity duration-300 ${previousTab === activeTab ? "opacity-100" : "opacity-0"
-            }`}
+          className={`transition-opacity duration-300 ${
+            previousTab === activeTab ? "opacity-100" : "opacity-0"
+          }`}
         >
           {renderTabContent()}
         </div>

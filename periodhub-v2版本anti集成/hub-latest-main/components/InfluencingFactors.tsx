@@ -127,9 +127,11 @@ export default function InfluencingFactors({
                   </h4>
                   <ul className="space-y-2">
                     {(() => {
-                      const items = t.raw("lifestyleFactors.dietaryHabits.items");
-                      const itemsArray = Array.isArray(items) 
-                        ? items 
+                      const items = t.raw(
+                        "lifestyleFactors.dietaryHabits.items",
+                      );
+                      const itemsArray = Array.isArray(items)
+                        ? items
                         : Object.values(items || {});
                       return itemsArray.map((item: string, index: number) => (
                         <li
@@ -150,9 +152,11 @@ export default function InfluencingFactors({
                   </h4>
                   <ul className="space-y-2">
                     {(() => {
-                      const items = t.raw("lifestyleFactors.exercisePatterns.items");
-                      const itemsArray = Array.isArray(items) 
-                        ? items 
+                      const items = t.raw(
+                        "lifestyleFactors.exercisePatterns.items",
+                      );
+                      const itemsArray = Array.isArray(items)
+                        ? items
                         : Object.values(items || {});
                       return itemsArray.map((item: string, index: number) => (
                         <li
@@ -173,9 +177,11 @@ export default function InfluencingFactors({
                   </h4>
                   <ul className="space-y-2">
                     {(() => {
-                      const items = t.raw("lifestyleFactors.sleepAndStress.items");
-                      const itemsArray = Array.isArray(items) 
-                        ? items 
+                      const items = t.raw(
+                        "lifestyleFactors.sleepAndStress.items",
+                      );
+                      const itemsArray = Array.isArray(items)
+                        ? items
                         : Object.values(items || {});
                       return itemsArray.map((item: string, index: number) => (
                         <li

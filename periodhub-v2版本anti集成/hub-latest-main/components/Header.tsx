@@ -28,7 +28,11 @@ export default function Header() {
   // Navigation items with badges
   const navigation = [
     { name: t("home"), href: `/${locale}` },
-    { name: t("interactiveSolutions"), href: `/${locale}/interactive-tools`, badge: "8+" },
+    {
+      name: t("interactiveSolutions"),
+      href: `/${locale}/interactive-tools`,
+      badge: "8+",
+    },
     { name: t("articlesDownloads"), href: `/${locale}/downloads`, badge: "43" },
     { name: t("scenarioSolutions"), href: `/${locale}/scenario-solutions` },
     // { name: t('frameworkDemo'), href: `/${locale}/framework-demo` }, // 暂时隐藏 - 可快速恢复
@@ -146,13 +150,15 @@ export default function Header() {
               >
                 <span>{item.name}</span>
                 {item.badge && (
-                  <span className={`px-2 py-0.5 rounded-full text-xs font-bold leading-none whitespace-nowrap ${
-                    item.badge === "8+" 
-                      ? "bg-red-500 text-white shadow-sm" 
-                      : item.badge === "43"
-                      ? "bg-blue-500 text-white shadow-sm"
-                      : "bg-gray-500 text-white shadow-sm"
-                  }`}>
+                  <span
+                    className={`px-2 py-0.5 rounded-full text-xs font-bold leading-none whitespace-nowrap ${
+                      item.badge === "8+"
+                        ? "bg-red-500 text-white shadow-sm"
+                        : item.badge === "43"
+                          ? "bg-blue-500 text-white shadow-sm"
+                          : "bg-gray-500 text-white shadow-sm"
+                    }`}
+                  >
                     {item.badge}
                   </span>
                 )}
@@ -192,32 +198,34 @@ export default function Header() {
             className="md:hidden border-t border-neutral-200 bg-white/95 backdrop-blur-md"
             id="mobile-menu"
           >
-              <div className="px-2 pt-3 pb-4 space-y-2 sm:px-3">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors min-h-[44px] flex items-center justify-between ${
-                      isActive(item.href)
-                        ? "bg-primary-50 text-primary-600 border border-primary-200"
-                        : "text-neutral-700 hover:bg-primary-50 hover:text-primary-600 border border-transparent"
-                    }`}
-                  >
-                    <span>{item.name}</span>
-                    {item.badge && (
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-bold leading-none whitespace-nowrap ${
-                        item.badge === "8+" 
-                          ? "bg-red-500 text-white shadow-sm" 
+            <div className="px-2 pt-3 pb-4 space-y-2 sm:px-3">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`block px-4 py-3 rounded-lg text-base font-medium transition-colors min-h-[44px] flex items-center justify-between ${
+                    isActive(item.href)
+                      ? "bg-primary-50 text-primary-600 border border-primary-200"
+                      : "text-neutral-700 hover:bg-primary-50 hover:text-primary-600 border border-transparent"
+                  }`}
+                >
+                  <span>{item.name}</span>
+                  {item.badge && (
+                    <span
+                      className={`px-2 py-0.5 rounded-full text-xs font-bold leading-none whitespace-nowrap ${
+                        item.badge === "8+"
+                          ? "bg-red-500 text-white shadow-sm"
                           : item.badge === "43"
-                          ? "bg-blue-500 text-white shadow-sm"
-                          : "bg-gray-500 text-white shadow-sm"
-                      }`}>
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
-                ))}
-              </div>
+                            ? "bg-blue-500 text-white shadow-sm"
+                            : "bg-gray-500 text-white shadow-sm"
+                      }`}
+                    >
+                      {item.badge}
+                    </span>
+                  )}
+                </Link>
+              ))}
+            </div>
           </div>
         )}
       </div>

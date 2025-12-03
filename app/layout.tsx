@@ -157,14 +157,14 @@ export default async function RootLayout({
     // 尝试多种方法获取locale信息
     const pathname = headersList.get("x-pathname") || "";
     const referer = headersList.get("referer") || "";
-    
+
     // 从路径中检测locale
     if (pathname.includes("/en/") || referer.includes("/en/")) {
       // locale = "en"; // 已注释：当前未使用，但保留检测逻辑以备将来需要
     } else if (pathname.includes("/zh/") || referer.includes("/zh/")) {
       // locale = "zh"; // 已注释：当前未使用，但保留检测逻辑以备将来需要
     }
-    
+
     // 从cookie中检测locale（Next.js国际化可能会设置这个）
     const cookies = headersList.get("cookie") || "";
     if (cookies.includes("NEXT_LOCALE=en")) {
@@ -176,7 +176,7 @@ export default async function RootLayout({
     // 如果获取 headers 失败，使用默认语言
     // locale = "zh"; // 已注释：当前未使用
   }
-  
+
   // locale变量当前未使用，但保留以备将来需要
   void locale;
 
@@ -187,7 +187,7 @@ export default async function RootLayout({
       {/* 🚀 SEO优化 - 全局脚本 */}
       <WebVitalsReporter />
       <PerformanceMonitor />
-      
+
       {children}
     </HydrationErrorBoundary>
   );

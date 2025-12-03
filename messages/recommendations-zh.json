@@ -12,7 +12,7 @@
     "step3Desc": "获得针对您个人情况的健康建议和护理方案",
     "step4": "持续优化",
     "step4Desc": "根据您的反馈持续优化推荐，越来越精准",
-    
+
     "filter": "筛选",
     "sortBy": "排序",
     "refresh": "刷新",
@@ -23,32 +23,32 @@
     "autoRefreshOn": "自动刷新已开启",
     "autoRefreshOff": "自动刷新已关闭",
     "close": "关闭",
-    
+
     "timeRange": "时间范围",
     "thisWeek": "本周",
     "thisMonth": "本月",
     "allTime": "全部时间",
     "lastUpdated": "最后更新",
-    
+
     "status": "状态",
     "priority": "优先级",
     "type": "类型",
     "date": "日期",
     "score": "评分",
-    
+
     "allStatuses": "所有状态",
     "active": "活跃",
     "viewed": "已查看",
     "saved": "已保存",
     "completed": "已完成",
-    
+
     "allPriorities": "所有优先级",
     "urgent": "紧急",
     "high": "高优先级",
     "medium": "中等",
     "low": "一般",
     "normal": "普通",
-    
+
     "allTypes": "所有类型",
     "nutrition": "营养管理",
     "exercise": "运动建议",
@@ -58,7 +58,7 @@
     "medical": "医疗建议",
     "lifestyle": "生活方式",
     "emergency": "紧急情况",
-    
+
     "resetFilters": "重置筛选",
     "noRecommendations": "暂无推荐",
     "noFilteredRecommendations": "没有符合筛选条件的推荐",
@@ -66,7 +66,7 @@
     "checkBackLater": "请稍后查看",
     "showingNOfM": "显示 {count} 条，共 {total} 条",
     "viewAllRecommendations": "查看全部推荐",
-    
+
     "markAsComplete": "标记为完成",
     "save": "保存",
     "saved": "已保存",
@@ -77,22 +77,22 @@
     "rate": "评分",
     "rateThisRecommendation": "为此推荐评分",
     "cancel": "取消",
-    
+
     "actionSteps": "行动步骤",
     "relatedResources": "相关资源",
-    
+
     "todayHighlights": "今日重点推荐",
     "categoryInsights": "分类洞察",
     "weeklyProgress": "每周进度",
     "activeStatus": "活跃状态",
-    
+
     "totalRecommendations": "总推荐数",
     "urgentItems": "紧急项目",
     "completionRate": "完成率",
     "averageRating": "平均评分",
     "count": "数量",
     "effectiveness": "有效性",
-    
+
     "completionProgress": "完成进度",
     "completed": "已完成",
     "activeRecommendations": "活跃推荐",

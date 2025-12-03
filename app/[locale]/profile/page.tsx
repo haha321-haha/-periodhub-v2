@@ -1,8 +1,8 @@
-import { User, Mail, Calendar, Shield } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { User, Mail, Calendar, Shield } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 interface ProfilePageProps {
   params: Promise<{
@@ -10,31 +10,31 @@ interface ProfilePageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: ProfilePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProfilePageProps): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'profile' });
-  
+  const t = await getTranslations({ locale, namespace: "profile" });
+
   return {
-    title: t('title'),
-    description: t('description'),
+    title: t("title"),
+    description: t("description"),
   };
 }
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'profile' });
-  
+  const t = await getTranslations({ locale, namespace: "profile" });
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {t('title')}
+            {t("title")}
           </h1>
-          <p className="text-lg text-gray-600">
-            {t('description')}
-          </p>
+          <p className="text-lg text-gray-600">{t("description")}</p>
         </div>
 
         {/* Profile Card */}
@@ -45,11 +45,9 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
             </div>
             <div>
               <h2 className="text-2xl font-semibold text-gray-900">
-                {t('user.name')}
+                {t("user.name")}
               </h2>
-              <p className="text-gray-600">
-                {t('user.email')}
-              </p>
+              <p className="text-gray-600">{t("user.email")}</p>
             </div>
           </div>
 
@@ -58,10 +56,10 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
               <Calendar className="w-5 h-5 text-purple-600" />
               <div>
                 <div className="font-medium text-gray-900">
-                  {t('user.memberSince.label')}
+                  {t("user.memberSince.label")}
                 </div>
                 <div className="text-sm text-gray-600">
-                  {t('user.memberSince.value')}
+                  {t("user.memberSince.value")}
                 </div>
               </div>
             </div>
@@ -70,10 +68,10 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
               <Shield className="w-5 h-5 text-green-600" />
               <div>
                 <div className="font-medium text-gray-900">
-                  {t('user.subscription.label')}
+                  {t("user.subscription.label")}
                 </div>
                 <div className="text-sm text-gray-600">
-                  {t('user.subscription.value')}
+                  {t("user.subscription.value")}
                 </div>
               </div>
             </div>
@@ -83,28 +81,34 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         {/* Settings Sections */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-6">
           <h3 className="text-xl font-semibold text-gray-900 mb-4">
-            {t('settings.title')}
+            {t("settings.title")}
           </h3>
-          
+
           <div className="space-y-4">
-            <Button asChild variant="outline" className="w-full justify-start">
+            <Button variant="outline" className="w-full justify-start">
               <Link href="/pricing" className="flex items-center gap-3">
                 <User className="w-4 h-4" />
-                {t('settings.managePlan')}
+                {t("settings.managePlan")}
               </Link>
             </Button>
-            
-            <Button asChild variant="outline" className="w-full justify-start">
-              <Link href="/settings/notifications" className="flex items-center gap-3">
+
+            <Button variant="outline" className="w-full justify-start">
+              <Link
+                href="/settings/notifications"
+                className="flex items-center gap-3"
+              >
                 <Mail className="w-4 h-4" />
-                {t('settings.notifications')}
+                {t("settings.notifications")}
               </Link>
             </Button>
-            
-            <Button asChild variant="outline" className="w-full justify-start">
-              <Link href="/settings/privacy" className="flex items-center gap-3">
+
+            <Button variant="outline" className="w-full justify-start">
+              <Link
+                href="/settings/privacy"
+                className="flex items-center gap-3"
+              >
                 <Shield className="w-4 h-4" />
-                {t('settings.privacy')}
+                {t("settings.privacy")}
               </Link>
             </Button>
           </div>
@@ -112,16 +116,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button asChild className="flex-1">
-            <Link href="/dashboard">
-              {t('actions.backToDashboard')}
-            </Link>
+          <Button className="flex-1">
+            <Link href="/dashboard">{t("actions.backToDashboard")}</Link>
           </Button>
-          
-          <Button asChild variant="outline" className="flex-1">
-            <Link href="/">
-              {t('actions.backToHome')}
-            </Link>
+
+          <Button variant="outline" className="flex-1">
+            <Link href="/">{t("actions.backToHome")}</Link>
           </Button>
         </div>
       </div>

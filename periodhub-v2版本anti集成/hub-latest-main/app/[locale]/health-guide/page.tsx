@@ -12,7 +12,10 @@ import {
   HreflangScript,
 } from "@/lib/seo/multilingual-seo";
 import { generatePageSEO, StructuredDataType } from "@/lib/seo/page-seo";
-import { generateMedicalConditionSchema, generateMedicalWebPageSchema } from "@/lib/seo/medical-schema-generator";
+import {
+  generateMedicalConditionSchema,
+  generateMedicalWebPageSchema,
+} from "@/lib/seo/medical-schema-generator";
 import { safeStringify } from "@/lib/utils/json-serialization";
 
 // 推荐数据配置函数（健康指南主题）
@@ -188,11 +191,12 @@ export default async function HealthGuidePage({
   // 生成独立的 MedicalCondition Schema
   const medicalConditionSchema = generateMedicalConditionSchema(
     "DYSMENORRHEA",
-    locale
+    locale,
   );
 
   // 生成 MedicalWebPage Schema (GEO/AEO 合规性)
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
   const medicalWebPageSchema = generateMedicalWebPageSchema({
     title: t("title"),
     description: t("description"),

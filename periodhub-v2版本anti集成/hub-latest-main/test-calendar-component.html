@@ -40,7 +40,7 @@
 </head>
 <body>
     <h1>CalendarComponent 功能测试</h1>
-    
+
     <div class="test-item">
         <h3>测试项目 1: 按钮位置</h3>
         <p>验证【经期记录】按钮是否从头部右上角移至统计信息下方，居中显示</p>
@@ -49,7 +49,7 @@
         <button class="test-button" onclick="document.getElementById('test1-status').textContent='通过'; document.getElementById('test1-status').className='status pass'">测试通过</button>
         <button class="test-button" onclick="document.getElementById('test1-status').textContent='失败'; document.getElementById('test1-status').className='status fail'">测试失败</button>
     </div>
-    
+
     <div class="test-item">
         <h3>测试项目 2: 表单位置</h3>
         <p>验证表单是否位于按钮下方，同一视觉区域</p>
@@ -57,7 +57,7 @@
         <button class="test-button" onclick="document.getElementById('test2-status').textContent='通过'; document.getElementById('test2-status').className='status pass'">测试通过</button>
         <button class="test-button" onclick="document.getElementById('test2-status').textContent='失败'; document.getElementById('test2-status').className='status fail'">测试失败</button>
     </div>
-    
+
     <div class="test-item">
         <h3>测试项目 3: 自动聚焦</h3>
         <p>验证表单展开后是否自动聚焦到日期输入框</p>
@@ -65,7 +65,7 @@
         <button class="test-button" onclick="document.getElementById('test3-status').textContent='通过'; document.getElementById('test3-status').className='status pass'">测试通过</button>
         <button class="test-button" onclick="document.getElementById('test3-status').textContent='失败'; document.getElementById('test3-status').className='status fail'">测试失败</button>
     </div>
-    
+
     <div class="test-item">
         <h3>测试项目 4: 展开/收起动画</h3>
         <p>验证表单是否有平滑的展开/收起动画</p>
@@ -73,7 +73,7 @@
         <button class="test-button" onclick="document.getElementById('test4-status').textContent='通过'; document.getElementById('test4-status').className='status pass'">测试通过</button>
         <button class="test-button" onclick="document.getElementById('test4-status').textContent='失败'; document.getElementById('test4-status').className='status fail'">测试失败</button>
     </div>
-    
+
     <div class="test-item">
         <h3>测试项目 5: 状态指示</h3>
         <p>验证箭头图标是否根据表单状态切换（展开时向上，收起时向下）</p>
@@ -81,7 +81,7 @@
         <button class="test-button" onclick="document.getElementById('test5-status').textContent='通过'; document.getElementById('test5-status').className='status pass'">测试通过</button>
         <button class="test-button" onclick="document.getElementById('test5-status').textContent='失败'; document.getElementById('test5-status').className='status fail'">测试失败</button>
     </div>
-    
+
     <div class="test-item">
         <h3>测试项目 6: 可访问性</h3>
         <p>验证按钮是否添加了 aria-expanded 属性</p>
@@ -89,26 +89,26 @@
         <button class="test-button" onclick="document.getElementById('test6-status').textContent='通过'; document.getElementById('test6-status').className='status pass'">测试通过</button>
         <button class="test-button" onclick="document.getElementById('test6-status').textContent='失败'; document.getElementById('test6-status').className='status fail'">测试失败</button>
     </div>
-    
+
     <div class="test-item">
         <h3>总体评价</h3>
         <div class="status pending" id="overall-status">待测试</div>
         <button class="test-button" onclick="updateOverallStatus()">更新总体状态</button>
     </div>
-    
+
     <script>
         function updateOverallStatus() {
             const statuses = document.querySelectorAll('.status');
             let passCount = 0;
             let failCount = 0;
             let pendingCount = 0;
-            
+
             statuses.forEach(status => {
                 if (status.textContent === '通过') passCount++;
                 else if (status.textContent === '失败') failCount++;
                 else if (status.textContent === '待测试') pendingCount++;
             });
-            
+
             const overallStatus = document.getElementById('overall-status');
             if (failCount === 0 && pendingCount === 0) {
                 overallStatus.textContent = '全部通过';

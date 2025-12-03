@@ -2013,11 +2013,7 @@
         "title": "使用建议：",
         "bestTiming": {
           "title": "最佳时机：",
-          "items": [
-            "疼痛刚开始时",
-            "感到焦虑紧张时",
-            "睡前放松时"
-          ]
+          "items": ["疼痛刚开始时", "感到焦虑紧张时", "睡前放松时"]
         },
         "precautions": {
           "title": "注意事项：",
@@ -2643,48 +2639,23 @@
         "questions": {
           "q1": {
             "question": "Have you frequently felt anxious or tense recently?",
-            "options": [
-              "Never",
-              "Occasionally",
-              "Often",
-              "Always"
-            ]
+            "options": ["Never", "Occasionally", "Often", "Always"]
           },
           "q2": {
             "question": "How is your sleep quality?",
-            "options": [
-              "Very Good",
-              "Good",
-              "Poor",
-              "Very Poor"
-            ]
+            "options": ["Very Good", "Good", "Poor", "Very Poor"]
           },
           "q3": {
             "question": "Do you often feel tired or lack energy?",
-            "options": [
-              "Never",
-              "Occasionally",
-              "Often",
-              "Always"
-            ]
+            "options": ["Never", "Occasionally", "Often", "Always"]
           },
           "q4": {
             "question": "Do you easily feel irritable or angry?",
-            "options": [
-              "Never",
-              "Occasionally",
-              "Often",
-              "Always"
-            ]
+            "options": ["Never", "Occasionally", "Often", "Always"]
           },
           "q5": {
             "question": "Do you often worry about period-related issues?",
-            "options": [
-              "Never",
-              "Occasionally",
-              "Often",
-              "Always"
-            ]
+            "options": ["Never", "Occasionally", "Often", "Always"]
           }
         },
         "benefits": {
@@ -2706,13 +2677,7 @@
         "radar": {
           "title": "Stress Areas Analysis",
           "subtitle": "Visual representation of your stress levels across different life areas",
-          "labels": [
-            "Work",
-            "Sleep",
-            "Emotion",
-            "Physical",
-            "Social"
-          ]
+          "labels": ["Work", "Sleep", "Emotion", "Physical", "Social"]
         },
         "privacy": {
           "badge": "Your data is 100% encrypted and never sold",
@@ -8120,11 +8085,7 @@
       "partnerCommunication": {
         "title": "Partner Communication Scenarios",
         "description": "专业的伴侣沟通场景解决方案，帮助伴侣更好地理解痛经，提供针对性的沟通策略和情感支持技巧。包含理解Testing、30天训练营和个性化指导，帮助您建立更好的理解和沟通。",
-        "features": [
-          "伴侣理解测试",
-          "30天训练营",
-          "个性化指导"
-        ]
+        "features": ["伴侣理解测试", "30天训练营", "个性化指导"]
       }
     },
     "introTitle": "Comprehensive Scenario-Based Solutions",
@@ -13025,8 +12986,8 @@
     }
   },
   "homePageContent": {
-      "searchPlaceholder": "🔍 Quick search for period pain solutions...",
-      "searchTips": "💡 Try searching \"5-minute relief\", \"Hot Compress\", \"Prostaglandins\"",
+    "searchPlaceholder": "🔍 Quick search for period pain solutions...",
+    "searchTips": "💡 Try searching \"5-minute relief\", \"Hot Compress\", \"Prostaglandins\"",
     "seo": {
       "title": "PeriodHub - Professional Period Pain Relief Methods & Menstrual Health Management Platform | Scientific Guidance, Caring Companion",
       "description": "PeriodHub professional period pain relief solutions and menstrual health management platform. Based on 43 medical guides and 13 self-assessment tools, has helped 600,000+ women scientifically cope with period pain, obtain personalized solutions, and improve quality of life. Provides scientific period pain relief methods, interactive tools, and personalized health guidance.",
@@ -13785,11 +13746,7 @@
     "comparison": {
       "free": {
         "title": "Free",
-        "features": [
-          "1 full assessment",
-          "Basic results",
-          "General tips"
-        ]
+        "features": ["1 full assessment", "Basic results", "General tips"]
       },
       "pro": {
         "title": "Pro",
@@ -13852,12 +13809,7 @@
       },
       "productivity": {
         "q": "During your period, your work efficiency typically drops by:",
-        "options": [
-          "0-10%",
-          "10-25%",
-          "25-50%",
-          "Over 50%"
-        ]
+        "options": ["0-10%", "10-25%", "25-50%", "Over 50%"]
       },
       "sleep": {
         "q": "How do period-related symptoms affect your sleep quality?",

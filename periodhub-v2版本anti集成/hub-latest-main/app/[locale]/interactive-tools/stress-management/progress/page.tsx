@@ -14,7 +14,10 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "interactiveTools.stressManagement" });
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveTools.stressManagement",
+  });
 
   return {
     title: t("progress.title") + " - PeriodHub",
@@ -58,8 +61,14 @@ export default async function ProgressTrackingPage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
 
-  const t = await getTranslations({ locale, namespace: "interactiveTools.stressManagement" });
-  const breadcrumbT = await getTranslations({ locale, namespace: "interactiveTools.breadcrumb" });
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveTools.stressManagement",
+  });
+  const breadcrumbT = await getTranslations({
+    locale,
+    namespace: "interactiveTools.breadcrumb",
+  });
 
   const trackingFeatures = [
     {

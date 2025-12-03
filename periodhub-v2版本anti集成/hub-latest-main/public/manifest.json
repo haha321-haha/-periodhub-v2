@@ -9,11 +9,7 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "zh-CN",
-  "categories": [
-    "health",
-    "medical",
-    "lifestyle"
-  ],
+  "categories": ["health", "medical", "lifestyle"],
   "icons": [
     {
       "src": "/icon-192.png",

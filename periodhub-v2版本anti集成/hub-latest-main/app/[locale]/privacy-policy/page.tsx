@@ -633,10 +633,7 @@ export default async function PrivacyPolicyPage({
             </h2>
             <p className="text-purple-700 mb-6">{t("questionsDescription")}</p>
             <a
-              href={generateMailtoLink(
-                t("email.subject"),
-                t("email.body"),
-              )}
+              href={generateMailtoLink(t("email.subject"), t("email.body"))}
               className="btn-primary"
             >
               {t("contactUs")}

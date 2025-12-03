@@ -1,4 +1,7 @@
-import { safeStringify, cleanDataForJSON } from "@/lib/utils/json-serialization";
+import {
+  safeStringify,
+  cleanDataForJSON,
+} from "@/lib/utils/json-serialization";
 
 interface EnhancedStructuredDataProps {
   type: "website" | "article" | "faq" | "howto" | "medicalwebpage";
@@ -160,7 +163,7 @@ export default function EnhancedStructuredData({
 
   // 确保最终数据包含必需的字段且没有空字符串
   const cleanedData = cleanDataForJSON(structuredData);
-  
+
   // 验证数据有效性
   if (!cleanedData || typeof cleanedData !== "object") {
     console.error("Structured data cleaning failed:", cleanedData);
@@ -168,21 +171,36 @@ export default function EnhancedStructuredData({
   }
 
   const finalData = cleanedData as Record<string, unknown>;
-  
+
   // 验证 @type 字段存在且非空
-  if (!finalData["@type"] || typeof finalData["@type"] !== "string" || finalData["@type"] === "") {
+  if (
+    !finalData["@type"] ||
+    typeof finalData["@type"] !== "string" ||
+    finalData["@type"] === ""
+  ) {
     console.error("Structured data missing or invalid @type field:", finalData);
     return null; // 不渲染无效的结构化数据
   }
 
   // 验证 @context 字段
-  if (!finalData["@context"] || typeof finalData["@context"] !== "string" || finalData["@context"] === "") {
-    console.error("Structured data missing or invalid @context field:", finalData);
+  if (
+    !finalData["@context"] ||
+    typeof finalData["@context"] !== "string" ||
+    finalData["@context"] === ""
+  ) {
+    console.error(
+      "Structured data missing or invalid @context field:",
+      finalData,
+    );
     return null; // 不渲染无效的结构化数据
   }
-  
+
   // 验证必需的基本字段
-  if (!finalData["name"] || typeof finalData["name"] !== "string" || finalData["name"].trim() === "") {
+  if (
+    !finalData["name"] ||
+    typeof finalData["name"] !== "string" ||
+    finalData["name"].trim() === ""
+  ) {
     console.warn("Structured data missing or empty name field:", finalData);
   }
 

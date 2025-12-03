@@ -18,7 +18,8 @@ export default function FAQStructuredData({
 }: FAQStructuredDataProps) {
   // 过滤空问题和答案
   const validFAQs = faqs.filter(
-    (faq) => faq.question && faq.answer && faq.question.trim() && faq.answer.trim()
+    (faq) =>
+      faq.question && faq.answer && faq.question.trim() && faq.answer.trim(),
   );
 
   const structuredData: Record<string, unknown> = {

@@ -1,13 +1,13 @@
 /**
  * GEO地理位置Hook
  * Geographic Location Hook
- * 
+ *
  * 客户端使用的地理位置检测Hook
  * Client-side geographic location detection hook
  */
 
-import { useState, useEffect } from 'react';
-import type { GeoLocation } from '@/lib/geo/geoip-service';
+import { useState, useEffect } from "react";
+import type { GeoLocation } from "@/lib/geo/geoip-service";
 
 interface UseGeoLocationResult {
   location: GeoLocation | null;
@@ -30,7 +30,7 @@ export function useGeoLocation(): UseGeoLocationResult {
       setLoading(true);
       setError(null);
 
-      const response = await fetch('/api/geo/location');
+      const response = await fetch("/api/geo/location");
       const result = await response.json();
 
       if (result.success && result.data) {
@@ -38,23 +38,24 @@ export function useGeoLocation(): UseGeoLocationResult {
       } else {
         // 使用默认位置
         setLocation({
-          country: 'Unknown',
-          countryCode: 'XX',
-          city: 'Unknown',
-          region: 'Unknown',
-          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+          country: "Unknown",
+          countryCode: "XX",
+          city: "Unknown",
+          region: "Unknown",
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC",
         });
       }
     } catch (err) {
-      const error = err instanceof Error ? err : new Error('Failed to fetch location');
+      const error =
+        err instanceof Error ? err : new Error("Failed to fetch location");
       setError(error);
       // 设置默认位置
       setLocation({
-        country: 'Unknown',
-        countryCode: 'XX',
-        city: 'Unknown',
-        region: 'Unknown',
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+        country: "Unknown",
+        countryCode: "XX",
+        city: "Unknown",
+        region: "Unknown",
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC",
       });
     } finally {
       setLoading(false);
@@ -72,4 +73,3 @@ export function useGeoLocation(): UseGeoLocationResult {
     refetch: fetchLocation,
   };
 }
-

@@ -89,9 +89,7 @@ export default async function TrustSection({ locale }: TrustSectionProps) {
                 {t(`${baseKey}.professionalAssurance.regularlyUpdated`)}
               </p>
               <p className="text-xs md:text-sm text-neutral-300">
-                {t(
-                  `${baseKey}.professionalAssurance.regularlyUpdatedDesc`,
-                )}
+                {t(`${baseKey}.professionalAssurance.regularlyUpdatedDesc`)}
               </p>
             </div>
           </div>

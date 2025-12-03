@@ -352,10 +352,11 @@ export default function HistoryDataViewer() {
 
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className={`flex items-center px-3 py-2 rounded-lg transition-colors ${showFilters
+            className={`flex items-center px-3 py-2 rounded-lg transition-colors ${
+              showFilters
                 ? "bg-primary-500 text-white"
                 : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
+            }`}
           >
             <Filter className="w-4 h-4 mr-1" />
             {t("history.filters")}

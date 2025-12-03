@@ -34,9 +34,9 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
-CREATE TRIGGER update_aeo_references_updated_at 
-  BEFORE UPDATE ON aeo_references 
-  FOR EACH ROW 
+CREATE TRIGGER update_aeo_references_updated_at
+  BEFORE UPDATE ON aeo_references
+  FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
 -- 创建视图用于统计查询
@@ -73,9 +73,3 @@ COMMENT ON COLUMN aeo_references.content_snippet IS '引用的内容片段';
 COMMENT ON COLUMN aeo_references.accuracy_score IS '引用准确性评分（0-100）';
 COMMENT ON COLUMN aeo_references.includes_source_link IS '是否包含来源链接';
 COMMENT ON COLUMN aeo_references.user_query IS '用户查询';
-
-
-
-
-
-

@@ -173,7 +173,7 @@
       <h2>核心功能测试</h2>
       <div id="coreTests"></div>
     </div>
-    
+
     <div class="test-section">
       <h2>边界情况测试</h2>
       <div id="edgeCaseTests"></div>
@@ -277,10 +277,10 @@
           showError('无法打开测试窗口，请检查浏览器弹窗设置');
           return null;
         }
-        
+
         // 显示测试窗口信息
         document.getElementById('testWindowInfo').style.display = 'block';
-        
+
         // 等待窗口加载完成
         testWindow.addEventListener('load', () => {
           console.log('测试窗口已加载完成');
@@ -308,7 +308,7 @@
           reject(new Error('无法打开测试窗口'));
           return;
         }
-        
+
         // 检查窗口是否完全加载
         if (testWin.document.readyState !== 'complete') {
           testWin.addEventListener('load', () => {
@@ -336,7 +336,7 @@
       const startBtn = document.getElementById('startBtn');
       startBtn.disabled = true;
       startBtn.textContent = '测试进行中...';
-      
+
       // 初始化测试窗口
       const testWin = getTestWindow();
       if (!testWin) {
@@ -344,7 +344,7 @@
         startBtn.textContent = '开始测试';
         return;
       }
-      
+
       // 计算总测试数
       const allTests = [
         ...testDefinitions.core,
@@ -352,16 +352,16 @@
       ];
       testCount = allTests.length;
       completedTests = 0;
-      
+
       // 依次执行测试
       for (const test of testDefinitions.core) {
         await runTest(test, 'core');
       }
-      
+
       for (const test of testDefinitions.edgeCase) {
         await runTest(test, 'edgeCase');
       }
-      
+
       // 完成测试
       completeTests();
       startBtn.disabled = false;
@@ -374,28 +374,28 @@
       element.className = 'test-item running';
       element.querySelector('.test-status').textContent = `🔄 ${test.name}`;
       element.querySelector('.test-details').textContent = '正在执行测试...';
-      
+
       try {
         const result = await test.fn();
-        
+
         // 保存结果
         testResults[category].push({
           id: test.id,
           name: test.name,
           ...result
         });
-        
+
         // 更新UI
         element.className = `test-item ${result.status}`;
-        const statusIcon = result.status === 'passed' ? '✅' : 
+        const statusIcon = result.status === 'passed' ? '✅' :
                           result.status === 'failed' ? '❌' : '⚠️';
         element.querySelector('.test-status').textContent = `${statusIcon} ${test.name}`;
         element.querySelector('.test-details').textContent = result.details || result.message;
-        
+
         // 更新进度
         completedTests++;
         updateProgress();
-        
+
         // 短暂延迟以便观察
         await new Promise(resolve => setTimeout(resolve, 500));
       } catch (error) {
@@ -406,14 +406,14 @@
           message: '测试执行异常',
           details: error.message
         });
-        
+
         element.className = 'test-item failed';
         element.querySelector('.test-status').textContent = `❌ ${test.name}`;
         element.querySelector('.test-details').textContent = error.message;
-        
+
         completedTests++;
         updateProgress();
-        
+
         await new Promise(resolve => setTimeout(resolve, 500));
       }
     }
@@ -430,7 +430,7 @@
       const coreTotal = testResults.core.length;
       const edgePassed = testResults.edgeCase.filter(r => r.status === 'passed').length;
       const edgeTotal = testResults.edgeCase.length;
-      
+
       const summary = document.getElementById('testSummary');
       summary.innerHTML = `
         <div class="test-summary">
@@ -474,12 +474,12 @@
       hideError();
       document.getElementById('testWindowInfo').style.display = 'none';
       document.getElementById('testSummary').textContent = '准备开始测试...';
-      
+
       if (testWindow && !testWindow.closed) {
         testWindow.close();
         testWindow = null;
       }
-      
+
       initializeTests();
     }
 
@@ -492,7 +492,7 @@
               // 检查页面基本元素
               const hasMainContent = document.querySelector('main, .container, .app') !== null;
               const hasTitle = document.querySelector('h1, .title') !== null;
-              
+
               if (!hasMainContent || !hasTitle) {
                 return {
                   status: 'failed',
@@ -500,11 +500,11 @@
                   details: '缺少主要内容区域或标题'
                 };
               }
-              
+
               // 检查应用是否已加载
-              const appElement = document.querySelector('[data-testid], .app-container, #root') || 
+              const appElement = document.querySelector('[data-testid], .app-container, #root') ||
                                 document.querySelector('script[src*="workplace-wellness"]');
-              
+
               if (!appElement) {
                 return {
                   status: 'failed',
@@ -512,7 +512,7 @@
                   details: '无法找到应用相关元素'
                 };
               }
-              
+
               return {
                 status: 'passed',
                 message: '页面加载成功',
@@ -527,7 +527,7 @@
             }
           })()
         `;
-        
+
         return await executeInTestWindow(testCode);
       } catch (error) {
         return {
@@ -545,10 +545,10 @@
             try {
               // 检查localStorage数据
               const hasStorage = localStorage.getItem('workplace-wellness-storage') !== null;
-              
+
               // 检查页面数据元素
               const dataElements = document.querySelectorAll('[data-period], .period-data, .calendar-item, .chart-data');
-              
+
               if (!hasStorage && dataElements.length === 0) {
                 return {
                   status: 'warning',
@@ -556,7 +556,7 @@
                   details: '可能是首次访问或数据已清除'
                 };
               }
-              
+
               if (dataElements.length > 0) {
                 return {
                   status: 'passed',
@@ -564,7 +564,7 @@
                   details: \`页面显示\${dataElements.length}个数据元素\`
                 };
               }
-              
+
               return {
                 status: 'warning',
                 message: '数据状态未知',
@@ -579,7 +579,7 @@
             }
           })()
         `;
-        
+
         return await executeInTestWindow(testCode);
       } catch (error) {
         return {
@@ -597,7 +597,7 @@
             try {
               // 查找图表元素
               const chartElements = document.querySelectorAll('canvas, svg, [data-testid*="chart"], .chart, .graph');
-              
+
               if (chartElements.length === 0) {
                 return {
                   status: 'failed',
@@ -605,7 +605,7 @@
                   details: '页面可能未加载图表组件'
                 };
               }
-              
+
               // 检查图表是否有内容
               let hasContent = false;
               chartElements.forEach(chart => {
@@ -613,7 +613,7 @@
                 if (chart.tagName === 'SVG' && chart.children.length > 0) hasContent = true;
                 if (chart.querySelector && chart.querySelector('canvas, svg, path, circle, rect')) hasContent = true;
               });
-              
+
               if (!hasContent) {
                 return {
                   status: 'warning',
@@ -621,7 +621,7 @@
                   details: '可能需要等待数据加载'
                 };
               }
-              
+
               return {
                 status: 'passed',
                 message: '图表显示正常',
@@ -636,7 +636,7 @@
             }
           })()
         `;
-        
+
         return await executeInTestWindow(testCode);
       } catch (error) {
         return {
@@ -654,7 +654,7 @@
             try {
               // 查找按钮元素
               const buttons = document.querySelectorAll('button');
-              
+
               if (buttons.length === 0) {
                 return {
                   status: 'warning',
@@ -662,7 +662,7 @@
                   details: '页面可能使用了其他交互元素'
                 };
               }
-              
+
               // 检查按钮是否有合适的样式和位置
               let wellPositionedButtons = 0;
               buttons.forEach(button => {
@@ -670,7 +670,7 @@
                 const isVisible = rect.width > 0 && rect.height > 0;
                 if (isVisible) wellPositionedButtons++;
               });
-              
+
               if (wellPositionedButtons === 0) {
                 return {
                   status: 'warning',
@@ -678,7 +678,7 @@
                   details: '所有按钮都不可见'
                 };
               }
-              
+
               return {
                 status: 'passed',
                 message: '按钮位置正常',
@@ -693,7 +693,7 @@
             }
           })()
         `;
-        
+
         return await executeInTestWindow(testCode);
       } catch (error) {
         return {
@@ -712,7 +712,7 @@
               // 检查页面是否有空数据状态的处理
               const emptyStates = document.querySelectorAll('[data-testid*="empty"], .empty-state, .no-data');
               const errorElements = document.querySelectorAll('.error, .error-message');
-              
+
               if (errorElements.length > 0) {
                 return {
                   status: 'warning',
@@ -720,7 +720,7 @@
                   details: \`页面有\${errorElements.length}个错误元素\`
                 };
               }
-              
+
               if (emptyStates.length > 0) {
                 return {
                   status: 'passed',
@@ -728,10 +728,10 @@
                   details: '页面有友好的空状态提示'
                 };
               }
-              
+
               // 检查页面是否有数据元素
               const dataElements = document.querySelectorAll('[data-period], .period-data, .calendar-item');
-              
+
               if (dataElements.length === 0) {
                 return {
                   status: 'warning',
@@ -739,7 +739,7 @@
                   details: '可能需要添加空状态处理'
                 };
               }
-              
+
               return {
                 status: 'passed',
                 message: '页面正常显示数据',
@@ -754,7 +754,7 @@
             }
           })()
         `;
-        
+
         return await executeInTestWindow(testCode);
       } catch (error) {
         return {
@@ -773,7 +773,7 @@
               // 检查页面数据量
               const dataElements = document.querySelectorAll('[data-period], .period-data, .calendar-item, .chart-point');
               const dataCount = dataElements.length;
-              
+
               if (dataCount < 5) {
                 return {
                   status: 'warning',
@@ -781,14 +781,14 @@
                   details: \`当前数据量: \${dataCount}\`
                 };
               }
-              
+
               // 简单的性能检查
               const startTime = performance.now();
               const chartElements = document.querySelectorAll('canvas, svg, .chart');
               const endTime = performance.now();
-              
+
               const renderTime = endTime - startTime;
-              
+
               return {
                 status: 'passed',
                 message: '性能测试通过',
@@ -803,7 +803,7 @@
             }
           })()
         `;
-        
+
         return await executeInTestWindow(testCode);
       } catch (error) {
         return {
@@ -821,7 +821,7 @@
             try {
               // 检查页面是否有明显的安全问题
               const errorElements = document.querySelectorAll('.error, .error-message, [data-testid*="error"]');
-              
+
               if (errorElements.length > 0) {
                 return {
                   status: 'warning',
@@ -829,22 +829,22 @@
                   details: \`找到\${errorElements.length}个错误元素\`
                 };
               }
-              
+
               // 检查是否有明显的敏感信息泄露
               const scripts = document.querySelectorAll('script');
               let sensitiveInfoCount = 0;
-              
+
               scripts.forEach(script => {
                 if (script.textContent) {
                   const hasPasswords = /password|passwd|pwd/i.test(script.textContent);
                   const hasApiKeys = /api[_-]?key|secret|token/i.test(script.textContent);
-                  
+
                   if (hasPasswords || hasApiKeys) {
                     sensitiveInfoCount++;
                   }
                 }
               });
-              
+
               if (sensitiveInfoCount > 0) {
                 return {
                   status: 'warning',
@@ -852,7 +852,7 @@
                   details: \`检测到\${sensitiveInfoCount}处可能的敏感信息\`
                 };
               }
-              
+
               return {
                 status: 'passed',
                 message: '安全性检查通过',
@@ -867,7 +867,7 @@
             }
           })()
         `;
-        
+
         return await executeInTestWindow(testCode);
       } catch (error) {
         return {

@@ -7,13 +7,13 @@
 
 import React, { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
-import { 
-  Clock, 
-  Bookmark, 
-  CheckCircle, 
-  X, 
-  Star, 
-  ThumbsUp, 
+import {
+  Clock,
+  Bookmark,
+  CheckCircle,
+  X,
+  Star,
+  ThumbsUp,
   ThumbsDown,
   ChevronRight,
   AlertTriangle,
@@ -24,7 +24,7 @@ import {
   Brain,
   Apple,
   Dumbbell,
-  Shield
+  Shield,
 } from "lucide-react";
 
 import {
@@ -43,7 +43,9 @@ interface RecommendationCardProps {
   onSave?: (recommendationId: string) => void;
   onDismiss?: (recommendationId: string) => void;
   onComplete?: (recommendationId: string) => void;
-  onFeedback?: (feedback: Omit<RecommendationFeedback, "id" | "timestamp">) => void;
+  onFeedback?: (
+    feedback: Omit<RecommendationFeedback, "id" | "timestamp">,
+  ) => void;
   compact?: boolean;
   showFeedback?: boolean;
   variant?: "default" | "minimal" | "detailed";
@@ -76,7 +78,10 @@ const PRIORITY_COLORS: Record<RecommendationPriority, string> = {
 /**
  * 优先级标签配置
  */
-const PRIORITY_LABELS: Record<RecommendationPriority, { zh: string; en: string }> = {
+const PRIORITY_LABELS: Record<
+  RecommendationPriority,
+  { zh: string; en: string }
+> = {
   urgent: { zh: "紧急", en: "Urgent" },
   high: { zh: "高优先级", en: "High" },
   medium: { zh: "中等", en: "Medium" },
@@ -107,12 +112,13 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
 }) => {
   const t = useTranslations("recommendations");
   const actions = useRecommendationActions();
-  
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [showRatingDialog, setShowRatingDialog] = useState(false);
   const [hoveredAction, setHoveredAction] = useState<string | null>(null);
 
-  const { content, priority, status, personalizedReason, context } = recommendation;
+  const { content, priority, status, personalizedReason, context } =
+    recommendation;
 
   // 处理查看详情
   const handleView = useCallback(() => {
@@ -124,51 +130,66 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
   }, [status, recommendation.id, actions, onView]);
 
   // 处理保存
-  const handleSave = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (status === "saved") {
-      // 如果已保存，则取消保存
-      // 这里可以添加取消保存的逻辑
-    } else {
-      actions.saveRecommendation(recommendation.id);
-      onSave?.(recommendation.id);
-    }
-  }, [status, recommendation.id, actions, onSave]);
+  const handleSave = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (status === "saved") {
+        // 如果已保存，则取消保存
+        // 这里可以添加取消保存的逻辑
+      } else {
+        actions.saveRecommendation(recommendation.id);
+        onSave?.(recommendation.id);
+      }
+    },
+    [status, recommendation.id, actions, onSave],
+  );
 
   // 处理忽略
-  const handleDismiss = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    actions.dismissRecommendation(recommendation.id);
-    onDismiss?.(recommendation.id);
-  }, [recommendation.id, actions, onDismiss]);
+  const handleDismiss = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      actions.dismissRecommendation(recommendation.id);
+      onDismiss?.(recommendation.id);
+    },
+    [recommendation.id, actions, onDismiss],
+  );
 
   // 处理完成
-  const handleComplete = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    actions.markAsCompleted(recommendation.id);
-    onComplete?.(recommendation.id);
-  }, [recommendation.id, actions, onComplete]);
+  const handleComplete = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      actions.markAsCompleted(recommendation.id);
+      onComplete?.(recommendation.id);
+    },
+    [recommendation.id, actions, onComplete],
+  );
 
   // 处理反馈
-  const handleFeedback = useCallback((type: "useful" | "not_useful") => {
-    onFeedback?.({
-      recommendationId: recommendation.id,
-      type,
-      context: {
-        viewedDuration: isExpanded ? 30 : 5, // 简化的查看时长估算
-      },
-    });
-  }, [recommendation.id, onFeedback, isExpanded]);
+  const handleFeedback = useCallback(
+    (type: "useful" | "not_useful") => {
+      onFeedback?.({
+        recommendationId: recommendation.id,
+        type,
+        context: {
+          viewedDuration: isExpanded ? 30 : 5, // 简化的查看时长估算
+        },
+      });
+    },
+    [recommendation.id, onFeedback, isExpanded],
+  );
 
   // 处理评分
-  const handleRating = useCallback((rating: number) => {
-    onFeedback?.({
-      recommendationId: recommendation.id,
-      type: "rating",
-      rating: rating as 1 | 2 | 3 | 4 | 5,
-    });
-    setShowRatingDialog(false);
-  }, [recommendation.id, onFeedback]);
+  const handleRating = useCallback(
+    (rating: number) => {
+      onFeedback?.({
+        recommendationId: recommendation.id,
+        type: "rating",
+        rating: rating as 1 | 2 | 3 | 4 | 5,
+      });
+      setShowRatingDialog(false);
+    },
+    [recommendation.id, onFeedback],
+  );
 
   // 渲染状态指示器
   const renderStatusIndicator = () => {
@@ -198,10 +219,14 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             className="p-2 rounded-full hover:bg-green-100 transition-colors"
             title={t("markAsComplete")}
           >
-            <CheckCircle className={cn(
-              "h-4 w-4",
-              hoveredAction === "complete" ? "text-green-600" : "text-gray-400"
-            )} />
+            <CheckCircle
+              className={cn(
+                "h-4 w-4",
+                hoveredAction === "complete"
+                  ? "text-green-600"
+                  : "text-gray-400",
+              )}
+            />
           </button>
         )}
 
@@ -213,10 +238,16 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             className="p-2 rounded-full hover:bg-blue-100 transition-colors"
             title={status === "saved" ? t("saved") : t("save")}
           >
-            <Bookmark className={cn(
-              "h-4 w-4",
-              status === "saved" ? "text-blue-600" : hoveredAction === "save" ? "text-blue-600" : "text-gray-400"
-            )} />
+            <Bookmark
+              className={cn(
+                "h-4 w-4",
+                status === "saved"
+                  ? "text-blue-600"
+                  : hoveredAction === "save"
+                    ? "text-blue-600"
+                    : "text-gray-400",
+              )}
+            />
           </button>
         )}
 
@@ -227,10 +258,12 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
           className="p-2 rounded-full hover:bg-gray-100 transition-colors"
           title={t("dismiss")}
         >
-          <X className={cn(
-            "h-4 w-4",
-            hoveredAction === "dismiss" ? "text-gray-600" : "text-gray-400"
-          )} />
+          <X
+            className={cn(
+              "h-4 w-4",
+              hoveredAction === "dismiss" ? "text-gray-600" : "text-gray-400",
+            )}
+          />
         </button>
       </div>
     );
@@ -279,7 +312,9 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
         <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4">
-          <h3 className="text-lg font-semibold mb-4">{t("rateThisRecommendation")}</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            {t("rateThisRecommendation")}
+          </h3>
           <div className="flex justify-center space-x-2 mb-4">
             {[1, 2, 3, 4, 5].map((rating) => (
               <button
@@ -318,15 +353,13 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
           "p-3 border rounded-lg cursor-pointer hover:shadow-md transition-all duration-200",
           PRIORITY_COLORS[priority],
           status === "dismissed" && "opacity-60",
-          className
+          className,
         )}
         onClick={handleView}
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="text-gray-700">
-              {TYPE_ICONS[content.type]}
-            </div>
+            <div className="text-gray-700">{TYPE_ICONS[content.type]}</div>
             <div className="flex-1 min-w-0">
               <h4 className="text-sm font-medium text-gray-900 truncate">
                 {getLocalizedText(content.title)}
@@ -354,7 +387,7 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
           PRIORITY_COLORS[priority],
           status === "dismissed" && "opacity-60",
           "border-l-4", // 左边框强调优先级
-          className
+          className,
         )}
         onClick={handleView}
       >
@@ -363,13 +396,15 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
           <div className="flex items-start justify-between">
             <div className="flex items-start space-x-3 flex-1">
               {/* 类型图标 */}
-              <div className={cn(
-                "p-2 rounded-lg",
-                priority === "urgent" && "bg-red-100 text-red-600",
-                priority === "high" && "bg-orange-100 text-orange-600",
-                priority === "medium" && "bg-blue-100 text-blue-600",
-                priority === "low" && "bg-gray-100 text-gray-600"
-              )}>
+              <div
+                className={cn(
+                  "p-2 rounded-lg",
+                  priority === "urgent" && "bg-red-100 text-red-600",
+                  priority === "high" && "bg-orange-100 text-orange-600",
+                  priority === "medium" && "bg-blue-100 text-blue-600",
+                  priority === "low" && "bg-gray-100 text-gray-600",
+                )}
+              >
                 {TYPE_ICONS[content.type]}
               </div>
 
@@ -379,13 +414,15 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                   <h3 className="text-lg font-semibold text-gray-900">
                     {getLocalizedText(content.title)}
                   </h3>
-                  <span className={cn(
-                    "px-2 py-1 text-xs font-medium rounded-full",
-                    priority === "urgent" && "bg-red-100 text-red-700",
-                    priority === "high" && "bg-orange-100 text-orange-700",
-                    priority === "medium" && "bg-blue-100 text-blue-700",
-                    priority === "low" && "bg-gray-100 text-gray-700"
-                  )}>
+                  <span
+                    className={cn(
+                      "px-2 py-1 text-xs font-medium rounded-full",
+                      priority === "urgent" && "bg-red-100 text-red-700",
+                      priority === "high" && "bg-orange-100 text-orange-700",
+                      priority === "medium" && "bg-blue-100 text-blue-700",
+                      priority === "low" && "bg-gray-100 text-gray-700",
+                    )}
+                  >
                     {PRIORITY_LABELS[priority].zh}
                   </span>
                 </div>
@@ -421,10 +458,15 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             {/* 行动步骤 */}
             {content.actionSteps && content.actionSteps.length > 0 && (
               <div className="mb-3">
-                <h4 className="text-sm font-medium text-gray-900 mb-2">{t("actionSteps")}</h4>
+                <h4 className="text-sm font-medium text-gray-900 mb-2">
+                  {t("actionSteps")}
+                </h4>
                 <ol className="space-y-1">
                   {content.actionSteps.slice(0, 3).map((step, index) => (
-                    <li key={index} className="text-sm text-gray-600 flex items-start space-x-2">
+                    <li
+                      key={index}
+                      className="text-sm text-gray-600 flex items-start space-x-2"
+                    >
                       <span className="flex-shrink-0 w-5 h-5 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium">
                         {index + 1}
                       </span>
@@ -438,7 +480,9 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             {/* 资源链接 */}
             {content.resources && content.resources.length > 0 && (
               <div className="mb-3">
-                <h4 className="text-sm font-medium text-gray-900 mb-2">{t("relatedResources")}</h4>
+                <h4 className="text-sm font-medium text-gray-900 mb-2">
+                  {t("relatedResources")}
+                </h4>
                 <div className="space-y-1">
                   {content.resources.slice(0, 2).map((resource) => (
                     <a
@@ -468,7 +512,10 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
                     <span>阶段: {context.cyclePhase}</span>
                   )}
                   {recommendation.expiresAt && (
-                    <span>过期: {new Date(recommendation.expiresAt).toLocaleDateString()}</span>
+                    <span>
+                      过期:{" "}
+                      {new Date(recommendation.expiresAt).toLocaleDateString()}
+                    </span>
                   )}
                 </div>
               </div>

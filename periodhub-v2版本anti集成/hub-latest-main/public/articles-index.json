@@ -76,13 +76,7 @@
         "women's health",
         "reproductive health"
       ],
-      "tags_zh": [
-        "避孕",
-        "IUD",
-        "宫内节育器",
-        "女性健康",
-        "生殖健康"
-      ],
+      "tags_zh": ["避孕", "IUD", "宫内节育器", "女性健康", "生殖健康"],
       "category": "contraception guide",
       "category_zh": "避孕指导",
       "author": "periodhub.health Expert Team",
@@ -155,13 +149,7 @@
         "environmental factors",
         "health management"
       ],
-      "tags_zh": [
-        "痛经管理",
-        "职业压力",
-        "生活方式",
-        "环境因素",
-        "健康管理"
-      ],
+      "tags_zh": ["痛经管理", "职业压力", "生活方式", "环境因素", "健康管理"],
       "category": "Health Management",
       "category_zh": "健康管理",
       "author": "PeriodHub Expert Team",
@@ -183,13 +171,7 @@
         "traditional medicine",
         "plant therapy"
       ],
-      "tags_zh": [
-        "草药茶",
-        "自然疗法",
-        "痛经缓解",
-        "传统医学",
-        "植物疗法"
-      ],
+      "tags_zh": ["草药茶", "自然疗法", "痛经缓解", "传统医学", "植物疗法"],
       "category": "Health Management",
       "category_zh": "健康管理",
       "author": "PeriodHub Expert Team",
@@ -420,13 +402,7 @@
         "physical therapy",
         "medical guidance"
       ],
-      "tags_zh": [
-        "腰部护理",
-        "经期腰痛",
-        "疼痛管理",
-        "物理疗法",
-        "医学指导"
-      ],
+      "tags_zh": ["腰部护理", "经期腰痛", "疼痛管理", "物理疗法", "医学指导"],
       "category": "immediate-relief",
       "category_zh": "即时缓解方案",
       "author": "Period Hub Health Team",
@@ -610,13 +586,7 @@
         "pathological mechanisms",
         "clinical trials"
       ],
-      "tags_zh": [
-        "循证医学",
-        "研究进展",
-        "新药开发",
-        "病理机制",
-        "临床试验"
-      ],
+      "tags_zh": ["循证医学", "研究进展", "新药开发", "病理机制", "临床试验"],
       "category": "Understanding & Education",
       "category_zh": "理解与教育",
       "author": "Period Hub Health Team",
@@ -756,13 +726,7 @@
         "Dosage",
         "Medical Professional"
       ],
-      "tags_zh": [
-        "NSAIDs",
-        "药物治疗",
-        "安全用药",
-        "剂量计算",
-        "医学专业"
-      ],
+      "tags_zh": ["NSAIDs", "药物治疗", "安全用药", "剂量计算", "医学专业"],
       "category": "medical",
       "category_zh": "医学专业",
       "author": "periodhub.health Expert Team",
@@ -777,18 +741,8 @@
       "date": "2024-12-19",
       "summary": "",
       "summary_zh": "精选8-10款简单易学、美味又营养的食谱，涵盖早餐、午餐、晚餐及零食饮品，帮助你通过天然食物调理身体，舒适度过经期。",
-      "tags": [
-        "nutrition",
-        "period care",
-        "healthy recipes",
-        "wellness"
-      ],
-      "tags_zh": [
-        "营养饮食",
-        "经期护理",
-        "食疗养生",
-        "健康食谱"
-      ],
+      "tags": ["nutrition", "period care", "healthy recipes", "wellness"],
+      "tags_zh": ["营养饮食", "经期护理", "食疗养生", "健康食谱"],
       "category": "health",
       "author": "PeriodHub Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -826,13 +780,7 @@
         "personalized management",
         "data analysis"
       ],
-      "tags_zh": [
-        "经期追踪",
-        "健康档案",
-        "症状记录",
-        "个性化管理",
-        "数据分析"
-      ],
+      "tags_zh": ["经期追踪", "健康档案", "症状记录", "个性化管理", "数据分析"],
       "category": "Health Management",
       "category_zh": "健康管理",
       "author": "PeriodHub Expert Team",
@@ -853,12 +801,7 @@
         "menstrual education",
         "mental health"
       ],
-      "tags_zh": [
-        "阅读推荐",
-        "女性健康",
-        "经期教育",
-        "心理健康"
-      ],
+      "tags_zh": ["阅读推荐", "女性健康", "经期教育", "心理健康"],
       "category": "education",
       "author": "PeriodHub Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1034,14 +977,7 @@
       "title": "5分钟快速缓解痛经技巧",
       "date": "2024-12-19",
       "summary": "需要快速缓解经期痉挛？探索您现在就可以使用的简单、可操作的技巧，在短短5分钟内快速缓解经期疼痛，非常适合紧急情况。",
-      "tags": [
-        "快速缓解",
-        "即时缓解",
-        "痛经",
-        "痉挛",
-        "紧急技巧",
-        "立即缓解"
-      ],
+      "tags": ["快速缓解", "即时缓解", "痛经", "痉挛", "紧急技巧", "立即缓解"],
       "category": "即时缓解方案",
       "author": "periodhub.health 专家团队",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1072,13 +1008,7 @@
       "title": "宫内节育器 (IUD): 全面指南与用户须知",
       "date": "2024-01-15",
       "summary": "基于WHO、ACOG、NHS权威指南的IUD全面指导：深入解析含铜与含激素IUD的区别、适用人群、放置流程、副作用管理及常见问题。帮助女性做出明智的长效避孕选择。",
-      "tags": [
-        "避孕",
-        "IUD",
-        "宫内节育器",
-        "女性健康",
-        "生殖健康"
-      ],
+      "tags": ["避孕", "IUD", "宫内节育器", "女性健康", "生殖健康"],
       "category": "避孕指导",
       "author": "periodhub.health Expert Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1110,13 +1040,7 @@
       "title": "经期睡眠质量全面改善指南：循证医学方法",
       "date": "",
       "summary": "超过60%的女性在经期经历睡眠质量下降。本指南基于最新循证医学研究，提供科学的21天睡眠改善计划，包括环境优化、习惯建立、疼痛管理和专业干预策略，帮助女性建立长期优质睡眠模式。",
-      "tags": [
-        "睡眠质量",
-        "21天计划",
-        "睡眠卫生",
-        "激素睡眠",
-        "睡眠监测"
-      ],
+      "tags": ["睡眠质量", "21天计划", "睡眠卫生", "激素睡眠", "睡眠监测"],
       "category": "营养与健康",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1130,20 +1054,8 @@
       "date": "2024-12-19",
       "summary": "深度解析职业压力、生活方式、环境因素等非医疗因素如何影响痛经严重程度，提供基于科学研究的综合管理策略。",
       "summary_zh": "深度解析职业压力、生活方式、环境因素等非医疗因素如何影响痛经严重程度，提供基于科学研究的综合管理策略。",
-      "tags": [
-        "痛经管理",
-        "职业压力",
-        "生活方式",
-        "环境因素",
-        "健康管理"
-      ],
-      "tags_zh": [
-        "痛经管理",
-        "职业压力",
-        "生活方式",
-        "环境因素",
-        "健康管理"
-      ],
+      "tags": ["痛经管理", "职业压力", "生活方式", "环境因素", "健康管理"],
+      "tags_zh": ["痛经管理", "职业压力", "生活方式", "环境因素", "健康管理"],
       "category": "健康管理",
       "author": "PeriodHub专家团队",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1157,20 +1069,8 @@
       "date": "2024-12-19",
       "summary": "科学验证的7种草药茶配方，详细介绍制作方法、作用机制和临床效果，为女性提供安全有效的自然痛经缓解方案。",
       "summary_zh": "科学验证的7种草药茶配方，详细介绍制作方法、作用机制和临床效果，为女性提供安全有效的自然痛经缓解方案。",
-      "tags": [
-        "草药茶",
-        "自然疗法",
-        "痛经缓解",
-        "传统医学",
-        "植物疗法"
-      ],
-      "tags_zh": [
-        "草药茶",
-        "自然疗法",
-        "痛经缓解",
-        "传统医学",
-        "植物疗法"
-      ],
+      "tags": ["草药茶", "自然疗法", "痛经缓解", "传统医学", "植物疗法"],
+      "tags_zh": ["草药茶", "自然疗法", "痛经缓解", "传统医学", "植物疗法"],
       "category": "健康管理",
       "author": "PeriodHub专家团队",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1182,13 +1082,7 @@
       "title": "精油芳香疗法缓解痛经：全面指南",
       "date": "2024-12-19",
       "summary": "权威专业的精油缓解痛经指南，详解薰衣草、肉桂、玫瑰、马郁兰、生姜、罗马洋甘菊六种核心精油的科学功效、使用方法和安全指南。基于最新科学研究，为您提供安全有效的痛经自然缓解方案。",
-      "tags": [
-        "精油疗法",
-        "痛经缓解",
-        "自然疗法",
-        "芳香疗法",
-        "女性健康"
-      ],
+      "tags": ["精油疗法", "痛经缓解", "自然疗法", "芳香疗法", "女性健康"],
       "category": "自然疗法",
       "author": "Period Hub Health 专业团队",
       "featured_image": "/images/essential-oils/lavender_essential_oil_800x800.png",
@@ -1199,13 +1093,7 @@
       "title": "如何用生姜缓解痛经：科学验证的5种高效方法",
       "date": "",
       "summary": "详解生姜缓解痛经的科学机制和实用方法，包含黄金姜茶配方、生姜热敷包、精油按摩等5种验证方法，基于临床研究数据为女性提供安全高效的自然痛经缓解方案。",
-      "tags": [
-        "生姜疗法",
-        "痛经缓解",
-        "自然疗法",
-        "草药治疗",
-        "科学方法"
-      ],
+      "tags": ["生姜疗法", "痛经缓解", "自然疗法", "草药治疗", "科学方法"],
       "category": "即时缓解方案",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1235,13 +1123,7 @@
       "title": "经期热敷的正确方法：科学验证的5步高效指南",
       "date": "",
       "summary": "详解经期热敷的科学原理和正确操作方法，包含5步标准流程、温度控制表格、不同场景优化方案和常见问题解答，基于权威医学研究为女性提供安全有效的痛经缓解方案。",
-      "tags": [
-        "热敷疗法",
-        "痛经缓解",
-        "物理疗法",
-        "温度控制",
-        "科学方法"
-      ],
+      "tags": ["热敷疗法", "痛经缓解", "物理疗法", "温度控制", "科学方法"],
       "category": "即时缓解方案",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1253,13 +1135,7 @@
       "title": "最有效的痛经草药茶配方：科学验证的5种自然疗法",
       "date": "",
       "summary": "详解5种科学验证的痛经草药茶配方，包含黄金姜茶、肉桂红茶、茴香籽茶等经典配方，基于临床研究数据提供专业冲泡技巧和饮用时间表，为女性经期健康管理提供天然解决方案。",
-      "tags": [
-        "草药茶",
-        "痛经缓解",
-        "自然疗法",
-        "预防调理",
-        "科学配方"
-      ],
+      "tags": ["草药茶", "痛经缓解", "自然疗法", "预防调理", "科学配方"],
       "category": "计划准备",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1363,13 +1239,7 @@
       "title": "药物vs自然疗法：哪种痛经缓解方法最适合你？",
       "date": "",
       "summary": "深入分析药物治疗和自然疗法的优缺点，包括NSAIDs、激素疗法、草药、物理疗法等多种选择，提供基于个人情况的决策框架和专业建议。",
-      "tags": [
-        "药物治疗",
-        "自然疗法",
-        "痛经缓解",
-        "治疗选择",
-        "个性化医疗"
-      ],
+      "tags": ["药物治疗", "自然疗法", "痛经缓解", "治疗选择", "个性化医疗"],
       "category": "理解与教育",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1381,13 +1251,7 @@
       "title": "经期腰部深度护理指南：科学缓解与权威建议",
       "date": "",
       "summary": "详解经期腰痛的医学原理和科学护理方法，包含疼痛类型分类、即时缓解方案、运动疗法、营养干预和医疗预警信号，基于权威医学机构指南为女性提供全面的腰部深度护理方案。",
-      "tags": [
-        "腰部护理",
-        "经期腰痛",
-        "疼痛管理",
-        "物理疗法",
-        "医学指导"
-      ],
+      "tags": ["腰部护理", "经期腰痛", "疼痛管理", "物理疗法", "医学指导"],
       "category": "即时缓解方案",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1437,13 +1301,7 @@
       "title": "痛经会导致背痛吗？5个令人惊讶的事实",
       "date": "",
       "summary": "基于最新医学研究，详细解析痛经引起背痛的生理机制，提供专业的识别方法和针对性治疗建议，帮助女性更好地理解和管理经期疼痛。",
-      "tags": [
-        "痛经",
-        "背痛",
-        "疼痛机制",
-        "神经传导",
-        "疼痛管理"
-      ],
+      "tags": ["痛经", "背痛", "疼痛机制", "神经传导", "疼痛管理"],
       "category": "理解与教育",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1477,13 +1335,7 @@
       "title": "痛经应急药物携带完全指南：随时随地缓解疼痛的专业方案",
       "date": "",
       "summary": "详细介绍布洛芬、对乙酰氨基酚等非处方痛经药物的选择标准、剂量指导和携带方法，提供紧急用药决策流程和安全使用注意事项，确保女性在任何场合都能及时有效缓解痛经。",
-      "tags": [
-        "应急药物",
-        "痛经缓解",
-        "药物携带",
-        "用药安全",
-        "紧急处理"
-      ],
+      "tags": ["应急药物", "痛经缓解", "药物携带", "用药安全", "紧急处理"],
       "category": "理解与教育",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1533,13 +1385,7 @@
       "title": "2024年痛经研究进展报告：循证医学与临床转化",
       "date": "",
       "summary": "痛经影响45-95%的育龄女性，超过30%的青少年经历严重痛经。本报告整合2024年最新的同行评议研究和临床试验数据，包括HMI-115等新药进展、中枢敏化机制发现、个性化医疗方向和数字健康技术应用。",
-      "tags": [
-        "循证医学",
-        "研究进展",
-        "新药开发",
-        "病理机制",
-        "临床试验"
-      ],
+      "tags": ["循证医学", "研究进展", "新药开发", "病理机制", "临床试验"],
       "category": "理解与教育",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1550,13 +1396,7 @@
       "title": "痛经与其他腹部疼痛全面对比指南：识别危险信号，做出明智决策",
       "date": "",
       "summary": "详细对比痛经与心脏病发作、急性阑尾炎、肾结石等常见腹痛的关键区别，提供科学的鉴别诊断方法和危险信号识别清单，帮助女性在关键时刻做出正确的医疗决策。",
-      "tags": [
-        "痛经鉴别",
-        "腹痛诊断",
-        "危险信号",
-        "医学指导",
-        "紧急处理"
-      ],
+      "tags": ["痛经鉴别", "腹痛诊断", "危险信号", "医学指导", "紧急处理"],
       "category": "理解与教育",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1586,13 +1426,7 @@
       "title": "经期睡眠质量全面改善指南：科学方法重获优质睡眠",
       "date": "",
       "summary": "详细介绍经期睡眠障碍的识别方法、卧室环境优化技巧、21天睡眠改善计划和应急处理策略，帮助女性通过科学方法改善经期睡眠质量，重获优质睡眠体验。",
-      "tags": [
-        "经期睡眠",
-        "睡眠质量",
-        "睡眠改善",
-        "激素影响",
-        "睡眠环境"
-      ],
+      "tags": ["经期睡眠", "睡眠质量", "睡眠改善", "激素影响", "睡眠环境"],
       "category": "理解与教育",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1604,13 +1438,7 @@
       "title": "经期压力管理完全指南：从心理到生理的全面缓解",
       "date": "",
       "summary": "超过70%的女性在月经期间经历情绪波动和疼痛加剧。本指南系统解析压力与痛经的科学关联，提供北美职场女性专属的压力管理方案，包括5分钟快速减压法、办公室隐蔽技术和职场权益保护。",
-      "tags": [
-        "压力管理",
-        "职场健康",
-        "心理调节",
-        "HPA轴",
-        "皮质醇管理"
-      ],
+      "tags": ["压力管理", "职场健康", "心理调节", "HPA轴", "皮质醇管理"],
       "category": "营养与健康",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1651,20 +1479,8 @@
       "date": "2024-12-19",
       "summary": "专业NSAIDs痛经治疗指南：详解药理机制、安全用药、剂量计算与效果优化。包含互动式用药计算器、药物代谢动画演示、副作用管理和个性化治疗方案，助您科学安全地使用NSAIDs缓解痛经。",
       "summary_zh": "专业NSAIDs痛经治疗指南：详解药理机制、安全用药、剂量计算与效果优化。包含互动式用药计算器、药物代谢动画演示、副作用管理和个性化治疗方案，助您科学安全地使用NSAIDs缓解痛经。",
-      "tags": [
-        "NSAIDs",
-        "药物治疗",
-        "安全用药",
-        "剂量计算",
-        "医学专业"
-      ],
-      "tags_zh": [
-        "NSAIDs",
-        "药物治疗",
-        "安全用药",
-        "剂量计算",
-        "医学专业"
-      ],
+      "tags": ["NSAIDs", "药物治疗", "安全用药", "剂量计算", "医学专业"],
+      "tags_zh": ["NSAIDs", "药物治疗", "安全用药", "剂量计算", "医学专业"],
       "category": "medical",
       "category_zh": "医学专业",
       "author": "periodhub.health 专家团队",
@@ -1679,18 +1495,8 @@
       "date": "2024-12-19",
       "summary": "",
       "summary_zh": "精选8-10款简单易学、美味又营养的食谱，涵盖早餐、午餐、晚餐及零食饮品，帮助你通过天然食物调理身体，舒适度过经期。",
-      "tags": [
-        "营养饮食",
-        "经期护理",
-        "食疗养生",
-        "健康食谱"
-      ],
-      "tags_zh": [
-        "营养饮食",
-        "经期护理",
-        "食疗养生",
-        "健康食谱"
-      ],
+      "tags": ["营养饮食", "经期护理", "食疗养生", "健康食谱"],
+      "tags_zh": ["营养饮食", "经期护理", "食疗养生", "健康食谱"],
       "category": "health",
       "author": "PeriodHub团队",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1702,13 +1508,7 @@
       "title": "经痛模拟器准确吗？科学解析与权威观点",
       "date": "",
       "summary": "科学分析经痛模拟器的技术原理和准确性，基于临床研究和专家观点，客观评估其教育价值和局限性。",
-      "tags": [
-        "经痛模拟器",
-        "疼痛科学",
-        "医学设备",
-        "疼痛教育",
-        "性别理解"
-      ],
+      "tags": ["经痛模拟器", "疼痛科学", "医学设备", "疼痛教育", "性别理解"],
       "category": "理解与教育",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1721,20 +1521,8 @@
       "date": "2024-12-19",
       "summary": "系统性指导如何建立和维护个人经期健康档案，包括症状追踪、周期记录、影响因素分析等，为个性化健康管理提供科学依据。",
       "summary_zh": "系统性指导如何建立和维护个人经期健康档案，包括症状追踪、周期记录、影响因素分析等，为个性化健康管理提供科学依据。",
-      "tags": [
-        "经期追踪",
-        "健康档案",
-        "症状记录",
-        "个性化管理",
-        "数据分析"
-      ],
-      "tags_zh": [
-        "经期追踪",
-        "健康档案",
-        "症状记录",
-        "个性化管理",
-        "数据分析"
-      ],
+      "tags": ["经期追踪", "健康档案", "症状记录", "个性化管理", "数据分析"],
+      "tags_zh": ["经期追踪", "健康档案", "症状记录", "个性化管理", "数据分析"],
       "category": "健康管理",
       "author": "PeriodHub专家团队",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1748,18 +1536,8 @@
       "date": "2024-12-19",
       "summary": "精心挑选5-7本优秀书籍，涵盖女性健康、经期护理、情绪管理和整体健康调理等多个领域，帮助你更深入地了解自己的身体，温柔地关爱自己。",
       "summary_zh": "精心挑选5-7本优秀书籍，涵盖女性健康、经期护理、情绪管理和整体健康调理等多个领域，帮助你更深入地了解自己的身体，温柔地关爱自己。",
-      "tags": [
-        "阅读推荐",
-        "女性健康",
-        "经期教育",
-        "心理健康"
-      ],
-      "tags_zh": [
-        "阅读推荐",
-        "女性健康",
-        "经期教育",
-        "心理健康"
-      ],
+      "tags": ["阅读推荐", "女性健康", "经期教育", "心理健康"],
+      "tags_zh": ["阅读推荐", "女性健康", "经期教育", "心理健康"],
       "category": "education",
       "author": "PeriodHub团队",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1793,14 +1571,7 @@
       "title": "了解您的月经周期：全面指南",
       "date": "2024-05-10",
       "summary": "深入了解月经周期、其复杂的各个阶段、激素影响，以及这些知识如何帮助您有效地管理每月的健康状况。",
-      "tags": [
-        "月经周期",
-        "激素",
-        "女性健康",
-        "科普教育",
-        "生殖健康",
-        "痛经"
-      ],
+      "tags": ["月经周期", "激素", "女性健康", "科普教育", "生殖健康", "痛经"],
       "category": "理解与教育",
       "author": "periodhub.health 专家团队",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1812,13 +1583,7 @@
       "title": "美国痛经治疗医疗保险覆盖完全指南（2025年修正版）",
       "date": "",
       "summary": "详细解析2025年美国医疗保险政策变化，提供痛经治疗的保险覆盖策略、金属计划对比、药物费用参考和申诉成功技巧，帮助美国女性最大化医疗保险权益。",
-      "tags": [
-        "医疗保险",
-        "ACA政策",
-        "Medicare改革",
-        "保险理赔",
-        "医疗费用"
-      ],
+      "tags": ["医疗保险", "ACA政策", "Medicare改革", "保险理赔", "医疗费用"],
       "category": "理解与教育",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",
@@ -1870,13 +1635,7 @@
       "title": "女性生命周期痛经特点全解析：北美科学管理指南",
       "date": "",
       "summary": "痛经影响着高达90%的女性，在不同年龄段呈现出独特的特点和管理需求。本指南基于最新循证医学证据，为北美女性提供全生命周期的科学管理方案，包括各年龄段特点分析、管理策略和专业资源指导。",
-      "tags": [
-        "生命周期",
-        "年龄特点",
-        "科学管理",
-        "全程指导",
-        "北美指南"
-      ],
+      "tags": ["生命周期", "年龄特点", "科学管理", "全程指导", "北美指南"],
       "category": "理解与教育",
       "author": "Period Hub Health Team",
       "featured_image": "/images/articles/natural-physical-therapy-comprehensive-guide-cover.jpg",

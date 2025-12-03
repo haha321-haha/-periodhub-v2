@@ -52,37 +52,49 @@ function loadArticlesFromFileSystem(): Article[] {
 
       // 检查是否已经存在该slug的文章（避免重复）
       const existingIndex = articles.findIndex((a) => a.slug === slug);
-      const article: Article = existingIndex >= 0 
-        ? articles[existingIndex]
-        : {
-            slug,
-            title: data.title || "",
-            titleZh: data.title || "",
-            description: data.summary || data.description || "",
-            descriptionZh: data.summary || data.description || "",
-            category: data.category || "general",
-            tags: Array.isArray(data.tags) ? data.tags : [],
-            publishedAt: data.date || data.publishedAt || new Date().toISOString().split("T")[0],
-            updatedAt: data.updatedAt || data.date || new Date().toISOString().split("T")[0],
-            readingTime: parseInt(data.reading_time?.replace(/[^0-9]/g, "") || "10"),
-            featured: data.featured || false,
-            content: content,
-            // 兼容性属性
-            title_zh: data.title,
-            seo_title_zh: data.seo_title,
-            summary: data.summary || data.description,
-            summary_zh: data.summary || data.description,
-          };
+      const article: Article =
+        existingIndex >= 0
+          ? articles[existingIndex]
+          : {
+              slug,
+              title: data.title || "",
+              titleZh: data.title || "",
+              description: data.summary || data.description || "",
+              descriptionZh: data.summary || data.description || "",
+              category: data.category || "general",
+              tags: Array.isArray(data.tags) ? data.tags : [],
+              publishedAt:
+                data.date ||
+                data.publishedAt ||
+                new Date().toISOString().split("T")[0],
+              updatedAt:
+                data.updatedAt ||
+                data.date ||
+                new Date().toISOString().split("T")[0],
+              readingTime: parseInt(
+                data.reading_time?.replace(/[^0-9]/g, "") || "10",
+              ),
+              featured: data.featured || false,
+              content: content,
+              // 兼容性属性
+              title_zh: data.title,
+              seo_title_zh: data.seo_title,
+              summary: data.summary || data.description,
+              summary_zh: data.summary || data.description,
+            };
 
       // 根据locale更新对应的字段
       if (locale === "zh") {
         article.titleZh = data.title || article.titleZh;
-        article.descriptionZh = data.summary || data.description || article.descriptionZh;
+        article.descriptionZh =
+          data.summary || data.description || article.descriptionZh;
         article.title_zh = data.title || article.title_zh;
-        article.summary_zh = data.summary || data.description || article.summary_zh;
+        article.summary_zh =
+          data.summary || data.description || article.summary_zh;
       } else {
         article.title = data.title || article.title;
-        article.description = data.summary || data.description || article.description;
+        article.description =
+          data.summary || data.description || article.description;
         article.summary = data.summary || data.description || article.summary;
       }
 
@@ -138,11 +150,13 @@ export function getRelatedArticlesWithCache(
 
   const articles = getAllArticlesCached();
   // 简单的相关文章逻辑：同类别的其他文章
-  return articles.filter(
-    (article) =>
-      article.slug !== currentSlug &&
-      article.category === currentArticle.category,
-  ).slice(0, count);
+  return articles
+    .filter(
+      (article) =>
+        article.slug !== currentSlug &&
+        article.category === currentArticle.category,
+    )
+    .slice(0, count);
 }
 
 /**
@@ -197,11 +211,13 @@ export function getRelatedArticles(
 
   const articles = getAllArticlesCached();
   // 简单的相关文章逻辑：同类别的其他文章
-  return articles.filter(
-    (article) =>
-      article.slug !== currentSlug &&
-      article.category === currentArticle.category,
-  ).slice(0, count);
+  return articles
+    .filter(
+      (article) =>
+        article.slug !== currentSlug &&
+        article.category === currentArticle.category,
+    )
+    .slice(0, count);
 }
 
 /**

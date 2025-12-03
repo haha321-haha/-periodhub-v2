@@ -1,41 +1,41 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 interface LoadingSpinnerProps {
-  size?: 'sm' | 'md' | 'lg';
-  color?: 'primary' | 'secondary' | 'white';
+  size?: "sm" | "md" | "lg";
+  color?: "primary" | "secondary" | "white";
   className?: string;
 }
 
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
-  size = 'md',
-  color = 'primary',
-  className = ''
+  size = "md",
+  color = "primary",
+  className = "",
 }) => {
   const getSizeClasses = () => {
     switch (size) {
-      case 'sm':
-        return 'w-4 h-4';
-      case 'md':
-        return 'w-6 h-6';
-      case 'lg':
-        return 'w-8 h-8';
+      case "sm":
+        return "w-4 h-4";
+      case "md":
+        return "w-6 h-6";
+      case "lg":
+        return "w-8 h-8";
       default:
-        return 'w-6 h-6';
+        return "w-6 h-6";
     }
   };
 
   const getColorClasses = () => {
     switch (color) {
-      case 'primary':
-        return 'text-pink-600';
-      case 'secondary':
-        return 'text-purple-600';
-      case 'white':
-        return 'text-white';
+      case "primary":
+        return "text-pink-600";
+      case "secondary":
+        return "text-purple-600";
+      case "white":
+        return "text-white";
       default:
-        return 'text-pink-600';
+        return "text-pink-600";
     }
   };
 
@@ -73,8 +73,8 @@ interface LoadingOverlayProps {
 
 export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
   isLoading,
-  message = 'Loading...',
-  children
+  message = "Loading...",
+  children,
 }) => {
   return (
     <div className="relative">

@@ -104,11 +104,15 @@ export default async function PainTrackerPage({
     breadcrumbs: [
       {
         name: breadcrumbT("interactiveTools"),
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools`,
+        url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/${locale}/interactive-tools`,
       },
       {
         name: breadcrumbT("painTracker"),
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/pain-tracker`,
+        url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/${locale}/interactive-tools/pain-tracker`,
       },
     ],
   });

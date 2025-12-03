@@ -21,18 +21,29 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "interactiveTools.stressManagement" });
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveTools.stressManagement",
+  });
 
   return {
     title: t("pageTitle"),
     description: t("description"),
     keywords: t("keywords").split(","),
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/stress-management`,
+      canonical: `${
+        process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+      }/${locale}/interactive-tools/stress-management`,
       languages: {
-        "zh-CN": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/zh/interactive-tools/stress-management`,
-        "en-US": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/interactive-tools/stress-management`,
-        "x-default": `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/en/interactive-tools/stress-management`, // ✅ 修复：默认英文版本（北美市场优先）
+        "zh-CN": `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/zh/interactive-tools/stress-management`,
+        "en-US": `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/en/interactive-tools/stress-management`,
+        "x-default": `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/en/interactive-tools/stress-management`, // ✅ 修复：默认英文版本（北美市场优先）
       },
     },
     openGraph: {
@@ -57,8 +68,14 @@ export default async function StressManagementPage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
 
-  const t = await getTranslations({ locale, namespace: "interactiveTools.stressManagement" });
-  const breadcrumbT = await getTranslations({ locale, namespace: "interactiveTools.breadcrumb" });
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveTools.stressManagement",
+  });
+  const breadcrumbT = await getTranslations({
+    locale,
+    namespace: "interactiveTools.breadcrumb",
+  });
 
   // 生成工具结构化数据
   const toolStructuredData = await generateToolStructuredData({
@@ -82,11 +99,15 @@ export default async function StressManagementPage({
     breadcrumbs: [
       {
         name: t("common.breadcrumb.interactiveTools"),
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools`,
+        url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/${locale}/interactive-tools`,
       },
       {
         name: t("title"),
-        url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"}/${locale}/interactive-tools/stress-management`,
+        url: `${
+          process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health"
+        }/${locale}/interactive-tools/stress-management`,
       },
     ],
   });
@@ -112,7 +133,11 @@ export default async function StressManagementPage({
           {/* Header Section */}
           <header className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-6">
-              <span className="text-3xl" role="img" aria-label={t("common.icons.meditation")}>
+              <span
+                className="text-3xl"
+                role="img"
+                aria-label={t("common.icons.meditation")}
+              >
                 🧘
               </span>
             </div>
@@ -168,14 +193,20 @@ export default async function StressManagementPage({
             <div className="max-w-md mx-auto">
               <div className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <span className="text-2xl" role="img" aria-label={t("common.icons.progress")}>
+                  <span
+                    className="text-2xl"
+                    role="img"
+                    aria-label={t("common.icons.progress")}
+                  >
                     📈
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
                   {t("progress.title")}
                 </h3>
-                <p className="text-gray-600 mb-4 text-center">{t("progress.subtitle")}</p>
+                <p className="text-gray-600 mb-4 text-center">
+                  {t("progress.subtitle")}
+                </p>
                 <div className="text-center">
                   <Link
                     href={`/${locale}/interactive-tools/stress-management/progress`}
@@ -195,7 +226,11 @@ export default async function StressManagementPage({
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
-                <div className="text-4xl mb-3" role="img" aria-label={t("common.icons.dailyHabits")}>
+                <div
+                  className="text-4xl mb-3"
+                  role="img"
+                  aria-label={t("common.icons.dailyHabits")}
+                >
                   😌
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
@@ -204,7 +239,11 @@ export default async function StressManagementPage({
                 <p className="text-blue-100">{t("tips.daily.regularSleep")}</p>
               </div>
               <div className="text-center">
-                <div className="text-4xl mb-3" role="img" aria-label={t("common.icons.breathing")}>
+                <div
+                  className="text-4xl mb-3"
+                  role="img"
+                  aria-label={t("common.icons.breathing")}
+                >
                   💨
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
@@ -215,7 +254,11 @@ export default async function StressManagementPage({
                 </p>
               </div>
               <div className="text-center">
-                <div className="text-4xl mb-3" role="img" aria-label={t("common.icons.prevention")}>
+                <div
+                  className="text-4xl mb-3"
+                  role="img"
+                  aria-label={t("common.icons.prevention")}
+                >
                   🛡️
                 </div>
                 <h3 className="text-xl font-semibold mb-2">

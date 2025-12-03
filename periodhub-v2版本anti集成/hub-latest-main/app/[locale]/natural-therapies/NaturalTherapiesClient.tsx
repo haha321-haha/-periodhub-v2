@@ -285,9 +285,7 @@ export default function NaturalTherapiesClient({
                         : "Acupuncture & Moxibustion"}
                     </h3>
                     <p className="text-sm text-gray-600">
-                      {locale === "zh"
-                        ? "整体健康疗法"
-                        : "Holistic Health"}
+                      {locale === "zh" ? "整体健康疗法" : "Holistic Health"}
                     </p>
                   </div>
                 </div>

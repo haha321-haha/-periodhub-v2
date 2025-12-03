@@ -97,25 +97,25 @@ export function createLazyComponent<T extends ComponentType<unknown>>(
         fallback={finalFallback || <DefaultFallback height={height} />}
         delay={finalDelay}
       >
-        {/* 
+        {/*
           React.lazy 的泛型类型推断限制
-          
+
           这是 React.lazy 和 TypeScript 泛型结合时的已知限制。
           虽然我们已经使用了：
           1. LazyExoticComponent<T> 类型断言
           2. ExtractComponentProps<T> 提取组件 props
           3. separateWrapperProps 分离 props
-          
+
           但 TypeScript 仍然无法完全推断 LazyExoticComponent 的 props 类型。
-          
+
           这个错误是安全的，因为：
           - componentProps 已经通过 ExtractComponentProps<T> 进行了类型提取
           - LazyComponent 已经通过 LazyExoticComponent<T> 进行了类型断言
           - 运行时行为是正确的
           - 所有使用该函数的地方都会得到正确的类型提示
-          
+
           参考：https://github.com/DefinitelyTyped/DefinitelyTyped/issues/37087
-          
+
           使用类型断言而不是 any，保持类型安全
         */}
         {/* @ts-expect-error - React.lazy 泛型类型推断限制，运行时行为正确 */}

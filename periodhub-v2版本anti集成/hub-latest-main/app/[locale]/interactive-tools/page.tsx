@@ -279,14 +279,16 @@ export default async function InteractiveToolsPage({
                 {workplaceTools.map((tool) => (
                   <div
                     key={tool.title}
-                    className={`card flex flex-col items-center text-center h-full p-6 sm:p-8 ${tool.isPrimary
-                      ? "bg-gradient-to-br from-blue-100 to-indigo-100 border-2 border-blue-300 shadow-lg"
-                      : "bg-white border-2 border-purple-200 shadow-md"
-                      }`}
+                    className={`card flex flex-col items-center text-center h-full p-6 sm:p-8 ${
+                      tool.isPrimary
+                        ? "bg-gradient-to-br from-blue-100 to-indigo-100 border-2 border-blue-300 shadow-lg"
+                        : "bg-white border-2 border-purple-200 shadow-md"
+                    }`}
                   >
                     <div
-                      className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-full mb-6 ${tool.isPrimary ? "bg-blue-200" : "bg-purple-100"
-                        }`}
+                      className={`w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-full mb-6 ${
+                        tool.isPrimary ? "bg-blue-200" : "bg-purple-100"
+                      }`}
                     >
                       {renderIcon(tool.iconType, tool.iconColor)}
                     </div>
@@ -295,22 +297,24 @@ export default async function InteractiveToolsPage({
                       {tool.title}
                     </h3>
 
-                    {'subtitle' in tool && tool.subtitle && (
-                      <p className="text-sm text-gray-500 mb-2">{tool.subtitle}</p>
+                    {"subtitle" in tool && tool.subtitle && (
+                      <p className="text-sm text-gray-500 mb-2">
+                        {tool.subtitle}
+                      </p>
                     )}
 
                     <p className="text-sm sm:text-base text-gray-600 mb-4 flex-grow leading-relaxed">
                       {tool.description}
                     </p>
 
-                    {'duration' in tool && tool.duration && (
+                    {"duration" in tool && tool.duration && (
                       <div className="flex items-center justify-center gap-2 text-sm text-gray-600 mb-4">
                         <Clock className="w-4 h-4" />
                         <span>{tool.duration}</span>
                       </div>
                     )}
 
-                    {'benefits' in tool && tool.benefits && (
+                    {"benefits" in tool && tool.benefits && (
                       <p className="text-sm text-orange-600 font-medium mb-4">
                         {tool.benefits}
                       </p>
@@ -318,10 +322,11 @@ export default async function InteractiveToolsPage({
 
                     <Link
                       href={tool.href}
-                      className={`w-full mobile-touch-target text-sm sm:text-base px-6 py-4 text-center font-semibold rounded-lg transition-all duration-300 ${tool.isPrimary
-                        ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg"
-                        : "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 hover:shadow-lg"
-                        }`}
+                      className={`w-full mobile-touch-target text-sm sm:text-base px-6 py-4 text-center font-semibold rounded-lg transition-all duration-300 ${
+                        tool.isPrimary
+                          ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 hover:shadow-lg"
+                          : "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700 hover:shadow-lg"
+                      }`}
                     >
                       {tool.cta}
                     </Link>
@@ -346,10 +351,11 @@ export default async function InteractiveToolsPage({
               {regularTools.map((tool) => (
                 <div
                   key={tool.title}
-                  className={`card flex flex-col items-center text-center h-full p-4 sm:p-6 ${tool.requiresPrerequisites
-                    ? "relative border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-yellow-50"
-                    : ""
-                    }`}
+                  className={`card flex flex-col items-center text-center h-full p-4 sm:p-6 ${
+                    tool.requiresPrerequisites
+                      ? "relative border-2 border-orange-200 bg-gradient-to-br from-orange-50 to-yellow-50"
+                      : ""
+                  }`}
                 >
                   {/* 前置条件提示 */}
                   {tool.requiresPrerequisites && (
@@ -359,10 +365,11 @@ export default async function InteractiveToolsPage({
                   )}
 
                   <div
-                    className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-full mb-4 sm:mb-6 ${tool.requiresPrerequisites
-                      ? "bg-orange-100"
-                      : "bg-neutral-100"
-                      }`}
+                    className={`w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-full mb-4 sm:mb-6 ${
+                      tool.requiresPrerequisites
+                        ? "bg-orange-100"
+                        : "bg-neutral-100"
+                    }`}
                   >
                     {renderIcon(tool.iconType, tool.iconColor)}
                   </div>
@@ -399,10 +406,11 @@ export default async function InteractiveToolsPage({
                   ) : (
                     <Link
                       href={tool.href}
-                      className={`w-full mobile-touch-target text-sm sm:text-base px-4 py-3 text-center ${tool.requiresPrerequisites
-                        ? "btn-secondary"
-                        : "btn-primary"
-                        }`}
+                      className={`w-full mobile-touch-target text-sm sm:text-base px-4 py-3 text-center ${
+                        tool.requiresPrerequisites
+                          ? "btn-secondary"
+                          : "btn-primary"
+                      }`}
                     >
                       {tool.cta}
                     </Link>

@@ -47,7 +47,11 @@ export default function SimpleStorageTest() {
   };
 
   if (!isClient) {
-    return <div className="p-8 bg-white rounded-lg shadow-md max-w-2xl mx-auto">加载中...</div>;
+    return (
+      <div className="p-8 bg-white rounded-lg shadow-md max-w-2xl mx-auto">
+        加载中...
+      </div>
+    );
   }
 
   return (
@@ -97,7 +101,9 @@ export default function SimpleStorageTest() {
 
         {savedData && (
           <div>
-            <h3 className="text-lg font-medium mb-2">从localStorage读取的数据:</h3>
+            <h3 className="text-lg font-medium mb-2">
+              从localStorage读取的数据:
+            </h3>
             <div className="p-3 bg-gray-50 border border-gray-200 rounded-md">
               <pre className="whitespace-pre-wrap">{savedData}</pre>
             </div>
@@ -109,14 +115,14 @@ export default function SimpleStorageTest() {
         <h2 className="text-xl font-semibold mb-4">localStorage状态检查</h2>
         <div className="bg-gray-50 p-4 rounded-md">
           <pre className="text-sm">
-            {typeof window !== 'undefined' ?
-              `localStorage可用\n` +
-              `totalSpace: ${JSON.stringify(localStorage)}\n` +
-              `localStorage中的键数量: ${localStorage.length}\n` +
-              `所有键: ${Array.from({length: localStorage.length}, (_, i) => localStorage.key(i)).join(', ')}`
-              :
-              'localStorage不可用(可能是服务器端渲染)'
-            }
+            {typeof window !== "undefined"
+              ? `localStorage可用\n` +
+                `totalSpace: ${JSON.stringify(localStorage)}\n` +
+                `localStorage中的键数量: ${localStorage.length}\n` +
+                `所有键: ${Array.from({ length: localStorage.length }, (_, i) =>
+                  localStorage.key(i),
+                ).join(", ")}`
+              : "localStorage不可用(可能是服务器端渲染)"}
           </pre>
         </div>
       </div>

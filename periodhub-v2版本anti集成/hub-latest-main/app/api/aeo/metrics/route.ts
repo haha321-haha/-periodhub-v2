@@ -1,9 +1,9 @@
 /**
  * AEO Metrics API Route
  * AEO 指标 API 路由
- * 
+ *
  * GET /api/aeo/metrics?days=30
- * 
+ *
  * 获取 AEO 指标数据
  */
 
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     if (isNaN(days) || days < 1 || days > 365) {
       return NextResponse.json(
         { error: "Invalid days parameter. Must be between 1 and 365." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -30,8 +30,7 @@ export async function GET(request: NextRequest) {
     logError("[AEO Metrics] Error getting metrics", error, "AEO");
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
-

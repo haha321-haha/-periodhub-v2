@@ -129,7 +129,7 @@
       <h2>核心功能测试</h2>
       <div id="coreTests"></div>
     </div>
-    
+
     <div class="test-section">
       <h2>边界情况测试</h2>
       <div id="edgeCaseTests"></div>
@@ -212,10 +212,10 @@
           reject(new Error('无法打开测试窗口'));
           return;
         }
-        
+
         // 使用postMessage进行跨窗口通信
         const messageId = Date.now().toString();
-        
+
         // 监听响应
         const messageHandler = (event) => {
           if (event.data && event.data.type === 'testResponse' && event.data.id === messageId) {
@@ -227,16 +227,16 @@
             }
           }
         };
-        
+
         window.addEventListener('message', messageHandler);
-        
+
         // 发送测试代码到测试窗口
         testWin.postMessage({
           type: 'testExecute',
           id: messageId,
           code: code
         }, '*');
-        
+
         // 超时处理
         setTimeout(() => {
           window.removeEventListener('message', messageHandler);
@@ -267,9 +267,9 @@
             }
           }
         };
-        
+
         window.addEventListener('message', window.testResponseHandler);
-        
+
         // 等待页面完全加载
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', () => {
@@ -279,7 +279,7 @@
           window.postMessage({type: 'testReady'}, '*');
         }
       `;
-      
+
       return executeInTestWindow(initScript);
     }
 
@@ -330,7 +330,7 @@
     // 运行单个测试
     async function runTest(category, testDef) {
       updateTestStatus(testDef.id, 'running', '正在执行...');
-      
+
       try {
         const result = await testDef.fn();
         updateTestStatus(testDef.id, 'passed', `✅ 通过\n${result || ''}`);
@@ -339,7 +339,7 @@
         updateTestStatus(testDef.id, 'failed', `❌ 失败\n${error.message}`);
         testResults[category].push({ id: testDef.id, status: 'failed', error: error.message });
       }
-      
+
       completedTests++;
       updateProgress();
       updateSummary();
@@ -351,12 +351,12 @@
       document.getElementById('testFrame').style.display = 'block';
       const iframe = document.getElementById('testFrame');
       iframe.src = testUrl;
-      
+
       // 等待iframe加载
       await new Promise(resolve => {
         iframe.onload = resolve;
       });
-      
+
       // 运行所有测试
       for (const category of ['core', 'edgeCase']) {
         for (const testDef of testDefinitions[category]) {
@@ -404,12 +404,12 @@
             <div>总计</div>
           </div>
         </div>
-        ${total === 0 ? '准备开始测试...' : totalFailed === 0 ? 
+        ${total === 0 ? '准备开始测试...' : totalFailed === 0 ?
           '<div style="margin-top: 15px; color: #10b981; font-weight: bold;">🎉 所有测试通过！</div>' :
           '<div style="margin-top: 15px; color: #ef4444; font-weight: bold;">⚠️ 部分测试失败，请检查上述错误</div>'
         }
       `;
-      
+
       document.getElementById('testSummary').innerHTML = summaryHtml;
     }
 
@@ -417,10 +417,10 @@
     async function testPageLoad() {
       const iframe = document.getElementById('testFrame');
       const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-      
+
       const title = iframeDoc.title;
       const mainContent = iframeDoc.querySelector('body');
-      
+
       return `页面标题: ${title}\n主要内容: ${mainContent ? '已加载' : '未找到'}`;
     }
 
@@ -428,7 +428,7 @@
       // 在iframe中执行localStorage测试
       const iframe = document.getElementById('testFrame');
       const iframeWindow = iframe.contentWindow;
-      
+
       return iframeWindow.eval(`
         // 尝试添加测试记录
         const today = new Date().toISOString().split('T')[0];
@@ -438,11 +438,11 @@
           painLevel: 5,
           flow: 'medium'
         };
-        
+
         // 检查localStorage
         const storeData = localStorage.getItem('workplace-wellness-storage');
         if (!storeData) return '没有找到存储数据';
-        
+
         const parsed = JSON.parse(storeData);
         const periodData = parsed?.state?.calendar?.periodData || [];
         return '找到 ' + periodData.length + ' 条记录';
@@ -453,12 +453,12 @@
       // 检查图表元素
       const iframe = document.getElementById('testFrame');
       const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-      
-      const hasChartElements = 
+
+      const hasChartElements =
         iframeDoc.querySelector('[data-testid*="chart"]') ||
         iframeDoc.querySelector('.chart') ||
         iframeDoc.querySelector('.bar-chart');
-      
+
       return hasChartElements ? '找到图表元素' : '未找到图表元素';
     }
 
@@ -466,15 +466,15 @@
       // 检查按钮位置
       const iframe = document.getElementById('testFrame');
       const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-      
+
       const recordButton = iframeDoc.querySelector('button:contains("记录经期")') ||
                          iframeDoc.querySelector('[data-testid*="record"]');
-      
+
       if (!recordButton) return '未找到记录按钮';
-      
+
       const statistics = iframeDoc.querySelector('.grid:has(.text-2xl)') ||
                         iframeDoc.querySelector('[data-testid*="statistics"]');
-      
+
       return `记录按钮: ${recordButton ? '已找到' : '未找到'}\n统计区域: ${statistics ? '已找到' : '未找到'}`;
     }
 
@@ -492,9 +492,9 @@
       // 测试安全性
       const iframe = document.getElementById('testFrame');
       const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-      
+
       const debugPanel = iframeDoc.querySelector('[data-testid*="debug"]');
-      
+
       return debugPanel ? '⚠️ 找到调试面板' : '✅ 无调试面板';
     }
 

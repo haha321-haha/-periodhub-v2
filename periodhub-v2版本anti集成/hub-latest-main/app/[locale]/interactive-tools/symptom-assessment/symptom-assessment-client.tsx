@@ -46,14 +46,20 @@ interface Props {
 // 症状评估工具专用推荐数据配置 - 使用翻译系统
 const getSymptomAssessmentRecommendations = (
   locale: string,
-  recT: ReturnType<typeof useTranslations>
+  recT: ReturnType<typeof useTranslations>,
 ) => {
   // 推荐文章
   const relatedArticles = [
     {
       id: "comprehensive-medical-guide",
-      title: locale === "zh" ? "痛经综合医疗指南" : "Comprehensive Medical Guide to Dysmenorrhea",
-      description: locale === "zh" ? "专业医疗视角解析痛经，包含症状诊断和治疗方案" : "Professional medical perspective on dysmenorrhea, including symptom diagnosis and treatment options",
+      title:
+        locale === "zh"
+          ? "痛经综合医疗指南"
+          : "Comprehensive Medical Guide to Dysmenorrhea",
+      description:
+        locale === "zh"
+          ? "专业医疗视角解析痛经，包含症状诊断和治疗方案"
+          : "Professional medical perspective on dysmenorrhea, including symptom diagnosis and treatment options",
       href: `/${locale}/articles/comprehensive-medical-guide-to-dysmenorrhea`,
       category: locale === "zh" ? "医疗指南" : "Medical Guide",
       readTime: locale === "zh" ? "15分钟阅读" : "15 min read",
@@ -64,8 +70,14 @@ const getSymptomAssessmentRecommendations = (
     },
     {
       id: "natural-relief-methods",
-      title: locale === "zh" ? "家庭自然疼痛缓解方法" : "Home Natural Menstrual Pain Relief",
-      description: locale === "zh" ? "自然、安全的居家疼痛缓解方法，无药物副作用" : "Natural, safe home pain relief methods without medication side effects",
+      title:
+        locale === "zh"
+          ? "家庭自然疼痛缓解方法"
+          : "Home Natural Menstrual Pain Relief",
+      description:
+        locale === "zh"
+          ? "自然、安全的居家疼痛缓解方法，无药物副作用"
+          : "Natural, safe home pain relief methods without medication side effects",
       href: `/${locale}/articles/home-natural-menstrual-pain-relief`,
       category: locale === "zh" ? "自然疗法" : "Natural Therapy",
       readTime: locale === "zh" ? "10分钟阅读" : "10 min read",
@@ -76,8 +88,14 @@ const getSymptomAssessmentRecommendations = (
     },
     {
       id: "menstrual-pain-faq",
-      title: locale === "zh" ? "痛经常见问题专家解答" : "Menstrual Pain FAQ - Expert Answers",
-      description: locale === "zh" ? "医学专家解答关于痛经的常见问题和疑虑" : "Medical experts answer common questions and concerns about menstrual pain",
+      title:
+        locale === "zh"
+          ? "痛经常见问题专家解答"
+          : "Menstrual Pain FAQ - Expert Answers",
+      description:
+        locale === "zh"
+          ? "医学专家解答关于痛经的常见问题和疑虑"
+          : "Medical experts answer common questions and concerns about menstrual pain",
       href: `/${locale}/articles/menstrual-pain-faq-expert-answers`,
       category: locale === "zh" ? "常见问题" : "FAQ",
       readTime: locale === "zh" ? "8分钟阅读" : "8 min read",
@@ -249,9 +267,7 @@ function SymptomAssessmentContent({ locale }: { locale: string }) {
           {/* 评估模式选择卡片（简化版 / 详细版 / 医疗专业版） */}
           <div className="mb-10">
             <h2 className="text-2xl font-semibold text-gray-900 text-center mb-4">
-              {locale === "zh"
-                ? "选择评估模式"
-                : "Choose Your Assessment Mode"}
+              {locale === "zh" ? "选择评估模式" : "Choose Your Assessment Mode"}
             </h2>
             <p className="text-center text-gray-600 mb-6 max-w-2xl mx-auto">
               {locale === "zh"
@@ -309,7 +325,7 @@ function SymptomAssessmentContent({ locale }: { locale: string }) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {getSymptomAssessmentRecommendations(
                   locale,
-                  recT
+                  recT,
                 ).relatedArticles.map((article) => (
                   <RelatedArticleCard
                     key={article.id}
@@ -326,15 +342,12 @@ function SymptomAssessmentContent({ locale }: { locale: string }) {
                 {t("sections.relatedTools")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {getSymptomAssessmentRecommendations(locale, recT).relatedTools.map(
-                  (tool) => (
-                    <RelatedToolCard
-                      key={tool.id}
-                      tool={tool}
-                      locale={locale}
-                    />
-                  ),
-                )}
+                {getSymptomAssessmentRecommendations(
+                  locale,
+                  recT,
+                ).relatedTools.map((tool) => (
+                  <RelatedToolCard key={tool.id} tool={tool} locale={locale} />
+                ))}
               </div>
             </section>
 
@@ -346,7 +359,7 @@ function SymptomAssessmentContent({ locale }: { locale: string }) {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {getSymptomAssessmentRecommendations(
                   locale,
-                  recT
+                  recT,
                 ).scenarioSolutions.map((solution) => (
                   <ScenarioSolutionCard
                     key={solution.id}
@@ -365,18 +378,20 @@ function SymptomAssessmentContent({ locale }: { locale: string }) {
 
 export default function SymptomAssessmentClient({ params: { locale } }: Props) {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 text-neutral-800 font-sans">
-        <div className="container mx-auto px-4 py-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-3/4 mb-4"></div>
-              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-violet-50 text-neutral-800 font-sans">
+          <div className="container mx-auto px-4 py-8">
+            <div className="max-w-4xl mx-auto">
+              <div className="animate-pulse">
+                <div className="h-8 bg-gray-200 rounded w-3/4 mb-4"></div>
+                <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    }>
+      }
+    >
       <SymptomAssessmentContent locale={locale} />
     </Suspense>
   );

@@ -89,7 +89,9 @@ export default async function LocaleLayout({
         <Suspense fallback={<LoadingState />}>
           <EnhancedHydrationFix />
           <Header />
-          <main className="flex-1" suppressHydrationWarning>{children}</main>
+          <main className="flex-1" suppressHydrationWarning>
+            {children}
+          </main>
           <Footer />
           <FooterClickGuard />
           <FirstWeekActivationWrapperClient />

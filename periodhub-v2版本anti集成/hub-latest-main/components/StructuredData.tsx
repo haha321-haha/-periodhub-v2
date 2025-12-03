@@ -53,7 +53,7 @@ export function generateStructuredData(
     description: props.description || "",
     url: props.url || "",
   };
-  
+
   // 只在 image 存在时添加
   if (props.image) {
     baseData.image = props.image;

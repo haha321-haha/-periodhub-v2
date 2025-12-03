@@ -15,7 +15,10 @@ export async function generateMetadata({
   params: Promise<{ locale: Locale }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "interactiveTools.stressManagement" });
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveTools.stressManagement",
+  });
   const breathingT = await getTranslations({
     locale,
     namespace: "breathingExercise",
@@ -69,7 +72,10 @@ export default async function BreathingExercisePage({
   const { locale } = await params;
   unstable_setRequestLocale(locale);
 
-  const t = await getTranslations({ locale, namespace: "interactiveTools.stressManagement" });
+  const t = await getTranslations({
+    locale,
+    namespace: "interactiveTools.stressManagement",
+  });
   const breathingT = await getTranslations({
     locale,
     namespace: "breathingExercise",
@@ -153,7 +159,13 @@ export default async function BreathingExercisePage({
           {/* Header Section */}
           <header className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-6">
-              <span className="text-3xl" role="img" aria-label={breathingT('iconLabel') || 'Breathing exercise icon'}>
+              <span
+                className="text-3xl"
+                role="img"
+                aria-label={
+                  breathingT("iconLabel") || "Breathing exercise icon"
+                }
+              >
                 💨
               </span>
             </div>
@@ -206,4 +218,3 @@ export default async function BreathingExercisePage({
     </>
   );
 }
-

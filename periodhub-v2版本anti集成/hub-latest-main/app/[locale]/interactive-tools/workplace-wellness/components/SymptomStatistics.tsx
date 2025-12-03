@@ -83,8 +83,8 @@ export default function SymptomStatistics() {
     ];
 
     commonSymptoms.forEach((symptom) => {
-      const occurrences = symptomRecords.filter((record) =>
-        record.symptoms?.includes(symptom),
+      const occurrences = symptomRecords.filter(
+        (record) => record.symptoms?.includes(symptom),
       );
 
       if (occurrences.length > 0) {

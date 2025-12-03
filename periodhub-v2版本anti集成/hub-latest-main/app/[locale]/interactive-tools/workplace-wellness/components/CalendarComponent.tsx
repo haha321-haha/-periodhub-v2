@@ -133,12 +133,12 @@ export default function CalendarComponent() {
   const predictedDateEntry = periodData.find((d) => d.type === "predicted");
   const formattedPredictedDate = predictedDateEntry
     ? new Date(predictedDateEntry.date).toLocaleDateString(
-      locale === "zh" ? "zh-CN" : "en-US",
-      {
-        month: "short",
-        day: "numeric",
-      },
-    )
+        locale === "zh" ? "zh-CN" : "en-US",
+        {
+          month: "short",
+          day: "numeric",
+        },
+      )
     : "";
 
   // 月份导航 - 基于HVsLYEp的导航逻辑
@@ -182,7 +182,6 @@ export default function CalendarComponent() {
       }, 100);
     }
   }, [showAddForm]);
-
 
   // 获取今天的日期字符串
   const getTodayDateString = (): string => {
@@ -357,7 +356,7 @@ export default function CalendarComponent() {
                   {day}
                   {/* Phase 2: 评估指示器 */}
                   {assessmentStatus && (
-                    <div 
+                    <div
                       className="absolute top-1 right-1 w-2 h-2 bg-purple-500 rounded-full border border-white"
                       title={`评估完成 - 压力分数: ${assessmentStatus.stressScore}`}
                     />
@@ -387,7 +386,9 @@ export default function CalendarComponent() {
             <div className="w-4 h-4 rounded border border-neutral-300"></div>
             <div className="absolute top-0 right-0 w-1.5 h-1.5 bg-purple-500 rounded-full border border-white"></div>
           </div>
-          <span className="text-neutral-600">{t("calendar.legendAssessment") || "评估完成"}</span>
+          <span className="text-neutral-600">
+            {t("calendar.legendAssessment") || "评估完成"}
+          </span>
         </div>
       </div>
 
@@ -456,10 +457,11 @@ export default function CalendarComponent() {
                 onChange={(e) =>
                   setFormData({ ...formData, date: e.target.value })
                 }
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-primary-500 ${formErrors.date
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-primary-500 ${
+                  formErrors.date
                     ? "border-red-500 focus:ring-red-500"
                     : "border-neutral-300 focus:ring-primary-500"
-                  }`}
+                }`}
                 required
               />
               {formErrors.date && (
@@ -478,10 +480,11 @@ export default function CalendarComponent() {
                     type: e.target.value as PeriodType,
                   })
                 }
-                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-primary-500 ${formErrors.type
+                className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:border-primary-500 ${
+                  formErrors.type
                     ? "border-red-500 focus:ring-red-500"
                     : "border-neutral-300 focus:ring-primary-500"
-                  }`}
+                }`}
               >
                 <option value="period">{t("calendar.typePeriod")}</option>
                 <option value="predicted">{t("calendar.typePredicted")}</option>
@@ -511,8 +514,9 @@ export default function CalendarComponent() {
                         painLevel: parseInt(e.target.value, 10),
                       })
                     }
-                    className={`relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider ${formErrors.painLevel ? "border-2 border-red-500" : ""
-                      }`}
+                    className={`relative w-full h-3 bg-transparent appearance-none cursor-pointer z-10 pain-slider ${
+                      formErrors.painLevel ? "border-2 border-red-500" : ""
+                    }`}
                   />
                 </div>
                 {formErrors.painLevel && (

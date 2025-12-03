@@ -118,9 +118,7 @@
           "建议很实用，真的帮到我了",
           "建议太通用了，没有针对性"
         ],
-        "improvementAreas": [
-          "建议一般，改进空间很大"
-        ]
+        "improvementAreas": ["建议一般，改进空间很大"]
       }
     },
     "variantComparison": {

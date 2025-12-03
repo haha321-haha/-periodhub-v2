@@ -97,42 +97,58 @@ export class RecommendationOptimizationEngine {
    * 分析推荐内容效果
    */
   public analyzeContentEffectiveness(
-    contentId: string
+    contentId: string,
   ): RecommendationEffectivenessAnalysis {
     const relatedRecommendations = this.recommendationHistory.filter(
-      rec => rec.contentId === contentId
+      (rec) => rec.contentId === contentId,
     );
 
     const relatedFeedbacks = this.feedbackHistory.filter(
-      feedback => feedback.recommendationId === contentId
+      (feedback) => feedback.recommendationId === contentId,
     );
 
     const totalRecs = relatedRecommendations.length;
-    const viewedRecs = relatedRecommendations.filter(rec => rec.status === "viewed").length;
-    const completedRecs = relatedRecommendations.filter(rec => rec.status === "completed").length;
-    const savedRecs = relatedRecommendations.filter(rec => rec.status === "saved").length;
+    const viewedRecs = relatedRecommendations.filter(
+      (rec) => rec.status === "viewed",
+    ).length;
+    const completedRecs = relatedRecommendations.filter(
+      (rec) => rec.status === "completed",
+    ).length;
+    const savedRecs = relatedRecommendations.filter(
+      (rec) => rec.status === "saved",
+    ).length;
 
     // 计算各项指标
-    const engagementRate = totalRecs > 0 ? (viewedRecs + savedRecs) / totalRecs : 0;
+    const engagementRate =
+      totalRecs > 0 ? (viewedRecs + savedRecs) / totalRecs : 0;
     const completionRate = totalRecs > 0 ? completedRecs / totalRecs : 0;
-    
-    const ratingsWithValues = relatedFeedbacks.filter(f => f.rating !== undefined);
-    const averageRating = ratingsWithValues.length > 0
-      ? ratingsWithValues.reduce((sum, f) => sum + f.rating!, 0) / ratingsWithValues.length
-      : 0;
 
-    const positiveFeedbacks = relatedFeedbacks.filter(f => 
-      f.type === "useful" || f.type === "helpful" || (f.rating && f.rating >= 4)
+    const ratingsWithValues = relatedFeedbacks.filter(
+      (f) => f.rating !== undefined,
+    );
+    const averageRating =
+      ratingsWithValues.length > 0
+        ? ratingsWithValues.reduce((sum, f) => sum + f.rating!, 0) /
+          ratingsWithValues.length
+        : 0;
+
+    const positiveFeedbacks = relatedFeedbacks.filter(
+      (f) =>
+        f.type === "useful" ||
+        f.type === "helpful" ||
+        (f.rating && f.rating >= 4),
     ).length;
-    const userSatisfaction = relatedFeedbacks.length > 0 ? positiveFeedbacks / relatedFeedbacks.length : 0;
+    const userSatisfaction =
+      relatedFeedbacks.length > 0
+        ? positiveFeedbacks / relatedFeedbacks.length
+        : 0;
 
     // 综合效果评分 (0-1)
-    const effectiveness = (
+    const effectiveness =
       engagementRate * 0.3 +
       completionRate * 0.4 +
       (averageRating / 5) * 0.2 +
-      userSatisfaction * 0.1
-    );
+      userSatisfaction * 0.1;
 
     // 生成优化建议
     const recommendations = this.generateContentRecommendations(
@@ -140,7 +156,7 @@ export class RecommendationOptimizationEngine {
       engagementRate,
       completionRate,
       averageRating,
-      contentId
+      contentId,
     );
 
     return {
@@ -163,7 +179,7 @@ export class RecommendationOptimizationEngine {
     engagementRate: number,
     completionRate: number,
     averageRating: number,
-    contentId: string
+    contentId: string,
   ): RecommendationEffectivenessAnalysis["recommendations"] {
     const improvements: string[] = [];
     const weightAdjustments: Record<string, number> = {};
@@ -269,22 +285,28 @@ export class RecommendationOptimizationEngine {
     };
 
     // 分析偏好类型
-    const typeEngagement: Partial<Record<RecommendationType, { total: number; positive: number }>> = {};
+    const typeEngagement: Partial<
+      Record<RecommendationType, { total: number; positive: number }>
+    > = {};
 
     for (const rec of this.recommendationHistory) {
       const type = rec.content.type;
       if (!typeEngagement[type]) {
         typeEngagement[type] = { total: 0, positive: 0 };
       }
-      
+
       typeEngagement[type].total++;
-      
+
       if (rec.status === "completed" || rec.status === "saved") {
         typeEngagement[type].positive++;
       }
 
       // 分析优先级参与度
-      if (rec.status === "viewed" || rec.status === "completed" || rec.status === "saved") {
+      if (
+        rec.status === "viewed" ||
+        rec.status === "completed" ||
+        rec.status === "saved"
+      ) {
         pattern.engagementByPriority[rec.priority]++;
       }
 
@@ -293,7 +315,8 @@ export class RecommendationOptimizationEngine {
         if (rec.completedAt) {
           const completedTime = new Date(rec.completedAt).getTime();
           const generatedTime = new Date(rec.generatedAt).getTime();
-          const daysDiff = (completedTime - generatedTime) / (1000 * 60 * 60 * 24);
+          const daysDiff =
+            (completedTime - generatedTime) / (1000 * 60 * 60 * 24);
 
           if (daysDiff <= 1) {
             pattern.completionPatterns.quickCompletion++;
@@ -317,12 +340,17 @@ export class RecommendationOptimizationEngine {
     // 分析反馈趋势
     if (this.feedbackHistory.length >= 5) {
       const recentFeedbacks = this.feedbackHistory.slice(-10);
-      const positiveCount = recentFeedbacks.filter(f => 
-        f.type === "useful" || f.type === "helpful" || (f.rating && f.rating >= 4)
+      const positiveCount = recentFeedbacks.filter(
+        (f) =>
+          f.type === "useful" ||
+          f.type === "helpful" ||
+          (f.rating && f.rating >= 4),
       ).length;
-      
-      pattern.feedbackTrends.positiveTrend = positiveCount / recentFeedbacks.length > 0.6;
-      pattern.feedbackTrends.negativeTrend = positiveCount / recentFeedbacks.length < 0.3;
+
+      pattern.feedbackTrends.positiveTrend =
+        positiveCount / recentFeedbacks.length > 0.6;
+      pattern.feedbackTrends.negativeTrend =
+        positiveCount / recentFeedbacks.length < 0.3;
     }
 
     this.userPatterns = pattern;
@@ -341,11 +369,13 @@ export class RecommendationOptimizationEngine {
     suggestions.push(...contentSuggestions);
 
     // 算法优化建议
-    const algorithmSuggestions = this.generateAlgorithmOptimizationSuggestions(userPattern);
+    const algorithmSuggestions =
+      this.generateAlgorithmOptimizationSuggestions(userPattern);
     suggestions.push(...algorithmSuggestions);
 
     // 个性化优化建议
-    const personalizationSuggestions = this.generatePersonalizationSuggestions(userPattern);
+    const personalizationSuggestions =
+      this.generatePersonalizationSuggestions(userPattern);
     suggestions.push(...personalizationSuggestions);
 
     // 按优先级排序
@@ -364,13 +394,15 @@ export class RecommendationOptimizationEngine {
 
     for (const content of contents) {
       const analysis = this.analyzeContentEffectiveness(content.id);
-      
+
       if (!analysis.recommendations.keep) {
         suggestions.push({
           type: "content",
           priority: "high",
           title: `删除或重做内容: ${content.title.zh}`,
-          description: `该内容效果评分仅为${(analysis.effectiveness * 100).toFixed(1)}%，需要重大改进`,
+          description: `该内容效果评分仅为${(
+            analysis.effectiveness * 100
+          ).toFixed(1)}%，需要重大改进`,
           expectedImpact: "减少低质量推荐，提升用户满意度",
           implementationEffort: "medium",
           actions: analysis.recommendations.contentImprovements,
@@ -380,7 +412,9 @@ export class RecommendationOptimizationEngine {
           type: "content",
           priority: "medium",
           title: `优化内容: ${content.title.zh}`,
-          description: `该内容有改进空间，当前效果评分${(analysis.effectiveness * 100).toFixed(1)}%`,
+          description: `该内容有改进空间，当前效果评分${(
+            analysis.effectiveness * 100
+          ).toFixed(1)}%`,
           expectedImpact: "提升推荐质量和用户参与度",
           implementationEffort: "low",
           actions: analysis.recommendations.contentImprovements,
@@ -395,7 +429,7 @@ export class RecommendationOptimizationEngine {
    * 生成算法优化建议
    */
   private generateAlgorithmOptimizationSuggestions(
-    userPattern: UserBehaviorPattern
+    userPattern: UserBehaviorPattern,
   ): RecommendationOptimizationSuggestion[] {
     const suggestions: RecommendationOptimizationSuggestion[] = [];
 
@@ -405,7 +439,9 @@ export class RecommendationOptimizationEngine {
         type: "algorithm",
         priority: "high",
         title: "调整推荐算法权重",
-        description: `根据用户偏好，增加${userPattern.preferredTypes.join(", ")}类型的推荐权重`,
+        description: `根据用户偏好，增加${userPattern.preferredTypes.join(
+          ", ",
+        )}类型的推荐权重`,
         expectedImpact: "提升推荐相关性和用户满意度",
         implementationEffort: "low",
         actions: [
@@ -417,7 +453,10 @@ export class RecommendationOptimizationEngine {
     }
 
     // 优化触发机制
-    if (userPattern.completionPatterns.quickCompletion > userPattern.completionPatterns.delayedCompletion) {
+    if (
+      userPattern.completionPatterns.quickCompletion >
+      userPattern.completionPatterns.delayedCompletion
+    ) {
       suggestions.push({
         type: "delivery",
         priority: "medium",
@@ -440,7 +479,7 @@ export class RecommendationOptimizationEngine {
    * 生成个性化优化建议
    */
   private generatePersonalizationSuggestions(
-    userPattern: UserBehaviorPattern
+    userPattern: UserBehaviorPattern,
   ): RecommendationOptimizationSuggestion[] {
     const suggestions: RecommendationOptimizationSuggestion[] = [];
 
@@ -486,7 +525,7 @@ export class RecommendationOptimizationEngine {
    * 应用优化建议
    */
   public applyOptimizations(
-    suggestions: RecommendationOptimizationSuggestion[]
+    suggestions: RecommendationOptimizationSuggestion[],
   ): RecommendationAlgorithmConfig {
     const updatedConfig = { ...this.algorithmConfig };
 
@@ -503,7 +542,10 @@ export class RecommendationOptimizationEngine {
     }
 
     // 确保权重总和为1
-    const totalWeight = Object.values(updatedConfig.weights).reduce((sum, weight) => sum + weight, 0);
+    const totalWeight = Object.values(updatedConfig.weights).reduce(
+      (sum, weight) => sum + weight,
+      0,
+    );
     if (totalWeight !== 1 && totalWeight > 0) {
       const normalizedWeights = { ...updatedConfig.weights };
       for (const key in normalizedWeights) {
@@ -521,16 +563,22 @@ export class RecommendationOptimizationEngine {
   /**
    * 获取更高优先级
    */
-  private getHigherPriority(current: RecommendationPriority): RecommendationPriority {
+  private getHigherPriority(
+    current: RecommendationPriority,
+  ): RecommendationPriority {
     const hierarchy = ["low", "medium", "high", "urgent"];
     const currentIndex = hierarchy.indexOf(current);
-    return currentIndex < hierarchy.length - 1 ? hierarchy[currentIndex + 1] : current;
+    return currentIndex < hierarchy.length - 1
+      ? hierarchy[currentIndex + 1]
+      : current;
   }
 
   /**
    * 获取更低优先级
    */
-  private getLowerPriority(current: RecommendationPriority): RecommendationPriority {
+  private getLowerPriority(
+    current: RecommendationPriority,
+  ): RecommendationPriority {
     const hierarchy = ["low", "medium", "high", "urgent"];
     const currentIndex = hierarchy.indexOf(current);
     return currentIndex > 0 ? hierarchy[currentIndex - 1] : current;
@@ -560,22 +608,26 @@ export class RecommendationOptimizationEngine {
     contentAnalysis: RecommendationEffectivenessAnalysis[];
   } {
     const contents = defaultContentDatabase.getAllContents();
-    const contentAnalysis = contents.map(content => 
-      this.analyzeContentEffectiveness(content.id)
+    const contentAnalysis = contents.map((content) =>
+      this.analyzeContentEffectiveness(content.id),
     );
 
-    const effectivenessScores = contentAnalysis.map(analysis => analysis.effectiveness);
-    const averageEffectiveness = effectivenessScores.length > 0 
-      ? effectivenessScores.reduce((sum, score) => sum + score, 0) / effectivenessScores.length
-      : 0;
+    const effectivenessScores = contentAnalysis.map(
+      (analysis) => analysis.effectiveness,
+    );
+    const averageEffectiveness =
+      effectivenessScores.length > 0
+        ? effectivenessScores.reduce((sum, score) => sum + score, 0) /
+          effectivenessScores.length
+        : 0;
 
     const topPerformingContent = contentAnalysis
-      .filter(analysis => analysis.effectiveness > 0.7)
-      .map(analysis => analysis.contentId);
+      .filter((analysis) => analysis.effectiveness > 0.7)
+      .map((analysis) => analysis.contentId);
 
     const underperformingContent = contentAnalysis
-      .filter(analysis => analysis.effectiveness < 0.3)
-      .map(analysis => analysis.contentId);
+      .filter((analysis) => analysis.effectiveness < 0.3)
+      .map((analysis) => analysis.contentId);
 
     const suggestions = this.generateOptimizationSuggestions();
     const userPattern = this.analyzeUserBehaviorPattern();
@@ -597,9 +649,9 @@ export class RecommendationOptimizationEngine {
 // 创建默认优化引擎实例
 export const defaultOptimizationEngine = new RecommendationOptimizationEngine({
   weights: {
-    stressLevel: 0.30,
+    stressLevel: 0.3,
     painLevel: 0.25,
-    cyclePhase: 0.20,
+    cyclePhase: 0.2,
     constitution: 0.15,
     historyPattern: 0.05,
     userFeedback: 0.05,

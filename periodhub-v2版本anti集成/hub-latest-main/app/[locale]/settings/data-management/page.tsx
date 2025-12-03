@@ -97,7 +97,3 @@ export default async function DataManagementPage({
     </div>
   );
 }
-
-
-
-

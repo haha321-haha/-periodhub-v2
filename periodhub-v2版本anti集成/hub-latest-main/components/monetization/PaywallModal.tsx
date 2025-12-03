@@ -1,15 +1,23 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
-import { trackPaywallViewed, trackPaywallUpgradeClicked, trackPaywallClosed, trackPlanSelected, getPaywallVariant, trackABTestExposure, PAYWALL_VARIANTS } from '@/lib/analytics/posthog';
-import { X, Check, Sparkles } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import {
+  trackPaywallViewed,
+  trackPaywallUpgradeClicked,
+  trackPaywallClosed,
+  trackPlanSelected,
+  getPaywallVariant,
+  trackABTestExposure,
+  PAYWALL_VARIANTS,
+} from "@/lib/analytics/posthog";
+import { X, Check, Sparkles } from "lucide-react";
 
 export interface PaywallModalProps {
-  painPoint: 'pain' | 'work' | 'emotion';
+  painPoint: "pain" | "work" | "emotion";
   assessmentScore: number;
   onClose: () => void;
-  onUpgrade: (plan: 'monthly' | 'yearly' | 'oneTime') => void;
+  onUpgrade: (plan: "monthly" | "yearly" | "oneTime") => void;
 }
 
 export default function PaywallModal({
@@ -19,30 +27,36 @@ export default function PaywallModal({
   onUpgrade,
 }: PaywallModalProps) {
   const t = useTranslations();
-  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly' | 'oneTime'>('monthly');
-  const [variant, setVariant] = useState('control');
+  const [selectedPlan, setSelectedPlan] = useState<
+    "monthly" | "yearly" | "oneTime"
+  >("monthly");
+  const [variant, setVariant] = useState("control");
   const [viewStartTime] = useState(Date.now());
 
   useEffect(() => {
     const currentVariant = getPaywallVariant();
     setVariant(currentVariant);
-    
+
     // 记录A/B测试曝光
-    trackABTestExposure('paywall-variant-test', currentVariant, {
+    trackABTestExposure("paywall-variant-test", currentVariant, {
       painPoint,
-      assessmentScore
+      assessmentScore,
     });
-    
+
     trackPaywallViewed(currentVariant, painPoint, assessmentScore);
   }, [painPoint, assessmentScore]);
 
   // P1.2 A/B测试：3种变体策略
-  const headlineKey = variant === PAYWALL_VARIANTS.control ? `${painPoint}Dominant` : 
-                     variant === PAYWALL_VARIANTS.variant1 ? `${painPoint}Alternative1` : 
-                     variant === PAYWALL_VARIANTS.variant2 ? `${painPoint}Alternative2` : 
-                     `${painPoint}Dominant`;
+  const headlineKey =
+    variant === PAYWALL_VARIANTS.control
+      ? `${painPoint}Dominant`
+      : variant === PAYWALL_VARIANTS.variant1
+        ? `${painPoint}Alternative1`
+        : variant === PAYWALL_VARIANTS.variant2
+          ? `${painPoint}Alternative2`
+          : `${painPoint}Dominant`;
 
-  const handleUpgrade = (plan: 'monthly' | 'yearly' | 'oneTime') => {
+  const handleUpgrade = (plan: "monthly" | "yearly" | "oneTime") => {
     trackPaywallUpgradeClicked(variant, painPoint, plan);
     trackPlanSelected(variant, painPoint, plan);
     onUpgrade(plan);
@@ -69,7 +83,7 @@ export default function PaywallModal({
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-4">
               <Sparkles className="w-4 h-4" />
-              {t('Paywall.urgency.limitedOffer')}
+              {t("Paywall.urgency.limitedOffer")}
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
               {t(`Paywall.variants.${headlineKey}.headline`)}
@@ -82,15 +96,20 @@ export default function PaywallModal({
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div className="border-2 border-gray-200 rounded-xl p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4">
-                {t('Paywall.comparison.free.title')}
+                {t("Paywall.comparison.free.title")}
               </h3>
               <ul className="space-y-3">
-                {(t.raw('Paywall.comparison.free.features') as string[]).map((feature, i) => (
-                  <li key={i} className="flex items-start gap-2 text-gray-600">
-                    <Check className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
+                {(t.raw("Paywall.comparison.free.features") as string[]).map(
+                  (feature, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-gray-600"
+                    >
+                      <Check className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
 
@@ -99,62 +118,73 @@ export default function PaywallModal({
                 PRO
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-4">
-                {t('Paywall.comparison.pro.title')}
+                {t("Paywall.comparison.pro.title")}
               </h3>
               <ul className="space-y-3">
-                {(t.raw('Paywall.comparison.pro.features') as string[]).map((feature, i) => (
-                  <li key={i} className="flex items-start gap-2 text-gray-900">
-                    <Check className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
-                    <span className="font-medium">{feature}</span>
-                  </li>
-                ))}
+                {(t.raw("Paywall.comparison.pro.features") as string[]).map(
+                  (feature, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-gray-900"
+                    >
+                      <Check className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
+                      <span className="font-medium">{feature}</span>
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-4 mb-6">
             <button
-              onClick={() => setSelectedPlan('monthly')}
+              onClick={() => setSelectedPlan("monthly")}
               className={`p-4 rounded-xl border-2 transition-all ${
-                selectedPlan === 'monthly'
-                  ? 'border-purple-500 bg-purple-50'
-                  : 'border-gray-200 hover:border-purple-300'
+                selectedPlan === "monthly"
+                  ? "border-purple-500 bg-purple-50"
+                  : "border-gray-200 hover:border-purple-300"
               }`}
             >
-              <div className="text-sm text-gray-600 mb-1">{t('Pro.pricing.monthly.features')}</div>
+              <div className="text-sm text-gray-600 mb-1">
+                {t("Pro.pricing.monthly.features")}
+              </div>
               <div className="text-2xl font-bold text-gray-900">
-                {t('Pro.pricing.monthly.price')}
+                {t("Pro.pricing.monthly.price")}
               </div>
             </button>
 
             <button
-              onClick={() => setSelectedPlan('yearly')}
+              onClick={() => setSelectedPlan("yearly")}
               className={`p-4 rounded-xl border-2 transition-all relative ${
-                selectedPlan === 'yearly'
-                  ? 'border-purple-500 bg-purple-50'
-                  : 'border-gray-200 hover:border-purple-300'
+                selectedPlan === "yearly"
+                  ? "border-purple-500 bg-purple-50"
+                  : "border-gray-200 hover:border-purple-300"
               }`}
             >
               <div className="absolute -top-2 -right-2 bg-green-500 text-white px-2 py-1 text-xs font-bold rounded-full">
-                {t('Pro.pricing.yearly.save')}
+                {t("Pro.pricing.yearly.save")}
               </div>
-              <div className="text-sm text-gray-600 mb-1">{t('Pro.pricing.yearly.perMonth')}</div>
+              <div className="text-sm text-gray-600 mb-1">
+                {t("Pro.pricing.yearly.perMonth")}
+              </div>
               <div className="text-2xl font-bold text-gray-900">
-                {t('Pro.pricing.yearly.price')}
+                {t("Pro.pricing.yearly.price")}
               </div>
             </button>
 
             <button
-              onClick={() => setSelectedPlan('oneTime')}
+              onClick={() => setSelectedPlan("oneTime")}
               className={`p-4 rounded-xl border-2 transition-all ${
-                selectedPlan === 'oneTime'
-                  ? 'border-purple-500 bg-purple-50'
-                  : 'border-gray-200 hover:border-purple-300'
+                selectedPlan === "oneTime"
+                  ? "border-purple-500 bg-purple-50"
+                  : "border-gray-200 hover:border-purple-300"
               }`}
             >
-              <div className="text-sm text-gray-600 mb-1">{t('Pro.pricing.oneTime.label')}</div>
+              <div className="text-sm text-gray-600 mb-1">
+                {t("Pro.pricing.oneTime.label")}
+              </div>
               <div className="text-2xl font-bold text-gray-900">
-                {t('Pro.pricing.oneTime.price')}
+                {t("Pro.pricing.oneTime.price")}
               </div>
             </button>
           </div>
@@ -167,7 +197,7 @@ export default function PaywallModal({
           </button>
 
           <p className="text-center text-sm text-gray-500 mt-4">
-            {t('Paywall.urgency.usersJoined', { count: '127' })}
+            {t("Paywall.urgency.usersJoined", { count: "127" })}
           </p>
         </div>
       </div>

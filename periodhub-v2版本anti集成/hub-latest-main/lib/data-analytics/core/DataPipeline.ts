@@ -427,7 +427,11 @@ export class DataPipeline {
       // 如果服务失败，返回默认值
       // 使用logger而不是console.warn（开发环境自动启用，生产环境自动禁用）
       const { logWarn } = await import("@/lib/debug-logger");
-      logWarn("[DataPipeline] Failed to get location, using default", error, "DataPipeline");
+      logWarn(
+        "[DataPipeline] Failed to get location, using default",
+        error,
+        "DataPipeline",
+      );
       return {
         country: "XX",
         city: "Unknown",

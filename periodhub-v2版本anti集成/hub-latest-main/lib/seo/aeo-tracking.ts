@@ -1,7 +1,7 @@
 /**
  * AEO Tracking System
  * AEO 追踪系统
- * 
+ *
  * 追踪 AI 搜索引擎的引用情况
  * 监控 Perplexity, ChatGPT, Claude 等 AI 工具的引用数据
  */
@@ -54,12 +54,12 @@ const aiReferences: AIReference[] = [];
 
 /**
  * 记录 AI 引用
- * 
+ *
  * @param reference AI 引用数据
  */
 export async function trackAIReference(reference: AIReference): Promise<void> {
   const timestamp = reference.timestamp || new Date().toISOString();
-  
+
   // 添加到内存存储（用于向后兼容）
   aiReferences.push({
     ...reference,
@@ -77,14 +77,16 @@ export async function trackAIReference(reference: AIReference): Promise<void> {
     // 数据库未配置或保存失败，继续使用内存存储
     // 这在开发环境中是正常的
     if (process.env.NODE_ENV === "development") {
-      console.log("[AEO Tracking] Using in-memory storage (database not configured)");
+      console.log(
+        "[AEO Tracking] Using in-memory storage (database not configured)",
+      );
     }
   }
 }
 
 /**
  * 获取 AEO 指标
- * 
+ *
  * @param days 统计天数（默认 30 天）
  * @returns AEO 指标
  */
@@ -93,7 +95,7 @@ export async function getAEOMetrics(days: number = 30): Promise<AEOMetrics> {
   try {
     const { getAEOMetricsFromDB } = await import("@/lib/db/aeo-repository");
     const dbMetrics = await getAEOMetricsFromDB(days);
-    
+
     // 如果数据库有数据，优先使用数据库数据
     if (dbMetrics.totalReferences > 0) {
       return dbMetrics;
@@ -101,7 +103,9 @@ export async function getAEOMetrics(days: number = 30): Promise<AEOMetrics> {
   } catch {
     // 数据库未配置或查询失败，继续使用内存存储
     if (process.env.NODE_ENV === "development") {
-      console.log("[AEO Metrics] Using in-memory storage (database not configured)");
+      console.log(
+        "[AEO Metrics] Using in-memory storage (database not configured)",
+      );
     }
   }
 
@@ -110,7 +114,7 @@ export async function getAEOMetrics(days: number = 30): Promise<AEOMetrics> {
   cutoffDate.setDate(cutoffDate.getDate() - days);
 
   const recentReferences = aiReferences.filter(
-    (ref) => new Date(ref.timestamp) >= cutoffDate
+    (ref) => new Date(ref.timestamp) >= cutoffDate,
   );
 
   // 按来源分组
@@ -127,17 +131,19 @@ export async function getAEOMetrics(days: number = 30): Promise<AEOMetrics> {
 
   // 计算平均准确性评分
   const scoresWithValue = recentReferences.filter(
-    (ref) => ref.accuracyScore !== undefined
+    (ref) => ref.accuracyScore !== undefined,
   );
   const averageAccuracyScore =
     scoresWithValue.length > 0
-      ? scoresWithValue.reduce((sum, ref) => sum + (ref.accuracyScore || 0), 0) /
-        scoresWithValue.length
+      ? scoresWithValue.reduce(
+          (sum, ref) => sum + (ref.accuracyScore || 0),
+          0,
+        ) / scoresWithValue.length
       : 0;
 
   // 计算包含来源链接的百分比
   const withSourceLink = recentReferences.filter(
-    (ref) => ref.includesSourceLink
+    (ref) => ref.includesSourceLink,
   ).length;
   const sourceLinkPercentage =
     recentReferences.length > 0
@@ -168,7 +174,7 @@ export async function getAEOMetrics(days: number = 30): Promise<AEOMetrics> {
 
 /**
  * 获取特定页面的引用数据
- * 
+ *
  * @param pageUrl 页面 URL
  * @returns 引用数组
  */
@@ -178,7 +184,7 @@ export function getPageReferences(pageUrl: string): AIReference[] {
 
 /**
  * 获取特定来源的引用数据
- * 
+ *
  * @param source 来源名称
  * @returns 引用数组
  */
@@ -188,7 +194,7 @@ export function getSourceReferences(source: string): AIReference[] {
 
 /**
  * 导出引用数据（用于分析）
- * 
+ *
  * @param format 导出格式（json, csv）
  * @returns 导出的数据
  */
@@ -218,4 +224,3 @@ export function exportReferences(format: "json" | "csv" = "json"): string {
 
   return JSON.stringify(aiReferences, null, 2);
 }
-

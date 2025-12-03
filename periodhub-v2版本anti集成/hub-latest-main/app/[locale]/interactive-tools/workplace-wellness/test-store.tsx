@@ -108,10 +108,10 @@ export default function TestStore() {
       setActiveTab(currentState.activeTab);
       setTestMessage(
         "状态已更新，持久化将自动完成。当前状态: " +
-        JSON.stringify({
-          activeTab: currentState.activeTab,
-          calendarRecords: currentState.calendar.periodData.length,
-        }),
+          JSON.stringify({
+            activeTab: currentState.activeTab,
+            calendarRecords: currentState.calendar.periodData.length,
+          }),
       );
     } catch (error) {
       setTestMessage("持久化测试失败: " + String(error));
@@ -208,7 +208,7 @@ export default function TestStore() {
       const parsed = JSON.parse(raw);
       setTestMessage(
         "直接从localStorage读取数据成功: " +
-        JSON.stringify(parsed.state.calendar.periodData, null, 2),
+          JSON.stringify(parsed.state.calendar.periodData, null, 2),
       );
     } catch (error) {
       setTestMessage("直接从localStorage读取失败: " + String(error));

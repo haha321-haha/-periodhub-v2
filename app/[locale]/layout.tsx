@@ -147,14 +147,20 @@ export default async function LocaleLayout({
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+          <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="default"
+          />
 
           {/* 🔍 搜索引擎优化 */}
           <meta
             name="google-site-verification"
             content="1cZ9WUBHeRB2lMoPes66cXWCTkycozosPw4_PnNMoGk"
           />
-          <meta name="msvalidate.01" content="12D5EA89A249696AACD3F155B64C5E56" />
+          <meta
+            name="msvalidate.01"
+            content="12D5EA89A249696AACD3F155B64C5E56"
+          />
           <meta
             name="robots"
             content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"

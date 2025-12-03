@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { trackEvent } from '@/lib/analytics/posthog';
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { trackEvent } from "@/lib/analytics/posthog";
 
 interface UpgradeButtonProps {
-  plan: 'monthly' | 'yearly' | 'oneTime';
+  plan: "monthly" | "yearly" | "oneTime";
   painPoint: string;
   assessmentScore: number;
   className?: string;
@@ -15,7 +15,7 @@ export default function UpgradeButton({
   plan,
   painPoint,
   assessmentScore,
-  className = '',
+  className = "",
 }: UpgradeButtonProps) {
   const t = useTranslations();
   const [loading, setLoading] = useState(false);
@@ -28,11 +28,11 @@ export default function UpgradeButton({
 
   const handleUpgrade = async () => {
     setLoading(true);
-    
+
     try {
-      const res = await fetch('/api/lemonsqueezy/create-checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/lemonsqueezy/create-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           variantId: variantIds[plan],
           painPoint,
@@ -43,30 +43,31 @@ export default function UpgradeButton({
       const data = await res.json();
 
       if (data.url) {
-        trackEvent('redirecting_to_checkout', { plan, painPoint, platform: 'lemonsqueezy' });
+        trackEvent("redirecting_to_checkout", {
+          plan,
+          painPoint,
+          platform: "lemonsqueezy",
+        });
         window.location.href = data.url;
       } else {
-        throw new Error('No checkout URL received');
+        throw new Error("No checkout URL received");
       }
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      trackEvent('checkout_initiation_failed', {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error";
+      trackEvent("checkout_initiation_failed", {
         error: errorMessage,
         plan,
       });
-      
-      alert('Payment initialization failed. Please try again.');
+
+      alert("Payment initialization failed. Please try again.");
       setLoading(false);
     }
   };
 
   return (
-    <button
-      onClick={handleUpgrade}
-      disabled={loading}
-      className={className}
-    >
-      {loading ? t('common.loading') : t('Pro.cta.upgrade')}
+    <button onClick={handleUpgrade} disabled={loading} className={className}>
+      {loading ? t("common.loading") : t("Pro.cta.upgrade")}
     </button>
   );
 }

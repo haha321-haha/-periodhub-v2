@@ -38,7 +38,7 @@ const DownloadsSection = dynamic(
         </div>
       </section>
     ),
-  }
+  },
 );
 
 const PrivacySection = dynamic(
@@ -56,7 +56,7 @@ const PrivacySection = dynamic(
         </div>
       </section>
     ),
-  }
+  },
 );
 
 const CTASection = dynamic(() => import("@/components/sections/CTASection"), {
@@ -217,7 +217,13 @@ const getStructuredData = async (locale: string) => {
       answer: t("faq.q3.answer"),
     },
   ]
-    .filter((item) => item.question && item.answer && item.question.trim() && item.answer.trim()) // 过滤空值
+    .filter(
+      (item) =>
+        item.question &&
+        item.answer &&
+        item.question.trim() &&
+        item.answer.trim(),
+    ) // 过滤空值
     .map((item) => ({
       "@type": "Question",
       name: item.question.trim(),
@@ -332,31 +338,31 @@ export default async function HomePage({
         <main>
           {/* Hero Section with Clinical Effectiveness Scores */}
           <HeroNew />
-          
+
           {/* Comparison Section (Marketing) */}
           <ComparisonSection />
 
           {/* Stats Section */}
           <StatsSection />
-          
+
           {/* Tools Section */}
           <ToolsSection />
-          
+
           {/* Scenarios Section */}
           <ScenariosSection />
-          
+
           {/* Downloads Section */}
           <DownloadsSection />
-          
+
           {/* Privacy Section */}
           <PrivacySection />
-          
+
           {/* CTA Section */}
           <CTASection />
-          
+
           {/* Medical Advisory Board */}
           <MedicalAdvisoryBoard />
-          
+
           {/* Legacy sections - keeping for now */}
           <Hero />
 

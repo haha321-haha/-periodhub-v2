@@ -4,10 +4,7 @@
   "name": "PeriodHub - 专业女性健康管理平台",
   "description": "提供专业的痛经缓解方法、月经健康管理工具和个性化建议",
   "url": "https://periodhub.health",
-  "inLanguage": [
-    "zh-CN",
-    "en-US"
-  ],
+  "inLanguage": ["zh-CN", "en-US"],
   "publisher": {
     "@type": "Organization",
     "name": "PeriodHub",
@@ -22,12 +19,7 @@
   "mainEntity": {
     "@type": "MedicalCondition",
     "name": "痛经",
-    "alternateName": [
-      "月经疼痛",
-      "经期疼痛",
-      "Dysmenorrhea",
-      "Menstrual Pain"
-    ],
+    "alternateName": ["月经疼痛", "经期疼痛", "Dysmenorrhea", "Menstrual Pain"],
     "description": "月经期间或前后出现的疼痛症状，影响女性日常生活质量",
     "symptom": [
       {

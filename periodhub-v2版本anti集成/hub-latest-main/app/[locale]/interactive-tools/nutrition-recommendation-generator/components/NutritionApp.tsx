@@ -86,7 +86,9 @@ export default function NutritionApp({
       const categoryTitles = {
         menstrualPhase: getUIContentObject("categoryTitles.menstrualPhase"),
         healthGoals: getUIContentObject("categoryTitles.healthGoals"),
-        holisticHealthConstitution: getUIContentObject("categoryTitles.holisticHealthConstitution"),
+        holisticHealthConstitution: getUIContentObject(
+          "categoryTitles.holisticHealthConstitution",
+        ),
       };
 
       return (

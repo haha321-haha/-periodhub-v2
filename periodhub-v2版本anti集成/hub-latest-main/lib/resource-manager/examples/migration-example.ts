@@ -209,9 +209,7 @@ async function step4_generateAnalyticsReport(resourceManager: ResourceManager) {
     console.log(`  PDF资源: ${report.resourcesByType.pdf || 0}`);
     console.log(`  文章资源: ${report.resourcesByType.article || 0}`);
     console.log(`  活跃资源: ${report.resourcesByStatus.active || 0}`);
-    console.log(
-      `  热门标签: ${report.topTags.map((t) => t.tag).join(", ")}`,
-    );
+    console.log(`  热门标签: ${report.topTags.map((t) => t.tag).join(", ")}`);
   } else {
     console.error(`❌ 生成报告失败: ${reportResult.error}`);
   }

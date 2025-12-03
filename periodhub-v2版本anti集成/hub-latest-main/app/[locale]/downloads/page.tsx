@@ -149,7 +149,9 @@ export default async function DownloadsPage({
                   clipRule="evenodd"
                 />
               </svg>
-              <span className="text-sm font-bold" suppressHydrationWarning>{bannerText}</span>
+              <span className="text-sm font-bold" suppressHydrationWarning>
+                {bannerText}
+              </span>
             </div>
           </div>
         </div>
@@ -161,7 +163,7 @@ export default async function DownloadsPage({
               <Download className="w-8 h-8 text-white" />
             </div>
 
-            <h1 
+            <h1
               className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
               suppressHydrationWarning
             >
@@ -176,7 +178,12 @@ export default async function DownloadsPage({
             <div className="mb-6 flex justify-center">
               <DownloadModal
                 locale={locale}
-                buttonText={t("content.emailCollectionButton") || (locale === "zh" ? "📧 发送PDF到邮箱" : "📧 Send PDFs to Email")}
+                buttonText={
+                  t("content.emailCollectionButton") ||
+                  (locale === "zh"
+                    ? "📧 发送PDF到邮箱"
+                    : "📧 Send PDFs to Email")
+                }
                 className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all transform hover:scale-105"
                 source="downloads-page"
               />

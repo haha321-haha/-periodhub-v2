@@ -5,7 +5,7 @@
     "sectionTitle": "Recommended for You",
     "loading": "Generating recommendations...",
     "error": "Recommendation system temporarily unavailable, please try again later",
-    
+
     "insights": {
       "title": "Data Insights",
       "subtitle": "Analysis based on your data",
@@ -29,7 +29,7 @@
         "needs_attention": "Medical consultation recommended"
       }
     },
-    
+
     "categories": {
       "all": "All",
       "pain-relief": "Pain Relief",
@@ -43,7 +43,7 @@
       "mental-health": "Mental Health",
       "emergency": "Emergency"
     },
-    
+
     "types": {
       "article": "Article",
       "tool": "Tool",
@@ -51,14 +51,14 @@
       "tip": "Practical Tip",
       "action": "Action Item"
     },
-    
+
     "priority": {
       "high": "Important",
       "medium": "Recommended",
       "low": "Optional",
       "urgent": "Urgent"
     },
-    
+
     "actions": {
       "dismiss": "Dismiss",
       "save": "Save",
@@ -69,7 +69,7 @@
       "viewAll": "View All",
       "undoDismiss": "Undo Dismiss"
     },
-    
+
     "reasons": {
       "prefix": "Reason:",
       "highPainLevel": "Your current pain level is high ({level}/10)",
@@ -89,7 +89,7 @@
       "suffix": ", therefore this content is recommended.",
       "default": "Recommended based on your data patterns."
     },
-    
+
     "empty": {
       "title": "No Recommendations Yet",
       "description": "Complete more data tracking to receive personalized recommendations",
@@ -97,7 +97,7 @@
       "noData": "Insufficient data to generate recommendations",
       "insufficientData": "Please record at least 3 cycles of data for more accurate recommendations"
     },
-    
+
     "dataQuality": {
       "title": "Data Quality Notice",
       "low": "Insufficient data, recommendations may not be accurate. Please record at least 3 cycles.",
@@ -108,7 +108,7 @@
       "recordCount": "Recorded {count} cycles",
       "suggestion": "Continue recording data to improve recommendation accuracy"
     },
-    
+
     "feedback": {
       "title": "Was this recommendation helpful?",
       "helpful": "Helpful",
@@ -124,7 +124,7 @@
         "other": "Other Reason"
       }
     },
-    
+
     "filters": {
       "title": "Filter Recommendations",
       "showAll": "Show All",
@@ -136,14 +136,14 @@
       "sortByPriority": "By Priority",
       "sortByTime": "By Time"
     },
-    
+
     "summary": {
       "totalRecommendations": "{count} Recommendations",
       "highPriorityCount": "{count} High Priority Recommendations",
       "categoriesCount": "{count} Categories",
       "newRecommendations": "{count} New Recommendations"
     },
-    
+
     "content": {
       "articles": {
         "dysmenorrheaGuide": {
@@ -182,7 +182,7 @@
           "reason": "Deep dive into pain mechanisms"
         }
       },
-      
+
       "tools": {
         "painTracker": {
           "title": "Pain Tracker",
@@ -225,7 +225,7 @@
           "reason": "Manage period health in workplace"
         }
       },
-      
+
       "scenarios": {
         "office": {
           "title": "Office Scenario Solution",
@@ -268,7 +268,7 @@
           "reason": "Understand period changes at different stages"
         }
       },
-      
+
       "tips": {
         "heatTherapy": {
           "title": "Heat Therapy",
@@ -296,7 +296,7 @@
           "reason": "Improve symptoms through diet"
         }
       },
-      
+
       "actions": {
         "medicalConsultation": {
           "title": "Medical Consultation Recommended",

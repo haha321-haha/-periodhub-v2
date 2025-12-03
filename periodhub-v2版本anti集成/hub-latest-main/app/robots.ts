@@ -3,7 +3,8 @@ import { MetadataRoute } from "next";
 // 🚀 移动端优化已启用：Service Worker、触摸优化、性能监控
 // 🔧 修复版本：解决 manifest.json 和 constitution-test 被误屏蔽的问题
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || "https://www.periodhub.health";
 
   return {
     rules: [
@@ -13,7 +14,7 @@ export default function robots(): MetadataRoute.Robots {
           "/",
           "/manifest.json",
           "/manifest-*.webmanifest",
-          "/manifest-*.json"
+          "/manifest-*.json",
         ],
         disallow: [
           "/api/",
@@ -59,7 +60,7 @@ export default function robots(): MetadataRoute.Robots {
           "/",
           "/manifest.json",
           "/manifest-*.webmanifest",
-          "/manifest-*.json"
+          "/manifest-*.json",
         ],
         disallow: [
           "/api/",
@@ -97,7 +98,7 @@ export default function robots(): MetadataRoute.Robots {
           "/",
           "/manifest.json",
           "/manifest-*.webmanifest",
-          "/manifest-*.json"
+          "/manifest-*.json",
         ],
         disallow: [
           "/api/",

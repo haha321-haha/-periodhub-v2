@@ -186,7 +186,10 @@ const getStructuredData = async (locale: string) => {
           "@type": "MedicalAudience",
           audienceType: "Patient",
         },
-        about: generateMedicalConditionSchema("DYSMENORRHEA", locale as "en" | "zh"),
+        about: generateMedicalConditionSchema(
+          "DYSMENORRHEA",
+          locale as "en" | "zh",
+        ),
         lastReviewed: "2025-08-16",
         reviewedBy: {
           "@type": "Organization",
@@ -241,7 +244,7 @@ export default async function NaturalTherapiesPage({
   const localeTyped = locale as "en" | "zh";
   const medicalConditionSchema = generateMedicalConditionSchema(
     "DYSMENORRHEA",
-    localeTyped
+    localeTyped,
   );
 
   return (

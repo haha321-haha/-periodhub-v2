@@ -637,7 +637,11 @@ export const emergencyKitRecommendations: Record<
       {
         category: "营养补充用品",
         items: [
-          { name: "黑巧克力", reason: "提升铁水平，缓解疲劳", priority: "high" },
+          {
+            name: "黑巧克力",
+            reason: "提升铁水平，缓解疲劳",
+            priority: "high",
+          },
           { name: "暖宝宝", reason: "温暖身体，提升阳气", priority: "high" },
           { name: "小毯子", reason: "保暖休息，避免受凉", priority: "medium" },
         ],

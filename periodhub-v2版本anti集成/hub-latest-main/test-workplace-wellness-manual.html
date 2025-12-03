@@ -166,7 +166,7 @@
       <h2>核心功能测试</h2>
       <div id="coreTests"></div>
     </div>
-    
+
     <div class="test-section">
       <h2>边界情况测试</h2>
       <div id="edgeCaseTests"></div>
@@ -259,9 +259,9 @@
           <div class="test-status">
             <span>⏳ ${test.name}</span>
             <div style="margin-left: auto;">
-              <button class="btn btn-success" style="padding: 5px 10px; font-size: 12px;" 
+              <button class="btn btn-success" style="padding: 5px 10px; font-size: 12px;"
                       onclick="markTestPassed('${test.id}', '${section}')">通过</button>
-              <button class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;" 
+              <button class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;"
                       onclick="markTestFailed('${test.id}', '${section}')">失败</button>
             </div>
           </div>
@@ -295,21 +295,21 @@
     function updateTestStatus(testId, section, status) {
       const element = document.getElementById(testId);
       const testDef = testDefinitions[section].find(t => t.id === testId);
-      
+
       element.className = `test-item ${status}`;
       const statusIcon = status === 'passed' ? '✅' : '❌';
       element.querySelector('.test-status span').textContent = `${statusIcon} ${testDef.name}`;
-      
+
       // 保存结果
       testResults[section].push({
         id: testId,
         name: testDef.name,
         status: status
       });
-      
+
       completedTests++;
       updateProgress();
-      
+
       if (completedTests === testCount) {
         completeTests();
       }
@@ -327,7 +327,7 @@
       const coreTotal = testResults.core.length;
       const edgePassed = testResults.edgeCase.filter(r => r.status === 'passed').length;
       const edgeTotal = testResults.edgeCase.length;
-      
+
       const summary = document.getElementById('testSummary');
       summary.innerHTML = `
         <div class="test-summary">
@@ -370,10 +370,10 @@
       testCount = 0;
       completedTests = 0;
       document.getElementById('testSummary').textContent = '准备开始测试...';
-      
+
       // 重新计算测试总数
       testCount = testDefinitions.core.length + testDefinitions.edgeCase.length;
-      
+
       initializeTests();
     }
 
@@ -383,9 +383,9 @@
         timestamp: new Date().toISOString(),
         summary: {
           total: testCount,
-          passed: testResults.core.filter(r => r.status === 'passed').length + 
+          passed: testResults.core.filter(r => r.status === 'passed').length +
                   testResults.edgeCase.filter(r => r.status === 'passed').length,
-          failed: testResults.core.filter(r => r.status === 'failed').length + 
+          failed: testResults.core.filter(r => r.status === 'failed').length +
                   testResults.edgeCase.filter(r => r.status === 'failed').length
         },
         details: {
@@ -393,7 +393,7 @@
           edgeCase: testResults.edgeCase
         }
       };
-      
+
       const blob = new Blob([JSON.stringify(results, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');

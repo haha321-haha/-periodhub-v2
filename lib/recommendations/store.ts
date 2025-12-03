@@ -422,10 +422,15 @@ export const createRecommendationStore =
           // 上下文管理
           updateContext: (context: Partial<RecommendationContext>) => {
             const store = get();
+            const now = new Date().toISOString();
             set({
               currentContext: store.currentContext
-                ? { ...store.currentContext, ...context }
-                : context,
+                ? {
+                    ...store.currentContext,
+                    ...context,
+                    currentDate: store.currentContext.currentDate || now,
+                  }
+                : ({ ...context, currentDate: now } as RecommendationContext),
             });
           },
 

@@ -45,7 +45,7 @@ const V2Home: React.FC<V2HomeProps> = ({ locale: _locale }) => {
 
   const scenariosTranslations = getObjectTranslations("scenarios");
   const statsTranslations = getObjectTranslations("stats");
-  const trustTranslations = getArrayTranslations("hero.trust");
+  const trustTranslations = getArrayTranslations("hero.trust") as string[];
 
   // Get translated tools, scenarios, and stats based on language
   // translatedTools当前未使用，但保留以备将来需要
@@ -61,12 +61,14 @@ const V2Home: React.FC<V2HomeProps> = ({ locale: _locale }) => {
   // });
 
   const translatedScenarios = SCENARIOS.map((scenario) => {
-    const translated = scenariosTranslations?.[scenario.id];
+    const translated = scenariosTranslations?.[scenario.id] as
+      | { title?: string; description?: string }
+      | undefined;
     return translated
       ? {
           ...scenario,
-          title: translated.title,
-          description: translated.description,
+          title: translated.title || scenario.title,
+          description: translated.description || scenario.description,
         }
       : scenario;
   });

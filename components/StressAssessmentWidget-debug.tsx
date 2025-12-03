@@ -9,6 +9,7 @@ import {
   trackAssessmentStart,
   // trackAssessmentComplete, // 已注释：当前未使用
 } from "@/lib/ab-test-tracking";
+import { logInfo, logError } from "@/lib/debug-logger";
 
 // 确保全局升级处理函数可用
 import "@/lib/pro-upgrade-handler";
@@ -168,7 +169,7 @@ export default function StressAssessmentWidgetDebug() {
         plan: "oneTime",
         painPoint: "stress_management_assessment",
         assessmentScore: score,
-        answers: answers,
+        customData: { answers: answers },
       });
     } else {
       addDebugInfo("❌ 全局支付函数不存在");

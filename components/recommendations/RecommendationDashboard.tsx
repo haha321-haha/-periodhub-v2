@@ -378,7 +378,7 @@ export const RecommendationDashboard: React.FC<
           quickStats.averageRating.toFixed(1),
           <Star className="h-6 w-6 text-yellow-600" />,
           "border-yellow-200",
-          quickStats.averageRating > 4 ? "up" : "stable",
+          quickStats.averageRating > 4 ? "up" : "down",
         )}
       </div>
 

@@ -504,7 +504,7 @@ export class RecommendationOptimizationEngine {
     if (userPattern.feedbackTrends.negativeTrend) {
       suggestions.push({
         type: "personalization",
-        priority: "urgent",
+        priority: "high" as const,
         title: "改善推荐质量和相关性",
         description: "用户反馈呈负面趋势，需要立即改进推荐系统",
         expectedImpact: "防止用户流失，提升满意度",
@@ -566,7 +566,7 @@ export class RecommendationOptimizationEngine {
   private getHigherPriority(
     current: RecommendationPriority,
   ): RecommendationPriority {
-    const hierarchy = ["low", "medium", "high", "urgent"];
+    const hierarchy: RecommendationPriority[] = ["low", "medium", "high"];
     const currentIndex = hierarchy.indexOf(current);
     return currentIndex < hierarchy.length - 1
       ? hierarchy[currentIndex + 1]
@@ -579,7 +579,7 @@ export class RecommendationOptimizationEngine {
   private getLowerPriority(
     current: RecommendationPriority,
   ): RecommendationPriority {
-    const hierarchy = ["low", "medium", "high", "urgent"];
+    const hierarchy: RecommendationPriority[] = ["low", "medium", "high"];
     const currentIndex = hierarchy.indexOf(current);
     return currentIndex > 0 ? hierarchy[currentIndex - 1] : current;
   }

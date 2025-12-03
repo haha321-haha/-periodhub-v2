@@ -221,7 +221,7 @@ export default function StressAssessmentWidget() {
         plan: "oneTime",
         painPoint: "stress_management_assessment",
         assessmentScore: score,
-        answers: answers,
+        customData: { answers: answers },
       });
     } else {
       console.error("❌ 全局支付函数不存在");

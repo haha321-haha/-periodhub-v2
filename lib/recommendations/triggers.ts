@@ -7,7 +7,7 @@ import {
   RecommendationContext,
   AssessmentRecord,
   RecommendationTrigger,
-  // PatternDetection, // 已注释：当前未使用
+  PatternDetection,
   // RecommendationSettings // 已注释：当前未使用
 } from "@/types/recommendations";
 import { logInfo, logError } from "@/lib/debug-logger";

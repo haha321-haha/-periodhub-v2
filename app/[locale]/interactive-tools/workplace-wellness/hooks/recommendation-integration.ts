@@ -3,6 +3,7 @@
  * Phase 3: 个性化推荐系统
  */
 
+import { useState, useCallback, useEffect, useRef } from "react";
 import { AssessmentRecord, AssessmentHistory } from "@/types/recommendations";
 import {
   useRecommendationStore,
@@ -69,6 +70,12 @@ export const useRecommendationIntegration = (): RecommendationIntegrationState &
   const recommendationActions = useRecommendationActions();
   const triggerEngine = useRecommendationTriggers();
 
+  // 使用 ref 存储函数引用，避免循环依赖
+  const generateRecommendationsFromAssessmentRef = useRef<
+    ((assessment: AssessmentRecord) => Promise<void>) | null
+  >(null);
+  const syncWithRecommendationStoreRef = useRef<(() => void) | null>(null);
+
   // 本地状态（在实际实现中应该通过store persist）
   const [integrationState, setIntegrationState] =
     useState<RecommendationIntegrationState>({
@@ -100,8 +107,11 @@ export const useRecommendationIntegration = (): RecommendationIntegrationState &
         };
 
         // 如果启用了自动生成，触发推荐生成
-        if (prev.autoGenerateOnAssessment) {
-          generateRecommendationsFromAssessment(assessment);
+        if (
+          prev.autoGenerateOnAssessment &&
+          generateRecommendationsFromAssessmentRef.current
+        ) {
+          generateRecommendationsFromAssessmentRef.current(assessment);
         }
 
         // 触发评估完成触发器
@@ -113,7 +123,7 @@ export const useRecommendationIntegration = (): RecommendationIntegrationState &
         };
       });
     },
-    [generateRecommendationsFromAssessment, triggerEngine],
+    [triggerEngine],
   );
 
   // 获取评估历史
@@ -271,34 +281,46 @@ export const useRecommendationIntegration = (): RecommendationIntegrationState &
   }, []);
 
   // 从评估生成推荐
-  const generateRecommendationsFromAssessment = useCallback(async () => {
-    if (!integrationState.integrationEnabled) return;
+  const generateRecommendationsFromAssessment = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async (_assessment: AssessmentRecord) => {
+      if (!integrationState.integrationEnabled) return;
 
-    try {
-      await recommendationActions.generateRecommendations(
-        integrationState.assessmentHistory,
-      );
-      syncWithRecommendationStore();
-    } catch (error) {
-      // 使用logger而不是console.error（开发环境自动启用，生产环境自动禁用）
-      logError(
-        "Failed to generate recommendations from assessment",
-        error,
-        "RecommendationIntegration",
-      );
-    }
-  }, [
-    integrationState.integrationEnabled,
-    integrationState.assessmentHistory,
-    syncWithRecommendationStore,
-    recommendationActions,
-  ]);
+      try {
+        // 使用当前的评估历史来生成推荐
+        await recommendationActions.generateRecommendations(
+          integrationState.assessmentHistory,
+        );
+        if (syncWithRecommendationStoreRef.current) {
+          syncWithRecommendationStoreRef.current();
+        }
+      } catch (error) {
+        // 使用logger而不是console.error（开发环境自动启用，生产环境自动禁用）
+        logError(
+          "Failed to generate recommendations from assessment",
+          error,
+          "RecommendationIntegration",
+        );
+      }
+    },
+    [
+      integrationState.integrationEnabled,
+      integrationState.assessmentHistory,
+      recommendationActions,
+    ],
+  );
+
+  // 更新 ref
+  generateRecommendationsFromAssessmentRef.current =
+    generateRecommendationsFromAssessment;
 
   // 手动刷新推荐
   const triggerRecommendationRefresh = useCallback(async () => {
     try {
       await recommendationActions.refreshRecommendations();
-      syncWithRecommendationStore();
+      if (syncWithRecommendationStoreRef.current) {
+        syncWithRecommendationStoreRef.current();
+      }
     } catch (error) {
       // 使用logger而不是console.error（开发环境自动启用，生产环境自动禁用）
       logError(
@@ -307,7 +329,7 @@ export const useRecommendationIntegration = (): RecommendationIntegrationState &
         "RecommendationIntegration",
       );
     }
-  }, [syncWithRecommendationStore, recommendationActions]);
+  }, [recommendationActions]);
 
   // 获取集成统计
   const getIntegrationStatistics = useCallback(() => {
@@ -347,6 +369,9 @@ export const useRecommendationIntegration = (): RecommendationIntegrationState &
       urgentRecommendationsCount: urgentRecs.length,
     }));
   }, [recommendationStore]);
+
+  // 更新 ref
+  syncWithRecommendationStoreRef.current = syncWithRecommendationStore;
 
   // 初始化时同步状态
   useEffect(() => {
@@ -405,6 +430,3 @@ export const useAssessmentRecommendationIntegration = () => {
     refreshRecommendations: () => integration.triggerRecommendationRefresh(),
   };
 };
-
-// 由于使用了useState和useEffect，需要导入React
-import { useState, useEffect, useCallback } from "react";

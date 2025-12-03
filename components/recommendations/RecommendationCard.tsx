@@ -32,6 +32,7 @@ import {
   RecommendationPriority,
   RecommendationType,
   RecommendationFeedback,
+  RecommendationStatus,
 } from "@/types/recommendations";
 import { useRecommendationActions } from "@/lib/recommendations/store";
 import { cn } from "@/lib/utils";
@@ -117,8 +118,8 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
   const [showRatingDialog, setShowRatingDialog] = useState(false);
   const [hoveredAction, setHoveredAction] = useState<string | null>(null);
 
-  const { content, priority, status, personalizedReason, context } =
-    recommendation;
+  const { content, priority, personalizedReason, context } = recommendation;
+  const status = recommendation.status;
 
   // 处理查看详情
   const handleView = useCallback(() => {
@@ -236,12 +237,16 @@ export const RecommendationCard: React.FC<RecommendationCardProps> = ({
             onMouseEnter={() => setHoveredAction("save")}
             onMouseLeave={() => setHoveredAction(null)}
             className="p-2 rounded-full hover:bg-blue-100 transition-colors"
-            title={status === "saved" ? t("saved") : t("save")}
+            title={
+              (status as RecommendationStatus) === "saved"
+                ? t("saved")
+                : t("save")
+            }
           >
             <Bookmark
               className={cn(
                 "h-4 w-4",
-                status === "saved"
+                (status as RecommendationStatus) === "saved"
                   ? "text-blue-600"
                   : hoveredAction === "save"
                     ? "text-blue-600"

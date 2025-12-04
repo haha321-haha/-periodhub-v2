@@ -1,0 +1,80 @@
+{
+  "timestamp": "2025-09-29T12:25:35.997Z",
+  "environment": "production",
+  "issues": [
+    {
+      "url": "https://www.periodhub.health/_next/static/css/app/layout.css",
+      "status": 404,
+      "exists": false,
+      "size": "9",
+      "timestamp": "2025-09-29T12:25:37.023Z"
+    },
+    {
+      "url": "https://www.periodhub.health/_next/static/css/026415d6fc36570a.css",
+      "status": 200,
+      "exists": true,
+      "size": "11688",
+      "timestamp": "2025-09-29T12:25:37.903Z"
+    },
+    {
+      "url": "https://www.periodhub.health/_next/static/css/18b13dbb475de698.css",
+      "status": 200,
+      "exists": true,
+      "size": "142240",
+      "timestamp": "2025-09-29T12:25:38.808Z"
+    }
+  ],
+  "fixes": [
+    {
+      "file": ".next/static/css/app/layout.css",
+      "exists": true,
+      "size": 187706,
+      "timestamp": "2025-09-29T12:25:38.810Z"
+    },
+    {
+      "file": ".next/static/css/026415d6fc36570a.css",
+      "exists": true,
+      "size": 11688,
+      "timestamp": "2025-09-29T12:25:38.810Z"
+    },
+    {
+      "file": ".next/static/css/18b13dbb475de698.css",
+      "exists": true,
+      "size": 142240,
+      "timestamp": "2025-09-29T12:25:38.810Z"
+    },
+    {
+      "type": "config",
+      "hasLayoutCSSPreload": true,
+      "isCommented": true,
+      "status": "fixed"
+    }
+  ],
+  "recommendations": [
+    "❌ 生产环境layout.css文件不存在",
+    "🔧 需要重新部署到生产环境",
+    "📊 检查部署流程和CDN缓存",
+    "✅ 本地layout.css文件存在",
+    "🚀 可以重新部署",
+    "",
+    "🔧 修复步骤:",
+    "   1. 确保本地构建正常",
+    "   2. 提交代码到GitHub",
+    "   3. 触发生产环境重新部署",
+    "   4. 清除CDN缓存",
+    "   5. 验证生产环境文件存在",
+    "",
+    "🛡️ 预防措施:",
+    "   1. 建立自动化部署流程",
+    "   2. 部署后自动验证关键文件",
+    "   3. 设置文件存在性监控",
+    "   4. 定期检查生产环境状态"
+  ],
+  "summary": {
+    "totalIssues": 3,
+    "totalFixes": 4,
+    "productionIssues": 1,
+    "localIssues": 1,
+    "status": "needs_deployment"
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "timestamp": "2025-09-21T13:00:45.868Z",
+  "testMethod": "axe-core Accessibility Testing",
+  "averageScore": 100,
+  "results": {
+    "zh": {
+      "language": "中文",
+      "url": "http://localhost:3001/zh/articles/when-to-seek-medical-care-comprehensive-guide",
+      "axeScore": 100,
+      "summary": {
+        "violations": 0,
+        "passes": 12,
+        "incomplete": 0,
+        "inapplicable": 1
+      },
+      "details": {
+        "violations": [],
+        "passes": [
+          {
+            "id": "aria-allowed-attr",
+            "description": "ARIA属性在元素上是被允许的",
+            "impact": null,
+            "nodes": 15
+          },
+          {
+            "id": "aria-required-attr",
+            "description": "具有ARIA角色的元素具有所需的ARIA属性",
+            "impact": null,
+            "nodes": 8
+          },
+          {
+            "id": "button-name",
+            "description": "按钮具有可访问的名称",
+            "impact": null,
+            "nodes": 6
+          },
+          {
+            "id": "color-contrast",
+            "description": "元素具有足够的颜色对比度",
+            "impact": null,
+            "nodes": 45
+          },
+          {
+            "id": "focus-order-semantics",
+            "description": "焦点顺序遵循DOM顺序",
+            "impact": null,
+            "nodes": 12
+          },
+          {
+            "id": "heading-order",
+            "description": "标题级别只增加一级",
+            "impact": null,
+            "nodes": 17
+          },
+          {
+            "id": "keyboard",
+            "description": "所有可聚焦元素都可以通过键盘访问",
+            "impact": null,
+            "nodes": 12
+          },
+          {
+            "id": "label",
+            "description": "表单元素具有关联的标签",
+            "impact": null,
+            "nodes": 5
+          },
+          {
+            "id": "landmark-one-main",
+            "description": "页面具有主要地标",
+            "impact": null,
+            "nodes": 1
+          },
+          {
+            "id": "page-has-heading-one",
+            "description": "页面具有一级标题",
+            "impact": null,
+            "nodes": 1
+          },
+          {
+            "id": "region",
+            "description": "页面内容包含在地标中",
+            "impact": null,
+            "nodes": 5
+          },
+          {
+            "id": "skip-link",
+            "description": "跳转链接具有可聚焦的目标",
+            "impact": null,
+            "nodes": 1
+          }
+        ],
+        "incomplete": [],
+        "inapplicable": [
+          {
+            "id": "accesskeys",
+            "description": "accesskey属性值是唯一的",
+            "impact": null,
+            "nodes": 0
+          }
+        ]
+      }
+    },
+    "en": {
+      "language": "英文",
+      "url": "http://localhost:3001/en/articles/when-to-seek-medical-care-comprehensive-guide",
+      "axeScore": 100,
+      "summary": {
+        "violations": 0,
+        "passes": 12,
+        "incomplete": 0,
+        "inapplicable": 1
+      },
+      "details": {
+        "violations": [],
+        "passes": [
+          {
+            "id": "aria-allowed-attr",
+            "description": "ARIA属性在元素上是被允许的",
+            "impact": null,
+            "nodes": 15
+          },
+          {
+            "id": "aria-required-attr",
+            "description": "具有ARIA角色的元素具有所需的ARIA属性",
+            "impact": null,
+            "nodes": 8
+          },
+          {
+            "id": "button-name",
+            "description": "按钮具有可访问的名称",
+            "impact": null,
+            "nodes": 6
+          },
+          {
+            "id": "color-contrast",
+            "description": "元素具有足够的颜色对比度",
+            "impact": null,
+            "nodes": 45
+          },
+          {
+            "id": "focus-order-semantics",
+            "description": "焦点顺序遵循DOM顺序",
+            "impact": null,
+            "nodes": 12
+          },
+          {
+            "id": "heading-order",
+            "description": "标题级别只增加一级",
+            "impact": null,
+            "nodes": 17
+          },
+          {
+            "id": "keyboard",
+            "description": "所有可聚焦元素都可以通过键盘访问",
+            "impact": null,
+            "nodes": 12
+          },
+          {
+            "id": "label",
+            "description": "表单元素具有关联的标签",
+            "impact": null,
+            "nodes": 5
+          },
+          {
+            "id": "landmark-one-main",
+            "description": "页面具有主要地标",
+            "impact": null,
+            "nodes": 1
+          },
+          {
+            "id": "page-has-heading-one",
+            "description": "页面具有一级标题",
+            "impact": null,
+            "nodes": 1
+          },
+          {
+            "id": "region",
+            "description": "页面内容包含在地标中",
+            "impact": null,
+            "nodes": 5
+          },
+          {
+            "id": "skip-link",
+            "description": "跳转链接具有可聚焦的目标",
+            "impact": null,
+            "nodes": 1
+          }
+        ],
+        "incomplete": [],
+        "inapplicable": [
+          {
+            "id": "accesskeys",
+            "description": "accesskey属性值是唯一的",
+            "impact": null,
+            "nodes": 0
+          }
+        ]
+      }
+    }
+  }
+}

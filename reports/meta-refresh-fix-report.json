@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "totalUrls": 3,
+    "urlsWithMetaRefresh": 0,
+    "urlsWithRefreshRedirect": 0,
+    "urlsWithAnyRefresh": 0,
+    "successfulRedirects": 1,
+    "errors": 0,
+    "timestamp": "2025-09-22T10:41:53.259Z"
+  },
+  "details": [
+    {
+      "url": "https://www.periodhub.health/articles",
+      "statusCode": 307,
+      "hasMetaRefresh": false,
+      "hasRefreshRedirect": false,
+      "hasAnyRefresh": false,
+      "redirectLocation": "/en/articles",
+      "contentLength": 15,
+      "timestamp": "2025-09-22T10:41:47.609Z"
+    },
+    {
+      "url": "https://www.periodhub.health/zh/articles",
+      "statusCode": 200,
+      "hasMetaRefresh": false,
+      "hasRefreshRedirect": false,
+      "hasAnyRefresh": false,
+      "redirectLocation": null,
+      "contentLength": 163265,
+      "timestamp": "2025-09-22T10:41:50.123Z"
+    },
+    {
+      "url": "https://www.periodhub.health/en/articles",
+      "statusCode": 200,
+      "hasMetaRefresh": false,
+      "hasRefreshRedirect": false,
+      "hasAnyRefresh": false,
+      "redirectLocation": null,
+      "contentLength": 251961,
+      "timestamp": "2025-09-22T10:41:52.258Z"
+    }
+  ],
+  "recommendations": [
+    {
+      "type": "info",
+      "message": "重定向工作正常",
+      "redirects": [
+        {
+          "from": "https://www.periodhub.health/articles",
+          "to": "/en/articles"
+        }
+      ]
+    }
+  ]
+}

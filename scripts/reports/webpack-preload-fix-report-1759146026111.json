@@ -1,0 +1,37 @@
+{
+  "timestamp": "2025-09-29T11:40:26.111Z",
+  "environment": "development",
+  "summary": {
+    "totalPages": 4,
+    "pagesWithoutWarnings": 4,
+    "pagesWithWarnings": 0,
+    "successRate": "100.00%"
+  },
+  "details": [
+    {
+      "page": "/zh/downloads",
+      "hasWarning": false,
+      "timestamp": "2025-09-29T11:40:25.704Z"
+    },
+    {
+      "page": "/en/downloads",
+      "hasWarning": false,
+      "timestamp": "2025-09-29T11:40:25.807Z"
+    },
+    {
+      "page": "/zh/interactive-tools",
+      "hasWarning": false,
+      "timestamp": "2025-09-29T11:40:25.908Z"
+    },
+    {
+      "page": "/en/interactive-tools",
+      "hasWarning": false,
+      "timestamp": "2025-09-29T11:40:26.009Z"
+    }
+  ],
+  "recommendations": [
+    "✅ 所有页面都没有webpack预加载警告",
+    "✅ 智能预加载策略工作正常",
+    "✅ 可以部署到生产环境"
+  ]
+}

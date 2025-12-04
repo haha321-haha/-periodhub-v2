@@ -1,0 +1,307 @@
+{
+  "timestamp": "2025-09-29T12:44:11.826Z",
+  "totalPages": 69,
+  "categories": {
+    "other": {
+      "count": 33,
+      "pages": [
+        "/[locale]/admin/seo-dashboard",
+        "/[locale]/admin/seo-dashboard-simplified",
+        "/[locale]/articles-pdf-center",
+        "/[locale]/cultural-charms",
+        "/[locale]/data-dashboard",
+        "/[locale]/downloads",
+        "/[locale]/framework-demo",
+        "/[locale]/health-guide",
+        "/[locale]/home-clean",
+        "/[locale]/immediate-relief",
+        "/[locale]/interactive-tools",
+        "/[locale]/medical-disclaimer",
+        "/[locale]/natural-therapies",
+        "/[locale]",
+        "/[locale]/pdf-center-test",
+        "/[locale]/privacy-policy",
+        "/[locale]/resources",
+        "/[locale]/scenario-solutions",
+        "/[locale]/teen-health",
+        "/[locale]/terms-of-service",
+        "/[locale]/test-banner",
+        "/[locale]/test-downloads",
+        "/[locale]/test-image-quality",
+        "/[locale]/test-route",
+        "/[locale]/test-simple",
+        "/[locale]/test-simple-route",
+        "/admin/performance-dashboard",
+        "/framework-demo",
+        "/image-requirements",
+        "/teen-health",
+        "/test",
+        "/test-assessment",
+        "/test-symptom-assessment"
+      ],
+      "avgPriority": 3
+    },
+    "articles": {
+      "count": 5,
+      "pages": [
+        "/[locale]/articles/[slug]",
+        "/[locale]/articles/comprehensive-medical-guide-to-dysmenorrhea",
+        "/[locale]/articles/pain-management/medication-guide",
+        "/[locale]/articles/pain-management/understanding-dysmenorrhea",
+        "/[locale]/articles/when-to-seek-medical-care-comprehensive-guide"
+      ],
+      "avgPriority": 8
+    },
+    "downloads": {
+      "count": 2,
+      "pages": [
+        "/[locale]/downloads/medication-guide",
+        "/[locale]/downloads/preview/[id]"
+      ],
+      "avgPriority": 4
+    },
+    "health-guide": {
+      "count": 6,
+      "pages": [
+        "/[locale]/health-guide/global-perspectives",
+        "/[locale]/health-guide/lifestyle",
+        "/[locale]/health-guide/medical-care",
+        "/[locale]/health-guide/myths-facts",
+        "/[locale]/health-guide/relief-methods",
+        "/[locale]/health-guide/understanding-pain"
+      ],
+      "avgPriority": 6
+    },
+    "interactive-tools": {
+      "count": 10,
+      "pages": [
+        "/[locale]/interactive-tools/[tool]",
+        "/[locale]/interactive-tools/nutrition-recommendation-generator",
+        "/[locale]/interactive-tools/p2-advanced-features",
+        "/[locale]/interactive-tools/p3-system-optimization",
+        "/[locale]/interactive-tools/pain-tracker",
+        "/[locale]/interactive-tools/period-pain-impact-calculator",
+        "/[locale]/interactive-tools/symptom-assessment",
+        "/[locale]/interactive-tools/workplace-impact-assessment",
+        "/[locale]/interactive-tools/workplace-wellness",
+        "/[locale]/interactive-tools/workplace-wellness/seo-test"
+      ],
+      "avgPriority": 7
+    },
+    "scenario-solutions": {
+      "count": 8,
+      "pages": [
+        "/[locale]/scenario-solutions/commute",
+        "/[locale]/scenario-solutions/emergency-kit",
+        "/[locale]/scenario-solutions/exercise",
+        "/[locale]/scenario-solutions/lifeStages",
+        "/[locale]/scenario-solutions/office",
+        "/[locale]/scenario-solutions/partnerCommunication",
+        "/[locale]/scenario-solutions/sleep",
+        "/[locale]/scenario-solutions/social"
+      ],
+      "avgPriority": 5
+    },
+    "teen-health": {
+      "count": 4,
+      "pages": [
+        "/[locale]/teen-health/campus-guide",
+        "/[locale]/teen-health/communication-guide",
+        "/[locale]/teen-health/development-pain",
+        "/[locale]/teen-health/emotional-support"
+      ],
+      "avgPriority": 3
+    },
+    "homepage": {
+      "count": 1,
+      "pages": [
+        "/"
+      ],
+      "avgPriority": 10
+    }
+  },
+  "optimizationTargets": [
+    {
+      "type": "isolated_pages",
+      "title": "孤岛页面",
+      "description": "缺少内部链接的高价值页面",
+      "pages": [
+        {
+          "path": "/[locale]/health-guide/global-perspectives",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/global-perspectives/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/health-guide/lifestyle",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/lifestyle/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/health-guide/medical-care",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/medical-care/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/health-guide/myths-facts",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/myths-facts/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/health-guide/relief-methods",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/relief-methods/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/health-guide/understanding-pain",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/understanding-pain/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/scenario-solutions/commute",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/scenario-solutions/commute/page.tsx",
+          "category": "scenario-solutions",
+          "priority": 5
+        },
+        {
+          "path": "/[locale]/scenario-solutions/emergency-kit",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/scenario-solutions/emergency-kit/page.tsx",
+          "category": "scenario-solutions",
+          "priority": 5
+        },
+        {
+          "path": "/[locale]/scenario-solutions/exercise",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/scenario-solutions/exercise/page.tsx",
+          "category": "scenario-solutions",
+          "priority": 5
+        },
+        {
+          "path": "/[locale]/scenario-solutions/lifeStages",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/scenario-solutions/lifeStages/page.tsx",
+          "category": "scenario-solutions",
+          "priority": 5
+        }
+      ],
+      "priority": "high"
+    },
+    {
+      "type": "under_linked",
+      "title": "链接不足页面",
+      "description": "高优先级但内部链接数量不足",
+      "pages": [
+        {
+          "path": "/",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/page.tsx",
+          "category": "homepage",
+          "priority": 10
+        }
+      ],
+      "priority": "high"
+    },
+    {
+      "type": "cross_category",
+      "title": "跨分类连接缺失",
+      "description": "缺少跨分类内部链接的页面",
+      "pages": [
+        {
+          "path": "/[locale]/health-guide/global-perspectives",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/global-perspectives/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/health-guide/lifestyle",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/lifestyle/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/health-guide/medical-care",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/medical-care/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/health-guide/myths-facts",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/myths-facts/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/health-guide/relief-methods",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/relief-methods/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/[locale]/health-guide/understanding-pain",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/[locale]/health-guide/understanding-pain/page.tsx",
+          "category": "health-guide",
+          "priority": 6
+        },
+        {
+          "path": "/",
+          "fullPath": "/Users/duting/Downloads/money💰/--main/app/page.tsx",
+          "category": "homepage",
+          "priority": 10
+        }
+      ],
+      "priority": "medium"
+    }
+  ],
+  "recommendations": [
+    {
+      "type": "topic_clusters",
+      "title": "建立主题集群",
+      "description": "围绕核心主题建立链接集群",
+      "details": [
+        "创建\"痛经管理\"主题集群",
+        "建立\"月经健康\"知识网络",
+        "连接\"症状评估\"与\"解决方案\"",
+        "整合\"工具使用\"与\"专业指导\""
+      ],
+      "priority": "high"
+    },
+    {
+      "type": "navigation_optimization",
+      "title": "导航结构优化",
+      "description": "优化页面导航和面包屑",
+      "details": [
+        "完善面包屑导航",
+        "添加相关文章推荐",
+        "建立分类页面索引",
+        "优化侧边栏链接"
+      ],
+      "priority": "high"
+    },
+    {
+      "type": "content_linking",
+      "title": "内容内嵌链接",
+      "description": "在内容中自然添加相关链接",
+      "details": [
+        "文章内添加3-5个相关链接",
+        "使用描述性锚文本",
+        "避免\"点击这里\"等无意义文本",
+        "确保链接页面确实相关"
+      ],
+      "priority": "medium"
+    },
+    {
+      "type": "tool_integration",
+      "title": "工具页面整合",
+      "description": "连接工具页面与相关内容",
+      "details": [
+        "从文章链接到相关工具",
+        "工具结果页面链接到详细指南",
+        "创建工具使用说明页面",
+        "建立工具与解决方案的闭环"
+      ],
+      "priority": "high"
+    }
+  ]
+}

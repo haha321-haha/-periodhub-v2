@@ -1,0 +1,809 @@
+{
+  "timestamp": "2025-09-29T12:45:30.760Z",
+  "analysis": {
+    "totalPages": 69,
+    "categories": {
+      "other": {
+        "count": 33,
+        "pages": [
+          "/[locale]/admin/seo-dashboard",
+          "/[locale]/admin/seo-dashboard-simplified",
+          "/[locale]/articles-pdf-center",
+          "/[locale]/cultural-charms",
+          "/[locale]/data-dashboard",
+          "/[locale]/downloads",
+          "/[locale]/framework-demo",
+          "/[locale]/health-guide",
+          "/[locale]/home-clean",
+          "/[locale]/immediate-relief",
+          "/[locale]/interactive-tools",
+          "/[locale]/medical-disclaimer",
+          "/[locale]/natural-therapies",
+          "/[locale]",
+          "/[locale]/pdf-center-test",
+          "/[locale]/privacy-policy",
+          "/[locale]/resources",
+          "/[locale]/scenario-solutions",
+          "/[locale]/teen-health",
+          "/[locale]/terms-of-service",
+          "/[locale]/test-banner",
+          "/[locale]/test-downloads",
+          "/[locale]/test-image-quality",
+          "/[locale]/test-route",
+          "/[locale]/test-simple",
+          "/[locale]/test-simple-route",
+          "/admin/performance-dashboard",
+          "/framework-demo",
+          "/image-requirements",
+          "/teen-health",
+          "/test",
+          "/test-assessment",
+          "/test-symptom-assessment"
+        ],
+        "avgPriority": 3,
+        "hasInternalLinks": 7
+      },
+      "articles": {
+        "count": 5,
+        "pages": [
+          "/[locale]/articles/[slug]",
+          "/[locale]/articles/comprehensive-medical-guide-to-dysmenorrhea",
+          "/[locale]/articles/pain-management/medication-guide",
+          "/[locale]/articles/pain-management/understanding-dysmenorrhea",
+          "/[locale]/articles/when-to-seek-medical-care-comprehensive-guide"
+        ],
+        "avgPriority": 8,
+        "hasInternalLinks": 3
+      },
+      "downloads": {
+        "count": 2,
+        "pages": [
+          "/[locale]/downloads/medication-guide",
+          "/[locale]/downloads/preview/[id]"
+        ],
+        "avgPriority": 4,
+        "hasInternalLinks": 1
+      },
+      "health-guide": {
+        "count": 6,
+        "pages": [
+          "/[locale]/health-guide/global-perspectives",
+          "/[locale]/health-guide/lifestyle",
+          "/[locale]/health-guide/medical-care",
+          "/[locale]/health-guide/myths-facts",
+          "/[locale]/health-guide/relief-methods",
+          "/[locale]/health-guide/understanding-pain"
+        ],
+        "avgPriority": 6,
+        "hasInternalLinks": 1
+      },
+      "interactive-tools": {
+        "count": 10,
+        "pages": [
+          "/[locale]/interactive-tools/[tool]",
+          "/[locale]/interactive-tools/nutrition-recommendation-generator",
+          "/[locale]/interactive-tools/p2-advanced-features",
+          "/[locale]/interactive-tools/p3-system-optimization",
+          "/[locale]/interactive-tools/pain-tracker",
+          "/[locale]/interactive-tools/period-pain-impact-calculator",
+          "/[locale]/interactive-tools/symptom-assessment",
+          "/[locale]/interactive-tools/workplace-impact-assessment",
+          "/[locale]/interactive-tools/workplace-wellness",
+          "/[locale]/interactive-tools/workplace-wellness/seo-test"
+        ],
+        "avgPriority": 7,
+        "hasInternalLinks": 0
+      },
+      "scenario-solutions": {
+        "count": 8,
+        "pages": [
+          "/[locale]/scenario-solutions/commute",
+          "/[locale]/scenario-solutions/emergency-kit",
+          "/[locale]/scenario-solutions/exercise",
+          "/[locale]/scenario-solutions/lifeStages",
+          "/[locale]/scenario-solutions/office",
+          "/[locale]/scenario-solutions/partnerCommunication",
+          "/[locale]/scenario-solutions/sleep",
+          "/[locale]/scenario-solutions/social"
+        ],
+        "avgPriority": 5,
+        "hasInternalLinks": 0
+      },
+      "teen-health": {
+        "count": 4,
+        "pages": [
+          "/[locale]/teen-health/campus-guide",
+          "/[locale]/teen-health/communication-guide",
+          "/[locale]/teen-health/development-pain",
+          "/[locale]/teen-health/emotional-support"
+        ],
+        "avgPriority": 3,
+        "hasInternalLinks": 0
+      },
+      "homepage": {
+        "count": 1,
+        "pages": [
+          "/"
+        ],
+        "avgPriority": 10,
+        "hasInternalLinks": 0
+      }
+    },
+    "linkDensity": {
+      "totalPages": 69,
+      "pagesWithLinks": 12,
+      "linkDensity": 17,
+      "hubPages": 25,
+      "hubRatio": 36
+    },
+    "orphanPages": [
+      {
+        "path": "/[locale]/scenario-solutions/commute",
+        "category": "scenario-solutions",
+        "priority": 5,
+        "hasInternalLinks": false,
+        "isHub": false
+      },
+      {
+        "path": "/[locale]/scenario-solutions/emergency-kit",
+        "category": "scenario-solutions",
+        "priority": 5,
+        "hasInternalLinks": false,
+        "isHub": false
+      },
+      {
+        "path": "/[locale]/scenario-solutions/exercise",
+        "category": "scenario-solutions",
+        "priority": 5,
+        "hasInternalLinks": false,
+        "isHub": false
+      },
+      {
+        "path": "/[locale]/scenario-solutions/lifeStages",
+        "category": "scenario-solutions",
+        "priority": 5,
+        "hasInternalLinks": false,
+        "isHub": false
+      },
+      {
+        "path": "/[locale]/scenario-solutions/office",
+        "category": "scenario-solutions",
+        "priority": 5,
+        "hasInternalLinks": false,
+        "isHub": false
+      },
+      {
+        "path": "/[locale]/scenario-solutions/partnerCommunication",
+        "category": "scenario-solutions",
+        "priority": 5,
+        "hasInternalLinks": false,
+        "isHub": false
+      },
+      {
+        "path": "/[locale]/scenario-solutions/sleep",
+        "category": "scenario-solutions",
+        "priority": 5,
+        "hasInternalLinks": false,
+        "isHub": false
+      },
+      {
+        "path": "/[locale]/scenario-solutions/social",
+        "category": "scenario-solutions",
+        "priority": 5,
+        "hasInternalLinks": false,
+        "isHub": false
+      }
+    ],
+    "hubPages": [
+      {
+        "path": "/[locale]/articles/[slug]",
+        "category": "articles",
+        "priority": 8,
+        "hasInternalLinks": true,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/articles/comprehensive-medical-guide-to-dysmenorrhea",
+        "category": "articles",
+        "priority": 8,
+        "hasInternalLinks": true,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/articles/pain-management/medication-guide",
+        "category": "articles",
+        "priority": 8,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/articles/pain-management/understanding-dysmenorrhea",
+        "category": "articles",
+        "priority": 8,
+        "hasInternalLinks": true,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/articles/when-to-seek-medical-care-comprehensive-guide",
+        "category": "articles",
+        "priority": 8,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/articles-pdf-center",
+        "category": "other",
+        "priority": 3,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/health-guide/global-perspectives",
+        "category": "health-guide",
+        "priority": 6,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/health-guide/lifestyle",
+        "category": "health-guide",
+        "priority": 6,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/health-guide/medical-care",
+        "category": "health-guide",
+        "priority": 6,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/health-guide/myths-facts",
+        "category": "health-guide",
+        "priority": 6,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/health-guide",
+        "category": "other",
+        "priority": 3,
+        "hasInternalLinks": true,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/health-guide/relief-methods",
+        "category": "health-guide",
+        "priority": 6,
+        "hasInternalLinks": true,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/health-guide/understanding-pain",
+        "category": "health-guide",
+        "priority": 6,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools/[tool]",
+        "category": "interactive-tools",
+        "priority": 7,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools/nutrition-recommendation-generator",
+        "category": "interactive-tools",
+        "priority": 7,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools/p2-advanced-features",
+        "category": "interactive-tools",
+        "priority": 7,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools/p3-system-optimization",
+        "category": "interactive-tools",
+        "priority": 7,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools",
+        "category": "other",
+        "priority": 3,
+        "hasInternalLinks": true,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools/pain-tracker",
+        "category": "interactive-tools",
+        "priority": 7,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools/period-pain-impact-calculator",
+        "category": "interactive-tools",
+        "priority": 7,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools/symptom-assessment",
+        "category": "interactive-tools",
+        "priority": 7,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools/workplace-impact-assessment",
+        "category": "interactive-tools",
+        "priority": 7,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools/workplace-wellness",
+        "category": "interactive-tools",
+        "priority": 7,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/[locale]/interactive-tools/workplace-wellness/seo-test",
+        "category": "interactive-tools",
+        "priority": 7,
+        "hasInternalLinks": false,
+        "isHub": true
+      },
+      {
+        "path": "/",
+        "category": "homepage",
+        "priority": 10,
+        "hasInternalLinks": false,
+        "isHub": true
+      }
+    ]
+  },
+  "issues": [
+    {
+      "type": "orphan_pages",
+      "severity": "high",
+      "description": "孤岛页面缺少内部链接",
+      "count": 8,
+      "pages": [
+        {
+          "path": "/[locale]/scenario-solutions/commute",
+          "category": "scenario-solutions",
+          "priority": 5,
+          "hasInternalLinks": false,
+          "isHub": false
+        },
+        {
+          "path": "/[locale]/scenario-solutions/emergency-kit",
+          "category": "scenario-solutions",
+          "priority": 5,
+          "hasInternalLinks": false,
+          "isHub": false
+        },
+        {
+          "path": "/[locale]/scenario-solutions/exercise",
+          "category": "scenario-solutions",
+          "priority": 5,
+          "hasInternalLinks": false,
+          "isHub": false
+        },
+        {
+          "path": "/[locale]/scenario-solutions/lifeStages",
+          "category": "scenario-solutions",
+          "priority": 5,
+          "hasInternalLinks": false,
+          "isHub": false
+        },
+        {
+          "path": "/[locale]/scenario-solutions/office",
+          "category": "scenario-solutions",
+          "priority": 5,
+          "hasInternalLinks": false,
+          "isHub": false
+        },
+        {
+          "path": "/[locale]/scenario-solutions/partnerCommunication",
+          "category": "scenario-solutions",
+          "priority": 5,
+          "hasInternalLinks": false,
+          "isHub": false
+        },
+        {
+          "path": "/[locale]/scenario-solutions/sleep",
+          "category": "scenario-solutions",
+          "priority": 5,
+          "hasInternalLinks": false,
+          "isHub": false
+        },
+        {
+          "path": "/[locale]/scenario-solutions/social",
+          "category": "scenario-solutions",
+          "priority": 5,
+          "hasInternalLinks": false,
+          "isHub": false
+        }
+      ]
+    },
+    {
+      "type": "low_link_density",
+      "severity": "medium",
+      "description": "整体链接密度偏低",
+      "currentDensity": 17,
+      "targetDensity": 80,
+      "gap": 63
+    },
+    {
+      "type": "missing_cross_category",
+      "severity": "medium",
+      "description": "缺少跨分类链接",
+      "affectedCategories": [
+        "other",
+        "downloads",
+        "health-guide",
+        "scenario-solutions",
+        "teen-health",
+        "homepage"
+      ]
+    },
+    {
+      "type": "weak_hub_pages",
+      "severity": "high",
+      "description": "Hub页面链接不足",
+      "hubPages": [
+        {
+          "path": "/[locale]/articles/pain-management/medication-guide",
+          "category": "articles",
+          "priority": 8,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/articles/when-to-seek-medical-care-comprehensive-guide",
+          "category": "articles",
+          "priority": 8,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/articles-pdf-center",
+          "category": "other",
+          "priority": 3,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/health-guide/global-perspectives",
+          "category": "health-guide",
+          "priority": 6,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/health-guide/lifestyle",
+          "category": "health-guide",
+          "priority": 6,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/health-guide/medical-care",
+          "category": "health-guide",
+          "priority": 6,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/health-guide/myths-facts",
+          "category": "health-guide",
+          "priority": 6,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/health-guide/understanding-pain",
+          "category": "health-guide",
+          "priority": 6,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/interactive-tools/[tool]",
+          "category": "interactive-tools",
+          "priority": 7,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/interactive-tools/nutrition-recommendation-generator",
+          "category": "interactive-tools",
+          "priority": 7,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/interactive-tools/p2-advanced-features",
+          "category": "interactive-tools",
+          "priority": 7,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/interactive-tools/p3-system-optimization",
+          "category": "interactive-tools",
+          "priority": 7,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/interactive-tools/pain-tracker",
+          "category": "interactive-tools",
+          "priority": 7,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/interactive-tools/period-pain-impact-calculator",
+          "category": "interactive-tools",
+          "priority": 7,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/interactive-tools/symptom-assessment",
+          "category": "interactive-tools",
+          "priority": 7,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/interactive-tools/workplace-impact-assessment",
+          "category": "interactive-tools",
+          "priority": 7,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/interactive-tools/workplace-wellness",
+          "category": "interactive-tools",
+          "priority": 7,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/[locale]/interactive-tools/workplace-wellness/seo-test",
+          "category": "interactive-tools",
+          "priority": 7,
+          "hasInternalLinks": false,
+          "isHub": true
+        },
+        {
+          "path": "/",
+          "category": "homepage",
+          "priority": 10,
+          "hasInternalLinks": false,
+          "isHub": true
+        }
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "category": "主题集群建设",
+      "priority": "high",
+      "description": "建立强大的主题集群网络",
+      "strategies": [
+        {
+          "name": "痛经管理主题集群",
+          "description": "围绕痛经管理建立核心主题集群",
+          "implementation": [
+            "核心页面: /health-guide/understanding-pain",
+            "支撑页面: /articles/5-minute-period-pain-relief",
+            "工具页面: /interactive-tools/pain-tracker",
+            "解决方案: /scenario-solutions/office"
+          ],
+          "expectedImpact": "提升主题相关关键词排名"
+        },
+        {
+          "name": "月经健康知识网络",
+          "description": "建立全面的月经健康知识网络",
+          "implementation": [
+            "Hub页面: /health-guide",
+            "文章集群: /articles/*",
+            "工具集成: /interactive-tools/*",
+            "场景应用: /scenario-solutions/*"
+          ],
+          "expectedImpact": "增强页面权重传递"
+        }
+      ]
+    },
+    {
+      "category": "内部链接优化",
+      "priority": "high",
+      "description": "优化现有内部链接结构",
+      "strategies": [
+        {
+          "name": "锚文本优化",
+          "description": "使用描述性锚文本，避免无意义文本",
+          "implementation": [
+            "❌ 避免: \"点击这里\"、\"了解更多\"",
+            "✅ 推荐: \"痛经缓解方法\"、\"症状评估工具\"",
+            "✅ 推荐: \"热敷疗法指南\"、\"自然疗法方案\""
+          ],
+          "expectedImpact": "提升链接相关性和点击率"
+        },
+        {
+          "name": "链接密度优化",
+          "description": "确保每个页面有足够的内部链接",
+          "implementation": [
+            "每页至少3-5个内部链接",
+            "重要页面增加更多链接",
+            "相关页面相互链接",
+            "避免过度链接"
+          ],
+          "expectedImpact": "改善页面权重分布"
+        }
+      ]
+    },
+    {
+      "category": "导航结构优化",
+      "priority": "medium",
+      "description": "优化网站导航和用户路径",
+      "strategies": [
+        {
+          "name": "面包屑导航完善",
+          "description": "为所有页面添加面包屑导航",
+          "implementation": [
+            "首页 > 健康指南 > 痛经管理 > 缓解方法",
+            "首页 > 交互工具 > 症状评估 > 结果分析",
+            "首页 > 场景解决方案 > 办公室 > 应急处理"
+          ],
+          "expectedImpact": "改善用户体验和SEO"
+        },
+        {
+          "name": "相关推荐系统",
+          "description": "智能推荐相关页面",
+          "implementation": [
+            "基于内容相似性推荐",
+            "基于用户行为推荐",
+            "基于主题相关性推荐",
+            "动态调整推荐算法"
+          ],
+          "expectedImpact": "增加页面访问深度"
+        }
+      ]
+    },
+    {
+      "category": "工具页面整合",
+      "priority": "high",
+      "description": "整合工具页面与相关内容",
+      "strategies": [
+        {
+          "name": "工具-内容闭环",
+          "description": "建立工具使用与内容学习的闭环",
+          "implementation": [
+            "文章 → 相关工具 → 使用指南 → 结果解读",
+            "工具结果 → 相关文章 → 深度分析 → 解决方案",
+            "场景页面 → 工具推荐 → 使用指导 → 效果评估"
+          ],
+          "expectedImpact": "提升用户参与度和转化率"
+        },
+        {
+          "name": "跨平台链接",
+          "description": "连接不同功能模块",
+          "implementation": [
+            "健康指南 ↔ 交互工具",
+            "文章内容 ↔ 场景解决方案",
+            "工具结果 ↔ 下载资源",
+            "用户反馈 ↔ 内容优化"
+          ],
+          "expectedImpact": "增强网站整体性"
+        }
+      ]
+    }
+  ],
+  "implementation": [
+    {
+      "phase": "Phase 1: 紧急修复 (1-2天)",
+      "priority": "P0",
+      "tasks": [
+        {
+          "task": "修复孤岛页面",
+          "description": "为高优先级孤岛页面添加内部链接",
+          "effort": "4-6小时",
+          "resources": "1名SEO专家",
+          "deliverables": [
+            "识别所有孤岛页面",
+            "为每个页面添加3-5个相关链接",
+            "优化锚文本",
+            "测试链接有效性"
+          ]
+        },
+        {
+          "task": "优化Hub页面",
+          "description": "增强核心Hub页面的链接结构",
+          "effort": "6-8小时",
+          "resources": "1名内容策略师",
+          "deliverables": [
+            "分析Hub页面链接现状",
+            "添加相关页面链接",
+            "优化链接布局",
+            "提升页面权重传递"
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "Phase 2: 结构优化 (1-2周)",
+      "priority": "P1",
+      "tasks": [
+        {
+          "task": "建立主题集群",
+          "description": "围绕核心主题建立链接集群",
+          "effort": "2-3天",
+          "resources": "1名SEO专家 + 1名内容编辑",
+          "deliverables": [
+            "设计主题集群架构",
+            "实施集群链接策略",
+            "优化页面权重传递",
+            "监控集群效果"
+          ]
+        },
+        {
+          "task": "完善导航结构",
+          "description": "优化网站导航和用户路径",
+          "effort": "3-4天",
+          "resources": "1名UX设计师 + 1名开发人员",
+          "deliverables": [
+            "完善面包屑导航",
+            "优化相关推荐",
+            "改善用户路径",
+            "提升导航体验"
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "Phase 3: 深度优化 (2-4周)",
+      "priority": "P2",
+      "tasks": [
+        {
+          "task": "智能推荐系统",
+          "description": "实现基于AI的智能推荐",
+          "effort": "1-2周",
+          "resources": "1名算法工程师 + 1名前端开发",
+          "deliverables": [
+            "开发推荐算法",
+            "实现动态推荐",
+            "优化推荐效果",
+            "A/B测试验证"
+          ]
+        },
+        {
+          "task": "链接效果监控",
+          "description": "建立链接效果监控系统",
+          "effort": "3-5天",
+          "resources": "1名数据分析师",
+          "deliverables": [
+            "设置监控指标",
+            "建立分析仪表板",
+            "定期效果评估",
+            "持续优化调整"
+          ]
+        }
+      ]
+    }
+  ]
+}

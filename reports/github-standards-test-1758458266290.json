@@ -1,0 +1,149 @@
+{
+  "timestamp": "2025-09-21T12:37:46.237Z",
+  "totalScore": 88,
+  "results": {
+    "zh": {
+      "translation": {
+        "passed": true,
+        "issues": [],
+        "score": 100
+      },
+      "accessibility": {
+        "passed": false,
+        "issues": [
+          "ARIA标签数量不足: 4",
+          "角色定义不足: 0",
+          "键盘导航支持不足: 0"
+        ],
+        "score": 40,
+        "details": {
+          "ariaLabels": 4,
+          "roles": 0,
+          "tabIndex": 0
+        }
+      },
+      "performance": {
+        "passed": true,
+        "issues": [],
+        "score": 100,
+        "details": {
+          "pageSize": "321KB",
+          "dynamicComponents": 88
+        }
+      },
+      "userExperience": {
+        "passed": true,
+        "issues": [],
+        "score": 100,
+        "details": {
+          "responsiveClasses": 36,
+          "loadingStates": 42
+        }
+      },
+      "content": {
+        "passed": true,
+        "issues": [],
+        "score": 100,
+        "details": {
+          "h1Count": 1,
+          "h2Count": 5,
+          "h3Count": 11,
+          "structuredData": true
+        }
+      }
+    },
+    "en": {
+      "translation": {
+        "passed": true,
+        "issues": [],
+        "score": 100
+      },
+      "accessibility": {
+        "passed": false,
+        "issues": [
+          "ARIA标签数量不足: 4",
+          "角色定义不足: 0",
+          "键盘导航支持不足: 0"
+        ],
+        "score": 40,
+        "details": {
+          "ariaLabels": 4,
+          "roles": 0,
+          "tabIndex": 0
+        }
+      },
+      "performance": {
+        "passed": true,
+        "issues": [],
+        "score": 100,
+        "details": {
+          "pageSize": "329KB",
+          "dynamicComponents": 88
+        }
+      },
+      "userExperience": {
+        "passed": true,
+        "issues": [],
+        "score": 100,
+        "details": {
+          "responsiveClasses": 47,
+          "loadingStates": 36
+        }
+      },
+      "content": {
+        "passed": true,
+        "issues": [],
+        "score": 100,
+        "details": {
+          "h1Count": 1,
+          "h2Count": 5,
+          "h3Count": 11,
+          "structuredData": true
+        }
+      }
+    }
+  },
+  "standards": {
+    "translation": {
+      "name": "翻译完整性",
+      "checks": [
+        "无硬编码文本",
+        "无翻译键值显示",
+        "所有UI元素已翻译",
+        "错误信息已本地化"
+      ]
+    },
+    "accessibility": {
+      "name": "可访问性",
+      "checks": [
+        "ARIA标签完整",
+        "键盘导航支持",
+        "焦点管理",
+        "屏幕阅读器支持",
+        "高对比度支持"
+      ]
+    },
+    "performance": {
+      "name": "性能优化",
+      "checks": [
+        "useCallback优化",
+        "组件懒加载",
+        "React.memo使用",
+        "避免不必要重渲染"
+      ]
+    },
+    "codeQuality": {
+      "name": "代码质量",
+      "checks": [
+        "TypeScript类型安全",
+        "ESLint规则遵循",
+        "组件结构清晰",
+        "错误边界处理"
+      ]
+    },
+    "userExperience": {
+      "name": "用户体验",
+      "checks": ["响应式设计", "加载状态", "错误处理", "交互反馈", "移动端优化"]
+    }
+  }
+}

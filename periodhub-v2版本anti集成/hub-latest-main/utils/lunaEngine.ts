@@ -192,9 +192,9 @@ const DEFAULT_RESPONSE_KEYS = [
   "responses.default3",
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const processLunaQuery = (
   query: string,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   locale: "en" | "zh" = "en",
 ): LunaResponse => {
   const normalizedQuery = query.toLowerCase();

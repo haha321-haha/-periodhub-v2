@@ -168,6 +168,14 @@
       }
     },
     "copyright": "© {currentYear} PeriodHub. All rights reserved. | Made with ❤️ for women's health",
+    "allRights": "All rights reserved",
+    "contactUs": "Contact Us",
+    "disclaimer": "Medical Disclaimer",
+    "email": "Email",
+    "helpCenter": "Help Center",
+    "quickLinks": "Quick Links",
+    "support": "Support",
+    "support24": "24/7 Support",
     "medicalDisclaimerFull": "Medical Disclaimer: The content on this website is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. We are not medical professionals. If you have any medical questions, please consult your doctor or other qualified healthcare provider. In case of emergency, please seek medical assistance immediately. Using this website does not constitute a doctor-patient relationship.",
     "dataPrivacyFull": "Data Privacy (HIPAA/CCPA): Your health data belongs to you. We utilize Local-First Architecture, meaning your sensitive cycle data is encrypted and stored directly on your device. We do not sell, trade, or share your personal health information (PHI) with third-party advertisers.",
     "contactTitle": "Contact Us",
@@ -3422,7 +3430,10 @@
       "diet": "Anti-Inflammatory Diet Guide",
       "stress_guide": "Stress Management Guide",
       "sleep_guide": "Sleep Quality Guide",
-      "breathing_guide": "Breathing Exercises Guide"
+      "breathing_guide": "Breathing Exercises Guide",
+      "tcm_exercise": "Holistic Exercise Guide",
+      "tcm_guide": "Holistic Theory Guide",
+      "tcm_nutrition": "Holistic Nutrition Therapy"
     }
   },
   "healthStatistics": {
@@ -3510,7 +3521,8 @@
       "categories": {
         "menstrualPhase": "Menstrual Phase",
         "healthGoals": "Health Goals",
-        "holisticConstitution": "Holistic Body Pattern"
+        "holisticConstitution": "Holistic Body Pattern",
+        "holisticHealthConstitution": "Holistic Body Pattern"
       },
       "results": {
         "dynamicPromise": {
@@ -3555,6 +3567,17 @@
           "bloodStasis": "Circulation Blockage",
           "qiStagnation": "Energy Stagnation",
           "specialDiathesis": "High Sensitivity Pattern"
+        }
+      },
+      "holisticHealthConstitution": {
+        "title": "Select Your Holistic Body Pattern",
+        "description": "Understand your body pattern to get more precise nutrition recommendations",
+        "options": {
+          "qiDeficiency": "Low Energy Pattern",
+          "yangDeficiency": "Cold Sensitivity Pattern",
+          "yinDeficiency": "Overheated Pattern",
+          "phlegmDampness": "Sluggish Metabolism",
+          "dampHeat": "Internal Heat Pattern"
         }
       },
       "meta": {
@@ -5439,10 +5462,16 @@
         "foodName": "Food Name",
         "menstrualPhase": "Menstrual Phase",
         "holisticNature": "Energetic Nature",
+        "tcmNature": "Energetic Nature",
         "mainBenefits": "Main Benefits",
         "keyNutrients": "Key Nutrients"
       },
       "holisticNature": {
+        "warm": "Warm",
+        "cool": "Cool",
+        "neutral": "Neutral"
+      },
+      "tcmNature": {
         "warm": "Warm",
         "cool": "Cool",
         "neutral": "Neutral"
@@ -5501,15 +5530,6 @@
       "analytics": "Data Analytics"
     },
     "nav": {
-      "calendar": "Calendar",
-      "focusCalm": "Focus & Calm",
-      "nutrition": "Nutrition",
-      "workImpact": "Work Impact",
-      "analysis": "Analysis",
-      "export": "Export",
-      "settings": "Settings"
-    },
-    "tabs": {
       "calendar": "Calendar",
       "focusCalm": "Focus & Calm",
       "nutrition": "Nutrition",
@@ -5665,6 +5685,13 @@
         "warm": "Warm",
         "cool": "Cool",
         "neutral": "Neutral"
+      },
+      "tcmNature": {
+        "cold": "Cold",
+        "cool": "Cool",
+        "neutral": "Neutral",
+        "warm": "Warm",
+        "hot": "Hot"
       },
       "benefitsLabel": "Benefits",
       "nutrientsLabel": "Nutrients",
@@ -7633,6 +7660,22 @@
     "navigation": {
       "backToArticles": "Back to Articles"
     },
+    "heroNew": {
+      "badge": "ACOG Guidelines Powered",
+      "h1_prefix": "Stop Guessing.",
+      "h1_highlight": "Start Healing.",
+      "h2_prefix": "Painkillers only score 6.2/10.",
+      "h2_suffix": "Try the",
+      "h2_highlight": "7.5/10 method",
+      "h2_end": "backed by clinical evidence.",
+      "description": "The first AI-powered symptom checker built on ACOG guidelines—not search engine rumors. Track patterns, identify risks, and generate doctor-ready reports in seconds.",
+      "cta_primary": "Start Free Assessment",
+      "cta_secondary": "View Evidence",
+      "no_credit_card": "No credit card required • Local data only",
+      "trust1": "Your Health Data Stays on Your Device",
+      "trust2": "No Cloud by Default",
+      "trust3": "HIPAA Compliant"
+    },
     "hero": {
       "title": "\"Why Does It Hurt So Much?\" - You're Not Alone",
       "subtitle": "If you've ever curled up in bed wondering why your period feels like your body is rebelling, you're absolutely not alone. About 80% of women experience period pain at some point.",
@@ -8272,6 +8315,7 @@
           "foodName": "Food Name",
           "menstrualPhase": "Menstrual Phase",
           "holisticNature": "Energetic Nature",
+          "tcmNature": "Energetic Nature",
           "mainBenefits": "Main Benefits",
           "keyNutrients": "Key Nutrients"
         },
@@ -8289,11 +8333,21 @@
           "warm": "Warm",
           "cool": "Cool",
           "neutral": "Neutral"
+        },
+        "tcmNature": {
+          "warm": "Warm",
+          "cool": "Cool",
+          "neutral": "Neutral"
         }
       },
       "privacy": {
         "reportTitle": "隐私保护Report"
       }
+    },
+    "stressManagement": {
+      "title": "Stress Management",
+      "description": "Scientific stress management tool: assessment, techniques, breathing exercises, progress tracking. Professional solutions to manage period stress and improve life quality.",
+      "cta": "Start Stress Management"
     },
     "prerequisites": {
       "label": "Prerequisites",
@@ -9169,35 +9223,35 @@
           "title": "Lifestyle Factors",
           "dietaryHabits": {
             "title": "Dietary Habits",
-            "items": [
-              "Caffeine intake",
-              "Sugar consumption",
-              "Anti-inflammatory food ratio",
-              "Vitamin D levels",
-              "Magnesium, calcium mineral intake"
-            ],
+            "items": {
+              "0": "Caffeine intake",
+              "1": "Sugar consumption",
+              "2": "Anti-inflammatory food ratio",
+              "3": "Vitamin D levels",
+              "4": "Magnesium, calcium mineral intake"
+            },
             "description": "How dietary habits affect menstrual pain and what changes can provide relief"
           },
           "exercisePatterns": {
             "title": "Exercise Patterns",
-            "items": [
-              "Regular aerobic exercise",
-              "High-intensity training impact",
-              "Yoga, Pilates benefits",
-              "Sedentary lifestyle effects",
-              "Exercise timing optimization"
-            ],
+            "items": {
+              "0": "Regular aerobic exercise",
+              "1": "High-intensity training impact",
+              "2": "Yoga, Pilates benefits",
+              "3": "Sedentary lifestyle effects",
+              "4": "Exercise timing optimization"
+            },
             "description": "The impact of exercise patterns on menstrual health and recommended activities"
           },
           "sleepAndStress": {
             "title": "Sleep and Stress",
-            "items": [
-              "Sleep quality and duration",
-              "Work pressure level",
-              "Emotional stress management",
-              "Circadian rhythm stability",
-              "Relaxation practices"
-            ],
+            "items": {
+              "0": "Sleep quality and duration",
+              "1": "Work pressure level",
+              "2": "Emotional stress management",
+              "3": "Circadian rhythm stability",
+              "4": "Relaxation practices"
+            },
             "description": "The importance of sleep quality and stress management for menstrual health"
           },
           "stressManagement": {
@@ -9301,6 +9355,10 @@
           "content": "The content on this website is for informational and educational purposes only and is not intended to be a substitute for professional medical advice, diagnosis, or treatment. We are not healthcare professionals. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. In case of emergency, seek immediate medical attention. Use of this website does not establish a doctor-patient relationship."
         }
       },
+      "tcmAnalysis": {
+        "title": "Holistic Health Pattern Analysis",
+        "description": "Based on symptom characteristics, Holistic Health theory categorizes dysmenorrhea into several main patterns, each with its unique pathological mechanism and treatment approach:"
+      },
       "cta": {
         "title": "Start Recording Your Pain Patterns",
         "description": "Use our intelligent pain tracking tool to start recording and analyzing your pain patterns",
@@ -9326,6 +9384,10 @@
           }
         }
       }
+    },
+    "tcmAnalysis": {
+      "title": "Holistic Health Pattern Analysis",
+      "description": "Based on symptom characteristics, Holistic Health theory categorizes dysmenorrhea into several main patterns, each with its unique pathological mechanism and treatment approach:"
     },
     "holisticAnalysis": {
       "title": "Holistic Health Analysis",
@@ -9511,6 +9573,15 @@
         "personalizedAssessmentDescription": "Get customized recommendations based on your symptoms",
         "startAssessment": "Start Assessment",
         "methodsTechniques": "Methods & Techniques"
+      },
+      "contentSections": {
+        "professionalAssessmentTools": "Professional Assessment Tools",
+        "depthHealthArticles": "In-Depth Health Articles",
+        "healthManagementTopics": "Health Management Topics"
+      },
+      "breadcrumb": {
+        "home": "Home",
+        "current": "Health Guide"
       }
     },
     "campusGuide": {
@@ -9983,6 +10054,10 @@
           "description": "Period health information specifically for teenagers"
         }
       }
+    },
+    "holisticAnalysis": {
+      "title": "Holistic Health Pattern Analysis",
+      "description": "Based on symptom characteristics, Holistic Health theory categorizes dysmenorrhea into several main patterns, each with its unique pathological mechanism and treatment approach:"
     }
   },
   "privacyPolicy": {
@@ -10794,8 +10869,8 @@
     "combinationTherapy": {
       "title": "Combination Therapy",
       "subtitle": "Maximize relief by combining methods",
-      "combinations": [
-        {
+      "combinations": {
+        "0": {
           "level": "Mild Pain (1-3)",
           "description": "Start with simple, non-invasive methods that can be done anywhere.",
           "methods": {
@@ -10804,7 +10879,7 @@
             "2": "Breathing exercises"
           }
         },
-        {
+        "1": {
           "level": "Moderate Pain (4-6)",
           "description": "Combine multiple approaches for better relief when pain is more noticeable.",
           "methods": {
@@ -10813,7 +10888,7 @@
             "2": "Yoga poses"
           }
         },
-        {
+        "2": {
           "level": "Severe Pain (7-10)",
           "description": "Use all available methods and consider medical attention for severe pain.",
           "methods": {
@@ -10822,7 +10897,7 @@
             "2": "Emergency response"
           }
         }
-      ]
+      }
     },
     "meditationTitle": "Meditation & Mindfulness",
     "meditationDescription": "Reduce pain perception through mental techniques",
@@ -12976,6 +13051,42 @@
       "title": "Symptom Assessment工具",
       "description": "科学评估Menstrual Period症状，获取个性化建议",
       "actionText": "个性化症状Analysis"
+    },
+    "quickAccess": {
+      "title": "Quick Access",
+      "medicalDisclaimer": "Medical Disclaimer",
+      "medicalDisclaimerText": "This information is for educational purposes only and does not replace professional medical advice.",
+      "emergencyRelief": "Emergency Relief",
+      "emergencyReliefDescription": "Need immediate help? Access quick relief methods",
+      "personalizedAssessment": "Personalized Assessment",
+      "personalizedAssessmentDescription": "Get customized recommendations based on your symptoms",
+      "startAssessment": "Start Assessment",
+      "methodsTechniques": "Methods & Techniques"
+    },
+    "contentSections": {
+      "professionalAssessmentTools": "Professional Assessment Tools",
+      "depthHealthArticles": "In-Depth Health Articles",
+      "healthManagementTopics": "Health Management Topics"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Health Guide"
+    },
+    "recommendations": {
+      "relatedTools": {
+        "symptomAssessment": {
+          "title": "Symptom Assessment",
+          "description": "Evaluate your menstrual pain symptoms with our professional assessment tool"
+        },
+        "painTracker": {
+          "title": "Pain Tracker",
+          "description": "Track and analyze your pain patterns over time"
+        },
+        "painImpactCalculator": {
+          "title": "Pain Impact Calculator",
+          "description": "Calculate how period pain affects your daily life"
+        }
+      }
     }
   },
   "downloads": {
@@ -13444,35 +13555,6 @@
       "button": "Start Your Free Assessment Now",
       "note": "No credit card required • 100% private • Cancel anytime"
     },
-    "footer": {
-      "tagline": "Evidence-based period care powered by ACOG guidelines",
-      "columns": {
-        "tools": "Tools",
-        "resources": "Resources",
-        "legal": "Legal"
-      },
-      "links": {
-        "tools": {
-          "symptom_checker": "AI Symptom Checker",
-          "cycle_tracker": "Cycle Tracker",
-          "pain_diary": "Pain Diary",
-          "doctor_reports": "Doctor Reports"
-        },
-        "resources": {
-          "medical_guides": "Medical Guides",
-          "natural_remedies": "Natural Remedies",
-          "emergency_guide": "Emergency Guide",
-          "research_papers": "Research Papers"
-        },
-        "legal": {
-          "privacy_policy": "Privacy Policy",
-          "hipaa_compliance": "HIPAA Compliance",
-          "terms_of_service": "Terms of Service",
-          "medical_disclaimer": "Medical Disclaimer"
-        }
-      },
-      "copyright": "© 2024 PeriodHub. All rights reserved. | Made with ❤️ for women's health"
-    },
     "tools": {
       "pain-tracker": {
         "title": "Pain Tracker",
@@ -13549,6 +13631,35 @@
         }
       },
       "disclaimer": "Medical information is reviewed by qualified healthcare professionals. This content is for informational purposes only and should not replace professional medical advice."
+    },
+    "footer": {
+      "tagline": "Empowering women with evidence-based period health solutions",
+      "columns": {
+        "tools": "Tools",
+        "resources": "Resources",
+        "legal": "Legal"
+      },
+      "links": {
+        "tools": {
+          "symptom_checker": "Symptom Checker",
+          "cycle_tracker": "Cycle Tracker",
+          "pain_diary": "Pain Diary",
+          "doctor_reports": "Doctor Reports"
+        },
+        "resources": {
+          "medical_guides": "Medical Guides",
+          "natural_remedies": "Natural Remedies",
+          "emergency_guide": "Emergency Guide",
+          "research_papers": "Research Papers"
+        },
+        "legal": {
+          "privacy_policy": "Privacy Policy",
+          "hipaa_compliance": "HIPAA Compliance",
+          "terms_of_service": "Terms of Service",
+          "medical_disclaimer": "Medical Disclaimer"
+        }
+      },
+      "copyright": "© 2024 PeriodHub. All Rights Reserved. | Made for Women's Health ❤️"
     }
   },
   "CycleCalendar": {
@@ -13737,6 +13848,11 @@
         "subheadline": "Transform PMS rage into calm confidence. Our 4-week protocol has 94% success rate.",
         "cta": "Begin Your Emotional Transformation"
       },
+      "highStressDominant": {
+        "headline": "Urgent Relief: Break the Stress Cycle Now",
+        "subheadline": "Your stress score indicates immediate support is needed. Start your recovery today.",
+        "cta": "Get Immediate Relief"
+      },
       "emotionAlternative2": {
         "headline": "Relationships That Thrive - Even During PMS",
         "subheadline": "Stop apologizing for PMS. 8,234 couples report stronger bonds after our program.",
@@ -13760,8 +13876,9 @@
       }
     },
     "urgency": {
-      "limitedOffer": "Limited time: First month for .99",
-      "usersJoined": "{count} women upgraded this week"
+      "limitedOffer": "Limited Time Offer",
+      "reliefDiscount": "Relief Offer",
+      "usersJoined": "{count} women joined today"
     }
   },
   "Assessment": {
@@ -13893,6 +14010,16 @@
     },
     "common": {
       "access": "Access Now"
+    },
+    "pdf": {
+      "tableHeaders": {
+        "holisticNature": "Holistic Nature"
+      },
+      "holisticNature": {
+        "warm": "Warm",
+        "cool": "Cool",
+        "neutral": "Neutral"
+      }
     }
   },
   "Recommendations": {

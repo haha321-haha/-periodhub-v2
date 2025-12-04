@@ -18,6 +18,7 @@ import {
   useWorkplaceWellnessActions,
   useWorkplaceWellnessStore,
 } from "@/app/[locale]/interactive-tools/workplace-wellness/hooks/useWorkplaceWellnessStore";
+import PaywallModal from "@/components/monetization/PaywallModal";
 
 const StressRadarChart = dynamic(
   () =>
@@ -308,8 +309,10 @@ export default function StressAssessmentWidget() {
   };
 
   const handleUnlockPremium = async (
-    e?: React.MouseEvent<HTMLButtonElement>,
+    planOrEvent?: string | React.MouseEvent<HTMLButtonElement>,
   ) => {
+    const plan = typeof planOrEvent === "string" ? planOrEvent : "oneTime";
+    const e = typeof planOrEvent === "object" ? planOrEvent : undefined;
     // 防止重复点击
     const isProcessing =
       (window as { __paymentProcessing?: boolean }).__paymentProcessing ||
@@ -350,7 +353,7 @@ export default function StressAssessmentWidget() {
 
       // 构建请求数据
       const requestData = {
-        plan: "oneTime",
+        plan: plan,
         painPoint: "stress_management_assessment",
         assessmentScore: score,
       };
@@ -712,115 +715,12 @@ export default function StressAssessmentWidget() {
     // Paywall view
     if (showPaywall) {
       return (
-        <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mb-4">
-              <span className="text-3xl">🔒</span>
-            </div>
-            {/* Dynamic Promise Headline */}
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              {t(`results.dynamicPromise.${primaryPainPoint}`)}
-            </h2>
-            <p className="text-lg text-gray-600 mb-6">
-              {t("paywall.subtitle")}
-            </p>
-          </div>
-
-          {/* 付费功能对比 */}
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="p-6 border-2 border-gray-200 rounded-xl">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">
-                {t("paywall.comparison.free.title")}
-              </h3>
-              <ul className="space-y-3">
-                <li className="flex items-center gap-2 text-gray-600">
-                  <span className="text-green-500">✓</span>
-                  {t("paywall.comparison.free.features.questions")}
-                </li>
-                <li className="flex items-center gap-2 text-gray-600">
-                  <span className="text-green-500">✓</span>
-                  {t("paywall.comparison.free.features.score")}
-                </li>
-                <li className="flex items-center gap-2 text-gray-600">
-                  <span className="text-green-500">✓</span>
-                  {t("paywall.comparison.free.features.radar")}
-                </li>
-                <li className="flex items-center gap-2 text-gray-400">
-                  <span className="text-gray-300">✗</span>
-                  {t("paywall.comparison.free.features.analysis")}
-                </li>
-              </ul>
-            </div>
-
-            <div className="p-6 border-2 border-orange-500 rounded-xl bg-gradient-to-br from-orange-50 to-yellow-50">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold text-gray-800">
-                  {t("paywall.comparison.premium.title")}
-                </h3>
-                <span className="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                  {t("paywall.comparison.premium.badge")}
-                </span>
-              </div>
-              <ul className="space-y-3 mb-6">
-                <li className="flex items-center gap-2 text-gray-700">
-                  <span className="text-orange-500">✓</span>
-                  {t("paywall.comparison.premium.features.report")}
-                </li>
-                <li className="flex items-center gap-2 text-gray-700">
-                  <span className="text-orange-500">✓</span>
-                  {t("paywall.comparison.premium.features.phq9")}
-                </li>
-                <li className="flex items-center gap-2 text-gray-700">
-                  <span className="text-orange-500">✓</span>
-                  {t("paywall.comparison.premium.features.management")}
-                </li>
-              </ul>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-orange-600 mb-2">
-                  {t("paywall.comparison.premium.pricing.amount")}
-                </div>
-                <p className="text-sm text-gray-600">
-                  {t("paywall.comparison.premium.pricing.note")}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* 操作按钮 */}
-          <div className="flex gap-4">
-            <button
-              onClick={handleSkipPaywall}
-              className="flex-1 btn-secondary py-3"
-            >
-              {t("buttons.viewFreeResults")}
-            </button>
-
-            {/* 主要按钮 */}
-            <button
-              id="payment-button-primary"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log("🔘 支付按钮被点击");
-                handleUnlockPremium(e);
-              }}
-              className="flex-1 bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all relative z-[100] cursor-pointer"
-              style={{
-                pointerEvents: "auto",
-                position: "relative",
-                display: "block",
-              }}
-              data-testid="unlock-premium"
-              type="button"
-            >
-              {t("buttons.unlockPremium")}
-            </button>
-          </div>
-
-          <p className="text-center text-sm text-gray-500 mt-4">
-            {t("paywall.thanksMessage")}
-          </p>
-        </div>
+        <PaywallModal
+          painPoint={primaryPainPoint === "default" ? "work" : primaryPainPoint} // Fallback to work if default, or handle default in PaywallModal
+          assessmentScore={calculateScore(answers)}
+          onClose={handleSkipPaywall}
+          onUpgrade={handleUnlockPremium}
+        />
       );
     }
 

@@ -20,7 +20,14 @@ import {
 } from "../hooks/useWorkplaceWellnessStore";
 import { useLocale } from "next-intl";
 import { useTranslations } from "next-intl";
-import { PeriodRecord, PeriodType, PainLevel, CalendarState } from "../types";
+import {
+  PeriodRecord,
+  PeriodType,
+  PainLevel,
+  CalendarState,
+  AssessmentRecord,
+} from "../types";
+import AssessmentDetailModal from "./AssessmentDetailModal";
 import { logError, logInfo } from "@/lib/debug-logger";
 
 export default function CalendarComponent() {
@@ -57,6 +64,10 @@ export default function CalendarComponent() {
     type: "period",
     painLevel: 0,
   });
+
+  // 选中的评估记录
+  const [selectedAssessment, setSelectedAssessment] =
+    useState<AssessmentRecord | null>(null);
 
   // 表单验证错误状态
   const [formErrors, setFormErrors] = useState<{
@@ -357,8 +368,12 @@ export default function CalendarComponent() {
                   {/* Phase 2: 评估指示器 */}
                   {assessmentStatus && (
                     <div
-                      className="absolute top-1 right-1 w-2 h-2 bg-purple-500 rounded-full border border-white"
+                      className="absolute top-1 right-1 w-2 h-2 bg-purple-500 rounded-full border border-white cursor-pointer hover:scale-125 transition-transform"
                       title={`评估完成 - 压力分数: ${assessmentStatus.stressScore}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedAssessment(assessmentStatus);
+                      }}
                     />
                   )}
                 </>
@@ -601,6 +616,12 @@ export default function CalendarComponent() {
           </div>
         </form>
       )}
+      {/* 评估详情弹窗 */}
+      <AssessmentDetailModal
+        isOpen={!!selectedAssessment}
+        onClose={() => setSelectedAssessment(null)}
+        assessment={selectedAssessment}
+      />
     </div>
   );
 }

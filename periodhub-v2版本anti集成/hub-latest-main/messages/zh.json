@@ -424,7 +424,8 @@
       "categories": {
         "menstrualPhase": "月经阶段",
         "healthGoals": "健康目标",
-        "holisticHealthConstitution": "整体健康体质"
+        "holisticHealthConstitution": "整体健康体质",
+        "holisticConstitution": "整体健康体质"
       },
       "results": {
         "dynamicPromise": {
@@ -466,6 +467,20 @@
           "yinDeficiency": "阴虚",
           "phlegmDampness": "痰湿",
           "dampHeat": "湿热"
+        }
+      },
+      "holisticConstitution": {
+        "title": "选择您的整体健康体质",
+        "description": "了解您的体质类型，获得更精准的营养建议",
+        "options": {
+          "qiDeficiency": "气虚",
+          "yangDeficiency": "阳虚",
+          "yinDeficiency": "阴虚",
+          "phlegmDampness": "痰湿",
+          "dampHeat": "湿热",
+          "bloodStasis": "血瘀",
+          "qiStagnation": "气滞",
+          "specialDiathesis": "特禀质"
         }
       },
       "meta": {
@@ -1521,6 +1536,22 @@
     }
   },
   "hero": {
+    "heroNew": {
+      "badge": "ACOG 指南支持",
+      "h1_prefix": "停止猜测。",
+      "h1_highlight": "开始治愈。",
+      "h2_prefix": "止痛药只得6.2分。",
+      "h2_suffix": "试试",
+      "h2_highlight": "7.5分的方法",
+      "h2_end": "，基于临床证据。",
+      "description": "首个基于ACOG指南的AI症状检查器——而非搜索引擎传言。追踪模式，识别风险，几秒钟生成医生就绪的报告。",
+      "cta_primary": "开始免费评估",
+      "cta_secondary": "查看证据",
+      "no_credit_card": "无需信用卡 • 仅本地数据",
+      "trust1": "你的健康数据只在你的设备上",
+      "trust2": "默认无云端同步",
+      "trust3": "HIPAA 合规"
+    },
     "title": "专业的经期健康",
     "subtitle": "循证指导与隐私保护，陪伴每位女性科学管理生理期",
     "description": "专业的经期健康管理平台，循证指导与隐私保护，陪伴每位女性科学管理生理期",
@@ -1575,8 +1606,7 @@
       "constitutionTestDesc": "整体健康体质辨识与调理建议，个性化健康方案"
     },
     "ctaSupportText": "免费 • 3分钟 • 科学依据",
-    "learnMore": "浏览文章",
-    "description": "专业的经期健康管理平台，循证指导与隐私保护，陪伴每位女性科学管理生理期"
+    "learnMore": "浏览文章"
   },
   "heroNew": {
     "badge": "ACOG 指南支持",
@@ -5002,6 +5032,7 @@
           "foodName": "食物名称",
           "menstrualPhase": "经期阶段",
           "tcmNature": "整体健康性质",
+          "holisticNature": "整体健康性质",
           "mainBenefits": "主要功效",
           "keyNutrients": "关键营养素"
         },
@@ -6411,6 +6442,22 @@
         "step3": "生成建议"
       },
       "tip": "💡 提示：所有建议均基于科学研究和整体健康理论",
+      "categories": {
+        "menstrualPhase": "经期阶段",
+        "healthGoals": "健康目标",
+        "holisticHealthConstitution": "整体健康体质"
+      },
+      "holisticHealthConstitution": {
+        "title": "选择您的整体健康体质",
+        "description": "了解您的体质类型，获得更精准的营养建议",
+        "options": {
+          "qiDeficiency": "气虚",
+          "yangDeficiency": "阳虚",
+          "yinDeficiency": "阴虚",
+          "phlegmDampness": "痰湿",
+          "dampHeat": "湿热"
+        }
+      },
       "meta": {
         "title": "营养推荐生成器 - 个性化营养建议 | 经期健康中心",
         "description": "根据您的经期阶段、健康目标和整体健康体质，生成个性化营养建议。结合现代医学和整体健康理论的科学指导。",
@@ -7218,50 +7265,6 @@
           "viewFreeResults": "查看免费结果",
           "comingSoon": "即将推出",
           "restartAssessment": "重新评估"
-        },
-        "personalizedRecommendations": {
-          "title": "您的个性化建议",
-          "stressScore": "压力评分",
-          "immediateAction": "立即行动",
-          "startNow": "立即开始",
-          "recommendedForYou": "为您推荐",
-          "urgent": "紧急",
-          "levelDescriptions": {
-            "high": "建议立即进行压力缓解",
-            "moderate": "建议积极进行压力管理",
-            "low": "保持现有习惯，预防性练习"
-          },
-          "recommendations": {
-            "breathingExercise": {
-              "title": "呼吸练习",
-              "high": "立即尝试4-7-8呼吸法，快速缓解压力",
-              "moderate": "每天练习呼吸技巧，有效管理压力",
-              "low": "定期练习以保持身心健康"
-            },
-            "stressGuide": {
-              "title": "经期压力管理完全指南",
-              "high": "学习22种科学减压方法，全面管理经期压力",
-              "moderate": "学习科学压力管理方法，防止压力升级"
-            },
-            "sleepGuide": {
-              "title": "经期睡眠质量改善指南",
-              "high": "改善睡眠质量，通过良好休息缓解压力",
-              "low": "保持良好的睡眠习惯，预防压力"
-            },
-            "officeScenario": {
-              "title": "办公环境",
-              "high": "职场压力管理策略，保持工作效率",
-              "moderate": "职场压力管理策略"
-            },
-            "breathingGuide": {
-              "title": "呼吸练习完全指南",
-              "moderate": "详细的呼吸练习技巧和科学原理"
-            },
-            "exerciseScenario": {
-              "title": "运动场景",
-              "low": "通过适度运动保持健康"
-            }
-          }
         },
         "radar": {
           "title": "压力领域分析",
@@ -8559,71 +8562,54 @@
     }
   },
   "understandingPain": {
+    "tcmAnalysis": {
+      "title": "整体健康证型分析",
+      "description": "根据症状特点，整体健康理论将痛经细分为几种主要证型，每种证型都有其独特的病理机制和治疗方法："
+    },
+    "holisticAnalysis": {
+      "title": "整体健康证型分析",
+      "description": "根据症状特点，整体健康理论将痛经细分为几种主要证型，每种证型都有其独特的病理机制和治疗方法："
+    },
     "painPatterns": {
-      "title": "疼痛模式识别",
+      "title": "识别您的疼痛模式",
       "subtitle": "每个女性的疼痛模式都是独特的，但通常遵循某些规律。通过详细观察和记录，您可以识别自己的疼痛模式，制定更有效的预防和管理策略。",
-      "description": "了解不同类型的痛经模式，帮助您更好地识别和管理疼痛",
       "types": {
         "title": "常见疼痛模式类型",
         "menstrualFocused": {
-          "title": "经期集中型 (70%)",
+          "title": "经期集中型（70%）",
           "characteristics": [
-            "疼痛集中在月经前1-2天和月经期1-2天",
+            "疼痛集中在月经前1-2天和月经期间1-2天",
             "第3天后疼痛明显减轻或消失",
             "疼痛强度在第1天达到峰值",
             "常见于原发性痛经"
           ]
         },
         "wholePeriodPersistent": {
-          "title": "全经期持续型 (20%)",
+          "title": "整个经期持续型（20%）",
           "characteristics": [
-            "疼痛从月经前1周开始",
-            "持续整个月经期",
+            "疼痛在月经前1周开始",
+            "持续整个经期",
             "疼痛强度相对稳定",
             "可能提示继发性痛经"
           ]
         },
         "premenstrualProminent": {
-          "title": "经前突出型 (8%)",
+          "title": "经前突出型（8%）",
           "characteristics": [
-            "月经前1-3天疼痛最严重",
+            "疼痛在月经前1-3天最严重",
             "月经开始后疼痛减轻",
-            "常伴有经前综合征",
+            "常伴有经前期综合征",
             "与激素波动密切相关"
           ]
         },
         "irregularFluctuation": {
-          "title": "不规则波动型 (2%)",
+          "title": "不规则波动型（2%）",
           "characteristics": [
             "疼痛时间无明显规律",
             "强度变化很大",
             "可能与压力、生活方式等因素相关",
             "需要进一步医学评估"
           ]
-        }
-      },
-      "cta": {
-        "title": "开始您的疼痛管理之旅",
-        "description": "通过专业的疼痛评估工具，了解您的个人疼痛模式，获得个性化的管理建议。",
-        "buttonText": "开始疼痛评估",
-        "buttonLink": "/zh/interactive-tools/pain-tracker"
-      },
-      "influencers": {
-        "environmentalFactors": {
-          "environmentalImpact": {
-            "items": {
-              "0": "温度变化和天气波动",
-              "1": "空气质量和污染暴露",
-              "2": "季节性变化及其影响"
-            }
-          },
-          "socialPsychological": {
-            "items": {
-              "0": "工作相关压力和压力",
-              "1": "人际关系和冲突",
-              "2": "社会支持系统和社区联系"
-            }
-          }
         }
       },
       "recordingImportance": {
@@ -8633,7 +8619,7 @@
           "title": "记录要素",
           "items": [
             "疼痛强度（0-10分制）",
-            "疼痛性质（痉挛、钝痛等）",
+            "疼痛性质（痉挛性、钝痛等）",
             "持续时间",
             "伴随症状",
             "触发或缓解因素",
@@ -8653,8 +8639,8 @@
         }
       },
       "influencingFactors": {
-        "title": "影响因素",
-        "description": "了解影响痛经严重程度的各种因素",
+        "title": "影响个体周期模式的因素",
+        "description": "每个女性的月经周期和疼痛模式都受到多种因素的影响。了解这些因素有助于更好地预测和管理疼痛。",
         "physiologicalFactors": {
           "title": "生理因素",
           "ageAndDevelopment": {
@@ -8680,17 +8666,17 @@
             "items": [
               "甲状腺功能影响月经规律性",
               "多囊卵巢综合征导致周期异常",
-              "糖尿病影响血液循环和疼痛感知",
-              "自身免疫疾病可能加重症状"
+              "子宫内膜异位症加重疼痛",
+              "盆腔炎影响疼痛模式"
             ]
           },
           "medicationUse": {
             "title": "药物使用",
             "items": [
-              "长期使用避孕药可能影响疼痛模式",
-              "某些药物可能加重或减轻疼痛",
-              "药物相互作用影响治疗效果",
-              "停药后疼痛模式可能改变"
+              "避孕药调节激素水平",
+              "NSAIDs影响前列腺素合成",
+              "抗抑郁药可能影响周期",
+              "激素替代疗法的效果"
             ]
           }
         },
@@ -8699,24 +8685,35 @@
           "dietaryHabits": {
             "title": "饮食习惯",
             "items": {
-              "0": "减少咖啡因摄入",
-              "1": "增加富含镁的食物",
-              "2": "避免过多盐分",
-              "3": "保持规律饮食时间",
-              "4": "保持充足水分摄入"
+              "0": "咖啡因摄入",
+              "1": "糖分摄入",
+              "2": "抗炎食物比例",
+              "3": "维生素D水平",
+              "4": "镁、钙等矿物质摄入"
             },
-            "description": "饮食对经期疼痛的影响"
+            "description": "饮食习惯如何影响痛经以及哪些改变可以提供缓解"
           },
           "exercisePatterns": {
             "title": "运动模式",
             "items": {
-              "0": "定期有氧运动",
-              "1": "温和的瑜伽练习",
-              "2": "避免剧烈运动",
-              "3": "经期适当休息",
-              "4": "尝试低强度瑜伽或普拉提"
+              "0": "规律有氧运动",
+              "1": "高强度训练影响",
+              "2": "瑜伽、普拉提益处",
+              "3": "久坐生活方式影响",
+              "4": "运动时机优化"
             },
-            "description": "运动如何影响经期健康"
+            "description": "运动模式对月经健康的影响及推荐活动"
+          },
+          "sleepAndStress": {
+            "title": "睡眠和压力",
+            "items": {
+              "0": "睡眠质量和时长",
+              "1": "工作压力水平",
+              "2": "情绪压力管理",
+              "3": "昼夜节律稳定性",
+              "4": "放松练习"
+            },
+            "description": "睡眠质量和压力管理对月经健康的重要性"
           },
           "stressManagement": {
             "title": "压力管理",
@@ -8726,114 +8723,128 @@
               "睡眠不足影响恢复能力",
               "情绪波动影响疼痛阈值"
             ]
-          },
-          "sleepAndStress": {
-            "title": "睡眠与压力",
-            "items": {
-              "0": "保证充足睡眠",
-              "1": "建立规律作息",
-              "2": "学习压力管理技巧",
-              "3": "睡前放松练习",
-              "4": "定期进行冥想练习"
-            },
-            "description": "睡眠质量和压力管理的重要性"
           }
         },
         "environmentalFactors": {
-          "title": "环境因素",
+          "title": "环境和社会因素",
           "environmentalImpact": {
             "title": "环境影响",
-            "items": [
-              "气候变化影响身体适应性",
-              "空气质量影响呼吸系统",
-              "噪音污染增加压力水平",
-              "室内环境质量影响舒适度"
-            ]
+            "items": {
+              "0": "温度变化和天气波动",
+              "1": "空气质量和污染暴露",
+              "2": "季节性变化及其影响",
+              "3": "其他环境影响因子"
+            }
           },
           "socialPsychological": {
-            "title": "社会心理",
-            "items": [
-              "社会支持影响疼痛应对",
-              "工作环境压力加重症状",
-              "人际关系影响情绪状态",
-              "文化背景影响疼痛表达"
-            ]
+            "title": "社会心理因素",
+            "items": {
+              "0": "工作相关压力和压力",
+              "1": "人际关系和冲突",
+              "2": "社会支持系统和社区联系",
+              "3": "其他社会心理因子"
+            }
           }
         }
       },
       "optimizationStrategies": {
-        "title": "优化策略",
-        "description": "基于疼痛模式的个性化管理策略",
+        "title": "应用知识优化疼痛管理",
+        "description": "在了解了月经周期和疼痛模式的科学知识后，我们可以将这些信息转化为实用策略，优化疼痛管理的有效性。",
         "preventiveIntervention": {
-          "title": "预防性干预",
+          "title": "预防性干预时机",
           "earlyLutealPhase": {
-            "title": "黄体早期（月经前7-10天）",
+            "title": "月经前1-2周（黄体早期）",
             "items": [
-              "开始抗炎饮食",
-              "增加镁补充剂",
-              "开始温和运动",
-              "练习压力管理技巧"
+              "开始增加抗炎食物摄入（omega-3、姜黄）",
+              "规律适度运动，避免过度训练",
+              "优化睡眠质量，确保7-8小时休息",
+              "进行压力管理活动（冥想、瑜伽）"
             ]
           },
           "premenstrualDays": {
-            "title": "经前期（月经前3-7天）",
+            "title": "月经前3-5天",
             "items": [
-              "预防性使用热敷",
-              "在疼痛开始前服用NSAIDs",
-              "避免触发食物和咖啡因",
-              "保持规律睡眠时间"
+              "开始预防性NSAIDs（如医生建议）",
+              "增加镁补充剂（300-400mg/天）",
+              "适当减少咖啡因和酒精摄入",
+              "准备热疗设备和舒适衣物"
             ]
           },
           "peakPainDays": {
-            "title": "疼痛高峰期（月经第1-2天）",
+            "title": "月经第1-2天（疼痛高峰期）",
             "items": [
-              "应用热疗（40-45°C）",
-              "按处方服用NSAIDs",
-              "练习深呼吸练习",
-              "使用穴位按摩"
+              "及时应用所有可用的缓解方法",
+              "保持水分，但避免过量液体",
+              "采用最佳疼痛缓解姿势",
+              "如可能进行轻度活动，需要时休息"
             ]
           }
         },
         "treatmentOptimization": {
-          "title": "治疗优化",
+          "title": "治疗效果优化",
           "medicationTiming": {
             "title": "药物时机",
-            "items": [
-              "在疼痛开始前30-60分钟服用NSAIDs",
-              "避免空腹服药以减少胃部刺激",
-              "根据疼痛模式调整用药时间",
-              "记录药物效果以优化剂量"
-            ]
+            "items": {
+              "0": "在预期疼痛开始前30分钟服用止痛药",
+              "1": "在月经期间保持一致的用药时间表",
+              "2": "对于可预测的周期考虑预防性用药",
+              "3": "其他治疗优化建议"
+            }
           },
           "recoveryOptimization": {
             "title": "恢复优化",
-            "items": [
-              "疼痛缓解后逐步恢复活动",
-              "避免过度劳累导致复发",
-              "保持良好的睡眠质量",
-              "补充足够的营养和水分"
-            ]
+            "items": {
+              "0": "在疼痛严重的日子里确保充足的休息和睡眠",
+              "1": "持续使用热疗15-20分钟",
+              "2": "进行轻度拉伸以缓解肌肉紧张",
+              "3": "其他恢复优化建议"
+            }
           }
         },
         "keyTakeaways": {
           "title": "关键要点",
           "items": [
-            "疼痛模式识别是有效管理的基础",
-            "预防性干预比被动治疗更有效",
-            "个性化策略需要持续调整",
-            "生活方式因素影响疼痛严重程度",
-            "及时就医是排除严重疾病的关键"
+            "月经周期是一个精确调节的生物节律，了解其机制有助于科学疼痛管理",
+            "前列腺素是痛经的主要原因，但可以通过多种方法有效管理",
+            "每个人的疼痛模式都是独特的，可以通过详细记录发现个人模式",
+            "预防性干预优于被动治疗，时机是成功的关键",
+            "综合考虑生理、心理和环境因素可以实现最佳治疗效果"
           ]
         },
         "medicalDisclaimer": {
           "title": "医疗免责声明",
-          "content": "本内容仅供教育目的，不能替代专业医疗建议。如有严重或持续性疼痛，请及时咨询医生。"
+          "content": "本网站内容仅供信息和教育目的，不能替代专业医疗建议、诊断或治疗。我们不是医疗专业人员。如有任何医疗问题，请咨询您的医生或其他合格的医疗提供者。如有紧急情况，请立即寻求医疗帮助。使用本网站不构成医患关系。"
         }
-      }
-    },
-    "tcmAnalysis": {
-      "title": "整体健康证型分析",
-      "description": "根据症状特点，整体健康理论将痛经细分为几种主要证型，每种证型都有其独特的病理机制和治疗方法："
+      },
+      "influencers": {
+        "environmentalFactors": {
+          "environmentalImpact": {
+            "items": {
+              "0": "温度变化和天气波动",
+              "1": "空气质量和污染暴露",
+              "2": "季节性变化及其影响"
+            }
+          },
+          "socialPsychological": {
+            "items": {
+              "0": "工作相关压力和压力",
+              "1": "人际关系和冲突",
+              "2": "社会支持系统和社区联系"
+            }
+          }
+        }
+      },
+      "tcmAnalysis": {
+        "title": "整体健康证型分析",
+        "description": "根据症状特点，整体健康理论将痛经细分为几种主要证型，每种证型都有其独特的病理机制和治疗方法："
+      },
+      "cta": {
+        "title": "开始记录您的疼痛模式",
+        "description": "使用我们的智能疼痛追踪工具开始记录和分析您的疼痛模式",
+        "buttonText": "开始追踪",
+        "buttonLink": "/zh/interactive-tools/pain-tracker"
+      },
+      "description": "了解不同类型的痛经模式，帮助您更好地识别和管理疼痛"
     }
   },
   "healthGuidePage": {
@@ -9177,6 +9188,76 @@
     "holisticAnalysis": {
       "title": "整体健康分析",
       "description": "基于症状特征，整体健康将痛经分为几个主要证型，每种证型都有独特的病理机制和治疗方法："
+    },
+    "quickAccess": {
+      "title": "快速访问",
+      "medicalDisclaimer": "医疗免责声明",
+      "medicalDisclaimerText": "本信息仅供教育目的，不能替代专业医疗建议。",
+      "emergencyRelief": "紧急缓解",
+      "emergencyReliefDescription": "需要立即帮助？访问快速缓解方法",
+      "personalizedAssessment": "个性化评估",
+      "personalizedAssessmentDescription": "根据您的症状获得定制建议",
+      "startAssessment": "开始评估",
+      "methodsTechniques": "方法与技巧"
+    },
+    "contentSections": {
+      "professionalAssessmentTools": "专业评估工具",
+      "depthHealthArticles": "深度健康文章",
+      "healthManagementTopics": "健康管理主题"
+    },
+    "breadcrumb": {
+      "home": "首页",
+      "current": "健康指南"
+    },
+    "recommendations": {
+      "relatedTools": {
+        "symptomAssessment": {
+          "title": "症状评估",
+          "description": "使用我们的专业评估工具评估您的痛经症状"
+        },
+        "painTracker": {
+          "title": "疼痛追踪",
+          "description": "追踪和分析您的疼痛模式"
+        },
+        "painImpactCalculator": {
+          "title": "痛经影响计算器",
+          "description": "计算痛经对您日常生活的影响"
+        }
+      },
+      "relatedArticles": {
+        "medicalGuide": {
+          "title": "痛经综合医学指南",
+          "description": "涵盖病因、诊断和治疗方案的完整医学指南",
+          "readTime": "15 分钟阅读",
+          "category": "医学指南"
+        },
+        "medicalCare": {
+          "title": "何时寻求医疗帮助",
+          "description": "了解何时需要专业医疗关注",
+          "readTime": "10 分钟阅读",
+          "category": "医疗建议"
+        },
+        "faq": {
+          "title": "痛经常见问题",
+          "description": "专家回答关于痛经的常见问题",
+          "readTime": "8 分钟阅读",
+          "category": "常见问题"
+        }
+      },
+      "healthTopics": {
+        "naturalTherapies": {
+          "title": "自然疗法",
+          "description": "探索管理和缓解痛经的自然和整体方法"
+        },
+        "scenarioSolutions": {
+          "title": "场景解决方案",
+          "description": "在不同情况下管理痛经的实用解决方案"
+        },
+        "teenHealth": {
+          "title": "青少年健康",
+          "description": "专为青少年设计的经期健康信息"
+        }
+      }
     }
   },
   "bottomRecommendations": {
@@ -9190,6 +9271,42 @@
       "title": "症状评估工具",
       "description": "科学评估经期症状，获取个性化建议",
       "actionText": "个性化症状分析"
+    },
+    "quickAccess": {
+      "title": "快速访问",
+      "medicalDisclaimer": "医疗免责声明",
+      "medicalDisclaimerText": "本信息仅供教育目的，不能替代专业医疗建议。",
+      "emergencyRelief": "紧急缓解",
+      "emergencyReliefDescription": "需要立即帮助？访问快速缓解方法",
+      "personalizedAssessment": "个性化评估",
+      "personalizedAssessmentDescription": "根据您的症状获得定制建议",
+      "startAssessment": "开始评估",
+      "methodsTechniques": "方法与技巧"
+    },
+    "contentSections": {
+      "professionalAssessmentTools": "专业评估工具",
+      "depthHealthArticles": "深度健康文章",
+      "healthManagementTopics": "健康管理主题"
+    },
+    "breadcrumb": {
+      "home": "首页",
+      "current": "健康指南"
+    },
+    "recommendations": {
+      "relatedTools": {
+        "symptomAssessment": {
+          "title": "症状评估",
+          "description": "使用我们的专业评估工具评估您的痛经症状"
+        },
+        "painTracker": {
+          "title": "疼痛追踪",
+          "description": "追踪和分析您的疼痛模式"
+        },
+        "painImpactCalculator": {
+          "title": "痛经影响计算器",
+          "description": "计算痛经对您日常生活的影响"
+        }
+      }
     }
   },
   "teenHealth": {
@@ -9363,14 +9480,23 @@
       },
       "quickAccess": {
         "title": "快速访问",
-        "medicalDisclaimer": "Medical Disclaimer",
-        "medicalDisclaimerText": "This information is for educational purposes only and does not replace professional medical advice.",
-        "emergencyRelief": "Emergency Relief",
-        "emergencyReliefDescription": "Need immediate help? Access quick relief methods",
-        "personalizedAssessment": "Personalized Assessment",
-        "personalizedAssessmentDescription": "Get customized recommendations based on your symptoms",
-        "startAssessment": "Start Assessment",
-        "methodsTechniques": "Methods & Techniques"
+        "medicalDisclaimer": "医疗免责声明",
+        "medicalDisclaimerText": "本信息仅供教育目的，不能替代专业医疗建议。",
+        "emergencyRelief": "紧急缓解",
+        "emergencyReliefDescription": "需要立即帮助？访问快速缓解方法",
+        "personalizedAssessment": "个性化评估",
+        "personalizedAssessmentDescription": "根据您的症状获得定制建议",
+        "startAssessment": "开始评估",
+        "methodsTechniques": "方法与技巧"
+      },
+      "contentSections": {
+        "professionalAssessmentTools": "专业评估工具",
+        "depthHealthArticles": "深度健康文章",
+        "healthManagementTopics": "健康管理主题"
+      },
+      "breadcrumb": {
+        "home": "首页",
+        "current": "健康指南"
       }
     },
     "campusGuide": {
@@ -10700,11 +10826,11 @@
           "0": "从基础开始学习。每天花5分钟了解痛经的基本知识，比如\"为什么会有痛经\"、\"什么情况下需要关注\"。",
           "1": "学会倾听。当她说\"肚子疼\"时，不要急着给建议，先问\"需要我做什么吗？\"让她感受到你的关心。"
         },
-        "nextSteps": [
-          "完成专业深度测试",
-          "开始30天基础训练",
-          "学习基本关怀技巧"
-        ]
+        "nextSteps": {
+          "0": "完成专业深度测试",
+          "1": "开始30天基础训练",
+          "2": "学习基本关怀技巧"
+        }
       },
       "intermediate": {
         "title": "贴心守护者",
@@ -10713,11 +10839,11 @@
           "0": "学习基础按摩技巧。掌握简单的腹部按摩方法，在她说疼的时候能够提供实际的帮助。",
           "1": "准备暖心小物品。比如热水袋、暖宝宝、红糖水等，让她感受到你的贴心准备。"
         },
-        "nextSteps": [
-          "完成专业深度测试",
-          "开始30天进阶训练",
-          "学习更多关怀技巧"
-        ]
+        "nextSteps": {
+          "0": "完成专业深度测试",
+          "1": "开始30天进阶训练",
+          "2": "学习更多关怀技巧"
+        }
       },
       "advanced": {
         "title": "理解达人",
@@ -10726,11 +10852,11 @@
           "0": "制定关怀计划。和她一起讨论经期前后的注意事项，制定属于你们的\"关怀清单\"。",
           "1": "成为她的依靠。让她知道在经期时，你就是她最可靠的支撑，不需要强撑。"
         },
-        "nextSteps": [
-          "完成专业深度测试",
-          "开始30天高级训练",
-          "分享经验帮助他人"
-        ]
+        "nextSteps": {
+          "0": "完成专业深度测试",
+          "1": "开始30天高级训练",
+          "2": "分享经验帮助他人"
+        }
       },
       "expert": {
         "title": "暖心专家",
@@ -10739,7 +10865,11 @@
           "0": "分享你的经验。帮助其他男性朋友学会如何更好地理解和支持伴侣。",
           "1": "持续学习。虽然基础测试表现优秀，但专业测试会带给你更深层的医学知识。"
         },
-        "nextSteps": ["完成专业深度测试", "开始30天专家训练", "成为社区导师"]
+        "nextSteps": {
+          "0": "完成专业深度测试",
+          "1": "开始30天专家训练",
+          "2": "成为社区导师"
+        }
       }
     },
     "stage2Results": {
@@ -10750,11 +10880,11 @@
           "0": "学习医学基础知识。了解前列腺素、子宫内膜脱落等专业术语，掌握痛经的生理机制。",
           "1": "建立科学认知框架。区分原发性痛经和继发性痛经，学会识别需要医疗干预的症状。"
         },
-        "nextSteps": [
-          "开始30天专业训练",
-          "重点学习医学知识",
-          "建立科学认知体系"
-        ]
+        "nextSteps": {
+          "0": "开始30天专业训练",
+          "1": "重点学习医学知识",
+          "2": "建立科学认知体系"
+        }
       },
       "intermediate": {
         "title": "专业支持伙伴",
@@ -10763,11 +10893,11 @@
           "0": "掌握专业护理技能。学习专业的疼痛评估方法，掌握科学的缓解技巧和药物知识。",
           "1": "制定科学支持计划。根据她的具体情况，制定个性化的经期管理方案。"
         },
-        "nextSteps": [
-          "开始30天专业训练",
-          "重点提升专业技能",
-          "学习高级护理方法"
-        ]
+        "nextSteps": {
+          "0": "开始30天专业训练",
+          "1": "重点提升专业技能",
+          "2": "学习高级护理方法"
+        }
       },
       "advanced": {
         "title": "专业共情专家",
@@ -10776,11 +10906,11 @@
           "0": "制定专业应急预案。基于医学知识，和她一起制定科学的\"经期应急预案\"，包括症状监测、药物准备、医疗联系等。",
           "1": "成为专业导师。运用你的专业知识，帮助其他情侣建立科学的经期管理方法。"
         },
-        "nextSteps": [
-          "开始30天专业训练",
-          "重点巩固专业能力",
-          "成为专业社区导师"
-        ]
+        "nextSteps": {
+          "0": "开始30天专业训练",
+          "1": "重点巩固专业能力",
+          "2": "成为专业社区导师"
+        }
       },
       "expert": {
         "title": "专业关怀大师",
@@ -10790,11 +10920,11 @@
           "1": "成为专业导师。指导其他情侣建立基于医学知识的经期管理体系和沟通模式。",
           "2": "持续专业学习。保持对最新医学研究的关注，不断提升专业支持能力。"
         },
-        "nextSteps": [
-          "开始30天专业训练",
-          "成为专业社区导师",
-          "分享专业经验帮助他人"
-        ]
+        "nextSteps": {
+          "0": "开始30天专业训练",
+          "1": "成为专业社区导师",
+          "2": "分享专业经验帮助他人"
+        }
       }
     },
     "relatedLinks": {
@@ -11345,15 +11475,6 @@
       "export": "导出",
       "settings": "设置"
     },
-    "tabs": {
-      "calendar": "日历",
-      "focusCalm": "专注&减压",
-      "nutrition": "营养",
-      "workImpact": "工作影响",
-      "analysis": "分析",
-      "export": "导出",
-      "settings": "设置"
-    },
     "calendar": {
       "title": "经期日历",
       "subtitle": "记录和追踪您的经期周期",
@@ -11489,7 +11610,11 @@
         "qi_deficiency": "气虚",
         "yang_deficiency": "阳虚",
         "yin_deficiency": "阴虚",
-        "blood_deficiency": "血虚"
+        "blood_deficiency": "血虚",
+        "phlegm_dampness": "痰湿",
+        "blood_stasis": "血瘀",
+        "qi_stagnation": "气滞",
+        "special_diathesis": "特禀质"
       },
       "foodTitle": "食物推荐",
       "searchPlaceholder": "搜索食物...",
@@ -12226,6 +12351,7 @@
         "foodName": "Food Name",
         "menstrualPhase": "Menstrual Phase",
         "tcmNature": "Holistic Nature",
+        "holisticNature": "整体健康性质",
         "mainBenefits": "Main Benefits",
         "keyNutrients": "Key Nutrients"
       },
@@ -12243,6 +12369,11 @@
         "warm": "Warm",
         "cool": "Cool",
         "neutral": "Neutral"
+      },
+      "holisticNature": {
+        "warm": "温性",
+        "cool": "凉性",
+        "neutral": "平性"
       }
     },
     "privacy": {
@@ -12333,6 +12464,9 @@
       "ginger_tea": "生姜茶缓解经期疼痛",
       "natural_therapy": "自然物理疗法指南",
       "tcm_exercise": "整体健康功法指南",
+      "holistic_exercise": "整体健康功法指南",
+      "holistic_guide": "整体健康理论指南",
+      "holistic_nutrition": "整体健康营养调理",
       "diet": "抗炎饮食指南",
       "stress_guide": "压力管理指南",
       "sleep_guide": "睡眠质量指南",
@@ -13675,6 +13809,11 @@
         "subheadline": "将PMS愤怒转变为平静自信。我们的4周方案有94%成功率。",
         "cta": "开始您的情感转变"
       },
+      "highStressDominant": {
+        "headline": "紧急缓解：立即打破压力循环",
+        "subheadline": "您的压力评分显示需要立即支持。今天就开始您的恢复之旅。",
+        "cta": "获取立即缓解"
+      },
       "emotionAlternative2": {
         "headline": "即使在PMS期间也能茁壮成长的关系",
         "subheadline": "停止为PMS道歉。8,234对伴侣在加入我们的项目后报告关系更牢固。",
@@ -13698,8 +13837,9 @@
       }
     },
     "urgency": {
-      "limitedOffer": "限时优惠：首月仅需.99",
-      "usersJoined": "本周{count}位女性升级"
+      "limitedOffer": "限时优惠",
+      "reliefDiscount": "缓解特惠",
+      "usersJoined": "今天已有 {count} 位女性加入"
     }
   },
   "Assessment": {
@@ -14166,6 +14306,16 @@
     },
     "common": {
       "access": "立即访问"
+    },
+    "pdf": {
+      "tableHeaders": {
+        "holisticNature": "整体健康性质"
+      },
+      "holisticNature": {
+        "warm": "温性",
+        "cool": "凉性",
+        "neutral": "平性"
+      }
     }
   },
   "dataManagement": {

@@ -165,6 +165,16 @@ const SimpleZustandTest = dynamic(() => import("./simple-zustand-test"), {
   loading: () => <div className="animate-pulse bg-gray-200 h-64 rounded-lg" />,
 });
 
+const EmotionForecastNotification = dynamic(
+  () => import("./components/EmotionForecastNotification"),
+  {
+    loading: () => (
+      <div className="animate-pulse bg-indigo-50 h-32 rounded-xl mb-6" />
+    ),
+    ssr: false,
+  },
+);
+
 interface WorkplaceWellnessClientProps {
   locale?: string;
 }
@@ -421,6 +431,9 @@ function WorkplaceWellnessContent() {
     <ResponsiveContainer>
       {/* 数据保留提醒 */}
       <DataRetentionWarning />
+
+      {/* Emotion Forecast Notification (Phase 4) */}
+      {isHydrated && <EmotionForecastNotification />}
 
       {/* 标签页内容 */}
       <div className="relative min-h-[500px] mt-6">

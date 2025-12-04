@@ -12,6 +12,7 @@ import {
   PAYWALL_VARIANTS,
 } from "@/lib/analytics/posthog";
 import { X, Check, Sparkles } from "lucide-react";
+import WellnessPromiseCard from "./WellnessPromiseCard";
 
 export interface PaywallModalProps {
   painPoint: "pain" | "work" | "emotion";
@@ -48,13 +49,15 @@ export default function PaywallModal({
 
   // P1.2 A/B测试：3种变体策略
   const headlineKey =
-    variant === PAYWALL_VARIANTS.control
-      ? `${painPoint}Dominant`
-      : variant === PAYWALL_VARIANTS.variant1
-        ? `${painPoint}Alternative1`
-        : variant === PAYWALL_VARIANTS.variant2
-          ? `${painPoint}Alternative2`
-          : `${painPoint}Dominant`;
+    assessmentScore >= 7
+      ? "highStressDominant"
+      : variant === PAYWALL_VARIANTS.control
+        ? `${painPoint}Dominant`
+        : variant === PAYWALL_VARIANTS.variant1
+          ? `${painPoint}Alternative1`
+          : variant === PAYWALL_VARIANTS.variant2
+            ? `${painPoint}Alternative2`
+            : `${painPoint}Dominant`;
 
   const handleUpgrade = (plan: "monthly" | "yearly" | "oneTime") => {
     trackPaywallUpgradeClicked(variant, painPoint, plan);
@@ -92,6 +95,9 @@ export default function PaywallModal({
               {t(`Paywall.variants.${headlineKey}.subheadline`)}
             </p>
           </div>
+
+          {/* Phase 3: Wellness Promise Card */}
+          <WellnessPromiseCard painPoint={painPoint} />
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             <div className="border-2 border-gray-200 rounded-xl p-6">
@@ -139,12 +145,17 @@ export default function PaywallModal({
           <div className="grid md:grid-cols-3 gap-4 mb-6">
             <button
               onClick={() => setSelectedPlan("monthly")}
-              className={`p-4 rounded-xl border-2 transition-all ${
+              className={`p-4 rounded-xl border-2 transition-all relative ${
                 selectedPlan === "monthly"
                   ? "border-purple-500 bg-purple-50"
                   : "border-gray-200 hover:border-purple-300"
               }`}
             >
+              {assessmentScore >= 7 && (
+                <div className="absolute -top-2 -right-2 bg-red-500 text-white px-2 py-1 text-xs font-bold rounded-full animate-pulse">
+                  {t("Paywall.urgency.reliefDiscount")}
+                </div>
+              )}
               <div className="text-sm text-gray-600 mb-1">
                 {t("Pro.pricing.monthly.features")}
               </div>

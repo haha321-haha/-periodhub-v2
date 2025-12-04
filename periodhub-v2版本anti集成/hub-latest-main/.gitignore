@@ -1,11 +1,29 @@
 # 排除文档和脚本文件
+# 排除所有 .md 文件，但明确包含必需的文件
 *.md
+# 项目必需的核心文件
+!README.md
+# 网站核心内容 - 文章内容（必需）
+!content/articles/**/*.md
+# 重要项目文档（必需）
+!docs/DEPLOYMENT_GUIDE.md
+!docs/DEVELOPMENT_GUIDE.md
+!docs/DATABASE_SETUP_GUIDE.md
+!docs/GEO_AEO_INTEGRATION_GUIDE.md
+!docs/GEO_AEO_API_DOCUMENTATION.md
+!docs/TRANSLATION_KEY_MANAGEMENT_PROCESS.md
 *.sh
 *.py
 # 排除测试和研究相关目录
 app/[locale]/email-marketing-test/
-# 排除所有JS文件，但保留scripts目录下的构建脚本
+# 排除所有JS文件，但保留必需的配置文件和构建脚本
 *.js
+# 必需配置文件（项目构建和运行必需）
+!next.config.js
+!tailwind.config.js
+!postcss.config.js
+!jest.config.js
+# 构建脚本
 !scripts/build-articles-index.js
 !scripts/build-articles-index-wrapper.js
 !scripts/verify-translation-sync.js
@@ -202,13 +220,7 @@ messages/*.backup*
 *.tmp
 *.temp
 scripts/metadata-fix-commands.json
-# 压力管理相关文件（暂不上传GitHub）
-app/[locale]/stress-management/
-app/[locale]/interactive-tools/stress-management/
-components/stress-management/
-scripts/detect-stress-management-hardcode.js
-stress-management-translation-keys.json
-content/articles/*/menstrual-stress-management-*.md
+# 压力管理相关文件现在需要上传到GitHub（已移除排除规则）
 参考代码/
 女性经期管理营销推广/
 修复建议文档/

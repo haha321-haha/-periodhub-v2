@@ -69,7 +69,7 @@ type ModalType =
   | null;
 
 export function ToolsGrid() {
-  const t = useTranslations("home.tools");
+  const t = useTranslations("homePage.tools");
   const [openModal, setOpenModal] = useState<ModalType>(null);
 
   return (

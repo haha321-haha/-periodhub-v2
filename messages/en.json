@@ -105,7 +105,37 @@
           "title": "Body Battery Assessment",
           "desc": "Analyze your current energy levels and recovery needs.",
           "action": "Check Battery",
-          "badge": "⚡ Energy Check"
+          "badge": "⚡ Energy Check",
+          "form": {
+            "energy_level": "Current Energy Level",
+            "energy_level_hint": "Exhausted",
+            "energy_level_hint_end": "Energized",
+            "sleep_quality": "Last Night Sleep Quality",
+            "stress_level": "Current Stress Level",
+            "period_status": "Period Status",
+            "on_period": "On Period",
+            "off_period": "Off Period",
+            "calculate_button": "Calculate Body Battery",
+            "battery_status": "Battery Status",
+            "excellent": "Excellent",
+            "good": "Good",
+            "moderate": "Moderate",
+            "low": "Low",
+            "critical": "Critical",
+            "recommendations": "Personalized Recommendations",
+            "low_energy_alert": "Low Energy Alert",
+            "low_energy_desc": "Consider resting and avoiding strenuous activities today.",
+            "hydration": "Hydration",
+            "hydration_desc": "Drink at least 8 glasses of water today",
+            "gentle_movement": "Gentle Movement",
+            "gentle_movement_desc": "10-15 minutes of yoga or stretching",
+            "pdf_report": "Get Complete Assessment Report",
+            "pdf_description": "Download the full Body Battery Assessment & Energy Management Guide PDF",
+            "pdf_button": "Get Free PDF Report",
+            "pdf_footer": "Includes personalized energy plan + cycle tracking tools",
+            "retake": "Retake Assessment",
+            "done": "Done"
+          }
         },
         "cycle_forecast": {
           "title": "Cycle Energy Forecast",
@@ -186,6 +216,8 @@
         },
         "remedies": {
           "title": "Natural Relief Methods",
+          "desc": "Yoga, heat therapy, and nutrition advice",
+          "action": "Explore Methods",
           "description": "Evidence-based natural remedies to alleviate menstrual pain without medication.",
           "items": {
             "yoga": {
@@ -210,6 +242,8 @@
         },
         "emergency": {
           "title": "Emergency Guide",
+          "desc": "Know warning signs",
+          "action": "Check Symptoms",
           "description": "Know when to seek immediate medical attention. If you are in danger, call emergency services immediately.",
           "immediate": {
             "title": "Seek Immediate Help If:",
